@@ -6,10 +6,12 @@
 
 package pt.utl.ist.elab.client.momentoinercia;
 
+import java.awt.event.ItemEvent;
 import java.text.DecimalFormat;
 import java.util.Hashtable;
 
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
@@ -25,12 +27,16 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		com.linkare.rec.impl.client.customizer.ICustomizer {
 
-	private DecimalFormat df = new DecimalFormat();
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -106003589418199806L;
+	private final DecimalFormat df = new DecimalFormat();
 
 	/** Creates new form RadioactividadeCustomizer */
 	public MomInerciaCustomizer() {
 		initComponents();
-		Hashtable slidersLabels = new Hashtable(10);
+		final Hashtable slidersLabels = new Hashtable(10);
 		slidersLabels.put(new Integer(0), new JLabel("0.0"));
 		slidersLabels.put(new Integer(10000), new JLabel("10.0"));
 		slidersLabels.put(new Integer(20000), new JLabel("20.0"));
@@ -105,7 +111,8 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		jSliderLaunch.setPreferredSize(new java.awt.Dimension(380, 200));
 		jSliderLaunch.setOpaque(false);
 		jSliderLaunch.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderLaunchStateChanged(evt);
 			}
 		});
@@ -118,12 +125,13 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		jPanel8.add(jSliderLaunch, gridBagConstraints);
 
 		jTextFieldLaunch.setColumns(3);
-		jTextFieldLaunch.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		jTextFieldLaunch.setHorizontalAlignment(SwingConstants.RIGHT);
 		jTextFieldLaunch.setText("2.5");
 		jTextFieldLaunch.setMinimumSize(new java.awt.Dimension(33, 16));
 		jTextFieldLaunch.setPreferredSize(new java.awt.Dimension(37, 16));
 		jTextFieldLaunch.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldLaunchFocusLost(evt);
 			}
 		});
@@ -135,7 +143,8 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 
 		jCheckBoxLaunch.setSelected(true);
 		jCheckBoxLaunch.addItemListener(new java.awt.event.ItemListener() {
-			public void itemStateChanged(java.awt.event.ItemEvent evt) {
+			@Override
+			public void itemStateChanged(final java.awt.event.ItemEvent evt) {
 				jCheckBoxLaunchItemStateChanged(evt);
 			}
 		});
@@ -159,7 +168,8 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		jSliderStop.setPreferredSize(new java.awt.Dimension(380, 200));
 		jSliderStop.setOpaque(false);
 		jSliderStop.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderStopStateChanged(evt);
 			}
 		});
@@ -172,12 +182,13 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		jPanel5.add(jSliderStop, gridBagConstraints);
 
 		jTextFieldStop.setColumns(3);
-		jTextFieldStop.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		jTextFieldStop.setHorizontalAlignment(SwingConstants.RIGHT);
 		jTextFieldStop.setText("5");
 		jTextFieldStop.setMinimumSize(new java.awt.Dimension(33, 16));
 		jTextFieldStop.setPreferredSize(new java.awt.Dimension(37, 16));
 		jTextFieldStop.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldStopFocusLost(evt);
 			}
 		});
@@ -190,7 +201,8 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 
 		jCheckStop.setSelected(true);
 		jCheckStop.addItemListener(new java.awt.event.ItemListener() {
-			public void itemStateChanged(java.awt.event.ItemEvent evt) {
+			@Override
+			public void itemStateChanged(final java.awt.event.ItemEvent evt) {
 				jCheckStopItemStateChanged(evt);
 			}
 		});
@@ -214,7 +226,8 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		jSliderTBS.setMinimumSize(new java.awt.Dimension(400, 200));
 		jSliderTBS.setPreferredSize(new java.awt.Dimension(400, 200));
 		jSliderTBS.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderTBSStateChanged(evt);
 			}
 		});
@@ -226,13 +239,14 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		jPanel1.add(jSliderTBS, gridBagConstraints);
 
 		jTextFieldTBS.setColumns(4);
-		jTextFieldTBS.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		jTextFieldTBS.setHorizontalAlignment(SwingConstants.RIGHT);
 		jTextFieldTBS.setText("100");
 		jTextFieldTBS.setMaximumSize(new java.awt.Dimension(35, 16));
 		jTextFieldTBS.setMinimumSize(new java.awt.Dimension(35, 16));
 		jTextFieldTBS.setPreferredSize(new java.awt.Dimension(48, 16));
 		jTextFieldTBS.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldTBSFocusLost(evt);
 			}
 		});
@@ -260,7 +274,8 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		jSliderNumSamples.setMinimumSize(new java.awt.Dimension(400, 200));
 		jSliderNumSamples.setPreferredSize(new java.awt.Dimension(400, 200));
 		jSliderNumSamples.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderNumSamplesStateChanged(evt);
 			}
 		});
@@ -274,13 +289,14 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		jPanel6.add(jSliderNumSamples, gridBagConstraints);
 
 		jTextFieldSamples.setColumns(4);
-		jTextFieldSamples.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		jTextFieldSamples.setHorizontalAlignment(SwingConstants.RIGHT);
 		jTextFieldSamples.setText("100");
 		jTextFieldSamples.setMaximumSize(new java.awt.Dimension(48, 16));
 		jTextFieldSamples.setMinimumSize(new java.awt.Dimension(35, 16));
 		jTextFieldSamples.setPreferredSize(new java.awt.Dimension(48, 16));
 		jTextFieldSamples.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldSamplesFocusLost(evt);
 			}
 		});
@@ -315,7 +331,8 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
 		btnOK.setText(ReCResourceBundle.findString("momentoinercia$rec.exp.discos.lbl.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
 			}
 		});
@@ -327,7 +344,8 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 
 		btnCancel.setText(ReCResourceBundle.findString("momentoinercia$rec.exp.discos.lbl.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
 			}
 		});
@@ -346,7 +364,8 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 
 		btnDefaults.setText(ReCResourceBundle.findString("momentoinercia$rec.exp.dftcfg.momentoInercia.title.1"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
 			}
 		});
@@ -360,30 +379,32 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 
 	}// GEN-END:initComponents
 
-	private void jTextFieldLaunchFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldLaunchFocusLost
-		String strLaunch = jTextFieldLaunch.getText();
+	private void jTextFieldLaunchFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldLaunchFocusLost
+		final String strLaunch = jTextFieldLaunch.getText();
 
-		if (strLaunch.trim().equals(""))
+		if (strLaunch.trim().equals("")) {
 			return;
+		}
 		try {
-			float Launch = Float.parseFloat(strLaunch) * 1000;
-			if (Launch <= jSliderLaunch.getMaximum() && Launch >= jSliderLaunch.getMinimum())
+			final float Launch = Float.parseFloat(strLaunch) * 1000;
+			if (Launch <= jSliderLaunch.getMaximum() && Launch >= jSliderLaunch.getMinimum()) {
 				jSliderLaunch.setValue((int) Launch);
-			else
+			} else {
 				jTextFieldLaunch.setText(df.format(jSliderLaunch.getValue() / 1000f));
+			}
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			jTextFieldLaunch.setText(df.format(jSliderLaunch.getValue() / 1000f));
 		}
 	}// GEN-LAST:event_jTextFieldLaunchFocusLost
 
-	private void jSliderLaunchStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderLaunchStateChanged
+	private void jSliderLaunchStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderLaunchStateChanged
 		jTextFieldLaunch.setText(df.format(jSliderLaunch.getValue() / 1000f));
 		checkIterLaunch();
 	}// GEN-LAST:event_jSliderLaunchStateChanged
 
-	private void jCheckBoxLaunchItemStateChanged(java.awt.event.ItemEvent evt) {// GEN-FIRST:event_jCheckBoxLaunchItemStateChanged
-		if (evt.getStateChange() == evt.SELECTED) {
+	private void jCheckBoxLaunchItemStateChanged(final java.awt.event.ItemEvent evt) {// GEN-FIRST:event_jCheckBoxLaunchItemStateChanged
+		if (evt.getStateChange() == ItemEvent.SELECTED) {
 			jSliderLaunch.setEnabled(true);
 			jTextFieldLaunch.setEditable(true);
 		} else {
@@ -393,8 +414,8 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		checkIterLaunch();
 	}// GEN-LAST:event_jCheckBoxLaunchItemStateChanged
 
-	private void jCheckStopItemStateChanged(java.awt.event.ItemEvent evt) {// GEN-FIRST:event_jCheckStopItemStateChanged
-		if (evt.getStateChange() == evt.SELECTED) {
+	private void jCheckStopItemStateChanged(final java.awt.event.ItemEvent evt) {// GEN-FIRST:event_jCheckStopItemStateChanged
+		if (evt.getStateChange() == ItemEvent.SELECTED) {
 			jSliderStop.setEnabled(true);
 			jTextFieldStop.setEditable(true);
 		} else {
@@ -404,59 +425,65 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		checkIterStop();
 	}// GEN-LAST:event_jCheckStopItemStateChanged
 
-	private void jTextFieldStopFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldStopFocusLost
-		String strStop = jTextFieldStop.getText();
+	private void jTextFieldStopFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldStopFocusLost
+		final String strStop = jTextFieldStop.getText();
 
-		if (strStop.trim().equals(""))
+		if (strStop.trim().equals("")) {
 			return;
+		}
 		try {
-			float Stop = Float.parseFloat(strStop) * 1000;
-			if (Stop <= jSliderStop.getMaximum() && Stop >= jSliderStop.getMinimum())
+			final float Stop = Float.parseFloat(strStop) * 1000;
+			if (Stop <= jSliderStop.getMaximum() && Stop >= jSliderStop.getMinimum()) {
 				jSliderStop.setValue((int) Stop);
-			else
+			} else {
 				jTextFieldStop.setText(df.format(jSliderStop.getValue() / 1000f));
+			}
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			jTextFieldStop.setText(df.format(jSliderStop.getValue() / 1000f));
 		}
 	}// GEN-LAST:event_jTextFieldStopFocusLost
 
-	private void jTextFieldSamplesFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldSamplesFocusLost
-		String strNumSamples = jTextFieldSamples.getText();
-		if (strNumSamples.trim().equals(""))
+	private void jTextFieldSamplesFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldSamplesFocusLost
+		final String strNumSamples = jTextFieldSamples.getText();
+		if (strNumSamples.trim().equals("")) {
 			return;
+		}
 		try {
-			int numSamples = Integer.parseInt(strNumSamples);
-			if (numSamples <= jSliderNumSamples.getMaximum() && numSamples >= jSliderNumSamples.getMinimum())
+			final int numSamples = Integer.parseInt(strNumSamples);
+			if (numSamples <= jSliderNumSamples.getMaximum() && numSamples >= jSliderNumSamples.getMinimum()) {
 				jSliderNumSamples.setValue(numSamples);
-			else
+			} else {
 				jTextFieldSamples.setText("" + jSliderNumSamples.getValue());
-		} catch (Exception e) {
+			}
+		} catch (final Exception e) {
 			jTextFieldSamples.setText("" + jSliderNumSamples.getValue());
 		}
 	}// GEN-LAST:event_jTextFieldSamplesFocusLost
 
-	private void jTextFieldTBSFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldTBSFocusLost
-		String strFreq = jTextFieldTBS.getText();
-		if (strFreq.trim().equals(""))
+	private void jTextFieldTBSFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldTBSFocusLost
+		final String strFreq = jTextFieldTBS.getText();
+		if (strFreq.trim().equals("")) {
 			return;
+		}
 		try {
-			int Freq = Integer.parseInt(strFreq);
-			if (Freq <= jSliderTBS.getMaximum() && Freq >= jSliderTBS.getMinimum())
+			final int Freq = Integer.parseInt(strFreq);
+			if (Freq <= jSliderTBS.getMaximum() && Freq >= jSliderTBS.getMinimum()) {
 				jSliderTBS.setValue(Freq);
-			else
+			} else {
 				jTextFieldTBS.setText("" + jSliderTBS.getValue());
-		} catch (Exception e) {
+			}
+		} catch (final Exception e) {
 			jTextFieldTBS.setText("" + jSliderTBS.getValue());
 		}
 	}// GEN-LAST:event_jTextFieldTBSFocusLost
 
-	private void jSliderStopStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderStopStateChanged
+	private void jSliderStopStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderStopStateChanged
 		jTextFieldStop.setText(df.format(jSliderStop.getValue() / 1000f));
 		checkIterStop();
 	}// GEN-LAST:event_jSliderStopStateChanged
 
-	private void jSliderTBSStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderTBSStateChanged
+	private void jSliderTBSStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderTBSStateChanged
 		if (jSliderTBS.getValue() == 0) {
 			jSliderTBS.setValue(1);
 		}
@@ -466,7 +493,7 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		checkIterStop();
 	}// GEN-LAST:event_jSliderTBSStateChanged
 
-	private void jSliderNumSamplesStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderNumSamplesStateChanged
+	private void jSliderNumSamplesStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderNumSamplesStateChanged
 
 		if (jSliderNumSamples.getValue() == 0) {
 			jSliderNumSamples.setValue(1);
@@ -481,7 +508,7 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 	}// GEN-LAST:event_jSliderNumSamplesStateChanged
 
 	public void checkMaxNumSamples() {
-		float duration = jSliderTBS.getValue() / 1000f * jSliderNumSamples.getValue();
+		final float duration = jSliderTBS.getValue() / 1000f * jSliderNumSamples.getValue();
 
 		if (duration > 90) {
 			jLabelInfo.setEnabled(true);
@@ -498,7 +525,7 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 
 	public boolean checkIterLaunch() {
 		boolean ret = false;
-		int launch = jSliderLaunch.getValue() / jSliderTBS.getValue();
+		final int launch = jSliderLaunch.getValue() / jSliderTBS.getValue();
 		if (launch > jSliderNumSamples.getValue() && jCheckBoxLaunch.isSelected()) {
 			jLabelInfo.setEnabled(true);
 			jLabelInfo.setText(ReCResourceBundle.findString("momentoinercia$rec.exp.lbl.discos.invlaunch"));
@@ -513,7 +540,7 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 
 	public boolean checkIterStop() {
 		boolean ret = false;
-		int stop = jSliderStop.getValue() / jSliderTBS.getValue();
+		final int stop = jSliderStop.getValue() / jSliderTBS.getValue();
 		if (stop > jSliderNumSamples.getValue() && jCheckStop.isSelected()) {
 			jLabelInfo.setEnabled(true);
 			jLabelInfo.setText(ReCResourceBundle.findString("momentoinercia$rec.exp.discos.lbl.invstop"));
@@ -526,7 +553,7 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		return ret;
 	}
 
-	private void btnDefaultsActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
+	private void btnDefaultsActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
 	{// GEN-HEADEREND:event_btnDefaultsActionPerformed
 		jSliderNumSamples.setValue(100);
 		jTextFieldSamples.setText("100");
@@ -540,18 +567,18 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		jCheckStop.setSelected(true);
 	}// GEN-LAST:event_btnDefaultsActionPerformed
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
+	private void btnCancelActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
 	{// GEN-HEADEREND:event_btnCancelActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_btnCancelActionPerformed
 
-	private void btnOKActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
+	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
 		acqConfig.setTotalSamples(jSliderNumSamples.getValue());
 
-		int launch = jSliderLaunch.getValue() / jSliderTBS.getValue();
+		final int launch = jSliderLaunch.getValue() / jSliderTBS.getValue();
 
-		int stop = jSliderStop.getValue() / jSliderTBS.getValue();
+		final int stop = jSliderStop.getValue() / jSliderTBS.getValue();
 
 		acqConfig.getSelectedHardwareParameter("Launch Iteration").setParameterValue("" + launch);
 		acqConfig.getSelectedHardwareParameter("Stop Iteration").setParameterValue("" + stop);
@@ -565,9 +592,9 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		} else {
 			acqConfig.getSelectedHardwareParameter("Iteration").setParameterValue("None");
 		}
-		acqConfig.setSelectedFrequency(new Frequency((double) jSliderTBS.getValue(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
+		acqConfig.setSelectedFrequency(new Frequency(jSliderTBS.getValue(), hardwareInfo.getHardwareFrequencies(0)
+				.getMinimumFrequency().getMultiplier(), hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency()
+				.getFrequencyDefType()));
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_btnOKActionPerformed
 
@@ -605,7 +632,8 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -617,7 +645,8 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -627,9 +656,10 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -643,9 +673,10 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -657,29 +688,31 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
 		return acqConfig;
 	}
 
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
 			jSliderNumSamples.setValue(acqConfig.getTotalSamples());
 			jTextFieldSamples.setText("" + acqConfig.getTotalSamples());
 
-			int freq = (int) acqConfig.getSelectedFrequency().getFrequency();
+			final int freq = (int) acqConfig.getSelectedFrequency().getFrequency();
 			jSliderTBS.setValue(freq);
 			jTextFieldTBS.setText("" + freq);
 
-			int tLaunch = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("Launch Iteration"));
+			final int tLaunch = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("Launch Iteration"));
 			jSliderLaunch.setValue(tLaunch * freq);
 			jTextFieldLaunch.setText(df.format(tLaunch * freq / 1000f));
 
-			int tStop = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("Stop Iteration"));
+			final int tStop = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("Stop Iteration"));
 			jSliderStop.setValue((tStop * freq));
 			jTextFieldStop.setText(df.format(tStop * freq / 1000f));
 
-			String iteration = acqConfig.getSelectedHardwareParameterValue("Iteration");
+			final String iteration = acqConfig.getSelectedHardwareParameterValue("Iteration");
 
 			System.out.println("Iteration = " + iteration);
 
@@ -699,34 +732,39 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
+	@Override
 	public javax.swing.JComponent getCustomizerComponent() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/momentoinercia/resources/cd_iconified.gif"));
 	}
 
+	@Override
 	public String getCustomizerTitle() {
 		return ReCResourceBundle.findString("momentoinercia$rec.exp.customizer.title.discos");
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
-	public static void main(String args[]) {
-		javax.swing.JFrame jf = new javax.swing.JFrame();
-		MomInerciaCustomizer mom = new MomInerciaCustomizer();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame jf = new javax.swing.JFrame();
+		final MomInerciaCustomizer mom = new MomInerciaCustomizer();
 		jf.getContentPane().add(mom, java.awt.BorderLayout.CENTER);
 		jf.pack();
 		jf.show();

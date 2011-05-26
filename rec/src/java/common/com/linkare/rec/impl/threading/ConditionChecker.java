@@ -26,9 +26,9 @@ public class ConditionChecker {
 	/** Holds value of property startTime. */
 	private long startTime;
 
-	private Object synch = new Object();
+	private final Object synch = new Object();
 
-	private ConditionCheckerTask checkingTask = new ConditionCheckerTask();
+	private final ConditionCheckerTask checkingTask = new ConditionCheckerTask();
 
 	/**
 	 * 
@@ -40,13 +40,15 @@ public class ConditionChecker {
 	 *            met
 	 * @param conditionDecisor How to decide if the condition is met
 	 */
-	public ConditionChecker(long conditionTimeOut, long conditionCheckInterval, IConditionDecisor conditionDecisor) {
+	public ConditionChecker(final long conditionTimeOut, final long conditionCheckInterval,
+			final IConditionDecisor conditionDecisor) {
 		synchronized (synch) {
-			this.startTime = System.currentTimeMillis();
+			startTime = System.currentTimeMillis();
 			this.conditionTimeOut = Math.abs(conditionTimeOut);
 			this.conditionCheckInterval = Math.abs(conditionCheckInterval);
-			if (this.conditionCheckInterval > this.conditionTimeOut)
+			if (this.conditionCheckInterval > this.conditionTimeOut) {
 				this.conditionCheckInterval = this.conditionTimeOut;
+			}
 
 			this.conditionDecisor = conditionDecisor;
 
@@ -54,7 +56,7 @@ public class ConditionChecker {
 
 			try {
 				synch.wait();
-			} catch (InterruptedException e) {
+			} catch (final InterruptedException e) {
 				throw new RuntimeException(e.getMessage());
 			}
 		}
@@ -68,7 +70,7 @@ public class ConditionChecker {
 		private boolean cancel = false;
 		private boolean stoped = false;
 		public Object synchInternal = new Object();
-		
+
 		/**
 		 * Creates the <code>ConditionChecker.ConditionCheckerTask</code>.
 		 */
@@ -77,6 +79,7 @@ public class ConditionChecker {
 			setName(getName() + " - ConditionCheckerTask");
 		}
 
+		@Override
 		public void run() {
 			synchronized (synch) {
 				synch.notifyAll();
@@ -84,16 +87,19 @@ public class ConditionChecker {
 			ConditionResult conditionresult = null;
 			while (conditionTimeOut + startTime > System.currentTimeMillis() && !isCanceled()) {
 				conditionresult = conditionDecisor.getConditionResult();
-				if (conditionresult != ConditionResult.CONDITION_NOT_MET)
+				if (conditionresult != ConditionResult.CONDITION_NOT_MET) {
 					break;
+				}
 
 				try {
-					Object o = new Object();
+					final Object o = new Object();
 					synchronized (o) {
-						o.wait(Math.max(0, Math.min(conditionCheckInterval, startTime + conditionTimeOut
-								- System.currentTimeMillis())));
+						o.wait(Math.max(
+								0,
+								Math.min(conditionCheckInterval,
+										startTime + conditionTimeOut - System.currentTimeMillis())));
 					}
-				} catch (InterruptedException ignored) {
+				} catch (final InterruptedException ignored) {
 					return;
 				}
 			}
@@ -106,12 +112,13 @@ public class ConditionChecker {
 				return;
 			}
 
-			if (conditionresult == ConditionResult.CONDITION_MET_TRUE)
+			if (conditionresult == ConditionResult.CONDITION_MET_TRUE) {
 				conditionDecisor.onConditionMetTrue();
-			else if (conditionresult == ConditionResult.CONDITION_MET_FALSE)
+			} else if (conditionresult == ConditionResult.CONDITION_MET_FALSE) {
 				conditionDecisor.onConditionMetFalse();
-			else if (conditionresult == ConditionResult.CONDITION_NOT_MET)
+			} else if (conditionresult == ConditionResult.CONDITION_NOT_MET) {
 				conditionDecisor.onConditionTimeOut();
+			}
 
 			setStoped(true);
 		}
@@ -128,20 +135,21 @@ public class ConditionChecker {
 			}
 		}
 
-		private void setStoped(boolean stoped) {
+		private void setStoped(final boolean stoped) {
 			synchronized (synchInternal) {
 				this.stoped = stoped;
 			}
 		}
 
 		public void cancelCheck() {
-			if (isStoped())
+			if (isStoped()) {
 				return;
+			}
 			synchronized (synchInternal) {
 				cancel = true;
 				try {
 					synchInternal.wait();
-				} catch (InterruptedException ignored) {
+				} catch (final InterruptedException ignored) {
 				}
 			}
 		}

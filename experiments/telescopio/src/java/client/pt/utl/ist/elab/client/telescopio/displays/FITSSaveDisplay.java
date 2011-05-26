@@ -11,11 +11,18 @@ package pt.utl.ist.elab.client.telescopio.displays;
  * @author André Neto - LEFT - IST
  */
 
+import javax.swing.JFileChooser;
+
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class FITSSaveDisplay extends javax.swing.JPanel implements
 		com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7088185996812129892L;
 
 	/** Creates new form FITSDisplay */
 	public FITSSaveDisplay() {
@@ -43,7 +50,8 @@ public class FITSSaveDisplay extends javax.swing.JPanel implements
 		jButtonDark.setText("Save dark");
 		jButtonDark.setEnabled(false);
 		jButtonDark.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonDarkActionPerformed(evt);
 			}
 		});
@@ -56,7 +64,8 @@ public class FITSSaveDisplay extends javax.swing.JPanel implements
 		jButtonFlat.setText("Save flat");
 		jButtonFlat.setEnabled(false);
 		jButtonFlat.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonFlatActionPerformed(evt);
 			}
 		});
@@ -71,7 +80,8 @@ public class FITSSaveDisplay extends javax.swing.JPanel implements
 		jButtonTelescope.setText("Save telescope");
 		jButtonTelescope.setEnabled(false);
 		jButtonTelescope.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonTelescopeActionPerformed(evt);
 			}
 		});
@@ -86,104 +96,118 @@ public class FITSSaveDisplay extends javax.swing.JPanel implements
 
 	}// GEN-END:initComponents
 
-	private void jButtonTelescopeActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonTelescopeActionPerformed
+	private void jButtonTelescopeActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonTelescopeActionPerformed
 	{// GEN-HEADEREND:event_jButtonTelescopeActionPerformed
-		if (image == -1 || model.getValueAt(image, model.getChannelIndex("Imagem_Telescopio")) == null)
+		if (image == -1 || model.getValueAt(image, model.getChannelIndex("Imagem_Telescopio")) == null) {
 			return;
+		}
 
 		if (model.getValueAt(image, model.getChannelIndex("Imagem_Telescopio")) != null) {
-			java.io.File saveFile = showSaveDialog();
+			final java.io.File saveFile = showSaveDialog();
 
 			if (saveFile != null) {
-				byte[] imageb = model.getValueAt(image, model.getChannelIndex("Imagem_Telescopio")).getValue()
+				final byte[] imageb = model.getValueAt(image, model.getChannelIndex("Imagem_Telescopio")).getValue()
 						.getByteArrayValue().getData();
 				saveToFile(saveFile, imageb);
 			}
 		}
 	}// GEN-LAST:event_jButtonTelescopeActionPerformed
 
-	private void jButtonFlatActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonFlatActionPerformed
+	private void jButtonFlatActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonFlatActionPerformed
 	{// GEN-HEADEREND:event_jButtonFlatActionPerformed
-		if (flat == -1 || model.getValueAt(image, model.getChannelIndex("Imagem_Flat")) == null)
+		if (flat == -1 || model.getValueAt(image, model.getChannelIndex("Imagem_Flat")) == null) {
 			return;
+		}
 
 		if (model.getValueAt(flat, model.getChannelIndex("Imagem_Flat")) != null) {
-			java.io.File saveFile = showSaveDialog();
+			final java.io.File saveFile = showSaveDialog();
 
 			if (saveFile != null) {
-				byte[] imageb = model.getValueAt(flat, model.getChannelIndex("Imagem_Flat")).getValue()
+				final byte[] imageb = model.getValueAt(flat, model.getChannelIndex("Imagem_Flat")).getValue()
 						.getByteArrayValue().getData();
 				saveToFile(saveFile, imageb);
 			}
 		}
 	}// GEN-LAST:event_jButtonFlatActionPerformed
 
-	private void jButtonDarkActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonDarkActionPerformed
+	private void jButtonDarkActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonDarkActionPerformed
 	{// GEN-HEADEREND:event_jButtonDarkActionPerformed
-		if (dark == -1 || model.getValueAt(image, model.getChannelIndex("Imagem_DarkFrame")) == null)
+		if (dark == -1 || model.getValueAt(image, model.getChannelIndex("Imagem_DarkFrame")) == null) {
 			return;
+		}
 
 		if (model.getValueAt(dark, model.getChannelIndex("Imagem_DarkFrame")) != null) {
-			java.io.File saveFile = showSaveDialog();
+			final java.io.File saveFile = showSaveDialog();
 
 			if (saveFile != null) {
-				byte[] imageb = model.getValueAt(dark, model.getChannelIndex("Imagem_DarkFrame")).getValue()
+				final byte[] imageb = model.getValueAt(dark, model.getChannelIndex("Imagem_DarkFrame")).getValue()
 						.getByteArrayValue().getData();
 				saveToFile(saveFile, imageb);
 			}
 		}
 	}// GEN-LAST:event_jButtonDarkActionPerformed
 
-	private void saveToFile(java.io.File fName, byte[] data) {
+	private void saveToFile(final java.io.File fName, final byte[] data) {
 		try {
-			java.io.FileOutputStream fos = new java.io.FileOutputStream(fName);
+			final java.io.FileOutputStream fos = new java.io.FileOutputStream(fName);
 			fos.write(data);
 			fos.close();
-		} catch (java.io.IOException ioe) {
+		} catch (final java.io.IOException ioe) {
 			ioe.printStackTrace();
 		}
 	}
 
 	private java.io.File showSaveDialog() {
-		javax.swing.JFileChooser saveDialog = new javax.swing.JFileChooser();
-		int option = saveDialog.showSaveDialog(null);
-		if (option == saveDialog.APPROVE_OPTION)
+		final javax.swing.JFileChooser saveDialog = new javax.swing.JFileChooser();
+		final int option = saveDialog.showSaveDialog(null);
+		if (option == JFileChooser.APPROVE_OPTION) {
 			return saveDialog.getSelectedFile();
+		}
 
 		return null;
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/telescopio/resources/telescopio_iconified.png"));
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
@@ -192,9 +216,11 @@ public class FITSSaveDisplay extends javax.swing.JPanel implements
 	private int image = -1;
 	private int flat = -1;
 
-	public void newSamples(com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
-		if (model == null)
+	@Override
+	public void newSamples(final com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
+		if (model == null) {
 			return;
+		}
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
 			if (model.getValueAt(i, model.getChannelIndex("Imagem_Telescopio")) != null) {
 				jButtonTelescope.setEnabled(true);
@@ -213,19 +239,22 @@ public class FITSSaveDisplay extends javax.swing.JPanel implements
 
 	private com.linkare.rec.impl.client.experiment.ExpDataModel model = null;
 
-	public void setExpDataModel(com.linkare.rec.impl.client.experiment.ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final com.linkare.rec.impl.client.experiment.ExpDataModel model) {
+		if (this.model != null) {
 			model.removeExpDataModelListener(this);
+		}
 
 		this.model = model;
 
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 	}
 
+	@Override
 	public String getName() {
-		return ReCResourceBundle
-				.findStringOrDefault("telescopio$rec.exp.display.telescopio.title.2", "FITS Save");
+		return ReCResourceBundle.findStringOrDefault("telescopio$rec.exp.display.telescopio.title.2", "FITS Save");
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

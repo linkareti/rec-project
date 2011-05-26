@@ -30,9 +30,9 @@ public class GammaStampDataSource extends AbstractStampDataSource {
 	public static String GAMMA_DS_LOGGER = "GammaDataSource.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(GAMMA_DS_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(GammaStampDataSource.GAMMA_DS_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(GAMMA_DS_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(GammaStampDataSource.GAMMA_DS_LOGGER));
 		}
 	}
 
@@ -40,7 +40,8 @@ public class GammaStampDataSource extends AbstractStampDataSource {
 	public GammaStampDataSource() {
 	}
 
-	public void processDataCommand(StampCommand cmd) {
+	@Override
+	public void processDataCommand(final StampCommand cmd) {
 		if (stopped || cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null) {
 			return;
 		}
@@ -48,14 +49,14 @@ public class GammaStampDataSource extends AbstractStampDataSource {
 			float mic = 0;
 			float pressao = 0;
 			float time = 0;
-			PhysicsValue[] values = new PhysicsValue[4];
+			final PhysicsValue[] values = new PhysicsValue[4];
 			try {
 				if (counter > 0) {
 					mic = ((Float) cmd.getCommandData(StampGammaProcessor.ONDA_MIC)).floatValue();
 					pressao = ((Float) cmd.getCommandData(StampGammaProcessor.PRESSAO)).floatValue();
 					time = ((Float) cmd.getCommandData(StampGammaProcessor.TIME)).floatValue();
 				}
-			} catch (ClassCastException e) {
+			} catch (final ClassCastException e) {
 				e.printStackTrace();
 				return;
 			}
@@ -84,7 +85,7 @@ public class GammaStampDataSource extends AbstractStampDataSource {
 
 		counter++;
 		if (counter > total_samples) {
-			Logger.getLogger(GAMMA_DS_LOGGER).log(Level.INFO, "DataSource Ended");
+			Logger.getLogger(GammaStampDataSource.GAMMA_DS_LOGGER).log(Level.INFO, "DataSource Ended");
 			setDataSourceEnded();
 
 		}
@@ -94,7 +95,7 @@ public class GammaStampDataSource extends AbstractStampDataSource {
 	}
 
 	@Override
-	public void setAcquisitionHeader(HardwareAcquisitionConfig config) {
+	public void setAcquisitionHeader(final HardwareAcquisitionConfig config) {
 		super.setAcquisitionHeader(config);
 
 		total_samples = config.getTotalSamples();
@@ -104,6 +105,7 @@ public class GammaStampDataSource extends AbstractStampDataSource {
 
 	private boolean stopped = false;
 
+	@Override
 	public void stopNow() {
 		stopped = true;
 		setDataSourceStoped();

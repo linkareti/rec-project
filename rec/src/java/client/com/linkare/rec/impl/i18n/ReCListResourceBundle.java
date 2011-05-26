@@ -17,17 +17,19 @@ public class ReCListResourceBundle extends ReCResourceBundle {
 	private ListResourceBundle delegate = null;
 
 	/** Creates a new instance of ReCListResourceBundle */
-	public ReCListResourceBundle(ListResourceBundle delegate) {
+	public ReCListResourceBundle(final ListResourceBundle delegate) {
 		this.delegate = delegate;
 	}
 
-	public final Object handleGetObject(String key) {
+	@Override
+	public final Object handleGetObject(final String key) {
 		return delegate.handleGetObject(key);
 	}
 
 	/**
 	 * Implementation of ResourceBundle.getKeys.
 	 */
+	@Override
 	public Enumeration<String> getKeys() {
 		return delegate.getKeys();
 	}

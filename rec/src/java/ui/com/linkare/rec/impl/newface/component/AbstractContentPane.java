@@ -26,7 +26,7 @@ import com.linkare.rec.impl.newface.ReCApplication;
  */
 public class AbstractContentPane extends JPanel {
 
-	private ReCApplication recApplication = ReCApplication.getApplication();
+	private final ReCApplication recApplication = ReCApplication.getApplication();
 
 	private static final Logger log = Logger.getLogger(AbstractContentPane.class.getName());
 
@@ -38,7 +38,7 @@ public class AbstractContentPane extends JPanel {
 		super();
 	}
 
-	public AbstractContentPane(Window container) {
+	public AbstractContentPane(final Window container) {
 		this.container = container;
 	}
 
@@ -46,7 +46,7 @@ public class AbstractContentPane extends JPanel {
 		return container;
 	}
 
-	public void setContainer(Window container) {
+	public void setContainer(final Window container) {
 		this.container = container;
 	}
 
@@ -59,14 +59,14 @@ public class AbstractContentPane extends JPanel {
 	/**
 	 * Sets all child components enabled/disabled. (One level only)
 	 * 
-	 * @param enabled
-	 *            True to set enabled, false to disabled.
+	 * @param enabled True to set enabled, false to disabled.
 	 */
-	public void setChildComponentsEnabled(boolean enabled) {
-		for (Component childComponent : getComponents()) {
+	public void setChildComponentsEnabled(final boolean enabled) {
+		for (final Component childComponent : getComponents()) {
 			childComponent.setEnabled(enabled);
-			if (log.isLoggable(Level.FINE)) {
-				log.fine("component " + childComponent.getName() + (enabled ? " enabled" : " disabled"));
+			if (AbstractContentPane.log.isLoggable(Level.FINE)) {
+				AbstractContentPane.log.fine("component " + childComponent.getName()
+						+ (enabled ? " enabled" : " disabled"));
 			}
 		}
 	}

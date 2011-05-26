@@ -1,19 +1,21 @@
 package pt.utl.ist.elab.driver.statsound.audio.media.protocol.sinewavegenerator;
 
+import javax.media.Buffer;
 import javax.media.Control;
 import javax.media.Format;
 import javax.media.format.AudioFormat;
 import javax.media.protocol.BufferTransferHandler;
 import javax.media.protocol.ContentDescriptor;
 import javax.media.protocol.PullBufferStream;
+import javax.media.protocol.SourceStream;
 
 public class InterLacedSineWaveStream implements PullBufferStream {
 
 	protected ContentDescriptor cd = new ContentDescriptor(ContentDescriptor.RAW);
 	protected int maxDataLength;
-	private double freq_out = 44100.0;
-	private int bits_per_channel = 16;
-	private int num_channels = 2;
+	private final double freq_out = 44100.0;
+	private final int bits_per_channel = 16;
+	private final int num_channels = 2;
 	protected AudioFormat audioFormat;
 	protected boolean started;
 	// protected Thread thread;
@@ -40,7 +42,7 @@ public class InterLacedSineWaveStream implements PullBufferStream {
 		// maxDataLength=256;
 
 		/** CHANGED dividing by 4 */
-		max_amplitude = (double) (Math.pow(2., (double) (bits_per_channel - 1)) - 1) / 4;
+		max_amplitude = (Math.pow(2., (bits_per_channel - 1)) - 1) / 4;
 
 		// thread = new Thread(this);
 		// thread.setPriority(Thread.MAX_PRIORITY);
@@ -50,16 +52,19 @@ public class InterLacedSineWaveStream implements PullBufferStream {
 	 * SourceStream
 	 ***************************************************************************/
 
+	@Override
 	public ContentDescriptor getContentDescriptor() {
 		System.out.println("Getting cd");
 		return cd;
 	}
 
+	@Override
 	public long getContentLength() {
 		System.out.println("Getting content length");
-		return LENGTH_UNKNOWN;
+		return SourceStream.LENGTH_UNKNOWN;
 	}
 
+	@Override
 	public boolean endOfStream() {
 		System.out.println("Getting EOS");
 		return false;
@@ -77,7 +82,7 @@ public class InterLacedSineWaveStream implements PullBufferStream {
 
 	private double max_amplitude = 0;
 
-	public void setWaveLeftFreq(double wave_left_freq) {
+	public void setWaveLeftFreq(final double wave_left_freq) {
 		synchronized (Synch) {
 			this.wave_left_freq = wave_left_freq;
 			// this.wave_left_shift=0;
@@ -86,10 +91,10 @@ public class InterLacedSineWaveStream implements PullBufferStream {
 	}
 
 	public double getWaveLeftFreq() {
-		return this.wave_left_freq;
+		return wave_left_freq;
 	}
 
-	public void setWaveRightFreq(double wave_right_freq) {
+	public void setWaveRightFreq(final double wave_right_freq) {
 		synchronized (Synch) {
 			this.wave_right_freq = wave_right_freq;
 			// this.wave_right_shift=0;
@@ -98,14 +103,15 @@ public class InterLacedSineWaveStream implements PullBufferStream {
 	}
 
 	public double getWaveRightFreq() {
-		return this.wave_right_freq;
+		return wave_right_freq;
 	}
 
+	@Override
 	public Format getFormat() {
 		return audioFormat;
 	}
 
-	public void setTransferHandler(BufferTransferHandler transferHandler) {
+	public void setTransferHandler(final BufferTransferHandler transferHandler) {
 		System.out.println("Setting transfer handler");
 		synchronized (this) {
 			this.transferHandler = transferHandler;
@@ -113,7 +119,7 @@ public class InterLacedSineWaveStream implements PullBufferStream {
 		}
 	}
 
-	void start(boolean started) {
+	void start(final boolean started) {
 
 		synchronized (this) {
 			this.started = started;
@@ -146,23 +152,26 @@ public class InterLacedSineWaveStream implements PullBufferStream {
 	 */
 	// Controls
 
+	@Override
 	public Object[] getControls() {
 		System.out.println("Getting controls");
 		return controls;
 	}
 
-	public Object getControl(String controlType) {
+	@Override
+	public Object getControl(final String controlType) {
 		System.out.println("Getting controls");
 		try {
-			Class cls = Class.forName(controlType);
-			Object cs[] = getControls();
-			for (int i = 0; i < cs.length; i++) {
-				if (cls.isInstance(cs[i]))
-					return cs[i];
+			final Class cls = Class.forName(controlType);
+			final Object cs[] = getControls();
+			for (final Object element : cs) {
+				if (cls.isInstance(element)) {
+					return element;
+				}
 			}
 			return null;
 
-		} catch (Exception e) { // no such controlType or such control
+		} catch (final Exception e) { // no such controlType or such control
 			return null;
 		}
 	}
@@ -173,7 +182,8 @@ public class InterLacedSineWaveStream implements PullBufferStream {
 
 	Object Synch = new Object();
 
-	public void read(javax.media.Buffer buffer) throws java.io.IOException {
+	@Override
+	public void read(final javax.media.Buffer buffer) throws java.io.IOException {
 		freqPlayed = false;
 		Object outdata = buffer.getData();
 		if (outdata == null || !(outdata.getClass() == Format.byteArray) || ((byte[]) outdata).length != maxDataLength) {// realoca
@@ -193,16 +203,16 @@ public class InterLacedSineWaveStream implements PullBufferStream {
 
 		buffer.setFormat(audioFormat);
 
-		byte[] data_out = (byte[]) outdata;
+		final byte[] data_out = (byte[]) outdata;
 
-		double delta_t = 1. / (double) freq_out;
+		final double delta_t = 1. / freq_out;
 
-		int buffer_len = data_out.length / (num_channels * (bits_per_channel / 8));
+		final int buffer_len = data_out.length / (num_channels * (bits_per_channel / 8));
 		double wave_left_freq_temp = 0.;
 		double wave_right_freq_temp = 0.;
 		double time = 0.;
 		for (int i = 0; i < buffer_len; i++) {
-			time = (double) i * delta_t;
+			time = i * delta_t;
 			synchronized (Synch) {
 				wave_left_freq_temp = wave_left_freq;
 				wave_right_freq_temp = wave_left_freq;
@@ -242,7 +252,7 @@ public class InterLacedSineWaveStream implements PullBufferStream {
 		buffer.setSequenceNumber(seqNo);
 		buffer.setLength(data_out.length);
 		buffer.setOffset(0);
-		buffer.setFlags(buffer.FLAG_RELATIVE_TIME);
+		buffer.setFlags(Buffer.FLAG_RELATIVE_TIME);
 		buffer.setTimeStamp(0);
 		buffer.setHeader(null);
 		seqNo++;
@@ -255,6 +265,7 @@ public class InterLacedSineWaveStream implements PullBufferStream {
 		return freqPlayed;
 	}
 
+	@Override
 	public boolean willReadBlock() {
 		System.out.println("Will read block?");
 		return false;

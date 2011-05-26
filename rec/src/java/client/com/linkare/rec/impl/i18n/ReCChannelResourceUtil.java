@@ -21,36 +21,36 @@ public class ReCChannelResourceUtil {
 		throw new IllegalStateException("Static class can't be instatiated.");
 	}
 
-	private static String find(String bundleName, int channelIndex, String attribute) {
+	private static String find(final String bundleName, final int channelIndex, final String attribute) {
 		if (bundleName == null || attribute == null || attribute.isEmpty()) {
 			return null;
 		}
 		try {
-			return ReCResourceBundle.findString(bundleName.toLowerCase() + "$rec.exp."
-					+ bundleName.toLowerCase() + ".hardwareinfo.channel." + channelIndex + "." + attribute);
-		} catch (MissingResourceException e) {
+			return ReCResourceBundle.findString(bundleName.toLowerCase() + "$rec.exp." + bundleName.toLowerCase()
+					+ ".hardwareinfo.channel." + channelIndex + "." + attribute);
+		} catch (final MissingResourceException e) {
 		}
 		return null;
 	}
 
-	public static String findName(String bundleName, int channelIndex) {
-		return find(bundleName, channelIndex, "name");
+	public static String findName(final String bundleName, final int channelIndex) {
+		return ReCChannelResourceUtil.find(bundleName, channelIndex, "name");
 	}
 
-	public static String findLabel(String bundleName, int channelIndex) {
-		return find(bundleName, channelIndex, "label");
+	public static String findLabel(final String bundleName, final int channelIndex) {
+		return ReCChannelResourceUtil.find(bundleName, channelIndex, "label");
 	}
 
-	public static String findPhysicsUnitName(String bundleName, int channelIndex) {
-		return find(bundleName, channelIndex, "physicsunitname");
+	public static String findPhysicsUnitName(final String bundleName, final int channelIndex) {
+		return ReCChannelResourceUtil.find(bundleName, channelIndex, "physicsunitname");
 	}
 
-	public static String findPhysicsUnitSymbol(String bundleName, int channelIndex) {
-		return find(bundleName, channelIndex, "physicsunitsymbol");
+	public static String findPhysicsUnitSymbol(final String bundleName, final int channelIndex) {
+		return ReCChannelResourceUtil.find(bundleName, channelIndex, "physicsunitsymbol");
 	}
 
-	public static String findMultiplier(String bundleName, int channelIndex) {
-		return find(bundleName, channelIndex, "multiplier");
+	public static String findMultiplier(final String bundleName, final int channelIndex) {
+		return ReCChannelResourceUtil.find(bundleName, channelIndex, "multiplier");
 	}
 
 }

@@ -1,6 +1,11 @@
 package com.linkare.rec.data.synch;
 
 public final class Time implements org.omg.CORBA.portable.IDLEntity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -774236984957952973L;
+
 	//
 	// Struct member picos
 	//
@@ -40,7 +45,7 @@ public final class Time implements org.omg.CORBA.portable.IDLEntity {
 		this(new java.util.GregorianCalendar());
 	}
 
-	public Time(java.util.Calendar now) {
+	public Time(final java.util.Calendar now) {
 		this((short) 0, (short) 0, (short) 0, (short) now.get(java.util.Calendar.MILLISECOND), (byte) now
 				.get(java.util.Calendar.SECOND), (byte) now.get(java.util.Calendar.MINUTE), (byte) now
 				.get(java.util.Calendar.HOUR_OF_DAY));
@@ -56,7 +61,8 @@ public final class Time implements org.omg.CORBA.portable.IDLEntity {
 	// @param minutes minutes struct member
 	// @param hours hours struct member
 	//
-	public Time(short picos, short nanos, short micros, short milis, byte seconds, byte minutes, byte hours) {
+	public Time(final short picos, final short nanos, final short micros, final short milis, final byte seconds,
+			final byte minutes, final byte hours) {
 		this.picos = picos;
 		this.nanos = nanos;
 		this.micros = micros;
@@ -66,49 +72,49 @@ public final class Time implements org.omg.CORBA.portable.IDLEntity {
 		this.hours = hours;
 	}
 
-	public Time(Time other) {
-		this.picos = other.picos;
-		this.nanos = other.nanos;
-		this.micros = other.micros;
-		this.milis = other.milis;
-		this.seconds = other.seconds;
-		this.minutes = other.minutes;
-		this.hours = other.hours;
+	public Time(final Time other) {
+		picos = other.picos;
+		nanos = other.nanos;
+		micros = other.micros;
+		milis = other.milis;
+		seconds = other.seconds;
+		minutes = other.minutes;
+		hours = other.hours;
 	}
 
+	@Override
 	public String toString() {
-		java.text.NumberFormat nf3 = java.text.NumberFormat.getNumberInstance();
+		final java.text.NumberFormat nf3 = java.text.NumberFormat.getNumberInstance();
 		nf3.setMaximumFractionDigits(0);
 		nf3.setMinimumFractionDigits(0);
 		nf3.setMinimumIntegerDigits(3);
 		nf3.setMaximumIntegerDigits(3);
 
-		java.text.NumberFormat nf2 = java.text.NumberFormat.getNumberInstance();
+		final java.text.NumberFormat nf2 = java.text.NumberFormat.getNumberInstance();
 		nf2.setMaximumFractionDigits(0);
 		nf2.setMinimumFractionDigits(0);
 		nf2.setMinimumIntegerDigits(2);
 		nf2.setMaximumIntegerDigits(2);
 
-		return nf2.format((long) hours) + ":" + nf2.format((long) minutes) + ":" + nf2.format((long) seconds) + ":"
-				+ nf3.format((long) milis) + ":" + nf3.format((long) micros) + ":" + nf3.format((long) nanos) + ":"
-				+ nf3.format((long) picos);
+		return nf2.format(hours) + ":" + nf2.format(minutes) + ":" + nf2.format(seconds) + ":" + nf3.format(milis)
+				+ ":" + nf3.format(micros) + ":" + nf3.format(nanos) + ":" + nf3.format(picos);
 
 	}
 
 	public String toSimpleTimeString() {
-		java.text.NumberFormat nf3 = java.text.NumberFormat.getNumberInstance();
+		final java.text.NumberFormat nf3 = java.text.NumberFormat.getNumberInstance();
 		nf3.setMaximumFractionDigits(0);
 		nf3.setMinimumFractionDigits(0);
 		nf3.setMinimumIntegerDigits(3);
 		nf3.setMaximumIntegerDigits(3);
 
-		java.text.NumberFormat nf2 = java.text.NumberFormat.getNumberInstance();
+		final java.text.NumberFormat nf2 = java.text.NumberFormat.getNumberInstance();
 		nf2.setMaximumFractionDigits(0);
 		nf2.setMinimumFractionDigits(0);
 		nf2.setMinimumIntegerDigits(2);
 		nf2.setMaximumIntegerDigits(2);
 
-		return nf2.format((long) hours) + ":" + nf2.format((long) minutes) + ":" + nf2.format((long) seconds);
+		return nf2.format(hours) + ":" + nf2.format(minutes) + ":" + nf2.format(seconds);
 
 	}
 
@@ -118,7 +124,7 @@ public final class Time implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property hours.
 	 */
 	public byte getHours() {
-		return this.hours;
+		return hours;
 	}
 
 	/**
@@ -126,7 +132,7 @@ public final class Time implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param hours New value of property hours.
 	 */
-	public void setHours(byte hours) {
+	public void setHours(final byte hours) {
 		this.hours = hours;
 	}
 
@@ -136,7 +142,7 @@ public final class Time implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property minutes.
 	 */
 	public byte getMinutes() {
-		return this.minutes;
+		return minutes;
 	}
 
 	/**
@@ -144,7 +150,7 @@ public final class Time implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param minutes New value of property minutes.
 	 */
-	public void setMinutes(byte minutes) {
+	public void setMinutes(final byte minutes) {
 		this.minutes = minutes;
 	}
 
@@ -154,7 +160,7 @@ public final class Time implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property seconds.
 	 */
 	public byte getSeconds() {
-		return this.seconds;
+		return seconds;
 	}
 
 	/**
@@ -162,7 +168,7 @@ public final class Time implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param seconds New value of property seconds.
 	 */
-	public void setSeconds(byte seconds) {
+	public void setSeconds(final byte seconds) {
 		this.seconds = seconds;
 	}
 
@@ -172,7 +178,7 @@ public final class Time implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property milis.
 	 */
 	public short getMilis() {
-		return this.milis;
+		return milis;
 	}
 
 	/**
@@ -180,7 +186,7 @@ public final class Time implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param milis New value of property milis.
 	 */
-	public void setMilis(short milis) {
+	public void setMilis(final short milis) {
 		this.milis = milis;
 	}
 
@@ -190,7 +196,7 @@ public final class Time implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property micros.
 	 */
 	public short getMicros() {
-		return this.micros;
+		return micros;
 	}
 
 	/**
@@ -198,7 +204,7 @@ public final class Time implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param micros New value of property micros.
 	 */
-	public void setMicros(short micros) {
+	public void setMicros(final short micros) {
 		this.micros = micros;
 	}
 
@@ -208,7 +214,7 @@ public final class Time implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property nanos.
 	 */
 	public short getNanos() {
-		return this.nanos;
+		return nanos;
 	}
 
 	/**
@@ -216,7 +222,7 @@ public final class Time implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param nanos New value of property nanos.
 	 */
-	public void setNanos(short nanos) {
+	public void setNanos(final short nanos) {
 		this.nanos = nanos;
 	}
 
@@ -226,7 +232,7 @@ public final class Time implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property picos.
 	 */
 	public short getPicos() {
-		return this.picos;
+		return picos;
 	}
 
 	/**
@@ -234,7 +240,7 @@ public final class Time implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param picos New value of property picos.
 	 */
-	public void setPicos(short picos) {
+	public void setPicos(final short picos) {
 		this.picos = picos;
 	}
 

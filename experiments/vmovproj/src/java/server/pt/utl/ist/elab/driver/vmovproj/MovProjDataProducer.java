@@ -28,35 +28,36 @@ public class MovProjDataProducer extends VirtualBaseDataSource implements ODE/*
 																			 */
 {
 	// O numero de canais(de dados) que existem!
-	private int NUM_CHANNELS = 12;
+	private final int NUM_CHANNELS = 12;
 
 	private int tbs = 100;
-	private int nSamples;
+	private final int nSamples;
 
-	private double x, y, z;
-	private double[] omega;
-	private double[] velc;
+	private final double x, y, z;
+	private final double[] omega;
+	private final double[] velc;
 
-	private double s0;
-	private double raio, mass;
-	private double g;
+	private final double s0;
+	private final double raio, mass;
+	private final double g;
 	private double dt;
 
-	private double dragCoef1, dragCoef2, densidadeFluid;
+	private final double dragCoef1, dragCoef2, densidadeFluid;
 
-	private boolean gVariavel, atritoVariavel;
+	private final boolean gVariavel, atritoVariavel;
 	private boolean rMod = false, vMod = false;
 
-	private double[] state;
+	private final double[] state;
 	private ODESolver metodoNumerico;
 
 	private boolean stopped = false;
 	private VirtualBaseDriver driver = null;
 
-	public MovProjDataProducer(VirtualBaseDriver driver, float x, float y, float z, float vel, float velTheta,
-			float velPhi, float spin, float spinTheta, float spinPhi, float radius, float mass, float dragCoef1,
-			float dragCoef2, float densL, float s0, float g, int dt, boolean odeType, boolean gType, boolean dragType,
-			boolean rMod, boolean vMod, int tbs, int nSamples) {
+	public MovProjDataProducer(final VirtualBaseDriver driver, final float x, final float y, final float z,
+			final float vel, final float velTheta, final float velPhi, final float spin, final float spinTheta,
+			final float spinPhi, final float radius, final float mass, final float dragCoef1, final float dragCoef2,
+			final float densL, final float s0, final float g, final int dt, final boolean odeType, final boolean gType,
+			final boolean dragType, final boolean rMod, final boolean vMod, final int tbs, final int nSamples) {
 		System.out.println("Creating data producer...");
 		this.driver = driver;
 		this.nSamples = nSamples;
@@ -66,7 +67,7 @@ public class MovProjDataProducer extends VirtualBaseDataSource implements ODE/*
 		this.y = y;
 		this.z = z;
 
-		this.raio = radius;
+		raio = radius;
 		this.mass = mass;
 
 		System.out.println("A");
@@ -77,7 +78,7 @@ public class MovProjDataProducer extends VirtualBaseDataSource implements ODE/*
 		System.out.println("B");
 		this.dragCoef1 = dragCoef1;
 		this.dragCoef2 = dragCoef2;
-		this.densidadeFluid = densL;
+		densidadeFluid = densL;
 
 		this.s0 = s0;
 		System.out.println("C");
@@ -96,12 +97,13 @@ public class MovProjDataProducer extends VirtualBaseDataSource implements ODE/*
 		System.out.println("D");
 		state = new double[] { x, velc[0], y, velc[1], z, velc[2], 0 };
 
-		if (!odeType)
+		if (!odeType) {
 			metodoNumerico = new Euler(this);
-		else
+		} else {
 			metodoNumerico = new RK4(this);
+		}
 
-		metodoNumerico.initialize((double) dt / 1000d);
+		metodoNumerico.initialize(dt / 1000d);
 	}
 
 	// TESTE
@@ -154,22 +156,24 @@ public class MovProjDataProducer extends VirtualBaseDataSource implements ODE/*
 	private class ProducerThread extends Thread {
 		private int currentSample = 0;
 
+		@Override
 		public void run() {
 			try {
-				sleep(1000);
+				Thread.sleep(1000);
 
 				PhysicsValue[] value;
 				double tmp = 0;
 
 				while (currentSample < nSamples && !stopped) {
 
-					if (state[2] + state[3] * (double) dt / 1000d <= 0) {
-						dt = (double) dt / 10d;
-						metodoNumerico.setStepSize((double) dt / 1000d);
+					if (state[2] + state[3] * dt / 1000d <= 0) {
+						dt = dt / 10d;
+						metodoNumerico.setStepSize(dt / 1000d);
 					}
 					metodoNumerico.step();
-					if (state[2] <= 0)
+					if (state[2] <= 0) {
 						stopped = true;
+					}
 					if ((int) Math.round((state[6] - tmp) * 1000) >= tbs || stopped) {
 						value = new PhysicsValue[NUM_CHANNELS];
 
@@ -203,30 +207,32 @@ public class MovProjDataProducer extends VirtualBaseDataSource implements ODE/*
 								PhysicsValFactory
 										.fromFloat((float) (drag(state[3]) - g() + magnus()
 												* productoVectorial(state[1], state[3], state[5], omega[0], omega[1],
-														omega[2])[1])), getAcquisitionHeader().getChannelsConfig(8)
-										.getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
-										.getChannelsConfig(8).getSelectedScale().getMultiplier());
+														omega[2])[1])),
+								getAcquisitionHeader().getChannelsConfig(8).getSelectedScale().getDefaultErrorValue(),
+								getAcquisitionHeader().getChannelsConfig(8).getSelectedScale().getMultiplier());
 						value[9] = new PhysicsValue(PhysicsValFactory.fromFloat((float) (drag(state[5]) + magnus()
 								* productoVectorial(state[1], state[3], state[5], omega[0], omega[1], omega[2])[2])),
 								getAcquisitionHeader().getChannelsConfig(9).getSelectedScale().getDefaultErrorValue(),
 								getAcquisitionHeader().getChannelsConfig(9).getSelectedScale().getMultiplier());
 
-						if (rMod)
+						if (rMod) {
 							value[10] = new PhysicsValue(PhysicsValFactory.fromFloat((float) Math.sqrt(Math.pow(
-									state[0], 2)
-									+ Math.pow(state[2], 2) + Math.pow(state[4], 2))), getAcquisitionHeader()
-									.getChannelsConfig(10).getSelectedScale().getDefaultErrorValue(),
-									getAcquisitionHeader().getChannelsConfig(10).getSelectedScale().getMultiplier());
-						if (vMod)
+									state[0], 2) + Math.pow(state[2], 2) + Math.pow(state[4], 2))),
+									getAcquisitionHeader().getChannelsConfig(10).getSelectedScale()
+											.getDefaultErrorValue(), getAcquisitionHeader().getChannelsConfig(10)
+											.getSelectedScale().getMultiplier());
+						}
+						if (vMod) {
 							value[11] = new PhysicsValue(PhysicsValFactory.fromFloat((float) Math.sqrt(Math.pow(
-									state[1], 2)
-									+ Math.pow(state[3], 2) + Math.pow(state[5], 2))), getAcquisitionHeader()
-									.getChannelsConfig(11).getSelectedScale().getDefaultErrorValue(),
-									getAcquisitionHeader().getChannelsConfig(11).getSelectedScale().getMultiplier());
+									state[1], 2) + Math.pow(state[3], 2) + Math.pow(state[5], 2))),
+									getAcquisitionHeader().getChannelsConfig(11).getSelectedScale()
+											.getDefaultErrorValue(), getAcquisitionHeader().getChannelsConfig(11)
+											.getSelectedScale().getMultiplier());
+						}
 
 						addDataRow(value);
 						tmp = state[6];
-						sleep(tbs);
+						Thread.sleep(tbs);
 						currentSample++;
 					}
 				}
@@ -234,11 +240,12 @@ public class MovProjDataProducer extends VirtualBaseDataSource implements ODE/*
 				endProduction();
 
 				driver.stopVirtualHardware();
-			} catch (InterruptedException ie) {
+			} catch (final InterruptedException ie) {
 			}
 		}
 	}
 
+	@Override
 	public void startProduction() {
 		stopped = false;
 		new ProducerThread().start();
@@ -249,12 +256,14 @@ public class MovProjDataProducer extends VirtualBaseDataSource implements ODE/*
 		setDataSourceStoped();
 	}
 
+	@Override
 	public void stopNow() {
 		stopped = true;
 		setDataSourceStoped();
 	}
 
-	public void getRate(double[] state, double[] rate) {
+	@Override
+	public void getRate(final double[] state, final double[] rate) {
 		rate[0] = state[1]; // x
 		rate[1] = drag(state[1]) + magnus()
 				* productoVectorial(state[1], state[3], state[5], omega[0], omega[1], omega[2])[0];
@@ -270,16 +279,18 @@ public class MovProjDataProducer extends VirtualBaseDataSource implements ODE/*
 		rate[6] = 1; // tempo
 	}
 
+	@Override
 	public double[] getState() {
 		return state;
 	}
 
 	// Aceleracao gravitica
 	private double g() {
-		if (gVariavel)
+		if (gVariavel) {
 			return 5.9742e24 * 6.672e-11 / Math.pow(6.378e6 + state[2], 2);
-		else
+		} else {
 			return g;
+		}
 	}
 
 	// Factor constante da aceleracao de Magnus
@@ -288,25 +299,27 @@ public class MovProjDataProducer extends VirtualBaseDataSource implements ODE/*
 	}
 
 	// Aceleracao de atrito (variavel ou invariavel [atritoInv])
-	private double drag(double _v) {
+	private double drag(final double _v) {
 		double dragConst;
 
-		if (moduloVectorial(state[1], state[3], state[5]) > 14 && atritoVariavel)
+		if (moduloVectorial(state[1], state[3], state[5]) > 14 && atritoVariavel) {
 			dragConst = dragCoef2 / moduloVectorial(state[1], state[3], state[5]);
-		else
+		} else {
 			dragConst = dragCoef1;
+		}
 
 		return -dragConst * Math.PI * raio * raio * densidadeFluid * moduloVectorial(state[1], state[3], state[5]) * _v
 				/ (2 * mass);
 	}
 
 	// Modulo Vectorial generico (3)
-	private double moduloVectorial(double _x, double _y, double _z) {
+	private double moduloVectorial(final double _x, final double _y, final double _z) {
 		return Math.sqrt(_x * _x + _y * _y + _z * _z);
 	}
 
 	// Producto Vectorial generico (3)
-	private double[] productoVectorial(double _x1, double _y1, double _z1, double _x2, double _y2, double _z2) {
+	private double[] productoVectorial(final double _x1, final double _y1, final double _z1, final double _x2,
+			final double _y2, final double _z2) {
 		return new double[] { _y1 * _z2 - _z1 * _y2, -(_x1 * _z2 - _z1 * _x2), _x1 * _y2 - _y1 * _x2 };
 	}
 

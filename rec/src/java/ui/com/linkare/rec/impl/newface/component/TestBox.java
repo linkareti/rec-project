@@ -18,6 +18,11 @@ import com.linkare.rec.impl.newface.laf.flat.Focus;
 @Focus(display = false)
 public class TestBox extends JTextField {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7211810386748966175L;
+
 	public TestBox() {
 		super();
 	}

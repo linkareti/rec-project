@@ -14,12 +14,18 @@ import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
  */
 public class Mode1Table extends MultSeriesTable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3424229319703636220L;
+
 	/** Creates a new instance of TableFreqRMS */
 	public Mode1Table() {
 		super();
 		setColArray(new int[] { 0, 3 });
 	}
 
+	@Override
 	public String getName() {
 		return "Modo Fixo";
 	}

@@ -15,11 +15,12 @@ public class CypressConfiguredProcessor extends AbstractCypressProcessor {
 	public static final String COMMAND_IDENTIFIER = AbstractCypressDriver.CONFIG_ACCEPTED_STRING;
 
 	public CypressConfiguredProcessor() {
-		super(COMMAND_IDENTIFIER);
+		super(CypressConfiguredProcessor.COMMAND_IDENTIFIER);
 	}
 
-	public boolean process(CypressCommand command) {
-		command.addCommandData(COMMAND_IDENTIFIER, Boolean.TRUE);
+	@Override
+	public boolean process(final CypressCommand command) {
+		command.addCommandData(CypressConfiguredProcessor.COMMAND_IDENTIFIER, Boolean.TRUE);
 		return true;
 	}
 

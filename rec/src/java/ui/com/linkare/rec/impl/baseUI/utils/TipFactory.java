@@ -23,10 +23,12 @@ import javax.swing.Popup;
 import javax.swing.PopupFactory;
 
 public class TipFactory {
-	public void showTipWithTimeout(JComponent component, String tooltipText, int timeoutHide, Point location) {
+	public void showTipWithTimeout(final JComponent component, final String tooltipText, final int timeoutHide,
+			final Point location) {
 		showTipWindow(component, tooltipText, location);
 		timerPopup = new javax.swing.Timer(timeoutHide, new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
+			@Override
+			public void actionPerformed(final ActionEvent evt) {
 				hideTipWindow();
 			}
 		});
@@ -36,25 +38,26 @@ public class TipFactory {
 
 	private javax.swing.Timer timerPopup = null;
 
-	public void showTipWindow(JComponent component, String tooltipText, Point location) {
-		if (component == null || !component.isShowing())
+	public void showTipWindow(final JComponent component, final String tooltipText, final Point location) {
+		if (component == null || !component.isShowing()) {
 			return;
+		}
 
 		Dimension size;
-		Point screenLocation = component.getLocationOnScreen();
-		Rectangle sBounds = component.getBounds();
+		final Point screenLocation = component.getLocationOnScreen();
+		final Rectangle sBounds = component.getBounds();
 
 		// Just to be paranoid
 		hideTipWindow();
 
-		JToolTip tip = component.createToolTip();
+		final JToolTip tip = component.createToolTip();
 		tip.setTipText(tooltipText);
 		size = tip.getPreferredSize();
 
-		Rectangle popupRect = new Rectangle();
+		final Rectangle popupRect = new Rectangle();
 		popupRect.setBounds(location.x, location.y, size.width, size.height);
 
-		PopupFactory popupFactory = PopupFactory.getSharedInstance();
+		final PopupFactory popupFactory = PopupFactory.getSharedInstance();
 		tipWindow = popupFactory.getPopup(component, tip, location.x, location.y);
 		tipWindow.show();
 
@@ -67,7 +70,8 @@ public class TipFactory {
 			tipWindow.hide();
 			tipWindow = null;
 		}
-		if (timerPopup != null)
+		if (timerPopup != null) {
 			timerPopup.stop();
+		}
 	}
 }

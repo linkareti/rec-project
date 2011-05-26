@@ -15,38 +15,40 @@ public class MonthMap {
 	private static final java.util.HashMap<Integer, String> monthNameMap = new java.util.HashMap<Integer, String>();
 	private static final java.util.HashMap<String, Object> monthValueMap = new java.util.HashMap<String, Object>();
 	static {
-		monthNameMap.put(new Integer(java.util.Calendar.JANUARY), "Janeiro");
-		monthNameMap.put(new Integer(java.util.Calendar.FEBRUARY), "Fevereiro");
-		monthNameMap.put(new Integer(java.util.Calendar.MARCH), "Marco");
-		monthNameMap.put(new Integer(java.util.Calendar.APRIL), "Abril");
-		monthNameMap.put(new Integer(java.util.Calendar.MAY), "Maio");
-		monthNameMap.put(new Integer(java.util.Calendar.JUNE), "Junho");
-		monthNameMap.put(new Integer(java.util.Calendar.JULY), "Julho");
-		monthNameMap.put(new Integer(java.util.Calendar.AUGUST), "Agosto");
-		monthNameMap.put(new Integer(java.util.Calendar.SEPTEMBER), "Setembro");
-		monthNameMap.put(new Integer(java.util.Calendar.OCTOBER), "Outubro");
-		monthNameMap.put(new Integer(java.util.Calendar.NOVEMBER), "Novembro");
-		monthNameMap.put(new Integer(java.util.Calendar.DECEMBER), "Dezembro");
+		MonthMap.monthNameMap.put(new Integer(java.util.Calendar.JANUARY), "Janeiro");
+		MonthMap.monthNameMap.put(new Integer(java.util.Calendar.FEBRUARY), "Fevereiro");
+		MonthMap.monthNameMap.put(new Integer(java.util.Calendar.MARCH), "Marco");
+		MonthMap.monthNameMap.put(new Integer(java.util.Calendar.APRIL), "Abril");
+		MonthMap.monthNameMap.put(new Integer(java.util.Calendar.MAY), "Maio");
+		MonthMap.monthNameMap.put(new Integer(java.util.Calendar.JUNE), "Junho");
+		MonthMap.monthNameMap.put(new Integer(java.util.Calendar.JULY), "Julho");
+		MonthMap.monthNameMap.put(new Integer(java.util.Calendar.AUGUST), "Agosto");
+		MonthMap.monthNameMap.put(new Integer(java.util.Calendar.SEPTEMBER), "Setembro");
+		MonthMap.monthNameMap.put(new Integer(java.util.Calendar.OCTOBER), "Outubro");
+		MonthMap.monthNameMap.put(new Integer(java.util.Calendar.NOVEMBER), "Novembro");
+		MonthMap.monthNameMap.put(new Integer(java.util.Calendar.DECEMBER), "Dezembro");
 
-		Object[] keysObj = monthNameMap.keySet().toArray();
-		for (int i = 0; i < keysObj.length; i++)
-			monthValueMap.put(monthNameMap.get(keysObj[i]), keysObj[i]);
+		final Object[] keysObj = MonthMap.monthNameMap.keySet().toArray();
+		for (final Object element : keysObj) {
+			MonthMap.monthValueMap.put(MonthMap.monthNameMap.get(element), element);
+		}
 	}
 
 	public static String[] getMonthNames() {
-		Object[] values = monthNameMap.values().toArray();
-		String[] monthNames = new String[values.length];
-		for (int i = 0; i < values.length; i++)
+		final Object[] values = MonthMap.monthNameMap.values().toArray();
+		final String[] monthNames = new String[values.length];
+		for (int i = 0; i < values.length; i++) {
 			monthNames[i] = (String) values[values.length - 1 - i];
+		}
 
 		return monthNames;
 	}
 
-	public static int getMonthNumberfromName(String name) {
-		return ((Integer) monthValueMap.get(name)).intValue();
+	public static int getMonthNumberfromName(final String name) {
+		return ((Integer) MonthMap.monthValueMap.get(name)).intValue();
 	}
 
-	public static String getMonthNamefromNumber(int number) {
-		return (String) monthNameMap.get(new Integer(number));
+	public static String getMonthNamefromNumber(final int number) {
+		return MonthMap.monthNameMap.get(new Integer(number));
 	}
 }

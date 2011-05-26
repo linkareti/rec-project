@@ -21,7 +21,7 @@ import com.linkare.rec.impl.data.PhysicsValueFactory;
 public class MomInerciaStampDataSource extends AbstractStampDataSource {
 
 	private int counter = 0;
-	private int total_samples = 0;
+	private final int total_samples = 0;
 
 	private static final int MAX_VELOCITY = 7200;
 
@@ -33,21 +33,23 @@ public class MomInerciaStampDataSource extends AbstractStampDataSource {
 	private float timeDelay = -1;
 	private float stop_time = 1000;
 
-	public void processDataCommand(StampCommand cmd) {
-		if (cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null)
+	@Override
+	public void processDataCommand(final StampCommand cmd) {
+		if (cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null) {
 			return;
+		}
 
 		if (cmd.getCommandIdentifier().equals(StampMomInerciaProcessor.COMMAND_IDENTIFIER)) {
 
 			float velocity;
 			float power;
-			long time;
+			final long time;
 
-			PhysicsValue[] values = new PhysicsValue[3];
+			final PhysicsValue[] values = new PhysicsValue[3];
 			try {
 				velocity = ((Float) cmd.getCommandData(StampMomInerciaProcessor.VELOCITY)).floatValue();
 				power = ((Float) cmd.getCommandData(StampMomInerciaProcessor.POWER)).floatValue();
-			} catch (ClassCastException e) {
+			} catch (final ClassCastException e) {
 				e.printStackTrace();
 				return;
 			}
@@ -82,20 +84,22 @@ public class MomInerciaStampDataSource extends AbstractStampDataSource {
 			super.addDataRow(values);
 
 			counter++;
-			if (counter == total_samples)
+			if (counter == total_samples) {
 				setDataSourceEnded();
+			}
 		}
 
 	}
 
 	private boolean stopEnabled = false;
 
-	public void setAcquisitionHeader(HardwareAcquisitionConfig config) {
+	@Override
+	public void setAcquisitionHeader(final HardwareAcquisitionConfig config) {
 		super.setAcquisitionHeader(config);
 		delay_time = (float) (getAcquisitionHeader().getSelectedFrequency().getFrequency());
 		stop_time = Integer.parseInt(config.getSelectedHardwareParameterValue("Stop Iteration")) * delay_time / 1000f;
 
-		String iteration = config.getSelectedHardwareParameterValue("Iteration");
+		final String iteration = config.getSelectedHardwareParameterValue("Iteration");
 
 		if (iteration.equalsIgnoreCase("Both") || iteration.equalsIgnoreCase("Stop")) {
 			stopEnabled = true;
@@ -109,6 +113,7 @@ public class MomInerciaStampDataSource extends AbstractStampDataSource {
 
 	private boolean stopped = false;
 
+	@Override
 	public void stopNow() {
 		stopped = true;
 		setDataSourceStoped();

@@ -19,19 +19,21 @@ public class ReCPropertyResourceBundle extends ReCResourceBundle {
 	public PropertyResourceBundle delegate = null;
 
 	/** Creates a new instance of ReCPropertyResourceBundle */
-	public ReCPropertyResourceBundle(InputStream is) throws IOException {
+	public ReCPropertyResourceBundle(final InputStream is) throws IOException {
 		delegate = new PropertyResourceBundle(is);
 	}
 
 	// Implements java.util.ResourceBundle.handleGetObject; inherits javadoc
 	// specification.
-	public Object handleGetObject(String key) {
+	@Override
+	public Object handleGetObject(final String key) {
 		return delegate.handleGetObject(key);
 	}
 
 	/**
 	 * Implementation of ResourceBundle.getKeys.
 	 */
+	@Override
 	public Enumeration<String> getKeys() {
 		return delegate.getKeys();
 	}

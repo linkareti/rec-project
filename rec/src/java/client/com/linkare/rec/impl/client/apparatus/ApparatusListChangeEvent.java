@@ -12,11 +12,20 @@ package com.linkare.rec.impl.client.apparatus;
  */
 public class ApparatusListChangeEvent extends java.util.EventObject {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7383529014751063949L;
 	/** Holds value of property apparatus. */
 	private Apparatus[] apparatus;
 
-	/** Creates a new instance of ApparatusListChangeEvent */
-	public ApparatusListChangeEvent(Object source, Apparatus[] apparatus) {
+	/**
+	 * Creates a new instance of ApparatusListChangeEvent
+	 * 
+	 * @param source
+	 * @param apparatus
+	 */
+	public ApparatusListChangeEvent(final Object source, final Apparatus[] apparatus) {
 		super(source);
 		this.apparatus = apparatus;
 	}
@@ -27,7 +36,7 @@ public class ApparatusListChangeEvent extends java.util.EventObject {
 	 * @return Value of property apparatus.
 	 */
 	public Apparatus[] getApparatus() {
-		return this.apparatus;
+		return apparatus;
 	}
 
 	/**
@@ -35,7 +44,7 @@ public class ApparatusListChangeEvent extends java.util.EventObject {
 	 * 
 	 * @param apparatus New value of property apparatus.
 	 */
-	public void setApparatus(Apparatus[] apparatus) {
+	public void setApparatus(final Apparatus[] apparatus) {
 		this.apparatus = apparatus;
 	}
 

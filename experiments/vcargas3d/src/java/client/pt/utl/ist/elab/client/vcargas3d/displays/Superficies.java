@@ -6,6 +6,9 @@
 
 package pt.utl.ist.elab.client.vcargas3d.displays;
 
+import javax.swing.JFrame;
+import javax.swing.SwingConstants;
+
 import pt.utl.ist.elab.client.vcargas3d.Sistema;
 import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
 
@@ -21,6 +24,10 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * @author n0dP2
  */
 public class Superficies extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6798743703031713247L;
 	java.util.ArrayList[][] superficies;
 	java.util.ArrayList sist;
 	java.util.ArrayList sup20 = new java.util.ArrayList();
@@ -57,7 +64,7 @@ public class Superficies extends javax.swing.JPanel implements ExpDataDisplay, E
 		add(jPanel1, gridBagConstraints);
 
 		jSlider1.setMaximum(19);
-		jSlider1.setOrientation(javax.swing.JSlider.VERTICAL);
+		jSlider1.setOrientation(SwingConstants.VERTICAL);
 		jSlider1.setToolTipText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.13",
 				"Ajust the slider to visualise more equimodal surfaces"));
 		jSlider1.setValue(0);
@@ -65,7 +72,8 @@ public class Superficies extends javax.swing.JPanel implements ExpDataDisplay, E
 		jSlider1.setMinimumSize(new java.awt.Dimension(24, 450));
 		jSlider1.setPreferredSize(new java.awt.Dimension(24, 500));
 		jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSlider1StateChanged(evt);
 			}
 		});
@@ -78,7 +86,7 @@ public class Superficies extends javax.swing.JPanel implements ExpDataDisplay, E
 
 	}// GEN-END:initComponents
 
-	private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSlider1StateChanged
+	private void jSlider1StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSlider1StateChanged
 		painel.clear();
 		addCargas();
 		painel.addDrawable((org.opensourcephysics.displayejs.InteractivePoints) sup20.get(jSlider1.getValue()));
@@ -86,7 +94,8 @@ public class Superficies extends javax.swing.JPanel implements ExpDataDisplay, E
 		painel.repaint();
 	}// GEN-LAST:event_jSlider1StateChanged
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 		painel.clear();
 		setCargasHeader();
 		addCargas();
@@ -105,14 +114,17 @@ public class Superficies extends javax.swing.JPanel implements ExpDataDisplay, E
 	}
 
 	// Queremos fazer alguma coisa quandos os dados acabarem?
+	@Override
 	public void dataModelEnded() {
 	}
 
 	// Queremos fazer alguma coisa quandos acontecer um erro?
+	@Override
 	public void dataModelError() {
 	}
 
 	// Queremos fazer alguma coisa quando for dado o start e existirem dados?
+	@Override
 	public void dataModelStarted() {
 	}
 
@@ -120,32 +132,39 @@ public class Superficies extends javax.swing.JPanel implements ExpDataDisplay, E
 	// dados?
 	// Eu garanto que quando chegamos a este estado, j? existe o header da
 	// experi?ncia!
+	@Override
 	public void dataModelStartedNoData() {
 		setCargasHeader();
 		addCargas();
 	}
 
 	// Queremos fazer alguma coisa quando for dado parado?
+	@Override
 	public void dataModelStoped() {
 	}
 
 	// Queremos fazer alguma coisa em estado de espera?
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
 	// O icon associado a este painel!
+	@Override
 	public javax.swing.Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
@@ -153,25 +172,28 @@ public class Superficies extends javax.swing.JPanel implements ExpDataDisplay, E
 	// Este c?digo ? SEMPRE igual e tem de existir!
 	private ExpDataModel model = null;
 
-	public void setExpDataModel(ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
+		if (this.model != null) {
 			this.model.removeExpDataModelListener(this);
+		}
 		this.model = model;
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 
 	}
 
-	public static void main(String args[]) {
-		javax.swing.JFrame dummy = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new Superficies());
-		dummy.setDefaultCloseOperation(dummy.EXIT_ON_CLOSE);
+		dummy.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		dummy.pack();
 		dummy.show();
 	}
 
 	private void setCargasHeader() {
-		HardwareAcquisitionConfig header = model.getAcquisitionConfig();
+		final HardwareAcquisitionConfig header = model.getAcquisitionConfig();
 		sist = Sistema.stringToSistema(header.getSelectedHardwareParameterValue("Sistema"));
 	}
 
@@ -182,7 +204,7 @@ public class Superficies extends javax.swing.JPanel implements ExpDataDisplay, E
 		painel.repaint();
 	}
 
-	private void toPanelSuperficies(java.util.ArrayList[][] superficies_, java.util.ArrayList sup) {
+	private void toPanelSuperficies(final java.util.ArrayList[][] superficies_, final java.util.ArrayList sup) {
 		java.util.ArrayList[] listax_;
 		java.util.ArrayList[] listay_;
 		java.util.ArrayList[] listaz_;
@@ -193,14 +215,14 @@ public class Superficies extends javax.swing.JPanel implements ExpDataDisplay, E
 
 		double[][] arrayPontos;
 		for (int i = 0; i < 20; i++) {
-			org.opensourcephysics.displayejs.InteractivePoints superficie_ = new org.opensourcephysics.displayejs.InteractivePoints();
+			final org.opensourcephysics.displayejs.InteractivePoints superficie_ = new org.opensourcephysics.displayejs.InteractivePoints();
 			superficie_.getStyle().setEdgeColor(new java.awt.Color(44, 186, 0));
 			arrayPontos = new double[listax_[i].size()][3];
 
 			for (int j = 0; j < listax_[i].size(); j++) {
-				arrayPontos[j][0] = (double) (((Float) listax_[i].get(j)).floatValue());
-				arrayPontos[j][1] = (double) (((Float) listay_[i].get(j)).floatValue());
-				arrayPontos[j][2] = (double) (((Float) listaz_[i].get(j)).floatValue());
+				arrayPontos[j][0] = (((Float) listax_[i].get(j)).floatValue());
+				arrayPontos[j][1] = (((Float) listay_[i].get(j)).floatValue());
+				arrayPontos[j][2] = (((Float) listaz_[i].get(j)).floatValue());
 			}
 			if (listax_[i].size() != 0) {
 				superficie_.setData(arrayPontos);

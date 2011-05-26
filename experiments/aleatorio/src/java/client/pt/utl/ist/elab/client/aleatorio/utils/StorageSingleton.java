@@ -27,24 +27,25 @@ public class StorageSingleton {
 	}
 
 	public static StorageSingleton getSingleton() {
-		if (storageSingleton == null)
-			storageSingleton = new StorageSingleton();
-		return storageSingleton;
+		if (StorageSingleton.storageSingleton == null) {
+			StorageSingleton.storageSingleton = new StorageSingleton();
+		}
+		return StorageSingleton.storageSingleton;
 	}
 
-	public void setStoredInt(int intToStore) {
-		this.storedInt = intToStore;
-		this.newValueAvailableAccu = true;
-		this.newValueAvailableSess = true;
+	public void setStoredInt(final int intToStore) {
+		storedInt = intToStore;
+		newValueAvailableAccu = true;
+		newValueAvailableSess = true;
 	}// setStoredInt(int intToStore)
 
 	public int accuGetStoredInt() {
-		this.newValueAvailableAccu = false;
+		newValueAvailableAccu = false;
 		return storedInt;
 	}// accuGetStoredInt()
 
 	public int sessGetStoredInt() {
-		this.newValueAvailableSess = false;
+		newValueAvailableSess = false;
 		return storedInt;
 	}// SessGetStoredInt()
 
@@ -56,7 +57,7 @@ public class StorageSingleton {
 		return newValueAvailableSess;
 	}// checkNewValueSess()
 
-	public void setImage(java.awt.Image image) {
+	public void setImage(final java.awt.Image image) {
 		this.image = image;
 	}// setImage(java.awt.Image image)
 

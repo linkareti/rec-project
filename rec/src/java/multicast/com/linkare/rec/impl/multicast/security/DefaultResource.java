@@ -29,26 +29,28 @@ public class DefaultResource implements IResource {
 	private ResourceType resourceType = ResourceType.ROOT;
 
 	/** Creates a new instance of DefaultResource */
-	public DefaultResource(IResource enclosingResource, ResourceType resourceType, Map<String, String> properties) {
+	public DefaultResource(final IResource enclosingResource, final ResourceType resourceType,
+			final Map<String, String> properties) {
 		setProperties(properties);
 		setEnclosingResource(enclosingResource);
 		setResourceType(resourceType);
 	}
 
-	public DefaultResource(IResource enclosingResource, Map<String, String> properties) {
-		this(enclosingResource, deriveChildResourceType(enclosingResource), properties);
+	public DefaultResource(final IResource enclosingResource, final Map<String, String> properties) {
+		this(enclosingResource, DefaultResource.deriveChildResourceType(enclosingResource), properties);
 	}
 
-	public DefaultResource(IResource enclosingResource) {
-		this(enclosingResource, deriveChildResourceType(enclosingResource), new HashMap<String, String>());
+	public DefaultResource(final IResource enclosingResource) {
+		this(enclosingResource, DefaultResource.deriveChildResourceType(enclosingResource),
+				new HashMap<String, String>());
 	}
 
-	public DefaultResource(Map<String, String> properties) {
-		this(null, deriveChildResourceType(null), new HashMap<String, String>(properties));
+	public DefaultResource(final Map<String, String> properties) {
+		this(null, DefaultResource.deriveChildResourceType(null), new HashMap<String, String>(properties));
 	}
 
 	public DefaultResource() {
-		this(null, deriveChildResourceType(null), new HashMap<String, String>());
+		this(null, DefaultResource.deriveChildResourceType(null), new HashMap<String, String>());
 	}
 
 	/**
@@ -56,7 +58,7 @@ public class DefaultResource implements IResource {
 	 * 
 	 * @param properties New value of property properties.
 	 */
-	public void setProperties(Map<String, String> properties) {
+	public void setProperties(final Map<String, String> properties) {
 		this.properties = new HashMap<String, String>(properties);
 	}
 
@@ -65,7 +67,7 @@ public class DefaultResource implements IResource {
 	 * 
 	 * @param enclosingResource New value of property enclosingResource.
 	 */
-	public void setEnclosingResource(IResource enclosingResource) {
+	public void setEnclosingResource(final IResource enclosingResource) {
 		this.enclosingResource = enclosingResource;
 	}
 
@@ -74,13 +76,14 @@ public class DefaultResource implements IResource {
 	 * 
 	 * @param resourceType New value of property resourceType.
 	 */
-	public void setResourceType(ResourceType resourceType) {
+	public void setResourceType(final ResourceType resourceType) {
 		this.resourceType = resourceType;
 	}
 
-	private static ResourceType deriveChildResourceType(IResource resource) {
-		if (resource == null)
+	private static ResourceType deriveChildResourceType(final IResource resource) {
+		if (resource == null) {
 			return ResourceType.MCCONTROLLER;
+		}
 		return resource.getResourceType().getChildType();
 	}
 
@@ -88,7 +91,7 @@ public class DefaultResource implements IResource {
 		return new DefaultResource(this);
 	}
 
-	public DefaultResource createChildResource(Map<String, String> properties) {
+	public DefaultResource createChildResource(final Map<String, String> properties) {
 		return new DefaultResource(this, properties);
 	}
 
@@ -97,6 +100,7 @@ public class DefaultResource implements IResource {
 	 * 
 	 * @return Value of property properties.
 	 */
+	@Override
 	public Map<String, String> getProperties() {
 		return properties;
 	}
@@ -106,6 +110,7 @@ public class DefaultResource implements IResource {
 	 * 
 	 * @return Value of property enclosingResource.
 	 */
+	@Override
 	public IResource getEnclosingResource() {
 		return enclosingResource;
 	}
@@ -115,21 +120,25 @@ public class DefaultResource implements IResource {
 	 * 
 	 * @return Value of property resourceType.
 	 */
+	@Override
 	public ResourceType getResourceType() {
 		return resourceType;
 	}
 
+	@Override
 	public String toString() {
 
 		return getResourceType().getName() + " @ " + getProperties().get(getResourceType().getPropertyKey());
 
 	}
 
-	public boolean equals(Object other) {
-		if (other == null || !(other instanceof IResource))
+	@Override
+	public boolean equals(final Object other) {
+		if (other == null || !(other instanceof IResource)) {
 			return false;
+		}
 
-		IResource otherResource = (IResource) other;
+		final IResource otherResource = (IResource) other;
 
 		return otherResource.getResourceType() == getResourceType()
 				&& otherResource.getProperties().equals(getProperties());

@@ -12,8 +12,8 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 import org.openorb.orb.config.ORBLoader;
-import org.openorb.util.logger.LoggerTeam;
 import org.openorb.orb.net.SocketStreamDecorationStrategy;
+import org.openorb.util.logger.LoggerTeam;
 
 /**
  * 
@@ -23,18 +23,22 @@ public final class SoTimeoutDecorationStrategy implements SocketStreamDecoration
 
 	public static final class Factory implements SocketStreamDecorationStrategy.Factory {
 
-		public SocketStreamDecorationStrategy create(LoggerTeam logger, ORBLoader loader, String prefix) {
+		@Override
+		public SocketStreamDecorationStrategy create(final LoggerTeam logger, final ORBLoader loader,
+				final String prefix) {
 			return new SoTimeoutDecorationStrategy();
 		}
 
 	}
 
-	public InputStream decorate(Socket socket, InputStream stream) throws IOException {
+	@Override
+	public InputStream decorate(final Socket socket, final InputStream stream) throws IOException {
 		socket.setSoTimeout(1000);
 		return stream;
 	}
 
-	public OutputStream decorate(Socket socket, OutputStream stream) throws IOException {
+	@Override
+	public OutputStream decorate(final Socket socket, final OutputStream stream) throws IOException {
 		socket.setSoTimeout(1000);
 		return stream;
 	}

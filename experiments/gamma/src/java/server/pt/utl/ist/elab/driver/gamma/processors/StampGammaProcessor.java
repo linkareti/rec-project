@@ -23,7 +23,7 @@ public class StampGammaProcessor extends AbstractStampProcessor {
 
 	/** Creates a new instance of StampHelloProcessor */
 	public StampGammaProcessor() {
-		super(COMMAND_IDENTIFIER);
+		super(StampGammaProcessor.COMMAND_IDENTIFIER);
 	}
 
 	/**
@@ -33,37 +33,38 @@ public class StampGammaProcessor extends AbstractStampProcessor {
 	 * @return boolean - wether the processing was successfull
 	 * 
 	 */
-	public boolean process(StampCommand command) {
+	@Override
+	public boolean process(final StampCommand command) {
 
 		int ondamic = 0;
 		int pressao = 0;
-		int time = 0;
+		final int time = 0;
 
-		String[] splitedStr = command.getCommand().split("\t");
+		final String[] splitedStr = command.getCommand().split("\t");
 
-		if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedStr != null
-				&& splitedStr.length >= 2 && splitedStr[0] != null && splitedStr[1] != null) {
+		if (command.getCommandIdentifier().equalsIgnoreCase(StampGammaProcessor.COMMAND_IDENTIFIER)
+				&& splitedStr != null && splitedStr.length >= 2 && splitedStr[0] != null && splitedStr[1] != null) {
 			try {
 				if ("PARAMETROS".equals(splitedStr[0])) {
-					clock_freq = Integer.parseInt(splitedStr[1]);
-					period = Integer.parseInt(splitedStr[3]);
+					StampGammaProcessor.clock_freq = Integer.parseInt(splitedStr[1]);
+					StampGammaProcessor.period = Integer.parseInt(splitedStr[3]);
 
 				} else {
-					Float oTime = new Float((period * 1F) / clock_freq);
-					command.addCommandData(TIME, oTime);
+					final Float oTime = new Float((StampGammaProcessor.period * 1F) / StampGammaProcessor.clock_freq);
+					command.addCommandData(StampGammaProcessor.TIME, oTime);
 
 					pressao = Integer.parseInt(splitedStr[0]);
-					Float oPressao = new Float(pressao * 0.398 + 98);
-					command.addCommandData(PRESSAO, oPressao);
+					final Float oPressao = new Float(pressao * 0.398 + 98);
+					command.addCommandData(StampGammaProcessor.PRESSAO, oPressao);
 
 					ondamic = Integer.parseInt(splitedStr[1]);
-					Float oOndamic = new Float((ondamic) * 5);
-					command.addCommandData(ONDA_MIC, oOndamic);
+					final Float oOndamic = new Float((ondamic) * 5);
+					command.addCommandData(StampGammaProcessor.ONDA_MIC, oOndamic);
 				}
 				command.setData(true);
 				return true;
 
-			} catch (NumberFormatException e) {
+			} catch (final NumberFormatException e) {
 				e.printStackTrace();
 				return false;
 			}
@@ -72,6 +73,7 @@ public class StampGammaProcessor extends AbstractStampProcessor {
 		return false;
 	}
 
+	@Override
 	public boolean isData() {
 		return true;
 	}

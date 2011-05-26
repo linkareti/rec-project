@@ -21,26 +21,26 @@ public class ServerMain {
 
 	private static String Pend2M_HARDWARE_LOGGER = "Pend2M.Logger";
 	static {
-		Logger l = LogManager.getLogManager().getLogger(Pend2M_HARDWARE_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ServerMain.Pend2M_HARDWARE_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(Pend2M_HARDWARE_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ServerMain.Pend2M_HARDWARE_LOGGER));
 		}
 	}
 
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		try {
 			ORBBean.getORBBean();
 
-			BaseHardware baseHardware = new BaseHardware(new Pend2MDriver());
+			final BaseHardware baseHardware = new BaseHardware(new Pend2MDriver());
 
 			Thread.currentThread().join();
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			ORBBean.getORBBean().killORB();
-			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(Pend2M_HARDWARE_LOGGER));
+			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(ServerMain.Pend2M_HARDWARE_LOGGER));
 		}
 	}
 }

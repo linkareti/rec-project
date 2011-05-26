@@ -8,6 +8,7 @@ package com.linkare.rec.impl.newface.laf.flat.elabtheme;
 
 import java.util.Map;
 
+import com.linkare.rec.impl.newface.laf.flat.theme.AbstractStyle;
 import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 
 /**
@@ -27,13 +28,13 @@ public class SplitPaneDividerStyle extends DefaultStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return SplitPaneDividerStyle.ID;
 	}
 
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(BORDER, EMPTY_BORDER);
+		map.put(AbstractStyle.BORDER, DefaultStyle.EMPTY_BORDER);
 	}
 
 	// -------------------------------------------------------------------------

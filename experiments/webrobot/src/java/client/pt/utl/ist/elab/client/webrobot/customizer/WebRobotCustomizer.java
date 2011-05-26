@@ -16,7 +16,7 @@ import com.linkare.rec.impl.client.customizer.ICustomizerListener;
  */
 public class WebRobotCustomizer implements com.linkare.rec.impl.client.customizer.ICustomizer {
 
-	private javax.swing.ImageIcon iconPrograf = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.ImageIcon iconPrograf = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/customizer/Icons/webrobot.gif"));
 	private HardwareAcquisitionConfig acqConfig;
 	private HardwareInfo hardwareInfo;
@@ -35,7 +35,8 @@ public class WebRobotCustomizer implements com.linkare.rec.impl.client.customize
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -47,7 +48,8 @@ public class WebRobotCustomizer implements com.linkare.rec.impl.client.customize
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -58,9 +60,10 @@ public class WebRobotCustomizer implements com.linkare.rec.impl.client.customize
 	 */
 
 	protected void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -75,9 +78,10 @@ public class WebRobotCustomizer implements com.linkare.rec.impl.client.customize
 	 */
 
 	protected void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).done();
@@ -85,15 +89,18 @@ public class WebRobotCustomizer implements com.linkare.rec.impl.client.customize
 		}
 	}
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
 		return jPrograf.getAcquisitionConfig();
 	}
 
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
@@ -101,10 +108,12 @@ public class WebRobotCustomizer implements com.linkare.rec.impl.client.customize
 		return jPrograf.getHardwareInfo();
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return jPrograf.getMenuBar();
 	}
 
+	@Override
 	public javax.swing.JComponent getCustomizerComponent() {
 		jPrograf = new JPrograf(this);
 		jPrograf.setHardwareAcquisitionConfig(acqConfig);
@@ -112,11 +121,13 @@ public class WebRobotCustomizer implements com.linkare.rec.impl.client.customize
 		return jPrograf.getCustomizerComponent();
 	}
 
+	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return iconPrograf;
 	}
 
+	@Override
 	public String getCustomizerTitle() {
-		return TITLE_VERSION;
+		return WebRobotCustomizer.TITLE_VERSION;
 	}
 }

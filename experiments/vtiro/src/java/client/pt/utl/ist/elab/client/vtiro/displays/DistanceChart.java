@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.vtiro.displays;
  */
 public class DistanceChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6042510214760770582L;
+
 	/** Creates a new instance of DistanceChart */
 	public DistanceChart() {
 		super();

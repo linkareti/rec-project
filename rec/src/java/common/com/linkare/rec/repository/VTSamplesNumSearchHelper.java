@@ -19,70 +19,74 @@ public final class VTSamplesNumSearchHelper implements BoxedValueHelper {
 	public VTSamplesNumSearchHelper() {
 	}
 
-	public static void insert(Any a, SamplesNumSearch that) {
-		org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
-		a.type(type());
-		write(out, that);
-		a.read_value(out.create_input_stream(), type());
+	public static void insert(final Any a, final SamplesNumSearch that) {
+		final org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
+		a.type(VTSamplesNumSearchHelper.type());
+		VTSamplesNumSearchHelper.write(out, that);
+		a.read_value(out.create_input_stream(), VTSamplesNumSearchHelper.type());
 	}
 
-	public static SamplesNumSearch extract(Any a) {
-		return read(a.create_input_stream());
+	public static SamplesNumSearch extract(final Any a) {
+		return VTSamplesNumSearchHelper.read(a.create_input_stream());
 	}
 
 	private static TypeCode __typeCode = null;
 	private static boolean __active = false;
 
 	public static synchronized TypeCode type() {
-		if (__typeCode == null) {
+		if (VTSamplesNumSearchHelper.__typeCode == null) {
 			synchronized (TypeCode.class) {
-				if (__typeCode == null) {
-					if (__active) {
-						return ORB.init().create_recursive_tc(_id);
+				if (VTSamplesNumSearchHelper.__typeCode == null) {
+					if (VTSamplesNumSearchHelper.__active) {
+						return ORB.init().create_recursive_tc(VTSamplesNumSearchHelper._id);
 					}
-					__active = true;
-					__typeCode = SamplesNumSearchHelper.type();
-					__typeCode = ORB.init().create_value_box_tc(_id, "VTSamplesNumSearch", __typeCode);
-					__active = false;
+					VTSamplesNumSearchHelper.__active = true;
+					VTSamplesNumSearchHelper.__typeCode = SamplesNumSearchHelper.type();
+					VTSamplesNumSearchHelper.__typeCode = ORB.init().create_value_box_tc(VTSamplesNumSearchHelper._id,
+							"VTSamplesNumSearch", VTSamplesNumSearchHelper.__typeCode);
+					VTSamplesNumSearchHelper.__active = false;
 				}
 			}
 		}
-		return __typeCode;
+		return VTSamplesNumSearchHelper.__typeCode;
 	}
 
 	public static String id() {
-		return _id;
+		return VTSamplesNumSearchHelper._id;
 	}
 
-	public static SamplesNumSearch read(org.omg.CORBA.portable.InputStream istream) {
+	public static SamplesNumSearch read(final org.omg.CORBA.portable.InputStream istream) {
 		if (!(istream instanceof InputStream)) {
 			throw new BAD_PARAM();
 		}
-		return (SamplesNumSearch) ((InputStream) istream).read_value(_instance);
+		return (SamplesNumSearch) ((InputStream) istream).read_value(VTSamplesNumSearchHelper._instance);
 	}
 
-	public Serializable read_value(org.omg.CORBA.portable.InputStream istream) {
-		SamplesNumSearch tmp = SamplesNumSearchHelper.read(istream);
-		return (Serializable) tmp;
+	@Override
+	public Serializable read_value(final org.omg.CORBA.portable.InputStream istream) {
+		final SamplesNumSearch tmp = SamplesNumSearchHelper.read(istream);
+		return tmp;
 	}
 
-	public static void write(org.omg.CORBA.portable.OutputStream ostream, SamplesNumSearch value) {
+	public static void write(final org.omg.CORBA.portable.OutputStream ostream, final SamplesNumSearch value) {
 		if (!(ostream instanceof OutputStream)) {
 			throw new BAD_PARAM();
 		}
-		((OutputStream) ostream).write_value(value, _instance);
+		((OutputStream) ostream).write_value(value, VTSamplesNumSearchHelper._instance);
 	}
 
-	public void write_value(org.omg.CORBA.portable.OutputStream ostream, Serializable value) {
+	@Override
+	public void write_value(final org.omg.CORBA.portable.OutputStream ostream, final Serializable value) {
 		if (!(value instanceof SamplesNumSearch)) {
 			throw new MARSHAL();
 		}
-		SamplesNumSearch valueType = (SamplesNumSearch) value;
+		final SamplesNumSearch valueType = (SamplesNumSearch) value;
 		SamplesNumSearchHelper.write(ostream, valueType);
 	}
 
+	@Override
 	public String get_id() {
-		return _id;
+		return VTSamplesNumSearchHelper._id;
 	}
 
 }

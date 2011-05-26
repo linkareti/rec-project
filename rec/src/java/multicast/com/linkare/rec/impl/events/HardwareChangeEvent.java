@@ -8,12 +8,11 @@ package com.linkare.rec.impl.events;
 
 import com.linkare.rec.impl.threading.util.EnumPriority;
 
-
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class HardwareChangeEvent implements Prioritazible{
+public class HardwareChangeEvent implements Prioritazible {
 
 	/** Creates a new instance of HardwareChangeEvent */
 	public HardwareChangeEvent() {

@@ -16,7 +16,7 @@ public class ReCException extends Exception implements ReCExceptionDescriptionCo
 
 	private static final long serialVersionUID = -4083319135076449860L;
 
-	private ExceptionCode code;
+	private final ExceptionCode code;
 
 	/**
 	 * Creates a new <code>ReCException</code>.
@@ -25,7 +25,7 @@ public class ReCException extends Exception implements ReCExceptionDescriptionCo
 	 * @param message
 	 * @param cause
 	 */
-	public ReCException(ExceptionCode code, String message, Throwable cause) {
+	public ReCException(final ExceptionCode code, final String message, final Throwable cause) {
 		super(message, cause);
 		this.code = code;
 	}
@@ -36,7 +36,7 @@ public class ReCException extends Exception implements ReCExceptionDescriptionCo
 	 * @param code
 	 * @param message
 	 */
-	public ReCException(ExceptionCode code, String message) {
+	public ReCException(final ExceptionCode code, final String message) {
 		super(message);
 		this.code = code;
 	}

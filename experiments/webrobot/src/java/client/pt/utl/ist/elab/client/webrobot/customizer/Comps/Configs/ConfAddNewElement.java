@@ -12,12 +12,16 @@ package pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs;
  */
 public class ConfAddNewElement extends javax.swing.JDialog {
 
-	private Object[] returnObj = new Object[3];
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1992710608092283689L;
+	private final Object[] returnObj = new Object[3];
 
 	/** Creates new form ConfCompBin */
-	public ConfAddNewElement(javax.swing.JDialog parent, boolean modal, boolean i0State, boolean i1State,
-			boolean i2State, boolean i3State, boolean i4State, boolean i5State, boolean i6State, boolean i7State,
-			Object[] row) {
+	public ConfAddNewElement(final javax.swing.JDialog parent, final boolean modal, final boolean i0State,
+			final boolean i1State, final boolean i2State, final boolean i3State, final boolean i4State,
+			final boolean i5State, final boolean i6State, final boolean i7State, final Object[] row) {
 		super(parent, modal);
 		initComponents();
 		jRadioButtonI0.setEnabled(i0State);
@@ -28,9 +32,9 @@ public class ConfAddNewElement extends javax.swing.JDialog {
 		jRadioButtonI5.setEnabled(i5State);
 		jRadioButtonI6.setEnabled(i6State);
 		jRadioButtonI7.setEnabled(i7State);
-		String selected = (String) row[0];
-		Integer PWM1 = (Integer) row[1];
-		Integer PWM2 = (Integer) row[2];
+		final String selected = (String) row[0];
+		final Integer PWM1 = (Integer) row[1];
+		final Integer PWM2 = (Integer) row[2];
 		if (jRadioButtonI0.isEnabled() && selected.charAt(7) == '1') {
 			jRadioButtonI0.setSelected(true);
 		} else {
@@ -116,19 +120,22 @@ public class ConfAddNewElement extends javax.swing.JDialog {
 		setTitle("Adicionar/editar elemento");
 		setResizable(false);
 		addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyPressed(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyPressed(final java.awt.event.KeyEvent evt) {
 				formKeyPressed(evt);
 			}
 		});
 
 		addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mouseClicked(final java.awt.event.MouseEvent evt) {
 				formMouseClicked(evt);
 			}
 		});
 
 		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent evt) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent evt) {
 				closeDialog(evt);
 			}
 		});
@@ -318,7 +325,8 @@ public class ConfAddNewElement extends javax.swing.JDialog {
 		jButtonClean.setForeground(new java.awt.Color(51, 0, 102));
 		jButtonClean.setText("Apagar");
 		jButtonClean.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonCleanMousePressed(evt);
 			}
 		});
@@ -329,13 +337,15 @@ public class ConfAddNewElement extends javax.swing.JDialog {
 		jButtonOk.setText("Ok");
 		jButtonOk.setPreferredSize(new java.awt.Dimension(73, 26));
 		jButtonOk.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jButtonOkKeyReleased(evt);
 			}
 		});
 
 		jButtonOk.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonOkMousePressed(evt);
 			}
 		});
@@ -345,7 +355,8 @@ public class ConfAddNewElement extends javax.swing.JDialog {
 		jButtonCancel.setForeground(new java.awt.Color(51, 0, 102));
 		jButtonCancel.setText("Cancel");
 		jButtonCancel.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonCancelMousePressed(evt);
 			}
 		});
@@ -359,7 +370,7 @@ public class ConfAddNewElement extends javax.swing.JDialog {
 		pack();
 	}// GEN-END:initComponents
 
-	private void jButtonOkKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jButtonOkKeyReleased
+	private void jButtonOkKeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jButtonOkKeyReleased
 		if (evt.getKeyCode() == 10) {
 			jButtonOkMousePressed(null);
 		} else if (evt.getKeyCode() == 27) {
@@ -367,12 +378,12 @@ public class ConfAddNewElement extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_jButtonOkKeyReleased
 
-	private void jButtonCleanMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonCleanMousePressed
+	private void jButtonCleanMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonCleanMousePressed
 		clean = true;
 		closeDialog(null);
 	}// GEN-LAST:event_jButtonCleanMousePressed
 
-	private void formKeyPressed(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_formKeyPressed
+	private void formKeyPressed(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_formKeyPressed
 		if (evt.getKeyCode() == 10) {
 			jButtonOkMousePressed(null);
 		} else if (evt.getKeyCode() == 27) {
@@ -380,17 +391,17 @@ public class ConfAddNewElement extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_formKeyPressed
 
-	private void formMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseClicked
+	private void formMouseClicked(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseClicked
 		this.requestFocus();
 	}// GEN-LAST:event_formMouseClicked
 
-	private void jButtonCancelMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonCancelMousePressed
+	private void jButtonCancelMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonCancelMousePressed
 		closeDialog(null);
 	}// GEN-LAST:event_jButtonCancelMousePressed
 
-	private void jButtonOkMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonOkMousePressed
+	private void jButtonOkMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonOkMousePressed
 		if (checkTextValues.isOK(jTextFieldPWM1) && checkTextValues.isOK(jTextFieldPWM2)) {
-			StringBuffer temp = new StringBuffer();
+			final StringBuffer temp = new StringBuffer();
 			if (jRadioButtonI7.isSelected()) {
 				temp.append('1');
 			} else {
@@ -439,7 +450,7 @@ public class ConfAddNewElement extends javax.swing.JDialog {
 	}// GEN-LAST:event_jButtonOkMousePressed
 
 	/** Closes the dialog */
-	private void closeDialog(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
+	private void closeDialog(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
 		setVisible(false);
 		dispose();
 	}// GEN-LAST:event_closeDialog
@@ -491,7 +502,7 @@ public class ConfAddNewElement extends javax.swing.JDialog {
 	private javax.swing.JLabel jLabelI1;
 	// End of variables declaration//GEN-END:variables
 	// My variables
-	private pt.utl.ist.elab.client.webrobot.customizer.Utils.CheckTextValues checkTextValues = new pt.utl.ist.elab.client.webrobot.customizer.Utils.CheckTextValues(
+	private final pt.utl.ist.elab.client.webrobot.customizer.Utils.CheckTextValues checkTextValues = new pt.utl.ist.elab.client.webrobot.customizer.Utils.CheckTextValues(
 			this);
 	private boolean clean = false;
 }

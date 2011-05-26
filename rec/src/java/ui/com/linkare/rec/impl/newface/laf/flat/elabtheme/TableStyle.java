@@ -15,9 +15,9 @@ import java.util.Map;
 @Deprecated
 public class TableStyle extends DefaultStyle {
 
-	//ENABLED COLORS
+	// ENABLED COLORS
 
-	//LABEL FONT
+	// LABEL FONT
 
 	public static final String ID = "Table";
 
@@ -30,11 +30,11 @@ public class TableStyle extends DefaultStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return TableStyle.ID;
 	}
 
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		super.updatePropertyMap(map);
 	}
 }

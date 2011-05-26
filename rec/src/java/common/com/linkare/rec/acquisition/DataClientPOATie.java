@@ -11,23 +11,25 @@ public class DataClientPOATie extends DataClientPOA {
 
 	// Constructors
 
-	public DataClientPOATie(com.linkare.rec.acquisition.DataClientOperations delegate) {
-		this._impl = delegate;
+	public DataClientPOATie(final com.linkare.rec.acquisition.DataClientOperations delegate) {
+		_impl = delegate;
 	}
 
-	public DataClientPOATie(com.linkare.rec.acquisition.DataClientOperations delegate, org.omg.PortableServer.POA poa) {
-		this._impl = delegate;
-		this._poa = poa;
+	public DataClientPOATie(final com.linkare.rec.acquisition.DataClientOperations delegate,
+			final org.omg.PortableServer.POA poa) {
+		_impl = delegate;
+		_poa = poa;
 	}
 
 	public com.linkare.rec.acquisition.DataClientOperations _delegate() {
-		return this._impl;
+		return _impl;
 	}
 
-	public void _delegate(com.linkare.rec.acquisition.DataClientOperations delegate) {
-		this._impl = delegate;
+	public void _delegate(final com.linkare.rec.acquisition.DataClientOperations delegate) {
+		_impl = delegate;
 	}
 
+	@Override
 	public org.omg.PortableServer.POA _default_POA() {
 		if (_poa != null) {
 			return _poa;
@@ -38,25 +40,30 @@ public class DataClientPOATie extends DataClientPOA {
 
 	// Version 7.0 change: removed method getUser and getPassword and changed it
 	// to getUserInfo... wich is much more generic
+	@Override
 	public com.linkare.rec.acquisition.UserInfo getUserInfo() {
 		return _impl.getUserInfo();
 	} // getUserInfo
 
 	// wstring getPassword();
-	public void hardwareStateChange(com.linkare.rec.acquisition.HardwareState newState) {
+	@Override
+	public void hardwareStateChange(final com.linkare.rec.acquisition.HardwareState newState) {
 		_impl.hardwareStateChange(newState);
 	} // hardwareStateChange
 
+	@Override
 	public void hardwareChange() {
 		_impl.hardwareChange();
 	} // hardwareChange
 
-	public void hardwareLockable(long millisecs_to_lock_success) {
+	@Override
+	public void hardwareLockable(final long millisecs_to_lock_success) {
 		_impl.hardwareLockable(millisecs_to_lock_success);
 	} // hardwareLockable
 
 	// version 5 added suport for messages
-	public void receiveMessage(String clientFrom, String clientTo, String message) {
+	@Override
+	public void receiveMessage(final String clientFrom, final String clientTo, final String message) {
 		_impl.receiveMessage(clientFrom, clientTo, message);
 	} // receiveMessage
 

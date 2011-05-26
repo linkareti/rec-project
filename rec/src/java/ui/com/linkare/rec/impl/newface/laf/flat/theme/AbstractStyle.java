@@ -42,7 +42,7 @@ public abstract class AbstractStyle {
 	public static final String SELECTION_BACKGROUND = "selectionBackground";
 	public static final String DEFAULT_WHITE = "defaultWhite";
 
-	//COMBOBOX ARRROW BUTTON COLOR'S DEFINITION
+	// COMBOBOX ARRROW BUTTON COLOR'S DEFINITION
 	public static final String ARROWBUTTON_ENABLEDFOREGROUND = "arrowButton.enabledForeground";
 	public static final String ARROWBUTTON_DISABLEDFOREGROUND = "arrowButton.disabledForeground";
 
@@ -54,8 +54,8 @@ public abstract class AbstractStyle {
 	 * Default constructor. Initializes the style id.
 	 */
 	public AbstractStyle() {
-		this.id = defineStyleId();
-		this.propertyMap = new HashMap<String, Object>();
+		id = defineStyleId();
+		propertyMap = new HashMap<String, Object>();
 		updatePropertyMap(propertyMap);
 	}
 
@@ -63,13 +63,13 @@ public abstract class AbstractStyle {
 	 * @return The property name, value pairs in a collection.
 	 */
 	public Collection<Object> getProperties() {
-		Collection<Object> result = new ArrayList<Object>();
-		for (Entry<String, Object> entry : propertyMap.entrySet()) {
-			String propertyKey = getId() + DOT + entry.getKey();
+		final Collection<Object> result = new ArrayList<Object>();
+		for (final Entry<String, Object> entry : propertyMap.entrySet()) {
+			final String propertyKey = getId() + AbstractStyle.DOT + entry.getKey();
 			result.add(propertyKey);
 			result.add(entry.getValue());
-			if (log.isLoggable(Level.FINER)) {
-				log.finer("UI Property: " + propertyKey + "=" + entry.getValue());
+			if (AbstractStyle.log.isLoggable(Level.FINER)) {
+				AbstractStyle.log.finer("UI Property: " + propertyKey + "=" + entry.getValue());
 			}
 		}
 		assert (result.size() % 2 == 0); // Must be even
@@ -88,10 +88,10 @@ public abstract class AbstractStyle {
 	/**
 	 * Override to update the property map.
 	 * <p>
-	 * In most cases you should call super.updatePropertyMap before update the child properties.
+	 * In most cases you should call super.updatePropertyMap before update the
+	 * child properties.
 	 * 
-	 * @param map
-	 *            The style propertyMap.
+	 * @param map The style propertyMap.
 	 */
 	public abstract void updatePropertyMap(Map<String, Object> map);
 
@@ -113,18 +113,16 @@ public abstract class AbstractStyle {
 	}
 
 	/**
-	 * @param id
-	 *            the id to set
+	 * @param id the id to set
 	 */
-	public void setId(String id) {
+	public void setId(final String id) {
 		this.id = id;
 	}
 
 	/**
-	 * @param propertyMap
-	 *            the propertyMap to set
+	 * @param propertyMap the propertyMap to set
 	 */
-	public void setPropertyMap(Map<String, Object> propertyMap) {
+	public void setPropertyMap(final Map<String, Object> propertyMap) {
 		this.propertyMap = propertyMap;
 	}
 

@@ -19,9 +19,13 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  * @author André Neto - LEFT - IST
  */
 public class MeteoTableModelProxy extends javax.swing.table.DefaultTableModel implements ExpDataModelListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4787862338317891447L;
 	/** Holds value of property expDataModel. */
 	private ExpDataModel expDataModel = null;
-	private java.text.DecimalFormat df = new java.text.DecimalFormat("###0.0");
+	private final java.text.DecimalFormat df = new java.text.DecimalFormat("###0.0");
 	DateTime firstSampleTime = new DateTime();
 
 	private int[] colArray;
@@ -32,6 +36,7 @@ public class MeteoTableModelProxy extends javax.swing.table.DefaultTableModel im
 	}
 
 	// BIG SILENT NOOP
+	@Override
 	public void dataModelStoped() {
 		// fireTableDataChanged();
 	}
@@ -44,7 +49,8 @@ public class MeteoTableModelProxy extends javax.swing.table.DefaultTableModel im
 	 * @param columnIndex the index of the column
 	 * @return the common ancestor class of the object values in the model.
 	 */
-	public Class getColumnClass(int columnIndex) {
+	@Override
+	public Class getColumnClass(final int columnIndex) {
 		if (columnIndex > 0) {
 			return Integer.class;
 		} else {
@@ -60,6 +66,7 @@ public class MeteoTableModelProxy extends javax.swing.table.DefaultTableModel im
 	 * @return the number of columns in the model
 	 * @see #getRowCount
 	 */
+	@Override
 	public int getColumnCount() {
 		if (colArray == null) {
 			return 1;
@@ -75,7 +82,8 @@ public class MeteoTableModelProxy extends javax.swing.table.DefaultTableModel im
 	 * @param columnIndex the index of the column
 	 * @return the name of the column
 	 */
-	public String getColumnName(int columnIndex) {
+	@Override
+	public String getColumnName(final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			if (columnIndex == 0) {
 				return "No data available...";
@@ -98,6 +106,7 @@ public class MeteoTableModelProxy extends javax.swing.table.DefaultTableModel im
 	 * @see #getColumnCount
 	 */
 
+	@Override
 	public int getRowCount() {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			return 0;
@@ -116,12 +125,13 @@ public class MeteoTableModelProxy extends javax.swing.table.DefaultTableModel im
 	 * @param columnIndex the column whose value is to be queried
 	 * @return the value Object at the specified cell
 	 */
-	public Object getValueAt(int rowIndex, int columnIndex) {
+	@Override
+	public Object getValueAt(final int rowIndex, final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			return null;
 		}
 
-		PhysicsValue value = expDataModel.getValueAt(rowIndex, getColAtArray(columnIndex));
+		final PhysicsValue value = expDataModel.getValueAt(rowIndex, getColAtArray(columnIndex));
 		if (value == null) {
 			return null;
 		}
@@ -143,13 +153,15 @@ public class MeteoTableModelProxy extends javax.swing.table.DefaultTableModel im
 	 * @return true if the cell is editable
 	 * @see #setValueAt
 	 */
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
+	@Override
+	public boolean isCellEditable(final int rowIndex, final int columnIndex) {
 		return false;
 	}
 
 	private int lastnewsamples = 0;
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 		fireTableRowsInserted(Math.min(evt.getSamplesStartIndex(), lastnewsamples), evt.getSamplesEndIndex());
 		lastnewsamples = evt.getSamplesEndIndex();
 	}
@@ -160,7 +172,7 @@ public class MeteoTableModelProxy extends javax.swing.table.DefaultTableModel im
 	 * @return Value of property expDataModel.
 	 */
 	public ExpDataModel getExpDataModel() {
-		return this.expDataModel;
+		return expDataModel;
 	}
 
 	/**
@@ -168,9 +180,10 @@ public class MeteoTableModelProxy extends javax.swing.table.DefaultTableModel im
 	 * 
 	 * @param expDataModel New value of property expDataModel.
 	 */
-	public void setExpDataModel(ExpDataModel expDataModel) {
-		if (expDataModel != null)
+	public void setExpDataModel(final ExpDataModel expDataModel) {
+		if (expDataModel != null) {
 			expDataModel.removeExpDataModelListener(this);
+		}
 
 		this.expDataModel = expDataModel;
 
@@ -181,7 +194,7 @@ public class MeteoTableModelProxy extends javax.swing.table.DefaultTableModel im
 		}
 	}
 
-	public void headerAvailable(HardwareAcquisitionConfig header) {
+	public void headerAvailable(final HardwareAcquisitionConfig header) {
 		fireTableStructureChanged();
 	}
 
@@ -190,7 +203,7 @@ public class MeteoTableModelProxy extends javax.swing.table.DefaultTableModel im
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
-	public int getColAtArray(int col) {
+	public int getColAtArray(final int col) {
 		return colArray[col];
 	}
 
@@ -208,23 +221,28 @@ public class MeteoTableModelProxy extends javax.swing.table.DefaultTableModel im
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
-	public void setColArray(int[] colArray) {
+	public void setColArray(final int[] colArray) {
 		this.colArray = colArray;
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 		fireTableStructureChanged();
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 

@@ -13,20 +13,26 @@ package pt.utl.ist.elab.client.thomson.displays;
 
 import java.awt.Image;
 
+import javax.swing.ScrollPaneConstants;
+
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.utils.Defaults;
 
 public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2508953347929627979L;
 	public static final String THOMSON_N_ESP = "Thomson.N.Esp";
-	private static final double N_ESP = Double.parseDouble(Defaults.defaultIfEmpty(System.getProperty(THOMSON_N_ESP),
-			"640"));
+	private static final double N_ESP = Double.parseDouble(Defaults.defaultIfEmpty(
+			System.getProperty(AnalasysPanel.THOMSON_N_ESP), "640"));
 	public static final String THOMSON_D_ESP = "Thomson.D.Esp";
-	private static final double D_ESP = Double.parseDouble(Defaults.defaultIfEmpty(System.getProperty(THOMSON_D_ESP),
-			"0.07"));
+	private static final double D_ESP = Double.parseDouble(Defaults.defaultIfEmpty(
+			System.getProperty(AnalasysPanel.THOMSON_D_ESP), "0.07"));
 
-	private java.text.DecimalFormat df = new java.text.DecimalFormat("###0.0");
-	private java.text.DecimalFormat ndf = new java.text.DecimalFormat("0.0E0");
+	private final java.text.DecimalFormat df = new java.text.DecimalFormat("###0.0");
+	private final java.text.DecimalFormat ndf = new java.text.DecimalFormat("0.0E0");
 	protected boolean transf_done = false;
 	protected java.awt.Image[] im_analiz = new java.awt.Image[6]; // [0]->
 	// original,
@@ -91,7 +97,7 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 
 		add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-		jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		jScrollPane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		jPanel2.setLayout(new java.awt.GridBagLayout());
 
 		jPanel2.setBorder(new javax.swing.border.TitledBorder(""));
@@ -99,7 +105,8 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 		jButton1.setPreferredSize(new java.awt.Dimension(80, 25));
 		jButton1.setEnabled(false);
 		jButton1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButton1ActionPerformed(evt);
 			}
 		});
@@ -110,7 +117,8 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 		jButton2.setPreferredSize(new java.awt.Dimension(80, 25));
 		jButton2.setEnabled(false);
 		jButton2.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButton2ActionPerformed(evt);
 			}
 		});
@@ -124,7 +132,8 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 		jButton3.setPreferredSize(new java.awt.Dimension(80, 25));
 		jButton3.setEnabled(false);
 		jButton3.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButton3ActionPerformed(evt);
 			}
 		});
@@ -138,7 +147,8 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 		jButton4.setPreferredSize(new java.awt.Dimension(80, 25));
 		jButton4.setEnabled(false);
 		jButton4.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButton4ActionPerformed(evt);
 			}
 		});
@@ -152,7 +162,8 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 		jButton5.setPreferredSize(new java.awt.Dimension(80, 25));
 		jButton5.setEnabled(false);
 		jButton5.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButton5ActionPerformed(evt);
 			}
 		});
@@ -166,7 +177,8 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 		jButton6.setPreferredSize(new java.awt.Dimension(80, 25));
 		jButton6.setEnabled(false);
 		jButton6.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButton6ActionPerformed(evt);
 			}
 		});
@@ -283,7 +295,7 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 
 	}// GEN-END:initComponents
 
-	private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton6ActionPerformed
+	private void jButton6ActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton6ActionPerformed
 		// TODO add your handling code here:
 		jButton1.setBackground(new java.awt.Color(192, 192, 192));
 		jButton2.setBackground(new java.awt.Color(192, 192, 192));
@@ -295,7 +307,7 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 		paintImage(im_analiz[5]);
 	}// GEN-LAST:event_jButton6ActionPerformed
 
-	private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton5ActionPerformed
+	private void jButton5ActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton5ActionPerformed
 		// TODO add your handling code here:
 
 		jButton1.setBackground(new java.awt.Color(192, 192, 192));
@@ -310,7 +322,7 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 
 	}// GEN-LAST:event_jButton5ActionPerformed
 
-	private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton4ActionPerformed
+	private void jButton4ActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton4ActionPerformed
 		// TODO add your handling code here:
 
 		jButton1.setBackground(new java.awt.Color(192, 192, 192));
@@ -324,7 +336,7 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 
 	}// GEN-LAST:event_jButton4ActionPerformed
 
-	private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
+	private void jButton3ActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
 		// TODO add your handling code here:
 
 		jButton1.setBackground(new java.awt.Color(192, 192, 192));
@@ -338,7 +350,7 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 
 	}// GEN-LAST:event_jButton3ActionPerformed
 
-	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
+	private void jButton2ActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
 		// TODO add your handling code here:
 
 		jButton1.setBackground(new java.awt.Color(192, 192, 192));
@@ -352,7 +364,7 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 
 	}// GEN-LAST:event_jButton2ActionPerformed
 
-	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
+	private void jButton1ActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
 		// TODO add your handling code here:
 		jButton1.setBackground(new java.awt.Color(255, 192, 255));
 		jButton2.setBackground(new java.awt.Color(192, 192, 192));
@@ -365,25 +377,25 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 
 	}// GEN-LAST:event_jButton1ActionPerformed
 
-	private void setXYR(double X, double Y, double R) {
+	private void setXYR(final double X, final double Y, final double R) {
 		values[0] = X;
 		values[1] = Y;
 		values[2] = R;
 	}
 
-	private void setI(double intensidade) {
+	private void setI(final double intensidade) {
 		values[3] = intensidade;
 	}
 
-	private void setV(double tensao) {
+	private void setV(final double tensao) {
 		values[4] = tensao;
 	}
 
 	// private double miu_0 = 8.85419E-12;
-	private double miu_0 = 8.99E-7;
+	private final double miu_0 = 8.99E-7;
 
 	public void setQM() {
-		double b = miu_0 * N_ESP / 2 * (values[3] / 1000) / D_ESP;
+		final double b = miu_0 * AnalasysPanel.N_ESP / 2 * (values[3] / 1000) / AnalasysPanel.D_ESP;
 		values[5] = 2 * values[4] / (Math.pow(values[2] / 5000, 2) * Math.pow(b, 2));
 
 		/*
@@ -396,16 +408,18 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 
 	public void setTexts() {
 		String signI = "";
-		double i = Double
-				.parseDouble(model.getAcquisitionConfig().getSelectedHardwareParameterValue("correntebobines"));
+		final double i = Double.parseDouble(model.getAcquisitionConfig().getSelectedHardwareParameterValue(
+				"correntebobines"));
 
 		String modo = null;
 
-		if (model != null)
+		if (model != null) {
 			modo = model.getAcquisitionConfig().getSelectedHardwareParameterValue("modo");
+		}
 
-		if (i < 0)
+		if (i < 0) {
 			signI = "-";
+		}
 
 		jTextField1.setText("X0=" + df.format(values[0]) + "(cm)");
 		jTextField2.setText("Y0=" + df.format(values[1]) + "(cm)");
@@ -416,11 +430,12 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 		if (modo != null && modo.equals("defmag")) {
 			setQM();
 			jTextField6.setText("q/m=" + ndf.format(values[5]) + "(C/Kg)");
-		} else
+		} else {
 			jTextField6.setText("-");
+		}
 	}
 
-	public boolean setImages(java.awt.Image[] img) {
+	public boolean setImages(final java.awt.Image[] img) {
 
 		if (img.length == 6) {
 			im_analiz = img;
@@ -430,8 +445,8 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 		return (transf_done);
 	}
 
-	public boolean setImages(java.awt.Image img1, java.awt.Image img2, java.awt.Image img3, java.awt.Image img4,
-			java.awt.Image img5, java.awt.Image img6) {
+	public boolean setImages(final java.awt.Image img1, final java.awt.Image img2, final java.awt.Image img3,
+			final java.awt.Image img4, final java.awt.Image img5, final java.awt.Image img6) {
 		im_analiz[0] = img1;
 		im_analiz[1] = img2;
 		im_analiz[2] = img3;
@@ -443,81 +458,96 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 		return (transf_done);
 	}
 
-	public void setImageN(java.awt.Image img, int n) {
+	public void setImageN(final java.awt.Image img, final int n) {
 
 		if (n < 6 & n >= 0) {
 			im_analiz[n] = img;
 		}
 	}
 
-	private void paintImage(java.awt.Image img) {
+	private void paintImage(final java.awt.Image img) {
 		jPanelImage.setBorder(new ImageBorder(img, false));
 	}
 
-	public static void main(String args[]) {
-		javax.swing.JFrame dummy = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new AnalasysPanel(), java.awt.BorderLayout.CENTER);
 		dummy.pack();
 		dummy.show();
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/thomson/resources/thomson_iconified.png"));
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
 
-	public void newSamples(com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
-		if (model == null)
+	@Override
+	public void newSamples(final com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
+		if (model == null) {
 			return;
+		}
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
 			if (model.getValueAt(i, model.getChannelIndex("Image")) != null) {
 				buildImages(model.getValueAt(i, model.getChannelIndex("Image")).getValue().getByteArrayValue()
 						.getData());
 			}
-			if (model.getValueAt(i, 0) != null)
+			if (model.getValueAt(i, 0) != null) {
 				setI(model.getValueAt(i, 0).getValue().getIntValue());
-			if (model.getValueAt(i, 1) != null)
+			}
+			if (model.getValueAt(i, 1) != null) {
 				setV(model.getValueAt(i, 1).getValue().getIntValue());
+			}
 		}
 	}
 
-	private void buildImages(byte[] imageBA) {
-		AnalizadorImagens analyser = new AnalizadorImagens();
+	private void buildImages(final byte[] imageBA) {
+		final AnalizadorImagens analyser = new AnalizadorImagens();
 
 		double corrente = 0;
-		if (model != null)
+		if (model != null) {
 			corrente = Double.parseDouble(model.getAcquisitionConfig().getSelectedHardwareParameterValue(
 					"correntebobines"));
+		}
 
 		analyser.setIsUp(corrente < 0);
 
@@ -525,7 +555,7 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 		jButton1.setBackground(new java.awt.Color(255, 192, 255));
 		jButton1.setEnabled(true);
 		paintImage(analyser.getImagemOriginal());
-		Image[] imagesAlinhada = analyser.getImagemAlinhada(null);
+		final Image[] imagesAlinhada = analyser.getImagemAlinhada(null);
 		setImageN(imagesAlinhada[0], 1);
 		jButton2.setEnabled(true);
 		setImageN(imagesAlinhada[1], 2);
@@ -534,7 +564,7 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 		jButton4.setEnabled(true);
 		setImageN(imagesAlinhada[3], 4);
 		jButton5.setEnabled(true);
-		double[] xyr = analyser.getCircunferenciaPontos(imagesAlinhada[3]);
+		final double[] xyr = analyser.getCircunferenciaPontos(imagesAlinhada[3]);
 		setXYR(xyr[0], xyr[1], xyr[2]);
 		/*
 		 * System.out.println("xyr[0]= " + xyr[0]);
@@ -549,16 +579,20 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 
 	private com.linkare.rec.impl.client.experiment.ExpDataModel model = null;
 
-	public void setExpDataModel(com.linkare.rec.impl.client.experiment.ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final com.linkare.rec.impl.client.experiment.ExpDataModel model) {
+		if (this.model != null) {
 			model.removeExpDataModelListener(this);
+		}
 
 		this.model = model;
 
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 	}
 
+	@Override
 	public String getName() {
 		return ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.thomson.title.1", "Analasys Panel");
 	}

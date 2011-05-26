@@ -16,11 +16,11 @@ package com.linkare.rec.impl.utils;
  */
 public class MathUtil {
 
-	public static boolean isValueInScale(double min_value, double max_value, double step_value, double value) {
+	public static boolean isValueInScale(double min_value, double max_value, double step_value, final double value) {
 		step_value = step_value < 0. ? -step_value : step_value;
 
 		if (max_value < min_value) {
-			double temp_min = min_value;
+			final double temp_min = min_value;
 			min_value = max_value;
 			max_value = temp_min;
 		}

@@ -11,18 +11,21 @@ public final class HardwareAcquisitionConfigSearchHolder implements Streamable {
 	public HardwareAcquisitionConfigSearchHolder() {
 	}
 
-	public HardwareAcquisitionConfigSearchHolder(HardwareAcquisitionConfigSearch initialValue) {
+	public HardwareAcquisitionConfigSearchHolder(final HardwareAcquisitionConfigSearch initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(InputStream i) {
+	@Override
+	public void _read(final InputStream i) {
 		value = HardwareAcquisitionConfigSearchHelper.read(i);
 	}
 
-	public void _write(OutputStream o) {
+	@Override
+	public void _write(final OutputStream o) {
 		HardwareAcquisitionConfigSearchHelper.write(o, value);
 	}
 
+	@Override
 	public TypeCode _type() {
 		return HardwareAcquisitionConfigSearchHelper.type();
 	}

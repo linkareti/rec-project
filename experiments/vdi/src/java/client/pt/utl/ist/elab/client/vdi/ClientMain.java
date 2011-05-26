@@ -19,11 +19,11 @@ public class ClientMain {
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		// Este codigo e' sempre igual, so' altera o nome, ou melhor, o ID da
 		// exp, que neste caso vai ser DISCOS_INERCIA_V1.0
 		JFrame.setDefaultLookAndFeelDecorated(true);
-		ReCBaseUI ui = new ReCBaseUI();
+		final ReCBaseUI ui = new ReCBaseUI();
 		ui.setApparatusAutoConnectID("DISCOS_INERCIA_V1.0");
 		ui.setVisible(true);
 	}

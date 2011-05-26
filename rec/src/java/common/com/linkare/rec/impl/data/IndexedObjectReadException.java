@@ -11,13 +11,17 @@ package com.linkare.rec.impl.data;
  * @author José Pedro Pereira - Linkare TI
  */
 public class IndexedObjectReadException extends java.io.IOException {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6776588606049851136L;
 	private Object errorObjectKey = null;
 
 	/**
 	 * Creates a new instance of <code>PacketReadException</code> without detail
 	 * message.
 	 */
-	public IndexedObjectReadException(java.io.IOException e, Object errorObjectKey) {
+	public IndexedObjectReadException(final java.io.IOException e, final Object errorObjectKey) {
 		super(e.getMessage());
 		setStackTrace(e.getStackTrace());
 		this.errorObjectKey = errorObjectKey;

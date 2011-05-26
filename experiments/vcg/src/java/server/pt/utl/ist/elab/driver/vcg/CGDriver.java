@@ -30,9 +30,9 @@ public class CGDriver extends VirtualBaseDriver {
 
 	private static String CG_DRIVER_LOGGER = "CG.Logger";
 	static {
-		Logger l = LogManager.getLogManager().getLogger(CG_DRIVER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(CGDriver.CG_DRIVER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(CG_DRIVER_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(CGDriver.CG_DRIVER_LOGGER));
 		}
 	}
 
@@ -49,57 +49,63 @@ public class CGDriver extends VirtualBaseDriver {
 	public CGDriver() {
 	}
 
-	public void config(HardwareAcquisitionConfig config, HardwareInfo info) throws IncorrectStateException,
+	@Override
+	public void config(final HardwareAcquisitionConfig config, final HardwareInfo info) throws IncorrectStateException,
 			WrongConfigurationException {
 		fireIDriverStateListenerDriverConfiguring();
 		info.validateConfig(config);
 		extraValidateConfig(config, info);
 		try {
 			configure(config, info);
-		} catch (Exception e) {
-			LoggerUtil.logThrowable("Error on config...", e, Logger.getLogger(CG_DRIVER_LOGGER));
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable("Error on config...", e, Logger.getLogger(CGDriver.CG_DRIVER_LOGGER));
 			throw new WrongConfigurationException();
 		}
 	}
 
-	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException {
+	@Override
+	public void configure(final HardwareAcquisitionConfig config, final HardwareInfo info)
+			throws WrongConfigurationException {
 		this.config = config;
 		this.info = info;
 
 		// boolean expGType =
 		// Boolean.getBoolean(config.getSelectedHardwareParameterValue("expGType"));
-		boolean expGType = config.getSelectedHardwareParameterValue("expGType").trim().equals("1") ? true : false;
+		final boolean expGType = config.getSelectedHardwareParameterValue("expGType").trim().equals("1") ? true : false;
 
-		int angInit = Integer.parseInt(config.getSelectedHardwareParameterValue("angInit"));
-		float s0 = Float.parseFloat(config.getSelectedHardwareParameterValue("s0"));
-		float d = Float.parseFloat(config.getSelectedHardwareParameterValue("d"));
-		float mm0 = Float.parseFloat(config.getSelectedHardwareParameterValue("mm0"));
-		float mm1 = Float.parseFloat(config.getSelectedHardwareParameterValue("mm1"));
-		float mM0 = Float.parseFloat(config.getSelectedHardwareParameterValue("mM0"));
-		float mM1 = Float.parseFloat(config.getSelectedHardwareParameterValue("mM1"));
+		final int angInit = Integer.parseInt(config.getSelectedHardwareParameterValue("angInit"));
+		final float s0 = Float.parseFloat(config.getSelectedHardwareParameterValue("s0"));
+		final float d = Float.parseFloat(config.getSelectedHardwareParameterValue("d"));
+		final float mm0 = Float.parseFloat(config.getSelectedHardwareParameterValue("mm0"));
+		final float mm1 = Float.parseFloat(config.getSelectedHardwareParameterValue("mm1"));
+		final float mM0 = Float.parseFloat(config.getSelectedHardwareParameterValue("mM0"));
+		final float mM1 = Float.parseFloat(config.getSelectedHardwareParameterValue("mM1"));
 
-		float c = Float.parseFloat(config.getSelectedHardwareParameterValue("c"));
-		float k = Float.parseFloat(config.getSelectedHardwareParameterValue("k"));
-		float g = Float.parseFloat(config.getSelectedHardwareParameterValue("g"));
+		final float c = Float.parseFloat(config.getSelectedHardwareParameterValue("c"));
+		final float k = Float.parseFloat(config.getSelectedHardwareParameterValue("k"));
+		final float g = Float.parseFloat(config.getSelectedHardwareParameterValue("g"));
 
-		int tbs = (int) config.getSelectedFrequency().getFrequency();
-		int nSamples = config.getTotalSamples();
+		final int tbs = (int) config.getSelectedFrequency().getFrequency();
+		final int nSamples = config.getTotalSamples();
 
 		dataSource = new CGDataProducer(this, expGType, angInit, s0, d, mm0, mm1, mM0, mM1, new double[] { c, k, g },
 				tbs, nSamples);
 
-		for (int i = 0; i < config.getChannelsConfig().length; i++)
+		for (int i = 0; i < config.getChannelsConfig().length; i++) {
 			config.getChannelsConfig(i).setTotalSamples(config.getTotalSamples());
+		}
 
 		dataSource.setAcquisitionHeader(config);
 
 		fireIDriverStateListenerDriverConfigured();
 	}
 
+	@Override
 	public String getDriverUniqueID() {
-		return DRIVER_UNIQUE_ID;
+		return CGDriver.DRIVER_UNIQUE_ID;
 	}
 
+	@Override
 	public void shutdown() {
 		if (dataSource != null) {
 			dataSource.stopNow();
@@ -107,37 +113,42 @@ public class CGDriver extends VirtualBaseDriver {
 		super.shutDownNow();
 	}
 
-	public IDataSource start(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public IDataSource start(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverStarting();
 		dataSource.startProduction();
 		fireIDriverStateListenerDriverStarted();
 		return dataSource;
 	}
 
-	public void stop(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public void stop(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverStoping();
 		dataSource.stopNow();
 		fireIDriverStateListenerDriverStoped();
 	}
 
+	@Override
 	public Object getHardwareInfo() {
 		fireIDriverStateListenerDriverReseting();
-		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+				+ "/HardwareInfo.xml";
 		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
-		if (prop.indexOf("://") == -1)
+		if (prop.indexOf("://") == -1) {
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
+		}
 
 		java.net.URL url = null;
 		try {
 			url = ReCProtocols.getURL(prop);
-		} catch (java.net.MalformedURLException e) {
-			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger(CG_DRIVER_LOGGER));
+		} catch (final java.net.MalformedURLException e) {
+			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger(CGDriver.CG_DRIVER_LOGGER));
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
-			} catch (java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2, Logger
-						.getLogger(CG_DRIVER_LOGGER));
+			} catch (final java.net.MalformedURLException e2) {
+				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
+						Logger.getLogger(CGDriver.CG_DRIVER_LOGGER));
 			}
 		}
 		fireIDriverStateListenerDriverReseted();

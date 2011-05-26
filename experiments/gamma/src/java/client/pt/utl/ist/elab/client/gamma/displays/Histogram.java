@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.gamma.displays;
  */
 public class Histogram extends com.linkare.rec.impl.baseUI.graph.DefaultExperimentBarGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2148629764007599461L;
+
 	/** Creates a new instance of Histogram */
 	public Histogram() {
 		super();

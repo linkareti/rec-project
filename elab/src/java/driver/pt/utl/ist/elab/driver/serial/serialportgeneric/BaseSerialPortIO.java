@@ -35,9 +35,9 @@ public class BaseSerialPortIO {
 	private static String STAMP_IO_LOGGER = "BaseStampIO.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(STAMP_IO_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(BaseSerialPortIO.STAMP_IO_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(STAMP_IO_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(BaseSerialPortIO.STAMP_IO_LOGGER));
 		}
 	}
 	private SerialPort sPort = null;
@@ -48,16 +48,19 @@ public class BaseSerialPortIO {
 	/** Utility field used by event firing mechanism. */
 	private SerialPortCommandListener listener = null;
 	private String portName = "COM1";
-	
-	private AbstractSerialPortDriver driver;
 
-	/** Creates a new instance of BaseStampIO 
-	 * @param driver */
-	public BaseSerialPortIO(AbstractSerialPortDriver driver) {
+	private final AbstractSerialPortDriver driver;
+
+	/**
+	 * Creates a new instance of BaseStampIO
+	 * 
+	 * @param driver
+	 */
+	public BaseSerialPortIO(final AbstractSerialPortDriver driver) {
 		this.driver = driver;
 	}
 
-	public void setPort(SerialPort sPort) {
+	public void setPort(final SerialPort sPort) {
 		try {
 			synchronized (sPort) {
 				if (currentSerialPortReader != null) {
@@ -65,59 +68,60 @@ public class BaseSerialPortIO {
 				}
 				portName = sPort.getName();
 				sPort.close();
-				CommPortIdentifier cpi = CommPortIdentifier.getPortIdentifier(portName);
+				final CommPortIdentifier cpi = CommPortIdentifier.getPortIdentifier(portName);
 				this.sPort = (SerialPort) cpi.open(applicationNameLockPort, 100);
 				this.sPort.setSerialPortParams(portBaudRate, portDataBits, portStopBits, portParity);
 				outStream = this.sPort.getOutputStream();
 				inReader = new InputStreamReader(this.sPort.getInputStream(), "us-ascii");
 				(currentSerialPortReader = new SerialPortReader()).start();
 			}
-		} catch (Exception e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(STAMP_IO_LOGGER));
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(BaseSerialPortIO.STAMP_IO_LOGGER));
 		}
 	}
 
 	private String lastOutputMessage = null;
-	
+
 	public void resetLastOutputMessage() {
 		synchronized (sPort) {
 			lastOutputMessage = null;
 		}
 	}
 
-	public void writeMessage(String writeMessage) {
+	public void writeMessage(final String writeMessage) {
 		synchronized (sPort) {
 			try {
-				Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Write Line to STAMP: " + writeMessage);
-				byte[] message = (writeMessage + "\r").getBytes("us-ascii");
+				Logger.getLogger(BaseSerialPortIO.STAMP_IO_LOGGER).log(Level.INFO,
+						"Write Line to STAMP: " + writeMessage);
+				final byte[] message = (writeMessage + "\r").getBytes("us-ascii");
 				lastOutputMessage = writeMessage.trim();
 
 				if (sPort.getBaudRate() >= 9600) {
 					try {
 						Thread.sleep(50);
-					} catch (Exception e) {
+					} catch (final Exception e) {
 					}
 					for (int i = 0; i < message.length; i++) {
 						outStream.write(message, i, 1);
 						outStream.flush();
 						try {
 							Thread.sleep(50);
-						} catch (Exception e) {
+						} catch (final Exception e) {
 						}
 					}
 				} else {
 
 					try {
 						Thread.sleep(50);
-					} catch (Exception e) {
+					} catch (final Exception e) {
 					}
 					outStream.write(message);
 					outStream.flush();
 				}
 
-			} catch (IOException e) {
-				LoggerUtil.logThrowable("Unable to write command to serial port...", e, Logger
-						.getLogger(STAMP_IO_LOGGER));
+			} catch (final IOException e) {
+				LoggerUtil.logThrowable("Unable to write command to serial port...", e,
+						Logger.getLogger(BaseSerialPortIO.STAMP_IO_LOGGER));
 			}
 		}
 
@@ -133,6 +137,7 @@ public class BaseSerialPortIO {
 			setDaemon(true);
 		}
 
+		@Override
 		public void run() {
 			currentThread = Thread.currentThread();
 			String lineRead = null;
@@ -147,9 +152,9 @@ public class BaseSerialPortIO {
 						if (inReader != null) {
 							char readChar = 0;
 							lineRead = null;
-							if (!driver.isDriverInState(DriverState.RECEIVINGBIN))
+							if (!driver.isDriverInState(DriverState.RECEIVINGBIN)) {
 								lineReadTemp = new StringBuffer(1024);
-							else {
+							} else {
 								lineReadTemp = new StringBuffer(AbstractSerialPortDriver.currentBinaryLength + 5 /*
 																												 * length
 																												 * of
@@ -159,7 +164,7 @@ public class BaseSerialPortIO {
 							}
 							while (!exit) {
 								while (!inReader.ready()) {
-									sleep(0, 500);
+									Thread.sleep(0, 500);
 								}
 								readChar = (char) inReader.read();
 								if (!driver.isDriverInState(DriverState.RECEIVINGBIN)) {
@@ -169,11 +174,12 @@ public class BaseSerialPortIO {
 										break;
 									}
 								} else {
-									if (lineReadTemp.length() <= AbstractSerialPortDriver.currentBinaryLength + 5)
+									if (lineReadTemp.length() <= AbstractSerialPortDriver.currentBinaryLength + 5) {
 										/* 5 = length of _BIN header */
 										lineReadTemp.append(readChar);
-									else
+									} else {
 										break;
+									}
 								}
 							}
 
@@ -183,18 +189,19 @@ public class BaseSerialPortIO {
 							}
 
 							lineRead = lineReadTemp.toString().trim();
-							Logger.getLogger(STAMP_IO_LOGGER)
-									.log(Level.INFO, "Line read from STAMP [" + lineRead + "]");
+							Logger.getLogger(BaseSerialPortIO.STAMP_IO_LOGGER).log(Level.INFO,
+									"Line read from STAMP [" + lineRead + "]");
 
 							if (waitForEcho && lastOutputMessage != null) {
-								Logger.getLogger(STAMP_IO_LOGGER).log(
+								Logger.getLogger(BaseSerialPortIO.STAMP_IO_LOGGER).log(
 										Level.FINER,
 										"Line read [" + lineRead + "] waiting for echo [" + waitForEcho
 												+ "] of output message [" + lastOutputMessage + "]");
 
 								if (lastOutputMessage.equalsIgnoreCase(lineRead)) {
 									lastOutputMessage = null;
-									Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Received the echo message.");
+									Logger.getLogger(BaseSerialPortIO.STAMP_IO_LOGGER).log(Level.INFO,
+											"Received the echo message.");
 								}
 								continue;
 							}
@@ -205,9 +212,9 @@ public class BaseSerialPortIO {
 						processIncomingLine(lineRead);
 					}
 
-				} catch (Exception e) {
-					LoggerUtil.logThrowable("Unable to read line from stamp serial port...", e, Logger
-							.getLogger(STAMP_IO_LOGGER));
+				} catch (final Exception e) {
+					LoggerUtil.logThrowable("Unable to read line from stamp serial port...", e,
+							Logger.getLogger(BaseSerialPortIO.STAMP_IO_LOGGER));
 					currentThread = null;
 					return;
 				}
@@ -221,21 +228,22 @@ public class BaseSerialPortIO {
 			exit = true;
 			try {
 				inReader = null;
-			} catch (Exception e) {
+			} catch (final Exception e) {
 			}
 
 			if (currentThread != null) {
 				try {
 					currentThread.join(1000);
-				} catch (Exception e) {
+				} catch (final Exception e) {
 				}
 			}
 		}
 	}
 
-	private void processIncomingLine(String lineRead) throws Exception {
-		Logger.getLogger(STAMP_IO_LOGGER).log(Level.FINE, "Processing message incoming line ["+lineRead+"]");
-		
+	private void processIncomingLine(final String lineRead) throws Exception {
+		Logger.getLogger(BaseSerialPortIO.STAMP_IO_LOGGER).log(Level.FINE,
+				"Processing message incoming line [" + lineRead + "]");
+
 		SerialPortCommand inCommand = null;
 		String[] commandArray = null;
 
@@ -252,11 +260,12 @@ public class BaseSerialPortIO {
 		}
 
 		commandArray = lineRead.split("\\s");
-		Logger.getLogger(STAMP_IO_LOGGER).log(Level.FINEST, "Splited (whitepaces) line " + Arrays.deepToString(commandArray));
+		Logger.getLogger(BaseSerialPortIO.STAMP_IO_LOGGER).log(Level.FINEST,
+				"Splited (whitepaces) line " + Arrays.deepToString(commandArray));
 		if (commandArray.length > 0) {
 			inCommand = new SerialPortCommand(commandArray[0]);
 			if (commandArray.length > 1) {
-				StringBuilder commandTemp = new StringBuilder(commandArray[1]);
+				final StringBuilder commandTemp = new StringBuilder(commandArray[1]);
 				for (int i = 2; i < commandArray.length; i++) {
 					commandTemp.append("\t").append(commandArray[i]);
 				}
@@ -264,9 +273,9 @@ public class BaseSerialPortIO {
 			}
 		}
 
-		Logger.getLogger(STAMP_IO_LOGGER).log(Level.FINE, "Firing stamp command listener...");
+		Logger.getLogger(BaseSerialPortIO.STAMP_IO_LOGGER).log(Level.FINE, "Firing stamp command listener...");
 		fireStampCommandListenerHandleStampCommand(inCommand);
-		Logger.getLogger(STAMP_IO_LOGGER).log(Level.FINEST, "Fired stamp command listener...");
+		Logger.getLogger(BaseSerialPortIO.STAMP_IO_LOGGER).log(Level.FINEST, "Fired stamp command listener...");
 
 	}
 
@@ -275,7 +284,7 @@ public class BaseSerialPortIO {
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void setStampCommandListener(SerialPortCommandListener listener) {
+	public synchronized void setStampCommandListener(final SerialPortCommandListener listener) {
 		this.listener = listener;
 	}
 
@@ -285,7 +294,7 @@ public class BaseSerialPortIO {
 	 * @param listener The listener to remove.
 	 */
 	public synchronized void removeStampCommandListener() {
-		this.listener = null;
+		listener = null;
 	}
 
 	/**
@@ -294,29 +303,29 @@ public class BaseSerialPortIO {
 	 * @param event The event to be fired
 	 * @throws Exception
 	 */
-	private void fireStampCommandListenerHandleStampCommand(SerialPortCommand event) throws Exception {
+	private void fireStampCommandListenerHandleStampCommand(final SerialPortCommand event) throws Exception {
 		try {
 			if (listener != null) {
 				listener.handleStampCommand(event);
 			}
-		} catch (TimedOutException e) {
-			Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "TIMEOUT: " + e.getMessage());
+		} catch (final TimedOutException e) {
+			Logger.getLogger(BaseSerialPortIO.STAMP_IO_LOGGER).log(Level.INFO, "TIMEOUT: " + e.getMessage());
 			shutdown();
 		}
 
 	}
 
 	public void shutdown() {
-		Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Shutting down port...");
+		Logger.getLogger(BaseSerialPortIO.STAMP_IO_LOGGER).log(Level.INFO, "Shutting down port...");
 		if (currentSerialPortReader != null) {
 			currentSerialPortReader.exitNow();
 		}
 		if (sPort != null) {
-			Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Closing sPort...");
+			Logger.getLogger(BaseSerialPortIO.STAMP_IO_LOGGER).log(Level.INFO, "Closing sPort...");
 			sPort.close();
-			Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Closed sPort...");
+			Logger.getLogger(BaseSerialPortIO.STAMP_IO_LOGGER).log(Level.INFO, "Closed sPort...");
 		}
-		Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Shutted down port...");
+		Logger.getLogger(BaseSerialPortIO.STAMP_IO_LOGGER).log(Level.INFO, "Shutted down port...");
 	}
 
 	/**
@@ -325,7 +334,7 @@ public class BaseSerialPortIO {
 	 * @return Value of property portParity.
 	 */
 	public int getPortParity() {
-		return this.portParity;
+		return portParity;
 	}
 
 	/**
@@ -333,7 +342,7 @@ public class BaseSerialPortIO {
 	 * 
 	 * @param portParity New value of property portParity.
 	 */
-	public void setPortParity(int portParity) {
+	public void setPortParity(final int portParity) {
 		this.portParity = portParity;
 	}
 
@@ -343,7 +352,7 @@ public class BaseSerialPortIO {
 	 * @return Value of property portBaudRate.
 	 */
 	public int getPortBaudRate() {
-		return this.portBaudRate;
+		return portBaudRate;
 	}
 
 	/**
@@ -351,7 +360,7 @@ public class BaseSerialPortIO {
 	 * 
 	 * @param portBaudRate New value of property portBaudRate.
 	 */
-	public void setPortBaudRate(int portBaudRate) {
+	public void setPortBaudRate(final int portBaudRate) {
 		this.portBaudRate = portBaudRate;
 	}
 
@@ -361,7 +370,7 @@ public class BaseSerialPortIO {
 	 * @return Value of property portDataBits.
 	 */
 	public int getPortDataBits() {
-		return this.portDataBits;
+		return portDataBits;
 	}
 
 	/**
@@ -369,7 +378,7 @@ public class BaseSerialPortIO {
 	 * 
 	 * @param portDataBits New value of property portDataBits.
 	 */
-	public void setPortDataBits(int portDataBits) {
+	public void setPortDataBits(final int portDataBits) {
 		this.portDataBits = portDataBits;
 	}
 
@@ -379,7 +388,7 @@ public class BaseSerialPortIO {
 	 * @return Value of property portStopBits.
 	 */
 	public int getPortStopBits() {
-		return this.portStopBits;
+		return portStopBits;
 	}
 
 	/**
@@ -387,7 +396,7 @@ public class BaseSerialPortIO {
 	 * 
 	 * @param portStopBits New value of property portStopBits.
 	 */
-	public void setPortStopBits(int portStopBits) {
+	public void setPortStopBits(final int portStopBits) {
 		this.portStopBits = portStopBits;
 	}
 
@@ -397,7 +406,7 @@ public class BaseSerialPortIO {
 	 * @return Value of property applicationNameLockPort.
 	 */
 	public String getApplicationNameLockPort() {
-		return this.applicationNameLockPort;
+		return applicationNameLockPort;
 	}
 
 	/**
@@ -406,7 +415,7 @@ public class BaseSerialPortIO {
 	 * @param applicationNameLockPort New value of property
 	 *            applicationNameLockPort.
 	 */
-	public void setApplicationNameLockPort(String applicationNameLockPort) {
+	public void setApplicationNameLockPort(final String applicationNameLockPort) {
 		this.applicationNameLockPort = applicationNameLockPort;
 	}
 
@@ -417,7 +426,7 @@ public class BaseSerialPortIO {
 	 * 
 	 */
 	public boolean isDTR() {
-		return this.DTR;
+		return DTR;
 	}
 
 	/**
@@ -426,7 +435,7 @@ public class BaseSerialPortIO {
 	 * @param DTR New value of property DTR.
 	 * 
 	 */
-	public void setDTR(boolean DTR) {
+	public void setDTR(final boolean DTR) {
 		if (sPort != null) {
 			sPort.setDTR(DTR);
 		}
@@ -440,7 +449,7 @@ public class BaseSerialPortIO {
 	 * 
 	 */
 	public boolean isRTS() {
-		return this.RTS;
+		return RTS;
 	}
 
 	/**
@@ -449,7 +458,7 @@ public class BaseSerialPortIO {
 	 * @param RTS New value of property RTS.
 	 * 
 	 */
-	public void setRTS(boolean RTS) {
+	public void setRTS(final boolean RTS) {
 		if (sPort != null) {
 			sPort.setRTS(RTS);
 		}
@@ -463,7 +472,7 @@ public class BaseSerialPortIO {
 	 * 
 	 */
 	public boolean isWaitForEcho() {
-		return this.waitForEcho;
+		return waitForEcho;
 	}
 
 	/**
@@ -472,7 +481,7 @@ public class BaseSerialPortIO {
 	 * @param waitForEcho New value of property waitForEcho.
 	 * 
 	 */
-	public void setWaitForEcho(boolean waitForEcho) {
+	public void setWaitForEcho(final boolean waitForEcho) {
 		this.waitForEcho = waitForEcho;
 	}
 

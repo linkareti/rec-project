@@ -21,8 +21,8 @@ public class Tester {
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) throws WrongConfigurationException {
-		int[][] stupidQuestion = new int[3][4];
+	public static void main(final String[] args) throws WrongConfigurationException {
+		final int[][] stupidQuestion = new int[3][4];
 		System.out.println(stupidQuestion.length);
 		System.out.println(stupidQuestion[2].length);
 	}

@@ -22,6 +22,7 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import javax.swing.Icon;
+import javax.swing.JFileChooser;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
@@ -38,12 +39,16 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  * @author José Pedro Pereira - Linkare TI & Andr�
  */
 public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Printable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8961298577399250212L;
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 	private ExcelAdapter excelAdapter = null;
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(MeteoTable.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(MeteoTable.UI_CLIENT_LOGGER));
 		}
 	}
 
@@ -71,7 +76,8 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 		dataTable = new javax.swing.JTable();
 
 		defaultTableModelProxy.addTableModelListener(new javax.swing.event.TableModelListener() {
-			public void tableChanged(javax.swing.event.TableModelEvent evt) {
+			@Override
+			public void tableChanged(final javax.swing.event.TableModelEvent evt) {
 				defaultTableModelProxyTableChanged(evt);
 			}
 		});
@@ -81,7 +87,8 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 				"/com/linkare/rec/impl/baseUI/resources/Print16.gif")));
 		printBtn.setToolTipText("Print");
 		printBtn.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				printBtnActionPerformed(evt);
 			}
 		});
@@ -92,7 +99,8 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 				"/com/linkare/rec/impl/baseUI/resources/Save16.gif")));
 		saveBtn.setToolTipText("Save csv file");
 		saveBtn.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				saveBtnActionPerformed(evt);
 			}
 		});
@@ -102,7 +110,8 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 				"/com/linkare/rec/impl/baseUI/resources/Copy16.gif")));
 		copyBtn.setToolTipText("Copy to Clipboard in Excel Format");
 		copyBtn.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				copyBtnActionPerformed(evt);
 			}
 		});
@@ -111,7 +120,8 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 				"/com/linkare/rec/impl/baseUI/resources/tableSelectAll16.gif")));
 		selectAllBtn.setToolTipText("Select All");
 		selectAllBtn.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				selectAllBtnActionPerformed(evt);
 			}
 		});
@@ -127,40 +137,40 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 		add(scrollPaneTable, java.awt.BorderLayout.CENTER);
 	}
 
-	private void selectAllBtnActionPerformed(java.awt.event.ActionEvent evt) {
+	private void selectAllBtnActionPerformed(final java.awt.event.ActionEvent evt) {
 		dataTable.selectAll();
 	}
 
-	private void copyBtnActionPerformed(java.awt.event.ActionEvent evt) {
+	private void copyBtnActionPerformed(final java.awt.event.ActionEvent evt) {
 		excelAdapter.copyToClipBoard();
 	}
 
-	private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {
-		javax.swing.JFileChooser jFileChooserSave = new javax.swing.JFileChooser();
+	private void saveBtnActionPerformed(final java.awt.event.ActionEvent evt) {
+		final javax.swing.JFileChooser jFileChooserSave = new javax.swing.JFileChooser();
 
-		ExtensionFilter textExtension = new ExtensionFilter("csv", "ext");
+		final ExtensionFilter textExtension = new ExtensionFilter("csv", "ext");
 
 		textExtension.setDescription("Comma separated values files");
 		jFileChooserSave.setAcceptAllFileFilterUsed(false);
 		jFileChooserSave.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
 		jFileChooserSave.setFileFilter(textExtension);
 
-		int returnValue = jFileChooserSave.showSaveDialog(this);
+		final int returnValue = jFileChooserSave.showSaveDialog(this);
 		String extension = null;
-		if (returnValue == jFileChooserSave.APPROVE_OPTION) {
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			extension = textExtension.getExtension();
 		}
 		String path = jFileChooserSave.getSelectedFile().getPath();
 		if (path.endsWith(extension)) {
 			path = path.substring(0, path.length() - 4);
 		}
-		File saveFile = new File(path + "." + extension);
+		final File saveFile = new File(path + "." + extension);
 		saveTable(saveFile, false);
 	}
 
-	public void saveTable(File saveFile, boolean append) {
+	public void saveTable(final File saveFile, final boolean append) {
 		try {
-			Writer fileWriter = new OutputStreamWriter(new FileOutputStream(saveFile, append));
+			final Writer fileWriter = new OutputStreamWriter(new FileOutputStream(saveFile, append));
 			final String LS = System.getProperty("line.separator");
 			final String COMMA = ",";
 			final String QUOTE = "\"";
@@ -173,30 +183,31 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 			fileWriter.write(LS);
 			for (int row = 0; row < dataTable.getRowCount(); row++) {
 				for (int col = 0; col < dataTable.getColumnCount(); col++) {
-					fileWriter.write(QUOTE + new String().valueOf(dataTable.getValueAt(row, col)) + QUOTE);
+					new String();
+					fileWriter.write(QUOTE + String.valueOf(dataTable.getValueAt(row, col)) + QUOTE);
 					fileWriter.write(COMMA);
 				}
 				fileWriter.write(LS);
 			}
 			fileWriter.flush();
 			fileWriter.close();
-		} catch (java.io.IOException ioe) {
+		} catch (final java.io.IOException ioe) {
 			System.err.println("Error while trying to save data to file: " + ioe);
 		}
 	}
 
-	private void printBtnActionPerformed(java.awt.event.ActionEvent evt) {
+	private void printBtnActionPerformed(final java.awt.event.ActionEvent evt) {
 
-		PrinterJob job = PrinterJob.getPrinterJob();
-		PageFormat pf = job.defaultPage();
+		final PrinterJob job = PrinterJob.getPrinterJob();
+		final PageFormat pf = job.defaultPage();
 		pf.setOrientation(PageFormat.PORTRAIT);
-		PageFormat pf2 = job.pageDialog(pf);
+		final PageFormat pf2 = job.pageDialog(pf);
 		if (pf2 != pf) {
 			job.setPrintable(this, pf2);
 			if (job.printDialog()) {
 				try {
 					job.print();
-				} catch (PrinterException e) {
+				} catch (final PrinterException e) {
 					javax.swing.JOptionPane.showMessageDialog(this, e);
 				}
 			}
@@ -204,11 +215,12 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 
 	}
 
-	private void defaultTableModelProxyTableChanged(javax.swing.event.TableModelEvent evt) {
+	private void defaultTableModelProxyTableChanged(final javax.swing.event.TableModelEvent evt) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			@Override
 			public void run() {
-				Rectangle old_rect = dataTable.getVisibleRect();
-				Rectangle new_rect = dataTable.getCellRect(dataTable.getRowCount() + 1, 0, true);
+				final Rectangle old_rect = dataTable.getVisibleRect();
+				final Rectangle new_rect = dataTable.getCellRect(dataTable.getRowCount() + 1, 0, true);
 				new_rect.x = old_rect.x;
 				new_rect.width = old_rect.width;
 				dataTable.scrollRectToVisible(new_rect);
@@ -217,71 +229,85 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/table16.gif"));
 	}
 
+	@Override
 	public String getName() {
 		return "Data Table";
 	}
 
-	public void setExpDataModel(ExpDataModel model) {
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
 		defaultTableModelProxy.setExpDataModel(model);
 		model.addExpDataModelListener(new ExpDataModelListener() {
 			private boolean resizeDone = false;
 
-			public void headerAvailable(HardwareAcquisitionConfig config) {
+			public void headerAvailable(final HardwareAcquisitionConfig config) {
 
 			}
 
-			public void newSamples(NewExpDataEvent evt) {
+			@Override
+			public void newSamples(final NewExpDataEvent evt) {
 				if (!resizeDone) {
 					resizeDone = true;
-					FontMetrics fm = dataTable.getFontMetrics(dataTable.getFont());
-					TableColumnModel model = dataTable.getColumnModel();
+					final FontMetrics fm = dataTable.getFontMetrics(dataTable.getFont());
+					final TableColumnModel model = dataTable.getColumnModel();
 					for (int i = 0; i < model.getColumnCount(); i++) {
-						TableColumn col = model.getColumn(i);
+						final TableColumn col = model.getColumn(i);
 						if (dataTable.getColumnName(i) != null) {
-							int width = fm.stringWidth(dataTable.getColumnName(i)) + model.getColumnMargin() * 2 + 10;
+							final int width = fm.stringWidth(dataTable.getColumnName(i)) + model.getColumnMargin() * 2
+									+ 10;
 							col.setPreferredWidth(width);
 						}
 					}
 				}
 			}
 
+			@Override
 			public void dataModelEnded() {
 			}
 
+			@Override
 			public void dataModelError() {
 			}
 
+			@Override
 			public void dataModelStarted() {
 				defaultTableModelProxy.fireTableStructureChanged();
 				defaultTableModelProxy.fireTableDataChanged();
 			}
 
+			@Override
 			public void dataModelStartedNoData() {
 				defaultTableModelProxy.fireTableStructureChanged();
 				defaultTableModelProxy.fireTableDataChanged();
 			}
 
+			@Override
 			public void dataModelStoped() {// BIG SILENT NOOP
 			}
 
+			@Override
 			public void dataModelWaiting() {
 			}
 		});
 
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return toolBarTable;
 	}
@@ -308,28 +334,29 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 	 * @exception java.awt.print.PrinterException thrown when the print job is
 	 *                terminated.
 	 */
-	public int print(Graphics g, PageFormat pageFormat, int pageIndex) throws PrinterException {
+	@Override
+	public int print(final Graphics g, final PageFormat pageFormat, final int pageIndex) throws PrinterException {
 
-		java.awt.Graphics2D g2 = (java.awt.Graphics2D) g;
-		int fontHeight = g2.getFontMetrics().getHeight();
-		int fontDesent = g2.getFontMetrics().getDescent();
+		final java.awt.Graphics2D g2 = (java.awt.Graphics2D) g;
+		final int fontHeight = g2.getFontMetrics().getHeight();
+		final int fontDesent = g2.getFontMetrics().getDescent();
 
 		// deixar espa�o para o numero da pagina
-		double pageHeight = pageFormat.getImageableHeight() - fontHeight;
-		double pageWidth = pageFormat.getImageableWidth();
+		final double pageHeight = pageFormat.getImageableHeight() - fontHeight;
+		final double pageWidth = pageFormat.getImageableWidth();
 
-		double tableWidth = (double) dataTable.getColumnModel().getTotalColumnWidth();
+		final double tableWidth = dataTable.getColumnModel().getTotalColumnWidth();
 		double scale = 1;
 		if (tableWidth >= pageWidth) {
 			scale = pageWidth / tableWidth;
 		}
 
-		double headerHeightOnPage = dataTable.getTableHeader().getHeight() * scale;
-		double tableWidthOnPage = tableWidth * scale;
-		double oneRowHeight = (dataTable.getRowHeight() + dataTable.getRowMargin()) * scale;
-		int numRowsOnAPage = (int) ((pageHeight - headerHeightOnPage) / oneRowHeight);
-		double pageHeightForTable = oneRowHeight * numRowsOnAPage;
-		int totalNumPages = (int) Math.ceil(((double) dataTable.getRowCount()) / numRowsOnAPage);
+		final double headerHeightOnPage = dataTable.getTableHeader().getHeight() * scale;
+		final double tableWidthOnPage = tableWidth * scale;
+		final double oneRowHeight = (dataTable.getRowHeight() + dataTable.getRowMargin()) * scale;
+		final int numRowsOnAPage = (int) ((pageHeight - headerHeightOnPage) / oneRowHeight);
+		final double pageHeightForTable = oneRowHeight * numRowsOnAPage;
+		final int totalNumPages = (int) Math.ceil(((double) dataTable.getRowCount()) / numRowsOnAPage);
 
 		if (pageIndex >= totalNumPages) {
 			return (java.awt.print.Printable.NO_SUCH_PAGE);
@@ -347,15 +374,15 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 		// than the size available,
 		// clip to the appropriate bounds.
 		if (pageIndex + 1 == totalNumPages) {
-			int lastRowPrinted = numRowsOnAPage * pageIndex;
-			int numRowsLeft = dataTable.getRowCount() - lastRowPrinted;
-			g2.setClip(0, (int) (pageHeightForTable * pageIndex), (int) Math.ceil(tableWidthOnPage), (int) Math
-					.ceil(oneRowHeight * numRowsLeft));
+			final int lastRowPrinted = numRowsOnAPage * pageIndex;
+			final int numRowsLeft = dataTable.getRowCount() - lastRowPrinted;
+			g2.setClip(0, (int) (pageHeightForTable * pageIndex), (int) Math.ceil(tableWidthOnPage),
+					(int) Math.ceil(oneRowHeight * numRowsLeft));
 		}
 		// else clip to the entire area available.
 		else {
-			g2.setClip(0, (int) (pageHeightForTable * pageIndex), (int) Math.ceil(tableWidthOnPage), (int) Math
-					.ceil(pageHeightForTable));
+			g2.setClip(0, (int) (pageHeightForTable * pageIndex), (int) Math.ceil(tableWidthOnPage),
+					(int) Math.ceil(pageHeightForTable));
 		}
 
 		g2.scale(scale, scale);
@@ -376,7 +403,7 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
-	public int getColAtArray(int col) {
+	public int getColAtArray(final int col) {
 		return defaultTableModelProxy.getColAtArray(col);
 	}
 
@@ -394,7 +421,7 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
-	public void setColArray(int[] colArray) {
+	public void setColArray(final int[] colArray) {
 		defaultTableModelProxy.setColArray(colArray);
 	}
 

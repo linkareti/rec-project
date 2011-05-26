@@ -12,6 +12,11 @@ package com.linkare.rec.impl.baseUI;
  */
 public class InternalBrowser extends javax.swing.JInternalFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3743781485883799241L;
+
 	/** Creates new form InternalBrowser */
 	public InternalBrowser() {
 		initComponents();
@@ -19,12 +24,13 @@ public class InternalBrowser extends javax.swing.JInternalFrame {
 				"ReCBaseUI$rec.bui.title.internalBrowser", "Internal Browser"));
 	}
 
-	public InternalBrowser(java.net.URL url) {
+	public InternalBrowser(final java.net.URL url) {
 		this();
 		try {
-			if (url != null)
+			if (url != null) {
 				jTextPane.setPage(url);
-		} catch (Exception e) {
+			}
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}

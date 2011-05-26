@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.meteo.displays;
  */
 public class HumXYGraphDisplay extends MeteoTimeExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7410901153313380220L;
+
 	/** Creates a new instance of PVXYGraphDisplay */
 	public HumXYGraphDisplay() {
 		super();
@@ -19,6 +24,7 @@ public class HumXYGraphDisplay extends MeteoTimeExperimentGraph {
 		setChannelDisplayY(5);
 	}
 
+	@Override
 	public String getName() {
 		return "Humidade";
 	}

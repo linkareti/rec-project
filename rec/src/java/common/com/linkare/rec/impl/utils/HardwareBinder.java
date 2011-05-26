@@ -17,15 +17,15 @@ import com.linkare.rec.impl.wrappers.MultiCastControllerWrapper;
  */
 public class HardwareBinder extends Thread {
 	public static final String SYSPROP_MULTICAST_INIT_REF = "ReC.MultiCastController.InitRef";
-	public static final String MULTICAST_INIT_REF = Defaults.defaultIfEmpty(System
-			.getProperty(SYSPROP_MULTICAST_INIT_REF), "MultiCastController");
+	public static final String MULTICAST_INIT_REF = Defaults.defaultIfEmpty(
+			System.getProperty(HardwareBinder.SYSPROP_MULTICAST_INIT_REF), "MultiCastController");
 
 	private Hardware hardware = null;
-	private long WAIT_PERIOD = 40000;
+	private final long WAIT_PERIOD = 40000;
 
 	// Before trying to register please wait some time, to send the correct ID
 	// to the multicast...
-	private long STARTUP_PERIOD = 30000;
+	private final long STARTUP_PERIOD = 30000;
 
 	/** Creates a new instance of DirectoryCreator */
 	public HardwareBinder() {
@@ -35,12 +35,13 @@ public class HardwareBinder extends Thread {
 		start();
 	}
 
+	@Override
 	public void run() {
 
 		synchronized (this) {
 			try {
 				this.wait(STARTUP_PERIOD);
-			} catch (InterruptedException ignored) {
+			} catch (final InterruptedException ignored) {
 				return;
 			}
 		}
@@ -49,7 +50,7 @@ public class HardwareBinder extends Thread {
 			synchronized (this) {
 				try {
 					this.wait(WAIT_PERIOD);
-				} catch (InterruptedException ignored) {
+				} catch (final InterruptedException ignored) {
 					return;
 				}
 			}
@@ -58,20 +59,20 @@ public class HardwareBinder extends Thread {
 
 	public void bindHardware() {
 		try {
-			MultiCastController mcc = MultiCastControllerHelper.narrow(ORBBean.getORBBean().getORB()
-					.resolve_initial_references(MULTICAST_INIT_REF));
+			final MultiCastController mcc = MultiCastControllerHelper.narrow(ORBBean.getORBBean().getORB()
+					.resolve_initial_references(HardwareBinder.MULTICAST_INIT_REF));
 
 			/** Andre added the MultiCastControllerWrapper...check with JP! */
-			MultiCastControllerWrapper mcw = new MultiCastControllerWrapper(mcc);
+			final MultiCastControllerWrapper mcw = new MultiCastControllerWrapper(mcc);
 			mcw.registerHardware(hardware);
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	public void setHardware(Hardware hardware) {
+	public void setHardware(final Hardware hardware) {
 		this.hardware = hardware;
 	}
 }

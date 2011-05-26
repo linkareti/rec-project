@@ -24,6 +24,11 @@ import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 public class DefaultTimeSeriesCollectionProxy extends XYSeriesCollection implements org.jfree.data.xy.XYDataset,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7763191994535056805L;
+
 	private int[] channelIndexes = null;
 
 	/** Creates a new instance of DefaultXYDatasetProxy */
@@ -31,34 +36,43 @@ public class DefaultTimeSeriesCollectionProxy extends XYSeriesCollection impleme
 
 	}
 
+	@Override
 	public void dataModelWaiting() {
 		fireDatasetChanged();
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
-		if (header == null)
+		if (header == null) {
 			headerAvailable(expDataModel.getAcquisitionConfig());
+		}
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
-		if (header == null)
+		if (header == null) {
 			headerAvailable(expDataModel.getAcquisitionConfig());
+		}
 	}
 
 	private HardwareAcquisitionConfig header = null;
 
-	private void headerAvailable(HardwareAcquisitionConfig header) {
-		if (header == null)
+	private void headerAvailable(final HardwareAcquisitionConfig header) {
+		if (header == null) {
 			return;
+		}
 
 		this.header = header;
 
@@ -67,38 +81,43 @@ public class DefaultTimeSeriesCollectionProxy extends XYSeriesCollection impleme
 		// channelIndexes=new int[0];
 		if (channelIndexes == null) {
 			channelIndexes = new int[header.getChannelsConfig().length];
-			for (int i = 0; i < channelIndexes.length; i++)
+			for (int i = 0; i < channelIndexes.length; i++) {
 				channelIndexes[i] = i;
+			}
 		}
 
 		int[] channelIndexesValidated = new int[channelIndexes.length];
 		int indexChannelsValidated = -1;
 		for (int i = 0; i < channelIndexes.length; i++) {
 			channelIndexesValidated[i] = -1;
-			PhysicsValueType channel_type = header.getChannelsConfig(channelIndexes[i]).getSelectedScale()
+			final PhysicsValueType channel_type = header.getChannelsConfig(channelIndexes[i]).getSelectedScale()
 					.getMaximumValue().getDiscriminator();
-			if (channel_type != PhysicsValueType.ByteArrayVal)
+			if (channel_type != PhysicsValueType.ByteArrayVal) {
 				channelIndexesValidated[++indexChannelsValidated] = channelIndexes[i];
+			}
 		}
 
 		channelIndexes = new int[indexChannelsValidated + 1];
 
-		if (indexChannelsValidated >= 0)
+		if (indexChannelsValidated >= 0) {
 			System.arraycopy(channelIndexesValidated, 0, channelIndexes, 0, indexChannelsValidated + 1);
+		}
 
 		channelIndexesValidated = null;
 
 		for (int i = 0; i < channelIndexes.length; i++) {
-			JToggleButton btnAddRemoveSeries = new JToggleButton(getSeriesName(i), true);
+			final JToggleButton btnAddRemoveSeries = new JToggleButton(getSeriesName(i), true);
 			btnAddRemoveSeries.setActionCommand("" + i);
 			btnAddRemoveSeries.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent evt) {
-					JToggleButton btnSrc = (JToggleButton) evt.getSource();
-					int seriesAddRemove = Integer.parseInt(evt.getActionCommand());
-					if (btnSrc.isSelected())
+				@Override
+				public void actionPerformed(final ActionEvent evt) {
+					final JToggleButton btnSrc = (JToggleButton) evt.getSource();
+					final int seriesAddRemove = Integer.parseInt(evt.getActionCommand());
+					if (btnSrc.isSelected()) {
 						addSeries(new XYSeries(getSeriesName(seriesAddRemove)));
-					else
+					} else {
 						removeSeries(seriesAddRemove);
+					}
 				}
 			});
 		}
@@ -106,7 +125,8 @@ public class DefaultTimeSeriesCollectionProxy extends XYSeriesCollection impleme
 		fireDatasetChanged();
 	}
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 		fireDatasetChanged();
 	}
 
@@ -115,6 +135,7 @@ public class DefaultTimeSeriesCollectionProxy extends XYSeriesCollection impleme
 	 * 
 	 * @return the series count.
 	 */
+	@Override
 	public int getSeriesCount() {
 		if (expDataModel == null || !expDataModel.isDataAvailable() || channelIndexes != null) {
 			return 0;
@@ -130,17 +151,19 @@ public class DefaultTimeSeriesCollectionProxy extends XYSeriesCollection impleme
 	 * 
 	 * @return the name of the series.
 	 */
-	public String getSeriesName(int series) {
+	public String getSeriesName(final int series) {
 		if (expDataModel == null || !expDataModel.isDataAvailable() || channelIndexes == null
 				|| series >= channelIndexes.length) {
 			return null;
 		}
 
-		int channel_index = channelIndexes[series];
+		final int channel_index = channelIndexes[series];
 
-		String multiplier = expDataModel.getChannelConfig(channel_index).getSelectedScale().getMultiplier().toString();
-		String ph_unit_symbol = expDataModel.getChannelConfig(channel_index).getSelectedScale().getPhysicsUnitSymbol();
-		String ch_name = expDataModel.getChannelConfig(channel_index).getChannelName();
+		final String multiplier = expDataModel.getChannelConfig(channel_index).getSelectedScale().getMultiplier()
+				.toString();
+		final String ph_unit_symbol = expDataModel.getChannelConfig(channel_index).getSelectedScale()
+				.getPhysicsUnitSymbol();
+		final String ch_name = expDataModel.getChannelConfig(channel_index).getChannelName();
 
 		return ch_name + " [" + multiplier + ph_unit_symbol + "]";
 	}
@@ -152,13 +175,15 @@ public class DefaultTimeSeriesCollectionProxy extends XYSeriesCollection impleme
 	 * 
 	 * @return the number of items within the series.
 	 */
-	public int getItemCount(int series) {
+	@Override
+	public int getItemCount(final int series) {
 		if (expDataModel == null || !expDataModel.isDataAvailable() || series >= expDataModel.getChannelCount()) {
 			return 0;
 		}
 
-		if (expDataModel.getTotalSamples() == -1)
+		if (expDataModel.getTotalSamples() == -1) {
 			return 0;
+		}
 		return expDataModel.getTotalSamples();
 	}
 
@@ -173,7 +198,8 @@ public class DefaultTimeSeriesCollectionProxy extends XYSeriesCollection impleme
 	 * 
 	 * @return the x-value.
 	 */
-	public double getXValue(int series, int item) {
+	@Override
+	public double getXValue(final int series, final int item) {
 		if (expDataModel == null || !expDataModel.isDataAvailable() || series >= expDataModel.getChannelCount()
 				|| expDataModel.getAcquisitionConfig() == null) {
 			return 0;
@@ -191,7 +217,8 @@ public class DefaultTimeSeriesCollectionProxy extends XYSeriesCollection impleme
 	 * 
 	 * @return the y-value.
 	 */
-	public double getYValue(int series, int item) {
+	@Override
+	public double getYValue(final int series, final int item) {
 		if (expDataModel == null || !expDataModel.isDataAvailable() || series >= expDataModel.getChannelCount()) {
 			return 0;
 		}
@@ -210,7 +237,7 @@ public class DefaultTimeSeriesCollectionProxy extends XYSeriesCollection impleme
 	 * @return Value of property expDataModel.
 	 */
 	public ExpDataModel getExpDataModel() {
-		return this.expDataModel;
+		return expDataModel;
 	}
 
 	/**
@@ -218,9 +245,10 @@ public class DefaultTimeSeriesCollectionProxy extends XYSeriesCollection impleme
 	 * 
 	 * @param expDataModel New value of property expDataModel.
 	 */
-	public void setExpDataModel(ExpDataModel expDataModel) {
-		if (expDataModel != null)
+	public void setExpDataModel(final ExpDataModel expDataModel) {
+		if (expDataModel != null) {
 			expDataModel.removeExpDataModelListener(this);
+		}
 
 		this.expDataModel = expDataModel;
 
@@ -237,8 +265,8 @@ public class DefaultTimeSeriesCollectionProxy extends XYSeriesCollection impleme
 	 * @param index Index of the property.
 	 * @return Value of the property at <CODE>index</CODE>.
 	 */
-	public int getChannelIndex(int index) {
-		return this.channelIndexes[index];
+	public int getChannelIndex(final int index) {
+		return channelIndexes[index];
 	}
 
 	/**
@@ -247,7 +275,7 @@ public class DefaultTimeSeriesCollectionProxy extends XYSeriesCollection impleme
 	 * @return Value of property channelIndexes.
 	 */
 	public int[] getChannelIndexes() {
-		return this.channelIndexes;
+		return channelIndexes;
 	}
 
 	/**
@@ -256,8 +284,8 @@ public class DefaultTimeSeriesCollectionProxy extends XYSeriesCollection impleme
 	 * @param index Index of the property.
 	 * @param channelIndexes New value of the property at <CODE>index</CODE>.
 	 */
-	public void setChannelIndex(int index, int channelIndex) {
-		this.channelIndexes[index] = channelIndex;
+	public void setChannelIndex(final int index, final int channelIndex) {
+		channelIndexes[index] = channelIndex;
 	}
 
 	/**
@@ -265,7 +293,7 @@ public class DefaultTimeSeriesCollectionProxy extends XYSeriesCollection impleme
 	 * 
 	 * @param channelIndexes New value of property channelIndexes.
 	 */
-	public void setChannelIndexes(int[] channelIndexes) {
+	public void setChannelIndexes(final int[] channelIndexes) {
 		this.channelIndexes = channelIndexes;
 	}
 
@@ -275,6 +303,6 @@ public class DefaultTimeSeriesCollectionProxy extends XYSeriesCollection impleme
 	 * @return Value of property btnsToolBar.
 	 */
 	public JToggleButton[] getBtnsToolBar() {
-		return this.btnsToolBar;
+		return btnsToolBar;
 	}
 }

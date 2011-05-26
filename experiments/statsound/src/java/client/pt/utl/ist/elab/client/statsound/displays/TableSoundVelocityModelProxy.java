@@ -13,6 +13,10 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  */
 public class TableSoundVelocityModelProxy extends com.linkare.rec.impl.client.experiment.MultSeriesTableModelProxy {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1258510618135751233L;
 	private static final MathContext MATH_CONTEXT = new MathContext(2);
 
 	/**
@@ -23,6 +27,7 @@ public class TableSoundVelocityModelProxy extends com.linkare.rec.impl.client.ex
 	 * @return the number of columns in the model
 	 * @see #getRowCount
 	 */
+	@Override
 	public int getColumnCount() {
 		if (colArray == null) {
 			return 1;
@@ -38,7 +43,8 @@ public class TableSoundVelocityModelProxy extends com.linkare.rec.impl.client.ex
 	 * @param columnIndex the index of the column
 	 * @return the name of the column
 	 */
-	public String getColumnName(int columnIndex) {
+	@Override
+	public String getColumnName(final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			if (columnIndex == 0) {
 				return ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.nodata", "No data available...");
@@ -71,7 +77,8 @@ public class TableSoundVelocityModelProxy extends com.linkare.rec.impl.client.ex
 	 * @param columnIndex the column whose value is to be queried
 	 * @return the value Object at the specified cell
 	 */
-	public Object getValueAt(int rowIndex, int columnIndex) {
+	@Override
+	public Object getValueAt(final int rowIndex, final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			return null;
 		}
@@ -80,18 +87,18 @@ public class TableSoundVelocityModelProxy extends com.linkare.rec.impl.client.ex
 			return String.valueOf(rowIndex + 1);
 		} else if (columnIndex == 1) {
 			// acquisition time
-			final BigDecimal time = new BigDecimal(((double) rowIndex + 1) / ((double) 11.025));
-			time.setScale(2, BigDecimal.ROUND_HALF_DOWN);
-			return time.round(MATH_CONTEXT);
+			BigDecimal time = new BigDecimal(((double) rowIndex + 1) / ((double)11.025));
+			time = time.setScale(2, BigDecimal.ROUND_HALF_DOWN);
+			return time.round(TableSoundVelocityModelProxy.MATH_CONTEXT);
 		}
-		PhysicsValue value = expDataModel.getValueAt(rowIndex, getColAtArray(columnIndex));
+		final PhysicsValue value = expDataModel.getValueAt(rowIndex, getColAtArray(columnIndex));
 		if (value == null) {
 			return null;
 		}
 		return value.getValue().toString();
 	}
 
-	public void headerAvailable(HardwareAcquisitionConfig header) {
+	public void headerAvailable(final HardwareAcquisitionConfig header) {
 		fireTableStructureChanged();
 		// super doesn't have this method defined
 	}
@@ -110,7 +117,7 @@ public class TableSoundVelocityModelProxy extends com.linkare.rec.impl.client.ex
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Class getColumnClass(int columnIndex) {
+	public Class getColumnClass(final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			return null;
 		}

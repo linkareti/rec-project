@@ -19,9 +19,9 @@ public interface ISecurityManager {
 	boolean authorize(IResource resource, IUser user, IOperation op);
 
 	boolean authenticate(IResource resource, IUser user);
-	
+
 	void registerMultiCastHardware(List<ReCMultiCastHardware> multiCastHardwares);
-	
+
 	void registerSecurityCommunicator(ISecurityCommunicator communicator);
 
 }

@@ -13,17 +13,19 @@ public abstract class DataReceiverPOA extends org.omg.PortableServer.Servant imp
 
 	private static java.util.Hashtable _methods = new java.util.Hashtable();
 	static {
-		_methods.put("newSamples", new java.lang.Integer(0));
-		_methods.put("stateChanged", new java.lang.Integer(1));
-		_methods.put("clientsListChanged", new java.lang.Integer(2));
+		DataReceiverPOA._methods.put("newSamples", new java.lang.Integer(0));
+		DataReceiverPOA._methods.put("stateChanged", new java.lang.Integer(1));
+		DataReceiverPOA._methods.put("clientsListChanged", new java.lang.Integer(2));
 	}
 
-	public org.omg.CORBA.portable.OutputStream _invoke(String $method, org.omg.CORBA.portable.InputStream in,
-			org.omg.CORBA.portable.ResponseHandler $rh) {
+	@Override
+	public org.omg.CORBA.portable.OutputStream _invoke(final String $method,
+			final org.omg.CORBA.portable.InputStream in, final org.omg.CORBA.portable.ResponseHandler $rh) {
 		org.omg.CORBA.portable.OutputStream out = null;
-		java.lang.Integer __method = (java.lang.Integer) _methods.get($method);
-		if (__method == null)
+		final java.lang.Integer __method = (java.lang.Integer) DataReceiverPOA._methods.get($method);
+		if (__method == null) {
 			throw new org.omg.CORBA.BAD_OPERATION(0, org.omg.CORBA.CompletionStatus.COMPLETED_MAYBE);
+		}
 
 		switch (__method.intValue()) {
 
@@ -31,8 +33,8 @@ public abstract class DataReceiverPOA extends org.omg.PortableServer.Servant imp
 		// known... all the packets before should be there
 		case 0: // com/linkare/rec/acquisition/DataReceiver/newSamples
 		{
-			int largestNumPacket = in.read_long();
-			this.newSamples(largestNumPacket);
+			final int largestNumPacket = in.read_long();
+			newSamples(largestNumPacket);
 			out = $rh.createReply();
 			break;
 		}
@@ -40,9 +42,9 @@ public abstract class DataReceiverPOA extends org.omg.PortableServer.Servant imp
 			// Version 7.0 Changed this... now we may inform of changes in state
 		case 1: // com/linkare/rec/acquisition/DataReceiver/stateChanged
 		{
-			com.linkare.rec.acquisition.DataProducerState newState = com.linkare.rec.acquisition.DataProducerStateHelper
+			final com.linkare.rec.acquisition.DataProducerState newState = com.linkare.rec.acquisition.DataProducerStateHelper
 					.read(in);
-			this.stateChanged(newState);
+			stateChanged(newState);
 			out = $rh.createReply();
 			break;
 		}
@@ -51,7 +53,7 @@ public abstract class DataReceiverPOA extends org.omg.PortableServer.Servant imp
 			// clientsList
 		case 2: // com/linkare/rec/acquisition/DataReceiver/clientsListChanged
 		{
-			this.clientsListChanged();
+			clientsListChanged();
 			out = $rh.createReply();
 			break;
 		}
@@ -66,15 +68,16 @@ public abstract class DataReceiverPOA extends org.omg.PortableServer.Servant imp
 	// Type-specific CORBA::Object operations
 	private static String[] __ids = { "IDL:com/linkare/rec/acquisition/DataReceiver:1.0" };
 
-	public String[] _all_interfaces(org.omg.PortableServer.POA poa, byte[] objectId) {
-		return (String[]) __ids.clone();
+	@Override
+	public String[] _all_interfaces(final org.omg.PortableServer.POA poa, final byte[] objectId) {
+		return DataReceiverPOA.__ids.clone();
 	}
 
 	public DataReceiver _this() {
 		return DataReceiverHelper.narrow(super._this_object());
 	}
 
-	public DataReceiver _this(org.omg.CORBA.ORB orb) {
+	public DataReceiver _this(final org.omg.CORBA.ORB orb) {
 		return DataReceiverHelper.narrow(super._this_object(orb));
 	}
 

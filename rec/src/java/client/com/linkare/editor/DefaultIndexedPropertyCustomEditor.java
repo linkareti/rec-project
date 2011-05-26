@@ -14,6 +14,7 @@ import java.lang.reflect.Array;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
@@ -28,32 +29,35 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel {
 	 */
 	private static final long serialVersionUID = -3169823411394104976L;
 
-	public DefaultIndexedPropertyCustomEditor(PropertyEditor componentPropertyEditor) {
+	public DefaultIndexedPropertyCustomEditor(final PropertyEditor componentPropertyEditor) {
 		super();
 		initComponents();
 		this.componentPropertyEditor = componentPropertyEditor;
-		this.tblIndexedProperty.getTableHeader().addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent evt) {
-				int colHit = tblIndexedProperty.getTableHeader().getColumnModel().getColumnIndexAtX(evt.getX());
+		tblIndexedProperty.getTableHeader().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(final MouseEvent evt) {
+				final int colHit = tblIndexedProperty.getTableHeader().getColumnModel().getColumnIndexAtX(evt.getX());
 				tblIndexedProperty.getSelectionModel().clearSelection();
 				tblIndexedProperty.getColumnModel().getSelectionModel().clearSelection();
 				tblIndexedProperty.getColumnModel().getSelectionModel().addSelectionInterval(colHit, colHit);
-				if (tblIndexedProperty.getRowCount() > 0)
+				if (tblIndexedProperty.getRowCount() > 0) {
 					tblIndexedProperty.getSelectionModel()
 							.addSelectionInterval(0, tblIndexedProperty.getRowCount() - 1);
+				}
 			}
 		});
 
 	}
 
-	public DefaultIndexedPropertyCustomEditor(PropertyEditor componentPropertyEditor, Class<?> baseArrayClassDefined) {
+	public DefaultIndexedPropertyCustomEditor(final PropertyEditor componentPropertyEditor,
+			final Class<?> baseArrayClassDefined) {
 		this(componentPropertyEditor);
 		initComponents();
 		this.baseArrayClassDefined = baseArrayClassDefined;
 	}
 
-	public DefaultIndexedPropertyCustomEditor(PropertyEditor componentPropertyEditor, Class<?> baseArrayClassDefined,
-			Object value) {
+	public DefaultIndexedPropertyCustomEditor(final PropertyEditor componentPropertyEditor,
+			final Class<?> baseArrayClassDefined, final Object value) {
 		this(componentPropertyEditor);
 		initComponents();
 		this.baseArrayClassDefined = baseArrayClassDefined;
@@ -73,7 +77,7 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel {
 		indexedPropertyObjectTableModel = new com.linkare.editor.IndexedPropertyObjectTableModel();
 		jScrollPane1 = new javax.swing.JScrollPane();
 		tblIndexedProperty = new JTable(indexedPropertyObjectTableModel);
-		TableColumn columnIndexedProperty = tblIndexedProperty.getColumnModel().getColumn(1);
+		final TableColumn columnIndexedProperty = tblIndexedProperty.getColumnModel().getColumn(1);
 		columnIndexedProperty.setCellEditor(new IndexedPropertyObjectTableCellEditor());
 		columnIndexedProperty.setCellRenderer(new IndexedPropertyObjectTableCellRenderer());
 		tblIndexedProperty.getTableHeader().getColumnModel().getColumn(0).setPreferredWidth(35);
@@ -87,7 +91,8 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel {
 		btnMoveDown = new javax.swing.JButton();
 
 		indexedPropertyObjectTableModel.addTableModelListener(new javax.swing.event.TableModelListener() {
-			public void tableChanged(javax.swing.event.TableModelEvent evt) {
+			@Override
+			public void tableChanged(final javax.swing.event.TableModelEvent evt) {
 				indexedPropertyObjectTableModelTableChanged(evt);
 			}
 		});
@@ -103,7 +108,8 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel {
 
 		btnRemoveRows.setText("Remove Selected Rows");
 		btnRemoveRows.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnRemoveRowsActionPerformed(evt);
 			}
 		});
@@ -112,14 +118,15 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel {
 
 		btnAddRows.setText("Add Rows:");
 		btnAddRows.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnAddRowsActionPerformed(evt);
 			}
 		});
 
 		jPanel1.add(btnAddRows);
 
-		txtAddRows.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		txtAddRows.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtAddRows.setText("1");
 		txtAddRows.setMinimumSize(new java.awt.Dimension(50, 20));
 		txtAddRows.setPreferredSize(new java.awt.Dimension(50, 20));
@@ -134,7 +141,8 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel {
 		btnMoveUp.setMinimumSize(new java.awt.Dimension(102, 26));
 		btnMoveUp.setPreferredSize(new java.awt.Dimension(102, 26));
 		btnMoveUp.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnMoveUpActionPerformed(evt);
 			}
 		});
@@ -146,7 +154,8 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel {
 		btnMoveDown.setMinimumSize(new java.awt.Dimension(102, 26));
 		btnMoveDown.setPreferredSize(new java.awt.Dimension(102, 26));
 		btnMoveDown.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnMoveDownActionPerformed(evt);
 			}
 		});
@@ -157,52 +166,55 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel {
 
 	}// GEN-END:initComponents
 
-	private void btnMoveUpActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnMoveUpActionPerformed
+	private void btnMoveUpActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnMoveUpActionPerformed
 	{// GEN-HEADEREND:event_btnMoveUpActionPerformed
-		DefaultTableModel model = (DefaultTableModel) tblIndexedProperty.getModel();
-		int[] rowsSelected = tblIndexedProperty.getSelectedRows();
+		final DefaultTableModel model = (DefaultTableModel) tblIndexedProperty.getModel();
+		final int[] rowsSelected = tblIndexedProperty.getSelectedRows();
 		for (int i = 0; i < rowsSelected.length; i++) {
-			if (rowsSelected[i] == 0)
+			if (rowsSelected[i] == 0) {
 				return;
+			}
 			model.moveRow(rowsSelected[i], rowsSelected[i], rowsSelected[i] - 1);
 			rowsSelected[i] = rowsSelected[i] - 1;
 		}
 		tblIndexedProperty.getSelectionModel().clearSelection();
-		for (int i = 0; i < rowsSelected.length; i++) {
-			tblIndexedProperty.getSelectionModel().addSelectionInterval(rowsSelected[i], rowsSelected[i]);
+		for (final int element : rowsSelected) {
+			tblIndexedProperty.getSelectionModel().addSelectionInterval(element, element);
 		}
 	}// GEN-LAST:event_btnMoveUpActionPerformed
 
-	private void btnMoveDownActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnMoveDownActionPerformed
+	private void btnMoveDownActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnMoveDownActionPerformed
 	{// GEN-HEADEREND:event_btnMoveDownActionPerformed
-		DefaultTableModel model = (DefaultTableModel) tblIndexedProperty.getModel();
-		int[] rowsSelected = tblIndexedProperty.getSelectedRows();
+		final DefaultTableModel model = (DefaultTableModel) tblIndexedProperty.getModel();
+		final int[] rowsSelected = tblIndexedProperty.getSelectedRows();
 		for (int i = rowsSelected.length - 1; i >= 0; i--) {
-			if (rowsSelected[i] == model.getRowCount() - 1)
+			if (rowsSelected[i] == model.getRowCount() - 1) {
 				return;
+			}
 			model.moveRow(rowsSelected[i], rowsSelected[i], rowsSelected[i] + 1);
 			rowsSelected[i] = rowsSelected[i] + 1;
 		}
 		tblIndexedProperty.getSelectionModel().clearSelection();
-		for (int i = 0; i < rowsSelected.length; i++) {
-			tblIndexedProperty.getSelectionModel().addSelectionInterval(rowsSelected[i], rowsSelected[i]);
+		for (final int element : rowsSelected) {
+			tblIndexedProperty.getSelectionModel().addSelectionInterval(element, element);
 		}
 
 	}// GEN-LAST:event_btnMoveDownActionPerformed
 
-	private void indexedPropertyObjectTableModelTableChanged(javax.swing.event.TableModelEvent evt)// GEN-FIRST:event_indexedPropertyObjectTableModelTableChanged
+	private void indexedPropertyObjectTableModelTableChanged(final javax.swing.event.TableModelEvent evt)// GEN-FIRST:event_indexedPropertyObjectTableModelTableChanged
 	{// GEN-HEADEREND:event_indexedPropertyObjectTableModelTableChanged
-		Object oldValue = getValue();
+		final Object oldValue = getValue();
 
-		TableModel model = tblIndexedProperty.getModel();
-		int rowCount = model.getRowCount();
+		final TableModel model = tblIndexedProperty.getModel();
+		final int rowCount = model.getRowCount();
 
 		value = Array.newInstance(getBaseArrayClass(), rowCount);
 
 		for (int i = 0; i < rowCount; i++) {
-			IndexedPropertyObject ipo = (IndexedPropertyObject) model.getValueAt(i, 1);
-			if (ipo.getValue() == null && getBaseArrayClass().isPrimitive())
+			final IndexedPropertyObject ipo = (IndexedPropertyObject) model.getValueAt(i, 1);
+			if (ipo.getValue() == null && getBaseArrayClass().isPrimitive()) {
 				continue;
+			}
 
 			Array.set(value, i, ipo.getValue());
 		}
@@ -210,12 +222,12 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel {
 		firePropertyChange("value", oldValue, value);
 	}// GEN-LAST:event_indexedPropertyObjectTableModelTableChanged
 
-	private void btnAddRowsActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnAddRowsActionPerformed
+	private void btnAddRowsActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnAddRowsActionPerformed
 	{// GEN-HEADEREND:event_btnAddRowsActionPerformed
 		int countRowsAdd = 0;
 		try {
 			countRowsAdd = Integer.parseInt(txtAddRows.getText());
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			JOptionPane.showMessageDialog(this,
 					"Please define a positive integer value for the number of rows to add!", "Error adding rows!",
 					JOptionPane.ERROR_MESSAGE);
@@ -223,17 +235,18 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel {
 		}
 
 		for (int i = 0; i < countRowsAdd; i++) {
-			IndexedPropertyObject obj = new IndexedPropertyObject(componentPropertyEditor, getBaseArrayClass(), null);
+			final IndexedPropertyObject obj = new IndexedPropertyObject(componentPropertyEditor, getBaseArrayClass(),
+					null);
 			((DefaultTableModel) tblIndexedProperty.getModel()).addRow(new Object[] {
 					new Integer(tblIndexedProperty.getRowCount()), obj });
 		}
 
 	}// GEN-LAST:event_btnAddRowsActionPerformed
 
-	private void btnRemoveRowsActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnRemoveRowsActionPerformed
+	private void btnRemoveRowsActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnRemoveRowsActionPerformed
 	{// GEN-HEADEREND:event_btnRemoveRowsActionPerformed
 		// int countTotalRows=tblIndexedProperty.getModel().getRowCount();
-		int[] rowsSelected = tblIndexedProperty.getSelectedRows();
+		final int[] rowsSelected = tblIndexedProperty.getSelectedRows();
 		for (int i = rowsSelected.length - 1; i >= 0; i--) {
 			((DefaultTableModel) tblIndexedProperty.getModel()).removeRow(rowsSelected[i]);
 		}
@@ -247,12 +260,13 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel {
 	 */
 	public Class<?> getBaseArrayClass() {
 		Class<?> baseArrayClass = null;
-		if (baseArrayClassDefined != null)
+		if (baseArrayClassDefined != null) {
 			baseArrayClass = baseArrayClassDefined;
-		else if (getValue() != null)
+		} else if (getValue() != null) {
 			baseArrayClass = getValue().getClass().getComponentType();
-		else if (componentPropertyEditor.getValue() != null)
+		} else if (componentPropertyEditor.getValue() != null) {
 			baseArrayClass = componentPropertyEditor.getValue().getClass();
+		}
 
 		return baseArrayClass;
 
@@ -261,10 +275,10 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel {
 	/**
 	 * Setter for property definedBaseClass.
 	 * 
-	 * @param definedBaseClass New value of property definedBaseClass.
+	 * @param baseArrayClassDefined New value of property definedBaseClass.
 	 * 
 	 */
-	public void setBaseArrayClass(Class<?> baseArrayClassDefined) {
+	public void setBaseArrayClass(final Class<?> baseArrayClassDefined) {
 		this.baseArrayClassDefined = baseArrayClassDefined;
 	}
 
@@ -275,7 +289,7 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel {
 	 * 
 	 */
 	public PropertyEditor getComponentPropertyEditor() {
-		return this.componentPropertyEditor;
+		return componentPropertyEditor;
 	}
 
 	/**
@@ -285,7 +299,7 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel {
 	 *            componentPropertyEditor.
 	 * 
 	 */
-	public void setComponentPropertyEditor(PropertyEditor componentPropertyEditor) {
+	public void setComponentPropertyEditor(final PropertyEditor componentPropertyEditor) {
 		this.componentPropertyEditor = componentPropertyEditor;
 	}
 
@@ -296,7 +310,7 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel {
 	 * 
 	 */
 	public Object getValue() {
-		return this.value;
+		return value;
 	}
 
 	/**
@@ -305,8 +319,8 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel {
 	 * @param value New value of property value.
 	 * 
 	 */
-	public void setValue(Object value) {
-		Object oldValue = value;
+	public void setValue(final Object value) {
+		final Object oldValue = value;
 		this.value = value;
 
 		((DefaultTableModel) tblIndexedProperty.getModel()).setRowCount(0);
@@ -315,10 +329,10 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel {
 			((DefaultTableModel) tblIndexedProperty.getModel()).setRowCount(0);
 			return;
 		} else {
-			int length = java.lang.reflect.Array.getLength(value);
+			final int length = java.lang.reflect.Array.getLength(value);
 			for (int i = 0; i < length; i++) {
-				IndexedPropertyObject obj = new IndexedPropertyObject(componentPropertyEditor, getBaseArrayClass(),
-						java.lang.reflect.Array.get(value, i));
+				final IndexedPropertyObject obj = new IndexedPropertyObject(componentPropertyEditor,
+						getBaseArrayClass(), java.lang.reflect.Array.get(value, i));
 				((DefaultTableModel) tblIndexedProperty.getModel()).addRow(new Object[] {
 						new Integer(tblIndexedProperty.getRowCount()), obj });
 			}

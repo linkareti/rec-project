@@ -21,15 +21,15 @@ public class NoControlFileException extends Exception {
 		super();
 	}
 
-	public NoControlFileException(String message, Throwable cause) {
+	public NoControlFileException(final String message, final Throwable cause) {
 		super(message, cause);
 	}
 
-	public NoControlFileException(String message) {
+	public NoControlFileException(final String message) {
 		super(message);
 	}
 
-	public NoControlFileException(Throwable cause) {
+	public NoControlFileException(final Throwable cause) {
 		super(cause);
 	}
 

@@ -21,14 +21,17 @@ public class DateEditor extends PropertyEditorSupport {
 	public DateEditor() {
 	}
 
+	@Override
 	public boolean supportsCustomEditor() {
 		return true;
 	}
 
+	@Override
 	public Component getCustomEditor() {
-		DateCustomizer customizer = new DateCustomizer();
+		final DateCustomizer customizer = new DateCustomizer();
 		customizer.addPropertyChangeListener("date", new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent evt) {
+			@Override
+			public void propertyChange(final PropertyChangeEvent evt) {
 				setValue(evt.getNewValue());
 			}
 		});
@@ -36,6 +39,7 @@ public class DateEditor extends PropertyEditorSupport {
 		return customizer;
 	}
 
+	@Override
 	public String getAsText() {
 		return getValue().toString();
 	}

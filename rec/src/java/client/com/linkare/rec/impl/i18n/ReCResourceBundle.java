@@ -33,9 +33,9 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 	public static String REC_RESBUNDLE_LOGGER = "ReCResourceBundle.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(REC_RESBUNDLE_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ReCResourceBundle.REC_RESBUNDLE_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(REC_RESBUNDLE_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ReCResourceBundle.REC_RESBUNDLE_LOGGER));
 		}
 	}
 
@@ -44,162 +44,171 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 	// "ReCResourceBundle - " + message);
 	// }
 
-	private static void logThrowable(String message, Throwable t) {
-		LoggerUtil.logThrowable("ReCResourceBundle - " + message, t, Logger.getLogger(REC_RESBUNDLE_LOGGER));
+	private static void logThrowable(final String message, final Throwable t) {
+		LoggerUtil.logThrowable("ReCResourceBundle - " + message, t,
+				Logger.getLogger(ReCResourceBundle.REC_RESBUNDLE_LOGGER));
 	}
 
 	private static HashMap<String, ReCResourceBundle> bundles = new HashMap<String, ReCResourceBundle>();
 
-	public static String findString(String bundleName, String key) throws MissingResourceException {
+	public static String findString(final String bundleName, final String key) throws MissingResourceException {
 
-		ArrayList<String> bundleNames = calculateLanguageVariants(bundleName, Locale.getDefault());
+		final ArrayList<String> bundleNames = ReCResourceBundle.calculateLanguageVariants(bundleName,
+				Locale.getDefault());
 
 		ResourceBundle bundle = null;
 
 		for (int i = 0; i < bundleNames.size() && bundle == null; i++) {
-			bundle = (ResourceBundle) bundles.get(bundleNames.get(i));
+			bundle = ReCResourceBundle.bundles.get(bundleNames.get(i));
 		}
 
-		if (bundle == null)
-			throw new MissingResourceException("No bundle here by the name " + bundleName, ReCResourceBundle.class
-					.getName(), key);
+		if (bundle == null) {
+			throw new MissingResourceException("No bundle here by the name " + bundleName,
+					ReCResourceBundle.class.getName(), key);
+		}
 
 		return bundle.getString(key);
 	}
 
-	public static ImageIcon findImageIcon(String bundleName, String key) throws MissingResourceException,
+	public static ImageIcon findImageIcon(final String bundleName, final String key) throws MissingResourceException,
 			MalformedURLException {
-		String location = findString(bundleName, key);
-		URL url = ReCProtocols.getURL(location);
-		ImageIcon iconImage = new ImageIcon(url);
+		final String location = ReCResourceBundle.findString(bundleName, key);
+		final URL url = ReCProtocols.getURL(location);
+		final ImageIcon iconImage = new ImageIcon(url);
 		return iconImage;
 	}
 
-	public static Object findObject(String bundleName, String key) throws MissingResourceException, IOException,
+	public static Object findObject(final String bundleName, final String key) throws MissingResourceException,
+			IOException, ClassNotFoundException {
+		final String location = ReCResourceBundle.findString(bundleName, key);
+		final Object o = java.beans.Beans.instantiate(null, location);
+		return o;
+	}
+
+	public static String findStringOrDefault(final String bundleName, final String key, final String defaultValue)
+			throws MissingResourceException {
+		try {
+			return ReCResourceBundle.findString(bundleName, key);
+		} catch (final Exception e) {
+			ReCResourceBundle.logThrowable("Couldn't find key '" + key + "' on bundle " + bundleName, e);
+			return defaultValue;
+		}
+	}
+
+	public static ImageIcon findImageIconOrDefault(final String bundleName, final String key,
+			final ImageIcon defaultValue) throws MissingResourceException {
+		try {
+			return ReCResourceBundle.findImageIcon(bundleName, key);
+		} catch (final Exception e) {
+			ReCResourceBundle.logThrowable("Couldn't find key '" + key + "' on bundle " + bundleName, e);
+			return defaultValue;
+		}
+	}
+
+	public static Object findObjectOrDefault(final String bundleName, final String key, final Object defaultValue)
+			throws MissingResourceException {
+		try {
+			return ReCResourceBundle.findObject(bundleName, key);
+		} catch (final Exception e) {
+			ReCResourceBundle.logThrowable("Couldn't find key '" + key + "' on bundle " + bundleName, e);
+			return defaultValue;
+		}
+	}
+
+	public static ImageIcon findImageIcon(final String key) throws MissingResourceException, MalformedURLException {
+		final String location = ReCResourceBundle.findString(key);
+		final URL url = ReCProtocols.getURL(location);
+		final ImageIcon iconImage = new ImageIcon(url);
+		return iconImage;
+	}
+
+	public static Object findObject(final String key) throws MissingResourceException, IOException,
 			ClassNotFoundException {
-		String location = findString(bundleName, key);
-		Object o = java.beans.Beans.instantiate(null, location);
+		final String location = ReCResourceBundle.findString(key);
+		final Object o = java.beans.Beans.instantiate(null, location);
 		return o;
 	}
 
-	public static String findStringOrDefault(String bundleName, String key, String defaultValue)
-			throws MissingResourceException {
-		try {
-			return findString(bundleName, key);
-		} catch (Exception e) {
-			logThrowable("Couldn't find key '" + key + "' on bundle " + bundleName, e);
-			return defaultValue;
-		}
-	}
-
-	public static ImageIcon findImageIconOrDefault(String bundleName, String key, ImageIcon defaultValue)
-			throws MissingResourceException {
-		try {
-			return findImageIcon(bundleName, key);
-		} catch (Exception e) {
-			logThrowable("Couldn't find key '" + key + "' on bundle " + bundleName, e);
-			return defaultValue;
-		}
-	}
-
-	public static Object findObjectOrDefault(String bundleName, String key, Object defaultValue)
-			throws MissingResourceException {
-		try {
-			return findObject(bundleName, key);
-		} catch (Exception e) {
-			logThrowable("Couldn't find key '" + key + "' on bundle " + bundleName, e);
-			return defaultValue;
-		}
-	}
-
-	public static ImageIcon findImageIcon(String key) throws MissingResourceException, MalformedURLException {
-		String location = findString(key);
-		URL url = ReCProtocols.getURL(location);
-		ImageIcon iconImage = new ImageIcon(url);
-		return iconImage;
-	}
-
-	public static Object findObject(String key) throws MissingResourceException, IOException, ClassNotFoundException {
-		String location = findString(key);
-		Object o = java.beans.Beans.instantiate(null, location);
-		return o;
-	}
-
-	public static String findString(String key) throws MissingResourceException {
+	public static String findString(final String key) throws MissingResourceException {
 
 		if (key != null && key.indexOf('$') != -1) {
-			int loc = key.indexOf('$');
-			String bundleName = key.substring(0, loc);
-			String bundleKey = key.substring(loc + 1);
-			return findString(bundleName, bundleKey);
+			final int loc = key.indexOf('$');
+			final String bundleName = key.substring(0, loc);
+			final String bundleKey = key.substring(loc + 1);
+			return ReCResourceBundle.findString(bundleName, bundleKey);
 		}
 
-		for (ReCResourceBundle bundle : bundles.values()) {
+		for (final ReCResourceBundle bundle : ReCResourceBundle.bundles.values()) {
 			try {
 				if (bundle.containsKey(key)) {
 					return bundle.getString(key);
 				}
-			} catch (Exception e) {
+			} catch (final Exception e) {
 			}
 		}
 
-		throw new MissingResourceException("Key '" + key + "' not found in any bundle here", ReCResourceBundle.class
-				.getName(), key);
+		throw new MissingResourceException("Key '" + key + "' not found in any bundle here",
+				ReCResourceBundle.class.getName(), key);
 	}
 
-	public static String findStringOrDefault(String key, String defaultValue) throws MissingResourceException {
+	public static String findStringOrDefault(final String key, final String defaultValue)
+			throws MissingResourceException {
 		try {
-			return findString(key);
-		} catch (Exception e) {
-			logThrowable("Couldn't find key '" + key + "' on any bundle!", e);
+			return ReCResourceBundle.findString(key);
+		} catch (final Exception e) {
+			ReCResourceBundle.logThrowable("Couldn't find key '" + key + "' on any bundle!", e);
 			return defaultValue;
 		}
 	}
 
-	public static ImageIcon findImageIconOrDefault(String key, ImageIcon defaultValue) throws MissingResourceException {
+	public static ImageIcon findImageIconOrDefault(final String key, final ImageIcon defaultValue)
+			throws MissingResourceException {
 		try {
-			return findImageIcon(key);
-		} catch (Exception e) {
-			logThrowable("Couldn't find key '" + key + "' on any bundle!", e);
+			return ReCResourceBundle.findImageIcon(key);
+		} catch (final Exception e) {
+			ReCResourceBundle.logThrowable("Couldn't find key '" + key + "' on any bundle!", e);
 			return defaultValue;
 		}
 	}
 
-	public static Object findObjectOrDefault(String key, Object defaultValue) throws MissingResourceException {
+	public static Object findObjectOrDefault(final String key, final Object defaultValue)
+			throws MissingResourceException {
 		try {
-			return findObject(key);
-		} catch (Exception e) {
-			logThrowable("Couldn't find key '" + key + "' on any bundle!", e);
+			return ReCResourceBundle.findObject(key);
+		} catch (final Exception e) {
+			ReCResourceBundle.logThrowable("Couldn't find key '" + key + "' on any bundle!", e);
 			return defaultValue;
 		}
 	}
 
-	public static ReCResourceBundle loadResourceBundle(String bundleName, String bundleLocation) {
-		return loadResourceBundle(bundleName, bundleLocation, Locale.getDefault());
+	public static ReCResourceBundle loadResourceBundle(final String bundleName, final String bundleLocation) {
+		return ReCResourceBundle.loadResourceBundle(bundleName, bundleLocation, Locale.getDefault());
 	}
 
-	public static ReCResourceBundle loadResourceBundle(String bundleName, String bundleLocation, Locale locale) {
+	public static ReCResourceBundle loadResourceBundle(final String bundleName, final String bundleLocation,
+			final Locale locale) {
 		// first try to locate the bundle in the cache
-		ArrayList<String> bundleKeys = calculateLanguageVariants(bundleName, locale);
-		String bundleNameKey = bundleKeys.get(0);
-		if (bundles.containsKey(bundleNameKey))
-			return bundles.get(bundleNameKey);
+		final ArrayList<String> bundleKeys = ReCResourceBundle.calculateLanguageVariants(bundleName, locale);
+		final String bundleNameKey = bundleKeys.get(0);
+		if (ReCResourceBundle.bundles.containsKey(bundleNameKey)) {
+			return ReCResourceBundle.bundles.get(bundleNameKey);
+		}
 
 		// next calculate the languageVariants
-		ArrayList<String> bundleLocations = calculateLanguageVariants(bundleLocation, locale);
+		final ArrayList<String> bundleLocations = ReCResourceBundle.calculateLanguageVariants(bundleLocation, locale);
 
 		for (int i = 0; i < bundleLocations.size(); i++) {
-			String bundleLocationCurrent = (String) bundleLocations.get(i);
-			ReCResourceBundle bundle = loadFromClassName(bundleLocationCurrent);
+			final String bundleLocationCurrent = bundleLocations.get(i);
+			ReCResourceBundle bundle = ReCResourceBundle.loadFromClassName(bundleLocationCurrent);
 			if (bundle != null) {
-				bundles.put(bundleKeys.get(i), bundle);
-				propagateBundle(bundle, bundleLocationCurrent, bundleKeys.get(i));
+				ReCResourceBundle.bundles.put(bundleKeys.get(i), bundle);
+				ReCResourceBundle.propagateBundle(bundle, bundleLocationCurrent, bundleKeys.get(i));
 				return bundle;
 			} else {
-				bundle = loadFromURL(bundleLocationCurrent);
+				bundle = ReCResourceBundle.loadFromURL(bundleLocationCurrent);
 				if (bundle != null) {
-					bundles.put(bundleKeys.get(i), bundle);
-					propagateBundle(bundle, bundleLocationCurrent, bundleKeys.get(i));
+					ReCResourceBundle.bundles.put(bundleKeys.get(i), bundle);
+					ReCResourceBundle.propagateBundle(bundle, bundleLocationCurrent, bundleKeys.get(i));
 					return bundle;
 				}
 			}
@@ -207,12 +216,14 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 		return null;
 	}
 
-	private static void propagateBundle(ReCResourceBundle bundle, String bundleLocation, String bundleName) {
+	private static void propagateBundle(final ReCResourceBundle bundle, final String bundleLocation,
+			final String bundleName) {
 		ReCResourceBundle childBundle = bundle;
 		String temp = bundleLocation;
-		int fileExtLoc = temp.lastIndexOf(".properties");
-		if (fileExtLoc != -1)
+		final int fileExtLoc = temp.lastIndexOf(".properties");
+		if (fileExtLoc != -1) {
 			temp = temp.substring(0, fileExtLoc);
+		}
 
 		int loc = temp.lastIndexOf("_");
 
@@ -221,15 +232,15 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 		while (loc != -1) {
 			temp = temp.substring(0, loc);
 			bundleNameTemp = bundleNameTemp.substring(0, bundleNameTemp.lastIndexOf("_"));
-			ReCResourceBundle bundleParent = loadFromClassName(temp);
+			ReCResourceBundle bundleParent = ReCResourceBundle.loadFromClassName(temp);
 			if (bundleParent != null) {
-				bundles.put(bundleNameTemp, bundleParent);
+				ReCResourceBundle.bundles.put(bundleNameTemp, bundleParent);
 				childBundle.parent = bundleParent;
 				childBundle = bundleParent;
 			} else {
-				bundleParent = loadFromURL(temp);
+				bundleParent = ReCResourceBundle.loadFromURL(temp);
 				if (bundleParent != null) {
-					bundles.put(bundleNameTemp, bundleParent);
+					ReCResourceBundle.bundles.put(bundleNameTemp, bundleParent);
 					childBundle.parent = bundleParent;
 					childBundle = bundleParent;
 				}
@@ -239,12 +250,13 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 		}
 	}
 
-	private static ReCResourceBundle loadFromClassName(String className) {
+	private static ReCResourceBundle loadFromClassName(final String className) {
 		try {
-			Object oBundle = ClassLoader.getSystemClassLoader().loadClass(className).newInstance();
-			if (oBundle != null && oBundle instanceof ReCResourceBundle)
+			final Object oBundle = ClassLoader.getSystemClassLoader().loadClass(className).newInstance();
+			if (oBundle != null && oBundle instanceof ReCResourceBundle) {
 				return (ReCResourceBundle) oBundle;
-		} catch (Exception e) {
+			}
+		} catch (final Exception e) {
 
 		}
 
@@ -253,38 +265,39 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 
 	private static ReCResourceBundle loadFromURL(String strUrl) {
 		try {
-			if (strUrl.indexOf(".properties") == -1)
+			if (strUrl.indexOf(".properties") == -1) {
 				strUrl += ".properties";
+			}
 
-			URL url = ReCProtocols.getURL(strUrl);
+			final URL url = ReCProtocols.getURL(strUrl);
 			if (url != null) {
-				URLConnection con = url.openConnection();
+				final URLConnection con = url.openConnection();
 				con.setDoInput(true);
 				con.setDoOutput(false);
 				con.connect();
 
-				InputStream is = con.getInputStream();
-				ReCPropertyResourceBundle bundle = new ReCPropertyResourceBundle(is);
+				final InputStream is = con.getInputStream();
+				final ReCPropertyResourceBundle bundle = new ReCPropertyResourceBundle(is);
 				return bundle;
 			}
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 		}
 
 		return null;
 	}
 
-	private static ArrayList<String> calculateLanguageVariants(String base, Locale locale) {
-		String language1 = locale.getLanguage();
-		String country1 = locale.getCountry();
-		String variant1 = locale.getVariant();
+	private static ArrayList<String> calculateLanguageVariants(final String base, final Locale locale) {
+		final String language1 = locale.getLanguage();
+		final String country1 = locale.getCountry();
+		final String variant1 = locale.getVariant();
 
-		Locale defLocale = Locale.getDefault();
-		String language2 = defLocale.getLanguage();
-		String country2 = defLocale.getCountry();
-		String variant2 = defLocale.getVariant();
+		final Locale defLocale = Locale.getDefault();
+		final String language2 = defLocale.getLanguage();
+		final String country2 = defLocale.getCountry();
+		final String variant2 = defLocale.getVariant();
 
-		ArrayList<String> retVal = new ArrayList<String>(7);
+		final ArrayList<String> retVal = new ArrayList<String>(7);
 
 		String temp = "";
 		if (language1 != null && !language1.equals("")) {
@@ -306,7 +319,7 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 				.equals(variant2))) {
 
 			temp = "";
-			int locationInsert = retVal.size();
+			final int locationInsert = retVal.size();
 			if (language2 != null && !language2.equals("")) {
 				temp += "_" + language2;
 

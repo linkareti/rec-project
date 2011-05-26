@@ -51,8 +51,9 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	/**
 	 * The free memory space after which the data dumping to disk occurs
 	 */
-	public static final double FREE_THRESHOLD_VALUE = com.linkare.rec.impl.utils.Defaults.defaultIfEmpty(System
-			.getProperty(SYSPROP_FREE_THRESHOLD_NAME), DEFAULT_FREE_THRESHOLD);
+	public static final double FREE_THRESHOLD_VALUE = com.linkare.rec.impl.utils.Defaults.defaultIfEmpty(
+			System.getProperty(DiscardablePhysicsValueMatrix.SYSPROP_FREE_THRESHOLD_NAME),
+			DiscardablePhysicsValueMatrix.DEFAULT_FREE_THRESHOLD);
 
 	/**
 	 * An indexed {@link HashMap} of rowNumber to {@link PhysicsValue}[] of data
@@ -90,12 +91,12 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 
 	/** Creates a new instance of PhysicsValueMatrix */
 	public DiscardablePhysicsValueMatrix() {
-		percentFreeThreshold = FREE_THRESHOLD_VALUE;
+		percentFreeThreshold = DiscardablePhysicsValueMatrix.FREE_THRESHOLD_VALUE;
 		setTotalSamples(totalSamples);
 	}
 
 	/** Creates a new instance of PhysicsValueMatrix */
-	public DiscardablePhysicsValueMatrix(int totalSamples) {
+	public DiscardablePhysicsValueMatrix(final int totalSamples) {
 		setTotalSamples(totalSamples);
 	}
 
@@ -105,17 +106,18 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	 * 
 	 * @param dataSamples The row/rows of samples to add to this matrix
 	 */
-	public void addDataRows(PhysicsValue[]... dataSamples) {
+	public void addDataRows(final PhysicsValue[]... dataSamples) {
 		// Check if the samples are null, or have no values and return
 		// immediatly
-		if (dataSamples == null || dataSamples.length == 0)
+		if (dataSamples == null || dataSamples.length == 0) {
 			return;
+		}
 
 		// Create a new map to hold all the new samples arrived
-		HashMap<Integer, PhysicsValue[]> tempSamples = new HashMap<Integer, PhysicsValue[]>(dataSamples.length);
+		final HashMap<Integer, PhysicsValue[]> tempSamples = new HashMap<Integer, PhysicsValue[]>(dataSamples.length);
 
 		// Just add all dataRows and keep increasing the counter
-		for (PhysicsValue[] dataRow : dataSamples) {
+		for (final PhysicsValue[] dataRow : dataSamples) {
 			tempSamples.put(lastSampleCount++, dataRow);
 		}
 
@@ -124,9 +126,9 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 		if (serialized) {
 			try {
 				ioDelegate.write(tempSamples);
-			} catch (IOException e) {
-				LoggerUtil.logThrowable("Unable to write packets to file... defaulting to memory...", e, Logger
-						.getLogger("SwapIOLogger"));
+			} catch (final IOException e) {
+				LoggerUtil.logThrowable("Unable to write packets to file... defaulting to memory...", e,
+						Logger.getLogger("SwapIOLogger"));
 				samplesRows.putAll(tempSamples);
 			}
 		} else {
@@ -147,7 +149,7 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 				samplesRows.clear();
 				// Try to signal the garbage collector since we are near
 				// exaustion
-			} catch (IOException e) {
+			} catch (final IOException e) {
 
 			}
 		}
@@ -164,15 +166,15 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	 * 
 	 * @param totalSamples The total number of expected samples
 	 */
-	public void setTotalSamples(int totalSamples) {
+	public void setTotalSamples(final int totalSamples) {
 		// Saves the total samples number for later...
 		this.totalSamples = totalSamples;
 
 		// and creates or resizes the samplesRows variable
-		if (samplesRows == null)
+		if (samplesRows == null) {
 			samplesRows = new HashMap<Integer, PhysicsValue[]>(totalSamples);
-		else {
-			Map<Integer, PhysicsValue[]> tempRows = samplesRows;
+		} else {
+			final Map<Integer, PhysicsValue[]> tempRows = samplesRows;
 			samplesRows = new HashMap<Integer, PhysicsValue[]>(totalSamples);
 			samplesRows.putAll(tempRows);
 		}
@@ -199,8 +201,7 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	 *         {@link #percentFreeThreshold} maxMemory
 	 */
 	private boolean shouldSerialize() {
-		return ((double) Runtime.getRuntime().freeMemory() <= percentFreeThreshold
-				* (double) Runtime.getRuntime().maxMemory());
+		return (Runtime.getRuntime().freeMemory() <= percentFreeThreshold * Runtime.getRuntime().maxMemory());
 	}
 
 	/**
@@ -213,16 +214,17 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	 * @throws SamplesReadException if it was not possible to find the sample at
 	 *             the index specified
 	 */
-	private PhysicsValue[] removeSample(int sampleIndex) throws SamplesReadException {
+	private PhysicsValue[] removeSample(final int sampleIndex) throws SamplesReadException {
 		if (serialized) {
 			return ioDelegate.remove(sampleIndex, sampleIndex)[0];
 		}
 
-		if (samplesRows.containsKey(new Integer(sampleIndex)))
-			return (PhysicsValue[]) samplesRows.remove(sampleIndex);
-		else
+		if (samplesRows.containsKey(new Integer(sampleIndex))) {
+			return samplesRows.remove(sampleIndex);
+		} else {
 			throw new SamplesReadException(new IOException("Error trying to read sample " + sampleIndex
 					+ " from memory!"), sampleIndex);
+		}
 	}
 
 	/**
@@ -236,7 +238,9 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	 * @param sampleEndIndex The index of the ending row (inclusive)
 	 * @throws SamplesReadException If some data is not available
 	 */
-	public PhysicsValue[][] getSamples(int sampleStartIndex, int sampleEndIndex) throws SamplesReadException {
+	@Override
+	public PhysicsValue[][] getSamples(final int sampleStartIndex, final int sampleEndIndex)
+			throws SamplesReadException {
 
 		// If it is on disk, then read it from disk
 		if (serialized) {
@@ -244,7 +248,7 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 		}
 
 		// Allocate the returning array with the correct size
-		PhysicsValue[][] retVal = new PhysicsValue[sampleEndIndex - sampleStartIndex + 1][];
+		final PhysicsValue[][] retVal = new PhysicsValue[sampleEndIndex - sampleStartIndex + 1][];
 
 		for (int i = sampleStartIndex; i <= sampleEndIndex; i++) {
 			retVal[i - sampleStartIndex] = removeSample(i);
@@ -260,7 +264,8 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	 * @param listener The listener to register.
 	 * 
 	 */
-	public synchronized void addSamplesSourceEventListener(SamplesSourceEventListener listener) {
+	@Override
+	public synchronized void addSamplesSourceEventListener(final SamplesSourceEventListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -274,7 +279,8 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	 * @param listener The listener to remove.
 	 * 
 	 */
-	public synchronized void removeSamplesSourceEventListener(SamplesSourceEventListener listener) {
+	@Override
+	public synchronized void removeSamplesSourceEventListener(final SamplesSourceEventListener listener) {
 		listenerList.remove(SamplesSourceEventListener.class, listener);
 	}
 
@@ -286,14 +292,15 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	 *            new data
 	 * 
 	 */
-	private void fireNewSamples(int sampleLargestIndex) {
-		SamplesSourceEvent event = new SamplesSourceEvent(this, sampleLargestIndex);
-		if (listenerList == null)
+	private void fireNewSamples(final int sampleLargestIndex) {
+		final SamplesSourceEvent event = new SamplesSourceEvent(this, sampleLargestIndex);
+		if (listenerList == null) {
 			return;
+		}
 
 		// The way this code is implemented avoids the creation of new Listeners
 		// arrays
-		Object[] listeners = listenerList.getListenerList();
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == SamplesSourceEventListener.class) {
 				((SamplesSourceEventListener) listeners[i + 1]).newSamples(event);
@@ -304,6 +311,7 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	/**
 	 * @return the largest sample index known at anytime
 	 */
+	@Override
 	public int getLastSampleNum() {
 		return lastSampleCount;
 	}

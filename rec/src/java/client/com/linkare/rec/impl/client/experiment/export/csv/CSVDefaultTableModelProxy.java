@@ -13,13 +13,13 @@ import javax.swing.table.DefaultTableModel;
  * @author npadriano
  */
 public class CSVDefaultTableModelProxy implements CSVModel {
-	
-	private DefaultTableModel model;
-	
+
+	private final DefaultTableModel model;
+
 	/**
 	 * Creates the <code>CSVDefaultTableModelProxy</code>.
 	 */
-	public CSVDefaultTableModelProxy(DefaultTableModel model) {
+	public CSVDefaultTableModelProxy(final DefaultTableModel model) {
 		this.model = model;
 	}
 
@@ -27,7 +27,7 @@ public class CSVDefaultTableModelProxy implements CSVModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getCell(int row, int col) {
+	public String getCell(final int row, final int col) {
 		return model.getValueAt(row, col).toString();
 	}
 
@@ -43,7 +43,7 @@ public class CSVDefaultTableModelProxy implements CSVModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getColumnHeader(int index) {
+	public String getColumnHeader(final int index) {
 		return model.getColumnName(index);
 	}
 

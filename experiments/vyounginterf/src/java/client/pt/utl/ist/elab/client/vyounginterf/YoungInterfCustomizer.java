@@ -14,6 +14,7 @@ package pt.utl.ist.elab.client.vyounginterf;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.SwingConstants;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
@@ -23,33 +24,38 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 public class YoungInterfCustomizer extends javax.swing.JPanel implements
 		com.linkare.rec.impl.client.customizer.ICustomizer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7256341455487365684L;
+
 	/** Creates new form YoungInterfCustomizer */
 	public YoungInterfCustomizer() {
 		initWavelenghtChooser();
 		initComponents();
 
-		java.util.Hashtable htDFendas = new java.util.Hashtable(7);
+		final java.util.Hashtable htDFendas = new java.util.Hashtable(7);
 		for (int i = 0; i <= 600; i += 100) {
 			htDFendas.put(new Integer(i), new javax.swing.JLabel("" + i / 100F));
 		}
 		htDFendas.put(new Integer(10), new javax.swing.JLabel("0.10"));
 		jSliderDFendas.setLabelTable(htDFendas);
 
-		java.util.Hashtable htDPlanos = new java.util.Hashtable(10);
+		final java.util.Hashtable htDPlanos = new java.util.Hashtable(10);
 		for (int i = 0; i < 601; i += 100) {
 			htDPlanos.put(new Integer(i), new javax.swing.JLabel("" + i / 100F));
 		}
 		jSliderDPlanos.setLabelTable(htDPlanos);
 
-		jPanelWave.add(wave);
+		jPanelWave.add(YoungInterfCustomizer.wave);
 	}
 
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 
 		ReCResourceBundle.loadResourceBundle("younginterf",
 				"recresource:///pt/utl/ist/elab/client/vyounginterf/resources/messages");
 
-		javax.swing.JFrame dummy = new javax.swing.JFrame();
+		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new YoungInterfCustomizer());
 		dummy.pack();
 		dummy.show();
@@ -63,10 +69,11 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 	 * comprimento de onda (em nm).
 	 */
 	private void initWavelenghtChooser() {
-		wave = new wavelenghtChooser();
-		wave.setPreferredSize(new Dimension(430, 60));
-		wave.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+		YoungInterfCustomizer.wave = new wavelenghtChooser();
+		YoungInterfCustomizer.wave.setPreferredSize(new Dimension(430, 60));
+		YoungInterfCustomizer.wave.addChangeListener(new javax.swing.event.ChangeListener() {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				waveStateChanged(evt);
 			}
 		});
@@ -109,17 +116,19 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 
 		jButtonOK.setText(ReCResourceBundle.findStringOrDefault("younginterf$rec.exp.customizer.title.ok", "OK"));
 		jButtonOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonOKActionPerformed(evt);
 			}
 		});
 
 		jPanelOKCnl.add(jButtonOK);
 
-		jButtonCancel.setText(ReCResourceBundle.findStringOrDefault(
-				"younginterf$rec.exp.customizer.title.cancel", "Cancel"));
+		jButtonCancel.setText(ReCResourceBundle.findStringOrDefault("younginterf$rec.exp.customizer.title.cancel",
+				"Cancel"));
 		jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonCancelActionPerformed(evt);
 			}
 		});
@@ -131,10 +140,11 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 		gridBagConstraints.weightx = 1.0;
 		jPanelBtns.add(jPanelOKCnl, gridBagConstraints);
 
-		jButtonDefaultConfig.setText(ReCResourceBundle.findStringOrDefault(
-				"younginterf$rec.exp.customizer.title.dfc", "Default config"));
+		jButtonDefaultConfig.setText(ReCResourceBundle.findStringOrDefault("younginterf$rec.exp.customizer.title.dfc",
+				"Default config"));
 		jButtonDefaultConfig.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonDefaultConfigActionPerformed(evt);
 			}
 		});
@@ -160,10 +170,11 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 		jPanelL.add(jPanelWave);
 
 		jTextFieldWave.setColumns(4);
-		jTextFieldWave.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldWave.setHorizontalAlignment(SwingConstants.CENTER);
 		jTextFieldWave.setText("580");
 		jTextFieldWave.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldWaveFocusLost(evt);
 			}
 		});
@@ -184,7 +195,8 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 		jSliderDFendas.setMinimum(10);
 		jSliderDFendas.setMaximum(600);
 		jSliderDFendas.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderDFendasStateChanged(evt);
 			}
 		});
@@ -192,10 +204,11 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 		jPanelA.add(jSliderDFendas);
 
 		jTextFieldDFendas.setColumns(4);
-		jTextFieldDFendas.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldDFendas.setHorizontalAlignment(SwingConstants.CENTER);
 		jTextFieldDFendas.setText("2.0");
 		jTextFieldDFendas.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldDFendasFocusLost(evt);
 			}
 		});
@@ -214,7 +227,8 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 		jSliderDPlanos.setMinimum(100);
 		jSliderDPlanos.setMaximum(600);
 		jSliderDPlanos.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderDPlanosStateChanged(evt);
 			}
 		});
@@ -222,10 +236,11 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 		jPanelD.add(jSliderDPlanos);
 
 		jTextFieldDPlanos.setColumns(4);
-		jTextFieldDPlanos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldDPlanos.setHorizontalAlignment(SwingConstants.CENTER);
 		jTextFieldDPlanos.setText("4.00");
 		jTextFieldDPlanos.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldDPlanosFocusLost(evt);
 			}
 		});
@@ -242,7 +257,7 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 				"younginterf$rec.exp.customizer.title.5", "Projection area width (mm)")));
 		jPanelArea.setVerifyInputWhenFocusTarget(false);
 		jSliderArea.setPaintLabels(true);
-		jSliderArea.setOrientation(javax.swing.JSlider.VERTICAL);
+		jSliderArea.setOrientation(SwingConstants.VERTICAL);
 		jSliderArea.setPaintTicks(true);
 		jSliderArea.setMinorTickSpacing(1);
 		jSliderArea.setMajorTickSpacing(2);
@@ -251,7 +266,8 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 		jSliderArea.setMaximum(20);
 		jSliderArea.setSnapToTicks(true);
 		jSliderArea.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderAreaStateChanged(evt);
 			}
 		});
@@ -259,10 +275,11 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 		jPanelArea.add(jSliderArea);
 
 		jTextFieldArea.setColumns(4);
-		jTextFieldArea.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldArea.setHorizontalAlignment(SwingConstants.CENTER);
 		jTextFieldArea.setText("6.00");
 		jTextFieldArea.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldAreaFocusLost(evt);
 			}
 		});
@@ -277,112 +294,115 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 
 	}// GEN-END:initComponents
 
-	private void jSliderAreaStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderAreaStateChanged
+	private void jSliderAreaStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderAreaStateChanged
 		jTextFieldArea.setText("" + jSliderArea.getValue());
 	}// GEN-LAST:event_jSliderAreaStateChanged
 
-	private void jTextFieldAreaFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldAreaFocusLost
+	private void jTextFieldAreaFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldAreaFocusLost
 		adjustSlider2(jSliderArea, jTextFieldArea);
 	}// GEN-LAST:event_jTextFieldAreaFocusLost
 
-	private void jTextFieldDPlanosFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldDPlanosFocusLost
+	private void jTextFieldDPlanosFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldDPlanosFocusLost
 		adjustSlider3(jSliderDPlanos, jTextFieldDPlanos);
 	}// GEN-LAST:event_jTextFieldDPlanosFocusLost
 
-	private void jTextFieldDFendasFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldDFendasFocusLost
+	private void jTextFieldDFendasFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldDFendasFocusLost
 		adjustSlider3(jSliderDFendas, jTextFieldDFendas);
 	}// GEN-LAST:event_jTextFieldDFendasFocusLost
 
-	private void jTextFieldWaveFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldWaveFocusLost
-		adjustSlider(wave, jTextFieldWave);
+	private void jTextFieldWaveFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldWaveFocusLost
+		adjustSlider(YoungInterfCustomizer.wave, jTextFieldWave);
 	}// GEN-LAST:event_jTextFieldWaveFocusLost
 
-	private void jSliderDPlanosStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderDPlanosStateChanged
+	private void jSliderDPlanosStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderDPlanosStateChanged
 		jTextFieldDPlanos.setText("" + jSliderDPlanos.getValue() / 100f);
 	}// GEN-LAST:event_jSliderDPlanosStateChanged
 
-	private void jSliderDFendasStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderDFendasStateChanged
+	private void jSliderDFendasStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderDFendasStateChanged
 		jTextFieldDFendas.setText("" + jSliderDFendas.getValue() / 100f);
 	}// GEN-LAST:event_jSliderDFendasStateChanged
 
-	private void jButtonDefaultConfigActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonDefaultConfigActionPerformed
+	private void jButtonDefaultConfigActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonDefaultConfigActionPerformed
 		jSliderArea.setValue(6);
 		jSliderDFendas.setValue(200);
 		jSliderDPlanos.setValue(400);
-		wave.setValue(580);
+		YoungInterfCustomizer.wave.setValue(580);
 	}// GEN-LAST:event_jButtonDefaultConfigActionPerformed
 
-	private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonCancelActionPerformed
+	private void jButtonCancelActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonCancelActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_jButtonCancelActionPerformed
 
-	private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonOKActionPerformed
+	private void jButtonOKActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonOKActionPerformed
 		acqConfig.setTotalSamples(1080);
 
 		// acqConfig.setSelectedFrequency(new
 		// Frequency((double)jSliderTBS.getValue(),hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(),hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
 
-		acqConfig.getSelectedHardwareParameter("lambda").setParameterValue("" + wave.getValue());
+		acqConfig.getSelectedHardwareParameter("lambda").setParameterValue("" + YoungInterfCustomizer.wave.getValue());
 		acqConfig.getSelectedHardwareParameter("dfendas").setParameterValue("" + jSliderDFendas.getValue() / 100F);
 		acqConfig.getSelectedHardwareParameter("dplanos").setParameterValue("" + jSliderDPlanos.getValue() / 100F);
 		acqConfig.getSelectedHardwareParameter("lpadrao").setParameterValue("" + jSliderArea.getValue());
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_jButtonOKActionPerformed
 
-	public void waveStateChanged(javax.swing.event.ChangeEvent evt) {
-		jTextFieldWave.setText("" + wave.getValue());
+	public void waveStateChanged(final javax.swing.event.ChangeEvent evt) {
+		jTextFieldWave.setText("" + YoungInterfCustomizer.wave.getValue());
 	}
 
 	// Metodos que verificam a validade do que foi introduzido na text field
-	private void adjustSlider(wavelenghtChooser waveLC, javax.swing.JTextField field) {
+	private void adjustSlider(final wavelenghtChooser waveLC, final javax.swing.JTextField field) {
 		int num = 0;
 		try {
 			num = Integer.parseInt(field.getText().trim());
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 			field.setText("" + waveLC.getValue());
 		}
-		if (num > waveLC.getMaximum() || num < waveLC.getMinimum())
+		if (num > waveLC.getMaximum() || num < waveLC.getMinimum()) {
 			field.setText("" + waveLC.getValue());
-		else
+		} else {
 			waveLC.setValue(num);
+		}
 	}
 
-	private void adjustSlider2(javax.swing.JSlider slider, javax.swing.JTextField field) {
+	private void adjustSlider2(final javax.swing.JSlider slider, final javax.swing.JTextField field) {
 		int num = 0;
 		try {
 			num = (int) (Float.parseFloat(field.getText().trim()));
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 			field.setText("" + slider.getValue());
 			return;
 		}
-		if (num > slider.getMaximum() || num < slider.getMinimum())
+		if (num > slider.getMaximum() || num < slider.getMinimum()) {
 			field.setText("" + slider.getValue());
-		else
+		} else {
 			slider.setValue(num);
+		}
 	}
 
-	private void adjustSlider3(javax.swing.JSlider slider, javax.swing.JTextField field) {
+	private void adjustSlider3(final javax.swing.JSlider slider, final javax.swing.JTextField field) {
 		int num = 0;
 		try {
 			num = (int) (Float.parseFloat(field.getText().trim()) * 100);
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 			field.setText("" + slider.getValue() / 100f);
 			return;
 		}
-		if (num > slider.getMaximum() || num < slider.getMinimum())
+		if (num > slider.getMaximum() || num < slider.getMinimum()) {
 			field.setText("" + slider.getValue() / 100f);
-		else
+		} else {
 			slider.setValue(num);
+		}
 	}
 
-	public int getVirtualDimention(float dimReal, float dimVirtual, float aTransf) {
+	public int getVirtualDimention(final float dimReal, final float dimVirtual, final float aTransf) {
 		return roundToInt(dimVirtual * aTransf / dimReal + dimVirtual / 2);
 	}
 
 	/**
-	 *Arredonda um double para int de acordo com as casas decimais
+	 * Arredonda um double para int de acordo com as casas decimais
 	 */
-	public int roundToInt(double number) {
+	public int roundToInt(final double number) {
 		int rounded = 0;
 		if (number % (int) number < 0.5) {
 			rounded = (int) number;
@@ -401,7 +421,8 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -413,7 +434,8 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -423,9 +445,10 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -439,9 +462,10 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -453,6 +477,7 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
 		return acqConfig;
 	}
@@ -460,45 +485,51 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ESTE É PARA ALTERAR
 	// /////////////////////////////////////////////////////////////////////////////////
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		// Aqui são fornecidos parametros do ultimo utilizador que fez a exp, e'
 		// bom manter!
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
-			int lambda = (int) (Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("lambda")));
-			int dfendas = (int) (Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("dfendas"))) / 100;
-			int dplanos = (int) (Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("dplanos"))) / 100;
-			int lpadrao = (int) (Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("lpadrao")));
+			final int lambda = (int) (Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("lambda")));
+			final int dfendas = (int) (Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("dfendas"))) / 100;
+			final int dplanos = (int) (Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("dplanos"))) / 100;
+			final int lpadrao = (int) (Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("lpadrao")));
 
-			wave.setValue(lambda);
+			YoungInterfCustomizer.wave.setValue(lambda);
 			jSliderArea.setValue(lpadrao);
 			jSliderDFendas.setValue(dfendas);
 			jSliderDPlanos.setValue(dplanos);
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
+	@Override
 	public javax.swing.JComponent getCustomizerComponent() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/vyounginterf/resources/younginterf_iconified.png"));
 	}
 
 	// ESTE É PARA ALTERAR
+	@Override
 	public String getCustomizerTitle() {
 		return "Young's Interferences Experiment Configuration Utility";
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}

@@ -22,12 +22,12 @@ import com.linkare.rec.impl.data.PhysicsValFactory;
 
 public class DIDataProducer extends VirtualBaseDataSource {
 	// O numero de canais(de dados) que existem!
-	private int NUM_CHANNELS = 11;
+	private final int NUM_CHANNELS = 11;
 
 	private double tempo = 0;
 
-	private Disco disco1, disco2;
-	private ODESolver odeSolver1, odeSolver2;
+	private final Disco disco1, disco2;
+	private final ODESolver odeSolver1, odeSolver2;
 
 	private int tbs = 30;
 	private int nSamples = 200;
@@ -36,8 +36,8 @@ public class DIDataProducer extends VirtualBaseDataSource {
 	private VirtualBaseDriver driver = null;
 
 	// Aproveitamos para inicializar todas as variaveis logo no construtor...
-	public DIDataProducer(VirtualBaseDriver driver, double r1i, double r1e, double r2i, double r2e, double m1,
-			double m2, double inc, int tbs, int nSamples) {
+	public DIDataProducer(final VirtualBaseDriver driver, final double r1i, final double r1e, final double r2i,
+			final double r2e, final double m1, final double m2, final double inc, final int tbs, final int nSamples) {
 		this.driver = driver;
 		this.tbs = tbs;
 		this.nSamples = nSamples;
@@ -57,9 +57,10 @@ public class DIDataProducer extends VirtualBaseDataSource {
 	private class ProducerThread extends Thread {
 		private int currentSample = 0;
 
+		@Override
 		public void run() {
 			try {
-				sleep(1000);
+				Thread.sleep(1000);
 
 				// Enquanto a amostra actual for menor do que o numero de
 				// amostras pedido pelo cliente E ninguem tiver parado a
@@ -67,7 +68,7 @@ public class DIDataProducer extends VirtualBaseDataSource {
 				while (currentSample < nSamples && !stopped) {
 					// envia as amostra calculadas!
 					// 1- cria um array com o numero de canais existentes!
-					PhysicsValue[] value = new PhysicsValue[NUM_CHANNELS];
+					final PhysicsValue[] value = new PhysicsValue[NUM_CHANNELS];
 
 					// envia no canal CORRESPONDENTE!!! o valor
 					value[0] = new PhysicsValue(PhysicsValFactory.fromFloat((float) tempo), getAcquisitionHeader()
@@ -111,7 +112,7 @@ public class DIDataProducer extends VirtualBaseDataSource {
 					odeSolver1.step();
 					odeSolver2.step();
 					// dorme o tbs que o utilizador pediu...
-					sleep(tbs);
+					Thread.sleep(tbs);
 
 					currentSample++;
 				}
@@ -119,11 +120,12 @@ public class DIDataProducer extends VirtualBaseDataSource {
 				endProduction();
 
 				driver.stopVirtualHardware();
-			} catch (InterruptedException ie) {
+			} catch (final InterruptedException ie) {
 			}
 		}
 	}
 
+	@Override
 	public void startProduction() {
 		stopped = false;
 		new ProducerThread().start();
@@ -134,13 +136,14 @@ public class DIDataProducer extends VirtualBaseDataSource {
 		setDataSourceEnded();
 	}
 
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 		/*
 		 * DPendulumDataProducer dp = new DPendulumDataProducer(null,90, 90, 10,
 		 * 0, 0.5f, 1.5f, 0.3f, 0.5f, 10, 10000); dp.startProduction();
 		 */
 	}
 
+	@Override
 	public void stopNow() {
 		stopped = true;
 		setDataSourceStoped();

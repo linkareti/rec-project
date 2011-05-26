@@ -20,7 +20,7 @@ public class StampMomInerciaProcessor extends AbstractStampProcessor {
 
 	/** Creates a new instance of StampHelloProcessor */
 	public StampMomInerciaProcessor() {
-		super(COMMAND_IDENTIFIER);
+		super(StampMomInerciaProcessor.COMMAND_IDENTIFIER);
 	}
 
 	/**
@@ -30,14 +30,16 @@ public class StampMomInerciaProcessor extends AbstractStampProcessor {
 	 * @return boolean - wether the processing was successfull
 	 * 
 	 */
-	public boolean process(StampCommand command) {
+	@Override
+	public boolean process(final StampCommand command) {
 
 		int velocity = 0;
 		int potential = 0;
 
-		String[] splitedStr = command.getCommand().split(" ");
+		final String[] splitedStr = command.getCommand().split(" ");
 
-		if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedStr[0] != null) {
+		if (command.getCommandIdentifier().equalsIgnoreCase(StampMomInerciaProcessor.COMMAND_IDENTIFIER)
+				&& splitedStr[0] != null) {
 			try {
 				velocity = Integer.parseInt(splitedStr[1]);
 				Float oVelocity = null;
@@ -47,20 +49,20 @@ public class StampMomInerciaProcessor extends AbstractStampProcessor {
 					oVelocity = new Float(60000000f / (velocity * 4 * 2));
 				}
 
-				command.addCommandData(VELOCITY, oVelocity);
+				command.addCommandData(StampMomInerciaProcessor.VELOCITY, oVelocity);
 
 				System.out.println("oVelocity =" + oVelocity.floatValue());
 
 				potential = Integer.parseInt(splitedStr[2]);
-				float power = (potential * 5f / 4096f) * (potential * 5 / 4096f) * 3f / 4.7f;
+				final float power = (potential * 5f / 4096f) * (potential * 5 / 4096f) * 3f / 4.7f;
 
-				Float oPotential = new Float((power));
-				command.addCommandData(POWER, oPotential);
+				final Float oPotential = new Float((power));
+				command.addCommandData(StampMomInerciaProcessor.POWER, oPotential);
 
 				command.setData(true);
 				return true;
 
-			} catch (NumberFormatException e) {
+			} catch (final NumberFormatException e) {
 				e.printStackTrace();
 				return false;
 			}
@@ -69,6 +71,7 @@ public class StampMomInerciaProcessor extends AbstractStampProcessor {
 		return false;
 	}
 
+	@Override
 	public boolean isData() {
 		return true;
 	}

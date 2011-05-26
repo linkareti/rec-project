@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.voscilador.displays;
  */
 public class KETimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3708611018580921427L;
+
 	/** Creates a new instance of AnguloIntensidadeChart */
 	public KETimeChart() {
 		super();

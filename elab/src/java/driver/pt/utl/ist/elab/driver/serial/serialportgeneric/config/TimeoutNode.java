@@ -45,8 +45,8 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TimeoutNode", propOrder = { "defaultTimeout", "id", "cfg", "cur", "str", "datBin", "noData",
-		"end", "stp", "rst", "hardwareDied", "portListen" })
+@XmlType(name = "TimeoutNode", propOrder = { "defaultTimeout", "id", "cfg", "cur", "str", "datBin", "noData", "end",
+		"stp", "rst", "hardwareDied", "portListen" })
 public class TimeoutNode {
 
 	@XmlElement(name = "default_timeout", required = true)
@@ -90,8 +90,8 @@ public class TimeoutNode {
 	 * @param value allowed object is {@link OneTimeoutNode }
 	 * 
 	 */
-	public void setDefaultTimeout(OneTimeoutNode value) {
-		this.defaultTimeout = value;
+	public void setDefaultTimeout(final OneTimeoutNode value) {
+		defaultTimeout = value;
 	}
 
 	/**
@@ -110,8 +110,8 @@ public class TimeoutNode {
 	 * @param value allowed object is {@link OneTimeoutNode }
 	 * 
 	 */
-	public void setId(OneTimeoutNode value) {
-		this.id = value;
+	public void setId(final OneTimeoutNode value) {
+		id = value;
 	}
 
 	/**
@@ -130,8 +130,8 @@ public class TimeoutNode {
 	 * @param value allowed object is {@link OneTimeoutNode }
 	 * 
 	 */
-	public void setCfg(OneTimeoutNode value) {
-		this.cfg = value;
+	public void setCfg(final OneTimeoutNode value) {
+		cfg = value;
 	}
 
 	/**
@@ -150,8 +150,8 @@ public class TimeoutNode {
 	 * @param value allowed object is {@link OneTimeoutNode }
 	 * 
 	 */
-	public void setCur(OneTimeoutNode value) {
-		this.cur = value;
+	public void setCur(final OneTimeoutNode value) {
+		cur = value;
 	}
 
 	/**
@@ -170,8 +170,8 @@ public class TimeoutNode {
 	 * @param value allowed object is {@link OneTimeoutNode }
 	 * 
 	 */
-	public void setStr(OneTimeoutNode value) {
-		this.str = value;
+	public void setStr(final OneTimeoutNode value) {
+		str = value;
 	}
 
 	/**
@@ -190,8 +190,8 @@ public class TimeoutNode {
 	 * @param value allowed object is {@link OneTimeoutNode }
 	 * 
 	 */
-	public void setDatBin(OneTimeoutNode value) {
-		this.datBin = value;
+	public void setDatBin(final OneTimeoutNode value) {
+		datBin = value;
 	}
 
 	/**
@@ -210,8 +210,8 @@ public class TimeoutNode {
 	 * @param value allowed object is {@link OneTimeoutNode }
 	 * 
 	 */
-	public void setNoData(OneTimeoutNode value) {
-		this.noData = value;
+	public void setNoData(final OneTimeoutNode value) {
+		noData = value;
 	}
 
 	/**
@@ -230,8 +230,8 @@ public class TimeoutNode {
 	 * @param value allowed object is {@link OneTimeoutNode }
 	 * 
 	 */
-	public void setEnd(OneTimeoutNode value) {
-		this.end = value;
+	public void setEnd(final OneTimeoutNode value) {
+		end = value;
 	}
 
 	/**
@@ -250,8 +250,8 @@ public class TimeoutNode {
 	 * @param value allowed object is {@link OneTimeoutNode }
 	 * 
 	 */
-	public void setStp(OneTimeoutNode value) {
-		this.stp = value;
+	public void setStp(final OneTimeoutNode value) {
+		stp = value;
 	}
 
 	/**
@@ -270,8 +270,8 @@ public class TimeoutNode {
 	 * @param value allowed object is {@link OneTimeoutNode }
 	 * 
 	 */
-	public void setRst(OneTimeoutNode value) {
-		this.rst = value;
+	public void setRst(final OneTimeoutNode value) {
+		rst = value;
 	}
 
 	/**
@@ -290,8 +290,8 @@ public class TimeoutNode {
 	 * @param value allowed object is {@link OneTimeoutNode }
 	 * 
 	 */
-	public void setHardwareDied(OneTimeoutNode value) {
-		this.hardwareDied = value;
+	public void setHardwareDied(final OneTimeoutNode value) {
+		hardwareDied = value;
 	}
 
 	/**
@@ -310,8 +310,8 @@ public class TimeoutNode {
 	 * @param value allowed object is {@link OneTimeoutNode }
 	 * 
 	 */
-	public void setPortListen(OneTimeoutNode value) {
-		this.portListen = value;
+	public void setPortListen(final OneTimeoutNode value) {
+		portListen = value;
 	}
 
 }

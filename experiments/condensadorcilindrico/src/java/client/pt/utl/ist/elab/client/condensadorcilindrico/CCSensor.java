@@ -28,15 +28,19 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 
 public class CCSensor extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
-	private BufferedImage imgTube1 = new BufferedImage(290, 30, BufferedImage.TYPE_INT_ARGB);
-	private BufferedImage imgPiston = new BufferedImage(50, 28, BufferedImage.TYPE_INT_ARGB);
-	private Icon icon = new javax.swing.ImageIcon(getClass().getResource(
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6917080658128401814L;
+	private final BufferedImage imgTube1 = new BufferedImage(290, 30, BufferedImage.TYPE_INT_ARGB);
+	private final BufferedImage imgPiston = new BufferedImage(50, 28, BufferedImage.TYPE_INT_ARGB);
+	private final Icon icon = new javax.swing.ImageIcon(getClass().getResource(
 			"/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
 
 	private double freq = 500;
-	private double SOUND_VEL = 345;
+	private final double SOUND_VEL = 345;
 
-	private java.text.DecimalFormat df = new java.text.DecimalFormat();
+	private final java.text.DecimalFormat df = new java.text.DecimalFormat();
 
 	/** Creates new form CCSensor */
 	public CCSensor() {
@@ -78,11 +82,11 @@ public class CCSensor extends javax.swing.JPanel implements com.linkare.rec.impl
 	double L = 1450;
 	private boolean expStarted = false;
 
-	private void setCPos(int cpos) {
+	private void setCPos(final int cpos) {
 		if (cpos > 1450) {
-			this.L = 1450;
+			L = 1450;
 		} else {
-			this.L = cpos;
+			L = cpos;
 		}
 
 		this.cpos = Math.abs(cpos - 1480) / 10;
@@ -91,28 +95,29 @@ public class CCSensor extends javax.swing.JPanel implements com.linkare.rec.impl
 
 	private boolean tubeOpened = false;
 
-	public void paint(Graphics g) {
+	@Override
+	public void paint(final Graphics g) {
 		super.paint(g);
 
-		Graphics2D g2D = (Graphics2D) g;
+		final Graphics2D g2D = (Graphics2D) g;
 
-		int imgWidth = (int) getBounds().getWidth();
-		int imgHeight = (int) getBounds().getHeight();
-		int x_start = imgWidth / 2 - imgTube1.getWidth() / 2;
-		int y_start = imgHeight / 2 - imgTube1.getHeight() / 2;
+		final int imgWidth = (int) getBounds().getWidth();
+		final int imgHeight = (int) getBounds().getHeight();
+		final int x_start = imgWidth / 2 - imgTube1.getWidth() / 2;
+		final int y_start = imgHeight / 2 - imgTube1.getHeight() / 2;
 
-		int x2_start = x_start - imgPiston.getWidth() - 6 + cpos * 2;
-		int y2_start = imgHeight / 2 - imgTube1.getHeight() / 2 + 2;
+		final int x2_start = x_start - imgPiston.getWidth() - 6 + cpos * 2;
+		final int y2_start = imgHeight / 2 - imgTube1.getHeight() / 2 + 2;
 
 		if (!expStarted) {
 			return;
 		}
 
-		int cY = 0;
+		final int cY = 0;
 
-		Color yel = Color.yellow;
+		final Color yel = Color.yellow;
 
-		Color bgColor = new Color(yel.getRed(), yel.getGreen(), yel.getBlue(), 80);
+		final Color bgColor = new Color(yel.getRed(), yel.getGreen(), yel.getBlue(), 80);
 
 		g2D.setColor(bgColor);
 
@@ -120,7 +125,7 @@ public class CCSensor extends javax.swing.JPanel implements com.linkare.rec.impl
 			tubeOpened = true;
 			g2D.fillRect(x_start, y_start, imgTube1.getWidth(), imgTube1.getHeight());
 		} else {
-			int length = x_start + imgTube1.getWidth() - (x2_start + imgPiston.getWidth());
+			final int length = x_start + imgTube1.getWidth() - (x2_start + imgPiston.getWidth());
 			g2D.fillRect(x2_start + imgPiston.getWidth(), y_start, length, imgTube1.getHeight());
 			tubeOpened = false;
 		}
@@ -183,10 +188,10 @@ public class CCSensor extends javax.swing.JPanel implements com.linkare.rec.impl
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	// End of variables declaration//GEN-END:variables
 
-	public static void main(String args[]) {
-		CCSensor sss = new CCSensor();
+	public static void main(final String args[]) {
+		final CCSensor sss = new CCSensor();
 		sss.expStarted = true;
-		javax.swing.JFrame jf = new javax.swing.JFrame();
+		final javax.swing.JFrame jf = new javax.swing.JFrame();
 		jf.getContentPane().add(sss);
 		jf.pack();
 		jf.show();
@@ -204,8 +209,9 @@ public class CCSensor extends javax.swing.JPanel implements com.linkare.rec.impl
 
 		for (int i = 50; i < 2000; i += 20) {
 			try {
-				Thread.currentThread().sleep(500);
-			} catch (InterruptedException ie) {
+				Thread.currentThread();
+				Thread.sleep(500);
+			} catch (final InterruptedException ie) {
 				ie.printStackTrace();
 			}
 
@@ -214,78 +220,94 @@ public class CCSensor extends javax.swing.JPanel implements com.linkare.rec.impl
 		}
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public Icon getIcon() {
 		return icon;
 	}
 
 	private ExpDataModel model = null;
 
-	public void setExpDataModel(ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
+		if (this.model != null) {
 			this.model.removeExpDataModelListener(this);
+		}
 		this.model = model;
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 
 	}
 
 	public void dataModelRunning() {
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
-	public void headerAvailable(HardwareAcquisitionConfig header) {
+	public void headerAvailable(final HardwareAcquisitionConfig header) {
 		expStarted = true;
 
 		this.header = header;
 	}
 
 	private HardwareAcquisitionConfig header = null;
-	private boolean acqHeaderInited = false;
+	private final boolean acqHeaderInited = false;
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
 			if (model.getValueAt(i, 0) != null) {
 				setCPos(model.getValueAt(i, 0).getValueNumber().intValue());
 			}
 			if (model.getValueAt(i, 1) != null) {
-				this.freq = model.getValueAt(i, 1).getValueNumber().doubleValue();
+				freq = model.getValueAt(i, 1).getValueNumber().doubleValue();
 			}
 			repaint();
 		}
 	}
 
+	@Override
 	public String getName() {
 		return "Sensor";
 	}
 
+	@Override
 	public JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public JToolBar getToolBar() {
 		return null;
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public void dataModelStarted() {
-		if (model != null)
+		if (model != null) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 

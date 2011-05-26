@@ -21,6 +21,11 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  */
 public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2543082818312358187L;
+
 	/** Creates new form FlowChartDisplay */
 	public FlowChartDisplay() {
 		initComponents();
@@ -54,7 +59,8 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 		setLayout(new java.awt.BorderLayout());
 
 		addComponentListener(new java.awt.event.ComponentAdapter() {
-			public void componentResized(java.awt.event.ComponentEvent evt) {
+			@Override
+			public void componentResized(final java.awt.event.ComponentEvent evt) {
 				formComponentResized(evt);
 			}
 		});
@@ -70,15 +76,15 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 
 	}// GEN-END:initComponents
 
-	private void formComponentResized(java.awt.event.ComponentEvent evt) {// GEN-FIRST:event_formComponentResized
-		jScrollPaneIVPWM.setPreferredSize(new java.awt.Dimension(this.getWidth() / 2, this.getHeight()));
+	private void formComponentResized(final java.awt.event.ComponentEvent evt) {// GEN-FIRST:event_formComponentResized
+		jScrollPaneIVPWM.setPreferredSize(new java.awt.Dimension(getWidth() / 2, getHeight()));
 	}// GEN-LAST:event_formComponentResized
 
 	private boolean isViewIVPWM = false;
 
-	private void jButtonIVPWMMousePressed(java.awt.event.MouseEvent evt) {
+	private void jButtonIVPWMMousePressed(final java.awt.event.MouseEvent evt) {
 		if (!isViewIVPWM) {
-			jScrollPaneIVPWM.setPreferredSize(new java.awt.Dimension(this.getWidth() / 2, this.getHeight()));
+			jScrollPaneIVPWM.setPreferredSize(new java.awt.Dimension(getWidth() / 2, getHeight()));
 			add(jScrollPaneIVPWM, java.awt.BorderLayout.EAST);
 			isViewIVPWM = true;
 			revalidate();
@@ -89,33 +95,39 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 		}
 	}
 
-	private void jButtonIVPWMMouseEntered(java.awt.event.MouseEvent evt) {
+	private void jButtonIVPWMMouseEntered(final java.awt.event.MouseEvent evt) {
 	}
 
-	private void jButtonIVPWMMouseExited(java.awt.event.MouseEvent evt) {
+	private void jButtonIVPWMMouseExited(final java.awt.event.MouseEvent evt) {
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.Icon getIcon() {
 		return icon;
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
 
-	public void setExpDataModel(ExpDataModel expModel) {
+	@Override
+	public void setExpDataModel(final ExpDataModel expModel) {
 		if (this.expModel != null) {
 			expModel.removeExpDataModelListener(this);
 		}
@@ -130,10 +142,11 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 	public void dataModelRunning() {
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
-	public void headerAvailable(HardwareAcquisitionConfig header) {
+	public void headerAvailable(final HardwareAcquisitionConfig header) {
 		flow = header.getSelectedHardwareParameters(0).getParameterValue();
 		if (flow == null) {
 			return;
@@ -141,11 +154,11 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 		isFlowValid = true;
 		endedRowCol = false;// for treatData()!
 		counter = 0;// for treatData()!
-		int lineSeparator = (int) System.getProperty("line.separator").charAt(0);
+		final int lineSeparator = System.getProperty("line.separator").charAt(0);
 		StringBuffer sb;
 		sb = new StringBuffer(200);
 		for (int i = 0; i < flow.length(); i++) {
-			char charToApp = flow.charAt(i);
+			final char charToApp = flow.charAt(i);
 			sb.append(charToApp);
 			if (charToApp == lineSeparator) {
 				treatData(sb.toString().trim());
@@ -165,11 +178,12 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 
 	int lastIVPWMcol = 3;
 
-	public void newSamples(NewExpDataEvent evt) {
-		int lastSample = evt.getSamplesEndIndex();
-		int IVPWMcol = expModel.getValueAt(lastSample, 20).getValue().getIntValue();
-		int row = expModel.getValueAt(lastSample, 21).getValue().getIntValue();
-		int col = expModel.getValueAt(lastSample, 22).getValue().getIntValue();
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
+		final int lastSample = evt.getSamplesEndIndex();
+		final int IVPWMcol = expModel.getValueAt(lastSample, 20).getValue().getIntValue();
+		final int row = expModel.getValueAt(lastSample, 21).getValue().getIntValue();
+		final int col = expModel.getValueAt(lastSample, 22).getValue().getIntValue();
 		if (finishedPaint) {
 			highlightBlocks(row, col, IVPWMcol);
 		}
@@ -178,16 +192,17 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 	int currentIVPWMcol = 0;
 	boolean finishedPaint = true;
 
-	private void highlightBlocks(int row, int col, int iCol) {
+	private void highlightBlocks(final int row, final int col, final int iCol) {
 		currentRow = row;
 		currentCol = col;
 		if (lastIVPWMcol != iCol) {
 			currentIVPWMcol = iCol;
 			javax.swing.SwingUtilities.invokeLater(new Runnable() {
+				@Override
 				public void run() {
 					finishedPaint = false;
 					jPanelIVPWM.repaint();
-					java.awt.Rectangle rect = new java.awt.Rectangle(currentIVPWMcol * COL_WIDTH, 0, jPanelIVPWM
+					final java.awt.Rectangle rect = new java.awt.Rectangle(currentIVPWMcol * COL_WIDTH, 0, jPanelIVPWM
 							.getVisibleRect().width, jPanelIVPWM.getHeight());
 					jPanelIVPWM.scrollRectToVisible(rect);
 					jPanelIVPWM.revalidate();
@@ -327,11 +342,11 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 	/**
 	 * Checks if in the matrix at the position (rowXcol), there is a HorLine
 	 */
-	private boolean isHorLine(int row, int col) {
+	private boolean isHorLine(final int row, final int col) {
 		if (matrix[row][col] == null) {
 			return false;
-		} else if (matrix[row][col].getClass().getName().startsWith(
-				"pt.utl.ist.elab.client.webrobot.customizer.Comps.HorLine")) {
+		} else if (matrix[row][col].getClass().getName()
+				.startsWith("pt.utl.ist.elab.client.webrobot.customizer.Comps.HorLine")) {
 			return true;
 		} else {
 			return false;
@@ -342,8 +357,8 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 	 * Creates a new block based on the tpye and making a copy of the model of
 	 * the component, that is to be copied
 	 */
-	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Block createNewBlock(int tipo,
-			pt.utl.ist.elab.client.webrobot.customizer.Models.ModelBlock model) {
+	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Block createNewBlock(final int tipo,
+			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelBlock model) {
 		if (tipo == 1) {
 			compInt = new pt.utl.ist.elab.client.webrobot.customizer.Comps.CompInt(
 					(pt.utl.ist.elab.client.webrobot.customizer.Models.ModelCompInt) model);
@@ -377,7 +392,7 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 					(pt.utl.ist.elab.client.webrobot.customizer.Models.ModelPWM) model);
 			return pwm;
 		} else if (tipo == 14) {
-			ivpwm = new pt.utl.ist.elab.client.webrobot.customizer.Comps.IVPWM(modelIVPWM);
+			ivpwm = new pt.utl.ist.elab.client.webrobot.customizer.Comps.IVPWM(FlowChartDisplay.modelIVPWM);
 			return ivpwm;
 		} else if (tipo == 3) {
 			frente = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Frente(
@@ -403,7 +418,7 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 	 * Treats the data: creates new components, and new models with the data
 	 * from the file! The method is very obvious but long...
 	 */
-	private void treatData(String data) {
+	private void treatData(final String data) {
 		int coluna = 0;
 		int nivel = 0;
 		int tipo = 0;
@@ -429,7 +444,7 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 			return;
 		}
 		if (!endedRowCol) {
-			java.util.StringTokenizer st = new java.util.StringTokenizer(data, ",");
+			final java.util.StringTokenizer st = new java.util.StringTokenizer(data, ",");
 			while (st.hasMoreTokens()) {
 				try {
 					coluna = Integer.parseInt(st.nextToken().trim().substring("coluna=".length()));
@@ -450,13 +465,13 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 					valor = Integer.parseInt(st.nextToken().trim().substring("valor=".length()));
 					valor2 = Integer.parseInt(st.nextToken().trim().substring("valor2=".length()));
 					temp = st.nextToken().trim();
-					java.util.StringTokenizer st2 = new java.util.StringTokenizer(temp);
+					final java.util.StringTokenizer st2 = new java.util.StringTokenizer(temp);
 					while (st2.hasMoreTokens()) {
 						flag = Integer.parseInt(st2.nextToken().trim().substring("flag=".length()));
 						baixo = st2.nextToken().trim().substring("baixo=".length());
 					}
 					temp2 = st.nextToken().trim();
-					java.util.StringTokenizer st3 = new java.util.StringTokenizer(temp2);
+					final java.util.StringTokenizer st3 = new java.util.StringTokenizer(temp2);
 					if (st3.countTokens() == 1) {
 						esquerda = st3.nextToken().trim().substring("esquerda=".length());
 					} else {
@@ -494,15 +509,18 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 					matrix[nivel][coluna].revalidate();
 					if (tipo == 14) {
 						comp.addMouseListener(new java.awt.event.MouseAdapter() {
-							public void mouseExited(java.awt.event.MouseEvent evt) {
+							@Override
+							public void mouseExited(final java.awt.event.MouseEvent evt) {
 								jButtonIVPWMMouseExited(evt);
 							}
 
-							public void mouseEntered(java.awt.event.MouseEvent evt) {
+							@Override
+							public void mouseEntered(final java.awt.event.MouseEvent evt) {
 								jButtonIVPWMMouseEntered(evt);
 							}
 
-							public void mousePressed(java.awt.event.MouseEvent evt) {
+							@Override
+							public void mousePressed(final java.awt.event.MouseEvent evt) {
 								jButtonIVPWMMousePressed(evt);
 							}
 						});
@@ -515,7 +533,7 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 						maxRow = nivel;
 					}
 					return;
-				} catch (java.lang.NumberFormatException nfe) {
+				} catch (final java.lang.NumberFormatException nfe) {
 					javax.swing.JOptionPane.showMessageDialog(this, "Aten��o!\nO diagrama enviado n�o � v�lido!",
 							"Erro!", javax.swing.JOptionPane.ERROR_MESSAGE);
 					isFlowValid = false;
@@ -534,19 +552,19 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 			return;
 		} else if (counter == 4) {
 			try {
-				java.util.StringTokenizer st4 = new java.util.StringTokenizer(data);
-				modelConfInOut.setB0(Integer.parseInt(st4.nextToken()));
-				modelConfInOut.setB1(Integer.parseInt(st4.nextToken()));
-				modelConfInOut.setB2(Integer.parseInt(st4.nextToken()));
-				modelConfInOut.setB3(Integer.parseInt(st4.nextToken()));
-				modelConfInOut.setB4(Integer.parseInt(st4.nextToken()));
-				modelConfInOut.setB5(Integer.parseInt(st4.nextToken()));
-				modelConfInOut.setB6(Integer.parseInt(st4.nextToken()));
-				modelConfInOut.setB7(Integer.parseInt(st4.nextToken()));
-				modelConfInOut.setC0(Integer.parseInt(st4.nextToken()));
-				modelConfInOut.setC3(Integer.parseInt(st4.nextToken()));
+				final java.util.StringTokenizer st4 = new java.util.StringTokenizer(data);
+				FlowChartDisplay.modelConfInOut.setB0(Integer.parseInt(st4.nextToken()));
+				FlowChartDisplay.modelConfInOut.setB1(Integer.parseInt(st4.nextToken()));
+				FlowChartDisplay.modelConfInOut.setB2(Integer.parseInt(st4.nextToken()));
+				FlowChartDisplay.modelConfInOut.setB3(Integer.parseInt(st4.nextToken()));
+				FlowChartDisplay.modelConfInOut.setB4(Integer.parseInt(st4.nextToken()));
+				FlowChartDisplay.modelConfInOut.setB5(Integer.parseInt(st4.nextToken()));
+				FlowChartDisplay.modelConfInOut.setB6(Integer.parseInt(st4.nextToken()));
+				FlowChartDisplay.modelConfInOut.setB7(Integer.parseInt(st4.nextToken()));
+				FlowChartDisplay.modelConfInOut.setC0(Integer.parseInt(st4.nextToken()));
+				FlowChartDisplay.modelConfInOut.setC3(Integer.parseInt(st4.nextToken()));
 				return;
-			} catch (java.lang.NumberFormatException nfe) {
+			} catch (final java.lang.NumberFormatException nfe) {
 				javax.swing.JOptionPane.showMessageDialog(this, "Aten��o!\nEste ficheiro n�o � v�lido!", "Erro!",
 						javax.swing.JOptionPane.ERROR_MESSAGE);
 				isFlowValid = false;
@@ -554,14 +572,14 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 			}
 		} else if (counter == 5) {
 			try {
-				java.util.StringTokenizer st5 = new java.util.StringTokenizer(data);
-				modelConfInOut.setA1(Integer.parseInt(st5.nextToken()));
-				modelConfInOut.setA2(Integer.parseInt(st5.nextToken()));
-				modelConfInOut.setA3(Integer.parseInt(st5.nextToken()));
-				modelConfInOut.setA4(Integer.parseInt(st5.nextToken()));
-				String dummyVar = st5.nextToken();
+				final java.util.StringTokenizer st5 = new java.util.StringTokenizer(data);
+				FlowChartDisplay.modelConfInOut.setA1(Integer.parseInt(st5.nextToken()));
+				FlowChartDisplay.modelConfInOut.setA2(Integer.parseInt(st5.nextToken()));
+				FlowChartDisplay.modelConfInOut.setA3(Integer.parseInt(st5.nextToken()));
+				FlowChartDisplay.modelConfInOut.setA4(Integer.parseInt(st5.nextToken()));
+				final String dummyVar = st5.nextToken();
 				return;
-			} catch (java.lang.NumberFormatException nfe) {
+			} catch (final java.lang.NumberFormatException nfe) {
 				javax.swing.JOptionPane.showMessageDialog(this, "Aten��o!\nEste ficheiro n�o � v�lido!", "Erro!",
 						javax.swing.JOptionPane.ERROR_MESSAGE);
 				isFlowValid = false;
@@ -569,13 +587,13 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 			}
 		} else if (counter == 6) {
 			try {
-				java.util.StringTokenizer st6 = new java.util.StringTokenizer(data);
-				modelConfInOut.setV1(Integer.parseInt(st6.nextToken()));
-				modelConfInOut.setV2(Integer.parseInt(st6.nextToken()));
-				modelConfInOut.setV3(Integer.parseInt(st6.nextToken()));
-				modelConfInOut.setV4(Integer.parseInt(st6.nextToken()));
-				modelConfInOut.setV5(Integer.parseInt(st6.nextToken()));
-			} catch (java.lang.NumberFormatException nfe) {
+				final java.util.StringTokenizer st6 = new java.util.StringTokenizer(data);
+				FlowChartDisplay.modelConfInOut.setV1(Integer.parseInt(st6.nextToken()));
+				FlowChartDisplay.modelConfInOut.setV2(Integer.parseInt(st6.nextToken()));
+				FlowChartDisplay.modelConfInOut.setV3(Integer.parseInt(st6.nextToken()));
+				FlowChartDisplay.modelConfInOut.setV4(Integer.parseInt(st6.nextToken()));
+				FlowChartDisplay.modelConfInOut.setV5(Integer.parseInt(st6.nextToken()));
+			} catch (final java.lang.NumberFormatException nfe) {
 				javax.swing.JOptionPane.showMessageDialog(this, "Aten��o!\nEste ficheiro n�o � v�lido!", "Erro!",
 						javax.swing.JOptionPane.ERROR_MESSAGE);
 				isFlowValid = false;
@@ -590,7 +608,7 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 			return;
 		}
 		if (counter2 < iValuesSize) {
-			java.util.StringTokenizer st = new java.util.StringTokenizer(data, "\t");
+			final java.util.StringTokenizer st = new java.util.StringTokenizer(data, "\t");
 			iValues[counter2][0] = st.nextToken();
 			iValues[counter2][1] = new Integer(st.nextToken().trim());
 			iValues[counter2][2] = new Integer(st.nextToken().trim());
@@ -598,39 +616,39 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 			counter = 7;
 			return;
 		}
-		modelIVPWM.setIValues(iValues);
+		FlowChartDisplay.modelIVPWM.setIValues(iValues);
 		if (counter == 8) {
-			java.util.StringTokenizer st2 = new java.util.StringTokenizer(data);
-			modelIVPWM.setI0Value(Integer.parseInt(st2.nextToken().trim()));
-			modelIVPWM.setI1Value(Integer.parseInt(st2.nextToken().trim()));
-			modelIVPWM.setI2Value(Integer.parseInt(st2.nextToken().trim()));
-			modelIVPWM.setI3Value(Integer.parseInt(st2.nextToken().trim()));
-			modelIVPWM.setI4Value(Integer.parseInt(st2.nextToken().trim()));
-			modelIVPWM.setI5Value(Integer.parseInt(st2.nextToken().trim()));
-			modelIVPWM.setI6Value(Integer.parseInt(st2.nextToken().trim()));
-			modelIVPWM.setI7Value(Integer.parseInt(st2.nextToken().trim()));
+			final java.util.StringTokenizer st2 = new java.util.StringTokenizer(data);
+			FlowChartDisplay.modelIVPWM.setI0Value(Integer.parseInt(st2.nextToken().trim()));
+			FlowChartDisplay.modelIVPWM.setI1Value(Integer.parseInt(st2.nextToken().trim()));
+			FlowChartDisplay.modelIVPWM.setI2Value(Integer.parseInt(st2.nextToken().trim()));
+			FlowChartDisplay.modelIVPWM.setI3Value(Integer.parseInt(st2.nextToken().trim()));
+			FlowChartDisplay.modelIVPWM.setI4Value(Integer.parseInt(st2.nextToken().trim()));
+			FlowChartDisplay.modelIVPWM.setI5Value(Integer.parseInt(st2.nextToken().trim()));
+			FlowChartDisplay.modelIVPWM.setI6Value(Integer.parseInt(st2.nextToken().trim()));
+			FlowChartDisplay.modelIVPWM.setI7Value(Integer.parseInt(st2.nextToken().trim()));
 			return;
 		}
 		if (counter == 9) {
-			java.util.StringTokenizer st3 = new java.util.StringTokenizer(data);
-			modelIVPWM.setI0State(Integer.parseInt(st3.nextToken().trim()));
-			modelIVPWM.setI1State(Integer.parseInt(st3.nextToken().trim()));
-			modelIVPWM.setI2State(Integer.parseInt(st3.nextToken().trim()));
-			modelIVPWM.setI3State(Integer.parseInt(st3.nextToken().trim()));
-			modelIVPWM.setI4State(Integer.parseInt(st3.nextToken().trim()));
-			modelIVPWM.setI5State(Integer.parseInt(st3.nextToken().trim()));
-			modelIVPWM.setI6State(Integer.parseInt(st3.nextToken().trim()));
-			modelIVPWM.setI7State(Integer.parseInt(st3.nextToken().trim()));
+			final java.util.StringTokenizer st3 = new java.util.StringTokenizer(data);
+			FlowChartDisplay.modelIVPWM.setI0State(Integer.parseInt(st3.nextToken().trim()));
+			FlowChartDisplay.modelIVPWM.setI1State(Integer.parseInt(st3.nextToken().trim()));
+			FlowChartDisplay.modelIVPWM.setI2State(Integer.parseInt(st3.nextToken().trim()));
+			FlowChartDisplay.modelIVPWM.setI3State(Integer.parseInt(st3.nextToken().trim()));
+			FlowChartDisplay.modelIVPWM.setI4State(Integer.parseInt(st3.nextToken().trim()));
+			FlowChartDisplay.modelIVPWM.setI5State(Integer.parseInt(st3.nextToken().trim()));
+			FlowChartDisplay.modelIVPWM.setI6State(Integer.parseInt(st3.nextToken().trim()));
+			FlowChartDisplay.modelIVPWM.setI7State(Integer.parseInt(st3.nextToken().trim()));
 		}
 		/**
 		 * The ivpwm share all the same model...update the model, so it can read
 		 * the right values....if the user selects to edit or to create a new
 		 * one
 		 */
-		ivpwm = new pt.utl.ist.elab.client.webrobot.customizer.Comps.IVPWM(modelIVPWM);
+		ivpwm = new pt.utl.ist.elab.client.webrobot.customizer.Comps.IVPWM(FlowChartDisplay.modelIVPWM);
 	}
 
-	private pt.utl.ist.elab.client.webrobot.customizer.Models.ModelBlock getModel(int tipo) {
+	private pt.utl.ist.elab.client.webrobot.customizer.Models.ModelBlock getModel(final int tipo) {
 		if (tipo == 1) {
 			modelCompInt = new pt.utl.ist.elab.client.webrobot.customizer.Models.ModelCompInt();
 			return modelCompInt;
@@ -668,7 +686,7 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 			modelCompAndBin = new pt.utl.ist.elab.client.webrobot.customizer.Models.ModelCompAndBin();
 			return modelCompAndBin;
 		} else if (tipo == 14) {
-			return modelIVPWM;
+			return FlowChartDisplay.modelIVPWM;
 		}
 		return null;
 	}
@@ -680,16 +698,16 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 	/**
 	 * This method creates the ivpwm matrix! It is zero index based!
 	 */
-	private void createIVPWMatrix(Object[][] iValues) {
+	private void createIVPWMatrix(final Object[][] iValues) {
 		if (iValues == null) {
 			return;
 		}
 		/**
 		 * How big will be this matrix?
 		 */
-		int numRowsIValue = iValues.length;
+		final int numRowsIValue = iValues.length;
 		int iRowIVPWM = 0;
-		int numCols = countRealColumns();
+		final int numCols = countRealColumns();
 		rowMaxIVPWM = numCols + 1;
 		colMaxIVPWM = numRowsIValue;
 		String d2;
@@ -702,76 +720,84 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 		 */
 		for (int iRow = 0; iRow < numRowsIValue; iRow++) {
 			iRowIVPWM = 0;
-			if (modelIVPWM.getI0State() == 0) {
+			if (FlowChartDisplay.modelIVPWM.getI0State() == 0) {
 				if (Integer.parseInt(iValues[iRow][0].toString().substring(7, 8)) == 0) {
 					d2 = ">";
 				} else {
 					d2 = "<";
 				}
-				matrixIVPWM[iRowIVPWM][iRow] = createIVPWMBlock(12, "I0", d2, modelIVPWM.getI0Value(), 0);
+				matrixIVPWM[iRowIVPWM][iRow] = createIVPWMBlock(12, "I0", d2, FlowChartDisplay.modelIVPWM.getI0Value(),
+						0);
 				iRowIVPWM++;
 			}
-			if (modelIVPWM.getI1State() == 0) {
+			if (FlowChartDisplay.modelIVPWM.getI1State() == 0) {
 				if (Integer.parseInt(iValues[iRow][0].toString().substring(6, 7)) == 0) {
 					d2 = ">";
 				} else {
 					d2 = "<";
 				}
-				matrixIVPWM[iRowIVPWM][iRow] = createIVPWMBlock(12, "I1", d2, modelIVPWM.getI1Value(), 0);
+				matrixIVPWM[iRowIVPWM][iRow] = createIVPWMBlock(12, "I1", d2, FlowChartDisplay.modelIVPWM.getI1Value(),
+						0);
 				iRowIVPWM++;
 			}
-			if (modelIVPWM.getI2State() == 0) {
+			if (FlowChartDisplay.modelIVPWM.getI2State() == 0) {
 				if (Integer.parseInt(iValues[iRow][0].toString().substring(5, 6)) == 0) {
 					d2 = ">";
 				} else {
 					d2 = "<";
 				}
-				matrixIVPWM[iRowIVPWM][iRow] = createIVPWMBlock(12, "I2", d2, modelIVPWM.getI2Value(), 0);
+				matrixIVPWM[iRowIVPWM][iRow] = createIVPWMBlock(12, "I2", d2, FlowChartDisplay.modelIVPWM.getI2Value(),
+						0);
 				iRowIVPWM++;
 			}
-			if (modelIVPWM.getI3State() == 0) {
+			if (FlowChartDisplay.modelIVPWM.getI3State() == 0) {
 				if (Integer.parseInt(iValues[iRow][0].toString().substring(4, 5)) == 0) {
 					d2 = ">";
 				} else {
 					d2 = "<";
 				}
-				matrixIVPWM[iRowIVPWM][iRow] = createIVPWMBlock(12, "I3", d2, modelIVPWM.getI3Value(), 0);
+				matrixIVPWM[iRowIVPWM][iRow] = createIVPWMBlock(12, "I3", d2, FlowChartDisplay.modelIVPWM.getI3Value(),
+						0);
 				iRowIVPWM++;
 			}
-			if (modelIVPWM.getI4State() == 0) {
+			if (FlowChartDisplay.modelIVPWM.getI4State() == 0) {
 				if (Integer.parseInt(iValues[iRow][0].toString().substring(3, 4)) == 0) {
 					d2 = ">";
 				} else {
 					d2 = "<";
 				}
-				matrixIVPWM[iRowIVPWM][iRow] = createIVPWMBlock(12, "I4", d2, modelIVPWM.getI4Value(), 0);
+				matrixIVPWM[iRowIVPWM][iRow] = createIVPWMBlock(12, "I4", d2, FlowChartDisplay.modelIVPWM.getI4Value(),
+						0);
 				iRowIVPWM++;
 			}
-			if (modelIVPWM.getI5State() == 0) {
+			if (FlowChartDisplay.modelIVPWM.getI5State() == 0) {
 				if (Integer.parseInt(iValues[iRow][0].toString().substring(2, 3)) == 0) {
 					d2 = ">";
 				} else {
 					d2 = "<";
 				}
-				matrixIVPWM[iRowIVPWM][iRow] = createIVPWMBlock(12, "I5", d2, modelIVPWM.getI5Value(), 0);
+				matrixIVPWM[iRowIVPWM][iRow] = createIVPWMBlock(12, "I5", d2, FlowChartDisplay.modelIVPWM.getI5Value(),
+						0);
 				iRowIVPWM++;
 			}
-			if (modelIVPWM.getI6State() == 0) {
+			if (FlowChartDisplay.modelIVPWM.getI6State() == 0) {
 				if (Integer.parseInt(iValues[iRow][0].toString().substring(1, 2)) == 0) {
 					d2 = ">";
 				} else {
 					d2 = "<";
 				}
-				matrixIVPWM[iRowIVPWM][iRow] = createIVPWMBlock(12, "I6", d2, modelIVPWM.getI6Value(), 0);
+				matrixIVPWM[iRowIVPWM][iRow] = createIVPWMBlock(12, "I6", d2, FlowChartDisplay.modelIVPWM.getI6Value(),
+						0);
 				iRowIVPWM++;
 			}
-			if (modelIVPWM.getI7State() == 0) {
+			if (FlowChartDisplay.modelIVPWM.getI7State() == 0) {
 				if (Integer.parseInt(iValues[iRow][0].toString().substring(0, 1)) == 0) {
 					d2 = ">";
 				} else {
 					d2 = "<";
 				}
-				matrixIVPWM[iRowIVPWM][iRow] = createIVPWMBlock(12, "I7", d2, modelIVPWM.getI7Value(), 0);
+				matrixIVPWM[iRowIVPWM][iRow] = createIVPWMBlock(12, "I7", d2, FlowChartDisplay.modelIVPWM.getI7Value(),
+						0);
 				iRowIVPWM++;
 			}
 			/**
@@ -779,8 +805,8 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 			 * the robot the pwm values if all the conditions above it were
 			 * satisfied
 			 */
-			int valor = Integer.parseInt(iValues[iRow][1].toString());
-			int valor2 = Integer.parseInt(iValues[iRow][2].toString());
+			final int valor = Integer.parseInt(iValues[iRow][1].toString());
+			final int valor2 = Integer.parseInt(iValues[iRow][2].toString());
 			matrixIVPWM[iRowIVPWM][iRow] = createIVPWMBlock(8, "", "", valor, valor2);
 		}
 	}
@@ -791,35 +817,35 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 	 */
 	private int countRealColumns() {
 		int total = 0;
-		if (modelIVPWM.getI0State() == 0) {
+		if (FlowChartDisplay.modelIVPWM.getI0State() == 0) {
 			total++;
 		}
-		if (modelIVPWM.getI1State() == 0) {
+		if (FlowChartDisplay.modelIVPWM.getI1State() == 0) {
 			total++;
 		}
-		if (modelIVPWM.getI2State() == 0) {
+		if (FlowChartDisplay.modelIVPWM.getI2State() == 0) {
 			total++;
 		}
-		if (modelIVPWM.getI3State() == 0) {
+		if (FlowChartDisplay.modelIVPWM.getI3State() == 0) {
 			total++;
 		}
-		if (modelIVPWM.getI4State() == 0) {
+		if (FlowChartDisplay.modelIVPWM.getI4State() == 0) {
 			total++;
 		}
-		if (modelIVPWM.getI5State() == 0) {
+		if (FlowChartDisplay.modelIVPWM.getI5State() == 0) {
 			total++;
 		}
-		if (modelIVPWM.getI6State() == 0) {
+		if (FlowChartDisplay.modelIVPWM.getI6State() == 0) {
 			total++;
 		}
-		if (modelIVPWM.getI7State() == 0) {
+		if (FlowChartDisplay.modelIVPWM.getI7State() == 0) {
 			total++;
 		}
 		return total;
 	}
 
-	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Block createIVPWMBlock(int tipo, String d1, String d2,
-			int valor, int valor2) {
+	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Block createIVPWMBlock(final int tipo, final String d1,
+			final String d2, final int valor, final int valor2) {
 		pt.utl.ist.elab.client.webrobot.customizer.Models.ModelBlock model;
 		pt.utl.ist.elab.client.webrobot.customizer.Comps.Block comp;
 		model = getModel(tipo);
@@ -853,8 +879,9 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 				}
 				if (matrixIVPWM[row][col].getTipo() == 12) {
 					matrixIVPWM[row][col].setPaintBottom(true);
-					if (matrixIVPWM[row + 1][col] != null && matrixIVPWM[row + 1][col].getTipo() == 12)
+					if (matrixIVPWM[row + 1][col] != null && matrixIVPWM[row + 1][col].getTipo() == 12) {
 						matrixIVPWM[row][col].setAnotherAnd(true);
+					}
 					matrixIVPWM[row][col].revalidate();
 				}
 			}
@@ -862,34 +889,44 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 		jPanelIVPWM.revalidate();
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 		headerAvailable(expModel.getAcquisitionConfig());
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
 	class JPanelIVPWM extends javax.swing.JPanel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -6837998997279366155L;
 		public java.awt.Color darkBlue = java.awt.Color.blue.darker();
-		public java.awt.Color highlightColor = new java.awt.Color(darkBlue.getRed(), darkBlue.getGreen(), darkBlue
-				.getBlue(), 80);
-		public java.awt.Color transparent = new java.awt.Color(java.awt.Color.black.getRed(), java.awt.Color.black
-				.getGreen(), java.awt.Color.black.getBlue(), 0);
+		public java.awt.Color highlightColor = new java.awt.Color(darkBlue.getRed(), darkBlue.getGreen(),
+				darkBlue.getBlue(), 80);
+		public java.awt.Color transparent = new java.awt.Color(java.awt.Color.black.getRed(),
+				java.awt.Color.black.getGreen(), java.awt.Color.black.getBlue(), 0);
 
-		public void paint(java.awt.Graphics g) {
-			int xi = currentIVPWMcol * COL_WIDTH;
-			int yi = 0;
-			int yf = rowMaxIVPWM * COL_HEIGHT;
-			int xoldi = lastIVPWMcol * COL_WIDTH;
+		@Override
+		public void paint(final java.awt.Graphics g) {
+			final int xi = currentIVPWMcol * COL_WIDTH;
+			final int yi = 0;
+			final int yf = rowMaxIVPWM * COL_HEIGHT;
+			final int xoldi = lastIVPWMcol * COL_WIDTH;
 			super.paint(g);
 			g.setColor(transparent);
 			g.fillRect(xoldi, yi, COL_WIDTH, yf);
@@ -900,13 +937,18 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 	}
 
 	class JPanelContainer extends javax.swing.JPanel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1395032219683988728L;
 		public java.awt.Color darkBlue = java.awt.Color.blue.darker();
-		public java.awt.Color highlightColor = new java.awt.Color(darkBlue.getRed(), darkBlue.getGreen(), darkBlue
-				.getBlue(), 80);
-		public java.awt.Color transparent = new java.awt.Color(java.awt.Color.black.getRed(), java.awt.Color.black
-				.getGreen(), java.awt.Color.black.getBlue(), 0);
+		public java.awt.Color highlightColor = new java.awt.Color(darkBlue.getRed(), darkBlue.getGreen(),
+				darkBlue.getBlue(), 80);
+		public java.awt.Color transparent = new java.awt.Color(java.awt.Color.black.getRed(),
+				java.awt.Color.black.getGreen(), java.awt.Color.black.getBlue(), 0);
 
-		public void paint(java.awt.Graphics g) {
+		@Override
+		public void paint(final java.awt.Graphics g) {
 			super.paint(g);
 			g.setColor(transparent);
 			g.fillRect(0, 0, maxColumn * COL_WIDTH, maxRow * COL_HEIGHT);
@@ -936,14 +978,14 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 	private javax.swing.JScrollPane jScrollPaneIVPWM;
 	private javax.swing.JPanel jPanelContainer;
 	// End of variables declaration//GEN-END:variables
-	private int row = 1;
-	private int column = 1;
+	private final int row = 1;
+	private final int column = 1;
 	private int maxRow = 1;
 	private int maxColumn = 1;
-	private int COL_WIDTH = 77;
-	private int COL_HEIGHT = 45;
-	private int MAX_COLUMNS = 1000;
-	private int MAX_ROWS = 1000;
+	private final int COL_WIDTH = 77;
+	private final int COL_HEIGHT = 45;
+	private final int MAX_COLUMNS = 1000;
+	private final int MAX_ROWS = 1000;
 	private int counter;
 	private int counter2 = 0;
 	private int iValuesSize = 0;
@@ -953,12 +995,12 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 	private int currentCol = 1;
 	private boolean endedRowCol;
 	private ExpDataModel model;
-	private javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/displays/resources/Flow16.gif"));
-	private String name = "Diagrama de estados";
+	private final String name = "Diagrama de estados";
 	private String flow;
-	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] matrix = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[MAX_ROWS][MAX_COLUMNS];
-	private String[][] matrixWiring = new String[MAX_ROWS][MAX_COLUMNS];
+	private final pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] matrix = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[MAX_ROWS][MAX_COLUMNS];
+	private final String[][] matrixWiring = new String[MAX_ROWS][MAX_COLUMNS];
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] matrixIVPWM;
 	private Object iValues[][];
 
@@ -985,7 +1027,7 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.SetReset setReset;
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.PWM pwm;
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.IVPWM ivpwm = new pt.utl.ist.elab.client.webrobot.customizer.Comps.IVPWM(
-			modelIVPWM);
+			FlowChartDisplay.modelIVPWM);
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Frente frente;
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.MarchAtras marchAtras;
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Direita direita;
@@ -993,7 +1035,7 @@ public class FlowChartDisplay extends javax.swing.JPanel implements ExpDataDispl
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.HorLine horLine;
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.IntroMethod introMethod;
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.SubBlock subBlock;
-	private javax.swing.JButton jButtonProgStart;
+	private final javax.swing.JButton jButtonProgStart;
 	private boolean isFlowValid;
 	private boolean isFlowing;
 

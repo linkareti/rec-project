@@ -27,10 +27,14 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6700734317441548008L;
 	private InteractiveBalancaTorcao balanca;
-	private Circle luzCol;
-	private DrawingPanel reg;
-	private double[] consts = new double[] { 0, 0, 0 }; // c,k,g
+	private final Circle luzCol;
+	private final DrawingPanel reg;
+	private final double[] consts = new double[] { 0, 0, 0 }; // c,k,g
 
 	/** Creates new form CGCustomizer */
 	public CGCustomizer() {
@@ -51,9 +55,8 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		reg = new DrawingPanel();
 		reg.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
 				"cg$rec.exp.customizer.balanca.title.14", "Target")));
-		reg.setToolTipText(ReCResourceBundle
-				.findStringOrDefault("cg$rec.exp.customizer.balanca.tip.14", "Target"));
-		XAxis norm = new XAxis("dm");
+		reg.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.balanca.tip.14", "Target"));
+		final XAxis norm = new XAxis("dm");
 		reg.addDrawable(norm);
 		reg.setMinimumSize(new java.awt.Dimension(150, 100));
 		reg.setPreferredSize(new java.awt.Dimension(150, 100));
@@ -71,10 +74,11 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		gridBagConstraints.weighty = 0;
 		add(reg, gridBagConstraints);
 
-		java.util.Hashtable htK = new java.util.Hashtable(9);
+		final java.util.Hashtable htK = new java.util.Hashtable(9);
 		htK.put(new Integer(-89), new javax.swing.JLabel("" + (-89)));
-		for (int i = -70; i <= 70; i += 20)
+		for (int i = -70; i <= 70; i += 20) {
 			htK.put(new Integer(i), new javax.swing.JLabel("" + i));
+		}
 		htK.put(new Integer(89), new javax.swing.JLabel("" + 89));
 		angInitSlider.setLabelTable(htK);
 	}
@@ -85,28 +89,28 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		dSlider.setValue((int) Math.round(balanca.getD()));
 		lSlider.setValue((int) Math.round(balanca.getL() / 10));
 
-		double[] masses = balanca.getMasses();
+		final double[] masses = balanca.getMasses();
 
-		mm0Label.setText("[" + trimDecimalN(Math.round(masses[0] * 1e3) * 1e-3, 3) + "]");
-		mm1Label.setText("[" + trimDecimalN(Math.round(masses[1] * 1e3) * 1e-3, 3) + "]");
-		mM0Label.setText("[" + trimDecimalN(Math.round(masses[2] * 1e3) * 1e-3, 3) + "]");
-		mM1Label.setText("[" + trimDecimalN(Math.round(masses[3] * 1e3) * 1e-3, 3) + "]");
+		mm0Label.setText("[" + CGCustomizer.trimDecimalN(Math.round(masses[0] * 1e3) * 1e-3, 3) + "]");
+		mm1Label.setText("[" + CGCustomizer.trimDecimalN(Math.round(masses[1] * 1e3) * 1e-3, 3) + "]");
+		mM0Label.setText("[" + CGCustomizer.trimDecimalN(Math.round(masses[2] * 1e3) * 1e-3, 3) + "]");
+		mM1Label.setText("[" + CGCustomizer.trimDecimalN(Math.round(masses[3] * 1e3) * 1e-3, 3) + "]");
 
 		updateRegua();
 	}
 
-	public static String trimDecimalN(double val, int n) {
-		String str = Double.toString(val);
+	public static String trimDecimalN(final double val, final int n) {
+		final String str = Double.toString(val);
 		String str1;
 		String str2 = "";
 		try {
 			str1 = str.substring(0, str.indexOf(".") + n + 1);
-		} catch (StringIndexOutOfBoundsException e) {
+		} catch (final StringIndexOutOfBoundsException e) {
 			str1 = str;
 		}
 		try {
 			str2 = str.substring(str.indexOf("E"), str.length());
-		} catch (StringIndexOutOfBoundsException e) {
+		} catch (final StringIndexOutOfBoundsException e) {
 		}
 
 		return str1.concat(str2);
@@ -184,8 +188,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		expPanel.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
 				"cg$rec.exp.customizer.title.1", "Experiment")));
-		expPanel.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.1",
-				"Experiment Goal"));
+		expPanel.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.1", "Experiment Goal"));
 		expPanel.setMinimumSize(new java.awt.Dimension(250, 50));
 		expPanel.setPreferredSize(new java.awt.Dimension(250, 50));
 		expCRadioButton.setText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.title.2",
@@ -194,7 +197,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 				"Fiber Torsion Constant"));
 		expButtonGroup.add(expCRadioButton);
 		expCRadioButton.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				expCRadioButtonStateChanged(evt);
 			}
 		});
@@ -223,23 +226,21 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 				"Constants nature"));
 		constPanel.setMinimumSize(new java.awt.Dimension(250, 50));
 		constPanel.setPreferredSize(new java.awt.Dimension(250, 50));
-		randConstRadioButton.setText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.title.5",
-				"Random"));
+		randConstRadioButton.setText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.title.5", "Random"));
 		randConstRadioButton.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.5",
 				"Variable constants"));
 		constsButtonGroup.add(randConstRadioButton);
 		constPanel.add(randConstRadioButton, new java.awt.GridBagConstraints());
 
 		realConstRadioButton.setSelected(true);
-		realConstRadioButton.setText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.title.6",
-				"Real"));
+		realConstRadioButton.setText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.title.6", "Real"));
 		realConstRadioButton.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.6",
 				"Real value constants"));
 		constsButtonGroup.add(realConstRadioButton);
 		constPanel.add(realConstRadioButton, new java.awt.GridBagConstraints());
 
-		sameConstRadioButton.setText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.title.13",
-				"The same"));
+		sameConstRadioButton.setText(ReCResourceBundle
+				.findStringOrDefault("cg$rec.exp.customizer.title.13", "The same"));
 		sameConstRadioButton.setToolTipText(ReCResourceBundle.findStringOrDefault("rec.exp.customizer.tip.13",
 				"The same constants used in the last simulation"));
 		constsButtonGroup.add(sameConstRadioButton);
@@ -270,12 +271,12 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		angInitSlider.setValue(0);
 		angInitSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		angInitSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				angInitSliderStateChanged(evt);
 			}
 		});
 		angInitSlider.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-			public void mouseDragged(java.awt.event.MouseEvent evt) {
+			public void mouseDragged(final java.awt.event.MouseEvent evt) {
 				angInitSliderMouseDragged(evt);
 			}
 		});
@@ -292,7 +293,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		angInitTextField.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.7",
 				"Initial Angle (degrees)"));
 		angInitTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				angInitTextFieldFocusLost(evt);
 			}
 		});
@@ -330,12 +331,12 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 				"Distance between the axis and the target"));
 		lSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		lSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				lSliderStateChanged(evt);
 			}
 		});
 		lSlider.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-			public void mouseDragged(java.awt.event.MouseEvent evt) {
+			public void mouseDragged(final java.awt.event.MouseEvent evt) {
 				lSliderMouseDragged(evt);
 			}
 		});
@@ -352,7 +353,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 				"Distance between the axis and the target"));
 		lTextField.setPreferredSize(new java.awt.Dimension(43, 20));
 		lTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				lTextFieldFocusLost(evt);
 			}
 		});
@@ -378,12 +379,12 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		s0Slider.setValue(465);
 		s0Slider.setPreferredSize(new java.awt.Dimension(36, 24));
 		s0Slider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				s0SliderStateChanged(evt);
 			}
 		});
 		s0Slider.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-			public void mouseDragged(java.awt.event.MouseEvent evt) {
+			public void mouseDragged(final java.awt.event.MouseEvent evt) {
 				s0SliderMouseDragged(evt);
 			}
 		});
@@ -400,7 +401,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 				"Distance between the bigger and the smaller spheres"));
 		s0TextField.setPreferredSize(new java.awt.Dimension(43, 20));
 		s0TextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				s0TextFieldFocusLost(evt);
 			}
 		});
@@ -424,12 +425,12 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 				"Half the bar's size"));
 		dSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		dSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				dSliderStateChanged(evt);
 			}
 		});
 		dSlider.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-			public void mouseDragged(java.awt.event.MouseEvent evt) {
+			public void mouseDragged(final java.awt.event.MouseEvent evt) {
 				dSliderMouseDragged(evt);
 			}
 		});
@@ -446,7 +447,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 				"Half the bar's size"));
 		dTextField.setPreferredSize(new java.awt.Dimension(43, 20));
 		dTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				dTextFieldFocusLost(evt);
 			}
 		});
@@ -508,19 +509,18 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		okButton.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.ok",
 				"Run the simulation"));
 		okButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				okButtonActionPerformed(evt);
 			}
 		});
 
 		controlBtnPanel.add(okButton);
 
-		cancelButton.setText(ReCResourceBundle
-				.findStringOrDefault("cg$rec.exp.customizer.title.cancel", "Cancel"));
+		cancelButton.setText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.title.cancel", "Cancel"));
 		cancelButton.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.cancel",
 				"Cancel the experiment"));
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				cancelButtonActionPerformed(evt);
 			}
 		});
@@ -532,12 +532,12 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		gridBagConstraints.weightx = 1.0;
 		btnPanel.add(controlBtnPanel, gridBagConstraints);
 
-		defaultButton.setText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.title.dfc",
-				"Default config"));
+		defaultButton.setText(ReCResourceBundle
+				.findStringOrDefault("cg$rec.exp.customizer.title.dfc", "Default config"));
 		defaultButton.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.dfc",
 				"Load the default parameters of the experiment"));
 		defaultButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				defaultButtonActionPerformed(evt);
 			}
 		});
@@ -573,7 +573,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 				"Time between samples"));
 		tbsSlider.setValue(100);
 		tbsSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				tbsSliderStateChanged(evt);
 			}
 		});
@@ -590,7 +590,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		tbsTextField.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpMM$rec.exp.customizer.tip.tbs",
 				"Time between samples"));
 		tbsTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				tbsTextFieldFocusLost(evt);
 			}
 		});
@@ -626,7 +626,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 				"Number of samples"));
 		samplesSlider.setValue(100);
 		samplesSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				samplesSliderStateChanged(evt);
 			}
 		});
@@ -643,7 +643,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		samplesTextField.setToolTipText(ReCResourceBundle.findStringOrDefault(
 				"ReCExpMM$rec.exp.customizer.tip.samples", "Number of samples"));
 		samplesTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				samplesTextFieldFocusLost(evt);
 			}
 		});
@@ -666,75 +666,76 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 	}// GEN-END:initComponents
 
-	private void s0SliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_s0SliderStateChanged
+	private void s0SliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_s0SliderStateChanged
 		s0TextField.setText("" + s0Slider.getValue());
 	}// GEN-LAST:event_s0SliderStateChanged
 
-	private void s0SliderMouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_s0SliderMouseDragged
+	private void s0SliderMouseDragged(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_s0SliderMouseDragged
 		balanca.updateS0(s0Slider.getValue() * .1);
 	}// GEN-LAST:event_s0SliderMouseDragged
 
-	private void lSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_lSliderStateChanged
+	private void lSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_lSliderStateChanged
 		lTextField.setText("" + lSlider.getValue());
 	}// GEN-LAST:event_lSliderStateChanged
 
-	private void dSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_dSliderStateChanged
+	private void dSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_dSliderStateChanged
 		dTextField.setText("" + dSlider.getValue());
 	}// GEN-LAST:event_dSliderStateChanged
 
-	private void dSliderMouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_dSliderMouseDragged
+	private void dSliderMouseDragged(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_dSliderMouseDragged
 		balanca.updateD(dSlider.getValue());
 	}// GEN-LAST:event_dSliderMouseDragged
 
-	private void lSliderMouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lSliderMouseDragged
+	private void lSliderMouseDragged(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lSliderMouseDragged
 		balanca.updateL(lSlider.getValue() * 10);
 		updateRegua();
 	}// GEN-LAST:event_lSliderMouseDragged
 
-	private void angInitTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_angInitTextFieldFocusLost
-		double val = validateInput(angInitTextField, angInitSlider, 1);
-		if (val != -1)
+	private void angInitTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_angInitTextFieldFocusLost
+		final double val = CGCustomizer.validateInput(angInitTextField, angInitSlider, 1);
+		if (val != -1) {
 			balanca.updatePosAngle(val * Math.PI / 180);
+		}
 	}// GEN-LAST:event_angInitTextFieldFocusLost
 
-	private void samplesTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_samplesTextFieldFocusLost
-		validateInput(samplesTextField, samplesSlider, 0);
+	private void samplesTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_samplesTextFieldFocusLost
+		CGCustomizer.validateInput(samplesTextField, samplesSlider, 0);
 	}// GEN-LAST:event_samplesTextFieldFocusLost
 
-	private void tbsTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_tbsTextFieldFocusLost
-		validateInput(tbsTextField, tbsSlider, 0);
+	private void tbsTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_tbsTextFieldFocusLost
+		CGCustomizer.validateInput(tbsTextField, tbsSlider, 0);
 	}// GEN-LAST:event_tbsTextFieldFocusLost
 
-	private void angInitSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_angInitSliderStateChanged
+	private void angInitSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_angInitSliderStateChanged
 		angInitTextField.setText("" + angInitSlider.getValue());
 	}// GEN-LAST:event_angInitSliderStateChanged
 
-	private void samplesSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_samplesSliderStateChanged
+	private void samplesSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_samplesSliderStateChanged
 		samplesTextField.setText("" + samplesSlider.getValue());
 	}// GEN-LAST:event_samplesSliderStateChanged
 
-	private void tbsSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_tbsSliderStateChanged
+	private void tbsSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_tbsSliderStateChanged
 		tbsTextField.setText("" + tbsSlider.getValue());
 	}// GEN-LAST:event_tbsSliderStateChanged
 
-	private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
+	private void cancelButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_cancelButtonActionPerformed
 
-	private double parseMass(String mass) {
+	private double parseMass(final String mass) {
 		return Double.parseDouble(mass.substring(1, mass.length() - 1));
 	}
 
-	private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
+	private void okButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
 		acqConfig.setTotalSamples(samplesSlider.getValue());
 
 		acqConfig.setSelectedFrequency(new Frequency((double) tbsSlider.getValue(), hardwareInfo
 				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
 				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
 
-		double d = dSlider.getValue() / 1000d;
-		double[] mm = new double[] { parseMass(mm0Label.getText()), parseMass(mm1Label.getText()) };
-		double[] mM = new double[] { parseMass(mM0Label.getText()), parseMass(mM1Label.getText()) };
+		final double d = dSlider.getValue() / 1000d;
+		final double[] mm = new double[] { parseMass(mm0Label.getText()), parseMass(mm1Label.getText()) };
+		final double[] mM = new double[] { parseMass(mM0Label.getText()), parseMass(mM1Label.getText()) };
 
 		acqConfig.getSelectedHardwareParameter("expGType").setParameterValue(
 				"" + (expGRadioButton.isSelected() ? 1 : 0));
@@ -749,8 +750,8 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		acqConfig.getSelectedHardwareParameter("targetSize").setParameterValue("" + (int) balanca.getReguaSize());
 
 		if (!sameConstRadioButton.isSelected()) {
-			double i = (mm[0] + mm[1]) * d * d + 2 * Math.pow(d - 6.6e-3, 3) * Math.pow(1.25e-3, 2) * Math.PI * 2700
-					/ 3 + 2 * Math.pow(6.6e-3, 2) * (mm[0] + mm[1]) / 5;
+			final double i = (mm[0] + mm[1]) * d * d + 2 * Math.pow(d - 6.6e-3, 3) * Math.pow(1.25e-3, 2) * Math.PI
+					* 2700 / 3 + 2 * Math.pow(6.6e-3, 2) * (mm[0] + mm[1]) / 5;
 
 			consts[0] = 8.263e-9;
 			consts[1] = 9.3e-4 * 2 * i;
@@ -766,14 +767,15 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		acqConfig.getSelectedHardwareParameter("k").setParameterValue("" + (float) consts[1]);
 		acqConfig.getSelectedHardwareParameter("g").setParameterValue("" + (float) consts[2]);
 
-		for (int i = 0; i < acqConfig.getSelectedHardwareParameters().length; i++)
+		for (int i = 0; i < acqConfig.getSelectedHardwareParameters().length; i++) {
 			System.out.println(acqConfig.getSelectedHardwareParameters(i).getParameterName() + " = "
 					+ acqConfig.getSelectedHardwareParameters(i).getParameterValue());
+		}
 
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_okButtonActionPerformed
 
-	private void defaultButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_defaultButtonActionPerformed
+	private void defaultButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_defaultButtonActionPerformed
 		balanca.config(0, 500, 46.5, 50, 100);
 		balanca.setMasses(new double[] { .015, .015, 1.5, 1.5 });
 		expGRadioButton.setSelected(true);
@@ -781,58 +783,64 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		update();
 	}// GEN-LAST:event_defaultButtonActionPerformed
 
-	public static double validateInput(javax.swing.JTextField textField, javax.swing.JSlider slider, double multiplier) {
+	public static double validateInput(final javax.swing.JTextField textField, final javax.swing.JSlider slider,
+			final double multiplier) {
 		try {
 			int val = (int) Math.round(Math.abs(Double.parseDouble(textField.getText())));
 
-			if (val > slider.getMaximum())
+			if (val > slider.getMaximum()) {
 				val = slider.getMaximum();
-			else if (val < slider.getMinimum())
+			} else if (val < slider.getMinimum()) {
 				val = slider.getMinimum();
+			}
 
 			textField.setText(Integer.toString(val));
 			slider.setValue(val);
 			return val * multiplier;
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			textField.setText(Integer.toString(slider.getValue()));
 			return -1;
 		}
 	}
 
-	private void dTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_dTextFieldFocusLost
-		double val = validateInput(dTextField, dSlider, 1);
-		if (val != -1)
+	private void dTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_dTextFieldFocusLost
+		final double val = CGCustomizer.validateInput(dTextField, dSlider, 1);
+		if (val != -1) {
 			balanca.updateD(val);
+		}
 	}// GEN-LAST:event_dTextFieldFocusLost
 
-	private void lTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_lTextFieldFocusLost
-		double val = validateInput(lTextField, lSlider, 10);
-		if (val != -1)
+	private void lTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_lTextFieldFocusLost
+		final double val = CGCustomizer.validateInput(lTextField, lSlider, 10);
+		if (val != -1) {
 			balanca.updateL(val);
+		}
 	}// GEN-LAST:event_lTextFieldFocusLost
 
-	private void s0TextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_s0TextFieldFocusLost
-		double val = validateInput(s0TextField, s0Slider, .1);
-		if (val != -1)
+	private void s0TextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_s0TextFieldFocusLost
+		final double val = CGCustomizer.validateInput(s0TextField, s0Slider, .1);
+		if (val != -1) {
 			balanca.updateS0(val);
+		}
 	}// GEN-LAST:event_s0TextFieldFocusLost
 
-	private void expCRadioButtonStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_expCRadioButtonStateChanged
-		if (expCRadioButton.isSelected())
+	private void expCRadioButtonStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_expCRadioButtonStateChanged
+		if (expCRadioButton.isSelected()) {
 			balanca.cMode();
-		else
+		} else {
 			balanca.gMode();
+		}
 	}// GEN-LAST:event_expCRadioButtonStateChanged
 
-	private void angInitSliderMouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_angInitSliderMouseDragged
+	private void angInitSliderMouseDragged(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_angInitSliderMouseDragged
 		balanca.updatePosAngle(angInitSlider.getValue() * Math.PI / 180);
 		updateRegua();
 	}// GEN-LAST:event_angInitSliderMouseDragged
 
-	public static void main(String args[]) {
-		javax.swing.JFrame test = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame test = new javax.swing.JFrame();
 		test.addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent e) {
+			public void windowClosing(final java.awt.event.WindowEvent e) {
 				System.exit(0);
 			};
 		});
@@ -851,7 +859,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -863,7 +871,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -873,9 +881,10 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -889,9 +898,10 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -907,23 +917,23 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		return acqConfig;
 	}
 
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
 			// boolean expGType =
 			// Boolean.getBoolean(acqConfig.getSelectedHardwareParameterValue("expGType"));
-			boolean expGType = acqConfig.getSelectedHardwareParameterValue("expGType").trim().equals("1") ? true
+			final boolean expGType = acqConfig.getSelectedHardwareParameterValue("expGType").trim().equals("1") ? true
 					: false;
 
-			int angInit = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("angInit"));
-			int l = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("l"));
-			float s0 = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("s0"));
-			float d = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("d"));
-			float mm0 = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("mm0"));
-			float mm1 = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("mm1"));
-			float mM0 = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("mM0"));
-			float mM1 = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("mM1"));
-			int targetSize = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("targetSize"));
+			final int angInit = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("angInit"));
+			final int l = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("l"));
+			final float s0 = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("s0"));
+			final float d = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("d"));
+			final float mm0 = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("mm0"));
+			final float mm1 = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("mm1"));
+			final float mM0 = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("mM0"));
+			final float mM1 = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("mM1"));
+			final int targetSize = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("targetSize"));
 
 			expCRadioButton.setSelected(expGType);
 
@@ -937,12 +947,12 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
 	public javax.swing.JComponent getCustomizerComponent() {

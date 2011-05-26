@@ -32,18 +32,18 @@ public abstract class AbstractDisplayFactory implements DisplayFactory {
 	}
 
 	@Override
-	public void init(List<Display> displays) {
+	public void init(final List<Display> displays) {
 		this.displays = displays;
 	}
 
 	@Override
-	public void setAcquisitionConfig(HardwareAcquisitionConfig hconfig) {
-		this.hardwareAcquisitionConfig = hconfig;
+	public void setAcquisitionConfig(final HardwareAcquisitionConfig hconfig) {
+		hardwareAcquisitionConfig = hconfig;
 	}
 
 	@Override
-	public void setAcquisitionInfo(HardwareInfo hinfo) {
-		this.hardwareInfo = hinfo;
+	public void setAcquisitionInfo(final HardwareInfo hinfo) {
+		hardwareInfo = hinfo;
 	}
 
 }

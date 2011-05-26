@@ -41,12 +41,12 @@ public class DataClientForQueue implements QueueLogger {
 	private DefaultUser defaultUser = null;
 	private IResource resource = null;
 
-	public DataClientForQueue(IResource resource, DataClient dc, IDataClientForQueueListener dataClientForQueueListener)
-			throws NotAuthorized {
+	public DataClientForQueue(final IResource resource, final DataClient dc,
+			final IDataClientForQueueListener dataClientForQueueListener) throws NotAuthorized {
 		this.resource = resource;
 
 		setDataClientForQueueListener(dataClientForQueueListener);
-		this.dcw = new DataClientWrapper(dc);
+		dcw = new DataClientWrapper(dc);
 
 		if (!dcw.isConnected()) {
 			log(Level.SEVERE, "Error getting username in DataClientForQueue - Throwing not authorized...");
@@ -78,18 +78,22 @@ public class DataClientForQueue implements QueueLogger {
 		return getUserInfo().getUserName();
 	}
 
+	@Override
 	public String toString() {
 		return "Proxy Client " + getUserName();
 	}
 
-	public boolean equals(Object obj) {
-		if (!(obj instanceof DataClientForQueue))
+	@Override
+	public boolean equals(final Object obj) {
+		if (!(obj instanceof DataClientForQueue)) {
 			return false;
+		}
 
-		DataClientForQueue other = (DataClientForQueue) obj;
+		final DataClientForQueue other = (DataClientForQueue) obj;
 
-		if (other.dcw != null && other.dcw.isSameDelegate(dcw))
+		if (other.dcw != null && other.dcw.isSameDelegate(dcw)) {
 			return true;
+		}
 
 		return false;
 	}
@@ -104,6 +108,7 @@ public class DataClientForQueue implements QueueLogger {
 		// otherwise we would block because the queue is waiting for a join to
 		// it's dispatching Thread...
 		(new Thread() {
+			@Override
 			public void run() {
 				setName(getName() + " - DataClientForQueue - shutdown");
 				shutdown();
@@ -114,8 +119,9 @@ public class DataClientForQueue implements QueueLogger {
 	private boolean shutDown = false;
 
 	public synchronized void shutdown() {
-		if (shutDown)
+		if (shutDown) {
 			return;
+		}
 		shutDown = true;
 		log(Level.INFO, "client " + getUserName() + " - Shutting down!");
 		log(Level.INFO, "client " + getUserName() + " - shutting down message queue!");
@@ -131,13 +137,14 @@ public class DataClientForQueue implements QueueLogger {
 		return shutDown;
 	}
 
-	public boolean sameUser(DataClientForQueue dcfqother) {
+	public boolean sameUser(final DataClientForQueue dcfqother) {
 		return sameUser(dcfqother.getUserInfo());
 	}
 
-	public boolean sameUser(UserInfo userInfo) {
-		if (userInfo != null && userInfo.equals(getUserInfo()))
+	public boolean sameUser(final UserInfo userInfo) {
+		if (userInfo != null && userInfo.equals(getUserInfo())) {
 			return true;
+		}
 
 		return false;
 	}
@@ -154,15 +161,15 @@ public class DataClientForQueue implements QueueLogger {
 		messageQueue.addEvent(new HardwareChangeEvent());
 	}
 
-	public void hardwareLockable(HardwareLockEvent evt) {
+	public void hardwareLockable(final HardwareLockEvent evt) {
 		messageQueue.addEvent(evt);
 	}
 
-	public void hardwareStateChange(HardwareStateChangeEvent evt) {
+	public void hardwareStateChange(final HardwareStateChangeEvent evt) {
 		messageQueue.addEvent(evt);
 	}
 
-	public void receiveMessage(ChatMessageEvent evt) {
+	public void receiveMessage(final ChatMessageEvent evt) {
 		if (evt.getUserTo() == null || evt.getUserTo().getUserName() == null
 				|| evt.getUserTo().getUserName().equals(getUserName())) {
 			messageQueue.addEvent(evt);
@@ -201,8 +208,9 @@ public class DataClientForQueue implements QueueLogger {
 	}
 
 	public DefaultUser getAsDefaultUser() {
-		if (defaultUser == null)
+		if (defaultUser == null) {
 			defaultUser = new DefaultUser(userInfo);
+		}
 
 		return defaultUser;
 	}
@@ -213,7 +221,7 @@ public class DataClientForQueue implements QueueLogger {
 	 * @param userInfo New value of property userInfo.
 	 * 
 	 */
-	public void setUserInfo(UserInfo userInfo) {
+	public void setUserInfo(final UserInfo userInfo) {
 		this.userInfo = userInfo;
 	}
 
@@ -235,13 +243,14 @@ public class DataClientForQueue implements QueueLogger {
 	 * 
 	 */
 	public void setDataClientForQueueListener(
-			com.linkare.rec.impl.multicast.IDataClientForQueueListener dataClientForQueueListener) {
+			final com.linkare.rec.impl.multicast.IDataClientForQueueListener dataClientForQueueListener) {
 		this.dataClientForQueueListener = dataClientForQueueListener;
 	}
 
 	private class DataClientQueueDispatcher implements EventQueueDispatcher {
 
-		public void dispatchEvent(Object o) {
+		@Override
+		public void dispatchEvent(final Object o) {
 			// Connection check
 			if (!dcw.isConnected()) {
 				shutdownAsSoonAsPossible();
@@ -250,7 +259,7 @@ public class DataClientForQueue implements QueueLogger {
 
 			try {
 				if (o instanceof HardwareStateChangeEvent) {
-					HardwareStateChangeEvent evt = (HardwareStateChangeEvent) o;
+					final HardwareStateChangeEvent evt = (HardwareStateChangeEvent) o;
 					log(Level.FINE, "Dispatching hardware state [" + evt.getNewState() + "]");
 					dcw.hardwareStateChange(evt.getNewState());
 				}
@@ -258,16 +267,15 @@ public class DataClientForQueue implements QueueLogger {
 					dcw.hardwareChange();
 				}
 				if (o instanceof ChatMessageEvent) {
-					ChatMessageEvent evt = (ChatMessageEvent) o;
-					if (evt.getUserFrom() == null || evt.getUserTo() == null)
+					final ChatMessageEvent evt = (ChatMessageEvent) o;
+					if (evt.getUserFrom() == null || evt.getUserTo() == null) {
 						return;
+					}
 
-					dcw
-							.receiveMessage(evt.getUserFrom().getUserName(), evt.getUserTo().getUserName(), evt
-									.getMessage());
+					dcw.receiveMessage(evt.getUserFrom().getUserName(), evt.getUserTo().getUserName(), evt.getMessage());
 				}
 				if (o instanceof HardwareLockEvent) {
-					HardwareLockEvent evt = (HardwareLockEvent) o;
+					final HardwareLockEvent evt = (HardwareLockEvent) o;
 					// aqui o evento de HardwareLock que esta na Queue e
 					// desmultiplicado
 					// para true CORBA way
@@ -277,7 +285,7 @@ public class DataClientForQueue implements QueueLogger {
 					evt.startCountDown();
 				}
 
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				logThrowable("Oooppss.. client gone? - Error dispatching event to client! Why? Gone?", e);
 				if (!isConnected()) {
 					shutdownAsSoonAsPossible();
@@ -286,6 +294,7 @@ public class DataClientForQueue implements QueueLogger {
 			}
 		}
 
+		@Override
 		public int getPriority() {
 			return Thread.NORM_PRIORITY;
 		}
@@ -296,7 +305,7 @@ public class DataClientForQueue implements QueueLogger {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void log(Level debugLevel, String message) {
+	public void log(final Level debugLevel, final String message) {
 		getDataClientForQueueListener().log(debugLevel, message);
 	}
 
@@ -304,7 +313,7 @@ public class DataClientForQueue implements QueueLogger {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void logThrowable(String message, Throwable t) {
+	public void logThrowable(final String message, final Throwable t) {
 		getDataClientForQueueListener().logThrowable(message, t);
 	}
 

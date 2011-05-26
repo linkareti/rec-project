@@ -32,9 +32,9 @@ public class CypressFinder {
 	private static String CYPRESS_FINDER_LOGGER = "CypressFinder.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(CYPRESS_FINDER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(CypressFinder.CYPRESS_FINDER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(CYPRESS_FINDER_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(CypressFinder.CYPRESS_FINDER_LOGGER));
 		}
 	}
 
@@ -64,7 +64,7 @@ public class CypressFinder {
 		return inputChannelNumber;
 	}
 
-	public void setInputChannelNumber(byte inputChannelNumber) {
+	public void setInputChannelNumber(final byte inputChannelNumber) {
 		this.inputChannelNumber = inputChannelNumber;
 	}
 
@@ -72,7 +72,7 @@ public class CypressFinder {
 		return outputChannelNumber;
 	}
 
-	public void setOutputChannelNumber(byte outputChannelNumber) {
+	public void setOutputChannelNumber(final byte outputChannelNumber) {
 		this.outputChannelNumber = outputChannelNumber;
 	}
 
@@ -80,7 +80,7 @@ public class CypressFinder {
 		return vendorID;
 	}
 
-	public void setVendorID(short vendorID) {
+	public void setVendorID(final short vendorID) {
 		this.vendorID = vendorID;
 	}
 
@@ -88,7 +88,7 @@ public class CypressFinder {
 		return productID;
 	}
 
-	public void setProductID(short productID) {
+	public void setProductID(final short productID) {
 		this.productID = productID;
 	}
 
@@ -96,7 +96,7 @@ public class CypressFinder {
 		return interfaceNumber;
 	}
 
-	public void setInterfaceNumber(short interfaceNumber) {
+	public void setInterfaceNumber(final short interfaceNumber) {
 		this.interfaceNumber = interfaceNumber;
 	}
 
@@ -104,7 +104,7 @@ public class CypressFinder {
 		return alternateSetting;
 	}
 
-	public void setAlternateSetting(short alternateSetting) {
+	public void setAlternateSetting(final short alternateSetting) {
 		this.alternateSetting = alternateSetting;
 	}
 
@@ -114,7 +114,7 @@ public class CypressFinder {
 	 * @return Value of property CypressIdentifier.
 	 */
 	public String getCypressIdentifier() {
-		return this.cypressIdentifier;
+		return cypressIdentifier;
 	}
 
 	/**
@@ -122,8 +122,8 @@ public class CypressFinder {
 	 * 
 	 * @param CypressIdentifier New value of property CypressIdentifier.
 	 */
-	public void setCypressIdentifier(String CypressIdentifier) {
-		this.cypressIdentifier = cypressIdentifier;
+	public void setCypressIdentifier(final String CypressIdentifier) {
+		cypressIdentifier = cypressIdentifier;
 	}
 
 	/**
@@ -133,7 +133,7 @@ public class CypressFinder {
 	 * 
 	 */
 	public boolean isWaitForEcho() {
-		return this.waitForEcho;
+		return waitForEcho;
 	}
 
 	/**
@@ -142,13 +142,14 @@ public class CypressFinder {
 	 * @param waitForEcho New value of property waitForEcho.
 	 * 
 	 */
-	public void setWaitForEcho(boolean waitForEcho) {
+	public void setWaitForEcho(final boolean waitForEcho) {
 		this.waitForEcho = waitForEcho;
 	}
 
 	public void stopSearch() {
-		if (runner != null)
+		if (runner != null) {
 			runner.stopNow();
+		}
 
 		runner = null;
 	}
@@ -164,7 +165,8 @@ public class CypressFinder {
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addCypressFinderListener(pt.utl.ist.elab.driver.usb.cypress.CypressFinderListener listener) {
+	public synchronized void addCypressFinderListener(
+			final pt.utl.ist.elab.driver.usb.cypress.CypressFinderListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -177,7 +179,7 @@ public class CypressFinder {
 	 * @param listener The listener to remove.
 	 */
 	public synchronized void removeCypressFinderListener(
-			pt.utl.ist.elab.driver.usb.cypress.CypressFinderListener listener) {
+			final pt.utl.ist.elab.driver.usb.cypress.CypressFinderListener listener) {
 		listenerList.remove(pt.utl.ist.elab.driver.usb.cypress.CypressFinderListener.class, listener);
 	}
 
@@ -186,10 +188,11 @@ public class CypressFinder {
 	 * 
 	 * @param event The event to be fired
 	 */
-	private void fireCypressFinderListenerCypressFound(UsbDevice event) {
-		if (listenerList == null)
+	private void fireCypressFinderListenerCypressFound(final UsbDevice event) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == pt.utl.ist.elab.driver.usb.cypress.CypressFinderListener.class) {
 				((pt.utl.ist.elab.driver.usb.cypress.CypressFinderListener) listeners[i + 1]).cypressFound(event);
@@ -215,16 +218,16 @@ public class CypressFinder {
 		 */
 
 		try {
-			java.util.Properties props = UsbHostManager.getProperties();
-			java.util.Enumeration enumer = props.elements();
+			final java.util.Properties props = UsbHostManager.getProperties();
+			final java.util.Enumeration enumer = props.elements();
 			while (enumer.hasMoreElements()) {
 				System.out.println(enumer.nextElement().toString());
 			}
 
 			services = UsbHostManager.getUsbServices();
-		} catch (UsbException uE) {
+		} catch (final UsbException uE) {
 			throw new RuntimeException("Error : " + uE.getMessage());
-		} catch (SecurityException sE) {
+		} catch (final SecurityException sE) {
 			throw new RuntimeException("Error : " + sE.getMessage());
 		}
 
@@ -243,7 +246,7 @@ public class CypressFinder {
 		try {
 			virtualRootUsbHub = services.getRootUsbHub();
 			System.out.println("->" + virtualRootUsbHub.getAttachedUsbDevices().size());
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 		return virtualRootUsbHub;
@@ -257,8 +260,8 @@ public class CypressFinder {
 	 * @param productId The product id to match.
 	 * @param A List of any matching UsbDevice(s).
 	 */
-	private List<UsbDevice> getUsbDevicesWithId(UsbDevice usbDevice, short vendorId, short productId) {
-		List<UsbDevice> list = new ArrayList<UsbDevice>();
+	private List<UsbDevice> getUsbDevicesWithId(final UsbDevice usbDevice, final short vendorId, final short productId) {
+		final List<UsbDevice> list = new ArrayList<UsbDevice>();
 
 		/*
 		 * A device's descriptor is always available. All descriptor field names
@@ -280,14 +283,16 @@ public class CypressFinder {
 		 * See javax.usb.util.UsbUtil.unsignedInt() for some more information.
 		 */
 		if (vendorId == usbDevice.getUsbDeviceDescriptor().idVendor()
-				&& productId == usbDevice.getUsbDeviceDescriptor().idProduct())
+				&& productId == usbDevice.getUsbDeviceDescriptor().idProduct()) {
 			list.add(usbDevice);
+		}
 
 		/* this is just normal recursion. Nothing special. */
 		if (usbDevice.isUsbHub()) {
-			List devices = ((UsbHub) usbDevice).getAttachedUsbDevices();
-			for (int i = 0; i < devices.size(); i++)
+			final List devices = ((UsbHub) usbDevice).getAttachedUsbDevices();
+			for (int i = 0; i < devices.size(); i++) {
 				list.addAll(getUsbDevicesWithId((UsbDevice) devices.get(i), vendorId, productId));
+			}
 		}
 
 		return list;
@@ -296,61 +301,62 @@ public class CypressFinder {
 	private class CypressFinderRunner extends Thread {
 
 		private boolean exit = false;
-		private Thread current = null;
-		private int currentPort = 0;
-		private BaseCypressIO CypressIO = null;
+		private final Thread current = null;
+		private final int currentPort = 0;
+		private final BaseCypressIO CypressIO = null;
 
 		public void stopNow() {
 			exit = true;
 			if (current != null) {
 				try {
 					current.join();
-				} catch (InterruptedException e) {
-					LoggerUtil.logThrowable(null, e, Logger.getLogger(CYPRESS_FINDER_LOGGER));
+				} catch (final InterruptedException e) {
+					LoggerUtil.logThrowable(null, e, Logger.getLogger(CypressFinder.CYPRESS_FINDER_LOGGER));
 				}
 			}
 		}
 
+		@Override
 		public void run() {
 			while (!exit) {
-				Logger.getLogger(CYPRESS_FINDER_LOGGER).log(Level.INFO, "Cycling port...");
+				Logger.getLogger(CypressFinder.CYPRESS_FINDER_LOGGER).log(Level.INFO, "Cycling port...");
 				cycleUSBPorts();
 
 				try {
-					sleep(5000);
-				} catch (Exception ignored) {
+					Thread.sleep(5000);
+				} catch (final Exception ignored) {
 				}
 			}
 		}
 
 		public void cycleUSBPorts() {
-			Logger.getLogger(CYPRESS_FINDER_LOGGER).log(Level.INFO, "Searching for a USBDevice with:");
-			Logger.getLogger(CYPRESS_FINDER_LOGGER).log(Level.INFO,
+			Logger.getLogger(CypressFinder.CYPRESS_FINDER_LOGGER).log(Level.INFO, "Searching for a USBDevice with:");
+			Logger.getLogger(CypressFinder.CYPRESS_FINDER_LOGGER).log(Level.INFO,
 					"staticVendorId = " + vendorID + " and staticProductId = " + productID);
 
-			UsbHub virtualRootUsbHub = getVirtualRootUsbHub();
+			final UsbHub virtualRootUsbHub = getVirtualRootUsbHub();
 
 			List usbDevices = null;
 
 			usbDevices = getUsbDevicesWithId(virtualRootUsbHub, vendorID, productID);
 
-			if (usbDevices != null && usbDevices.size() > 0)
-				Logger.getLogger(CYPRESS_FINDER_LOGGER).log(Level.INFO,
+			if (usbDevices != null && usbDevices.size() > 0) {
+				Logger.getLogger(CypressFinder.CYPRESS_FINDER_LOGGER).log(Level.INFO,
 						"Found " + usbDevices.size() + " device with the requested parameters!");
-			else {
+			} else {
 				System.out.println("Couln't found any device with the requested parameters... returning");
 				return;
 			}
 
 			try {
-				UsbDevice device = (UsbDevice) usbDevices.get(0);
+				final UsbDevice device = (UsbDevice) usbDevices.get(0);
 
 				usbFound = true;
 				exit = true;
 
 				fireCypressFinderListenerCypressFound(device);
-			} catch (Exception e) {
-				Logger.getLogger(CYPRESS_FINDER_LOGGER).log(Level.INFO, e.getMessage());
+			} catch (final Exception e) {
+				Logger.getLogger(CypressFinder.CYPRESS_FINDER_LOGGER).log(Level.INFO, e.getMessage());
 				usbFound = false;
 			}
 		}

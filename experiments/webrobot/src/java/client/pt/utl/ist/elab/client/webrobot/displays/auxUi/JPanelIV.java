@@ -17,6 +17,11 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  */
 public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1165099135144688708L;
+
 	/** Creates new form JPanelIV */
 	public JPanelIV() {
 		initComponents();
@@ -253,7 +258,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	 * @return Value of property IR0.
 	 */
 	public int getIR0() {
-		return this.IR0;
+		return IR0;
 	}
 
 	/**
@@ -261,7 +266,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	 * 
 	 * @param IR0 New value of property IR0.
 	 */
-	public void setIR0(int IR0) {
+	public void setIR0(final int IR0) {
 		this.IR0 = IR0;
 		jProgressBarIR0.setValue(IR0);
 		jProgressBarIR0.setString(new Integer(IR0).toString());
@@ -273,7 +278,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	 * @return Value of property IR1.
 	 */
 	public int getIR1() {
-		return this.IR1;
+		return IR1;
 	}
 
 	/**
@@ -281,7 +286,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	 * 
 	 * @param IR1 New value of property IR1.
 	 */
-	public void setIR1(int IR1) {
+	public void setIR1(final int IR1) {
 		this.IR1 = IR1;
 		jProgressBarIR1.setValue(IR1);
 		jProgressBarIR1.setString(new Integer(IR1).toString());
@@ -293,7 +298,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	 * @return Value of property IR2.
 	 */
 	public int getIR2() {
-		return this.IR2;
+		return IR2;
 	}
 
 	/**
@@ -301,7 +306,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	 * 
 	 * @param IR2 New value of property IR2.
 	 */
-	public void setIR2(int IR2) {
+	public void setIR2(final int IR2) {
 		this.IR2 = IR2;
 		jProgressBarIR2.setValue(IR2);
 		jProgressBarIR2.setString(new Integer(IR2).toString());
@@ -313,7 +318,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	 * @return Value of property IR3.
 	 */
 	public int getIR3() {
-		return this.IR3;
+		return IR3;
 	}
 
 	/**
@@ -321,7 +326,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	 * 
 	 * @param IR3 New value of property IR3.
 	 */
-	public void setIR3(int IR3) {
+	public void setIR3(final int IR3) {
 		this.IR3 = IR3;
 		jProgressBarIR3.setValue(IR3);
 		jProgressBarIR3.setString(new Integer(IR3).toString());
@@ -333,7 +338,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	 * @return Value of property IR4.
 	 */
 	public int getIR4() {
-		return this.IR4;
+		return IR4;
 	}
 
 	/**
@@ -341,7 +346,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	 * 
 	 * @param IR4 New value of property IR4.
 	 */
-	public void setIR4(int IR4) {
+	public void setIR4(final int IR4) {
 		this.IR4 = IR4;
 		jProgressBarIR4.setValue(IR4);
 		jProgressBarIR4.setString(new Integer(IR4).toString());
@@ -353,7 +358,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	 * @return Value of property IR5.
 	 */
 	public int getIR5() {
-		return this.IR5;
+		return IR5;
 	}
 
 	/**
@@ -361,7 +366,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	 * 
 	 * @param IR5 New value of property IR5.
 	 */
-	public void setIR5(int IR5) {
+	public void setIR5(final int IR5) {
 		this.IR5 = IR5;
 		jProgressBarIR5.setValue(IR5);
 		jProgressBarIR5.setString(new Integer(IR5).toString());
@@ -373,7 +378,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	 * @return Value of property IR6.
 	 */
 	public int getIR6() {
-		return this.IR6;
+		return IR6;
 	}
 
 	/**
@@ -381,7 +386,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	 * 
 	 * @param IR6 New value of property IR6.
 	 */
-	public void setIR6(int IR6) {
+	public void setIR6(final int IR6) {
 		this.IR6 = IR6;
 		jProgressBarIR6.setValue(IR6);
 		jProgressBarIR6.setString(new Integer(IR6).toString());
@@ -393,7 +398,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	 * @return Value of property IR7.
 	 */
 	public int getIR7() {
-		return this.IR7;
+		return IR7;
 	}
 
 	/**
@@ -401,7 +406,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	 * 
 	 * @param IR7 New value of property IR7.
 	 */
-	public void setIR7(int IR7) {
+	public void setIR7(final int IR7) {
 		this.IR7 = IR7;
 		jProgressBarIR7.setValue(IR7);
 		jProgressBarIR7.setString(new Integer(IR7).toString());
@@ -410,14 +415,16 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 	public void dataModelRunning() {
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
-	public void headerAvailable(HardwareAcquisitionConfig header) {
+	public void headerAvailable(final HardwareAcquisitionConfig header) {
 	}
 
-	public void newSamples(NewExpDataEvent evt) {
-		int lastSample = evt.getSamplesEndIndex();
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
+		final int lastSample = evt.getSamplesEndIndex();
 		setIR0(model.getValueAt(lastSample, 0).getValue().getIntValue());
 		setIR1(model.getValueAt(lastSample, 1).getValue().getIntValue());
 		setIR2(model.getValueAt(lastSample, 2).getValue().getIntValue());
@@ -428,7 +435,7 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 		setIR7(model.getValueAt(lastSample, 7).getValue().getIntValue());
 	}
 
-	public void setExpDataModel(ExpDataModel model) {
+	public void setExpDataModel(final ExpDataModel model) {
 		if (this.model != null) {
 			model.removeExpDataModelListener(this);
 		}
@@ -440,19 +447,24 @@ public class JPanelIV extends javax.swing.JPanel implements ExpDataModelListener
 		}
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 		headerAvailable(model.getAcquisitionConfig());
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 

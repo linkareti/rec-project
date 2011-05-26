@@ -14,6 +14,11 @@ import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
  */
 public class DataTable extends MultSeriesTable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5197123341109825425L;
+
 	/** Creates a new instance of Data */
 	public DataTable() {
 		super();

@@ -85,7 +85,8 @@ public class OneParameterNode {
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list
 	 * {@link TransferFunctionNode }
-	 * @return 
+	 * 
+	 * @return
 	 * 
 	 * 
 	 */
@@ -93,7 +94,7 @@ public class OneParameterNode {
 		if (transferFunction == null) {
 			transferFunction = new ArrayList<TransferFunctionNode>();
 		}
-		return this.transferFunction;
+		return transferFunction;
 	}
 
 	/**
@@ -112,8 +113,8 @@ public class OneParameterNode {
 	 * @param value allowed object is {@link String }
 	 * 
 	 */
-	public void setInput(String value) {
-		this.input = value;
+	public void setInput(final String value) {
+		input = value;
 	}
 
 	/**
@@ -132,8 +133,8 @@ public class OneParameterNode {
 	 * @param value allowed object is {@link BigInteger }
 	 * 
 	 */
-	public void setMaxvalue(float value) {
-		this.maxvalue = value;
+	public void setMaxvalue(final float value) {
+		maxvalue = value;
 	}
 
 	/**
@@ -152,8 +153,8 @@ public class OneParameterNode {
 	 * @param value allowed object is {@link BigInteger }
 	 * 
 	 */
-	public void setMinvalue(float value) {
-		this.minvalue = value;
+	public void setMinvalue(final float value) {
+		minvalue = value;
 	}
 
 	/**
@@ -172,8 +173,8 @@ public class OneParameterNode {
 	 * @param value allowed object is {@link BigInteger }
 	 * 
 	 */
-	public void setOrder(BigInteger value) {
-		this.order = value;
+	public void setOrder(final BigInteger value) {
+		order = value;
 	}
 
 	/**
@@ -192,59 +193,70 @@ public class OneParameterNode {
 	 * @param value allowed object is {@link String }
 	 * 
 	 */
-	public void setOutput(String value) {
-		this.output = value;
+	public void setOutput(final String value) {
+		output = value;
 	}
 
-	public Double calculate(Double value, TransferFunctionType type) {
+	public Double calculate(final Double value, final TransferFunctionType type) {
 		if (transferFunction == null || transferFunction.isEmpty()) {
 			return value;
 		}
-		
+
 		Double total = 0D;
-		for (TransferFunctionNode node : transferFunction) {
+		for (final TransferFunctionNode node : transferFunction) {
 			if (type.toString().equalsIgnoreCase(node.type)) {
-				for (LinearFunctionNode linear : node.getLinear()) {
-					total = total + pD(linear.getParam().getWeight()) * value - pD(linear.getParam().getCenter());
+				for (final LinearFunctionNode linear : node.getLinear()) {
+					total = total + OneParameterNode.pD(linear.getParam().getWeight()) * value
+							- OneParameterNode.pD(linear.getParam().getCenter());
 				}
-				for (PowerFunctionNode power : node.getPower()) {
-					total = total + pD(power.getParam().getWeight())
-							* Math.pow((value - pD(power.getParam().getCenter())), pD(power.getParam().getPower()));
+				for (final PowerFunctionNode power : node.getPower()) {
+					total = total
+							+ OneParameterNode.pD(power.getParam().getWeight())
+							* Math.pow((value - OneParameterNode.pD(power.getParam().getCenter())),
+									OneParameterNode.pD(power.getParam().getPower()));
 				}
-				for (ExpFunctionNode expon : node.getExponential()) {
-					total = total + pD(expon.getParam().getWeight())
-							* Math.exp(pD(expon.getParam().getCoeficient()) * (value - pD(expon.getParam().getCenter())));
+				for (final ExpFunctionNode expon : node.getExponential()) {
+					total = total
+							+ OneParameterNode.pD(expon.getParam().getWeight())
+							* Math.exp(OneParameterNode.pD(expon.getParam().getCoeficient())
+									* (value - OneParameterNode.pD(expon.getParam().getCenter())));
 				}
-				for (LogFunctionNode log : node.getLogarithm()) {
-					total = total + pD(log.getParam().getWeight())
-							* Math.log(pD(log.getParam().getCoeficient()) * (value - pD(log.getParam().getCenter())));
+				for (final LogFunctionNode log : node.getLogarithm()) {
+					total = total
+							+ OneParameterNode.pD(log.getParam().getWeight())
+							* Math.log(OneParameterNode.pD(log.getParam().getCoeficient())
+									* (value - OneParameterNode.pD(log.getParam().getCenter())));
 				}
-				for (SinFunctionNode sin : node.getSin()) {
-					total = total + pD(sin.getParam().getWeight())
-							* Math.sin(pD(sin.getParam().getCoeficient()) * value - pD(sin.getParam().getDelta()));
+				for (final SinFunctionNode sin : node.getSin()) {
+					total = total
+							+ OneParameterNode.pD(sin.getParam().getWeight())
+							* Math.sin(OneParameterNode.pD(sin.getParam().getCoeficient()) * value
+									- OneParameterNode.pD(sin.getParam().getDelta()));
 				}
-				for (TgFunctionNode tg : node.getTg()) {
-					total = total + pD(tg.getParam().getWeight())
-							* Math.tan(pD(tg.getParam().getCoeficient()) * value - pD(tg.getParam().getDelta()));
+				for (final TgFunctionNode tg : node.getTg()) {
+					total = total
+							+ OneParameterNode.pD(tg.getParam().getWeight())
+							* Math.tan(OneParameterNode.pD(tg.getParam().getCoeficient()) * value
+									- OneParameterNode.pD(tg.getParam().getDelta()));
 				}
 			}
 		}
 
 		return total;
 	}
-	
-	private static Double pD(String s) {
+
+	private static Double pD(final String s) {
 		return Double.parseDouble(s);
 	}
 
-	public String formatOutput(Number value) {
+	public String formatOutput(final Number value) {
 		if (getOutputFormat() == null) {
 			return String.valueOf(value);
 		}
 		return getOutputFormat().format(value);
 	}
 
-	public String formatInput(Number value) {
+	public String formatInput(final Number value) {
 		if (getInputFormat() == null) {
 			return String.valueOf(value);
 		}

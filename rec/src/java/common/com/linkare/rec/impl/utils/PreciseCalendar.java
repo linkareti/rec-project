@@ -23,7 +23,7 @@ public class PreciseCalendar extends GregorianCalendar {
 	 * 
 	 */
 	private static final long serialVersionUID = 5926592879006322379L;
-	
+
 	private int picos = 0;
 	private int nanos = 0;
 	private int micros = 0;
@@ -33,7 +33,7 @@ public class PreciseCalendar extends GregorianCalendar {
 		this(new DateTime());
 	}
 
-	public PreciseCalendar(long millis) {
+	public PreciseCalendar(final long millis) {
 		setTimeInMillis(millis);
 	}
 
@@ -42,14 +42,13 @@ public class PreciseCalendar extends GregorianCalendar {
 	 * 
 	 * @param dateTime
 	 */
-	public PreciseCalendar(DateTime dateTime) {
-		super((int) dateTime.getDate().getYear(), (int) dateTime.getDate().getMonth(), (int) dateTime.getDate()
-				.getDay(), (int) dateTime.getTime().getHours(), (int) dateTime.getTime().getMinutes(), (int) dateTime
-				.getTime().getSeconds());
-		add(Calendar.MILLISECOND, (int) dateTime.getTime().getMilis());
-		addMicros((int) dateTime.getTime().getMicros());
-		addNanos((int) dateTime.getTime().getNanos());
-		addPicos((int) dateTime.getTime().getPicos());
+	public PreciseCalendar(final DateTime dateTime) {
+		super(dateTime.getDate().getYear(), dateTime.getDate().getMonth(), dateTime.getDate().getDay(), dateTime
+				.getTime().getHours(), dateTime.getTime().getMinutes(), dateTime.getTime().getSeconds());
+		add(Calendar.MILLISECOND, dateTime.getTime().getMilis());
+		addMicros(dateTime.getTime().getMicros());
+		addNanos(dateTime.getTime().getNanos());
+		addPicos(dateTime.getTime().getPicos());
 	}
 
 	public DateTime getDateTime() {
@@ -146,41 +145,43 @@ public class PreciseCalendar extends GregorianCalendar {
 		add(Calendar.MILLISECOND, overflow);
 	}
 
-	public void addDateTime(DateTime dateTime) {
-		addPicos((int) dateTime.getTime().getPicos());
-		addNanos((int) dateTime.getTime().getNanos());
-		addMicros((int) dateTime.getTime().getMicros());
-		add(Calendar.MILLISECOND, (int) dateTime.getTime().getMilis());
-		add(Calendar.SECOND, (int) dateTime.getTime().getSeconds());
-		add(Calendar.MINUTE, (int) dateTime.getTime().getMinutes());
-		add(Calendar.HOUR, (int) dateTime.getTime().getHours());
-		add(Calendar.DATE, (int) dateTime.getDate().getDay());
-		add(Calendar.MONTH, (int) dateTime.getDate().getMonth());
-		add(Calendar.YEAR, (int) dateTime.getDate().getYear());
+	public void addDateTime(final DateTime dateTime) {
+		addPicos(dateTime.getTime().getPicos());
+		addNanos(dateTime.getTime().getNanos());
+		addMicros(dateTime.getTime().getMicros());
+		add(Calendar.MILLISECOND, dateTime.getTime().getMilis());
+		add(Calendar.SECOND, dateTime.getTime().getSeconds());
+		add(Calendar.MINUTE, dateTime.getTime().getMinutes());
+		add(Calendar.HOUR, dateTime.getTime().getHours());
+		add(Calendar.DATE, dateTime.getDate().getDay());
+		add(Calendar.MONTH, dateTime.getDate().getMonth());
+		add(Calendar.YEAR, dateTime.getDate().getYear());
 	}
 
+	@Override
 	public String toString() {
-		DateFormat format = DateFormat.getInstance();
-		java.util.Date d = new java.util.Date(this.getTimeInMillis());
+		final DateFormat format = DateFormat.getInstance();
+		final java.util.Date d = new java.util.Date(getTimeInMillis());
 		String dateStr = format.format(d);
 		dateStr += "." + getMicros() + "" + getNanos() + "" + getPicos();
 		return dateStr;
 	}
 
-	public static DateTime calculateDateTime(DateTime timeStart, Frequency f, int sampleNumber) {
+	public static DateTime calculateDateTime(final DateTime timeStart, final Frequency f, final int sampleNumber) {
 		double tbs = f.getFrequency() * f.getMultiplier().getExpValue();
-		if (f.getFrequencyDefType().equals(FrequencyDefType.FrequencyType))
+		if (f.getFrequencyDefType().equals(FrequencyDefType.FrequencyType)) {
 			tbs = 1. / tbs;
+		}
 
-		double totalDelta = tbs * 1000. * (double) sampleNumber;
-		long totalMillisDelta = (long) Math.floor(totalDelta);
-		long totalPicosDelta = (long) Math.floor((totalDelta - Math.floor(totalDelta)) * 1E9);
-		int microsDelta = (int) Math.floor((double) totalPicosDelta / 1.E6);
-		int nanosDelta = (int) Math.floor((totalPicosDelta - microsDelta * 1E6) / 1.E3);
-		int picosDelta = (int) (totalPicosDelta - microsDelta * 1E6 - nanosDelta * 1E3);
+		final double totalDelta = tbs * 1000. * sampleNumber;
+		final long totalMillisDelta = (long) Math.floor(totalDelta);
+		final long totalPicosDelta = (long) Math.floor((totalDelta - Math.floor(totalDelta)) * 1E9);
+		final int microsDelta = (int) Math.floor(totalPicosDelta / 1.E6);
+		final int nanosDelta = (int) Math.floor((totalPicosDelta - microsDelta * 1E6) / 1.E3);
+		final int picosDelta = (int) (totalPicosDelta - microsDelta * 1E6 - nanosDelta * 1E3);
 
-		PreciseCalendar start = new PreciseCalendar(timeStart);
-		PreciseCalendar ret = new PreciseCalendar(start.getTimeInMillis() + totalMillisDelta);
+		final PreciseCalendar start = new PreciseCalendar(timeStart);
+		final PreciseCalendar ret = new PreciseCalendar(start.getTimeInMillis() + totalMillisDelta);
 		ret.addPicos(picosDelta);
 		ret.addNanos(nanosDelta);
 		ret.addMicros(microsDelta);
@@ -189,7 +190,7 @@ public class PreciseCalendar extends GregorianCalendar {
 	}
 
 	public DateTime toDateTime() {
-		DateTime ret = new DateTime(getTimeInMillis());
+		final DateTime ret = new DateTime(getTimeInMillis());
 		ret.getTime().setMicros((short) getMicros());
 		ret.getTime().setNanos((short) getNanos());
 		ret.getTime().setPicos((short) getPicos());

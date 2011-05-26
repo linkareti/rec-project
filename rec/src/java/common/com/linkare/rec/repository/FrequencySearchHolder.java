@@ -11,18 +11,21 @@ public final class FrequencySearchHolder implements Streamable {
 	public FrequencySearchHolder() {
 	}
 
-	public FrequencySearchHolder(FrequencySearch initialValue) {
+	public FrequencySearchHolder(final FrequencySearch initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(InputStream i) {
+	@Override
+	public void _read(final InputStream i) {
 		value = FrequencySearchHelper.read(i);
 	}
 
-	public void _write(OutputStream o) {
+	@Override
+	public void _write(final OutputStream o) {
 		FrequencySearchHelper.write(o, value);
 	}
 
+	@Override
 	public TypeCode _type() {
 		return FrequencySearchHelper.type();
 	}

@@ -7,6 +7,10 @@ import com.linkare.rec.data.config.ParameterConfig;
 import com.linkare.rec.data.metadata.Scale;
 
 public final class ChannelAcquisitionConfigSearch implements IDLEntity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8923035127225605680L;
 	private String channelName = null;
 	private DateTimeSearch startTimeSearch = null;
 	private FrequencySearch frequencySearch = null;
@@ -17,9 +21,9 @@ public final class ChannelAcquisitionConfigSearch implements IDLEntity {
 	public ChannelAcquisitionConfigSearch() {
 	} // ctor
 
-	public ChannelAcquisitionConfigSearch(String channelName, DateTimeSearch startTimeSearch,
-			FrequencySearch frequencySearch, Scale selectedScale, ParameterConfig[] selectedChannelParameters,
-			SamplesNumSearch samplesNumSearch) {
+	public ChannelAcquisitionConfigSearch(final String channelName, final DateTimeSearch startTimeSearch,
+			final FrequencySearch frequencySearch, final Scale selectedScale,
+			final ParameterConfig[] selectedChannelParameters, final SamplesNumSearch samplesNumSearch) {
 		setChannelName(channelName);
 		setStartTimeSearch(startTimeSearch);
 		setFrequencySearch(frequencySearch);
@@ -44,7 +48,7 @@ public final class ChannelAcquisitionConfigSearch implements IDLEntity {
 	 * @param channelName New value of property channelName.
 	 * 
 	 */
-	public void setChannelName(java.lang.String channelName) {
+	public void setChannelName(final java.lang.String channelName) {
 		this.channelName = channelName;
 	}
 
@@ -64,7 +68,7 @@ public final class ChannelAcquisitionConfigSearch implements IDLEntity {
 	 * @param startTimeSearch New value of property startTimeSearch.
 	 * 
 	 */
-	public void setStartTimeSearch(DateTimeSearch startTimeSearch) {
+	public void setStartTimeSearch(final DateTimeSearch startTimeSearch) {
 		this.startTimeSearch = startTimeSearch;
 	}
 
@@ -84,7 +88,7 @@ public final class ChannelAcquisitionConfigSearch implements IDLEntity {
 	 * @param frequencySearch New value of property frequencySearch.
 	 * 
 	 */
-	public void setFrequencySearch(FrequencySearch frequencySearch) {
+	public void setFrequencySearch(final FrequencySearch frequencySearch) {
 		this.frequencySearch = frequencySearch;
 	}
 
@@ -104,7 +108,7 @@ public final class ChannelAcquisitionConfigSearch implements IDLEntity {
 	 * @param selectedScale New value of property selectedScale.
 	 * 
 	 */
-	public void setSelectedScale(Scale selectedScale) {
+	public void setSelectedScale(final Scale selectedScale) {
 		this.selectedScale = selectedScale;
 	}
 
@@ -115,7 +119,7 @@ public final class ChannelAcquisitionConfigSearch implements IDLEntity {
 	 * 
 	 */
 	public ParameterConfig[] getSelectedChannelParameters() {
-		return this.selectedChannelParameters;
+		return selectedChannelParameters;
 	}
 
 	/**
@@ -125,7 +129,7 @@ public final class ChannelAcquisitionConfigSearch implements IDLEntity {
 	 *            selectedChannelParameters.
 	 * 
 	 */
-	public void setSelectedChannelParameters(ParameterConfig[] selectedChannelParameters) {
+	public void setSelectedChannelParameters(final ParameterConfig[] selectedChannelParameters) {
 		this.selectedChannelParameters = selectedChannelParameters;
 	}
 
@@ -145,37 +149,43 @@ public final class ChannelAcquisitionConfigSearch implements IDLEntity {
 	 * @param samplesNumSearch New value of property samplesNumSearch.
 	 * 
 	 */
-	public void setSamplesNumSearch(SamplesNumSearch samplesNumSearch) {
+	public void setSamplesNumSearch(final SamplesNumSearch samplesNumSearch) {
 		this.samplesNumSearch = samplesNumSearch;
 	}
 
-	public boolean isValid(ChannelAcquisitionConfig channelConfig) {
-		if (channelConfig == null)
+	public boolean isValid(final ChannelAcquisitionConfig channelConfig) {
+		if (channelConfig == null) {
 			return false;
+		}
 
-		if (getStartTimeSearch() != null && !getStartTimeSearch().isValid(channelConfig.getTimeStart()))
+		if (getStartTimeSearch() != null && !getStartTimeSearch().isValid(channelConfig.getTimeStart())) {
 			return false;
+		}
 
-		if (getFrequencySearch() != null && !getFrequencySearch().isValid(channelConfig.getSelectedFrequency()))
+		if (getFrequencySearch() != null && !getFrequencySearch().isValid(channelConfig.getSelectedFrequency())) {
 			return false;
+		}
 
-		if (getSelectedScale() != null && !getSelectedScale().equals(channelConfig.getSelectedScale()))
+		if (getSelectedScale() != null && !getSelectedScale().equals(channelConfig.getSelectedScale())) {
 			return false;
+		}
 
-		if (getSamplesNumSearch() != null && !getSamplesNumSearch().isValid(channelConfig.getTotalSamples()))
+		if (getSamplesNumSearch() != null && !getSamplesNumSearch().isValid(channelConfig.getTotalSamples())) {
 			return false;
+		}
 
-		ParameterConfig[] params = getSelectedChannelParameters();
+		final ParameterConfig[] params = getSelectedChannelParameters();
 
 		if (params != null) {
-			for (int i = 0; i < params.length; i++) {
-				String paramName = params[i].getParameterName();
-				String paramValue = params[i].getParameterValue();
+			for (final ParameterConfig param : params) {
+				final String paramName = param.getParameterName();
+				final String paramValue = param.getParameterValue();
 				if (paramName != null && paramValue != null) {
-					ParameterConfig configParam = channelConfig.getSelectedChannelParameter(paramName);
+					final ParameterConfig configParam = channelConfig.getSelectedChannelParameter(paramName);
 					if (!(configParam != null && configParam.getParameterValue() != null && configParam
-							.getParameterValue().equals(paramValue)))
+							.getParameterValue().equals(paramValue))) {
 						return false;
+					}
 				}
 			}
 

@@ -35,6 +35,7 @@ import java.util.Vector;
 
 import javax.media.Buffer;
 import javax.media.ConfigureCompleteEvent;
+import javax.media.Controller;
 import javax.media.ControllerEvent;
 import javax.media.ControllerListener;
 import javax.media.DataSink;
@@ -69,19 +70,19 @@ import javax.media.protocol.SourceStream;
 public class DataSourceReader implements ControllerListener, DataSinkListener {
 
 	private Processor proc;
-	private Object waitSync = new Object();
+	private final Object waitSync = new Object();
 	private boolean stateTransitionOK = true;
 
 	/**
 	 * Given a DataSource, create a processor and hook up the output DataSource
 	 * from the processor to a customed DataSink.
 	 */
-	public boolean open(DataSource ds) {
+	public boolean open(final DataSource ds) {
 		System.out.println("create processor for: " + ds.getContentType());
 		proc = null;
 		try {
 			proc = Manager.createProcessor(ds);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			System.out.println("Failed to create a processor from the given DataSource: " + e);
 			return false;
 		}
@@ -90,7 +91,7 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 
 		// Put the Processor into configured state.
 		proc.configure();
-		if (!waitForState(proc.Configured)) {
+		if (!waitForState(Processor.Configured)) {
 			System.out.println("Failed to configure the processor.");
 			return false;
 		}
@@ -99,19 +100,19 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 		proc.setContentDescriptor(new ContentDescriptor(ContentDescriptor.RAW));
 
 		proc.realize();
-		if (!waitForState(proc.Realized)) {
+		if (!waitForState(Controller.Realized)) {
 			System.out.println("Failed to realize the processor.");
 			return false;
 		}
 
 		// Get the output DataSource from the processor and
 		// hook it up to the DataSourceHandler.
-		DataSource ods = proc.getDataOutput();
-		DataSourceHandler handler = new DataSourceHandler();
+		final DataSource ods = proc.getDataOutput();
+		final DataSourceHandler handler = new DataSourceHandler();
 
 		try {
 			handler.setSource(ods);
-		} catch (IncompatibleSourceException e) {
+		} catch (final IncompatibleSourceException e) {
 			System.out.println("Cannot handle the output DataSource from the processor: " + ods);
 			return false;
 		}
@@ -121,14 +122,14 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 
 		// Prefetch the processor.
 		proc.prefetch();
-		if (!waitForState(proc.Prefetched)) {
+		if (!waitForState(Controller.Prefetched)) {
 			System.out.println("Failed to prefetch the processor.");
 			return false;
 		}
 
 		// Start the processor.
 		proc.start();
-		if (!waitForState(proc.Started)) {
+		if (!waitForState(Controller.Started)) {
 			System.out.println("Failed to start the processor.");
 			return false;
 		}
@@ -151,9 +152,9 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 	 * this, would you? :)
 	 */
 	public void enableSyncMux() {
-		Vector muxes = PlugInManager.getPlugInList(null, null, PlugInManager.MULTIPLEXER);
+		final Vector muxes = PlugInManager.getPlugInList(null, null, PlugInManager.MULTIPLEXER);
 		for (int i = 0; i < muxes.size(); i++) {
-			String cname = (String) muxes.elementAt(i);
+			final String cname = (String) muxes.elementAt(i);
 			if (cname.equals("com.sun.media.multiplexer.RawBufferMux")) {
 				muxes.removeElementAt(i);
 				break;
@@ -166,14 +167,14 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 	 * Block until the processor has transitioned to the given state. Return
 	 * false if the transition failed.
 	 */
-	boolean waitForState(int state) {
+	boolean waitForState(final int state) {
 		synchronized (waitSync) {
 			try {
 				while (proc.getState() < state && stateTransitionOK) {
 					System.out.println("waiting 1");
 					waitSync.wait();
 				}
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -183,7 +184,8 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 	/**
 	 * Controller Listener.
 	 */
-	public void controllerUpdate(ControllerEvent evt) {
+	@Override
+	public void controllerUpdate(final ControllerEvent evt) {
 		if (evt instanceof ConfigureCompleteEvent || evt instanceof RealizeCompleteEvent
 				|| evt instanceof PrefetchCompleteEvent || evt instanceof StartEvent) {
 			synchronized (waitSync) {
@@ -206,7 +208,8 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 	/**
 	 * DataSink Listener
 	 */
-	public void dataSinkUpdate(DataSinkEvent evt) {
+	@Override
+	public void dataSinkUpdate(final DataSinkEvent evt) {
 		if (evt instanceof EndOfStreamEvent) {
 			System.out.println("All done!");
 			evt.getSourceDataSink().close();
@@ -231,7 +234,7 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 		PushBufferStream pushStrms[] = null;
 
 		// Data sink listeners.
-		private Vector listeners = new Vector(1);
+		private final Vector listeners = new Vector(1);
 
 		// Stored all the streams that are not yet finished (i.e. EOM
 		// has not been received.
@@ -245,7 +248,8 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 		 * Sets the media source this <code>MediaHandler</code> should use to
 		 * obtain content.
 		 */
-		public void setSource(DataSource source) throws IncompatibleSourceException {
+		@Override
+		public void setSource(final DataSource source) throws IncompatibleSourceException {
 			// Different types of DataSources need to handled differently.
 			if (source instanceof PushBufferDataSource) {
 
@@ -286,13 +290,16 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 		 * For completeness, DataSink's require this method. But we don't need
 		 * it.
 		 */
-		public void setOutputLocator(MediaLocator ml) {
+		@Override
+		public void setOutputLocator(final MediaLocator ml) {
 		}
 
+		@Override
 		public MediaLocator getOutputLocator() {
 			return null;
 		}
 
+		@Override
 		public String getContentType() {
 			return source.getContentType();
 		}
@@ -300,66 +307,78 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 		/**
 		 * Our DataSink does not need to be opened.
 		 */
+		@Override
 		public void open() {
 		}
 
+		@Override
 		public void start() {
 			try {
 				source.start();
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				System.out.println(e);
 			}
 
 			// Start the processing loop if we are dealing with a
 			// PullBufferDataSource.
 			if (loops != null) {
-				for (int i = 0; i < loops.length; i++)
-					loops[i].restart();
+				for (final Loop loop : loops) {
+					loop.restart();
+				}
 			}
 		}
 
+		@Override
 		public void stop() {
 			try {
 				source.stop();
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				System.out.println(e);
 			}
 
 			// Start the processing loop if we are dealing with a
 			// PullBufferDataSource.
 			if (loops != null) {
-				for (int i = 0; i < loops.length; i++)
-					loops[i].pause();
+				for (final Loop loop : loops) {
+					loop.pause();
+				}
 			}
 		}
 
+		@Override
 		public void close() {
 			stop();
 			if (loops != null) {
-				for (int i = 0; i < loops.length; i++)
-					loops[i].kill();
+				for (final Loop loop : loops) {
+					loop.kill();
+				}
 			}
 		}
 
-		public void addDataSinkListener(DataSinkListener dsl) {
-			if (dsl != null)
-				if (!listeners.contains(dsl))
+		@Override
+		public void addDataSinkListener(final DataSinkListener dsl) {
+			if (dsl != null) {
+				if (!listeners.contains(dsl)) {
 					listeners.addElement(dsl);
+				}
+			}
 		}
 
-		public void removeDataSinkListener(DataSinkListener dsl) {
-			if (dsl != null)
+		@Override
+		public void removeDataSinkListener(final DataSinkListener dsl) {
+			if (dsl != null) {
 				listeners.removeElement(dsl);
+			}
 		}
 
-		protected void sendEvent(DataSinkEvent event) {
+		protected void sendEvent(final DataSinkEvent event) {
 			if (!listeners.isEmpty()) {
 				synchronized (listeners) {
 					System.out.println("waiting 5");
-					Enumeration list = listeners.elements();
+					final Enumeration list = listeners.elements();
 					while (list.hasMoreElements()) {
 						System.out.println("waiting 6");
-						DataSinkListener listener = (DataSinkListener) list.nextElement();
+						final DataSinkListener listener = (DataSinkListener) list.nextElement();
 						listener.dataSinkUpdate(event);
 					}
 				}
@@ -370,12 +389,13 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 		 * This will get called when there's data pushed from the
 		 * PushBufferDataSource.
 		 */
-		public void transferData(PushBufferStream stream) {
-			Buffer readBuffer = new Buffer();
+		@Override
+		public void transferData(final PushBufferStream stream) {
+			final Buffer readBuffer = new Buffer();
 
 			try {
 				stream.read(readBuffer);
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				System.out.println(e);
 				sendEvent(new DataSinkErrorEvent(this, e.getMessage()));
 				return;
@@ -394,12 +414,12 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 		 * This is called from the Loop thread to pull data from the
 		 * PullBufferStream.
 		 */
-		public boolean readPullData(PullBufferStream stream) {
-			Buffer readBuffer = new Buffer();
+		public boolean readPullData(final PullBufferStream stream) {
+			final Buffer readBuffer = new Buffer();
 
 			try {
 				stream.read(readBuffer);
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				System.out.println(e);
 				return true;
 			}
@@ -421,7 +441,7 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 		/**
 		 * Check to see if all the streams are processed.
 		 */
-		public boolean checkDone(SourceStream strm) {
+		public boolean checkDone(final SourceStream strm) {
 			boolean done = true;
 
 			for (int i = 0; i < unfinishedStrms.length; i++) {
@@ -436,25 +456,29 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 			return done;
 		}
 
-		void printDataInfo(Buffer buffer) {
+		void printDataInfo(final Buffer buffer) {
 			// System.out.println("Read from stream: " + stream);
-			if (buffer.getFormat() instanceof AudioFormat)
+			if (buffer.getFormat() instanceof AudioFormat) {
 				System.out.println("Read audio data:");
-			else
+			} else {
 				System.out.println("Read video data:");
+			}
 			System.out.println("  Time stamp: " + buffer.getTimeStamp());
 			System.out.println("  Sequence #: " + buffer.getSequenceNumber());
 			System.out.println("  Data length: " + buffer.getLength());
 
-			if (buffer.isEOM())
+			if (buffer.isEOM()) {
 				System.out.println("  Got EOM!");
+			}
 		}
 
+		@Override
 		public Object[] getControls() {
 			return new Object[0];
 		}
 
-		public Object getControl(String name) {
+		@Override
+		public Object getControl(final String name) {
 			return null;
 		}
 	}
@@ -466,7 +490,7 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addDataSoundListener(DataSoundListener listener) {
+	public synchronized void addDataSoundListener(final DataSoundListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -479,7 +503,7 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 	 * @param listener The listener to remove.
 	 */
 
-	public synchronized void removeDataSoundListener(DataSoundListener listener) {
+	public synchronized void removeDataSoundListener(final DataSoundListener listener) {
 		listenerList.remove(DataSoundListener.class, listener);
 	}
 
@@ -489,10 +513,11 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 
-	private void fireNewBufferAvailabe(Buffer readBuffer) {
-		if (listenerList == null)
+	private void fireNewBufferAvailabe(final Buffer readBuffer) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == DataSoundListener.class) {
 				((DataSoundListener) listeners[i + 1]).bufferAvailable(new NewDataBufferEvent(readBuffer));
@@ -510,7 +535,7 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 		boolean paused = true;
 		boolean killed = false;
 
-		public Loop(DataSourceHandler handler, PullBufferStream stream) {
+		public Loop(final DataSourceHandler handler, final PullBufferStream stream) {
 			this.handler = handler;
 			this.stream = stream;
 			start();
@@ -539,6 +564,7 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 		/**
 		 * This is the processing loop to pull data from a PullBufferDataSource.
 		 */
+		@Override
 		public void run() {
 			while (!killed) {
 				System.out.println("waiting 7");
@@ -547,11 +573,11 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 						System.out.println("waiting 8");
 						wait();
 					}
-				} catch (InterruptedException e) {
+				} catch (final InterruptedException e) {
 				}
 
 				if (!killed) {
-					boolean done = handler.readPullData(stream);
+					final boolean done = handler.readPullData(stream);
 					if (done) {
 						pause();
 					}

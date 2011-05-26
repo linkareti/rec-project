@@ -26,7 +26,7 @@ public abstract class FlatTheme extends OceanThemeAdaptor {
 	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(FlatTheme.class.getName());
 
-	private List<AbstractStyle> stylesList;
+	private final List<AbstractStyle> stylesList;
 
 	/**
 	 * Initializes the FlatTheme.
@@ -37,38 +37,37 @@ public abstract class FlatTheme extends OceanThemeAdaptor {
 	public FlatTheme() {
 		super();
 		stylesList = new ArrayList<AbstractStyle>();
-		Set<Class<? extends AbstractStyle>> styleClasses = registerStyles();
-		for (Class<? extends AbstractStyle> clazz : styleClasses) {
+		final Set<Class<? extends AbstractStyle>> styleClasses = registerStyles();
+		for (final Class<? extends AbstractStyle> clazz : styleClasses) {
 			try {
-				AbstractStyle newInstance = clazz.newInstance();
+				final AbstractStyle newInstance = clazz.newInstance();
 				stylesList.add(newInstance);
-			} catch (Exception e) {
-				log.log(Level.SEVERE, "Error creating style.", e);
+			} catch (final Exception e) {
+				FlatTheme.log.log(Level.SEVERE, "Error creating style.", e);
 			}
 		}
-		if (log.isLoggable(Level.FINER)) {
-			log.finer("Registered Styles: " + styleClasses);
+		if (FlatTheme.log.isLoggable(Level.FINER)) {
+			FlatTheme.log.finer("Registered Styles: " + styleClasses);
 		}
 	}
 
 	/**
 	 * Add this theme's custom entries to the defaults table.
 	 * 
-	 * @param table
-	 *            the defaults table, non-null
+	 * @param table the defaults table, non-null
 	 */
 	@Override
-	public void addCustomEntriesToTable(UIDefaults table) {
+	public void addCustomEntriesToTable(final UIDefaults table) {
 		super.addCustomEntriesToTable(table);
 
-		List<Object> defaults = new ArrayList<Object>();
-		for (AbstractStyle style : getThemeStyles()) {
+		final List<Object> defaults = new ArrayList<Object>();
+		for (final AbstractStyle style : getThemeStyles()) {
 			defaults.addAll(style.getProperties());
 		}
-		//		// Hack for MetalLookAndFeel inheritance)
-		//		defaults.add("MenuBarUI");
-		//		defaults.add(FlatMenuBarUI.class.getName());
-		//		// Hack end
+		// // Hack for MetalLookAndFeel inheritance)
+		// defaults.add("MenuBarUI");
+		// defaults.add(FlatMenuBarUI.class.getName());
+		// // Hack end
 
 		table.putDefaults(defaults.toArray(new Object[defaults.size()]));
 	}

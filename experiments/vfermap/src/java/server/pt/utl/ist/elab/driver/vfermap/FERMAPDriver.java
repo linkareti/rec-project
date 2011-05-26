@@ -30,9 +30,9 @@ public class FERMAPDriver extends VirtualBaseDriver {
 
 	private static String FERMAP_DRIVER_LOGGER = "FERMAP.Logger";
 	static {
-		Logger l = LogManager.getLogManager().getLogger(FERMAP_DRIVER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(FERMAPDriver.FERMAP_DRIVER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(FERMAP_DRIVER_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(FERMAPDriver.FERMAP_DRIVER_LOGGER));
 		}
 	}
 
@@ -49,85 +49,92 @@ public class FERMAPDriver extends VirtualBaseDriver {
 	public FERMAPDriver() {
 	}
 
-	public void config(HardwareAcquisitionConfig config, HardwareInfo info) throws IncorrectStateException,
+	@Override
+	public void config(final HardwareAcquisitionConfig config, final HardwareInfo info) throws IncorrectStateException,
 			WrongConfigurationException {
 		fireIDriverStateListenerDriverConfiguring();
 		info.validateConfig(config);
 		extraValidateConfig(config, info);
 		try {
 			configure(config, info);
-		} catch (Exception e) {
-			LoggerUtil.logThrowable("Error on config...", e, Logger.getLogger(FERMAP_DRIVER_LOGGER));
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable("Error on config...", e, Logger.getLogger(FERMAPDriver.FERMAP_DRIVER_LOGGER));
 			throw new WrongConfigurationException();
 		}
 	}
 
-	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException {
+	@Override
+	public void configure(final HardwareAcquisitionConfig config, final HardwareInfo info)
+			throws WrongConfigurationException {
 		this.config = config;
 		this.info = info;
 
-		byte simulType = Byte.parseByte(config.getSelectedHardwareParameterValue("simulType"));
+		final byte simulType = Byte.parseByte(config.getSelectedHardwareParameterValue("simulType"));
 
 		if (simulType == 2) { // anima
-			int tbs = (int) config.getSelectedFrequency().getFrequency();
-			int nSamples = Integer.parseInt(config.getSelectedHardwareParameterValue("nCol"));
+			final int tbs = (int) config.getSelectedFrequency().getFrequency();
+			final int nSamples = Integer.parseInt(config.getSelectedHardwareParameterValue("nCol"));
 			;
 
-			float x = Float.parseFloat(config.getSelectedHardwareParameterValue("x"));
-			float xDot = Float.parseFloat(config.getSelectedHardwareParameterValue("xDot"));
-			float psi = Float.parseFloat(config.getSelectedHardwareParameterValue("psi"));
-			float wFreq = Float.parseFloat(config.getSelectedHardwareParameterValue("psi"));
-			float wAmp = Float.parseFloat(config.getSelectedHardwareParameterValue("wAmp"));
-			float d = Float.parseFloat(config.getSelectedHardwareParameterValue("d"));
+			final float x = Float.parseFloat(config.getSelectedHardwareParameterValue("x"));
+			final float xDot = Float.parseFloat(config.getSelectedHardwareParameterValue("xDot"));
+			final float psi = Float.parseFloat(config.getSelectedHardwareParameterValue("psi"));
+			final float wFreq = Float.parseFloat(config.getSelectedHardwareParameterValue("psi"));
+			final float wAmp = Float.parseFloat(config.getSelectedHardwareParameterValue("wAmp"));
+			final float d = Float.parseFloat(config.getSelectedHardwareParameterValue("d"));
 
 			dataSource = new FERMAPDataProducer(this, x, xDot, psi, wFreq, wAmp, d, tbs, nSamples);
 		} else {
-			boolean staticImg = config.getSelectedHardwareParameterValue("staticImg").trim().equals("1") ? true : false;
+			final boolean staticImg = config.getSelectedHardwareParameterValue("staticImg").trim().equals("1") ? true
+					: false;
 
-			int w = Integer.parseInt(config.getSelectedHardwareParameterValue("w"));
-			int h = Integer.parseInt(config.getSelectedHardwareParameterValue("h"));
-			byte pixSize = Byte.parseByte(config.getSelectedHardwareParameterValue("pixSize"));
+			final int w = Integer.parseInt(config.getSelectedHardwareParameterValue("w"));
+			final int h = Integer.parseInt(config.getSelectedHardwareParameterValue("h"));
+			final byte pixSize = Byte.parseByte(config.getSelectedHardwareParameterValue("pixSize"));
 
-			int uMax = Integer.parseInt(config.getSelectedHardwareParameterValue("uMax"));
+			final int uMax = Integer.parseInt(config.getSelectedHardwareParameterValue("uMax"));
 
 			if (simulType == 1) {
-				float m = Float.parseFloat(config.getSelectedHardwareParameterValue("m"));
-				float pcor = Float.parseFloat(config.getSelectedHardwareParameterValue("pcor"));
-				int iter = Integer.parseInt(config.getSelectedHardwareParameterValue("iter"));
+				final float m = Float.parseFloat(config.getSelectedHardwareParameterValue("m"));
+				final float pcor = Float.parseFloat(config.getSelectedHardwareParameterValue("pcor"));
+				final int iter = Integer.parseInt(config.getSelectedHardwareParameterValue("iter"));
 
-				float psi = Float.parseFloat(config.getSelectedHardwareParameterValue("psi"));
-				int nPsi = Integer.parseInt(config.getSelectedHardwareParameterValue("nPsi"));
-				float dPsi = Float.parseFloat(config.getSelectedHardwareParameterValue("dPsi"));
+				final float psi = Float.parseFloat(config.getSelectedHardwareParameterValue("psi"));
+				final int nPsi = Integer.parseInt(config.getSelectedHardwareParameterValue("nPsi"));
+				final float dPsi = Float.parseFloat(config.getSelectedHardwareParameterValue("dPsi"));
 
-				float uMapa = Float.parseFloat(config.getSelectedHardwareParameterValue("uMapa"));
-				int nUMapa = Integer.parseInt(config.getSelectedHardwareParameterValue("nUMapa"));
-				float dUMapa = Float.parseFloat(config.getSelectedHardwareParameterValue("dUMapa"));
+				final float uMapa = Float.parseFloat(config.getSelectedHardwareParameterValue("uMapa"));
+				final int nUMapa = Integer.parseInt(config.getSelectedHardwareParameterValue("nUMapa"));
+				final float dUMapa = Float.parseFloat(config.getSelectedHardwareParameterValue("dUMapa"));
 
 				dataSource = new FERMAPDataProducer(this, m, psi, nPsi, dPsi, uMapa, nUMapa, dUMapa, iter, pcor, w, h,
 						pixSize, uMax, staticImg);
 			} else if (simulType == 3) {
-				float m = Float.parseFloat(config.getSelectedHardwareParameterValue("m"));
-				float pcor = Float.parseFloat(config.getSelectedHardwareParameterValue("pcor"));
-				int iter = Integer.parseInt(config.getSelectedHardwareParameterValue("iter"));
+				final float m = Float.parseFloat(config.getSelectedHardwareParameterValue("m"));
+				final float pcor = Float.parseFloat(config.getSelectedHardwareParameterValue("pcor"));
+				final int iter = Integer.parseInt(config.getSelectedHardwareParameterValue("iter"));
 
-				float psi = Float.parseFloat(config.getSelectedHardwareParameterValue("psi"));
-				float uMapa = Float.parseFloat(config.getSelectedHardwareParameterValue("uMapa"));
+				final float psi = Float.parseFloat(config.getSelectedHardwareParameterValue("psi"));
+				final float uMapa = Float.parseFloat(config.getSelectedHardwareParameterValue("uMapa"));
 
 				dataSource = new FERMAPDataProducer(this, m, psi, uMapa, iter, pcor, w, h, pixSize, uMax, staticImg);
 			}
 		}
-		for (int i = 0; i < config.getChannelsConfig().length; i++)
+		for (int i = 0; i < config.getChannelsConfig().length; i++) {
 			config.getChannelsConfig(i).setTotalSamples(config.getTotalSamples());
+		}
 
 		dataSource.setAcquisitionHeader(config);
 
 		fireIDriverStateListenerDriverConfigured();
 	}
 
+	@Override
 	public String getDriverUniqueID() {
-		return DRIVER_UNIQUE_ID;
+		return FERMAPDriver.DRIVER_UNIQUE_ID;
 	}
 
+	@Override
 	public void shutdown() {
 		if (dataSource != null) {
 			dataSource.stopNow();
@@ -135,37 +142,43 @@ public class FERMAPDriver extends VirtualBaseDriver {
 		super.shutDownNow();
 	}
 
-	public IDataSource start(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public IDataSource start(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverStarting();
 		dataSource.startProduction();
 		fireIDriverStateListenerDriverStarted();
 		return dataSource;
 	}
 
-	public void stop(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public void stop(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverStoping();
 		dataSource.stopNow();
 		fireIDriverStateListenerDriverStoped();
 	}
 
+	@Override
 	public Object getHardwareInfo() {
 		fireIDriverStateListenerDriverReseting();
-		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+				+ "/HardwareInfo.xml";
 		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
-		if (prop.indexOf("://") == -1)
+		if (prop.indexOf("://") == -1) {
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
+		}
 
 		java.net.URL url = null;
 		try {
 			url = ReCProtocols.getURL(prop);
-		} catch (java.net.MalformedURLException e) {
-			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger(FERMAP_DRIVER_LOGGER));
+		} catch (final java.net.MalformedURLException e) {
+			LoggerUtil.logThrowable("Unable to load resource: " + prop, e,
+					Logger.getLogger(FERMAPDriver.FERMAP_DRIVER_LOGGER));
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
-			} catch (java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2, Logger
-						.getLogger(FERMAP_DRIVER_LOGGER));
+			} catch (final java.net.MalformedURLException e2) {
+				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
+						Logger.getLogger(FERMAPDriver.FERMAP_DRIVER_LOGGER));
 			}
 		}
 		fireIDriverStateListenerDriverReseted();

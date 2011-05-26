@@ -48,6 +48,11 @@ import com.linkare.rec.impl.utils.EventQueueDispatcher;
  */
 public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7321983002008596066L;
+
 	private static final Logger log = Logger.getLogger(Chat.class.getName());
 
 	private static final String CHAT_TEMPLATE_RESOURCE = "resources/chatTemplate.htm";
@@ -58,7 +63,7 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 
 	private static final String __MESSAGE__ = "__MESSAGE__";
 
-	private static final InputStream CHAT_TEMPLATE_IS = Chat.class.getResourceAsStream(CHAT_TEMPLATE_RESOURCE);
+	private static final InputStream CHAT_TEMPLATE_IS = Chat.class.getResourceAsStream(Chat.CHAT_TEMPLATE_RESOURCE);
 
 	private static final String CHAT_TEMPLATE;
 
@@ -69,18 +74,19 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 	// BORDER
 	private static final Color COLOR_BORDER_SOLID_THIN_BLUE = new Color(0x517DA8);
 
-	public static final Border THIN_BLUE_BORDER = BorderFactory.createCompoundBorder(javax.swing.BorderFactory
-			.createLineBorder(COLOR_BORDER_SOLID_THIN_BLUE), javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+	public static final Border THIN_BLUE_BORDER = BorderFactory.createCompoundBorder(
+			javax.swing.BorderFactory.createLineBorder(Chat.COLOR_BORDER_SOLID_THIN_BLUE),
+			javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
 	static {
 		boolean parsingUserMessageTemplate = false;
-		StringBuilder userMessageTemplate = new StringBuilder();
+		final StringBuilder userMessageTemplate = new StringBuilder();
 
-		StringBuilder chatTemplateResult = new StringBuilder();
-		Scanner scan = new Scanner(CHAT_TEMPLATE_IS);
+		final StringBuilder chatTemplateResult = new StringBuilder();
+		final Scanner scan = new Scanner(Chat.CHAT_TEMPLATE_IS);
 		while (scan.hasNextLine()) {
-			String line = scan.nextLine();
-			if (line.contains(USERMESSAGE__TEMPLATE__ID)) {
+			final String line = scan.nextLine();
+			if (line.contains(Chat.USERMESSAGE__TEMPLATE__ID)) {
 				parsingUserMessageTemplate = true;
 				userMessageTemplate.append(line);
 
@@ -97,12 +103,12 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 		USERMESSAGE_TEMPLATE = userMessageTemplate.toString();
 		CHAT_TEMPLATE = chatTemplateResult.toString();
 
-		if (log.isLoggable(Level.INFO)) {
-			log.info(USERMESSAGE_TEMPLATE);
-			log.info(CHAT_TEMPLATE);
+		if (Chat.log.isLoggable(Level.INFO)) {
+			Chat.log.info(Chat.USERMESSAGE_TEMPLATE);
+			Chat.log.info(Chat.CHAT_TEMPLATE);
 		}
 	}
-	
+
 	private static final String MULTICAST_STR = ReCResourceBundle.findStringOrDefault(
 			"ReCBaseUI$rec.bui.lbl.multicast", "Server");
 	private static final String SECURITY_COMMUNICATOR_MSG_BEFORE_KICK_STR = ReCResourceBundle.findStringOrDefault(
@@ -118,11 +124,11 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 		private final String message;
 		private final String result;
 
-		public UserMessage(String user, String message) {
+		public UserMessage(final String user, final String message) {
 			super();
 			this.user = user;
 			this.message = message;
-			this.result = USERMESSAGE_TEMPLATE.replaceFirst(__USER__, user).replaceFirst(__MESSAGE__,
+			result = Chat.USERMESSAGE_TEMPLATE.replaceFirst(Chat.__USER__, user).replaceFirst(Chat.__MESSAGE__,
 					StringEscapeUtils.escapeJava(message));
 		}
 
@@ -135,11 +141,14 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 
 	private class MessageQueueDispatcher implements EventQueueDispatcher {
 
-		public void dispatchEvent(Object evt) {
-			if (evt instanceof ChatMessageEvent && chatServer != null)
+		@Override
+		public void dispatchEvent(final Object evt) {
+			if (evt instanceof ChatMessageEvent && chatServer != null) {
 				chatServer.sendMessage((ChatMessageEvent) evt);
+			}
 		}
 
+		@Override
 		public int getPriority() {
 			return Thread.NORM_PRIORITY - 1;
 		}
@@ -155,7 +164,7 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 		initComponents();
 
 		// Set HTML document
-		msgPane.setText(CHAT_TEMPLATE);
+		msgPane.setText(Chat.CHAT_TEMPLATE);
 
 	}
 
@@ -164,26 +173,26 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 	}
 
 	@Override
-	public void roomChanged(ChatRoomEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine(evt.toString());
+	public void roomChanged(final ChatRoomEvent evt) {
+		if (Chat.log.isLoggable(Level.FINE)) {
+			Chat.log.fine(evt.toString());
 		}
 	}
 
 	@Override
-	public void connectionChanged(ChatConnectionEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine(evt.toString());
+	public void connectionChanged(final ChatConnectionEvent evt) {
+		if (Chat.log.isLoggable(Level.FINE)) {
+			Chat.log.fine(evt.toString());
 		}
 
 		if (evt.isConnected()) {
-			msgPane.setText(CHAT_TEMPLATE);
+			msgPane.setText(Chat.CHAT_TEMPLATE);
 			txtInputMsg.setText("");
 		}
 	}
 
 	@Override
-	public void userListChanged(UserInfo[] usersList) {
+	public void userListChanged(final UserInfo[] usersList) {
 		// if (log.isLoggable(Level.FINEST)) {
 		// log.finest(Arrays.deepToString(usersList));
 		// }
@@ -206,29 +215,29 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 		// If we only communicate with "everyone", then why try to find it? Why
 		// even handle a usersListChange???
 	}
-	
+
 	private static final Pattern securityCommunicationBeforeKickPattern = Pattern
 			.compile(ChatMessageEvent.SECURITY_COMMUNICATION_MSG_BEFORE_KICK_KEY
 					+ ChatMessageEvent.SECURITY_COMMUNICATION_MSG_SEPARATOR + "(([01]?[0-9]|2[0-3]):[0-5][0-9])");
 
 	@Override
-	public void newChatMessage(ChatMessageEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine(evt != null ? evt.getMessage() : "null event");
+	public void newChatMessage(final ChatMessageEvent evt) {
+		if (Chat.log.isLoggable(Level.FINE)) {
+			Chat.log.fine(evt != null ? evt.getMessage() : "null event");
 		}
 
 		String user = evt.getUserFrom().getUserName();
 		String msg = evt.getMessage();
-		
+
 		if (user.equals(ChatMessageEvent.MULTICAST_USERNAME)) {
-			user = MULTICAST_STR;
+			user = Chat.MULTICAST_STR;
 			if (ChatMessageEvent.SECURITY_COMMUNICATION_MSG_ON_KICK_KEY.equals(msg)) {
-				msg = new String(SECURITY_COMMUNICATOR_MSG_ON_KICK_STR);
+				msg = new String(Chat.SECURITY_COMMUNICATOR_MSG_ON_KICK_STR);
 			} else {
-				Matcher matcher = securityCommunicationBeforeKickPattern.matcher(msg); 
+				final Matcher matcher = Chat.securityCommunicationBeforeKickPattern.matcher(msg);
 				if (matcher.matches()) {
-					String time = matcher.group(1); 
-					msg = new String(SECURITY_COMMUNICATOR_MSG_BEFORE_KICK_STR).replace("{1}", time);
+					final String time = matcher.group(1);
+					msg = new String(Chat.SECURITY_COMMUNICATOR_MSG_BEFORE_KICK_STR).replace("{1}", time);
 				}
 			}
 		}
@@ -237,7 +246,7 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 			final String userFrom = user;
 			final String escapedMsg = StringEscapeUtils.escapeHtml(msg);
 
-			final Element msgList = getHTMLDocument().getElement(MESSAGE_LIST);
+			final Element msgList = getHTMLDocument().getElement(Chat.MESSAGE_LIST);
 
 			if (!SwingUtilities.isEventDispatchThread()) {
 				SwingUtilities.invokeLater(new Runnable() {
@@ -256,28 +265,28 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 		try {
 			getHTMLDocument().insertBeforeEnd(msgList, new UserMessage(userFrom, escapedMsg).toString());
 
-		} catch (BadLocationException e) {
-			log.log(Level.SEVERE, "Trying to insert html element", e);
-		} catch (IOException e) {
-			log.log(Level.SEVERE, "Trying to insert html element", e);
+		} catch (final BadLocationException e) {
+			Chat.log.log(Level.SEVERE, "Trying to insert html element", e);
+		} catch (final IOException e) {
+			Chat.log.log(Level.SEVERE, "Trying to insert html element", e);
 		}
 		// TODO improve the method to scroll to the end of the
 		// jEditorPane
-		int editorPaneHeight = (int) msgPane.getBounds().getHeight();
+		final int editorPaneHeight = (int) msgPane.getBounds().getHeight();
 		msgPane.scrollRectToVisible(new Rectangle(new Point(0, editorPaneHeight + 15)));
 	}
 
 	@Action
 	public void sendMessage() {
 
-		String msg = txtInputMsg.getText();
+		final String msg = txtInputMsg.getText();
 
 		if (userInfo != null && chatServer != null && msg.length() > 0) {
 
-			ChatMessageEvent newMessage = new ChatMessageEvent(this, userInfo, everyone, msg);
+			final ChatMessageEvent newMessage = new ChatMessageEvent(this, userInfo, everyone, msg);
 
-			log.info("mesage event: " + newMessage);
-			log.info("mesage: " + msg);
+			Chat.log.info("mesage event: " + newMessage);
+			Chat.log.info("mesage: " + msg);
 
 			messageQueue.addEvent(newMessage);
 			// if (!((UserInfo)
@@ -309,20 +318,23 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 	/**
 	 * @param chatServer the chatServer to set
 	 */
-	public void setChatServer(IChatServer chatServer) {
-		if (this.chatServer != null)
+	public void setChatServer(final IChatServer chatServer) {
+		if (this.chatServer != null) {
 			this.chatServer.removeChatMessageListener(this);
+		}
 		this.chatServer = chatServer;
-		if (this.chatServer != null)
+		if (this.chatServer != null) {
 			this.chatServer.addChatMessageListener(this);
-		if (messageQueue == null)
+		}
+		if (messageQueue == null) {
 			messageQueue = new EventQueue(new MessageQueueDispatcher(), this.getClass().getSimpleName());
+		}
 	}
 
 	/**
 	 * @param userInfo the userInfo to set
 	 */
-	public void setUserInfo(UserInfo userInfo) {
+	public void setUserInfo(final UserInfo userInfo) {
 		this.userInfo = userInfo;
 	}
 
@@ -330,7 +342,7 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 	 * @see javax.swing.JComponent#setEnabled(boolean)
 	 */
 	@Override
-	public void setEnabled(boolean enabled) {
+	public void setEnabled(final boolean enabled) {
 		super.setEnabled(enabled);
 		txtInputMsg.setEnabled(enabled);
 		msgPane.setEnabled(enabled);
@@ -353,22 +365,24 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 
 		setName("Form"); // NOI18N
 
-		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(
-				com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(Chat.class);
+		final org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application
+				.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(Chat.class);
 		txtInputMsg.setText(resourceMap.getString("txtInputMsg.text")); // NOI18N
-		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(
-				com.linkare.rec.impl.newface.ReCApplication.class).getContext().getActionMap(Chat.class, this);
+		final javax.swing.ActionMap actionMap = org.jdesktop.application.Application
+				.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext()
+				.getActionMap(Chat.class, this);
 		txtInputMsg.setAction(actionMap.get("sendMessage")); // NOI18N
 		txtInputMsg.setName("txtInputMsg"); // NOI18N
 		txtInputMsg.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				txtInputMsgActionPerformed(evt);
 			}
 		});
 
 		pChatContainer.setName("pChatContainer"); // NOI18N
 		pChatContainer.setLayout(new javax.swing.BoxLayout(pChatContainer, javax.swing.BoxLayout.LINE_AXIS));
-		pChatContainer.setBorder(THIN_BLUE_BORDER);
+		pChatContainer.setBorder(Chat.THIN_BLUE_BORDER);
 
 		msgScrollPane.setName("msgScrollPane"); // NOI18N
 
@@ -380,21 +394,22 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 
 		pChatContainer.add(msgScrollPane);
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-		this.setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-				txtInputMsg, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE).addComponent(pChatContainer,
-				javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE));
+		final javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+		setLayout(layout);
+		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(txtInputMsg, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+				.addComponent(pChatContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE));
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 				javax.swing.GroupLayout.Alignment.TRAILING,
-				layout.createSequentialGroup().addComponent(pChatContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 242,
-						Short.MAX_VALUE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+				layout.createSequentialGroup()
+						.addComponent(pChatContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 						.addComponent(txtInputMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 29,
 								javax.swing.GroupLayout.PREFERRED_SIZE)));
 	}// </editor-fold>//GEN-END:initComponents
 
-	private void txtInputMsgActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtInputMsgActionPerformed
-		log.info("action was performed");
+	private void txtInputMsgActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtInputMsgActionPerformed
+		Chat.log.info("action was performed");
 	}// GEN-LAST:event_txtInputMsgActionPerformed
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
@@ -410,6 +425,6 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 	/** Holds value of property user. */
 	private UserInfo userInfo;
 
-	private UserInfo everyone = new UserInfo(ChatMessageEvent.EVERYONE_USER);
+	private final UserInfo everyone = new UserInfo(ChatMessageEvent.EVERYONE_USER);
 
 }

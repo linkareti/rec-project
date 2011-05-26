@@ -41,12 +41,12 @@ public class FlatFocusRenderer implements PropertyChangeListener {
 
 	private static FlatFocusRenderer instance;
 
-	private KeyboardFocusManager focusManager;
-	private Map<Window, FocusPainter> focusComponentMap = new HashMap<Window, FocusPainter>();
+	private final KeyboardFocusManager focusManager;
+	private final Map<Window, FocusPainter> focusComponentMap = new HashMap<Window, FocusPainter>();
 
 	public static void install() {
-		if (instance == null) {
-			instance = new FlatFocusRenderer();
+		if (FlatFocusRenderer.instance == null) {
+			FlatFocusRenderer.instance = new FlatFocusRenderer();
 		}
 	}
 
@@ -56,15 +56,16 @@ public class FlatFocusRenderer implements PropertyChangeListener {
 	}
 
 	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
+	public void propertyChange(final PropertyChangeEvent evt) {
 		if (evt.getNewValue() != null) {
-			// a new component has received focus; get the window corresponding to the component
+			// a new component has received focus; get the window corresponding
+			// to the component
 			// in order to install a FocusComponent in it
-			Window activeWindow = focusManager.getActiveWindow();
+			final Window activeWindow = focusManager.getActiveWindow();
 
 			// install a FocusPainter in the window's layered pane
 			// (or retrieve the instance already installed)
-			FocusPainter focusPainter = getFocusPainter(activeWindow);
+			final FocusPainter focusPainter = getFocusPainter(activeWindow);
 
 			if (focusPainter != null) {
 				// tell the FocusPainter to paint the focus
@@ -73,7 +74,7 @@ public class FlatFocusRenderer implements PropertyChangeListener {
 		}
 	}
 
-	private FocusPainter getFocusPainter(Window window) {
+	private FocusPainter getFocusPainter(final Window window) {
 		FocusPainter focusPainter = focusComponentMap.get(window);
 
 		if (focusPainter == null) {
@@ -93,7 +94,13 @@ public class FlatFocusRenderer implements PropertyChangeListener {
 
 	private static class FocusPainter extends JComponent {
 
-		private static final BufferedImage squareFocusImg = FlatLAFResources.getImage(FlatLAFImageResourcesEnum.SQUARE_FOCUS);
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 5636961149080993539L;
+
+		private static final BufferedImage squareFocusImg = FlatLAFResources
+				.getImage(FlatLAFImageResourcesEnum.SQUARE_FOCUS);
 
 		private static final Insets squareFocusInsets = FlatLAFImageResourcesEnum.SQUARE_FOCUS.getInsets();
 
@@ -104,13 +111,13 @@ public class FlatFocusRenderer implements PropertyChangeListener {
 			// track size window component resize
 			windowLayeredPane.addComponentListener(new ComponentAdapter() {
 				@Override
-				public void componentResized(ComponentEvent e) {
+				public void componentResized(final ComponentEvent e) {
 					setBounds(0, 0, windowLayeredPane.getWidth(), windowLayeredPane.getHeight());
 				}
 			});
 		}
 
-		public void setCurrentlyFocusedComponent(Component currentlyFocusedComponent) {
+		public void setCurrentlyFocusedComponent(final Component currentlyFocusedComponent) {
 			this.currentlyFocusedComponent = currentlyFocusedComponent;
 			repaint();
 		}
@@ -119,15 +126,15 @@ public class FlatFocusRenderer implements PropertyChangeListener {
 		 * Paint focus
 		 */
 		@Override
-		protected void paintComponent(Graphics g) {
+		protected void paintComponent(final Graphics g) {
 			if (currentlyFocusedComponent != null) {
 				paintSquareFocus(g);
 			}
 		}
 
-		protected void paintSquareFocus(Graphics g) {
+		protected void paintSquareFocus(final Graphics g) {
 			if (currentlyFocusedComponent instanceof JComponent) {
-				JComponent component = (JComponent) currentlyFocusedComponent;
+				final JComponent component = (JComponent) currentlyFocusedComponent;
 
 				if (component instanceof JButton) {
 
@@ -135,7 +142,8 @@ public class FlatFocusRenderer implements PropertyChangeListener {
 						return; // Respect component state
 					}
 
-					// Focus focus = component.getClass().getAnnotation(Focus.class);
+					// Focus focus =
+					// component.getClass().getAnnotation(Focus.class);
 					// if (focus != null && !focus.display())
 					// return;
 
@@ -144,7 +152,8 @@ public class FlatFocusRenderer implements PropertyChangeListener {
 					// Get bounds relative to this (FocusPainter) component
 					bounds = SwingUtilities.convertRectangle(component, bounds, this);
 
-					PaintUtils.tileStretchPaint(g, component, squareFocusImg, squareFocusInsets, bounds.getLocation());
+					PaintUtils.tileStretchPaint(g, component, FocusPainter.squareFocusImg,
+							FocusPainter.squareFocusInsets, bounds.getLocation());
 				}
 			}
 		}

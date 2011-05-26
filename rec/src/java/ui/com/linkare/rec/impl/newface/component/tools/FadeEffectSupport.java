@@ -25,31 +25,34 @@ public class FadeEffectSupport<C extends JComponent> implements FadeEffect, Acti
 
 	public static final float TRANSLUCENT = 0.0f;
 
-	private C component;
+	private final C component;
 
 	private State currentState;
 
 	private float alpha = 1.0f; // current opacity
-	private Timer timer = new Timer(30, this); // for later start/stop actions
-	private int animationDuration = 450; // each animation duration (ms)
+	private final Timer timer = new Timer(30, this); // for later start/stop
+														// actions
+	private final int animationDuration = 450; // each animation duration (ms)
 	private long animationStartTime; // start time for each animation
 	private BufferedImage componentImage = null;
 
-	public FadeEffectSupport(C component) {
+	public FadeEffectSupport(final C component) {
 		this.component = component;
 		this.currentState = State.OPAQUE;
 	}
 
+	@Override
 	public void fadeIn() {
-		alpha = TRANSLUCENT;
+		alpha = FadeEffectSupport.TRANSLUCENT;
 		animationStartTime = System.nanoTime() / 1000000;
 		currentState = State.FADING_IN;
 		timer.start();
 		// Continues on timer event
 	}
 
+	@Override
 	public void fadeOut() {
-		alpha = OPAQUE;
+		alpha = FadeEffectSupport.OPAQUE;
 		animationStartTime = System.nanoTime() / 1000000;
 		currentState = State.FADING_OUT;
 		timer.start();
@@ -59,10 +62,11 @@ public class FadeEffectSupport<C extends JComponent> implements FadeEffect, Acti
 	/**
 	 * Timer animation event
 	 */
-	public void actionPerformed(ActionEvent e) {
+	@Override
+	public void actionPerformed(final ActionEvent e) {
 		// calculate the elapsed fraction
-		long currentTime = System.nanoTime() / 1000000;
-		long totalTime = currentTime - animationStartTime;
+		final long currentTime = System.nanoTime() / 1000000;
+		final long totalTime = currentTime - animationStartTime;
 		if (totalTime > animationDuration) {
 			animationStartTime = currentTime;
 			timer.stop();
@@ -90,24 +94,26 @@ public class FadeEffectSupport<C extends JComponent> implements FadeEffect, Acti
 		component.repaint();
 	}
 
-	public Graphics getComponentGraphics(Graphics g) {
-		componentImage = component.getGraphicsConfiguration().createCompatibleImage(component.getWidth(), component.getHeight());
+	public Graphics getComponentGraphics(final Graphics g) {
+		componentImage = component.getGraphicsConfiguration().createCompatibleImage(component.getWidth(),
+				component.getHeight());
 
-		Graphics gComponent = componentImage.getGraphics();
+		final Graphics gComponent = componentImage.getGraphics();
 
 		return gComponent;
 	}
 
-	void paint(Graphics g) {
+	void paint(final Graphics g) {
 		// Make the graphics translucent
-		Graphics2D g2d = (Graphics2D) g;
-		AlphaComposite newComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
+		final Graphics2D g2d = (Graphics2D) g;
+		final AlphaComposite newComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
 		g2d.setComposite(newComposite);
 
 		// Copy the component's image to the destination graphics, translucently
 		g2d.drawImage(componentImage, 0, 0, null);
 	}
 
+	@Override
 	public State getFadeEffectState() {
 		return currentState;
 	}

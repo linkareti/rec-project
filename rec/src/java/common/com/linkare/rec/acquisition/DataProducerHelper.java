@@ -11,49 +11,50 @@ package com.linkare.rec.acquisition;
 public abstract class DataProducerHelper {
 	private static String _id = "IDL:com/linkare/rec/acquisition/DataProducer:1.0";
 
-	public static void insert(org.omg.CORBA.Any a, com.linkare.rec.acquisition.DataProducer that) {
-		org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
-		a.type(type());
-		write(out, that);
-		a.read_value(out.create_input_stream(), type());
+	public static void insert(final org.omg.CORBA.Any a, final com.linkare.rec.acquisition.DataProducer that) {
+		final org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
+		a.type(DataProducerHelper.type());
+		DataProducerHelper.write(out, that);
+		a.read_value(out.create_input_stream(), DataProducerHelper.type());
 	}
 
-	public static com.linkare.rec.acquisition.DataProducer extract(org.omg.CORBA.Any a) {
-		return read(a.create_input_stream());
+	public static com.linkare.rec.acquisition.DataProducer extract(final org.omg.CORBA.Any a) {
+		return DataProducerHelper.read(a.create_input_stream());
 	}
 
 	private static org.omg.CORBA.TypeCode __typeCode = null;
 
 	synchronized public static org.omg.CORBA.TypeCode type() {
-		if (__typeCode == null) {
-			__typeCode = org.omg.CORBA.ORB.init().create_interface_tc(
+		if (DataProducerHelper.__typeCode == null) {
+			DataProducerHelper.__typeCode = org.omg.CORBA.ORB.init().create_interface_tc(
 					com.linkare.rec.acquisition.DataProducerHelper.id(), "DataProducer");
 		}
-		return __typeCode;
+		return DataProducerHelper.__typeCode;
 	}
 
 	public static String id() {
-		return _id;
+		return DataProducerHelper._id;
 	}
 
-	public static com.linkare.rec.acquisition.DataProducer read(org.omg.CORBA.portable.InputStream istream) {
-		return narrow(istream.read_Object(_DataProducerStub.class));
+	public static com.linkare.rec.acquisition.DataProducer read(final org.omg.CORBA.portable.InputStream istream) {
+		return DataProducerHelper.narrow(istream.read_Object(_DataProducerStub.class));
 	}
 
-	public static void write(org.omg.CORBA.portable.OutputStream ostream, com.linkare.rec.acquisition.DataProducer value) {
-		ostream.write_Object((org.omg.CORBA.Object) value);
+	public static void write(final org.omg.CORBA.portable.OutputStream ostream,
+			final com.linkare.rec.acquisition.DataProducer value) {
+		ostream.write_Object(value);
 	}
 
-	public static com.linkare.rec.acquisition.DataProducer narrow(org.omg.CORBA.Object obj) {
-		if (obj == null)
+	public static com.linkare.rec.acquisition.DataProducer narrow(final org.omg.CORBA.Object obj) {
+		if (obj == null) {
 			return null;
-		else if (obj instanceof com.linkare.rec.acquisition.DataProducer)
+		} else if (obj instanceof com.linkare.rec.acquisition.DataProducer) {
 			return (com.linkare.rec.acquisition.DataProducer) obj;
-		else if (!obj._is_a(id()))
+		} else if (!obj._is_a(DataProducerHelper.id())) {
 			throw new org.omg.CORBA.BAD_PARAM();
-		else {
-			org.omg.CORBA.portable.Delegate delegate = ((org.omg.CORBA.portable.ObjectImpl) obj)._get_delegate();
-			com.linkare.rec.acquisition._DataProducerStub stub = new com.linkare.rec.acquisition._DataProducerStub();
+		} else {
+			final org.omg.CORBA.portable.Delegate delegate = ((org.omg.CORBA.portable.ObjectImpl) obj)._get_delegate();
+			final com.linkare.rec.acquisition._DataProducerStub stub = new com.linkare.rec.acquisition._DataProducerStub();
 			stub._set_delegate(delegate);
 			return stub;
 		}

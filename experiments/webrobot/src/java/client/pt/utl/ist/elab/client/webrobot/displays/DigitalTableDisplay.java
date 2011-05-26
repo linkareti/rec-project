@@ -6,6 +6,8 @@
 
 package pt.utl.ist.elab.client.webrobot.displays;
 
+import javax.swing.JFileChooser;
+
 import pt.utl.ist.elab.client.webrobot.utils.ExtensionFilter;
 import pt.utl.ist.elab.client.webrobot.utils.PrintComponent;
 
@@ -17,6 +19,11 @@ import com.linkare.rec.impl.client.experiment.ExpDataModel;
  * @author André Neto - LEFT - IST
  */
 public class DigitalTableDisplay extends javax.swing.JPanel implements ExpDataDisplay {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5719403966449589995L;
+
 	/** Creates new form DigitalTableDisplay */
 	public DigitalTableDisplay() {
 		initComponents();
@@ -41,7 +48,8 @@ public class DigitalTableDisplay extends javax.swing.JPanel implements ExpDataDi
 		jFileChooserSave.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
 		jFileChooserSave.setFileFilter(textExtension);
 		digitalTableModelProxy.addTableModelListener(new javax.swing.event.TableModelListener() {
-			public void tableChanged(javax.swing.event.TableModelEvent evt) {
+			@Override
+			public void tableChanged(final javax.swing.event.TableModelEvent evt) {
 				digitalTableModelProxyTableChanged(evt);
 			}
 		});
@@ -53,7 +61,7 @@ public class DigitalTableDisplay extends javax.swing.JPanel implements ExpDataDi
 		jTableData.setModel(digitalTableModelProxy);
 		jTableData.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
 		jTableData.setPreferredScrollableViewportSize(new java.awt.Dimension(453, 400));
-		javax.swing.table.TableColumnModel tableColumnModelData = jTableData.getColumnModel();
+		final javax.swing.table.TableColumnModel tableColumnModelData = jTableData.getColumnModel();
 		tableColumnModelData.getColumn(0).setMinWidth(70);
 		tableColumnModelData.getColumn(0).setMaxWidth(70);
 		jScrollPaneData.setViewportView(jTableData);
@@ -64,7 +72,8 @@ public class DigitalTableDisplay extends javax.swing.JPanel implements ExpDataDi
 				"/pt/utl/ist/elab/client/webrobot/displays/resources/Save16.gif")));
 		jButtonSave.setToolTipText("Guardar dados...");
 		jButtonSave.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonSaveActionPerformed(evt);
 			}
 		});
@@ -75,7 +84,8 @@ public class DigitalTableDisplay extends javax.swing.JPanel implements ExpDataDi
 				"/pt/utl/ist/elab/client/webrobot/displays/resources/Print16.gif")));
 		jButtonDataPrint.setToolTipText("Imprimir tabela...");
 		jButtonDataPrint.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonDataPrintActionPerformed(evt);
 			}
 		});
@@ -86,33 +96,34 @@ public class DigitalTableDisplay extends javax.swing.JPanel implements ExpDataDi
 
 	}// GEN-END:initComponents
 
-	private void digitalTableModelProxyTableChanged(javax.swing.event.TableModelEvent evt) {// GEN-FIRST:event_digitalTableModelProxyTableChanged
+	private void digitalTableModelProxyTableChanged(final javax.swing.event.TableModelEvent evt) {// GEN-FIRST:event_digitalTableModelProxyTableChanged
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				jTableData.scrollRectToVisible(jTableData.getCellRect(jTableData.getRowCount() + 1, 0, true));
 			}
 		});
 	}// GEN-LAST:event_digitalTableModelProxyTableChanged
 
-	private void jButtonDataPrintActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonDataPrintActionPerformed
+	private void jButtonDataPrintActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonDataPrintActionPerformed
 		printTable();
 	}// GEN-LAST:event_jButtonDataPrintActionPerformed
 
-	private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonSaveActionPerformed
-		int returnValue = jFileChooserSave.showSaveDialog(this);
+	private void jButtonSaveActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonSaveActionPerformed
+		final int returnValue = jFileChooserSave.showSaveDialog(this);
 		String extension = null;
-		if (returnValue == jFileChooserSave.APPROVE_OPTION) {
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			extension = textExtension.getExtension();
 		}
 		String path = jFileChooserSave.getSelectedFile().getPath();
 		if (path.endsWith(".txt")) {
 			path = path.substring(0, path.length() - 4);
 		}
-		java.io.File saveFile = new java.io.File(path + "." + extension);
+		final java.io.File saveFile = new java.io.File(path + "." + extension);
 		saveTable(saveFile, false);
 	}// GEN-LAST:event_jButtonSaveActionPerformed
 
-	public void saveTable(java.io.File saveFile, boolean append) {
+	public void saveTable(final java.io.File saveFile, final boolean append) {
 		try {
 			fileWriter = new java.io.FileWriter(saveFile, append);
 			for (int headerCol = 0; headerCol < jTableData.getColumnCount(); headerCol++) {
@@ -122,13 +133,14 @@ public class DigitalTableDisplay extends javax.swing.JPanel implements ExpDataDi
 			fileWriter.write(System.getProperty("line.separator"));
 			for (int row = 0; row < jTableData.getRowCount(); row++) {
 				for (int col = 0; col < jTableData.getColumnCount(); col++) {
-					fileWriter.write(new String().valueOf(jTableData.getValueAt(row, col)));
+					new String();
+					fileWriter.write(String.valueOf(jTableData.getValueAt(row, col)));
 					fileWriter.write(delimiter);
 				}
 				fileWriter.write(System.getProperty("line.separator"));
 			}
 			fileWriter.close();
-		} catch (java.io.IOException ioe) {
+		} catch (final java.io.IOException ioe) {
 			System.out.println("Erro ao tentar escrever no ficheiro..." + ioe);
 		}
 	}
@@ -137,26 +149,32 @@ public class DigitalTableDisplay extends javax.swing.JPanel implements ExpDataDi
 		new PrintComponent(jTableData);
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.Icon getIcon() {
 		return icon;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
-	public void setExpDataModel(ExpDataModel model) {
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
 		digitalTableModelProxy.setExpDataModel(model);
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
@@ -172,9 +190,9 @@ public class DigitalTableDisplay extends javax.swing.JPanel implements ExpDataDi
 	// End of variables declaration//GEN-END:variables
 	// my variables
 	private java.io.FileWriter fileWriter;
-	private String delimiter = ",";
-	private javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource(
+	private final String delimiter = ",";
+	private final javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/displays/resources/JTableD16.gif"));
-	private String name = "Entradas digitais";
-	private ExtensionFilter textExtension = new ExtensionFilter("txt", "ext");
+	private final String name = "Entradas digitais";
+	private final ExtensionFilter textExtension = new ExtensionFilter("txt", "ext");
 }

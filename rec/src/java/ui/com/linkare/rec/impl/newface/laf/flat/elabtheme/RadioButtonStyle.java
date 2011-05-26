@@ -9,6 +9,8 @@ package com.linkare.rec.impl.newface.laf.flat.elabtheme;
 import java.awt.Color;
 import java.util.Map;
 
+import com.linkare.rec.impl.newface.laf.flat.theme.AbstractStyle;
+
 /**
  * 
  * @author joao
@@ -17,7 +19,7 @@ public class RadioButtonStyle extends DefaultStyle {
 
 	public static final String ID = "RadioButton";
 
-	//COLORS	
+	// COLORS
 	private static final Color COLOR_RADIOBUTTON_FG = new Color(0x515151);
 	private static final Color COLOR_RADIOBUTTON_BG = new Color(0xE4EEED);
 
@@ -30,14 +32,14 @@ public class RadioButtonStyle extends DefaultStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return RadioButtonStyle.ID;
 	}
 
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(FOREGROUND, COLOR_RADIOBUTTON_FG);
-		map.put(BACKGROUND, COLOR_RADIOBUTTON_BG);
+		map.put(AbstractStyle.FOREGROUND, RadioButtonStyle.COLOR_RADIOBUTTON_FG);
+		map.put(AbstractStyle.BACKGROUND, RadioButtonStyle.COLOR_RADIOBUTTON_BG);
 	}
 
 }

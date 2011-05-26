@@ -16,14 +16,14 @@ public class OpticaTableModel extends DefaultExperimentDataTable {
 
 	/** Generated UID */
 	private static final long serialVersionUID = -6452291751943433228L;
-	
+
 	/**
 	 * Creates the <code>OpticaTableModel</code>.
 	 */
 	public OpticaTableModel() {
 		super();
-		
-		OpticaTableModelProxy model = new OpticaTableModelProxy();
+
+		final OpticaTableModelProxy model = new OpticaTableModelProxy();
 		setActualTableModel(model);
 		setExpDataModelContainer(model);
 	}

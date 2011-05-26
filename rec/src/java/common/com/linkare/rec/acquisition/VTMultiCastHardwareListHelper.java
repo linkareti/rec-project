@@ -8,78 +8,84 @@ public final class VTMultiCastHardwareListHelper implements org.omg.CORBA.portab
 	public VTMultiCastHardwareListHelper() {
 	}
 
-	public static void insert(org.omg.CORBA.Any a, com.linkare.rec.acquisition.MultiCastHardware[] that) {
-		org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
-		a.type(type());
-		write(out, that);
-		a.read_value(out.create_input_stream(), type());
+	public static void insert(final org.omg.CORBA.Any a, final com.linkare.rec.acquisition.MultiCastHardware[] that) {
+		final org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
+		a.type(VTMultiCastHardwareListHelper.type());
+		VTMultiCastHardwareListHelper.write(out, that);
+		a.read_value(out.create_input_stream(), VTMultiCastHardwareListHelper.type());
 	}
 
-	public static com.linkare.rec.acquisition.MultiCastHardware[] extract(org.omg.CORBA.Any a) {
-		return read(a.create_input_stream());
+	public static com.linkare.rec.acquisition.MultiCastHardware[] extract(final org.omg.CORBA.Any a) {
+		return VTMultiCastHardwareListHelper.read(a.create_input_stream());
 	}
 
 	private static org.omg.CORBA.TypeCode __typeCode = null;
 	private static boolean __active = false;
 
 	synchronized public static org.omg.CORBA.TypeCode type() {
-		if (__typeCode == null) {
+		if (VTMultiCastHardwareListHelper.__typeCode == null) {
 			synchronized (org.omg.CORBA.TypeCode.class) {
-				if (__typeCode == null) {
-					if (__active) {
-						return org.omg.CORBA.ORB.init().create_recursive_tc(_id);
+				if (VTMultiCastHardwareListHelper.__typeCode == null) {
+					if (VTMultiCastHardwareListHelper.__active) {
+						return org.omg.CORBA.ORB.init().create_recursive_tc(VTMultiCastHardwareListHelper._id);
 					}
-					__active = true;
-					__typeCode = com.linkare.rec.acquisition.MultiCastHardwareHelper.type();
-					__typeCode = org.omg.CORBA.ORB.init().create_sequence_tc(0, __typeCode);
-					__typeCode = org.omg.CORBA.ORB.init().create_alias_tc(
+					VTMultiCastHardwareListHelper.__active = true;
+					VTMultiCastHardwareListHelper.__typeCode = com.linkare.rec.acquisition.MultiCastHardwareHelper
+							.type();
+					VTMultiCastHardwareListHelper.__typeCode = org.omg.CORBA.ORB.init().create_sequence_tc(0,
+							VTMultiCastHardwareListHelper.__typeCode);
+					VTMultiCastHardwareListHelper.__typeCode = org.omg.CORBA.ORB.init().create_alias_tc(
 							com.linkare.rec.acquisition.MultiCastHardwareListHelper.id(), "MultiCastHardwareList",
-							__typeCode);
-					__typeCode = org.omg.CORBA.ORB.init().create_value_box_tc(_id, "VTMultiCastHardwareList",
-							__typeCode);
-					__active = false;
+							VTMultiCastHardwareListHelper.__typeCode);
+					VTMultiCastHardwareListHelper.__typeCode = org.omg.CORBA.ORB.init().create_value_box_tc(
+							VTMultiCastHardwareListHelper._id, "VTMultiCastHardwareList",
+							VTMultiCastHardwareListHelper.__typeCode);
+					VTMultiCastHardwareListHelper.__active = false;
 				}
 			}
 		}
-		return __typeCode;
+		return VTMultiCastHardwareListHelper.__typeCode;
 	}
 
 	public static String id() {
-		return _id;
+		return VTMultiCastHardwareListHelper._id;
 	}
 
-	public static com.linkare.rec.acquisition.MultiCastHardware[] read(org.omg.CORBA.portable.InputStream istream) {
+	public static com.linkare.rec.acquisition.MultiCastHardware[] read(final org.omg.CORBA.portable.InputStream istream) {
 		if (!(istream instanceof org.omg.CORBA_2_3.portable.InputStream)) {
 			throw new org.omg.CORBA.BAD_PARAM();
 		}
 		return (com.linkare.rec.acquisition.MultiCastHardware[]) ((org.omg.CORBA_2_3.portable.InputStream) istream)
-				.read_value(_instance);
+				.read_value(VTMultiCastHardwareListHelper._instance);
 	}
 
-	public java.io.Serializable read_value(org.omg.CORBA.portable.InputStream istream) {
+	@Override
+	public java.io.Serializable read_value(final org.omg.CORBA.portable.InputStream istream) {
 		com.linkare.rec.acquisition.MultiCastHardware[] tmp;
 		tmp = com.linkare.rec.acquisition.MultiCastHardwareListHelper.read(istream);
-		return (java.io.Serializable) tmp;
+		return tmp;
 	}
 
-	public static void write(org.omg.CORBA.portable.OutputStream ostream,
-			com.linkare.rec.acquisition.MultiCastHardware[] value) {
+	public static void write(final org.omg.CORBA.portable.OutputStream ostream,
+			final com.linkare.rec.acquisition.MultiCastHardware[] value) {
 		if (!(ostream instanceof org.omg.CORBA_2_3.portable.OutputStream)) {
 			throw new org.omg.CORBA.BAD_PARAM();
 		}
-		((org.omg.CORBA_2_3.portable.OutputStream) ostream).write_value(value, _instance);
+		((org.omg.CORBA_2_3.portable.OutputStream) ostream).write_value(value, VTMultiCastHardwareListHelper._instance);
 	}
 
-	public void write_value(org.omg.CORBA.portable.OutputStream ostream, java.io.Serializable value) {
+	@Override
+	public void write_value(final org.omg.CORBA.portable.OutputStream ostream, final java.io.Serializable value) {
 		if (!(value instanceof com.linkare.rec.acquisition.MultiCastHardware[])) {
 			throw new org.omg.CORBA.MARSHAL();
 		}
-		com.linkare.rec.acquisition.MultiCastHardware[] valueType = (com.linkare.rec.acquisition.MultiCastHardware[]) value;
+		final com.linkare.rec.acquisition.MultiCastHardware[] valueType = (com.linkare.rec.acquisition.MultiCastHardware[]) value;
 		com.linkare.rec.acquisition.MultiCastHardwareListHelper.write(ostream, valueType);
 	}
 
+	@Override
 	public String get_id() {
-		return _id;
+		return VTMultiCastHardwareListHelper._id;
 	}
 
 }

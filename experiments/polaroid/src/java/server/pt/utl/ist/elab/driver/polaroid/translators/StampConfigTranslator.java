@@ -27,36 +27,42 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 
 	/** Creates a new instance of StampRelayTranslator */
 	public StampConfigTranslator() {
-		super(COMMAND_IDENTIFIER);
+		super(StampConfigTranslator.COMMAND_IDENTIFIER);
 	}
 
-	public boolean translate(StampCommand command) {
-		if (command.getCommandIdentifier() == null)
+	@Override
+	public boolean translate(final StampCommand command) {
+		if (command.getCommandIdentifier() == null) {
 			return false;
-		if (!command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER))
+		}
+		if (!command.getCommandIdentifier().equalsIgnoreCase(StampConfigTranslator.COMMAND_IDENTIFIER)) {
 			return false;
+		}
 
-		int numsamples = ((Integer) command.getCommandData(NUMSAMPLES_STR)).intValue();
-		int posini = (((Integer) command.getCommandData(POS_INI_POL_STR)).intValue() * 155) / 180;
-		int posend = (((Integer) command.getCommandData(POS_END_POL_STR)).intValue() * 155) / 180;
-		int posfixo = (((Integer) command.getCommandData(POS_FIXO_STR)).intValue() * 155) / 180;
-		int luzpol = ((Integer) command.getCommandData(LUZ_POL_STR)).intValue();
-		int calib = ((Integer) command.getCommandData(CALIB_STR)).intValue();
+		final int numsamples = ((Integer) command.getCommandData(StampConfigTranslator.NUMSAMPLES_STR)).intValue();
+		final int posini = (((Integer) command.getCommandData(StampConfigTranslator.POS_INI_POL_STR)).intValue() * 155) / 180;
+		final int posend = (((Integer) command.getCommandData(StampConfigTranslator.POS_END_POL_STR)).intValue() * 155) / 180;
+		final int posfixo = (((Integer) command.getCommandData(StampConfigTranslator.POS_FIXO_STR)).intValue() * 155) / 180;
+		final int luzpol = ((Integer) command.getCommandData(StampConfigTranslator.LUZ_POL_STR)).intValue();
+		final int calib = ((Integer) command.getCommandData(StampConfigTranslator.CALIB_STR)).intValue();
 
 		String posinistr = "" + posini;
-		while (posinistr.length() < 3)
+		while (posinistr.length() < 3) {
 			posinistr = "0" + posinistr;
+		}
 
 		String posendstr = "" + posend;
-		while (posendstr.length() < 3)
+		while (posendstr.length() < 3) {
 			posendstr = "0" + posendstr;
+		}
 
 		String posfixostr = "" + posfixo;
-		while (posfixostr.length() < 3)
+		while (posfixostr.length() < 3) {
 			posfixostr = "0" + posfixostr;
+		}
 
-		String commandStr = command.getCommandIdentifier() + " " + posfixostr + " " + posinistr + " " + posendstr + " "
-				+ calib + " " + luzpol;
+		final String commandStr = command.getCommandIdentifier() + " " + posfixostr + " " + posinistr + " " + posendstr
+				+ " " + calib + " " + luzpol;
 		command.setCommand(commandStr);
 
 		return true;

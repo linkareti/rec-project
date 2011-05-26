@@ -7,6 +7,7 @@
 package pt.utl.ist.elab.client.aleatorio.displays;
 
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 
 /**
  * 
@@ -16,12 +17,16 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
 
-	private JScrollPane  scroll;
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8629188632289132947L;
+	private final JScrollPane scroll;
+
 	/** Creates new form ImagePanelDisplay */
 	public ImagePanelDisplay() {
 		initComponents();
-		
+
 		scroll = new JScrollPane();
 		scroll.setViewportView(this);
 	}
@@ -41,7 +46,7 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		dotsFoundText = new javax.swing.JTextField();
 		diceFoundText = new javax.swing.JTextField();
 		imageScrollPanel = new javax.swing.JScrollPane();
-//		ButtonsScrollPanel = new javax.swing.JScrollPane();
+		// ButtonsScrollPanel = new javax.swing.JScrollPane();
 		controlsPanel = new javax.swing.JPanel();
 		originalButton = new javax.swing.JButton();
 		BWButton = new javax.swing.JButton();
@@ -77,14 +82,14 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		infoPanel.add(diceFoundLabel);
 
 		dotsFoundText.setEditable(false);
-		dotsFoundText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		dotsFoundText.setHorizontalAlignment(SwingConstants.CENTER);
 		dotsFoundText.setToolTipText("Number of dots found in the image.");
 		dotsFoundText.setName("dotsFoundText");
 		infoPanel.add(dotsFoundText);
 
 		diceFoundText.setBackground(new java.awt.Color(204, 204, 204));
 		diceFoundText.setEditable(false);
-		diceFoundText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		diceFoundText.setHorizontalAlignment(SwingConstants.CENTER);
 		diceFoundText
 				.setToolTipText("The number of dice found in the image by clustering (might not be correct if there are at least 2 dice close toghether).");
 		diceFoundText.setName("diceFoundText");
@@ -97,9 +102,9 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		imageScrollPanel.setPreferredSize(new java.awt.Dimension(100, 100));
 		add(imageScrollPanel, java.awt.BorderLayout.CENTER);
 
-//		ButtonsScrollPanel.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-//		ButtonsScrollPanel.setMinimumSize(new java.awt.Dimension(7, 43));
-//		ButtonsScrollPanel.setPreferredSize(new java.awt.Dimension(624, 43));
+		// ButtonsScrollPanel.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		// ButtonsScrollPanel.setMinimumSize(new java.awt.Dimension(7, 43));
+		// ButtonsScrollPanel.setPreferredSize(new java.awt.Dimension(624, 43));
 		controlsPanel.setLayout(new java.awt.GridBagLayout());
 
 		controlsPanel.setName("controlsPanel");
@@ -108,7 +113,8 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		originalButton.setToolTipText("Display the original image.");
 		originalButton.setName("originalButton");
 		originalButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				originalButtonHandler(evt);
 			}
 		});
@@ -122,7 +128,8 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		BWButton.setToolTipText("Display the Black&Whyte image.");
 		BWButton.setName("BWButton");
 		BWButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				BWButtonHandler(evt);
 			}
 		});
@@ -138,7 +145,8 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		edgesButton.setName("edgesButton");
 		edgesButton.setEnabled(false);
 		edgesButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				edgesButtonHandler(evt);
 			}
 		});
@@ -154,7 +162,8 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		houghButton.setName("houghButton");
 		houghButton.setEnabled(false);
 		houghButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				houghButtonHandler(evt);
 			}
 		});
@@ -171,7 +180,8 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		countButton.setName("counterButton");
 		countButton.setEnabled(false);
 		countButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				countButtonHandler(evt);
 			}
 		});
@@ -210,7 +220,8 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		nextButton.setName("nextButton");
 		nextButton.setEnabled(false);
 		nextButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				nextButtonHandler(evt);
 			}
 		});
@@ -231,7 +242,8 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		refineCountButton.setText("Refine");
 		refineCountButton.setEnabled(false);
 		refineCountButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				refineCountButtonActionPerformedHandler(evt);
 			}
 		});
@@ -247,27 +259,29 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		gridBagConstraints.gridy = 0;
 		controlsPanel.add(arrowLabel14, gridBagConstraints);
 
-//		ButtonsScrollPanel.setViewportView(controlsPanel);
-//
-//		add(ButtonsScrollPanel, java.awt.BorderLayout.SOUTH);
+		// ButtonsScrollPanel.setViewportView(controlsPanel);
+		//
+		// add(ButtonsScrollPanel, java.awt.BorderLayout.SOUTH);
 		add(controlsPanel, java.awt.BorderLayout.SOUTH);
 
 	}// GEN-END:initComponents
 
-	private void refineCountButtonActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_refineCountButtonActionPerformedHandler
+	private void refineCountButtonActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_refineCountButtonActionPerformedHandler
 		// Add your handling code here:
-		if (analysisPanel[currentAnalysisPanelIndex].getImage("refineCount") == null)
-			analysisPanel[currentAnalysisPanelIndex].refineCount(analysisPanel[currentAnalysisPanelIndex].IMAGE_HOUGH);
-		else
+		if (analysisPanel[currentAnalysisPanelIndex].getImage("refineCount") == null) {
+			analysisPanel[currentAnalysisPanelIndex].refineCount(AnalysisPanel.IMAGE_HOUGH);
+		} else {
 			analysisPanel[currentAnalysisPanelIndex].setImage(analysisPanel[currentAnalysisPanelIndex]
 					.getImage("refineCount"));
+		}
 		dotsFoundText.setText(String.valueOf(analysisPanel[currentAnalysisPanelIndex].getCenterCounter()));
 		diceFoundText.setText(String.valueOf(analysisPanel[currentAnalysisPanelIndex].getClusterCounter()));
 		analysing = false;
 
 		// if (analysisPanel.length>currentAnalysisPanelIndex+1)
-		if (currentAnalysisPanelCount > currentAnalysisPanelIndex + 1)
+		if (currentAnalysisPanelCount > currentAnalysisPanelIndex + 1) {
 			nextButton.setEnabled(true);
+		}
 
 		imageDisplaySingleton.setStoredInt(analysisPanel[currentAnalysisPanelIndex].getCenterCounter()); // stores
 		// the
@@ -278,7 +292,7 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		imageScrollPanel.repaint();
 	}// GEN-LAST:event_refineCountButtonActionPerformedHandler
 
-	private void originalButtonHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_originalButtonHandler
+	private void originalButtonHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_originalButtonHandler
 		// Add your handling code here:
 		if (analysisPanel != null && analysisPanel[currentAnalysisPanelIndex] != null) {
 			analysisPanel[currentAnalysisPanelIndex].setImage(analysisPanel[currentAnalysisPanelIndex]
@@ -289,14 +303,15 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		}
 	}// GEN-LAST:event_originalButtonHandler
 
-	private void BWButtonHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BWButtonHandler
+	private void BWButtonHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BWButtonHandler
 		// Add your handling code here:
 		if (analysisPanel != null) {
-			if (analysisPanel[currentAnalysisPanelIndex].getImage("bw") == null)
+			if (analysisPanel[currentAnalysisPanelIndex].getImage("bw") == null) {
 				analysisPanel[currentAnalysisPanelIndex].conversionBW();
-			else
+			} else {
 				analysisPanel[currentAnalysisPanelIndex].setImage(analysisPanel[currentAnalysisPanelIndex]
 						.getImage("bw"));
+			}
 			edgesButton.setEnabled(true);
 			// viewingPanel.repaint();
 			analysisPanel[currentAnalysisPanelIndex].repaint();
@@ -304,37 +319,40 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		}// if
 	}// GEN-LAST:event_BWButtonHandler
 
-	private void edgesButtonHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_edgesButtonHandler
+	private void edgesButtonHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_edgesButtonHandler
 		// Add your handling code here:
-		if (analysisPanel[currentAnalysisPanelIndex].getImage("edges") == null)
+		if (analysisPanel[currentAnalysisPanelIndex].getImage("edges") == null) {
 			analysisPanel[currentAnalysisPanelIndex].edgeDetector();
-		else
+		} else {
 			analysisPanel[currentAnalysisPanelIndex].setImage(analysisPanel[currentAnalysisPanelIndex]
 					.getImage("edges"));
+		}
 		houghButton.setEnabled(true);
 		analysisPanel[currentAnalysisPanelIndex].repaint();
 		imageScrollPanel.repaint();
 	}// GEN-LAST:event_edgesButtonHandler
 
-	private void houghButtonHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_houghButtonHandler
+	private void houghButtonHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_houghButtonHandler
 		// Add your handling code here:
-		if (analysisPanel[currentAnalysisPanelIndex].getImage("hough") == null)
+		if (analysisPanel[currentAnalysisPanelIndex].getImage("hough") == null) {
 			analysisPanel[currentAnalysisPanelIndex].houghTransform();
-		else
+		} else {
 			analysisPanel[currentAnalysisPanelIndex].setImage(analysisPanel[currentAnalysisPanelIndex]
 					.getImage("hough"));
+		}
 		countButton.setEnabled(true);
 		analysisPanel[currentAnalysisPanelIndex].repaint();
 		imageScrollPanel.repaint();
 	}// GEN-LAST:event_houghButtonHandler
 
-	private void countButtonHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_countButtonHandler
+	private void countButtonHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_countButtonHandler
 		// Add your handling code here:
-		if (analysisPanel[currentAnalysisPanelIndex].getImage("houghCount") == null)
+		if (analysisPanel[currentAnalysisPanelIndex].getImage("houghCount") == null) {
 			analysisPanel[currentAnalysisPanelIndex].houghCount();
-		else
+		} else {
 			analysisPanel[currentAnalysisPanelIndex].setImage(analysisPanel[currentAnalysisPanelIndex]
 					.getImage("houghCount"));
+		}
 		dotsFoundText.setText(String.valueOf(analysisPanel[currentAnalysisPanelIndex].getHoughCenterCounter()));
 		// diceFoundText.setText(String.valueOf(analysisPanel[0].getClusterCounter()));
 
@@ -344,7 +362,7 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		imageScrollPanel.repaint();
 	}// GEN-LAST:event_countButtonHandler
 
-	private void nextButtonHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_nextButtonHandler
+	private void nextButtonHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_nextButtonHandler
 		// Add your handling code here:
 
 		// analysisPanel = removeArrayEntry(analysisPanel,0);
@@ -379,13 +397,14 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		refineCountButton.setEnabled(false);
 		analysisPanel[currentAnalysisPanelIndex].repaint();
 		imageScrollPanel.repaint();
-		if (analysisPanel.length <= currentAnalysisPanelIndex + 1)
+		if (analysisPanel.length <= currentAnalysisPanelIndex + 1) {
 			nextButton.setEnabled(false);
+		}
 	}// GEN-LAST:event_nextButtonHandler
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JButton BWButton;
-//	private javax.swing.JScrollPane ButtonsScrollPanel;
+	// private javax.swing.JScrollPane ButtonsScrollPanel;
 	private javax.swing.JLabel arrowLabel1;
 	private javax.swing.JLabel arrowLabel11;
 	private javax.swing.JLabel arrowLabel12;
@@ -409,17 +428,17 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 
 	/** My vars */
 	private com.linkare.rec.impl.client.experiment.ExpDataModel model;
-	private String name = "Image Analysis";
+	private final String name = "Image Analysis";
 
-	private javax.swing.Icon icon = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.Icon icon = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/aleatorio/resources/AleatorioIcon.gif"));
 
-	private int imageWidth = 640;
-	private int imageHeight = 480;
+	private final int imageWidth = 640;
+	private final int imageHeight = 480;
 	private AnalysisPanel[] analysisPanel = null;
 	private boolean analysing = false;
 	private int currentAnalysisPanelCount = 0, currentAnalysisPanelIndex = 0;
-	private pt.utl.ist.elab.client.aleatorio.utils.StorageSingleton imageDisplaySingleton = pt.utl.ist.elab.client.aleatorio.utils.StorageSingleton
+	private final pt.utl.ist.elab.client.aleatorio.utils.StorageSingleton imageDisplaySingleton = pt.utl.ist.elab.client.aleatorio.utils.StorageSingleton
 			.getSingleton();
 	private int[] configurationValues;
 	private byte[] configurationByteArray;
@@ -427,50 +446,60 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 	private boolean configured = false;
 
 	/**
-	 *ExpDataDisplay Implementation
+	 * ExpDataDisplay Implementation
 	 */
-	public void setExpDataModel(com.linkare.rec.impl.client.experiment.ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final com.linkare.rec.impl.client.experiment.ExpDataModel model) {
+		if (this.model != null) {
 			model.removeExpDataModelListener(this);
+		}
 
 		this.model = model;
 
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 
 	}// setExpDataModel(ExpDataModel model)
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
-//		return this;
+		// return this;
 		return scroll;
 	}// getDisplay()
 
+	@Override
 	public String getName() {
 		return name;
 	}// getName()
 
+	@Override
 	public javax.swing.Icon getIcon() {
 		return icon;
 	}// getIcon()
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}// getMenuBar()
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}// getToolBar()
 
 	/**
-	 *ExpDataModelListener implementation
+	 * ExpDataModelListener implementation
 	 */
 
-	public void newSamples(com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
 		System.out.println(">>> Received New Samples!!");
 		System.out.println("DataChannels:");
 		for (int i = 0; i < model.getChannelCount(); i++) {
-			if (model.getValueAt(evt.getSamplesStartIndex(), i) != null)
+			if (model.getValueAt(evt.getSamplesStartIndex(), i) != null) {
 				System.out.println("channel[" + i + "].name=" + model.getChannelName(i));
+			}
 		}
 
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
@@ -481,16 +510,16 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 			// System.out.println("checking for image = "+(model.getValueAt(i,
 			// model.getChannelIndex("Image")) != null));
 			if (model.getValueAt(i, model.getChannelIndex("Image")) != null) {
-				if (analysisPanel == null)
+				if (analysisPanel == null) {
 					analysisPanel = new AnalysisPanel[1];
-				else {
+				} else {
 					analysisPanel = addArrayPanel(analysisPanel);
 					imageScrollPanel.setViewportView(analysisPanel[currentAnalysisPanelIndex]);
 				}// else
 
 				imageByteArray = model.getValueAt(i, model.getChannelIndex("Image")).getValue().getByteArrayValue()
 						.getData();
-				java.awt.Image tempImage = byteArray2Image(imageByteArray);
+				final java.awt.Image tempImage = byteArray2Image(imageByteArray);
 
 				// System.out.println("analysisPanel.length:"+analysisPanel.length
 				// + "; currentAnalysisPanelCount:"+currentAnalysisPanelCount);
@@ -503,8 +532,8 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 					System.out.println("currentAnalysisPanelCount:" + currentAnalysisPanelCount + "\nanalysisPanel:"
 							+ analysisPanel + "\nconfigured:" + configured);
 				}// if
-				// if (currentAnalysisPanelCount == 0)
-				// viewingPanel.add(analysisPanel[0]);
+					// if (currentAnalysisPanelCount == 0)
+					// viewingPanel.add(analysisPanel[0]);
 				analysisPanel[currentAnalysisPanelCount].setPreferredSize(new java.awt.Dimension(
 						analysisPanel[currentAnalysisPanelCount].imageSize()[0],
 						analysisPanel[currentAnalysisPanelCount].imageSize()[1]));
@@ -515,8 +544,9 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 					imageScrollPanel.repaint();
 					imageDisplaySingleton.setImage(analysisPanel[0].getImage("original"));
 				}// if
-				else
+				else {
 					nextButton.setEnabled(true);
+				}
 				currentAnalysisPanelCount++;
 				// System.out.println("Image:"+analysisPanel[currentAnalysisPanelCount-1].getImage("original"));
 			}// if__image
@@ -557,29 +587,30 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		}
 	}// newSamples(NewExpDataEvent evt)
 
+	@Override
 	public void dataModelStoped() {
 	}// dataModelStoped()
 
 	public void dataModelRunning() {
 	}// dataModelRunning()
 
-	public void headerAvailable(com.linkare.rec.data.config.HardwareAcquisitionConfig header) {
+	public void headerAvailable(final com.linkare.rec.data.config.HardwareAcquisitionConfig header) {
 	}// headerAvailable(HardwareAcquisitionConfig header)
 
 	/**
-	 *Utilities
+	 * Utilities
 	 */
 
-	private java.awt.Image byteArray2Image(byte[] byteArray) {
-		java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+	private java.awt.Image byteArray2Image(final byte[] byteArray) {
+		final java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
 		try {
 			baos.write(byteArray);
-		} catch (java.io.IOException e) {
+		} catch (final java.io.IOException e) {
 		}
 
-		java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(baos.toByteArray());
+		final java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(baos.toByteArray());
 
-		javax.imageio.stream.MemoryCacheImageInputStream mciis = new javax.imageio.stream.MemoryCacheImageInputStream(
+		final javax.imageio.stream.MemoryCacheImageInputStream mciis = new javax.imageio.stream.MemoryCacheImageInputStream(
 				bais);
 
 		java.awt.image.BufferedImage bImage = null;
@@ -587,61 +618,61 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		// converting the jpg byteArray into an image
 		try {
 			bImage = javax.imageio.ImageIO.read(mciis);
-		} catch (java.io.IOException e) {
+		} catch (final java.io.IOException e) {
 		}
 
-		return (java.awt.Image) bImage;
+		return bImage;
 	}// byteArray2Image(byte[] byteArray)
 
-	private java.awt.Image byteArray2Image_old(byte[] byteArray) {
-		int[] pixels = new int[byteArray.length / 3];
+	private java.awt.Image byteArray2Image_old(final byte[] byteArray) {
+		final int[] pixels = new int[byteArray.length / 3];
 		for (int index = 0; index < byteArray.length; index += 3) {
-			pixels[index / 3] = (int) (byteArray[index] & 0xff) << 16;
-			pixels[index / 3] += (int) (byteArray[index + 1] & 0xff) << 8;
-			pixels[index / 3] += (int) (byteArray[index + 2] & 0xff);
+			pixels[index / 3] = (byteArray[index] & 0xff) << 16;
+			pixels[index / 3] += (byteArray[index + 1] & 0xff) << 8;
+			pixels[index / 3] += (byteArray[index + 2] & 0xff);
 		}
 
-		java.awt.image.MemoryImageSource mis = new java.awt.image.MemoryImageSource(imageWidth, imageHeight, pixels, 0,
-				imageWidth);
-		java.awt.Image image = createImage(mis);
+		final java.awt.image.MemoryImageSource mis = new java.awt.image.MemoryImageSource(imageWidth, imageHeight,
+				pixels, 0, imageWidth);
+		final java.awt.Image image = createImage(mis);
 
-		java.awt.MediaTracker tracker = new java.awt.MediaTracker(this);
+		final java.awt.MediaTracker tracker = new java.awt.MediaTracker(this);
 		tracker.addImage(image, 0);
 		try {
 			tracker.waitForAll();
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
 		return image;
 	}// byteArray2Image(byte[] byteArray) ******** OLD ********
 
-	private int[] byteArray2IntArray(byte[] byteArray) {
-		int[] temp = new int[byteArray.length / 4];
+	private int[] byteArray2IntArray(final byte[] byteArray) {
+		final int[] temp = new int[byteArray.length / 4];
 
 		for (int index = 0; index < temp.length; index++) {
-			temp[index] = (int) (byteArray[4 * index] & 0xff) << 24;
-			temp[index] += (int) (byteArray[4 * index + 1] & 0xff) << 16;
-			temp[index] += (int) (byteArray[4 * index + 2] & 0xff) << 8;
-			temp[index] += (int) (byteArray[4 * index + 3] & 0xff);
+			temp[index] = (byteArray[4 * index] & 0xff) << 24;
+			temp[index] += (byteArray[4 * index + 1] & 0xff) << 16;
+			temp[index] += (byteArray[4 * index + 2] & 0xff) << 8;
+			temp[index] += (byteArray[4 * index + 3] & 0xff);
 		}
 		return temp;
 	}// byteArray2IntArray(byte[] byteArray)
 
-	private AnalysisPanel analyseImage(AnalysisPanel analysisPan) {
+	private AnalysisPanel analyseImage(final AnalysisPanel analysisPan) {
 		analysisPan.conversionBW();
 		analysisPan.edgeDetector();
 		analysisPan.houghTransform();
 		analysisPan.houghCount();
 		// analysisPan.convolutionTransform();
 		// analysisPan.fullCount();
-		analysisPan.refineCount(analysisPanel[currentAnalysisPanelIndex].IMAGE_HOUGH);
+		analysisPan.refineCount(AnalysisPanel.IMAGE_HOUGH);
 		;
 		return analysisPan;
 	}// analyseImage (AnalysisPanel analysisPan)
 
-	private AnalysisPanel[] addArrayPanel(AnalysisPanel[] analysisPan) {
-		AnalysisPanel[] out = new AnalysisPanel[analysisPan.length + 1];
+	private AnalysisPanel[] addArrayPanel(final AnalysisPanel[] analysisPan) {
+		final AnalysisPanel[] out = new AnalysisPanel[analysisPan.length + 1];
 		for (int i = 0; i < analysisPan.length; i++) {
 			out[i] = (AnalysisPanel) analysisPan[i].clone();
 		}// for_i
@@ -649,8 +680,8 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		return out;
 	}// addArrayPanel
 
-	private AnalysisPanel[] removeArrayEntry(AnalysisPanel[] analysisPan, int index) {
-		AnalysisPanel[] returnPanel = new AnalysisPanel[analysisPan.length - 1];
+	private AnalysisPanel[] removeArrayEntry(final AnalysisPanel[] analysisPan, final int index) {
+		final AnalysisPanel[] returnPanel = new AnalysisPanel[analysisPan.length - 1];
 		for (int i = 0; i < analysisPan.length; i++) {
 			if (i < index) {
 				returnPanel[i] = analysisPan[i];
@@ -662,18 +693,23 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		return returnPanel;
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 

@@ -16,7 +16,7 @@ public class Debugger {
 	public Debugger() {
 	}
 
-	public static void print(Object className, String text) {
+	public static void print(final Object className, final String text) {
 		System.out.println(className.getClass().getName() + " says: " + text);
 	}
 

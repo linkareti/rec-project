@@ -16,7 +16,7 @@ final public class ChannelParameterConfigListHolder implements org.omg.CORBA.por
 	// Constructor with value initialisation
 	// @param initial the initial value
 	//
-	public ChannelParameterConfigListHolder(com.linkare.rec.data.config.ParameterConfig[] initial) {
+	public ChannelParameterConfigListHolder(final com.linkare.rec.data.config.ParameterConfig[] initial) {
 		value = initial;
 	}
 
@@ -24,7 +24,8 @@ final public class ChannelParameterConfigListHolder implements org.omg.CORBA.por
 	// Read ChannelParameterConfigList from a marshalled stream
 	// @param istream the input stream
 	//
-	public void _read(org.omg.CORBA.portable.InputStream istream) {
+	@Override
+	public void _read(final org.omg.CORBA.portable.InputStream istream) {
 		value = ChannelParameterConfigListHelper.read(istream);
 	}
 
@@ -32,7 +33,8 @@ final public class ChannelParameterConfigListHolder implements org.omg.CORBA.por
 	// Write ChannelParameterConfigList into a marshalled stream
 	// @param ostream the output stream
 	//
-	public void _write(org.omg.CORBA.portable.OutputStream ostream) {
+	@Override
+	public void _write(final org.omg.CORBA.portable.OutputStream ostream) {
 		ChannelParameterConfigListHelper.write(ostream, value);
 	}
 
@@ -40,6 +42,7 @@ final public class ChannelParameterConfigListHolder implements org.omg.CORBA.por
 	// Return the ChannelParameterConfigList TypeCode
 	// @return a TypeCode
 	//
+	@Override
 	public org.omg.CORBA.TypeCode _type() {
 		return ChannelParameterConfigListHelper.type();
 	}

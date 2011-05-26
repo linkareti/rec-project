@@ -14,7 +14,7 @@ public class DateBeanInfo extends SimpleBeanInfo {
 			com.linkare.rec.data.synch.DateCustomizer.class);
 
 	private static BeanDescriptor getBdescriptor() {
-		return beanDescriptor;
+		return DateBeanInfo.beanDescriptor;
 	}
 
 	static {// GEN-HEADEREND:BeanDescriptor
@@ -32,15 +32,18 @@ public class DateBeanInfo extends SimpleBeanInfo {
 	private static PropertyDescriptor[] properties = new PropertyDescriptor[3];
 
 	private static PropertyDescriptor[] getPdescriptor() {
-		return properties;
+		return DateBeanInfo.properties;
 	}
 
 	static {
 		try {
-			properties[PROPERTY_month] = new PropertyDescriptor("month", Date.class, "getMonth", "setMonth");
-			properties[PROPERTY_day] = new PropertyDescriptor("day", Date.class, "getDay", "setDay");
-			properties[PROPERTY_year] = new PropertyDescriptor("year", Date.class, "getYear", "setYear");
-		} catch (IntrospectionException e) {
+			DateBeanInfo.properties[DateBeanInfo.PROPERTY_month] = new PropertyDescriptor("month", Date.class,
+					"getMonth", "setMonth");
+			DateBeanInfo.properties[DateBeanInfo.PROPERTY_day] = new PropertyDescriptor("day", Date.class, "getDay",
+					"setDay");
+			DateBeanInfo.properties[DateBeanInfo.PROPERTY_year] = new PropertyDescriptor("year", Date.class, "getYear",
+					"setYear");
+		} catch (final IntrospectionException e) {
 		}// GEN-HEADEREND:Properties
 
 		// Here you can add code for customizing the properties array.
@@ -53,7 +56,7 @@ public class DateBeanInfo extends SimpleBeanInfo {
 	private static EventSetDescriptor[] eventSets = new EventSetDescriptor[0];
 
 	private static EventSetDescriptor[] getEdescriptor() {
-		return eventSets;
+		return DateBeanInfo.eventSets;
 	}
 
 	// GEN-HEADEREND:Events
@@ -69,15 +72,15 @@ public class DateBeanInfo extends SimpleBeanInfo {
 	private static MethodDescriptor[] methods = new MethodDescriptor[1];
 
 	private static MethodDescriptor[] getMdescriptor() {
-		return methods;
+		return DateBeanInfo.methods;
 	}
 
 	static {
 		try {
-			methods[METHOD_toString0] = new MethodDescriptor(com.linkare.rec.data.synch.Date.class.getMethod(
-					"toString", new Class[] {}));
-			methods[METHOD_toString0].setDisplayName("");
-		} catch (Exception e) {
+			DateBeanInfo.methods[DateBeanInfo.METHOD_toString0] = new MethodDescriptor(
+					com.linkare.rec.data.synch.Date.class.getMethod("toString", new Class[] {}));
+			DateBeanInfo.methods[DateBeanInfo.METHOD_toString0].setDisplayName("");
+		} catch (final Exception e) {
 		}// GEN-HEADEREND:Methods
 
 		// Here you can add code for customizing the methods array.
@@ -100,8 +103,9 @@ public class DateBeanInfo extends SimpleBeanInfo {
 	 *         May return null if the information should be obtained by
 	 *         automatic analysis.
 	 */
+	@Override
 	public BeanDescriptor getBeanDescriptor() {
-		return getBdescriptor();
+		return DateBeanInfo.getBdescriptor();
 	}
 
 	/**
@@ -117,8 +121,9 @@ public class DateBeanInfo extends SimpleBeanInfo {
 	 *         "instanceof" to check if a given PropertyDescriptor is an
 	 *         IndexedPropertyDescriptor.
 	 */
+	@Override
 	public PropertyDescriptor[] getPropertyDescriptors() {
-		return getPdescriptor();
+		return DateBeanInfo.getPdescriptor();
 	}
 
 	/**
@@ -128,8 +133,9 @@ public class DateBeanInfo extends SimpleBeanInfo {
 	 *         fired by this bean. May return null if the information should be
 	 *         obtained by automatic analysis.
 	 */
+	@Override
 	public EventSetDescriptor[] getEventSetDescriptors() {
-		return getEdescriptor();
+		return DateBeanInfo.getEdescriptor();
 	}
 
 	/**
@@ -139,8 +145,9 @@ public class DateBeanInfo extends SimpleBeanInfo {
 	 *         by this bean. May return null if the information should be
 	 *         obtained by automatic analysis.
 	 */
+	@Override
 	public MethodDescriptor[] getMethodDescriptors() {
-		return getMdescriptor();
+		return DateBeanInfo.getMdescriptor();
 	}
 
 	/**
@@ -153,8 +160,9 @@ public class DateBeanInfo extends SimpleBeanInfo {
 	 *         <P>
 	 *         Returns -1 if there is no default property.
 	 */
+	@Override
 	public int getDefaultPropertyIndex() {
-		return defaultPropertyIndex;
+		return DateBeanInfo.defaultPropertyIndex;
 	}
 
 	/**
@@ -166,7 +174,8 @@ public class DateBeanInfo extends SimpleBeanInfo {
 	 *         <P>
 	 *         Returns -1 if there is no default event.
 	 */
+	@Override
 	public int getDefaultEventIndex() {
-		return defaultEventIndex;
+		return DateBeanInfo.defaultEventIndex;
 	}
 }

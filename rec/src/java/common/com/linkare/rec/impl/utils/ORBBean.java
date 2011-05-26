@@ -46,18 +46,19 @@ import org.omg.PortableServer.ThreadPolicyValue;
 @SuppressWarnings("unchecked")
 public class ORBBean {
 	public static ORBBean getORBBean() {
-		if (this_object == null) {
-			this_object = new ORBBean();
+		if (ORBBean.this_object == null) {
+			ORBBean.this_object = new ORBBean();
 		}
 
-		return this_object;
+		return ORBBean.this_object;
 	}
 
-	public static ORBBean getORBBean(Applet applet) {
-		if (this_object == null)
-			this_object = new ORBBean(applet);
+	public static ORBBean getORBBean(final Applet applet) {
+		if (ORBBean.this_object == null) {
+			ORBBean.this_object = new ORBBean(applet);
+		}
 
-		return this_object;
+		return ORBBean.this_object;
 	}
 
 	/* Singleton Pattern */
@@ -74,26 +75,27 @@ public class ORBBean {
 		initORB();
 	}
 
-	private ORBBean(Applet applet) {
+	private ORBBean(final Applet applet) {
 		this.applet = applet;
 		initORB();
 	}
 
-	private java.lang.Object orb_synch = new java.lang.Object();
+	private final java.lang.Object orb_synch = new java.lang.Object();
 
 	private synchronized void initORB() {
 		synchronized (orb_synch) {
-			if (the_orb != null)
+			if (the_orb != null) {
 				return;
+			}
 
-			if (this.applet != null) {
-				the_orb = ORB.init(this.applet, null);
+			if (applet != null) {
+				the_orb = ORB.init(applet, null);
 			} else {
-				Properties props = System.getProperties();
+				final Properties props = System.getProperties();
 				the_orb = ORB.init(new String[] {}, props);
 			}
 
-			ORBRunner runner = new ORBRunner(the_orb);
+			final ORBRunner runner = new ORBRunner(the_orb);
 			try {
 				synchronized (runner) {
 					runner.start();
@@ -101,7 +103,7 @@ public class ORBBean {
 					// getNameService();
 					runner.wait(1000);
 				}
-			} catch (Exception e) {
+			} catch (final Exception e) {
 
 			}
 		}
@@ -111,15 +113,16 @@ public class ORBBean {
 	private class ORBRunner extends Thread {
 		org.omg.CORBA.ORB the_orb = null;
 
-		public ORBRunner(org.omg.CORBA.ORB the_orb) {
+		public ORBRunner(final org.omg.CORBA.ORB the_orb) {
 			this.the_orb = the_orb;
 			setDaemon(true);
 			setPriority(Thread.MAX_PRIORITY);
 		}
 
+		@Override
 		public void run() {
 			synchronized (this) {
-				this.notifyAll();
+				notifyAll();
 			}
 			the_orb.run();
 		}
@@ -139,16 +142,16 @@ public class ORBBean {
 			if (bidirpol == null) {
 				try {
 
-					Any any = getORB().create_any();
+					final Any any = getORB().create_any();
 
 					any.insert_ushort(BOTH.value);
 
 					bidirpol = getORB().create_policy(BIDIRECTIONAL_POLICY_TYPE.value, any);
 
-					PolicyManager opm = (PolicyManager) getORB().resolve_initial_references("ORBPolicyManager");
+					final PolicyManager opm = (PolicyManager) getORB().resolve_initial_references("ORBPolicyManager");
 					opm.set_policy_overrides(new Policy[] { bidirpol }, SetOverrideType.ADD_OVERRIDE);
 
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					logThrowable(Level.SEVERE, e.getMessage(), e);
 				}
 			}
@@ -157,42 +160,39 @@ public class ORBBean {
 		}
 	}
 
-	public synchronized POA getDataProducerPOA(ServantManager deactivator) throws Exception {
+	public synchronized POA getDataProducerPOA(final ServantManager deactivator) throws Exception {
 		synchronized (orb_synch) {
 			try {
 				if (dataProducerPOA == null) {
 
-					POA rootPOA = POAHelper.narrow(the_orb.resolve_initial_references("RootPOA"));
+					final POA rootPOA = POAHelper.narrow(the_orb.resolve_initial_references("RootPOA"));
 
 					rootPOA.the_POAManager().activate();
 
-					Policy bidirpol = getBidirPolicy();
+					final Policy bidirpol = getBidirPolicy();
 
 					Policy[] poa_policies = null;
 
-					if (bidirpol == null)
+					if (bidirpol == null) {
 						poa_policies = new Policy[] {
 								rootPOA.create_id_assignment_policy(IdAssignmentPolicyValue.USER_ID),
 								rootPOA.create_id_uniqueness_policy(IdUniquenessPolicyValue.UNIQUE_ID),
-								rootPOA
-										.create_implicit_activation_policy(ImplicitActivationPolicyValue.NO_IMPLICIT_ACTIVATION),
+								rootPOA.create_implicit_activation_policy(ImplicitActivationPolicyValue.NO_IMPLICIT_ACTIVATION),
 								rootPOA.create_lifespan_policy(LifespanPolicyValue.PERSISTENT),
-								rootPOA
-										.create_request_processing_policy(RequestProcessingPolicyValue.USE_SERVANT_MANAGER),
+								rootPOA.create_request_processing_policy(RequestProcessingPolicyValue.USE_SERVANT_MANAGER),
 								rootPOA.create_servant_retention_policy(ServantRetentionPolicyValue.RETAIN),
 								rootPOA.create_thread_policy(ThreadPolicyValue.ORB_CTRL_MODEL), };
-					else
+					} else {
 						poa_policies = new Policy[] {
 								bidirpol,
 								rootPOA.create_id_assignment_policy(IdAssignmentPolicyValue.USER_ID),
 								rootPOA.create_id_uniqueness_policy(IdUniquenessPolicyValue.UNIQUE_ID),
-								rootPOA
-										.create_implicit_activation_policy(ImplicitActivationPolicyValue.NO_IMPLICIT_ACTIVATION),
+								rootPOA.create_implicit_activation_policy(ImplicitActivationPolicyValue.NO_IMPLICIT_ACTIVATION),
 								rootPOA.create_lifespan_policy(LifespanPolicyValue.PERSISTENT),
-								rootPOA
-										.create_request_processing_policy(RequestProcessingPolicyValue.USE_SERVANT_MANAGER),
+								rootPOA.create_request_processing_policy(RequestProcessingPolicyValue.USE_SERVANT_MANAGER),
 								rootPOA.create_servant_retention_policy(ServantRetentionPolicyValue.RETAIN),
 								rootPOA.create_thread_policy(ThreadPolicyValue.ORB_CTRL_MODEL) };
+					}
 
 					dataProducerPOA = rootPOA.create_POA("DataProducerPOA", null, poa_policies);
 
@@ -202,7 +202,7 @@ public class ORBBean {
 				}
 
 				return dataProducerPOA;
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				throw e;
 			}
 		}
@@ -215,35 +215,32 @@ public class ORBBean {
 			try {
 				if (myRootPOA == null) {
 
-					POA rootPOA = POAHelper.narrow(the_orb.resolve_initial_references("RootPOA"));
+					final POA rootPOA = POAHelper.narrow(the_orb.resolve_initial_references("RootPOA"));
 					rootPOA.the_POAManager().activate();
 
-					Policy bidirpol = getBidirPolicy();
+					final Policy bidirpol = getBidirPolicy();
 					Policy[] poa_policies = null;
 
-					if (bidirpol == null)
+					if (bidirpol == null) {
 						poa_policies = new Policy[] {
 								rootPOA.create_id_assignment_policy(IdAssignmentPolicyValue.USER_ID),
 								rootPOA.create_id_uniqueness_policy(IdUniquenessPolicyValue.UNIQUE_ID),
-								rootPOA
-										.create_implicit_activation_policy(ImplicitActivationPolicyValue.NO_IMPLICIT_ACTIVATION),
+								rootPOA.create_implicit_activation_policy(ImplicitActivationPolicyValue.NO_IMPLICIT_ACTIVATION),
 								rootPOA.create_lifespan_policy(LifespanPolicyValue.PERSISTENT),
-								rootPOA
-										.create_request_processing_policy(RequestProcessingPolicyValue.USE_ACTIVE_OBJECT_MAP_ONLY),
+								rootPOA.create_request_processing_policy(RequestProcessingPolicyValue.USE_ACTIVE_OBJECT_MAP_ONLY),
 								rootPOA.create_servant_retention_policy(ServantRetentionPolicyValue.RETAIN),
 								rootPOA.create_thread_policy(ThreadPolicyValue.ORB_CTRL_MODEL), };
-					else
+					} else {
 						poa_policies = new Policy[] {
 								bidirpol,
 								rootPOA.create_id_assignment_policy(IdAssignmentPolicyValue.USER_ID),
 								rootPOA.create_id_uniqueness_policy(IdUniquenessPolicyValue.UNIQUE_ID),
-								rootPOA
-										.create_implicit_activation_policy(ImplicitActivationPolicyValue.NO_IMPLICIT_ACTIVATION),
+								rootPOA.create_implicit_activation_policy(ImplicitActivationPolicyValue.NO_IMPLICIT_ACTIVATION),
 								rootPOA.create_lifespan_policy(LifespanPolicyValue.PERSISTENT),
-								rootPOA
-										.create_request_processing_policy(RequestProcessingPolicyValue.USE_ACTIVE_OBJECT_MAP_ONLY),
+								rootPOA.create_request_processing_policy(RequestProcessingPolicyValue.USE_ACTIVE_OBJECT_MAP_ONLY),
 								rootPOA.create_servant_retention_policy(ServantRetentionPolicyValue.RETAIN),
 								rootPOA.create_thread_policy(ThreadPolicyValue.ORB_CTRL_MODEL), };
+					}
 
 					myRootPOA = rootPOA.create_POA("MyRootPOA", null, poa_policies);
 
@@ -251,7 +248,7 @@ public class ORBBean {
 
 				}
 				return myRootPOA;
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				throw e;
 			}
 		}
@@ -265,35 +262,32 @@ public class ORBBean {
 			try {
 				if (myAutoIdRootPOA == null) {
 
-					POA rootPOA = POAHelper.narrow(the_orb.resolve_initial_references("RootPOA"));
+					final POA rootPOA = POAHelper.narrow(the_orb.resolve_initial_references("RootPOA"));
 					rootPOA.the_POAManager().activate();
 
-					Policy bidirpol = getBidirPolicy();
+					final Policy bidirpol = getBidirPolicy();
 					Policy[] poa_policies = null;
 
-					if (bidirpol == null)
+					if (bidirpol == null) {
 						poa_policies = new Policy[] {
 								rootPOA.create_id_assignment_policy(IdAssignmentPolicyValue.SYSTEM_ID),
 								rootPOA.create_id_uniqueness_policy(IdUniquenessPolicyValue.UNIQUE_ID),
-								rootPOA
-										.create_implicit_activation_policy(ImplicitActivationPolicyValue.IMPLICIT_ACTIVATION),
+								rootPOA.create_implicit_activation_policy(ImplicitActivationPolicyValue.IMPLICIT_ACTIVATION),
 								rootPOA.create_lifespan_policy(LifespanPolicyValue.TRANSIENT),
-								rootPOA
-										.create_request_processing_policy(RequestProcessingPolicyValue.USE_ACTIVE_OBJECT_MAP_ONLY),
+								rootPOA.create_request_processing_policy(RequestProcessingPolicyValue.USE_ACTIVE_OBJECT_MAP_ONLY),
 								rootPOA.create_servant_retention_policy(ServantRetentionPolicyValue.RETAIN),
 								rootPOA.create_thread_policy(ThreadPolicyValue.ORB_CTRL_MODEL), };
-					else
+					} else {
 						poa_policies = new Policy[] {
 								bidirpol,
 								rootPOA.create_id_assignment_policy(IdAssignmentPolicyValue.SYSTEM_ID),
 								rootPOA.create_id_uniqueness_policy(IdUniquenessPolicyValue.UNIQUE_ID),
-								rootPOA
-										.create_implicit_activation_policy(ImplicitActivationPolicyValue.IMPLICIT_ACTIVATION),
+								rootPOA.create_implicit_activation_policy(ImplicitActivationPolicyValue.IMPLICIT_ACTIVATION),
 								rootPOA.create_lifespan_policy(LifespanPolicyValue.TRANSIENT),
-								rootPOA
-										.create_request_processing_policy(RequestProcessingPolicyValue.USE_ACTIVE_OBJECT_MAP_ONLY),
+								rootPOA.create_request_processing_policy(RequestProcessingPolicyValue.USE_ACTIVE_OBJECT_MAP_ONLY),
 								rootPOA.create_servant_retention_policy(ServantRetentionPolicyValue.RETAIN),
 								rootPOA.create_thread_policy(ThreadPolicyValue.ORB_CTRL_MODEL) };
+					}
 
 					myAutoIdRootPOA = rootPOA.create_POA("MyAutoIdRootPOA", null, poa_policies);
 
@@ -301,44 +295,47 @@ public class ORBBean {
 
 				}
 				return myAutoIdRootPOA;
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				throw e;
 			}
 		}
 	}
 
-	public void deactivateServant(Servant servant) {
+	public void deactivateServant(final Servant servant) {
 		synchronized (orb_synch) {
 			try {
 				getAutoIdRootPOA().deactivate_object(getAutoIdRootPOA().servant_to_id(servant));
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				logThrowable(Level.SEVERE, e.getMessage(), e);
 			}
 		}
 	}
 
-	public void deactivateServant(byte[] oid) {
+	public void deactivateServant(final byte[] oid) {
 		synchronized (orb_synch) {
 			try {
 				getAutoIdRootPOA().deactivate_object(oid);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				logThrowable(Level.SEVERE, e.getMessage(), e);
 			}
 		}
 	}
 
-	public Servant registerDataProducerPOAServant(Class remoteInterface, java.lang.Object servantDelegate, byte[] oid,
-			ServantManager deactivator) throws Exception {
+	public Servant registerDataProducerPOAServant(final Class remoteInterface, final java.lang.Object servantDelegate,
+			final byte[] oid, final ServantManager deactivator) throws Exception {
 		synchronized (orb_synch) {
-			String delegateInterfaceName = remoteInterface.getName() + "Operations";
-			Class delegateInterface = Class.forName(delegateInterfaceName, false, this.getClass().getClassLoader());
+			final String delegateInterfaceName = remoteInterface.getName() + "Operations";
+			final Class delegateInterface = Class.forName(delegateInterfaceName, false, this.getClass()
+					.getClassLoader());
 
-			String poaTieServantClassName = remoteInterface.getName() + "POATie";
-			Class poaTieServantClass = Class.forName(poaTieServantClassName, false, this.getClass().getClassLoader());
+			final String poaTieServantClassName = remoteInterface.getName() + "POATie";
+			final Class poaTieServantClass = Class.forName(poaTieServantClassName, false, this.getClass()
+					.getClassLoader());
 
-			Constructor servantCtr = poaTieServantClass.getConstructor(new Class[] { delegateInterface, POA.class });
+			final Constructor servantCtr = poaTieServantClass
+					.getConstructor(new Class[] { delegateInterface, POA.class });
 
-			Servant servant = (Servant) servantCtr.newInstance(new java.lang.Object[] { servantDelegate,
+			final Servant servant = (Servant) servantCtr.newInstance(new java.lang.Object[] { servantDelegate,
 					getDataProducerPOA(deactivator) });
 
 			getDataProducerPOA(deactivator).activate_object_with_id(oid, servant);
@@ -347,19 +344,22 @@ public class ORBBean {
 		}
 	}
 
-	public Servant registerRootPOAServant(Class remoteInterface, java.lang.Object servantDelegate, byte[] oid)
-			throws Exception {
+	public Servant registerRootPOAServant(final Class remoteInterface, final java.lang.Object servantDelegate,
+			final byte[] oid) throws Exception {
 		synchronized (orb_synch) {
-			String delegateInterfaceName = remoteInterface.getName() + "Operations";
-			Class delegateInterface = Class.forName(delegateInterfaceName, false, this.getClass().getClassLoader());
+			final String delegateInterfaceName = remoteInterface.getName() + "Operations";
+			final Class delegateInterface = Class.forName(delegateInterfaceName, false, this.getClass()
+					.getClassLoader());
 
-			String poaTieServantClassName = remoteInterface.getName() + "POATie";
-			Class poaTieServantClass = Class.forName(poaTieServantClassName, false, this.getClass().getClassLoader());
+			final String poaTieServantClassName = remoteInterface.getName() + "POATie";
+			final Class poaTieServantClass = Class.forName(poaTieServantClassName, false, this.getClass()
+					.getClassLoader());
 
-			Constructor servantCtr = poaTieServantClass.getConstructor(new Class[] { delegateInterface, POA.class });
+			final Constructor servantCtr = poaTieServantClass
+					.getConstructor(new Class[] { delegateInterface, POA.class });
 
-			Servant servant = (Servant) servantCtr
-					.newInstance(new java.lang.Object[] { servantDelegate, getRootPOA() });
+			final Servant servant = (Servant) servantCtr.newInstance(new java.lang.Object[] { servantDelegate,
+					getRootPOA() });
 
 			getRootPOA().activate_object_with_id(oid, servant);
 
@@ -367,63 +367,68 @@ public class ORBBean {
 		}
 	}
 
-	public Servant registerAutoIdRootPOAServant(Class remoteInterface, java.lang.Object servantDelegate, ObjectID oidOut)
-			throws Exception {
+	public Servant registerAutoIdRootPOAServant(final Class remoteInterface, final java.lang.Object servantDelegate,
+			final ObjectID oidOut) throws Exception {
 		synchronized (orb_synch) {
-			String delegateInterfaceName = remoteInterface.getName() + "Operations";
-			Class delegateInterface = Class.forName(delegateInterfaceName, false, this.getClass().getClassLoader());
+			final String delegateInterfaceName = remoteInterface.getName() + "Operations";
+			final Class delegateInterface = Class.forName(delegateInterfaceName, false, this.getClass()
+					.getClassLoader());
 
-			String poaTieServantClassName = remoteInterface.getName() + "POATie";
-			Class poaTieServantClass = Class.forName(poaTieServantClassName, false, this.getClass().getClassLoader());
+			final String poaTieServantClassName = remoteInterface.getName() + "POATie";
+			final Class poaTieServantClass = Class.forName(poaTieServantClassName, false, this.getClass()
+					.getClassLoader());
 
-			Constructor servantCtr = poaTieServantClass.getConstructor(new Class[] { delegateInterface, POA.class });
+			final Constructor servantCtr = poaTieServantClass
+					.getConstructor(new Class[] { delegateInterface, POA.class });
 
-			Servant servant = (Servant) servantCtr.newInstance(new java.lang.Object[] { servantDelegate,
+			final Servant servant = (Servant) servantCtr.newInstance(new java.lang.Object[] { servantDelegate,
 					getAutoIdRootPOA() });
 
-			byte[] oid = getAutoIdRootPOA().activate_object(servant);
-			if (oidOut != null)
+			final byte[] oid = getAutoIdRootPOA().activate_object(servant);
+			if (oidOut != null) {
 				oidOut.setOid(oid);
+			}
 
 			return servant;
 		}
 	}
 
-	public NamingContextExt createDirectory(java.lang.String FullName) throws Exception {
+	public NamingContextExt createDirectory(final java.lang.String FullName) throws Exception {
 		synchronized (orb_synch) {
 			try {
 
 				NamingContextExt nc = getNameService();
-				NameComponent[] fullname = nc.to_name(FullName);
+				final NameComponent[] fullname = nc.to_name(FullName);
 				NamingContextExt nc1 = null;
 
-				for (int j = 0; j < fullname.length; j++) {
+				for (final NameComponent element : fullname) {
 					try {
-						nc1 = NamingContextExtHelper.narrow(nc.bind_new_context(new NameComponent[] { fullname[j] }));
+						nc1 = NamingContextExtHelper.narrow(nc.bind_new_context(new NameComponent[] { element }));
 						nc = nc1;
-					} catch (Exception e) {
-						nc1 = NamingContextExtHelper.narrow(nc.resolve(new NameComponent[] { fullname[j] }));
-						if (nc1 == null)
-							throw new Exception("The name " + fullname[j].id + " is not a directory...");
+					} catch (final Exception e) {
+						nc1 = NamingContextExtHelper.narrow(nc.resolve(new NameComponent[] { element }));
+						if (nc1 == null) {
+							throw new Exception("The name " + element.id + " is not a directory...");
+						}
 
 						nc = nc1;
 					}
 				}
 
 				return nc;
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				throw e;
 			}
 		}
 	}
 
-	public void bindObject(java.lang.String FullName, org.omg.CORBA.Object obj) throws Exception {
+	public void bindObject(final java.lang.String FullName, final org.omg.CORBA.Object obj) throws Exception {
 		synchronized (orb_synch) {
 			try {
-				NamingContextExt nc = getNameService();
-				NameComponent[] fullPath = nc.to_name(FullName);
+				final NamingContextExt nc = getNameService();
+				final NameComponent[] fullPath = nc.to_name(FullName);
 				nc.rebind(fullPath, obj);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				throw e;
 			}
 		}
@@ -435,11 +440,12 @@ public class ORBBean {
 		synchronized (orb_synch) {
 			if (ns != null) {
 				try {
-					if (ns._non_existent())
+					if (ns._non_existent()) {
 						ns = null;
-					else
+					} else {
 						return ns;
-				} catch (Exception e) {
+					}
+				} catch (final Exception e) {
 					ns = null;
 				}
 			}
@@ -454,55 +460,56 @@ public class ORBBean {
 
 					((org.openorb.orb.core.ORB) getORB()).addInitialReference("NameService", null);
 
-				} catch (Exception ignored) {
+				} catch (final Exception ignored) {
 				}
 				ns = NamingContextExtHelper.narrow(getORB().resolve_initial_references("NameService"));
 				return ns;
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				logThrowable(Level.SEVERE, e.getMessage(), e);
 				throw e;
 			}
 		}
 	}
 
-	public org.omg.CORBA.Object getRemoteObject(String FullName) throws Exception {
+	public org.omg.CORBA.Object getRemoteObject(final String FullName) throws Exception {
 		org.omg.CORBA.Object out = null;
 		// org.omg.CORBA.Object out=getNameService().resolve_str(FullName);
 		// org.omg.CORBA.Object out =
 		// getRemoteObject(getNameService().to_name(FullName));
 		try {
 			out = getNameService().resolve_str(FullName);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logThrowable(Level.SEVERE, e.getMessage(), e);
 		}
 
 		return out;
 	}
 
-	public org.omg.CORBA.Object getRemoteObject(NameComponent[] fullname) throws Exception {
+	public org.omg.CORBA.Object getRemoteObject(final NameComponent[] fullname) throws Exception {
 		synchronized (the_orb) {
-			org.omg.CORBA.Object out = getNameService().resolve(fullname);
+			final org.omg.CORBA.Object out = getNameService().resolve(fullname);
 			return out;
 		}
 	}
 
-	public void removeNSRegistration(NameComponent[] fullname) {
+	public void removeNSRegistration(final NameComponent[] fullname) {
 		synchronized (the_orb) {
 			try {
 				getNameService().unbind(fullname);
-			} catch (Exception ignored) {
+			} catch (final Exception ignored) {
 			}
 		}
 	}
 
-	public org.omg.CORBA.Object getRemoteCORBALocObject(String corbalocURL) throws Exception {
-		if (!corbalocURL.startsWith("corbaloc"))
+	public org.omg.CORBA.Object getRemoteCORBALocObject(final String corbalocURL) throws Exception {
+		if (!corbalocURL.startsWith("corbaloc")) {
 			return getRemoteObject(corbalocURL);
+		}
 
 		org.omg.CORBA.Object obj = null;
 		try {
 			obj = getORB().string_to_object(corbalocURL);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logThrowable(Level.SEVERE, e.getMessage(), e);
 			throw e;
 		}
@@ -510,11 +517,11 @@ public class ORBBean {
 		return obj;
 	}
 
-	public String bindObjectToCorbalocService(String name, org.omg.CORBA.Object obj) {
-		org.omg.CORBA.ORB orb = getORB();
+	public String bindObjectToCorbalocService(final String name, final org.omg.CORBA.Object obj) {
+		final org.omg.CORBA.ORB orb = getORB();
 		String result = null;
 		try {
-			org.omg.CORBA.Object clsobj = orb.resolve_initial_references("CorbalocService");
+			final org.omg.CORBA.Object clsobj = orb.resolve_initial_references("CorbalocService");
 
 			/*
 			 * Thia was for openorb 1.3.1
@@ -528,10 +535,10 @@ public class ORBBean {
 			 */
 
 			// And now for Openorb 1.4.0
-			Class cls_clz = Thread.currentThread().getContextClassLoader().loadClass(
-					"org.openorb.orb.corbaloc.CorbalocService");
-			Class clsstub_clz = Thread.currentThread().getContextClassLoader().loadClass(
-					"org.openorb.orb.corbaloc._CorbalocServiceStub");
+			final Class cls_clz = Thread.currentThread().getContextClassLoader()
+					.loadClass("org.openorb.orb.corbaloc.CorbalocService");
+			final Class clsstub_clz = Thread.currentThread().getContextClassLoader()
+					.loadClass("org.openorb.orb.corbaloc._CorbalocServiceStub");
 
 			/*
 			 * Thia was for openorb 1.3.1
@@ -547,14 +554,14 @@ public class ORBBean {
 							._is_a("IDL:orb.openorb.org/corbaloc/CorbalocService:1.1"))) {
 				// create an instance of _CorbalocServiceStub (default
 				// constructor)
-				java.lang.Object clsstub_obj = getStubInstance(clsstub_clz, clsobj);
+				final java.lang.Object clsstub_obj = getStubInstance(clsstub_clz, clsobj);
 
 				// get the put method
-				Method put = clsstub_obj.getClass().getMethod("put",
+				final Method put = clsstub_obj.getClass().getMethod("put",
 						new Class[] { String.class, org.omg.CORBA.Object.class });
 
 				// call the _get_delegate() method on the stub
-				java.lang.Object deleg = ((ObjectImpl) clsobj)._get_delegate();
+				final java.lang.Object deleg = ((ObjectImpl) clsobj)._get_delegate();
 
 				try {
 					// call the put operation on the CorbalocService
@@ -572,8 +579,8 @@ public class ORBBean {
 					 * "org.openorb.net.Address" );
 					 */
 
-					Class orgOpenorbOrbNetAddressClz = Thread.currentThread().getContextClassLoader().loadClass(
-							"org.openorb.orb.net.Address");
+					final Class orgOpenorbOrbNetAddressClz = Thread.currentThread().getContextClassLoader()
+							.loadClass("org.openorb.orb.net.Address");
 
 					/*
 					 * This was for openorb 1.3.1
@@ -585,24 +592,25 @@ public class ORBBean {
 					 */
 
 					// And now for Openorb 1.4.0
-					Class orgOpenorbOrbCoreDelegateClz = Thread.currentThread().getContextClassLoader().loadClass(
-							"org.openorb.orb.core.Delegate");
+					final Class orgOpenorbOrbCoreDelegateClz = Thread.currentThread().getContextClassLoader()
+							.loadClass("org.openorb.orb.core.Delegate");
 
-					Method getAddresses = orgOpenorbOrbCoreDelegateClz.getMethod("getAddresses",
+					final Method getAddresses = orgOpenorbOrbCoreDelegateClz.getMethod("getAddresses",
 							new java.lang.Class[] { org.omg.CORBA.Object.class });
 
-					Method getProtocol = orgOpenorbOrbNetAddressClz.getMethod("getProtocol", new java.lang.Class[] {});
-					Method getEndpointString = orgOpenorbOrbNetAddressClz.getMethod("getEndpointString",
+					final Method getProtocol = orgOpenorbOrbNetAddressClz.getMethod("getProtocol",
+							new java.lang.Class[] {});
+					final Method getEndpointString = orgOpenorbOrbNetAddressClz.getMethod("getEndpointString",
 							new java.lang.Class[] {});
 
-					java.lang.Object addrs = getAddresses.invoke(deleg, new java.lang.Object[] { obj });
+					final java.lang.Object addrs = getAddresses.invoke(deleg, new java.lang.Object[] { obj });
 
 					String endpoint = null;
 					if (addrs != null) {
-						int len = Array.getLength(addrs);
+						final int len = Array.getLength(addrs);
 						for (int i = 0; i < len; i++) {
-							java.lang.Object addr = Array.get(addrs, i);
-							String prot = (String) getProtocol.invoke(addr, new java.lang.Object[] {});
+							final java.lang.Object addr = Array.get(addrs, i);
+							final String prot = (String) getProtocol.invoke(addr, new java.lang.Object[] {});
 							if (prot.equals("iiop")) {
 								endpoint = (String) getEndpointString.invoke(addr, new java.lang.Object[] {});
 							}
@@ -613,7 +621,7 @@ public class ORBBean {
 						}
 						result = "corbaloc:" + endpoint + "/" + name;
 					}
-				} catch (Exception ex) {
+				} catch (final Exception ex) {
 					// do nothing, return false
 				}
 			}
@@ -623,7 +631,7 @@ public class ORBBean {
 		return result;
 	}
 
-	private java.lang.Object getStubInstance(Class clz, org.omg.CORBA.Object obj) {
+	private java.lang.Object getStubInstance(final Class clz, final org.omg.CORBA.Object obj) {
 		java.lang.Object result = null;
 		try {
 			try {
@@ -631,26 +639,26 @@ public class ORBBean {
 				// create an instance of _NamingContextStub (default
 				// constructor)
 				result = clz.newInstance();
-				Method setDelegate = clz.getMethod("_set_delegate", new java.lang.Class[] { Delegate.class });
+				final Method setDelegate = clz.getMethod("_set_delegate", new java.lang.Class[] { Delegate.class });
 				setDelegate.invoke(result, new java.lang.Object[] { ((ObjectImpl) obj)._get_delegate() });
-			} catch (InstantiationException ex) {
+			} catch (final InstantiationException ex) {
 				// JDK 1.3
 				// create an instance of _NamingContextStub (constructor takes
 				// Delegate)
-				Constructor ctor = clz.getConstructor(new Class[] { Delegate.class });
+				final Constructor ctor = clz.getConstructor(new Class[] { Delegate.class });
 				result = ctor.newInstance(new java.lang.Object[] { ((ObjectImpl) obj)._get_delegate() });
 			}
-		} catch (Exception ex) {
+		} catch (final Exception ex) {
 			logThrowable(Level.SEVERE, ex.getMessage(), ex);
 		}
 		return result;
 	}
 
-	public static byte[] StrToOid(String strOid) {
+	public static byte[] StrToOid(final String strOid) {
 		return strOid.getBytes();
 	}
 
-	public static String OidtoStr(byte[] Oid) {
+	public static String OidtoStr(final byte[] Oid) {
 		return new String(Oid);
 	}
 
@@ -658,19 +666,19 @@ public class ORBBean {
 		synchronized (orb_synch) {
 			try {
 				the_orb.shutdown(true);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				logThrowable(Level.SEVERE, e.getMessage(), e);
 			}
 			try {
 				the_orb.destroy();
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				logThrowable(Level.SEVERE, e.getMessage(), e);
 			}
 			the_orb = null;
 		}
 	}
 
-	private void logThrowable(Level l, String message, Throwable t) {
+	private void logThrowable(final Level l, final String message, final Throwable t) {
 		Logger.getLogger(getClass().getName()).log(Level.ALL, message, t);
 	}
 

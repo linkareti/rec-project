@@ -27,29 +27,31 @@ public class ScubaStampDataSource extends AbstractStampDataSource {
 	private int counter = 0;
 	private int total_samples = 0;
 
-	public void processDataCommand(StampCommand cmd) {
-		if (stopped || cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null)
+	@Override
+	public void processDataCommand(final StampCommand cmd) {
+		if (stopped || cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null) {
 			return;
+		}
 
 		if (cmd.getCommandIdentifier().equals(StampScubaProcessor.COMMAND_IDENTIFIER)) {
 			Float pressure0, pressure1, pressure2, pressure3;
 			Integer deep;
-			PhysicsValue[] values = new PhysicsValue[5];
+			final PhysicsValue[] values = new PhysicsValue[5];
 			try {
 				pressure0 = (Float) cmd.getCommandData(StampScubaProcessor.PRESSAO_CH_0);
 				pressure1 = (Float) cmd.getCommandData(StampScubaProcessor.PRESSAO_CH_1);
 				pressure2 = (Float) cmd.getCommandData(StampScubaProcessor.PRESSAO_CH_2);
 				pressure3 = (Float) cmd.getCommandData(StampScubaProcessor.PRESSAO_CH_3);
 				deep = (Integer) cmd.getCommandData(StampScubaProcessor.PROFUNDIDADE);
-			} catch (ClassCastException e) {
+			} catch (final ClassCastException e) {
 				e.printStackTrace();
 				return;
 			}
-			float valorPressao0 = pressure0.floatValue();
-			float valorPressao1 = pressure1.floatValue();
-			float valorPressao2 = pressure2.floatValue();
-			float valorPressao3 = pressure3.floatValue();
-			int valorProfundidade = deep.intValue();
+			final float valorPressao0 = pressure0.floatValue();
+			final float valorPressao1 = pressure1.floatValue();
+			final float valorPressao2 = pressure2.floatValue();
+			final float valorPressao3 = pressure3.floatValue();
+			final int valorProfundidade = deep.intValue();
 
 			values[0] = PhysicsValueFactory.fromFloat(valorPressao0, getAcquisitionHeader().getChannelsConfig(0)
 					.getSelectedScale());
@@ -63,13 +65,15 @@ public class ScubaStampDataSource extends AbstractStampDataSource {
 					.getSelectedScale());
 			super.addDataRow(values);
 			counter++;
-			if (counter == total_samples)
+			if (counter == total_samples) {
 				setDataSourceEnded();
+			}
 
 		}
 	}
 
-	public void setAcquisitionHeader(HardwareAcquisitionConfig config) {
+	@Override
+	public void setAcquisitionHeader(final HardwareAcquisitionConfig config) {
 		super.setAcquisitionHeader(config);
 		total_samples = config.getTotalSamples();
 		setPacketSize((int) Math.ceil(1. / (8. * config.getSelectedFrequency().getFrequency() * config
@@ -78,6 +82,7 @@ public class ScubaStampDataSource extends AbstractStampDataSource {
 
 	private boolean stopped = false;
 
+	@Override
 	public void stopNow() {
 		stopped = true;
 		setDataSourceStoped();

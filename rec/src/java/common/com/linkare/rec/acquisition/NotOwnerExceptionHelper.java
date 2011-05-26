@@ -10,29 +10,29 @@ package com.linkare.rec.acquisition;
 public abstract class NotOwnerExceptionHelper {
 	private static String _id = "IDL:com/linkare/rec/acquisition/NotOwnerException:1.0";
 
-	public static void insert(org.omg.CORBA.Any a, com.linkare.rec.acquisition.NotOwnerException that) {
-		org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
-		a.type(type());
-		write(out, that);
-		a.read_value(out.create_input_stream(), type());
+	public static void insert(final org.omg.CORBA.Any a, final com.linkare.rec.acquisition.NotOwnerException that) {
+		final org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
+		a.type(NotOwnerExceptionHelper.type());
+		NotOwnerExceptionHelper.write(out, that);
+		a.read_value(out.create_input_stream(), NotOwnerExceptionHelper.type());
 	}
 
-	public static com.linkare.rec.acquisition.NotOwnerException extract(org.omg.CORBA.Any a) {
-		return read(a.create_input_stream());
+	public static com.linkare.rec.acquisition.NotOwnerException extract(final org.omg.CORBA.Any a) {
+		return NotOwnerExceptionHelper.read(a.create_input_stream());
 	}
 
 	private static org.omg.CORBA.TypeCode __typeCode = null;
 	private static boolean __active = false;
 
 	synchronized public static org.omg.CORBA.TypeCode type() {
-		if (__typeCode == null) {
+		if (NotOwnerExceptionHelper.__typeCode == null) {
 			synchronized (org.omg.CORBA.TypeCode.class) {
-				if (__typeCode == null) {
-					if (__active) {
-						return org.omg.CORBA.ORB.init().create_recursive_tc(_id);
+				if (NotOwnerExceptionHelper.__typeCode == null) {
+					if (NotOwnerExceptionHelper.__active) {
+						return org.omg.CORBA.ORB.init().create_recursive_tc(NotOwnerExceptionHelper._id);
 					}
-					__active = true;
-					org.omg.CORBA.StructMember[] _members0 = new org.omg.CORBA.StructMember[2];
+					NotOwnerExceptionHelper.__active = true;
+					final org.omg.CORBA.StructMember[] _members0 = new org.omg.CORBA.StructMember[2];
 					org.omg.CORBA.TypeCode _tcOf_members0 = null;
 					_tcOf_members0 = org.omg.CORBA.ORB.init().get_primitive_tc(org.omg.CORBA.TCKind.tk_long);
 					_members0[0] = new org.omg.CORBA.StructMember("errorCode", _tcOf_members0, null);
@@ -40,21 +40,21 @@ public abstract class NotOwnerExceptionHelper {
 					_tcOf_members0 = org.omg.CORBA.ORB.init().create_alias_tc(
 							com.linkare.rec.acquisition.ClientNameHelper.id(), "ClientName", _tcOf_members0);
 					_members0[1] = new org.omg.CORBA.StructMember("currentOwner", _tcOf_members0, null);
-					__typeCode = org.omg.CORBA.ORB.init().create_exception_tc(
+					NotOwnerExceptionHelper.__typeCode = org.omg.CORBA.ORB.init().create_exception_tc(
 							com.linkare.rec.acquisition.NotOwnerExceptionHelper.id(), "NotOwnerException", _members0);
-					__active = false;
+					NotOwnerExceptionHelper.__active = false;
 				}
 			}
 		}
-		return __typeCode;
+		return NotOwnerExceptionHelper.__typeCode;
 	}
 
 	public static String id() {
-		return _id;
+		return NotOwnerExceptionHelper._id;
 	}
 
-	public static com.linkare.rec.acquisition.NotOwnerException read(org.omg.CORBA.portable.InputStream istream) {
-		com.linkare.rec.acquisition.NotOwnerException value = new com.linkare.rec.acquisition.NotOwnerException();
+	public static com.linkare.rec.acquisition.NotOwnerException read(final org.omg.CORBA.portable.InputStream istream) {
+		final com.linkare.rec.acquisition.NotOwnerException value = new com.linkare.rec.acquisition.NotOwnerException();
 		// read and discard the repository ID
 		istream.read_string();
 		value.errorCode = istream.read_long();
@@ -62,10 +62,10 @@ public abstract class NotOwnerExceptionHelper {
 		return value;
 	}
 
-	public static void write(org.omg.CORBA.portable.OutputStream ostream,
-			com.linkare.rec.acquisition.NotOwnerException value) {
+	public static void write(final org.omg.CORBA.portable.OutputStream ostream,
+			final com.linkare.rec.acquisition.NotOwnerException value) {
 		// write the repository ID
-		ostream.write_string(id());
+		ostream.write_string(NotOwnerExceptionHelper.id());
 		ostream.write_long(value.errorCode);
 		ostream.write_wstring(value.currentOwner);
 	}

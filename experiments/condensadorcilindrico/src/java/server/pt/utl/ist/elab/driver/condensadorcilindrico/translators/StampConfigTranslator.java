@@ -24,26 +24,27 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 
 	/** Creates a new instance of StampRelayTranslator */
 	public StampConfigTranslator() {
-		super(COMMAND_IDENTIFIER);
+		super(StampConfigTranslator.COMMAND_IDENTIFIER);
 	}
 
-	public boolean translate(StampCommand command) {
+	@Override
+	public boolean translate(final StampCommand command) {
 		if (command.getCommandIdentifier() == null) {
 			return false;
 		}
-		if (!command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER)) {
+		if (!command.getCommandIdentifier().equalsIgnoreCase(StampConfigTranslator.COMMAND_IDENTIFIER)) {
 			return false;
 		}
-		int numsamples = ((Integer) command.getCommandData(NUMSAMPLES_STR)).intValue();
-		float startPosf = ((Float) command.getCommandData(START_POS_STR)).floatValue();
+		final int numsamples = ((Integer) command.getCommandData(StampConfigTranslator.NUMSAMPLES_STR)).intValue();
+		float startPosf = ((Float) command.getCommandData(StampConfigTranslator.START_POS_STR)).floatValue();
 		startPosf = startPosf * 10.F;
-		float endPosf = ((Float) command.getCommandData(END_POS_STR)).floatValue();
+		float endPosf = ((Float) command.getCommandData(StampConfigTranslator.END_POS_STR)).floatValue();
 		endPosf = endPosf * 10.F;
-		int endPos = (int) Math.floor(endPosf);
-		int startPos = (int) Math.floor(startPosf);
+		final int endPos = (int) Math.floor(endPosf);
+		final int startPos = (int) Math.floor(startPosf);
 
-		int numPoints = ((Integer) command.getCommandData(FREQ_INTERVAL_STR)).intValue();
-		int calib = ((Integer) command.getCommandData(CALIBRATE_STR)).intValue();
+		final int numPoints = ((Integer) command.getCommandData(StampConfigTranslator.FREQ_INTERVAL_STR)).intValue();
+		final int calib = ((Integer) command.getCommandData(StampConfigTranslator.CALIBRATE_STR)).intValue();
 
 		if (startPos > 670 || startPos < 0) {
 			System.out.println("startPos is wrong..." + startPos);
@@ -95,8 +96,8 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 		while (numPointsStr.length() < 4) {
 			numPointsStr = "0" + numPointsStr;
 		}
-		String commandStr = command.getCommandIdentifier() + " " + calib + " " + startPosStr + " " + endPosStr + " "
-				+ numPointsStr + " " + numSamplesStr;
+		final String commandStr = command.getCommandIdentifier() + " " + calib + " " + startPosStr + " " + endPosStr
+				+ " " + numPointsStr + " " + numSamplesStr;
 		command.setCommand(commandStr);
 
 		return true;

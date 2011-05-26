@@ -18,12 +18,12 @@ public class ExpHistory {
 
 	private ExpHistoryDisplayFactory expHistoryDisplayFactory = null;
 	private DataProducerWrapper producerWrapper = null;
-	private Icon apparatusIcon = null;
+	private final Icon apparatusIcon = null;
 	private boolean deleted = false;
 	private long expCount = 0;
 
 	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
+	private final javax.swing.event.EventListenerList listenerList = null;
 
 	/** Holds value of property locallyOwned. */
 	private boolean locallyOwned = false;
@@ -36,17 +36,24 @@ public class ExpHistory {
 	// null;
 
 	/** Creates a new instance of ExperimentHistory */
-	public ExpHistory(ExpHistoryDisplayFactory expHistoryDisplayFactory, DataProducerWrapper producerWrapper,
-			com.linkare.rec.impl.client.apparatus.Apparatus apparatus/*
-																	 * ,
-																	 * com.linkare
-																	 * .
-																	 * rec.impl.
-																	 * baseUI
-																	 * .config
-																	 * .Apparatus
-																	 * apparatusConfig
-																	 */) {
+	public ExpHistory(final ExpHistoryDisplayFactory expHistoryDisplayFactory,
+			final DataProducerWrapper producerWrapper, final com.linkare.rec.impl.client.apparatus.Apparatus apparatus/*
+																													 * ,
+																													 * com
+																													 * .
+																													 * linkare
+																													 * .
+																													 * rec
+																													 * .
+																													 * impl
+																													 * .
+																													 * baseUI
+																													 * .
+																													 * config
+																													 * .
+																													 * Apparatus
+																													 * apparatusConfig
+																													 */) {
 
 		this.expHistoryDisplayFactory = expHistoryDisplayFactory;
 		this.producerWrapper = producerWrapper;
@@ -60,7 +67,7 @@ public class ExpHistory {
 	}
 
 	public com.linkare.rec.impl.client.apparatus.Apparatus getApparatus() {
-		return this.apparatus;
+		return apparatus;
 	}
 
 	// public com.linkare.rec.impl.baseUI.config.Apparatus getApparatusConfig()
@@ -73,13 +80,15 @@ public class ExpHistory {
 	}
 
 	public void startExperiment() {
-		if (expHistoryDisplayFactory != null)
+		if (expHistoryDisplayFactory != null) {
 			expHistoryDisplayFactory.startExperiment(this);
+		}
 	}
 
 	public void showExperimentHeader() {
-		if (expHistoryDisplayFactory != null)
+		if (expHistoryDisplayFactory != null) {
 			expHistoryDisplayFactory.showExperimentHeader(this);
+		}
 	}
 
 	public long getExpCount() {
@@ -119,7 +128,7 @@ public class ExpHistory {
 	 * @return Value of property locallyOwned.
 	 */
 	public boolean isLocallyOwned() {
-		return this.locallyOwned;
+		return locallyOwned;
 	}
 
 	/**
@@ -127,7 +136,7 @@ public class ExpHistory {
 	 * 
 	 * @param locallyOwned New value of property locallyOwned.
 	 */
-	public void setLocallyOwned(boolean locallyOwned) {
+	public void setLocallyOwned(final boolean locallyOwned) {
 		this.locallyOwned = locallyOwned;
 	}
 
@@ -135,7 +144,7 @@ public class ExpHistory {
 		return ownerUserName;
 	}
 
-	public void setOwnerUserName(String ownerUserName) {
+	public void setOwnerUserName(final String ownerUserName) {
 		this.ownerUserName = ownerUserName;
 	}
 }

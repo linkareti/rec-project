@@ -44,9 +44,9 @@ public class LibVlcImpl {
 
 	public static boolean done;
 
-	public static void main(String[] args) throws InterruptedException {
-		LibVlc libVlc = LibVlc.SYNC_INSTANCE;
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public static void main(final String[] args) throws InterruptedException {
+		final LibVlc libVlc = LibVlc.SYNC_INSTANCE;
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libVlc.libvlc_exception_init(exception);
 
 		final Object lock = new Object();
@@ -58,27 +58,30 @@ public class LibVlcImpl {
 
 		// LibVlcInstance libvlc_instance_t = libVlc.libvlc_new(0, new String[]
 		// {"/usr/local/bin/vlc"}, exception);
-		LibVlcInstance libvlc_instance_t = libVlc.libvlc_new(0, new String[] { "/usr/lib/vlc" }, exception);
+		final LibVlcInstance libvlc_instance_t = libVlc.libvlc_new(0, new String[] { "/usr/lib/vlc" }, exception);
 
-		LibVlcMediaDescriptor mediaDescriptor = libVlc
+		final LibVlcMediaDescriptor mediaDescriptor = libVlc
 		// .libvlc_media_new(libvlc_instance_t, "/home/carone/a.avi",
 		// exception);
 				.libvlc_media_new(libvlc_instance_t, "/home/bcatarino/Documentos/NetBeansProjects/xpto.avi", exception);
 
-		LibVlcMediaInstance mediaPlayer = libVlc.libvlc_media_player_new_from_media(mediaDescriptor, exception);
+		final LibVlcMediaInstance mediaPlayer = libVlc.libvlc_media_player_new_from_media(mediaDescriptor, exception);
 
-		LibVlcEventManager mediaInstanceEventManager = libVlc.libvlc_media_player_event_manager(mediaPlayer, exception);
+		final LibVlcEventManager mediaInstanceEventManager = libVlc.libvlc_media_player_event_manager(mediaPlayer,
+				exception);
 
-		LibVlcCallback played = new LibVlcCallback() {
+		final LibVlcCallback played = new LibVlcCallback() {
 
-			public void callback(libvlc_event_t libvlc_event_t, Pointer pointer) {
+			@Override
+			public void callback(final libvlc_event_t libvlc_event_t, final Pointer pointer) {
 				System.out.println("Playing started.");
 			}
 		};
 
-		LibVlcCallback endReached = new LibVlcCallback() {
+		final LibVlcCallback endReached = new LibVlcCallback() {
 
-			public void callback(libvlc_event_t libvlc_event_t, Pointer pointer) {
+			@Override
+			public void callback(final libvlc_event_t libvlc_event_t, final Pointer pointer) {
 				synchronized (lock) {
 					System.out.println("Playing finished.");
 					LibVlcImpl.done = true;
@@ -92,20 +95,20 @@ public class LibVlcImpl {
 		libVlc.libvlc_event_attach(mediaInstanceEventManager, LibVlcEventType.libvlc_MediaPlayerEndReached.ordinal(),
 				endReached, null, exception);
 
-		JFrame frame = new JFrame("title");
+		final JFrame frame = new JFrame("title");
 		frame.setVisible(true);
 		frame.setLocation(100, 100);
 		frame.setSize(500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JPanel panel = new JPanel();
-		Canvas canvas = new Canvas();
+		final JPanel panel = new JPanel();
+		final Canvas canvas = new Canvas();
 		canvas.setSize(500, 500);
 		panel.add(canvas);
 		frame.getContentPane().add(panel);
 		frame.pack();
 
-		int drawable = (int) com.sun.jna.Native.getComponentID(canvas);
+		final int drawable = (int) com.sun.jna.Native.getComponentID(canvas);
 
 		libVlc.libvlc_video_set_parent(libvlc_instance_t, drawable, exception);
 		libVlc.libvlc_media_player_play(mediaPlayer, exception);

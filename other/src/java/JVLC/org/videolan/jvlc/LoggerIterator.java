@@ -33,42 +33,45 @@ import org.videolan.jvlc.internal.LibVlc.libvlc_log_message_t;
 
 public class LoggerIterator implements Iterator<LoggerMessage> {
 
-	private Logger logger;
-	private LibVlcLogIterator logIterator;
+	private final Logger logger;
+	private final LibVlcLogIterator logIterator;
 
 	/**
 	 * @param logInstance
 	 */
-	LoggerIterator(Logger logger) {
+	LoggerIterator(final Logger logger) {
 		this.logger = logger;
-		libvlc_exception_t exception = new libvlc_exception_t();
-		this.logIterator = logger.libvlc.libvlc_log_get_iterator(logger.logInstance, exception);
+		final libvlc_exception_t exception = new libvlc_exception_t();
+		logIterator = logger.libvlc.libvlc_log_get_iterator(logger.logInstance, exception);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public boolean hasNext() {
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		return logger.libvlc.libvlc_log_iterator_has_next(logIterator, exception) != 0;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public LoggerMessage next() {
-		libvlc_exception_t exception = new libvlc_exception_t();
-		libvlc_log_message_t message = new libvlc_log_message_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_log_message_t message = new libvlc_log_message_t();
 		logger.libvlc.libvlc_log_iterator_next(logIterator, message, exception);
-		LoggerMessage result = new LoggerMessage(message);
+		final LoggerMessage result = new LoggerMessage(message);
 		return result;
 	}
 
 	/**
 	 * {@inheritDoc} Does not remove the element.
 	 */
+	@Override
 	public void remove() {
-		//        
+		//
 	}
 
 	/**
@@ -76,7 +79,7 @@ public class LoggerIterator implements Iterator<LoggerMessage> {
 	 */
 	@Override
 	protected void finalize() throws Throwable {
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		logger.libvlc.libvlc_log_iterator_free(logIterator, exception);
 		super.finalize();
 	}

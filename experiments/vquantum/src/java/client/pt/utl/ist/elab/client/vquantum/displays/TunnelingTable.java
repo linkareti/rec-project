@@ -14,6 +14,11 @@ import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
  */
 public class TunnelingTable extends MultSeriesTable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8703468708861005040L;
+
 	/** Creates a new instance of TunnelingTable */
 	public TunnelingTable() {
 		super();

@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.vlooping.displays;
  */
 public class KPMETChart extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7938177333593117308L;
+
 	/** Creates a new instance of AnguloIntensidadeChart */
 	public KPMETChart() {
 		super();

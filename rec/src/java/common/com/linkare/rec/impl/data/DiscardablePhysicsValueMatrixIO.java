@@ -39,27 +39,27 @@ public class DiscardablePhysicsValueMatrixIO {
 	 * @param file New value of property file.
 	 * 
 	 */
-	private void setFile(File file) throws IOException {
+	private void setFile(final File file) throws IOException {
 		ioDelegate.setFile(file);
 	}
 
-	public PhysicsValue[][] remove(int sampleStart, int sampleEnd) throws SamplesReadException {
+	public PhysicsValue[][] remove(final int sampleStart, final int sampleEnd) throws SamplesReadException {
 		try {
-			Object[] keys = new Object[sampleEnd - sampleStart + 1];
+			final Object[] keys = new Object[sampleEnd - sampleStart + 1];
 			for (int i = sampleStart; i <= sampleEnd; i++) {
 				keys[i - sampleStart] = new Integer(i);
 			}
-			Object[] oRead = ioDelegate.removeObjects(keys);
+			final Object[] oRead = ioDelegate.removeObjects(keys);
 
-			PhysicsValue[][] retVal = new PhysicsValue[keys.length][];
+			final PhysicsValue[][] retVal = new PhysicsValue[keys.length][];
 			System.arraycopy(oRead, 0, retVal, 0, retVal.length);
 			return retVal;
-		} catch (IndexedObjectReadException e) {
+		} catch (final IndexedObjectReadException e) {
 			throw new SamplesReadException(e, ((Integer) e.getErrorObjectKey()).intValue());
 		}
 	}
 
-	public void write(Map samples) throws IOException {
+	public void write(final Map samples) throws IOException {
 		ioDelegate.writeObjects(samples);
 	}
 

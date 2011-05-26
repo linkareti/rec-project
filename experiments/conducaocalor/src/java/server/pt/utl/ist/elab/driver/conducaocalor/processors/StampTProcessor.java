@@ -27,7 +27,7 @@ public class StampTProcessor extends AbstractStampProcessor {
 
 	/** Creates a new instance of StampHelloProcessor */
 	public StampTProcessor() {
-		super(COMMAND_IDENTIFIER);
+		super(StampTProcessor.COMMAND_IDENTIFIER);
 	}
 
 	/**
@@ -37,7 +37,8 @@ public class StampTProcessor extends AbstractStampProcessor {
 	 * @return boolean - wether the processing was successfull
 	 * 
 	 */
-	public boolean process(StampCommand command) {
+	@Override
+	public boolean process(final StampCommand command) {
 
 		int temperature1Brass = 0;
 		int temperature2Brass = 0;
@@ -49,51 +50,51 @@ public class StampTProcessor extends AbstractStampProcessor {
 		int temperature2Copper = 0;
 		int temperature3Copper = 0;
 
-		String[] splitedStr = command.getCommand().split(" ");
+		final String[] splitedStr = command.getCommand().split(" ");
 
-		if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedStr[0] != null
-				&& splitedStr.length == 10) {
+		if (command.getCommandIdentifier().equalsIgnoreCase(StampTProcessor.COMMAND_IDENTIFIER)
+				&& splitedStr[0] != null && splitedStr.length == 10) {
 			try {
 				temperature1Brass = Integer.parseInt(splitedStr[1]);
-				Float oTemperature1Brass = new Float((float) temperature1Brass / 10.);
-				command.addCommandData(TEMPERATURE_1_BRASS, oTemperature1Brass);
+				final Float oTemperature1Brass = new Float(temperature1Brass / 10.);
+				command.addCommandData(StampTProcessor.TEMPERATURE_1_BRASS, oTemperature1Brass);
 
 				temperature2Brass = Integer.parseInt(splitedStr[2]);
-				Float oTemperature2Brass = new Float((float) temperature2Brass / 10.);
-				command.addCommandData(TEMPERATURE_2_BRASS, oTemperature2Brass);
+				final Float oTemperature2Brass = new Float(temperature2Brass / 10.);
+				command.addCommandData(StampTProcessor.TEMPERATURE_2_BRASS, oTemperature2Brass);
 
 				temperature3Brass = Integer.parseInt(splitedStr[3]);
-				Float oTemperature3Brass = new Float((float) temperature3Brass / 10.);
-				command.addCommandData(TEMPERATURE_3_BRASS, oTemperature3Brass);
+				final Float oTemperature3Brass = new Float(temperature3Brass / 10.);
+				command.addCommandData(StampTProcessor.TEMPERATURE_3_BRASS, oTemperature3Brass);
 
 				temperature1Iron = Integer.parseInt(splitedStr[4]);
-				Float oTemperature1Iron = new Float((float) temperature1Iron / 10.);
-				command.addCommandData(TEMPERATURE_1_IRON, oTemperature1Iron);
+				final Float oTemperature1Iron = new Float(temperature1Iron / 10.);
+				command.addCommandData(StampTProcessor.TEMPERATURE_1_IRON, oTemperature1Iron);
 
 				temperature2Iron = Integer.parseInt(splitedStr[5]);
-				Float oTemperature2Iron = new Float((float) temperature2Iron / 10.);
-				command.addCommandData(TEMPERATURE_2_IRON, oTemperature2Iron);
+				final Float oTemperature2Iron = new Float(temperature2Iron / 10.);
+				command.addCommandData(StampTProcessor.TEMPERATURE_2_IRON, oTemperature2Iron);
 
 				temperature3Iron = Integer.parseInt(splitedStr[6]);
-				Float oTemperature3Iron = new Float((float) temperature3Iron / 10.);
-				command.addCommandData(TEMPERATURE_3_IRON, oTemperature3Iron);
+				final Float oTemperature3Iron = new Float(temperature3Iron / 10.);
+				command.addCommandData(StampTProcessor.TEMPERATURE_3_IRON, oTemperature3Iron);
 
 				temperature1Copper = Integer.parseInt(splitedStr[7]);
-				Float oTemperature1Copper = new Float((float) temperature1Copper / 10.);
-				command.addCommandData(TEMPERATURE_1_COPPER, oTemperature1Copper);
+				final Float oTemperature1Copper = new Float(temperature1Copper / 10.);
+				command.addCommandData(StampTProcessor.TEMPERATURE_1_COPPER, oTemperature1Copper);
 
 				temperature2Copper = Integer.parseInt(splitedStr[8]);
-				Float oTemperature2Copper = new Float((float) temperature2Copper / 10.);
-				command.addCommandData(TEMPERATURE_2_COPPER, oTemperature2Copper);
+				final Float oTemperature2Copper = new Float(temperature2Copper / 10.);
+				command.addCommandData(StampTProcessor.TEMPERATURE_2_COPPER, oTemperature2Copper);
 
 				temperature3Copper = Integer.parseInt(splitedStr[9]);
-				Float oTemperature3Copper = new Float((float) temperature3Copper / 10.);
-				command.addCommandData(TEMPERATURE_3_COPPER, oTemperature3Copper);
+				final Float oTemperature3Copper = new Float(temperature3Copper / 10.);
+				command.addCommandData(StampTProcessor.TEMPERATURE_3_COPPER, oTemperature3Copper);
 
 				command.setData(true);
 				return true;
 
-			} catch (NumberFormatException e) {
+			} catch (final NumberFormatException e) {
 				e.printStackTrace();
 				return false;
 			}
@@ -102,6 +103,7 @@ public class StampTProcessor extends AbstractStampProcessor {
 		return false;
 	}
 
+	@Override
 	public boolean isData() {
 		return true;
 	}

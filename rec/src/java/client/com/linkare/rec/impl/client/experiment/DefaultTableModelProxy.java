@@ -13,16 +13,23 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class DefaultTableModelProxy extends javax.swing.table.DefaultTableModel implements ExpDataModelListener, ExpDataModelContainer {
+public class DefaultTableModelProxy extends javax.swing.table.DefaultTableModel implements ExpDataModelListener,
+		ExpDataModelContainer {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 283913067438836151L;
 	/** Holds value of property expDataModel. */
 	private ExpDataModel expDataModel = null;
 
 	// BIG SILENT NOOP
+	@Override
 	public void dataModelWaiting() {
 		// fireTableStructureChanged();
 	}
 
 	// BIG SILENT NOOP
+	@Override
 	public void dataModelStoped() {
 		// fireTableDataChanged();
 	}
@@ -35,10 +42,12 @@ public class DefaultTableModelProxy extends javax.swing.table.DefaultTableModel 
 	 * @param columnIndex the index of the column
 	 * @return the common ancestor class of the object values in the model.
 	 */
-	public Class getColumnClass(int columnIndex) {
+	@Override
+	public Class getColumnClass(final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
-			if (columnIndex == 0)
+			if (columnIndex == 0) {
 				return String.class;
+			}
 			return null;
 		}
 
@@ -58,9 +67,11 @@ public class DefaultTableModelProxy extends javax.swing.table.DefaultTableModel 
 	 * @return the number of columns in the model
 	 * @see #getRowCount
 	 */
+	@Override
 	public int getColumnCount() {
-		if (expDataModel == null || !expDataModel.isDataAvailable())
+		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			return 1;
+		}
 
 		return expDataModel.getChannelCount() * 2 + 4;
 	}
@@ -73,34 +84,43 @@ public class DefaultTableModelProxy extends javax.swing.table.DefaultTableModel 
 	 * @param columnIndex the index of the column
 	 * @return the name of the column
 	 */
-	public String getColumnName(int columnIndex) {
+	@Override
+	public String getColumnName(final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			if (columnIndex == 0) {
 				return ReCResourceBundle.findString("ReCBaseUI$rec.bui.lbl.nodata");
 			}
 			return null;
 		}
-		if (columnIndex == 0)
+		if (columnIndex == 0) {
 			return ReCResourceBundle.findString("ReCBaseUI$rec.bui.table.model.column.sample");
-		if (columnIndex == 1)
+		}
+		if (columnIndex == 1) {
 			return ReCResourceBundle.findString("ReCBaseUI$rec.bui.table.model.column.date");
-		if (columnIndex == 2)
+		}
+		if (columnIndex == 2) {
 			return ReCResourceBundle.findString("ReCBaseUI$rec.bui.table.model.column.time");
-		if (columnIndex == 3)
+		}
+		if (columnIndex == 3) {
 			return ReCResourceBundle.findString("ReCBaseUI$rec.bui.table.model.column.milliseconds");
+		}
 
-		int channelIndex = (int) Math.floor(((double) columnIndex - 4.) / 2.);
-		
-		String ch_name = ReCResourceBundle.findString(expDataModel.getChannelConfig(channelIndex).getChannelName());
-		String multiplier = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getMultiplier().toString();
-		String ph_unit_symbol = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getPhysicsUnitSymbol();
+		final int channelIndex = (int) Math.floor((columnIndex - 4.) / 2.);
 
-		String retorna = ch_name + " [" + multiplier + ph_unit_symbol + "]";
+		final String ch_name = ReCResourceBundle.findString(expDataModel.getChannelConfig(channelIndex)
+				.getChannelName());
+		final String multiplier = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getMultiplier()
+				.toString();
+		final String ph_unit_symbol = expDataModel.getChannelConfig(channelIndex).getSelectedScale()
+				.getPhysicsUnitSymbol();
 
-		if (columnIndex % 2 == 0)
+		final String retorna = ch_name + " [" + multiplier + ph_unit_symbol + "]";
+
+		if (columnIndex % 2 == 0) {
 			return retorna;
-		else
+		} else {
 			return "\u03B5 " + retorna;
+		}
 	}
 
 	/**
@@ -111,13 +131,15 @@ public class DefaultTableModelProxy extends javax.swing.table.DefaultTableModel 
 	 * @return the number of rows in the model
 	 * @see #getColumnCount
 	 */
+	@Override
 	public int getRowCount() {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			return 0;
 		}
 
-		if (expDataModel.getTotalSamples() == -1)
+		if (expDataModel.getTotalSamples() == -1) {
 			return 0;
+		}
 		return expDataModel.getTotalSamples();
 	}
 
@@ -129,27 +151,34 @@ public class DefaultTableModelProxy extends javax.swing.table.DefaultTableModel 
 	 * @param columnIndex the column whose value is to be queried
 	 * @return the value Object at the specified cell
 	 */
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		if (expDataModel == null || !expDataModel.isDataAvailable())
+	@Override
+	public Object getValueAt(final int rowIndex, final int columnIndex) {
+		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			return null;
+		}
 
-		if (columnIndex == 0)
+		if (columnIndex == 0) {
 			return "" + (rowIndex + 1);
-		if (columnIndex == 1)
+		}
+		if (columnIndex == 1) {
 			return expDataModel.getTimeStamp(rowIndex).getDate().toString();
-		if (columnIndex == 2)
+		}
+		if (columnIndex == 2) {
 			return expDataModel.getTimeStamp(rowIndex).getTime().toSimpleTimeString();
-		if (columnIndex == 3)
+		}
+		if (columnIndex == 3) {
 			return "" + expDataModel.getTimeStamp(rowIndex).getTime().getMilis();
+		}
 
-		int channelIndex = (int) Math.floor(((double) columnIndex - 4.) / 2.);
+		final int channelIndex = (int) Math.floor((columnIndex - 4.) / 2.);
 
-		PhysicsValue value = expDataModel.getValueAt(rowIndex, channelIndex);
+		final PhysicsValue value = expDataModel.getValueAt(rowIndex, channelIndex);
 
-		if (columnIndex % 2 == 0)
+		if (columnIndex % 2 == 0) {
 			return value.getValue().toEngineeringNotation();
-		else
+		} else {
 			return value.getError().toEngineeringNotation();
+		}
 
 	}
 
@@ -163,15 +192,17 @@ public class DefaultTableModelProxy extends javax.swing.table.DefaultTableModel 
 	 * @return true if the cell is editable
 	 * @see #setValueAt
 	 */
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
+	@Override
+	public boolean isCellEditable(final int rowIndex, final int columnIndex) {
 		return false;
 	}
 
 	private int lastnewsamples = 0;
 
-	public void newSamples(NewExpDataEvent evt) {
-		fireTableRowsInserted(Math.min(evt.getSamplesStartIndex(), lastnewsamples), (lastnewsamples = evt
-				.getSamplesEndIndex()));
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
+		fireTableRowsInserted(Math.min(evt.getSamplesStartIndex(), lastnewsamples),
+				(lastnewsamples = evt.getSamplesEndIndex()));
 	}
 
 	/**
@@ -179,8 +210,9 @@ public class DefaultTableModelProxy extends javax.swing.table.DefaultTableModel 
 	 * 
 	 * @return Value of property expDataModel.
 	 */
+	@Override
 	public ExpDataModel getExpDataModel() {
-		return this.expDataModel;
+		return expDataModel;
 	}
 
 	/**
@@ -188,9 +220,11 @@ public class DefaultTableModelProxy extends javax.swing.table.DefaultTableModel 
 	 * 
 	 * @param expDataModel New value of property expDataModel.
 	 */
-	public void setExpDataModel(ExpDataModel expDataModel) {
-		if (expDataModel != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel expDataModel) {
+		if (expDataModel != null) {
 			expDataModel.removeExpDataModelListener(this);
+		}
 
 		this.expDataModel = expDataModel;
 
@@ -202,17 +236,21 @@ public class DefaultTableModelProxy extends javax.swing.table.DefaultTableModel 
 
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 		fireTableStructureChanged();
 		fireTableDataChanged();
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 		fireTableDataChanged();
 	}

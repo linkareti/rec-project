@@ -27,23 +27,25 @@ public class PVStampDataSource extends AbstractStampDataSource {
 	public PVStampDataSource() {
 	}
 
-	public void processDataCommand(StampCommand cmd) {
-		if (cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null)
+	@Override
+	public void processDataCommand(final StampCommand cmd) {
+		if (cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null) {
 			return;
+		}
 
 		if (cmd.getCommandIdentifier().equals(StampPVProcessor.COMMAND_IDENTIFIER)) {
 			Integer pressure;
 			Float volume;
-			PhysicsValue[] values = new PhysicsValue[2];
+			final PhysicsValue[] values = new PhysicsValue[2];
 			try {
 				pressure = (Integer) cmd.getCommandData(StampPVProcessor.PRESSAO);
 				volume = (Float) cmd.getCommandData(StampPVProcessor.VOLUME);
-			} catch (ClassCastException e) {
+			} catch (final ClassCastException e) {
 				e.printStackTrace();
 				return;
 			}
-			int valorPressao = pressure.intValue();
-			float valorVolume = volume.floatValue();
+			final int valorPressao = pressure.intValue();
+			final float valorVolume = volume.floatValue();
 			values[0] = PhysicsValueFactory.fromFloat(valorPressao, getAcquisitionHeader().getChannelsConfig(0)
 					.getSelectedScale());
 			values[1] = PhysicsValueFactory.fromFloat(valorVolume, getAcquisitionHeader().getChannelsConfig(1)
@@ -53,16 +55,18 @@ public class PVStampDataSource extends AbstractStampDataSource {
 			counter++;
 			if (counter == total_samples) {
 				try {
-					Thread.currentThread().sleep(1000);
+					Thread.currentThread();
+					Thread.sleep(1000);
 					setDataSourceEnded();
-				} catch (InterruptedException ignored) {
+				} catch (final InterruptedException ignored) {
 				}
 			}
 		}
 
 	}
 
-	public void setAcquisitionHeader(HardwareAcquisitionConfig config) {
+	@Override
+	public void setAcquisitionHeader(final HardwareAcquisitionConfig config) {
 		super.setAcquisitionHeader(config);
 
 		total_samples = config.getTotalSamples();
@@ -72,6 +76,7 @@ public class PVStampDataSource extends AbstractStampDataSource {
 
 	private boolean stopped = false;
 
+	@Override
 	public void stopNow() {
 		stopped = true;
 		setDataSourceStoped();

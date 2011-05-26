@@ -7,6 +7,7 @@
 package pt.utl.ist.elab.client.vmvbrown.displays;
 
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import org.opensourcephysics.displayejs.DrawingPanel3D;
 
@@ -22,6 +23,10 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  */
 public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6475653665018521985L;
 	private BrownMovement brown;
 
 	/** Creates a new instance of Animation */
@@ -77,25 +82,30 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 	 * test.pack(); test.setVisible(true); stdim.start(); }
 	 */
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
-		HardwareAcquisitionConfig header = model.getAcquisitionConfig();
+		final HardwareAcquisitionConfig header = model.getAcquisitionConfig();
 
 		if (header.getSelectedHardwareParameterValue("animaAct").trim().equals("1") ? true : false) {
-			byte dim = Byte.parseByte(header.getSelectedHardwareParameterValue("dim"));
+			final byte dim = Byte.parseByte(header.getSelectedHardwareParameterValue("dim"));
 
-			if (dim == 3)
+			if (dim == 3) {
 				brown = new Animation3D(DrawingPanel3D.DISPLAY_NO_PERSPECTIVE);
-			else
+			} else {
 				brown = new Animation2D();
+			}
 
 			setLayout(new java.awt.GridBagLayout());
 			java.awt.GridBagConstraints gridBagConstraints;
@@ -109,8 +119,8 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 			gridBagConstraints.weighty = 1;
 			add((JPanel) brown, gridBagConstraints);
 			updateUI();
-			brown.config(Integer.parseInt(header.getSelectedHardwareParameterValue("nPart")), Byte.parseByte(header
-					.getSelectedHardwareParameterValue("radiusAnima")), java.awt.Color.BLACK);
+			brown.config(Integer.parseInt(header.getSelectedHardwareParameterValue("nPart")),
+					Byte.parseByte(header.getSelectedHardwareParameterValue("radiusAnima")), java.awt.Color.BLACK);
 		} else {
 			setLayout(new java.awt.GridBagLayout());
 			java.awt.GridBagConstraints gridBagConstraints;
@@ -123,52 +133,63 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 			gridBagConstraints.weightx = 1;
 			gridBagConstraints.weighty = 1;
 
-			javax.swing.JLabel label = new javax.swing.JLabel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-					"rec.exp.displays.inactive"), javax.swing.JLabel.CENTER);
+			final javax.swing.JLabel label = new javax.swing.JLabel(java.util.ResourceBundle.getBundle(
+					"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.displays.inactive"),
+					SwingConstants.CENTER);
 			removeAll();
 			add(label, gridBagConstraints);
 			updateUI();
 		}
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
-			if (model.getValueAt(i, 0) != null)
+			if (model.getValueAt(i, 0) != null) {
 				brown.moves(model.getValueAt(i, 0).getValue().getByteArrayValue().getData());
+			}
 		}
 	}
 
 	private ExpDataModel model = null;
 
-	public void setExpDataModel(ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
+		if (this.model != null) {
 			this.model.removeExpDataModelListener(this);
+		}
 		this.model = model;
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 	}
 
 }

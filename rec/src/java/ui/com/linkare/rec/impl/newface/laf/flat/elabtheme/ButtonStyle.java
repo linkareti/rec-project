@@ -17,29 +17,36 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
 
+import com.linkare.rec.impl.newface.laf.flat.theme.AbstractStyle;
+
 /**
  * 
  * @author João Florindo
  */
 public class ButtonStyle extends DefaultStyle {
 
-//        Old Button
-//	private static final FontUIResource FONT_BUTTON = new FontUIResource(DEFAULT_FONT.getFontName(), Font.PLAIN, 12);
-//	private static final List BUTTON_GRADIENT = Arrays.asList(new Object[] { new Float(.1f), new Float(0f), new ColorUIResource(0xF3F3F3),
-//			new ColorUIResource(0xF3F3F3), new ColorUIResource(0xFEFEFE) });
-//	private static final Border COLOR_BORDER = BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(0xC2C2C2)),
-//			BorderFactory.createEmptyBorder(4, 16, 4, 16));
-//	private static final Color COLOR_BUTTON_FG = new Color(0x848187);
+	// Old Button
+	// private static final FontUIResource FONT_BUTTON = new
+	// FontUIResource(DEFAULT_FONT.getFontName(), Font.PLAIN, 12);
+	// private static final List BUTTON_GRADIENT = Arrays.asList(new Object[] {
+	// new Float(.1f), new Float(0f), new ColorUIResource(0xF3F3F3),
+	// new ColorUIResource(0xF3F3F3), new ColorUIResource(0xFEFEFE) });
+	// private static final Border COLOR_BORDER =
+	// BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new
+	// Color(0xC2C2C2)),
+	// BorderFactory.createEmptyBorder(4, 16, 4, 16));
+	// private static final Color COLOR_BUTTON_FG = new Color(0x848187);
 
-//        New Button
-    	private static final FontUIResource FONT_BUTTON = new FontUIResource(DEFAULT_FONT.getFontName(), Font.PLAIN, 12);
-	private static final List BUTTON_GRADIENT = Arrays.asList(new Object[] { new Float(.1f), new Float(0f), new ColorUIResource(0xD8E8F6),
-			new ColorUIResource(0xEDF5FB), new ColorUIResource(0xD8F0FF) });
-	private static final Border COLOR_BORDER = BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(0x636767)),
-			BorderFactory.createEmptyBorder(4, 16, 4, 16));
+	// New Button
+	private static final FontUIResource FONT_BUTTON = new FontUIResource(DefaultStyle.DEFAULT_FONT.getFontName(),
+			Font.PLAIN, 12);
+	private static final List BUTTON_GRADIENT = Arrays.asList(new Object[] { new Float(.1f), new Float(0f),
+			new ColorUIResource(0xD8E8F6), new ColorUIResource(0xEDF5FB), new ColorUIResource(0xD8F0FF) });
+	private static final Border COLOR_BORDER = BorderFactory.createCompoundBorder(
+			BorderFactory.createLineBorder(new Color(0x636767)), BorderFactory.createEmptyBorder(4, 16, 4, 16));
 	private static final Color COLOR_BUTTON_FG = new Color(0x395882);
 
-	//PROPERTIES
+	// PROPERTIES
 	private static final String PT_GRADIENT = "gradient";
 	private static final String ROLLOVER = "rollover";
 
@@ -54,16 +61,16 @@ public class ButtonStyle extends DefaultStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return ButtonStyle.ID;
 	}
 
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(PT_GRADIENT, BUTTON_GRADIENT);
-		map.put(BORDER, COLOR_BORDER);
-		map.put(FOREGROUND, COLOR_BUTTON_FG);
-		map.put(ROLLOVER, false);
+		map.put(ButtonStyle.PT_GRADIENT, ButtonStyle.BUTTON_GRADIENT);
+		map.put(AbstractStyle.BORDER, ButtonStyle.COLOR_BORDER);
+		map.put(AbstractStyle.FOREGROUND, ButtonStyle.COLOR_BUTTON_FG);
+		map.put(ButtonStyle.ROLLOVER, false);
 
 	}
 

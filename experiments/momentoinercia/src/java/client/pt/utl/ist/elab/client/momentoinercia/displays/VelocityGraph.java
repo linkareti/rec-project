@@ -14,6 +14,11 @@ import com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph;
  */
 public class VelocityGraph extends MultSeriesXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3091863273206698440L;
+
 	/** Creates a new instance of Sensor1Graph */
 	public VelocityGraph() {
 		setChannelDisplayX(2);
@@ -21,6 +26,7 @@ public class VelocityGraph extends MultSeriesXYExperimentGraph {
 		setUpdatePercentage(10);
 	}
 
+	@Override
 	public String getName() {
 		return "Velocidade angular";
 	}

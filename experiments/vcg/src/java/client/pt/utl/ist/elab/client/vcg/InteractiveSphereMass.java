@@ -17,11 +17,11 @@ public class InteractiveSphereMass extends InteractiveSphere {
 	private double mass;
 
 	/** Creates a new instance of InteractiveSphereMass */
-	public InteractiveSphereMass(double m) {
+	public InteractiveSphereMass(final double m) {
 		mass = m;
 	}
 
-	public void setMass(double m) {
+	public void setMass(final double m) {
 		mass = m;
 	}
 

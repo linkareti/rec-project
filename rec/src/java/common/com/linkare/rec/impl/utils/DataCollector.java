@@ -34,7 +34,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 	private static String DATA_RECEIVER_LOGGER = "DataReceiver.Logger";
 	private transient Thread acquisitionThread = null;
 	private boolean acquisitionThreadInited = false;
-	private Object synchWaitFetchData = new boolean[0];
+	private final Object synchWaitFetchData = new boolean[0];
 	private SamplesPacketMatrix samplesPackets = null;
 	private int largestPacketKnown = MaxPacketNumUnknown.value;
 	private DataProducerState remoteDataProducerState = DataProducerState.DP_WAITING;
@@ -42,15 +42,15 @@ public abstract class DataCollector extends Thread implements Serializable {
 	private boolean startedSamples = false;
 	private int totalSamples;
 	private static final int DEFAULT_FREQUENCY_TIME = 100;
-	private long frequency = DEFAULT_FREQUENCY_TIME;
+	private long frequency = DataCollector.DEFAULT_FREQUENCY_TIME;
 	private long lastFetchPacketsTimestamp = System.currentTimeMillis();
 	private long lastPacketFetchedTimestamp = System.currentTimeMillis();
 	private transient DataCollectorFetchPacketCheck fetchPacketCheck = null;
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(DATA_RECEIVER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(DataCollector.DATA_RECEIVER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(DATA_RECEIVER_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(DataCollector.DATA_RECEIVER_LOGGER));
 		}
 	}
 
@@ -60,11 +60,19 @@ public abstract class DataCollector extends Thread implements Serializable {
 		setName(getName() + " - DataCollector");
 	}
 
+	protected DataCollector(final DataCollectorState collectorState, final SamplesPacketMatrix samplesPacketMAtrix) {
+		this.samplesPackets = samplesPacketMAtrix;
+		this.dataCollectorState = collectorState;
+		if (samplesPacketMAtrix != null && samplesPacketMAtrix.size() > 0) {
+			this.largestPacketKnown = samplesPacketMAtrix.size();
+		}
+	}
+
 	public SamplesPacketSource getSamplesPacketSource() {
 		return samplesPackets;
 	}
 
-	protected void setLargestPacketKnown(int largestPacketKnown) {
+	protected void setLargestPacketKnown(final int largestPacketKnown) {
 		synchronized (synchWaitFetchData) {
 			log(Level.FINEST, "Setting DataCollector for the largest packet know = " + largestPacketKnown);
 			if (largestPacketKnown > this.largestPacketKnown) {
@@ -94,7 +102,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 		}
 	}
 
-	public void addSamplesPackets(SamplesPacket[] samples_packet) {
+	public void addSamplesPackets(final SamplesPacket[] samples_packet) {
 		lastPacketFetchedTimestamp = System.currentTimeMillis();
 
 		samplesPackets.addSamplesPackets(samples_packet);
@@ -107,52 +115,53 @@ public abstract class DataCollector extends Thread implements Serializable {
 		fireNewSamples();
 	}
 
-	private void setDataCollectorState(DataCollectorState newState) {
-		if (newState.equals(dataCollectorState))
+	private void setDataCollectorState(final DataCollectorState newState) {
+		if (newState.equals(dataCollectorState)) {
 			return;
+		}
 
 		if (newState.equals(DataCollectorState.DP_WAITING)) {
 			log(Level.INFO, "Trying to set Data Collector State to " + newState
 					+ " while current DataProducer State is " + dataCollectorState
 					+ " - this transition is not possible!");
 		} else if (newState.equals(DataCollectorState.DP_STARTED_NODATA)) {
-			if (!dataCollectorState.equals(DataCollectorState.DP_WAITING))
+			if (!dataCollectorState.equals(DataCollectorState.DP_WAITING)) {
 				log(Level.INFO, "Trying to set Data Collector State to " + newState
 						+ " while current DataProducer State is " + dataCollectorState
 						+ " - this transition is not possible!");
-			else {
+			} else {
 				dataCollectorState = newState;
 				fireStateChanged();
 			}
 		} else if (newState.equals(DataCollectorState.DP_STARTED)) {
 			if (!(dataCollectorState.equals(DataCollectorState.DP_WAITING) || dataCollectorState
-					.equals(DataCollectorState.DP_STARTED_NODATA)))
+					.equals(DataCollectorState.DP_STARTED_NODATA))) {
 				log(Level.INFO, "Trying to set Data Collector State to " + newState
 						+ " while current DataProducer State is " + dataCollectorState
 						+ " - this transition is not possible!");
-			else {
+			} else {
 				dataCollectorState = newState;
 				fireStateChanged();
 			}
 		} else if (newState.equals(DataCollectorState.DP_ENDED)) {
 			if (!(dataCollectorState.equals(DataCollectorState.DP_WAITING)
 					|| dataCollectorState.equals(DataCollectorState.DP_STARTED_NODATA) || dataCollectorState
-					.equals(DataCollectorState.DP_STARTED)))
+					.equals(DataCollectorState.DP_STARTED))) {
 				log(Level.INFO, "Trying to set Data Collector State to " + newState
 						+ " while current DataProducer State is " + dataCollectorState
 						+ " - this transition is not possible!");
-			else {
+			} else {
 				dataCollectorState = newState;
 				fireStateChanged();
 			}
 		} else if (newState.equals(DataCollectorState.DP_STOPED)) {
 			if (!(dataCollectorState.equals(DataCollectorState.DP_WAITING)
 					|| dataCollectorState.equals(DataCollectorState.DP_STARTED_NODATA) || dataCollectorState
-					.equals(DataCollectorState.DP_STARTED)))
+					.equals(DataCollectorState.DP_STARTED))) {
 				log(Level.INFO, "Trying to set Data Collector State to " + newState
 						+ " while current DataProducer State is " + dataCollectorState
 						+ " - this transition is not possible!");
-			else {
+			} else {
 				dataCollectorState = newState;
 				fireStateChanged();
 			}
@@ -160,30 +169,32 @@ public abstract class DataCollector extends Thread implements Serializable {
 			dataCollectorState = newState;
 			fireStateChanged();
 
-		} else
+		} else {
 			log(Level.INFO, "Unknown Data Collector State " + newState);
+		}
 	}
 
 	public DataCollectorState getDataCollectorState() {
 		return dataCollectorState;
 	}
 
-	public void setRemoteDataProducerState(DataProducerState newState) {
+	public void setRemoteDataProducerState(final DataProducerState newState) {
 		remoteDataProducerState = newState;
-		if (newState.equals(DataProducerState.DP_WAITING))
+		if (newState.equals(DataProducerState.DP_WAITING)) {
 			remoteDataProducerWaiting();
-		else if (newState.equals(DataProducerState.DP_STARTED_NODATA))
+		} else if (newState.equals(DataProducerState.DP_STARTED_NODATA)) {
 			remoteDataProducerStartedNoData();
-		else if (newState.equals(DataProducerState.DP_STARTED))
+		} else if (newState.equals(DataProducerState.DP_STARTED)) {
 			remoteDataProducerStarted();
-		else if (newState.equals(DataProducerState.DP_ENDED))
+		} else if (newState.equals(DataProducerState.DP_ENDED)) {
 			remoteDataProducerEnded();
-		else if (newState.equals(DataProducerState.DP_STOPED))
+		} else if (newState.equals(DataProducerState.DP_STOPED)) {
 			remoteDataProducerStoped();
-		else if (newState.equals(DataProducerState.DP_ERROR))
+		} else if (newState.equals(DataProducerState.DP_ERROR)) {
 			remoteDataProducerError();
-		else
+		} else {
 			log(Level.INFO, "Unknown Remote Data Collector State " + newState);
+		}
 	}
 
 	private void remoteDataProducerWaiting() {
@@ -226,10 +237,11 @@ public abstract class DataCollector extends Thread implements Serializable {
 
 	abstract public DataProducerWrapper getRemoteDataProducer();
 
+	@Override
 	public void run() {
 		exit = false;
 		pause = false;
-		acquisitionThread = currentThread();
+		acquisitionThread = Thread.currentThread();
 
 		log(Level.INFO, "DataCollector started. Remote data producer state = " + remoteDataProducerState);
 
@@ -246,11 +258,11 @@ public abstract class DataCollector extends Thread implements Serializable {
 			while (samplesPackets.size() < totalSamples && !exit) {
 				while (pause && !exit) {
 					synchronized (synchWaitFetchData) {
-						DataCollectorState stateBeforePausing = getDataCollectorState();
+						final DataCollectorState stateBeforePausing = getDataCollectorState();
 						setDataCollectorState(new DataCollectorState(DataCollectorState.DP_WAITING));
 						try {
 							synchWaitFetchData.wait(calcWaitTime());
-						} catch (Exception e) {
+						} catch (final Exception e) {
 							logThrowable("Exception while pausing", e);
 							return;
 						}
@@ -281,7 +293,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 
 			log(Level.INFO, "DataCollector ended. Remote data producer state = " + remoteDataProducerState);
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logThrowable("Unexpected exception while running DataCollector!", e);
 			return;
 		}
@@ -306,35 +318,40 @@ public abstract class DataCollector extends Thread implements Serializable {
 	}
 
 	protected void shutdownThread() {
-		if (acquisitionThread != null)
+		if (acquisitionThread != null) {
 			try {
 				acquisitionThread.join(1000);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				logThrowable("Error waiting for acquisitionThread shutdown...", e);
 			}
+		}
 	}
 
 	private void fetchPackets() {
 		lastFetchPacketsTimestamp = System.currentTimeMillis();
 		int lastPacket = samplesPackets.size();
-		if (lastPacket > largestPacketKnown || largestPacketKnown == MaxPacketNumUnknown.value)
+		if (lastPacket > largestPacketKnown || largestPacketKnown == MaxPacketNumUnknown.value) {
 			return;
+		}
 		try {
 			log(Level.FINE, "DataCollector is going to fetch packets from " + lastPacket + " to " + largestPacketKnown);
 			addSamplesPackets(getRemoteDataProducer().getSamples(lastPacket, largestPacketKnown));
-		} catch (NotAnAvailableSamplesPacketException e) {
+		} catch (final NotAnAvailableSamplesPacketException e) {
 			logThrowable("Error fetching samples Packet " + e.firstPacketNotFound, e);
-			if (!isConnected())
+			if (!isConnected()) {
 				setRemoteDataProducerState(DataProducerState.DP_ERROR);
+			}
 			lastPacket = e.firstPacketNotFound - 1;
-			if (lastPacket > largestPacketKnown)
+			if (lastPacket > largestPacketKnown) {
 				return;
+			}
 			try {
 				addSamplesPackets(getRemoteDataProducer().getSamples(lastPacket, largestPacketKnown));
-			} catch (NotAnAvailableSamplesPacketException e2) {
+			} catch (final NotAnAvailableSamplesPacketException e2) {
 				logThrowable("Error fetching samples Packet " + e2.firstPacketNotFound, e2);
-				if (!isConnected())
+				if (!isConnected()) {
 					setRemoteDataProducerState(DataProducerState.DP_ERROR);
+				}
 			}
 		}
 	}
@@ -342,9 +359,11 @@ public abstract class DataCollector extends Thread implements Serializable {
 	public void fetchAvailablePackets() {
 		updateLargestPacketKnown();
 		fetchPackets();
-		if (largestPacketKnown != samplesPackets.size() - 1)
-			if (!isConnected())
+		if (largestPacketKnown != samplesPackets.size() - 1) {
+			if (!isConnected()) {
 				setRemoteDataProducerState(DataProducerState.DP_ERROR);
+			}
+		}
 	}
 
 	private void updateLargestPacketKnown() {
@@ -353,9 +372,10 @@ public abstract class DataCollector extends Thread implements Serializable {
 				largestPacketKnown = Math.max(getRemoteDataProducer().getMaxPacketNum(), largestPacketKnown);
 				log(Level.FINEST, "Updated DataCollector for the largest packet know = " + largestPacketKnown);
 			}
-		} catch (Exception e) {
-			if (!isConnected())
+		} catch (final Exception e) {
+			if (!isConnected()) {
 				setRemoteDataProducerState(DataProducerState.DP_ERROR);
+			}
 		}
 	}
 
@@ -369,7 +389,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 	 * @return Value of property exit.
 	 */
 	public boolean isExit() {
-		return this.exit;
+		return exit;
 	}
 
 	/**
@@ -377,7 +397,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 	 * 
 	 * @param exit New value of property exit.
 	 */
-	public void setExit(boolean exit) {
+	public void setExit(final boolean exit) {
 		this.exit = exit;
 		synchronized (synchWaitFetchData) {
 			notified = true;
@@ -391,7 +411,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 	 * @return Value of property pause.
 	 */
 	public boolean isPause() {
-		return this.pause;
+		return pause;
 	}
 
 	/**
@@ -399,7 +419,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 	 * 
 	 * @param pause New value of property pause.
 	 */
-	public void setPause(boolean pause) {
+	public void setPause(final boolean pause) {
 		this.pause = pause;
 		synchronized (synchWaitFetchData) {
 			synchWaitFetchData.notifyAll();
@@ -414,8 +434,8 @@ public abstract class DataCollector extends Thread implements Serializable {
 	 * @return the waiting time to check for new packets
 	 */
 	protected long calcWaitTime() {
-		long time = frequency - (System.currentTimeMillis() - lastFetchPacketsTimestamp);
-		return time > 0 ? time : DEFAULT_FREQUENCY_TIME;
+		final long time = frequency - (System.currentTimeMillis() - lastFetchPacketsTimestamp);
+		return time > 0 ? time : DataCollector.DEFAULT_FREQUENCY_TIME;
 	}
 
 	/**
@@ -428,7 +448,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 	/**
 	 * @param totalSamples the totalSamples to set
 	 */
-	protected void setTotalSamples(int totalSamples) {
+	protected void setTotalSamples(final int totalSamples) {
 		this.totalSamples = totalSamples;
 	}
 
@@ -442,24 +462,28 @@ public abstract class DataCollector extends Thread implements Serializable {
 	/**
 	 * @param frequency the frequency to set
 	 */
-	protected void setFrequency(long frequency) {
+	protected void setFrequency(final long frequency) {
 		this.frequency = frequency;
 	}
 
 	private class DataCollectorFetchPacketCheck extends ScheduledWorkUnit {
 
-		private int periodChecker = 60; // seconds // TODO must be a system
-										// property
-		private int timeSpend = 5 * 60 * 1000; // milliseconds // TODO must be a
-												// system property
+		private final int periodChecker = 60; // seconds // TODO must be a
+												// system
+		// property
+		private final int timeSpend = 5 * 60 * 1000; // milliseconds // TODO
+														// must be a
+
+		// system property
 
 		DataCollectorFetchPacketCheck() {
 			ExecutorScheduler.scheduleAtFixedRate(this, 1, periodChecker, SECONDS);
 		}
 
+		@Override
 		public void run() {
 			if (System.currentTimeMillis() - lastPacketFetchedTimestamp >= timeSpend) {
-				log(Level.INFO, "Going to exit because it has passed more than " + ((int) (timeSpend / 1000))
+				log(Level.INFO, "Going to exit because it has passed more than " + ((timeSpend / 1000))
 						+ " seconds since it was received a sample.");
 				exit = true;
 				shutdown();
@@ -470,7 +494,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 		 * {@inheritDoc}
 		 */
 		@Override
-		public void logThrowable(String message, Throwable throwable) {
+		public void logThrowable(final String message, final Throwable throwable) {
 			logThrowable(message, throwable);
 		}
 	}

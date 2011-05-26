@@ -12,9 +12,14 @@ package pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs;
  */
 public class ConfIVPWM extends javax.swing.JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7134889764646889284L;
+
 	/** Creates new form IVPWM */
-	public ConfIVPWM(java.awt.Frame parent, boolean modal,
-			pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIVPWM model) {
+	public ConfIVPWM(final java.awt.Frame parent, final boolean modal,
+			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIVPWM model) {
 		super(parent, modal);
 		this.model = model;
 		initComponents();
@@ -89,13 +94,15 @@ public class ConfIVPWM extends javax.swing.JDialog {
 
 		setTitle("Configura\u00e7\u00e3o do PWM");
 		addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				formKeyReleased(evt);
 			}
 		});
 
 		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent evt) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent evt) {
 				closeDialog(evt);
 			}
 		});
@@ -115,7 +122,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 
 		jRadioButtonI7.setForeground(new java.awt.Color(51, 0, 102));
 		jRadioButtonI7.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jRadioButtonI7StateChanged(evt);
 			}
 		});
@@ -140,7 +148,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 
 		jRadioButtonI6.setForeground(new java.awt.Color(51, 0, 102));
 		jRadioButtonI6.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jRadioButtonI6StateChanged(evt);
 			}
 		});
@@ -165,7 +174,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 
 		jRadioButtonI5.setForeground(new java.awt.Color(51, 0, 102));
 		jRadioButtonI5.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jRadioButtonI5StateChanged(evt);
 			}
 		});
@@ -181,7 +191,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 
 		jRadioButtonI4.setForeground(new java.awt.Color(51, 0, 102));
 		jRadioButtonI4.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jRadioButtonI4StateChanged(evt);
 			}
 		});
@@ -197,7 +208,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 
 		jRadioButtonI3.setForeground(new java.awt.Color(51, 0, 102));
 		jRadioButtonI3.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jRadioButtonI3StateChanged(evt);
 			}
 		});
@@ -213,7 +225,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 
 		jRadioButtonI2.setForeground(new java.awt.Color(51, 0, 102));
 		jRadioButtonI2.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jRadioButtonI2StateChanged(evt);
 			}
 		});
@@ -229,7 +242,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 
 		jRadioButtonI1.setForeground(new java.awt.Color(51, 0, 102));
 		jRadioButtonI1.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jRadioButtonI1StateChanged(evt);
 			}
 		});
@@ -245,7 +259,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 
 		jRadioButtonI0.setForeground(new java.awt.Color(51, 0, 102));
 		jRadioButtonI0.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jRadioButtonI0StateChanged(evt);
 			}
 		});
@@ -313,11 +328,13 @@ public class ConfIVPWM extends javax.swing.JDialog {
 				"PWM2" }) {
 			boolean[] canEdit = new boolean[] { false, false, false };
 
-			public Class getColumnClass(int c) {
+			@Override
+			public Class getColumnClass(final int c) {
 				return getValueAt(0, c).getClass();
 			}
 
-			public boolean isCellEditable(int rowIndex, int columnIndex) {
+			@Override
+			public boolean isCellEditable(final int rowIndex, final int columnIndex) {
 				return canEdit[columnIndex];
 			}
 		});
@@ -331,19 +348,22 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		tableColumnModel.getColumn(0).setMaxWidth(60);
 		defaultTableModel
 				.addTableModelListener(new pt.utl.ist.elab.client.webrobot.customizer.Utils.TableModelAdapter() {
-					public void tableChanged(javax.swing.event.TableModelEvent evt) {
+					@Override
+					public void tableChanged(final javax.swing.event.TableModelEvent evt) {
 						jTableChanged(evt);
 					}
 				});
 		listSelectionModel
 				.addListSelectionListener(new pt.utl.ist.elab.client.webrobot.customizer.Utils.ListSelectionAdapter() {
-					public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+					@Override
+					public void valueChanged(final javax.swing.event.ListSelectionEvent evt) {
 						rowWasSelected(evt);
 					}
 				});
 
 		jTable.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mouseClicked(final java.awt.event.MouseEvent evt) {
 				jTableMouseClicked(evt);
 			}
 		});
@@ -368,7 +388,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		jButtonNewElem.setForeground(new java.awt.Color(51, 0, 102));
 		jButtonNewElem.setText("Novo Elemento");
 		jButtonNewElem.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mouseClicked(final java.awt.event.MouseEvent evt) {
 				jButtonNewElemMouseClicked(evt);
 			}
 		});
@@ -389,13 +410,15 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		jButtonOk.setText("Ok");
 		jButtonOk.setPreferredSize(new java.awt.Dimension(73, 26));
 		jButtonOk.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jButtonOkKeyReleased(evt);
 			}
 		});
 
 		jButtonOk.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonOkMousePressed(evt);
 			}
 		});
@@ -405,7 +428,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		jButtonCancel.setForeground(new java.awt.Color(51, 0, 102));
 		jButtonCancel.setText("Cancel");
 		jButtonCancel.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonCancelMousePressed(evt);
 			}
 		});
@@ -430,7 +454,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		jSliderI0.setMaximum(255);
 		jSliderI0.setPaintTicks(true);
 		jSliderI0.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderI0StateChanged(evt);
 			}
 		});
@@ -441,7 +466,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		jTextFieldI0.setColumns(3);
 		jTextFieldI0.setForeground(new java.awt.Color(51, 0, 102));
 		jTextFieldI0.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jTextFieldI0KeyReleased(evt);
 			}
 		});
@@ -459,7 +485,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		jSliderI1.setMaximum(255);
 		jSliderI1.setPaintTicks(true);
 		jSliderI1.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderI1StateChanged(evt);
 			}
 		});
@@ -473,7 +500,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		jTextFieldI1.setColumns(3);
 		jTextFieldI1.setForeground(new java.awt.Color(51, 0, 102));
 		jTextFieldI1.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jTextFieldI1KeyReleased(evt);
 			}
 		});
@@ -494,7 +522,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		jSliderI2.setMaximum(255);
 		jSliderI2.setPaintTicks(true);
 		jSliderI2.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderI2StateChanged(evt);
 			}
 		});
@@ -508,7 +537,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		jTextFieldI2.setColumns(3);
 		jTextFieldI2.setForeground(new java.awt.Color(51, 0, 102));
 		jTextFieldI2.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jTextFieldI2KeyReleased(evt);
 			}
 		});
@@ -529,7 +559,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		jSliderI3.setMaximum(255);
 		jSliderI3.setPaintTicks(true);
 		jSliderI3.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderI3StateChanged(evt);
 			}
 		});
@@ -543,7 +574,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		jTextFieldI3.setColumns(3);
 		jTextFieldI3.setForeground(new java.awt.Color(51, 0, 102));
 		jTextFieldI3.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jTextFieldI3KeyReleased(evt);
 			}
 		});
@@ -564,7 +596,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		jSliderI4.setMaximum(255);
 		jSliderI4.setPaintTicks(true);
 		jSliderI4.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderI4StateChanged(evt);
 			}
 		});
@@ -578,7 +611,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		jTextFieldI4.setColumns(3);
 		jTextFieldI4.setForeground(new java.awt.Color(51, 0, 102));
 		jTextFieldI4.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jTextFieldI4KeyReleased(evt);
 			}
 		});
@@ -599,7 +633,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		jSliderI5.setMaximum(255);
 		jSliderI5.setPaintTicks(true);
 		jSliderI5.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderI5StateChanged(evt);
 			}
 		});
@@ -613,7 +648,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		jTextFieldI5.setColumns(3);
 		jTextFieldI5.setForeground(new java.awt.Color(51, 0, 102));
 		jTextFieldI5.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jTextFieldI5KeyReleased(evt);
 			}
 		});
@@ -634,7 +670,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		jSliderI6.setMaximum(255);
 		jSliderI6.setPaintTicks(true);
 		jSliderI6.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderI6StateChanged(evt);
 			}
 		});
@@ -648,7 +685,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		jTextFieldI6.setColumns(3);
 		jTextFieldI6.setForeground(new java.awt.Color(51, 0, 102));
 		jTextFieldI6.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jTextFieldI6KeyReleased(evt);
 			}
 		});
@@ -669,7 +707,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		jSliderI7.setMaximum(255);
 		jSliderI7.setPaintTicks(true);
 		jSliderI7.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderI7StateChanged(evt);
 			}
 		});
@@ -683,7 +722,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		jTextFieldI7.setColumns(3);
 		jTextFieldI7.setForeground(new java.awt.Color(51, 0, 102));
 		jTextFieldI7.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jTextFieldI7KeyReleased(evt);
 			}
 		});
@@ -704,7 +744,7 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		pack();
 	}// GEN-END:initComponents
 
-	private void jRadioButtonI0StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jRadioButtonI0StateChanged
+	private void jRadioButtonI0StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jRadioButtonI0StateChanged
 		if (jRadioButtonI0.isSelected()) {
 			jSliderI0.setEnabled(true);
 			jTextFieldI0.setEditable(true);
@@ -714,7 +754,7 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_jRadioButtonI0StateChanged
 
-	private void jRadioButtonI1StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jRadioButtonI1StateChanged
+	private void jRadioButtonI1StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jRadioButtonI1StateChanged
 		if (jRadioButtonI1.isSelected()) {
 			jSliderI1.setEnabled(true);
 			jTextFieldI1.setEditable(true);
@@ -724,7 +764,7 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_jRadioButtonI1StateChanged
 
-	private void jRadioButtonI2StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jRadioButtonI2StateChanged
+	private void jRadioButtonI2StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jRadioButtonI2StateChanged
 		if (jRadioButtonI2.isSelected()) {
 			jSliderI2.setEnabled(true);
 			jTextFieldI2.setEditable(true);
@@ -734,7 +774,7 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_jRadioButtonI2StateChanged
 
-	private void jRadioButtonI3StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jRadioButtonI3StateChanged
+	private void jRadioButtonI3StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jRadioButtonI3StateChanged
 		if (jRadioButtonI3.isSelected()) {
 			jSliderI3.setEnabled(true);
 			jTextFieldI3.setEditable(true);
@@ -744,7 +784,7 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_jRadioButtonI3StateChanged
 
-	private void jRadioButtonI4StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jRadioButtonI4StateChanged
+	private void jRadioButtonI4StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jRadioButtonI4StateChanged
 		if (jRadioButtonI4.isSelected()) {
 			jSliderI4.setEnabled(true);
 			jTextFieldI4.setEditable(true);
@@ -754,7 +794,7 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_jRadioButtonI4StateChanged
 
-	private void jRadioButtonI5StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jRadioButtonI5StateChanged
+	private void jRadioButtonI5StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jRadioButtonI5StateChanged
 		if (jRadioButtonI5.isSelected()) {
 			jSliderI5.setEnabled(true);
 			jTextFieldI5.setEditable(true);
@@ -764,7 +804,7 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_jRadioButtonI5StateChanged
 
-	private void jRadioButtonI6StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jRadioButtonI6StateChanged
+	private void jRadioButtonI6StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jRadioButtonI6StateChanged
 		if (jRadioButtonI6.isSelected()) {
 			jSliderI6.setEnabled(true);
 			jTextFieldI6.setEditable(true);
@@ -774,7 +814,7 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_jRadioButtonI6StateChanged
 
-	private void jRadioButtonI7StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jRadioButtonI7StateChanged
+	private void jRadioButtonI7StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jRadioButtonI7StateChanged
 		if (jRadioButtonI7.isSelected()) {
 			jSliderI7.setEnabled(true);
 			jTextFieldI7.setEditable(true);
@@ -784,14 +824,14 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_jRadioButtonI7StateChanged
 
-	private void jTableMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jTableMouseClicked
+	private void jTableMouseClicked(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jTableMouseClicked
 		if (evt.getClickCount() == 2) {
 			wasDoubleClick = true;
 			rowWasSelected(tempListEvt);
 		}
 	}// GEN-LAST:event_jTableMouseClicked
 
-	private void jButtonOkKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jButtonOkKeyReleased
+	private void jButtonOkKeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jButtonOkKeyReleased
 		if (evt.getKeyCode() == 10) {
 			jButtonOkMousePressed(null);
 		} else if (evt.getKeyCode() == 27) {
@@ -799,7 +839,7 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_jButtonOkKeyReleased
 
-	private void formKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_formKeyReleased
+	private void formKeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_formKeyReleased
 		if (evt.getKeyCode() == 10) {
 			jButtonOkMousePressed(null);
 		} else if (evt.getKeyCode() == 27) {
@@ -807,12 +847,12 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_formKeyReleased
 
-	private void jButtonCancelMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonCancelMousePressed
+	private void jButtonCancelMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonCancelMousePressed
 		setCancel(true);
 		closeDialog(null);
 	}// GEN-LAST:event_jButtonCancelMousePressed
 
-	private void jButtonOkMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonOkMousePressed
+	private void jButtonOkMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonOkMousePressed
 		if (checkTextValues.isOK(jTextFieldI7) && checkTextValues.isOK(jTextFieldI6)
 				&& checkTextValues.isOK(jTextFieldI5) && checkTextValues.isOK(jTextFieldI4)
 				&& checkTextValues.isOK(jTextFieldI3) && checkTextValues.isOK(jTextFieldI2)
@@ -833,7 +873,7 @@ public class ConfIVPWM extends javax.swing.JDialog {
 			model.setI5Value(jSliderI5.getValue());
 			model.setI6Value(jSliderI6.getValue());
 			model.setI7Value(jSliderI7.getValue());
-			Object[][] tempObj = new Object[defaultTableModel.getRowCount()][3];
+			final Object[][] tempObj = new Object[defaultTableModel.getRowCount()][3];
 			for (int i = 0; i < defaultTableModel.getRowCount(); i++) {
 				tempObj[i][0] = defaultTableModel.getValueAt(i, 0);
 				tempObj[i][1] = defaultTableModel.getValueAt(i, 1);
@@ -845,89 +885,89 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_jButtonOkMousePressed
 
-	private void jTextFieldI7KeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldI7KeyReleased
+	private void jTextFieldI7KeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldI7KeyReleased
 		setTextFieldText(jTextFieldI7, jSliderI7);
 	}// GEN-LAST:event_jTextFieldI7KeyReleased
 
-	private void jTextFieldI6KeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldI6KeyReleased
+	private void jTextFieldI6KeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldI6KeyReleased
 		setTextFieldText(jTextFieldI6, jSliderI6);
 	}// GEN-LAST:event_jTextFieldI6KeyReleased
 
-	private void jTextFieldI5KeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldI5KeyReleased
+	private void jTextFieldI5KeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldI5KeyReleased
 		setTextFieldText(jTextFieldI5, jSliderI5);
 	}// GEN-LAST:event_jTextFieldI5KeyReleased
 
-	private void jTextFieldI4KeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldI4KeyReleased
+	private void jTextFieldI4KeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldI4KeyReleased
 		setTextFieldText(jTextFieldI4, jSliderI4);
 	}// GEN-LAST:event_jTextFieldI4KeyReleased
 
-	private void jTextFieldI3KeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldI3KeyReleased
+	private void jTextFieldI3KeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldI3KeyReleased
 		setTextFieldText(jTextFieldI3, jSliderI3);
 	}// GEN-LAST:event_jTextFieldI3KeyReleased
 
-	private void jTextFieldI2KeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldI2KeyReleased
+	private void jTextFieldI2KeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldI2KeyReleased
 		setTextFieldText(jTextFieldI2, jSliderI2);
 	}// GEN-LAST:event_jTextFieldI2KeyReleased
 
-	private void jTextFieldI1KeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldI1KeyReleased
+	private void jTextFieldI1KeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldI1KeyReleased
 		setTextFieldText(jTextFieldI1, jSliderI1);
 	}// GEN-LAST:event_jTextFieldI1KeyReleased
 
-	private void jTextFieldI0KeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldI0KeyReleased
+	private void jTextFieldI0KeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldI0KeyReleased
 		setTextFieldText(jTextFieldI0, jSliderI0);
 	}// GEN-LAST:event_jTextFieldI0KeyReleased
 
-	private void jSliderI7StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderI7StateChanged
+	private void jSliderI7StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderI7StateChanged
 		jTextFieldI7.setText("" + jSliderI7.getValue());
 	}// GEN-LAST:event_jSliderI7StateChanged
 
-	private void jSliderI6StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderI6StateChanged
+	private void jSliderI6StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderI6StateChanged
 		jTextFieldI6.setText("" + jSliderI6.getValue());
 	}// GEN-LAST:event_jSliderI6StateChanged
 
-	private void jSliderI5StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderI5StateChanged
+	private void jSliderI5StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderI5StateChanged
 		jTextFieldI5.setText("" + jSliderI5.getValue());
 	}// GEN-LAST:event_jSliderI5StateChanged
 
-	private void jSliderI4StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderI4StateChanged
+	private void jSliderI4StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderI4StateChanged
 		jTextFieldI4.setText("" + jSliderI4.getValue());
 	}// GEN-LAST:event_jSliderI4StateChanged
 
-	private void jSliderI3StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderI3StateChanged
+	private void jSliderI3StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderI3StateChanged
 		jTextFieldI3.setText("" + jSliderI3.getValue());
 	}// GEN-LAST:event_jSliderI3StateChanged
 
-	private void jSliderI2StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderI2StateChanged
+	private void jSliderI2StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderI2StateChanged
 		jTextFieldI2.setText("" + jSliderI2.getValue());
 	}// GEN-LAST:event_jSliderI2StateChanged
 
-	private void jSliderI1StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderI1StateChanged
+	private void jSliderI1StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderI1StateChanged
 		jTextFieldI1.setText("" + jSliderI1.getValue());
 	}// GEN-LAST:event_jSliderI1StateChanged
 
-	private void jSliderI0StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderI0StateChanged
+	private void jSliderI0StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderI0StateChanged
 		jTextFieldI0.setText("" + jSliderI0.getValue());
 	}// GEN-LAST:event_jSliderI0StateChanged
 
-	private void jButtonNewElemMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonNewElemMouseClicked
-		Object[] send = new Object[3];
+	private void jButtonNewElemMouseClicked(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonNewElemMouseClicked
+		final Object[] send = new Object[3];
 		send[0] = new String("00000000");
 		send[1] = new Integer(0);
 		send[2] = new Integer(0);
 		confAddNewElement = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfAddNewElement(this, true,
-				jRadioButtonI0.isSelected(), jRadioButtonI1.isSelected(), jRadioButtonI2.isSelected(), jRadioButtonI3
-						.isSelected(), jRadioButtonI4.isSelected(), jRadioButtonI5.isSelected(), jRadioButtonI6
-						.isSelected(), jRadioButtonI7.isSelected(), send);
+				jRadioButtonI0.isSelected(), jRadioButtonI1.isSelected(), jRadioButtonI2.isSelected(),
+				jRadioButtonI3.isSelected(), jRadioButtonI4.isSelected(), jRadioButtonI5.isSelected(),
+				jRadioButtonI6.isSelected(), jRadioButtonI7.isSelected(), send);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(this, confAddNewElement);
 		confAddNewElement.show();
-		Object[] newRowData = confAddNewElement.getReturnObj();
+		final Object[] newRowData = confAddNewElement.getReturnObj();
 		if (newRowData[0] != null) {
 			defaultTableModel.addRow(newRowData);
 		}
 		reOrderTable();
 	}// GEN-LAST:event_jButtonNewElemMouseClicked
 
-	private void rowWasSelected(javax.swing.event.ListSelectionEvent evt) {
+	private void rowWasSelected(final javax.swing.event.ListSelectionEvent evt) {
 		if (!wasDoubleClick) {
 			tempListEvt = evt;
 			return;
@@ -937,22 +977,22 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		if (listSelectionModel.isSelectionEmpty()) {
 			return;
 		}
-		int selectedRow = listSelectionModel.getMinSelectionIndex();
-		Object[] send = new Object[3];
+		final int selectedRow = listSelectionModel.getMinSelectionIndex();
+		final Object[] send = new Object[3];
 		send[0] = defaultTableModel.getValueAt(selectedRow, 0);
 		send[1] = defaultTableModel.getValueAt(selectedRow, 1);
 		send[2] = defaultTableModel.getValueAt(selectedRow, 2);
 		confAddNewElement = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfAddNewElement(this, true,
-				jRadioButtonI0.isSelected(), jRadioButtonI1.isSelected(), jRadioButtonI2.isSelected(), jRadioButtonI3
-						.isSelected(), jRadioButtonI4.isSelected(), jRadioButtonI5.isSelected(), jRadioButtonI6
-						.isSelected(), jRadioButtonI7.isSelected(), send);
+				jRadioButtonI0.isSelected(), jRadioButtonI1.isSelected(), jRadioButtonI2.isSelected(),
+				jRadioButtonI3.isSelected(), jRadioButtonI4.isSelected(), jRadioButtonI5.isSelected(),
+				jRadioButtonI6.isSelected(), jRadioButtonI7.isSelected(), send);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(this, confAddNewElement);
 		confAddNewElement.show();
 		if (confAddNewElement.getClean()) {
 			defaultTableModel.removeRow(selectedRow);
 			return;
 		}
-		Object[] newRowData = confAddNewElement.getReturnObj();
+		final Object[] newRowData = confAddNewElement.getReturnObj();
 		if (newRowData[0] != null) {
 			defaultTableModel.setValueAt(newRowData[0], selectedRow, 0);
 			defaultTableModel.setValueAt(newRowData[1], selectedRow, 1);
@@ -962,12 +1002,12 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		reOrderTable();
 	}
 
-	private void jTableChanged(javax.swing.event.TableModelEvent evt) {
+	private void jTableChanged(final javax.swing.event.TableModelEvent evt) {
 		jTextFieldNElems.setText("" + jTable.getRowCount());
 	}
 
 	/** Closes the dialog */
-	private void closeDialog(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
+	private void closeDialog(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
 		if (evt != null) {
 			setCancel(true);
 		}
@@ -982,7 +1022,7 @@ public class ConfIVPWM extends javax.swing.JDialog {
 	 *            javax.swing.JFrame(), true).show(); }
 	 */
 
-	private void setTextFieldText(javax.swing.JTextField jTextField, javax.swing.JSlider jSlider) {
+	private void setTextFieldText(final javax.swing.JTextField jTextField, final javax.swing.JSlider jSlider) {
 		try {
 			if (new Integer(jTextField.getText()).intValue() < 1) {
 				jTextField.setText("" + 1);
@@ -990,7 +1030,7 @@ public class ConfIVPWM extends javax.swing.JDialog {
 				jTextField.setText("" + 255);
 			}
 			jSlider.setValue(new Integer(jTextField.getText()).intValue());
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 		}
 	}
 
@@ -1078,11 +1118,11 @@ public class ConfIVPWM extends javax.swing.JDialog {
 
 	}
 
-	public boolean convertIntBoolean(int i) {
+	public boolean convertIntBoolean(final int i) {
 		return (i == 0) ? true : false;
 	}
 
-	public int convertBooleanInt(boolean b) {
+	public int convertBooleanInt(final boolean b) {
 		return (b) ? 0 : 1;
 	}
 
@@ -1104,8 +1144,8 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		String temp;
 		int temp2 = 0;
 		int temp3 = 0;
-		int[][] orderTable = new int[defaultTableModel.getRowCount()][2];
-		Object[] tempObj = new Object[3];
+		final int[][] orderTable = new int[defaultTableModel.getRowCount()][2];
+		final Object[] tempObj = new Object[3];
 		for (int i = 0; i < defaultTableModel.getRowCount(); i++) {
 			temp = (String) defaultTableModel.getValueAt(i, 0);
 			orderTable[i][0] = new Integer(temp.substring(7, 8)).intValue() * 1
@@ -1128,7 +1168,7 @@ public class ConfIVPWM extends javax.swing.JDialog {
 				}
 			}
 		}
-		int tempRow = defaultTableModel.getRowCount();
+		final int tempRow = defaultTableModel.getRowCount();
 		for (int i = 0; i < tempRow; i++) {
 			tempObj[0] = defaultTableModel.getValueAt(orderTable[i][1], 0);
 			tempObj[1] = defaultTableModel.getValueAt(orderTable[i][1], 1);
@@ -1146,7 +1186,7 @@ public class ConfIVPWM extends javax.swing.JDialog {
 	 * @return Value of property cancel.
 	 */
 	public boolean isCancel() {
-		return this.cancel;
+		return cancel;
 	}
 
 	/**
@@ -1154,7 +1194,7 @@ public class ConfIVPWM extends javax.swing.JDialog {
 	 * 
 	 * @param cancel New value of property cancel.
 	 */
-	public void setCancel(boolean cancel) {
+	public void setCancel(final boolean cancel) {
 		this.cancel = cancel;
 	}
 
@@ -1214,12 +1254,12 @@ public class ConfIVPWM extends javax.swing.JDialog {
 	private javax.swing.JTextField jTextFieldNElems;
 	private javax.swing.JLabel jLabelI1;
 	// End of variables declaration//GEN-END:variables
-	private pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIVPWM model;
+	private final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIVPWM model;
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfAddNewElement confAddNewElement;
 	private javax.swing.table.TableColumnModel tableColumnModel;
 	private javax.swing.ListSelectionModel listSelectionModel;
 	private javax.swing.table.DefaultTableModel defaultTableModel;
-	private pt.utl.ist.elab.client.webrobot.customizer.Utils.CheckTextValues checkTextValues = new pt.utl.ist.elab.client.webrobot.customizer.Utils.CheckTextValues(
+	private final pt.utl.ist.elab.client.webrobot.customizer.Utils.CheckTextValues checkTextValues = new pt.utl.ist.elab.client.webrobot.customizer.Utils.CheckTextValues(
 			this);
 	private javax.swing.event.ListSelectionEvent tempListEvt = null;// for
 	// double-click

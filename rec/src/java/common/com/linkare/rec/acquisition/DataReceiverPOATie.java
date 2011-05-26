@@ -10,24 +10,25 @@ public class DataReceiverPOATie extends DataReceiverPOA {
 
 	// Constructors
 
-	public DataReceiverPOATie(com.linkare.rec.acquisition.DataReceiverOperations delegate) {
-		this._impl = delegate;
+	public DataReceiverPOATie(final com.linkare.rec.acquisition.DataReceiverOperations delegate) {
+		_impl = delegate;
 	}
 
-	public DataReceiverPOATie(com.linkare.rec.acquisition.DataReceiverOperations delegate,
-			org.omg.PortableServer.POA poa) {
-		this._impl = delegate;
-		this._poa = poa;
+	public DataReceiverPOATie(final com.linkare.rec.acquisition.DataReceiverOperations delegate,
+			final org.omg.PortableServer.POA poa) {
+		_impl = delegate;
+		_poa = poa;
 	}
 
 	public com.linkare.rec.acquisition.DataReceiverOperations _delegate() {
-		return this._impl;
+		return _impl;
 	}
 
-	public void _delegate(com.linkare.rec.acquisition.DataReceiverOperations delegate) {
-		this._impl = delegate;
+	public void _delegate(final com.linkare.rec.acquisition.DataReceiverOperations delegate) {
+		_impl = delegate;
 	}
 
+	@Override
 	public org.omg.PortableServer.POA _default_POA() {
 		if (_poa != null) {
 			return _poa;
@@ -38,16 +39,19 @@ public class DataReceiverPOATie extends DataReceiverPOA {
 
 	// Version 7.0 Changed this... we must only inform of the largest packet
 	// known... all the packets before should be there
-	public void newSamples(int largestNumPacket) {
+	@Override
+	public void newSamples(final int largestNumPacket) {
 		_impl.newSamples(largestNumPacket);
 	} // newSamples
 
 	// Version 7.0 Changed this... now we may inform of changes in state
-	public void stateChanged(com.linkare.rec.acquisition.DataProducerState newState) {
+	@Override
+	public void stateChanged(final com.linkare.rec.acquisition.DataProducerState newState) {
 		_impl.stateChanged(newState);
 	} // stateChanged
 
 	// Version 7.0 Changed this... now we may inform of changes in clientsList
+	@Override
 	public void clientsListChanged() {
 		_impl.clientsListChanged();
 	} // clientsListChanged

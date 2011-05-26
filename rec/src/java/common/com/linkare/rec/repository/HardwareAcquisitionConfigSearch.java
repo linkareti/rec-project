@@ -6,6 +6,10 @@ import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.config.ParameterConfig;
 
 public final class HardwareAcquisitionConfigSearch implements IDLEntity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8337200789857768556L;
 	private DateTimeSearch startTimeSearch = null;
 	private FrequencySearch frequencySearch = null;
 	private ChannelAcquisitionConfigSearch[] channelsConfigSearch = null;
@@ -15,9 +19,9 @@ public final class HardwareAcquisitionConfigSearch implements IDLEntity {
 	public HardwareAcquisitionConfigSearch() {
 	} // ctor
 
-	public HardwareAcquisitionConfigSearch(DateTimeSearch startTimeSearch, FrequencySearch frequencySearch,
-			ChannelAcquisitionConfigSearch[] channelsConfigSearch, ParameterConfig[] selectedHardwareParameters,
-			SamplesNumSearch samplesNumSearch) {
+	public HardwareAcquisitionConfigSearch(final DateTimeSearch startTimeSearch, final FrequencySearch frequencySearch,
+			final ChannelAcquisitionConfigSearch[] channelsConfigSearch,
+			final ParameterConfig[] selectedHardwareParameters, final SamplesNumSearch samplesNumSearch) {
 		setStartTimeSearch(startTimeSearch);
 		setFrequencySearch(frequencySearch);
 		setChannelsConfigSearch(channelsConfigSearch);
@@ -41,7 +45,7 @@ public final class HardwareAcquisitionConfigSearch implements IDLEntity {
 	 * @param startTimeSearch New value of property startTimeSearch.
 	 * 
 	 */
-	public void setStartTimeSearch(DateTimeSearch startTimeSearch) {
+	public void setStartTimeSearch(final DateTimeSearch startTimeSearch) {
 		this.startTimeSearch = startTimeSearch;
 	}
 
@@ -61,7 +65,7 @@ public final class HardwareAcquisitionConfigSearch implements IDLEntity {
 	 * @param frequencySearch New value of property frequencySearch.
 	 * 
 	 */
-	public void setFrequencySearch(FrequencySearch frequencySearch) {
+	public void setFrequencySearch(final FrequencySearch frequencySearch) {
 		this.frequencySearch = frequencySearch;
 	}
 
@@ -72,7 +76,7 @@ public final class HardwareAcquisitionConfigSearch implements IDLEntity {
 	 * 
 	 */
 	public ChannelAcquisitionConfigSearch[] getChannelsConfigSearch() {
-		return this.channelsConfigSearch;
+		return channelsConfigSearch;
 	}
 
 	/**
@@ -81,7 +85,7 @@ public final class HardwareAcquisitionConfigSearch implements IDLEntity {
 	 * @param channelsConfigSearch New value of property channelsConfigSearch.
 	 * 
 	 */
-	public void setChannelsConfigSearch(ChannelAcquisitionConfigSearch[] channelsConfigSearch) {
+	public void setChannelsConfigSearch(final ChannelAcquisitionConfigSearch[] channelsConfigSearch) {
 		this.channelsConfigSearch = channelsConfigSearch;
 	}
 
@@ -92,7 +96,7 @@ public final class HardwareAcquisitionConfigSearch implements IDLEntity {
 	 * 
 	 */
 	public ParameterConfig[] getSelectedHardwareParameters() {
-		return this.selectedHardwareParameters;
+		return selectedHardwareParameters;
 	}
 
 	/**
@@ -102,7 +106,7 @@ public final class HardwareAcquisitionConfigSearch implements IDLEntity {
 	 *            selectedHardwareParameters.
 	 * 
 	 */
-	public void setSelectedHardwareParameters(ParameterConfig[] selectedHardwareParameters) {
+	public void setSelectedHardwareParameters(final ParameterConfig[] selectedHardwareParameters) {
 		this.selectedHardwareParameters = selectedHardwareParameters;
 	}
 
@@ -122,34 +126,39 @@ public final class HardwareAcquisitionConfigSearch implements IDLEntity {
 	 * @param samplesNumSearch New value of property samplesNumSearch.
 	 * 
 	 */
-	public void setSamplesNumSearch(SamplesNumSearch samplesNumSearch) {
+	public void setSamplesNumSearch(final SamplesNumSearch samplesNumSearch) {
 		this.samplesNumSearch = samplesNumSearch;
 	}
 
-	public boolean isValid(HardwareAcquisitionConfig hwConfig) {
-		if (hwConfig == null)
+	public boolean isValid(final HardwareAcquisitionConfig hwConfig) {
+		if (hwConfig == null) {
 			return false;
+		}
 
-		if (getStartTimeSearch() != null && !getStartTimeSearch().isValid(hwConfig.getTimeStart()))
+		if (getStartTimeSearch() != null && !getStartTimeSearch().isValid(hwConfig.getTimeStart())) {
 			return false;
+		}
 
-		if (getFrequencySearch() != null && !getFrequencySearch().isValid(hwConfig.getSelectedFrequency()))
+		if (getFrequencySearch() != null && !getFrequencySearch().isValid(hwConfig.getSelectedFrequency())) {
 			return false;
+		}
 
-		if (getSamplesNumSearch() != null && !getSamplesNumSearch().isValid(hwConfig.getTotalSamples()))
+		if (getSamplesNumSearch() != null && !getSamplesNumSearch().isValid(hwConfig.getTotalSamples())) {
 			return false;
+		}
 
-		ParameterConfig[] params = getSelectedHardwareParameters();
+		final ParameterConfig[] params = getSelectedHardwareParameters();
 
 		if (params != null) {
-			for (int i = 0; i < params.length; i++) {
-				String paramName = params[i].getParameterName();
-				String paramValue = params[i].getParameterValue();
+			for (final ParameterConfig param : params) {
+				final String paramName = param.getParameterName();
+				final String paramValue = param.getParameterValue();
 				if (paramName != null && paramValue != null) {
-					ParameterConfig configParam = hwConfig.getSelectedHardwareParameter(paramName);
+					final ParameterConfig configParam = hwConfig.getSelectedHardwareParameter(paramName);
 					if (!(configParam != null && configParam.getParameterValue() != null && configParam
-							.getParameterValue().equals(paramValue)))
+							.getParameterValue().equals(paramValue))) {
 						return false;
+					}
 				}
 			}
 
@@ -157,10 +166,11 @@ public final class HardwareAcquisitionConfigSearch implements IDLEntity {
 
 		if (getChannelsConfigSearch() != null) {
 			for (int i = 0; i < getChannelsConfigSearch().length; i++) {
-				String channelName = getChannelsConfigSearch()[i].getChannelName();
+				final String channelName = getChannelsConfigSearch()[i].getChannelName();
 				if (channelName != null) {
-					if (!getChannelsConfigSearch()[i].isValid(hwConfig.getChannelsConfig(channelName)))
+					if (!getChannelsConfigSearch()[i].isValid(hwConfig.getChannelsConfig(channelName))) {
 						return false;
+					}
 				}
 			}
 		}

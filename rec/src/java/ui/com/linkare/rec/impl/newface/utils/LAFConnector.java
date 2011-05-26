@@ -18,19 +18,19 @@ import javax.swing.UIManager;
 public class LAFConnector /* extends UIManager */{
 
 	/**
-	 * The special LAF properties bridge. Use this holder to define special resources provided on the default eLab Theme
-	 * for Flat Look and Feel.
+	 * The special LAF properties bridge. Use this holder to define special
+	 * resources provided on the default eLab Theme for Flat Look and Feel.
 	 * 
 	 * @author Henrique Fernandes
 	 */
 	public enum SpecialELabProperties {
 
-		ENABLED_FOREGROUND_ON_DARK("enabledForegroundOnDark"), SELECTION_FOREGROUND_ON_DARK("selectionForegroundOnDark"),
-		GRADIENT_LIGHTCOLOR("gradientLightColor"), GRADIENT_DARKCOLOR("gradientDarkColor"), DEFAULT_WHITE(".defaultWhite"), ;
+		ENABLED_FOREGROUND_ON_DARK("enabledForegroundOnDark"), SELECTION_FOREGROUND_ON_DARK("selectionForegroundOnDark"), GRADIENT_LIGHTCOLOR(
+				"gradientLightColor"), GRADIENT_DARKCOLOR("gradientDarkColor"), DEFAULT_WHITE(".defaultWhite"), ;
 
-		private String name;
+		private final String name;
 
-		SpecialELabProperties(String name) {
+		SpecialELabProperties(final String name) {
 			this.name = name;
 		}
 
@@ -39,11 +39,11 @@ public class LAFConnector /* extends UIManager */{
 		}
 	}
 
-	public static final Color getColor(SpecialELabProperties lafColorProperty) {
+	public static final Color getColor(final SpecialELabProperties lafColorProperty) {
 		return UIManager.getColor(lafColorProperty.getName());
 	}
 
-	public static final Font getFont(SpecialELabProperties lafFontProperty) {
+	public static final Font getFont(final SpecialELabProperties lafFontProperty) {
 		return UIManager.getFont(lafFontProperty.getName());
 	}
 }

@@ -56,7 +56,6 @@ import java.util.logging.Logger;
 import javax.jnlp.BasicService;
 import javax.jnlp.ServiceManager;
 import javax.jnlp.UnavailableServiceException;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.RootPaneContainer;
 import javax.swing.SwingUtilities;
@@ -125,7 +124,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	 * 
 	 * @param videoOutput
 	 */
-	void setVideoOutput(Canvas videoOutput) {
+	void setVideoOutput(final Canvas videoOutput) {
 		mediaController.setVideoOutput(videoOutput);
 	}
 
@@ -139,12 +138,12 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			if (mediaController == null) {
 
 				MediaSetup.setup();
-				String[] defaultVlcParams = MediaSetup.getDefaultMediaParameters();
+				final String[] defaultVlcParams = MediaSetup.getDefaultMediaParameters();
 				mediaController = VideoViewerController.getInstance(defaultVlcParams);
 				mediaController.addMediaApplicationEventListener(getMediaApplicationEventListener());
 			}
-		} catch (UnsatisfiedLinkError e) {
-			log.severe(e.toString());
+		} catch (final UnsatisfiedLinkError e) {
+			ReCApplication.log.severe(e.toString());
 			fireApplicationEvent(new ReCAppEvent(this, ReCCommand.ASK_FOR_VLC));
 		}
 	}
@@ -153,26 +152,26 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 		return new MediaApplicationEventListener() {
 			@Override
-			public void timeChanged(MediaTimeChangedEvent evt) {
-				log.fine("Handling time changed!!!!!!!");
+			public void timeChanged(final MediaTimeChangedEvent evt) {
+				ReCApplication.log.fine("Handling time changed!!!!!!!");
 				// TODO lançar evento para a view para colocar slider com time
 				// actual do controller.
 			}
 
 			@Override
-			public void notConnected(MediaNotConnectedEvent evt) {
-				log.fine("Handling not connected!!!!!!!");
+			public void notConnected(final MediaNotConnectedEvent evt) {
+				ReCApplication.log.fine("Handling not connected!!!!!!!");
 				if (isApparatusVideoEnabled()) {
-					log.info("Video is enable for the selected apparatus.");
+					ReCApplication.log.info("Video is enable for the selected apparatus.");
 					playMedia(ReCResourceBundle.findString(currentApparatusConfig.getMediaConfig().getVideoLocation()));
 				} else {
-					log.info("Video isn't enable for the selected apparatus.");
+					ReCApplication.log.info("Video isn't enable for the selected apparatus.");
 				}
 			}
 
 			@Override
-			public void stopped(MediaStoppedEvent evt) {
-				log.fine("Handling stopped!!!!!!!");
+			public void stopped(final MediaStoppedEvent evt) {
+				ReCApplication.log.fine("Handling stopped!!!!!!!");
 				// TODO lançar evento para a view para colocar slider a 0.
 			}
 		};
@@ -184,15 +183,15 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	 * 
 	 * @param mrl
 	 */
-	public void playMediaExternal(String mrl) {
+	public void playMediaExternal(final String mrl) {
 		try {
 			String vlc = PreferencesUtils.readUserPreference("vlcpath");
 			if (vlc == null) {
 				vlc = "vlc";
 			}
 			Runtime.getRuntime().exec(vlc + " " + mrl);
-		} catch (IOException e) {
-			log.info("VLC not installed on the specified directory");
+		} catch (final IOException e) {
+			ReCApplication.log.info("VLC not installed on the specified directory");
 		}
 	}
 
@@ -201,11 +200,12 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	 * 
 	 * @param mrl URL for the media to play.
 	 */
-	public void playMedia(String mrl) {
+	public void playMedia(final String mrl) {
 
-		log.info("Playing media: " + mrl);
+		ReCApplication.log.info("Playing media: " + mrl);
 		if (mrl == null || mrl.equals("")) {
-			log.info("There is not a valid media to play for this " + "experience. Proceding without video.");
+			ReCApplication.log.info("There is not a valid media to play for this "
+					+ "experience. Proceding without video.");
 			return;
 		}
 
@@ -222,39 +222,40 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	 * 
 	 * @param mrl URL for the media to play.
 	 */
-	public void setMediaToPlay(String mrl) {
-		log.info("Setting to play media: " + mrl);
+	public void setMediaToPlay(final String mrl) {
+		ReCApplication.log.info("Setting to play media: " + mrl);
 		if (mrl == null || mrl.equals("")) {
-			log.info("There is not a valid media to play for this experiment. Proceding without video.");
+			ReCApplication.log.info("There is not a valid media to play for this experiment. Proceding without video.");
 			return;
 		}
 
 		if (mediaController != null) {
 			mediaController.setMediaToPlay(mrl);
 		} else {
-			log.warning("There is no media controller!");
+			ReCApplication.log.warning("There is no media controller!");
 		}
 	}
-	
+
 	/**
 	 * Plays the initialized media.
 	 */
 	public void playMedia() {
 		if (mediaController != null && mediaController.getMediaURL() != null) {
-			log.info("Playing media: " + mediaController.getMediaURL());
+			ReCApplication.log.info("Playing media: " + mediaController.getMediaURL());
 			mediaController.play();
 		} else if (mediaController.getMediaURL() != null) {
-			log.info("Playing media with external player: " + mediaController.getMediaURL());
+			ReCApplication.log.info("Playing media with external player: " + mediaController.getMediaURL());
 			playMediaExternal(mediaController.getMediaURL());
 		} else {
-			log.warning("There is no initialized media.");
+			ReCApplication.log.warning("There is no initialized media.");
 		}
 	}
-	
+
 	/**
 	 * Getter for the media for the current apparatus configuration.
 	 * 
-	 * @return Video location or null if the current apparatus doesn't have the video enabled.
+	 * @return Video location or null if the current apparatus doesn't have the
+	 *         video enabled.
 	 */
 	public String getCurrentApparatusVideoLocation() {
 		if (isApparatusVideoEnabled()) {
@@ -262,7 +263,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Plays the media for the current apparatus configuration.
 	 */
@@ -277,7 +278,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		if (mediaController == null) {
 			return;
 		}
-		log.info("Stopping media...");
+		ReCApplication.log.info("Stopping media...");
 		mediaController.stop();
 		mediaController.releaseMedia();
 	}
@@ -285,15 +286,15 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	/**
 	 * flag that enables video development.
 	 */
-	public static boolean IS_VIDEO_ENABLED = "yes".equals(System
-			.getProperty(ReCSystemProperty.VIDEO_ENABLED.getName()));
+	public static boolean IS_VIDEO_ENABLED = "yes"
+			.equals(System.getProperty(ReCSystemProperty.VIDEO_ENABLED.getName()));
 
 	/** Holds the jws basic service context */
 	private BasicService basicService;
 
 	/** ResourceMap shortcut */
 	private ResourceMap resourceMap;
-	
+
 	/** Yes No Options text */
 	private Object[] dialogYesNoOptions;
 
@@ -322,9 +323,9 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 	private Apparatus currentApparatusConfig;
 
-	private ApparatusComboBoxModel apparatusComboBoxModel;
+	private final ApparatusComboBoxModel apparatusComboBoxModel;
 
-	private LabComboBoxModel labComboBoxModel;
+	private final LabComboBoxModel labComboBoxModel;
 
 	private ICustomizer currentCustomizer;
 
@@ -372,17 +373,17 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		String codeBase = "";
 		try {
 			codeBase = getBasicService().getCodeBase().toString();
-		} catch (UnavailableServiceException ex) {
-			log.warning("Codebase is not available");
+		} catch (final UnavailableServiceException ex) {
+			ReCApplication.log.warning("Codebase is not available");
 		}
 		return codeBase;
 	}
-	
-	public void setCurrentLab(Lab lab) {
+
+	public void setCurrentLab(final Lab lab) {
 		currentLab = lab;
 	}
 
-	public void setUserInfo(String username, String password) {
+	public void setUserInfo(final String username, final String password) {
 		labClientBean.getUserInfo().setUserName(username);
 		labClientBean.getUserInfo().setPassword(password);
 	}
@@ -394,7 +395,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		}
 		return result;
 	}
-	
+
 	public String getPassword() {
 		String result = null;
 		if (labClientBean != null && labClientBean.getUserInfo() != null) {
@@ -427,16 +428,16 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		return currentState;
 	}
 
-	public void setCurrentState(NavigationWorkflow newState) {
-		this.currentState = newState;
+	public void setCurrentState(final NavigationWorkflow newState) {
+		currentState = newState;
 	}
 
 	public ReCFaceConfig getReCFaceConfig() {
 		return recFaceConfig;
 	}
 
-	protected void setReCFaceConfig(ReCFaceConfig reCFaceConfig) {
-		this.recFaceConfig = reCFaceConfig;
+	protected void setReCFaceConfig(final ReCFaceConfig reCFaceConfig) {
+		recFaceConfig = reCFaceConfig;
 	}
 
 	public ApparatusComboBoxModel getApparatusComboBoxModel() {
@@ -457,8 +458,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		return currentApparatus;
 	}
 
-	public void setSelectedApparatusConfig(Apparatus apparatus) {
-		this.currentApparatusConfig = apparatus;
+	public void setSelectedApparatusConfig(final Apparatus apparatus) {
+		currentApparatusConfig = apparatus;
 		// Notify the view
 		fireApplicationEvent(new ReCAppEvent(this, ReCCommand.SELECTED_APPARATUS_CHANGE));
 	}
@@ -466,9 +467,10 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	public Apparatus getSelectedApparatusConfig() {
 		return currentApparatusConfig;
 	}
-	
+
 	public boolean isApparatusVideoEnabled() {
-		return IS_VIDEO_ENABLED && currentApparatusConfig != null && currentApparatusConfig.getMediaConfig() != null
+		return ReCApplication.IS_VIDEO_ENABLED && currentApparatusConfig != null
+				&& currentApparatusConfig.getMediaConfig() != null
 				&& currentApparatusConfig.getMediaConfig().getVideoLocation() != null
 				&& !currentApparatusConfig.getMediaConfig().getVideoLocation().equals("");
 	}
@@ -493,20 +495,20 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	// Application Startup Workflow
 
 	@Override
-	protected void initialize(String[] args) {
+	protected void initialize(final String[] args) {
 		super.initialize(args);
 
 		resourceMap = getContext().getResourceMap();
-		
+
 		// read yes no option text
-		String yesOption = resourceMap.getString("Application.confirmationDialog.option.yes");
-		String noOption = resourceMap.getString("Application.confirmationDialog.option.no");
-		dialogYesNoOptions = new Object [2];
+		final String yesOption = resourceMap.getString("Application.confirmationDialog.option.yes");
+		final String noOption = resourceMap.getString("Application.confirmationDialog.option.no");
+		dialogYesNoOptions = new Object[2];
 		dialogYesNoOptions[0] = yesOption;
 		dialogYesNoOptions[1] = noOption;
 
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("Initializing system properties...");
+		if (ReCApplication.log.isLoggable(Level.FINE)) {
+			ReCApplication.log.fine("Initializing system properties...");
 		}
 
 		// TODO Move to jnlp ?
@@ -528,59 +530,62 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	@Override
 	protected void startup() {
 
-		ExitListener appExitHandler = new ExitListener() {
-			public boolean canExit(EventObject e) {
-				Object source = (e != null) ? e.getSource() : null;
-				Component owner = (source instanceof Component) ? (Component) source : null;
-				int option = JOptionPane.showOptionDialog(owner, resourceMap
-						.getString("Application.exitListener.message"), resourceMap
-						.getString("Application.confirmationDialog.message"), JOptionPane.YES_NO_OPTION, 
+		final ExitListener appExitHandler = new ExitListener() {
+			@Override
+			public boolean canExit(final EventObject e) {
+				final Object source = (e != null) ? e.getSource() : null;
+				final Component owner = (source instanceof Component) ? (Component) source : null;
+				final int option = JOptionPane.showOptionDialog(owner,
+						resourceMap.getString("Application.exitListener.message"),
+						resourceMap.getString("Application.confirmationDialog.message"), JOptionPane.YES_NO_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, dialogYesNoOptions, dialogYesNoOptions[0]);
 				return option == JOptionPane.YES_OPTION;
 			}
 
-			public void willExit(EventObject e) {
-				log.fine("Exiting ReC...");
+			@Override
+			public void willExit(final EventObject e) {
+				ReCApplication.log.fine("Exiting ReC...");
 			}
 		};
 		addExitListener(appExitHandler);
 
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("Starting ReC");
-			log.fine("Running on EDT? " + (SwingUtilities.isEventDispatchThread() ? "YES" : "NO"));
+		if (ReCApplication.log.isLoggable(Level.FINE)) {
+			ReCApplication.log.fine("Starting ReC");
+			ReCApplication.log.fine("Running on EDT? " + (SwingUtilities.isEventDispatchThread() ? "YES" : "NO"));
 		}
 
 		try {
 			// TODO Launch Splash Screen (AppFramework?)
-			log.warning("TODO Launch Splash Screen");
+			ReCApplication.log.warning("TODO Launch Splash Screen");
 
-//			log.info("Setting default locale " + PORTUGAL);
-//			Locale.setDefault(PORTUGAL);
-			
-			log.info("Defined locale is " + java.util.Locale.getDefault());
+			// log.info("Setting default locale " + PORTUGAL);
+			// Locale.setDefault(PORTUGAL);
+
+			ReCApplication.log.info("Defined locale is " + java.util.Locale.getDefault());
 
 			// Check System Properties Availability
 			checkSystemProperties();
-			log.info("ReC System Properties are checked.");
+			ReCApplication.log.info("ReC System Properties are checked.");
 
 			// Unmarshal xml configuration
 			String configLocationUrl = System.getProperty(ReCSystemProperty.RECFACECONFIG.getName());
 			if (!configLocationUrl.contains("://")) {
 				configLocationUrl = getCodeBase() + configLocationUrl;
 			}
-			if (log.isLoggable(Level.FINE)) {
-				log.fine("Unmarshalling ReCFaceConfig from input stream location = " + configLocationUrl);
+			if (ReCApplication.log.isLoggable(Level.FINE)) {
+				ReCApplication.log
+						.fine("Unmarshalling ReCFaceConfig from input stream location = " + configLocationUrl);
 			}
-			InputStream is = ReCProtocols.getURL(configLocationUrl).openConnection().getInputStream();
+			final InputStream is = ReCProtocols.getURL(configLocationUrl).openConnection().getInputStream();
 			recFaceConfig = ReCFaceConfig.unmarshall(is);
-			log.info("ReCFaceConfig is unmarshalled.");
+			ReCApplication.log.info("ReCFaceConfig is unmarshalled.");
 
 			// Lab Client setup
 			labClientBean = new LabClientBean();
 			labClientBean.setUsersListRefreshPeriod(recFaceConfig.getUsersListRefreshRateMs());
 			labClientBean.addApparatusListSourceListener(this);
 			labClientBean.addLabConnectorListener(this);
-			
+
 			// Lab combobox model
 			labComboBoxModel.addLabList(recFaceConfig.getLab());
 
@@ -593,26 +598,26 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			labClientBean.setUsersListRefreshPeriod(recFaceConfig.getUsersListRefreshRateMs());
 
 			// Load Localization Bundles
-			for (LocalizationBundle bundle : recFaceConfig.getLocalizationBundle()) {
+			for (final LocalizationBundle bundle : recFaceConfig.getLocalizationBundle()) {
 				ReCResourceBundle.loadResourceBundle(bundle.getName(), bundle.getLocation());
 			}
-			for (Lab lab : recFaceConfig.getLab()) {
-				for (LocalizationBundle bundle : lab.getLocalizationBundle()) {
+			for (final Lab lab : recFaceConfig.getLab()) {
+				for (final LocalizationBundle bundle : lab.getLocalizationBundle()) {
 					ReCResourceBundle.loadResourceBundle(bundle.getName(), bundle.getLocation());
 				}
-				for (Apparatus apparatus : lab.getApparatus()) {
-					for (LocalizationBundle bundle : apparatus.getLocalizationBundle()) {
+				for (final Apparatus apparatus : lab.getApparatus()) {
+					for (final LocalizationBundle bundle : apparatus.getLocalizationBundle()) {
 						ReCResourceBundle.loadResourceBundle(bundle.getName(), bundle.getLocation());
 					}
 				}
 			}
-			
+
 			// Show view
-			log.info("Starting user interface...");
+			ReCApplication.log.info("Starting user interface...");
 			showView();
 
-		} catch (Exception e) {
-			log.log(Level.SEVERE, "Some error occured.", e);
+		} catch (final Exception e) {
+			ReCApplication.log.log(Level.SEVERE, "Some error occured.", e);
 			// show(getUnexpectedErrorBox(e));
 			System.exit(ExceptionCode.THE_FAMOUS_UNKNOWN_ERROR.getId());
 		}
@@ -620,14 +625,14 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	}
 
 	protected void showView() {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("Launching view on " + Thread.currentThread());
+		if (ReCApplication.log.isLoggable(Level.FINE)) {
+			ReCApplication.log.fine("Launching view on " + Thread.currentThread());
 		}
-		ReCFrameView recView = new ReCFrameView(this);
+		final ReCFrameView recView = new ReCFrameView(this);
 		getAppListeners().add(recView);
 
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		Dimension dimension = tk.getScreenSize();
+		final Toolkit tk = Toolkit.getDefaultToolkit();
+		final Dimension dimension = tk.getScreenSize();
 		recView.getFrame().setPreferredSize(dimension);
 
 		recView.getFrame().pack();
@@ -640,10 +645,10 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	}
 
 	@Override
-	public void show(View view) {
+	public void show(final View view) {
 		// Do not load the session state for the View
 		// TODO Add to ReCFaceConfig
-		RootPaneContainer c = (RootPaneContainer) view.getRootPane().getParent();
+		final RootPaneContainer c = (RootPaneContainer) view.getRootPane().getParent();
 		((Window) c).setVisible(true);
 	}
 
@@ -657,8 +662,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		super.ready();
 		// This stage is reached just after login. Login modal dialog blocks
 		// this call.
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("Ready");
+		if (ReCApplication.log.isLoggable(Level.FINE)) {
+			ReCApplication.log.fine("Ready");
 		}
 	}
 
@@ -671,14 +676,14 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 		if (apparatusClientBean != null) {
 			apparatusClientBean.disconnect();
-			log.info("Apparatus has been client disconnected");
+			ReCApplication.log.info("Apparatus has been client disconnected");
 		}
 		if (labClientBean != null) {
 			labClientBean.disconnect();
-			log.info("Lab client has been disconnected");
+			ReCApplication.log.info("Lab client has been disconnected");
 		}
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("Shutting down and saving session state");
+		if (ReCApplication.log.isLoggable(Level.FINE)) {
+			ReCApplication.log.fine("Shutting down and saving session state");
 		}
 		super.shutdown();
 	}
@@ -689,11 +694,11 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	 * @throws ReCConfigurationException If some required property is missing.
 	 */
 	public void checkSystemProperties() throws ReCConfigurationException {
-		List<String> missingRequiredProperties = new ArrayList<String>();
+		final List<String> missingRequiredProperties = new ArrayList<String>();
 
-		for (ReCSystemProperty property : ReCSystemProperty.values()) {
-			String propertyValue = System.getProperty(property.getName());
-			log.info(property.getName() + "=" + propertyValue);
+		for (final ReCSystemProperty property : ReCSystemProperty.values()) {
+			final String propertyValue = System.getProperty(property.getName());
+			ReCApplication.log.info(property.getName() + "=" + propertyValue);
 
 			if (property.isRequired()) { // Required Property
 				if (propertyValue == null || propertyValue.isEmpty()) {
@@ -701,13 +706,13 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 				}
 			} else { // Optional Property
 				if (propertyValue == null || propertyValue.isEmpty()) {
-					log.fine("Optional ReC system property is missing: " + property);
+					ReCApplication.log.fine("Optional ReC system property is missing: " + property);
 				}
 			}
 		}
 
 		if (!missingRequiredProperties.isEmpty()) {
-			log.severe("Required ReC system properties are missing: " + missingRequiredProperties);
+			ReCApplication.log.severe("Required ReC system properties are missing: " + missingRequiredProperties);
 			throw new ReCConfigurationException(ExceptionCode.MISSING_SYSTEM_PROPERTIES,
 					"Please check the required system properties before run. " + missingRequiredProperties);
 		}
@@ -720,15 +725,15 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	public void connect() {
 		if (currentState.canGoTo(LAB_CONNECT_PERFORMED)) {
 			setCurrentState(LAB_CONNECT_PERFORMED);
-			
+
 			apparatusComboBoxModel.removeAllElements();
 			apparatusComboBoxModel.addApparatusList(currentLab.getApparatus());
-			
+
 			// ORB initialization
 			ORBBean.getORBBean();
-			log.info("ORBBean is initialized.");
+			ReCApplication.log.info("ORBBean is initialized.");
 
-			log.info("Connect user " + getUsername());
+			ReCApplication.log.info("Connect user " + getUsername());
 			labClientBean.connect(currentLab.getLocation());
 
 			// TODO Verify if this is the best place to
@@ -743,7 +748,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	public void disconnect() {
 		if (currentState.canGoTo(LAB_DISCONNECT_PERFORMED)) {
 			setCurrentState(LAB_DISCONNECT_PERFORMED);
-			log.info("Disconnect user " + labClientBean.getUserInfo().getUserName());
+			ReCApplication.log.info("Disconnect user " + labClientBean.getUserInfo().getUserName());
 
 			apparatusClientBean.disconnect();
 			labClientBean.disconnect();
@@ -755,17 +760,18 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	@Action
 	public void toggleApparatusState() {
 		if (currentState.canGoTo(APPARATUS_CONNECT_PERFORMED)) {
-			
-			com.linkare.rec.impl.client.apparatus.Apparatus apparatus = labClientBean.getApparatusByID(currentApparatusConfig.getLocation());
-			log.info("Selected apparatus is " + (apparatus != null ? "online" : "offline"));
+
+			final com.linkare.rec.impl.client.apparatus.Apparatus apparatus = labClientBean
+					.getApparatusByID(currentApparatusConfig.getLocation());
+			ReCApplication.log.info("Selected apparatus is " + (apparatus != null ? "online" : "offline"));
 			if (apparatus != null) {
 				setCurrentState(APPARATUS_CONNECT_PERFORMED);
-				
+
 				apparatusClientBean.getUserInfo().setUserName(getUsername());
 				apparatusClientBean.getUserInfo().setPassword(getPassword());
-				
+
 				apparatusClientBean.setApparatus(updateCurrentApparatusFromComboModel());
-				
+
 				// FIXME Check this background task implmentation
 				new Thread() {
 					@Override
@@ -774,7 +780,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 						apparatusClientBean.connect(); // Background task
 					}
 				}.start();
-				
+
 			}
 
 		} else if (currentState.canGoTo(APPARATUS_DISCONNECT_PERFORMED)) {
@@ -789,13 +795,13 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	@Action
 	public void play() {
 		if (currentApparatus != null) {
-			if (log.isLoggable(Level.FINE)) {
-				log.fine("play");
+			if (ReCApplication.log.isLoggable(Level.FINE)) {
+				ReCApplication.log.fine("play");
 			}
-			
+
 			// block interface so that is impossible o repeate play event
 			apparatusStateConfiguring(new ApparatusConnectorEvent(this, ""));
-			
+
 			if (SwingUtilities.isEventDispatchThread()) {
 				(new Thread() {
 					public void run() {
@@ -808,26 +814,26 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		}
 	}
 
-	public void setExperimentAutoplay(boolean enabled) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("Auto-play enabled = " + enabled);
+	public void setExperimentAutoplay(final boolean enabled) {
+		if (ReCApplication.log.isLoggable(Level.FINE)) {
+			ReCApplication.log.fine("Auto-play enabled = " + enabled);
 		}
-		this.experimentAutoplay = enabled;
-		
-		if (this.experimentAutoplay && experimentPlayButtonEnabled
+		experimentAutoplay = enabled;
+
+		if (experimentAutoplay && experimentPlayButtonEnabled
 				&& (currentState.equals(APPARATUS_CONFIGURED) || currentState.equals(APPARATUS_STARTED))) {
 			play();
 		}
 	}
-	
+
 	/**
 	 * Apparatus stop action
 	 */
 	@Action
 	public void stop() {
 		if (currentApparatus != null) {
-			if (log.isLoggable(Level.FINE)) {
-				log.fine("stop");
+			if (ReCApplication.log.isLoggable(Level.FINE)) {
+				ReCApplication.log.fine("stop");
 			}
 			apparatusClientBean.stop();
 		}
@@ -836,7 +842,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	public boolean getExperimentAutoplay() {
 		return experimentAutoplay;
 	}
-	
+
 	/**
 	 * @return the experimentPlayButtonEnabled
 	 */
@@ -847,47 +853,47 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	/**
 	 * @param enabled the experimentPlayButtonEnabled to set
 	 */
-	public void setExperimentPlayButtonEnabled(boolean enabled) {
-		this.experimentPlayButtonEnabled = enabled;
+	public void setExperimentPlayButtonEnabled(final boolean enabled) {
+		experimentPlayButtonEnabled = enabled;
 	}
 
 	// -------------------------------------------------------------------------
 	// Event handling
 
 	@Override
-	public void labStatusChanged(LabConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("Lab status changed to " + evt.getStatusCode());
+	public void labStatusChanged(final LabConnectorEvent evt) {
+		if (ReCApplication.log.isLoggable(Level.FINE)) {
+			ReCApplication.log.fine("Lab status changed to " + evt.getStatusCode());
 		}
 		switch (evt.getStatusCode()) {
 		case LabConnectorEvent.STATUS_CONNECTING:
-			log.fine("STATUS_CONNECTING");
+			ReCApplication.log.fine("STATUS_CONNECTING");
 			break;
 		case LabConnectorEvent.STATUS_CONNECTED:
-			log.fine("STATUS_CONNECTED");
+			ReCApplication.log.fine("STATUS_CONNECTED");
 			setCurrentState(CONNECTED_TO_LAB);
 			break;
 		case LabConnectorEvent.STATUS_DISCONNECTING:
-			log.fine("STATUS_DISCONNECTING");
+			ReCApplication.log.fine("STATUS_DISCONNECTING");
 			break;
 		case LabConnectorEvent.STATUS_DISCONNECTED:
-			log.fine("STATUS_DISCONNECTED");
+			ReCApplication.log.fine("STATUS_DISCONNECTED");
 			setCurrentState(DISCONNECTED_OFFLINE);
 			break;
 		case LabConnectorEvent.STATUS_UNREACHABLE:
-			log.fine("STATUS_UNREACHABLE");
+			ReCApplication.log.fine("STATUS_UNREACHABLE");
 			setCurrentState(DISCONNECTED_OFFLINE);
 			break;
 		case LabConnectorEvent.STATUS_NOT_AUTHORIZED:
-			log.fine("STATUS_NOT_AUTHORIZED");
+			ReCApplication.log.fine("STATUS_NOT_AUTHORIZED");
 			setCurrentState(DISCONNECTED_OFFLINE);
 			break;
 		case LabConnectorEvent.STATUS_NOT_REGISTERED:
-			log.fine("STATUS_NOT_REGISTERED");
+			ReCApplication.log.fine("STATUS_NOT_REGISTERED");
 			setCurrentState(DISCONNECTED_OFFLINE);
 			break;
 		default:
-			log.warning("Unknown lab status!");
+			ReCApplication.log.warning("Unknown lab status!");
 		}
 
 		// Forward event to the view
@@ -896,27 +902,27 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	}
 
 	@Override
-	public void apparatusListChanged(ApparatusListChangeEvent evt) {
+	public void apparatusListChanged(final ApparatusListChangeEvent evt) {
 
 		if (evt != null && evt.getApparatus() != null) {
 
-			if (log.isLoggable(Level.FINE)) {
-				log.fine("Apparatus list change event: " + Arrays.deepToString(evt.getApparatus()));
-				log.fine("Total available apparatus: " + evt.getApparatus().length);
+			if (ReCApplication.log.isLoggable(Level.FINE)) {
+				ReCApplication.log.fine("Apparatus list change event: " + Arrays.deepToString(evt.getApparatus()));
+				ReCApplication.log.fine("Total available apparatus: " + evt.getApparatus().length);
 			}
 
 			// Enable apparatus combo box list
-			Set<String> activeApparatusUIDs = new HashSet<String>();
-			for (com.linkare.rec.impl.client.apparatus.Apparatus clientApparatus : evt.getApparatus()) {
+			final Set<String> activeApparatusUIDs = new HashSet<String>();
+			for (final com.linkare.rec.impl.client.apparatus.Apparatus clientApparatus : evt.getApparatus()) {
 				activeApparatusUIDs.add(clientApparatus.getHardwareInfo().getHardwareUniqueID());
 			}
-			for (String ApparatusUID : apparatusComboBoxModel.getApparatusHardwareUniqueID()) {
-				Apparatus apparatus = apparatusComboBoxModel.getApparatus(ApparatusUID);
+			for (final String ApparatusUID : apparatusComboBoxModel.getApparatusHardwareUniqueID()) {
+				final Apparatus apparatus = apparatusComboBoxModel.getApparatus(ApparatusUID);
 				if (apparatus != null) {
 					apparatus.setEnabled(activeApparatusUIDs.contains(ApparatusUID));
 				}
 			}
-			
+
 			// Exit experiment if it was connected but tha driver went offline
 			if (currentApparatus != null
 					&& apparatusComboBoxModel.getApparatusHardwareUniqueID().contains(
@@ -924,7 +930,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 					&& !activeApparatusUIDs.contains(currentApparatus.getHardwareInfo().getHardwareUniqueID())) {
 				toggleApparatusState();
 			}
-			
+
 			// Update view
 			apparatusComboBoxModel.fireContentsChanged(this);
 
@@ -952,13 +958,13 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	}
 
 	@Override
-	public void apparatusConnecting(ApparatusConnectorEvent evt) {
+	public void apparatusConnecting(final ApparatusConnectorEvent evt) {
 		// Forward event to the view
 		fireApparatusStateChanged(CONNECTING, evt);
 	}
 
 	@Override
-	public void apparatusConnected(ApparatusConnectorEvent evt) {
+	public void apparatusConnected(final ApparatusConnectorEvent evt) {
 		// Load customizer
 		currentCustomizer = CustomizerUIUtil.loadCustomizer(ReCResourceBundle.findString(currentApparatusConfig
 				.getCustomizerClassLocationBundleKey()));
@@ -986,13 +992,13 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	}
 
 	@Override
-	public void apparatusDisconnecting(ApparatusConnectorEvent evt) {
+	public void apparatusDisconnecting(final ApparatusConnectorEvent evt) {
 		// Forward event to the view
 		fireApparatusStateChanged(DISCONNECTING, evt);
 	}
 
 	@Override
-	public void apparatusDisconnected(ApparatusConnectorEvent evt) {
+	public void apparatusDisconnected(final ApparatusConnectorEvent evt) {
 		if (isApparatusVideoEnabled()) {
 			stopMedia();
 		}
@@ -1005,11 +1011,11 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	}
 
 	@Override
-	public void apparatusLockable(ApparatusConnectorEvent evt) {
+	public void apparatusLockable(final ApparatusConnectorEvent evt) {
 		if (currentState.matches(APPARATUS_CONFIGURED) || currentState.matches(APPARATUS_STARTED)) {
 			// Forward event to the view
 			fireApparatusStateChanged(LOCKABLE, evt);
-			
+
 			if (experimentAutoplay) {
 				play();
 			}
@@ -1017,7 +1023,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	}
 
 	@Override
-	public void apparatusLocked(ApparatusConnectorEvent evt) {
+	public void apparatusLocked(final ApparatusConnectorEvent evt) {
 		setCurrentState(APPARATUS_LOCKED);
 
 		if (currentHardwareAcquisitionConfig == null) {
@@ -1030,18 +1036,18 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	}
 
 	@Override
-	public void apparatusStateConfiguring(ApparatusConnectorEvent evt) {
+	public void apparatusStateConfiguring(final ApparatusConnectorEvent evt) {
 		// Forward event to the view
 		fireApparatusStateChanged(STATECONFIGURING, evt);
 	}
 
 	@Override
-	public void apparatusStateConfigured(ApparatusConnectorEvent evt) {
+	public void apparatusStateConfigured(final ApparatusConnectorEvent evt) {
 		if (currentState.matches(APPARATUS_LOCKED)) {
 			apparatusClientBean.start();
 		} else {
 			// TODO Check if this is really needed.
-			log.severe("Appartus SHOULD be locked?");
+			ReCApplication.log.severe("Appartus SHOULD be locked?");
 		}
 
 		// Forward event to the view
@@ -1049,75 +1055,75 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	}
 
 	@Override
-	public void apparatusIncorrectState(ApparatusConnectorEvent evt) {
+	public void apparatusIncorrectState(final ApparatusConnectorEvent evt) {
 		// Forward event to the view
 		fireApparatusStateChanged(INCORRECTSTATE, evt);
 	}
 
 	@Override
-	public void apparatusMaxUsers(ApparatusConnectorEvent evt) {
+	public void apparatusMaxUsers(final ApparatusConnectorEvent evt) {
 		if (currentState.canGoTo(CONNECTED_TO_LAB)) {
 			setCurrentState(CONNECTED_TO_LAB);
 		}
-		
+
 		// Forward event to the view
 		fireApparatusStateChanged(MAXUSERS, evt);
 	}
 
 	@Override
-	public void apparatusNotAuthorized(ApparatusConnectorEvent evt) {
+	public void apparatusNotAuthorized(final ApparatusConnectorEvent evt) {
 		if (currentState.canGoTo(CONNECTED_TO_LAB)) {
 			setCurrentState(CONNECTED_TO_LAB);
 		}
-		
+
 		// Forward event to the view
 		fireApparatusStateChanged(NOTAUTHORIZED, evt);
 	}
 
 	@Override
-	public void apparatusNotOwner(ApparatusConnectorEvent evt) {
+	public void apparatusNotOwner(final ApparatusConnectorEvent evt) {
 		// Forward event to the view
 		fireApparatusStateChanged(NOTOWNER, evt);
 	}
 
 	@Override
-	public void apparatusNotRegistered(ApparatusConnectorEvent evt) {
+	public void apparatusNotRegistered(final ApparatusConnectorEvent evt) {
 		// Forward event to the view
 		fireApparatusStateChanged(NOTREGISTERED, evt);
 	}
 
 	@Override
-	public void apparatusStateConfigError(ApparatusConnectorEvent evt) {
+	public void apparatusStateConfigError(final ApparatusConnectorEvent evt) {
 		// Forward event to the view
 		fireApparatusStateChanged(STATECONFIGERROR, evt);
 	}
 
 	@Override
-	public void apparatusStateReseting(ApparatusConnectorEvent evt) {
+	public void apparatusStateReseting(final ApparatusConnectorEvent evt) {
 		// Forward event to the view
 		fireApparatusStateChanged(STATERESETING, evt);
 	}
 
 	@Override
-	public void apparatusStateReseted(ApparatusConnectorEvent evt) {
+	public void apparatusStateReseted(final ApparatusConnectorEvent evt) {
 		// Forward event to the view
 		fireApparatusStateChanged(STATERESETED, evt);
 	}
 
 	@Override
-	public void apparatusStateStarting(ApparatusConnectorEvent evt) {
+	public void apparatusStateStarting(final ApparatusConnectorEvent evt) {
 		// Forward event to the view
 		fireApparatusStateChanged(STATESTARTING, evt);
 	}
 
 	@Override
-	public void apparatusStateStarted(ApparatusConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("ApparatusConnectorEvent " + evt.getMessage());
+	public void apparatusStateStarted(final ApparatusConnectorEvent evt) {
+		if (ReCApplication.log.isLoggable(Level.FINE)) {
+			ReCApplication.log.fine("ApparatusConnectorEvent " + evt.getMessage());
 		}
 
-		lastExperimentHistory = new ExperimentHistoryUINode(this, evt.getDataSource(), apparatusClientBean
-				.getApparatus(), currentApparatusConfig);
+		lastExperimentHistory = new ExperimentHistoryUINode(this, evt.getDataSource(),
+				apparatusClientBean.getApparatus(), currentApparatusConfig);
 
 		lastExperimentHistory.setLocallyOwned(currentState.matches(APPARATUS_LOCKED));
 		lastExperimentHistory.setOwnerUserName(apparatusClientBean.getUserInfo().getUserName());
@@ -1126,30 +1132,30 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		fireApplicationEvent(new ReCAppEvent(this, ReCCommand.EXPERIMENT_HISTORY_ADDED));
 
 		if (currentState.matches(APPARATUS_LOCKED)) {
-			this.apparatusStateStartedEvent = evt;
+			apparatusStateStartedEvent = evt;
 			setCurrentState(APPARATUS_STARTED);
 			startNewExperiment(lastExperimentHistory);
 		}
 
 	}
 
-	public void startNewExperiment(ExpHistory expHistory) {
-		ExperimentUIData experimentData = initExperiment(expHistory);
+	public void startNewExperiment(final ExpHistory expHistory) {
+		final ExperimentUIData experimentData = initExperiment(expHistory);
 		// Forward event to the view
 		apparatusStateStartedEvent.setValue("ExperimentUIData", experimentData);
 		fireApparatusStateChanged(STATESTARTED, apparatusStateStartedEvent);
 	}
 
 	@Override
-	public void startExperiment(ExpHistory expHistory) {
-		ExperimentUIData experimentData = initExperiment(expHistory);
+	public void startExperiment(final ExpHistory expHistory) {
+		final ExperimentUIData experimentData = initExperiment(expHistory);
 		// Forward event to the view
 		fireApplicationEvent(new ReCAppEvent(this, ReCCommand.SHOW_EXPERIMENT_HISTORY, experimentData));
 	}
 
-	private ExperimentUIData initExperiment(ExpHistory expHistory) {
-		ExperimentHistoryUINode experimentHistory = (ExperimentHistoryUINode) expHistory;
-		ExperimentUIData experimentData = new ExperimentUIData();
+	private ExperimentUIData initExperiment(final ExpHistory expHistory) {
+		final ExperimentHistoryUINode experimentHistory = (ExperimentHistoryUINode) expHistory;
+		final ExperimentUIData experimentData = new ExperimentUIData();
 		experimentData.setHistoryUINode(experimentHistory);
 		DisplayFactory factory = null;
 
@@ -1158,7 +1164,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		try {
 			factoryLocation = ReCResourceBundle.findStringOrDefault(experimentHistory.getApparatusConfig()
 					.getDisplayFactoryClassLocationBundleKey(), null);
-		} catch (Exception ignored) {
+		} catch (final Exception ignored) {
 			// don't print the not found exception please...
 		}
 		// Of course not... maybe he didn't want to...
@@ -1168,22 +1174,23 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 		} else { // Ok the user wants to load his own Factory
 			try {
-				Object displayFactoryTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
+				final Object displayFactoryTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
 						factoryLocation);
-				if (java.beans.Beans.isInstanceOf(displayFactoryTemp, DisplayFactory.class))
+				if (java.beans.Beans.isInstanceOf(displayFactoryTemp, DisplayFactory.class)) {
 					factory = (DisplayFactory) displayFactoryTemp;
-			} catch (Exception e) {
-				log.log(Level.SEVERE, "Could not instantiate the display factory", e);
+				}
+			} catch (final Exception e) {
+				ReCApplication.log.log(Level.SEVERE, "Could not instantiate the display factory", e);
 			}
 		}
 
 		if (factory != null) {
 			// I will only give the selected displays :)
-			List<Display> selectedDisplays = new ArrayList<Display>();
+			final List<Display> selectedDisplays = new ArrayList<Display>();
 
-			List<Display> availableDisplays = experimentHistory.getApparatusConfig().getDisplay();
+			final List<Display> availableDisplays = experimentHistory.getApparatusConfig().getDisplay();
 
-			for (Display display : availableDisplays) {
+			for (final Display display : availableDisplays) {
 				if (display.isSelected()) {
 					selectedDisplays.add(display);
 				}
@@ -1192,8 +1199,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			factory.setAcquisitionInfo(experimentHistory.getApparatus().getHardwareInfo());
 			try {
 				factory.setAcquisitionConfig(experimentHistory.getProducerWrapper().getAcquisitionHeader());
-			} catch (Exception e) {
-				log.log(Level.SEVERE, "Could not set aquisition config", e);
+			} catch (final Exception e) {
+				ReCApplication.log.log(Level.SEVERE, "Could not set aquisition config", e);
 			}
 			experimentData.setDataDisplays(factory.getDisplays());
 		}
@@ -1201,15 +1208,15 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		// Couldn't read from xml or from user
 		if (experimentData.getDataDisplays() == null) {
 			try {
-				ArrayList<ExpDataDisplay> experimentDataDisplays = new ArrayList<ExpDataDisplay>();
-				Object dataDisplayTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
+				final ArrayList<ExpDataDisplay> experimentDataDisplays = new ArrayList<ExpDataDisplay>();
+				final Object dataDisplayTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
 						"com.linkare.rec.impl.baseUI.DefaultExperimentDataTable");
 				if (java.beans.Beans.isInstanceOf(dataDisplayTemp, ExpDataDisplay.class)) {
 					experimentDataDisplays.set(0, (ExpDataDisplay) dataDisplayTemp);
 				}
 				experimentData.setDataDisplays(experimentDataDisplays);
-			} catch (Exception e) {
-				log.log(Level.SEVERE, "Could not instantiate default datatable", e);
+			} catch (final Exception e) {
+				ReCApplication.log.log(Level.SEVERE, "Could not instantiate default datatable", e);
 			}
 		}
 
@@ -1218,35 +1225,37 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		try {
 			dataModelLocation = ReCResourceBundle.findStringOrDefault(experimentHistory.getApparatusConfig()
 					.getDataModelClassLocationBundleKey(), null);
-		} catch (Exception ignored) {
+		} catch (final Exception ignored) {
 			// don't print the not found exception please...
 		}
 
 		if (dataModelLocation != null) {
 			try {
-				Object expDataModelTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
+				final Object expDataModelTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
 						dataModelLocation);
 				if (java.beans.Beans.isInstanceOf(expDataModelTemp, ExpDataModel.class)) {
-					log.fine("Instatiating ExpDataModel from " + dataModelLocation);
+					ReCApplication.log.fine("Instatiating ExpDataModel from " + dataModelLocation);
 					experimentData.setDataModel((ExpDataModel) expDataModelTemp);
 				}
-			} catch (Exception e) {
-				log.log(Level.SEVERE, "Could not instantiate datamodel", e);
+			} catch (final Exception e) {
+				ReCApplication.log.log(Level.SEVERE, "Could not instantiate datamodel", e);
 			}
 		}
 		DefaultExpDataModel experimentDataModel = null;
 		// if the user didn't defined is data model, then use the default one
 		if (experimentData.getDataModel() == null) {
-			log.fine("Setting default datamodel - DefaultExpDataModel.");
+			ReCApplication.log.fine("Setting default datamodel - DefaultExpDataModel.");
 			experimentDataModel = new DefaultExpDataModel();
 		}
 
 		try {
 			experimentDataModel.setDpwDataSource(experimentHistory.getProducerWrapper());
-			experimentDataModel.initAcquisitionThread(); // iniciar a aquisicao de dados do multicast
+			experimentDataModel.initAcquisitionThread(); // iniciar a aquisicao
+															// de dados do
+															// multicast
 			experimentData.setDataModel(experimentDataModel);
-		} catch (Exception e) {
-			log.log(Level.SEVERE, "Failed data output connection...", e);
+		} catch (final Exception e) {
+			ReCApplication.log.log(Level.SEVERE, "Failed data output connection...", e);
 			// TODO statusPanelApparatus Failed data output connection - forward
 			// view event
 		}
@@ -1255,7 +1264,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	}
 
 	@Override
-	public void showExperimentHeader(ExpHistory history) {
+	public void showExperimentHeader(final ExpHistory history) {
 		HardwareAcquisitionConfig config = null;
 		try {
 			config = history.getProducerWrapper().getAcquisitionHeader();
@@ -1263,33 +1272,33 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			if (config != null) {
 				fireApplicationEvent(new ReCAppEvent(this, ReCCommand.SHOW_EXPERIMENT_HISTORY_HEADER_INFO, config));
 			} else {
-				log.severe("Couldn't show Experiment Info... Aquisition Header is null.");
+				ReCApplication.log.severe("Couldn't show Experiment Info... Aquisition Header is null.");
 			}
-		} catch (Exception ignored) {
-			log.log(Level.SEVERE, "Couldn't show Experiment Info...", ignored);
+		} catch (final Exception ignored) {
+			ReCApplication.log.log(Level.SEVERE, "Couldn't show Experiment Info...", ignored);
 		}
 	}
 
 	@Override
-	public void apparatusStateStoping(ApparatusConnectorEvent evt) {
+	public void apparatusStateStoping(final ApparatusConnectorEvent evt) {
 		// Forward event to the view
 		fireApparatusStateChanged(STATESTOPING, evt);
 	}
 
 	@Override
-	public void apparatusStateStoped(ApparatusConnectorEvent evt) {
+	public void apparatusStateStoped(final ApparatusConnectorEvent evt) {
 		// Forward event to the view
 		fireApparatusStateChanged(STATESTOPED, evt);
 	}
 
 	@Override
-	public void apparatusStateUnknow(ApparatusConnectorEvent evt) {
+	public void apparatusStateUnknow(final ApparatusConnectorEvent evt) {
 		// Forward event to the view
 		fireApparatusStateChanged(STATEUNKNOW, evt);
 	}
 
 	@Override
-	public void apparatusUnreachable(ApparatusConnectorEvent evt) {
+	public void apparatusUnreachable(final ApparatusConnectorEvent evt) {
 		// Forward event to the view
 		fireApparatusStateChanged(UNREACHABLE, evt);
 	}
@@ -1299,23 +1308,23 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 	@Override
 	public void done() {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("Customizer Done");
+		if (ReCApplication.log.isLoggable(Level.FINE)) {
+			ReCApplication.log.fine("Customizer Done");
 		}
 
 		// Store user's last acquisition configuration
 		userAcquisitionConfig = getCurrentCustomizer().getAcquisitionConfig();
 
 		setCurrentState(APPARATUS_CONFIGURED);
-		
+
 		// Forward event to the view
 		fireApplicationEvent(new ReCAppEvent(this, ReCCommand.CUSTOMIZER_DONE));
 	}
 
 	@Override
 	public void canceled() {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("Customizer Canceled");
+		if (ReCApplication.log.isLoggable(Level.FINE)) {
+			ReCApplication.log.fine("Customizer Canceled");
 		}
 
 		// Forward event to the view
@@ -1332,34 +1341,34 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		return appListeners;
 	}
 
-	public void addReCApplicationListener(ReCApplicationListener listener) {
+	public void addReCApplicationListener(final ReCApplicationListener listener) {
 		getAppListeners().add(listener);
 	}
 
-	public void removeReCApplicationListener(ReCApplicationListener listener) {
+	public void removeReCApplicationListener(final ReCApplicationListener listener) {
 		getAppListeners().remove(listener);
 	}
 
-	public void fireLabStateChanged(LabConnectorEvent evt) {
-		for (ReCApplicationListener listener : getAppListeners()) {
+	public void fireLabStateChanged(final LabConnectorEvent evt) {
+		for (final ReCApplicationListener listener : getAppListeners()) {
 			listener.labStateChanged(evt);
 		}
 	}
 
-	public void fireApparatusListChanged(ApparatusListChangeEvent evt) {
-		for (ReCApplicationListener listener : getAppListeners()) {
+	public void fireApparatusListChanged(final ApparatusListChangeEvent evt) {
+		for (final ReCApplicationListener listener : getAppListeners()) {
 			listener.apparatusListChanged(evt);
 		}
 	}
 
 	public void fireApparatusStateChanged(final ApparatusEvent evtSelector, final ApparatusConnectorEvent evt) {
-		for (ReCApplicationListener listener : getAppListeners()) {
+		for (final ReCApplicationListener listener : getAppListeners()) {
 			listener.apparatusStateChanged(evtSelector, evt);
 		}
 	}
 
 	public void fireApplicationEvent(final ReCAppEvent evt) {
-		for (ReCApplicationListener listener : getAppListeners()) {
+		for (final ReCApplicationListener listener : getAppListeners()) {
 			listener.applicationEvent(evt);
 		}
 	}
@@ -1379,7 +1388,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	/**
 	 * Main method launching the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		Application.launch(ReCApplication.class, args);
 	}
 
@@ -1403,11 +1412,11 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			return experimentDataModel;
 		}
 
-		public void setDataDisplays(List<ExpDataDisplay> experimentDataDisplays) {
+		public void setDataDisplays(final List<ExpDataDisplay> experimentDataDisplays) {
 			this.experimentDataDisplays = experimentDataDisplays;
 		}
 
-		public void setDataModel(ExpDataModel experimentDataModel) {
+		public void setDataModel(final ExpDataModel experimentDataModel) {
 			this.experimentDataModel = experimentDataModel;
 		}
 
@@ -1415,7 +1424,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			return experimentHistoryUINode;
 		}
 
-		public void setHistoryUINode(ExperimentHistoryUINode experimentHistoryUINode) {
+		public void setHistoryUINode(final ExperimentHistoryUINode experimentHistoryUINode) {
 			this.experimentHistoryUINode = experimentHistoryUINode;
 		}
 

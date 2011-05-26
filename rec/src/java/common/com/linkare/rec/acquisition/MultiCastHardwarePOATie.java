@@ -11,24 +11,25 @@ public class MultiCastHardwarePOATie extends MultiCastHardwarePOA {
 
 	// Constructors
 
-	public MultiCastHardwarePOATie(com.linkare.rec.acquisition.MultiCastHardwareOperations delegate) {
-		this._impl = delegate;
+	public MultiCastHardwarePOATie(final com.linkare.rec.acquisition.MultiCastHardwareOperations delegate) {
+		_impl = delegate;
 	}
 
-	public MultiCastHardwarePOATie(com.linkare.rec.acquisition.MultiCastHardwareOperations delegate,
-			org.omg.PortableServer.POA poa) {
-		this._impl = delegate;
-		this._poa = poa;
+	public MultiCastHardwarePOATie(final com.linkare.rec.acquisition.MultiCastHardwareOperations delegate,
+			final org.omg.PortableServer.POA poa) {
+		_impl = delegate;
+		_poa = poa;
 	}
 
 	public com.linkare.rec.acquisition.MultiCastHardwareOperations _delegate() {
-		return this._impl;
+		return _impl;
 	}
 
-	public void _delegate(com.linkare.rec.acquisition.MultiCastHardwareOperations delegate) {
-		this._impl = delegate;
+	public void _delegate(final com.linkare.rec.acquisition.MultiCastHardwareOperations delegate) {
+		_impl = delegate;
 	}
 
+	@Override
 	public org.omg.PortableServer.POA _default_POA() {
 		if (_poa != null) {
 			return _poa;
@@ -38,33 +39,38 @@ public class MultiCastHardwarePOATie extends MultiCastHardwarePOA {
 	}
 
 	// that the DataClient must be regsitered...
-	public com.linkare.rec.data.metadata.HardwareInfo getHardwareInfo(com.linkare.rec.acquisition.UserInfo user)
+	@Override
+	public com.linkare.rec.data.metadata.HardwareInfo getHardwareInfo(final com.linkare.rec.acquisition.UserInfo user)
 			throws com.linkare.rec.acquisition.NotRegistered, com.linkare.rec.acquisition.NotAuthorized {
 		return _impl.getHardwareInfo(user);
 	} // getHardwareInfo
 
 	// give me a way to build a user interface
-	public com.linkare.rec.acquisition.HardwareState getHardwareState(com.linkare.rec.acquisition.UserInfo user)
+	@Override
+	public com.linkare.rec.acquisition.HardwareState getHardwareState(final com.linkare.rec.acquisition.UserInfo user)
 			throws com.linkare.rec.acquisition.NotRegistered, com.linkare.rec.acquisition.NotAuthorized {
 		return _impl.getHardwareState(user);
 	} // getHardwareState
 
 	// How are you?
-	public void requireLock(com.linkare.rec.acquisition.UserInfo user)
+	@Override
+	public void requireLock(final com.linkare.rec.acquisition.UserInfo user)
 			throws com.linkare.rec.acquisition.IncorrectStateException,
 			com.linkare.rec.acquisition.NotAvailableException, com.linkare.rec.acquisition.NotOwnerException,
 			com.linkare.rec.acquisition.NotRegistered, com.linkare.rec.acquisition.NotAuthorized {
 		_impl.requireLock(user);
 	} // requireLock
 
-	public void registerDataClient(com.linkare.rec.acquisition.DataClient data_client)
+	@Override
+	public void registerDataClient(final com.linkare.rec.acquisition.DataClient data_client)
 			throws com.linkare.rec.acquisition.NotAvailableException,
 			com.linkare.rec.acquisition.MaximumClientsReached, com.linkare.rec.acquisition.NotAuthorized {
 		_impl.registerDataClient(data_client);
 	} // registerDataClient
 
-	public void configure(com.linkare.rec.acquisition.UserInfo user,
-			com.linkare.rec.data.config.HardwareAcquisitionConfig configuration)
+	@Override
+	public void configure(final com.linkare.rec.acquisition.UserInfo user,
+			final com.linkare.rec.data.config.HardwareAcquisitionConfig configuration)
 			throws com.linkare.rec.acquisition.IncorrectStateException,
 			com.linkare.rec.acquisition.NotAvailableException, com.linkare.rec.acquisition.WrongConfigurationException,
 			com.linkare.rec.acquisition.NotOwnerException, com.linkare.rec.acquisition.NotRegistered,
@@ -72,36 +78,41 @@ public class MultiCastHardwarePOATie extends MultiCastHardwarePOA {
 		_impl.configure(user, configuration);
 	} // configure
 
-	public com.linkare.rec.acquisition.DataProducer start(com.linkare.rec.acquisition.UserInfo user)
+	@Override
+	public com.linkare.rec.acquisition.DataProducer start(final com.linkare.rec.acquisition.UserInfo user)
 			throws com.linkare.rec.acquisition.IncorrectStateException,
 			com.linkare.rec.acquisition.NotAvailableException, com.linkare.rec.acquisition.NotOwnerException,
 			com.linkare.rec.acquisition.NotRegistered, com.linkare.rec.acquisition.NotAuthorized {
 		return _impl.start(user);
 	} // start
 
-	public com.linkare.rec.acquisition.DataProducer startOutput(com.linkare.rec.acquisition.UserInfo user,
-			com.linkare.rec.acquisition.DataProducer data_source)
+	@Override
+	public com.linkare.rec.acquisition.DataProducer startOutput(final com.linkare.rec.acquisition.UserInfo user,
+			final com.linkare.rec.acquisition.DataProducer data_source)
 			throws com.linkare.rec.acquisition.IncorrectStateException,
 			com.linkare.rec.acquisition.NotAvailableException, com.linkare.rec.acquisition.NotOwnerException,
 			com.linkare.rec.acquisition.NotRegistered, com.linkare.rec.acquisition.NotAuthorized {
 		return _impl.startOutput(user, data_source);
 	} // startOutput
 
-	public void stop(com.linkare.rec.acquisition.UserInfo user)
+	@Override
+	public void stop(final com.linkare.rec.acquisition.UserInfo user)
 			throws com.linkare.rec.acquisition.IncorrectStateException,
 			com.linkare.rec.acquisition.NotAvailableException, com.linkare.rec.acquisition.NotOwnerException,
 			com.linkare.rec.acquisition.NotRegistered, com.linkare.rec.acquisition.NotAuthorized {
 		_impl.stop(user);
 	} // stop
 
-	public void reset(com.linkare.rec.acquisition.UserInfo user)
+	@Override
+	public void reset(final com.linkare.rec.acquisition.UserInfo user)
 			throws com.linkare.rec.acquisition.IncorrectStateException,
 			com.linkare.rec.acquisition.NotAvailableException, com.linkare.rec.acquisition.NotOwnerException,
 			com.linkare.rec.acquisition.NotRegistered, com.linkare.rec.acquisition.NotAuthorized {
 		_impl.reset(user);
 	} // reset
 
-	public com.linkare.rec.acquisition.DataProducer getDataProducer(com.linkare.rec.acquisition.UserInfo user)
+	@Override
+	public com.linkare.rec.acquisition.DataProducer getDataProducer(final com.linkare.rec.acquisition.UserInfo user)
 			throws com.linkare.rec.acquisition.IncorrectStateException,
 			com.linkare.rec.acquisition.NotAvailableException, com.linkare.rec.acquisition.NotRegistered,
 			com.linkare.rec.acquisition.NotAuthorized {
@@ -110,14 +121,17 @@ public class MultiCastHardwarePOATie extends MultiCastHardwarePOA {
 
 	// VTClientNameList getClientQueue(in DataClient data_client) raises
 	// (NotRegistered);
-	public com.linkare.rec.acquisition.UserInfo[] getClientList(com.linkare.rec.acquisition.UserInfo user)
+	@Override
+	public com.linkare.rec.acquisition.UserInfo[] getClientList(final com.linkare.rec.acquisition.UserInfo user)
 			throws com.linkare.rec.acquisition.NotRegistered, com.linkare.rec.acquisition.NotAuthorized {
 		return _impl.getClientList(user);
 	} // getClientList
 
 	// version 5 added suport for messages
-	public void sendMessage(com.linkare.rec.acquisition.UserInfo userFrom, String clientTo, String message)
-			throws com.linkare.rec.acquisition.NotRegistered, com.linkare.rec.acquisition.NotAuthorized {
+	@Override
+	public void sendMessage(final com.linkare.rec.acquisition.UserInfo userFrom, final String clientTo,
+			final String message) throws com.linkare.rec.acquisition.NotRegistered,
+			com.linkare.rec.acquisition.NotAuthorized {
 		_impl.sendMessage(userFrom, clientTo, message);
 	} // sendMessage
 

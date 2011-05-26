@@ -15,7 +15,8 @@ public class CypressIDProcessor extends AbstractCypressProcessor {
 		super(pt.utl.ist.elab.driver.usb.cypress.AbstractCypressDriver.ID_STR);
 	}
 
-	public boolean process(CypressCommand command) {
+	@Override
+	public boolean process(final CypressCommand command) {
 		command.addCommandData(getCommandIdentifier(), Boolean.TRUE);
 		return true;
 	}

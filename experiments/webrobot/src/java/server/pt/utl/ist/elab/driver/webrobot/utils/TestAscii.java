@@ -19,7 +19,7 @@ public class TestAscii {
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		for (int i = 0; i < 256; i++) {
 			System.out.println(i + " " + (byte) (i));
 		}

@@ -12,7 +12,6 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import com.linkare.rec.impl.logging.LoggerUtil;
-import com.linkare.rec.impl.multicast.ClientQueue;
 import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
 
 /**
@@ -31,45 +30,47 @@ public final class SecurityManagerFactory {
 	public static final String MCCONTROLLER_SECURITYMANAGER_LOGGER = "ReC.MultiCast.SecurityManager.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(
+				SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER));
+			LogManager.getLogManager().addLogger(
+					Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER));
 		}
 	}
 
 	private void loadSecurityManager() {
-		String secManagerClassName = System.getProperty(SYSPROP_SECURITY_MANAGER_CLASS);
+		final String secManagerClassName = System.getProperty(SecurityManagerFactory.SYSPROP_SECURITY_MANAGER_CLASS);
 		if (secManagerClassName == null || secManagerClassName.trim().length() == 0) {
-			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
+			Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
 					"SecurityManager System Property not found... Loading DefaultSecurityManager!");
 			secManager = new DefaultSecurityManager();
 		}
 		try {
-			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINE,
+			Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINE,
 					"Trying to load the SecurityManager class [" + secManagerClassName + "]");
-			Class<?> clazz = Class.forName(secManagerClassName);
+			final Class<?> clazz = Class.forName(secManagerClassName);
 			if (clazz != null) {
 				secManager = (ISecurityManager) Class.forName(secManagerClassName).newInstance();
 			}
-		} catch (Exception e) {
-			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
+		} catch (final Exception e) {
+			Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
 					Level.INFO,
 					"Unable to load SecurityManager defined at system : " + secManagerClassName
 							+ " - loading DefaultSecurityManager!");
-			LoggerUtil.logThrowable("Error loading specified SecurityManager", e, Logger
-					.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER));
+			LoggerUtil.logThrowable("Error loading specified SecurityManager", e,
+					Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER));
 			e.printStackTrace();
-		} catch (LinkageError e) {
-			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
+		} catch (final LinkageError e) {
+			Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
 					Level.INFO,
 					"Unable to load SecurityManager defined at system : " + secManagerClassName
 							+ " - loading DefaultSecurityManager!");
-			LoggerUtil.logThrowable("Error loading specified SecurityManager", e, Logger
-					.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER));
+			LoggerUtil.logThrowable("Error loading specified SecurityManager", e,
+					Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER));
 			e.printStackTrace();
 		} finally {
 			if (secManager == null) {
-				Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
+				Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
 						"SecurityManager not instatiated... Loading DefaultSecurityManager!");
 				secManager = new DefaultSecurityManager();
 			}
@@ -82,20 +83,20 @@ public final class SecurityManagerFactory {
 	}
 
 	private static SecurityManagerFactory getInstance() {
-		return instance;
+		return SecurityManagerFactory.instance;
 	}
 
 	private ISecurityManager getSecManager() {
 		return secManager;
 	}
 
-	private void setSecManager(ISecurityManager secManager) {
+	private void setSecManager(final ISecurityManager secManager) {
 		if (secManager == null) {
-			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
+			Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
 					"Setting SecurityManager to null... Loading DefaultSecurityManager!");
 			this.secManager = new DefaultSecurityManager();
 		} else {
-			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
+			Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
 					Level.INFO,
 					"Setting SecurityManager to instance of class " + secManager.getClass().getPackage().getName()
 							+ "." + secManager.getClass().getName());
@@ -103,53 +104,55 @@ public final class SecurityManagerFactory {
 		}
 	}
 
-	public static void setSecurityManager(ISecurityManager secManager) {
-		getInstance().setSecManager(secManager);
+	public static void setSecurityManager(final ISecurityManager secManager) {
+		SecurityManagerFactory.getInstance().setSecManager(secManager);
 	}
 
 	public static ISecurityManager getSecurityManager() {
-		return getInstance().getSecManager();
+		return SecurityManagerFactory.getInstance().getSecManager();
 	}
 
-	public boolean authenticateNow(IResource resource, IUser user) {
+	public boolean authenticateNow(final IResource resource, final IUser user) {
 		try {
-			return getSecurityManager().authenticate(resource, user);
-		} catch (Exception e) {
-			LoggerUtil.logThrowable("Exception occured authenticating user! Returning false!", e, Logger
-					.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER));
+			return SecurityManagerFactory.getSecurityManager().authenticate(resource, user);
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable("Exception occured authenticating user! Returning false!", e,
+					Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER));
 			e.printStackTrace();
 			return false;
 		}
 	}
 
-	public boolean authorizeNow(IResource resource, IUser user, IOperation op) {
+	public boolean authorizeNow(final IResource resource, final IUser user, final IOperation op) {
 		try {
-			return getSecurityManager().authorize(resource, user, op);
-		} catch (Exception e) {
-			LoggerUtil.logThrowable("Exception occured authorizing user for operation! Returning false!", e, Logger
-					.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER));
+			return SecurityManagerFactory.getSecurityManager().authorize(resource, user, op);
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable("Exception occured authorizing user for operation! Returning false!", e,
+					Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER));
 			e.printStackTrace();
 			return false;
 		}
 	}
 
-	public static boolean authenticate(IResource resource, IUser user) {
-		return getInstance().authenticateNow(resource, user);
+	public static boolean authenticate(final IResource resource, final IUser user) {
+		return SecurityManagerFactory.getInstance().authenticateNow(resource, user);
 	}
 
-	public static boolean authorize(IResource resource, IUser user, IOperation op) {
-		return getInstance().authorizeNow(resource, user, op);
+	public static boolean authorize(final IResource resource, final IUser user, final IOperation op) {
+		return SecurityManagerFactory.getInstance().authorizeNow(resource, user, op);
 	}
 
 	private class DefaultSecurityManager implements ISecurityManager {
 
-		public boolean authenticate(IResource resource, IUser user) {
+		@Override
+		public boolean authenticate(final IResource resource, final IUser user) {
 			// Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,"Authenticating access for Resource: "
 			// + resource + " to User: " + user +" OK!");
 			return true;
 		}
 
-		public boolean authorize(IResource resource, IUser user, IOperation op) {
+		@Override
+		public boolean authorize(final IResource resource, final IUser user, final IOperation op) {
 			// Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,"Authorizing Operation "
 			// + op + " for Resource: " + resource + " to User: " + user
 			// +" OK!");
@@ -160,16 +163,18 @@ public final class SecurityManagerFactory {
 		 * {@inheritDoc}
 		 */
 		@Override
-		public void registerMultiCastHardware(List<ReCMultiCastHardware> multiCastHardwares) {
-			// this security implementation doesn't require the multicast hardwares
+		public void registerMultiCastHardware(final List<ReCMultiCastHardware> multiCastHardwares) {
+			// this security implementation doesn't require the multicast
+			// hardwares
 		}
 
 		/**
 		 * {@inheritDoc}
 		 */
 		@Override
-		public void registerSecurityCommunicator(ISecurityCommunicator communicator) {
-			// this security implementation doesn't require the multicast hardwares
+		public void registerSecurityCommunicator(final ISecurityCommunicator communicator) {
+			// this security implementation doesn't require the multicast
+			// hardwares
 		}
 	}
 

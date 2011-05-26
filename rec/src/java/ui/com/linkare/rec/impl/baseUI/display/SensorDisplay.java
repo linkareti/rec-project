@@ -93,10 +93,12 @@ public class SensorDisplay extends javax.swing.JPanel implements com.linkare.rec
 	/**
 	 * @return The Display to add to the TabPane
 	 */
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public Icon getIcon() {
 		return icon;
 	}
@@ -106,16 +108,19 @@ public class SensorDisplay extends javax.swing.JPanel implements com.linkare.rec
 	 * 
 	 * @param icon New value of property icon.
 	 */
-	public void setIcon(Icon icon) {
-		if (icon != null)
+	public void setIcon(final Icon icon) {
+		if (icon != null) {
 			this.icon = icon;
+		}
 	}
 
+	@Override
 	public String getName() {
-		if (name != null)
-			return this.name;
-		else
+		if (name != null) {
+			return name;
+		} else {
 			return "Sensor for channel " + channelIndexDisplay;
+		}
 	}
 
 	/**
@@ -123,20 +128,25 @@ public class SensorDisplay extends javax.swing.JPanel implements com.linkare.rec
 	 * 
 	 * @param name New value of property name.
 	 */
-	public void setName(String name) {
-		if (name != null)
+	@Override
+	public void setName(final String name) {
+		if (name != null) {
 			this.name = name;
+		}
 
 	}
 
-	public void setExpDataModel(ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
+		if (this.model != null) {
 			model.removeExpDataModelListener(this);
+		}
 
 		this.model = model;
 
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 
 	}
 
@@ -146,7 +156,7 @@ public class SensorDisplay extends javax.swing.JPanel implements com.linkare.rec
 	 * @return Value of property channelIndexDisplay.
 	 */
 	public int getChannelIndexDisplay() {
-		return this.channelIndexDisplay;
+		return channelIndexDisplay;
 	}
 
 	/**
@@ -154,62 +164,75 @@ public class SensorDisplay extends javax.swing.JPanel implements com.linkare.rec
 	 * 
 	 * @param channelIndexDisplay New value of property channelIndexDisplay.
 	 */
-	public void setChannelIndexDisplay(int channelIndexDisplay) {
-		if (channelIndexDisplay >= 0)
+	public void setChannelIndexDisplay(final int channelIndexDisplay) {
+		if (channelIndexDisplay >= 0) {
 			this.channelIndexDisplay = channelIndexDisplay;
+		}
 	}
 
+	@Override
 	public void dataModelWaiting() {
 
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
-		if (header == null)
+		if (header == null) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
-		if (header == null)
+		if (header == null) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
 	private Scale scale = null;
 	private HardwareAcquisitionConfig header = null;
 
-	private void headerAvailable(HardwareAcquisitionConfig header) {
-		if (header == null)
+	private void headerAvailable(final HardwareAcquisitionConfig header) {
+		if (header == null) {
 			return;
+		}
 
 		this.header = header;
 		scale = model.getChannelConfig(channelIndexDisplay).getSelectedScale();
-		String chn = model.getChannelConfig(channelIndexDisplay).getChannelName();
-		String pus = scale.getPhysicsUnitSymbol();
-		String multiplier = scale.getMultiplier().toString();
+		final String chn = model.getChannelConfig(channelIndexDisplay).getChannelName();
+		final String pus = scale.getPhysicsUnitSymbol();
+		final String multiplier = scale.getMultiplier().toString();
 
 		lblChannel.setText(chn + " [" + multiplier + pus + "]");
 
 	}
 
-	public void newSamples(NewExpDataEvent evt) {
-		int lastsample = evt.getSamplesEndIndex();
-		PhysicsValue value = model.getValueAt(lastsample, channelIndexDisplay);
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
+		final int lastsample = evt.getSamplesEndIndex();
+		final PhysicsValue value = model.getValueAt(lastsample, channelIndexDisplay);
 
 		lblValue.setText(value.toEngineeringNotation());
 	}
 
+	@Override
 	public JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public JToolBar getToolBar() {
 		return null;
 	}
@@ -223,8 +246,9 @@ public class SensorDisplay extends javax.swing.JPanel implements com.linkare.rec
 	 * @see #getForeground
 	 * @since JDK1.0
 	 */
-	public void setForeground(Color cout) {
-		Color c = new Color(cout.getRGB());
+	@Override
+	public void setForeground(final Color cout) {
+		final Color c = new Color(cout.getRGB());
 		super.setForeground(c);
 		if (jScrollPane1 != null) {
 			jScrollPane1.setForeground(getForeground());
@@ -248,8 +272,9 @@ public class SensorDisplay extends javax.swing.JPanel implements com.linkare.rec
 	 * @since JDK1.0
 	 * @beaninfo bound: true
 	 */
-	public void setBackground(Color cout) {
-		Color c = new Color(cout.getRGB());
+	@Override
+	public void setBackground(final Color cout) {
+		final Color c = new Color(cout.getRGB());
 		super.setBackground(c);
 		if (jScrollPane1 != null) {
 			jScrollPane1.setBackground(getBackground());
@@ -293,18 +318,19 @@ public class SensorDisplay extends javax.swing.JPanel implements com.linkare.rec
 	 * @exception ClassNotFoundException If the class for an object being
 	 *                restored cannot be found.
 	 */
-	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+	@Override
+	public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
 		try {
 			setForeground((Color) in.readObject());
-		} catch (ClassNotFoundException e) {
+		} catch (final ClassNotFoundException e) {
 		}
 		try {
 			setBackground((Color) in.readObject());
-		} catch (ClassNotFoundException e) {
+		} catch (final ClassNotFoundException e) {
 		}
 		try {
 			setIcon((Icon) in.readObject());
-		} catch (ClassNotFoundException e) {
+		} catch (final ClassNotFoundException e) {
 		}
 		setName(in.readUTF());
 		setChannelIndexDisplay(in.readInt());
@@ -324,7 +350,8 @@ public class SensorDisplay extends javax.swing.JPanel implements com.linkare.rec
 	 * @param out the stream to write the object to
 	 * @exception IOException Includes any I/O exceptions that may occur
 	 */
-	public void writeExternal(ObjectOutput out) throws IOException {
+	@Override
+	public void writeExternal(final ObjectOutput out) throws IOException {
 		out.writeObject(getForeground());
 		out.writeObject(getBackground());
 		out.writeObject(icon);

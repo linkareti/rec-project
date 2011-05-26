@@ -22,7 +22,7 @@ public enum ExceptionCode {
 	int id;
 	String description;
 
-	ExceptionCode(String description, int id) {
+	ExceptionCode(final String description, final int id) {
 		this.description = description;
 		this.id = id;
 	}

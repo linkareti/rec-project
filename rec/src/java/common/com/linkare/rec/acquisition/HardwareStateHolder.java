@@ -6,18 +6,21 @@ public final class HardwareStateHolder implements org.omg.CORBA.portable.Streama
 	public HardwareStateHolder() {
 	}
 
-	public HardwareStateHolder(com.linkare.rec.acquisition.HardwareState initialValue) {
+	public HardwareStateHolder(final com.linkare.rec.acquisition.HardwareState initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(org.omg.CORBA.portable.InputStream i) {
+	@Override
+	public void _read(final org.omg.CORBA.portable.InputStream i) {
 		value = com.linkare.rec.acquisition.HardwareStateHelper.read(i);
 	}
 
-	public void _write(org.omg.CORBA.portable.OutputStream o) {
+	@Override
+	public void _write(final org.omg.CORBA.portable.OutputStream o) {
 		com.linkare.rec.acquisition.HardwareStateHelper.write(o, value);
 	}
 
+	@Override
 	public org.omg.CORBA.TypeCode _type() {
 		return com.linkare.rec.acquisition.HardwareStateHelper.type();
 	}

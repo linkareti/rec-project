@@ -21,7 +21,7 @@ public class StampThomsonProcessor extends AbstractStampProcessor {
 
 	/** Creates a new instance of StampHelloProcessor */
 	public StampThomsonProcessor() {
-		super(COMMAND_IDENTIFIER);
+		super(StampThomsonProcessor.COMMAND_IDENTIFIER);
 	}
 
 	/**
@@ -31,27 +31,29 @@ public class StampThomsonProcessor extends AbstractStampProcessor {
 	 * @return boolean - wether the processing was successfull
 	 * 
 	 */
-	public boolean process(StampCommand command) {
+	@Override
+	public boolean process(final StampCommand command) {
 
 		int corrente = 0;
 		int tensao = 0;
 
-		String[] splitedStr = command.getCommand().split(" ");
+		final String[] splitedStr = command.getCommand().split(" ");
 
-		if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedStr[0] != null) {
+		if (command.getCommandIdentifier().equalsIgnoreCase(StampThomsonProcessor.COMMAND_IDENTIFIER)
+				&& splitedStr[0] != null) {
 			try {
 				corrente = Integer.parseInt(splitedStr[0]) * 2000 / 170;
-				Integer oCorrente = new Integer(corrente);
-				command.addCommandData(CORRENTE, oCorrente);
+				final Integer oCorrente = new Integer(corrente);
+				command.addCommandData(StampThomsonProcessor.CORRENTE, oCorrente);
 
 				tensao = (Integer.parseInt(splitedStr[1]) * 5 * 40000 / 255) / 27;
-				Integer oTensao = new Integer(tensao);
-				command.addCommandData(TENSAO, oTensao);
+				final Integer oTensao = new Integer(tensao);
+				command.addCommandData(StampThomsonProcessor.TENSAO, oTensao);
 
 				command.setData(true);
 				return true;
 
-			} catch (NumberFormatException e) {
+			} catch (final NumberFormatException e) {
 				e.printStackTrace();
 				return false;
 			}
@@ -60,6 +62,7 @@ public class StampThomsonProcessor extends AbstractStampProcessor {
 		return false;
 	}
 
+	@Override
 	public boolean isData() {
 		return true;
 	}

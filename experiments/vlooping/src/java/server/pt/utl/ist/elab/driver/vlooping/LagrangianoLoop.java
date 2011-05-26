@@ -14,9 +14,9 @@ import org.opensourcephysics.numerics.ODE;
  */
 public class LagrangianoLoop implements ODE {
 
-	private double raio;
-	private double g; // valor a tomar para a acceleracao gravitacional
-	private double[] state;
+	private final double raio;
+	private final double g; // valor a tomar para a acceleracao gravitacional
+	private final double[] state;
 
 	/**
 	 * Contrutores da classe Contrutor por omissao
@@ -29,7 +29,7 @@ public class LagrangianoLoop implements ODE {
 	}
 
 	/* Construtor com argumentos */
-	public LagrangianoLoop(double anguloInic, double omegaInic, double raio, double g) {
+	public LagrangianoLoop(final double anguloInic, final double omegaInic, final double raio, final double g) {
 		this.raio = raio;
 		this.g = g;
 		state = new double[] { anguloInic, omegaInic, 0 }; // respectivamente
@@ -37,7 +37,8 @@ public class LagrangianoLoop implements ODE {
 		// tempo]
 	}
 
-	public void getRate(double[] state, double[] rate) {
+	@Override
+	public void getRate(final double[] state, final double[] rate) {
 
 		/* variacao do theta */
 		rate[0] = state[1];
@@ -49,6 +50,7 @@ public class LagrangianoLoop implements ODE {
 		rate[2] = 1;
 	}
 
+	@Override
 	public double[] getState() {
 		return state;
 	}

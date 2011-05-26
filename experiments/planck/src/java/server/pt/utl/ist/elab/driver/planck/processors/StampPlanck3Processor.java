@@ -18,7 +18,7 @@ public class StampPlanck3Processor extends AbstractStampProcessor {
 
 	/** Creates a new instance of StampHelloProcessor */
 	public StampPlanck3Processor() {
-		super(COMMAND_IDENTIFIER);
+		super(StampPlanck3Processor.COMMAND_IDENTIFIER);
 	}
 
 	/**
@@ -28,12 +28,14 @@ public class StampPlanck3Processor extends AbstractStampProcessor {
 	 * @return boolean - wether the processing was successfull
 	 * 
 	 */
-	public boolean process(StampCommand command) {
+	@Override
+	public boolean process(final StampCommand command) {
 		command.addCommandData(null, null);
 		command.setData(true);
 		return true;
 	}
 
+	@Override
 	public boolean isData() {
 		return true;
 	}

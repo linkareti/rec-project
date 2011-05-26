@@ -68,8 +68,8 @@ public class HardwareNode {
 	 * @param value allowed object is {@link Rs232Node }
 	 * 
 	 */
-	public void setRs232(Rs232Node value) {
-		this.rs232 = value;
+	public void setRs232(final Rs232Node value) {
+		rs232 = value;
 	}
 
 	/**
@@ -88,8 +88,8 @@ public class HardwareNode {
 	 * @param value allowed object is {@link String }
 	 * 
 	 */
-	public void setId(String value) {
-		this.id = value;
+	public void setId(final String value) {
+		id = value;
 	}
 
 	/**
@@ -108,8 +108,8 @@ public class HardwareNode {
 	 * @param value allowed object is {@link String }
 	 * 
 	 */
-	public void setMaxfrequency(String value) {
-		this.maxfrequency = value;
+	public void setMaxfrequency(final String value) {
+		maxfrequency = value;
 	}
 
 	/**
@@ -128,8 +128,8 @@ public class HardwareNode {
 	 * @param value allowed object is {@link String }
 	 * 
 	 */
-	public void setMinfrequency(String value) {
-		this.minfrequency = value;
+	public void setMinfrequency(final String value) {
+		minfrequency = value;
 	}
 
 	/**
@@ -148,8 +148,8 @@ public class HardwareNode {
 	 * @param value allowed object is {@link String }
 	 * 
 	 */
-	public void setNumChannels(String value) {
-		this.numChannels = value;
+	public void setNumChannels(final String value) {
+		numChannels = value;
 	}
 
 }

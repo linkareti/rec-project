@@ -20,16 +20,18 @@ public class SortPotentials implements Comparator {
 	 * @param o1 objecto 1
 	 * @param o2 objecto 2
 	 */
-	public int compare(Object o1, Object o2) {
-		double[] comp1 = (double[]) o1;
-		double[] comp2 = (double[]) o2;
+	@Override
+	public int compare(final Object o1, final Object o2) {
+		final double[] comp1 = (double[]) o1;
+		final double[] comp2 = (double[]) o2;
 
-		if (comp1[0] > comp2[0])
+		if (comp1[0] > comp2[0]) {
 			return 1;
-		else if (comp1[0] < comp2[0])
+		} else if (comp1[0] < comp2[0]) {
 			return -1;
-		else
+		} else {
 			return 0;
+		}
 	}
 
 }

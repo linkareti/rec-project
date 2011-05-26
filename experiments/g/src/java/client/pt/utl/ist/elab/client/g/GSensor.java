@@ -28,8 +28,12 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 public class GSensor extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
 
-	private BufferedImage imgTube1 = new BufferedImage(50, 200, BufferedImage.TYPE_INT_ARGB);
-	private Icon icon = new javax.swing.ImageIcon(getClass().getResource(
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4240613184181381425L;
+	private final BufferedImage imgTube1 = new BufferedImage(50, 200, BufferedImage.TYPE_INT_ARGB);
+	private final Icon icon = new javax.swing.ImageIcon(getClass().getResource(
 			"/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
 
 	/** Creates new form SeringeSensor */
@@ -39,8 +43,8 @@ public class GSensor extends javax.swing.JPanel implements com.linkare.rec.impl.
 		setMinimumSize(getPreferredSize());
 		setMaximumSize(getPreferredSize());
 
-		Graphics2D g2D = (Graphics2D) imgTube1.getGraphics();
-		Color baseColor = Color.cyan;
+		final Graphics2D g2D = (Graphics2D) imgTube1.getGraphics();
+		final Color baseColor = Color.cyan;
 		g2D.setColor(Color.white);
 		g2D.drawRect(0, 0, imgTube1.getWidth() - 1, imgTube1.getHeight() - 1);
 		g2D.setColor(Color.cyan);
@@ -83,25 +87,27 @@ public class GSensor extends javax.swing.JPanel implements com.linkare.rec.impl.
 	 * @see #getComponentGraphics
 	 * @see #repaint
 	 */
-	public void paint(Graphics g) {
+	@Override
+	public void paint(final Graphics g) {
 		super.paint(g);
-		if (height == null)
+		if (height == null) {
 			return;
+		}
 
-		Graphics2D g2D = (Graphics2D) g;
+		final Graphics2D g2D = (Graphics2D) g;
 
-		double height = this.height.getValue().toDouble();
+		final double height = this.height.getValue().toDouble();
 
-		int imgWidth = (int) getBounds().getWidth();
-		int imgHeight = (int) getBounds().getHeight();
-		int x_start = imgWidth / 2 - imgTube1.getWidth() / 2;
-		int y_start = imgHeight / 2 - imgTube1.getHeight() / 2;
+		final int imgWidth = (int) getBounds().getWidth();
+		final int imgHeight = (int) getBounds().getHeight();
+		final int x_start = imgWidth / 2 - imgTube1.getWidth() / 2;
+		final int y_start = imgHeight / 2 - imgTube1.getHeight() / 2;
 
 		g2D.drawImage(imgTube1, x_start, y_start, imgTube1.getWidth(), imgTube1.getHeight(), null);
 
-		int radius = 5;
-		int heightPos = radius
-				+ (int) Math.floor((float) (imgTube1.getHeight() - 2 * radius) * (height - HEIGHT_MIN)
+		final int radius = 5;
+		final int heightPos = radius
+				+ (int) Math.floor((imgTube1.getHeight() - 2 * radius) * (height - HEIGHT_MIN)
 						/ (HEIGHT_MAX - HEIGHT_MIN));
 
 		g2D.setPaint(new Color(240, 240, 0, 255));
@@ -122,37 +128,44 @@ public class GSensor extends javax.swing.JPanel implements com.linkare.rec.impl.
 	public double HEIGHT_MIN = 0.;
 	private PhysicsValue height = null;
 
-	public void setHeight(PhysicsValue height) {
+	public void setHeight(final PhysicsValue height) {
 		this.height = height;
 		repaint();
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public Icon getIcon() {
 		return icon;
 	}
 
 	private ExpDataModel model = null;
 
-	public void setExpDataModel(ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
+		if (this.model != null) {
 			this.model.removeExpDataModelListener(this);
+		}
 		this.model = model;
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
-	public void headerAvailable(HardwareAcquisitionConfig header) {
+	public void headerAvailable(final HardwareAcquisitionConfig header) {
 		acqHeaderInited = true;
 
 		this.header = header;
@@ -165,35 +178,44 @@ public class GSensor extends javax.swing.JPanel implements com.linkare.rec.impl.
 	private HardwareAcquisitionConfig header = null;
 	private boolean acqHeaderInited = false;
 
-	public void newSamples(NewExpDataEvent evt) {
-		if (!acqHeaderInited)
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
+		if (!acqHeaderInited) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 
-		int lastsample = evt.getSamplesEndIndex();
+		final int lastsample = evt.getSamplesEndIndex();
 		setHeight(model.getValueAt(lastsample, 0));
 	}
 
+	@Override
 	public String getName() {
 		return "Height Sensor";
 	}
 
+	@Override
 	public JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public JToolBar getToolBar() {
 		return null;
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 

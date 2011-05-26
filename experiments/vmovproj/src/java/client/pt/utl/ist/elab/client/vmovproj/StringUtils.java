@@ -11,11 +11,12 @@ package pt.utl.ist.elab.client.vmovproj;
  * @author andre
  */
 public abstract class StringUtils {
-	public static String[] splitArroundPoint(String tosplit) {
-		java.util.Vector v = new java.util.Vector();
-		java.util.StringTokenizer token = new java.util.StringTokenizer(tosplit, ".");
-		while (token.hasMoreTokens())
+	public static String[] splitArroundPoint(final String tosplit) {
+		final java.util.Vector v = new java.util.Vector();
+		final java.util.StringTokenizer token = new java.util.StringTokenizer(tosplit, ".");
+		while (token.hasMoreTokens()) {
 			v.add(token.nextToken());
+		}
 		return (String[]) v.toArray(new String[0]);
 	}
 }

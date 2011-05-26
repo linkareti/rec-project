@@ -6,6 +6,8 @@
 
 package pt.utl.ist.elab.client.vtiro;
 
+import javax.swing.SwingConstants;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
@@ -68,10 +70,11 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 		commandsPanel.setPreferredSize(new java.awt.Dimension(100, 100));
 		okButton.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages")
 				.getString("rec.exp.customizer.title.ok"));
-		okButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vtiro/resources/messages").getString("rec.exp.customizer.tip.ok"));
+		okButton.setToolTipText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages")
+				.getString("rec.exp.customizer.tip.ok"));
 		okButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				okButtonActionPerformed(evt);
 			}
 		});
@@ -82,13 +85,13 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 		gridBagConstraints.weighty = 1.0;
 		commandsPanel.add(okButton, gridBagConstraints);
 
-		cancelButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vtiro/resources/messages")
+		cancelButton.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages")
 				.getString("rec.exp.customizer.title.cancel"));
 		cancelButton.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vtiro/resources/messages").getString("rec.exp.customizer.tip.cancel"));
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				cancelButtonActionPerformed(evt);
 			}
 		});
@@ -101,12 +104,13 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 		gridBagConstraints.weighty = 1.0;
 		commandsPanel.add(cancelButton, gridBagConstraints);
 
-		defaultButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vtiro/resources/messages").getString("rec.exp.customizer.title.dfc"));
+		defaultButton.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages")
+				.getString("rec.exp.customizer.title.dfc"));
 		defaultButton.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vtiro/resources/messages").getString("rec.exp.customizer.tip.dfc"));
 		defaultButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				defaultButtonActionPerformed(evt);
 			}
 		});
@@ -129,8 +133,8 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 
 		gPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vtiro/resources/messages").getString("rec.exp.customizer.title.2")));
-		gPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vtiro/resources/messages").getString("rec.exp.customizer.tip.2"));
+		gPanel.setToolTipText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages")
+				.getString("rec.exp.customizer.tip.2"));
 		gPanel.setMinimumSize(new java.awt.Dimension(82, 114));
 		gPanel.setPreferredSize(new java.awt.Dimension(82, 114));
 		gSlider.setMajorTickSpacing(50);
@@ -138,13 +142,14 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 		gSlider.setMinorTickSpacing(10);
 		gSlider.setPaintLabels(true);
 		gSlider.setPaintTicks(true);
-		gSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vtiro/resources/messages").getString("rec.exp.customizer.tip.2"));
+		gSlider.setToolTipText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages")
+				.getString("rec.exp.customizer.tip.2"));
 		gSlider.setValue(98);
 		gSlider.setMinimumSize(new java.awt.Dimension(200, 47));
 		gSlider.setRequestFocusEnabled(false);
 		gSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				gSliderStateChanged(evt);
 			}
 		});
@@ -156,13 +161,14 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 		gPanel.add(gSlider, gridBagConstraints);
 
 		gTextField.setColumns(4);
-		gTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		gTextField.setHorizontalAlignment(SwingConstants.CENTER);
 		gTextField.setText("98");
-		gTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vtiro/resources/messages").getString("rec.exp.customizer.tip.2"));
+		gTextField.setToolTipText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages")
+				.getString("rec.exp.customizer.tip.2"));
 		gTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		gTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				gTextFieldFocusLost(evt);
 			}
 		});
@@ -181,24 +187,24 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 
 	}// GEN-END:initComponents
 
-	private void gTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_gTextFieldFocusLost
+	private void gTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_gTextFieldFocusLost
 		try {
 			pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(gTextField, gSlider, 1);
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			gTextField.setText(Integer.toString(gSlider.getValue()));
 		}
 	}// GEN-LAST:event_gTextFieldFocusLost
 
-	private void gSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_gSliderStateChanged
+	private void gSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_gSliderStateChanged
 		gTextField.setText("" + gSlider.getValue());
 	}// GEN-LAST:event_gSliderStateChanged
 
-	private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
-		double w = tiro.getW();
-		double h = tiro.getH();
-		double v = tiro.getVel();
-		double theta = tiro.getTheta();
-		double g = (double) gSlider.getValue() / 10d;
+	private void okButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
+		final double w = tiro.getW();
+		final double h = tiro.getH();
+		final double v = tiro.getVel();
+		final double theta = tiro.getTheta();
+		final double g = gSlider.getValue() / 10d;
 
 		acqConfig.setSelectedFrequency(new Frequency(100d, hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency()
 				.getMultiplier(), hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
@@ -210,33 +216,35 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 		acqConfig.getSelectedHardwareParameter("theta").setParameterValue("" + (float) theta);
 		acqConfig.getSelectedHardwareParameter("g").setParameterValue("" + (float) g);
 
-		for (int i = 0; i < acqConfig.getSelectedHardwareParameters().length; i++)
+		for (int i = 0; i < acqConfig.getSelectedHardwareParameters().length; i++) {
 			System.out.println(acqConfig.getSelectedHardwareParameters(i).getParameterName() + " = "
 					+ acqConfig.getSelectedHardwareParameters(i).getParameterValue());
+		}
 
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_okButtonActionPerformed
 
-	private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
+	private void cancelButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_cancelButtonActionPerformed
 
-	private void defaultButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_defaultButtonActionPerformed
+	private void defaultButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_defaultButtonActionPerformed
 		gSlider.setValue(98);
 		tiro.config(10, 10, 6.7, Math.toRadians(26.56));
 	}// GEN-LAST:event_defaultButtonActionPerformed
 
-	private void formWindowClosing(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowClosing
+	private void formWindowClosing(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowClosing
 		System.exit(0);// A FORM PASSOU-SE
 	}// GEN-LAST:event_formWindowClosing
 
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String args[]) {
-		javax.swing.JFrame test = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame test = new javax.swing.JFrame();
 		test.addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent e) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent e) {
 				System.exit(0);
 			};
 		});
@@ -255,7 +263,8 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -267,7 +276,8 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -277,9 +287,10 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -293,9 +304,10 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -307,44 +319,51 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
 		return acqConfig;
 	}
 
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
-			gSlider.setValue((int) Math.round(Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("g")) * 10));
-			double w = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("w"));
-			double h = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("h"));
-			double v = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("v"));
-			double theta = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("theta"));
+			gSlider.setValue(Math.round(Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("g")) * 10));
+			final double w = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("w"));
+			final double h = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("h"));
+			final double v = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("v"));
+			final double theta = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("theta"));
 
 			tiro.config(w, h, v, theta);
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
+	@Override
 	public javax.swing.JComponent getCustomizerComponent() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/vtiro/resources/tiro_iconified.PNG"));
 	}
 
+	@Override
 	public String getCustomizerTitle() {
 		return "Shot Configuration Utility";
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}

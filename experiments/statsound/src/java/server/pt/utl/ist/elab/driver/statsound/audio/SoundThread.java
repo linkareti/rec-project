@@ -6,8 +6,14 @@ package pt.utl.ist.elab.driver.statsound.audio;
  * Created on 5 de Junho de 2003, 17:26
  */
 
-import javax.sound.sampled.*;
-import java.io.*;
+import java.io.IOException;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.SourceDataLine;
 
 //import java.util.Hashtable;
 /**
@@ -17,11 +23,14 @@ import java.io.*;
 public class SoundThread implements Runnable {
 
 	private static final int EXTERNAL_BUFFER_SIZE = 44100;
-	private float waveSampleRate = 11025.0F; //44100.0F; // sampleRate do audio
-	private float waveUltraSampleRate = 44100.0F; // sampleRate do audio
+	private final float waveSampleRate = 11025.0F; // 44100.0F; // sampleRate do
+													// audio
+	private final float waveUltraSampleRate = 44100.0F; // sampleRate do audio
 	// determina o formato do audio
-	private AudioFormat waveFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, waveSampleRate, 16, 1, 2, waveSampleRate, false);
-	private AudioFormat waveFormatUltra = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, waveUltraSampleRate, 16, 1, 2, waveUltraSampleRate, false);
+	private final AudioFormat waveFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, waveSampleRate, 16, 1, 2,
+			waveSampleRate, false);
+	private final AudioFormat waveFormatUltra = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, waveUltraSampleRate,
+			16, 1, 2, waveUltraSampleRate, false);
 
 	private float waveFrequency1; // frequency of the audio wave in Hz
 	private float waveFrequency2; // frequency of the audio wave in Hz
@@ -39,30 +48,31 @@ public class SoundThread implements Runnable {
 	public SoundThread() {
 	}
 
-	public SoundThread(int type) {
-		this.soundType = type;
+	public SoundThread(final int type) {
+		soundType = type;
 	}
 
 	/**
-	 *Runs the thread. This is where the actual playing is done
+	 * Runs the thread. This is where the actual playing is done
 	 */
+	@Override
 	public void run() {
 		System.out.println(">>>Starting the sound line!");
 		// starts the linha
 		linha.start();
 
 		int nBytesRead = 0;
-		byte[] abData = new byte[EXTERNAL_BUFFER_SIZE];
+		final byte[] abData = new byte[SoundThread.EXTERNAL_BUFFER_SIZE];
 		System.out.println(">>>Reading the sound data!");
 		while (nBytesRead != -1) {
 			try {
 				nBytesRead = audiostream.read(abData, 0, abData.length);
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				System.out.println("excep");
 				e.printStackTrace();
 			}
 			if (nBytesRead >= 0) {
-				int nBytesWritten = linha.write(abData, 0, nBytesRead);
+				final int nBytesWritten = linha.write(abData, 0, nBytesRead);
 				// System.out.println(nBytesRead);
 			}
 		}
@@ -79,56 +89,65 @@ public class SoundThread implements Runnable {
 		try {
 			switch (soundType) {
 			case SoundThread.WAVE:
-				audiostream = new Oscilador(this.waveFrequency1*2, this.waveFrequency2*2, waveAmplitude, length, waveFormat, 1);
+				audiostream = new Oscilador(waveFrequency1 * 2, waveFrequency2 * 2, waveAmplitude, length, waveFormat,
+						1);
 				break;
 			case SoundThread.PULSE:
-				//audiostream = new Oscilador(this.waveFrequency1*2, this.waveFrequency2*2, waveAmplitude, length, waveFormatUltra, 3);
-				audiostream = new Oscilador(this.waveFrequency1*2, this.waveFrequency2*2, waveAmplitude, length, waveFormat, 3);
+				// audiostream = new Oscilador(this.waveFrequency1*2,
+				// this.waveFrequency2*2, waveAmplitude, length,
+				// waveFormatUltra, 3);
+				audiostream = new Oscilador(waveFrequency1 * 2, waveFrequency2 * 2, waveAmplitude, length, waveFormat,
+						3);
 				break;
 			case SoundThread.PINK_NOISE:
-				//audiostream = new Oscilador(this.waveFrequency1, this.waveFrequency2, waveAmplitude, length, waveFormatUltra, 2);
-				audiostream = new Oscilador(this.waveFrequency1*2, this.waveFrequency2*2, waveAmplitude, length, waveFormat, 2);
+				// audiostream = new Oscilador(this.waveFrequency1,
+				// this.waveFrequency2, waveAmplitude, length, waveFormatUltra,
+				// 2);
+				audiostream = new Oscilador(waveFrequency1 * 2, waveFrequency2 * 2, waveAmplitude, length, waveFormat,
+						2);
 				break;
-			case -1 :
+			case -1:
 				System.out.println("NOT DEFINED");
 			}
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
 
-		DataLine.Info informacao = new DataLine.Info(SourceDataLine.class, waveFormat);
+		final DataLine.Info informacao = new DataLine.Info(SourceDataLine.class, waveFormat);
 
 		try {
 			linha = (SourceDataLine) AudioSystem.getLine(informacao);
-			//if (soundType == SoundThread.WAVE)
-				linha.open(waveFormat);
-			//else
-			//	linha.open(waveFormatUltra);
-		} catch (LineUnavailableException e) {
+			// if (soundType == SoundThread.WAVE)
+			linha.open(waveFormat);
+			// else
+			// linha.open(waveFormatUltra);
+		} catch (final LineUnavailableException e) {
 			e.printStackTrace();
 			System.exit(1);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
 	}// newLine
 
-	public void configure(float waveFrequency1, float waveFrequency2, float waveDuration, int wait) {
+	public void configure(final float waveFrequency1, final float waveFrequency2, final float waveDuration,
+			final int wait) {
 		this.waveFrequency1 = waveFrequency1;
 		this.waveFrequency2 = waveFrequency2;
 		this.waveDuration = waveDuration;
 		this.wait = wait;
 
-		if (waveFrequency2 == 0.0f)
-			this.length = Math.round(waveSampleRate * this.waveDuration); // length
-		else
-			this.length = Math.round(waveSampleRate * this.waveDuration);
+		if (waveFrequency2 == 0.0f) {
+			length = Math.round(waveSampleRate * this.waveDuration); // length
+		} else {
+			length = Math.round(waveSampleRate * this.waveDuration);
+		}
 	}
 
 	/**
-	 *Emergency stop playing (don't know if it works)
+	 * Emergency stop playing (don't know if it works)
 	 */
 	public synchronized void stopWave() {
 		linha.drain();
@@ -136,9 +155,9 @@ public class SoundThread implements Runnable {
 	}
 
 	/**
-	 *Setters and getters
+	 * Setters and getters
 	 */
-	public void setFrequency1(float waveFrequency1) {
+	public void setFrequency1(final float waveFrequency1) {
 		this.waveFrequency1 = waveFrequency1;
 	}
 
@@ -146,7 +165,7 @@ public class SoundThread implements Runnable {
 		return waveFrequency1;
 	}
 
-	public void setFrequency2(float waveFrequency2) {
+	public void setFrequency2(final float waveFrequency2) {
 		this.waveFrequency2 = waveFrequency2;
 	}
 
@@ -154,7 +173,7 @@ public class SoundThread implements Runnable {
 		return waveFrequency2;
 	}
 
-	public void setAmplitude(float waveAmplitude) {
+	public void setAmplitude(final float waveAmplitude) {
 		this.waveAmplitude = waveAmplitude;
 	}
 
@@ -162,7 +181,7 @@ public class SoundThread implements Runnable {
 		return waveAmplitude;
 	}
 
-	public void setDuration(float waveDuration) {
+	public void setDuration(final float waveDuration) {
 		this.waveDuration = waveDuration;
 	}
 
@@ -170,10 +189,11 @@ public class SoundThread implements Runnable {
 		return waveDuration;
 	}
 
+	@Override
 	public void finalize() throws Throwable {
 		try {
 			super.finalize();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw e.fillInStackTrace();
 		}
 	}// finalize

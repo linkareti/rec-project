@@ -36,13 +36,14 @@ public class TelescopioDriver extends BaseDriver {
 	public TelescopioDriver() {
 	}
 
-	public void config(HardwareAcquisitionConfig config, HardwareInfo info) throws IncorrectStateException,
+	@Override
+	public void config(final HardwareAcquisitionConfig config, final HardwareInfo info) throws IncorrectStateException,
 			WrongConfigurationException {
 		fireIDriverStateListenerDriverConfiguring();
 		info.validateConfig(config);
 		try {
 			configure(config, info);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			throw new WrongConfigurationException("Erro no config...", 20);
 		}
@@ -51,7 +52,9 @@ public class TelescopioDriver extends BaseDriver {
 	private int expo = 0;
 	private String command = "";
 
-	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException {
+	@Override
+	public void configure(final HardwareAcquisitionConfig config, final HardwareInfo info)
+			throws WrongConfigurationException {
 		if (dataSource != null) {
 			dataSource = null;
 		}
@@ -65,7 +68,7 @@ public class TelescopioDriver extends BaseDriver {
 
 		command = config.getSelectedHardwareParameter("Comando").getParameterValue().trim();
 
-		int nSamples = 1;
+		final int nSamples = 1;
 
 		config.setTotalSamples(nSamples);
 
@@ -77,16 +80,19 @@ public class TelescopioDriver extends BaseDriver {
 		fireIDriverStateListenerDriverConfigured();
 	}
 
-	public void extraValidateConfig(HardwareAcquisitionConfig config, HardwareInfo info)
+	@Override
+	public void extraValidateConfig(final HardwareAcquisitionConfig config, final HardwareInfo info)
 			throws WrongConfigurationException {
 		/** not going to use */
 	}
 
+	@Override
 	public String getDriverUniqueID() {
-		return DRIVER_UNIQUE_ID;
+		return TelescopioDriver.DRIVER_UNIQUE_ID;
 	}
 
-	public void init(HardwareInfo info) {
+	@Override
+	public void init(final HardwareInfo info) {
 		/*
 		 * SQLConnector sqlc = new SQLConnector(SQLConnector.MYSQL); conn =
 		 * sqlc.connect("192.168.0.111/meteo", "root", "");
@@ -94,10 +100,12 @@ public class TelescopioDriver extends BaseDriver {
 		fireIDriverStateListenerDriverInited();
 	}
 
-	public void reset(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public void reset(final HardwareInfo info) throws IncorrectStateException {
 		/** Reset in not supported in webrobot */
 	}
 
+	@Override
 	public void shutdown() {
 		if (dataSource != null) {
 			dataSource.shutdown();
@@ -105,7 +113,8 @@ public class TelescopioDriver extends BaseDriver {
 		super.shutDownNow();
 	}
 
-	public IDataSource start(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public IDataSource start(final HardwareInfo info) throws IncorrectStateException {
 		if (dataSource != null) {
 			fireIDriverStateListenerDriverStarting();
 			dataSource.start(command, "" + expo);
@@ -116,36 +125,41 @@ public class TelescopioDriver extends BaseDriver {
 		}
 	}
 
-	public IDataSource startOutput(HardwareInfo info, IDataSource source) throws IncorrectStateException {
+	@Override
+	public IDataSource startOutput(final HardwareInfo info, final IDataSource source) throws IncorrectStateException {
 		/** Don't know what is startOutput... */
 		return null;
 	}
 
-	public void stop(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public void stop(final HardwareInfo info) throws IncorrectStateException {
 
 	}
 
+	@Override
 	public Object getHardwareInfo() {
 		fireIDriverStateListenerDriverReseting();
 
-		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+				+ "/HardwareInfo.xml";
 		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
-		if (prop.indexOf("://") == -1)
+		if (prop.indexOf("://") == -1) {
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
+		}
 
 		java.net.URL url = null;
 		try {
 			url = new java.net.URL(prop);
 			fireIDriverStateListenerDriverReseted();
-		} catch (java.net.MalformedURLException e) {
+		} catch (final java.net.MalformedURLException e) {
 			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger("Telescopio"));
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
 				fireIDriverStateListenerDriverReseted();
-			} catch (java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2, Logger
-						.getLogger("Telescopio"));
+			} catch (final java.net.MalformedURLException e2) {
+				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
+						Logger.getLogger("Telescopio"));
 			}
 		}
 

@@ -13,6 +13,7 @@ import java.net.URL;
 import javax.jnlp.BasicService;
 import javax.jnlp.ServiceManager;
 import javax.jnlp.UnavailableServiceException;
+import javax.swing.Action;
 
 /**
  * 
@@ -20,24 +21,28 @@ import javax.jnlp.UnavailableServiceException;
  */
 public class OpenURLAction extends javax.swing.AbstractAction {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6874035185430577183L;
 	private BasicService bs = null;
 	private URL url = null;
 
 	/** Creates a new instance of OpenURLAction */
 	public OpenURLAction(final String strName, final String strURLResource) {
-		this.putValue(OpenURLAction.NAME, strName);
+		putValue(Action.NAME, strName);
 
 		try {
 			url = new URL(strURLResource);
-		} catch (MalformedURLException e) {
-			this.setEnabled(false);
+		} catch (final MalformedURLException e) {
+			setEnabled(false);
 			e.printStackTrace();
 			return;
 		}
 
 		try {
 			bs = (BasicService) ServiceManager.lookup("javax.jnlp.BasicService");
-		} catch (UnavailableServiceException e) {
+		} catch (final UnavailableServiceException e) {
 			e.printStackTrace();
 		}
 	}
@@ -45,9 +50,11 @@ public class OpenURLAction extends javax.swing.AbstractAction {
 	/**
 	 * Invoked when an action occurs.
 	 */
-	public void actionPerformed(ActionEvent evt) {
-		if (bs == null || url == null)
+	@Override
+	public void actionPerformed(final ActionEvent evt) {
+		if (bs == null || url == null) {
 			return;
+		}
 
 		if (!bs.isOffline()) {
 			// if(bs.showDocument(url))

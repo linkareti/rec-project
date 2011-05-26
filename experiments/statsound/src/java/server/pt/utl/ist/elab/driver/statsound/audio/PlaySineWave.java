@@ -6,12 +6,15 @@
 
 package pt.utl.ist.elab.driver.statsound.audio;
 
-
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
 public class PlaySineWave extends javax.swing.JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2736314751916973649L;
 	SoundRecorder sr = null;
 	Process proc = null;
 
@@ -34,7 +37,7 @@ public class PlaySineWave extends javax.swing.JFrame {
 
 			// soundProducer = new SoundProducer();
 
-		} catch (Exception ioe) {
+		} catch (final Exception ioe) {
 			System.out.println("Could not start Sound Producer!");
 			ioe.printStackTrace();
 		}
@@ -58,14 +61,16 @@ public class PlaySineWave extends javax.swing.JFrame {
 		updateFreq = new javax.swing.JButton();
 
 		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent evt) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent evt) {
 				exitForm(evt);
 			}
 		});
 
 		startPlay.setText("Start Playing");
 		startPlay.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				startPlayActionPerformed(evt);
 			}
 		});
@@ -74,7 +79,8 @@ public class PlaySineWave extends javax.swing.JFrame {
 
 		startCapture.setText("Start Capturing");
 		startCapture.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				startCaptureActionPerformed(evt);
 			}
 		});
@@ -83,7 +89,8 @@ public class PlaySineWave extends javax.swing.JFrame {
 
 		stopPlay.setText("Stop Playing");
 		stopPlay.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				stopPlayActionPerformed(evt);
 			}
 		});
@@ -92,7 +99,8 @@ public class PlaySineWave extends javax.swing.JFrame {
 
 		stopCapture.setText("Stop Capturing");
 		stopCapture.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				stopCaptureActionPerformed(evt);
 			}
 		});
@@ -105,7 +113,8 @@ public class PlaySineWave extends javax.swing.JFrame {
 
 		updateFreq.setText("Update Freq");
 		updateFreq.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				updateFreqActionPerformed(evt);
 			}
 		});
@@ -117,56 +126,56 @@ public class PlaySineWave extends javax.swing.JFrame {
 		pack();
 	}// GEN-END:initComponents
 
-	private void updateFreqActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_updateFreqActionPerformed
+	private void updateFreqActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_updateFreqActionPerformed
 		try {
 			synchronized (this) {
-				java.io.File file = new java.io.File("/home/elab/java/configFiles/freq");
-				java.io.FileWriter fw = new java.io.FileWriter(file);
+				final java.io.File file = new java.io.File("/home/elab/java/configFiles/freq");
+				final java.io.FileWriter fw = new java.io.FileWriter(file);
 				fw.write(jTextField1.getText().trim());
 				fw.close();
 			}
-		} catch (Exception ioe) {
+		} catch (final Exception ioe) {
 		}
 	}// GEN-LAST:event_updateFreqActionPerformed
 
-	private void stopCaptureActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_stopCaptureActionPerformed
+	private void stopCaptureActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_stopCaptureActionPerformed
 		sr.stopAcquiring();
 		sr = null;
 
 	}// GEN-LAST:event_stopCaptureActionPerformed
 
-	private void stopPlayActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_stopPlayActionPerformed
+	private void stopPlayActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_stopPlayActionPerformed
 		synchronized (this) {
 			try {
-				java.io.File file = new java.io.File("/home/elab/java/configFiles/stop");
-				java.io.FileWriter fw = new java.io.FileWriter(file);
+				final java.io.File file = new java.io.File("/home/elab/java/configFiles/stop");
+				final java.io.FileWriter fw = new java.io.FileWriter(file);
 				fw.write("0");
 				fw.close();
-			} catch (Exception e) {
+			} catch (final Exception e) {
 			}
 		}
 	}// GEN-LAST:event_stopPlayActionPerformed
 
-	private void startCaptureActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_startCaptureActionPerformed
+	private void startCaptureActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_startCaptureActionPerformed
 	{// GEN-HEADEREND:event_startCaptureActionPerformed
 		sr.startAcquiring(false);
 	}// GEN-LAST:event_startCaptureActionPerformed
 
-	private void startPlayActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_startPlayActionPerformed
+	private void startPlayActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_startPlayActionPerformed
 	{// GEN-HEADEREND:event_startPlayActionPerformed
 		try {
 			synchronized (this) {
-				java.io.File file = new java.io.File("/home/elab/java/configFiles/startFreq");
-				java.io.FileWriter fw = new java.io.FileWriter(file);
+				final java.io.File file = new java.io.File("/home/elab/java/configFiles/startFreq");
+				final java.io.FileWriter fw = new java.io.FileWriter(file);
 				fw.write(jTextField1.getText().trim());
 				fw.close();
 			}
-		} catch (Exception ioe) {
+		} catch (final Exception ioe) {
 		}
 	}// GEN-LAST:event_startPlayActionPerformed
 
 	/** Exit the Application */
-	private void exitForm(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_exitForm
+	private void exitForm(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_exitForm
 
 		System.exit(0);
 	}// GEN-LAST:event_exitForm
@@ -174,7 +183,7 @@ public class PlaySineWave extends javax.swing.JFrame {
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 		new PlaySineWave().show();
 	}
 

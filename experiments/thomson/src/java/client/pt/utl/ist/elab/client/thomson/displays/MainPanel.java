@@ -16,12 +16,18 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
 
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class MainPanel extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5037766913324990072L;
 
 	/** Creates new form mainPanel */
 	public MainPanel() {
@@ -53,7 +59,7 @@ public class MainPanel extends javax.swing.JPanel implements com.linkare.rec.imp
 		jTextFieldTI.setBackground(new java.awt.Color(204, 255, 204));
 		jTextFieldTI.setColumns(8);
 		jTextFieldTI.setEditable(false);
-		jTextFieldTI.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		jTextFieldTI.setHorizontalAlignment(SwingConstants.RIGHT);
 		jTextFieldTI.setText("(mA)");
 		jTextFieldTI.setPreferredSize(new java.awt.Dimension(92, 21));
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -68,7 +74,7 @@ public class MainPanel extends javax.swing.JPanel implements com.linkare.rec.imp
 		jTextFieldTDefleccao.setBackground(new java.awt.Color(204, 255, 204));
 		jTextFieldTDefleccao.setColumns(8);
 		jTextFieldTDefleccao.setEditable(false);
-		jTextFieldTDefleccao.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		jTextFieldTDefleccao.setHorizontalAlignment(SwingConstants.RIGHT);
 		jTextFieldTDefleccao.setText("(V)");
 		jTextFieldTDefleccao.setPreferredSize(new java.awt.Dimension(92, 21));
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -83,7 +89,7 @@ public class MainPanel extends javax.swing.JPanel implements com.linkare.rec.imp
 		jTextFieldTAceleracao.setBackground(new java.awt.Color(204, 255, 204));
 		jTextFieldTAceleracao.setColumns(8);
 		jTextFieldTAceleracao.setEditable(false);
-		jTextFieldTAceleracao.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		jTextFieldTAceleracao.setHorizontalAlignment(SwingConstants.RIGHT);
 		jTextFieldTAceleracao.setText("(V)");
 		jTextFieldTAceleracao.setPreferredSize(new java.awt.Dimension(92, 21));
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -100,9 +106,9 @@ public class MainPanel extends javax.swing.JPanel implements com.linkare.rec.imp
 
 	}// GEN-END:initComponents
 
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 
-		javax.swing.JFrame dummy = new javax.swing.JFrame();
+		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new MainPanel(), java.awt.BorderLayout.CENTER);
 		dummy.pack();
 		dummy.show();
@@ -110,110 +116,134 @@ public class MainPanel extends javax.swing.JPanel implements com.linkare.rec.imp
 	}
 
 	public class ImageBorder implements Border {
-		private Image image;
+		private final Image image;
 
 		/** Creates a new instance of ImageBorder */
-		public ImageBorder(Image image, boolean fill) {
+		public ImageBorder(final Image image, final boolean fill) {
 			this.image = image;
 			this.fill = fill;
 		}
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+		@Override
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int width,
+				final int height) {
 			if (image == null) {
 				return;
 			}
 			if (!fill) {
-				int x0 = x + (width - image.getWidth(null)) / 2;
-				int y0 = y + (height - image.getHeight(null)) / 2;
+				final int x0 = x + (width - image.getWidth(null)) / 2;
+				final int y0 = y + (height - image.getHeight(null)) / 2;
 				g.drawImage(image, x0, y0, null);
 			} else {
 				g.drawImage(image, 0, 0, width, height, null);
 			}
 		}
 
-		public Insets getBorderInsets(Component c) {
+		@Override
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(0, 0, 0, 0);
 		}
 
+		@Override
 		public boolean isBorderOpaque() {
 			return true;
 		}
 
 		private boolean fill = true;
 
-		public void setFill(boolean fill) {
+		public void setFill(final boolean fill) {
 			this.fill = fill;
 		}
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
 	private String signI = "";
 
+	@Override
 	public void dataModelStarted() {
-		double i = Double
-				.parseDouble(model.getAcquisitionConfig().getSelectedHardwareParameterValue("correntebobines"));
+		final double i = Double.parseDouble(model.getAcquisitionConfig().getSelectedHardwareParameterValue(
+				"correntebobines"));
 
-		if (i < 0)
+		if (i < 0) {
 			signI = "-";
+		}
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/thomson/resources/thomson_iconified.png"));
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
 
-	public void newSamples(com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
-		if (model == null)
+	@Override
+	public void newSamples(final com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
+		if (model == null) {
 			return;
+		}
 
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
-			if (model.getValueAt(i, 0) != null)
+			if (model.getValueAt(i, 0) != null) {
 				jTextFieldTI.setText(signI + model.getValueAt(i, 0).getValue().getIntValue() + " (mA)");
-			if (model.getValueAt(i, 1) != null)
+			}
+			if (model.getValueAt(i, 1) != null) {
 				jTextFieldTAceleracao.setText(model.getValueAt(i, 1).getValue().getIntValue() + " (V)");
-			if (model.getValueAt(i, 2) != null)
+			}
+			if (model.getValueAt(i, 2) != null) {
 				jTextFieldTDefleccao.setText(model.getValueAt(i, 2).getValue().getIntValue() + " (V)");
+			}
 		}
 	}
 
 	private com.linkare.rec.impl.client.experiment.ExpDataModel model = null;
 
-	public void setExpDataModel(com.linkare.rec.impl.client.experiment.ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final com.linkare.rec.impl.client.experiment.ExpDataModel model) {
+		if (this.model != null) {
 			model.removeExpDataModelListener(this);
+		}
 
 		this.model = model;
 
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 	}
 
+	@Override
 	public String getName() {
 		return ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.thomson.title.sensor", "Sensors");
 	}

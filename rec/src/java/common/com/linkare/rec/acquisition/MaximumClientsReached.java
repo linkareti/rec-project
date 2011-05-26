@@ -8,22 +8,27 @@ package com.linkare.rec.acquisition;
  */
 
 public final class MaximumClientsReached extends org.omg.CORBA.UserException {
-	public int errorCode = (int) 0;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3473693917796424603L;
+
+	public int errorCode = 0;
 
 	// Version 7.0 change
-	public int maximumClients = (int) 0;
+	public int maximumClients = 0;
 
 	public MaximumClientsReached() {
 		super(MaximumClientsReachedHelper.id());
 	} // ctor
 
-	public MaximumClientsReached(int _errorCode, int _maximumClients) {
+	public MaximumClientsReached(final int _errorCode, final int _maximumClients) {
 		super(MaximumClientsReachedHelper.id());
 		errorCode = _errorCode;
 		maximumClients = _maximumClients;
 	} // ctor
 
-	public MaximumClientsReached(String $reason, int _errorCode, int _maximumClients) {
+	public MaximumClientsReached(final String $reason, final int _errorCode, final int _maximumClients) {
 		super(MaximumClientsReachedHelper.id() + "  " + $reason);
 		errorCode = _errorCode;
 		maximumClients = _maximumClients;

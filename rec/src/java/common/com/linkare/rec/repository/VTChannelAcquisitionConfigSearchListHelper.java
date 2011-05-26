@@ -19,75 +19,83 @@ public final class VTChannelAcquisitionConfigSearchListHelper implements BoxedVa
 	public VTChannelAcquisitionConfigSearchListHelper() {
 	}
 
-	public static void insert(Any a, ChannelAcquisitionConfigSearch[] that) {
-		org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
-		a.type(type());
-		write(out, that);
-		a.read_value(out.create_input_stream(), type());
+	public static void insert(final Any a, final ChannelAcquisitionConfigSearch[] that) {
+		final org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
+		a.type(VTChannelAcquisitionConfigSearchListHelper.type());
+		VTChannelAcquisitionConfigSearchListHelper.write(out, that);
+		a.read_value(out.create_input_stream(), VTChannelAcquisitionConfigSearchListHelper.type());
 	}
 
-	public static ChannelAcquisitionConfigSearch[] extract(Any a) {
-		return read(a.create_input_stream());
+	public static ChannelAcquisitionConfigSearch[] extract(final Any a) {
+		return VTChannelAcquisitionConfigSearchListHelper.read(a.create_input_stream());
 	}
 
 	private static TypeCode __typeCode = null;
 	private static boolean __active = false;
 
 	public static synchronized TypeCode type() {
-		if (__typeCode == null) {
+		if (VTChannelAcquisitionConfigSearchListHelper.__typeCode == null) {
 			synchronized (TypeCode.class) {
-				if (__typeCode == null) {
-					if (__active) {
-						return ORB.init().create_recursive_tc(_id);
+				if (VTChannelAcquisitionConfigSearchListHelper.__typeCode == null) {
+					if (VTChannelAcquisitionConfigSearchListHelper.__active) {
+						return ORB.init().create_recursive_tc(VTChannelAcquisitionConfigSearchListHelper._id);
 					}
-					__active = true;
-					__typeCode = ChannelAcquisitionConfigSearchHelper.type();
-					__typeCode = ORB.init().create_sequence_tc(0, __typeCode);
-					__typeCode = ORB.init().create_alias_tc(ChannelAcquisitionConfigSearchListHelper.id(),
-							"ChannelAcquisitionConfigSearchList", __typeCode);
-					__typeCode = ORB.init()
-							.create_value_box_tc(_id, "VTChannelAcquisitionConfigSearchList", __typeCode);
-					__active = false;
+					VTChannelAcquisitionConfigSearchListHelper.__active = true;
+					VTChannelAcquisitionConfigSearchListHelper.__typeCode = ChannelAcquisitionConfigSearchHelper.type();
+					VTChannelAcquisitionConfigSearchListHelper.__typeCode = ORB.init().create_sequence_tc(0,
+							VTChannelAcquisitionConfigSearchListHelper.__typeCode);
+					VTChannelAcquisitionConfigSearchListHelper.__typeCode = ORB.init().create_alias_tc(
+							ChannelAcquisitionConfigSearchListHelper.id(), "ChannelAcquisitionConfigSearchList",
+							VTChannelAcquisitionConfigSearchListHelper.__typeCode);
+					VTChannelAcquisitionConfigSearchListHelper.__typeCode = ORB.init().create_value_box_tc(
+							VTChannelAcquisitionConfigSearchListHelper._id, "VTChannelAcquisitionConfigSearchList",
+							VTChannelAcquisitionConfigSearchListHelper.__typeCode);
+					VTChannelAcquisitionConfigSearchListHelper.__active = false;
 				}
 			}
 		}
-		return __typeCode;
+		return VTChannelAcquisitionConfigSearchListHelper.__typeCode;
 	}
 
 	public static String id() {
-		return _id;
+		return VTChannelAcquisitionConfigSearchListHelper._id;
 	}
 
-	public static ChannelAcquisitionConfigSearch[] read(org.omg.CORBA.portable.InputStream istream) {
+	public static ChannelAcquisitionConfigSearch[] read(final org.omg.CORBA.portable.InputStream istream) {
 		if (!(istream instanceof InputStream)) {
 			throw new BAD_PARAM();
 		}
-		return (ChannelAcquisitionConfigSearch[]) ((InputStream) istream).read_value(_instance);
+		return (ChannelAcquisitionConfigSearch[]) ((InputStream) istream)
+				.read_value(VTChannelAcquisitionConfigSearchListHelper._instance);
 	}
 
-	public Serializable read_value(org.omg.CORBA.portable.InputStream istream) {
+	@Override
+	public Serializable read_value(final org.omg.CORBA.portable.InputStream istream) {
 		ChannelAcquisitionConfigSearch[] tmp;
 		tmp = ChannelAcquisitionConfigSearchListHelper.read(istream);
-		return (Serializable) tmp;
+		return tmp;
 	}
 
-	public static void write(org.omg.CORBA.portable.OutputStream ostream, ChannelAcquisitionConfigSearch[] value) {
+	public static void write(final org.omg.CORBA.portable.OutputStream ostream,
+			final ChannelAcquisitionConfigSearch[] value) {
 		if (!(ostream instanceof OutputStream)) {
 			throw new BAD_PARAM();
 		}
-		((OutputStream) ostream).write_value(value, _instance);
+		((OutputStream) ostream).write_value(value, VTChannelAcquisitionConfigSearchListHelper._instance);
 	}
 
-	public void write_value(org.omg.CORBA.portable.OutputStream ostream, Serializable value) {
+	@Override
+	public void write_value(final org.omg.CORBA.portable.OutputStream ostream, final Serializable value) {
 		if (!(value instanceof ChannelAcquisitionConfigSearch[])) {
 			throw new MARSHAL();
 		}
-		ChannelAcquisitionConfigSearch[] valueType = (ChannelAcquisitionConfigSearch[]) value;
+		final ChannelAcquisitionConfigSearch[] valueType = (ChannelAcquisitionConfigSearch[]) value;
 		ChannelAcquisitionConfigSearchListHelper.write(ostream, valueType);
 	}
 
+	@Override
 	public String get_id() {
-		return _id;
+		return VTChannelAcquisitionConfigSearchListHelper._id;
 	}
 
 }

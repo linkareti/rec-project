@@ -13,7 +13,6 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import com.linkare.rec.impl.logging.LoggerUtil;
-import com.linkare.rec.impl.multicast.ClientQueue;
 import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
 
 /**
@@ -29,34 +28,37 @@ public class CompositeSecurityManager implements ISecurityManager {
 	public static final String MCCONTROLLER_SECURITYMANAGER_LOGGER = "ReC.MultiCast.SecurityManager.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(
+				CompositeSecurityManager.MCCONTROLLER_SECURITYMANAGER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER));
+			LogManager.getLogManager().addLogger(
+					Logger.getLogger(CompositeSecurityManager.MCCONTROLLER_SECURITYMANAGER_LOGGER));
 		}
 	}
 
 	private void loadSecurityManagers() {
 		securityManagers = new ArrayList<ISecurityManager>();
-		String secManagersClassName = System.getProperty(SYSPROP_SECURITY_MANAGERS_CLASS_LIST);
+		final String secManagersClassName = System
+				.getProperty(CompositeSecurityManager.SYSPROP_SECURITY_MANAGERS_CLASS_LIST);
 		if (secManagersClassName == null || secManagersClassName.trim().length() == 0) {
-			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
+			Logger.getLogger(CompositeSecurityManager.MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
 					"SecurityManager System Property not found... Loading DefaultSecurityManager!");
 			return;
 		}
-		String[] classNames = secManagersClassName.split(",");
-		for (String className : classNames) {
+		final String[] classNames = secManagersClassName.split(",");
+		for (final String className : classNames) {
 			try {
 				securityManagers.add((ISecurityManager) Class.forName(className).newInstance());
-			} catch (Exception e) {
-				Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
+			} catch (final Exception e) {
+				Logger.getLogger(CompositeSecurityManager.MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
 						"Unable to load SecurityManager defined at system : " + className + " - ignoring!");
-				LoggerUtil.logThrowable("Error loading specified SecurityManager", e, Logger
-						.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER));
-			} catch (LinkageError e) {
-				Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
+				LoggerUtil.logThrowable("Error loading specified SecurityManager", e,
+						Logger.getLogger(CompositeSecurityManager.MCCONTROLLER_SECURITYMANAGER_LOGGER));
+			} catch (final LinkageError e) {
+				Logger.getLogger(CompositeSecurityManager.MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
 						"Unable to load SecurityManager defined at system : " + className + "!");
-				LoggerUtil.logThrowable("Error loading specified SecurityManager", e, Logger
-						.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER));
+				LoggerUtil.logThrowable("Error loading specified SecurityManager", e,
+						Logger.getLogger(CompositeSecurityManager.MCCONTROLLER_SECURITYMANAGER_LOGGER));
 			}
 		}
 	}
@@ -72,10 +74,10 @@ public class CompositeSecurityManager implements ISecurityManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean authenticate(IResource resource, IUser user) {
+	public boolean authenticate(final IResource resource, final IUser user) {
 		boolean retVal = true;
 		if (securityManagers != null) {
-			for (ISecurityManager secManager : securityManagers) {
+			for (final ISecurityManager secManager : securityManagers) {
 				retVal = retVal && secManager.authenticate(resource, user);
 				if (!retVal) {
 					break;
@@ -89,10 +91,10 @@ public class CompositeSecurityManager implements ISecurityManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean authorize(IResource resource, IUser user, IOperation op) {
+	public boolean authorize(final IResource resource, final IUser user, final IOperation op) {
 		boolean retVal = true;
 		if (securityManagers != null) {
-			for (ISecurityManager secManager : securityManagers) {
+			for (final ISecurityManager secManager : securityManagers) {
 				retVal = retVal && secManager.authorize(resource, user, op);
 				if (!retVal) {
 					break;
@@ -106,9 +108,9 @@ public class CompositeSecurityManager implements ISecurityManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void registerMultiCastHardware(List<ReCMultiCastHardware> multiCastHardwares) {
+	public void registerMultiCastHardware(final List<ReCMultiCastHardware> multiCastHardwares) {
 		if (securityManagers != null) {
-			for (ISecurityManager secManager : securityManagers) {
+			for (final ISecurityManager secManager : securityManagers) {
 				secManager.registerMultiCastHardware(multiCastHardwares);
 			}
 		}
@@ -118,9 +120,9 @@ public class CompositeSecurityManager implements ISecurityManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void registerSecurityCommunicator(ISecurityCommunicator communicator) {
+	public void registerSecurityCommunicator(final ISecurityCommunicator communicator) {
 		if (securityManagers != null) {
-			for (ISecurityManager secManager : securityManagers) {
+			for (final ISecurityManager secManager : securityManagers) {
 				secManager.registerSecurityCommunicator(communicator);
 			}
 		}

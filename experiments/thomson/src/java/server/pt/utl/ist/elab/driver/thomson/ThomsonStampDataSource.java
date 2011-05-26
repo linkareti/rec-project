@@ -27,35 +27,39 @@ public class ThomsonStampDataSource extends AbstractStampDataSource {
 
 	private final int NUM_CHANNELS = 5;
 
-	public void processDataCommand(StampCommand cmd) {
-		if (stopped)
+	@Override
+	public void processDataCommand(final StampCommand cmd) {
+		if (stopped) {
 			return;
+		}
 
-		if (stopped || cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null)
+		if (stopped || cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null) {
 			return;
+		}
 
 		if (cmd.getCommandIdentifier().equals(StampThomsonProcessor.COMMAND_IDENTIFIER)) {
 
 			int corrente;
 			int tensaoacel;
 			int tensaodef;
-			PhysicsValue[] values = new PhysicsValue[NUM_CHANNELS];
+			final PhysicsValue[] values = new PhysicsValue[NUM_CHANNELS];
 			try {
 				corrente = ((Integer) cmd.getCommandData(StampThomsonProcessor.CORRENTE)).intValue();
 				tensaoacel = ((Integer) cmd.getCommandData(StampThomsonProcessor.TENSAO)).intValue();
-			} catch (ClassCastException e) {
+			} catch (final ClassCastException e) {
 				e.printStackTrace();
 				return;
 			}
 
-			if (defmag)
+			if (defmag) {
 				tensaodef = 0;
-			else
+			} else {
 				tensaodef = tensaoacel;
+			}
 
-			values[0] = new PhysicsValue(PhysicsValFactory.fromInt(corrente), getAcquisitionHeader().getChannelsConfig(
-					0).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader().getChannelsConfig(0)
-					.getSelectedScale().getMultiplier());
+			values[0] = new PhysicsValue(PhysicsValFactory.fromInt(corrente), getAcquisitionHeader()
+					.getChannelsConfig(0).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
+					.getChannelsConfig(0).getSelectedScale().getMultiplier());
 			values[1] = new PhysicsValue(PhysicsValFactory.fromInt(tensaoacel), getAcquisitionHeader()
 					.getChannelsConfig(1).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
 					.getChannelsConfig(1).getSelectedScale().getMultiplier());
@@ -66,62 +70,65 @@ public class ThomsonStampDataSource extends AbstractStampDataSource {
 		}
 	}
 
-	public void sendImages(java.awt.Image[] images) {
+	public void sendImages(final java.awt.Image[] images) {
 		if (video) {
 			// The last video frame is sent in the same sample of the image
 			for (int i = 0; i < images.length - 1; i++) {
-				PhysicsValue[] values = new PhysicsValue[NUM_CHANNELS];
-				byte[] dataImage = image2ByteArray(images[i]);
-				PhysicsVal val = PhysicsValFactory.fromByteArray(dataImage, "image/jpeg");
+				final PhysicsValue[] values = new PhysicsValue[NUM_CHANNELS];
+				final byte[] dataImage = image2ByteArray(images[i]);
+				final PhysicsVal val = PhysicsValFactory.fromByteArray(dataImage, "image/jpeg");
 				values[4] = new PhysicsValue(val, null, com.linkare.rec.data.Multiplier.none);
 				super.addDataRow(values);
 			}
 		}
 
-		PhysicsValue[] values = new PhysicsValue[NUM_CHANNELS];
-		byte[] dataImage = image2ByteArray(images[images.length - 1]);
-		PhysicsVal val = PhysicsValFactory.fromByteArray(dataImage, "image/jpeg");
+		final PhysicsValue[] values = new PhysicsValue[NUM_CHANNELS];
+		final byte[] dataImage = image2ByteArray(images[images.length - 1]);
+		final PhysicsVal val = PhysicsValFactory.fromByteArray(dataImage, "image/jpeg");
 		values[3] = new PhysicsValue(val, null, com.linkare.rec.data.Multiplier.none);
-		if (video)
+		if (video) {
 			values[4] = new PhysicsValue(val, null, com.linkare.rec.data.Multiplier.none);
+		}
 
 		super.addDataRow(values);
 
 		try {
-			Thread.currentThread().sleep(1500);
-		} catch (InterruptedException ie) {
+			Thread.currentThread();
+			Thread.sleep(1500);
+		} catch (final InterruptedException ie) {
 			ie.printStackTrace();
 		}
 
 		setDataSourceEnded();
 	}
 
-	public byte[] image2ByteArray(java.awt.Image image) {
-		java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
-		javax.imageio.stream.MemoryCacheImageOutputStream mcios = new javax.imageio.stream.MemoryCacheImageOutputStream(
+	public byte[] image2ByteArray(final java.awt.Image image) {
+		final java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+		final javax.imageio.stream.MemoryCacheImageOutputStream mcios = new javax.imageio.stream.MemoryCacheImageOutputStream(
 				baos);
-		if (image == null)
+		if (image == null) {
 			return null;
-		int imageWidth = image.getWidth(null), imageHeight = image.getHeight(null);
-		java.awt.image.BufferedImage bImage = new java.awt.image.BufferedImage(imageWidth, imageHeight,
+		}
+		final int imageWidth = image.getWidth(null), imageHeight = image.getHeight(null);
+		final java.awt.image.BufferedImage bImage = new java.awt.image.BufferedImage(imageWidth, imageHeight,
 				java.awt.image.BufferedImage.TYPE_INT_RGB);
-		java.awt.Graphics2D g2d = bImage.createGraphics();
+		final java.awt.Graphics2D g2d = bImage.createGraphics();
 		while (!g2d.drawImage(image, 0, 0, imageWidth, imageHeight, null)) {
 		}// wait for the full image to be available
 		try {
 			javax.imageio.ImageIO.write(bImage, "jpg", mcios);
-		} catch (java.io.IOException e) {
+		} catch (final java.io.IOException e) {
 			e.printStackTrace();
-		} catch (com.sun.image.codec.jpeg.ImageFormatException e) {
+		} catch (final com.sun.image.codec.jpeg.ImageFormatException e) {
 			e.printStackTrace();
 		}
 		// create the ByteArrayInputStream and get the Byte[]
-		java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(baos.toByteArray());
-		byte[] byteArray = new byte[bais.available()];
+		final java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(baos.toByteArray());
+		final byte[] byteArray = new byte[bais.available()];
 
 		try {
 			bais.read(byteArray);
-		} catch (java.io.IOException e) {
+		} catch (final java.io.IOException e) {
 			e.printStackTrace();
 		}
 
@@ -131,17 +138,21 @@ public class ThomsonStampDataSource extends AbstractStampDataSource {
 	private boolean defmag = false;
 	private boolean video = false;
 
-	public void setAcquisitionHeader(HardwareAcquisitionConfig config) {
+	@Override
+	public void setAcquisitionHeader(final HardwareAcquisitionConfig config) {
 		super.setAcquisitionHeader(config);
-		if (config.getSelectedHardwareParameterValue("modo").equalsIgnoreCase("defmag"))
+		if (config.getSelectedHardwareParameterValue("modo").equalsIgnoreCase("defmag")) {
 			defmag = true;
-		if (Integer.parseInt(config.getSelectedHardwareParameterValue("video")) == 1)
+		}
+		if (Integer.parseInt(config.getSelectedHardwareParameterValue("video")) == 1) {
 			video = true;
+		}
 
 	}
 
 	private boolean stopped = false;
 
+	@Override
 	public void stopNow() {
 		stopped = true;
 		// TODO CHECK THIS OUT. Stopping the data source while sending images

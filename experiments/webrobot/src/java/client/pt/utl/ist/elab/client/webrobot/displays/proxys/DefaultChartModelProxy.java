@@ -18,16 +18,20 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 public class DefaultChartModelProxy extends org.jfree.data.xy.XYSeriesCollection // implements
 // ExpDataModelListener
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4800050900279161911L;
 	/** Holds value of property expDataModel. */
-	private int numChannels;
-	private int startChannelIndex;
-	private boolean booleanValue;
+	private final int numChannels;
+	private final int startChannelIndex;
+	private final boolean booleanValue;
 	private DateTime firstSampleTime = new DateTime();
 	private ExpDataModel expDataModel = null;
 	private java.util.Vector vectorXY;
 	private HardwareAcquisitionConfig header = null;
 
-	public DefaultChartModelProxy(int startChannelIndex, int numChannels, boolean booleanValue) {
+	public DefaultChartModelProxy(final int startChannelIndex, final int numChannels, final boolean booleanValue) {
 		super();
 		this.startChannelIndex = startChannelIndex;
 		this.numChannels = numChannels;
@@ -45,16 +49,18 @@ public class DefaultChartModelProxy extends org.jfree.data.xy.XYSeriesCollection
 
 	private int lastnewsamples = 0;
 
-	public void newSamples(NewExpDataEvent evt) {
+	public void newSamples(final NewExpDataEvent evt) {
 		lastnewsamples = evt.getSamplesEndIndex();
 		fireDatasetChanged();
 	}
 
-	public int getItemCount(int series) {
+	@Override
+	public int getItemCount(final int series) {
 		return lastnewsamples;
 	}
 
-	public double getXValue(int series, int item) {
+	@Override
+	public double getXValue(final int series, final int item) {
 		if (expDataModel == null || header == null) {
 			return 0;
 		}
@@ -65,7 +71,7 @@ public class DefaultChartModelProxy extends org.jfree.data.xy.XYSeriesCollection
 		if (item == 0) {
 			firstSampleTime = expDataModel.getTimeStamp(item);
 		}
-		double elapsedMilis = (double) (expDataModel.getTimeStamp(item).getMilliSeconds() - firstSampleTime
+		final double elapsedMilis = (double) (expDataModel.getTimeStamp(item).getMilliSeconds() - firstSampleTime
 				.getMilliSeconds()) / 1000;
 		return elapsedMilis;
 	}
@@ -78,7 +84,8 @@ public class DefaultChartModelProxy extends org.jfree.data.xy.XYSeriesCollection
 	 * 
 	 * @return the y-value for the specified series and item.
 	 */
-	public double getYValue(int series, int index) {
+	@Override
+	public double getYValue(int series, final int index) {
 		if (expDataModel == null || header == null) {
 			return 0;
 		}
@@ -97,14 +104,14 @@ public class DefaultChartModelProxy extends org.jfree.data.xy.XYSeriesCollection
 			return 0;
 		}
 		if (!booleanValue) {
-			int value = expDataModel.getValueAt(index, series).getValue().getIntValue();
+			final int value = expDataModel.getValueAt(index, series).getValue().getIntValue();
 			return value;
 		} else {
 			return convertBooleanInt(expDataModel.getValueAt(index, series).getValue().isBooleanValue());
 		}
 	}
 
-	private int convertBooleanInt(boolean toConvert) {
+	private int convertBooleanInt(final boolean toConvert) {
 		if (toConvert) {
 			return 1;
 		} else {
@@ -118,7 +125,7 @@ public class DefaultChartModelProxy extends org.jfree.data.xy.XYSeriesCollection
 	 * @return Value of property expDataModel.
 	 */
 	public ExpDataModel getExpDataModel() {
-		return this.expDataModel;
+		return expDataModel;
 	}
 
 	/**
@@ -126,13 +133,13 @@ public class DefaultChartModelProxy extends org.jfree.data.xy.XYSeriesCollection
 	 * 
 	 * @param expDataModel New value of property expDataModel.
 	 */
-	public void setExpDataModel(ExpDataModel expDataModel) {
+	public void setExpDataModel(final ExpDataModel expDataModel) {
 		vectorXY = new java.util.Vector(0);
 		this.expDataModel = expDataModel;
 		fireDatasetChanged();
 	}
 
-	public void headerAvailable(HardwareAcquisitionConfig header) {
+	public void headerAvailable(final HardwareAcquisitionConfig header) {
 		this.header = header;
 		if (header != null) {
 			for (int i = 0; i < numChannels; i++) {
@@ -144,7 +151,7 @@ public class DefaultChartModelProxy extends org.jfree.data.xy.XYSeriesCollection
 		}
 	}
 
-	public void setSeriesVisible(boolean value, int series) {
+	public void setSeriesVisible(final boolean value, final int series) {
 		if (value) {
 			addSeries((org.jfree.data.xy.XYSeries) vectorXY.elementAt(series));
 		} else {

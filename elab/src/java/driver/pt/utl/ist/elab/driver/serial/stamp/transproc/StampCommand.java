@@ -20,57 +20,60 @@ public class StampCommand implements java.io.Serializable {
 	private boolean isData = false;
 
 	/** Creates a new instance of SerialPortCommand */
-	public StampCommand(String commandIdentifier) {
+	public StampCommand(final String commandIdentifier) {
 		this.commandIdentifier = commandIdentifier;
 	}
 
-	public void setCommand(String command) {
+	public void setCommand(final String command) {
 		this.command = command;
 	}
 
 	public String getCommand() {
-		return this.command;
+		return command;
 	}
 
-	public void setCommandIdentifier(String commandIdentifier) {
+	public void setCommandIdentifier(final String commandIdentifier) {
 		this.commandIdentifier = commandIdentifier;
 	}
 
 	public String getCommandIdentifier() {
-		return this.commandIdentifier;
+		return commandIdentifier;
 	}
 
-	public void addCommandData(Object commandDataKey, Object commandDataObject) {
-		if (this.commandDataMap == null)
-			this.commandDataMap = new HashMap(1);
+	public void addCommandData(final Object commandDataKey, final Object commandDataObject) {
+		if (commandDataMap == null) {
+			commandDataMap = new HashMap(1);
+		}
 
-		if (this.commandDataMap.containsKey(commandDataKey))
-			this.commandDataMap.remove(commandDataKey);
+		if (commandDataMap.containsKey(commandDataKey)) {
+			commandDataMap.remove(commandDataKey);
+		}
 
-		this.commandDataMap.put(commandDataKey, commandDataObject);
+		commandDataMap.put(commandDataKey, commandDataObject);
 	}
 
-	public Object getCommandData(Object commandDataKey) {
-		return this.commandDataMap.get(commandDataKey);
+	public Object getCommandData(final Object commandDataKey) {
+		return commandDataMap.get(commandDataKey);
 	}
 
-	public void setData(boolean isData) {
+	public void setData(final boolean isData) {
 		this.isData = isData;
 	}
 
 	public boolean isData() {
-		return this.isData;
+		return isData;
 	}
 
 	private StampProcessor processor = null;
 
 	public StampProcessor getProcessor() {
-		if (processor == null)
+		if (processor == null) {
 			processor = StampTranslatorProcessorManager.getProcessor(this);
+		}
 
 		return processor;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */

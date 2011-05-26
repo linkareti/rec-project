@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.vpend2m.displays;
  */
 public class PhiChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4458744556811339160L;
+
 	/** Creates a new instance of PhiChart */
 	public PhiChart() {
 		super();

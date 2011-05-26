@@ -20,11 +20,11 @@ public class CopyPaste {
 	public CopyPaste() {
 	}
 
-	public void addData(pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] matrixToCopy) {
+	public void addData(final pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] matrixToCopy) {
 		this.matrixToCopy = matrixToCopy;
 	}
 
-	public void addData(String[][] matrixWiringToCopy) {
+	public void addData(final String[][] matrixWiringToCopy) {
 		this.matrixWiringToCopy = matrixWiringToCopy;
 	}
 

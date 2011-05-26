@@ -19,9 +19,9 @@ public class ClientMain {
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		JFrame.setDefaultLookAndFeelDecorated(true);
-		ReCBaseUI ui = new ReCBaseUI();
+		final ReCBaseUI ui = new ReCBaseUI();
 		ui.setApparatusAutoConnectID("ELAB_POLAROID_V1.3");
 		ui.setVisible(true);
 	}

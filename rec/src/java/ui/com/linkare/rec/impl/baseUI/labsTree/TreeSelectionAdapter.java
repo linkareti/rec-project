@@ -12,19 +12,24 @@ package com.linkare.rec.impl.baseUI.labsTree;
  */
 public abstract class TreeSelectionAdapter implements TreeSelectionChangeListener {
 
-	public void apparatusSelectionChange(ApparatusSelectionEvent selectevent) {
+	@Override
+	public void apparatusSelectionChange(final ApparatusSelectionEvent selectevent) {
 	}
 
-	public void defaultConfigSelectionChange(DefaultConfigSelectionEvent selectevent) {
+	@Override
+	public void defaultConfigSelectionChange(final DefaultConfigSelectionEvent selectevent) {
 	}
 
-	public void displaySelectionChange(DisplaySelectionEvent selectevent) {
+	@Override
+	public void displaySelectionChange(final DisplaySelectionEvent selectevent) {
 	}
 
-	public void labSelectionChange(LabSelectionEvent selectevent) {
+	@Override
+	public void labSelectionChange(final LabSelectionEvent selectevent) {
 	}
 
-	public void webResourceSelectionChange(WebResourceSelectionEvent selectevent) {
+	@Override
+	public void webResourceSelectionChange(final WebResourceSelectionEvent selectevent) {
 	}
 
 }

@@ -24,23 +24,26 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 
 	/** Creates a new instance of StampRelayTranslator */
 	public StampConfigTranslator() {
-		super(COMMAND_IDENTIFIER);
+		super(StampConfigTranslator.COMMAND_IDENTIFIER);
 	}
 
-	public boolean translate(StampCommand command) {
-		if (command.getCommandIdentifier() == null)
+	@Override
+	public boolean translate(final StampCommand command) {
+		if (command.getCommandIdentifier() == null) {
 			return false;
-		if (!command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER))
+		}
+		if (!command.getCommandIdentifier().equalsIgnoreCase(StampConfigTranslator.COMMAND_IDENTIFIER)) {
 			return false;
+		}
 
-		int numsamples = ((Integer) command.getCommandData(NUMSAMPLES_STR)).intValue();
-		int volume = ((Integer) command.getCommandData(VOLUME_STR)).intValue();
+		final int numsamples = ((Integer) command.getCommandData(StampConfigTranslator.NUMSAMPLES_STR)).intValue();
+		final int volume = ((Integer) command.getCommandData(StampConfigTranslator.VOLUME_STR)).intValue();
 
-		int vol_to_send = 350 - ((volume - 5) * 350) / 15;
+		final int vol_to_send = 350 - ((volume - 5) * 350) / 15;
 
-		int T = (int) (1. / ((Integer) command.getCommandData(FREQ_STR)).doubleValue() / 5.4253E-04);
+		final int T = (int) (1. / ((Integer) command.getCommandData(StampConfigTranslator.FREQ_STR)).doubleValue() / 5.4253E-04);
 
-		String commandStr = command.getCommandIdentifier() + " " + vol_to_send + " " + T + " " + numsamples;
+		final String commandStr = command.getCommandIdentifier() + " " + vol_to_send + " " + T + " " + numsamples;
 		command.setCommand(commandStr);
 
 		return true;

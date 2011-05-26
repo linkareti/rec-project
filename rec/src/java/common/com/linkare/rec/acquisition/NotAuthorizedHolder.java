@@ -13,18 +13,21 @@ public final class NotAuthorizedHolder implements org.omg.CORBA.portable.Streama
 	public NotAuthorizedHolder() {
 	}
 
-	public NotAuthorizedHolder(com.linkare.rec.acquisition.NotAuthorized initialValue) {
+	public NotAuthorizedHolder(final com.linkare.rec.acquisition.NotAuthorized initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(org.omg.CORBA.portable.InputStream i) {
+	@Override
+	public void _read(final org.omg.CORBA.portable.InputStream i) {
 		value = com.linkare.rec.acquisition.NotAuthorizedHelper.read(i);
 	}
 
-	public void _write(org.omg.CORBA.portable.OutputStream o) {
+	@Override
+	public void _write(final org.omg.CORBA.portable.OutputStream o) {
 		com.linkare.rec.acquisition.NotAuthorizedHelper.write(o, value);
 	}
 
+	@Override
 	public org.omg.CORBA.TypeCode _type() {
 		return com.linkare.rec.acquisition.NotAuthorizedHelper.type();
 	}

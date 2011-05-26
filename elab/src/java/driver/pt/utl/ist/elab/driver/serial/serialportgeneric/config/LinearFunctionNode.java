@@ -55,8 +55,8 @@ public class LinearFunctionNode {
 	 * @param value allowed object is {@link ParamValuesNode }
 	 * 
 	 */
-	public void setParam(ParamValuesNode value) {
-		this.param = value;
+	public void setParam(final ParamValuesNode value) {
+		param = value;
 	}
 
 }

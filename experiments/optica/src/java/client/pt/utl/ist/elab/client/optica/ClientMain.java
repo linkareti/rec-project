@@ -1,4 +1,3 @@
-
 package pt.utl.ist.elab.client.optica;
 
 import javax.swing.JFrame;
@@ -14,9 +13,9 @@ public class ClientMain {
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		JFrame.setDefaultLookAndFeelDecorated(true);
-		ReCBaseUI ui = new ReCBaseUI();
+		final ReCBaseUI ui = new ReCBaseUI();
 		ui.setApparatusAutoConnectID("ELAB_OPTICA_DSPIC_V1.0");
 		ui.setVisible(true);
 	}

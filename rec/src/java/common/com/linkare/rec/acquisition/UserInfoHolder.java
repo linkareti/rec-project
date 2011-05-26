@@ -14,18 +14,21 @@ public final class UserInfoHolder implements org.omg.CORBA.portable.Streamable {
 	public UserInfoHolder() {
 	}
 
-	public UserInfoHolder(com.linkare.rec.acquisition.UserInfo initialValue) {
+	public UserInfoHolder(final com.linkare.rec.acquisition.UserInfo initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(org.omg.CORBA.portable.InputStream i) {
+	@Override
+	public void _read(final org.omg.CORBA.portable.InputStream i) {
 		value = com.linkare.rec.acquisition.UserInfoHelper.read(i);
 	}
 
-	public void _write(org.omg.CORBA.portable.OutputStream o) {
+	@Override
+	public void _write(final org.omg.CORBA.portable.OutputStream o) {
 		com.linkare.rec.acquisition.UserInfoHelper.write(o, value);
 	}
 
+	@Override
 	public org.omg.CORBA.TypeCode _type() {
 		return com.linkare.rec.acquisition.UserInfoHelper.type();
 	}

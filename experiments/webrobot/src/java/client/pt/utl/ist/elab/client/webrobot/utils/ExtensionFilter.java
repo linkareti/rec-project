@@ -23,31 +23,32 @@ public class ExtensionFilter extends javax.swing.filechooser.FileFilter {
 
 	/** Creates a new instance of ExeFilter */
 	/*******************************************
-	 *par1 = name to filter par2 = filter by extension, name or both Please
+	 * par1 = name to filter par2 = filter by extension, name or both Please
 	 * remember that if you want to filter both give the filename.extension
 	 **************************************************/
 
-	public ExtensionFilter(String par1, String par2) {
+	public ExtensionFilter(final String par1, final String par2) {
 		if (par2.equals("ext")) {
-			this.extName = par1;
+			extName = par1;
 			searchExt = true;
 		} else if (par2.equals("name")) {
-			this.fileName = par1;
+			fileName = par1;
 			searchName = true;
 		} else if (par2.equals("nameAndExt")) {
-			this.fileName = par1;
+			fileName = par1;
 			searchExtAndName = true;
 		}
 	}
 
 	// Accept all directories and all ext files.
-	public boolean accept(java.io.File f) {
+	@Override
+	public boolean accept(final java.io.File f) {
 		if (f.isDirectory()) {
 			return true;
 		}
 
-		String extension = fileExt(f);
-		String fName = fileName(f);
+		final String extension = fileExt(f);
+		final String fName = fileName(f);
 
 		if (searchExt) {
 			if (extension != null) {
@@ -78,10 +79,10 @@ public class ExtensionFilter extends javax.swing.filechooser.FileFilter {
 		return false;
 	}
 
-	private String fileExt(java.io.File f) {
+	private String fileExt(final java.io.File f) {
 		String ext = null;
-		String s = f.getName();
-		int i = s.lastIndexOf('.');
+		final String s = f.getName();
+		final int i = s.lastIndexOf('.');
 
 		if (i > 0 && i < s.length() - 1) {
 			ext = s.substring(i + 1).toLowerCase();
@@ -89,10 +90,10 @@ public class ExtensionFilter extends javax.swing.filechooser.FileFilter {
 		return ext;
 	}
 
-	private String fileName(java.io.File f) {
+	private String fileName(final java.io.File f) {
 		String fName = null;
-		String s = f.getName();
-		int i = s.lastIndexOf('.');
+		final String s = f.getName();
+		final int i = s.lastIndexOf('.');
 		if (i > 0 && i < s.length() - 1) {
 			fName = s.substring(0, i);
 		}
@@ -100,6 +101,7 @@ public class ExtensionFilter extends javax.swing.filechooser.FileFilter {
 	}
 
 	// The description of this filter
+	@Override
 	public String getDescription() {
 		if (fileName == null) {
 			return (customDesc + " (." + extName + ")");
@@ -108,7 +110,7 @@ public class ExtensionFilter extends javax.swing.filechooser.FileFilter {
 		}
 	}
 
-	public void setDescription(String customDesc) {
+	public void setDescription(final String customDesc) {
 		this.customDesc = customDesc;
 	}
 

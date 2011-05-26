@@ -20,9 +20,10 @@ public class StampTranslatorProcessorManager {
 	private static String STAMP_TPMANAGER_LOGGER = "StampTranslatorProcessorManager.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(STAMP_TPMANAGER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(StampTranslatorProcessorManager.STAMP_TPMANAGER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(STAMP_TPMANAGER_LOGGER));
+			LogManager.getLogManager().addLogger(
+					Logger.getLogger(StampTranslatorProcessorManager.STAMP_TPMANAGER_LOGGER));
 		}
 	}
 
@@ -33,52 +34,56 @@ public class StampTranslatorProcessorManager {
 	private StampTranslatorProcessorManager() {
 	}
 
-	public static void registerTranslator(StampTranslator translator) {
-		if (!translators.containsKey(translator.getCommandIdentifier()))
-			translators.put(translator.getCommandIdentifier(), translator);
-	}
-
-	public static void deregisterTranslator(StampTranslator translator) {
-		if (translators.containsKey(translator.getCommandIdentifier()))
-			translators.remove(translator.getCommandIdentifier());
-	}
-
-	public static StampTranslator getTranslator(StampCommand command) {
-		return (StampTranslator) translators.get(command.getCommandIdentifier());
-	}
-
-	public static void registerProcessor(StampProcessor processor) {
-		if (!processors.containsKey(processor.getCommandIdentifier()))
-			processors.put(processor.getCommandIdentifier(), processor);
-	}
-
-	public static void deregisterProcessor(StampProcessor processor) {
-		if (processors.containsKey(processor.getCommandIdentifier()))
-			processors.remove(processor.getCommandIdentifier());
-	}
-
-	public static StampProcessor getProcessor(StampCommand command) {
-		return (StampProcessor) processors.get(command.getCommandIdentifier());
-	}
-
-	public static void initStampProcessorTranslator(String className) {
-		try {
-			Class c = Class.forName(className);
-			c.newInstance();
-		} catch (Exception e) {
-			LoggerUtil.logThrowable("Unable to load class:" + className, e, Logger.getLogger(STAMP_TPMANAGER_LOGGER));
+	public static void registerTranslator(final StampTranslator translator) {
+		if (!StampTranslatorProcessorManager.translators.containsKey(translator.getCommandIdentifier())) {
+			StampTranslatorProcessorManager.translators.put(translator.getCommandIdentifier(), translator);
 		}
 	}
 
-	public static void initStampProcessorsTranslators(String[] classNames) {
-		for (int i = 0; i < classNames.length; i++) {
-			String className = classNames[i];
+	public static void deregisterTranslator(final StampTranslator translator) {
+		if (StampTranslatorProcessorManager.translators.containsKey(translator.getCommandIdentifier())) {
+			StampTranslatorProcessorManager.translators.remove(translator.getCommandIdentifier());
+		}
+	}
+
+	public static StampTranslator getTranslator(final StampCommand command) {
+		return (StampTranslator) StampTranslatorProcessorManager.translators.get(command.getCommandIdentifier());
+	}
+
+	public static void registerProcessor(final StampProcessor processor) {
+		if (!StampTranslatorProcessorManager.processors.containsKey(processor.getCommandIdentifier())) {
+			StampTranslatorProcessorManager.processors.put(processor.getCommandIdentifier(), processor);
+		}
+	}
+
+	public static void deregisterProcessor(final StampProcessor processor) {
+		if (StampTranslatorProcessorManager.processors.containsKey(processor.getCommandIdentifier())) {
+			StampTranslatorProcessorManager.processors.remove(processor.getCommandIdentifier());
+		}
+	}
+
+	public static StampProcessor getProcessor(final StampCommand command) {
+		return (StampProcessor) StampTranslatorProcessorManager.processors.get(command.getCommandIdentifier());
+	}
+
+	public static void initStampProcessorTranslator(final String className) {
+		try {
+			final Class c = Class.forName(className);
+			c.newInstance();
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable("Unable to load class:" + className, e,
+					Logger.getLogger(StampTranslatorProcessorManager.STAMP_TPMANAGER_LOGGER));
+		}
+	}
+
+	public static void initStampProcessorsTranslators(final String[] classNames) {
+		for (final String className : classNames) {
 			try {
-				Class c = Class.forName(className);
+				final Class c = Class.forName(className);
 				c.newInstance();
-			} catch (Exception e) {
-				LoggerUtil.logThrowable("Unable to load class:" + className, e, Logger
-						.getLogger(STAMP_TPMANAGER_LOGGER));
+			} catch (final Exception e) {
+				LoggerUtil.logThrowable("Unable to load class:" + className, e,
+						Logger.getLogger(StampTranslatorProcessorManager.STAMP_TPMANAGER_LOGGER));
 			}
 		}
 	}

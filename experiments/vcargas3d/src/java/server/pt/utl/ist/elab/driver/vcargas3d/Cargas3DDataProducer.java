@@ -26,18 +26,18 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 
 	private final float k = 8.9875E9f;
 	// O numero de canais(de dados) que existem!
-	private int NUM_CHANNELS = 2;
+	private final int NUM_CHANNELS = 2;
 
 	private VirtualBaseDriver driver = null;
-	private java.util.ArrayList sistema;
+	private final java.util.ArrayList sistema;
 
 	// Aproveitamos para inicializar todas as vari�veis logo no construtor...
-	public Cargas3DDataProducer(VirtualBaseDriver driver, java.util.ArrayList sistema) {
+	public Cargas3DDataProducer(final VirtualBaseDriver driver, final java.util.ArrayList sistema) {
 		this.driver = driver;
 		this.sistema = sistema;
 	}
 
-	public Cargas3DDataProducer(java.util.ArrayList sistema) {
+	public Cargas3DDataProducer(final java.util.ArrayList sistema) {
 		// panel.setPreferredMinMax(0,10,0,10, 0,10);
 		this.sistema = sistema;
 	}
@@ -46,8 +46,8 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 	// cliente!
 	private class ProducerThread extends Thread {
 
-		private java.util.ArrayList linhas = new java.util.ArrayList();
-		private java.util.ArrayList[][] superficies = new java.util.ArrayList[3][20];
+		private final java.util.ArrayList linhas = new java.util.ArrayList();
+		private final java.util.ArrayList[][] superficies = new java.util.ArrayList[3][20];
 
 		private float x, y, z;
 		private float rx, ry, rz, r;
@@ -89,7 +89,7 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 					for (z = 0f; z < 10; z = z + 0.1f) {
 
 						calculaCampo();
-						int EFF = pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondarInt(EF);
+						final int EFF = pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondarInt(EF);
 
 						// considere-se apenas o campo dentro de certos
 						// limites na caixa
@@ -102,14 +102,15 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 							// seja
 							// para
 							// sempre
-							InteractiveCharge carga = ((InteractiveCharge) sistema.get(i));
+							final InteractiveCharge carga = ((InteractiveCharge) sistema.get(i));
 							if ((x < carga.getX() + 0.5 && x > carga.getX() - 0.5)
 									|| (y < carga.getY() + 0.5 && y > carga.getY() - 0.5)
 									|| (z < carga.getZ() + 0.5 && z > carga.getZ() - 0.5) || z > 8 || z < 3 || y > 8
-									|| y < 3 || x > 8 || x < 3)
+									|| y < 3 || x > 8 || x < 3) {
 								minmax = false;
-							else
+							} else {
 								minmax = true;
+							}
 						}
 						if (minmax == true) {
 							EFmax = Math.max(EF, EFmax);
@@ -130,7 +131,7 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 
 			// divisao do espaco a considerar para
 			// o modulo do campo
-			int razao = pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondarInt((EFmax - EFmin) / 50);
+			final int razao = pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondarInt((EFmax - EFmin) / 50);
 
 			// inicializem-se as listas
 			for (int i = 0; i < 20; i++) {
@@ -144,12 +145,12 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 					for (z = 0f; z < 10; z = z + 0.1f) {
 
 						calculaCampo();
-						int EFF = pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondarInt(EF);
+						final int EFF = pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondarInt(EF);
 						// o meio e' a tolerancia em guardar os pontos
-						int meio = (int) (EFF * 0.02);
+						final int meio = (int) (EFF * 0.02);
 						for (int i = 1; i <= 20; i++) {
 
-							int modulo = i * razao + EFFmin;
+							final int modulo = i * razao + EFFmin;
 							// adicione-se a lista
 							if (modulo > EFF - meio && modulo < EFF + meio && EFF < EFFmax) {
 								listax[i - 1].add(new Float(x));
@@ -176,12 +177,12 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 			E = 0;
 
 			for (int i = 0; i < sistema.size(); i++) {
-				InteractiveCharge carga = ((InteractiveCharge) sistema.get(i));
+				final InteractiveCharge carga = ((InteractiveCharge) sistema.get(i));
 				rx = x - (float) (carga).getX();
 				ry = y - (float) (carga).getY();
 				rz = z - (float) (carga).getZ();
 				r = (float) Math.sqrt(rx * rx + ry * ry + rz * rz);
-				float q = carga.getCharge();
+				final float q = carga.getCharge();
 				E = (float) (k * q * 1E-6 / (r * r));
 
 				Ex = E * rx / r;
@@ -196,9 +197,9 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 			EF = (float) Math.sqrt(ExF * ExF + EzF * EzF + EyF * EyF);
 		}
 
-		private void pontos(int densidade, int nparticula) {
-			InteractiveCharge carga = ((InteractiveCharge) sistema.get(nparticula));
-			double r = 0.15;
+		private void pontos(final int densidade, final int nparticula) {
+			final InteractiveCharge carga = ((InteractiveCharge) sistema.get(nparticula));
+			final double r = 0.15;
 			double x = 0, y = 0, z = 0;
 			double x1, y1, z1;
 
@@ -210,22 +211,20 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 				for (double j = 0; j <= r; j += r / densidade) {
 					for (double i = 0; i <= r; i += r / densidade) {
 
-						double norma = Math.sqrt((i + x1) * (i + x1) + (j + y1) * (j + y1) + (k + z1) * (k + z1));
+						final double norma = Math.sqrt((i + x1) * (i + x1) + (j + y1) * (j + y1) + (k + z1) * (k + z1));
 						x = (x1 + i) / (norma) * r;
 						y = (y1 + j) / (norma) * r;
 						z = (z1 + k) / (norma) * r;
 						// calcula para cada ponto da superficies esferica, para
 						// cada esfera
-						linhas
-								.add(calculaLinha(carga.getX() + x, carga.getY() + y, carga.getZ() + z, carga
-										.getCharge()));
+						linhas.add(calculaLinha(carga.getX() + x, carga.getY() + y, carga.getZ() + z, carga.getCharge()));
 					}
 				}
 			}
 		}
 
-		private java.util.ArrayList calculaLinha(double x0, double y0, double z0, double Q) {
-			java.util.ArrayList linha = new java.util.ArrayList();
+		private java.util.ArrayList calculaLinha(final double x0, final double y0, final double z0, final double Q) {
+			final java.util.ArrayList linha = new java.util.ArrayList();
 			if (Q < 0) {
 				linha.add("neg");
 			}
@@ -264,7 +263,7 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 				}
 
 				// adicione-se ponto ao traco
-				Float[] linhaXYZ = new Float[3];
+				final Float[] linhaXYZ = new Float[3];
 				linhaXYZ[0] = new Float(x);
 				linhaXYZ[1] = new Float(y);
 				linhaXYZ[2] = new Float(z);
@@ -272,23 +271,25 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 
 				// se a linha for de encontro a uma carga, pare-se o calculo
 				for (int i = 0; i < sistema.size(); i++) {
-					InteractiveCharge carga = ((InteractiveCharge) sistema.get(i));
+					final InteractiveCharge carga = ((InteractiveCharge) sistema.get(i));
 					if ((x < carga.getX() + 0.15 && x > carga.getX() - 0.15)
 							&& (y < carga.getY() + 0.15 && y > carga.getY() - 0.15)
-							&& (z < carga.getZ() + 0.15 && z > carga.getZ() - 0.15))
+							&& (z < carga.getZ() + 0.15 && z > carga.getZ() - 0.15)) {
 						controla = false;
+					}
 				}
 			}
 
 			return linha;
 		}
 
+		@Override
 		public void run() {
 			// java.util.ArrayList sup20=new java.util.ArrayList();
 			// toPanelSuperficies(calculaSuperficies(),sup20);
 			// panel.addDrawable((org.opensourcephysics.displayejs.InteractivePoints)(sup20.get(10)));
 			// panel.repaint();
-			PhysicsValue[] value = new PhysicsValue[NUM_CHANNELS];
+			final PhysicsValue[] value = new PhysicsValue[NUM_CHANNELS];
 
 			// envia no canal CORRESPONDENTE!!! o valor
 			PhysicsVal val = PhysicsValFactory
@@ -300,7 +301,7 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 			addDataRow(value);
 			try {
 				join(100);
-			} catch (InterruptedException ie) {
+			} catch (final InterruptedException ie) {
 			}
 			endProduction();
 
@@ -326,6 +327,7 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 	// frame.show();
 	// }
 
+	@Override
 	public void startProduction() {
 		new ProducerThread().start();
 	}
@@ -334,6 +336,7 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 		setDataSourceEnded();
 	}
 
+	@Override
 	public void stopNow() {
 		setDataSourceStoped();
 	}

@@ -16,12 +16,16 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * @author Jos� Pedro Pereira
  */
 public class LoginFrame extends javax.swing.JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 85210671383717704L;
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(LoginFrame.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(LoginFrame.UI_CLIENT_LOGGER));
 		}
 	}
 
@@ -57,7 +61,8 @@ public class LoginFrame extends javax.swing.JFrame {
 				new javax.swing.ImageIcon(getClass().getResource(
 						"/com/linkare/rec/impl/baseUI/resources/security16.gif"))).getImage());
 		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosed(java.awt.event.WindowEvent evt) {
+			@Override
+			public void windowClosed(final java.awt.event.WindowEvent evt) {
 				formWindowClosed(evt);
 			}
 		});
@@ -96,7 +101,8 @@ public class LoginFrame extends javax.swing.JFrame {
 
 		btnOK.setText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.ok", "OK"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
 			}
 		});
@@ -109,7 +115,8 @@ public class LoginFrame extends javax.swing.JFrame {
 
 		btnCancel.setText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.cancel", "Cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
 			}
 		});
@@ -128,23 +135,23 @@ public class LoginFrame extends javax.swing.JFrame {
 		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
 		getContentPane().add(jLabel2, gridBagConstraints);
 
-		java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+		final java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		setBounds((screenSize.width - 288) / 2, (screenSize.height - 173) / 2, 288, 173);
 	}// GEN-END:initComponents
 
-	private void formWindowClosed(java.awt.event.WindowEvent evt)// GEN-FIRST:event_formWindowClosed
+	private void formWindowClosed(final java.awt.event.WindowEvent evt)// GEN-FIRST:event_formWindowClosed
 	{// GEN-HEADEREND:event_formWindowClosed
 		setCanceled(true);
 		setVisible(false);
 		firePropertyChange("login", true, false);
 	}// GEN-LAST:event_formWindowClosed
 
-	private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt)// GEN-FIRST:event_formInternalFrameClosed
+	private void formInternalFrameClosed(final javax.swing.event.InternalFrameEvent evt)// GEN-FIRST:event_formInternalFrameClosed
 	{// GEN-HEADEREND:event_formInternalFrameClosed
 
 	}// GEN-LAST:event_formInternalFrameClosed
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
+	private void btnCancelActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
 	{// GEN-HEADEREND:event_btnCancelActionPerformed
 		// just hide it;
 		setCanceled(true);
@@ -152,7 +159,7 @@ public class LoginFrame extends javax.swing.JFrame {
 		firePropertyChange("login", true, false);
 	}// GEN-LAST:event_btnCancelActionPerformed
 
-	private void btnOKActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
+	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
 		username = tfLoginName.getText();
 		password = new String(tfPassword.getPassword());
@@ -161,7 +168,7 @@ public class LoginFrame extends javax.swing.JFrame {
 		firePropertyChange("login", false, true);
 	}// GEN-LAST:event_btnOKActionPerformed
 
-	public void setVisible(boolean visible, boolean enablePasswordField) {
+	public void setVisible(final boolean visible, final boolean enablePasswordField) {
 		super.setVisible(visible);
 		tfPassword.setEnabled(enablePasswordField);
 		getRootPane().requestFocus();
@@ -184,7 +191,7 @@ public class LoginFrame extends javax.swing.JFrame {
 	 * @return Value of property username.
 	 */
 	public String getUsername() {
-		return this.username;
+		return username;
 	}
 
 	/**
@@ -192,9 +199,9 @@ public class LoginFrame extends javax.swing.JFrame {
 	 * 
 	 * @param username New value of property username.
 	 */
-	public void setUsername(String username) {
+	public void setUsername(final String username) {
 		this.username = username;
-		this.tfLoginName.setText(username);
+		tfLoginName.setText(username);
 	}
 
 	/**
@@ -203,7 +210,7 @@ public class LoginFrame extends javax.swing.JFrame {
 	 * @return Value of property password.
 	 */
 	public String getPassword() {
-		return this.password;
+		return password;
 	}
 
 	/**
@@ -211,9 +218,9 @@ public class LoginFrame extends javax.swing.JFrame {
 	 * 
 	 * @param password New value of property password.
 	 */
-	public void setPassword(String password) {
+	public void setPassword(final String password) {
 		this.password = password;
-		this.tfPassword.setText(password);
+		tfPassword.setText(password);
 	}
 
 	/**
@@ -222,7 +229,7 @@ public class LoginFrame extends javax.swing.JFrame {
 	 * @return Value of property canceled.
 	 */
 	public boolean isCanceled() {
-		return this.canceled;
+		return canceled;
 	}
 
 	/**
@@ -230,7 +237,7 @@ public class LoginFrame extends javax.swing.JFrame {
 	 * 
 	 * @param canceled New value of property canceled.
 	 */
-	public void setCanceled(boolean canceled) {
+	public void setCanceled(final boolean canceled) {
 		this.canceled = canceled;
 	}
 
@@ -246,6 +253,6 @@ public class LoginFrame extends javax.swing.JFrame {
 	/**
 	 * Utility field used by event firing mechanism.
 	 */
-	private javax.swing.event.EventListenerList listenerList = null;
+	private final javax.swing.event.EventListenerList listenerList = null;
 
 }

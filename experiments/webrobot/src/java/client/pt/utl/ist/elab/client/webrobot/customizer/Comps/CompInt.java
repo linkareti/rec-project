@@ -11,19 +11,23 @@ package pt.utl.ist.elab.client.webrobot.customizer.Comps;
  * @author André Neto - LEFT - IST
  */
 public class CompInt extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Block {
-	private int WIDTH = 77;
-	private int HEIGHT = 45;
-	private int LINEWIDTH = 6;
-	private java.awt.Dimension dimension = new java.awt.Dimension(WIDTH, HEIGHT);
-	private int TIPO = 1;
-	private javax.swing.ImageIcon image = new javax.swing.ImageIcon(getClass().getResource(
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7788428343614635289L;
+	private final int WIDTH = 77;
+	private final int HEIGHT = 45;
+	private final int LINEWIDTH = 6;
+	private final java.awt.Dimension dimension = new java.awt.Dimension(WIDTH, HEIGHT);
+	private final int TIPO = 1;
+	private final javax.swing.ImageIcon image = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/customizer/Comps/Icons/compInt.gif"));
 	private pt.utl.ist.elab.client.webrobot.customizer.Models.ModelCompInt model;
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfCompInt confCompInt;
-	private java.awt.Color backgroundColor = new java.awt.Color(204, 204, 204);
-	private java.awt.Color anotherAndColor = new java.awt.Color(102, 255, 255);
+	private final java.awt.Color backgroundColor = new java.awt.Color(204, 204, 204);
+	private final java.awt.Color anotherAndColor = new java.awt.Color(102, 255, 255);
 	private String text;
-	private String fullNameDescription = "Comparacao de numeros inteiros";
+	private final String fullNameDescription = "Comparacao de numeros inteiros";
 
 	/** Holds value of property paintBottom. */
 	private boolean paintBottom = false;
@@ -38,7 +42,7 @@ public class CompInt extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 	private boolean cancel = false;
 
 	/** Creates a new instance of CompInt */
-	public CompInt(javax.swing.JFrame parent) {
+	public CompInt(final javax.swing.JFrame parent) {
 		super();
 		setCancel(false);
 		model = new pt.utl.ist.elab.client.webrobot.customizer.Models.ModelCompInt();
@@ -58,7 +62,7 @@ public class CompInt extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 		text = "";
 	}
 
-	public CompInt(pt.utl.ist.elab.client.webrobot.customizer.Models.ModelCompInt model) {
+	public CompInt(final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelCompInt model) {
 		super();
 		setCancel(false);
 		this.model = new pt.utl.ist.elab.client.webrobot.customizer.Models.ModelCompInt();
@@ -81,21 +85,21 @@ public class CompInt extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 		text = "";
 	}
 
-	public void paintComponent(java.awt.Graphics g) {
-		java.awt.Graphics2D g2 = (java.awt.Graphics2D) g;
+	@Override
+	public void paintComponent(final java.awt.Graphics g) {
+		final java.awt.Graphics2D g2 = (java.awt.Graphics2D) g;
 		g2.setStroke(new java.awt.BasicStroke(3f));
 		g.setColor(backgroundColor);
 		g.fillRect(0, 0, this.getSize().width, this.getSize().height);
 		g2.drawImage(image.getImage(), 0, 0, image.getIconWidth(), image.getIconHeight(), null);
 		g.setColor(java.awt.Color.black);
 		if (paintBottom) {
-			g2.drawLine(image.getIconWidth() / 2, image.getIconHeight(), image.getIconWidth() / 2, image
-					.getIconHeight()
-					+ LINEWIDTH);
+			g2.drawLine(image.getIconWidth() / 2, image.getIconHeight(), image.getIconWidth() / 2,
+					image.getIconHeight() + LINEWIDTH);
 		}
 		if (paintLeft) {
-			g2.drawLine(image.getIconWidth(), image.getIconHeight() / 2, image.getIconWidth() + LINEWIDTH, image
-					.getIconHeight() / 2);
+			g2.drawLine(image.getIconWidth(), image.getIconHeight() / 2, image.getIconWidth() + LINEWIDTH,
+					image.getIconHeight() / 2);
 		}
 		g.setColor(java.awt.Color.white);
 		if (model.getFlag() == 0) {
@@ -103,31 +107,35 @@ public class CompInt extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 		} else {
 			text = model.getD1() + model.getD2() + model.getValor();
 		}
-		g.drawString(text, (int) ((image.getIconWidth() - text.length() * g.getFont().getSize() * 1 / 2) / 2), image
-				.getIconWidth() / 3);
+		g.drawString(text, ((image.getIconWidth() - text.length() * g.getFont().getSize() * 1 / 2) / 2),
+				image.getIconWidth() / 3);
 		super.paintComponent(g);
 	}
 
+	@Override
 	public pt.utl.ist.elab.client.webrobot.customizer.Models.ModelBlock getDataModel() {
 		return model;
 	}
 
-	public void setDataModel(pt.utl.ist.elab.client.webrobot.customizer.Models.ModelCompInt model) {
+	public void setDataModel(final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelCompInt model) {
 		this.model = model;
 	}
 
-	public void edit(javax.swing.JFrame parent) {
+	@Override
+	public void edit(final javax.swing.JFrame parent) {
 		confCompInt = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfCompInt(parent, true, model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confCompInt);
 		confCompInt.show();
 	}
 
+	@Override
 	public int getTipo() {
 		return TIPO;
 	}
 
+	@Override
 	public String getFullNameDescription() {
-		return this.fullNameDescription;
+		return fullNameDescription;
 	}
 
 	/**
@@ -135,8 +143,9 @@ public class CompInt extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 	 * 
 	 * @return Value of property paintBottom.
 	 */
+	@Override
 	public boolean isPaintBottom() {
-		return this.paintBottom;
+		return paintBottom;
 	}
 
 	/**
@@ -144,7 +153,8 @@ public class CompInt extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 	 * 
 	 * @param paintBottom New value of property paintBottom.
 	 */
-	public void setPaintBottom(boolean paintBottom) {
+	@Override
+	public void setPaintBottom(final boolean paintBottom) {
 		this.paintBottom = paintBottom;
 		repaint();
 	}
@@ -154,8 +164,9 @@ public class CompInt extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 	 * 
 	 * @return Value of property paintLeft.
 	 */
+	@Override
 	public boolean isPaintLeft() {
-		return this.paintLeft;
+		return paintLeft;
 	}
 
 	/**
@@ -163,7 +174,8 @@ public class CompInt extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 	 * 
 	 * @param paintLeft New value of property paintLeft.
 	 */
-	public void setPaintLeft(boolean paintLeft) {
+	@Override
+	public void setPaintLeft(final boolean paintLeft) {
 		this.paintLeft = paintLeft;
 		repaint();
 	}
@@ -173,8 +185,9 @@ public class CompInt extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 	 * 
 	 * @return Value of property anotherAnd.
 	 */
+	@Override
 	public boolean isAnotherAnd() {
-		return this.anotherAnd;
+		return anotherAnd;
 	}
 
 	/**
@@ -182,7 +195,8 @@ public class CompInt extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 	 * 
 	 * @param anotherAnd New value of property anotherAnd.
 	 */
-	public void setAnotherAnd(boolean anotherAnd) {
+	@Override
+	public void setAnotherAnd(final boolean anotherAnd) {
 		this.anotherAnd = anotherAnd;
 	}
 
@@ -191,8 +205,9 @@ public class CompInt extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 	 * 
 	 * @return Value of property cancel.
 	 */
+	@Override
 	public boolean isCancel() {
-		return this.cancel;
+		return cancel;
 	}
 
 	/**
@@ -200,7 +215,8 @@ public class CompInt extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 	 * 
 	 * @param cancel New value of property cancel.
 	 */
-	public void setCancel(boolean cancel) {
+	@Override
+	public void setCancel(final boolean cancel) {
 		this.cancel = cancel;
 	}
 }

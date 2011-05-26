@@ -36,9 +36,9 @@ public class BaseDataProducer implements DataProducerOperations, QueueLogger {
 	private static String BASE_DATAPRODUCER_LOGGER = "BaseDataProducer.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(BASE_DATAPRODUCER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(BASE_DATAPRODUCER_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER));
 		}
 	}
 
@@ -52,76 +52,90 @@ public class BaseDataProducer implements DataProducerOperations, QueueLogger {
 
 	// private helper methods
 	public DataProducer _this() {
-		if (_this != null)
+		if (_this != null) {
 			return _this;
+		}
 
 		try {
-			return (_this = DataProducerHelper.narrow(ORBBean.getORBBean().getAutoIdRootPOA().servant_to_reference(
-					ORBBean.getORBBean().registerAutoIdRootPOAServant(DataProducer.class, this, null))));
-		} catch (Exception e) {
-			LoggerUtil.logThrowable("Couldn't Register this BaseDataProducer with ORB", e, Logger
-					.getLogger(BASE_DATAPRODUCER_LOGGER));
+			return (_this = DataProducerHelper.narrow(ORBBean
+					.getORBBean()
+					.getAutoIdRootPOA()
+					.servant_to_reference(
+							ORBBean.getORBBean().registerAutoIdRootPOAServant(DataProducer.class, this, null))));
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable("Couldn't Register this BaseDataProducer with ORB", e,
+					Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER));
 			return null;
 		}
 
 	}
 
 	public void stopNow() {
-		if (dataSource != null)
+		if (dataSource != null) {
 			dataSource.stopNow();
+		}
 
 		// informProducerIsStopedAsynch();
 	}
 
-	/** Creates a new instance of SimulationDataProducerImpl */
-	public BaseDataProducer(DataReceiver dataReceiver) {
-		
-		eventQueueDataReceiver = new EventQueue(new DataProducerEventsDispatcher(), this.getClass().getSimpleName(), this);
+	/**
+	 * Creates a new instance of SimulationDataProducerImpl
+	 * 
+	 * @param dataReceiver
+	 */
+	public BaseDataProducer(final DataReceiver dataReceiver) {
+
+		eventQueueDataReceiver = new EventQueue(new DataProducerEventsDispatcher(), this.getClass().getSimpleName(),
+				this);
 		try {
 			registerDataReceiver(dataReceiver);
-		} catch (MaximumClientsReached e) {
-			LoggerUtil.logThrowable("Unable to register DataReceiver with this BaseDataProducer", e, Logger
-					.getLogger(BASE_DATAPRODUCER_LOGGER));
+		} catch (final MaximumClientsReached e) {
+			LoggerUtil.logThrowable("Unable to register DataReceiver with this BaseDataProducer", e,
+					Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER));
 		}
 	}
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionHeader() throws NotAvailableException {
-		if (dataSource != null)
+		if (dataSource != null) {
 			return dataSource.getAcquisitionHeader();
+		}
 
 		throw new NotAvailableException(NotAvailableExceptionConstants.NO_ACQ_HEADER);
 	}
 
 	private class DataProducerEventsDispatcher implements EventQueueDispatcher {
 
-		public void dispatchEvent(Object o) {
+		@Override
+		public void dispatchEvent(final Object o) {
 			if (o instanceof SamplesPacketSourceEvent) {
-				int num_packet = ((SamplesPacketSourceEvent) o).getPacketLargestIndex();
+				final int num_packet = ((SamplesPacketSourceEvent) o).getPacketLargestIndex();
 				if (dataReceiver != null) {
 					try {
-						Logger.getLogger(BASE_DATAPRODUCER_LOGGER).log(Level.INFO,
+						Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER).log(Level.INFO,
 								"New data packet available : " + num_packet);
 						dataReceiver.newSamples(num_packet);
-					} catch (Exception e) {
+					} catch (final Exception e) {
 						LoggerUtil.logThrowable("Exception informing DataReceiver of new samples " + num_packet, e,
-								Logger.getLogger(BASE_DATAPRODUCER_LOGGER));
+								Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER));
 					}
 				}
 			} else if (o instanceof DataProducerStateChangeEvent) {
 				if (dataReceiver != null) {
-					DataProducerStateChangeEvent event = (DataProducerStateChangeEvent) o;
+					final DataProducerStateChangeEvent event = (DataProducerStateChangeEvent) o;
 					try {
-						Logger.getLogger(BASE_DATAPRODUCER_LOGGER).log(Level.INFO,
+						Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER).log(Level.INFO,
 								"Data Producer is:" + event.getDataProducerState());
 						dataReceiver.stateChanged(event.getDataProducerState());
-					} catch (Exception e) {
-						LoggerUtil.logThrowable("Exception informing DataReceiver of data Producer stoped!", e, Logger
-								.getLogger(BASE_DATAPRODUCER_LOGGER));
+					} catch (final Exception e) {
+						LoggerUtil.logThrowable("Exception informing DataReceiver of data Producer stoped!", e,
+								Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER));
 					}
 				}
 			}
 		}
 
+		@Override
 		public int getPriority() {
 			return Thread.NORM_PRIORITY + 1;
 		}
@@ -131,40 +145,46 @@ public class BaseDataProducer implements DataProducerOperations, QueueLogger {
 	/** Utility field used by event firing mechanism. */
 	private EventListenerList listenerList = null;
 
-	private void fireNewSamples(SamplesPacketSourceEvent evt) {
-		Logger.getLogger(BASE_DATAPRODUCER_LOGGER).log(Level.INFO,
+	private void fireNewSamples(final SamplesPacketSourceEvent evt) {
+		Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER).log(Level.INFO,
 				"New packet available : " + evt.getPacketLargestIndex());
 		setDataProducerState(DataProducerState.DP_STARTED);
 		eventQueueDataReceiver.addEvent(evt);
 	}
 
 	private void fireStateChanged() {
-		Logger.getLogger(BASE_DATAPRODUCER_LOGGER).log(Level.INFO, "Producer is now :" + getDataProducerState());
+		Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER).log(Level.INFO,
+				"Producer is now :" + getDataProducerState());
 		eventQueueDataReceiver.addEvent(new DataProducerStateChangeEvent(getDataProducerState()));
 	}
 
-	public SamplesPacket[] getSamples(int packetStartIndex, int packetEndIndex)
+	@Override
+	public SamplesPacket[] getSamples(final int packetStartIndex, final int packetEndIndex)
 			throws NotAnAvailableSamplesPacketException {
 		try {
-			SamplesPacket[] packets = packetizer.getSamplesPackets(packetStartIndex, packetEndIndex);
-			if (packetEndIndex == getMaxPacketNum())
+			final SamplesPacket[] packets = packetizer.getSamplesPackets(packetStartIndex, packetEndIndex);
+			if (packetEndIndex == getMaxPacketNum()) {
 				fireDataProducerIsEmpty(this);
+			}
 			return packets;
-		} catch (SamplesPacketReadException e) {
+		} catch (final SamplesPacketReadException e) {
 			throw new NotAnAvailableSamplesPacketException(
 					NotAnAvailableSamplesPacketExceptionConstants.PACKET_NOT_FOUND_IN_CACHE, e.getErrorPacketNumber());
 		}
 	}
 
+	@Override
 	public String getDataProducerName() {
 		return dataSource.getName();
 	}
 
+	@Override
 	public int getMaxPacketNum() {
 		return packetizer.size() - 1;
 	}
 
-	public void registerDataReceiver(DataReceiver dataReceiver) throws MaximumClientsReached {
+	@Override
+	public void registerDataReceiver(final DataReceiver dataReceiver) throws MaximumClientsReached {
 		this.dataReceiver = new DataReceiverWrapper(dataReceiver);
 	}
 
@@ -173,7 +193,7 @@ public class BaseDataProducer implements DataProducerOperations, QueueLogger {
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addBaseDataProducerListener(BaseDataProducerListener listener) {
+	public synchronized void addBaseDataProducerListener(final BaseDataProducerListener listener) {
 		if (listenerList == null) {
 			listenerList = new EventListenerList();
 		}
@@ -185,7 +205,7 @@ public class BaseDataProducer implements DataProducerOperations, QueueLogger {
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeBaseDataProducerListener(BaseDataProducerListener listener) {
+	public synchronized void removeBaseDataProducerListener(final BaseDataProducerListener listener) {
 		listenerList.remove(BaseDataProducerListener.class, listener);
 	}
 
@@ -194,10 +214,11 @@ public class BaseDataProducer implements DataProducerOperations, QueueLogger {
 	 * 
 	 * @param event The event to be fired
 	 */
-	private void fireDataProducerIsEmpty(BaseDataProducer event) {
-		if (listenerList == null)
+	private void fireDataProducerIsEmpty(final BaseDataProducer event) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == BaseDataProducerListener.class) {
 				((BaseDataProducerListener) listeners[i + 1]).baseDataProducerIsEmpty(event);
@@ -211,6 +232,7 @@ public class BaseDataProducer implements DataProducerOperations, QueueLogger {
 	 * @return Value of property dataProducerState.
 	 * 
 	 */
+	@Override
 	public DataProducerState getDataProducerState() {
 		return dataProducerState;
 	}
@@ -221,9 +243,10 @@ public class BaseDataProducer implements DataProducerOperations, QueueLogger {
 	 * @param dataProducerState New value of property dataProducerState.
 	 * 
 	 */
-	public void setDataProducerState(DataProducerState dataProducerState) {
-		if (dataProducerState.equals(this.dataProducerState))
+	public void setDataProducerState(final DataProducerState dataProducerState) {
+		if (dataProducerState.equals(this.dataProducerState)) {
 			return;
+		}
 		this.dataProducerState = dataProducerState;
 		fireStateChanged();
 	}
@@ -233,10 +256,11 @@ public class BaseDataProducer implements DataProducerOperations, QueueLogger {
 	}
 
 	public void dataSourceStateStarted() {
-		if (packetizer.size() > 0)
+		if (packetizer.size() > 0) {
 			setDataProducerState(DataProducerState.DP_STARTED);
-		else
+		} else {
 			setDataProducerState(DataProducerState.DP_STARTED_NODATA);
+		}
 	}
 
 	public void dataSourceStateEnded() {
@@ -261,63 +285,70 @@ public class BaseDataProducer implements DataProducerOperations, QueueLogger {
 	/**
 	 * @param dataSource the dataSource to set
 	 */
-	public void setDataSource(IDataSource dataSource) {
+	public void setDataSource(final IDataSource dataSource) {
 		if (!dataSourceInitiated) {
 			dataSourceInitiated = true;
 			this.dataSource = dataSource;
-			
-			packetizer = new SamplesSourcePacketizer(dataSource.getAcquisitionHeader().getSelectedFrequency(), dataSource
-					.getPacketSize(), (int) Math.ceil((double) dataSource.getTotalSamples()
+
+			packetizer = new SamplesSourcePacketizer(dataSource.getAcquisitionHeader().getSelectedFrequency(),
+					dataSource.getPacketSize(), (int) Math.ceil((double) dataSource.getTotalSamples()
 							/ (double) dataSource.getPacketSize()), dataSource.getTotalSamples());
-			
+
 			packetizer.addSamplesPacketSourceEventListener(new SamplesPacketSourceEventListener() {
-				public void newSamplesPackets(SamplesPacketSourceEvent evt) {
+				@Override
+				public void newSamplesPackets(final SamplesPacketSourceEvent evt) {
 					fireNewSamples(evt);
 				}
 			});
 			packetizer.setSamplesSource(dataSource);
-			
+
 			dataSource.addIDataSourceListener(new IDataSourceListener() {
+				@Override
 				public void dataSourceWaiting() {
 					dataSourceStateWaiting();
 				}
-				
+
+				@Override
 				public void dataSourceStarted() {
 					dataSourceStateStarted();
 				}
-				
+
+				@Override
 				public void dataSourceEnded() {
 					dataSourceStateEnded();
 				}
-				
+
+				@Override
 				public void dataSourceStoped() {
 					dataSourceStateStoped();
 				}
-				
+
+				@Override
 				public void dataSourceError() {
 					dataSourceStateError();
 				}
-				
-				public void newSamples(SamplesSourceEvent evt) {
+
+				@Override
+				public void newSamples(final SamplesSourceEvent evt) {
 				}
 			});
 		}
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void log(Level debugLevel, String message) {
-		Logger.getLogger(BASE_DATAPRODUCER_LOGGER).log(debugLevel, message);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void logThrowable(String message, Throwable t) {
-		LoggerUtil.logThrowable(message, t, Logger.getLogger(BASE_DATAPRODUCER_LOGGER));
+	public void log(final Level debugLevel, final String message) {
+		Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER).log(debugLevel, message);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void logThrowable(final String message, final Throwable t) {
+		LoggerUtil.logThrowable(message, t, Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER));
 	}
 
 }

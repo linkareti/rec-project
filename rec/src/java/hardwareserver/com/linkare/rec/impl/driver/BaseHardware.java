@@ -53,52 +53,53 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 	private static String BASE_HARDWARE_LOGGER = "BaseHardware.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(BASE_HARDWARE_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(BaseHardware.BASE_HARDWARE_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(BASE_HARDWARE_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER));
 		}
 	}
 
-	private static final boolean SHOW_GUI = Boolean.parseBoolean(Defaults.defaultIfEmpty(System
-			.getProperty("ReC.Driver.ShowGUI"), "false"));
+	private static final boolean SHOW_GUI = Boolean.parseBoolean(Defaults.defaultIfEmpty(
+			System.getProperty("ReC.Driver.ShowGUI"), "false"));
 
-	private HardwareBinder refBinder = new HardwareBinder();
+	private final HardwareBinder refBinder = new HardwareBinder();
 
 	private IDriver driver = null;
 
 	private HardwareInfo info = null;
 
-	private HardwareAcquisitionConfig config = null;
+	// private HardwareAcquisitionConfig config = null;
 
 	private BaseDataProducer dataProducerInEffect = null;
-	private Vector<BaseDataProducer> oldDataProducers = new Vector<BaseDataProducer>();
+	private final Vector<BaseDataProducer> oldDataProducers = new Vector<BaseDataProducer>();
 
 	protected DataClientWrapper dataClient = null;
 
 	private Hardware _this = null;
 
 	private Hardware _this() {
-		if (_this != null)
+		if (_this != null) {
 			return _this;
+		}
 
 		try {
-			HardwarePOATie thisRemoteObject = (HardwarePOATie) ORBBean.getORBBean().registerAutoIdRootPOAServant(
+			final HardwarePOATie thisRemoteObject = (HardwarePOATie) ORBBean.getORBBean().registerAutoIdRootPOAServant(
 					com.linkare.rec.acquisition.Hardware.class, this, null);
 
 			_this = thisRemoteObject._this();
 
-			Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.INFO,
+			Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER).log(Level.INFO,
 					"Registering this hardware with name " + "com/linkare/rec/hardwares/" + driver.getDriverUniqueID());
 
 			refBinder.setHardware(_this);
 
 			return _this;
-		} catch (Exception e) {
-			LoggerUtil.logThrowable("Couldn't register BaseHardware with ORB...", e, Logger
-					.getLogger(BASE_HARDWARE_LOGGER));
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable("Couldn't register BaseHardware with ORB...", e,
+					Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER));
 			try {
 				driver.shutdown();
-			} catch (Exception ignored) {
+			} catch (final Exception ignored) {
 			}
 			driver = null;
 			System.exit(-1);
@@ -108,42 +109,52 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 	}
 
 	private class StateMachine implements IDriverStateListener {
+		@Override
 		public void driverInited() {
 			startup();
 		}
 
+		@Override
 		public void driverConfiguring() {
 			setHardwareState(HardwareState.CONFIGURING);
 		}
 
+		@Override
 		public void driverConfigured() {
 			setHardwareState(HardwareState.CONFIGURED);
 		}
 
+		@Override
 		public void driverStarting() {
 			setHardwareState(HardwareState.STARTING);
 		}
 
+		@Override
 		public void driverStarted() {
 			setHardwareState(HardwareState.STARTED);
 		}
 
+		@Override
 		public void driverStoping() {
 			setHardwareState(HardwareState.STOPING);
 		}
 
+		@Override
 		public void driverStoped() {
 			setHardwareState(HardwareState.STOPED);
 		}
 
+		@Override
 		public void driverReseting() {
 			setHardwareState(HardwareState.RESETING);
 		}
 
+		@Override
 		public void driverReseted() {
 			setHardwareState(HardwareState.RESETED);
 		}
 
+		@Override
 		public void driverShutdown() {
 			shutdown();
 		}
@@ -152,20 +163,21 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 	EventQueue eventQueue = null;
 
 	public BaseHardware() {
-		Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.INFO, "Instatiating the BaseHardware.");
+		Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER).log(Level.INFO, "Instatiating the BaseHardware.");
 
-		Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.INFO, "Creating EventQueue for data client dispatcher.");
+		Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER).log(Level.INFO,
+				"Creating EventQueue for data client dispatcher.");
 		eventQueue = new EventQueue(new BaseHardwareDataClientDispatcher(), this.getClass().getSimpleName(), this);
 
-		if (!GraphicsEnvironment.isHeadless() && SHOW_GUI) {
-			JFrame frameForKill = new JFrame();
-			JButton btnExit = new JButton("End Driver!");
+		if (!GraphicsEnvironment.isHeadless() && BaseHardware.SHOW_GUI) {
+			final JFrame frameForKill = new JFrame();
+			final JButton btnExit = new JButton("End Driver!");
 			btnExit.setBackground(Color.blue);
 			btnExit.setForeground(Color.white);
 			btnExit.addActionListener(new ActionListener() {
 
 				@Override
-				public void actionPerformed(ActionEvent e) {
+				public void actionPerformed(final ActionEvent e) {
 					System.exit(-1);
 
 				}
@@ -176,10 +188,14 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 		}
 	}
 
-	/** Creates a new instance of SimulationHardwareImpl */
-	public BaseHardware(IDriver driver) {
+	/**
+	 * Creates a new instance of SimulationHardwareImpl
+	 * 
+	 * @param driver
+	 */
+	public BaseHardware(final IDriver driver) {
 		this();
-		this.setDriver(driver);
+		setDriver(driver);
 	}
 
 	/**
@@ -188,7 +204,7 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 	 * @return Value of property driver.
 	 */
 	public IDriver getDriver() {
-		return this.driver;
+		return driver;
 	}
 
 	StateMachine stateMachine = new StateMachine();
@@ -198,21 +214,21 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 	 * 
 	 * @param driver New value of property driver.
 	 */
-	public void setDriver(IDriver driver) {
-		Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.FINE, "Setting the driver for the BaseHardware.");
+	public void setDriver(final IDriver driver) {
+		Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER).log(Level.FINE, "Setting the driver for the BaseHardware.");
 
 		if (this.driver != null) {
 			this.driver.removeIDriverStateListener(stateMachine);
 		}
 		this.driver = driver;
-		if (driver == null)
+		if (driver == null) {
 			shutdown();
-		else {
+		} else {
 			try {
 				driver.addIDriverStateListener(stateMachine);
-			} catch (java.util.TooManyListenersException e) {
-				LoggerUtil.logThrowable("Couldn't register IDriverStateListener with Driver...", e, Logger
-						.getLogger(BASE_HARDWARE_LOGGER));
+			} catch (final java.util.TooManyListenersException e) {
+				LoggerUtil.logThrowable("Couldn't register IDriverStateListener with Driver...", e,
+						Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER));
 			}
 			readInHardwareInfo(driver.getHardwareInfo());
 			driver.init(getHardwareInfo());
@@ -225,19 +241,21 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 	}
 
 	private void startup() {
-		Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.INFO, "Driver started up... Register with ORB...");
+		Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER)
+				.log(Level.INFO, "Driver started up... Register with ORB...");
 		_this();
 	}
 
 	private HardwareState state = HardwareState.UNKNOWN;
 
+	@Override
 	public HardwareState getHardwareState() {
 		synchronized (state) {
 			return state;
 		}
 	}
 
-	public void setHardwareState(HardwareState state) {
+	public void setHardwareState(final HardwareState state) {
 		synchronized (state) {
 			if (!this.state.equals(state)) {
 				this.state = state;
@@ -246,9 +264,10 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 		}
 	}
 
-	private void readInHardwareInfo(Object o) {
-		if (o == null)
+	private void readInHardwareInfo(final Object o) {
+		if (o == null) {
 			return;
+		}
 		try {
 			if (o instanceof HardwareInfo) {
 				setHardwareInfo((HardwareInfo) o);
@@ -258,183 +277,212 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 				setHardwareInfo(HardwareInfoXMLReader.readHardwareInfo((URL) o));
 			} else if (o instanceof InputStream) {
 				setHardwareInfo(HardwareInfoXMLReader.readHardwareInfo((InputStream) o));
-			} else
+			} else {
 				throw new RuntimeException("Not possible to read HardwareInfo");
-		} catch (Exception e) {
-			LoggerUtil
-					.logThrowable("Couldn't read HardwareInfo from Driver", e, Logger.getLogger(BASE_HARDWARE_LOGGER));
+			}
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable("Couldn't read HardwareInfo from Driver", e,
+					Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER));
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo info) {
+	public void setHardwareInfo(final HardwareInfo info) {
 		this.info = info;
 	}
 
+	@Override
 	public HardwareInfo getHardwareInfo() {
 		return info;
 	}
 
+	@Override
 	public DataProducer getDataProducer() throws IncorrectStateException, NotAvailableException {
-		if (dataProducerInEffect == null)
+		if (dataProducerInEffect == null) {
 			throw new com.linkare.rec.acquisition.NotAvailableException();
+		}
 
 		return dataProducerInEffect._this();
 
 	}
 
-	public void registerDataClient(DataClient data_client) {
-		this.dataClient = new DataClientWrapper(data_client);
+	@Override
+	public void registerDataClient(final DataClient data_client) {
+		dataClient = new DataClientWrapper(data_client);
 	}
 
+	@Override
 	public DataClient getDataClient() {
 		return dataClient.getDelegate();
 	}
 
-	public void configure(HardwareAcquisitionConfig config) throws IncorrectStateException, WrongConfigurationException {
+	@Override
+	public void configure(final HardwareAcquisitionConfig config) throws IncorrectStateException,
+			WrongConfigurationException {
 
-		if (driver == null)
+		if (driver == null) {
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.UNKNOWN_ERROR, state,
 					HardwareState.CONFIGURING);
+		}
 
 		if (!state.equals(HardwareState.CONFIGURED) && !state.equals(HardwareState.STOPED)
-				&& !state.equals(HardwareState.RESETED))
+				&& !state.equals(HardwareState.RESETED)) {
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.WRONG_HARDWARE_STATE, state,
 					HardwareState.CONFIGURING);
+		}
 
 		try {
 			driver.config(config, getHardwareInfo());
-		} catch (WrongConfigurationException e) {
-			Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.WARNING, "Invalid configuration. Thowing the exception.",
-					e);
+		} catch (final WrongConfigurationException e) {
+			Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER).log(Level.WARNING,
+					"Invalid configuration. Thowing the exception.", e);
 			e.printStackTrace();
 			throw e;
-		} catch (Exception e) {
-			Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.WARNING, "Error configuring the hardware.", e);
+		} catch (final Exception e) {
+			Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER)
+					.log(Level.WARNING, "Error configuring the hardware.", e);
 			e.printStackTrace();
 		}
 
 	}
 
-	public DataProducer start(DataReceiver receiver) throws IncorrectStateException {
-		if (driver == null)
+	@Override
+	public DataProducer start(final DataReceiver receiver) throws IncorrectStateException {
+		if (driver == null) {
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.UNKNOWN_ERROR, state,
 					HardwareState.STARTING);
+		}
 
-		if (!state.equals(HardwareState.STOPED) && !state.equals(HardwareState.CONFIGURED))
+		if (!state.equals(HardwareState.STOPED) && !state.equals(HardwareState.CONFIGURED)) {
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.WRONG_HARDWARE_STATE, state,
 					HardwareState.STARTING);
+		}
 
 		try {
 			dataProducerInEffect = new BaseDataProducer(receiver);
 			dataProducerInEffect.addBaseDataProducerListener(this);
 
 			oldDataProducers.add(dataProducerInEffect);
-			DataProducer dataProducer = dataProducerInEffect._this();
+			final DataProducer dataProducer = dataProducerInEffect._this();
 
-			IDataSource ds = driver.start(getHardwareInfo());
+			final IDataSource ds = driver.start(getHardwareInfo());
 			dataProducerInEffect.setDataSource(ds);
 
 			return dataProducer;
-		} catch (IncorrectStateException e) {
+		} catch (final IncorrectStateException e) {
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.WRONG_HARDWARE_STATE,
 					getHardwareState(), HardwareState.STARTING);
 		}
 
 	}
 
-	public DataProducer startOutput(DataReceiver receiver, DataProducer data_source) throws IncorrectStateException {
-		if (driver == null)
+	@Override
+	public DataProducer startOutput(final DataReceiver receiver, final DataProducer data_source)
+			throws IncorrectStateException {
+		if (driver == null) {
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.UNKNOWN_ERROR, state,
 					HardwareState.STARTING);
+		}
 
-		if (!state.equals(HardwareState.STOPED) && !state.equals(HardwareState.CONFIGURED))
+		if (!state.equals(HardwareState.STOPED) && !state.equals(HardwareState.CONFIGURED)) {
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.WRONG_HARDWARE_STATE, state,
 					HardwareState.STARTING);
+		}
 
 		try {
 			dataProducerInEffect = new BaseDataProducer(receiver);
 			oldDataProducers.add(dataProducerInEffect);
 			dataProducerInEffect.addBaseDataProducerListener(this);
-			DataProducer dataProducer = dataProducerInEffect._this();
+			final DataProducer dataProducer = dataProducerInEffect._this();
 
-			IDataSource ds = driver.startOutput(getHardwareInfo(), new DataProducer2IDataSourceAdapter(
+			final IDataSource ds = driver.startOutput(getHardwareInfo(), new DataProducer2IDataSourceAdapter(
 					new DataProducerWrapper(data_source)));
 			dataProducerInEffect.setDataSource(ds);
 
 			return dataProducer;
-		} catch (IncorrectStateException e) {
+		} catch (final IncorrectStateException e) {
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.WRONG_HARDWARE_STATE,
 					getHardwareState(), HardwareState.STARTING);
 		}
 	}
 
+	@Override
 	public void stop() throws IncorrectStateException {
-		if (driver == null)
+		if (driver == null) {
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.UNKNOWN_ERROR, state,
 					HardwareState.STOPING);
+		}
 
-		if (!state.equals(HardwareState.STARTED))
+		if (!state.equals(HardwareState.STARTED)) {
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.WRONG_HARDWARE_STATE, state,
 					HardwareState.STOPING);
+		}
 
-		Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.INFO, "Reseting Driver...");
+		Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER).log(Level.INFO, "Reseting Driver...");
 		try {
-			if (this.dataProducerInEffect != null) {
+			if (dataProducerInEffect != null) {
 				dataProducerInEffect.stopNow();
 
 				dataProducerInEffect.dataSourceStateStoped();
 			}
 
 			driver.stop(getHardwareInfo());
-		} catch (IncorrectStateException e) {
+		} catch (final IncorrectStateException e) {
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.WRONG_HARDWARE_STATE,
 					getHardwareState(), HardwareState.STOPING);
 		}
 	}
 
+	@Override
 	public void reset() throws IncorrectStateException {
-		if (driver == null)
+		if (driver == null) {
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.UNKNOWN_ERROR, state,
 					HardwareState.RESETING);
+		}
 
 		if (!state.equals(HardwareState.STARTED) && !state.equals(HardwareState.CONFIGURED)
-				&& !state.equals(HardwareState.UNKNOWN))
+				&& !state.equals(HardwareState.UNKNOWN)) {
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.WRONG_HARDWARE_STATE, state,
 					HardwareState.RESETING);
+		}
 
-		Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.INFO, "Reseting Driver...");
+		Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER).log(Level.INFO, "Reseting Driver...");
 		try {
 			driver.reset(getHardwareInfo());
-		} catch (IncorrectStateException e) {
+		} catch (final IncorrectStateException e) {
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.WRONG_HARDWARE_STATE,
 					getHardwareState(), HardwareState.RESETING);
 		}
 	}
 
-	public void baseDataProducerIsEmpty(BaseDataProducer producer) {
-		if (producer != null)
+	@Override
+	public void baseDataProducerIsEmpty(final BaseDataProducer producer) {
+		if (producer != null) {
 			oldDataProducers.remove(producer);
+		}
 
-		if (producer == dataProducerInEffect)
+		if (producer == dataProducerInEffect) {
 			dataProducerInEffect = null;
+		}
 	}
 
 	private class BaseHardwareDataClientDispatcher implements EventQueueDispatcher {
-		public void dispatchEvent(Object o) {
+		@Override
+		public void dispatchEvent(final Object o) {
 			try {
 				if (o instanceof HardwareStateChangeEvent) {
 					if (dataClient != null) {
-						Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.FINE,
+						Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER).log(Level.FINE,
 								"Dispatching hardware state [" + ((HardwareStateChangeEvent) o).getNewState() + "]");
 						dataClient.hardwareStateChange(((HardwareStateChangeEvent) o).getNewState());
 					}
 				}
-			} catch (Exception e) {
-				LoggerUtil.logThrowable("Error comunicating HardwareStateChange to dataClient", e, Logger
-						.getLogger(BASE_HARDWARE_LOGGER));
+			} catch (final Exception e) {
+				LoggerUtil.logThrowable("Error comunicating HardwareStateChange to dataClient", e,
+						Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER));
 			}
 		}
 
+		@Override
 		public int getPriority() {
 			return Thread.NORM_PRIORITY;
 		}
@@ -445,16 +493,16 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void log(Level debugLevel, String message) {
-		Logger.getLogger(BASE_HARDWARE_LOGGER).log(debugLevel, message);
+	public void log(final Level debugLevel, final String message) {
+		Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER).log(debugLevel, message);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void logThrowable(String message, Throwable t) {
-		LoggerUtil.logThrowable(message, t, Logger.getLogger(BASE_HARDWARE_LOGGER));
+	public void logThrowable(final String message, final Throwable t) {
+		LoggerUtil.logThrowable(message, t, Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER));
 	}
 
 }

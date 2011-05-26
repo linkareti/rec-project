@@ -30,20 +30,24 @@ import com.linkare.rec.impl.utils.Defaults;
 public class UserAnalysisPanel extends javax.swing.JPanel implements
 		com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7637754421473532894L;
 	private Robot robot = null;
 	private AnalizadorImagens imageAnalyser = null;
 	private Component editingComponent = null;
-	private java.text.DecimalFormat df = new java.text.DecimalFormat("###0.0");
-	private java.text.DecimalFormat ndf = new java.text.DecimalFormat("0.0E0");
+	private final java.text.DecimalFormat df = new java.text.DecimalFormat("###0.0");
+	private final java.text.DecimalFormat ndf = new java.text.DecimalFormat("0.0E0");
 	public static final String THOMSON_N_ESP = "Thomson.N.Esp";
-	private static final double N_ESP = Double.parseDouble(Defaults.defaultIfEmpty(System.getProperty(THOMSON_N_ESP),
-			"640"));
+	private static final double N_ESP = Double.parseDouble(Defaults.defaultIfEmpty(
+			System.getProperty(UserAnalysisPanel.THOMSON_N_ESP), "640"));
 	public static final String THOMSON_D_ESP = "Thomson.D.Esp";
-	private static final double D_ESP = Double.parseDouble(Defaults.defaultIfEmpty(System.getProperty(THOMSON_D_ESP),
-			"0.07"));
+	private static final double D_ESP = Double.parseDouble(Defaults.defaultIfEmpty(
+			System.getProperty(UserAnalysisPanel.THOMSON_D_ESP), "0.07"));
 	private double corrente = 0;
 	private double tensao = 0;
-	private double miu_0 = 8.99E-7;
+	private final double miu_0 = 8.99E-7;
 
 	/** Creates new form UserAnalysisPanel */
 	public UserAnalysisPanel() {
@@ -53,7 +57,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 
 		try {
 			robot = new Robot();
-		} catch (java.awt.AWTException awte) {
+		} catch (final java.awt.AWTException awte) {
 			awte.printStackTrace();
 		}
 
@@ -158,12 +162,12 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 
 		jPanelColorPicker.setPreferredSize(new java.awt.Dimension(640, 480));
 		jPanelColorPicker.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseReleased(java.awt.event.MouseEvent evt) {
+			public void mouseReleased(final java.awt.event.MouseEvent evt) {
 				jPanelColorPickerMouseReleased(evt);
 			}
 		});
 		jPanelColorPicker.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-			public void mouseMoved(java.awt.event.MouseEvent evt) {
+			public void mouseMoved(final java.awt.event.MouseEvent evt) {
 				jPanelColorPickerMouseMoved(evt);
 			}
 		});
@@ -186,7 +190,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jSliderBeamBlue.setPaintTicks(true);
 		jSliderBeamBlue.setValue(0);
 		jSliderBeamBlue.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderBeamBlueStateChanged(evt);
 			}
 		});
@@ -211,7 +215,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jSliderCross.setPaintTicks(true);
 		jSliderCross.setValue(0);
 		jSliderCross.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderCrossStateChanged(evt);
 			}
 		});
@@ -242,7 +246,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jSliderD1.setPaintTicks(true);
 		jSliderD1.setValue(0);
 		jSliderD1.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderD1StateChanged(evt);
 			}
 		});
@@ -274,7 +278,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jSliderD2.setPaintTicks(true);
 		jSliderD2.setValue(0);
 		jSliderD2.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderD2StateChanged(evt);
 			}
 		});
@@ -307,7 +311,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jSliderP.setPaintLabels(true);
 		jSliderP.setPaintTicks(true);
 		jSliderP.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderPStateChanged(evt);
 			}
 		});
@@ -338,7 +342,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jSliderRansac.setPaintLabels(true);
 		jSliderRansac.setPaintTicks(true);
 		jSliderRansac.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderRansacStateChanged(evt);
 			}
 		});
@@ -436,7 +440,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 
 		jButtonB1Pick.setText(ReCResourceBundle.findString("thomson$rec.exp.display.pick"));
 		jButtonB1Pick.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonB1PickActionPerformed(evt);
 			}
 		});
@@ -452,7 +456,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 
 		jButtonB1Select.setText(ReCResourceBundle.findString("thomson$rec.exp.display.selectcolor"));
 		jButtonB1Select.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonB1SelectActionPerformed(evt);
 			}
 		});
@@ -543,7 +547,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 
 		jButtonBluePick.setText(ReCResourceBundle.findString("thomson$rec.exp.display.pick"));
 		jButtonBluePick.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonBluePickActionPerformed(evt);
 			}
 		});
@@ -559,7 +563,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 
 		jButtonBlueSelect.setText(ReCResourceBundle.findString("thomson$rec.exp.display.selectcolor"));
 		jButtonBlueSelect.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonBlueSelectActionPerformed(evt);
 			}
 		});
@@ -584,7 +588,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jPanel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0)));
 		jButtonEditOK.setText(ReCResourceBundle.findString("thomson$rec.exp.display.ok"));
 		jButtonEditOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonEditOKActionPerformed(evt);
 			}
 		});
@@ -593,7 +597,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 
 		jButtonEditCancel.setText(ReCResourceBundle.findString("thomson$rec.exp.display.cancel"));
 		jButtonEditCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonEditCancelActionPerformed(evt);
 			}
 		});
@@ -607,7 +611,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jPanel7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0)));
 		jButtonZoom.setText("OK");
 		jButtonZoom.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonZoomActionPerformed(evt);
 			}
 		});
@@ -619,7 +623,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		setLayout(new java.awt.BorderLayout());
 
 		addComponentListener(new java.awt.event.ComponentAdapter() {
-			public void componentResized(java.awt.event.ComponentEvent evt) {
+			public void componentResized(final java.awt.event.ComponentEvent evt) {
 				formComponentResized(evt);
 			}
 		});
@@ -633,7 +637,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jPanelOriginal.setMinimumSize(new java.awt.Dimension(160, 120));
 		jPanelOriginal.setPreferredSize(new java.awt.Dimension(160, 120));
 		jLabelOriginal.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseReleased(java.awt.event.MouseEvent evt) {
+			public void mouseReleased(final java.awt.event.MouseEvent evt) {
 				jLabelOriginalMouseReleased(evt);
 			}
 		});
@@ -650,7 +654,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jPanelEdge.setPreferredSize(new java.awt.Dimension(160, 120));
 		jLabelEdges.setOpaque(true);
 		jLabelEdges.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseReleased(java.awt.event.MouseEvent evt) {
+			public void mouseReleased(final java.awt.event.MouseEvent evt) {
 				jLabelEdgesMouseReleased(evt);
 			}
 		});
@@ -667,7 +671,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jPanelLines.setPreferredSize(new java.awt.Dimension(160, 120));
 		jLabelLines.setOpaque(true);
 		jLabelLines.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseReleased(java.awt.event.MouseEvent evt) {
+			public void mouseReleased(final java.awt.event.MouseEvent evt) {
 				jLabelLinesMouseReleased(evt);
 			}
 		});
@@ -685,7 +689,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jPanelAlign.setPreferredSize(new java.awt.Dimension(160, 120));
 		jLabelAlign.setOpaque(true);
 		jLabelAlign.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseReleased(java.awt.event.MouseEvent evt) {
+			public void mouseReleased(final java.awt.event.MouseEvent evt) {
 				jLabelAlignMouseReleased(evt);
 			}
 		});
@@ -702,7 +706,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jPanelBeam.setPreferredSize(new java.awt.Dimension(160, 120));
 		jLabelBeam.setOpaque(true);
 		jLabelBeam.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseReleased(java.awt.event.MouseEvent evt) {
+			public void mouseReleased(final java.awt.event.MouseEvent evt) {
 				jLabelBeamMouseReleased(evt);
 			}
 		});
@@ -719,7 +723,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jPanelFinal.setPreferredSize(new java.awt.Dimension(160, 120));
 		jLabelFinal.setOpaque(true);
 		jLabelFinal.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseReleased(java.awt.event.MouseEvent evt) {
+			public void mouseReleased(final java.awt.event.MouseEvent evt) {
 				jLabelFinalMouseReleased(evt);
 			}
 		});
@@ -736,7 +740,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jButtonEdit.setText(ReCResourceBundle.findString("thomson$rec.exp.display.changeanalysisvalues"));
 		jButtonEdit.setEnabled(false);
 		jButtonEdit.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonEditActionPerformed(evt);
 			}
 		});
@@ -793,80 +797,83 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 
 	}// GEN-END:initComponents
 
-	private void jSliderRansacStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderRansacStateChanged
+	private void jSliderRansacStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderRansacStateChanged
 	{// GEN-HEADEREND:event_jSliderRansacStateChanged
 		jTextFieldRansac.setText("" + jSliderRansac.getValue());
 	}// GEN-LAST:event_jSliderRansacStateChanged
 
-	private void jSliderPStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderPStateChanged
+	private void jSliderPStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderPStateChanged
 	{// GEN-HEADEREND:event_jSliderPStateChanged
 		jTextFieldP.setText("" + jSliderP.getValue());
 	}// GEN-LAST:event_jSliderPStateChanged
 
-	private void jButtonZoomActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonZoomActionPerformed
+	private void jButtonZoomActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonZoomActionPerformed
 	{// GEN-HEADEREND:event_jButtonZoomActionPerformed
 		jDialogZoom.hide();
 	}// GEN-LAST:event_jButtonZoomActionPerformed
 
-	private void jSliderBeamBlueStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderBeamBlueStateChanged
+	private void jSliderBeamBlueStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderBeamBlueStateChanged
 	{// GEN-HEADEREND:event_jSliderBeamBlueStateChanged
 		jTextFieldRBlue.setText("" + jSliderBeamBlue.getValue());
 	}// GEN-LAST:event_jSliderBeamBlueStateChanged
 
-	private void formComponentResized(java.awt.event.ComponentEvent evt)// GEN-FIRST:event_formComponentResized
+	private void formComponentResized(final java.awt.event.ComponentEvent evt)// GEN-FIRST:event_formComponentResized
 	{// GEN-HEADEREND:event_formComponentResized
 		readd();
 	}// GEN-LAST:event_formComponentResized
 
-	private void jLabelFinalMouseReleased(java.awt.event.MouseEvent evt)// GEN-FIRST:event_jLabelFinalMouseReleased
+	private void jLabelFinalMouseReleased(final java.awt.event.MouseEvent evt)// GEN-FIRST:event_jLabelFinalMouseReleased
 	{// GEN-HEADEREND:event_jLabelFinalMouseReleased
 		showZoom(jLabelFinal);
 	}// GEN-LAST:event_jLabelFinalMouseReleased
 
-	private void jLabelBeamMouseReleased(java.awt.event.MouseEvent evt)// GEN-FIRST:event_jLabelBeamMouseReleased
+	private void jLabelBeamMouseReleased(final java.awt.event.MouseEvent evt)// GEN-FIRST:event_jLabelBeamMouseReleased
 	{// GEN-HEADEREND:event_jLabelBeamMouseReleased
 		showZoom(jLabelBeam);
 	}// GEN-LAST:event_jLabelBeamMouseReleased
 
-	private void jLabelAlignMouseReleased(java.awt.event.MouseEvent evt)// GEN-FIRST:event_jLabelAlignMouseReleased
+	private void jLabelAlignMouseReleased(final java.awt.event.MouseEvent evt)// GEN-FIRST:event_jLabelAlignMouseReleased
 	{// GEN-HEADEREND:event_jLabelAlignMouseReleased
 		showZoom(jLabelAlign);
 	}// GEN-LAST:event_jLabelAlignMouseReleased
 
-	private void jLabelLinesMouseReleased(java.awt.event.MouseEvent evt)// GEN-FIRST:event_jLabelLinesMouseReleased
+	private void jLabelLinesMouseReleased(final java.awt.event.MouseEvent evt)// GEN-FIRST:event_jLabelLinesMouseReleased
 	{// GEN-HEADEREND:event_jLabelLinesMouseReleased
 		showZoom(jLabelLines);
 	}// GEN-LAST:event_jLabelLinesMouseReleased
 
-	private void jLabelEdgesMouseReleased(java.awt.event.MouseEvent evt)// GEN-FIRST:event_jLabelEdgesMouseReleased
+	private void jLabelEdgesMouseReleased(final java.awt.event.MouseEvent evt)// GEN-FIRST:event_jLabelEdgesMouseReleased
 	{// GEN-HEADEREND:event_jLabelEdgesMouseReleased
 		showZoom(jLabelEdges);
 	}// GEN-LAST:event_jLabelEdgesMouseReleased
 
-	private void jLabelOriginalMouseReleased(java.awt.event.MouseEvent evt)// GEN-FIRST:event_jLabelOriginalMouseReleased
+	private void jLabelOriginalMouseReleased(final java.awt.event.MouseEvent evt)// GEN-FIRST:event_jLabelOriginalMouseReleased
 	{// GEN-HEADEREND:event_jLabelOriginalMouseReleased
 		showZoom(jLabelOriginal);
 	}// GEN-LAST:event_jLabelOriginalMouseReleased
 
-	private void jPanelColorPickerMouseMoved(java.awt.event.MouseEvent evt)// GEN-FIRST:event_jPanelColorPickerMouseMoved
+	private void jPanelColorPickerMouseMoved(final java.awt.event.MouseEvent evt)// GEN-FIRST:event_jPanelColorPickerMouseMoved
 	{// GEN-HEADEREND:event_jPanelColorPickerMouseMoved
-		if (editingComponent == null)
+		if (editingComponent == null) {
 			return;
+		}
 
-		Point p = new Point(evt.getX(), evt.getY());
+		final Point p = new Point(evt.getX(), evt.getY());
 		SwingUtilities.convertPointToScreen(p, jPanelColorPicker);
-		Color crgb = robot.getPixelColor((int) p.getX(), (int) p.getY());
+		final Color crgb = robot.getPixelColor((int) p.getX(), (int) p.getY());
 
-		if (editingComponent.equals(jPanelB1))
+		if (editingComponent.equals(jPanelB1)) {
 			updatePreview(jPanelB1Preview, crgb);
-		else if (editingComponent.equals(jPanelBlue))
+		} else if (editingComponent.equals(jPanelBlue)) {
 			updatePreview(jPanelBluePreview, crgb);
+		}
 	}// GEN-LAST:event_jPanelColorPickerMouseMoved
 
-	private void jPanelColorPickerMouseReleased(java.awt.event.MouseEvent evt)// GEN-FIRST:event_jPanelColorPickerMouseReleased
+	private void jPanelColorPickerMouseReleased(final java.awt.event.MouseEvent evt)// GEN-FIRST:event_jPanelColorPickerMouseReleased
 	{// GEN-HEADEREND:event_jPanelColorPickerMouseReleased
-		if (editingComponent == null)
+		if (editingComponent == null) {
 			return;
+		}
 
 		editingComponent = null;
 
@@ -880,14 +887,14 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jPanelColorPicker.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 	}// GEN-LAST:event_jPanelColorPickerMouseReleased
 
-	private void jButtonBlueSelectActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonBlueSelectActionPerformed
+	private void jButtonBlueSelectActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonBlueSelectActionPerformed
 	{// GEN-HEADEREND:event_jButtonBlueSelectActionPerformed
-		Color selectedColor = jColorChooser.showDialog(this, ReCResourceBundle
-				.findString("thomson$rec.exp.display.selectcolor"), jPanelBluePreview.getBackground());
+		final Color selectedColor = jColorChooser.showDialog(this,
+				ReCResourceBundle.findString("thomson$rec.exp.display.selectcolor"), jPanelBluePreview.getBackground());
 		updatePreview(jPanelBluePreview, selectedColor);
 	}// GEN-LAST:event_jButtonBlueSelectActionPerformed
 
-	private void jButtonBluePickActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonBluePickActionPerformed
+	private void jButtonBluePickActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonBluePickActionPerformed
 	{// GEN-HEADEREND:event_jButtonBluePickActionPerformed
 		editingComponent = jPanelBlue;
 		jPanelColorPicker.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
@@ -895,14 +902,14 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		showColorPicker();
 	}// GEN-LAST:event_jButtonBluePickActionPerformed
 
-	private void jButtonB1SelectActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonB1SelectActionPerformed
+	private void jButtonB1SelectActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonB1SelectActionPerformed
 	{// GEN-HEADEREND:event_jButtonB1SelectActionPerformed
-		Color selectedColor = jColorChooser.showDialog(this, ReCResourceBundle
-				.findString("thomson$rec.exp.display.selectcolor"), jPanelB1Preview.getBackground());
+		final Color selectedColor = jColorChooser.showDialog(this,
+				ReCResourceBundle.findString("thomson$rec.exp.display.selectcolor"), jPanelB1Preview.getBackground());
 		updatePreview(jPanelB1Preview, selectedColor);
 	}// GEN-LAST:event_jButtonB1SelectActionPerformed
 
-	private void jButtonB1PickActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonB1PickActionPerformed
+	private void jButtonB1PickActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonB1PickActionPerformed
 	{// GEN-HEADEREND:event_jButtonB1PickActionPerformed
 		editingComponent = jPanelB1;
 		jPanelColorPicker.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
@@ -910,18 +917,18 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		showColorPicker();
 	}// GEN-LAST:event_jButtonB1PickActionPerformed
 
-	private void jButtonEditActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonEditActionPerformed
+	private void jButtonEditActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonEditActionPerformed
 	{// GEN-HEADEREND:event_jButtonEditActionPerformed
 		jDialogChooser.pack();
 		jDialogChooser.setLocationRelativeTo(this);
 		jDialogChooser.show();
 	}// GEN-LAST:event_jButtonEditActionPerformed
 
-	private void jButtonEditOKActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonEditOKActionPerformed
+	private void jButtonEditOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonEditOKActionPerformed
 	{// GEN-HEADEREND:event_jButtonEditOKActionPerformed
 		jDialogChooser.hide();
-		Color b1 = jPanelB1Preview.getBackground();
-		Color blue = jPanelBluePreview.getBackground();
+		final Color b1 = jPanelB1Preview.getBackground();
+		final Color blue = jPanelBluePreview.getBackground();
 
 		imageAnalyser.PRETO_R1 = b1.getRed();
 		imageAnalyser.PRETO_G1 = b1.getGreen();
@@ -955,45 +962,45 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		}.start();
 	}// GEN-LAST:event_jButtonEditOKActionPerformed
 
-	private void jButtonEditCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonEditCancelActionPerformed
+	private void jButtonEditCancelActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonEditCancelActionPerformed
 	{// GEN-HEADEREND:event_jButtonEditCancelActionPerformed
 		jDialogChooser.hide();
 	}// GEN-LAST:event_jButtonEditCancelActionPerformed
 
-	private void jSliderD2StateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderD2StateChanged
+	private void jSliderD2StateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderD2StateChanged
 	{// GEN-HEADEREND:event_jSliderD2StateChanged
 		jTextFieldD2.setText("" + jSliderD2.getValue());
 	}// GEN-LAST:event_jSliderD2StateChanged
 
-	private void jSliderD1StateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderD1StateChanged
+	private void jSliderD1StateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderD1StateChanged
 	{// GEN-HEADEREND:event_jSliderD1StateChanged
 		jTextFieldD1.setText("" + jSliderD1.getValue());
 	}// GEN-LAST:event_jSliderD1StateChanged
 
-	private void jSliderCrossStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderCrossStateChanged
+	private void jSliderCrossStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderCrossStateChanged
 	{// GEN-HEADEREND:event_jSliderCrossStateChanged
 		jTextFieldCross.setText("" + jSliderCross.getValue());
 	}// GEN-LAST:event_jSliderCrossStateChanged
 
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 		ReCResourceBundle.loadResourceBundle("thomson",
 				"recresource:///pt/utl/ist/elab/client/thomson/resources/messages");
-		JFrame test = new JFrame();
-		UserAnalysisPanel uap = new UserAnalysisPanel();
+		final JFrame test = new JFrame();
+		final UserAnalysisPanel uap = new UserAnalysisPanel();
 		test.getContentPane().add(uap);
 		test.pack();
 		test.setVisible(true);
 		try {
-			Image img = javax.imageio.ImageIO.read(new java.io.File("/home/andre/Image1.jpg"));
+			final Image img = javax.imageio.ImageIO.read(new java.io.File("/home/andre/Image1.jpg"));
 			uap.imageAnalyser.setOriginalImage(img);
 			uap.jButtonEdit.setEnabled(true);
 			uap.buildImages(img);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void updatePreview(JPanel preview, Color crgb) {
+	private void updatePreview(final JPanel preview, final Color crgb) {
 		if (preview.equals(jPanelB1Preview)) {
 			jPanelB1Preview.setBackground(crgb);
 			jTextFieldB1R.setText("" + crgb.getRed());
@@ -1014,39 +1021,41 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jDialogColorPicker.show();
 	}
 
-	public void setImageN(java.awt.Image img, int n) {
+	public void setImageN(final java.awt.Image img, final int n) {
 		if (n == 0) {
 			jPanelColorPicker.setBorder(new ImageBorder(img, true));
 			paintImage(jLabelOriginal, img);
-		} else if (n == 1)
+		} else if (n == 1) {
 			paintImage(jLabelEdges, img);
-		else if (n == 2)
+		} else if (n == 2) {
 			paintImage(jLabelLines, img);
-		else if (n == 3)
+		} else if (n == 3) {
 			paintImage(jLabelAlign, img);
-		else if (n == 4)
+		} else if (n == 4) {
 			paintImage(jLabelBeam, img);
-		else if (n == 5)
+		} else if (n == 5) {
 			paintImage(jLabelFinal, img);
+		}
 	}
 
-	private void buildImages(byte[] imageBA) {
+	private void buildImages(final byte[] imageBA) {
 		buildImages(imageAnalyser.byteArray2Image(imageBA));
 	}
 
-	private void buildImages(Image img) {
+	private void buildImages(final Image img) {
 		jButtonEdit.setEnabled(false);
 		double user_corrente = 0;
-		if (model != null)
+		if (model != null) {
 			user_corrente = Double.parseDouble(model.getAcquisitionConfig().getSelectedHardwareParameterValue(
 					"correntebobines"));
+		}
 
 		imageAnalyser.setIsUp(user_corrente < 0);
 
 		imageAnalyser.setOriginalImage(img);
 		setImageN(img, 0);
 
-		Image[] imagesAlinhada = imageAnalyser.getImagemAlinhada(null);
+		final Image[] imagesAlinhada = imageAnalyser.getImagemAlinhada(null);
 
 		if (imagesAlinhada == null) {
 			jButtonEdit.setEnabled(true);
@@ -1062,7 +1071,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		setImageN(imagesAlinhada[1], 2);
 		setImageN(imagesAlinhada[2], 3);
 		setImageN(imagesAlinhada[3], 4);
-		double[] xyr = imageAnalyser.getCircunferenciaPontos(imagesAlinhada[3]);
+		final double[] xyr = imageAnalyser.getCircunferenciaPontos(imagesAlinhada[3]);
 		jTextFieldX.setText("X0=" + df.format(xyr[0]) + "(cm)");
 		jTextFieldY.setText("Y0=" + df.format(xyr[1]) + "(cm)");
 		jTextFieldR.setText("R=" + df.format((xyr[2] / 50)) + "(cm)");
@@ -1070,15 +1079,17 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 
 		String modo = null;
 
-		if (model != null)
+		if (model != null) {
 			modo = model.getAcquisitionConfig().getSelectedHardwareParameterValue("modo");
+		}
 
 		if (modo != null && modo.equals("defmag")) {
-			double b = miu_0 * N_ESP / 2 * (corrente / 1000) / D_ESP;
-			double qm = 2 * tensao / (Math.pow(xyr[2] / 5000, 2) * Math.pow(b, 2));
+			final double b = miu_0 * UserAnalysisPanel.N_ESP / 2 * (corrente / 1000) / UserAnalysisPanel.D_ESP;
+			final double qm = 2 * tensao / (Math.pow(xyr[2] / 5000, 2) * Math.pow(b, 2));
 			jTextFieldQM.setText("q/m=" + ndf.format(qm) + "(C/Kg)");
-		} else
+		} else {
 			jTextFieldQM.setText("-");
+		}
 
 		jButtonEdit.setEnabled(true);
 	}
@@ -1118,9 +1129,10 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		return null;
 	}
 
-	public void newSamples(com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
-		if (model == null)
+	public void newSamples(final com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
+		if (model == null) {
 			return;
+		}
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
 			if (model.getValueAt(i, model.getChannelIndex("Image")) != null) {
 				buildImages(model.getValueAt(i, model.getChannelIndex("Image")).getValue().getByteArrayValue()
@@ -1128,10 +1140,11 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 			}
 			if (model.getValueAt(i, 0) != null) {
 				String signI = "";
-				double c = Double.parseDouble(model.getAcquisitionConfig().getSelectedHardwareParameterValue(
+				final double c = Double.parseDouble(model.getAcquisitionConfig().getSelectedHardwareParameterValue(
 						"correntebobines"));
-				if (c < 0)
+				if (c < 0) {
 					signI = "-";
+				}
 
 				jTextFieldI.setText("I=" + signI + df.format(model.getValueAt(i, 0).getValue().getIntValue()) + "(mA)");
 				corrente = model.getValueAt(i, 0).getValue().getIntValue();
@@ -1145,21 +1158,23 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 
 	private com.linkare.rec.impl.client.experiment.ExpDataModel model = null;
 
-	public void setExpDataModel(com.linkare.rec.impl.client.experiment.ExpDataModel model) {
-		if (this.model != null)
+	public void setExpDataModel(final com.linkare.rec.impl.client.experiment.ExpDataModel model) {
+		if (this.model != null) {
 			model.removeExpDataModelListener(this);
+		}
 
 		this.model = model;
 
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 	}
 
 	public String getName() {
 		return ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.thomson.title.3", "Analasys Panel");
 	}
 
-	private void paintImage(JLabel label, Image img) {
+	private void paintImage(final JLabel label, final Image img) {
 		ImageIcon icon = null;
 		if (img != null) {
 			icon = new ImageIcon(img.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
@@ -1184,26 +1199,29 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		paintImage(jLabelFinal, imageAnalyser.getFinalimage(imageAnalyser.getImage(2)));
 	}
 
-	private void showZoom(JLabel label) {
+	private void showZoom(final JLabel label) {
 		Image img = null;
-		if (label.getIcon() == null)
+		if (label.getIcon() == null) {
 			return;
+		}
 
-		if (label.equals(jLabelOriginal))
+		if (label.equals(jLabelOriginal)) {
 			img = imageAnalyser.getOriginalImage();
-		else if (label.equals(jLabelEdges))
+		} else if (label.equals(jLabelEdges)) {
 			img = imageAnalyser.getImage(0);
-		else if (label.equals(jLabelLines))
+		} else if (label.equals(jLabelLines)) {
 			img = imageAnalyser.getImage(1);
-		else if (label.equals(jLabelAlign))
+		} else if (label.equals(jLabelAlign)) {
 			img = imageAnalyser.getImage(2);
-		else if (label.equals(jLabelBeam))
+		} else if (label.equals(jLabelBeam)) {
 			img = imageAnalyser.getImage(3);
-		else if (label.equals(jLabelFinal))
+		} else if (label.equals(jLabelFinal)) {
 			img = imageAnalyser.getFinalimage(imageAnalyser.getImage(2));
+		}
 
-		if (img == null)
+		if (img == null) {
 			return;
+		}
 
 		jLabelZoom.setIcon(new ImageIcon(img));
 		jDialogZoom.pack();

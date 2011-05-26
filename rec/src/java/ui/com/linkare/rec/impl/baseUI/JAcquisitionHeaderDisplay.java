@@ -18,6 +18,11 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * @author José Pedro Pereira - Linkare TI
  */
 public class JAcquisitionHeaderDisplay extends javax.swing.JPanel implements AcquisitionHeaderDisplay {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3232664970974155008L;
+
 	private static final String NO_HEADER_STR = ReCResourceBundle.findStringOrDefault(
 			"ReCBaseUI$rec.bui.lbl.noHeaderStatus", "No header yet!");
 
@@ -41,7 +46,7 @@ public class JAcquisitionHeaderDisplay extends javax.swing.JPanel implements Acq
 		setLayout(new java.awt.BorderLayout());
 
 		textPaneHeader.setEditable(false);
-		textPaneHeader.setText(NO_HEADER_STR);
+		textPaneHeader.setText(JAcquisitionHeaderDisplay.NO_HEADER_STR);
 		add(textPaneHeader, java.awt.BorderLayout.CENTER);
 
 	}// GEN-END:initComponents
@@ -51,8 +56,9 @@ public class JAcquisitionHeaderDisplay extends javax.swing.JPanel implements Acq
 	 * 
 	 * @return Value of property acquisitionHeader.
 	 */
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionHeader() {
-		return this.acquisitionHeader;
+		return acquisitionHeader;
 	}
 
 	/**
@@ -60,16 +66,19 @@ public class JAcquisitionHeaderDisplay extends javax.swing.JPanel implements Acq
 	 * 
 	 * @param acquisitionHeader New value of property acquisitionHeader.
 	 */
-	public void setAcquisitionHeader(HardwareAcquisitionConfig acquisitionHeader) {
+	@Override
+	public void setAcquisitionHeader(final HardwareAcquisitionConfig acquisitionHeader) {
 		this.acquisitionHeader = acquisitionHeader;
-		if (acquisitionHeader != null)
+		if (acquisitionHeader != null) {
 			textPaneHeader.setText(acquisitionHeader.toString());
-		else
-			textPaneHeader.setText(NO_HEADER_STR);
+		} else {
+			textPaneHeader.setText(JAcquisitionHeaderDisplay.NO_HEADER_STR);
+		}
 
 		repaint();
 	}
 
+	@Override
 	public JComponent getDisplayComponent() {
 		return this;
 	}
@@ -80,10 +89,11 @@ public class JAcquisitionHeaderDisplay extends javax.swing.JPanel implements Acq
 	 * @return Value of property text.
 	 */
 	public String getText() {
-		return this.textPaneHeader.getText();
+		return textPaneHeader.getText();
 	}
 
-	public void print(Graphics g) {
+	@Override
+	public void print(final Graphics g) {
 		textPaneHeader.print(g);
 	}
 

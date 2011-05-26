@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.gamma.displays;
  */
 public class PressionTable extends com.linkare.rec.impl.baseUI.table.MultSeriesTable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1699205338647293303L;
+
 	/** Creates a new instance of AnguloIntensidadeChart */
 	public PressionTable() {
 		super();

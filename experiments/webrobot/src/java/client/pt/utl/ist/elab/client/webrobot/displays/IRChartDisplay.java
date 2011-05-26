@@ -19,12 +19,17 @@ import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
  */
 public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4044212168535968298L;
+
 	/** Creates new form IRChartDisplay */
 	public IRChartDisplay() {
 		initComponents();
 		dataIR = new DefaultChartModelProxy(0, 8, false);
-		org.jfree.chart.JFreeChart chart = org.jfree.chart.ChartFactory.createXYLineChart(name, "Tempo(s)", "Valor",
-				dataIR, org.jfree.chart.plot.PlotOrientation.VERTICAL, true, true, false);
+		final org.jfree.chart.JFreeChart chart = org.jfree.chart.ChartFactory.createXYLineChart(name, "Tempo(s)",
+				"Valor", dataIR, org.jfree.chart.plot.PlotOrientation.VERTICAL, true, true, false);
 		chartPanel = new org.jfree.chart.ChartPanel(chart);
 		chartPanel.setPreferredSize(new java.awt.Dimension(600, 400));
 		add(chartPanel, java.awt.BorderLayout.CENTER);
@@ -55,7 +60,8 @@ public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay
 		jButtonIR0.setToolTipText("Ver IR0?");
 		jButtonIR0.setEnabled(false);
 		jButtonIR0.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonIR0MousePressed(evt);
 			}
 		});
@@ -67,7 +73,8 @@ public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay
 		jButtonIR1.setText("IR1");
 		jButtonIR1.setToolTipText("Ver IR1?");
 		jButtonIR1.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonIR1MousePressed(evt);
 			}
 		});
@@ -79,7 +86,8 @@ public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay
 		jButtonIR2.setText("IR2");
 		jButtonIR2.setToolTipText("Ver IR2?");
 		jButtonIR2.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonIR2MousePressed(evt);
 			}
 		});
@@ -91,7 +99,8 @@ public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay
 		jButtonIR3.setText("IR3");
 		jButtonIR3.setToolTipText("Ver IR3?");
 		jButtonIR3.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonIR3MousePressed(evt);
 			}
 		});
@@ -103,7 +112,8 @@ public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay
 		jButtonIR4.setText("IR4");
 		jButtonIR4.setToolTipText("Ver IR4?");
 		jButtonIR4.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonIR4MousePressed(evt);
 			}
 		});
@@ -115,7 +125,8 @@ public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay
 		jButtonIR5.setText("IR5");
 		jButtonIR5.setToolTipText("Ver IR5?");
 		jButtonIR5.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonIR5MousePressed(evt);
 			}
 		});
@@ -127,7 +138,8 @@ public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay
 		jButtonIR6.setText("IR6");
 		jButtonIR6.setToolTipText("Ver IR6?");
 		jButtonIR6.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonIR6MousePressed(evt);
 			}
 		});
@@ -139,7 +151,8 @@ public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay
 		jButtonIR7.setText("IR7");
 		jButtonIR7.setToolTipText("Ver IR7?");
 		jButtonIR7.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonIR7MousePressed(evt);
 			}
 		});
@@ -153,7 +166,8 @@ public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay
 		jButtonPrint.setMinimumSize(new java.awt.Dimension(30, 28));
 		jButtonPrint.setPreferredSize(new java.awt.Dimension(30, 28));
 		jButtonPrint.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonPrintActionPerformed(evt);
 			}
 		});
@@ -164,7 +178,7 @@ public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay
 
 	}// GEN-END:initComponents
 
-	private void jButtonIR7MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonIR7MousePressed
+	private void jButtonIR7MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonIR7MousePressed
 		if (jButtonIR7.isEnabled()) {
 			dataIR.setSeriesVisible(true, 7);
 			jButtonIR7.setEnabled(false);
@@ -174,7 +188,7 @@ public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay
 		}
 	}// GEN-LAST:event_jButtonIR7MousePressed
 
-	private void jButtonIR6MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonIR6MousePressed
+	private void jButtonIR6MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonIR6MousePressed
 		if (jButtonIR6.isEnabled()) {
 			dataIR.setSeriesVisible(true, 6);
 			jButtonIR6.setEnabled(false);
@@ -184,7 +198,7 @@ public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay
 		}
 	}// GEN-LAST:event_jButtonIR6MousePressed
 
-	private void jButtonIR5MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonIR5MousePressed
+	private void jButtonIR5MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonIR5MousePressed
 		if (jButtonIR5.isEnabled()) {
 			dataIR.setSeriesVisible(true, 5);
 			jButtonIR5.setEnabled(false);
@@ -194,7 +208,7 @@ public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay
 		}
 	}// GEN-LAST:event_jButtonIR5MousePressed
 
-	private void jButtonIR4MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonIR4MousePressed
+	private void jButtonIR4MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonIR4MousePressed
 		if (jButtonIR4.isEnabled()) {
 			dataIR.setSeriesVisible(true, 4);
 			jButtonIR4.setEnabled(false);
@@ -204,7 +218,7 @@ public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay
 		}
 	}// GEN-LAST:event_jButtonIR4MousePressed
 
-	private void jButtonIR3MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonIR3MousePressed
+	private void jButtonIR3MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonIR3MousePressed
 		if (jButtonIR3.isEnabled()) {
 			dataIR.setSeriesVisible(true, 3);
 			jButtonIR3.setEnabled(false);
@@ -214,7 +228,7 @@ public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay
 		}
 	}// GEN-LAST:event_jButtonIR3MousePressed
 
-	private void jButtonIR2MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonIR2MousePressed
+	private void jButtonIR2MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonIR2MousePressed
 		if (jButtonIR2.isEnabled()) {
 			dataIR.setSeriesVisible(true, 2);
 			jButtonIR2.setEnabled(false);
@@ -224,7 +238,7 @@ public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay
 		}
 	}// GEN-LAST:event_jButtonIR2MousePressed
 
-	private void jButtonIR1MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonIR1MousePressed
+	private void jButtonIR1MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonIR1MousePressed
 		if (jButtonIR1.isEnabled()) {
 			dataIR.setSeriesVisible(true, 1);
 			jButtonIR1.setEnabled(false);
@@ -234,7 +248,7 @@ public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay
 		}
 	}// GEN-LAST:event_jButtonIR1MousePressed
 
-	private void jButtonIR0MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonIR0MousePressed
+	private void jButtonIR0MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonIR0MousePressed
 		if (jButtonIR0.isEnabled()) {
 			dataIR.setSeriesVisible(true, 0);
 			jButtonIR0.setEnabled(false);
@@ -244,7 +258,7 @@ public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay
 		}
 	}// GEN-LAST:event_jButtonIR0MousePressed
 
-	private void jButtonPrintActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonPrintActionPerformed
+	private void jButtonPrintActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonPrintActionPerformed
 		printchart();
 	}// GEN-LAST:event_jButtonPrintActionPerformed
 
@@ -252,21 +266,26 @@ public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay
 		new PrintComponent(chartPanel);
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.Icon getIcon() {
 		return icon;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
-	public void setExpDataModel(ExpDataModel expDataModel) {
-		if (expDataModel != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel expDataModel) {
+		if (expDataModel != null) {
 			expDataModel.removeExpDataModelListener(this);
+		}
 
 		this.expDataModel = expDataModel;
 
@@ -276,10 +295,12 @@ public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay
 		}
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
@@ -288,31 +309,38 @@ public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay
 		dataIR.dataModelRunning();
 	}
 
+	@Override
 	public void dataModelStoped() {
 		dataIR.dataModelStoped();
 	}
 
-	public void headerAvailable(com.linkare.rec.data.config.HardwareAcquisitionConfig hardwareAcquisitionConfig) {
+	public void headerAvailable(final com.linkare.rec.data.config.HardwareAcquisitionConfig hardwareAcquisitionConfig) {
 		dataIR.headerAvailable(hardwareAcquisitionConfig);
 	}
 
-	public void newSamples(com.linkare.rec.impl.client.experiment.NewExpDataEvent newExpDataEvent) {
+	@Override
+	public void newSamples(final com.linkare.rec.impl.client.experiment.NewExpDataEvent newExpDataEvent) {
 		dataIR.newSamples(newExpDataEvent);
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 		headerAvailable(expDataModel.getAcquisitionConfig());
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
@@ -329,9 +357,9 @@ public class IRChartDisplay extends javax.swing.JPanel implements ExpDataDisplay
 	private javax.swing.JToolBar jToolBarChart;
 	// End of variables declaration//GEN-END:variables
 	private ExpDataModel expDataModel;
-	private javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/displays/resources/ChartIV16.gif"));
-	private String name = "Sensores Infravermelhos";
-	private DefaultChartModelProxy dataIR;
-	private org.jfree.chart.ChartPanel chartPanel;
+	private final String name = "Sensores Infravermelhos";
+	private final DefaultChartModelProxy dataIR;
+	private final org.jfree.chart.ChartPanel chartPanel;
 }

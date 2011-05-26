@@ -15,6 +15,10 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  */
 public class GraphPistonRMS extends MyDefaultXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4701714266593827092L;
 	private static final String CHART_NAME = ReCResourceBundle
 			.findString("statsound$rec.exp.display.statsound.title.4");
 
@@ -27,11 +31,11 @@ public class GraphPistonRMS extends MyDefaultXYExperimentGraph {
 
 	@Override
 	public String getName() {
-		return CHART_NAME;
+		return GraphPistonRMS.CHART_NAME;
 	}
 
 	@Override
-	protected String getChartName(HardwareAcquisitionConfig header) {
+	protected String getChartName(final HardwareAcquisitionConfig header) {
 		return getName();
 	}
 }

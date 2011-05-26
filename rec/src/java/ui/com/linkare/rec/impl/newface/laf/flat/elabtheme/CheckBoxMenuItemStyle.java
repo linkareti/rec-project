@@ -12,6 +12,7 @@ import java.util.Map;
 
 import javax.swing.plaf.FontUIResource;
 
+import com.linkare.rec.impl.newface.laf.flat.theme.AbstractStyle;
 import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 
 /**
@@ -20,13 +21,13 @@ import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 @Style
 public class CheckBoxMenuItemStyle extends DefaultStyle {
 
-	//ENABLED COLORS
+	// ENABLED COLORS
 	private static final Color COLOR_MENU_ITEM_BG = new Color(0x263537);
 	private static final Color COLOR_MENU_ITEM_FG = new Color(0xE4EEED);
 	private static final Color COLOR_MENU_BORDER = new Color(0xE4EEED);
 	private static final Color COLOR_MENU_DISABLED_FG = new Color(0x22363A);
 	private static final Color COLOR_MENU_ACCELERATOR_FG = new Color(0xE4EEED);
-	//PROPERTIES
+	// PROPERTIES
 	private static final String PT_MENU_SELECTION_BG = "selectionBackground";
 	private static final String PT_MENU_SELECTION_FG = "selectionForeground";
 	private static final String PT_MENU_DISABLED_FG = "disabledForeground";
@@ -34,7 +35,7 @@ public class CheckBoxMenuItemStyle extends DefaultStyle {
 	private static final String PT_MENU_MARGIN = "margin";
 	private static final String PT_FONT_ACCELERATOR = "acceleratorFont";
 
-	//LABEL FONT
+	// LABEL FONT
 	public static final Font FONT_MENU = new FontUIResource("Arial", Font.BOLD, 10);
 
 	public static final String ID = "CheckBoxMenuItem";
@@ -48,20 +49,20 @@ public class CheckBoxMenuItemStyle extends DefaultStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return CheckBoxMenuItemStyle.ID;
 	}
 
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(BORDER, EMPTY_BORDER_MARGIN_2);
-		map.put(FOREGROUND, COLOR_MENU_ITEM_FG);
-		map.put(BACKGROUND, COLOR_MENU_ITEM_BG);
-		map.put(PT_MENU_SELECTION_FG, COLOR_MENU_ITEM_BG);
-		map.put(PT_MENU_SELECTION_BG, PT_MENU_SELECTION_FG);
-		map.put(FONT, FONT_MENU);
-		map.put(PT_FONT_ACCELERATOR, FONT_MENU);
-		map.put(PT_MENU_ACCELERATOR_FG, COLOR_MENU_ACCELERATOR_FG);
+		map.put(AbstractStyle.BORDER, DefaultStyle.EMPTY_BORDER_MARGIN_2);
+		map.put(AbstractStyle.FOREGROUND, CheckBoxMenuItemStyle.COLOR_MENU_ITEM_FG);
+		map.put(AbstractStyle.BACKGROUND, CheckBoxMenuItemStyle.COLOR_MENU_ITEM_BG);
+		map.put(CheckBoxMenuItemStyle.PT_MENU_SELECTION_FG, CheckBoxMenuItemStyle.COLOR_MENU_ITEM_BG);
+		map.put(CheckBoxMenuItemStyle.PT_MENU_SELECTION_BG, CheckBoxMenuItemStyle.PT_MENU_SELECTION_FG);
+		map.put(AbstractStyle.FONT, CheckBoxMenuItemStyle.FONT_MENU);
+		map.put(CheckBoxMenuItemStyle.PT_FONT_ACCELERATOR, CheckBoxMenuItemStyle.FONT_MENU);
+		map.put(CheckBoxMenuItemStyle.PT_MENU_ACCELERATOR_FG, CheckBoxMenuItemStyle.COLOR_MENU_ACCELERATOR_FG);
 	}
 
 	// -------------------------------------------------------------------------

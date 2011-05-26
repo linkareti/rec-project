@@ -35,12 +35,16 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  */
 public class DefaultExperimentTimeSeriesGraph extends javax.swing.JPanel implements ExpDataDisplay,
 		ExpDataModelListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -645433433676332049L;
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(DefaultExperimentTimeSeriesGraph.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(DefaultExperimentTimeSeriesGraph.UI_CLIENT_LOGGER));
 		}
 	}
 
@@ -82,80 +86,90 @@ public class DefaultExperimentTimeSeriesGraph extends javax.swing.JPanel impleme
 	/** Holds value of property channelY. */
 	private int channelY;
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/chart16.gif"));
 	}
 
 	private ExpDataModel model = null;
 
-	public void setExpDataModel(ExpDataModel model) {
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
 		this.model = model;
 		model.addExpDataModelListener(this);
 	}
 
+	@Override
 	public String getName() {
 		return "Time Series Chart";
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
 
+	@Override
 	public void dataModelWaiting() {// BIG SILENT NOOP
 	}
 
+	@Override
 	public void dataModelStoped() {
-		if (header == null && model != null)
+		if (header == null && model != null) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
 	private HardwareAcquisitionConfig header = null;
 
-	private void headerAvailable(HardwareAcquisitionConfig header) {
-		if (header == null)
+	private void headerAvailable(final HardwareAcquisitionConfig header) {
+		if (header == null) {
 			return;
+		}
 
 		this.header = header;
 
-		JPanel fullPlot = new JPanel();
+		final JPanel fullPlot = new JPanel();
 		fullPlot.setLayout(new BoxLayout(fullPlot, BoxLayout.Y_AXIS));
 
-		NumberAxis timeAxis = new NumberAxis("Elapsed Time [ms]");
+		final NumberAxis timeAxis = new NumberAxis("Elapsed Time [ms]");
 		timeAxis.setAutoRange(true);
 		timeAxis.setAutoRangeStickyZero(false);
 		timeAxis.setAutoRangeIncludesZero(false);
 
 		for (int i = 0; i < header.getChannelsConfig().length; i++) {
-			
-			Scale scale = header.getChannelsConfig(i).getSelectedScale();
-			
-			String chn = ReCResourceBundle.findString(header.getChannelsConfig(i).getChannelName());
-			String pus = scale.getPhysicsUnitSymbol();
-			String multiplier = scale.getMultiplier().toString();
 
-			NumberAxis valueAxis = new NumberAxis(chn + " [" + multiplier + pus + "]");
+			final Scale scale = header.getChannelsConfig(i).getSelectedScale();
+
+			final String chn = ReCResourceBundle.findString(header.getChannelsConfig(i).getChannelName());
+			final String pus = scale.getPhysicsUnitSymbol();
+			final String multiplier = scale.getMultiplier().toString();
+
+			final NumberAxis valueAxis = new NumberAxis(chn + " [" + multiplier + pus + "]");
 			valueAxis.setAutoRange(true);
 			valueAxis.setAutoRangeStickyZero(false);
 			valueAxis.setAutoRangeIncludesZero(false);
 
-			DefaultDatasetProxy proxy = new DefaultDatasetProxy();
+			final DefaultDatasetProxy proxy = new DefaultDatasetProxy();
 			proxy.setChannelDisplay(i);
 			proxy.setExpDataModel(model);
 
-			XYPlot plot = new XYPlot(proxy, timeAxis, valueAxis, new StandardXYItemRenderer(
+			final XYPlot plot = new XYPlot(proxy, timeAxis, valueAxis, new StandardXYItemRenderer(
 					StandardXYItemRenderer.SHAPES_AND_LINES, new StandardXYToolTipGenerator()));
 
 			chart = new JFreeChart(chn, JFreeChart.DEFAULT_TITLE_FONT, plot, false);
 
-			ChartPanel panelChart = new ChartPanel(chart);
+			final ChartPanel panelChart = new ChartPanel(chart);
 			panelChart.setPreferredSize(new java.awt.Dimension(350, 300));
 			// panelChart.setMinimumSize(new java.awt.Dimension(350,300));
 			// panelChart.setSize(new java.awt.Dimension(350,300));
@@ -169,31 +183,40 @@ public class DefaultExperimentTimeSeriesGraph extends javax.swing.JPanel impleme
 
 	}
 
-	private boolean isScaleSet = false;
+	private final boolean isScaleSet = false;
 
 	private JFreeChart chart = null;
 
-	public void newSamples(NewExpDataEvent evt) {
-		if (header == null && model != null)
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
+		if (header == null && model != null) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
+	@Override
 	public void dataModelEnded() {
-		if (header == null && model != null)
+		if (header == null && model != null) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
-		if (header == null && model != null)
+		if (header == null && model != null) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
-		if (header == null && model != null)
+		if (header == null && model != null) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
 }

@@ -3,11 +3,13 @@ package com.linkare.rec.impl.newface.laf.flat.elabtheme;
 import java.awt.Color;
 import java.util.Map;
 
+import com.linkare.rec.impl.newface.laf.flat.theme.AbstractStyle;
+
 public class SliderStyle extends DefaultStyle {
 
 	public static final String ID = "Slider";
 
-	//COLORS	
+	// COLORS
 	private static final Color COLOR_SLIDER_FG = new Color(0x515151);
 	private static final Color COLOR_SLIDER_BG = new Color(0xE4EEED);
 
@@ -20,13 +22,13 @@ public class SliderStyle extends DefaultStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return SliderStyle.ID;
 	}
 
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(FOREGROUND, COLOR_SLIDER_FG);
-		map.put(BACKGROUND, COLOR_SLIDER_BG);
+		map.put(AbstractStyle.FOREGROUND, SliderStyle.COLOR_SLIDER_FG);
+		map.put(AbstractStyle.BACKGROUND, SliderStyle.COLOR_SLIDER_BG);
 	}
 }

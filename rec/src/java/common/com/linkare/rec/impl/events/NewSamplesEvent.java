@@ -13,7 +13,7 @@ import com.linkare.rec.impl.utils.IntersectableEvent;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class NewSamplesEvent implements IntersectableEvent,Prioritazible {
+public class NewSamplesEvent implements IntersectableEvent, Prioritazible {
 
 	private int largestNumPacket;
 
@@ -22,7 +22,7 @@ public class NewSamplesEvent implements IntersectableEvent,Prioritazible {
 	 * 
 	 * @param largestNumPacket
 	 */
-	public NewSamplesEvent(int largestNumPacket) {
+	public NewSamplesEvent(final int largestNumPacket) {
 		this.largestNumPacket = largestNumPacket;
 	}
 
@@ -35,26 +35,28 @@ public class NewSamplesEvent implements IntersectableEvent,Prioritazible {
 	public int getLargestNumPacket() {
 		return largestNumPacket;
 	}
-	
+
 	/**
 	 * @param largestNumPacket the largestNumPacket to set
 	 */
-	public void setLargestNumPacket(int largestNumPacket) {
+	public void setLargestNumPacket(final int largestNumPacket) {
 		this.largestNumPacket = largestNumPacket;
 	}
 
-	public boolean intersectTo(IntersectableEvent other) {
-		if (!(other instanceof NewSamplesEvent))
+	@Override
+	public boolean intersectTo(final IntersectableEvent other) {
+		if (!(other instanceof NewSamplesEvent)) {
 			return false;
+		}
 
-		NewSamplesEvent evt = (NewSamplesEvent) other;
+		final NewSamplesEvent evt = (NewSamplesEvent) other;
 		if (evt.isPoisoned()) {
 			return false;
 		}
 		largestNumPacket = Math.max(largestNumPacket, evt.getLargestNumPacket());
 		return true;
 	}
-	
+
 	/**
 	 * @return
 	 */
@@ -67,7 +69,7 @@ public class NewSamplesEvent implements IntersectableEvent,Prioritazible {
 	 */
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder("[");
+		final StringBuilder builder = new StringBuilder("[");
 		builder.append(getClass().getSimpleName());
 		builder.append(">largestNumPacket: ");
 		builder.append(largestNumPacket);

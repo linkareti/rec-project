@@ -11,46 +11,50 @@ package com.linkare.rec.acquisition;
 abstract public class PropertyListHelper {
 	private static String _id = "IDL:com/linkare/rec/acquisition/PropertyList:1.0";
 
-	public static void insert(org.omg.CORBA.Any a, com.linkare.rec.acquisition.Property[] that) {
-		org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
-		a.type(type());
-		write(out, that);
-		a.read_value(out.create_input_stream(), type());
+	public static void insert(final org.omg.CORBA.Any a, final com.linkare.rec.acquisition.Property[] that) {
+		final org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
+		a.type(PropertyListHelper.type());
+		PropertyListHelper.write(out, that);
+		a.read_value(out.create_input_stream(), PropertyListHelper.type());
 	}
 
-	public static com.linkare.rec.acquisition.Property[] extract(org.omg.CORBA.Any a) {
-		return read(a.create_input_stream());
+	public static com.linkare.rec.acquisition.Property[] extract(final org.omg.CORBA.Any a) {
+		return PropertyListHelper.read(a.create_input_stream());
 	}
 
 	private static org.omg.CORBA.TypeCode __typeCode = null;
 
 	synchronized public static org.omg.CORBA.TypeCode type() {
-		if (__typeCode == null) {
-			__typeCode = com.linkare.rec.acquisition.PropertyHelper.type();
-			__typeCode = org.omg.CORBA.ORB.init().create_sequence_tc(0, __typeCode);
-			__typeCode = org.omg.CORBA.ORB.init().create_alias_tc(com.linkare.rec.acquisition.PropertyListHelper.id(),
-					"PropertyList", __typeCode);
+		if (PropertyListHelper.__typeCode == null) {
+			PropertyListHelper.__typeCode = com.linkare.rec.acquisition.PropertyHelper.type();
+			PropertyListHelper.__typeCode = org.omg.CORBA.ORB.init().create_sequence_tc(0,
+					PropertyListHelper.__typeCode);
+			PropertyListHelper.__typeCode = org.omg.CORBA.ORB.init().create_alias_tc(
+					com.linkare.rec.acquisition.PropertyListHelper.id(), "PropertyList", PropertyListHelper.__typeCode);
 		}
-		return __typeCode;
+		return PropertyListHelper.__typeCode;
 	}
 
 	public static String id() {
-		return _id;
+		return PropertyListHelper._id;
 	}
 
-	public static com.linkare.rec.acquisition.Property[] read(org.omg.CORBA.portable.InputStream istream) {
+	public static com.linkare.rec.acquisition.Property[] read(final org.omg.CORBA.portable.InputStream istream) {
 		com.linkare.rec.acquisition.Property value[] = null;
-		int _len0 = istream.read_long();
+		final int _len0 = istream.read_long();
 		value = new com.linkare.rec.acquisition.Property[_len0];
-		for (int _o1 = 0; _o1 < value.length; ++_o1)
+		for (int _o1 = 0; _o1 < value.length; ++_o1) {
 			value[_o1] = com.linkare.rec.acquisition.PropertyHelper.read(istream);
+		}
 		return value;
 	}
 
-	public static void write(org.omg.CORBA.portable.OutputStream ostream, com.linkare.rec.acquisition.Property[] value) {
+	public static void write(final org.omg.CORBA.portable.OutputStream ostream,
+			final com.linkare.rec.acquisition.Property[] value) {
 		ostream.write_long(value.length);
-		for (int _i0 = 0; _i0 < value.length; ++_i0)
+		for (int _i0 = 0; _i0 < value.length; ++_i0) {
 			com.linkare.rec.acquisition.PropertyHelper.write(ostream, value[_i0]);
+		}
 	}
 
 }

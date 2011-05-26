@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.voscilador.displays;
  */
 public class ZTimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7820332641343365092L;
+
 	/** Creates a new instance of AnguloIntensidadeChart */
 	public ZTimeChart() {
 		super();

@@ -28,9 +28,9 @@ public class CustomizerUIUtil {
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(CustomizerUIUtil.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(CustomizerUIUtil.UI_CLIENT_LOGGER));
 		}
 	}
 
@@ -38,21 +38,22 @@ public class CustomizerUIUtil {
 	public CustomizerUIUtil() {
 	}
 
-	public static ICustomizer loadCustomizer(String url) {
+	public static ICustomizer loadCustomizer(final String url) {
 		try {
-			String className = url;
-			Class c = Class.forName(className);
+			final String className = url;
+			final Class<?> c = Class.forName(className);
 
-			Object o = c.newInstance();
+			final Object o = c.newInstance();
 
-			if (o instanceof ICustomizer)
+			if (o instanceof ICustomizer) {
 				return (ICustomizer) o;
-			else
+			} else {
 				return null;
+			}
 
-		} catch (Exception e2) {
-			LoggerUtil
-					.logThrowable("Couldn't load Customizer from URL :" + url, e2, Logger.getLogger(UI_CLIENT_LOGGER));
+		} catch (final Exception e2) {
+			LoggerUtil.logThrowable("Couldn't load Customizer from URL :" + url, e2,
+					Logger.getLogger(CustomizerUIUtil.UI_CLIENT_LOGGER));
 			return null;
 		}
 
@@ -149,44 +150,50 @@ public class CustomizerUIUtil {
 		 */
 	}
 
-	public static boolean customizerExists(String url) {
+	public static boolean customizerExists(final String url) {
 		try {
-			String className = url;
-			Class c = Class.forName(className);
+			final String className = url;
+			final Class<?> c = Class.forName(className);
 			return (c != null);
 
-		} catch (Exception e2) {
-			LoggerUtil
-					.logThrowable("Couldn't load Customizer from URL :" + url, e2, Logger.getLogger(UI_CLIENT_LOGGER));
+		} catch (final Exception e2) {
+			LoggerUtil.logThrowable("Couldn't load Customizer from URL :" + url, e2,
+					Logger.getLogger(CustomizerUIUtil.UI_CLIENT_LOGGER));
 			return false;
 		}
 	}
 
-	public static ICustomizer InitCustomizer(ICustomizer customizer, HardwareInfo hardwareInfo,
-			HardwareAcquisitionConfig acqConfig, CustomizerInfo info) {
+	public static ICustomizer InitCustomizer(final ICustomizer customizer, final HardwareInfo hardwareInfo,
+			final HardwareAcquisitionConfig acqConfig, final CustomizerInfo info) {
 		try {
-			if (customizer == null)
+			if (customizer == null) {
 				return null;
+			}
 			customizer.setHardwareInfo(hardwareInfo);
 			customizer.setHardwareAcquisitionConfig(acqConfig);
-			JComponent display = customizer.getCustomizerComponent();
-			if (display == null)
+			final JComponent display = customizer.getCustomizerComponent();
+			if (display == null) {
 				return null;
+			}
 
 			final JFrame customizerFrame = new JFrame(info.getCustomizerTitle());
-			if (info.getCustomizerIcon() != null)
+			if (info.getCustomizerIcon() != null) {
 				customizerFrame.setIconImage(info.getCustomizerIcon().getImage());
+			}
 			customizerFrame.getContentPane().setLayout(new BorderLayout());
 			customizerFrame.getContentPane().add(display, BorderLayout.CENTER);
-			JMenuBar menuBar = customizer.getMenuBar();
-			if (menuBar != null)
+			final JMenuBar menuBar = customizer.getMenuBar();
+			if (menuBar != null) {
 				customizerFrame.setJMenuBar(menuBar);
+			}
 
 			customizer.addICustomizerListener(new ICustomizerListener() {
+				@Override
 				public void canceled() {
 					customizerFrame.dispose();
 				}
 
+				@Override
 				public void done() {
 					customizerFrame.dispose();
 				}
@@ -194,15 +201,15 @@ public class CustomizerUIUtil {
 
 			customizerFrame.setVisible(true);
 			customizerFrame.pack();
-			int width = customizerFrame.getWidth();
-			int height = customizerFrame.getHeight();
-			Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+			final int width = customizerFrame.getWidth();
+			final int height = customizerFrame.getHeight();
+			final Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 			customizerFrame.setLocation((d.width - width) / 2, (d.height - height) / 2);
 			return customizer;
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			LoggerUtil.logThrowable("Couldn't init Customizer for Experiment " + hardwareInfo.getFamiliarName(), e,
-					Logger.getLogger(UI_CLIENT_LOGGER));
+					Logger.getLogger(CustomizerUIUtil.UI_CLIENT_LOGGER));
 			return null;
 		}
 	}

@@ -16,18 +16,18 @@ package pt.utl.ist.elab.driver.vdi;
 import org.opensourcephysics.numerics.ODE;
 
 public class Disco implements ODE {
-	private double ri, re, inc, aT;
+	private final double ri, re, inc, aT;
 	static public final double g = 9.8;
-	private double[] state = new double[7];
+	private final double[] state = new double[7];
 
 	/** Creates a new instance of Disco */
-	public Disco(double raioInt, double raioExt, double angulo) {
+	public Disco(final double raioInt, final double raioExt, final double angulo) {
 		ri = raioInt;
 		re = raioExt;
 		inc = angulo;
-		aT = (2 * g * re * re * Math.sin(inc)) / ((3 * re * re) + (ri * ri));
+		aT = (2 * Disco.g * re * re * Math.sin(inc)) / ((3 * re * re) + (ri * ri));
 
-		double beta = (Math.PI / 2.0) - angulo;
+		final double beta = (Math.PI / 2.0) - angulo;
 
 		state[0] = re * Math.cos(beta);
 		state[1] = 0;
@@ -38,7 +38,8 @@ public class Disco implements ODE {
 		state[6] = 0;
 	}
 
-	public void getRate(double[] state, double[] rate) {
+	@Override
+	public void getRate(final double[] state, final double[] rate) {
 		rate[0] = state[1];
 		rate[1] = aT * Math.cos(inc);
 		rate[2] = state[3];
@@ -53,10 +54,10 @@ public class Disco implements ODE {
 	}
 
 	public double getEspacoPercorrido() {
-		return this.calcDist(re * Math.sin(inc), re * Math.cos(inc), state[0], state[2]);
+		return calcDist(re * Math.sin(inc), re * Math.cos(inc), state[0], state[2]);
 	}
 
-	private double calcDist(double _x1, double _y1, double _x2, double _y2) {
+	private double calcDist(final double _x1, final double _y1, final double _x2, final double _y2) {
 		return Math.sqrt(Math.pow((_x2 - _x1), 2) + Math.pow((_y2 - _y1), 2));
 	}
 
@@ -72,6 +73,7 @@ public class Disco implements ODE {
 		return re;
 	}
 
+	@Override
 	public double[] getState() {
 		return state;
 	}

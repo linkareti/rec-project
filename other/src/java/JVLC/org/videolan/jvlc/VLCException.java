@@ -28,7 +28,6 @@
 
 package org.videolan.jvlc;
 
-
 public class VLCException extends Exception {
 
 	/**
@@ -40,15 +39,15 @@ public class VLCException extends Exception {
 		super();
 	}
 
-	public VLCException(String message) {
+	public VLCException(final String message) {
 		super(message);
 	}
 
-	public VLCException(String message, Throwable cause) {
+	public VLCException(final String message, final Throwable cause) {
 		super(message, cause);
 	}
 
-	public VLCException(Throwable cause) {
+	public VLCException(final Throwable cause) {
 		super(cause);
 	}
 }

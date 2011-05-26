@@ -31,65 +31,69 @@ public class StateHelper implements javax.media.ControllerListener {
 	boolean failed = false;
 	boolean closed = false;
 
-	public StateHelper(Player p) {
+	public StateHelper(final Player p) {
 		player = p;
 		p.addControllerListener(this);
 	}
 
-	public boolean configure(int timeOutMillis) {
-		long startTime = System.currentTimeMillis();
+	public boolean configure(final int timeOutMillis) {
+		final long startTime = System.currentTimeMillis();
 		synchronized (this) {
-			if (player instanceof Processor)
+			if (player instanceof Processor) {
 				((Processor) player).configure();
-			else
+			} else {
 				return false;
+			}
 
 			while (!configured && !failed) {
 				try {
 					wait(timeOutMillis);
-				} catch (InterruptedException ie) {
+				} catch (final InterruptedException ie) {
 				}
-				if (System.currentTimeMillis() - startTime > timeOutMillis)
+				if (System.currentTimeMillis() - startTime > timeOutMillis) {
 					break;
+				}
 			}
 		}
 		return configured;
 	}
 
-	public boolean realize(int timeOutMillis) {
-		long startTime = System.currentTimeMillis();
+	public boolean realize(final int timeOutMillis) {
+		final long startTime = System.currentTimeMillis();
 		synchronized (this) {
 			player.realize();
 			while (!realized && !failed) {
 				try {
 					wait(timeOutMillis);
-				} catch (InterruptedException ie) {
+				} catch (final InterruptedException ie) {
 				}
-				if (System.currentTimeMillis() - startTime > timeOutMillis)
+				if (System.currentTimeMillis() - startTime > timeOutMillis) {
 					break;
+				}
 			}
 		}
 		return realized;
 	}
 
-	public boolean prefetch(int timeOutMillis) {
-		long startTime = System.currentTimeMillis();
+	public boolean prefetch(final int timeOutMillis) {
+		final long startTime = System.currentTimeMillis();
 		synchronized (this) {
 			player.prefetch();
 			while (!prefetched && !failed) {
 				try {
 					wait(timeOutMillis);
-				} catch (InterruptedException ie) {
+				} catch (final InterruptedException ie) {
 				}
-				if (System.currentTimeMillis() - startTime > timeOutMillis)
+				if (System.currentTimeMillis() - startTime > timeOutMillis) {
 					break;
+				}
 			}
 		}
 		return prefetched && !failed;
 	}
 
-	public boolean playToEndOfMedia(int timeOutMillis) {
-		long startTime = System.currentTimeMillis();
+	public boolean playToEndOfMedia(final int timeOutMillis) {
+		final long startTime = System.currentTimeMillis();
 		eom = false;
 		synchronized (this) {
 			player.start();
@@ -97,10 +101,11 @@ public class StateHelper implements javax.media.ControllerListener {
 			while (!eom && !failed) {
 				try {
 					wait(timeOutMillis);
-				} catch (InterruptedException ie) {
+				} catch (final InterruptedException ie) {
 				}
-				if (System.currentTimeMillis() - startTime > timeOutMillis)
+				if (System.currentTimeMillis() - startTime > timeOutMillis) {
 					break;
+				}
 			}
 		}
 		return eom && !failed;
@@ -112,14 +117,15 @@ public class StateHelper implements javax.media.ControllerListener {
 			while (!closed) {
 				try {
 					wait(100);
-				} catch (InterruptedException ie) {
+				} catch (final InterruptedException ie) {
 				}
 			}
 		}
 		player.removeControllerListener(this);
 	}
 
-	public synchronized void controllerUpdate(ControllerEvent ce) {
+	@Override
+	public synchronized void controllerUpdate(final ControllerEvent ce) {
 		if (ce instanceof RealizeCompleteEvent) {
 			realized = true;
 		} else if (ce instanceof ConfigureCompleteEvent) {

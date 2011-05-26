@@ -25,10 +25,10 @@ public class FFT {
 	 * func -> Dados M -> log[2](N), N -> numero de dados itype : ~ -1 FFT
 	 * Inversa != -1 FFT Directa
 	 */
-	public static Complex[] calculateFFT(Complex[] func, int M, int itype) {
+	public static Complex[] calculateFFT(final Complex[] func, final int M, final int itype) {
 
-		int N = (int) Math.pow(2, M);
-		double xi[] = new double[N], xr[] = new double[N], wi[] = new double[N], wr[] = new double[N];
+		final int N = (int) Math.pow(2, M);
+		final double xi[] = new double[N], xr[] = new double[N], wi[] = new double[N], wr[] = new double[N];
 
 		int i, j, k, l, n1, n2, ie, ia;
 		double c, s, xt, yt, a, p;
@@ -46,12 +46,15 @@ public class FFT {
 			wi[k - 1] = Math.sin(a);
 		}
 
-		if (N == 1)
+		if (N == 1) {
 			return null;
+		}
 
-		if (itype == -1)
-			for (i = 1; i <= N; i++)
+		if (itype == -1) {
+			for (i = 1; i <= N; i++) {
 				xi[i - 1] = -xi[i - 1];
+			}
+		}
 
 		n2 = N;
 
@@ -108,10 +111,11 @@ public class FFT {
 			}
 		}
 
-		Complex[] toReturn = new Complex[N];
+		final Complex[] toReturn = new Complex[N];
 
-		for (i = 0; i < func.length; i++)
+		for (i = 0; i < func.length; i++) {
 			toReturn[i] = new Complex(xr[i], xi[i]);
+		}
 
 		return toReturn;
 	}

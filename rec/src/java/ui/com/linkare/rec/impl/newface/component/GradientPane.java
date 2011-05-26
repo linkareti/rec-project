@@ -41,12 +41,12 @@ public class GradientPane extends AbstractContentPane {
 		this(null, null);
 	}
 
-	public GradientPane(GradientStyle style) {
+	public GradientPane(final GradientStyle style) {
 		this(style, null);
 	}
 
 	/** Creates a new GradientPane */
-	public GradientPane(GradientStyle style, Window container) {
+	public GradientPane(final GradientStyle style, final Window container) {
 		super(container);
 		this.style = style;
 		init();
@@ -67,19 +67,19 @@ public class GradientPane extends AbstractContentPane {
 	}
 
 	@Override
-	protected void paintComponent(Graphics g) {
+	protected void paintComponent(final Graphics g) {
 
-		Graphics2D g2 = (Graphics2D) g;
+		final Graphics2D g2 = (Graphics2D) g;
 
 		GradientPaint p = null;
 
-		if (this.style == GradientStyle.VERTICAL_LINEAR_LIGHT_TO_DARK) {
+		if (style == GradientStyle.VERTICAL_LINEAR_LIGHT_TO_DARK) {
 			p = new GradientPaint(0, 0, lightColor, 0, getHeight(), darkColor);
 		} else {
 			p = new GradientPaint(0, 0, darkColor, 0, getHeight(), lightColor);
 		}
 
-		Paint oldPaint = g2.getPaint();
+		final Paint oldPaint = g2.getPaint();
 		g2.setPaint(p);
 		g2.fillRect(0, 0, getWidth(), getHeight());
 		g2.setPaint(oldPaint);
@@ -108,26 +108,23 @@ public class GradientPane extends AbstractContentPane {
 	}
 
 	/**
-	 * @param style
-	 *            the style to set
+	 * @param style the style to set
 	 */
-	public void setStyle(GradientStyle style) {
+	public void setStyle(final GradientStyle style) {
 		this.style = style;
 	}
 
 	/**
-	 * @param lightColor
-	 *            the lightColor to set
+	 * @param lightColor the lightColor to set
 	 */
-	public void setLightColor(Color lightColor) {
+	public void setLightColor(final Color lightColor) {
 		this.lightColor = lightColor;
 	}
 
 	/**
-	 * @param darkColor
-	 *            the darkColor to set
+	 * @param darkColor the darkColor to set
 	 */
-	public void setDarkColor(Color darkColor) {
+	public void setDarkColor(final Color darkColor) {
 		this.darkColor = darkColor;
 	}
 

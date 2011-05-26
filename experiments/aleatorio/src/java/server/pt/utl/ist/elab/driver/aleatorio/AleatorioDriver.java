@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import pt.utl.ist.elab.driver.aleatorio.Hardware.HardwareInit;
 import pt.utl.ist.elab.driver.aleatorio.Hardware.SoundThread;
 import pt.utl.ist.elab.driver.aleatorio.Hardware.WebCamThread;
+import pt.utl.ist.elab.driver.aleatorio.Utils.ImageAnalyser;
 import pt.utl.ist.elab.driver.aleatorio.Utils.VideoReader;
 
 import com.linkare.rec.acquisition.IncorrectStateException;
@@ -84,7 +85,7 @@ public class AleatorioDriver extends BaseDriver {
 
 	private int[][] centers;
 
-	private boolean waitingStart = false;
+	private final boolean waitingStart = false;
 
 	/** Creates a new instance of AleatorioDriver */
 	public AleatorioDriver() {
@@ -96,49 +97,53 @@ public class AleatorioDriver extends BaseDriver {
 	 */
 
 	/**
-	 *BaseDriver implementation
+	 * BaseDriver implementation
 	 */
+	@Override
 	public Object getHardwareInfo() {
 		// com.linkare.rec.impl.protocols.ReCProtocols.init();
 
-		String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
 				+ "/HardwareInfo.xml";
 		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
-		if (prop.indexOf("://") == -1)
+		if (prop.indexOf("://") == -1) {
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
+		}
 
 		java.net.URL url = null;
 		try {
 			url = ReCProtocols.getURL(prop);
 			fireIDriverStateListenerDriverReseted();// why is this here and not
 			// in GDriver?
-		} catch (java.net.MalformedURLException e) {
+		} catch (final java.net.MalformedURLException e) {
 			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger("Aleatorio.logger"));
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
 				fireIDriverStateListenerDriverReseted();// And again???
-			} catch (java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2, Logger
-						.getLogger("Aleatorio.logger"));
+			} catch (final java.net.MalformedURLException e2) {
+				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
+						Logger.getLogger("Aleatorio.logger"));
 			}
 		}
 		return url;
 	}// getHardwareInfo()
 
+	@Override
 	public String getDriverUniqueID() {
-		return DRIVER_UNIQUE_ID;
+		return AleatorioDriver.DRIVER_UNIQUE_ID;
 	}// getDriverUniqueID()
 
-	public void init(HardwareInfo info) {
+	@Override
+	public void init(final HardwareInfo info) {
 		this.info = info;
 		// System.out.println(" HardwareInfo read from a file is= " + info);
 		// System.out.println(" Hardware Unique ID from file is: " +
 		// info.getHardwareUniqueID());
 		// aleatorioDataSource = new AleatorioDataSource(this);
-		HardwareInit hardware = new HardwareInit();
-		this.webcam = hardware.getWebCamThread();
-		this.sound = hardware.getSoundThread();
+		final HardwareInit hardware = new HardwareInit();
+		webcam = hardware.getWebCamThread();
+		sound = hardware.getSoundThread();
 		readProperties();
 		// while(!webcam.isVideoPlayerStarted()){System.out.println("waiting for videoplayer to be started!");}//wait
 		// for videoPlayer to start!
@@ -147,7 +152,8 @@ public class AleatorioDriver extends BaseDriver {
 		fireIDriverStateListenerDriverInited();
 	}// init(HardwareInfo info)
 
-	public void config(HardwareAcquisitionConfig config, HardwareInfo info) throws IncorrectStateException,
+	@Override
+	public void config(final HardwareAcquisitionConfig config, final HardwareInfo info) throws IncorrectStateException,
 			WrongConfigurationException {
 		fireIDriverStateListenerDriverConfiguring();
 		// aleatorioDataSource = new AleatorioDataSource(this);
@@ -158,67 +164,74 @@ public class AleatorioDriver extends BaseDriver {
 
 		try {
 			configure(config, info);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			throw new WrongConfigurationException("Erro no config...", 20);
 		}// aqui parece estar certo, mas precisas de fazer mais que isso...
-		// deves definir as totalSamples para cada canal, e aqueles
-		// par�metros pmarados que est�s a definir l� para baixo algures...
+			// deves definir as totalSamples para cada canal, e aqueles
+			// par�metros pmarados que est�s a definir l� para baixo algures...
 	}// config(HardwareAcquisitionConfig config,HardwareInfo info)
 
-	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException {
+	@Override
+	public void configure(final HardwareAcquisitionConfig config, final HardwareInfo info)
+			throws WrongConfigurationException {
 		fireIDriverStateListenerDriverConfiguring();
 
 		this.info = info;
 		aleatorioDataSource = new AleatorioDataSource(this);
-		ParameterConfig[] selectedParams = config.getSelectedHardwareParameters();
+		final ParameterConfig[] selectedParams = config.getSelectedHardwareParameters();
 
-		for (int index = 0; index < selectedParams.length; index++) {
-			if (selectedParams[index].getParameterName().equalsIgnoreCase("SoundWaveDuration"))
+		for (final ParameterConfig selectedParam : selectedParams) {
+			if (selectedParam.getParameterName().equalsIgnoreCase("SoundWaveDuration")) {
 				try {
-					waveDuration = Float.valueOf(selectedParams[index].getParameterValue()).floatValue() / 1000;
-				} catch (NumberFormatException e) {
-					waveDuration = WAVE_DURATION;
+					waveDuration = Float.valueOf(selectedParam.getParameterValue()).floatValue() / 1000;
+				} catch (final NumberFormatException e) {
+					waveDuration = AleatorioDriver.WAVE_DURATION;
 				}
+			}
 			// System.out.println("soundDuration:"+waveDuration);
-			if (selectedParams[index].getParameterName().equalsIgnoreCase("MovieOnOff"))
+			if (selectedParam.getParameterName().equalsIgnoreCase("MovieOnOff")) {
 				try {
-					int onOff = Integer.valueOf(selectedParams[index].getParameterValue()).intValue();
+					final int onOff = Integer.valueOf(selectedParam.getParameterValue()).intValue();
 					movieOnOff = (onOff == 0 ? false : true);
 				}
 				// try {movieOnOff =
 				// Boolean.valueOf(selectedParams[index].getParameterValue()).booleanValue();}
-				catch (NumberFormatException e) {
-					movieOnOff = MOVIE_ON_OFF;
+				catch (final NumberFormatException e) {
+					movieOnOff = AleatorioDriver.MOVIE_ON_OFF;
 				}
+			}
 			// System.out.println("show movie? " + movieOnOff);
-			if (selectedParams[index].getParameterName().equalsIgnoreCase("NumberOfSamples"))
+			if (selectedParam.getParameterName().equalsIgnoreCase("NumberOfSamples")) {
 				try {
-					numberOfSamples = Integer.valueOf(selectedParams[index].getParameterValue()).intValue();
-				} catch (NumberFormatException e) {
-					numberOfSamples = NUMBER_OF_SAMPLES;
+					numberOfSamples = Integer.valueOf(selectedParam.getParameterValue()).intValue();
+				} catch (final NumberFormatException e) {
+					numberOfSamples = AleatorioDriver.NUMBER_OF_SAMPLES;
 				}
+			}
 			// System.out.println("NumberOfSamples:"+numberOfSamples);
-			if (selectedParams[index].getParameterName().equalsIgnoreCase("InitialFrequency"))
+			if (selectedParam.getParameterName().equalsIgnoreCase("InitialFrequency")) {
 				try {
-					frequency1 = Float.valueOf(selectedParams[index].getParameterValue()).floatValue();
-				} catch (NumberFormatException e) {
-					frequency1 = WAVE_FREQUENCY;
+					frequency1 = Float.valueOf(selectedParam.getParameterValue()).floatValue();
+				} catch (final NumberFormatException e) {
+					frequency1 = AleatorioDriver.WAVE_FREQUENCY;
 				}
+			}
 			// System.out.println("Initial Freq:"+frequency1);
-			if (selectedParams[index].getParameterName().equalsIgnoreCase("FinalFrequency"))
+			if (selectedParam.getParameterName().equalsIgnoreCase("FinalFrequency")) {
 				try {
-					frequency2 = Float.valueOf(selectedParams[index].getParameterValue()).floatValue();
-				} catch (NumberFormatException e) {
-					frequency2 = WAVE_FREQUENCY;
+					frequency2 = Float.valueOf(selectedParam.getParameterValue()).floatValue();
+				} catch (final NumberFormatException e) {
+					frequency2 = AleatorioDriver.WAVE_FREQUENCY;
 				}
-			// System.out.println("final Freq:"+frequency2);
+				// System.out.println("final Freq:"+frequency2);
+			}
 		}
 		// the movie lasts as long as the wave plus one second to watch the dice
 		// stopping
 		this.config = config;
 
-		movieLength = (long) java.lang.Math.round(waveDuration * 1000 + 1000);
+		movieLength = java.lang.Math.round(waveDuration * 1000 + 1000);
 		webcam.configure(movieLength);
 
 		webcam.videoPlayerStart();
@@ -239,24 +252,27 @@ public class AleatorioDriver extends BaseDriver {
 		return aleatorioDataSource.getAcquisitionHeader();
 	}// getAcquisitionHeader()
 
-	public IDataSource start(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public IDataSource start(final HardwareInfo info) throws IncorrectStateException {
 		try {
 			if (webcam != null && sound != null) {
 				aleatorioDataSource = new AleatorioDataSource(this);
 				fireIDriverStateListenerDriverStarting();
 				centerCounterArray = new int[numberOfSamples];
 
-				if (movieOnOff)
-					videoReader = new VideoReader(aleatorioDataSource, webcam,
-							(int) (FRAME_RATE * (double) movieLength / 1000.), FRAME_RATE);
+				if (movieOnOff) {
+					videoReader = new VideoReader(aleatorioDataSource, webcam, (int) (AleatorioDriver.FRAME_RATE
+							* (double) movieLength / 1000.), AleatorioDriver.FRAME_RATE);
+				}
 
-				config
-						.setTotalSamples(numberOfSamples
-								+ (movieOnOff ? (numberOfSamples * (int) ((double) FRAME_RATE * (double) movieLength / (double) 1000.))
-										: 0));
-				System.out.println("Smples expected: "
-						+ (numberOfSamples + (movieOnOff ? (numberOfSamples * (int) ((double) FRAME_RATE
-								* (double) movieLength / (double) 1000.)) : 0)));
+				config.setTotalSamples(numberOfSamples
+						+ (movieOnOff ? (numberOfSamples * (int) ((double) AleatorioDriver.FRAME_RATE
+								* (double) movieLength / 1000.)) : 0));
+				System.out
+						.println("Smples expected: "
+								+ (numberOfSamples + (movieOnOff ? (numberOfSamples * (int) ((double) AleatorioDriver.FRAME_RATE
+										* (double) movieLength / 1000.))
+										: 0)));
 				config.setTimeStart(new DateTime());
 
 				for (int i = 0; i < config.getChannelsConfig().length; i++) {
@@ -270,8 +286,8 @@ public class AleatorioDriver extends BaseDriver {
 
 				aleatorioDataSource.setTotalSamples(config.getTotalSamples());
 
-				aleatorioDataSource.setPacketSize(1 + (movieOnOff ? Math.min(10, ((int) ((double) FRAME_RATE
-						* (double) movieLength / (double) 1000.))) : 0));
+				aleatorioDataSource.setPacketSize(1 + (movieOnOff ? Math.min(10,
+						((int) ((double) AleatorioDriver.FRAME_RATE * (double) movieLength / 1000.))) : 0));
 
 				fireIDriverStateListenerDriverStarted();
 
@@ -290,21 +306,23 @@ public class AleatorioDriver extends BaseDriver {
 					// funcionar!olha
 				}// if
 			}// if
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			System.out.println("Error occured while on Start...");
 			e.printStackTrace();
 		}
 		return null;
 	}// start(HardwareInfo info)
 
-	public IDataSource startOutput(HardwareInfo info, IDataSource source) throws IncorrectStateException {
+	@Override
+	public IDataSource startOutput(final HardwareInfo info, final IDataSource source) throws IncorrectStateException {
 		/**
 		 * Current Version doesn't support startOutput Does nothing!
 		 */
 		return null;
 	}// startOutput(HardwareInfo info,IDataSource source)
 
-	public void stop(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public void stop(final HardwareInfo info) throws IncorrectStateException {
 		/*
 		 * JP says: Don't use this!! And we don't use it!! unless it's an
 		 * emergency...
@@ -316,32 +334,35 @@ public class AleatorioDriver extends BaseDriver {
 		fireIDriverStateListenerDriverStoped();
 	}// stop(HardwareInfo info)
 
-	public void reset(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public void reset(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverReseting();
-		if (this.webcam != null)
+		if (webcam != null) {
 			try {
-				this.webcam.finalize();
-			} catch (Exception e) {
+				webcam.finalize();
+			} catch (final Exception e) {
 				e.printStackTrace();
-			} catch (Throwable t) {
+			} catch (final Throwable t) {
 				t.printStackTrace();
 			}
-		if (this.sound != null)
+		}
+		if (sound != null) {
 			try {
-				this.sound.finalize();
-			} catch (Exception e) {
+				sound.finalize();
+			} catch (final Exception e) {
 				e.printStackTrace();
-			} catch (Throwable t) {
+			} catch (final Throwable t) {
 				t.printStackTrace();
 			}
+		}
 		// initializes the hardware
-		HardwareInit hardware = new HardwareInit();
-		this.webcam = hardware.getWebCamThread();
-		this.sound = hardware.getSoundThread();
+		final HardwareInit hardware = new HardwareInit();
+		webcam = hardware.getWebCamThread();
+		sound = hardware.getSoundThread();
 
 		// reconfigures with the default values
-		webcam.configure(MOVIE_LENGTH);
-		sound.configure(WAVE_FREQUENCY, WAVE_FREQUENCY, WAVE_DURATION);
+		webcam.configure(AleatorioDriver.MOVIE_LENGTH);
+		sound.configure(AleatorioDriver.WAVE_FREQUENCY, AleatorioDriver.WAVE_FREQUENCY, AleatorioDriver.WAVE_DURATION);
 		sound.newLine();
 		// dataSourceReader = new DataSourceReader(webcam);
 		// dataSourceReader.open(webcam.getVideoDataSource());
@@ -349,6 +370,7 @@ public class AleatorioDriver extends BaseDriver {
 		fireIDriverStateListenerDriverReseted();
 	}// reset(HardwareInfo info)
 
+	@Override
 	public void shutdown() {
 		// There is nothing to shut down...
 		// except the computer, but that's not going to happen, unless the power
@@ -356,7 +378,8 @@ public class AleatorioDriver extends BaseDriver {
 		super.shutDownNow();
 	}// shutdown()
 
-	public void extraValidateConfig(HardwareAcquisitionConfig config, HardwareInfo info)
+	@Override
+	public void extraValidateConfig(final HardwareAcquisitionConfig config, final HardwareInfo info)
 			throws WrongConfigurationException {
 		// Not necessary
 	}// extraValidateConfig(HardwareAcquisitionConfig config, HardwareInfo info)
@@ -372,20 +395,21 @@ public class AleatorioDriver extends BaseDriver {
 	}
 
 	/** Properties stuff... */
-	private java.io.InputStream is = null;
-	private java.io.File propFile = null;
-	private String propertiesLocation = null;
+	private final java.io.InputStream is = null;
+	private final java.io.File propFile = null;
+	private final String propertiesLocation = null;
 	private java.util.Properties props = null;
 
 	/**
-	 *Loads the properties File
+	 * Loads the properties File
 	 */
 	public void readProperties() {
 
 		props = new java.util.Properties();
 		try {
-			props.load(getClass().getResourceAsStream("/pt/utl/ist/elab/driver/aleatorio/configurator/AleatorioConfigurator.properties"));
-		} catch (IOException e) {
+			props.load(getClass().getResourceAsStream(
+					"/pt/utl/ist/elab/driver/aleatorio/configurator/AleatorioConfigurator.properties"));
+		} catch (final IOException e) {
 			System.out.println("Error loading the configurations.");
 			e.printStackTrace();
 			System.exit(0);
@@ -403,23 +427,26 @@ public class AleatorioDriver extends BaseDriver {
 			while (imageToAnalyze == null) {
 			}
 			image = imageToAnalyze;
-		} else
+		} else {
 			image = imageToAnalyze;
-		// image = webcam.getImage();
+			// image = webcam.getImage();
+		}
 
 		imageAnalyser = new pt.utl.ist.elab.driver.aleatorio.Utils.ImageAnalyser(image);
-		imageAnalyser.setParams(Integer.valueOf(props.getProperty("BWThreshold")).intValue(), Integer.valueOf(
-				props.getProperty("radiusOfSpot")).intValue(), Integer.valueOf(props.getProperty("houghThreshold1"))
-				.intValue(), Integer.valueOf(props.getProperty("houghThreshold2")).intValue(), Integer.valueOf(
-				props.getProperty("houghThreshold3")).intValue(), Integer.valueOf(props.getProperty("convThreshold"))
-				.intValue(), Integer.valueOf(props.getProperty("maxWidthOfDie")).intValue(), Integer.valueOf(
-				props.getProperty("numberOfDice")).intValue());
+		imageAnalyser.setParams(Integer.valueOf(props.getProperty("BWThreshold")).intValue(),
+				Integer.valueOf(props.getProperty("radiusOfSpot")).intValue(),
+				Integer.valueOf(props.getProperty("houghThreshold1")).intValue(),
+				Integer.valueOf(props.getProperty("houghThreshold2")).intValue(),
+				Integer.valueOf(props.getProperty("houghThreshold3")).intValue(),
+				Integer.valueOf(props.getProperty("convThreshold")).intValue(),
+				Integer.valueOf(props.getProperty("maxWidthOfDie")).intValue(),
+				Integer.valueOf(props.getProperty("numberOfDice")).intValue());
 
 		imageAnalyser.conversionBW();
 		imageAnalyser.edgeDetector();
 		imageAnalyser.houghTransform();
 		imageAnalyser.houghCount();
-		imageAnalyser.refineCount(imageAnalyser.IMAGE_HOUGH);
+		imageAnalyser.refineCount(ImageAnalyser.IMAGE_HOUGH);
 		// imageAnalyser.convolutionTransform();
 		// imageAnalyser.fullCount();
 		centers = imageAnalyser.getCenters();
@@ -443,13 +470,15 @@ public class AleatorioDriver extends BaseDriver {
 	}
 
 	/**
-	 *returns the index of the first occurrence of 'val' in 'array' 'array' is
+	 * returns the index of the first occurrence of 'val' in 'array' 'array' is
 	 * an array of ints and 'val' is an int
 	 */
-	private int indexOf(int[] array, int val) {
-		for (int index = 0; index < array.length; index++)
-			if (array[index] == val)
+	private int indexOf(final int[] array, final int val) {
+		for (int index = 0; index < array.length; index++) {
+			if (array[index] == val) {
 				return index;
+			}
+		}
 		return -1;
 	}// indexOf(int[] array, int val)
 
@@ -468,42 +497,45 @@ public class AleatorioDriver extends BaseDriver {
 	 * ios); } catch(java.io.IOException e){} return ios; }
 	 */
 	class AleatorioThread implements java.lang.Runnable {
+		@Override
 		public void run() {
 			for (int index = 0; index < numberOfSamples; index++) {
 				imageToAnalyze = null;
 				webcam.recording = true;
 				recording = true;
-				final int pauseBetweenFrames = 1000 / FRAME_RATE;
+				final int pauseBetweenFrames = 1000 / AleatorioDriver.FRAME_RATE;
 
 				if (movieOnOff) {
 					// while(!webcam.isVideoPlayerStarted()){System.out.println("waiting for videoplayer to be started!");}//wait
 					// for videoPlayer to start!
 					// System.out.println("videoPlayer started!");
-					RecordingThread recordingThread = new RecordingThread();
+					final RecordingThread recordingThread = new RecordingThread();
 					recordingThread.start();
 					while (!recording) {
 						try {
-							Thread.currentThread().sleep(pauseBetweenFrames * 2);
-						} catch (InterruptedException e) {
+							Thread.currentThread();
+							Thread.sleep(pauseBetweenFrames * 2);
+						} catch (final InterruptedException e) {
 						}
 					}// do nothing while not recording
 					(new Thread(sound)).start();
 					while (recording) {
 						try {
-							Thread.currentThread().sleep(pauseBetweenFrames * 2);
-						} catch (InterruptedException e) {
+							Thread.currentThread();
+							Thread.sleep(pauseBetweenFrames * 2);
+						} catch (final InterruptedException e) {
 						}
 					} // do nothing here while recording!
-					// try{recordingThread.waiting.synchStop.wait();}
-					// catch(Exception e){}
-					// java.awt.Image[] movieFrames =
-					// recordingThread.getMovieFrames();
-					// for (int i=0; i < movieFrames.length; i++)
-					// {
-					// if (movieFrames[i] != null)
-					// aleatorioDataSource.sendMovieFrame(movieFrames[i]);
-					// }//for_i
-					// movieFrames=null;
+						// try{recordingThread.waiting.synchStop.wait();}
+						// catch(Exception e){}
+						// java.awt.Image[] movieFrames =
+						// recordingThread.getMovieFrames();
+						// for (int i=0; i < movieFrames.length; i++)
+						// {
+						// if (movieFrames[i] != null)
+						// aleatorioDataSource.sendMovieFrame(movieFrames[i]);
+						// }//for_i
+						// movieFrames=null;
 				}// if
 				else {// se nao quisermos filme segue por aqui. isto funciona!
 					while (!webcam.isVideoPlayerStarted()) {
@@ -513,8 +545,9 @@ public class AleatorioDriver extends BaseDriver {
 
 					while (webcam.recording) {
 						try {
-							Thread.currentThread().sleep(pauseBetweenFrames);
-						} catch (InterruptedException e) {
+							Thread.currentThread();
+							Thread.sleep(pauseBetweenFrames);
+						} catch (final InterruptedException e) {
 						}
 					} // do nothing while recording!
 				}// else
@@ -522,19 +555,19 @@ public class AleatorioDriver extends BaseDriver {
 				// reset sound so the image sent is stopped!
 				sound.newLine();
 				try {
-					Thread.currentThread().sleep(pauseBetweenFrames);
-				} catch (InterruptedException e) {
+					Thread.currentThread();
+					Thread.sleep(pauseBetweenFrames);
+				} catch (final InterruptedException e) {
 				}
 
 				try {
 					imageToAnalyze = webcam.getImage();
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					LoggerUtil
 							.logThrowable("Unable to get image from webcam!", e, Logger.getLogger("Aleatorio.logger"));
 					// TODO FIXME Handle exception and shutdown experiment!
 				}
-				
-				
+
 				// 09/10/2008
 				// change to speed up transmission of image and avoid crashing
 				// due to poor lighting!
@@ -557,9 +590,10 @@ public class AleatorioDriver extends BaseDriver {
 					while (videoReader.lastFrame == null) {
 					}
 					webcamImage = imageToAnalyze;
-				} else
+				} else {
 					// webcamImage = webcam.getImage();
 					webcamImage = imageToAnalyze;
+				}
 				while (webcamImage.getHeight(null) == 0) {
 				} // do nothing while image is not ok
 				aleatorioDataSource.sendImage(webcamImage, centerCounterArray[index]);
@@ -568,37 +602,43 @@ public class AleatorioDriver extends BaseDriver {
 				webcamImage.flush();
 
 				try {
-					Thread.currentThread().sleep(50);
-				} catch (InterruptedException e) {
+					Thread.currentThread();
+					Thread.sleep(50);
+				} catch (final InterruptedException e) {
 					e.printStackTrace();
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					e.printStackTrace();
 				}
 			}// end -for
-			AleatorioDriver.this.fireIDriverStateListenerDriverStoping();
+			fireIDriverStateListenerDriverStoping();
 			aleatorioDataSource.endAcquisition();
 			webcam.videoPlayerStop();
-//			// updates the Statistics data file after all samples (of this
-//			// experiment) have been processed!
-//			int numberOfDice;
-//			try {
-//				numberOfDice = Integer.parseInt(props.getProperty("numberOfDice"));
-//			} catch (NumberFormatException e) {
-//				e.printStackTrace();
-//				numberOfDice = NUMBER_OF_DICE;
-//			}
-//			// int numberOfDice =
-//			// Integer.getInteger(props.getProperty("numberOfDice")).intValue();
-////			for (int i = 0; i < numberOfSamples; i++) {
-//			for (int i = 0; i < centerCounterArray.length; i++) {
-//				System.out.println("numberOfspotsDetected=" + centerCounterArray[i]);
-//				aleatorioDataSource.updateStatisticsFile(centerCounterArray[i],
-//						aleatorioDataSource.statisticY[centerCounterArray[i] - numberOfDice]++);
-//			}// for_i
-//			aleatorioDataSource.sessionStatisticsFile(centerCounterArray, Integer.parseInt(props
-//					.getProperty("numberOfDice")));
+			// // updates the Statistics data file after all samples (of this
+			// // experiment) have been processed!
+			// int numberOfDice;
+			// try {
+			// numberOfDice =
+			// Integer.parseInt(props.getProperty("numberOfDice"));
+			// } catch (NumberFormatException e) {
+			// e.printStackTrace();
+			// numberOfDice = NUMBER_OF_DICE;
+			// }
+			// // int numberOfDice =
+			// //
+			// Integer.getInteger(props.getProperty("numberOfDice")).intValue();
+			// // for (int i = 0; i < numberOfSamples; i++) {
+			// for (int i = 0; i < centerCounterArray.length; i++) {
+			// System.out.println("numberOfspotsDetected=" +
+			// centerCounterArray[i]);
+			// aleatorioDataSource.updateStatisticsFile(centerCounterArray[i],
+			// aleatorioDataSource.statisticY[centerCounterArray[i] -
+			// numberOfDice]++);
+			// }// for_i
+			// aleatorioDataSource.sessionStatisticsFile(centerCounterArray,
+			// Integer.parseInt(props
+			// .getProperty("numberOfDice")));
 			System.out.println("Ended acquisition...");
-			AleatorioDriver.this.fireIDriverStateListenerDriverStoped();
+			fireIDriverStateListenerDriverStoped();
 
 		}// run
 	}// AleatorioThread
@@ -606,7 +646,7 @@ public class AleatorioDriver extends BaseDriver {
 	class RecordingThread extends Thread {
 		// private java.awt.Image[] movieFrames = null;
 		// private int frameCount = 0;
-		private static final int PAUSE_BETWEEN_FRAMES = 1000 / FRAME_RATE;
+		private static final int PAUSE_BETWEEN_FRAMES = 1000 / AleatorioDriver.FRAME_RATE;
 		private int totalFrames = 0;
 
 		// public Waiting waiting = new Waiting();
@@ -618,8 +658,9 @@ public class AleatorioDriver extends BaseDriver {
 			// java.awt.Image[FRAME_RATE*(int)movieLength/1000];
 		}// RecordingThread()
 
+		@Override
 		public void run() {
-			totalFrames = FRAME_RATE * (int) movieLength / 1000;
+			totalFrames = AleatorioDriver.FRAME_RATE * (int) movieLength / 1000;
 			// movieFrames = new java.awt.Image[totalFrames];
 
 			System.out.println("Filming!");
@@ -641,7 +682,7 @@ public class AleatorioDriver extends BaseDriver {
 					// >= totalFrames/2) recording=true;
 					try {
 						this.wait(movieLength);
-					} catch (InterruptedException e) {
+					} catch (final InterruptedException e) {
 					}
 				}
 			}// while
@@ -651,11 +692,11 @@ public class AleatorioDriver extends BaseDriver {
 				synchronized (this) {
 					try {
 						this.wait(movieLength);
-					} catch (InterruptedException e) {
+					} catch (final InterruptedException e) {
 					}
 				}
 			}// while
-			// imageToAnalyze = dataSourceReader.lastFrame;
+				// imageToAnalyze = dataSourceReader.lastFrame;
 			imageToAnalyze = videoReader.lastFrame;
 
 			// System.out.println("frames caught:"+ totalFrames);

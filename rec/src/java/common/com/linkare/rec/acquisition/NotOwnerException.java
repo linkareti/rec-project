@@ -13,7 +13,7 @@ public final class NotOwnerException extends org.omg.CORBA.UserException {
 	 */
 	private static final long serialVersionUID = 4873224362944011457L;
 
-	public int errorCode = (int) 0;
+	public int errorCode = 0;
 
 	// DataClient currentOwner;
 	public String currentOwner = null;
@@ -22,13 +22,13 @@ public final class NotOwnerException extends org.omg.CORBA.UserException {
 		super(NotOwnerExceptionHelper.id());
 	} // ctor
 
-	public NotOwnerException(int _errorCode, String _currentOwner) {
+	public NotOwnerException(final int _errorCode, final String _currentOwner) {
 		super(NotOwnerExceptionHelper.id());
 		errorCode = _errorCode;
 		currentOwner = _currentOwner;
 	} // ctor
 
-	public NotOwnerException(String $reason, int _errorCode, String _currentOwner) {
+	public NotOwnerException(final String $reason, final int _errorCode, final String _currentOwner) {
 		super(NotOwnerExceptionHelper.id() + "  " + $reason);
 		errorCode = _errorCode;
 		currentOwner = _currentOwner;

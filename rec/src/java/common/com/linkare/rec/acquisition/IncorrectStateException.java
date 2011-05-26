@@ -8,7 +8,11 @@ package com.linkare.rec.acquisition;
  */
 
 public final class IncorrectStateException extends org.omg.CORBA.UserException {
-	public int errorCode = (int) 0;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6451255900771805587L;
+	public int errorCode = 0;
 	public com.linkare.rec.acquisition.HardwareState actualState = null;
 	public com.linkare.rec.acquisition.HardwareState requiredState = null;
 
@@ -16,17 +20,17 @@ public final class IncorrectStateException extends org.omg.CORBA.UserException {
 		super(IncorrectStateExceptionHelper.id());
 	} // ctor
 
-	public IncorrectStateException(int _errorCode, com.linkare.rec.acquisition.HardwareState _actualState,
-			com.linkare.rec.acquisition.HardwareState _requiredState) {
+	public IncorrectStateException(final int _errorCode, final com.linkare.rec.acquisition.HardwareState _actualState,
+			final com.linkare.rec.acquisition.HardwareState _requiredState) {
 		super(IncorrectStateExceptionHelper.id());
 		errorCode = _errorCode;
 		actualState = _actualState;
 		requiredState = _requiredState;
 	} // ctor
 
-	public IncorrectStateException(String $reason, int _errorCode,
-			com.linkare.rec.acquisition.HardwareState _actualState,
-			com.linkare.rec.acquisition.HardwareState _requiredState) {
+	public IncorrectStateException(final String $reason, final int _errorCode,
+			final com.linkare.rec.acquisition.HardwareState _actualState,
+			final com.linkare.rec.acquisition.HardwareState _requiredState) {
 		super(IncorrectStateExceptionHelper.id() + "  " + $reason);
 		errorCode = _errorCode;
 		actualState = _actualState;

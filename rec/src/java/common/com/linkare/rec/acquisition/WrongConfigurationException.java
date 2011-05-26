@@ -12,18 +12,18 @@ public final class WrongConfigurationException extends org.omg.CORBA.UserExcepti
 	 * 
 	 */
 	private static final long serialVersionUID = -7173404293218569323L;
-	public int errorCode = (int) 0;
+	public int errorCode = 0;
 
 	public WrongConfigurationException() {
 		super(WrongConfigurationExceptionHelper.id());
 	} // ctor
 
-	public WrongConfigurationException(int _errorCode) {
+	public WrongConfigurationException(final int _errorCode) {
 		super(WrongConfigurationExceptionHelper.id());
 		errorCode = _errorCode;
 	} // ctor
 
-	public WrongConfigurationException(String $reason, int _errorCode) {
+	public WrongConfigurationException(final String $reason, final int _errorCode) {
 		super(WrongConfigurationExceptionHelper.id() + "  " + $reason);
 		errorCode = _errorCode;
 	} // ctor

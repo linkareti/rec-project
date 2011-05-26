@@ -16,6 +16,10 @@ import com.linkare.rec.data.Multiplier;
  */
 public class MultiplierLabel extends JLabel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7597984373081961501L;
 	/** Holds value of property multiplier. */
 	private com.linkare.rec.data.Multiplier multiplier;
 
@@ -23,8 +27,12 @@ public class MultiplierLabel extends JLabel {
 	public MultiplierLabel() {
 	}
 
-	/** Creates a new instance of MultiplierBean */
-	public MultiplierLabel(Multiplier multiplier) {
+	/**
+	 * Creates a new instance of MultiplierBean
+	 * 
+	 * @param multiplier
+	 */
+	public MultiplierLabel(final Multiplier multiplier) {
 		setMultiplier(multiplier);
 	}
 
@@ -34,7 +42,7 @@ public class MultiplierLabel extends JLabel {
 	 * @return Value of property multiplier.
 	 */
 	public com.linkare.rec.data.Multiplier getMultiplier() {
-		return this.multiplier;
+		return multiplier;
 	}
 
 	/**
@@ -42,19 +50,22 @@ public class MultiplierLabel extends JLabel {
 	 * 
 	 * @param multiplier New value of property multiplier.
 	 */
-	public synchronized void setMultiplier(com.linkare.rec.data.Multiplier multiplier) {
+	public synchronized void setMultiplier(final com.linkare.rec.data.Multiplier multiplier) {
 		this.multiplier = multiplier;
 		repaint();
 	}
 
-	public void setText(String text) {
+	@Override
+	public void setText(final String text) {
 	}// cannot set Text Property
 
+	@Override
 	public String getText() {
-		if (multiplier != null)
+		if (multiplier != null) {
 			return multiplier.toString();
-		else
+		} else {
 			return "";
+		}
 	}
 
 }

@@ -9,6 +9,10 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  */
 public class TableSoundVelocity extends MultSeriesTable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1821992577555282536L;
 	private static final String NAME = ReCResourceBundle
 			.findString("statsound$rec.exp.display.statsound.title.soundVelocityTable");
 
@@ -29,7 +33,8 @@ public class TableSoundVelocity extends MultSeriesTable {
 		setColArray(new int[] { 100, 111, 4, 5, 0, 1 });
 	}
 
+	@Override
 	public String getName() {
-		return NAME;
+		return TableSoundVelocity.NAME;
 	}
 }

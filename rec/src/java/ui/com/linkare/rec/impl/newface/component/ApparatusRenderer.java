@@ -22,6 +22,11 @@ import com.linkare.rec.impl.newface.config.Apparatus;
  */
 public class ApparatusRenderer extends JLabel implements ListCellRenderer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3255888693182744820L;
+
 	private static final Border NO_FOCUS_BORDER = new EmptyBorder(1, 2, 1, 2);
 
 	private Apparatus apparatus;
@@ -29,11 +34,12 @@ public class ApparatusRenderer extends JLabel implements ListCellRenderer {
 	public ApparatusRenderer() {
 		super();
 		setOpaque(true);
-		setBorder(NO_FOCUS_BORDER);
+		setBorder(ApparatusRenderer.NO_FOCUS_BORDER);
 	}
 
 	@Override
-	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+	public Component getListCellRendererComponent(final JList list, final Object value, final int index,
+			final boolean isSelected, final boolean cellHasFocus) {
 
 		// Value must be an Apparatus
 		apparatus = (Apparatus) value;

@@ -41,7 +41,7 @@ public class DisplayTreeNode {
 	 * @param icon New value of property icon.
 	 * 
 	 */
-	public void setIcon(javax.swing.Icon icon) {
+	public void setIcon(final javax.swing.Icon icon) {
 		this.icon = icon;
 	}
 
@@ -61,7 +61,7 @@ public class DisplayTreeNode {
 	 * @param text New value of property text.
 	 * 
 	 */
-	public void setText(java.lang.String text) {
+	public void setText(final java.lang.String text) {
 		this.text = text;
 	}
 
@@ -81,7 +81,7 @@ public class DisplayTreeNode {
 	 * @param tooltipText New value of property tooltipText.
 	 * 
 	 */
-	public void setTooltipText(java.lang.String tooltipText) {
+	public void setTooltipText(final java.lang.String tooltipText) {
 		this.tooltipText = tooltipText;
 	}
 
@@ -101,28 +101,28 @@ public class DisplayTreeNode {
 	 * @param enabled New value of property enabled.
 	 * 
 	 */
-	public void setEnabled(boolean enabled) {
+	public void setEnabled(final boolean enabled) {
 		this.enabled = enabled;
 	}
 
-	public void loadIcon(String iconLocationKey) {
+	public void loadIcon(final String iconLocationKey) {
 		try {
 			setIcon(ReCResourceBundle.findImageIcon(iconLocationKey));
-		} catch (Exception ignored) {
+		} catch (final Exception ignored) {
 		}
 	}
 
-	public void loadText(String textKey) {
+	public void loadText(final String textKey) {
 		try {
 			setText(ReCResourceBundle.findString(textKey));
-		} catch (Exception ignored) {
+		} catch (final Exception ignored) {
 		}
 	}
 
-	public void loadTooltipText(String tooltipTextKey) {
+	public void loadTooltipText(final String tooltipTextKey) {
 		try {
 			setTooltipText(ReCResourceBundle.findString(tooltipTextKey));
-		} catch (Exception ignored) {
+		} catch (final Exception ignored) {
 		}
 	}
 
@@ -133,7 +133,7 @@ public class DisplayTreeNode {
 	 * 
 	 */
 	public boolean isVisible() {
-		return this.visible;
+		return visible;
 	}
 
 	/**
@@ -142,7 +142,7 @@ public class DisplayTreeNode {
 	 * @param visible New value of property visible.
 	 * 
 	 */
-	public void setVisible(boolean visible) {
+	public void setVisible(final boolean visible) {
 		this.visible = visible;
 	}
 

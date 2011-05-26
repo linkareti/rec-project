@@ -15,7 +15,7 @@ import javax.swing.plaf.ComponentUI;
  */
 public class FlatCheckBoxUI extends FlatRadioButtonUI {
 
-	public static ComponentUI createUI(JComponent x) {
+	public static ComponentUI createUI(final JComponent x) {
 		return new FlatCheckBoxUI();
 	}
 }

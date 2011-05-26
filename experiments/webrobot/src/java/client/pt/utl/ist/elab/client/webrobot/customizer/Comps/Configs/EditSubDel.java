@@ -12,8 +12,13 @@ package pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs;
  */
 public class EditSubDel extends javax.swing.JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2075340700062065758L;
+
 	/** Creates new form EditSubDel */
-	public EditSubDel(java.awt.Frame parent, boolean modal) {
+	public EditSubDel(final java.awt.Frame parent, final boolean modal) {
 		super(parent, modal);
 		initComponents();
 		jButtonEdit.requestFocus();
@@ -41,19 +46,22 @@ public class EditSubDel extends javax.swing.JDialog {
 		setTitle("Editar/Substituir/Apagar");
 		setResizable(false);
 		addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				formKeyReleased(evt);
 			}
 		});
 
 		addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				formMousePressed(evt);
 			}
 		});
 
 		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent evt) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent evt) {
 				closeDialog(evt);
 			}
 		});
@@ -62,13 +70,15 @@ public class EditSubDel extends javax.swing.JDialog {
 		jButtonEdit.setText("Editar?");
 		jButtonEdit.setPreferredSize(new java.awt.Dimension(132, 75));
 		jButtonEdit.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jButtonEditKeyReleased(evt);
 			}
 		});
 
 		jButtonEdit.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonEditMousePressed(evt);
 			}
 		});
@@ -79,7 +89,8 @@ public class EditSubDel extends javax.swing.JDialog {
 		jButtonAddDown.setText("Adiciona Abaixo?");
 		jButtonAddDown.setPreferredSize(new java.awt.Dimension(132, 75));
 		jButtonAddDown.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonAddDownMousePressed(evt);
 			}
 		});
@@ -91,7 +102,8 @@ public class EditSubDel extends javax.swing.JDialog {
 		jButtonDelBlock.setToolTipText("");
 		jButtonDelBlock.setPreferredSize(new java.awt.Dimension(132, 75));
 		jButtonDelBlock.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonDelBlockMousePressed(evt);
 			}
 		});
@@ -102,7 +114,8 @@ public class EditSubDel extends javax.swing.JDialog {
 		jButtonSubBlock.setText("Substituir Bloco?");
 		jButtonSubBlock.setPreferredSize(new java.awt.Dimension(132, 75));
 		jButtonSubBlock.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonSubBlockMousePressed(evt);
 			}
 		});
@@ -116,7 +129,8 @@ public class EditSubDel extends javax.swing.JDialog {
 		jButtonCopyCol.setText("Copiar Coluna?");
 		jButtonCopyCol.setPreferredSize(new java.awt.Dimension(132, 75));
 		jButtonCopyCol.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonCopyColMousePressed(evt);
 			}
 		});
@@ -130,7 +144,8 @@ public class EditSubDel extends javax.swing.JDialog {
 		jButtonDelCol.setText("Apagar Coluna?");
 		jButtonDelCol.setPreferredSize(new java.awt.Dimension(132, 75));
 		jButtonDelCol.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonDelColMousePressed(evt);
 			}
 		});
@@ -144,7 +159,8 @@ public class EditSubDel extends javax.swing.JDialog {
 		jButtonDel.setText("Apagar?");
 		jButtonDel.setPreferredSize(new java.awt.Dimension(132, 75));
 		jButtonDel.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonDelMousePressed(evt);
 			}
 		});
@@ -157,7 +173,8 @@ public class EditSubDel extends javax.swing.JDialog {
 		jButtonCancel.setForeground(new java.awt.Color(51, 0, 102));
 		jButtonCancel.setText("Cancel");
 		jButtonCancel.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonCancelMousePressed(evt);
 			}
 		});
@@ -170,55 +187,55 @@ public class EditSubDel extends javax.swing.JDialog {
 		pack();
 	}// GEN-END:initComponents
 
-	private void formKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_formKeyReleased
+	private void formKeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_formKeyReleased
 		jButtonEditKeyReleased(evt);
 	}// GEN-LAST:event_formKeyReleased
 
-	private void formMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMousePressed
+	private void formMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMousePressed
 		this.requestFocus();
 	}// GEN-LAST:event_formMousePressed
 
-	private void jButtonCancelMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonCancelMousePressed
+	private void jButtonCancelMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonCancelMousePressed
 		setSelection(0);
 		closeDialog(null);
 	}// GEN-LAST:event_jButtonCancelMousePressed
 
-	private void jButtonDelMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonDelMousePressed
+	private void jButtonDelMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonDelMousePressed
 		setSelection(7);
 		closeDialog(null);
 	}// GEN-LAST:event_jButtonDelMousePressed
 
-	private void jButtonDelColMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonDelColMousePressed
+	private void jButtonDelColMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonDelColMousePressed
 		setSelection(6);
 		closeDialog(null);
 	}// GEN-LAST:event_jButtonDelColMousePressed
 
-	private void jButtonCopyColMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonCopyColMousePressed
+	private void jButtonCopyColMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonCopyColMousePressed
 		setSelection(5);
 		closeDialog(null);
 	}// GEN-LAST:event_jButtonCopyColMousePressed
 
-	private void jButtonSubBlockMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonSubBlockMousePressed
+	private void jButtonSubBlockMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonSubBlockMousePressed
 		setSelection(4);
 		closeDialog(null);
 	}// GEN-LAST:event_jButtonSubBlockMousePressed
 
-	private void jButtonDelBlockMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonDelBlockMousePressed
+	private void jButtonDelBlockMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonDelBlockMousePressed
 		setSelection(3);
 		closeDialog(null);
 	}// GEN-LAST:event_jButtonDelBlockMousePressed
 
-	private void jButtonAddDownMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonAddDownMousePressed
+	private void jButtonAddDownMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonAddDownMousePressed
 		setSelection(2);
 		closeDialog(null);
 	}// GEN-LAST:event_jButtonAddDownMousePressed
 
-	private void jButtonEditMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonEditMousePressed
+	private void jButtonEditMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonEditMousePressed
 		setSelection(1);
 		closeDialog(null);
 	}// GEN-LAST:event_jButtonEditMousePressed
 
-	private void jButtonEditKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jButtonEditKeyReleased
+	private void jButtonEditKeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jButtonEditKeyReleased
 		if (evt.getKeyCode() == 10) {
 			jButtonEditMousePressed(null);
 		} else if (evt.getKeyCode() == 27) {
@@ -227,7 +244,7 @@ public class EditSubDel extends javax.swing.JDialog {
 	}// GEN-LAST:event_jButtonEditKeyReleased
 
 	/** Closes the dialog */
-	private void closeDialog(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
+	private void closeDialog(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
 		if (evt != null) {
 			setSelection(0);
 		}
@@ -248,7 +265,7 @@ public class EditSubDel extends javax.swing.JDialog {
 	 * @return Value of property selection.
 	 */
 	public int getSelection() {
-		return this.selection;
+		return selection;
 	}
 
 	/**
@@ -256,7 +273,7 @@ public class EditSubDel extends javax.swing.JDialog {
 	 * 
 	 * @param selection New value of property selection.
 	 */
-	public void setSelection(int selection) {
+	public void setSelection(final int selection) {
 		this.selection = selection;
 	}
 

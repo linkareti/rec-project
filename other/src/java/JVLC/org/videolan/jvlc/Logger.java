@@ -38,27 +38,27 @@ public class Logger {
 	/**
 	 * @param jvlc The current jvlc instance
 	 */
-	public Logger(JVLC jvlc) {
-		this.libvlc = jvlc.getLibvlc();
-		libvlc_exception_t exception = new libvlc_exception_t();
-		this.logInstance = jvlc.getLibvlc().libvlc_log_open(jvlc.getInstance(), exception);
+	public Logger(final JVLC jvlc) {
+		libvlc = jvlc.getLibvlc();
+		final libvlc_exception_t exception = new libvlc_exception_t();
+		logInstance = jvlc.getLibvlc().libvlc_log_open(jvlc.getInstance(), exception);
 		if (exception.raised == 1) {
 			throw new RuntimeException("Native exception thrown: " + exception.message);
 		}
 	}
 
 	public void clear() {
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc.libvlc_log_clear(logInstance, exception);
 	}
 
 	public void close() {
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc.libvlc_log_close(logInstance, exception);
 	}
 
 	public int count() {
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		return libvlc.libvlc_log_count(logInstance, exception);
 	}
 

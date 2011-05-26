@@ -8,77 +8,82 @@ public final class VTPhysicsValueListHelper implements org.omg.CORBA.portable.Bo
 	public VTPhysicsValueListHelper() {
 	}
 
-	public static void insert(org.omg.CORBA.Any a, com.linkare.rec.data.acquisition.PhysicsValue[] that) {
-		org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
-		a.type(type());
-		write(out, that);
-		a.read_value(out.create_input_stream(), type());
+	public static void insert(final org.omg.CORBA.Any a, final com.linkare.rec.data.acquisition.PhysicsValue[] that) {
+		final org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
+		a.type(VTPhysicsValueListHelper.type());
+		VTPhysicsValueListHelper.write(out, that);
+		a.read_value(out.create_input_stream(), VTPhysicsValueListHelper.type());
 	}
 
-	public static com.linkare.rec.data.acquisition.PhysicsValue[] extract(org.omg.CORBA.Any a) {
-		return read(a.create_input_stream());
+	public static com.linkare.rec.data.acquisition.PhysicsValue[] extract(final org.omg.CORBA.Any a) {
+		return VTPhysicsValueListHelper.read(a.create_input_stream());
 	}
 
 	private static org.omg.CORBA.TypeCode __typeCode = null;
 	private static boolean __active = false;
 
 	synchronized public static org.omg.CORBA.TypeCode type() {
-		if (__typeCode == null) {
+		if (VTPhysicsValueListHelper.__typeCode == null) {
 			synchronized (org.omg.CORBA.TypeCode.class) {
-				if (__typeCode == null) {
-					if (__active) {
-						return org.omg.CORBA.ORB.init().create_recursive_tc(_id);
+				if (VTPhysicsValueListHelper.__typeCode == null) {
+					if (VTPhysicsValueListHelper.__active) {
+						return org.omg.CORBA.ORB.init().create_recursive_tc(VTPhysicsValueListHelper._id);
 					}
-					__active = true;
-					__typeCode = com.linkare.rec.data.acquisition.VTPhysicsValueHelper.type();
-					__typeCode = org.omg.CORBA.ORB.init().create_sequence_tc(0, __typeCode);
-					__typeCode = org.omg.CORBA.ORB.init().create_alias_tc(
+					VTPhysicsValueListHelper.__active = true;
+					VTPhysicsValueListHelper.__typeCode = com.linkare.rec.data.acquisition.VTPhysicsValueHelper.type();
+					VTPhysicsValueListHelper.__typeCode = org.omg.CORBA.ORB.init().create_sequence_tc(0,
+							VTPhysicsValueListHelper.__typeCode);
+					VTPhysicsValueListHelper.__typeCode = org.omg.CORBA.ORB.init().create_alias_tc(
 							com.linkare.rec.data.acquisition.PhysicsValueListHelper.id(), "PhysicsValueList",
-							__typeCode);
-					__typeCode = org.omg.CORBA.ORB.init().create_value_box_tc(_id, "VTPhysicsValueList", __typeCode);
-					__active = false;
+							VTPhysicsValueListHelper.__typeCode);
+					VTPhysicsValueListHelper.__typeCode = org.omg.CORBA.ORB.init().create_value_box_tc(
+							VTPhysicsValueListHelper._id, "VTPhysicsValueList", VTPhysicsValueListHelper.__typeCode);
+					VTPhysicsValueListHelper.__active = false;
 				}
 			}
 		}
-		return __typeCode;
+		return VTPhysicsValueListHelper.__typeCode;
 	}
 
 	public static String id() {
-		return _id;
+		return VTPhysicsValueListHelper._id;
 	}
 
-	public static com.linkare.rec.data.acquisition.PhysicsValue[] read(org.omg.CORBA.portable.InputStream istream) {
+	public static com.linkare.rec.data.acquisition.PhysicsValue[] read(final org.omg.CORBA.portable.InputStream istream) {
 		if (!(istream instanceof org.omg.CORBA_2_3.portable.InputStream)) {
 			throw new org.omg.CORBA.BAD_PARAM();
 		}
 		return (com.linkare.rec.data.acquisition.PhysicsValue[]) ((org.omg.CORBA_2_3.portable.InputStream) istream)
-				.read_value(_instance);
+				.read_value(VTPhysicsValueListHelper._instance);
 	}
 
-	public java.io.Serializable read_value(org.omg.CORBA.portable.InputStream istream) {
+	@Override
+	public java.io.Serializable read_value(final org.omg.CORBA.portable.InputStream istream) {
 		com.linkare.rec.data.acquisition.PhysicsValue[] tmp;
 		tmp = com.linkare.rec.data.acquisition.PhysicsValueListHelper.read(istream);
-		return (java.io.Serializable) tmp;
+		return tmp;
 	}
 
-	public static void write(org.omg.CORBA.portable.OutputStream ostream,
-			com.linkare.rec.data.acquisition.PhysicsValue[] value) {
+	public static void write(final org.omg.CORBA.portable.OutputStream ostream,
+			final com.linkare.rec.data.acquisition.PhysicsValue[] value) {
 		if (!(ostream instanceof org.omg.CORBA_2_3.portable.OutputStream)) {
 			throw new org.omg.CORBA.BAD_PARAM();
 		}
-		((org.omg.CORBA_2_3.portable.OutputStream) ostream).write_value(value, _instance);
+		((org.omg.CORBA_2_3.portable.OutputStream) ostream).write_value(value, VTPhysicsValueListHelper._instance);
 	}
 
-	public void write_value(org.omg.CORBA.portable.OutputStream ostream, java.io.Serializable value) {
+	@Override
+	public void write_value(final org.omg.CORBA.portable.OutputStream ostream, final java.io.Serializable value) {
 		if (!(value instanceof com.linkare.rec.data.acquisition.PhysicsValue[])) {
 			throw new org.omg.CORBA.MARSHAL();
 		}
-		com.linkare.rec.data.acquisition.PhysicsValue[] valueType = (com.linkare.rec.data.acquisition.PhysicsValue[]) value;
+		final com.linkare.rec.data.acquisition.PhysicsValue[] valueType = (com.linkare.rec.data.acquisition.PhysicsValue[]) value;
 		com.linkare.rec.data.acquisition.PhysicsValueListHelper.write(ostream, valueType);
 	}
 
+	@Override
 	public String get_id() {
-		return _id;
+		return VTPhysicsValueListHelper._id;
 	}
 
 }

@@ -9,19 +9,20 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class ExecutorScheduler {
 
-	private static final ScheduledExecutorService scheduler = newScheduledThreadPool(1);
+	private static final ScheduledExecutorService scheduler = ExecutorScheduler.newScheduledThreadPool(1);
 
-	public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize) {
+	public static ScheduledExecutorService newScheduledThreadPool(final int corePoolSize) {
 		return new ScheduledThreadPoolExecutor(corePoolSize, new ReCThreadFactory());
 	}
 
-	public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize, int threadPriority) {
+	public static ScheduledExecutorService newScheduledThreadPool(final int corePoolSize, final int threadPriority) {
 		return new ScheduledThreadPoolExecutor(corePoolSize, new ReCThreadFactory(threadPriority));
 	}
 
-	public static void scheduleAtFixedRate(ScheduledWorkUnit work, long initialDelay, long period, TimeUnit unit) {
-		ScheduledFuture<?> shutdownHandler = scheduler.scheduleWithFixedDelay(new ScheduledRunnable(work),
-				initialDelay, period, unit);
+	public static void scheduleAtFixedRate(final ScheduledWorkUnit work, final long initialDelay, final long period,
+			final TimeUnit unit) {
+		final ScheduledFuture<?> shutdownHandler = ExecutorScheduler.scheduler.scheduleWithFixedDelay(
+				new ScheduledRunnable(work), initialDelay, period, unit);
 		work.setShutdownHandler(shutdownHandler);
 	}
 
@@ -29,18 +30,19 @@ public class ExecutorScheduler {
 
 		ScheduledWorkUnit work;
 
-		ScheduledRunnable(ScheduledWorkUnit work) {
+		ScheduledRunnable(final ScheduledWorkUnit work) {
 			this.work = work;
 		}
 
+		@Override
 		public void run() {
 			try {
-			if (work != null) {
-				work.run();
-			}
-			}catch(Throwable t)
-			{
-				work.logThrowable("Throwable caught upon execution of Scheduled Work Unit of type "+work.getClass().getCanonicalName()+":"+t.getMessage(),t);
+				if (work != null) {
+					work.run();
+				}
+			} catch (final Throwable t) {
+				work.logThrowable("Throwable caught upon execution of Scheduled Work Unit of type "
+						+ work.getClass().getCanonicalName() + ":" + t.getMessage(), t);
 			}
 		}
 
@@ -57,19 +59,22 @@ public class ExecutorScheduler {
 			this(Thread.NORM_PRIORITY);
 		}
 
-		ReCThreadFactory(int priority) {
+		ReCThreadFactory(final int priority) {
 			this.priority = priority;
-			SecurityManager s = System.getSecurityManager();
+			final SecurityManager s = System.getSecurityManager();
 			group = (s != null) ? s.getThreadGroup() : Thread.currentThread().getThreadGroup();
-			namePrefix = "rec-pool-" + poolNumber.getAndIncrement() + "-thread-";
+			namePrefix = "rec-pool-" + ReCThreadFactory.poolNumber.getAndIncrement() + "-thread-";
 		}
 
-		public Thread newThread(Runnable r) {
-			Thread t = new Thread(group, r, namePrefix + threadNumber.getAndIncrement(), 0);
-			if (t.isDaemon())
+		@Override
+		public Thread newThread(final Runnable r) {
+			final Thread t = new Thread(group, r, namePrefix + threadNumber.getAndIncrement(), 0);
+			if (t.isDaemon()) {
 				t.setDaemon(false);
-			if (t.getPriority() != priority)
+			}
+			if (t.getPriority() != priority) {
 				t.setPriority(priority);
+			}
 			return t;
 		}
 	}

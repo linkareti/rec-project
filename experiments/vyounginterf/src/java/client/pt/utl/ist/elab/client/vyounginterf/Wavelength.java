@@ -41,7 +41,7 @@ public class Wavelength {
 	 * 
 	 * @param gamma 0.0 .. 1.0 intensity.
 	 */
-	public static Color wvColor(float wl, float gamma) {
+	public static Color wvColor(final float wl, final float gamma) {
 
 		/**
 		 * red, green, blue component in range 0.0 .. 1.0.
@@ -172,14 +172,14 @@ public class Wavelength {
 	 * 
 	 * @param gamma 0.0 .. 1.0 intensity.
 	 */
-	public static Color fColor(float freq, float gamma) {
+	public static Color fColor(final float freq, final float gamma) {
 		// speed of light is 299,792,458 meters/sec
 		// = 2.9972458e08 m/sec
 		// = 2.9972458e17 nm/sec
 		// = 2.9972458e05 nm/picosecond
 		// = 299,724.58 nm/picosecond
 		// 1 Terahertz = 1 cycle per picosecond
-		return wvColor(299724.58f / freq, gamma);
+		return Wavelength.wvColor(299724.58f / freq, gamma);
 	} // end fColor
 
 } // end class WaveLength

@@ -29,14 +29,15 @@ public class ExpHistoryUINode extends ExpHistory {
 	 * @param apparatus
 	 * @param apparatusConfig
 	 */
-	public ExpHistoryUINode(ExpHistoryDisplayFactory expHistoryDisplayFactory, DataProducerWrapper producerWrapper,
-			Apparatus apparatus, com.linkare.rec.impl.baseUI.config.Apparatus apparatusConfig) {
+	public ExpHistoryUINode(final ExpHistoryDisplayFactory expHistoryDisplayFactory,
+			final DataProducerWrapper producerWrapper, final Apparatus apparatus,
+			final com.linkare.rec.impl.baseUI.config.Apparatus apparatusConfig) {
 		super(expHistoryDisplayFactory, producerWrapper, apparatus);
 		this.apparatusConfig = apparatusConfig;
 	}
 
 	public com.linkare.rec.impl.baseUI.config.Apparatus getApparatusConfig() {
-		return this.apparatusConfig;
+		return apparatusConfig;
 	}
 
 	/**

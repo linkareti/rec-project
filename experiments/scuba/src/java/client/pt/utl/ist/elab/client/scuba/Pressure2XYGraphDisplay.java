@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.scuba;
  */
 public class Pressure2XYGraphDisplay extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6349303891819450971L;
+
 	/** Creates a new instance of PVXYGraphDisplay */
 	public Pressure2XYGraphDisplay() {
 		super();

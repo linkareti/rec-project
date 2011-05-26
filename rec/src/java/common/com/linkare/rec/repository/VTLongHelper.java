@@ -20,71 +20,75 @@ public final class VTLongHelper implements BoxedValueHelper {
 	public VTLongHelper() {
 	}
 
-	public static void insert(Any a, VTLong that) {
-		org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
-		a.type(type());
-		write(out, that);
-		a.read_value(out.create_input_stream(), type());
+	public static void insert(final Any a, final VTLong that) {
+		final org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
+		a.type(VTLongHelper.type());
+		VTLongHelper.write(out, that);
+		a.read_value(out.create_input_stream(), VTLongHelper.type());
 	}
 
-	public static VTLong extract(Any a) {
-		return read(a.create_input_stream());
+	public static VTLong extract(final Any a) {
+		return VTLongHelper.read(a.create_input_stream());
 	}
 
 	private static TypeCode __typeCode = null;
 	private static boolean __active = false;
 
 	public static synchronized TypeCode type() {
-		if (__typeCode == null) {
+		if (VTLongHelper.__typeCode == null) {
 			synchronized (TypeCode.class) {
-				if (__typeCode == null) {
-					if (__active) {
-						return ORB.init().create_recursive_tc(_id);
+				if (VTLongHelper.__typeCode == null) {
+					if (VTLongHelper.__active) {
+						return ORB.init().create_recursive_tc(VTLongHelper._id);
 					}
-					__active = true;
-					__typeCode = ORB.init().get_primitive_tc(TCKind.tk_long);
-					__typeCode = ORB.init().create_value_box_tc(_id, "VTLong", __typeCode);
-					__active = false;
+					VTLongHelper.__active = true;
+					VTLongHelper.__typeCode = ORB.init().get_primitive_tc(TCKind.tk_long);
+					VTLongHelper.__typeCode = ORB.init().create_value_box_tc(VTLongHelper._id, "VTLong",
+							VTLongHelper.__typeCode);
+					VTLongHelper.__active = false;
 				}
 			}
 		}
-		return __typeCode;
+		return VTLongHelper.__typeCode;
 	}
 
 	public static String id() {
-		return _id;
+		return VTLongHelper._id;
 	}
 
-	public static VTLong read(org.omg.CORBA.portable.InputStream istream) {
+	public static VTLong read(final org.omg.CORBA.portable.InputStream istream) {
 		if (!(istream instanceof InputStream)) {
 			throw new BAD_PARAM();
 		}
-		return (VTLong) ((InputStream) istream).read_value(_instance);
+		return (VTLong) ((InputStream) istream).read_value(VTLongHelper._instance);
 	}
 
-	public Serializable read_value(org.omg.CORBA.portable.InputStream istream) {
+	@Override
+	public Serializable read_value(final org.omg.CORBA.portable.InputStream istream) {
 		int tmp;
 		tmp = istream.read_long();
 		return new VTLong(tmp);
 	}
 
-	public static void write(org.omg.CORBA.portable.OutputStream ostream, VTLong value) {
+	public static void write(final org.omg.CORBA.portable.OutputStream ostream, final VTLong value) {
 		if (!(ostream instanceof OutputStream)) {
 			throw new BAD_PARAM();
 		}
-		((OutputStream) ostream).write_value(value, _instance);
+		((OutputStream) ostream).write_value(value, VTLongHelper._instance);
 	}
 
-	public void write_value(org.omg.CORBA.portable.OutputStream ostream, Serializable value) {
+	@Override
+	public void write_value(final org.omg.CORBA.portable.OutputStream ostream, final Serializable value) {
 		if (!(value instanceof VTLong)) {
 			throw new MARSHAL();
 		}
-		VTLong valueType = (VTLong) value;
+		final VTLong valueType = (VTLong) value;
 		ostream.write_long(valueType.getValue());
 	}
 
+	@Override
 	public String get_id() {
-		return _id;
+		return VTLongHelper._id;
 	}
 
 }

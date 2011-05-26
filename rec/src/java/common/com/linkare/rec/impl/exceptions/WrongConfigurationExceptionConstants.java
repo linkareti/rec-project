@@ -13,16 +13,16 @@ public class WrongConfigurationExceptionConstants {
 	public static final int SCALE_INVALID = 3;
 	public static final String SCALE_INVALID_MSG = "The selected scale is not any of the allowed scales!";
 
-	public static String getTranslatedMessage(WrongConfigurationException e) {
+	public static String getTranslatedMessage(final WrongConfigurationException e) {
 		switch (e.errorCode) {
 		case FREQUENCY_NOT_IN_SCALES:
-			return FREQUENCY_NOT_IN_SCALES_MSG;
+			return WrongConfigurationExceptionConstants.FREQUENCY_NOT_IN_SCALES_MSG;
 		case PARAMETER_INVALID:
-			return PARAMETER_INVALID_MSG;
+			return WrongConfigurationExceptionConstants.PARAMETER_INVALID_MSG;
 		case SAMPLING_SCALE_INVALID:
-			return SAMPLING_SCALE_INVALID_MSG;
+			return WrongConfigurationExceptionConstants.SAMPLING_SCALE_INVALID_MSG;
 		case SCALE_INVALID:
-			return SCALE_INVALID_MSG;
+			return WrongConfigurationExceptionConstants.SCALE_INVALID_MSG;
 		}
 
 		return e.getMessage();

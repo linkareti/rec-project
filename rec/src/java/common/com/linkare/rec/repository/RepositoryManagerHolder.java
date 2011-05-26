@@ -11,18 +11,21 @@ public final class RepositoryManagerHolder implements Streamable {
 	public RepositoryManagerHolder() {
 	}
 
-	public RepositoryManagerHolder(RepositoryManager initialValue) {
+	public RepositoryManagerHolder(final RepositoryManager initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(InputStream i) {
+	@Override
+	public void _read(final InputStream i) {
 		value = RepositoryManagerHelper.read(i);
 	}
 
-	public void _write(OutputStream o) {
+	@Override
+	public void _write(final OutputStream o) {
 		RepositoryManagerHelper.write(o, value);
 	}
 
+	@Override
 	public TypeCode _type() {
 		return RepositoryManagerHelper.type();
 	}

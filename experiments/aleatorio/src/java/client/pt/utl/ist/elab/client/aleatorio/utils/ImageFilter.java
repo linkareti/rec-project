@@ -14,24 +14,25 @@ public class ImageFilter extends javax.swing.filechooser.FileFilter {
 
 	private java.util.Hashtable filtros = null;
 	private String fullDescription = "JPEG, BitMap and Tif Image Files";
-	private String description = null;
+	private final String description = null;
 
 	private boolean useExtensionsInDescription = true;
 
 	/** Creates a new instance of ImageFilter */
 	public ImageFilter() {
-		this.filtros = new java.util.Hashtable(5);
+		filtros = new java.util.Hashtable(5);
 		filtros.put("jpg", this);
 		filtros.put("bmp", this);
 		filtros.put("tif", this);
 	}
 
-	public boolean accept(java.io.File file) {
+	@Override
+	public boolean accept(final java.io.File file) {
 		if (file != null) {
 			if (file.isDirectory()) {
 				return true;
 			}
-			String extension = getExtension(file);
+			final String extension = getExtension(file);
 			if (extension != null && filtros.get(extension) != null) {
 				return true;
 			}
@@ -39,10 +40,10 @@ public class ImageFilter extends javax.swing.filechooser.FileFilter {
 		return false;
 	}
 
-	public String getExtension(java.io.File f) {
+	public String getExtension(final java.io.File f) {
 		if (f != null) {
-			String filename = f.getName();
-			int i = filename.lastIndexOf('.');
+			final String filename = f.getName();
+			final int i = filename.lastIndexOf('.');
 			if (i > 0 && i < filename.length() - 1) {
 				return filename.substring(i + 1).toLowerCase();
 			}
@@ -51,12 +52,13 @@ public class ImageFilter extends javax.swing.filechooser.FileFilter {
 		return null;
 	}
 
+	@Override
 	public String getDescription() {
 		if (fullDescription == null) {
 			if (description == null || isExtensionListInDescription()) {
 				fullDescription = description == null ? "(" : description + " (";
 				// build the description from the extension list
-				java.util.Enumeration extensions = filtros.keys();
+				final java.util.Enumeration extensions = filtros.keys();
 				if (extensions != null) {
 					fullDescription += "." + (String) extensions.nextElement();
 					while (extensions.hasMoreElements()) {
@@ -71,7 +73,7 @@ public class ImageFilter extends javax.swing.filechooser.FileFilter {
 		return fullDescription;
 	}
 
-	public void setExtensionListInDescription(boolean b) {
+	public void setExtensionListInDescription(final boolean b) {
 		useExtensionsInDescription = b;
 		fullDescription = null;
 	}

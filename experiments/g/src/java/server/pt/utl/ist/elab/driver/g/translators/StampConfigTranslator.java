@@ -24,18 +24,21 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 
 	/** Creates a new instance of StampRelayTranslator */
 	public StampConfigTranslator() {
-		super(COMMAND_IDENTIFIER);
+		super(StampConfigTranslator.COMMAND_IDENTIFIER);
 	}
 
-	public boolean translate(StampCommand command) {
-		if (command.getCommandIdentifier() == null)
+	@Override
+	public boolean translate(final StampCommand command) {
+		if (command.getCommandIdentifier() == null) {
 			return false;
-		if (!command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER))
+		}
+		if (!command.getCommandIdentifier().equalsIgnoreCase(StampConfigTranslator.COMMAND_IDENTIFIER)) {
 			return false;
+		}
 
-		int numsamples = ((Integer) command.getCommandData(NUMSAMPLES_STR)).intValue();
-		int delay_time = ((Integer) command.getCommandData(DELAY_STR)).intValue();
-		int power = ((Integer) command.getCommandData(POWER_STR)).intValue();
+		final int numsamples = ((Integer) command.getCommandData(StampConfigTranslator.NUMSAMPLES_STR)).intValue();
+		final int delay_time = ((Integer) command.getCommandData(StampConfigTranslator.DELAY_STR)).intValue();
+		final int power = ((Integer) command.getCommandData(StampConfigTranslator.POWER_STR)).intValue();
 
 		if (power > 100 || power < 0) {
 			System.out.println("power launch is wrong..." + power);
@@ -47,7 +50,7 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 			return false;
 		}
 
-		if (numsamples > (int) Math.floor(500. - ((float) delay_time - 1.) * 480. / 249.)) {
+		if (numsamples > (int) Math.floor(500. - (delay_time - 1.) * 480. / 249.)) {
 			System.out.println("numsamples>=500-(delay_time-1)*480/249)");
 			return false;
 		}
@@ -58,18 +61,21 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 		}
 
 		String powerstr = "" + power;
-		while (powerstr.length() < 3)
+		while (powerstr.length() < 3) {
 			powerstr = "0" + powerstr;
+		}
 
 		String delay_time_str = "" + delay_time;
-		while (delay_time_str.length() < 3)
+		while (delay_time_str.length() < 3) {
 			delay_time_str = "0" + delay_time_str;
+		}
 
 		String numSamplesStr = "" + (numsamples - 1);
-		while (numSamplesStr.length() < 4)
+		while (numSamplesStr.length() < 4) {
 			numSamplesStr = "0" + numSamplesStr;
+		}
 
-		String commandStr = command.getCommandIdentifier() + " " + numSamplesStr + " " + powerstr + " "
+		final String commandStr = command.getCommandIdentifier() + " " + numSamplesStr + " " + powerstr + " "
 				+ delay_time_str;
 		command.setCommand(commandStr);
 

@@ -28,6 +28,10 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  */
 public class BalancaTorcao extends DrawingPanel3D implements ActionListener, MouseListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3799433187705742204L;
 	protected double d = 50;
 	protected double luzX = 0;
 
@@ -43,7 +47,7 @@ public class BalancaTorcao extends DrawingPanel3D implements ActionListener, Mou
 	protected InteractivePlane regua;
 	protected InteractiveTrace luz;
 
-	public void setListener(InteractionListener list) {
+	public void setListener(final InteractionListener list) {
 		mM[0].addListener(list);
 		mM[1].addListener(list);
 		mm[0].addListener(list);
@@ -53,15 +57,15 @@ public class BalancaTorcao extends DrawingPanel3D implements ActionListener, Mou
 
 	/** Creates a new instance of BalancaTorcao */
 	public BalancaTorcao() {
-		super(DISPLAY_PERSPECTIVE);
+		super(DrawingPanel3D.DISPLAY_PERSPECTIVE);
 		setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
 				"rec.exp.customizer.balanca.title.13", "Torsion Balance View")));
 		setToolTipText(ReCResourceBundle.findStringOrDefault("rec.exp.customizer.balanca.tip.13",
 				"Mouse Interactive View"));
-		setDecorationType(DECORATION_NONE);
+		setDecorationType(DrawingPanel3D.DECORATION_NONE);
 		setAlphaAndBeta(Math.PI / 2, Math.PI / 70 + Math.PI);
 		setPreferredMinMaxX(-40, 60);
-		setCursorMode(CURSOR_CUBE);
+		setCursorMode(DrawingPanel3D.CURSOR_CUBE);
 
 		setEnabled(true);
 		addMouseListener(this);
@@ -124,9 +128,9 @@ public class BalancaTorcao extends DrawingPanel3D implements ActionListener, Mou
 		viewPopMenu.addItem(ReCResourceBundle.findStringOrDefault("rec.exp.customizer.balanca.popup.view.title.2",
 				"Frontal View"), ReCResourceBundle.findStringOrDefault("rec.exp.customizer.balanca.popup.view.tip.2",
 				"Frontal View (2D)"));
-		viewPopMenu.addItem(ReCResourceBundle.findStringOrDefault("rec.exp.customizer.balanca.popup.view.title.3",
-				"Top View"), ReCResourceBundle.findStringOrDefault("rec.exp.customizer.balanca.popup.view.tip.3",
-				"Top View (2D)"));
+		viewPopMenu.addItem(
+				ReCResourceBundle.findStringOrDefault("rec.exp.customizer.balanca.popup.view.title.3", "Top View"),
+				ReCResourceBundle.findStringOrDefault("rec.exp.customizer.balanca.popup.view.tip.3", "Top View (2D)"));
 		viewPopMenu.addItem(ReCResourceBundle.findStringOrDefault("rec.exp.customizer.balanca.popup.view.title.4",
 				"Lateral View"), ReCResourceBundle.findStringOrDefault("rec.exp.customizer.balanca.popup.view.tip.4",
 				"Lateral View (2D)"));
@@ -138,7 +142,7 @@ public class BalancaTorcao extends DrawingPanel3D implements ActionListener, Mou
 				"Define the measure that shows all the objects"));
 	}
 
-	public void config(double angInit, double l, double s0, double s, double targetSize) {
+	public void config(final double angInit, final double l, final double s0, final double s, final double targetSize) {
 		setD(s);
 		setS0(s0);
 		setL(l);
@@ -150,11 +154,11 @@ public class BalancaTorcao extends DrawingPanel3D implements ActionListener, Mou
 		return regua.getSizeX();
 	}
 
-	public void setReguaSize(double size) {
+	public void setReguaSize(final double size) {
 		regua.setSizeX(size);
 	}
 
-	public void updateReguaSize(double size) {
+	public void updateReguaSize(final double size) {
 		regua.setSizeX(size);
 		repaint();
 	}
@@ -163,21 +167,21 @@ public class BalancaTorcao extends DrawingPanel3D implements ActionListener, Mou
 		return Math.abs(regua.getY());
 	}
 
-	public void setL(double l) {
+	public void setL(final double l) {
 		regua.setY(-Math.abs(l));
 	}
 
-	public void updateL(double l) {
+	public void updateL(final double l) {
 		regua.setY(-Math.abs(l));
 		updateLuz();
 	}
 
-	public void setD(double s) {
+	public void setD(final double s) {
 		d = Math.abs(s);
 	}
 
-	public void updateD(double s) {
-		double ang = getAngle();
+	public void updateD(final double s) {
+		final double ang = getAngle();
 		d = Math.abs(s);
 		mm[0].setXY(-Math.cos(ang) * d, -Math.sin(ang) * d);
 		mm[1].setXY(Math.cos(ang) * d, Math.sin(ang) * d);
@@ -194,7 +198,7 @@ public class BalancaTorcao extends DrawingPanel3D implements ActionListener, Mou
 	protected void updateGUI() {
 		try {
 			((CGCustomizer) getParent()).update();
-		} catch (ClassCastException e) {
+		} catch (final ClassCastException e) {
 		}
 	}
 
@@ -202,14 +206,14 @@ public class BalancaTorcao extends DrawingPanel3D implements ActionListener, Mou
 		return Math.max(Math.abs(mM[0].getY()), Math.abs(mM[1].getY()));
 	}
 
-	public void setS0(double s0) {
+	public void setS0(final double s0) {
 		mM[0].setY(Math.abs(s0));
 		mM[1].setY(-Math.abs(s0));
 		mM[0].setX(-d);
 		mM[1].setX(d);
 	}
 
-	public void updateS0(double s0) {
+	public void updateS0(final double s0) {
 		mM[0].setY(Math.abs(s0));
 		mM[1].setY(-Math.abs(s0));
 		repaint();
@@ -235,7 +239,7 @@ public class BalancaTorcao extends DrawingPanel3D implements ActionListener, Mou
 		return Math.atan(mm[0].getY() / mm[0].getX());
 	}
 
-	public void updateAngle(double ang) {
+	public void updateAngle(final double ang) {
 		mm[0].setXY(-Math.cos(ang) * d, -Math.sin(ang) * d);
 		mm[1].setXY(Math.cos(ang) * d, Math.sin(ang) * d);
 		updateBarra();
@@ -245,7 +249,7 @@ public class BalancaTorcao extends DrawingPanel3D implements ActionListener, Mou
 		repaint();
 	}
 
-	public void updatePosAngle(double ang) {
+	public void updatePosAngle(final double ang) {
 		mm[0].setXY(-Math.cos(ang) * d, -Math.sin(ang) * d);
 		mm[1].setXY(Math.cos(ang) * d, Math.sin(ang) * d);
 
@@ -270,31 +274,32 @@ public class BalancaTorcao extends DrawingPanel3D implements ActionListener, Mou
 		updateGUI();
 	}
 
-	public void actionPerformed(ActionEvent e) {
+	@Override
+	public void actionPerformed(final ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase("Perspective")) {
-			setDisplayMode(DISPLAY_PERSPECTIVE);
+			setDisplayMode(DrawingPanel3D.DISPLAY_PERSPECTIVE);
 			setAlphaAndBeta(Math.PI / 2, Math.PI / 70 + Math.PI);
 			setPreferredMinMax(-40, 60, -1, 1);
 			view2D = 0;
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase("Frontal View")) {
-			setDisplayMode(DISPLAY_PLANAR_XZ);
+			setDisplayMode(DrawingPanel3D.DISPLAY_PLANAR_XZ);
 			setPreferredMinMax(-60, 60, -60, 60);
 			setAlphaAndBeta(Math.PI / 2, 0);
 			view2D = 1;
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase("Top View")) {
-			setDisplayMode(DISPLAY_PLANAR_XY);
+			setDisplayMode(DrawingPanel3D.DISPLAY_PLANAR_XY);
 			setPreferredMinMax(-60, 60, -60, 60);
 			view2D = 2;
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase("Lateral View")) {
-			setDisplayMode(DISPLAY_PLANAR_YZ);
+			setDisplayMode(DrawingPanel3D.DISPLAY_PLANAR_YZ);
 			setPreferredMinMaxY(-60, 60);
 			view2D = 3;
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase("Free 3D")) {
-			setDisplayMode(DISPLAY_3D);
+			setDisplayMode(DrawingPanel3D.DISPLAY_3D);
 			switch (view2D) {
 			case 1:
 				setAlphaAndBeta(-Math.PI / 2, Math.PI);
@@ -313,21 +318,27 @@ public class BalancaTorcao extends DrawingPanel3D implements ActionListener, Mou
 
 	}
 
-	public void mouseClicked(MouseEvent e) {
-		if (javax.swing.SwingUtilities.isRightMouseButton(e))
+	@Override
+	public void mouseClicked(final MouseEvent e) {
+		if (javax.swing.SwingUtilities.isRightMouseButton(e)) {
 			viewPopMenu.show(e.getComponent(), e.getX(), e.getY());
+		}
 	}
 
-	public void mouseEntered(MouseEvent e) {
+	@Override
+	public void mouseEntered(final MouseEvent e) {
 	}
 
-	public void mouseExited(MouseEvent e) {
+	@Override
+	public void mouseExited(final MouseEvent e) {
 	}
 
-	public void mousePressed(MouseEvent e) {
+	@Override
+	public void mousePressed(final MouseEvent e) {
 	}
 
-	public void mouseReleased(MouseEvent e) {
+	@Override
+	public void mouseReleased(final MouseEvent e) {
 	}
 
 }

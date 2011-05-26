@@ -3,13 +3,21 @@ package com.linkare.rec.data.config;
 import java.util.ResourceBundle;
 
 public final class ParameterConfig implements org.omg.CORBA.portable.IDLEntity {
-	
-	private static final ResourceBundle resourceBundle = ResourceBundle.getBundle("com/linkare/rec/data/resources/messages");
 
-	private static final String UNDEFINED_PARAMETER_NAME = resourceBundle.getString("rec.bui.parameter.config.undefined.parameter.name");
-	
-	private static final String UNDEFINED = resourceBundle.getString("rec.bui.parameter.config.undefined");
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6831632775475652156L;
+
+	private static final ResourceBundle resourceBundle = ResourceBundle
+			.getBundle("com/linkare/rec/data/resources/messages");
+
+	private static final String UNDEFINED_PARAMETER_NAME = ParameterConfig.resourceBundle
+			.getString("rec.bui.parameter.config.undefined.parameter.name");
+
+	private static final String UNDEFINED = ParameterConfig.resourceBundle
+			.getString("rec.bui.parameter.config.undefined");
+
 	/** Holds value of property parameterName. */
 	private String parameterName;
 
@@ -27,17 +35,17 @@ public final class ParameterConfig implements org.omg.CORBA.portable.IDLEntity {
 	// @param parameter_name parameter_name struct member
 	// @param parameter_value parameter_value struct member
 	//
-	public ParameterConfig(String parameter_name, String parameter_value) {
-		this.setParameterName(parameter_name);
-		this.setParameterValue(parameter_value);
+	public ParameterConfig(final String parameter_name, final String parameter_value) {
+		setParameterName(parameter_name);
+		setParameterValue(parameter_value);
 	}
 
 	//
 	// Copy Constructor
 	//
-	public ParameterConfig(ParameterConfig other) {
-		this.setParameterName(new String(other.getParameterName()));
-		this.setParameterValue(new String(other.getParameterValue()));
+	public ParameterConfig(final ParameterConfig other) {
+		setParameterName(new String(other.getParameterName()));
+		setParameterValue(new String(other.getParameterValue()));
 	}
 
 	/**
@@ -46,7 +54,7 @@ public final class ParameterConfig implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property parameterName.
 	 */
 	public String getParameterName() {
-		return this.parameterName;
+		return parameterName;
 	}
 
 	/**
@@ -54,7 +62,7 @@ public final class ParameterConfig implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param parameterName New value of property parameterName.
 	 */
-	public void setParameterName(String parameterName) {
+	public void setParameterName(final String parameterName) {
 		this.parameterName = parameterName;
 	}
 
@@ -64,7 +72,7 @@ public final class ParameterConfig implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property parameterValue.
 	 */
 	public String getParameterValue() {
-		return this.parameterValue;
+		return parameterValue;
 	}
 
 	/**
@@ -72,7 +80,7 @@ public final class ParameterConfig implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param parameterValue New value of property parameterValue.
 	 */
-	public void setParameterValue(String parameterValue) {
+	public void setParameterValue(final String parameterValue) {
 		this.parameterValue = parameterValue;
 	}
 
@@ -97,9 +105,10 @@ public final class ParameterConfig implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @return a string representation of the object.
 	 */
+	@Override
 	public String toString() {
-		return "" + (parameterName == null ? UNDEFINED_PARAMETER_NAME : parameterName) + " : "
-				+ (parameterValue == null ? UNDEFINED : parameterValue);
+		return "" + (parameterName == null ? ParameterConfig.UNDEFINED_PARAMETER_NAME : parameterName) + " : "
+				+ (parameterValue == null ? ParameterConfig.UNDEFINED : parameterValue);
 	}
 
 } // class ParameterConfig

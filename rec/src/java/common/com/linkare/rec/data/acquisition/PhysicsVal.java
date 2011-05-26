@@ -5,6 +5,11 @@ import org.omg.CORBA.portable.IDLEntity;
 import com.linkare.rec.impl.data.PhysicsValueUtil;
 
 public final class PhysicsVal implements IDLEntity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6372435451112594019L;
+
 	// Discriminator
 	private com.linkare.rec.data.acquisition.PhysicsValueType discriminator;
 
@@ -37,7 +42,7 @@ public final class PhysicsVal implements IDLEntity {
 	}
 
 	/* Copy constructor */
-	public PhysicsVal(PhysicsVal other) {
+	public PhysicsVal(final PhysicsVal other) {
 		switch (other.getDiscriminator().value()) {
 		case com.linkare.rec.data.acquisition.PhysicsValueType._BooleanVal:
 			setBooleanValue(other.isBooleanValue());
@@ -79,7 +84,7 @@ public final class PhysicsVal implements IDLEntity {
 	//
 	// Set discriminator value
 	//
-	public void setDiscriminator(com.linkare.rec.data.acquisition.PhysicsValueType discriminator) {
+	public void setDiscriminator(final com.linkare.rec.data.acquisition.PhysicsValueType discriminator) {
 		this.discriminator = discriminator;
 	}
 
@@ -106,7 +111,7 @@ public final class PhysicsVal implements IDLEntity {
 		 * .BooleanVal) throw new RuntimeException("Invalid type request");
 		 */
 
-		return this._boolean_value;
+		return _boolean_value;
 	}
 
 	/**
@@ -114,7 +119,7 @@ public final class PhysicsVal implements IDLEntity {
 	 * 
 	 * @param booleanValue New value of property booleanValue.
 	 */
-	public void setBooleanValue(boolean _boolean_value) {
+	public void setBooleanValue(final boolean _boolean_value) {
 		setDiscriminator(com.linkare.rec.data.acquisition.PhysicsValueType.BooleanVal);
 		this._boolean_value = _boolean_value;
 	}
@@ -130,7 +135,7 @@ public final class PhysicsVal implements IDLEntity {
 		 * .ByteVal) throw new RuntimeException("Invalid type request");
 		 */
 
-		return this._byte_value;
+		return _byte_value;
 	}
 
 	/**
@@ -138,7 +143,7 @@ public final class PhysicsVal implements IDLEntity {
 	 * 
 	 * @param byteValue New value of property byteValue.
 	 */
-	public void setByteValue(byte _byte_value) {
+	public void setByteValue(final byte _byte_value) {
 		setDiscriminator(com.linkare.rec.data.acquisition.PhysicsValueType.ByteVal);
 		this._byte_value = _byte_value;
 	}
@@ -154,7 +159,7 @@ public final class PhysicsVal implements IDLEntity {
 		 * .ShortVal) throw new RuntimeException("Invalid type request");
 		 */
 
-		return this._short_value;
+		return _short_value;
 	}
 
 	/**
@@ -162,7 +167,7 @@ public final class PhysicsVal implements IDLEntity {
 	 * 
 	 * @param shortValue New value of property shortValue.
 	 */
-	public void setShortValue(short _short_value) {
+	public void setShortValue(final short _short_value) {
 		setDiscriminator(com.linkare.rec.data.acquisition.PhysicsValueType.ShortVal);
 		this._short_value = _short_value;
 	}
@@ -178,7 +183,7 @@ public final class PhysicsVal implements IDLEntity {
 		 * .IntVal) throw new RuntimeException("Invalid type request");
 		 */
 
-		return this._int_value;
+		return _int_value;
 	}
 
 	/**
@@ -186,7 +191,7 @@ public final class PhysicsVal implements IDLEntity {
 	 * 
 	 * @param intValue New value of property intValue.
 	 */
-	public void setIntValue(int _int_value) {
+	public void setIntValue(final int _int_value) {
 		setDiscriminator(com.linkare.rec.data.acquisition.PhysicsValueType.IntVal);
 		this._int_value = _int_value;
 	}
@@ -202,7 +207,7 @@ public final class PhysicsVal implements IDLEntity {
 		 * .LongVal) throw new RuntimeException("Invalid type request");
 		 */
 
-		return this._long_value;
+		return _long_value;
 	}
 
 	/**
@@ -210,7 +215,7 @@ public final class PhysicsVal implements IDLEntity {
 	 * 
 	 * @param longValue New value of property longValue.
 	 */
-	public void setLongValue(long _long_value) {
+	public void setLongValue(final long _long_value) {
 		setDiscriminator(com.linkare.rec.data.acquisition.PhysicsValueType.LongVal);
 		this._long_value = _long_value;
 	}
@@ -226,7 +231,7 @@ public final class PhysicsVal implements IDLEntity {
 		 * .FloatVal) throw new RuntimeException("Invalid type request");
 		 */
 
-		return this._float_value;
+		return _float_value;
 	}
 
 	/**
@@ -234,7 +239,7 @@ public final class PhysicsVal implements IDLEntity {
 	 * 
 	 * @param floatValue New value of property floatValue.
 	 */
-	public void setFloatValue(float _float_value) {
+	public void setFloatValue(final float _float_value) {
 		setDiscriminator(com.linkare.rec.data.acquisition.PhysicsValueType.FloatVal);
 		this._float_value = _float_value;
 	}
@@ -250,7 +255,7 @@ public final class PhysicsVal implements IDLEntity {
 		 * .DoubleVal) throw new RuntimeException("Invalid type request");
 		 */
 
-		return this._double_value;
+		return _double_value;
 	}
 
 	/**
@@ -258,7 +263,7 @@ public final class PhysicsVal implements IDLEntity {
 	 * 
 	 * @param doubleValue New value of property doubleValue.
 	 */
-	public void setDoubleValue(double _double_value) {
+	public void setDoubleValue(final double _double_value) {
 		setDiscriminator(com.linkare.rec.data.acquisition.PhysicsValueType.DoubleVal);
 		this._double_value = _double_value;
 	}
@@ -273,7 +278,7 @@ public final class PhysicsVal implements IDLEntity {
 		 * if(getDiscriminator()!=com.linkare.rec.data.acquisition.PhysicsValueType
 		 * .ByteArrayVal) throw new RuntimeException("Invalid type request");
 		 */
-		return this._byte_array_value;
+		return _byte_array_value;
 	}
 
 	/**
@@ -281,13 +286,13 @@ public final class PhysicsVal implements IDLEntity {
 	 * 
 	 * @param byteArray New value of property byteArrayValue.
 	 */
-	public void setByteArrayValue(ByteArrayValue newValue) {
+	public void setByteArrayValue(final ByteArrayValue newValue) {
 		/*
 		 * if(getDiscriminator()!=com.linkare.rec.data.acquisition.PhysicsValueType
 		 * .ByteArrayVal) throw new RuntimeException("Invalid type request");
 		 */
 		setDiscriminator(com.linkare.rec.data.acquisition.PhysicsValueType.ByteArrayVal);
-		this._byte_array_value = newValue;
+		_byte_array_value = newValue;
 	}
 
 	/**
@@ -295,25 +300,28 @@ public final class PhysicsVal implements IDLEntity {
 	 * 
 	 * @param byteArray New value of property byteArrayValue.
 	 */
-	private void copyByteArrayValue(ByteArrayValue byteArray) {
+	private void copyByteArrayValue(final ByteArrayValue byteArray) {
 		setDiscriminator(com.linkare.rec.data.acquisition.PhysicsValueType.ByteArrayVal);
 		if (byteArray == null) {
-			this._byte_array_value = null;
+			_byte_array_value = null;
 			return;
 		}
 
-		this._byte_array_value = new ByteArrayValue(byteArray);
+		_byte_array_value = new ByteArrayValue(byteArray);
 
 	}
 
-	public boolean equals(Object obj) {
-		if (obj == null || !(obj instanceof PhysicsVal))
+	@Override
+	public boolean equals(final Object obj) {
+		if (obj == null || !(obj instanceof PhysicsVal)) {
 			return false;
+		}
 
-		PhysicsVal other = (PhysicsVal) obj;
+		final PhysicsVal other = (PhysicsVal) obj;
 
-		if (other.getDiscriminator().getValue() != getDiscriminator().getValue())
+		if (other.getDiscriminator().getValue() != getDiscriminator().getValue()) {
 			return false;
+		}
 
 		switch (other.getDiscriminator().value()) {
 		case com.linkare.rec.data.acquisition.PhysicsValueType._BooleanVal:
@@ -338,6 +346,7 @@ public final class PhysicsVal implements IDLEntity {
 
 	}
 
+	@Override
 	public String toString() {
 		switch (getDiscriminator().value()) {
 		case com.linkare.rec.data.acquisition.PhysicsValueType._BooleanVal:

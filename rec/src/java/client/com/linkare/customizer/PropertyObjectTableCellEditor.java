@@ -36,29 +36,35 @@ public class PropertyObjectTableCellEditor extends AbstractCellEditor implements
 	static final long serialVersionUID = 3067172209892390454L;
 	private PropertyObject value = null;
 
-	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-		if (value instanceof PropertyObject)
+	@Override
+	public Component getTableCellEditorComponent(final JTable table, final Object value, final boolean isSelected,
+			final int row, final int column) {
+		if (value instanceof PropertyObject) {
 			this.value = (PropertyObject) value;
-		else
+		} else {
 			return null;
+		}
 
 		if (this.value.getPropertyEditor() != null) {
 			panelEdit = new JPanel(new BorderLayout());
-			JButton btn = PropertyObjectTableCellRenderer.createRendererButton(value, isSelected, true, table);
+			final JButton btn = PropertyObjectTableCellRenderer.createRendererButton(value, isSelected, true, table);
 			btn.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent evt) {
+				@Override
+				public void actionPerformed(final ActionEvent evt) {
 					replaceEditingPanel();
 				}
 			});
 			panelEdit.add(btn, BorderLayout.CENTER);
 			return panelEdit;
-		} else
+		} else {
 			return null;
+		}
 	}
 
-	public boolean shouldSelectCell(EventObject anEvent) {
+	@Override
+	public boolean shouldSelectCell(final EventObject anEvent) {
 		if (anEvent instanceof MouseEvent) {
-			MouseEvent e = (MouseEvent) anEvent;
+			final MouseEvent e = (MouseEvent) anEvent;
 			return e.getID() != MouseEvent.MOUSE_DRAGGED;
 		}
 		return false;
@@ -67,24 +73,27 @@ public class PropertyObjectTableCellEditor extends AbstractCellEditor implements
 	private JPanel panelEdit = null;
 
 	private void replaceEditingPanel() {
-		JComponent editingComp = createEditingComponent();
-		JButton customEditorButton = createCustomEditorButton();
+		final JComponent editingComp = createEditingComponent();
+		final JButton customEditorButton = createCustomEditorButton();
 		if (editingComp != null) {
 			panelEdit.remove(0);
 			panelEdit.add(editingComp, BorderLayout.CENTER);
-			if (customEditorButton != null)
+			if (customEditorButton != null) {
 				panelEdit.add(customEditorButton, BorderLayout.EAST);
+			}
 			panelEdit.setFocusCycleRoot(true);
 			editingComp.requestFocus();
 
-			if (editingComp instanceof JTextField)
+			if (editingComp instanceof JTextField) {
 				((JTextField) editingComp).selectAll();
+			}
 
 			panelEdit.validate();
 
 		}
 	}
 
+	@Override
 	public Object getCellEditorValue() {
 		return value;
 	}
@@ -95,23 +104,25 @@ public class PropertyObjectTableCellEditor extends AbstractCellEditor implements
 	private JComponent createEditingComponent() {
 		tf = null;
 		combo = null;
-		if (this.value.getPropertyEditor() != null) {
-			this.value.getPropertyEditor().setValue(this.value.getValue());
+		if (value.getPropertyEditor() != null) {
+			value.getPropertyEditor().setValue(value.getValue());
 
-			if (this.value.getPropertyEditor().getTags() != null) {
+			if (value.getPropertyEditor().getTags() != null) {
 
-				combo = new JComboBox(this.value.getPropertyEditor().getTags());
-				combo.setSelectedItem(this.value.getPropertyEditor().getAsText());
+				combo = new JComboBox(value.getPropertyEditor().getTags());
+				combo.setSelectedItem(value.getPropertyEditor().getAsText());
 				combo.addItemListener(new ItemListener() {
-					public void itemStateChanged(ItemEvent evt) {
+					@Override
+					public void itemStateChanged(final ItemEvent evt) {
 						comboBoxItemStateChanged(evt);
 					}
 				});
 				return combo;
-			} else if (this.value.getPropertyEditor().getAsText() != null) {
-				tf = new JTextField(this.value.getPropertyEditor().getAsText());
+			} else if (value.getPropertyEditor().getAsText() != null) {
+				tf = new JTextField(value.getPropertyEditor().getAsText());
 				tf.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
+					@Override
+					public void actionPerformed(final ActionEvent evt) {
 						tfActionPerformed(evt);
 					}
 				});
@@ -129,33 +140,33 @@ public class PropertyObjectTableCellEditor extends AbstractCellEditor implements
 		return null;
 	}
 
-	public void comboBoxItemStateChanged(ItemEvent evt) {
-		JComboBox combo = (JComboBox) evt.getSource();
-		String tag = (String) combo.getSelectedItem();
+	public void comboBoxItemStateChanged(final ItemEvent evt) {
+		final JComboBox combo = (JComboBox) evt.getSource();
+		final String tag = (String) combo.getSelectedItem();
 		try {
-			this.value.getPropertyEditor().setAsText(tag);
-			this.value.setValue(this.value.getPropertyEditor().getValue());
+			value.getPropertyEditor().setAsText(tag);
+			value.setValue(value.getPropertyEditor().getValue());
 			fireEditingStopped();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			JOptionPane.showMessageDialog(null, "Unable to change value\n\rReason:" + e.getMessage());
 		}
 	}
 
-	public void tfActionPerformed(ActionEvent evt) {
-		JTextField tf = (JTextField) evt.getSource();
-		String val = tf.getText();
+	public void tfActionPerformed(final ActionEvent evt) {
+		final JTextField tf = (JTextField) evt.getSource();
+		final String val = tf.getText();
 		try {
-			this.value.getPropertyEditor().setAsText(val);
-			this.value.setValue(this.value.getPropertyEditor().getValue());
+			value.getPropertyEditor().setAsText(val);
+			value.setValue(value.getPropertyEditor().getValue());
 			fireEditingStopped();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			JOptionPane.showMessageDialog(null, "Unable to change value\n\rReason:" + e.getMessage());
 			tf.requestFocus();
 		}
 
 	}
 
-	public void tfFocusLost(FocusEvent evt) {
+	public void tfFocusLost(final FocusEvent evt) {
 		/*
 		 * JTextField tf=(JTextField)evt.getSource(); String val=tf.getText();
 		 * try { this.value.getPropertyEditor().setAsText(val);
@@ -183,8 +194,9 @@ public class PropertyObjectTableCellEditor extends AbstractCellEditor implements
 		public PropertyCustomEditorButton() {
 			super("...");
 			setFont(getFont().deriveFont(Font.BOLD));
-			this.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent evt) {
+			addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(final ActionEvent evt) {
 					btnClicked();
 				}
 			});
@@ -193,30 +205,32 @@ public class PropertyObjectTableCellEditor extends AbstractCellEditor implements
 		private JDialog dialog = null;
 
 		public void btnClicked() {
-			Object oldValue = value.getValue();
+			final Object oldValue = value.getValue();
 			if (value.getPropertyEditor().supportsCustomEditor()) {
 				value.getPropertyEditor().setValue(oldValue);
-				Component comp = value.getPropertyEditor().getCustomEditor();
+				final Component comp = value.getPropertyEditor().getCustomEditor();
 
 				dialog = new JDialog(new JDialog(), "Property Custom Editing", true);
 
-				JButton btnOK = new JButton("OK");
+				final JButton btnOK = new JButton("OK");
 
 				btnOK.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
+					@Override
+					public void actionPerformed(final ActionEvent evt) {
 						btnOKPressed();
 					}
 				});
 
-				JButton btnCancel = new JButton("Cancel");
+				final JButton btnCancel = new JButton("Cancel");
 
 				btnCancel.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
+					@Override
+					public void actionPerformed(final ActionEvent evt) {
 						btnCancelPressed();
 					}
 				});
 
-				JPanel panel = new JPanel();
+				final JPanel panel = new JPanel();
 				panel.add(btnOK);
 				panel.add(btnCancel);
 

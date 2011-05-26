@@ -19,6 +19,11 @@ import com.linkare.rec.impl.client.customizer.ICustomizerListener;
 
 public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1408002044401205113L;
+
 	/** Creates new form MvBrownCustomizer */
 	public MvBrownCustomizer() {
 		initComponents();
@@ -149,28 +154,24 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		setPreferredSize(new java.awt.Dimension(600, 600));
 		btnPanel.setLayout(new java.awt.GridBagLayout());
 
-		okButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.ok"));
-		okButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.ok"));
+		okButton.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
+				.getString("rec.exp.customizer.title.ok"));
+		okButton.setToolTipText(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.ok"));
 		okButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				okButtonActionPerformed(evt);
 			}
 		});
 
 		controlBtnPanel.add(okButton);
 
-		cancelButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.cancel"));
+		cancelButton.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
+				.getString("rec.exp.customizer.title.cancel"));
 		cancelButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.tip.cancel"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.cancel"));
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				cancelButtonActionPerformed(evt);
 			}
 		});
@@ -182,14 +183,12 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		gridBagConstraints.weightx = 1.0;
 		btnPanel.add(controlBtnPanel, gridBagConstraints);
 
-		defaultButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.dfc"));
+		defaultButton.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
+				.getString("rec.exp.customizer.title.dfc"));
 		defaultButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.tip.dfc"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.dfc"));
 		defaultButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				defaultButtonActionPerformed(evt);
 			}
 		});
@@ -210,23 +209,20 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		modelPanel.setBorder(new javax.swing.border.TitledBorder(new javax.swing.border.SoftBevelBorder(
 				javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 102, 255),
 				new java.awt.Color(0, 102, 255), new java.awt.Color(0, 102, 255), new java.awt.Color(0, 102, 255)),
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
-						.getString("rec.exp.customizer.title.25")));
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.title.25")));
 		modelPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.25"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.25"));
 		modelPanel.setMinimumSize(new java.awt.Dimension(300, 60));
 		modelPanel.setPreferredSize(new java.awt.Dimension(150, 60));
 		langevinRadioButton.setSelected(true);
 		langevinRadioButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.13"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.13"));
 		langevinRadioButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.13"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.13"));
 		modelButtonGroup.add(langevinRadioButton);
 		langevinRadioButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				langevinRadioButtonActionPerformed(evt);
 			}
 		});
@@ -234,14 +230,12 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		modelPanel.add(langevinRadioButton);
 
 		randomRadioButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.14"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.14"));
 		randomRadioButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.14"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.14"));
 		modelButtonGroup.add(randomRadioButton);
 		randomRadioButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				randomRadioButtonActionPerformed(evt);
 			}
 		});
@@ -259,11 +253,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		dimPanel.setBorder(new javax.swing.border.TitledBorder(new javax.swing.border.SoftBevelBorder(
 				javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 102, 255),
 				new java.awt.Color(0, 102, 255), new java.awt.Color(0, 102, 255), new java.awt.Color(0, 102, 255)),
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
-						.getString("rec.exp.customizer.title.26")));
-		dimPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.26"));
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.title.26")));
+		dimPanel.setToolTipText(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.26"));
 		dimPanel.setMinimumSize(new java.awt.Dimension(150, 60));
 		dimPanel.setPreferredSize(new java.awt.Dimension(150, 60));
 		dim1RadioButton.setText("1");
@@ -292,10 +285,9 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		dPanel.setBorder(new javax.swing.border.TitledBorder(new javax.swing.border.SoftBevelBorder(
 				javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 102, 255),
 				new java.awt.Color(0, 102, 255), new java.awt.Color(0, 102, 255), new java.awt.Color(0, 102, 255)),
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
-						.getString("rec.exp.customizer.title.24")));
-		dPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.title.24")));
+		dPanel.setToolTipText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
 				.getString("rec.exp.customizer.tip.24"));
 		dPanel.setMinimumSize(new java.awt.Dimension(150, 60));
 		dPanel.setPreferredSize(new java.awt.Dimension(150, 60));
@@ -304,12 +296,11 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		dSlider.setMinorTickSpacing(6);
 		dSlider.setPaintLabels(true);
 		dSlider.setPaintTicks(true);
-		dSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
+		dSlider.setToolTipText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
 				.getString("rec.exp.customizer.tip.24"));
 		dSlider.setEnabled(false);
 		dSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				dSliderStateChanged(evt);
 			}
 		});
@@ -324,12 +315,11 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		dTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		dTextField.setText("50");
 		dTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.24"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.24"));
 		dTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		dTextField.setEnabled(false);
 		dTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				dTextFieldFocusLost(evt);
 			}
 		});
@@ -360,12 +350,9 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		massPanel.setLayout(new java.awt.GridBagLayout());
 
 		massPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.3")));
-		massPanel
-				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-						"rec.exp.customizer.tip.3"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.3")));
+		massPanel.setToolTipText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.3"));
 		massPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		massSlider.setMajorTickSpacing(100);
 		massSlider.setMaximum(1001);
@@ -373,15 +360,13 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		massSlider.setMinorTickSpacing(10);
 		massSlider.setPaintLabels(true);
 		massSlider.setPaintTicks(true);
-		massSlider
-				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-						"rec.exp.customizer.tip.3"));
+		massSlider.setToolTipText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.3"));
 		massSlider.setValue(100);
 		massSlider.setMinimumSize(new java.awt.Dimension(200, 47));
 		massSlider.setRequestFocusEnabled(false);
 		massSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				massSliderStateChanged(evt);
 			}
 		});
@@ -395,13 +380,11 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		massTextField.setColumns(4);
 		massTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		massTextField.setText("100");
-		massTextField
-				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-						"rec.exp.customizer.tip.3"));
+		massTextField.setToolTipText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.3"));
 		massTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		massTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				massTextFieldFocusLost(evt);
 			}
 		});
@@ -419,12 +402,9 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		radiusPanel.setLayout(new java.awt.GridBagLayout());
 
 		radiusPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.4")));
-		radiusPanel
-				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-						"rec.exp.customizer.tip.4"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.4")));
+		radiusPanel.setToolTipText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.4"));
 		radiusPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		radiusSlider.setMajorTickSpacing(100);
 		radiusSlider.setMaximum(1001);
@@ -432,15 +412,13 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		radiusSlider.setMinorTickSpacing(10);
 		radiusSlider.setPaintLabels(true);
 		radiusSlider.setPaintTicks(true);
-		radiusSlider
-				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-						"rec.exp.customizer.tip.4"));
+		radiusSlider.setToolTipText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.4"));
 		radiusSlider.setValue(10);
 		radiusSlider.setMinimumSize(new java.awt.Dimension(200, 47));
 		radiusSlider.setRequestFocusEnabled(false);
 		radiusSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				radiusSliderStateChanged(evt);
 			}
 		});
@@ -454,13 +432,11 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		radiusTextField.setColumns(4);
 		radiusTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		radiusTextField.setText("10");
-		radiusTextField
-				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-						"rec.exp.customizer.tip.4"));
+		radiusTextField.setToolTipText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.4"));
 		radiusTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		radiusTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				radiusTextFieldFocusLost(evt);
 			}
 		});
@@ -478,12 +454,9 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		nPartPanel.setLayout(new java.awt.GridBagLayout());
 
 		nPartPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.2")));
-		nPartPanel
-				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-						"rec.exp.customizer.tip.2"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.2")));
+		nPartPanel.setToolTipText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.2"));
 		nPartPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		nPartSlider.setMajorTickSpacing(200);
 		nPartSlider.setMaximum(1001);
@@ -491,15 +464,13 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		nPartSlider.setMinorTickSpacing(50);
 		nPartSlider.setPaintLabels(true);
 		nPartSlider.setPaintTicks(true);
-		nPartSlider
-				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-						"rec.exp.customizer.tip.2"));
+		nPartSlider.setToolTipText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.2"));
 		nPartSlider.setValue(500);
 		nPartSlider.setMinimumSize(new java.awt.Dimension(200, 47));
 		nPartSlider.setRequestFocusEnabled(false);
 		nPartSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				nPartSliderStateChanged(evt);
 			}
 		});
@@ -513,13 +484,11 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		nPartTextField.setColumns(4);
 		nPartTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		nPartTextField.setText("500");
-		nPartTextField
-				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-						"rec.exp.customizer.tip.2"));
+		nPartTextField.setToolTipText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.2"));
 		nPartTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		nPartTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				nPartTextFieldFocusLost(evt);
 			}
 		});
@@ -534,11 +503,12 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		gridBagConstraints.weighty = 1.0;
 		partPanel.add(nPartPanel, gridBagConstraints);
 
-		mainTabbedPane
-				.addTab(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-						"rec.exp.customizer.title.1"), null, partPanel, java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+		mainTabbedPane.addTab(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.title.1"),
+				null,
+				partPanel,
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
 						"rec.exp.customizer.tip.1"));
 
 		velPanel.setLayout(new java.awt.GridBagLayout());
@@ -549,27 +519,22 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		velModPanel.setLayout(new java.awt.GridBagLayout());
 
 		velModPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.6")));
-		velModPanel
-				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-						"rec.exp.customizer.tip.6"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.6")));
+		velModPanel.setToolTipText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.6"));
 		velModPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		velModSlider.setMajorTickSpacing(100);
 		velModSlider.setMaximum(1000);
 		velModSlider.setMinorTickSpacing(10);
 		velModSlider.setPaintLabels(true);
 		velModSlider.setPaintTicks(true);
-		velModSlider
-				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-						"rec.exp.customizer.tip.6"));
+		velModSlider.setToolTipText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.6"));
 		velModSlider.setValue(0);
 		velModSlider.setMinimumSize(new java.awt.Dimension(200, 47));
 		velModSlider.setRequestFocusEnabled(false);
 		velModSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				velModSliderStateChanged(evt);
 			}
 		});
@@ -583,13 +548,11 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		velModTextField.setColumns(4);
 		velModTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		velModTextField.setText("0");
-		velModTextField
-				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-						"rec.exp.customizer.tip.6"));
+		velModTextField.setToolTipText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.6"));
 		velModTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		velModTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				velModTextFieldFocusLost(evt);
 			}
 		});
@@ -607,27 +570,22 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		velThetaPanel.setLayout(new java.awt.GridBagLayout());
 
 		velThetaPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.7")));
-		velThetaPanel
-				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-						"rec.exp.customizer.tip.7"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.7")));
+		velThetaPanel.setToolTipText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.7"));
 		velThetaPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		velThetaSlider.setMajorTickSpacing(60);
 		velThetaSlider.setMaximum(360);
 		velThetaSlider.setMinorTickSpacing(10);
 		velThetaSlider.setPaintLabels(true);
 		velThetaSlider.setPaintTicks(true);
-		velThetaSlider
-				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-						"rec.exp.customizer.tip.7"));
+		velThetaSlider.setToolTipText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.7"));
 		velThetaSlider.setValue(45);
 		velThetaSlider.setMinimumSize(new java.awt.Dimension(200, 47));
 		velThetaSlider.setRequestFocusEnabled(false);
 		velThetaSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				velThetaSliderStateChanged(evt);
 			}
 		});
@@ -641,13 +599,11 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		velThetaTextField.setColumns(4);
 		velThetaTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		velThetaTextField.setText("45");
-		velThetaTextField
-				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-						"rec.exp.customizer.tip.7"));
+		velThetaTextField.setToolTipText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.7"));
 		velThetaTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		velThetaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				velThetaTextFieldFocusLost(evt);
 			}
 		});
@@ -665,27 +621,22 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		velPhiPanel.setLayout(new java.awt.GridBagLayout());
 
 		velPhiPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.8")));
-		velPhiPanel
-				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-						"rec.exp.customizer.tip.8"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.8")));
+		velPhiPanel.setToolTipText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.8"));
 		velPhiPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		velPhiSlider.setMajorTickSpacing(30);
 		velPhiSlider.setMaximum(180);
 		velPhiSlider.setMinorTickSpacing(5);
 		velPhiSlider.setPaintLabels(true);
 		velPhiSlider.setPaintTicks(true);
-		velPhiSlider
-				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-						"rec.exp.customizer.tip.8"));
+		velPhiSlider.setToolTipText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.8"));
 		velPhiSlider.setValue(90);
 		velPhiSlider.setMinimumSize(new java.awt.Dimension(200, 47));
 		velPhiSlider.setRequestFocusEnabled(false);
 		velPhiSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				velPhiSliderStateChanged(evt);
 			}
 		});
@@ -699,13 +650,11 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		velPhiTextField.setColumns(4);
 		velPhiTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		velPhiTextField.setText("90");
-		velPhiTextField
-				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-						"rec.exp.customizer.tip.8"));
+		velPhiTextField.setToolTipText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.8"));
 		velPhiTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		velPhiTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				velPhiTextFieldFocusLost(evt);
 			}
 		});
@@ -720,11 +669,12 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		gridBagConstraints.weighty = 1.0;
 		velPanel.add(velPhiPanel, gridBagConstraints);
 
-		mainTabbedPane
-				.addTab(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-						"rec.exp.customizer.title.5"), null, velPanel, java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+		mainTabbedPane.addTab(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.title.5"),
+				null,
+				velPanel,
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
 						"rec.exp.customizer.tip.5"));
 
 		langevinPanel.setLayout(new java.awt.GridBagLayout());
@@ -735,10 +685,8 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		dPPanel.setLayout(new java.awt.GridBagLayout());
 
 		dPPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.20")));
-		dPPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.20")));
+		dPPanel.setToolTipText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
 				.getString("rec.exp.customizer.tip.20"));
 		dPPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		dPSlider.setMajorTickSpacing(100);
@@ -747,14 +695,13 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		dPSlider.setMinorTickSpacing(10);
 		dPSlider.setPaintLabels(true);
 		dPSlider.setPaintTicks(true);
-		dPSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.20"));
+		dPSlider.setToolTipText(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.20"));
 		dPSlider.setValue(10);
 		dPSlider.setMinimumSize(new java.awt.Dimension(200, 47));
 		dPSlider.setRequestFocusEnabled(false);
 		dPSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				dPSliderStateChanged(evt);
 			}
 		});
@@ -769,11 +716,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		dPTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		dPTextField.setText("10");
 		dPTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.20"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.20"));
 		dPTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		dPTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				dPTextFieldFocusLost(evt);
 			}
 		});
@@ -791,11 +737,9 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		freqPanel.setLayout(new java.awt.GridBagLayout());
 
 		freqPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.19")));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.19")));
 		freqPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.19"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.19"));
 		freqPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		freqSlider.setMajorTickSpacing(100);
 		freqSlider.setMaximum(1001);
@@ -804,11 +748,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		freqSlider.setPaintLabels(true);
 		freqSlider.setPaintTicks(true);
 		freqSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.19"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.19"));
 		freqSlider.setValue(25);
 		freqSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				freqSliderStateChanged(evt);
 			}
 		});
@@ -823,11 +766,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		freqTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		freqTextField.setText("25");
 		freqTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.19"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.19"));
 		freqTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		freqTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				freqTextFieldFocusLost(evt);
 			}
 		});
@@ -845,11 +787,9 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		visPanel.setLayout(new java.awt.GridBagLayout());
 
 		visPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.21")));
-		visPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.21"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.21")));
+		visPanel.setToolTipText(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.21"));
 		visPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		visSlider.setMajorTickSpacing(100);
 		visSlider.setMaximum(1001);
@@ -858,11 +798,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		visSlider.setPaintLabels(true);
 		visSlider.setPaintTicks(true);
 		visSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.21"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.21"));
 		visSlider.setValue(10);
 		visSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				visSliderStateChanged(evt);
 			}
 		});
@@ -877,11 +816,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		visTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		visTextField.setText("10");
 		visTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.21"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.21"));
 		visTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		visTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				visTextFieldFocusLost(evt);
 			}
 		});
@@ -896,11 +834,13 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		gridBagConstraints.weighty = 1.0;
 		langevinPanel.add(visPanel, gridBagConstraints);
 
-		mainTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.18"), null, langevinPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.18"));
+		mainTabbedPane.addTab(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.title.18"),
+				null,
+				langevinPanel,
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.tip.18"));
 
 		simulSettingsPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -910,11 +850,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		tbsPanel.setLayout(new java.awt.GridBagLayout());
 
 		tbsPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.tbs")));
-		tbsPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.tip.tbs"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.tbs")));
+		tbsPanel.setToolTipText(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
+				.getString("rec.exp.customizer.tip.tbs"));
 		tbsPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		tbsSlider.setMajorTickSpacing(50);
 		tbsSlider.setMaximum(500);
@@ -923,11 +862,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		tbsSlider.setPaintLabels(true);
 		tbsSlider.setPaintTicks(true);
 		tbsSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.tip.tbs"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.tbs"));
 		tbsSlider.setValue(100);
 		tbsSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				tbsSliderStateChanged(evt);
 			}
 		});
@@ -942,11 +880,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		tbsTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		tbsTextField.setText("100");
 		tbsTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.tip.tbs"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.tbs"));
 		tbsTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		tbsTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				tbsTextFieldFocusLost(evt);
 			}
 		});
@@ -965,11 +902,9 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		samplesPanel.setLayout(new java.awt.GridBagLayout());
 
 		samplesPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.samples")));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.samples")));
 		samplesPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.tip.samples"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.samples"));
 		samplesPanel.setMinimumSize(new java.awt.Dimension(82, 83));
 		samplesPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		samplesSlider.setMajorTickSpacing(50);
@@ -979,12 +914,11 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		samplesSlider.setPaintLabels(true);
 		samplesSlider.setPaintTicks(true);
 		samplesSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.tip.samples"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.samples"));
 		samplesSlider.setValue(150);
 		samplesSlider.setMinimumSize(new java.awt.Dimension(200, 47));
 		samplesSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				samplesSliderStateChanged(evt);
 			}
 		});
@@ -999,11 +933,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		samplesTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		samplesTextField.setText("150");
 		samplesTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.tip.samples"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.samples"));
 		samplesTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		samplesTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				samplesTextFieldFocusLost(evt);
 			}
 		});
@@ -1018,11 +951,11 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		gridBagConstraints.weighty = 1.0;
 		simulSettingsPanel.add(samplesPanel, gridBagConstraints);
 
-		mainTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.27"), null, simulSettingsPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.27"));
+		mainTabbedPane
+				.addTab(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
+						.getString("rec.exp.customizer.title.27"), null, simulSettingsPanel,
+						java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
+								.getString("rec.exp.customizer.tip.27"));
 
 		graphicsPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -1032,8 +965,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		graph2Panel.setLayout(new java.awt.GridBagLayout());
 
 		graph2Panel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.32")));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.32")));
 		graph2XComboBox.setFont(new java.awt.Font("MS Sans Serif", 0, 24));
 		graph2XComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "X", "X^2", "Y", "Y^2", "Z",
 				"Z^2", "| r |", "| r |^2", "t", "Vx", "Vx^2", "Vy", "Vy^2", "Vz", "Vz^2", "| v |", "| v |^2" }));
@@ -1060,22 +992,18 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 
 		graph2MedCheckBox.setSelected(true);
 		graph2MedCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.41"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.41"));
 		graph2MedCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.41"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.41"));
 		graph2Panel.add(graph2MedCheckBox, new java.awt.GridBagConstraints());
 
 		graph2ActCheckBox.setSelected(true);
 		graph2ActCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.15"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.15"));
 		graph2ActCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.15"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.15"));
 		graph2ActCheckBox.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				graph2ActCheckBoxActionPerformed(evt);
 			}
 		});
@@ -1093,8 +1021,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		graph3Panel.setLayout(new java.awt.GridBagLayout());
 
 		graph3Panel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.33")));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.33")));
 		graph3XComboBox.setFont(new java.awt.Font("MS Sans Serif", 0, 24));
 		graph3XComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "X", "X^2", "Y", "Y^2", "Z",
 				"Z^2", "| r |", "| r |^2", "t", "Vx", "Vx^2", "Vy", "Vy^2", "Vz", "Vz^2", "| v |", "| v |^2" }));
@@ -1121,22 +1048,18 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 
 		graph3MedCheckBox.setSelected(true);
 		graph3MedCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.41"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.41"));
 		graph3MedCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.41"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.41"));
 		graph3Panel.add(graph3MedCheckBox, new java.awt.GridBagConstraints());
 
 		graph3ActCheckBox.setSelected(true);
 		graph3ActCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.15"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.15"));
 		graph3ActCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.15"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.15"));
 		graph3ActCheckBox.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				graph3ActCheckBoxActionPerformed(evt);
 			}
 		});
@@ -1154,8 +1077,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		graph4Panel.setLayout(new java.awt.GridBagLayout());
 
 		graph4Panel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.34")));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.34")));
 		graph4XComboBox.setFont(new java.awt.Font("MS Sans Serif", 0, 24));
 		graph4XComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "X", "X^2", "Y", "Y^2", "Z",
 				"Z^2", "| r |", "| r |^2", "t", "Vx", "Vx^2", "Vy", "Vy^2", "Vz", "Vz^2", "| v |", "| v |^2" }));
@@ -1182,22 +1104,18 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 
 		graph4MedCheckBox.setSelected(true);
 		graph4MedCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.41"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.41"));
 		graph4MedCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.41"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.41"));
 		graph4Panel.add(graph4MedCheckBox, new java.awt.GridBagConstraints());
 
 		graph4ActCheckBox.setSelected(true);
 		graph4ActCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.15"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.15"));
 		graph4ActCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.15"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.15"));
 		graph4ActCheckBox.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				graph4ActCheckBoxActionPerformed(evt);
 			}
 		});
@@ -1215,8 +1133,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		graph1Panel.setLayout(new java.awt.GridBagLayout());
 
 		graph1Panel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.31")));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.31")));
 		graph1XComboBox.setFont(new java.awt.Font("MS Sans Serif", 0, 24));
 		graph1XComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "X", "X^2", "Y", "Y^2", "Z",
 				"Z^2", "| r |", "| r |^2", "t", "Vx", "Vx^2", "Vy", "Vy^2", "Vz", "Vz^2", "| v |", "| v |^2" }));
@@ -1243,22 +1160,18 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 
 		graph1MedCheckBox.setSelected(true);
 		graph1MedCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.41"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.41"));
 		graph1MedCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.41"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.41"));
 		graph1Panel.add(graph1MedCheckBox, new java.awt.GridBagConstraints());
 
 		graph1ActCheckBox.setSelected(true);
 		graph1ActCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.15"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.15"));
 		graph1ActCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.15"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.15"));
 		graph1ActCheckBox.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				graph1ActCheckBoxActionPerformed(evt);
 			}
 		});
@@ -1283,11 +1196,13 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		gridBagConstraints.weighty = 1.0;
 		graphicsPanel.add(genGraphsPanel, gridBagConstraints);
 
-		mainTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.30"), null, graphicsPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.30"));
+		mainTabbedPane.addTab(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.title.30"),
+				null,
+				graphicsPanel,
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.tip.30"));
 
 		genChartsPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -1295,11 +1210,9 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 				new java.awt.Color(0, 102, 255), new java.awt.Color(0, 102, 255), new java.awt.Color(0, 102, 255),
 				new java.awt.Color(0, 102, 255)));
 		genPosPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.39")));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.39")));
 		genPosPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.39"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.39"));
 		xCheckBox.setSelected(true);
 		xCheckBox.setText("X");
 		genPosPanel.add(xCheckBox);
@@ -1313,30 +1226,25 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		genPosPanel.add(zCheckBox);
 
 		posModCheckBox.setSelected(true);
-		posModCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.35"));
+		posModCheckBox.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
+				.getString("rec.exp.customizer.title.35"));
 		posModCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.35"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.35"));
 		genPosPanel.add(posModCheckBox);
 
 		posQuadCheckBox.setSelected(true);
 		posQuadCheckBox.setText("^2");
 		posQuadCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.43"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.43"));
 		genPosPanel.add(posQuadCheckBox);
 
 		genPosGraphActCheckBox.setSelected(true);
 		genPosGraphActCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.15"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.15"));
 		genPosGraphActCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.15"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.15"));
 		genPosGraphActCheckBox.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				genPosGraphActCheckBoxActionPerformed(evt);
 			}
 		});
@@ -1350,11 +1258,9 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		genChartsPanel.add(genPosPanel, gridBagConstraints);
 
 		genVelPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.40")));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.40")));
 		genVelPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.40"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.40"));
 		vxCheckBox.setSelected(true);
 		vxCheckBox.setText("Vx");
 		genVelPanel.add(vxCheckBox);
@@ -1368,30 +1274,25 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		genVelPanel.add(vzCheckBox);
 
 		velModCheckBox.setSelected(true);
-		velModCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.36"));
+		velModCheckBox.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
+				.getString("rec.exp.customizer.title.36"));
 		velModCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.36"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.36"));
 		genVelPanel.add(velModCheckBox);
 
 		velQuadCheckBox.setSelected(true);
 		velQuadCheckBox.setText("^2");
 		velQuadCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.43"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.43"));
 		genVelPanel.add(velQuadCheckBox);
 
 		genVelGraphActCheckBox.setSelected(true);
 		genVelGraphActCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.15"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.15"));
 		genVelGraphActCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.15"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.15"));
 		genVelGraphActCheckBox.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				genVelGraphActCheckBoxActionPerformed(evt);
 			}
 		});
@@ -1406,11 +1307,13 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		gridBagConstraints.weighty = 1.0;
 		genChartsPanel.add(genVelPanel, gridBagConstraints);
 
-		mainTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.42"), null, genChartsPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.42"));
+		mainTabbedPane.addTab(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.title.42"),
+				null,
+				genChartsPanel,
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.tip.42"));
 
 		animaPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -1420,11 +1323,9 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		radiusAnimaPanel.setLayout(new java.awt.GridBagLayout());
 
 		radiusAnimaPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.23")));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.23")));
 		radiusAnimaPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.23"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.23"));
 		radiusAnimaSlider.setMajorTickSpacing(1);
 		radiusAnimaSlider.setMaximum(6);
 		radiusAnimaSlider.setMinimum(1);
@@ -1432,11 +1333,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		radiusAnimaSlider.setPaintTicks(true);
 		radiusAnimaSlider.setSnapToTicks(true);
 		radiusAnimaSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.23"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.23"));
 		radiusAnimaSlider.setValue(3);
 		radiusAnimaSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				radiusAnimaSliderStateChanged(evt);
 			}
 		});
@@ -1451,11 +1351,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		radiusAnimaTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		radiusAnimaTextField.setText("3");
 		radiusAnimaTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.23"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.23"));
 		radiusAnimaTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		radiusAnimaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				radiusAnimaTextFieldFocusLost(evt);
 			}
 		});
@@ -1472,13 +1371,11 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 
 		animaActCheckBox.setSelected(true);
 		animaActCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.37"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.37"));
 		animaActCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.37"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.37"));
 		animaActCheckBox.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				animaActCheckBoxActionPerformed(evt);
 			}
 		});
@@ -1488,11 +1385,13 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		gridBagConstraints.gridy = 2;
 		animaPanel.add(animaActCheckBox, gridBagConstraints);
 
-		mainTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.22"), null, animaPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.22"));
+		mainTabbedPane.addTab(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.title.22"),
+				null,
+				animaPanel,
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.tip.22"));
 
 		chartSettingsPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -1502,11 +1401,9 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		widthPanel.setLayout(new java.awt.GridBagLayout());
 
 		widthPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.47")));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.47")));
 		widthPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.47"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.47"));
 		widthPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		widthPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		widthSlider.setMajorTickSpacing(500);
@@ -1516,13 +1413,12 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		widthSlider.setPaintLabels(true);
 		widthSlider.setPaintTicks(true);
 		widthSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.47"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.47"));
 		widthSlider.setValue(800);
 		widthSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		widthSlider.setEnabled(false);
 		widthSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				widthSliderStateChanged(evt);
 			}
 		});
@@ -1537,11 +1433,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		widthTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		widthTextField.setText("800");
 		widthTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.47"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.47"));
 		widthTextField.setEnabled(false);
 		widthTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				widthTextFieldFocusLost(evt);
 			}
 		});
@@ -1559,11 +1454,9 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		heightPanel.setLayout(new java.awt.GridBagLayout());
 
 		heightPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.48")));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.48")));
 		heightPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.48"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.48"));
 		heightPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		heightPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		heightSlider.setMajorTickSpacing(500);
@@ -1573,13 +1466,12 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		heightSlider.setPaintLabels(true);
 		heightSlider.setPaintTicks(true);
 		heightSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.48"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.48"));
 		heightSlider.setValue(800);
 		heightSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		heightSlider.setEnabled(false);
 		heightSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				heightSliderStateChanged(evt);
 			}
 		});
@@ -1594,11 +1486,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		heightTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		heightTextField.setText("800");
 		heightTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.48"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.48"));
 		heightTextField.setEnabled(false);
 		heightTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				heightTextFieldFocusLost(evt);
 			}
 		});
@@ -1615,14 +1506,12 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 
 		resAdaptedCheckBox.setSelected(true);
 		resAdaptedCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.50"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.50"));
 		resAdaptedCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.50"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.50"));
 		resAdaptedCheckBox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		resAdaptedCheckBox.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				resAdaptedCheckBoxActionPerformed(evt);
 			}
 		});
@@ -1630,11 +1519,9 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		otherResSettPanel.add(resAdaptedCheckBox);
 
 		connectedPointsCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.49"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.title.49"));
 		connectedPointsCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.49"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.customizer.tip.49"));
 		connectedPointsCheckBox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		otherResSettPanel.add(connectedPointsCheckBox);
 
@@ -1643,11 +1530,11 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		gridBagConstraints.gridy = 2;
 		chartSettingsPanel.add(otherResSettPanel, gridBagConstraints);
 
-		mainTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.title.46"), null, chartSettingsPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
-				.getString("rec.exp.customizer.tip.46"));
+		mainTabbedPane
+				.addTab(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
+						.getString("rec.exp.customizer.title.46"), null, chartSettingsPanel,
+						java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
+								.getString("rec.exp.customizer.tip.46"));
 
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -1658,7 +1545,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 
 	}// GEN-END:initComponents
 
-	private void animaActCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_animaActCheckBoxActionPerformed
+	private void animaActCheckBoxActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_animaActCheckBoxActionPerformed
 		if (animaActCheckBox.isSelected()) {
 			radiusAnimaSlider.setEnabled(true);
 			radiusSlider.setEnabled(true);
@@ -1672,7 +1559,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		}
 	}// GEN-LAST:event_animaActCheckBoxActionPerformed
 
-	private void resAdaptedCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_resAdaptedCheckBoxActionPerformed
+	private void resAdaptedCheckBoxActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_resAdaptedCheckBoxActionPerformed
 		if (resAdaptedCheckBox.isSelected()) {
 			heightSlider.setEnabled(false);
 			heightTextField.setEnabled(false);
@@ -1686,31 +1573,31 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		}
 	}// GEN-LAST:event_resAdaptedCheckBoxActionPerformed
 
-	private void heightTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_heightTextFieldFocusLost
+	private void heightTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_heightTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(heightTextField, heightSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(heightTextField, heightSlider, 1);
+		} catch (final NumberFormatException e) {
 			heightTextField.setText(Integer.toString(heightSlider.getValue()));
 		}
 	}// GEN-LAST:event_heightTextFieldFocusLost
 
-	private void widthTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_widthTextFieldFocusLost
+	private void widthTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_widthTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(widthTextField, widthSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(widthTextField, widthSlider, 1);
+		} catch (final NumberFormatException e) {
 			widthTextField.setText(Integer.toString(widthSlider.getValue()));
 		}
 	}// GEN-LAST:event_widthTextFieldFocusLost
 
-	private void heightSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_heightSliderStateChanged
+	private void heightSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_heightSliderStateChanged
 		heightTextField.setText("" + heightSlider.getValue());
 	}// GEN-LAST:event_heightSliderStateChanged
 
-	private void widthSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_widthSliderStateChanged
+	private void widthSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_widthSliderStateChanged
 		widthTextField.setText("" + widthSlider.getValue());
 	}// GEN-LAST:event_widthSliderStateChanged
 
-	private void graph4ActCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_graph4ActCheckBoxActionPerformed
+	private void graph4ActCheckBoxActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_graph4ActCheckBoxActionPerformed
 		if (graph4ActCheckBox.isSelected()) {
 			graph4XComboBox.setEnabled(true);
 			graph4YComboBox.setEnabled(true);
@@ -1722,7 +1609,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		}
 	}// GEN-LAST:event_graph4ActCheckBoxActionPerformed
 
-	private void graph3ActCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_graph3ActCheckBoxActionPerformed
+	private void graph3ActCheckBoxActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_graph3ActCheckBoxActionPerformed
 		if (graph3ActCheckBox.isSelected()) {
 			graph3XComboBox.setEnabled(true);
 			graph3YComboBox.setEnabled(true);
@@ -1734,7 +1621,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		}
 	}// GEN-LAST:event_graph3ActCheckBoxActionPerformed
 
-	private void graph2ActCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_graph2ActCheckBoxActionPerformed
+	private void graph2ActCheckBoxActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_graph2ActCheckBoxActionPerformed
 		if (graph2ActCheckBox.isSelected()) {
 			graph2XComboBox.setEnabled(true);
 			graph2YComboBox.setEnabled(true);
@@ -1746,7 +1633,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		}
 	}// GEN-LAST:event_graph2ActCheckBoxActionPerformed
 
-	private void graph1ActCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_graph1ActCheckBoxActionPerformed
+	private void graph1ActCheckBoxActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_graph1ActCheckBoxActionPerformed
 		if (graph1ActCheckBox.isSelected()) {
 			graph1XComboBox.setEnabled(true);
 			graph1YComboBox.setEnabled(true);
@@ -1758,7 +1645,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		}
 	}// GEN-LAST:event_graph1ActCheckBoxActionPerformed
 
-	private void genVelGraphActCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_genVelGraphActCheckBoxActionPerformed
+	private void genVelGraphActCheckBoxActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_genVelGraphActCheckBoxActionPerformed
 		if (genVelGraphActCheckBox.isSelected()) {
 			vxCheckBox.setEnabled(true);
 			vyCheckBox.setEnabled(true);
@@ -1774,7 +1661,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		}
 	}// GEN-LAST:event_genVelGraphActCheckBoxActionPerformed
 
-	private void genPosGraphActCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_genPosGraphActCheckBoxActionPerformed
+	private void genPosGraphActCheckBoxActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_genPosGraphActCheckBoxActionPerformed
 		if (genPosGraphActCheckBox.isSelected()) {
 			xCheckBox.setEnabled(true);
 			yCheckBox.setEnabled(true);
@@ -1790,31 +1677,31 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		}
 	}// GEN-LAST:event_genPosGraphActCheckBoxActionPerformed
 
-	private void radiusAnimaTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_radiusAnimaTextFieldFocusLost
+	private void radiusAnimaTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_radiusAnimaTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(radiusAnimaTextField, radiusAnimaSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(radiusAnimaTextField, radiusAnimaSlider, 1);
+		} catch (final NumberFormatException e) {
 			radiusAnimaTextField.setText(Integer.toString(radiusAnimaSlider.getValue()));
 		}
 	}// GEN-LAST:event_radiusAnimaTextFieldFocusLost
 
-	private void radiusAnimaSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_radiusAnimaSliderStateChanged
+	private void radiusAnimaSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_radiusAnimaSliderStateChanged
 		radiusAnimaTextField.setText("" + radiusAnimaSlider.getValue());
 	}// GEN-LAST:event_radiusAnimaSliderStateChanged
 
-	private void dTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_dTextFieldFocusLost
+	private void dTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_dTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(dTextField, dSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(dTextField, dSlider, 1);
+		} catch (final NumberFormatException e) {
 			dTextField.setText(Integer.toString(dSlider.getValue()));
 		}
 	}// GEN-LAST:event_dTextFieldFocusLost
 
-	private void dSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_dSliderStateChanged
+	private void dSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_dSliderStateChanged
 		dTextField.setText("" + dSlider.getValue());
 	}// GEN-LAST:event_dSliderStateChanged
 
-	private void randomRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_randomRadioButtonActionPerformed
+	private void randomRadioButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_randomRadioButtonActionPerformed
 		dSlider.setEnabled(true);
 		dTextField.setEnabled(true);
 
@@ -1847,7 +1734,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		setGraphVelBoxes(false);
 	}// GEN-LAST:event_randomRadioButtonActionPerformed
 
-	private void setGraphVelBoxes(boolean set) {
+	private void setGraphVelBoxes(final boolean set) {
 		setGraphVel(graph1XComboBox, set);
 		setGraphVel(graph1YComboBox, set);
 		setGraphVel(graph2XComboBox, set);
@@ -1858,7 +1745,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		setGraphVel(graph4YComboBox, set);
 	}
 
-	private void setGraphVel(javax.swing.JComboBox cBox, boolean set) {
+	private void setGraphVel(final javax.swing.JComboBox cBox, final boolean set) {
 		if (!set) {
 			cBox.removeItem("Vx");
 			cBox.removeItem("Vx^2");
@@ -1880,7 +1767,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		}
 	}
 
-	private void langevinRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_langevinRadioButtonActionPerformed
+	private void langevinRadioButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_langevinRadioButtonActionPerformed
 		massSlider.setEnabled(true);
 		massTextField.setEnabled(true);
 
@@ -1913,143 +1800,143 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		dTextField.setEnabled(false);
 	}// GEN-LAST:event_langevinRadioButtonActionPerformed
 
-	private void dPSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_dPSliderStateChanged
+	private void dPSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_dPSliderStateChanged
 		dPTextField.setText("" + dPSlider.getValue());
 	}// GEN-LAST:event_dPSliderStateChanged
 
-	private void visTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_visTextFieldFocusLost
+	private void visTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_visTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(visTextField, visSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(visTextField, visSlider, 1);
+		} catch (final NumberFormatException e) {
 			visTextField.setText(Integer.toString(visSlider.getValue()));
 		}
 	}// GEN-LAST:event_visTextFieldFocusLost
 
-	private void freqTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_freqTextFieldFocusLost
+	private void freqTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_freqTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(freqTextField, freqSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(freqTextField, freqSlider, 1);
+		} catch (final NumberFormatException e) {
 			freqTextField.setText(Integer.toString(freqSlider.getValue()));
 		}
 	}// GEN-LAST:event_freqTextFieldFocusLost
 
-	private void visSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_visSliderStateChanged
+	private void visSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_visSliderStateChanged
 		visTextField.setText("" + visSlider.getValue());
 	}// GEN-LAST:event_visSliderStateChanged
 
-	private void freqSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_freqSliderStateChanged
+	private void freqSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_freqSliderStateChanged
 		freqTextField.setText("" + freqSlider.getValue());
 	}// GEN-LAST:event_freqSliderStateChanged
 
-	private void dPTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_dPTextFieldFocusLost
+	private void dPTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_dPTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(dPTextField, dPSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(dPTextField, dPSlider, 1);
+		} catch (final NumberFormatException e) {
 			dPTextField.setText(Integer.toString(dPSlider.getValue()));
 		}
 	}// GEN-LAST:event_dPTextFieldFocusLost
 
-	private void velPhiTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_velPhiTextFieldFocusLost
+	private void velPhiTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_velPhiTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(velPhiTextField, velPhiSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(velPhiTextField, velPhiSlider, 1);
+		} catch (final NumberFormatException e) {
 			velPhiTextField.setText(Integer.toString(velPhiSlider.getValue()));
 		}
 	}// GEN-LAST:event_velPhiTextFieldFocusLost
 
-	private void velPhiSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_velPhiSliderStateChanged
+	private void velPhiSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_velPhiSliderStateChanged
 		velPhiTextField.setText("" + velPhiSlider.getValue());
 	}// GEN-LAST:event_velPhiSliderStateChanged
 
-	private void velThetaTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_velThetaTextFieldFocusLost
+	private void velThetaTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_velThetaTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(velThetaTextField, velThetaSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(velThetaTextField, velThetaSlider, 1);
+		} catch (final NumberFormatException e) {
 			velThetaTextField.setText(Integer.toString(velThetaSlider.getValue()));
 		}
 	}// GEN-LAST:event_velThetaTextFieldFocusLost
 
-	private void velThetaSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_velThetaSliderStateChanged
+	private void velThetaSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_velThetaSliderStateChanged
 		velThetaTextField.setText("" + velThetaSlider.getValue());
 	}// GEN-LAST:event_velThetaSliderStateChanged
 
-	private void velModTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_velModTextFieldFocusLost
+	private void velModTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_velModTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(velModTextField, velModSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(velModTextField, velModSlider, 1);
+		} catch (final NumberFormatException e) {
 			velModTextField.setText(Integer.toString(velModSlider.getValue()));
 		}
 	}// GEN-LAST:event_velModTextFieldFocusLost
 
-	private void velModSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_velModSliderStateChanged
+	private void velModSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_velModSliderStateChanged
 		velModTextField.setText("" + velModSlider.getValue());
 	}// GEN-LAST:event_velModSliderStateChanged
 
-	private void radiusTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_radiusTextFieldFocusLost
+	private void radiusTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_radiusTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(radiusTextField, radiusSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(radiusTextField, radiusSlider, 1);
+		} catch (final NumberFormatException e) {
 			radiusTextField.setText(Integer.toString(radiusSlider.getValue()));
 		}
 	}// GEN-LAST:event_radiusTextFieldFocusLost
 
-	private void radiusSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_radiusSliderStateChanged
+	private void radiusSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_radiusSliderStateChanged
 		radiusTextField.setText("" + radiusSlider.getValue());
 	}// GEN-LAST:event_radiusSliderStateChanged
 
-	private void massTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_massTextFieldFocusLost
+	private void massTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_massTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(massTextField, massSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(massTextField, massSlider, 1);
+		} catch (final NumberFormatException e) {
 			massTextField.setText(Integer.toString(massSlider.getValue()));
 		}
 	}// GEN-LAST:event_massTextFieldFocusLost
 
-	private void massSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_massSliderStateChanged
+	private void massSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_massSliderStateChanged
 		massTextField.setText("" + massSlider.getValue());
 	}// GEN-LAST:event_massSliderStateChanged
 
-	private void nPartTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_nPartTextFieldFocusLost
+	private void nPartTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_nPartTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(nPartTextField, nPartSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(nPartTextField, nPartSlider, 1);
+		} catch (final NumberFormatException e) {
 			nPartTextField.setText(Integer.toString(nPartSlider.getValue()));
 		}
 	}// GEN-LAST:event_nPartTextFieldFocusLost
 
-	private void nPartSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_nPartSliderStateChanged
+	private void nPartSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_nPartSliderStateChanged
 		nPartTextField.setText("" + nPartSlider.getValue());
 	}// GEN-LAST:event_nPartSliderStateChanged
 
-	private void samplesTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_samplesTextFieldFocusLost
+	private void samplesTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_samplesTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(samplesTextField, samplesSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(samplesTextField, samplesSlider, 1);
+		} catch (final NumberFormatException e) {
 			samplesTextField.setText(Integer.toString(samplesSlider.getValue()));
 		}
 	}// GEN-LAST:event_samplesTextFieldFocusLost
 
-	private void tbsTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_tbsTextFieldFocusLost
+	private void tbsTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_tbsTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(tbsTextField, tbsSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(tbsTextField, tbsSlider, 1);
+		} catch (final NumberFormatException e) {
 			tbsTextField.setText(Integer.toString(tbsSlider.getValue()));
 		}
 	}// GEN-LAST:event_tbsTextFieldFocusLost
 
-	private void samplesSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_samplesSliderStateChanged
+	private void samplesSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_samplesSliderStateChanged
 		samplesTextField.setText("" + samplesSlider.getValue());
 	}// GEN-LAST:event_samplesSliderStateChanged
 
-	private void tbsSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_tbsSliderStateChanged
+	private void tbsSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_tbsSliderStateChanged
 		tbsTextField.setText("" + tbsSlider.getValue());
 	}// GEN-LAST:event_tbsSliderStateChanged
 
-	private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
+	private void cancelButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_cancelButtonActionPerformed
 
-	private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
+	private void okButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
 		acqConfig.setSelectedFrequency(new Frequency((double) tbsSlider.getValue(), hardwareInfo
 				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
 				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
@@ -2079,14 +1966,14 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 			acqConfig.getSelectedHardwareParameter("vy").setParameterValue("" + (vy ? 1 : 0));
 			acqConfig.getSelectedHardwareParameter("vz").setParameterValue("" + (vz ? 1 : 0));
 
-			double mass = (double) massSlider.getValue() / 100d;
-			double radius = (double) radiusSlider.getValue() / 100d;
-			double velMod = (double) velModSlider.getValue() / 100d;
-			double velTheta = Math.toRadians(velThetaSlider.getValue());
+			final double mass = (double) massSlider.getValue() / 100d;
+			final double radius = (double) radiusSlider.getValue() / 100d;
+			final double velMod = (double) velModSlider.getValue() / 100d;
+			final double velTheta = Math.toRadians(velThetaSlider.getValue());
 
-			double freq = (double) freqSlider.getValue() / 100d;
-			double dP = (double) dPSlider.getValue() / 100d;
-			double vis = (double) visSlider.getValue() / 1000d;
+			final double freq = (double) freqSlider.getValue() / 100d;
+			final double dP = (double) dPSlider.getValue() / 100d;
+			final double vis = (double) visSlider.getValue() / 1000d;
 
 			acqConfig.getSelectedHardwareParameter("mass").setParameterValue("" + (float) mass);
 			acqConfig.getSelectedHardwareParameter("radius").setParameterValue("" + (float) radius);
@@ -2094,14 +1981,14 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 			acqConfig.getSelectedHardwareParameter("velMod").setParameterValue("" + (float) velMod);
 			acqConfig.getSelectedHardwareParameter("velTheta").setParameterValue("" + (float) velTheta);
 			if (dim3RadioButton.isSelected()) {
-				double velPhi = Math.toRadians(velPhiSlider.getValue());
+				final double velPhi = Math.toRadians(velPhiSlider.getValue());
 				acqConfig.getSelectedHardwareParameter("velPhi").setParameterValue("" + (float) velPhi);
 			}
 			acqConfig.getSelectedHardwareParameter("freq").setParameterValue("" + (float) freq);
 			acqConfig.getSelectedHardwareParameter("dP").setParameterValue("" + (float) dP);
 			acqConfig.getSelectedHardwareParameter("vis").setParameterValue("" + (float) vis);
 		} else {
-			double d = (double) dSlider.getValue() / 10d;
+			final double d = (double) dSlider.getValue() / 10d;
 			acqConfig.getSelectedHardwareParameter("d").setParameterValue("" + (float) d);
 		}
 
@@ -2129,40 +2016,45 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 
 		acqConfig.getSelectedHardwareParameter("nPart").setParameterValue("" + nPartSlider.getValue());
 
-		if (dim1RadioButton.isSelected())
+		if (dim1RadioButton.isSelected()) {
 			acqConfig.getSelectedHardwareParameter("dim").setParameterValue("" + (byte) 1);
-		else if (dim2RadioButton.isSelected())
+		} else if (dim2RadioButton.isSelected()) {
 			acqConfig.getSelectedHardwareParameter("dim").setParameterValue("" + (byte) 2);
-		else
+		} else {
 			acqConfig.getSelectedHardwareParameter("dim").setParameterValue("" + (byte) 3);
+		}
 
 		if (graph1ActCheckBox.isSelected()) {
-			String graph1 = ((String) graph1XComboBox.getSelectedItem()).toString().concat(
+			final String graph1 = ((String) graph1XComboBox.getSelectedItem()).toString().concat(
 					" vs " + ((String) graph1YComboBox.getSelectedItem()).toString());
 			acqConfig.getSelectedHardwareParameter("graph1").setParameterValue("" + graph1);
-		} else
+		} else {
 			acqConfig.getSelectedHardwareParameter("graph1").setParameterValue("");
+		}
 
 		if (graph2ActCheckBox.isSelected()) {
-			String graph2 = ((String) graph2XComboBox.getSelectedItem()).toString().concat(
+			final String graph2 = ((String) graph2XComboBox.getSelectedItem()).toString().concat(
 					" vs " + ((String) graph2YComboBox.getSelectedItem()).toString());
 			acqConfig.getSelectedHardwareParameter("graph2").setParameterValue("" + graph2);
-		} else
+		} else {
 			acqConfig.getSelectedHardwareParameter("graph2").setParameterValue("");
+		}
 
 		if (graph3ActCheckBox.isSelected()) {
-			String graph3 = ((String) graph3XComboBox.getSelectedItem()).toString().concat(
+			final String graph3 = ((String) graph3XComboBox.getSelectedItem()).toString().concat(
 					" vs " + ((String) graph3YComboBox.getSelectedItem()).toString());
 			acqConfig.getSelectedHardwareParameter("graph3").setParameterValue("" + graph3);
-		} else
+		} else {
 			acqConfig.getSelectedHardwareParameter("graph3").setParameterValue("");
+		}
 
 		if (graph4ActCheckBox.isSelected()) {
-			String graph4 = ((String) graph4XComboBox.getSelectedItem()).toString().concat(
+			final String graph4 = ((String) graph4XComboBox.getSelectedItem()).toString().concat(
 					" vs " + ((String) graph4YComboBox.getSelectedItem()).toString());
 			acqConfig.getSelectedHardwareParameter("graph4").setParameterValue("" + graph4);
-		} else
+		} else {
 			acqConfig.getSelectedHardwareParameter("graph4").setParameterValue("");
+		}
 
 		acqConfig.getSelectedHardwareParameter("graph1Med").setParameterValue(
 				"" + (graph1MedCheckBox.isSelected() ? 1 : 0));
@@ -2187,14 +2079,15 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		acqConfig.getSelectedHardwareParameter("animaAct").setParameterValue(
 				"" + (animaActCheckBox.isSelected() ? 1 : 0));
 
-		for (int i = 0; i < acqConfig.getSelectedHardwareParameters().length; i++)
+		for (int i = 0; i < acqConfig.getSelectedHardwareParameters().length; i++) {
 			System.out.println(acqConfig.getSelectedHardwareParameters(i).getParameterName() + " = "
 					+ acqConfig.getSelectedHardwareParameters(i).getParameterValue());
+		}
 
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_okButtonActionPerformed
 
-	private void defaultButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_defaultButtonActionPerformed
+	private void defaultButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_defaultButtonActionPerformed
 		tbsSlider.setValue(100);
 		samplesSlider.setValue(1000);
 
@@ -2266,10 +2159,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		animaActCheckBoxActionPerformed(null);
 	}// GEN-LAST:event_defaultButtonActionPerformed
 
-	public static void main(String args[]) {
-		javax.swing.JFrame test = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame test = new javax.swing.JFrame();
 		test.addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent e) {
+			public void windowClosing(final java.awt.event.WindowEvent e) {
 				System.exit(0);
 			};
 		});
@@ -2288,7 +2181,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -2300,7 +2193,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -2310,9 +2203,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -2326,9 +2220,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -2344,7 +2239,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		return acqConfig;
 	}
 
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
 			// samplesSlider.setValue(acqConfig.getTotalSamples());
@@ -2366,23 +2261,24 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 				dim3RadioButton.setSelected(true);
 			}
 
-			if (acqConfig.getSelectedHardwareParameterValue("langevin").trim().equals("1") ? true : false)
+			if (acqConfig.getSelectedHardwareParameterValue("langevin").trim().equals("1") ? true : false) {
 				langevinRadioButton.setSelected(true);
-			else
+			} else {
 				randomRadioButton.setSelected(true);
+			}
 
 			if (langevinRadioButton.isSelected()) {
 
-				boolean vx = acqConfig.getSelectedHardwareParameterValue("vx").trim().equals("1") ? true : false;
-				boolean vy = acqConfig.getSelectedHardwareParameterValue("vy").trim().equals("1") ? true : false;
-				boolean vz = acqConfig.getSelectedHardwareParameterValue("vz").trim().equals("1") ? true : false;
-				boolean velModulus = acqConfig.getSelectedHardwareParameterValue("velModulus").trim().equals("1") ? true
+				final boolean vx = acqConfig.getSelectedHardwareParameterValue("vx").trim().equals("1") ? true : false;
+				final boolean vy = acqConfig.getSelectedHardwareParameterValue("vy").trim().equals("1") ? true : false;
+				final boolean vz = acqConfig.getSelectedHardwareParameterValue("vz").trim().equals("1") ? true : false;
+				final boolean velModulus = acqConfig.getSelectedHardwareParameterValue("velModulus").trim().equals("1") ? true
 						: false;
 
 				if (vx || vy || vz || velModulus) {
 					velModCheckBox.setSelected(velModulus);
-					velQuadCheckBox.setSelected(acqConfig.getSelectedHardwareParameterValue("velQuad").trim().equals(
-							"1") ? true : false);
+					velQuadCheckBox.setSelected(acqConfig.getSelectedHardwareParameterValue("velQuad").trim()
+							.equals("1") ? true : false);
 					vxCheckBox.setSelected(vx);
 					vyCheckBox.setSelected(vy);
 					vzCheckBox.setSelected(vz);
@@ -2399,25 +2295,24 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 						.getSelectedHardwareParameterValue("velMod")) * 100));
 				velThetaSlider.setValue((int) Math.round(Math.toDegrees(Float.parseFloat(acqConfig
 						.getSelectedHardwareParameterValue("velTheta")))));
-				if (dim3RadioButton.isSelected())
+				if (dim3RadioButton.isSelected()) {
 					velPhiSlider.setValue((int) Math.round(Math.toDegrees(Float.parseFloat(acqConfig
 							.getSelectedHardwareParameterValue("velPhi")))));
+				}
 
 				freqSlider.setValue((int) Math.round(Float.parseFloat(acqConfig
 						.getSelectedHardwareParameterValue("freq")) * 100));
-				dPSlider.setValue((int) Math
-						.round(Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("dP")) * 100));
-				visSlider.setValue((int) Math.round(Float
-						.parseFloat(acqConfig.getSelectedHardwareParameterValue("vis")) * 1000));
+				dPSlider.setValue((int) Math.round(Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("dP")) * 100));
+				visSlider
+						.setValue((int) Math.round(Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("vis")) * 1000));
 			} else {
-				dSlider.setValue((int) Math
-						.round(Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("d")) * 10));
+				dSlider.setValue((int) Math.round(Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("d")) * 10));
 			}
 
-			boolean x = acqConfig.getSelectedHardwareParameterValue("x").trim().equals("1") ? true : false;
-			boolean y = acqConfig.getSelectedHardwareParameterValue("y").trim().equals("1") ? true : false;
-			boolean z = acqConfig.getSelectedHardwareParameterValue("z").trim().equals("1") ? true : false;
-			boolean posModulus = acqConfig.getSelectedHardwareParameterValue("posModulus").trim().equals("1") ? true
+			final boolean x = acqConfig.getSelectedHardwareParameterValue("x").trim().equals("1") ? true : false;
+			final boolean y = acqConfig.getSelectedHardwareParameterValue("y").trim().equals("1") ? true : false;
+			final boolean z = acqConfig.getSelectedHardwareParameterValue("z").trim().equals("1") ? true : false;
+			final boolean posModulus = acqConfig.getSelectedHardwareParameterValue("posModulus").trim().equals("1") ? true
 					: false;
 
 			if (x || y || z || posModulus) {
@@ -2435,41 +2330,41 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 
 			String str;
 			if (!(str = acqConfig.getSelectedHardwareParameterValue("graph1")).equalsIgnoreCase("")) {
-				String[] graph = str.split(" vs ");
+				final String[] graph = str.split(" vs ");
 				graph1XComboBox.setSelectedItem(graph[0]);
 				graph1YComboBox.setSelectedItem(graph[1]);
-				graph1MedCheckBox.setSelected(acqConfig.getSelectedHardwareParameterValue("graph1Med").trim().equals(
-						"1") ? true : false);
+				graph1MedCheckBox.setSelected(acqConfig.getSelectedHardwareParameterValue("graph1Med").trim()
+						.equals("1") ? true : false);
 			} else {
 				graph1ActCheckBox.setSelected(false);
 				graph1ActCheckBoxActionPerformed(null);
 			}
 			if (!(str = acqConfig.getSelectedHardwareParameterValue("graph2")).equalsIgnoreCase("")) {
-				String[] graph = str.split(" vs ");
+				final String[] graph = str.split(" vs ");
 				graph2XComboBox.setSelectedItem(graph[0]);
 				graph2YComboBox.setSelectedItem(graph[1]);
-				graph2MedCheckBox.setSelected(acqConfig.getSelectedHardwareParameterValue("graph2Med").trim().equals(
-						"1") ? true : false);
+				graph2MedCheckBox.setSelected(acqConfig.getSelectedHardwareParameterValue("graph2Med").trim()
+						.equals("1") ? true : false);
 			} else {
 				graph2ActCheckBox.setSelected(false);
 				graph2ActCheckBoxActionPerformed(null);
 			}
 			if (!(str = acqConfig.getSelectedHardwareParameterValue("graph3")).equalsIgnoreCase("")) {
-				String[] graph = str.split(" vs ");
+				final String[] graph = str.split(" vs ");
 				graph3XComboBox.setSelectedItem(graph[0]);
 				graph3YComboBox.setSelectedItem(graph[1]);
-				graph3MedCheckBox.setSelected(acqConfig.getSelectedHardwareParameterValue("graph3Med").trim().equals(
-						"1") ? true : false);
+				graph3MedCheckBox.setSelected(acqConfig.getSelectedHardwareParameterValue("graph3Med").trim()
+						.equals("1") ? true : false);
 			} else {
 				graph3ActCheckBox.setSelected(false);
 				graph3ActCheckBoxActionPerformed(null);
 			}
 			if (!(str = acqConfig.getSelectedHardwareParameterValue("graph4")).equalsIgnoreCase("")) {
-				String[] graph = str.split(" vs ");
+				final String[] graph = str.split(" vs ");
 				graph4XComboBox.setSelectedItem(graph[0]);
 				graph4YComboBox.setSelectedItem(graph[1]);
-				graph4MedCheckBox.setSelected(acqConfig.getSelectedHardwareParameterValue("graph4Med").trim().equals(
-						"1") ? true : false);
+				graph4MedCheckBox.setSelected(acqConfig.getSelectedHardwareParameterValue("graph4Med").trim()
+						.equals("1") ? true : false);
 			} else {
 				graph4ActCheckBox.setSelected(false);
 				graph4ActCheckBoxActionPerformed(null);
@@ -2488,12 +2383,12 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
 	public javax.swing.JComponent getCustomizerComponent() {

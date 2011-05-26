@@ -11,6 +11,7 @@ import java.util.Map;
 
 import javax.swing.border.Border;
 
+import com.linkare.rec.impl.newface.laf.flat.theme.AbstractStyle;
 import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 
 /**
@@ -21,7 +22,8 @@ public class TextAreaStyle extends DefaultStyle {
 
 	public static final String ID = "TextArea";
 
-	//    public static final FontUIResource TEXTAREA_FONT = new FontUIResource(DEFAULT_FONT.getFontName(), Font.PLAIN, 12);
+	// public static final FontUIResource TEXTAREA_FONT = new
+	// FontUIResource(DEFAULT_FONT.getFontName(), Font.PLAIN, 12);
 	public static final Border TEXTAREA_BORDER = javax.swing.BorderFactory.createEmptyBorder(2, 3, 2, 3);
 	public static final Color TEXTAREA_BACKGROUND = new Color(0xE4EEED);
 
@@ -34,14 +36,14 @@ public class TextAreaStyle extends DefaultStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return TextAreaStyle.ID;
 	}
 
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(BORDER, TEXTAREA_BORDER);
-		map.put(BACKGROUND, TEXTAREA_BACKGROUND);
+		map.put(AbstractStyle.BORDER, TextAreaStyle.TEXTAREA_BORDER);
+		map.put(AbstractStyle.BACKGROUND, TextAreaStyle.TEXTAREA_BACKGROUND);
 
 	}
 

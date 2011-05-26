@@ -13,22 +13,23 @@ public final class NotAnAvailableSamplesPacketException extends org.omg.CORBA.Us
 	 */
 	private static final long serialVersionUID = 2358640551409185130L;
 
-	public int errorCode = (int) 0;
+	public int errorCode = 0;
 
 	// Version 7.0 Change - which was the first packet not found
-	public int firstPacketNotFound = (int) 0;
+	public int firstPacketNotFound = 0;
 
 	public NotAnAvailableSamplesPacketException() {
 		super(NotAnAvailableSamplesPacketExceptionHelper.id());
 	} // ctor
 
-	public NotAnAvailableSamplesPacketException(int _errorCode, int _firstPacketNotFound) {
+	public NotAnAvailableSamplesPacketException(final int _errorCode, final int _firstPacketNotFound) {
 		super(NotAnAvailableSamplesPacketExceptionHelper.id());
 		errorCode = _errorCode;
 		firstPacketNotFound = _firstPacketNotFound;
 	} // ctor
 
-	public NotAnAvailableSamplesPacketException(String $reason, int _errorCode, int _firstPacketNotFound) {
+	public NotAnAvailableSamplesPacketException(final String $reason, final int _errorCode,
+			final int _firstPacketNotFound) {
 		super(NotAnAvailableSamplesPacketExceptionHelper.id() + "  " + $reason);
 		errorCode = _errorCode;
 		firstPacketNotFound = _firstPacketNotFound;

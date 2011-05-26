@@ -19,7 +19,7 @@ public class StampCounterProcessor extends AbstractStampProcessor {
 
 	/** Creates a new instance of StampHelloProcessor */
 	public StampCounterProcessor() {
-		super(COMMAND_IDENTIFIER);
+		super(StampCounterProcessor.COMMAND_IDENTIFIER);
 	}
 
 	/**
@@ -29,20 +29,22 @@ public class StampCounterProcessor extends AbstractStampProcessor {
 	 * @return boolean - wether the processing was successfull
 	 * 
 	 */
-	public boolean process(StampCommand command) {
+	@Override
+	public boolean process(final StampCommand command) {
 		int countedHits = 0;
-		String[] splitedStr = command.getCommand().split(" ");
+		final String[] splitedStr = command.getCommand().split(" ");
 
-		if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedStr[0] != null) {
+		if (command.getCommandIdentifier().equalsIgnoreCase(StampCounterProcessor.COMMAND_IDENTIFIER)
+				&& splitedStr[0] != null) {
 			try {
 				countedHits = Integer.parseInt(splitedStr[0]);
-				Integer nHits = new Integer(countedHits);
-				command.addCommandData(COUNTER, nHits);
+				final Integer nHits = new Integer(countedHits);
+				command.addCommandData(StampCounterProcessor.COUNTER, nHits);
 				command.setData(true);
 
 				return true;
 
-			} catch (NumberFormatException e) {
+			} catch (final NumberFormatException e) {
 				e.printStackTrace();
 				return false;
 			}
@@ -51,6 +53,7 @@ public class StampCounterProcessor extends AbstractStampProcessor {
 		return false;
 	}
 
+	@Override
 	public boolean isData() {
 		return true;
 	}

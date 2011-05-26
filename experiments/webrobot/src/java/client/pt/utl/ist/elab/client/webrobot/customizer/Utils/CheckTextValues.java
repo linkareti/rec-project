@@ -15,15 +15,15 @@ public class CheckTextValues {
 	javax.swing.JDialog parent;
 
 	/** Creates a new instance of CheckTextValues */
-	public CheckTextValues(javax.swing.JDialog parent) {
+	public CheckTextValues(final javax.swing.JDialog parent) {
 		this.parent = parent;
 	}
 
-	public boolean isOK(javax.swing.JTextField jTextField) {
+	public boolean isOK(final javax.swing.JTextField jTextField) {
 		int value = -1;
 		try {
 			value = new Integer(jTextField.getText()).intValue();
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 			javax.swing.JOptionPane.showMessageDialog(parent, "Por favor, introduza um numero inteiro", "Erro!",
 					javax.swing.JOptionPane.ERROR_MESSAGE);
 			jTextField.selectAll();

@@ -11,12 +11,16 @@ package pt.utl.ist.elab.client.webrobot.customizer.Comps;
  * @author André Neto - LEFT - IST
  */
 public class IVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Block {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8924517921431375671L;
 	private static int WIDTH = 77;
 	private static int HEIGHT = 45;
 	private static int LINEWIDTH = 6;
-	private static java.awt.Dimension dimension = new java.awt.Dimension(WIDTH, HEIGHT);
+	private static java.awt.Dimension dimension = new java.awt.Dimension(IVPWM.WIDTH, IVPWM.HEIGHT);
 	private static int TIPO = 14;
-	private javax.swing.ImageIcon image = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.ImageIcon image = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/customizer/Comps/Icons/ivpwm.gif"));
 	private static pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIVPWM model;
 	private static pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfIVPWM confIVPWM;
@@ -34,79 +38,85 @@ public class IVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bloc
 	private boolean cancel = false;
 
 	/** Creates a new instance of CompInt */
-	public IVPWM(javax.swing.JFrame parent, pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIVPWM model) {
+	public IVPWM(final javax.swing.JFrame parent,
+			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIVPWM model) {
 		super();
-		this.model = model;
+		IVPWM.model = model;
 		setCancel(false);
-		confIVPWM = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfIVPWM(parent, true, model);
-		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confIVPWM);
-		confIVPWM.show();
-		if (confIVPWM.isCancel()) {
+		IVPWM.confIVPWM = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfIVPWM(parent, true, model);
+		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, IVPWM.confIVPWM);
+		IVPWM.confIVPWM.show();
+		if (IVPWM.confIVPWM.isCancel()) {
 			setCancel(true);
 			return;
 		} else {
 			setCancel(false);
 		}
-		setMinimumSize(dimension);
-		setPreferredSize(dimension);
-		setMaximumSize(dimension);
+		setMinimumSize(IVPWM.dimension);
+		setPreferredSize(IVPWM.dimension);
+		setMaximumSize(IVPWM.dimension);
 		setBorderPainted(false);
 		setBackground(new java.awt.Color(0, 0, 0, 0));// background transparente
 		setOpaque(false);
 		text = "";
 	}
 
-	public IVPWM(pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIVPWM model) {
+	public IVPWM(final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIVPWM model) {
 		super();
-		this.model = model;
-		setMinimumSize(dimension);
-		setPreferredSize(dimension);
-		setMaximumSize(dimension);
+		IVPWM.model = model;
+		setMinimumSize(IVPWM.dimension);
+		setPreferredSize(IVPWM.dimension);
+		setMaximumSize(IVPWM.dimension);
 		setBorderPainted(false);
 		setBackground(new java.awt.Color(0, 0, 0, 0));// background transparente
 		setOpaque(false);
 		text = "";
 	}
 
-	public void paintComponent(java.awt.Graphics g) {
-		java.awt.Graphics2D g2 = (java.awt.Graphics2D) g;
+	@Override
+	public void paintComponent(final java.awt.Graphics g) {
+		final java.awt.Graphics2D g2 = (java.awt.Graphics2D) g;
 		g2.setStroke(new java.awt.BasicStroke(3f));
-		g.setColor(backgroundColor);
+		g.setColor(IVPWM.backgroundColor);
 		g.fillRect(0, 0, this.getSize().width, this.getSize().height);
 		g.drawImage(image.getImage(), 0, 0, image.getIconWidth(), image.getIconHeight(), null);
 		g.setColor(java.awt.Color.black);
 		if (paintBottom) {
-			g2.drawLine(image.getIconWidth() / 2, image.getIconHeight(), image.getIconWidth() / 2, image
-					.getIconHeight()
-					+ LINEWIDTH);
+			g2.drawLine(image.getIconWidth() / 2, image.getIconHeight(), image.getIconWidth() / 2,
+					image.getIconHeight() + IVPWM.LINEWIDTH);
 		}
 		if (paintLeft) {
-			g2.drawLine(image.getIconWidth(), image.getIconHeight() / 2, image.getIconWidth() + LINEWIDTH, image
-					.getIconHeight() / 2);
+			g2.drawLine(image.getIconWidth(), image.getIconHeight() / 2, image.getIconWidth() + IVPWM.LINEWIDTH,
+					image.getIconHeight() / 2);
 		}
 		super.paintComponent(g);
 	}
 
+	@Override
 	public pt.utl.ist.elab.client.webrobot.customizer.Models.ModelBlock getDataModel() {
-		return model;
+		return IVPWM.model;
 	}
 
-	public void setDataModel(pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIVPWM model) {
-		this.model = model;
+	public void setDataModel(final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIVPWM model) {
+		IVPWM.model = model;
 	}
 
-	public void edit(javax.swing.JFrame parent) {
-		confIVPWM = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfIVPWM(parent, true, model);
-		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confIVPWM);
-		confIVPWM.show();
+	@Override
+	public void edit(final javax.swing.JFrame parent) {
+		IVPWM.confIVPWM = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfIVPWM(parent, true,
+				IVPWM.model);
+		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, IVPWM.confIVPWM);
+		IVPWM.confIVPWM.show();
 	}
 
+	@Override
 	public int getTipo() {
-		return TIPO;
+		return IVPWM.TIPO;
 	}
 
+	@Override
 	public String getFullNameDescription() {
-		return this.fullNameDescription;
+		return fullNameDescription;
 	}
 
 	/**
@@ -114,8 +124,9 @@ public class IVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bloc
 	 * 
 	 * @return Value of property paintBottom.
 	 */
+	@Override
 	public boolean isPaintBottom() {
-		return this.paintBottom;
+		return paintBottom;
 	}
 
 	/**
@@ -123,7 +134,8 @@ public class IVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bloc
 	 * 
 	 * @param paintBottom New value of property paintBottom.
 	 */
-	public void setPaintBottom(boolean paintBottom) {
+	@Override
+	public void setPaintBottom(final boolean paintBottom) {
 		this.paintBottom = paintBottom;
 		repaint();
 	}
@@ -133,8 +145,9 @@ public class IVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bloc
 	 * 
 	 * @return Value of property paintLeft.
 	 */
+	@Override
 	public boolean isPaintLeft() {
-		return this.paintLeft;
+		return paintLeft;
 	}
 
 	/**
@@ -142,7 +155,8 @@ public class IVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bloc
 	 * 
 	 * @param paintLeft New value of property paintLeft.
 	 */
-	public void setPaintLeft(boolean paintLeft) {
+	@Override
+	public void setPaintLeft(final boolean paintLeft) {
 		this.paintLeft = paintLeft;
 		repaint();
 	}
@@ -152,8 +166,9 @@ public class IVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bloc
 	 * 
 	 * @return Value of property cancel.
 	 */
+	@Override
 	public boolean isCancel() {
-		return this.cancel;
+		return cancel;
 	}
 
 	/**
@@ -161,7 +176,8 @@ public class IVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bloc
 	 * 
 	 * @param cancel New value of property cancel.
 	 */
-	public void setCancel(boolean cancel) {
+	@Override
+	public void setCancel(final boolean cancel) {
 		this.cancel = cancel;
 	}
 }

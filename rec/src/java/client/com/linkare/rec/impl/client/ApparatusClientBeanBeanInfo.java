@@ -21,7 +21,7 @@ public class ApparatusClientBeanBeanInfo extends SimpleBeanInfo {
 	// Bean descriptor //GEN-FIRST:BeanDescriptor
 	/* lazy BeanDescriptor */
 	private static BeanDescriptor getBdescriptor() {
-		BeanDescriptor beanDescriptor = new BeanDescriptor(ApparatusClientBean.class, null);// GEN-HEADEREND:BeanDescriptor
+		final BeanDescriptor beanDescriptor = new BeanDescriptor(ApparatusClientBean.class, null);// GEN-HEADEREND:BeanDescriptor
 
 		// Here you can add code for customizing the BeanDescriptor.
 
@@ -33,7 +33,7 @@ public class ApparatusClientBeanBeanInfo extends SimpleBeanInfo {
 	// Property array
 	/* lazy PropertyDescriptor */
 	private static PropertyDescriptor[] getPdescriptor() {
-		PropertyDescriptor[] properties = new PropertyDescriptor[0];// GEN-HEADEREND:Properties
+		final PropertyDescriptor[] properties = new PropertyDescriptor[0];// GEN-HEADEREND:Properties
 
 		// Here you can add code for customizing the properties array.
 
@@ -48,10 +48,10 @@ public class ApparatusClientBeanBeanInfo extends SimpleBeanInfo {
 	// EventSet array
 	/* lazy EventSetDescriptor */
 	private static EventSetDescriptor[] getEdescriptor() {
-		EventSetDescriptor[] eventSets = new EventSetDescriptor[3];
+		final EventSetDescriptor[] eventSets = new EventSetDescriptor[3];
 
 		try {
-			eventSets[EVENT_apparatusConnectorListener] = new EventSetDescriptor(
+			eventSets[ApparatusClientBeanBeanInfo.EVENT_apparatusConnectorListener] = new EventSetDescriptor(
 					com.linkare.rec.impl.client.ApparatusClientBean.class, "apparatusConnectorListener",
 					com.linkare.rec.impl.client.apparatus.ApparatusConnectorListener.class, new String[] {
 							"apparatusConnected", "apparatusConnecting", "apparatusDisconnected",
@@ -62,16 +62,16 @@ public class ApparatusClientBeanBeanInfo extends SimpleBeanInfo {
 							"apparatusStateStarted", "apparatusStateStarting", "apparatusStateStoped",
 							"apparatusStateStoping", "apparatusStateUnknow", "apparatusUnreachable" },
 					"addApparatusConnectorListener", "removeApparatusConnectorListener");
-			eventSets[EVENT_chatMessageListener] = new EventSetDescriptor(
+			eventSets[ApparatusClientBeanBeanInfo.EVENT_chatMessageListener] = new EventSetDescriptor(
 					com.linkare.rec.impl.client.ApparatusClientBean.class, "chatMessageListener",
 					com.linkare.rec.impl.client.chat.IChatMessageListener.class, new String[] { "connectionChanged",
 							"newChatMessage", "roomChanged" }, "addChatMessageListener", "removeChatMessageListener");
-			eventSets[EVENT_expUsersListChangeListener] = new EventSetDescriptor(
+			eventSets[ApparatusClientBeanBeanInfo.EVENT_expUsersListChangeListener] = new EventSetDescriptor(
 					com.linkare.rec.impl.client.ApparatusClientBean.class, "expUsersListChangeListener",
 					com.linkare.rec.impl.client.experiment.ExpUsersListChangeListener.class,
 					new String[] { "usersListChanged" }, "addExpUsersListChangeListener",
 					"removeExpUsersListChangeListener");
-		} catch (IntrospectionException e) {
+		} catch (final IntrospectionException e) {
 		}// GEN-HEADEREND:Events
 
 		// Here you can add code for customizing the event sets array.
@@ -98,57 +98,58 @@ public class ApparatusClientBeanBeanInfo extends SimpleBeanInfo {
 	// Method array
 	/* lazy MethodDescriptor */
 	private static MethodDescriptor[] getMdescriptor() {
-		MethodDescriptor[] methods = new MethodDescriptor[14];
+		final MethodDescriptor[] methods = new MethodDescriptor[14];
 
 		try {
-			methods[METHOD_configure0] = new MethodDescriptor(
+			methods[ApparatusClientBeanBeanInfo.METHOD_configure0] = new MethodDescriptor(
 					com.linkare.rec.impl.client.ApparatusClientBean.class.getMethod("configure",
 							new Class[] { com.linkare.rec.data.config.HardwareAcquisitionConfig.class }));
-			methods[METHOD_configure0].setDisplayName("");
-			methods[METHOD_connect1] = new MethodDescriptor(com.linkare.rec.impl.client.ApparatusClientBean.class
-					.getMethod("connect", new Class[] {}));
-			methods[METHOD_connect1].setDisplayName("");
-			methods[METHOD_disconnect2] = new MethodDescriptor(com.linkare.rec.impl.client.ApparatusClientBean.class
-					.getMethod("disconnect", new Class[] {}));
-			methods[METHOD_disconnect2].setDisplayName("");
-			methods[METHOD_hardwareChange3] = new MethodDescriptor(
+			methods[ApparatusClientBeanBeanInfo.METHOD_configure0].setDisplayName("");
+			methods[ApparatusClientBeanBeanInfo.METHOD_connect1] = new MethodDescriptor(
+					com.linkare.rec.impl.client.ApparatusClientBean.class.getMethod("connect", new Class[] {}));
+			methods[ApparatusClientBeanBeanInfo.METHOD_connect1].setDisplayName("");
+			methods[ApparatusClientBeanBeanInfo.METHOD_disconnect2] = new MethodDescriptor(
+					com.linkare.rec.impl.client.ApparatusClientBean.class.getMethod("disconnect", new Class[] {}));
+			methods[ApparatusClientBeanBeanInfo.METHOD_disconnect2].setDisplayName("");
+			methods[ApparatusClientBeanBeanInfo.METHOD_hardwareChange3] = new MethodDescriptor(
 					com.linkare.rec.impl.client.ApparatusClientBean.class.getMethod("hardwareChange", new Class[] {}));
-			methods[METHOD_hardwareChange3].setDisplayName("");
-			methods[METHOD_hardwareLockable4] = new MethodDescriptor(
+			methods[ApparatusClientBeanBeanInfo.METHOD_hardwareChange3].setDisplayName("");
+			methods[ApparatusClientBeanBeanInfo.METHOD_hardwareLockable4] = new MethodDescriptor(
 					com.linkare.rec.impl.client.ApparatusClientBean.class.getMethod("hardwareLockable",
 							new Class[] { Long.TYPE }));
-			methods[METHOD_hardwareLockable4].setDisplayName("");
-			methods[METHOD_hardwareStateChange5] = new MethodDescriptor(
+			methods[ApparatusClientBeanBeanInfo.METHOD_hardwareLockable4].setDisplayName("");
+			methods[ApparatusClientBeanBeanInfo.METHOD_hardwareStateChange5] = new MethodDescriptor(
 					com.linkare.rec.impl.client.ApparatusClientBean.class.getMethod("hardwareStateChange",
 							new Class[] { com.linkare.rec.acquisition.HardwareState.class }));
-			methods[METHOD_hardwareStateChange5].setDisplayName("");
-			methods[METHOD_lock6] = new MethodDescriptor(com.linkare.rec.impl.client.ApparatusClientBean.class
-					.getMethod("lock", new Class[] {}));
-			methods[METHOD_lock6].setDisplayName("");
-			methods[METHOD_receiveMessage7] = new MethodDescriptor(
+			methods[ApparatusClientBeanBeanInfo.METHOD_hardwareStateChange5].setDisplayName("");
+			methods[ApparatusClientBeanBeanInfo.METHOD_lock6] = new MethodDescriptor(
+					com.linkare.rec.impl.client.ApparatusClientBean.class.getMethod("lock", new Class[] {}));
+			methods[ApparatusClientBeanBeanInfo.METHOD_lock6].setDisplayName("");
+			methods[ApparatusClientBeanBeanInfo.METHOD_receiveMessage7] = new MethodDescriptor(
 					com.linkare.rec.impl.client.ApparatusClientBean.class.getMethod("receiveMessage", new Class[] {
 							java.lang.String.class, java.lang.String.class, java.lang.String.class }));
-			methods[METHOD_receiveMessage7].setDisplayName("");
-			methods[METHOD_reset8] = new MethodDescriptor(com.linkare.rec.impl.client.ApparatusClientBean.class
-					.getMethod("reset", new Class[] {}));
-			methods[METHOD_reset8].setDisplayName("");
-			methods[METHOD_sendMessage9] = new MethodDescriptor(com.linkare.rec.impl.client.ApparatusClientBean.class
-					.getMethod("sendMessage", new Class[] { com.linkare.rec.impl.events.ChatMessageEvent.class }));
-			methods[METHOD_sendMessage9].setDisplayName("");
-			methods[METHOD_start10] = new MethodDescriptor(com.linkare.rec.impl.client.ApparatusClientBean.class
-					.getMethod("start", new Class[] {}));
-			methods[METHOD_start10].setDisplayName("");
-			methods[METHOD_startAutoRefresh11] = new MethodDescriptor(
+			methods[ApparatusClientBeanBeanInfo.METHOD_receiveMessage7].setDisplayName("");
+			methods[ApparatusClientBeanBeanInfo.METHOD_reset8] = new MethodDescriptor(
+					com.linkare.rec.impl.client.ApparatusClientBean.class.getMethod("reset", new Class[] {}));
+			methods[ApparatusClientBeanBeanInfo.METHOD_reset8].setDisplayName("");
+			methods[ApparatusClientBeanBeanInfo.METHOD_sendMessage9] = new MethodDescriptor(
+					com.linkare.rec.impl.client.ApparatusClientBean.class.getMethod("sendMessage",
+							new Class[] { com.linkare.rec.impl.events.ChatMessageEvent.class }));
+			methods[ApparatusClientBeanBeanInfo.METHOD_sendMessage9].setDisplayName("");
+			methods[ApparatusClientBeanBeanInfo.METHOD_start10] = new MethodDescriptor(
+					com.linkare.rec.impl.client.ApparatusClientBean.class.getMethod("start", new Class[] {}));
+			methods[ApparatusClientBeanBeanInfo.METHOD_start10].setDisplayName("");
+			methods[ApparatusClientBeanBeanInfo.METHOD_startAutoRefresh11] = new MethodDescriptor(
 					com.linkare.rec.impl.client.ApparatusClientBean.class.getMethod("startAutoRefresh",
 							new Class[] { Long.TYPE }));
-			methods[METHOD_startAutoRefresh11].setDisplayName("");
-			methods[METHOD_stop12] = new MethodDescriptor(com.linkare.rec.impl.client.ApparatusClientBean.class
-					.getMethod("stop", new Class[] {}));
-			methods[METHOD_stop12].setDisplayName("");
-			methods[METHOD_stopAutoRefresh13] = new MethodDescriptor(
+			methods[ApparatusClientBeanBeanInfo.METHOD_startAutoRefresh11].setDisplayName("");
+			methods[ApparatusClientBeanBeanInfo.METHOD_stop12] = new MethodDescriptor(
+					com.linkare.rec.impl.client.ApparatusClientBean.class.getMethod("stop", new Class[] {}));
+			methods[ApparatusClientBeanBeanInfo.METHOD_stop12].setDisplayName("");
+			methods[ApparatusClientBeanBeanInfo.METHOD_stopAutoRefresh13] = new MethodDescriptor(
 					com.linkare.rec.impl.client.ApparatusClientBean.class.getMethod("stopAutoRefresh", new Class[] {}));
-			methods[METHOD_stopAutoRefresh13].setDisplayName("");
-		} catch (Exception e) {
+			methods[ApparatusClientBeanBeanInfo.METHOD_stopAutoRefresh13].setDisplayName("");
+		} catch (final Exception e) {
 		}// GEN-HEADEREND:Methods
 
 		// Here you can add code for customizing the methods array.
@@ -172,8 +173,9 @@ public class ApparatusClientBeanBeanInfo extends SimpleBeanInfo {
 	 *         May return null if the information should be obtained by
 	 *         automatic analysis.
 	 */
+	@Override
 	public BeanDescriptor getBeanDescriptor() {
-		return getBdescriptor();
+		return ApparatusClientBeanBeanInfo.getBdescriptor();
 	}
 
 	/**
@@ -189,8 +191,9 @@ public class ApparatusClientBeanBeanInfo extends SimpleBeanInfo {
 	 *         "instanceof" to check if a given PropertyDescriptor is an
 	 *         IndexedPropertyDescriptor.
 	 */
+	@Override
 	public PropertyDescriptor[] getPropertyDescriptors() {
-		return getPdescriptor();
+		return ApparatusClientBeanBeanInfo.getPdescriptor();
 	}
 
 	/**
@@ -200,8 +203,9 @@ public class ApparatusClientBeanBeanInfo extends SimpleBeanInfo {
 	 *         fired by this bean. May return null if the information should be
 	 *         obtained by automatic analysis.
 	 */
+	@Override
 	public EventSetDescriptor[] getEventSetDescriptors() {
-		return getEdescriptor();
+		return ApparatusClientBeanBeanInfo.getEdescriptor();
 	}
 
 	/**
@@ -211,8 +215,9 @@ public class ApparatusClientBeanBeanInfo extends SimpleBeanInfo {
 	 *         by this bean. May return null if the information should be
 	 *         obtained by automatic analysis.
 	 */
+	@Override
 	public MethodDescriptor[] getMethodDescriptors() {
-		return getMdescriptor();
+		return ApparatusClientBeanBeanInfo.getMdescriptor();
 	}
 
 	/**
@@ -225,8 +230,9 @@ public class ApparatusClientBeanBeanInfo extends SimpleBeanInfo {
 	 *         <P>
 	 *         Returns -1 if there is no default property.
 	 */
+	@Override
 	public int getDefaultPropertyIndex() {
-		return defaultPropertyIndex;
+		return ApparatusClientBeanBeanInfo.defaultPropertyIndex;
 	}
 
 	/**
@@ -238,7 +244,8 @@ public class ApparatusClientBeanBeanInfo extends SimpleBeanInfo {
 	 *         <P>
 	 *         Returns -1 if there is no default event.
 	 */
+	@Override
 	public int getDefaultEventIndex() {
-		return defaultEventIndex;
+		return ApparatusClientBeanBeanInfo.defaultEventIndex;
 	}
 }

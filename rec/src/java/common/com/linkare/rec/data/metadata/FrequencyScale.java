@@ -1,6 +1,11 @@
 package com.linkare.rec.data.metadata;
 
 public final class FrequencyScale implements org.omg.CORBA.portable.IDLEntity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5317813822004515622L;
+
 	/** Holds value of property minimumFrequency. */
 	private com.linkare.rec.data.synch.Frequency minimumFrequency;
 
@@ -25,11 +30,11 @@ public final class FrequencyScale implements org.omg.CORBA.portable.IDLEntity {
 	// @param f_max f_max struct member
 	// @param step step struct member
 	//
-	public FrequencyScale(com.linkare.rec.data.synch.Frequency f_min, com.linkare.rec.data.synch.Frequency f_max,
-			com.linkare.rec.data.synch.Frequency step) {
-		this.setMinimumFrequency(f_min);
-		this.setMaximumFrequency(f_max);
-		this.setStepFrequency(step);
+	public FrequencyScale(final com.linkare.rec.data.synch.Frequency f_min,
+			final com.linkare.rec.data.synch.Frequency f_max, final com.linkare.rec.data.synch.Frequency step) {
+		setMinimumFrequency(f_min);
+		setMaximumFrequency(f_max);
+		setStepFrequency(step);
 	}
 
 	//
@@ -39,22 +44,22 @@ public final class FrequencyScale implements org.omg.CORBA.portable.IDLEntity {
 	// @param f_max f_max struct member
 	// @param step step struct member
 	//
-	public FrequencyScale(String frequency_scale_label, com.linkare.rec.data.synch.Frequency f_min,
-			com.linkare.rec.data.synch.Frequency f_max, com.linkare.rec.data.synch.Frequency step) {
-		this.setFrequencyScaleLabel(frequency_scale_label);
-		this.setMinimumFrequency(f_min);
-		this.setMaximumFrequency(f_max);
-		this.setStepFrequency(step);
+	public FrequencyScale(final String frequency_scale_label, final com.linkare.rec.data.synch.Frequency f_min,
+			final com.linkare.rec.data.synch.Frequency f_max, final com.linkare.rec.data.synch.Frequency step) {
+		setFrequencyScaleLabel(frequency_scale_label);
+		setMinimumFrequency(f_min);
+		setMaximumFrequency(f_max);
+		setStepFrequency(step);
 	}
 
 	//
 	// Copy Constructor
 	//
-	public FrequencyScale(FrequencyScale other) {
-		this.setFrequencyScaleLabel(new String(other.getFrequencyScaleLabel()));
-		this.setMinimumFrequency(new com.linkare.rec.data.synch.Frequency(other.getMinimumFrequency()));
-		this.setMaximumFrequency(new com.linkare.rec.data.synch.Frequency(other.getMaximumFrequency()));
-		this.setStepFrequency(new com.linkare.rec.data.synch.Frequency(other.getStepFrequency()));
+	public FrequencyScale(final FrequencyScale other) {
+		setFrequencyScaleLabel(new String(other.getFrequencyScaleLabel()));
+		setMinimumFrequency(new com.linkare.rec.data.synch.Frequency(other.getMinimumFrequency()));
+		setMaximumFrequency(new com.linkare.rec.data.synch.Frequency(other.getMaximumFrequency()));
+		setStepFrequency(new com.linkare.rec.data.synch.Frequency(other.getStepFrequency()));
 	}
 
 	/**
@@ -63,7 +68,7 @@ public final class FrequencyScale implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property minimumFrequency.
 	 */
 	public com.linkare.rec.data.synch.Frequency getMinimumFrequency() {
-		return this.minimumFrequency;
+		return minimumFrequency;
 	}
 
 	/**
@@ -71,7 +76,7 @@ public final class FrequencyScale implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param minimumFrequency New value of property minimumFrequency.
 	 */
-	public void setMinimumFrequency(com.linkare.rec.data.synch.Frequency minimumFrequency) {
+	public void setMinimumFrequency(final com.linkare.rec.data.synch.Frequency minimumFrequency) {
 		this.minimumFrequency = minimumFrequency;
 	}
 
@@ -81,7 +86,7 @@ public final class FrequencyScale implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property maximumFrequency.
 	 */
 	public com.linkare.rec.data.synch.Frequency getMaximumFrequency() {
-		return this.maximumFrequency;
+		return maximumFrequency;
 	}
 
 	/**
@@ -89,7 +94,7 @@ public final class FrequencyScale implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param maximumFrequency New value of property maximumFrequency.
 	 */
-	public void setMaximumFrequency(com.linkare.rec.data.synch.Frequency maximumFrequency) {
+	public void setMaximumFrequency(final com.linkare.rec.data.synch.Frequency maximumFrequency) {
 		this.maximumFrequency = maximumFrequency;
 	}
 
@@ -99,7 +104,7 @@ public final class FrequencyScale implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property stepFrequency.
 	 */
 	public com.linkare.rec.data.synch.Frequency getStepFrequency() {
-		return this.stepFrequency;
+		return stepFrequency;
 	}
 
 	/**
@@ -107,7 +112,7 @@ public final class FrequencyScale implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param stepFrequency New value of property stepFrequency.
 	 */
-	public void setStepFrequency(com.linkare.rec.data.synch.Frequency stepFrequency) {
+	public void setStepFrequency(final com.linkare.rec.data.synch.Frequency stepFrequency) {
 		this.stepFrequency = stepFrequency;
 	}
 
@@ -117,7 +122,7 @@ public final class FrequencyScale implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property frequency_scale_label.
 	 */
 	public String getFrequencyScaleLabel() {
-		return this.frequency_scale_label;
+		return frequency_scale_label;
 	}
 
 	/**
@@ -125,13 +130,15 @@ public final class FrequencyScale implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param frequency_scale_label New value of property frequency_scale_label.
 	 */
-	public void setFrequencyScaleLabel(String frequency_scale_label) {
+	public void setFrequencyScaleLabel(final String frequency_scale_label) {
 		this.frequency_scale_label = frequency_scale_label;
 	}
 
+	@Override
 	public String toString() {
-		if (frequency_scale_label != null)
+		if (frequency_scale_label != null) {
 			return frequency_scale_label;
+		}
 
 		return "[" + maximumFrequency + ":" + maximumFrequency + ",\u0394=" + stepFrequency + "]";
 	}

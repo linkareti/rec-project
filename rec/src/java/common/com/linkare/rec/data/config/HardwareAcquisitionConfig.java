@@ -3,29 +3,45 @@ package com.linkare.rec.data.config;
 import java.util.ResourceBundle;
 
 public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.IDLEntity {
-	
-	private static final ResourceBundle resourceBundle = ResourceBundle.getBundle("com/linkare/rec/data/resources/messages");
-	
-	private static final String APPARATUS = resourceBundle.getString("rec.bui.hardware.acquisition.config.apparatus");
-	
-	private static final String EXPERIENCE_START_TIME = resourceBundle.getString("rec.bui.hardware.acquisition.config.experience.start.time");
-	
-	private static final String FREQUENCY = resourceBundle.getString("rec.bui.hardware.acquisition.config.frequency");
-	
-	private static final String TOTAL_SAMPLES = resourceBundle.getString("rec.bui.hardware.acquisition.config.total.samples");
-	
-	private static final String TOTAL_SAMPLES_UNDETERMINED = resourceBundle.getString("rec.bui.hardware.acquisition.config.total.samples.undetermined");
-	
-	private static final String PARAMETERS = resourceBundle.getString("rec.bui.hardware.acquisition.config.parameters");
-	
-	private static final String CHANNELS_CONFIGURATION = resourceBundle.getString("rec.bui.hardware.acquisition.config.channels.onfiguration");
-	
-	private static final String CHANNEL = resourceBundle.getString("rec.bui.hardware.acquisition.config.channel");
-	
-	private static final String CONFIGURATION = resourceBundle.getString("rec.bui.hardware.acquisition.config.configuration");
 
-	private static final String CONFIGURATION_UNDEFINED = resourceBundle.getString("rec.bui.hardware.acquisition.config.configuration.undefined");
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8746936361307546270L;
+
+	private static final ResourceBundle resourceBundle = ResourceBundle
+			.getBundle("com/linkare/rec/data/resources/messages");
+
+	private static final String APPARATUS = HardwareAcquisitionConfig.resourceBundle
+			.getString("rec.bui.hardware.acquisition.config.apparatus");
+
+	private static final String EXPERIENCE_START_TIME = HardwareAcquisitionConfig.resourceBundle
+			.getString("rec.bui.hardware.acquisition.config.experience.start.time");
+
+	private static final String FREQUENCY = HardwareAcquisitionConfig.resourceBundle
+			.getString("rec.bui.hardware.acquisition.config.frequency");
+
+	private static final String TOTAL_SAMPLES = HardwareAcquisitionConfig.resourceBundle
+			.getString("rec.bui.hardware.acquisition.config.total.samples");
+
+	private static final String TOTAL_SAMPLES_UNDETERMINED = HardwareAcquisitionConfig.resourceBundle
+			.getString("rec.bui.hardware.acquisition.config.total.samples.undetermined");
+
+	private static final String PARAMETERS = HardwareAcquisitionConfig.resourceBundle
+			.getString("rec.bui.hardware.acquisition.config.parameters");
+
+	private static final String CHANNELS_CONFIGURATION = HardwareAcquisitionConfig.resourceBundle
+			.getString("rec.bui.hardware.acquisition.config.channels.onfiguration");
+
+	private static final String CHANNEL = HardwareAcquisitionConfig.resourceBundle
+			.getString("rec.bui.hardware.acquisition.config.channel");
+
+	private static final String CONFIGURATION = HardwareAcquisitionConfig.resourceBundle
+			.getString("rec.bui.hardware.acquisition.config.configuration");
+
+	private static final String CONFIGURATION_UNDEFINED = HardwareAcquisitionConfig.resourceBundle
+			.getString("rec.bui.hardware.acquisition.config.configuration.undefined");
+
 	/** Holds value of property timeStart. */
 	private com.linkare.rec.data.synch.DateTime timeStart;
 
@@ -62,25 +78,26 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	// member
 	// @param total_samples total_samples struct member
 	//
-	public HardwareAcquisitionConfig(String familiarName, String hardwareUniqueID,
-			com.linkare.rec.data.synch.DateTime time_start, com.linkare.rec.data.synch.Frequency selected_frequency,
-			com.linkare.rec.data.config.ChannelAcquisitionConfig[] channels_config,
-			com.linkare.rec.data.config.ParameterConfig[] selected_hardware_parameters, int total_samples) {
-		this.setFamiliarName(familiarName);
-		this.setHardwareUniqueID(hardwareUniqueID);
-		this.setTimeStart(time_start);
-		this.setSelectedFrequency(selected_frequency);
+	public HardwareAcquisitionConfig(final String familiarName, final String hardwareUniqueID,
+			final com.linkare.rec.data.synch.DateTime time_start,
+			final com.linkare.rec.data.synch.Frequency selected_frequency,
+			final com.linkare.rec.data.config.ChannelAcquisitionConfig[] channels_config,
+			final com.linkare.rec.data.config.ParameterConfig[] selected_hardware_parameters, final int total_samples) {
+		setFamiliarName(familiarName);
+		setHardwareUniqueID(hardwareUniqueID);
+		setTimeStart(time_start);
+		setSelectedFrequency(selected_frequency);
 		this.setSelectedHardwareParameters(selected_hardware_parameters);
 		this.setChannelsConfig(channels_config);
-		this.setTotalSamples(total_samples);
+		setTotalSamples(total_samples);
 	}
 
-	public HardwareAcquisitionConfig(HardwareAcquisitionConfig other) {
+	public HardwareAcquisitionConfig(final HardwareAcquisitionConfig other) {
 
-		this.setFamiliarName(new String(other.getFamiliarName()));
-		this.setHardwareUniqueID(new String(other.getHardwareUniqueID()));
-		this.setTimeStart(new com.linkare.rec.data.synch.DateTime(other.getTimeStart()));
-		this.setSelectedFrequency(new com.linkare.rec.data.synch.Frequency(other.getSelectedFrequency()));
+		setFamiliarName(new String(other.getFamiliarName()));
+		setHardwareUniqueID(new String(other.getHardwareUniqueID()));
+		setTimeStart(new com.linkare.rec.data.synch.DateTime(other.getTimeStart()));
+		setSelectedFrequency(new com.linkare.rec.data.synch.Frequency(other.getSelectedFrequency()));
 
 		ParameterConfig[] temp = null;
 		if (other.getSelectedHardwareParameters() != null) {
@@ -97,10 +114,10 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 		}
 		this.setChannelsConfig(temp2);
 		temp2 = null;
-		this.setTotalSamples(other.getTotalSamples());
+		setTotalSamples(other.getTotalSamples());
 	}
 
-	public HardwareAcquisitionConfig(com.linkare.rec.data.metadata.HardwareInfo info) {
+	public HardwareAcquisitionConfig(final com.linkare.rec.data.metadata.HardwareInfo info) {
 		setFamiliarName(info.getFamiliarName());
 		setHardwareUniqueID(info.getHardwareUniqueID());
 
@@ -110,20 +127,21 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 		if ((params_info = info.getHardwareParameters()) != null) {
 			params = new ParameterConfig[params_info.length];
 			for (int i = 0; i < params_info.length; i++) {
-				if (params_info[i] != null)
-					params[i] = new ParameterConfig(params_info[i].getParameterName(), params_info[i]
-							.getSelectedParameterValue());
+				if (params_info[i] != null) {
+					params[i] = new ParameterConfig(params_info[i].getParameterName(),
+							params_info[i].getSelectedParameterValue());
+				}
 			}
 			this.setSelectedHardwareParameters(params);
 		}
 
-		this.setSelectedFrequency(info.getSelectedFrequency());
+		setSelectedFrequency(info.getSelectedFrequency());
 
 		com.linkare.rec.data.metadata.ChannelInfo[] ch_infos = null;
 		if ((ch_infos = info.getChannelsInfo()) != null)
 
 		{
-			ChannelAcquisitionConfig[] ch_acq_configs = new ChannelAcquisitionConfig[ch_infos.length];
+			final ChannelAcquisitionConfig[] ch_acq_configs = new ChannelAcquisitionConfig[ch_infos.length];
 
 			for (int i = 0; i < ch_acq_configs.length; i++) {
 				ch_acq_configs[i] = new ChannelAcquisitionConfig(ch_infos[i]);
@@ -140,7 +158,7 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	 * @return Value of property timeStart.
 	 */
 	public com.linkare.rec.data.synch.DateTime getTimeStart() {
-		return this.timeStart;
+		return timeStart;
 	}
 
 	/**
@@ -148,7 +166,7 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	 * 
 	 * @param timeStart New value of property timeStart.
 	 */
-	public void setTimeStart(com.linkare.rec.data.synch.DateTime timeStart) {
+	public void setTimeStart(final com.linkare.rec.data.synch.DateTime timeStart) {
 		this.timeStart = timeStart;
 	}
 
@@ -158,7 +176,7 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	 * @return Value of property selectedFrequency.
 	 */
 	public com.linkare.rec.data.synch.Frequency getSelectedFrequency() {
-		return this.selectedFrequency;
+		return selectedFrequency;
 	}
 
 	/**
@@ -166,7 +184,7 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	 * 
 	 * @param selectedFrequency New value of property selectedFrequency.
 	 */
-	public void setSelectedFrequency(com.linkare.rec.data.synch.Frequency selectedFrequency) {
+	public void setSelectedFrequency(final com.linkare.rec.data.synch.Frequency selectedFrequency) {
 		this.selectedFrequency = selectedFrequency;
 	}
 
@@ -176,9 +194,10 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	 * @param index Index of the property.
 	 * @return Value of the property at <CODE>index</CODE>.
 	 */
-	public com.linkare.rec.data.config.ParameterConfig getSelectedHardwareParameters(int index) {
-		if (this.selectedHardwareParameters != null && index < this.selectedHardwareParameters.length)
-			return this.selectedHardwareParameters[index];
+	public com.linkare.rec.data.config.ParameterConfig getSelectedHardwareParameters(final int index) {
+		if (selectedHardwareParameters != null && index < selectedHardwareParameters.length) {
+			return selectedHardwareParameters[index];
+		}
 
 		throw new RuntimeException("No ParameterConfig at that index...");
 	}
@@ -189,23 +208,26 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	 * @return Value of property selectedChannelParameters.
 	 */
 	public com.linkare.rec.data.config.ParameterConfig[] getSelectedHardwareParameters() {
-		return this.selectedHardwareParameters;
+		return selectedHardwareParameters;
 	}
 
-	public com.linkare.rec.data.config.ParameterConfig getSelectedHardwareParameter(String parameter_name) {
-		if (this.selectedHardwareParameters != null && parameter_name != null) {
-			for (int i = 0; i < selectedHardwareParameters.length; i++)
-				if (parameter_name.equals(selectedHardwareParameters[i].getParameterName()))
-					return selectedHardwareParameters[i];
+	public com.linkare.rec.data.config.ParameterConfig getSelectedHardwareParameter(final String parameter_name) {
+		if (selectedHardwareParameters != null && parameter_name != null) {
+			for (final ParameterConfig selectedHardwareParameter : selectedHardwareParameters) {
+				if (parameter_name.equals(selectedHardwareParameter.getParameterName())) {
+					return selectedHardwareParameter;
+				}
+			}
 		}
 		return null;
 
 	}
 
-	public String getSelectedHardwareParameterValue(String parameter_name) {
+	public String getSelectedHardwareParameterValue(final String parameter_name) {
 		ParameterConfig param = null;
-		if ((param = getSelectedHardwareParameter(parameter_name)) != null)
+		if ((param = getSelectedHardwareParameter(parameter_name)) != null) {
 			return param.getParameterValue();
+		}
 
 		return null;
 	}
@@ -217,14 +239,15 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	 * @param selectedHardwareParameters New value of the property at
 	 *            <CODE>index</CODE>.
 	 */
-	public void setSelectedHardwareParameters(int index,
-			com.linkare.rec.data.config.ParameterConfig selectedHardwareParameters) {
-		if (this.selectedHardwareParameters != null && index < this.selectedHardwareParameters.length)
+	public void setSelectedHardwareParameters(final int index,
+			final com.linkare.rec.data.config.ParameterConfig selectedHardwareParameters) {
+		if (this.selectedHardwareParameters != null && index < this.selectedHardwareParameters.length) {
 			this.selectedHardwareParameters[index] = selectedHardwareParameters;
-		else {
+		} else {
 			ParameterConfig[] temp = new ParameterConfig[index + 1];
-			if (this.selectedHardwareParameters != null)
+			if (this.selectedHardwareParameters != null) {
 				System.arraycopy(this.selectedHardwareParameters, 0, temp, 0, this.selectedHardwareParameters.length);
+			}
 
 			temp[index] = selectedHardwareParameters;
 			this.selectedHardwareParameters = temp;
@@ -232,11 +255,12 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 		}
 	}
 
-	public void addSelectedHardwareParameter(com.linkare.rec.data.config.ParameterConfig selectedHardwareParameter) {
-		if (this.selectedHardwareParameters == null)
+	public void addSelectedHardwareParameter(final com.linkare.rec.data.config.ParameterConfig selectedHardwareParameter) {
+		if (selectedHardwareParameters == null) {
 			setSelectedHardwareParameters(0, selectedHardwareParameter);
-		else
+		} else {
 			setSelectedHardwareParameters(selectedHardwareParameters.length, selectedHardwareParameter);
+		}
 	}
 
 	/**
@@ -245,7 +269,8 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	 * @param selectedChannelParameters New value of property
 	 *            selectedChannelParameters.
 	 */
-	public void setSelectedHardwareParameters(com.linkare.rec.data.config.ParameterConfig[] selectedHardwareParameters) {
+	public void setSelectedHardwareParameters(
+			final com.linkare.rec.data.config.ParameterConfig[] selectedHardwareParameters) {
 		this.selectedHardwareParameters = selectedHardwareParameters;
 	}
 
@@ -255,7 +280,7 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	 * @return Value of property totalSamples.
 	 */
 	public int getTotalSamples() {
-		return this.totalSamples;
+		return totalSamples;
 	}
 
 	/**
@@ -263,7 +288,7 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	 * 
 	 * @param totalSamples New value of property totalSamples.
 	 */
-	public void setTotalSamples(int totalSamples) {
+	public void setTotalSamples(final int totalSamples) {
 		this.totalSamples = totalSamples;
 	}
 
@@ -273,9 +298,10 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	 * @param index Index of the property.
 	 * @return Value of the property at <CODE>index</CODE>.
 	 */
-	public com.linkare.rec.data.config.ChannelAcquisitionConfig getChannelsConfig(int index) {
-		if (this.channelsConfig != null && index < this.channelsConfig.length)
-			return this.channelsConfig[index];
+	public com.linkare.rec.data.config.ChannelAcquisitionConfig getChannelsConfig(final int index) {
+		if (channelsConfig != null && index < channelsConfig.length) {
+			return channelsConfig[index];
+		}
 
 		throw new RuntimeException("No ChannelAcquisitionConfig at that index...");
 	}
@@ -286,15 +312,16 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	 * @param name Name of the channel.
 	 * @return Value of the property at <CODE>index</CODE>.
 	 */
-	public com.linkare.rec.data.config.ChannelAcquisitionConfig getChannelsConfig(String channelName) {
-		if (channelName == null)
+	public com.linkare.rec.data.config.ChannelAcquisitionConfig getChannelsConfig(final String channelName) {
+		if (channelName == null) {
 			return null;
+		}
 
 		if (channelsConfig != null) {
-			for (int i = 0; i < channelsConfig.length; i++) {
-				if (channelsConfig[i] != null && channelsConfig[i].getChannelName() != null
-						&& channelsConfig[i].getChannelName().equals(channelName))
-					return channelsConfig[i];
+			for (final ChannelAcquisitionConfig element : channelsConfig) {
+				if (element != null && element.getChannelName() != null && element.getChannelName().equals(channelName)) {
+					return element;
+				}
 			}
 		}
 
@@ -308,7 +335,7 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	 * @return Value of property channelsConfig.
 	 */
 	public com.linkare.rec.data.config.ChannelAcquisitionConfig[] getChannelsConfig() {
-		return this.channelsConfig;
+		return channelsConfig;
 	}
 
 	/**
@@ -317,13 +344,15 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	 * @param index Index of the property.
 	 * @param channelsConfig New value of the property at <CODE>index</CODE>.
 	 */
-	public void setChannelsConfig(int index, com.linkare.rec.data.config.ChannelAcquisitionConfig channelsConfig) {
-		if (this.channelsConfig != null && index < this.channelsConfig.length)
+	public void setChannelsConfig(final int index,
+			final com.linkare.rec.data.config.ChannelAcquisitionConfig channelsConfig) {
+		if (this.channelsConfig != null && index < this.channelsConfig.length) {
 			this.channelsConfig[index] = channelsConfig;
-		else {
+		} else {
 			ChannelAcquisitionConfig[] temp = new ChannelAcquisitionConfig[index + 1];
-			if (this.channelsConfig != null)
+			if (this.channelsConfig != null) {
 				System.arraycopy(this.channelsConfig, 0, temp, 0, this.channelsConfig.length);
+			}
 
 			temp[index] = channelsConfig;
 			this.channelsConfig = temp;
@@ -332,11 +361,12 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 
 	}
 
-	public void addChannelConfig(com.linkare.rec.data.config.ChannelAcquisitionConfig channelConfig) {
-		if (channelsConfig == null)
+	public void addChannelConfig(final com.linkare.rec.data.config.ChannelAcquisitionConfig channelConfig) {
+		if (channelsConfig == null) {
 			setChannelsConfig(0, channelConfig);
-		else
+		} else {
 			setChannelsConfig(channelsConfig.length, channelConfig);
+		}
 
 	}
 
@@ -345,44 +375,56 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	 * 
 	 * @param channelsConfig New value of property channelsConfig.
 	 */
-	public void setChannelsConfig(com.linkare.rec.data.config.ChannelAcquisitionConfig[] channelsConfig) {
+	public void setChannelsConfig(final com.linkare.rec.data.config.ChannelAcquisitionConfig[] channelsConfig) {
 		this.channelsConfig = channelsConfig;
 	}
 
+	@Override
 	public String toString() {
-		StringBuffer strBufOut = new StringBuffer();
-		String linesep = System.getProperty("line.separator");
+		final StringBuffer strBufOut = new StringBuffer();
+		final String linesep = System.getProperty("line.separator");
 
-		if (familiarName != null)
-			strBufOut.append(APPARATUS).append(familiarName).append(linesep);
+		if (familiarName != null) {
+			strBufOut.append(HardwareAcquisitionConfig.APPARATUS).append(familiarName).append(linesep);
+		}
 
-		if (timeStart != null)
-			strBufOut.append(EXPERIENCE_START_TIME).append(timeStart.toSimpleString()).append(linesep);
+		if (timeStart != null) {
+			strBufOut.append(HardwareAcquisitionConfig.EXPERIENCE_START_TIME).append(timeStart.toSimpleString())
+					.append(linesep);
+		}
 
-		if (selectedFrequency != null)
-			strBufOut.append(FREQUENCY).append(selectedFrequency).append(linesep);
+		if (selectedFrequency != null) {
+			strBufOut.append(HardwareAcquisitionConfig.FREQUENCY).append(selectedFrequency).append(linesep);
+		}
 
-		if (totalSamples != com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value)
-			strBufOut.append(TOTAL_SAMPLES).append(totalSamples).append(linesep);
-		else if (totalSamples == com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value)
-			strBufOut.append(TOTAL_SAMPLES_UNDETERMINED).append(linesep);
+		if (totalSamples != com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value) {
+			strBufOut.append(HardwareAcquisitionConfig.TOTAL_SAMPLES).append(totalSamples).append(linesep);
+		} else if (totalSamples == com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value) {
+			strBufOut.append(HardwareAcquisitionConfig.TOTAL_SAMPLES_UNDETERMINED).append(linesep);
+		}
 
 		if (selectedHardwareParameters != null) {
-			strBufOut.append(PARAMETERS).append(linesep);
-			for (int i = 0; i < selectedHardwareParameters.length; i++) {
-				if (selectedHardwareParameters[i] != null)
-					strBufOut.append("\t").append(selectedHardwareParameters[i]).append(linesep);
+			strBufOut.append(HardwareAcquisitionConfig.PARAMETERS).append(linesep);
+			for (final ParameterConfig selectedHardwareParameter : selectedHardwareParameters) {
+				if (selectedHardwareParameter != null) {
+					strBufOut.append("\t").append(selectedHardwareParameter).append(linesep);
+				}
 			}
 		}
 
 		if (channelsConfig != null) {
-			strBufOut.append(CHANNELS_CONFIGURATION).append(linesep);
+			strBufOut.append(HardwareAcquisitionConfig.CHANNELS_CONFIGURATION).append(linesep);
 			for (int i = 0; i < channelsConfig.length; i++) {
-				if (channelsConfig[i] != null)
-					strBufOut.append("\t" + CHANNEL + i + CONFIGURATION).append(linesep).append(channelsConfig[i])
-							.append(linesep);
-				else
-					strBufOut.append("\t" + CHANNEL + i + CONFIGURATION_UNDEFINED).append(linesep);
+				if (channelsConfig[i] != null) {
+					strBufOut
+							.append("\t" + HardwareAcquisitionConfig.CHANNEL + i
+									+ HardwareAcquisitionConfig.CONFIGURATION).append(linesep)
+							.append(channelsConfig[i]).append(linesep);
+				} else {
+					strBufOut.append(
+							"\t" + HardwareAcquisitionConfig.CHANNEL + i
+									+ HardwareAcquisitionConfig.CONFIGURATION_UNDEFINED).append(linesep);
+				}
 			}
 		}
 
@@ -395,7 +437,7 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	 * @return Value of property familiarName.
 	 */
 	public String getFamiliarName() {
-		return this.familiarName;
+		return familiarName;
 	}
 
 	/**
@@ -403,7 +445,7 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	 * 
 	 * @param familiarName New value of property familiarName.
 	 */
-	public void setFamiliarName(String familiarName) {
+	public void setFamiliarName(final String familiarName) {
 		this.familiarName = familiarName;
 	}
 
@@ -413,7 +455,7 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	 * @return Value of property hardwareUniqueID.
 	 */
 	public String getHardwareUniqueID() {
-		return this.hardwareUniqueID;
+		return hardwareUniqueID;
 	}
 
 	/**
@@ -421,7 +463,7 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	 * 
 	 * @param hardwareUniqueID New value of property hardwareUniqueID.
 	 */
-	public void setHardwareUniqueID(String hardwareUniqueID) {
+	public void setHardwareUniqueID(final String hardwareUniqueID) {
 		this.hardwareUniqueID = hardwareUniqueID;
 	}
 

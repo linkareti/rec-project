@@ -1,6 +1,10 @@
 package com.linkare.rec.data.acquisition;
 
 public final class ByteArrayValue implements org.omg.CORBA.portable.IDLEntity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1206377612112792782L;
 	private byte data[] = null;
 	private String mimeType = null;
 
@@ -8,79 +12,89 @@ public final class ByteArrayValue implements org.omg.CORBA.portable.IDLEntity {
 	public ByteArrayValue() {
 	}
 
-	public ByteArrayValue(byte[] _data, String _mime_type) {
+	public ByteArrayValue(final byte[] _data, final String _mime_type) {
 		data = _data;
 		mimeType = _mime_type;
 	}
 
 	/** Copy Constructor */
-	public ByteArrayValue(ByteArrayValue value) {
-		this.data = new byte[value.getData().length];
-		System.arraycopy(value.getData(), 0, this.data, 0, this.data.length);
-		this.mimeType = new String(value.getMimeType());
+	public ByteArrayValue(final ByteArrayValue value) {
+		data = new byte[value.getData().length];
+		System.arraycopy(value.getData(), 0, data, 0, data.length);
+		mimeType = new String(value.getMimeType());
 	}
 
-	public void setData(byte[] _data) {
-		this.data = _data;
+	public void setData(final byte[] _data) {
+		data = _data;
 	}
 
-	public void setData(int index, byte byteValue) {
-		if (this.data != null && index < this.data.length)
-			this.data[index] = byteValue;
-		else {
+	public void setData(final int index, final byte byteValue) {
+		if (data != null && index < data.length) {
+			data[index] = byteValue;
+		} else {
 			byte[] temp = new byte[index + 1];
-			if (this.data != null)
-				System.arraycopy(this.data, 0, temp, 0, this.data.length);
+			if (data != null) {
+				System.arraycopy(data, 0, temp, 0, data.length);
+			}
 
 			temp[index] = byteValue;
-			this.data = temp;
+			data = temp;
 			temp = null;
 		}
 	}
 
 	public byte[] getData() {
-		return this.data;
+		return data;
 	}
 
-	public byte getData(int index) {
-		return this.data[index];
+	public byte getData(final int index) {
+		return data[index];
 	}
 
-	public void setMimeType(String _mime_type) {
-		this.mimeType = _mime_type;
+	public void setMimeType(final String _mime_type) {
+		mimeType = _mime_type;
 	}
 
 	public String getMimeType() {
-		return this.mimeType;
+		return mimeType;
 	}
 
 	public int getSize() {
-		return this.data.length;
+		return data.length;
 	}
 
-	public boolean equals(Object obj) {
-		if (obj == null || !(obj instanceof ByteArrayValue))
+	@Override
+	public boolean equals(final Object obj) {
+		if (obj == null || !(obj instanceof ByteArrayValue)) {
 			return false;
+		}
 
-		ByteArrayValue other = (ByteArrayValue) obj;
+		final ByteArrayValue other = (ByteArrayValue) obj;
 
-		if (!other.getMimeType().equals(getMimeType()))
+		if (!other.getMimeType().equals(getMimeType())) {
 			return false;
+		}
 
-		if (other.getData() == null && getData() == null)
+		if (other.getData() == null && getData() == null) {
 			return true;
-		if (other.getData() == null)
+		}
+		if (other.getData() == null) {
 			return false;
-		if (getData() == null)
+		}
+		if (getData() == null) {
 			return false;
+		}
 
-		if (other.getData().length != getData().length)
+		if (other.getData().length != getData().length) {
 			return false;
+		}
 
 		boolean retVal = true;
-		for (int i = 0; i < getData().length && retVal; i++)
-			if (getData()[i] != other.getData()[i])
+		for (int i = 0; i < getData().length && retVal; i++) {
+			if (getData()[i] != other.getData()[i]) {
 				retVal = false;
+			}
+		}
 
 		return retVal;
 

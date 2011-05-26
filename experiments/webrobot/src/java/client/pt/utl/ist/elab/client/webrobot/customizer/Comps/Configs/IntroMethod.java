@@ -12,8 +12,14 @@ package pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs;
  */
 public class IntroMethod extends javax.swing.JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2310916843138604597L;
+
 	/** Creates new form IntroMethod */
-	public IntroMethod(java.awt.Frame parent, boolean modal, boolean b1, boolean b2, boolean b3, boolean b4) {
+	public IntroMethod(final java.awt.Frame parent, final boolean modal, final boolean b1, final boolean b2,
+			final boolean b3, final boolean b4) {
 		super(parent, modal);
 		initComponents();
 		if (!b1) {
@@ -49,19 +55,22 @@ public class IntroMethod extends javax.swing.JDialog {
 		setTitle("M\u00e9todo de Introdu\u00e7\u00e3o");
 		setResizable(false);
 		addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				formKeyReleased(evt);
 			}
 		});
 
 		addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				formMousePressed(evt);
 			}
 		});
 
 		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent evt) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent evt) {
 				closeDialog(evt);
 			}
 		});
@@ -71,7 +80,8 @@ public class IntroMethod extends javax.swing.JDialog {
 		jButtonEsquerda.setMaximumSize(new java.awt.Dimension(116, 50));
 		jButtonEsquerda.setPreferredSize(new java.awt.Dimension(116, 50));
 		jButtonEsquerda.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonEsquerdaMousePressed(evt);
 			}
 		});
@@ -84,7 +94,8 @@ public class IntroMethod extends javax.swing.JDialog {
 		jButtonDireita.setMinimumSize(new java.awt.Dimension(116, 50));
 		jButtonDireita.setPreferredSize(new java.awt.Dimension(116, 50));
 		jButtonDireita.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonDireitaMousePressed(evt);
 			}
 		});
@@ -96,7 +107,8 @@ public class IntroMethod extends javax.swing.JDialog {
 		jButtonPasteEsquerda.setMaximumSize(new java.awt.Dimension(116, 50));
 		jButtonPasteEsquerda.setPreferredSize(new java.awt.Dimension(116, 50));
 		jButtonPasteEsquerda.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonPasteEsquerdaMousePressed(evt);
 			}
 		});
@@ -111,7 +123,8 @@ public class IntroMethod extends javax.swing.JDialog {
 		jButtonPasteDireita.setMaximumSize(new java.awt.Dimension(116, 50));
 		jButtonPasteDireita.setPreferredSize(new java.awt.Dimension(116, 50));
 		jButtonPasteDireita.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonPasteDireitaMousePressed(evt);
 			}
 		});
@@ -124,13 +137,15 @@ public class IntroMethod extends javax.swing.JDialog {
 		jButtonCancel.setForeground(new java.awt.Color(51, 0, 102));
 		jButtonCancel.setText("Cancel");
 		jButtonCancel.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jButtonCancelKeyReleased(evt);
 			}
 		});
 
 		jButtonCancel.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonCancelMousePressed(evt);
 			}
 		});
@@ -144,15 +159,15 @@ public class IntroMethod extends javax.swing.JDialog {
 		pack();
 	}// GEN-END:initComponents
 
-	private void formKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_formKeyReleased
+	private void formKeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_formKeyReleased
 		jButtonCancelKeyReleased(evt);
 	}// GEN-LAST:event_formKeyReleased
 
-	private void formMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMousePressed
+	private void formMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMousePressed
 		this.requestFocus();
 	}// GEN-LAST:event_formMousePressed
 
-	private void jButtonCancelKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jButtonCancelKeyReleased
+	private void jButtonCancelKeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jButtonCancelKeyReleased
 		if (evt.getKeyCode() == 10) {
 			jButtonEsquerdaMousePressed(null);
 		} else if (evt.getKeyCode() == 27) {
@@ -160,33 +175,33 @@ public class IntroMethod extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_jButtonCancelKeyReleased
 
-	private void jButtonCancelMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonCancelMousePressed
+	private void jButtonCancelMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonCancelMousePressed
 		setSelOption(-1);
 		closeDialog(null);
 	}// GEN-LAST:event_jButtonCancelMousePressed
 
-	private void jButtonPasteDireitaMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonPasteDireitaMousePressed
+	private void jButtonPasteDireitaMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonPasteDireitaMousePressed
 		if (jButtonPasteDireita.isEnabled()) {
 			setSelOption(4);
 			closeDialog(null);
 		}
 	}// GEN-LAST:event_jButtonPasteDireitaMousePressed
 
-	private void jButtonPasteEsquerdaMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonPasteEsquerdaMousePressed
+	private void jButtonPasteEsquerdaMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonPasteEsquerdaMousePressed
 		if (jButtonPasteEsquerda.isEnabled()) {
 			setSelOption(3);
 			closeDialog(null);
 		}
 	}// GEN-LAST:event_jButtonPasteEsquerdaMousePressed
 
-	private void jButtonDireitaMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonDireitaMousePressed
+	private void jButtonDireitaMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonDireitaMousePressed
 		if (jButtonDireita.isEnabled()) {
 			setSelOption(2);
 			closeDialog(null);
 		}
 	}// GEN-LAST:event_jButtonDireitaMousePressed
 
-	private void jButtonEsquerdaMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonEsquerdaMousePressed
+	private void jButtonEsquerdaMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonEsquerdaMousePressed
 		if (jButtonEsquerda.isEnabled()) {
 			setSelOption(1);
 			closeDialog(null);
@@ -194,7 +209,7 @@ public class IntroMethod extends javax.swing.JDialog {
 	}// GEN-LAST:event_jButtonEsquerdaMousePressed
 
 	/** Closes the dialog */
-	private void closeDialog(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
+	private void closeDialog(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
 		if (evt != null) {
 			setSelOption(-1);
 		}
@@ -215,7 +230,7 @@ public class IntroMethod extends javax.swing.JDialog {
 	 * @return Value of property setSelOption.
 	 */
 	public int getSelOption() {
-		return this.setSelOption;
+		return setSelOption;
 	}
 
 	/**
@@ -223,7 +238,7 @@ public class IntroMethod extends javax.swing.JDialog {
 	 * 
 	 * @param setSelOption New value of property setSelOption.
 	 */
-	public void setSelOption(int setSelOption) {
+	public void setSelOption(final int setSelOption) {
 		this.setSelOption = setSelOption;
 	}
 

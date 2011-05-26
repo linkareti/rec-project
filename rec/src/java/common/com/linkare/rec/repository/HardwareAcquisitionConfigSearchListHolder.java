@@ -11,18 +11,21 @@ public final class HardwareAcquisitionConfigSearchListHolder implements Streamab
 	public HardwareAcquisitionConfigSearchListHolder() {
 	}
 
-	public HardwareAcquisitionConfigSearchListHolder(HardwareAcquisitionConfigSearch[] initialValue) {
+	public HardwareAcquisitionConfigSearchListHolder(final HardwareAcquisitionConfigSearch[] initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(InputStream i) {
+	@Override
+	public void _read(final InputStream i) {
 		value = HardwareAcquisitionConfigSearchListHelper.read(i);
 	}
 
-	public void _write(OutputStream o) {
+	@Override
+	public void _write(final OutputStream o) {
 		HardwareAcquisitionConfigSearchListHelper.write(o, value);
 	}
 
+	@Override
 	public TypeCode _type() {
 		return HardwareAcquisitionConfigSearchListHelper.type();
 	}

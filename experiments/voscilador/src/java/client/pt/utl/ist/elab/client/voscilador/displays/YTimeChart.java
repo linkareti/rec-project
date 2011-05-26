@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.voscilador.displays;
  */
 public class YTimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5065873656226904594L;
+
 	/** Creates a new instance of AnguloIntensidadeChart */
 	public YTimeChart() {
 		super();

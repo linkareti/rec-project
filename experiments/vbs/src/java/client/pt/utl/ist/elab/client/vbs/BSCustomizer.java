@@ -38,28 +38,31 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class BSCustomizer extends JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
 
-	private VariablePanel f1_Iini, f1_Ifin, f2_Iini, f2_Ifin, distFios, numSamples, xPto, yPto, tbs;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6498867012261009804L;
 
-	private JButton buttonOK, buttonCancel, buttonReset;
+	private final VariablePanel f1_Iini, f1_Ifin, f2_Iini, f2_Ifin, distFios, numSamples, xPto, yPto, tbs;
 
-	private JPanel panelBotoes, panelTopo, panelBaixo;
-	private DrawingPanel drawingPanel;
-	private DrawableShape f1, f2, pto;
+	private final JButton buttonOK, buttonCancel, buttonReset;
+
+	private final JPanel panelBotoes, panelTopo, panelBaixo;
+	private final DrawingPanel drawingPanel;
+	private final DrawableShape f1, f2, pto;
 
 	public BSCustomizer() {
 		f1_Iini = new VariablePanel(-1, 1, 0.6, 3, 2, ReCResourceBundle.findStringOrDefault(
-				"bs$rec.exp.customizer.title.i1ini", "I Inicial Fio 1 (A)"), ReCResourceBundle
-				.findStringOrDefault("bs$rec.exp.customizer.tip.i1ini",
-						"Intensidade de corrente inicial do fio 1"));
+				"bs$rec.exp.customizer.title.i1ini", "I Inicial Fio 1 (A)"), ReCResourceBundle.findStringOrDefault(
+				"bs$rec.exp.customizer.tip.i1ini", "Intensidade de corrente inicial do fio 1"));
 
 		f1_Ifin = new VariablePanel(-1, 1, -0.2, 3, 2, ReCResourceBundle.findStringOrDefault(
 				"bs$rec.exp.customizer.title.i1fin", "I Final Fio 1 (A)"), ReCResourceBundle.findStringOrDefault(
 				"bs$rec.exp.customizer.tip.i1fin", "Intensidade de corrente final do fio 1"));
 
 		f2_Iini = new VariablePanel(-1, 1, -0.2, 3, 2, ReCResourceBundle.findStringOrDefault(
-				"bs$rec.exp.customizer.title.i2ini", "I Inicial Fio 2 (A)"), ReCResourceBundle
-				.findStringOrDefault("bs$rec.exp.customizer.tip.i2ini",
-						"Intensidade de corrente inicial do fio 2"));
+				"bs$rec.exp.customizer.title.i2ini", "I Inicial Fio 2 (A)"), ReCResourceBundle.findStringOrDefault(
+				"bs$rec.exp.customizer.tip.i2ini", "Intensidade de corrente inicial do fio 2"));
 
 		f2_Ifin = new VariablePanel(-1, 1, 0.6, 3, 2, ReCResourceBundle.findStringOrDefault(
 				"bs$rec.exp.customizer.title.i2fin", "I Final Fio 2 (A)"), ReCResourceBundle.findStringOrDefault(
@@ -70,20 +73,22 @@ public class BSCustomizer extends JPanel implements com.linkare.rec.impl.client.
 				"bs$rec.exp.customizer.tip.dist", "Distancia entre os dois fios"));
 
 		distFios.addExecutor(new VariableExecutor() {
+			@Override
 			public void execute() {
 				actualizar();
 			}
 		});
 
 		numSamples = new VariablePanel(10, 500, 250, 0, 2, ReCResourceBundle.findStringOrDefault(
-				"bs$rec.exp.customizer.title.samples", "Numero de Amostras"), ReCResourceBundle
-				.findStringOrDefault("bs$rec.exp.customizer.tip.samples", "Numero de amostras"));
+				"bs$rec.exp.customizer.title.samples", "Numero de Amostras"), ReCResourceBundle.findStringOrDefault(
+				"bs$rec.exp.customizer.tip.samples", "Numero de amostras"));
 
 		xPto = new VariablePanel(-0.15, 0.15, 0, 3, 2, ReCResourceBundle.findStringOrDefault(
 				"bs$rec.exp.customizer.title.xpto", "X Ponto (m)"), ReCResourceBundle.findStringOrDefault(
 				"bs$rec.exp.customizer.tip.xpto", "Coordenada X do ponto a observar"));
 
 		xPto.addExecutor(new VariableExecutor() {
+			@Override
 			public void execute() {
 				actualizar();
 			}
@@ -94,6 +99,7 @@ public class BSCustomizer extends JPanel implements com.linkare.rec.impl.client.
 				"bs$rec.exp.customizer.tip.ypto", "Coordenada Y do ponto a observar"));
 
 		yPto.addExecutor(new VariableExecutor() {
+			@Override
 			public void execute() {
 				actualizar();
 			}
@@ -105,7 +111,8 @@ public class BSCustomizer extends JPanel implements com.linkare.rec.impl.client.
 
 		buttonOK = new JButton(ReCResourceBundle.findStringOrDefault("bs$rec.exp.customizer.title.ok", "Correr"));
 		buttonOK.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
+			@Override
+			public void actionPerformed(final ActionEvent evt) {
 				// OK o utilizador quer enviar as informacoes, vamos colocar os
 				// valores nos canais!!!
 				acqConfig.setTotalSamples((int) numSamples.getCurrentValue());
@@ -127,16 +134,17 @@ public class BSCustomizer extends JPanel implements com.linkare.rec.impl.client.
 		buttonCancel = new JButton(ReCResourceBundle.findStringOrDefault("bs$rec.exp.customizer.title.cancel",
 				"Cancelar"));
 		buttonCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
+			@Override
+			public void actionPerformed(final ActionEvent evt) {
 				// Sempre igual
 				fireICustomizerListenerCanceled();
 			}
 		});
 
-		buttonReset = new JButton(ReCResourceBundle.findStringOrDefault("bs$rec.exp.customizer.title.dfc",
-				"Restaurar"));
+		buttonReset = new JButton(ReCResourceBundle.findStringOrDefault("bs$rec.exp.customizer.title.dfc", "Restaurar"));
 		buttonReset.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
+			@Override
+			public void actionPerformed(final ActionEvent evt) {
 				f1_Iini.reset();
 				f1_Ifin.reset();
 				f2_Iini.reset();
@@ -189,7 +197,7 @@ public class BSCustomizer extends JPanel implements com.linkare.rec.impl.client.
 
 		panelTopo.add(drawingPanel);
 
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(panelTopo);
 		this.add(panelBaixo);
 	}
@@ -208,8 +216,8 @@ public class BSCustomizer extends JPanel implements com.linkare.rec.impl.client.
 		drawingPanel.repaint();
 	}
 
-	public static void main(String args[]) {
-		JFrame dummy = new JFrame();
+	public static void main(final String args[]) {
+		final JFrame dummy = new JFrame();
 		dummy.getContentPane().add(new BSCustomizer());
 		dummy.pack();
 		dummy.show();
@@ -225,7 +233,8 @@ public class BSCustomizer extends JPanel implements com.linkare.rec.impl.client.
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -237,7 +246,8 @@ public class BSCustomizer extends JPanel implements com.linkare.rec.impl.client.
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -247,9 +257,10 @@ public class BSCustomizer extends JPanel implements com.linkare.rec.impl.client.
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -263,9 +274,10 @@ public class BSCustomizer extends JPanel implements com.linkare.rec.impl.client.
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -277,12 +289,14 @@ public class BSCustomizer extends JPanel implements com.linkare.rec.impl.client.
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
 		return acqConfig;
 	}
 
 	// ESTE E' PARA ALTERAR
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		// Aqui sao fornecidos parametros do ultimo utilizador que fez a exp, e'
 		// bom manter!
 		this.acqConfig = acqConfig;
@@ -312,36 +326,42 @@ public class BSCustomizer extends JPanel implements com.linkare.rec.impl.client.
 
 			numSamples.setCurrentValue(acqConfig.getTotalSamples());
 
-			int freq = (int) acqConfig.getSelectedFrequency().getFrequency();
+			final int freq = (int) acqConfig.getSelectedFrequency().getFrequency();
 			tbs.setCurrentValue(freq);
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
+	@Override
 	public javax.swing.JComponent getCustomizerComponent() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
-		java.net.URL url = getClass().getResource("/pt/utl/ist/elab/client/vbs/resources/bs_iconified.png");
-		if (url != null)
+		final java.net.URL url = getClass().getResource("/pt/utl/ist/elab/client/vbs/resources/bs_iconified.png");
+		if (url != null) {
 			return new javax.swing.ImageIcon(url);
+		}
 
 		return null;
 	}
 
 	// ESTE E' PARA ALTERAR
+	@Override
 	public String getCustomizerTitle() {
 		return "Magnetic Field Experiment Configuration Utility";
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}

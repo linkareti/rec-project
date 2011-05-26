@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.voscilador.displays;
  */
 public class VelZTimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3428648717600615092L;
+
 	/** Creates a new instance of AnguloIntensidadeChart */
 	public VelZTimeChart() {
 		super();

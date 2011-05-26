@@ -12,54 +12,55 @@ import com.linkare.rec.data.synch.VTFrequencyHelper;
 abstract public class FrequencySearchHelper {
 	private static String _id = "IDL:com/linkare/rec/repository/FrequencySearch:1.0";
 
-	public static void insert(Any a, FrequencySearch that) {
-		OutputStream out = a.create_output_stream();
-		a.type(type());
-		write(out, that);
-		a.read_value(out.create_input_stream(), type());
+	public static void insert(final Any a, final FrequencySearch that) {
+		final OutputStream out = a.create_output_stream();
+		a.type(FrequencySearchHelper.type());
+		FrequencySearchHelper.write(out, that);
+		a.read_value(out.create_input_stream(), FrequencySearchHelper.type());
 	}
 
-	public static FrequencySearch extract(Any a) {
-		return read(a.create_input_stream());
+	public static FrequencySearch extract(final Any a) {
+		return FrequencySearchHelper.read(a.create_input_stream());
 	}
 
 	private static TypeCode __typeCode = null;
 	private static boolean __active = false;
 
 	public static synchronized TypeCode type() {
-		if (__typeCode == null) {
+		if (FrequencySearchHelper.__typeCode == null) {
 			synchronized (TypeCode.class) {
-				if (__typeCode == null) {
-					if (__active) {
-						return ORB.init().create_recursive_tc(_id);
+				if (FrequencySearchHelper.__typeCode == null) {
+					if (FrequencySearchHelper.__active) {
+						return ORB.init().create_recursive_tc(FrequencySearchHelper._id);
 					}
-					__active = true;
-					StructMember[] _members0 = new StructMember[2];
+					FrequencySearchHelper.__active = true;
+					final StructMember[] _members0 = new StructMember[2];
 					TypeCode _tcOf_members0 = null;
 					_tcOf_members0 = VTFrequencyHelper.type();
 					_members0[0] = new StructMember("minFrequency", _tcOf_members0, null);
 					_tcOf_members0 = VTFrequencyHelper.type();
 					_members0[1] = new StructMember("maxFrequency", _tcOf_members0, null);
-					__typeCode = ORB.init().create_struct_tc(FrequencySearchHelper.id(), "FrequencySearch", _members0);
-					__active = false;
+					FrequencySearchHelper.__typeCode = ORB.init().create_struct_tc(FrequencySearchHelper.id(),
+							"FrequencySearch", _members0);
+					FrequencySearchHelper.__active = false;
 				}
 			}
 		}
-		return __typeCode;
+		return FrequencySearchHelper.__typeCode;
 	}
 
 	public static String id() {
-		return _id;
+		return FrequencySearchHelper._id;
 	}
 
-	public static FrequencySearch read(InputStream istream) {
-		FrequencySearch value = new FrequencySearch();
+	public static FrequencySearch read(final InputStream istream) {
+		final FrequencySearch value = new FrequencySearch();
 		value.setMinFrequency(VTFrequencyHelper.read(istream));
 		value.setMaxFrequency(VTFrequencyHelper.read(istream));
 		return value;
 	}
 
-	public static void write(OutputStream ostream, FrequencySearch value) {
+	public static void write(final OutputStream ostream, final FrequencySearch value) {
 		VTFrequencyHelper.write(ostream, value.getMinFrequency());
 		VTFrequencyHelper.write(ostream, value.getMaxFrequency());
 	}

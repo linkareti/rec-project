@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.meteo.displays;
  */
 public class VelWindXYGraphDisplay extends MeteoTimeExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5418568452573056899L;
+
 	/** Creates a new instance of PVXYGraphDisplay */
 	public VelWindXYGraphDisplay() {
 		super();
@@ -19,6 +24,7 @@ public class VelWindXYGraphDisplay extends MeteoTimeExperimentGraph {
 		setChannelDisplayY(4);
 	}
 
+	@Override
 	public String getName() {
 		return "Velocidade do vento";
 	}

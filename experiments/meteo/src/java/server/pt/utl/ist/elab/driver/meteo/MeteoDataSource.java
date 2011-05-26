@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 import pt.utl.ist.cfn.math.MathUtils;
 import pt.utl.ist.cfn.serial.NewSerialDataEvent;
@@ -63,7 +64,7 @@ public class MeteoDataSource implements SerialDataListener {
 	private java.util.Timer timer = null;
 
 	/** Creates a new instance of MeteoDataSource */
-	public MeteoDataSource(Connection conn) {
+	public MeteoDataSource(final Connection conn) {
 		sc = new SerialComm();
 		sc.addSerialDataListener(this);
 		// sc.setDTR(false);
@@ -81,14 +82,16 @@ public class MeteoDataSource implements SerialDataListener {
 	}
 
 	private class HourTask extends java.util.TimerTask {
+		@Override
 		public void run() {
 			try {
-				java.util.GregorianCalendar c = new java.util.GregorianCalendar();
-				String datetime = "'" + c.get(c.YEAR) + "-" + (c.get(c.MONTH) + 1) + "-" + c.get(c.DAY_OF_MONTH) + " "
-						+ c.get(c.HOUR_OF_DAY) + ":" + c.get(c.MINUTE) + ":" + c.get(c.SECOND) + "'";
+				final java.util.GregorianCalendar c = new java.util.GregorianCalendar();
+				final String datetime = "'" + c.get(Calendar.YEAR) + "-" + (c.get(Calendar.MONTH) + 1) + "-"
+						+ c.get(Calendar.DAY_OF_MONTH) + " " + c.get(Calendar.HOUR_OF_DAY) + ":"
+						+ c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND) + "'";
 
 				PreparedStatement ps = conn.prepareStatement("select * from current_meteo;");
-				ResultSet rs = ps.executeQuery();
+				final ResultSet rs = ps.executeQuery();
 
 				ps = conn.prepareStatement("insert into meteo values(" + datetime + "," + getMeanValues(rs) + ");");
 				ps.execute();
@@ -96,7 +99,7 @@ public class MeteoDataSource implements SerialDataListener {
 				ps.execute();
 
 				rs.close();
-			} catch (SQLException sqle) {
+			} catch (final SQLException sqle) {
 			}
 		}
 	}
@@ -110,44 +113,44 @@ public class MeteoDataSource implements SerialDataListener {
 			props = new java.util.Properties();
 			props.load(is);
 			is.close();
-		} catch (java.io.FileNotFoundException fnfe) {
+		} catch (final java.io.FileNotFoundException fnfe) {
 			System.out.println("Couldn't found the file...\n" + fnfe);
 			System.out.println("Trying defaults");
 			return;
-		} catch (java.io.IOException ioe) {
+		} catch (final java.io.IOException ioe) {
 			System.out.println("Exception...\n" + ioe);
 		}
-		MAX_TEMP = Float.parseFloat(props.getProperty("MAXTEMP").trim());
-		MAX_RAIN = Float.parseFloat(props.getProperty("MAXRAIN").trim());
-		MAX_WIND_DIR = Float.parseFloat(props.getProperty("MAXWINDDIR").trim());
-		MAX_WIND_VEL = Float.parseFloat(props.getProperty("MAXWINDVEL").trim());
-		MAX_HUMIDITY = Float.parseFloat(props.getProperty("MAXHUMIDITY").trim());
-		MAX_COND = Float.parseFloat(props.getProperty("MAXCOND").trim());
-		MAX_PRESSION = Float.parseFloat(props.getProperty("MAXPRESSION").trim());
-		MAX_LUM = Float.parseFloat(props.getProperty("MAXLUM").trim());
-		MIN_TEMP = Float.parseFloat(props.getProperty("MINTEMP").trim());
-		MIN_RAIN = Float.parseFloat(props.getProperty("MINRAIN").trim());
-		MIN_WIND_DIR = Float.parseFloat(props.getProperty("MINWINDDIR").trim());
-		MIN_WIND_VEL = Float.parseFloat(props.getProperty("MINWINDVEL").trim());
-		MIN_HUMIDITY = Float.parseFloat(props.getProperty("MINHUMIDITY").trim());
-		MIN_COND = Float.parseFloat(props.getProperty("MINCOND").trim());
-		MIN_PRESSION = Float.parseFloat(props.getProperty("MINPRESSION").trim());
-		MIN_LUM = Float.parseFloat(props.getProperty("MINLUM").trim());
+		MeteoDataSource.MAX_TEMP = Float.parseFloat(props.getProperty("MAXTEMP").trim());
+		MeteoDataSource.MAX_RAIN = Float.parseFloat(props.getProperty("MAXRAIN").trim());
+		MeteoDataSource.MAX_WIND_DIR = Float.parseFloat(props.getProperty("MAXWINDDIR").trim());
+		MeteoDataSource.MAX_WIND_VEL = Float.parseFloat(props.getProperty("MAXWINDVEL").trim());
+		MeteoDataSource.MAX_HUMIDITY = Float.parseFloat(props.getProperty("MAXHUMIDITY").trim());
+		MeteoDataSource.MAX_COND = Float.parseFloat(props.getProperty("MAXCOND").trim());
+		MeteoDataSource.MAX_PRESSION = Float.parseFloat(props.getProperty("MAXPRESSION").trim());
+		MeteoDataSource.MAX_LUM = Float.parseFloat(props.getProperty("MAXLUM").trim());
+		MeteoDataSource.MIN_TEMP = Float.parseFloat(props.getProperty("MINTEMP").trim());
+		MeteoDataSource.MIN_RAIN = Float.parseFloat(props.getProperty("MINRAIN").trim());
+		MeteoDataSource.MIN_WIND_DIR = Float.parseFloat(props.getProperty("MINWINDDIR").trim());
+		MeteoDataSource.MIN_WIND_VEL = Float.parseFloat(props.getProperty("MINWINDVEL").trim());
+		MeteoDataSource.MIN_HUMIDITY = Float.parseFloat(props.getProperty("MINHUMIDITY").trim());
+		MeteoDataSource.MIN_COND = Float.parseFloat(props.getProperty("MINCOND").trim());
+		MeteoDataSource.MIN_PRESSION = Float.parseFloat(props.getProperty("MINPRESSION").trim());
+		MeteoDataSource.MIN_LUM = Float.parseFloat(props.getProperty("MINLUM").trim());
 
 		System.out.println("Meteo props ok!");
 	}
 
-	public synchronized void serialDataAvailable(NewSerialDataEvent evt) {
+	public synchronized void serialDataAvailable(final NewSerialDataEvent evt) {
 		if (!evt.getData().trim().startsWith("dados")) {
 			return;
 		}
-		long start = System.currentTimeMillis();
+		final long start = System.currentTimeMillis();
 
-		java.util.StringTokenizer st = new java.util.StringTokenizer(evt.getData(), "=");
+		final java.util.StringTokenizer st = new java.util.StringTokenizer(evt.getData(), "=");
 		st.nextToken();
 		updateDB(convertReceived(st.nextToken()));
 
-		boolean weather = checkWeather();
+		final boolean weather = checkWeather();
 
 		byte openOk = 0;
 		byte toggle = 0;
@@ -203,7 +206,7 @@ public class MeteoDataSource implements SerialDataListener {
 
 			rs.close();
 			ps.close();
-		} catch (SQLException sqle) {
+		} catch (final SQLException sqle) {
 			sqle.printStackTrace();
 		}
 
@@ -211,33 +214,40 @@ public class MeteoDataSource implements SerialDataListener {
 	}
 
 	private boolean checkWeather() {
-		boolean weather = true;
+		final boolean weather = true;
 
-		if (!MathUtils.isInScale(new Float(temp), new Float(MIN_TEMP), new Float(MAX_TEMP))) {
+		if (!MathUtils.isInScale(new Float(temp), new Float(MeteoDataSource.MIN_TEMP), new Float(
+				MeteoDataSource.MAX_TEMP))) {
 			System.out.println("Temp out of scale!");
 			return false;
 		}
-		if (!MathUtils.isInScale(new Float(rain), new Float(MIN_RAIN), new Float(MAX_RAIN))) {
+		if (!MathUtils.isInScale(new Float(rain), new Float(MeteoDataSource.MIN_RAIN), new Float(
+				MeteoDataSource.MAX_RAIN))) {
 			System.out.println("Rain out of scale!");
 			return false;
 		}
-		if (!MathUtils.isInScale(new Float(windDir), new Float(MIN_WIND_DIR), new Float(MAX_WIND_DIR))) {
+		if (!MathUtils.isInScale(new Float(windDir), new Float(MeteoDataSource.MIN_WIND_DIR), new Float(
+				MeteoDataSource.MAX_WIND_DIR))) {
 			System.out.println("windDir out of scale!");
 			return false;
 		}
-		if (!MathUtils.isInScale(new Float(windVel), new Float(MIN_WIND_VEL), new Float(MAX_WIND_VEL))) {
+		if (!MathUtils.isInScale(new Float(windVel), new Float(MeteoDataSource.MIN_WIND_VEL), new Float(
+				MeteoDataSource.MAX_WIND_VEL))) {
 			System.out.println("windVel out of scale!");
 			return false;
 		}
-		if (!MathUtils.isInScale(new Float(cond), new Float(MIN_COND), new Float(MAX_COND))) {
+		if (!MathUtils.isInScale(new Float(cond), new Float(MeteoDataSource.MIN_COND), new Float(
+				MeteoDataSource.MAX_COND))) {
 			System.out.println("cond out of scale!");
 			return false;
 		}
-		if (!MathUtils.isInScale(new Float(pression), new Float(MIN_PRESSION), new Float(MAX_PRESSION))) {
+		if (!MathUtils.isInScale(new Float(pression), new Float(MeteoDataSource.MIN_PRESSION), new Float(
+				MeteoDataSource.MAX_PRESSION))) {
 			System.out.println("pression out of scale!");
 			return false;
 		}
-		if (!MathUtils.isInScale(new Float((lum / getMaxLumValue()) * 100f), new Float(MIN_LUM), new Float(MAX_LUM))) {
+		if (!MathUtils.isInScale(new Float((lum / getMaxLumValue()) * 100f), new Float(MeteoDataSource.MIN_LUM),
+				new Float(MeteoDataSource.MAX_LUM))) {
 			System.out.println("lum out of scale!");
 			return false;
 		}
@@ -245,23 +255,23 @@ public class MeteoDataSource implements SerialDataListener {
 		return weather;
 	}
 
-	private void updateDB(String csv) {
+	private void updateDB(final String csv) {
 		System.out.println("updating db with:\n" + csv);
 		if (csv == null) {
 			return;
 		}
 		try {
-			ResultSet rs = null;
-			PreparedStatement ps = conn.prepareStatement("insert into current_meteo values(" + csv + ");");
+			final ResultSet rs = null;
+			final PreparedStatement ps = conn.prepareStatement("insert into current_meteo values(" + csv + ");");
 			ps.execute();
 			ps.close();
-		} catch (SQLException sqle) {
+		} catch (final SQLException sqle) {
 			sqle.printStackTrace();
 		}
 	}
 
-	private String convertReceived(String csv) {
-		java.util.StringTokenizer st = new java.util.StringTokenizer(csv, ",");
+	private String convertReceived(final String csv) {
+		final java.util.StringTokenizer st = new java.util.StringTokenizer(csv, ",");
 
 		if (st.countTokens() < 8) {
 			System.out.println("error tokenizing the received parameters from serial port!");
@@ -269,7 +279,7 @@ public class MeteoDataSource implements SerialDataListener {
 		}
 
 		rain = getRainValue(Float.parseFloat(st.nextToken()));
-		temp = getTemperatureValue(Float.parseFloat(st.nextToken()));
+		temp = MeteoDataSource.getTemperatureValue(Float.parseFloat(st.nextToken()));
 		humidity = getHumidityValue(Float.parseFloat(st.nextToken()));
 		windDir = getWindDirectionValue(Float.parseFloat(st.nextToken()));
 		windVel = getWindVelocityValue(Float.parseFloat(st.nextToken()));
@@ -291,7 +301,7 @@ public class MeteoDataSource implements SerialDataListener {
 		return rainArray;
 	}
 
-	private String getMeanValues(ResultSet rs) {
+	private String getMeanValues(final ResultSet rs) {
 		float temp = 0;
 		float rain = 0;
 		float windDir = 0;
@@ -316,7 +326,7 @@ public class MeteoDataSource implements SerialDataListener {
 				n++;
 			}
 			rs.close();
-		} catch (SQLException sqle) {
+		} catch (final SQLException sqle) {
 			sqle.printStackTrace();
 		}
 		if (n == 0) {
@@ -333,24 +343,24 @@ public class MeteoDataSource implements SerialDataListener {
 		pression /= n;
 		lum /= n;
 
-		String mean = rain + "," + temp + "," + humidity + "," + windDir + "," + windVel + "," + cond + "," + pression
-				+ "," + lum;
+		final String mean = rain + "," + temp + "," + humidity + "," + windDir + "," + windVel + "," + cond + ","
+				+ pression + "," + lum;
 		return mean;
 	}
 
-	private static float getTemperatureValue(float temp) {
+	private static float getTemperatureValue(final float temp) {
 		return (float) (3970 / (Math.log(temp * Math.pow(10, -6)) + 17.24337) - 273.15);
 	}
 
-	private float getRainValue(float rain) {
+	private float getRainValue(final float rain) {
 		return rain * 0.127f;
 	}
 
-	private float getWindDirectionValue(float windDir) {
+	private float getWindDirectionValue(final float windDir) {
 		return (360f - windDir);
 	}
 
-	private float getWindVelocityValue(float windVel) {
+	private float getWindVelocityValue(final float windVel) {
 		if (windVel != 0) {
 			return 3.426f * windVel / 30f + 3.08f;
 		}
@@ -365,11 +375,11 @@ public class MeteoDataSource implements SerialDataListener {
 		return humidity;
 	}
 
-	private float getPressionValue(float pression) {
+	private float getPressionValue(final float pression) {
 		return 100f + pression * 1150f / 1023f;
 	}
 
-	private void updateLum(float lum) {
+	private void updateLum(final float lum) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
@@ -378,14 +388,14 @@ public class MeteoDataSource implements SerialDataListener {
 			rs = ps.executeQuery();
 
 			if (rs.last()) {
-				float lastValue = rs.getFloat(1);
+				final float lastValue = rs.getFloat(1);
 				if (lum > lastValue) {
 					ps = conn.prepareStatement("update lightmax set light = " + lum + " where light = " + lastValue
 							+ " LIMIT 1;");
 					ps.execute();
 				}
 			}
-		} catch (SQLException sqle) {
+		} catch (final SQLException sqle) {
 			sqle.printStackTrace();
 		}
 	}
@@ -412,14 +422,14 @@ public class MeteoDataSource implements SerialDataListener {
 
 			ps.close();
 			rs.close();
-		} catch (SQLException sqle) {
+		} catch (final SQLException sqle) {
 			sqle.printStackTrace();
 		}
 
 		return lum;
 	}
 
-	private float getCondValue(float cond) {
+	private float getCondValue(final float cond) {
 		return cond;
 	}
 }

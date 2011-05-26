@@ -13,35 +13,47 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * 
  * @author Andr�
  */
-public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableModel implements ExpDataModelListener, com.linkare.rec.impl.client.experiment.ExpDataModelContainer {
+public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableModel implements ExpDataModelListener,
+		com.linkare.rec.impl.client.experiment.ExpDataModelContainer {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5884746425826302252L;
 
 	/** Holds value of property expDataModel. */
 	protected ExpDataModel expDataModel = null;
 
 	protected int[] colArray;
 
+	@Override
 	public void dataModelStoped() {
 		// BIG SILENT NOOP
 	}
 
+	@Override
 	public void dataModelEnded() {
 		// BIG SILENT NOOP
 	}
 
+	@Override
 	public void dataModelError() {
 		// BIG SILENT NOOP
 	}
 
+	@Override
 	public void dataModelStarted() {
 		fireTableStructureChanged();
 		fireTableDataChanged();
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 		fireTableStructureChanged();
 		fireTableDataChanged();
 	}
 
+	@Override
 	public void dataModelWaiting() {
 		// BIG SILENT NOOP
 	}
@@ -54,7 +66,8 @@ public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableMod
 	 * @param columnIndex the index of the column
 	 * @return the common ancestor class of the object values in the model.
 	 */
-	public Class getColumnClass(int columnIndex) {
+	@Override
+	public Class getColumnClass(final int columnIndex) {
 		if (columnIndex > 0) {
 			return Integer.class;
 		} else {
@@ -70,6 +83,7 @@ public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableMod
 	 * @return the number of columns in the model
 	 * @see #getRowCount
 	 */
+	@Override
 	public int getColumnCount() {
 		if (colArray == null) {
 			return 1;
@@ -85,7 +99,8 @@ public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableMod
 	 * @param columnIndex the index of the column
 	 * @return the name of the column
 	 */
-	public String getColumnName(int columnIndex) {
+	@Override
+	public String getColumnName(final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			if (columnIndex == 0) {
 				return ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.nodata", "No data available...");
@@ -94,16 +109,20 @@ public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableMod
 			}
 		}
 
-		int channelIndex = getColAtArray(columnIndex / 2);
-		
+		final int channelIndex = getColAtArray(columnIndex / 2);
+
 		if (columnIndex % 2 == 0) {
-			String ch_name = ReCResourceBundle.findString(expDataModel.getChannelConfig(channelIndex).getChannelName());
-			String multiplier = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getMultiplier().toString();
-			String ph_unit_symbol = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getPhysicsUnitSymbol();
+			final String ch_name = ReCResourceBundle.findString(expDataModel.getChannelConfig(channelIndex)
+					.getChannelName());
+			final String multiplier = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getMultiplier()
+					.toString();
+			final String ph_unit_symbol = expDataModel.getChannelConfig(channelIndex).getSelectedScale()
+					.getPhysicsUnitSymbol();
 			return ch_name + "[" + multiplier + ph_unit_symbol + "]";
 		} else {
 			if ((columnIndex / 2) >= 0 && expDataModel.getChannelConfig(channelIndex) != null) {
-				String ch_name = ReCResourceBundle.findString(expDataModel.getChannelConfig(channelIndex).getChannelName());
+				final String ch_name = ReCResourceBundle.findString(expDataModel.getChannelConfig(channelIndex)
+						.getChannelName());
 				return "\u03B5 " + ch_name;
 			}
 		}
@@ -120,6 +139,7 @@ public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableMod
 	 * @see #getColumnCount
 	 */
 
+	@Override
 	public int getRowCount() {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			return 0;
@@ -139,12 +159,13 @@ public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableMod
 	 * @param columnIndex the column whose value is to be queried
 	 * @return the value Object at the specified cell
 	 */
-	public Object getValueAt(int rowIndex, int columnIndex) {
+	@Override
+	public Object getValueAt(final int rowIndex, final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			return null;
 		}
 
-		PhysicsValue value = expDataModel.getValueAt(rowIndex, getColAtArray(columnIndex / 2));
+		final PhysicsValue value = expDataModel.getValueAt(rowIndex, getColAtArray(columnIndex / 2));
 		if (value == null) {
 			// removeRow(rowIndex);
 			return null;
@@ -167,13 +188,15 @@ public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableMod
 	 * @return true if the cell is editable
 	 * @see #setValueAt
 	 */
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
+	@Override
+	public boolean isCellEditable(final int rowIndex, final int columnIndex) {
 		return false;
 	}
 
 	private int lastnewsamples = 0;
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 		fireTableRowsInserted(Math.min(evt.getSamplesStartIndex(), lastnewsamples), evt.getSamplesEndIndex());
 		lastnewsamples = evt.getSamplesEndIndex();
 
@@ -191,8 +214,9 @@ public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableMod
 	 * 
 	 * @return Value of property expDataModel.
 	 */
+	@Override
 	public ExpDataModel getExpDataModel() {
-		return this.expDataModel;
+		return expDataModel;
 	}
 
 	/**
@@ -200,9 +224,11 @@ public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableMod
 	 * 
 	 * @param expDataModel New value of property expDataModel.
 	 */
-	public void setExpDataModel(ExpDataModel expDataModel) {
-		if (expDataModel != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel expDataModel) {
+		if (expDataModel != null) {
 			expDataModel.removeExpDataModelListener(this);
+		}
 
 		this.expDataModel = expDataModel;
 
@@ -218,7 +244,7 @@ public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableMod
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
-	public int getColAtArray(int col) {
+	public int getColAtArray(final int col) {
 		return colArray[col];
 	}
 
@@ -236,7 +262,7 @@ public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableMod
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
-	public void setColArray(int[] colArray) {
+	public void setColArray(final int[] colArray) {
 		this.colArray = colArray;
 	}
 

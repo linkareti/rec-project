@@ -20,7 +20,7 @@ public class StampPVProcessor extends AbstractStampProcessor {
 
 	/** Creates a new instance of StampHelloProcessor */
 	public StampPVProcessor() {
-		super(COMMAND_IDENTIFIER);
+		super(StampPVProcessor.COMMAND_IDENTIFIER);
 	}
 
 	/**
@@ -30,26 +30,28 @@ public class StampPVProcessor extends AbstractStampProcessor {
 	 * @return boolean - wether the processing was successfull
 	 * 
 	 */
-	public boolean process(StampCommand command) {
+	@Override
+	public boolean process(final StampCommand command) {
 		int pressure = 0;
 		int volume = 0;
-		String[] splitedStr = command.getCommand().split(" ");
+		final String[] splitedStr = command.getCommand().split(" ");
 
-		if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedStr[0] != null) {
+		if (command.getCommandIdentifier().equalsIgnoreCase(StampPVProcessor.COMMAND_IDENTIFIER)
+				&& splitedStr[0] != null) {
 			try {
 				pressure = Integer.parseInt(splitedStr[0]);
-				Integer oPressure = new Integer(pressure);
-				command.addCommandData(PRESSAO, oPressure);
+				final Integer oPressure = new Integer(pressure);
+				command.addCommandData(StampPVProcessor.PRESSAO, oPressure);
 
 				volume = Integer.parseInt(splitedStr[2]);
-				Float oVolume = new Float((float) volume / 1000);
-				command.addCommandData(VOLUME, oVolume);
+				final Float oVolume = new Float((float) volume / 1000);
+				command.addCommandData(StampPVProcessor.VOLUME, oVolume);
 
 				command.setData(true);
 
 				return true;
 
-			} catch (NumberFormatException e) {
+			} catch (final NumberFormatException e) {
 				e.printStackTrace();
 				return false;
 			}
@@ -58,6 +60,7 @@ public class StampPVProcessor extends AbstractStampProcessor {
 		return false;
 	}
 
+	@Override
 	public boolean isData() {
 		return true;
 	}

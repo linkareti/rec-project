@@ -6,18 +6,21 @@ public final class ChannelInfoHolder implements org.omg.CORBA.portable.Streamabl
 	public ChannelInfoHolder() {
 	}
 
-	public ChannelInfoHolder(com.linkare.rec.data.metadata.ChannelInfo initialValue) {
+	public ChannelInfoHolder(final com.linkare.rec.data.metadata.ChannelInfo initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(org.omg.CORBA.portable.InputStream i) {
+	@Override
+	public void _read(final org.omg.CORBA.portable.InputStream i) {
 		value = com.linkare.rec.data.metadata.ChannelInfoHelper.read(i);
 	}
 
-	public void _write(org.omg.CORBA.portable.OutputStream o) {
+	@Override
+	public void _write(final org.omg.CORBA.portable.OutputStream o) {
 		com.linkare.rec.data.metadata.ChannelInfoHelper.write(o, value);
 	}
 
+	@Override
 	public org.omg.CORBA.TypeCode _type() {
 		return com.linkare.rec.data.metadata.ChannelInfoHelper.type();
 	}

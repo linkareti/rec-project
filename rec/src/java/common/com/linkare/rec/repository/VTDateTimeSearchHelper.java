@@ -19,70 +19,74 @@ public final class VTDateTimeSearchHelper implements BoxedValueHelper {
 	public VTDateTimeSearchHelper() {
 	}
 
-	public static void insert(Any a, DateTimeSearch that) {
-		org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
-		a.type(type());
-		write(out, that);
-		a.read_value(out.create_input_stream(), type());
+	public static void insert(final Any a, final DateTimeSearch that) {
+		final org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
+		a.type(VTDateTimeSearchHelper.type());
+		VTDateTimeSearchHelper.write(out, that);
+		a.read_value(out.create_input_stream(), VTDateTimeSearchHelper.type());
 	}
 
-	public static DateTimeSearch extract(Any a) {
-		return read(a.create_input_stream());
+	public static DateTimeSearch extract(final Any a) {
+		return VTDateTimeSearchHelper.read(a.create_input_stream());
 	}
 
 	private static TypeCode __typeCode = null;
 	private static boolean __active = false;
 
 	public static synchronized TypeCode type() {
-		if (__typeCode == null) {
+		if (VTDateTimeSearchHelper.__typeCode == null) {
 			synchronized (TypeCode.class) {
-				if (__typeCode == null) {
-					if (__active) {
-						return ORB.init().create_recursive_tc(_id);
+				if (VTDateTimeSearchHelper.__typeCode == null) {
+					if (VTDateTimeSearchHelper.__active) {
+						return ORB.init().create_recursive_tc(VTDateTimeSearchHelper._id);
 					}
-					__active = true;
-					__typeCode = DateTimeSearchHelper.type();
-					__typeCode = ORB.init().create_value_box_tc(_id, "VTDateTimeSearch", __typeCode);
-					__active = false;
+					VTDateTimeSearchHelper.__active = true;
+					VTDateTimeSearchHelper.__typeCode = DateTimeSearchHelper.type();
+					VTDateTimeSearchHelper.__typeCode = ORB.init().create_value_box_tc(VTDateTimeSearchHelper._id,
+							"VTDateTimeSearch", VTDateTimeSearchHelper.__typeCode);
+					VTDateTimeSearchHelper.__active = false;
 				}
 			}
 		}
-		return __typeCode;
+		return VTDateTimeSearchHelper.__typeCode;
 	}
 
 	public static String id() {
-		return _id;
+		return VTDateTimeSearchHelper._id;
 	}
 
-	public static DateTimeSearch read(org.omg.CORBA.portable.InputStream istream) {
+	public static DateTimeSearch read(final org.omg.CORBA.portable.InputStream istream) {
 		if (!(istream instanceof InputStream)) {
 			throw new BAD_PARAM();
 		}
-		return (DateTimeSearch) ((InputStream) istream).read_value(_instance);
+		return (DateTimeSearch) ((InputStream) istream).read_value(VTDateTimeSearchHelper._instance);
 	}
 
-	public Serializable read_value(org.omg.CORBA.portable.InputStream istream) {
-		DateTimeSearch tmp = DateTimeSearchHelper.read(istream);
-		return (Serializable) tmp;
+	@Override
+	public Serializable read_value(final org.omg.CORBA.portable.InputStream istream) {
+		final DateTimeSearch tmp = DateTimeSearchHelper.read(istream);
+		return tmp;
 	}
 
-	public static void write(org.omg.CORBA.portable.OutputStream ostream, DateTimeSearch value) {
+	public static void write(final org.omg.CORBA.portable.OutputStream ostream, final DateTimeSearch value) {
 		if (!(ostream instanceof OutputStream)) {
 			throw new BAD_PARAM();
 		}
-		((OutputStream) ostream).write_value(value, _instance);
+		((OutputStream) ostream).write_value(value, VTDateTimeSearchHelper._instance);
 	}
 
-	public void write_value(org.omg.CORBA.portable.OutputStream ostream, Serializable value) {
+	@Override
+	public void write_value(final org.omg.CORBA.portable.OutputStream ostream, final Serializable value) {
 		if (!(value instanceof DateTimeSearch)) {
 			throw new MARSHAL();
 		}
-		DateTimeSearch valueType = (DateTimeSearch) value;
+		final DateTimeSearch valueType = (DateTimeSearch) value;
 		DateTimeSearchHelper.write(ostream, valueType);
 	}
 
+	@Override
 	public String get_id() {
-		return _id;
+		return VTDateTimeSearchHelper._id;
 	}
 
 }

@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.polaroid.displays;
  */
 public class AnguloIntensidadeTable extends com.linkare.rec.impl.baseUI.table.MultSeriesTable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 831020282726475816L;
+
 	/** Creates a new instance of AnguloIntensidadeChart */
 	public AnguloIntensidadeTable() {
 		super();

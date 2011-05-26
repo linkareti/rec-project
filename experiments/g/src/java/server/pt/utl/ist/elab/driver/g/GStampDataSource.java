@@ -29,17 +29,20 @@ public class GStampDataSource extends AbstractStampDataSource {
 	private int counter = 0;
 	private int total_samples = 0;
 
-	public void processDataCommand(StampCommand cmd) {
-		if (stopped)
+	@Override
+	public void processDataCommand(final StampCommand cmd) {
+		if (stopped) {
 			return;
+		}
 
-		if (stopped || cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null)
+		if (stopped || cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null) {
 			return;
+		}
 
 		if (cmd.getCommandIdentifier().equals(StampGProcessor.COMMAND_IDENTIFIER)) {
 
 			float height;
-			PhysicsValue[] values = new PhysicsValue[2];
+			final PhysicsValue[] values = new PhysicsValue[2];
 			try {
 				height = ((Float) cmd.getCommandData(StampGProcessor.ALTURA)).floatValue();
 				if (timeDelayMillis == -1) {
@@ -47,26 +50,28 @@ public class GStampDataSource extends AbstractStampDataSource {
 				} else {
 					timeDelayMillis += (int) (0.0088 * 1000.0 + height * 2.0 * 1000.0 / 340.0 + delay_time * 1000.0);
 				}
-			} catch (ClassCastException e) {
+			} catch (final ClassCastException e) {
 				e.printStackTrace();
 				return;
 			}
 
-			values[0] = new PhysicsValue(PhysicsValFactory.fromFloat(height), getAcquisitionHeader().getChannelsConfig(
-					0).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader().getChannelsConfig(0)
-					.getSelectedScale().getMultiplier());
+			values[0] = new PhysicsValue(PhysicsValFactory.fromFloat(height), getAcquisitionHeader()
+					.getChannelsConfig(0).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
+					.getChannelsConfig(0).getSelectedScale().getMultiplier());
 			values[1] = new PhysicsValue(PhysicsValFactory.fromInt(timeDelayMillis), getAcquisitionHeader()
 					.getChannelsConfig(1).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
 					.getChannelsConfig(1).getSelectedScale().getMultiplier());
 			super.addDataRow(values);
 
 			counter++;
-			if (counter == total_samples)
+			if (counter == total_samples) {
 				setDataSourceEnded();
+			}
 		}
 	}
 
-	public void setAcquisitionHeader(HardwareAcquisitionConfig config) {
+	@Override
+	public void setAcquisitionHeader(final HardwareAcquisitionConfig config) {
 		super.setAcquisitionHeader(config);
 
 		total_samples = config.getTotalSamples();
@@ -79,6 +84,7 @@ public class GStampDataSource extends AbstractStampDataSource {
 
 	private boolean stopped = false;
 
+	@Override
 	public void stopNow() {
 		stopped = true;
 		setDataSourceStoped();

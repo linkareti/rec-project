@@ -11,18 +11,21 @@ public final class VTSamplesNumSearchHolder implements Streamable {
 	public VTSamplesNumSearchHolder() {
 	}
 
-	public VTSamplesNumSearchHolder(SamplesNumSearch initialValue) {
+	public VTSamplesNumSearchHolder(final SamplesNumSearch initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(InputStream i) {
+	@Override
+	public void _read(final InputStream i) {
 		value = VTSamplesNumSearchHelper.read(i);
 	}
 
-	public void _write(OutputStream o) {
+	@Override
+	public void _write(final OutputStream o) {
 		VTSamplesNumSearchHelper.write(o, value);
 	}
 
+	@Override
 	public TypeCode _type() {
 		return VTSamplesNumSearchHelper.type();
 	}

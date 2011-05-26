@@ -32,13 +32,18 @@ public class wavelenghtChooser extends javax.swing.JPanel {
 	 * debugging main
 	 */
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8187478361284594697L;
+
 	/** Creates new form wavelenghtChooser */
 	public wavelenghtChooser() {
 
 		initComponents();
 
 		// adds a new Spectrum to the panel
-		SpectrumCanvas spectrum = new SpectrumCanvas();
+		final SpectrumCanvas spectrum = new SpectrumCanvas();
 		jPanelSpectrum.add(spectrum);
 
 	} // end constructor
@@ -59,7 +64,7 @@ public class wavelenghtChooser extends javax.swing.JPanel {
 	}
 
 	// this method sets the (value of the jSlider) wavelength value
-	public void setValue(int value) {
+	public void setValue(final int value) {
 		jSliderWl.setValue(value);
 	} // end setValue
 
@@ -108,7 +113,8 @@ public class wavelenghtChooser extends javax.swing.JPanel {
 		jSliderWl.setMinimumSize(new java.awt.Dimension(414, 25));
 		jSliderWl.setPreferredSize(new java.awt.Dimension(414, 25));
 		jSliderWl.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderWlStateChanged(evt);
 			}
 		});
@@ -125,13 +131,19 @@ public class wavelenghtChooser extends javax.swing.JPanel {
 
 	}// GEN-END:initComponents
 
-	private void jSliderWlStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderWlStateChanged
+	private void jSliderWlStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderWlStateChanged
 		// System.out.println("O valor e': "+jSliderWl.getValue());
 		fireStateChanged();
 	}// GEN-LAST:event_jSliderWlStateChanged
 
 	private class ModelListener implements ChangeListener, Serializable {
-		public void stateChanged(ChangeEvent e) {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 4069782119146787282L;
+
+		@Override
+		public void stateChanged(final ChangeEvent e) {
 			fireStateChanged();
 		}
 	}
@@ -155,7 +167,7 @@ public class wavelenghtChooser extends javax.swing.JPanel {
 	 * @see #fireStateChanged
 	 * @see #removeChangeListener
 	 */
-	public void addChangeListener(ChangeListener l) {
+	public void addChangeListener(final ChangeListener l) {
 		listenerList.add(ChangeListener.class, l);
 	}
 
@@ -167,7 +179,7 @@ public class wavelenghtChooser extends javax.swing.JPanel {
 	 * @see #addChangeListener
 	 * 
 	 */
-	public void removeChangeListener(ChangeListener l) {
+	public void removeChangeListener(final ChangeListener l) {
 		listenerList.remove(ChangeListener.class, l);
 	}
 
@@ -180,7 +192,7 @@ public class wavelenghtChooser extends javax.swing.JPanel {
 	 * @since 1.4
 	 */
 	public ChangeListener[] getChangeListeners() {
-		return (ChangeListener[]) listenerList.getListeners(ChangeListener.class);
+		return listenerList.getListeners(ChangeListener.class);
 	}
 
 	/**
@@ -192,7 +204,7 @@ public class wavelenghtChooser extends javax.swing.JPanel {
 	 * @see EventListenerList
 	 */
 	protected void fireStateChanged() {
-		Object[] listeners = listenerList.getListenerList();
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ChangeListener.class) {
 				if (changeEvent == null) {
@@ -234,6 +246,10 @@ public class wavelenghtChooser extends javax.swing.JPanel {
 // from 380nm to 780nm
 class SpectrumCanvas extends java.awt.Canvas {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1001023358346927167L;
 	static final int N = 400; // number of lines to be painted, equal to the
 	// width of the spectrum
 	static final int border = 9; // additional border
@@ -241,30 +257,31 @@ class SpectrumCanvas extends java.awt.Canvas {
 	static final int w1 = 380;
 	static final int w2 = 780;
 
-	public void paint(Graphics g) {
+	@Override
+	public void paint(final Graphics g) {
 		// for text
-		Font little = new Font("Dialog", Font.PLAIN, 10);
-		FontMetrics littlefm = getFontMetrics(little);
+		final Font little = new Font("Dialog", Font.PLAIN, 10);
+		final FontMetrics littlefm = getFontMetrics(little);
 
-		Font big = new Font("Dialog", Font.BOLD, 14);
-		FontMetrics bigfm = getFontMetrics(big);
+		final Font big = new Font("Dialog", Font.BOLD, 14);
+		final FontMetrics bigfm = getFontMetrics(big);
 
 		// draw the Light spectrum
-		for (int i = 0; i < N; i++) {
-			float wl = (w2 - w1) * i / (float) N + w1;
-			Color shade = Wavelength.wvColor(wl, 1.0f);
+		for (int i = 0; i < SpectrumCanvas.N; i++) {
+			final float wl = (SpectrumCanvas.w2 - SpectrumCanvas.w1) * i / (float) SpectrumCanvas.N + SpectrumCanvas.w1;
+			final Color shade = Wavelength.wvColor(wl, 1.0f);
 			g.setColor(shade);
-			g.drawLine(i + border, 0, i + border, 50);
+			g.drawLine(i + SpectrumCanvas.border, 0, i + SpectrumCanvas.border, 50);
 		} // end for
 
 		g.setFont(little);
 		g.setColor(Color.gray);
 		// draw nm ticks and numbering every 50 nm
-		final int span = w2 - w1;
-		for (int tick = w1; tick <= w2; tick += 50) {
-			int tickPix = ((tick - w1) * N) / span + border;
+		final int span = SpectrumCanvas.w2 - SpectrumCanvas.w1;
+		for (int tick = SpectrumCanvas.w1; tick <= SpectrumCanvas.w2; tick += 50) {
+			final int tickPix = ((tick - SpectrumCanvas.w1) * SpectrumCanvas.N) / span + SpectrumCanvas.border;
 			g.drawLine(tickPix, 0, tickPix, 5);
-			String tickString = String.valueOf(tick);
+			final String tickString = String.valueOf(tick);
 			g.drawString(tickString, tickPix - littlefm.stringWidth(tickString) / 2, 20);
 		} // end for
 	} // end paint

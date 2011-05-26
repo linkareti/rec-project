@@ -28,11 +28,13 @@ public class SpinnerMonthModel extends javax.swing.AbstractSpinnerModel {
 	 * @see #getValue
 	 * @see #getPreviousValue
 	 */
+	@Override
 	public Object getNextValue() {
 		int monthNumber = MonthMap.getMonthNumberfromName(value) - 1;
 		monthNumber = monthNumber % 12;
-		if (monthNumber < 0)
+		if (monthNumber < 0) {
 			monthNumber += 12;
+		}
 		return MonthMap.getMonthNamefromNumber(MonthMap.getMonthNumberfromName(value) + 1);
 	}
 
@@ -45,11 +47,13 @@ public class SpinnerMonthModel extends javax.swing.AbstractSpinnerModel {
 	 * @see #getValue
 	 * @see #getNextValue
 	 */
+	@Override
 	public Object getPreviousValue() {
 		int monthNumber = MonthMap.getMonthNumberfromName(value) - 1;
 		monthNumber = monthNumber % 12;
-		if (monthNumber < 0)
+		if (monthNumber < 0) {
 			monthNumber += 12;
+		}
 		return MonthMap.getMonthNamefromNumber(monthNumber);
 	}
 
@@ -60,8 +64,9 @@ public class SpinnerMonthModel extends javax.swing.AbstractSpinnerModel {
 	 * @return the current spinner value.
 	 * @see #setValue
 	 */
+	@Override
 	public Object getValue() {
-		return this.value;
+		return value;
 	}
 
 	/**
@@ -76,13 +81,15 @@ public class SpinnerMonthModel extends javax.swing.AbstractSpinnerModel {
 	 * @throws IllegalArgumentException if <code>value</code> isn't allowed
 	 * @see #getValue
 	 */
-	public void setValue(Object value) {
+	@Override
+	public void setValue(final Object value) {
 		if ((value instanceof String) && value != null) {
 			this.value = (String) value;
-		} else
+		} else {
 			this.value = MonthMap.getMonthNames()[0];
+		}
 
-		this.fireStateChanged();
+		fireStateChanged();
 	}
 
 }

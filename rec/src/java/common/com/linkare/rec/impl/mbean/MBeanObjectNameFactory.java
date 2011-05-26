@@ -25,7 +25,7 @@ public class MBeanObjectNameFactory {
 		}
 
 		public String getDomain() {
-			return this.domain + ":";
+			return domain + ":";
 		}
 	}
 
@@ -42,11 +42,11 @@ public class MBeanObjectNameFactory {
 		private final String mbeanName;
 
 		private MBeansNameEnum(final String mbeanName) {
-			this.mbeanName = new StringBuilder(NAME_ATTRIBUTE).append("=").append(mbeanName).toString();
+			this.mbeanName = new StringBuilder(MBeansNameEnum.NAME_ATTRIBUTE).append("=").append(mbeanName).toString();
 		}
 
 		public String getMBeanName() {
-			return this.mbeanName;
+			return mbeanName;
 		}
 	}
 
@@ -54,7 +54,7 @@ public class MBeanObjectNameFactory {
 		try {
 			return new ObjectName(DomainsEnum.DEFAULT_DOMAIN.getDomain()
 					+ MBeansNameEnum.THREADPOOLEXECUTORSTATISTICS.getMBeanName());
-		} catch (MalformedObjectNameException e) {
+		} catch (final MalformedObjectNameException e) {
 			throw new RuntimeException(e);
 		}
 	}

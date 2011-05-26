@@ -37,7 +37,7 @@ public class FlatTabbedPaneUI extends MetalTabbedPaneUI {
 	// OTHER COLORS
 	public static final Color COLOR_DISABLE_TAB_FG = new Color(0x677478);
 
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new FlatTabbedPaneUI();
 	}
 
@@ -50,13 +50,13 @@ public class FlatTabbedPaneUI extends MetalTabbedPaneUI {
 	}
 
 	@Override
-	protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h,
-			boolean isSelected) {
+	protected void paintTabBackground(final Graphics g, final int tabPlacement, final int tabIndex, final int x,
+			final int y, final int w, final int h, final boolean isSelected) {
 
 		if (isSelected) {
-			g.setColor(COLOR_SELECTED_TAB_BG);
+			g.setColor(FlatTabbedPaneUI.COLOR_SELECTED_TAB_BG);
 		} else {
-			g.setColor(COLOR_UNSELECTED_TAB_BG);
+			g.setColor(FlatTabbedPaneUI.COLOR_UNSELECTED_TAB_BG);
 		}
 		switch (tabPlacement) {
 		case LEFT:
@@ -80,13 +80,13 @@ public class FlatTabbedPaneUI extends MetalTabbedPaneUI {
 	}
 
 	@Override
-	public void paint(Graphics g, JComponent c) {
-		int selectedIndex = tabPane.getSelectedIndex();
-		int tabPlacement = tabPane.getTabPlacement();
+	public void paint(final Graphics g, final JComponent c) {
+		final int selectedIndex = tabPane.getSelectedIndex();
+		final int tabPlacement = tabPane.getTabPlacement();
 
 		ensureCurrentLayout();
 		paintTabArea(g, tabPlacement, selectedIndex);
-		g.setColor(COLOR_SELECTED_TAB_BG);
+		g.setColor(FlatTabbedPaneUI.COLOR_SELECTED_TAB_BG);
 		g.fillRect(0, 28, tabPane.getWidth(), tabPane.getHeight() - 29);
 	}
 
@@ -100,57 +100,57 @@ public class FlatTabbedPaneUI extends MetalTabbedPaneUI {
 		 * See bug 4237677.
 		 */
 		if (!tabPane.isValid()) {
-			TabbedPaneLayout layout = (TabbedPaneLayout) tabPane.getLayout();
+			final TabbedPaneLayout layout = (TabbedPaneLayout) tabPane.getLayout();
 			layout.calculateLayoutInfo();
 		}
 	}
 
 	@Override
-	protected void paintFocusIndicator(Graphics g, int tabPlacement, Rectangle[] rects, int tabIndex,
-			Rectangle iconRect, Rectangle textRect, boolean isSelected) {
+	protected void paintFocusIndicator(final Graphics g, final int tabPlacement, final Rectangle[] rects,
+			final int tabIndex, final Rectangle iconRect, final Rectangle textRect, final boolean isSelected) {
 		// Painting spec
 	}
 
 	@Override
-	protected void paintTabBorder(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h,
-			boolean isSelected) {
+	protected void paintTabBorder(final Graphics g, final int tabPlacement, final int tabIndex, final int x,
+			final int y, final int w, final int h, final boolean isSelected) {
 		// Painting spec
 	}
 
 	@Override
-	protected void paintContentBorderLeftEdge(Graphics g, int tabPlacement, int selectedIndex, int x, int y, int w,
-			int h) {
+	protected void paintContentBorderLeftEdge(final Graphics g, final int tabPlacement, final int selectedIndex,
+			final int x, final int y, final int w, final int h) {
 		// Painting spec
 	}
 
 	@Override
-	protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title,
-			Rectangle textRect, boolean isSelected) {
+	protected void paintText(final Graphics g, final int tabPlacement, final Font font, final FontMetrics metrics,
+			final int tabIndex, final String title, final Rectangle textRect, final boolean isSelected) {
 
 		g.setFont(font);
 
-		View v = getTextViewForTab(tabIndex);
+		final View v = getTextViewForTab(tabIndex);
 		if (v != null) {
 			// html
 			v.paint(g, textRect);
 		} else {
 
 			// plain text
-			int mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
+			final int mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
 			if (tabPane.isEnabled() && isSelected) {
-				g.setColor(COLOR_SELECTED_TAB_FG);
-				BasicGraphicsUtils.drawStringUnderlineCharAt(g, title, mnemIndex, textRect.x, textRect.y
-						+ metrics.getAscent());
+				g.setColor(FlatTabbedPaneUI.COLOR_SELECTED_TAB_FG);
+				BasicGraphicsUtils.drawStringUnderlineCharAt(g, title, mnemIndex, textRect.x,
+						textRect.y + metrics.getAscent());
 
 			} else if (tabPane.isEnabled() && !isSelected) {
-				g.setColor(COLOR_UNSELECTED_TAB_FG);
-				BasicGraphicsUtils.drawStringUnderlineCharAt(g, title, mnemIndex, textRect.x, textRect.y
-						+ metrics.getAscent());
+				g.setColor(FlatTabbedPaneUI.COLOR_UNSELECTED_TAB_FG);
+				BasicGraphicsUtils.drawStringUnderlineCharAt(g, title, mnemIndex, textRect.x,
+						textRect.y + metrics.getAscent());
 
 			} else { // tab disabled
-				g.setColor(COLOR_DISABLE_TAB_FG);
-				BasicGraphicsUtils.drawStringUnderlineCharAt(g, title, mnemIndex, textRect.x, textRect.y
-						+ metrics.getAscent());
+				g.setColor(FlatTabbedPaneUI.COLOR_DISABLE_TAB_FG);
+				BasicGraphicsUtils.drawStringUnderlineCharAt(g, title, mnemIndex, textRect.x,
+						textRect.y + metrics.getAscent());
 
 			}
 		}

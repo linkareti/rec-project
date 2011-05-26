@@ -15,6 +15,10 @@ import pt.utl.ist.elab.driver.webrobot.debug.Debugger;
 
 public class WebRobotConfigurator extends javax.swing.JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2516875612288846836L;
 	/** Properties stuff... */
 	java.io.InputStream is = null;
 	java.io.File propFile = null;
@@ -36,7 +40,7 @@ public class WebRobotConfigurator extends javax.swing.JFrame {
 			props = new java.util.Properties();
 			props.load(is);
 			is.close();
-		} catch (java.io.FileNotFoundException fnfe) {
+		} catch (final java.io.FileNotFoundException fnfe) {
 			Debugger.print(this, "Couldn't found the file...\n" + fnfe);
 			resourceLocation = getClass().getResource(
 					"/pt/utl/ist/elab/driver/webrobot/configs/WebRobotProps.properties").getFile();
@@ -46,12 +50,12 @@ public class WebRobotConfigurator extends javax.swing.JFrame {
 				props = new java.util.Properties();
 				props.load(is);
 				is.close();
-			} catch (java.io.FileNotFoundException fnfe2) {
+			} catch (final java.io.FileNotFoundException fnfe2) {
 				Debugger.print(this, "Couldn't found the file...\n" + fnfe2);
-			} catch (java.io.IOException ioe2) {
+			} catch (final java.io.IOException ioe2) {
 				Debugger.print(this, "Exception...\n" + ioe2);
 			}
-		} catch (java.io.IOException ioe) {
+		} catch (final java.io.IOException ioe) {
 			Debugger.print(this, "Exception...\n" + ioe);
 		}
 		jComboBoxPort.setSelectedItem(props.getProperty("comName"));
@@ -154,7 +158,7 @@ public class WebRobotConfigurator extends javax.swing.JFrame {
 
 		setTitle("Web-Robot server config");
 		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent evt) {
+			public void windowClosing(final java.awt.event.WindowEvent evt) {
 				exitForm(evt);
 			}
 		});
@@ -279,7 +283,7 @@ public class WebRobotConfigurator extends javax.swing.JFrame {
 
 		jButton1.setText("Gravar");
 		jButton1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButton1ActionPerformed(evt);
 			}
 		});
@@ -288,7 +292,7 @@ public class WebRobotConfigurator extends javax.swing.JFrame {
 
 		jButton2.setText("Sair");
 		jButton2.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButton2ActionPerformed(evt);
 			}
 		});
@@ -301,8 +305,7 @@ public class WebRobotConfigurator extends javax.swing.JFrame {
 
 		jPanelStateMachine.setBorder(new javax.swing.border.TitledBorder("Parametros gerais"));
 		jLabel7.setText("Velocidade frente [128,255]:");
-		jLabel7
-				.setToolTipText("Quando o utilizador escolhe um dos blocos para fazer o robot andar x segundos, qual a velocidade a aplicar as rodas?");
+		jLabel7.setToolTipText("Quando o utilizador escolhe um dos blocos para fazer o robot andar x segundos, qual a velocidade a aplicar as rodas?");
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;
@@ -321,8 +324,7 @@ public class WebRobotConfigurator extends javax.swing.JFrame {
 		jPanelStateMachine.add(jTextFieldVF, gridBagConstraints);
 
 		jLabel8.setText("Velocidade \"marcha atr\u00e1s\":");
-		jLabel8
-				.setToolTipText("Quando o utilizador escolhe um dos blocos para fazer o robot andar x segundos, qual a velocidade a aplicar as rodas?");
+		jLabel8.setToolTipText("Quando o utilizador escolhe um dos blocos para fazer o robot andar x segundos, qual a velocidade a aplicar as rodas?");
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 2;
@@ -625,24 +627,24 @@ public class WebRobotConfigurator extends javax.swing.JFrame {
 		pack();
 	}// GEN-END:initComponents
 
-	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
+	private void jButton1ActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
 		saveProps();
 		System.out.println("As alteracoes foram gravadas.\nPor favor reinicie o servidor...");
 	}// GEN-LAST:event_jButton1ActionPerformed
 
-	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
+	private void jButton2ActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
 		exitForm(null);
 	}// GEN-LAST:event_jButton2ActionPerformed
 
 	/** Exit the Application */
-	private void exitForm(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_exitForm
-		this.hide();
+	private void exitForm(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_exitForm
+		hide();
 	}// GEN-LAST:event_exitForm
 
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 		new WebRobotConfigurator().show();
 	}
 
@@ -686,7 +688,7 @@ public class WebRobotConfigurator extends javax.swing.JFrame {
 			fos = new java.io.FileOutputStream(propFile);
 			props.store(fos, "Elab:Web-Robot Server properties");
 			fos.close();
-		} catch (java.io.IOException ioe) {
+		} catch (final java.io.IOException ioe) {
 			Debugger.print(this, "Nao consegui escrever as propriedades\n" + ioe);
 		}
 	}

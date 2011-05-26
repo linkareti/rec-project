@@ -79,8 +79,8 @@ public class Rs232Node {
 	 * @param value allowed object is {@link ParametersNode }
 	 * 
 	 */
-	public void setParameters(ParametersNode value) {
-		this.parameters = value;
+	public void setParameters(final ParametersNode value) {
+		parameters = value;
 	}
 
 	/**
@@ -99,8 +99,8 @@ public class Rs232Node {
 	 * @param value allowed object is {@link ChannelsNode }
 	 * 
 	 */
-	public void setChannels(ChannelsNode value) {
-		this.channels = value;
+	public void setChannels(final ChannelsNode value) {
+		channels = value;
 	}
 
 	/**
@@ -119,8 +119,8 @@ public class Rs232Node {
 	 * @param value allowed object is {@link TimeoutNode }
 	 * 
 	 */
-	public void setTimeout(TimeoutNode value) {
-		this.timeout = value;
+	public void setTimeout(final TimeoutNode value) {
+		timeout = value;
 	}
 
 	/**
@@ -139,8 +139,8 @@ public class Rs232Node {
 	 * @param value allowed object is {@link ErrorsNode }
 	 * 
 	 */
-	public void setErrors(ErrorsNode value) {
-		this.errors = value;
+	public void setErrors(final ErrorsNode value) {
+		errors = value;
 	}
 
 	/**
@@ -159,8 +159,8 @@ public class Rs232Node {
 	 * @param value allowed object is {@link BigInteger }
 	 * 
 	 */
-	public void setBaud(BigInteger value) {
-		this.baud = value;
+	public void setBaud(final BigInteger value) {
+		baud = value;
 	}
 
 	/**
@@ -179,8 +179,8 @@ public class Rs232Node {
 	 * @param value allowed object is {@link BigInteger }
 	 * 
 	 */
-	public void setNumbits(BigInteger value) {
-		this.numbits = value;
+	public void setNumbits(final BigInteger value) {
+		numbits = value;
 	}
 
 	/**
@@ -199,8 +199,8 @@ public class Rs232Node {
 	 * @param value allowed object is {@link BigInteger }
 	 * 
 	 */
-	public void setParitybits(BigInteger value) {
-		this.paritybits = value;
+	public void setParitybits(final BigInteger value) {
+		paritybits = value;
 	}
 
 	/**
@@ -219,8 +219,8 @@ public class Rs232Node {
 	 * @param value allowed object is {@link String }
 	 * 
 	 */
-	public void setPortsRestrict(String value) {
-		this.portsRestrict = value;
+	public void setPortsRestrict(final String value) {
+		portsRestrict = value;
 	}
 
 	/**
@@ -239,8 +239,8 @@ public class Rs232Node {
 	 * @param value allowed object is {@link BigInteger }
 	 * 
 	 */
-	public void setStopbits(BigInteger value) {
-		this.stopbits = value;
+	public void setStopbits(final BigInteger value) {
+		stopbits = value;
 	}
 
 }

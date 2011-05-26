@@ -13,59 +13,66 @@ import java.util.HashMap;
  * @author José Pedro Pereira - Linkare TI
  */
 public class CypressCommand implements java.io.Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3655605015145642602L;
 	private String commandIdentifier = null;
 	private String command = null;
 	private HashMap commandDataMap = null;
 	private boolean isData = false;
 
 	/** Creates a new instance of SerialPortCommand */
-	public CypressCommand(String commandIdentifier) {
+	public CypressCommand(final String commandIdentifier) {
 		this.commandIdentifier = commandIdentifier;
 	}
 
-	public void setCommand(String command) {
+	public void setCommand(final String command) {
 		this.command = command;
 	}
 
 	public String getCommand() {
-		return this.command;
+		return command;
 	}
 
-	public void setCommandIdentifier(String commandIdentifier) {
+	public void setCommandIdentifier(final String commandIdentifier) {
 		this.commandIdentifier = commandIdentifier;
 	}
 
 	public String getCommandIdentifier() {
-		return this.commandIdentifier;
+		return commandIdentifier;
 	}
 
-	public void addCommandData(Object commandDataKey, Object commandDataObject) {
-		if (this.commandDataMap == null)
-			this.commandDataMap = new HashMap(1);
+	public void addCommandData(final Object commandDataKey, final Object commandDataObject) {
+		if (commandDataMap == null) {
+			commandDataMap = new HashMap(1);
+		}
 
-		if (this.commandDataMap.containsKey(commandDataKey))
-			this.commandDataMap.remove(commandDataKey);
+		if (commandDataMap.containsKey(commandDataKey)) {
+			commandDataMap.remove(commandDataKey);
+		}
 
-		this.commandDataMap.put(commandDataKey, commandDataObject);
+		commandDataMap.put(commandDataKey, commandDataObject);
 	}
 
-	public Object getCommandData(Object commandDataKey) {
-		return this.commandDataMap.get(commandDataKey);
+	public Object getCommandData(final Object commandDataKey) {
+		return commandDataMap.get(commandDataKey);
 	}
 
-	public void setData(boolean isData) {
+	public void setData(final boolean isData) {
 		this.isData = isData;
 	}
 
 	public boolean isData() {
-		return this.isData;
+		return isData;
 	}
 
 	private CypressProcessor processor = null;
 
 	public CypressProcessor getProcessor() {
-		if (processor == null)
+		if (processor == null) {
 			processor = CypressTranslatorProcessorManager.getProcessor(this);
+		}
 
 		return processor;
 	}

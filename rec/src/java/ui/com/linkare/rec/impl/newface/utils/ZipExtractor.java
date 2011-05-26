@@ -11,37 +11,39 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 /**
- * Funcionalidades para descompactar arquivos zip. Também extrai ficheiros jar ou qualquer outro formato que utilize
- * compressão zip.
+ * Funcionalidades para descompactar arquivos zip. Também extrai ficheiros jar
+ * ou qualquer outro formato que utilize compressão zip.
  * 
  * @author bcatarino
  */
 public class ZipExtractor extends Observable {
-	
-	private ZipFile zipFile;
+
+	private final ZipFile zipFile;
 	private int extracted;
 
 	/**
 	 * Cria um Extractor para um ficheiro zip.
+	 * 
 	 * @param zipFile Ficheiro a extrair.
-	 * @throws IOException 
+	 * @throws IOException
 	 */
-	public ZipExtractor(String zipFile) throws IOException {
+	public ZipExtractor(final String zipFile) throws IOException {
 		this.zipFile = new ZipFile(zipFile);
 	}
-	
-	/**
-	 * Extrai todos os ficheiros existentes num ficheiro comprimido para uma directoria de destino. A extracção é feita
-	 * recursivamente, preservando os paths relativos à root do zip.
-	 * 
-	 * @param destDir
-	 *            Directoria onde se pretende extrair o zip e que servirá de root dir para os paths relativos dos
-	 *            ficheiros existentes no zip.
-	 */
-	public void extractFiles(String destDir) {
 
-		this.extracted = 0;
-		
+	/**
+	 * Extrai todos os ficheiros existentes num ficheiro comprimido para uma
+	 * directoria de destino. A extracção é feita recursivamente, preservando os
+	 * paths relativos à root do zip.
+	 * 
+	 * @param destDir Directoria onde se pretende extrair o zip e que servirá de
+	 *            root dir para os paths relativos dos ficheiros existentes no
+	 *            zip.
+	 */
+	public void extractFiles(final String destDir) {
+
+		extracted = 0;
+
 		try {
 
 			// Uma vez que não há garantia que os folders sejam criados antes
@@ -51,20 +53,20 @@ public class ZipExtractor extends Observable {
 			createDirectories(destDir);
 			createFiles(destDir);
 
-		} catch (IOException e) {
-			//FIXME tratamento correcto da excepção!!!!
+		} catch (final IOException e) {
+			// FIXME tratamento correcto da excepção!!!!
 			e.printStackTrace();
 		}
 	}
 
-	private void createDirectories(String destDir) throws IOException {
+	private void createDirectories(final String destDir) throws IOException {
 
-		Enumeration<? extends ZipEntry> entries = zipFile.entries();
+		final Enumeration<? extends ZipEntry> entries = zipFile.entries();
 
 		while (entries.hasMoreElements()) {
 
-			ZipEntry entry = entries.nextElement();
-			String name = entry.getName();
+			final ZipEntry entry = entries.nextElement();
+			final String name = entry.getName();
 
 			if (entry.isDirectory()) {
 				extractDirectory(destDir + File.separator + name);
@@ -72,41 +74,43 @@ public class ZipExtractor extends Observable {
 			}
 		}
 	}
-	
+
 	/**
-	 * Envia informação a todos os Observers registados de que houve uma alteração.
+	 * Envia informação a todos os Observers registados de que houve uma
+	 * alteração.
 	 */
 	private void informObservers() {
 		setChanged();
-		notifyObservers(new int[]{++extracted, zipFile.size()});
+		notifyObservers(new int[] { ++extracted, zipFile.size() });
 	}
 
-	private void extractDirectory(String dirName) {
-		File dir = new File(dirName);
+	private void extractDirectory(final String dirName) {
+		final File dir = new File(dirName);
 		dir.mkdirs();
 	}
 
-	private void createFiles(String destDir) throws FileNotFoundException, IOException {
+	private void createFiles(final String destDir) throws FileNotFoundException, IOException {
 
-		Enumeration<? extends ZipEntry> entries = zipFile.entries();
+		final Enumeration<? extends ZipEntry> entries = zipFile.entries();
 
 		while (entries.hasMoreElements()) {
 
-			ZipEntry entry = entries.nextElement();
-			String name = entry.getName();
+			final ZipEntry entry = entries.nextElement();
+			final String name = entry.getName();
 
 			if (!entry.isDirectory()) {
 				extractSingleFile(zipFile, entry, destDir + File.separator + name);
-				notifyObservers(new int[]{++extracted, zipFile.size()});
+				notifyObservers(new int[] { ++extracted, zipFile.size() });
 			}
 		}
 	}
 
-	private void extractSingleFile(ZipFile file, ZipEntry entry, String fileName) throws FileNotFoundException, IOException {
+	private void extractSingleFile(final ZipFile file, final ZipEntry entry, final String fileName)
+			throws FileNotFoundException, IOException {
 
-		InputStream input = file.getInputStream(entry);
-		FileOutputStream output = new FileOutputStream(fileName);
-		byte[] buffer = new byte[1024];
+		final InputStream input = file.getInputStream(entry);
+		final FileOutputStream output = new FileOutputStream(fileName);
+		final byte[] buffer = new byte[1024];
 		int bytesRead = 0;
 		while ((bytesRead = input.read(buffer)) > 0) {
 			output.write(buffer, 0, bytesRead);

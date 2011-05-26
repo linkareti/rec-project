@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.meteo.displays;
  */
 public class CondXYGraphDisplay extends MeteoTimeExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7583299662421005389L;
+
 	/** Creates a new instance of PVXYGraphDisplay */
 	public CondXYGraphDisplay() {
 		super();
@@ -19,6 +24,7 @@ public class CondXYGraphDisplay extends MeteoTimeExperimentGraph {
 		setChannelDisplayY(6);
 	}
 
+	@Override
 	public String getName() {
 		return "Condensacao";
 	}

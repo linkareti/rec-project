@@ -12,14 +12,16 @@ import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
+import com.linkare.rec.impl.newface.laf.flat.theme.AbstractStyle;
+
 /**
  * 
  * @author João Florindo
  */
 public class FlatButtonStyle extends DefaultStyle {
 
-	private static final Border COLOR_BORDER = BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(0x7da921)),
-			BorderFactory.createEmptyBorder(4, 16, 4, 16));
+	private static final Border COLOR_BORDER = BorderFactory.createCompoundBorder(
+			BorderFactory.createLineBorder(new Color(0x7da921)), BorderFactory.createEmptyBorder(4, 16, 4, 16));
 	private static final Color COLOR_BUTTON_FG = new Color(0x2B7A3B);
 
 	public static final String ID = "FlatButton";
@@ -33,13 +35,13 @@ public class FlatButtonStyle extends DefaultStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return FlatButtonStyle.ID;
 	}
 
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(BORDER, COLOR_BORDER);
-		map.put(FOREGROUND, COLOR_BUTTON_FG);
+		map.put(AbstractStyle.BORDER, FlatButtonStyle.COLOR_BORDER);
+		map.put(AbstractStyle.FOREGROUND, FlatButtonStyle.COLOR_BUTTON_FG);
 	}
 }

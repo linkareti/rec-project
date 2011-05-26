@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.vcartpole.displays;
  */
 public class ActionChart extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3215997957386721916L;
+
 	/** Creates a new instance of ActionChart */
 	public ActionChart() {
 		super();

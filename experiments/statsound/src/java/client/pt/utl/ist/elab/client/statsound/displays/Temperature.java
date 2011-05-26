@@ -11,6 +11,8 @@ package pt.utl.ist.elab.client.statsound.displays;
  * @author  Andr�
  */
 
+import javax.swing.SwingConstants;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
@@ -18,6 +20,11 @@ import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 
 public class Temperature extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3439867691042404141L;
 
 	/** Creates new form Temperature */
 	public Temperature() {
@@ -48,7 +55,7 @@ public class Temperature extends javax.swing.JPanel implements ExpDataDisplay, E
 		add(jLabel1, gridBagConstraints);
 
 		jTextFieldTempIni.setColumns(5);
-		jTextFieldTempIni.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldTempIni.setHorizontalAlignment(SwingConstants.CENTER);
 		jTextFieldTempIni.setText("-");
 		add(jTextFieldTempIni, new java.awt.GridBagConstraints());
 
@@ -61,7 +68,7 @@ public class Temperature extends javax.swing.JPanel implements ExpDataDisplay, E
 		add(jLabel11, gridBagConstraints);
 
 		jTextFieldFinalTemp.setColumns(5);
-		jTextFieldFinalTemp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldFinalTemp.setHorizontalAlignment(SwingConstants.CENTER);
 		jTextFieldFinalTemp.setText("-");
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
@@ -82,18 +89,20 @@ public class Temperature extends javax.swing.JPanel implements ExpDataDisplay, E
 	public void dataModelRunning() {
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
 	private boolean firstTime = false;
 
-	public void headerAvailable(HardwareAcquisitionConfig header) {
+	public void headerAvailable(final HardwareAcquisitionConfig header) {
 		jTextFieldFinalTemp.setText("-");
 		jTextFieldTempIni.setText("-");
 		firstTime = true;
 	}
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
 			if (model.getValueAt(i, model.getChannelIndex("temp")) != null) {
 				System.out.println(model.getValueAt(i, model.getChannelIndex("temp")));
@@ -108,22 +117,27 @@ public class Temperature extends javax.swing.JPanel implements ExpDataDisplay, E
 		}
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/table16.gif"));
 	}
 
+	@Override
 	public String getName() {
 		return "Temperature";
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
@@ -136,7 +150,7 @@ public class Temperature extends javax.swing.JPanel implements ExpDataDisplay, E
 	 * @return Value of property expDataModel.
 	 */
 	public ExpDataModel getExpDataModel() {
-		return this.model;
+		return model;
 	}
 
 	/**
@@ -144,9 +158,11 @@ public class Temperature extends javax.swing.JPanel implements ExpDataDisplay, E
 	 * 
 	 * @param expDataModel New value of property expDataModel.
 	 */
-	public void setExpDataModel(ExpDataModel model) {
-		if (model != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
+		if (model != null) {
 			model.removeExpDataModelListener(this);
+		}
 
 		this.model = model;
 
@@ -155,20 +171,26 @@ public class Temperature extends javax.swing.JPanel implements ExpDataDisplay, E
 		}
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
-		if (model != null)
+		if (model != null) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 

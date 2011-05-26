@@ -19,7 +19,7 @@ public class StampGProcessor extends AbstractStampProcessor {
 
 	/** Creates a new instance of StampHelloProcessor */
 	public StampGProcessor() {
-		super(COMMAND_IDENTIFIER);
+		super(StampGProcessor.COMMAND_IDENTIFIER);
 	}
 
 	/**
@@ -29,22 +29,24 @@ public class StampGProcessor extends AbstractStampProcessor {
 	 * @return boolean - wether the processing was successfull
 	 * 
 	 */
-	public boolean process(StampCommand command) {
+	@Override
+	public boolean process(final StampCommand command) {
 
 		int height = 0;
 
-		String[] splitedStr = command.getCommand().split(" ");
+		final String[] splitedStr = command.getCommand().split(" ");
 
-		if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedStr[0] != null) {
+		if (command.getCommandIdentifier().equalsIgnoreCase(StampGProcessor.COMMAND_IDENTIFIER)
+				&& splitedStr[0] != null) {
 			try {
 				height = Integer.parseInt(splitedStr[0]);
-				Float oHeight = new Float(0.000346F * (float) height);
-				command.addCommandData(ALTURA, oHeight);
+				final Float oHeight = new Float(0.000346F * height);
+				command.addCommandData(StampGProcessor.ALTURA, oHeight);
 
 				command.setData(true);
 				return true;
 
-			} catch (NumberFormatException e) {
+			} catch (final NumberFormatException e) {
 				e.printStackTrace();
 				return false;
 			}
@@ -53,6 +55,7 @@ public class StampGProcessor extends AbstractStampProcessor {
 		return false;
 	}
 
+	@Override
 	public boolean isData() {
 		return true;
 	}

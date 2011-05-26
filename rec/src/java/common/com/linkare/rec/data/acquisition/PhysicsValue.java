@@ -3,6 +3,11 @@ package com.linkare.rec.data.acquisition;
 import com.linkare.rec.impl.data.PhysicsValueUtil;
 
 public final class PhysicsValue implements org.omg.CORBA.portable.IDLEntity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8301734098218481714L;
+
 	//
 	// Struct member the_value
 	//
@@ -30,8 +35,9 @@ public final class PhysicsValue implements org.omg.CORBA.portable.IDLEntity {
 	// @param the_error the_error struct member
 	// @param applied_multiplier applied_multiplier struct member
 	//
-	public PhysicsValue(com.linkare.rec.data.acquisition.PhysicsVal the_value,
-			com.linkare.rec.data.acquisition.PhysicsVal the_error, com.linkare.rec.data.Multiplier applied_multiplier) {
+	public PhysicsValue(final com.linkare.rec.data.acquisition.PhysicsVal the_value,
+			final com.linkare.rec.data.acquisition.PhysicsVal the_error,
+			final com.linkare.rec.data.Multiplier applied_multiplier) {
 		this.the_value = the_value;
 		this.the_error = the_error;
 		this.applied_multiplier = applied_multiplier;
@@ -40,10 +46,10 @@ public final class PhysicsValue implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Copy Constructor
 	//
-	public PhysicsValue(PhysicsValue other) {
-		this.setValue(new PhysicsVal(other.getValue()));
-		this.setError(new PhysicsVal(other.getError()));
-		this.setAppliedMultiplier(new com.linkare.rec.data.Multiplier(other.getAppliedMultiplier()));
+	public PhysicsValue(final PhysicsValue other) {
+		setValue(new PhysicsVal(other.getValue()));
+		setError(new PhysicsVal(other.getError()));
+		setAppliedMultiplier(new com.linkare.rec.data.Multiplier(other.getAppliedMultiplier()));
 	}
 
 	/**
@@ -52,7 +58,7 @@ public final class PhysicsValue implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property the_value.
 	 */
 	public com.linkare.rec.data.acquisition.PhysicsVal getValue() {
-		return this.the_value;
+		return the_value;
 	}
 
 	/**
@@ -60,7 +66,7 @@ public final class PhysicsValue implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param the_value New value of property the_value.
 	 */
-	public void setValue(com.linkare.rec.data.acquisition.PhysicsVal the_value) {
+	public void setValue(final com.linkare.rec.data.acquisition.PhysicsVal the_value) {
 		this.the_value = the_value;
 	}
 
@@ -70,7 +76,7 @@ public final class PhysicsValue implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property the_error.
 	 */
 	public com.linkare.rec.data.acquisition.PhysicsVal getError() {
-		return this.the_error;
+		return the_error;
 	}
 
 	/**
@@ -78,7 +84,7 @@ public final class PhysicsValue implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param the_error New value of property the_error.
 	 */
-	public void setError(com.linkare.rec.data.acquisition.PhysicsVal the_error) {
+	public void setError(final com.linkare.rec.data.acquisition.PhysicsVal the_error) {
 		this.the_error = the_error;
 	}
 
@@ -88,7 +94,7 @@ public final class PhysicsValue implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property applied_multiplier.
 	 */
 	public com.linkare.rec.data.Multiplier getAppliedMultiplier() {
-		return this.applied_multiplier;
+		return applied_multiplier;
 	}
 
 	/**
@@ -96,7 +102,7 @@ public final class PhysicsValue implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param applied_multiplier New value of property applied_multiplier.
 	 */
-	public void setAppliedMultiplier(com.linkare.rec.data.Multiplier applied_multiplier) {
+	public void setAppliedMultiplier(final com.linkare.rec.data.Multiplier applied_multiplier) {
 		this.applied_multiplier = applied_multiplier;
 	}
 
@@ -122,6 +128,7 @@ public final class PhysicsValue implements org.omg.CORBA.portable.IDLEntity {
 	 * @return a string representation of the object.
 	 */
 
+	@Override
 	public String toString() {
 		return toScientificNotation();
 	}

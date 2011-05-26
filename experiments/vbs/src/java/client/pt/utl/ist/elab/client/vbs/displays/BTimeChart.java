@@ -11,6 +11,11 @@ package pt.utl.ist.elab.client.vbs.displays;
  * @author Queiro'
  */
 public class BTimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6644240122314922711L;
+
 	/** Creates a new instance of AnguloIntensidadeChart */
 	public BTimeChart() {
 		super();

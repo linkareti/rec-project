@@ -31,9 +31,9 @@ public class BSDriver extends VirtualBaseDriver {
 	// vosso caso!
 	private static String BS_DRIVER_LOGGER = "BS.Logger";
 	static {
-		Logger l = LogManager.getLogManager().getLogger(BS_DRIVER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(BSDriver.BS_DRIVER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(BS_DRIVER_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(BSDriver.BS_DRIVER_LOGGER));
 		}
 	}
 
@@ -50,34 +50,37 @@ public class BSDriver extends VirtualBaseDriver {
 	public BSDriver() {
 	}
 
-	public void config(HardwareAcquisitionConfig config, HardwareInfo info) throws IncorrectStateException,
+	@Override
+	public void config(final HardwareAcquisitionConfig config, final HardwareInfo info) throws IncorrectStateException,
 			WrongConfigurationException {
 		fireIDriverStateListenerDriverConfiguring();
 		info.validateConfig(config);
 		extraValidateConfig(config, info);
 		try {
 			configure(config, info);
-		} catch (Exception e) {
-			LoggerUtil.logThrowable("Error on config...", e, Logger.getLogger(BS_DRIVER_LOGGER));
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable("Error on config...", e, Logger.getLogger(BSDriver.BS_DRIVER_LOGGER));
 			throw new WrongConfigurationException();
 		}
 	}
 
-	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException {
+	@Override
+	public void configure(final HardwareAcquisitionConfig config, final HardwareInfo info)
+			throws WrongConfigurationException {
 		// Recebemos ordem para configurar, no HardwareAcquisitionConfig estao
 		// todas as informacoes escolhidas pelo cliente...agora e' so' pedir
 		this.config = config;
 		this.info = info;
 
-		double i1_ini = Double.parseDouble(config.getSelectedHardwareParameterValue("i1_ini"));
-		double i1_fin = Double.parseDouble(config.getSelectedHardwareParameterValue("i1_fin"));
-		double i2_ini = Double.parseDouble(config.getSelectedHardwareParameterValue("i2_ini"));
-		double i2_fin = Double.parseDouble(config.getSelectedHardwareParameterValue("i2_fin"));
-		double dist = Double.parseDouble(config.getSelectedHardwareParameterValue("dist"));
-		double xpto = Double.parseDouble(config.getSelectedHardwareParameterValue("xpto"));
-		double ypto = Double.parseDouble(config.getSelectedHardwareParameterValue("ypto"));
-		int tbs = (int) config.getSelectedFrequency().getFrequency();
-		int nSamples = config.getTotalSamples();
+		final double i1_ini = Double.parseDouble(config.getSelectedHardwareParameterValue("i1_ini"));
+		final double i1_fin = Double.parseDouble(config.getSelectedHardwareParameterValue("i1_fin"));
+		final double i2_ini = Double.parseDouble(config.getSelectedHardwareParameterValue("i2_ini"));
+		final double i2_fin = Double.parseDouble(config.getSelectedHardwareParameterValue("i2_fin"));
+		final double dist = Double.parseDouble(config.getSelectedHardwareParameterValue("dist"));
+		final double xpto = Double.parseDouble(config.getSelectedHardwareParameterValue("xpto"));
+		final double ypto = Double.parseDouble(config.getSelectedHardwareParameterValue("ypto"));
+		final int tbs = (int) config.getSelectedFrequency().getFrequency();
+		final int nSamples = config.getTotalSamples();
 
 		// Vamos criar o nosso produtor de dados!
 		dataSource = new BSDataProducer(this, i1_ini, i1_fin, i2_ini, i2_fin, dist, xpto, ypto, tbs, nSamples);
@@ -93,10 +96,12 @@ public class BSDriver extends VirtualBaseDriver {
 		fireIDriverStateListenerDriverConfigured();
 	}
 
+	@Override
 	public String getDriverUniqueID() {
-		return DRIVER_UNIQUE_ID;
+		return BSDriver.DRIVER_UNIQUE_ID;
 	}
 
+	@Override
 	public void shutdown() {
 		if (dataSource != null) {
 			dataSource.stopNow();
@@ -104,41 +109,45 @@ public class BSDriver extends VirtualBaseDriver {
 		super.shutDownNow();
 	}
 
-	public IDataSource start(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public IDataSource start(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverStarting();
 		dataSource.startProduction();
 		fireIDriverStateListenerDriverStarted();
 		return dataSource;
 	}
 
-	public void stop(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public void stop(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverStoping();
 		dataSource.stopNow();
 		fireIDriverStateListenerDriverStoped();
 	}
 
+	@Override
 	public Object getHardwareInfo() {
 		fireIDriverStateListenerDriverReseting();
-		
-		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+
+		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+				+ "/HardwareInfo.xml";
 		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
-
-		if (prop.indexOf("://") == -1)
+		if (prop.indexOf("://") == -1) {
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
+		}
 
 		java.net.URL url = null;
 		try {
 			url = ReCProtocols.getURL(prop);
-		} catch (java.net.MalformedURLException e) {
+		} catch (final java.net.MalformedURLException e) {
 			// Nao sera' de alterar isto para BS, ou algo do genero?
 			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger("DPendulum"));
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
-			} catch (java.net.MalformedURLException e2) {
+			} catch (final java.net.MalformedURLException e2) {
 				// E isto?
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2, Logger
-						.getLogger("DPendulum"));
+				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
+						Logger.getLogger("DPendulum"));
 			}
 		}
 		fireIDriverStateListenerDriverReseted();

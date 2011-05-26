@@ -17,12 +17,14 @@ import javax.swing.table.TableCellRenderer;
  * @author José Pedro Pereira - Linkare TI
  */
 public class PropertyObjectTableCellRenderer implements TableCellRenderer {
-	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-			int row, int column) {
-		return createRendererButton(value, isSelected, hasFocus, table);
+	@Override
+	public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected,
+			final boolean hasFocus, final int row, final int column) {
+		return PropertyObjectTableCellRenderer.createRendererButton(value, isSelected, hasFocus, table);
 	}
 
-	public static JButton createRendererButton(Object value, boolean isSelected, boolean hasFocus, JTable table) {
+	public static JButton createRendererButton(final Object value, final boolean isSelected, final boolean hasFocus,
+			final JTable table) {
 		return new JPropertyObjectButton((PropertyObject) value, isSelected, hasFocus, table);
 	}
 

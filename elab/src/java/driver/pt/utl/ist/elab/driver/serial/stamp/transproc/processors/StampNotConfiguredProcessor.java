@@ -15,11 +15,12 @@ public class StampNotConfiguredProcessor extends AbstractStampProcessor {
 	public static final String COMMAND_IDENTIFIER = AbstractStampDriver.CONFIG_NOT_DONE_STRING;
 
 	public StampNotConfiguredProcessor() {
-		super(COMMAND_IDENTIFIER);
+		super(StampNotConfiguredProcessor.COMMAND_IDENTIFIER);
 	}
 
-	public boolean process(StampCommand command) {
-		command.addCommandData(COMMAND_IDENTIFIER, Boolean.TRUE);
+	@Override
+	public boolean process(final StampCommand command) {
+		command.addCommandData(StampNotConfiguredProcessor.COMMAND_IDENTIFIER, Boolean.TRUE);
 		return true;
 	}
 

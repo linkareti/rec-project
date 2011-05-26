@@ -35,7 +35,7 @@ public final class UserInfo implements IDLEntity
 
 	} // ctor
 
-	public UserInfo(String userName)
+	public UserInfo(final String userName)
 
 	{
 
@@ -43,7 +43,7 @@ public final class UserInfo implements IDLEntity
 
 	} // ctor
 
-	public UserInfo(String userName, com.linkare.rec.acquisition.Property[] userProps)
+	public UserInfo(final String userName, final com.linkare.rec.acquisition.Property[] userProps)
 
 	{
 
@@ -53,7 +53,7 @@ public final class UserInfo implements IDLEntity
 
 	}
 
-	public UserInfo(UserInfo other)
+	public UserInfo(final UserInfo other)
 
 	{
 
@@ -63,11 +63,11 @@ public final class UserInfo implements IDLEntity
 
 		{
 
-			Property[] props = new Property[other.userProps.length];
+			final Property[] props = new Property[other.userProps.length];
 
-			for (int i = 0; i < props.length; i++)
-
+			for (int i = 0; i < props.length; i++) {
 				props[i] = new Property(other.userProps[i]);
+			}
 
 			setUserProps(props);
 
@@ -101,7 +101,7 @@ public final class UserInfo implements IDLEntity
 	 * 
 	 */
 
-	public void setUserName(java.lang.String userName)
+	public void setUserName(final java.lang.String userName)
 
 	{
 
@@ -122,7 +122,7 @@ public final class UserInfo implements IDLEntity
 
 	{
 
-		return this.userProps;
+		return userProps;
 
 	}
 
@@ -135,7 +135,7 @@ public final class UserInfo implements IDLEntity
 	 * 
 	 */
 
-	public void setUserProps(com.linkare.rec.acquisition.Property[] userProps)
+	public void setUserProps(final com.linkare.rec.acquisition.Property[] userProps)
 
 	{
 
@@ -143,16 +143,17 @@ public final class UserInfo implements IDLEntity
 
 	}
 
-	public void addUserProp(Property userProp)
+	public void addUserProp(final Property userProp)
 
 	{
 
-		if (userProp == null)
+		if (userProp == null) {
 			return;
+		}
 
-		if (userProps == null)
-
+		if (userProps == null) {
 			userProps = new Property[0];
+		}
 
 		Property[] tempProps = new Property[userProps.length + 1];
 
@@ -164,23 +165,24 @@ public final class UserInfo implements IDLEntity
 		tempProps = null;
 	}
 
-	public Any getPropertyValue(String propName)
+	public Any getPropertyValue(final String propName)
 
 	{
 
-		if (getUserProps() == null)
+		if (getUserProps() == null) {
 			return null;
+		}
 
 		for (int i = 0; i < getUserProps().length; i++)
 
 		{
 
-			if (getUserProps()[i] != null)
-
+			if (getUserProps()[i] != null) {
 				if ((propName == null && getUserProps()[i].getName() == null)
 						|| (propName != null && propName.equals(getUserProps()[i].getName()))) {
 					return getUserProps()[i].getValue();
 				}
+			}
 
 		}
 
@@ -188,11 +190,11 @@ public final class UserInfo implements IDLEntity
 
 	}
 
-	public void setPassword(String pass)
+	public void setPassword(final String pass)
 
 	{
 
-		Property newProp = new Property();
+		final Property newProp = new Property();
 
 		removeUserProp(PROPKEY_USERINFO_PASS.value);
 
@@ -204,11 +206,11 @@ public final class UserInfo implements IDLEntity
 
 	}
 
-	public void setCertificate(byte[] certificate)
+	public void setCertificate(final byte[] certificate)
 
 	{
 
-		Property newProp = new Property();
+		final Property newProp = new Property();
 
 		removeUserProp(PROPKEY_USERINFO_CERTIFICATE.value);
 
@@ -220,11 +222,11 @@ public final class UserInfo implements IDLEntity
 
 	}
 
-	public void setLockedTime(DateTime dateTime)
+	public void setLockedTime(final DateTime dateTime)
 
 	{
 
-		Property newProp = new Property();
+		final Property newProp = new Property();
 
 		removeUserProp(PROPKEY_USERINFO_LOCKED_DATETIME.value);
 
@@ -236,12 +238,12 @@ public final class UserInfo implements IDLEntity
 
 	}
 
-	public void setNextLockTime(DateTime dateTimeMin, DateTime dateTimeMax)
+	public void setNextLockTime(final DateTime dateTimeMin, final DateTime dateTimeMax)
 
 	{
 
 		// TODO - If it works for nulls with LockedTime... do it here also
-		Property newProp = new Property();
+		final Property newProp = new Property();
 
 		removeUserProp(PROPKEY_USERINFO_NEXTLOCK_DATETIME_MIN.value);
 
@@ -251,7 +253,7 @@ public final class UserInfo implements IDLEntity
 
 		addUserProp(newProp);
 
-		Property newProp2 = new Property();
+		final Property newProp2 = new Property();
 
 		removeUserProp(PROPKEY_USERINFO_NEXTLOCK_DATETIME_MAX.value);
 
@@ -267,11 +269,11 @@ public final class UserInfo implements IDLEntity
 
 	{
 
-		Any value = getPropertyValue(PROPKEY_USERINFO_PASS.value);
+		final Any value = getPropertyValue(PROPKEY_USERINFO_PASS.value);
 
-		if (value != null)
-
+		if (value != null) {
 			return WStringValueHelper.extract(value);
+		}
 
 		return null;
 
@@ -281,11 +283,11 @@ public final class UserInfo implements IDLEntity
 
 	{
 
-		Any value = getPropertyValue(PROPKEY_USERINFO_CERTIFICATE.value);
+		final Any value = getPropertyValue(PROPKEY_USERINFO_CERTIFICATE.value);
 
-		if (value != null)
-
+		if (value != null) {
 			return OctetSeqHelper.extract(value);
+		}
 
 		return null;
 
@@ -295,20 +297,20 @@ public final class UserInfo implements IDLEntity
 
 	{
 
-		Any value = getPropertyValue(PROPKEY_USERINFO_LOCKED_DATETIME.value);
+		final Any value = getPropertyValue(PROPKEY_USERINFO_LOCKED_DATETIME.value);
 
-		if (value != null)
-
+		if (value != null) {
 			return VTDateTimeHelper.extract(value);
+		}
 
 		return null;
 
 	}
 
-	public void setHardwaresConnectedTo(String hardwareIdsCSV)
+	public void setHardwaresConnectedTo(final String hardwareIdsCSV)
 
 	{
-		Property newProp = new Property();
+		final Property newProp = new Property();
 
 		removeUserProp(PROPKEY_USERINFO_HARDWARES_CONNECTED_TO.value);
 
@@ -323,10 +325,11 @@ public final class UserInfo implements IDLEntity
 	public String getHardwaresConnectedTo()
 
 	{
-		Any value = getPropertyValue(PROPKEY_USERINFO_HARDWARES_CONNECTED_TO.value);
+		final Any value = getPropertyValue(PROPKEY_USERINFO_HARDWARES_CONNECTED_TO.value);
 
-		if (value != null)
+		if (value != null) {
 			return WStringValueHelper.extract(value);
+		}
 
 		return null;
 	}
@@ -339,17 +342,17 @@ public final class UserInfo implements IDLEntity
 
 		DateTime max = null;
 
-		Any valueMin = getPropertyValue(PROPKEY_USERINFO_NEXTLOCK_DATETIME_MIN.value);
+		final Any valueMin = getPropertyValue(PROPKEY_USERINFO_NEXTLOCK_DATETIME_MIN.value);
 
-		if (valueMin != null)
-
+		if (valueMin != null) {
 			min = VTDateTimeHelper.extract(valueMin);
+		}
 
-		Any valueMax = getPropertyValue(PROPKEY_USERINFO_NEXTLOCK_DATETIME_MAX.value);
+		final Any valueMax = getPropertyValue(PROPKEY_USERINFO_NEXTLOCK_DATETIME_MAX.value);
 
-		if (valueMax != null)
-
+		if (valueMax != null) {
 			max = VTDateTimeHelper.extract(valueMax);
+		}
 
 		// removeUserProp(valueMax);
 
@@ -359,15 +362,17 @@ public final class UserInfo implements IDLEntity
 
 	}
 
-	public void removeUserProp(String propName)
+	public void removeUserProp(final String propName)
 
 	{
 
-		if (propName == null)
+		if (propName == null) {
 			return;
+		}
 
-		if (userProps == null)
+		if (userProps == null) {
 			return;
+		}
 
 		int found_index = -1;
 
@@ -403,6 +408,7 @@ public final class UserInfo implements IDLEntity
 
 	}
 
+	@Override
 	public String toString() {
 		String retVal = getUserName();
 		if (getHardwaresConnectedTo() != null && !getHardwaresConnectedTo().equals("")) {

@@ -16,9 +16,9 @@ import com.linkare.rec.impl.logging.LoggerUtil;
  */
 public class Deactivator extends Thread {
 	private Deactivatable deactivatable = null;
-	private long DEACTIVATION_TIME = 40000;
+	private final long DEACTIVATION_TIME = 40000;
 	private boolean deactivated = false;
-	
+
 	private Logger logger = null;
 
 	/**
@@ -26,7 +26,7 @@ public class Deactivator extends Thread {
 	 * 
 	 * @param deactivatable
 	 */
-	public Deactivator(Deactivatable deactivatable) {
+	public Deactivator(final Deactivatable deactivatable) {
 		super("Deactivator Thread...");
 		setDaemon(true);
 		setPriority(Thread.NORM_PRIORITY - 2);
@@ -39,20 +39,21 @@ public class Deactivator extends Thread {
 	 * Creates a new instance of Deactivator
 	 * 
 	 * @param deactivatable
-	 * @param logger 
+	 * @param logger
 	 */
-	public Deactivator(Deactivatable deactivatable, Logger logger) {
+	public Deactivator(final Deactivatable deactivatable, final Logger logger) {
 		this(deactivatable);
-		
+
 		this.logger = logger;
 	}
 
+	@Override
 	public void run() {
 
 		synchronized (this) {
 			try {
 				this.wait(DEACTIVATION_TIME);
-			} catch (InterruptedException ignored) {
+			} catch (final InterruptedException ignored) {
 				return;
 			}
 		}
@@ -60,7 +61,7 @@ public class Deactivator extends Thread {
 			synchronized (this) {
 				try {
 					this.wait(DEACTIVATION_TIME);
-				} catch (InterruptedException ignored) {
+				} catch (final InterruptedException ignored) {
 					return;
 				}
 			}
@@ -80,7 +81,7 @@ public class Deactivator extends Thread {
 			// System.out.println("deactivatable has an object id = null... returning");
 			return;
 		}
-		byte[] oid = deactivatable.getOID().getBytes();
+		final byte[] oid = deactivatable.getOID().getBytes();
 		try {
 			/*
 			 * System.out.println("************************************");
@@ -97,7 +98,7 @@ public class Deactivator extends Thread {
 			 * System.out.println("************************************");
 			 */
 			deactivated = true;
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			deactivated = false;
 			LoggerUtil.logThrowable("Exception while trying to deactivate.", e, logger);
 		}

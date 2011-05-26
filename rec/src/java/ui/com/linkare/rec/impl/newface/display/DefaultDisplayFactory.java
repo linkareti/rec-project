@@ -25,57 +25,69 @@ public class DefaultDisplayFactory extends AbstractDisplayFactory {
 
 	@Override
 	public List<ExpDataDisplay> getDisplays() {
-		List<Display> initDisplays = getInitDisplays();
-		List<ExpDataDisplay> tempDisplays = new ArrayList<ExpDataDisplay>();
+		final List<Display> initDisplays = getInitDisplays();
+		final List<ExpDataDisplay> tempDisplays = new ArrayList<ExpDataDisplay>();
 
-		for (Display display : initDisplays) {
+		for (final Display display : initDisplays) {
 			try {
-				String beanName = ReCResourceBundle.findStringOrDefault(display.getClassLocationBundleKey(), null);
-				if (beanName == null)
+				final String beanName = ReCResourceBundle
+						.findStringOrDefault(display.getClassLocationBundleKey(), null);
+				if (beanName == null) {
 					continue;
-				Object dataDisplayTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(), beanName.trim());
-				if (java.beans.Beans.isInstanceOf(dataDisplayTemp, ExpDataDisplay.class))
+				}
+				final Object dataDisplayTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
+						beanName.trim());
+				if (java.beans.Beans.isInstanceOf(dataDisplayTemp, ExpDataDisplay.class)) {
 					tempDisplays.add(new ExpDataDisplayTreeIconAndName((ExpDataDisplay) dataDisplayTemp, display));
+				}
 
-			} catch (Throwable t) {
-				log.log(Level.SEVERE, "Could not instantiate display", t);
+			} catch (final Throwable t) {
+				DefaultDisplayFactory.log.log(Level.SEVERE, "Could not instantiate display", t);
 			}
 		}
 		return tempDisplays;
 	}
 
-	// Hacked... this is the way I found to, without changing to source code, set
-	// tree image and label in the experiment tabs... i think this is the logic way..
+	// Hacked... this is the way I found to, without changing to source code,
+	// set
+	// tree image and label in the experiment tabs... i think this is the logic
+	// way..
 	private class ExpDataDisplayTreeIconAndName implements ExpDataDisplay {
 		private ExpDataDisplay expDisplay = null;
 		private Display treeDisplay = null;
 
-		public ExpDataDisplayTreeIconAndName(ExpDataDisplay expDisplay, Display treeDisplay) {
+		public ExpDataDisplayTreeIconAndName(final ExpDataDisplay expDisplay, final Display treeDisplay) {
 			this.expDisplay = expDisplay;
 			this.treeDisplay = treeDisplay;
 		}
 
+		@Override
 		public javax.swing.JComponent getDisplay() {
 			return expDisplay.getDisplay();
 		}
 
+		@Override
 		public javax.swing.Icon getIcon() {
 			return ReCResourceBundle.findImageIconOrDefault(treeDisplay.getIconLocationBundleKey(), null);
 		}
 
+		@Override
 		public javax.swing.JMenuBar getMenuBar() {
 			return expDisplay.getMenuBar();
 		}
 
+		@Override
 		public String getName() {
 			return ReCResourceBundle.findStringOrDefault(treeDisplay.getDisplayStringBundleKey(), expDisplay.getName());
 		}
 
+		@Override
 		public javax.swing.JToolBar getToolBar() {
 			return expDisplay.getToolBar();
 		}
 
-		public void setExpDataModel(com.linkare.rec.impl.client.experiment.ExpDataModel model) {
+		@Override
+		public void setExpDataModel(final com.linkare.rec.impl.client.experiment.ExpDataModel model) {
 			expDisplay.setExpDataModel(model);
 		}
 	}

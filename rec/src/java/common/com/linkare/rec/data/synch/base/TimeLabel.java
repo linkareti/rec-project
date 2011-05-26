@@ -12,6 +12,10 @@ package com.linkare.rec.data.synch.base;
  */
 public class TimeLabel extends javax.swing.JLabel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5767322376038801008L;
 	/** Holds value of property time. */
 	private com.linkare.rec.data.synch.Time time;
 
@@ -19,14 +23,17 @@ public class TimeLabel extends javax.swing.JLabel {
 	public TimeLabel() {
 	}
 
+	@Override
 	public String getText() {
-		if (time == null)
+		if (time == null) {
 			return "";
-		else
+		} else {
 			return time.toString();
+		}
 	}
 
-	public void setText(String str) {
+	@Override
+	public void setText(final String str) {
 	}
 
 	/**
@@ -35,7 +42,7 @@ public class TimeLabel extends javax.swing.JLabel {
 	 * @return Value of property time.
 	 */
 	public com.linkare.rec.data.synch.Time getTime() {
-		return this.time;
+		return time;
 	}
 
 	/**
@@ -43,7 +50,7 @@ public class TimeLabel extends javax.swing.JLabel {
 	 * 
 	 * @param time New value of property time.
 	 */
-	public void setTime(com.linkare.rec.data.synch.Time time) {
+	public void setTime(final com.linkare.rec.data.synch.Time time) {
 		this.time = time;
 		repaint();
 	}

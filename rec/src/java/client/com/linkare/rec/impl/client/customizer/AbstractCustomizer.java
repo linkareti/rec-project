@@ -16,6 +16,10 @@ import com.linkare.rec.data.metadata.HardwareInfo;
 public abstract class AbstractCustomizer extends javax.swing.JPanel implements
 		com.linkare.rec.impl.client.customizer.ICustomizer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2585288988776353777L;
 	/** Utility field used by event firing mechanism. */
 	private javax.swing.event.EventListenerList listenerList = null;
 
@@ -24,7 +28,8 @@ public abstract class AbstractCustomizer extends javax.swing.JPanel implements
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -36,7 +41,8 @@ public abstract class AbstractCustomizer extends javax.swing.JPanel implements
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -45,53 +51,57 @@ public abstract class AbstractCustomizer extends javax.swing.JPanel implements
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
-			return;
-		Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
+	// private void fireICustomizerListenerCanceled() {
+	// if (listenerList == null)
+	// return;
+	// Object[] listeners = listenerList.getListenerList();
+	// for (int i = listeners.length - 2; i >= 0; i -= 2) {
+	// if (listeners[i] == ICustomizerListener.class) {
+	// ((ICustomizerListener) listeners[i + 1]).canceled();
+	// }
+	// }
+	// }
 
 	/**
 	 * Notifies all registered listeners about the event.
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
-			return;
-		Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
+	// private void fireICustomizerListenerDone() {
+	// if (listenerList == null)
+	// return;
+	// Object[] listeners = listenerList.getListenerList();
+	// for (int i = listeners.length - 2; i >= 0; i -= 2) {
+	// if (listeners[i] == ICustomizerListener.class) {
+	//
+	// ((ICustomizerListener) listeners[i + 1]).done();
+	// }
+	// }
+	// }
 
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
 		return acqConfig;
 	}
 
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}

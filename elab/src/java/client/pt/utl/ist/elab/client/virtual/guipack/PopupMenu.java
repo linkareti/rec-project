@@ -29,6 +29,10 @@ import javax.swing.JTextField;
  */
 public class PopupMenu extends JPopupMenu implements ActionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8592133133038632731L;
 	private ActionListener listener;
 
 	/** Creates a new instance of PopupMenu */
@@ -36,49 +40,53 @@ public class PopupMenu extends JPopupMenu implements ActionListener {
 		setEnabled(true);
 	}
 
-	public PopupMenu(ActionListener listener) {
+	public PopupMenu(final ActionListener listener) {
 		setEnabled(true);
 		this.listener = listener;
 	}
 
-	public void addItem(String name, String toolTip) {
-		JMenuItem item = new JMenuItem(name);
+	public void addItem(final String name, final String toolTip) {
+		final JMenuItem item = new JMenuItem(name);
 		item.setToolTipText(toolTip);
 
-		if (listener == null)
+		if (listener == null) {
 			item.addActionListener(this);
-		else
+		} else {
 			item.addActionListener(listener);
+		}
 
 		add(item);
 	}
 
-	public void addCheckBoxItem(String name, String toolTip, boolean selected) {
-		JCheckBoxMenuItem item = new JCheckBoxMenuItem(name);
+	public void addCheckBoxItem(final String name, final String toolTip, final boolean selected) {
+		final JCheckBoxMenuItem item = new JCheckBoxMenuItem(name);
 		item.setToolTipText(toolTip);
 		item.setSelected(selected);
 
-		if (listener == null)
+		if (listener == null) {
 			item.addActionListener(this);
-		else
+		} else {
 			item.addActionListener(listener);
+		}
 
 		add(item);
 	}
 
-	public void addCheckBoxItem(String name, String toolTip) {
-		JCheckBoxMenuItem item = new JCheckBoxMenuItem(name);
+	public void addCheckBoxItem(final String name, final String toolTip) {
+		final JCheckBoxMenuItem item = new JCheckBoxMenuItem(name);
 		item.setToolTipText(toolTip);
 
-		if (listener == null)
+		if (listener == null) {
 			item.addActionListener(this);
-		else
+		} else {
 			item.addActionListener(listener);
+		}
 
 		add(item);
 	}
 
-	public void actionPerformed(ActionEvent e) {
+	@Override
+	public void actionPerformed(final ActionEvent e) {
 	}
 
 	/*
@@ -86,16 +94,17 @@ public class PopupMenu extends JPopupMenu implements ActionListener {
 	 * sliderConfig : 0 -> majorTickSpacing 1 -> Maximum 2 -> Minimum 3 ->
 	 * MinorTickSpacing
 	 */
-	public static int dialog(String title, String toolTip, String okToolTip, int value, int[] sliderConfig) {
+	public static int dialog(final String title, final String toolTip, final String okToolTip, final int value,
+			final int[] sliderConfig) {
 		java.awt.GridBagConstraints gridBagConstraints;
 
-		JDialog tempDialog = new JDialog(new JFrame(), title, true);
+		final JDialog tempDialog = new JDialog(new JFrame(), title, true);
 
-		JPanel dialogPanel = new JPanel();
-		JTextField dialogTextField = new JTextField();
+		final JPanel dialogPanel = new JPanel();
+		final JTextField dialogTextField = new JTextField();
 
-		JSlider dialogSlider = new JSlider();
-		JButton okButton = new JButton();
+		final JSlider dialogSlider = new JSlider();
+		final JButton okButton = new JButton();
 
 		tempDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		dialogPanel.setLayout(new java.awt.GridBagLayout());
@@ -113,7 +122,8 @@ public class PopupMenu extends JPopupMenu implements ActionListener {
 		dialogSlider.setPaintTicks(true);
 
 		dialogSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				((JTextField) ((JSlider) evt.getSource()).getParent().getComponents()[1]).setText(""
 						+ ((JSlider) evt.getSource()).getValue());
 			}
@@ -133,7 +143,8 @@ public class PopupMenu extends JPopupMenu implements ActionListener {
 		dialogTextField.setMinimumSize(new java.awt.Dimension(62, 20));
 		dialogTextField.setPreferredSize(new java.awt.Dimension(62, 20));
 		dialogTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				GUtils.validateInput((JTextField) evt.getSource(), ((JSlider) ((JTextField) evt.getSource())
 						.getParent().getComponents()[0]), 1);
 			}
@@ -147,7 +158,8 @@ public class PopupMenu extends JPopupMenu implements ActionListener {
 		okButton.setText("Ok");
 		okButton.setToolTipText(okToolTip);
 		okButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				((JDialog) ((JButton) evt.getSource()).getParent().getParent().getParent().getParent().getParent())
 						.dispose();
 			}
@@ -162,8 +174,8 @@ public class PopupMenu extends JPopupMenu implements ActionListener {
 
 		tempDialog.pack();
 
-		java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-		java.awt.Dimension tempSize = tempDialog.getSize();
+		final java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+		final java.awt.Dimension tempSize = tempDialog.getSize();
 		tempDialog.setLocation((int) ((screenSize.width - tempSize.getWidth()) / 2d),
 				(int) ((screenSize.height - tempSize.getHeight()) / 2d));
 

@@ -13,8 +13,7 @@ import java.awt.Window;
  * An Undecorated Dialog for the ReC Application.
  * <p>
  * 
- * @param <C>
- *            The dialog content type
+ * @param <C> The dialog content type
  * 
  * @author Henrique Fernandes
  */
@@ -22,14 +21,14 @@ public class UndecoratedDialog<C extends AbstractContentPane> extends DefaultDia
 
 	private static final long serialVersionUID = -605288573925533710L;
 
-	//	/**
-	//	 * @param content
-	//	 */
-	//	public UndecoratedDialog(C content) {
-	//		this(content, null);
-	//	}
+	// /**
+	// * @param content
+	// */
+	// public UndecoratedDialog(C content) {
+	// this(content, null);
+	// }
 
-	public UndecoratedDialog(Window owner, C content) {
+	public UndecoratedDialog(final Window owner, final C content) {
 		super(owner, "", content);
 	}
 

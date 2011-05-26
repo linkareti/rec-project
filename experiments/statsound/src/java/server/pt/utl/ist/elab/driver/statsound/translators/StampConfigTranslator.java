@@ -26,22 +26,23 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 
 	/** Creates a new instance of StampRelayTranslator */
 	public StampConfigTranslator() {
-		super(COMMAND_IDENTIFIER);
+		super(StampConfigTranslator.COMMAND_IDENTIFIER);
 	}
 
-	public boolean translate(StampCommand command) {
+	@Override
+	public boolean translate(final StampCommand command) {
 		if (command.getCommandIdentifier() == null) {
 			return false;
 		}
-		if (!command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER)) {
+		if (!command.getCommandIdentifier().equalsIgnoreCase(StampConfigTranslator.COMMAND_IDENTIFIER)) {
 			return false;
 		}
-		int numSamples = ((Integer) command.getCommandData(NUMSAMPLES_STR)).intValue();
-		int xini = ((Integer) command.getCommandData(POS_INIT_STR)).intValue() - 1264;
-		int xfin = ((Integer) command.getCommandData(POS_FIN_STR)).intValue() - 1264;
-		int reset = ((Integer) command.getCommandData(RESET_STR)).intValue();
+		final int numSamples = ((Integer) command.getCommandData(StampConfigTranslator.NUMSAMPLES_STR)).intValue();
+		final int xini = ((Integer) command.getCommandData(StampConfigTranslator.POS_INIT_STR)).intValue() - 1264;
+		final int xfin = ((Integer) command.getCommandData(StampConfigTranslator.POS_FIN_STR)).intValue() - 1264;
+		final int reset = ((Integer) command.getCommandData(StampConfigTranslator.RESET_STR)).intValue();
 
-		String status = (String) command.getCommandData(STATUS_STR);
+		final String status = (String) command.getCommandData(StampConfigTranslator.STATUS_STR);
 
 		String numSamplesStr = "" + numSamples;
 		while (numSamplesStr.length() < 3) {
@@ -63,7 +64,7 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 			statusStr = "0" + statusStr;
 		}
 
-		String resetStr = "" + reset;
+		final String resetStr = "" + reset;
 
 		System.out.println("Received:\n");
 		System.out.println("numSamplesStr=" + numSamplesStr);
@@ -72,8 +73,8 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 		System.out.println("statusStr=" + statusStr);
 		System.out.println("resetStr=" + resetStr);
 
-		String commandStr = command.getCommandIdentifier() + " " + numSamplesStr + " " + xiniStr + " " + xfinStr + " "
-				+ statusStr + " " + resetStr;
+		final String commandStr = command.getCommandIdentifier() + " " + numSamplesStr + " " + xiniStr + " " + xfinStr
+				+ " " + statusStr + " " + resetStr;
 		command.setCommand(commandStr);
 		return true;
 	}

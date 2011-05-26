@@ -21,6 +21,10 @@ import com.linkare.rec.impl.logging.LoggerUtil;
  */
 public class DefaultExpDataModel extends AbstractExpDataModel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1255034627816487663L;
 	private static String DATA_RECEIVER_LOGGER = "DataReceiver.Logger";
 	private int channelCount = -1;
 
@@ -29,9 +33,9 @@ public class DefaultExpDataModel extends AbstractExpDataModel {
 	private Hashtable<String, ChannelAcquisitionConfig> channels = null;
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(DATA_RECEIVER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(DefaultExpDataModel.DATA_RECEIVER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(DATA_RECEIVER_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(DefaultExpDataModel.DATA_RECEIVER_LOGGER));
 		}
 	}
 
@@ -40,6 +44,7 @@ public class DefaultExpDataModel extends AbstractExpDataModel {
 		super();
 	}
 
+	@Override
 	public void fireNewSamples() {
 		// int maxpacket = getSamplesPacketSource().getLargestNumPacket();
 		// fireExpDataModelListenerNewSamples(maxpacket);
@@ -50,123 +55,145 @@ public class DefaultExpDataModel extends AbstractExpDataModel {
 	 * 
 	 * @return Value of property channelCount.
 	 */
+	@Override
 	public int getChannelCount() {
-		if (channelCount != -1)
+		if (channelCount != -1) {
 			return channelCount;
+		}
 
 		try {
 			channelCount = getAcquisitionConfig().getChannelsConfig().length;
-		} catch (NullPointerException npe) {
+		} catch (final NullPointerException npe) {
 			LoggerUtil.logThrowable("Couldn't get Channel Count from Acquisition Header!", npe, LogManager
-					.getLogManager().getLogger(DATA_RECEIVER_LOGGER));
+					.getLogManager().getLogger(DefaultExpDataModel.DATA_RECEIVER_LOGGER));
 		}
 
 		return channelCount;
 	}
 
 	private Hashtable getChannels() {
-		if (channels != null)
+		if (channels != null) {
 			return channels;
+		}
 		try {
-			ChannelAcquisitionConfig[] ch_configs = getAcquisitionConfig().getChannelsConfig();
+			final ChannelAcquisitionConfig[] ch_configs = getAcquisitionConfig().getChannelsConfig();
 
-			if (ch_configs == null)
+			if (ch_configs == null) {
 				return null;
+			}
 
-			if (channels == null)
+			if (channels == null) {
 				channels = new Hashtable<String, ChannelAcquisitionConfig>(ch_configs.length);
+			}
 
-			for (int i = 0; i < ch_configs.length; i++)
+			for (int i = 0; i < ch_configs.length; i++) {
 				channels.put("" + i, ch_configs[i]);
+			}
 
-		} catch (NullPointerException npe) {
+		} catch (final NullPointerException npe) {
 			LoggerUtil.logThrowable("Couldn't get Channel Count from Acquisition Header!", npe, LogManager
-					.getLogManager().getLogger(DATA_RECEIVER_LOGGER));
+					.getLogManager().getLogger(DefaultExpDataModel.DATA_RECEIVER_LOGGER));
 		}
 
 		return channels;
 	}
 
-	public int getChannelIndex(String channelName) {
-		if (getChannels() == null)
+	@Override
+	public int getChannelIndex(final String channelName) {
+		if (getChannels() == null) {
 			return -1;
+		}
 
-		Object[] channelsMapEntries = getChannels().entrySet().toArray();
-		if (channelsMapEntries == null)
+		final Object[] channelsMapEntries = getChannels().entrySet().toArray();
+		if (channelsMapEntries == null) {
 			return -1;
+		}
 
-		for (int i = 0; i < channelsMapEntries.length; i++) {
-			if (((ChannelAcquisitionConfig) ((Map.Entry) channelsMapEntries[i]).getValue()).getChannelName().equals(
-					channelName))
-				return Integer.parseInt((String) ((Map.Entry) channelsMapEntries[i]).getKey());
+		for (final Object channelsMapEntrie : channelsMapEntries) {
+			if (((ChannelAcquisitionConfig) ((Map.Entry) channelsMapEntrie).getValue()).getChannelName().equals(
+					channelName)) {
+				return Integer.parseInt((String) ((Map.Entry) channelsMapEntrie).getKey());
+			}
 		}
 
 		return -1;
 	}
 
-	public String getChannelName(int channelIndex) {
-		if (getChannels() == null)
+	@Override
+	public String getChannelName(final int channelIndex) {
+		if (getChannels() == null) {
 			return null;
+		}
 
 		return ((ChannelAcquisitionConfig) getChannels().get("" + channelIndex)).getChannelName();
 	}
 
-	public ChannelAcquisitionConfig getChannelConfig(int channelIndex) {
-		if (getChannels() == null)
+	@Override
+	public ChannelAcquisitionConfig getChannelConfig(final int channelIndex) {
+		if (getChannels() == null) {
 			return null;
+		}
 
 		return ((ChannelAcquisitionConfig) getChannels().get("" + channelIndex));
 	}
 
-	public ChannelAcquisitionConfig getChannelConfig(String channelName) {
-		if (getChannels() == null)
+	@Override
+	public ChannelAcquisitionConfig getChannelConfig(final String channelName) {
+		if (getChannels() == null) {
 			return null;
+		}
 
-		Object[] channelsMapEntries = getChannels().entrySet().toArray();
-		if (channelsMapEntries == null)
+		final Object[] channelsMapEntries = getChannels().entrySet().toArray();
+		if (channelsMapEntries == null) {
 			return null;
+		}
 
-		for (int i = 0; i < channelsMapEntries.length; i++) {
-			if (((ChannelAcquisitionConfig) ((Map.Entry) channelsMapEntries[i]).getValue()).getChannelName().equals(
-					channelName))
-				return (ChannelAcquisitionConfig) ((Map.Entry) channelsMapEntries[i]).getValue();
+		for (final Object channelsMapEntrie : channelsMapEntries) {
+			if (((ChannelAcquisitionConfig) ((Map.Entry) channelsMapEntrie).getValue()).getChannelName().equals(
+					channelName)) {
+				return (ChannelAcquisitionConfig) ((Map.Entry) channelsMapEntrie).getValue();
+			}
 		}
 
 		return null;
 	}
 
-	public com.linkare.rec.data.synch.DateTime getTimeStamp(int sampleIndex) {
+	@Override
+	public com.linkare.rec.data.synch.DateTime getTimeStamp(final int sampleIndex) {
 		return calcTimeStamp(sampleIndex);
 	}
 
-	private com.linkare.rec.data.synch.DateTime calcTimeStamp(int sampleIndex) {
-		if (getTimeStart() == null)
+	private com.linkare.rec.data.synch.DateTime calcTimeStamp(final int sampleIndex) {
+		if (getTimeStart() == null) {
 			return null;
+		}
 
 		try {
 			return getTimeStart().calculateDateTime(getAcquisitionConfig().getSelectedFrequency(), sampleIndex);
-		} catch (NullPointerException npe) {
+		} catch (final NullPointerException npe) {
 			LoggerUtil.logThrowable("Couldn't calculate TimeStamp for sample " + sampleIndex, npe, LogManager
-					.getLogManager().getLogger(DATA_RECEIVER_LOGGER));
+					.getLogManager().getLogger(DefaultExpDataModel.DATA_RECEIVER_LOGGER));
 		}
 
 		return null;
 	}
 
 	private DateTime getTimeStart() {
-		if (timeStart != null)
+		if (timeStart != null) {
 			return timeStart;
+		}
 
 		try {
 			timeStart = getAcquisitionConfig().getTimeStart();
-		} catch (NullPointerException npe) {
+		} catch (final NullPointerException npe) {
 			LoggerUtil.logThrowable("Couldn't get starting time from Acquisition Header!", npe, LogManager
-					.getLogManager().getLogger(DATA_RECEIVER_LOGGER));
+					.getLogManager().getLogger(DefaultExpDataModel.DATA_RECEIVER_LOGGER));
 		}
 
 		return timeStart;
 	}
 
+	@Override
 	public void clientsListChanged() {
 	}
 

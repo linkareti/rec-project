@@ -35,15 +35,18 @@ public class SamplesPacketSourceDepacketizer implements SamplesSource {
 	}
 
 	/** Creates a new instance of DiscardablePhysicsValueMatrixPacketizer */
-	public SamplesPacketSourceDepacketizer(SamplesPacketSource samplesPacketSource) {
+	public SamplesPacketSourceDepacketizer(final SamplesPacketSource samplesPacketSource) {
 		setSamplesPacketSource(samplesPacketSource);
 	}
 
-	public PhysicsValue[][] getSamples(int sampleStartIndex, int sampleEndIndex) throws SamplesReadException {
-		if (sampleStartIndex > sampleEndIndex)
+	@Override
+	public PhysicsValue[][] getSamples(final int sampleStartIndex, final int sampleEndIndex)
+			throws SamplesReadException {
+		if (sampleStartIndex > sampleEndIndex) {
 			throw new SamplesReadException("Start index is bigger than end index", sampleEndIndex);
+		}
 
-		PhysicsValue[][] retVal = new PhysicsValue[sampleEndIndex - sampleStartIndex + 1][];
+		final PhysicsValue[][] retVal = new PhysicsValue[sampleEndIndex - sampleStartIndex + 1][];
 
 		for (int i = 0; i < retVal.length; i++) {
 			retVal[i] = getSample(sampleStartIndex + i);
@@ -52,49 +55,53 @@ public class SamplesPacketSourceDepacketizer implements SamplesSource {
 		return retVal;
 	}
 
-	private PhysicsValue[] getSample(int sampleIndex) throws SamplesReadException {
+	private PhysicsValue[] getSample(final int sampleIndex) throws SamplesReadException {
 
-		if (samplesLocations == null || getSamplesPacketSource() == null)
+		if (samplesLocations == null || getSamplesPacketSource() == null) {
 			throw new SamplesReadException("Error depacketizing... probably source is not set yet", sampleIndex);
+		}
 
 		try {
-			int[] sampleLocation = (int[]) samplesLocations.get(sampleIndex);
-			SamplesPacket packet = samplesPacketSource.getSamplesPackets(sampleLocation[0], sampleLocation[0])[0];
+			final int[] sampleLocation = samplesLocations.get(sampleIndex);
+			final SamplesPacket packet = samplesPacketSource.getSamplesPackets(sampleLocation[0], sampleLocation[0])[0];
 			return packet.getData(sampleLocation[1]);
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			throw new SamplesReadException("Error depacketizing... couldn't fetch sample", sampleIndex);
 		}
 	}
 
-	private void refreshState(int largestPacketIndex) {
-		if (largestPacketGot >= largestPacketIndex)
+	private void refreshState(final int largestPacketIndex) {
+		if (largestPacketGot >= largestPacketIndex) {
 			return;
+		}
 		try {
 			while (largestPacketGot < largestPacketIndex) {
 
-				SamplesPacket packet = samplesPacketSource
-						.getSamplesPackets(largestPacketGot + 1, largestPacketGot + 1)[0];
+				final SamplesPacket packet = samplesPacketSource.getSamplesPackets(largestPacketGot + 1,
+						largestPacketGot + 1)[0];
 
-				PhysicsValue[][] rows = packet.getData();
+				final PhysicsValue[][] rows = packet.getData();
 
 				++largestPacketGot;
 
-				if (rows == null)
+				if (rows == null) {
 					continue;
+				}
 
 				for (int r = 0; r < rows.length; r++) {
 					samplesLocations.add(new int[] { largestPacketGot, r });
 				}
 
-				if (lastSampleCount == MaxPacketNumUnknown.value)
+				if (lastSampleCount == MaxPacketNumUnknown.value) {
 					lastSampleCount = rows.length - 1;
-				else
+				} else {
 					lastSampleCount += rows.length;
+				}
 
 			}
-		} catch (SamplesPacketReadException ignored) {
+		} catch (final SamplesPacketReadException ignored) {
 		}
 
 		fireNewSamples(lastSampleCount);
@@ -107,7 +114,8 @@ public class SamplesPacketSourceDepacketizer implements SamplesSource {
 	 * @param listener The listener to register.
 	 * 
 	 */
-	public synchronized void addSamplesSourceEventListener(SamplesSourceEventListener listener) {
+	@Override
+	public synchronized void addSamplesSourceEventListener(final SamplesSourceEventListener listener) {
 		if (listenerList == null) {
 			listenerList = new EventListenerList();
 		}
@@ -120,7 +128,8 @@ public class SamplesPacketSourceDepacketizer implements SamplesSource {
 	 * @param listener The listener to remove.
 	 * 
 	 */
-	public synchronized void removeSamplesSourceEventListener(SamplesSourceEventListener listener) {
+	@Override
+	public synchronized void removeSamplesSourceEventListener(final SamplesSourceEventListener listener) {
 		listenerList.remove(SamplesSourceEventListener.class, listener);
 	}
 
@@ -130,11 +139,12 @@ public class SamplesPacketSourceDepacketizer implements SamplesSource {
 	 * @param event The event to be fired
 	 * 
 	 */
-	private void fireNewSamples(int sampleLargestIndex) {
-		SamplesSourceEvent event = new SamplesSourceEvent(this, sampleLargestIndex);
-		if (listenerList == null)
+	private void fireNewSamples(final int sampleLargestIndex) {
+		final SamplesSourceEvent event = new SamplesSourceEvent(this, sampleLargestIndex);
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == SamplesSourceEventListener.class) {
 				((SamplesSourceEventListener) listeners[i + 1]).newSamples(event);
@@ -158,7 +168,7 @@ public class SamplesPacketSourceDepacketizer implements SamplesSource {
 	 * @param source New value of property samplesPacketSource.
 	 * 
 	 */
-	public void setSamplesPacketSource(SamplesPacketSource samplesPacketSource) {
+	public void setSamplesPacketSource(final SamplesPacketSource samplesPacketSource) {
 		if (this.samplesPacketSource != null && this.samplesPacketSource == samplesPacketSource) {
 			return;
 		}
@@ -169,27 +179,31 @@ public class SamplesPacketSourceDepacketizer implements SamplesSource {
 
 		this.samplesPacketSource = samplesPacketSource;
 
-		this.samplesLocations = new ArrayList<int[]>(100);
+		samplesLocations = new ArrayList<int[]>(100);
 
 		if (this.samplesPacketSource != null) {
-			if (adapter == null)
+			if (adapter == null) {
 				adapter = new SamplesPacketSourceAdapter();
+			}
 
 			this.samplesPacketSource.addSamplesPacketSourceEventListener(adapter);
 		}
 	}
 
+	@Override
 	public int getLastSampleNum() {
 		return lastSampleCount;
 	}
 
 	private class SamplesPacketSourceAdapter implements SamplesPacketSourceEventListener {
 
-		public void newSamplesPackets(SamplesPacketSourceEvent evt) {
+		@Override
+		public void newSamplesPackets(final SamplesPacketSourceEvent evt) {
 			// System.out.println("SamplesPacketSourceDepacktizer refreshing state... "+
 			// evt.getPacketLargestIndex());
-			if (evt != null)
+			if (evt != null) {
 				refreshState(evt.getPacketLargestIndex());
+			}
 		}
 
 	}

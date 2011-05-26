@@ -13,6 +13,7 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 
 import javax.swing.Icon;
+import javax.swing.JFileChooser;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.baseUI.utils.ExtensionFilter;
@@ -27,6 +28,11 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  */
 public class DefaultExperimentHeaderInfo extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener,
 		Printable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1914589166869502855L;
 
 	/** Creates new form DefaultExperimentHeaderInfo */
 	public DefaultExperimentHeaderInfo() {
@@ -50,7 +56,8 @@ public class DefaultExperimentHeaderInfo extends javax.swing.JPanel implements E
 				"/com/linkare/rec/impl/baseUI/resources/Print16.gif")));
 		printBtn.setToolTipText("Print");
 		printBtn.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				printBtnActionPerformed(evt);
 			}
 		});
@@ -61,7 +68,8 @@ public class DefaultExperimentHeaderInfo extends javax.swing.JPanel implements E
 				"/com/linkare/rec/impl/baseUI/resources/Save16.gif")));
 		saveBtn.setToolTipText("Save dat file");
 		saveBtn.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				saveBtnActionPerformed(evt);
 			}
 		});
@@ -76,127 +84,145 @@ public class DefaultExperimentHeaderInfo extends javax.swing.JPanel implements E
 
 	}// GEN-END:initComponents
 
-	private void saveBtnActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_saveBtnActionPerformed
+	private void saveBtnActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_saveBtnActionPerformed
 	{// GEN-HEADEREND:event_saveBtnActionPerformed
 
-		javax.swing.JFileChooser jFileChooserSave = new javax.swing.JFileChooser();
+		final javax.swing.JFileChooser jFileChooserSave = new javax.swing.JFileChooser();
 
-		ExtensionFilter textExtension = new ExtensionFilter("dat", "ext");
+		final ExtensionFilter textExtension = new ExtensionFilter("dat", "ext");
 
 		textExtension.setDescription("Acquisition Header File");
 		jFileChooserSave.setAcceptAllFileFilterUsed(false);
 		jFileChooserSave.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
 		jFileChooserSave.setFileFilter(textExtension);
 
-		int returnValue = jFileChooserSave.showSaveDialog(this);
+		final int returnValue = jFileChooserSave.showSaveDialog(this);
 		String extension = null;
-		if (returnValue == jFileChooserSave.APPROVE_OPTION) {
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			extension = textExtension.getExtension();
 		}
 		String path = jFileChooserSave.getSelectedFile().getPath();
 		if (path.endsWith(extension)) {
 			path = path.substring(0, path.length() - 4);
 		}
-		java.io.File saveFile = new java.io.File(path + "." + extension);
+		final java.io.File saveFile = new java.io.File(path + "." + extension);
 
 		try {
-			java.io.FileWriter fileWriter = new java.io.FileWriter(saveFile, true);
-			fileWriter.write(this.acquisitionHeaderDisplay.getText());
+			final java.io.FileWriter fileWriter = new java.io.FileWriter(saveFile, true);
+			fileWriter.write(acquisitionHeaderDisplay.getText());
 			fileWriter.close();
-		} catch (java.io.IOException ioe) {
+		} catch (final java.io.IOException ioe) {
 			// System.out.println("Error while trying to save data to file: "+ioe);
 		}
 	}// GEN-LAST:event_saveBtnActionPerformed
 
-	private void printBtnActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_printBtnActionPerformed
+	private void printBtnActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_printBtnActionPerformed
 	{// GEN-HEADEREND:event_printBtnActionPerformed
-		PrinterJob job = PrinterJob.getPrinterJob();
-		PageFormat pf = job.defaultPage();
+		final PrinterJob job = PrinterJob.getPrinterJob();
+		final PageFormat pf = job.defaultPage();
 		pf.setOrientation(PageFormat.PORTRAIT);
-		PageFormat pf2 = job.pageDialog(pf);
+		final PageFormat pf2 = job.pageDialog(pf);
 		if (pf2 != pf) {
 			job.setPrintable(this, pf2);
 			if (job.printDialog()) {
 				try {
 					job.print();
-				} catch (PrinterException e) {
+				} catch (final PrinterException e) {
 					javax.swing.JOptionPane.showMessageDialog(this, e);
 				}
 			}
 		}
 	}// GEN-LAST:event_printBtnActionPerformed
 
+	@Override
 	public String getName() {
 		return "Experiment info";
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/hwinfo16.gif"));
 	}
 
 	private ExpDataModel model;
 
-	public void setExpDataModel(ExpDataModel model) {
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
 		this.model = model;
 		model.addExpDataModelListener(this);
 	}
 
 	private HardwareAcquisitionConfig header = null;
 
-	private void headerAvailable(HardwareAcquisitionConfig header) {
-		if (header == null)
+	private void headerAvailable(final HardwareAcquisitionConfig header) {
+		if (header == null) {
 			return;
+		}
 
 		this.header = header;
 		acquisitionHeaderDisplay.setAcquisitionHeader(header);
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
-		if (header == null)
+		if (header == null) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
-		if (header == null)
+		if (header == null) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return toolBarHeaderInfo;
 	}
 
-	public int print(Graphics g, PageFormat pageFormat, int pageIndex) throws PrinterException {
+	@Override
+	public int print(final Graphics g, final PageFormat pageFormat, final int pageIndex) throws PrinterException {
 
 		if (pageIndex == 0) {
 			g.translate((int) pageFormat.getImageableX(), (int) pageFormat.getImageableY());
 			g.setClip(0, 0, (int) pageFormat.getImageableWidth(), (int) pageFormat.getImageableHeight());
 			acquisitionHeaderDisplay.print(g);
 			return java.awt.print.Printable.PAGE_EXISTS;
-		} else
+		} else {
 			return java.awt.print.Printable.NO_SUCH_PAGE;
+		}
 
 	}
 

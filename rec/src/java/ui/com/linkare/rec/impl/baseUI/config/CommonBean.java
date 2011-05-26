@@ -21,14 +21,17 @@ public interface CommonBean {
 
 	public void childBeans(boolean recursive, List<CommonBean> beans);
 
+	@Override
 	public boolean equals(Object o);
 
+	@Override
 	public int hashCode();
 
 	public void readNode(Node node);
 
 	public void removePropertyChangeListener(PropertyChangeListener listener);
 
+	@Override
 	public String toString();
 
 	public void validate() throws ReCBaseUIConfig.ValidateException;

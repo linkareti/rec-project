@@ -28,23 +28,25 @@ public class MultiCastExperimentStats implements Serializable {
 	private static String LOGGER = "ReCMultiCastDataProducer.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(MultiCastExperimentStats.LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(MultiCastExperimentStats.LOGGER));
 		}
 	}
 
 	private static String baseDir = null;
 	static {
-		baseDir = System.getProperty("user.dir") + System.getProperty("file.separator") + "ExperimentStats";
-		java.io.File f = new java.io.File(baseDir);
-		if (!f.exists())
+		MultiCastExperimentStats.baseDir = System.getProperty("user.dir") + System.getProperty("file.separator")
+				+ "ExperimentStats";
+		java.io.File f = new java.io.File(MultiCastExperimentStats.baseDir);
+		if (!f.exists()) {
 			f.mkdirs();
+		}
 		f = null;
 	}
 
-	private String hardwareUniqueId;
-	private long lockPeriod;
+	private final String hardwareUniqueId;
+	private final long lockPeriod;
 
 	private long totalNumberOfExecutions = 0;
 	private long runningAverageTimeOfExecution = 0;
@@ -57,14 +59,14 @@ public class MultiCastExperimentStats implements Serializable {
 	 * @param hardwareInfo
 	 * @param lockPeriod
 	 */
-	private MultiCastExperimentStats(HardwareInfo hardwareInfo, long lockPeriod) {
+	private MultiCastExperimentStats(final HardwareInfo hardwareInfo, final long lockPeriod) {
 		this.lockPeriod = lockPeriod;
-		this.hardwareUniqueId = hardwareInfo.getHardwareUniqueID();
+		hardwareUniqueId = hardwareInfo.getHardwareUniqueID();
 
-		Logger.getLogger(LOGGER).log(Level.INFO,
+		Logger.getLogger(MultiCastExperimentStats.LOGGER).log(Level.INFO,
 				"Stats instantiated for hardware " + hardwareUniqueId + " with lock period " + lockPeriod);
 
-		this.runningAverageTimeOfExecution = FrequencyUtil.getMaximumExperimentTime(hardwareInfo);
+		runningAverageTimeOfExecution = FrequencyUtil.getMaximumExperimentTime(hardwareInfo);
 	}
 
 	public synchronized void lockEventSent() {
@@ -79,7 +81,7 @@ public class MultiCastExperimentStats implements Serializable {
 
 	public synchronized void stopExperimentStats() {
 		if (experimentStartTimestamp > 0) {
-			long totalTimeOfCurrentExecution = System.currentTimeMillis() - experimentStartTimestamp;
+			final long totalTimeOfCurrentExecution = System.currentTimeMillis() - experimentStartTimestamp;
 			experimentStartTimestamp = 0;
 
 			runningAverageTimeOfExecution = (runningAverageTimeOfExecution * totalNumberOfExecutions + totalTimeOfCurrentExecution)
@@ -90,17 +92,18 @@ public class MultiCastExperimentStats implements Serializable {
 	}
 
 	public synchronized long calcAverageExecutionTime() {
-		double averageUsedLocks = (totalLockEventsSent == 0 ? 1 : ((double) totalNumberOfExecutions)
+		final double averageUsedLocks = (totalLockEventsSent == 0 ? 1 : ((double) totalNumberOfExecutions)
 				/ ((double) totalLockEventsSent));
 		// long averageExecutionTime = (long) (runningAverageTimeOfExecution *
 		// averageUsedLocks);
-		long averageExecutionTime = (long) (runningAverageTimeOfExecution * averageUsedLocks) + lockPeriod;
+		final long averageExecutionTime = (long) (runningAverageTimeOfExecution * averageUsedLocks) + lockPeriod;
 
 		return averageExecutionTime;
 	}
 
 	public synchronized void shutdown() {
-		Logger.getLogger(LOGGER).log(Level.INFO, "Stats shutdown for hardware " + hardwareUniqueId);
+		Logger.getLogger(MultiCastExperimentStats.LOGGER).log(Level.INFO,
+				"Stats shutdown for hardware " + hardwareUniqueId);
 		writeObject();
 	}
 
@@ -109,29 +112,30 @@ public class MultiCastExperimentStats implements Serializable {
 	 * @param lockPeriod
 	 * @return
 	 */
-	public static MultiCastExperimentStats getInstance(HardwareInfo hardwareInfo, long lockPeriod) {
-		File file = new File(getFileName(hardwareInfo.getHardwareUniqueID()));
+	public static MultiCastExperimentStats getInstance(final HardwareInfo hardwareInfo, final long lockPeriod) {
+		final File file = new File(MultiCastExperimentStats.getFileName(hardwareInfo.getHardwareUniqueID()));
 		if (file.exists()) {
 			try {
-				Logger.getLogger(LOGGER).log(Level.FINE, "Getting stats instance from file.");
-				return readObject(file);
-			} catch (Exception e) {
+				Logger.getLogger(MultiCastExperimentStats.LOGGER).log(Level.FINE, "Getting stats instance from file.");
+				return MultiCastExperimentStats.readObject(file);
+			} catch (final Exception e) {
 				e.printStackTrace();
-				Logger.getLogger(LOGGER).log(Level.WARNING,
+				Logger.getLogger(MultiCastExperimentStats.LOGGER).log(Level.WARNING,
 						"Exception ocurred reading serialized stats object. Message: " + e.getMessage());
 			}
 		}
-		Logger.getLogger(LOGGER).log(Level.FINE, "Getting new stats instance.");
+		Logger.getLogger(MultiCastExperimentStats.LOGGER).log(Level.FINE, "Getting new stats instance.");
 		return new MultiCastExperimentStats(hardwareInfo, lockPeriod);
 	}
 
-	private static String getFileName(String hardwareUniqueId) {
-		return baseDir + System.getProperty("file.separator") + hardwareUniqueId + ".ser";
+	private static String getFileName(final String hardwareUniqueId) {
+		return MultiCastExperimentStats.baseDir + System.getProperty("file.separator") + hardwareUniqueId + ".ser";
 	}
 
 	private void writeObject() {
-		File file = new File(getFileName(hardwareUniqueId));
-		Logger.getLogger(LOGGER).log(Level.FINE, "Writing stats to file " + file.getAbsoluteFile());
+		final File file = new File(MultiCastExperimentStats.getFileName(hardwareUniqueId));
+		Logger.getLogger(MultiCastExperimentStats.LOGGER).log(Level.FINE,
+				"Writing stats to file " + file.getAbsoluteFile());
 		if (file.exists()) {
 			file.delete();
 		}
@@ -142,18 +146,19 @@ public class MultiCastExperimentStats implements Serializable {
 			oos.writeObject(this);
 			oos.flush();
 			oos.close();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			e.printStackTrace();
-			Logger.getLogger(LOGGER).log(Level.WARNING,
+			Logger.getLogger(MultiCastExperimentStats.LOGGER).log(Level.WARNING,
 					"Exception ocurred writing serialized stats object. Message: " + e.getMessage());
 		}
 	}
 
-	private static MultiCastExperimentStats readObject(File file) throws IOException, ClassNotFoundException {
-		Logger.getLogger(LOGGER).log(Level.FINE, "Reading stats from file " + file.getAbsoluteFile());
+	private static MultiCastExperimentStats readObject(final File file) throws IOException, ClassNotFoundException {
+		Logger.getLogger(MultiCastExperimentStats.LOGGER).log(Level.FINE,
+				"Reading stats from file " + file.getAbsoluteFile());
 
-		FileObjectInputStream ois = new FileObjectInputStream(file);
-		Object o = ois.readObject();
+		final FileObjectInputStream ois = new FileObjectInputStream(file);
+		final Object o = ois.readObject();
 		ois.close();
 		return (MultiCastExperimentStats) o;
 	}

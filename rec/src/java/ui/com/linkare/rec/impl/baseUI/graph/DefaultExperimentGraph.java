@@ -30,12 +30,16 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  * @author José Pedro Pereira - Linkare TI
  */
 public class DefaultExperimentGraph extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6277296277292084591L;
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(DefaultExperimentGraph.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(DefaultExperimentGraph.UI_CLIENT_LOGGER));
 		}
 	}
 
@@ -77,89 +81,108 @@ public class DefaultExperimentGraph extends javax.swing.JPanel implements ExpDat
 	/** Holds value of property channelY. */
 	private int channelY;
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/chart16.gif"));
 	}
 
 	private ExpDataModel model = null;
 
-	public void setExpDataModel(ExpDataModel model) {
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
 		this.model = model;
 		defaultDatasetProxy.setExpDataModel(model);
 		model.addExpDataModelListener(this);
 	}
 
+	@Override
 	public String getName() {
 		return "Time Series Chart";
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
 
+	@Override
 	public void dataModelWaiting() {// BIG SILENT NOOP
 	}
 
+	@Override
 	public void dataModelStoped() {
-		if (header == null && model != null)
+		if (header == null && model != null) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
-	public void newSamples(NewExpDataEvent evt) {
-		if (header == null && model != null)
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
+		if (header == null && model != null) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
+	@Override
 	public void dataModelEnded() {
-		if (header == null && model != null)
+		if (header == null && model != null) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
-		if (header == null && model != null)
+		if (header == null && model != null) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
-		if (header == null && model != null)
+		if (header == null && model != null) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
 	private HardwareAcquisitionConfig header = null;
 
-	private void headerAvailable(HardwareAcquisitionConfig header) {
-		if (header == null)
+	private void headerAvailable(final HardwareAcquisitionConfig header) {
+		if (header == null) {
 			return;
+		}
 
 		this.header = header;
-		NumberAxis timeAxis = new NumberAxis("Elapsed Time [ms]");
+		final NumberAxis timeAxis = new NumberAxis("Elapsed Time [ms]");
 		timeAxis.setAutoRange(true);
 		timeAxis.setAutoRangeStickyZero(false);
 		timeAxis.setAutoRangeIncludesZero(false);
-		NumberAxis valueAxis = new NumberAxis("Acquisition Channels");
+		final NumberAxis valueAxis = new NumberAxis("Acquisition Channels");
 		valueAxis.setAutoRange(true);
 		valueAxis.setAutoRangeStickyZero(false);
 		valueAxis.setAutoRangeIncludesZero(false);
 
-		XYToolTipGenerator tooltipGenerator = new StandardXYToolTipGenerator();
+		final XYToolTipGenerator tooltipGenerator = new StandardXYToolTipGenerator();
 
-		XYPlot plot = new XYPlot(defaultDatasetProxy, timeAxis, valueAxis, new StandardXYItemRenderer(
+		final XYPlot plot = new XYPlot(defaultDatasetProxy, timeAxis, valueAxis, new StandardXYItemRenderer(
 				StandardXYItemRenderer.SHAPES_AND_LINES, tooltipGenerator));
 
 		chart = new JFreeChart(header.getFamiliarName(), JFreeChart.DEFAULT_TITLE_FONT, plot, true);
 
-		ChartPanel panel = new ChartPanel(chart);
+		final ChartPanel panel = new ChartPanel(chart);
 		panel.setPreferredSize(new java.awt.Dimension(350, 300));
 		// panel.setMinimumSize(new java.awt.Dimension(350,300));
 		// panel.setSize(new java.awt.Dimension(350,300));
@@ -169,7 +192,7 @@ public class DefaultExperimentGraph extends javax.swing.JPanel implements ExpDat
 		scrollPane.setViewportView(panel);
 	}
 
-	private boolean isScaleSet = false;
+	private final boolean isScaleSet = false;
 
 	private JFreeChart chart = null;
 }

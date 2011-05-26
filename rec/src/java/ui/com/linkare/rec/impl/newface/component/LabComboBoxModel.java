@@ -21,51 +21,52 @@ public class LabComboBoxModel extends DefaultComboBoxModel {
 
 	/** Generated UID */
 	private static final long serialVersionUID = -6839802903970136273L;
-	
+
 	/**
 	 * Lab list for the lab login combo
 	 */
 	protected List<Lab> labList = new ArrayList<Lab>();
-	
+
 	/**
 	 * Creates the <code>LabComboBoxModel</code>.
 	 */
 	public LabComboBoxModel() {
 		super();
 	}
-	
+
 	/**
 	 * Creates the <code>LabComboBoxModel</code>.
-	 * @param labList 
+	 * 
+	 * @param labList
 	 */
-	public LabComboBoxModel(List<Lab> labList) {
+	public LabComboBoxModel(final List<Lab> labList) {
 		super();
 		this.labList = labList;
 	}
-	
+
 	/**
 	 * @param index
 	 * @return
 	 */
-	public Lab getLab(int index) {
+	public Lab getLab(final int index) {
 		return labList.get(index);
 	}
-	
+
 	/**
 	 * @param lab
 	 */
-	public void addLab(Lab lab) {
+	public void addLab(final Lab lab) {
 		labList.add(lab);
 		addElement(lab);
 	}
-	
+
 	/**
 	 * @param labList
 	 */
-	public void addLabList(List<Lab> labList) {
-		for (Lab lab : labList) {
+	public void addLabList(final List<Lab> labList) {
+		for (final Lab lab : labList) {
 			addLab(lab);
 		}
 	}
-	
+
 }

@@ -21,26 +21,26 @@ public class ServerMain {
 
 	private static String Quantum_HARDWARE_LOGGER = "Quantum.Logger";
 	static {
-		Logger l = LogManager.getLogManager().getLogger(Quantum_HARDWARE_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ServerMain.Quantum_HARDWARE_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(Quantum_HARDWARE_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ServerMain.Quantum_HARDWARE_LOGGER));
 		}
 	}
 
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		try {
 			ORBBean.getORBBean();
 
-			BaseHardware baseHardware = new BaseHardware(new QuantumDriver());
+			final BaseHardware baseHardware = new BaseHardware(new QuantumDriver());
 
 			Thread.currentThread().join();
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			ORBBean.getORBBean().killORB();
-			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(Quantum_HARDWARE_LOGGER));
+			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(ServerMain.Quantum_HARDWARE_LOGGER));
 		}
 	}
 }

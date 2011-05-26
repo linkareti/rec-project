@@ -9,57 +9,66 @@ package com.linkare.rec.data.synch;
 
 // Version 4 addition
 public class FrequencyDefType implements org.omg.CORBA.portable.IDLEntity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2898717213178965251L;
+
 	private int __value;
 
 	public static final int _FrequencyType = 0;
 	public static final com.linkare.rec.data.synch.FrequencyDefType FrequencyType = new com.linkare.rec.data.synch.FrequencyDefType(
-			_FrequencyType);
+			FrequencyDefType._FrequencyType);
 	public static final int _SamplingIntervalType = 1;
 	public static final com.linkare.rec.data.synch.FrequencyDefType SamplingIntervalType = new com.linkare.rec.data.synch.FrequencyDefType(
-			_SamplingIntervalType);
+			FrequencyDefType._SamplingIntervalType);
 
 	public int value() {
 		return __value;
 	}
 
-	public static com.linkare.rec.data.synch.FrequencyDefType from_int(int value) {
+	public static com.linkare.rec.data.synch.FrequencyDefType from_int(final int value) {
 		switch (value) {
 		case 0:
-			return FrequencyType;
+			return FrequencyDefType.FrequencyType;
 		case 1:
-			return SamplingIntervalType;
+			return FrequencyDefType.SamplingIntervalType;
 		}
 		throw new org.omg.CORBA.BAD_OPERATION();
 	}
 
-	private FrequencyDefType(int value) {
+	private FrequencyDefType(final int value) {
 		__value = value;
 	}
 
 	// just for the sake of serialization
 	public FrequencyDefType() {
 		// by default...
-		__value = _FrequencyType;
+		__value = FrequencyDefType._FrequencyType;
 	}
 
 	public int getValue() {
 		return __value;
 	}
 
-	public void setValue(int value) {
-		if (value == _FrequencyType || value == _SamplingIntervalType)
+	public void setValue(final int value) {
+		if (value == FrequencyDefType._FrequencyType || value == FrequencyDefType._SamplingIntervalType) {
 			__value = value;
-		else
+		} else {
 			throw new org.omg.CORBA.BAD_OPERATION();
+		}
 	}
 
-	public boolean equals(Object other) {
-		if (other == null || !(other instanceof FrequencyDefType))
+	@Override
+	public boolean equals(final Object other) {
+		if (other == null || !(other instanceof FrequencyDefType)) {
 			return false;
+		}
 
 		return ((FrequencyDefType) other).getValue() == getValue();
 	}
 
+	@Override
 	public String toString() {
 		switch (__value) {
 		case _FrequencyType:

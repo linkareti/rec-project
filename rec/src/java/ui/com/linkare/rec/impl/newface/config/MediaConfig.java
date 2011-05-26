@@ -26,7 +26,7 @@ public class MediaConfig extends DisplayNode {
 		return canSave;
 	}
 
-	public void setCanSave(boolean canSave) {
+	public void setCanSave(final boolean canSave) {
 		this.canSave = canSave;
 	}
 
@@ -35,7 +35,7 @@ public class MediaConfig extends DisplayNode {
 		return offlinePlay;
 	}
 
-	public void setOfflinePlay(boolean offlinePlay) {
+	public void setOfflinePlay(final boolean offlinePlay) {
 		this.offlinePlay = offlinePlay;
 	}
 
@@ -44,12 +44,12 @@ public class MediaConfig extends DisplayNode {
 		return videoLocation;
 	}
 
-	public void setVideoLocation(String videoLocation) {
+	public void setVideoLocation(final String videoLocation) {
 		this.videoLocation = videoLocation;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (obj == null) {
 			return false;
 		}
@@ -57,13 +57,13 @@ public class MediaConfig extends DisplayNode {
 			return false;
 		}
 		final MediaConfig other = (MediaConfig) obj;
-		if ((this.videoLocation == null) ? (other.videoLocation != null) : !this.videoLocation.equals(other.videoLocation)) {
+		if ((videoLocation == null) ? (other.videoLocation != null) : !videoLocation.equals(other.videoLocation)) {
 			return false;
 		}
-		if (this.canSave != other.canSave) {
+		if (canSave != other.canSave) {
 			return false;
 		}
-		if (this.offlinePlay != other.offlinePlay) {
+		if (offlinePlay != other.offlinePlay) {
 			return false;
 		}
 		return true;
@@ -72,9 +72,9 @@ public class MediaConfig extends DisplayNode {
 	@Override
 	public int hashCode() {
 		int hash = 3;
-		hash = 79 * hash + (this.videoLocation != null ? this.videoLocation.hashCode() : 0);
-		hash = 79 * hash + (this.canSave ? 1 : 0);
-		hash = 79 * hash + (this.offlinePlay ? 1 : 0);
+		hash = 79 * hash + (videoLocation != null ? videoLocation.hashCode() : 0);
+		hash = 79 * hash + (canSave ? 1 : 0);
+		hash = 79 * hash + (offlinePlay ? 1 : 0);
 		return hash;
 	}
 

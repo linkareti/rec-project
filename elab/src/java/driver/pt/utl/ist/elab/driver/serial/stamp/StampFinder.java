@@ -32,9 +32,9 @@ public class StampFinder {
 	private static String STAMP_FINDER_LOGGER = "StampFinder.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(STAMP_FINDER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(StampFinder.STAMP_FINDER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(STAMP_FINDER_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER));
 		}
 	}
 	/** Holds value of property applicationNameLockPort. */
@@ -84,7 +84,7 @@ public class StampFinder {
 	 * @return Value of property applicationNameLockPort.
 	 */
 	public String getApplicationNameLockPort() {
-		return this.applicationNameLockPort;
+		return applicationNameLockPort;
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class StampFinder {
 	 * @param applicationNameLockPort New value of property
 	 *            applicationNameLockPort.
 	 */
-	public void setApplicationNameLockPort(String applicationNameLockPort) {
+	public void setApplicationNameLockPort(final String applicationNameLockPort) {
 		this.applicationNameLockPort = applicationNameLockPort;
 	}
 
@@ -103,7 +103,7 @@ public class StampFinder {
 	 * @return Value of property stampIdentifier.
 	 */
 	public String getStampIdentifier() {
-		return this.stampIdentifier;
+		return stampIdentifier;
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class StampFinder {
 	 * 
 	 * @param stampIdentifier New value of property stampIdentifier.
 	 */
-	public void setStampIdentifier(String stampIdentifier) {
+	public void setStampIdentifier(final String stampIdentifier) {
 		this.stampIdentifier = stampIdentifier;
 	}
 
@@ -121,7 +121,7 @@ public class StampFinder {
 	 * @return Value of property portParity.
 	 */
 	public int getPortParity() {
-		return this.portParity;
+		return portParity;
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class StampFinder {
 	 * 
 	 * @param portParity New value of property portParity.
 	 */
-	public void setPortParity(int portParity) {
+	public void setPortParity(final int portParity) {
 		this.portParity = portParity;
 	}
 
@@ -139,7 +139,7 @@ public class StampFinder {
 	 * @return Value of property portBaudRate.
 	 */
 	public int getPortBaudRate() {
-		return this.portBaudRate;
+		return portBaudRate;
 	}
 
 	/**
@@ -147,7 +147,7 @@ public class StampFinder {
 	 * 
 	 * @param portBaudRate New value of property portBaudRate.
 	 */
-	public void setPortBaudRate(int portBaudRate) {
+	public void setPortBaudRate(final int portBaudRate) {
 		this.portBaudRate = portBaudRate;
 	}
 
@@ -157,7 +157,7 @@ public class StampFinder {
 	 * @return Value of property portDataBits.
 	 */
 	public int getPortDataBits() {
-		return this.portDataBits;
+		return portDataBits;
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class StampFinder {
 	 * 
 	 * @param portDataBits New value of property portDataBits.
 	 */
-	public void setPortDataBits(int portDataBits) {
+	public void setPortDataBits(final int portDataBits) {
 		this.portDataBits = portDataBits;
 	}
 
@@ -175,7 +175,7 @@ public class StampFinder {
 	 * @return Value of property portStopBits.
 	 */
 	public int getPortStopBits() {
-		return this.portStopBits;
+		return portStopBits;
 	}
 
 	/**
@@ -183,7 +183,7 @@ public class StampFinder {
 	 * 
 	 * @param portStopBits New value of property portStopBits.
 	 */
-	public void setPortStopBits(int portStopBits) {
+	public void setPortStopBits(final int portStopBits) {
 		this.portStopBits = portStopBits;
 	}
 
@@ -194,7 +194,7 @@ public class StampFinder {
 	 * 
 	 */
 	public boolean isDTR() {
-		return this.DTR;
+		return DTR;
 	}
 
 	/**
@@ -203,7 +203,7 @@ public class StampFinder {
 	 * @param DTR New value of property DTR.
 	 * 
 	 */
-	public void setDTR(boolean DTR) {
+	public void setDTR(final boolean DTR) {
 		this.DTR = DTR;
 	}
 
@@ -214,7 +214,7 @@ public class StampFinder {
 	 * 
 	 */
 	public boolean isRTS() {
-		return this.RTS;
+		return RTS;
 	}
 
 	/**
@@ -223,7 +223,7 @@ public class StampFinder {
 	 * @param RTS New value of property RTS.
 	 * 
 	 */
-	public void setRTS(boolean RTS) {
+	public void setRTS(final boolean RTS) {
 		this.RTS = RTS;
 	}
 
@@ -234,7 +234,7 @@ public class StampFinder {
 	 * 
 	 */
 	public boolean isWaitForEcho() {
-		return this.waitForEcho;
+		return waitForEcho;
 	}
 
 	/**
@@ -243,43 +243,45 @@ public class StampFinder {
 	 * @param waitForEcho New value of property waitForEcho.
 	 * 
 	 */
-	public void setWaitForEcho(boolean waitForEcho) {
+	public void setWaitForEcho(final boolean waitForEcho) {
 		this.waitForEcho = waitForEcho;
 	}
 
 	public void stopSearch() {
-		if (runner != null)
+		if (runner != null) {
 			runner.stopNow();
+		}
 
 		runner = null;
 		ports = null;
 	}
 
 	public void startSearch() {
-		Enumeration commPortIdentifiers = gnu.io.CommPortIdentifier.getPortIdentifiers();
+		final Enumeration commPortIdentifiers = gnu.io.CommPortIdentifier.getPortIdentifiers();
 
-		LinkedList tempPorts = new LinkedList();
+		final LinkedList tempPorts = new LinkedList();
 
-		Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,
+		Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO,
 				"Are there COMM Ports on the System? " + commPortIdentifiers.hasMoreElements());
 
 		while (commPortIdentifiers.hasMoreElements()) {
-			CommPortIdentifier identifier = (CommPortIdentifier) commPortIdentifiers.nextElement();
-			if (identifier.getPortType() == CommPortIdentifier.PORT_SERIAL)
+			final CommPortIdentifier identifier = (CommPortIdentifier) commPortIdentifiers.nextElement();
+			if (identifier.getPortType() == CommPortIdentifier.PORT_SERIAL) {
 				tempPorts.add(identifier);
+			}
 		}
 
 		ports = new CommPortIdentifier[tempPorts.size()];
-		Object[] portsObj = tempPorts.toArray();
+		final Object[] portsObj = tempPorts.toArray();
 
-		Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,
+		Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO,
 				"There are " + portsObj.length + " Serial COMM Ports in the system...");
 
 		System.arraycopy(portsObj, 0, ports, 0, ports.length);
 
-		Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO, "Serial COMM Ports in the system are:");
+		Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO, "Serial COMM Ports in the system are:");
 		for (int i = 0; i < ports.length; i++) {
-			Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO, "Port[" + i + "]=" + ports[i].getName());
+			Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO, "Port[" + i + "]=" + ports[i].getName());
 		}
 
 		runner = new StampFinderRunner();
@@ -293,7 +295,8 @@ public class StampFinder {
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addStampFinderListener(pt.utl.ist.elab.driver.serial.stamp.StampFinderListener listener) {
+	public synchronized void addStampFinderListener(
+			final pt.utl.ist.elab.driver.serial.stamp.StampFinderListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -305,7 +308,8 @@ public class StampFinder {
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeStampFinderListener(pt.utl.ist.elab.driver.serial.stamp.StampFinderListener listener) {
+	public synchronized void removeStampFinderListener(
+			final pt.utl.ist.elab.driver.serial.stamp.StampFinderListener listener) {
 		listenerList.remove(pt.utl.ist.elab.driver.serial.stamp.StampFinderListener.class, listener);
 	}
 
@@ -314,10 +318,11 @@ public class StampFinder {
 	 * 
 	 * @param event The event to be fired
 	 */
-	private void fireStampFinderListenerStampFound(SerialPort event) {
-		if (listenerList == null)
+	private void fireStampFinderListenerStampFound(final SerialPort event) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == pt.utl.ist.elab.driver.serial.stamp.StampFinderListener.class) {
 				((pt.utl.ist.elab.driver.serial.stamp.StampFinderListener) listeners[i + 1]).stampFound(event);
@@ -331,7 +336,7 @@ public class StampFinder {
 	 * @return Value of property timeOutPerPort.
 	 */
 	public long getTimeOutPerPort() {
-		return this.timeOutPerPort;
+		return timeOutPerPort;
 	}
 
 	/**
@@ -339,51 +344,53 @@ public class StampFinder {
 	 * 
 	 * @param timeOutPerPort New value of property timeOutPerPort.
 	 */
-	public void setTimeOutPerPort(long timeOutPerPort) {
+	public void setTimeOutPerPort(final long timeOutPerPort) {
 		this.timeOutPerPort = timeOutPerPort;
 	}
 
 	private class StampFinderRunner extends Thread {
 
 		private boolean exit = false;
-		private Thread current = null;
+		private final Thread current = null;
 		private int currentPort = 0;
 		private BaseStampIO stampIO = null;
 		private SerialPort currentPortOpen = null;
 		// private BufferedReader currentReader=null;
-		private StampFinderRunnerPortListener stampFinderRunnerEventListener = new StampFinderRunnerPortListener();
+		private final StampFinderRunnerPortListener stampFinderRunnerEventListener = new StampFinderRunnerPortListener();
 
 		public void stopNow() {
 			exit = true;
 			if (current != null) {
 				try {
 					current.join();
-				} catch (InterruptedException e) {
-					LoggerUtil.logThrowable(null, e, Logger.getLogger(STAMP_FINDER_LOGGER));
+				} catch (final InterruptedException e) {
+					LoggerUtil.logThrowable(null, e, Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER));
 				}
 			}
 		}
 
+		@Override
 		public void run() {
 			while (!exit) {
-				Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO, "Cycling port...");
+				Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO, "Cycling port...");
 				cyclePort();
 			}
 		}
 
 		public void cyclePort() {
-			if (ports == null)
+			if (ports == null) {
 				return;
+			}
 
 			if (currentPort >= ports.length) {
 				currentPort = 0;
-				Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO, "Restarting from the first port!");
+				Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO, "Restarting from the first port!");
 			}
 
-			CommPortIdentifier cpi = ports[currentPort];
+			final CommPortIdentifier cpi = ports[currentPort];
 
 			if (cpi.isCurrentlyOwned()) {
-				Logger.getLogger(STAMP_FINDER_LOGGER).log(
+				Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(
 						Level.INFO,
 						"Serial Port " + cpi.getName() + " is currently owned by another application - "
 								+ cpi.getCurrentOwner());
@@ -391,7 +398,7 @@ public class StampFinder {
 				return;
 			}
 
-			Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,
+			Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO,
 					"Serial Port " + cpi.getName() + " is not Owned - Opening & Locking It! ");
 
 			try {
@@ -412,40 +419,40 @@ public class StampFinder {
 				// currentPortOpen.addEventListener(stampFinderRunnerEventListener);
 				// currentPortOpen.notifyOnDataAvailable(true);
 
-			} catch (gnu.io.PortInUseException e) {
-				LoggerUtil.logThrowable("Serial port " + cpi.getName() + " is currently in use...", e, Logger
-						.getLogger(STAMP_FINDER_LOGGER));
+			} catch (final gnu.io.PortInUseException e) {
+				LoggerUtil.logThrowable("Serial port " + cpi.getName() + " is currently in use...", e,
+						Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER));
 				currentPort++;
 				return;
 			}
 
 			try {
-				Logger.getLogger(STAMP_FINDER_LOGGER).log(
+				Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(
 						Level.INFO,
 						"Sleeping for " + (timeOutPerPort > 0 ? timeOutPerPort : 100) + " ms for port " + cpi.getName()
 								+ " data events");
 				synchronized (this) {
 					wait(timeOutPerPort > 0 ? timeOutPerPort : 100);
-					Logger.getLogger(STAMP_FINDER_LOGGER).log(
+					Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(
 							Level.INFO,
 							"Ended Sleeping for " + (timeOutPerPort > 0 ? timeOutPerPort : 100) + " ms for port "
 									+ cpi.getName() + " data events");
 				}
 
-			} catch (InterruptedException e) {
-				LoggerUtil.logThrowable("Error waiting for SerialPort identification!", e, Logger
-						.getLogger(STAMP_FINDER_LOGGER));
+			} catch (final InterruptedException e) {
+				LoggerUtil.logThrowable("Error waiting for SerialPort identification!", e,
+						Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER));
 				return;
 			}
 
 			if (!portFound) {
-				Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO, "Port was not found!");
+				Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO, "Port was not found!");
 				synchronized (stampFinderRunnerEventListener) {
-					Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,
+					Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO,
 							"NO id string detected on port " + cpi.getName());
 					// currentPortOpen.removeEventListener();
 					stampIO.shutdown();
-					Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO, "Shuted down stampIO!");
+					Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO, "Shuted down stampIO!");
 				}
 				/*
 				 * try {Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,
@@ -502,18 +509,19 @@ public class StampFinder {
 			 * portFound=true; exit=true; } } }
 			 */
 
-			public void handleStampCommand(StampCommand command) {
-				Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,
+			@Override
+			public void handleStampCommand(final StampCommand command) {
+				Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO,
 						"Received a command " + command.getCommandIdentifier() + "!");
 				if (command.getCommandIdentifier().equals(stampIdentifier)) {
-					Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,
+					Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO,
 							"Identified STAMP on port " + currentPortOpen.getName() + "!");
 					stampIO.shutdown();
 					fireStampFinderListenerStampFound(currentPortOpen);
 					portFound = true;
 					exit = true;
 				} else {
-					Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.FINE,
+					Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.FINE,
 							"Command ignored for stamp finder. Command [" + command + "]");
 				}
 			}

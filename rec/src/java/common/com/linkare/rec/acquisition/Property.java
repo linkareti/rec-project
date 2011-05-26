@@ -19,12 +19,12 @@ public final class Property implements IDLEntity {
 		createEmptyAny();
 	} // ctor
 
-	public Property(String name, Any value) {
+	public Property(final String name, final Any value) {
 		setName(name);
 		setValue(value);
 	}
 
-	public Property(Property other) {
+	public Property(final Property other) {
 		setName(new String(other.name));
 		setValue(other.getValue());
 	}
@@ -45,7 +45,7 @@ public final class Property implements IDLEntity {
 	 * @param name New value of property name.
 	 * 
 	 */
-	public void setName(java.lang.String name) {
+	public void setName(final java.lang.String name) {
 		this.name = name;
 	}
 
@@ -65,34 +65,41 @@ public final class Property implements IDLEntity {
 	 * @param value New value of property value.
 	 * 
 	 */
-	public void setValue(Any value) {
-		if (value != null)
+	public void setValue(final Any value) {
+		if (value != null) {
 			this.value = value;
-		else
+		} else {
 			createEmptyAny();
+		}
 	}
 
+	@Override
 	public int hashCode() {
-		if (getName() != null)
+		if (getName() != null) {
 			return getName().hashCode();
-		else
+		} else {
 			return 0;
+		}
 	}
 
+	@Override
 	public String toString() {
 		return "[" + getName() + "]=" + getValue();
 	}
 
-	public boolean equals(Object other) {
-		if (other == null || !(other instanceof Property))
+	@Override
+	public boolean equals(final Object other) {
+		if (other == null || !(other instanceof Property)) {
 			return false;
-		Property otherProp = (Property) other;
-		if (getName() == null && otherProp.getName() == null)
+		}
+		final Property otherProp = (Property) other;
+		if (getName() == null && otherProp.getName() == null) {
 			return true;
-		else if (getName() == null)
+		} else if (getName() == null) {
 			return false;
-		else
+		} else {
 			return getName().equals(otherProp.getName());
+		}
 	}
 
 	private void createEmptyAny() {

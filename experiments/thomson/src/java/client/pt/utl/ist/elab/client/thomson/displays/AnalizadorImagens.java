@@ -64,29 +64,30 @@ public class AnalizadorImagens {
 	 */
 
 	public static final String THOMSON_CROSS = "Thomson.Cross";
-	public static int CROSS = Defaults.defaultIfEmpty(System.getProperty(THOMSON_CROSS), 17);
+	public static int CROSS = Defaults.defaultIfEmpty(System.getProperty(AnalizadorImagens.THOMSON_CROSS), 17);
 	public static final String THOMSON_D1 = "Thomson.D1";
-	public static int D1 = Defaults.defaultIfEmpty(System.getProperty(THOMSON_D1), 18);
+	public static int D1 = Defaults.defaultIfEmpty(System.getProperty(AnalizadorImagens.THOMSON_D1), 18);
 	public static final String THOMSON_D2 = "Thomson.D2";
-	public static int D2 = Defaults.defaultIfEmpty(System.getProperty(THOMSON_D2), 115);
+	public static int D2 = Defaults.defaultIfEmpty(System.getProperty(AnalizadorImagens.THOMSON_D2), 115);
 	public static final String THOMSON_PRETO_R1 = "Thomson.Preto.R1";
-	public static int PRETO_R1 = Defaults.defaultIfEmpty(System.getProperty(THOMSON_PRETO_R1), 165);
+	public static int PRETO_R1 = Defaults.defaultIfEmpty(System.getProperty(AnalizadorImagens.THOMSON_PRETO_R1), 165);
 	public static final String THOMSON_PRETO_G1 = "Thomson.Preto.G1";
-	public static int PRETO_G1 = Defaults.defaultIfEmpty(System.getProperty(THOMSON_PRETO_G1), 162);
+	public static int PRETO_G1 = Defaults.defaultIfEmpty(System.getProperty(AnalizadorImagens.THOMSON_PRETO_G1), 162);
 	public static final String THOMSON_PRETO_B1 = "Thomson.Preto.B1";
-	public static int PRETO_B1 = Defaults.defaultIfEmpty(System.getProperty(THOMSON_PRETO_B1), 140);
+	public static int PRETO_B1 = Defaults.defaultIfEmpty(System.getProperty(AnalizadorImagens.THOMSON_PRETO_B1), 140);
 	public static final String THOMSON_AZUL_R = "Thomson.Azul.R";
-	public static int AZUL_R = Defaults.defaultIfEmpty(System.getProperty(THOMSON_AZUL_R), 198);
+	public static int AZUL_R = Defaults.defaultIfEmpty(System.getProperty(AnalizadorImagens.THOMSON_AZUL_R), 198);
 	public static final String THOMSON_AZUL_G = "Thomson.Azul.G";
-	public static int AZUL_G = Defaults.defaultIfEmpty(System.getProperty(THOMSON_AZUL_G), 218);
+	public static int AZUL_G = Defaults.defaultIfEmpty(System.getProperty(AnalizadorImagens.THOMSON_AZUL_G), 218);
 	public static final String THOMSON_AZUL_B = "Thomson.Azul.B";
-	public static int AZUL_B = Defaults.defaultIfEmpty(System.getProperty(THOMSON_AZUL_B), 255);
+	public static int AZUL_B = Defaults.defaultIfEmpty(System.getProperty(AnalizadorImagens.THOMSON_AZUL_B), 255);
 	public static final String THOMSON_AZUL_RAIO = "Thomson.Azul.Raio";
-	public static int AZUL_RAIO = Defaults.defaultIfEmpty(System.getProperty(THOMSON_AZUL_RAIO), 25);
+	public static int AZUL_RAIO = Defaults.defaultIfEmpty(System.getProperty(AnalizadorImagens.THOMSON_AZUL_RAIO), 25);
 	public static final String THOMSON_P = "Thomson.P";
-	public static int P = Defaults.defaultIfEmpty(System.getProperty(THOMSON_P), 1);
+	public static int P = Defaults.defaultIfEmpty(System.getProperty(AnalizadorImagens.THOMSON_P), 1);
 	public static final String THOMSON_RANSAC_ERROR = "Thomson.Ransac.Error";
-	public static int RANSAC_ERROR = Defaults.defaultIfEmpty(System.getProperty(THOMSON_RANSAC_ERROR), 1);
+	public static int RANSAC_ERROR = Defaults.defaultIfEmpty(
+			System.getProperty(AnalizadorImagens.THOMSON_RANSAC_ERROR), 1);
 
 	// Fim variaveis sistema
 
@@ -107,17 +108,17 @@ public class AnalizadorImagens {
 		 */
 	}
 
-	public java.awt.Image byteArray2Image(byte[] byteArray) {
-		java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+	public java.awt.Image byteArray2Image(final byte[] byteArray) {
+		final java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
 		try {
 			baos.write(byteArray);
-		} catch (java.io.IOException e) {
+		} catch (final java.io.IOException e) {
 			e.printStackTrace();
 		}
 
-		java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(baos.toByteArray());
+		final java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(baos.toByteArray());
 
-		javax.imageio.stream.MemoryCacheImageInputStream mciis = new javax.imageio.stream.MemoryCacheImageInputStream(
+		final javax.imageio.stream.MemoryCacheImageInputStream mciis = new javax.imageio.stream.MemoryCacheImageInputStream(
 				bais);
 
 		java.awt.image.BufferedImage bImage = null;
@@ -125,14 +126,14 @@ public class AnalizadorImagens {
 		// converting the jpg byteArray into an image
 		try {
 			bImage = javax.imageio.ImageIO.read(mciis);
-		} catch (java.io.IOException e) {
+		} catch (final java.io.IOException e) {
 			e.printStackTrace();
 		}
 
-		return (java.awt.Image) bImage;
+		return bImage;
 	}// byteArray2Image(byte[] byteArray)
 
-	public AnalizadorImagens(java.awt.Image im_original) {
+	public AnalizadorImagens(final java.awt.Image im_original) {
 		this.im_original = im_original;
 		area = IMAGE_WIDTH * IMAGE_HEIGHT;
 	}
@@ -163,13 +164,13 @@ public class AnalizadorImagens {
 		return (allDone);
 	} // ver se ja esta tudo feito
 
-	public void setOriginalImage(java.awt.Image img) {
+	public void setOriginalImage(final java.awt.Image img) {
 		im_original = img;
 		area = IMAGE_WIDTH * IMAGE_HEIGHT;
 	}
 
-	public Image setOriginalImageAsByteArray(byte[] image) {
-		Image original = byteArray2Image(image);
+	public Image setOriginalImageAsByteArray(final byte[] image) {
+		final Image original = byteArray2Image(image);
 		setOriginalImage(original);
 		return original;
 	}
@@ -184,7 +185,7 @@ public class AnalizadorImagens {
 		return (new_height);
 	}
 
-	public double[] getCircunferenciaPontos(java.awt.Image img) {
+	public double[] getCircunferenciaPontos(final java.awt.Image img) {
 		try {
 			/*
 			 * if (circunferencia[0] * circunferencia[1] * circunferencia[2] !=
@@ -208,17 +209,17 @@ public class AnalizadorImagens {
 			int var1 = 0;
 			int var2 = 0;
 			double var3 = 0;
-			double RANSAC_ERR = RANSAC_ERROR / 10000d;
+			final double RANSAC_ERR = AnalizadorImagens.RANSAC_ERROR / 10000d;
 
-			int[] img_BW = new int[new_width * new_height];
-			int[] img_BW_temp = new int[new_width * new_height];
+			final int[] img_BW = new int[new_width * new_height];
+			final int[] img_BW_temp = new int[new_width * new_height];
 
-			java.awt.image.PixelGrabber pg = new java.awt.image.PixelGrabber(img, 0, 0, new_width, new_height, img_BW,
-					0, new_width);
+			final java.awt.image.PixelGrabber pg = new java.awt.image.PixelGrabber(img, 0, 0, new_width, new_height,
+					img_BW, 0, new_width);
 
 			try {
 				pg.grabPixels();
-			} catch (InterruptedException e) {
+			} catch (final InterruptedException e) {
 				e.printStackTrace();
 			}
 
@@ -253,7 +254,7 @@ public class AnalizadorImagens {
 			for (j = 0; j < (new_height - 1); j++) { // erode para tira pontos
 				// deslinhados
 
-				while (p_temp > P) {
+				while (p_temp > AnalizadorImagens.P) {
 
 					for (i = 1; i < (new_width - 2); i++) {
 						if (img_BW[i + j * new_width] == 0xffffffff & img_BW[i + 1 + j * new_width] == 0xffffffff
@@ -264,13 +265,16 @@ public class AnalizadorImagens {
 						}
 					}
 					// actualizar a imagem
-					for (i = 1; i < (new_width - 2); i++)
+					for (i = 1; i < (new_width - 2); i++) {
 						img_BW[i + j * new_width] = img_BW_temp[i + j * new_width];
+					}
 
 					p_temp = 0;
-					for (i = 1; i < (new_width - 2); i++)
-						if (img_BW[i + j * new_width] == 0xffffffff)
+					for (i = 1; i < (new_width - 2); i++) {
+						if (img_BW[i + j * new_width] == 0xffffffff) {
 							p_temp++;
+						}
+					}
 
 				}
 				p_temp = 20;
@@ -278,18 +282,21 @@ public class AnalizadorImagens {
 
 			// numero de pontos total -> p
 			p = 0;
-			for (i = 1; i < (new_width - 2); i++)
-				for (j = 0; j < (new_height - 1); j++)
-					if (img_BW[i + j * new_width] == 0xffffffff)
+			for (i = 1; i < (new_width - 2); i++) {
+				for (j = 0; j < (new_height - 1); j++) {
+					if (img_BW[i + j * new_width] == 0xffffffff) {
 						p++;
+					}
+				}
+			}
 
 			System.out.println("p=" + p);
 			// im_alinhada[2] = toolkit.createImage(new
 			// java.awt.image.MemoryImageSource(new_width, new_height, img_BW,
 			// 0, new_width));
 
-			int[] p_x = new int[p];
-			int[] p_y = new int[p];
+			final int[] p_x = new int[p];
+			final int[] p_y = new int[p];
 
 			for (j = 5; j < (new_height - 6); j++) {
 				for (i = 5; i < (new_width - 5); i++) {
@@ -373,13 +380,13 @@ public class AnalizadorImagens {
 			circunferencia[0] = A;
 			circunferencia[1] = B;
 			circunferencia[2] = R;
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 		return (circunferencia);
 	}
 
-	public double[] getEquilibrioData(java.awt.Image img) {
+	public double[] getEquilibrioData(final java.awt.Image img) {
 		if (recta[0] * recta[1] * recta[2] != 0) {
 			return (recta);
 		}
@@ -390,19 +397,19 @@ public class AnalizadorImagens {
 		int sxy = 0;
 		int sx2 = 0;
 		int sy2 = 0;
-		double SSyy = 0;
-		double SEE = 0;
-		double x2 = 0;
+		final double SSyy = 0;
+		final double SEE = 0;
+		final double x2 = 0;
 
-		int[] img_BW = new int[new_width * new_height];
-		int[] img_BW_temp = new int[new_width * new_height];
+		final int[] img_BW = new int[new_width * new_height];
+		final int[] img_BW_temp = new int[new_width * new_height];
 
-		java.awt.image.PixelGrabber pg = new java.awt.image.PixelGrabber(img, 0, 0, new_width, new_height, img_BW, 0,
-				new_width);
+		final java.awt.image.PixelGrabber pg = new java.awt.image.PixelGrabber(img, 0, 0, new_width, new_height,
+				img_BW, 0, new_width);
 
 		try {
 			pg.grabPixels();
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			e.printStackTrace();
 		}
 
@@ -421,13 +428,16 @@ public class AnalizadorImagens {
 					}
 				}
 				// actualizar a imagem
-				for (j = 1; j < (new_height - 2); j++)
+				for (j = 1; j < (new_height - 2); j++) {
 					img_BW[i + j * new_width] = img_BW_temp[i + j * new_width];
+				}
 
 				p_temp = 0;
-				for (j = 1; j < (new_height - 2); j++)
-					if (img_BW[i + j * new_width] == 0xffffffff)
+				for (j = 1; j < (new_height - 2); j++) {
+					if (img_BW[i + j * new_width] == 0xffffffff) {
 						p_temp++;
+					}
+				}
 
 			}
 			p_temp = 20;
@@ -435,10 +445,13 @@ public class AnalizadorImagens {
 
 		// numero de pontos total -> p
 		p = 0;
-		for (i = 1; i < (new_width - 2); i++)
-			for (j = 0; j < (new_height - 1); j++)
-				if (img_BW[i + j * new_width] == 0xffffffff)
+		for (i = 1; i < (new_width - 2); i++) {
+			for (j = 0; j < (new_height - 1); j++) {
+				if (img_BW[i + j * new_width] == 0xffffffff) {
 					p++;
+				}
+			}
+		}
 
 		System.out.println("p=" + p);
 		// im_alinhada[2] = toolkit.createImage(new
@@ -503,37 +516,39 @@ public class AnalizadorImagens {
 		return im_original;
 	}
 
-	public Image getImage(int imgN) {
-		if (im_alinhada == null || imgN < 0 || imgN > im_alinhada.length)
+	public Image getImage(final int imgN) {
+		if (im_alinhada == null || imgN < 0 || imgN > im_alinhada.length) {
 			return null;
-		else
+		} else {
 			return im_alinhada[imgN];
+		}
 	}
 
 	public java.awt.Image[] getImagemAlinhada(java.awt.Image img) {
 		try {
-			if (img == null)
+			if (img == null) {
 				img = im_original;
+			}
 
 			// if (im_alinhada != null) return (im_alinhada);
 
 			img640480 = null;
 
-			System.out.println("D2 = " + D2);
+			System.out.println("D2 = " + AnalizadorImagens.D2);
 
 			im_alinhada = new java.awt.Image[5]; // alterar depois para o numero
 			// desejado!!!!!!!!!!!
 
-			int[] image_pixels = new int[area];
-			int[] temp_pixels = new int[area];
-			int[] img_BW = new int[area];
-			int[] img_orig = new int[area];
+			final int[] image_pixels = new int[area];
+			final int[] temp_pixels = new int[area];
+			final int[] img_BW = new int[area];
+			final int[] img_orig = new int[area];
 			int acomulado = 0;
-			int acomulado_max = 0;
-			double[] m_horiz = new double[7]; // y=mx+b
-			double[] b_horiz = new double[7];
-			double[] m_vert = new double[9]; // x=my+b
-			double[] b_vert = new double[9];
+			final int acomulado_max = 0;
+			final double[] m_horiz = new double[7]; // y=mx+b
+			final double[] b_horiz = new double[7];
+			final double[] m_vert = new double[9]; // x=my+b
+			final double[] b_vert = new double[9];
 			long p = 0; // contador
 			int n = 0; // contador
 			double sx = 0; // acomular para depois fazer as contas
@@ -543,8 +558,8 @@ public class AnalizadorImagens {
 			double sxy = 0;
 			double sup = 0; // limites superiores e inferiores
 			double inf = 0;
-			int[] pontos_x = new int[45];
-			int[] pontos_y = new int[45];
+			final int[] pontos_x = new int[45];
+			final int[] pontos_y = new int[45];
 			// int[] refine_x = new int[45];
 			// int[] refine_y = new int[45];
 
@@ -561,14 +576,16 @@ public class AnalizadorImagens {
 			// int FINE1 = 2;
 			// int FINE2 =25;
 
-			java.awt.image.PixelGrabber pg = new java.awt.image.PixelGrabber(img, 0, 0, IMAGE_WIDTH, IMAGE_HEIGHT,
-					image_pixels, 0, IMAGE_WIDTH);
+			final java.awt.image.PixelGrabber pg = new java.awt.image.PixelGrabber(img, 0, 0, IMAGE_WIDTH,
+					IMAGE_HEIGHT, image_pixels, 0, IMAGE_WIDTH);
 
 			pg.grabPixels();
 
-			for (i = 0; i < (IMAGE_WIDTH - 1); i++)
-				for (j = 0; j < IMAGE_HEIGHT; j++)
+			for (i = 0; i < (IMAGE_WIDTH - 1); i++) {
+				for (j = 0; j < IMAGE_HEIGHT; j++) {
 					img_orig[i + j * IMAGE_WIDTH] = image_pixels[i + j * IMAGE_WIDTH];
+				}
+			}
 
 			for (i = 1; i < (IMAGE_WIDTH - 2); i++) { // onde varia a funcao.
 				// out:(imagem preto e
@@ -576,11 +593,11 @@ public class AnalizadorImagens {
 
 				for (j = 1; j < (IMAGE_HEIGHT - 1); j++) {
 
-					int r = (image_pixels[i + j * IMAGE_WIDTH] & 0x00ff0000) >> 16;
-					int g = (image_pixels[i + j * IMAGE_WIDTH] & 0x0000ff00) >> 8;
-					int b = (image_pixels[i + j * IMAGE_WIDTH] & 0x000000ff);
+					final int r = (image_pixels[i + j * IMAGE_WIDTH] & 0x00ff0000) >> 16;
+					final int g = (image_pixels[i + j * IMAGE_WIDTH] & 0x0000ff00) >> 8;
+					final int b = (image_pixels[i + j * IMAGE_WIDTH] & 0x000000ff);
 
-					int re = (image_pixels[i - 1 + j * IMAGE_WIDTH] & 0x00ff0000) >> 16; // valor
+					final int re = (image_pixels[i - 1 + j * IMAGE_WIDTH] & 0x00ff0000) >> 16; // valor
 					// de
 					// vermelho
 					// na
@@ -588,20 +605,20 @@ public class AnalizadorImagens {
 					// do
 					// pixel
 					// central
-					int ge = (image_pixels[i - 1 + j * IMAGE_WIDTH] & 0x0000ff00) >> 8;
-					int be = (image_pixels[i - 1 + j * IMAGE_WIDTH] & 0x000000ff);
+					final int ge = (image_pixels[i - 1 + j * IMAGE_WIDTH] & 0x0000ff00) >> 8;
+					final int be = (image_pixels[i - 1 + j * IMAGE_WIDTH] & 0x000000ff);
 
-					int rd = (image_pixels[i + 1 + j * IMAGE_WIDTH] & 0x00ff0000) >> 16;
-					int gd = (image_pixels[i + 1 + j * IMAGE_WIDTH] & 0x0000ff00) >> 8; // direita
-					int bd = (image_pixels[i + 1 + j * IMAGE_WIDTH] & 0x000000ff);
+					final int rd = (image_pixels[i + 1 + j * IMAGE_WIDTH] & 0x00ff0000) >> 16;
+					final int gd = (image_pixels[i + 1 + j * IMAGE_WIDTH] & 0x0000ff00) >> 8; // direita
+					final int bd = (image_pixels[i + 1 + j * IMAGE_WIDTH] & 0x000000ff);
 
-					int rc = (image_pixels[i + (j - 1) * IMAGE_WIDTH] & 0x00ff0000) >> 16;
-					int gc = (image_pixels[i + (j - 1) * IMAGE_WIDTH] & 0x0000ff00) >> 8; // cima
-					int bc = (image_pixels[i + (j - 1) * IMAGE_WIDTH] & 0x000000ff);
+					final int rc = (image_pixels[i + (j - 1) * IMAGE_WIDTH] & 0x00ff0000) >> 16;
+					final int gc = (image_pixels[i + (j - 1) * IMAGE_WIDTH] & 0x0000ff00) >> 8; // cima
+					final int bc = (image_pixels[i + (j - 1) * IMAGE_WIDTH] & 0x000000ff);
 
-					int rb = (image_pixels[i + (j + 1) * IMAGE_WIDTH] & 0x00ff0000) >> 16;
-					int gb = (image_pixels[i + (j + 1) * IMAGE_WIDTH] & 0x0000ff00) >> 8; // baixo
-					int bb = (image_pixels[i + (j + 1) * IMAGE_WIDTH] & 0x000000ff);
+					final int rb = (image_pixels[i + (j + 1) * IMAGE_WIDTH] & 0x00ff0000) >> 16;
+					final int gb = (image_pixels[i + (j + 1) * IMAGE_WIDTH] & 0x0000ff00) >> 8; // baixo
+					final int bb = (image_pixels[i + (j + 1) * IMAGE_WIDTH] & 0x000000ff);
 
 					// System.out.println(String.valueOf(r) + " " +
 					// String.valueOf(g) + " " + String.valueOf(b) + " " );
@@ -613,11 +630,14 @@ public class AnalizadorImagens {
 					 * getDistancia(r,g,b,rb,gb,bb) < D1 ) { temp_pixels[i +
 					 * j*IMAGE_WIDTH] = temp_pixels[i] = 0xff000000; }
 					 */
-					if (getDistancia(r, g, b, PRETO_R1, PRETO_G1, PRETO_B1) < D2) {
+					if (getDistancia(r, g, b, AnalizadorImagens.PRETO_R1, AnalizadorImagens.PRETO_G1,
+							AnalizadorImagens.PRETO_B1) < AnalizadorImagens.D2) {
 						temp_pixels[i + j * IMAGE_WIDTH] = 0xffffffff;
 
-						if (getDistancia(r, g, b, re, ge, be) < D1 & getDistancia(r, g, b, rd, gd, bd) < D1
-								& getDistancia(r, g, b, rc, gc, bc) < D1 & getDistancia(r, g, b, rb, gb, bb) < D1)
+						if (getDistancia(r, g, b, re, ge, be) < AnalizadorImagens.D1
+								& getDistancia(r, g, b, rd, gd, bd) < AnalizadorImagens.D1
+								& getDistancia(r, g, b, rc, gc, bc) < AnalizadorImagens.D1
+								& getDistancia(r, g, b, rb, gb, bb) < AnalizadorImagens.D1)
 
 						{
 							temp_pixels[i + j * IMAGE_WIDTH] = 0xff000000;
@@ -658,13 +678,17 @@ public class AnalizadorImagens {
 					 */
 				}
 			}
-			for (i = 0; i < (IMAGE_WIDTH - 1); i++)
-				for (j = 0; j < IMAGE_HEIGHT; j++)
+			for (i = 0; i < (IMAGE_WIDTH - 1); i++) {
+				for (j = 0; j < IMAGE_HEIGHT; j++) {
 					image_pixels[i + j * IMAGE_WIDTH] = temp_pixels[i + j * IMAGE_WIDTH];
+				}
+			}
 			// gravar imagem preto e branco
-			for (i = 0; i < (IMAGE_WIDTH - 1); i++)
-				for (j = 0; j < IMAGE_HEIGHT; j++)
+			for (i = 0; i < (IMAGE_WIDTH - 1); i++) {
+				for (j = 0; j < IMAGE_HEIGHT; j++) {
 					img_BW[i + j * IMAGE_WIDTH] = temp_pixels[i + j * IMAGE_WIDTH];
+				}
+			}
 			im_alinhada[0] = toolkit.createImage(new java.awt.image.MemoryImageSource(IMAGE_WIDTH, IMAGE_HEIGHT,
 					img_BW, 0, IMAGE_WIDTH));
 
@@ -682,54 +706,71 @@ public class AnalizadorImagens {
 					}
 				}
 
-				for (i = 0; i < (IMAGE_WIDTH - 1); i++)
-					for (j = 0; j < IMAGE_HEIGHT; j++)
+				for (i = 0; i < (IMAGE_WIDTH - 1); i++) {
+					for (j = 0; j < IMAGE_HEIGHT; j++) {
 						image_pixels[i + j * IMAGE_WIDTH] = temp_pixels[i + j * IMAGE_WIDTH];
+					}
+				}
 			}
 
-			for (i = CROSS; i < (IMAGE_WIDTH - CROSS - 1); i++) { // erode cruz
-				for (j = CROSS; j < (IMAGE_HEIGHT - CROSS); j++) {
+			for (i = AnalizadorImagens.CROSS; i < (IMAGE_WIDTH - AnalizadorImagens.CROSS - 1); i++) { // erode
+																										// cruz
+				for (j = AnalizadorImagens.CROSS; j < (IMAGE_HEIGHT - AnalizadorImagens.CROSS); j++) {
 
 					acomulado = 1;
-					for (int alfa = -CROSS; alfa < (CROSS + 1); alfa++) {
+					for (int alfa = -AnalizadorImagens.CROSS; alfa < (AnalizadorImagens.CROSS + 1); alfa++) {
 						acomulado = acomulado * image_pixels[i + alfa + j * IMAGE_WIDTH] / 0xffffffff;
 						acomulado = acomulado * image_pixels[i + (alfa + j) * IMAGE_WIDTH] / 0xffffffff;
 					}
 
 					if (acomulado == 1) {
 						temp_pixels[i + j * IMAGE_WIDTH] = 0xffffffff;
-					} else
+					} else {
 						temp_pixels[i + j * IMAGE_WIDTH] = 0xff000000;
+					}
 
 				}
 			}
 			// apagar o resto k nao � analizado
-			for (i = 0; i < (CROSS + 1); i++)
-				for (j = 0; j < IMAGE_HEIGHT; j++)
+			for (i = 0; i < (AnalizadorImagens.CROSS + 1); i++) {
+				for (j = 0; j < IMAGE_HEIGHT; j++) {
 					temp_pixels[i + j * IMAGE_WIDTH] = 0xff000000;
-			for (i = (IMAGE_WIDTH - CROSS - 2); i < (IMAGE_WIDTH - 1); i++)
-				for (j = 0; j < IMAGE_HEIGHT; j++)
+				}
+			}
+			for (i = (IMAGE_WIDTH - AnalizadorImagens.CROSS - 2); i < (IMAGE_WIDTH - 1); i++) {
+				for (j = 0; j < IMAGE_HEIGHT; j++) {
 					temp_pixels[i + j * IMAGE_WIDTH] = 0xff000000;
-			for (i = 0; i < (IMAGE_WIDTH - 1); i++)
-				for (j = 0; j < (CROSS + 1); j++)
+				}
+			}
+			for (i = 0; i < (IMAGE_WIDTH - 1); i++) {
+				for (j = 0; j < (AnalizadorImagens.CROSS + 1); j++) {
 					temp_pixels[i + j * IMAGE_WIDTH] = 0xff000000;
-			for (i = 0; i < (IMAGE_WIDTH - 1); i++)
-				for (j = IMAGE_HEIGHT - CROSS - 1; j < IMAGE_HEIGHT; j++)
+				}
+			}
+			for (i = 0; i < (IMAGE_WIDTH - 1); i++) {
+				for (j = IMAGE_HEIGHT - AnalizadorImagens.CROSS - 1; j < IMAGE_HEIGHT; j++) {
 					temp_pixels[i + j * IMAGE_WIDTH] = 0xff000000;
+				}
+			}
 			// copiar temp_pixels -> image_pixels
-			for (i = 0; i < (IMAGE_WIDTH - 1); i++)
-				for (j = 0; j < IMAGE_HEIGHT; j++)
+			for (i = 0; i < (IMAGE_WIDTH - 1); i++) {
+				for (j = 0; j < IMAGE_HEIGHT; j++) {
 					image_pixels[i + j * IMAGE_WIDTH] = temp_pixels[i + j * IMAGE_WIDTH];
+				}
+			}
 
 			// Isto é MESMO TEMP
 			// copiar temp_pixels -> image_pixels
-			int[] temp_px = new int[area];
-			for (i = 0; i < (IMAGE_WIDTH - 1); i++)
-				for (j = 0; j < IMAGE_HEIGHT; j++)
+			final int[] temp_px = new int[area];
+			for (i = 0; i < (IMAGE_WIDTH - 1); i++) {
+				for (j = 0; j < IMAGE_HEIGHT; j++) {
 					temp_px[i + j * IMAGE_WIDTH] = temp_pixels[i + j * IMAGE_WIDTH];
-			// im_alinhada[2] = toolkit.createImage(new
-			// java.awt.image.MemoryImageSource(IMAGE_WIDTH, IMAGE_HEIGHT,
-			// temp_px, 0, IMAGE_WIDTH));
+					// im_alinhada[2] = toolkit.createImage(new
+					// java.awt.image.MemoryImageSource(IMAGE_WIDTH,
+					// IMAGE_HEIGHT,
+					// temp_px, 0, IMAGE_WIDTH));
+				}
+			}
 
 			// rectas horizontais
 
@@ -836,9 +877,11 @@ public class AnalizadorImagens {
 
 			// imagem original com as rectas comentar para ficar a preto e
 			// branco com as rectas
-			for (i = 0; i < (IMAGE_WIDTH - 1); i++)
-				for (j = 0; j < IMAGE_HEIGHT; j++)
+			for (i = 0; i < (IMAGE_WIDTH - 1); i++) {
+				for (j = 0; j < IMAGE_HEIGHT; j++) {
 					temp_pixels[i + j * IMAGE_WIDTH] = img_orig[i + j * IMAGE_WIDTH];
+				}
+			}
 
 			// desenhar rectas importante.... gravar uma imagem com isto
 			for (i = 0; i < (IMAGE_WIDTH - 1); i++) {
@@ -859,9 +902,11 @@ public class AnalizadorImagens {
 					}
 				}
 			}
-			for (i = 0; i < (IMAGE_WIDTH - 1); i++)
-				for (j = 0; j < IMAGE_HEIGHT; j++)
+			for (i = 0; i < (IMAGE_WIDTH - 1); i++) {
+				for (j = 0; j < IMAGE_HEIGHT; j++) {
 					image_pixels[i + j * IMAGE_WIDTH] = temp_pixels[i + j * IMAGE_WIDTH];
+				}
+			}
 
 			im_alinhada[1] = toolkit.createImage(new java.awt.image.MemoryImageSource(IMAGE_WIDTH, IMAGE_HEIGHT,
 					image_pixels, 0, IMAGE_WIDTH));
@@ -894,9 +939,11 @@ public class AnalizadorImagens {
 				// String.valueOf(refine_x[ni]) + "  " +
 				// String.valueOf(refine_y[ni]));
 			}
-			for (i = 0; i < (IMAGE_WIDTH - 1); i++)
-				for (j = 0; j < IMAGE_HEIGHT; j++)
+			for (i = 0; i < (IMAGE_WIDTH - 1); i++) {
+				for (j = 0; j < IMAGE_HEIGHT; j++) {
 					image_pixels[i + j * IMAGE_WIDTH] = temp_pixels[i + j * IMAGE_WIDTH];
+				}
+			}
 
 			// RECONTRUCAO DA IMAGEM espacamento de 50 pixeis entre rectas
 			new_width = 400 + Math.round((640 - Math.max(pontos_x[8], pontos_x[44])) * 400 / 640); // nova
@@ -907,9 +954,9 @@ public class AnalizadorImagens {
 			// de
 			// ajustada
 			new_height = 250; // nova altura da imagem
-			int[] new_img = new int[new_width * new_height];
-			int[] new_tmp2 = new int[new_width * new_height];
-			int cx = Math.round((pontos_x[8] - pontos_x[0] + pontos_x[44] - pontos_x[36]) / 16); // distancias
+			final int[] new_img = new int[new_width * new_height];
+			final int[] new_tmp2 = new int[new_width * new_height];
+			final int cx = Math.round((pontos_x[8] - pontos_x[0] + pontos_x[44] - pontos_x[36]) / 16); // distancias
 			// x
 			// e
 			// y
@@ -918,10 +965,10 @@ public class AnalizadorImagens {
 			// na
 			// imagem
 			// original
-			int cy = Math.round((pontos_y[44] - pontos_y[8] + pontos_y[36] - pontos_y[0]) / 8);
-			int[] rgb = new int[3];
-			int g = 0;
-			int b = 0;
+			final int cy = Math.round((pontos_y[44] - pontos_y[8] + pontos_y[36] - pontos_y[0]) / 8);
+			final int[] rgb = new int[3];
+			final int g = 0;
+			final int b = 0;
 
 			// System.out.println(String.valueOf(cx) + " " +
 			// String.valueOf(cy));
@@ -1131,32 +1178,35 @@ public class AnalizadorImagens {
 							+ (pontos_y[44] + Math.round(j * cy / 50)) * IMAGE_WIDTH];
 				}
 			}
-			for (i = 0; i < (new_width - 1); i++)
-				for (j = 0; j < new_height; j++)
+			for (i = 0; i < (new_width - 1); i++) {
+				for (j = 0; j < new_height; j++) {
 					new_tmp2[i + j * new_width] = new_img[i + j * new_width];
+				}
+			}
 
 			im_alinhada[2] = toolkit.createImage(new java.awt.image.MemoryImageSource(new_width, new_height, new_tmp2,
 					0, new_width));
 
-			int[] new_tmp = new int[new_width * new_height];
+			final int[] new_tmp = new int[new_width * new_height];
 			for (i = 1; i < (new_width - 2); i++) { // onde varia a funcao.
 				// out:(imagem preto e
 				// branco)
 
 				for (j = 1; j < (new_height - 1); j++) {
 
-					int r1 = (new_img[i + j * new_width] & 0x00ff0000) >> 16;
-					int g1 = (new_img[i + j * new_width] & 0x0000ff00) >> 8;
-					int b1 = (new_img[i + j * new_width] & 0x000000ff);
+					final int r1 = (new_img[i + j * new_width] & 0x00ff0000) >> 16;
+					final int g1 = (new_img[i + j * new_width] & 0x0000ff00) >> 8;
+					final int b1 = (new_img[i + j * new_width] & 0x000000ff);
 
-					if (getDistancia(0, 0, b1, 0, 0, AZUL_B) < AZUL_RAIO) {
+					if (getDistancia(0, 0, b1, 0, 0, AnalizadorImagens.AZUL_B) < AnalizadorImagens.AZUL_RAIO) {
 
 						// secalhar � melhor calcular logo tudo aqui dentro ou
 						// entao fazer dialate e depois erode para "tapar"
 						// buracos do feixe
 						new_img[i + j * new_width] = 0xffffffff;
-					} else
+					} else {
 						new_img[i + j * new_width] = 0xff000000;
+					}
 
 				}
 			}
@@ -1196,7 +1246,7 @@ public class AnalizadorImagens {
 					0, new_width));
 
 			return (im_alinhada);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			// e.printStackTrace();
 			im_alinhada = null;
 		}
@@ -1217,34 +1267,35 @@ public class AnalizadorImagens {
 		return (isUp);
 	}
 
-	public void setIsUp(boolean isUp) {
+	public void setIsUp(final boolean isUp) {
 		this.isUp = isUp;
 	}
 
-	public java.awt.Image getFinalimage(java.awt.Image img) {
-		if (img == null)
+	public java.awt.Image getFinalimage(final java.awt.Image img) {
+		if (img == null) {
 			return null;
+		}
 
 		if (img640480 != null) {
 			return (img640480);
 		}
 
 		im_temp = img;
-		int[] temp_pixels = new int[new_width * new_height];
-		int[] image_pixels = new int[area];
+		final int[] temp_pixels = new int[new_width * new_height];
+		final int[] image_pixels = new int[area];
 
-		java.awt.image.PixelGrabber pg = new java.awt.image.PixelGrabber(img, 0, 0, new_width, new_height, temp_pixels,
-				0, new_width);
+		final java.awt.image.PixelGrabber pg = new java.awt.image.PixelGrabber(img, 0, 0, new_width, new_height,
+				temp_pixels, 0, new_width);
 
 		try {
 			pg.grabPixels();
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			e.printStackTrace();
 		}
 
 		java.awt.image.BufferedImage bImage = null;
 
-		int newheight = 230;
+		final int newheight = 230;
 
 		// por a imagem em cima ou em baixo para que se veja a circunferencia
 		if (getIsUp()) {
@@ -1260,20 +1311,20 @@ public class AnalizadorImagens {
 			}
 			img640480 = toolkit.createImage(new java.awt.image.MemoryImageSource(IMAGE_WIDTH, IMAGE_HEIGHT,
 					image_pixels, 0, IMAGE_WIDTH));
-			int imageWidth = img640480.getWidth(null);
-			int imageHeight = img640480.getHeight(null);
+			final int imageWidth = img640480.getWidth(null);
+			final int imageHeight = img640480.getHeight(null);
 			bImage = new java.awt.image.BufferedImage(imageWidth, imageHeight,
 					java.awt.image.BufferedImage.TYPE_INT_RGB);
-			java.awt.Graphics2D g2d = bImage.createGraphics();
+			final java.awt.Graphics2D g2d = bImage.createGraphics();
 			g2d.drawImage(img640480, 0, 0, null);
 			g2d.setColor(Color.RED);
-			g2d.drawOval((int) Math.round(circunferencia[0] - circunferencia[2]), (int) Math.round(circunferencia[1]
-					- circunferencia[2] + newheight), (int) Math.round(2 * circunferencia[2]), (int) Math
-					.round(2 * circunferencia[2]));
+			g2d.drawOval((int) Math.round(circunferencia[0] - circunferencia[2]),
+					(int) Math.round(circunferencia[1] - circunferencia[2] + newheight),
+					(int) Math.round(2 * circunferencia[2]), (int) Math.round(2 * circunferencia[2]));
 			g2d.fillOval((int) Math.round(circunferencia[0]), (int) Math.round(circunferencia[1] + newheight), 3, 3);
 			g2d.setColor(Color.CYAN);
-			int x0 = 50;
-			int y0 = newheight - 40;
+			final int x0 = 50;
+			final int y0 = newheight - 40;
 			g2d.drawLine(x0, y0, x0 + 50, y0);
 			g2d.drawLine(x0, y0 - 5, x0, y0 + 5);
 			g2d.drawLine(x0 + 50, y0 - 5, x0 + 50, y0 + 5);
@@ -1291,21 +1342,21 @@ public class AnalizadorImagens {
 			}
 			img640480 = toolkit.createImage(new java.awt.image.MemoryImageSource(IMAGE_WIDTH, IMAGE_HEIGHT,
 					image_pixels, 0, IMAGE_WIDTH));
-			int imageWidth = img640480.getWidth(null);
-			int imageHeight = img640480.getHeight(null);
+			final int imageWidth = img640480.getWidth(null);
+			final int imageHeight = img640480.getHeight(null);
 			bImage = new java.awt.image.BufferedImage(imageWidth, imageHeight,
 					java.awt.image.BufferedImage.TYPE_INT_RGB);
-			java.awt.Graphics2D g2d = bImage.createGraphics();
+			final java.awt.Graphics2D g2d = bImage.createGraphics();
 			g2d.drawImage(img640480, 0, 0, null);
 			g2d.setColor(Color.RED);
-			g2d.drawOval((int) Math.round(circunferencia[0] - circunferencia[2]), (int) Math.round(circunferencia[1]
-					- circunferencia[2]), (int) Math.round(2 * circunferencia[2]), (int) Math
-					.round(2 * circunferencia[2]));
+			g2d.drawOval((int) Math.round(circunferencia[0] - circunferencia[2]),
+					(int) Math.round(circunferencia[1] - circunferencia[2]), (int) Math.round(2 * circunferencia[2]),
+					(int) Math.round(2 * circunferencia[2]));
 			g2d.fillOval((int) Math.round(circunferencia[0]), (int) Math.round(circunferencia[1]), 3, 3);
 
 			g2d.setColor(Color.CYAN);
-			int x0 = 50;
-			int y0 = 300;
+			final int x0 = 50;
+			final int y0 = 300;
 			g2d.drawLine(x0, y0, x0 + 50, y0);
 			g2d.drawLine(x0, y0 - 5, x0, y0 + 5);
 			g2d.drawLine(x0 + 50, y0 - 5, x0 + 50, y0 + 5);
@@ -1322,43 +1373,44 @@ public class AnalizadorImagens {
 		return (im_original);
 	}
 
-	public java.awt.Image convertTo640480(java.awt.Image img) {
+	public java.awt.Image convertTo640480(final java.awt.Image img) {
 
-		im_temp = img.getScaledInstance(640, 480, img.SCALE_SMOOTH);
+		im_temp = img.getScaledInstance(640, 480, Image.SCALE_SMOOTH);
 
 		return (im_temp);
 	}
 
-	public java.awt.Image convertTo320240(java.awt.Image img) {
+	public java.awt.Image convertTo320240(final java.awt.Image img) {
 
-		im_temp = img.getScaledInstance(320, 240, img.SCALE_SMOOTH);
+		im_temp = img.getScaledInstance(320, 240, Image.SCALE_SMOOTH);
 
 		return (im_temp);
 
 	}
 
-	public java.awt.Image convertToXY(java.awt.Image img, int x, int y) {
+	public java.awt.Image convertToXY(final java.awt.Image img, final int x, final int y) {
 
-		if (x * y < 25)
+		if (x * y < 25) {
 			return (null);
+		}
 
-		im_temp = img.getScaledInstance(x, y, img.SCALE_SMOOTH);
+		im_temp = img.getScaledInstance(x, y, Image.SCALE_SMOOTH);
 
 		return (im_temp);
 	}
 
-	private double getDistancia(int x1, int y1, int z1, int x2, int y2, int z2) {
+	private double getDistancia(final int x1, final int y1, final int z1, final int x2, final int y2, final int z2) {
 
-		return (java.lang.Math.sqrt((double) ((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2) + (z1 - z2) * (z1 - z2))));
+		return (java.lang.Math.sqrt(((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2) + (z1 - z2) * (z1 - z2))));
 	}
 
-	private double getDistancia(int x1, int y1, int x2, int y2) {
+	private double getDistancia(final int x1, final int y1, final int x2, final int y2) {
 
-		return (java.lang.Math.sqrt((double) ((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2))));
+		return (java.lang.Math.sqrt(((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2))));
 	}
 
-	private double getDistancia(double x1, double y1, double x2, double y2) {
+	private double getDistancia(final double x1, final double y1, final double x2, final double y2) {
 
-		return (java.lang.Math.sqrt((double) ((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2))));
+		return (java.lang.Math.sqrt(((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2))));
 	}
 }

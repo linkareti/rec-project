@@ -37,7 +37,7 @@ public class QMethods {
 	 * @return O numero a arredondado as casas desejadas.
 	 */
 
-	public static double arredondar(double a, int x) {
+	public static double arredondar(final double a, final int x) {
 
 		double b, c, d;
 
@@ -65,13 +65,13 @@ public class QMethods {
 	 * @return O numero a arredondado as casas desejadas.
 	 */
 
-	public static float arredondar(float a, int x) {
+	public static float arredondar(final float a, final int x) {
 
 		float b, c, d;
 
 		d = (float) Math.pow(10, x);
 
-		b = (float) (a * d);
+		b = (a * d);
 
 		c = (float) (Math.rint(b)) / d;
 
@@ -93,7 +93,7 @@ public class QMethods {
 	 * @return O numero a arredondado a 0 casas decimais, ou seja, um inteiro.
 	 */
 
-	public static int arredondarInt(double a) {
+	public static int arredondarInt(final double a) {
 
 		int c;
 
@@ -117,7 +117,7 @@ public class QMethods {
 	 * @return O numero a arredondado a 0 casas decimais, ou seja, um inteiro.
 	 */
 
-	public static int arredondarInt(float a) {
+	public static int arredondarInt(final float a) {
 
 		int c;
 

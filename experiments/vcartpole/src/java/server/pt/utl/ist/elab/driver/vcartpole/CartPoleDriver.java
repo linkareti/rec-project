@@ -30,9 +30,9 @@ public class CartPoleDriver extends VirtualBaseDriver {
 
 	private static String CartPole_DRIVER_LOGGER = "CartPole.Logger";
 	static {
-		Logger l = LogManager.getLogManager().getLogger(CartPole_DRIVER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(CartPoleDriver.CartPole_DRIVER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(CartPole_DRIVER_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(CartPoleDriver.CartPole_DRIVER_LOGGER));
 		}
 	}
 
@@ -49,54 +49,59 @@ public class CartPoleDriver extends VirtualBaseDriver {
 	public CartPoleDriver() {
 	}
 
-	public void config(HardwareAcquisitionConfig config, HardwareInfo info) throws IncorrectStateException,
+	@Override
+	public void config(final HardwareAcquisitionConfig config, final HardwareInfo info) throws IncorrectStateException,
 			WrongConfigurationException {
 		fireIDriverStateListenerDriverConfiguring();
 		info.validateConfig(config);
 		extraValidateConfig(config, info);
 		try {
 			configure(config, info);
-		} catch (Exception e) {
-			LoggerUtil.logThrowable("Error on config...", e, Logger.getLogger(CartPole_DRIVER_LOGGER));
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable("Error on config...", e, Logger.getLogger(CartPoleDriver.CartPole_DRIVER_LOGGER));
 			throw new WrongConfigurationException();
 		}
 	}
 
-	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException {
+	@Override
+	public void configure(final HardwareAcquisitionConfig config, final HardwareInfo info)
+			throws WrongConfigurationException {
 		this.config = config;
 		this.info = info;
 
-		int tbs = (int) config.getSelectedFrequency().getFrequency();
-		int nSamples = config.getTotalSamples();
+		final int tbs = (int) config.getSelectedFrequency().getFrequency();
+		final int nSamples = config.getTotalSamples();
 
-		double uCart = Float.parseFloat(config.getSelectedHardwareParameterValue("uCart"));
-		double uPole = Float.parseFloat(config.getSelectedHardwareParameterValue("uPole"));
+		final double uCart = Float.parseFloat(config.getSelectedHardwareParameterValue("uCart"));
+		final double uPole = Float.parseFloat(config.getSelectedHardwareParameterValue("uPole"));
 
-		double g = Float.parseFloat(config.getSelectedHardwareParameterValue("g"));
+		final double g = Float.parseFloat(config.getSelectedHardwareParameterValue("g"));
 
-		int kp = Integer.parseInt(config.getSelectedHardwareParameterValue("kp"));
-		int ki = Integer.parseInt(config.getSelectedHardwareParameterValue("ki"));
-		int kd = Integer.parseInt(config.getSelectedHardwareParameterValue("kd"));
+		final int kp = Integer.parseInt(config.getSelectedHardwareParameterValue("kp"));
+		final int ki = Integer.parseInt(config.getSelectedHardwareParameterValue("ki"));
+		final int kd = Integer.parseInt(config.getSelectedHardwareParameterValue("kd"));
 
-		boolean failActive = (config.getSelectedHardwareParameterValue("failActive").trim().equals("1") ? true : false);
-		int failNLaps = Integer.parseInt(config.getSelectedHardwareParameterValue("failNLaps"));
-		int failN = Integer.parseInt(config.getSelectedHardwareParameterValue("failN"));
-		int failTime = Integer.parseInt(config.getSelectedHardwareParameterValue("failTime"));
+		final boolean failActive = (config.getSelectedHardwareParameterValue("failActive").trim().equals("1") ? true
+				: false);
+		final int failNLaps = Integer.parseInt(config.getSelectedHardwareParameterValue("failNLaps"));
+		final int failN = Integer.parseInt(config.getSelectedHardwareParameterValue("failN"));
+		final int failTime = Integer.parseInt(config.getSelectedHardwareParameterValue("failTime"));
 
-		boolean sucActive = (config.getSelectedHardwareParameterValue("sucActive").trim().equals("1") ? true : false);
-		int sucAngle = Integer.parseInt(config.getSelectedHardwareParameterValue("sucAngle"));
-		int sucTime = Integer.parseInt(config.getSelectedHardwareParameterValue("sucTime"));
-		double xMax = Float.parseFloat(config.getSelectedHardwareParameterValue("xMax"));
+		final boolean sucActive = (config.getSelectedHardwareParameterValue("sucActive").trim().equals("1") ? true
+				: false);
+		final int sucAngle = Integer.parseInt(config.getSelectedHardwareParameterValue("sucAngle"));
+		final int sucTime = Integer.parseInt(config.getSelectedHardwareParameterValue("sucTime"));
+		final double xMax = Float.parseFloat(config.getSelectedHardwareParameterValue("xMax"));
 
-		double mCart = Float.parseFloat(config.getSelectedHardwareParameterValue("mCart"));
-		double mPole = Float.parseFloat(config.getSelectedHardwareParameterValue("mPole"));
+		final double mCart = Float.parseFloat(config.getSelectedHardwareParameterValue("mCart"));
+		final double mPole = Float.parseFloat(config.getSelectedHardwareParameterValue("mPole"));
 
-		double x = Float.parseFloat(config.getSelectedHardwareParameterValue("x"));
-		double xdot = Float.parseFloat(config.getSelectedHardwareParameterValue("xdot"));
-		double theta = Float.parseFloat(config.getSelectedHardwareParameterValue("theta"));
-		double thetadot = Float.parseFloat(config.getSelectedHardwareParameterValue("thetadot"));
-		double poleLength = Float.parseFloat(config.getSelectedHardwareParameterValue("poleLength"));
-		double action = Float.parseFloat(config.getSelectedHardwareParameterValue("action"));
+		final double x = Float.parseFloat(config.getSelectedHardwareParameterValue("x"));
+		final double xdot = Float.parseFloat(config.getSelectedHardwareParameterValue("xdot"));
+		final double theta = Float.parseFloat(config.getSelectedHardwareParameterValue("theta"));
+		final double thetadot = Float.parseFloat(config.getSelectedHardwareParameterValue("thetadot"));
+		final double poleLength = Float.parseFloat(config.getSelectedHardwareParameterValue("poleLength"));
+		final double action = Float.parseFloat(config.getSelectedHardwareParameterValue("action"));
 
 		dataSource = new CartPoleDataProducer(this, x, xdot, theta, thetadot, new double[] { uCart, uPole },
 				new double[] { mCart, mPole }, g, poleLength, action, tbs, nSamples);
@@ -104,18 +109,21 @@ public class CartPoleDriver extends VirtualBaseDriver {
 		((CartPoleDataProducer) dataSource).initializeFailure(failN, xMax, failTime, failNLaps);
 		((CartPoleDataProducer) dataSource).initializeSuccess(sucAngle, sucTime);
 
-		for (int i = 0; i < config.getChannelsConfig().length; i++)
+		for (int i = 0; i < config.getChannelsConfig().length; i++) {
 			config.getChannelsConfig(i).setTotalSamples(config.getTotalSamples());
+		}
 
 		dataSource.setAcquisitionHeader(config);
 
 		fireIDriverStateListenerDriverConfigured();
 	}
 
+	@Override
 	public String getDriverUniqueID() {
-		return DRIVER_UNIQUE_ID;
+		return CartPoleDriver.DRIVER_UNIQUE_ID;
 	}
 
+	@Override
 	public void shutdown() {
 		if (dataSource != null) {
 			dataSource.stopNow();
@@ -123,37 +131,43 @@ public class CartPoleDriver extends VirtualBaseDriver {
 		super.shutDownNow();
 	}
 
-	public IDataSource start(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public IDataSource start(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverStarting();
 		dataSource.startProduction();
 		fireIDriverStateListenerDriverStarted();
 		return dataSource;
 	}
 
-	public void stop(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public void stop(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverStoping();
 		dataSource.stopNow();
 		fireIDriverStateListenerDriverStoped();
 	}
 
+	@Override
 	public Object getHardwareInfo() {
 		fireIDriverStateListenerDriverReseting();
-		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+				+ "/HardwareInfo.xml";
 		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
-		if (prop.indexOf("://") == -1)
+		if (prop.indexOf("://") == -1) {
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
+		}
 
 		java.net.URL url = null;
 		try {
 			url = ReCProtocols.getURL(prop);
-		} catch (java.net.MalformedURLException e) {
-			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger(CartPole_DRIVER_LOGGER));
+		} catch (final java.net.MalformedURLException e) {
+			LoggerUtil.logThrowable("Unable to load resource: " + prop, e,
+					Logger.getLogger(CartPoleDriver.CartPole_DRIVER_LOGGER));
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
-			} catch (java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2, Logger
-						.getLogger(CartPole_DRIVER_LOGGER));
+			} catch (final java.net.MalformedURLException e2) {
+				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
+						Logger.getLogger(CartPoleDriver.CartPole_DRIVER_LOGGER));
 			}
 		}
 		fireIDriverStateListenerDriverReseted();

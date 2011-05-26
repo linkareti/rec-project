@@ -6,18 +6,20 @@ public enum SerialPortCommandList {
 
 	private String command = null;
 
-	SerialPortCommandList(String str) {
-		this.command = str;
+	SerialPortCommandList(final String str) {
+		command = str;
 	}
 
+	@Override
 	public String toString() {
-		return this.command;
+		return command;
 	}
 
-	public static boolean exists(String str) {
-		for (SerialPortCommandList commandList : SerialPortCommandList.values()) {
-			if (commandList.toString().equals(str))
+	public static boolean exists(final String str) {
+		for (final SerialPortCommandList commandList : SerialPortCommandList.values()) {
+			if (commandList.toString().equals(str)) {
 				return true;
+			}
 		}
 		return false;
 	}

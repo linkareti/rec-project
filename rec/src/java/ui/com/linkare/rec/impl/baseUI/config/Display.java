@@ -37,7 +37,7 @@ public class Display extends DisplayNode implements com.linkare.rec.impl.baseUI.
 	}
 
 	// Deep copy
-	public Display(com.linkare.rec.impl.baseUI.config.Display source) {
+	public Display(final com.linkare.rec.impl.baseUI.config.Display source) {
 		_Order = source._Order;
 		_OfflineCapable = source._OfflineCapable;
 		_Selected = source._Selected;
@@ -49,30 +49,34 @@ public class Display extends DisplayNode implements com.linkare.rec.impl.baseUI.
 	}
 
 	// This attribute is mandatory
-	public void setOrder(int value) {
+	@Override
+	public void setOrder(final int value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "order", new Integer(getOrder()), new Integer(value));
 		}
 		_Order = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
+	@Override
 	public int getOrder() {
 		return _Order;
 	}
 
 	// This attribute is mandatory
-	public void setOfflineCapable(boolean value) {
+	public void setOfflineCapable(final boolean value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "offlineCapable", new Boolean(getOfflineCapable()),
 					new Boolean(value));
 		}
 		_OfflineCapable = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public boolean getOfflineCapable() {
@@ -80,15 +84,17 @@ public class Display extends DisplayNode implements com.linkare.rec.impl.baseUI.
 	}
 
 	// This attribute is mandatory
-	public void setSelected(boolean value) {
+	@Override
+	public void setSelected(final boolean value) {
 		super.setSelected(value);
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "selected", new Boolean(getSelected()), new Boolean(value));
 		}
 		_Selected = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public boolean getSelected() {
@@ -96,14 +102,15 @@ public class Display extends DisplayNode implements com.linkare.rec.impl.baseUI.
 	}
 
 	// This attribute is mandatory
-	public void setDisplayStringBundleKey(String value) {
+	public void setDisplayStringBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "displayStringBundleKey", getDisplayStringBundleKey(), value);
 		}
 		_DisplayStringBundleKey = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public String getDisplayStringBundleKey() {
@@ -111,51 +118,57 @@ public class Display extends DisplayNode implements com.linkare.rec.impl.baseUI.
 	}
 
 	// This attribute is mandatory
-	public void setIconLocationBundleKey(String value) {
+	public void setIconLocationBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "iconLocationBundleKey", getIconLocationBundleKey(), value);
 		}
 		_IconLocationBundleKey = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
+	@Override
 	public String getIconLocationBundleKey() {
 		return _IconLocationBundleKey;
 	}
 
 	// This attribute is mandatory
-	public void setToolTipBundleKey(String value) {
+	public void setToolTipBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "toolTipBundleKey", getToolTipBundleKey(), value);
 		}
 		_ToolTipBundleKey = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
+	@Override
 	public String getToolTipBundleKey() {
 		return _ToolTipBundleKey;
 	}
 
 	// This attribute is mandatory
-	public void setClassLocationBundleKey(String value) {
+	public void setClassLocationBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "classLocationBundleKey", getClassLocationBundleKey(), value);
 		}
 		_ClassLocationBundleKey = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public String getClassLocationBundleKey() {
 		return _ClassLocationBundleKey;
 	}
 
-	public void writeNode(Writer out, String nodeName, String indent) throws IOException {
+	@Override
+	public void writeNode(final Writer out, final String nodeName, final String indent) throws IOException {
 		out.write(indent);
 		out.write("<");
 		out.write(nodeName);
@@ -207,14 +220,15 @@ public class Display extends DisplayNode implements com.linkare.rec.impl.baseUI.
 			out.write("'"); // NOI18N
 		}
 		out.write(">\n");
-		String nextIndent = indent + "	";
+		final String nextIndent = indent + "	";
 		out.write(indent);
 		out.write("</" + nodeName + ">\n");
 	}
 
-	public void readNode(Node node) {
+	@Override
+	public void readNode(final Node node) {
 		if (node.hasAttributes()) {
-			NamedNodeMap attrs = node.getAttributes();
+			final NamedNodeMap attrs = node.getAttributes();
 			Attr attr;
 			attr = (Attr) attrs.getNamedItem("order");
 			if (attr != null) {
@@ -246,11 +260,11 @@ public class Display extends DisplayNode implements com.linkare.rec.impl.baseUI.
 				_ClassLocationBundleKey = attr.getValue();
 			}
 		}
-		NodeList children = node.getChildNodes();
+		final NodeList children = node.getChildNodes();
 		for (int i = 0, size = children.getLength(); i < size; ++i) {
-			Node childNode = children.item(i);
-			String childNodeName = (childNode.getLocalName() == null ? childNode.getNodeName().intern() : childNode
-					.getLocalName().intern());
+			final Node childNode = children.item(i);
+			final String childNodeName = (childNode.getLocalName() == null ? childNode.getNodeName().intern()
+					: childNode.getLocalName().intern());
 			String childNodeValue = "";
 			if (childNode.getFirstChild() != null) {
 				childNodeValue = childNode.getFirstChild().getNodeValue();
@@ -258,8 +272,9 @@ public class Display extends DisplayNode implements com.linkare.rec.impl.baseUI.
 		}
 	}
 
+	@Override
 	public void validate() throws ReCBaseUIConfig.ValidateException {
-		boolean restrictionFailure = false;
+		final boolean restrictionFailure = false;
 		// Validating property order
 
 		// Validating property displayStringBundleKey
@@ -280,14 +295,16 @@ public class Display extends DisplayNode implements com.linkare.rec.impl.baseUI.
 		}
 	}
 
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
+	@Override
+	public void addPropertyChangeListener(final PropertyChangeListener listener) {
 		if (eventListeners == null) {
 			eventListeners = new PropertyChangeSupport(this);
 		}
 		eventListeners.addPropertyChangeListener(listener);
 	}
 
-	public void removePropertyChangeListener(PropertyChangeListener listener) {
+	@Override
+	public void removePropertyChangeListener(final PropertyChangeListener listener) {
 		if (eventListeners == null) {
 			return;
 		}
@@ -297,86 +314,108 @@ public class Display extends DisplayNode implements com.linkare.rec.impl.baseUI.
 		}
 	}
 
-	public void _setPropertyChangeSupport(PropertyChangeSupport listeners) {
+	@Override
+	public void _setPropertyChangeSupport(final PropertyChangeSupport listeners) {
 		eventListeners = listeners;
 	}
 
-	public void changePropertyByName(String name, Object value) {
-		if (name == null)
+	public void changePropertyByName(String name, final Object value) {
+		if (name == null) {
 			return;
+		}
 		name = name.intern();
-		if (name.equals("order"))
+		if (name.equals("order")) {
 			setOrder(((Integer) value).intValue());
-		else if (name.equals("offlineCapable"))
+		} else if (name.equals("offlineCapable")) {
 			setOfflineCapable(((Boolean) value).booleanValue());
-		else if (name.equals("displayStringBundleKey"))
+		} else if (name.equals("displayStringBundleKey")) {
 			setDisplayStringBundleKey((String) value);
-		else if (name.equals("iconLocationBundleKey"))
+		} else if (name.equals("iconLocationBundleKey")) {
 			setIconLocationBundleKey((String) value);
-		else if (name.equals("toolTipBundleKey"))
+		} else if (name.equals("toolTipBundleKey")) {
 			setToolTipBundleKey((String) value);
-		else if (name.equals("classLocationBundleKey"))
+		} else if (name.equals("classLocationBundleKey")) {
 			setClassLocationBundleKey((String) value);
-		else
+		} else {
 			throw new IllegalArgumentException(name + " is not a valid property name for Display");
+		}
 	}
 
-	public Object fetchPropertyByName(String name) {
-		if (name.equals("order"))
+	public Object fetchPropertyByName(final String name) {
+		if (name.equals("order")) {
 			return new Integer(getOrder());
-		if (name.equals("offlineCapable"))
+		}
+		if (name.equals("offlineCapable")) {
 			return new Boolean(getOfflineCapable());
-		if (name.equals("displayStringBundleKey"))
+		}
+		if (name.equals("displayStringBundleKey")) {
 			return getDisplayStringBundleKey();
-		if (name.equals("iconLocationBundleKey"))
+		}
+		if (name.equals("iconLocationBundleKey")) {
 			return getIconLocationBundleKey();
-		if (name.equals("toolTipBundleKey"))
+		}
+		if (name.equals("toolTipBundleKey")) {
 			return getToolTipBundleKey();
-		if (name.equals("classLocationBundleKey"))
+		}
+		if (name.equals("classLocationBundleKey")) {
 			return getClassLocationBundleKey();
+		}
 		throw new IllegalArgumentException(name + " is not a valid property name for Display");
 	}
 
 	// Return an array of all of the properties that are beans and are set.
-	public com.linkare.rec.impl.baseUI.config.CommonBean[] childBeans(boolean recursive) {
-		List<CommonBean> children = new LinkedList<CommonBean>();
+	@Override
+	public com.linkare.rec.impl.baseUI.config.CommonBean[] childBeans(final boolean recursive) {
+		final List<CommonBean> children = new LinkedList<CommonBean>();
 		childBeans(recursive, children);
-		com.linkare.rec.impl.baseUI.config.CommonBean[] result = new com.linkare.rec.impl.baseUI.config.CommonBean[children
+		final com.linkare.rec.impl.baseUI.config.CommonBean[] result = new com.linkare.rec.impl.baseUI.config.CommonBean[children
 				.size()];
-		return (com.linkare.rec.impl.baseUI.config.CommonBean[]) children.toArray(result);
+		return children.toArray(result);
 	}
 
 	// Put all child beans into the beans list.
-	public void childBeans(boolean recursive, List beans) {
+	@Override
+	public void childBeans(final boolean recursive, final List beans) {
 	}
 
-	public boolean equals(Object o) {
-		if (o == this)
+	@Override
+	public boolean equals(final Object o) {
+		if (o == this) {
 			return true;
-		if (!(o instanceof com.linkare.rec.impl.baseUI.config.Display))
+		}
+		if (!(o instanceof com.linkare.rec.impl.baseUI.config.Display)) {
 			return false;
-		com.linkare.rec.impl.baseUI.config.Display inst = (com.linkare.rec.impl.baseUI.config.Display) o;
-		if (_Order != inst._Order)
+		}
+		final com.linkare.rec.impl.baseUI.config.Display inst = (com.linkare.rec.impl.baseUI.config.Display) o;
+		if (_Order != inst._Order) {
 			return false;
-		if (_OfflineCapable != inst._OfflineCapable)
+		}
+		if (_OfflineCapable != inst._OfflineCapable) {
 			return false;
-		if (_Selected != inst._Selected)
+		}
+		if (_Selected != inst._Selected) {
 			return false;
+		}
 		if (!(_DisplayStringBundleKey == null ? inst._DisplayStringBundleKey == null : _DisplayStringBundleKey
-				.equals(inst._DisplayStringBundleKey)))
+				.equals(inst._DisplayStringBundleKey))) {
 			return false;
+		}
 		if (!(_IconLocationBundleKey == null ? inst._IconLocationBundleKey == null : _IconLocationBundleKey
-				.equals(inst._IconLocationBundleKey)))
+				.equals(inst._IconLocationBundleKey))) {
 			return false;
+		}
 		if (!(_ToolTipBundleKey == null ? inst._ToolTipBundleKey == null : _ToolTipBundleKey
-				.equals(inst._ToolTipBundleKey)))
+				.equals(inst._ToolTipBundleKey))) {
 			return false;
+		}
 		if (!(_ClassLocationBundleKey == null ? inst._ClassLocationBundleKey == null : _ClassLocationBundleKey
-				.equals(inst._ClassLocationBundleKey)))
+				.equals(inst._ClassLocationBundleKey))) {
 			return false;
+		}
 		return true;
 	}
 
+	@Override
 	public int hashCode() {
 		int result = 17;
 		result = 37 * result + _Order;
@@ -389,15 +428,17 @@ public class Display extends DisplayNode implements com.linkare.rec.impl.baseUI.
 		return result;
 	}
 
+	@Override
 	public String getDisplayNameBundleKey() {
 		return getDisplayStringBundleKey();
 	}
 
+	@Override
 	public String toString() {
-		StringWriter sw = new StringWriter();
+		final StringWriter sw = new StringWriter();
 		try {
 			writeNode(sw, "Display", "");
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			// How can we actually get an IOException on a StringWriter?
 			// We'll just ignore it.
 		}

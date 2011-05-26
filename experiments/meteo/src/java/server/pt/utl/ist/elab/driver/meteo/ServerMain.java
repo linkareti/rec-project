@@ -20,26 +20,26 @@ import com.linkare.rec.impl.utils.ORBBean;
 public class ServerMain {
 	private static String METEO_HARDWARE_LOGGER = "Meteo.Logger";
 	static {
-		Logger l = LogManager.getLogManager().getLogger(METEO_HARDWARE_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ServerMain.METEO_HARDWARE_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(METEO_HARDWARE_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ServerMain.METEO_HARDWARE_LOGGER));
 		}
 	}
 
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		try {
 			ORBBean.getORBBean();
 
-			BaseHardware baseHardware = new BaseHardware(new MeteoDriver());
+			final BaseHardware baseHardware = new BaseHardware(new MeteoDriver());
 
 			Thread.currentThread().join();
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			ORBBean.getORBBean().killORB();
-			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(METEO_HARDWARE_LOGGER));
+			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(ServerMain.METEO_HARDWARE_LOGGER));
 		}
 	}
 }

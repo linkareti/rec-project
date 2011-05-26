@@ -17,21 +17,23 @@ import com.linkare.rec.impl.protocols.recresource.Handler;
  */
 public class ReCProtocols {
 
-	public static URL getURL(String spec) throws MalformedURLException {
-		if (spec == null || spec.length() == 0)
+	public static URL getURL(final String spec) throws MalformedURLException {
+		if (spec == null || spec.length() == 0) {
 			throw new MalformedURLException("spec is null or with length 0 - returning Exception from ReCProtocols...");
+		}
 
 		if (spec.startsWith(Handler.RECRESOURCE_PROTOCOL_IDENTIFIER)) {
-			String protocol = "recresource";
-			int protocolLength = Handler.RECRESOURCE_PROTOCOL_IDENTIFIER.length();
+			final String protocol = "recresource";
+			final int protocolLength = Handler.RECRESOURCE_PROTOCOL_IDENTIFIER.length();
 			String file = "";
 			String host = "localhost";
 			if (spec.indexOf("/", protocolLength) != -1) {
 				host = spec.substring(protocolLength, spec.indexOf("/", protocolLength));
 
 				file += spec.substring(spec.indexOf("/", protocolLength));
-			} else
+			} else {
 				host = spec.substring(protocolLength);
+			}
 
 			int port = -1;
 
@@ -40,7 +42,8 @@ public class ReCProtocols {
 				host = host.substring(0, host.indexOf(":") - 1);
 			}
 
-			URL url = new URL(protocol, host, port, file, new com.linkare.rec.impl.protocols.recresource.Handler());
+			final URL url = new URL(protocol, host, port, file,
+					new com.linkare.rec.impl.protocols.recresource.Handler());
 			return url;
 		}
 

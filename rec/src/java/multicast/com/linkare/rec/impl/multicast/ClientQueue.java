@@ -52,14 +52,18 @@ public class ClientQueue implements QueueLogger {
 	private IClientQueueListener clientQueueListener = null;
 
 	// private internal state variables
-	private List<DataClientForQueue> queueOrg = new LinkedList<DataClientForQueue>();
+	private final List<DataClientForQueue> queueOrg = new LinkedList<DataClientForQueue>();
 
-	private ClientsConnectionCheck clientsConnectionChecker = new ClientsConnectionCheck();
+	private final ClientsConnectionCheck clientsConnectionChecker = new ClientsConnectionCheck();
 
-	private IDataClientForQueueListener dataClientForQueueAdapter = new DataClientForQueueAdapter();
-	
-	/** Client queue to send events for dispatch. This attribute must be the last of the class to be declared! */
-	private EventQueue messageQueue = new EventQueue(new ClientQueueDispatcher(), this.getClass().getSimpleName(), this);
+	private final IDataClientForQueueListener dataClientForQueueAdapter = new DataClientForQueueAdapter();
+
+	/**
+	 * Client queue to send events for dispatch. This attribute must be the last
+	 * of the class to be declared!
+	 */
+	private final EventQueue messageQueue = new EventQueue(new ClientQueueDispatcher(),
+			this.getClass().getSimpleName(), this);
 
 	/**
 	 * Creates the <code>ClientQueue</code>.
@@ -68,17 +72,17 @@ public class ClientQueue implements QueueLogger {
 	 * @param maximumClients - Maximum number of clients to be registered in the
 	 *            queue
 	 */
-	public ClientQueue(IClientQueueListener clientQueueListener, int maximumClients) {
+	public ClientQueue(final IClientQueueListener clientQueueListener, final int maximumClients) {
 		setClientQueueListener(clientQueueListener);
 		setMaximumClients(maximumClients);
 		ExecutorScheduler.scheduleAtFixedRate(clientsConnectionChecker, 0, 1000, TimeUnit.MILLISECONDS);
 	}
 
 	/* Delegate Implementations for MCHardware & MCController */
-	public UserInfo[] getUsers(UserInfo user, IResource resource) throws NotRegistered, NotAuthorized {
-		IOperation op1 = new DefaultOperation(IOperation.OP_ENUM_USERS);
-		DefaultOperation opList = new DefaultOperation(IOperation.OP_LIST_USER);
-		DefaultUser securityUser = new DefaultUser(user);
+	public UserInfo[] getUsers(final UserInfo user, final IResource resource) throws NotRegistered, NotAuthorized {
+		final IOperation op1 = new DefaultOperation(IOperation.OP_ENUM_USERS);
+		final DefaultOperation opList = new DefaultOperation(IOperation.OP_LIST_USER);
+		final DefaultUser securityUser = new DefaultUser(user);
 
 		if (!contains(user)) {
 			getClientQueueListener().log(
@@ -96,11 +100,11 @@ public class ClientQueue implements QueueLogger {
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_OPERATION);
 		}
 
-		Iterator<DataClientForQueue> iter = iterator();
+		final Iterator<DataClientForQueue> iter = iterator();
 
-		ArrayList<UserInfo> userInfosOut = new ArrayList<UserInfo>(queueOrg.size());
+		final ArrayList<UserInfo> userInfosOut = new ArrayList<UserInfo>(queueOrg.size());
 		while (iter.hasNext()) {
-			DataClientForQueue otherUser = iter.next();
+			final DataClientForQueue otherUser = iter.next();
 			opList.getProperties().put(IOperation.PROPKEY_USERID_OTHER, otherUser.getAsDefaultUser());
 			if (SecurityManagerFactory.authorize(resource, securityUser, opList)) {
 				userInfosOut.add(otherUser.getUserInfoCleaned());
@@ -112,25 +116,25 @@ public class ClientQueue implements QueueLogger {
 		 * System.arraycopy(userInfosOut,0, retVal, 0, retVal.length); return
 		 * retVal;
 		 */
-		UserInfo[] retVal = userInfosOut.toArray(new UserInfo[0]);
+		final UserInfo[] retVal = userInfosOut.toArray(new UserInfo[0]);
 		return retVal;
 	}
 
 	// message queue dispatchers
-	public void hardwareStateChange(HardwareState newState) {
+	public void hardwareStateChange(final HardwareState newState) {
 		messageQueue.addEvent(new HardwareStateChangeEvent(newState));
 	}
 
-	public void hardwareLockable(HardwareLockEvent evt) {
+	public void hardwareLockable(final HardwareLockEvent evt) {
 		messageQueue.addEvent(evt);
 	}
 
-	public void hardwareChanged(HardwareChangeEvent evt) {
+	public void hardwareChanged(final HardwareChangeEvent evt) {
 		messageQueue.addEvent(evt);
 	}
 
-	public void sendChatMessage(UserInfo user, String clientTo, String message, IResource resource)
-			throws NotRegistered, NotAuthorized {
+	public void sendChatMessage(final UserInfo user, final String clientTo, final String message,
+			final IResource resource) throws NotRegistered, NotAuthorized {
 		synchronized (queueOrg) {
 			if (!contains(user)) {
 				getClientQueueListener().log(
@@ -142,10 +146,11 @@ public class ClientQueue implements QueueLogger {
 
 			UserInfo otherUser = userNameToUserInfo(clientTo);
 
-			if (otherUser == null || otherUser.getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS))
+			if (otherUser == null || otherUser.getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS)) {
 				otherUser = new UserInfo(ChatMessageEvent.EVERYONE_USER);
+			}
 
-			DefaultOperation op = new DefaultOperation(IOperation.OP_SEND_MESSAGE);
+			final DefaultOperation op = new DefaultOperation(IOperation.OP_SEND_MESSAGE);
 			op.getProperties().put(IOperation.PROPKEY_USERID_OTHER, otherUser);
 
 			if (!SecurityManagerFactory.authorize(resource, new DefaultUser(user), op)) {
@@ -162,18 +167,18 @@ public class ClientQueue implements QueueLogger {
 			messageQueue.addEvent(new ChatMessageEvent(this, user, otherUser, message));
 		}
 	}
-	
-	public void sendMulticastChatMessage(String clientTo, String message) {
+
+	public void sendMulticastChatMessage(final String clientTo, final String message) {
 		synchronized (queueOrg) {
-			UserInfo otherUser = userNameToUserInfo(clientTo);
+			final UserInfo otherUser = userNameToUserInfo(clientTo);
 
 			if (otherUser == null || otherUser.getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS)) {
 				return;
 			}
-			
-			UserInfo adminUser = new UserInfo(ChatMessageEvent.MULTICAST_USERNAME);
 
-			DefaultOperation op = new DefaultOperation(IOperation.OP_SEND_MESSAGE);
+			final UserInfo adminUser = new UserInfo(ChatMessageEvent.MULTICAST_USERNAME);
+
+			final DefaultOperation op = new DefaultOperation(IOperation.OP_SEND_MESSAGE);
 			op.getProperties().put(IOperation.PROPKEY_USERID_OTHER, otherUser);
 
 			messageQueue.addEvent(new ChatMessageEvent(this, adminUser, otherUser, message));
@@ -181,10 +186,10 @@ public class ClientQueue implements QueueLogger {
 	}
 
 	// Helper function for chat messages...
-	private UserInfo userNameToUserInfo(String userName) {
-		Iterator<DataClientForQueue> iter = iterator();
+	private UserInfo userNameToUserInfo(final String userName) {
+		final Iterator<DataClientForQueue> iter = iterator();
 		while (iter.hasNext()) {
-			DataClientForQueue dcfq = iter.next();
+			final DataClientForQueue dcfq = iter.next();
 			if (dcfq.getUserName().equals(userName)) {
 				return dcfq.getUserInfo();
 			}
@@ -194,8 +199,9 @@ public class ClientQueue implements QueueLogger {
 	}
 
 	public void shutdown() {
-		if (shutDown)
+		if (shutDown) {
 			return;
+		}
 		shutDown = true;
 		getClientQueueListener().log(Level.INFO, "ClientQueue - shut down process initiated!");
 		getClientQueueListener().log(Level.INFO, "ClientQueue - shutting down message queue!");
@@ -207,9 +213,9 @@ public class ClientQueue implements QueueLogger {
 		getClientQueueListener().log(Level.INFO, "ClientQueue - clients connection checker is shut down!");
 
 		getClientQueueListener().log(Level.INFO, "ClientQueue - shutting down clients!");
-		Iterator<DataClientForQueue> iter = iterator();
+		final Iterator<DataClientForQueue> iter = iterator();
 		while (iter.hasNext()) {
-			DataClientForQueue dcfq = iter.next();
+			final DataClientForQueue dcfq = iter.next();
 			getClientQueueListener().log(Level.INFO, "ClientQueue - shutting down client " + dcfq.getUserName());
 			dcfq.shutdown();
 			getClientQueueListener().log(Level.INFO, "ClientQueue - client " + dcfq.getUserName() + " is shut down!");
@@ -218,7 +224,7 @@ public class ClientQueue implements QueueLogger {
 		getClientQueueListener().log(Level.INFO, "ClientQueue - shut down completed!");
 	}
 
-	public boolean add(DataClient dc, IResource resource) throws MaximumClientsReached, NotAuthorized {
+	public boolean add(final DataClient dc, final IResource resource) throws MaximumClientsReached, NotAuthorized {
 		getClientQueueListener().log(Level.INFO, "ClientQueue - trying to register new client!");
 		boolean retVal = false;
 
@@ -237,16 +243,17 @@ public class ClientQueue implements QueueLogger {
 
 		}
 
-		DataClientForQueue dcfq = new DataClientForQueue(resource, dc, dataClientForQueueAdapter);
+		final DataClientForQueue dcfq = new DataClientForQueue(resource, dc, dataClientForQueueAdapter);
 
-		if (!SecurityManagerFactory.authenticate(resource, dcfq.getAsDefaultUser()))
+		if (!SecurityManagerFactory.authenticate(resource, dcfq.getAsDefaultUser())) {
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_USERNAME_PASSWORD_NOT_MATCH);
+		}
 
 		getClientQueueListener().log(Level.INFO,
 				"ClientQueue : checking to see if DataClient " + dcfq.getUserName() + " is allready registered!");
 
 		if (contains(dcfq.getUserInfo())) {
-			DataClientForQueue otherDcfq = getWrapperForUser(dcfq.getUserInfo());
+			final DataClientForQueue otherDcfq = getWrapperForUser(dcfq.getUserInfo());
 			if (otherDcfq.isShuttingDown() || !otherDcfq.isConnected()) {
 				if (!otherDcfq.isShuttingDown()) {
 					otherDcfq.shutdown();
@@ -259,7 +266,7 @@ public class ClientQueue implements QueueLogger {
 							// shutdown...
 							wait(1000);
 						}
-					} catch (Exception e) {
+					} catch (final Exception e) {
 						e.printStackTrace();
 					}
 				}
@@ -290,7 +297,7 @@ public class ClientQueue implements QueueLogger {
 		synchronized (queueOrg) {
 			try {
 				return queueOrg.get(0);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				getClientQueueListener().log(Level.INFO, "ClientQueue - No client at first position!");
 				return null;
 			}
@@ -309,7 +316,7 @@ public class ClientQueue implements QueueLogger {
 		}
 	}
 
-	public boolean remove(DataClientForQueue dcfq) {
+	public boolean remove(final DataClientForQueue dcfq) {
 		boolean returnVal = false;
 
 		synchronized (queueOrg) {
@@ -333,7 +340,7 @@ public class ClientQueue implements QueueLogger {
 							"ClientQueue - client " + dcfq.getUserName() + " isn't registered here!");
 				}
 
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				getClientQueueListener().logThrowable(
 						"ClientQueue - Error " + (cyclingQueue ? "cycling" : "removing") + " client "
 								+ dcfq.getUserName() + "!", e);
@@ -346,25 +353,26 @@ public class ClientQueue implements QueueLogger {
 	public void moveFirstToLast() {
 		synchronized (queueOrg) {
 			cyclingQueue = true;
-			DataClientForQueue first = first();
+			final DataClientForQueue first = first();
 
-			if (remove(first))
+			if (remove(first)) {
 				queueOrg.add(first);
-			else
+			} else {
 				getClientQueueListener().log(Level.INFO, "ClientQueue - Unable to cycle users in Queue!");
+			}
 
 			cyclingQueue = false;
 		}
 	}
 
-	public boolean contains(UserInfo user) {
-		Iterator<DataClientForQueue> iter = iterator();
+	public boolean contains(final UserInfo user) {
+		final Iterator<DataClientForQueue> iter = iterator();
 		getClientQueueListener().log(Level.FINEST,
 				"ClientQueue - users size is " + Collections.unmodifiableList(queueOrg).size());
 		getClientQueueListener().log(Level.FINEST,
 				"ClientQueue - username passed in is " + (user == null ? "(user is null)" : user.getUserName()));
 		while (iter.hasNext()) {
-			DataClientForQueue dcfq = iter.next();
+			final DataClientForQueue dcfq = iter.next();
 			getClientQueueListener().log(Level.FINEST, "ClientQueue - dcfq.getUserName() " + dcfq.getUserName());
 			if (dcfq.getUserName().equals(user.getUserName())) {
 				return true;
@@ -374,10 +382,10 @@ public class ClientQueue implements QueueLogger {
 		return false;
 	}
 
-	private DataClientForQueue getWrapperForUser(UserInfo user) {
-		Iterator<DataClientForQueue> iter = iterator();
+	private DataClientForQueue getWrapperForUser(final UserInfo user) {
+		final Iterator<DataClientForQueue> iter = iterator();
 		while (iter.hasNext()) {
-			DataClientForQueue dcfq = (DataClientForQueue) iter.next();
+			final DataClientForQueue dcfq = iter.next();
 			if (dcfq.getUserName().equals(user.getUserName())) {
 				return dcfq;
 			}
@@ -385,12 +393,13 @@ public class ClientQueue implements QueueLogger {
 		return null;
 	}
 
+	@Override
 	public String toString() {
-		StringBuffer returnClients = new StringBuffer("");
+		final StringBuffer returnClients = new StringBuffer("");
 
 		returnClients.append("******************************************" + "\r\n");
 		returnClients.append("Client Queue Contents: \r\n");
-		Iterator<DataClientForQueue> iter = iterator();
+		final Iterator<DataClientForQueue> iter = iterator();
 		while (iter.hasNext()) {
 			returnClients.append(iter.next() + "\r\n");
 		}
@@ -414,7 +423,7 @@ public class ClientQueue implements QueueLogger {
 	 * @param maximumClients New value of property maximumClients.
 	 * 
 	 */
-	public void setMaximumClients(int maximumClients) {
+	public void setMaximumClients(final int maximumClients) {
 		this.maximumClients = maximumClients;
 	}
 
@@ -434,7 +443,7 @@ public class ClientQueue implements QueueLogger {
 	 * @param clientQueueListener New value of property clientQueueListener.
 	 * 
 	 */
-	public void setClientQueueListener(com.linkare.rec.impl.multicast.IClientQueueListener clientQueueListener) {
+	public void setClientQueueListener(final com.linkare.rec.impl.multicast.IClientQueueListener clientQueueListener) {
 		this.clientQueueListener = clientQueueListener;
 	}
 
@@ -442,7 +451,8 @@ public class ClientQueue implements QueueLogger {
 	private class ClientQueueDispatcher implements EventQueueDispatcher {
 		private HardwareState cachedHardwareState = null;
 
-		public void dispatchEvent(Object o) {
+		@Override
+		public void dispatchEvent(final Object o) {
 			if (o instanceof HardwareStateChangeEvent) {
 				if (cachedHardwareState == null
 						|| !cachedHardwareState.equals(((HardwareStateChangeEvent) o).getNewState())) {
@@ -453,11 +463,11 @@ public class ClientQueue implements QueueLogger {
 							"ClientQueue - dispatching Hardware State change event. New State is: "
 									+ ((HardwareStateChangeEvent) o).getNewState());
 
-					Iterator<DataClientForQueue> iter = iterator();
+					final Iterator<DataClientForQueue> iter = iterator();
 					while (iter.hasNext()) {
 						try {
-							((DataClientForQueue) iter.next()).hardwareStateChange((HardwareStateChangeEvent) o);
-						} catch (Exception e) {
+							(iter.next()).hardwareStateChange((HardwareStateChangeEvent) o);
+						} catch (final Exception e) {
 							getClientQueueListener().logThrowable(
 									"ClientQueue - Error dispatching Hardware State change events to clients!", e);
 						}
@@ -468,11 +478,11 @@ public class ClientQueue implements QueueLogger {
 			} else if (o instanceof ChatMessageEvent) {
 				getClientQueueListener().log(Level.INFO, "ClientQueue - dispatching chat message event.");
 
-				Iterator<DataClientForQueue> iter = iterator();
+				final Iterator<DataClientForQueue> iter = iterator();
 				while (iter.hasNext()) {
 					try {
-						((DataClientForQueue) iter.next()).receiveMessage((ChatMessageEvent) o);
-					} catch (Exception e) {
+						(iter.next()).receiveMessage((ChatMessageEvent) o);
+					} catch (final Exception e) {
 						getClientQueueListener().logThrowable("ClientQueue - Error dispatching chat message event!", e);
 					}
 				}
@@ -488,7 +498,7 @@ public class ClientQueue implements QueueLogger {
 				try {
 					((HardwareLockEvent) o).getLockerClient().hardwareLockable((HardwareLockEvent) o);
 
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					getClientQueueListener().logThrowable(
 							"ClientQueue - Error dispatching Hardware Lock event to client "
 									+ ((HardwareLockEvent) o).getLockerClient().getUserName(), e);
@@ -496,11 +506,11 @@ public class ClientQueue implements QueueLogger {
 			} else if (o instanceof HardwareChangeEvent) {
 				getClientQueueListener().log(Level.INFO, "ClientQueue - dispatching Hardware Change event!");
 
-				Iterator<DataClientForQueue> iter = iterator();
+				final Iterator<DataClientForQueue> iter = iterator();
 				while (iter.hasNext()) {
 					try {
 						iter.next().hardwareChange();
-					} catch (Exception e) {
+					} catch (final Exception e) {
 						getClientQueueListener().logThrowable("ClientQueue - Error dispatching Hardware Change event!",
 								e);
 					}
@@ -509,6 +519,7 @@ public class ClientQueue implements QueueLogger {
 
 		}
 
+		@Override
 		public int getPriority() {
 			return Thread.NORM_PRIORITY + 2;
 		}
@@ -520,15 +531,16 @@ public class ClientQueue implements QueueLogger {
 	/* Inner Class - Clients Connection Checker */
 	private class ClientsConnectionCheck extends ScheduledWorkUnit {
 
+		@Override
 		public void run() {
-			Iterator<DataClientForQueue> iterClients = iterator();
+			final Iterator<DataClientForQueue> iterClients = iterator();
 			while (iterClients.hasNext()) {
 				try {
-					DataClientForQueue dcfq = iterClients.next();
+					final DataClientForQueue dcfq = iterClients.next();
 					if (!dcfq.isConnected()) {
 						dcfq.shutdown();
 					}
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					getClientQueueListener().logThrowable("ClientQueue - Error cheking client connection status!", e);
 				}
 			}
@@ -538,7 +550,7 @@ public class ClientQueue implements QueueLogger {
 		 * {@inheritDoc}
 		 */
 		@Override
-		public void logThrowable(String message, Throwable throwable) {
+		public void logThrowable(final String message, final Throwable throwable) {
 			getClientQueueListener().logThrowable(message, throwable);
 		}
 	}
@@ -547,27 +559,31 @@ public class ClientQueue implements QueueLogger {
 
 	/* Inner Class - Clients callbacks */
 	private class DataClientForQueueAdapter implements IDataClientForQueueListener {
-		public void dataClientForQueueIsGone(DataClientForQueue dcfq) {
+		@Override
+		public void dataClientForQueueIsGone(final DataClientForQueue dcfq) {
 			remove(dcfq);
 		}
 
 		/* Proxy Logging methods for DataClientForQueue */
-		public void log(Level debugLevel, String message) {
+		@Override
+		public void log(final Level debugLevel, final String message) {
 			getClientQueueListener().log(debugLevel, "ClientQueue - " + message);
 		}
 
-		public void logThrowable(String message, Throwable t) {
+		@Override
+		public void logThrowable(final String message, final Throwable t) {
 			getClientQueueListener().logThrowable("ClientQueue - " + message, t);
 		}
 
 	}
+
 	/* End Inner Class - Clients callbacks */
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void log(Level debugLevel, String message) {
+	public void log(final Level debugLevel, final String message) {
 		getClientQueueListener().log(debugLevel, message);
 	}
 
@@ -575,7 +591,7 @@ public class ClientQueue implements QueueLogger {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void logThrowable(String message, Throwable t) {
+	public void logThrowable(final String message, final Throwable t) {
 		getClientQueueListener().logThrowable(message, t);
 	}
 }

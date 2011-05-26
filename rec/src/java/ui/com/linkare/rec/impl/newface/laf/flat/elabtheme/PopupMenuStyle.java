@@ -14,6 +14,7 @@ import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import javax.swing.plaf.FontUIResource;
 
+import com.linkare.rec.impl.newface.laf.flat.theme.AbstractStyle;
 import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 
 /**
@@ -22,22 +23,22 @@ import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 @Style
 public class PopupMenuStyle extends MenuStyle {
 
-	//ENABLED COLORS
+	// ENABLED COLORS
 	private static final Color COLOR_MENU_ITEM_BG = new Color(0x263537);
 	private static final Color COLOR_MENU_ITEM_FG = new Color(0xE4EEED);
 	private static final Color COLOR_MENU_BORDER = new Color(0xE4EEED);
 	private static final Color COLOR_MENU_DISABLED_FG = new Color(0x22363A);
 	private static final Color COLOR_MENU_ITEM_HOVER = new Color(0x22363A);
-	//PROPERTIES
+	// PROPERTIES
 	private static final String PT_MENU_SELECTION_BG = "selectionBackground";
 	private static final String PT_MENU_SELECTION_FG = "selectionForeground";
 	private static final String PT_MENU_DISABLED_FG = "disabledForeground";
 	private static final String PT_MENU_MARGIN = "margin";
 
-	//BORDER
-	public static final Border SOLID_THIN_BORDER = BorderFactory.createLineBorder(COLOR_MENU_BORDER);
+	// BORDER
+	public static final Border SOLID_THIN_BORDER = BorderFactory.createLineBorder(PopupMenuStyle.COLOR_MENU_BORDER);
 
-	//LABEL FONT
+	// LABEL FONT
 	public static final Font FONT_MENU = new FontUIResource("Arial", Font.BOLD, 10);
 
 	public static final String ID = "PopupMenu";
@@ -51,16 +52,16 @@ public class PopupMenuStyle extends MenuStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return PopupMenuStyle.ID;
 	}
 
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(BORDER, SOLID_THIN_BORDER);
-		map.put(FONT, FONT_MENU);
-		map.put(FOREGROUND, COLOR_MENU_ITEM_FG);
-		map.put(BACKGROUND, COLOR_MENU_ITEM_BG);
+		map.put(AbstractStyle.BORDER, PopupMenuStyle.SOLID_THIN_BORDER);
+		map.put(AbstractStyle.FONT, PopupMenuStyle.FONT_MENU);
+		map.put(AbstractStyle.FOREGROUND, PopupMenuStyle.COLOR_MENU_ITEM_FG);
+		map.put(AbstractStyle.BACKGROUND, PopupMenuStyle.COLOR_MENU_ITEM_BG);
 	}
 
 	// -------------------------------------------------------------------------

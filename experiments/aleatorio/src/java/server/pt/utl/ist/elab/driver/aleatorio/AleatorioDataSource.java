@@ -31,14 +31,14 @@ public class AleatorioDataSource extends BaseDataSource {
 	public int[] statisticY = null;
 
 	/**
-	 *channel 0 ==> image; channel 1 ==> [minX, maxX]; channel 2 ==> [y1....yN]
+	 * channel 0 ==> image; channel 1 ==> [minX, maxX]; channel 2 ==> [y1....yN]
 	 * channel 3 ==> movie; channel 4 ==> [centersX][centersY]; channel 5 ==>
 	 * [configuration values]
 	 */
 	private static final int NUM_CHANNELS = 6;
 
 	/** Creates a new instance of AleatorioDataSource */
-	public AleatorioDataSource(AleatorioDriver aleatorioDriver) {
+	public AleatorioDataSource(final AleatorioDriver aleatorioDriver) {
 		this.aleatorioDriver = aleatorioDriver;
 	}
 
@@ -119,9 +119,9 @@ public class AleatorioDataSource extends BaseDataSource {
 	 * super.addDataRow(values); }
 	 */
 
-	public void sendImage(java.awt.Image image, int centerCounter) {
+	public void sendImage(final java.awt.Image image, final int centerCounter) {
 		// the image to be sent thru the web
-		values = new PhysicsValue[NUM_CHANNELS];
+		values = new PhysicsValue[AleatorioDataSource.NUM_CHANNELS];
 		if (firstImage) {
 			fillStatistics();
 			fillConfig();
@@ -130,7 +130,7 @@ public class AleatorioDataSource extends BaseDataSource {
 			// sendConfig();
 		}// if
 
-		byte[] baImage = image2ByteArray(image);
+		final byte[] baImage = image2ByteArray(image);
 		values[0] = new PhysicsValue(PhysicsValFactory.fromByteArray(baImage, "image/jpeg"), // mime-Type
 				null, // Error
 				com.linkare.rec.data.Multiplier.none); // multiplier
@@ -144,7 +144,7 @@ public class AleatorioDataSource extends BaseDataSource {
 	public void fillStatistics()// sendStatistics()
 	{
 		// values = new PhysicsValue[NUM_CHANNELS];
-		int[] xxFirstLast = new int[2];
+		final int[] xxFirstLast = new int[2];
 		int numDice = 0;
 		int minValueOfDie = 0;
 		int maxValueOfDie = 0;
@@ -153,18 +153,18 @@ public class AleatorioDataSource extends BaseDataSource {
 
 		try {
 			numDice = new Integer(aleatorioDriver.getProps().getProperty("numberOfDice")).intValue();
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 		}
 		try {
 			minValueOfDie = new Integer(aleatorioDriver.getProps().getProperty("minValueOfDie")).intValue();
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 		}
 		try {
 			maxValueOfDie = new Integer(aleatorioDriver.getProps().getProperty("maxValueOfDie")).intValue();
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 		}
 
-		int[] newFileProperties = new int[3];
+		final int[] newFileProperties = new int[3];
 		newFileProperties[0] = numDice;
 		newFileProperties[1] = minValueOfDie;
 		newFileProperties[2] = maxValueOfDie;
@@ -198,11 +198,11 @@ public class AleatorioDataSource extends BaseDataSource {
 		// System.out.println(">>Values added to dataRow");
 	}
 
-	public void sendMovieFrame(java.awt.Image image) {
+	public void sendMovieFrame(final java.awt.Image image) {
 		if (image != null) {
-			values = new PhysicsValue[NUM_CHANNELS];
-			byte[] dataImage = image2ByteArray(image);
-			PhysicsVal val = PhysicsValFactory.fromByteArray(dataImage, "image/jpeg");
+			values = new PhysicsValue[AleatorioDataSource.NUM_CHANNELS];
+			final byte[] dataImage = image2ByteArray(image);
+			final PhysicsVal val = PhysicsValFactory.fromByteArray(dataImage, "image/jpeg");
 			values[3] = new PhysicsValue(val, null, com.linkare.rec.data.Multiplier.none);
 
 			super.addDataRow(values);
@@ -225,7 +225,7 @@ public class AleatorioDataSource extends BaseDataSource {
 		// the configuration information of the experiment
 		// BWThreshold, radius, houghThreshold1, houghThreshold2,
 		// convolutionThreshold
-		int[] configurationIntArray = new int[8];
+		final int[] configurationIntArray = new int[8];
 		// isto tamb�m � idiota... podia import como props da HardwareConfig -
 		// HardwareParameters (alias para ChannelParameters...)
 		configurationIntArray[0] = Integer.valueOf(aleatorioDriver.getProps().getProperty("BWThreshold")).intValue();
@@ -251,7 +251,7 @@ public class AleatorioDataSource extends BaseDataSource {
 		// super.addDataRow(values);
 	}
 
-	public void fillCenterCounter(int centerCounter)// sendCenterCounter(int
+	public void fillCenterCounter(final int centerCounter)// sendCenterCounter(int
 	// centerCounter)
 	{
 		// values = new PhysicsValue[NUM_CHANNELS];
@@ -275,21 +275,22 @@ public class AleatorioDataSource extends BaseDataSource {
 	 */
 	// sendImageCenters
 
-	private byte[] image2ByteArray(Image image) {
-		java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
-		javax.imageio.stream.MemoryCacheImageOutputStream mcios = new javax.imageio.stream.MemoryCacheImageOutputStream(
+	private byte[] image2ByteArray(final Image image) {
+		final java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+		final javax.imageio.stream.MemoryCacheImageOutputStream mcios = new javax.imageio.stream.MemoryCacheImageOutputStream(
 				baos);
-		if (image == null)
+		if (image == null) {
 			return null;
+		}
 		// convert Image to BufferedImage
 		// System.out.println("converting to JPEG!");
 		// System.out.println("Image is: "+image);
 		// System.out.println("Image.width:"+image.getWidth(null)+
 		// ", image.height:"+image.getHeight(null));
-		int imageWidth = image.getWidth(null), imageHeight = image.getHeight(null);
-		java.awt.image.BufferedImage bImage = new java.awt.image.BufferedImage(imageWidth, imageHeight,
+		final int imageWidth = image.getWidth(null), imageHeight = image.getHeight(null);
+		final java.awt.image.BufferedImage bImage = new java.awt.image.BufferedImage(imageWidth, imageHeight,
 				java.awt.image.BufferedImage.TYPE_INT_RGB);
-		Graphics2D g2d = bImage.createGraphics();
+		final Graphics2D g2d = bImage.createGraphics();
 		// javax.swing.JPanel painel = new javax.swing.JPanel();
 		while (!g2d.drawImage(image, 0, 0, imageWidth, imageHeight, null)) {
 		}// wait for the full image to be available
@@ -301,8 +302,8 @@ public class AleatorioDataSource extends BaseDataSource {
 		// write BufferedImage to ByteArrayOutputStream in jpg!
 		try {
 			javax.imageio.ImageIO.write(bImage, "jpg", mcios);
-		} catch (java.io.IOException e) {
-		} catch (com.sun.image.codec.jpeg.ImageFormatException e) {
+		} catch (final java.io.IOException e) {
+		} catch (final com.sun.image.codec.jpeg.ImageFormatException e) {
 		}
 		/*
 		 * try {javax.imageio.ImageIO.write(bImage, "jpg", new
@@ -311,20 +312,20 @@ public class AleatorioDataSource extends BaseDataSource {
 		 */
 
 		// create the ByteArrayInputStream and get the Byte[]
-		java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(baos.toByteArray());
-		byte[] byteArray = new byte[bais.available()];
+		final java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(baos.toByteArray());
+		final byte[] byteArray = new byte[bais.available()];
 
 		try {
 			bais.read(byteArray);
-		} catch (java.io.IOException e) {
+		} catch (final java.io.IOException e) {
 		}
 
 		return byteArray;
 	}// image2ByteArray(Image image)
 
-	private byte[] int2ByteArray(int[] intArray) {
+	private byte[] int2ByteArray(final int[] intArray) {
 		// each int takes 3 bytes
-		byte[] byteArray = new byte[intArray.length * 4];
+		final byte[] byteArray = new byte[intArray.length * 4];
 
 		for (int index = 0; index < intArray.length; index++) {
 			byteArray[4 * index] = (byte) ((intArray[index] & 0xff000000) >> 24);
@@ -335,17 +336,17 @@ public class AleatorioDataSource extends BaseDataSource {
 		return byteArray;
 	}// int2ByteArray(int[] intArray)
 
-	public void updateStatisticsFile(int pos, int value) {
+	public void updateStatisticsFile(final int pos, final int value) {
 		file.updateFile(pos, value);
 
 	}// updateStatisticsFile(int pos, int value)
 
-	public void sessionStatisticsFile(int[] centers, int numberOfDice) {
-		java.util.Date today = new java.util.Date();
-		java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy_MM_dd-HH'h'mm'm'ss");
-		String pathName = "data/ReC_Aleatorio_" + formatter.format(today) + ".dat";
+	public void sessionStatisticsFile(final int[] centers, final int numberOfDice) {
+		final java.util.Date today = new java.util.Date();
+		final java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy_MM_dd-HH'h'mm'm'ss");
+		final String pathName = "data/ReC_Aleatorio_" + formatter.format(today) + ".dat";
 
-		java.io.File newFile = new java.io.File(pathName);
+		final java.io.File newFile = new java.io.File(pathName);
 		// try{newFile.createNewFile();}
 		// catch(java.io.IOException e){e.printStackTrace();}
 		java.io.FileOutputStream fo = null;
@@ -353,36 +354,37 @@ public class AleatorioDataSource extends BaseDataSource {
 			fo = new java.io.FileOutputStream(newFile, false);
 			fo.write(getAcquisitionHeader().toString().getBytes());
 		}// try
-		catch (java.io.FileNotFoundException e) {
+		catch (final java.io.FileNotFoundException e) {
 			e.printStackTrace();
-		} catch (java.io.IOException e) {
+		} catch (final java.io.IOException e) {
 			e.printStackTrace();
 		}
 		byte[] bytesToWrite = "Counts\n".getBytes();
 
 		try {
 			fo.write(bytesToWrite);
-		} catch (java.io.IOException e) {
+		} catch (final java.io.IOException e) {
 			e.printStackTrace();
 		}
 
-		for (int i = 0; i < centers.length; i++) {
-			bytesToWrite = (String.valueOf(centers[i]) + "\n").getBytes();
+		for (final int center : centers) {
+			bytesToWrite = (String.valueOf(center) + "\n").getBytes();
 			try {
 				fo.write(bytesToWrite);
-			} catch (java.io.IOException e) {
+			} catch (final java.io.IOException e) {
 				e.printStackTrace();
 			}
 		}// for_I
 		try {
 			fo.close();
-		} catch (java.io.IOException e) {
+		} catch (final java.io.IOException e) {
 			e.printStackTrace();
 		}
 
 	}// sessionStatisticsFile
 
-	public void setAcquisitionHeader(HardwareAcquisitionConfig config) {
+	@Override
+	public void setAcquisitionHeader(final HardwareAcquisitionConfig config) {
 		super.setAcquisitionHeader(config);
 
 	}// setAcquisitionHeader
@@ -392,6 +394,7 @@ public class AleatorioDataSource extends BaseDataSource {
 		// fireIDataSourceListenerAcquisitionEnded();
 	}
 
+	@Override
 	public void stopNow() {
 		setDataSourceStoped();
 	}

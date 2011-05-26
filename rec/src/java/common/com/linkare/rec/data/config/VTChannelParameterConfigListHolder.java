@@ -6,18 +6,21 @@ public final class VTChannelParameterConfigListHolder implements org.omg.CORBA.p
 	public VTChannelParameterConfigListHolder() {
 	}
 
-	public VTChannelParameterConfigListHolder(com.linkare.rec.data.config.ParameterConfig[] initialValue) {
+	public VTChannelParameterConfigListHolder(final com.linkare.rec.data.config.ParameterConfig[] initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(org.omg.CORBA.portable.InputStream i) {
+	@Override
+	public void _read(final org.omg.CORBA.portable.InputStream i) {
 		value = com.linkare.rec.data.config.VTChannelParameterConfigListHelper.read(i);
 	}
 
-	public void _write(org.omg.CORBA.portable.OutputStream o) {
+	@Override
+	public void _write(final org.omg.CORBA.portable.OutputStream o) {
 		com.linkare.rec.data.config.VTChannelParameterConfigListHelper.write(o, value);
 	}
 
+	@Override
 	public org.omg.CORBA.TypeCode _type() {
 		return com.linkare.rec.data.config.VTChannelParameterConfigListHelper.type();
 	}

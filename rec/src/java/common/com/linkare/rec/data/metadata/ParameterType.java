@@ -1,6 +1,11 @@
 package com.linkare.rec.data.metadata;
 
 public class ParameterType implements org.omg.CORBA.portable.IDLEntity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5693915743719414084L;
+
 	//
 	// Internal member value
 	//
@@ -14,7 +19,7 @@ public class ParameterType implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member SelectionListValue
 	//
-	public static final ParameterType SelectionListValue = new ParameterType(_SelectionListValue);
+	public static final ParameterType SelectionListValue = new ParameterType(ParameterType._SelectionListValue);
 
 	//
 	// Enum member ContinuousValue value
@@ -24,7 +29,7 @@ public class ParameterType implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member ContinuousValue
 	//
-	public static final ParameterType ContinuousValue = new ParameterType(_ContinuousValue);
+	public static final ParameterType ContinuousValue = new ParameterType(ParameterType._ContinuousValue);
 
 	//
 	// Enum member OnOffValue value
@@ -34,7 +39,7 @@ public class ParameterType implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member OnOffValue
 	//
-	public static final ParameterType OnOffValue = new ParameterType(_OnOffValue);
+	public static final ParameterType OnOffValue = new ParameterType(ParameterType._OnOffValue);
 
 	//
 	// Enum member BlackBoxValue value
@@ -44,7 +49,7 @@ public class ParameterType implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member BlackBoxValue
 	//
-	public static final ParameterType BlackBoxValue = new ParameterType(_BlackBoxValue);
+	public static final ParameterType BlackBoxValue = new ParameterType(ParameterType._BlackBoxValue);
 
 	//
 	// Return the internal member value
@@ -54,37 +59,39 @@ public class ParameterType implements org.omg.CORBA.portable.IDLEntity {
 		return value;
 	}
 
-	public void setValue(int value) {
-		if (value == _SelectionListValue || value == _OnOffValue || value == _ContinuousValue
-				|| value == _BlackBoxValue)
+	public void setValue(final int value) {
+		if (value == ParameterType._SelectionListValue || value == ParameterType._OnOffValue
+				|| value == ParameterType._ContinuousValue || value == ParameterType._BlackBoxValue) {
 			this.value = value;
-		else
+		} else {
 			throw new org.omg.CORBA.BAD_OPERATION();
+		}
 	}
 
 	//
 	// Private constructor
 	// @param the enum value for this new member
 	//
-	public ParameterType(int value) {
+	public ParameterType(final int value) {
 		setValue(value);
 	}
 
 	// JavaBeans Constructor
 	public ParameterType() {
-		setValue(_OnOffValue);
+		setValue(ParameterType._OnOffValue);
 	}
 
 	//
 	// Copy constructor
 	// @param the enum value for this new member
 	//
-	public ParameterType(ParameterType other) {
+	public ParameterType(final ParameterType other) {
 		setValue(other.value);
 	}
 
+	@Override
 	public String toString() {
-		switch (this.getValue()) {
+		switch (getValue()) {
 		case _ContinuousValue:
 			return "Continuous Value";
 		case _SelectionListValue:
@@ -98,9 +105,11 @@ public class ParameterType implements org.omg.CORBA.portable.IDLEntity {
 		}
 	}
 
-	public boolean equals(Object other) {
-		if (other == null || !(other instanceof ParameterType))
+	@Override
+	public boolean equals(final Object other) {
+		if (other == null || !(other instanceof ParameterType)) {
 			return false;
+		}
 
 		return ((ParameterType) other).getValue() == getValue();
 	}

@@ -23,114 +23,127 @@ public class PhysicsValueUtil {
 	private PhysicsValueUtil() {
 	}
 
-	public static boolean isLessThan(PhysicsValue pv1, PhysicsValue pv2) {
-		double value1 = PhysicsValueUtil.toDoubleValue(pv1.getValue());
-		double value2 = PhysicsValueUtil.toDoubleValue(pv2.getValue());
-		double relatedmultiplier = pv1.getAppliedMultiplier().getExpValue() / pv2.getAppliedMultiplier().getExpValue();
+	public static boolean isLessThan(final PhysicsValue pv1, final PhysicsValue pv2) {
+		final double value1 = PhysicsValueUtil.toDoubleValue(pv1.getValue());
+		final double value2 = PhysicsValueUtil.toDoubleValue(pv2.getValue());
+		final double relatedmultiplier = pv1.getAppliedMultiplier().getExpValue()
+				/ pv2.getAppliedMultiplier().getExpValue();
 
 		return value1 * relatedmultiplier < value2;
 	}
 
-	public static boolean isEqual(PhysicsValue pv1, PhysicsValue pv2) {
-		double value1 = PhysicsValueUtil.toDoubleValue(pv1.getValue());
-		double value2 = PhysicsValueUtil.toDoubleValue(pv2.getValue());
-		double relatedmultiplier = pv1.getAppliedMultiplier().getExpValue() / pv2.getAppliedMultiplier().getExpValue();
+	public static boolean isEqual(final PhysicsValue pv1, final PhysicsValue pv2) {
+		final double value1 = PhysicsValueUtil.toDoubleValue(pv1.getValue());
+		final double value2 = PhysicsValueUtil.toDoubleValue(pv2.getValue());
+		final double relatedmultiplier = pv1.getAppliedMultiplier().getExpValue()
+				/ pv2.getAppliedMultiplier().getExpValue();
 
 		return value1 * relatedmultiplier == value2;
 	}
 
-	public static boolean isMoreThan(PhysicsValue pv1, PhysicsValue pv2) {
-		double value1 = PhysicsValueUtil.toDoubleValue(pv1.getValue());
-		double value2 = PhysicsValueUtil.toDoubleValue(pv2.getValue());
-		double relatedmultiplier = pv1.getAppliedMultiplier().getExpValue() / pv2.getAppliedMultiplier().getExpValue();
+	public static boolean isMoreThan(final PhysicsValue pv1, final PhysicsValue pv2) {
+		final double value1 = PhysicsValueUtil.toDoubleValue(pv1.getValue());
+		final double value2 = PhysicsValueUtil.toDoubleValue(pv2.getValue());
+		final double relatedmultiplier = pv1.getAppliedMultiplier().getExpValue()
+				/ pv2.getAppliedMultiplier().getExpValue();
 
 		return value1 * relatedmultiplier > value2;
 	}
 
-	public static boolean isLessThanOrEqual(PhysicsValue pv1, PhysicsValue pv2) {
-		return (isLessThan(pv1, pv2) || isEqual(pv1, pv2));
+	public static boolean isLessThanOrEqual(final PhysicsValue pv1, final PhysicsValue pv2) {
+		return (PhysicsValueUtil.isLessThan(pv1, pv2) || PhysicsValueUtil.isEqual(pv1, pv2));
 	}
 
-	public static boolean isMoreThanOrEqual(PhysicsValue pv1, PhysicsValue pv2) {
-		return !isLessThan(pv1, pv2);
+	public static boolean isMoreThanOrEqual(final PhysicsValue pv1, final PhysicsValue pv2) {
+		return !PhysicsValueUtil.isLessThan(pv1, pv2);
 	}
 
-	public static boolean isBetween(PhysicsValue pvalue, PhysicsValue min, PhysicsValue max) {
-		return (isMoreThanOrEqual(pvalue, min) && isLessThanOrEqual(pvalue, max));
+	public static boolean isBetween(final PhysicsValue pvalue, final PhysicsValue min, final PhysicsValue max) {
+		return (PhysicsValueUtil.isMoreThanOrEqual(pvalue, min) && PhysicsValueUtil.isLessThanOrEqual(pvalue, max));
 	}
 
-	public static boolean isInScale(PhysicsValue value, Scale scale) {
+	public static boolean isInScale(final PhysicsValue value, final Scale scale) {
 
-		if (!isBetween(value, new PhysicsValue(scale.getMinimumValue(), null, scale.getMultiplier()), new PhysicsValue(
-				scale.getMaximumValue(), null, scale.getMultiplier())))
+		if (!PhysicsValueUtil.isBetween(value, new PhysicsValue(scale.getMinimumValue(), null, scale.getMultiplier()),
+				new PhysicsValue(scale.getMaximumValue(), null, scale.getMultiplier()))) {
 			return false;
+		}
 
-		double valued = PhysicsValueUtil.toDoubleValue(value.getValue()) * value.getAppliedMultiplier().getExpValue();
-		double vmin = PhysicsValueUtil.toDoubleValue(scale.getMinimumValue()) * scale.getMultiplier().getExpValue();
-		double step = PhysicsValueUtil.toDoubleValue(scale.getStepValue()) * scale.getMultiplier().getExpValue();
+		final double valued = PhysicsValueUtil.toDoubleValue(value.getValue())
+				* value.getAppliedMultiplier().getExpValue();
+		final double vmin = PhysicsValueUtil.toDoubleValue(scale.getMinimumValue())
+				* scale.getMultiplier().getExpValue();
+		final double step = PhysicsValueUtil.toDoubleValue(scale.getStepValue()) * scale.getMultiplier().getExpValue();
 
 		return (valued - vmin) % step == 0;
 	}
 
 	// Delegate functions for PhysicsValueUtil
-	public static double toDoubleValue(PhysicsVal pv) {
-		if (pv == null)
+	public static double toDoubleValue(final PhysicsVal pv) {
+		if (pv == null) {
 			return 0.;
+		}
 
 		switch (pv.getDiscriminator().value()) {
 		case PhysicsValueType._BooleanVal:
 			return pv.isBooleanValue() ? 1.0 : 0.0;
 		case PhysicsValueType._ByteVal:
-			return (double) pv.getByteValue();
+			return pv.getByteValue();
 		case PhysicsValueType._ShortVal:
-			return (double) pv.getShortValue();
+			return pv.getShortValue();
 		case PhysicsValueType._IntVal:
-			return (double) pv.getIntValue();
+			return pv.getIntValue();
 		case PhysicsValueType._LongVal:
-			return (double) pv.getLongValue();
+			return pv.getLongValue();
 		case PhysicsValueType._FloatVal:
-			return (double) pv.getFloatValue();
+			return pv.getFloatValue();
 		case PhysicsValueType._DoubleVal:
 			return pv.getDoubleValue();
 		case PhysicsValueType._ByteArrayVal:
-			return (double) pv.getByteArrayValue().getData().length;
+			return pv.getByteArrayValue().getData().length;
 		default:
 			return 0.;
 		}
 	}
 
-	public static String toScientificNotation(PhysicsValue pv) {
-		String retorna = toScientificNotation(pv.getValue());
+	public static String toScientificNotation(final PhysicsValue pv) {
+		String retorna = PhysicsValueUtil.toScientificNotation(pv.getValue());
 
-		if (retorna.endsWith("E0"))
+		if (retorna.endsWith("E0")) {
 			retorna = retorna.substring(0, retorna.length() - 2);
+		}
 
-		if (pv.getError() != null)
-			retorna += " \u00B1 " + toScientificNotation(pv.getError());
+		if (pv.getError() != null) {
+			retorna += " \u00B1 " + PhysicsValueUtil.toScientificNotation(pv.getError());
+		}
 
-		if (retorna.endsWith("E0"))
+		if (retorna.endsWith("E0")) {
 			retorna = retorna.substring(0, retorna.length() - 2);
+		}
 
 		return retorna;
 	}
 
-	public static String toEngineeringNotation(PhysicsValue pv) {
+	public static String toEngineeringNotation(final PhysicsValue pv) {
 
-		String retorna = toEngineeringNotation(pv.getValue());
+		String retorna = PhysicsValueUtil.toEngineeringNotation(pv.getValue());
 
-		if (retorna.endsWith("E0"))
+		if (retorna.endsWith("E0")) {
 			retorna = retorna.substring(0, retorna.length() - 2);
+		}
 
-		if (pv.getError() != null)
-			retorna += " \u00B1 " + toEngineeringNotation(pv.getError());
+		if (pv.getError() != null) {
+			retorna += " \u00B1 " + PhysicsValueUtil.toEngineeringNotation(pv.getError());
+		}
 
-		if (retorna.endsWith("E0"))
+		if (retorna.endsWith("E0")) {
 			retorna = retorna.substring(0, retorna.length() - 2);
+		}
 
 		return retorna;
 	}
 
-	public static String toScientificNotation(PhysicsVal pv) {
+	public static String toScientificNotation(final PhysicsVal pv) {
 		DecimalFormat formatter = new DecimalFormat("0.#E0");
 		if (pv.getDiscriminator() == PhysicsValueType.ByteVal || pv.getDiscriminator() == PhysicsValueType.ShortVal
 				|| pv.getDiscriminator() == PhysicsValueType.IntVal
@@ -143,13 +156,14 @@ public class PhysicsValueUtil {
 
 		String retorna = formatter.format(pv.toDouble());
 
-		if (retorna.endsWith("E0"))
+		if (retorna.endsWith("E0")) {
 			retorna = retorna.substring(0, retorna.length() - 2);
+		}
 
 		return retorna;
 	}
 
-	public static String toEngineeringNotation(PhysicsVal pv) {
+	public static String toEngineeringNotation(final PhysicsVal pv) {
 		DecimalFormat formatter = new DecimalFormat("##0.#E0");
 		if (pv.getDiscriminator() == PhysicsValueType.ByteVal || pv.getDiscriminator() == PhysicsValueType.ShortVal
 				|| pv.getDiscriminator() == PhysicsValueType.IntVal
@@ -162,8 +176,9 @@ public class PhysicsValueUtil {
 
 		String retorna = formatter.format(pv.toDouble());
 
-		if (retorna.endsWith("E0"))
+		if (retorna.endsWith("E0")) {
 			retorna = retorna.substring(0, retorna.length() - 2);
+		}
 
 		return retorna;
 	}

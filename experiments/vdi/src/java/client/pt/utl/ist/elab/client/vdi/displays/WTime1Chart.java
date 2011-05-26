@@ -11,6 +11,11 @@ package pt.utl.ist.elab.client.vdi.displays;
  * @author Queiro'
  */
 public class WTime1Chart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9096061612802621122L;
+
 	/** Creates a new instance of AnguloIntensidadeChart */
 	public WTime1Chart() {
 		super();

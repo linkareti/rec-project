@@ -40,14 +40,14 @@ public class DataReceiverForQueue implements QueueLogger
 
 	public EventQueue messageQueue = null;
 
-	public DataReceiverForQueue(DataReceiver dr, IDataReceiverForQueueListener dataReceiverForQueueListener)
+	public DataReceiverForQueue(final DataReceiver dr, final IDataReceiverForQueueListener dataReceiverForQueueListener)
 			throws NotAuthorized
 
 	{
 
 		setDataReceiverForQueueListener(dataReceiverForQueueListener);
 
-		this.drw = new DataReceiverWrapper(dr);
+		drw = new DataReceiverWrapper(dr);
 
 		if (!drw.isConnected())
 
@@ -68,16 +68,21 @@ public class DataReceiverForQueue implements QueueLogger
 	}
 
 	/* Proxy Logging methods */
-	public void log(Level debugLevel, String message) {
-		if (getDataReceiverForQueueListener() != null)
+	@Override
+	public void log(final Level debugLevel, final String message) {
+		if (getDataReceiverForQueueListener() != null) {
 			getDataReceiverForQueueListener().log(debugLevel, message);
+		}
 	}
 
-	public void logThrowable(String message, Throwable t) {
-		if (getDataReceiverForQueueListener() != null)
+	@Override
+	public void logThrowable(final String message, final Throwable t) {
+		if (getDataReceiverForQueueListener() != null) {
 			getDataReceiverForQueueListener().logThrowable(message, t);
+		}
 	}
 
+	@Override
 	public String toString()
 
 	{
@@ -86,19 +91,20 @@ public class DataReceiverForQueue implements QueueLogger
 
 	}
 
-	public boolean equals(Object obj)
+	@Override
+	public boolean equals(final Object obj)
 
 	{
 
-		if (!(obj instanceof DataReceiverForQueue))
-
+		if (!(obj instanceof DataReceiverForQueue)) {
 			return false;
+		}
 
-		DataReceiverForQueue other = (DataReceiverForQueue) obj;
+		final DataReceiverForQueue other = (DataReceiverForQueue) obj;
 
-		if (other.drw != null && other.drw.isSameDelegate(drw))
-
+		if (other.drw != null && other.drw.isSameDelegate(drw)) {
 			return true;
+		}
 
 		return false;
 
@@ -113,10 +119,12 @@ public class DataReceiverForQueue implements QueueLogger
 	}
 
 	public void shutdownAsSoonAsPossible() {
-		if (shutdown)
+		if (shutdown) {
 			return;
+		}
 
 		(new Thread() {
+			@Override
 			public void run() {
 				setName(getName() + " - DataReceiverForQueue - shutdown");
 				shutdown();
@@ -129,8 +137,9 @@ public class DataReceiverForQueue implements QueueLogger
 	public synchronized void shutdown()
 
 	{
-		if (shutdown)
+		if (shutdown) {
 			return;
+		}
 
 		shutdown = true;
 
@@ -144,8 +153,9 @@ public class DataReceiverForQueue implements QueueLogger
 
 		log(Level.INFO, "receiver " + drw.getDelegate() + " - informing dataReceiverForQueueListener that I'm gone!");
 
-		if (getDataReceiverForQueueListener() != null)
+		if (getDataReceiverForQueueListener() != null) {
 			getDataReceiverForQueueListener().dataReceiverForQueueIsGone(this);
+		}
 
 		log(Level.INFO, "receiver " + drw.getDelegate() + " is shut down!");
 	}
@@ -154,7 +164,7 @@ public class DataReceiverForQueue implements QueueLogger
 		return shutdown;
 	}
 
-	public void stateChanged(DataProducerStateChangeEvent event)
+	public void stateChanged(final DataProducerStateChangeEvent event)
 
 	{
 
@@ -162,7 +172,7 @@ public class DataReceiverForQueue implements QueueLogger
 
 	}
 
-	public void newSamples(NewSamplesEvent event)
+	public void newSamples(final NewSamplesEvent event)
 
 	{
 
@@ -205,7 +215,7 @@ public class DataReceiverForQueue implements QueueLogger
 	 * 
 	 */
 
-	public void setDataReceiverForQueueListener(IDataReceiverForQueueListener dataReceiverForQueueListener)
+	public void setDataReceiverForQueueListener(final IDataReceiverForQueueListener dataReceiverForQueueListener)
 
 	{
 
@@ -217,7 +227,8 @@ public class DataReceiverForQueue implements QueueLogger
 
 	{
 
-		public void dispatchEvent(Object o)
+		@Override
+		public void dispatchEvent(final Object o)
 
 		{
 
@@ -239,7 +250,7 @@ public class DataReceiverForQueue implements QueueLogger
 
 				{
 
-					NewSamplesEvent evt = (NewSamplesEvent) o;
+					final NewSamplesEvent evt = (NewSamplesEvent) o;
 
 					log(Level.INFO, "DataReceiverForQueue - dispatching new samples message event " + evt);
 
@@ -254,7 +265,7 @@ public class DataReceiverForQueue implements QueueLogger
 
 				} else if (o instanceof DataProducerStateChangeEvent) {
 
-					DataProducerStateChangeEvent evt = (DataProducerStateChangeEvent) o;
+					final DataProducerStateChangeEvent evt = (DataProducerStateChangeEvent) o;
 
 					drw.stateChanged(evt.getDataProducerState());
 
@@ -262,7 +273,7 @@ public class DataReceiverForQueue implements QueueLogger
 
 			}
 
-			catch (Exception e)
+			catch (final Exception e)
 
 			{
 
@@ -282,6 +293,7 @@ public class DataReceiverForQueue implements QueueLogger
 
 		}
 
+		@Override
 		public int getPriority()
 
 		{

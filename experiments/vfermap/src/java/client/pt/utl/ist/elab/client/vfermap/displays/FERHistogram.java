@@ -14,6 +14,7 @@ import java.awt.Graphics;
 import org.opensourcephysics.display.Dimensioned;
 import org.opensourcephysics.display.Histogram;
 import org.opensourcephysics.display.PlottingPanel;
+import org.opensourcephysics.display.axes.XYAxis;
 
 import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
 
@@ -29,15 +30,17 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  */
 public class FERHistogram extends PlottingPanel implements ExpDataDisplay, ExpDataModelListener {
 
-	private String statusStr = java.util.ResourceBundle.getBundle(
-			"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-			"rec.exp.displays.statusStr.recData");
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6746114326158796680L;
+	private String statusStr = java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
+			.getString("rec.exp.displays.statusStr.recData");
 	private Histogram hist;
 
 	/** Creates a new instance of Histogram */
 	public FERHistogram() {
-		super("", "", "", org.opensourcephysics.display.axes.XAxis.LINEAR,
-				org.opensourcephysics.display.axes.YAxis.LINEAR);
+		super("", "", "", XYAxis.LINEAR, XYAxis.LINEAR);
 		// setPreferredMinMaxX(0,4);
 		/*
 		 * hist = new Histogram(); hist.setNormalizedToOne(true);
@@ -82,7 +85,8 @@ public class FERHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 
 	}
 
-	protected void paintEverything(Graphics g) {
+	@Override
+	protected void paintEverything(final Graphics g) {
 		// find the cliping rectangle within a scroll pane viewport
 		viewRect = null;
 		Container c = getParent();
@@ -95,11 +99,13 @@ public class FERHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 		}
 		Dimension interiorDimension = null;
 		// A single drawable object can set the dimension
-		if (dimensionSetter != null)
+		if (dimensionSetter != null) {
 			interiorDimension = dimensionSetter.getInterior(this);
+		}
 		// Give the axes a chance to set the gutter and the dimension.
-		if (axes instanceof Dimensioned)
+		if (axes instanceof Dimensioned) {
 			interiorDimension = ((Dimensioned) axes).getInterior(this);
+		}
 		if (interiorDimension != null) {
 			squareAspect = false;
 			leftGutter = rightGutter = Math.max(0, getWidth() - interiorDimension.width) / 2;
@@ -122,12 +128,12 @@ public class FERHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 		if (!statusStr.equalsIgnoreCase("")) {
 			g.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 26));
 
-			int x = (int) Math.round((double) getWidth() / 2d)
+			final int x = (int) Math.round(getWidth() / 2d)
 					- (int) Math.round((double) g.getFontMetrics().stringWidth(statusStr) / 2);
-			int y = (int) Math.round((double) getHeight() / 2d) - g.getFontMetrics().getHeight() + 5;
+			final int y = (int) Math.round(getHeight() / 2d) - g.getFontMetrics().getHeight() + 5;
 
 			g.setColor(new java.awt.Color(.6f, .12f, .3f));
-			g.drawString(statusStr, x, (int) Math.round((double) getHeight() / 2d));
+			g.drawString(statusStr, x, (int) Math.round(getHeight() / 2d));
 
 			g.setColor(new java.awt.Color(0, 0, 0, .4f));
 			g.fillRect(0, y, getWidth(), g.getFontMetrics().getHeight());
@@ -139,128 +145,140 @@ public class FERHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 	}
 
 	// TESTE
-	public void append(double i) {
+	public void append(final double i) {
 		hist.append(Math.abs(i));
 		// repaint();
 	}
 
-	public static void main(String args[]) {
-		javax.swing.JFrame test = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame test = new javax.swing.JFrame();
 		test.addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent e) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent e) {
 				System.exit(0);
 			};
 		});
-		FERHistogram ferim = new FERHistogram();
+		final FERHistogram ferim = new FERHistogram();
 		test.getContentPane().add(ferim);
 		test.pack();
 		test.setVisible(true);
 	}
 
+	@Override
 	public void dataModelEnded() {
 		if (statusStr.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.displays.statusStr.recData"))) {
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.displays.statusStr.recData"))) {
 			statusStr = "";
 			repaint();
 		}
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 		if (statusStr.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.displays.statusStr.recData"))) {
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.displays.statusStr.recData"))) {
 			statusStr = "";
 			repaint();
 		}
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
-		HardwareAcquisitionConfig header = model.getAcquisitionConfig();
+		final HardwareAcquisitionConfig header = model.getAcquisitionConfig();
 
-		byte simulType = Byte.parseByte(header.getSelectedHardwareParameterValue("simulType"));
+		final byte simulType = Byte.parseByte(header.getSelectedHardwareParameterValue("simulType"));
 
 		// if (simulType == 1)
 		// setVisible(false);
 		if (simulType != 1) {
-			float uMax = Float.parseFloat(header.getSelectedHardwareParameterValue("uMax"));
-			if (uMax != -1)
+			final float uMax = Float.parseFloat(header.getSelectedHardwareParameterValue("uMax"));
+			if (uMax != -1) {
 				setPreferredMinMaxX(0, uMax);
-			setTitle(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
-					.getString("rec.exp.display.fermap.title.2"));
+			}
+			setTitle(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+					"rec.exp.display.fermap.title.2"));
 			hist = new Histogram();
 			hist.setBinWidth(.4 / uMax);
 			if (simulType == 2) {
 				setXLabel("dX/dt");
-				hist.setXYColumnNames("dX/dt", java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-						"rec.exp.displays.histogram.title.1"));
+				hist.setXYColumnNames("dX/dt",
+						java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
+								.getString("rec.exp.displays.histogram.title.1"));
 			} else {
 				setXLabel("U");
-				hist.setXYColumnNames("U", java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-						"rec.exp.displays.histogram.title.1"));
+				hist.setXYColumnNames("U",
+						java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
+								.getString("rec.exp.displays.histogram.title.1"));
 			}
-			setYLabel(java.util.ResourceBundle
-					.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-							"rec.exp.displays.histogram.title.1"));
+			setYLabel(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
+					.getString("rec.exp.displays.histogram.title.1"));
 			addDrawable(hist);
-		} else
-			statusStr = java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-					"rec.exp.displays.inactive");
+		} else {
+			statusStr = java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
+					.getString("rec.exp.displays.inactive");
+		}
 		repaint();
 	}
 
+	@Override
 	public void dataModelStoped() {
 		if (statusStr.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.displays.statusStr.recData"))) {
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.displays.statusStr.recData"))) {
 			statusStr = "";
 			repaint();
 		}
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
 
-	public void newSamples(NewExpDataEvent evt) {
-		if (hist != null)
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
+		if (hist != null) {
 			for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
 				// sample, canal
 				if (model.getValueAt(i, model.getChannelIndex("uMapaBytes")) != null) { // static
-					float[] tmp = ByteUtil.byteArrayToFloatArray(model.getValueAt(i,
-							model.getChannelIndex("uMapaBytes")).getValue().getByteArrayValue().getData());
+					final float[] tmp = ByteUtil.byteArrayToFloatArray(model
+							.getValueAt(i, model.getChannelIndex("uMapaBytes")).getValue().getByteArrayValue()
+							.getData());
 
-					for (int k = 0; k < tmp.length; k++)
-						hist.append(tmp[k]);
+					for (final float element : tmp) {
+						hist.append(element);
+					}
 
 					repaint();
 				} else if (model.getValueAt(i, model.getChannelIndex("mData")) != null) { // non-static
-					float[] mData = ByteUtil.byteArrayToFloatArray(model.getValueAt(i, model.getChannelIndex("mData"))
-							.getValue().getByteArrayValue().getData());
+					final float[] mData = ByteUtil.byteArrayToFloatArray(model
+							.getValueAt(i, model.getChannelIndex("mData")).getValue().getByteArrayValue().getData());
 
-					for (int k = 1; k < mData.length; k += 2)
+					for (int k = 1; k < mData.length; k += 2) {
 						hist.append(mData[k]);
+					}
 
 					repaint();
 				} else if (model.getValueAt(i, 0) != null && model.getValueAt(i, 1) == null
@@ -275,16 +293,20 @@ public class FERHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 					hist.setBinWidth(.4 / model.getValueAt(i, 0).getValue().getFloatValue());
 				}
 			}
+		}
 	}
 
 	private ExpDataModel model = null;
 
-	public void setExpDataModel(ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
+		if (this.model != null) {
 			this.model.removeExpDataModelListener(this);
+		}
 		this.model = model;
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 
 	}
 }

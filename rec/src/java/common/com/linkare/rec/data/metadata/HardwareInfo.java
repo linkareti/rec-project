@@ -7,6 +7,11 @@ import com.linkare.rec.impl.data.FrequencyUtil;
 import com.linkare.rec.impl.exceptions.WrongConfigurationExceptionConstants;
 
 public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2621083036892229458L;
+
 	/** Holds value of property driverVersion. */
 	private String driverVersion;
 
@@ -63,37 +68,38 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * @param hardware_parameters hardware_parameters struct member
 	 * @param hardware_frequencies hardware_frequencies struct member
 	 */
-	public HardwareInfo(String familiarName, String DriverVersion, String HardwareName, String HardwareVersion,
-			String HardwareManufacturer, String DescriptionText, String url_customizer_class,
-			String hardware_unique_id, com.linkare.rec.data.metadata.ChannelInfo[] channels_info,
-			com.linkare.rec.data.metadata.ChannelParameter[] hardware_parameters,
-			com.linkare.rec.data.metadata.FrequencyScale[] hardware_frequencies,
-			com.linkare.rec.data.synch.Frequency selectedFrequency, SamplesNumScale samplingScale) {
-		this.setFamiliarName(familiarName);
-		this.setDriverVersion(DriverVersion);
-		this.setHardwareName(HardwareName);
-		this.setHardwareVersion(HardwareVersion);
-		this.setHardwareManufacturer(HardwareManufacturer);
-		this.setDescriptionText(DescriptionText);
-		this.setHardwareUniqueID(hardware_unique_id);
+	public HardwareInfo(final String familiarName, final String DriverVersion, final String HardwareName,
+			final String HardwareVersion, final String HardwareManufacturer, final String DescriptionText,
+			final String url_customizer_class, final String hardware_unique_id,
+			final com.linkare.rec.data.metadata.ChannelInfo[] channels_info,
+			final com.linkare.rec.data.metadata.ChannelParameter[] hardware_parameters,
+			final com.linkare.rec.data.metadata.FrequencyScale[] hardware_frequencies,
+			final com.linkare.rec.data.synch.Frequency selectedFrequency, final SamplesNumScale samplingScale) {
+		setFamiliarName(familiarName);
+		setDriverVersion(DriverVersion);
+		setHardwareName(HardwareName);
+		setHardwareVersion(HardwareVersion);
+		setHardwareManufacturer(HardwareManufacturer);
+		setDescriptionText(DescriptionText);
+		setHardwareUniqueID(hardware_unique_id);
 		this.setChannelsInfo(channels_info);
 		this.setHardwareParameters(hardware_parameters);
 		this.setHardwareFrequencies(hardware_frequencies);
-		this.setSelectedFrequency(selectedFrequency);
-		this.setSamplingScale(samplingScale);
+		setSelectedFrequency(selectedFrequency);
+		setSamplingScale(samplingScale);
 	}
 
 	/**
 	 * Copy Constructor
 	 */
-	public HardwareInfo(HardwareInfo other) {
-		this.setFamiliarName(other.getFamiliarName());
-		this.setDriverVersion(other.getDriverVersion());
-		this.setHardwareName(other.getHardwareName());
-		this.setHardwareVersion(other.getHardwareVersion());
-		this.setHardwareManufacturer(other.getHardwareManufacturer());
-		this.setDescriptionText(other.getDescriptionText());
-		this.setHardwareUniqueID(other.getHardwareUniqueID());
+	public HardwareInfo(final HardwareInfo other) {
+		setFamiliarName(other.getFamiliarName());
+		setDriverVersion(other.getDriverVersion());
+		setHardwareName(other.getHardwareName());
+		setHardwareVersion(other.getHardwareVersion());
+		setHardwareManufacturer(other.getHardwareManufacturer());
+		setDescriptionText(other.getDescriptionText());
+		setHardwareUniqueID(other.getHardwareUniqueID());
 
 		ChannelInfo[] temp = null;
 		if (other.getChannelsInfo() != null) {
@@ -119,9 +125,9 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 		this.setHardwareFrequencies(temp3);
 		temp3 = null;
 
-		this.setSelectedFrequency(other.getSelectedFrequency());
+		setSelectedFrequency(other.getSelectedFrequency());
 
-		this.setSamplingScale(other.getSamplingScale());
+		setSamplingScale(other.getSamplingScale());
 	}
 
 	/**
@@ -130,7 +136,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property familiarName.
 	 */
 	public String getFamiliarName() {
-		return this.familiarName;
+		return familiarName;
 	}
 
 	/**
@@ -138,7 +144,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param familiarName New value of property familiarName.
 	 */
-	public void setFamiliarName(String familiarName) {
+	public void setFamiliarName(final String familiarName) {
 		this.familiarName = familiarName;
 	}
 
@@ -148,7 +154,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property driverVersion.
 	 */
 	public String getDriverVersion() {
-		return this.driverVersion;
+		return driverVersion;
 	}
 
 	/**
@@ -156,7 +162,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param driverVersion New value of property driverVersion.
 	 */
-	public void setDriverVersion(String driverVersion) {
+	public void setDriverVersion(final String driverVersion) {
 		this.driverVersion = driverVersion;
 	}
 
@@ -166,7 +172,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property hardwareName.
 	 */
 	public String getHardwareName() {
-		return this.hardwareName;
+		return hardwareName;
 	}
 
 	/**
@@ -174,7 +180,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param hardwareName New value of property hardwareName.
 	 */
-	public void setHardwareName(String hardwareName) {
+	public void setHardwareName(final String hardwareName) {
 		this.hardwareName = hardwareName;
 	}
 
@@ -184,7 +190,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property hardwareVersion.
 	 */
 	public String getHardwareVersion() {
-		return this.hardwareVersion;
+		return hardwareVersion;
 	}
 
 	/**
@@ -192,7 +198,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param hardwareVersion New value of property hardwareVersion.
 	 */
-	public void setHardwareVersion(String hardwareVersion) {
+	public void setHardwareVersion(final String hardwareVersion) {
 		this.hardwareVersion = hardwareVersion;
 	}
 
@@ -202,7 +208,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property hardwareManufacturer.
 	 */
 	public String getHardwareManufacturer() {
-		return this.hardwareManufacturer;
+		return hardwareManufacturer;
 	}
 
 	/**
@@ -210,7 +216,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param hardwareManufacturer New value of property hardwareManufacturer.
 	 */
-	public void setHardwareManufacturer(String hardwareManufacturer) {
+	public void setHardwareManufacturer(final String hardwareManufacturer) {
 		this.hardwareManufacturer = hardwareManufacturer;
 	}
 
@@ -220,7 +226,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property descriptionText.
 	 */
 	public String getDescriptionText() {
-		return this.descriptionText;
+		return descriptionText;
 	}
 
 	/**
@@ -228,7 +234,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param descriptionText New value of property descriptionText.
 	 */
-	public void setDescriptionText(String descriptionText) {
+	public void setDescriptionText(final String descriptionText) {
 		this.descriptionText = descriptionText;
 	}
 
@@ -238,7 +244,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property hardwareUniqueID.
 	 */
 	public String getHardwareUniqueID() {
-		return this.hardwareUniqueID;
+		return hardwareUniqueID;
 	}
 
 	/**
@@ -246,7 +252,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param hardwareUniqueID New value of property hardwareUniqueID.
 	 */
-	public void setHardwareUniqueID(String hardwareUniqueID) {
+	public void setHardwareUniqueID(final String hardwareUniqueID) {
 		this.hardwareUniqueID = hardwareUniqueID;
 	}
 
@@ -256,9 +262,10 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * @param index Index of the property.
 	 * @return Value of the property at <CODE>index</CODE>.
 	 */
-	public com.linkare.rec.data.metadata.ChannelInfo getChannelsInfo(int index) {
-		if (this.channelsInfo != null && index < this.channelsInfo.length)
-			return this.channelsInfo[index];
+	public com.linkare.rec.data.metadata.ChannelInfo getChannelsInfo(final int index) {
+		if (channelsInfo != null && index < channelsInfo.length) {
+			return channelsInfo[index];
+		}
 
 		throw new RuntimeException("No ChannelInfo at that index...");
 	}
@@ -269,7 +276,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property channelsInfo.
 	 */
 	public com.linkare.rec.data.metadata.ChannelInfo[] getChannelsInfo() {
-		return this.channelsInfo;
+		return channelsInfo;
 	}
 
 	/**
@@ -278,24 +285,26 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * @param index Index of the property.
 	 * @param channelsInfo New value of the property at <CODE>index</CODE>.
 	 */
-	public void setChannelsInfo(int index, com.linkare.rec.data.metadata.ChannelInfo channelsInfo) {
-		if (this.channelsInfo != null && index < this.channelsInfo.length)
+	public void setChannelsInfo(final int index, final com.linkare.rec.data.metadata.ChannelInfo channelsInfo) {
+		if (this.channelsInfo != null && index < this.channelsInfo.length) {
 			this.channelsInfo[index] = channelsInfo;
-		else {
+		} else {
 			ChannelInfo[] temp = new ChannelInfo[index + 1];
-			if (this.channelsInfo != null)
+			if (this.channelsInfo != null) {
 				System.arraycopy(this.channelsInfo, 0, temp, 0, this.channelsInfo.length);
+			}
 			temp[index] = channelsInfo;
 			this.channelsInfo = temp;
 			temp = null;
 		}
 	}
 
-	public void addChannelsInfo(com.linkare.rec.data.metadata.ChannelInfo channelsInfo) {
-		if (this.channelsInfo == null)
+	public void addChannelsInfo(final com.linkare.rec.data.metadata.ChannelInfo channelsInfo) {
+		if (this.channelsInfo == null) {
 			setChannelsInfo(0, channelsInfo);
-		else
+		} else {
 			setChannelsInfo(this.channelsInfo.length, channelsInfo);
+		}
 	}
 
 	/**
@@ -303,7 +312,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param channelsInfo New value of property channelsInfo.
 	 */
-	public void setChannelsInfo(com.linkare.rec.data.metadata.ChannelInfo[] channelsInfo) {
+	public void setChannelsInfo(final com.linkare.rec.data.metadata.ChannelInfo[] channelsInfo) {
 		this.channelsInfo = channelsInfo;
 	}
 
@@ -313,27 +322,31 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * @param index Index of the property.
 	 * @return Value of the property at <CODE>index</CODE>.
 	 */
-	public com.linkare.rec.data.metadata.ChannelParameter getHardwareParameters(int index) {
-		if (this.hardwareParameters != null && index < this.hardwareParameters.length)
-			return this.hardwareParameters[index];
+	public com.linkare.rec.data.metadata.ChannelParameter getHardwareParameters(final int index) {
+		if (hardwareParameters != null && index < hardwareParameters.length) {
+			return hardwareParameters[index];
+		}
 
 		throw new RuntimeException("No HardwareParameter at that index...");
 	}
 
-	public com.linkare.rec.data.metadata.ChannelParameter getHardwareParameter(String parameter_name) {
-		if (this.hardwareParameters != null && parameter_name != null) {
-			for (int i = 0; i < hardwareParameters.length; i++)
-				if (parameter_name.equals(hardwareParameters[i].getParameterName()))
-					return hardwareParameters[i];
+	public com.linkare.rec.data.metadata.ChannelParameter getHardwareParameter(final String parameter_name) {
+		if (hardwareParameters != null && parameter_name != null) {
+			for (final ChannelParameter hardwareParameter : hardwareParameters) {
+				if (parameter_name.equals(hardwareParameter.getParameterName())) {
+					return hardwareParameter;
+				}
+			}
 		}
 		return null;
 
 	}
 
-	public String getHardwareParameterValue(String parameter_name) {
+	public String getHardwareParameterValue(final String parameter_name) {
 		ChannelParameter param = null;
-		if ((param = getHardwareParameter(parameter_name)) != null)
+		if ((param = getHardwareParameter(parameter_name)) != null) {
 			return param.getSelectedParameterValue();
+		}
 
 		return null;
 	}
@@ -344,7 +357,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property hardwareParameters.
 	 */
 	public com.linkare.rec.data.metadata.ChannelParameter[] getHardwareParameters() {
-		return this.hardwareParameters;
+		return hardwareParameters;
 	}
 
 	/**
@@ -354,24 +367,27 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * @param hardwareParameters New value of the property at <CODE>index</CODE>
 	 *            .
 	 */
-	public void setHardwareParameters(int index, com.linkare.rec.data.metadata.ChannelParameter hardwareParameters) {
-		if (this.hardwareParameters != null && index < this.hardwareParameters.length)
+	public void setHardwareParameters(final int index,
+			final com.linkare.rec.data.metadata.ChannelParameter hardwareParameters) {
+		if (this.hardwareParameters != null && index < this.hardwareParameters.length) {
 			this.hardwareParameters[index] = hardwareParameters;
-		else {
+		} else {
 			ChannelParameter[] temp = new ChannelParameter[index + 1];
-			if (this.hardwareParameters != null)
+			if (this.hardwareParameters != null) {
 				System.arraycopy(this.hardwareParameters, 0, temp, 0, this.hardwareParameters.length);
+			}
 			temp[index] = hardwareParameters;
 			this.hardwareParameters = temp;
 			temp = null;
 		}
 	}
 
-	public void addHardwareParameters(com.linkare.rec.data.metadata.ChannelParameter hardwareParameters) {
-		if (this.hardwareParameters == null)
+	public void addHardwareParameters(final com.linkare.rec.data.metadata.ChannelParameter hardwareParameters) {
+		if (this.hardwareParameters == null) {
 			setHardwareParameters(0, hardwareParameters);
-		else
+		} else {
 			setHardwareParameters(this.hardwareParameters.length, hardwareParameters);
+		}
 	}
 
 	/**
@@ -379,7 +395,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param hardwareParameters New value of property hardwareParameters.
 	 */
-	public void setHardwareParameters(com.linkare.rec.data.metadata.ChannelParameter[] hardwareParameters) {
+	public void setHardwareParameters(final com.linkare.rec.data.metadata.ChannelParameter[] hardwareParameters) {
 		this.hardwareParameters = hardwareParameters;
 	}
 
@@ -389,9 +405,10 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * @param index Index of the property.
 	 * @return Value of the property at <CODE>index</CODE>.
 	 */
-	public com.linkare.rec.data.metadata.FrequencyScale getHardwareFrequencies(int index) {
-		if (this.hardwareFrequencies != null && index < this.hardwareFrequencies.length)
-			return this.hardwareFrequencies[index];
+	public com.linkare.rec.data.metadata.FrequencyScale getHardwareFrequencies(final int index) {
+		if (hardwareFrequencies != null && index < hardwareFrequencies.length) {
+			return hardwareFrequencies[index];
+		}
 
 		throw new RuntimeException("No FrequencyScale at that index...");
 	}
@@ -402,7 +419,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property hardwareFrequencies.
 	 */
 	public com.linkare.rec.data.metadata.FrequencyScale[] getHardwareFrequencies() {
-		return this.hardwareFrequencies;
+		return hardwareFrequencies;
 	}
 
 	/**
@@ -412,13 +429,15 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * @param hardwareFrequencies New value of the property at
 	 *            <CODE>index</CODE>.
 	 */
-	public void setHardwareFrequencies(int index, com.linkare.rec.data.metadata.FrequencyScale hardwareFrequencies) {
-		if (this.hardwareFrequencies != null && index < this.hardwareFrequencies.length)
+	public void setHardwareFrequencies(final int index,
+			final com.linkare.rec.data.metadata.FrequencyScale hardwareFrequencies) {
+		if (this.hardwareFrequencies != null && index < this.hardwareFrequencies.length) {
 			this.hardwareFrequencies[index] = hardwareFrequencies;
-		else {
+		} else {
 			FrequencyScale[] temp = new FrequencyScale[index + 1];
-			if (this.hardwareFrequencies != null)
+			if (this.hardwareFrequencies != null) {
 				System.arraycopy(this.hardwareFrequencies, 0, temp, 0, this.hardwareFrequencies.length);
+			}
 			temp[index] = hardwareFrequencies;
 			this.hardwareFrequencies = temp;
 			temp = null;
@@ -426,11 +445,12 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 
 	}
 
-	public void addHardwareFrequencies(com.linkare.rec.data.metadata.FrequencyScale hardwareFrequencies) {
-		if (this.hardwareFrequencies == null)
+	public void addHardwareFrequencies(final com.linkare.rec.data.metadata.FrequencyScale hardwareFrequencies) {
+		if (this.hardwareFrequencies == null) {
 			setHardwareFrequencies(0, hardwareFrequencies);
-		else
+		} else {
 			setHardwareFrequencies(this.hardwareFrequencies.length, hardwareFrequencies);
+		}
 
 	}
 
@@ -439,7 +459,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param hardwareFrequencies New value of property hardwareFrequencies.
 	 */
-	public void setHardwareFrequencies(com.linkare.rec.data.metadata.FrequencyScale[] hardwareFrequencies) {
+	public void setHardwareFrequencies(final com.linkare.rec.data.metadata.FrequencyScale[] hardwareFrequencies) {
 
 		this.hardwareFrequencies = hardwareFrequencies;
 	}
@@ -450,7 +470,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property samplingScale.
 	 */
 	public com.linkare.rec.data.metadata.SamplesNumScale getSamplingScale() {
-		return this.samplingScale;
+		return samplingScale;
 	}
 
 	/**
@@ -458,7 +478,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param samplingScale New value of property samplingScale.
 	 */
-	public void setSamplingScale(com.linkare.rec.data.metadata.SamplesNumScale samplingScale) {
+	public void setSamplingScale(final com.linkare.rec.data.metadata.SamplesNumScale samplingScale) {
 		this.samplingScale = samplingScale;
 	}
 
@@ -468,7 +488,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property selectedFrequency.
 	 */
 	public com.linkare.rec.data.synch.Frequency getSelectedFrequency() {
-		return this.selectedFrequency;
+		return selectedFrequency;
 	}
 
 	/**
@@ -476,7 +496,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param selectedFrequency New value of property selectedFrequency.
 	 */
-	public void setSelectedFrequency(com.linkare.rec.data.synch.Frequency selectedFrequency) {
+	public void setSelectedFrequency(final com.linkare.rec.data.synch.Frequency selectedFrequency) {
 		this.selectedFrequency = selectedFrequency;
 	}
 
@@ -491,7 +511,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * (acq_header.getSamplesInfo(i)); } }
 	 */
 
-	public void validateConfig(HardwareAcquisitionConfig config) throws WrongConfigurationException {
+	public void validateConfig(final HardwareAcquisitionConfig config) throws WrongConfigurationException {
 		// check selected frequency
 
 		boolean freq_ok = false;
@@ -508,8 +528,9 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 			}
 		}
 
-		if (!freq_ok)
+		if (!freq_ok) {
 			throw new WrongConfigurationException(WrongConfigurationExceptionConstants.FREQUENCY_NOT_IN_SCALES);
+		}
 
 		boolean params_ok = true;
 		if (config.getSelectedHardwareParameters() == null) {
@@ -520,25 +541,29 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 			params_ok = true;
 		} else {
 			for (int i = 0; i < hardwareParameters.length && params_ok; i++) {
-				String param_value = config.getSelectedHardwareParameterValue(hardwareParameters[i].getParameterName());
-				if (param_value != null)
+				final String param_value = config.getSelectedHardwareParameterValue(hardwareParameters[i]
+						.getParameterName());
+				if (param_value != null) {
 					params_ok = params_ok && hardwareParameters[i].isSelectedValueValid(param_value);
+				}
 			}
 		}
 
-		if (!params_ok)
+		if (!params_ok) {
 			throw new WrongConfigurationException(WrongConfigurationExceptionConstants.PARAMETER_INVALID);
+		}
 
 		// check bigger then now, at least, or null
 		// not now! Maybe at a later time I'll have time to do it!
 		// config.getTimeStart();
 
 		// check total_samples with samplingScale
-		int total_samples = config.getTotalSamples();
+		final int total_samples = config.getTotalSamples();
 
 		if (!(total_samples >= samplingScale.getMinSamples() && total_samples <= samplingScale.getMaxSamples() && ((total_samples - samplingScale
-				.getMinSamples()) % samplingScale.getStep()) == 0))
+				.getMinSamples()) % samplingScale.getStep()) == 0)) {
 			throw new WrongConfigurationException(WrongConfigurationExceptionConstants.SAMPLING_SCALE_INVALID);
+		}
 
 		// Check channels config
 		config.getChannelsConfig();
@@ -560,15 +585,18 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 
 	public HardwareAcquisitionConfig createBaseHardwareAcquisitionConfig() {
 		// check selected frequency
-		HardwareAcquisitionConfig config = new HardwareAcquisitionConfig();
+		final HardwareAcquisitionConfig config = new HardwareAcquisitionConfig();
 
-		if (hardwareFrequencies != null && hardwareFrequencies.length > 0 && hardwareFrequencies[0] != null)
+		if (hardwareFrequencies != null && hardwareFrequencies.length > 0 && hardwareFrequencies[0] != null) {
 			config.setSelectedFrequency(hardwareFrequencies[0].getMinimumFrequency());
+		}
 
-		if (hardwareParameters != null)
-			for (int i = 0; i < hardwareParameters.length; i++)
-				config.addSelectedHardwareParameter(new ParameterConfig(hardwareParameters[i].getParameterName(),
-						hardwareParameters[i].getSelectedParameterValue()));
+		if (hardwareParameters != null) {
+			for (final ChannelParameter hardwareParameter : hardwareParameters) {
+				config.addSelectedHardwareParameter(new ParameterConfig(hardwareParameter.getParameterName(),
+						hardwareParameter.getSelectedParameterValue()));
+			}
+		}
 
 		config.setTotalSamples(samplingScale.getMinSamples());
 		config.setFamiliarName(getFamiliarName());
@@ -576,9 +604,10 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 		config.setTimeStart(new com.linkare.rec.data.synch.DateTime());
 
 		if (channelsInfo != null) {
-			for (int i = 0; i < channelsInfo.length; i++) {
-				if (channelsInfo[i] != null)
-					config.addChannelConfig(channelsInfo[i].createBaseChannelConfig(this));
+			for (final ChannelInfo element : channelsInfo) {
+				if (element != null) {
+					config.addChannelConfig(element.createBaseChannelConfig(this));
+				}
 			}
 		}
 

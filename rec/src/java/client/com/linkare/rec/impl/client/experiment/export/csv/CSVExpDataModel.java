@@ -13,15 +13,15 @@ import com.linkare.rec.impl.client.experiment.ExpDataModel;
  * @author npadriano
  */
 public class CSVExpDataModel implements CSVModel {
-	
-	private ExpDataModel model;
-	
-	public CSVExpDataModel(ExpDataModel model) {
+
+	private final ExpDataModel model;
+
+	public CSVExpDataModel(final ExpDataModel model) {
 		this.model = model;
 	}
 
 	@Override
-	public String getCell(int row, int col) {
+	public String getCell(final int row, final int col) {
 		return model.getValueAt(row, col).getValue().toString();
 	}
 
@@ -31,7 +31,7 @@ public class CSVExpDataModel implements CSVModel {
 	}
 
 	@Override
-	public String getColumnHeader(int index) {
+	public String getColumnHeader(final int index) {
 		return model.getChannelName(index);
 	}
 
@@ -39,5 +39,5 @@ public class CSVExpDataModel implements CSVModel {
 	public int getRowCount() {
 		return model.getTotalSamples();
 	}
-	
+
 }

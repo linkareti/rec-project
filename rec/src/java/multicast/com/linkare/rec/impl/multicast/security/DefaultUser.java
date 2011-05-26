@@ -19,6 +19,10 @@ import com.linkare.rec.acquisition.UserInfo;
  * @author José Pedro Pereira - Linkare TI
  */
 public class DefaultUser implements IUser {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4436155536469038628L;
 	private String userName;
 	private byte[] auth;
 	private HashMap<String, Any> properties;
@@ -30,21 +34,21 @@ public class DefaultUser implements IUser {
 		setProperties(new HashMap<String, Any>());
 	}
 
-	public DefaultUser(UserInfo userInfo) {
+	public DefaultUser(final UserInfo userInfo) {
 		setUserName(userInfo.getUserName());
-		String pass = userInfo.getPassword();
-		if (pass != null)
+		final String pass = userInfo.getPassword();
+		if (pass != null) {
 			setAuth(pass.getBytes());
-		else {
+		} else {
 			setAuth(userInfo.getCertificate());
 		}
 
-		Property[] props = userInfo.getUserProps();
+		final Property[] props = userInfo.getUserProps();
 
 		setProperties(new HashMap<String, Any>());
 
-		for (int i = 0; i < props.length; i++) {
-			getProperties().put(props[i].getName(), props[i].getValue());
+		for (final Property prop : props) {
+			getProperties().put(prop.getName(), prop.getValue());
 		}
 
 	}
@@ -55,6 +59,7 @@ public class DefaultUser implements IUser {
 	 * @return Value of property userName.
 	 * 
 	 */
+	@Override
 	public java.lang.String getUserName() {
 		return userName;
 	}
@@ -65,7 +70,7 @@ public class DefaultUser implements IUser {
 	 * @param userName New value of property userName.
 	 * 
 	 */
-	public void setUserName(java.lang.String userName) {
+	public void setUserName(final java.lang.String userName) {
 		this.userName = userName;
 	}
 
@@ -75,8 +80,9 @@ public class DefaultUser implements IUser {
 	 * @return Value of property auth.
 	 * 
 	 */
+	@Override
 	public byte[] getAuth() {
-		return this.auth;
+		return auth;
 	}
 
 	/**
@@ -85,7 +91,7 @@ public class DefaultUser implements IUser {
 	 * @param auth New value of property auth.
 	 * 
 	 */
-	public void setAuth(byte[] auth) {
+	public void setAuth(final byte[] auth) {
 		this.auth = auth;
 	}
 
@@ -95,6 +101,7 @@ public class DefaultUser implements IUser {
 	 * @return Value of property properties.
 	 * 
 	 */
+	@Override
 	public Map<String, Any> getProperties() {
 		return properties;
 	}
@@ -105,19 +112,22 @@ public class DefaultUser implements IUser {
 	 * @param properties New value of property properties.
 	 * 
 	 */
-	public void setProperties(Map<String, Any> properties) {
+	public void setProperties(final Map<String, Any> properties) {
 		this.properties = new HashMap<String, Any>(properties);
 	}
 
+	@Override
 	public String toString() {
 		return getUserName();
 	}
 
-	public boolean equals(Object other) {
-		if (other == null || !(other instanceof IUser))
+	@Override
+	public boolean equals(final Object other) {
+		if (other == null || !(other instanceof IUser)) {
 			return false;
+		}
 
-		IUser otherUser = (IUser) other;
+		final IUser otherUser = (IUser) other;
 
 		return (getUserName() == null ? otherUser.getUserName() == null : getUserName().equals(otherUser.getUserName()));
 

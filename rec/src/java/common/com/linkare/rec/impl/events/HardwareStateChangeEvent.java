@@ -8,7 +8,6 @@ package com.linkare.rec.impl.events;
 
 import com.linkare.rec.impl.threading.util.EnumPriority;
 
-
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
@@ -16,11 +15,14 @@ import com.linkare.rec.impl.threading.util.EnumPriority;
 public class HardwareStateChangeEvent implements Prioritazible {
 
 	/** Holds value of property newState. */
-	private com.linkare.rec.acquisition.HardwareState newState;
+	private final com.linkare.rec.acquisition.HardwareState newState;
 
-	/** Creates a new instance of HardwareStateChangeEvent 
-	 * @param newState */
-	public HardwareStateChangeEvent(com.linkare.rec.acquisition.HardwareState newState) {
+	/**
+	 * Creates a new instance of HardwareStateChangeEvent
+	 * 
+	 * @param newState
+	 */
+	public HardwareStateChangeEvent(final com.linkare.rec.acquisition.HardwareState newState) {
 		this.newState = newState;
 	}
 
@@ -30,9 +32,9 @@ public class HardwareStateChangeEvent implements Prioritazible {
 	 * @return Value of property newState.
 	 */
 	public com.linkare.rec.acquisition.HardwareState getNewState() {
-		return this.newState;
+		return newState;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */

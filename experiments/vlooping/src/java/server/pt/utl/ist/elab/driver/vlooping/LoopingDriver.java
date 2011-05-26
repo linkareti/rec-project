@@ -31,9 +31,9 @@ public class LoopingDriver extends VirtualBaseDriver {
 	// caso!
 	private static String LOOPING_DRIVER_LOGGER = "LOOPING.Logger";
 	static {
-		Logger l = LogManager.getLogManager().getLogger(LOOPING_DRIVER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(LoopingDriver.LOOPING_DRIVER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(LOOPING_DRIVER_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(LoopingDriver.LOOPING_DRIVER_LOGGER));
 		}
 	}
 
@@ -50,34 +50,37 @@ public class LoopingDriver extends VirtualBaseDriver {
 	public LoopingDriver() {
 	}
 
-	public void config(HardwareAcquisitionConfig config, HardwareInfo info) throws IncorrectStateException,
+	@Override
+	public void config(final HardwareAcquisitionConfig config, final HardwareInfo info) throws IncorrectStateException,
 			WrongConfigurationException {
 		fireIDriverStateListenerDriverConfiguring();
 		info.validateConfig(config);
 		extraValidateConfig(config, info);
 		try {
 			configure(config, info);
-		} catch (Exception e) {
-			LoggerUtil.logThrowable("Error on config...", e, Logger.getLogger(LOOPING_DRIVER_LOGGER));
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable("Error on config...", e, Logger.getLogger(LoopingDriver.LOOPING_DRIVER_LOGGER));
 			throw new WrongConfigurationException();
 		}
 	}
 
-	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException {
+	@Override
+	public void configure(final HardwareAcquisitionConfig config, final HardwareInfo info)
+			throws WrongConfigurationException {
 		// Recebemos ordem para configurar, no HardwareAcquisitionConfig estao
 		// todas as informacoes escolhidas pelo cliente...agora e' so' pedir
 		this.config = config;
 		this.info = info;
 
-		float xini = Float.parseFloat(config.getSelectedHardwareParameterValue("xini"));
-		float vini = Float.parseFloat(config.getSelectedHardwareParameterValue("vini"));
-		float h1 = Float.parseFloat(config.getSelectedHardwareParameterValue("h1"));
-		float h2 = Float.parseFloat(config.getSelectedHardwareParameterValue("h2"));
-		float r = Float.parseFloat(config.getSelectedHardwareParameterValue("r"));
-		float g = Float.parseFloat(config.getSelectedHardwareParameterValue("g"));
+		final float xini = Float.parseFloat(config.getSelectedHardwareParameterValue("xini"));
+		final float vini = Float.parseFloat(config.getSelectedHardwareParameterValue("vini"));
+		final float h1 = Float.parseFloat(config.getSelectedHardwareParameterValue("h1"));
+		final float h2 = Float.parseFloat(config.getSelectedHardwareParameterValue("h2"));
+		final float r = Float.parseFloat(config.getSelectedHardwareParameterValue("r"));
+		final float g = Float.parseFloat(config.getSelectedHardwareParameterValue("g"));
 
-		int tbs = (int) config.getSelectedFrequency().getFrequency();
-		int nSamples = config.getTotalSamples();
+		final int tbs = (int) config.getSelectedFrequency().getFrequency();
+		final int nSamples = config.getTotalSamples();
 
 		// Vamos criar o nosso produtor de dados!
 		dataSource = new LoopingDataProducer(this, xini, h1, h2, r, vini, g, tbs, nSamples);
@@ -93,10 +96,12 @@ public class LoopingDriver extends VirtualBaseDriver {
 		fireIDriverStateListenerDriverConfigured();
 	}
 
+	@Override
 	public String getDriverUniqueID() {
-		return DRIVER_UNIQUE_ID;
+		return LoopingDriver.DRIVER_UNIQUE_ID;
 	}
 
+	@Override
 	public void shutdown() {
 		if (dataSource != null) {
 			dataSource.stopNow();
@@ -104,39 +109,43 @@ public class LoopingDriver extends VirtualBaseDriver {
 		super.shutDownNow();
 	}
 
-	public IDataSource start(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public IDataSource start(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverStarting();
 		dataSource.startProduction();
 		fireIDriverStateListenerDriverStarted();
 		return dataSource;
 	}
 
-	public void stop(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public void stop(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverStoping();
 		dataSource.stopNow();
 		fireIDriverStateListenerDriverStoped();
 	}
 
+	@Override
 	public Object getHardwareInfo() {
 		fireIDriverStateListenerDriverReseting();
-		
-		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+
+		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+				+ "/HardwareInfo.xml";
 		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
-
-		if (prop.indexOf("://") == -1)
+		if (prop.indexOf("://") == -1) {
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
+		}
 
 		java.net.URL url = null;
 		try {
 			url = ReCProtocols.getURL(prop);
-		} catch (java.net.MalformedURLException e) {
+		} catch (final java.net.MalformedURLException e) {
 			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger("LOOPING"));
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
-			} catch (java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2, Logger
-						.getLogger("LOOPING"));
+			} catch (final java.net.MalformedURLException e2) {
+				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
+						Logger.getLogger("LOOPING"));
 			}
 		}
 		fireIDriverStateListenerDriverReseted();

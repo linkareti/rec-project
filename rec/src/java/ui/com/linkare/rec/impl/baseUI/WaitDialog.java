@@ -12,8 +12,14 @@ package com.linkare.rec.impl.baseUI;
  */
 public class WaitDialog extends javax.swing.JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5358412375727889540L;
+
 	/** Creates new form WaitDialog */
-	public WaitDialog(java.awt.Frame parent, boolean modal, String message, javax.swing.ImageIcon icon) {
+	public WaitDialog(final java.awt.Frame parent, final boolean modal, final String message,
+			final javax.swing.ImageIcon icon) {
 		super(parent, modal);
 		initComponents();
 		setTitle(com.linkare.rec.impl.i18n.ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.title.wait",
@@ -21,7 +27,7 @@ public class WaitDialog extends javax.swing.JDialog {
 		jLabel.setText(message);
 		jLabel.setIcon(icon);
 		pack();
-		java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+		final java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation((int) (screenSize.getWidth() / 2 - getWidth() / 2),
 				(int) (screenSize.getHeight() / 2 - getHeight() / 2));
 	}
@@ -54,7 +60,7 @@ public class WaitDialog extends javax.swing.JDialog {
 		pack();
 	}// GEN-END:initComponents
 
-	public void setBackgroundImage(java.awt.Image img, boolean fill) {
+	public void setBackgroundImage(final java.awt.Image img, final boolean fill) {
 		jPanel1.setBorder(new ImageBorder(img, fill));
 	}
 

@@ -12,6 +12,10 @@ package com.linkare.rec.impl.client.apparatus;
  */
 public class ApparatusConnectorEvent extends java.util.EventObject {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7071882058319116578L;
 	private String message = null;
 	private long millis_to_lock_success = 0;
 	private com.linkare.rec.impl.wrappers.DataProducerWrapper dataSource = null;
@@ -19,17 +23,18 @@ public class ApparatusConnectorEvent extends java.util.EventObject {
 	private String key;
 	private Object value;
 
-	public ApparatusConnectorEvent(Object source, String message) {
+	public ApparatusConnectorEvent(final Object source, final String message) {
 		super(source);
 		this.message = message;
 	}
 
-	public ApparatusConnectorEvent(Object source, long millis_to_lock_success) {
+	public ApparatusConnectorEvent(final Object source, final long millis_to_lock_success) {
 		super(source);
 		this.millis_to_lock_success = millis_to_lock_success;
 	}
 
-	public ApparatusConnectorEvent(Object source, com.linkare.rec.impl.wrappers.DataProducerWrapper dataSource) {
+	public ApparatusConnectorEvent(final Object source,
+			final com.linkare.rec.impl.wrappers.DataProducerWrapper dataSource) {
 		super(source);
 		// this.millis_to_lock_success = millis_to_lock_success;
 		this.dataSource = dataSource;
@@ -47,7 +52,7 @@ public class ApparatusConnectorEvent extends java.util.EventObject {
 		return dataSource;
 	}
 
-	public void setValue(String key, Object value) {
+	public void setValue(final String key, final Object value) {
 		this.key = key;
 		this.value = value;
 	}

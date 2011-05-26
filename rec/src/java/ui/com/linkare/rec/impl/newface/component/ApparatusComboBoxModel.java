@@ -10,8 +10,8 @@ package com.linkare.rec.impl.newface.component;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.swing.DefaultComboBoxModel;
 
@@ -33,36 +33,36 @@ public class ApparatusComboBoxModel extends DefaultComboBoxModel {
 		super();
 	}
 
-	public ApparatusComboBoxModel(List<Apparatus> apparatusList) {
+	public ApparatusComboBoxModel(final List<Apparatus> apparatusList) {
 		super(apparatusList.toArray(new Apparatus[apparatusList.size()]));
 
-		for (Apparatus apparatus : apparatusList) {
+		for (final Apparatus apparatus : apparatusList) {
 			apparatusMap.put(apparatus.getLocation(), apparatus);
 		}
 	}
-	
-	public void addApparatus(Apparatus apparatus) {
+
+	public void addApparatus(final Apparatus apparatus) {
 		apparatusMap.put(apparatus.getLocation(), apparatus);
-		
+
 		super.addElement(apparatus);
 	}
-	
-	public void addApparatusList(List<Apparatus> apparatusList) {
-		for (Apparatus apparatus : apparatusList) {
+
+	public void addApparatusList(final List<Apparatus> apparatusList) {
+		for (final Apparatus apparatus : apparatusList) {
 			addApparatus(apparatus);
 		}
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void addElement(Object anObject) {
+	public void addElement(final Object anObject) {
 		if (anObject instanceof Apparatus) {
 			addApparatus((Apparatus) anObject);
 		}
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -71,47 +71,47 @@ public class ApparatusComboBoxModel extends DefaultComboBoxModel {
 		apparatusMap.clear();
 		super.removeAllElements();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void removeElement(Object anObject) {
+	public void removeElement(final Object anObject) {
 		if (anObject instanceof Apparatus) {
-			Apparatus apparatus = (Apparatus) anObject;
+			final Apparatus apparatus = (Apparatus) anObject;
 			apparatusMap.remove(apparatus.getLocation());
-			
+
 			super.removeElement(anObject);
 		}
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void removeElementAt(int index) {
-		Apparatus apparatus =  (Apparatus) getElementAt(index);
+	public void removeElementAt(final int index) {
+		final Apparatus apparatus = (Apparatus) getElementAt(index);
 		if (apparatus != null) {
 			apparatusMap.remove(apparatus.getLocation());
-			
+
 			super.removeElementAt(index);
 		}
 	}
-	
-	public Apparatus getApparatus(String locationKey) {
+
+	public Apparatus getApparatus(final String locationKey) {
 		return apparatusMap.get(locationKey);
 	}
-	
+
 	public Set<String> getApparatusHardwareUniqueID() {
 		return apparatusMap.keySet();
 	}
 
-	public void fireContentsChanged(Object source) {
+	public void fireContentsChanged(final Object source) {
 		super.fireContentsChanged(source, 0, getSize());
 	}
 
-	public void setAllApparatusEnabled(boolean enabled) {
-		for (Entry<String, Apparatus> entry : apparatusMap.entrySet()) {
+	public void setAllApparatusEnabled(final boolean enabled) {
+		for (final Entry<String, Apparatus> entry : apparatusMap.entrySet()) {
 			entry.getValue().setEnabled(enabled);
 		}
 		fireContentsChanged(this);

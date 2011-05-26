@@ -3,20 +3,25 @@ package com.linkare.rec.repository;
 import org.omg.CORBA.portable.ValueBase;
 
 public class VTLong implements ValueBase {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7025599705236045836L;
 	private int value;
 
 	public VTLong() {
 		setValue(0);
 	}
 
-	public VTLong(int initial) {
+	public VTLong(final int initial) {
 		setValue(initial);
 	}
 
 	private static String[] _truncatable_ids = { VTLongHelper.id() };
 
+	@Override
 	public String[] _truncatable_ids() {
-		return _truncatable_ids;
+		return VTLong._truncatable_ids;
 	}
 
 	/**
@@ -35,7 +40,7 @@ public class VTLong implements ValueBase {
 	 * @param value New value of property value.
 	 * 
 	 */
-	public void setValue(int value) {
+	public void setValue(final int value) {
 		this.value = value;
 	}
 

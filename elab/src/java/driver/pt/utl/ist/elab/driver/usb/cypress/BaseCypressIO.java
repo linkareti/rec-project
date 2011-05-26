@@ -37,15 +37,15 @@ public class BaseCypressIO implements UsbDeviceListener, UsbPipeListener {
 	private static String CYPRESS_IO_LOGGER = "BaseCypressIO.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(CYPRESS_IO_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(BaseCypressIO.CYPRESS_IO_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(CYPRESS_IO_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(BaseCypressIO.CYPRESS_IO_LOGGER));
 		}
 	}
 
 	private UsbDevice device = null;
-	private boolean exit = false;
-	private String cypressIdentifier = "ELAB_CYPRESS_V0.0";
+	private final boolean exit = false;
+	private final String cypressIdentifier = "ELAB_CYPRESS_V0.0";
 	private short vendorID = (short) 0x0547;
 	private short productID = (short) 0x2131;
 	private short interfaceNumber = (short) 0;
@@ -68,7 +68,7 @@ public class BaseCypressIO implements UsbDeviceListener, UsbPipeListener {
 		return inputChannelNumber;
 	}
 
-	public void setInputChannelNumber(byte inputChannelNumber) {
+	public void setInputChannelNumber(final byte inputChannelNumber) {
 		this.inputChannelNumber = inputChannelNumber;
 	}
 
@@ -76,7 +76,7 @@ public class BaseCypressIO implements UsbDeviceListener, UsbPipeListener {
 		return outputChannelNumber;
 	}
 
-	public void setOutputChannelNumber(byte outputChannelNumber) {
+	public void setOutputChannelNumber(final byte outputChannelNumber) {
 		this.outputChannelNumber = outputChannelNumber;
 	}
 
@@ -84,7 +84,7 @@ public class BaseCypressIO implements UsbDeviceListener, UsbPipeListener {
 		return vendorID;
 	}
 
-	public void setVendorID(short vendorID) {
+	public void setVendorID(final short vendorID) {
 		this.vendorID = vendorID;
 	}
 
@@ -92,7 +92,7 @@ public class BaseCypressIO implements UsbDeviceListener, UsbPipeListener {
 		return productID;
 	}
 
-	public void setProductID(short productID) {
+	public void setProductID(final short productID) {
 		this.productID = productID;
 	}
 
@@ -100,7 +100,7 @@ public class BaseCypressIO implements UsbDeviceListener, UsbPipeListener {
 		return interfaceNumber;
 	}
 
-	public void setInterfaceNumber(short interfaceNumber) {
+	public void setInterfaceNumber(final short interfaceNumber) {
 		this.interfaceNumber = interfaceNumber;
 	}
 
@@ -108,51 +108,53 @@ public class BaseCypressIO implements UsbDeviceListener, UsbPipeListener {
 		return alternateSetting;
 	}
 
-	public void setAlternateSetting(short alternateSetting) {
+	public void setAlternateSetting(final short alternateSetting) {
 		this.alternateSetting = alternateSetting;
 	}
 
-	public void setDevice(UsbDevice device) {
+	public void setDevice(final UsbDevice device) {
 		try {
 			synchronized (device) {
 				this.device = device;
 
-				Logger.getLogger(CYPRESS_IO_LOGGER).log(Level.INFO, "Going to configure the device!");
+				Logger.getLogger(BaseCypressIO.CYPRESS_IO_LOGGER).log(Level.INFO, "Going to configure the device!");
 
-				List ifaces = device.getActiveUsbConfiguration().getUsbInterfaces();
+				final List ifaces = device.getActiveUsbConfiguration().getUsbInterfaces();
 
 				UsbInterface usbInterface = null;
 
-				Logger.getLogger(CYPRESS_IO_LOGGER).log(Level.INFO,
+				Logger.getLogger(BaseCypressIO.CYPRESS_IO_LOGGER).log(Level.INFO,
 						"Configuration= " + StandardRequest.getConfiguration(device));
 
-				Logger.getLogger(CYPRESS_IO_LOGGER).log(Level.INFO, "Setting interface!");
+				Logger.getLogger(BaseCypressIO.CYPRESS_IO_LOGGER).log(Level.INFO, "Setting interface!");
 
-				List configs = device.getUsbConfigurations();
+				final List configs = device.getUsbConfigurations();
 				for (int i = 0; i < configs.size(); i++) {
-					List inter = ((UsbConfigurationImp) configs.get(i)).getUsbInterfaces();
+					final List inter = ((UsbConfigurationImp) configs.get(i)).getUsbInterfaces();
 					usbInterface = (UsbInterface) inter.get(0);
 					usbInterface.claim();
 				}
 
-				List settings = usbInterface.getSettings();
+				final List settings = usbInterface.getSettings();
 
-				UsbInterface settingOne = (UsbInterface) settings.get(1);
+				final UsbInterface settingOne = (UsbInterface) settings.get(1);
 				StandardRequest.setInterface(device, interfaceNumber, alternateSetting);
 
-				List endPoints = settingOne.getUsbEndpoints();
+				final List endPoints = settingOne.getUsbEndpoints();
 
-				UsbEndpoint endPointIn = (UsbEndpoint) endPoints.get(inputChannelNumber);
-				UsbEndpoint endPointOut = (UsbEndpoint) endPoints.get(outputChannelNumber);
+				final UsbEndpoint endPointIn = (UsbEndpoint) endPoints.get(inputChannelNumber);
+				final UsbEndpoint endPointOut = (UsbEndpoint) endPoints.get(outputChannelNumber);
 
 				inPipe = endPointIn.getUsbPipe();
 				outPipe = endPointOut.getUsbPipe();
 
-				if (inPipe.isOpen())
+				if (inPipe.isOpen()) {
 					inPipe.close();
+				}
 
-				if (outPipe.isOpen())
+				if (outPipe.isOpen()) {
 					outPipe.close();
+				}
 
 				inPipe.open();
 				outPipe.open();
@@ -162,18 +164,19 @@ public class BaseCypressIO implements UsbDeviceListener, UsbPipeListener {
 
 				new UsbPipeReader().start();
 			}
-		} catch (Exception e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(CYPRESS_IO_LOGGER));
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(BaseCypressIO.CYPRESS_IO_LOGGER));
 		}
 	}
 
 	private String lastOutputMessage = null;
 
-	public void writeMessage(String writeMessage) {
+	public void writeMessage(final String writeMessage) {
 		synchronized (device) {
 			try {
-				Logger.getLogger(CYPRESS_IO_LOGGER).log(Level.INFO, "Write Line to Cypress: " + writeMessage);
-				byte[] message = (writeMessage).getBytes("us-ascii");
+				Logger.getLogger(BaseCypressIO.CYPRESS_IO_LOGGER).log(Level.INFO,
+						"Write Line to Cypress: " + writeMessage);
+				final byte[] message = (writeMessage).getBytes("us-ascii");
 				lastOutputMessage = writeMessage;
 
 				// TODO - ISTO PROVAVELMENTE VAI DAR ASNEIRA...SE CALHAR É
@@ -181,9 +184,9 @@ public class BaseCypressIO implements UsbDeviceListener, UsbPipeListener {
 				outPipe.syncSubmit(message);
 				// ISTO É MTO ESTUPIDO...MAS FUNCIONA...
 				outPipe.syncSubmit(message);
-			} catch (Exception e) {
-				LoggerUtil
-						.logThrowable("Unable to write command to cypress...", e, Logger.getLogger(CYPRESS_IO_LOGGER));
+			} catch (final Exception e) {
+				LoggerUtil.logThrowable("Unable to write command to cypress...", e,
+						Logger.getLogger(BaseCypressIO.CYPRESS_IO_LOGGER));
 			}
 		}
 
@@ -198,16 +201,17 @@ public class BaseCypressIO implements UsbDeviceListener, UsbPipeListener {
 			setDaemon(true);
 		}
 
+		@Override
 		public void run() {
 			while (!exit) {
 				try {
 					inBuffer = new byte[inPipe.getUsbEndpoint().getUsbEndpointDescriptor().wMaxPacketSize()];
 					inPipe.syncSubmit(inBuffer);
-					sleep(readerSleep);
+					Thread.sleep(readerSleep);
 
-				} catch (Exception e) {
-					LoggerUtil.logThrowable("Unable to read line from Cypress serial port...", e, Logger
-							.getLogger(CYPRESS_IO_LOGGER));
+				} catch (final Exception e) {
+					LoggerUtil.logThrowable("Unable to read line from Cypress serial port...", e,
+							Logger.getLogger(BaseCypressIO.CYPRESS_IO_LOGGER));
 					currentThread = null;
 					return;
 				}
@@ -223,7 +227,7 @@ public class BaseCypressIO implements UsbDeviceListener, UsbPipeListener {
 			if (currentThread != null) {
 				try {
 					currentThread.join(1000);
-				} catch (Exception e) {
+				} catch (final Exception e) {
 				}
 			}
 		}
@@ -231,12 +235,13 @@ public class BaseCypressIO implements UsbDeviceListener, UsbPipeListener {
 	}
 
 	private void processIncomingLine(String lineRead) {
-		if (lineRead == null)
+		if (lineRead == null) {
 			return;
+		}
 
 		lineRead = lineRead.trim();
 
-		int commandpos = lineRead.indexOf(" ");
+		final int commandpos = lineRead.indexOf(" ");
 		CypressCommand inCommand;
 		if (commandpos != -1) {
 			inCommand = new CypressCommand(lineRead.substring(0, commandpos));
@@ -245,10 +250,11 @@ public class BaseCypressIO implements UsbDeviceListener, UsbPipeListener {
 			inCommand = new CypressCommand(lineRead);
 		}
 
-		if (inCommand.getCommandIdentifier().equals(AbstractCypressDriver.START_STRING))
+		if (inCommand.getCommandIdentifier().equals(AbstractCypressDriver.START_STRING)) {
 			readerSleep = 100;
-		else if (inCommand.getCommandIdentifier().equals(AbstractCypressDriver.CONFIG_NOT_DONE_STRING))
+		} else if (inCommand.getCommandIdentifier().equals(AbstractCypressDriver.CONFIG_NOT_DONE_STRING)) {
 			readerSleep = 2000;
+		}
 
 		fireCypressCommandListenerHandleCypressCommand(inCommand);
 	}
@@ -258,7 +264,7 @@ public class BaseCypressIO implements UsbDeviceListener, UsbPipeListener {
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void setCypressCommandListener(CypressCommandListener listener) {
+	public synchronized void setCypressCommandListener(final CypressCommandListener listener) {
 		this.listener = listener;
 	}
 
@@ -268,7 +274,7 @@ public class BaseCypressIO implements UsbDeviceListener, UsbPipeListener {
 	 * @param listener The listener to remove.
 	 */
 	public synchronized void removeCypressCommandListener() {
-		this.listener = null;
+		listener = null;
 	}
 
 	/**
@@ -276,7 +282,7 @@ public class BaseCypressIO implements UsbDeviceListener, UsbPipeListener {
 	 * 
 	 * @param event The event to be fired
 	 */
-	private void fireCypressCommandListenerHandleCypressCommand(CypressCommand event) {
+	private void fireCypressCommandListenerHandleCypressCommand(final CypressCommand event) {
 		if (listener != null) {
 			listener.handleCypressCommand(event);
 		}
@@ -306,7 +312,7 @@ public class BaseCypressIO implements UsbDeviceListener, UsbPipeListener {
 	 * 
 	 */
 	public boolean isWaitForEcho() {
-		return this.waitForEcho;
+		return waitForEcho;
 	}
 
 	/**
@@ -315,7 +321,7 @@ public class BaseCypressIO implements UsbDeviceListener, UsbPipeListener {
 	 * @param waitForEcho New value of property waitForEcho.
 	 * 
 	 */
-	public void setWaitForEcho(boolean waitForEcho) {
+	public void setWaitForEcho(final boolean waitForEcho) {
 		this.waitForEcho = waitForEcho;
 	}
 
@@ -328,37 +334,43 @@ public class BaseCypressIO implements UsbDeviceListener, UsbPipeListener {
 		 */
 	}
 
-	public void dataEventOccurred(javax.usb.event.UsbDeviceDataEvent usbDeviceDataEvent) {
-		Logger.getLogger(CYPRESS_IO_LOGGER).log(Level.INFO, "Received an usbDeviceDataEvent");
+	@Override
+	public void dataEventOccurred(final javax.usb.event.UsbDeviceDataEvent usbDeviceDataEvent) {
+		Logger.getLogger(BaseCypressIO.CYPRESS_IO_LOGGER).log(Level.INFO, "Received an usbDeviceDataEvent");
 	}
 
-	public void dataEventOccurred(javax.usb.event.UsbPipeDataEvent usbPipeDataEvent) {
-		Logger.getLogger(CYPRESS_IO_LOGGER).log(Level.INFO, "Received an usbPipeDataEvent");
+	@Override
+	public void dataEventOccurred(final javax.usb.event.UsbPipeDataEvent usbPipeDataEvent) {
+		Logger.getLogger(BaseCypressIO.CYPRESS_IO_LOGGER).log(Level.INFO, "Received an usbPipeDataEvent");
 
-		String data = new String(usbPipeDataEvent.getData());
-		if (data == null || data.equals(lastOutputMessage))
+		final String data = new String(usbPipeDataEvent.getData());
+		if (data == null || data.equals(lastOutputMessage)) {
 			return;
+		}
 
 		// TODO - possivel fonte de erro...
 		/*
 		 * if(usbPipeDataEvent.getUsbPipe() != inPipe) return;
 		 */
 
-		Logger.getLogger(CYPRESS_IO_LOGGER).log(Level.INFO, data);
+		Logger.getLogger(BaseCypressIO.CYPRESS_IO_LOGGER).log(Level.INFO, data);
 
 		processIncomingLine(new String(usbPipeDataEvent.getData()));
 	}
 
-	public void errorEventOccurred(javax.usb.event.UsbDeviceErrorEvent usbDeviceErrorEvent) {
-		Logger.getLogger(CYPRESS_IO_LOGGER).log(Level.INFO, "Received an usbDeviceErrorEvent");
+	@Override
+	public void errorEventOccurred(final javax.usb.event.UsbDeviceErrorEvent usbDeviceErrorEvent) {
+		Logger.getLogger(BaseCypressIO.CYPRESS_IO_LOGGER).log(Level.INFO, "Received an usbDeviceErrorEvent");
 	}
 
-	public void errorEventOccurred(javax.usb.event.UsbPipeErrorEvent usbPipeErrorEvent) {
-		Logger.getLogger(CYPRESS_IO_LOGGER).log(Level.INFO, "Received an usbPipeErrorEvent");
+	@Override
+	public void errorEventOccurred(final javax.usb.event.UsbPipeErrorEvent usbPipeErrorEvent) {
+		Logger.getLogger(BaseCypressIO.CYPRESS_IO_LOGGER).log(Level.INFO, "Received an usbPipeErrorEvent");
 	}
 
-	public void usbDeviceDetached(javax.usb.event.UsbDeviceEvent usbDeviceEvent) {
-		Logger.getLogger(CYPRESS_IO_LOGGER).log(Level.INFO, "Received an usbDeviceEvent");
+	@Override
+	public void usbDeviceDetached(final javax.usb.event.UsbDeviceEvent usbDeviceEvent) {
+		Logger.getLogger(BaseCypressIO.CYPRESS_IO_LOGGER).log(Level.INFO, "Received an usbDeviceEvent");
 	}
 
 }

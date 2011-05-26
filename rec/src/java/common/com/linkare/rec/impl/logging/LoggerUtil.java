@@ -23,13 +23,13 @@ public class LoggerUtil {
 	 * @param logger The {@link Logger} on which to log the exception and
 	 *            message
 	 */
-	public static void logThrowable(String info_message, Throwable t, Logger logger) {
+	public static void logThrowable(String info_message, final Throwable t, final Logger logger) {
 		if (info_message != null && logger != null && logger.isLoggable(Level.SEVERE)) {
 			if (t != null) {
-				StackTraceElement[] trace = t.getStackTrace();
+				final StackTraceElement[] trace = t.getStackTrace();
 				if (trace != null && trace.length > 0) {
 					info_message = " @class " + trace[0].getClassName() + " ,@method " + trace[0].getMethodName()
-					+ " ,@line " + trace[0].getLineNumber() + " " + info_message;
+							+ " ,@line " + trace[0].getLineNumber() + " " + info_message;
 				}
 			}
 

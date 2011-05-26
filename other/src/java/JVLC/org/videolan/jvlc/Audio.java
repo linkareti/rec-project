@@ -58,52 +58,52 @@ public class Audio {
 	 */
 	public final int DOLBY_CHANNEL = 5;
 
-	public Audio(JVLC jvlc) {
+	public Audio(final JVLC jvlc) {
 		this.jvlc = jvlc;
 	}
 
-	public int getTrack(MediaPlayer mediaInstance) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public int getTrack(final MediaPlayer mediaInstance) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		return jvlc.getLibvlc().libvlc_audio_get_track(mediaInstance.getInstance(), exception);
 	}
 
-	public void setTrack(MediaPlayer mediaInstance, int track) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public void setTrack(final MediaPlayer mediaInstance, final int track) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		jvlc.getLibvlc().libvlc_audio_set_track(mediaInstance.getInstance(), track, exception);
 	}
 
 	public int getChannel() {
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		return jvlc.getLibvlc().libvlc_audio_get_channel(jvlc.getInstance(), exception);
 	}
 
-	public void setChannel(int channel) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public void setChannel(final int channel) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		jvlc.getLibvlc().libvlc_audio_set_channel(jvlc.getInstance(), channel, exception);
 	}
 
 	public boolean getMute() {
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		return jvlc.getLibvlc().libvlc_audio_get_mute(jvlc.getInstance(), exception) == 1 ? true : false;
 	}
 
-	public void setMute(boolean value) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public void setMute(final boolean value) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		jvlc.getLibvlc().libvlc_audio_set_mute(jvlc.getInstance(), value ? 1 : 0, exception);
 	}
 
 	public void toggleMute() {
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		jvlc.getLibvlc().libvlc_audio_toggle_mute(jvlc.getInstance(), exception);
 	}
 
 	public int getVolume() {
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		return jvlc.getLibvlc().libvlc_audio_get_volume(jvlc.getInstance(), exception);
 	}
 
-	public void setVolume(int volume) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public void setVolume(final int volume) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		jvlc.getLibvlc().libvlc_audio_set_volume(jvlc.getInstance(), volume, exception);
 	}
 }

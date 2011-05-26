@@ -86,11 +86,11 @@ public class ParamValuesNode {
 	 * @throws IncorrectRs232ValuesException
 	 * 
 	 */
-	public void setCenter(String value) throws IncorrectRs232ValuesException {
-		this.center = value;
+	public void setCenter(final String value) throws IncorrectRs232ValuesException {
+		center = value;
 		try {
-			this.dcenter = Double.valueOf(value);
-		} catch (NumberFormatException e) {
+			dcenter = Double.valueOf(value);
+		} catch (final NumberFormatException e) {
 			throw new IncorrectRs232ValuesException("Center definition is incorrect: " + value);
 		}
 	}
@@ -117,11 +117,11 @@ public class ParamValuesNode {
 	 * @throws IncorrectRs232ValuesException
 	 * 
 	 */
-	public void setCoeficient(String value) throws IncorrectRs232ValuesException {
-		this.coeficient = value;
+	public void setCoeficient(final String value) throws IncorrectRs232ValuesException {
+		coeficient = value;
 		try {
-			this.dcoeficient = Double.valueOf(value);
-		} catch (NumberFormatException e) {
+			dcoeficient = Double.valueOf(value);
+		} catch (final NumberFormatException e) {
 			throw new IncorrectRs232ValuesException("Coeficient definition is incorrect: " + value);
 		}
 	}
@@ -148,11 +148,11 @@ public class ParamValuesNode {
 	 * @throws IncorrectRs232ValuesException
 	 * 
 	 */
-	public void setDelta(String value) throws IncorrectRs232ValuesException {
-		this.delta = value;
+	public void setDelta(final String value) throws IncorrectRs232ValuesException {
+		delta = value;
 		try {
-			this.ddelta = Double.valueOf(value);
-		} catch (NumberFormatException e) {
+			ddelta = Double.valueOf(value);
+		} catch (final NumberFormatException e) {
 			throw new IncorrectRs232ValuesException("Delta definition is incorrect: " + value);
 		}
 	}
@@ -179,11 +179,11 @@ public class ParamValuesNode {
 	 * @throws IncorrectRs232ValuesException
 	 * 
 	 */
-	public void setPower(String value) throws IncorrectRs232ValuesException {
-		this.power = value;
+	public void setPower(final String value) throws IncorrectRs232ValuesException {
+		power = value;
 		try {
-			this.dpower = Double.valueOf(value);
-		} catch (NumberFormatException e) {
+			dpower = Double.valueOf(value);
+		} catch (final NumberFormatException e) {
 			throw new IncorrectRs232ValuesException("Power definition is incorrect: " + value);
 		}
 	}
@@ -210,11 +210,11 @@ public class ParamValuesNode {
 	 * @throws IncorrectRs232ValuesException
 	 * 
 	 */
-	public void setWeight(String value) throws IncorrectRs232ValuesException {
-		this.weight = value;
+	public void setWeight(final String value) throws IncorrectRs232ValuesException {
+		weight = value;
 		try {
-			this.dweight = Double.valueOf(value);
-		} catch (NumberFormatException e) {
+			dweight = Double.valueOf(value);
+		} catch (final NumberFormatException e) {
 			throw new IncorrectRs232ValuesException("Weight definition is incorrect: " + value);
 		}
 	}

@@ -106,8 +106,9 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @return Value of property d1.
 	 */
+	@Override
 	public String getD1() {
-		return this.d1;
+		return d1;
 	}
 
 	/**
@@ -115,7 +116,8 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param d1 New value of property d1.
 	 */
-	public void setD1(String d1) {
+	@Override
+	public void setD1(final String d1) {
 		this.d1 = d1;
 	}
 
@@ -124,8 +126,9 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @return Value of property d2.
 	 */
+	@Override
 	public String getD2() {
-		return this.d2;
+		return d2;
 	}
 
 	/**
@@ -133,7 +136,8 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param d2 New value of property d2.
 	 */
-	public void setD2(String d2) {
+	@Override
+	public void setD2(final String d2) {
 		this.d2 = d2;
 	}
 
@@ -142,8 +146,9 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @return Value of property d3.
 	 */
+	@Override
 	public String getD3() {
-		return this.d3;
+		return d3;
 	}
 
 	/**
@@ -151,7 +156,8 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param d3 New value of property d3.
 	 */
-	public void setD3(String d3) {
+	@Override
+	public void setD3(final String d3) {
 		this.d3 = d3;
 	}
 
@@ -160,8 +166,9 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @return Value of property valor.
 	 */
+	@Override
 	public int getValor() {
-		return this.valor;
+		return valor;
 	}
 
 	/**
@@ -169,7 +176,8 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param valor New value of property valor.
 	 */
-	public void setValor(int valor) {
+	@Override
+	public void setValor(final int valor) {
 		this.valor = valor;
 	}
 
@@ -178,8 +186,9 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @return Value of property valor2.
 	 */
+	@Override
 	public int getValor2() {
-		return this.valor2;
+		return valor2;
 	}
 
 	/**
@@ -187,7 +196,8 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param valor2 New value of property valor2.
 	 */
-	public void setValor2(int valor2) {
+	@Override
+	public void setValor2(final int valor2) {
 		this.valor2 = valor2;
 	}
 
@@ -196,8 +206,9 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @return Value of property coluna.
 	 */
+	@Override
 	public int getColuna() {
-		return this.coluna;
+		return coluna;
 	}
 
 	/**
@@ -205,7 +216,8 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param coluna New value of property coluna.
 	 */
-	public void setColuna(int coluna) {
+	@Override
+	public void setColuna(final int coluna) {
 		this.coluna = coluna;
 	}
 
@@ -214,8 +226,9 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @return Value of property nivel.
 	 */
+	@Override
 	public int getNivel() {
-		return this.nivel;
+		return nivel;
 	}
 
 	/**
@@ -223,8 +236,9 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param coluna New value of property nivel.
 	 */
-	public void setNivel(int Nivel) {
-		this.nivel = nivel;
+	@Override
+	public void setNivel(final int Nivel) {
+		nivel = nivel;
 	}
 
 	/**
@@ -232,8 +246,9 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @return Value of property flag.
 	 */
+	@Override
 	public int getFlag() {
-		return this.flag;
+		return flag;
 	}
 
 	/**
@@ -241,7 +256,8 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param flag New value of property flag.
 	 */
-	public void setFlag(int flag) {
+	@Override
+	public void setFlag(final int flag) {
 		this.flag = flag;
 	}
 
@@ -250,8 +266,9 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @return Value of property baixo.
 	 */
+	@Override
 	public char getBaixo() {
-		return this.baixo;
+		return baixo;
 	}
 
 	/**
@@ -259,7 +276,8 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param baixo New value of property baixo.
 	 */
-	public void setBaixo(char baixo) {
+	@Override
+	public void setBaixo(final char baixo) {
 		this.baixo = baixo;
 	}
 
@@ -268,8 +286,9 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @return Value of property esquerda.
 	 */
+	@Override
 	public char getEsquerda() {
-		return this.esquerda;
+		return esquerda;
 	}
 
 	/**
@@ -277,7 +296,8 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param esquerda New value of property esquerda.
 	 */
-	public void setEsquerda(char esquerda) {
+	@Override
+	public void setEsquerda(final char esquerda) {
 		this.esquerda = esquerda;
 	}
 
@@ -287,7 +307,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * @return Value of property iValues.
 	 */
 	public Object[][] getIValues() {
-		return this.iValues;
+		return iValues;
 	}
 
 	/**
@@ -295,7 +315,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param iValues New value of property iValues.
 	 */
-	public void setIValues(Object[][] iValues) {
+	public void setIValues(final Object[][] iValues) {
 		this.iValues = iValues;
 	}
 
@@ -305,7 +325,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * @return Value of property i0Value.
 	 */
 	public int getI0Value() {
-		return this.i0Value;
+		return i0Value;
 	}
 
 	/**
@@ -313,7 +333,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param i0Value New value of property i0Value.
 	 */
-	public void setI0Value(int i0Value) {
+	public void setI0Value(final int i0Value) {
 		this.i0Value = i0Value;
 	}
 
@@ -323,7 +343,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * @return Value of property i1Value.
 	 */
 	public int getI1Value() {
-		return this.i1Value;
+		return i1Value;
 	}
 
 	/**
@@ -331,7 +351,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param i1Value New value of property i1Value.
 	 */
-	public void setI1Value(int i1Value) {
+	public void setI1Value(final int i1Value) {
 		this.i1Value = i1Value;
 	}
 
@@ -341,7 +361,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * @return Value of property i2Value.
 	 */
 	public int getI2Value() {
-		return this.i2Value;
+		return i2Value;
 	}
 
 	/**
@@ -349,7 +369,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param i2Value New value of property i2Value.
 	 */
-	public void setI2Value(int i2Value) {
+	public void setI2Value(final int i2Value) {
 		this.i2Value = i2Value;
 	}
 
@@ -359,7 +379,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * @return Value of property i3Value.
 	 */
 	public int getI3Value() {
-		return this.i3Value;
+		return i3Value;
 	}
 
 	/**
@@ -367,7 +387,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param i3Value New value of property i3Value.
 	 */
-	public void setI3Value(int i3Value) {
+	public void setI3Value(final int i3Value) {
 		this.i3Value = i3Value;
 	}
 
@@ -377,7 +397,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * @return Value of property i4Value.
 	 */
 	public int getI4Value() {
-		return this.i4Value;
+		return i4Value;
 	}
 
 	/**
@@ -385,7 +405,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param i4Value New value of property i4Value.
 	 */
-	public void setI4Value(int i4Value) {
+	public void setI4Value(final int i4Value) {
 		this.i4Value = i4Value;
 	}
 
@@ -395,7 +415,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * @return Value of property i5Value.
 	 */
 	public int getI5Value() {
-		return this.i5Value;
+		return i5Value;
 	}
 
 	/**
@@ -403,7 +423,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param i5Value New value of property i5Value.
 	 */
-	public void setI5Value(int i5Value) {
+	public void setI5Value(final int i5Value) {
 		this.i5Value = i5Value;
 	}
 
@@ -413,7 +433,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * @return Value of property i6Value.
 	 */
 	public int getI6Value() {
-		return this.i6Value;
+		return i6Value;
 	}
 
 	/**
@@ -421,7 +441,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param i6Value New value of property i6Value.
 	 */
-	public void setI6Value(int i6Value) {
+	public void setI6Value(final int i6Value) {
 		this.i6Value = i6Value;
 	}
 
@@ -431,7 +451,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * @return Value of property i7Value.
 	 */
 	public int getI7Value() {
-		return this.i7Value;
+		return i7Value;
 	}
 
 	/**
@@ -439,7 +459,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param i7Value New value of property i7Value.
 	 */
-	public void setI7Value(int i7Value) {
+	public void setI7Value(final int i7Value) {
 		this.i7Value = i7Value;
 	}
 
@@ -449,7 +469,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * @return Value of property i0State.
 	 */
 	public int getI0State() {
-		return this.i0State;
+		return i0State;
 	}
 
 	/**
@@ -457,7 +477,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param i0State New value of property i0State.
 	 */
-	public void setI0State(int i0State) {
+	public void setI0State(final int i0State) {
 		this.i0State = i0State;
 	}
 
@@ -467,7 +487,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * @return Value of property i1State.
 	 */
 	public int getI1State() {
-		return this.i1State;
+		return i1State;
 	}
 
 	/**
@@ -475,7 +495,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param i1State New value of property i1State.
 	 */
-	public void setI1State(int i1State) {
+	public void setI1State(final int i1State) {
 		this.i1State = i1State;
 	}
 
@@ -485,7 +505,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * @return Value of property i2State.
 	 */
 	public int getI2State() {
-		return this.i2State;
+		return i2State;
 	}
 
 	/**
@@ -493,7 +513,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param i2State New value of property i2State.
 	 */
-	public void setI2State(int i2State) {
+	public void setI2State(final int i2State) {
 		this.i2State = i2State;
 	}
 
@@ -503,7 +523,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * @return Value of property i3State.
 	 */
 	public int getI3State() {
-		return this.i3State;
+		return i3State;
 	}
 
 	/**
@@ -511,7 +531,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param i3State New value of property i3State.
 	 */
-	public void setI3State(int i3State) {
+	public void setI3State(final int i3State) {
 		this.i3State = i3State;
 	}
 
@@ -521,7 +541,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * @return Value of property i4State.
 	 */
 	public int getI4State() {
-		return this.i4State;
+		return i4State;
 	}
 
 	/**
@@ -529,7 +549,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param i4State New value of property i4State.
 	 */
-	public void setI4State(int i4State) {
+	public void setI4State(final int i4State) {
 		this.i4State = i4State;
 	}
 
@@ -539,7 +559,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * @return Value of property i5State.
 	 */
 	public int getI5State() {
-		return this.i5State;
+		return i5State;
 	}
 
 	/**
@@ -547,7 +567,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param i5State New value of property i5State.
 	 */
-	public void setI5State(int i5State) {
+	public void setI5State(final int i5State) {
 		this.i5State = i5State;
 	}
 
@@ -557,7 +577,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * @return Value of property i6State.
 	 */
 	public int getI6State() {
-		return this.i6State;
+		return i6State;
 	}
 
 	/**
@@ -565,7 +585,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param i6State New value of property i6State.
 	 */
-	public void setI6State(int i6State) {
+	public void setI6State(final int i6State) {
 		this.i6State = i6State;
 	}
 
@@ -575,7 +595,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * @return Value of property i7State.
 	 */
 	public int getI7State() {
-		return this.i7State;
+		return i7State;
 	}
 
 	/**
@@ -583,7 +603,7 @@ public class ModelIVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Model
 	 * 
 	 * @param i7State New value of property i7State.
 	 */
-	public void setI7State(int i7State) {
+	public void setI7State(final int i7State) {
 		this.i7State = i7State;
 	}
 }

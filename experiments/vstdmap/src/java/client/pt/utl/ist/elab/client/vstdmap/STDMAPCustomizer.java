@@ -21,6 +21,10 @@ import com.linkare.rec.impl.client.customizer.ICustomizerListener;
 public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer,
 		InteractiveMenu {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1103714767152996034L;
 	private InteractiveSTDMAPAnima stdAnima;
 	private int nSamples = 500;
 
@@ -123,21 +127,16 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		configPanel.setPreferredSize(new java.awt.Dimension(290, 400));
 		staticPanel.setLayout(new java.awt.GridBagLayout());
 
-		staticPanel
-				.setBorder(new javax.swing.border.TitledBorder(new javax.swing.border.BevelBorder(
-						javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 153), new java.awt.Color(0,
-								51, 153), new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153)),
-						java.util.ResourceBundle.getBundle(
-								"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-								"rec.exp.customizer.title.1")));
+		staticPanel.setBorder(new javax.swing.border.TitledBorder(new javax.swing.border.BevelBorder(
+				javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153),
+				new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153)), java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.title.1")));
 		staticPanel.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.1"));
 		staticPanel.setMinimumSize(new java.awt.Dimension(290, 50));
 		staticPanel.setPreferredSize(new java.awt.Dimension(290, 50));
-		staticRadioButton
-				.setText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-						"rec.exp.customizer.title.2"));
+		staticRadioButton.setText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.title.2"));
 		staticRadioButton.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.2"));
 		expButtonGroup.add(staticRadioButton);
@@ -146,10 +145,8 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		staticPanel.add(staticRadioButton, gridBagConstraints);
 
 		nonStaticRadioButton.setSelected(true);
-		nonStaticRadioButton
-				.setText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-						"rec.exp.customizer.title.3"));
+		nonStaticRadioButton.setText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.title.3"));
 		nonStaticRadioButton.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.3"));
 		expButtonGroup.add(nonStaticRadioButton);
@@ -164,27 +161,23 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		simulPanel.setLayout(new java.awt.GridBagLayout());
 
-		simulPanel
-				.setBorder(new javax.swing.border.TitledBorder(new javax.swing.border.BevelBorder(
-						javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 153), new java.awt.Color(0,
-								51, 153), new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153)),
-						java.util.ResourceBundle.getBundle(
-								"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-								"rec.exp.customizer.title.4")));
+		simulPanel.setBorder(new javax.swing.border.TitledBorder(new javax.swing.border.BevelBorder(
+				javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153),
+				new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153)), java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.title.4")));
 		simulPanel.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.4"));
 		simulPanel.setMinimumSize(new java.awt.Dimension(290, 100));
 		simulPanel.setPreferredSize(new java.awt.Dimension(290, 100));
 		mapRadioButton.setSelected(true);
-		mapRadioButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages")
+		mapRadioButton.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
 				.getString("rec.exp.customizer.title.24"));
 		mapRadioButton.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.24"));
 		constsButtonGroup.add(mapRadioButton);
 		mapRadioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		mapRadioButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				mapRadioButtonActionPerformed(evt);
 			}
 		});
@@ -196,15 +189,15 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.weightx = 1.0;
 		simulPanel.add(mapRadioButton, gridBagConstraints);
 
-		animaRadioButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages")
+		animaRadioButton.setText(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
 				.getString("rec.exp.customizer.title.25"));
 		animaRadioButton.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.25"));
 		constsButtonGroup.add(animaRadioButton);
 		animaRadioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		animaRadioButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				animaRadioButtonActionPerformed(evt);
 			}
 		});
@@ -216,15 +209,14 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.weightx = 1.0;
 		simulPanel.add(animaRadioButton, gridBagConstraints);
 
-		histRadioButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages")
+		histRadioButton.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
 				.getString("rec.exp.customizer.title.26"));
 		histRadioButton.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.26"));
 		constsButtonGroup.add(histRadioButton);
 		histRadioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		histRadioButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				histRadioButtonActionPerformed(evt);
 			}
 		});
@@ -241,13 +233,10 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
 		configPanel.add(simulPanel, gridBagConstraints);
 
-		mapaTabbedPane
-				.setBorder(new javax.swing.border.TitledBorder(new javax.swing.border.BevelBorder(
-						javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 153), new java.awt.Color(0,
-								51, 153), new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153)),
-						java.util.ResourceBundle.getBundle(
-								"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-								"rec.exp.customizer.title.5")));
+		mapaTabbedPane.setBorder(new javax.swing.border.TitledBorder(new javax.swing.border.BevelBorder(
+				javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153),
+				new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153)), java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.title.5")));
 		mapaTabbedPane.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.5"));
 		mapaTabbedPane.setMinimumSize(new java.awt.Dimension(290, 293));
@@ -261,12 +250,10 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		generalPanel.setPreferredSize(new java.awt.Dimension(290, 90));
 		pcorPanel.setLayout(new java.awt.GridBagLayout());
 
-		pcorPanel
-				.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-						"rec.exp.customizer.title.8")));
-		pcorPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.8"));
+		pcorPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.title.8")));
+		pcorPanel.setToolTipText(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.8"));
 		pcorPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		pcorPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -280,7 +267,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		pcorSlider.setValue(314);
 		pcorSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		pcorSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				pcorSliderStateChanged(evt);
 			}
 		});
@@ -297,7 +284,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		pcorTextField.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.8"));
 		pcorTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				pcorTextFieldFocusLost(evt);
 			}
 		});
@@ -314,12 +301,10 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		iterPanel.setLayout(new java.awt.GridBagLayout());
 
-		iterPanel
-				.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-						"rec.exp.customizer.title.9")));
-		iterPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.9"));
+		iterPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.title.9")));
+		iterPanel.setToolTipText(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.9"));
 		iterPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		iterPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -333,7 +318,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.9"));
 		iterSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		iterSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				iterSliderStateChanged(evt);
 			}
 		});
@@ -350,7 +335,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		iterTextField.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.9"));
 		iterTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				iterTextFieldFocusLost(evt);
 			}
 		});
@@ -367,12 +352,10 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		kPanel.setLayout(new java.awt.GridBagLayout());
 
-		kPanel
-				.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-						"rec.exp.customizer.title.7")));
-		kPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.7"));
+		kPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.title.7")));
+		kPanel.setToolTipText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
+				.getString("rec.exp.customizer.tip.7"));
 		kPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		kPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -381,11 +364,11 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		kSlider.setMinorTickSpacing(50);
 		kSlider.setPaintLabels(true);
 		kSlider.setPaintTicks(true);
-		kSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.7"));
+		kSlider.setToolTipText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
+				.getString("rec.exp.customizer.tip.7"));
 		kSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		kSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				kSliderStateChanged(evt);
 			}
 		});
@@ -402,7 +385,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		kTextField.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.7"));
 		kTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				kTextFieldFocusLost(evt);
 			}
 		});
@@ -418,10 +401,12 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		generalPanel.add(kPanel, gridBagConstraints);
 
 		mapaTabbedPane.addTab(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
-						.getString("rec.exp.customizer.title.6"), null, generalPanel, java.util.ResourceBundle
-						.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-								"rec.exp.customizer.tip.6"));
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.title.6"),
+				null,
+				generalPanel,
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.tip.6"));
 
 		mainThetaPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -433,8 +418,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		thetaPanel.setLayout(new java.awt.GridBagLayout());
 
 		thetaPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages")
-				.getString("rec.exp.customizer.title.11")));
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.title.11")));
 		thetaPanel.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.11"));
 		thetaPanel.setMinimumSize(new java.awt.Dimension(250, 80));
@@ -449,7 +433,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		thetaSlider.setValue(0);
 		thetaSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		thetaSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				thetaSliderStateChanged(evt);
 			}
 		});
@@ -465,7 +449,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		thetaTextField.setText("0");
 		thetaTextField.setToolTipText("Initial Angle (degrees)");
 		thetaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				thetaTextFieldFocusLost(evt);
 			}
 		});
@@ -483,8 +467,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		nThetaPanel.setLayout(new java.awt.GridBagLayout());
 
 		nThetaPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages")
-				.getString("rec.exp.customizer.title.13")));
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.title.13")));
 		nThetaPanel.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.13"));
 		nThetaPanel.setMinimumSize(new java.awt.Dimension(250, 80));
@@ -501,7 +484,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		nThetaSlider.setValue(30);
 		nThetaSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		nThetaSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				nThetaSliderStateChanged(evt);
 			}
 		});
@@ -518,7 +501,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		nThetaTextField.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.13"));
 		nThetaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				nThetaTextFieldFocusLost(evt);
 			}
 		});
@@ -536,8 +519,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		dThetaPanel.setLayout(new java.awt.GridBagLayout());
 
 		dThetaPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages")
-				.getString("rec.exp.customizer.title.12")));
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.title.12")));
 		dThetaPanel.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.12"));
 		dThetaPanel.setMinimumSize(new java.awt.Dimension(250, 80));
@@ -553,7 +535,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		dThetaSlider.setValue(15);
 		dThetaSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		dThetaSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				dThetaSliderStateChanged(evt);
 			}
 		});
@@ -570,7 +552,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		dThetaTextField.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.12"));
 		dThetaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				dThetaTextFieldFocusLost(evt);
 			}
 		});
@@ -585,10 +567,13 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.weighty = 1.0;
 		mainThetaPanel.add(dThetaPanel, gridBagConstraints);
 
-		mapaTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages")
-				.getString("rec.exp.customizer.title.10"), null, mainThetaPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.10"));
+		mapaTabbedPane.addTab(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.title.10"),
+				null,
+				mainThetaPanel,
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.tip.10"));
 
 		mainIMapaPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -600,8 +585,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		iMapaPanel.setLayout(new java.awt.GridBagLayout());
 
 		iMapaPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages")
-				.getString("rec.exp.customizer.title.15")));
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.title.15")));
 		iMapaPanel.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.15"));
 		iMapaPanel.setMinimumSize(new java.awt.Dimension(250, 80));
@@ -617,7 +601,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		iMapaSlider.setValue(0);
 		iMapaSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		iMapaSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				iMapaSliderStateChanged(evt);
 			}
 		});
@@ -634,7 +618,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		iMapaTextField.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.15"));
 		iMapaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				iMapaTextFieldFocusLost(evt);
 			}
 		});
@@ -652,8 +636,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		nIMapaPanel.setLayout(new java.awt.GridBagLayout());
 
 		nIMapaPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages")
-				.getString("rec.exp.customizer.title.17")));
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.title.17")));
 		nIMapaPanel.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.17"));
 		nIMapaPanel.setMinimumSize(new java.awt.Dimension(250, 80));
@@ -670,7 +653,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		nIMapaSlider.setValue(5);
 		nIMapaSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		nIMapaSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				nIMapaSliderStateChanged(evt);
 			}
 		});
@@ -687,7 +670,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		nIMapaTextField.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.17"));
 		nIMapaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				nIMapaTextFieldFocusLost(evt);
 			}
 		});
@@ -705,8 +688,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		dIMapaPanel.setLayout(new java.awt.GridBagLayout());
 
 		dIMapaPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages")
-				.getString("rec.exp.customizer.title.16")));
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.title.16")));
 		dIMapaPanel.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.16"));
 		dIMapaPanel.setMinimumSize(new java.awt.Dimension(250, 80));
@@ -722,7 +704,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		dIMapaSlider.setValue(20);
 		dIMapaSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		dIMapaSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				dIMapaSliderStateChanged(evt);
 			}
 		});
@@ -739,7 +721,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		dIMapaTextField.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.16"));
 		dIMapaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				dIMapaTextFieldFocusLost(evt);
 			}
 		});
@@ -754,10 +736,13 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.weighty = 1.0;
 		mainIMapaPanel.add(dIMapaPanel, gridBagConstraints);
 
-		mapaTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages")
-				.getString("rec.exp.customizer.title.14"), null, mainIMapaPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.14"));
+		mapaTabbedPane.addTab(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.title.14"),
+				null,
+				mainIMapaPanel,
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.tip.14"));
 
 		resolutionPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -767,8 +752,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		widthPanel.setLayout(new java.awt.GridBagLayout());
 
 		widthPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages")
-				.getString("rec.exp.customizer.title.19")));
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.title.19")));
 		widthPanel.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.19"));
 		widthPanel.setMinimumSize(new java.awt.Dimension(250, 80));
@@ -785,7 +769,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		widthSlider.setValue(800);
 		widthSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		widthSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				widthSliderStateChanged(evt);
 			}
 		});
@@ -802,7 +786,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		widthTextField.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.19"));
 		widthTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				widthTextFieldFocusLost(evt);
 			}
 		});
@@ -820,8 +804,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		heightPanel.setLayout(new java.awt.GridBagLayout());
 
 		heightPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages")
-				.getString("rec.exp.customizer.title.20")));
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.title.20")));
 		heightPanel.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.20"));
 		heightPanel.setMinimumSize(new java.awt.Dimension(250, 80));
@@ -838,7 +821,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		heightSlider.setValue(800);
 		heightSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		heightSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				heightSliderStateChanged(evt);
 			}
 		});
@@ -855,7 +838,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		heightTextField.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.20"));
 		heightTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				heightTextFieldFocusLost(evt);
 			}
 		});
@@ -873,8 +856,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		pixSizePanel.setLayout(new java.awt.GridBagLayout());
 
 		pixSizePanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages")
-				.getString("rec.exp.customizer.title.21")));
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.title.21")));
 		pixSizePanel.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.21"));
 		pixSizePanel.setMinimumSize(new java.awt.Dimension(250, 80));
@@ -903,10 +885,13 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.weighty = 1.0;
 		resolutionPanel.add(pixSizePanel, gridBagConstraints);
 
-		mapaTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages")
-				.getString("rec.exp.customizer.title.18"), null, resolutionPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.18"));
+		mapaTabbedPane.addTab(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.title.18"),
+				null,
+				resolutionPanel,
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.tip.18"));
 
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -924,27 +909,24 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		btnPanel.setLayout(new java.awt.GridBagLayout());
 
-		okButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages")
+		okButton.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
 				.getString("rec.exp.customizer.title.ok"));
-		okButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.ok"));
+		okButton.setToolTipText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
+				.getString("rec.exp.customizer.tip.ok"));
 		okButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				okButtonActionPerformed(evt);
 			}
 		});
 
 		controlBtnPanel.add(okButton);
 
-		cancelButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.title.cancel"));
+		cancelButton.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
+				.getString("rec.exp.customizer.title.cancel"));
 		cancelButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.tip.cancel"));
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.cancel"));
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				cancelButtonActionPerformed(evt);
 			}
 		});
@@ -956,15 +938,12 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.weightx = 1.0;
 		btnPanel.add(controlBtnPanel, gridBagConstraints);
 
-		defaultButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.title.dfc"));
-		defaultButton
-				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-						"rec.exp.customizer.tip.dfc"));
+		defaultButton.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
+				.getString("rec.exp.customizer.title.dfc"));
+		defaultButton.setToolTipText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.dfc"));
 		defaultButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				defaultButtonActionPerformed(evt);
 			}
 		});
@@ -985,8 +964,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		mainEditPanel.setBorder(new javax.swing.border.TitledBorder(new javax.swing.border.BevelBorder(
 				javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153),
 				new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153)), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages")
-				.getString("rec.exp.customizer.title.22")));
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.title.22")));
 		mainEditPanel.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.22"));
 		mainEditPanel.setMinimumSize(new java.awt.Dimension(300, 100));
@@ -995,10 +973,9 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		editPanel.setLayout(new java.awt.GridBagLayout());
 
 		editPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages")
-				.getString("rec.exp.customizer.title.23")));
-		editPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.23"));
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.title.23")));
+		editPanel.setToolTipText(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.23"));
 		editPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		editPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -1013,12 +990,12 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		editSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		editSlider.setEnabled(false);
 		editSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				editSliderStateChanged(evt);
 			}
 		});
 		editSlider.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-			public void mouseDragged(java.awt.event.MouseEvent evt) {
+			public void mouseDragged(final java.awt.event.MouseEvent evt) {
 				editSliderMouseDragged(evt);
 			}
 		});
@@ -1038,7 +1015,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.23"));
 		editTextField.setEnabled(false);
 		editTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				editTextFieldFocusLost(evt);
 			}
 		});
@@ -1057,11 +1034,10 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		editLabel.setFont(new java.awt.Font("MS Sans Serif", 0, 24));
 		editLabel.setForeground(new java.awt.Color(255, 102, 102));
-		editLabel.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages")
+		editLabel.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
 				.getString("rec.exp.customizer.title.23"));
-		editLabel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.23"));
+		editLabel.setToolTipText(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.tip.23"));
 		editLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -1087,105 +1063,107 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 	}// GEN-END:initComponents
 
-	private void heightSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_heightSliderStateChanged
+	private void heightSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_heightSliderStateChanged
 		heightTextField.setText("" + heightSlider.getValue());
 	}// GEN-LAST:event_heightSliderStateChanged
 
-	private void widthSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_widthSliderStateChanged
+	private void widthSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_widthSliderStateChanged
 		widthTextField.setText("" + widthSlider.getValue());
 	}// GEN-LAST:event_widthSliderStateChanged
 
-	private void heightTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_heightTextFieldFocusLost
+	private void heightTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_heightTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(heightTextField, heightSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(heightTextField, heightSlider, 1);
+		} catch (final NumberFormatException e) {
 			heightTextField.setText(Integer.toString(heightSlider.getValue()));
 		}
 	}// GEN-LAST:event_heightTextFieldFocusLost
 
-	private void widthTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_widthTextFieldFocusLost
+	private void widthTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_widthTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(widthTextField, widthSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(widthTextField, widthSlider, 1);
+		} catch (final NumberFormatException e) {
 			widthTextField.setText(Integer.toString(widthSlider.getValue()));
 		}
 	}// GEN-LAST:event_widthTextFieldFocusLost
 
-	public void actionPerformed(java.awt.event.ActionEvent e) {
+	public void actionPerformed(final java.awt.event.ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
-						.getString("rec.exp.customizer.editMenu.title.1")))
-			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.title.1"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.tip.1"), (int) Math.round(stdAnima.getMass()), new int[] { 100, 1001,
-					1, 50 });
-		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
-						.getString("rec.exp.customizer.editMenu.title.2")))
-			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.title.2"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.tip.2"), (int) Math.round(stdAnima.getLength() * 10), new int[] { 10,
-					161, 1, 2 });
-		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
-						.getString("rec.exp.customizer.editMenu.title.3")))
-			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.title.3"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.tip.3"), (int) Math.round(stdAnima.getForce() * 10), new int[] { 50,
-					250, -250, 10 });
-		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
-						.getString("rec.exp.customizer.editMenu.title.4")))
-			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.title.4"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.tip.4"), (int) Math.round((double) stdAnima.getForceDt() / 100d),
-					new int[] { 10, 101, 1, 1 });
-		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
-						.getString("rec.exp.customizer.editMenu.title.5")))
-			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.title.5"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.tip.5"), (int) Math.round(Math.toDegrees(stdAnima.getTheta())),
-					new int[] { 30, 180, -180, 15 });
-		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
-						.getString("rec.exp.customizer.editMenu.title.6")))
-			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.title.6"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.tip.6"), (int) Math.round(Math.toDegrees(stdAnima.getThetaVecVel())),
-					new int[] { 240, 1440, -1440, 60 });
-		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
-						.getString("rec.exp.customizer.editMenu.title.7")))
-			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.title.7"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.tip.7"), this.nSamples, new int[] { 1000, 10010, 10, 500 });
-		/*
-		 * else if (e.getActionCommand().equalsIgnoreCase("Ok")){
-		 * mainPanel.remove(mainPanel.getComponentCount()-1);
-		 * stdAnima.setVisible(true); //if (stateCheckBoxMenuItem.isSelected()
-		 * || xCheckBoxMenuItem.isSelected() ||
-		 * thetaCheckBoxMenuItem.isSelected()) //
-		 * mainTabbedPane.setVisible(true); //viewMenu.setEnabled(true);
-		 * //helpMenu.setEnabled(true); //fileMenu.setEnabled(true); }
-		 */
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.editMenu.title.1"))) {
+			updateEditPanel(
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.title.1"),
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.tip.1"), (int) Math.round(stdAnima.getMass()), new int[] {
+							100, 1001, 1, 50 });
+		} else if (e.getActionCommand().equalsIgnoreCase(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.editMenu.title.2"))) {
+			updateEditPanel(
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.title.2"),
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.tip.2"), (int) Math.round(stdAnima.getLength() * 10),
+					new int[] { 10, 161, 1, 2 });
+		} else if (e.getActionCommand().equalsIgnoreCase(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.editMenu.title.3"))) {
+			updateEditPanel(
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.title.3"),
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.tip.3"), (int) Math.round(stdAnima.getForce() * 10),
+					new int[] { 50, 250, -250, 10 });
+		} else if (e.getActionCommand().equalsIgnoreCase(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.editMenu.title.4"))) {
+			updateEditPanel(
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.title.4"),
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.tip.4"),
+					(int) Math.round((double) stdAnima.getForceDt() / 100d), new int[] { 10, 101, 1, 1 });
+		} else if (e.getActionCommand().equalsIgnoreCase(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.editMenu.title.5"))) {
+			updateEditPanel(
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.title.5"),
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.tip.5"),
+					(int) Math.round(Math.toDegrees(stdAnima.getTheta())), new int[] { 30, 180, -180, 15 });
+		} else if (e.getActionCommand().equalsIgnoreCase(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.editMenu.title.6"))) {
+			updateEditPanel(
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.title.6"),
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.tip.6"), (int) Math.round(Math.toDegrees(stdAnima
+							.getThetaVecVel())), new int[] { 240, 1440, -1440, 60 });
+		} else if (e.getActionCommand().equalsIgnoreCase(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.editMenu.title.7"))) {
+			updateEditPanel(
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.title.7"),
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.tip.7"), nSamples, new int[] { 1000, 10010, 10, 500 });
+			/*
+			 * else if (e.getActionCommand().equalsIgnoreCase("Ok")){
+			 * mainPanel.remove(mainPanel.getComponentCount()-1);
+			 * stdAnima.setVisible(true); //if
+			 * (stateCheckBoxMenuItem.isSelected() ||
+			 * xCheckBoxMenuItem.isSelected() ||
+			 * thetaCheckBoxMenuItem.isSelected()) //
+			 * mainTabbedPane.setVisible(true); //viewMenu.setEnabled(true);
+			 * //helpMenu.setEnabled(true); //fileMenu.setEnabled(true); }
+			 */
+		}
 	}
 
-	private void updateEditPanel(String strTitle, String strTip, int val, int[] sliderConfig) {
+	private void updateEditPanel(final String strTitle, final String strTip, final int val, final int[] sliderConfig) {
 		editPanel.remove(editSlider);
 		editSlider = new javax.swing.JSlider();
 		editSlider.setMaximum(sliderConfig[1]);
@@ -1198,17 +1176,17 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		editSlider.setValue(val);
 		editSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		editSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				editSliderStateChanged(evt);
 			}
 		});
 		editSlider.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-			public void mouseDragged(java.awt.event.MouseEvent evt) {
+			public void mouseDragged(final java.awt.event.MouseEvent evt) {
 				editSliderMouseDragged(evt);
 			}
 		});
 
-		java.awt.GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+		final java.awt.GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;
@@ -1230,195 +1208,185 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 	}
 
 	public void update() {
-		String str = ((javax.swing.border.TitledBorder) editPanel.getBorder()).getTitle();
+		final String str = ((javax.swing.border.TitledBorder) editPanel.getBorder()).getTitle();
 
-		if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.2")))
+		if (str.equalsIgnoreCase(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.editPanel.title.2"))) {
 			editSlider.setValue((int) Math.round(stdAnima.getLength() * 10));
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.3")))
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.editPanel.title.3"))) {
 			editSlider.setValue((int) Math.round(stdAnima.getForce() * 10));
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.4")))
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.editPanel.title.4"))) {
 			editSlider.setValue((int) Math.round((double) stdAnima.getForceDt() / 100d));
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.5")))
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.editPanel.title.5"))) {
 			editSlider.setValue((int) Math.round(Math.toDegrees(stdAnima.getTheta())));
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.6")))
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.editPanel.title.6"))) {
 			editSlider.setValue((int) Math.round(Math.toDegrees(stdAnima.getThetaVecVel())));
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.1")))
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.editPanel.title.1"))) {
 			editSlider.setValue((int) Math.round(stdAnima.getMass()));
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.7")))
-			editSlider.setValue(this.nSamples);
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.editPanel.title.7"))) {
+			editSlider.setValue(nSamples);
+		}
 	}
 
-	private void editSet(String str, double val) {
-		if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.1")))
+	private void editSet(final String str, final double val) {
+		if (str.equalsIgnoreCase(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.editPanel.title.1"))) {
 			stdAnima.setMass(val);
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.2")))
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.editPanel.title.2"))) {
 			stdAnima.setLength(val / 10d);
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.3")))
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.editPanel.title.3"))) {
 			stdAnima.setForce(val / 10d);
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.4")))
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.editPanel.title.4"))) {
 			stdAnima.setForceDt((int) val * 100);
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.5")))
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.editPanel.title.5"))) {
 			stdAnima.setTheta(Math.toRadians(val));
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.6")))
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.editPanel.title.6"))) {
 			stdAnima.setThetaVecVel(Math.toRadians(val));
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.7")))
-			this.nSamples = (int) val;
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.customizer.editPanel.title.7"))) {
+			nSamples = (int) val;
+		}
 	}
 
-	private void editTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_editTextFieldFocusLost
+	private void editTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_editTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(editTextField, editSlider, 1);
+			final double val = GUtils.validateInput(editTextField, editSlider, 1);
 			editSet(((javax.swing.border.TitledBorder) editPanel.getBorder()).getTitle(), val);
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			editTextField.setText(Integer.toString(editSlider.getValue()));
 		}
 	}// GEN-LAST:event_editTextFieldFocusLost
 
-	private void editSliderMouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_editSliderMouseDragged
+	private void editSliderMouseDragged(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_editSliderMouseDragged
 		editSet(((javax.swing.border.TitledBorder) editPanel.getBorder()).getTitle(), editSlider.getValue());
 	}// GEN-LAST:event_editSliderMouseDragged
 
-	private void editSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_editSliderStateChanged
+	private void editSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_editSliderStateChanged
 		editTextField.setText("" + editSlider.getValue());
 	}// GEN-LAST:event_editSliderStateChanged
 
-	private void nIMapaTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_nIMapaTextFieldFocusLost
+	private void nIMapaTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_nIMapaTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(nIMapaTextField, nIMapaSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(nIMapaTextField, nIMapaSlider, 1);
+		} catch (final NumberFormatException e) {
 			nIMapaTextField.setText(Integer.toString(nIMapaSlider.getValue()));
 		}
 	}// GEN-LAST:event_nIMapaTextFieldFocusLost
 
-	private void dIMapaTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_dIMapaTextFieldFocusLost
+	private void dIMapaTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_dIMapaTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(dIMapaTextField, dIMapaSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(dIMapaTextField, dIMapaSlider, 1);
+		} catch (final NumberFormatException e) {
 			dIMapaTextField.setText(Integer.toString(dIMapaSlider.getValue()));
 		}
 	}// GEN-LAST:event_dIMapaTextFieldFocusLost
 
-	private void iMapaTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_iMapaTextFieldFocusLost
+	private void iMapaTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_iMapaTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(iMapaTextField, iMapaSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(iMapaTextField, iMapaSlider, 1);
+		} catch (final NumberFormatException e) {
 			iMapaTextField.setText(Integer.toString(iMapaSlider.getValue()));
 		}
 	}// GEN-LAST:event_iMapaTextFieldFocusLost
 
-	private void nThetaTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_nThetaTextFieldFocusLost
+	private void nThetaTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_nThetaTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(nThetaTextField, nThetaSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(nThetaTextField, nThetaSlider, 1);
+		} catch (final NumberFormatException e) {
 			nThetaTextField.setText(Integer.toString(nThetaSlider.getValue()));
 		}
 	}// GEN-LAST:event_nThetaTextFieldFocusLost
 
-	private void dThetaTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_dThetaTextFieldFocusLost
+	private void dThetaTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_dThetaTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(dThetaTextField, dThetaSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(dThetaTextField, dThetaSlider, 1);
+		} catch (final NumberFormatException e) {
 			dThetaTextField.setText(Integer.toString(dThetaSlider.getValue()));
 		}
 	}// GEN-LAST:event_dThetaTextFieldFocusLost
 
-	private void thetaTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_thetaTextFieldFocusLost
+	private void thetaTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_thetaTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(thetaTextField, thetaSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(thetaTextField, thetaSlider, 1);
+		} catch (final NumberFormatException e) {
 			thetaTextField.setText(Integer.toString(thetaSlider.getValue()));
 		}
 	}// GEN-LAST:event_thetaTextFieldFocusLost
 
-	private void iterTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_iterTextFieldFocusLost
+	private void iterTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_iterTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(iterTextField, iterSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(iterTextField, iterSlider, 1);
+		} catch (final NumberFormatException e) {
 			iterTextField.setText(Integer.toString(iterSlider.getValue()));
 		}
 	}// GEN-LAST:event_iterTextFieldFocusLost
 
-	private void pcorTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_pcorTextFieldFocusLost
+	private void pcorTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_pcorTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(pcorTextField, pcorSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(pcorTextField, pcorSlider, 1);
+		} catch (final NumberFormatException e) {
 			pcorTextField.setText(Integer.toString(pcorSlider.getValue()));
 		}
 	}// GEN-LAST:event_pcorTextFieldFocusLost
 
-	private void kTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_kTextFieldFocusLost
+	private void kTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_kTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(kTextField, kSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(kTextField, kSlider, 1);
+		} catch (final NumberFormatException e) {
 			kTextField.setText(Integer.toString(kSlider.getValue()));
 		}
 	}// GEN-LAST:event_kTextFieldFocusLost
 
-	private void nIMapaSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_nIMapaSliderStateChanged
+	private void nIMapaSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_nIMapaSliderStateChanged
 		nIMapaTextField.setText("" + nIMapaSlider.getValue());
 	}// GEN-LAST:event_nIMapaSliderStateChanged
 
-	private void dIMapaSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_dIMapaSliderStateChanged
+	private void dIMapaSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_dIMapaSliderStateChanged
 		dIMapaTextField.setText("" + dIMapaSlider.getValue());
 	}// GEN-LAST:event_dIMapaSliderStateChanged
 
-	private void iMapaSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_iMapaSliderStateChanged
+	private void iMapaSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_iMapaSliderStateChanged
 		iMapaTextField.setText("" + iMapaSlider.getValue());
 	}// GEN-LAST:event_iMapaSliderStateChanged
 
-	private void nThetaSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_nThetaSliderStateChanged
+	private void nThetaSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_nThetaSliderStateChanged
 		nThetaTextField.setText("" + nThetaSlider.getValue());
 	}// GEN-LAST:event_nThetaSliderStateChanged
 
-	private void dThetaSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_dThetaSliderStateChanged
+	private void dThetaSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_dThetaSliderStateChanged
 		dThetaTextField.setText("" + dThetaSlider.getValue());
 	}// GEN-LAST:event_dThetaSliderStateChanged
 
-	private void thetaSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_thetaSliderStateChanged
+	private void thetaSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_thetaSliderStateChanged
 		thetaTextField.setText("" + thetaSlider.getValue());
 	}// GEN-LAST:event_thetaSliderStateChanged
 
-	private void iterSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_iterSliderStateChanged
+	private void iterSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_iterSliderStateChanged
 		iterTextField.setText("" + iterSlider.getValue());
 	}// GEN-LAST:event_iterSliderStateChanged
 
-	private void pcorSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_pcorSliderStateChanged
+	private void pcorSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_pcorSliderStateChanged
 		pcorTextField.setText("" + pcorSlider.getValue());
 	}// GEN-LAST:event_pcorSliderStateChanged
 
-	private void kSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_kSliderStateChanged
+	private void kSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_kSliderStateChanged
 		kTextField.setText("" + kSlider.getValue());
 	}// GEN-LAST:event_kSliderStateChanged
 
-	private void animaRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_animaRadioButtonActionPerformed
+	private void animaRadioButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_animaRadioButtonActionPerformed
 		editSlider.setEnabled(true);
 		editTextField.setEnabled(true);
 
@@ -1444,7 +1412,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		pcorTextField.setEnabled(false);
 	}// GEN-LAST:event_animaRadioButtonActionPerformed
 
-	private void histRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_histRadioButtonActionPerformed
+	private void histRadioButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_histRadioButtonActionPerformed
 		editSlider.setEnabled(false);
 		editTextField.setEnabled(false);
 
@@ -1470,7 +1438,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		pcorTextField.setEnabled(true);
 	}// GEN-LAST:event_histRadioButtonActionPerformed
 
-	private void mapRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_mapRadioButtonActionPerformed
+	private void mapRadioButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_mapRadioButtonActionPerformed
 		editSlider.setEnabled(false);
 		editTextField.setEnabled(false);
 
@@ -1496,31 +1464,31 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		pcorTextField.setEnabled(true);
 	}// GEN-LAST:event_mapRadioButtonActionPerformed
 
-	private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
+	private void cancelButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_cancelButtonActionPerformed
 
-	private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
+	private void okButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
 
 		acqConfig.setSelectedFrequency(new Frequency((double) stdAnima.getForceDt(), hardwareInfo
 				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
 				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
 
 		byte simulType = 0;
-		int check = 0;
+		final int check = 0;
 
 		if (mapRadioButton.isSelected()) {
-			double k = (double) kSlider.getValue() / 100d;
-			double pcor = (double) pcorSlider.getValue() / 100d;
-			int iter = iterSlider.getValue() * 10;
+			final double k = (double) kSlider.getValue() / 100d;
+			final double pcor = (double) pcorSlider.getValue() / 100d;
+			final int iter = iterSlider.getValue() * 10;
 
-			double theta = Math.toRadians(thetaSlider.getValue());
-			int nTheta = nThetaSlider.getValue();
-			double dTheta = Math.toRadians(dThetaSlider.getValue());
+			final double theta = Math.toRadians(thetaSlider.getValue());
+			final int nTheta = nThetaSlider.getValue();
+			final double dTheta = Math.toRadians(dThetaSlider.getValue());
 
-			double iMapa = Math.toRadians(iMapaSlider.getValue());
-			int nIMapa = nIMapaSlider.getValue();
-			double dIMapa = Math.toRadians(dIMapaSlider.getValue());
+			final double iMapa = Math.toRadians(iMapaSlider.getValue());
+			final int nIMapa = nIMapaSlider.getValue();
+			final double dIMapa = Math.toRadians(dIMapaSlider.getValue());
 
 			acqConfig.setTotalSamples(nTheta * nIMapa * iter + nTheta * nIMapa);
 
@@ -1538,13 +1506,13 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 			acqConfig.getSelectedHardwareParameter("nIMapa").setParameterValue("" + nIMapa);
 			acqConfig.getSelectedHardwareParameter("dIMapa").setParameterValue("" + (float) dIMapa);
 		} else if (animaRadioButton.isSelected()) {
-			acqConfig.setTotalSamples(this.nSamples);
+			acqConfig.setTotalSamples(nSamples);
 			// Force dt = Frequencia
-			double length = stdAnima.getLength() / 10d;
-			double mass = stdAnima.getMass() / 100d;
-			double thetaDot = stdAnima.getThetaVecVel();
-			double theta = stdAnima.getTheta();
-			double force = stdAnima.getForce();
+			final double length = stdAnima.getLength() / 10d;
+			final double mass = stdAnima.getMass() / 100d;
+			final double thetaDot = stdAnima.getThetaVecVel();
+			final double theta = stdAnima.getTheta();
+			final double force = stdAnima.getForce();
 
 			simulType = 2;
 
@@ -1554,12 +1522,12 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 			acqConfig.getSelectedHardwareParameter("theta").setParameterValue("" + (float) theta);
 			acqConfig.getSelectedHardwareParameter("force").setParameterValue("" + (float) force);
 		} else if (histRadioButton.isSelected()) {
-			double k = (double) kSlider.getValue() / 100d;
-			double pcor = (double) pcorSlider.getValue() / 100d;
-			int iter = iterSlider.getValue() * 10;
+			final double k = (double) kSlider.getValue() / 100d;
+			final double pcor = (double) pcorSlider.getValue() / 100d;
+			final int iter = iterSlider.getValue() * 10;
 
-			double theta = Math.toRadians(thetaSlider.getValue());
-			double iMapa = Math.toRadians(iMapaSlider.getValue());
+			final double theta = Math.toRadians(thetaSlider.getValue());
+			final double iMapa = Math.toRadians(iMapaSlider.getValue());
 
 			acqConfig.setTotalSamples(iter + 1);
 
@@ -1581,15 +1549,16 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		acqConfig.getSelectedHardwareParameter("h").setParameterValue("" + heightSlider.getValue());
 		acqConfig.getSelectedHardwareParameter("pixSize").setParameterValue("" + (byte) pixSizeSlider.getValue());
 
-		for (int i = 0; i < acqConfig.getSelectedHardwareParameters().length; i++)
+		for (int i = 0; i < acqConfig.getSelectedHardwareParameters().length; i++) {
 			System.out.println(acqConfig.getSelectedHardwareParameters(i).getParameterName() + " = "
 					+ acqConfig.getSelectedHardwareParameters(i).getParameterValue());
+		}
 
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_okButtonActionPerformed
 
-	private void defaultButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_defaultButtonActionPerformed
-		this.nSamples = 500;
+	private void defaultButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_defaultButtonActionPerformed
+		nSamples = 500;
 
 		nonStaticRadioButton.setSelected(true);
 		mapRadioButton.setSelected(true);
@@ -1616,10 +1585,10 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		update();
 	}// GEN-LAST:event_defaultButtonActionPerformed
 
-	public static void main(String args[]) {
-		javax.swing.JFrame test = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame test = new javax.swing.JFrame();
 		test.addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent e) {
+			public void windowClosing(final java.awt.event.WindowEvent e) {
 				System.exit(0);
 			};
 		});
@@ -1638,7 +1607,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -1650,7 +1619,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -1660,9 +1629,10 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -1676,9 +1646,10 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -1694,15 +1665,16 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		return acqConfig;
 	}
 
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
 
-			byte simulType = Byte.parseByte(acqConfig.getSelectedHardwareParameterValue("simulType"));
-			if (acqConfig.getSelectedHardwareParameterValue("staticImg").trim().equals("1") ? true : false)
+			final byte simulType = Byte.parseByte(acqConfig.getSelectedHardwareParameterValue("simulType"));
+			if (acqConfig.getSelectedHardwareParameterValue("staticImg").trim().equals("1") ? true : false) {
 				staticRadioButton.setSelected(true);
-			else
+			} else {
 				nonStaticRadioButton.setSelected(true);
+			}
 
 			// this.nSamples = acqConfig.getTotalSamples();
 
@@ -1714,17 +1686,17 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 				mapRadioButton.setSelected(true);
 				mapRadioButtonActionPerformed(null);
 
-				float k = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("k"));
-				float pcor = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("pcor"));
-				int iter = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("iter"));
+				final float k = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("k"));
+				final float pcor = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("pcor"));
+				final int iter = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("iter"));
 
-				float theta = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("theta"));
-				int nTheta = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("nTheta"));
-				float dTheta = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("dTheta"));
+				final float theta = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("theta"));
+				final int nTheta = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("nTheta"));
+				final float dTheta = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("dTheta"));
 
-				float iMapa = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("iMapa"));
-				int nIMapa = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("nIMapa"));
-				float dIMapa = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("dIMapa"));
+				final float iMapa = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("iMapa"));
+				final int nIMapa = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("nIMapa"));
+				final float dIMapa = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("dIMapa"));
 
 				kSlider.setValue((int) Math.round(100 * k));
 				pcorSlider.setValue((int) Math.round(100 * pcor));
@@ -1741,11 +1713,11 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 				animaRadioButton.setSelected(true);
 				animaRadioButtonActionPerformed(null);
 
-				float length = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("length"));
-				float mass = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("mass"));
-				float thetaDot = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("thetaDot"));
-				float theta = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("theta"));
-				float force = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("force"));
+				final float length = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("length"));
+				final float mass = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("mass"));
+				final float thetaDot = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("thetaDot"));
+				final float theta = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("theta"));
+				final float force = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("force"));
 
 				stdAnima.config(length * 10, theta, thetaDot, mass * 100, force, (int) acqConfig.getSelectedFrequency()
 						.getFrequency());
@@ -1754,12 +1726,12 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 				histRadioButton.setSelected(true);
 				histRadioButtonActionPerformed(null);
 
-				float k = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("k"));
-				float pcor = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("pcor"));
-				int iter = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("iter"));
+				final float k = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("k"));
+				final float pcor = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("pcor"));
+				final int iter = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("iter"));
 
-				float theta = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("theta"));
-				float iMapa = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("iMapa"));
+				final float theta = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("theta"));
+				final float iMapa = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("iMapa"));
 
 				kSlider.setValue((int) Math.round(100 * k));
 				pcorSlider.setValue((int) Math.round(100 * pcor));
@@ -1771,12 +1743,12 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
 	public javax.swing.JComponent getCustomizerComponent() {

@@ -30,10 +30,10 @@ import com.linkare.rec.impl.data.PhysicsValFactory;
 public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 	// Runnable {
 
-	private int NUM_CHANNELS = 24;
+	private final int NUM_CHANNELS = 24;
 
 	private int tbs = 100;
-	private int nSamples;
+	private final int nSamples;
 
 	private boolean stopped = false;
 	private VirtualBaseDriver driver = null;
@@ -65,11 +65,11 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 	/**************************************
 	 * TRONCO NUMERICO
 	 **************************************/
-	private double[][] state;
-	private byte execDim;
-	private int numPart;
-	private long seed = Math.round(Math.PI * Integer.MAX_VALUE);
-	private java.util.Random rand;
+	private final double[][] state;
+	private final byte execDim;
+	private final int numPart;
+	private final long seed = Math.round(Math.PI * Integer.MAX_VALUE);
+	private final java.util.Random rand;
 
 	/**************************************
 	 * GRAFISMO
@@ -79,13 +79,13 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 	private IntervalXYDataset datasetGenPos;
 	private IntervalXYDataset datasetGenVel;
 
-	private int w, h;
-	private boolean conPts;
-	private boolean anima;
+	private final int w, h;
+	private final boolean conPts;
+	private final boolean anima;
 	private boolean[] graphMed;
 
-	public MvBrownDataProducer(VirtualBaseDriver driver, int _numPart, byte _dim, int _w, int _h, boolean _conPts,
-			boolean _anima, int _tbs, int _nSamples) {
+	public MvBrownDataProducer(final VirtualBaseDriver driver, final int _numPart, final byte _dim, final int _w,
+			final int _h, final boolean _conPts, final boolean _anima, final int _tbs, final int _nSamples) {
 		this.driver = driver;
 		nSamples = _nSamples;
 		tbs = _tbs;
@@ -108,17 +108,19 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 	 * renderizado num JFreeChart e cuja imagem e' enviada como um array de
 	 * bytes.
 	 */
-	public void initializeGraphs(String[] _graph, boolean[] _graphMed) {
+	public void initializeGraphs(final String[] _graph, final boolean[] _graphMed) {
 
 		graphMed = _graphMed;
 		int k = 0;
 		int p = 0;
-		for (int i = 0; i < _graph.length; i++)
+		for (int i = 0; i < _graph.length; i++) {
 			if (!_graph[i].equalsIgnoreCase("")) {
-				if (!_graphMed[i])
+				if (!_graphMed[i]) {
 					p++;
+				}
 				k++;
 			}
+		}
 
 		axis[0] = new byte[k][3];
 		datasets = new XYSeries[p];
@@ -128,247 +130,332 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 				if (!_graphMed[i]) {
 					datasets[--p] = new XYSeries(_graph[i]);
 				} else {
-					String str[] = _graph[i].split(" vs ");
-					if (!str[0].equalsIgnoreCase("t"))
+					final String str[] = _graph[i].split(" vs ");
+					if (!str[0].equalsIgnoreCase("t")) {
 						str[0] = "<" + str[0] + ">";
-					if (!str[1].equalsIgnoreCase("t"))
+					}
+					if (!str[1].equalsIgnoreCase("t")) {
 						str[1] = "<" + str[1] + ">";
+					}
 
 					_graph[i] = str[0].concat(" vs " + str[1]);
 					serieRelateAxis(_graph[i], --k, (byte) 0);
 				}
 			}
 		}
-		if (datasets.length > 0)
+		if (datasets.length > 0) {
 			relateDataset(); // correspondencia serie->eixos
-		else
+		} else {
 			datasets = null;
+		}
 	}
 
 	/*
 	 * Inicializa um grafico do tipo (t,vx,vy,vz,|v|) que e' renderizado num
 	 * JFreeChart e cuja imagem e' enviada como um array de bytes.
 	 */
-	public void initializeGenVelGraph(boolean _vx, boolean _vy, boolean _vz, boolean _vMod, boolean _vMed,
-			boolean _vQuad, boolean _vAbs) {
+	public void initializeGenVelGraph(final boolean _vx, final boolean _vy, final boolean _vz, final boolean _vMod,
+			final boolean _vMed, final boolean _vQuad, final boolean _vAbs) {
 
 		if (!_vMed && !_vQuad && !_vAbs) {
 			datasetGenVel = new XYSeriesCollection();
-			if (_vx)
+			if (_vx) {
 				((XYSeriesCollection) datasetGenVel).addSeries(new XYSeries("t vs Vx", false, true));
-			if (_vy)
+			}
+			if (_vy) {
 				((XYSeriesCollection) datasetGenVel).addSeries(new XYSeries("t vs Vy", false, true));
-			if (_vz)
+			}
+			if (_vz) {
 				((XYSeriesCollection) datasetGenVel).addSeries(new XYSeries("t vs Vz", false, true));
-			if (_vMod)
+			}
+			if (_vMod) {
 				((XYSeriesCollection) datasetGenVel).addSeries(new XYSeries("t vs | v |", false, true));
+			}
 		} else if (!_vMed && !_vAbs) {
 			datasetGenVel = new XYSeriesCollection();
-			if (_vx)
+			if (_vx) {
 				((XYSeriesCollection) datasetGenVel).addSeries(new XYSeries("t vs Vx^2", false, true));
-			if (_vy)
+			}
+			if (_vy) {
 				((XYSeriesCollection) datasetGenVel).addSeries(new XYSeries("t vs Vy^2", false, true));
-			if (_vz)
+			}
+			if (_vz) {
 				((XYSeriesCollection) datasetGenVel).addSeries(new XYSeries("t vs Vz^2", false, true));
-			if (_vMod)
+			}
+			if (_vMod) {
 				((XYSeriesCollection) datasetGenVel).addSeries(new XYSeries("t vs | v |^2", false, true));
+			}
 		} else if (!_vMed && !_vQuad) {
 			datasetGenVel = new XYSeriesCollection();
-			if (_vx)
+			if (_vx) {
 				((XYSeriesCollection) datasetGenVel).addSeries(new XYSeries("t vs | Vx |", false, true));
-			if (_vy)
+			}
+			if (_vy) {
 				((XYSeriesCollection) datasetGenVel).addSeries(new XYSeries("t vs | Vy |", false, true));
-			if (_vz)
+			}
+			if (_vz) {
 				((XYSeriesCollection) datasetGenVel).addSeries(new XYSeries("t vs | Vz |", false, true));
-			if (_vMod)
+			}
+			if (_vMod) {
 				((XYSeriesCollection) datasetGenVel).addSeries(new XYSeries("t vs | v |", false, true));
+			}
 		} else if (!_vAbs && !_vQuad) {
 			int k = 0;
-			if (_vx)
+			if (_vx) {
 				k++;
-			if (_vy)
+			}
+			if (_vy) {
 				k++;
-			if (_vz)
+			}
+			if (_vz) {
 				k++;
-			if (_vMod)
+			}
+			if (_vMod) {
 				k++;
+			}
 			axis[2] = new byte[k][3];
 			int i = 0;
-			if (_vx)
+			if (_vx) {
 				serieRelateAxis("t vs <Vx>", i++, (byte) 2);
-			if (_vy)
+			}
+			if (_vy) {
 				serieRelateAxis("t vs <Vy>", i++, (byte) 2);
-			if (_vz)
+			}
+			if (_vz) {
 				serieRelateAxis("t vs <Vz>", i++, (byte) 2);
-			if (_vMod)
+			}
+			if (_vMod) {
 				serieRelateAxis("t vs <| v |>", i++, (byte) 2);
+			}
 		} else if (!_vAbs) {
 			int k = 0;
-			if (_vx)
+			if (_vx) {
 				k++;
-			if (_vy)
+			}
+			if (_vy) {
 				k++;
-			if (_vz)
+			}
+			if (_vz) {
 				k++;
-			if (_vMod)
+			}
+			if (_vMod) {
 				k++;
+			}
 			axis[2] = new byte[k][3];
 			int i = 0;
-			if (_vx)
+			if (_vx) {
 				serieRelateAxis("t vs <Vx^2>", i++, (byte) 2);
-			if (_vy)
+			}
+			if (_vy) {
 				serieRelateAxis("t vs <Vy^2>", i++, (byte) 2);
-			if (_vz)
+			}
+			if (_vz) {
 				serieRelateAxis("t vs <Vz^2>", i++, (byte) 2);
-			if (_vMod)
+			}
+			if (_vMod) {
 				serieRelateAxis("t vs <| v |^2>", i++, (byte) 2);
+			}
 		} else if (!_vMed) {
 			datasetGenVel = new XYSeriesCollection();
-			if (_vx)
+			if (_vx) {
 				((XYSeriesCollection) datasetGenVel).addSeries(new XYSeries("t vs Vx^2", false, true));
-			if (_vy)
+			}
+			if (_vy) {
 				((XYSeriesCollection) datasetGenVel).addSeries(new XYSeries("t vs Vy^2", false, true));
-			if (_vz)
+			}
+			if (_vz) {
 				((XYSeriesCollection) datasetGenVel).addSeries(new XYSeries("t vs Vz^2", false, true));
-			if (_vMod)
+			}
+			if (_vMod) {
 				((XYSeriesCollection) datasetGenVel).addSeries(new XYSeries("t vs | v |^2", false, true));
+			}
 		} else if (!_vQuad) {
 			int k = 0;
-			if (_vx)
+			if (_vx) {
 				k++;
-			if (_vy)
+			}
+			if (_vy) {
 				k++;
-			if (_vz)
+			}
+			if (_vz) {
 				k++;
-			if (_vMod)
+			}
+			if (_vMod) {
 				k++;
+			}
 			axis[2] = new byte[k][3];
 			int i = 0;
-			if (_vx)
+			if (_vx) {
 				serieRelateAxis("t vs <| Vx |>", i++, (byte) 2);
-			if (_vy)
+			}
+			if (_vy) {
 				serieRelateAxis("t vs <| Vy |>", i++, (byte) 2);
-			if (_vz)
+			}
+			if (_vz) {
 				serieRelateAxis("t vs <| Vz |>", i++, (byte) 2);
-			if (_vMod)
+			}
+			if (_vMod) {
 				serieRelateAxis("t vs <| v |>", i++, (byte) 2);
+			}
 		}
 
-		if (datasetGenVel != null)
+		if (datasetGenVel != null) {
 			relateVelDataset();
+		}
 	}
 
 	/*
 	 * Initializa um grafico do tipo (t,x,y,z,|r|) que e' renderizado num
 	 * JFreeChart e cuja imagem e' enviada como um array de bytes.
 	 */
-	public void initializeGenPosGraph(boolean _x, boolean _y, boolean _z, boolean _rMod, boolean _rMed, boolean _rQuad,
-			boolean _rAbs) {
+	public void initializeGenPosGraph(final boolean _x, final boolean _y, final boolean _z, final boolean _rMod,
+			final boolean _rMed, final boolean _rQuad, final boolean _rAbs) {
 
 		if (!_rMed && !_rQuad && !_rAbs) {
 			datasetGenPos = new XYSeriesCollection();
-			if (_x)
+			if (_x) {
 				((XYSeriesCollection) datasetGenPos).addSeries(new XYSeries("t vs X", false, true));
-			if (_y)
+			}
+			if (_y) {
 				((XYSeriesCollection) datasetGenPos).addSeries(new XYSeries("t vs Y", false, true));
-			if (_z)
+			}
+			if (_z) {
 				((XYSeriesCollection) datasetGenPos).addSeries(new XYSeries("t vs Z", false, true));
-			if (_rMod)
+			}
+			if (_rMod) {
 				((XYSeriesCollection) datasetGenPos).addSeries(new XYSeries("t vs | r |", false, true));
+			}
 		} else if (!_rMed && !_rAbs) {
 			datasetGenPos = new XYSeriesCollection();
-			if (_x)
+			if (_x) {
 				((XYSeriesCollection) datasetGenPos).addSeries(new XYSeries("t vs X^2", false, true));
-			if (_y)
+			}
+			if (_y) {
 				((XYSeriesCollection) datasetGenPos).addSeries(new XYSeries("t vs Y^2", false, true));
-			if (_z)
+			}
+			if (_z) {
 				((XYSeriesCollection) datasetGenPos).addSeries(new XYSeries("t vs Z^2", false, true));
-			if (_rMod)
+			}
+			if (_rMod) {
 				((XYSeriesCollection) datasetGenPos).addSeries(new XYSeries("t vs | r |^2", false, true));
+			}
 		} else if (!_rMed && !_rQuad) {
 			datasetGenPos = new XYSeriesCollection();
-			if (_x)
+			if (_x) {
 				((XYSeriesCollection) datasetGenPos).addSeries(new XYSeries("t vs | X |", false, true));
-			if (_y)
+			}
+			if (_y) {
 				((XYSeriesCollection) datasetGenPos).addSeries(new XYSeries("t vs | Y |", false, true));
-			if (_z)
+			}
+			if (_z) {
 				((XYSeriesCollection) datasetGenPos).addSeries(new XYSeries("t vs | Z |", false, true));
-			if (_rMod)
+			}
+			if (_rMod) {
 				((XYSeriesCollection) datasetGenPos).addSeries(new XYSeries("t vs | r |", false, true));
+			}
 		} else if (!_rAbs && !_rQuad) {
 			int k = 0;
-			if (_x)
+			if (_x) {
 				k++;
-			if (_y)
+			}
+			if (_y) {
 				k++;
-			if (_z)
+			}
+			if (_z) {
 				k++;
-			if (_rMod)
+			}
+			if (_rMod) {
 				k++;
+			}
 			axis[1] = new byte[k][3];
 			int i = 0;
-			if (_x)
+			if (_x) {
 				serieRelateAxis("t vs <X>", i++, (byte) 1);
-			if (_y)
+			}
+			if (_y) {
 				serieRelateAxis("t vs <Y>", i++, (byte) 1);
-			if (_z)
+			}
+			if (_z) {
 				serieRelateAxis("t vs <Z>", i++, (byte) 1);
-			if (_rMod)
+			}
+			if (_rMod) {
 				serieRelateAxis("t vs <| r |>", i++, (byte) 1);
+			}
 		} else if (!_rAbs) {
 			int k = 0;
-			if (_x)
+			if (_x) {
 				k++;
-			if (_y)
+			}
+			if (_y) {
 				k++;
-			if (_z)
+			}
+			if (_z) {
 				k++;
-			if (_rMod)
+			}
+			if (_rMod) {
 				k++;
+			}
 			axis[1] = new byte[k][3];
 			int i = 0;
-			if (_x)
+			if (_x) {
 				serieRelateAxis("t vs <X^2>", i++, (byte) 1);
-			if (_y)
+			}
+			if (_y) {
 				serieRelateAxis("t vs <Y^2>", i++, (byte) 1);
-			if (_z)
+			}
+			if (_z) {
 				serieRelateAxis("t vs <Z^2>", i++, (byte) 1);
-			if (_rMod)
+			}
+			if (_rMod) {
 				serieRelateAxis("t vs <| r |^2>", i++, (byte) 1);
+			}
 		} else if (!_rMed) {
 			datasetGenPos = new XYSeriesCollection();
-			if (_x)
+			if (_x) {
 				((XYSeriesCollection) datasetGenPos).addSeries(new XYSeries("t vs X^2", false, true));
-			if (_y)
+			}
+			if (_y) {
 				((XYSeriesCollection) datasetGenPos).addSeries(new XYSeries("t vs Y^2", false, true));
-			if (_z)
+			}
+			if (_z) {
 				((XYSeriesCollection) datasetGenPos).addSeries(new XYSeries("t vs Z^2", false, true));
-			if (_rMod)
+			}
+			if (_rMod) {
 				((XYSeriesCollection) datasetGenPos).addSeries(new XYSeries("t vs | r |^2", false, true));
+			}
 		} else if (!_rQuad) {
 			int k = 0;
-			if (_x)
+			if (_x) {
 				k++;
-			if (_y)
+			}
+			if (_y) {
 				k++;
-			if (_z)
+			}
+			if (_z) {
 				k++;
-			if (_rMod)
+			}
+			if (_rMod) {
 				k++;
+			}
 			axis[1] = new byte[k][3];
 			int i = 0;
-			if (_x)
+			if (_x) {
 				serieRelateAxis("t vs <| X |>", i++, (byte) 1);
-			if (_y)
+			}
+			if (_y) {
 				serieRelateAxis("t vs <| Y |>", i++, (byte) 1);
-			if (_z)
+			}
+			if (_z) {
 				serieRelateAxis("t vs <| Z |>", i++, (byte) 1);
-			if (_rMod)
+			}
+			if (_rMod) {
 				serieRelateAxis("t vs <| r |>", i++, (byte) 1);
+			}
 		}
 
-		if (datasetGenPos != null)
+		if (datasetGenPos != null) {
 			relatePosDataset();
+		}
 	}
 
 	/*
@@ -478,7 +565,7 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 
 		public void run() {
 			try {
-				sleep(1000);
+				Thread.sleep(1000);
 
 				PhysicsValue[] value;
 
@@ -488,70 +575,82 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 
 				// [ Variavel: x,y,z,... ][ 0 ] [ valor(es) ]
 				// usado so quando nao e' media
-				float[][] data = new float[19][];
+				final float[][] data = new float[19][];
 
 				while (currentSample < nSamples && !stopped) {
 					value = new PhysicsValue[NUM_CHANNELS];
 
-					for (int i = 0; i < axis.length; i++)
-						if (axis[i] != null)
+					for (int i = 0; i < axis.length; i++) {
+						if (axis[i] != null) {
 							for (int j = 0; j < axis[i].length; j++) {
 								if (axis[i][j][0] > 0) {
-									if (axis[i][j][2] == 0) // x ~media
+									if (axis[i][j][2] == 0) {
 										data[axis[i][j][0]] = getValue(axis[i][j], currentSample, 0);
-									else
-										value[axis[i][j][0] - 1] = new PhysicsValue(PhysicsValFactory
-												.fromFloat((float) getValue(axis[i][j], currentSample, 0)[0]),
-												getAcquisitionHeader().getChannelsConfig(axis[i][j][0] - 1)
-														.getSelectedScale().getDefaultErrorValue(),
-												getAcquisitionHeader().getChannelsConfig(axis[i][j][0] - 1)
-														.getSelectedScale().getMultiplier());
+									} else {
+										value[axis[i][j][0] - 1] = new PhysicsValue(
+												PhysicsValFactory.fromFloat((float) getValue(axis[i][j], currentSample,
+														0)[0]), getAcquisitionHeader()
+														.getChannelsConfig(axis[i][j][0] - 1).getSelectedScale()
+														.getDefaultErrorValue(), getAcquisitionHeader()
+														.getChannelsConfig(axis[i][j][0] - 1).getSelectedScale()
+														.getMultiplier());
+									}
 								}
 								if (axis[i][j][1] > 0) {
-									if (axis[i][j][2] == 0) // y ~media
+									if (axis[i][j][2] == 0) {
 										data[axis[i][j][1]] = getValue(axis[i][j], currentSample, 1);
-									else
-										value[axis[i][j][1] - 1] = new PhysicsValue(PhysicsValFactory
-												.fromFloat((float) getValue(axis[i][j], currentSample, 1)[0]),
-												getAcquisitionHeader().getChannelsConfig(axis[i][j][1] - 1)
-														.getSelectedScale().getDefaultErrorValue(),
-												getAcquisitionHeader().getChannelsConfig(axis[i][j][1] - 1)
-														.getSelectedScale().getMultiplier());
+									} else {
+										value[axis[i][j][1] - 1] = new PhysicsValue(
+												PhysicsValFactory.fromFloat((float) getValue(axis[i][j], currentSample,
+														1)[0]), getAcquisitionHeader()
+														.getChannelsConfig(axis[i][j][1] - 1).getSelectedScale()
+														.getDefaultErrorValue(), getAcquisitionHeader()
+														.getChannelsConfig(axis[i][j][1] - 1).getSelectedScale()
+														.getMultiplier());
+									}
 								}
 							}
+						}
+					}
 
 					// ~MEDIA - preencher serie
-					if (datasets != null)
-						for (int i = 0; i < datasets.length; i++)
-							appendValueToSerie(datasets[i], data[Math.abs(axis[0][i][0])],
+					if (datasets != null) {
+						for (int i = 0; i < datasets.length; i++) {
+							MvBrownDataProducer.appendValueToSerie(datasets[i], data[Math.abs(axis[0][i][0])],
 									data[Math.abs(axis[0][i][1])]);
+						}
+					}
 					// ~MEDIA - preencher serie
-					if (datasetGenPos != null)
-						for (int i = 0; i < datasetGenPos.getSeriesCount(); i++)
-							appendValueToSerie(((XYSeriesCollection) datasetGenPos).getSeries(i), data[Math
-									.abs(axis[1][i][0])], data[Math.abs(axis[1][i][1])]);
+					if (datasetGenPos != null) {
+						for (int i = 0; i < datasetGenPos.getSeriesCount(); i++) {
+							MvBrownDataProducer.appendValueToSerie(((XYSeriesCollection) datasetGenPos).getSeries(i),
+									data[Math.abs(axis[1][i][0])], data[Math.abs(axis[1][i][1])]);
+						}
+					}
 					// ~MEDIA - preencher serie
-					if (datasetGenVel != null)
-						for (int i = 0; i < datasetGenVel.getSeriesCount(); i++)
-							appendValueToSerie(((XYSeriesCollection) datasetGenVel).getSeries(i), data[Math
-									.abs(axis[2][i][0])], data[Math.abs(axis[2][i][1])]);
+					if (datasetGenVel != null) {
+						for (int i = 0; i < datasetGenVel.getSeriesCount(); i++) {
+							MvBrownDataProducer.appendValueToSerie(((XYSeriesCollection) datasetGenVel).getSeries(i),
+									data[Math.abs(axis[2][i][0])], data[Math.abs(axis[2][i][1])]);
+						}
+					}
 
 					if (anima) {
 
 						if (execDim == 2) {
-							float[] f = new float[numPart * 2];
+							final float[] f = new float[numPart * 2];
 
 							for (int i = 0; i < numPart; i++) {
 								f[i] = (float) state[i][0];
 								f[i + 1] = (float) state[i][2];
 							}
 
-							byte[] b = pt.utl.ist.elab.driver.virtual.utils.ByteUtil.floatArrayToByteArray(f);
+							final byte[] b = pt.utl.ist.elab.driver.virtual.utils.ByteUtil.floatArrayToByteArray(f);
 
 							value[0] = new PhysicsValue(PhysicsValFactory.fromByteArray(b, "data/raw"), null,
 									com.linkare.rec.data.Multiplier.none);
 						} else if (execDim == 3) {
-							float[] f = new float[numPart * 3];
+							final float[] f = new float[numPart * 3];
 
 							for (int i = 0; i < numPart; i++) {
 								f[i] = (float) state[i][0];
@@ -559,20 +658,21 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 								f[i + 2] = (float) state[i][4];
 							}
 
-							byte[] b = pt.utl.ist.elab.driver.virtual.utils.ByteUtil.floatArrayToByteArray(f);
+							final byte[] b = pt.utl.ist.elab.driver.virtual.utils.ByteUtil.floatArrayToByteArray(f);
 							value[0] = new PhysicsValue(PhysicsValFactory.fromByteArray(b, "data/raw"), null,
 									com.linkare.rec.data.Multiplier.none);
 						} else {
-							float[] f = new float[numPart];
+							final float[] f = new float[numPart];
 
-							for (int i = 0; i < numPart; i++)
+							for (int i = 0; i < numPart; i++) {
 								f[i] = (float) state[i][0];
+							}
 
-							byte[] b = pt.utl.ist.elab.driver.virtual.utils.ByteUtil.floatArrayToByteArray(f);
+							final byte[] b = pt.utl.ist.elab.driver.virtual.utils.ByteUtil.floatArrayToByteArray(f);
 							value[0] = new PhysicsValue(PhysicsValFactory.fromByteArray(b, "data/raw"), null,
 									com.linkare.rec.data.Multiplier.none);
 						}
-						sleep(tbs);
+						Thread.sleep(tbs);
 					}
 					addDataRow(value);
 					currentSample++;
@@ -587,21 +687,25 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 				// ENVIAR Graficos 2 vars [~Media]
 				if (datasets != null) {
 					int o = datasets.length;
-					for (int i = 0; i < graphMed.length; i++)
-						if (!graphMed[i])
+					for (int i = 0; i < graphMed.length; i++) {
+						if (!graphMed[i]) {
 							value[18 + i] = new PhysicsValue(PhysicsValFactory.fromByteArray(
 									graphImageBytes(datasets[--o]), "data/raw"), null,
 									com.linkare.rec.data.Multiplier.none);
+						}
+					}
 				}
 				// ENVIAR Grafico da posicao [~Media]
-				if (datasetGenPos != null)
+				if (datasetGenPos != null) {
 					value[22] = new PhysicsValue(PhysicsValFactory.fromByteArray(graphImageBytes(datasetGenPos),
 							"data/raw"), null, com.linkare.rec.data.Multiplier.none);
+				}
 
 				// ENVIAR Grafico da velocidade [~Media]
-				if (datasetGenVel != null)
+				if (datasetGenVel != null) {
 					value[23] = new PhysicsValue(PhysicsValFactory.fromByteArray(graphImageBytes(datasetGenVel),
 							"data/raw"), null, com.linkare.rec.data.Multiplier.none);
+				}
 
 				addDataRow(value);
 
@@ -609,7 +713,7 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 				endProduction();
 
 				driver.stopVirtualHardware();
-			} catch (InterruptedException ie) {
+			} catch (final InterruptedException ie) {
 			}
 		}
 	}
@@ -633,10 +737,11 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 	 * Avanca todas as particulas numericamente
 	 */
 	public void stepNumerico() {
-		if (!langevin)
+		if (!langevin) {
 			stepRandomSimul();
-		else
+		} else {
 			stepLangevin();
+		}
 	}
 
 	/*
@@ -650,7 +755,7 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 	}
 
 	/*************************************************************
-	 *------------------------------------------------------------ MODELO
+	 * ------------------------------------------------------------ MODELO
 	 * ALEATORIO ------------------------------------------------------------
 	 *************************************************************/
 
@@ -659,16 +764,17 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 	 * com as definicoes dos argumentos: _d = modulo do incremento posicional ;
 	 * _dim = dimensoes ; _seed = mesmo conjunto de aleatorios.
 	 */
-	public void initializeRandomSimul(double _d, boolean _seed) {
+	public void initializeRandomSimul(final double _d, final boolean _seed) {
 		// resetState();
 		d = _d;
 		langevin = false;
 
-		if (_seed) // Modo Aleatorio com correlacao
+		if (_seed) {
 			rand.setSeed(seed);
-		else
+		} else {
 			// Modo aleatorio sem correlacao
 			rand.setSeed((long) (Math.random() * Long.MAX_VALUE));
+		}
 
 		if (execDim == 3) {
 			eulerTransf = new javax.media.j3d.Transform3D();
@@ -684,10 +790,10 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 		for (int i = 0; i < numPart; i++) {
 
 			if (execDim == 1 || execDim == 0) {
-				double angTheta = randomize();
+				final double angTheta = randomize();
 				state[i][0] += d * Math.cos(angTheta) / Math.abs(Math.cos(angTheta));
 			} else if (execDim == 2) {
-				double angTheta = randomize();
+				final double angTheta = randomize();
 				state[i][0] += d * Math.cos(angTheta);
 				state[i][2] += d * Math.sin(angTheta);
 			} else {
@@ -703,7 +809,7 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 	}
 
 	/*************************************************************
-	 *------------------------------------------------------------ MODELO DE
+	 * ------------------------------------------------------------ MODELO DE
 	 * LANGEVIN ------------------------------------------------------------
 	 *************************************************************/
 
@@ -715,8 +821,8 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 	 * _randForce[1] = frequencia de colisao ; [] _velcInit = velocidade inicial
 	 * X , Y, Z ; _dim = dimensoes ; _seed = mesmo conjunto de aleatorios.
 	 */
-	public void initializeLangevin(double _massa, double[] _atrito, double[] _randForce, double[] _velcInit,
-			boolean _seed) {
+	public void initializeLangevin(final double _massa, final double[] _atrito, final double[] _randForce,
+			final double[] _velcInit, final boolean _seed) {
 		// resetState();
 		massa = _massa;
 		a = _atrito[0];
@@ -725,11 +831,12 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 		freqColisao = _randForce[1];
 		langevin = true;
 
-		if (_seed) // Modo Aleatorio com correlacao
+		if (_seed) {
 			rand.setSeed(seed);
-		else
+		} else {
 			// Modo aleatorio sem correlacao
 			rand.setSeed((long) (Math.random() * Long.MAX_VALUE));
+		}
 
 		if (execDim == 3) {
 			eulerTransf = new javax.media.j3d.Transform3D();
@@ -761,10 +868,10 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 		for (int i = 0; i < numPart; i++) {
 
 			if (execDim == 1 || execDim == 0) {
-				double angTheta = randomize();
+				final double angTheta = randomize();
 				state[i][1] += dPRandForce * Math.cos(angTheta) / (Math.abs(Math.cos(angTheta)) * massa);
 			} else if (execDim == 2) {
-				double angTheta = randomize();
+				final double angTheta = randomize();
 				state[i][1] += dPRandForce * Math.cos(angTheta) / massa;
 				state[i][3] += dPRandForce * Math.sin(angTheta) / massa;
 			} else {
@@ -783,8 +890,8 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 	 * Actualiza o estado do sistema apos a aplicao duma forca de atrito durante
 	 * um intervalo de tempo _dt
 	 */
-	private void atrito(double _dt) {
-		double alpha = 6 * Math.PI * a * visco / massa;
+	private void atrito(final double _dt) {
+		final double alpha = 6 * Math.PI * a * visco / massa;
 
 		for (int i = 0; i < numPart; i++) {
 
@@ -809,81 +916,86 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 	}
 
 	/*************************************************************
-	 *------------------------------------------------------------ GRAFICOS
+	 * ------------------------------------------------------------ GRAFICOS
 	 * ------------------------------------------------------------
 	 *************************************************************/
 	// Graficos de 2 vars
-	private byte[] graphImageBytes(XYSeries serie) {
+	private byte[] graphImageBytes(final XYSeries serie) {
 
-		String labels[] = serie.getDescription().split(" vs ");
+		final String labels[] = serie.getDescription().split(" vs ");
 
 		JFreeChart tmpChart;
-		if (conPts)
+		if (conPts) {
 			tmpChart = ChartFactory.createXYLineChart(serie.getDescription(), labels[0], labels[1],
 					new XYSeriesCollection(serie), PlotOrientation.VERTICAL, true, true, true);
-		else
+		} else {
 			tmpChart = ChartFactory.createScatterPlot(serie.getDescription(), labels[0], labels[1],
 					new XYSeriesCollection(serie), PlotOrientation.VERTICAL, true, true, true);
+		}
 
-		BufferedImage tempImg = ((JFreeChart) tmpChart)
-				.createBufferedImage(w, h, BufferedImage.TYPE_BYTE_INDEXED, null);
+		final BufferedImage tempImg = ((JFreeChart) tmpChart).createBufferedImage(w, h,
+				BufferedImage.TYPE_BYTE_INDEXED, null);
 
-		PixelGrabber pg = new PixelGrabber(tempImg, 0, 0, tempImg.getWidth(), tempImg.getHeight(), false);
+		final PixelGrabber pg = new PixelGrabber(tempImg, 0, 0, tempImg.getWidth(), tempImg.getHeight(), false);
 
 		try {
 			pg.grabPixels();
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 		}
 
 		return (byte[]) pg.getPixels();
 	}
 
 	// Graficos de varias vars
-	private byte[] graphImageBytes(IntervalXYDataset serCol) {
+	private byte[] graphImageBytes(final IntervalXYDataset serCol) {
 
-		String label = "t";
+		final String label = "t";
 
 		JFreeChart tmpChart;
-		if (conPts)
+		if (conPts) {
 			tmpChart = ChartFactory.createXYLineChart("General Chart", label, "", serCol, PlotOrientation.VERTICAL,
 					true, true, true);
-		else
+		} else {
 			tmpChart = ChartFactory.createScatterPlot("General Chart", label, "", serCol, PlotOrientation.VERTICAL,
 					true, true, true);
+		}
 
-		BufferedImage tempImg = ((JFreeChart) tmpChart)
-				.createBufferedImage(w, h, BufferedImage.TYPE_BYTE_INDEXED, null);
+		final BufferedImage tempImg = ((JFreeChart) tmpChart).createBufferedImage(w, h,
+				BufferedImage.TYPE_BYTE_INDEXED, null);
 
-		PixelGrabber pg = new PixelGrabber(tempImg, 0, 0, tempImg.getWidth(), tempImg.getHeight(), false);
+		final PixelGrabber pg = new PixelGrabber(tempImg, 0, 0, tempImg.getWidth(), tempImg.getHeight(), false);
 
 		try {
 			pg.grabPixels();
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 		}
 
 		return (byte[]) pg.getPixels();
 	}
 
 	private void relateDataset() {
-		for (int i = 0; i < datasets.length; i++)
+		for (int i = 0; i < datasets.length; i++) {
 			serieRelateAxis(datasets[i].getDescription(), i, (byte) 0);
+		}
 	}
 
 	private void relatePosDataset() {
 		axis[1] = new byte[datasetGenPos.getSeriesCount()][3];
-		for (int i = 0; i < datasetGenPos.getSeriesCount(); i++)
+		for (int i = 0; i < datasetGenPos.getSeriesCount(); i++) {
 			serieRelateAxis(((XYSeriesCollection) datasetGenPos).getSeries(i).getDescription(), i, (byte) 1);
+		}
 	}
 
 	private void relateVelDataset() {
 		axis[2] = new byte[datasetGenVel.getSeriesCount()][3];
-		for (int i = 0; i < datasetGenVel.getSeriesCount(); i++)
+		for (int i = 0; i < datasetGenVel.getSeriesCount(); i++) {
 			serieRelateAxis(((XYSeriesCollection) datasetGenVel).getSeries(i).getDescription(), i, (byte) 2);
+		}
 	}
 
 	// 3-> 3 tipos de graficos, 0 : graficos 2 vars, 1 : grafico da posicao, 2 :
 	// grafico da velocidade
-	private byte[][][] axis = new byte[3][][];
+	private final byte[][][] axis = new byte[3][][];
 
 	/*
 	 * byte[ind][k][3], 3 -> (x,y,isMedia)
@@ -895,8 +1007,8 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 	 * 
 	 * @param name nome do grafico do tipo: x vs y
 	 */
-	private void serieRelateAxis(String name, int k, byte ind) {
-		String[] str = name.split(" vs ");
+	private void serieRelateAxis(final String name, final int k, final byte ind) {
+		final String[] str = name.split(" vs ");
 		axis[ind][k][2] = 0;
 		if (str[0].indexOf("<") != -1) {
 			axis[ind][k][2] = 1;
@@ -908,59 +1020,66 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 		}
 
 		for (int i = 0; i < 2; i++) {
-			if (str[i].equalsIgnoreCase("X"))
+			if (str[i].equalsIgnoreCase("X")) {
 				axis[ind][k][i] = 2;// 0;
-			if (str[i].equalsIgnoreCase("Y"))
+			}
+			if (str[i].equalsIgnoreCase("Y")) {
 				axis[ind][k][i] = 4;// 2;
-			if (str[i].equalsIgnoreCase("Z"))
+			}
+			if (str[i].equalsIgnoreCase("Z")) {
 				axis[ind][k][i] = 6;// 4;
-			else if (str[i].equalsIgnoreCase("X^2"))
+			} else if (str[i].equalsIgnoreCase("X^2")) {
 				axis[ind][k][i] = 8;// 6;
-			else if (str[i].equalsIgnoreCase("Y^2"))
+			} else if (str[i].equalsIgnoreCase("Y^2")) {
 				axis[ind][k][i] = 10;// 8;
-			else if (str[i].equalsIgnoreCase("Z^2"))
+			} else if (str[i].equalsIgnoreCase("Z^2")) {
 				axis[ind][k][i] = 12;// 10;
-			else if (str[i].equalsIgnoreCase("| r |^2"))
+			} else if (str[i].equalsIgnoreCase("| r |^2")) {
 				axis[ind][k][i] = 14;// 12;
-			else if (str[i].equalsIgnoreCase("Vx"))
+			} else if (str[i].equalsIgnoreCase("Vx")) {
 				axis[ind][k][i] = 3;// 1;
-			else if (str[i].equalsIgnoreCase("Vy"))
+			} else if (str[i].equalsIgnoreCase("Vy")) {
 				axis[ind][k][i] = 5;// 3;
-			else if (str[i].equalsIgnoreCase("Vz"))
+			} else if (str[i].equalsIgnoreCase("Vz")) {
 				axis[ind][k][i] = 7;// 5;
-			else if (str[i].equalsIgnoreCase("Vx^2"))
+			} else if (str[i].equalsIgnoreCase("Vx^2")) {
 				axis[ind][k][i] = 9;// 7;
-			else if (str[i].equalsIgnoreCase("Vy^2"))
+			} else if (str[i].equalsIgnoreCase("Vy^2")) {
 				axis[ind][k][i] = 11;// 9;
-			else if (str[i].equalsIgnoreCase("Vz^2"))
+			} else if (str[i].equalsIgnoreCase("Vz^2")) {
 				axis[ind][k][i] = 13;// 11;
-			else if (str[i].equalsIgnoreCase("| v |^2"))
+			} else if (str[i].equalsIgnoreCase("| v |^2")) {
 				axis[ind][k][i] = 15;// 13;
-			else if (str[i].equalsIgnoreCase("t"))
+			} else if (str[i].equalsIgnoreCase("t")) {
 				axis[ind][k][i] = 18;// 16;
-			else if (str[i].equalsIgnoreCase("| r |"))
+			} else if (str[i].equalsIgnoreCase("| r |")) {
 				axis[ind][k][i] = 16;// 14;
-			else if (str[i].equalsIgnoreCase("| v |"))
+			} else if (str[i].equalsIgnoreCase("| v |")) {
 				axis[ind][k][i] = 17;// 15;
+			}
 
-			detectRepetition(axis, ind, k, i);
+			MvBrownDataProducer.detectRepetition(axis, ind, k, i);
 		}
 	}
 
-	private static void detectRepetition(byte[][][] axis, byte ind, int k, int i) {
-		for (int j = 0; j <= ind; j++)
-			for (int l = 0; l < axis[j].length; l++)
-				for (int q = 0; q < 2; q++)
+	private static void detectRepetition(final byte[][][] axis, final byte ind, final int k, final int i) {
+		for (int j = 0; j <= ind; j++) {
+			for (int l = 0; l < axis[j].length; l++) {
+				for (int q = 0; q < 2; q++) {
 					if (axis[j][l][2] == axis[ind][k][2] && axis[j][l][q] == axis[ind][k][i]
 							&& (j != ind || l != k || q != i)) {
 						axis[ind][k][i] *= -1; // identifica repeticoes
 						return;
 					}
+				}
+			}
+		}
 	}
 
-	public static void appendValueToSerie(XYSeries serie, float[] fx, float[] fy) {
-		for (int i = 0; i < fx.length; i++)
+	public static void appendValueToSerie(final XYSeries serie, final float[] fx, final float[] fy) {
+		for (int i = 0; i < fx.length; i++) {
 			serie.add(fx[i], fy[i]);
+		}
 	}
 
 	/*
@@ -1097,10 +1216,10 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 	 * .pow(state[i][1],2)+Math.pow(state[i][3],2)+Math.pow(state[i][5],2)); } }
 	 * f[i][0] = (float)x; f[i][1] = (float)y; } return f; } }
 	 */
-	private float[] getValue(byte[] _axis, int _currentSample, int ind) {
+	private float[] getValue(final byte[] _axis, final int _currentSample, final int ind) {
 		if (_axis[2] == 1) {
 			double x = 0;
-			double y = 0;
+			final double y = 0;
 			for (int i = 0; i < numPart; i++) {
 				if (_axis[ind] < 8) {
 					x += state[i][_axis[ind] - 2];
@@ -1127,55 +1246,62 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 			}
 			return new float[] { (float) (x / numPart) };
 		} else {
-			float[] f = new float[numPart];
+			final float[] f = new float[numPart];
 			double x = 0;
-			double y = 0;
+			final double y = 0;
 			for (int i = 0; i < numPart; i++) {
 				if (_axis[ind] < 8) {
-					if (_axis[2] == 1)
+					if (_axis[2] == 1) {
 						x += state[i][_axis[ind] - 2];
-					else
+					} else {
 						x = state[i][_axis[ind] - 2];
+					}
 				} else if (_axis[ind] < 14) {
-					if (_axis[2] == 1)
+					if (_axis[2] == 1) {
 						x += Math.pow(state[i][_axis[ind] - 8], 2);
-					else
+					} else {
 						x = Math.pow(state[i][_axis[ind] - 8], 2);
+					}
 				} else {
 					switch (_axis[ind]) {
 					case 14:
-						if (_axis[2] == 1)
+						if (_axis[2] == 1) {
 							x += Math.pow(state[i][0], 2) + Math.pow(state[i][2], 2) + Math.pow(state[i][4], 2);
-						else
+						} else {
 							x = Math.pow(state[i][0], 2) + Math.pow(state[i][2], 2) + Math.pow(state[i][4], 2);
+						}
 						break;
 					case 16:
-						if (_axis[2] == 1)
+						if (_axis[2] == 1) {
 							x += Math.sqrt(Math.pow(state[i][0], 2) + Math.pow(state[i][2], 2)
 									+ Math.pow(state[i][4], 2));
-						else
+						} else {
 							x = Math.sqrt(Math.pow(state[i][0], 2) + Math.pow(state[i][2], 2)
 									+ Math.pow(state[i][4], 2));
+						}
 						break;
 					case 18:
-						if (_axis[2] == 1)
+						if (_axis[2] == 1) {
 							x += _currentSample + 1;
-						else
+						} else {
 							x = _currentSample + 1;
+						}
 						break;
 					case 15:
-						if (_axis[2] == 1)
+						if (_axis[2] == 1) {
 							x += Math.pow(state[i][1], 2) + Math.pow(state[i][3], 2) + Math.pow(state[i][5], 2);
-						else
+						} else {
 							x = Math.pow(state[i][1], 2) + Math.pow(state[i][3], 2) + Math.pow(state[i][5], 2);
+						}
 						break;
 					case 17:
-						if (_axis[2] == 1)
+						if (_axis[2] == 1) {
 							x += Math.sqrt(Math.pow(state[i][1], 2) + Math.pow(state[i][3], 2)
 									+ Math.pow(state[i][5], 2));
-						else
+						} else {
 							x = Math.sqrt(Math.pow(state[i][1], 2) + Math.pow(state[i][3], 2)
 									+ Math.pow(state[i][5], 2));
+						}
 					}
 				}
 

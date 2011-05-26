@@ -11,19 +11,22 @@ public final class VTLongHolder implements Streamable {
 	public VTLongHolder() {
 	}
 
-	public VTLongHolder(int initialValue) {
+	public VTLongHolder(final int initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(InputStream i) {
+	@Override
+	public void _read(final InputStream i) {
 		value = VTLongHelper.read(i).getValue();
 	}
 
-	public void _write(OutputStream o) {
-		VTLong vb = new VTLong(value);
+	@Override
+	public void _write(final OutputStream o) {
+		final VTLong vb = new VTLong(value);
 		VTLongHelper.write(o, vb);
 	}
 
+	@Override
 	public TypeCode _type() {
 		return VTLongHelper.type();
 	}

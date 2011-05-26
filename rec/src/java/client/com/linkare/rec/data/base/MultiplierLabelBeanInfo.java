@@ -18,12 +18,12 @@ public class MultiplierLabelBeanInfo extends SimpleBeanInfo
 			com.linkare.customizer.DefaultPropertySheetCustomizer.class);
 
 	private static BeanDescriptor getBdescriptor() {
-		return beanDescriptor;
+		return MultiplierLabelBeanInfo.beanDescriptor;
 	}
 
 	static {
-		beanDescriptor.setDisplayName("LblMultiplier");
-		beanDescriptor.setShortDescription("Uma label para multipliers");// GEN-HEADEREND:BeanDescriptor
+		MultiplierLabelBeanInfo.beanDescriptor.setDisplayName("LblMultiplier");
+		MultiplierLabelBeanInfo.beanDescriptor.setShortDescription("Uma label para multipliers");// GEN-HEADEREND:BeanDescriptor
 
 		// Here you can add code for customizing the BeanDescriptor.
 
@@ -37,20 +37,23 @@ public class MultiplierLabelBeanInfo extends SimpleBeanInfo
 	private static PropertyDescriptor[] properties = new PropertyDescriptor[2];
 
 	private static PropertyDescriptor[] getPdescriptor() {
-		return properties;
+		return MultiplierLabelBeanInfo.properties;
 	}
 
 	static {
 		try {
-			properties[PROPERTY_multiplier] = new PropertyDescriptor("multiplier", MultiplierLabel.class,
-					"getMultiplier", "setMultiplier");
-			properties[PROPERTY_multiplier].setPreferred(true);
-			properties[PROPERTY_multiplier].setDisplayName("Multiplicador");
-			properties[PROPERTY_multiplier].setPropertyEditorClass(com.linkare.rec.data.MultiplierEditor.class);
-			properties[PROPERTY_text] = new PropertyDescriptor("text", MultiplierLabel.class, "getText", null);
-			properties[PROPERTY_text].setHidden(true);
-			properties[PROPERTY_text].setPropertyEditorClass(null);
-		} catch (IntrospectionException e) {
+			MultiplierLabelBeanInfo.properties[MultiplierLabelBeanInfo.PROPERTY_multiplier] = new PropertyDescriptor(
+					"multiplier", MultiplierLabel.class, "getMultiplier", "setMultiplier");
+			MultiplierLabelBeanInfo.properties[MultiplierLabelBeanInfo.PROPERTY_multiplier].setPreferred(true);
+			MultiplierLabelBeanInfo.properties[MultiplierLabelBeanInfo.PROPERTY_multiplier]
+					.setDisplayName("Multiplicador");
+			MultiplierLabelBeanInfo.properties[MultiplierLabelBeanInfo.PROPERTY_multiplier]
+					.setPropertyEditorClass(com.linkare.rec.data.MultiplierEditor.class);
+			MultiplierLabelBeanInfo.properties[MultiplierLabelBeanInfo.PROPERTY_text] = new PropertyDescriptor("text",
+					MultiplierLabel.class, "getText", null);
+			MultiplierLabelBeanInfo.properties[MultiplierLabelBeanInfo.PROPERTY_text].setHidden(true);
+			MultiplierLabelBeanInfo.properties[MultiplierLabelBeanInfo.PROPERTY_text].setPropertyEditorClass(null);
+		} catch (final IntrospectionException e) {
 		}// GEN-HEADEREND:Properties
 
 		// Here you can add code for customizing the properties array.
@@ -65,7 +68,7 @@ public class MultiplierLabelBeanInfo extends SimpleBeanInfo
 
 		// Here you can add code for customizing the event sets array.
 
-		return eventSets;
+		return MultiplierLabelBeanInfo.eventSets;
 	} // GEN-LAST:Events
 
 	// Method information will be obtained from
@@ -76,7 +79,7 @@ public class MultiplierLabelBeanInfo extends SimpleBeanInfo
 
 		// Here you can add code for customizing the methods array.
 
-		return methods;
+		return MultiplierLabelBeanInfo.methods;
 	} // GEN-LAST:Methods
 
 	private static java.awt.Image iconColor16 = null; // GEN-BEGIN:IconsDef
@@ -95,15 +98,16 @@ public class MultiplierLabelBeanInfo extends SimpleBeanInfo
 	private static final int defaultPropertyIndex = -1;// GEN-BEGIN:Idx
 	private static final int defaultEventIndex = -1;// GEN-END:Idx
 
+	@Override
 	public BeanInfo[] getAdditionalBeanInfo() {// GEN-FIRST:Superclass
-		Class superclass = MultiplierLabel.class.getSuperclass();
+		final Class<?> superclass = MultiplierLabel.class.getSuperclass();
 		BeanInfo sbi = null;
 		try {
 			sbi = Introspector.getBeanInfo(superclass);// GEN-HEADEREND:Superclass
 
 			// Here you can add code for customizing the Superclass BeanInfo.
 
-		} catch (IntrospectionException ex) {
+		} catch (final IntrospectionException ex) {
 		}
 		return new BeanInfo[] { sbi };
 	}// GEN-LAST:Superclass
@@ -121,11 +125,12 @@ public class MultiplierLabelBeanInfo extends SimpleBeanInfo
 	 *         information should be obtained by automatic analysis.
 	 */
 
+	@Override
 	public BeanDescriptor getBeanDescriptor()
 
 	{
 
-		return getBdescriptor();
+		return MultiplierLabelBeanInfo.getBdescriptor();
 
 	}
 
@@ -153,11 +158,12 @@ public class MultiplierLabelBeanInfo extends SimpleBeanInfo
 	 *         if a given PropertyDescriptor is an IndexedPropertyDescriptor.
 	 */
 
+	@Override
 	public PropertyDescriptor[] getPropertyDescriptors()
 
 	{
 
-		return getPdescriptor();
+		return MultiplierLabelBeanInfo.getPdescriptor();
 
 	}
 
@@ -174,11 +180,12 @@ public class MultiplierLabelBeanInfo extends SimpleBeanInfo
 	 *         should be obtained by automatic analysis.
 	 */
 
+	@Override
 	public EventSetDescriptor[] getEventSetDescriptors()
 
 	{
 
-		return getEdescriptor();
+		return MultiplierLabelBeanInfo.getEdescriptor();
 
 	}
 
@@ -195,11 +202,12 @@ public class MultiplierLabelBeanInfo extends SimpleBeanInfo
 	 *         should be obtained by automatic analysis.
 	 */
 
+	@Override
 	public MethodDescriptor[] getMethodDescriptors()
 
 	{
 
-		return getMdescriptor();
+		return MultiplierLabelBeanInfo.getMdescriptor();
 
 	}
 
@@ -219,11 +227,12 @@ public class MultiplierLabelBeanInfo extends SimpleBeanInfo
 	 *         Returns -1 if there is no default property.
 	 */
 
+	@Override
 	public int getDefaultPropertyIndex()
 
 	{
 
-		return defaultPropertyIndex;
+		return MultiplierLabelBeanInfo.defaultPropertyIndex;
 
 	}
 
@@ -241,11 +250,12 @@ public class MultiplierLabelBeanInfo extends SimpleBeanInfo
 	 *         Returns -1 if there is no default event.
 	 */
 
+	@Override
 	public int getDefaultEventIndex()
 
 	{
 
-		return defaultEventIndex;
+		return MultiplierLabelBeanInfo.defaultEventIndex;
 
 	}
 
@@ -290,7 +300,8 @@ public class MultiplierLabelBeanInfo extends SimpleBeanInfo
 	 *         return null if no suitable icon is available.
 	 */
 
-	public java.awt.Image getIcon(int iconKind)
+	@Override
+	public java.awt.Image getIcon(final int iconKind)
 
 	{
 
@@ -300,73 +311,65 @@ public class MultiplierLabelBeanInfo extends SimpleBeanInfo
 
 		case ICON_COLOR_16x16:
 
-			if (iconNameC16 == null)
-
+			if (MultiplierLabelBeanInfo.iconNameC16 == null) {
 				return null;
-
-			else
+			} else
 
 			{
 
-				if (iconColor16 == null)
+				if (MultiplierLabelBeanInfo.iconColor16 == null) {
+					MultiplierLabelBeanInfo.iconColor16 = loadImage(MultiplierLabelBeanInfo.iconNameC16);
+				}
 
-					iconColor16 = loadImage(iconNameC16);
-
-				return iconColor16;
+				return MultiplierLabelBeanInfo.iconColor16;
 
 			}
 
 		case ICON_COLOR_32x32:
 
-			if (iconNameC32 == null)
-
+			if (MultiplierLabelBeanInfo.iconNameC32 == null) {
 				return null;
-
-			else
+			} else
 
 			{
 
-				if (iconColor32 == null)
+				if (MultiplierLabelBeanInfo.iconColor32 == null) {
+					MultiplierLabelBeanInfo.iconColor32 = loadImage(MultiplierLabelBeanInfo.iconNameC32);
+				}
 
-					iconColor32 = loadImage(iconNameC32);
-
-				return iconColor32;
+				return MultiplierLabelBeanInfo.iconColor32;
 
 			}
 
 		case ICON_MONO_16x16:
 
-			if (iconNameM16 == null)
-
+			if (MultiplierLabelBeanInfo.iconNameM16 == null) {
 				return null;
-
-			else
+			} else
 
 			{
 
-				if (iconMono16 == null)
+				if (MultiplierLabelBeanInfo.iconMono16 == null) {
+					MultiplierLabelBeanInfo.iconMono16 = loadImage(MultiplierLabelBeanInfo.iconNameM16);
+				}
 
-					iconMono16 = loadImage(iconNameM16);
-
-				return iconMono16;
+				return MultiplierLabelBeanInfo.iconMono16;
 
 			}
 
 		case ICON_MONO_32x32:
 
-			if (iconNameM32 == null)
-
+			if (MultiplierLabelBeanInfo.iconNameM32 == null) {
 				return null;
-
-			else
+			} else
 
 			{
 
-				if (iconMono32 == null)
+				if (MultiplierLabelBeanInfo.iconMono32 == null) {
+					MultiplierLabelBeanInfo.iconMono32 = loadImage(MultiplierLabelBeanInfo.iconNameM32);
+				}
 
-					iconMono32 = loadImage(iconNameM32);
-
-				return iconMono32;
+				return MultiplierLabelBeanInfo.iconMono32;
 
 			}
 

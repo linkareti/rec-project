@@ -17,8 +17,7 @@ import javax.swing.WindowConstants;
  * <p>
  * All common dialogs must be launched using <code>DefaultDialog</code>.
  * 
- * @param <C>
- *            The dialog content type.
+ * @param <C> The dialog content type.
  * 
  * @author Henrique Fernandes
  */
@@ -28,11 +27,11 @@ public class DefaultDialog<C extends AbstractContentPane> extends JDialog {
 
 	protected C content;
 
-	public DefaultDialog(C content) {
+	public DefaultDialog(final C content) {
 		this(null, "", content);
 	}
 
-	public DefaultDialog(Window owner, String title, C content) {
+	public DefaultDialog(final Window owner, final String title, final C content) {
 		super(owner, title);
 		this.content = content;
 		this.content.setContainer(this);
@@ -44,7 +43,7 @@ public class DefaultDialog<C extends AbstractContentPane> extends JDialog {
 		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		setModal(true);
 	}
-	
+
 	/**
 	 * @return the dialog content.
 	 */

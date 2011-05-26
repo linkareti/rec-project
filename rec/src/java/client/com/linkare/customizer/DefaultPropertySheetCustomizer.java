@@ -43,14 +43,15 @@ public class DefaultPropertySheetCustomizer extends JPanel implements Customizer
 		propertyObjectTableModel = new com.linkare.customizer.PropertyObjectTableModel();
 		jScrollPane1 = new javax.swing.JScrollPane();
 		tblProperty = new JTable(propertyObjectTableModel);
-		TableColumn columnProperty = tblProperty.getColumnModel().getColumn(1);
+		final TableColumn columnProperty = tblProperty.getColumnModel().getColumn(1);
 		columnProperty.setCellEditor(new PropertyObjectTableCellEditor());
 		columnProperty.setCellRenderer(new PropertyObjectTableCellRenderer());
 		tblProperty.getTableHeader().getColumnModel().getColumn(0).setPreferredWidth(150);
 		tblProperty.getTableHeader().getColumnModel().getColumn(1).setPreferredWidth(250);
 
 		propertyObjectTableModel.addTableModelListener(new javax.swing.event.TableModelListener() {
-			public void tableChanged(javax.swing.event.TableModelEvent evt) {
+			@Override
+			public void tableChanged(final javax.swing.event.TableModelEvent evt) {
 				propertyObjectTableModelTableChanged(evt);
 			}
 		});
@@ -67,42 +68,44 @@ public class DefaultPropertySheetCustomizer extends JPanel implements Customizer
 
 	}// GEN-END:initComponents
 
-	private void propertyObjectTableModelTableChanged(javax.swing.event.TableModelEvent evt)// GEN-FIRST:event_propertyObjectTableModelTableChanged
+	private void propertyObjectTableModelTableChanged(final javax.swing.event.TableModelEvent evt)// GEN-FIRST:event_propertyObjectTableModelTableChanged
 	{// GEN-HEADEREND:event_propertyObjectTableModelTableChanged
 
-		if (updating)
+		if (updating) {
 			return;
+		}
 
 		if (evt.getType() == TableModelEvent.UPDATE) {
-			TableModel model = tblProperty.getModel();
-			int startRow = evt.getFirstRow();
-			int endRow = evt.getLastRow();
+			final TableModel model = tblProperty.getModel();
+			final int startRow = evt.getFirstRow();
+			final int endRow = evt.getLastRow();
 			BeanInfo bi = null;
 			try {
 				bi = Introspector.getBeanInfo(object.getClass());
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				return;
 			}
 
-			Hashtable<String, PropertyDescriptor> pds = createHashPropertyDesc(bi.getPropertyDescriptors());
+			final Hashtable<String, PropertyDescriptor> pds = createHashPropertyDesc(bi.getPropertyDescriptors());
 
 			for (int i = startRow; i <= endRow; i++) {
-				PropertyObject po = (PropertyObject) model.getValueAt(i, 1);
-				PropertyDescriptor pd = getPropertyDescriptor(pds, po.getName());
-				if (pd == null)
+				final PropertyObject po = (PropertyObject) model.getValueAt(i, 1);
+				final PropertyDescriptor pd = getPropertyDescriptor(pds, po.getName());
+				if (pd == null) {
 					return;
+				}
 
 				Object oldValue = null;
 				try {
 					oldValue = pd.getReadMethod().invoke(object, (Object[]) null);
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					continue;
 				}
-				Object oValue = po.getValue();
+				final Object oValue = po.getValue();
 
 				try {
 					pd.getWriteMethod().invoke(object, new Object[] { oValue });
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					continue;
 				}
 				firePropertyChange(pd.getName(), oldValue, oValue);
@@ -112,22 +115,22 @@ public class DefaultPropertySheetCustomizer extends JPanel implements Customizer
 
 	}// GEN-LAST:event_propertyObjectTableModelTableChanged
 
-	private Hashtable<String, PropertyDescriptor> createHashPropertyDesc(PropertyDescriptor[] pds) {
-		Hashtable<String, PropertyDescriptor> retVal = new Hashtable<String, PropertyDescriptor>();
+	private Hashtable<String, PropertyDescriptor> createHashPropertyDesc(final PropertyDescriptor[] pds) {
+		final Hashtable<String, PropertyDescriptor> retVal = new Hashtable<String, PropertyDescriptor>();
 		if (pds != null) {
-			for (int i = 0; i < pds.length; i++) {
-				PropertyDescriptor pd = pds[i];
+			for (final PropertyDescriptor pd : pds) {
 				retVal.put(pd.getName(), pd);
 			}
 		}
 		return retVal;
 	}
 
-	private PropertyDescriptor getPropertyDescriptor(Hashtable<String, PropertyDescriptor> hash, String name) {
+	private PropertyDescriptor getPropertyDescriptor(final Hashtable<String, PropertyDescriptor> hash, final String name) {
 		PropertyDescriptor pd = null;
-		Object opd = hash.get(name);
-		if (opd != null && opd instanceof PropertyDescriptor)
+		final Object opd = hash.get(name);
+		if (opd != null && opd instanceof PropertyDescriptor) {
 			pd = (PropertyDescriptor) opd;
+		}
 
 		return pd;
 	}
@@ -141,7 +144,8 @@ public class DefaultPropertySheetCustomizer extends JPanel implements Customizer
 
 	private boolean updating = false;
 
-	public void setObject(Object object) {
+	@Override
+	public void setObject(final Object object) {
 		updating = true;
 		// Object oldObject=this.object;
 		this.object = object;
@@ -157,34 +161,33 @@ public class DefaultPropertySheetCustomizer extends JPanel implements Customizer
 			BeanInfo bi = null;
 			try {
 				bi = Introspector.getBeanInfo(object.getClass());
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				updating = false;
 				return;
 			}
 
-			PropertyDescriptor[] pds = bi.getPropertyDescriptors();
+			final PropertyDescriptor[] pds = bi.getPropertyDescriptors();
 
-			for (int i = 0; i < pds.length; i++) {
-				PropertyDescriptor desc = pds[i];
+			for (final PropertyDescriptor desc : pds) {
 				if (desc.getReadMethod() != null && desc.getWriteMethod() != null) {
-					String displayName = desc.getDisplayName();
+					final String displayName = desc.getDisplayName();
 					PropertyEditor editor = null;
 					try {
 						editor = (PropertyEditor) desc.getPropertyEditorClass().newInstance();
-					} catch (Exception e) {
+					} catch (final Exception e) {
 						editor = PropertyEditorManager.findEditor(desc.getPropertyType());
 					}
 
-					boolean editable = desc.getWriteMethod() != null ? true : false;
+					final boolean editable = desc.getWriteMethod() != null ? true : false;
 					Object oValue = null;
 					try {
 						oValue = desc.getReadMethod().invoke(object, (Object[]) null);
-					} catch (Exception e) {
+					} catch (final Exception e) {
 						// noop
 					}
 
-					PropertyObject po = new PropertyObject(desc.getName(), editor, desc.getPropertyType(), editable,
-							oValue);
+					final PropertyObject po = new PropertyObject(desc.getName(), editor, desc.getPropertyType(),
+							editable, oValue);
 
 					((DefaultTableModel) tblProperty.getModel()).addRow(new Object[] { displayName, po });
 				}

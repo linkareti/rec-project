@@ -34,10 +34,14 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelListener, MouseListener, ActionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4055682951725090833L;
 	private BalancaTorcao balanca;
-	private Circle luzCol;
-	private DrawingPanel reg;
-	private PopupMenu regPopMenu;
+	private final Circle luzCol;
+	private final DrawingPanel reg;
+	private final PopupMenu regPopMenu;
 	private InteractiveText constTextBox;
 
 	/** Creates a new instance of Animation */
@@ -66,7 +70,7 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 		reg.setPreferredMinMaxX(0, 10);
 		reg.enableInspector(false);
 
-		XAxis norm = new XAxis("dm");
+		final XAxis norm = new XAxis("dm");
 		reg.addDrawable(norm);
 
 		luzCol = new Circle(5, 0, 10);
@@ -87,15 +91,16 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 						"Edit the selected object"));
 	}
 
-	public static void main(String args[]) {
-		javax.swing.JFrame dummy = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new Animation());
 		dummy.pack();
 		dummy.show();
 	}
 
 	// Chegaram novas amostras!
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
 			// sample, canal
 			if (model.getValueAt(i, 1) != null) {
@@ -112,6 +117,7 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 	}
 
 	// Queremos fazer alguma coisa quandos os dados acabarem?
+	@Override
 	public void dataModelEnded() {
 		constTextBox.getStyle().setEdgeColor(java.awt.Color.BLUE);
 		reg.addDrawable(constTextBox);
@@ -120,10 +126,12 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 	}
 
 	// Queremos fazer alguma coisa quandos acontecer um erro?
+	@Override
 	public void dataModelError() {
 	}
 
 	// Queremos fazer alguma coisa quando for dado o start e existirem dados?
+	@Override
 	public void dataModelStarted() {
 	}
 
@@ -131,17 +139,18 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 	// dados?
 	// Eu garanto que quando chegamos a este estado, já existe o header da
 	// experiência!
+	@Override
 	public void dataModelStartedNoData() {
-		HardwareAcquisitionConfig header = model.getAcquisitionConfig();
+		final HardwareAcquisitionConfig header = model.getAcquisitionConfig();
 
 		// boolean expGType =
 		// Boolean.getBoolean(header.getSelectedHardwareParameterValue("expGType"));
-		boolean expGType = header.getSelectedHardwareParameterValue("expGType").trim().equals("1") ? true : false;
-		int angInit = Integer.parseInt(header.getSelectedHardwareParameterValue("angInit"));
-		int l = Integer.parseInt(header.getSelectedHardwareParameterValue("l"));
-		float s0 = Float.parseFloat(header.getSelectedHardwareParameterValue("s0"));
-		float d = Float.parseFloat(header.getSelectedHardwareParameterValue("d"));
-		int targetSize = Integer.parseInt(header.getSelectedHardwareParameterValue("targetSize"));
+		final boolean expGType = header.getSelectedHardwareParameterValue("expGType").trim().equals("1") ? true : false;
+		final int angInit = Integer.parseInt(header.getSelectedHardwareParameterValue("angInit"));
+		final int l = Integer.parseInt(header.getSelectedHardwareParameterValue("l"));
+		final float s0 = Float.parseFloat(header.getSelectedHardwareParameterValue("s0"));
+		final float d = Float.parseFloat(header.getSelectedHardwareParameterValue("d"));
+		final int targetSize = Integer.parseInt(header.getSelectedHardwareParameterValue("targetSize"));
 
 		constTextBox = new InteractiveText("C : "
 				+ CGCustomizer.trimDecimalN(Float.parseFloat(header.getSelectedHardwareParameterValue("c")), 3)
@@ -150,74 +159,90 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 				+ " ; G : "
 				+ CGCustomizer.trimDecimalN(Float.parseFloat(header.getSelectedHardwareParameterValue("g")), 3));
 
-		if (!expGType)
+		if (!expGType) {
 			balanca.cMode();
+		}
 
 		balanca.config(angInit * Math.PI / 180, l, s0 * 1000, d * 1000, targetSize);
 		updateRegua();
 	}
 
 	// Queremos fazer alguma coisa quando for dado parado?
+	@Override
 	public void dataModelStoped() {
 	}
 
 	// Queremos fazer alguma coisa em estado de espera?
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
 	// O icon associado a este painel!
+	@Override
 	public javax.swing.Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
 
 	private ExpDataModel model = null;
 
-	public void setExpDataModel(ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
+		if (this.model != null) {
 			this.model.removeExpDataModelListener(this);
+		}
 		this.model = model;
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 
 	}
 
-	public void mouseClicked(java.awt.event.MouseEvent e) {
-		if (javax.swing.SwingUtilities.isRightMouseButton(e))
+	@Override
+	public void mouseClicked(final java.awt.event.MouseEvent e) {
+		if (javax.swing.SwingUtilities.isRightMouseButton(e)) {
 			regPopMenu.show(e.getComponent(), e.getX(), e.getY());
+		}
 	}
 
-	public void mouseEntered(java.awt.event.MouseEvent e) {
+	@Override
+	public void mouseEntered(final java.awt.event.MouseEvent e) {
 	}
 
-	public void mouseExited(java.awt.event.MouseEvent e) {
+	@Override
+	public void mouseExited(final java.awt.event.MouseEvent e) {
 	}
 
-	public void mousePressed(java.awt.event.MouseEvent e) {
+	@Override
+	public void mousePressed(final java.awt.event.MouseEvent e) {
 	}
 
-	public void mouseReleased(java.awt.event.MouseEvent e) {
+	@Override
+	public void mouseReleased(final java.awt.event.MouseEvent e) {
 	}
 
-	public void actionPerformed(java.awt.event.ActionEvent e) {
+	@Override
+	public void actionPerformed(final java.awt.event.ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase("Edit")) {
 			balanca.setReguaSize(PopupMenu.dialog(ReCResourceBundle.findStringOrDefault(
 					"cg$rec.exp.customizer.balanca.title.15", "Edit Target Ruler (cm)"), ReCResourceBundle
-					.findStringOrDefault("cg$rec.exp.customizer.balanca.tip.15", "Ruler length"),
-					ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.balanca.tip.16",
-							"Accept the configuration"), (int) Math.round(reg.getPreferredXMax() * 10), new int[] {
-							100, 500, 50, 50 }));
+					.findStringOrDefault("cg$rec.exp.customizer.balanca.tip.15", "Ruler length"), ReCResourceBundle
+					.findStringOrDefault("cg$rec.exp.customizer.balanca.tip.16", "Accept the configuration"),
+					(int) Math.round(reg.getPreferredXMax() * 10), new int[] { 100, 500, 50, 50 }));
 			constTextBox.setX(balanca.getReguaSize() / 20);
 			balanca.repaint();
 			updateRegua();

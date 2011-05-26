@@ -1,6 +1,10 @@
 package com.linkare.rec.data.metadata;
 
 public final class Scale implements org.omg.CORBA.portable.IDLEntity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1688440666209818701L;
 	//
 	// Struct member applied_multiplier
 	//
@@ -56,11 +60,12 @@ public final class Scale implements org.omg.CORBA.portable.IDLEntity {
 	// @param PhysicsUnitSymbol PhysicsUnitSymbol struct member
 	// @param scaleLabel ScaleLabel struct member
 	//
-	public Scale(com.linkare.rec.data.acquisition.PhysicsVal min_value,
-			com.linkare.rec.data.acquisition.PhysicsVal max_value,
-			com.linkare.rec.data.acquisition.PhysicsVal default_error,
-			com.linkare.rec.data.acquisition.PhysicsVal step, com.linkare.rec.data.Multiplier applied_multiplier,
-			String PhysicsUnitName, String PhysicsUnitSymbol, String scaleLabel) {
+	public Scale(final com.linkare.rec.data.acquisition.PhysicsVal min_value,
+			final com.linkare.rec.data.acquisition.PhysicsVal max_value,
+			final com.linkare.rec.data.acquisition.PhysicsVal default_error,
+			final com.linkare.rec.data.acquisition.PhysicsVal step,
+			final com.linkare.rec.data.Multiplier applied_multiplier, final String PhysicsUnitName,
+			final String PhysicsUnitSymbol, final String scaleLabel) {
 		setMinimumValue(min_value);
 		setMaximumValue(max_value);
 		setDefaultErrorValue(default_error);
@@ -74,7 +79,7 @@ public final class Scale implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Copy Constructor
 	//
-	public Scale(Scale other) {
+	public Scale(final Scale other) {
 		setMinimumValue(new com.linkare.rec.data.acquisition.PhysicsVal(other.getMinimumValue()));
 		setMaximumValue(new com.linkare.rec.data.acquisition.PhysicsVal(other.getMaximumValue()));
 		setDefaultErrorValue(new com.linkare.rec.data.acquisition.PhysicsVal(other.getDefaultErrorValue()));
@@ -91,7 +96,7 @@ public final class Scale implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property minimumValue.
 	 */
 	public com.linkare.rec.data.acquisition.PhysicsVal getMinimumValue() {
-		return this.min_value;
+		return min_value;
 	}
 
 	/**
@@ -99,8 +104,8 @@ public final class Scale implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param minimumValue New value of property minimumValue.
 	 */
-	public void setMinimumValue(com.linkare.rec.data.acquisition.PhysicsVal minimumValue) {
-		this.min_value = minimumValue;
+	public void setMinimumValue(final com.linkare.rec.data.acquisition.PhysicsVal minimumValue) {
+		min_value = minimumValue;
 	}
 
 	/**
@@ -109,7 +114,7 @@ public final class Scale implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property maximumValue.
 	 */
 	public com.linkare.rec.data.acquisition.PhysicsVal getMaximumValue() {
-		return this.max_value;
+		return max_value;
 	}
 
 	/**
@@ -117,8 +122,8 @@ public final class Scale implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param maximumValue New value of property maximumValue.
 	 */
-	public void setMaximumValue(com.linkare.rec.data.acquisition.PhysicsVal maximumValue) {
-		this.max_value = maximumValue;
+	public void setMaximumValue(final com.linkare.rec.data.acquisition.PhysicsVal maximumValue) {
+		max_value = maximumValue;
 	}
 
 	/**
@@ -127,7 +132,7 @@ public final class Scale implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property default_error.
 	 */
 	public com.linkare.rec.data.acquisition.PhysicsVal getDefaultErrorValue() {
-		return this.default_error;
+		return default_error;
 	}
 
 	/**
@@ -135,7 +140,7 @@ public final class Scale implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param default_error New value of property default_error.
 	 */
-	public void setDefaultErrorValue(com.linkare.rec.data.acquisition.PhysicsVal default_error) {
+	public void setDefaultErrorValue(final com.linkare.rec.data.acquisition.PhysicsVal default_error) {
 		this.default_error = default_error;
 	}
 
@@ -145,7 +150,7 @@ public final class Scale implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property step.
 	 */
 	public com.linkare.rec.data.acquisition.PhysicsVal getStepValue() {
-		return this.step;
+		return step;
 	}
 
 	/**
@@ -153,7 +158,7 @@ public final class Scale implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param step New value of property step.
 	 */
-	public void setStepValue(com.linkare.rec.data.acquisition.PhysicsVal step) {
+	public void setStepValue(final com.linkare.rec.data.acquisition.PhysicsVal step) {
 		this.step = step;
 	}
 
@@ -163,7 +168,7 @@ public final class Scale implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property PhysicsUnitName.
 	 */
 	public String getPhysicsUnitName() {
-		return this.PhysicsUnitName;
+		return PhysicsUnitName;
 	}
 
 	/**
@@ -171,7 +176,7 @@ public final class Scale implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param PhysicsUnitName New value of property PhysicsUnitName.
 	 */
-	public void setPhysicsUnitName(String PhysicsUnitName) {
+	public void setPhysicsUnitName(final String PhysicsUnitName) {
 		this.PhysicsUnitName = PhysicsUnitName;
 	}
 
@@ -181,7 +186,7 @@ public final class Scale implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property physicsUnitSymbol.
 	 */
 	public String getPhysicsUnitSymbol() {
-		return this.PhysicsUnitSymbol;
+		return PhysicsUnitSymbol;
 	}
 
 	/**
@@ -189,7 +194,7 @@ public final class Scale implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param physicsUnitSymbol New value of property physicsUnitSymbol.
 	 */
-	public void setPhysicsUnitSymbol(String PhysicsUnitSymbol) {
+	public void setPhysicsUnitSymbol(final String PhysicsUnitSymbol) {
 		this.PhysicsUnitSymbol = PhysicsUnitSymbol;
 	}
 
@@ -199,7 +204,7 @@ public final class Scale implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property scaleLabel.
 	 */
 	public String getScaleLabel() {
-		return this.scaleLabel;
+		return scaleLabel;
 	}
 
 	/**
@@ -207,7 +212,7 @@ public final class Scale implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param scaleLabel New value of property scaleLabel.
 	 */
-	public void setScaleLabel(String scaleLabel) {
+	public void setScaleLabel(final String scaleLabel) {
 		this.scaleLabel = scaleLabel;
 	}
 
@@ -217,7 +222,7 @@ public final class Scale implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property applied_multiplier.
 	 */
 	public com.linkare.rec.data.Multiplier getMultiplier() {
-		return this.applied_multiplier;
+		return applied_multiplier;
 	}
 
 	/**
@@ -225,7 +230,7 @@ public final class Scale implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param physicsUnitSymbol New value of property physicsUnitSymbol.
 	 */
-	public void setMultiplier(com.linkare.rec.data.Multiplier applied_multiplier) {
+	public void setMultiplier(final com.linkare.rec.data.Multiplier applied_multiplier) {
 		this.applied_multiplier = applied_multiplier;
 	}
 
@@ -250,6 +255,7 @@ public final class Scale implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @return a string representation of the object.
 	 */
+	@Override
 	public String toString() {
 
 		return (scaleLabel == null ? "" : scaleLabel + " = ") + "[" + min_value.toEngineeringNotation() + " ; "
@@ -258,11 +264,13 @@ public final class Scale implements org.omg.CORBA.portable.IDLEntity {
 				+ PhysicsUnitName;
 	}
 
-	public boolean equals(Object obj) {
-		if (obj == null || !(obj instanceof Scale))
+	@Override
+	public boolean equals(final Object obj) {
+		if (obj == null || !(obj instanceof Scale)) {
 			return false;
+		}
 
-		Scale other = (Scale) obj;
+		final Scale other = (Scale) obj;
 
 		return other.getMinimumValue().equals(getMinimumValue()) && other.getMaximumValue().equals(getMaximumValue())
 				&& other.getStepValue().equals(getStepValue())

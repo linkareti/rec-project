@@ -28,11 +28,11 @@ public class ExportPrinter {
 	 * @param painter
 	 * @throws PrinterException
 	 */
-	public static void print(Printable painter) throws PrinterException {
-		PrinterJob job = PrinterJob.getPrinterJob();
-		PageFormat pf = job.defaultPage();
+	public static void print(final Printable painter) throws PrinterException {
+		final PrinterJob job = PrinterJob.getPrinterJob();
+		final PageFormat pf = job.defaultPage();
 		pf.setOrientation(PageFormat.PORTRAIT);
-		PageFormat pf2 = job.pageDialog(pf);
+		final PageFormat pf2 = job.pageDialog(pf);
 		if (pf2 != pf) {
 			job.setPrintable(painter, pf2);
 			if (job.printDialog()) {

@@ -9,6 +9,8 @@ package pt.utl.ist.elab.client.aleatorio.displays;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+import javax.swing.SwingConstants;
+
 /**
  * 
  * @author Pedro Carvalho - LEFT - IST
@@ -16,6 +18,11 @@ import java.util.logging.Logger;
 public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 178147959330980830L;
 
 	/** Creates new form AleatorioUserAnalysisPanel */
 	public UserAnalysisDisplay() {
@@ -116,7 +123,8 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		loadButton.setText("Load");
 		loadButton.setName("Threshold");
 		loadButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				loadButtonActionPerformedHandler(evt);
 			}
 		});
@@ -130,7 +138,8 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		saveButton.setName("saveButton");
 		saveButton.setEnabled(false);
 		saveButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				saveButtonActionPerformedHandler(evt);
 			}
 		});
@@ -144,7 +153,8 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		fromExperimentButton.setName("fromExperimentButton");
 		fromExperimentButton.setEnabled(false);
 		fromExperimentButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				fromExperimentButtonActionPerformedHandler(evt);
 			}
 		});
@@ -167,7 +177,8 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		originalButton.setName("originalButton");
 		originalButton.setEnabled(false);
 		originalButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				originalButtonActionPerformedHandler(evt);
 			}
 		});
@@ -182,7 +193,8 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		BWButton.setName("BWButton");
 		BWButton.setEnabled(false);
 		BWButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				BWButtonActionPerformedHandler(evt);
 			}
 		});
@@ -197,7 +209,8 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		edgesButton.setName("edgesButton");
 		edgesButton.setEnabled(false);
 		edgesButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				edgesButtonActionPerformedHandler(evt);
 			}
 		});
@@ -211,7 +224,8 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		houghButton.setName("houghButton");
 		houghButton.setEnabled(false);
 		houghButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				houghButtonActionPerformedHandler(evt);
 			}
 		});
@@ -223,7 +237,8 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		convolutionButton.setName("convolutionButton");
 		convolutionButton.setEnabled(false);
 		convolutionButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				convolutionButtonActionPerformedHandler(evt);
 			}
 		});
@@ -240,7 +255,8 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		countHoughButton.setName("countHoughButton");
 		countHoughButton.setEnabled(false);
 		countHoughButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				countHoughButtonActionPerformedHandler(evt);
 			}
 		});
@@ -252,7 +268,8 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		countConvolutionButton.setName("countConvolutionButton");
 		countConvolutionButton.setEnabled(false);
 		countConvolutionButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				countConvolutionActionPerformedHandler(evt);
 			}
 		});
@@ -268,7 +285,8 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		refineHoughCountButton.setName("fullCountButton");
 		refineHoughCountButton.setEnabled(false);
 		refineHoughCountButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				refineHoughCountButtonActionPerformedHandler(evt);
 			}
 		});
@@ -282,7 +300,8 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		refineConvCountButton.setText("Refine Count");
 		refineConvCountButton.setEnabled(false);
 		refineConvCountButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				refineConvCountButtonActionPerformedHandler(evt);
 			}
 		});
@@ -317,7 +336,8 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		BWThresholdSlider.setMinimumSize(new java.awt.Dimension(200, 56));
 		BWThresholdSlider.setName("BWSlider");
 		BWThresholdSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				BWThresholdSliderStateChangedHandler(evt);
 			}
 		});
@@ -339,7 +359,8 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		houghThreshold1Slider.setMinimumSize(new java.awt.Dimension(200, 56));
 		houghThreshold1Slider.setName("houghThreshold1Slider");
 		houghThreshold1Slider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				houghThreshold1SliderStateChangedHandler(evt);
 			}
 		});
@@ -354,7 +375,8 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		houghThreshold2Slider.setMinimumSize(new java.awt.Dimension(200, 56));
 		houghThreshold2Slider.setName("houghThreshold2Slider");
 		houghThreshold2Slider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				houghThreshold2SliderStateChangedHandler(evt);
 			}
 		});
@@ -371,7 +393,8 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 				+ String.valueOf(houghThreshold3Slider.getValue())));
 		houghThreshold3Slider.setMinimumSize(new java.awt.Dimension(200, 56));
 		houghThreshold3Slider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				houghThreshold3SliderStateChangedHandler(evt);
 			}
 		});
@@ -394,7 +417,8 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		convolutionThresholdSlider.setMinimumSize(new java.awt.Dimension(200, 41));
 		convolutionThresholdSlider.setName("convolutionThresholdSlider");
 		convolutionThresholdSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				convolutionThresholdSliderStateChangedHandler(evt);
 			}
 		});
@@ -418,7 +442,8 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		radiusOfSpotSlider.setMinimumSize(new java.awt.Dimension(200, 56));
 		radiusOfSpotSlider.setName("radiusOfSpotSlider");
 		radiusOfSpotSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				radiusOfSpotSliderStateChangedHandler(evt);
 			}
 		});
@@ -433,7 +458,8 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		widthOfDieSlider.setMinimumSize(new java.awt.Dimension(200, 56));
 		widthOfDieSlider.setName("widthOfDieSlider");
 		widthOfDieSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				widthOfDieSliderStateChangedHandler(evt);
 			}
 		});
@@ -445,13 +471,14 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 
 		numberOfExpectedDiceText.setBackground(new java.awt.Color(204, 204, 204));
 		numberOfExpectedDiceText.setColumns(18);
-		numberOfExpectedDiceText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		numberOfExpectedDiceText.setHorizontalAlignment(SwingConstants.CENTER);
 		numberOfExpectedDiceText.setText("14");
 		numberOfExpectedDiceText.setToolTipText("Must be lower than " + Integer.MAX_VALUE);
 		numberOfExpectedDiceText.setBorder(new javax.swing.border.TitledBorder("Expected Number of Dice"));
 		numberOfExpectedDiceText.setMinimumSize(new java.awt.Dimension(198, 41));
 		numberOfExpectedDiceText.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyTyped(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyTyped(final java.awt.event.KeyEvent evt) {
 				numberOfExpectedDiceTextKeyPressedHandler(evt);
 			}
 		});
@@ -483,7 +510,7 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 
 	}// GEN-END:initComponents
 
-	private void refineConvCountButtonActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_refineConvCountButtonActionPerformedHandler
+	private void refineConvCountButtonActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_refineConvCountButtonActionPerformedHandler
 		// Add your handling code here:
 		imagePanel.refineCount(imagePanel.IMAGE_CONVOLUTION);
 		numberOfSpotsText.setText(String.valueOf(imagePanel.getCenterCounter()));
@@ -491,13 +518,14 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		this.repaint();
 	}// GEN-LAST:event_refineConvCountButtonActionPerformedHandler
 
-	private void numberOfExpectedDiceTextKeyPressedHandler(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_numberOfExpectedDiceTextKeyPressedHandler
+	private void numberOfExpectedDiceTextKeyPressedHandler(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_numberOfExpectedDiceTextKeyPressedHandler
 		// Add your handling code here:
-		if (!isNumber(numberOfExpectedDiceText.getText()))
+		if (!isNumber(numberOfExpectedDiceText.getText())) {
 			numberOfExpectedDiceText.setText("");
+		}
 	}// GEN-LAST:event_numberOfExpectedDiceTextKeyPressedHandler
 
-	private void houghThreshold3SliderStateChangedHandler(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_houghThreshold3SliderStateChangedHandler
+	private void houghThreshold3SliderStateChangedHandler(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_houghThreshold3SliderStateChangedHandler
 		// Add your handling code here:
 		houghThreshold3Slider.setBorder(new javax.swing.border.TitledBorder("Threshold3: "
 				+ String.valueOf(houghThreshold3Slider.getValue())));
@@ -512,16 +540,17 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		widthOfDie = widthOfDieSlider.getValue();
 		try {
 			numberOfExpectedDice = Integer.parseInt(numberOfExpectedDiceText.getText());
-		} catch (NumberFormatException e) {
-			numberOfExpectedDice = NUMBER_OF_EXPECTED_DICE;
+		} catch (final NumberFormatException e) {
+			numberOfExpectedDice = UserAnalysisDisplay.NUMBER_OF_EXPECTED_DICE;
 		}
 
-		if (imagePanel != null)
+		if (imagePanel != null) {
 			imagePanel.setParams(BWThreshold, radiusOfSpot, houghThreshold1, houghThreshold2, houghThreshold3,
 					convolutionThreshold, widthOfDie, numberOfExpectedDice);
+		}
 	}// GEN-LAST:event_houghThreshold3SliderStateChangedHandler
 
-	private void fromExperimentButtonActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_fromExperimentButtonActionPerformedHandler
+	private void fromExperimentButtonActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_fromExperimentButtonActionPerformedHandler
 		// Add your handling code here:
 		if (userAnalysisSingleton.getImage() != null) {
 			imagePanel = new AnalysisPanel(userAnalysisSingleton.getImage());
@@ -537,13 +566,14 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 			widthOfDie = widthOfDieSlider.getValue();
 			try {
 				numberOfExpectedDice = Integer.parseInt(numberOfExpectedDiceText.getText());
-			} catch (NumberFormatException e) {
-				numberOfExpectedDice = NUMBER_OF_EXPECTED_DICE;
+			} catch (final NumberFormatException e) {
+				numberOfExpectedDice = UserAnalysisDisplay.NUMBER_OF_EXPECTED_DICE;
 			}
 
-			if (imagePanel != null)
+			if (imagePanel != null) {
 				imagePanel.setParams(BWThreshold, radiusOfSpot, houghThreshold1, houghThreshold2, houghThreshold3,
 						convolutionThreshold, widthOfDie, numberOfExpectedDice);
+			}
 			saveButton.setEnabled(true);
 			originalButton.setEnabled(true);
 			BWButton.setEnabled(true);
@@ -557,7 +587,7 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		chooser.setFileFilter(imageFilter);
 	}
 
-	private void refineHoughCountButtonActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_refineHoughCountButtonActionPerformedHandler
+	private void refineHoughCountButtonActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_refineHoughCountButtonActionPerformedHandler
 		// Add your handling code here:
 		imagePanel.refineCount(imagePanel.IMAGE_HOUGH);
 		numberOfSpotsText.setText(String.valueOf(imagePanel.getCenterCounter()));
@@ -565,7 +595,7 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		this.repaint();
 	}// GEN-LAST:event_refineHoughCountButtonActionPerformedHandler
 
-	private void countConvolutionActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_countConvolutionActionPerformedHandler
+	private void countConvolutionActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_countConvolutionActionPerformedHandler
 		// Add your handling code here:
 		imagePanel.convolutionCount();
 		numberOfSpotsText.setText(String.valueOf(imagePanel.getConvolutionCenterCounter()));
@@ -574,7 +604,7 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		this.repaint();
 	}// GEN-LAST:event_countConvolutionActionPerformedHandler
 
-	private void countHoughButtonActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_countHoughButtonActionPerformedHandler
+	private void countHoughButtonActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_countHoughButtonActionPerformedHandler
 		// Add your handling code here:
 		imagePanel.houghCount();
 		numberOfSpotsText.setText(String.valueOf(imagePanel.getHoughCenterCounter()));
@@ -583,28 +613,28 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		this.repaint();
 	}// GEN-LAST:event_countHoughButtonActionPerformedHandler
 
-	private void convolutionButtonActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_convolutionButtonActionPerformedHandler
+	private void convolutionButtonActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_convolutionButtonActionPerformedHandler
 		// Add your handling code here:
 		imagePanel.convolutionTransform();
 		countConvolutionButton.setEnabled(true);
 		this.repaint();
 	}// GEN-LAST:event_convolutionButtonActionPerformedHandler
 
-	private void houghButtonActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_houghButtonActionPerformedHandler
+	private void houghButtonActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_houghButtonActionPerformedHandler
 		// Add your handling code here:
 		imagePanel.houghTransform();
 		countHoughButton.setEnabled(true);
 		this.repaint();
 	}// GEN-LAST:event_houghButtonActionPerformedHandler
 
-	private void edgesButtonActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_edgesButtonActionPerformedHandler
+	private void edgesButtonActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_edgesButtonActionPerformedHandler
 		// Add your handling code here:
 		imagePanel.edgeDetector();
 		houghButton.setEnabled(true);
 		this.repaint();
 	}// GEN-LAST:event_edgesButtonActionPerformedHandler
 
-	private void BWButtonActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BWButtonActionPerformedHandler
+	private void BWButtonActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BWButtonActionPerformedHandler
 		// Add your handling code here:
 		imagePanel.conversionBW();
 		edgesButton.setEnabled(true);
@@ -612,7 +642,7 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		this.repaint();
 	}// GEN-LAST:event_BWButtonActionPerformedHandler
 
-	private void originalButtonActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_originalButtonActionPerformedHandler
+	private void originalButtonActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_originalButtonActionPerformedHandler
 		// Add your handling code here:
 		imagePanel.setImage(imagePanel.getImage(imagePanel.IMAGE_ORIGINAL));
 		BWThreshold = BWThresholdSlider.getValue();
@@ -624,20 +654,21 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		widthOfDie = widthOfDieSlider.getValue();
 		try {
 			numberOfExpectedDice = Integer.parseInt(numberOfExpectedDiceText.getText());
-		} catch (NumberFormatException e) {
-			numberOfExpectedDice = NUMBER_OF_EXPECTED_DICE;
+		} catch (final NumberFormatException e) {
+			numberOfExpectedDice = UserAnalysisDisplay.NUMBER_OF_EXPECTED_DICE;
 		}
 
-		if (imagePanel != null)
+		if (imagePanel != null) {
 			imagePanel.setParams(BWThreshold, radiusOfSpot, houghThreshold1, houghThreshold2, houghThreshold3,
 					convolutionThreshold, widthOfDie, numberOfExpectedDice);
+		}
 		this.repaint();
 	}// GEN-LAST:event_originalButtonActionPerformedHandler
 
-	private void saveButtonActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_saveButtonActionPerformedHandler
+	private void saveButtonActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_saveButtonActionPerformedHandler
 		// Add your handling code here:
 		chooser.setFileFilter(jpegImageFilter);
-		javax.swing.JSlider jpegQualitySlider = new javax.swing.JSlider();
+		final javax.swing.JSlider jpegQualitySlider = new javax.swing.JSlider();
 		jpegQualitySlider.setValue(75);
 		jpegQualitySlider.setMaximum(100);
 		jpegQualitySlider.setPaintLabels(true);
@@ -656,48 +687,50 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 					act = javax.swing.JOptionPane.showConfirmDialog(null, file.toString() + " exists.  Overwrite?");
 				}
 
-				if (act == javax.swing.JOptionPane.CANCEL_OPTION)
+				if (act == javax.swing.JOptionPane.CANCEL_OPTION) {
 					file = null;
-				else if (act == javax.swing.JOptionPane.OK_OPTION)
+				} else if (act == javax.swing.JOptionPane.OK_OPTION) {
 					saveImageToFile(file.getAbsolutePath(), imagePanel.getImage(imagePanel.getCurrentImageType()),
 							jpegQualitySlider.getValue());
+				}
 			} else {
-				java.awt.Image imageToSave = imagePanel.getImage(imagePanel.getCurrentImageType());
-				java.awt.MediaTracker tracker = new java.awt.MediaTracker(this);
+				final java.awt.Image imageToSave = imagePanel.getImage(imagePanel.getCurrentImageType());
+				final java.awt.MediaTracker tracker = new java.awt.MediaTracker(this);
 				tracker.addImage(imageToSave, 0);
 				try {
 					tracker.waitForAll();
-				} catch (InterruptedException e) {
+				} catch (final InterruptedException e) {
 					e.printStackTrace();
 					System.exit(1);
 				}
 				System.out.println("Saving image with dims:" + imageToSave.getWidth(this) + "x"
 						+ imageToSave.getHeight(this));
-				if (file.getAbsolutePath().indexOf(".jpg") == -1)
+				if (file.getAbsolutePath().indexOf(".jpg") == -1) {
 					saveImageToFile(file.getAbsolutePath() + ".jpg", imageToSave, jpegQualitySlider.getValue());
-				else
+				} else {
 					saveImageToFile(file.getAbsolutePath(), imageToSave, jpegQualitySlider.getValue());
+				}
 			}// else
 		}
 
 		this.repaint();
 	}// GEN-LAST:event_saveButtonActionPerformedHandler
 
-	private void loadButtonActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_loadButtonActionPerformedHandler
+	private void loadButtonActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_loadButtonActionPerformedHandler
 		// Add your handling code here:
 		chooser.setFileFilter(imageFilter);
 		chooser.showOpenDialog(this);
-		java.io.File imageFile = chooser.getSelectedFile();
+		final java.io.File imageFile = chooser.getSelectedFile();
 
 		if (imageFile != null) {
-			java.awt.Image image = openImage(imageFile.getAbsolutePath());
+			final java.awt.Image image = openImage(imageFile.getAbsolutePath());
 			imagePanel = new AnalysisPanel(image);
 
 			// imagePanel.setImage(image);
 			while (image.getWidth(imagePanel) < 0) {
 				try {
 					Thread.currentThread().sleep(50);
-				} catch (InterruptedException e) {
+				} catch (final InterruptedException e) {
 				}
 			}
 
@@ -715,16 +748,17 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 			widthOfDie = widthOfDieSlider.getValue();
 			try {
 				numberOfExpectedDice = Integer.parseInt(numberOfExpectedDiceText.getText());
-			} catch (NumberFormatException e) {
-				numberOfExpectedDice = NUMBER_OF_EXPECTED_DICE;
+			} catch (final NumberFormatException e) {
+				numberOfExpectedDice = UserAnalysisDisplay.NUMBER_OF_EXPECTED_DICE;
 			}
 
-			if (imagePanel != null)
+			if (imagePanel != null) {
 				imagePanel.setParams(BWThreshold, radiusOfSpot, houghThreshold1, houghThreshold2, houghThreshold3,
 						convolutionThreshold, widthOfDie, numberOfExpectedDice);
-			// imageViewingPanel.add(imagePanel,java.awt.BorderLayout.CENTER);
-			// imageScrollPane.setViewportView(imagePanel);
-			// int[] dimIm = imagePanel.imageSize();
+				// imageViewingPanel.add(imagePanel,java.awt.BorderLayout.CENTER);
+				// imageScrollPane.setViewportView(imagePanel);
+				// int[] dimIm = imagePanel.imageSize();
+			}
 
 			// imagePanel.setSize(new java.awt.Dimension(dimIm[0], dimIm[1]));
 
@@ -742,7 +776,7 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		}
 	}// GEN-LAST:event_loadButtonActionPerformedHandler
 
-	private void widthOfDieSliderStateChangedHandler(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_widthOfDieSliderStateChangedHandler
+	private void widthOfDieSliderStateChangedHandler(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_widthOfDieSliderStateChangedHandler
 		// Add your handling code here:
 		// widthOfDieSlider.setBorder(null);
 		widthOfDieSlider.setBorder(new javax.swing.border.TitledBorder("Width of Die: "
@@ -758,16 +792,17 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		widthOfDie = widthOfDieSlider.getValue();
 		try {
 			numberOfExpectedDice = Integer.parseInt(numberOfExpectedDiceText.getText());
-		} catch (NumberFormatException e) {
-			numberOfExpectedDice = NUMBER_OF_EXPECTED_DICE;
+		} catch (final NumberFormatException e) {
+			numberOfExpectedDice = UserAnalysisDisplay.NUMBER_OF_EXPECTED_DICE;
 		}
 
-		if (imagePanel != null)
+		if (imagePanel != null) {
 			imagePanel.setParams(BWThreshold, radiusOfSpot, houghThreshold1, houghThreshold2, houghThreshold3,
 					convolutionThreshold, widthOfDie, numberOfExpectedDice);
+		}
 	}// GEN-LAST:event_widthOfDieSliderStateChangedHandler
 
-	private void radiusOfSpotSliderStateChangedHandler(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_radiusOfSpotSliderStateChangedHandler
+	private void radiusOfSpotSliderStateChangedHandler(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_radiusOfSpotSliderStateChangedHandler
 		// Add your handling code here:
 		// radiusOfSpotSlider.setBorder(null);
 		radiusOfSpotSlider.setBorder(new javax.swing.border.TitledBorder("Radius of Spot: "
@@ -783,16 +818,17 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		widthOfDie = widthOfDieSlider.getValue();
 		try {
 			numberOfExpectedDice = Integer.parseInt(numberOfExpectedDiceText.getText());
-		} catch (NumberFormatException e) {
-			numberOfExpectedDice = NUMBER_OF_EXPECTED_DICE;
+		} catch (final NumberFormatException e) {
+			numberOfExpectedDice = UserAnalysisDisplay.NUMBER_OF_EXPECTED_DICE;
 		}
 
-		if (imagePanel != null)
+		if (imagePanel != null) {
 			imagePanel.setParams(BWThreshold, radiusOfSpot, houghThreshold1, houghThreshold2, houghThreshold3,
 					convolutionThreshold, widthOfDie, numberOfExpectedDice);
+		}
 	}// GEN-LAST:event_radiusOfSpotSliderStateChangedHandler
 
-	private void convolutionThresholdSliderStateChangedHandler(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_convolutionThresholdSliderStateChangedHandler
+	private void convolutionThresholdSliderStateChangedHandler(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_convolutionThresholdSliderStateChangedHandler
 		// Add your handling code here:
 		// convolutionThresholdSlider.setBorder(null);
 		convolutionThresholdSlider.setBorder(new javax.swing.border.TitledBorder("Convolution Threshold: "
@@ -808,16 +844,17 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		widthOfDie = widthOfDieSlider.getValue();
 		try {
 			numberOfExpectedDice = Integer.parseInt(numberOfExpectedDiceText.getText());
-		} catch (NumberFormatException e) {
-			numberOfExpectedDice = NUMBER_OF_EXPECTED_DICE;
+		} catch (final NumberFormatException e) {
+			numberOfExpectedDice = UserAnalysisDisplay.NUMBER_OF_EXPECTED_DICE;
 		}
 
-		if (imagePanel != null)
+		if (imagePanel != null) {
 			imagePanel.setParams(BWThreshold, radiusOfSpot, houghThreshold1, houghThreshold2, houghThreshold3,
 					convolutionThreshold, widthOfDie, numberOfExpectedDice);
+		}
 	}// GEN-LAST:event_convolutionThresholdSliderStateChangedHandler
 
-	private void houghThreshold2SliderStateChangedHandler(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_houghThreshold2SliderStateChangedHandler
+	private void houghThreshold2SliderStateChangedHandler(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_houghThreshold2SliderStateChangedHandler
 		// Add your handling code here:
 		// houghThreshold2Slider.setBorder(null);
 		houghThreshold2Slider.setBorder(new javax.swing.border.TitledBorder("Threshold2: "
@@ -833,16 +870,17 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		widthOfDie = widthOfDieSlider.getValue();
 		try {
 			numberOfExpectedDice = Integer.parseInt(numberOfExpectedDiceText.getText());
-		} catch (NumberFormatException e) {
-			numberOfExpectedDice = NUMBER_OF_EXPECTED_DICE;
+		} catch (final NumberFormatException e) {
+			numberOfExpectedDice = UserAnalysisDisplay.NUMBER_OF_EXPECTED_DICE;
 		}
 
-		if (imagePanel != null)
+		if (imagePanel != null) {
 			imagePanel.setParams(BWThreshold, radiusOfSpot, houghThreshold1, houghThreshold2, houghThreshold3,
 					convolutionThreshold, widthOfDie, numberOfExpectedDice);
+		}
 	}// GEN-LAST:event_houghThreshold2SliderStateChangedHandler
 
-	private void houghThreshold1SliderStateChangedHandler(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_houghThreshold1SliderStateChangedHandler
+	private void houghThreshold1SliderStateChangedHandler(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_houghThreshold1SliderStateChangedHandler
 		// Add your handling code here:
 		// houghThreshold1Slider.setBorder(null);
 		houghThreshold1Slider.setBorder(new javax.swing.border.TitledBorder("Threshold1: "
@@ -858,16 +896,17 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		widthOfDie = widthOfDieSlider.getValue();
 		try {
 			numberOfExpectedDice = Integer.parseInt(numberOfExpectedDiceText.getText());
-		} catch (NumberFormatException e) {
-			numberOfExpectedDice = NUMBER_OF_EXPECTED_DICE;
+		} catch (final NumberFormatException e) {
+			numberOfExpectedDice = UserAnalysisDisplay.NUMBER_OF_EXPECTED_DICE;
 		}
 
-		if (imagePanel != null)
+		if (imagePanel != null) {
 			imagePanel.setParams(BWThreshold, radiusOfSpot, houghThreshold1, houghThreshold2, houghThreshold3,
 					convolutionThreshold, widthOfDie, numberOfExpectedDice);
+		}
 	}// GEN-LAST:event_houghThreshold1SliderStateChangedHandler
 
-	private void BWThresholdSliderStateChangedHandler(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_BWThresholdSliderStateChangedHandler
+	private void BWThresholdSliderStateChangedHandler(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_BWThresholdSliderStateChangedHandler
 		// Add your handling code here:
 		// BWThresholdSlider.setBorder(null);
 		BWThresholdSlider.setBorder(new javax.swing.border.TitledBorder("Black&White Threshold: "
@@ -883,13 +922,14 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 		widthOfDie = widthOfDieSlider.getValue();
 		try {
 			numberOfExpectedDice = Integer.parseInt(numberOfExpectedDiceText.getText());
-		} catch (NumberFormatException e) {
-			numberOfExpectedDice = NUMBER_OF_EXPECTED_DICE;
+		} catch (final NumberFormatException e) {
+			numberOfExpectedDice = UserAnalysisDisplay.NUMBER_OF_EXPECTED_DICE;
 		}
 
-		if (imagePanel != null)
+		if (imagePanel != null) {
 			imagePanel.setParams(BWThreshold, radiusOfSpot, houghThreshold1, houghThreshold2, houghThreshold3,
 					convolutionThreshold, widthOfDie, numberOfExpectedDice);
+		}
 	}// GEN-LAST:event_BWThresholdSliderStateChangedHandler
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
@@ -932,16 +972,16 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 	// My Vars
 
 	private com.linkare.rec.impl.client.experiment.ExpDataModel model;
-	private String name = "User Image Analysis";
-	private javax.swing.Icon icon = new javax.swing.ImageIcon(getClass().getResource(
+	private final String name = "User Image Analysis";
+	private final javax.swing.Icon icon = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/aleatorio/resources/AleatorioIcon.gif"));
 	/** Filter for the file chooser, so we only load known images */
-	private pt.utl.ist.elab.client.aleatorio.utils.ImageFilter imageFilter = new pt.utl.ist.elab.client.aleatorio.utils.ImageFilter();
-	private pt.utl.ist.elab.client.aleatorio.utils.JPEGImageFilter jpegImageFilter = new pt.utl.ist.elab.client.aleatorio.utils.JPEGImageFilter();
-	private javax.swing.JFileChooser chooser = new javax.swing.JFileChooser();
+	private final pt.utl.ist.elab.client.aleatorio.utils.ImageFilter imageFilter = new pt.utl.ist.elab.client.aleatorio.utils.ImageFilter();
+	private final pt.utl.ist.elab.client.aleatorio.utils.JPEGImageFilter jpegImageFilter = new pt.utl.ist.elab.client.aleatorio.utils.JPEGImageFilter();
+	private final javax.swing.JFileChooser chooser = new javax.swing.JFileChooser();
 
 	private AnalysisPanel imagePanel = null;
-	private pt.utl.ist.elab.client.aleatorio.utils.StorageSingleton userAnalysisSingleton = pt.utl.ist.elab.client.aleatorio.utils.StorageSingleton
+	private final pt.utl.ist.elab.client.aleatorio.utils.StorageSingleton userAnalysisSingleton = pt.utl.ist.elab.client.aleatorio.utils.StorageSingleton
 			.getSingleton();
 
 	private byte[] configurationByteArray;
@@ -959,26 +999,29 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(UserAnalysisDisplay.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(UserAnalysisDisplay.UI_CLIENT_LOGGER));
 		}
 	}
 
 	/**
-	 *ExpDataDisplay Implementation
+	 * ExpDataDisplay Implementation
 	 */
-	public void setExpDataModel(com.linkare.rec.impl.client.experiment.ExpDataModel model) {
-		if (model != null)
+	public void setExpDataModel(final com.linkare.rec.impl.client.experiment.ExpDataModel model) {
+		if (model != null) {
 			fromExperimentButton.setEnabled(true);
+		}
 
-		if (this.model != null)
+		if (this.model != null) {
 			model.removeExpDataModelListener(this);
+		}
 
 		this.model = model;
 
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 
 	}// setExpDataModel(ExpDataModel model)
 
@@ -1003,10 +1046,10 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 	}// getToolBar()
 
 	/**
-	 *ExpDataModelListener implementation
+	 * ExpDataModelListener implementation
 	 */
 
-	public void newSamples(com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
+	public void newSamples(final com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
 			if (model.getValueAt(i, model.getChannelIndex("Configuration")) != null) {
 				// System.out.println("Configuring!");
@@ -1032,32 +1075,32 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 	public void dataModelRunning() {
 	}// dataModelRunning()
 
-	public void headerAvailable(com.linkare.rec.data.config.HardwareAcquisitionConfig header) {
+	public void headerAvailable(final com.linkare.rec.data.config.HardwareAcquisitionConfig header) {
 	}// headerAvailable(HardwareAcquisitionConfig header)
 
 	/**
-	 *Utilities
+	 * Utilities
 	 */
 
-	public java.awt.Image openImage(String filename) {
-		java.awt.Toolkit toolkit = java.awt.Toolkit.getDefaultToolkit();
+	public java.awt.Image openImage(final String filename) {
+		final java.awt.Toolkit toolkit = java.awt.Toolkit.getDefaultToolkit();
 		return (toolkit.getImage(filename));
 	}
 
-	private void saveImageToFile(String fileName, java.awt.Image image, int quality) {
+	private void saveImageToFile(final String fileName, final java.awt.Image image, final int quality) {
 		try {
-			java.awt.image.BufferedImage bImage = new java.awt.image.BufferedImage(imagePanel.getWidth(), imagePanel
-					.getHeight(), java.awt.image.BufferedImage.TYPE_4BYTE_ABGR);
+			final java.awt.image.BufferedImage bImage = new java.awt.image.BufferedImage(imagePanel.getWidth(),
+					imagePanel.getHeight(), java.awt.image.BufferedImage.TYPE_4BYTE_ABGR);
 
 			// Copy from Image to BufferedImage
-			java.awt.Graphics2D g = (java.awt.Graphics2D) bImage.getGraphics();
+			final java.awt.Graphics2D g = (java.awt.Graphics2D) bImage.getGraphics();
 			g.drawImage(image, 0, 0, this);
 			g.dispose();
 
-			java.io.FileOutputStream out = new java.io.FileOutputStream(fileName);
-			com.sun.image.codec.jpeg.JPEGImageEncoder encoder = com.sun.image.codec.jpeg.JPEGCodec
+			final java.io.FileOutputStream out = new java.io.FileOutputStream(fileName);
+			final com.sun.image.codec.jpeg.JPEGImageEncoder encoder = com.sun.image.codec.jpeg.JPEGCodec
 					.createJPEGEncoder(out);
-			com.sun.image.codec.jpeg.JPEGEncodeParam jep = com.sun.image.codec.jpeg.JPEGCodec
+			final com.sun.image.codec.jpeg.JPEGEncodeParam jep = com.sun.image.codec.jpeg.JPEGCodec
 					.getDefaultJPEGEncodeParam(bImage);
 
 			jep.setQuality((float) quality / 100, true);
@@ -1065,25 +1108,25 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 			encoder.encode(bImage);
 
 			out.close();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private boolean isNumber(String numberString) {
+	private boolean isNumber(final String numberString) {
 		int numberInt;
 		if (numberString != "") {
 			try {
 				numberInt = Integer.parseInt(numberString);
-			} catch (NumberFormatException e) {
+			} catch (final NumberFormatException e) {
 				return false;
 			}
 		}// if
 		return true;
 	}// isNumber
 
-	private int[] byteArray2IntArray(byte[] byteArray) {
-		int[] temp = new int[byteArray.length / 4];
+	private int[] byteArray2IntArray(final byte[] byteArray) {
+		final int[] temp = new int[byteArray.length / 4];
 
 		for (int index = 0; index < temp.length; index++) {
 			temp[index] = (int) (byteArray[4 * index] & 0xff) << 24;

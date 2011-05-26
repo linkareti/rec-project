@@ -21,6 +21,10 @@ import com.linkare.rec.impl.client.customizer.ICustomizerListener;
 public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer,
 		InteractiveMenu {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4488403254934149496L;
 	private InteractiveFERMAPAnima fermAnima;
 	private int nSamples = 10;
 	private int tbs = 1;
@@ -129,21 +133,16 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		configPanel.setPreferredSize(new java.awt.Dimension(290, 400));
 		staticPanel.setLayout(new java.awt.GridBagLayout());
 
-		staticPanel
-				.setBorder(new javax.swing.border.TitledBorder(new javax.swing.border.BevelBorder(
-						javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 153), new java.awt.Color(0,
-								51, 153), new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153)),
-						java.util.ResourceBundle.getBundle(
-								"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-								"rec.exp.customizer.title.1")));
+		staticPanel.setBorder(new javax.swing.border.TitledBorder(new javax.swing.border.BevelBorder(
+				javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153),
+				new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153)), java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.title.1")));
 		staticPanel.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.1"));
 		staticPanel.setMinimumSize(new java.awt.Dimension(290, 50));
 		staticPanel.setPreferredSize(new java.awt.Dimension(290, 50));
-		staticRadioButton
-				.setText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-						"rec.exp.customizer.title.2"));
+		staticRadioButton.setText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.title.2"));
 		staticRadioButton.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.2"));
 		expButtonGroup.add(staticRadioButton);
@@ -152,10 +151,8 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		staticPanel.add(staticRadioButton, gridBagConstraints);
 
 		nonStaticRadioButton.setSelected(true);
-		nonStaticRadioButton
-				.setText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-						"rec.exp.customizer.title.3"));
+		nonStaticRadioButton.setText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.title.3"));
 		nonStaticRadioButton.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.3"));
 		expButtonGroup.add(nonStaticRadioButton);
@@ -170,27 +167,23 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		simulPanel.setLayout(new java.awt.GridBagLayout());
 
-		simulPanel
-				.setBorder(new javax.swing.border.TitledBorder(new javax.swing.border.BevelBorder(
-						javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 153), new java.awt.Color(0,
-								51, 153), new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153)),
-						java.util.ResourceBundle.getBundle(
-								"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-								"rec.exp.customizer.title.4")));
+		simulPanel.setBorder(new javax.swing.border.TitledBorder(new javax.swing.border.BevelBorder(
+				javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153),
+				new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153)), java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.title.4")));
 		simulPanel.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.4"));
 		simulPanel.setMinimumSize(new java.awt.Dimension(290, 100));
 		simulPanel.setPreferredSize(new java.awt.Dimension(290, 100));
 		mapRadioButton.setSelected(true);
-		mapRadioButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages")
+		mapRadioButton.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
 				.getString("rec.exp.customizer.title.24"));
 		mapRadioButton.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.24"));
 		constsButtonGroup.add(mapRadioButton);
 		mapRadioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		mapRadioButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				mapRadioButtonActionPerformed(evt);
 			}
 		});
@@ -202,15 +195,15 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.weightx = 1.0;
 		simulPanel.add(mapRadioButton, gridBagConstraints);
 
-		animaRadioButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages")
+		animaRadioButton.setText(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
 				.getString("rec.exp.customizer.title.25"));
 		animaRadioButton.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.25"));
 		constsButtonGroup.add(animaRadioButton);
 		animaRadioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		animaRadioButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				animaRadioButtonActionPerformed(evt);
 			}
 		});
@@ -222,15 +215,14 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.weightx = 1.0;
 		simulPanel.add(animaRadioButton, gridBagConstraints);
 
-		histRadioButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages")
+		histRadioButton.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
 				.getString("rec.exp.customizer.title.26"));
 		histRadioButton.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.26"));
 		constsButtonGroup.add(histRadioButton);
 		histRadioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		histRadioButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				histRadioButtonActionPerformed(evt);
 			}
 		});
@@ -247,13 +239,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
 		configPanel.add(simulPanel, gridBagConstraints);
 
-		mapaTabbedPane
-				.setBorder(new javax.swing.border.TitledBorder(new javax.swing.border.BevelBorder(
-						javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 153), new java.awt.Color(0,
-								51, 153), new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153)),
-						java.util.ResourceBundle.getBundle(
-								"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-								"rec.exp.customizer.title.5")));
+		mapaTabbedPane.setBorder(new javax.swing.border.TitledBorder(new javax.swing.border.BevelBorder(
+				javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153),
+				new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153)), java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.title.5")));
 		mapaTabbedPane.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.5"));
 		mapaTabbedPane.setMinimumSize(new java.awt.Dimension(290, 293));
@@ -267,12 +256,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		generalPanel.setPreferredSize(new java.awt.Dimension(290, 90));
 		pcorPanel.setLayout(new java.awt.GridBagLayout());
 
-		pcorPanel
-				.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-						"rec.exp.customizer.title.8")));
-		pcorPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.8"));
+		pcorPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.title.8")));
+		pcorPanel.setToolTipText(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.8"));
 		pcorPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		pcorPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -285,7 +272,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.8"));
 		pcorSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		pcorSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				pcorSliderStateChanged(evt);
 			}
 		});
@@ -302,7 +289,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		pcorTextField.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.8"));
 		pcorTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				pcorTextFieldFocusLost(evt);
 			}
 		});
@@ -319,12 +306,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		iterPanel.setLayout(new java.awt.GridBagLayout());
 
-		iterPanel
-				.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-						"rec.exp.customizer.title.9")));
-		iterPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.9"));
+		iterPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.title.9")));
+		iterPanel.setToolTipText(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.9"));
 		iterPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		iterPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -338,7 +323,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.9"));
 		iterSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		iterSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				iterSliderStateChanged(evt);
 			}
 		});
@@ -355,7 +340,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		iterTextField.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.9"));
 		iterTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				iterTextFieldFocusLost(evt);
 			}
 		});
@@ -372,12 +357,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		mPanel.setLayout(new java.awt.GridBagLayout());
 
-		mPanel
-				.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-						"rec.exp.customizer.title.7")));
-		mPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.7"));
+		mPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.title.7")));
+		mPanel.setToolTipText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
+				.getString("rec.exp.customizer.tip.7"));
 		mPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		mPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -386,12 +369,12 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		mSlider.setMinorTickSpacing(50);
 		mSlider.setPaintLabels(true);
 		mSlider.setPaintTicks(true);
-		mSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.7"));
+		mSlider.setToolTipText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
+				.getString("rec.exp.customizer.tip.7"));
 		mSlider.setValue(160);
 		mSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		mSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				mSliderStateChanged(evt);
 			}
 		});
@@ -408,7 +391,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		mTextField.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.7"));
 		mTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				mTextFieldFocusLost(evt);
 			}
 		});
@@ -424,10 +407,12 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		generalPanel.add(mPanel, gridBagConstraints);
 
 		mapaTabbedPane.addTab(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
-						.getString("rec.exp.customizer.title.6"), null, generalPanel, java.util.ResourceBundle
-						.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-								"rec.exp.customizer.tip.6"));
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.title.6"),
+				null,
+				generalPanel,
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.tip.6"));
 
 		mainPsiPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -439,10 +424,9 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		psiPanel.setLayout(new java.awt.GridBagLayout());
 
 		psiPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages")
-				.getString("rec.exp.customizer.title.11")));
-		psiPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.11"));
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.title.11")));
+		psiPanel.setToolTipText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
+				.getString("rec.exp.customizer.tip.11"));
 		psiPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		psiPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -451,12 +435,12 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		psiSlider.setMinorTickSpacing(12);
 		psiSlider.setPaintLabels(true);
 		psiSlider.setPaintTicks(true);
-		psiSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.11"));
+		psiSlider.setToolTipText(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.11"));
 		psiSlider.setValue(0);
 		psiSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		psiSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				psiSliderStateChanged(evt);
 			}
 		});
@@ -473,7 +457,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		psiTextField.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.11"));
 		psiTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				psiTextFieldFocusLost(evt);
 			}
 		});
@@ -491,10 +475,9 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		nPsiPanel.setLayout(new java.awt.GridBagLayout());
 
 		nPsiPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages")
-				.getString("rec.exp.customizer.title.13")));
-		nPsiPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.13"));
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.title.13")));
+		nPsiPanel.setToolTipText(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.13"));
 		nPsiPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		nPsiPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -509,7 +492,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		nPsiSlider.setValue(30);
 		nPsiSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		nPsiSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				nPsiSliderStateChanged(evt);
 			}
 		});
@@ -526,7 +509,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		nPsiTextField.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.13"));
 		nPsiTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				nPsiTextFieldFocusLost(evt);
 			}
 		});
@@ -544,10 +527,9 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		dPsiPanel.setLayout(new java.awt.GridBagLayout());
 
 		dPsiPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages")
-				.getString("rec.exp.customizer.title.12")));
-		dPsiPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.12"));
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.title.12")));
+		dPsiPanel.setToolTipText(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.12"));
 		dPsiPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		dPsiPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -561,7 +543,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		dPsiSlider.setValue(15);
 		dPsiSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		dPsiSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				dPsiSliderStateChanged(evt);
 			}
 		});
@@ -578,7 +560,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		dPsiTextField.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.12"));
 		dPsiTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				dPsiTextFieldFocusLost(evt);
 			}
 		});
@@ -593,10 +575,13 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.weighty = 1.0;
 		mainPsiPanel.add(dPsiPanel, gridBagConstraints);
 
-		mapaTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages")
-				.getString("rec.exp.customizer.title.10"), null, mainPsiPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.10"));
+		mapaTabbedPane.addTab(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.title.10"),
+				null,
+				mainPsiPanel,
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.tip.10"));
 
 		mainUMapaPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -608,8 +593,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		uMapaPanel.setLayout(new java.awt.GridBagLayout());
 
 		uMapaPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages")
-				.getString("rec.exp.customizer.title.15")));
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.title.15")));
 		uMapaPanel.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.15"));
 		uMapaPanel.setMinimumSize(new java.awt.Dimension(250, 80));
@@ -625,7 +609,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.15"));
 		uMapaSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		uMapaSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				uMapaSliderStateChanged(evt);
 			}
 		});
@@ -642,7 +626,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		uMapaTextField.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.15"));
 		uMapaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				uMapaTextFieldFocusLost(evt);
 			}
 		});
@@ -660,8 +644,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		nUMapaPanel.setLayout(new java.awt.GridBagLayout());
 
 		nUMapaPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages")
-				.getString("rec.exp.customizer.title.17")));
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.title.17")));
 		nUMapaPanel.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.17"));
 		nUMapaPanel.setMinimumSize(new java.awt.Dimension(250, 80));
@@ -678,7 +661,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		nUMapaSlider.setValue(5);
 		nUMapaSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		nUMapaSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				nUMapaSliderStateChanged(evt);
 			}
 		});
@@ -695,7 +678,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		nUMapaTextField.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.17"));
 		nUMapaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				nUMapaTextFieldFocusLost(evt);
 			}
 		});
@@ -713,8 +696,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		dUMapaPanel.setLayout(new java.awt.GridBagLayout());
 
 		dUMapaPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages")
-				.getString("rec.exp.customizer.title.16")));
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.title.16")));
 		dUMapaPanel.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.16"));
 		dUMapaPanel.setMinimumSize(new java.awt.Dimension(250, 80));
@@ -731,7 +713,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		dUMapaSlider.setValue(20);
 		dUMapaSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		dUMapaSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				dUMapaSliderStateChanged(evt);
 			}
 		});
@@ -748,7 +730,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		dUMapaTextField.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.16"));
 		dUMapaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				dUMapaTextFieldFocusLost(evt);
 			}
 		});
@@ -763,10 +745,13 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.weighty = 1.0;
 		mainUMapaPanel.add(dUMapaPanel, gridBagConstraints);
 
-		mapaTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages")
-				.getString("rec.exp.customizer.title.14"), null, mainUMapaPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.14"));
+		mapaTabbedPane.addTab(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.title.14"),
+				null,
+				mainUMapaPanel,
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.tip.14"));
 
 		resolutionPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -776,8 +761,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		widthPanel.setLayout(new java.awt.GridBagLayout());
 
 		widthPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages")
-				.getString("rec.exp.customizer.title.19")));
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.title.19")));
 		widthPanel.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.19"));
 		widthPanel.setMinimumSize(new java.awt.Dimension(250, 80));
@@ -794,7 +778,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		widthSlider.setValue(800);
 		widthSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		widthSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				widthSliderStateChanged(evt);
 			}
 		});
@@ -811,7 +795,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		widthTextField.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.19"));
 		widthTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				widthTextFieldFocusLost(evt);
 			}
 		});
@@ -829,8 +813,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		heightPanel.setLayout(new java.awt.GridBagLayout());
 
 		heightPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages")
-				.getString("rec.exp.customizer.title.20")));
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.title.20")));
 		heightPanel.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.20"));
 		heightPanel.setMinimumSize(new java.awt.Dimension(250, 80));
@@ -847,7 +830,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		heightSlider.setValue(800);
 		heightSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		heightSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				heightSliderStateChanged(evt);
 			}
 		});
@@ -864,7 +847,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		heightTextField.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.20"));
 		heightTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				heightTextFieldFocusLost(evt);
 			}
 		});
@@ -882,8 +865,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		pixSizePanel.setLayout(new java.awt.GridBagLayout());
 
 		pixSizePanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages")
-				.getString("rec.exp.customizer.title.21")));
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.title.21")));
 		pixSizePanel.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.21"));
 		pixSizePanel.setMinimumSize(new java.awt.Dimension(250, 80));
@@ -912,10 +894,13 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.weighty = 1.0;
 		resolutionPanel.add(pixSizePanel, gridBagConstraints);
 
-		mapaTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages")
-				.getString("rec.exp.customizer.title.18"), null, resolutionPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.18"));
+		mapaTabbedPane.addTab(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.title.18"),
+				null,
+				resolutionPanel,
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.tip.18"));
 
 		mainUMaxPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -925,10 +910,9 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		uMaxPanel.setLayout(new java.awt.GridBagLayout());
 
 		uMaxPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages")
-				.getString("rec.exp.customizer.title.28")));
-		uMaxPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.28"));
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.title.28")));
+		uMaxPanel.setToolTipText(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.28"));
 		uMaxPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		uMaxPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -944,7 +928,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		uMaxSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		uMaxSlider.setEnabled(false);
 		uMaxSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				uMaxSliderStateChanged(evt);
 			}
 		});
@@ -965,7 +949,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.28"));
 		uMaxTextField.setEnabled(false);
 		uMaxTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				uMaxTextFieldFocusLost(evt);
 			}
 		});
@@ -978,14 +962,13 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		uMaxPanel.add(uMaxTextField, gridBagConstraints);
 
 		uMaxCheckBox.setSelected(true);
-		uMaxCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages")
+		uMaxCheckBox.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
 				.getString("rec.exp.customizer.title.29"));
 		uMaxCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.29"));
 		uMaxCheckBox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		uMaxCheckBox.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				uMaxCheckBoxActionPerformed(evt);
 			}
 		});
@@ -1006,10 +989,13 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.weighty = 1.0;
 		mainUMaxPanel.add(uMaxPanel, gridBagConstraints);
 
-		mapaTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages")
-				.getString("rec.exp.customizer.title.27"), null, mainUMaxPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.27"));
+		mapaTabbedPane.addTab(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.title.27"),
+				null,
+				mainUMaxPanel,
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.tip.27"));
 
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -1027,27 +1013,24 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		btnPanel.setLayout(new java.awt.GridBagLayout());
 
-		okButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages")
+		okButton.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
 				.getString("rec.exp.customizer.title.ok"));
-		okButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.ok"));
+		okButton.setToolTipText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
+				.getString("rec.exp.customizer.tip.ok"));
 		okButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				okButtonActionPerformed(evt);
 			}
 		});
 
 		controlBtnPanel.add(okButton);
 
-		cancelButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.customizer.title.cancel"));
+		cancelButton.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
+				.getString("rec.exp.customizer.title.cancel"));
 		cancelButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.customizer.tip.cancel"));
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.cancel"));
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				cancelButtonActionPerformed(evt);
 			}
 		});
@@ -1059,15 +1042,12 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.weightx = 1.0;
 		btnPanel.add(controlBtnPanel, gridBagConstraints);
 
-		defaultButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.customizer.title.dfc"));
-		defaultButton
-				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-						"rec.exp.customizer.tip.dfc"));
+		defaultButton.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
+				.getString("rec.exp.customizer.title.dfc"));
+		defaultButton.setToolTipText(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.dfc"));
 		defaultButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				defaultButtonActionPerformed(evt);
 			}
 		});
@@ -1088,8 +1068,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		mainEditPanel.setBorder(new javax.swing.border.TitledBorder(new javax.swing.border.BevelBorder(
 				javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153),
 				new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153)), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages")
-				.getString("rec.exp.customizer.title.22")));
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.title.22")));
 		mainEditPanel.setToolTipText(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.22"));
 		mainEditPanel.setMinimumSize(new java.awt.Dimension(300, 100));
@@ -1098,11 +1077,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		editPanel.setLayout(new java.awt.GridBagLayout());
 
 		editPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages")
-				.getString("rec.exp.customizer.title.23")));
-		editPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.tip.1"));
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.title.23")));
+		editPanel.setToolTipText(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.editPanel.tip.1"));
 		editPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		editPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -1117,12 +1095,12 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		editSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		editSlider.setEnabled(false);
 		editSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				editSliderStateChanged(evt);
 			}
 		});
 		editSlider.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-			public void mouseDragged(java.awt.event.MouseEvent evt) {
+			public void mouseDragged(final java.awt.event.MouseEvent evt) {
 				editSliderMouseDragged(evt);
 			}
 		});
@@ -1142,7 +1120,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.23"));
 		editTextField.setEnabled(false);
 		editTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				editTextFieldFocusLost(evt);
 			}
 		});
@@ -1161,11 +1139,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		editLabel.setFont(new java.awt.Font("MS Sans Serif", 0, 24));
 		editLabel.setForeground(new java.awt.Color(255, 102, 102));
-		editLabel.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages")
+		editLabel.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
 				.getString("rec.exp.customizer.title.23"));
-		editLabel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.23"));
+		editLabel.setToolTipText(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.tip.23"));
 		editLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -1191,139 +1168,142 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 	}// GEN-END:initComponents
 
-	private void uMaxTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_uMaxTextFieldFocusLost
+	private void uMaxTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_uMaxTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(uMaxTextField, uMaxSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(uMaxTextField, uMaxSlider, 1);
+		} catch (final NumberFormatException e) {
 			uMaxTextField.setText(Integer.toString(uMaxSlider.getValue()));
 		}
 	}// GEN-LAST:event_uMaxTextFieldFocusLost
 
-	private void uMaxSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_uMaxSliderStateChanged
+	private void uMaxSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_uMaxSliderStateChanged
 		uMaxTextField.setText("" + uMaxSlider.getValue());
 	}// GEN-LAST:event_uMaxSliderStateChanged
 
-	private void uMaxCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_uMaxCheckBoxActionPerformed
+	private void uMaxCheckBoxActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_uMaxCheckBoxActionPerformed
 		uMaxSlider.setEnabled(!uMaxCheckBox.isSelected());
 		uMaxTextField.setEnabled(!uMaxCheckBox.isSelected());
 	}// GEN-LAST:event_uMaxCheckBoxActionPerformed
 
-	private void heightSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_heightSliderStateChanged
+	private void heightSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_heightSliderStateChanged
 		heightTextField.setText("" + heightSlider.getValue());
 	}// GEN-LAST:event_heightSliderStateChanged
 
-	private void widthSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_widthSliderStateChanged
+	private void widthSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_widthSliderStateChanged
 		widthTextField.setText("" + widthSlider.getValue());
 	}// GEN-LAST:event_widthSliderStateChanged
 
-	private void heightTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_heightTextFieldFocusLost
+	private void heightTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_heightTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(heightTextField, heightSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(heightTextField, heightSlider, 1);
+		} catch (final NumberFormatException e) {
 			heightTextField.setText(Integer.toString(heightSlider.getValue()));
 		}
 	}// GEN-LAST:event_heightTextFieldFocusLost
 
-	private void widthTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_widthTextFieldFocusLost
+	private void widthTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_widthTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(widthTextField, widthSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(widthTextField, widthSlider, 1);
+		} catch (final NumberFormatException e) {
 			widthTextField.setText(Integer.toString(widthSlider.getValue()));
 		}
 	}// GEN-LAST:event_widthTextFieldFocusLost
 
-	public void actionPerformed(java.awt.event.ActionEvent e) {
+	public void actionPerformed(final java.awt.event.ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
-						.getString("rec.exp.customizer.editMenu.title.1")))
-			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.title.1"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.tip.1"), (int) Math.round(fermAnima.getSysX() * 10), new int[] {
-					(int) Math.round(fermAnima.getSysXMax() * 2), (int) Math.round(fermAnima.getSysXMax() * 10), 0, 0 });
-		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
-						.getString("rec.exp.customizer.editMenu.title.2")))
-			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.title.2"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.tip.2"), (int) Math.round(fermAnima.getVel() * 10), new int[] { 400,
-					2000, -2000, 100 });
-		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
-						.getString("rec.exp.customizer.editMenu.title.3")))
-			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.title.3"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.tip.3"), (int) Math.round(Math.toDegrees(fermAnima.getPsi())),
-					new int[] { 30, 360, 0, 6 });
-		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
-						.getString("rec.exp.customizer.editMenu.title.4")))
-			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.title.4"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.tip.4"), (int) Math.round(fermAnima.getWallAmp() * 100), new int[] {
-					100, 900, 0, 20 });
-		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
-						.getString("rec.exp.customizer.editMenu.title.5")))
-			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.title.5"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.tip.5"), (int) Math.round(fermAnima.getWallFreq() * 100), new int[] {
-					10, 100, 0, 2 });
-		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
-						.getString("rec.exp.customizer.editMenu.title.6")))
-			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.title.6"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.tip.6"), (int) Math.round(fermAnima.getD() * 10), new int[] { 100,
-					1000, 100, 20 });
-		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
-						.getString("rec.exp.customizer.editMenu.title.7")))
-			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.title.7"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.tip.7"), this.nSamples, new int[] { 100, 1010, 10, 50 });
-		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
-						.getString("rec.exp.customizer.editMenu.title.8")))
-			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.title.8"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.tip.8"), this.tbs, new int[] { 1, 10, 1, 0 });
-		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
-						.getString("rec.exp.customizer.editMenu.title.9"))) {
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.editMenu.title.1"))) {
+			updateEditPanel(
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.title.1"),
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.tip.1"),
+					(int) Math.round(fermAnima.getSysX() * 10),
+					new int[] { (int) Math.round(fermAnima.getSysXMax() * 2),
+							(int) Math.round(fermAnima.getSysXMax() * 10), 0, 0 });
+		} else if (e.getActionCommand().equalsIgnoreCase(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.editMenu.title.2"))) {
+			updateEditPanel(
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.title.2"),
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.tip.2"), (int) Math.round(fermAnima.getVel() * 10),
+					new int[] { 400, 2000, -2000, 100 });
+		} else if (e.getActionCommand().equalsIgnoreCase(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.editMenu.title.3"))) {
+			updateEditPanel(
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.title.3"),
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.tip.3"),
+					(int) Math.round(Math.toDegrees(fermAnima.getPsi())), new int[] { 30, 360, 0, 6 });
+		} else if (e.getActionCommand().equalsIgnoreCase(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.editMenu.title.4"))) {
+			updateEditPanel(
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.title.4"),
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.tip.4"), (int) Math.round(fermAnima.getWallAmp() * 100),
+					new int[] { 100, 900, 0, 20 });
+		} else if (e.getActionCommand().equalsIgnoreCase(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.editMenu.title.5"))) {
+			updateEditPanel(
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.title.5"),
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.tip.5"), (int) Math.round(fermAnima.getWallFreq() * 100),
+					new int[] { 10, 100, 0, 2 });
+		} else if (e.getActionCommand().equalsIgnoreCase(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.editMenu.title.6"))) {
+			updateEditPanel(
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.title.6"),
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.tip.6"), (int) Math.round(fermAnima.getD() * 10), new int[] {
+							100, 1000, 100, 20 });
+		} else if (e.getActionCommand().equalsIgnoreCase(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.editMenu.title.7"))) {
+			updateEditPanel(
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.title.7"),
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.tip.7"), nSamples, new int[] { 100, 1010, 10, 50 });
+		} else if (e.getActionCommand().equalsIgnoreCase(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.editMenu.title.8"))) {
+			updateEditPanel(
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.title.8"),
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.tip.8"), tbs, new int[] { 1, 10, 1, 0 });
+		} else if (e.getActionCommand().equalsIgnoreCase(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.editMenu.title.9"))) {
 			fermAnima.terminate();
 			fermAnima.setPsi(fermAnima.getPsi());
 			((javax.swing.JMenuItem) e.getSource()).setText(java.util.ResourceBundle.getBundle(
 					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
 					"rec.exp.customizer.editMenu.title.10"));
 			((javax.swing.JMenuItem) e.getSource()).setToolTipText(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-					"rec.exp.customizer.editMenu.tip.10"));
+					"pt/utl/ist/elab/client/vfermap/resources/messages")
+					.getString("rec.exp.customizer.editMenu.tip.10"));
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
-						.getString("rec.exp.customizer.editMenu.title.10"))) {
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.editMenu.title.10"))) {
 			fermAnima.start();
 			((javax.swing.JMenuItem) e.getSource()).setText(java.util.ResourceBundle.getBundle(
 					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
 					"rec.exp.customizer.editMenu.title.9"));
-			((javax.swing.JMenuItem) e.getSource()).setToolTipText(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-					"rec.exp.customizer.editMenu.tip.9"));
+			((javax.swing.JMenuItem) e.getSource())
+					.setToolTipText(java.util.ResourceBundle.getBundle(
+							"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+							"rec.exp.customizer.editMenu.tip.9"));
 		}
 		/*
 		 * else if (e.getActionCommand().equalsIgnoreCase("Ok")){
@@ -1336,7 +1316,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		 */
 	}
 
-	private void updateEditPanel(String strTitle, String strTip, int val, int[] sliderConfig) {
+	private void updateEditPanel(final String strTitle, final String strTip, final int val, final int[] sliderConfig) {
 		editPanel.remove(editSlider);
 		editSlider = new javax.swing.JSlider();
 		editSlider.setMaximum(sliderConfig[1]);
@@ -1349,17 +1329,17 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		editSlider.setValue(val);
 		editSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		editSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				editSliderStateChanged(evt);
 			}
 		});
 		editSlider.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-			public void mouseDragged(java.awt.event.MouseEvent evt) {
+			public void mouseDragged(final java.awt.event.MouseEvent evt) {
 				editSliderMouseDragged(evt);
 			}
 		});
 
-		java.awt.GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+		final java.awt.GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;
@@ -1381,208 +1361,198 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 	}
 
 	public void update() {
-		String str = ((javax.swing.border.TitledBorder) editPanel.getBorder()).getTitle();
+		final String str = ((javax.swing.border.TitledBorder) editPanel.getBorder()).getTitle();
 
-		if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.1")))
-			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.title.1"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-					"rec.exp.customizer.editPanel.tip.1"), (int) Math.round(fermAnima.getSysX() * 10), new int[] {
-					(int) Math.round(fermAnima.getSysXMax() * 2), (int) Math.round(fermAnima.getSysXMax() * 10), 0, 0 });
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.2")))
+		if (str.equalsIgnoreCase(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.editPanel.title.1"))) {
+			updateEditPanel(
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.title.1"),
+					java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+							"rec.exp.customizer.editPanel.tip.1"),
+					(int) Math.round(fermAnima.getSysX() * 10),
+					new int[] { (int) Math.round(fermAnima.getSysXMax() * 2),
+							(int) Math.round(fermAnima.getSysXMax() * 10), 0, 0 });
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.editPanel.title.2"))) {
 			editSlider.setValue((int) Math.round(fermAnima.getVel() * 10));
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.3")))
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.editPanel.title.3"))) {
 			editSlider.setValue((int) Math.round(Math.toDegrees(fermAnima.getPsi())));
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.6")))
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.editPanel.title.6"))) {
 			editSlider.setValue((int) Math.round(fermAnima.getD() * 10));
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.4")))
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.editPanel.title.4"))) {
 			editSlider.setValue((int) Math.round(fermAnima.getWallAmp() * 100));
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.5")))
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.editPanel.title.5"))) {
 			editSlider.setValue((int) Math.round(fermAnima.getWallFreq() * 100));
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.7")))
-			editSlider.setValue(this.nSamples);
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.8")))
-			editSlider.setValue(this.tbs);
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.editPanel.title.7"))) {
+			editSlider.setValue(nSamples);
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.editPanel.title.8"))) {
+			editSlider.setValue(tbs);
+		}
 	}
 
-	private void editSet(String str, double val) {
-		if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.1")))
+	private void editSet(final String str, final double val) {
+		if (str.equalsIgnoreCase(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
+						"rec.exp.customizer.editPanel.title.1"))) {
 			fermAnima.setSysX(val / 10d);
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.2")))
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.editPanel.title.2"))) {
 			fermAnima.setVel(val / 10d);
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.3")))
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.editPanel.title.3"))) {
 			fermAnima.setPsi(Math.toRadians(val));
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.4")))
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.editPanel.title.4"))) {
 			fermAnima.setWallAmp(val / 100d);
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.5")))
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.editPanel.title.5"))) {
 			fermAnima.setWallFreq(val / 100d);
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.6")))
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.editPanel.title.6"))) {
 			fermAnima.setD(val / 10d);
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.7")))
-			this.nSamples = (int) val;
-		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
-				"rec.exp.customizer.editPanel.title.8")))
-			this.tbs = (int) val;
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.editPanel.title.7"))) {
+			nSamples = (int) val;
+		} else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.customizer.editPanel.title.8"))) {
+			tbs = (int) val;
+		}
 	}
 
-	private void editTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_editTextFieldFocusLost
+	private void editTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_editTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(editTextField, editSlider, 1);
+			final double val = GUtils.validateInput(editTextField, editSlider, 1);
 			editSet(((javax.swing.border.TitledBorder) editPanel.getBorder()).getTitle(), val);
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			editTextField.setText(Integer.toString(editSlider.getValue()));
 		}
 	}// GEN-LAST:event_editTextFieldFocusLost
 
-	private void editSliderMouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_editSliderMouseDragged
+	private void editSliderMouseDragged(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_editSliderMouseDragged
 		editSet(((javax.swing.border.TitledBorder) editPanel.getBorder()).getTitle(), editSlider.getValue());
 	}// GEN-LAST:event_editSliderMouseDragged
 
-	private void editSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_editSliderStateChanged
+	private void editSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_editSliderStateChanged
 		editTextField.setText("" + editSlider.getValue());
 	}// GEN-LAST:event_editSliderStateChanged
 
-	private void nUMapaTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_nUMapaTextFieldFocusLost
+	private void nUMapaTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_nUMapaTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(nUMapaTextField, nUMapaSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(nUMapaTextField, nUMapaSlider, 1);
+		} catch (final NumberFormatException e) {
 			nUMapaTextField.setText(Integer.toString(nUMapaSlider.getValue()));
 		}
 	}// GEN-LAST:event_nUMapaTextFieldFocusLost
 
-	private void dUMapaTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_dUMapaTextFieldFocusLost
+	private void dUMapaTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_dUMapaTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(dUMapaTextField, dUMapaSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(dUMapaTextField, dUMapaSlider, 1);
+		} catch (final NumberFormatException e) {
 			dUMapaTextField.setText(Integer.toString(dUMapaSlider.getValue()));
 		}
 	}// GEN-LAST:event_dUMapaTextFieldFocusLost
 
-	private void uMapaTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_uMapaTextFieldFocusLost
+	private void uMapaTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_uMapaTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(uMapaTextField, uMapaSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(uMapaTextField, uMapaSlider, 1);
+		} catch (final NumberFormatException e) {
 			uMapaTextField.setText(Integer.toString(uMapaSlider.getValue()));
 		}
 	}// GEN-LAST:event_uMapaTextFieldFocusLost
 
-	private void nPsiTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_nPsiTextFieldFocusLost
+	private void nPsiTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_nPsiTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(nPsiTextField, nPsiSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(nPsiTextField, nPsiSlider, 1);
+		} catch (final NumberFormatException e) {
 			nPsiTextField.setText(Integer.toString(nPsiSlider.getValue()));
 		}
 	}// GEN-LAST:event_nPsiTextFieldFocusLost
 
-	private void dPsiTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_dPsiTextFieldFocusLost
+	private void dPsiTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_dPsiTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(dPsiTextField, dPsiSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(dPsiTextField, dPsiSlider, 1);
+		} catch (final NumberFormatException e) {
 			dPsiTextField.setText(Integer.toString(dPsiSlider.getValue()));
 		}
 	}// GEN-LAST:event_dPsiTextFieldFocusLost
 
-	private void psiTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_psiTextFieldFocusLost
+	private void psiTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_psiTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(psiTextField, psiSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(psiTextField, psiSlider, 1);
+		} catch (final NumberFormatException e) {
 			psiTextField.setText(Integer.toString(psiSlider.getValue()));
 		}
 	}// GEN-LAST:event_psiTextFieldFocusLost
 
-	private void iterTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_iterTextFieldFocusLost
+	private void iterTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_iterTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(iterTextField, iterSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(iterTextField, iterSlider, 1);
+		} catch (final NumberFormatException e) {
 			iterTextField.setText(Integer.toString(iterSlider.getValue()));
 		}
 	}// GEN-LAST:event_iterTextFieldFocusLost
 
-	private void pcorTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_pcorTextFieldFocusLost
+	private void pcorTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_pcorTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(pcorTextField, pcorSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(pcorTextField, pcorSlider, 1);
+		} catch (final NumberFormatException e) {
 			pcorTextField.setText(Integer.toString(pcorSlider.getValue()));
 		}
 	}// GEN-LAST:event_pcorTextFieldFocusLost
 
-	private void mTextFieldFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_mTextFieldFocusLost
+	private void mTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_mTextFieldFocusLost
 		try {
-			double val = GUtils.validateInput(mTextField, mSlider, 1);
-		} catch (NumberFormatException e) {
+			final double val = GUtils.validateInput(mTextField, mSlider, 1);
+		} catch (final NumberFormatException e) {
 			mTextField.setText(Integer.toString(mSlider.getValue()));
 		}
 	}// GEN-LAST:event_mTextFieldFocusLost
 
-	private void nUMapaSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_nUMapaSliderStateChanged
+	private void nUMapaSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_nUMapaSliderStateChanged
 		nUMapaTextField.setText("" + nUMapaSlider.getValue());
 	}// GEN-LAST:event_nUMapaSliderStateChanged
 
-	private void dUMapaSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_dUMapaSliderStateChanged
+	private void dUMapaSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_dUMapaSliderStateChanged
 		dUMapaTextField.setText("" + dUMapaSlider.getValue());
 	}// GEN-LAST:event_dUMapaSliderStateChanged
 
-	private void uMapaSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_uMapaSliderStateChanged
+	private void uMapaSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_uMapaSliderStateChanged
 		uMapaTextField.setText("" + uMapaSlider.getValue());
 	}// GEN-LAST:event_uMapaSliderStateChanged
 
-	private void nPsiSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_nPsiSliderStateChanged
+	private void nPsiSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_nPsiSliderStateChanged
 		nPsiTextField.setText("" + nPsiSlider.getValue());
 	}// GEN-LAST:event_nPsiSliderStateChanged
 
-	private void dPsiSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_dPsiSliderStateChanged
+	private void dPsiSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_dPsiSliderStateChanged
 		dPsiTextField.setText("" + dPsiSlider.getValue());
 	}// GEN-LAST:event_dPsiSliderStateChanged
 
-	private void psiSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_psiSliderStateChanged
+	private void psiSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_psiSliderStateChanged
 		psiTextField.setText("" + psiSlider.getValue());
 	}// GEN-LAST:event_psiSliderStateChanged
 
-	private void iterSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_iterSliderStateChanged
+	private void iterSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_iterSliderStateChanged
 		iterTextField.setText("" + iterSlider.getValue());
 	}// GEN-LAST:event_iterSliderStateChanged
 
-	private void pcorSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_pcorSliderStateChanged
+	private void pcorSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_pcorSliderStateChanged
 		pcorTextField.setText("" + pcorSlider.getValue());
 	}// GEN-LAST:event_pcorSliderStateChanged
 
-	private void mSliderStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_mSliderStateChanged
+	private void mSliderStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_mSliderStateChanged
 		mTextField.setText("" + mSlider.getValue());
 	}// GEN-LAST:event_mSliderStateChanged
 
-	private void animaRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_animaRadioButtonActionPerformed
+	private void animaRadioButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_animaRadioButtonActionPerformed
 		editSlider.setEnabled(true);
 		editTextField.setEnabled(true);
 
@@ -1608,7 +1578,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		pcorTextField.setEnabled(false);
 	}// GEN-LAST:event_animaRadioButtonActionPerformed
 
-	private void histRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_histRadioButtonActionPerformed
+	private void histRadioButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_histRadioButtonActionPerformed
 		editSlider.setEnabled(false);
 		editTextField.setEnabled(false);
 
@@ -1634,7 +1604,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		pcorTextField.setEnabled(true);
 	}// GEN-LAST:event_histRadioButtonActionPerformed
 
-	private void mapRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_mapRadioButtonActionPerformed
+	private void mapRadioButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_mapRadioButtonActionPerformed
 		editSlider.setEnabled(false);
 		editTextField.setEnabled(false);
 
@@ -1660,31 +1630,31 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		pcorTextField.setEnabled(true);
 	}// GEN-LAST:event_mapRadioButtonActionPerformed
 
-	private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
+	private void cancelButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_cancelButtonActionPerformed
 
-	private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
+	private void okButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
 
-		acqConfig.setSelectedFrequency(new Frequency((double) this.tbs, hardwareInfo.getHardwareFrequencies(0)
+		acqConfig.setSelectedFrequency(new Frequency((double) tbs, hardwareInfo.getHardwareFrequencies(0)
 				.getMinimumFrequency().getMultiplier(), hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency()
 				.getFrequencyDefType()));
 
 		byte simulType = 0;
-		int check = 0;
+		final int check = 0;
 
 		if (mapRadioButton.isSelected()) {
-			double m = (double) mSlider.getValue() / 10d;
-			double pcor = (double) pcorSlider.getValue() / 100d;
-			int iter = iterSlider.getValue() * 10;
+			final double m = (double) mSlider.getValue() / 10d;
+			final double pcor = (double) pcorSlider.getValue() / 100d;
+			final int iter = iterSlider.getValue() * 10;
 
-			double psi = Math.toRadians(psiSlider.getValue());
-			int nPsi = nPsiSlider.getValue();
-			double dPsi = Math.toRadians(dPsiSlider.getValue());
+			final double psi = Math.toRadians(psiSlider.getValue());
+			final int nPsi = nPsiSlider.getValue();
+			final double dPsi = Math.toRadians(dPsiSlider.getValue());
 
-			double uMapa = (double) uMapaSlider.getValue() / 10d;
-			int nUMapa = nUMapaSlider.getValue();
-			double dUMapa = (double) dUMapaSlider.getValue() / 100d;
+			final double uMapa = (double) uMapaSlider.getValue() / 10d;
+			final int nUMapa = nUMapaSlider.getValue();
+			final double dUMapa = (double) dUMapaSlider.getValue() / 100d;
 
 			acqConfig.setTotalSamples(nPsi * nUMapa * iter + nPsi * nUMapa);
 
@@ -1702,12 +1672,12 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 			acqConfig.getSelectedHardwareParameter("nUMapa").setParameterValue("" + nUMapa);
 			acqConfig.getSelectedHardwareParameter("dUMapa").setParameterValue("" + (float) dUMapa);
 		} else if (animaRadioButton.isSelected()) {
-			double x = fermAnima.getSysX();
-			double xDot = fermAnima.getVel();
-			double psi = fermAnima.getPsi();
-			double wAmp = fermAnima.getWallAmp();
-			double d = fermAnima.getD();
-			double wFreq = fermAnima.getWallFreq();
+			final double x = fermAnima.getSysX();
+			final double xDot = fermAnima.getVel();
+			final double psi = fermAnima.getPsi();
+			final double wAmp = fermAnima.getWallAmp();
+			final double d = fermAnima.getD();
+			final double wFreq = fermAnima.getWallFreq();
 
 			acqConfig.setTotalSamples(214700);
 
@@ -1719,14 +1689,14 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 			acqConfig.getSelectedHardwareParameter("wAmp").setParameterValue("" + (float) wAmp);
 			acqConfig.getSelectedHardwareParameter("d").setParameterValue("" + (float) d);
 			acqConfig.getSelectedHardwareParameter("wFreq").setParameterValue("" + (float) wFreq);
-			acqConfig.getSelectedHardwareParameter("nCol").setParameterValue("" + this.nSamples);
+			acqConfig.getSelectedHardwareParameter("nCol").setParameterValue("" + nSamples);
 		} else if (histRadioButton.isSelected()) {
-			double m = (double) mSlider.getValue() / 10d;
-			double pcor = (double) pcorSlider.getValue() / 100d;
-			int iter = iterSlider.getValue() * 10;
+			final double m = (double) mSlider.getValue() / 10d;
+			final double pcor = (double) pcorSlider.getValue() / 100d;
+			final int iter = iterSlider.getValue() * 10;
 
-			double psi = Math.toRadians(psiSlider.getValue());
-			double uMapa = (double) uMapaSlider.getValue() / 10d;
+			final double psi = Math.toRadians(psiSlider.getValue());
+			final double uMapa = (double) uMapaSlider.getValue() / 10d;
 
 			acqConfig.setTotalSamples(iter + 1);
 
@@ -1747,20 +1717,22 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		acqConfig.getSelectedHardwareParameter("w").setParameterValue("" + widthSlider.getValue());
 		acqConfig.getSelectedHardwareParameter("h").setParameterValue("" + heightSlider.getValue());
 		acqConfig.getSelectedHardwareParameter("pixSize").setParameterValue("" + (byte) pixSizeSlider.getValue());
-		if (uMaxCheckBox.isSelected())
+		if (uMaxCheckBox.isSelected()) {
 			acqConfig.getSelectedHardwareParameter("uMax").setParameterValue("" + -1);
-		else
+		} else {
 			acqConfig.getSelectedHardwareParameter("uMax").setParameterValue("" + uMaxSlider.getValue());
+		}
 
-		for (int i = 0; i < acqConfig.getSelectedHardwareParameters().length; i++)
+		for (int i = 0; i < acqConfig.getSelectedHardwareParameters().length; i++) {
 			System.out.println(acqConfig.getSelectedHardwareParameters(i).getParameterName() + " = "
 					+ acqConfig.getSelectedHardwareParameters(i).getParameterValue());
+		}
 
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_okButtonActionPerformed
 
-	private void defaultButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_defaultButtonActionPerformed
-		this.nSamples = 10;
+	private void defaultButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_defaultButtonActionPerformed
+		nSamples = 10;
 
 		nonStaticRadioButton.setSelected(true);
 		mapRadioButton.setSelected(true);
@@ -1788,10 +1760,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		update();
 	}// GEN-LAST:event_defaultButtonActionPerformed
 
-	public static void main(String args[]) {
-		javax.swing.JFrame test = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame test = new javax.swing.JFrame();
 		test.addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent e) {
+			public void windowClosing(final java.awt.event.WindowEvent e) {
 				System.exit(0);
 			};
 		});
@@ -1810,7 +1782,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -1822,7 +1794,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -1832,9 +1804,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -1848,9 +1821,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -1866,46 +1840,48 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		return acqConfig;
 	}
 
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
 
-			byte simulType = Byte.parseByte(acqConfig.getSelectedHardwareParameterValue("simulType"));
-			if (acqConfig.getSelectedHardwareParameterValue("staticImg").trim().equals("1") ? true : false)
+			final byte simulType = Byte.parseByte(acqConfig.getSelectedHardwareParameterValue("simulType"));
+			if (acqConfig.getSelectedHardwareParameterValue("staticImg").trim().equals("1") ? true : false) {
 				staticRadioButton.setSelected(true);
-			else
+			} else {
 				nonStaticRadioButton.setSelected(true);
+			}
 
 			widthSlider.setValue(Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("w")));
 			heightSlider.setValue(Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("h")));
 			pixSizeSlider.setValue(Byte.parseByte(acqConfig.getSelectedHardwareParameterValue("pixSize")));
 
 			// this.nSamples = acqConfig.getTotalSamples();
-			this.tbs = (int) acqConfig.getSelectedFrequency().getFrequency();
+			tbs = (int) acqConfig.getSelectedFrequency().getFrequency();
 
-			int uMax = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("uMax"));
+			final int uMax = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("uMax"));
 
 			if (uMax == -1) {
 				uMaxCheckBox.setSelected(true);
 				uMaxCheckBoxActionPerformed(null);
-			} else
+			} else {
 				uMaxSlider.setValue(uMax);
+			}
 
 			if (simulType == 1) {
 				mapRadioButton.setSelected(true);
 				mapRadioButtonActionPerformed(null);
 
-				float m = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("m"));
-				float pcor = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("pcor"));
-				int iter = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("iter"));
+				final float m = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("m"));
+				final float pcor = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("pcor"));
+				final int iter = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("iter"));
 
-				float psi = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("psi"));
-				int nPsi = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("nPsi"));
-				float dPsi = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("dPsi"));
+				final float psi = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("psi"));
+				final int nPsi = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("nPsi"));
+				final float dPsi = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("dPsi"));
 
-				float uMapa = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("uMapa"));
-				int nUMapa = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("nUMapa"));
-				float dUMapa = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("dUMapa"));
+				final float uMapa = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("uMapa"));
+				final int nUMapa = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("nUMapa"));
+				final float dUMapa = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("dUMapa"));
 
 				mSlider.setValue((int) Math.round(10 * m));
 				pcorSlider.setValue((int) Math.round(100 * pcor));
@@ -1922,12 +1898,12 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 				animaRadioButton.setSelected(true);
 				animaRadioButtonActionPerformed(null);
 
-				float x = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("x"));
-				float xDot = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("xDot"));
-				float psi = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("psi"));
-				float wAmp = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("wAmp"));
-				float d = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("d"));
-				float wFreq = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("wFreq"));
+				final float x = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("x"));
+				final float xDot = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("xDot"));
+				final float psi = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("psi"));
+				final float wAmp = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("wAmp"));
+				final float d = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("d"));
+				final float wFreq = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("wFreq"));
 
 				fermAnima.config(x, xDot, psi, d, wAmp, wFreq);
 				update();
@@ -1935,12 +1911,12 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 				histRadioButton.setSelected(true);
 				histRadioButtonActionPerformed(null);
 
-				float m = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("m"));
-				float pcor = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("pcor"));
-				int iter = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("iter"));
+				final float m = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("m"));
+				final float pcor = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("pcor"));
+				final int iter = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("iter"));
 
-				float psi = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("psi"));
-				float uMapa = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("uMapa"));
+				final float psi = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("psi"));
+				final float uMapa = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("uMapa"));
 
 				mSlider.setValue((int) Math.round(10 * m));
 				pcorSlider.setValue((int) Math.round(100 * pcor));
@@ -1952,12 +1928,12 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
 	public javax.swing.JComponent getCustomizerComponent() {

@@ -10,13 +10,17 @@ import javax.swing.table.TableColumnModel;
 @Deprecated
 public class FlatTableHeader extends JTableHeader {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3074273916069416941L;
 	private final String uiClassID = "FlatTableHeaderUI";
 
 	public FlatTableHeader() {
 		this(null);
 	}
 
-	public FlatTableHeader(TableColumnModel cm) {
+	public FlatTableHeader(final TableColumnModel cm) {
 		// João: Este construtor não devia invocar o super(cm) ?
 	}
 

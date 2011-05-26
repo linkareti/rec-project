@@ -15,40 +15,42 @@ public class Defaults {
 	private Defaults() {
 	}
 
-	public static int defaultIfEmpty(String value, int defaultValue) {
+	public static int defaultIfEmpty(final String value, final int defaultValue) {
 		try {
 			return Integer.parseInt(value);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			return defaultValue;
 		}
 	}
 
-	public static long defaultIfEmpty(String value, long defaultValue) {
+	public static long defaultIfEmpty(final String value, final long defaultValue) {
 		try {
 			return Long.parseLong(value);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			return defaultValue;
 		}
 	}
 
-	public static double defaultIfEmpty(String value, double defaultValue) {
+	public static double defaultIfEmpty(final String value, final double defaultValue) {
 		try {
 			return Double.parseDouble(value);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			return defaultValue;
 		}
 	}
 
-	public static String defaultIfEmpty(String value, String defaultValue) {
-		if (value != null && !value.trim().equals(""))
+	public static String defaultIfEmpty(final String value, final String defaultValue) {
+		if (value != null && !value.trim().equals("")) {
 			return value;
+		}
 
 		return defaultValue;
 	}
 
-	public static javax.swing.ImageIcon defaultIfEmpty(Object value, javax.swing.ImageIcon defaultValue) {
-		if (value != null && value instanceof javax.swing.ImageIcon)
+	public static javax.swing.ImageIcon defaultIfEmpty(final Object value, final javax.swing.ImageIcon defaultValue) {
+		if (value != null && value instanceof javax.swing.ImageIcon) {
 			return (javax.swing.ImageIcon) value;
+		}
 
 		return defaultValue;
 	}

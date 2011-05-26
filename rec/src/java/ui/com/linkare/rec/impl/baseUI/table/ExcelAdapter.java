@@ -20,7 +20,7 @@ import javax.swing.TransferHandler;
  */
 public class ExcelAdapter implements ActionListener {
 	private String rowstring, value;
-	private Clipboard system;
+	private final Clipboard system;
 	private StringSelection stsel;
 	private JTable jTable1;
 
@@ -29,10 +29,10 @@ public class ExcelAdapter implements ActionListener {
 	 * Copy-Paste and acts as a Clipboard listener.
 	 */
 
-	public ExcelAdapter(JTable myJTable) {
+	public ExcelAdapter(final JTable myJTable) {
 		jTable1 = myJTable;
 		system = Toolkit.getDefaultToolkit().getSystemClipboard();
-		KeyStroke copy = KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK, false);
+		final KeyStroke copy = KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK, false);
 		jTable1.registerKeyboardAction(this, "Copy", copy, JComponent.WHEN_FOCUSED);
 
 	}
@@ -44,7 +44,7 @@ public class ExcelAdapter implements ActionListener {
 		return jTable1;
 	}
 
-	public void setJTable(JTable jTable1) {
+	public void setJTable(final JTable jTable1) {
 		this.jTable1 = jTable1;
 	}
 
@@ -87,9 +87,11 @@ public class ExcelAdapter implements ActionListener {
 	/**
 	 * Invoked when an action occurs.
 	 */
-	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().compareTo("Copy") == 0)
+	@Override
+	public void actionPerformed(final ActionEvent e) {
+		if (e.getActionCommand().compareTo("Copy") == 0) {
 			copyToClipBoard();
+		}
 	}
 
 }

@@ -22,7 +22,7 @@ import com.linkare.rec.impl.client.experiment.MultSeriesTableModelProxy;
  * @author npadriano
  */
 public class ExportCSV {
-	
+
 	/** CSV extention file */
 	public static final String CSV_EXTENTION_FILE = "csv";
 
@@ -34,8 +34,7 @@ public class ExportCSV {
 
 	/** Tabed strategy */
 	public static final CSVStrategy TDF_STRATEGY = CSVStrategy.TDF_STRATEGY;
-	
-	
+
 	/**
 	 * Static Class
 	 */
@@ -43,6 +42,15 @@ public class ExportCSV {
 		throw new UnsupportedOperationException("Static class!");
 	}
 
+	/**
+	 * Format data in CSV using excel strategy.
+	 * 
+	 * @param model model with the data
+	 * @return csv file content
+	 */
+	public static String print(final CSVModel model) {
+		return ExportCSV.print(model, ExportCSV.EXCEL_STRATEGY);
+	}
 
 	/**
 	 * Format data in CSV using excel strategy.
@@ -50,40 +58,30 @@ public class ExportCSV {
 	 * @param model model with the data
 	 * @return csv file content
 	 */
-	public static String print(CSVModel model) {
-		return print(model, EXCEL_STRATEGY);
+	public static String print(final ExpDataModel model) {
+		return ExportCSV.print(new CSVExpDataModel(model));
 	}
-	
+
 	/**
 	 * Format data in CSV using excel strategy.
 	 * 
 	 * @param model model with the data
 	 * @return csv file content
 	 */
-	public static String print(ExpDataModel model) {
-		return print(new CSVExpDataModel(model));
+	public static String print(final MultSeriesTableModelProxy model) {
+		return ExportCSV.print(new CSVMultSeriesTableModelProxy(model));
 	}
-	
+
 	/**
 	 * Format data in CSV using excel strategy.
 	 * 
 	 * @param model model with the data
 	 * @return csv file content
 	 */
-	public static String print(MultSeriesTableModelProxy model) {
-		return print(new CSVMultSeriesTableModelProxy(model));
+	public static String print(final DefaultTableModel model) {
+		return ExportCSV.print(new CSVDefaultTableModelProxy(model));
 	}
-	
-	/**
-	 * Format data in CSV using excel strategy.
-	 * 
-	 * @param model model with the data
-	 * @return csv file content
-	 */
-	public static String print(DefaultTableModel model) {
-		return print(new CSVDefaultTableModelProxy(model));
-	}
-	
+
 	/**
 	 * Format data in CSV using the specified strategy.
 	 * 
@@ -91,17 +89,17 @@ public class ExportCSV {
 	 * @param strategy strategy to use in the format
 	 * @return csv file content
 	 */
-	public static String print(CSVModel model, CSVStrategy strategy) {
-	    StringWriter sw = new StringWriter();
-	    CSVPrinter printer = new CSVPrinter(sw);
-	    printer.setStrategy(strategy);
-		
-	    // print the header with the columns name
+	public static String print(final CSVModel model, final CSVStrategy strategy) {
+		final StringWriter sw = new StringWriter();
+		final CSVPrinter printer = new CSVPrinter(sw);
+		printer.setStrategy(strategy);
+
+		// print the header with the columns name
 		for (int headerCol = 0; headerCol < model.getColumnCount(); headerCol++) {
 			printer.print(model.getColumnHeader(headerCol));
 		}
 		printer.println();
-		
+
 		// print the lines
 		for (int row = 0; row < model.getRowCount(); row++) {
 			for (int col = 0; col < model.getColumnCount(); col++) {
@@ -109,8 +107,8 @@ public class ExportCSV {
 			}
 			printer.println();
 		}
-		
+
 		return sw.toString();
 	}
-	
+
 }

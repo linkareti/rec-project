@@ -9,6 +9,10 @@ package com.linkare.rec.impl.data;
 public class SamplesReadException extends java.io.IOException {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8422668385063715056L;
+	/**
 	 * The number of the sample data index that caused the error
 	 */
 	private int errorSampleNumber = 0;
@@ -17,13 +21,13 @@ public class SamplesReadException extends java.io.IOException {
 	 * Creates a new instance of <code>PacketReadException</code> without detail
 	 * message.
 	 */
-	public SamplesReadException(java.io.IOException e, int errorSampleNumber) {
+	public SamplesReadException(final java.io.IOException e, final int errorSampleNumber) {
 		super(e.getMessage());
 		setStackTrace(e.getStackTrace());
 		this.errorSampleNumber = errorSampleNumber;
 	}
 
-	public SamplesReadException(String message, int errorSampleNumber) {
+	public SamplesReadException(final String message, final int errorSampleNumber) {
 		super(message);
 		this.errorSampleNumber = errorSampleNumber;
 	}

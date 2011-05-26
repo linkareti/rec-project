@@ -19,6 +19,11 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 508731691742556600L;
+
 	/** Creates new form GammaCustomizer */
 	public GammaCustomizer() {
 		initComponents();
@@ -65,7 +70,8 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
 		btnOK.setText(ReCResourceBundle.findString("gamma$rec.exp.lbl.gamma.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
 			}
 		});
@@ -77,7 +83,8 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		btnCancel.setText(ReCResourceBundle.findString("gamma$rec.exp.lbl.gamma.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
 			}
 		});
@@ -96,7 +103,8 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		btnDefaults.setText(ReCResourceBundle.findString("gamma$rec.exp.lbl.gamma.dftcfg"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
 			}
 		});
@@ -135,7 +143,8 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jSliderVolume.setMinimumSize(new java.awt.Dimension(300, 41));
 		jSliderVolume.setPreferredSize(new java.awt.Dimension(300, 41));
 		jSliderVolume.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderVolumeStateChanged(evt);
 			}
 		});
@@ -145,7 +154,8 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jTextFieldVolume.setColumns(4);
 		jTextFieldVolume.setText("10");
 		jTextFieldVolume.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldVolumeFocusLost(evt);
 			}
 		});
@@ -168,7 +178,8 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jSliderAcqFreq.setSnapToTicks(true);
 		jSliderAcqFreq.setValue(1000);
 		jSliderAcqFreq.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderAcqFreqStateChanged(evt);
 			}
 		});
@@ -178,7 +189,8 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jTextFieldAcqFreq.setColumns(4);
 		jTextFieldAcqFreq.setText("1000");
 		jTextFieldAcqFreq.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldAcqFreqFocusLost(evt);
 			}
 		});
@@ -201,7 +213,8 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jSliderNPoints.setSnapToTicks(true);
 		jSliderNPoints.setValue(120);
 		jSliderNPoints.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderNPointsStateChanged(evt);
 			}
 		});
@@ -211,7 +224,8 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jTextFieldNPoints.setColumns(4);
 		jTextFieldNPoints.setText("120");
 		jTextFieldNPoints.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldNPointsFocusLost(evt);
 			}
 		});
@@ -232,79 +246,80 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 	}// GEN-END:initComponents
 
-	private void btnDefaultsActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
+	private void btnDefaultsActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
 	{// GEN-HEADEREND:event_btnDefaultsActionPerformed
 		jSliderAcqFreq.setValue(1000);
 		jSliderNPoints.setValue(300);
 		jSliderVolume.setValue(10);
 	}// GEN-LAST:event_btnDefaultsActionPerformed
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
+	private void btnCancelActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
 	{// GEN-HEADEREND:event_btnCancelActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_btnCancelActionPerformed
 
-	private void btnOKActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
+	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
 		acqConfig.getSelectedHardwareParameter("Volume").setParameterValue("" + jSliderVolume.getValue());
 
-		acqConfig.setSelectedFrequency(new Frequency((double) jSliderAcqFreq.getValue(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
+		acqConfig.setSelectedFrequency(new Frequency(jSliderAcqFreq.getValue(), hardwareInfo.getHardwareFrequencies(0)
+				.getMinimumFrequency().getMultiplier(), hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency()
+				.getFrequencyDefType()));
 
 		acqConfig.setTotalSamples(jSliderNPoints.getValue() + 20);
 
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_btnOKActionPerformed
 
-	private void jTextFieldNPointsFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldNPointsFocusLost
+	private void jTextFieldNPointsFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldNPointsFocusLost
 	{// GEN-HEADEREND:event_jTextFieldNPointsFocusLost
 		adjustSlider(jSliderNPoints, jTextFieldNPoints);
 	}// GEN-LAST:event_jTextFieldNPointsFocusLost
 
-	private void jTextFieldAcqFreqFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldAcqFreqFocusLost
+	private void jTextFieldAcqFreqFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldAcqFreqFocusLost
 	{// GEN-HEADEREND:event_jTextFieldAcqFreqFocusLost
 		adjustSlider(jSliderAcqFreq, jTextFieldAcqFreq);
 	}// GEN-LAST:event_jTextFieldAcqFreqFocusLost
 
-	private void jTextFieldVolumeFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldVolumeFocusLost
+	private void jTextFieldVolumeFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldVolumeFocusLost
 	{// GEN-HEADEREND:event_jTextFieldVolumeFocusLost
 		adjustSlider(jSliderVolume, jTextFieldVolume);
 	}// GEN-LAST:event_jTextFieldVolumeFocusLost
 
-	private void jSliderNPointsStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderNPointsStateChanged
+	private void jSliderNPointsStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderNPointsStateChanged
 	{// GEN-HEADEREND:event_jSliderNPointsStateChanged
 		jTextFieldNPoints.setText("" + jSliderNPoints.getValue());
 	}// GEN-LAST:event_jSliderNPointsStateChanged
 
-	private void jSliderAcqFreqStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderAcqFreqStateChanged
+	private void jSliderAcqFreqStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderAcqFreqStateChanged
 	{// GEN-HEADEREND:event_jSliderAcqFreqStateChanged
 		jTextFieldAcqFreq.setText("" + jSliderAcqFreq.getValue());
 	}// GEN-LAST:event_jSliderAcqFreqStateChanged
 
-	private void jSliderVolumeStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderVolumeStateChanged
+	private void jSliderVolumeStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderVolumeStateChanged
 	{// GEN-HEADEREND:event_jSliderVolumeStateChanged
 		jTextFieldVolume.setText("" + jSliderVolume.getValue());
 	}// GEN-LAST:event_jSliderVolumeStateChanged
 
-	private void adjustSlider(javax.swing.JSlider slider, javax.swing.JTextField field) {
+	private void adjustSlider(final javax.swing.JSlider slider, final javax.swing.JTextField field) {
 		int num = 0;
 		try {
 			num = Integer.parseInt(field.getText().trim());
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 			field.setText("" + slider.getValue());
 		}
-		if (num > slider.getMaximum() || num < slider.getMinimum())
+		if (num > slider.getMaximum() || num < slider.getMinimum()) {
 			field.setText("" + slider.getValue());
-		else
+		} else {
 			slider.setValue(num);
+		}
 	}
 
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String args[]) {
-		javax.swing.JFrame dummy = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new GammaCustomizer(), java.awt.BorderLayout.CENTER);
 		dummy.pack();
 		dummy.show();
@@ -318,7 +333,8 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -330,7 +346,8 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -340,9 +357,10 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -356,9 +374,10 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -370,43 +389,50 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
 		return acqConfig;
 	}
 
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
-			int vol = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("Volume"));
+			final int vol = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("Volume"));
 			jSliderVolume.setValue(vol);
-			int acqFreq = (int) acqConfig.getSelectedFrequency().getFrequency();
+			final int acqFreq = (int) acqConfig.getSelectedFrequency().getFrequency();
 			jSliderAcqFreq.setValue(acqFreq);
-			int nsamples = acqConfig.getTotalSamples();
+			final int nsamples = acqConfig.getTotalSamples();
 			jSliderNPoints.setValue(nsamples);
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
+	@Override
 	public javax.swing.JComponent getCustomizerComponent() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/gamma/resources/gamma_iconified.gif"));
 	}
 
+	@Override
 	public String getCustomizerTitle() {
 		return "Gamma Experiment Configuration Utility";
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}

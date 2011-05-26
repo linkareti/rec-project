@@ -21,12 +21,16 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * @author Jos� Pedro Pereira
  */
 public class ExperimentHistoryPanel extends javax.swing.JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5581704567638778779L;
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ExperimentHistoryPanel.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ExperimentHistoryPanel.UI_CLIENT_LOGGER));
 		}
 	}
 
@@ -39,22 +43,24 @@ public class ExperimentHistoryPanel extends javax.swing.JPanel {
 			"ReCBaseUI$rec.bui.lbl.confirmDeleteData",
 			"Are you sure you want to delete this experiment from the history?");
 
-	private ImageIcon ICON_COUNT = null;
-	private ImageIcon ICON_EXP = null;
-	private ImageIcon ICON_PLAY = null;
-	private ImageIcon ICON_DELETE = null;
+	private final ImageIcon ICON_COUNT = null;
+	private final ImageIcon ICON_EXP = null;
+	private final ImageIcon ICON_PLAY = null;
+	private final ImageIcon ICON_DELETE = null;
 
 	/** Creates new form ExperimentHistoryCell */
-	public ExperimentHistoryPanel(ExpHistoryPanelNew panelExp, ExpHistoryUINode value) {
+	public ExperimentHistoryPanel(final ExpHistoryPanelNew panelExp, final ExpHistoryUINode value) {
 		super();
 
 		this.panelExp = panelExp;
 		this.value = value;
 		initComponents();
 		lblCount.setText("" + this.value.getExpCount() + ".");
-		lblCount.setToolTipText(EXP_STR + " " + this.value.getExpCount() + " [" + this.value.getApparatusName() + "]");
-		if (value.getApparatusIcon() != null)
+		lblCount.setToolTipText(ExperimentHistoryPanel.EXP_STR + " " + this.value.getExpCount() + " ["
+				+ this.value.getApparatusName() + "]");
+		if (value.getApparatusIcon() != null) {
 			lblCount.setIcon(value.getApparatusIcon());
+		}
 
 		if (value.isLocallyOwned()) {
 			// Logger.getLogger(UI_CLIENT_LOGGER).log(Level.INFO,
@@ -101,7 +107,8 @@ public class ExperimentHistoryPanel extends javax.swing.JPanel {
 		btnExpInfo.setRolloverEnabled(true);
 		btnExpInfo.setOpaque(false);
 		btnExpInfo.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnExpInfoActionPerformed(evt);
 			}
 		});
@@ -121,7 +128,8 @@ public class ExperimentHistoryPanel extends javax.swing.JPanel {
 		btnExpPlay.setRolloverEnabled(true);
 		btnExpPlay.setOpaque(false);
 		btnExpPlay.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnExpPlayActionPerformed(evt);
 			}
 		});
@@ -141,7 +149,8 @@ public class ExperimentHistoryPanel extends javax.swing.JPanel {
 		btnExpDelete.setRolloverEnabled(true);
 		btnExpDelete.setOpaque(false);
 		btnExpDelete.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnExpDeleteActionPerformed(evt);
 			}
 		});
@@ -150,18 +159,19 @@ public class ExperimentHistoryPanel extends javax.swing.JPanel {
 
 	}// GEN-END:initComponents
 
-	private void btnExpDeleteActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnExpDeleteActionPerformed
+	private void btnExpDeleteActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnExpDeleteActionPerformed
 	{// GEN-HEADEREND:event_btnExpDeleteActionPerformed
-		if (JOptionPane.showConfirmDialog(this, CONFIRM_STR) == JOptionPane.OK_OPTION)
+		if (JOptionPane.showConfirmDialog(this, ExperimentHistoryPanel.CONFIRM_STR) == JOptionPane.OK_OPTION) {
 			panelExp.removeExpHistory(this);
+		}
 	}// GEN-LAST:event_btnExpDeleteActionPerformed
 
-	private void btnExpPlayActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnExpPlayActionPerformed
+	private void btnExpPlayActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnExpPlayActionPerformed
 	{// GEN-HEADEREND:event_btnExpPlayActionPerformed
 		value.startExperiment();
 	}// GEN-LAST:event_btnExpPlayActionPerformed
 
-	private void btnExpInfoActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnExpInfoActionPerformed
+	private void btnExpInfoActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnExpInfoActionPerformed
 	{// GEN-HEADEREND:event_btnExpInfoActionPerformed
 		value.showExperimentHeader();
 	}// GEN-LAST:event_btnExpInfoActionPerformed

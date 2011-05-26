@@ -14,12 +14,12 @@ public class MultiplierBeanInfo extends SimpleBeanInfo {
 			com.linkare.customizer.DefaultPropertySheetCustomizer.class);
 
 	private static BeanDescriptor getBdescriptor() {
-		return beanDescriptor;
+		return MultiplierBeanInfo.beanDescriptor;
 	}
 
 	static {
-		beanDescriptor.setDisplayName("Multiplicador");
-		beanDescriptor.setShortDescription("Define um multiplicador para valores fisicos...");// GEN-HEADEREND:BeanDescriptor
+		MultiplierBeanInfo.beanDescriptor.setDisplayName("Multiplicador");
+		MultiplierBeanInfo.beanDescriptor.setShortDescription("Define um multiplicador para valores fisicos...");// GEN-HEADEREND:BeanDescriptor
 
 		// Here you can add code for customizing the BeanDescriptor.
 
@@ -33,18 +33,22 @@ public class MultiplierBeanInfo extends SimpleBeanInfo {
 	private static PropertyDescriptor[] properties = new PropertyDescriptor[2];
 
 	private static PropertyDescriptor[] getPdescriptor() {
-		return properties;
+		return MultiplierBeanInfo.properties;
 	}
 
 	static {
 		try {
-			properties[PROPERTY_expValue] = new PropertyDescriptor("expValue", Multiplier.class, "getExpValue", null);
-			properties[PROPERTY_value] = new PropertyDescriptor("value", Multiplier.class, "getValue", "setValue");
-			properties[PROPERTY_value].setPreferred(true);
-			properties[PROPERTY_value].setDisplayName("Multiplicador");
-			properties[PROPERTY_value].setShortDescription("O valor do multiplicador...");
-			properties[PROPERTY_value].setPropertyEditorClass(com.linkare.rec.data.MultiplierValueEditor.class);
-		} catch (IntrospectionException e) {
+			MultiplierBeanInfo.properties[MultiplierBeanInfo.PROPERTY_expValue] = new PropertyDescriptor("expValue",
+					Multiplier.class, "getExpValue", null);
+			MultiplierBeanInfo.properties[MultiplierBeanInfo.PROPERTY_value] = new PropertyDescriptor("value",
+					Multiplier.class, "getValue", "setValue");
+			MultiplierBeanInfo.properties[MultiplierBeanInfo.PROPERTY_value].setPreferred(true);
+			MultiplierBeanInfo.properties[MultiplierBeanInfo.PROPERTY_value].setDisplayName("Multiplicador");
+			MultiplierBeanInfo.properties[MultiplierBeanInfo.PROPERTY_value]
+					.setShortDescription("O valor do multiplicador...");
+			MultiplierBeanInfo.properties[MultiplierBeanInfo.PROPERTY_value]
+					.setPropertyEditorClass(com.linkare.rec.data.MultiplierValueEditor.class);
+		} catch (final IntrospectionException e) {
 		}// GEN-HEADEREND:Properties
 
 		// Here you can add code for customizing the properties array.
@@ -57,7 +61,7 @@ public class MultiplierBeanInfo extends SimpleBeanInfo {
 	private static EventSetDescriptor[] eventSets = new EventSetDescriptor[0];
 
 	private static EventSetDescriptor[] getEdescriptor() {
-		return eventSets;
+		return MultiplierBeanInfo.eventSets;
 	}
 
 	// GEN-HEADEREND:Events
@@ -75,21 +79,21 @@ public class MultiplierBeanInfo extends SimpleBeanInfo {
 	private static MethodDescriptor[] methods = new MethodDescriptor[3];
 
 	private static MethodDescriptor[] getMdescriptor() {
-		return methods;
+		return MultiplierBeanInfo.methods;
 	}
 
 	static {
 		try {
-			methods[METHOD_equals0] = new MethodDescriptor(com.linkare.rec.data.Multiplier.class.getMethod("equals",
-					new Class[] { java.lang.Object.class }));
-			methods[METHOD_equals0].setDisplayName("");
-			methods[METHOD_toExpString1] = new MethodDescriptor(com.linkare.rec.data.Multiplier.class.getMethod(
-					"toExpString", new Class[] {}));
-			methods[METHOD_toExpString1].setDisplayName("");
-			methods[METHOD_toString2] = new MethodDescriptor(com.linkare.rec.data.Multiplier.class.getMethod(
-					"toString", new Class[] {}));
-			methods[METHOD_toString2].setDisplayName("");
-		} catch (Exception e) {
+			MultiplierBeanInfo.methods[MultiplierBeanInfo.METHOD_equals0] = new MethodDescriptor(
+					com.linkare.rec.data.Multiplier.class.getMethod("equals", new Class[] { java.lang.Object.class }));
+			MultiplierBeanInfo.methods[MultiplierBeanInfo.METHOD_equals0].setDisplayName("");
+			MultiplierBeanInfo.methods[MultiplierBeanInfo.METHOD_toExpString1] = new MethodDescriptor(
+					com.linkare.rec.data.Multiplier.class.getMethod("toExpString", new Class[] {}));
+			MultiplierBeanInfo.methods[MultiplierBeanInfo.METHOD_toExpString1].setDisplayName("");
+			MultiplierBeanInfo.methods[MultiplierBeanInfo.METHOD_toString2] = new MethodDescriptor(
+					com.linkare.rec.data.Multiplier.class.getMethod("toString", new Class[] {}));
+			MultiplierBeanInfo.methods[MultiplierBeanInfo.METHOD_toString2].setDisplayName("");
+		} catch (final Exception e) {
 		}// GEN-HEADEREND:Methods
 
 		// Here you can add code for customizing the methods array.
@@ -112,8 +116,9 @@ public class MultiplierBeanInfo extends SimpleBeanInfo {
 	 *         May return null if the information should be obtained by
 	 *         automatic analysis.
 	 */
+	@Override
 	public BeanDescriptor getBeanDescriptor() {
-		return getBdescriptor();
+		return MultiplierBeanInfo.getBdescriptor();
 	}
 
 	/**
@@ -129,8 +134,9 @@ public class MultiplierBeanInfo extends SimpleBeanInfo {
 	 *         "instanceof" to check if a given PropertyDescriptor is an
 	 *         IndexedPropertyDescriptor.
 	 */
+	@Override
 	public PropertyDescriptor[] getPropertyDescriptors() {
-		return getPdescriptor();
+		return MultiplierBeanInfo.getPdescriptor();
 	}
 
 	/**
@@ -140,8 +146,9 @@ public class MultiplierBeanInfo extends SimpleBeanInfo {
 	 *         fired by this bean. May return null if the information should be
 	 *         obtained by automatic analysis.
 	 */
+	@Override
 	public EventSetDescriptor[] getEventSetDescriptors() {
-		return getEdescriptor();
+		return MultiplierBeanInfo.getEdescriptor();
 	}
 
 	/**
@@ -151,8 +158,9 @@ public class MultiplierBeanInfo extends SimpleBeanInfo {
 	 *         by this bean. May return null if the information should be
 	 *         obtained by automatic analysis.
 	 */
+	@Override
 	public MethodDescriptor[] getMethodDescriptors() {
-		return getMdescriptor();
+		return MultiplierBeanInfo.getMdescriptor();
 	}
 
 	/**
@@ -165,8 +173,9 @@ public class MultiplierBeanInfo extends SimpleBeanInfo {
 	 *         <P>
 	 *         Returns -1 if there is no default property.
 	 */
+	@Override
 	public int getDefaultPropertyIndex() {
-		return defaultPropertyIndex;
+		return MultiplierBeanInfo.defaultPropertyIndex;
 	}
 
 	/**
@@ -178,7 +187,8 @@ public class MultiplierBeanInfo extends SimpleBeanInfo {
 	 *         <P>
 	 *         Returns -1 if there is no default event.
 	 */
+	@Override
 	public int getDefaultEventIndex() {
-		return defaultEventIndex;
+		return MultiplierBeanInfo.defaultEventIndex;
 	}
 }

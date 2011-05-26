@@ -40,14 +40,14 @@ public class GlassLayer extends JComponent {
 	 * Creates a new GlassPane.
 	 */
 	public GlassLayer() {
-		setBackground(DEFAULT_BACKGROUND);
+		setBackground(GlassLayer.DEFAULT_BACKGROUND);
 	}
 
 	/**
 	 * Creates a new GlassPane.
 	 */
-	public GlassLayer(CatchEvents eventsToCatch) {
-		setBackground(DEFAULT_BACKGROUND);
+	public GlassLayer(final CatchEvents eventsToCatch) {
+		setBackground(GlassLayer.DEFAULT_BACKGROUND);
 
 		if (CatchEvents.ALL == eventsToCatch) {
 
@@ -65,7 +65,7 @@ public class GlassLayer extends JComponent {
 			// Request focus
 			addComponentListener(new ComponentAdapter() {
 				@Override
-				public void componentShown(ComponentEvent evt) {
+				public void componentShown(final ComponentEvent evt) {
 					requestFocusInWindow();
 				}
 			});
@@ -76,15 +76,15 @@ public class GlassLayer extends JComponent {
 	}
 
 	@Override
-	protected void paintComponent(Graphics g) {
-		Graphics2D g2 = (Graphics2D) g;
+	protected void paintComponent(final Graphics g) {
+		final Graphics2D g2 = (Graphics2D) g;
 
 		// gets the current clipping area
-		Rectangle clip = g.getClipBounds();
+		final Rectangle clip = g.getClipBounds();
 
 		// sets a translucent composite with current opacity
-		AlphaComposite alpha = AlphaComposite.SrcOver.derive(opacity);
-		Composite composite = g2.getComposite();
+		final AlphaComposite alpha = AlphaComposite.SrcOver.derive(opacity);
+		final Composite composite = g2.getComposite();
 		g2.setComposite(alpha);
 
 		// background fill

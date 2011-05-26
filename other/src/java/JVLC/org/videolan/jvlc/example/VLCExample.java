@@ -9,7 +9,7 @@ import org.videolan.jvlc.event.MediaPlayerListener;
 
 public class VLCExample {
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(final String[] args) throws InterruptedException {
 		System.out.println("== Starting VLCExample ==");
 		if (args.length == 0) {
 			System.out.print("Creating a JVLC instance without args");
@@ -19,39 +19,46 @@ public class VLCExample {
 				System.out.println(i + ") " + args[i]);
 			}
 		}
-		JVLC jvlc = new JVLC(args);
+		final JVLC jvlc = new JVLC(args);
 		System.out.println("... done.");
 
-		MediaDescriptor mediaDescriptor = new MediaDescriptor(jvlc, "/home/carone/apps/a.avi");
-		MediaPlayer mediaPlayer = mediaDescriptor.getMediaPlayer();
+		final MediaDescriptor mediaDescriptor = new MediaDescriptor(jvlc, "/home/carone/apps/a.avi");
+		final MediaPlayer mediaPlayer = mediaDescriptor.getMediaPlayer();
 
 		mediaPlayer.addListener(new MediaPlayerListener() {
 
-			public void endReached(MediaPlayer mediaPlayer) {
+			@Override
+			public void endReached(final MediaPlayer mediaPlayer) {
 				System.out.println("Media instance end reached. MRL: " + mediaPlayer.getMediaDescriptor().getMrl());
 			}
 
-			public void paused(MediaPlayer mediaPlayer) {
+			@Override
+			public void paused(final MediaPlayer mediaPlayer) {
 				System.out.println("Media instance paused. MRL: " + mediaPlayer.getMediaDescriptor().getMrl());
 			}
 
-			public void playing(MediaPlayer mediaPlayer) {
+			@Override
+			public void playing(final MediaPlayer mediaPlayer) {
 				System.out.println("Media instance played. MRL: " + mediaPlayer.getMediaDescriptor().getMrl());
 			}
 
-			public void positionChanged(MediaPlayer mediaPlayer) {
+			@Override
+			public void positionChanged(final MediaPlayer mediaPlayer) {
 				// TODO Auto-generated method stub
 			}
 
-			public void timeChanged(MediaPlayer mediaPlayer, long newTime) {
+			@Override
+			public void timeChanged(final MediaPlayer mediaPlayer, final long newTime) {
 				System.out.println("new time: " + newTime);
 			}
 
-			public void stopped(MediaPlayer mediaPlayer) {
+			@Override
+			public void stopped(final MediaPlayer mediaPlayer) {
 				System.out.println("Media player stopped. MRL: " + mediaPlayer.getMediaDescriptor().getMrl());
 			}
 
-			public void errorOccurred(MediaPlayer mediaPlayer) {
+			@Override
+			public void errorOccurred(final MediaPlayer mediaPlayer) {
 				System.out.println("An error has occurred.");
 			}
 		});
@@ -61,7 +68,7 @@ public class VLCExample {
 			Thread.sleep(100);
 		}
 
-		Video video = new Video(jvlc);
+		final Video video = new Video(jvlc);
 		System.out.print(video.getWidth(mediaPlayer));
 		System.out.print("x");
 		System.out.println(video.getHeight(mediaPlayer));
@@ -78,7 +85,7 @@ public class VLCExample {
 		video.setSize(300, 300);
 
 		System.out.print("Muting...");
-		Audio audio = new Audio(jvlc);
+		final Audio audio = new Audio(jvlc);
 		audio.setMute(true);
 		Thread.sleep(3000);
 		System.out.println("unmuting.");

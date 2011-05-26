@@ -17,10 +17,15 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  */
 public class JPanelAnalogic extends javax.swing.JPanel implements ExpDataModelListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8085151768340826162L;
+
 	/** Creates new form JPanelIV */
 	public JPanelAnalogic() {
 		initComponents();
-		String a = new String("" + 3);
+		final String a = new String("" + 3);
 	}
 
 	/**
@@ -150,7 +155,7 @@ public class JPanelAnalogic extends javax.swing.JPanel implements ExpDataModelLi
 	 * @return Value of property A1.
 	 */
 	public int getA1() {
-		return this.A1;
+		return A1;
 	}
 
 	/**
@@ -158,7 +163,7 @@ public class JPanelAnalogic extends javax.swing.JPanel implements ExpDataModelLi
 	 * 
 	 * @param A1 New value of property A1.
 	 */
-	public void setA1(int A1) {
+	public void setA1(final int A1) {
 		this.A1 = A1;
 		jProgressBarA1.setValue(A1);
 		jProgressBarA1.setString(new Integer(A1).toString());
@@ -170,7 +175,7 @@ public class JPanelAnalogic extends javax.swing.JPanel implements ExpDataModelLi
 	 * @return Value of property A2.
 	 */
 	public int getA2() {
-		return this.A2;
+		return A2;
 	}
 
 	/**
@@ -178,7 +183,7 @@ public class JPanelAnalogic extends javax.swing.JPanel implements ExpDataModelLi
 	 * 
 	 * @param A2 New value of property A2.
 	 */
-	public void setA2(int A2) {
+	public void setA2(final int A2) {
 		this.A2 = A2;
 		jProgressBarA2.setValue(A2);
 		jProgressBarA2.setString(new Integer(A2).toString());
@@ -190,7 +195,7 @@ public class JPanelAnalogic extends javax.swing.JPanel implements ExpDataModelLi
 	 * @return Value of property A3.
 	 */
 	public int getA3() {
-		return this.A3;
+		return A3;
 	}
 
 	/**
@@ -198,7 +203,7 @@ public class JPanelAnalogic extends javax.swing.JPanel implements ExpDataModelLi
 	 * 
 	 * @param A3 New value of property A3.
 	 */
-	public void setA3(int A3) {
+	public void setA3(final int A3) {
 		this.A3 = A3;
 		jProgressBarA3.setValue(A3);
 		jProgressBarA3.setString(new Integer(A3).toString());
@@ -210,7 +215,7 @@ public class JPanelAnalogic extends javax.swing.JPanel implements ExpDataModelLi
 	 * @return Value of property A4.
 	 */
 	public int getA4() {
-		return this.A4;
+		return A4;
 	}
 
 	/**
@@ -218,7 +223,7 @@ public class JPanelAnalogic extends javax.swing.JPanel implements ExpDataModelLi
 	 * 
 	 * @param A4 New value of property A4.
 	 */
-	public void setA4(int A4) {
+	public void setA4(final int A4) {
 		this.A4 = A4;
 		jProgressBarA4.setValue(A4);
 		jProgressBarA4.setString(new Integer(A4).toString());
@@ -227,21 +232,23 @@ public class JPanelAnalogic extends javax.swing.JPanel implements ExpDataModelLi
 	public void dataModelRunning() {
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
-	public void headerAvailable(HardwareAcquisitionConfig header) {
+	public void headerAvailable(final HardwareAcquisitionConfig header) {
 	}
 
-	public void newSamples(NewExpDataEvent evt) {
-		int lastSample = evt.getSamplesEndIndex();
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
+		final int lastSample = evt.getSamplesEndIndex();
 		setA1(model.getValueAt(lastSample, 16).getValue().getIntValue());
 		setA2(model.getValueAt(lastSample, 17).getValue().getIntValue());
 		setA3(model.getValueAt(lastSample, 18).getValue().getIntValue());
 		setA4(model.getValueAt(lastSample, 19).getValue().getIntValue());
 	}
 
-	public void setExpDataModel(ExpDataModel model) {
+	public void setExpDataModel(final ExpDataModel model) {
 		if (this.model != null) {
 			model.removeExpDataModelListener(this);
 		}
@@ -253,19 +260,24 @@ public class JPanelAnalogic extends javax.swing.JPanel implements ExpDataModelLi
 		}
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 		headerAvailable(model.getAcquisitionConfig());
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 

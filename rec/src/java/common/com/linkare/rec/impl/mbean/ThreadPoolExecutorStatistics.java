@@ -42,7 +42,7 @@ public class ThreadPoolExecutorStatistics implements ThreadPoolExecutorStatistic
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setMaxThreadPoolCoreSize(int corePoolSize) {
+	public void setMaxThreadPoolCoreSize(final int corePoolSize) {
 		ProcessingManager.getInstance().setMaxThreadPoolCoreSize(corePoolSize);
 
 	}
@@ -59,7 +59,7 @@ public class ThreadPoolExecutorStatistics implements ThreadPoolExecutorStatistic
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setMediumThreadPoolCoreSize(int corePoolSize) {
+	public void setMediumThreadPoolCoreSize(final int corePoolSize) {
 		ProcessingManager.getInstance().setMaxThreadPoolCoreSize(corePoolSize);
 	}
 
@@ -75,7 +75,7 @@ public class ThreadPoolExecutorStatistics implements ThreadPoolExecutorStatistic
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setMinThreadPoolCoreSize(int corePoolSize) {
+	public void setMinThreadPoolCoreSize(final int corePoolSize) {
 		ProcessingManager.getInstance().setMinThreadPoolCoreSize(corePoolSize);
 	}
 
@@ -91,7 +91,7 @@ public class ThreadPoolExecutorStatistics implements ThreadPoolExecutorStatistic
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setMaxThreadPoolMaxSize(int maxsize) {
+	public void setMaxThreadPoolMaxSize(final int maxsize) {
 		ProcessingManager.getInstance().setMaxThreadPoolMaxSize(maxsize);
 	}
 
@@ -107,7 +107,7 @@ public class ThreadPoolExecutorStatistics implements ThreadPoolExecutorStatistic
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setMediumThreadPoolMaxSize(int maxsize) {
+	public void setMediumThreadPoolMaxSize(final int maxsize) {
 		ProcessingManager.getInstance().setMediumThreadPoolMaxSize(maxsize);
 	}
 
@@ -123,7 +123,7 @@ public class ThreadPoolExecutorStatistics implements ThreadPoolExecutorStatistic
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setMinThreadPoolMaxSize(int maxsize) {
+	public void setMinThreadPoolMaxSize(final int maxsize) {
 		ProcessingManager.getInstance().setMinThreadPoolMaxSize(maxsize);
 	}
 

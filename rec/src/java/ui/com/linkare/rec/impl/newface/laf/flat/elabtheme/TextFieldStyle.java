@@ -14,6 +14,7 @@ import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import javax.swing.plaf.FontUIResource;
 
+import com.linkare.rec.impl.newface.laf.flat.theme.AbstractStyle;
 import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 
 /**
@@ -24,9 +25,11 @@ public class TextFieldStyle extends DefaultStyle {
 
 	public static final String ID = "TextField";
 
-	public static final FontUIResource TEXTFIELD_FONT = new FontUIResource(DEFAULT_FONT.getFontName(), Font.PLAIN, 12);
-	public static final Border THIN_BLUE_BORDER = BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new Color(
-			0x517DA8)), javax.swing.BorderFactory.createEmptyBorder(2, 3, 2, 3));
+	public static final FontUIResource TEXTFIELD_FONT = new FontUIResource(DefaultStyle.DEFAULT_FONT.getFontName(),
+			Font.PLAIN, 12);
+	public static final Border THIN_BLUE_BORDER = BorderFactory.createCompoundBorder(
+			javax.swing.BorderFactory.createLineBorder(new Color(0x517DA8)),
+			javax.swing.BorderFactory.createEmptyBorder(2, 3, 2, 3));
 
 	/**
 	 * Creates the <code>TextFieldStyle</code>.
@@ -37,14 +40,14 @@ public class TextFieldStyle extends DefaultStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return TextFieldStyle.ID;
 	}
 
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(BORDER, THIN_BLUE_BORDER);
-		map.put(BACKGROUND, Color.white);
+		map.put(AbstractStyle.BORDER, TextFieldStyle.THIN_BLUE_BORDER);
+		map.put(AbstractStyle.BACKGROUND, Color.white);
 
 	}
 

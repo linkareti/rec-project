@@ -25,19 +25,22 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 
 	/** Creates a new instance of StampRelayTranslator */
 	public StampConfigTranslator() {
-		super(COMMAND_IDENTIFIER);
+		super(StampConfigTranslator.COMMAND_IDENTIFIER);
 	}
 
-	public boolean translate(StampCommand command) {
-		if (command.getCommandIdentifier() == null)
+	@Override
+	public boolean translate(final StampCommand command) {
+		if (command.getCommandIdentifier() == null) {
 			return false;
-		if (!command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER))
+		}
+		if (!command.getCommandIdentifier().equalsIgnoreCase(StampConfigTranslator.COMMAND_IDENTIFIER)) {
 			return false;
+		}
 
-		int numsamples = ((Integer) command.getCommandData(NUMSAMPLES_STR)).intValue();
-		float height = ((Float) command.getCommandData(HEIGHT_INIT_STR)).floatValue();
-		float teta = ((Float) command.getCommandData(TETA_INIT_STR)).floatValue();
-		int freq = ((Integer) command.getCommandData(FREQ_INTERVAL_STR)).intValue();
+		final int numsamples = ((Integer) command.getCommandData(StampConfigTranslator.NUMSAMPLES_STR)).intValue();
+		final float height = ((Float) command.getCommandData(StampConfigTranslator.HEIGHT_INIT_STR)).floatValue();
+		final float teta = ((Float) command.getCommandData(StampConfigTranslator.TETA_INIT_STR)).floatValue();
+		final int freq = ((Integer) command.getCommandData(StampConfigTranslator.FREQ_INTERVAL_STR)).intValue();
 
 		if (height > 24.9 || height < 15.1) {
 			System.out.println("Crashed at height=" + height);
@@ -59,28 +62,32 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 			return false;
 		}
 
-		int height_stamp = (int) ((24.837 - height) / 0.012);
+		final int height_stamp = (int) ((24.837 - height) / 0.012);
 
 		String heightstr = "" + height_stamp;
-		while (heightstr.length() < 3)
+		while (heightstr.length() < 3) {
 			heightstr = "0" + heightstr;
+		}
 
-		int teta_stamp = (int) ((2.4 + teta) / 0.176);
+		final int teta_stamp = (int) ((2.4 + teta) / 0.176);
 
 		String tetastr = "" + teta_stamp;
-		while (tetastr.length() < 2)
+		while (tetastr.length() < 2) {
 			tetastr = "0" + teta_stamp;
+		}
 
 		String numSamplesStr = "" + numsamples;
-		while (numSamplesStr.length() < 3)
+		while (numSamplesStr.length() < 3) {
 			numSamplesStr = "0" + numSamplesStr;
+		}
 
 		String freqStr = "" + freq;
-		while (freqStr.length() < 3)
+		while (freqStr.length() < 3) {
 			freqStr = "0" + freqStr;
+		}
 
-		String commandStr = command.getCommandIdentifier() + " " + heightstr + " " + tetastr + " " + numSamplesStr
-				+ " " + freqStr;
+		final String commandStr = command.getCommandIdentifier() + " " + heightstr + " " + tetastr + " "
+				+ numSamplesStr + " " + freqStr;
 		command.setCommand(commandStr);
 
 		return true;

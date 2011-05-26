@@ -27,6 +27,10 @@ import pt.utl.ist.elab.client.virtual.guipack.PopupMenu;
  */
 public class STDMAPAnima extends DrawingPanel3D implements ActionListener, MouseListener, Runnable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7576858186892391385L;
 	private PopupMenu viewPopMenu;
 	protected InteractiveMenu par;
 
@@ -41,14 +45,14 @@ public class STDMAPAnima extends DrawingPanel3D implements ActionListener, Mouse
 
 	private int forceDt = 1000; // ms
 
-	public STDMAPAnima(InteractiveMenu par) {
-		super(DISPLAY_NO_PERSPECTIVE);
+	public STDMAPAnima(final InteractiveMenu par) {
+		super(DrawingPanel3D.DISPLAY_NO_PERSPECTIVE);
 		buildSTDMAPAnima();
 		this.par = par;
 	}
 
 	public STDMAPAnima() {
-		super(DISPLAY_NO_PERSPECTIVE);
+		super(DrawingPanel3D.DISPLAY_NO_PERSPECTIVE);
 		buildSTDMAPAnima();
 	}
 
@@ -84,7 +88,7 @@ public class STDMAPAnima extends DrawingPanel3D implements ActionListener, Mouse
 		vel.getStyle().setFillPattern(java.awt.Color.GREEN);
 		vel.getStyle().setEdgeColor(java.awt.Color.GREEN);
 
-		Group group = new Group();
+		final Group group = new Group();
 		bola.setGroup(group);
 		force.setGroup(group);
 		vel.setGroup(group);
@@ -106,34 +110,34 @@ public class STDMAPAnima extends DrawingPanel3D implements ActionListener, Mouse
 
 	private void buildPopupMenu() {
 		viewPopMenu = new PopupMenu(this);
-		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.title.1"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.tip.1"));
-		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.title.2"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.tip.2"));
-		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.title.3"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.tip.3"));
-		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.title.4"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.tip.4"));
-		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.title.5"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.tip.5"));
+		viewPopMenu.addItem(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.1"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.tip.1"));
+		viewPopMenu.addItem(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.2"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.tip.2"));
+		viewPopMenu.addItem(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.3"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.tip.3"));
+		viewPopMenu.addItem(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.4"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.tip.4"));
+		viewPopMenu.addItem(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.5"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.tip.5"));
 	}
 
-	public void setListener(InteractionListener list) {
+	public void setListener(final InteractionListener list) {
 		bola.addListener(list);
 		force.addListener(list);
 		vel.addListener(list);
@@ -142,26 +146,26 @@ public class STDMAPAnima extends DrawingPanel3D implements ActionListener, Mouse
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		// TODO code application logic here
 	}
 
-	public void setMass(double m) {
-		this.mass = m;
+	public void setMass(final double m) {
+		mass = m;
 	}
 
 	public double getMass() {
 		return mass;
 	}
 
-	public void setLength(double len) {
+	public void setLength(final double len) {
 		/*
 		 * double ang = getTheta(); bola.setXYZ(0, Math.cos(ang)*len,
 		 * Math.sin(ang)*len); force.setXYZ(0, bola.getY(), bola.getZ());
 		 * vel.setXYZ(0, bola.getY(), bola.getZ()); fio.clear(); fio.addPoint(0,
 		 * 0, 0); fio.addPoint(0, bola.getY(), bola.getZ()); repaint();
 		 */
-		double ang = getTheta();
+		final double ang = getTheta();
 		bola.setXYZ(0, Math.sin(ang) * len, Math.cos(ang) * len);
 		force.setXYZ(0, bola.getY(), bola.getZ());
 		vel.setXYZ(0, bola.getY(), bola.getZ());
@@ -175,7 +179,7 @@ public class STDMAPAnima extends DrawingPanel3D implements ActionListener, Mouse
 		return Math.sqrt(Math.pow(fio.getYMax() - fio.getYMin(), 2) + Math.pow(fio.getZMax() - fio.getZMin(), 2));
 	}
 
-	public void setThetaVecVel(double vel) {
+	public void setThetaVecVel(final double vel) {
 		/*
 		 * this.vel.setSizeY(vel*Math.sin(getTheta()));
 		 * this.vel.setSizeZ(vel*Math.cos(getTheta())); repaint();
@@ -193,13 +197,14 @@ public class STDMAPAnima extends DrawingPanel3D implements ActionListener, Mouse
 		 * 2)+Math.pow(vel.getSizeY(), 2)); else return
 		 * Math.sqrt(Math.pow(vel.getSizeZ(), 2)+Math.pow(vel.getSizeY(), 2));
 		 */
-		if (-Math.cos(getTheta()) * vel.getSizeY() + Math.sin(getTheta()) * vel.getSizeZ() > 0)
+		if (-Math.cos(getTheta()) * vel.getSizeY() + Math.sin(getTheta()) * vel.getSizeZ() > 0) {
 			return -Math.sqrt(Math.pow(vel.getSizeZ(), 2) + Math.pow(vel.getSizeY(), 2));
-		else
+		} else {
 			return Math.sqrt(Math.pow(vel.getSizeZ(), 2) + Math.pow(vel.getSizeY(), 2));
+		}
 	}
 
-	public void move(double ang, double vel) {
+	public void move(final double ang, final double vel) {
 		animaThread = new Thread(this);
 
 		this.vel.setSizeY(vel * Math.cos(ang));
@@ -215,8 +220,8 @@ public class STDMAPAnima extends DrawingPanel3D implements ActionListener, Mouse
 		repaint();
 
 		try {
-			animaThread.sleep(100);
-		} catch (InterruptedException e) {
+			Thread.sleep(100);
+		} catch (final InterruptedException e) {
 		}
 
 		terminate();
@@ -224,7 +229,7 @@ public class STDMAPAnima extends DrawingPanel3D implements ActionListener, Mouse
 		repaint();
 	}
 
-	public void setTheta(double ang) {
+	public void setTheta(final double ang) {
 		/*
 		 * bola.setXYZ(0, Math.cos(ang)*getLength(), Math.sin(ang)*getLength());
 		 * fio.clear(); fio.addPoint(0, 0, 0); fio.addPoint(0, bola.getY(),
@@ -244,11 +249,11 @@ public class STDMAPAnima extends DrawingPanel3D implements ActionListener, Mouse
 	public double getTheta() {
 		// int n = (int) (bola.getZ()/Math.abs(bola.getZ()));
 		// return -n*Math.acos(bola.getY()/getLength());
-		int n = (int) (bola.getY() / Math.abs(bola.getY()));
+		final int n = (int) (bola.getY() / Math.abs(bola.getY()));
 		return n * Math.acos(bola.getZ() / getLength());
 	}
 
-	public void setForce(double f) {
+	public void setForce(final double f) {
 		force.setSizeZ(-f);
 		repaint();
 	}
@@ -258,18 +263,18 @@ public class STDMAPAnima extends DrawingPanel3D implements ActionListener, Mouse
 	}
 
 	public void terminate() {
-		Thread runningThread = animaThread;
+		final Thread runningThread = animaThread;
 		animaThread = null;
 		try {
 			if (runningThread != null) {
 				runningThread.interrupt();
 				runningThread.join();
 			}
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 		}
 	}
 
-	public void setForceDt(int fDt) {
+	public void setForceDt(final int fDt) {
 		terminate();
 
 		forceDt = fDt;
@@ -281,72 +286,83 @@ public class STDMAPAnima extends DrawingPanel3D implements ActionListener, Mouse
 		return forceDt;
 	}
 
-	public void actionPerformed(ActionEvent e) {
+	@Override
+	public void actionPerformed(final ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
-						.getString("rec.exp.customizer.viewMenu.title.1"))) {
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.1"))) {
 			setAlphaAndBeta(0, 0);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
-						.getString("rec.exp.customizer.viewMenu.title.2"))) {
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.2"))) {
 			setZoom(1);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
-						.getString("rec.exp.customizer.viewMenu.title.3"))) {
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.3"))) {
 			setZoom(.5);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
-						.getString("rec.exp.customizer.viewMenu.title.4"))) {
-			this.setDisplayMode(this.DISPLAY_PLANAR_YZ);
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.4"))) {
+			setDisplayMode(DISPLAY_PLANAR_YZ);
 			repaint();
 			((javax.swing.JMenuItem) e.getSource()).setText(java.util.ResourceBundle.getBundle(
 					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
 					"rec.exp.customizer.viewMenu.title.6"));
-			((javax.swing.JMenuItem) e.getSource()).setToolTipText(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-					"rec.exp.customizer.viewMenu.tip.6"));
+			((javax.swing.JMenuItem) e.getSource())
+					.setToolTipText(java.util.ResourceBundle.getBundle(
+							"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+							"rec.exp.customizer.viewMenu.tip.6"));
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
-						.getString("rec.exp.customizer.viewMenu.title.6"))) {
-			this.setDisplayMode(this.DISPLAY_NO_PERSPECTIVE);
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.6"))) {
+			setDisplayMode(DISPLAY_NO_PERSPECTIVE);
 			repaint();
 			((javax.swing.JMenuItem) e.getSource()).setText(java.util.ResourceBundle.getBundle(
 					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
 					"rec.exp.customizer.viewMenu.title.4"));
-			((javax.swing.JMenuItem) e.getSource()).setToolTipText(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-					"rec.exp.customizer.viewMenu.tip.4"));
+			((javax.swing.JMenuItem) e.getSource())
+					.setToolTipText(java.util.ResourceBundle.getBundle(
+							"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+							"rec.exp.customizer.viewMenu.tip.4"));
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
-						.getString("rec.exp.customizer.viewMenu.title.5")))
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.5"))) {
 			snapshot();
+		}
 	}
 
-	public void mouseClicked(MouseEvent e) {
-		if (javax.swing.SwingUtilities.isRightMouseButton(e))
+	@Override
+	public void mouseClicked(final MouseEvent e) {
+		if (javax.swing.SwingUtilities.isRightMouseButton(e)) {
 			viewPopMenu.show(e.getComponent(), e.getX(), e.getY());
+		}
 	}
 
-	public void mouseEntered(MouseEvent e) {
+	@Override
+	public void mouseEntered(final MouseEvent e) {
 	}
 
-	public void mouseExited(MouseEvent e) {
+	@Override
+	public void mouseExited(final MouseEvent e) {
 	}
 
-	public void mousePressed(MouseEvent e) {
+	@Override
+	public void mousePressed(final MouseEvent e) {
 	}
 
-	public void mouseReleased(MouseEvent e) {
+	@Override
+	public void mouseReleased(final MouseEvent e) {
 	}
 
 	protected void updateGUI() {
 		par.update();
 	}
 
-	public void config(double len, double theta, double thetaDot, double mass, double force, int forceDt) {
+	public void config(final double len, final double theta, final double thetaDot, final double mass,
+			final double force, final int forceDt) {
 		this.mass = mass;
 		bola.setXYZ(0, Math.sin(theta) * len, Math.cos(theta) * len);
 		this.force.setXYZ(0, bola.getY(), bola.getZ());
@@ -362,17 +378,19 @@ public class STDMAPAnima extends DrawingPanel3D implements ActionListener, Mouse
 	private boolean mod = true;
 	private Thread animaThread;
 
+	@Override
 	public void run() {
 		while (animaThread == Thread.currentThread()) {
 			force.setVisible(mod);
 			repaint();
 			mod = !mod;
 			try {
-				if (!mod)
-					animaThread.sleep(100);
-				else
-					animaThread.sleep(forceDt);
-			} catch (InterruptedException e) {
+				if (!mod) {
+					Thread.sleep(100);
+				} else {
+					Thread.sleep(forceDt);
+				}
+			} catch (final InterruptedException e) {
 			}
 		}
 	}

@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.voscilador.displays;
  */
 public class PETimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8086038392778136852L;
+
 	/** Creates a new instance of AnguloIntensidadeChart */
 	public PETimeChart() {
 		super();

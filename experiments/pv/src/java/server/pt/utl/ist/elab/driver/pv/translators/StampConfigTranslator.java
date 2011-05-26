@@ -25,23 +25,26 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 
 	/** Creates a new instance of StampRelayTranslator */
 	public StampConfigTranslator() {
-		super(COMMAND_IDENTIFIER);
+		super(StampConfigTranslator.COMMAND_IDENTIFIER);
 	}
 
-	public boolean translate(StampCommand command) {
-		if (command.getCommandIdentifier() == null)
+	@Override
+	public boolean translate(final StampCommand command) {
+		if (command.getCommandIdentifier() == null) {
 			return false;
-		if (!command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER))
+		}
+		if (!command.getCommandIdentifier().equalsIgnoreCase(StampConfigTranslator.COMMAND_IDENTIFIER)) {
 			return false;
+		}
 
-		int numsamples = ((Integer) command.getCommandData(NUMSAMPLES_STR)).intValue();
-		float userposhighf = ((Float) command.getCommandData(USER_POS_HIGH_STR)).floatValue();
+		final int numsamples = ((Integer) command.getCommandData(StampConfigTranslator.NUMSAMPLES_STR)).intValue();
+		float userposhighf = ((Float) command.getCommandData(StampConfigTranslator.USER_POS_HIGH_STR)).floatValue();
 		userposhighf = userposhighf * 10.F;
-		float userposlowf = ((Float) command.getCommandData(USER_POS_LOW_STR)).floatValue();
+		float userposlowf = ((Float) command.getCommandData(StampConfigTranslator.USER_POS_LOW_STR)).floatValue();
 		userposlowf = userposlowf * 10.F;
-		int userposlow = (int) Math.floor(userposlowf);
-		int userposhigh = (int) Math.floor(userposhighf);
-		int dt = ((Integer) command.getCommandData(FREQ_INTERVAL_STR)).intValue();
+		final int userposlow = (int) Math.floor(userposlowf);
+		final int userposhigh = (int) Math.floor(userposhighf);
+		final int dt = ((Integer) command.getCommandData(StampConfigTranslator.FREQ_INTERVAL_STR)).intValue();
 
 		if (userposhigh > 70 || userposhigh < 40) {
 			System.out.println("userposhigh is wrong..." + userposhigh);
@@ -75,23 +78,25 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 		 */
 
 		// Horacio said that this parameters can't have zeros
-		String userposlowstr = "" + userposlow;
-//		while (userposlowstr.length() < 4)
-//			userposlowstr = "0" + userposlowstr;
-//
-		String userposhighstr = "" + userposhigh;
-//		while (userposhighstr.length() < 4)
-//			userposhighstr = "0" + userposhighstr;
+		final String userposlowstr = "" + userposlow;
+		// while (userposlowstr.length() < 4)
+		// userposlowstr = "0" + userposlowstr;
+		//
+		final String userposhighstr = "" + userposhigh;
+		// while (userposhighstr.length() < 4)
+		// userposhighstr = "0" + userposhighstr;
 
 		String numSamplesStr = "" + (numsamples - 1);
-		while (numSamplesStr.length() < 3)
+		while (numSamplesStr.length() < 3) {
 			numSamplesStr = "0" + numSamplesStr;
+		}
 
 		String dtStr = "" + (dt - 1);
-		while (dtStr.length() < 4)
+		while (dtStr.length() < 4) {
 			dtStr = "0" + dtStr;
+		}
 
-		String commandStr = command.getCommandIdentifier() + " " + userposlowstr + " " + userposhighstr + " "
+		final String commandStr = command.getCommandIdentifier() + " " + userposlowstr + " " + userposhighstr + " "
 				+ numSamplesStr + " " + dtStr;
 		command.setCommand(commandStr);
 

@@ -18,10 +18,13 @@ import java.io.ObjectInputStream;
 public class FileObjectInputStream extends ObjectInputStream {
 	private File file = null;
 
-	/** Creates a new instance of FileObjectOutputStream 
-	 * @param file 
-	 * @throws IOException */
-	public FileObjectInputStream(File file) throws IOException {
+	/**
+	 * Creates a new instance of FileObjectOutputStream
+	 * 
+	 * @param file
+	 * @throws IOException
+	 */
+	public FileObjectInputStream(final File file) throws IOException {
 		super(new FileInputStream(file));
 		setFile(file);
 	}
@@ -42,7 +45,7 @@ public class FileObjectInputStream extends ObjectInputStream {
 	 * @param file New value of property file.
 	 * 
 	 */
-	public void setFile(File file) {
+	public void setFile(final File file) {
 		this.file = file;
 	}
 

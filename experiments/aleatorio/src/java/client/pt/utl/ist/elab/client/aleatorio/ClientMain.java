@@ -26,19 +26,19 @@ public class ClientMain {
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		javax.swing.JFrame.setDefaultLookAndFeelDecorated(true);
-		
+
 		SwingUtilities.invokeLater(new Runnable() {
-			
+
 			@Override
 			public void run() {
-				ReCBaseUI ui = new ReCBaseUI();
-				ui.setApparatusAutoConnectID(NAME);
+				final ReCBaseUI ui = new ReCBaseUI();
+				ui.setApparatusAutoConnectID(ClientMain.NAME);
 				ui.pack();
 				ui.setVisible(true);
 			}
 		});
-		
+
 	}
 }

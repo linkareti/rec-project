@@ -36,7 +36,8 @@ public class AbsoluteLayout implements LayoutManager2, java.io.Serializable {
 	 * @param name the component name
 	 * @param comp the component to be added
 	 */
-	public void addLayoutComponent(String name, Component comp) {
+	@Override
+	public void addLayoutComponent(final String name, final Component comp) {
 		throw new IllegalArgumentException();
 	}
 
@@ -45,7 +46,8 @@ public class AbsoluteLayout implements LayoutManager2, java.io.Serializable {
 	 * 
 	 * @param comp the component to be removed
 	 */
-	public void removeLayoutComponent(Component comp) {
+	@Override
+	public void removeLayoutComponent(final Component comp) {
 		constraints.remove(comp);
 	}
 
@@ -57,25 +59,30 @@ public class AbsoluteLayout implements LayoutManager2, java.io.Serializable {
 	 * 
 	 * @see #minimumLayoutSize
 	 */
-	public Dimension preferredLayoutSize(Container parent) {
+	@Override
+	public Dimension preferredLayoutSize(final Container parent) {
 		int maxWidth = 0;
 		int maxHeight = 0;
-		for (java.util.Enumeration e = constraints.keys(); e.hasMoreElements();) {
-			Component comp = (Component) e.nextElement();
-			AbsoluteConstraints ac = (AbsoluteConstraints) constraints.get(comp);
-			Dimension size = comp.getPreferredSize();
+		for (final java.util.Enumeration e = constraints.keys(); e.hasMoreElements();) {
+			final Component comp = (Component) e.nextElement();
+			final AbsoluteConstraints ac = (AbsoluteConstraints) constraints.get(comp);
+			final Dimension size = comp.getPreferredSize();
 
 			int width = ac.getWidth();
-			if (width == -1)
+			if (width == -1) {
 				width = size.width;
+			}
 			int height = ac.getHeight();
-			if (height == -1)
+			if (height == -1) {
 				height = size.height;
+			}
 
-			if (ac.x + width > maxWidth)
+			if (ac.x + width > maxWidth) {
 				maxWidth = ac.x + width;
-			if (ac.y + height > maxHeight)
+			}
+			if (ac.y + height > maxHeight) {
 				maxHeight = ac.y + height;
+			}
 		}
 		return new Dimension(maxWidth, maxHeight);
 	}
@@ -87,26 +94,31 @@ public class AbsoluteLayout implements LayoutManager2, java.io.Serializable {
 	 * @param parent the component to be laid out
 	 * @see #preferredLayoutSize
 	 */
-	public Dimension minimumLayoutSize(Container parent) {
+	@Override
+	public Dimension minimumLayoutSize(final Container parent) {
 		int maxWidth = 0;
 		int maxHeight = 0;
-		for (java.util.Enumeration e = constraints.keys(); e.hasMoreElements();) {
-			Component comp = (Component) e.nextElement();
-			AbsoluteConstraints ac = (AbsoluteConstraints) constraints.get(comp);
+		for (final java.util.Enumeration e = constraints.keys(); e.hasMoreElements();) {
+			final Component comp = (Component) e.nextElement();
+			final AbsoluteConstraints ac = (AbsoluteConstraints) constraints.get(comp);
 
-			Dimension size = comp.getMinimumSize();
+			final Dimension size = comp.getMinimumSize();
 
 			int width = ac.getWidth();
-			if (width == -1)
+			if (width == -1) {
 				width = size.width;
+			}
 			int height = ac.getHeight();
-			if (height == -1)
+			if (height == -1) {
 				height = size.height;
+			}
 
-			if (ac.x + width > maxWidth)
+			if (ac.x + width > maxWidth) {
 				maxWidth = ac.x + width;
-			if (ac.y + height > maxHeight)
+			}
+			if (ac.y + height > maxHeight) {
 				maxHeight = ac.y + height;
+			}
 		}
 		return new Dimension(maxWidth, maxHeight);
 	}
@@ -116,17 +128,20 @@ public class AbsoluteLayout implements LayoutManager2, java.io.Serializable {
 	 * 
 	 * @param parent the component which needs to be laid out
 	 */
-	public void layoutContainer(Container parent) {
-		for (java.util.Enumeration e = constraints.keys(); e.hasMoreElements();) {
-			Component comp = (Component) e.nextElement();
-			AbsoluteConstraints ac = (AbsoluteConstraints) constraints.get(comp);
-			Dimension size = comp.getPreferredSize();
+	@Override
+	public void layoutContainer(final Container parent) {
+		for (final java.util.Enumeration e = constraints.keys(); e.hasMoreElements();) {
+			final Component comp = (Component) e.nextElement();
+			final AbsoluteConstraints ac = (AbsoluteConstraints) constraints.get(comp);
+			final Dimension size = comp.getPreferredSize();
 			int width = ac.getWidth();
-			if (width == -1)
+			if (width == -1) {
 				width = size.width;
+			}
 			int height = ac.getHeight();
-			if (height == -1)
+			if (height == -1) {
 				height = size.height;
+			}
 
 			comp.setBounds(ac.x, ac.y, width, height);
 		}
@@ -139,9 +154,11 @@ public class AbsoluteLayout implements LayoutManager2, java.io.Serializable {
 	 * @param comp the component to be added
 	 * @param constr where/how the component is added to the layout.
 	 */
-	public void addLayoutComponent(Component comp, Object constr) {
-		if (!(constr instanceof AbsoluteConstraints))
+	@Override
+	public void addLayoutComponent(final Component comp, final Object constr) {
+		if (!(constr instanceof AbsoluteConstraints)) {
 			throw new IllegalArgumentException();
+		}
 		constraints.put(comp, constr);
 	}
 
@@ -152,7 +169,8 @@ public class AbsoluteLayout implements LayoutManager2, java.io.Serializable {
 	 * @see java.awt.Component#getPreferredSize()
 	 * @see LayoutManager
 	 */
-	public Dimension maximumLayoutSize(Container target) {
+	@Override
+	public Dimension maximumLayoutSize(final Container target) {
 		return new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE);
 	}
 
@@ -163,7 +181,8 @@ public class AbsoluteLayout implements LayoutManager2, java.io.Serializable {
 	 * origin, 1 is aligned the furthest away from the origin, 0.5 is centered,
 	 * etc.
 	 */
-	public float getLayoutAlignmentX(Container target) {
+	@Override
+	public float getLayoutAlignmentX(final Container target) {
 		return 0;
 	}
 
@@ -174,7 +193,8 @@ public class AbsoluteLayout implements LayoutManager2, java.io.Serializable {
 	 * origin, 1 is aligned the furthest away from the origin, 0.5 is centered,
 	 * etc.
 	 */
-	public float getLayoutAlignmentY(Container target) {
+	@Override
+	public float getLayoutAlignmentY(final Container target) {
 		return 0;
 	}
 
@@ -182,7 +202,8 @@ public class AbsoluteLayout implements LayoutManager2, java.io.Serializable {
 	 * Invalidates the layout, indicating that if the layout manager has cached
 	 * information it should be discarded.
 	 */
-	public void invalidateLayout(Container target) {
+	@Override
+	public void invalidateLayout(final Container target) {
 	}
 
 	/** A mapping <Component, AbsoluteConstraints> */

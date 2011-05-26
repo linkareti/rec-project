@@ -20,7 +20,7 @@ public class StampPolaroidProcessor extends AbstractStampProcessor {
 
 	/** Creates a new instance of StampHelloProcessor */
 	public StampPolaroidProcessor() {
-		super(COMMAND_IDENTIFIER);
+		super(StampPolaroidProcessor.COMMAND_IDENTIFIER);
 	}
 
 	/**
@@ -30,27 +30,29 @@ public class StampPolaroidProcessor extends AbstractStampProcessor {
 	 * @return boolean - wether the processing was successfull
 	 * 
 	 */
-	public boolean process(StampCommand command) {
+	@Override
+	public boolean process(final StampCommand command) {
 
 		int angulo = 0;
 		float intensidade = 0;
 
-		String[] splitedStr = command.getCommand().split(" ");
+		final String[] splitedStr = command.getCommand().split(" ");
 
-		if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedStr[0] != null) {
+		if (command.getCommandIdentifier().equalsIgnoreCase(StampPolaroidProcessor.COMMAND_IDENTIFIER)
+				&& splitedStr[0] != null) {
 			try {
 				angulo = Integer.parseInt(splitedStr[0]);
-				Integer oAngulo = new Integer((angulo * 180) / 155);
-				command.addCommandData(ANGULO, oAngulo);
+				final Integer oAngulo = new Integer((angulo * 180) / 155);
+				command.addCommandData(StampPolaroidProcessor.ANGULO, oAngulo);
 
 				intensidade = Integer.parseInt(splitedStr[1]);
-				Float oIntensidade = new Float((intensidade * 5) / 1024F);
-				command.addCommandData(INTENSIDADE, oIntensidade);
+				final Float oIntensidade = new Float((intensidade * 5) / 1024F);
+				command.addCommandData(StampPolaroidProcessor.INTENSIDADE, oIntensidade);
 
 				command.setData(true);
 				return true;
 
-			} catch (NumberFormatException e) {
+			} catch (final NumberFormatException e) {
 				e.printStackTrace();
 				return false;
 			}

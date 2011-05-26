@@ -32,9 +32,9 @@ public class YoungInterfDriver extends VirtualBaseDriver {
 	// caso!
 	private static String YOUNGINTERF_DRIVER_LOGGER = "YoungInterf.Logger";
 	static {
-		Logger l = LogManager.getLogManager().getLogger(YOUNGINTERF_DRIVER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(YoungInterfDriver.YOUNGINTERF_DRIVER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(YOUNGINTERF_DRIVER_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(YoungInterfDriver.YOUNGINTERF_DRIVER_LOGGER));
 		}
 	}
 
@@ -51,31 +51,35 @@ public class YoungInterfDriver extends VirtualBaseDriver {
 	public YoungInterfDriver() {
 	}
 
-	public void config(HardwareAcquisitionConfig config, HardwareInfo info) throws IncorrectStateException,
+	@Override
+	public void config(final HardwareAcquisitionConfig config, final HardwareInfo info) throws IncorrectStateException,
 			WrongConfigurationException {
 		fireIDriverStateListenerDriverConfiguring();
 		info.validateConfig(config);
 		extraValidateConfig(config, info);
 		try {
 			configure(config, info);
-		} catch (Exception e) {
-			LoggerUtil.logThrowable("Error on config...", e, Logger.getLogger(YOUNGINTERF_DRIVER_LOGGER));
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable("Error on config...", e,
+					Logger.getLogger(YoungInterfDriver.YOUNGINTERF_DRIVER_LOGGER));
 			throw new WrongConfigurationException();
 		}
 	}
 
-	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException {
+	@Override
+	public void configure(final HardwareAcquisitionConfig config, final HardwareInfo info)
+			throws WrongConfigurationException {
 		// Recebemos ordem para configurar, no HardwareAcquisitionConfig estao
 		// todas as informacoes escolhidas pelo cliente...agora e' so' pedir
 		this.config = config;
 		this.info = info;
-		float lambda = Float.parseFloat(config.getSelectedHardwareParameterValue("lambda"));
-		float dfendas = Float.parseFloat(config.getSelectedHardwareParameterValue("dfendas"));
-		float dplanos = Float.parseFloat(config.getSelectedHardwareParameterValue("dplanos"));
-		float lpadrao = Float.parseFloat(config.getSelectedHardwareParameterValue("lpadrao"));
+		final float lambda = Float.parseFloat(config.getSelectedHardwareParameterValue("lambda"));
+		final float dfendas = Float.parseFloat(config.getSelectedHardwareParameterValue("dfendas"));
+		final float dplanos = Float.parseFloat(config.getSelectedHardwareParameterValue("dplanos"));
+		final float lpadrao = Float.parseFloat(config.getSelectedHardwareParameterValue("lpadrao"));
 
-		int tbs = (int) config.getSelectedFrequency().getFrequency();
-		int nSamples = config.getTotalSamples();
+		final int tbs = (int) config.getSelectedFrequency().getFrequency();
+		final int nSamples = config.getTotalSamples();
 
 		// Vamos criar o nosso produtor de dados!
 		dataSource = new YoungInterfDataProducer(this, dfendas, dplanos, lambda, lpadrao, tbs, nSamples);
@@ -91,10 +95,12 @@ public class YoungInterfDriver extends VirtualBaseDriver {
 		fireIDriverStateListenerDriverConfigured();
 	}
 
+	@Override
 	public String getDriverUniqueID() {
-		return DRIVER_UNIQUE_ID;
+		return YoungInterfDriver.DRIVER_UNIQUE_ID;
 	}
 
+	@Override
 	public void shutdown() {
 		if (dataSource != null) {
 			dataSource.stopNow();
@@ -102,37 +108,42 @@ public class YoungInterfDriver extends VirtualBaseDriver {
 		super.shutDownNow();
 	}
 
-	public IDataSource start(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public IDataSource start(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverStarting();
 		dataSource.startProduction();
 		fireIDriverStateListenerDriverStarted();
 		return dataSource;
 	}
 
-	public void stop(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public void stop(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverStoping();
 		dataSource.stopNow();
 		fireIDriverStateListenerDriverStoped();
 	}
 
+	@Override
 	public Object getHardwareInfo() {
 		fireIDriverStateListenerDriverReseting();
-		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+				+ "/HardwareInfo.xml";
 		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
-		if (prop.indexOf("://") == -1)
+		if (prop.indexOf("://") == -1) {
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
+		}
 
 		java.net.URL url = null;
 		try {
 			url = ReCProtocols.getURL(prop);
-		} catch (java.net.MalformedURLException e) {
+		} catch (final java.net.MalformedURLException e) {
 			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger("YoungInterf"));
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
-			} catch (java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2, Logger
-						.getLogger("YoungInterf"));
+			} catch (final java.net.MalformedURLException e2) {
+				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
+						Logger.getLogger("YoungInterf"));
 			}
 		}
 		fireIDriverStateListenerDriverReseted();

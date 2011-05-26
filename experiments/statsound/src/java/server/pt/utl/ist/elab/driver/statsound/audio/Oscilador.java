@@ -5,10 +5,13 @@ package pt.utl.ist.elab.driver.statsound.audio;
  *
  * Created on 06 April 2003, 15:19
  */
-import javax.sound.sampled.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Random;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
 
 /**
  * 
@@ -16,7 +19,7 @@ import java.util.Random;
  */
 public class Oscilador extends AudioInputStream {
 
-	private byte[] m_abData;
+	private final byte[] m_abData;
 	private int m_nBufferPosition;
 	private long m_lRemainingFrames;
 
@@ -24,35 +27,37 @@ public class Oscilador extends AudioInputStream {
 	private double[] values;
 
 	/** Creates a new instance of Oscilador */
-	public Oscilador(float frequencia1, float frequencia2, float amplitude, long lengthInFrames,
-			AudioFormat audioFormat, int type) {
-		super(new ByteArrayInputStream(new byte[0]), new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, audioFormat
-				.getSampleRate(), 16, 2, 4, audioFormat.getFrameRate(), audioFormat.isBigEndian()), lengthInFrames);
+	public Oscilador(final float frequencia1, final float frequencia2, final float amplitude,
+			final long lengthInFrames, final AudioFormat audioFormat, final int type) {
+		super(new ByteArrayInputStream(new byte[0]), new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
+				audioFormat.getSampleRate(), 16, 2, 4, audioFormat.getFrameRate(), audioFormat.isBigEndian()),
+				lengthInFrames);
 
 		System.out.println("new Oscilador : type=" + type + ", lengthInFrames=" + lengthInFrames + ", bufferLength="
 				+ lengthInFrames * getFormat().getFrameSize());
 
-		float fAmplitude = 0.80f * (float) (amplitude * Math.pow(2, getFormat().getSampleSizeInBits() - 1));
+		final float fAmplitude = 0.80f * (float) (amplitude * Math.pow(2, getFormat().getSampleSizeInBits() - 1));
 		// int nPeriodLengthInFrames = Math.round(getFormat().getFrameRate() /
 		// frequencia1);
 		// int nBufferLength = nPeriodLengthInFrames *
 		// getFormat().getFrameSize();
-		int nFullLengthInFrames = (int) lengthInFrames;
+		final int nFullLengthInFrames = (int) lengthInFrames;
 
-		int nFirstPeriodLengthInFrames = Math.round(getFormat().getFrameRate() / frequencia1);
-		int nLastPeriodLengthInFrames = Math.round(getFormat().getFrameRate() / frequencia2);
+		final int nFirstPeriodLengthInFrames = Math.round(getFormat().getFrameRate() / frequencia1);
+		final int nLastPeriodLengthInFrames = Math.round(getFormat().getFrameRate() / frequencia2);
 
-		int nBufferLength = nFullLengthInFrames * getFormat().getFrameSize();
+		final int nBufferLength = nFullLengthInFrames * getFormat().getFrameSize();
 
 		int freqSign = 0;
-		if (frequencia1 < frequencia2)
+		if (frequencia1 < frequencia2) {
 			freqSign = -1;
-		else
+		} else {
 			freqSign = 1;
+		}
 
 		// int nFreqDif = Math.round((frequencia1 - fequencia2) * freqSign);
-		int lengthInSeconds = (int) Math.round((double) lengthInFrames / audioFormat.getFrameRate());
-		int nPeriodCount = (int) Math.round((double) lengthInSeconds / ((1. / frequencia1 + 1. / frequencia2) / 2));
+		final int lengthInSeconds = (int) Math.round((double) lengthInFrames / audioFormat.getFrameRate());
+		final int nPeriodCount = (int) Math.round(lengthInSeconds / ((1. / frequencia1 + 1. / frequencia2) / 2));
 
 		System.out.println("seconds:" + lengthInSeconds + " periods: " + nPeriodCount);
 
@@ -68,14 +73,14 @@ public class Oscilador extends AudioInputStream {
 
 				// if (nFrame % Math.round(nFullLengthInFrames/100) == 0 ||
 				// dCurrentPeriod == 0)
-				dCurrentPeriod = 1. / (double) (frequencia1 + (double) nFrame / (double) nFullLengthInFrames
+				dCurrentPeriod = 1. / (frequencia1 + (double) nFrame / (double) nFullLengthInFrames
 						* (frequencia2 - frequencia1));
 
-				float fFullPosition = (float) nFrame / (float) nFullLengthInFrames * (lengthInSeconds);
-				float fValue = (float) Math.cos(fFullPosition * 2.0 * Math.PI / dCurrentPeriod);
+				final float fFullPosition = (float) nFrame / (float) nFullLengthInFrames * (lengthInSeconds);
+				final float fValue = (float) Math.cos(fFullPosition * 2.0 * Math.PI / dCurrentPeriod);
 
-				int nValue = Math.round(fValue * fAmplitude);
-				int nBaseAddr = nFrame * getFormat().getFrameSize();
+				final int nValue = Math.round(fValue * fAmplitude);
+				final int nBaseAddr = nFrame * getFormat().getFrameSize();
 				m_abData[nBaseAddr + 0] = (byte) (nValue & 0xFF);
 				m_abData[nBaseAddr + 1] = (byte) ((nValue >>> 8) & 0xFF);
 				m_abData[nBaseAddr + 2] = (byte) (nValue & 0xFF);
@@ -85,12 +90,12 @@ public class Oscilador extends AudioInputStream {
 			// PINK
 		} else if (type == 2) {
 
-			int poles = 5;
-			double alpha = 1.0;
+			final int poles = 5;
+			final double alpha = 1.0;
 			multipliers = new double[poles];
 			values = new double[poles];
 
-			Random rnd = new Random();
+			final Random rnd = new Random();
 
 			double a = 1;
 			for (int i = 0; i < poles; i++) {
@@ -119,10 +124,10 @@ public class Oscilador extends AudioInputStream {
 					System.arraycopy(values, 0, values, 1, values.length - 1);
 					values[0] = x;
 
-					float fValue = (float) x;
+					final float fValue = (float) x;
 
-					int nValue = Math.round(fValue * fAmplitude);
-					int nBaseAddr = nFrame * getFormat().getFrameSize();
+					final int nValue = Math.round(fValue * fAmplitude);
+					final int nBaseAddr = nFrame * getFormat().getFrameSize();
 					m_abData[nBaseAddr + 0] = (byte) (nValue & 0xFF);
 					m_abData[nBaseAddr + 1] = (byte) ((nValue >>> 8) & 0xFF);
 					m_abData[nBaseAddr + 2] = (byte) (nValue & 0xFF);
@@ -134,8 +139,8 @@ public class Oscilador extends AudioInputStream {
 			System.out.println("#: " + audioFormat.getFrameRate() + " " + frequencia1 / 10);
 			// int perFrames = Math.round(audioFormat.getFrameRate() / ((float)
 			// -1900 + frequencia1 * 15.2f ));
-			int perFrames = Math.round(audioFormat.getFrameRate() / (frequencia1 / 10));
-			int perFrames10 = Math.round(perFrames / 25f);
+			final int perFrames = Math.round(audioFormat.getFrameRate() / (frequencia1 / 10));
+			final int perFrames10 = Math.round(perFrames / 25f);
 			float fValue = 0f;
 			for (int nFrame = 0; nFrame < nFullLengthInFrames; nFrame++) {
 				if (nFrame % perFrames < perFrames10) {
@@ -143,8 +148,8 @@ public class Oscilador extends AudioInputStream {
 				} else {
 					fValue = 0f;
 				}
-				int nValue = Math.round(fValue * fAmplitude);
-				int nBaseAddr = nFrame * getFormat().getFrameSize();
+				final int nValue = Math.round(fValue * fAmplitude);
+				final int nBaseAddr = nFrame * getFormat().getFrameSize();
 				m_abData[nBaseAddr + 0] = (byte) (nValue & 0xFF);
 				m_abData[nBaseAddr + 1] = (byte) ((nValue >>> 8) & 0xFF);
 				m_abData[nBaseAddr + 2] = (byte) (nValue & 0xFF);
@@ -153,11 +158,12 @@ public class Oscilador extends AudioInputStream {
 		}
 	}
 
-	public int read(byte[] abData, int nOffset, int nLength) throws IOException {
+	@Override
+	public int read(final byte[] abData, int nOffset, final int nLength) throws IOException {
 		if (nLength % getFormat().getFrameSize() != 0) {
 			throw new IOException("Length tem de ser um multiplo inteiro de FrameSize");
 		}
-		int nConstrainedLength = Math.min(available(), nLength);
+		final int nConstrainedLength = Math.min(available(), nLength);
 		int nRemainingLength = nConstrainedLength;
 		while (nRemainingLength > 0) {
 			int nNumBytesToCopyNow = m_abData.length - m_nBufferPosition;
@@ -167,7 +173,7 @@ public class Oscilador extends AudioInputStream {
 			nOffset += nNumBytesToCopyNow;
 			m_nBufferPosition = (m_nBufferPosition + nNumBytesToCopyNow) % m_abData.length;
 		}
-		int nFramesRead = nConstrainedLength / getFormat().getFrameSize();
+		final int nFramesRead = nConstrainedLength / getFormat().getFrameSize();
 		if (m_lRemainingFrames != AudioSystem.NOT_SPECIFIED) {
 			m_lRemainingFrames -= nFramesRead;
 		}
@@ -178,13 +184,14 @@ public class Oscilador extends AudioInputStream {
 		return nReturn;
 	}
 
+	@Override
 	public int available() {
 		int nAvailable = 0;
 		if (m_lRemainingFrames == AudioSystem.NOT_SPECIFIED) {
 			nAvailable = Integer.MAX_VALUE;
 		} else {
-			long lBytesAvailable = m_lRemainingFrames * getFormat().getFrameSize();
-			nAvailable = (int) Math.min(lBytesAvailable, (long) Integer.MAX_VALUE);
+			final long lBytesAvailable = m_lRemainingFrames * getFormat().getFrameSize();
+			nAvailable = (int) Math.min(lBytesAvailable, Integer.MAX_VALUE);
 		}
 		return nAvailable;
 	}

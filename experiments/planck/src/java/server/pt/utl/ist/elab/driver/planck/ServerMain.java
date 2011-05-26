@@ -22,29 +22,29 @@ public class ServerMain {
 	private static String PLANCK_HARDWARE_LOGGER = "PlanckHardware.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(PLANCK_HARDWARE_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ServerMain.PLANCK_HARDWARE_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(PLANCK_HARDWARE_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ServerMain.PLANCK_HARDWARE_LOGGER));
 		}
 	}
 
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		try {
 			ORBBean.getORBBean();
 
-			BaseHardware baseHardware = new BaseHardware(new PlanckStampDriver());
+			final BaseHardware baseHardware = new BaseHardware(new PlanckStampDriver());
 
 			try {
 				Thread.currentThread().join();
-			} catch (Exception ignored) {
+			} catch (final Exception ignored) {
 			}
 
 			ORBBean.getORBBean().killORB();
-		} catch (Exception e) {
-			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(PLANCK_HARDWARE_LOGGER));
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(ServerMain.PLANCK_HARDWARE_LOGGER));
 		}
 	}
 

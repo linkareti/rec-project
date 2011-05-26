@@ -24,29 +24,30 @@ import com.linkare.rec.impl.data.PhysicsValFactory;
 
 public class Pend2MDataProducer extends VirtualBaseDataSource implements ODE {
 
-	private int NUM_CHANNELS = 7;
+	private final int NUM_CHANNELS = 7;
 
 	private int tbs = 1000;
-	private int nSamples;
+	private final int nSamples;
 
-	private double l1;
-	private double l2;
-	private double m1;
-	private double m2;
-	private double w;
-	private double fase;
-	private double a;
+	private final double l1;
+	private final double l2;
+	private final double m1;
+	private final double m2;
+	private final double w;
+	private final double fase;
+	private final double a;
 
-	private double g;
+	private final double g;
 
-	private double[] state;
-	private ODESolver rk4;
+	private final double[] state;
+	private final ODESolver rk4;
 
 	private boolean stopped = false;
 	private VirtualBaseDriver driver = null;
 
-	public Pend2MDataProducer(VirtualBaseDriver driver, float theta, float phi, float thetaDot, float phiDot, float l1,
-			float l2, float m1, float m2, float w, float fase, float a, float g, int tbs, int nSamples) {
+	public Pend2MDataProducer(final VirtualBaseDriver driver, final float theta, final float phi, final float thetaDot,
+			final float phiDot, final float l1, final float l2, final float m1, final float m2, final float w,
+			final float fase, final float a, final float g, final int tbs, final int nSamples) {
 		this.driver = driver;
 		this.nSamples = nSamples;
 		this.tbs = tbs;
@@ -60,7 +61,7 @@ public class Pend2MDataProducer extends VirtualBaseDataSource implements ODE {
 		this.a = a;
 		this.g = g;
 
-		this.state = new double[] { theta, thetaDot, phi, phiDot, 0 };
+		state = new double[] { theta, thetaDot, phi, phiDot, 0 };
 
 		rk4 = new RK4(this);
 		rk4.initialize(1e-3);
@@ -69,9 +70,10 @@ public class Pend2MDataProducer extends VirtualBaseDataSource implements ODE {
 	private class ProducerThread extends Thread {
 		private int currentSample = 0;
 
+		@Override
 		public void run() {
 			try {
-				sleep(1000);
+				Thread.sleep(1000);
 
 				PhysicsValue[] value;
 				int counter = 0;
@@ -97,8 +99,8 @@ public class Pend2MDataProducer extends VirtualBaseDataSource implements ODE {
 						value[4] = new PhysicsValue(PhysicsValFactory.fromFloat((float) state[4]),
 								getAcquisitionHeader().getChannelsConfig(4).getSelectedScale().getDefaultErrorValue(),
 								getAcquisitionHeader().getChannelsConfig(4).getSelectedScale().getMultiplier());
-						value[5] = new PhysicsValue(PhysicsValFactory
-								.fromFloat((float) ((-a * m2 * w * w * Math.cos(state[2])
+						value[5] = new PhysicsValue(
+								PhysicsValFactory.fromFloat((float) ((-a * m2 * w * w * Math.cos(state[2])
 										* Math.cos(state[2] - state[0]) * Math.sin(fase + state[4] * w) + a * (m1 + m2)
 										* w * w * Math.cos(state[0]) * Math.sin(fase + state[4] * w) + g * m2
 										* Math.cos(state[2] - state[0]) * Math.sin(state[2]) - g * (m1 + m2)
@@ -107,8 +109,8 @@ public class Pend2MDataProducer extends VirtualBaseDataSource implements ODE {
 										* (l2 * state[3] * state[3] + l1 * Math.cos(state[2] - state[0]) * state[1]
 												* state[1])) / (l1 * (m1 + m2 - m2
 										* Math.pow(Math.cos(state[2] - state[0]), 2))))), getAcquisitionHeader()
-								.getChannelsConfig(5).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
-								.getChannelsConfig(5).getSelectedScale().getMultiplier());
+										.getChannelsConfig(5).getSelectedScale().getDefaultErrorValue(),
+								getAcquisitionHeader().getChannelsConfig(5).getSelectedScale().getMultiplier());
 						value[6] = new PhysicsValue(PhysicsValFactory.fromFloat((float) (-(Math
 								.sin(state[2] - state[0]) * (l2 * m2 * Math.cos(state[2] - state[0]) * state[3]
 								* state[3] + (m1 + m2)
@@ -120,7 +122,7 @@ public class Pend2MDataProducer extends VirtualBaseDataSource implements ODE {
 
 						addDataRow(value);
 
-						sleep(tbs);
+						Thread.sleep(tbs);
 						currentSample++;
 					}
 					counter++;
@@ -130,11 +132,12 @@ public class Pend2MDataProducer extends VirtualBaseDataSource implements ODE {
 				endProduction();
 
 				driver.stopVirtualHardware();
-			} catch (InterruptedException ie) {
+			} catch (final InterruptedException ie) {
 			}
 		}
 	}
 
+	@Override
 	public void startProduction() {
 		stopped = false;
 		new ProducerThread().start();
@@ -145,12 +148,14 @@ public class Pend2MDataProducer extends VirtualBaseDataSource implements ODE {
 		setDataSourceEnded();
 	}
 
+	@Override
 	public void stopNow() {
 		stopped = true;
 		setDataSourceStoped();
 	}
 
-	public void getRate(double[] state, double[] rate) {
+	@Override
+	public void getRate(final double[] state, final double[] rate) {
 		// theta
 		rate[0] = state[1];
 		rate[1] = (-a * m2 * w * w * Math.cos(state[2]) * Math.cos(state[2] - state[0]) * Math.sin(fase + state[4] * w)
@@ -171,6 +176,7 @@ public class Pend2MDataProducer extends VirtualBaseDataSource implements ODE {
 		rate[4] = 1;
 	}
 
+	@Override
 	public double[] getState() {
 		return state;
 	}

@@ -31,9 +31,9 @@ public class Cargas3DDriver extends VirtualBaseDriver {
 	// caso!
 	private static String Cargas3D_DRIVER_LOGGER = "Cargas3D.Logger";
 	static {
-		Logger l = LogManager.getLogManager().getLogger(Cargas3D_DRIVER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(Cargas3DDriver.Cargas3D_DRIVER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(Cargas3D_DRIVER_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(Cargas3DDriver.Cargas3D_DRIVER_LOGGER));
 		}
 	}
 
@@ -46,29 +46,32 @@ public class Cargas3DDriver extends VirtualBaseDriver {
 	protected HardwareAcquisitionConfig config = null;
 	protected HardwareInfo info = null;
 
-	public void config(HardwareAcquisitionConfig config, HardwareInfo info) throws IncorrectStateException,
+	@Override
+	public void config(final HardwareAcquisitionConfig config, final HardwareInfo info) throws IncorrectStateException,
 			WrongConfigurationException {
 		fireIDriverStateListenerDriverConfiguring();
 		info.validateConfig(config);
 		extraValidateConfig(config, info);
 		try {
 			configure(config, info);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
-			LoggerUtil.logThrowable("Error on config...", e, Logger.getLogger(Cargas3D_DRIVER_LOGGER));
+			LoggerUtil.logThrowable("Error on config...", e, Logger.getLogger(Cargas3DDriver.Cargas3D_DRIVER_LOGGER));
 			throw new WrongConfigurationException();
-		} catch (Throwable t) {
+		} catch (final Throwable t) {
 			t.printStackTrace();
 		}
 	}
 
-	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException {
+	@Override
+	public void configure(final HardwareAcquisitionConfig config, final HardwareInfo info)
+			throws WrongConfigurationException {
 		// Recebemos ordem para configurar, no HardwareAcquisitionConfig estao
 		// todas as informacoes escolhidas pelo cliente...agora e' so' pedir
 		this.config = config;
 		this.info = info;
 
-		String sist = config.getSelectedHardwareParameterValue("Sistema");
+		final String sist = config.getSelectedHardwareParameterValue("Sistema");
 
 		System.out.println("Received = " + sist);
 
@@ -86,10 +89,12 @@ public class Cargas3DDriver extends VirtualBaseDriver {
 		fireIDriverStateListenerDriverConfigured();
 	}
 
+	@Override
 	public String getDriverUniqueID() {
-		return DRIVER_UNIQUE_ID;
+		return Cargas3DDriver.DRIVER_UNIQUE_ID;
 	}
 
+	@Override
 	public void shutdown() {
 		if (dataSource != null) {
 			dataSource.stopNow();
@@ -97,39 +102,43 @@ public class Cargas3DDriver extends VirtualBaseDriver {
 		super.shutDownNow();
 	}
 
-	public IDataSource start(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public IDataSource start(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverStarting();
 		dataSource.startProduction();
 		fireIDriverStateListenerDriverStarted();
 		return dataSource;
 	}
 
-	public void stop(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public void stop(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverStoping();
 		dataSource.stopNow();
 		fireIDriverStateListenerDriverStoped();
 	}
 
+	@Override
 	public Object getHardwareInfo() {
 		fireIDriverStateListenerDriverReseting();
-		
-		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+
+		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+				+ "/HardwareInfo.xml";
 		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
-
-		if (prop.indexOf("://") == -1)
+		if (prop.indexOf("://") == -1) {
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
+		}
 
 		java.net.URL url = null;
 		try {
 			url = ReCProtocols.getURL(prop);
-		} catch (java.net.MalformedURLException e) {
+		} catch (final java.net.MalformedURLException e) {
 			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger("DPendulum"));
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
-			} catch (java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2, Logger
-						.getLogger("DPendulum"));
+			} catch (final java.net.MalformedURLException e2) {
+				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
+						Logger.getLogger("DPendulum"));
 			}
 		}
 		fireIDriverStateListenerDriverReseted();

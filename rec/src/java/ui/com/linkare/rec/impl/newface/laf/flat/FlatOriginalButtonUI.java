@@ -22,26 +22,28 @@ public class FlatOriginalButtonUI extends MetalButtonUI {
 
 	private final static String propertyPrefix = "Button" + ".";
 
-	public static ComponentUI createUI(JComponent x) {
+	public static ComponentUI createUI(final JComponent x) {
 		return new FlatOriginalButtonUI();
 	}
 
 	@Override
 	protected String getPropertyPrefix() {
-		return propertyPrefix;
+		return FlatOriginalButtonUI.propertyPrefix;
 	}
 
 	// ********************************
-	//          Paint
+	// Paint
 	// ********************************
 
 	@Override
-	protected void paintButtonPressed(Graphics g, AbstractButton b) {
-		// FIXME João: Podes confirmar se este noop é está mesmo relacionado com o focus? Não poderá influenciar o comportamento do button pressed?
+	protected void paintButtonPressed(final Graphics g, final AbstractButton b) {
+		// FIXME João: Podes confirmar se este noop é está mesmo relacionado com
+		// o focus? Não poderá influenciar o comportamento do button pressed?
 	}
 
 	@Override
-	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
+	protected void paintFocus(final Graphics g, final AbstractButton b, final Rectangle viewRect,
+			final Rectangle textRect, final Rectangle iconRect) {
 		// Para não ser desenhado o focus no Button
 	}
 

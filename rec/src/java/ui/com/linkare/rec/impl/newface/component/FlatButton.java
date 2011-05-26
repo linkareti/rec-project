@@ -20,13 +20,18 @@ import javax.swing.plaf.metal.MetalButtonUI;
  */
 public class FlatButton extends JButton implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2049201533365453880L;
+
 	private static final String uiClassID = "FlatButtonUI";
 
 	private Color borderColor;
 
-	private Color gradientTop = GRADIENTTOP_OFF;
-	private Color gradientBottom = GRADIENTBOTTOM_OFF;
-	private Color foreground = FOREGROUND_OFF;
+	private Color gradientTop = FlatButton.GRADIENTTOP_OFF;
+	private Color gradientBottom = FlatButton.GRADIENTBOTTOM_OFF;
+	private Color foreground = FlatButton.FOREGROUND_OFF;
 
 	public static final Color GRADIENTTOP_OFF = new Color(0xacd651);
 	public static final Color GRADIENTBOTTOM_OFF = new Color(0x9fcb42);
@@ -49,14 +54,13 @@ public class FlatButton extends JButton implements Serializable {
 
 	@Override
 	public String getUIClassID() {
-		return uiClassID;
+		return FlatButton.uiClassID;
 	}
 
 	/**
-	 * @param gradientTopOff
-	 *            the gradientTop to set
+	 * @param gradientTopOff the gradientTop to set
 	 */
-	public void setGradientTop(Color gradientTop) {
+	public void setGradientTop(final Color gradientTop) {
 		this.gradientTop = gradientTop;
 	}
 
@@ -68,10 +72,9 @@ public class FlatButton extends JButton implements Serializable {
 	}
 
 	/**
-	 * @param gradientBottom
-	 *            the gradientBottom to set
+	 * @param gradientBottom the gradientBottom to set
 	 */
-	public void setGradientBottom(Color gradientBottom) {
+	public void setGradientBottom(final Color gradientBottom) {
 		this.gradientBottom = gradientBottom;
 	}
 
@@ -83,11 +86,10 @@ public class FlatButton extends JButton implements Serializable {
 	}
 
 	/**
-	 * @param foreground
-	 *            the foreground to set
+	 * @param foreground the foreground to set
 	 */
 	@Override
-	public void setForeground(Color foreground) {
+	public void setForeground(final Color foreground) {
 		this.foreground = foreground;
 	}
 
@@ -100,12 +102,11 @@ public class FlatButton extends JButton implements Serializable {
 	}
 
 	/**
-	 * @param borderColor
-	 *            the borderColor to set
+	 * @param borderColor the borderColor to set
 	 */
-	public void setBorderColor(Color borderColor) {
-		setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(borderColor), BorderFactory.createEmptyBorder(4, 16, 4,
-				16)));
+	public void setBorderColor(final Color borderColor) {
+		setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(borderColor),
+				BorderFactory.createEmptyBorder(4, 16, 4, 16)));
 	}
 
 	/**

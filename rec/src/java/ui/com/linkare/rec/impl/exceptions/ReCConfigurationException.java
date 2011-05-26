@@ -23,7 +23,7 @@ public class ReCConfigurationException extends ReCException {
 	 * @param message
 	 * @param cause
 	 */
-	public ReCConfigurationException(ExceptionCode code, String message, Throwable cause) {
+	public ReCConfigurationException(final ExceptionCode code, final String message, final Throwable cause) {
 		super(code, message, cause);
 	}
 
@@ -33,7 +33,7 @@ public class ReCConfigurationException extends ReCException {
 	 * @param code
 	 * @param message
 	 */
-	public ReCConfigurationException(ExceptionCode code, String message) {
+	public ReCConfigurationException(final ExceptionCode code, final String message) {
 		super(code, message);
 	}
 

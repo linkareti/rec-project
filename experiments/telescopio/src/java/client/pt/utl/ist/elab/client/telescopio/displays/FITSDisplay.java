@@ -18,6 +18,11 @@ import eap.fitsbrowser.FITSFileDisplay;
 public class FITSDisplay extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3211953961172698100L;
+
 	/** Creates new form FITSDisplay */
 	public FITSDisplay() {
 		initComponents();
@@ -35,81 +40,98 @@ public class FITSDisplay extends javax.swing.JPanel implements com.linkare.rec.i
 
 	}// GEN-END:initComponents
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/telescopio/resources/telescopio_iconified.png"));
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
 
-	public void newSamples(com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
-		if (model == null)
+	@Override
+	public void newSamples(final com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
+		if (model == null) {
 			return;
+		}
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
 			if (model.getValueAt(i, model.getChannelIndex("Imagem_Telescopio")) != null) {
-				byte[] image = model.getValueAt(i, model.getChannelIndex("Imagem_Telescopio")).getValue()
+				final byte[] image = model.getValueAt(i, model.getChannelIndex("Imagem_Telescopio")).getValue()
 						.getByteArrayValue().getData();
-				FITSFileDisplay ffd = new FITSFileDisplay();
+				final FITSFileDisplay ffd = new FITSFileDisplay();
 				add(ffd, java.awt.BorderLayout.CENTER);
 				try {
-					java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(image);
+					final java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(image);
 					ffd.load(bais);
-				} catch (java.io.IOException ioe) {
+				} catch (final java.io.IOException ioe) {
 					ioe.printStackTrace();
 				}
 			} else if (model.getValueAt(i, model.getChannelIndex("Error_Channel")) != null) {
-				byte[] error = model.getValueAt(i, model.getChannelIndex("Error_Channel")).getValue()
+				final byte[] error = model.getValueAt(i, model.getChannelIndex("Error_Channel")).getValue()
 						.getByteArrayValue().getData();
 
-				if (error != null && error.length > 0)
-					javax.swing.JOptionPane.showMessageDialog(null, ReCResourceBundle
-							.findString("telescopio$rec.exp.telescopio.lbl.error"), ReCResourceBundle
-							.findString("telescopio$rec.exp.telescopio.title.error"),
+				if (error != null && error.length > 0) {
+					javax.swing.JOptionPane.showMessageDialog(null,
+							ReCResourceBundle.findString("telescopio$rec.exp.telescopio.lbl.error"),
+							ReCResourceBundle.findString("telescopio$rec.exp.telescopio.title.error"),
 							javax.swing.JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		}
 	}
 
 	private com.linkare.rec.impl.client.experiment.ExpDataModel model = null;
 
-	public void setExpDataModel(com.linkare.rec.impl.client.experiment.ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final com.linkare.rec.impl.client.experiment.ExpDataModel model) {
+		if (this.model != null) {
 			model.removeExpDataModelListener(this);
+		}
 
 		this.model = model;
 
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 	}
 
+	@Override
 	public String getName() {
 		return ReCResourceBundle.findStringOrDefault("telescopio$rec.exp.display.telescopio.title.1", "FITS");
 	}

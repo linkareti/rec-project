@@ -27,19 +27,22 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 
 	/** Creates a new instance of StampRelayTranslator */
 	public StampConfigTranslator() {
-		super(COMMAND_IDENTIFIER);
+		super(StampConfigTranslator.COMMAND_IDENTIFIER);
 	}
 
-	public boolean translate(StampCommand command) {
-		if (command.getCommandIdentifier() == null)
+	@Override
+	public boolean translate(final StampCommand command) {
+		if (command.getCommandIdentifier() == null) {
 			return false;
-		if (!command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER))
+		}
+		if (!command.getCommandIdentifier().equalsIgnoreCase(StampConfigTranslator.COMMAND_IDENTIFIER)) {
 			return false;
+		}
 
-		int numsamples = ((Integer) command.getCommandData(NUMSAMPLES_STR)).intValue();
+		final int numsamples = ((Integer) command.getCommandData(StampConfigTranslator.NUMSAMPLES_STR)).intValue();
 
 		int color = 0;
-		String colStr = command.getCommandData(COLOR_STR).toString();
+		final String colStr = command.getCommandData(StampConfigTranslator.COLOR_STR).toString();
 		if (colStr.equalsIgnoreCase("Yellow")) {
 			color = 0;
 		} else if (colStr.equalsIgnoreCase("Green")) {
@@ -51,7 +54,7 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 		}
 
 		int dlevel = 0;
-		String dlevelStr = command.getCommandData(DARK_LEVEL_STR).toString();
+		final String dlevelStr = command.getCommandData(StampConfigTranslator.DARK_LEVEL_STR).toString();
 		if (dlevelStr.equalsIgnoreCase("0")) {
 			dlevel = 5;
 		} else if (colStr.equalsIgnoreCase("20")) {
@@ -67,19 +70,19 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 		}
 
 		int mode = 0;
-		String modeStr = command.getCommandData(MODE_STR).toString();
+		final String modeStr = command.getCommandData(StampConfigTranslator.MODE_STR).toString();
 		if (modeStr.equalsIgnoreCase("All")) {
 			mode = 0;
 		} else {
 			mode = 1;
 		}
 
-		float tetai = ((Float) command.getCommandData(TETAI_STR)).floatValue();
+		final float tetai = ((Float) command.getCommandData(StampConfigTranslator.TETAI_STR)).floatValue();
 		// int teta = (int)(tetai * 434.7f - 2505.4f);
-		int teta = (int) ((tetai - 12) * 662.8f + 430f);
+		final int teta = (int) ((tetai - 12) * 662.8f + 430f);
 
-		String commandStr = command.getCommandIdentifier() + " " + numsamples + " " + color + " " + dlevel + " " + teta
-				+ " " + mode;
+		final String commandStr = command.getCommandIdentifier() + " " + numsamples + " " + color + " " + dlevel + " "
+				+ teta + " " + mode;
 		command.setCommand(commandStr);
 		return true;
 	}

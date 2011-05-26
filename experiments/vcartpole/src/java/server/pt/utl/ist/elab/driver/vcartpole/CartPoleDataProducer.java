@@ -22,22 +22,22 @@ import com.linkare.rec.impl.data.PhysicsValFactory;
  */
 public class CartPoleDataProducer extends VirtualBaseDataSource implements ODE {
 
-	private double uCart, uPole;
-	private double mCart, mPole;
-	private double g;
-	private double l;
+	private final double uCart, uPole;
+	private final double mCart, mPole;
+	private final double g;
+	private final double l;
 
 	private double act;
 
 	private double time;
 
-	private double[] state; // theta, dtheta/dt, x, dx/dt, t
-	private ODESolver rk4;
+	private final double[] state; // theta, dtheta/dt, x, dx/dt, t
+	private final ODESolver rk4;
 
-	private int NUM_CHANNELS = 8;
+	private final int NUM_CHANNELS = 8;
 
 	private int tbs = 1;
-	private int nSamples;
+	private final int nSamples;
 
 	private boolean stopped = false;
 	private VirtualBaseDriver driver = null;
@@ -60,14 +60,15 @@ public class CartPoleDataProducer extends VirtualBaseDataSource implements ODE {
 	private double sucTime;
 	private double sucTimeBest;
 
-	public CartPoleDataProducer(VirtualBaseDriver driver, double x, double x_dot, double theta, double theta_dot,
-			double[] u, double[] m, double g, double l, double action, int tbs, int nSamples) {
+	public CartPoleDataProducer(final VirtualBaseDriver driver, final double x, final double x_dot, final double theta,
+			final double theta_dot, final double[] u, final double[] m, final double g, final double l,
+			final double action, final int tbs, final int nSamples) {
 		this.driver = driver;
-		this.uCart = u[0];
-		this.uPole = u[1];
+		uCart = u[0];
+		uPole = u[1];
 
-		this.mCart = m[0];
-		this.mPole = m[1];
+		mCart = m[0];
+		mPole = m[1];
 
 		this.g = g;
 		this.l = l / 2d;
@@ -81,16 +82,16 @@ public class CartPoleDataProducer extends VirtualBaseDataSource implements ODE {
 		act = action;
 
 		rk4 = new RK4(this);
-		rk4.initialize((double) tbs / 1000d);
+		rk4.initialize(tbs / 1000d);
 	}
 
-	public void initializePID(double _kp, double _ki, double _kd) {
+	public void initializePID(final double _kp, final double _ki, final double _kd) {
 		kp = _kp;
 		ki = _ki;
 		kd = _kd;
 	}
 
-	public void initializeSuccess(double _sucAngle, double _timeForSuc) {
+	public void initializeSuccess(final double _sucAngle, final double _timeForSuc) {
 		successActive = true;
 		sucAngle = _sucAngle;
 		timeForSuc = _timeForSuc;
@@ -98,7 +99,8 @@ public class CartPoleDataProducer extends VirtualBaseDataSource implements ODE {
 		sucTimeBest = 0;
 	}
 
-	public void initializeFailure(int _allowedFailures, double _xMax, double _failureTime, double _failureLaps) {
+	public void initializeFailure(final int _allowedFailures, final double _xMax, final double _failureTime,
+			final double _failureLaps) {
 		failureActive = true;
 		allowedFailures = _allowedFailures;
 		xMax = _xMax;
@@ -107,7 +109,8 @@ public class CartPoleDataProducer extends VirtualBaseDataSource implements ODE {
 		failures = 0;
 	}
 
-	public void getRate(double[] state, double[] rate) {
+	@Override
+	public void getRate(final double[] state, final double[] rate) {
 		rate[0] = state[1]; // dx/dt
 		rate[1] = (act
 				+ mPole
@@ -128,15 +131,16 @@ public class CartPoleDataProducer extends VirtualBaseDataSource implements ODE {
 		rate[4] = 1; // t
 	}
 
-	private int sgn(double val) {
+	private int sgn(final double val) {
 		return (int) (val / Math.abs(val));
 	}
 
+	@Override
 	public double[] getState() {
 		return state;
 	}
 
-	public double step(double action) {
+	public double step(final double action) {
 		act = action;
 		time += rk4.step();
 		return time;
@@ -187,17 +191,18 @@ public class CartPoleDataProducer extends VirtualBaseDataSource implements ODE {
 	private class ProducerThread extends Thread {
 		private int currentSample = 0;
 
+		@Override
 		public void run() {
 			try {
-				sleep(1000);
+				Thread.sleep(1000);
 
 				PhysicsValue[] value;
 				double mem = 0;
 
 				while (!stopped && currentSample < nSamples) {
 
-					mem += (Math.toRadians(0) - state[2]) * (double) tbs / 1000d;
-					double action = -(kp * (Math.toRadians(0) - state[2]) + kd * (-state[3]) + ki * mem);
+					mem += (Math.toRadians(0) - state[2]) * tbs / 1000d;
+					final double action = -(kp * (Math.toRadians(0) - state[2]) + kd * (-state[3]) + ki * mem);
 					step(action);
 
 					value = new PhysicsValue[NUM_CHANNELS];
@@ -222,7 +227,7 @@ public class CartPoleDataProducer extends VirtualBaseDataSource implements ODE {
 							.getChannelsConfig(5).getSelectedScale().getMultiplier());
 
 					addDataRow(value);
-					sleep(tbs);
+					Thread.sleep(tbs);
 					currentSample++;
 
 					if (failureActive
@@ -242,10 +247,11 @@ public class CartPoleDataProducer extends VirtualBaseDataSource implements ODE {
 						}
 					} else if (successActive) {
 						if (Math.abs(state[2] % (2 * Math.PI)) < Math.toRadians(sucAngle)
-								|| 2 * Math.PI - Math.abs(state[2] % (2 * Math.PI)) < Math.toRadians(sucAngle))
-							sucTime += (double) tbs / 1000d;
-						else
+								|| 2 * Math.PI - Math.abs(state[2] % (2 * Math.PI)) < Math.toRadians(sucAngle)) {
+							sucTime += tbs / 1000d;
+						} else {
 							sucTime = 0;
+						}
 
 						sucTimeBest = Math.max(sucTime, sucTimeBest);
 
@@ -266,11 +272,12 @@ public class CartPoleDataProducer extends VirtualBaseDataSource implements ODE {
 				endProduction();
 
 				driver.stopVirtualHardware();
-			} catch (InterruptedException ie) {
+			} catch (final InterruptedException ie) {
 			}
 		}
 	}
 
+	@Override
 	public void startProduction() {
 		stopped = false;
 		new ProducerThread().start();
@@ -281,6 +288,7 @@ public class CartPoleDataProducer extends VirtualBaseDataSource implements ODE {
 		setDataSourceEnded();
 	}
 
+	@Override
 	public void stopNow() {
 		stopped = true;
 		setDataSourceStoped();

@@ -23,6 +23,11 @@ import com.linkare.rec.impl.baseUI.config.WebResource;
  * @author José Pedro Pereira - Linkare TI
  */
 public class LabsTreeModel extends DefaultTreeModel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8281716289400134678L;
+
 	/** Utility field used by event firing mechanism. */
 	private EventListenerList listenerList = null;
 
@@ -30,66 +35,67 @@ public class LabsTreeModel extends DefaultTreeModel {
 	public static DefaultMutableTreeNode treeRoot = null;
 
 	/** Creates a new instance of LabsTreeModel */
-	public LabsTreeModel(Object userObject, boolean allowsChildren) {
+	public LabsTreeModel(final Object userObject, final boolean allowsChildren) {
 		super(new DefaultMutableTreeNode(userObject), true);
 	}
 
-	public void populateTree(ReCBaseUIConfig config) {
-		DefaultMutableTreeNode root = (DefaultMutableTreeNode) getRoot();
-		treeRoot = root;
+	public void populateTree(final ReCBaseUIConfig config) {
+		final DefaultMutableTreeNode root = (DefaultMutableTreeNode) getRoot();
+		LabsTreeModel.treeRoot = root;
 		DefaultMutableTreeNode labroot = (DefaultMutableTreeNode) getRoot();
 		DefaultMutableTreeNode approot = (DefaultMutableTreeNode) getRoot();
 		DefaultMutableTreeNode node = null;
 		WebResource[] wr = config.getWebResource();
 
-		for (int a = 0; a < wr.length; a++) {
-			wr[a].setEnabled(true);
-			node = new DefaultMutableTreeNode(wr[a]);
+		for (final WebResource element : wr) {
+			element.setEnabled(true);
+			node = new DefaultMutableTreeNode(element);
 			node.setAllowsChildren(false);
 			root.add(node);
 		}
 
-		Lab[] labs = config.getLab();
-		for (int i = 0; i < labs.length; i++) {
-			labroot = new DefaultMutableTreeNode(labs[i]);
+		final Lab[] labs = config.getLab();
+		for (final Lab lab : labs) {
+			labroot = new DefaultMutableTreeNode(lab);
 			root.add(labroot);
-			addPropChangeListener(labs[i]);
+			addPropChangeListener(lab);
 
-			wr = labs[i].getWebResource();
-			for (int k = 0; k < wr.length; k++) {
-				wr[k].setEnabled(true);
-				labroot.add(new DefaultMutableTreeNode(wr[k]));
+			wr = lab.getWebResource();
+			for (final WebResource element : wr) {
+				element.setEnabled(true);
+				labroot.add(new DefaultMutableTreeNode(element));
 			}
 
-			Apparatus[] apparatus = labs[i].getApparatus();
-			for (int j = 0; j < apparatus.length; j++) {
-				addPropChangeListener(apparatus[j]);
+			final Apparatus[] apparatus = lab.getApparatus();
+			for (final Apparatus apparatu : apparatus) {
+				addPropChangeListener(apparatu);
 
-				approot = new DefaultMutableTreeNode(apparatus[j]);
+				approot = new DefaultMutableTreeNode(apparatu);
 				labroot.add(approot);
 
-				wr = apparatus[j].getWebResource();
-				for (int r = 0; r < wr.length; r++) {
-					wr[r].setEnabled(true);
-					node = new DefaultMutableTreeNode(wr[r]);
+				wr = apparatu.getWebResource();
+				for (final WebResource element : wr) {
+					element.setEnabled(true);
+					node = new DefaultMutableTreeNode(element);
 					node.setAllowsChildren(false);
 					approot.add(node);
 				}
 
-				DefaultAcquisitionConfig[] configs = apparatus[j].getDefaultAcquisitionConfig();
-				for (int c = 0; c < configs.length; c++) {
-					addPropChangeListener(configs[c]);
-					node = new DefaultMutableTreeNode(configs[c]);
+				final DefaultAcquisitionConfig[] configs = apparatu.getDefaultAcquisitionConfig();
+				for (final DefaultAcquisitionConfig config2 : configs) {
+					addPropChangeListener(config2);
+					node = new DefaultMutableTreeNode(config2);
 					node.setAllowsChildren(false);
 					approot.add(node);
 				}
 
-				Display[] displays = apparatus[j].getDisplay();
-				for (int d = 0; d < displays.length; d++) {
-					if (displays[d].getOfflineCapable())
-						displays[d].setEnabled(true);
-					addPropChangeListener(displays[d]);
-					node = new DefaultMutableTreeNode(displays[d]);
+				final Display[] displays = apparatu.getDisplay();
+				for (final Display display : displays) {
+					if (display.getOfflineCapable()) {
+						display.setEnabled(true);
+					}
+					addPropChangeListener(display);
+					node = new DefaultMutableTreeNode(display);
 					node.setAllowsChildren(false);
 					approot.add(node);
 				}
@@ -99,10 +105,10 @@ public class LabsTreeModel extends DefaultTreeModel {
 		reload();
 	}
 
-	public Apparatus getApparatus(String uniqueID) {
-		java.util.Enumeration allChild = ((DefaultMutableTreeNode) root).breadthFirstEnumeration();
+	public Apparatus getApparatus(final String uniqueID) {
+		final java.util.Enumeration allChild = ((DefaultMutableTreeNode) root).breadthFirstEnumeration();
 		while (allChild.hasMoreElements()) {
-			Object currentNode = ((DefaultMutableTreeNode) allChild.nextElement()).getUserObject();
+			final Object currentNode = ((DefaultMutableTreeNode) allChild.nextElement()).getUserObject();
 			if (currentNode instanceof Apparatus) {
 				if (((Apparatus) currentNode).getLocation().equals(uniqueID)) {
 					return (Apparatus) currentNode;
@@ -112,21 +118,23 @@ public class LabsTreeModel extends DefaultTreeModel {
 		return null;
 	}
 
-	public void addPropChangeListener(DisplayNode node) {
+	public void addPropChangeListener(final DisplayNode node) {
 		// needed to change the default add method name, because, lab,
 		// apparatus, etc. were overriding the addPropertyChageListener
 		node.addDisplayNodePropertyChangeListener(new java.beans.PropertyChangeListener() {
-			public void propertyChange(java.beans.PropertyChangeEvent evt) {
+			@Override
+			public void propertyChange(final java.beans.PropertyChangeEvent evt) {
 				displayNodePropertyChanged(evt);
 			}
 		});
 
 	}
 
-	private void displayNodePropertyChanged(java.beans.PropertyChangeEvent evt) {
-		if (evt.getPropertyName().equals("enable"))
+	private void displayNodePropertyChanged(final java.beans.PropertyChangeEvent evt) {
+		if (evt.getPropertyName().equals("enable")) {
 			firePropertyChangeListenerPropertyChange(new java.beans.PropertyChangeEvent(this, "reload", Boolean.TRUE,
 					Boolean.TRUE));
+		}
 	}
 
 	/**
@@ -134,7 +142,7 @@ public class LabsTreeModel extends DefaultTreeModel {
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addPropertyChangeListener(java.beans.PropertyChangeListener listener) {
+	public synchronized void addPropertyChangeListener(final java.beans.PropertyChangeListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -146,7 +154,7 @@ public class LabsTreeModel extends DefaultTreeModel {
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removePropertyChangeListener(java.beans.PropertyChangeListener listener) {
+	public synchronized void removePropertyChangeListener(final java.beans.PropertyChangeListener listener) {
 		listenerList.remove(java.beans.PropertyChangeListener.class, listener);
 	}
 
@@ -155,10 +163,11 @@ public class LabsTreeModel extends DefaultTreeModel {
 	 * 
 	 * @param event The event to be fired
 	 */
-	private void firePropertyChangeListenerPropertyChange(java.beans.PropertyChangeEvent event) {
-		if (listenerList == null)
+	private void firePropertyChangeListenerPropertyChange(final java.beans.PropertyChangeEvent event) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == java.beans.PropertyChangeListener.class) {
 				((java.beans.PropertyChangeListener) listeners[i + 1]).propertyChange(event);

@@ -4,6 +4,8 @@ import java.util.Map;
 
 import javax.swing.BorderFactory;
 
+import com.linkare.rec.impl.newface.laf.flat.theme.AbstractStyle;
+
 public class ScrollPaneStyle extends DefaultStyle {
 
 	public static final String ID = "ScrollPane";
@@ -17,12 +19,12 @@ public class ScrollPaneStyle extends DefaultStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return ScrollPaneStyle.ID;
 	}
 
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(BORDER, BorderFactory.createEmptyBorder());
+		map.put(AbstractStyle.BORDER, BorderFactory.createEmptyBorder());
 	}
 }

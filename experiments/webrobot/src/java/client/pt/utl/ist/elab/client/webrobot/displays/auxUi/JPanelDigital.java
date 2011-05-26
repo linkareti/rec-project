@@ -17,6 +17,11 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  */
 public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5202835691542328531L;
+
 	/** Creates new form JPanelDigital */
 	public JPanelDigital() {
 		initComponents();
@@ -55,7 +60,8 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 		jRadioButtonB0.setRequestFocusEnabled(false);
 		jRadioButtonB0.setVerifyInputWhenFocusTarget(false);
 		jRadioButtonB0.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jRadioButtonB0ActionPerformed(evt);
 			}
 		});
@@ -73,7 +79,8 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 		jRadioButtonB1.setFont(new java.awt.Font("Comic Sans MS", 1, 12));
 		jRadioButtonB1.setForeground(new java.awt.Color(0, 51, 153));
 		jRadioButtonB1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jRadioButtonB1ActionPerformed(evt);
 			}
 		});
@@ -91,7 +98,8 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 		jRadioButtonB2.setFont(new java.awt.Font("Comic Sans MS", 1, 12));
 		jRadioButtonB2.setForeground(new java.awt.Color(0, 51, 153));
 		jRadioButtonB2.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jRadioButtonB2ActionPerformed(evt);
 			}
 		});
@@ -109,7 +117,8 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 		jRadioButtonB3.setFont(new java.awt.Font("Comic Sans MS", 1, 12));
 		jRadioButtonB3.setForeground(new java.awt.Color(0, 51, 153));
 		jRadioButtonB3.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jRadioButtonB3ActionPerformed(evt);
 			}
 		});
@@ -127,7 +136,8 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 		jRadioButtonB4.setFont(new java.awt.Font("Comic Sans MS", 1, 12));
 		jRadioButtonB4.setForeground(new java.awt.Color(0, 51, 153));
 		jRadioButtonB4.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jRadioButtonB4ActionPerformed(evt);
 			}
 		});
@@ -145,7 +155,8 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 		jRadioButtonB5.setFont(new java.awt.Font("Comic Sans MS", 1, 12));
 		jRadioButtonB5.setForeground(new java.awt.Color(0, 51, 153));
 		jRadioButtonB5.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jRadioButtonB5ActionPerformed(evt);
 			}
 		});
@@ -163,7 +174,8 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 		jRadioButtonB6.setFont(new java.awt.Font("Comic Sans MS", 1, 12));
 		jRadioButtonB6.setForeground(new java.awt.Color(0, 51, 153));
 		jRadioButtonB6.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jRadioButtonB6ActionPerformed(evt);
 			}
 		});
@@ -181,7 +193,8 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 		jRadioButtonB7.setFont(new java.awt.Font("Comic Sans MS", 1, 12));
 		jRadioButtonB7.setForeground(new java.awt.Color(0, 51, 153));
 		jRadioButtonB7.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jRadioButtonB7ActionPerformed(evt);
 			}
 		});
@@ -286,39 +299,39 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 
 	}// GEN-END:initComponents
 
-	private void jRadioButtonB7ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jRadioButtonB7ActionPerformed
+	private void jRadioButtonB7ActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jRadioButtonB7ActionPerformed
 		undoUserSelection(jRadioButtonB7);
 	}// GEN-LAST:event_jRadioButtonB7ActionPerformed
 
-	private void jRadioButtonB6ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jRadioButtonB6ActionPerformed
+	private void jRadioButtonB6ActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jRadioButtonB6ActionPerformed
 		undoUserSelection(jRadioButtonB6);
 	}// GEN-LAST:event_jRadioButtonB6ActionPerformed
 
-	private void jRadioButtonB5ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jRadioButtonB5ActionPerformed
+	private void jRadioButtonB5ActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jRadioButtonB5ActionPerformed
 		undoUserSelection(jRadioButtonB5);
 	}// GEN-LAST:event_jRadioButtonB5ActionPerformed
 
-	private void jRadioButtonB4ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jRadioButtonB4ActionPerformed
+	private void jRadioButtonB4ActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jRadioButtonB4ActionPerformed
 		undoUserSelection(jRadioButtonB4);
 	}// GEN-LAST:event_jRadioButtonB4ActionPerformed
 
-	private void jRadioButtonB3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jRadioButtonB3ActionPerformed
+	private void jRadioButtonB3ActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jRadioButtonB3ActionPerformed
 		undoUserSelection(jRadioButtonB3);
 	}// GEN-LAST:event_jRadioButtonB3ActionPerformed
 
-	private void jRadioButtonB2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jRadioButtonB2ActionPerformed
+	private void jRadioButtonB2ActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jRadioButtonB2ActionPerformed
 		undoUserSelection(jRadioButtonB2);
 	}// GEN-LAST:event_jRadioButtonB2ActionPerformed
 
-	private void jRadioButtonB1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jRadioButtonB1ActionPerformed
+	private void jRadioButtonB1ActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jRadioButtonB1ActionPerformed
 		undoUserSelection(jRadioButtonB1);
 	}// GEN-LAST:event_jRadioButtonB1ActionPerformed
 
-	private void jRadioButtonB0ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jRadioButtonB0ActionPerformed
+	private void jRadioButtonB0ActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jRadioButtonB0ActionPerformed
 		undoUserSelection(jRadioButtonB0);
 	}// GEN-LAST:event_jRadioButtonB0ActionPerformed
 
-	private void undoUserSelection(javax.swing.JRadioButton jRadioButton) {
+	private void undoUserSelection(final javax.swing.JRadioButton jRadioButton) {
 		if (jRadioButton.isSelected()) {
 			jRadioButton.setSelected(false);
 		} else {
@@ -332,7 +345,7 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 	 * @return Value of property b0.
 	 */
 	public boolean isB0() {
-		return this.b0;
+		return b0;
 	}
 
 	/**
@@ -340,7 +353,7 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 	 * 
 	 * @param b0 New value of property b0.
 	 */
-	public void setB0(boolean b0) {
+	public void setB0(final boolean b0) {
 		this.b0 = b0;
 		jRadioButtonB0.setSelected(b0);
 	}
@@ -351,7 +364,7 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 	 * @return Value of property b1.
 	 */
 	public boolean isB1() {
-		return this.b1;
+		return b1;
 	}
 
 	/**
@@ -359,7 +372,7 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 	 * 
 	 * @param b1 New value of property b1.
 	 */
-	public void setB1(boolean b1) {
+	public void setB1(final boolean b1) {
 		this.b1 = b1;
 		jRadioButtonB1.setSelected(b1);
 	}
@@ -370,7 +383,7 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 	 * @return Value of property b2.
 	 */
 	public boolean isB2() {
-		return this.b2;
+		return b2;
 	}
 
 	/**
@@ -378,7 +391,7 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 	 * 
 	 * @param b2 New value of property b2.
 	 */
-	public void setB2(boolean b2) {
+	public void setB2(final boolean b2) {
 		this.b2 = b2;
 		jRadioButtonB2.setSelected(b2);
 	}
@@ -397,7 +410,7 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 	 * 
 	 * @param b3 New value of property b3.
 	 */
-	public void setB3(boolean b3) {
+	public void setB3(final boolean b3) {
 		this.b3 = b3;
 		jRadioButtonB3.setSelected(b3);
 	}
@@ -416,7 +429,7 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 	 * 
 	 * @param b4 New value of property b4.
 	 */
-	public void setB4(boolean b4) {
+	public void setB4(final boolean b4) {
 		this.b4 = b4;
 	}
 
@@ -434,7 +447,7 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 	 * 
 	 * @param b5 New value of property b5.
 	 */
-	public void setB5(boolean b5) {
+	public void setB5(final boolean b5) {
 		this.b5 = b5;
 	}
 
@@ -452,7 +465,7 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 	 * 
 	 * @param b6 New value of property b6.
 	 */
-	public void setB6(boolean b6) {
+	public void setB6(final boolean b6) {
 		this.b6 = b6;
 		jRadioButtonB6.setSelected(b6);
 	}
@@ -471,7 +484,7 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 	 * 
 	 * @param b7 New value of property b7.
 	 */
-	public void setB7(boolean b7) {
+	public void setB7(final boolean b7) {
 		this.b7 = b7;
 		jRadioButtonB7.setSelected(b7);
 	}
@@ -479,14 +492,16 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 	public void dataModelRunning() {
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
-	public void headerAvailable(HardwareAcquisitionConfig header) {
+	public void headerAvailable(final HardwareAcquisitionConfig header) {
 	}
 
-	public void newSamples(NewExpDataEvent evt) {
-		int lastSample = evt.getSamplesEndIndex();
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
+		final int lastSample = evt.getSamplesEndIndex();
 		setB0(model.getValueAt(lastSample, 8).getValue().isBooleanValue());
 		setB1(model.getValueAt(lastSample, 9).getValue().isBooleanValue());
 		setB2(model.getValueAt(lastSample, 10).getValue().isBooleanValue());
@@ -497,7 +512,7 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 		setB7(model.getValueAt(lastSample, 15).getValue().isBooleanValue());
 	}
 
-	public void setExpDataModel(ExpDataModel model) {
+	public void setExpDataModel(final ExpDataModel model) {
 		if (this.model != null) {
 			model.removeExpDataModelListener(this);
 		}
@@ -509,19 +524,24 @@ public class JPanelDigital extends javax.swing.JPanel implements ExpDataModelLis
 		}
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 		headerAvailable(model.getAcquisitionConfig());
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 

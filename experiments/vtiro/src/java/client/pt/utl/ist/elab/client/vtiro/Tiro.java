@@ -40,10 +40,13 @@ import pt.utl.ist.elab.client.virtual.guipack.PopupMenu;
  */
 public class Tiro extends DrawingPanel3D implements ActionListener, MouseListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2806000950201101209L;
 	protected String statusStr;
-	private String actionStr = java.util.ResourceBundle.getBundle(
-			"pt/utl/ist/elab/client/vtiro/resources/messages").getString(
-			"rec.exp.displays.animation.actionStr");
+	private String actionStr = java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages")
+			.getString("rec.exp.displays.animation.actionStr");
 
 	private PopupMenu viewPopMenu;
 
@@ -56,38 +59,38 @@ public class Tiro extends DrawingPanel3D implements ActionListener, MouseListene
 
 	private InteractiveTrace linha;
 
-	public void setListener(InteractionListener list) {
+	public void setListener(final InteractionListener list) {
 		vel.addListener(list);
 		target.addListener(list);
 	}
 
 	/** Creates a new instance of BalancaTorcao */
 	public Tiro() {
-		super(DISPLAY_PLANAR_XY);
+		super(DrawingPanel3D.DISPLAY_PLANAR_XY);
 		buildTiro();
 	}
 
 	public void buildTiro() {
-		setToolTipText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages")
-				.getString("rec.exp.customizer.tip.1"));
-		setDecorationType(DECORATION_AXES);
+		setToolTipText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages").getString(
+				"rec.exp.customizer.tip.1"));
+		setDecorationType(DrawingPanel3D.DECORATION_AXES);
 		setSquareAspect(true);
 		setPreferredMinMax(0, 30, 0, 15);
-		setCursorMode(CURSOR_CROSSHAIR);
+		setCursorMode(DrawingPanel3D.CURSOR_CROSSHAIR);
 		mouseInspection = false;
 		addMouseListener(this);
 
 		bullet = new InteractiveParticle();
 		bullet.setXYZ(0, 0, 0);
 		bullet.setSizeXYZ(.5, .5, .5);
-		bullet.setShapeType(target.ELLIPSE);
+		bullet.setShapeType(InteractiveParticle.ELLIPSE);
 		bullet.getStyle().setEdgeColor(java.awt.Color.BLUE);
 		bullet.getStyle().setFillPattern(java.awt.Color.BLUE);
 
 		target = new InteractiveParticle();
 		target.setXYZ(10, 10, 0);
 		target.setSizeXYZ(.5, .5, .5);
-		target.setShapeType(target.ELLIPSE);
+		target.setShapeType(InteractiveParticle.ELLIPSE);
 		target.getStyle().setEdgeColor(java.awt.Color.YELLOW);
 		target.getStyle().setFillPattern(java.awt.Color.ORANGE);
 
@@ -109,7 +112,7 @@ public class Tiro extends DrawingPanel3D implements ActionListener, MouseListene
 		vel.getStyle().setEdgeColor(java.awt.Color.BLUE);
 		vel.getStyle().setFillPattern(java.awt.Color.BLUE);
 
-		Group group = new Group();
+		final Group group = new Group();
 		vel.setGroup(group);
 		bullet.setGroup(group);
 
@@ -128,14 +131,14 @@ public class Tiro extends DrawingPanel3D implements ActionListener, MouseListene
 		buildPopupMenu();
 	}
 
-	public void config(double w, double h, double v, double theta) {
+	public void config(final double w, final double h, final double v, final double theta) {
 		target.setXY(w, h);
 		vel.setSizeXY(v * Math.cos(theta), v * Math.sin(theta));
 		updateLinha();
 		updateDistances();
 	}
 
-	public void move(double x, double y, double vx, double vy, double yTarget) {
+	public void move(final double x, final double y, final double vx, final double vy, final double yTarget) {
 		bullet.getGroup().setXY(x, y);
 		vel.setSizeXY(vx, vy);
 		target.setY(yTarget);
@@ -157,12 +160,12 @@ public class Tiro extends DrawingPanel3D implements ActionListener, MouseListene
 		return (target.getX() - bullet.getGroup().getX()) * vel.getSizeY() / vel.getSizeX() + bullet.getGroup().getY();
 	}
 
-	public void setVel(double v) {
+	public void setVel(final double v) {
 		vel.setSizeXY(v * Math.cos(getTheta()), v * Math.sin(getTheta()));
 		repaint();
 	}
 
-	public void setTheta(double ang) {
+	public void setTheta(final double ang) {
 		vel.setSizeXY(getVel() * Math.cos(ang), getVel() * Math.sin(ang));
 		repaint();
 	}
@@ -192,31 +195,36 @@ public class Tiro extends DrawingPanel3D implements ActionListener, MouseListene
 
 	private void buildPopupMenu() {
 		viewPopMenu = new PopupMenu(this);
-		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vtiro/resources/messages").getString("rec.exp.displays.save"),
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages")
-						.getString("rec.exp.displays.save.tip"));
-		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vtiro/resources/messages").getString("rec.exp.displays.print"),
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages")
-						.getString("rec.exp.displays.print.tip"));
+		viewPopMenu.addItem(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages").getString(
+						"rec.exp.displays.save"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages").getString(
+						"rec.exp.displays.save.tip"));
+		viewPopMenu.addItem(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages").getString(
+						"rec.exp.displays.print"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages").getString(
+						"rec.exp.displays.print.tip"));
 	}
 
-	public void actionPerformed(ActionEvent e) {
+	@Override
+	public void actionPerformed(final ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages")
-						.getString("rec.exp.displays.save")))
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages").getString(
+						"rec.exp.displays.save"))) {
 			try {
 				doSaveAs();
-			} catch (IOException io) {
+			} catch (final IOException io) {
 			}
-		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages")
-						.getString("rec.exp.displays.print")))
+		} else if (e.getActionCommand().equalsIgnoreCase(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages").getString(
+						"rec.exp.displays.print"))) {
 			createChartPrintJob();
+		}
 	}
 
-	public void mouseClicked(MouseEvent e) {
+	@Override
+	public void mouseClicked(final MouseEvent e) {
 		if (javax.swing.SwingUtilities.isRightMouseButton(e)) {
 			viewPopMenu.show(e.getComponent(), e.getX(), e.getY());
 			if (actionStr != null) {
@@ -226,28 +234,33 @@ public class Tiro extends DrawingPanel3D implements ActionListener, MouseListene
 		}
 	}
 
-	public void mouseEntered(MouseEvent e) {
+	@Override
+	public void mouseEntered(final MouseEvent e) {
 	}
 
-	public void mouseExited(MouseEvent e) {
+	@Override
+	public void mouseExited(final MouseEvent e) {
 	}
 
-	public void mousePressed(MouseEvent e) {
+	@Override
+	public void mousePressed(final MouseEvent e) {
 	}
 
-	public void mouseReleased(MouseEvent e) {
+	@Override
+	public void mouseReleased(final MouseEvent e) {
 	}
 
-	protected void paintEverything(java.awt.Graphics g) {
+	@Override
+	protected void paintEverything(final java.awt.Graphics g) {
 		if (dimensionSetter != null) {
-			java.awt.Dimension interiorDimension = dimensionSetter.getInterior(this);
+			final java.awt.Dimension interiorDimension = dimensionSetter.getInterior(this);
 			if (interiorDimension != null) {
 				squareAspect = false;
 				leftGutter = rightGutter = Math.max(0, getWidth() - interiorDimension.width) / 2;
 				topGutter = bottomGutter = Math.max(0, getHeight() - interiorDimension.height) / 2;
 			}
 		}
-		java.util.ArrayList tempList = getDrawables();
+		final java.util.ArrayList tempList = getDrawables();
 		scale(tempList);
 		setPixelScale();
 		g.setColor(getBackground());
@@ -268,36 +281,37 @@ public class Tiro extends DrawingPanel3D implements ActionListener, MouseListene
 
 		g.setColor(new java.awt.Color(.2f, .12f, .3f));
 
-		double[] pix = new double[3];
-		this.project(new double[] { target.getX() + 1, target.getY() / 2, target.getZ() }, pix);
-		String h = "h : " + GUtils.trimDecimalN(target.getY(), 2) + " m";
+		final double[] pix = new double[3];
+		project(new double[] { target.getX() + 1, target.getY() / 2, target.getZ() }, pix);
+		final String h = "h : " + GUtils.trimDecimalN(target.getY(), 2) + " m";
 		g.drawString(h, (int) pix[0], (int) pix[1] + g.getFontMetrics().getHeight() / 2);
 
-		this.project(new double[] { bullet.getGroup().getX() + (target.getX() - bullet.getGroup().getX()) / 2, -1,
+		project(new double[] { bullet.getGroup().getX() + (target.getX() - bullet.getGroup().getX()) / 2, -1,
 				target.getZ() }, pix);
-		String w = "w : " + GUtils.trimDecimalN(target.getX() - bullet.getGroup().getX(), 2) + " m";
+		final String w = "w : " + GUtils.trimDecimalN(target.getX() - bullet.getGroup().getX(), 2) + " m";
 		g.drawString(w, (int) pix[0] - g.getFontMetrics().stringWidth(h) / 2, (int) pix[1]);
 
-		String v = GUtils.trimDecimalN(getVel(), 2) + " m/s";
-		this.project(new double[] { bullet.getGroup().getX(), bullet.getGroup().getY() + 1, target.getZ() }, pix);
+		final String v = GUtils.trimDecimalN(getVel(), 2) + " m/s";
+		project(new double[] { bullet.getGroup().getX(), bullet.getGroup().getY() + 1, target.getZ() }, pix);
 		g.drawString(v, (int) pix[0] - g.getFontMetrics().stringWidth(v) / 2, (int) pix[1]);
 
-		java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
-		double theta = getTheta();
-		String thetaStr = GUtils.trimDecimalN(Math.toDegrees(theta), 2) + "�";
-		this.project(new double[] { bullet.getGroup().getX() + (target.getX() - bullet.getGroup().getX()) / 2,
+		final java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
+		final double theta = getTheta();
+		final String thetaStr = GUtils.trimDecimalN(Math.toDegrees(theta), 2) + "�";
+		project(new double[] { bullet.getGroup().getX() + (target.getX() - bullet.getGroup().getX()) / 2,
 				linha.getYMin() + (linha.getYMax() - linha.getYMin()) / 2, 0 }, pix);
-		g2.rotate(-theta, pix[0] - Math.cos(theta) * g.getFontMetrics().stringWidth(thetaStr) / 2, pix[1]
-				+ Math.sin(theta) * g.getFontMetrics().getHeight() / 2);
-		g2.drawString(thetaStr, (int) pix[0]
-				- (int) Math.round(Math.cos(theta) * g.getFontMetrics().stringWidth(thetaStr) / 2), (int) pix[1]
-				+ (int) Math.round(Math.sin(theta) * g.getFontMetrics().getHeight() / 2));
+		g2.rotate(-theta, pix[0] - Math.cos(theta) * g.getFontMetrics().stringWidth(thetaStr) / 2,
+				pix[1] + Math.sin(theta) * g.getFontMetrics().getHeight() / 2);
+		g2.drawString(thetaStr,
+				(int) pix[0] - (int) Math.round(Math.cos(theta) * g.getFontMetrics().stringWidth(thetaStr) / 2),
+				(int) pix[1] + (int) Math.round(Math.sin(theta) * g.getFontMetrics().getHeight() / 2));
 	}
 
-	public static void main(String args[]) {
-		javax.swing.JFrame test = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame test = new javax.swing.JFrame();
 		test.addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent e) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent e) {
 				System.exit(0);
 			};
 		});
@@ -308,13 +322,12 @@ public class Tiro extends DrawingPanel3D implements ActionListener, MouseListene
 
 	public void doSaveAs() throws IOException {
 
-		JFileChooser fileChooser = new JFileChooser();
-		org.jfree.ui.ExtensionFileFilter filter = new org.jfree.ui.ExtensionFileFilter(java.util.ResourceBundle
-				.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages").getString("PNG_Image_Files"),
-				".png");
+		final JFileChooser fileChooser = new JFileChooser();
+		final org.jfree.ui.ExtensionFileFilter filter = new org.jfree.ui.ExtensionFileFilter(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages").getString("PNG_Image_Files"), ".png");
 		fileChooser.addChoosableFileFilter(filter);
 
-		int option = fileChooser.showSaveDialog(this);
+		final int option = fileChooser.showSaveDialog(this);
 		if (option == JFileChooser.APPROVE_OPTION) {
 			String filename = fileChooser.getSelectedFile().getPath();
 
@@ -322,7 +335,7 @@ public class Tiro extends DrawingPanel3D implements ActionListener, MouseListene
 				filename = filename + ".png";
 			}
 
-			OutputStream out = new BufferedOutputStream(new FileOutputStream(new File(filename)));
+			final OutputStream out = new BufferedOutputStream(new FileOutputStream(new File(filename)));
 
 			EncoderUtil.writeBufferedImage(render(), ImageFormat.PNG, out);
 			out.close();
@@ -331,15 +344,15 @@ public class Tiro extends DrawingPanel3D implements ActionListener, MouseListene
 	}
 
 	public void createChartPrintJob() {
-		PrinterJob job = PrinterJob.getPrinterJob();
-		PageFormat pf = job.defaultPage();
-		PageFormat pf2 = job.pageDialog(pf);
+		final PrinterJob job = PrinterJob.getPrinterJob();
+		final PageFormat pf = job.defaultPage();
+		final PageFormat pf2 = job.pageDialog(pf);
 		if (pf2 != pf) {
 			job.setPrintable(this, pf2);
 			if (job.printDialog()) {
 				try {
 					job.print();
-				} catch (PrinterException e) {
+				} catch (final PrinterException e) {
 					JOptionPane.showMessageDialog(this, e);
 				}
 			}

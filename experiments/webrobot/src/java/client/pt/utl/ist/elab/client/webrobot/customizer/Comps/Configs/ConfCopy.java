@@ -12,8 +12,13 @@ package pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs;
  */
 public class ConfCopy extends javax.swing.JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5282877353270750357L;
+
 	/** Creates new form ConfCompBin */
-	public ConfCopy(java.awt.Frame parent, boolean modal) {
+	public ConfCopy(final java.awt.Frame parent, final boolean modal) {
 		super(parent, modal);
 		initComponents();
 		setCancel(false);
@@ -40,19 +45,22 @@ public class ConfCopy extends javax.swing.JDialog {
 		setTitle("Copiar");
 		setResizable(false);
 		addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyPressed(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyPressed(final java.awt.event.KeyEvent evt) {
 				formKeyPressed(evt);
 			}
 		});
 
 		addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mouseClicked(final java.awt.event.MouseEvent evt) {
 				formMouseClicked(evt);
 			}
 		});
 
 		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent evt) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent evt) {
 				closeDialog(evt);
 			}
 		});
@@ -82,7 +90,8 @@ public class ConfCopy extends javax.swing.JDialog {
 		jLabelIcon.setToolTipText("Pressione para selecionar com o mouse...");
 		jLabelIcon.setBorder(new javax.swing.border.EtchedBorder());
 		jLabelIcon.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jLabelIconMousePressed(evt);
 			}
 		});
@@ -99,13 +108,15 @@ public class ConfCopy extends javax.swing.JDialog {
 		jButtonOk.setText("Ok");
 		jButtonOk.setPreferredSize(new java.awt.Dimension(73, 26));
 		jButtonOk.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jButtonOkKeyReleased(evt);
 			}
 		});
 
 		jButtonOk.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonOkMousePressed(evt);
 			}
 		});
@@ -115,7 +126,8 @@ public class ConfCopy extends javax.swing.JDialog {
 		jButtonCancel.setForeground(new java.awt.Color(51, 0, 102));
 		jButtonCancel.setText("Cancel");
 		jButtonCancel.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonCancelMousePressed(evt);
 			}
 		});
@@ -127,12 +139,12 @@ public class ConfCopy extends javax.swing.JDialog {
 		pack();
 	}// GEN-END:initComponents
 
-	private void jLabelIconMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabelIconMousePressed
+	private void jLabelIconMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabelIconMousePressed
 		setCopying(true);
 		closeDialog(null);
 	}// GEN-LAST:event_jLabelIconMousePressed
 
-	private void jButtonOkKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jButtonOkKeyReleased
+	private void jButtonOkKeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jButtonOkKeyReleased
 		if (evt.getKeyCode() == 10) {
 			jButtonOkMousePressed(null);
 		} else if (evt.getKeyCode() == 27) {
@@ -140,7 +152,7 @@ public class ConfCopy extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_jButtonOkKeyReleased
 
-	private void formKeyPressed(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_formKeyPressed
+	private void formKeyPressed(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_formKeyPressed
 		if (evt.getKeyCode() == 10) {
 			jButtonOkMousePressed(null);
 		} else if (evt.getKeyCode() == 27) {
@@ -148,22 +160,22 @@ public class ConfCopy extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_formKeyPressed
 
-	private void formMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseClicked
+	private void formMouseClicked(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseClicked
 		this.requestFocus();
 	}// GEN-LAST:event_formMouseClicked
 
-	private void jButtonCancelMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonCancelMousePressed
+	private void jButtonCancelMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonCancelMousePressed
 		setCancel(true);
 		setCopying(false);
 		closeDialog(null);
 	}// GEN-LAST:event_jButtonCancelMousePressed
 
-	private void jButtonOkMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonOkMousePressed
+	private void jButtonOkMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonOkMousePressed
 		int cc = -1;
 		int rc = -1;
 		try {
 			cc = new Integer(jTextFieldCol.getText()).intValue();
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 			javax.swing.JOptionPane.showMessageDialog(this, "Por favor, introduza um n�mero inteiro", "Erro!",
 					javax.swing.JOptionPane.ERROR_MESSAGE);
 			jTextFieldCol.selectAll();
@@ -179,7 +191,7 @@ public class ConfCopy extends javax.swing.JDialog {
 		}
 		try {
 			rc = new Integer(jTextFieldRow.getText()).intValue();
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 			javax.swing.JOptionPane.showMessageDialog(this, "Por favor, introduza um n�mero inteiro", "Erro!",
 					javax.swing.JOptionPane.ERROR_MESSAGE);
 			jTextFieldRow.selectAll();
@@ -201,7 +213,7 @@ public class ConfCopy extends javax.swing.JDialog {
 	}// GEN-LAST:event_jButtonOkMousePressed
 
 	/** Closes the dialog */
-	private void closeDialog(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
+	private void closeDialog(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
 		if (evt != null) {
 			setCancel(true);
 		}
@@ -223,7 +235,7 @@ public class ConfCopy extends javax.swing.JDialog {
 	 * @return Value of property cancel.
 	 */
 	public boolean isCancel() {
-		return this.cancel;
+		return cancel;
 	}
 
 	/**
@@ -231,7 +243,7 @@ public class ConfCopy extends javax.swing.JDialog {
 	 * 
 	 * @param cancel New value of property cancel.
 	 */
-	public void setCancel(boolean cancel) {
+	public void setCancel(final boolean cancel) {
 		this.cancel = cancel;
 	}
 
@@ -241,7 +253,7 @@ public class ConfCopy extends javax.swing.JDialog {
 	 * @return Value of property columnCopy.
 	 */
 	public int getRowCopy() {
-		return this.rowCopy;
+		return rowCopy;
 	}
 
 	/**
@@ -249,7 +261,7 @@ public class ConfCopy extends javax.swing.JDialog {
 	 * 
 	 * @param columnCopy New value of property columnCopy.
 	 */
-	public void setRowCopy(int rowCopy) {
+	public void setRowCopy(final int rowCopy) {
 		this.rowCopy = rowCopy;
 	}
 
@@ -259,7 +271,7 @@ public class ConfCopy extends javax.swing.JDialog {
 	 * @return Value of property columnCopy.
 	 */
 	public int getColumnCopy() {
-		return this.columnCopy;
+		return columnCopy;
 	}
 
 	/**
@@ -267,7 +279,7 @@ public class ConfCopy extends javax.swing.JDialog {
 	 * 
 	 * @param columnCopy New value of property columnCopy.
 	 */
-	public void setColumnCopy(int columnCopy) {
+	public void setColumnCopy(final int columnCopy) {
 		this.columnCopy = columnCopy;
 	}
 
@@ -277,7 +289,7 @@ public class ConfCopy extends javax.swing.JDialog {
 	 * @return Value of property rowText.
 	 */
 	public String getRowText() {
-		return this.rowText;
+		return rowText;
 	}
 
 	/**
@@ -285,7 +297,7 @@ public class ConfCopy extends javax.swing.JDialog {
 	 * 
 	 * @param rowText New value of property rowText.
 	 */
-	public void setRowText(String rowText) {
+	public void setRowText(final String rowText) {
 		this.rowText = rowText;
 		jTextFieldRow.setText(rowText);
 	}
@@ -296,7 +308,7 @@ public class ConfCopy extends javax.swing.JDialog {
 	 * @return Value of property colText.
 	 */
 	public String getColText() {
-		return this.colText;
+		return colText;
 	}
 
 	/**
@@ -304,7 +316,7 @@ public class ConfCopy extends javax.swing.JDialog {
 	 * 
 	 * @param colText New value of property colText.
 	 */
-	public void setColText(String colText) {
+	public void setColText(final String colText) {
 		this.colText = colText;
 		jTextFieldCol.setText(colText);
 	}
@@ -315,7 +327,7 @@ public class ConfCopy extends javax.swing.JDialog {
 	 * @return Value of property copying.
 	 */
 	public boolean isCopying() {
-		return this.copying;
+		return copying;
 	}
 
 	/**
@@ -323,7 +335,7 @@ public class ConfCopy extends javax.swing.JDialog {
 	 * 
 	 * @param copying New value of property copying.
 	 */
-	public void setCopying(boolean copying) {
+	public void setCopying(final boolean copying) {
 		this.copying = copying;
 	}
 

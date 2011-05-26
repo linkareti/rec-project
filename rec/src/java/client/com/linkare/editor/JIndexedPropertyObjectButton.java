@@ -13,6 +13,7 @@ import java.awt.Rectangle;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -38,18 +39,26 @@ public class JIndexedPropertyObjectButton extends JButton {
 	// These ivars will be made protected when their names are finalized.
 	private Color unselectedForeground;
 	private Color unselectedBackground;
-	private JTable table;
+	private final JTable table;
 
-	/** Creates a new instance of JIndexedPropertyObjectButton */
-	public JIndexedPropertyObjectButton(IndexedPropertyObject value, boolean isSelected, boolean hasFocus, JTable table) {
+	/**
+	 * Creates a new instance of JIndexedPropertyObjectButton
+	 * 
+	 * @param value The current indexed property
+	 * @param isSelected if the cell is currently selected
+	 * @param hasFocus if the cell has the focus
+	 * @param table the table on which editing is taking place
+	 */
+	public JIndexedPropertyObjectButton(final IndexedPropertyObject value, final boolean isSelected,
+			final boolean hasFocus, final JTable table) {
 		this.table = table;
 		this.isSelected = isSelected;
 		this.hasFocus = hasFocus;
 		this.value = value;
-		setHorizontalAlignment(LEFT);
+		setHorizontalAlignment(SwingConstants.LEFT);
 		setMargin(new java.awt.Insets(0, 0, 0, 0));
 		setOpaque(true);
-		setBorder(noFocusBorder);
+		setBorder(JIndexedPropertyObjectButton.noFocusBorder);
 	}
 
 	/**
@@ -58,7 +67,8 @@ public class JIndexedPropertyObjectButton extends JButton {
 	 * 
 	 * @param c set the foreground color to this value
 	 */
-	public void setForeground(Color c) {
+	@Override
+	public void setForeground(final Color c) {
 		super.setForeground(c);
 		unselectedForeground = c;
 	}
@@ -69,7 +79,8 @@ public class JIndexedPropertyObjectButton extends JButton {
 	 * 
 	 * @param c set the background color to this value
 	 */
-	public void setBackground(Color c) {
+	@Override
+	public void setBackground(final Color c) {
 		super.setBackground(c);
 		unselectedBackground = c;
 	}
@@ -81,13 +92,15 @@ public class JIndexedPropertyObjectButton extends JButton {
 	 * 
 	 * @see JComponent#updateUI
 	 */
+	@Override
 	public void updateUI() {
 		super.updateUI();
 		setForeground(null);
 		setBackground(null);
 	}
 
-	protected void paintComponent(Graphics g) {
+	@Override
+	protected void paintComponent(final Graphics g) {
 		if (isSelected) {
 			super.setForeground(table.getSelectionForeground());
 			super.setBackground(table.getSelectionBackground());
@@ -105,7 +118,7 @@ public class JIndexedPropertyObjectButton extends JButton {
 				super.setBackground(UIManager.getColor("Table.focusCellBackground"));
 			}
 		} else {
-			setBorder(noFocusBorder);
+			setBorder(JIndexedPropertyObjectButton.noFocusBorder);
 		}
 
 		if (value.getPropertyEditor() != null) {
@@ -113,7 +126,7 @@ public class JIndexedPropertyObjectButton extends JButton {
 			if (value.getPropertyEditor().isPaintable()) {
 				setText("");
 				super.paintComponent(g);
-				Rectangle draw = new Rectangle(g.getClipBounds().x + 2, g.getClipBounds().y + 2,
+				final Rectangle draw = new Rectangle(g.getClipBounds().x + 2, g.getClipBounds().y + 2,
 						g.getClipBounds().width - 4, g.getClipBounds().height - 4);
 				value.getPropertyEditor().paintValue(g, draw);
 			} else if (value.getPropertyEditor().getAsText() != null) {

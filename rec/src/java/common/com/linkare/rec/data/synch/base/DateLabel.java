@@ -12,6 +12,10 @@ package com.linkare.rec.data.synch.base;
  */
 public class DateLabel extends javax.swing.JLabel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5917134646068781819L;
 	/** Holds value of property date. */
 	private com.linkare.rec.data.synch.Date date = new com.linkare.rec.data.synch.Date();
 
@@ -19,13 +23,16 @@ public class DateLabel extends javax.swing.JLabel {
 	public DateLabel() {
 	}
 
+	@Override
 	public String getText() {
-		if (date == null)
+		if (date == null) {
 			return "";
+		}
 		return date.toString();
 	}
 
-	public void setText(String str) {
+	@Override
+	public void setText(final String str) {
 	}
 
 	/**
@@ -34,7 +41,7 @@ public class DateLabel extends javax.swing.JLabel {
 	 * @return Value of property date.
 	 */
 	public com.linkare.rec.data.synch.Date getDate() {
-		return this.date;
+		return date;
 	}
 
 	/**
@@ -42,7 +49,7 @@ public class DateLabel extends javax.swing.JLabel {
 	 * 
 	 * @param date New value of property date.
 	 */
-	public void setDate(com.linkare.rec.data.synch.Date date) {
+	public void setDate(final com.linkare.rec.data.synch.Date date) {
 		this.date = date;
 		repaint();
 	}

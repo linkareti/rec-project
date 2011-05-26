@@ -11,6 +11,11 @@ package pt.utl.ist.elab.client.vbs.displays;
  * @author Queiro'
  */
 public class B2I2Chart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4555510135304280443L;
+
 	/** Creates a new instance of AnguloIntensidadeChart */
 	public B2I2Chart() {
 		super();

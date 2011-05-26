@@ -30,9 +30,9 @@ public class PenduloStampDataSource extends AbstractStampDataSource {
 	public static String PENDULO_DS_LOGGER = "PenduloDataSource.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(PENDULO_DS_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(PenduloStampDataSource.PENDULO_DS_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(PENDULO_DS_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(PenduloStampDataSource.PENDULO_DS_LOGGER));
 		}
 	}
 
@@ -40,21 +40,23 @@ public class PenduloStampDataSource extends AbstractStampDataSource {
 	public PenduloStampDataSource() {
 	}
 
-	public void processDataCommand(StampCommand cmd) {
-		if (stopped || cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null)
+	@Override
+	public void processDataCommand(final StampCommand cmd) {
+		if (stopped || cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null) {
 			return;
+		}
 
 		if (cmd.getCommandIdentifier().equals(StampPenduloProcessor.COMMAND_IDENTIFIER)) {
 
 			Float angle_vel;
-			PhysicsValue[] values = new PhysicsValue[1];
+			final PhysicsValue[] values = new PhysicsValue[1];
 			try {
 				angle_vel = (Float) cmd.getCommandData(StampPenduloProcessor.ANGLE_VEL);
-			} catch (ClassCastException e) {
+			} catch (final ClassCastException e) {
 				e.printStackTrace();
 				return;
 			}
-			float valorAngleVel = angle_vel.floatValue();
+			final float valorAngleVel = angle_vel.floatValue();
 			values[0] = PhysicsValueFactory.fromFloat(valorAngleVel, getAcquisitionHeader().getChannelsConfig(0)
 					.getSelectedScale());
 			super.addDataRow(values);
@@ -62,14 +64,15 @@ public class PenduloStampDataSource extends AbstractStampDataSource {
 			counter++;
 
 			if (counter == total_samples) {
-				Logger.getLogger(PENDULO_DS_LOGGER).log(Level.INFO, "DataSource Ended");
+				Logger.getLogger(PenduloStampDataSource.PENDULO_DS_LOGGER).log(Level.INFO, "DataSource Ended");
 				setDataSourceEnded();
 			}
 		}
 
 	}
 
-	public void setAcquisitionHeader(HardwareAcquisitionConfig config) {
+	@Override
+	public void setAcquisitionHeader(final HardwareAcquisitionConfig config) {
 		super.setAcquisitionHeader(config);
 		// setPacketSize((int)Math.ceil(config.getSelectedFrequency().getFrequency()/8.));
 		// setPacketSize(1);
@@ -80,6 +83,7 @@ public class PenduloStampDataSource extends AbstractStampDataSource {
 
 	private boolean stopped = false;
 
+	@Override
 	public void stopNow() {
 		stopped = true;
 		setDataSourceStoped();

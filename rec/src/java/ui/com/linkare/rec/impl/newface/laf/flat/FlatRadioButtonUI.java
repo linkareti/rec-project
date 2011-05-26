@@ -25,36 +25,35 @@ import javax.swing.plaf.basic.BasicHTML;
 import javax.swing.plaf.metal.MetalRadioButtonUI;
 import javax.swing.text.View;
 
-
 /**
  * 
  * @author João FLorindo
  */
 public class FlatRadioButtonUI extends MetalRadioButtonUI {
 
-	public static ComponentUI createUI(JComponent x) {
+	public static ComponentUI createUI(final JComponent x) {
 		return new FlatRadioButtonUI();
 	}
 
 	@Override
-	public synchronized void paint(Graphics g, JComponent c) {
-		AbstractButton abstractButton = (AbstractButton) c;
-		ButtonModel model = abstractButton.getModel();
+	public synchronized void paint(final Graphics g, final JComponent c) {
+		final AbstractButton abstractButton = (AbstractButton) c;
+		final ButtonModel model = abstractButton.getModel();
 
-		Dimension size = c.getSize();
+		final Dimension size = c.getSize();
 
-		int w = size.width;
-		int h = size.height;
+		final int w = size.width;
+		final int h = size.height;
 
-		Font f = c.getFont();
+		final Font f = c.getFont();
 		g.setFont(f);
-		FontMetrics fm = g.getFontMetrics();
+		final FontMetrics fm = g.getFontMetrics();
 
-		Rectangle viewRect = new Rectangle(size);
-		Rectangle iconRect = new Rectangle();
-		Rectangle textRect = new Rectangle();
+		final Rectangle viewRect = new Rectangle(size);
+		final Rectangle iconRect = new Rectangle();
+		final Rectangle textRect = new Rectangle();
 
-		Insets i = c.getInsets();
+		final Insets i = c.getInsets();
 		viewRect.x += i.left;
 		viewRect.y += i.top;
 		viewRect.width -= (i.right + viewRect.x);
@@ -66,17 +65,23 @@ public class FlatRadioButtonUI extends MetalRadioButtonUI {
 
 		if (abstractButton instanceof javax.swing.JRadioButton) {
 			altIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class.getResource("resources/radioButton.png"));
-			selectedIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class.getResource("resources/radioButtonSelected.png"));
-			disableIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class.getResource("resources/radioButtonDisable.png"));
+			selectedIcon = new javax.swing.ImageIcon(
+					FlatRadioButtonUI.class.getResource("resources/radioButtonSelected.png"));
+			disableIcon = new javax.swing.ImageIcon(
+					FlatRadioButtonUI.class.getResource("resources/radioButtonDisable.png"));
 		} else if (abstractButton instanceof javax.swing.JCheckBox) {
 			altIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class.getResource("resources/checkBox.png"));
-			selectedIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class.getResource("resources/checkBoxSelected.png"));
-			disableIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class.getResource("resources/checkBoxDisable.png"));
+			selectedIcon = new javax.swing.ImageIcon(
+					FlatRadioButtonUI.class.getResource("resources/checkBoxSelected.png"));
+			disableIcon = new javax.swing.ImageIcon(
+					FlatRadioButtonUI.class.getResource("resources/checkBoxDisable.png"));
 		}
 
-		String text = SwingUtilities.layoutCompoundLabel(c, fm, abstractButton.getText(), altIcon != null ? altIcon : getDefaultIcon(), abstractButton
-				.getVerticalAlignment(), abstractButton.getHorizontalAlignment(), abstractButton.getVerticalTextPosition(), abstractButton.getHorizontalTextPosition(), viewRect,
-				iconRect, textRect, abstractButton.getIconTextGap());
+		final String text = SwingUtilities.layoutCompoundLabel(c, fm, abstractButton.getText(),
+				altIcon != null ? altIcon : getDefaultIcon(), abstractButton.getVerticalAlignment(),
+				abstractButton.getHorizontalAlignment(), abstractButton.getVerticalTextPosition(),
+				abstractButton.getHorizontalTextPosition(), viewRect, iconRect, textRect,
+				abstractButton.getIconTextGap());
 
 		// fill background
 		if (c.isOpaque()) {
@@ -103,11 +108,11 @@ public class FlatRadioButtonUI extends MetalRadioButtonUI {
 
 		// Draw the Text
 		if (text != null) {
-			View v = (View) c.getClientProperty(BasicHTML.propertyKey);
+			final View v = (View) c.getClientProperty(BasicHTML.propertyKey);
 			if (v != null) {
 				v.paint(g, textRect);
 			} else {
-				int mnemIndex = abstractButton.getDisplayedMnemonicIndex();
+				final int mnemIndex = abstractButton.getDisplayedMnemonicIndex();
 				if (model.isEnabled()) {
 					// *** paint the text normally
 					g.setColor(abstractButton.getForeground());
@@ -115,16 +120,16 @@ public class FlatRadioButtonUI extends MetalRadioButtonUI {
 					// *** paint the text disabled
 					g.setColor(getDisabledTextColor());
 				}
-				if(mnemIndex>0 && mnemIndex<=text.length())
-				{
-					AttributedString as=new AttributedString(text);
-					as.addAttribute(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON,mnemIndex-1,mnemIndex);
+				if (mnemIndex > 0 && mnemIndex <= text.length()) {
+					final AttributedString as = new AttributedString(text);
+					as.addAttribute(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON, mnemIndex - 1, mnemIndex);
 					g.drawString(as.getIterator(), textRect.x, textRect.y + fm.getAscent());
 				} else {
 					g.drawString(text, textRect.x, textRect.y + fm.getAscent());
 				}
 			}
-			if (abstractButton.hasFocus() && abstractButton.isFocusPainted() && textRect.width > 0 && textRect.height > 0) {
+			if (abstractButton.hasFocus() && abstractButton.isFocusPainted() && textRect.width > 0
+					&& textRect.height > 0) {
 				paintFocus(g, textRect, size);
 			}
 		}

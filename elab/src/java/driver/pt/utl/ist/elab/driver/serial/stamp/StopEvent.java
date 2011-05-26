@@ -13,12 +13,12 @@ import com.linkare.rec.impl.threading.util.EnumPriority;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class StopEvent implements Prioritazible{
+public class StopEvent implements Prioritazible {
 
 	/** Creates a new instance of StopEvent */
 	public StopEvent() {
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */

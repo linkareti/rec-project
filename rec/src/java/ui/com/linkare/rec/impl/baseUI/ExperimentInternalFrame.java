@@ -16,10 +16,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JInternalFrame;
 import javax.swing.JToolBar;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import com.linkare.rec.data.acquisition.TOTAL_SAMPLES_UNDEFINED;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.baseUI.control.TrafficLightPanel;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
@@ -32,12 +34,16 @@ import com.linkare.rec.impl.logging.LoggerUtil;
  * @author José Pedro Pereira - Linkare TI
  */
 public class ExperimentInternalFrame extends JInternalFrame implements ExpDataModelListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7228356586142295103L;
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ExperimentInternalFrame.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ExperimentInternalFrame.UI_CLIENT_LOGGER));
 		}
 	}
 
@@ -101,27 +107,34 @@ public class ExperimentInternalFrame extends JInternalFrame implements ExpDataMo
 		setFrameIcon(ReCResourceBundle.findImageIconOrDefault("ReCBaseUI$rec.bui.icon.experiment", new ImageIcon(
 				getClass().getResource("/com/linkare/rec/impl/baseUI/resources/Experiment16.gif"))));
 		addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-			public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+			@Override
+			public void internalFrameActivated(final javax.swing.event.InternalFrameEvent evt) {
 			}
 
-			public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+			@Override
+			public void internalFrameClosed(final javax.swing.event.InternalFrameEvent evt) {
 				formInternalFrameClosed(evt);
 			}
 
-			public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+			@Override
+			public void internalFrameClosing(final javax.swing.event.InternalFrameEvent evt) {
 				formInternalFrameClosing(evt);
 			}
 
-			public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+			@Override
+			public void internalFrameDeactivated(final javax.swing.event.InternalFrameEvent evt) {
 			}
 
-			public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+			@Override
+			public void internalFrameDeiconified(final javax.swing.event.InternalFrameEvent evt) {
 			}
 
-			public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+			@Override
+			public void internalFrameIconified(final javax.swing.event.InternalFrameEvent evt) {
 			}
 
-			public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+			@Override
+			public void internalFrameOpened(final javax.swing.event.InternalFrameEvent evt) {
 			}
 		});
 
@@ -135,7 +148,8 @@ public class ExperimentInternalFrame extends JInternalFrame implements ExpDataMo
 		btnPlayExperiment.setPreferredSize(new java.awt.Dimension(16, 16));
 		btnPlayExperiment.setEnabled(false);
 		btnPlayExperiment.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnPlayExperimentActionPerformed(evt);
 			}
 		});
@@ -149,7 +163,8 @@ public class ExperimentInternalFrame extends JInternalFrame implements ExpDataMo
 		btnPauseExperiment.setMaximumSize(new java.awt.Dimension(16, 16));
 		btnPauseExperiment.setPreferredSize(new java.awt.Dimension(16, 16));
 		btnPauseExperiment.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnPauseExperimentActionPerformed(evt);
 			}
 		});
@@ -166,11 +181,11 @@ public class ExperimentInternalFrame extends JInternalFrame implements ExpDataMo
 		gridBagConstraints.weightx = 1.0;
 		jPanel41.add(experimentProgressBar, gridBagConstraints);
 
-		jLabel11.setText(STATUS_STR);
+		jLabel11.setText(ExperimentInternalFrame.STATUS_STR);
 		jPanel41.add(jLabel11, new java.awt.GridBagConstraints());
 
 		lblExpStatus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		lblExpStatus.setText(RUNNING_STR);
+		lblExpStatus.setText(ExperimentInternalFrame.RUNNING_STR);
 		lblExpStatus.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		jPanel41.add(lblExpStatus, new java.awt.GridBagConstraints());
 
@@ -181,11 +196,12 @@ public class ExperimentInternalFrame extends JInternalFrame implements ExpDataMo
 		jPanelCenter.setLayout(new java.awt.BorderLayout());
 
 		tabPaneExperiment.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
-		tabPaneExperiment.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
+		tabPaneExperiment.setTabPlacement(SwingConstants.BOTTOM);
 		tabPaneExperiment.setMinimumSize(new java.awt.Dimension(350, 100));
 		tabPaneExperiment.setPreferredSize(new java.awt.Dimension(350, 100));
 		tabPaneExperiment.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				tabPaneExperimentStateChanged(evt);
 			}
 		});
@@ -197,31 +213,35 @@ public class ExperimentInternalFrame extends JInternalFrame implements ExpDataMo
 		pack();
 	}// GEN-END:initComponents
 
-	private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt)// GEN-FIRST:event_formInternalFrameClosed
+	private void formInternalFrameClosed(final javax.swing.event.InternalFrameEvent evt)// GEN-FIRST:event_formInternalFrameClosed
 	{// GEN-HEADEREND:event_formInternalFrameClosed
-		if (!killed)
+		if (!killed) {
 			killInternalFrame();
+		}
 	}// GEN-LAST:event_formInternalFrameClosed
 
 	private JToolBar oldToolBar = null;
 
-	private void tabPaneExperimentStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_tabPaneExperimentStateChanged
+	private void tabPaneExperimentStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_tabPaneExperimentStateChanged
 	{// GEN-HEADEREND:event_tabPaneExperimentStateChanged
 		int selectedIndex = 0;
 		if ((selectedIndex = tabPaneExperiment.getSelectedIndex()) != -1) {
-			final ExpDataDisplay display = (ExpDataDisplay) dataDisplayList.get(selectedIndex);
+			final ExpDataDisplay display = dataDisplayList.get(selectedIndex);
 
 			SwingUtilities.invokeLater(new Runnable() {
+				@Override
 				public void run() {
 					setJMenuBar(display.getMenuBar());
 
-					if (oldToolBar != null)
+					if (oldToolBar != null) {
 						getContentPane().remove(oldToolBar);
+					}
 
 					oldToolBar = display.getToolBar();
 
-					if (oldToolBar != null)
+					if (oldToolBar != null) {
 						getContentPane().add(oldToolBar, java.awt.BorderLayout.NORTH);
+					}
 
 					repaint();// absolutely needed - tested allready
 				}
@@ -229,43 +249,47 @@ public class ExperimentInternalFrame extends JInternalFrame implements ExpDataMo
 		}
 	}// GEN-LAST:event_tabPaneExperimentStateChanged
 
-	private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt)// GEN-FIRST:event_formInternalFrameClosing
+	private void formInternalFrameClosing(final javax.swing.event.InternalFrameEvent evt)// GEN-FIRST:event_formInternalFrameClosing
 	{// GEN-HEADEREND:event_formInternalFrameClosing
-		if (!killed)
+		if (!killed) {
 			killInternalFrame();
+		}
 	}// GEN-LAST:event_formInternalFrameClosing
 
-	private void btnPlayExperimentActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnPlayExperimentActionPerformed
+	private void btnPlayExperimentActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnPlayExperimentActionPerformed
 	{// GEN-HEADEREND:event_btnPlayExperimentActionPerformed
 		btnPauseExperiment.setEnabled(true);
 		// experimentProgressBar.setIndeterminate(true);
 		btnPlayExperiment.setEnabled(false);
-		lblExpStatus.setText(RUNNING_STR + "...");
+		lblExpStatus.setText(ExperimentInternalFrame.RUNNING_STR + "...");
 		lblExpStatus.setForeground(new Color(0, 153, 0));
 		// lblExpStatus.startBlinking();
-		trafficLightPanel1.changeTrafficStatus(trafficLightPanel1.GREEN);
-		if (expDataModel != null)
+		trafficLightPanel1.changeTrafficStatus(TrafficLightPanel.GREEN);
+		if (expDataModel != null) {
 			expDataModel.play();
+		}
 	}// GEN-LAST:event_btnPlayExperimentActionPerformed
 
-	private void btnPauseExperimentActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnPauseExperimentActionPerformed
+	private void btnPauseExperimentActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnPauseExperimentActionPerformed
 	{// GEN-HEADEREND:event_btnPauseExperimentActionPerformed
 		btnPlayExperiment.setEnabled(true);
 		// experimentProgressBar.setIndeterminate(false);
 		btnPauseExperiment.setEnabled(false);
 		// lblExpStatus.stopBlinking();
-		lblExpStatus.setText(PAUSED_STR + "...");
+		lblExpStatus.setText(ExperimentInternalFrame.PAUSED_STR + "...");
 		lblExpStatus.setForeground(Color.red);
-		trafficLightPanel1.changeTrafficStatus(trafficLightPanel1.BLINK);
-		if (expDataModel != null)
+		trafficLightPanel1.changeTrafficStatus(TrafficLightPanel.BLINK);
+		if (expDataModel != null) {
 			expDataModel.pause();
+		}
 	}// GEN-LAST:event_btnPauseExperimentActionPerformed
 
 	private boolean killed = false;
 
 	private void killInternalFrame() {
-		if (expDataModel != null)
+		if (expDataModel != null) {
 			expDataModel.stopNow();
+		}
 		killed = true;
 		dispose();
 	}
@@ -276,7 +300,7 @@ public class ExperimentInternalFrame extends JInternalFrame implements ExpDataMo
 	 * @return Value of property expDataModel.
 	 */
 	public ExpDataModel getExpDataModel() {
-		return this.expDataModel;
+		return expDataModel;
 	}
 
 	/**
@@ -284,38 +308,42 @@ public class ExperimentInternalFrame extends JInternalFrame implements ExpDataMo
 	 * 
 	 * @param expDataModel New value of property expDataModel.
 	 */
-	public void setExpDataModel(ExpDataModel expDataModel) {
-		if (expDataModel != null)
+	public void setExpDataModel(final ExpDataModel expDataModel) {
+		if (expDataModel != null) {
 			expDataModel.removeExpDataModelListener(this);
+		}
 		this.expDataModel = expDataModel;
-		if (expDataModel != null)
+		if (expDataModel != null) {
 			expDataModel.addExpDataModelListener(this);
+		}
 
 		if (dataDisplayList != null) {
-			Object[] dataDisplayArrObj = dataDisplayList.toArray();
-			for (int i = 0; i < dataDisplayArrObj.length; i++) {
-				ExpDataDisplay display = (ExpDataDisplay) dataDisplayArrObj[i];
+			final Object[] dataDisplayArrObj = dataDisplayList.toArray();
+			for (final Object element : dataDisplayArrObj) {
+				final ExpDataDisplay display = (ExpDataDisplay) element;
 				display.setExpDataModel(expDataModel);
 			}
 		}
 	}
 
+	@Override
 	public void dataModelWaiting() {
-		lblExpStatus.setText(WAITING_STR + "...");
+		lblExpStatus.setText(ExperimentInternalFrame.WAITING_STR + "...");
 		lblExpStatus.setForeground(new Color(0, 153, 0));
 		// lblExpStatus.startBlinking();
 		btnPauseExperiment.setEnabled(true);
 		btnPlayExperiment.setEnabled(false);
 		experimentProgressBar.setIndeterminate(true);
-		trafficLightPanel1.changeTrafficStatus(trafficLightPanel1.BLINK);
+		trafficLightPanel1.changeTrafficStatus(TrafficLightPanel.BLINK);
 	}
 
+	@Override
 	public void dataModelStoped() {
 		if (expDataModel.getTotalSamples() == TOTAL_SAMPLES_UNDEFINED.value) {
-			lblExpStatus.setText(NODATA_STR + "!");
+			lblExpStatus.setText(ExperimentInternalFrame.NODATA_STR + "!");
 		} else {
 			experimentProgressBar.setIndeterminate(false);
-			lblExpStatus.setText(STOPED_STR + "!");
+			lblExpStatus.setText(ExperimentInternalFrame.STOPED_STR + "!");
 		}
 		// lblExpStatus.stopBlinking();
 		lblExpStatus.setForeground(Color.red);
@@ -324,24 +352,27 @@ public class ExperimentInternalFrame extends JInternalFrame implements ExpDataMo
 		experimentProgressBar.setIndeterminate(false);
 		experimentProgressBar.setValue(experimentProgressBar.getMaximum());
 		experimentProgressBar.setString("100%");
-		trafficLightPanel1.changeTrafficStatus(trafficLightPanel1.RED);
+		trafficLightPanel1.changeTrafficStatus(TrafficLightPanel.RED);
 	}
 
-	public void newSamples(NewExpDataEvent evt) {
-		lblExpStatus.setText(RUNNING_STR + "...");
-		if (getHeader() != null)
-			this.experimentProgressBar.setValue(evt.getSamplesEndIndex());
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
+		lblExpStatus.setText(ExperimentInternalFrame.RUNNING_STR + "...");
 		if (getHeader() != null) {
-			if (getHeader().getTotalSamples() > 1)
+			experimentProgressBar.setValue(evt.getSamplesEndIndex());
+		}
+		if (getHeader() != null) {
+			if (getHeader().getTotalSamples() > 1) {
 				experimentProgressBar.setString(""
 						+ (100 * evt.getSamplesEndIndex() / (getHeader().getTotalSamples() - 1)) + "%");
-			else
+			} else {
 				experimentProgressBar.setString("" + (100 * evt.getSamplesEndIndex()) + "%");
+			}
 		}
 
 	}
 
-	public synchronized void addExpDataDisplay(ExpDataDisplay dataDisplay) {
+	public synchronized void addExpDataDisplay(final ExpDataDisplay dataDisplay) {
 		if (dataDisplayList == null) {
 			dataDisplayList = new java.util.ArrayList<ExpDataDisplay>();
 		}
@@ -351,48 +382,52 @@ public class ExperimentInternalFrame extends JInternalFrame implements ExpDataMo
 		try {
 			final Icon icon = dataDisplay.getIcon();
 			String nameTab = dataDisplay.getName();
-			if (nameTab == null)
-				nameTab = DISPLAY_STR;
+			if (nameTab == null) {
+				nameTab = ExperimentInternalFrame.DISPLAY_STR;
+			}
 			int i = 1;
 
 			if (tabPaneExperiment.indexOfTab(nameTab) != -1) {
-				while (tabPaneExperiment.indexOfTab(nameTab + " " + i) != -1)
+				while (tabPaneExperiment.indexOfTab(nameTab + " " + i) != -1) {
 					++i;
+				}
 
 				nameTab += " " + i;
 			}
 
-			JComponent displayComp = dataDisplay.getDisplay();
-			String nameTabFinal = nameTab;
+			final JComponent displayComp = dataDisplay.getDisplay();
+			final String nameTabFinal = nameTab;
 			tabPaneExperiment.addTab(nameTabFinal, icon, displayComp);
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			LoggerUtil.logThrowable("Couldn't add DataDisplay Component " + dataDisplay
-					+ " to ExperimentInternalFrame!", e, Logger.getLogger(UI_CLIENT_LOGGER));
+					+ " to ExperimentInternalFrame!", e, Logger.getLogger(ExperimentInternalFrame.UI_CLIENT_LOGGER));
 		}
 		dataDisplay.setExpDataModel(expDataModel);
 	}
 
-	public synchronized void removeExpDataDisplay(ExpDataDisplay dataDisplay) {
+	public synchronized void removeExpDataDisplay(final ExpDataDisplay dataDisplay) {
 		if (dataDisplayList != null) {
 			dataDisplayList.remove(dataDisplay);
 		}
 
 		dataDisplay.setExpDataModel(null);
 
-		if (dataDisplay.getDisplay() != null)
+		if (dataDisplay.getDisplay() != null) {
 			tabPaneExperiment.remove(dataDisplay.getDisplay());
+		}
 	}
 
-	public synchronized void addExpDataDisplayBean(String beanName) {
+	public synchronized void addExpDataDisplayBean(final String beanName) {
 
 		try {
-			Object dataDisplayTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(), beanName);
-			if (java.beans.Beans.isInstanceOf(dataDisplayTemp, ExpDataDisplay.class))
+			final Object dataDisplayTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(), beanName);
+			if (java.beans.Beans.isInstanceOf(dataDisplayTemp, ExpDataDisplay.class)) {
 				addExpDataDisplay((ExpDataDisplay) dataDisplayTemp);
-		} catch (Exception e) {
-			LoggerUtil.logThrowable("Couldn't init dataDisplay bean :" + beanName, e, Logger
-					.getLogger(UI_CLIENT_LOGGER));
+			}
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable("Couldn't init dataDisplay bean :" + beanName, e,
+					Logger.getLogger(ExperimentInternalFrame.UI_CLIENT_LOGGER));
 			e.printStackTrace();
 		}
 
@@ -400,49 +435,53 @@ public class ExperimentInternalFrame extends JInternalFrame implements ExpDataMo
 
 	HardwareAcquisitionConfig header = null;
 
-	public void errorOccurred(java.lang.String errorMessage) {
-		if (expDataModel != null)
+	public void errorOccurred(final java.lang.String errorMessage) {
+		if (expDataModel != null) {
 			expDataModel.stopNow();
+		}
 
 		lblExpStatus.setText(errorMessage);
 		// lblExpStatus.stopBlinking();
 		lblExpStatus.setForeground(java.awt.Color.red);
 		btnPlayExperiment.setEnabled(false);
 		btnPauseExperiment.setEnabled(false);
-		trafficLightPanel1.changeTrafficStatus(trafficLightPanel1.RED);
+		trafficLightPanel1.changeTrafficStatus(TrafficLightPanel.RED);
 	}
 
+	@Override
 	public void dataModelEnded() {
-		lblExpStatus.setText(DATA_ENDED_STR + "...");
-		trafficLightPanel1.changeTrafficStatus(trafficLightPanel1.RED);
+		lblExpStatus.setText(ExperimentInternalFrame.DATA_ENDED_STR + "...");
+		trafficLightPanel1.changeTrafficStatus(TrafficLightPanel.RED);
 	}
 
+	@Override
 	public void dataModelError() {
 		if (expDataModel.getTotalSamples() == TOTAL_SAMPLES_UNDEFINED.value) {
-			lblExpStatus.setText(DATA_MODEL_ERROR2_STR + "!");
+			lblExpStatus.setText(ExperimentInternalFrame.DATA_MODEL_ERROR2_STR + "!");
 			experimentProgressBar.setIndeterminate(false);
 		} else {
-			lblExpStatus.setText(DATA_MODEL_ERROR1_STR + "!");
+			lblExpStatus.setText(ExperimentInternalFrame.DATA_MODEL_ERROR1_STR + "!");
 			experimentProgressBar.setIndeterminate(false);
 			experimentProgressBar.setValue(experimentProgressBar.getMaximum());
 			experimentProgressBar.setString("100%");
 		}
-		trafficLightPanel1.changeTrafficStatus(trafficLightPanel1.RED);
+		trafficLightPanel1.changeTrafficStatus(TrafficLightPanel.RED);
 	}
 
+	@Override
 	public void dataModelStarted() {
-		lblExpStatus.setText(RUNNING_STR + "...");
+		lblExpStatus.setText(ExperimentInternalFrame.RUNNING_STR + "...");
 		if (expDataModel.getAcquisitionConfig() != null) {
 			getHeader();
 		}
-		trafficLightPanel1.changeTrafficStatus(trafficLightPanel1.GREEN);
+		trafficLightPanel1.changeTrafficStatus(TrafficLightPanel.GREEN);
 	}
 
 	public HardwareAcquisitionConfig getHeader() {
 		if (header == null) {
 			header = expDataModel.getAcquisitionConfig();
 			if (header != null) {
-				int total_samples = header.getTotalSamples();
+				final int total_samples = header.getTotalSamples();
 
 				experimentProgressBar.setIndeterminate(false);
 				experimentProgressBar.setMaximum(total_samples - 1);
@@ -455,10 +494,11 @@ public class ExperimentInternalFrame extends JInternalFrame implements ExpDataMo
 		return header;
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
-		lblExpStatus.setText(STARTED_NODATA_STR + "...");
+		lblExpStatus.setText(ExperimentInternalFrame.STARTED_NODATA_STR + "...");
 		experimentProgressBar.setIndeterminate(true);
-		trafficLightPanel1.changeTrafficStatus(trafficLightPanel1.BLINK);
+		trafficLightPanel1.changeTrafficStatus(TrafficLightPanel.BLINK);
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

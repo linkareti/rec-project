@@ -12,34 +12,36 @@ package com.linkare.rec.impl.threading;
  */
 public class WaitForConditionResult extends AbstractConditionDecisor {
 
-	public static void waitForConditionTrue(IConditionDecisor decisor, long timeout, long frequencyCheck)
-			throws TimedOutException {
+	public static void waitForConditionTrue(final IConditionDecisor decisor, final long timeout,
+			final long frequencyCheck) throws TimedOutException {
 		new WaitForConditionResult(decisor, timeout, frequencyCheck, true);
 	}
 
-	public static void waitForConditionTrue(IConditionDecisor decisor, long timeout) throws TimedOutException {
-		waitForConditionTrue(decisor, timeout, timeout / 10);
+	public static void waitForConditionTrue(final IConditionDecisor decisor, final long timeout)
+			throws TimedOutException {
+		WaitForConditionResult.waitForConditionTrue(decisor, timeout, timeout / 10);
 	}
 
-	public static void waitForConditionFalse(IConditionDecisor decisor, long timeout, long frequencyCheck)
-			throws TimedOutException {
+	public static void waitForConditionFalse(final IConditionDecisor decisor, final long timeout,
+			final long frequencyCheck) throws TimedOutException {
 		new WaitForConditionResult(decisor, timeout, frequencyCheck, false);
 	}
 
-	public static void waitForConditionFalse(IConditionDecisor decisor, long timeout) throws TimedOutException {
-		waitForConditionFalse(decisor, timeout, timeout / 10);
+	public static void waitForConditionFalse(final IConditionDecisor decisor, final long timeout)
+			throws TimedOutException {
+		WaitForConditionResult.waitForConditionFalse(decisor, timeout, timeout / 10);
 	}
 
 	private IConditionDecisor decisorDelegate = null;
-	private Object synch = new Object();
+	private final Object synch = new Object();
 	private boolean throwTimedOut = false;
 
 	private boolean waitForTrue = false;
 	private long timeOut = 0;
 
 	/** Creates a new instance of WaitForConditionTrue */
-	private WaitForConditionResult(IConditionDecisor decisorDelegate, long timeOut, long frequencyCheck,
-			boolean waitForTrue) throws TimedOutException {
+	private WaitForConditionResult(final IConditionDecisor decisorDelegate, final long timeOut,
+			final long frequencyCheck, final boolean waitForTrue) throws TimedOutException {
 
 		this.timeOut = timeOut;
 
@@ -51,36 +53,43 @@ public class WaitForConditionResult extends AbstractConditionDecisor {
 			new ConditionChecker(timeOut, frequencyCheck, this);
 			try {
 				synch.wait();
-			} catch (InterruptedException ignored) {
+			} catch (final InterruptedException ignored) {
 			}
 		}
 
-		if (throwTimedOut)
+		if (throwTimedOut) {
 			throw new TimedOutException();
+		}
 	}
 
+	@Override
 	public ConditionResult getConditionResult() {
 		return decisorDelegate.getConditionResult();
 	}
 
+	@Override
 	public void onConditionMetFalse() {
 		decisorDelegate.onConditionMetFalse();
-		if (!waitForTrue)
+		if (!waitForTrue) {
 			synchronized (synch) {
 				throwTimedOut = false;
 				synch.notifyAll();
 			}
+		}
 	}
 
+	@Override
 	public void onConditionMetTrue() {
 		decisorDelegate.onConditionMetTrue();
-		if (waitForTrue)
+		if (waitForTrue) {
 			synchronized (synch) {
 				throwTimedOut = false;
 				synch.notifyAll();
 			}
+		}
 	}
 
+	@Override
 	public void onConditionTimeOut() {
 		decisorDelegate.onConditionTimeOut();
 		synchronized (synch) {

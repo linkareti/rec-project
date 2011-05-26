@@ -8,13 +8,13 @@ public class NotAnAvailableSamplesPacketExceptionConstants {
 			.getBundle("com/linkare/rec/impl/exceptions/resources/NotAnAvailableSamplesPacketException");
 
 	public static final int PACKET_NOT_FOUND_IN_CACHE = 0;
-	public static final String PACKET_NOT_FOUND_IN_CACHE_MSG = notAnAvailableSamplesPacketExceptionRB
+	public static final String PACKET_NOT_FOUND_IN_CACHE_MSG = NotAnAvailableSamplesPacketExceptionConstants.notAnAvailableSamplesPacketExceptionRB
 			.getString("not_an_available_samples_packet_in_cache");
 
-	public static String getTranslatedMessage(NotAnAvailableSamplesPacketException e) {
+	public static String getTranslatedMessage(final NotAnAvailableSamplesPacketException e) {
 		switch (e.errorCode) {
 		case PACKET_NOT_FOUND_IN_CACHE:
-			return PACKET_NOT_FOUND_IN_CACHE_MSG;
+			return NotAnAvailableSamplesPacketExceptionConstants.PACKET_NOT_FOUND_IN_CACHE_MSG;
 
 		}
 

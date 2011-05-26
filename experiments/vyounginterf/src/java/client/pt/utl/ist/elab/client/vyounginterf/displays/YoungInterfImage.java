@@ -28,6 +28,10 @@ import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 
 public class YoungInterfImage extends JPanel implements ExpDataDisplay, ExpDataModelListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1040016606949070827L;
 	public JLabel label = null;
 	public ImageIcon icon = null;
 	public JScrollPane scroll = null;
@@ -35,52 +39,64 @@ public class YoungInterfImage extends JPanel implements ExpDataDisplay, ExpDataM
 	/** Creates a new instance of YoungInterfImage */
 	public YoungInterfImage() {
 
-		this.setLayout(new BorderLayout());
-		this.setBackground(Color.BLACK);
-		this.setPreferredSize(new Dimension(1200, 400));
+		setLayout(new BorderLayout());
+		setBackground(Color.BLACK);
+		setPreferredSize(new Dimension(1200, 400));
 		scroll = new JScrollPane();
 		this.add(scroll);
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
 
-	public void newSamples(com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
 
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
 			// sample, canal
@@ -97,12 +113,15 @@ public class YoungInterfImage extends JPanel implements ExpDataDisplay, ExpDataM
 
 	private ExpDataModel model = null;
 
-	public void setExpDataModel(ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
+		if (this.model != null) {
 			this.model.removeExpDataModelListener(this);
+		}
 		this.model = model;
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 	}
 
 }

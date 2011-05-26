@@ -16,16 +16,20 @@ import com.linkare.rec.impl.baseUI.config.Lab;
 
 public class ApparatusSelectionEvent extends LabSelectionEvent {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2546597189502256910L;
 	/** Holds value of property Apparatus. */
-	private Apparatus app;
+	private final Apparatus app;
 
 	/** Creates a new instance of ApparatusSelectionEvent */
-	public ApparatusSelectionEvent(Object source, Apparatus app) {
+	public ApparatusSelectionEvent(final Object source, final Apparatus app) {
 		this(source, app, null);
 	}
 
 	/** Creates a new instance of ApparatusSelectionEvent */
-	public ApparatusSelectionEvent(Object source, Apparatus app, Lab lab) {
+	public ApparatusSelectionEvent(final Object source, final Apparatus app, final Lab lab) {
 		super(source, lab);
 		this.app = app;
 	}
@@ -36,6 +40,6 @@ public class ApparatusSelectionEvent extends LabSelectionEvent {
 	 * @return Value of property Apparatus.
 	 */
 	public Apparatus getApparatus() {
-		return this.app;
+		return app;
 	}
 }

@@ -23,19 +23,23 @@ public abstract class VirtualBaseDriver extends BaseDriver {
 	public VirtualBaseDriver() {
 	}
 
-	public void extraValidateConfig(HardwareAcquisitionConfig config, HardwareInfo info)
+	@Override
+	public void extraValidateConfig(final HardwareAcquisitionConfig config, final HardwareInfo info)
 			throws WrongConfigurationException {
 		/** not going to use */
 	}
 
-	public void init(HardwareInfo info) {
+	@Override
+	public void init(final HardwareInfo info) {
 		fireIDriverStateListenerDriverInited();
 	}
 
-	public void reset(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public void reset(final HardwareInfo info) throws IncorrectStateException {
 	}
 
-	public IDataSource startOutput(HardwareInfo info, IDataSource source) throws IncorrectStateException {
+	@Override
+	public IDataSource startOutput(final HardwareInfo info, final IDataSource source) throws IncorrectStateException {
 		return null;
 	}
 

@@ -14,6 +14,11 @@ import com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph;
  */
 public class Mode0Graph extends MultSeriesXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4140016764770630928L;
+
 	/** Creates a new instance of Sensor1Graph */
 	public Mode0Graph() {
 		setChannelDisplayX(1);
@@ -21,6 +26,7 @@ public class Mode0Graph extends MultSeriesXYExperimentGraph {
 		setUpdatePercentage(10);
 	}
 
+	@Override
 	public String getName() {
 		return "Modo Varrimento";
 	}

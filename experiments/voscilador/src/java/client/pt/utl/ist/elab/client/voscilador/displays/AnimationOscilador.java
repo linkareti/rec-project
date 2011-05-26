@@ -26,13 +26,19 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class AnimationOscilador extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3776009227768913899L;
+
 	/** Creates new form Animation */
 	public AnimationOscilador() {
 		painel2DLateralFixo = new PlottingPanel("x(m)", "z(m)", ReCResourceBundle.findStringOrDefault(
 				"oscilador$rec.exp.display.oscilador.title.anim1", "2D Lateral Fixed Animation"));
 		painel2DLateral = new PlottingPanel(ReCResourceBundle.findStringOrDefault(
-				"oscilador$rec.exp.display.oscilador.title.anim2", "Radius (m)"), "z(m)", ReCResourceBundle
-				.findStringOrDefault("oscilador$rec.exp.display.oscilador.title.anim3", "2D Lateral Animation"));
+				"oscilador$rec.exp.display.oscilador.title.anim2", "Radius (m)"), "z(m)",
+				ReCResourceBundle.findStringOrDefault("oscilador$rec.exp.display.oscilador.title.anim3",
+						"2D Lateral Animation"));
 		painel2DSuperior = new PlottingPanel("y(m)", "x(m)", ReCResourceBundle.findStringOrDefault(
 				"oscilador$rec.exp.display.oscilador.title.anim4", "2D Superior Animation"));
 
@@ -91,22 +97,25 @@ public class AnimationOscilador extends javax.swing.JPanel implements ExpDataDis
 
 	}// GEN-END:initComponents
 
-	public static void main(String args[]) {
-		javax.swing.JFrame dummy = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new AnimationOscilador());
 		dummy.pack();
 		dummy.show();
 	}
 
 	// Queremos fazer alguma coisa quandos os dados acabarem?
+	@Override
 	public void dataModelEnded() {
 	}
 
 	// Queremos fazer alguma coisa quandos acontecer um erro?
+	@Override
 	public void dataModelError() {
 	}
 
 	// Queremos fazer alguma coisa quando for dado o start e existirem dados?
+	@Override
 	public void dataModelStarted() {
 	}
 
@@ -114,15 +123,16 @@ public class AnimationOscilador extends javax.swing.JPanel implements ExpDataDis
 	// dados?
 	// Eu garanto que quando chegamos a este estado, já existe o header da
 	// experiência!
+	@Override
 	public void dataModelStartedNoData() {
-		HardwareAcquisitionConfig header = model.getAcquisitionConfig();
+		final HardwareAcquisitionConfig header = model.getAcquisitionConfig();
 		// vamos lá ver o que o utilizador escolheu, para colocar a animação nas
 		// posições iniciais correctas!
 
-		float a = Float.parseFloat(header.getSelectedHardwareParameterValue("a"));
-		float alturaInicial = Float.parseFloat(header.getSelectedHardwareParameterValue("alturaInicial"));
-		float g = Float.parseFloat(header.getSelectedHardwareParameterValue("g"));
-		float frequencia = Float.parseFloat(header.getSelectedHardwareParameterValue("frequencia"));
+		final float a = Float.parseFloat(header.getSelectedHardwareParameterValue("a"));
+		final float alturaInicial = Float.parseFloat(header.getSelectedHardwareParameterValue("alturaInicial"));
+		final float g = Float.parseFloat(header.getSelectedHardwareParameterValue("g"));
+		final float frequencia = Float.parseFloat(header.getSelectedHardwareParameterValue("frequencia"));
 		painel2DLateralFixo.setPreferredMinMax(Math.sqrt(alturaInicial / a) * 1.2, -Math.sqrt(alturaInicial / a) * 1.2,
 				alturaInicial * 1.2, 0);
 		painel2DLateral.setPreferredMinMax(Math.sqrt(alturaInicial / a) * 1.2, -Math.sqrt(alturaInicial / a) * 1.2,
@@ -131,31 +141,38 @@ public class AnimationOscilador extends javax.swing.JPanel implements ExpDataDis
 	}
 
 	// Queremos fazer alguma coisa quando for dado parado?
+	@Override
 	public void dataModelStoped() {
 	}
 
 	// Queremos fazer alguma coisa em estado de espera?
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
 	// O icon associado a este painel!
+	@Override
 	public javax.swing.Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 
 		// Esta é a maneira clássica de tirar as amostras dos canais que nos
 		// interessam!
@@ -192,21 +209,24 @@ public class AnimationOscilador extends javax.swing.JPanel implements ExpDataDis
 				dataParabolaSuperior.clear();
 				dataParabolaLateral.clear();
 				dataParabolaLateralFixo.clear();
-				dataParabolaSuperior.append(model.getValueAt(i, 15).getValue().getFloatValue()
-						* Math.cos(model.getValueAt(i, 13).getValue().getFloatValue()), model.getValueAt(i, 15)
-						.getValue().getFloatValue()
-						* Math.sin(model.getValueAt(i, 13).getValue().getFloatValue()));
-				dataParabolaSuperior.append(-model.getValueAt(i, 15).getValue().getFloatValue()
-						* Math.cos(model.getValueAt(i, 13).getValue().getFloatValue()), -model.getValueAt(i, 15)
-						.getValue().getFloatValue()
-						* Math.sin(model.getValueAt(i, 13).getValue().getFloatValue()));
+				dataParabolaSuperior.append(
+						model.getValueAt(i, 15).getValue().getFloatValue()
+								* Math.cos(model.getValueAt(i, 13).getValue().getFloatValue()), model.getValueAt(i, 15)
+								.getValue().getFloatValue()
+								* Math.sin(model.getValueAt(i, 13).getValue().getFloatValue()));
+				dataParabolaSuperior.append(
+						-model.getValueAt(i, 15).getValue().getFloatValue()
+								* Math.cos(model.getValueAt(i, 13).getValue().getFloatValue()), -model
+								.getValueAt(i, 15).getValue().getFloatValue()
+								* Math.sin(model.getValueAt(i, 13).getValue().getFloatValue()));
 				double aux1 = -1;
 				while (aux1 <= 1) {
-					dataParabolaLateralFixo.append(model.getValueAt(i, 15).getValue().getFloatValue() * aux1
-							* Math.cos(model.getValueAt(i, 13).getValue().getFloatValue()), aux1
-							* model.getValueAt(i, 15).getValue().getFloatValue() * aux1
-							* model.getValueAt(i, 15).getValue().getFloatValue()
-							* (model.getValueAt(i, 14).getValue().getFloatValue()));
+					dataParabolaLateralFixo.append(
+							model.getValueAt(i, 15).getValue().getFloatValue() * aux1
+									* Math.cos(model.getValueAt(i, 13).getValue().getFloatValue()),
+							aux1 * model.getValueAt(i, 15).getValue().getFloatValue() * aux1
+									* model.getValueAt(i, 15).getValue().getFloatValue()
+									* (model.getValueAt(i, 14).getValue().getFloatValue()));
 					dataParabolaLateral.append(model.getValueAt(i, 15).getValue().getFloatValue() * aux1, aux1
 							* model.getValueAt(i, 15).getValue().getFloatValue() * aux1
 							* model.getValueAt(i, 15).getValue().getFloatValue()
@@ -248,18 +268,21 @@ public class AnimationOscilador extends javax.swing.JPanel implements ExpDataDis
 		}
 	}
 
-	public void setExpDataModel(ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
+		if (this.model != null) {
 			this.model.removeExpDataModelListener(this);
+		}
 		this.model = model;
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 
 	}
 
 	private ExpDataModel model = null;
-	private PlottingPanel painel2DLateralFixo, painel2DLateral, painel2DSuperior;
-	private Circle contaLateralFixa, contaLateral, contaSuperior;
+	private final PlottingPanel painel2DLateralFixo, painel2DLateral, painel2DSuperior;
+	private final Circle contaLateralFixa, contaLateral, contaSuperior;
 	Dataset dataParabolaLateralFixo, dataRastoLateralFixo, dataParabolaLateral, dataRastoLateral, dataParabolaSuperior,
 			dataRastoSuperior;
 	// Variables declaration - do not modify//GEN-BEGIN:variables

@@ -18,12 +18,16 @@ import com.linkare.rec.impl.baseUI.config.ReCBaseUIConfig;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class ReCSplash extends javax.swing.JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4577402453849250029L;
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ReCSplash.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ReCSplash.UI_CLIENT_LOGGER));
 		}
 	}
 
@@ -31,15 +35,15 @@ public class ReCSplash extends javax.swing.JDialog {
 	public ReCSplash() {
 		this(null, false);
 		initComponents();
-		ReCBaseUIConfig recBaseUIConfig = ReCBaseUIConfig.sharedInstance();
+		final ReCBaseUIConfig recBaseUIConfig = ReCBaseUIConfig.sharedInstance();
 		jLabelImage.setIcon(recBaseUIConfig.getSplashIcon());
 	}
 
 	/** Creates new form ReCSplash */
-	public ReCSplash(java.awt.Frame parent, boolean modal) {
+	public ReCSplash(final java.awt.Frame parent, final boolean modal) {
 		super(parent, modal);
 		initComponents();
-		ReCBaseUIConfig recBaseUIConfig = ReCBaseUIConfig.sharedInstance();
+		final ReCBaseUIConfig recBaseUIConfig = ReCBaseUIConfig.sharedInstance();
 		jLabelImage.setIcon(recBaseUIConfig.getSplashIcon());
 	}
 
@@ -60,7 +64,8 @@ public class ReCSplash extends javax.swing.JDialog {
 		setBackground(java.awt.Color.white);
 		setUndecorated(true);
 		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent evt) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent evt) {
 				closeDialog(evt);
 			}
 		});
@@ -88,12 +93,12 @@ public class ReCSplash extends javax.swing.JDialog {
 
 		getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
-		java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+		final java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		setBounds((screenSize.width - 410) / 2, (screenSize.height - 380) / 2, 410, 380);
 	}// GEN-END:initComponents
 
 	/** Closes the dialog */
-	public void closeDialog(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
+	public void closeDialog(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
 		setVisible(false);
 		dispose();
 	}// GEN-LAST:event_closeDialog
@@ -104,7 +109,7 @@ public class ReCSplash extends javax.swing.JDialog {
 	 * @return Value of property statusMessage.
 	 */
 	public String getStatusMessage() {
-		return this.jProgressBar1.getString();
+		return jProgressBar1.getString();
 	}
 
 	/**
@@ -112,8 +117,8 @@ public class ReCSplash extends javax.swing.JDialog {
 	 * 
 	 * @param statusMessage New value of property statusMessage.
 	 */
-	public void setStatusMessage(String statusMessage) {
-		this.jProgressBar1.setString(statusMessage);
+	public void setStatusMessage(final String statusMessage) {
+		jProgressBar1.setString(statusMessage);
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

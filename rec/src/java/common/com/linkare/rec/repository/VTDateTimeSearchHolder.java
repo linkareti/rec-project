@@ -11,18 +11,21 @@ public final class VTDateTimeSearchHolder implements Streamable {
 	public VTDateTimeSearchHolder() {
 	}
 
-	public VTDateTimeSearchHolder(DateTimeSearch initialValue) {
+	public VTDateTimeSearchHolder(final DateTimeSearch initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(InputStream i) {
+	@Override
+	public void _read(final InputStream i) {
 		value = VTDateTimeSearchHelper.read(i);
 	}
 
-	public void _write(OutputStream o) {
+	@Override
+	public void _write(final OutputStream o) {
 		VTDateTimeSearchHelper.write(o, value);
 	}
 
+	@Override
 	public TypeCode _type() {
 		return VTDateTimeSearchHelper.type();
 	}

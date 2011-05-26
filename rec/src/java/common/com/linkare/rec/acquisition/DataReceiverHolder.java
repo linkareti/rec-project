@@ -12,18 +12,21 @@ public final class DataReceiverHolder implements org.omg.CORBA.portable.Streamab
 	public DataReceiverHolder() {
 	}
 
-	public DataReceiverHolder(com.linkare.rec.acquisition.DataReceiver initialValue) {
+	public DataReceiverHolder(final com.linkare.rec.acquisition.DataReceiver initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(org.omg.CORBA.portable.InputStream i) {
+	@Override
+	public void _read(final org.omg.CORBA.portable.InputStream i) {
 		value = com.linkare.rec.acquisition.DataReceiverHelper.read(i);
 	}
 
-	public void _write(org.omg.CORBA.portable.OutputStream o) {
+	@Override
+	public void _write(final org.omg.CORBA.portable.OutputStream o) {
 		com.linkare.rec.acquisition.DataReceiverHelper.write(o, value);
 	}
 
+	@Override
 	public org.omg.CORBA.TypeCode _type() {
 		return com.linkare.rec.acquisition.DataReceiverHelper.type();
 	}

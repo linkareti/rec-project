@@ -20,7 +20,7 @@ public class StampPlanck1Processor extends AbstractStampProcessor {
 
 	/** Creates a new instance of StampHelloProcessor */
 	public StampPlanck1Processor() {
-		super(COMMAND_IDENTIFIER);
+		super(StampPlanck1Processor.COMMAND_IDENTIFIER);
 	}
 
 	/**
@@ -30,32 +30,34 @@ public class StampPlanck1Processor extends AbstractStampProcessor {
 	 * @return boolean - wether the processing was successfull
 	 * 
 	 */
-	public boolean process(StampCommand command) {
+	@Override
+	public boolean process(final StampCommand command) {
 
 		int teta = 0;
 		int potential = 0;
 
-		String[] splitedStr = command.getCommand().split(" ");
+		final String[] splitedStr = command.getCommand().split(" ");
 
-		if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedStr[0] != null) {
+		if (command.getCommandIdentifier().equalsIgnoreCase(StampPlanck1Processor.COMMAND_IDENTIFIER)
+				&& splitedStr[0] != null) {
 			try {
 				teta = Integer.parseInt(splitedStr[0]);
 				// Float oTeta = new Float((teta + 2505.4f)/434.7f);
-				Float oTeta = new Float((teta - 430) / 662.8f + 12);
+				final Float oTeta = new Float((teta - 430) / 662.8f + 12);
 
-				command.addCommandData(TETA, oTeta);
+				command.addCommandData(StampPlanck1Processor.TETA, oTeta);
 
 				System.out.println("oTeta =" + oTeta.floatValue());
 
 				potential = Integer.parseInt(splitedStr[1]);
-				Float oPotential = new Float(potential * 5f / 4096f);
+				final Float oPotential = new Float(potential * 5f / 4096f);
 
-				command.addCommandData(FOTOCEL, oPotential);
+				command.addCommandData(StampPlanck1Processor.FOTOCEL, oPotential);
 
 				command.setData(true);
 				return true;
 
-			} catch (NumberFormatException e) {
+			} catch (final NumberFormatException e) {
 				e.printStackTrace();
 				return false;
 			}
@@ -64,6 +66,7 @@ public class StampPlanck1Processor extends AbstractStampProcessor {
 		return false;
 	}
 
+	@Override
 	public boolean isData() {
 		return true;
 	}

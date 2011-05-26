@@ -12,13 +12,18 @@ package pt.utl.ist.elab.client.g;
  */
 public class GDataTable extends com.linkare.rec.impl.baseUI.table.DefaultExperimentDataTable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1885941025221128247L;
+
 	/** Creates new form DefaultExperimentDataTable */
 	public GDataTable() {
 		super();
-		
-		pt.utl.ist.elab.client.g.GTableModelProxy model = new pt.utl.ist.elab.client.g.GTableModelProxy();
+
+		final pt.utl.ist.elab.client.g.GTableModelProxy model = new pt.utl.ist.elab.client.g.GTableModelProxy();
 		setActualTableModel(model);
 		setExpDataModelContainer(model);
 	}
-	
+
 }

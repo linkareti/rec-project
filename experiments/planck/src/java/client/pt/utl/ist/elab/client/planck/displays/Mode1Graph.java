@@ -14,6 +14,11 @@ import com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph;
  */
 public class Mode1Graph extends MultSeriesXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -170722587130188183L;
+
 	/** Creates a new instance of Sensor1Graph */
 	public Mode1Graph() {
 		setChannelDisplayX(0);
@@ -21,6 +26,7 @@ public class Mode1Graph extends MultSeriesXYExperimentGraph {
 		setUpdatePercentage(10);
 	}
 
+	@Override
 	public String getName() {
 		return "Modo Fixo";
 	}

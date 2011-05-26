@@ -18,19 +18,20 @@ import com.linkare.rec.impl.data.PhysicsValFactory;
  */
 public class TiroDataProducer extends VirtualBaseDataSource implements Runnable {
 
-	private double g;
-	private double w, h;
+	private final double g;
+	private final double w, h;
 
-	private double[] state; // theta, dtheta/dt, x, dx/dt, t
+	private final double[] state; // theta, dtheta/dt, x, dx/dt, t
 
-	private int NUM_CHANNELS = 7;
+	private final int NUM_CHANNELS = 7;
 
 	private double dt = .1;
 
 	private boolean stopped = false;
 	private VirtualBaseDriver driver = null;
 
-	public TiroDataProducer(VirtualBaseDriver driver, double _w, double _h, double v, double theta, double _g) {
+	public TiroDataProducer(final VirtualBaseDriver driver, final double _w, final double _h, final double v,
+			final double theta, final double _g) {
 		this.driver = driver;
 
 		g = _g;
@@ -51,25 +52,26 @@ public class TiroDataProducer extends VirtualBaseDataSource implements Runnable 
 		state[6] -= g * dt;
 	}
 
-//	// TESTE
-//	public void start(pt.utl.ist.elab.client.vtiro.displays.Animation an) {
-//		this.an = an;
-//		animaThread = new Thread(this);
-//		animaThread.start();
-//	}
-//
-//	// TESTE
-//	pt.utl.ist.elab.client.vtiro.displays.Animation an;
+	// // TESTE
+	// public void start(pt.utl.ist.elab.client.vtiro.displays.Animation an) {
+	// this.an = an;
+	// animaThread = new Thread(this);
+	// animaThread.start();
+	// }
+	//
+	// // TESTE
+	// pt.utl.ist.elab.client.vtiro.displays.Animation an;
 	private Thread animaThread;
 
+	@Override
 	public void run() {
 		while (animaThread == Thread.currentThread() && !stopped && state[0] < w) {
 			step();
-//			an.move(state[0], state[2], state[1], state[3], state[5]);
+			// an.move(state[0], state[2], state[1], state[3], state[5]);
 			System.out.println(state[4]);
 			try {
-				animaThread.sleep(Math.round(dt * 1000));
-			} catch (InterruptedException e) {
+				Thread.sleep(Math.round(dt * 1000));
+			} catch (final InterruptedException e) {
 			}
 		}
 	}
@@ -77,16 +79,18 @@ public class TiroDataProducer extends VirtualBaseDataSource implements Runnable 
 	private class ProducerThread extends Thread {
 		private int currentSample = 0;
 
+		@Override
 		public void run() {
 			try {
-				sleep(1000);
+				Thread.sleep(1000);
 
 				PhysicsValue[] value;
 
 				while (!stopped && state[0] < w && currentSample < 3000) {
 
-					if (state[0] + state[1] * dt > w)
+					if (state[0] + state[1] * dt > w) {
 						dt /= 10;
+					}
 					step();
 					value = new PhysicsValue[NUM_CHANNELS];
 
@@ -114,7 +118,7 @@ public class TiroDataProducer extends VirtualBaseDataSource implements Runnable 
 							.getChannelsConfig(6).getSelectedScale().getMultiplier());
 
 					addDataRow(value);
-					sleep(Math.round(dt * 1000));
+					Thread.sleep(Math.round(dt * 1000));
 					currentSample++;
 
 				}
@@ -123,11 +127,12 @@ public class TiroDataProducer extends VirtualBaseDataSource implements Runnable 
 				endProduction();
 
 				driver.stopVirtualHardware();
-			} catch (InterruptedException ie) {
+			} catch (final InterruptedException ie) {
 			}
 		}
 	}
 
+	@Override
 	public void startProduction() {
 		stopped = false;
 		new ProducerThread().start();
@@ -138,6 +143,7 @@ public class TiroDataProducer extends VirtualBaseDataSource implements Runnable 
 		setDataSourceStoped();
 	}
 
+	@Override
 	public void stopNow() {
 		stopped = true;
 		setDataSourceStoped();

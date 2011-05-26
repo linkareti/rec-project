@@ -3,6 +3,11 @@ package com.linkare.rec.data.synch;
 import com.linkare.rec.impl.utils.PreciseCalendar;
 
 public final class DateTime implements org.omg.CORBA.portable.IDLEntity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7664961740758383977L;
+
 	//
 	// Struct member date
 	//
@@ -20,15 +25,15 @@ public final class DateTime implements org.omg.CORBA.portable.IDLEntity {
 		this(new java.util.GregorianCalendar());
 	}
 
-	public DateTime(java.util.Calendar calendario) {
+	public DateTime(final java.util.Calendar calendario) {
 		this(new Date(calendario), new Time(calendario));
 	}
 
-	public DateTime(long millis) {
-		java.util.Calendar c = new java.util.GregorianCalendar();
+	public DateTime(final long millis) {
+		final java.util.Calendar c = new java.util.GregorianCalendar();
 		c.setTimeInMillis(millis);
-		this.setDate(new Date(c));
-		this.setTime(new Time(c));
+		setDate(new Date(c));
+		setTime(new Time(c));
 	}
 
 	//
@@ -36,7 +41,7 @@ public final class DateTime implements org.omg.CORBA.portable.IDLEntity {
 	// @param date date struct member
 	// @param time time struct member
 	//
-	public DateTime(com.linkare.rec.data.synch.Date date, com.linkare.rec.data.synch.Time time) {
+	public DateTime(final com.linkare.rec.data.synch.Date date, final com.linkare.rec.data.synch.Time time) {
 		this.date = date;
 		this.time = time;
 	}
@@ -44,33 +49,38 @@ public final class DateTime implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Copy Constructor
 	//
-	public DateTime(DateTime other) {
-		this.setDate(new Date(other.getDate()));
-		this.setTime(new Time(other.getTime()));
+	public DateTime(final DateTime other) {
+		setDate(new Date(other.getDate()));
+		setTime(new Time(other.getTime()));
 	}
 
+	@Override
 	public String toString() {
-		PreciseCalendar calendar = new PreciseCalendar(this);
+		final PreciseCalendar calendar = new PreciseCalendar(this);
 		return calendar.toString();
 	}
 
 	public String toSimpleString() {
 		String date = "";
-		if (this.date != null)
+		if (this.date != null) {
 			date = this.date.toString();
+		}
 		String time = "";
-		if (this.time != null)
+		if (this.time != null) {
 			time = this.time.toSimpleTimeString();
+		}
 		return date + " " + time;
 	}
 
 	public String toSimpleStringTimeFirst() {
 		String date = "";
-		if (this.date != null)
+		if (this.date != null) {
 			date = this.date.toString();
+		}
 		String time = "";
-		if (this.time != null)
+		if (this.time != null) {
 			time = this.time.toSimpleTimeString();
+		}
 		return time + " " + date;
 	}
 
@@ -80,7 +90,7 @@ public final class DateTime implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property date.
 	 */
 	public com.linkare.rec.data.synch.Date getDate() {
-		return this.date;
+		return date;
 	}
 
 	/**
@@ -88,7 +98,7 @@ public final class DateTime implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param date New value of property date.
 	 */
-	public void setDate(com.linkare.rec.data.synch.Date date) {
+	public void setDate(final com.linkare.rec.data.synch.Date date) {
 		this.date = date;
 	}
 
@@ -98,7 +108,7 @@ public final class DateTime implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property time.
 	 */
 	public com.linkare.rec.data.synch.Time getTime() {
-		return this.time;
+		return time;
 	}
 
 	/**
@@ -106,15 +116,14 @@ public final class DateTime implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param time New value of property time.
 	 */
-	public void setTime(com.linkare.rec.data.synch.Time time) {
+	public void setTime(final com.linkare.rec.data.synch.Time time) {
 		this.time = time;
 	}
 
 	public long getMilliSeconds() {
-		java.util.Calendar c = new java.util.GregorianCalendar(this.getDate().getYear(), this.getDate().getMonth(),
-				this.getDate().getDay(), this.getTime().getHours(), this.getTime().getMinutes(), this.getTime()
-						.getSeconds());
-		c.set(java.util.Calendar.MILLISECOND, this.getTime().getMilis());
+		final java.util.Calendar c = new java.util.GregorianCalendar(getDate().getYear(), getDate().getMonth(),
+				getDate().getDay(), getTime().getHours(), getTime().getMinutes(), getTime().getSeconds());
+		c.set(java.util.Calendar.MILLISECOND, getTime().getMilis());
 		return c.getTimeInMillis();
 	}
 
@@ -122,24 +131,23 @@ public final class DateTime implements org.omg.CORBA.portable.IDLEntity {
 		return (System.currentTimeMillis() - getMilliSeconds());
 	}
 
-	public long getElapsedTimeInMillis(DateTime other) {
+	public long getElapsedTimeInMillis(final DateTime other) {
 		return (other.getMilliSeconds() - getMilliSeconds());
 	}
 
-	public void addMillis(long millis) {
-		java.util.Calendar c = new java.util.GregorianCalendar(this.getDate().getYear(), this.getDate().getMonth(),
-				this.getDate().getDay(), this.getTime().getHours(), this.getTime().getMinutes(), this.getTime()
-						.getSeconds());
+	public void addMillis(final long millis) {
+		final java.util.Calendar c = new java.util.GregorianCalendar(getDate().getYear(), getDate().getMonth(),
+				getDate().getDay(), getTime().getHours(), getTime().getMinutes(), getTime().getSeconds());
 		c.setTimeInMillis(getMilliSeconds() + millis);
-		this.setDate(new Date(c));
-		this.setTime(new Time(c));
+		setDate(new Date(c));
+		setTime(new Time(c));
 	}
-	
-	public void removeMillis(long millis) {
+
+	public void removeMillis(final long millis) {
 		addMillis(millis * -1);
 	}
 
-	public DateTime calculateDateTime(Frequency f, int sample_index) {
+	public DateTime calculateDateTime(final Frequency f, final int sample_index) {
 		return PreciseCalendar.calculateDateTime(this, f, sample_index);
 	}
 

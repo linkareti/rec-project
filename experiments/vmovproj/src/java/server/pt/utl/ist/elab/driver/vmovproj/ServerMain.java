@@ -21,26 +21,26 @@ public class ServerMain {
 
 	private static String MovProj_HARDWARE_LOGGER = "MovProj.Logger";
 	static {
-		Logger l = LogManager.getLogManager().getLogger(MovProj_HARDWARE_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ServerMain.MovProj_HARDWARE_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(MovProj_HARDWARE_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ServerMain.MovProj_HARDWARE_LOGGER));
 		}
 	}
 
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		try {
 			ORBBean.getORBBean();
 
-			BaseHardware baseHardware = new BaseHardware(new MovProjDriver());
+			final BaseHardware baseHardware = new BaseHardware(new MovProjDriver());
 
 			Thread.currentThread().join();
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			ORBBean.getORBBean().killORB();
-			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(MovProj_HARDWARE_LOGGER));
+			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(ServerMain.MovProj_HARDWARE_LOGGER));
 		}
 	}
 }

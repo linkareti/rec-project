@@ -30,9 +30,9 @@ public class STDMAPDriver extends VirtualBaseDriver {
 
 	private static String STDMAP_DRIVER_LOGGER = "STDMAP.Logger";
 	static {
-		Logger l = LogManager.getLogManager().getLogger(STDMAP_DRIVER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(STDMAPDriver.STDMAP_DRIVER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(STDMAP_DRIVER_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(STDMAPDriver.STDMAP_DRIVER_LOGGER));
 		}
 	}
 
@@ -49,81 +49,88 @@ public class STDMAPDriver extends VirtualBaseDriver {
 	public STDMAPDriver() {
 	}
 
-	public void config(HardwareAcquisitionConfig config, HardwareInfo info) throws IncorrectStateException,
+	@Override
+	public void config(final HardwareAcquisitionConfig config, final HardwareInfo info) throws IncorrectStateException,
 			WrongConfigurationException {
 		fireIDriverStateListenerDriverConfiguring();
 		info.validateConfig(config);
 		extraValidateConfig(config, info);
 		try {
 			configure(config, info);
-		} catch (Exception e) {
-			LoggerUtil.logThrowable("Error on config...", e, Logger.getLogger(STDMAP_DRIVER_LOGGER));
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable("Error on config...", e, Logger.getLogger(STDMAPDriver.STDMAP_DRIVER_LOGGER));
 			throw new WrongConfigurationException();
 		}
 	}
 
-	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException {
+	@Override
+	public void configure(final HardwareAcquisitionConfig config, final HardwareInfo info)
+			throws WrongConfigurationException {
 		this.config = config;
 		this.info = info;
 
-		byte simulType = Byte.parseByte(config.getSelectedHardwareParameterValue("simulType"));
+		final byte simulType = Byte.parseByte(config.getSelectedHardwareParameterValue("simulType"));
 
 		if (simulType == 2) { // anima
-			int tbs = (int) config.getSelectedFrequency().getFrequency();
-			int nSamples = config.getTotalSamples();
+			final int tbs = (int) config.getSelectedFrequency().getFrequency();
+			final int nSamples = config.getTotalSamples();
 
-			float theta = Float.parseFloat(config.getSelectedHardwareParameterValue("theta"));
-			float thetaDot = Float.parseFloat(config.getSelectedHardwareParameterValue("thetaDot"));
-			float mass = Float.parseFloat(config.getSelectedHardwareParameterValue("mass"));
-			float length = Float.parseFloat(config.getSelectedHardwareParameterValue("length"));
-			float force = Float.parseFloat(config.getSelectedHardwareParameterValue("force"));
+			final float theta = Float.parseFloat(config.getSelectedHardwareParameterValue("theta"));
+			final float thetaDot = Float.parseFloat(config.getSelectedHardwareParameterValue("thetaDot"));
+			final float mass = Float.parseFloat(config.getSelectedHardwareParameterValue("mass"));
+			final float length = Float.parseFloat(config.getSelectedHardwareParameterValue("length"));
+			final float force = Float.parseFloat(config.getSelectedHardwareParameterValue("force"));
 			System.out.println("Configuring with " + nSamples + "nsamples");
 			dataSource = new STDMAPDataProducer(this, theta, thetaDot, length, mass, force, tbs, nSamples);
 		} else {
-			boolean staticImg = config.getSelectedHardwareParameterValue("staticImg").trim().equals("1") ? true : false;
+			final boolean staticImg = config.getSelectedHardwareParameterValue("staticImg").trim().equals("1") ? true
+					: false;
 
-			int w = Integer.parseInt(config.getSelectedHardwareParameterValue("w"));
-			int h = Integer.parseInt(config.getSelectedHardwareParameterValue("h"));
-			byte pixSize = Byte.parseByte(config.getSelectedHardwareParameterValue("pixSize"));
+			final int w = Integer.parseInt(config.getSelectedHardwareParameterValue("w"));
+			final int h = Integer.parseInt(config.getSelectedHardwareParameterValue("h"));
+			final byte pixSize = Byte.parseByte(config.getSelectedHardwareParameterValue("pixSize"));
 
 			if (simulType == 1) {
-				float k = Float.parseFloat(config.getSelectedHardwareParameterValue("k"));
-				float pcor = Float.parseFloat(config.getSelectedHardwareParameterValue("pcor"));
-				int iter = Integer.parseInt(config.getSelectedHardwareParameterValue("iter"));
+				final float k = Float.parseFloat(config.getSelectedHardwareParameterValue("k"));
+				final float pcor = Float.parseFloat(config.getSelectedHardwareParameterValue("pcor"));
+				final int iter = Integer.parseInt(config.getSelectedHardwareParameterValue("iter"));
 
-				float theta = Float.parseFloat(config.getSelectedHardwareParameterValue("theta"));
-				int nTheta = Integer.parseInt(config.getSelectedHardwareParameterValue("nTheta"));
-				float dTheta = Float.parseFloat(config.getSelectedHardwareParameterValue("dTheta"));
+				final float theta = Float.parseFloat(config.getSelectedHardwareParameterValue("theta"));
+				final int nTheta = Integer.parseInt(config.getSelectedHardwareParameterValue("nTheta"));
+				final float dTheta = Float.parseFloat(config.getSelectedHardwareParameterValue("dTheta"));
 
-				float iMapa = Float.parseFloat(config.getSelectedHardwareParameterValue("iMapa"));
-				int nIMapa = Integer.parseInt(config.getSelectedHardwareParameterValue("nIMapa"));
-				float dIMapa = Float.parseFloat(config.getSelectedHardwareParameterValue("dIMapa"));
+				final float iMapa = Float.parseFloat(config.getSelectedHardwareParameterValue("iMapa"));
+				final int nIMapa = Integer.parseInt(config.getSelectedHardwareParameterValue("nIMapa"));
+				final float dIMapa = Float.parseFloat(config.getSelectedHardwareParameterValue("dIMapa"));
 
 				dataSource = new STDMAPDataProducer(this, k, theta, nTheta, dTheta, iMapa, nIMapa, dIMapa, iter, pcor,
 						w, h, pixSize, staticImg);
 			} else if (simulType == 3) {
-				float k = Float.parseFloat(config.getSelectedHardwareParameterValue("k"));
-				float pcor = Float.parseFloat(config.getSelectedHardwareParameterValue("pcor"));
-				int iter = Integer.parseInt(config.getSelectedHardwareParameterValue("iter"));
+				final float k = Float.parseFloat(config.getSelectedHardwareParameterValue("k"));
+				final float pcor = Float.parseFloat(config.getSelectedHardwareParameterValue("pcor"));
+				final int iter = Integer.parseInt(config.getSelectedHardwareParameterValue("iter"));
 
-				float theta = Float.parseFloat(config.getSelectedHardwareParameterValue("theta"));
-				float iMapa = Float.parseFloat(config.getSelectedHardwareParameterValue("iMapa"));
+				final float theta = Float.parseFloat(config.getSelectedHardwareParameterValue("theta"));
+				final float iMapa = Float.parseFloat(config.getSelectedHardwareParameterValue("iMapa"));
 
 				dataSource = new STDMAPDataProducer(this, k, theta, iMapa, iter, pcor, w, h, pixSize, staticImg);
 			}
 		}
-		for (int i = 0; i < config.getChannelsConfig().length; i++)
+		for (int i = 0; i < config.getChannelsConfig().length; i++) {
 			config.getChannelsConfig(i).setTotalSamples(config.getTotalSamples());
+		}
 
 		dataSource.setAcquisitionHeader(config);
 
 		fireIDriverStateListenerDriverConfigured();
 	}
 
+	@Override
 	public String getDriverUniqueID() {
-		return DRIVER_UNIQUE_ID;
+		return STDMAPDriver.DRIVER_UNIQUE_ID;
 	}
 
+	@Override
 	public void shutdown() {
 		if (dataSource != null) {
 			dataSource.stopNow();
@@ -131,37 +138,43 @@ public class STDMAPDriver extends VirtualBaseDriver {
 		super.shutDownNow();
 	}
 
-	public IDataSource start(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public IDataSource start(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverStarting();
 		dataSource.startProduction();
 		fireIDriverStateListenerDriverStarted();
 		return dataSource;
 	}
 
-	public void stop(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public void stop(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverStoping();
 		dataSource.stopNow();
 		fireIDriverStateListenerDriverStoped();
 	}
 
+	@Override
 	public Object getHardwareInfo() {
 		fireIDriverStateListenerDriverReseting();
-		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+				+ "/HardwareInfo.xml";
 		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
-		if (prop.indexOf("://") == -1)
+		if (prop.indexOf("://") == -1) {
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
+		}
 
 		java.net.URL url = null;
 		try {
 			url = ReCProtocols.getURL(prop);
-		} catch (java.net.MalformedURLException e) {
-			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger(STDMAP_DRIVER_LOGGER));
+		} catch (final java.net.MalformedURLException e) {
+			LoggerUtil.logThrowable("Unable to load resource: " + prop, e,
+					Logger.getLogger(STDMAPDriver.STDMAP_DRIVER_LOGGER));
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
-			} catch (java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2, Logger
-						.getLogger(STDMAP_DRIVER_LOGGER));
+			} catch (final java.net.MalformedURLException e2) {
+				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
+						Logger.getLogger(STDMAPDriver.STDMAP_DRIVER_LOGGER));
 			}
 		}
 		fireIDriverStateListenerDriverReseted();

@@ -24,8 +24,8 @@ public class Spacer extends JComponent {
 
 	public Spacer() {
 		super();
-		setPreferredSize(DEFAULT_SPACER_SIZE);
-		setMinimumSize(DEFAULT_SPACER_SIZE);
+		setPreferredSize(Spacer.DEFAULT_SPACER_SIZE);
+		setMinimumSize(Spacer.DEFAULT_SPACER_SIZE);
 	}
 
 }

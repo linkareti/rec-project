@@ -15,6 +15,8 @@ package pt.utl.ist.elab.client.vmm;
  *
  */
 
+import javax.swing.SwingConstants;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
@@ -23,29 +25,34 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7211161392221931955L;
+
 	/** Creates new form MMCustomizer */
 	public MMCustomizer() {
 		initComponents();
 		// Maneira classica de alterar os labels do slider
-		java.util.Hashtable htK = new java.util.Hashtable(10);
+		final java.util.Hashtable htK = new java.util.Hashtable(10);
 		for (int i = 0; i < 21; i += 2) {
 			htK.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
 		}
 		jSliderK.setLabelTable(htK);
 
-		java.util.Hashtable htM = new java.util.Hashtable(20);
+		final java.util.Hashtable htM = new java.util.Hashtable(20);
 		for (int i = 0; i < 51; i += 5) {
 			htM.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
 		}
 		jSliderM.setLabelTable(htM);
 
-		java.util.Hashtable htFric = new java.util.Hashtable(10);
+		final java.util.Hashtable htFric = new java.util.Hashtable(10);
 		for (int i = 0; i < 11; i++) {
 			htFric.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
 		}
 		jSliderFric.setLabelTable(htFric);
 
-		java.util.Hashtable htX0 = new java.util.Hashtable(10);
+		final java.util.Hashtable htX0 = new java.util.Hashtable(10);
 		for (int i = -20; i < 21; i += 5) {
 			htX0.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
 		}
@@ -109,7 +116,8 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jSliderK.setPaintTicks(true);
 		jSliderK.setValue(10);
 		jSliderK.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderKStateChanged(evt);
 			}
 		});
@@ -120,10 +128,11 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanelK.add(jSliderK, gridBagConstraints);
 
 		jTextFieldK.setColumns(4);
-		jTextFieldK.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldK.setHorizontalAlignment(SwingConstants.CENTER);
 		jTextFieldK.setText("1.0");
 		jTextFieldK.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldKFocusLost(evt);
 			}
 		});
@@ -143,7 +152,8 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jSliderM.setPaintTicks(true);
 		jSliderM.setValue(10);
 		jSliderM.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderMStateChanged(evt);
 			}
 		});
@@ -154,10 +164,11 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanelM.add(jSliderM, gridBagConstraints);
 
 		jTextFieldM.setColumns(4);
-		jTextFieldM.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldM.setHorizontalAlignment(SwingConstants.CENTER);
 		jTextFieldM.setText("1.0");
 		jTextFieldM.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldMFocusLost(evt);
 			}
 		});
@@ -177,7 +188,8 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jSliderFric.setPaintTicks(true);
 		jSliderFric.setValue(0);
 		jSliderFric.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderFricStateChanged(evt);
 			}
 		});
@@ -188,10 +200,11 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanelFric.add(jSliderFric, gridBagConstraints);
 
 		jTextFieldFric.setColumns(4);
-		jTextFieldFric.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldFric.setHorizontalAlignment(SwingConstants.CENTER);
 		jTextFieldFric.setText("0.0");
 		jTextFieldFric.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldFricFocusLost(evt);
 			}
 		});
@@ -212,7 +225,8 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jSliderX0.setPaintTicks(true);
 		jSliderX0.setValue(10);
 		jSliderX0.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderX0StateChanged(evt);
 			}
 		});
@@ -223,10 +237,11 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanelX0.add(jSliderX0, gridBagConstraints);
 
 		jTextFieldX0.setColumns(4);
-		jTextFieldX0.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldX0.setHorizontalAlignment(SwingConstants.CENTER);
 		jTextFieldX0.setText("1.0");
 		jTextFieldX0.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldX0FocusLost(evt);
 			}
 		});
@@ -250,14 +265,15 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jSliderTBS.setMaximum(500);
 		jSliderTBS.setMinimum(50);
 		jSliderTBS.setMinorTickSpacing(50);
-		jSliderTBS.setOrientation(javax.swing.JSlider.VERTICAL);
+		jSliderTBS.setOrientation(SwingConstants.VERTICAL);
 		jSliderTBS.setPaintLabels(true);
 		jSliderTBS.setPaintTicks(true);
 		jSliderTBS.setToolTipText(ReCResourceBundle.findStringOrDefault("mm$rec.exp.customizer.tip.tbs",
 				"Time between samples"));
 		jSliderTBS.setValue(100);
 		jSliderTBS.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderTBSStateChanged(evt);
 			}
 		});
@@ -269,10 +285,11 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanelTBS.add(jSliderTBS, gridBagConstraints);
 
 		jTextFieldTBS.setColumns(4);
-		jTextFieldTBS.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldTBS.setHorizontalAlignment(SwingConstants.CENTER);
 		jTextFieldTBS.setText("100");
 		jTextFieldTBS.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldTBSFocusLost(evt);
 			}
 		});
@@ -300,14 +317,15 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jSliderSamples.setMaximum(500);
 		jSliderSamples.setMinimum(1);
 		jSliderSamples.setMinorTickSpacing(50);
-		jSliderSamples.setOrientation(javax.swing.JSlider.VERTICAL);
+		jSliderSamples.setOrientation(SwingConstants.VERTICAL);
 		jSliderSamples.setPaintLabels(true);
 		jSliderSamples.setPaintTicks(true);
 		jSliderSamples.setToolTipText(ReCResourceBundle.findStringOrDefault("mm$rec.exp.customizer.tip.samples",
 				"Number of samples"));
 		jSliderSamples.setValue(100);
 		jSliderSamples.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderSamplesStateChanged(evt);
 			}
 		});
@@ -319,10 +337,11 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanelSamples.add(jSliderSamples, gridBagConstraints);
 
 		jTextFieldSamples.setColumns(4);
-		jTextFieldSamples.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldSamples.setHorizontalAlignment(SwingConstants.CENTER);
 		jTextFieldSamples.setText("100");
 		jTextFieldSamples.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldSamplesFocusLost(evt);
 			}
 		});
@@ -349,7 +368,8 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel3.setMinimumSize(new java.awt.Dimension(143, 25));
 		btnOK.setText(ReCResourceBundle.findStringOrDefault("mm$rec.exp.customizer.title.ok", "OK"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
 			}
 		});
@@ -358,7 +378,8 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		btnCancel.setText(ReCResourceBundle.findStringOrDefault("mm$rec.exp.customizer.title.cancel", "Cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
 			}
 		});
@@ -371,10 +392,10 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel2.add(jPanel3, gridBagConstraints);
 
 		jPanel4.setMinimumSize(new java.awt.Dimension(136, 25));
-		btnDefaults.setText(ReCResourceBundle.findStringOrDefault("mm$rec.exp.customizer.title.dfc",
-				"Default config"));
+		btnDefaults.setText(ReCResourceBundle.findStringOrDefault("mm$rec.exp.customizer.title.dfc", "Default config"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
 			}
 		});
@@ -389,28 +410,28 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 	}// GEN-END:initComponents
 
-	private void btnDefaultsActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
+	private void btnDefaultsActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
 	{// GEN-HEADEREND:event_btnDefaultsActionPerformed
 		// Colocar nas configurações predefinidas...tipo:
 		jSliderSamples.setValue(100);
 		// etc...
 	}// GEN-LAST:event_btnDefaultsActionPerformed
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
+	private void btnCancelActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
 	{// GEN-HEADEREND:event_btnCancelActionPerformed
 		// Sempre igual
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_btnCancelActionPerformed
 
-	private void btnOKActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
+	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
 		// OK o utilizador quer enviar as informacoes, vamos colocar os valores
 		// nos canais!!!
 		acqConfig.setTotalSamples(jSliderSamples.getValue());
 
-		acqConfig.setSelectedFrequency(new Frequency((double) jSliderTBS.getValue(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
+		acqConfig.setSelectedFrequency(new Frequency(jSliderTBS.getValue(), hardwareInfo.getHardwareFrequencies(0)
+				.getMinimumFrequency().getMultiplier(), hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency()
+				.getFrequencyDefType()));
 
 		acqConfig.getSelectedHardwareParameter("kmola").setParameterValue("" + jSliderK.getValue() / 10F);
 		acqConfig.getSelectedHardwareParameter("massa").setParameterValue("" + jSliderM.getValue() / 10F);
@@ -419,99 +440,101 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_btnOKActionPerformed
 
-	private void jTextFieldSamplesFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldSamplesFocusLost
+	private void jTextFieldSamplesFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldSamplesFocusLost
 	{// GEN-HEADEREND:event_jTextFieldSamplesFocusLost
 		adjustSlider(jSliderSamples, jTextFieldSamples);
 	}// GEN-LAST:event_jTextFieldSamplesFocusLost
 
-	private void jSliderSamplesStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderSamplesStateChanged
+	private void jSliderSamplesStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderSamplesStateChanged
 	{// GEN-HEADEREND:event_jSliderSamplesStateChanged
 		jTextFieldSamples.setText("" + jSliderSamples.getValue());
 	}// GEN-LAST:event_jSliderSamplesStateChanged
 
-	private void jTextFieldTBSFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldTBSFocusLost
+	private void jTextFieldTBSFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldTBSFocusLost
 	{// GEN-HEADEREND:event_jTextFieldTBSFocusLost
 		adjustSlider(jSliderTBS, jTextFieldTBS);
 	}// GEN-LAST:event_jTextFieldTBSFocusLost
 
-	private void jSliderTBSStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderTBSStateChanged
+	private void jSliderTBSStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderTBSStateChanged
 	{// GEN-HEADEREND:event_jSliderTBSStateChanged
 		jTextFieldTBS.setText("" + jSliderTBS.getValue());
 	}// GEN-LAST:event_jSliderTBSStateChanged
 
-	private void jTextFieldX0FocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldX0FocusLost
+	private void jTextFieldX0FocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldX0FocusLost
 	{// GEN-HEADEREND:event_jTextFieldX0FocusLost
 		adjustSlider2(jSliderX0, jTextFieldX0);
 	}// GEN-LAST:event_jTextFieldX0FocusLost
 
-	private void jSliderX0StateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderX0StateChanged
+	private void jSliderX0StateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderX0StateChanged
 	{// GEN-HEADEREND:event_jSliderX0StateChanged
 		jTextFieldX0.setText("" + jSliderX0.getValue() / 10F);
 	}// GEN-LAST:event_jSliderX0StateChanged
 
-	private void jTextFieldFricFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldFricFocusLost
+	private void jTextFieldFricFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldFricFocusLost
 	{// GEN-HEADEREND:event_jTextFieldFricFocusLost
 		adjustSlider2(jSliderFric, jTextFieldFric);
 	}// GEN-LAST:event_jTextFieldFricFocusLost
 
-	private void jSliderFricStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderFricStateChanged
+	private void jSliderFricStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderFricStateChanged
 	{// GEN-HEADEREND:event_jSliderFricStateChanged
 		jTextFieldFric.setText("" + jSliderFric.getValue() / 10F);
 	}// GEN-LAST:event_jSliderFricStateChanged
 
-	private void jTextFieldMFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldMFocusLost
+	private void jTextFieldMFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldMFocusLost
 	{// GEN-HEADEREND:event_jTextFieldMFocusLost
 		adjustSlider2(jSliderM, jTextFieldM);
 	}// GEN-LAST:event_jTextFieldMFocusLost
 
-	private void jSliderMStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderMStateChanged
+	private void jSliderMStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderMStateChanged
 	{// GEN-HEADEREND:event_jSliderMStateChanged
 		jTextFieldM.setText("" + jSliderM.getValue() / 10F);
 	}// GEN-LAST:event_jSliderMStateChanged
 
-	private void jTextFieldKFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldKFocusLost
+	private void jTextFieldKFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldKFocusLost
 	{// GEN-HEADEREND:event_jTextFieldKFocusLost
 		adjustSlider2(jSliderK, jTextFieldK);
 	}// GEN-LAST:event_jTextFieldKFocusLost
 
-	private void jSliderKStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderKStateChanged
+	private void jSliderKStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderKStateChanged
 	{// GEN-HEADEREND:event_jSliderKStateChanged
 		jTextFieldK.setText("" + jSliderK.getValue() / 10F);
 	}// GEN-LAST:event_jSliderKStateChanged
 
-	public static void main(String args[]) {
-		javax.swing.JFrame dummy = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new MMCustomizer());
 		dummy.pack();
 		dummy.show();
 	}
 
 	// Metodo que verifica a validade do que foi introduzido na text field
-	private void adjustSlider(javax.swing.JSlider slider, javax.swing.JTextField field) {
+	private void adjustSlider(final javax.swing.JSlider slider, final javax.swing.JTextField field) {
 		int num = 0;
 		try {
 			num = Integer.parseInt(field.getText().trim());
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 			field.setText("" + slider.getValue());
 		}
-		if (num > slider.getMaximum() || num < slider.getMinimum())
+		if (num > slider.getMaximum() || num < slider.getMinimum()) {
 			field.setText("" + slider.getValue());
-		else
+		} else {
 			slider.setValue(num);
+		}
 	}
 
-	private void adjustSlider2(javax.swing.JSlider slider, javax.swing.JTextField field) {
+	private void adjustSlider2(final javax.swing.JSlider slider, final javax.swing.JTextField field) {
 		int num = 0;
 		try {
 			num = (int) (Float.parseFloat(field.getText().trim()) * 10);
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 			field.setText("" + slider.getValue() / 10F);
 			return;
 		}
-		if (num > slider.getMaximum() || num < slider.getMinimum())
+		if (num > slider.getMaximum() || num < slider.getMinimum()) {
 			field.setText("" + slider.getValue() / 10F);
-		else
+		} else {
 			slider.setValue(num);
+		}
 	}
 
 	// ****************************REC********************************************/
@@ -524,7 +547,8 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -536,7 +560,8 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -546,9 +571,10 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -562,9 +588,10 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -576,44 +603,51 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
 		return acqConfig;
 	}
 
 	// ESTE É PARA ALTERAR
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		// Aqui são fornecidos parametros do ultimo utilizador que fez a exp, e'
 		// bom manter!
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
-			int xini = (int) (Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("xini")));
+			final int xini = (int) (Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("xini")));
 			jSliderX0.setValue(xini);
 			// etc...
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
+	@Override
 	public javax.swing.JComponent getCustomizerComponent() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/vmm/resources/mm_iconified.png"));
 	}
 
 	// ESTE É PARA ALTERAR
+	@Override
 	public String getCustomizerTitle() {
 		return "Harmonic Oscillator Experiment Configuration Utility";
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}

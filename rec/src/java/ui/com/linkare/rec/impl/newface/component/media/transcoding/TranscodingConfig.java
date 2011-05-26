@@ -15,13 +15,14 @@ public class TranscodingConfig {
 	private int audioBitrate;
 	private int soundChannels;
 
-	//TODO ver que outras opções se pode passar ao VLM e se vale a pena implementar
+	// TODO ver que outras opções se pode passar ao VLM e se vale a pena
+	// implementar
 
 	public int getAudioBitrate() {
 		return audioBitrate;
 	}
 
-	public void setAudioBitrate(int audioBitrate) {
+	public void setAudioBitrate(final int audioBitrate) {
 		this.audioBitrate = audioBitrate;
 	}
 
@@ -29,7 +30,7 @@ public class TranscodingConfig {
 		return audioCodec;
 	}
 
-	public void setAudioCodec(AudioCodecs audioCodec) {
+	public void setAudioCodec(final AudioCodecs audioCodec) {
 		this.audioCodec = audioCodec;
 	}
 
@@ -37,7 +38,7 @@ public class TranscodingConfig {
 		return muxer;
 	}
 
-	public void setMuxer(Muxers muxer) {
+	public void setMuxer(final Muxers muxer) {
 		this.muxer = muxer;
 	}
 
@@ -45,7 +46,7 @@ public class TranscodingConfig {
 		return soundChannels;
 	}
 
-	public void setSoundChannels(int soundChannels) {
+	public void setSoundChannels(final int soundChannels) {
 		this.soundChannels = soundChannels;
 	}
 
@@ -53,7 +54,7 @@ public class TranscodingConfig {
 		return videoBitrate;
 	}
 
-	public void setVideoBitrate(int videoBitrate) {
+	public void setVideoBitrate(final int videoBitrate) {
 		this.videoBitrate = videoBitrate;
 	}
 
@@ -61,7 +62,7 @@ public class TranscodingConfig {
 		return videoCodec;
 	}
 
-	public void setVideoCodec(VideoCodecs videoCodec) {
+	public void setVideoCodec(final VideoCodecs videoCodec) {
 		this.videoCodec = videoCodec;
 	}
 
@@ -69,7 +70,7 @@ public class TranscodingConfig {
 		return videoScale;
 	}
 
-	public void setVideoScale(int videoScale) {
+	public void setVideoScale(final int videoScale) {
 		this.videoScale = videoScale;
 	}
 }

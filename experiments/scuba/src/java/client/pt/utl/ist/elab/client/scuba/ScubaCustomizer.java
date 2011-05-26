@@ -6,6 +6,8 @@
 
 package pt.utl.ist.elab.client.scuba;
 
+import javax.swing.SwingConstants;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.client.customizer.ICustomizerListener;
@@ -16,6 +18,11 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * @author José Pedro Pereira - Linkare TI
  */
 public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6365436529087297874L;
 
 	/** Creates new form RadioactividadeCustomizer */
 	public ScubaCustomizer() {
@@ -61,7 +68,8 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
 		btnOK.setText(ReCResourceBundle.findString("scuba$rec.exp.scuba.lbl.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
 			}
 		});
@@ -73,7 +81,8 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		btnCancel.setText(ReCResourceBundle.findString("scuba$rec.exp.scuba.lbl.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
 			}
 		});
@@ -92,7 +101,8 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		btnDefaults.setText(ReCResourceBundle.findString("scuba$rec.exp.dftcfg.scuba.title.1"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
 			}
 		});
@@ -138,7 +148,8 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		sldNumSamples.setMinimumSize(new java.awt.Dimension(250, 60));
 		sldNumSamples.setPreferredSize(new java.awt.Dimension(250, 60));
 		sldNumSamples.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sldNumSamplesStateChanged(evt);
 			}
 		});
@@ -152,13 +163,14 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel6.add(sldNumSamples, gridBagConstraints);
 
 		tfNumSamples.setColumns(3);
-		tfNumSamples.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		tfNumSamples.setHorizontalAlignment(SwingConstants.RIGHT);
 		tfNumSamples.setText("50");
 		tfNumSamples.setMaximumSize(new java.awt.Dimension(30, 16));
 		tfNumSamples.setMinimumSize(new java.awt.Dimension(30, 16));
 		tfNumSamples.setPreferredSize(new java.awt.Dimension(37, 16));
 		tfNumSamples.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				tfNumSamplesKeyReleased(evt);
 			}
 		});
@@ -193,7 +205,7 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		sldPos1.setMajorTickSpacing(150);
 		sldPos1.setMaximum(900);
 		sldPos1.setMinorTickSpacing(10);
-		sldPos1.setOrientation(javax.swing.JSlider.VERTICAL);
+		sldPos1.setOrientation(SwingConstants.VERTICAL);
 		sldPos1.setPaintLabels(true);
 		sldPos1.setPaintTicks(true);
 		sldPos1.setPaintTrack(false);
@@ -203,7 +215,8 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		sldPos1.setMinimumSize(new java.awt.Dimension(100, 250));
 		sldPos1.setPreferredSize(new java.awt.Dimension(100, 250));
 		sldPos1.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sldPos1StateChanged(evt);
 			}
 		});
@@ -218,7 +231,7 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		sldPos2.setMajorTickSpacing(150);
 		sldPos2.setMaximum(900);
 		sldPos2.setMinorTickSpacing(10);
-		sldPos2.setOrientation(javax.swing.JSlider.VERTICAL);
+		sldPos2.setOrientation(SwingConstants.VERTICAL);
 		sldPos2.setPaintLabels(true);
 		sldPos2.setPaintTicks(true);
 		sldPos2.setPaintTrack(false);
@@ -228,7 +241,8 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		sldPos2.setMinimumSize(new java.awt.Dimension(100, 250));
 		sldPos2.setPreferredSize(new java.awt.Dimension(100, 250));
 		sldPos2.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sldPos2StateChanged(evt);
 			}
 		});
@@ -252,16 +266,18 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel5.add(lblErrorDeepsAreEqual, gridBagConstraints);
 
 		tfPos1.setColumns(3);
-		tfPos1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		tfPos1.setHorizontalAlignment(SwingConstants.RIGHT);
 		tfPos1.setText("900");
 		tfPos1.setMinimumSize(new java.awt.Dimension(33, 20));
 		tfPos1.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				tfPos1FocusLost(evt);
 			}
 		});
 		tfPos1.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				tfPos1KeyReleased(evt);
 			}
 		});
@@ -272,16 +288,18 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel5.add(tfPos1, gridBagConstraints);
 
 		tfPos2.setColumns(3);
-		tfPos2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		tfPos2.setHorizontalAlignment(SwingConstants.RIGHT);
 		tfPos2.setText("0");
 		tfPos2.setMinimumSize(new java.awt.Dimension(33, 20));
 		tfPos2.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				tfPos2FocusLost(evt);
 			}
 		});
 		tfPos2.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				tfPos2KeyReleased(evt);
 			}
 		});
@@ -295,50 +313,54 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 	}// GEN-END:initComponents
 
-	private void tfPos2FocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfPos2FocusLost
+	private void tfPos2FocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfPos2FocusLost
 	{// GEN-HEADEREND:event_tfPos2FocusLost
-		String strPos2 = tfPos2.getText();
-		if (strPos2.trim().equals(""))
+		final String strPos2 = tfPos2.getText();
+		if (strPos2.trim().equals("")) {
 			return;
+		}
 		try {
-			int Pos2 = Integer.parseInt(strPos2);
-			if (Pos2 <= sldPos2.getMaximum() && Pos2 > sldPos2.getMinimum())
+			final int Pos2 = Integer.parseInt(strPos2);
+			if (Pos2 <= sldPos2.getMaximum() && Pos2 > sldPos2.getMinimum()) {
 				sldPos2.setValue(Pos2);
-			else
+			} else {
 				tfPos2.setText("" + sldPos2.getValue());
-		} catch (Exception e) {
+			}
+		} catch (final Exception e) {
 			tfPos2.setText("" + sldPos2.getValue());
 		}
 		checkPosOverlap();
 		checkMaxNumSamples();
 	}// GEN-LAST:event_tfPos2FocusLost
 
-	private void tfPos1FocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfPos1FocusLost
+	private void tfPos1FocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfPos1FocusLost
 	{// GEN-HEADEREND:event_tfPos1FocusLost
-		String strPos1 = tfPos1.getText();
+		final String strPos1 = tfPos1.getText();
 
-		if (strPos1.trim().equals(""))
+		if (strPos1.trim().equals("")) {
 			return;
+		}
 		try {
-			int Pos1 = Integer.parseInt(strPos1);
-			if (Pos1 <= sldPos1.getMaximum() && Pos1 > sldPos1.getMinimum())
+			final int Pos1 = Integer.parseInt(strPos1);
+			if (Pos1 <= sldPos1.getMaximum() && Pos1 > sldPos1.getMinimum()) {
 				sldPos1.setValue(Pos1);
-			else
+			} else {
 				tfPos1.setText("" + sldPos1.getValue());
+			}
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			tfPos1.setText("" + sldPos1.getValue());
 		}
 		checkPosOverlap();
 		checkMaxNumSamples();
 	}// GEN-LAST:event_tfPos1FocusLost
 
-	private void tfPos1KeyReleased(java.awt.event.KeyEvent evt)// GEN-FIRST:event_tfPos1KeyReleased
+	private void tfPos1KeyReleased(final java.awt.event.KeyEvent evt)// GEN-FIRST:event_tfPos1KeyReleased
 	{// GEN-HEADEREND:event_tfPos1KeyReleased
 
 	}// GEN-LAST:event_tfPos1KeyReleased
 
-	private void sldPos1StateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos1StateChanged
+	private void sldPos1StateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos1StateChanged
 	{// GEN-HEADEREND:event_sldPos1StateChanged
 
 		tfPos1.setText("" + sldPos1.getValue());
@@ -347,12 +369,12 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 	}// GEN-LAST:event_sldPos1StateChanged
 
-	private void tfPos2KeyReleased(java.awt.event.KeyEvent evt)// GEN-FIRST:event_tfPos2KeyReleased
+	private void tfPos2KeyReleased(final java.awt.event.KeyEvent evt)// GEN-FIRST:event_tfPos2KeyReleased
 	{// GEN-HEADEREND:event_tfPos2KeyReleased
 
 	}// GEN-LAST:event_tfPos2KeyReleased
 
-	private void sldPos2StateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos2StateChanged
+	private void sldPos2StateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos2StateChanged
 	{// GEN-HEADEREND:event_sldPos2StateChanged
 
 		tfPos2.setText("" + sldPos2.getValue());
@@ -361,24 +383,26 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 	}// GEN-LAST:event_sldPos2StateChanged
 
-	private void tfNumSamplesKeyReleased(java.awt.event.KeyEvent evt)// GEN-FIRST:event_tfNumSamplesKeyReleased
+	private void tfNumSamplesKeyReleased(final java.awt.event.KeyEvent evt)// GEN-FIRST:event_tfNumSamplesKeyReleased
 	{// GEN-HEADEREND:event_tfNumSamplesKeyReleased
-		String strNumSamples = tfNumSamples.getText();
-		if (strNumSamples.trim().equals(""))
+		final String strNumSamples = tfNumSamples.getText();
+		if (strNumSamples.trim().equals("")) {
 			return;
+		}
 		try {
-			int numSamples = Integer.parseInt(strNumSamples);
-			if (numSamples <= sldNumSamples.getMaximum() && numSamples > sldNumSamples.getMinimum())
+			final int numSamples = Integer.parseInt(strNumSamples);
+			if (numSamples <= sldNumSamples.getMaximum() && numSamples > sldNumSamples.getMinimum()) {
 				sldNumSamples.setValue(numSamples);
-			else
+			} else {
 				tfNumSamples.setText("" + sldNumSamples.getValue());
-		} catch (Exception e) {
+			}
+		} catch (final Exception e) {
 			tfNumSamples.setText("" + sldNumSamples.getValue());
 		}
 		checkMaxNumSamples();
 	}// GEN-LAST:event_tfNumSamplesKeyReleased
 
-	private void sldNumSamplesStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldNumSamplesStateChanged
+	private void sldNumSamplesStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldNumSamplesStateChanged
 	{// GEN-HEADEREND:event_sldNumSamplesStateChanged
 
 		if (sldNumSamples.getValue() == 0) {
@@ -396,15 +420,14 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 	}
 
 	private void checkMaxNumSamples() {
-		lblErrorSamplesTooHigh
-				.setEnabled((float) Math.abs(sldPos2.getValue() - sldPos1.getValue()) * 4.5 < (float) sldNumSamples
-						.getValue());
+		lblErrorSamplesTooHigh.setEnabled(Math.abs(sldPos2.getValue() - sldPos1.getValue()) * 4.5 < sldNumSamples
+				.getValue());
 		btnOK.setEnabled(!lblErrorDeepsAreEqual.isEnabled() && !lblErrorSamplesTooHigh.isEnabled());
 		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("scuba$rec.exp.customizer.title.2.label.1")
-				+ Math.min(500, (int) Math.floor((float) Math.abs(sldPos2.getValue() - sldPos1.getValue()) * 4.5)));
+				+ Math.min(500, (int) Math.floor(Math.abs(sldPos2.getValue() - sldPos1.getValue()) * 4.5)));
 	}
 
-	private void btnDefaultsActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
+	private void btnDefaultsActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
 	{// GEN-HEADEREND:event_btnDefaultsActionPerformed
 		sldNumSamples.setValue(45);
 		tfNumSamples.setText("45");
@@ -414,20 +437,21 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		tfPos2.setText("450");
 	}// GEN-LAST:event_btnDefaultsActionPerformed
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
+	private void btnCancelActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
 	{// GEN-HEADEREND:event_btnCancelActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_btnCancelActionPerformed
 
-	private void btnOKActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
+	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
 		acqConfig.setTotalSamples(sldNumSamples.getValue() == 0 ? 1 : sldNumSamples.getValue());
 		acqConfig.getSelectedHardwareParameter("xini").setParameterValue("" + sldPos1.getValue());
 		acqConfig.getSelectedHardwareParameter("xfin").setParameterValue("" + sldPos2.getValue());
-		if (checkCalib.isSelected())
+		if (checkCalib.isSelected()) {
 			acqConfig.getSelectedHardwareParameter("calib").setParameterValue("1");
-		else
+		} else {
 			acqConfig.getSelectedHardwareParameter("calib").setParameterValue("0");
+		}
 
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_btnOKActionPerformed
@@ -462,7 +486,8 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -474,7 +499,8 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -484,9 +510,10 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -500,9 +527,10 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -514,53 +542,61 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
 		return acqConfig;
 	}
 
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
 			sldNumSamples.setValue(acqConfig.getTotalSamples());
 			tfNumSamples.setText("" + acqConfig.getTotalSamples());
 
-			int xini = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("xini"));
+			final int xini = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("xini"));
 			sldPos1.setValue(xini);
 			tfPos1.setText("" + xini);
 
-			int xfin = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("xfin"));
+			final int xfin = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("xfin"));
 			sldPos2.setValue(xfin);
 			tfPos2.setText("" + xfin);
 
-			int calib = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("calib"));
-			if (calib == 1)
+			final int calib = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("calib"));
+			if (calib == 1) {
 				checkCalib.setSelected(true);
-			else
+			} else {
 				checkCalib.setSelected(false);
+			}
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
+	@Override
 	public javax.swing.JComponent getCustomizerComponent() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/scuba/resources/scuba_iconified.gif"));
 	}
 
+	@Override
 	public String getCustomizerTitle() {
 		return "Scuba Experiment Configuration Utility";
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
@@ -570,9 +606,9 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 	 * 
 	 * @author Sergio Pino
 	 */
-	public static void main(String args[]) {
-		javax.swing.JFrame jf = new javax.swing.JFrame();
-		ScubaCustomizer sc = new ScubaCustomizer();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame jf = new javax.swing.JFrame();
+		final ScubaCustomizer sc = new ScubaCustomizer();
 		jf.getContentPane().add(sc, java.awt.BorderLayout.CENTER);
 		jf.pack();
 		jf.setVisible(true);

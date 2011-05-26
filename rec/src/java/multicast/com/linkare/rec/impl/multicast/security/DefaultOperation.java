@@ -14,6 +14,10 @@ import java.util.Map;
  * @author José Pedro Pereira - Linkare TI
  */
 public class DefaultOperation implements IOperation {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1873349350151682256L;
 	private short operation;
 	private HashMap<String, Object> properties;
 
@@ -24,13 +28,13 @@ public class DefaultOperation implements IOperation {
 	}
 
 	/** Creates a new instance of DefaultOperation */
-	public DefaultOperation(short operation) {
+	public DefaultOperation(final short operation) {
 		setOperation(operation);
 		setProperties(new HashMap<String, Object>());
 	}
 
 	/** Creates a new instance of DefaultOperation */
-	public DefaultOperation(short operation, Map<String, Object> properties) {
+	public DefaultOperation(final short operation, final Map<String, Object> properties) {
 		setOperation(operation);
 		setProperties(properties);
 	}
@@ -41,6 +45,7 @@ public class DefaultOperation implements IOperation {
 	 * @return Value of property operation.
 	 * 
 	 */
+	@Override
 	public short getOperation() {
 		return operation;
 	}
@@ -51,7 +56,7 @@ public class DefaultOperation implements IOperation {
 	 * @param operation New value of property operation.
 	 * 
 	 */
-	public void setOperation(short operation) {
+	public void setOperation(final short operation) {
 		this.operation = operation;
 	}
 
@@ -61,6 +66,7 @@ public class DefaultOperation implements IOperation {
 	 * @return Value of property properties.
 	 * 
 	 */
+	@Override
 	public Map<String, Object> getProperties() {
 		return properties;
 	}
@@ -71,14 +77,15 @@ public class DefaultOperation implements IOperation {
 	 * @param properties New value of property properties.
 	 * 
 	 */
-	public void setProperties(Map<String, Object> properties) {
+	public void setProperties(final Map<String, Object> properties) {
 		this.properties = new HashMap<String, Object>(properties);
 	}
 
+	@Override
 	public String toString() {
 		switch (operation) {
 		case OP_CONFIG:
-			return "CONFIG Config=" + getProperties().get(PROPKEY_ACQ_CONFIG);
+			return "CONFIG Config=" + getProperties().get(IOperation.PROPKEY_ACQ_CONFIG);
 		case OP_ENUM_HARDWARES:
 			return "ENUM_HARDWARES";
 		case OP_ENUM_USERS:
@@ -108,17 +115,19 @@ public class DefaultOperation implements IOperation {
 		case OP_STOP:
 			return "STOP";
 		case OP_GET_HARDWAREINFO:
-			return "GET_HARDWAREINFO HardwareInfo=" + getProperties().get(PROPKEY_HARDWAREINFO);
+			return "GET_HARDWAREINFO HardwareInfo=" + getProperties().get(IOperation.PROPKEY_HARDWAREINFO);
 		default:
 			return "UNKNOW OPERATION = NUMBER(" + operation + ")";
 		}
 	}
 
-	public boolean equals(Object other) {
-		if (other == null || !(other instanceof IOperation))
+	@Override
+	public boolean equals(final Object other) {
+		if (other == null || !(other instanceof IOperation)) {
 			return false;
+		}
 
-		IOperation otherOperation = (IOperation) other;
+		final IOperation otherOperation = (IOperation) other;
 
 		return otherOperation.getOperation() == getOperation()
 				&& getProperties().equals(otherOperation.getProperties());

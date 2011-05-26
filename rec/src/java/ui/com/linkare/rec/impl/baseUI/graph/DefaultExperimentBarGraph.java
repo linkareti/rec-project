@@ -30,12 +30,16 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  * @author José Pedro Pereira - Linkare TI
  */
 public class DefaultExperimentBarGraph extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 790325971846177416L;
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(DefaultExperimentBarGraph.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(DefaultExperimentBarGraph.UI_CLIENT_LOGGER));
 		}
 	}
 
@@ -72,32 +76,39 @@ public class DefaultExperimentBarGraph extends javax.swing.JPanel implements Exp
 
 	// End of variables declaration//GEN-END:variables
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/chart16.gif"));
 	}
 
 	private ExpDataModel model = null;
 
-	public void setExpDataModel(ExpDataModel model) {
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
 		this.model = model;
 		defaultHistogramDatasetProxy.setChannelDisplay(getChannelDisplay());
 		defaultHistogramDatasetProxy.setExpDataModel(model);
-		if (model != null)
+		if (model != null) {
 			model.addExpDataModelListener(this);
+		}
 	}
 
+	@Override
 	public String getName() {
 		return "Histogram";
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
@@ -105,6 +116,7 @@ public class DefaultExperimentBarGraph extends javax.swing.JPanel implements Exp
 	public void dataModelRunning() {// BIG SILENT NOOP
 	}
 
+	@Override
 	public void dataModelStoped() {// BIG SILENT NOOP
 	}
 
@@ -147,14 +159,15 @@ public class DefaultExperimentBarGraph extends javax.swing.JPanel implements Exp
 	 * }
 	 */
 
-	private boolean isScaleSet = false;
+	private final boolean isScaleSet = false;
 
 	private JFreeChart chart = null;
 
 	/** Holds value of property channelDisplay. */
 	private int channelDisplay = 0;
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 
 	}
 
@@ -164,7 +177,7 @@ public class DefaultExperimentBarGraph extends javax.swing.JPanel implements Exp
 	 * @return Value of property channelDisplay.
 	 */
 	public int getChannelDisplay() {
-		return this.channelDisplay;
+		return channelDisplay;
 	}
 
 	/**
@@ -172,40 +185,46 @@ public class DefaultExperimentBarGraph extends javax.swing.JPanel implements Exp
 	 * 
 	 * @param channelDisplay New value of property channelDisplay.
 	 */
-	public void setChannelDisplay(int channelDisplay) {
+	public void setChannelDisplay(final int channelDisplay) {
 		this.channelDisplay = channelDisplay;
 		defaultHistogramDatasetProxy.setChannelDisplay(channelDisplay);
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
-		if (header == null)
+		if (header == null) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
 	private HardwareAcquisitionConfig header = null;
 
-	private void headerAvailable(HardwareAcquisitionConfig header) {
-		if (header == null)
+	private void headerAvailable(final HardwareAcquisitionConfig header) {
+		if (header == null) {
 			return;
+		}
 
 		this.header = header;
-		NumberAxis hitsAxis = new NumberAxis("Hits");
+		final NumberAxis hitsAxis = new NumberAxis("Hits");
 		hitsAxis.setAutoRange(true);
 		hitsAxis.setAutoRangeStickyZero(false);
 		hitsAxis.setAutoRangeIncludesZero(false);
 
-		com.linkare.rec.data.metadata.Scale scale = header.getChannelsConfig(getChannelDisplay()).getSelectedScale();
-		String chn = header.getChannelsConfig(getChannelDisplay()).getChannelName();
-		String pus = scale.getPhysicsUnitSymbol();
-		String multiplier = scale.getMultiplier().toString();
+		final com.linkare.rec.data.metadata.Scale scale = header.getChannelsConfig(getChannelDisplay())
+				.getSelectedScale();
+		final String chn = header.getChannelsConfig(getChannelDisplay()).getChannelName();
+		final String pus = scale.getPhysicsUnitSymbol();
+		final String multiplier = scale.getMultiplier().toString();
 
-		NumberAxis valueAxis = new NumberAxis(chn + " [" + multiplier + pus + "]");
+		final NumberAxis valueAxis = new NumberAxis(chn + " [" + multiplier + pus + "]");
 
 		// NumberAxis valueAxis = new
 		// VerticalNumberAxis("Acquisition Channels");
@@ -213,13 +232,13 @@ public class DefaultExperimentBarGraph extends javax.swing.JPanel implements Exp
 		valueAxis.setAutoRangeStickyZero(false);
 		valueAxis.setAutoRangeIncludesZero(false);
 
-		XYToolTipGenerator tooltipGenerator = new StandardXYToolTipGenerator();
+		final XYToolTipGenerator tooltipGenerator = new StandardXYToolTipGenerator();
 
-		XYPlot plot = new XYPlot(defaultHistogramDatasetProxy, valueAxis, hitsAxis, new XYBarRenderer(0.1));
+		final XYPlot plot = new XYPlot(defaultHistogramDatasetProxy, valueAxis, hitsAxis, new XYBarRenderer(0.1));
 
 		chart = new JFreeChart(header.getFamiliarName(), JFreeChart.DEFAULT_TITLE_FONT, plot, true);
 
-		ChartPanel panel = new ChartPanel(chart, 350, 250, 350, 250, 350, 250, true, true, true, true, true, true);
+		final ChartPanel panel = new ChartPanel(chart, 350, 250, 350, 250, 350, 250, true, true, true, true, true, true);
 		panel.setPreferredSize(new java.awt.Dimension(350, 250));
 		// panel.setMinimumSize(new java.awt.Dimension(350,250));
 		// panel.setSize(new java.awt.Dimension(350,250));
@@ -229,11 +248,14 @@ public class DefaultExperimentBarGraph extends javax.swing.JPanel implements Exp
 		scrollPane.setViewportView(panel);
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
-		if (header == null)
+		if (header == null) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 

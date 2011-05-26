@@ -10,6 +10,7 @@ import java.text.DecimalFormat;
 import java.util.Hashtable;
 
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import javax.swing.text.NumberFormatter;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
@@ -24,11 +25,16 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  */
 public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1374781526147471266L;
+
 	/** Creates new form RadioactividadeCustomizer */
 	public CCCustomizer() {
 		initComponents();
 
-		Hashtable slidersPosLabels = new Hashtable(4);
+		final Hashtable slidersPosLabels = new Hashtable(4);
 		slidersPosLabels.put(new Integer(4000), new JLabel("4.0"));
 		slidersPosLabels.put(new Integer(5000), new JLabel("5.0"));
 		slidersPosLabels.put(new Integer(6000), new JLabel("6.0"));
@@ -36,12 +42,12 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		sldPos1.setLabelTable(slidersPosLabels);
 		sldPos2.setLabelTable(slidersPosLabels);
-		DecimalFormat format = new DecimalFormat("0.0");
+		final DecimalFormat format = new DecimalFormat("0.0");
 		format.setDecimalSeparatorAlwaysShown(true);
 		format.setGroupingUsed(false);
 		format.setMinimumFractionDigits(1);
-		NumberFormatter formatterUserPos1 = new NumberFormatter(format);
-		NumberFormatter formatterUserPos2 = new NumberFormatter(format);
+		final NumberFormatter formatterUserPos1 = new NumberFormatter(format);
+		final NumberFormatter formatterUserPos2 = new NumberFormatter(format);
 
 		// formatterUserPos1.setAllowsInvalid(false);
 		// formatterUserPos2.setAllowsInvalid(false);
@@ -52,8 +58,8 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		formatterUserPos1.setOverwriteMode(true);
 		formatterUserPos2.setOverwriteMode(true);
 
-		formatterUserPos1.install(this.tfPos1);
-		formatterUserPos2.install(this.tfPos2);
+		formatterUserPos1.install(tfPos1);
+		formatterUserPos2.install(tfPos2);
 
 		checkPosOverlap();
 	}
@@ -98,7 +104,8 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		btnOK.setText("OK");
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
 			}
 		});
@@ -109,7 +116,8 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		btnCancel.setText("Cancel");
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
 			}
 		});
@@ -159,7 +167,8 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		sldNumSamples.setMinimumSize(new java.awt.Dimension(250, 42));
 		sldNumSamples.setPreferredSize(new java.awt.Dimension(250, 42));
 		sldNumSamples.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sldNumSamplesStateChanged(evt);
 			}
 		});
@@ -172,13 +181,14 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel6.add(sldNumSamples, gridBagConstraints);
 
 		tfNumSamples.setColumns(3);
-		tfNumSamples.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		tfNumSamples.setHorizontalAlignment(SwingConstants.RIGHT);
 		tfNumSamples.setText("50");
 		tfNumSamples.setMaximumSize(new java.awt.Dimension(30, 16));
 		tfNumSamples.setMinimumSize(new java.awt.Dimension(30, 16));
 		tfNumSamples.setPreferredSize(new java.awt.Dimension(37, 16));
 		tfNumSamples.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				tfNumSamplesFocusLost(evt);
 			}
 		});
@@ -206,7 +216,8 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		sldFreq.setMinimumSize(new java.awt.Dimension(255, 80));
 		sldFreq.setPreferredSize(new java.awt.Dimension(255, 80));
 		sldFreq.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sldFreqStateChanged(evt);
 			}
 		});
@@ -217,13 +228,14 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel1.add(sldFreq, gridBagConstraints);
 
 		tfFreq.setColumns(4);
-		tfFreq.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		tfFreq.setHorizontalAlignment(SwingConstants.RIGHT);
 		tfFreq.setText("50");
 		tfFreq.setMaximumSize(new java.awt.Dimension(30, 16));
 		tfFreq.setMinimumSize(new java.awt.Dimension(30, 16));
 		tfFreq.setPreferredSize(new java.awt.Dimension(48, 16));
 		tfFreq.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				tfFreqFocusLost(evt);
 			}
 		});
@@ -253,7 +265,8 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		sldPos1.setMinimumSize(new java.awt.Dimension(250, 42));
 		sldPos1.setPreferredSize(new java.awt.Dimension(250, 42));
 		sldPos1.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sldPos1StateChanged(evt);
 			}
 		});
@@ -276,7 +289,8 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		sldPos2.setMinimumSize(new java.awt.Dimension(250, 42));
 		sldPos2.setPreferredSize(new java.awt.Dimension(250, 42));
 		sldPos2.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sldPos2StateChanged(evt);
 			}
 		});
@@ -301,7 +315,8 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		tfPos1.setText("2.0");
 		tfPos1.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				tfPos1FocusLost(evt);
 			}
 		});
@@ -311,7 +326,8 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		tfPos2.setText("5.0");
 		tfPos2.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				tfPos2FocusLost(evt);
 			}
 		});
@@ -325,89 +341,97 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel5.getAccessibleContext().setAccessibleName("Distance Variation [mm]");
 	}// </editor-fold>//GEN-END:initComponents
 
-	private void tfFreqFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfFreqFocusLost
+	private void tfFreqFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfFreqFocusLost
 	{// GEN-HEADEREND:event_tfFreqFocusLost
-		String strFreq = tfFreq.getText();
-		if (strFreq.trim().equals(""))
+		final String strFreq = tfFreq.getText();
+		if (strFreq.trim().equals("")) {
 			return;
+		}
 		try {
-			int Freq = Integer.parseInt(strFreq);
-			if (Freq <= sldFreq.getMaximum() && Freq > sldFreq.getMinimum())
+			final int Freq = Integer.parseInt(strFreq);
+			if (Freq <= sldFreq.getMaximum() && Freq > sldFreq.getMinimum()) {
 				sldFreq.setValue(Freq);
-			else
+			} else {
 				tfFreq.setText("" + sldFreq.getValue());
-		} catch (Exception e) {
+			}
+		} catch (final Exception e) {
 			tfFreq.setText("" + sldFreq.getValue());
 		}
 	}// GEN-LAST:event_tfFreqFocusLost
 
-	private void tfNumSamplesFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfNumSamplesFocusLost
+	private void tfNumSamplesFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfNumSamplesFocusLost
 	{// GEN-HEADEREND:event_tfNumSamplesFocusLost
-		String strNumSamples = tfNumSamples.getText();
-		if (strNumSamples.trim().equals(""))
+		final String strNumSamples = tfNumSamples.getText();
+		if (strNumSamples.trim().equals("")) {
 			return;
+		}
 		try {
-			int numSamples = Integer.parseInt(strNumSamples);
-			if (numSamples <= sldNumSamples.getMaximum() && numSamples > sldNumSamples.getMinimum())
+			final int numSamples = Integer.parseInt(strNumSamples);
+			if (numSamples <= sldNumSamples.getMaximum() && numSamples > sldNumSamples.getMinimum()) {
 				sldNumSamples.setValue(numSamples);
-			else
+			} else {
 				tfNumSamples.setText("" + sldNumSamples.getValue());
-		} catch (Exception e) {
+			}
+		} catch (final Exception e) {
 			tfNumSamples.setText("" + sldNumSamples.getValue());
 		}
 	}// GEN-LAST:event_tfNumSamplesFocusLost
 
-	private void tfPos2FocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfPos2FocusLost
+	private void tfPos2FocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfPos2FocusLost
 	{// GEN-HEADEREND:event_tfPos2FocusLost
-		String strPos2 = tfPos2.getText();
-		if (strPos2.trim().equals(""))
+		final String strPos2 = tfPos2.getText();
+		if (strPos2.trim().equals("")) {
 			return;
+		}
 		try {
-			int Pos2 = (int) (Float.parseFloat(strPos2) * 1000.F);
-			if (Pos2 <= sldPos2.getMaximum() && Pos2 > sldPos2.getMinimum())
+			final int Pos2 = (int) (Float.parseFloat(strPos2) * 1000.F);
+			if (Pos2 <= sldPos2.getMaximum() && Pos2 > sldPos2.getMinimum()) {
 				sldPos2.setValue(Pos2);
-			else
-				tfPos2.setValue(new Float(((float) sldPos2.getValue() / 1000.F)));
-		} catch (Exception e) {
-			tfPos2.setValue(new Float(((float) sldPos2.getValue() / 1000.F)));
+			} else {
+				tfPos2.setValue(new Float((sldPos2.getValue() / 1000.F)));
+			}
+		} catch (final Exception e) {
+			tfPos2.setValue(new Float((sldPos2.getValue() / 1000.F)));
 		}
 		checkPosOverlap();
 	}// GEN-LAST:event_tfPos2FocusLost
 
-	private void tfPos1FocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfPos1FocusLost
+	private void tfPos1FocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfPos1FocusLost
 	{// GEN-HEADEREND:event_tfPos1FocusLost
-		String strPos1 = tfPos1.getText();
+		final String strPos1 = tfPos1.getText();
 
-		if (strPos1.trim().equals(""))
+		if (strPos1.trim().equals("")) {
 			return;
+		}
 		try {
-			int Pos1 = (int) (Float.parseFloat(strPos1) * 1000.F);
-			if (Pos1 <= sldPos1.getMaximum() && Pos1 > sldPos1.getMinimum())
+			final int Pos1 = (int) (Float.parseFloat(strPos1) * 1000.F);
+			if (Pos1 <= sldPos1.getMaximum() && Pos1 > sldPos1.getMinimum()) {
 				sldPos1.setValue(Pos1);
-			else
-				tfPos1.setValue(new Float(((float) sldPos1.getValue() / 1000.F)));
+			} else {
+				tfPos1.setValue(new Float((sldPos1.getValue() / 1000.F)));
+			}
 
-		} catch (Exception e) {
-			tfPos1.setValue(new Float(((float) sldPos1.getValue() / 1000.F)));
+		} catch (final Exception e) {
+			tfPos1.setValue(new Float((sldPos1.getValue() / 1000.F)));
 		}
 		checkPosOverlap();
 	}// GEN-LAST:event_tfPos1FocusLost
 
-	private void sldPos1StateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos1StateChanged
+	private void sldPos1StateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos1StateChanged
 	{// GEN-HEADEREND:event_sldPos1StateChanged
 
-		tfPos1.setValue(new Float(((float) sldPos1.getValue() / 1000.F)));
+		tfPos1.setValue(new Float((sldPos1.getValue() / 1000.F)));
 		checkPosOverlap();
 	}// GEN-LAST:event_sldPos1StateChanged
 
-	private void sldPos2StateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos2StateChanged
+	private void sldPos2StateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos2StateChanged
 	{// GEN-HEADEREND:event_sldPos2StateChanged
 
-		tfPos2.setValue(new Float(((float) sldPos2.getValue() / 1000.F)));
+		tfPos2.setValue(new Float((sldPos2.getValue() / 1000.F)));
 		checkPosOverlap();
 	}// GEN-LAST:event_sldPos2StateChanged
 
-	private void sldFreqStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldFreqStateChanged
+	private void sldFreqStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldFreqStateChanged
 	{// GEN-HEADEREND:event_sldFreqStateChanged
 
 		if (sldFreq.getValue() == 0) {
@@ -417,7 +441,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 	}// GEN-LAST:event_sldFreqStateChanged
 
-	private void sldNumSamplesStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldNumSamplesStateChanged
+	private void sldNumSamplesStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldNumSamplesStateChanged
 	{// GEN-HEADEREND:event_sldNumSamplesStateChanged
 
 		if (sldNumSamples.getValue() == 0) {
@@ -433,23 +457,21 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		btnOK.setEnabled(!lblErrorVolsAreEqua.isEnabled());
 	}
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
+	private void btnCancelActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
 	{// GEN-HEADEREND:event_btnCancelActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_btnCancelActionPerformed
 
-	private void btnOKActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
+	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
-		int nsamples = sldNumSamples.getValue() == 0 ? 1 : sldNumSamples.getValue();
+		final int nsamples = sldNumSamples.getValue() == 0 ? 1 : sldNumSamples.getValue();
 		acqConfig.setTotalSamples(nsamples + 1);
-		acqConfig.getSelectedHardwareParameter("StartPosition").setParameterValue(
-				"" + ((float) sldPos1.getValue() / 1000.F));
-		acqConfig.getSelectedHardwareParameter("EndPosition").setParameterValue(
-				"" + ((float) sldPos2.getValue() / 1000.F));
+		acqConfig.getSelectedHardwareParameter("StartPosition").setParameterValue("" + (sldPos1.getValue() / 1000.F));
+		acqConfig.getSelectedHardwareParameter("EndPosition").setParameterValue("" + (sldPos2.getValue() / 1000.F));
 		acqConfig.getSelectedHardwareParameter("Calibrate").setParameterValue(jChkCalibrate.isSelected() ? "1" : "0");
-		acqConfig.setSelectedFrequency(new Frequency((double) sldFreq.getValue(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
+		acqConfig.setSelectedFrequency(new Frequency(sldFreq.getValue(), hardwareInfo.getHardwareFrequencies(0)
+				.getMinimumFrequency().getMultiplier(), hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency()
+				.getFrequencyDefType()));
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_btnOKActionPerformed
 
@@ -483,7 +505,8 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -495,7 +518,8 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -505,9 +529,10 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -521,9 +546,10 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -535,58 +561,65 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
 		return acqConfig;
 	}
 
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
-			int nsamples = acqConfig.getTotalSamples() - 1;
+			final int nsamples = acqConfig.getTotalSamples() - 1;
 			sldNumSamples.setValue(nsamples);
 			tfNumSamples.setText("" + nsamples);
 
-			int freq = (int) acqConfig.getSelectedFrequency().getFrequency();
+			final int freq = (int) acqConfig.getSelectedFrequency().getFrequency();
 			sldFreq.setValue(freq);
 			tfFreq.setText("" + freq);
 
-			float pos1f = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("StartPosition"));
-			int pos1 = (int) Math.floor(pos1f * 1000.F);
+			final float pos1f = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("StartPosition"));
+			final int pos1 = (int) Math.floor(pos1f * 1000.F);
 			sldPos1.setValue(pos1);
 			tfPos1.setValue(new Float(pos1f));
 
-			float pos2f = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("EndPosition"));
-			int pos2 = (int) Math.floor(pos2f * 1000.F);
+			final float pos2f = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("EndPosition"));
+			final int pos2 = (int) Math.floor(pos2f * 1000.F);
 			sldPos2.setValue(pos2);
 			tfPos2.setValue(new Float(pos2f));
 
-			int calibrate = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("Calibrate"));
+			final int calibrate = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("Calibrate"));
 			jChkCalibrate.setSelected(calibrate != 0);
 
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
+	@Override
 	public javax.swing.JComponent getCustomizerComponent() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/condensadorcilindrico/resources/cc_iconified.gif"));
 	}
 
+	@Override
 	public String getCustomizerTitle() {
 		return ReCResourceBundle.findString("cc$rec.exp.cc.customizer.title");
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}

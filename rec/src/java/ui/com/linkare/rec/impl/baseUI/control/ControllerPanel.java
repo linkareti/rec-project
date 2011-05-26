@@ -20,12 +20,16 @@ import javax.swing.ImageIcon;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class ControllerPanel extends javax.swing.JPanel implements java.io.Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -869866736417188281L;
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ControllerPanel.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ControllerPanel.UI_CLIENT_LOGGER));
 		}
 	}
 
@@ -56,7 +60,8 @@ public class ControllerPanel extends javax.swing.JPanel implements java.io.Seria
 		jButtonConfigure.setPreferredSize(new java.awt.Dimension(16, 16));
 		jButtonConfigure.setEnabled(false);
 		jButtonConfigure.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonConfigureActionPerformed(evt);
 			}
 		});
@@ -72,7 +77,8 @@ public class ControllerPanel extends javax.swing.JPanel implements java.io.Seria
 		jButtonPlay.setPreferredSize(new java.awt.Dimension(16, 16));
 		jButtonPlay.setEnabled(false);
 		jButtonPlay.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonPlayActionPerformed(evt);
 			}
 		});
@@ -88,7 +94,8 @@ public class ControllerPanel extends javax.swing.JPanel implements java.io.Seria
 		jButtonStop.setPreferredSize(new java.awt.Dimension(16, 16));
 		jButtonStop.setEnabled(false);
 		jButtonStop.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonStopActionPerformed(evt);
 			}
 		});
@@ -97,17 +104,17 @@ public class ControllerPanel extends javax.swing.JPanel implements java.io.Seria
 
 	}// GEN-END:initComponents
 
-	private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonStopActionPerformed
+	private void jButtonStopActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonStopActionPerformed
 	{// GEN-HEADEREND:event_jButtonStopActionPerformed
 		firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "stop", Boolean.FALSE, Boolean.TRUE));
 	}// GEN-LAST:event_jButtonStopActionPerformed
 
-	private void jButtonPlayActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonPlayActionPerformed
+	private void jButtonPlayActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonPlayActionPerformed
 	{// GEN-HEADEREND:event_jButtonPlayActionPerformed
 		firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "play", Boolean.FALSE, Boolean.TRUE));
 	}// GEN-LAST:event_jButtonPlayActionPerformed
 
-	private void jButtonConfigureActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonConfigureActionPerformed
+	private void jButtonConfigureActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonConfigureActionPerformed
 	{// GEN-HEADEREND:event_jButtonConfigureActionPerformed
 		firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "customize", Boolean.FALSE, Boolean.TRUE));
 	}// GEN-LAST:event_jButtonConfigureActionPerformed
@@ -118,7 +125,7 @@ public class ControllerPanel extends javax.swing.JPanel implements java.io.Seria
 	 * @return Value of property enablePlay.
 	 */
 	public boolean isEnablePlay() {
-		return this.enablePlay;
+		return enablePlay;
 	}
 
 	/**
@@ -126,7 +133,7 @@ public class ControllerPanel extends javax.swing.JPanel implements java.io.Seria
 	 * 
 	 * @param enablePlay New value of property enablePlay.
 	 */
-	public void setEnablePlay(boolean enablePlay) {
+	public void setEnablePlay(final boolean enablePlay) {
 		this.enablePlay = enablePlay;
 		jButtonPlay.setEnabled(enablePlay);
 	}
@@ -137,7 +144,7 @@ public class ControllerPanel extends javax.swing.JPanel implements java.io.Seria
 	 * @return Value of property enableStop.
 	 */
 	public boolean isEnableStop() {
-		return this.enableStop;
+		return enableStop;
 	}
 
 	/**
@@ -145,7 +152,7 @@ public class ControllerPanel extends javax.swing.JPanel implements java.io.Seria
 	 * 
 	 * @param enableStop New value of property enableStop.
 	 */
-	public void setEnableStop(boolean enableStop) {
+	public void setEnableStop(final boolean enableStop) {
 		this.enableStop = enableStop;
 		jButtonStop.setEnabled(enableStop);
 	}
@@ -156,7 +163,7 @@ public class ControllerPanel extends javax.swing.JPanel implements java.io.Seria
 	 * @return Value of property enableCustomize.
 	 */
 	public boolean isEnableCustomize() {
-		return this.enableCustomize;
+		return enableCustomize;
 	}
 
 	/**
@@ -164,7 +171,7 @@ public class ControllerPanel extends javax.swing.JPanel implements java.io.Seria
 	 * 
 	 * @param enableCustomize New value of property enableCustomize.
 	 */
-	public void setEnableCustomize(boolean enableCustomize) {
+	public void setEnableCustomize(final boolean enableCustomize) {
 		this.enableCustomize = enableCustomize;
 		jButtonConfigure.setEnabled(enableCustomize);
 	}
@@ -174,10 +181,11 @@ public class ControllerPanel extends javax.swing.JPanel implements java.io.Seria
 	 * 
 	 * @param event The event to be fired
 	 */
-	private void firePropertyChangeListenerPropertyChange(java.beans.PropertyChangeEvent event) {
-		if (listenerList == null)
+	private void firePropertyChangeListenerPropertyChange(final java.beans.PropertyChangeEvent event) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == java.beans.PropertyChangeListener.class) {
 				((java.beans.PropertyChangeListener) listeners[i + 1]).propertyChange(event);
@@ -185,8 +193,9 @@ public class ControllerPanel extends javax.swing.JPanel implements java.io.Seria
 		}
 	}
 
-	public void showCustomizerTip(com.linkare.rec.impl.baseUI.utils.TipFactory tipfact, String message, int time) {
-		Point locationCustomizer = jButtonConfigure.getLocationOnScreen();
+	public void showCustomizerTip(final com.linkare.rec.impl.baseUI.utils.TipFactory tipfact, final String message,
+			final int time) {
+		final Point locationCustomizer = jButtonConfigure.getLocationOnScreen();
 		locationCustomizer.x = locationCustomizer.x + jButtonConfigure.getWidth() - 5;
 		locationCustomizer.y = locationCustomizer.y + jButtonConfigure.getHeight() / 2 - 35;
 		tipfact.showTipWithTimeout(jButtonConfigure, message, time, locationCustomizer);
@@ -197,7 +206,8 @@ public class ControllerPanel extends javax.swing.JPanel implements java.io.Seria
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addPropertyChangeListener(java.beans.PropertyChangeListener listener) {
+	@Override
+	public synchronized void addPropertyChangeListener(final java.beans.PropertyChangeListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -209,7 +219,8 @@ public class ControllerPanel extends javax.swing.JPanel implements java.io.Seria
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removePropertyChangeListener(java.beans.PropertyChangeListener listener) {
+	@Override
+	public synchronized void removePropertyChangeListener(final java.beans.PropertyChangeListener listener) {
 		listenerList.remove(java.beans.PropertyChangeListener.class, listener);
 	}
 

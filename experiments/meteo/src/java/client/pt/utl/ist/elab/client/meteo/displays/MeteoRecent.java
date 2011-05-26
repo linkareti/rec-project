@@ -11,6 +11,8 @@ package pt.utl.ist.elab.client.meteo.displays;
  * @author José Pedro Pereira - Linkare TI
  */
 
+import javax.swing.SwingConstants;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
@@ -19,6 +21,10 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 
 public class MeteoRecent extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7175705331277347386L;
 	java.text.DecimalFormat df = null;
 
 	/** Creates new form JPanel */
@@ -69,7 +75,7 @@ public class MeteoRecent extends javax.swing.JPanel implements ExpDataDisplay, E
 
 		jPanel1.setBorder(new javax.swing.border.TitledBorder("\u00daltima Aquisi\u00e7\u00e3o"));
 		jTextFieldPression.setColumns(6);
-		jTextFieldPression.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldPression.setHorizontalAlignment(SwingConstants.CENTER);
 		jTextFieldPression.setText("-");
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
@@ -78,7 +84,7 @@ public class MeteoRecent extends javax.swing.JPanel implements ExpDataDisplay, E
 		jPanel1.add(jTextFieldPression, gridBagConstraints);
 
 		jTextFieldLum.setColumns(6);
-		jTextFieldLum.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldLum.setHorizontalAlignment(SwingConstants.CENTER);
 		jTextFieldLum.setText("-");
 		jTextFieldLum.setMinimumSize(new java.awt.Dimension(66, 20));
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -89,7 +95,7 @@ public class MeteoRecent extends javax.swing.JPanel implements ExpDataDisplay, E
 		jPanel1.add(jTextFieldLum, gridBagConstraints);
 
 		jTextFieldCond.setColumns(6);
-		jTextFieldCond.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldCond.setHorizontalAlignment(SwingConstants.CENTER);
 		jTextFieldCond.setText("-");
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
@@ -98,7 +104,7 @@ public class MeteoRecent extends javax.swing.JPanel implements ExpDataDisplay, E
 		jPanel1.add(jTextFieldCond, gridBagConstraints);
 
 		jTextFieldHum.setColumns(6);
-		jTextFieldHum.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldHum.setHorizontalAlignment(SwingConstants.CENTER);
 		jTextFieldHum.setText("-");
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
@@ -107,7 +113,7 @@ public class MeteoRecent extends javax.swing.JPanel implements ExpDataDisplay, E
 		jPanel1.add(jTextFieldHum, gridBagConstraints);
 
 		jTextFieldWindVel.setColumns(6);
-		jTextFieldWindVel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldWindVel.setHorizontalAlignment(SwingConstants.CENTER);
 		jTextFieldWindVel.setText("-");
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
@@ -116,7 +122,7 @@ public class MeteoRecent extends javax.swing.JPanel implements ExpDataDisplay, E
 		jPanel1.add(jTextFieldWindVel, gridBagConstraints);
 
 		jTextFieldWindDir.setColumns(6);
-		jTextFieldWindDir.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldWindDir.setHorizontalAlignment(SwingConstants.CENTER);
 		jTextFieldWindDir.setText("-");
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
@@ -125,7 +131,7 @@ public class MeteoRecent extends javax.swing.JPanel implements ExpDataDisplay, E
 		jPanel1.add(jTextFieldWindDir, gridBagConstraints);
 
 		jTextFieldRain.setColumns(6);
-		jTextFieldRain.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldRain.setHorizontalAlignment(SwingConstants.CENTER);
 		jTextFieldRain.setText("-");
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
@@ -134,7 +140,7 @@ public class MeteoRecent extends javax.swing.JPanel implements ExpDataDisplay, E
 		jPanel1.add(jTextFieldRain, gridBagConstraints);
 
 		jTextFieldTemp.setColumns(6);
-		jTextFieldTemp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldTemp.setHorizontalAlignment(SwingConstants.CENTER);
 		jTextFieldTemp.setText("-");
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
@@ -271,19 +277,23 @@ public class MeteoRecent extends javax.swing.JPanel implements ExpDataDisplay, E
 
 	}// GEN-END:initComponents
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.Icon getIcon() {
 		return new javax.swing.ImageIcon("/com/linkare/rec/impl/baseUI/resources/table16.gif");
 	}
 
 	private ExpDataModel expDataModel = null;
 
-	public void setExpDataModel(ExpDataModel expDataModel) {
-		if (expDataModel != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel expDataModel) {
+		if (expDataModel != null) {
 			expDataModel.removeExpDataModelListener(this);
+		}
 
 		this.expDataModel = expDataModel;
 
@@ -292,14 +302,17 @@ public class MeteoRecent extends javax.swing.JPanel implements ExpDataDisplay, E
 		}
 	}
 
+	@Override
 	public String getName() {
 		return "Valores �ltima aquisi��o";
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
@@ -307,10 +320,11 @@ public class MeteoRecent extends javax.swing.JPanel implements ExpDataDisplay, E
 	public void dataModelRunning() {// BIG SILENT NOOP
 	}
 
+	@Override
 	public void dataModelStoped() {// BIG SILENT NOOP
 	}
 
-	public void headerAvailable(HardwareAcquisitionConfig header) {
+	public void headerAvailable(final HardwareAcquisitionConfig header) {
 		jTextFieldCond.setText("-");
 		jTextFieldHum.setText("-");
 		jTextFieldLum.setText("-");
@@ -321,7 +335,8 @@ public class MeteoRecent extends javax.swing.JPanel implements ExpDataDisplay, E
 		jTextFieldWindVel.setText("-");
 	}
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 		System.out.println("getSamplesStartIndex= " + evt.getSamplesStartIndex());
 		System.out.println("getSamplesEndIndex= " + evt.getSamplesEndIndex());
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
@@ -343,7 +358,7 @@ public class MeteoRecent extends javax.swing.JPanel implements ExpDataDisplay, E
 					jTextFieldHum.setText(df.format(expDataModel.getValueAt(i, 5).getValueNumber().floatValue()));
 				}
 				if (expDataModel.getValueAt(i, 6) != null) {
-					float cond = expDataModel.getValueAt(i, 6).getValueNumber().floatValue();
+					final float cond = expDataModel.getValueAt(i, 6).getValueNumber().floatValue();
 					if (cond > 0.5) {
 						jTextFieldCond.setText("sim");
 					} else {
@@ -360,19 +375,24 @@ public class MeteoRecent extends javax.swing.JPanel implements ExpDataDisplay, E
 		}
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 		headerAvailable(null);
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 

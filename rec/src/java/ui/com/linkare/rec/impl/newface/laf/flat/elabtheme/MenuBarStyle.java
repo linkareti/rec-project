@@ -12,6 +12,7 @@ import java.util.Map;
 
 import javax.swing.plaf.ColorUIResource;
 
+import com.linkare.rec.impl.newface.laf.flat.theme.AbstractStyle;
 import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 
 /**
@@ -21,7 +22,7 @@ import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 @Style
 public class MenuBarStyle extends DefaultStyle {
 
-	//ENABLED COLORS
+	// ENABLED COLORS
 	private static final Color COLOR_MENU_BG = new Color(0x285357);
 
 	public static final String ID = "MenuBar";
@@ -35,15 +36,16 @@ public class MenuBarStyle extends DefaultStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return MenuBarStyle.ID;
 	}
 
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(BORDER, EMPTY_BORDER);
-		map.put("gradient", Arrays.asList(new Object[] { new Float(1f), new Float(0f), new ColorUIResource(0x0c1011),
-				new ColorUIResource(0x2a3436), new ColorUIResource(0x2a3436) }));
+		map.put(AbstractStyle.BORDER, DefaultStyle.EMPTY_BORDER);
+		map.put("gradient",
+				Arrays.asList(new Object[] { new Float(1f), new Float(0f), new ColorUIResource(0x0c1011),
+						new ColorUIResource(0x2a3436), new ColorUIResource(0x2a3436) }));
 	}
 
 	// -------------------------------------------------------------------------

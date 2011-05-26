@@ -37,21 +37,21 @@ import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommand
 public enum DriverState {
 
 	ERROR {
-		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
+		@Override
+		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
-					Level.INFO,
-					"Processing next state... Actual state: " + this.toString() + ", Actual command: "
-							+ command.toString());
+			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
 			switch (command) {
 			case IDS:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			default:
-				return logAndReturn(this);
+				return DriverState.logAndReturn(this);
 			}
 		}
 
-		public boolean processeMe(SerialPortCommandList command) {
+		@Override
+		public boolean processeMe(final SerialPortCommandList command) {
 			// Log this event
 			switch (command) {
 			case IDS:
@@ -63,7 +63,8 @@ public enum DriverState {
 			}
 		}
 
-		public boolean acceptHardwareStatus(HardwareStatus status) {
+		@Override
+		public boolean acceptHardwareStatus(final HardwareStatus status) {
 			switch (status) {
 			case UNKNOWN:
 				return true;
@@ -76,18 +77,17 @@ public enum DriverState {
 	},
 
 	UNKNOWN {
-		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
+		@Override
+		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
-					Level.INFO,
-					"Processing next state... Actual state: " + this.toString() + ", Actual command: "
-							+ command.toString());
+			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
 			switch (command) {
 			case IDS:
 				if (HardwareStatus.valueOf(cmd.getDataHashMap().get(1)) == HardwareStatus.STOPED) {
-					return logAndReturn(STOPPED);
+					return DriverState.logAndReturn(STOPPED);
 				}
-				return logAndReturn(RESETED);
+				return DriverState.logAndReturn(RESETED);
 			case CFG:
 			case CFGOK:
 			case CUR:
@@ -100,15 +100,16 @@ public enum DriverState {
 			case STPOK:
 			case RST:
 			case RSTOK:
-				return logAndReturn(this);
+				return DriverState.logAndReturn(this);
 			case ERR:
-				return logAndReturn(DriverState.ERROR);
+				return DriverState.logAndReturn(DriverState.ERROR);
 			default:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			}
 		}
 
-		public boolean processeMe(SerialPortCommandList command) {
+		@Override
+		public boolean processeMe(final SerialPortCommandList command) {
 			// Log this event
 			switch (command) {
 			case IDS:
@@ -120,7 +121,8 @@ public enum DriverState {
 			}
 		}
 
-		public boolean acceptHardwareStatus(HardwareStatus status) {
+		@Override
+		public boolean acceptHardwareStatus(final HardwareStatus status) {
 			switch (status) {
 			case UNKNOWN:
 			case RESETED:
@@ -135,26 +137,26 @@ public enum DriverState {
 	},
 
 	STOPING {
-		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
+		@Override
+		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
-					Level.INFO,
-					"Processing next state... Actual state: " + this.toString() + ", Actual command: "
-							+ command.toString());
+			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
 			switch (command) {
 			case IDS:
 			case STP:
-				return logAndReturn(this);
+				return DriverState.logAndReturn(this);
 			case STPOK:
-				return logAndReturn(DriverState.STOPPED);
+				return DriverState.logAndReturn(DriverState.STOPPED);
 			case ERR:
-				return logAndReturn(DriverState.ERROR);
+				return DriverState.logAndReturn(DriverState.ERROR);
 			default:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			}
 		}
 
-		public boolean processeMe(SerialPortCommandList command) {
+		@Override
+		public boolean processeMe(final SerialPortCommandList command) {
 			// Log this event
 			switch (command) {
 			case IDS:
@@ -168,7 +170,8 @@ public enum DriverState {
 			}
 		}
 
-		public boolean acceptHardwareStatus(HardwareStatus status) {
+		@Override
+		public boolean acceptHardwareStatus(final HardwareStatus status) {
 			switch (status) {
 			case STARTED:
 				return true;
@@ -179,25 +182,25 @@ public enum DriverState {
 	},
 
 	STOPWAIT {
-		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
+		@Override
+		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
-					Level.INFO,
-					"Processing next state... Actual state: " + this.toString() + ", Actual command: "
-							+ command.toString());
+			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
 			switch (command) {
 			case IDS:
-				return logAndReturn(this);
+				return DriverState.logAndReturn(this);
 			case STPOK:
-				return logAndReturn(DriverState.STOPPED);
+				return DriverState.logAndReturn(DriverState.STOPPED);
 			case ERR:
-				return logAndReturn(DriverState.ERROR);
+				return DriverState.logAndReturn(DriverState.ERROR);
 			default:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			}
 		}
 
-		public boolean processeMe(SerialPortCommandList command) {
+		@Override
+		public boolean processeMe(final SerialPortCommandList command) {
 			// Log this event
 			switch (command) {
 			case IDS:
@@ -211,7 +214,8 @@ public enum DriverState {
 			}
 		}
 
-		public boolean acceptHardwareStatus(HardwareStatus status) {
+		@Override
+		public boolean acceptHardwareStatus(final HardwareStatus status) {
 			switch (status) {
 			case STARTED:
 				return true;
@@ -222,47 +226,47 @@ public enum DriverState {
 	},
 
 	STOPPED {
-		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
+		@Override
+		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
-					Level.INFO,
-					"Processing next state... Actual state: " + this.toString() + ", Actual command: "
-							+ command.toString());
+			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
 			switch (command) {
 			case IDS:
-				return logAndReturn(this);
+				return DriverState.logAndReturn(this);
 			case CFG:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case CFGOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case CUR:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STR:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STROK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case DAT:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case BIN:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case END:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STP:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STPOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case RST:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case RSTOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case ERR:
-				return logAndReturn(DriverState.ERROR);
+				return DriverState.logAndReturn(DriverState.ERROR);
 			default:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			}
 		}
 
-		public boolean processeMe(SerialPortCommandList command) {
+		@Override
+		public boolean processeMe(final SerialPortCommandList command) {
 			// Log this event
 			switch (command) {
 			case IDS:
@@ -298,7 +302,8 @@ public enum DriverState {
 			}
 		}
 
-		public boolean acceptHardwareStatus(HardwareStatus status) {
+		@Override
+		public boolean acceptHardwareStatus(final HardwareStatus status) {
 			switch (status) {
 			case STOPED:
 				return true;
@@ -309,47 +314,47 @@ public enum DriverState {
 	},
 
 	CONFIGURING {
-		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
+		@Override
+		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
-					Level.INFO,
-					"Processing next state... Actual state: " + this.toString() + ", Actual command: "
-							+ command.toString());
+			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
 			switch (command) {
 			case IDS:
-				return logAndReturn(this);
+				return DriverState.logAndReturn(this);
 			case CFG:
-				return logAndReturn(DriverState.CONFIGUREWAIT);
+				return DriverState.logAndReturn(DriverState.CONFIGUREWAIT);
 			case CFGOK:
-				return logAndReturn(DriverState.CONFIGURED);
+				return DriverState.logAndReturn(DriverState.CONFIGURED);
 			case CUR:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STR:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STROK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case DAT:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case BIN:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case END:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STP:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STPOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case RST:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case RSTOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case ERR:
-				return logAndReturn(DriverState.ERROR);
+				return DriverState.logAndReturn(DriverState.ERROR);
 			default:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			}
 		}
 
-		public boolean processeMe(SerialPortCommandList command) {
+		@Override
+		public boolean processeMe(final SerialPortCommandList command) {
 			// Log this event
 			switch (command) {
 			case IDS:
@@ -385,7 +390,8 @@ public enum DriverState {
 			}
 		}
 
-		public boolean acceptHardwareStatus(HardwareStatus status) {
+		@Override
+		public boolean acceptHardwareStatus(final HardwareStatus status) {
 			switch (status) {
 			case STOPED:
 				return true;
@@ -400,47 +406,47 @@ public enum DriverState {
 	},
 
 	CONFIGUREWAIT {
-		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
+		@Override
+		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
-					Level.INFO,
-					"Processing next state... Actual state: " + this.toString() + ", Actual command: "
-							+ command.toString());
+			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
 			switch (command) {
 			case IDS:
-				return logAndReturn(this);
+				return DriverState.logAndReturn(this);
 			case CFG:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case CFGOK:
-				return logAndReturn(DriverState.CONFIGURED);
+				return DriverState.logAndReturn(DriverState.CONFIGURED);
 			case CUR:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STR:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STROK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case DAT:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case BIN:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case END:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STP:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STPOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case RST:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case RSTOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case ERR:
-				return logAndReturn(DriverState.ERROR);
+				return DriverState.logAndReturn(DriverState.ERROR);
 			default:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			}
 		}
 
-		public boolean processeMe(SerialPortCommandList command) {
+		@Override
+		public boolean processeMe(final SerialPortCommandList command) {
 			// Log this event
 			switch (command) {
 			case IDS:
@@ -476,7 +482,8 @@ public enum DriverState {
 			}
 		}
 
-		public boolean acceptHardwareStatus(HardwareStatus status) {
+		@Override
+		public boolean acceptHardwareStatus(final HardwareStatus status) {
 			switch (status) {
 			case STOPED:
 				return true;
@@ -491,47 +498,47 @@ public enum DriverState {
 	},
 
 	CONFIGURED {
-		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
+		@Override
+		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
-					Level.INFO,
-					"Processing next state... Actual state: " + this.toString() + ", Actual command: "
-							+ command.toString());
+			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
 			switch (command) {
 			case IDS:
-				return logAndReturn(this);
+				return DriverState.logAndReturn(this);
 			case CFG:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case CFGOK:
-				return logAndReturn(DriverState.CONFIGURED);
+				return DriverState.logAndReturn(DriverState.CONFIGURED);
 			case CUR:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STR:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STROK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case DAT:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case BIN:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case END:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STP:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STPOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case RST:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case RSTOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case ERR:
-				return logAndReturn(DriverState.ERROR);
+				return DriverState.logAndReturn(DriverState.ERROR);
 			default:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			}
 		}
 
-		public boolean processeMe(SerialPortCommandList command) {
+		@Override
+		public boolean processeMe(final SerialPortCommandList command) {
 			// Log this event
 			switch (command) {
 			case IDS:
@@ -567,7 +574,8 @@ public enum DriverState {
 			}
 		}
 
-		public boolean acceptHardwareStatus(HardwareStatus status) {
+		@Override
+		public boolean acceptHardwareStatus(final HardwareStatus status) {
 			switch (status) {
 			case CONFIGURED:
 				return true;
@@ -578,47 +586,47 @@ public enum DriverState {
 	},
 
 	STARTING {
-		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
+		@Override
+		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
-					Level.INFO,
-					"Processing next state... Actual state: " + this.toString() + ", Actual command: "
-							+ command.toString());
+			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
 			switch (command) {
 			case IDS:
-				return logAndReturn(this);
+				return DriverState.logAndReturn(this);
 			case CFG:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case CFGOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case CUR:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STR:
-				return logAndReturn(DriverState.STARTWAIT);
+				return DriverState.logAndReturn(DriverState.STARTWAIT);
 			case STROK:
-				return logAndReturn(DriverState.STARTED);
+				return DriverState.logAndReturn(DriverState.STARTED);
 			case DAT:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case BIN:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case END:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STP:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STPOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case RST:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case RSTOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case ERR:
-				return logAndReturn(DriverState.ERROR);
+				return DriverState.logAndReturn(DriverState.ERROR);
 			default:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			}
 		}
 
-		public boolean processeMe(SerialPortCommandList command) {
+		@Override
+		public boolean processeMe(final SerialPortCommandList command) {
 			// Log this event
 			switch (command) {
 			case IDS:
@@ -654,7 +662,8 @@ public enum DriverState {
 			}
 		}
 
-		public boolean acceptHardwareStatus(HardwareStatus status) {
+		@Override
+		public boolean acceptHardwareStatus(final HardwareStatus status) {
 			switch (status) {
 			case CONFIGURED:
 				return true;
@@ -667,47 +676,47 @@ public enum DriverState {
 	},
 
 	STARTWAIT {
-		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
+		@Override
+		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
-					Level.INFO,
-					"Processing next state... Actual state: " + this.toString() + ", Actual command: "
-							+ command.toString());
+			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
 			switch (command) {
 			case IDS:
-				return logAndReturn(this);
+				return DriverState.logAndReturn(this);
 			case CFG:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case CFGOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case CUR:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STR:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STROK:
-				return logAndReturn(DriverState.STARTED);
+				return DriverState.logAndReturn(DriverState.STARTED);
 			case DAT:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case BIN:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case END:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STP:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STPOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case RST:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case RSTOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case ERR:
-				return logAndReturn(DriverState.ERROR);
+				return DriverState.logAndReturn(DriverState.ERROR);
 			default:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			}
 		}
 
-		public boolean processeMe(SerialPortCommandList command) {
+		@Override
+		public boolean processeMe(final SerialPortCommandList command) {
 			// Log this event
 			switch (command) {
 			case IDS:
@@ -743,7 +752,8 @@ public enum DriverState {
 			}
 		}
 
-		public boolean acceptHardwareStatus(HardwareStatus status) {
+		@Override
+		public boolean acceptHardwareStatus(final HardwareStatus status) {
 			switch (status) {
 			case CONFIGURED:
 				return true;
@@ -756,47 +766,47 @@ public enum DriverState {
 	},
 
 	STARTED {
-		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
+		@Override
+		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
-					Level.INFO,
-					"Processing next state... Actual state: " + this.toString() + ", Actual command: "
-							+ command.toString());
+			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
 			switch (command) {
 			case IDS:
-				return logAndReturn(this);
+				return DriverState.logAndReturn(this);
 			case CFG:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case CFGOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case CUR:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STR:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STROK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case DAT:
-				return logAndReturn(DriverState.RECEIVINGDATA);
+				return DriverState.logAndReturn(DriverState.RECEIVINGDATA);
 			case BIN:
-				return logAndReturn(DriverState.RECEIVINGBIN);
+				return DriverState.logAndReturn(DriverState.RECEIVINGBIN);
 			case END:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STP:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STPOK:
-				return logAndReturn(DriverState.STOPPED);
+				return DriverState.logAndReturn(DriverState.STOPPED);
 			case RST:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case RSTOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case ERR:
-				return logAndReturn(DriverState.ERROR);
+				return DriverState.logAndReturn(DriverState.ERROR);
 			default:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			}
 		}
 
-		public boolean processeMe(SerialPortCommandList command) {
+		@Override
+		public boolean processeMe(final SerialPortCommandList command) {
 			// Log this event
 			switch (command) {
 			case IDS:
@@ -832,7 +842,8 @@ public enum DriverState {
 			}
 		}
 
-		public boolean acceptHardwareStatus(HardwareStatus status) {
+		@Override
+		public boolean acceptHardwareStatus(final HardwareStatus status) {
 			switch (status) {
 			case STARTED:
 				return true;
@@ -843,25 +854,25 @@ public enum DriverState {
 	},
 
 	RECEIVINGDATA {
-		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
+		@Override
+		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
-					Level.INFO,
-					"Processing next state... Actual state: " + this.toString() + ", Actual command: "
-							+ command.toString());
+			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
 			switch (command) {
 			case IDS:
-				return logAndReturn(this);
+				return DriverState.logAndReturn(this);
 			case END:
-				return logAndReturn(DriverState.STARTED);
+				return DriverState.logAndReturn(DriverState.STARTED);
 			case ERR:
-				return logAndReturn(DriverState.ERROR);
+				return DriverState.logAndReturn(DriverState.ERROR);
 			default:
-				return logAndReturn(this);
+				return DriverState.logAndReturn(this);
 			}
 		}
 
-		public boolean processeMe(SerialPortCommandList command) {
+		@Override
+		public boolean processeMe(final SerialPortCommandList command) {
 			// Log this event
 			switch (command) {
 			case IDS:
@@ -875,7 +886,8 @@ public enum DriverState {
 			}
 		}
 
-		public boolean acceptHardwareStatus(HardwareStatus status) {
+		@Override
+		public boolean acceptHardwareStatus(final HardwareStatus status) {
 			switch (status) {
 			case STARTED:
 				return true;
@@ -886,22 +898,22 @@ public enum DriverState {
 	},
 
 	RECEIVINGBIN {
+		@Override
 		@Deprecated
-		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
+		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
-					Level.INFO,
-					"Processing next state... Actual state: " + this.toString() + ", Actual command: "
-							+ command.toString());
+			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
 			switch (command) {
 			// should never achieve this point of code ;)
 			default:
-				return logAndReturn(this);
+				return DriverState.logAndReturn(this);
 			}
 		}
 
+		@Override
 		@Deprecated
-		public boolean processeMe(SerialPortCommandList command) {
+		public boolean processeMe(final SerialPortCommandList command) {
 			// Log this event
 			switch (command) {
 			// should never achieve this point of code ;)
@@ -910,8 +922,9 @@ public enum DriverState {
 			}
 		}
 
+		@Override
 		@Deprecated
-		public boolean acceptHardwareStatus(HardwareStatus status) {
+		public boolean acceptHardwareStatus(final HardwareStatus status) {
 			switch (status) {
 			case STARTED:
 				return true;
@@ -922,49 +935,49 @@ public enum DriverState {
 	},
 
 	RECEIVINGCONFIG {
-		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
+		@Override
+		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
-					Level.INFO,
-					"Processing next state... Actual state: " + this.toString() + ", Actual command: "
-							+ command.toString());
+			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
 			switch (command) {
 			case IDS:
-				return logAndReturn(this);
+				return DriverState.logAndReturn(this);
 			case CFG:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case CFGOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 				// Okay, I'm expecting this state, but I need to return to the
 				// state before RECEIVINGCONFIG
 			case CUR:
-				return logAndReturn(lastState);
+				return DriverState.logAndReturn(DriverState.lastState);
 			case STR:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STROK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case DAT:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case BIN:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case END:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STP:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STPOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case RST:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case RSTOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case ERR:
-				return logAndReturn(DriverState.ERROR);
+				return DriverState.logAndReturn(DriverState.ERROR);
 			default:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			}
 		}
 
-		public boolean processeMe(SerialPortCommandList command) {
+		@Override
+		public boolean processeMe(final SerialPortCommandList command) {
 			// Log this event
 			switch (command) {
 			case IDS:
@@ -1000,7 +1013,8 @@ public enum DriverState {
 			}
 		}
 
-		public boolean acceptHardwareStatus(HardwareStatus status) {
+		@Override
+		public boolean acceptHardwareStatus(final HardwareStatus status) {
 			switch (status) {
 			case UNKNOWN:
 				return true;
@@ -1017,47 +1031,47 @@ public enum DriverState {
 	},
 
 	RESETING {
-		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
+		@Override
+		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
-					Level.INFO,
-					"Processing next state... Actual state: " + this.toString() + ", Actual command: "
-							+ command.toString());
+			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
 			switch (command) {
 			case IDS:
-				return logAndReturn(this);
+				return DriverState.logAndReturn(this);
 			case CFG:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case CFGOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case CUR:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STR:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STROK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case DAT:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case BIN:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case END:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STP:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STPOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case RST:
-				return logAndReturn(DriverState.RESETWAIT);
+				return DriverState.logAndReturn(DriverState.RESETWAIT);
 			case RSTOK:
-				return logAndReturn(DriverState.RESETED);
+				return DriverState.logAndReturn(DriverState.RESETED);
 			case ERR:
-				return logAndReturn(DriverState.ERROR);
+				return DriverState.logAndReturn(DriverState.ERROR);
 			default:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			}
 		}
 
-		public boolean processeMe(SerialPortCommandList command) {
+		@Override
+		public boolean processeMe(final SerialPortCommandList command) {
 			// Log this event
 			switch (command) {
 			case IDS:
@@ -1093,7 +1107,8 @@ public enum DriverState {
 			}
 		}
 
-		public boolean acceptHardwareStatus(HardwareStatus status) {
+		@Override
+		public boolean acceptHardwareStatus(final HardwareStatus status) {
 			switch (status) {
 			default:
 				return true;
@@ -1102,47 +1117,47 @@ public enum DriverState {
 	},
 
 	RESETWAIT {
-		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
+		@Override
+		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
-					Level.INFO,
-					"Processing next state... Actual state: " + this.toString() + ", Actual command: "
-							+ command.toString());
+			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
 			switch (command) {
 			case IDS:
-				return logAndReturn(this);
+				return DriverState.logAndReturn(this);
 			case CFG:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case CFGOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case CUR:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STR:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STROK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case DAT:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case BIN:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case END:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STP:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STPOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case RST:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case RSTOK:
-				return logAndReturn(DriverState.RESETED);
+				return DriverState.logAndReturn(DriverState.RESETED);
 			case ERR:
-				return logAndReturn(DriverState.ERROR);
+				return DriverState.logAndReturn(DriverState.ERROR);
 			default:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			}
 		}
 
-		public boolean processeMe(SerialPortCommandList command) {
+		@Override
+		public boolean processeMe(final SerialPortCommandList command) {
 			// Log this event
 			switch (command) {
 			case IDS:
@@ -1178,7 +1193,8 @@ public enum DriverState {
 			}
 		}
 
-		public boolean acceptHardwareStatus(HardwareStatus status) {
+		@Override
+		public boolean acceptHardwareStatus(final HardwareStatus status) {
 			switch (status) {
 			default:
 				return true;
@@ -1187,47 +1203,47 @@ public enum DriverState {
 	},
 
 	RESETED {
-		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
+		@Override
+		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
-					Level.INFO,
-					"Processing next state... Actual state: " + this.toString() + ", Actual command: "
-							+ command.toString());
+			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
 			switch (command) {
 			case IDS:
-				return logAndReturn(this);
+				return DriverState.logAndReturn(this);
 			case CFG:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case CFGOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case CUR:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STR:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STROK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case DAT:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case BIN:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case END:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STP:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case STPOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case RST:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case RSTOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			case ERR:
-				return logAndReturn(DriverState.ERROR);
+				return DriverState.logAndReturn(DriverState.ERROR);
 			default:
-				return logAndReturn(DriverState.UNKNOWN);
+				return DriverState.logAndReturn(DriverState.UNKNOWN);
 			}
 		}
 
-		public boolean processeMe(SerialPortCommandList command) {
+		@Override
+		public boolean processeMe(final SerialPortCommandList command) {
 			// Log this event
 			switch (command) {
 			case IDS:
@@ -1263,7 +1279,8 @@ public enum DriverState {
 			}
 		}
 
-		public boolean acceptHardwareStatus(HardwareStatus status) {
+		@Override
+		public boolean acceptHardwareStatus(final HardwareStatus status) {
 			switch (status) {
 			case STOPED:
 			case RESETED:
@@ -1276,11 +1293,11 @@ public enum DriverState {
 
 	private static DriverState lastState = null;
 
-	public void setLastState(DriverState lastState) {
+	public void setLastState(final DriverState lastState) {
 		DriverState.lastState = lastState;
 	}
 
-	private static DriverState logAndReturn(DriverState driverState) {
+	private static DriverState logAndReturn(final DriverState driverState) {
 		Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.FINE,
 				"Returning next state... New state: " + driverState.toString());
 		return driverState;

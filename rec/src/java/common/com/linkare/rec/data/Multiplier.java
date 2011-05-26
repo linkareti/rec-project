@@ -2,6 +2,11 @@ package com.linkare.rec.data;
 
 public final class Multiplier implements org.omg.CORBA.portable.IDLEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3935432061092281370L;
+
 	//
 	// Internal member value
 	//
@@ -15,7 +20,7 @@ public final class Multiplier implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member fento
 	//
-	public static final Multiplier fento = new Multiplier(_fento);
+	public static final Multiplier fento = new Multiplier(Multiplier._fento);
 
 	//
 	// Enum member pico value
@@ -25,7 +30,7 @@ public final class Multiplier implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member pico
 	//
-	public static final Multiplier pico = new Multiplier(_pico);
+	public static final Multiplier pico = new Multiplier(Multiplier._pico);
 
 	//
 	// Enum member nano value
@@ -35,7 +40,7 @@ public final class Multiplier implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member nano
 	//
-	public static final Multiplier nano = new Multiplier(_nano);
+	public static final Multiplier nano = new Multiplier(Multiplier._nano);
 
 	//
 	// Enum member micro value
@@ -45,7 +50,7 @@ public final class Multiplier implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member micro
 	//
-	public static final Multiplier micro = new Multiplier(_micro);
+	public static final Multiplier micro = new Multiplier(Multiplier._micro);
 
 	//
 	// Enum member mili value
@@ -55,7 +60,7 @@ public final class Multiplier implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member mili
 	//
-	public static final Multiplier mili = new Multiplier(_mili);
+	public static final Multiplier mili = new Multiplier(Multiplier._mili);
 
 	//
 	// Enum member none value
@@ -65,7 +70,7 @@ public final class Multiplier implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member none
 	//
-	public static final Multiplier none = new Multiplier(_none);
+	public static final Multiplier none = new Multiplier(Multiplier._none);
 
 	//
 	// Enum member kilo value
@@ -75,7 +80,7 @@ public final class Multiplier implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member kilo
 	//
-	public static final Multiplier kilo = new Multiplier(_kilo);
+	public static final Multiplier kilo = new Multiplier(Multiplier._kilo);
 
 	//
 	// Enum member mega value
@@ -85,7 +90,7 @@ public final class Multiplier implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member mega
 	//
-	public static final Multiplier mega = new Multiplier(_mega);
+	public static final Multiplier mega = new Multiplier(Multiplier._mega);
 
 	//
 	// Enum member giga value
@@ -95,7 +100,7 @@ public final class Multiplier implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member giga
 	//
-	public static final Multiplier giga = new Multiplier(_giga);
+	public static final Multiplier giga = new Multiplier(Multiplier._giga);
 
 	//
 	// Enum member tera value
@@ -105,7 +110,7 @@ public final class Multiplier implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member tera
 	//
-	public static final Multiplier tera = new Multiplier(_tera);
+	public static final Multiplier tera = new Multiplier(Multiplier._tera);
 
 	/**
 	 * Getter for property value.
@@ -113,7 +118,7 @@ public final class Multiplier implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property value.
 	 */
 	public byte getValue() {
-		return this.value;
+		return value;
 	}
 
 	/**
@@ -121,12 +126,15 @@ public final class Multiplier implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param value New value of property value.
 	 */
-	public void setValue(byte value) {
-		if (value == _fento || value == _pico || value == _nano || value == _micro || value == _mili || value == _none
-				|| value == _kilo || value == _mega || value == _giga || value == _tera)
+	public void setValue(final byte value) {
+		if (value == Multiplier._fento || value == Multiplier._pico || value == Multiplier._nano
+				|| value == Multiplier._micro || value == Multiplier._mili || value == Multiplier._none
+				|| value == Multiplier._kilo || value == Multiplier._mega || value == Multiplier._giga
+				|| value == Multiplier._tera) {
 			this.value = value;
-		else
+		} else {
 			throw new org.omg.CORBA.BAD_OPERATION();
+		}
 
 	}
 
@@ -135,20 +143,22 @@ public final class Multiplier implements org.omg.CORBA.portable.IDLEntity {
 	// @param the enum value for this new member
 	//
 	public Multiplier() {
-		this.setValue(_none);
+		setValue(Multiplier._none);
 	}
 
-	public Multiplier(byte value) {
-		this.setValue(value);
+	public Multiplier(final byte value) {
+		setValue(value);
 	}
 
-	public Multiplier(Multiplier other) {
-		if (other != null)
+	public Multiplier(final Multiplier other) {
+		if (other != null) {
 			setValue(other.getValue());
-		else
+		} else {
 			setValue(Multiplier.none.getValue());
+		}
 	}
 
+	@Override
 	public String toString() {
 		switch (getValue()) {
 		case Multiplier._fento:
@@ -230,9 +240,11 @@ public final class Multiplier implements org.omg.CORBA.portable.IDLEntity {
 		}
 	}
 
-	public boolean equals(Object other) {
-		if (other == null || !(other instanceof Multiplier))
+	@Override
+	public boolean equals(final Object other) {
+		if (other == null || !(other instanceof Multiplier)) {
 			return false;
+		}
 
 		return ((Multiplier) other).getValue() == getValue();
 	}

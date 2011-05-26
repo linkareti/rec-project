@@ -40,9 +40,9 @@ public class Video {
 
 	private final LibVlc libvlc;
 
-	public Video(JVLC jvlc) {
-		this.libvlcInstance = jvlc.getInstance();
-		this.libvlc = jvlc.getLibvlc();
+	public Video(final JVLC jvlc) {
+		libvlcInstance = jvlc.getInstance();
+		libvlc = jvlc.getLibvlc();
 	}
 
 	/*
@@ -50,8 +50,8 @@ public class Video {
 	 * 
 	 * @see org.videolan.jvlc.VideoIntf#destroyVideo()
 	 */
-	public void destroyVideo(MediaPlayer media) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public void destroyVideo(final MediaPlayer media) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc.libvlc_video_destroy(media.getInstance(), exception);
 
 	}
@@ -61,8 +61,8 @@ public class Video {
 	 * 
 	 * @see org.videolan.jvlc.VideoIntf#getFullscreen()
 	 */
-	public boolean getFullscreen(MediaPlayer media) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public boolean getFullscreen(final MediaPlayer media) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		return libvlc.libvlc_get_fullscreen(media.getInstance(), exception) == 1 ? true : false;
 	}
 
@@ -71,8 +71,8 @@ public class Video {
 	 * 
 	 * @see org.videolan.jvlc.VideoIntf#getSnapshot(java.lang.String)
 	 */
-	public void getSnapshot(MediaPlayer media, String filepath, int width, int height) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public void getSnapshot(final MediaPlayer media, final String filepath, final int width, final int height) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc.libvlc_video_take_snapshot(media.getInstance(), filepath, width, height, exception);
 	}
 
@@ -81,8 +81,8 @@ public class Video {
 	 * 
 	 * @see org.videolan.jvlc.VideoIntf#getVideoHeight()
 	 */
-	public int getHeight(MediaPlayer media) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public int getHeight(final MediaPlayer media) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		return libvlc.libvlc_video_get_height(media.getInstance(), exception);
 	}
 
@@ -91,8 +91,8 @@ public class Video {
 	 * 
 	 * @see org.videolan.jvlc.VideoIntf#getVideoWidth()
 	 */
-	public int getWidth(MediaPlayer media) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public int getWidth(final MediaPlayer media) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		// Bruno mal implementado??????????? n seria getWidth
 		return libvlc.libvlc_video_get_height(media.getInstance(), exception);
 	}
@@ -102,9 +102,9 @@ public class Video {
 	 * 
 	 * @see org.videolan.jvlc.VideoIntf#reparentVideo(java.awt.Component)
 	 */
-	public void reparent(MediaPlayer media, java.awt.Canvas canvas) {
-		libvlc_exception_t exception = new libvlc_exception_t();
-		long drawable = com.sun.jna.Native.getComponentID(canvas);
+	public void reparent(final MediaPlayer media, final java.awt.Canvas canvas) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
+		final long drawable = com.sun.jna.Native.getComponentID(canvas);
 		libvlc.libvlc_video_reparent(media.getInstance(), drawable, exception);
 	}
 
@@ -113,8 +113,8 @@ public class Video {
 	 * 
 	 * @see org.videolan.jvlc.VideoIntf#resizeVideo(int, int)
 	 */
-	public void setSize(int width, int height) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public void setSize(final int width, final int height) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc.libvlc_video_set_size(libvlcInstance, width, height, exception);
 	}
 
@@ -123,8 +123,8 @@ public class Video {
 	 * 
 	 * @see org.videolan.jvlc.VideoIntf#setFullscreen(boolean)
 	 */
-	public void setFullscreen(MediaPlayer media, boolean fullscreen) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public void setFullscreen(final MediaPlayer media, final boolean fullscreen) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc.libvlc_set_fullscreen(media.getInstance(), fullscreen ? 1 : 0, exception);
 	}
 
@@ -133,8 +133,8 @@ public class Video {
 	 * 
 	 * @see org.videolan.jvlc.VideoIntf#toggleFullscreen()
 	 */
-	public void toggleFullscreen(MediaPlayer media) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public void toggleFullscreen(final MediaPlayer media) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc.libvlc_toggle_fullscreen(media.getInstance(), exception);
 	}
 
@@ -143,7 +143,7 @@ public class Video {
 	 * 
 	 * @see org.videolan.jvlc.VideoIntf#getSize()
 	 */
-	public Dimension getSize(MediaPlayer media) {
+	public Dimension getSize(final MediaPlayer media) {
 		return new Dimension(getWidth(media), getHeight(media));
 	}
 
@@ -152,7 +152,7 @@ public class Video {
 	 * 
 	 * @see org.videolan.jvlc.VideoIntf#setSize(java.awt.Dimension)
 	 */
-	public void setSize(Dimension d) {
+	public void setSize(final Dimension d) {
 		setSize(d.width, d.height);
 	}
 }

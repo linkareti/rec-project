@@ -16,26 +16,32 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * @author José Pedro Pereira - Linkare TI
  */
 public class AboutDialog extends javax.swing.JDialog {
-	private String ABOUT_REC = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.title.about", "About ReC");
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3067926061738785827L;
+	private final String ABOUT_REC = ReCResourceBundle
+			.findStringOrDefault("ReCBaseUI$rec.bui.title.about", "About ReC");
 
 	/** Creates new form AboutDialog */
 	public AboutDialog() {
 		super();
 
-		ReCBaseUIConfig recBaseUIConfig = ReCBaseUIConfig.sharedInstance();
+		final ReCBaseUIConfig recBaseUIConfig = ReCBaseUIConfig.sharedInstance();
 
 		initComponents();
 
 		URL urlPageAboutPersonalized = null;
 		try {
 			urlPageAboutPersonalized = recBaseUIConfig.getAboutPageURL();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 		}
 
 		try {
-			if (urlPageAboutPersonalized != null)
+			if (urlPageAboutPersonalized != null) {
 				tAbout.setPage(urlPageAboutPersonalized);
-		} catch (Exception e) {
+			}
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -53,7 +59,8 @@ public class AboutDialog extends javax.swing.JDialog {
 		setTitle(ABOUT_REC);
 		setModal(true);
 		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent evt) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent evt) {
 				closeDialog(evt);
 			}
 		});
@@ -63,12 +70,12 @@ public class AboutDialog extends javax.swing.JDialog {
 
 		getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-		java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+		final java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		setBounds((screenSize.width - 410) / 2, (screenSize.height - 380) / 2, 410, 380);
 	}// GEN-END:initComponents
 
 	/** Closes the dialog */
-	private void closeDialog(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
+	private void closeDialog(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
 		setVisible(false);
 		dispose();
 	}// GEN-LAST:event_closeDialog

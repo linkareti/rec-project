@@ -15,7 +15,8 @@ public class StampIdProcessor extends AbstractStampProcessor {
 		super(pt.utl.ist.elab.driver.serial.stamp.AbstractStampDriver.ID_STR);
 	}
 
-	public boolean process(StampCommand command) {
+	@Override
+	public boolean process(final StampCommand command) {
 		command.addCommandData(getCommandIdentifier(), Boolean.TRUE);
 		return true;
 	}

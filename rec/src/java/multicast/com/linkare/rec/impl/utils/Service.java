@@ -18,11 +18,11 @@ import java.io.IOException;
 public class Service {
 	private File controlFile = null;
 
-	protected Service(String controlFileName) {
+	protected Service(final String controlFileName) {
 		if (controlFileName == null) {
 			throw new NullPointerException("Service should have a control file...");
 		}
-		this.controlFile = new File(controlFileName);
+		controlFile = new File(controlFileName);
 	}
 
 	protected final void removeStaleControlFile() {
@@ -46,9 +46,9 @@ public class Service {
 		int port = -1;
 		try {
 			port = readServicePort();
-		} catch (NoControlFileException e) {
+		} catch (final NoControlFileException e) {
 			return false;
-		} catch (CannotReadServicePortException e) {
+		} catch (final CannotReadServicePortException e) {
 			return false;
 		}
 
@@ -69,16 +69,16 @@ public class Service {
 		try {
 			br = new BufferedReader(new FileReader(controlFile));
 			portNumberStr = br.readLine();
-			int portNumber = Integer.parseInt(portNumberStr);
+			final int portNumber = Integer.parseInt(portNumberStr);
 			return portNumber;
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new CannotReadServicePortException("Cannot read service port '" + portNumberStr
 					+ "' from control file @ " + controlFile.getAbsolutePath());
 		} finally {
 			if (br != null) {
 				try {
 					br.close();
-				} catch (IOException e) {
+				} catch (final IOException e) {
 					e.printStackTrace();
 				}
 			}

@@ -19,19 +19,19 @@ public class ExperimentHistoryRenderer {
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ExperimentHistoryRenderer.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ExperimentHistoryRenderer.UI_CLIENT_LOGGER));
 		}
 	}
 
-	public ExperimentHistoryRenderer(ExpHistoryPanelNew panelExp) {
+	public ExperimentHistoryRenderer(final ExpHistoryPanelNew panelExp) {
 		this.panelExp = panelExp;
 	}
 
 	private ExpHistoryPanelNew panelExp = null;
 
-	public JComponent getJComponent(ExpHistoryUINode value) {
+	public JComponent getJComponent(final ExpHistoryUINode value) {
 		return new ExperimentHistoryPanel(panelExp, value);
 	}
 

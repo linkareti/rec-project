@@ -12,8 +12,13 @@ package pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs;
  */
 public class SubBlock extends javax.swing.JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8270936120692672004L;
+
 	/** Creates new form SubBlock */
-	public SubBlock(java.awt.Frame parent, boolean modal, int tipo, boolean connectComp) {
+	public SubBlock(final java.awt.Frame parent, final boolean modal, final int tipo, final boolean connectComp) {
 		super(parent, modal);
 		initComponents();
 		switch (tipo) {
@@ -104,7 +109,8 @@ public class SubBlock extends javax.swing.JDialog {
 		setTitle("Substituir o bloco");
 		setResizable(false);
 		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent evt) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent evt) {
 				closeDialog(evt);
 			}
 		});
@@ -115,13 +121,15 @@ public class SubBlock extends javax.swing.JDialog {
 		jButtonOk.setText("Ok");
 		jButtonOk.setPreferredSize(new java.awt.Dimension(73, 26));
 		jButtonOk.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jButtonOkKeyReleased(evt);
 			}
 		});
 
 		jButtonOk.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonOkMousePressed(evt);
 			}
 		});
@@ -131,7 +139,8 @@ public class SubBlock extends javax.swing.JDialog {
 		jButtonCancel.setForeground(new java.awt.Color(51, 0, 102));
 		jButtonCancel.setText("Cancel");
 		jButtonCancel.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonCancelMousePressed(evt);
 			}
 		});
@@ -144,7 +153,8 @@ public class SubBlock extends javax.swing.JDialog {
 
 		jButton10.setIcon(image10);
 		jButton10.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButton10MousePressed(evt);
 			}
 		});
@@ -156,7 +166,8 @@ public class SubBlock extends javax.swing.JDialog {
 
 		jButton11.setIcon(image11);
 		jButton11.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButton11MousePressed(evt);
 			}
 		});
@@ -168,7 +179,8 @@ public class SubBlock extends javax.swing.JDialog {
 
 		jButton9.setIcon(image9);
 		jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButton9MousePressed(evt);
 			}
 		});
@@ -180,7 +192,8 @@ public class SubBlock extends javax.swing.JDialog {
 
 		jButton8.setIcon(image8);
 		jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButton8MousePressed(evt);
 			}
 		});
@@ -192,7 +205,8 @@ public class SubBlock extends javax.swing.JDialog {
 
 		jButton14.setIcon(image14);
 		jButton14.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButton14MousePressed(evt);
 			}
 		});
@@ -201,7 +215,8 @@ public class SubBlock extends javax.swing.JDialog {
 
 		jButton3.setIcon(image3);
 		jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButton3MousePressed(evt);
 			}
 		});
@@ -210,7 +225,8 @@ public class SubBlock extends javax.swing.JDialog {
 
 		jButton4.setIcon(image4);
 		jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButton4MousePressed(evt);
 			}
 		});
@@ -219,7 +235,8 @@ public class SubBlock extends javax.swing.JDialog {
 
 		jButton6.setIcon(image6);
 		jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButton6MousePressed(evt);
 			}
 		});
@@ -228,7 +245,8 @@ public class SubBlock extends javax.swing.JDialog {
 
 		jButton5.setIcon(image5);
 		jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButton5MousePressed(evt);
 			}
 		});
@@ -237,7 +255,8 @@ public class SubBlock extends javax.swing.JDialog {
 
 		jButton13.setIcon(image13);
 		jButton13.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButton13MousePressed(evt);
 			}
 		});
@@ -249,7 +268,8 @@ public class SubBlock extends javax.swing.JDialog {
 
 		jButton12.setIcon(image12);
 		jButton12.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButton12MousePressed(evt);
 			}
 		});
@@ -261,7 +281,8 @@ public class SubBlock extends javax.swing.JDialog {
 
 		jButton2.setIcon(image2);
 		jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButton2MousePressed(evt);
 			}
 		});
@@ -273,7 +294,8 @@ public class SubBlock extends javax.swing.JDialog {
 
 		jButton1.setIcon(image1);
 		jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButton1MousePressed(evt);
 			}
 		});
@@ -312,12 +334,12 @@ public class SubBlock extends javax.swing.JDialog {
 		pack();
 	}// GEN-END:initComponents
 
-	private void jButtonCancelMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonCancelMousePressed
+	private void jButtonCancelMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonCancelMousePressed
 		setSubTipo(-1);
 		closeDialog(null);
 	}// GEN-LAST:event_jButtonCancelMousePressed
 
-	private void jButtonOkKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jButtonOkKeyReleased
+	private void jButtonOkKeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jButtonOkKeyReleased
 		if (evt.getKeyCode() == 10) {
 			jButtonOkMousePressed(null);
 		} else if (evt.getKeyCode() == 27) {
@@ -325,82 +347,82 @@ public class SubBlock extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_jButtonOkKeyReleased
 
-	private void jButtonOkMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonOkMousePressed
+	private void jButtonOkMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonOkMousePressed
 		closeDialog(null);
 	}// GEN-LAST:event_jButtonOkMousePressed
 
-	private void jButton1MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton1MousePressed
+	private void jButton1MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton1MousePressed
 		setSubTipo(1);
 	}// GEN-LAST:event_jButton1MousePressed
 
-	private void jButton2MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton2MousePressed
+	private void jButton2MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton2MousePressed
 		setSubTipo(2);
 	}// GEN-LAST:event_jButton2MousePressed
 
-	private void jButton12MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton12MousePressed
+	private void jButton12MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton12MousePressed
 		setSubTipo(12);
 	}// GEN-LAST:event_jButton12MousePressed
 
-	private void jButton13MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton13MousePressed
+	private void jButton13MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton13MousePressed
 		setSubTipo(13);
 	}// GEN-LAST:event_jButton13MousePressed
 
-	private void jButton5MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton5MousePressed
+	private void jButton5MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton5MousePressed
 		if (jButton5.isEnabled()) {
 			setSubTipo(5);
 		}
 	}// GEN-LAST:event_jButton5MousePressed
 
-	private void jButton6MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton6MousePressed
+	private void jButton6MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton6MousePressed
 		if (jButton6.isEnabled()) {
 			setSubTipo(6);
 		}
 	}// GEN-LAST:event_jButton6MousePressed
 
-	private void jButton4MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton4MousePressed
+	private void jButton4MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton4MousePressed
 		if (jButton4.isEnabled()) {
 			setSubTipo(4);
 		}
 	}// GEN-LAST:event_jButton4MousePressed
 
-	private void jButton3MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton3MousePressed
+	private void jButton3MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton3MousePressed
 		if (jButton3.isEnabled()) {
 			setSubTipo(3);
 		}
 	}// GEN-LAST:event_jButton3MousePressed
 
-	private void jButton14MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton14MousePressed
+	private void jButton14MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton14MousePressed
 		if (jButton14.isEnabled()) {
 			setSubTipo(14);
 		}
 	}// GEN-LAST:event_jButton14MousePressed
 
-	private void jButton8MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton8MousePressed
+	private void jButton8MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton8MousePressed
 		if (jButton8.isEnabled()) {
 			setSubTipo(8);
 		}
 	}// GEN-LAST:event_jButton8MousePressed
 
-	private void jButton9MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton9MousePressed
+	private void jButton9MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton9MousePressed
 		if (jButton9.isEnabled()) {
 			setSubTipo(9);
 		}
 	}// GEN-LAST:event_jButton9MousePressed
 
-	private void jButton11MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton11MousePressed
+	private void jButton11MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton11MousePressed
 		if (jButton11.isEnabled()) {
 			setSubTipo(11);
 		}
 	}// GEN-LAST:event_jButton11MousePressed
 
-	private void jButton10MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton10MousePressed
+	private void jButton10MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton10MousePressed
 		if (jButton10.isEnabled()) {
 			setSubTipo(10);
 		}
 	}// GEN-LAST:event_jButton10MousePressed
 
 	/** Closes the dialog */
-	private void closeDialog(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
+	private void closeDialog(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
 		if (evt != null) {
 			setSubTipo(-1);
 		}
@@ -420,7 +442,7 @@ public class SubBlock extends javax.swing.JDialog {
 	 * @return Value of property subTipo.
 	 */
 	public int getSubTipo() {
-		return this.subTipo;
+		return subTipo;
 	}
 
 	/**
@@ -428,7 +450,7 @@ public class SubBlock extends javax.swing.JDialog {
 	 * 
 	 * @param subTipo New value of property subTipo.
 	 */
-	public void setSubTipo(int subTipo) {
+	public void setSubTipo(final int subTipo) {
 		this.subTipo = subTipo;
 		if (subTipo == -1) {
 			return;
@@ -500,31 +522,31 @@ public class SubBlock extends javax.swing.JDialog {
 	private javax.swing.JButton jButton4;
 	private javax.swing.JButton jButtonB;
 	// End of variables declaration//GEN-END:variables
-	private javax.swing.ImageIcon image10 = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.ImageIcon image10 = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/customizer/Comps/Icons/atribui.gif"));
-	private javax.swing.ImageIcon image13 = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.ImageIcon image13 = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/customizer/Comps/Icons/compAndBin.gif"));
-	private javax.swing.ImageIcon image12 = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.ImageIcon image12 = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/customizer/Comps/Icons/compAndInt.gif"));
-	private javax.swing.ImageIcon image2 = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.ImageIcon image2 = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/customizer/Comps/Icons/compBin.gif"));
-	private javax.swing.ImageIcon image1 = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.ImageIcon image1 = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/customizer/Comps/Icons/compInt.gif"));
-	private javax.swing.ImageIcon image5 = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.ImageIcon image5 = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/customizer/Comps/Icons/direita.gif"));
-	private javax.swing.ImageIcon image6 = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.ImageIcon image6 = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/customizer/Comps/Icons/esquerda.gif"));
-	private javax.swing.ImageIcon image3 = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.ImageIcon image3 = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/customizer/Comps/Icons/frente.gif"));
-	private javax.swing.ImageIcon image14 = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.ImageIcon image14 = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/customizer/Comps/Icons/ivpwm.gif"));
-	private javax.swing.ImageIcon image11 = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.ImageIcon image11 = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/customizer/Comps/Icons/incdec+.gif"));
-	private javax.swing.ImageIcon image4 = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.ImageIcon image4 = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/customizer/Comps/Icons/marchatras.gif"));
-	private javax.swing.ImageIcon image8 = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.ImageIcon image8 = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/customizer/Comps/Icons/pwm.gif"));
-	private javax.swing.ImageIcon image9 = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.ImageIcon image9 = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/customizer/Comps/Icons/setreset.gif"));
 
 	/** Holds value of property subTipo. */

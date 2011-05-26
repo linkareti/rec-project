@@ -30,14 +30,18 @@ import org.opensourcephysics.display.axes.AxisFactory;
 
 public class MAPanel extends PlottingPanel implements ActionListener, Printable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3902724457660525948L;
 	protected double xmaxImg, xminImg, ymaxImg, yminImg;
 	protected double pcor;
 	protected BufferedImage mapImg;
 	protected int iter, nn;
 	protected float[] mData;
-	protected String statusStr = java.util.ResourceBundle.getBundle(
-			"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-			"rec.exp.displays.statusStr.recImage");
+	protected String statusStr = java.util.ResourceBundle
+			.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+					"rec.exp.displays.statusStr.recImage");
 	protected int dataCounter = 0;
 	protected Graphics g;
 	protected boolean staticImg;
@@ -46,34 +50,34 @@ public class MAPanel extends PlottingPanel implements ActionListener, Printable 
 	protected double xMaxBound, yMaxBound;
 
 	/** Creates a new instance of Animation */
-	public MAPanel(String strX, String strY, String title, double xMinBound, double xMaxBound, double yMinBound,
-			double yMaxBound) {
+	public MAPanel(final String strX, final String strY, final String title, final double xMinBound,
+			final double xMaxBound, final double yMinBound, final double yMaxBound) {
 		super(strX, strY, title);
 
-		this.axes = AxisFactory.createAxesType2(this);
-		this.axes.setXLabel(strX, null);
-		this.axes.setYLabel(strY, null);
-		this.axes.setTitle(title, null);
+		axes = AxisFactory.createAxesType2(this);
+		axes.setXLabel(strX, null);
+		axes.setYLabel(strY, null);
+		axes.setTitle(title, null);
 
 		this.xMaxBound = xMaxBound;
 		this.yMaxBound = yMaxBound;
 
-		this.xmaxPreferred = xmaxImg = xMaxBound;
-		this.xminPreferred = xminImg = xMinBound;
-		this.ymaxPreferred = ymaxImg = yMaxBound;
-		this.yminPreferred = yminImg = yMinBound;
-		this.setAutoscaleX(false);
-		this.setAutoscaleY(false);
+		xmaxPreferred = xmaxImg = xMaxBound;
+		xminPreferred = xminImg = xMinBound;
+		ymaxPreferred = ymaxImg = yMaxBound;
+		yminPreferred = yminImg = yMinBound;
+		setAutoscaleX(false);
+		setAutoscaleY(false);
 	}
 
 	// TESTE
-	public void drawImageNonStatic(float theta, float iMapa) {
+	public void drawImageNonStatic(final float theta, final float iMapa) {
 		g.drawOval((int) Math.round(theta * mapImg.getWidth() / (xmaxPreferred - xminPreferred)), mapImg.getHeight()
 				- (int) Math.round(iMapa * mapImg.getHeight() / (ymaxPreferred - yminPreferred)), pixSize, pixSize);
 	}
 
 	// TESTE
-	public void setData(float theta, float iMapa) {
+	public void setData(final float theta, final float iMapa) {
 		mData[dataCounter++] = theta;
 		mData[dataCounter++] = iMapa;
 	}
@@ -83,7 +87,7 @@ public class MAPanel extends PlottingPanel implements ActionListener, Printable 
 		repaint();
 	}
 
-	protected void makeImage(byte[] b) {
+	protected void makeImage(final byte[] b) {
 		mapImg.getGraphics().drawImage(
 				java.awt.Toolkit.getDefaultToolkit().createImage(
 						new java.awt.image.MemoryImageSource(mapImg.getWidth(), mapImg.getWidth(),
@@ -100,16 +104,19 @@ public class MAPanel extends PlottingPanel implements ActionListener, Printable 
 
 		int z = 0;
 		for (int i = 0; i < nn; i++) {
-			float c1 = (float) Math.abs((mData[z++] + mData[z]) % 1);
-			float c2 = (float) Math.abs((mData[z--] + pcor * Math.sin(mData[z])) % 1);
-			float c3 = (c1 + c2) % 1;
+			final float c1 = Math.abs((mData[z++] + mData[z]) % 1);
+			final float c2 = (float) Math.abs((mData[z--] + pcor * Math.sin(mData[z])) % 1);
+			final float c3 = (c1 + c2) % 1;
 
 			g.setColor(new java.awt.Color(c1, c2, c3));
-			for (int j = 0; j < iter; j++)
-				g.drawOval((int) Math.round((mData[z++] - xminPreferred) * mapImg.getWidth()
-						/ (xmaxPreferred - xminPreferred)), mapImg.getHeight()
-						- (int) Math.round((mData[z++] - yminPreferred) * mapImg.getHeight()
-								/ (ymaxPreferred - yminPreferred)), pixSize, pixSize);
+			for (int j = 0; j < iter; j++) {
+				g.drawOval(
+						(int) Math.round((mData[z++] - xminPreferred) * mapImg.getWidth()
+								/ (xmaxPreferred - xminPreferred)),
+						mapImg.getHeight()
+								- (int) Math.round((mData[z++] - yminPreferred) * mapImg.getHeight()
+										/ (ymaxPreferred - yminPreferred)), pixSize, pixSize);
+			}
 		}
 		xmaxImg = xmaxPreferred;
 		xminImg = xminPreferred;
@@ -117,44 +124,38 @@ public class MAPanel extends PlottingPanel implements ActionListener, Printable 
 		yminImg = yminPreferred;
 	}
 
+	@Override
 	protected void buildPopupmenu() {
 		popupmenu.setEnabled(true);
-		ActionListener listener = this;
+		final ActionListener listener = this;
 		JMenuItem item = new JMenuItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.displays.mapanel.menu.title.1"));
-		item.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.displays.mapanel.menu.tip.1"));
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.displays.mapanel.menu.title.1"));
+		item.setToolTipText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
+				.getString("rec.exp.displays.mapanel.menu.tip.1"));
 		item.addActionListener(listener);
 		popupmenu.add(item);
-		item = new JMenuItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.displays.mapanel.menu.title.2"));
-		item.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.displays.mapanel.menu.tip.2"));
+		item = new JMenuItem(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
+				.getString("rec.exp.displays.mapanel.menu.title.2"));
+		item.setToolTipText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
+				.getString("rec.exp.displays.mapanel.menu.tip.2"));
 		item.addActionListener(listener);
 		popupmenu.add(item);
-		item = new JMenuItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.displays.mapanel.menu.title.3"));
-		item.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.displays.mapanel.menu.tip.3"));
+		item = new JMenuItem(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
+				.getString("rec.exp.displays.mapanel.menu.title.3"));
+		item.setToolTipText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
+				.getString("rec.exp.displays.mapanel.menu.tip.3"));
 		item.addActionListener(listener);
 		popupmenu.add(item);
-		item = new JMenuItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.displays.mapanel.menu.title.4"));
-		item.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.displays.mapanel.menu.tip.4"));
+		item = new JMenuItem(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
+				.getString("rec.exp.displays.mapanel.menu.title.4"));
+		item.setToolTipText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
+				.getString("rec.exp.displays.mapanel.menu.tip.4"));
 		item.addActionListener(listener);
 		popupmenu.add(item);
 	}
 
-	protected void paintEverything(Graphics g) {
+	@Override
+	protected void paintEverything(final Graphics g) {
 		viewRect = null;
 		Container c = getParent();
 		while (c != null) {
@@ -166,16 +167,18 @@ public class MAPanel extends PlottingPanel implements ActionListener, Printable 
 		}
 
 		Dimension interiorDimension = null;
-		if (dimensionSetter != null)
+		if (dimensionSetter != null) {
 			interiorDimension = dimensionSetter.getInterior(this);
-		if (axes instanceof Dimensioned)
+		}
+		if (axes instanceof Dimensioned) {
 			interiorDimension = ((Dimensioned) axes).getInterior(this);
+		}
 		if (interiorDimension != null) {
 			squareAspect = false;
 			leftGutter = rightGutter = Math.max(0, getWidth() - interiorDimension.width) / 2;
 			topGutter = bottomGutter = Math.max(0, getHeight() - interiorDimension.height) / 2;
 		}
-		java.util.ArrayList tempList = getDrawables();
+		final java.util.ArrayList tempList = getDrawables();
 		g.setColor(getBackground());
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.black);
@@ -183,11 +186,11 @@ public class MAPanel extends PlottingPanel implements ActionListener, Printable 
 		axes.draw(this, g);
 
 		if (!statusStr.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-				"rec.exp.displays.statusStr.recImage"))) {
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.displays.statusStr.recImage"))) {
 			if (!staticImg
-					&& (xmaxImg != xmaxPreferred || ymaxImg != ymaxPreferred || xminImg != xminPreferred || yminImg != yminPreferred))
+					&& (xmaxImg != xmaxPreferred || ymaxImg != ymaxPreferred || xminImg != xminPreferred || yminImg != yminPreferred)) {
 				generateImage();
+			}
 
 			g.drawImage(mapImg, leftGutter, topGutter, getWidth() - leftGutter - rightGutter, getHeight()
 					- bottomGutter - topGutter, this);
@@ -196,12 +199,12 @@ public class MAPanel extends PlottingPanel implements ActionListener, Printable 
 		if (!statusStr.equalsIgnoreCase("")) {
 			g.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 26));
 
-			int x = (int) Math.round((double) getWidth() / 2d)
+			final int x = (int) Math.round(getWidth() / 2d)
 					- (int) Math.round((double) g.getFontMetrics().stringWidth(statusStr) / 2);
-			int y = (int) Math.round((double) getHeight() / 2d) - g.getFontMetrics().getHeight() + 5;
+			final int y = (int) Math.round(getHeight() / 2d) - g.getFontMetrics().getHeight() + 5;
 
 			g.setColor(new java.awt.Color(.6f, .12f, .3f));
-			g.drawString(statusStr, x, (int) Math.round((double) getHeight() / 2d));
+			g.drawString(statusStr, x, (int) Math.round(getHeight() / 2d));
 
 			g.setColor(new java.awt.Color(0, 0, 0, .4f));
 			g.fillRect(0, y, getWidth(), g.getFontMetrics().getHeight());
@@ -212,46 +215,46 @@ public class MAPanel extends PlottingPanel implements ActionListener, Printable 
 		}
 	}
 
-	public void actionPerformed(java.awt.event.ActionEvent e) {
+	@Override
+	public void actionPerformed(final java.awt.event.ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
-						.getString("rec.exp.displays.mapanel.menu.title.3"))) {
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.displays.mapanel.menu.title.3"))) {
 			xminPreferred = 0;
 			xmaxPreferred = xMaxBound;
 			yminPreferred = 0;
 			ymaxPreferred = yMaxBound;
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
-						.getString("rec.exp.displays.mapanel.menu.title.1"))) {
-			snapshot(null, java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-					"rec.exp.displays.mapanel.menu.title.1"));
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.displays.mapanel.menu.title.1"))) {
+			snapshot(null, java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
+					.getString("rec.exp.displays.mapanel.menu.title.1"));
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
-						.getString("rec.exp.displays.mapanel.menu.title.2"))) {
-			snapshot(mapImg, java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
-					"rec.exp.displays.mapanel.menu.title.2"));
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.displays.mapanel.menu.title.2"))) {
+			snapshot(mapImg, java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
+					.getString("rec.exp.displays.mapanel.menu.title.2"));
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
-						.getString("rec.exp.displays.mapanel.menu.title.4"))) {
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
+						"rec.exp.displays.mapanel.menu.title.4"))) {
 			updateImage();
 		}
 	}
 
-	public void snapshot(BufferedImage bufImg, String str) {
-		DrawingPanel panel = new DrawingPanel();
-		DrawingFrame frame = new DrawingFrame(panel);
+	public void snapshot(final BufferedImage bufImg, final String str) {
+		final DrawingPanel panel = new DrawingPanel();
+		final DrawingFrame frame = new DrawingFrame(panel);
 		frame.setKeepHidden(false);
 		panel.setSquareAspect(false);
 		Drawable mi;
-		int w = (isVisible()) ? getWidth() : getPreferredSize().width;
-		int h = (isVisible()) ? getHeight() : getPreferredSize().height;
+		final int w = (isVisible()) ? getWidth() : getPreferredSize().width;
+		final int h = (isVisible()) ? getHeight() : getPreferredSize().height;
 		if (bufImg == null) {
-			if (w == 0 || h == 0)
+			if (w == 0 || h == 0) {
 				return;
-			BufferedImage snapimage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+			}
+			final BufferedImage snapimage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 			render(snapimage);
 			mi = new org.opensourcephysics.display.MeasuredImage(snapimage, pixToX(0), pixToX(w), pixToY(h), pixToY(0));
 			panel.setPreferredSize(new Dimension(w, h));
@@ -269,19 +272,21 @@ public class MAPanel extends PlottingPanel implements ActionListener, Printable 
 
 	class MeasuredImage implements Drawable {
 
-		private BufferedImage buf;
+		private final BufferedImage buf;
 
-		public MeasuredImage(BufferedImage buff) {
+		public MeasuredImage(final BufferedImage buff) {
 			buf = buff;
 		}
 
-		public void draw(DrawingPanel panel, Graphics g) {
+		@Override
+		public void draw(final DrawingPanel panel, final Graphics g) {
 			g.drawImage(buf, 0, 0, panel.getWidth(), panel.getHeight(), panel);
 		}
 
 	}
 
-	public void config(boolean staticImg, byte pixSize, int w, int h, int nn, int iter) {
+	public void config(final boolean staticImg, final byte pixSize, final int w, final int h, final int nn,
+			final int iter) {
 		this.staticImg = staticImg;
 		this.pixSize = pixSize;
 		mapImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
@@ -297,7 +302,7 @@ public class MAPanel extends PlottingPanel implements ActionListener, Printable 
 		g = mapImg.getGraphics();
 	}
 
-	public void setStatus(String str) {
+	public void setStatus(final String str) {
 		statusStr = str;
 	}
 

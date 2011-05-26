@@ -16,36 +16,45 @@ import javax.swing.event.MenuListener;
  * "Windows" menu for MDI applications.
  */
 public class WindowMenu extends JMenu {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3632140703550353877L;
 	private MDIDesktopPane desktop;
-	private JMenuItem cascade = new JMenuItem("Cascade");
-	private JMenuItem tile = new JMenuItem("Tile");
+	private final JMenuItem cascade = new JMenuItem("Cascade");
+	private final JMenuItem tile = new JMenuItem("Tile");
 
 	public WindowMenu() {
 		setText("Window");
 		setMnemonic('W');
 	}
 
-	public void setMDIDesktopPane(MDIDesktopPane desktop) {
+	public void setMDIDesktopPane(final MDIDesktopPane desktop) {
 		this.desktop = desktop;
 		cascade.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
+			@Override
+			public void actionPerformed(final ActionEvent ae) {
 				WindowMenu.this.desktop.cascadeFrames();
 			}
 		});
 		tile.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
+			@Override
+			public void actionPerformed(final ActionEvent ae) {
 				WindowMenu.this.desktop.tileFrames();
 			}
 		});
 		addMenuListener(new MenuListener() {
-			public void menuCanceled(MenuEvent e) {
+			@Override
+			public void menuCanceled(final MenuEvent e) {
 			}
 
-			public void menuDeselected(MenuEvent e) {
+			@Override
+			public void menuDeselected(final MenuEvent e) {
 				removeAll();
 			}
 
-			public void menuSelected(MenuEvent e) {
+			@Override
+			public void menuSelected(final MenuEvent e) {
 				buildChildMenus();
 			}
 		});
@@ -59,12 +68,13 @@ public class WindowMenu extends JMenu {
 	private void buildChildMenus() {
 		int i;
 		ChildMenuItem menu;
-		JInternalFrame[] array = desktop.getAllFrames();
+		final JInternalFrame[] array = desktop.getAllFrames();
 
 		add(cascade);
 		add(tile);
-		if (array.length > 0)
+		if (array.length > 0) {
 			addSeparator();
+		}
 		cascade.setEnabled(array.length > 0);
 		tile.setEnabled(array.length > 0);
 
@@ -72,12 +82,13 @@ public class WindowMenu extends JMenu {
 			menu = new ChildMenuItem(array[i]);
 			menu.setState(i == 0);
 			menu.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent ae) {
-					JInternalFrame frame = ((ChildMenuItem) ae.getSource()).getFrame();
+				@Override
+				public void actionPerformed(final ActionEvent ae) {
+					final JInternalFrame frame = ((ChildMenuItem) ae.getSource()).getFrame();
 					frame.moveToFront();
 					try {
 						frame.setSelected(true);
-					} catch (PropertyVetoException e) {
+					} catch (final PropertyVetoException e) {
 						e.printStackTrace();
 					}
 				}
@@ -92,9 +103,13 @@ public class WindowMenu extends JMenu {
 	 * corresponds to a give menu.
 	 */
 	class ChildMenuItem extends JCheckBoxMenuItem {
-		private JInternalFrame frame;
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 2464339688464806598L;
+		private final JInternalFrame frame;
 
-		public ChildMenuItem(JInternalFrame frame) {
+		public ChildMenuItem(final JInternalFrame frame) {
 			super(frame.getTitle());
 			this.frame = frame;
 		}

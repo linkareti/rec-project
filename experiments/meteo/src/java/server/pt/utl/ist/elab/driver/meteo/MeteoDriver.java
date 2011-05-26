@@ -39,7 +39,7 @@ public class MeteoDriver extends BaseDriver {
 
 	protected String flowChartString = null;
 
-	private SerialComm sc = null;
+	private final SerialComm sc = null;
 	private Connection conn = null;
 
 	/** Creates a new instance of RobotDriver */
@@ -54,13 +54,14 @@ public class MeteoDriver extends BaseDriver {
 		return conn;
 	}
 
-	public void config(HardwareAcquisitionConfig config, HardwareInfo info) throws IncorrectStateException,
+	@Override
+	public void config(final HardwareAcquisitionConfig config, final HardwareInfo info) throws IncorrectStateException,
 			WrongConfigurationException {
 		fireIDriverStateListenerDriverConfiguring();
 		info.validateConfig(config);
 		try {
 			configure(config, info);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			throw new WrongConfigurationException(20);
 		}
@@ -70,7 +71,9 @@ public class MeteoDriver extends BaseDriver {
 	private String startDate = "";
 	private String endDate = "";
 
-	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException {
+	@Override
+	public void configure(final HardwareAcquisitionConfig config, final HardwareInfo info)
+			throws WrongConfigurationException {
 		if (dataSource != null) {
 			dataSource = null;
 		}
@@ -80,34 +83,34 @@ public class MeteoDriver extends BaseDriver {
 		this.config = config;
 		this.info = info;
 
-		selected = MathUtils.integerToBinaryBoolean(Integer.parseInt(config.getSelectedHardwareParameter("Sensor")
-				.getParameterValue().trim()), 8);
+		selected = MathUtils.integerToBinaryBoolean(
+				Integer.parseInt(config.getSelectedHardwareParameter("Sensor").getParameterValue().trim()), 8);
 
-		String startHour = config.getSelectedHardwareParameter("StartHour").getParameterValue().trim();
-		String startDay = config.getSelectedHardwareParameter("StartDay").getParameterValue().trim();
-		String startMonth = config.getSelectedHardwareParameter("StartMonth").getParameterValue().trim();
-		String startYear = config.getSelectedHardwareParameter("StartYear").getParameterValue().trim();
-		String endHour = config.getSelectedHardwareParameter("EndHour").getParameterValue().trim();
-		String endDay = config.getSelectedHardwareParameter("EndDay").getParameterValue().trim();
-		String endMonth = config.getSelectedHardwareParameter("EndMonth").getParameterValue().trim();
-		String endYear = config.getSelectedHardwareParameter("EndYear").getParameterValue().trim();
+		final String startHour = config.getSelectedHardwareParameter("StartHour").getParameterValue().trim();
+		final String startDay = config.getSelectedHardwareParameter("StartDay").getParameterValue().trim();
+		final String startMonth = config.getSelectedHardwareParameter("StartMonth").getParameterValue().trim();
+		final String startYear = config.getSelectedHardwareParameter("StartYear").getParameterValue().trim();
+		final String endHour = config.getSelectedHardwareParameter("EndHour").getParameterValue().trim();
+		final String endDay = config.getSelectedHardwareParameter("EndDay").getParameterValue().trim();
+		final String endMonth = config.getSelectedHardwareParameter("EndMonth").getParameterValue().trim();
+		final String endYear = config.getSelectedHardwareParameter("EndYear").getParameterValue().trim();
 
 		startDate = startYear + "-" + startMonth + "-" + startDay + " " + startHour + ":0:0";
 		endDate = endYear + "-" + endMonth + "-" + endDay + " " + endHour + ":59:59";
 
-		String res = config.getSelectedHardwareParameter("Resolution").getParameterValue();
+		final String res = config.getSelectedHardwareParameter("Resolution").getParameterValue();
 		int resolution = 0;
 		if (res.trim().equalsIgnoreCase("Daily")) {
-			resolution = dataSource.DAILY;
+			resolution = MeteoDataProducer.DAILY;
 		} else if (res.trim().equalsIgnoreCase("Hourly")) {
-			resolution = dataSource.HOURLY;
+			resolution = MeteoDataProducer.HOURLY;
 		} else if (res.trim().equalsIgnoreCase("Monthly")) {
-			resolution = dataSource.MONTHLY;
+			resolution = MeteoDataProducer.MONTHLY;
 		} else {
-			resolution = dataSource.YEARLY;
+			resolution = MeteoDataProducer.YEARLY;
 		}
 
-		int nSamples = dataSource.checkNSamples(startDate, endDate, resolution);
+		final int nSamples = dataSource.checkNSamples(startDate, endDate, resolution);
 
 		config.setTotalSamples(nSamples);
 		for (int i = 0; i < config.getChannelsConfig().length; i++) {
@@ -118,19 +121,22 @@ public class MeteoDriver extends BaseDriver {
 		fireIDriverStateListenerDriverConfigured();
 	}
 
-	public void extraValidateConfig(HardwareAcquisitionConfig config, HardwareInfo info)
+	@Override
+	public void extraValidateConfig(final HardwareAcquisitionConfig config, final HardwareInfo info)
 			throws WrongConfigurationException {
 		/** not going to use */
 	}
 
+	@Override
 	public String getDriverUniqueID() {
-		return DRIVER_UNIQUE_ID;
+		return MeteoDriver.DRIVER_UNIQUE_ID;
 	}
 
 	private MeteoDataSource source = null;
 
-	public void init(HardwareInfo info) {
-		SQLConnector sqlc = new SQLConnector(SQLConnector.MYSQL);
+	@Override
+	public void init(final HardwareInfo info) {
+		final SQLConnector sqlc = new SQLConnector(SQLConnector.MYSQL);
 		conn = sqlc.connect("192.168.0.111/meteo", "root", "");
 
 		source = new MeteoDataSource(conn);
@@ -143,10 +149,12 @@ public class MeteoDriver extends BaseDriver {
 		return source.getRainArray();
 	}
 
-	public void reset(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public void reset(final HardwareInfo info) throws IncorrectStateException {
 		/** Reset in not supported in webrobot */
 	}
 
+	@Override
 	public void shutdown() {
 		if (dataSource != null) {
 			dataSource.shutdown();
@@ -154,7 +162,8 @@ public class MeteoDriver extends BaseDriver {
 		super.shutDownNow();
 	}
 
-	public IDataSource start(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public IDataSource start(final HardwareInfo info) throws IncorrectStateException {
 		if (dataSource != null) {
 			fireIDriverStateListenerDriverStarting();
 			// dataSource.setRunning(true);
@@ -166,39 +175,43 @@ public class MeteoDriver extends BaseDriver {
 		}
 	}
 
-	public IDataSource startOutput(HardwareInfo info, IDataSource source) throws IncorrectStateException {
+	@Override
+	public IDataSource startOutput(final HardwareInfo info, final IDataSource source) throws IncorrectStateException {
 		/** Don't know what is startOutput... */
 		return null;
 	}
 
-	public void stop(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public void stop(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverStoping();
 		dataSource.stopProduction();
 		fireIDriverStateListenerDriverStoped();
 	}
 
+	@Override
 	public Object getHardwareInfo() {
 		fireIDriverStateListenerDriverReseting();
 
-		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+				+ "/HardwareInfo.xml";
 		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
-
-		if (prop.indexOf("://") == -1)
+		if (prop.indexOf("://") == -1) {
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
+		}
 
 		java.net.URL url = null;
 		try {
 			url = new java.net.URL(prop);
 			fireIDriverStateListenerDriverReseted();
-		} catch (java.net.MalformedURLException e) {
+		} catch (final java.net.MalformedURLException e) {
 			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger("Meteo"));
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
 				fireIDriverStateListenerDriverReseted();
-			} catch (java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2, Logger
-						.getLogger("WebRobot"));
+			} catch (final java.net.MalformedURLException e2) {
+				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
+						Logger.getLogger("WebRobot"));
 			}
 		}
 

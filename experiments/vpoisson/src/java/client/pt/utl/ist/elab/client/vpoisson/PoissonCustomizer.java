@@ -17,6 +17,7 @@ package pt.utl.ist.elab.client.vpoisson;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import org.opensourcephysics.numerics.ParsedMultiVarFunction;
 import org.opensourcephysics.numerics.ParserException;
@@ -27,6 +28,11 @@ import com.linkare.rec.impl.client.customizer.ICustomizerListener;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -719952193772195688L;
 
 	/** Creates new form MMCustomizer */
 	public PoissonCustomizer() {
@@ -225,10 +231,11 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanel25.setLayout(new java.awt.GridBagLayout());
 
 		jTextFieldFace1.setColumns(24);
-		jTextFieldFace1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		jTextFieldFace1.setHorizontalAlignment(SwingConstants.RIGHT);
 		jTextFieldFace1.setText("1");
 		jTextFieldFace1.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldFace1FocusLost(evt);
 			}
 		});
@@ -246,10 +253,11 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanel26.setLayout(new java.awt.GridBagLayout());
 
 		jTextFieldFace2.setColumns(24);
-		jTextFieldFace2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		jTextFieldFace2.setHorizontalAlignment(SwingConstants.RIGHT);
 		jTextFieldFace2.setText("0");
 		jTextFieldFace2.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldFace2FocusLost(evt);
 			}
 		});
@@ -267,10 +275,11 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanel27.setLayout(new java.awt.GridBagLayout());
 
 		jTextFieldFace3.setColumns(24);
-		jTextFieldFace3.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		jTextFieldFace3.setHorizontalAlignment(SwingConstants.RIGHT);
 		jTextFieldFace3.setText("2");
 		jTextFieldFace3.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldFace3FocusLost(evt);
 			}
 		});
@@ -288,10 +297,11 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanel28.setLayout(new java.awt.GridBagLayout());
 
 		jTextFieldFace4.setColumns(24);
-		jTextFieldFace4.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		jTextFieldFace4.setHorizontalAlignment(SwingConstants.RIGHT);
 		jTextFieldFace4.setText("0");
 		jTextFieldFace4.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldFace4FocusLost(evt);
 			}
 		});
@@ -309,10 +319,11 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanel29.setLayout(new java.awt.GridBagLayout());
 
 		jTextFieldFace5.setColumns(24);
-		jTextFieldFace5.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		jTextFieldFace5.setHorizontalAlignment(SwingConstants.RIGHT);
 		jTextFieldFace5.setText("0");
 		jTextFieldFace5.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldFace5FocusLost(evt);
 			}
 		});
@@ -330,10 +341,11 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanel30.setLayout(new java.awt.GridBagLayout());
 
 		jTextFieldFace6.setColumns(24);
-		jTextFieldFace6.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		jTextFieldFace6.setHorizontalAlignment(SwingConstants.RIGHT);
 		jTextFieldFace6.setText("0");
 		jTextFieldFace6.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldFace6FocusLost(evt);
 			}
 		});
@@ -354,7 +366,8 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 		jTextFieldRho.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 		jTextFieldRho.setText("0");
 		jTextFieldRho.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldRhoFocusLost(evt);
 			}
 		});
@@ -555,7 +568,8 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 		jTextFieldNx.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 		jTextFieldNx.setText("100");
 		jTextFieldNx.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldNxFocusLost(evt);
 			}
 		});
@@ -576,7 +590,8 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 		jTextFieldNy.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 		jTextFieldNy.setText("100");
 		jTextFieldNy.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldNyFocusLost(evt);
 			}
 		});
@@ -597,7 +612,7 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 		jTextFieldNz.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 		jTextFieldNz.setText("100");
 		jTextFieldNz.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldNzFocusLost(evt);
 			}
 		});
@@ -649,7 +664,7 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanel14.setMinimumSize(new java.awt.Dimension(143, 25));
 		btnOK.setText(ReCResourceBundle.findString("poisson$rec.exp.customizer.title.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
 			}
 		});
@@ -658,7 +673,7 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 
 		btnCancel.setText(ReCResourceBundle.findString("poisson$rec.exp.customizer.title.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
 			}
 		});
@@ -673,7 +688,7 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanel15.setMinimumSize(new java.awt.Dimension(136, 25));
 		btnDefaults.setText(ReCResourceBundle.findString("poisson$rec.exp.customizer.title.dfc"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
 			}
 		});
@@ -688,7 +703,7 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 
 	}// GEN-END:initComponents
 
-	private void btnDefaultsActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
+	private void btnDefaultsActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
 	{// GEN-HEADEREND:event_btnDefaultsActionPerformed
 		jTextFieldFace1.setText("1");
 		jTextFieldFace2.setText("1");
@@ -702,12 +717,12 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 		jTextFieldNz.setText("60");
 	}// GEN-LAST:event_btnDefaultsActionPerformed
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
+	private void btnCancelActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
 	{// GEN-HEADEREND:event_btnCancelActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_btnCancelActionPerformed
 
-	private void btnOKActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
+	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
 		// Verificar isto...
 		acqConfig.setTotalSamples(1);
@@ -726,109 +741,110 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_btnOKActionPerformed
 
-	private void jTextFieldRhoFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldRhoFocusLost
+	private void jTextFieldRhoFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldRhoFocusLost
 	{// GEN-HEADEREND:event_jTextFieldRhoFocusLost
-		String s[] = new String[] { "x", "y", "z" };
+		final String s[] = new String[] { "x", "y", "z" };
 		verifyTextParser(jTextFieldRho, s);
 	}// GEN-LAST:event_jTextFieldRhoFocusLost
 
-	private void jTextFieldFace6FocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldFace6FocusLost
+	private void jTextFieldFace6FocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldFace6FocusLost
 	{// GEN-HEADEREND:event_jTextFieldFace6FocusLost
-		String s[] = new String[2];
+		final String s[] = new String[2];
 		s[0] = "y";
 		s[1] = "z";
 		verifyTextParser(jTextFieldFace6, s);
 	}// GEN-LAST:event_jTextFieldFace6FocusLost
 
-	private void jTextFieldFace5FocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldFace5FocusLost
+	private void jTextFieldFace5FocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldFace5FocusLost
 	{// GEN-HEADEREND:event_jTextFieldFace5FocusLost
-		String s[] = new String[2];
+		final String s[] = new String[2];
 		s[0] = "y";
 		s[1] = "z";
 		verifyTextParser(jTextFieldFace5, s);
 	}// GEN-LAST:event_jTextFieldFace5FocusLost
 
-	private void jTextFieldFace4FocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldFace4FocusLost
+	private void jTextFieldFace4FocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldFace4FocusLost
 	{// GEN-HEADEREND:event_jTextFieldFace4FocusLost
-		String s[] = new String[2];
+		final String s[] = new String[2];
 		s[0] = "x";
 		s[1] = "z";
 		verifyTextParser(jTextFieldFace4, s);
 	}// GEN-LAST:event_jTextFieldFace4FocusLost
 
-	private void jTextFieldFace3FocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldFace3FocusLost
+	private void jTextFieldFace3FocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldFace3FocusLost
 	{// GEN-HEADEREND:event_jTextFieldFace3FocusLost
-		String s[] = new String[2];
+		final String s[] = new String[2];
 		s[0] = "x";
 		s[1] = "y";
 		verifyTextParser(jTextFieldFace3, s);
 	}// GEN-LAST:event_jTextFieldFace3FocusLost
 
-	private void jTextFieldFace2FocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldFace2FocusLost
+	private void jTextFieldFace2FocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldFace2FocusLost
 	{// GEN-HEADEREND:event_jTextFieldFace2FocusLost
-		String s[] = new String[2];
+		final String s[] = new String[2];
 		s[0] = "x";
 		s[1] = "z";
 		verifyTextParser(jTextFieldFace2, s);
 	}// GEN-LAST:event_jTextFieldFace2FocusLost
 
-	private void jTextFieldFace1FocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldFace1FocusLost
+	private void jTextFieldFace1FocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldFace1FocusLost
 	{// GEN-HEADEREND:event_jTextFieldFace1FocusLost
-		String s[] = new String[2];
+		final String s[] = new String[2];
 		s[0] = "x";
 		s[1] = "y";
 		verifyTextParser(jTextFieldFace1, s);
 	}// GEN-LAST:event_jTextFieldFace1FocusLost
 
-	private void jTextFieldNzFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldNzFocusLost
+	private void jTextFieldNzFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldNzFocusLost
 	{// GEN-HEADEREND:event_jTextFieldNzFocusLost
 		verifyText(jTextFieldNz, "50");
 		verifyBounds(jTextFieldNz, Integer.parseInt(jTextFieldNz.getText()), 0, 80, 60);
 	}// GEN-LAST:event_jTextFieldNzFocusLost
 
-	private void jTextFieldNyFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldNyFocusLost
+	private void jTextFieldNyFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldNyFocusLost
 	{// GEN-HEADEREND:event_jTextFieldNyFocusLost
 		verifyText(jTextFieldNy, "50");
 		verifyBounds(jTextFieldNy, Integer.parseInt(jTextFieldNy.getText()), 0, 80, 60);
 	}// GEN-LAST:event_jTextFieldNyFocusLost
 
-	private void jTextFieldNxFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldNxFocusLost
+	private void jTextFieldNxFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldNxFocusLost
 	{// GEN-HEADEREND:event_jTextFieldNxFocusLost
 		verifyText(jTextFieldNx, "50");
 		verifyBounds(jTextFieldNx, Integer.parseInt(jTextFieldNx.getText()), 0, 80, 60);
 	}// GEN-LAST:event_jTextFieldNxFocusLost
 
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 		ReCResourceBundle.loadResourceBundle("poisson",
 				"recresource:///pt/utl/ist/elab/client/vpoisson/resources/messages");
-		javax.swing.JFrame dummy = new javax.swing.JFrame();
+		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new PoissonCustomizer());
 		dummy.pack();
 		dummy.show();
 	}
 
-	private void verifyText(JTextField field, String dftValue) {
+	private void verifyText(final JTextField field, final String dftValue) {
 		try {
 			Integer.parseInt(field.getText());
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 			field.setText(dftValue);
 		}
 	}
 
-	private void verifyTextParser(JTextField field, String[] s) {
-		String error = ReCResourceBundle.findStringOrDefault("poisson$rec.exp.customizer.title.errorfunc",
+	private void verifyTextParser(final JTextField field, final String[] s) {
+		final String error = ReCResourceBundle.findStringOrDefault("poisson$rec.exp.customizer.title.errorfunc",
 				"Wrong function!");
-		String title = ReCResourceBundle.findStringOrDefault("poisson$rec.exp.customizer.title.error", "Error");
+		final String title = ReCResourceBundle.findStringOrDefault("poisson$rec.exp.customizer.title.error", "Error");
 		try {
 			new ParsedMultiVarFunction(field.getText(), s);
-		} catch (ParserException pe) {
+		} catch (final ParserException pe) {
 			JOptionPane.showMessageDialog(null, error, title, JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
-	private void verifyBounds(JTextField field, int value, int min, int max, int dft) {
-		if (value < min || value > max)
+	private void verifyBounds(final JTextField field, final int value, final int min, final int max, final int dft) {
+		if (value < min || value > max) {
 			field.setText("" + dft);
+		}
 	}
 
 	// Metodo que verifica a validade do que foi introduzido na text field
@@ -859,7 +875,7 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -871,7 +887,7 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -881,9 +897,10 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -897,9 +914,10 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -916,7 +934,7 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 	}
 
 	// ESTE É PARA ALTERAR
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		// Aqui são fornecidos parametros do ultimo utilizador que fez a exp, e'
 		// bom manter!
 		this.acqConfig = acqConfig;
@@ -934,12 +952,12 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
 	public javax.swing.JComponent getCustomizerComponent() {

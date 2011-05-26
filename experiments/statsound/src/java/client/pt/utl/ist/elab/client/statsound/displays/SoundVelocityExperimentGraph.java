@@ -28,6 +28,11 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  */
 public class SoundVelocityExperimentGraph extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3005704584221537484L;
+
 	private JFreeChart chart;
 
 	private ExpDataModel model;
@@ -45,9 +50,9 @@ public class SoundVelocityExperimentGraph extends javax.swing.JPanel implements 
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(SoundVelocityExperimentGraph.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(SoundVelocityExperimentGraph.UI_CLIENT_LOGGER));
 		}
 	}
 
@@ -65,28 +70,34 @@ public class SoundVelocityExperimentGraph extends javax.swing.JPanel implements 
 		add(scrollPane, java.awt.BorderLayout.CENTER);
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/chart16.gif"));
 	}
 
-	public void setExpDataModel(ExpDataModel model) {
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
 		datasetProxy.setExpDataModel(model);
 		model.addExpDataModelListener(this);
 		this.model = model;
 	}
 
+	@Override
 	public String getName() {
 		return "Chart";
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
@@ -94,13 +105,14 @@ public class SoundVelocityExperimentGraph extends javax.swing.JPanel implements 
 	public void dataModelRunning() {// BIG SILENT NOOP
 	}
 
+	@Override
 	public void dataModelStoped() {// BIG SILENT NOOP
 	}
 
-	public void headerAvailable(HardwareAcquisitionConfig header) {
+	public void headerAvailable(final HardwareAcquisitionConfig header) {
 		// Scale scaleX =
 		// header.getChannelsConfig(datasetProxy.getChannelDisplayX()).getSelectedScale();
-		String chnX = ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.acquisitionTime");
+		final String chnX = ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.acquisitionTime");
 
 		Scale scaleY;
 		String chnY;
@@ -121,23 +133,23 @@ public class SoundVelocityExperimentGraph extends javax.swing.JPanel implements 
 			multiplierY = scaleY.getMultiplier().toString();
 		}
 
-		NumberAxis xAxis = new NumberAxis(chnX);
+		final NumberAxis xAxis = new NumberAxis(chnX);
 		xAxis.setAutoRange(true);
 		xAxis.setAutoRangeStickyZero(false);
 		xAxis.setAutoRangeIncludesZero(false);
 
-		NumberAxis yAxis = new NumberAxis(chnY + " [" + multiplierY + pusY + "]");
+		final NumberAxis yAxis = new NumberAxis(chnY + " [" + multiplierY + pusY + "]");
 		yAxis.setAutoRange(true);
 		yAxis.setAutoRangeStickyZero(false);
 		yAxis.setAutoRangeIncludesZero(false);
 
-		XYToolTipGenerator tooltipGenerator = new StandardXYToolTipGenerator();
+		final XYToolTipGenerator tooltipGenerator = new StandardXYToolTipGenerator();
 
-		XYPlot plot = new XYPlot(datasetProxy, xAxis, yAxis, new StandardXYItemRenderer(
+		final XYPlot plot = new XYPlot(datasetProxy, xAxis, yAxis, new StandardXYItemRenderer(
 				StandardXYItemRenderer.SHAPES_AND_LINES, tooltipGenerator));
 
 		chart = new JFreeChart(getChartName(header), JFreeChart.DEFAULT_TITLE_FONT, plot, true);
-		ChartPanel panel = new ChartPanel(chart);
+		final ChartPanel panel = new ChartPanel(chart);
 
 		panel.setPreferredSize(new java.awt.Dimension(350, 250));
 		panel.setMouseZoomable(true, false);
@@ -157,7 +169,8 @@ public class SoundVelocityExperimentGraph extends javax.swing.JPanel implements 
 		return header.getFamiliarName();
 	}
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 
 	}
 
@@ -175,7 +188,7 @@ public class SoundVelocityExperimentGraph extends javax.swing.JPanel implements 
 	 * 
 	 * @param channelDisplayX New value of property channelDisplayX.
 	 */
-	public void setChannelDisplayX(int channelDisplayX) {
+	public void setChannelDisplayX(final int channelDisplayX) {
 		datasetProxy.setChannelDisplayX(channelDisplayX);
 	}
 
@@ -193,7 +206,7 @@ public class SoundVelocityExperimentGraph extends javax.swing.JPanel implements 
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
-	public void setChannelDisplayY(int channelDisplayY) {
+	public void setChannelDisplayY(final int channelDisplayY) {
 		datasetProxy.setChannelDisplayY(channelDisplayY);
 	}
 
@@ -202,7 +215,7 @@ public class SoundVelocityExperimentGraph extends javax.swing.JPanel implements 
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
-	public int getChannelDisplayAtYArray(int channel) {
+	public int getChannelDisplayAtYArray(final int channel) {
 		return datasetProxy.getChannelDisplayAtYArray(channel);
 	}
 
@@ -220,24 +233,30 @@ public class SoundVelocityExperimentGraph extends javax.swing.JPanel implements 
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
-	public void setChannelDisplayYArray(int[] channelDisplayYArray) {
+	public void setChannelDisplayYArray(final int[] channelDisplayYArray) {
 		datasetProxy.setChannelDisplayYArray(channelDisplayYArray);
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
-		if (model != null)
+		if (model != null) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 }

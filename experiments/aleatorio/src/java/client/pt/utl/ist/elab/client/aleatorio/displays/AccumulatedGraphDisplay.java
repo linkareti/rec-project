@@ -6,6 +6,8 @@
 
 package pt.utl.ist.elab.client.aleatorio.displays;
 
+import javax.swing.SwingConstants;
+
 /**
  * 
  * @author Pedro Carvalho - LEFT - IST
@@ -13,6 +15,11 @@ package pt.utl.ist.elab.client.aleatorio.displays;
 public class AccumulatedGraphDisplay extends javax.swing.JPanel implements
 		com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3869131619333980671L;
 
 	/** Creates new form AccumulatedGraphDisplay */
 	public AccumulatedGraphDisplay() {
@@ -57,7 +64,7 @@ public class AccumulatedGraphDisplay extends javax.swing.JPanel implements
 
 		muText.setBackground(new java.awt.Color(204, 204, 204));
 		muText.setEditable(false);
-		muText.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+		muText.setHorizontalAlignment(SwingConstants.LEFT);
 		muText.setMinimumSize(new java.awt.Dimension(40, 20));
 		muText.setName("muText");
 		accuStatValuesPanel.add(muText);
@@ -69,7 +76,7 @@ public class AccumulatedGraphDisplay extends javax.swing.JPanel implements
 
 		sigmaText.setBackground(new java.awt.Color(204, 204, 204));
 		sigmaText.setEditable(false);
-		sigmaText.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+		sigmaText.setHorizontalAlignment(SwingConstants.LEFT);
 		sigmaText.setMinimumSize(new java.awt.Dimension(40, 20));
 		sigmaText.setName("sigmaText");
 		accuStatValuesPanel.add(sigmaText);
@@ -81,7 +88,7 @@ public class AccumulatedGraphDisplay extends javax.swing.JPanel implements
 
 		y0Text.setBackground(new java.awt.Color(204, 204, 204));
 		y0Text.setEditable(false);
-		y0Text.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+		y0Text.setHorizontalAlignment(SwingConstants.LEFT);
 		y0Text.setMinimumSize(new java.awt.Dimension(40, 20));
 		y0Text.setName("y0Text");
 		accuStatValuesPanel.add(y0Text);
@@ -93,7 +100,7 @@ public class AccumulatedGraphDisplay extends javax.swing.JPanel implements
 
 		ampText.setBackground(new java.awt.Color(204, 204, 204));
 		ampText.setEditable(false);
-		ampText.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+		ampText.setHorizontalAlignment(SwingConstants.LEFT);
 		ampText.setName("ampText");
 		accuStatValuesPanel.add(ampText);
 
@@ -139,59 +146,68 @@ public class AccumulatedGraphDisplay extends javax.swing.JPanel implements
 	// End of variables declaration//GEN-END:variables
 
 	// My Vars
-	private pt.utl.ist.elab.client.aleatorio.utils.StorageSingleton accuGraphDisplaySingleton = pt.utl.ist.elab.client.aleatorio.utils.StorageSingleton
+	private final pt.utl.ist.elab.client.aleatorio.utils.StorageSingleton accuGraphDisplaySingleton = pt.utl.ist.elab.client.aleatorio.utils.StorageSingleton
 			.getSingleton();
 	private int numberOfDice, minValueOfDie, maxValueOfDie, counts = 0;
 	private GraphPanel graphPanel;
-	private ImageStorePanel imageStorePanel = new ImageStorePanel();
+	private final ImageStorePanel imageStorePanel = new ImageStorePanel();
 	private double[] accuX = null, accuY = null;
 	private int[] xx;
 	private double mu, sigma, y0, Amp;
 	private com.linkare.rec.impl.client.experiment.ExpDataModel model;
-	private String name = "Accumulated Statistics";
+	private final String name = "Accumulated Statistics";
 
-	private javax.swing.Icon icon = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.Icon icon = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/aleatorio/resources/AleatorioIcon.gif"));
 
 	/**
-	 *ExpDataDisplay Implementation
+	 * ExpDataDisplay Implementation
 	 */
-	public void setExpDataModel(com.linkare.rec.impl.client.experiment.ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final com.linkare.rec.impl.client.experiment.ExpDataModel model) {
+		if (this.model != null) {
 			model.removeExpDataModelListener(this);
+		}
 
 		this.model = model;
 
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 
 	}// setExpDataModel(ExpDataModel model)
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}// getDisplay()
 
+	@Override
 	public String getName() {
 		return name;
 	}// getName()
 
+	@Override
 	public javax.swing.Icon getIcon() {
 		return icon;
 	}// getIcon()
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}// getMenuBar()
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}// getToolBar()
 
 	/**
-	 *ExpDataModelListener implementation
+	 * ExpDataModelListener implementation
 	 */
 
-	public void newSamples(com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
 			byte[] accuYByteArray = null;
 			if (model.getValueAt(i, model.getChannelIndex("YY")) != null) {
@@ -199,8 +215,8 @@ public class AccumulatedGraphDisplay extends javax.swing.JPanel implements
 						.getData();
 			}// if
 			if (model.getValueAt(i, model.getChannelIndex("XX")) != null) {
-				byte[] xxByteArray = model.getValueAt(i, model.getChannelIndex("XX")).getValue().getByteArrayValue()
-						.getData();
+				final byte[] xxByteArray = model.getValueAt(i, model.getChannelIndex("XX")).getValue()
+						.getByteArrayValue().getData();
 				xx = byteArray2IntArray(xxByteArray); // xx[0] is the first
 				// element of sessionX;
 				// xx[1] is the last.
@@ -210,10 +226,11 @@ public class AccumulatedGraphDisplay extends javax.swing.JPanel implements
 					int[] accuYInt = new int[accuX.length];
 					accuYInt = byteArray2IntArray(accuYByteArray);
 					for (int index = 0; index < accuX.length; index++) {
-						accuX[index] = (double) (xx[0] + index);
+						accuX[index] = (xx[0] + index);
 						accuY[index] = accuYInt[index];
 					}// for_index
-					// these are just initial values for the fitting algorithm
+						// these are just initial values for the fitting
+						// algorithm
 					mu = accuX[accuX.length / 2];
 					sigma = mu / 2.;
 					y0 = 0.;
@@ -241,100 +258,115 @@ public class AccumulatedGraphDisplay extends javax.swing.JPanel implements
 					// }//for_j
 				}// if
 			}// if
-			// TODO FIXME out of bounds -14 again?!?!?
-//			if (model.getValueAt(i, model.getChannelIndex("CenterCount")) != null && xx != null) {
-//				// sessionY[sessionGraphDisplaySingleton.sessGetStoredInt() -
-//				// xx[0]]++;
-//				accuY[model.getValueAt(i, model.getChannelIndex("CenterCount")).getValue().getIntValue() - xx[0]]++;
-//
-//				double lambda = 0.01; // 0.001
-//				double termEpsilon = 0.01;
-//				int maxIter = 100;
-//				double[] params = pt.utl.ist.elab.client.aleatorio.utils.LMFit.solve(accuX, accuY, mu, sigma, y0, Amp,
-//						lambda, termEpsilon, maxIter);
-//				graphPanel.updateGraph(accuX, accuY, params[0], params[1], params[2], params[3]);
-//				imageStorePanel.setImage(graphPanel.getImage());
-//				imageStorePanel.repaint();
-//
-//				counts++;
-//				muText.setText(String.valueOf(params[0]));
-//				sigmaText.setText(String.valueOf(params[1]));
-//				y0Text.setText(String.valueOf(params[2]));
-//				ampText.setText(String.valueOf(params[3]));
-//				chiSqText.setText(String.valueOf(params[4]));
-//				countsText.setText(String.valueOf(counts));
-//			}// if
+				// TODO FIXME out of bounds -14 again?!?!?
+				// if (model.getValueAt(i, model.getChannelIndex("CenterCount"))
+				// != null && xx != null) {
+			// // sessionY[sessionGraphDisplaySingleton.sessGetStoredInt() -
+			// // xx[0]]++;
+			// accuY[model.getValueAt(i,
+			// model.getChannelIndex("CenterCount")).getValue().getIntValue() -
+			// xx[0]]++;
+			//
+			// double lambda = 0.01; // 0.001
+			// double termEpsilon = 0.01;
+			// int maxIter = 100;
+			// double[] params =
+			// pt.utl.ist.elab.client.aleatorio.utils.LMFit.solve(accuX, accuY,
+			// mu, sigma, y0, Amp,
+			// lambda, termEpsilon, maxIter);
+			// graphPanel.updateGraph(accuX, accuY, params[0], params[1],
+			// params[2], params[3]);
+			// imageStorePanel.setImage(graphPanel.getImage());
+			// imageStorePanel.repaint();
+			//
+			// counts++;
+			// muText.setText(String.valueOf(params[0]));
+			// sigmaText.setText(String.valueOf(params[1]));
+			// y0Text.setText(String.valueOf(params[2]));
+			// ampText.setText(String.valueOf(params[3]));
+			// chiSqText.setText(String.valueOf(params[4]));
+			// countsText.setText(String.valueOf(counts));
+			// }// if
 		}// for_i
-		// System.out.println("Processed new samples in Accu!");
+			// System.out.println("Processed new samples in Accu!");
 	}// newSamples(NewExpDataEvent evt)
 
+	@Override
 	public void dataModelStoped() {
 	}// dataModelStoped()
 
 	public void dataModelRunning() {
 	}// dataModelRunning()
 
-	public void headerAvailable(com.linkare.rec.data.config.HardwareAcquisitionConfig header) {
+	public void headerAvailable(final com.linkare.rec.data.config.HardwareAcquisitionConfig header) {
 	}// headerAvailable(HardwareAcquisitionConfig header)
 
 	/**
-	 *Utilities
+	 * Utilities
 	 */
 
-	private int[] byteArray2IntArray(byte[] byteArray) {
-		int[] temp = new int[byteArray.length / 4];
+	private int[] byteArray2IntArray(final byte[] byteArray) {
+		final int[] temp = new int[byteArray.length / 4];
 
 		for (int index = 0; index < temp.length; index++) {
-			temp[index] = (int) (byteArray[4 * index] & 0xff) << 24;
-			temp[index] = (int) (byteArray[4 * index + 1] & 0xff) << 16;
-			temp[index] += (int) (byteArray[4 * index + 2] & 0xff) << 8;
-			temp[index] += (int) (byteArray[4 * index + 3] & 0xff);
+			temp[index] = (byteArray[4 * index] & 0xff) << 24;
+			temp[index] = (byteArray[4 * index + 1] & 0xff) << 16;
+			temp[index] += (byteArray[4 * index + 2] & 0xff) << 8;
+			temp[index] += (byteArray[4 * index + 3] & 0xff);
 		}
 		return temp;
 	}// byteArray2IntArray(byte[] byteArray)
 
-	private int getIndexOfMax(double[] array) {
+	private int getIndexOfMax(final double[] array) {
 		double value = Double.MIN_VALUE;
 		int valueIndex = -1;
-		for (int index = 0; index < array.length; index++)
+		for (int index = 0; index < array.length; index++) {
 			if (array[index] > value) {
 				valueIndex = index;
 				value = array[index];
 			}
+		}
 		return valueIndex;
 	}// getIndexOfMax(double[] array)
 
-	private double getMax(double[] array) {
-		if (array == null)
+	private double getMax(final double[] array) {
+		if (array == null) {
 			return 0.;
+		}
 
 		double value = array[0];
-		for (int index = 1; index < array.length; index++)
+		for (int index = 1; index < array.length; index++) {
 			value = (array[index] > value) ? array[index] : value;
+		}
 
 		return value;
 	}// getMax(double[] array)
 
-	private int getCounts(double[] array) {
+	private int getCounts(final double[] array) {
 		counts = 0;
-		for (int i = 0; i < array.length; i++) {
-			counts += (int) array[i];
+		for (final double element : array) {
+			counts += (int) element;
 		}// for_i
 		return counts;
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 

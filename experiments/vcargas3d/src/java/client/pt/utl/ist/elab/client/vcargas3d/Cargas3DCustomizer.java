@@ -6,6 +6,8 @@
 
 package pt.utl.ist.elab.client.vcargas3d;
 
+import javax.swing.JFrame;
+
 import org.opensourcephysics.displayejs.DrawingPanel3D;
 import org.opensourcephysics.displayejs.InteractionEvent;
 import org.opensourcephysics.displayejs.InteractionListener;
@@ -24,7 +26,11 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		com.linkare.rec.impl.client.customizer.ICustomizer {
 
-	private PainelCargas painelCargas;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2779758007139256391L;
+	private final PainelCargas painelCargas;
 
 	public Cargas3DCustomizer() {
 		Sistema.novaCarga(5f, 8f, 5f, -25f);
@@ -43,7 +49,8 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -55,7 +62,8 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -65,9 +73,10 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -81,9 +90,10 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -95,12 +105,14 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
 		return acqConfig;
 	}
 
 	// ESTE � PARA ALTERAR
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		// Aqui s�o fornecidos parametros do ultimo utilizador que fez a exp, e'
 		// bom manter!
 		this.acqConfig = acqConfig;
@@ -112,29 +124,34 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
+	@Override
 	public javax.swing.JComponent getCustomizerComponent() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/vcargas3d/resources/cargas3d_iconified.png"));
 	}
 
 	// ESTE � PARA ALTERAR
+	@Override
 	public String getCustomizerTitle() {
 		return ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.12",
 				"3D Charges Experiment Configuration Utility");
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
@@ -247,7 +264,8 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		textX.setMinimumSize(new java.awt.Dimension(35, 20));
 		textX.setPreferredSize(new java.awt.Dimension(40, 20));
 		textX.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				textXFocusLost(evt);
 			}
 		});
@@ -258,7 +276,8 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		textY.setMinimumSize(new java.awt.Dimension(40, 20));
 		textY.setPreferredSize(new java.awt.Dimension(40, 20));
 		textY.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				textYFocusLost(evt);
 			}
 		});
@@ -272,7 +291,8 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		textZ.setMinimumSize(new java.awt.Dimension(35, 20));
 		textZ.setPreferredSize(new java.awt.Dimension(40, 20));
 		textZ.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				textZFocusLost(evt);
 			}
 		});
@@ -286,7 +306,8 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		textQ.setMinimumSize(new java.awt.Dimension(35, 20));
 		textQ.setPreferredSize(new java.awt.Dimension(40, 20));
 		textQ.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				textQFocusLost(evt);
 			}
 		});
@@ -352,8 +373,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
 		painelComum.add(labelInfoX, gridBagConstraints);
 
-		labelInfoY.setText(ReCResourceBundle
-				.findStringOrDefault("cargas3d$rec.exp.customizer.title.7", "between"));
+		labelInfoY.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.7", "between"));
 		labelInfoY.setMaximumSize(new java.awt.Dimension(100, 15));
 		labelInfoY.setMinimumSize(new java.awt.Dimension(100, 15));
 		labelInfoY.setPreferredSize(new java.awt.Dimension(100, 15));
@@ -365,8 +385,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		painelComum.add(labelInfoY, gridBagConstraints);
 
 		labelInfoZ.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		labelInfoZ.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.8",
-				"10 and -10"));
+		labelInfoZ.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.8", "10 and -10"));
 		labelInfoZ.setMaximumSize(new java.awt.Dimension(100, 15));
 		labelInfoZ.setMinimumSize(new java.awt.Dimension(100, 15));
 		labelInfoZ.setPreferredSize(new java.awt.Dimension(100, 15));
@@ -391,10 +410,10 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 
 		painelAdd.add(painelComum);
 
-		addButton.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.2",
-				"Add Charge"));
+		addButton.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.2", "Add Charge"));
 		addButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				addButtonActionPerformed(evt);
 			}
 		});
@@ -459,7 +478,8 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		textX1.setMinimumSize(new java.awt.Dimension(35, 20));
 		textX1.setPreferredSize(new java.awt.Dimension(40, 20));
 		textX1.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				textX1FocusLost(evt);
 			}
 		});
@@ -470,7 +490,8 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		textY1.setMinimumSize(new java.awt.Dimension(40, 20));
 		textY1.setPreferredSize(new java.awt.Dimension(40, 20));
 		textY1.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				textY1FocusLost(evt);
 			}
 		});
@@ -484,7 +505,8 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		textZ1.setMinimumSize(new java.awt.Dimension(35, 20));
 		textZ1.setPreferredSize(new java.awt.Dimension(40, 20));
 		textZ1.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				textZ1FocusLost(evt);
 			}
 		});
@@ -498,7 +520,8 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		textQ1.setMinimumSize(new java.awt.Dimension(35, 20));
 		textQ1.setPreferredSize(new java.awt.Dimension(40, 20));
 		textQ1.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				textQ1FocusLost(evt);
 			}
 		});
@@ -564,8 +587,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
 		painelComum1.add(labelInfoX1, gridBagConstraints);
 
-		labelInfoY1.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.7",
-				"between"));
+		labelInfoY1.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.7", "between"));
 		labelInfoY1.setMaximumSize(new java.awt.Dimension(100, 15));
 		labelInfoY1.setMinimumSize(new java.awt.Dimension(100, 15));
 		labelInfoY1.setPreferredSize(new java.awt.Dimension(100, 15));
@@ -577,8 +599,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		painelComum1.add(labelInfoY1, gridBagConstraints);
 
 		labelInfoZ1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		labelInfoZ1.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.8",
-				"10 and -10"));
+		labelInfoZ1.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.8", "10 and -10"));
 		labelInfoZ1.setMaximumSize(new java.awt.Dimension(100, 15));
 		labelInfoZ1.setMinimumSize(new java.awt.Dimension(100, 15));
 		labelInfoZ1.setPreferredSize(new java.awt.Dimension(100, 15));
@@ -605,17 +626,19 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 
 		editOK.setText("OK");
 		editOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				editOKActionPerformed(evt);
 			}
 		});
 
 		painelEdit.add(editOK);
 
-		editApagar.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.5",
-				"remove charge"));
+		editApagar.setText(ReCResourceBundle
+				.findStringOrDefault("cargas3d$rec.exp.customizer.title.5", "remove charge"));
 		editApagar.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				editApagarActionPerformed(evt);
 			}
 		});
@@ -627,7 +650,8 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		painelTabs.setMinimumSize(new java.awt.Dimension(400, 450));
 		painelTabs.setPreferredSize(new java.awt.Dimension(400, 450));
 		painelTabs.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				painelTabsStateChanged(evt);
 			}
 		});
@@ -644,8 +668,8 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		painelAddEdit.setLayout(new java.awt.BorderLayout());
 
 		painelAddEdit.add(painelAdd);
-		painelTabs.addTab(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.2",
-				"Add Charge"), painelAddEdit);
+		painelTabs.addTab(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.2", "Add Charge"),
+				painelAddEdit);
 
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -661,20 +685,22 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		buttonOK.setMinimumSize(new java.awt.Dimension(130, 23));
 		buttonOK.setPreferredSize(new java.awt.Dimension(130, 23));
 		buttonOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				buttonOKActionPerformed(evt);
 			}
 		});
 
 		panelDefault.add(buttonOK, new java.awt.GridBagConstraints());
 
-		buttonCancel.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.cancel",
-				"Cancel"));
+		buttonCancel.setText(ReCResourceBundle
+				.findStringOrDefault("cargas3d$rec.exp.customizer.title.cancel", "Cancel"));
 		buttonCancel.setMaximumSize(new java.awt.Dimension(130, 23));
 		buttonCancel.setMinimumSize(new java.awt.Dimension(130, 23));
 		buttonCancel.setPreferredSize(new java.awt.Dimension(130, 23));
 		buttonCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				buttonCancelActionPerformed(evt);
 			}
 		});
@@ -687,7 +713,8 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		buttonDefault.setMinimumSize(new java.awt.Dimension(140, 23));
 		buttonDefault.setPreferredSize(new java.awt.Dimension(140, 23));
 		buttonDefault.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				buttonDefaultActionPerformed(evt);
 			}
 		});
@@ -703,7 +730,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 
 	}// GEN-END:initComponents
 
-	private void buttonOKActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_buttonOKActionPerformed
+	private void buttonOKActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_buttonOKActionPerformed
 		acqConfig.setTotalSamples(1);
 
 		// acqConfig.setSelectedFrequency(
@@ -714,7 +741,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_buttonOKActionPerformed
 
-	private void buttonDefaultActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_buttonDefaultActionPerformed
+	private void buttonDefaultActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_buttonDefaultActionPerformed
 		Sistema.sistema.clear();
 		Sistema.novaCarga(5f, 8f, 5f, -25f);
 		Sistema.novaCarga(5f, 2f, 5f, 25f);
@@ -722,44 +749,44 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 
 	}// GEN-LAST:event_buttonDefaultActionPerformed
 
-	private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_buttonCancelActionPerformed
+	private void buttonCancelActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_buttonCancelActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_buttonCancelActionPerformed
 
-	private void editApagarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_editApagarActionPerformed
+	private void editApagarActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_editApagarActionPerformed
 		Sistema.apagarCarga(Sistema.sistema.indexOf(painelCargas.interaction.carga));
 		painelTabs.setSelectedIndex(0);
 		painelCargas.refresh();
 	}// GEN-LAST:event_editApagarActionPerformed
 
-	private void editOKActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_editOKActionPerformed
+	private void editOKActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_editOKActionPerformed
 
 		Sistema.editarCarga(pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textX1, 0f, 10f),
 				pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textY1, 0f, 10f),
 				pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textZ1, 0f, 10f),
-				pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textQ1, -25f, 25f), Sistema.sistema
-						.indexOf(painelCargas.interaction.carga));
+				pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textQ1, -25f, 25f),
+				Sistema.sistema.indexOf(painelCargas.interaction.carga));
 		painelTabs.setSelectedIndex(0);
 		painelCargas.refresh();
 	}// GEN-LAST:event_editOKActionPerformed
 
-	private void textQ1FocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textQ1FocusLost
+	private void textQ1FocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textQ1FocusLost
 		pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textQ1, -25f, 25f);
 	}// GEN-LAST:event_textQ1FocusLost
 
-	private void textZ1FocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textZ1FocusLost
+	private void textZ1FocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textZ1FocusLost
 		pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textZ1, 0f, 10f);
 	}// GEN-LAST:event_textZ1FocusLost
 
-	private void textY1FocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textY1FocusLost
+	private void textY1FocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textY1FocusLost
 		pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textY1, 0f, 10f);
 	}// GEN-LAST:event_textY1FocusLost
 
-	private void textX1FocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textX1FocusLost
+	private void textX1FocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textX1FocusLost
 		pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textX1, 0f, 10f);
 	}// GEN-LAST:event_textX1FocusLost
 
-	private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_addButtonActionPerformed
+	private void addButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_addButtonActionPerformed
 		Sistema.novaCarga(pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textX, 0f, 10f),
 				pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textY, 0f, 10f),
 				pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textZ, 0f, 10f),
@@ -768,29 +795,29 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		painelCargas.refresh();
 	}// GEN-LAST:event_addButtonActionPerformed
 
-	private void textQFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textQFocusLost
+	private void textQFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textQFocusLost
 		pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textQ, -25f, 25f);
 	}// GEN-LAST:event_textQFocusLost
 
-	private void textZFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textZFocusLost
+	private void textZFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textZFocusLost
 		pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textZ, 0f, 10f);
 	}// GEN-LAST:event_textZFocusLost
 
-	private void textYFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textYFocusLost
+	private void textYFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textYFocusLost
 		pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textY, 0f, 10f);
 	}// GEN-LAST:event_textYFocusLost
 
-	private void textXFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textXFocusLost
+	private void textXFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textXFocusLost
 		pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textX, 0f, 10f);
 	}// GEN-LAST:event_textXFocusLost
 
-	private void painelTabsStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_painelTabsStateChanged
+	private void painelTabsStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_painelTabsStateChanged
 
 		if (painelTabs.getSelectedIndex() == 0 && painelTabs.getTabCount() == 2) {
 			painelTabs.remove(1);
 			painelTabs.add(painelAdd, 1);
-			painelTabs.setTitleAt(1, ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.2",
-					"Add Charge"));
+			painelTabs.setTitleAt(1,
+					ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.2", "Add Charge"));
 		}
 	}// GEN-LAST:event_painelTabsStateChanged
 
@@ -803,7 +830,8 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 					.getSource());
 		}
 
-		public void interactionPerformed(InteractionEvent _event) {
+		@Override
+		public void interactionPerformed(final InteractionEvent _event) {
 
 			if (_event.getID() == InteractionEvent.MOUSE_OVER) {
 				cor = (java.awt.Color) (getCarga().getStyle().getFillPattern());
@@ -819,8 +847,8 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 				painelTabs.remove(1);
 				painelTabs.add(painelEdit, 1);
 				painelTabs.setSelectedIndex(1);
-				painelTabs.setTitleAt(1, ReCResourceBundle.findStringOrDefault(
-						"cargas3d$rec.exp.customizer.title.3", "Edit Charge"));
+				painelTabs.setTitleAt(1,
+						ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.3", "Edit Charge"));
 				setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 				carga.getStyle().setFillPattern(cor);
 
@@ -830,14 +858,18 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 						2)));
 				textZ1.setText(Double.toString(pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondar(carga.getZ(),
 						2)));
-				textQ1.setText(Float.toString(pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondar(carga
-						.getCharge(), 2)));
+				textQ1.setText(Float.toString(pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondar(
+						carga.getCharge(), 2)));
 			}
 		}
 	}
 
 	class PainelCargas extends DrawingPanel3D {
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 6354099059606762623L;
 		java.util.ArrayList sistema;
 		Interaction interaction = new Interaction();
 
@@ -848,8 +880,8 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 			setPreferredMinMax(0, 10, 0, 10, 0, 10);
 			setBackground(java.awt.Color.white);
 			setUseColorDepth(false);
-			setDecorationType(DECORATION_AXES);
-			setDisplayMode(DISPLAY_NO_PERSPECTIVE);
+			setDecorationType(DrawingPanel3D.DECORATION_AXES);
+			setDisplayMode(DrawingPanel3D.DISPLAY_NO_PERSPECTIVE);
 			setShowCoordinates(false);
 			showAllTrackers(false);
 			setAlpha(Math.PI / 7);
@@ -863,7 +895,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 			clear();
 			sistema = Sistema.sistema;
 			for (int i = 0; i < sistema.size(); i++) {
-				InteractiveCharge carga = (InteractiveCharge) sistema.get(i);
+				final InteractiveCharge carga = (InteractiveCharge) sistema.get(i);
 				carga.setEnabled(true);
 				addDrawable(carga);
 				carga.addListener(interaction);
@@ -872,10 +904,10 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		}
 	}
 
-	public static void main(String args[]) {
-		javax.swing.JFrame frame = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame frame = new javax.swing.JFrame();
 		frame.getContentPane().add(new Cargas3DCustomizer());
-		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.show();
 	}

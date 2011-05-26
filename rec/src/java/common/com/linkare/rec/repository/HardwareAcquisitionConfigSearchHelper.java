@@ -12,29 +12,29 @@ import com.linkare.rec.data.config.VTHardwareParameterConfigListHelper;
 abstract public class HardwareAcquisitionConfigSearchHelper {
 	private static String _id = "IDL:com/linkare/rec/repository/HardwareAcquisitionConfigSearch:1.0";
 
-	public static void insert(Any a, HardwareAcquisitionConfigSearch that) {
-		OutputStream out = a.create_output_stream();
-		a.type(type());
-		write(out, that);
-		a.read_value(out.create_input_stream(), type());
+	public static void insert(final Any a, final HardwareAcquisitionConfigSearch that) {
+		final OutputStream out = a.create_output_stream();
+		a.type(HardwareAcquisitionConfigSearchHelper.type());
+		HardwareAcquisitionConfigSearchHelper.write(out, that);
+		a.read_value(out.create_input_stream(), HardwareAcquisitionConfigSearchHelper.type());
 	}
 
-	public static HardwareAcquisitionConfigSearch extract(Any a) {
-		return read(a.create_input_stream());
+	public static HardwareAcquisitionConfigSearch extract(final Any a) {
+		return HardwareAcquisitionConfigSearchHelper.read(a.create_input_stream());
 	}
 
 	private static TypeCode __typeCode = null;
 	private static boolean __active = false;
 
 	public static synchronized TypeCode type() {
-		if (__typeCode == null) {
+		if (HardwareAcquisitionConfigSearchHelper.__typeCode == null) {
 			synchronized (TypeCode.class) {
-				if (__typeCode == null) {
-					if (__active) {
-						return ORB.init().create_recursive_tc(_id);
+				if (HardwareAcquisitionConfigSearchHelper.__typeCode == null) {
+					if (HardwareAcquisitionConfigSearchHelper.__active) {
+						return ORB.init().create_recursive_tc(HardwareAcquisitionConfigSearchHelper._id);
 					}
-					__active = true;
-					StructMember[] _members0 = new StructMember[5];
+					HardwareAcquisitionConfigSearchHelper.__active = true;
+					final StructMember[] _members0 = new StructMember[5];
 					TypeCode _tcOf_members0 = null;
 					_tcOf_members0 = VTDateTimeSearchHelper.type();
 					_members0[0] = new StructMember("startTimeSearch", _tcOf_members0, null);
@@ -46,21 +46,21 @@ abstract public class HardwareAcquisitionConfigSearchHelper {
 					_members0[3] = new StructMember("selected_hardware_parameters", _tcOf_members0, null);
 					_tcOf_members0 = VTSamplesNumSearchHelper.type();
 					_members0[4] = new StructMember("samplesNumSearch", _tcOf_members0, null);
-					__typeCode = ORB.init().create_struct_tc(HardwareAcquisitionConfigSearchHelper.id(),
-							"HardwareAcquisitionConfigSearch", _members0);
-					__active = false;
+					HardwareAcquisitionConfigSearchHelper.__typeCode = ORB.init().create_struct_tc(
+							HardwareAcquisitionConfigSearchHelper.id(), "HardwareAcquisitionConfigSearch", _members0);
+					HardwareAcquisitionConfigSearchHelper.__active = false;
 				}
 			}
 		}
-		return __typeCode;
+		return HardwareAcquisitionConfigSearchHelper.__typeCode;
 	}
 
 	public static String id() {
-		return _id;
+		return HardwareAcquisitionConfigSearchHelper._id;
 	}
 
-	public static HardwareAcquisitionConfigSearch read(InputStream istream) {
-		HardwareAcquisitionConfigSearch value = new HardwareAcquisitionConfigSearch();
+	public static HardwareAcquisitionConfigSearch read(final InputStream istream) {
+		final HardwareAcquisitionConfigSearch value = new HardwareAcquisitionConfigSearch();
 		value.setStartTimeSearch(VTDateTimeSearchHelper.read(istream));
 		value.setFrequencySearch(VTFrequencySearchHelper.read(istream));
 		value.setChannelsConfigSearch(VTChannelAcquisitionConfigSearchListHelper.read(istream));
@@ -69,7 +69,7 @@ abstract public class HardwareAcquisitionConfigSearchHelper {
 		return value;
 	}
 
-	public static void write(OutputStream ostream, HardwareAcquisitionConfigSearch value) {
+	public static void write(final OutputStream ostream, final HardwareAcquisitionConfigSearch value) {
 		VTDateTimeSearchHelper.write(ostream, value.getStartTimeSearch());
 		VTFrequencySearchHelper.write(ostream, value.getFrequencySearch());
 		VTChannelAcquisitionConfigSearchListHelper.write(ostream, value.getChannelsConfigSearch());

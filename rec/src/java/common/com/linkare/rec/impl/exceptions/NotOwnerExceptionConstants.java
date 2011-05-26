@@ -12,28 +12,28 @@ public class NotOwnerExceptionConstants {
 			.getBundle("com/linkare/rec/impl/exceptions/resources/NotOwnerException");
 
 	public static final int HARDWARE_NOT_LOCKABLE_TO_ANYONE = 0;
-	public static final String HARDWARE_NOT_LOCKABLE_TO_ANYONE_MSG = notOwnerExceptionRB
+	public static final String HARDWARE_NOT_LOCKABLE_TO_ANYONE_MSG = NotOwnerExceptionConstants.notOwnerExceptionRB
 			.getString("multicasthardware_lock_unavailable_all_dataclients");
 	public static final int HARDWARE_IN_LOCK_PROCESS_TO_ANOTHER = 1;
-	public static final String HARDWARE_IN_LOCK_PROCESS_TO_ANOTHER_MSG = notOwnerExceptionRB
+	public static final String HARDWARE_IN_LOCK_PROCESS_TO_ANOTHER_MSG = NotOwnerExceptionConstants.notOwnerExceptionRB
 			.getString("multicasthardware_locking_another_dataclient");
 	public static final int HARDWARE_LOCKED_TO_ANOTHER = 2;
-	public static final String HARDWARE_LOCKED_TO_ANOTHER_MSG = notOwnerExceptionRB
+	public static final String HARDWARE_LOCKED_TO_ANOTHER_MSG = NotOwnerExceptionConstants.notOwnerExceptionRB
 			.getString("multicasthardware_locked_another_dataclient");
 	public static final int HARDWARE_LOCK_AVAILABLE_TO_ANOTHER = 3;
-	public static final String HARDWARE_LOCK_AVAILABLE_TO_ANOTHER_MSG = notOwnerExceptionRB
+	public static final String HARDWARE_LOCK_AVAILABLE_TO_ANOTHER_MSG = NotOwnerExceptionConstants.notOwnerExceptionRB
 			.getString("multicasthardware_lock_available_another_dataclient");
 
-	public static String getTranslatedMessage(NotOwnerException e) {
+	public static String getTranslatedMessage(final NotOwnerException e) {
 		switch (e.errorCode) {
 		case HARDWARE_IN_LOCK_PROCESS_TO_ANOTHER:
-			return HARDWARE_IN_LOCK_PROCESS_TO_ANOTHER_MSG;
+			return NotOwnerExceptionConstants.HARDWARE_IN_LOCK_PROCESS_TO_ANOTHER_MSG;
 		case HARDWARE_LOCKED_TO_ANOTHER:
-			return HARDWARE_LOCKED_TO_ANOTHER_MSG;
+			return NotOwnerExceptionConstants.HARDWARE_LOCKED_TO_ANOTHER_MSG;
 		case HARDWARE_LOCK_AVAILABLE_TO_ANOTHER:
-			return HARDWARE_LOCK_AVAILABLE_TO_ANOTHER_MSG;
+			return NotOwnerExceptionConstants.HARDWARE_LOCK_AVAILABLE_TO_ANOTHER_MSG;
 		case HARDWARE_NOT_LOCKABLE_TO_ANYONE:
-			return HARDWARE_NOT_LOCKABLE_TO_ANYONE_MSG;
+			return NotOwnerExceptionConstants.HARDWARE_NOT_LOCKABLE_TO_ANYONE_MSG;
 		}
 
 		return e.getMessage();

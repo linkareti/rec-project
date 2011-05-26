@@ -11,41 +11,41 @@ package com.linkare.rec.acquisition;
 abstract public class DataProducerStateHelper {
 	private static String _id = "IDL:com/linkare/rec/acquisition/DataProducerState:1.0";
 
-	public static void insert(org.omg.CORBA.Any a, com.linkare.rec.acquisition.DataProducerState that) {
-		org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
-		a.type(type());
-		write(out, that);
-		a.read_value(out.create_input_stream(), type());
+	public static void insert(final org.omg.CORBA.Any a, final com.linkare.rec.acquisition.DataProducerState that) {
+		final org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
+		a.type(DataProducerStateHelper.type());
+		DataProducerStateHelper.write(out, that);
+		a.read_value(out.create_input_stream(), DataProducerStateHelper.type());
 	}
 
-	public static com.linkare.rec.acquisition.DataProducerState extract(org.omg.CORBA.Any a) {
-		return read(a.create_input_stream());
+	public static com.linkare.rec.acquisition.DataProducerState extract(final org.omg.CORBA.Any a) {
+		return DataProducerStateHelper.read(a.create_input_stream());
 	}
 
 	private static org.omg.CORBA.TypeCode __typeCode = null;
 
 	synchronized public static org.omg.CORBA.TypeCode type() {
-		if (__typeCode == null) {
-			__typeCode = org.omg.CORBA.ORB.init()
+		if (DataProducerStateHelper.__typeCode == null) {
+			DataProducerStateHelper.__typeCode = org.omg.CORBA.ORB.init()
 					.create_enum_tc(
 							com.linkare.rec.acquisition.DataProducerStateHelper.id(),
 							"DataProducerState",
 							new String[] { "DP_WAITING", "DP_STARTED_NODATA", "DP_STARTED", "DP_ENDED", "DP_STOPED",
 									"DP_ERROR" });
 		}
-		return __typeCode;
+		return DataProducerStateHelper.__typeCode;
 	}
 
 	public static String id() {
-		return _id;
+		return DataProducerStateHelper._id;
 	}
 
-	public static com.linkare.rec.acquisition.DataProducerState read(org.omg.CORBA.portable.InputStream istream) {
+	public static com.linkare.rec.acquisition.DataProducerState read(final org.omg.CORBA.portable.InputStream istream) {
 		return new com.linkare.rec.acquisition.DataProducerState(istream.read_octet());
 	}
 
-	public static void write(org.omg.CORBA.portable.OutputStream ostream,
-			com.linkare.rec.acquisition.DataProducerState value) {
+	public static void write(final org.omg.CORBA.portable.OutputStream ostream,
+			final com.linkare.rec.acquisition.DataProducerState value) {
 		ostream.write_octet(value.getValue());
 	}
 

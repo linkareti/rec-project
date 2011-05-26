@@ -14,6 +14,11 @@ import com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph;
  */
 public class Sensor1Graph extends MultSeriesXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -477417160419530458L;
+
 	/** Creates a new instance of Sensor1Graph */
 	public Sensor1Graph() {
 		super();
@@ -21,6 +26,7 @@ public class Sensor1Graph extends MultSeriesXYExperimentGraph {
 		setChannelDisplayYArray(new int[] { 0, 3, 6 });
 	}
 
+	@Override
 	public String getName() {
 		return "Sensor 1";
 	}

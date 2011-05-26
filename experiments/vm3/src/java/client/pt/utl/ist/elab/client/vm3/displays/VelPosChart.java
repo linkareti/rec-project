@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.vm3.displays;
  */
 public class VelPosChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6118365395426651450L;
+
 	/** Creates a new instance of PosVelChart */
 	public VelPosChart() {
 		super();

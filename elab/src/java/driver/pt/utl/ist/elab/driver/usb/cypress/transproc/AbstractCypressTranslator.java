@@ -14,11 +14,12 @@ public abstract class AbstractCypressTranslator implements CypressTranslator {
 	private String commandIdentifier = null;
 
 	/** Creates a new instance of SerialPortTranslatorAdapter */
-	public AbstractCypressTranslator(String commandIdentifier) {
+	public AbstractCypressTranslator(final String commandIdentifier) {
 		this.commandIdentifier = commandIdentifier;
 		CypressTranslatorProcessorManager.registerTranslator(this);
 	}
 
+	@Override
 	public String getCommandIdentifier() {
 		return commandIdentifier;
 	}

@@ -19,12 +19,17 @@ import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
  */
 public class AnalogChartDisplay extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -458370520622782420L;
+
 	/** Creates new form AnalogChartDisplay */
 	public AnalogChartDisplay() {
 		initComponents();
 		dataAnalog = new DefaultChartModelProxy(16, 4, false);
-		org.jfree.chart.JFreeChart chart = org.jfree.chart.ChartFactory.createXYLineChart(name, "Tempo(s)", "Valor",
-				dataAnalog, org.jfree.chart.plot.PlotOrientation.VERTICAL, true, true, false);
+		final org.jfree.chart.JFreeChart chart = org.jfree.chart.ChartFactory.createXYLineChart(name, "Tempo(s)",
+				"Valor", dataAnalog, org.jfree.chart.plot.PlotOrientation.VERTICAL, true, true, false);
 		chartPanel = new org.jfree.chart.ChartPanel(chart);
 		chartPanel.setPreferredSize(new java.awt.Dimension(600, 400));
 		add(chartPanel, java.awt.BorderLayout.CENTER);
@@ -54,7 +59,8 @@ public class AnalogChartDisplay extends javax.swing.JPanel implements ExpDataDis
 		jButtonA1.setPreferredSize(new java.awt.Dimension(30, 28));
 		jButtonA1.setEnabled(false);
 		jButtonA1.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonA1MousePressed(evt);
 			}
 		});
@@ -69,7 +75,8 @@ public class AnalogChartDisplay extends javax.swing.JPanel implements ExpDataDis
 		jButtonA2.setMinimumSize(new java.awt.Dimension(30, 28));
 		jButtonA2.setPreferredSize(new java.awt.Dimension(30, 28));
 		jButtonA2.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonA2MousePressed(evt);
 			}
 		});
@@ -84,7 +91,8 @@ public class AnalogChartDisplay extends javax.swing.JPanel implements ExpDataDis
 		jButtonA3.setMinimumSize(new java.awt.Dimension(30, 28));
 		jButtonA3.setPreferredSize(new java.awt.Dimension(30, 28));
 		jButtonA3.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonA3MousePressed(evt);
 			}
 		});
@@ -99,7 +107,8 @@ public class AnalogChartDisplay extends javax.swing.JPanel implements ExpDataDis
 		jButtonA4.setMinimumSize(new java.awt.Dimension(30, 28));
 		jButtonA4.setPreferredSize(new java.awt.Dimension(30, 28));
 		jButtonA4.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonA4MousePressed(evt);
 			}
 		});
@@ -113,7 +122,8 @@ public class AnalogChartDisplay extends javax.swing.JPanel implements ExpDataDis
 		jButtonPrint.setMinimumSize(new java.awt.Dimension(30, 28));
 		jButtonPrint.setPreferredSize(new java.awt.Dimension(30, 28));
 		jButtonPrint.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonPrintActionPerformed(evt);
 			}
 		});
@@ -124,7 +134,7 @@ public class AnalogChartDisplay extends javax.swing.JPanel implements ExpDataDis
 
 	}// GEN-END:initComponents
 
-	private void jButtonA4MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonA4MousePressed
+	private void jButtonA4MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonA4MousePressed
 		if (jButtonA4.isEnabled()) {
 			dataAnalog.setSeriesVisible(true, 3);
 			jButtonA4.setEnabled(false);
@@ -134,7 +144,7 @@ public class AnalogChartDisplay extends javax.swing.JPanel implements ExpDataDis
 		}
 	}// GEN-LAST:event_jButtonA4MousePressed
 
-	private void jButtonA3MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonA3MousePressed
+	private void jButtonA3MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonA3MousePressed
 		if (jButtonA3.isEnabled()) {
 			dataAnalog.setSeriesVisible(true, 2);
 			jButtonA3.setEnabled(false);
@@ -144,7 +154,7 @@ public class AnalogChartDisplay extends javax.swing.JPanel implements ExpDataDis
 		}
 	}// GEN-LAST:event_jButtonA3MousePressed
 
-	private void jButtonA2MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonA2MousePressed
+	private void jButtonA2MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonA2MousePressed
 		if (jButtonA2.isEnabled()) {
 			dataAnalog.setSeriesVisible(true, 1);
 			jButtonA2.setEnabled(false);
@@ -154,7 +164,7 @@ public class AnalogChartDisplay extends javax.swing.JPanel implements ExpDataDis
 		}
 	}// GEN-LAST:event_jButtonA2MousePressed
 
-	private void jButtonA1MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonA1MousePressed
+	private void jButtonA1MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonA1MousePressed
 		if (jButtonA1.isEnabled()) {
 			dataAnalog.setSeriesVisible(true, 0);
 			jButtonA1.setEnabled(false);
@@ -164,7 +174,7 @@ public class AnalogChartDisplay extends javax.swing.JPanel implements ExpDataDis
 		}
 	}// GEN-LAST:event_jButtonA1MousePressed
 
-	private void jButtonPrintActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonPrintActionPerformed
+	private void jButtonPrintActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonPrintActionPerformed
 		printChart();
 	}// GEN-LAST:event_jButtonPrintActionPerformed
 
@@ -172,21 +182,26 @@ public class AnalogChartDisplay extends javax.swing.JPanel implements ExpDataDis
 		new PrintComponent(chartPanel);
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.Icon getIcon() {
 		return icon;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
-	public void setExpDataModel(ExpDataModel expDataModel) {
-		if (expDataModel != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel expDataModel) {
+		if (expDataModel != null) {
 			expDataModel.removeExpDataModelListener(this);
+		}
 
 		this.expDataModel = expDataModel;
 
@@ -196,10 +211,12 @@ public class AnalogChartDisplay extends javax.swing.JPanel implements ExpDataDis
 		}
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
@@ -208,31 +225,38 @@ public class AnalogChartDisplay extends javax.swing.JPanel implements ExpDataDis
 		dataAnalog.dataModelRunning();
 	}
 
+	@Override
 	public void dataModelStoped() {
 		dataAnalog.dataModelStoped();
 	}
 
-	public void headerAvailable(com.linkare.rec.data.config.HardwareAcquisitionConfig hardwareAcquisitionConfig) {
+	public void headerAvailable(final com.linkare.rec.data.config.HardwareAcquisitionConfig hardwareAcquisitionConfig) {
 		dataAnalog.headerAvailable(hardwareAcquisitionConfig);
 	}
 
-	public void newSamples(com.linkare.rec.impl.client.experiment.NewExpDataEvent newExpDataEvent) {
+	@Override
+	public void newSamples(final com.linkare.rec.impl.client.experiment.NewExpDataEvent newExpDataEvent) {
 		dataAnalog.newSamples(newExpDataEvent);
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 		headerAvailable(expDataModel.getAcquisitionConfig());
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
@@ -245,9 +269,9 @@ public class AnalogChartDisplay extends javax.swing.JPanel implements ExpDataDis
 	private javax.swing.JButton jButtonA1;
 	// End of variables declaration//GEN-END:variables
 	private ExpDataModel expDataModel;
-	private javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/displays/resources/ChartA16.gif"));
-	private String name = "Entradas anal�gicas";
-	private DefaultChartModelProxy dataAnalog;
-	private org.jfree.chart.ChartPanel chartPanel;
+	private final String name = "Entradas anal�gicas";
+	private final DefaultChartModelProxy dataAnalog;
+	private final org.jfree.chart.ChartPanel chartPanel;
 }

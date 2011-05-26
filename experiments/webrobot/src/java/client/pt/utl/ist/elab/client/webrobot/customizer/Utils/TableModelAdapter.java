@@ -16,7 +16,8 @@ public class TableModelAdapter implements javax.swing.event.TableModelListener {
 	public TableModelAdapter() {
 	}
 
-	public void tableChanged(javax.swing.event.TableModelEvent tableModelEvent) {
+	@Override
+	public void tableChanged(final javax.swing.event.TableModelEvent tableModelEvent) {
 	}
 
 }

@@ -32,9 +32,11 @@ public abstract class AbstractSerialPortDataSource extends BaseDataSource {
 	protected static String ABSTRACT_PORT_DATA_SOURCE_LOGGER = "AbstractSerialPortDataSource.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(ABSTRACT_PORT_DATA_SOURCE_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(
+				AbstractSerialPortDataSource.ABSTRACT_PORT_DATA_SOURCE_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(ABSTRACT_PORT_DATA_SOURCE_LOGGER));
+			LogManager.getLogManager().addLogger(
+					Logger.getLogger(AbstractSerialPortDataSource.ABSTRACT_PORT_DATA_SOURCE_LOGGER));
 		}
 	}
 
@@ -47,17 +49,18 @@ public abstract class AbstractSerialPortDataSource extends BaseDataSource {
 	/**
 	 * @param rs232configs the rs232configs to set
 	 */
-	public void setRs232configs(HardwareNode rs232configs) {
+	public void setRs232configs(final HardwareNode rs232configs) {
 		this.rs232configs = rs232configs;
 	}
 
-	public PhysicsValue[] processDataCommand(SerialPortCommand cmd) {
+	public PhysicsValue[] processDataCommand(final SerialPortCommand cmd) {
 
 		// _DAT e _BIN
-		if (stopped || cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null)
+		if (stopped || cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null) {
 			return null;
+		}
 
-		PhysicsValue[] values = new PhysicsValue[cmd.getDataHashMap().size()];
+		final PhysicsValue[] values = new PhysicsValue[cmd.getDataHashMap().size()];
 
 		if (cmd.getCommandIdentifier().equals(SerialPortCommandList.DAT.toString())) {
 
@@ -66,7 +69,8 @@ public abstract class AbstractSerialPortDataSource extends BaseDataSource {
 				PhysicsVal phError = null;
 				Multiplier phMultiplier = null;
 
-				OneChannelNode oneChannelNode = rs232configs.getRs232().getChannels().getChannelToOrder(channelNumber);
+				final OneChannelNode oneChannelNode = rs232configs.getRs232().getChannels()
+						.getChannelToOrder(channelNumber);
 
 				if (channelNumber < getAcquisitionHeader().getChannelsConfig().length) {
 					// these are pure data channels
@@ -90,8 +94,9 @@ public abstract class AbstractSerialPortDataSource extends BaseDataSource {
 					// this is trash and should be ignored
 				}
 
-				if (phValue != null)
+				if (phValue != null) {
 					values[channelNumber] = new PhysicsValue(phValue, phError, phMultiplier);
+				}
 			}
 			super.addDataRow(values);
 		} else if (cmd.getCommandIdentifier().equals(SerialPortCommandList.BIN)) {
@@ -99,28 +104,30 @@ public abstract class AbstractSerialPortDataSource extends BaseDataSource {
 		}
 
 		counter++;
-		if (counter == total_samples)
+		if (counter == total_samples) {
 			setDataSourceEnded();
+		}
 
 		return values;
 
 	}
 
-	public void processBinaryCommand(SerialPortCommand cmd) {
+	public void processBinaryCommand(final SerialPortCommand cmd) {
 		// TODO : what must I do with this?
 
 	}
 
-	public void setAcquisitionHeader(HardwareAcquisitionConfig config) {
+	@Override
+	public void setAcquisitionHeader(final HardwareAcquisitionConfig config) {
 		super.setAcquisitionHeader(config);
-		Logger.getLogger(ABSTRACT_PORT_DATA_SOURCE_LOGGER).log(Level.FINE,
+		Logger.getLogger(AbstractSerialPortDataSource.ABSTRACT_PORT_DATA_SOURCE_LOGGER).log(Level.FINE,
 				"Setting Hardware Acquisition Config [" + config + "]");
 
 		total_samples = config.getTotalSamples();
 
 		// this is a formula from g experiment
-		int packetSize = calcPacketSize(config);
-		Logger.getLogger(ABSTRACT_PORT_DATA_SOURCE_LOGGER).log(Level.FINEST,
+		final int packetSize = calcPacketSize(config);
+		Logger.getLogger(AbstractSerialPortDataSource.ABSTRACT_PORT_DATA_SOURCE_LOGGER).log(Level.FINEST,
 				"Setting packet size to [" + packetSize + "]");
 
 		setPacketSize(packetSize);
@@ -132,13 +139,14 @@ public abstract class AbstractSerialPortDataSource extends BaseDataSource {
 	 * @param config experiment configuration with the frequency defined
 	 * @return
 	 */
-	protected int calcPacketSize(HardwareAcquisitionConfig config) {
+	protected int calcPacketSize(final HardwareAcquisitionConfig config) {
 		return (int) Math.ceil(1. / (8. * config.getSelectedFrequency().getFrequency() * config.getSelectedFrequency()
 				.getMultiplier().getExpValue()));
 	}
 
 	private boolean stopped = false;
 
+	@Override
 	public void stopNow() {
 		stopped = true;
 		setDataSourceStoped();

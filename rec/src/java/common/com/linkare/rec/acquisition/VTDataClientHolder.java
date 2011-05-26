@@ -6,18 +6,21 @@ public final class VTDataClientHolder implements org.omg.CORBA.portable.Streamab
 	public VTDataClientHolder() {
 	}
 
-	public VTDataClientHolder(com.linkare.rec.acquisition.DataClient initialValue) {
+	public VTDataClientHolder(final com.linkare.rec.acquisition.DataClient initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(org.omg.CORBA.portable.InputStream i) {
+	@Override
+	public void _read(final org.omg.CORBA.portable.InputStream i) {
 		value = com.linkare.rec.acquisition.VTDataClientHelper.read(i);
 	}
 
-	public void _write(org.omg.CORBA.portable.OutputStream o) {
+	@Override
+	public void _write(final org.omg.CORBA.portable.OutputStream o) {
 		com.linkare.rec.acquisition.VTDataClientHelper.write(o, value);
 	}
 
+	@Override
 	public org.omg.CORBA.TypeCode _type() {
 		return com.linkare.rec.acquisition.VTDataClientHelper.type();
 	}

@@ -21,23 +21,27 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 
 public class STDMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModelListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7450881172848139332L;
+
 	/** Creates a new instance of Animation */
 	public STDMAPImage() {
-		super("Theta", "I", java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString("rec.exp.title.stdmap"), 0,
-				2 * Math.PI, 0, 2 * Math.PI);
+		super("Theta", "I", java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
+				.getString("rec.exp.title.stdmap"), 0, 2 * Math.PI, 0, 2 * Math.PI);
 		// this.setPreferredSize(new java.awt.Dimension(500,500));
 	}
 
 	// TESTE - FORA DO CONTEXTO DO e-Lab
 	public void start() {
-		int nTheta = 5, nI = 25;
+		final int nTheta = 5, nI = 25;
 
-		this.nn = nTheta * nI;
-		this.iter = 20000;
+		nn = nTheta * nI;
+		iter = 20000;
 
-		int w = getWidth() - leftGutter - rightGutter;
-		int h = getHeight() - topGutter - bottomGutter;
+		final int w = getWidth() - leftGutter - rightGutter;
+		final int h = getHeight() - topGutter - bottomGutter;
 
 		// config(false, (short)1, w, h, nTheta*nI, iter);
 		mapImg = new BufferedImage(getWidth() - leftGutter - rightGutter, getHeight() - topGutter - bottomGutter,
@@ -45,12 +49,14 @@ public class STDMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModel
 
 		// Map Non-Static
 		staticImg = true;
-		//FIXME - client should never depend on driver part
-//		pt.utl.ist.elab.driver.vstdmap.STDMAPDataProducer std = new pt.utl.ist.elab.driver.vstdmap.STDMAPDataProducer(
-//				null, 1.1f, 0, nTheta, 2.1f, 0, nI, .21f, iter, (float) Math.PI, w, h, pixSize, staticImg);
+		// FIXME - client should never depend on driver part
+		// pt.utl.ist.elab.driver.vstdmap.STDMAPDataProducer std = new
+		// pt.utl.ist.elab.driver.vstdmap.STDMAPDataProducer(
+		// null, 1.1f, 0, nTheta, 2.1f, 0, nI, .21f, iter, (float) Math.PI, w,
+		// h, pixSize, staticImg);
 		popupmenu.getComponent(2).setEnabled(false);
 		popupmenu.getComponent(3).setEnabled(false);
-//		makeImage(std.getMapaPixs());
+		// makeImage(std.getMapaPixs());
 		statusStr = "";
 		repaint();
 
@@ -88,14 +94,15 @@ public class STDMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModel
 
 	}
 
-	public static void main(String args[]) {
-		javax.swing.JFrame test = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame test = new javax.swing.JFrame();
 		test.addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent e) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent e) {
 				System.exit(0);
 			};
 		});
-		STDMAPImage stdim = new STDMAPImage();
+		final STDMAPImage stdim = new STDMAPImage();
 		test.getContentPane().add(stdim);
 		test.pack();
 		test.setVisible(true);
@@ -104,7 +111,8 @@ public class STDMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModel
 	}
 
 	// Chegaram novas amostras!
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
 			// sample, canal
 
@@ -120,10 +128,12 @@ public class STDMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModel
 				double tempTheta = model.getValueAt(i, 0).getValue().getFloatValue();
 				double tempThetaDot = model.getValueAt(i, 1).getValue().getFloatValue();
 
-				if (tempTheta < 0)
+				if (tempTheta < 0) {
 					tempTheta = Math.abs(tempTheta + 2 * Math.PI);
-				if (tempThetaDot < 0)
+				}
+				if (tempThetaDot < 0) {
 					tempThetaDot = Math.abs(tempThetaDot + 2 * Math.PI);
+				}
 
 				tempTheta = tempTheta % (2 * Math.PI);
 				tempThetaDot = tempThetaDot % (2 * Math.PI);
@@ -141,14 +151,17 @@ public class STDMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModel
 	}
 
 	// Queremos fazer alguma coisa quandos os dados acabarem?
+	@Override
 	public void dataModelEnded() {
 	}
 
 	// Queremos fazer alguma coisa quandos acontecer um erro?
+	@Override
 	public void dataModelError() {
 	}
 
 	// Queremos fazer alguma coisa quando for dado o start e existirem dados?
+	@Override
 	public void dataModelStarted() {
 		statusStr = "";
 		repaint();
@@ -158,11 +171,12 @@ public class STDMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModel
 	// dados?
 	// Eu garanto que quando chegamos a este estado, já existe o header da
 	// experiência!
+	@Override
 	public void dataModelStartedNoData() {
-		HardwareAcquisitionConfig header = model.getAcquisitionConfig();
+		final HardwareAcquisitionConfig header = model.getAcquisitionConfig();
 
-		byte simulType = Byte.parseByte(header.getSelectedHardwareParameterValue("simulType"));
-		this.pcor = Float.parseFloat(header.getSelectedHardwareParameterValue("pcor"));
+		final byte simulType = Byte.parseByte(header.getSelectedHardwareParameterValue("simulType"));
+		pcor = Float.parseFloat(header.getSelectedHardwareParameterValue("pcor"));
 
 		if (simulType == 2) { // anima
 			this.setYLabel("dTheta/dt");
@@ -170,32 +184,33 @@ public class STDMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModel
 					BufferedImage.TYPE_INT_RGB);
 			g = mapImg.getGraphics();
 
-			float theta = Float.parseFloat(header.getSelectedHardwareParameterValue("theta"));
-			float thetaDot = Float.parseFloat(header.getSelectedHardwareParameterValue("thetaDot"));
+			final float theta = Float.parseFloat(header.getSelectedHardwareParameterValue("theta"));
+			final float thetaDot = Float.parseFloat(header.getSelectedHardwareParameterValue("thetaDot"));
 
-			float c1 = (float) Math.abs((theta + thetaDot) % 1);
-			float c2 = (float) Math.abs((thetaDot + pcor * Math.sin(theta)) % 1);
-			float c3 = (c1 + c2) % 1;
+			final float c1 = Math.abs((theta + thetaDot) % 1);
+			final float c2 = (float) Math.abs((thetaDot + pcor * Math.sin(theta)) % 1);
+			final float c3 = (c1 + c2) % 1;
 
 			g.setColor(new java.awt.Color(c1, c2, c3));
-		} else
+		} else {
 			mapImg = new BufferedImage((int) Float.parseFloat(header.getSelectedHardwareParameterValue("w")),
 					(int) Float.parseFloat(header.getSelectedHardwareParameterValue("h")), BufferedImage.TYPE_INT_RGB);
+		}
 
-		this.staticImg = header.getSelectedHardwareParameterValue("staticImg").trim().equals("1") ? true : false;
-		this.pixSize = Byte.parseByte(header.getSelectedHardwareParameterValue("pixSize"));
+		staticImg = header.getSelectedHardwareParameterValue("staticImg").trim().equals("1") ? true : false;
+		pixSize = Byte.parseByte(header.getSelectedHardwareParameterValue("pixSize"));
 
 		if (staticImg) {
 			popupmenu.getComponent(2).setEnabled(false);
 			popupmenu.getComponent(3).setEnabled(false);
 		} else {
 			if (simulType == 3) {
-				this.nn = 1;
-				this.iter = header.getTotalSamples();
+				nn = 1;
+				iter = header.getTotalSamples();
 			} else {
-				this.nn = (int) Float.parseFloat(header.getSelectedHardwareParameterValue("nTheta"))
+				nn = (int) Float.parseFloat(header.getSelectedHardwareParameterValue("nTheta"))
 						* (int) Float.parseFloat(header.getSelectedHardwareParameterValue("nIMapa"));
-				this.iter = (int) Float.parseFloat(header.getSelectedHardwareParameterValue("iter"));
+				iter = (int) Float.parseFloat(header.getSelectedHardwareParameterValue("iter"));
 			}
 			mData = new float[nn * iter * 2];
 		}
@@ -204,40 +219,49 @@ public class STDMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModel
 	}
 
 	// Queremos fazer alguma coisa quando for dado parado?
+	@Override
 	public void dataModelStoped() {
 		statusStr = "";
 		repaint();
 	}
 
 	// Queremos fazer alguma coisa em estado de espera?
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
 	// O icon associado a este painel!
+	@Override
 	public javax.swing.Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
 
 	private ExpDataModel model = null;
 
-	public void setExpDataModel(ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
+		if (this.model != null) {
 			this.model.removeExpDataModelListener(this);
+		}
 		this.model = model;
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 
 	}
 

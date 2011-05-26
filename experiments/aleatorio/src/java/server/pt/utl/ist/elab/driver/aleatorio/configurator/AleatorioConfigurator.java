@@ -76,7 +76,7 @@ public class AleatorioConfigurator extends javax.swing.JFrame {
 		setName("Aleatorio Configurator");
 		setResizable(false);
 		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent evt) {
+			public void windowClosing(final java.awt.event.WindowEvent evt) {
 				exitForm(evt);
 			}
 		});
@@ -602,7 +602,7 @@ public class AleatorioConfigurator extends javax.swing.JFrame {
 		okButton.setText("OK");
 		okButton.setName("okButton");
 		okButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				okButtonHandler(evt);
 			}
 		});
@@ -613,7 +613,7 @@ public class AleatorioConfigurator extends javax.swing.JFrame {
 		applyButton.setText("Apply");
 		applyButton.setName("applyButton");
 		applyButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				applyButtonHandler(evt);
 			}
 		});
@@ -624,7 +624,7 @@ public class AleatorioConfigurator extends javax.swing.JFrame {
 		cancelButton.setText("Cancel");
 		cancelButton.setName("cancelButton");
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				cancelButtonHandler(evt);
 			}
 		});
@@ -642,24 +642,24 @@ public class AleatorioConfigurator extends javax.swing.JFrame {
 		pack();
 	}// GEN-END:initComponents
 
-	private void cancelButtonHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonHandler
+	private void cancelButtonHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonHandler
 		// Add your handling code here:
-		this.dispose();
+		dispose();
 	}// GEN-LAST:event_cancelButtonHandler
 
-	private void okButtonHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonHandler
+	private void okButtonHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonHandler
 		// Add your handling code here:
 		saveProperties();
-		this.dispose();
+		dispose();
 	}// GEN-LAST:event_okButtonHandler
 
-	private void applyButtonHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_applyButtonHandler
+	private void applyButtonHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_applyButtonHandler
 		// Add your handling code here:
 		saveProperties();
 	}// GEN-LAST:event_applyButtonHandler
 
 	/** Exit the Application */
-	private void exitForm(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_exitForm
+	private void exitForm(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_exitForm
 		System.exit(0);
 	}// GEN-LAST:event_exitForm
 
@@ -670,7 +670,7 @@ public class AleatorioConfigurator extends javax.swing.JFrame {
 	java.util.Properties props = null;
 
 	/**
-	 *Loads the properties File
+	 * Loads the properties File
 	 */
 	public void readProperties() {
 		propertiesLocation = "AleatorioConfigurator.properties";
@@ -679,7 +679,7 @@ public class AleatorioConfigurator extends javax.swing.JFrame {
 		// propertiesLocation=propertiesLocation.substring(6);
 
 		while (propertiesLocation.indexOf("%20") != -1) {
-			String temp = propertiesLocation.substring(propertiesLocation.indexOf("%20") + 3);
+			final String temp = propertiesLocation.substring(propertiesLocation.indexOf("%20") + 3);
 			propertiesLocation = propertiesLocation.substring(0, propertiesLocation.indexOf("%20"));
 			propertiesLocation = propertiesLocation.concat(" " + temp);
 		}
@@ -690,10 +690,10 @@ public class AleatorioConfigurator extends javax.swing.JFrame {
 			props = new java.util.Properties();
 			props.load(is);
 			is.close();
-		} catch (java.io.FileNotFoundException fnfe) {
+		} catch (final java.io.FileNotFoundException fnfe) {
 			System.out.println("Couldn't find the file...\n" + fnfe);
 			System.exit(0);
-		} catch (java.io.IOException ioe) {
+		} catch (final java.io.IOException ioe) {
 			System.out.println("Exception...\n" + ioe);
 			System.exit(0);
 		}
@@ -733,7 +733,7 @@ public class AleatorioConfigurator extends javax.swing.JFrame {
 			fos = new java.io.FileOutputStream(propFile);
 			props.store(fos, "Elab:Aleatorio Server properties");
 			fos.close();
-		} catch (java.io.IOException ioe) {
+		} catch (final java.io.IOException ioe) {
 			System.out.println("Couldn't write properties file.\n" + ioe);
 		}
 	}
@@ -741,7 +741,7 @@ public class AleatorioConfigurator extends javax.swing.JFrame {
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 		new AleatorioConfigurator().setVisible(true);
 	}
 

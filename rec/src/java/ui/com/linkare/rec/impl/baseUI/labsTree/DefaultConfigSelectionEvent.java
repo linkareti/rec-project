@@ -17,21 +17,26 @@ import com.linkare.rec.impl.baseUI.config.Lab;
 
 public class DefaultConfigSelectionEvent extends ApparatusSelectionEvent {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5123794113680057337L;
 	/** Holds value of property DefaultConfig. */
-	private DefaultAcquisitionConfig cfg;
+	private final DefaultAcquisitionConfig cfg;
 
 	/** Creates a new instance of DefaultConfigSelectionEvent */
-	public DefaultConfigSelectionEvent(Object source, DefaultAcquisitionConfig cfg) {
+	public DefaultConfigSelectionEvent(final Object source, final DefaultAcquisitionConfig cfg) {
 		this(source, cfg, null, null);
 	}
 
 	/** Creates a new instance of DefaultConfigSelectionEvent */
-	public DefaultConfigSelectionEvent(Object source, DefaultAcquisitionConfig cfg, Apparatus app) {
+	public DefaultConfigSelectionEvent(final Object source, final DefaultAcquisitionConfig cfg, final Apparatus app) {
 		this(source, cfg, app, null);
 	}
 
 	/** Creates a new instance of DefaultConfigSelectionEvent */
-	public DefaultConfigSelectionEvent(Object source, DefaultAcquisitionConfig cfg, Apparatus app, Lab lab) {
+	public DefaultConfigSelectionEvent(final Object source, final DefaultAcquisitionConfig cfg, final Apparatus app,
+			final Lab lab) {
 		super(source, app, lab);
 		this.cfg = cfg;
 	}
@@ -42,6 +47,6 @@ public class DefaultConfigSelectionEvent extends ApparatusSelectionEvent {
 	 * @return Value of property DefaultConfig.
 	 */
 	public DefaultAcquisitionConfig getDefaultConfig() {
-		return this.cfg;
+		return cfg;
 	}
 }

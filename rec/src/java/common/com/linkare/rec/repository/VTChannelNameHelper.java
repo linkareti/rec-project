@@ -19,71 +19,75 @@ public final class VTChannelNameHelper implements BoxedValueHelper {
 	public VTChannelNameHelper() {
 	}
 
-	public static void insert(Any a, String that) {
-		org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
-		a.type(type());
-		write(out, that);
-		a.read_value(out.create_input_stream(), type());
+	public static void insert(final Any a, final String that) {
+		final org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
+		a.type(VTChannelNameHelper.type());
+		VTChannelNameHelper.write(out, that);
+		a.read_value(out.create_input_stream(), VTChannelNameHelper.type());
 	}
 
-	public static String extract(Any a) {
-		return read(a.create_input_stream());
+	public static String extract(final Any a) {
+		return VTChannelNameHelper.read(a.create_input_stream());
 	}
 
 	private static TypeCode __typeCode = null;
 	private static boolean __active = false;
 
 	public static synchronized TypeCode type() {
-		if (__typeCode == null) {
+		if (VTChannelNameHelper.__typeCode == null) {
 			synchronized (TypeCode.class) {
-				if (__typeCode == null) {
-					if (__active) {
-						return ORB.init().create_recursive_tc(_id);
+				if (VTChannelNameHelper.__typeCode == null) {
+					if (VTChannelNameHelper.__active) {
+						return ORB.init().create_recursive_tc(VTChannelNameHelper._id);
 					}
-					__active = true;
-					__typeCode = ORB.init().create_wstring_tc(0);
-					__typeCode = ORB.init().create_value_box_tc(_id, "VTChannelName", __typeCode);
-					__active = false;
+					VTChannelNameHelper.__active = true;
+					VTChannelNameHelper.__typeCode = ORB.init().create_wstring_tc(0);
+					VTChannelNameHelper.__typeCode = ORB.init().create_value_box_tc(VTChannelNameHelper._id,
+							"VTChannelName", VTChannelNameHelper.__typeCode);
+					VTChannelNameHelper.__active = false;
 				}
 			}
 		}
-		return __typeCode;
+		return VTChannelNameHelper.__typeCode;
 	}
 
 	public static String id() {
-		return _id;
+		return VTChannelNameHelper._id;
 	}
 
-	public static String read(org.omg.CORBA.portable.InputStream istream) {
+	public static String read(final org.omg.CORBA.portable.InputStream istream) {
 		if (!(istream instanceof InputStream)) {
 			throw new BAD_PARAM();
 		}
-		return (String) ((InputStream) istream).read_value(_instance);
+		return (String) ((InputStream) istream).read_value(VTChannelNameHelper._instance);
 	}
 
-	public Serializable read_value(org.omg.CORBA.portable.InputStream istream) {
+	@Override
+	public Serializable read_value(final org.omg.CORBA.portable.InputStream istream) {
 		String tmp;
 		tmp = istream.read_wstring();
-		return (Serializable) tmp;
+		return tmp;
 	}
 
-	public static void write(org.omg.CORBA.portable.OutputStream ostream, String value) {
+	public static void write(final org.omg.CORBA.portable.OutputStream ostream, final String value) {
 		if (!(ostream instanceof OutputStream)) {
 			throw new BAD_PARAM();
 		}
-		((OutputStream) ostream).write_value(value, _instance);
+		((OutputStream) ostream).write_value(value, VTChannelNameHelper._instance);
 	}
 
-	public void write_value(org.omg.CORBA.portable.OutputStream ostream, Serializable value) {
+	@Override
+	public void write_value(final org.omg.CORBA.portable.OutputStream ostream, final Serializable value) {
 		if (!(value instanceof String)) {
 			throw new MARSHAL();
 		}
-		String valueType = (String) value;
+		final String valueType = (String) value;
 		ostream.write_wstring(valueType);
 	}
 
+	@Override
 	public String get_id() {
-		return _id;
+		return VTChannelNameHelper._id;
 	}
 
 }

@@ -21,15 +21,15 @@ public class CannotReadServicePortException extends Exception {
 		super();
 	}
 
-	public CannotReadServicePortException(String message, Throwable cause) {
+	public CannotReadServicePortException(final String message, final Throwable cause) {
 		super(message, cause);
 	}
 
-	public CannotReadServicePortException(String message) {
+	public CannotReadServicePortException(final String message) {
 		super(message);
 	}
 
-	public CannotReadServicePortException(Throwable cause) {
+	public CannotReadServicePortException(final Throwable cause) {
 		super(cause);
 	}
 

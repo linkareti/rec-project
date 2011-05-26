@@ -13,18 +13,21 @@ public final class VTClientNameHolder implements org.omg.CORBA.portable.Streamab
 	public VTClientNameHolder() {
 	}
 
-	public VTClientNameHolder(String initialValue) {
+	public VTClientNameHolder(final String initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(org.omg.CORBA.portable.InputStream i) {
+	@Override
+	public void _read(final org.omg.CORBA.portable.InputStream i) {
 		value = com.linkare.rec.acquisition.VTClientNameHelper.read(i);
 	}
 
-	public void _write(org.omg.CORBA.portable.OutputStream o) {
+	@Override
+	public void _write(final org.omg.CORBA.portable.OutputStream o) {
 		com.linkare.rec.acquisition.VTClientNameHelper.write(o, value);
 	}
 
+	@Override
 	public org.omg.CORBA.TypeCode _type() {
 		return com.linkare.rec.acquisition.VTClientNameHelper.type();
 	}

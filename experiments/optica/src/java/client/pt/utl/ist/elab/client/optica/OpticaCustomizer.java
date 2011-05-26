@@ -1,4 +1,3 @@
-
 package pt.utl.ist.elab.client.optica;
 
 import java.text.DecimalFormat;
@@ -6,6 +5,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import javax.swing.text.NumberFormatter;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
@@ -25,7 +25,7 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 	public OpticaCustomizer() {
 		initComponents();
 
-		Dictionary<Integer, JLabel> slidersPosLabels = new Hashtable<Integer, JLabel>(4);
+		final Dictionary<Integer, JLabel> slidersPosLabels = new Hashtable<Integer, JLabel>(4);
 		slidersPosLabels.put(new Integer(0), new JLabel("0.0"));
 		slidersPosLabels.put(new Integer(900), new JLabel("90.0"));
 		slidersPosLabels.put(new Integer(1800), new JLabel("180.0"));
@@ -34,12 +34,12 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		sldPos1.setLabelTable(slidersPosLabels);
 		sldPos2.setLabelTable(slidersPosLabels);
-		DecimalFormat format = new DecimalFormat("0.0");
+		final DecimalFormat format = new DecimalFormat("0.0");
 		format.setDecimalSeparatorAlwaysShown(true);
 		format.setGroupingUsed(false);
 		format.setMinimumFractionDigits(1);
-		NumberFormatter formatterUserPos1 = new NumberFormatter(format);
-		NumberFormatter formatterUserPos2 = new NumberFormatter(format);
+		final NumberFormatter formatterUserPos1 = new NumberFormatter(format);
+		final NumberFormatter formatterUserPos2 = new NumberFormatter(format);
 
 		formatterUserPos1.setCommitsOnValidEdit(true);
 		formatterUserPos2.setCommitsOnValidEdit(true);
@@ -47,8 +47,8 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 		formatterUserPos1.setOverwriteMode(true);
 		formatterUserPos2.setOverwriteMode(true);
 
-		formatterUserPos1.install(this.tfPos1);
-		formatterUserPos2.install(this.tfPos2);
+		formatterUserPos1.install(tfPos1);
+		formatterUserPos2.install(tfPos2);
 
 		checkMaxNumSamples();
 		checkMaxTime();
@@ -96,7 +96,8 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
 		btnOK.setText("OK");
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
 			}
 		});
@@ -108,7 +109,8 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		btnCancel.setText("Cancel");
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
 			}
 		});
@@ -127,7 +129,8 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		btnDefaults.setText(ReCResourceBundle.findStringOrDefault("rec.exp.dftcfg.optica.title.1", "Default Config"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
 			}
 		});
@@ -167,7 +170,8 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 		sldNumSamples.setPreferredSize(new java.awt.Dimension(250, 42));
 		sldNumSamples.setValue(1);
 		sldNumSamples.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sldNumSamplesStateChanged(evt);
 			}
 		});
@@ -181,13 +185,14 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 		jPanel6.add(sldNumSamples, gridBagConstraints);
 
 		tfNumSamples.setColumns(3);
-		tfNumSamples.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		tfNumSamples.setHorizontalAlignment(SwingConstants.RIGHT);
 		tfNumSamples.setText("50");
 		tfNumSamples.setMaximumSize(new java.awt.Dimension(30, 16));
 		tfNumSamples.setMinimumSize(new java.awt.Dimension(30, 16));
 		tfNumSamples.setPreferredSize(new java.awt.Dimension(37, 16));
 		tfNumSamples.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				tfNumSamplesFocusLost(evt);
 			}
 		});
@@ -227,7 +232,8 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 		sldFreq.setMinimumSize(new java.awt.Dimension(255, 80));
 		sldFreq.setPreferredSize(new java.awt.Dimension(255, 80));
 		sldFreq.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sldFreqStateChanged(evt);
 			}
 		});
@@ -239,13 +245,14 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 		jPanel1.add(sldFreq, gridBagConstraints);
 
 		tfFreq.setColumns(4);
-		tfFreq.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		tfFreq.setHorizontalAlignment(SwingConstants.RIGHT);
 		tfFreq.setText("50");
 		tfFreq.setMaximumSize(new java.awt.Dimension(30, 16));
 		tfFreq.setMinimumSize(new java.awt.Dimension(30, 16));
 		tfFreq.setPreferredSize(new java.awt.Dimension(48, 16));
 		tfFreq.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				tfFreqFocusLost(evt);
 			}
 		});
@@ -290,7 +297,8 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 		sldPos1.setMinimumSize(new java.awt.Dimension(250, 42));
 		sldPos1.setPreferredSize(new java.awt.Dimension(250, 42));
 		sldPos1.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sldPos1StateChanged(evt);
 			}
 		});
@@ -314,7 +322,8 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 		sldPos2.setMinimumSize(new java.awt.Dimension(250, 42));
 		sldPos2.setPreferredSize(new java.awt.Dimension(250, 42));
 		sldPos2.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sldPos2StateChanged(evt);
 			}
 		});
@@ -340,7 +349,8 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		tfPos1.setText("0.0");
 		tfPos1.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				tfPos1FocusLost(evt);
 			}
 		});
@@ -351,7 +361,8 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		tfPos2.setText("360.0");
 		tfPos2.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				tfPos2FocusLost(evt);
 			}
 		});
@@ -366,112 +377,117 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 
 	}// GEN-END:initComponents
 
-	private void tfFreqFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfFreqFocusLost
+	private void tfFreqFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfFreqFocusLost
 	{// GEN-HEADEREND:event_tfFreqFocusLost
-		
-		// TODO 
-//		String strFreq = tfFreq.getText();
-//		if (strFreq.trim().equals(""))
-//			return;
-//		try {
-//			int Freq = Integer.parseInt(strFreq);
-//			if (Freq <= sldFreq.getMaximum() && Freq > sldFreq.getMinimum())
-//				sldFreq.setValue(Freq);
-//			else
-//				tfFreq.setText("" + sldFreq.getValue());
-//		} catch (Exception e) {
-//			tfFreq.setText("" + sldFreq.getValue());
-//		}
-//		checkMaxTime();
-		
+
+		// TODO
+		// String strFreq = tfFreq.getText();
+		// if (strFreq.trim().equals(""))
+		// return;
+		// try {
+		// int Freq = Integer.parseInt(strFreq);
+		// if (Freq <= sldFreq.getMaximum() && Freq > sldFreq.getMinimum())
+		// sldFreq.setValue(Freq);
+		// else
+		// tfFreq.setText("" + sldFreq.getValue());
+		// } catch (Exception e) {
+		// tfFreq.setText("" + sldFreq.getValue());
+		// }
+		// checkMaxTime();
+
 	}// GEN-LAST:event_tfFreqFocusLost
 
-	private void tfNumSamplesFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfNumSamplesFocusLost
+	private void tfNumSamplesFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfNumSamplesFocusLost
 	{// GEN-HEADEREND:event_tfNumSamplesFocusLost
-		
-		// TODO 
-//		String strNumSamples = tfNumSamples.getText();
-//		if (strNumSamples.trim().equals(""))
-//			return;
-//		try {
-//			int numSamples = Integer.parseInt(strNumSamples);
-//			if (numSamples <= sldNumSamples.getMaximum() && numSamples > sldNumSamples.getMinimum())
-//				sldNumSamples.setValue(numSamples);
-//			else
-//				tfNumSamples.setText("" + sldNumSamples.getValue());
-//		} catch (Exception e) {
-//			tfNumSamples.setText("" + sldNumSamples.getValue());
-//		}
-//		checkMaxNumSamples();
-//		checkMaxTime();
-		
+
+		// TODO
+		// String strNumSamples = tfNumSamples.getText();
+		// if (strNumSamples.trim().equals(""))
+		// return;
+		// try {
+		// int numSamples = Integer.parseInt(strNumSamples);
+		// if (numSamples <= sldNumSamples.getMaximum() && numSamples >
+		// sldNumSamples.getMinimum())
+		// sldNumSamples.setValue(numSamples);
+		// else
+		// tfNumSamples.setText("" + sldNumSamples.getValue());
+		// } catch (Exception e) {
+		// tfNumSamples.setText("" + sldNumSamples.getValue());
+		// }
+		// checkMaxNumSamples();
+		// checkMaxTime();
+
 	}// GEN-LAST:event_tfNumSamplesFocusLost
 
-	private void tfPos2FocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfPos2FocusLost
+	private void tfPos2FocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfPos2FocusLost
 	{// GEN-HEADEREND:event_tfPos2FocusLost
-		
-		// TODO 
-		String strPos2 = tfPos2.getText();
-		if (strPos2.trim().equals(""))
+
+		// TODO
+		final String strPos2 = tfPos2.getText();
+		if (strPos2.trim().equals("")) {
 			return;
-		try {
-			int Pos2 = (int) (Float.parseFloat(strPos2) * 10.F);
-			if (Pos2 <= sldPos2.getMaximum() && Pos2 > sldPos2.getMinimum())
-				sldPos2.setValue(Pos2);
-			else
-				tfPos2.setValue(new Float(((float) sldPos2.getValue() / 10.F)));
-		} catch (Exception e) {
-			tfPos2.setValue(new Float(((float) sldPos2.getValue() / 10.F)));
 		}
-//		checkPosOverlap();
-//		checkMaxNumSamples();
-		
+		try {
+			final int Pos2 = (int) (Float.parseFloat(strPos2) * 10.F);
+			if (Pos2 <= sldPos2.getMaximum() && Pos2 > sldPos2.getMinimum()) {
+				sldPos2.setValue(Pos2);
+			} else {
+				tfPos2.setValue(new Float((sldPos2.getValue() / 10.F)));
+			}
+		} catch (final Exception e) {
+			tfPos2.setValue(new Float((sldPos2.getValue() / 10.F)));
+		}
+		// checkPosOverlap();
+		// checkMaxNumSamples();
+
 	}// GEN-LAST:event_tfPos2FocusLost
 
-	private void tfPos1FocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfPos1FocusLost
+	private void tfPos1FocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfPos1FocusLost
 	{// GEN-HEADEREND:event_tfPos1FocusLost
-		
-		// TODO 
-		String strPos1 = tfPos1.getText();
 
-		if (strPos1.trim().equals(""))
+		// TODO
+		final String strPos1 = tfPos1.getText();
+
+		if (strPos1.trim().equals("")) {
 			return;
-		try {
-			int Pos1 = (int) (Float.parseFloat(strPos1) * 10.F);
-			if (Pos1 <= sldPos1.getMaximum() && Pos1 > sldPos1.getMinimum())
-				sldPos1.setValue(Pos1);
-			else
-				tfPos1.setValue(new Float(((float) sldPos1.getValue() / 10.F)));
-
-		} catch (Exception e) {
-			tfPos1.setValue(new Float(((float) sldPos1.getValue() / 10.F)));
 		}
-//		checkPosOverlap();
-//		checkMaxNumSamples();
+		try {
+			final int Pos1 = (int) (Float.parseFloat(strPos1) * 10.F);
+			if (Pos1 <= sldPos1.getMaximum() && Pos1 > sldPos1.getMinimum()) {
+				sldPos1.setValue(Pos1);
+			} else {
+				tfPos1.setValue(new Float((sldPos1.getValue() / 10.F)));
+			}
+
+		} catch (final Exception e) {
+			tfPos1.setValue(new Float((sldPos1.getValue() / 10.F)));
+		}
+		// checkPosOverlap();
+		// checkMaxNumSamples();
 
 	}// GEN-LAST:event_tfPos1FocusLost
 
-	private void sldPos1StateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos1StateChanged
+	private void sldPos1StateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos1StateChanged
 	{// GEN-HEADEREND:event_sldPos1StateChanged
 
-		// TODO 
-		tfPos1.setValue(new Float(((float) sldPos1.getValue() / 10.F)));
-//		checkPosOverlap();
-//		checkMaxNumSamples();
+		// TODO
+		tfPos1.setValue(new Float((sldPos1.getValue() / 10.F)));
+		// checkPosOverlap();
+		// checkMaxNumSamples();
 
 	}// GEN-LAST:event_sldPos1StateChanged
 
-	private void sldPos2StateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos2StateChanged
+	private void sldPos2StateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos2StateChanged
 	{// GEN-HEADEREND:event_sldPos2StateChanged
 
-		// TODO 
-		tfPos2.setValue(new Float(((float) sldPos2.getValue() / 10.F)));
-//		checkPosOverlap();
-//		checkMaxNumSamples();
+		// TODO
+		tfPos2.setValue(new Float((sldPos2.getValue() / 10.F)));
+		// checkPosOverlap();
+		// checkMaxNumSamples();
 
 	}// GEN-LAST:event_sldPos2StateChanged
 
-	private void sldFreqStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldFreqStateChanged
+	private void sldFreqStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldFreqStateChanged
 	{// GEN-HEADEREND:event_sldFreqStateChanged
 
 		if (sldFreq.getValue() == 0) {
@@ -479,12 +495,12 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 		}
 		tfFreq.setText("" + sldFreq.getValue());
 
-		// TODO 
-//		checkMaxTime();
-		
+		// TODO
+		// checkMaxTime();
+
 	}// GEN-LAST:event_sldFreqStateChanged
 
-	private void sldNumSamplesStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldNumSamplesStateChanged
+	private void sldNumSamplesStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldNumSamplesStateChanged
 	{// GEN-HEADEREND:event_sldNumSamplesStateChanged
 
 		if (sldNumSamples.getValue() == 0) {
@@ -493,10 +509,10 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 		}
 		tfNumSamples.setText("" + sldNumSamples.getValue());
 
-		// TODO 
-//		checkMaxNumSamples();
-//		checkMaxTime();
-		
+		// TODO
+		// checkMaxNumSamples();
+		// checkMaxTime();
+
 	}// GEN-LAST:event_sldNumSamplesStateChanged
 
 	private void checkPosOverlap() {
@@ -507,16 +523,15 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 
 	private void checkMaxNumSamples() {
 		lblErrorSamplesTooHigh
-				.setEnabled((float) Math.abs(sldPos2.getValue() - sldPos1.getValue()) * 80. / 1000.F < sldNumSamples
-						.getValue());
+				.setEnabled(Math.abs(sldPos2.getValue() - sldPos1.getValue()) * 80. / 1000.F < sldNumSamples.getValue());
 		btnOK.setEnabled(!lblErrorVolsAreEqua.isEnabled() && !lblErrorSamplesTooHigh.isEnabled()
 				&& !lblSamplingIntervalTooHigh.isEnabled());
 		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("optica$rec.exp.customizer.label2")
-				+ (int) Math.floor((float) Math.abs(sldPos2.getValue() - sldPos1.getValue()) * 80. / 1000.F));
+				+ (int) Math.floor(Math.abs(sldPos2.getValue() - sldPos1.getValue()) * 80. / 1000.F));
 	}
 
 	public void checkMaxTime() {
-		float maxValue = Math.min((float) sldFreq.getMaximum(), 72000.F / (float) sldNumSamples.getValue());
+		final float maxValue = Math.min(sldFreq.getMaximum(), 72000.F / sldNumSamples.getValue());
 		lblSamplingIntervalTooHigh.setEnabled(sldFreq.getValue() > maxValue);
 		btnOK.setEnabled(!lblErrorVolsAreEqua.isEnabled() && !lblErrorSamplesTooHigh.isEnabled()
 				&& !lblSamplingIntervalTooHigh.isEnabled());
@@ -524,7 +539,7 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 				+ (int) maxValue);
 	}
 
-	private void btnDefaultsActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
+	private void btnDefaultsActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
 	{// GEN-HEADEREND:event_btnDefaultsActionPerformed
 		sldNumSamples.setValue(18);
 		tfNumSamples.setText("18");
@@ -536,29 +551,31 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 		tfFreq.setText("150");
 	}// GEN-LAST:event_btnDefaultsActionPerformed
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
+	private void btnCancelActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
 	{// GEN-HEADEREND:event_btnCancelActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_btnCancelActionPerformed
 
-	private void btnOKActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
+	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
-		
-		int nsamples = sldNumSamples.getValue() < 10 ? 10 : sldNumSamples.getValue();
+
+		final int nsamples = sldNumSamples.getValue() < 10 ? 10 : sldNumSamples.getValue();
 		acqConfig.setTotalSamples(nsamples);
 
 		acqConfig.getSelectedHardwareParameter("protocolo").setParameterValue("1");
-		acqConfig.getSelectedHardwareParameter("ang1_min").setParameterValue("" + ((float) sldPos1.getValue() / 10.F));
-		acqConfig.getSelectedHardwareParameter("ang1_max").setParameterValue("" + ((float) sldPos2.getValue() / 10.F));
+		acqConfig.getSelectedHardwareParameter("ang1_min").setParameterValue("" + (sldPos1.getValue() / 10.F));
+		acqConfig.getSelectedHardwareParameter("ang1_max").setParameterValue("" + (sldPos2.getValue() / 10.F));
 		acqConfig.getSelectedHardwareParameter("delta_ang1").setParameterValue("10");
 		acqConfig.getSelectedHardwareParameter("delay").setParameterValue("2");
 
-//		acqConfig.setSelectedFrequency(new Frequency((double) sldFreq.getValue(), hardwareInfo
-//				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
-//				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
+		// acqConfig.setSelectedFrequency(new Frequency((double)
+		// sldFreq.getValue(), hardwareInfo
+		// .getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(),
+		// hardwareInfo
+		// .getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
 
 		fireICustomizerListenerDone();
-		
+
 	}// GEN-LAST:event_btnOKActionPerformed
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
@@ -593,7 +610,8 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -605,7 +623,8 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -615,9 +634,10 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -631,9 +651,10 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -645,57 +666,67 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
 		return acqConfig;
 	}
 
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
 			System.out.println("OpticaCustomizer.setHardwareAcquisitionConfig(HardwareAcquisitionConfig  acqConfig)");
 			System.out.println("acqConfig: [" + acqConfig + "]");
-			
-			// TODO 
-//			int nsamples = acqConfig.getTotalSamples();
-//			sldNumSamples.setValue(nsamples);
-//			tfNumSamples.setText("" + nsamples);
-//
-//			int freq = (int) acqConfig.getSelectedFrequency().getFrequency();
-//			sldFreq.setValue(freq);
-//			tfFreq.setText("" + freq);
-//
-//			float pos1f = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("UserPosLow"));
-//			int pos1 = (int) Math.floor(pos1f * 1000.F);
-//			sldPos1.setValue(pos1);
-//			tfPos1.setValue(new Float(pos1f));
-//
-//			float pos2f = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("UserPosHigh"));
-//			int pos2 = (int) Math.floor(pos2f * 1000.F);
-//			sldPos2.setValue(pos2);
-//			tfPos2.setValue(new Float(pos2f));
+
+			// TODO
+			// int nsamples = acqConfig.getTotalSamples();
+			// sldNumSamples.setValue(nsamples);
+			// tfNumSamples.setText("" + nsamples);
+			//
+			// int freq = (int) acqConfig.getSelectedFrequency().getFrequency();
+			// sldFreq.setValue(freq);
+			// tfFreq.setText("" + freq);
+			//
+			// float pos1f =
+			// Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("UserPosLow"));
+			// int pos1 = (int) Math.floor(pos1f * 1000.F);
+			// sldPos1.setValue(pos1);
+			// tfPos1.setValue(new Float(pos1f));
+			//
+			// float pos2f =
+			// Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("UserPosHigh"));
+			// int pos2 = (int) Math.floor(pos2f * 1000.F);
+			// sldPos2.setValue(pos2);
+			// tfPos2.setValue(new Float(pos2f));
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
+	@Override
 	public javax.swing.JComponent getCustomizerComponent() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
-		return new javax.swing.ImageIcon(getClass().getResource("/pt/utl/ist/elab/client/optica/resources/optica_iconified.gif"));
+		return new javax.swing.ImageIcon(getClass().getResource(
+				"/pt/utl/ist/elab/client/optica/resources/optica_iconified.gif"));
 	}
 
+	@Override
 	public String getCustomizerTitle() {
 		return ReCResourceBundle.findString("optica$rec.exp.optica.customizer.title");
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}

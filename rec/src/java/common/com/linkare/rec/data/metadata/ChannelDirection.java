@@ -1,6 +1,11 @@
 package com.linkare.rec.data.metadata;
 
 public class ChannelDirection implements org.omg.CORBA.portable.IDLEntity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6726466355392865469L;
+
 	//
 	// Internal member value
 	//
@@ -14,7 +19,7 @@ public class ChannelDirection implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member CHANNEL_INPUT
 	//
-	public static final ChannelDirection CHANNEL_INPUT = new ChannelDirection(_CHANNEL_INPUT);
+	public static final ChannelDirection CHANNEL_INPUT = new ChannelDirection(ChannelDirection._CHANNEL_INPUT);
 
 	//
 	// Enum member CHANNEL_OUTPUT value
@@ -24,7 +29,7 @@ public class ChannelDirection implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member CHANNEL_OUTPUT
 	//
-	public static final ChannelDirection CHANNEL_OUTPUT = new ChannelDirection(_CHANNEL_OUTPUT);
+	public static final ChannelDirection CHANNEL_OUTPUT = new ChannelDirection(ChannelDirection._CHANNEL_OUTPUT);
 
 	//
 	// Return the internal member value
@@ -34,11 +39,12 @@ public class ChannelDirection implements org.omg.CORBA.portable.IDLEntity {
 		return value;
 	}
 
-	public void setValue(int value) {
-		if (value == _CHANNEL_INPUT || value == _CHANNEL_OUTPUT)
+	public void setValue(final int value) {
+		if (value == ChannelDirection._CHANNEL_INPUT || value == ChannelDirection._CHANNEL_OUTPUT) {
 			this.value = value;
-		else
+		} else {
 			throw new org.omg.CORBA.BAD_OPERATION();
+		}
 	}
 
 	//
@@ -46,6 +52,7 @@ public class ChannelDirection implements org.omg.CORBA.portable.IDLEntity {
 	// @param an enum value
 	// @return an enum member
 	//
+	@Override
 	public String toString() {
 		switch (value) {
 		case 0:
@@ -61,7 +68,7 @@ public class ChannelDirection implements org.omg.CORBA.portable.IDLEntity {
 	// Private constructor
 	// @param the enum value for this new member
 	//
-	public ChannelDirection(int value) {
+	public ChannelDirection(final int value) {
 		setValue(value);
 	}
 
@@ -71,9 +78,11 @@ public class ChannelDirection implements org.omg.CORBA.portable.IDLEntity {
 	public ChannelDirection() {
 	}
 
-	public boolean equals(Object other) {
-		if (other == null || !(other instanceof ChannelDirection))
+	@Override
+	public boolean equals(final Object other) {
+		if (other == null || !(other instanceof ChannelDirection)) {
 			return false;
+		}
 
 		return ((ChannelDirection) other).getValue() == getValue();
 	}

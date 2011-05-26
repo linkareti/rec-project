@@ -43,7 +43,7 @@ public enum ResourceType {
 	private ResourceType childType = null;
 	private String name = null;
 
-	private ResourceType(String name, String propKey, ResourceType childType) {
+	private ResourceType(final String name, final String propKey, final ResourceType childType) {
 		this.name = name;
 		this.propKey = propKey;
 		this.childType = childType;

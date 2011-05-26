@@ -31,31 +31,31 @@ import org.videolan.jvlc.internal.LibVlc.LibVlcMediaDescriptor;
 import org.videolan.jvlc.internal.LibVlc.libvlc_exception_t;
 
 public class MediaDescriptor {
-	private LibVlcMediaDescriptor instance;
-	private LibVlc libvlc;
-	private LibVlcEventManager eventManager;
+	private final LibVlcMediaDescriptor instance;
+	private final LibVlc libvlc;
+	private final LibVlcEventManager eventManager;
 	private boolean released;
 
 	/**
 	 * @param jvlc The jvlc instance to create the media descriptor for.
 	 * @param media The media string
 	 */
-	public MediaDescriptor(JVLC jvlc, String media) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public MediaDescriptor(final JVLC jvlc, final String media) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc = jvlc.getLibvlc();
 		instance = libvlc.libvlc_media_new(jvlc.getInstance(), media, exception);
 		eventManager = libvlc.libvlc_media_event_manager(instance, exception);
 	}
 
-	MediaDescriptor(JVLC jvlc, LibVlcMediaDescriptor instance) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	MediaDescriptor(final JVLC jvlc, final LibVlcMediaDescriptor instance) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc = jvlc.getLibvlc();
 		this.instance = instance;
 		eventManager = libvlc.libvlc_media_event_manager(instance, exception);
 	}
 
-	public void addOption(String option) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public void addOption(final String option) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc.libvlc_media_add_option(instance, option, exception);
 	}
 

@@ -61,50 +61,47 @@ public class WebResource extends DisplayNode {
 	}
 
 	/**
-	 * @param internalBrowser
-	 *            the internalBrowser to set
+	 * @param internalBrowser the internalBrowser to set
 	 */
-	public void setInternalBrowser(boolean internalBrowser) {
-		changeSupport.firePropertyChange("internalBrowser", this.internalBrowser, this.internalBrowser = internalBrowser);
+	public void setInternalBrowser(final boolean internalBrowser) {
+		changeSupport.firePropertyChange("internalBrowser", this.internalBrowser,
+				this.internalBrowser = internalBrowser);
 	}
 
 	/**
-	 * @param toolTipLocationBundleKey
-	 *            the toolTipLocationBundleKey to set
+	 * @param toolTipLocationBundleKey the toolTipLocationBundleKey to set
 	 */
-	public void setToolTipLocationBundleKey(String toolTipLocationBundleKey) {
+	public void setToolTipLocationBundleKey(final String toolTipLocationBundleKey) {
 		changeSupport.firePropertyChange("toolTipLocationBundleKey", this.toolTipLocationBundleKey,
 				this.toolTipLocationBundleKey = toolTipLocationBundleKey);
 	}
 
 	/**
-	 * @param displayStringBundleKey
-	 *            the displayStringBundleKey to set
+	 * @param displayStringBundleKey the displayStringBundleKey to set
 	 */
-	public void setDisplayStringBundleKey(String displayStringBundleKey) {
+	public void setDisplayStringBundleKey(final String displayStringBundleKey) {
 		changeSupport.firePropertyChange("displayStringBundleKey", this.displayStringBundleKey,
 				this.displayStringBundleKey = displayStringBundleKey);
 	}
 
 	/**
-	 * @param iconLocationBundleKey
-	 *            the iconLocationBundleKey to set
+	 * @param iconLocationBundleKey the iconLocationBundleKey to set
 	 */
-	public void setIconLocationBundleKey(String iconLocationBundleKey) {
+	public void setIconLocationBundleKey(final String iconLocationBundleKey) {
 		changeSupport.firePropertyChange("iconLocationBundleKey", this.iconLocationBundleKey,
 				this.iconLocationBundleKey = iconLocationBundleKey);
 	}
 
 	/**
-	 * @param locationBundleKey
-	 *            the locationBundleKey to set
+	 * @param locationBundleKey the locationBundleKey to set
 	 */
-	public void setLocationBundleKey(String locationBundleKey) {
-		changeSupport.firePropertyChange("locationBundleKey", this.locationBundleKey, this.locationBundleKey = locationBundleKey);
+	public void setLocationBundleKey(final String locationBundleKey) {
+		changeSupport.firePropertyChange("locationBundleKey", this.locationBundleKey,
+				this.locationBundleKey = locationBundleKey);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (obj == null) {
 			return false;
 		}
@@ -112,22 +109,23 @@ public class WebResource extends DisplayNode {
 			return false;
 		}
 		final WebResource other = (WebResource) obj;
-		if (this.internalBrowser != other.internalBrowser) {
+		if (internalBrowser != other.internalBrowser) {
 			return false;
 		}
-		if ((this.toolTipLocationBundleKey == null) ? (other.toolTipLocationBundleKey != null) : !this.toolTipLocationBundleKey
+		if ((toolTipLocationBundleKey == null) ? (other.toolTipLocationBundleKey != null) : !toolTipLocationBundleKey
 				.equals(other.toolTipLocationBundleKey)) {
 			return false;
 		}
-		if ((this.displayStringBundleKey == null) ? (other.displayStringBundleKey != null) : !this.displayStringBundleKey
+		if ((displayStringBundleKey == null) ? (other.displayStringBundleKey != null) : !displayStringBundleKey
 				.equals(other.displayStringBundleKey)) {
 			return false;
 		}
-		if ((this.iconLocationBundleKey == null) ? (other.iconLocationBundleKey != null) : !this.iconLocationBundleKey
+		if ((iconLocationBundleKey == null) ? (other.iconLocationBundleKey != null) : !iconLocationBundleKey
 				.equals(other.iconLocationBundleKey)) {
 			return false;
 		}
-		if ((this.locationBundleKey == null) ? (other.locationBundleKey != null) : !this.locationBundleKey.equals(other.locationBundleKey)) {
+		if ((locationBundleKey == null) ? (other.locationBundleKey != null) : !locationBundleKey
+				.equals(other.locationBundleKey)) {
 			return false;
 		}
 		return true;
@@ -136,11 +134,11 @@ public class WebResource extends DisplayNode {
 	@Override
 	public int hashCode() {
 		int hash = 7;
-		hash = 13 * hash + (this.internalBrowser ? 1 : 0);
-		hash = 13 * hash + (this.toolTipLocationBundleKey != null ? this.toolTipLocationBundleKey.hashCode() : 0);
-		hash = 13 * hash + (this.displayStringBundleKey != null ? this.displayStringBundleKey.hashCode() : 0);
-		hash = 13 * hash + (this.iconLocationBundleKey != null ? this.iconLocationBundleKey.hashCode() : 0);
-		hash = 13 * hash + (this.locationBundleKey != null ? this.locationBundleKey.hashCode() : 0);
+		hash = 13 * hash + (internalBrowser ? 1 : 0);
+		hash = 13 * hash + (toolTipLocationBundleKey != null ? toolTipLocationBundleKey.hashCode() : 0);
+		hash = 13 * hash + (displayStringBundleKey != null ? displayStringBundleKey.hashCode() : 0);
+		hash = 13 * hash + (iconLocationBundleKey != null ? iconLocationBundleKey.hashCode() : 0);
+		hash = 13 * hash + (locationBundleKey != null ? locationBundleKey.hashCode() : 0);
 		return hash;
 	}
 

@@ -11,6 +11,10 @@ package com.linkare.rec.impl.baseUI.control;
  * @author André Neto - LEFT - IST
  */
 public class ControllerEvent extends java.util.EventObject {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4952346639176245568L;
 	public static final byte PLAY = 0;
 	public static final byte STOP = 1;
 	public static final byte CUSTOMIZE = 2;
@@ -32,18 +36,18 @@ public class ControllerEvent extends java.util.EventObject {
 	private byte trigger = -1;
 	private String customTrigger = "";
 
-	public ControllerEvent(Object source) {
+	public ControllerEvent(final Object source) {
 		super(source);
 	}
 
 	/** Creates a new instance of ControlEvent */
-	public ControllerEvent(Object source, byte trigger) {
+	public ControllerEvent(final Object source, final byte trigger) {
 		super(source);
 		this.trigger = trigger;
 	}
 
 	/** Creates a new instance of ControlEvent */
-	public ControllerEvent(Object source, String customTrigger) {
+	public ControllerEvent(final Object source, final String customTrigger) {
 		super(source);
 		this.customTrigger = customTrigger;
 	}

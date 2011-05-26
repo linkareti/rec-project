@@ -24,63 +24,70 @@ import com.linkare.rec.impl.newface.laf.flat.elabtheme.FlatScrollButton;
  */
 public class FlatScrollBarUI extends MetalScrollBarUI {
 
-	//FIXME: Corrigir esta forma de obter as cores. Tem de ser por intermédio de propriedades
-	//ENABLED COLORS
+	// FIXME: Corrigir esta forma de obter as cores. Tem de ser por intermédio
+	// de propriedades
+	// ENABLED COLORS
 	public static final Color COLOR_BORDER = new Color(0x848485);
 	public static final Color COLOR_THUMB_BACKGROUND = new Color(0xDAE1DF);
 	public static final Color COLOR_BACKGROUND = new Color(0xE4EEED);
-	//OTHER COLORS
+	// OTHER COLORS
 	public static final Color COLOR_DIS_BACKGROUND = new Color(0xE4EEED);
 	public static final Color COLOR_PRESS_BACKGROUND = new Color(0xE4EEED);
-	//INSETS
-	//	public static final Integer INSETS = 1;
+	// INSETS
+	// public static final Integer INSETS = 1;
 
 	protected FlatScrollButton increaseButton;
 	protected FlatScrollButton decreaseButton;
 
-	public static ComponentUI createUI(JComponent c) {
+	public static ComponentUI createUI(final JComponent c) {
 		return new FlatScrollBarUI();
 	}
 
 	@Override
-	protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
+	protected void paintTrack(final Graphics g, final JComponent c, final Rectangle trackBounds) {
 
 		g.translate(trackBounds.x, trackBounds.y);
-		//        scrollbar.setBackground(scrollbar.getParent().getBackground());
+		// scrollbar.setBackground(scrollbar.getParent().getBackground());
 
 		if (scrollbar.getOrientation() == Adjustable.VERTICAL) {
-			//		    g.setColor( COLOR_BACKGROUND);
-			//    	    g.fillRect( 1, INSETS, trackBounds.width - 1, trackBounds.height - INSETS*2);
+			// g.setColor( COLOR_BACKGROUND);
+			// g.fillRect( 1, INSETS, trackBounds.width - 1, trackBounds.height
+			// - INSETS*2);
 
-			//FIXME: COMO É ?? CORES ENABLE/DISABLE
+			// FIXME: COMO É ?? CORES ENABLE/DISABLE
 			if (c.isEnabled()) {
-				g.setColor(COLOR_BORDER);
-				//FIXME: COMO É ?? DISTANCIA ENTRE BOTÃO E SLIDE
-				g.drawLine(0, 0, 0, trackBounds.height); //LEFT
-				g.drawLine(trackBounds.width - 1, 0, trackBounds.width - 1, trackBounds.height); //RIGHT
+				g.setColor(FlatScrollBarUI.COLOR_BORDER);
+				// FIXME: COMO É ?? DISTANCIA ENTRE BOTÃO E SLIDE
+				g.drawLine(0, 0, 0, trackBounds.height); // LEFT
+				g.drawLine(trackBounds.width - 1, 0, trackBounds.width - 1, trackBounds.height); // RIGHT
 
-				//				g.drawLine( 1, trackBounds.height , trackBounds.width - 1, trackBounds.height );//BOTTOM
-				//				g.drawLine( 1, 1, trackBounds.width - 1, 1 );	//TOP
+				// g.drawLine( 1, trackBounds.height , trackBounds.width - 1,
+				// trackBounds.height );//BOTTOM
+				// g.drawLine( 1, 1, trackBounds.width - 1, 1 ); //TOP
 
 			} else {
-				//			    MetalUtils.drawDisabledBorder(g, 0, 0, trackBounds.width, trackBounds.height );
+				// MetalUtils.drawDisabledBorder(g, 0, 0, trackBounds.width,
+				// trackBounds.height );
 			}
 
 		} else // HORIZONTAL
 		{
-			//    	    g.setColor( COLOR_BACKGROUND);
-			//    	    g.fillRect( INSETS + 1, 1, trackBounds.width - INSETS*2, trackBounds.height - 2);
+			// g.setColor( COLOR_BACKGROUND);
+			// g.fillRect( INSETS + 1, 1, trackBounds.width - INSETS*2,
+			// trackBounds.height - 2);
 
 			if (c.isEnabled()) {
-				g.setColor(COLOR_BORDER);
+				g.setColor(FlatScrollBarUI.COLOR_BORDER);
 				g.drawLine(0, 0, trackBounds.width, 0); // TOP
 				g.drawLine(0, trackBounds.height - 1, trackBounds.width, trackBounds.height - 1); // BOTTOM
 
-				//				g.drawLine( 0, 1, 0, trackBounds.height - 1 ); // LEFT
-				//				g.drawLine( trackBounds.width , 1, trackBounds.width , trackBounds.height - 1 ); // RIGHT
+				// g.drawLine( 0, 1, 0, trackBounds.height - 1 ); // LEFT
+				// g.drawLine( trackBounds.width , 1, trackBounds.width ,
+				// trackBounds.height - 1 ); // RIGHT
 
 			} else {
-				//		        MetalUtils.drawDisabledBorder(g, 0, 0, trackBounds.width, trackBounds.height );
+				// MetalUtils.drawDisabledBorder(g, 0, 0, trackBounds.width,
+				// trackBounds.height );
 			}
 		}
 
@@ -88,7 +95,7 @@ public class FlatScrollBarUI extends MetalScrollBarUI {
 	}
 
 	@Override
-	protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
+	protected void paintThumb(final Graphics g, final JComponent c, final Rectangle thumbBounds) {
 		if (!c.isEnabled()) {
 			return;
 		}
@@ -96,24 +103,24 @@ public class FlatScrollBarUI extends MetalScrollBarUI {
 		g.translate(thumbBounds.x, thumbBounds.y);
 
 		if (scrollbar.getOrientation() == Adjustable.VERTICAL) {
-			g.setColor(COLOR_THUMB_BACKGROUND);
+			g.setColor(FlatScrollBarUI.COLOR_THUMB_BACKGROUND);
 			g.fillRect(2, 1, thumbBounds.width - 4, thumbBounds.height - 2);
 
-			g.setColor(COLOR_BORDER);
-			g.drawLine(1, 0, thumbBounds.width - 2, 0);//TOP
-			g.drawLine(1, 1, 1, thumbBounds.height - 2);//LEFT
-			g.drawLine(1, thumbBounds.height - 1, thumbBounds.width - 2, thumbBounds.height - 1);//BOTTOM
-			g.drawLine(thumbBounds.width - 2, 1, thumbBounds.width - 2, thumbBounds.height - 2);//RIGHT
+			g.setColor(FlatScrollBarUI.COLOR_BORDER);
+			g.drawLine(1, 0, thumbBounds.width - 2, 0);// TOP
+			g.drawLine(1, 1, 1, thumbBounds.height - 2);// LEFT
+			g.drawLine(1, thumbBounds.height - 1, thumbBounds.width - 2, thumbBounds.height - 1);// BOTTOM
+			g.drawLine(thumbBounds.width - 2, 1, thumbBounds.width - 2, thumbBounds.height - 2);// RIGHT
 		} else // HORIZONTAL
 		{
-			g.setColor(COLOR_THUMB_BACKGROUND);
+			g.setColor(FlatScrollBarUI.COLOR_THUMB_BACKGROUND);
 			g.fillRect(2, 2, thumbBounds.width - 2, thumbBounds.height - 4);
 
-			g.setColor(COLOR_BORDER);
-			g.drawLine(1, 1, thumbBounds.width - 1, 1);//TOP
-			g.drawLine(0, 1, 0, thumbBounds.height - 2);//LEFT
-			g.drawLine(1, thumbBounds.height - 2, thumbBounds.width - 1, thumbBounds.height - 2);//BOTTOM
-			g.drawLine(thumbBounds.width - 1, 1, thumbBounds.width - 1, thumbBounds.height - 2);//RIGHT
+			g.setColor(FlatScrollBarUI.COLOR_BORDER);
+			g.drawLine(1, 1, thumbBounds.width - 1, 1);// TOP
+			g.drawLine(0, 1, 0, thumbBounds.height - 2);// LEFT
+			g.drawLine(1, thumbBounds.height - 2, thumbBounds.width - 1, thumbBounds.height - 2);// BOTTOM
+			g.drawLine(thumbBounds.width - 1, 1, thumbBounds.width - 1, thumbBounds.height - 2);// RIGHT
 		}
 
 		g.translate(-thumbBounds.x, -thumbBounds.y);
@@ -123,14 +130,14 @@ public class FlatScrollBarUI extends MetalScrollBarUI {
 	 * Returns the view that represents the decrease view.
 	 */
 	@Override
-	protected JButton createDecreaseButton(int orientation) {
+	protected JButton createDecreaseButton(final int orientation) {
 		decreaseButton = new FlatScrollButton(orientation, scrollBarWidth, isFreeStanding);
 		return decreaseButton;
 	}
 
 	/** Returns the view that represents the increase view. */
 	@Override
-	protected JButton createIncreaseButton(int orientation) {
+	protected JButton createIncreaseButton(final int orientation) {
 		increaseButton = new FlatScrollButton(orientation, scrollBarWidth, isFreeStanding);
 		return increaseButton;
 	}

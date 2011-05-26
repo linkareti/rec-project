@@ -10,11 +10,10 @@ import static com.linkare.rec.impl.newface.component.ExperimentActionLabel.State
 import static com.linkare.rec.impl.newface.component.ExperimentActionLabel.State.RED;
 import static com.linkare.rec.impl.newface.component.ExperimentActionLabel.State.YELLOW;
 
-import java.awt.Dimension;
 import java.awt.Dialog.ModalityType;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.HierarchyEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowEvent;
@@ -63,6 +62,7 @@ import com.linkare.rec.impl.newface.component.ExperimentHeaderInfoBox;
 import com.linkare.rec.impl.newface.component.ExperimentHistoryBox;
 import com.linkare.rec.impl.newface.component.FlatButton;
 import com.linkare.rec.impl.newface.component.GlassLayer;
+import com.linkare.rec.impl.newface.component.GlassLayer.CatchEvents;
 import com.linkare.rec.impl.newface.component.InfoPopup;
 import com.linkare.rec.impl.newface.component.LabLoginBox;
 import com.linkare.rec.impl.newface.component.LayoutContainerPane;
@@ -71,13 +71,12 @@ import com.linkare.rec.impl.newface.component.StatusActionBar;
 import com.linkare.rec.impl.newface.component.UndecoratedDialog;
 import com.linkare.rec.impl.newface.component.UnexpectedErrorPane;
 import com.linkare.rec.impl.newface.component.VideoBox;
-import com.linkare.rec.impl.newface.component.GlassLayer.CatchEvents;
 import com.linkare.rec.impl.newface.component.media.VideoViewerController;
 import com.linkare.rec.impl.newface.config.Apparatus;
 import com.linkare.rec.impl.newface.utils.LAFConnector;
+import com.linkare.rec.impl.newface.utils.LAFConnector.SpecialELabProperties;
 import com.linkare.rec.impl.newface.utils.PreferencesUtils;
 import com.linkare.rec.impl.newface.utils.TimeUtils;
-import com.linkare.rec.impl.newface.utils.LAFConnector.SpecialELabProperties;
 
 /**
  * The application's main frame.
@@ -93,14 +92,15 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	static {
 		Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler() {
 			@Override
-			public void uncaughtException(Thread thread, Throwable t) {
-				log.log(Level.SEVERE, "An uncaught exception occurred in thread " + thread, t);
-				getUnexpectedErrorBox(t).setVisible(true);
+			public void uncaughtException(final Thread thread, final Throwable t) {
+				ReCFrameView.log.log(Level.SEVERE, "An uncaught exception occurred in thread " + thread, t);
+				ReCFrameView.getUnexpectedErrorBox(t).setVisible(true);
 			}
 		});
 	}
 
-	// For now, application model is unique. So there is no need for abstraction here.
+	// For now, application model is unique. So there is no need for abstraction
+	// here.
 	private final ReCApplication recApplication = ReCApplication.getApplication();
 
 	private List<AbstractContentPane> interactiveBoxes;
@@ -115,23 +115,24 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 	private ResultsPane resultsPane;
 
-	public ReCFrameView(SingleFrameApplication app) {
+	public ReCFrameView(final SingleFrameApplication app) {
 		super(app);
 
-		ResourceMap resourceMap = getResourceMap();
+		final ResourceMap resourceMap = getResourceMap();
 
 		// Get status resources
 		// Icon idleIcon, final Icon[] busyIcons, int busyAnimationRate
-		idleIcon = resourceMap.getIcon("StatusBar.idleIcon");
-		for (int i = 0; i < busyIcons.length; i++) {
-			busyIcons[i] = resourceMap.getIcon("StatusBar.busyIcons[" + i + "]");
+		ReCFrameView.idleIcon = resourceMap.getIcon("StatusBar.idleIcon");
+		for (int i = 0; i < ReCFrameView.busyIcons.length; i++) {
+			ReCFrameView.busyIcons[i] = resourceMap.getIcon("StatusBar.busyIcons[" + i + "]");
 		}
 		busyAnimationRate = resourceMap.getInteger("StatusBar.busyAnimationRate");
 
 		// Initialize components
 		initComponents();
 
-		// Collect boxes that are enabled/disabled between lab connect/disconnect
+		// Collect boxes that are enabled/disabled between lab
+		// connect/disconnect
 		collectInterativeBoxes();
 
 		// Set frame properties
@@ -139,8 +140,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		getFrame().setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		getFrame().addWindowListener(new WindowListenerAdapter() {
 			@Override
-			public void windowClosing(WindowEvent e) {
-				ApplicationActionMap actionMap = getActionMap();
+			public void windowClosing(final WindowEvent e) {
+				final ApplicationActionMap actionMap = getActionMap();
 				actionMap.get("quit").actionPerformed(new ActionEvent(this, 0, "close"));
 			}
 		});
@@ -156,13 +157,13 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		getChatBox().getChat().setUserInfo(recApplication.getUserInfo());
 
 		// Hide status indicators
-		//lblTaskMessage.setVisible(false);
-		//progressCicleTask.setVisible(false);
+		// lblTaskMessage.setVisible(false);
+		// progressCicleTask.setVisible(false);
 
 		// Init timers
-		apparatusLockTimer = new Timer(ONE_SECOND, new ActionListener() {
+		apparatusLockTimer = new Timer(ReCFrameView.ONE_SECOND, new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(final ActionEvent e) {
 				apparatusLockTimerTick();
 			}
 		});
@@ -171,11 +172,11 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		statusPanel.setVisible(false);
 
 		// connecting action tasks to status bar via TaskMonitor
-		TaskMonitor taskMonitor = new TaskMonitor(getApplication().getContext());
+		final TaskMonitor taskMonitor = new TaskMonitor(getApplication().getContext());
 		taskMonitor.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-			public void propertyChange(java.beans.PropertyChangeEvent evt) {
-				String propertyName = evt.getPropertyName();
-				log.finer(propertyName + " = " + evt.getNewValue());
+			public void propertyChange(final java.beans.PropertyChangeEvent evt) {
+				final String propertyName = evt.getPropertyName();
+				ReCFrameView.log.finer(propertyName + " = " + evt.getNewValue());
 				if ("started".equals(propertyName)) {
 					progressCicleTask.start();
 
@@ -184,7 +185,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 					lblTaskMessage.setText("");
 
 				} else if ("message".equals(propertyName)) {
-					String taskMessage = (String) (evt.getNewValue());
+					final String taskMessage = (String) (evt.getNewValue());
 					lblTaskMessage.setText(taskMessage);
 				}
 			}
@@ -196,8 +197,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	 * @return The <code>ReCFrameView</code> action map.
 	 */
 	private ApplicationActionMap getActionMap() {
-		return org.jdesktop.application.Application.getInstance(ReCApplication.class).getContext().getActionMap(ReCFrameView.class,
-				ReCFrameView.this);
+		return org.jdesktop.application.Application.getInstance(ReCApplication.class).getContext()
+				.getActionMap(ReCFrameView.class, ReCFrameView.this);
 	}
 
 	/**
@@ -212,9 +213,9 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		interactiveBoxes.add(getChatBox());
 	}
 
-	public void setInteractiveBoxesEnabled(boolean enabled) {
-		for (AbstractContentPane box : interactiveBoxes) {
-			log.fine("Setting box " + box.getName() + " enabled = " + enabled);
+	public void setInteractiveBoxesEnabled(final boolean enabled) {
+		for (final AbstractContentPane box : interactiveBoxes) {
+			ReCFrameView.log.fine("Setting box " + box.getName() + " enabled = " + enabled);
 			box.setEnabled(enabled);
 			box.setChildComponentsEnabled(enabled);
 		}
@@ -250,7 +251,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 	private StatusActionBar getExperimentStatusActionBar() {
 		StatusActionBar result = null;
-		ApparatusTabbedPane apparatusTabbedPane = getApparatusTabbedPane();
+		final ApparatusTabbedPane apparatusTabbedPane = getApparatusTabbedPane();
 		if (apparatusTabbedPane != null) {
 			result = apparatusTabbedPane.getExperimentStatusActionBar();
 		}
@@ -266,34 +267,35 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	}
 
 	/**
-	 * @param cause
-	 *            The unexpected error cause
+	 * @param cause The unexpected error cause
 	 * @return The <code>NewUnexpectedErrorPane</code>
 	 */
-	public static DefaultDialog<UnexpectedErrorPane> getUnexpectedErrorBox(Throwable cause) {
-		if (unexpectedErrorBox == null) {
-			unexpectedErrorBox = new DefaultDialog<UnexpectedErrorPane>(new UnexpectedErrorPane(cause));
-			unexpectedErrorBox.setLocationRelativeTo(null);
+	public static DefaultDialog<UnexpectedErrorPane> getUnexpectedErrorBox(final Throwable cause) {
+		if (ReCFrameView.unexpectedErrorBox == null) {
+			ReCFrameView.unexpectedErrorBox = new DefaultDialog<UnexpectedErrorPane>(new UnexpectedErrorPane(cause));
+			ReCFrameView.unexpectedErrorBox.setLocationRelativeTo(null);
 		}
-		unexpectedErrorBox.getContent().setErrorCause(cause);
-		unexpectedErrorBox.pack();
-		return unexpectedErrorBox;
+		ReCFrameView.unexpectedErrorBox.getContent().setErrorCause(cause);
+		ReCFrameView.unexpectedErrorBox.pack();
+		return ReCFrameView.unexpectedErrorBox;
 	}
 
-	public DefaultDialog<ApparatusTabbedHistoryPane> getNewExperimentHistoryDialogBox(ExperimentUIData experimentUIData) {
-		ApparatusTabbedHistoryPane apparatusTabbedPane = new ApparatusTabbedHistoryPane(experimentUIData);
+	public DefaultDialog<ApparatusTabbedHistoryPane> getNewExperimentHistoryDialogBox(
+			final ExperimentUIData experimentUIData) {
+		final ApparatusTabbedHistoryPane apparatusTabbedPane = new ApparatusTabbedHistoryPane(experimentUIData);
 		// Set description
-		apparatusTabbedPane.getDescriptionPane().setApparatusConfig(experimentUIData.getHistoryUINode().getApparatusConfig());
+		apparatusTabbedPane.getDescriptionPane().setApparatusConfig(
+				experimentUIData.getHistoryUINode().getApparatusConfig());
 		// Set results
-		ResultsPane historyResultsPane = new ResultsPane();
-		historyResultsPane.setExperimentResults(experimentUIData.getHistoryUINode(), experimentUIData.getDataModel(), experimentUIData
-				.getDataDisplays());
+		final ResultsPane historyResultsPane = new ResultsPane();
+		historyResultsPane.setExperimentResults(experimentUIData.getHistoryUINode(), experimentUIData.getDataModel(),
+				experimentUIData.getDataDisplays());
 		apparatusTabbedPane.getResultsHolderPane().add(historyResultsPane);
 		// Select the results panel by default
 		apparatusTabbedPane.setSelectedTabIndex(ApparatusTabbedHistoryPane.TAB_RESULTS);
 		// Return dialog
-		DefaultDialog<ApparatusTabbedHistoryPane> dialog = new DefaultDialog<ApparatusTabbedHistoryPane>(getFrame(), experimentUIData
-				.getHistoryUINode().getApparatusName(), apparatusTabbedPane);
+		final DefaultDialog<ApparatusTabbedHistoryPane> dialog = new DefaultDialog<ApparatusTabbedHistoryPane>(
+				getFrame(), experimentUIData.getHistoryUINode().getApparatusName(), apparatusTabbedPane);
 		dialog.pack();
 		dialog.setLocationRelativeTo(getFrame());
 		dialog.setModalityType(ModalityType.MODELESS);
@@ -302,9 +304,9 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 	public UndecoratedDialog<LabLoginBox> getLoginBox() {
 		if (loginBox == null) {
-			LabLoginBox loginBoxPane = new LabLoginBox();
-			loginBoxPane.setIdleIcon(idleIcon);
-			loginBoxPane.setBusyIcons(busyIcons);
+			final LabLoginBox loginBoxPane = new LabLoginBox();
+			loginBoxPane.setIdleIcon(ReCFrameView.idleIcon);
+			loginBoxPane.setBusyIcons(ReCFrameView.busyIcons);
 			loginBox = new UndecoratedDialog<LabLoginBox>(getFrame(), loginBoxPane);
 		}
 		loginBox.getContent().setLoginProgressVisible(false);
@@ -313,13 +315,13 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		return loginBox;
 	}
 
-	public UndecoratedDialog<ExperimentHeaderInfoBox> getExperimentHeaderInfoBox(String info) {
+	public UndecoratedDialog<ExperimentHeaderInfoBox> getExperimentHeaderInfoBox(final String info) {
 		if (experimentInfoBox == null) {
-			ExperimentHeaderInfoBox experimentInfoBoxPane = new ExperimentHeaderInfoBox();
+			final ExperimentHeaderInfoBox experimentInfoBoxPane = new ExperimentHeaderInfoBox();
 			experimentInfoBox = new UndecoratedDialog<ExperimentHeaderInfoBox>(getFrame(), experimentInfoBoxPane);
 			experimentInfoBox.getContent().addPropertyChangeListener(new PropertyChangeListener() {
 				@Override
-				public void propertyChange(PropertyChangeEvent evt) {
+				public void propertyChange(final PropertyChangeEvent evt) {
 					if (evt != null) {
 						if (ExperimentHeaderInfoBox.CLOSE_ME == evt.getPropertyName()) {
 							setGlassPaneVisible(false);
@@ -337,9 +339,9 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 	public JDialog getAboutBox() {
 		if (aboutBox == null) {
-			JFrame mainFrame = recApplication.getMainFrame();
-//			aboutBox = new ReCAboutBox(mainFrame);
-//			aboutBox = new AboutDialog();
+			final JFrame mainFrame = recApplication.getMainFrame();
+			// aboutBox = new ReCAboutBox(mainFrame);
+			// aboutBox = new AboutDialog();
 			aboutBox = new AboutBoxDialog(mainFrame);
 			aboutBox.setLocationRelativeTo(mainFrame);
 		}
@@ -354,15 +356,15 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		return getLayoutContainerPane().getNavigationPane().getApparatusSelectBox().getButtonToggleEnter();
 	}
 
-	public void setGlassPaneVisible(boolean visible) {
+	public void setGlassPaneVisible(final boolean visible) {
 		getFrame().getGlassPane().setVisible(visible);
 	}
 
-	public void updateStatus(String msg) {
+	public void updateStatus(final String msg) {
 		lblTaskMessage.setText(msg);
 	}
 
-	public void setStatusMessageVisible(boolean visible) {
+	public void setStatusMessageVisible(final boolean visible) {
 		lblTaskMessage.setVisible(visible);
 	}
 
@@ -392,31 +394,38 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		getLoginBox().setVisible(true);
 	}
 
-	private javax.swing.Action toggleConnectionStateActionData(boolean connected) {
-		javax.swing.Action toggleConnectionStateAction = getContext().getActionMap(ReCFrameView.class, this).get("toggleConnectionState");
+	private javax.swing.Action toggleConnectionStateActionData(final boolean connected) {
+		final javax.swing.Action toggleConnectionStateAction = getContext().getActionMap(ReCFrameView.class, this).get(
+				"toggleConnectionState");
 
-		toggleConnectionStateAction.putValue(javax.swing.Action.NAME, getResourceMap().getString(
-				"toggleConnectionState" + (connected ? "Disconnect" : "") + ".Action.text"));
-		toggleConnectionStateAction.putValue(javax.swing.Action.SHORT_DESCRIPTION, getResourceMap().getString(
-				"toggleConnectionState" + (connected ? "Disconnect" : "") + ".Action.shortDescription"));
-		toggleConnectionStateAction.putValue(javax.swing.Action.SMALL_ICON, getResourceMap().getImageIcon(
-				"toggleConnectionState" + (connected ? "Disconnect" : "") + ".Action.smallIcon"));
-		toggleConnectionStateAction.putValue(javax.swing.Action.LARGE_ICON_KEY, getResourceMap().getImageIcon(
-				"toggleConnectionState" + (connected ? "Disconnect" : "") + ".Action.icon"));
+		toggleConnectionStateAction.putValue(javax.swing.Action.NAME,
+				getResourceMap().getString("toggleConnectionState" + (connected ? "Disconnect" : "") + ".Action.text"));
+		toggleConnectionStateAction.putValue(
+				javax.swing.Action.SHORT_DESCRIPTION,
+				getResourceMap().getString(
+						"toggleConnectionState" + (connected ? "Disconnect" : "") + ".Action.shortDescription"));
+		toggleConnectionStateAction.putValue(
+				javax.swing.Action.SMALL_ICON,
+				getResourceMap().getImageIcon(
+						"toggleConnectionState" + (connected ? "Disconnect" : "") + ".Action.smallIcon"));
+		toggleConnectionStateAction.putValue(
+				javax.swing.Action.LARGE_ICON_KEY,
+				getResourceMap().getImageIcon(
+						"toggleConnectionState" + (connected ? "Disconnect" : "") + ".Action.icon"));
 
 		return toggleConnectionStateAction;
 	}
 
 	// Listen to user input
 	@Override
-	public void itemStateChanged(ItemEvent evt) {
+	public void itemStateChanged(final ItemEvent evt) {
 		if (evt == null) {
 			return;
 		}
 		// Listen to ApparatusCombo selection change
 		if (getApparatusCombo() == evt.getSource()) {
 			if (ItemEvent.SELECTED == evt.getStateChange()) {
-				Apparatus apparatus = (Apparatus) evt.getItem();
+				final Apparatus apparatus = (Apparatus) evt.getItem();
 				recApplication.setSelectedApparatusConfig(apparatus);
 			}
 		}
@@ -426,7 +435,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	// Response to application model events
 
 	@Override
-	public void applicationEvent(ReCAppEvent evt) {
+	public void applicationEvent(final ReCAppEvent evt) {
 
 		switch (evt.getCommand()) {
 		case SHOW_LOGIN:
@@ -456,11 +465,11 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		}
 	}
 
-	private void showExperimentHistory(ExperimentUIData experimentUIData) {
+	private void showExperimentHistory(final ExperimentUIData experimentUIData) {
 		getNewExperimentHistoryDialogBox(experimentUIData).setVisible(true);
 	}
 
-	private void showExperimentHistoryHeaderInfo(HardwareAcquisitionConfig config) {
+	private void showExperimentHistoryHeaderInfo(final HardwareAcquisitionConfig config) {
 		if (config != null) {
 			getLoginBox().getContent().reset();
 			setGlassPaneVisible(true);
@@ -471,54 +480,57 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	private void askForVLC() {
 
 		final String LINE_SEPARATOR = System.getProperty("line.separator");
-		String key = VideoViewerController.VLC_PATH_KEY;
+		final String key = VideoViewerController.VLC_PATH_KEY;
 
-		String vlcPath = PreferencesUtils.readUserPreference(key);
+		final String vlcPath = PreferencesUtils.readUserPreference(key);
 		if (vlcPath == null) {
 
-			int result = JOptionPane.showConfirmDialog(this.getFrame(), "Não foi possível iniciar a reprodução de vídeo. " + LINE_SEPARATOR
-					+ "No entanto, pode visualizar a experiência instalando " + LINE_SEPARATOR
-					+ "o VLC. Deseja especificar a directoria de instalação do VLC?", "", JOptionPane.YES_NO_OPTION,
-					JOptionPane.QUESTION_MESSAGE);
+			final int result = JOptionPane.showConfirmDialog(getFrame(),
+					"Não foi possível iniciar a reprodução de vídeo. " + LINE_SEPARATOR
+							+ "No entanto, pode visualizar a experiência instalando " + LINE_SEPARATOR
+							+ "o VLC. Deseja especificar a directoria de instalação do VLC?", "",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
 			if (result == JOptionPane.YES_OPTION) {
 
-				File executable = getVLCExecutableFile();
-				log.info("Selected file was: " + executable.getAbsolutePath());
+				final File executable = getVLCExecutableFile();
+				ReCFrameView.log.info("Selected file was: " + executable.getAbsolutePath());
 				PreferencesUtils.writeUserPreference(key, executable.getAbsolutePath());
 			}
 		}
 	}
-	
+
 	private File getVLCExecutableFile() {
-		
+
 		boolean proceed;
 		File selected = null;
 		do {
-		
+
 			proceed = true;
-			JFileChooser chooser = new JFileChooser();
-			chooser.showOpenDialog(this.getFrame());
+			final JFileChooser chooser = new JFileChooser();
+			chooser.showOpenDialog(getFrame());
 			selected = chooser.getSelectedFile();
-			
+
 			if (!isVLCExecutable(selected)) {
-				if (JOptionPane.showConfirmDialog(this.getFrame(),
-						"Não seleccionou um executável de VLC válido. Deseja prosseguir sem vídeo?", "", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+				if (JOptionPane.showConfirmDialog(getFrame(),
+						"Não seleccionou um executável de VLC válido. Deseja prosseguir sem vídeo?", "",
+						JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
 					proceed = false;
 				}
 			}
 		} while (!proceed);
-		
+
 		return selected;
 	}
 
 	/**
-	 * Verifies if the specified file is in fact the vlc executable. Guarantees that no other executable file of other
-	 * application is selected and launched by eLab.
+	 * Verifies if the specified file is in fact the vlc executable. Guarantees
+	 * that no other executable file of other application is selected and
+	 * launched by eLab.
 	 * 
 	 * @return true if the specified file is vlc executable. false otherwise.
 	 */
-	private boolean isVLCExecutable(File vlcExec) {
+	private boolean isVLCExecutable(final File vlcExec) {
 
 		if (vlcExec == null) {
 			return false;
@@ -554,9 +566,9 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	}
 
 	@Override
-	public void labStateChanged(LabConnectorEvent evt) {
+	public void labStateChanged(final LabConnectorEvent evt) {
 
-		//setStatusMessageVisible(true);
+		// setStatusMessageVisible(true);
 
 		switch (evt.getStatusCode()) {
 		case LabConnectorEvent.STATUS_CONNECTING:
@@ -612,14 +624,14 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	}
 
 	@Override
-	public void apparatusListChanged(ApparatusListChangeEvent evt) {
+	public void apparatusListChanged(final ApparatusListChangeEvent evt) {
 		if (recApplication.getCurrentState().matches(CONNECTED_TO_LAB)) {
 			getApparatusCombo().setEnabled(true);
 		}
 	}
 
 	@Override
-	public void apparatusStateChanged(ApparatusEvent eventSelector, ApparatusConnectorEvent evt) {
+	public void apparatusStateChanged(final ApparatusEvent eventSelector, final ApparatusConnectorEvent evt) {
 
 		switch (eventSelector) {
 		case CONNECTING:
@@ -667,7 +679,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		case STATESTARTING:
 			progressCicleTask.start();
 			startingExperiment();
-			//clearLastExperimentResults();
+			// clearLastExperimentResults();
 			break;
 		case STATESTARTED:
 			startedExperiment();
@@ -697,7 +709,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	 * Select Description and disable Results
 	 */
 	private void connectingToApparatus() {
-		ApparatusTabbedPane apparatusTabbedPane = getApparatusTabbedPane();
+		final ApparatusTabbedPane apparatusTabbedPane = getApparatusTabbedPane();
 		if (apparatusTabbedPane != null) {
 			apparatusTabbedPane.setSelectedTabIndex(ApparatusTabbedPane.TAB_DESCRIPTION);
 			apparatusTabbedPane.setTabIndexEnabled(ApparatusTabbedPane.TAB_RESULTS, false);
@@ -711,16 +723,16 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 		// Video
 		if (recApplication.isApparatusVideoEnabled() && recApplication.getMediaController() != null) {
-			log.info("Video is enable for the selected apparatus.");
+			ReCFrameView.log.info("Video is enable for the selected apparatus.");
 			getVideoBox().initializeVideoOutput();
 			recApplication.setMediaToPlay(recApplication.getCurrentApparatusVideoLocation());
 			recApplication.setVideoOutput(getVideoBox().getVideoOutput());
 			recApplication.playMedia();
 		} else {
-			log.info("Video isn't enable for the selected apparatus.");
+			ReCFrameView.log.info("Video isn't enable for the selected apparatus.");
 		}
 
-		// Toggle apparatus connected UI state 
+		// Toggle apparatus connected UI state
 		getApparatusSelectBox().toggleApparatusStateActionData(false);
 		getApparatusCombo().setEnabled(false);
 		getLayoutContainerPane().enableApparatusTabbedPane();
@@ -765,49 +777,53 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		// identificar se é uma situção com que temos mesmo de viver.
 		// TODO Carregar em background
 		getApparatusUserListPane().getModel().setExpUsersListSource(recApplication.getApparatusClientBean());
-		log.fine("Users List source took @ " + (System.currentTimeMillis() - timeStart) / 1000 + "s to start...");
+		ReCFrameView.log.fine("Users List source took @ " + (System.currentTimeMillis() - timeStart) / 1000
+				+ "s to start...");
 		timeStart = System.currentTimeMillis();
-		getApparatusUserListPane().getModel().setAutoRefresh(recApplication.getReCFaceConfig().getUsersListRefreshRateMs());
+		getApparatusUserListPane().getModel().setAutoRefresh(
+				recApplication.getReCFaceConfig().getUsersListRefreshRateMs());
 
-		log.fine("Auto Refresh set took @ " + (System.currentTimeMillis() - timeStart) / 1000 + "s to do!");
-		//getApparatusUserListPane().getModel().chechRefresh();
+		ReCFrameView.log
+				.fine("Auto Refresh set took @ " + (System.currentTimeMillis() - timeStart) / 1000 + "s to do!");
+		// getApparatusUserListPane().getModel().chechRefresh();
 	}
 
 	private void disconnectFromApparatus() {
 		if (recApplication.isApparatusVideoEnabled() && recApplication.getMediaController() != null) {
 			getVideoBox().destroyVideoOutput();
 		}
-		
+
 		// Reset apparatus actions
 		apparatusLockTimer.stop();
 		progressCicleTask.stop();
 		setStopButtonEnabled(false);
 		getApparatusTabbedPane().getExperimentActionBar().setPlayStopButtonEnabled(false);
 
-		// Toggle apparatus connected UI state 
-		StatusActionBar experimentStatusActionBar = getExperimentStatusActionBar();
+		// Toggle apparatus connected UI state
+		final StatusActionBar experimentStatusActionBar = getExperimentStatusActionBar();
 		if (experimentStatusActionBar != null) {
 			experimentStatusActionBar.setActionStateLabelVisible(false);
 		}
 		getApparatusSelectBox().toggleApparatusStateActionData(true);
 		getApparatusCombo().setEnabled(true);
 		getLayoutContainerPane().disableApparatusTabbedPane();
-		updateStatus(getResourceMap().getString("lblTaskMessage.connectedToLab.text", recApplication.getCurrentLabName()));
+		updateStatus(getResourceMap().getString("lblTaskMessage.connectedToLab.text",
+				recApplication.getCurrentLabName()));
 	}
-	
+
 	private void maxUsers() {
-		String errorMessage = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.maxUsers",
+		final String errorMessage = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.maxUsers",
 				"Sorry, the lab is full. Please try again later...");
 		errorConnectingToApparatus(errorMessage);
 	}
 
 	private void notAuthorized() {
-		String errorMessage = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.notAuthorized",
+		final String errorMessage = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.notAuthorized",
 				"Not authorized, please confirm your login/password and try again!");
 		errorConnectingToApparatus(errorMessage);
 	}
-	
-	private void errorConnectingToApparatus(String errorMessage) {
+
+	private void errorConnectingToApparatus(final String errorMessage) {
 		getApparatusSelectBox().getProgressCicle().stop();
 		JOptionPane.showMessageDialog(null, errorMessage);
 		disconnectFromApparatus();
@@ -816,21 +832,22 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	/**
 	 * @param evt
 	 */
-	private void lockableApparatus(ApparatusConnectorEvent evt) {
-		
-		// if it is in auto-play mode doesn't show the countdown because it will play now
+	private void lockableApparatus(final ApparatusConnectorEvent evt) {
+
+		// if it is in auto-play mode doesn't show the countdown because it will
+		// play now
 		if (!recApplication.getExperimentAutoplay()) {
-			
+
 			apparatusLockInitialTimeMs = TimeUtils.getSystemCurrentTimeMs();
 			millisToLockSuccess = evt.getMillisToLockSuccess();
-			
+
 			getExperimentStatusActionBar().setActionStateText(
 					getStatusActionBarResourceMap().getString("lblActionState.apparatusLockable.text",
 							TimeUtils.msToSeconds(millisToLockSuccess)), GREEN);
 			getExperimentActionBar().setPlayStopButtonEnabled(true);
-			
+
 			getExperimentStatusActionBar().setActionStateLabelVisible(true);
-			
+
 			apparatusLockTimer.setInitialDelay(1); // ready, set
 			apparatusLockTimer.start(); // go
 		}
@@ -842,8 +859,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 	private void configuringApparatus() {
 		getExperimentStatusActionBar().setActionStateText(
-				getStatusActionBarResourceMap().getString("lblActionState.apparatusConfiguring.text"),
-				GREEN);
+				getStatusActionBarResourceMap().getString("lblActionState.apparatusConfiguring.text"), GREEN);
 		lockApparatus();
 		setExperimentAutoplay(false);
 		setPlayButtonEnabled(false);
@@ -852,14 +868,12 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 	private void configuredApparatus() {
 		getExperimentStatusActionBar().setActionStateText(
-				getStatusActionBarResourceMap().getString("lblActionState.apparatusConfigured.text"),
-				GREEN);
+				getStatusActionBarResourceMap().getString("lblActionState.apparatusConfigured.text"), GREEN);
 	}
 
 	private void startingExperiment() {
 		getExperimentStatusActionBar().setActionStateText(
-				getStatusActionBarResourceMap().getString("lblActionState.apparatusStarting.text"),
-				YELLOW);
+				getStatusActionBarResourceMap().getString("lblActionState.apparatusStarting.text"), YELLOW);
 	}
 
 	private ResourceMap getStatusActionBarResourceMap() {
@@ -869,10 +883,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	private void startedExperiment() {
 		// Goto results tab
 		getApparatusTabbedPane().setSelectedTabIndex(ApparatusTabbedPane.TAB_RESULTS);
-		getExperimentStatusActionBar()
-				.setActionStateText(
-						getStatusActionBarResourceMap().getString("lblActionState.apparatusStarted.text"),
-				YELLOW);
+		getExperimentStatusActionBar().setActionStateText(
+				getStatusActionBarResourceMap().getString("lblActionState.apparatusStarted.text"), YELLOW);
 		setExperimentAutoplay(false);
 		setPlayButtonEnabled(false);
 		setStopButtonEnabled(true);
@@ -883,7 +895,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 				getStatusActionBarResourceMap().getString("lblActionState.apparatusStoped.text"), RED);
 		setStopButtonEnabled(false);
 	}
-	
+
 	private void configError() {
 		apparatusLockTimer.stop();
 		progressCicleTask.stop();
@@ -892,8 +904,9 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 				getStatusActionBarResourceMap().getString("lblActionState.apparatusConfigErrorState.text"), RED);
 		getApparatusTabbedPane().getExperimentActionBar().setPlayStopButtonEnabled(false);
 
-		// showing this message can be necessary because the status bar message is going to be hidden with stopped message
-		String errorMessage = ReCResourceBundle.findStringOrDefault(
+		// showing this message can be necessary because the status bar message
+		// is going to be hidden with stopped message
+		final String errorMessage = ReCResourceBundle.findStringOrDefault(
 				"ReCBaseUI$rec.bui.status.apparatus.config.error.state",
 				"The experiment has a wrong configuration! Please check the customizer.");
 		JOptionPane.showMessageDialog(null, errorMessage);
@@ -907,27 +920,27 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 				getStatusActionBarResourceMap().getString("lblActionState.apparatusIncorrectState.text"), RED);
 		getApparatusTabbedPane().getExperimentActionBar().setPlayStopButtonEnabled(false);
 
-		String errorMessage = ReCResourceBundle.findStringOrDefault(
+		final String errorMessage = ReCResourceBundle.findStringOrDefault(
 				"ReCBaseUI$rec.bui.status.apparatus.incorrect.state",
 				"The experiment is in an incorrect state! Please contact the administrator.");
 		errorConnectingToApparatus(errorMessage);
 	}
-	
-	private void setStopButtonEnabled(boolean enabled) {
-		ApparatusTabbedPane apparatusTabbedPane = getApparatusTabbedPane();
+
+	private void setStopButtonEnabled(final boolean enabled) {
+		final ApparatusTabbedPane apparatusTabbedPane = getApparatusTabbedPane();
 		if (apparatusTabbedPane != null) {
 			apparatusTabbedPane.setStopButtonEnabled(enabled);
 			// the play button is enabled by the lock cycle
-//			apparatusTabbedPane.getExperimentActionBar().setPlayStopButtonEnabled(!enabled);
+			// apparatusTabbedPane.getExperimentActionBar().setPlayStopButtonEnabled(!enabled);
 		}
 	}
-	
-	private void setExperimentAutoplay(boolean enabled) {
+
+	private void setExperimentAutoplay(final boolean enabled) {
 		getExperimentActionBar().unCheckExperimentAutoplay();
 		recApplication.setExperimentAutoplay(false);
 	}
-	
-	private void setPlayButtonEnabled(boolean enabled) {
+
+	private void setPlayButtonEnabled(final boolean enabled) {
 		getExperimentActionBar().setPlayStopButtonEnabled(enabled);
 	}
 
@@ -935,7 +948,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		getResultsPane().clearExperimentResults();
 	}
 
-	private void showExperimentResults(ExperimentUIData experimentUIData) {
+	private void showExperimentResults(final ExperimentUIData experimentUIData) {
 		getLayoutContainerPane().getApparatusTabbedPane().setDataDisplays(experimentUIData.getDataDisplays());
 
 		getResultsPane().setExperimentResults(experimentUIData.getHistoryUINode(), experimentUIData.getDataModel(),
@@ -953,9 +966,10 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	}
 
 	private void apparatusLockTimerTick() {
-		long lockCountDown = TimeUtils.msToSeconds(millisToLockSuccess - (TimeUtils.getSystemCurrentTimeMs() - apparatusLockInitialTimeMs));
+		final long lockCountDown = TimeUtils.msToSeconds(millisToLockSuccess
+				- (TimeUtils.getSystemCurrentTimeMs() - apparatusLockInitialTimeMs));
 
-		boolean lockCountDownGreaterThanZero = lockCountDown > 0;
+		final boolean lockCountDownGreaterThanZero = lockCountDown > 0;
 
 		if (lockCountDownGreaterThanZero) {
 			getExperimentStatusActionBar().setActionStateText(
@@ -971,183 +985,188 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	}
 
 	/**
-	 * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The
-	 * content of this method is always regenerated by the Form Editor.
+	 * This method is called from within the constructor to initialize the form.
+	 * WARNING: Do NOT modify this code. The content of this method is always
+	 * regenerated by the Form Editor.
 	 */
 	@SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+	// <editor-fold defaultstate="collapsed"
+	// desc="Generated Code">//GEN-BEGIN:initComponents
+	private void initComponents() {
 
-        mainPanel = new javax.swing.JPanel();
-        toolBar = new javax.swing.JToolBar();
-        toolBtnConnect = new javax.swing.JButton();
-        toolBarCenterSpace = new com.linkare.rec.impl.newface.component.Spacer();
-        lblTaskMessage = new javax.swing.JLabel();
-        progressCicleTask = new com.linkare.rec.impl.newface.component.ProgressCicle(idleIcon, busyIcons, busyAnimationRate);
-        layoutContainerPane = new com.linkare.rec.impl.newface.component.LayoutContainerPane();
-        menuBar = new javax.swing.JMenuBar();
-        javax.swing.JMenu menuLab = new javax.swing.JMenu();
-        menuItemConnect = new javax.swing.JMenuItem();
-        sep1 = new javax.swing.JSeparator();
-        javax.swing.JMenuItem menuItemSair = new javax.swing.JMenuItem();
-        javax.swing.JMenu menuHelp = new javax.swing.JMenu();
-        javax.swing.JMenuItem menuItemAbout = new javax.swing.JMenuItem();
-        statusPanel = new javax.swing.JPanel();
-        javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
+		mainPanel = new javax.swing.JPanel();
+		toolBar = new javax.swing.JToolBar();
+		toolBtnConnect = new javax.swing.JButton();
+		toolBarCenterSpace = new com.linkare.rec.impl.newface.component.Spacer();
+		lblTaskMessage = new javax.swing.JLabel();
+		progressCicleTask = new com.linkare.rec.impl.newface.component.ProgressCicle(ReCFrameView.idleIcon,
+				ReCFrameView.busyIcons, busyAnimationRate);
+		layoutContainerPane = new com.linkare.rec.impl.newface.component.LayoutContainerPane();
+		menuBar = new javax.swing.JMenuBar();
+		final javax.swing.JMenu menuLab = new javax.swing.JMenu();
+		menuItemConnect = new javax.swing.JMenuItem();
+		sep1 = new javax.swing.JSeparator();
+		final javax.swing.JMenuItem menuItemSair = new javax.swing.JMenuItem();
+		final javax.swing.JMenu menuHelp = new javax.swing.JMenu();
+		final javax.swing.JMenuItem menuItemAbout = new javax.swing.JMenuItem();
+		statusPanel = new javax.swing.JPanel();
+		final javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
 
-        mainPanel.setAutoscrolls(true);
-        mainPanel.setName("mainPanel"); // NOI18N
-        mainPanel.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
-            public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
-            }
-            public void ancestorResized(java.awt.event.HierarchyEvent evt) {
-                onResize(evt);
-            }
-        });
-        mainPanel.setLayout(new java.awt.BorderLayout());
+		mainPanel.setAutoscrolls(true);
+		mainPanel.setName("mainPanel"); // NOI18N
+		mainPanel.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
+			public void ancestorMoved(final java.awt.event.HierarchyEvent evt) {
+			}
 
-        toolBar.setFloatable(false);
-        toolBar.setRollover(true);
-        toolBar.setName("toolBar"); // NOI18N
-        toolBar.setPreferredSize(new java.awt.Dimension(100, 31));
+			public void ancestorResized(final java.awt.event.HierarchyEvent evt) {
+				onResize(evt);
+			}
+		});
+		mainPanel.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getActionMap(ReCFrameView.class, this);
-        toolBtnConnect.setAction(actionMap.get("toggleConnectionState")); // NOI18N
-        toolBtnConnect.setBackground(null);
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ReCFrameView.class);
-        toolBtnConnect.setText(resourceMap.getString("toolBtnConnect.text")); // NOI18N
-        toolBtnConnect.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
-        toolBtnConnect.setBorderPainted(false);
-        toolBtnConnect.setFocusPainted(false);
-        toolBtnConnect.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        toolBtnConnect.setName("toolBtnConnect"); // NOI18N
-        toolBtnConnect.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        toolBtnConnect.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                toolBtnConnectPropertyChange(evt);
-            }
-        });
-        toolBar.add(toolBtnConnect);
-        toolBtnConnect.getAccessibleContext().setAccessibleName(resourceMap.getString("toolBtnConnect.AccessibleContext.accessibleName")); // NOI18N
+		toolBar.setFloatable(false);
+		toolBar.setRollover(true);
+		toolBar.setName("toolBar"); // NOI18N
+		toolBar.setPreferredSize(new java.awt.Dimension(100, 31));
 
-        toolBarCenterSpace.setName("toolBarCenterSpace"); // NOI18N
+		final javax.swing.ActionMap actionMap = org.jdesktop.application.Application
+				.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext()
+				.getActionMap(ReCFrameView.class, this);
+		toolBtnConnect.setAction(actionMap.get("toggleConnectionState")); // NOI18N
+		toolBtnConnect.setBackground(null);
+		final org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application
+				.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext()
+				.getResourceMap(ReCFrameView.class);
+		toolBtnConnect.setText(resourceMap.getString("toolBtnConnect.text")); // NOI18N
+		toolBtnConnect.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+		toolBtnConnect.setBorderPainted(false);
+		toolBtnConnect.setFocusPainted(false);
+		toolBtnConnect.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		toolBtnConnect.setName("toolBtnConnect"); // NOI18N
+		toolBtnConnect.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+		toolBtnConnect.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+			public void propertyChange(final java.beans.PropertyChangeEvent evt) {
+				toolBtnConnectPropertyChange(evt);
+			}
+		});
+		toolBar.add(toolBtnConnect);
+		toolBtnConnect.getAccessibleContext().setAccessibleName(
+				resourceMap.getString("toolBtnConnect.AccessibleContext.accessibleName")); // NOI18N
 
-        javax.swing.GroupLayout toolBarCenterSpaceLayout = new javax.swing.GroupLayout(toolBarCenterSpace);
-        toolBarCenterSpace.setLayout(toolBarCenterSpaceLayout);
-        toolBarCenterSpaceLayout.setHorizontalGroup(
-            toolBarCenterSpaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 794, Short.MAX_VALUE)
-        );
-        toolBarCenterSpaceLayout.setVerticalGroup(
-            toolBarCenterSpaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 27, Short.MAX_VALUE)
-        );
+		toolBarCenterSpace.setName("toolBarCenterSpace"); // NOI18N
 
-        toolBar.add(toolBarCenterSpace);
+		final javax.swing.GroupLayout toolBarCenterSpaceLayout = new javax.swing.GroupLayout(toolBarCenterSpace);
+		toolBarCenterSpace.setLayout(toolBarCenterSpaceLayout);
+		toolBarCenterSpaceLayout.setHorizontalGroup(toolBarCenterSpaceLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 794, Short.MAX_VALUE));
+		toolBarCenterSpaceLayout.setVerticalGroup(toolBarCenterSpaceLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 27, Short.MAX_VALUE));
 
-        lblTaskMessage.setForeground(LAFConnector.getColor(SpecialELabProperties.DEFAULT_WHITE));
-        lblTaskMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTaskMessage.setText(resourceMap.getString("lblTaskMessage.text")); // NOI18N
-        lblTaskMessage.setFocusable(false);
-        lblTaskMessage.setName("lblTaskMessage"); // NOI18N
-        toolBar.add(lblTaskMessage);
+		toolBar.add(toolBarCenterSpace);
 
-        progressCicleTask.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
-        progressCicleTask.setIcon(resourceMap.getIcon("progressCicleTask.icon")); // NOI18N
-        progressCicleTask.setText(resourceMap.getString("progressCicleTask.text")); // NOI18N
-        progressCicleTask.setFocusable(false);
-        progressCicleTask.setName("progressCicleTask"); // NOI18N
-        toolBar.add(progressCicleTask);
+		lblTaskMessage.setForeground(LAFConnector.getColor(SpecialELabProperties.DEFAULT_WHITE));
+		lblTaskMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		lblTaskMessage.setText(resourceMap.getString("lblTaskMessage.text")); // NOI18N
+		lblTaskMessage.setFocusable(false);
+		lblTaskMessage.setName("lblTaskMessage"); // NOI18N
+		toolBar.add(lblTaskMessage);
 
-        mainPanel.add(toolBar, java.awt.BorderLayout.PAGE_START);
+		progressCicleTask.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+		progressCicleTask.setIcon(resourceMap.getIcon("progressCicleTask.icon")); // NOI18N
+		progressCicleTask.setText(resourceMap.getString("progressCicleTask.text")); // NOI18N
+		progressCicleTask.setFocusable(false);
+		progressCicleTask.setName("progressCicleTask"); // NOI18N
+		toolBar.add(progressCicleTask);
 
-        layoutContainerPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 6, 6, 6));
-        layoutContainerPane.setName("layoutContainerPane"); // NOI18N
-        mainPanel.add(layoutContainerPane, java.awt.BorderLayout.CENTER);
+		mainPanel.add(toolBar, java.awt.BorderLayout.PAGE_START);
 
-        menuBar.setName("menuBar"); // NOI18N
-        menuBar.setPreferredSize(new java.awt.Dimension(291, 31));
+		layoutContainerPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 6, 6, 6));
+		layoutContainerPane.setName("layoutContainerPane"); // NOI18N
+		mainPanel.add(layoutContainerPane, java.awt.BorderLayout.CENTER);
 
-        menuLab.setText(resourceMap.getString("menuLab.text")); // NOI18N
-        menuLab.setName("menuLab"); // NOI18N
+		menuBar.setName("menuBar"); // NOI18N
+		menuBar.setPreferredSize(new java.awt.Dimension(291, 31));
 
-        menuItemConnect.setAction(actionMap.get("toggleConnectionState")); // NOI18N
-        menuItemConnect.setName("menuItemConnect"); // NOI18N
-        menuLab.add(menuItemConnect);
+		menuLab.setText(resourceMap.getString("menuLab.text")); // NOI18N
+		menuLab.setName("menuLab"); // NOI18N
 
-        sep1.setName("sep1"); // NOI18N
-        menuLab.add(sep1);
+		menuItemConnect.setAction(actionMap.get("toggleConnectionState")); // NOI18N
+		menuItemConnect.setName("menuItemConnect"); // NOI18N
+		menuLab.add(menuItemConnect);
 
-        menuItemSair.setAction(actionMap.get("quit")); // NOI18N
-        menuItemSair.setName("menuItemSair"); // NOI18N
-        menuLab.add(menuItemSair);
+		sep1.setName("sep1"); // NOI18N
+		menuLab.add(sep1);
 
-        menuBar.add(menuLab);
+		menuItemSair.setAction(actionMap.get("quit")); // NOI18N
+		menuItemSair.setName("menuItemSair"); // NOI18N
+		menuLab.add(menuItemSair);
 
-        menuHelp.setText(resourceMap.getString("menuHelp.text")); // NOI18N
-        menuHelp.setName("menuHelp"); // NOI18N
+		menuBar.add(menuLab);
 
-        menuItemAbout.setAction(actionMap.get("showAboutBox")); // NOI18N
-        menuItemAbout.setName("menuItemAbout"); // NOI18N
-        menuHelp.add(menuItemAbout);
+		menuHelp.setText(resourceMap.getString("menuHelp.text")); // NOI18N
+		menuHelp.setName("menuHelp"); // NOI18N
 
-        menuBar.add(menuHelp);
+		menuItemAbout.setAction(actionMap.get("showAboutBox")); // NOI18N
+		menuItemAbout.setName("menuItemAbout"); // NOI18N
+		menuHelp.add(menuItemAbout);
 
-        statusPanel.setEnabled(false);
-        statusPanel.setName("statusPanel"); // NOI18N
-        statusPanel.setOpaque(false);
+		menuBar.add(menuHelp);
 
-        statusPanelSeparator.setName("statusPanelSeparator"); // NOI18N
+		statusPanel.setEnabled(false);
+		statusPanel.setName("statusPanel"); // NOI18N
+		statusPanel.setOpaque(false);
 
-        javax.swing.GroupLayout statusPanelLayout = new javax.swing.GroupLayout(statusPanel);
-        statusPanel.setLayout(statusPanelLayout);
-        statusPanelLayout.setHorizontalGroup(
-            statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE)
-        );
-        statusPanelLayout.setVerticalGroup(
-            statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(statusPanelLayout.createSequentialGroup()
-                .addComponent(statusPanelSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
+		statusPanelSeparator.setName("statusPanelSeparator"); // NOI18N
 
-        setComponent(mainPanel);
-        setMenuBar(menuBar);
-        setStatusBar(statusPanel);
-    }// </editor-fold>//GEN-END:initComponents
+		final javax.swing.GroupLayout statusPanelLayout = new javax.swing.GroupLayout(statusPanel);
+		statusPanel.setLayout(statusPanelLayout);
+		statusPanelLayout.setHorizontalGroup(statusPanelLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addComponent(statusPanelSeparator,
+				javax.swing.GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE));
+		statusPanelLayout.setVerticalGroup(statusPanelLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				statusPanelLayout
+						.createSequentialGroup()
+						.addComponent(statusPanelSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 2,
+								javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(25, Short.MAX_VALUE)));
 
-	private void toolBtnConnectPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_toolBtnConnectPropertyChange
+		setComponent(mainPanel);
+		setMenuBar(menuBar);
+		setStatusBar(statusPanel);
+	}// </editor-fold>//GEN-END:initComponents
+
+	private void toolBtnConnectPropertyChange(final java.beans.PropertyChangeEvent evt) {// GEN-FIRST:event_toolBtnConnectPropertyChange
 		if ("text".equals(evt.getPropertyName())) {
-			// Disable text display on toggle connection state button from toolbar
+			// Disable text display on toggle connection state button from
+			// toolbar
 			((JButton) evt.getSource()).setText("");
 		}
-	}//GEN-LAST:event_toolBtnConnectPropertyChange
+	}// GEN-LAST:event_toolBtnConnectPropertyChange
 
-	private void onResize(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_onResize
-		if (log.isLoggable(Level.FINER)) {
-			log.finer("ReC Resize: Navigation=" + layoutContainerPane.getNavigationPane().getSize() + " Media="
-					+ layoutContainerPane.getMediaPane().getSize() + " Center="
-					+ layoutContainerPane.getApparatusDescriptionPane().getSize() + " LayoutContainer=" + layoutContainerPane.getSize()
-					+ " Frame=" + getFrame().getSize());
+	private void onResize(final java.awt.event.HierarchyEvent evt) {// GEN-FIRST:event_onResize
+		if (ReCFrameView.log.isLoggable(Level.FINER)) {
+			ReCFrameView.log.finer("ReC Resize: Navigation=" + layoutContainerPane.getNavigationPane().getSize()
+					+ " Media=" + layoutContainerPane.getMediaPane().getSize() + " Center="
+					+ layoutContainerPane.getApparatusDescriptionPane().getSize() + " LayoutContainer="
+					+ layoutContainerPane.getSize() + " Frame=" + getFrame().getSize());
 		}
-	}//GEN-LAST:event_onResize
+	}// GEN-LAST:event_onResize
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.linkare.rec.impl.newface.component.LayoutContainerPane layoutContainerPane;
-    private javax.swing.JLabel lblTaskMessage;
-    private javax.swing.JPanel mainPanel;
-    private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem menuItemConnect;
-    private com.linkare.rec.impl.newface.component.ProgressCicle progressCicleTask;
-    private javax.swing.JSeparator sep1;
-    private javax.swing.JPanel statusPanel;
-    private javax.swing.JToolBar toolBar;
-    private com.linkare.rec.impl.newface.component.Spacer toolBarCenterSpace;
-    private javax.swing.JButton toolBtnConnect;
-    // End of variables declaration//GEN-END:variables
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private com.linkare.rec.impl.newface.component.LayoutContainerPane layoutContainerPane;
+	private javax.swing.JLabel lblTaskMessage;
+	private javax.swing.JPanel mainPanel;
+	private javax.swing.JMenuBar menuBar;
+	private javax.swing.JMenuItem menuItemConnect;
+	private com.linkare.rec.impl.newface.component.ProgressCicle progressCicleTask;
+	private javax.swing.JSeparator sep1;
+	private javax.swing.JPanel statusPanel;
+	private javax.swing.JToolBar toolBar;
+	private com.linkare.rec.impl.newface.component.Spacer toolBarCenterSpace;
+	private javax.swing.JButton toolBtnConnect;
+	// End of variables declaration//GEN-END:variables
 
-	//    private final Timer messageTimer;
+	// private final Timer messageTimer;
 	private final Timer apparatusLockTimer;
 	public static Icon idleIcon;
 	public static Icon[] busyIcons = new Icon[15];

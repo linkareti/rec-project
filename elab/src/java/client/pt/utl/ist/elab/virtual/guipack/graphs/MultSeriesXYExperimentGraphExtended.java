@@ -32,6 +32,11 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 public class MultSeriesXYExperimentGraphExtended extends javax.swing.JPanel implements GraphSamplesFunction,
 		ExpDataDisplay, ExpDataModelListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -432562648479345376L;
+
 	/** Creates a new instance of MyDefaultXYExperimentGraph */
 	public MultSeriesXYExperimentGraphExtended() {
 		initComponents();
@@ -40,9 +45,10 @@ public class MultSeriesXYExperimentGraphExtended extends javax.swing.JPanel impl
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(MultSeriesXYExperimentGraphExtended.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager()
+					.addLogger(Logger.getLogger(MultSeriesXYExperimentGraphExtended.UI_CLIENT_LOGGER));
 		}
 	}
 
@@ -79,20 +85,24 @@ public class MultSeriesXYExperimentGraphExtended extends javax.swing.JPanel impl
 	/** Holds value of property channelY. */
 	private int channelY;
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/chart16.gif"));
 	}
 
 	ExpDataModel expDataModel = null;
 
-	public void setExpDataModel(ExpDataModel expDataModel) {
+	@Override
+	public void setExpDataModel(final ExpDataModel expDataModel) {
 
-		if (expDataModel != null)
+		if (expDataModel != null) {
 			expDataModel.removeExpDataModelListener(this);
+		}
 
 		this.expDataModel = expDataModel;
 
@@ -102,52 +112,64 @@ public class MultSeriesXYExperimentGraphExtended extends javax.swing.JPanel impl
 		}
 	}
 
+	@Override
 	public String getName() {
 		return "Chart";
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
 
+	@Override
 	public void dataModelStoped() {// BIG SILENT NOOP
 	}
 
+	@Override
 	public void dataModelEnded() {// BIG SILENT NOOP
 	}
 
+	@Override
 	public void dataModelError() {// BIG SILENT NOOP
 	}
 
+	@Override
 	public void dataModelStarted() {
 		defaultXYDatasetProxy.dataModelStarted();
-		if (header == null)
+		if (header == null) {
 			headerAvailable(expDataModel.getAcquisitionConfig());
+		}
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
-		if (header == null)
+		if (header == null) {
 			headerAvailable(expDataModel.getAcquisitionConfig());
+		}
 	}
 
+	@Override
 	public void dataModelWaiting() {// BIG SILENT NOOP
 	}
 
 	private HardwareAcquisitionConfig header = null;
 
-	private void headerAvailable(HardwareAcquisitionConfig header) {
-		if (header == null)
+	private void headerAvailable(final HardwareAcquisitionConfig header) {
+		if (header == null) {
 			return;
+		}
 
 		this.header = header;
-		Scale scaleX = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getSelectedScale();
-		String chnX = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getChannelName();
-		String pusX = scaleX.getPhysicsUnitSymbol();
-		String multiplierX = scaleX.getMultiplier().toString();
+		final Scale scaleX = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getSelectedScale();
+		final String chnX = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getChannelName();
+		final String pusX = scaleX.getPhysicsUnitSymbol();
+		final String multiplierX = scaleX.getMultiplier().toString();
 
 		Scale scaleY;
 		String chnY;
@@ -159,7 +181,7 @@ public class MultSeriesXYExperimentGraphExtended extends javax.swing.JPanel impl
 		pusY = scaleY.getPhysicsUnitSymbol();
 		multiplierY = scaleY.getMultiplier().toString();
 
-		NumberAxis xAxis = new NumberAxis(chnX + " [" + multiplierX + pusX + "]");
+		final NumberAxis xAxis = new NumberAxis(chnX + " [" + multiplierX + pusX + "]");
 		xAxis.setAutoRange(true);
 		xAxis.setAutoRangeStickyZero(false);
 		xAxis.setAutoRangeIncludesZero(false);
@@ -174,13 +196,13 @@ public class MultSeriesXYExperimentGraphExtended extends javax.swing.JPanel impl
 		yAxis.setAutoRangeStickyZero(false);
 		yAxis.setAutoRangeIncludesZero(false);
 
-		XYPlot plot = new XYPlot(defaultXYDatasetProxy, xAxis, yAxis, new StandardXYItemRenderer(
+		final XYPlot plot = new XYPlot(defaultXYDatasetProxy, xAxis, yAxis, new StandardXYItemRenderer(
 				StandardXYItemRenderer.SHAPES_AND_LINES, new StandardXYToolTipGenerator()));
 		plot.setRenderer(new StandardXYItemRenderer(StandardXYItemRenderer.SHAPES_AND_LINES,
 				new StandardXYToolTipGenerator()));
 
 		chart = new JFreeChart(header.getFamiliarName(), JFreeChart.DEFAULT_TITLE_FONT, plot, true);
-		ChartPanel panel = new ChartPanel(chart);
+		final ChartPanel panel = new ChartPanel(chart);
 
 		panel.setPreferredSize(new java.awt.Dimension(350, 250));
 		panel.setMouseZoomable(true, false);
@@ -198,11 +220,12 @@ public class MultSeriesXYExperimentGraphExtended extends javax.swing.JPanel impl
 	 * }
 	 */
 
-	private boolean isScaleSet = false;
+	private final boolean isScaleSet = false;
 
 	private JFreeChart chart = null;
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 
 	}
 
@@ -220,7 +243,7 @@ public class MultSeriesXYExperimentGraphExtended extends javax.swing.JPanel impl
 	 * 
 	 * @param channelDisplayX New value of property channelDisplayX.
 	 */
-	public void setChannelDisplayX(int channelDisplayX) {
+	public void setChannelDisplayX(final int channelDisplayX) {
 		defaultXYDatasetProxy.setChannelDisplayX(channelDisplayX);
 	}
 
@@ -238,7 +261,7 @@ public class MultSeriesXYExperimentGraphExtended extends javax.swing.JPanel impl
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
-	public void setChannelDisplayY(int channelDisplayY) {
+	public void setChannelDisplayY(final int channelDisplayY) {
 		// defaultXYDatasetProxy.setChannelDisplayY(channelDisplayY);
 		setChannelDisplayYArray(new int[] { channelDisplayY });
 	}
@@ -248,7 +271,7 @@ public class MultSeriesXYExperimentGraphExtended extends javax.swing.JPanel impl
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
-	public int getChannelDisplayAtYArray(int channel) {
+	public int getChannelDisplayAtYArray(final int channel) {
 		return defaultXYDatasetProxy.getChannelDisplayAtYArray(channel);
 	}
 
@@ -266,7 +289,7 @@ public class MultSeriesXYExperimentGraphExtended extends javax.swing.JPanel impl
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
-	public void setChannelDisplayYArray(int[] channelDisplayYArray) {
+	public void setChannelDisplayYArray(final int[] channelDisplayYArray) {
 		defaultXYDatasetProxy.setChannelDisplayYArray(channelDisplayYArray);
 	}
 
@@ -276,7 +299,7 @@ public class MultSeriesXYExperimentGraphExtended extends javax.swing.JPanel impl
 	}
 
 	/** Deprecated!! Use setUpdateFrequency */
-	public void setUpdatePercentage(int updatePercentage) {
+	public void setUpdatePercentage(final int updatePercentage) {
 		// this.updatePercentage = updatePercentage;
 		setUpdateFrequency(updatePercentage);
 	}
@@ -286,15 +309,17 @@ public class MultSeriesXYExperimentGraphExtended extends javax.swing.JPanel impl
 	}
 
 	/** Update from updateFrequency to updateFrequency points */
-	public void setUpdateFrequency(int updateFrequency) {
+	public void setUpdateFrequency(final int updateFrequency) {
 		defaultXYDatasetProxy.setUpdateFrequency(updateFrequency);
 	}
 
-	public double getValueX(int ch, double val) {
+	@Override
+	public double getValueX(final int ch, final double val) {
 		return val;
 	}
 
-	public double getValueY(int ch, double val) {
+	@Override
+	public double getValueY(final int ch, final double val) {
 		return val;
 	}
 }

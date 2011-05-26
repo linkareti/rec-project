@@ -20,40 +20,44 @@ import java.awt.Insets;
 import javax.swing.border.Border;
 
 public class ImageBorder implements Border {
-	private Image image;
+	private final Image image;
 
 	/** Creates a new instance of ImageBorder */
-	public ImageBorder(Image image, boolean fill) {
+	public ImageBorder(final Image image, final boolean fill) {
 		this.image = image;
 		this.fill = fill;
 	}
 
-	public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+	@Override
+	public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int width,
+			final int height) {
 		if (image == null) {
-			Color color = c.getBackground();
+			final Color color = c.getBackground();
 			g.setColor(color);
 			g.fillRect(0, 0, width, height);
 		}
 		if (!fill) {
-			int x0 = x + (width - image.getWidth(null)) / 2;
-			int y0 = y + (height - image.getHeight(null)) / 2;
+			final int x0 = x + (width - image.getWidth(null)) / 2;
+			final int y0 = y + (height - image.getHeight(null)) / 2;
 			g.drawImage(image, x0, y0, null);
 		} else {
 			g.drawImage(image, 0, 0, width, height, null);
 		}
 	}
 
-	public Insets getBorderInsets(Component c) {
+	@Override
+	public Insets getBorderInsets(final Component c) {
 		return new Insets(0, 0, 0, 0);
 	}
 
+	@Override
 	public boolean isBorderOpaque() {
 		return true;
 	}
 
 	private boolean fill = true;
 
-	public void setFill(boolean fill) {
+	public void setFill(final boolean fill) {
 		this.fill = fill;
 	}
 }

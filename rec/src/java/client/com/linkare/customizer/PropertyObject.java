@@ -23,17 +23,33 @@ public class PropertyObject {
 	/** Holds value of property name. */
 	private String name;
 
-	/** Creates a new instance of IndexedPropertyObject */
-	public PropertyObject(String name, PropertyEditor propertyEditor, Class<?> valueClass, boolean editable) {
+	/**
+	 * Creates a new instance of IndexedPropertyObject
+	 * 
+	 * @param name The name of the javabean property being edited
+	 * @param propertyEditor The property editor associated with that property
+	 * @param valueClass the type of the value that should be edited
+	 * @param editable Is the property editable?
+	 */
+	public PropertyObject(final String name, final PropertyEditor propertyEditor, final Class<?> valueClass,
+			final boolean editable) {
 		setName(name);
 		setPropertyEditor(propertyEditor);
 		setValueClass(valueClass);
 		setEditable(editable);
 	}
 
-	/** Creates a new instance of IndexedPropertyObject */
-	public PropertyObject(String name, PropertyEditor propertyEditor, Class<?> valueClass, boolean editable,
-			Object value) {
+	/**
+	 * Creates a new instance of IndexedPropertyObject
+	 * 
+	 * @param name The name of the javabean property being edited
+	 * @param propertyEditor The property editor associated with that property
+	 * @param valueClass the type of the value that should be edited
+	 * @param editable Is the property editable?
+	 * @param value The current property's value
+	 */
+	public PropertyObject(final String name, final PropertyEditor propertyEditor, final Class<?> valueClass,
+			final boolean editable, final Object value) {
 		this(name, propertyEditor, valueClass, editable);
 		setValue(value);
 	}
@@ -45,7 +61,7 @@ public class PropertyObject {
 	 * 
 	 */
 	public Object getValue() {
-		return this.value;
+		return value;
 	}
 
 	/**
@@ -54,28 +70,29 @@ public class PropertyObject {
 	 * @param value New value of property value.
 	 * 
 	 */
-	public void setValue(Object value) {
+	public void setValue(final Object value) {
 		this.value = value;
 		if (this.value == null && getValueClass().isPrimitive()) {
 			try {
-				if (getValueClass() == boolean.class)
+				if (getValueClass() == boolean.class) {
 					this.value = new Boolean(false);
-				else if (getValueClass() == byte.class)
+				} else if (getValueClass() == byte.class) {
 					this.value = new Byte((byte) 0);
-				else if (getValueClass() == char.class)
+				} else if (getValueClass() == char.class) {
 					this.value = new Character(' ');
-				else if (getValueClass() == short.class)
+				} else if (getValueClass() == short.class) {
 					this.value = new Short((short) 0);
-				else if (getValueClass() == int.class)
+				} else if (getValueClass() == int.class) {
 					this.value = new Integer(0);
-				else if (getValueClass() == long.class)
+				} else if (getValueClass() == long.class) {
 					this.value = new Long(0);
-				else if (getValueClass() == float.class)
+				} else if (getValueClass() == float.class) {
 					this.value = new Float(0.F);
-				else if (getValueClass() == double.class)
+				} else if (getValueClass() == double.class) {
 					this.value = new Double(0.);
+				}
 
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				javax.swing.JOptionPane.showMessageDialog(null, "Couldn't init value...\n\r" + e.getMessage());
 			}
 		}
@@ -88,7 +105,7 @@ public class PropertyObject {
 	 * 
 	 */
 	public PropertyEditor getPropertyEditor() {
-		return this.propertyEditor;
+		return propertyEditor;
 	}
 
 	/**
@@ -97,7 +114,7 @@ public class PropertyObject {
 	 * @param propertyEditor New value of property propertyEditor.
 	 * 
 	 */
-	public void setPropertyEditor(PropertyEditor propertyEditor) {
+	public void setPropertyEditor(final PropertyEditor propertyEditor) {
 		this.propertyEditor = propertyEditor;
 	}
 
@@ -108,7 +125,7 @@ public class PropertyObject {
 	 * 
 	 */
 	public Class<?> getValueClass() {
-		return this.valueClass;
+		return valueClass;
 	}
 
 	/**
@@ -117,7 +134,7 @@ public class PropertyObject {
 	 * @param valueClass New value of property valueClass.
 	 * 
 	 */
-	public void setValueClass(Class<?> valueClass) {
+	public void setValueClass(final Class<?> valueClass) {
 		this.valueClass = valueClass;
 	}
 
@@ -128,16 +145,16 @@ public class PropertyObject {
 	 * 
 	 */
 	public boolean isEditable() {
-		return this.editable;
+		return editable;
 	}
 
 	/**
 	 * Setter for property readOnly.
 	 * 
-	 * @param readOnly New value of property readOnly.
+	 * @param editable New value of property editable.
 	 * 
 	 */
-	public void setEditable(boolean editable) {
+	public void setEditable(final boolean editable) {
 		this.editable = editable;
 	}
 
@@ -148,7 +165,7 @@ public class PropertyObject {
 	 * 
 	 */
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	/**
@@ -157,7 +174,7 @@ public class PropertyObject {
 	 * @param name New value of property name.
 	 * 
 	 */
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 

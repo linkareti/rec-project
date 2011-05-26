@@ -21,7 +21,7 @@ public class StampCCProcessor extends AbstractStampProcessor {
 
 	/** Creates a new instance of StampHelloProcessor */
 	public StampCCProcessor() {
-		super(COMMAND_IDENTIFIER);
+		super(StampCCProcessor.COMMAND_IDENTIFIER);
 	}
 
 	/**
@@ -31,32 +31,33 @@ public class StampCCProcessor extends AbstractStampProcessor {
 	 * @return boolean - wether the processing was successfull
 	 * 
 	 */
-	public boolean process(StampCommand command) {
+	@Override
+	public boolean process(final StampCommand command) {
 		float capacidadeFreq = 0.f;
 		float capacidadeFarad = 0.f;
 		float distancia = 0.f;
-		String[] splitedStr = command.getCommand().split(" ");
+		final String[] splitedStr = command.getCommand().split(" ");
 
-		if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedStr != null
+		if (command.getCommandIdentifier().equalsIgnoreCase(StampCCProcessor.COMMAND_IDENTIFIER) && splitedStr != null
 				&& splitedStr.length >= 2 && splitedStr[0] != null && splitedStr[1] != null) {
 			try {
 				capacidadeFreq = Integer.parseInt(splitedStr[0]);
-				Float oCapacidadeFreq = new Float(capacidadeFreq);
-				command.addCommandData(CAPACIDADE_FREQ_STR, oCapacidadeFreq);
+				final Float oCapacidadeFreq = new Float(capacidadeFreq);
+				command.addCommandData(StampCCProcessor.CAPACIDADE_FREQ_STR, oCapacidadeFreq);
 
 				capacidadeFarad = capacidadeFreq * 5 / 50;
-				Float oCapacidadeFarad = new Float(capacidadeFreq);
-				command.addCommandData(CAPACIDADE_FARAD_STR, oCapacidadeFarad);
+				final Float oCapacidadeFarad = new Float(capacidadeFreq);
+				command.addCommandData(StampCCProcessor.CAPACIDADE_FARAD_STR, oCapacidadeFarad);
 
 				distancia = Integer.parseInt(splitedStr[1]);
-				Float oDistancia = new Float((float) distancia / 1000);
-				command.addCommandData(DISTANCIA_STR, oDistancia);
+				final Float oDistancia = new Float(distancia / 1000);
+				command.addCommandData(StampCCProcessor.DISTANCIA_STR, oDistancia);
 
 				command.setData(true);
 
 				return true;
 
-			} catch (NumberFormatException e) {
+			} catch (final NumberFormatException e) {
 				e.printStackTrace();
 				return false;
 			}
@@ -65,6 +66,7 @@ public class StampCCProcessor extends AbstractStampProcessor {
 		return false;
 	}
 
+	@Override
 	public boolean isData() {
 		return true;
 	}

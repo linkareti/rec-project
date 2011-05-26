@@ -47,32 +47,39 @@ public class PenduloStampDriver extends AbstractStampDriver {
 		loadCommandHandlers();
 	}
 
-	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException {
+	@Override
+	public void configure(final HardwareAcquisitionConfig config, final HardwareInfo info)
+			throws WrongConfigurationException {
 
 		fireIDriverStateListenerDriverConfiguring();
 
-		stampConfig = new StampCommand(CONFIG_OUT_STRING);
+		stampConfig = new StampCommand(AbstractStampDriver.CONFIG_OUT_STRING);
 
-		stampConfig.addCommandData(StampConfigTranslator.TETA_INIT_STR, new Integer(Defaults.defaultIfEmpty(config
-				.getSelectedHardwareParameterValue(StampConfigTranslator.TETA_INIT_STR), info
-				.getHardwareParameterValue(StampConfigTranslator.TETA_INIT_STR))));
+		stampConfig.addCommandData(
+				StampConfigTranslator.TETA_INIT_STR,
+				new Integer(Defaults.defaultIfEmpty(
+						config.getSelectedHardwareParameterValue(StampConfigTranslator.TETA_INIT_STR),
+						info.getHardwareParameterValue(StampConfigTranslator.TETA_INIT_STR))));
 
-		stampConfig.addCommandData(StampConfigTranslator.HEIGHT_INIT_STR, new Integer(Defaults.defaultIfEmpty(config
-				.getSelectedHardwareParameterValue(StampConfigTranslator.HEIGHT_INIT_STR), info
-				.getHardwareParameterValue(StampConfigTranslator.HEIGHT_INIT_STR))));
+		stampConfig.addCommandData(
+				StampConfigTranslator.HEIGHT_INIT_STR,
+				new Integer(Defaults.defaultIfEmpty(
+						config.getSelectedHardwareParameterValue(StampConfigTranslator.HEIGHT_INIT_STR),
+						info.getHardwareParameterValue(StampConfigTranslator.HEIGHT_INIT_STR))));
 
-		stampConfig.addCommandData(StampConfigTranslator.FRICTION_STR, Defaults.defaultIfEmpty(config
-				.getSelectedHardwareParameterValue(StampConfigTranslator.FRICTION_STR), info
-				.getHardwareParameterValue(StampConfigTranslator.FRICTION_STR)));
+		stampConfig.addCommandData(StampConfigTranslator.FRICTION_STR, Defaults.defaultIfEmpty(
+				config.getSelectedHardwareParameterValue(StampConfigTranslator.FRICTION_STR),
+				info.getHardwareParameterValue(StampConfigTranslator.FRICTION_STR)));
 
 		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new Integer(config.getTotalSamples()));
 
 		stampConfig.addCommandData(StampConfigTranslator.FREQ_INTERBAL_STR, new Integer((int) config
 				.getSelectedFrequency().getFrequency()));
 
-		StampTranslator translator = StampTranslatorProcessorManager.getTranslator(stampConfig);
-		if (!translator.translate(stampConfig))
+		final StampTranslator translator = StampTranslatorProcessorManager.getTranslator(stampConfig);
+		if (!translator.translate(stampConfig)) {
 			throw new WrongConfigurationException("Cannot translate StampCommand!", -1);
+		}
 
 		config.getChannelsConfig(0).setTotalSamples(config.getTotalSamples());
 
@@ -81,27 +88,32 @@ public class PenduloStampDriver extends AbstractStampDriver {
 		fireIDriverStateListenerDriverConfigured();
 	}
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionHeader() {
 		return config;
 	}
 
+	@Override
 	public Object getHardwareInfo() {
-		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+				+ "/HardwareInfo.xml";
 		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
-		if (prop.indexOf("://") == -1)
+		if (prop.indexOf("://") == -1) {
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
+		}
 
 		java.net.URL url = null;
 		try {
 			url = ReCProtocols.getURL(prop);
-		} catch (java.net.MalformedURLException e) {
-			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger(STAMP_DRIVER_LOGGER));
+		} catch (final java.net.MalformedURLException e) {
+			LoggerUtil.logThrowable("Unable to load resource: " + prop, e,
+					Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER));
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
-			} catch (java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2, Logger
-						.getLogger(STAMP_DRIVER_LOGGER));
+			} catch (final java.net.MalformedURLException e2) {
+				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
+						Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER));
 			}
 		}
 
@@ -109,25 +121,29 @@ public class PenduloStampDriver extends AbstractStampDriver {
 
 	}
 
+	@Override
 	public AbstractStampDataSource initDataSource() {
-		PenduloStampDataSource dataSource = new PenduloStampDataSource();
+		final PenduloStampDataSource dataSource = new PenduloStampDataSource();
 		dataSource.setAcquisitionHeader(getAcquisitionHeader());
 		return dataSource;
 	}
 
+	@Override
 	protected void loadExtraCommandHandlers() {
-		String packageName = getClass().getPackage().getName() + ".";
+		final String packageName = getClass().getPackage().getName() + ".";
 		StampTranslatorProcessorManager.initStampProcessorsTranslators(new String[] {
 				packageName + "processors.StampPenduloProcessor", packageName + "translators.StampConfigTranslator", });
 	}
 
-	public void processCommand(StampCommand cmd) {
+	@Override
+	public void processCommand(final StampCommand cmd) {
 		if (cmd == null || cmd.getCommandIdentifier() == null) {
-			Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO, "Can not interpret command " + cmd);
+			Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER).log(Level.INFO,
+					"Can not interpret command " + cmd);
 			return;
 		}
 
-		if (cmd.getCommandIdentifier().equals(ID_STR)) {
+		if (cmd.getCommandIdentifier().equals(AbstractStampDriver.ID_STR)) {
 			if (waitingStart) {
 				waitingStart = false;
 				writeMessage(stampConfig.getCommand());
@@ -183,23 +199,27 @@ public class PenduloStampDriver extends AbstractStampDriver {
 	private boolean initing = true;
 	private boolean waitingStart = false;
 	private boolean wroteStart = false;
-	private boolean waitingStop = false;
+	private final boolean waitingStop = false;
 	private boolean started = false;
 	private boolean stoping = false;
 	private boolean reseting = true;
 
+	@Override
 	public void startNow() throws TimedOutException {
 		wroteStart = false;
 
-		if (stampConfig == null)
+		if (stampConfig == null) {
 			throw new TimedOutException("No configuration available yet!");
+		}
 
 		waitingStart = true;
 
 		WaitForConditionResult.waitForConditionTrue(new AbstractConditionDecisor() {
+			@Override
 			public ConditionResult getConditionResult() {
-				if (!waitingStart)
+				if (!waitingStart) {
 					return ConditionResult.CONDITION_MET_TRUE;
+				}
 
 				return ConditionResult.CONDITION_NOT_MET;
 			}

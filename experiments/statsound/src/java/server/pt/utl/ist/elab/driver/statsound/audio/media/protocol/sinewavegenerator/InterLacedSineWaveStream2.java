@@ -6,14 +6,15 @@ import javax.media.format.AudioFormat;
 import javax.media.protocol.BufferTransferHandler;
 import javax.media.protocol.ContentDescriptor;
 import javax.media.protocol.PushBufferStream;
+import javax.media.protocol.SourceStream;
 
 public class InterLacedSineWaveStream2 implements PushBufferStream {
 
 	protected ContentDescriptor cd = new ContentDescriptor(ContentDescriptor.RAW);
 	protected int maxDataLength;
-	private float freq_out = 44100.0f;
-	private int bits_per_channel = 16;
-	private int num_channels = 2;
+	private final float freq_out = 44100.0f;
+	private final int bits_per_channel = 16;
+	private final int num_channels = 2;
 	protected AudioFormat audioFormat;
 	protected boolean started;
 	protected Thread thread;
@@ -32,7 +33,7 @@ public class InterLacedSineWaveStream2 implements PushBufferStream {
 		maxDataLength = (int) (freq_out / 4.) * num_channels * bits_per_channel / 8;
 		// System.out.println("maxDataLength="+maxDataLength);
 
-		max_amplitude = (double) Math.pow(2., (double) (bits_per_channel - 1)) - 1;
+		max_amplitude = Math.pow(2., (bits_per_channel - 1)) - 1;
 
 		thread = new SineWaveByteFrameGenerator();
 		thread.setPriority(Thread.NORM_PRIORITY);
@@ -46,16 +47,19 @@ public class InterLacedSineWaveStream2 implements PushBufferStream {
 	 * SourceStream
 	 ***************************************************************************/
 
+	@Override
 	public ContentDescriptor getContentDescriptor() {
 		// System.out.println("Getting content descriptor");
 		return cd;
 	}
 
+	@Override
 	public long getContentLength() {
 		// System.out.println("Getting content length");
-		return LENGTH_UNKNOWN;
+		return SourceStream.LENGTH_UNKNOWN;
 	}
 
+	@Override
 	public boolean endOfStream() {
 		// System.out.println("Quering for end of stream");
 		return false;
@@ -73,7 +77,7 @@ public class InterLacedSineWaveStream2 implements PushBufferStream {
 
 	private double max_amplitude = 0;
 
-	public void setWaveLeftFreq(double wave_left_freq) {
+	public void setWaveLeftFreq(final double wave_left_freq) {
 		/*
 		 * synchronized(Synch) {
 		 */
@@ -84,10 +88,10 @@ public class InterLacedSineWaveStream2 implements PushBufferStream {
 	}
 
 	public double getWaveLeftFreq() {
-		return this.wave_left_freq;
+		return wave_left_freq;
 	}
 
-	public void setWaveRightFreq(double wave_right_freq) {
+	public void setWaveRightFreq(final double wave_right_freq) {
 		/*
 		 * synchronized(Synch) {
 		 */
@@ -98,15 +102,17 @@ public class InterLacedSineWaveStream2 implements PushBufferStream {
 	}
 
 	public double getWaveRightFreq() {
-		return this.wave_right_freq;
+		return wave_right_freq;
 	}
 
+	@Override
 	public Format getFormat() {
 		// System.out.println("Getting format");
 		return audioFormat;
 	}
 
-	public void setTransferHandler(BufferTransferHandler transferHandler) {
+	@Override
+	public void setTransferHandler(final BufferTransferHandler transferHandler) {
 		// System.out.println("Setting transfer handler");
 		// synchronized (this) {
 		this.transferHandler = transferHandler;
@@ -115,7 +121,7 @@ public class InterLacedSineWaveStream2 implements PushBufferStream {
 		 */
 	}
 
-	void start(boolean started) {
+	void start(final boolean started) {
 		/*
 		 * synchronized ( this ) {
 		 */
@@ -131,22 +137,25 @@ public class InterLacedSineWaveStream2 implements PushBufferStream {
 		 */
 	}
 
+	@Override
 	public Object[] getControls() {
 		// System.out.println("Getting controls");
 		return controls;
 	}
 
-	public Object getControl(String controlType) {
+	@Override
+	public Object getControl(final String controlType) {
 		try {
-			Class cls = Class.forName(controlType);
-			Object cs[] = getControls();
-			for (int i = 0; i < cs.length; i++) {
-				if (cls.isInstance(cs[i]))
-					return cs[i];
+			final Class cls = Class.forName(controlType);
+			final Object cs[] = getControls();
+			for (final Object element : cs) {
+				if (cls.isInstance(element)) {
+					return element;
+				}
 			}
 			return null;
 
-		} catch (Exception e) { // no such controlType or such control
+		} catch (final Exception e) { // no such controlType or such control
 			return null;
 		}
 	}
@@ -158,16 +167,16 @@ public class InterLacedSineWaveStream2 implements PushBufferStream {
 	Object Synch = new Object();
 
 	// Alterar os valores do vector, talvez apostar num incremento brutal..
-	private java.util.Vector frames = new java.util.Vector(1000);
+	private final java.util.Vector frames = new java.util.Vector(1000);
 
-	private void newData(byte[] dataFrame) {
+	private void newData(final byte[] dataFrame) {
 		frames.add(dataFrame);
 		while (transferHandler == null && started) {
 			// System.out.println("Locked @ new data");
 			synchronized (this) {
 				try {
 					wait(1000);
-				} catch (InterruptedException ie) {
+				} catch (final InterruptedException ie) {
 				}
 			}
 		}// while
@@ -176,7 +185,8 @@ public class InterLacedSineWaveStream2 implements PushBufferStream {
 		}
 	}
 
-	public void read(javax.media.Buffer buffer) throws java.io.IOException {
+	@Override
+	public void read(final javax.media.Buffer buffer) throws java.io.IOException {
 		freqPlayed = false;
 		// System.out.println("Reading Buffer of Sound Data " + seqNo);
 
@@ -184,7 +194,7 @@ public class InterLacedSineWaveStream2 implements PushBufferStream {
 			// System.out.println("The frames size is smaller then zero");
 			return;
 		}
-		byte[] frame = (byte[]) frames.get(seqNo);
+		final byte[] frame = (byte[]) frames.get(seqNo);
 		buffer.setData(frame);
 		buffer.setFormat(audioFormat);
 		buffer.setSequenceNumber(seqNo);
@@ -204,25 +214,26 @@ public class InterLacedSineWaveStream2 implements PushBufferStream {
 	}
 
 	public class SineWaveByteFrameGenerator extends Thread {
+		@Override
 		public void run() {
 			double waitSecsForNewTransfer = (double) maxDataLength / (double) (num_channels * (bits_per_channel / 8));
-			waitSecsForNewTransfer = waitSecsForNewTransfer / ((double) freq_out);
+			waitSecsForNewTransfer = waitSecsForNewTransfer / (freq_out);
 			long timeStarted = 0;
 			long timeSpent = 0;
 			int frameNumber = -1;
 			while (started) {
 				frameNumber++;
 				timeStarted = System.currentTimeMillis();
-				byte[] data_out = new byte[maxDataLength];
+				final byte[] data_out = new byte[maxDataLength];
 
-				double delta_t = 1. / (double) freq_out;
+				final double delta_t = 1. / freq_out;
 
-				int buffer_len = data_out.length / (num_channels * (bits_per_channel / 8));
+				final int buffer_len = data_out.length / (num_channels * (bits_per_channel / 8));
 				double wave_left_freq_temp = 0.;
 				double wave_right_freq_temp = 0.;
 				double time = 0.;
 				for (int i = 0; i < buffer_len; i++) {
-					time = (double) i * delta_t;
+					time = i * delta_t;
 					// synchronized (Synch) {
 					wave_left_freq_temp = wave_left_freq;
 					wave_right_freq_temp = wave_left_freq;
@@ -263,11 +274,11 @@ public class InterLacedSineWaveStream2 implements PushBufferStream {
 				newData(data_out);
 				timeSpent = System.currentTimeMillis() - timeStarted;
 				try {
-					long sleep = ((long) (waitSecsForNewTransfer * 1000.) - timeSpent);
+					final long sleep = ((long) (waitSecsForNewTransfer * 1000.) - timeSpent);
 					System.out.println("Generated new Frame of Sound Data " + frameNumber);
 					System.out.println("Sleeping for " + Math.max(sleep, 0) + " ms");
-					sleep(Math.max(sleep, 0));
-				} catch (InterruptedException ise) {
+					Thread.sleep(Math.max(sleep, 0));
+				} catch (final InterruptedException ise) {
 				}
 			}
 		}// while (started)
@@ -286,5 +297,5 @@ public class InterLacedSineWaveStream2 implements PushBufferStream {
 	 * }
 	 */
 
-	private com.linkare.rec.impl.utils.EventQueue dataQueue = null;
+	private final com.linkare.rec.impl.utils.EventQueue dataQueue = null;
 }

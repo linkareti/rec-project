@@ -20,13 +20,13 @@ public class SaveData {
 	int shift = 0;
 
 	/** Creates a new instance of SaveData */
-	public SaveData(java.io.File file, pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] matrix,
-			pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfInOut confInOut,
-			pt.utl.ist.elab.client.webrobot.customizer.Comps.IVPWM ivpwm, int maxRow, int maxColumn) {
+	public SaveData(final java.io.File file, final pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] matrix,
+			final pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfInOut confInOut,
+			final pt.utl.ist.elab.client.webrobot.customizer.Comps.IVPWM ivpwm, final int maxRow, final int maxColumn) {
 		boolean isFirstTime = true;
 		this.matrix = matrix;
-		int maxAllowedColumn = getMaxAllowedColumn(maxRow, maxColumn);
-		pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIVPWM modelIVPWM = (pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIVPWM) ivpwm
+		final int maxAllowedColumn = getMaxAllowedColumn(maxRow, maxColumn);
+		final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIVPWM modelIVPWM = (pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIVPWM) ivpwm
 				.getDataModel();
 		try {
 			if (file != null) {
@@ -40,8 +40,8 @@ public class SaveData {
 				for (int iRow = 2; iRow < maxRow + 1; iRow++) {
 					comp = matrix[iRow][iCol];
 					if (comp == null
-							|| comp.getClass().getName().startsWith(
-									"pt.utl.ist.elab.client.webrobot.customizer.Comps.HorLine")) {
+							|| comp.getClass().getName()
+									.startsWith("pt.utl.ist.elab.client.webrobot.customizer.Comps.HorLine")) {
 						continue;
 					}
 					write("coluna=" + iCol + ", nivel=" + iRow + ", tipo=" + comp.getTipo() + ", d1="
@@ -61,8 +61,9 @@ public class SaveData {
 						 * HorLines
 						 */
 						if (matrix[iRow][cCol - 1] != null
-								&& matrix[iRow][cCol - 1].getClass().getName().startsWith(
-										"pt.utl.ist.elab.client.webrobot.customizer.Comps.HorLine") && isFirstTime) {
+								&& matrix[iRow][cCol - 1].getClass().getName()
+										.startsWith("pt.utl.ist.elab.client.webrobot.customizer.Comps.HorLine")
+								&& isFirstTime) {
 						} else {
 							isFirstTime = false;
 							shift++;
@@ -91,14 +92,14 @@ public class SaveData {
 					+ confInOut.getModel().getV3() + " " + confInOut.getModel().getV4() + " "
 					+ confInOut.getModel().getV5() + lineSeparator);
 
-			Object[][] iValues = modelIVPWM.getIValues();
+			final Object[][] iValues = modelIVPWM.getIValues();
 			write("y" + iValues.length + lineSeparator);
-			for (int iRow = 0; iRow < iValues.length; iRow++) {
-				write((String) iValues[iRow][0] + "\t");
-				int firstSize = String.valueOf((Integer) iValues[iRow][1]).length();
-				int secondSize = String.valueOf((Integer) iValues[iRow][2]).length();
-				write(convertSpaces(firstSize) + String.valueOf((Integer) iValues[iRow][1]) + "\t"
-						+ convertSpaces(secondSize) + String.valueOf((Integer) iValues[iRow][2]) + lineSeparator);
+			for (final Object[] iValue : iValues) {
+				write((String) iValue[0] + "\t");
+				final int firstSize = String.valueOf(iValue[1]).length();
+				final int secondSize = String.valueOf(iValue[2]).length();
+				write(convertSpaces(firstSize) + String.valueOf(iValue[1]) + "\t" + convertSpaces(secondSize)
+						+ String.valueOf(iValue[2]) + lineSeparator);
 
 			}
 			write(modelIVPWM.getI0Value() + " " + modelIVPWM.getI1Value() + " " + modelIVPWM.getI2Value() + " "
@@ -111,12 +112,12 @@ public class SaveData {
 			if (file != null) {
 				fileOutPutStream.close();
 			}
-		} catch (java.io.IOException ioe) {
+		} catch (final java.io.IOException ioe) {
 			System.out.println("Erro ao tentar escrever no ficheiro..." + ioe);
 		}
 	}
 
-	private String convertSpaces(int width) {
+	private String convertSpaces(final int width) {
 		if (width == 3) {
 			return "";
 		} else if (width == 2) {
@@ -128,7 +129,7 @@ public class SaveData {
 		}
 	}
 
-	private int getMaxAllowedColumn(int maxRow, int maxColumn) {
+	private int getMaxAllowedColumn(final int maxRow, final int maxColumn) {
 		boolean abort = false;
 		int iCol;
 		for (iCol = 1; iCol < maxColumn + 1; iCol++) {
@@ -146,11 +147,11 @@ public class SaveData {
 		return (iCol - 1);
 	}
 
-	private void write(String write) {
+	private void write(final String write) {
 		if (fileOutPutStream != null) {
 			try {
 				fileOutPutStream.write(write.getBytes());
-			} catch (java.io.IOException ioe) {
+			} catch (final java.io.IOException ioe) {
 				System.out.println("Erro ao tentar escrever no ficheiro..." + ioe);
 			}
 		} else {

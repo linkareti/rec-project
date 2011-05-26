@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.vcartpole.displays;
  */
 public class ThetaChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7199137166280304856L;
+
 	/** Creates a new instance of ThetaChart */
 	public ThetaChart() {
 		super();

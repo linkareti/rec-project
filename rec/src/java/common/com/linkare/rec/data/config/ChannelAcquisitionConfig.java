@@ -3,23 +3,36 @@ package com.linkare.rec.data.config;
 import java.util.ResourceBundle;
 
 public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.IDLEntity {
-	
-	private static final ResourceBundle resourceBundle = ResourceBundle.getBundle("com/linkare/rec/data/resources/messages");
-	
-	private static final String CHANNEL_NAME = resourceBundle.getString("rec.bui.channel.acquisition.config.data.channel.name");
-	
-	private static final String CHANNEL_START_TIME = resourceBundle.getString("rec.bui.channel.acquisition.config.data.channel.start.time");
-	
-	private static final String CHANNEL_FREQUENCY = resourceBundle.getString("rec.bui.channel.acquisition.config.data.channel.frequency");
-	
-	private static final String CHANNEL_SCALE = resourceBundle.getString("rec.bui.channel.acquisition.config.data.channel.scale");
-	
-	private static final String CHANNEL_TOTAL_SAMPLES = resourceBundle.getString("rec.bui.channel.acquisition.config.data.channel.total.samples");
-	
-	private static final String CHANNEL_TOTAL_SAMPLES_UNDETERMINED = resourceBundle.getString("rec.bui.channel.acquisition.config.data.channel.total.samples.undetermined");
-	
-	private static final String CHANNEL_PARAMETERS = resourceBundle.getString("rec.bui.channel.acquisition.config.data.channel.parameters");
-	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2314380377663357304L;
+
+	private static final ResourceBundle resourceBundle = ResourceBundle
+			.getBundle("com/linkare/rec/data/resources/messages");
+
+	private static final String CHANNEL_NAME = ChannelAcquisitionConfig.resourceBundle
+			.getString("rec.bui.channel.acquisition.config.data.channel.name");
+
+	private static final String CHANNEL_START_TIME = ChannelAcquisitionConfig.resourceBundle
+			.getString("rec.bui.channel.acquisition.config.data.channel.start.time");
+
+	private static final String CHANNEL_FREQUENCY = ChannelAcquisitionConfig.resourceBundle
+			.getString("rec.bui.channel.acquisition.config.data.channel.frequency");
+
+	private static final String CHANNEL_SCALE = ChannelAcquisitionConfig.resourceBundle
+			.getString("rec.bui.channel.acquisition.config.data.channel.scale");
+
+	private static final String CHANNEL_TOTAL_SAMPLES = ChannelAcquisitionConfig.resourceBundle
+			.getString("rec.bui.channel.acquisition.config.data.channel.total.samples");
+
+	private static final String CHANNEL_TOTAL_SAMPLES_UNDETERMINED = ChannelAcquisitionConfig.resourceBundle
+			.getString("rec.bui.channel.acquisition.config.data.channel.total.samples.undetermined");
+
+	private static final String CHANNEL_PARAMETERS = ChannelAcquisitionConfig.resourceBundle
+			.getString("rec.bui.channel.acquisition.config.data.channel.parameters");
+
 	/** Holds value of property timeStart. */
 	private com.linkare.rec.data.synch.DateTime timeStart;
 
@@ -52,26 +65,26 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 	// member
 	// @param total_samples total_samples struct member
 	//
-	public ChannelAcquisitionConfig(String channelName, com.linkare.rec.data.synch.DateTime time_start,
-			com.linkare.rec.data.synch.Frequency selected_frequency,
-			com.linkare.rec.data.metadata.Scale selected_scale,
-			com.linkare.rec.data.config.ParameterConfig[] selected_channel_parameters, int total_samples) {
-		this.setChannelName(channelName);
-		this.setTimeStart(time_start);
-		this.setSelectedFrequency(selected_frequency);
-		this.setSelectedScale(selected_scale);
+	public ChannelAcquisitionConfig(final String channelName, final com.linkare.rec.data.synch.DateTime time_start,
+			final com.linkare.rec.data.synch.Frequency selected_frequency,
+			final com.linkare.rec.data.metadata.Scale selected_scale,
+			final com.linkare.rec.data.config.ParameterConfig[] selected_channel_parameters, final int total_samples) {
+		setChannelName(channelName);
+		setTimeStart(time_start);
+		setSelectedFrequency(selected_frequency);
+		setSelectedScale(selected_scale);
 		this.setSelectedChannelParameters(selected_channel_parameters);
-		this.setTotalSamples(total_samples);
+		setTotalSamples(total_samples);
 	}
 
 	//
 	// Copy Constructor
 	//
-	public ChannelAcquisitionConfig(ChannelAcquisitionConfig other) {
-		this.setChannelName(new String(other.getChannelName()));
-		this.setTimeStart(new com.linkare.rec.data.synch.DateTime(other.getTimeStart()));
-		this.setSelectedFrequency(new com.linkare.rec.data.synch.Frequency(other.getSelectedFrequency()));
-		this.setSelectedScale(other.getSelectedScale());
+	public ChannelAcquisitionConfig(final ChannelAcquisitionConfig other) {
+		setChannelName(new String(other.getChannelName()));
+		setTimeStart(new com.linkare.rec.data.synch.DateTime(other.getTimeStart()));
+		setSelectedFrequency(new com.linkare.rec.data.synch.Frequency(other.getSelectedFrequency()));
+		setSelectedScale(other.getSelectedScale());
 
 		ParameterConfig[] temp = null;
 		if (other.getSelectedChannelParameters() != null) {
@@ -81,26 +94,27 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 
 		this.setSelectedChannelParameters(temp);
 		temp = null;
-		this.setTotalSamples(other.getTotalSamples());
+		setTotalSamples(other.getTotalSamples());
 	}
 
-	public ChannelAcquisitionConfig(com.linkare.rec.data.metadata.ChannelInfo info) {
+	public ChannelAcquisitionConfig(final com.linkare.rec.data.metadata.ChannelInfo info) {
 		setChannelName(info.getChannelName());
 
-		ParameterConfig[] params = null;
+		final ParameterConfig[] params = null;
 		com.linkare.rec.data.metadata.ChannelParameter[] params_info = null;
 
 		if ((params_info = info.getChannelParameters()) != null) {
 			for (int i = 0; i < params_info.length; i++) {
-				if (params_info[i] != null)
-					params[i] = new ParameterConfig(params_info[i].getParameterName(), params_info[i]
-							.getSelectedParameterValue());
+				if (params_info[i] != null) {
+					params[i] = new ParameterConfig(params_info[i].getParameterName(),
+							params_info[i].getSelectedParameterValue());
+				}
 			}
 			this.setSelectedChannelParameters(params);
 		}
 
-		this.setSelectedFrequency(info.getSelectedFrequency());
-		this.setSelectedScale(info.getActualSelectedScale());
+		setSelectedFrequency(info.getSelectedFrequency());
+		setSelectedScale(info.getActualSelectedScale());
 	}
 
 	/**
@@ -109,7 +123,7 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 	 * @return Value of property timeStart.
 	 */
 	public com.linkare.rec.data.synch.DateTime getTimeStart() {
-		return this.timeStart;
+		return timeStart;
 	}
 
 	/**
@@ -117,7 +131,7 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 	 * 
 	 * @param timeStart New value of property timeStart.
 	 */
-	public void setTimeStart(com.linkare.rec.data.synch.DateTime timeStart) {
+	public void setTimeStart(final com.linkare.rec.data.synch.DateTime timeStart) {
 		this.timeStart = timeStart;
 	}
 
@@ -127,7 +141,7 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 	 * @return Value of property selectedFrequency.
 	 */
 	public com.linkare.rec.data.synch.Frequency getSelectedFrequency() {
-		return this.selectedFrequency;
+		return selectedFrequency;
 	}
 
 	/**
@@ -135,7 +149,7 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 	 * 
 	 * @param selectedFrequency New value of property selectedFrequency.
 	 */
-	public void setSelectedFrequency(com.linkare.rec.data.synch.Frequency selectedFrequency) {
+	public void setSelectedFrequency(final com.linkare.rec.data.synch.Frequency selectedFrequency) {
 		this.selectedFrequency = selectedFrequency;
 	}
 
@@ -145,7 +159,7 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 	 * @return Value of property selectedScaleIndex.
 	 */
 	public com.linkare.rec.data.metadata.Scale getSelectedScale() {
-		return this.selected_scale;
+		return selected_scale;
 	}
 
 	/**
@@ -153,7 +167,7 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 	 * 
 	 * @param selectedScaleIndex New value of property selectedScaleIndex.
 	 */
-	public void setSelectedScale(com.linkare.rec.data.metadata.Scale selected_scale) {
+	public void setSelectedScale(final com.linkare.rec.data.metadata.Scale selected_scale) {
 		this.selected_scale = selected_scale;
 	}
 
@@ -163,9 +177,10 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 	 * @param index Index of the property.
 	 * @return Value of the property at <CODE>index</CODE>.
 	 */
-	public com.linkare.rec.data.config.ParameterConfig getSelectedChannelParameters(int index) {
-		if (this.selectedChannelParameters != null && index < this.selectedChannelParameters.length)
-			return this.selectedChannelParameters[index];
+	public com.linkare.rec.data.config.ParameterConfig getSelectedChannelParameters(final int index) {
+		if (selectedChannelParameters != null && index < selectedChannelParameters.length) {
+			return selectedChannelParameters[index];
+		}
 
 		throw new RuntimeException("No ParameterConfig at that index...");
 	}
@@ -176,23 +191,26 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 	 * @return Value of property selectedChannelParameters.
 	 */
 	public com.linkare.rec.data.config.ParameterConfig[] getSelectedChannelParameters() {
-		return this.selectedChannelParameters;
+		return selectedChannelParameters;
 	}
 
-	public com.linkare.rec.data.config.ParameterConfig getSelectedChannelParameter(String parameter_name) {
-		if (this.selectedChannelParameters != null && parameter_name != null) {
-			for (int i = 0; i < selectedChannelParameters.length; i++)
-				if (parameter_name.equals(selectedChannelParameters[i].getParameterName()))
-					return selectedChannelParameters[i];
+	public com.linkare.rec.data.config.ParameterConfig getSelectedChannelParameter(final String parameter_name) {
+		if (selectedChannelParameters != null && parameter_name != null) {
+			for (final ParameterConfig selectedChannelParameter : selectedChannelParameters) {
+				if (parameter_name.equals(selectedChannelParameter.getParameterName())) {
+					return selectedChannelParameter;
+				}
+			}
 		}
 		return null;
 
 	}
 
-	public String getSelectedChannelParameterValue(String parameter_name) {
+	public String getSelectedChannelParameterValue(final String parameter_name) {
 		ParameterConfig param = null;
-		if ((param = getSelectedChannelParameter(parameter_name)) != null)
+		if ((param = getSelectedChannelParameter(parameter_name)) != null) {
 			return param.getParameterValue();
+		}
 
 		return null;
 	}
@@ -204,14 +222,15 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 	 * @param selectedChannelParameters New value of the property at
 	 *            <CODE>index</CODE>.
 	 */
-	public void setSelectedChannelParameters(int index,
-			com.linkare.rec.data.config.ParameterConfig selectedChannelParameters) {
-		if (this.selectedChannelParameters != null && index < this.selectedChannelParameters.length)
+	public void setSelectedChannelParameters(final int index,
+			final com.linkare.rec.data.config.ParameterConfig selectedChannelParameters) {
+		if (this.selectedChannelParameters != null && index < this.selectedChannelParameters.length) {
 			this.selectedChannelParameters[index] = selectedChannelParameters;
-		else {
+		} else {
 			ParameterConfig[] temp = new ParameterConfig[index + 1];
-			if (this.selectedChannelParameters != null)
+			if (this.selectedChannelParameters != null) {
 				System.arraycopy(this.selectedChannelParameters, 0, temp, 0, this.selectedChannelParameters.length);
+			}
 
 			temp[index] = selectedChannelParameters;
 			this.selectedChannelParameters = temp;
@@ -219,11 +238,12 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 		}
 	}
 
-	public void addSelectedChannelParameter(com.linkare.rec.data.config.ParameterConfig selectedChannelParameter) {
-		if (this.selectedChannelParameters == null)
+	public void addSelectedChannelParameter(final com.linkare.rec.data.config.ParameterConfig selectedChannelParameter) {
+		if (selectedChannelParameters == null) {
 			setSelectedChannelParameters(0, selectedChannelParameter);
-		else
+		} else {
 			setSelectedChannelParameters(selectedChannelParameters.length, selectedChannelParameter);
+		}
 	}
 
 	/**
@@ -232,7 +252,8 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 	 * @param selectedChannelParameters New value of property
 	 *            selectedChannelParameters.
 	 */
-	public void setSelectedChannelParameters(com.linkare.rec.data.config.ParameterConfig[] selectedChannelParameters) {
+	public void setSelectedChannelParameters(
+			final com.linkare.rec.data.config.ParameterConfig[] selectedChannelParameters) {
 		this.selectedChannelParameters = selectedChannelParameters;
 	}
 
@@ -242,7 +263,7 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 	 * @return Value of property totalSamples.
 	 */
 	public int getTotalSamples() {
-		return this.total_samples;
+		return total_samples;
 	}
 
 	/**
@@ -250,8 +271,8 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 	 * 
 	 * @param totalSamples New value of property totalSamples.
 	 */
-	public void setTotalSamples(int totalSamples) {
-		this.total_samples = totalSamples;
+	public void setTotalSamples(final int totalSamples) {
+		total_samples = totalSamples;
 	}
 
 	/**
@@ -275,32 +296,42 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 	 * 
 	 * @return a string representation of the object.
 	 */
+	@Override
 	public String toString() {
-		StringBuffer strBufOut = new StringBuffer();
-		String linesep = System.getProperty("line.separator");
+		final StringBuffer strBufOut = new StringBuffer();
+		final String linesep = System.getProperty("line.separator");
 
-		if (channelName != null)
-			strBufOut.append("\t" + CHANNEL_NAME).append(channelName).append(linesep);
+		if (channelName != null) {
+			strBufOut.append("\t" + ChannelAcquisitionConfig.CHANNEL_NAME).append(channelName).append(linesep);
+		}
 
-		if (timeStart != null)
-			strBufOut.append("\t" + CHANNEL_START_TIME).append(timeStart.toSimpleString()).append(linesep);
+		if (timeStart != null) {
+			strBufOut.append("\t" + ChannelAcquisitionConfig.CHANNEL_START_TIME).append(timeStart.toSimpleString())
+					.append(linesep);
+		}
 
-		if (selectedFrequency != null)
-			strBufOut.append("\t" + CHANNEL_FREQUENCY).append(selectedFrequency).append(linesep);
+		if (selectedFrequency != null) {
+			strBufOut.append("\t" + ChannelAcquisitionConfig.CHANNEL_FREQUENCY).append(selectedFrequency)
+					.append(linesep);
+		}
 
-		if (selected_scale != null)
-			strBufOut.append("\t" + CHANNEL_SCALE).append(selected_scale).append(linesep);
+		if (selected_scale != null) {
+			strBufOut.append("\t" + ChannelAcquisitionConfig.CHANNEL_SCALE).append(selected_scale).append(linesep);
+		}
 
-		if (total_samples != com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value)
-			strBufOut.append("\t" + CHANNEL_TOTAL_SAMPLES).append(total_samples).append(linesep);
-		else if (total_samples == com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value)
-			strBufOut.append("\t" + CHANNEL_TOTAL_SAMPLES_UNDETERMINED).append(linesep);
+		if (total_samples != com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value) {
+			strBufOut.append("\t" + ChannelAcquisitionConfig.CHANNEL_TOTAL_SAMPLES).append(total_samples)
+					.append(linesep);
+		} else if (total_samples == com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value) {
+			strBufOut.append("\t" + ChannelAcquisitionConfig.CHANNEL_TOTAL_SAMPLES_UNDETERMINED).append(linesep);
+		}
 
 		if (selectedChannelParameters != null) {
-			strBufOut.append("\t" + CHANNEL_PARAMETERS).append(linesep);
-			for (int i = 0; i < selectedChannelParameters.length; i++) {
-				if (selectedChannelParameters[i] != null)
-					strBufOut.append("\t\t").append(selectedChannelParameters[i]).append(linesep);
+			strBufOut.append("\t" + ChannelAcquisitionConfig.CHANNEL_PARAMETERS).append(linesep);
+			for (final ParameterConfig selectedChannelParameter : selectedChannelParameters) {
+				if (selectedChannelParameter != null) {
+					strBufOut.append("\t\t").append(selectedChannelParameter).append(linesep);
+				}
 			}
 		}
 
@@ -313,7 +344,7 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 	 * @return Value of property channelName.
 	 */
 	public String getChannelName() {
-		return this.channelName;
+		return channelName;
 		// return ReCResourceBundle.findStringOrDefault(this.channelName,
 		// this.channelName);
 	}
@@ -323,7 +354,7 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 	 * 
 	 * @param channelName New value of property channelName.
 	 */
-	public void setChannelName(String channelName) {
+	public void setChannelName(final String channelName) {
 		this.channelName = channelName;
 	}
 

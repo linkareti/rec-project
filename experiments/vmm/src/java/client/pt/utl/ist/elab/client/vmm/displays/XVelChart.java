@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.vmm.displays;
  */
 public class XVelChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7730826508876935576L;
+
 	/** Creates a new instance of AnguloIntensidadeChart */
 	public XVelChart() {
 		super();

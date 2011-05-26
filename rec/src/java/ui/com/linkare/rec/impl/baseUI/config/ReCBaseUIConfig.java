@@ -133,18 +133,18 @@ public class ReCBaseUIConfig implements CommonBean {
 	public static String UI_CONFIG_LOGGER = "ReCBaseUIConfig.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CONFIG_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ReCBaseUIConfig.UI_CONFIG_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CONFIG_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ReCBaseUIConfig.UI_CONFIG_LOGGER));
 		}
 	}
 
-	private void log(Level debugLevel, String message) {
-		Logger.getLogger(UI_CONFIG_LOGGER).log(debugLevel, "ReCBaseUIConfig - " + message);
+	private void log(final Level debugLevel, final String message) {
+		Logger.getLogger(ReCBaseUIConfig.UI_CONFIG_LOGGER).log(debugLevel, "ReCBaseUIConfig - " + message);
 	}
 
-	private void logThrowable(String message, Throwable t) {
-		LoggerUtil.logThrowable("ReCBaseUIConfig - " + message, t, Logger.getLogger(UI_CONFIG_LOGGER));
+	private void logThrowable(final String message, final Throwable t) {
+		LoggerUtil.logThrowable("ReCBaseUIConfig - " + message, t, Logger.getLogger(ReCBaseUIConfig.UI_CONFIG_LOGGER));
 	}
 
 	private boolean _AutoConnectLab = false;
@@ -164,8 +164,8 @@ public class ReCBaseUIConfig implements CommonBean {
 	private String _FrameTitleBundleKey;
 	private String _IconSponsorLocationBundleKey = "";
 	private String _HelpPageLocationBundleKey = "";
-	private List<Lab> _Lab = new ArrayList<Lab>(); // List<Lab>
-	private List<WebResource> _WebResource = new ArrayList<WebResource>(); // List<WebResource>
+	private final List<Lab> _Lab = new ArrayList<Lab>(); // List<Lab>
+	private final List<WebResource> _WebResource = new ArrayList<WebResource>(); // List<WebResource>
 	private PropertyChangeSupport eventListeners;
 
 	private ReCBaseUIConfig() {
@@ -174,25 +174,26 @@ public class ReCBaseUIConfig implements CommonBean {
 		String codeBase = "";
 
 		try {
-			BasicService bs = (BasicService) ServiceManager.lookup("javax.jnlp.BasicService");
+			final BasicService bs = (BasicService) ServiceManager.lookup("javax.jnlp.BasicService");
 			codeBase = bs.getCodeBase().toString();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logThrowable(
 					"Couldn't get codebase - Basic Service is probably not defined... Not running as a jnlp application!",
 					e);
 		}
 
-		if (codeBase == null || "".equals(codeBase))
+		if (codeBase == null || "".equals(codeBase)) {
 			codeBase = ".";
+		}
 
-		String configLocation = Defaults.defaultIfEmpty(System.getProperty(UI_CONFIG_URL_PROP), codeBase + "/"
-				+ UI_CONFIG_URL_PROP + ".xml");
+		final String configLocation = Defaults.defaultIfEmpty(System.getProperty(ReCBaseUIConfig.UI_CONFIG_URL_PROP),
+				codeBase + "/" + ReCBaseUIConfig.UI_CONFIG_URL_PROP + ".xml");
 
 		InputStream is = null;
 
 		try {
 			is = ReCProtocols.getURL(configLocation).openConnection().getInputStream();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			logThrowable("Couldn't openConnection to Config file, trying to load directly from the jar file!", e);
 		}
@@ -206,12 +207,12 @@ public class ReCBaseUIConfig implements CommonBean {
 
 		try {
 			read(is);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logThrowable("Couldn't read config file!", e);
 		}
 		try {
 			validate();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			logThrowable("Couldn't validate config file!", e);
 			e.printStackTrace();
 		}
@@ -221,33 +222,36 @@ public class ReCBaseUIConfig implements CommonBean {
 	public static ReCBaseUIConfig instance = null;
 
 	public static ReCBaseUIConfig sharedInstance() {
-		if (instance == null)
-			instance = new ReCBaseUIConfig();
+		if (ReCBaseUIConfig.instance == null) {
+			ReCBaseUIConfig.instance = new ReCBaseUIConfig();
+		}
 
-		return instance;
+		return ReCBaseUIConfig.instance;
 	}
 
 	// This attribute is mandatory
-	public void setAboutPageLocationBundleKey(String value) {
+	public void setAboutPageLocationBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "aboutPageLocationBundleKey", getAboutPageLocationBundleKey(), value);
 		}
 		_AboutPageLocationBundleKey = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	// This attribute is mandatory
-	public void setSplashIconLocationBundleKey(String value) {
+	public void setSplashIconLocationBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "splashIconLocationBundleKey", getSplashIconLocationBundleKey(),
 					value);
 		}
 		_SplashIconLocationBundleKey = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public String getAboutPageLocationBundleKey() {
@@ -266,7 +270,7 @@ public class ReCBaseUIConfig implements CommonBean {
 	public URL getAboutPageURL() {
 		try {
 			return ReCProtocols.getURL(ReCResourceBundle.findString(getAboutPageLocationBundleKey()));
-		} catch (Exception e) {
+		} catch (final Exception e) {
 		}
 
 		return null;
@@ -277,14 +281,15 @@ public class ReCBaseUIConfig implements CommonBean {
 	}
 
 	// This attribute is mandatory
-	public void setAutoConnectLab(boolean value) {
+	public void setAutoConnectLab(final boolean value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "autoConnectLab", new Boolean(isAutoConnectLab()), new Boolean(value));
 		}
 		_AutoConnectLab = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public boolean isAutoConnectLab() {
@@ -292,14 +297,15 @@ public class ReCBaseUIConfig implements CommonBean {
 	}
 
 	// This attribute is mandatory
-	public void setShowVideoFrame(boolean value) {
+	public void setShowVideoFrame(final boolean value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "showVideoFrame", new Boolean(isShowVideoFrame()), new Boolean(value));
 		}
 		_ShowVideoFrame = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public boolean isShowVideoFrame() {
@@ -307,15 +313,16 @@ public class ReCBaseUIConfig implements CommonBean {
 	}
 
 	// This attribute is mandatory
-	public void setEnableVideoFrame(boolean value) {
+	public void setEnableVideoFrame(final boolean value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "enableVideoFrame", new Boolean(isEnableVideoFrame()), new Boolean(
 					value));
 		}
 		_EnableVideoFrame = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public boolean isEnableVideoFrame() {
@@ -323,15 +330,16 @@ public class ReCBaseUIConfig implements CommonBean {
 	}
 
 	// This attribute is NOT mandatory
-	public void setEnableLoginPassword(boolean value) {
+	public void setEnableLoginPassword(final boolean value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "enableLoginPassword", new Boolean(isEnableLoginPassword()),
 					new Boolean(value));
 		}
 		_EnableLoginPassword = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public boolean isEnableLoginPassword() {
@@ -339,14 +347,15 @@ public class ReCBaseUIConfig implements CommonBean {
 	}
 
 	// This attribute is mandatory
-	public void setShowChatFrame(boolean value) {
+	public void setShowChatFrame(final boolean value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "showChatFrame", new Boolean(isShowChatFrame()), new Boolean(value));
 		}
 		_ShowChatFrame = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public boolean isShowChatFrame() {
@@ -354,15 +363,16 @@ public class ReCBaseUIConfig implements CommonBean {
 	}
 
 	// This attribute is mandatory
-	public void setEnableChatFrame(boolean value) {
+	public void setEnableChatFrame(final boolean value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "enableChatFrame", new Boolean(isEnableChatFrame()), new Boolean(
 					value));
 		}
 		_EnableChatFrame = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public boolean isEnableChatFrame() {
@@ -370,14 +380,15 @@ public class ReCBaseUIConfig implements CommonBean {
 	}
 
 	// This attribute is mandatory
-	public void setShowUserList(boolean value) {
+	public void setShowUserList(final boolean value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "showUserList", new Boolean(isShowUserList()), new Boolean(value));
 		}
 		_ShowUserList = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public boolean isShowUserList() {
@@ -385,15 +396,16 @@ public class ReCBaseUIConfig implements CommonBean {
 	}
 
 	// This attribute is mandatory
-	public void setEnableUsersList(boolean value) {
+	public void setEnableUsersList(final boolean value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "enableUsersList", new Boolean(isEnableUsersList()), new Boolean(
 					value));
 		}
 		_EnableUsersList = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public boolean isEnableUsersList() {
@@ -401,15 +413,16 @@ public class ReCBaseUIConfig implements CommonBean {
 	}
 
 	// This attribute is mandatory
-	public void setUsersListRefreshRateMs(long value) {
+	public void setUsersListRefreshRateMs(final long value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "usersListRefreshRateMs", new Long(getUsersListRefreshRateMs()),
 					new Long(value));
 		}
 		_UsersListRefreshRateMs = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public long getUsersListRefreshRateMs() {
@@ -417,15 +430,16 @@ public class ReCBaseUIConfig implements CommonBean {
 	}
 
 	// This attribute is mandatory
-	public void setEnterApparatusChatRoom(boolean value) {
+	public void setEnterApparatusChatRoom(final boolean value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "enterApparatusChatRoom", new Boolean(isEnterApparatusChatRoom()),
 					new Boolean(value));
 		}
 		_EnterApparatusChatRoom = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public boolean isEnterApparatusChatRoom() {
@@ -433,28 +447,30 @@ public class ReCBaseUIConfig implements CommonBean {
 	}
 
 	// This attribute is mandatory
-	public void setIconLocationBundleKey(String value) {
+	public void setIconLocationBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "iconLocationBundleKey", getIconLocationBundleKey(), value);
 		}
 		_IconLocationBundleKey = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public String getIconLocationBundleKey() {
 		return _IconLocationBundleKey;
 	}
 
-	public void setDesktopLocationBundleKey(String value) {
+	public void setDesktopLocationBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "desktopLocationBundleKey", getIconLocationBundleKey(), value);
 		}
 		_DesktopLocationBundleKey = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public String getDesktopLocationBundleKey() {
@@ -462,14 +478,15 @@ public class ReCBaseUIConfig implements CommonBean {
 	}
 
 	// This attribute is mandatory
-	public void setFrameTitleBundleKey(String value) {
+	public void setFrameTitleBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "frameTitleBundleKey", getFrameTitleBundleKey(), value);
 		}
 		_FrameTitleBundleKey = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public String getFrameTitleBundleKey() {
@@ -481,15 +498,16 @@ public class ReCBaseUIConfig implements CommonBean {
 	}
 
 	// This attribute is mandatory
-	public void setIconSponsorLocationBundleKey(String value) {
+	public void setIconSponsorLocationBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "iconSponsorLocationBundleKey", getIconSponsorLocationBundleKey(),
 					value);
 		}
 		_IconSponsorLocationBundleKey = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public String getIconSponsorLocationBundleKey() {
@@ -499,20 +517,21 @@ public class ReCBaseUIConfig implements CommonBean {
 	public javax.swing.Icon getIconSponsor() {
 		try {
 			return ReCResourceBundle.findImageIcon(getIconSponsorLocationBundleKey());
-		} catch (Exception e) {
+		} catch (final Exception e) {
 		}
 		return null;
 	}
 
 	// This attribute is mandatory
-	public void setHelpPageLocationBundleKey(String value) {
+	public void setHelpPageLocationBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "helpPageLocationBundleKey", getHelpPageLocationBundleKey(), value);
 		}
 		_HelpPageLocationBundleKey = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public String getHelpPageLocationBundleKey() {
@@ -522,7 +541,7 @@ public class ReCBaseUIConfig implements CommonBean {
 	public URL getHelpPageURL() {
 		try {
 			return ReCProtocols.getURL(getHelpPageLocationBundleKey());
-		} catch (Exception e) {
+		} catch (final Exception e) {
 		}
 
 		return null;
@@ -530,8 +549,9 @@ public class ReCBaseUIConfig implements CommonBean {
 
 	// This attribute is an array, possibly empty
 	public void setLab(Lab[] value) {
-		if (value == null)
+		if (value == null) {
 			value = new Lab[0];
+		}
 		// Make the foreign beans take on our property change event listeners.
 		for (int i = 0; i < value.length; ++i) {
 			if (value[i] != null) {
@@ -546,15 +566,16 @@ public class ReCBaseUIConfig implements CommonBean {
 		for (int i = 0; i < value.length; ++i) {
 			_Lab.add(value[i]);
 		}
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
-	public void setLab(int index, Lab value) {
+	public void setLab(final int index, final Lab value) {
 		// Make the foreign beans take on our property change event listeners.
 		value._setPropertyChangeSupport(eventListeners);
 		if (eventListeners != null) {
-			PropertyChangeEvent event = new PropertyChangeEvent(this, "lab.i" + index, _Lab.get(index), value);
+			final PropertyChangeEvent event = new PropertyChangeEvent(this, "lab.i" + index, _Lab.get(index), value);
 			eventListeners.firePropertyChange(event);
 		}
 		_Lab.set(index, value);
@@ -575,7 +596,7 @@ public class ReCBaseUIConfig implements CommonBean {
 		return _Lab;
 	}
 
-	public Lab getLab(int index) {
+	public Lab getLab(final int index) {
 		return (Lab) _Lab.get(index);
 	}
 
@@ -584,24 +605,24 @@ public class ReCBaseUIConfig implements CommonBean {
 		return _Lab.size();
 	}
 
-	public int addLab(Lab value) {
+	public int addLab(final Lab value) {
 		// Make the foreign beans take on our property change event listeners.
 		value._setPropertyChangeSupport(eventListeners);
 		_Lab.add(value);
 		if (eventListeners != null) {
-			PropertyChangeEvent event = new PropertyChangeEvent(this, "lab.i" + (_Lab.size() - 1), null, value);
+			final PropertyChangeEvent event = new PropertyChangeEvent(this, "lab.i" + (_Lab.size() - 1), null, value);
 			eventListeners.firePropertyChange(event);
 		}
 		return _Lab.size() - 1;
 	}
 
 	// Search from the end looking for @param value, and then remove it.
-	public int removeLab(Lab value) {
-		int pos = _Lab.indexOf(value);
+	public int removeLab(final Lab value) {
+		final int pos = _Lab.indexOf(value);
 		if (pos >= 0) {
 			_Lab.remove(pos);
 			if (eventListeners != null) {
-				PropertyChangeEvent event = new PropertyChangeEvent(this, "lab.i" + pos, value, null);
+				final PropertyChangeEvent event = new PropertyChangeEvent(this, "lab.i" + pos, value, null);
 				eventListeners.firePropertyChange(event);
 			}
 		}
@@ -610,8 +631,9 @@ public class ReCBaseUIConfig implements CommonBean {
 
 	// This attribute is an array, possibly empty
 	public void setWebResource(WebResource[] value) {
-		if (value == null)
+		if (value == null) {
 			value = new WebResource[0];
+		}
 		// Make the foreign beans take on our property change event listeners.
 		for (int i = 0; i < value.length; ++i) {
 			if (value[i] != null) {
@@ -626,23 +648,24 @@ public class ReCBaseUIConfig implements CommonBean {
 		for (int i = 0; i < value.length; ++i) {
 			_WebResource.add(value[i]);
 		}
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
-	public void setWebResource(int index, WebResource value) {
+	public void setWebResource(final int index, final WebResource value) {
 		// Make the foreign beans take on our property change event listeners.
 		value._setPropertyChangeSupport(eventListeners);
 		if (eventListeners != null) {
-			PropertyChangeEvent event = new PropertyChangeEvent(this, "webResource.i" + index, _WebResource.get(index),
-					value);
+			final PropertyChangeEvent event = new PropertyChangeEvent(this, "webResource.i" + index,
+					_WebResource.get(index), value);
 			eventListeners.firePropertyChange(event);
 		}
 		_WebResource.set(index, value);
 	}
 
 	public WebResource[] getWebResource() {
-		WebResource[] arr = new WebResource[_WebResource.size()];
+		final WebResource[] arr = new WebResource[_WebResource.size()];
 		return (WebResource[]) _WebResource.toArray(arr);
 	}
 
@@ -657,7 +680,7 @@ public class ReCBaseUIConfig implements CommonBean {
 		return _WebResource;
 	}
 
-	public WebResource getWebResource(int index) {
+	public WebResource getWebResource(final int index) {
 		return (WebResource) _WebResource.get(index);
 	}
 
@@ -666,40 +689,40 @@ public class ReCBaseUIConfig implements CommonBean {
 		return _WebResource.size();
 	}
 
-	public int addWebResource(WebResource value) {
+	public int addWebResource(final WebResource value) {
 		// Make the foreign beans take on our property change event listeners.
 		value._setPropertyChangeSupport(eventListeners);
 		_WebResource.add(value);
 		if (eventListeners != null) {
-			PropertyChangeEvent event = new PropertyChangeEvent(this, "webResource.i" + (_WebResource.size() - 1),
-					null, value);
+			final PropertyChangeEvent event = new PropertyChangeEvent(this,
+					"webResource.i" + (_WebResource.size() - 1), null, value);
 			eventListeners.firePropertyChange(event);
 		}
 		return _WebResource.size() - 1;
 	}
 
 	// Search from the end looking for @param value, and then remove it.
-	public int removeWebResource(WebResource value) {
-		int pos = _WebResource.indexOf(value);
+	public int removeWebResource(final WebResource value) {
+		final int pos = _WebResource.indexOf(value);
 		if (pos >= 0) {
 			_WebResource.remove(pos);
 			if (eventListeners != null) {
-				PropertyChangeEvent event = new PropertyChangeEvent(this, "webResource.i" + pos, value, null);
+				final PropertyChangeEvent event = new PropertyChangeEvent(this, "webResource.i" + pos, value, null);
 				eventListeners.firePropertyChange(event);
 			}
 		}
 		return pos;
 	}
 
-	public ReCResourceBundle addLocalizationBundle(LocalizationBundle bundle) {
+	public ReCResourceBundle addLocalizationBundle(final LocalizationBundle bundle) {
 		return ReCResourceBundle.loadResourceBundle(bundle.getName(), bundle.getLocation());
 	}
 
-	public void write(OutputStream out) throws IOException {
+	public void write(final OutputStream out) throws IOException {
 		write(out, null);
 	}
 
-	public void write(OutputStream out, String encoding) throws IOException {
+	public void write(final OutputStream out, String encoding) throws IOException {
 		Writer w;
 		if (encoding == null) {
 			encoding = "UTF-8"; // NOI18N
@@ -711,15 +734,16 @@ public class ReCBaseUIConfig implements CommonBean {
 
 	// Print this Java Bean to @param out including an XML header.
 	// @param encoding is the encoding style that @param out was opened with.
-	public void write(Writer out, String encoding) throws IOException {
+	public void write(final Writer out, final String encoding) throws IOException {
 		out.write("<?xml version='1.0'"); // NOI18N
-		if (encoding != null)
+		if (encoding != null) {
 			out.write(" encoding='" + encoding + "'"); // NOI18N
+		}
 		out.write(" ?>\n"); // NOI18N
 		writeNode(out, "ReCBaseUIConfig", ""); // NOI18N
 	}
 
-	public void writeNode(Writer out, String nodeName, String indent) throws IOException {
+	public void writeNode(final Writer out, final String nodeName, final String indent) throws IOException {
 		out.write(indent);
 		out.write("<");
 		out.write(nodeName);
@@ -823,15 +847,15 @@ public class ReCBaseUIConfig implements CommonBean {
 			out.write("'"); // NOI18N
 		}
 		out.write(">\n");
-		String nextIndent = indent + "	";
-		for (Iterator it = _Lab.iterator(); it.hasNext();) {
-			Lab element = (Lab) it.next();
+		final String nextIndent = indent + "	";
+		for (final Object element2 : _Lab) {
+			final Lab element = (Lab) element2;
 			if (element != null) {
 				element.writeNode(out, "Lab", nextIndent);
 			}
 		}
-		for (Iterator it = _WebResource.iterator(); it.hasNext();) {
-			WebResource element = (WebResource) it.next();
+		for (final Object element2 : _WebResource) {
+			final WebResource element = (WebResource) element2;
 			if (element != null) {
 				element.writeNode(out, "WebResource", nextIndent);
 			}
@@ -840,7 +864,7 @@ public class ReCBaseUIConfig implements CommonBean {
 		out.write("</" + nodeName + ">\n");
 	}
 
-	public void read(InputStream in) throws ParserConfigurationException, SAXException, IOException {
+	public void read(final InputStream in) throws ParserConfigurationException, SAXException, IOException {
 		read(new InputSource(in), false, null, null);
 	}
 
@@ -848,35 +872,38 @@ public class ReCBaseUIConfig implements CommonBean {
 	// not be read from any DTD in the XML source.
 	// However, this way is faster since no DTDs are looked up
 	// (possibly skipping network access) or parsed.
-	public void readNoEntityResolver(InputStream in) throws ParserConfigurationException, SAXException, IOException {
+	public void readNoEntityResolver(final InputStream in) throws ParserConfigurationException, SAXException,
+			IOException {
 		read(new InputSource(in), false, new EntityResolver() {
-			public InputSource resolveEntity(String publicId, String systemId) {
-				ByteArrayInputStream bin = new ByteArrayInputStream(new byte[0]);
+			public InputSource resolveEntity(final String publicId, final String systemId) {
+				final ByteArrayInputStream bin = new ByteArrayInputStream(new byte[0]);
 				return new InputSource(bin);
 			}
 		}, null);
 	}
 
-	public void read(InputSource in, boolean validate, EntityResolver er, org.xml.sax.ErrorHandler eh)
-			throws ParserConfigurationException, SAXException, IOException {
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	public void read(final InputSource in, final boolean validate, final EntityResolver er,
+			final org.xml.sax.ErrorHandler eh) throws ParserConfigurationException, SAXException, IOException {
+		final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		dbf.setValidating(validate);
-		javax.xml.parsers.DocumentBuilder db = dbf.newDocumentBuilder();
-		if (er != null)
+		final javax.xml.parsers.DocumentBuilder db = dbf.newDocumentBuilder();
+		if (er != null) {
 			db.setEntityResolver(er);
-		if (eh != null)
+		}
+		if (eh != null) {
 			db.setErrorHandler(eh);
-		Document doc = db.parse(in);
+		}
+		final Document doc = db.parse(in);
 		read(doc);
 	}
 
-	public void read(Document document) {
+	public void read(final Document document) {
 		readNode(document.getDocumentElement());
 	}
 
-	public void readNode(Node node) {
+	public void readNode(final Node node) {
 		if (node.hasAttributes()) {
-			org.w3c.dom.NamedNodeMap attrs = node.getAttributes();
+			final org.w3c.dom.NamedNodeMap attrs = node.getAttributes();
 			Attr attr;
 			attr = (Attr) attrs.getNamedItem("aboutPageLocationBundleKey");
 			if (attr != null) {
@@ -947,27 +974,27 @@ public class ReCBaseUIConfig implements CommonBean {
 				_HelpPageLocationBundleKey = attr.getValue();
 			}
 		}
-		org.w3c.dom.NodeList children = node.getChildNodes();
+		final org.w3c.dom.NodeList children = node.getChildNodes();
 		for (int i = 0, size = children.getLength(); i < size; ++i) {
-			Node childNode = children.item(i);
-			String childNodeName = (childNode.getLocalName() == null ? childNode.getNodeName().intern() : childNode
-					.getLocalName().intern());
+			final Node childNode = children.item(i);
+			final String childNodeName = (childNode.getLocalName() == null ? childNode.getNodeName().intern()
+					: childNode.getLocalName().intern());
 			String childNodeValue = "";
 			if (childNode.getFirstChild() != null) {
 				childNodeValue = childNode.getFirstChild().getNodeValue();
 			}
 			if (childNodeName == "Lab") {
-				Lab aLab = new Lab();
+				final Lab aLab = new Lab();
 				aLab._setPropertyChangeSupport(eventListeners);
 				aLab.readNode(childNode);
 				_Lab.add(aLab);
 			} else if (childNodeName == "WebResource") {
-				WebResource aWebResource = new WebResource();
+				final WebResource aWebResource = new WebResource();
 				aWebResource._setPropertyChangeSupport(eventListeners);
 				aWebResource.readNode(childNode);
 				_WebResource.add(aWebResource);
 			} else if (childNodeName == "LocalizationBundle") {
-				LocalizationBundle aLocalizationBundle = new LocalizationBundle();
+				final LocalizationBundle aLocalizationBundle = new LocalizationBundle();
 				aLocalizationBundle._setPropertyChangeSupport(eventListeners);
 				aLocalizationBundle.readNode(childNode);
 				addLocalizationBundle(aLocalizationBundle);
@@ -979,44 +1006,46 @@ public class ReCBaseUIConfig implements CommonBean {
 
 	// Takes some text to be printed into an XML stream and escapes any
 	// characters that might make it invalid XML (like '<').
-	public static void writeXML(Writer out, String msg) throws IOException {
-		writeXML(out, msg, true);
+	public static void writeXML(final Writer out, final String msg) throws IOException {
+		ReCBaseUIConfig.writeXML(out, msg, true);
 	}
 
-	public static void writeXML(Writer out, String msg, boolean attribute) throws IOException {
-		if (msg == null)
+	public static void writeXML(final Writer out, final String msg, final boolean attribute) throws IOException {
+		if (msg == null) {
 			return;
-		int msgLength = msg.length();
+		}
+		final int msgLength = msg.length();
 		for (int i = 0; i < msgLength; ++i) {
-			char c = msg.charAt(i);
-			writeXML(out, c, attribute);
+			final char c = msg.charAt(i);
+			ReCBaseUIConfig.writeXML(out, c, attribute);
 		}
 	}
 
-	public static void writeXML(Writer out, char msg, boolean attribute) throws IOException {
-		if (msg == '&')
+	public static void writeXML(final Writer out, final char msg, final boolean attribute) throws IOException {
+		if (msg == '&') {
 			out.write("&amp;");
-		else if (msg == '<')
+		} else if (msg == '<') {
 			out.write("&lt;");
-		else if (msg == '>')
+		} else if (msg == '>') {
 			out.write("&gt;");
-		else if (attribute && msg == '"')
+		} else if (attribute && msg == '"') {
 			out.write("&quot;");
-		else if (attribute && msg == '\'')
+		} else if (attribute && msg == '\'') {
 			out.write("&apos;");
-		else if (attribute && msg == '\n')
+		} else if (attribute && msg == '\n') {
 			out.write("&#xA;");
-		else if (attribute && msg == '\t')
+		} else if (attribute && msg == '\t') {
 			out.write("&#x9;");
-		else
+		} else {
 			out.write(msg);
+		}
 	}
 
 	public static class ValidateException extends Exception {
-		private CommonBean failedBean;
-		private String failedPropertyName;
+		private final CommonBean failedBean;
+		private final String failedPropertyName;
 
-		public ValidateException(String msg, String failedPropertyName, CommonBean failedBean) {
+		public ValidateException(final String msg, final String failedPropertyName, final CommonBean failedBean) {
 			super(msg);
 			this.failedBean = failedBean;
 			this.failedPropertyName = failedPropertyName;
@@ -1032,7 +1061,7 @@ public class ReCBaseUIConfig implements CommonBean {
 	}
 
 	public void validate() throws ValidateException {
-		boolean restrictionFailure = false;
+		final boolean restrictionFailure = false;
 		// Validating property aboutPageLocationBundleKey
 		/*
 		 * if (getAboutPageLocationBundleKey() == null) { throw new
@@ -1072,7 +1101,7 @@ public class ReCBaseUIConfig implements CommonBean {
 		 */
 		// Validating property lab
 		for (int _index = 0; _index < sizeLab(); ++_index) {
-			Lab element = getLab(_index);
+			final Lab element = getLab(_index);
 			if (element != null) {
 				element.validate();
 			}
@@ -1082,33 +1111,33 @@ public class ReCBaseUIConfig implements CommonBean {
 		}
 		// Validating property webResource
 		for (int _index = 0; _index < sizeWebResource(); ++_index) {
-			WebResource element = getWebResource(_index);
+			final WebResource element = getWebResource(_index);
 			if (element != null) {
 				element.validate();
 			}
 		}
 	}
 
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
+	public void addPropertyChangeListener(final PropertyChangeListener listener) {
 		if (eventListeners == null) {
 			eventListeners = new PropertyChangeSupport(this);
 		}
 		eventListeners.addPropertyChangeListener(listener);
-		for (Iterator it = _Lab.iterator(); it.hasNext();) {
-			Lab element = (Lab) it.next();
+		for (final Object element2 : _Lab) {
+			final Lab element = (Lab) element2;
 			if (element != null) {
 				element.addPropertyChangeListener(listener);
 			}
 		}
-		for (Iterator it = _WebResource.iterator(); it.hasNext();) {
-			WebResource element = (WebResource) it.next();
+		for (final Object element2 : _WebResource) {
+			final WebResource element = (WebResource) element2;
 			if (element != null) {
 				element.addPropertyChangeListener(listener);
 			}
 		}
 	}
 
-	public void removePropertyChangeListener(PropertyChangeListener listener) {
+	public void removePropertyChangeListener(final PropertyChangeListener listener) {
 		if (eventListeners == null) {
 			return;
 		}
@@ -1118,22 +1147,22 @@ public class ReCBaseUIConfig implements CommonBean {
 		}
 	}
 
-	public void _setPropertyChangeSupport(PropertyChangeSupport listeners) {
+	public void _setPropertyChangeSupport(final PropertyChangeSupport listeners) {
 		eventListeners = listeners;
 	}
 
 	// Return an array of all of the properties that are beans and are set.
-	public CommonBean[] childBeans(boolean recursive) {
-		List<CommonBean> children = new LinkedList<CommonBean>();
+	public CommonBean[] childBeans(final boolean recursive) {
+		final List<CommonBean> children = new LinkedList<CommonBean>();
 		childBeans(recursive, children);
-		CommonBean[] result = new CommonBean[children.size()];
+		final CommonBean[] result = new CommonBean[children.size()];
 		return (CommonBean[]) children.toArray(result);
 	}
 
 	// Put all child beans into the beans list.
-	public void childBeans(boolean recursive, List<CommonBean> beans) {
-		for (Iterator it = _Lab.iterator(); it.hasNext();) {
-			Lab element = (Lab) it.next();
+	public void childBeans(final boolean recursive, final List<CommonBean> beans) {
+		for (final Object element2 : _Lab) {
+			final Lab element = (Lab) element2;
 			if (element != null) {
 				if (recursive) {
 					element.childBeans(true, beans);
@@ -1141,8 +1170,8 @@ public class ReCBaseUIConfig implements CommonBean {
 				beans.add(element);
 			}
 		}
-		for (Iterator it = _WebResource.iterator(); it.hasNext();) {
-			WebResource element = (WebResource) it.next();
+		for (final Object element2 : _WebResource) {
+			final WebResource element = (WebResource) element2;
 			if (element != null) {
 				if (recursive) {
 					element.childBeans(true, beans);
@@ -1152,70 +1181,93 @@ public class ReCBaseUIConfig implements CommonBean {
 		}
 	}
 
-	public boolean equals(Object o) {
-		if (o == this)
+	public boolean equals(final Object o) {
+		if (o == this) {
 			return true;
-		if (!(o instanceof ReCBaseUIConfig))
+		}
+		if (!(o instanceof ReCBaseUIConfig)) {
 			return false;
-		ReCBaseUIConfig inst = (ReCBaseUIConfig) o;
+		}
+		final ReCBaseUIConfig inst = (ReCBaseUIConfig) o;
 		if (!(_AboutPageLocationBundleKey == null ? inst._AboutPageLocationBundleKey == null
-				: _AboutPageLocationBundleKey.equals(inst._AboutPageLocationBundleKey)))
+				: _AboutPageLocationBundleKey.equals(inst._AboutPageLocationBundleKey))) {
 			return false;
+		}
 		if (!(_SplashIconLocationBundleKey == null ? inst._SplashIconLocationBundleKey == null
-				: _SplashIconLocationBundleKey.equals(inst._SplashIconLocationBundleKey)))
+				: _SplashIconLocationBundleKey.equals(inst._SplashIconLocationBundleKey))) {
 			return false;
-		if (!(_AutoConnectLab == inst._AutoConnectLab))
+		}
+		if (!(_AutoConnectLab == inst._AutoConnectLab)) {
 			return false;
-		if (!(_ShowVideoFrame == inst._ShowVideoFrame))
+		}
+		if (!(_ShowVideoFrame == inst._ShowVideoFrame)) {
 			return false;
-		if (!(_EnableVideoFrame == inst._EnableVideoFrame))
+		}
+		if (!(_EnableVideoFrame == inst._EnableVideoFrame)) {
 			return false;
-		if (!(_EnableLoginPassword == inst._EnableLoginPassword))
+		}
+		if (!(_EnableLoginPassword == inst._EnableLoginPassword)) {
 			return false;
-		if (!(_ShowChatFrame == inst._ShowChatFrame))
+		}
+		if (!(_ShowChatFrame == inst._ShowChatFrame)) {
 			return false;
-		if (!(_EnableChatFrame == inst._EnableChatFrame))
+		}
+		if (!(_EnableChatFrame == inst._EnableChatFrame)) {
 			return false;
-		if (!(_ShowUserList == inst._ShowUserList))
+		}
+		if (!(_ShowUserList == inst._ShowUserList)) {
 			return false;
-		if (!(_EnableUsersList == inst._EnableUsersList))
+		}
+		if (!(_EnableUsersList == inst._EnableUsersList)) {
 			return false;
-		if (!(_UsersListRefreshRateMs == inst._UsersListRefreshRateMs))
+		}
+		if (!(_UsersListRefreshRateMs == inst._UsersListRefreshRateMs)) {
 			return false;
-		if (!(_EnterApparatusChatRoom == inst._EnterApparatusChatRoom))
+		}
+		if (!(_EnterApparatusChatRoom == inst._EnterApparatusChatRoom)) {
 			return false;
+		}
 		if (!(_IconLocationBundleKey == null ? inst._IconLocationBundleKey == null : _IconLocationBundleKey
-				.equals(inst._IconLocationBundleKey)))
+				.equals(inst._IconLocationBundleKey))) {
 			return false;
+		}
 		if (!(_DesktopLocationBundleKey == null ? inst._DesktopLocationBundleKey == null : _DesktopLocationBundleKey
-				.equals(inst._DesktopLocationBundleKey)))
+				.equals(inst._DesktopLocationBundleKey))) {
 			return false;
+		}
 		if (!(_FrameTitleBundleKey == null ? inst._FrameTitleBundleKey == null : _FrameTitleBundleKey
-				.equals(inst._FrameTitleBundleKey)))
+				.equals(inst._FrameTitleBundleKey))) {
 			return false;
+		}
 		if (!(_IconSponsorLocationBundleKey == null ? inst._IconSponsorLocationBundleKey == null
-				: _IconSponsorLocationBundleKey.equals(inst._IconSponsorLocationBundleKey)))
+				: _IconSponsorLocationBundleKey.equals(inst._IconSponsorLocationBundleKey))) {
 			return false;
+		}
 		if (!(_HelpPageLocationBundleKey == null ? inst._HelpPageLocationBundleKey == null : _HelpPageLocationBundleKey
-				.equals(inst._HelpPageLocationBundleKey)))
+				.equals(inst._HelpPageLocationBundleKey))) {
 			return false;
-		if (sizeLab() != inst.sizeLab())
+		}
+		if (sizeLab() != inst.sizeLab()) {
 			return false;
+		}
 		// Compare every element.
 		for (Iterator it = _Lab.iterator(), it2 = inst._Lab.iterator(); it.hasNext() && it2.hasNext();) {
-			Lab element = (Lab) it.next();
-			Lab element2 = (Lab) it2.next();
-			if (!(element == null ? element2 == null : element.equals(element2)))
+			final Lab element = (Lab) it.next();
+			final Lab element2 = (Lab) it2.next();
+			if (!(element == null ? element2 == null : element.equals(element2))) {
 				return false;
+			}
 		}
-		if (sizeWebResource() != inst.sizeWebResource())
+		if (sizeWebResource() != inst.sizeWebResource()) {
 			return false;
+		}
 		// Compare every element.
 		for (Iterator it = _WebResource.iterator(), it2 = inst._WebResource.iterator(); it.hasNext() && it2.hasNext();) {
-			WebResource element = (WebResource) it.next();
-			WebResource element2 = (WebResource) it2.next();
-			if (!(element == null ? element2 == null : element.equals(element2)))
+			final WebResource element = (WebResource) it.next();
+			final WebResource element2 = (WebResource) it2.next();
+			if (!(element == null ? element2 == null : element.equals(element2))) {
 				return false;
+			}
 		}
 
 		return true;
@@ -1246,10 +1298,10 @@ public class ReCBaseUIConfig implements CommonBean {
 	}
 
 	public String toString() {
-		StringWriter sw = new StringWriter();
+		final StringWriter sw = new StringWriter();
 		try {
 			writeNode(sw, "ReCBaseUIConfig", "");
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			// How can we actually get an IOException on a StringWriter?
 			// We'll just ignore it.
 		}

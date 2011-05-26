@@ -11,12 +11,19 @@ package pt.utl.ist.elab.client.telescopio.displays;
  * @author André Neto - LEFT - IST
  */
 
+import javax.swing.JFileChooser;
+
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 import eap.fitsbrowser.FITSFileDisplay;
 
 public class FITSOpen extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8513993408293072015L;
 
 	/** Creates new form FITSDisplay */
 	public FITSOpen() {
@@ -30,7 +37,7 @@ public class FITSOpen extends javax.swing.JPanel implements com.linkare.rec.impl
 	 */
 	private void initComponents()// GEN-BEGIN:initComponents
 	{
-		java.awt.GridBagConstraints gridBagConstraints;
+		final java.awt.GridBagConstraints gridBagConstraints;
 
 		jTabbedPaneOpen = new javax.swing.JTabbedPane();
 		jPanel1 = new javax.swing.JPanel();
@@ -42,7 +49,8 @@ public class FITSOpen extends javax.swing.JPanel implements com.linkare.rec.impl
 
 		jButtonOpen.setText(ReCResourceBundle.findString("telescopio$rec.exp.telescopio.lbl.open"));
 		jButtonOpen.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonOpenActionPerformed(evt);
 			}
 		});
@@ -55,107 +63,122 @@ public class FITSOpen extends javax.swing.JPanel implements com.linkare.rec.impl
 
 	}// GEN-END:initComponents
 
-	private void jButtonOpenActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonOpenActionPerformed
+	private void jButtonOpenActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonOpenActionPerformed
 	{// GEN-HEADEREND:event_jButtonOpenActionPerformed
 
-		javax.swing.JFileChooser openChooser = new javax.swing.JFileChooser();
-		int res = openChooser.showOpenDialog(null);
+		final javax.swing.JFileChooser openChooser = new javax.swing.JFileChooser();
+		final int res = openChooser.showOpenDialog(null);
 
-		if (res == openChooser.APPROVE_OPTION) {
-			java.io.File f = openChooser.getSelectedFile();
-			FITSFileDisplay ffd = new FITSFileDisplay();
+		if (res == JFileChooser.APPROVE_OPTION) {
+			final java.io.File f = openChooser.getSelectedFile();
+			final FITSFileDisplay ffd = new FITSFileDisplay();
 			jTabbedPaneOpen.add(f.getName(), ffd);
 			try {
 				ffd.load(f);
-			} catch (java.io.IOException ioe) {
+			} catch (final java.io.IOException ioe) {
 				ioe.printStackTrace();
 			}
 		}
 	}// GEN-LAST:event_jButtonOpenActionPerformed
 
-	private void saveToFile(java.io.File fName, byte[] data) {
+	private void saveToFile(final java.io.File fName, final byte[] data) {
 		try {
-			java.io.FileOutputStream fos = new java.io.FileOutputStream(fName);
+			final java.io.FileOutputStream fos = new java.io.FileOutputStream(fName);
 			fos.write(data);
 			fos.close();
-		} catch (java.io.IOException ioe) {
+		} catch (final java.io.IOException ioe) {
 			ioe.printStackTrace();
 		}
 	}
 
 	private java.io.File showSaveDialog() {
-		javax.swing.JFileChooser saveDialog = new javax.swing.JFileChooser();
-		int option = saveDialog.showSaveDialog(null);
-		if (option == saveDialog.APPROVE_OPTION)
+		final javax.swing.JFileChooser saveDialog = new javax.swing.JFileChooser();
+		final int option = saveDialog.showSaveDialog(null);
+		if (option == JFileChooser.APPROVE_OPTION) {
 			return saveDialog.getSelectedFile();
+		}
 
 		return null;
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/telescopio/resources/telescopio_iconified.png"));
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
 
-	private int dark = -1;
-	private int image = -1;
-	private int flat = -1;
+	private final int dark = -1;
+	private final int image = -1;
+	private final int flat = -1;
 
-	public void newSamples(com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
 	}
 
 	private com.linkare.rec.impl.client.experiment.ExpDataModel model = null;
 
-	public void setExpDataModel(com.linkare.rec.impl.client.experiment.ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final com.linkare.rec.impl.client.experiment.ExpDataModel model) {
+		if (this.model != null) {
 			model.removeExpDataModelListener(this);
+		}
 
 		this.model = model;
 
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 	}
 
+	@Override
 	public String getName() {
-		return ReCResourceBundle
-				.findStringOrDefault("telescopio$rec.exp.display.telescopio.title.3", "FITS Open");
+		return ReCResourceBundle.findStringOrDefault("telescopio$rec.exp.display.telescopio.title.3", "FITS Open");
 	}
 
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 		ReCResourceBundle.loadResourceBundle("telescopio",
 				"recresource:///pt/utl/ist/elab/client/telescopio/resources/messages");
-		javax.swing.JFrame dummy = new javax.swing.JFrame();
-		FITSOpen p = new FITSOpen();
+		final javax.swing.JFrame dummy = new javax.swing.JFrame();
+		final FITSOpen p = new FITSOpen();
 		dummy.getContentPane().add(p, java.awt.BorderLayout.CENTER);
 		dummy.pack();
 		dummy.show();

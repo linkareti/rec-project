@@ -18,7 +18,7 @@ public class StopEvent implements Prioritazible {
 	/** Creates a new instance of StopEvent */
 	public StopEvent() {
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */

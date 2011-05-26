@@ -36,13 +36,18 @@ import org.jfree.ui.ExtensionFileFilter;
  */
 public class StaticChart extends javax.swing.JPanel implements Printable, ActionListener, MouseListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1904281096188351110L;
+
 	protected pt.utl.ist.elab.client.virtual.guipack.PopupMenu viewPopMenu;
 
 	protected BufferedImage image;
-	private int width, height;
+	private final int width, height;
 
 	/** Creates a new instance of Chart1 */
-	public StaticChart(int w, int h) {
+	public StaticChart(final int w, final int h) {
 		super();
 		width = w;
 		height = h;
@@ -50,17 +55,19 @@ public class StaticChart extends javax.swing.JPanel implements Printable, Action
 
 	private void buildPopupMenu() {
 		viewPopMenu = new pt.utl.ist.elab.client.virtual.guipack.PopupMenu(this);
-		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.displays.save"),
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
-						.getString("rec.exp.displays.save.tip"));
-		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.displays.print"),
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
-						.getString("rec.exp.displays.print.tip"));
+		viewPopMenu.addItem(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.displays.save"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.displays.save.tip"));
+		viewPopMenu.addItem(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.displays.print"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.displays.print.tip"));
 	}
 
-	public void makeImage(byte[] b) {
+	public void makeImage(final byte[] b) {
 		addMouseListener(this);
 		buildPopupMenu();
 		image = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_INDEXED);
@@ -72,22 +79,23 @@ public class StaticChart extends javax.swing.JPanel implements Printable, Action
 		repaint();
 	}
 
-	public void paintComponent(Graphics g) {
+	@Override
+	public void paintComponent(final Graphics g) {
 		super.paintComponent(g);
-		if (image != null)
+		if (image != null) {
 			g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
-		else {
-			String statusStr = java.util.ResourceBundle.getBundle(
+		} else {
+			final String statusStr = java.util.ResourceBundle.getBundle(
 					"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
 					"rec.exp.displays.statusStr.recImage");
 			g.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 26));
 
-			int x = (int) Math.round((double) getWidth() / 2d)
+			final int x = (int) Math.round(getWidth() / 2d)
 					- (int) Math.round((double) g.getFontMetrics().stringWidth(statusStr) / 2);
-			int y = (int) Math.round((double) getHeight() / 2d) - g.getFontMetrics().getHeight() + 5;
+			final int y = (int) Math.round(getHeight() / 2d) - g.getFontMetrics().getHeight() + 5;
 
 			g.setColor(new java.awt.Color(.6f, .12f, .3f));
-			g.drawString(statusStr, x, (int) Math.round((double) getHeight() / 2d));
+			g.drawString(statusStr, x, (int) Math.round(getHeight() / 2d));
 
 			g.setColor(new java.awt.Color(0, 0, 0, .4f));
 			g.fillRect(0, y, getWidth(), g.getFontMetrics().getHeight());
@@ -100,12 +108,12 @@ public class StaticChart extends javax.swing.JPanel implements Printable, Action
 
 	public void doSaveAs() throws IOException {
 
-		JFileChooser fileChooser = new JFileChooser();
-		ExtensionFileFilter filter = new ExtensionFileFilter(java.util.ResourceBundle.getBundle(
+		final JFileChooser fileChooser = new JFileChooser();
+		final ExtensionFileFilter filter = new ExtensionFileFilter(java.util.ResourceBundle.getBundle(
 				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("PNG_Image_Files"), ".png");
 		fileChooser.addChoosableFileFilter(filter);
 
-		int option = fileChooser.showSaveDialog(this);
+		final int option = fileChooser.showSaveDialog(this);
 		if (option == JFileChooser.APPROVE_OPTION) {
 			String filename = fileChooser.getSelectedFile().getPath();
 
@@ -113,7 +121,7 @@ public class StaticChart extends javax.swing.JPanel implements Printable, Action
 				filename = filename + ".png";
 			}
 
-			OutputStream out = new BufferedOutputStream(new FileOutputStream(new File(filename)));
+			final OutputStream out = new BufferedOutputStream(new FileOutputStream(new File(filename)));
 
 			EncoderUtil.writeBufferedImage(image, ImageFormat.PNG, out);
 			out.close();
@@ -122,67 +130,76 @@ public class StaticChart extends javax.swing.JPanel implements Printable, Action
 	}
 
 	public void createChartPrintJob() {
-		PrinterJob job = PrinterJob.getPrinterJob();
-		PageFormat pf = job.defaultPage();
-		PageFormat pf2 = job.pageDialog(pf);
+		final PrinterJob job = PrinterJob.getPrinterJob();
+		final PageFormat pf = job.defaultPage();
+		final PageFormat pf2 = job.pageDialog(pf);
 		if (pf2 != pf) {
 			job.setPrintable(this, pf2);
 			if (job.printDialog()) {
 				try {
 					job.print();
-				} catch (PrinterException e) {
+				} catch (final PrinterException e) {
 					JOptionPane.showMessageDialog(this, e);
 				}
 			}
 		}
 	}
 
-	public int print(Graphics g, PageFormat pageFormat, int pageIndex) throws PrinterException {
+	@Override
+	public int print(final Graphics g, final PageFormat pageFormat, final int pageIndex) throws PrinterException {
 		if (pageIndex >= 1) {
 			return Printable.NO_SUCH_PAGE;
 		}
 		if (g == null) {
 			return Printable.NO_SUCH_PAGE;
 		}
-		Graphics2D g2 = (Graphics2D) g;
-		double scalex = pageFormat.getImageableWidth() / (double) getWidth();
-		double scaley = pageFormat.getImageableHeight() / (double) getHeight();
-		double scale = Math.min(scalex, scaley);
+		final Graphics2D g2 = (Graphics2D) g;
+		final double scalex = pageFormat.getImageableWidth() / getWidth();
+		final double scaley = pageFormat.getImageableHeight() / getHeight();
+		final double scale = Math.min(scalex, scaley);
 		g2.translate((int) pageFormat.getImageableX(), (int) pageFormat.getImageableY());
 		g2.scale(scale, scale);
 		g2.drawImage(image, 0, 0, null);
 		return Printable.PAGE_EXISTS;
 	}
 
-	public void actionPerformed(ActionEvent e) {
+	@Override
+	public void actionPerformed(final ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
-						.getString("rec.exp.displays.save")))
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.displays.save"))) {
 			try {
 				doSaveAs();
-			} catch (IOException io) {
+			} catch (final IOException io) {
 			}
-		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
-						.getString("rec.exp.displays.print")))
+		} else if (e.getActionCommand().equalsIgnoreCase(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.displays.print"))) {
 			createChartPrintJob();
+		}
 	}
 
-	public void mouseClicked(MouseEvent e) {
-		if (javax.swing.SwingUtilities.isRightMouseButton(e))
+	@Override
+	public void mouseClicked(final MouseEvent e) {
+		if (javax.swing.SwingUtilities.isRightMouseButton(e)) {
 			viewPopMenu.show(e.getComponent(), e.getX(), e.getY());
+		}
 	}
 
-	public void mouseEntered(MouseEvent e) {
+	@Override
+	public void mouseEntered(final MouseEvent e) {
 	}
 
-	public void mouseExited(MouseEvent e) {
+	@Override
+	public void mouseExited(final MouseEvent e) {
 	}
 
-	public void mousePressed(MouseEvent e) {
+	@Override
+	public void mousePressed(final MouseEvent e) {
 	}
 
-	public void mouseReleased(MouseEvent e) {
+	@Override
+	public void mouseReleased(final MouseEvent e) {
 	}
 
 }

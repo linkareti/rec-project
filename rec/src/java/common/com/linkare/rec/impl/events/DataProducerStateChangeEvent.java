@@ -17,7 +17,7 @@ public class DataProducerStateChangeEvent implements Prioritazible {
 	DataProducerState dataProducerState = null;
 
 	/** Creates a new instance of DataEndedEvent */
-	public DataProducerStateChangeEvent(DataProducerState dataProducerState) {
+	public DataProducerStateChangeEvent(final DataProducerState dataProducerState) {
 		this.dataProducerState = dataProducerState;
 	}
 
@@ -30,7 +30,7 @@ public class DataProducerStateChangeEvent implements Prioritazible {
 	public DataProducerState getDataProducerState() {
 		return dataProducerState;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */

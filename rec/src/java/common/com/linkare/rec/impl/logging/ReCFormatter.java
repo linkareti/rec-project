@@ -31,11 +31,11 @@ public class ReCFormatter extends Formatter {
 	 * @see java.util.logging.Formatter#format(java.util.logging.LogRecord)
 	 */
 	@Override
-	public synchronized String format(LogRecord record) {
-		StringBuffer str = new StringBuffer();
+	public synchronized String format(final LogRecord record) {
+		final StringBuffer str = new StringBuffer();
 		date.setTime(record.getMillis());
 		// String sourceClassName = record.getSourceClassName();
-		String sourceMethodName = record.getSourceMethodName();
+		final String sourceMethodName = record.getSourceMethodName();
 		// String loggerName = record.getLoggerName();
 
 		str.append(dateFormat.format(date)).append(" ");
@@ -44,31 +44,31 @@ public class ReCFormatter extends Formatter {
 		// str.append(sourceClassName != null ? sourceClassName :
 		// record.getLoggerName());
 		// Use always the logger name
-		str.append(getSimpleName(record.getLoggerName()));
+		str.append(ReCFormatter.getSimpleName(record.getLoggerName()));
 		// str.append(record.getLoggerName());
 		if (sourceMethodName != null) {
 			str.append(".").append(sourceMethodName);
 		}
 		str.append(" ");
 		str.append(record.getMessage());
-		str.append(LINE_SEPARATOR);
+		str.append(ReCFormatter.LINE_SEPARATOR);
 
 		if (record.getThrown() != null) {
 			try {
-				StringWriter sw = new StringWriter();
-				PrintWriter pw = new PrintWriter(sw);
+				final StringWriter sw = new StringWriter();
+				final PrintWriter pw = new PrintWriter(sw);
 				record.getThrown().printStackTrace(pw);
 				pw.close();
 				str.append(sw.toString());
-			} catch (Exception ex) {
+			} catch (final Exception ex) {
 				// best effort
 			}
 		}
 		return str.toString();
 	}
 
-	public static String getSimpleName(String loggerName) {
-		int lastIndex = loggerName.lastIndexOf(".");
+	public static String getSimpleName(final String loggerName) {
+		final int lastIndex = loggerName.lastIndexOf(".");
 		if (lastIndex != -1) {
 			return loggerName.substring(lastIndex + 1);
 		}

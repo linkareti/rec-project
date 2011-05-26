@@ -40,6 +40,7 @@ public interface IDriver {
 	 * Registers IDriverStateListener to receive events.
 	 * 
 	 * @param listener The listener to register.
+	 * @throws java.util.TooManyListenersException
 	 */
 	public void addIDriverStateListener(IDriverStateListener listener) throws java.util.TooManyListenersException;
 

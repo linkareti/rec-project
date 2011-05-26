@@ -54,7 +54,7 @@ public class JPrografBlock {
 	 * @return Value of property d1.
 	 */
 	public String getD1() {
-		return this.d1;
+		return d1;
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class JPrografBlock {
 	 * 
 	 * @param d1 New value of property d1.
 	 */
-	public void setD1(String d1) {
+	public void setD1(final String d1) {
 		this.d1 = d1;
 	}
 
@@ -72,7 +72,7 @@ public class JPrografBlock {
 	 * @return Value of property d2.
 	 */
 	public String getD2() {
-		return this.d2;
+		return d2;
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class JPrografBlock {
 	 * 
 	 * @param d2 New value of property d2.
 	 */
-	public void setD2(String d2) {
+	public void setD2(final String d2) {
 		this.d2 = d2;
 	}
 
@@ -90,7 +90,7 @@ public class JPrografBlock {
 	 * @return Value of property d3.
 	 */
 	public String getD3() {
-		return this.d3;
+		return d3;
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class JPrografBlock {
 	 * 
 	 * @param d3 New value of property d3.
 	 */
-	public void setD3(String d3) {
+	public void setD3(final String d3) {
 		this.d3 = d3;
 	}
 
@@ -108,7 +108,7 @@ public class JPrografBlock {
 	 * @return Value of property flag.
 	 */
 	public int getFlag() {
-		return this.flag;
+		return flag;
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class JPrografBlock {
 	 * 
 	 * @param flag New value of property flag.
 	 */
-	public void setFlag(int flag) {
+	public void setFlag(final int flag) {
 		this.flag = flag;
 	}
 
@@ -126,7 +126,7 @@ public class JPrografBlock {
 	 * @return Value of property valor.
 	 */
 	public int getValor() {
-		return this.valor;
+		return valor;
 	}
 
 	/**
@@ -134,7 +134,7 @@ public class JPrografBlock {
 	 * 
 	 * @param valor New value of property valor.
 	 */
-	public void setValor(int valor) {
+	public void setValor(final int valor) {
 		this.valor = valor;
 	}
 
@@ -144,7 +144,7 @@ public class JPrografBlock {
 	 * @return Value of property valor2.
 	 */
 	public int getValor2() {
-		return this.valor2;
+		return valor2;
 	}
 
 	/**
@@ -152,7 +152,7 @@ public class JPrografBlock {
 	 * 
 	 * @param valor2 New value of property valor2.
 	 */
-	public void setValor2(int valor2) {
+	public void setValor2(final int valor2) {
 		this.valor2 = valor2;
 	}
 
@@ -162,7 +162,7 @@ public class JPrografBlock {
 	 * @return Value of property coluna.
 	 */
 	public int getColuna() {
-		return this.coluna;
+		return coluna;
 	}
 
 	/**
@@ -170,7 +170,7 @@ public class JPrografBlock {
 	 * 
 	 * @param coluna New value of property coluna.
 	 */
-	public void setColuna(int coluna) {
+	public void setColuna(final int coluna) {
 		this.coluna = coluna;
 	}
 
@@ -180,7 +180,7 @@ public class JPrografBlock {
 	 * @return Value of property nivel.
 	 */
 	public int getNivel() {
-		return this.nivel;
+		return nivel;
 	}
 
 	/**
@@ -188,8 +188,8 @@ public class JPrografBlock {
 	 * 
 	 * @param coluna New value of property nivel.
 	 */
-	public void setNivel(int Nivel) {
-		this.nivel = nivel;
+	public void setNivel(final int Nivel) {
+		nivel = nivel;
 	}
 
 	/**
@@ -198,7 +198,7 @@ public class JPrografBlock {
 	 * @return Value of property baixo.
 	 */
 	public char getBaixo() {
-		return this.baixo;
+		return baixo;
 	}
 
 	/**
@@ -206,7 +206,7 @@ public class JPrografBlock {
 	 * 
 	 * @param baixo New value of property baixo.
 	 */
-	public void setBaixo(char baixo) {
+	public void setBaixo(final char baixo) {
 		this.baixo = baixo;
 	}
 
@@ -216,7 +216,7 @@ public class JPrografBlock {
 	 * @return Value of property esquerda.
 	 */
 	public String getEsquerda() {
-		return this.esquerda;
+		return esquerda;
 	}
 
 	/**
@@ -224,7 +224,7 @@ public class JPrografBlock {
 	 * 
 	 * @param esquerda New value of property esquerda.
 	 */
-	public void setEsquerda(String esquerda) {
+	public void setEsquerda(final String esquerda) {
 		this.esquerda = esquerda;
 	}
 
@@ -234,7 +234,7 @@ public class JPrografBlock {
 	 * @return Value of property tipo.
 	 */
 	public int getTipo() {
-		return this.tipo;
+		return tipo;
 	}
 
 	/**
@@ -242,7 +242,7 @@ public class JPrografBlock {
 	 * 
 	 * @param tipo New value of property tipo.
 	 */
-	public void setTipo(int tipo) {
+	public void setTipo(final int tipo) {
 		this.tipo = tipo;
 	}
 

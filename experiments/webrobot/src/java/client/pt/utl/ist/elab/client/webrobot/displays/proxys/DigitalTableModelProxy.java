@@ -18,10 +18,14 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  * @author Andr�
  */
 public class DigitalTableModelProxy extends javax.swing.table.DefaultTableModel implements ExpDataModelListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2262009072924415958L;
 	/** Holds value of property expDataModel. */
 	private ExpDataModel expDataModel = null;
-	private int numChannels = 8;
-	private java.text.DecimalFormat df = new java.text.DecimalFormat("###0.0");
+	private final int numChannels = 8;
+	private final java.text.DecimalFormat df = new java.text.DecimalFormat("###0.0");
 	DateTime firstSampleTime = new DateTime();
 
 	// BIG SILENT NOOP
@@ -30,6 +34,7 @@ public class DigitalTableModelProxy extends javax.swing.table.DefaultTableModel 
 	}
 
 	// BIG SILENT NOOP
+	@Override
 	public void dataModelStoped() {
 		// fireTableDataChanged();
 	}
@@ -42,7 +47,8 @@ public class DigitalTableModelProxy extends javax.swing.table.DefaultTableModel 
 	 * @param columnIndex the index of the column
 	 * @return the common ancestor class of the object values in the model.
 	 */
-	public Class getColumnClass(int columnIndex) {
+	@Override
+	public Class getColumnClass(final int columnIndex) {
 		if (columnIndex > 0) {
 			return Integer.class;
 		} else {
@@ -58,6 +64,7 @@ public class DigitalTableModelProxy extends javax.swing.table.DefaultTableModel 
 	 * @return the number of columns in the model
 	 * @see #getRowCount
 	 */
+	@Override
 	public int getColumnCount() {
 		return numChannels + 1;
 	}
@@ -70,8 +77,9 @@ public class DigitalTableModelProxy extends javax.swing.table.DefaultTableModel 
 	 * @param columnIndex the index of the column
 	 * @return the name of the column
 	 */
-	public String getColumnName(int columnIndex) {
-		String[] colNames = { "Tempo (s)", "b0", "b1", "b2", "b3", "b4", "b5", "b6", "b7" };
+	@Override
+	public String getColumnName(final int columnIndex) {
+		final String[] colNames = { "Tempo (s)", "b0", "b1", "b2", "b3", "b4", "b5", "b6", "b7" };
 		return colNames[columnIndex];
 	}
 
@@ -83,6 +91,7 @@ public class DigitalTableModelProxy extends javax.swing.table.DefaultTableModel 
 	 * @return the number of rows in the model
 	 * @see #getColumnCount
 	 */
+	@Override
 	public int getRowCount() {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			return 0;
@@ -101,7 +110,8 @@ public class DigitalTableModelProxy extends javax.swing.table.DefaultTableModel 
 	 * @param columnIndex the column whose value is to be queried
 	 * @return the value Object at the specified cell
 	 */
-	public Object getValueAt(int rowIndex, int columnIndex) {
+	@Override
+	public Object getValueAt(final int rowIndex, final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			return null;
 		}
@@ -110,16 +120,16 @@ public class DigitalTableModelProxy extends javax.swing.table.DefaultTableModel 
 			if (rowIndex == 0) {
 				firstSampleTime = expDataModel.getTimeStamp(rowIndex);
 			}
-			double elapsedMilis = (double) (expDataModel.getTimeStamp(rowIndex).getMilliSeconds() - firstSampleTime
+			final double elapsedMilis = (double) (expDataModel.getTimeStamp(rowIndex).getMilliSeconds() - firstSampleTime
 					.getMilliSeconds()) / 1000;
 			return df.format(elapsedMilis);
 		} else {
-			PhysicsValue value = expDataModel.getValueAt(rowIndex, columnIndex - 1 + 8);
+			final PhysicsValue value = expDataModel.getValueAt(rowIndex, columnIndex - 1 + 8);
 			return new Integer(convertBooleanInt(value.getValue().isBooleanValue()));
 		}
 	}
 
-	private int convertBooleanInt(boolean toConvert) {
+	private int convertBooleanInt(final boolean toConvert) {
 		if (toConvert) {
 			return 1;
 		} else {
@@ -137,13 +147,15 @@ public class DigitalTableModelProxy extends javax.swing.table.DefaultTableModel 
 	 * @return true if the cell is editable
 	 * @see #setValueAt
 	 */
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
+	@Override
+	public boolean isCellEditable(final int rowIndex, final int columnIndex) {
 		return false;
 	}
 
 	private int lastnewsamples = 0;
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 		fireTableRowsInserted(Math.min(evt.getSamplesStartIndex(), lastnewsamples), evt.getSamplesEndIndex());
 		lastnewsamples = evt.getSamplesEndIndex();
 	}
@@ -154,7 +166,7 @@ public class DigitalTableModelProxy extends javax.swing.table.DefaultTableModel 
 	 * @return Value of property expDataModel.
 	 */
 	public ExpDataModel getExpDataModel() {
-		return this.expDataModel;
+		return expDataModel;
 	}
 
 	/**
@@ -162,7 +174,7 @@ public class DigitalTableModelProxy extends javax.swing.table.DefaultTableModel 
 	 * 
 	 * @param expDataModel New value of property expDataModel.
 	 */
-	public void setExpDataModel(ExpDataModel expDataModel) {
+	public void setExpDataModel(final ExpDataModel expDataModel) {
 		if (expDataModel != null) {
 			expDataModel.removeExpDataModelListener(this);
 		}
@@ -176,23 +188,28 @@ public class DigitalTableModelProxy extends javax.swing.table.DefaultTableModel 
 		}
 	}
 
-	public void headerAvailable(HardwareAcquisitionConfig header) {
+	public void headerAvailable(final HardwareAcquisitionConfig header) {
 		fireTableStructureChanged();
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 		headerAvailable(expDataModel.getAcquisitionConfig());
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 

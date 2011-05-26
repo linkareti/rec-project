@@ -16,7 +16,7 @@ public class ReCRuntimeException extends RuntimeException implements ReCExceptio
 
 	private static final long serialVersionUID = 1101481717221162525L;
 
-	private ExceptionCode code;
+	private final ExceptionCode code;
 
 	/**
 	 * Creates a new <code>ReCRuntimeException</code>.
@@ -25,7 +25,7 @@ public class ReCRuntimeException extends RuntimeException implements ReCExceptio
 	 * @param message
 	 * @param cause
 	 */
-	public ReCRuntimeException(ExceptionCode code, String message, Throwable cause) {
+	public ReCRuntimeException(final ExceptionCode code, final String message, final Throwable cause) {
 		super(message, cause);
 		this.code = code;
 	}
@@ -36,7 +36,7 @@ public class ReCRuntimeException extends RuntimeException implements ReCExceptio
 	 * @param code
 	 * @param message
 	 */
-	public ReCRuntimeException(ExceptionCode code, String message) {
+	public ReCRuntimeException(final ExceptionCode code, final String message) {
 		super(message);
 		this.code = code;
 	}

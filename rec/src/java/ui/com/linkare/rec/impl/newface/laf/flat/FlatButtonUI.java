@@ -28,53 +28,57 @@ public class FlatButtonUI extends MetalButtonUI {
 
 	private final static String propertyPrefix = "FlatButton" + ".";
 
-	public static ComponentUI createUI(JComponent x) {
+	public static ComponentUI createUI(final JComponent x) {
 		return new FlatButtonUI();
 	}
 
 	@Override
 	protected String getPropertyPrefix() {
-		return propertyPrefix;
+		return FlatButtonUI.propertyPrefix;
 	}
 
 	// ********************************
-	//          Paint
+	// Paint
 	// ********************************
 
 	@Override
-	protected void paintButtonPressed(Graphics g, AbstractButton b) {
-		//		FlatButton fButton = (FlatButton) b;
+	protected void paintButtonPressed(final Graphics g, final AbstractButton b) {
+		// FlatButton fButton = (FlatButton) b;
 
-		//		fButton.setForeground(fButton.getForeground());
-		//		fButton.setBorder(BorderFactory.createLineBorder(fButton.getBorderColor()));
-		//		FlatUtils.drawGradient(fButton, g, 0, 0, 0, b.getHeight(), new float[] { .0f, 1.0f }, new Color[] { fButton.getGradientTop(),
-		//				fButton.getGradientBottom() });
+		// fButton.setForeground(fButton.getForeground());
+		// fButton.setBorder(BorderFactory.createLineBorder(fButton.getBorderColor()));
+		// FlatUtils.drawGradient(fButton, g, 0, 0, 0, b.getHeight(), new
+		// float[] { .0f, 1.0f }, new Color[] { fButton.getGradientTop(),
+		// fButton.getGradientBottom() });
 	}
 
 	@Override
-	public void paint(Graphics g, JComponent c) {
-		FlatButton fButton = (FlatButton) c;
+	public void paint(final Graphics g, final JComponent c) {
+		final FlatButton fButton = (FlatButton) c;
 
-		//		FlatUtils.drawGradient(fButton, g, 0, 0, 0, fButton.getHeight(), new float[] { .0f, .2f, .4f }, new Color[] {
-		//				fButton.getGradientTop(), Color.white, fButton.getGradientBottom() });
+		// FlatUtils.drawGradient(fButton, g, 0, 0, 0, fButton.getHeight(), new
+		// float[] { .0f, .2f, .4f }, new Color[] {
+		// fButton.getGradientTop(), Color.white, fButton.getGradientBottom()
+		// });
 
-		FlatUtils.drawGradient(fButton, g, 0, 0, 0, fButton.getHeight(), new float[] { .0f, .4f }, new Color[] { fButton.getGradientTop(),
-				fButton.getGradientBottom() });
+		FlatUtils.drawGradient(fButton, g, 0, 0, 0, fButton.getHeight(), new float[] { .0f, .4f }, new Color[] {
+				fButton.getGradientTop(), fButton.getGradientBottom() });
 
 		super.paint(g, c);
 	}
 
 	@Override
-	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
+	protected void paintFocus(final Graphics g, final AbstractButton b, final Rectangle viewRect,
+			final Rectangle textRect, final Rectangle iconRect) {
 		// Para não ser desenhado o focus no FlatButton
 	}
 
 	@Override
-	protected void paintText(Graphics g, JComponent c, Rectangle textRect, String text) {
-		AbstractButton b = (AbstractButton) c;
-		ButtonModel model = b.getModel();
-		FontMetrics fm = g.getFontMetrics(c.getFont());
-		int mnemIndex = b.getDisplayedMnemonicIndex();
+	protected void paintText(final Graphics g, final JComponent c, final Rectangle textRect, final String text) {
+		final AbstractButton b = (AbstractButton) c;
+		final ButtonModel model = b.getModel();
+		final FontMetrics fm = g.getFontMetrics(c.getFont());
+		final int mnemIndex = b.getDisplayedMnemonicIndex();
 
 		/* Draw the Text */
 		if (model.isEnabled()) {

@@ -7,11 +7,9 @@
 package com.linkare.rec.impl.newface.laf.flat.elabtheme;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.util.Map;
 
-import javax.swing.plaf.FontUIResource;
-
+import com.linkare.rec.impl.newface.laf.flat.theme.AbstractStyle;
 import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 
 /**
@@ -22,7 +20,7 @@ public class FlatListStyle extends DefaultStyle {
 
 	public static final String ID = "List";
 
-	public static final Color LIST_BACKGROUND = WHITE_DEFAULT_COLOR;
+	public static final Color LIST_BACKGROUND = DefaultStyle.WHITE_DEFAULT_COLOR;
 	public static final Color LIST_FOREGROUND = new Color(0x231F20);
 
 	/**
@@ -34,15 +32,15 @@ public class FlatListStyle extends DefaultStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return FlatListStyle.ID;
 	}
 
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(BACKGROUND, LIST_BACKGROUND);
-		map.put(FOREGROUND, LIST_FOREGROUND);
-		map.put(FONT, DEFAULT_FONT);
+		map.put(AbstractStyle.BACKGROUND, FlatListStyle.LIST_BACKGROUND);
+		map.put(AbstractStyle.FOREGROUND, FlatListStyle.LIST_FOREGROUND);
+		map.put(AbstractStyle.FONT, DefaultStyle.DEFAULT_FONT);
 	}
 
 }

@@ -17,18 +17,24 @@ import java.util.logging.Logger;
 
 import javax.swing.Icon;
 import javax.swing.JComponent;
+import javax.swing.SwingConstants;
 
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.logging.LoggerUtil;
 
 public class OfflineInternalFrame extends javax.swing.JInternalFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2697891883188571761L;
+
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(OfflineInternalFrame.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(OfflineInternalFrame.UI_CLIENT_LOGGER));
 		}
 	}
 
@@ -48,7 +54,7 @@ public class OfflineInternalFrame extends javax.swing.JInternalFrame {
 	}
 
 	/** Creates new form OfflineInternalFrame */
-	public OfflineInternalFrame(String hardwareID) {
+	public OfflineInternalFrame(final String hardwareID) {
 		initComponents();
 		this.hardwareID = hardwareID;
 	}
@@ -68,13 +74,13 @@ public class OfflineInternalFrame extends javax.swing.JInternalFrame {
 		setMaximizable(true);
 		setResizable(true);
 		jTabbedPaneOffline.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
-		jTabbedPaneOffline.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
+		jTabbedPaneOffline.setTabPlacement(SwingConstants.BOTTOM);
 		getContentPane().add(jTabbedPaneOffline, java.awt.BorderLayout.CENTER);
 
 		pack();
 	}// GEN-END:initComponents
 
-	public synchronized void addOfflineDisplay(ExpDataDisplay dataDisplay) {
+	public synchronized void addOfflineDisplay(final ExpDataDisplay dataDisplay) {
 		if (dataDisplayList == null) {
 			dataDisplayList = new ArrayList<ExpDataDisplay>();
 		}
@@ -84,36 +90,39 @@ public class OfflineInternalFrame extends javax.swing.JInternalFrame {
 		try {
 			final Icon icon = dataDisplay.getIcon();
 			String nameTab = dataDisplay.getName();
-			if (nameTab == null)
-				nameTab = DISPLAY_STR;
+			if (nameTab == null) {
+				nameTab = OfflineInternalFrame.DISPLAY_STR;
+			}
 			int i = 1;
 
 			if (jTabbedPaneOffline.indexOfTab(nameTab) != -1) {
-				while (jTabbedPaneOffline.indexOfTab(nameTab + " " + i) != -1)
+				while (jTabbedPaneOffline.indexOfTab(nameTab + " " + i) != -1) {
 					++i;
+				}
 
 				nameTab += " " + i;
 			}
 
-			JComponent displayComp = dataDisplay.getDisplay();
-			TabClosablePanel panel = new TabClosablePanel();
+			final JComponent displayComp = dataDisplay.getDisplay();
+			final TabClosablePanel panel = new TabClosablePanel();
 			panel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-				public void propertyChange(java.beans.PropertyChangeEvent evt) {
+				@Override
+				public void propertyChange(final java.beans.PropertyChangeEvent evt) {
 					tabClosed(evt);
 				}
 			});
 
 			panel.add(displayComp, java.awt.BorderLayout.CENTER);
 
-			String nameTabFinal = nameTab;
+			final String nameTabFinal = nameTab;
 			jTabbedPaneOffline.addTab(nameTabFinal, icon, panel);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			LoggerUtil.logThrowable("Couldn't add DataDisplay Component " + dataDisplay
-					+ " to ExperimentInternalFrame!", e, Logger.getLogger(UI_CLIENT_LOGGER));
+					+ " to ExperimentInternalFrame!", e, Logger.getLogger(OfflineInternalFrame.UI_CLIENT_LOGGER));
 		}
 	}
 
-	public synchronized void removeExpDataDisplay(ExpDataDisplay dataDisplay) {
+	public synchronized void removeExpDataDisplay(final ExpDataDisplay dataDisplay) {
 		if (dataDisplayList != null) {
 			dataDisplayList.remove(dataDisplay);
 		}
@@ -121,17 +130,18 @@ public class OfflineInternalFrame extends javax.swing.JInternalFrame {
 		if (dataDisplay.getDisplay() != null) {
 			for (int i = 0; i < jTabbedPaneOffline.getComponentCount(); i++) {
 				if (jTabbedPaneOffline.getComponent(i) instanceof TabClosablePanel) {
-					TabClosablePanel tab = (TabClosablePanel) jTabbedPaneOffline.getComponent(i);
+					final TabClosablePanel tab = (TabClosablePanel) jTabbedPaneOffline.getComponent(i);
 					for (int j = 0; j < tab.getComponentCount(); j++) {
-						if (tab.getComponent(j) == dataDisplay)
+						if (tab.getComponent(j) == dataDisplay) {
 							jTabbedPaneOffline.remove(tab);
+						}
 					}
 				}
 			}
 		}
 	}
 
-	public void tabClosed(java.beans.PropertyChangeEvent evt) {
+	public void tabClosed(final java.beans.PropertyChangeEvent evt) {
 		jTabbedPaneOffline.remove((TabClosablePanel) evt.getSource());
 	}
 
@@ -141,7 +151,7 @@ public class OfflineInternalFrame extends javax.swing.JInternalFrame {
 	 * @return Value of property hardwareID.
 	 */
 	public String getHardwareID() {
-		return this.hardwareID;
+		return hardwareID;
 	}
 
 	/**
@@ -149,7 +159,7 @@ public class OfflineInternalFrame extends javax.swing.JInternalFrame {
 	 * 
 	 * @param hardwareID New value of property hardwareID.
 	 */
-	public void setHardwareID(String hardwareID) {
+	public void setHardwareID(final String hardwareID) {
 		this.hardwareID = hardwareID;
 	}
 

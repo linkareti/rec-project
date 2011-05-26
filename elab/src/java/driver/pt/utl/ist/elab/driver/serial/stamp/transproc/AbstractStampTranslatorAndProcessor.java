@@ -14,12 +14,12 @@ public abstract class AbstractStampTranslatorAndProcessor implements StampTransl
 	private String commandIdentifier = null;
 
 	/** Creates a new instance of AbstractSerialPortTranslatorAndProcessor */
-	public AbstractStampTranslatorAndProcessor(String commandIdentifier) {
+	public AbstractStampTranslatorAndProcessor(final String commandIdentifier) {
 		this.commandIdentifier = commandIdentifier;
 		StampTranslatorProcessorManager.registerProcessor(this);
 	}
 
-	public boolean accepts(StampCommand command) {
+	public boolean accepts(final StampCommand command) {
 		return commandIdentifier.equals(command.getCommandIdentifier());
 	}
 

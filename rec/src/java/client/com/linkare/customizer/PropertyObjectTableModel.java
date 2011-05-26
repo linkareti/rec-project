@@ -18,21 +18,26 @@ public class PropertyObjectTableModel extends javax.swing.table.DefaultTableMode
 		super(new String[] { "Name", "Value" }, 0);
 	}
 
-	public boolean isCellEditable(int row, int column) {
-		if (column == 0)
+	@Override
+	public boolean isCellEditable(final int row, final int column) {
+		if (column == 0) {
 			return false;
-		else if (column == 1)
+		} else if (column == 1) {
 			return ((PropertyObject) getValueAt(row, column)).isEditable();
+		}
 		return true;
 	}
 
-	public Class<?> getColumnClass(int columnIndex) {
-		if (columnIndex == 0)
+	@Override
+	public Class<?> getColumnClass(final int columnIndex) {
+		if (columnIndex == 0) {
 			return String.class;
-		if (columnIndex == 1)
+		}
+		if (columnIndex == 1) {
 			return PropertyObject.class;
-		else
+		} else {
 			return Object.class;
+		}
 	}
 
 }

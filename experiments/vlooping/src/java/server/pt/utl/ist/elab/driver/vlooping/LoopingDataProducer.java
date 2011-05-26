@@ -23,7 +23,7 @@ import com.linkare.rec.impl.data.PhysicsValFactory;
 
 public class LoopingDataProducer extends VirtualBaseDataSource implements ODE {
 	// O numero de canais(de dados) que existem!
-	private int NUM_CHANNELS = 6;
+	private final int NUM_CHANNELS = 6;
 
 	/* Fields Onde estas? : */
 	public static final int TAG_DROP = 0;
@@ -36,17 +36,17 @@ public class LoopingDataProducer extends VirtualBaseDataSource implements ODE {
 
 	private double[] state = new double[] { 0d, 0d, 0d };// x,v,t
 	private double x_, y_;
-	private double xi = 0;
+	private final double xi = 0;
 	private double h1 = 7;
 	private double h2 = 1.0;
 	private double r1 = 3;
-	private double vi = 0;
+	private final double vi = 0;
 	private double g = 9.8;
 	private int tbs = 10;
 	private int nSamples = 1000;
 	private boolean turningBack = false;
 	private boolean passLoop;
-	private boolean passVertical = false;
+	private final boolean passVertical = false;
 	private boolean stopped = false;
 	private VirtualBaseDriver driver = null;
 
@@ -57,8 +57,8 @@ public class LoopingDataProducer extends VirtualBaseDataSource implements ODE {
 	// double time =0;
 
 	// Aproveitamos para inicializar todas as variaveis logo no construtor...
-	public LoopingDataProducer(VirtualBaseDriver driver, float xi, float h1, float h2, float r1, float vi, float g,
-			int tbs, int nSamples) {
+	public LoopingDataProducer(final VirtualBaseDriver driver, final float xi, final float h1, final float h2,
+			final float r1, final float vi, final float g, final int tbs, final int nSamples) {
 		this.driver = driver;
 		this.h1 = h1;
 		this.h2 = h2;
@@ -86,10 +86,10 @@ public class LoopingDataProducer extends VirtualBaseDataSource implements ODE {
 		double aux = 0;
 		double aux_ = 0;
 
-		if (getWhereTag() == TAG_DROP) {
+		if (getWhereTag() == LoopingDataProducer.TAG_DROP) {
 			aux = h1 * 0.5 * Math.sin(state[0]) * state[1];
 			aux_ = h1;
-		} else if (getWhereTag() == TAG_WAVE) {
+		} else if (getWhereTag() == LoopingDataProducer.TAG_WAVE) {
 			aux = h2 * 0.5 * Math.sin(state[0]) * state[1];
 			aux_ = h2;
 		} else {
@@ -116,15 +116,17 @@ public class LoopingDataProducer extends VirtualBaseDataSource implements ODE {
 		return new double[] { energiaCin, energiaPot, energiaMec };
 	}
 
+	@Override
 	public double[] getState() {
 		return state;
 	}
 
-	public void setState(double[] state) {
+	public void setState(final double[] state) {
 		this.state = state;
 	}
 
-	public void getRate(double[] state, double[] rate) {
+	@Override
+	public void getRate(final double[] state, final double[] rate) {
 
 		rate[0] = state[1];// dx/dt
 
@@ -132,13 +134,13 @@ public class LoopingDataProducer extends VirtualBaseDataSource implements ODE {
 			rate[1] = (2 * h1 * g * Math.sin(state[0]) - h1 * h1 * Math.cos(state[0]) * Math.sin(state[0]) * state[1]
 					* state[1])
 					/ (4 + h1 * h1 * Math.sin(state[0]) * Math.sin(state[0]));
-			where_tag = TAG_DROP;
+			where_tag = LoopingDataProducer.TAG_DROP;
 		} else if (state[0] > Math.PI && state[0] <= 3 * Math.PI) { // primeira
 			// lomba
 			rate[1] = (2 * h2 * g * Math.sin(state[0]) - h2 * h2 * Math.cos(state[0]) * Math.sin(state[0]) * state[1]
 					* state[1])
 					/ (4 + h2 * h2 * Math.sin(state[0]) * Math.sin(state[0]));
-			where_tag = TAG_WAVE;
+			where_tag = LoopingDataProducer.TAG_WAVE;
 		} else if (state[0] > 3 * Math.PI && state[0] <= 3 * Math.PI + r1) { // zona
 			// recta
 			// depois
@@ -149,7 +151,7 @@ public class LoopingDataProducer extends VirtualBaseDataSource implements ODE {
 			// do
 			// looping
 			rate[1] = 0;
-			where_tag = TAG_PLANE;
+			where_tag = LoopingDataProducer.TAG_PLANE;
 		} else if (passLoop) {
 			rate[1] = 0;
 		}
@@ -166,7 +168,7 @@ public class LoopingDataProducer extends VirtualBaseDataSource implements ODE {
 		public void setData() {
 			// envia as amostra calculadas!
 			// 1- cria um array com o numero de canais existentes!
-			PhysicsValue[] value = new PhysicsValue[NUM_CHANNELS];
+			final PhysicsValue[] value = new PhysicsValue[NUM_CHANNELS];
 
 			// envia no canal CORRESPONDENTE!!! o valor
 			value[0] = new PhysicsValue(PhysicsValFactory.fromFloat(time), getAcquisitionHeader().getChannelsConfig(0)
@@ -192,9 +194,10 @@ public class LoopingDataProducer extends VirtualBaseDataSource implements ODE {
 
 		}
 
+		@Override
 		public void run() {
 			try {
-				sleep(1000);
+				Thread.sleep(1000);
 
 				// Enquanto a amostra actual for menor do que o numero de
 				// amostras pedido pelo cliente E ninguém tiver parado a
@@ -218,7 +221,7 @@ public class LoopingDataProducer extends VirtualBaseDataSource implements ODE {
 					odeSolver.step();
 
 					// dorme o tbs que o utilizador pediu...
-					sleep(tbs);
+					Thread.sleep(tbs);
 
 					currentSample++;
 
@@ -238,7 +241,7 @@ public class LoopingDataProducer extends VirtualBaseDataSource implements ODE {
 
 					// envia as amostra calculadas!
 					// 1- cria um array com o numero de canais existentes!
-					PhysicsValue[] value = new PhysicsValue[NUM_CHANNELS];
+					final PhysicsValue[] value = new PhysicsValue[NUM_CHANNELS];
 
 					// envia no canal CORRESPONDENTE!!! o valor
 					value[0] = new PhysicsValue(PhysicsValFactory.fromFloat(time), getAcquisitionHeader()
@@ -267,7 +270,7 @@ public class LoopingDataProducer extends VirtualBaseDataSource implements ODE {
 					odeSolver.step();
 
 					// dorme o tbs que o utilizador pediu...
-					sleep(tbs);
+					Thread.sleep(tbs);
 
 					currentSample++;
 
@@ -290,7 +293,7 @@ public class LoopingDataProducer extends VirtualBaseDataSource implements ODE {
 					odeSolver.step();
 
 					// dorme o tbs que o utilizador pediu...
-					sleep(tbs);
+					Thread.sleep(tbs);
 
 					currentSample++;
 				}
@@ -302,7 +305,7 @@ public class LoopingDataProducer extends VirtualBaseDataSource implements ODE {
 
 				driver.stopVirtualHardware();
 
-			} catch (InterruptedException ie) {
+			} catch (final InterruptedException ie) {
 			}
 
 		}
@@ -313,8 +316,8 @@ public class LoopingDataProducer extends VirtualBaseDataSource implements ODE {
 		double a = x_ - (3 * Math.PI + r1);
 		int n = 0;
 
-		x_ = this.getState()[0];
-		n = this.getWhereTag();
+		x_ = getState()[0];
+		n = getWhereTag();
 
 		switch (n) {
 
@@ -353,6 +356,7 @@ public class LoopingDataProducer extends VirtualBaseDataSource implements ODE {
 		}
 	}
 
+	@Override
 	public void startProduction() {
 		stopped = false;
 		new ProducerThread().start();
@@ -369,6 +373,7 @@ public class LoopingDataProducer extends VirtualBaseDataSource implements ODE {
 	 * dp.startProduction(); }
 	 */
 
+	@Override
 	public void stopNow() {
 		stopped = true;
 		setDataSourceStoped();

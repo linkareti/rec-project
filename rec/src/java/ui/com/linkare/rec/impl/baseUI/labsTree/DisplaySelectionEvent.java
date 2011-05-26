@@ -17,21 +17,25 @@ import com.linkare.rec.impl.baseUI.config.Lab;
 
 public class DisplaySelectionEvent extends ApparatusSelectionEvent {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3605900953223887127L;
 	/** Holds value of property Display. */
-	private Display dp;
+	private final Display dp;
 
 	/** Creates a new instance of DisplaySelectionEvent */
-	public DisplaySelectionEvent(Object source, Display dp) {
+	public DisplaySelectionEvent(final Object source, final Display dp) {
 		this(source, dp, null, null);
 	}
 
 	/** Creates a new instance of DisplaySelectionEvent */
-	public DisplaySelectionEvent(Object source, Display dp, Apparatus app) {
+	public DisplaySelectionEvent(final Object source, final Display dp, final Apparatus app) {
 		this(source, dp, app, null);
 	}
 
 	/** Creates a new instance of DisplaySelectionEvent */
-	public DisplaySelectionEvent(Object source, Display dp, Apparatus app, Lab lab) {
+	public DisplaySelectionEvent(final Object source, final Display dp, final Apparatus app, final Lab lab) {
 		super(source, app, lab);
 		this.dp = dp;
 	}
@@ -42,6 +46,6 @@ public class DisplaySelectionEvent extends ApparatusSelectionEvent {
 	 * @return Value of property Display.
 	 */
 	public Display getDisplay() {
-		return this.dp;
+		return dp;
 	}
 }

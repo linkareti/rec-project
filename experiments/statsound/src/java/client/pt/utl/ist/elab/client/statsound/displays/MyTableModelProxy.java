@@ -17,6 +17,11 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 public class MyTableModelProxy extends com.linkare.rec.impl.client.experiment.MultSeriesTableModelProxy {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4598655304178508572L;
+
+	/**
 	 * Returns the number of columns in the model. A <code>JTable</code> uses
 	 * this method to determine how many columns it should create and display by
 	 * default.
@@ -24,6 +29,7 @@ public class MyTableModelProxy extends com.linkare.rec.impl.client.experiment.Mu
 	 * @return the number of columns in the model
 	 * @see #getRowCount
 	 */
+	@Override
 	public int getColumnCount() {
 		if (colArray == null) {
 			return 1;
@@ -39,7 +45,8 @@ public class MyTableModelProxy extends com.linkare.rec.impl.client.experiment.Mu
 	 * @param columnIndex the index of the column
 	 * @return the name of the column
 	 */
-	public String getColumnName(int columnIndex) {
+	@Override
+	public String getColumnName(final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			if (columnIndex == 0) {
 				return ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.nodata", "No data available...");
@@ -47,7 +54,7 @@ public class MyTableModelProxy extends com.linkare.rec.impl.client.experiment.Mu
 				return null;
 			}
 		}
-		String ch_name = ReCResourceBundle.findString(expDataModel.getChannelConfig(getColAtArray(columnIndex))
+		final String ch_name = ReCResourceBundle.findString(expDataModel.getChannelConfig(getColAtArray(columnIndex))
 				.getChannelName());
 		return ch_name + "["
 				+ expDataModel.getChannelConfig(getColAtArray(columnIndex)).getSelectedScale().getPhysicsUnitSymbol()
@@ -62,26 +69,29 @@ public class MyTableModelProxy extends com.linkare.rec.impl.client.experiment.Mu
 	 * @param columnIndex the column whose value is to be queried
 	 * @return the value Object at the specified cell
 	 */
-	public Object getValueAt(int rowIndex, int columnIndex) {
+	@Override
+	public Object getValueAt(final int rowIndex, final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			return null;
 		}
-		PhysicsValue value = expDataModel.getValueAt(rowIndex, getColAtArray(columnIndex));
+		final PhysicsValue value = expDataModel.getValueAt(rowIndex, getColAtArray(columnIndex));
 		if (value == null) {
 			return null;
 		}
 		return value.getValue().toString();
 	}
 
-	public void headerAvailable(HardwareAcquisitionConfig header) {
+	public void headerAvailable(final HardwareAcquisitionConfig header) {
 		fireTableStructureChanged();
 		// super doesn't have this method defined
 	}
 
+	@Override
 	public void dataModelStarted() {
 		fireTableStructureChanged();
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 		fireTableStructureChanged();
 	}
@@ -90,7 +100,7 @@ public class MyTableModelProxy extends com.linkare.rec.impl.client.experiment.Mu
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Class getColumnClass(int columnIndex) {
+	public Class getColumnClass(final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			return null;
 		}

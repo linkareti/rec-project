@@ -19,10 +19,10 @@ public class ClientMain {
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		JFrame.setDefaultLookAndFeelDecorated(true);
-		ReCBaseUI ui = new ReCBaseUI();
+		final ReCBaseUI ui = new ReCBaseUI();
 		ui.setApparatusAutoConnectID("ELAB_PV_STAMP_V02");
 		ui.setVisible(true);
 	}

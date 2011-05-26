@@ -33,13 +33,17 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  * @author José Pedro Pereira - Linkare TI
  */
 public class DefaultTimeExperimentGraph extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3346506712021056751L;
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 	private DefaultTimeDatasetProxy defaultTimeDatasetProxy = null;
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(DefaultTimeExperimentGraph.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(DefaultTimeExperimentGraph.UI_CLIENT_LOGGER));
 		}
 	}
 
@@ -79,53 +83,59 @@ public class DefaultTimeExperimentGraph extends javax.swing.JPanel implements Ex
 	/** Holds value of property channelY. */
 	private int channelY;
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public Icon getIcon() {
 		return new javax.swing.ImageIcon("/com/linkare/rec/impl/baseUI/resources/chart16.gif");
 	}
 
 	private ExpDataModel model = null;
 
-	public void setExpDataModel(ExpDataModel model) {
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
 		defaultTimeDatasetProxy.setExpDataModel(model);
 		model.addExpDataModelListener(this);
 		this.model = model;
 	}
 
+	@Override
 	public String getName() {
 		return "Time Chart";
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
 
-	public void headerAvailable(HardwareAcquisitionConfig header) {
-		DateAxis dAxis = new DateAxis("Time");
+	public void headerAvailable(final HardwareAcquisitionConfig header) {
+		final DateAxis dAxis = new DateAxis("Time");
 		dAxis.setAutoRange(true);
 
 		dAxis.setTickUnit(new DateTickUnit(DateTickUnit.SECOND, 1, new SimpleDateFormat("HH:mm:ss dd-MMM-yyyy")));
 		dAxis.setVerticalTickLabels(true);
 
-		NumberAxis yAxis = new NumberAxis("Valor");
+		final NumberAxis yAxis = new NumberAxis("Valor");
 		yAxis.setAutoRange(true);
 		yAxis.setAutoRangeStickyZero(false);
 		yAxis.setAutoRangeIncludesZero(false);
 
-		XYToolTipGenerator tooltipGenerator = new StandardXYToolTipGenerator();
+		final XYToolTipGenerator tooltipGenerator = new StandardXYToolTipGenerator();
 
-		XYPlot plot = new XYPlot(defaultTimeDatasetProxy, dAxis, yAxis, new StandardXYItemRenderer(
+		final XYPlot plot = new XYPlot(defaultTimeDatasetProxy, dAxis, yAxis, new StandardXYItemRenderer(
 				StandardXYItemRenderer.SHAPES_AND_LINES, tooltipGenerator));
 
-		JFreeChart chart = new JFreeChart("meteo", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
-		ChartPanel panel = new ChartPanel(chart);
+		final JFreeChart chart = new JFreeChart("meteo", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
+		final ChartPanel panel = new ChartPanel(chart);
 
 		panel.setPreferredSize(new java.awt.Dimension(350, 300));
 		// panel.setMinimumSize(panel.getPreferredSize());
@@ -137,9 +147,10 @@ public class DefaultTimeExperimentGraph extends javax.swing.JPanel implements Ex
 		scrollPane.setViewportView(panel);
 	}
 
-	private boolean isScaleSet = false;
+	private final boolean isScaleSet = false;
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 
 	}
 
@@ -157,7 +168,7 @@ public class DefaultTimeExperimentGraph extends javax.swing.JPanel implements Ex
 	 * 
 	 * @param channelDisplayX New value of property channelDisplayX.
 	 */
-	public void setChannelTime(int channelTime) {
+	public void setChannelTime(final int channelTime) {
 		defaultTimeDatasetProxy.setChannelTime(channelTime);
 	}
 
@@ -175,39 +186,46 @@ public class DefaultTimeExperimentGraph extends javax.swing.JPanel implements Ex
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
-	public void setChannelDisplayY(int channelDisplayY) {
+	public void setChannelDisplayY(final int channelDisplayY) {
 		defaultTimeDatasetProxy.setChannelDisplayY(channelDisplayY);
 	}
 
 	public DefaultTimeDatasetProxy getDefaultTimeDatasetProxy() {
-		return this.defaultTimeDatasetProxy;
+		return defaultTimeDatasetProxy;
 	}
 
 	public javax.swing.JScrollPane getScrollPane() {
-		return this.scrollPane;
+		return scrollPane;
 	}
 
 	public javax.swing.JLabel getLabel() {
-		return this.labelWaitData;
+		return labelWaitData;
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
-		if (model != null)
+		if (model != null) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelStoped() {// BIG SILENT NOOP
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 

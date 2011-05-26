@@ -5,6 +5,7 @@
  */
 package pt.utl.ist.elab.client.telescopio;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
@@ -20,8 +21,8 @@ public class ObjectoCeleste {
 	int ar_h, dec_g;
 	double dt;
 
-	public ObjectoCeleste(String _nomeObjecto, String _nome, String _comentario, int _ar_h, double _ar_m, int _dec_g,
-			double _dec_m, double _dt) {
+	public ObjectoCeleste(final String _nomeObjecto, final String _nome, final String _comentario, final int _ar_h,
+			final double _ar_m, final int _dec_g, final double _dec_m, final double _dt) {
 		nomeObjecto = _nomeObjecto;
 		nome = _nome;
 		comentario = _comentario;
@@ -30,7 +31,7 @@ public class ObjectoCeleste {
 		dec_g = _dec_g;
 		dec_m = _dec_m;
 		dt = _dt;
-		visivel = visivel(ar_h, ar_m, dec_g, dec_m);
+		visivel = ObjectoCeleste.visivel(ar_h, ar_m, dec_g, dec_m);
 
 	}
 
@@ -66,41 +67,42 @@ public class ObjectoCeleste {
 		return comentario;
 	}
 
-	public static double degToRad(double arg) {
+	public static double degToRad(final double arg) {
 		return arg * Math.PI / 180;
 	}
 
-	public static double radToDeg(double arg) {
+	public static double radToDeg(final double arg) {
 		return arg * 180 / Math.PI;
 	}
 
 	/* calcula os objetos visiveis, devolve true se for visivel */
-	public static boolean visivel(int ar_h, double ar_m, int dec_g, double dec_m) {
+	public static boolean visivel(final int ar_h, final double ar_m, final int dec_g, final double dec_m) {
 
 		/*
 		 * Local de observa��o Lisboa PORTUGAL Latitude: 38.7� Longitude -9.2�
 		 */
-		double lat = 0.675442421, longi = 0.160570291;
+		final double lat = 0.675442421, longi = 0.160570291;
 		double ar, dec;
 		int ano, mes, dia, hora, minutos, hora_h;
 		double a, b, jd;
 
 		/* Transformar ascen��o recta de HH:MM em radianos */
-		ar = degToRad(15 * (ar_h + ar_m / 60));
+		ar = ObjectoCeleste.degToRad(15 * (ar_h + ar_m / 60));
 
 		/* Transformar declina��o de DD:MM em radianos */
-		if (dec_g < 0)
-			dec = degToRad(-(Math.abs(dec_g) + dec_m / 60));
-		else
-			dec = degToRad(dec_g + dec_m / 60);
+		if (dec_g < 0) {
+			dec = ObjectoCeleste.degToRad(-(Math.abs(dec_g) + dec_m / 60));
+		} else {
+			dec = ObjectoCeleste.degToRad(dec_g + dec_m / 60);
+		}
 
 		/* Criar calendario */
-		GregorianCalendar calendario = new GregorianCalendar();
-		ano = calendario.get(GregorianCalendar.YEAR);
-		mes = calendario.get(GregorianCalendar.MONTH);
-		dia = calendario.get(GregorianCalendar.DAY_OF_MONTH);
-		hora = calendario.get(GregorianCalendar.HOUR_OF_DAY);
-		minutos = calendario.get(GregorianCalendar.MINUTE);
+		final GregorianCalendar calendario = new GregorianCalendar();
+		ano = calendario.get(Calendar.YEAR);
+		mes = calendario.get(Calendar.MONTH);
+		dia = calendario.get(Calendar.DAY_OF_MONTH);
+		hora = calendario.get(Calendar.HOUR_OF_DAY);
+		minutos = calendario.get(Calendar.MINUTE);
 		hora_h = hora + minutos / 60; // Convers�o HH:MM em HH decimal
 
 		/* Calcular o dia Juliano jd */
@@ -125,10 +127,10 @@ public class ObjectoCeleste {
 		 * while(lst<0 ||lst>360) { if(lst<0){lst= lst+k*360; k++;}
 		 * if(lst>360){lst= lst -k*360;k++;} }
 		 */
-		lst = degToRad(lst);
+		lst = ObjectoCeleste.degToRad(lst);
 
 		/* Calculo do angulo horario HA */
-		double ha = lst - ar;
+		final double ha = lst - ar;
 		k = 1;
 		/*
 		 * while(ha<0){ ha=ha+2*k*Math.PI; k++; }
@@ -136,22 +138,26 @@ public class ObjectoCeleste {
 
 		/* Calculo da altitude e azimut do objeto */
 
-		double sin_alt, alt, cos_a, a_, azim;
+		double sin_alt, alt, cos_a;
+		final double a_;
+		double azim;
 		sin_alt = Math.sin(dec) * Math.sin(lat) + Math.cos(dec) * Math.cos(lat) * Math.cos(ha);
 		alt = Math.asin(sin_alt);
 
 		cos_a = (Math.sin(dec) - Math.sin(alt) * Math.sin(lat)) / (Math.cos(alt) * Math.cos(lat));
 		a = Math.acos(cos_a);
 
-		if (Math.sin(ha) < 0)
+		if (Math.sin(ha) < 0) {
 			azim = a;
-		else
+		} else {
 			azim = 2 * Math.PI - a;
+		}
 
 		/* Excluir os objetos a baixo de 10� e perto do meridiano local (5�) */
-		if ((alt < 10) || (Math.abs(azim) < 0.1))
+		if ((alt < 10) || (Math.abs(azim) < 0.1)) {
 			return true;
-		else
+		} else {
 			return true;
+		}
 	}
 }

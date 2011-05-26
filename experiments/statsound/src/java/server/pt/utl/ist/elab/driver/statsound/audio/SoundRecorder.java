@@ -34,7 +34,7 @@ public class SoundRecorder implements DataSoundListener {
 
 	private boolean fileExp = false;
 
-	public void startAcquiring(boolean fileExp) {
+	public void startAcquiring(final boolean fileExp) {
 		this.fileExp = fileExp;
 		dsr = null;
 		dsr = new DataSourceReader();
@@ -46,25 +46,26 @@ public class SoundRecorder implements DataSoundListener {
 		totalRMSSquareRight = 0;
 		nPoints = 0;
 		nBuffers = 0;
-		CaptureDeviceInfo di = null;
-		StateHelper sh = null;
+		final CaptureDeviceInfo di = null;
+		final StateHelper sh = null;
 		try {
-			if (mediaLocator == null) {
+			if (SoundRecorder.mediaLocator == null) {
 				// mediaLocator = new MediaLocator("javasound://48000");
 				// mediaLocator = new MediaLocator("javasound://44100");
-				mediaLocator = new MediaLocator("javasound://11025");
-				ds = Manager.createDataSource(mediaLocator);
-				formatControls = ((javax.media.protocol.CaptureDevice) ds).getFormatControls();
+				SoundRecorder.mediaLocator = new MediaLocator("javasound://11025");
+				SoundRecorder.ds = Manager.createDataSource(SoundRecorder.mediaLocator);
+				SoundRecorder.formatControls = ((javax.media.protocol.CaptureDevice) SoundRecorder.ds)
+						.getFormatControls();
 				// System.out.println("Format=" +
 				// formatControls[0].getFormat());
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			System.out.println("Error creating data source and locator");
 			e.printStackTrace();
 			return;
 		}
 
-		boolean test = dsr.open(ds);
+		final boolean test = dsr.open(SoundRecorder.ds);
 		if (!test) {
 			System.out.println("There was a problem with datasourcereader!!");
 		} else {
@@ -81,19 +82,19 @@ public class SoundRecorder implements DataSoundListener {
 
 	}
 
-	public double getRMS(int channel) {
+	public double getRMS(final int channel) {
 		synchronized (this) {
 			if (nPoints == 0) {
 				nPoints = 1;
 			}
 			dataAddedToRMS = false;
-			if (channel == LEFT_CHANNEL) {
-				double lReturn = 20 * getLog(10, Math.sqrt(totalRMSSquareLeft / nPoints) / 32768);
+			if (channel == SoundRecorder.LEFT_CHANNEL) {
+				final double lReturn = 20 * getLog(10, Math.sqrt(totalRMSSquareLeft / nPoints) / 32768);
 				// System.out.println("Return Left=" + lReturn);
 				notifyAll();
 				return lReturn;
 			} else {
-				double rReturn = 20 * getLog(10, Math.sqrt(totalRMSSquareRight / nPoints) / 32768);
+				final double rReturn = 20 * getLog(10, Math.sqrt(totalRMSSquareRight / nPoints) / 32768);
 				// System.out.println("Return right=" + rReturn);
 				notifyAll();
 				return rReturn;
@@ -102,7 +103,7 @@ public class SoundRecorder implements DataSoundListener {
 	}
 
 	public byte[] getAcqBytes() {
-		byte[] toReturn = acqBytes;
+		final byte[] toReturn = acqBytes;
 		acqBytes = new byte[0];
 		return toReturn;
 	}
@@ -125,7 +126,7 @@ public class SoundRecorder implements DataSoundListener {
 	 * Finds the log in any base using the formula log a=ln b/ln a b
 	 */
 
-	private double getLog(double base, double value) {
+	private double getLog(final double base, final double value) {
 		if (value == 0) {
 			return 0;
 		}
@@ -141,11 +142,11 @@ public class SoundRecorder implements DataSoundListener {
 	long maxValueRight = 0;
 
 	/** ONLY LITTLE ENDIAN IS ACCEPTED!! */
-	public void addDataToRMS(byte[] audioAcqBytes) {
+	public void addDataToRMS(final byte[] audioAcqBytes) {
 		synchronized (this) {
 
-			byte[] audioBytes = audioAcqBytes;
-			int[] audioData = null;
+			final byte[] audioBytes = audioAcqBytes;
+			final int[] audioData = null;
 			short[] leftData = null;
 			short[] rightData = null;
 
@@ -155,10 +156,10 @@ public class SoundRecorder implements DataSoundListener {
 			leftData = new short[audioBytes.length / 4];
 			rightData = new short[audioBytes.length / 4];
 			for (int i = 0; i + 4 <= audioBytes.length; i += 4) {
-				short LSBLeft = audioBytes[i];
-				short MSBLeft = audioBytes[i + 1];
-				short LSBRight = audioBytes[i + 2];
-				short MSBRight = audioBytes[i + 3];
+				final short LSBLeft = audioBytes[i];
+				final short MSBLeft = audioBytes[i + 1];
+				final short LSBRight = audioBytes[i + 2];
+				final short MSBRight = audioBytes[i + 3];
 
 				leftData[i / 4] = (short) (MSBLeft << 8 | (255 & LSBLeft));
 				rightData[i / 4] = (short) (MSBRight << 8 | (255 & LSBRight));
@@ -166,8 +167,8 @@ public class SoundRecorder implements DataSoundListener {
 
 			long squareLeft = 0;
 			long squareRight = 0;
-			int leftMean = getMean(leftData);
-			int rightMean = getMean(rightData);
+			final int leftMean = getMean(leftData);
+			final int rightMean = getMean(rightData);
 
 			for (int i = 0; i < leftData.length; i++) {
 				squareLeft += (leftData[i] - leftMean) * (leftData[i] - leftMean);
@@ -190,15 +191,16 @@ public class SoundRecorder implements DataSoundListener {
 	private int nBuffers = 0;
 	private javax.media.Buffer buffer;
 
-	public void bufferAvailable(NewDataBufferEvent evt) {
-		javax.media.Buffer buffer = evt.getBuffer();
+	@Override
+	public void bufferAvailable(final NewDataBufferEvent evt) {
+		final javax.media.Buffer buffer = evt.getBuffer();
 		this.buffer = buffer;
-		byte[] audioBytes = (byte[]) buffer.getData();
+		final byte[] audioBytes = (byte[]) buffer.getData();
 
 		if (!fileExp) {
 			addDataToRMS(audioBytes);
 		} else if (nBuffers < 10) {
-			byte[] tempArray = acqBytes;
+			final byte[] tempArray = acqBytes;
 			acqBytes = new byte[acqBytes.length + audioBytes.length];
 			System.arraycopy(tempArray, 0, acqBytes, 0, tempArray.length);
 			System.arraycopy(audioBytes, 0, acqBytes, tempArray.length, audioBytes.length);
@@ -211,18 +213,19 @@ public class SoundRecorder implements DataSoundListener {
 		}
 	}
 
-	private int getMean(short[] array) {
+	private int getMean(final short[] array) {
 		if (array.length == 0) {
 			return 0;
 		}
 
 		int sum = 0;
-		for (int i = 0; i < array.length; i++) {
-			sum += array[i];
+		for (final short element : array) {
+			sum += element;
 		}
 		return sum / array.length;
 	}
 
+	@Override
 	public void rmsAvailable() {
 	}
 
@@ -233,7 +236,7 @@ public class SoundRecorder implements DataSoundListener {
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addDataSoundListener(DataSoundListener listener) {
+	public synchronized void addDataSoundListener(final DataSoundListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -246,7 +249,7 @@ public class SoundRecorder implements DataSoundListener {
 	 * @param listener The listener to remove.
 	 */
 
-	public synchronized void removeDataSoundListener(DataSoundListener listener) {
+	public synchronized void removeDataSoundListener(final DataSoundListener listener) {
 		listenerList.remove(DataSoundListener.class, listener);
 	}
 
@@ -257,9 +260,10 @@ public class SoundRecorder implements DataSoundListener {
 	 */
 
 	private void fireRMSAvailabe() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == DataSoundListener.class) {
 				((DataSoundListener) listeners[i + 1]).rmsAvailable();

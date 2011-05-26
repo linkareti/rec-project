@@ -11,10 +11,14 @@ package com.linkare.rec.impl.client.chat;
  * @author André Neto - LEFT - IST
  */
 public class ChatConnectionEvent extends java.util.EventObject {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -553175236398899773L;
 	private boolean connect = false;
-	private String newRoomName = "";
+	private final String newRoomName = "";
 
-	public ChatConnectionEvent(Object source, boolean connect) {
+	public ChatConnectionEvent(final Object source, final boolean connect) {
 		super(source);
 		this.connect = connect;
 	}

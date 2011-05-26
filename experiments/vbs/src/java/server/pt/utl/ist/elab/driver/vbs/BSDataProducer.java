@@ -22,7 +22,7 @@ import com.linkare.rec.impl.data.PhysicsValFactory;
 
 public class BSDataProducer extends VirtualBaseDataSource {
 	// O numero de canais(de dados) que existem!
-	private int NUM_CHANNELS = 7;
+	private final int NUM_CHANNELS = 7;
 
 	private double i1_ini = 0.6;
 	private double i1_fin = -0.2;
@@ -34,10 +34,14 @@ public class BSDataProducer extends VirtualBaseDataSource {
 
 	private static final double u0 = 4 * Math.PI * Math.pow(10, -7);
 
-	private double i1, i2, x1, x2, tempo = 0, bpto, b1, b2, r1, r2;
+	private double i1, i2;
 
-	private GridPointData grelha;
-	private double[][][] data;
+	private final double x1, x2;
+
+	private double tempo = 0, bpto, b1, b2, r1, r2;
+
+	private final GridPointData grelha;
+	private final double[][][] data;
 
 	private int tbs = 300;
 	private int nSamples = 26;
@@ -46,8 +50,9 @@ public class BSDataProducer extends VirtualBaseDataSource {
 	private VirtualBaseDriver driver = null;
 
 	// Aproveitamos para inicializar todas as variaveis logo no construtor...
-	public BSDataProducer(VirtualBaseDriver driver, double i1_ini, double i1_fin, double i2_ini, double i2_fin,
-			double dist, double xpto, double ypto, int tbs, int nSamples) {
+	public BSDataProducer(final VirtualBaseDriver driver, final double i1_ini, final double i1_fin,
+			final double i2_ini, final double i2_fin, final double dist, final double xpto, final double ypto,
+			final int tbs, final int nSamples) {
 		this.driver = driver;
 		this.i1_ini = i1_ini;
 		this.i1_fin = i1_fin;
@@ -67,8 +72,8 @@ public class BSDataProducer extends VirtualBaseDataSource {
 		r1 = calcDist(x1, 0, xpto, ypto);
 		r2 = calcDist(x2, 0, xpto, ypto);
 
-		b1 = ((u0 * i1) / 2 * Math.PI * r1);
-		b2 = ((u0 * i2) / 2 * Math.PI * r2);
+		b1 = ((BSDataProducer.u0 * i1) / 2 * Math.PI * r1);
+		b2 = ((BSDataProducer.u0 * i2) / 2 * Math.PI * r2);
 		bpto = b1 + b2;
 
 		grelha = new GridPointData(10, 10, 3);
@@ -77,7 +82,7 @@ public class BSDataProducer extends VirtualBaseDataSource {
 		data = grelha.getData();
 	}
 
-	public double calcDist(double _x1, double _y1, double _x2, double _y2) {
+	public double calcDist(final double _x1, final double _y1, final double _x2, final double _y2) {
 		return Math.sqrt(Math.pow((_x2 - _x1), 2) + Math.pow((_y2 - _y1), 2));
 	}
 
@@ -86,9 +91,10 @@ public class BSDataProducer extends VirtualBaseDataSource {
 	private class ProducerThread extends Thread {
 		private int currentSample = 0;
 
+		@Override
 		public void run() {
 			try {
-				sleep(1000);
+				Thread.sleep(1000);
 
 				// Enquanto a amostra actual for menor do que o numero de
 				// amostras pedido pelo cliente E ninguem tiver parado a
@@ -98,20 +104,22 @@ public class BSDataProducer extends VirtualBaseDataSource {
 					r1 = calcDist(x1, 0, xpto, ypto);
 					r2 = calcDist(x2, 0, xpto, ypto);
 
-					b1 = ((u0 * i1) / 2 * Math.PI * r1);
-					b2 = ((u0 * i2) / 2 * Math.PI * r2);
+					b1 = ((BSDataProducer.u0 * i1) / 2 * Math.PI * r1);
+					b2 = ((BSDataProducer.u0 * i2) / 2 * Math.PI * r2);
 					bpto = b1 + b2;
 
 					for (int i = 0; i < data.length; i++) {
 						for (int j = 0; j < data[0].length; j++) {
-							double x = data[i][j][0] / 100.0; // the x location
-							double y = data[i][j][1] / 100.0; // the y location
+							final double x = data[i][j][0] / 100.0; // the x
+																	// location
+							final double y = data[i][j][1] / 100.0; // the y
+																	// location
 
 							r1 = calcDist(x1, 0, x, y); // distance to wire 1
 							r2 = calcDist(x2, 0, x, y); // distance to wire 2
 
-							b1 = (u0 * i1) / (2 * Math.PI * r1);
-							b2 = (u0 * i2) / (2 * Math.PI * r2);
+							b1 = (BSDataProducer.u0 * i1) / (2 * Math.PI * r1);
+							b2 = (BSDataProducer.u0 * i2) / (2 * Math.PI * r2);
 
 							double ra1 = Math.atan((y) / (x1 - x));
 							double gamma1 = 0;
@@ -151,7 +159,7 @@ public class BSDataProducer extends VirtualBaseDataSource {
 
 					// envia as amostra calculadas!
 					// 1- cria um array com o numero de canais existentes!
-					PhysicsValue[] value = new PhysicsValue[NUM_CHANNELS];
+					final PhysicsValue[] value = new PhysicsValue[NUM_CHANNELS];
 
 					// envia no canal CORRESPONDENTE!!! o valor
 					value[0] = new PhysicsValue(PhysicsValFactory.fromFloat((float) tempo), getAcquisitionHeader()
@@ -183,7 +191,7 @@ public class BSDataProducer extends VirtualBaseDataSource {
 					i2 += (i2_fin - i2_ini) / nSamples;
 
 					// dorme o tbs que o utilizador pediu...
-					sleep(tbs);
+					Thread.sleep(tbs);
 
 					currentSample++;
 				}
@@ -191,11 +199,12 @@ public class BSDataProducer extends VirtualBaseDataSource {
 				endProduction();
 
 				driver.stopVirtualHardware();
-			} catch (InterruptedException ie) {
+			} catch (final InterruptedException ie) {
 			}
 		}
 	}
 
+	@Override
 	public void startProduction() {
 		stopped = false;
 		new ProducerThread().start();
@@ -206,13 +215,14 @@ public class BSDataProducer extends VirtualBaseDataSource {
 		setDataSourceEnded();
 	}
 
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 		/*
 		 * DPendulumDataProducer dp = new DPendulumDataProducer(null,90, 90, 10,
 		 * 0, 0.5f, 1.5f, 0.3f, 0.5f, 10, 10000); dp.startProduction();
 		 */
 	}
 
+	@Override
 	public void stopNow() {
 		stopped = true;
 		setDataSourceStoped();

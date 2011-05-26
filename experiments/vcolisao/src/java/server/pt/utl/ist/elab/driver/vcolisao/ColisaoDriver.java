@@ -31,9 +31,9 @@ public class ColisaoDriver extends VirtualBaseDriver {
 	// caso!
 	private static String COLISAO_DRIVER_LOGGER = "Colisao.Logger";
 	static {
-		Logger l = LogManager.getLogManager().getLogger(COLISAO_DRIVER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ColisaoDriver.COLISAO_DRIVER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(COLISAO_DRIVER_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ColisaoDriver.COLISAO_DRIVER_LOGGER));
 		}
 	}
 
@@ -50,35 +50,38 @@ public class ColisaoDriver extends VirtualBaseDriver {
 	public ColisaoDriver() {
 	}
 
-	public void config(HardwareAcquisitionConfig config, HardwareInfo info) throws IncorrectStateException,
+	@Override
+	public void config(final HardwareAcquisitionConfig config, final HardwareInfo info) throws IncorrectStateException,
 			WrongConfigurationException {
 		fireIDriverStateListenerDriverConfiguring();
 		info.validateConfig(config);
 		extraValidateConfig(config, info);
 		try {
 			configure(config, info);
-		} catch (Exception e) {
-			LoggerUtil.logThrowable("Error on config...", e, Logger.getLogger(COLISAO_DRIVER_LOGGER));
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable("Error on config...", e, Logger.getLogger(ColisaoDriver.COLISAO_DRIVER_LOGGER));
 			throw new WrongConfigurationException();
 		}
 	}
 
-	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException {
+	@Override
+	public void configure(final HardwareAcquisitionConfig config, final HardwareInfo info)
+			throws WrongConfigurationException {
 		// Recebemos ordem para configurar, no HardwareAcquisitionConfig estao
 		// todas as informacoes escolhidas pelo cliente...agora e' so' pedir
 		this.config = config;
 		this.info = info;
 
-		float v1 = Float.parseFloat(config.getSelectedHardwareParameterValue("v1"));
-		float m1 = Float.parseFloat(config.getSelectedHardwareParameterValue("m1"));
-		float r1 = Float.parseFloat(config.getSelectedHardwareParameterValue("r1"));
-		float v2 = Float.parseFloat(config.getSelectedHardwareParameterValue("v1"));
-		float m2 = Float.parseFloat(config.getSelectedHardwareParameterValue("m1"));
-		float r2 = Float.parseFloat(config.getSelectedHardwareParameterValue("r2"));
-		int a = Integer.parseInt(config.getSelectedHardwareParameterValue("a"));
-		int elasticCollision = Integer.parseInt(config.getSelectedHardwareParameterValue("elasticCollision"));
-		int tbs = (int) config.getSelectedFrequency().getFrequency();
-		int nSamples = config.getTotalSamples();
+		final float v1 = Float.parseFloat(config.getSelectedHardwareParameterValue("v1"));
+		final float m1 = Float.parseFloat(config.getSelectedHardwareParameterValue("m1"));
+		final float r1 = Float.parseFloat(config.getSelectedHardwareParameterValue("r1"));
+		final float v2 = Float.parseFloat(config.getSelectedHardwareParameterValue("v1"));
+		final float m2 = Float.parseFloat(config.getSelectedHardwareParameterValue("m1"));
+		final float r2 = Float.parseFloat(config.getSelectedHardwareParameterValue("r2"));
+		final int a = Integer.parseInt(config.getSelectedHardwareParameterValue("a"));
+		final int elasticCollision = Integer.parseInt(config.getSelectedHardwareParameterValue("elasticCollision"));
+		final int tbs = (int) config.getSelectedFrequency().getFrequency();
+		final int nSamples = config.getTotalSamples();
 
 		// Vamos criar o nosso produtor de dados!
 		dataSource = new ColisaoDataProducer(this, v1, v2, r1, r2, m1, m2, a, elasticCollision, tbs, nSamples);
@@ -94,10 +97,12 @@ public class ColisaoDriver extends VirtualBaseDriver {
 		fireIDriverStateListenerDriverConfigured();
 	}
 
+	@Override
 	public String getDriverUniqueID() {
-		return DRIVER_UNIQUE_ID;
+		return ColisaoDriver.DRIVER_UNIQUE_ID;
 	}
 
+	@Override
 	public void shutdown() {
 		if (dataSource != null) {
 			dataSource.stopNow();
@@ -105,37 +110,42 @@ public class ColisaoDriver extends VirtualBaseDriver {
 		super.shutDownNow();
 	}
 
-	public IDataSource start(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public IDataSource start(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverStarting();
 		dataSource.startProduction();
 		fireIDriverStateListenerDriverStarted();
 		return dataSource;
 	}
 
-	public void stop(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public void stop(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverStoping();
 		dataSource.stopNow();
 		fireIDriverStateListenerDriverStoped();
 	}
 
+	@Override
 	public Object getHardwareInfo() {
 		fireIDriverStateListenerDriverReseting();
-		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+				+ "/HardwareInfo.xml";
 		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
-		if (prop.indexOf("://") == -1)
+		if (prop.indexOf("://") == -1) {
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
+		}
 
 		java.net.URL url = null;
 		try {
 			url = ReCProtocols.getURL(prop);
-		} catch (java.net.MalformedURLException e) {
+		} catch (final java.net.MalformedURLException e) {
 			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger("Colisao"));
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
-			} catch (java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2, Logger
-						.getLogger("Colisao"));
+			} catch (final java.net.MalformedURLException e2) {
+				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
+						Logger.getLogger("Colisao"));
 			}
 		}
 		fireIDriverStateListenerDriverReseted();

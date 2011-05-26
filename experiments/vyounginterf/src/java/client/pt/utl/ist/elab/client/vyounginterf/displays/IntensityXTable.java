@@ -14,6 +14,11 @@ import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
  */
 public class IntensityXTable extends MultSeriesTable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7456068659800144418L;
+
 	/** Creates a new instance of ItensityXTable */
 	public IntensityXTable() {
 		super();

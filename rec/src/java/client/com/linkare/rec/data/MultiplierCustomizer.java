@@ -34,7 +34,8 @@ public class MultiplierCustomizer extends javax.swing.JPanel implements java.bea
 		tagsList = new javax.swing.JComboBox(multiplierEditor.getTags());
 
 		multiplierEditor.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-			public void propertyChange(java.beans.PropertyChangeEvent evt) {
+			@Override
+			public void propertyChange(final java.beans.PropertyChangeEvent evt) {
 				multiplierEditorPropertyChange(evt);
 			}
 		});
@@ -47,10 +48,10 @@ public class MultiplierCustomizer extends javax.swing.JPanel implements java.bea
 		jLabel1.setText("Altere aqui o multiplicador");
 		add(jLabel1);
 
-		tagsList
-				.setForeground((java.awt.Color) javax.swing.UIManager.getDefaults().get("ComboBox.selectionBackground"));
+		tagsList.setForeground((java.awt.Color) javax.swing.UIManager.getDefaults().get("ComboBox.selectionBackground"));
 		tagsList.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				tagsListActionPerformed(evt);
 			}
 		});
@@ -59,23 +60,24 @@ public class MultiplierCustomizer extends javax.swing.JPanel implements java.bea
 
 	}// GEN-END:initComponents
 
-	private void multiplierEditorPropertyChange(java.beans.PropertyChangeEvent evt)// GEN-FIRST:event_multiplierEditorPropertyChange
+	private void multiplierEditorPropertyChange(final java.beans.PropertyChangeEvent evt)// GEN-FIRST:event_multiplierEditorPropertyChange
 	{// GEN-HEADEREND:event_multiplierEditorPropertyChange
 		if (mybean != null) {
-			Byte oldValue = new Byte(mybean.getValue());
+			final Byte oldValue = new Byte(mybean.getValue());
 			mybean.setValue(((Multiplier) multiplierEditor.getValue()).getValue());
 			firePropertyChange("value", oldValue, new Byte(mybean.getValue()));
 		}
 	}// GEN-LAST:event_multiplierEditorPropertyChange
 
-	private void tagsListActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_tagsListActionPerformed
+	private void tagsListActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_tagsListActionPerformed
 	{// GEN-HEADEREND:event_tagsListActionPerformed
 		multiplierEditor.setAsText((String) tagsList.getSelectedItem());
 	}// GEN-LAST:event_tagsListActionPerformed
 
 	private Multiplier mybean = null;
 
-	public synchronized void setObject(Object obj) {
+	@Override
+	public synchronized void setObject(final Object obj) {
 
 		if (java.beans.Beans.isInstanceOf(obj, Multiplier.class)) {
 			mybean = (Multiplier) java.beans.Beans.getInstanceOf(obj, Multiplier.class);

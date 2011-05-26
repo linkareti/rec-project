@@ -6,18 +6,21 @@ public final class TimeHolder implements org.omg.CORBA.portable.Streamable {
 	public TimeHolder() {
 	}
 
-	public TimeHolder(com.linkare.rec.data.synch.Time initialValue) {
+	public TimeHolder(final com.linkare.rec.data.synch.Time initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(org.omg.CORBA.portable.InputStream i) {
+	@Override
+	public void _read(final org.omg.CORBA.portable.InputStream i) {
 		value = com.linkare.rec.data.synch.TimeHelper.read(i);
 	}
 
-	public void _write(org.omg.CORBA.portable.OutputStream o) {
+	@Override
+	public void _write(final org.omg.CORBA.portable.OutputStream o) {
 		com.linkare.rec.data.synch.TimeHelper.write(o, value);
 	}
 
+	@Override
 	public org.omg.CORBA.TypeCode _type() {
 		return com.linkare.rec.data.synch.TimeHelper.type();
 	}

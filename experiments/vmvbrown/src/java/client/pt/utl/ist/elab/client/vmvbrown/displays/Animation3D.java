@@ -38,13 +38,17 @@ import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
  */
 public class Animation3D extends DrawingPanel3D implements ActionListener, MouseListener, BrownMovement {
 
-	private String actionStr = java.util.ResourceBundle.getBundle(
-			"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-			"rec.exp.displays.animation.actionStr");
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8767728989605971607L;
+
+	private String actionStr = java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
+			.getString("rec.exp.displays.animation.actionStr");
 
 	private pt.utl.ist.elab.client.virtual.guipack.PopupMenu viewPopMenu;
 
-	private boolean isConnectedTrail = false, closeUp = false;
+	private final boolean isConnectedTrail = false, closeUp = false;
 
 	private int numPart;
 
@@ -52,9 +56,9 @@ public class Animation3D extends DrawingPanel3D implements ActionListener, Mouse
 	private InteractiveSphere[] parts;
 
 	/** Creates a new instance of Animation3D */
-	public Animation3D(int display) {
+	public Animation3D(final int display) {
 		super(display);
-		setDecorationType(DECORATION_AXES);
+		setDecorationType(DrawingPanel3D.DECORATION_AXES);
 		setPreferredMinMax(-5, 5, -5, 5, -5, 5);
 		addMouseListener(this);
 		buildPopupMenu();
@@ -62,77 +66,80 @@ public class Animation3D extends DrawingPanel3D implements ActionListener, Mouse
 
 	private void buildPopupMenu() {
 		viewPopMenu = new pt.utl.ist.elab.client.virtual.guipack.PopupMenu(this);
-		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/movproj/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.title.1"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/movproj/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.tip.1"));
-		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/movproj/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.title.2"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/movproj/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.tip.2"));
-		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/movproj/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.title.3"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/movproj/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.tip.3"));
-		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/movproj/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.title.4"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/movproj/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.tip.4"));
-		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/movproj/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.title.15"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/movproj/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.tip.15"));
-		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/movproj/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.title.16"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/movproj/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.tip.16"));
-		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/movproj/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.title.6"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/movproj/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.tip.6"));
-		viewPopMenu.addCheckBoxItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.title.7"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.tip.7"), true);
-		viewPopMenu.addCheckBoxItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.title.9"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.tip.9"), true);
-		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.title.10"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-				"rec.exp.customizer.viewMenu.tip.10"));
-		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.displays.save"),
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
-						.getString("rec.exp.displays.save.tip"));
-		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.displays.print"),
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
-						.getString("rec.exp.displays.print.tip"));
+		viewPopMenu.addItem(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/movproj/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.1"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/movproj/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.tip.1"));
+		viewPopMenu.addItem(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/movproj/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.2"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/movproj/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.tip.2"));
+		viewPopMenu.addItem(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/movproj/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.3"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/movproj/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.tip.3"));
+		viewPopMenu.addItem(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/movproj/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.4"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/movproj/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.tip.4"));
+		viewPopMenu.addItem(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/movproj/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.15"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/movproj/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.tip.15"));
+		viewPopMenu.addItem(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/movproj/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.16"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/movproj/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.tip.16"));
+		viewPopMenu.addItem(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/movproj/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.6"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/movproj/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.tip.6"));
+		viewPopMenu.addCheckBoxItem(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.7"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.tip.7"), true);
+		viewPopMenu.addCheckBoxItem(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.9"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.tip.9"), true);
+		viewPopMenu.addItem(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.10"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.tip.10"));
+		viewPopMenu.addItem(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.displays.save"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.displays.save.tip"));
+		viewPopMenu.addItem(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.displays.print"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.displays.print.tip"));
 		((JCheckBoxMenuItem) viewPopMenu.getComponent(8)).setEnabled(false);
 	}
 
-	protected void paintEverything(java.awt.Graphics g) {
+	@Override
+	protected void paintEverything(final java.awt.Graphics g) {
 		if (dimensionSetter != null) {
-			java.awt.Dimension interiorDimension = dimensionSetter.getInterior(this);
+			final java.awt.Dimension interiorDimension = dimensionSetter.getInterior(this);
 			if (interiorDimension != null) {
 				squareAspect = false;
 				leftGutter = rightGutter = Math.max(0, getWidth() - interiorDimension.width) / 2;
 				topGutter = bottomGutter = Math.max(0, getHeight() - interiorDimension.height) / 2;
 			}
 		}
-		java.util.ArrayList tempList = getDrawables();
+		final java.util.ArrayList tempList = getDrawables();
 		scale(tempList);
 		setPixelScale();
 		g.setColor(getBackground());
@@ -144,128 +151,141 @@ public class Animation3D extends DrawingPanel3D implements ActionListener, Mouse
 		g.drawString(actionStr, 5, getHeight() - 10);
 	}
 
-	public void actionPerformed(ActionEvent e) {
+	@Override
+	public void actionPerformed(final ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
-						.getString("rec.exp.customizer.viewMenu.title.1"))) {
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.1"))) {
 			setAlphaAndBeta(-Math.PI / 2, Math.PI / 2);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
-						.getString("rec.exp.customizer.viewMenu.title.2"))) {
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.2"))) {
 			if (getZoom() != 1) {
 				setZoom(1);
 				repaint();
 			}
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
-						.getString("rec.exp.customizer.viewMenu.title.3"))) {
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.3"))) {
 			if (getZoom() != .5) {
 				setZoom(.5);
 				repaint();
 			}
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
-						.getString("rec.exp.customizer.viewMenu.title.4"))) {
-			this.setDisplayMode(this.DISPLAY_PLANAR_XY);
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.4"))) {
+			setDisplayMode(DrawingPanel3D.DISPLAY_PLANAR_XY);
 			setPan(0, 0);
 			setZoom(1);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
-						.getString("rec.exp.customizer.viewMenu.title.15"))) {
-			this.setDisplayMode(this.DISPLAY_PLANAR_XZ);
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.15"))) {
+			setDisplayMode(DrawingPanel3D.DISPLAY_PLANAR_XZ);
 			setPan(0, 0);
 			setZoom(1);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
-						.getString("rec.exp.customizer.viewMenu.title.16"))) {
-			this.setDisplayMode(this.DISPLAY_PLANAR_YZ);
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.16"))) {
+			setDisplayMode(DrawingPanel3D.DISPLAY_PLANAR_YZ);
 			setPan(0, 0);
 			setZoom(1);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
-						.getString("rec.exp.customizer.viewMenu.title.6"))) {
-			this.setDisplayMode(this.DISPLAY_NO_PERSPECTIVE);
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.6"))) {
+			setDisplayMode(DrawingPanel3D.DISPLAY_NO_PERSPECTIVE);
 			setPan(0, 0);
 			setZoom(1);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
-						.getString("rec.exp.customizer.viewMenu.title.7"))) {
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.7"))) {
 			setParticlesVisibility(((javax.swing.JMenuItem) e.getSource()).isSelected());
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
-						.getString("rec.exp.customizer.viewMenu.title.9"))) {
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.9"))) {
 			avgPos.setVisible(((javax.swing.JMenuItem) e.getSource()).isSelected());
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
-						.getString("rec.exp.customizer.viewMenu.title.10")))
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.customizer.viewMenu.title.10"))) {
 			avgPos.clear();
-		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
-						.getString("rec.exp.displays.save")))
+		} else if (e.getActionCommand().equalsIgnoreCase(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.displays.save"))) {
 			try {
 				doSaveAs();
-			} catch (IOException io) {
+			} catch (final IOException io) {
 			}
-		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
-						.getString("rec.exp.displays.print")))
+		} else if (e.getActionCommand().equalsIgnoreCase(
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
+						"rec.exp.displays.print"))) {
 			createChartPrintJob();
+		}
 	}
 
-	private void setParticlesVisibility(boolean visible) {
-		for (int i = 0; i < parts.length; i++)
-			parts[i].setVisible(visible);
+	private void setParticlesVisibility(final boolean visible) {
+		for (final InteractiveSphere part : parts) {
+			part.setVisible(visible);
+		}
 	}
 
-	public void mouseClicked(MouseEvent e) {
+	@Override
+	public void mouseClicked(final MouseEvent e) {
 		if (javax.swing.SwingUtilities.isRightMouseButton(e)) {
 			actionStr = "";
 			viewPopMenu.show(e.getComponent(), e.getX(), e.getY());
 		}
 	}
 
-	public void mouseEntered(MouseEvent e) {
+	@Override
+	public void mouseEntered(final MouseEvent e) {
 	}
 
-	public void mouseExited(MouseEvent e) {
+	@Override
+	public void mouseExited(final MouseEvent e) {
 	}
 
-	public void mousePressed(MouseEvent e) {
+	@Override
+	public void mousePressed(final MouseEvent e) {
 	}
 
-	public void mouseReleased(MouseEvent e) {
+	@Override
+	public void mouseReleased(final MouseEvent e) {
 	}
 
-	public void moves(byte[] mv) {
-		float[] mvf = ByteUtil.byteArrayToFloatArray(mv);
+	@Override
+	public void moves(final byte[] mv) {
+		final float[] mvf = ByteUtil.byteArrayToFloatArray(mv);
 
-		double[] med = new double[3];
+		final double[] med = new double[3];
 
-		if (avgPos.isVisible() || (parts != null && parts[0].isVisible()))
+		if (avgPos.isVisible() || (parts != null && parts[0].isVisible())) {
 			for (int i = 0; i < numPart; i++) {
-				if (parts != null && parts[0].isVisible())
+				if (parts != null && parts[0].isVisible()) {
 					parts[i].setXYZ(mvf[i] / 10d, mvf[i + 1] / 10d, mvf[i + 2] / 10d);
+				}
 				if (avgPos.isVisible()) {
 					med[0] += mvf[i];
 					med[1] += mvf[i + 1];
 					med[2] += mvf[i + 2];
 				}
 			}
-		if (avgPos.isVisible())
+		}
+		if (avgPos.isVisible()) {
 			avgPos.addPoint(med[0] / numPart, med[1] / numPart, med[2] / numPart);
+		}
 
 		repaint();
 
 	}
 
-	public void config(int _numPart, byte _animaRadius, java.awt.Color _cor) {
+	@Override
+	public void config(final int _numPart, final byte _animaRadius, final java.awt.Color _cor) {
 		if (_numPart <= 30) {
 			parts = new InteractiveSphere[_numPart];
 
@@ -273,8 +293,7 @@ public class Animation3D extends DrawingPanel3D implements ActionListener, Mouse
 				parts[i] = new InteractiveSphere();
 				parts[i].getStyle().setEdgeColor(_cor);
 				parts[i].getStyle().setFillPattern(null);
-				parts[i].setSizeXYZ((double) _animaRadius / 10d, (double) _animaRadius / 10d,
-						(double) _animaRadius / 10d);
+				parts[i].setSizeXYZ(_animaRadius / 10d, _animaRadius / 10d, _animaRadius / 10d);
 				addDrawable(parts[i]);
 			}
 			((JCheckBoxMenuItem) viewPopMenu.getComponent(8)).setEnabled(true);
@@ -291,13 +310,12 @@ public class Animation3D extends DrawingPanel3D implements ActionListener, Mouse
 
 	public void doSaveAs() throws IOException {
 
-		JFileChooser fileChooser = new JFileChooser();
-		org.jfree.ui.ExtensionFileFilter filter = new org.jfree.ui.ExtensionFileFilter(java.util.ResourceBundle
-				.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-						"PNG_Image_Files"), ".png");
+		final JFileChooser fileChooser = new JFileChooser();
+		final org.jfree.ui.ExtensionFileFilter filter = new org.jfree.ui.ExtensionFileFilter(java.util.ResourceBundle
+				.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("PNG_Image_Files"), ".png");
 		fileChooser.addChoosableFileFilter(filter);
 
-		int option = fileChooser.showSaveDialog(this);
+		final int option = fileChooser.showSaveDialog(this);
 		if (option == JFileChooser.APPROVE_OPTION) {
 			String filename = fileChooser.getSelectedFile().getPath();
 
@@ -305,7 +323,7 @@ public class Animation3D extends DrawingPanel3D implements ActionListener, Mouse
 				filename = filename + ".png";
 			}
 
-			OutputStream out = new BufferedOutputStream(new FileOutputStream(new File(filename)));
+			final OutputStream out = new BufferedOutputStream(new FileOutputStream(new File(filename)));
 
 			EncoderUtil.writeBufferedImage(render(), ImageFormat.PNG, out);
 			out.close();
@@ -314,15 +332,15 @@ public class Animation3D extends DrawingPanel3D implements ActionListener, Mouse
 	}
 
 	public void createChartPrintJob() {
-		PrinterJob job = PrinterJob.getPrinterJob();
-		PageFormat pf = job.defaultPage();
-		PageFormat pf2 = job.pageDialog(pf);
+		final PrinterJob job = PrinterJob.getPrinterJob();
+		final PageFormat pf = job.defaultPage();
+		final PageFormat pf2 = job.pageDialog(pf);
 		if (pf2 != pf) {
 			job.setPrintable(this, pf2);
 			if (job.printDialog()) {
 				try {
 					job.print();
-				} catch (PrinterException e) {
+				} catch (final PrinterException e) {
 					JOptionPane.showMessageDialog(this, e);
 				}
 			}

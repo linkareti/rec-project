@@ -13,13 +13,13 @@ import com.linkare.rec.impl.threading.util.EnumPriority;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class HardwareAddEvt implements Prioritazible{
+public class HardwareAddEvt implements Prioritazible {
 
 	/** Holds value of property hardware. */
-	private Hardware hardware;
+	private final Hardware hardware;
 
 	/** Creates a new instance of HardwareAddEvt */
-	public HardwareAddEvt(Hardware hardware) {
+	public HardwareAddEvt(final Hardware hardware) {
 		this.hardware = hardware;
 	}
 
@@ -29,7 +29,7 @@ public class HardwareAddEvt implements Prioritazible{
 	 * @return Value of property hardware.
 	 */
 	public Hardware getHardware() {
-		return this.hardware;
+		return hardware;
 	}
 
 	/**

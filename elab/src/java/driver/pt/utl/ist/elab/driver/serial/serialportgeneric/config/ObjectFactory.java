@@ -186,8 +186,8 @@ public class ObjectFactory {
 	 * 
 	 */
 	@XmlElementDecl(namespace = "", name = "comment")
-	public JAXBElement<String> createComment(String value) {
-		return new JAXBElement<String>(_Comment_QNAME, String.class, null, value);
+	public JAXBElement<String> createComment(final String value) {
+		return new JAXBElement<String>(ObjectFactory._Comment_QNAME, String.class, null, value);
 	}
 
 	/**
@@ -196,8 +196,8 @@ public class ObjectFactory {
 	 * 
 	 */
 	@XmlElementDecl(namespace = "", name = "hardware")
-	public JAXBElement<HardwareNode> createHardware(HardwareNode value) {
-		return new JAXBElement<HardwareNode>(_Hardware_QNAME, HardwareNode.class, null, value);
+	public JAXBElement<HardwareNode> createHardware(final HardwareNode value) {
+		return new JAXBElement<HardwareNode>(ObjectFactory._Hardware_QNAME, HardwareNode.class, null, value);
 	}
 
 }

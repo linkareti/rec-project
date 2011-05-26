@@ -52,12 +52,17 @@ import com.linkare.rec.impl.utils.DataCollector;
 import com.linkare.rec.impl.utils.ORBBean;
 
 public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener, ExpHistoryDisplayFactory {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5857575400723174598L;
+
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ReCBaseUI.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ReCBaseUI.UI_CLIENT_LOGGER));
 		}
 	}
 
@@ -78,12 +83,12 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 
 	private java.util.TimerTask lockerTask = null;
 
-	private java.util.Timer timerLock = new java.util.Timer();
+	private final java.util.Timer timerLock = new java.util.Timer();
 
 	// Stores the already added Offline Apparatus Displays
 	private java.util.ArrayList<JInternalFrame> offlineApparatusDisplaysList = null;
 
-	private Object synch = new Object();
+	private final Object synch = new Object();
 
 	public static final String USER_NAME_PREF = "rec.user.name";
 	public static final String USER_PASS_PREF = "rec.user.pass";
@@ -106,19 +111,22 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		// Check the user preferences...
 		preferences = Preferences.userRoot().userNodeForPackage(ReCBaseUI.class);
 
-		String username = preferences.get(USER_NAME_PREF, System.getProperty("user.name"));
-		String pass = preferences.get(USER_PASS_PREF, System.getProperty("user.name"));
+		final String username = preferences.get(ReCBaseUI.USER_NAME_PREF, System.getProperty("user.name"));
+		final String pass = preferences.get(ReCBaseUI.USER_PASS_PREF, System.getProperty("user.name"));
 		loginFrame.setUsername(username);
 		loginFrame.setPassword(pass);
 		// end users prefs
 
 		tips = new TipFactory();
 
-		if (recBaseUI.getDesktopLocationBundleKey() != null)
-			mDIDesktopPane.setBackgroundImage(ReCResourceBundle.findImageIconOrDefault(
-					recBaseUI.getDesktopLocationBundleKey(),
-					new ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/about_box.png")))
-					.getImage(), true);
+		if (recBaseUI.getDesktopLocationBundleKey() != null) {
+			mDIDesktopPane.setBackgroundImage(
+					ReCResourceBundle.findImageIconOrDefault(
+							recBaseUI.getDesktopLocationBundleKey(),
+							new ImageIcon(getClass()
+									.getResource("/com/linkare/rec/impl/baseUI/resources/about_box.png"))).getImage(),
+					true);
+		}
 		setIconImage(ReCResourceBundle.findImageIconOrDefault(recBaseUI.getIconLocationBundleKey(),
 				new ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/ReCIconHand16.gif")))
 				.getImage());
@@ -151,11 +159,13 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		 * loginFrame.setPassword(recBaseUI.getPassword());
 		 */
 
-		if (recBaseUI.getFrameTitle() != null)
+		if (recBaseUI.getFrameTitle() != null) {
 			setTitle(recBaseUI.getFrameTitle());
+		}
 
-		if (recBaseUI.getHelpPageURL() != null)
+		if (recBaseUI.getHelpPageURL() != null) {
 			menuBar.setEnableContents(true);
+		}
 
 		if (recBaseUI.isShowChatFrame()) {
 			setShowChatFrame(true);
@@ -197,30 +207,29 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		}
 	}
 
-	public void setVisible(boolean visible) {
+	public void setVisible(final boolean visible) {
 		super.setVisible(visible);
 		if (visible) {
 			if (!recBaseUI.isAutoConnectLab()) {
 				try {
-					java.net.URL url = getClass().getResource(
+					final java.net.URL url = getClass().getResource(
 							ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.tip.icon.url.connecthelp",
 									"/com/linkare/rec/impl/baseUI/resources/earth16.gif"));
-					Point locationConnect = toolBarPanel.getLocationOnScreen();
+					final Point locationConnect = toolBarPanel.getLocationOnScreen();
 					locationConnect.y = locationConnect.y + toolBarPanel.getHeight() / 2;
-					tips
-							.showTipWithTimeout(
-									toolBarPanel,
-									ReCResourceBundle
-											.findStringOrDefault(
-													"ReCBaseUI$rec.bui.lbl.helpConnectBefore",
-													"<html><body bgcolor='#ffffe6' style='padding:5px;'><center><font color='#5a8183'>Click the Connect button<br><img src='")
-											+ url.toExternalForm()
-											+ ReCResourceBundle
-													.findStringOrDefault("ReCBaseUI$rec.bui.lbl.helpConnectAfter",
-															"'><br>double click the apparatus<br>you wish to connect to!</font></center></body></html>"),
-									5000, locationConnect);
-				} catch (Exception e2) {
-					LoggerUtil.logThrowable(e2.getMessage(), e2, Logger.getLogger(UI_CLIENT_LOGGER));
+					tips.showTipWithTimeout(
+							toolBarPanel,
+							ReCResourceBundle
+									.findStringOrDefault(
+											"ReCBaseUI$rec.bui.lbl.helpConnectBefore",
+											"<html><body bgcolor='#ffffe6' style='padding:5px;'><center><font color='#5a8183'>Click the Connect button<br><img src='")
+									+ url.toExternalForm()
+									+ ReCResourceBundle
+											.findStringOrDefault("ReCBaseUI$rec.bui.lbl.helpConnectAfter",
+													"'><br>double click the apparatus<br>you wish to connect to!</font></center></body></html>"),
+							5000, locationConnect);
+				} catch (final Exception e2) {
+					LoggerUtil.logThrowable(e2.getMessage(), e2, Logger.getLogger(ReCBaseUI.UI_CLIENT_LOGGER));
 				}
 			} else {
 				loginFrame.setVisible(true, recBaseUI.isEnableLoginPassword());
@@ -266,119 +275,137 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 
 		labClientBean
 				.addApparatusListSourceListener(new com.linkare.rec.impl.client.apparatus.ApparatusListSourceListener() {
-					public void apparatusListChanged(com.linkare.rec.impl.client.apparatus.ApparatusListChangeEvent evt) {
+					public void apparatusListChanged(
+							final com.linkare.rec.impl.client.apparatus.ApparatusListChangeEvent evt) {
 						labClientBeanApparatusListChanged(evt);
 					}
 				});
 		labClientBean.addLabConnectorListener(new com.linkare.rec.impl.client.lab.LabConnectorListener() {
-			public void labStatusChanged(com.linkare.rec.impl.client.lab.LabConnectorEvent evt) {
+			public void labStatusChanged(final com.linkare.rec.impl.client.lab.LabConnectorEvent evt) {
 				labClientBeanLabStatusChanged(evt);
 			}
 		});
 
 		apparatusClientBean
 				.addApparatusConnectorListener(new com.linkare.rec.impl.client.apparatus.ApparatusConnectorListener() {
-					public void apparatusConnected(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
+					public void apparatusConnected(
+							final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
 						apparatusClientBeanApparatusConnected(evt);
 					}
 
-					public void apparatusConnecting(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
+					public void apparatusConnecting(
+							final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
 						apparatusClientBeanApparatusConnecting(evt);
 					}
 
-					public void apparatusDisconnected(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
+					public void apparatusDisconnected(
+							final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
 						apparatusClientBeanApparatusDisconnected(evt);
 					}
 
-					public void apparatusDisconnecting(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
+					public void apparatusDisconnecting(
+							final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
 						apparatusClientBeanApparatusDisconnecting(evt);
 					}
 
 					public void apparatusIncorrectState(
-							com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
+							final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
 						apparatusClientBeanApparatusIncorrectState(evt);
 					}
 
-					public void apparatusLockable(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
+					public void apparatusLockable(
+							final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
 						apparatusClientBeanApparatusLockable(evt);
 					}
 
-					public void apparatusLocked(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
+					public void apparatusLocked(final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
 						apparatusClientBeanApparatusLocked(evt);
 					}
 
-					public void apparatusMaxUsers(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
+					public void apparatusMaxUsers(
+							final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
 						apparatusClientBeanApparatusMaxUsers(evt);
 					}
 
-					public void apparatusNotAuthorized(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
+					public void apparatusNotAuthorized(
+							final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
 						apparatusClientBeanApparatusNotAuthorized(evt);
 					}
 
-					public void apparatusNotOwner(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
+					public void apparatusNotOwner(
+							final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
 						apparatusClientBeanApparatusNotOwner(evt);
 					}
 
-					public void apparatusNotRegistered(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
+					public void apparatusNotRegistered(
+							final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
 						apparatusClientBeanApparatusNotRegistered(evt);
 					}
 
 					public void apparatusStateConfigError(
-							com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
+							final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
 						apparatusClientBeanApparatusStateConfigError(evt);
 					}
 
 					public void apparatusStateConfigured(
-							com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
+							final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
 						apparatusClientBeanApparatusStateConfigured(evt);
 					}
 
 					public void apparatusStateConfiguring(
-							com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
+							final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
 						apparatusClientBeanApparatusStateConfiguring(evt);
 					}
 
-					public void apparatusStateReseted(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
+					public void apparatusStateReseted(
+							final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
 						apparatusClientBeanApparatusStateReseted(evt);
 					}
 
-					public void apparatusStateReseting(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
+					public void apparatusStateReseting(
+							final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
 						apparatusClientBeanApparatusStateReseting(evt);
 					}
 
-					public void apparatusStateStarted(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
+					public void apparatusStateStarted(
+							final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
 						apparatusClientBeanApparatusStateStarted(evt);
 					}
 
-					public void apparatusStateStarting(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
+					public void apparatusStateStarting(
+							final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
 						apparatusClientBeanApparatusStateStarting(evt);
 					}
 
-					public void apparatusStateStoped(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
+					public void apparatusStateStoped(
+							final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
 						apparatusClientBeanApparatusStateStoped(evt);
 					}
 
-					public void apparatusStateStoping(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
+					public void apparatusStateStoping(
+							final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
 						apparatusClientBeanApparatusStateStoping(evt);
 					}
 
-					public void apparatusStateUnknow(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
+					public void apparatusStateUnknow(
+							final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
 						apparatusClientBeanApparatusStateUnknow(evt);
 					}
 
-					public void apparatusUnreachable(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
+					public void apparatusUnreachable(
+							final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt) {
 						apparatusClientBeanApparatusUnreachable(evt);
 					}
 				});
 
 		loginFrame.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-			public void propertyChange(java.beans.PropertyChangeEvent evt) {
+			public void propertyChange(final java.beans.PropertyChangeEvent evt) {
 				ReCBaseUI.this.propertyChange(evt);
 			}
 		});
 
 		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent evt) {
+			public void windowClosing(final java.awt.event.WindowEvent evt) {
 				exitForm(evt);
 			}
 		});
@@ -389,7 +416,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		toolBarPanel.setSelectHistory(true);
 		toolBarPanel.setSelectUsersList(true);
 		toolBarPanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-			public void propertyChange(java.beans.PropertyChangeEvent evt) {
+			public void propertyChange(final java.beans.PropertyChangeEvent evt) {
 				ReCBaseUI.this.propertyChange(evt);
 			}
 		});
@@ -414,51 +441,52 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		jInternalFrameLabTree.setPreferredSize(new java.awt.Dimension(210, 35));
 		jInternalFrameLabTree.setVisible(true);
 		jInternalFrameLabTree.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-			public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+			public void internalFrameActivated(final javax.swing.event.InternalFrameEvent evt) {
 			}
 
-			public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+			public void internalFrameClosed(final javax.swing.event.InternalFrameEvent evt) {
 			}
 
-			public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+			public void internalFrameClosing(final javax.swing.event.InternalFrameEvent evt) {
 				jInternalFrameLabTreeInternalFrameClosing(evt);
 			}
 
-			public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+			public void internalFrameDeactivated(final javax.swing.event.InternalFrameEvent evt) {
 			}
 
-			public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+			public void internalFrameDeiconified(final javax.swing.event.InternalFrameEvent evt) {
 			}
 
-			public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+			public void internalFrameIconified(final javax.swing.event.InternalFrameEvent evt) {
 			}
 
-			public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+			public void internalFrameOpened(final javax.swing.event.InternalFrameEvent evt) {
 			}
 		});
 
 		laboratoryTree
 				.addTreeSelectionChangeListener(new com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener() {
 					public void defaultConfigSelectionChange(
-							com.linkare.rec.impl.baseUI.labsTree.DefaultConfigSelectionEvent evt) {
+							final com.linkare.rec.impl.baseUI.labsTree.DefaultConfigSelectionEvent evt) {
 						laboratoryTreeDefaultConfigSelectionChange(evt);
 					}
 
-					public void displaySelectionChange(com.linkare.rec.impl.baseUI.labsTree.DisplaySelectionEvent evt) {
+					public void displaySelectionChange(
+							final com.linkare.rec.impl.baseUI.labsTree.DisplaySelectionEvent evt) {
 						laboratoryTreeDisplaySelectionChange(evt);
 					}
 
 					public void webResourceSelectionChange(
-							com.linkare.rec.impl.baseUI.labsTree.WebResourceSelectionEvent evt) {
+							final com.linkare.rec.impl.baseUI.labsTree.WebResourceSelectionEvent evt) {
 						laboratoryTreeWebResourceSelectionChange(evt);
 					}
 
 					public void apparatusSelectionChange(
-							com.linkare.rec.impl.baseUI.labsTree.ApparatusSelectionEvent evt) {
+							final com.linkare.rec.impl.baseUI.labsTree.ApparatusSelectionEvent evt) {
 						laboratoryTreeApparatusSelectionChange(evt);
 					}
 
-					public void labSelectionChange(com.linkare.rec.impl.baseUI.labsTree.LabSelectionEvent evt) {
+					public void labSelectionChange(final com.linkare.rec.impl.baseUI.labsTree.LabSelectionEvent evt) {
 						laboratoryTreeLabSelectionChange(evt);
 					}
 				});
@@ -476,26 +504,26 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		jInternalFrameTabs.setPreferredSize(new java.awt.Dimension(250, 250));
 		jInternalFrameTabs.setVisible(true);
 		jInternalFrameTabs.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-			public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+			public void internalFrameActivated(final javax.swing.event.InternalFrameEvent evt) {
 			}
 
-			public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+			public void internalFrameClosed(final javax.swing.event.InternalFrameEvent evt) {
 			}
 
-			public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+			public void internalFrameClosing(final javax.swing.event.InternalFrameEvent evt) {
 				jInternalFrameTabsInternalFrameClosing(evt);
 			}
 
-			public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+			public void internalFrameDeactivated(final javax.swing.event.InternalFrameEvent evt) {
 			}
 
-			public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+			public void internalFrameDeiconified(final javax.swing.event.InternalFrameEvent evt) {
 			}
 
-			public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+			public void internalFrameIconified(final javax.swing.event.InternalFrameEvent evt) {
 			}
 
-			public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+			public void internalFrameOpened(final javax.swing.event.InternalFrameEvent evt) {
 			}
 		});
 
@@ -503,9 +531,8 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		jTabbedPaneInfoUsers.setPreferredSize(new java.awt.Dimension(250, 250));
 		expHistoryPanelNew.setPreferredSize(new java.awt.Dimension(150, 200));
 		jTabbedPaneInfoUsers
-				.addTab(
-						ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.title.expHistory",
-								"Experiment History"),
+				.addTab(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.title.expHistory",
+						"Experiment History"),
 						ReCResourceBundle.findImageIconOrDefault("ReCBaseUI$rec.bui.icon.experiment", new ImageIcon(
 								getClass().getResource("/com/linkare/rec/impl/baseUI/resources/Experiment16.gif"))),
 						expHistoryPanelNew,
@@ -528,26 +555,26 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		chatFrame.setPreferredSize(new java.awt.Dimension(250, 150));
 		chatFrame.setVisible(true);
 		chatFrame.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-			public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+			public void internalFrameActivated(final javax.swing.event.InternalFrameEvent evt) {
 			}
 
-			public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+			public void internalFrameClosed(final javax.swing.event.InternalFrameEvent evt) {
 			}
 
-			public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+			public void internalFrameClosing(final javax.swing.event.InternalFrameEvent evt) {
 				chatFrameInternalFrameClosing(evt);
 			}
 
-			public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+			public void internalFrameDeactivated(final javax.swing.event.InternalFrameEvent evt) {
 			}
 
-			public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+			public void internalFrameDeiconified(final javax.swing.event.InternalFrameEvent evt) {
 			}
 
-			public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+			public void internalFrameIconified(final javax.swing.event.InternalFrameEvent evt) {
 			}
 
-			public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+			public void internalFrameOpened(final javax.swing.event.InternalFrameEvent evt) {
 			}
 		});
 
@@ -575,7 +602,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		jPanel2.add(statusPanelApparatus, gridBagConstraints);
 
 		controllerPanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-			public void propertyChange(java.beans.PropertyChangeEvent evt) {
+			public void propertyChange(final java.beans.PropertyChangeEvent evt) {
 				ReCBaseUI.this.propertyChange(evt);
 			}
 		});
@@ -586,7 +613,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		jPanel2.add(controllerPanel, gridBagConstraints);
 
 		countDownProgressPanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-			public void propertyChange(java.beans.PropertyChangeEvent evt) {
+			public void propertyChange(final java.beans.PropertyChangeEvent evt) {
 				ReCBaseUI.this.propertyChange(evt);
 			}
 		});
@@ -623,28 +650,29 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 
 		menuBar.setEnableVideo(false);
 		menuBar.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-			public void propertyChange(java.beans.PropertyChangeEvent evt) {
+			public void propertyChange(final java.beans.PropertyChangeEvent evt) {
 				ReCBaseUI.this.propertyChange(evt);
 			}
 		});
 		menuBar.addTreeSelectionChangeListener(new com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener() {
 			public void defaultConfigSelectionChange(
-					com.linkare.rec.impl.baseUI.labsTree.DefaultConfigSelectionEvent evt) {
+					final com.linkare.rec.impl.baseUI.labsTree.DefaultConfigSelectionEvent evt) {
 				menuBarDefaultConfigSelectionChange(evt);
 			}
 
-			public void displaySelectionChange(com.linkare.rec.impl.baseUI.labsTree.DisplaySelectionEvent evt) {
+			public void displaySelectionChange(final com.linkare.rec.impl.baseUI.labsTree.DisplaySelectionEvent evt) {
 				menuBarDisplaySelectionChange(evt);
 			}
 
-			public void webResourceSelectionChange(com.linkare.rec.impl.baseUI.labsTree.WebResourceSelectionEvent evt) {
+			public void webResourceSelectionChange(
+					final com.linkare.rec.impl.baseUI.labsTree.WebResourceSelectionEvent evt) {
 				menuBarWebResourceSelectionChange(evt);
 			}
 
-			public void apparatusSelectionChange(com.linkare.rec.impl.baseUI.labsTree.ApparatusSelectionEvent evt) {
+			public void apparatusSelectionChange(final com.linkare.rec.impl.baseUI.labsTree.ApparatusSelectionEvent evt) {
 			}
 
-			public void labSelectionChange(com.linkare.rec.impl.baseUI.labsTree.LabSelectionEvent evt) {
+			public void labSelectionChange(final com.linkare.rec.impl.baseUI.labsTree.LabSelectionEvent evt) {
 			}
 		});
 
@@ -653,23 +681,24 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		pack();
 	}// GEN-END:initComponents
 
-	private void menuBarWebResourceSelectionChange(com.linkare.rec.impl.baseUI.labsTree.WebResourceSelectionEvent evt)// GEN-FIRST:event_menuBarWebResourceSelectionChange
+	private void menuBarWebResourceSelectionChange(
+			final com.linkare.rec.impl.baseUI.labsTree.WebResourceSelectionEvent evt)// GEN-FIRST:event_menuBarWebResourceSelectionChange
 	{// GEN-HEADEREND:event_menuBarWebResourceSelectionChange
 		laboratoryTreeWebResourceSelectionChange(evt);
 	}// GEN-LAST:event_menuBarWebResourceSelectionChange
 
-	private void menuBarDisplaySelectionChange(com.linkare.rec.impl.baseUI.labsTree.DisplaySelectionEvent evt)// GEN-FIRST:event_menuBarDisplaySelectionChange
+	private void menuBarDisplaySelectionChange(final com.linkare.rec.impl.baseUI.labsTree.DisplaySelectionEvent evt)// GEN-FIRST:event_menuBarDisplaySelectionChange
 	{// GEN-HEADEREND:event_menuBarDisplaySelectionChange
 		laboratoryTreeDisplaySelectionChange(evt);
 	}// GEN-LAST:event_menuBarDisplaySelectionChange
 
 	private void menuBarDefaultConfigSelectionChange(
-			com.linkare.rec.impl.baseUI.labsTree.DefaultConfigSelectionEvent evt)// GEN-FIRST:event_menuBarDefaultConfigSelectionChange
+			final com.linkare.rec.impl.baseUI.labsTree.DefaultConfigSelectionEvent evt)// GEN-FIRST:event_menuBarDefaultConfigSelectionChange
 	{// GEN-HEADEREND:event_menuBarDefaultConfigSelectionChange
 		laboratoryTreeDefaultConfigSelectionChange(evt);
 	}// GEN-LAST:event_menuBarDefaultConfigSelectionChange
 
-	private void propertyChange(java.beans.PropertyChangeEvent evt)// GEN-FIRST:event_propertyChange
+	private void propertyChange(final java.beans.PropertyChangeEvent evt)// GEN-FIRST:event_propertyChange
 	{// GEN-HEADEREND:event_propertyChange
 
 		if (evt.getPropertyName().equals("users")) {
@@ -685,27 +714,28 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 				setConnectLab(false);
 				return;
 			}
-			DisplayNode node = laboratoryTree.getCurrentSelectedNode();
+			final DisplayNode node = laboratoryTree.getCurrentSelectedNode();
 			if (node == null || !(node instanceof Lab)) {
-				String errorMessage = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.error.lab",
+				final String errorMessage = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.error.lab",
 						"Please select a laboratory first!");
-				String title = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.title.info", "Info");
+				final String title = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.title.info", "Info");
 				/*
 				 * JOptionPane.showMessageDialog(this, errorMessage, title,
 				 * JOptionPane.ERROR_MESSAGE);
 				 * toolBarPanel.setSelectConnect(false);
 				 */
-				Lab[] availableLabs = recBaseUI.getLab();
-				String[] options = new String[availableLabs.length];
+				final Lab[] availableLabs = recBaseUI.getLab();
+				final String[] options = new String[availableLabs.length];
 				for (int i = 0; i < availableLabs.length; i++) {
 					options[i] = new String(availableLabs[i].getText());
 				}
-				Object answer = JOptionPane.showInputDialog(this, errorMessage, title, JOptionPane.INFORMATION_MESSAGE,
-						availableLabs[0].getIcon(), options, options[0]);
+				final Object answer = JOptionPane.showInputDialog(this, errorMessage, title,
+						JOptionPane.INFORMATION_MESSAGE, availableLabs[0].getIcon(), options, options[0]);
 				if (answer != null) {
-					for (int i = 0; i < availableLabs.length; i++) {
-						if (availableLabs[i].getText().equals(answer.toString()))
-							currentLab = availableLabs[i];
+					for (final Lab availableLab : availableLabs) {
+						if (availableLab.getText().equals(answer.toString())) {
+							currentLab = availableLab;
+						}
 					}
 				} else {
 					toolBarPanel.setSelectConnect(false);
@@ -725,17 +755,19 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 			aboutDialog.requestFocus();
 		} else if (evt.getPropertyName().equals("customize")) {
 			if (currentCustomizer != null) {
-				if (config == null)
+				if (config == null) {
 					config = currentApparatus.getHardwareInfo().createBaseHardwareAcquisitionConfig();
+				}
 
 				CustomizerUIUtil.InitCustomizer(currentCustomizer, currentApparatus.getHardwareInfo(), config,
 						currentCustomizer).addICustomizerListener(this);
 			}
 		} else if (evt.getPropertyName().equals("progressEnd")) {
-			if (started)
+			if (started) {
 				controllerPanel.setEnableStop(false);
-			else if (customizeDoneOnce)
+			} else if (customizeDoneOnce) {
 				controllerPanel.setEnablePlay(false);
+			}
 
 			if (lockerTask != null) {
 				lockerTask.cancel();
@@ -758,12 +790,12 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 				chatFrame.setUser(new com.linkare.rec.acquisition.UserInfo(loginFrame.getUsername()));
 
 				// save the new preferences...
-				preferences.put(USER_NAME_PREF, loginFrame.getUsername());
-				preferences.put(USER_PASS_PREF, loginFrame.getPassword());
+				preferences.put(ReCBaseUI.USER_NAME_PREF, loginFrame.getUsername());
+				preferences.put(ReCBaseUI.USER_PASS_PREF, loginFrame.getPassword());
 
 				try {
 					preferences.flush();
-				} catch (BackingStoreException bse) {
+				} catch (final BackingStoreException bse) {
 					bse.printStackTrace();
 				}
 			} else {
@@ -780,7 +812,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		}
 	}// GEN-LAST:event_propertyChange
 
-	private void labClientBeanLabStatusChanged(com.linkare.rec.impl.client.lab.LabConnectorEvent evt)// GEN-FIRST:event_labClientBeanLabStatusChanged
+	private void labClientBeanLabStatusChanged(final com.linkare.rec.impl.client.lab.LabConnectorEvent evt)// GEN-FIRST:event_labClientBeanLabStatusChanged
 	{// GEN-HEADEREND:event_labClientBeanLabStatusChanged
 		if (evt.getStatusCode() == LabConnectorEvent.STATUS_UNREACHABLE) {
 			statusPanelLab.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.unreachable",
@@ -789,34 +821,37 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		} else if (evt.getStatusCode() == LabConnectorEvent.STATUS_CONNECTED) {
 			statusPanelLab.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.connected",
 					"Connected"));
-			if (currentLab != null)
+			if (currentLab != null) {
 				currentLab.setEnabled(true);
-			if (waitDialog != null)
+			}
+			if (waitDialog != null) {
 				waitDialog.setVisible(false);
-			if (currentLab.getDesktopLocationBundleKey() != null)
-				mDIDesktopPane.setBackgroundImage(ReCResourceBundle
-						.findImageIconOrDefault(
+			}
+			if (currentLab.getDesktopLocationBundleKey() != null) {
+				mDIDesktopPane.setBackgroundImage(
+						ReCResourceBundle.findImageIconOrDefault(
 								currentLab.getDesktopLocationBundleKey(),
 								new ImageIcon(getClass().getResource(
 										"/com/linkare/rec/impl/baseUI/resources/desktopback.png"))).getImage(), false);
-		} else if (evt.getStatusCode() == LabConnectorEvent.STATUS_CONNECTING)
+			}
+		} else if (evt.getStatusCode() == LabConnectorEvent.STATUS_CONNECTING) {
 			statusPanelLab.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.connecting",
 					"Connecting"));
-		else if (evt.getStatusCode() == LabConnectorEvent.STATUS_DISCONNECTED) {
+		} else if (evt.getStatusCode() == LabConnectorEvent.STATUS_DISCONNECTED) {
 			statusPanelLab.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.disconnected",
 					"Disconnected"));
 			setConnectLab(false);
-		} else if (evt.getStatusCode() == LabConnectorEvent.STATUS_DISCONNECTING)
+		} else if (evt.getStatusCode() == LabConnectorEvent.STATUS_DISCONNECTING) {
 			statusPanelLab.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.disconnecting",
 					"Disconnecting"));
-		else if (evt.getStatusCode() == LabConnectorEvent.STATUS_MAX_USERS) {
-			String errorMessage = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.maxUsers",
+		} else if (evt.getStatusCode() == LabConnectorEvent.STATUS_MAX_USERS) {
+			final String errorMessage = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.maxUsers",
 					"Sorry, the lab is full. Please try again later...");
 			statusPanelLab.setStatus(errorMessage);
 			JOptionPane.showMessageDialog(this, errorMessage);
 			setConnectLab(false);
 		} else if (evt.getStatusCode() == LabConnectorEvent.STATUS_NOT_AUTHORIZED) {
-			String errorMessage = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.notAuthorized",
+			final String errorMessage = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.notAuthorized",
 					"Not authorized, please confirm your login/password and try again!");
 			statusPanelLab.setStatus(errorMessage);
 			JOptionPane.showMessageDialog(this, errorMessage);
@@ -828,24 +863,26 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		}
 	}// GEN-LAST:event_labClientBeanLabStatusChanged
 
-	private void jInternalFrameTabsInternalFrameClosing(javax.swing.event.InternalFrameEvent evt)// GEN-FIRST:event_jInternalFrameTabsInternalFrameClosing
+	private void jInternalFrameTabsInternalFrameClosing(final javax.swing.event.InternalFrameEvent evt)// GEN-FIRST:event_jInternalFrameTabsInternalFrameClosing
 	{// GEN-HEADEREND:event_jInternalFrameTabsInternalFrameClosing
 		setShowHistory(false);
 		setShowUsersList(false);
 	}// GEN-LAST:event_jInternalFrameTabsInternalFrameClosing
 
-	private void labClientBeanApparatusListChanged(com.linkare.rec.impl.client.apparatus.ApparatusListChangeEvent evt)// GEN-FIRST:event_labClientBeanApparatusListChanged
+	private void labClientBeanApparatusListChanged(
+			final com.linkare.rec.impl.client.apparatus.ApparatusListChangeEvent evt)// GEN-FIRST:event_labClientBeanApparatusListChanged
 	{// GEN-HEADEREND:event_labClientBeanApparatusListChanged
 		if (evt != null) {
 			if (evt.getApparatus() != null) {
-				if (currentLab != null)
+				if (currentLab != null) {
 					DisplayTreeNodeUtils.disableAllApparatus(currentLab);
+				}
 
 				if (getApparatusAutoConnectID() != null) {
 					for (int i = 0; i < evt.getApparatus().length; i++) {
-						if (evt.getApparatus()[i].getHardwareInfo().getHardwareUniqueID().equals(
-								getApparatusAutoConnectID())) {
-							com.linkare.rec.impl.baseUI.config.Apparatus app = laboratoryTree
+						if (evt.getApparatus()[i].getHardwareInfo().getHardwareUniqueID()
+								.equals(getApparatusAutoConnectID())) {
+							final com.linkare.rec.impl.baseUI.config.Apparatus app = laboratoryTree
 									.getApparatus(getApparatusAutoConnectID());
 							app.setEnabled(true);
 							laboratoryTreeApparatusSelectionChange(new ApparatusSelectionEvent(this, app));
@@ -853,74 +890,77 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 					}
 				} else {
 					for (int i = 0; i < evt.getApparatus().length; i++) {
-						com.linkare.rec.impl.baseUI.config.Apparatus app = laboratoryTree.getApparatus(evt
+						final com.linkare.rec.impl.baseUI.config.Apparatus app = laboratoryTree.getApparatus(evt
 								.getApparatus()[i].getHardwareInfo().getHardwareUniqueID());
-						if (app == null)
+						if (app == null) {
 							continue;
+						}
 
-						if (!app.isEnabled())
+						if (!app.isEnabled()) {
 							app.setEnabled(true);
+						}
 					}
 
 					if (!showedMessageConnectApparatus) {
 						try {
-							java.net.URL url = getClass().getResource(
+							final java.net.URL url = getClass().getResource(
 									ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.tip.icon.url.labhelp",
 											"/com/linkare/rec/impl/baseUI/resources/tree_experiment.gif"));
-							Point locationTreeApparatus = laboratoryTree.getLocationOnScreen();
+							final Point locationTreeApparatus = laboratoryTree.getLocationOnScreen();
 							locationTreeApparatus.x = locationTreeApparatus.x + laboratoryTree.getWidth() - 10;
 							locationTreeApparatus.y = locationTreeApparatus.y + laboratoryTree.getHeight() / 2;
-							tips
-									.showTipWithTimeout(
-											laboratoryTree,
-											ReCResourceBundle
+							tips.showTipWithTimeout(
+									laboratoryTree,
+									ReCResourceBundle
+											.findStringOrDefault("ReCBaseUI$rec.bui.tip.helpSelectApparatusBefore",
+													"<html><body bgcolor='#ffffe6' style='padding:5px;'><center><font color='#5a8183'>In the Apparatus List <img src='")
+											+ url.toExternalForm()
+											+ ReCResourceBundle
 													.findStringOrDefault(
-															"ReCBaseUI$rec.bui.tip.helpSelectApparatusBefore",
-															"<html><body bgcolor='#ffffe6' style='padding:5px;'><center><font color='#5a8183'>In the Apparatus List <img src='")
-													+ url.toExternalForm()
-													+ ReCResourceBundle
-															.findStringOrDefault(
-																	"ReCBaseUI$rec.bui.tip.helpSelectApparatusAfter",
-																	"'><br>double click the apparatus<br>you wish to connect to!</font></center></body></html>"),
-											5000, locationTreeApparatus);
+															"ReCBaseUI$rec.bui.tip.helpSelectApparatusAfter",
+															"'><br>double click the apparatus<br>you wish to connect to!</font></center></body></html>"),
+									5000, locationTreeApparatus);
 							showedMessageConnectApparatus = true;
-						} catch (Exception e2) {
-							LoggerUtil.logThrowable(e2.getMessage(), e2, Logger.getLogger(UI_CLIENT_LOGGER));
+						} catch (final Exception e2) {
+							LoggerUtil.logThrowable(e2.getMessage(), e2, Logger.getLogger(ReCBaseUI.UI_CLIENT_LOGGER));
 						}
 					}
 				}
 
-				if (currentApparatusConfig != null && apparatusClientBean.isConnected())
+				if (currentApparatusConfig != null && apparatusClientBean.isConnected()) {
 					DisplayTreeNodeUtils.enableAllApparatusContents(currentApparatusConfig);
-				else if (currentApparatusConfig != null)
+				} else if (currentApparatusConfig != null) {
 					menuBar.removeApparatus();
+				}
 
 			}
 		}
 	}// GEN-LAST:event_labClientBeanApparatusListChanged
 
 	private void apparatusClientBeanApparatusUnreachable(
-			com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusUnreachable
+			final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusUnreachable
 	{// GEN-HEADEREND:event_apparatusClientBeanApparatusUnreachable
 		statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.unreachable",
 				"Unreachable..."));
-		if (waitDialog != null)
+		if (waitDialog != null) {
 			waitDialog.setVisible(false);
+		}
 	}// GEN-LAST:event_apparatusClientBeanApparatusUnreachable
 
 	private void apparatusClientBeanApparatusStateUnknow(
-			com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusStateUnknow
+			final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusStateUnknow
 	{// GEN-HEADEREND:event_apparatusClientBeanApparatusStateUnknow
 		statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.unknown",
 				"Unknown..."));
 		controllerPanel.setEnablePlay(false);
 		controllerPanel.setEnableStop(false);
-		if (waitDialog != null)
+		if (waitDialog != null) {
 			waitDialog.setVisible(false);
+		}
 	}// GEN-LAST:event_apparatusClientBeanApparatusStateUnknow
 
 	private void apparatusClientBeanApparatusStateStoping(
-			com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusStateStoping
+			final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusStateStoping
 	{// GEN-HEADEREND:event_apparatusClientBeanApparatusStateStoping
 		statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.stoping",
 				"Stopping..."));
@@ -929,7 +969,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	}// GEN-LAST:event_apparatusClientBeanApparatusStateStoping
 
 	private void apparatusClientBeanApparatusStateStoped(
-			com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusStateStoped
+			final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusStateStoped
 	{// GEN-HEADEREND:event_apparatusClientBeanApparatusStateStoped
 		statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.stoped",
 				"Stopped..."));
@@ -940,19 +980,19 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	}// GEN-LAST:event_apparatusClientBeanApparatusStateStoped
 
 	private void apparatusClientBeanApparatusStateStarting(
-			com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusStateStarting
+			final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusStateStarting
 	{// GEN-HEADEREND:event_apparatusClientBeanApparatusStateStarting
 		statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.starting",
 				"Starting..."));
 	}// GEN-LAST:event_apparatusClientBeanApparatusStateStarting
 
 	private void apparatusClientBeanApparatusStateStarted(
-			com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusStateStarted
+			final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusStateStarted
 	{// GEN-HEADEREND:event_apparatusClientBeanApparatusStateStarted
 		started = true;
 
-		ExpHistoryUINode expHistory = new ExpHistoryUINode(this, evt.getDataSource(), apparatusClientBean
-				.getApparatus(), currentApparatusConfig);
+		final ExpHistoryUINode expHistory = new ExpHistoryUINode(this, evt.getDataSource(),
+				apparatusClientBean.getApparatus(), currentApparatusConfig);
 		expHistory.setLocallyOwned(locked);
 
 		expHistoryPanelNew.addExpHistory(expHistory);
@@ -967,14 +1007,14 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	}// GEN-LAST:event_apparatusClientBeanApparatusStateStarted
 
 	private void apparatusClientBeanApparatusStateReseting(
-			com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusStateReseting
+			final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusStateReseting
 	{// GEN-HEADEREND:event_apparatusClientBeanApparatusStateReseting
 		statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.reseting",
 				"Reseting..."));
 	}// GEN-LAST:event_apparatusClientBeanApparatusStateReseting
 
 	private void apparatusClientBeanApparatusStateReseted(
-			com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusStateReseted
+			final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusStateReseted
 	{// GEN-HEADEREND:event_apparatusClientBeanApparatusStateReseted
 		statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.reseted",
 				"Reseted..."));
@@ -985,14 +1025,14 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	}// GEN-LAST:event_apparatusClientBeanApparatusStateReseted
 
 	private void apparatusClientBeanApparatusStateConfiguring(
-			com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusStateConfiguring
+			final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusStateConfiguring
 	{// GEN-HEADEREND:event_apparatusClientBeanApparatusStateConfiguring
 		statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.configuring",
 				"Configuring..."));
 	}// GEN-LAST:event_apparatusClientBeanApparatusStateConfiguring
 
 	private void apparatusClientBeanApparatusStateConfigured(
-			com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusStateConfigured
+			final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusStateConfigured
 	{// GEN-HEADEREND:event_apparatusClientBeanApparatusStateConfigured
 		statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.configured",
 				"Configured..."));
@@ -1003,7 +1043,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	}// GEN-LAST:event_apparatusClientBeanApparatusStateConfigured
 
 	private void apparatusClientBeanApparatusStateConfigError(
-			com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusStateConfigError
+			final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusStateConfigError
 	{// GEN-HEADEREND:event_apparatusClientBeanApparatusStateConfigError
 		statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.config.error",
 				"Configuration error..."));
@@ -1012,18 +1052,20 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	}// GEN-LAST:event_apparatusClientBeanApparatusStateConfigError
 
 	private void apparatusClientBeanApparatusNotRegistered(
-			com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusNotRegistered
+			final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusNotRegistered
 	{// GEN-HEADEREND:event_apparatusClientBeanApparatusNotRegistered
 		statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.notRegistered",
 				"Not registered..."));
 		controllerPanel.setEnableCustomize(false);
 		controllerPanel.setEnablePlay(false);
 		controllerPanel.setEnableStop(false);
-		if (waitDialog != null)
+		if (waitDialog != null) {
 			waitDialog.setVisible(false);
+		}
 	}// GEN-LAST:event_apparatusClientBeanApparatusNotRegistered
 
-	private void apparatusClientBeanApparatusNotOwner(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusNotOwner
+	private void apparatusClientBeanApparatusNotOwner(
+			final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusNotOwner
 	{// GEN-HEADEREND:event_apparatusClientBeanApparatusNotOwner
 		statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.notOwner",
 				"You're not the current owner..."));
@@ -1032,7 +1074,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	}// GEN-LAST:event_apparatusClientBeanApparatusNotOwner
 
 	private void apparatusClientBeanApparatusNotAuthorized(
-			com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusNotAuthorized
+			final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusNotAuthorized
 	{// GEN-HEADEREND:event_apparatusClientBeanApparatusNotAuthorized
 		statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.notAuthorized",
 				"Not authorized, please confirm your login/password and try again..."));
@@ -1042,29 +1084,34 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		loginFrame.setVisible(true, recBaseUI.isEnableLoginPassword());
 	}// GEN-LAST:event_apparatusClientBeanApparatusNotAuthorized
 
-	private void apparatusClientBeanApparatusMaxUsers(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusMaxUsers
+	private void apparatusClientBeanApparatusMaxUsers(
+			final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusMaxUsers
 	{// GEN-HEADEREND:event_apparatusClientBeanApparatusMaxUsers
 		statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.roomFull",
 				"The room is full, please try again later..."));
 		controllerPanel.setEnableCustomize(false);
 		controllerPanel.setEnablePlay(false);
 		controllerPanel.setEnableStop(false);
-		if (waitDialog != null)
+		if (waitDialog != null) {
 			waitDialog.setVisible(false);
+		}
 	}// GEN-LAST:event_apparatusClientBeanApparatusMaxUsers
 
-	private void apparatusClientBeanApparatusLocked(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusLocked
+	private void apparatusClientBeanApparatusLocked(
+			final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusLocked
 	{// GEN-HEADEREND:event_apparatusClientBeanApparatusLocked
 		statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.locked",
 				"Locked..."));
 		locked = true;
-		if (config == null)
+		if (config == null) {
 			config = currentApparatus.getHardwareInfo().createBaseHardwareAcquisitionConfig();
+		}
 
 		apparatusClientBean.configure(config);
 	}// GEN-LAST:event_apparatusClientBeanApparatusLocked
 
-	private void apparatusClientBeanApparatusLockable(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusLockable
+	private void apparatusClientBeanApparatusLockable(
+			final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusLockable
 	{// GEN-HEADEREND:event_apparatusClientBeanApparatusLockable
 
 		if (!countDownProgressPanel.isStop()) {
@@ -1094,15 +1141,17 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 				if (locktried) {
 					cancel();
 
-					if (customizeDoneOnce)
+					if (customizeDoneOnce) {
 						countDownProgressPanel.setStop(true);
+					}
 
 					lockerTask = null;
 
 					lockable = false;
 				} else if (customizeDoneOnce) {
-					if (!controllerPanel.isEnablePlay())
+					if (!controllerPanel.isEnablePlay()) {
 						controllerPanel.setEnablePlay(true);
+					}
 				}
 			}
 		}), 0, countDownProgressPanel.getUpdateRate() * 1000);
@@ -1118,14 +1167,14 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	}// GEN-LAST:event_apparatusClientBeanApparatusLockable
 
 	private void apparatusClientBeanApparatusIncorrectState(
-			com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusIncorrectState
+			final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusIncorrectState
 	{// GEN-HEADEREND:event_apparatusClientBeanApparatusIncorrectState
 		statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.incorrectState",
 				"Incorrect state for the operation..."));
 	}// GEN-LAST:event_apparatusClientBeanApparatusIncorrectState
 
 	private void apparatusClientBeanApparatusDisconnecting(
-			com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusDisconnecting
+			final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusDisconnecting
 	{// GEN-HEADEREND:event_apparatusClientBeanApparatusDisconnecting
 		statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.disconnecting",
 				"Disconnecting..."));
@@ -1133,7 +1182,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	}// GEN-LAST:event_apparatusClientBeanApparatusDisconnecting
 
 	private void apparatusClientBeanApparatusDisconnected(
-			com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusDisconnected
+			final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusDisconnected
 	{// GEN-HEADEREND:event_apparatusClientBeanApparatusDisconnected
 		statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.disconnected",
 				"Disconnected..."));
@@ -1143,43 +1192,48 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	}// GEN-LAST:event_apparatusClientBeanApparatusDisconnected
 
 	private void apparatusClientBeanApparatusConnecting(
-			com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusConnecting
+			final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusConnecting
 	{// GEN-HEADEREND:event_apparatusClientBeanApparatusConnecting
 		statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.connecting",
 				"Connecting..."));
 	}// GEN-LAST:event_apparatusClientBeanApparatusConnecting
 
-	private void apparatusClientBeanApparatusConnected(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusConnected
+	private void apparatusClientBeanApparatusConnected(
+			final com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)// GEN-FIRST:event_apparatusClientBeanApparatusConnected
 	{// GEN-HEADEREND:event_apparatusClientBeanApparatusConnected
 		statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.connected",
 				"Connected..."));
 		try {
-			if (config == null)
+			if (config == null) {
 				config = currentApparatus.getHardwareInfo().createBaseHardwareAcquisitionConfig();
+			}
 
-			com.linkare.rec.impl.baseUI.config.Apparatus app = laboratoryTree.getApparatus(currentApparatus
+			final com.linkare.rec.impl.baseUI.config.Apparatus app = laboratoryTree.getApparatus(currentApparatus
 					.getHardwareInfo().getHardwareUniqueID());
-			if (app == null)
+			if (app == null) {
 				return;
+			}
 
 			DisplayTreeNodeUtils.enableAllApparatusContents(app);
 
 			currentCustomizer = CustomizerUIUtil.loadCustomizer(ReCResourceBundle.findString(app
 					.getCustomizerClassLocationBundleKey()));
 
-			if (currentCustomizer instanceof ICustomizerSecurity)
+			if (currentCustomizer instanceof ICustomizerSecurity) {
 				((ICustomizerSecurity) currentCustomizer).setUserInfo(new com.linkare.rec.acquisition.UserInfo(
 						loginFrame.getUsername()));
+			}
 
 			if (currentCustomizer != null) {
-				if (waitDialog != null)
+				if (waitDialog != null) {
 					waitDialog.setVisible(false);
+				}
 				controllerPanel.setEnableCustomize(true);
 				if (!showedMessageConfig) {
-					java.net.URL url = getClass().getResource(
+					final java.net.URL url = getClass().getResource(
 							ReCResourceBundle.findStringOrDefault("reb.bui.tip.icon.url.apparatushelp",
 									"/com/linkare/rec/impl/baseUI/resources/Preferences16.gif"));
-					String message = ReCResourceBundle
+					final String message = ReCResourceBundle
 							.findStringOrDefault(
 									"ReCBaseUI$rec.bui.lbl.helpSelectConfigBefore",
 									"<html><body bgcolor='#ffffe6' style='padding:5px;'><center><font color='#5a8183'>Click the configure button <img src='")
@@ -1193,61 +1247,72 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 
 				menuBar.addApparatusMenu(currentLab, currentApparatusConfig);
 
-				if (currentApparatusConfig.getDesktopLocationBundleKey() != null)
-					mDIDesktopPane.setBackgroundImage(ReCResourceBundle.findImageIconOrDefault(
-							currentApparatusConfig.getDesktopLocationBundleKey(),
-							new ImageIcon(getClass().getResource(
-									"/com/linkare/rec/impl/baseUI/resources/desktopback.png"))).getImage(), false);
-				else if (currentLab.getDesktopLocationBundleKey() != null)
-					mDIDesktopPane.setBackgroundImage(ReCResourceBundle.findImageIconOrDefault(
-							currentLab.getDesktopLocationBundleKey(),
-							new ImageIcon(getClass().getResource(
-									"/com/linkare/rec/impl/baseUI/resources/desktopback.png"))).getImage(), false);
-				else if (recBaseUI.getDesktopLocationBundleKey() != null)
-					mDIDesktopPane.setBackgroundImage(ReCResourceBundle.findImageIconOrDefault(
-							recBaseUI.getDesktopLocationBundleKey(),
-							new ImageIcon(getClass().getResource(
-									"/com/linkare/rec/impl/baseUI/resources/desktopback.png"))).getImage(), false);
-				else
+				if (currentApparatusConfig.getDesktopLocationBundleKey() != null) {
+					mDIDesktopPane.setBackgroundImage(
+							ReCResourceBundle.findImageIconOrDefault(
+									currentApparatusConfig.getDesktopLocationBundleKey(),
+									new ImageIcon(getClass().getResource(
+											"/com/linkare/rec/impl/baseUI/resources/desktopback.png"))).getImage(),
+							false);
+				} else if (currentLab.getDesktopLocationBundleKey() != null) {
+					mDIDesktopPane.setBackgroundImage(
+							ReCResourceBundle.findImageIconOrDefault(
+									currentLab.getDesktopLocationBundleKey(),
+									new ImageIcon(getClass().getResource(
+											"/com/linkare/rec/impl/baseUI/resources/desktopback.png"))).getImage(),
+							false);
+				} else if (recBaseUI.getDesktopLocationBundleKey() != null) {
+					mDIDesktopPane.setBackgroundImage(
+							ReCResourceBundle.findImageIconOrDefault(
+									recBaseUI.getDesktopLocationBundleKey(),
+									new ImageIcon(getClass().getResource(
+											"/com/linkare/rec/impl/baseUI/resources/desktopback.png"))).getImage(),
+							false);
+				} else {
 					mDIDesktopPane.setBackgroundImage(null, false);
+				}
 				currentCustomizer.addICustomizerListener(this);
 			}
-		} catch (Exception e) {
-			LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(UI_CLIENT_LOGGER));
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(ReCBaseUI.UI_CLIENT_LOGGER));
 		}
 
 		// apparatusClientBean.startAutoRefresh(recBaseUI.getUsersListRefreshRateMs());
 	}// GEN-LAST:event_apparatusClientBeanApparatusConnected
 
 	private void laboratoryTreeWebResourceSelectionChange(
-			com.linkare.rec.impl.baseUI.labsTree.WebResourceSelectionEvent evt)// GEN-FIRST:event_laboratoryTreeWebResourceSelectionChange
+			final com.linkare.rec.impl.baseUI.labsTree.WebResourceSelectionEvent evt)// GEN-FIRST:event_laboratoryTreeWebResourceSelectionChange
 	{// GEN-HEADEREND:event_laboratoryTreeWebResourceSelectionChange
 		try {
 			openURL(evt.getWebResource().getURL(), evt.getWebResource().isInternalBrowser());
-		} catch (Exception e2) {
-			LoggerUtil.logThrowable(e2.getMessage(), e2, Logger.getLogger(UI_CLIENT_LOGGER));
+		} catch (final Exception e2) {
+			LoggerUtil.logThrowable(e2.getMessage(), e2, Logger.getLogger(ReCBaseUI.UI_CLIENT_LOGGER));
 		}
 	}// GEN-LAST:event_laboratoryTreeWebResourceSelectionChange
 
-	private void laboratoryTreeDisplaySelectionChange(com.linkare.rec.impl.baseUI.labsTree.DisplaySelectionEvent evt)// GEN-FIRST:event_laboratoryTreeDisplaySelectionChange
+	private void laboratoryTreeDisplaySelectionChange(
+			final com.linkare.rec.impl.baseUI.labsTree.DisplaySelectionEvent evt)// GEN-FIRST:event_laboratoryTreeDisplaySelectionChange
 	{// GEN-HEADEREND:event_laboratoryTreeDisplaySelectionChange
-		if (!evt.getDisplay().isEnabled() || !evt.getDisplay().getOfflineCapable())
-			return;
-
-		ExpDataDisplay display = null;
-		String displayLocation = ReCResourceBundle.findStringOrDefault(evt.getDisplay().getClassLocationBundleKey(),
-				null);
-		try {
-			Object displayTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(), displayLocation);
-			if (java.beans.Beans.isInstanceOf(displayTemp, ExpDataDisplay.class))
-				display = (ExpDataDisplay) displayTemp;
-		} catch (Exception e) {
-			LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(UI_CLIENT_LOGGER));
+		if (!evt.getDisplay().isEnabled() || !evt.getDisplay().getOfflineCapable()) {
 			return;
 		}
 
-		if (offlineApparatusDisplaysList == null)
+		ExpDataDisplay display = null;
+		final String displayLocation = ReCResourceBundle.findStringOrDefault(evt.getDisplay()
+				.getClassLocationBundleKey(), null);
+		try {
+			final Object displayTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(), displayLocation);
+			if (java.beans.Beans.isInstanceOf(displayTemp, ExpDataDisplay.class)) {
+				display = (ExpDataDisplay) displayTemp;
+			}
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(ReCBaseUI.UI_CLIENT_LOGGER));
+			return;
+		}
+
+		if (offlineApparatusDisplaysList == null) {
 			offlineApparatusDisplaysList = new ArrayList<JInternalFrame>();
+		}
 
 		OfflineInternalFrame offInternalFrame = null;
 
@@ -1258,8 +1323,9 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 			}
 		}
 
-		if (offInternalFrame == null)
+		if (offInternalFrame == null) {
 			offInternalFrame = new OfflineInternalFrame(evt.getApparatus().getLocation());
+		}
 
 		offInternalFrame.addOfflineDisplay(display);
 
@@ -1273,12 +1339,10 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		offInternalFrame.setFrameIcon(evt.getApparatus().getIcon());
 
 		offInternalFrame.setTitle(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.offline",
-				"Offline Displays")
-				+ " [" + evt.getApparatus().getText() + "]");
+				"Offline Displays") + " [" + evt.getApparatus().getText() + "]");
 
 		offInternalFrame.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.tip.experiment",
-				"Experiment")
-				+ " [" + evt.getApparatus().getText() + "]");
+				"Experiment") + " [" + evt.getApparatus().getText() + "]");
 
 		mDIDesktopPane.add(offInternalFrame);
 
@@ -1288,12 +1352,13 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	}// GEN-LAST:event_laboratoryTreeDisplaySelectionChange
 
 	private void laboratoryTreeDefaultConfigSelectionChange(
-			com.linkare.rec.impl.baseUI.labsTree.DefaultConfigSelectionEvent evt)// GEN-FIRST:event_laboratoryTreeDefaultConfigSelectionChange
+			final com.linkare.rec.impl.baseUI.labsTree.DefaultConfigSelectionEvent evt)// GEN-FIRST:event_laboratoryTreeDefaultConfigSelectionChange
 	{// GEN-HEADEREND:event_laboratoryTreeDefaultConfigSelectionChange
-		if (!evt.getDefaultConfig().isEnabled())
+		if (!evt.getDefaultConfig().isEnabled()) {
 			return;
+		}
 
-		String configLocation = ReCResourceBundle.findStringOrDefault(evt.getDefaultConfig()
+		final String configLocation = ReCResourceBundle.findStringOrDefault(evt.getDefaultConfig()
 				.getClassLocationBundleKey(), null);
 
 		HardwareAcquisitionConfig defaultConfig = null;
@@ -1303,31 +1368,35 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		} else {
 
 			try {
-				java.io.ObjectInputStream ois = new java.io.ObjectInputStream(getClass().getResourceAsStream(
+				final java.io.ObjectInputStream ois = new java.io.ObjectInputStream(getClass().getResourceAsStream(
 						configLocation));
 				defaultConfig = (HardwareAcquisitionConfig) ois.readObject();
 				ois.close();
-			} catch (Exception e) {
-				LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(UI_CLIENT_LOGGER));
+			} catch (final Exception e) {
+				LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(ReCBaseUI.UI_CLIENT_LOGGER));
 			}
 		}
-		if (defaultConfig == null)
+		if (defaultConfig == null) {
 			return;
+		}
 
 		config = defaultConfig;
 		customizeDoneOnce = true;
-		if (controllerPanel.isEnablePlay())
+		if (controllerPanel.isEnablePlay()) {
 			propertyChange(new java.beans.PropertyChangeEvent(this, "play", Boolean.FALSE, Boolean.TRUE));
-		else
+		} else {
 			setAutoPlay(true);
+		}
 
 	}// GEN-LAST:event_laboratoryTreeDefaultConfigSelectionChange
 
-	private void laboratoryTreeApparatusSelectionChange(com.linkare.rec.impl.baseUI.labsTree.ApparatusSelectionEvent evt)// GEN-FIRST:event_laboratoryTreeApparatusSelectionChange
+	private void laboratoryTreeApparatusSelectionChange(
+			final com.linkare.rec.impl.baseUI.labsTree.ApparatusSelectionEvent evt)// GEN-FIRST:event_laboratoryTreeApparatusSelectionChange
 	{// GEN-HEADEREND:event_laboratoryTreeApparatusSelectionChange
 
-		if (!evt.getApparatus().isEnabled())
+		if (!evt.getApparatus().isEnabled()) {
 			return;
+		}
 
 		if (currentApparatusConfig != null) {
 			DisplayTreeNodeUtils.disableAllApparatusContents(currentApparatusConfig);
@@ -1347,8 +1416,9 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		currentApparatusConfig = evt.getApparatus();
 		currentApparatus = labClientBean.getApparatusByID(currentApparatusConfig.getLocation());
 
-		if (currentApparatus == null)
+		if (currentApparatus == null) {
 			return;
+		}
 
 		currentCustomizer = null;
 
@@ -1379,26 +1449,27 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		}.start();
 
 		waitDialog = new WaitDialog(this, true, ReCResourceBundle.findStringOrDefault(
-				"ReCBaseUI$rec.bui.lbl.loadingCustomizer", "Loading customizer..."), ReCResourceBundle
-				.findImageIconOrDefault("ReCBaseUI$rec.bui.icon.customize", new ImageIcon(getClass().getResource(
-						"/com/linkare/rec/impl/baseUI/resources/Preferences16.gif"))));
+				"ReCBaseUI$rec.bui.lbl.loadingCustomizer", "Loading customizer..."),
+				ReCResourceBundle.findImageIconOrDefault("ReCBaseUI$rec.bui.icon.customize", new ImageIcon(getClass()
+						.getResource("/com/linkare/rec/impl/baseUI/resources/Preferences16.gif"))));
 		waitDialog.setVisible(true);
 	}// GEN-LAST:event_laboratoryTreeApparatusSelectionChange
 
-	private void laboratoryTreeLabSelectionChange(com.linkare.rec.impl.baseUI.labsTree.LabSelectionEvent evt)// GEN-FIRST:event_laboratoryTreeLabSelectionChange
+	private void laboratoryTreeLabSelectionChange(final com.linkare.rec.impl.baseUI.labsTree.LabSelectionEvent evt)// GEN-FIRST:event_laboratoryTreeLabSelectionChange
 	{// GEN-HEADEREND:event_laboratoryTreeLabSelectionChange
 		// Ok, I've changed this because some users didn't like this feature,
 		// from now on it will change state if it connected...
-		if (!evt.getLab().isEnabled())
+		if (!evt.getLab().isEnabled()) {
 			propertyChange(new java.beans.PropertyChangeEvent(this, "connect", Boolean.FALSE, Boolean.TRUE));
+		}
 	}// GEN-LAST:event_laboratoryTreeLabSelectionChange
 
-	private void chatFrameInternalFrameClosing(javax.swing.event.InternalFrameEvent evt)// GEN-FIRST:event_chatFrameInternalFrameClosing
+	private void chatFrameInternalFrameClosing(final javax.swing.event.InternalFrameEvent evt)// GEN-FIRST:event_chatFrameInternalFrameClosing
 	{// GEN-HEADEREND:event_chatFrameInternalFrameClosing
 		setShowChatFrame(false);
 	}// GEN-LAST:event_chatFrameInternalFrameClosing
 
-	private void jInternalFrameLabTreeInternalFrameClosing(javax.swing.event.InternalFrameEvent evt)// GEN-FIRST:event_jInternalFrameLabTreeInternalFrameClosing
+	private void jInternalFrameLabTreeInternalFrameClosing(final javax.swing.event.InternalFrameEvent evt)// GEN-FIRST:event_jInternalFrameLabTreeInternalFrameClosing
 	{// GEN-HEADEREND:event_jInternalFrameLabTreeInternalFrameClosing
 		setShowApparatusFrame(false);
 	}// GEN-LAST:event_jInternalFrameLabTreeInternalFrameClosing
@@ -1406,7 +1477,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	private boolean shuttingDown = false;
 
 	/** Exit the Application */
-	private void exitForm(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_exitForm
+	private void exitForm(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_exitForm
 		shuttingDown = true;
 
 		setVisible(false);
@@ -1420,7 +1491,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 				// Wait that in the server side they realize I'm gone!
 				wait(5000);
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 		System.exit(0);
@@ -1429,21 +1500,20 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 		JFrame.setDefaultLookAndFeelDecorated(true);
-		final String apparatusAutoConnectID=System.getProperty("ReC.AutoConnectID");
+		final String apparatusAutoConnectID = System.getProperty("ReC.AutoConnectID");
 		SwingUtilities.invokeLater(new Runnable() {
-			
+
 			@Override
 			public void run() {
-				ReCBaseUI baseUI = new ReCBaseUI();
-				if(apparatusAutoConnectID!=null)
-				{
+				final ReCBaseUI baseUI = new ReCBaseUI();
+				if (apparatusAutoConnectID != null) {
 					baseUI.setApparatusAutoConnectID(apparatusAutoConnectID);
 				}
 				baseUI.pack();
 				baseUI.setVisible(true);
-				
+
 			}
 		});
 	}
@@ -1454,7 +1524,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * @return Value of property apparatusAutoConnectID.
 	 */
 	public String getApparatusAutoConnectID() {
-		return this.apparatusAutoConnectID;
+		return apparatusAutoConnectID;
 	}
 
 	/**
@@ -1463,12 +1533,13 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * @param apparatusAutoConnectID New value of property
 	 *            apparatusAutoConnectID.
 	 */
-	public void setApparatusAutoConnectID(String apparatusAutoConnectID) {
+	public void setApparatusAutoConnectID(final String apparatusAutoConnectID) {
 		this.apparatusAutoConnectID = apparatusAutoConnectID;
-		if (this.apparatusAutoConnectID != null)
-			this.setApparatusListEnabled(false);
-		else
-			this.setApparatusListEnabled(true);
+		if (this.apparatusAutoConnectID != null) {
+			setApparatusListEnabled(false);
+		} else {
+			setApparatusListEnabled(true);
+		}
 	}
 
 	/**
@@ -1477,7 +1548,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * @return Value of property apparatusListEnabled.
 	 */
 	public boolean isApparatusListEnabled() {
-		return this.apparatusListEnabled;
+		return apparatusListEnabled;
 	}
 
 	/**
@@ -1485,7 +1556,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * 
 	 * @param apparatusListEnabled New value of property apparatusListEnabled.
 	 */
-	public void setApparatusListEnabled(boolean apparatusListEnabled) {
+	public void setApparatusListEnabled(final boolean apparatusListEnabled) {
 		this.apparatusListEnabled = apparatusListEnabled;
 	}
 
@@ -1495,7 +1566,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * @return Value of property videoFrameEnabled.
 	 */
 	public boolean isVideoFrameEnabled() {
-		return this.videoFrameEnabled;
+		return videoFrameEnabled;
 	}
 
 	/**
@@ -1503,7 +1574,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * 
 	 * @param videoFrameEnabled New value of property videoFrameEnabled.
 	 */
-	public void setVideoFrameEnabled(boolean videoFrameEnabled) {
+	public void setVideoFrameEnabled(final boolean videoFrameEnabled) {
 		this.videoFrameEnabled = videoFrameEnabled;
 		toolBarPanel.setEnableVideo(videoFrameEnabled);
 	}
@@ -1514,7 +1585,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * @return Value of property chatFrameEnabled.
 	 */
 	public boolean isChatFrameEnabled() {
-		return this.chatFrameEnabled;
+		return chatFrameEnabled;
 	}
 
 	/**
@@ -1522,7 +1593,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * 
 	 * @param chatFrameEnabled New value of property chatFrameEnabled.
 	 */
-	public void setChatFrameEnabled(boolean chatFrameEnabled) {
+	public void setChatFrameEnabled(final boolean chatFrameEnabled) {
 		this.chatFrameEnabled = chatFrameEnabled;
 		toolBarPanel.setEnableChat(chatFrameEnabled);
 	}
@@ -1533,7 +1604,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * @return Value of property usersListEnable.
 	 */
 	public boolean isUsersListEnabled() {
-		return this.usersListEnabled;
+		return usersListEnabled;
 	}
 
 	/**
@@ -1541,7 +1612,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * 
 	 * @param usersListEnable New value of property usersListEnable.
 	 */
-	public void setUsersListEnabled(boolean usersListEnabled) {
+	public void setUsersListEnabled(final boolean usersListEnabled) {
 		this.usersListEnabled = usersListEnabled;
 		toolBarPanel.setEnableUsersList(usersListEnabled);
 	}
@@ -1552,7 +1623,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * @return Value of property showChatFrame.
 	 */
 	public boolean isShowChatFrame() {
-		return this.showChatFrame;
+		return showChatFrame;
 	}
 
 	/**
@@ -1560,7 +1631,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * 
 	 * @param showChatFrame New value of property showChatFrame.
 	 */
-	public void setShowChatFrame(boolean showChatFrame) {
+	public void setShowChatFrame(final boolean showChatFrame) {
 		this.showChatFrame = showChatFrame;
 		if (showChatFrame) {
 			SwingUtilities.invokeLater(new Runnable() {
@@ -1573,7 +1644,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 			try {
 				// This way we lock the swing thread and it has to wait for us
 				// to finish first
-				Thread t = new Thread() {
+				final Thread t = new Thread() {
 					public void run() {
 						chatFrame.setVisible(false);
 					}
@@ -1581,7 +1652,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 
 				t.start();
 				t.join();
-			} catch (InterruptedException ignored) {
+			} catch (final InterruptedException ignored) {
 			}
 			toolBarPanel.setSelectChat(false);
 		}
@@ -1593,7 +1664,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * @return Value of property showUsersList.
 	 */
 	public boolean isShowUsersList() {
-		return this.showUsersList;
+		return showUsersList;
 	}
 
 	/**
@@ -1601,9 +1672,9 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * 
 	 * @param showUsersList New value of property showUsersList.
 	 */
-	public void setShowUsersList(boolean showUsersList) {
+	public void setShowUsersList(final boolean showUsersList) {
 		int found = -1;
-		java.awt.Component[] comps = jTabbedPaneInfoUsers.getComponents();
+		final java.awt.Component[] comps = jTabbedPaneInfoUsers.getComponents();
 		for (int i = 0; i < comps.length; i++) {
 			if (comps[i].equals(usersListPanel)) {
 				found = i;
@@ -1613,31 +1684,32 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 
 		this.showUsersList = showUsersList;
 		if (showUsersList) {
-			if (found > -1)
+			if (found > -1) {
 				return;
+			}
 
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
-					if (!jInternalFrameTabs.isVisible())
+					if (!jInternalFrameTabs.isVisible()) {
 						jInternalFrameTabs.setVisible(true);
-					jTabbedPaneInfoUsers
-							.addTab(
-									ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.title.apparatusUsersList",
-											"Apparatus Users List"),
-									ReCResourceBundle.findImageIconOrDefault("ReCBaseUI$rec.bui.icon.users",
-											new ImageIcon(getClass().getResource(
-													"/com/linkare/rec/impl/baseUI/resources/UserList16_2.gif"))),
-									usersListPanel,
-									ReCResourceBundle
-											.findStringOrDefault("ReCBaseUI$rec.bui.tip.users",
-													"Shows you the current users of the apparatus and an estimate of the control timings"));
+					}
+					jTabbedPaneInfoUsers.addTab(
+							ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.title.apparatusUsersList",
+									"Apparatus Users List"),
+							ReCResourceBundle.findImageIconOrDefault("ReCBaseUI$rec.bui.icon.users", new ImageIcon(
+									getClass().getResource("/com/linkare/rec/impl/baseUI/resources/UserList16_2.gif"))),
+							usersListPanel,
+							ReCResourceBundle
+									.findStringOrDefault("ReCBaseUI$rec.bui.tip.users",
+											"Shows you the current users of the apparatus and an estimate of the control timings"));
 					jTabbedPaneInfoUsers.setSelectedComponent(usersListPanel);
 					toolBarPanel.setSelectUsersList(true);
 				}
 			});
 		} else {
-			if (found < 0)
+			if (found < 0) {
 				return;
+			}
 
 			jTabbedPaneInfoUsers.remove(usersListPanel);
 			toolBarPanel.setSelectUsersList(false);
@@ -1647,7 +1719,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 				try {
 					// This way we lock the swing thread and it has to wait for
 					// us to finish first
-					Thread t = new Thread() {
+					final Thread t = new Thread() {
 						public void run() {
 							jInternalFrameTabs.setVisible(false);
 						}
@@ -1655,7 +1727,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 
 					t.start();
 					t.join();
-				} catch (InterruptedException ignored) {
+				} catch (final InterruptedException ignored) {
 				}
 			}
 		}
@@ -1667,7 +1739,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * @return Value of property showVideoFrame.
 	 */
 	public boolean isShowVideoFrame() {
-		return this.showVideoFrame;
+		return showVideoFrame;
 	}
 
 	/**
@@ -1675,7 +1747,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * 
 	 * @param showVideoFrame New value of property showVideoFrame.
 	 */
-	public void setShowVideoFrame(boolean showVideoFrame) {
+	public void setShowVideoFrame(final boolean showVideoFrame) {
 		this.showVideoFrame = showVideoFrame;
 	}
 
@@ -1685,7 +1757,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * @return Value of property autoConnectLab.
 	 */
 	public boolean isAutoConnectLab() {
-		return this.autoConnectLab;
+		return autoConnectLab;
 	}
 
 	/**
@@ -1693,7 +1765,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * 
 	 * @param autoConnectLab New value of property autoConnectLab.
 	 */
-	public void setAutoConnectLab(boolean autoConnectLab) {
+	public void setAutoConnectLab(final boolean autoConnectLab) {
 		// TODO solve the autoConnectLab
 		this.autoConnectLab = autoConnectLab;
 	}
@@ -1704,7 +1776,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * @return Value of property showApparatusFrame.
 	 */
 	public boolean isShowApparatusFrame() {
-		return this.showApparatusFrame;
+		return showApparatusFrame;
 	}
 
 	/**
@@ -1712,7 +1784,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * 
 	 * @param showApparatusFrame New value of property showApparatusFrame.
 	 */
-	public void setShowApparatusFrame(boolean showApparatusFrame) {
+	public void setShowApparatusFrame(final boolean showApparatusFrame) {
 		this.showApparatusFrame = showApparatusFrame;
 		if (showApparatusFrame) {
 			SwingUtilities.invokeLater(new Runnable() {
@@ -1725,19 +1797,19 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 			try {
 				// This way we lock the swing thread and it has to wait for us
 				// to finish first
-				Thread t = new Thread() {
+				final Thread t = new Thread() {
 					public void run() {
 						try {
 							jInternalFrameLabTree.setVisible(false);
 
-						} catch (Exception e2) {
-							LoggerUtil.logThrowable(e2.getMessage(), e2, Logger.getLogger(UI_CLIENT_LOGGER));
+						} catch (final Exception e2) {
+							LoggerUtil.logThrowable(e2.getMessage(), e2, Logger.getLogger(ReCBaseUI.UI_CLIENT_LOGGER));
 						}
 					}
 				};
 				t.start();
 				t.join();
-			} catch (InterruptedException ignored) {
+			} catch (final InterruptedException ignored) {
 			}
 			toolBarPanel.setSelectApparatusTree(false);
 		}
@@ -1749,7 +1821,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * @return Value of property autoPlay.
 	 */
 	public boolean isAutoPlay() {
-		return this.autoPlay;
+		return autoPlay;
 	}
 
 	/**
@@ -1757,41 +1829,43 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * 
 	 * @param autoPlay New value of property autoPlay.
 	 */
-	public void setAutoPlay(boolean autoPlay) {
+	public void setAutoPlay(final boolean autoPlay) {
 		this.autoPlay = autoPlay;
 		toolBarPanel.setSelectAutoPlay(autoPlay);
 		menuBar.setSelectAutoPlay(autoPlay);
 	}
 
-	private void openURL(java.net.URL url, boolean internalBrowser) {
-		if (url == null)
+	private void openURL(final java.net.URL url, final boolean internalBrowser) {
+		if (url == null) {
 			return;
+		}
 
 		if (internalBrowser) {
-			InternalBrowser browser = new InternalBrowser(url);
+			final InternalBrowser browser = new InternalBrowser(url);
 			mDIDesktopPane.add(browser);
 			return;
 		}
 
 		try {
-			javax.jnlp.BasicService bs = (javax.jnlp.BasicService) javax.jnlp.ServiceManager
+			final javax.jnlp.BasicService bs = (javax.jnlp.BasicService) javax.jnlp.ServiceManager
 					.lookup("javax.jnlp.BasicService");
-			if (bs != null)
+			if (bs != null) {
 				try {
 					// System.out.println("bs.isWebBrowserSupported() ? " +
 					// bs.isWebBrowserSupported());
 					System.out.println("bs.isOffline() ? " + bs.isOffline());
-					boolean ok = bs.showDocument(url);
+					final boolean ok = bs.showDocument(url);
 
 					// System.out.println("Showed the document ? " + ok);
 
-				} catch (Exception e2) {
-					LoggerUtil.logThrowable(e2.getMessage(), e2, Logger.getLogger(UI_CLIENT_LOGGER));
+				} catch (final Exception e2) {
+					LoggerUtil.logThrowable(e2.getMessage(), e2, Logger.getLogger(ReCBaseUI.UI_CLIENT_LOGGER));
 				}
-			// else
-			// System.out.println("bs is null...WHY?");
-		} catch (Exception e) {
-			LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(UI_CLIENT_LOGGER));
+				// else
+				// System.out.println("bs is null...WHY?");
+			}
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(ReCBaseUI.UI_CLIENT_LOGGER));
 		}
 	}
 
@@ -1818,7 +1892,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * @return Value of property customizeDoneOnce.
 	 */
 	public boolean isCustomizeDoneOnce() {
-		return this.customizeDoneOnce;
+		return customizeDoneOnce;
 	}
 
 	/**
@@ -1826,7 +1900,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * 
 	 * @param customizeDoneOnce New value of property customizeDoneOnce.
 	 */
-	public void setCustomizeDoneOnce(boolean customizeDoneOnce) {
+	public void setCustomizeDoneOnce(final boolean customizeDoneOnce) {
 		this.customizeDoneOnce = customizeDoneOnce;
 	}
 
@@ -1836,7 +1910,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * @return Value of property lockable.
 	 */
 	public boolean isLockable() {
-		return this.lockable;
+		return lockable;
 	}
 
 	/**
@@ -1844,7 +1918,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * 
 	 * @param lockable New value of property lockable.
 	 */
-	public void setLockable(boolean lockable) {
+	public void setLockable(final boolean lockable) {
 		this.lockable = lockable;
 	}
 
@@ -1854,7 +1928,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * @return Value of property locked.
 	 */
 	public boolean isLocked() {
-		return this.locked;
+		return locked;
 	}
 
 	/**
@@ -1862,7 +1936,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * 
 	 * @param locked New value of property locked.
 	 */
-	public void setLocked(boolean locked) {
+	public void setLocked(final boolean locked) {
 		this.locked = locked;
 	}
 
@@ -1872,7 +1946,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * @return Value of property started.
 	 */
 	public boolean isStarted() {
-		return this.started;
+		return started;
 	}
 
 	/**
@@ -1880,37 +1954,41 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * 
 	 * @param started New value of property started.
 	 */
-	public void setStarted(boolean started) {
+	public void setStarted(final boolean started) {
 		this.started = started;
 	}
 
-	public void showExperimentHeader(ExpHistory expHistory) {
+	public void showExperimentHeader(final ExpHistory expHistory) {
 		HardwareAcquisitionConfig config = null;
 		try {
 			config = expHistory.getProducerWrapper().getAcquisitionHeader();
-		} catch (Exception ignored) {
-			LoggerUtil.logThrowable("Couldn't show Experiment Info...", ignored, Logger.getLogger(UI_CLIENT_LOGGER));
+		} catch (final Exception ignored) {
+			LoggerUtil.logThrowable("Couldn't show Experiment Info...", ignored,
+					Logger.getLogger(ReCBaseUI.UI_CLIENT_LOGGER));
 			return;
 		}
 
-		javax.swing.JFrame frame = new javax.swing.JFrame("Experiment [" + config.getFamiliarName() + "] - "
+		final javax.swing.JFrame frame = new javax.swing.JFrame("Experiment [" + config.getFamiliarName() + "] - "
 				+ config.getTimeStart() + " Info");
 		frame.setIconImage((new javax.swing.ImageIcon(getClass().getResource(
 				"/com/linkare/rec/impl/baseUI/resources/hwinfo16.gif"))).getImage());
 
-		javax.swing.JTextArea tainfo = new javax.swing.JTextArea(/*
-																 * ReCResourceBundle.
-																 * findStringOrDefault
-																 * (
-																 * "ReCBaseUI$rec.bui.lbl.expOwner"
-																 * ,
-																 * "Started by:"
-																 * ) + " " +
-																 * expHistory
-																 * .getOwnerUserName
-																 * ()
-																 */);
-		tainfo.append(LS + config.toString());
+		final javax.swing.JTextArea tainfo = new javax.swing.JTextArea(/*
+																		 * ReCResourceBundle
+																		 * .
+																		 * findStringOrDefault
+																		 * (
+																		 * "ReCBaseUI$rec.bui.lbl.expOwner"
+																		 * ,
+																		 * "Started by:"
+																		 * ) +
+																		 * " " +
+																		 * expHistory
+																		 * .
+																		 * getOwnerUserName
+																		 * ()
+																		 */);
+		tainfo.append(ReCBaseUI.LS + config.toString());
 		tainfo.setColumns(40);
 		tainfo.setRows(20);
 		frame.getContentPane().add(new javax.swing.JScrollPane(tainfo));
@@ -1921,9 +1999,9 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		frame.setVisible(true);
 	}
 
-	public void startExperiment(ExpHistory abstractExpHistory) {
+	public void startExperiment(final ExpHistory abstractExpHistory) {
 
-		ExpHistoryUINode expHistory = (ExpHistoryUINode) abstractExpHistory;
+		final ExpHistoryUINode expHistory = (ExpHistoryUINode) abstractExpHistory;
 
 		ExpDataDisplay[] displays = null;
 		DisplayFactory factory = null;
@@ -1936,7 +2014,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 			// null);
 			factoryLocation = ReCResourceBundle.findStringOrDefault(expHistory.getApparatusConfig()
 					.getDisplayFactoryClassLocationBundleKey(), null);
-		} catch (Exception ignored) {
+		} catch (final Exception ignored) {
 			// don't print the not found exception please...
 		}
 		// Of course not... maybe he didn't want to...
@@ -1947,29 +2025,31 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		// Ok the user wants to load his own Factory
 		else {
 			try {
-				Object displayFactoryTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
+				final Object displayFactoryTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
 						factoryLocation);
-				if (java.beans.Beans.isInstanceOf(displayFactoryTemp, DisplayFactory.class))
+				if (java.beans.Beans.isInstanceOf(displayFactoryTemp, DisplayFactory.class)) {
 					factory = (DisplayFactory) displayFactoryTemp;
-			} catch (Exception e) {
-				LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(UI_CLIENT_LOGGER));
+				}
+			} catch (final Exception e) {
+				LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(ReCBaseUI.UI_CLIENT_LOGGER));
 			}
 		}
 
 		if (factory != null) {
 			// I will only give the selected displays :)
-			Vector<Display> selectedDisplays = new Vector<Display>();
-			Display[] availableDisplays = expHistory.getApparatusConfig().getDisplay();
-			for (int i = 0; i < availableDisplays.length; i++) {
-				if (availableDisplays[i].isSelected())
-					selectedDisplays.add(availableDisplays[i]);
+			final Vector<Display> selectedDisplays = new Vector<Display>();
+			final Display[] availableDisplays = expHistory.getApparatusConfig().getDisplay();
+			for (final Display availableDisplay : availableDisplays) {
+				if (availableDisplay.isSelected()) {
+					selectedDisplays.add(availableDisplay);
+				}
 			}
 
 			factory.init((Display[]) selectedDisplays.toArray(new Display[0]));
 			factory.setAcquisitionInfo(expHistory.getApparatus().getHardwareInfo());
 			try {
 				factory.setAcquisitionConfig(expHistory.getProducerWrapper().getAcquisitionHeader());
-			} catch (Exception e) {
+			} catch (final Exception e) {
 			}
 			displays = factory.getDisplays();
 		}
@@ -1978,12 +2058,13 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		if (displays == null) {
 			try {
 				displays = new ExpDataDisplay[1];
-				Object dataDisplayTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
+				final Object dataDisplayTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
 						"com.linkare.rec.impl.baseUI.DefaultExperimentDataTable");
-				if (java.beans.Beans.isInstanceOf(dataDisplayTemp, ExpDataDisplay.class))
+				if (java.beans.Beans.isInstanceOf(dataDisplayTemp, ExpDataDisplay.class)) {
 					displays[0] = (ExpDataDisplay) dataDisplayTemp;
-			} catch (Exception e) {
-				LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(UI_CLIENT_LOGGER));
+				}
+			} catch (final Exception e) {
+				LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(ReCBaseUI.UI_CLIENT_LOGGER));
 			}
 		}
 
@@ -1993,30 +2074,36 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 		try {
 			dataModelLocation = ReCResourceBundle.findStringOrDefault(expHistory.getApparatusConfig()
 					.getDataModelClassLocationBundleKey(), null);
-		} catch (Exception ignored) {
+		} catch (final Exception ignored) {
 			// don't print the not found exception please...
 		}
 
 		if (dataModelLocation != null) {
 			try {
-				Object expDataModelTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
+				final Object expDataModelTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
 						dataModelLocation);
-				if (java.beans.Beans.isInstanceOf(expDataModelTemp, ExpDataModel.class))
+				if (java.beans.Beans.isInstanceOf(expDataModelTemp, ExpDataModel.class)) {
 					dataModel = (ExpDataModel) expDataModelTemp;
-			} catch (Exception e) {
-				LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(UI_CLIENT_LOGGER));
+				}
+			} catch (final Exception e) {
+				LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(ReCBaseUI.UI_CLIENT_LOGGER));
 			}
 		}
 		// if the user didn't defined is data model, then use the default one
-		if (dataModel == null)
+		if (dataModel == null) {
 			dataModel = new DefaultExpDataModel();
+		}
 
 		try {
 			dataModel.setDpwDataSource(expHistory.getProducerWrapper());
-			((DataCollector) dataModel).initAcquisitionThread(); // iniciar a aquisicao de dados do multicast
-		} catch (Exception e) {
+			((DataCollector) dataModel).initAcquisitionThread(); // iniciar a
+																	// aquisicao
+																	// de dados
+																	// do
+																	// multicast
+		} catch (final Exception e) {
 			e.printStackTrace();
-			LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(UI_CLIENT_LOGGER));
+			LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(ReCBaseUI.UI_CLIENT_LOGGER));
 			statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault(
 					"ReCBaseUI$rec.bui.linkare.rec.status.failedDataoutputConnection",
 					"Failed data output connection..."));
@@ -2029,17 +2116,18 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 
 		// The experimentInternalFrame takes care of adding the expdatamodels to
 		// the displays
-		for (int i = 0; i < displays.length; i++) {
-			experimentInternalFrame.addExpDataDisplay(displays[i]);
+		for (final ExpDataDisplay display : displays) {
+			experimentInternalFrame.addExpDataDisplay(display);
 		}
 
 		experimentInternalFrame.setTitle(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.experiment",
-				"Experiment")
-				+ expHistory.getExpCount() + " [" + expHistory.getApparatusName() + "]");
+				"Experiment") + expHistory.getExpCount() + " [" + expHistory.getApparatusName() + "]");
 
 		experimentInternalFrame.setToolTipText(ReCResourceBundle.findStringOrDefault(
 				"ReCBaseUI$rec.bui.tip.experiment", "Experiment")
-				+ expHistory.getExpCount() + " [" + expHistory.getApparatusName() + "]");
+				+ expHistory.getExpCount()
+				+ " ["
+				+ expHistory.getApparatusName() + "]");
 
 		mDIDesktopPane.add(experimentInternalFrame);
 
@@ -2054,7 +2142,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * @return Value of property showedMessageConfig.
 	 */
 	public boolean isShowedMessageConfig() {
-		return this.showedMessageConfig;
+		return showedMessageConfig;
 	}
 
 	/**
@@ -2062,7 +2150,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * 
 	 * @param showedMessageConfig New value of property showedMessageConfig.
 	 */
-	public void setShowedMessageConfig(boolean showedMessageConfig) {
+	public void setShowedMessageConfig(final boolean showedMessageConfig) {
 		this.showedMessageConfig = showedMessageConfig;
 	}
 
@@ -2072,7 +2160,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * @return Value of property enterApparatusRoom.
 	 */
 	public boolean isEnterApparatusRoom() {
-		return this.enterApparatusRoom;
+		return enterApparatusRoom;
 	}
 
 	/**
@@ -2080,7 +2168,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * 
 	 * @param enterApparatusRoom New value of property enterApparatusRoom.
 	 */
-	public void setEnterApparatusRoom(boolean enterApparatusRoom) {
+	public void setEnterApparatusRoom(final boolean enterApparatusRoom) {
 		this.enterApparatusRoom = enterApparatusRoom;
 	}
 
@@ -2090,7 +2178,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * @return Value of property showHistory.
 	 */
 	public boolean isShowHistory() {
-		return this.showHistory;
+		return showHistory;
 	}
 
 	/**
@@ -2098,9 +2186,9 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * 
 	 * @param showHistory New value of property showHistory.
 	 */
-	public void setShowHistory(boolean showHistory) {
+	public void setShowHistory(final boolean showHistory) {
 		int found = -1;
-		java.awt.Component[] comps = jTabbedPaneInfoUsers.getComponents();
+		final java.awt.Component[] comps = jTabbedPaneInfoUsers.getComponents();
 		for (int i = 0; i < comps.length; i++) {
 			if (comps[i].equals(expHistoryPanelNew)) {
 				found = i;
@@ -2110,31 +2198,34 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 
 		this.showHistory = showHistory;
 		if (showHistory) {
-			if (found > -1)
+			if (found > -1) {
 				return;
+			}
 
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
-					if (!jInternalFrameTabs.isVisible())
+					if (!jInternalFrameTabs.isVisible()) {
 						jInternalFrameTabs.setVisible(true);
-					jTabbedPaneInfoUsers
-							.addTab(
-									ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.title.expHistory",
-											"Experiment History"),
-									ReCResourceBundle.findImageIconOrDefault("ReCBaseUI$rec.bui.icon.experiment",
-											new ImageIcon(getClass().getResource(
-													"/com/linkare/rec/impl/baseUI/resources/Experiment16.gif"))),
-									expHistoryPanelNew,
-									ReCResourceBundle
-											.findStringOrDefault("ReCBaseUI$rec.bui.tip.expHistory",
-													"Experiment History gives you access to all the experiments that have been made since you were connected to the system"));
+					}
+					jTabbedPaneInfoUsers.addTab(
+							ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.title.expHistory",
+									"Experiment History"),
+							ReCResourceBundle.findImageIconOrDefault(
+									"ReCBaseUI$rec.bui.icon.experiment",
+									new ImageIcon(getClass().getResource(
+											"/com/linkare/rec/impl/baseUI/resources/Experiment16.gif"))),
+							expHistoryPanelNew,
+							ReCResourceBundle
+									.findStringOrDefault("ReCBaseUI$rec.bui.tip.expHistory",
+											"Experiment History gives you access to all the experiments that have been made since you were connected to the system"));
 					toolBarPanel.setSelectHistory(true);
 					jTabbedPaneInfoUsers.setSelectedComponent(expHistoryPanelNew);
 				}
 			});
 		} else {
-			if (found < 0)
+			if (found < 0) {
 				return;
+			}
 
 			jTabbedPaneInfoUsers.remove(expHistoryPanelNew);
 			toolBarPanel.setSelectHistory(false);
@@ -2144,7 +2235,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 				try {
 					// This way we lock the swing thread and it has to wait for
 					// us to finish first
-					Thread t = new Thread() {
+					final Thread t = new Thread() {
 						public void run() {
 							jInternalFrameTabs.setVisible(false);
 						}
@@ -2152,7 +2243,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 
 					t.start();
 					t.join();
-				} catch (InterruptedException ignored) {
+				} catch (final InterruptedException ignored) {
 				}
 			}
 		}
@@ -2175,7 +2266,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * @return Value of property connectLab.
 	 */
 	public boolean isConnectLab() {
-		return this.connectLab;
+		return connectLab;
 	}
 
 	private Lab currentLab = null;
@@ -2187,9 +2278,10 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * 
 	 * @param connectLab New value of property connectLab.
 	 */
-	public void setConnectLab(boolean connectLab) {
-		if (shuttingDown)
+	public void setConnectLab(final boolean connectLab) {
+		if (shuttingDown) {
 			return;
+		}
 
 		if (!connectLab && !alreadyDisconnected)// && currentLab != null &&
 		// currentLab.isEnabled())
@@ -2208,17 +2300,19 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 
 			finishedDisconnection = true;
 
-			if (waitDialog != null)
+			if (waitDialog != null) {
 				waitDialog.setVisible(false);
+			}
 
-			if (recBaseUI.getDesktopLocationBundleKey() != null)
-				mDIDesktopPane.setBackgroundImage(ReCResourceBundle
-						.findImageIconOrDefault(
+			if (recBaseUI.getDesktopLocationBundleKey() != null) {
+				mDIDesktopPane.setBackgroundImage(
+						ReCResourceBundle.findImageIconOrDefault(
 								recBaseUI.getDesktopLocationBundleKey(),
 								new ImageIcon(getClass().getResource(
 										"/com/linkare/rec/impl/baseUI/resources/desktopback.png"))).getImage(), true);
-			else
+			} else {
 				mDIDesktopPane.setBackgroundImage(null, false);
+			}
 
 		} else if (connectLab) {
 			/*
@@ -2226,13 +2320,14 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 			 * currentLab = (Lab)node;
 			 */
 
-			if (loginFrame.getUsername() == null || loginFrame.getPassword() == null)
+			if (loginFrame.getUsername() == null || loginFrame.getPassword() == null) {
 				return;
+			}
 
 			waitDialog = new WaitDialog(this, false, ReCResourceBundle.findStringOrDefault(
-					"ReCBaseUI$rec.bui.lbl.connectingToLab", "Connecting to lab"), ReCResourceBundle
-					.findImageIconOrDefault("ReCBaseUI$rec.bui.icon.connect", new ImageIcon(getClass().getResource(
-							"/com/linkare/rec/impl/baseUI/resources/earth16.gif"))));
+					"ReCBaseUI$rec.bui.lbl.connectingToLab", "Connecting to lab"),
+					ReCResourceBundle.findImageIconOrDefault("ReCBaseUI$rec.bui.icon.connect", new ImageIcon(getClass()
+							.getResource("/com/linkare/rec/impl/baseUI/resources/earth16.gif"))));
 			// waitDialog.setBackgroundImage(ReCResourceBundle.findImageIconOrDefault("ReCBaseUI$rec.bui.image.waitConnectLab",
 			// new
 			// ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/connectlab.jpg"))).getImage(),

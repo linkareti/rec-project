@@ -27,8 +27,8 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable {
 	private double lastFreq = 50.0;
 
 	private boolean playing = true;
-	private javax.media.Player p = null;
-	private InterLacedSineWaveStream baseStream = null;
+	private final javax.media.Player p = null;
+	private final InterLacedSineWaveStream baseStream = null;
 
 	/** Creates a new instance of Sound */
 	public SoundProducer() {
@@ -36,17 +36,18 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable {
 		new Thread(this).start();
 	}
 
-	public void startPlayingAudioFile(java.io.File file) throws UnsupportedAudioFileException, IOException,
+	public void startPlayingAudioFile(final java.io.File file) throws UnsupportedAudioFileException, IOException,
 			LineUnavailableException {
-		AudioInputStream AIStream = AudioSystem.getAudioInputStream(file);
-		DataLine.Info Info = new DataLine.Info(SourceDataLine.class, AIStream.getFormat());
+		final AudioInputStream AIStream = AudioSystem.getAudioInputStream(file);
+		final DataLine.Info Info = new DataLine.Info(SourceDataLine.class, AIStream.getFormat());
 		SourceDataLine Line = (SourceDataLine) AudioSystem.getLine(Info);
 		Line.open(AIStream.getFormat());
 		Line.start();
-		byte[] Buffer = new byte[16384];
+		final byte[] Buffer = new byte[16384];
 		int Count;
-		while ((Count = AIStream.read(Buffer)) > 0)
+		while ((Count = AIStream.read(Buffer)) > 0) {
 			Line.write(Buffer, 0, Count);
+		}
 		AIStream.close();
 		Line.drain();
 		Line.stop();
@@ -55,7 +56,7 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable {
 
 	}
 
-	public void startPlayingAudioFile(int waveForm) throws UnsupportedAudioFileException, IOException,
+	public void startPlayingAudioFile(final int waveForm) throws UnsupportedAudioFileException, IOException,
 			LineUnavailableException {
 		if (waveForm == 0) {
 			// startPlayingAudioFile(new
@@ -72,7 +73,7 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable {
 
 	private SoundThread soundBoard = null;
 
-	public void startPlayingSinWave(double freq) {
+	public void startPlayingSinWave(final double freq) {
 		System.out.println("Playing sin wave with freq=" + freq);
 
 		playing = true;
@@ -118,7 +119,7 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable {
 			// System.out.println("Failed to start the processor.");
 			// return;
 			// }
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -137,11 +138,11 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable {
 		// }
 	}
 
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 		new SoundProducer();
 	}
 
-	public void setFrequency(double freq) {
+	public void setFrequency(final double freq) {
 		lastFreq = this.freq;
 		this.freq = freq;
 		if (baseStream != null) {
@@ -161,10 +162,11 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable {
 		return playing;
 	}
 
-	private Object waitSync = new Object();
+	private final Object waitSync = new Object();
 	private boolean stateTransitionOK = true;
 
-	public void controllerUpdate(javax.media.ControllerEvent evt) {
+	@Override
+	public void controllerUpdate(final javax.media.ControllerEvent evt) {
 		if (evt instanceof javax.media.ConfigureCompleteEvent || evt instanceof javax.media.RealizeCompleteEvent
 				|| evt instanceof javax.media.PrefetchCompleteEvent || evt instanceof javax.media.StartEvent) {
 			synchronized (waitSync) {
@@ -183,19 +185,20 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable {
 		}
 	}
 
-	private boolean waitForState(int state) {
+	private boolean waitForState(final int state) {
 		synchronized (waitSync) {
 			try {
 				while (p.getState() != state && stateTransitionOK) {
 					waitSync.wait();
 				}
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				e.printStackTrace();
 			}
 		}
 		return stateTransitionOK;
 	}
 
+	@Override
 	public void run() {
 		boolean fileFound = false;
 
@@ -203,25 +206,25 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable {
 			synchronized (this) {
 				fileFound = false;
 				try {
-					double freq = Double.parseDouble(getData(new java.io.File("/tmp/startFreq")));
+					final double freq = Double.parseDouble(getData(new java.io.File("/tmp/startFreq")));
 					startPlayingSinWave(freq);
 					fileFound = true;
-				} catch (NumberFormatException nfe) {
+				} catch (final NumberFormatException nfe) {
 				}
 
 				if (!fileFound) {
 					try {
-						int wave = Integer.parseInt(getData(new java.io.File("/tmp/startFile")));
+						final int wave = Integer.parseInt(getData(new java.io.File("/tmp/startFile")));
 						startPlayingAudioFile(wave);
 						fileFound = true;
-					} catch (NumberFormatException nfe) {
-					} catch (UnsupportedAudioFileException e) {
+					} catch (final NumberFormatException nfe) {
+					} catch (final UnsupportedAudioFileException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					} catch (IOException e) {
+					} catch (final IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					} catch (LineUnavailableException e) {
+					} catch (final LineUnavailableException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
@@ -229,10 +232,10 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable {
 
 				if (!fileFound) {
 					try {
-						double freq = Double.parseDouble(getData(new java.io.File("/tmp/freq")));
+						final double freq = Double.parseDouble(getData(new java.io.File("/tmp/freq")));
 						setFrequency(freq);
 						fileFound = true;
-					} catch (NumberFormatException nfe) {
+					} catch (final NumberFormatException nfe) {
 					}
 				}
 
@@ -241,22 +244,22 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable {
 						Integer.parseInt(getData(new java.io.File("/tmp/stop")));
 						stopPlaying();
 						fileFound = true;
-					} catch (NumberFormatException nfe) {
+					} catch (final NumberFormatException nfe) {
 					}
 				}
 
 				try {
 					wait(100);
-				} catch (InterruptedException ie) {
+				} catch (final InterruptedException ie) {
 				}
 			}
 		}
 	}
 
-	private String getData(java.io.File file) {
+	private String getData(final java.io.File file) {
 		java.io.FileReader fr;
 		int c;
-		StringBuffer sb = new StringBuffer();
+		final StringBuffer sb = new StringBuffer();
 		;
 		try {
 			fr = new java.io.FileReader(file);
@@ -265,8 +268,8 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable {
 			}
 			fr.close();
 			file.delete();
-		} catch (java.io.FileNotFoundException fnfe) {
-		} catch (java.io.IOException ioe) {
+		} catch (final java.io.FileNotFoundException fnfe) {
+		} catch (final java.io.IOException ioe) {
 		}
 		return sb.toString().trim();
 	}

@@ -40,33 +40,34 @@ public class MultiCastHardwareWrapper implements MultiCastHardwareOperations {
 	private static String MC_HARDWARE_LOGGER = "MultiCastHardware.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(MC_HARDWARE_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(MC_HARDWARE_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER));
 		}
 	}
 
-	public MultiCastHardwareWrapper(MultiCastHardware delegate) {
+	public MultiCastHardwareWrapper(final MultiCastHardware delegate) {
 		this.delegate = delegate;
 		checkConnect();
 	}
 
 	private void checkConnect() {
 		if (delegate == null) {
-			Logger.getLogger(MC_HARDWARE_LOGGER)
-					.log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			connected = false;
 		}
 		try {
-			if (delegate._non_existent())
+			if (delegate._non_existent()) {
 				connected = false;
-			else
+			} else {
 				connected = true;
-		} catch (Exception e) {
+			}
+		} catch (final Exception e) {
 
 			LoggerUtil.logThrowable(
-					"Couldn't determine remote existence of MultiCastHardware. Assuming disconnected...", e, Logger
-							.getLogger(MC_HARDWARE_LOGGER));
+					"Couldn't determine remote existence of MultiCastHardware. Assuming disconnected...", e,
+					Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER));
 			connected = false;
 		}
 	}
@@ -76,216 +77,230 @@ public class MultiCastHardwareWrapper implements MultiCastHardwareOperations {
 		return connected;
 	}
 
-	public boolean isSameDelegate(MultiCastHardwareWrapper other) {
-		return other.delegate._is_equivalent(this.delegate);
+	public boolean isSameDelegate(final MultiCastHardwareWrapper other) {
+		return other.delegate._is_equivalent(delegate);
 	}
 
-	public boolean isSameDelegate(MultiCastHardware other) {
-		return other._is_equivalent(this.delegate);
+	public boolean isSameDelegate(final MultiCastHardware other) {
+		return other._is_equivalent(delegate);
 	}
 
 	public MultiCastHardware getDelegate() {
 		return delegate;
 	}
 
-	public void configure(UserInfo user, HardwareAcquisitionConfig configuration) throws IncorrectStateException,
-			NotAvailableException, WrongConfigurationException, NotOwnerException, NotRegistered, NotAuthorized {
+	@Override
+	public void configure(final UserInfo user, final HardwareAcquisitionConfig configuration)
+			throws IncorrectStateException, NotAvailableException, WrongConfigurationException, NotOwnerException,
+			NotRegistered, NotAuthorized {
 		if (delegate == null) {
-			Logger.getLogger(MC_HARDWARE_LOGGER)
-					.log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			return;
 		}
 
 		try {
 			delegate.configure(user, configuration);
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(MC_HARDWARE_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER));
 			checkConnect();
 		}
 	}
 
-	public UserInfo[] getClientList(UserInfo user) throws NotRegistered, NotAuthorized {
+	@Override
+	public UserInfo[] getClientList(final UserInfo user) throws NotRegistered, NotAuthorized {
 		if (delegate == null) {
-			Logger.getLogger(MC_HARDWARE_LOGGER)
-					.log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.getClientList(user);
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(MC_HARDWARE_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER));
 			checkConnect();
 		}
 
 		return null;
 	}
 
-	public DataProducer getDataProducer(UserInfo user) throws IncorrectStateException, NotAvailableException,
+	@Override
+	public DataProducer getDataProducer(final UserInfo user) throws IncorrectStateException, NotAvailableException,
 			NotRegistered, NotAuthorized {
 		if (delegate == null) {
-			Logger.getLogger(MC_HARDWARE_LOGGER)
-					.log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.getDataProducer(user);
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(MC_HARDWARE_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER));
 			checkConnect();
 		}
 
 		return null;
 	}
 
-	public HardwareInfo getHardwareInfo(UserInfo user) throws NotRegistered, NotAuthorized {
+	@Override
+	public HardwareInfo getHardwareInfo(final UserInfo user) throws NotRegistered, NotAuthorized {
 		if (delegate == null) {
-			Logger.getLogger(MC_HARDWARE_LOGGER)
-					.log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.getHardwareInfo(user);
-		} catch (SystemException e) {
+		} catch (final SystemException e) {
 			e.printStackTrace();
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(MC_HARDWARE_LOGGER));
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER));
 			checkConnect();
 		}
 
 		return null;
 	}
 
-	public HardwareState getHardwareState(UserInfo user) throws NotRegistered, NotAuthorized {
+	@Override
+	public HardwareState getHardwareState(final UserInfo user) throws NotRegistered, NotAuthorized {
 		if (delegate == null) {
-			Logger.getLogger(MC_HARDWARE_LOGGER)
-					.log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.getHardwareState(user);
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(MC_HARDWARE_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER));
 			checkConnect();
 		}
 
 		return null;
 	}
 
-	public void registerDataClient(DataClient data_client) throws NotAvailableException, MaximumClientsReached,
+	@Override
+	public void registerDataClient(final DataClient data_client) throws NotAvailableException, MaximumClientsReached,
 			NotAuthorized {
 		if (delegate == null) {
-			Logger.getLogger(MC_HARDWARE_LOGGER)
-					.log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			return;
 		}
 
 		try {
 			delegate.registerDataClient(data_client);
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(MC_HARDWARE_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER));
 			checkConnect();
 		}
 	}
 
-	public void requireLock(UserInfo user) throws IncorrectStateException, NotAvailableException, NotOwnerException,
-			NotRegistered, NotAuthorized {
+	@Override
+	public void requireLock(final UserInfo user) throws IncorrectStateException, NotAvailableException,
+			NotOwnerException, NotRegistered, NotAuthorized {
 		if (delegate == null) {
-			Logger.getLogger(MC_HARDWARE_LOGGER)
-					.log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			return;
 		}
 
 		try {
 			delegate.requireLock(user);
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(MC_HARDWARE_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER));
 			checkConnect();
 		}
 	}
 
-	public void reset(UserInfo user) throws IncorrectStateException, NotAvailableException, NotOwnerException,
+	@Override
+	public void reset(final UserInfo user) throws IncorrectStateException, NotAvailableException, NotOwnerException,
 			NotRegistered, NotAuthorized {
 		if (delegate == null) {
-			Logger.getLogger(MC_HARDWARE_LOGGER)
-					.log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			return;
 		}
 
 		try {
 			delegate.reset(user);
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(MC_HARDWARE_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER));
 			checkConnect();
 		}
 
 	}
 
-	public void sendMessage(UserInfo userFrom, String clientTo, String message) throws NotRegistered, NotAuthorized {
+	@Override
+	public void sendMessage(final UserInfo userFrom, final String clientTo, final String message) throws NotRegistered,
+			NotAuthorized {
 		if (delegate == null) {
-			Logger.getLogger(MC_HARDWARE_LOGGER)
-					.log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			return;
 		}
 
 		try {
 			delegate.sendMessage(userFrom, clientTo, message);
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(MC_HARDWARE_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER));
 			checkConnect();
 		}
 	}
 
-	public DataProducer start(UserInfo user) throws IncorrectStateException, NotAvailableException, NotOwnerException,
-			NotRegistered, NotAuthorized {
+	@Override
+	public DataProducer start(final UserInfo user) throws IncorrectStateException, NotAvailableException,
+			NotOwnerException, NotRegistered, NotAuthorized {
 		if (delegate == null) {
-			Logger.getLogger(MC_HARDWARE_LOGGER)
-					.log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.start(user);
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(MC_HARDWARE_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER));
 			checkConnect();
 		}
 
 		return null;
 	}
 
-	public DataProducer startOutput(UserInfo user, DataProducer data_source) throws IncorrectStateException,
-			NotAvailableException, NotOwnerException, NotRegistered, NotAuthorized {
+	@Override
+	public DataProducer startOutput(final UserInfo user, final DataProducer data_source)
+			throws IncorrectStateException, NotAvailableException, NotOwnerException, NotRegistered, NotAuthorized {
 		if (delegate == null) {
-			Logger.getLogger(MC_HARDWARE_LOGGER)
-					.log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.startOutput(user, data_source);
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(MC_HARDWARE_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER));
 			checkConnect();
 		}
 
 		return null;
 	}
 
-	public void stop(UserInfo user) throws IncorrectStateException, NotAvailableException, NotOwnerException,
+	@Override
+	public void stop(final UserInfo user) throws IncorrectStateException, NotAvailableException, NotOwnerException,
 			NotRegistered, NotAuthorized {
 		if (delegate == null) {
-			Logger.getLogger(MC_HARDWARE_LOGGER)
-					.log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			return;
 		}
 
 		try {
 			delegate.stop(user);
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(MC_HARDWARE_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(MultiCastHardwareWrapper.MC_HARDWARE_LOGGER));
 			checkConnect();
 		}
 

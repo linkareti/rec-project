@@ -12,6 +12,7 @@ import java.util.Map;
 
 import javax.swing.plaf.FontUIResource;
 
+import com.linkare.rec.impl.newface.laf.flat.theme.AbstractStyle;
 import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 
 /**
@@ -20,17 +21,17 @@ import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 @Style
 public class MenuStyle extends DefaultStyle {
 
-	//ENABLED COLORS
+	// ENABLED COLORS
 	private static final Color COLOR_MENU_BG = new Color(0x285357);
 	private static final Color COLOR_MENU_FG = new Color(0xE4EEED);
 	private static final Color COLOR_MENU_ITEM_HOVER = new Color(0x22363A);
 	private static final Color COLOR_MENU_DISABLED_FG = new Color(0x22363A);
-	//PROPERTIES
+	// PROPERTIES
 	private static final String PT_MENU_SELECTION_FG = "selectionForeground";
 	private static final String PT_MENU_SELECTION_BG = "selectionBackground";
 	private static final String PT_MENU_DISABLED_FG = "disabledForeground";
 
-	//LABEL FONT
+	// LABEL FONT
 	public static final Font FONT_MENU = new FontUIResource("Arial", Font.PLAIN, 12);
 
 	public static final String ID = "Menu";
@@ -44,21 +45,21 @@ public class MenuStyle extends DefaultStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return MenuStyle.ID;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(FOREGROUND, WHITE_DEFAULT_COLOR);
-		map.put(PT_MENU_SELECTION_FG, COLOR_MENU_ITEM_HOVER);
-		map.put(PT_MENU_SELECTION_BG, COLOR_MENU_FG);
+		map.put(AbstractStyle.FOREGROUND, DefaultStyle.WHITE_DEFAULT_COLOR);
+		map.put(MenuStyle.PT_MENU_SELECTION_FG, MenuStyle.COLOR_MENU_ITEM_HOVER);
+		map.put(MenuStyle.PT_MENU_SELECTION_BG, MenuStyle.COLOR_MENU_FG);
 
-		map.put(BORDER, EMPTY_BORDER_MARGIN_2);
-		map.put(FONT, FONT_MENU);
+		map.put(AbstractStyle.BORDER, DefaultStyle.EMPTY_BORDER_MARGIN_2);
+		map.put(AbstractStyle.FONT, MenuStyle.FONT_MENU);
 
 	}
 

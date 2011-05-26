@@ -29,7 +29,7 @@ public class ObjectID implements java.io.Serializable {
 	 * @return Value of property oid.
 	 */
 	public byte[] getOid() {
-		return this.oid;
+		return oid;
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class ObjectID implements java.io.Serializable {
 	 * 
 	 * @param oid New value of property oid.
 	 */
-	public void setOid(byte[] oid) {
+	public void setOid(final byte[] oid) {
 		this.oid = oid;
 	}
 

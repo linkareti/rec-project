@@ -39,14 +39,19 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
 
-	private VariablePanel r1i, r1e, r2i, r2e, m1, m2, inc, tbs, nSamples;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3505735736072304856L;
 
-	private JButton buttonOK, buttonCancel, buttonReset;
+	private final VariablePanel r1i, r1e, r2i, r2e, m1, m2, inc, tbs, nSamples;
 
-	private JPanel panelBotoes, panelTopo, panelBaixo;
+	private final JButton buttonOK, buttonCancel, buttonReset;
 
-	private DrawingPanel panelDisco1, panelDisco2;
-	private DrawingPanel panelPlano;
+	private final JPanel panelBotoes, panelTopo, panelBaixo;
+
+	private final DrawingPanel panelDisco1, panelDisco2;
+	private final DrawingPanel panelPlano;
 	private DrawableShape d1i, d1e, d2i, d2e;
 	private Dataset plano;
 	private TitledBorder title;
@@ -57,6 +62,7 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 				"di$rec.exp.customizer.tip.r1i", "Raio interno do disco 1"));
 
 		r1i.addExecutor(new VariableExecutor() {
+			@Override
 			public void execute() {
 				actualizar();
 			}
@@ -67,6 +73,7 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 				"di$rec.exp.customizer.tip.r1e", "Raio externo do disco 1"));
 
 		r1e.addExecutor(new VariableExecutor() {
+			@Override
 			public void execute() {
 				actualizar();
 			}
@@ -77,6 +84,7 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 				"di$rec.exp.customizer.tip.r2i", "Raio interno do disco 2"));
 
 		r2i.addExecutor(new VariableExecutor() {
+			@Override
 			public void execute() {
 				actualizar();
 			}
@@ -87,6 +95,7 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 				"di$rec.exp.customizer.tip.r2e", "Raio externo do disco 2"));
 
 		r2e.addExecutor(new VariableExecutor() {
+			@Override
 			public void execute() {
 				actualizar();
 			}
@@ -105,6 +114,7 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 				"di$rec.exp.customizer.tip.inc", "Inclinacao do plano"));
 
 		inc.addExecutor(new VariableExecutor() {
+			@Override
 			public void execute() {
 				actualizar();
 			}
@@ -115,12 +125,13 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 				"di$rec.exp.customizer.tip.tbs", "Tempo entre Amostras"));
 
 		nSamples = new VariablePanel(10, 150, 150, 0, 2, ReCResourceBundle.findStringOrDefault(
-				"di$rec.exp.customizer.title.nsamps", "Numero de Amostras"), ReCResourceBundle
-				.findStringOrDefault("di$rec.exp.customizer.tip.nsamps", "Numero de Amostras"));
+				"di$rec.exp.customizer.title.nsamps", "Numero de Amostras"), ReCResourceBundle.findStringOrDefault(
+				"di$rec.exp.customizer.tip.nsamps", "Numero de Amostras"));
 
 		buttonOK = new JButton(ReCResourceBundle.findStringOrDefault("di$rec.exp.customizer.title.ok", "Correr"));
 		buttonOK.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
+			@Override
+			public void actionPerformed(final ActionEvent evt) {
 				// OK o utilizador quer enviar as informacoes, vamos colocar os
 				// valores nos canais!!!
 				acqConfig.setTotalSamples((int) nSamples.getCurrentValue());
@@ -142,16 +153,17 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 		buttonCancel = new JButton(ReCResourceBundle.findStringOrDefault("di$rec.exp.customizer.title.cancel",
 				"Cancelar"));
 		buttonCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
+			@Override
+			public void actionPerformed(final ActionEvent evt) {
 				// Sempre igual
 				fireICustomizerListenerCanceled();
 			}
 		});
 
-		buttonReset = new JButton(ReCResourceBundle.findStringOrDefault("di$rec.exp.customizer.title.dfc",
-				"Restaurar"));
+		buttonReset = new JButton(ReCResourceBundle.findStringOrDefault("di$rec.exp.customizer.title.dfc", "Restaurar"));
 		buttonReset.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
+			@Override
+			public void actionPerformed(final ActionEvent evt) {
 				r1i.reset();
 				r1e.reset();
 				r2i.reset();
@@ -234,19 +246,19 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 		panelTopo.add(panelDisco2);
 		panelTopo.add(panelPlano);
 
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(panelTopo);
 		this.add(panelBaixo);
 	}
 
-	public static void main(String args[]) {
-		JFrame dummy = new JFrame();
+	public static void main(final String args[]) {
+		final JFrame dummy = new JFrame();
 		dummy.getContentPane().add(new DICustomizer());
 		dummy.pack();
 		dummy.show();
 	}
 
-	public double arredondar(double a, int x) {
+	public double arredondar(final double a, final int x) {
 		double b, c, d;
 		d = Math.pow(10, x);
 		b = (a * d);
@@ -255,17 +267,17 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 	}
 
 	private void actualizar() {
-		double rint1 = r1i.getCurrentValue();
+		final double rint1 = r1i.getCurrentValue();
 
-		double rext1 = r1e.getCurrentValue();
+		final double rext1 = r1e.getCurrentValue();
 
-		double rint2 = r2i.getCurrentValue();
+		final double rint2 = r2i.getCurrentValue();
 		;
 
-		double rext2 = r2e.getCurrentValue();
+		final double rext2 = r2e.getCurrentValue();
 		;
 
-		double ang = inc.getCurrentValue();
+		final double ang = inc.getCurrentValue();
 		;
 
 		d1i = DrawableShape.createCircle(0, 0, 2 * rint1);
@@ -279,7 +291,7 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 		d2i.setMarkerColor(java.awt.Color.white, java.awt.Color.black);
 		d2e.setMarkerColor(java.awt.Color.red, java.awt.Color.black);
 
-		double m = Math.tan(Math.toRadians(-ang));
+		final double m = Math.tan(Math.toRadians(-ang));
 		plano = new Dataset(java.awt.Color.black, java.awt.Color.black, true);
 		plano.append(-5, -5 * m);
 		plano.append(5, 5 * m);
@@ -310,7 +322,8 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -322,7 +335,8 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -332,9 +346,10 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -348,9 +363,10 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -362,12 +378,14 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
 		return acqConfig;
 	}
 
 	// ESTE E' PARA ALTERAR
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		// Aqui sao fornecidos parametros do ultimo utilizador que fez a exp, e'
 		// bom manter!
 		this.acqConfig = acqConfig;
@@ -397,33 +415,38 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 
 			nSamples.setCurrentValue(acqConfig.getTotalSamples());
 
-			int freq = (int) acqConfig.getSelectedFrequency().getFrequency();
+			final int freq = (int) acqConfig.getSelectedFrequency().getFrequency();
 			tbs.setCurrentValue(freq);
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
+	@Override
 	public javax.swing.JComponent getCustomizerComponent() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/vdi/resources/di_iconified.png"));
 	}
 
 	// ESTE E' PARA ALTERAR
+	@Override
 	public String getCustomizerTitle() {
 		return "Inertial Discs Experiment Configuration Utility";
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}

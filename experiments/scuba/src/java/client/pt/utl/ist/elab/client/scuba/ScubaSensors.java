@@ -29,14 +29,18 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 public class ScubaSensors extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
 
-	private BufferedImage imgTube1 = new BufferedImage(50, 200, BufferedImage.TYPE_INT_ARGB);
-	private BufferedImage imgTube2 = new BufferedImage(imgTube1.getWidth(), imgTube1.getHeight(),
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2976008858081776558L;
+	private final BufferedImage imgTube1 = new BufferedImage(50, 200, BufferedImage.TYPE_INT_ARGB);
+	private final BufferedImage imgTube2 = new BufferedImage(imgTube1.getWidth(), imgTube1.getHeight(),
 			BufferedImage.TYPE_INT_ARGB);
-	private BufferedImage imgTube3 = new BufferedImage(imgTube1.getWidth(), imgTube1.getHeight(),
+	private final BufferedImage imgTube3 = new BufferedImage(imgTube1.getWidth(), imgTube1.getHeight(),
 			BufferedImage.TYPE_INT_ARGB);
-	private BufferedImage imgTube4 = new BufferedImage(imgTube1.getWidth(), imgTube1.getHeight(),
+	private final BufferedImage imgTube4 = new BufferedImage(imgTube1.getWidth(), imgTube1.getHeight(),
 			BufferedImage.TYPE_INT_ARGB);
-	private Icon icon = new javax.swing.ImageIcon(getClass().getResource(
+	private final Icon icon = new javax.swing.ImageIcon(getClass().getResource(
 			"/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
 
 	/** Creates new form SeringeSensor */
@@ -48,32 +52,32 @@ public class ScubaSensors extends javax.swing.JPanel implements com.linkare.rec.
 
 		Graphics2D g2D = (Graphics2D) imgTube1.getGraphics();
 		Color baseColor = Color.cyan;
-		g2D.setPaint(new GradientPaint((float) imgTube1.getWidth() / 2.F, 0.F, baseColor.brighter().brighter(),
-				(float) imgTube1.getWidth() / 2.F, (float) imgTube1.getHeight(), baseColor.darker().darker()));
+		g2D.setPaint(new GradientPaint(imgTube1.getWidth() / 2.F, 0.F, baseColor.brighter().brighter(), imgTube1
+				.getWidth() / 2.F, imgTube1.getHeight(), baseColor.darker().darker()));
 		g2D.fillRect(0, 0, imgTube1.getWidth(), imgTube1.getHeight());
 		g2D.setColor(Color.white);
 		g2D.drawRect(0, 0, imgTube1.getWidth(), imgTube1.getHeight());
 
 		g2D = (Graphics2D) imgTube2.getGraphics();
 		baseColor = Color.green;
-		g2D.setPaint(new GradientPaint((float) imgTube1.getWidth() / 2.F, 0.F, baseColor.brighter().brighter(),
-				(float) imgTube1.getWidth() / 2.F, (float) imgTube1.getHeight(), baseColor.darker().darker()));
+		g2D.setPaint(new GradientPaint(imgTube1.getWidth() / 2.F, 0.F, baseColor.brighter().brighter(), imgTube1
+				.getWidth() / 2.F, imgTube1.getHeight(), baseColor.darker().darker()));
 		g2D.fillRect(0, 0, imgTube1.getWidth(), imgTube1.getHeight());
 		g2D.setColor(Color.white);
 		g2D.drawRect(0, 0, imgTube1.getWidth(), imgTube1.getHeight());
 
 		g2D = (Graphics2D) imgTube3.getGraphics();
 		baseColor = Color.yellow;
-		g2D.setPaint(new GradientPaint((float) imgTube1.getWidth() / 2.F, 0.F, baseColor.brighter().brighter(),
-				(float) imgTube1.getWidth() / 2.F, (float) imgTube1.getHeight(), baseColor.darker().darker()));
+		g2D.setPaint(new GradientPaint(imgTube1.getWidth() / 2.F, 0.F, baseColor.brighter().brighter(), imgTube1
+				.getWidth() / 2.F, imgTube1.getHeight(), baseColor.darker().darker()));
 		g2D.fillRect(0, 0, imgTube1.getWidth(), imgTube1.getHeight());
 		g2D.setColor(Color.white);
 		g2D.drawRect(0, 0, imgTube1.getWidth(), imgTube1.getHeight());
 
 		g2D = (Graphics2D) imgTube4.getGraphics();
 		baseColor = Color.pink;
-		g2D.setPaint(new GradientPaint((float) imgTube1.getWidth() / 2.F, 0.F, baseColor.brighter().brighter(),
-				(float) imgTube1.getWidth() / 2.F, (float) imgTube1.getHeight(), baseColor.darker().darker()));
+		g2D.setPaint(new GradientPaint(imgTube1.getWidth() / 2.F, 0.F, baseColor.brighter().brighter(), imgTube1
+				.getWidth() / 2.F, imgTube1.getHeight(), baseColor.darker().darker()));
 		g2D.fillRect(0, 0, imgTube1.getWidth(), imgTube1.getHeight());
 		g2D.setColor(Color.white);
 		g2D.drawRect(0, 0, imgTube1.getWidth(), imgTube1.getHeight());
@@ -115,47 +119,49 @@ public class ScubaSensors extends javax.swing.JPanel implements com.linkare.rec.
 	 * @see #getComponentGraphics
 	 * @see #repaint
 	 */
-	public void paint(Graphics g) {
+	@Override
+	public void paint(final Graphics g) {
 		super.paint(g);
-		if (pressure1 == null || deepness == null)
+		if (pressure1 == null || deepness == null) {
 			return;
+		}
 
-		Graphics2D g2D = (Graphics2D) g;
+		final Graphics2D g2D = (Graphics2D) g;
 
-		double pressure1 = this.pressure1.getValue().toDouble();
-		double pressure2 = this.pressure2.getValue().toDouble();
-		double pressure3 = this.pressure3.getValue().toDouble();
-		double pressure4 = this.pressure4.getValue().toDouble();
-		double deepness = this.deepness.getValue().toDouble();
+		final double pressure1 = this.pressure1.getValue().toDouble();
+		final double pressure2 = this.pressure2.getValue().toDouble();
+		final double pressure3 = this.pressure3.getValue().toDouble();
+		final double pressure4 = this.pressure4.getValue().toDouble();
+		final double deepness = this.deepness.getValue().toDouble();
 
-		int imgWidth = (int) getBounds().getWidth();
-		int imgHeight = (int) getBounds().getHeight();
-		int x_start = imgWidth / 2 - imgTube1.getWidth() * 2 - 25;
-		int y_start = imgHeight / 2 - imgTube1.getHeight() / 2;
+		final int imgWidth = (int) getBounds().getWidth();
+		final int imgHeight = (int) getBounds().getHeight();
+		final int x_start = imgWidth / 2 - imgTube1.getWidth() * 2 - 25;
+		final int y_start = imgHeight / 2 - imgTube1.getHeight() / 2;
 
 		g2D.drawImage(imgTube1, x_start + 10, y_start, imgTube1.getWidth(), imgTube1.getHeight(), null);
-		g2D.drawImage(imgTube2, x_start + 2 * 10 + imgTube1.getWidth(), y_start, imgTube2.getWidth(), imgTube2
-				.getHeight(), null);
-		g2D.drawImage(imgTube3, x_start + 3 * 10 + 2 * imgTube1.getWidth(), y_start, imgTube3.getWidth(), imgTube3
-				.getHeight(), null);
-		g2D.drawImage(imgTube4, x_start + 4 * 10 + 3 * imgTube1.getWidth(), y_start, imgTube4.getWidth(), imgTube4
-				.getHeight(), null);
+		g2D.drawImage(imgTube2, x_start + 2 * 10 + imgTube1.getWidth(), y_start, imgTube2.getWidth(),
+				imgTube2.getHeight(), null);
+		g2D.drawImage(imgTube3, x_start + 3 * 10 + 2 * imgTube1.getWidth(), y_start, imgTube3.getWidth(),
+				imgTube3.getHeight(), null);
+		g2D.drawImage(imgTube4, x_start + 4 * 10 + 3 * imgTube1.getWidth(), y_start, imgTube4.getWidth(),
+				imgTube4.getHeight(), null);
 
-		int max_radius = (imgTube1.getWidth() - 2) / 2;
-		int min_radius = 5;
+		final int max_radius = (imgTube1.getWidth() - 2) / 2;
+		final int min_radius = 5;
 
-		int deeppos = (int) Math.floor((imgTube1.getHeight() - max_radius * 2) * (deepness - DEEP_MIN)
+		final int deeppos = (int) Math.floor((imgTube1.getHeight() - max_radius * 2) * (deepness - DEEP_MIN)
 				/ (DEEP_MAX - DEEP_MIN));
-		int radius1 = max_radius
+		final int radius1 = max_radius
 				- (int) Math.ceil(((float) max_radius - min_radius)
 						* ((pressure1 - PRESS_MIN) / (PRESS_MAX - PRESS_MIN)));
-		int radius2 = max_radius
+		final int radius2 = max_radius
 				- (int) Math.ceil(((float) max_radius - min_radius)
 						* ((pressure2 - PRESS_MIN) / (PRESS_MAX - PRESS_MIN)));
-		int radius3 = max_radius
+		final int radius3 = max_radius
 				- (int) Math.ceil(((float) max_radius - min_radius)
 						* ((pressure3 - PRESS_MIN) / (PRESS_MAX - PRESS_MIN)));
-		int radius4 = max_radius
+		final int radius4 = max_radius
 				- (int) Math.ceil(((float) max_radius - min_radius)
 						* ((pressure4 - PRESS_MIN) / (PRESS_MAX - PRESS_MIN)));
 
@@ -200,8 +206,8 @@ public class ScubaSensors extends javax.swing.JPanel implements com.linkare.rec.
 	private PhysicsValue pressure4 = null;
 	private PhysicsValue deepness = null;
 
-	public void setPressuresAndDeepness(PhysicsValue pressure1, PhysicsValue pressure2, PhysicsValue pressure3,
-			PhysicsValue pressure4, PhysicsValue deepness) {
+	public void setPressuresAndDeepness(final PhysicsValue pressure1, final PhysicsValue pressure2,
+			final PhysicsValue pressure3, final PhysicsValue pressure4, final PhysicsValue deepness) {
 		this.pressure1 = pressure1;
 		this.pressure2 = pressure2;
 		this.pressure3 = pressure3;
@@ -210,31 +216,38 @@ public class ScubaSensors extends javax.swing.JPanel implements com.linkare.rec.
 		repaint();
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public Icon getIcon() {
 		return icon;
 	}
 
 	private ExpDataModel model = null;
 
-	public void setExpDataModel(ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
+		if (this.model != null) {
 			this.model.removeExpDataModelListener(this);
+		}
 		this.model = model;
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
-	public void headerAvailable(HardwareAcquisitionConfig header) {
+	public void headerAvailable(final HardwareAcquisitionConfig header) {
 		System.out.println("***********************************************");
 		System.out.println("***********************************************");
 		System.out.println("INIT headerAvailable");
@@ -263,41 +276,50 @@ public class ScubaSensors extends javax.swing.JPanel implements com.linkare.rec.
 	private HardwareAcquisitionConfig header = null;
 	private boolean acqHeaderInited = false;
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 		System.out.println("***********************************************");
 		System.out.println("***********************************************");
 		System.out.println("NEW SAMPLES ! COOL!");
 		System.out.println("***********************************************");
 		System.out.println("***********************************************");
-		if (!acqHeaderInited)
+		if (!acqHeaderInited) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 
-		int lastsample = evt.getSamplesEndIndex();
-		setPressuresAndDeepness(model.getValueAt(lastsample, 0), model.getValueAt(lastsample, 1), model.getValueAt(
-				lastsample, 2), model.getValueAt(lastsample, 3), model.getValueAt(lastsample, 4));
+		final int lastsample = evt.getSamplesEndIndex();
+		setPressuresAndDeepness(model.getValueAt(lastsample, 0), model.getValueAt(lastsample, 1),
+				model.getValueAt(lastsample, 2), model.getValueAt(lastsample, 3), model.getValueAt(lastsample, 4));
 	}
 
+	@Override
 	public String getName() {
 		return "Deepness Sensors";
 	}
 
+	@Override
 	public JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public JToolBar getToolBar() {
 		return null;
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 

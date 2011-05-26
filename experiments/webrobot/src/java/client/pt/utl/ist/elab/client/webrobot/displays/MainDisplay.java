@@ -16,6 +16,11 @@ import com.linkare.rec.impl.client.experiment.ExpDataModel;
 
 public class MainDisplay extends javax.swing.JPanel implements ExpDataDisplay {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6264873711019619672L;
+
 	/** Creates new form MainDisplay */
 	public MainDisplay() {
 		initComponents();
@@ -87,28 +92,34 @@ public class MainDisplay extends javax.swing.JPanel implements ExpDataDisplay {
 
 	}// GEN-END:initComponents
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.Icon getIcon() {
 		return icon;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
-	public void setExpDataModel(ExpDataModel model) {
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
 		jPanelIV1.setExpDataModel(model);
 		jPanelAnalogic1.setExpDataModel(model);
 		jPanelDigital1.setExpDataModel(model);
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
@@ -126,7 +137,7 @@ public class MainDisplay extends javax.swing.JPanel implements ExpDataDisplay {
 	// End of variables declaration//GEN-END:variables
 	/** My vars */
 	private ExpDataModel model;
-	private javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/displays/resources/Main16.gif"));
-	private String name = "Painel principal";
+	private final String name = "Painel principal";
 }

@@ -8,6 +8,7 @@ package com.linkare.rec.impl.newface.laf.flat.elabtheme;
 
 import java.util.Map;
 
+import com.linkare.rec.impl.newface.laf.flat.theme.AbstractStyle;
 import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 
 /**
@@ -27,16 +28,16 @@ public class LabelStyle extends DefaultStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return LabelStyle.ID;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.remove(FOREGROUND);
+		map.remove(AbstractStyle.FOREGROUND);
 	}
 
 	// -------------------------------------------------------------------------

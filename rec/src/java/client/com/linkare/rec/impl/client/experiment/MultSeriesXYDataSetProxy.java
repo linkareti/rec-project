@@ -15,6 +15,11 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  */
 public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDataset implements
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2476365483222546333L;
+
 	private int[] channelDisplayYArray;
 
 	private ExpDataModel expDataModel;
@@ -35,33 +40,42 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 		fireDatasetChanged();
 	}
 
+	@Override
 	public void dataModelStoped() {// BIG SILENT NOOP
 	}
 
+	@Override
 	public void dataModelEnded() {// BIG SILENT NOOP
 	}
 
+	@Override
 	public void dataModelError() {// BIG SILENT NOOP
 	}
 
+	@Override
 	public void dataModelStarted() {
-		if (header == null && expDataModel != null)
+		if (header == null && expDataModel != null) {
 			header = expDataModel.getAcquisitionConfig();
+		}
 		fireDatasetChanged();
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
-		if (header == null && expDataModel != null)
+		if (header == null && expDataModel != null) {
 			header = expDataModel.getAcquisitionConfig();
+		}
 		fireDatasetChanged();
 	}
 
+	@Override
 	public void dataModelWaiting() {// BIG SILENT NOOP
 	}
 
 	private HardwareAcquisitionConfig header = null;
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
 			if (i % updateFrequency == 0 || i == (header.getTotalSamples() - 1)) {
 				fireDatasetChanged();
@@ -75,6 +89,7 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 	 * 
 	 * @return the series count.
 	 */
+	@Override
 	public int getSeriesCount() {
 		if (expDataModel == null || !expDataModel.isDataAvailable() || getChannelDisplayYArray() == null) {
 			return 0;
@@ -90,23 +105,24 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 	 * 
 	 * @return the name of the series.
 	 */
-	public Comparable getSeriesKey(int series) {
+	@Override
+	public Comparable getSeriesKey(final int series) {
 		if (expDataModel == null || !expDataModel.isDataAvailable() || series >= expDataModel.getChannelCount()) {
 			return null;
 		}
 
-		String multiplierX = expDataModel.getChannelConfig(getChannelDisplayX()).getSelectedScale().getMultiplier()
-				.toString();
-		String ph_unit_symbolX = expDataModel.getChannelConfig(getChannelDisplayX()).getSelectedScale()
+		final String multiplierX = expDataModel.getChannelConfig(getChannelDisplayX()).getSelectedScale()
+				.getMultiplier().toString();
+		final String ph_unit_symbolX = expDataModel.getChannelConfig(getChannelDisplayX()).getSelectedScale()
 				.getPhysicsUnitSymbol();
-		String ch_nameX = ReCResourceBundle.findString(expDataModel.getChannelConfig(getChannelDisplayX())
+		final String ch_nameX = ReCResourceBundle.findString(expDataModel.getChannelConfig(getChannelDisplayX())
 				.getChannelName());
 
-		String multiplierY = expDataModel.getChannelConfig(getChannelDisplayY()).getSelectedScale().getMultiplier()
-				.toString();
-		String ph_unit_symbolY = expDataModel.getChannelConfig(getChannelDisplayY()).getSelectedScale()
+		final String multiplierY = expDataModel.getChannelConfig(getChannelDisplayY()).getSelectedScale()
+				.getMultiplier().toString();
+		final String ph_unit_symbolY = expDataModel.getChannelConfig(getChannelDisplayY()).getSelectedScale()
 				.getPhysicsUnitSymbol();
-		String ch_nameY = ReCResourceBundle.findString(expDataModel.getChannelConfig(getChannelDisplayY())
+		final String ch_nameY = ReCResourceBundle.findString(expDataModel.getChannelConfig(getChannelDisplayY())
 				.getChannelName());
 
 		return ch_nameX + " [" + multiplierX + ph_unit_symbolX + "] vs " + ch_nameY + " [" + multiplierY
@@ -124,13 +140,15 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 	 */
 	private int itemCount = 0;
 
-	public int getItemCount(int series) {
+	@Override
+	public int getItemCount(final int series) {
 		if (expDataModel == null || !expDataModel.isDataAvailable() || series >= expDataModel.getChannelCount()) {
 			return 0;
 		}
 
-		if (expDataModel.getTotalSamples() == -1)
+		if (expDataModel.getTotalSamples() == -1) {
 			return 0;
+		}
 
 		/*
 		 * if(header != null) { updateFrequency =
@@ -139,8 +157,9 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 		 * if(updateFrequency < 1) { updateFrequency = 1; }
 		 */
 
-		if (!errorOccurred)
+		if (!errorOccurred) {
 			itemCount = expDataModel.getTotalSamples();
+		}
 
 		return itemCount;
 	}
@@ -156,7 +175,8 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 	 * 
 	 * @return the x-value.
 	 */
-	public double getXValue(int series, int item) {
+	@Override
+	public double getXValue(final int series, final int item) {
 		if (expDataModel == null || !expDataModel.isDataAvailable() || series >= expDataModel.getChannelCount()) {
 			return 0;
 		}
@@ -168,19 +188,21 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 
 		try {
 			x = expDataModel.getValueAt(item, getChannelDisplayX()).getValueNumber();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			errorOccurred = true;
 			if (item > 0) {
 				x = expDataModel.getValueAt(item - 1, getChannelDisplayX()).getValueNumber();
 				itemCount--;
-			} else
+			} else {
 				x = new Double(0);
+			}
 		}
 
 		return x.doubleValue();
 	}
 
-	public double getYValue(int series, int item) {
+	@Override
+	public double getYValue(final int series, final int item) {
 		if (expDataModel == null || !expDataModel.isDataAvailable() || series >= expDataModel.getChannelCount()
 				|| expDataModel.getValueAt(item, getChannelDisplayX()) == null) {
 			return 0;
@@ -195,13 +217,14 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 
 			try {
 				y = expDataModel.getValueAt(item, getChannelDisplayAtYArray(series)).getValueNumber();
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				errorOccurred = true;
 				if (item > 0) {
 					y = expDataModel.getValueAt(item, getChannelDisplayAtYArray(series)).getValueNumber();
 					itemCount--;
-				} else
+				} else {
 					y = new Double(0);
+				}
 			}
 
 			return y.doubleValue();
@@ -214,7 +237,7 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 	 * @return Value of property channelDisplayY.
 	 */
 	public int getChannelDisplayY() {
-		return this.channelDisplayY;
+		return channelDisplayY;
 	}
 
 	/**
@@ -222,7 +245,7 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
-	public void setChannelDisplayY(int channelDisplayY) {
+	public void setChannelDisplayY(final int channelDisplayY) {
 		this.channelDisplayY = channelDisplayY;
 		setChannelDisplayYArray(new int[] { channelDisplayY });
 	}
@@ -233,7 +256,7 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 	 * @return Value of property expDataModel.
 	 */
 	public ExpDataModel getExpDataModel() {
-		return this.expDataModel;
+		return expDataModel;
 	}
 
 	/**
@@ -241,9 +264,10 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 	 * 
 	 * @param expDataModel New value of property expDataModel.
 	 */
-	public void setExpDataModel(ExpDataModel expDataModel) {
-		if (expDataModel != null)
+	public void setExpDataModel(final ExpDataModel expDataModel) {
+		if (expDataModel != null) {
 			expDataModel.removeExpDataModelListener(this);
+		}
 
 		this.expDataModel = expDataModel;
 
@@ -260,7 +284,7 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 	 * @return Value of property channelDisplay.
 	 */
 	public int getChannelDisplayX() {
-		return this.channelDisplayX;
+		return channelDisplayX;
 	}
 
 	/**
@@ -268,7 +292,7 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 	 * 
 	 * @param channelDisplay New value of property channelDisplay.
 	 */
-	public void setChannelDisplayX(int channelDisplayX) {
+	public void setChannelDisplayX(final int channelDisplayX) {
 		this.channelDisplayX = channelDisplayX;
 	}
 
@@ -277,7 +301,7 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
-	public int getChannelDisplayAtYArray(int series) {
+	public int getChannelDisplayAtYArray(final int series) {
 		return channelDisplayYArray[series];
 	}
 
@@ -295,25 +319,25 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
-	public void setChannelDisplayYArray(int[] channelDisplayYArray) {
+	public void setChannelDisplayYArray(final int[] channelDisplayYArray) {
 		this.channelDisplayYArray = channelDisplayYArray;
 	}
 
-	private int updatePercentage = 10;
+	private final int updatePercentage = 10;
 
 	/** Deprecated!! Use getUpdateFrequency */
 	public int getUpdatePercentage() {
-		return this.updateFrequency;
+		return updateFrequency;
 	}
 
 	/** Deprecated!! Use setUpdateFrequency */
-	public void setUpdatePercentage(int updatePercentage) {
+	public void setUpdatePercentage(final int updatePercentage) {
 		// this.updatePercentage = updatePercentage;
 		setUpdateFrequency(updatePercentage);
 	}
 
 	public int getUpdateFrequency() {
-		return this.updateFrequency;
+		return updateFrequency;
 	}
 
 	/** Update from updateFrequency to updateFrequency points */
@@ -324,14 +348,17 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 		this.updateFrequency = updateFrequency;
 	}
 
-	public Number getX(int param, int param1) {
+	@Override
+	public Number getX(final int param, final int param1) {
 		return new Double(getXValue(param, param1));
 	}
 
-	public Number getY(int param, int param1) {
+	@Override
+	public Number getY(final int param, final int param1) {
 		return new Double(getYValue(param, param1));
 	}
 
+	@Override
 	public org.jfree.data.DomainOrder getDomainOrder() {
 		return org.jfree.data.DomainOrder.NONE;
 	}

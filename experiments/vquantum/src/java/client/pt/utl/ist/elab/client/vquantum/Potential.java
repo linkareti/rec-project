@@ -27,7 +27,7 @@ public class Potential implements Bounded {
 
 	private double xIPotential;
 	private double potentialWidth;
-	private double dx = 1e-2;
+	private final double dx = 1e-2;
 	private ParsedFunction vFunction;
 
 	private GeneralPath positivePath;
@@ -43,28 +43,29 @@ public class Potential implements Bounded {
 	private double xmax, xmin;
 	private double ymax, ymin;
 
-	private boolean enabled;
+	private final boolean enabled;
 	private boolean isMedio;
 
-	public Potential(double xI, double vWidth, String function, boolean _enabled, boolean _isMedio) {
+	public Potential(final double xI, final double vWidth, final String function, final boolean _enabled,
+			final boolean _isMedio) {
 		xIPotential = xI;
 		potentialWidth = vWidth;
 		try {
 			vFunction = new ParsedFunction(function);
-		} catch (ParserException e) {
+		} catch (final ParserException e) {
 		}
 		enabled = _enabled;
 		isMedio = _isMedio;
 		buildPath();
 	}
 
-	public Potential(double xI, double vWidth, String function, boolean _enabled, boolean _isMedio, Color _fillColor,
-			Color _highlightColor) {
+	public Potential(final double xI, final double vWidth, final String function, final boolean _enabled,
+			final boolean _isMedio, final Color _fillColor, final Color _highlightColor) {
 		xIPotential = xI;
 		potentialWidth = vWidth;
 		try {
 			vFunction = new ParsedFunction(function);
-		} catch (ParserException e) {
+		} catch (final ParserException e) {
 		}
 		enabled = _enabled;
 		isMedio = _isMedio;
@@ -83,22 +84,25 @@ public class Potential implements Bounded {
 		positivePath.moveTo((float) x, (float) y);
 		while (x < xIPotential + potentialWidth) {
 			y = vFunction.evaluate(x - xIPotential);
-			if (Double.isNaN(y) || Double.isInfinite(y))
+			if (Double.isNaN(y) || Double.isInfinite(y)) {
 				y = 0;// return;
-			// else {
+				// else {
+			}
 
 			if (y < 0) {
 				positivePath.moveTo((float) x, (float) y);
-				if (negativePath.getCurrentPoint() == null)
+				if (negativePath.getCurrentPoint() == null) {
 					negativePath.moveTo((float) x, (float) y);
-				else
+				} else {
 					negativePath.lineTo((float) x, (float) y);
+				}
 			} else {
 				negativePath.moveTo((float) x, (float) y);
-				if (positivePath.getCurrentPoint() == null)
+				if (positivePath.getCurrentPoint() == null) {
 					positivePath.moveTo((float) x, (float) y);
-				else
+				} else {
 					positivePath.lineTo((float) x, (float) y);
+				}
 			}
 			ymaxHere = Math.max(y, ymaxHere);
 			yminHere = Math.min(y, yminHere);
@@ -108,56 +112,64 @@ public class Potential implements Bounded {
 			// }
 			x += dx;
 		}
-		if (y >= 0)
-			positivePath.lineTo((float) (xIPotential + potentialWidth), (float) 0);
-		if (y <= 0)
-			negativePath.lineTo((float) (xIPotential + potentialWidth), (float) 0);
+		if (y >= 0) {
+			positivePath.lineTo((float) (xIPotential + potentialWidth), 0);
+		}
+		if (y <= 0) {
+			negativePath.lineTo((float) (xIPotential + potentialWidth), 0);
+		}
 
-		positivePath.transform(new AffineTransform(1, 0, 0, Math.abs(5e-1 / Math.max(Math.abs(yminHere), Math
-				.abs(ymaxHere))), 0, 0));
-		negativePath.transform(new AffineTransform(1, 0, 0, Math.abs(5e-1 / Math.max(Math.abs(yminHere), Math
-				.abs(ymaxHere))), 0, 0));
+		positivePath.transform(new AffineTransform(1, 0, 0, Math.abs(5e-1 / Math.max(Math.abs(yminHere),
+				Math.abs(ymaxHere))), 0, 0));
+		negativePath.transform(new AffineTransform(1, 0, 0, Math.abs(5e-1 / Math.max(Math.abs(yminHere),
+				Math.abs(ymaxHere))), 0, 0));
 
-		if (ymaxHere != 0)
+		if (ymaxHere != 0) {
 			ymaxHere *= Math.abs(5e-1 / ymaxHere);
-		if (yminHere != 0)
+		}
+		if (yminHere != 0) {
 			yminHere *= Math.abs(5e-1 / yminHere);
+		}
 		ymax = Math.max(ymaxHere, ymax);
 		ymin = Math.min(yminHere, ymin);
 	}
 
-	public void draw(DrawingPanel panel, Graphics g) {
+	@Override
+	public void draw(final DrawingPanel panel, final Graphics g) {
 		positiveShape = positivePath.createTransformedShape(panel.getPixelTransform());
-		Graphics2D g2 = (Graphics2D) g;
+		final Graphics2D g2 = (Graphics2D) g;
 		g2.setPaint(positivePaintColor);
 		g2.draw(positiveShape);
 		g2.fill(positiveShape);
 
 		negativeShape = negativePath.createTransformedShape(panel.getPixelTransform());
-		if (negativePaintColor == null)
+		if (negativePaintColor == null) {
 			g2.setPaint(panel.getBackground());
-		else
+		} else {
 			g2.setPaint(negativePaintColor);
+		}
 		g2.draw(negativeShape);
 		g2.fill(negativeShape);
 	}
 
-	public Interactive findInteractive(DrawingPanel panel, int _xpix, int _ypix) {
+	@Override
+	public Interactive findInteractive(final DrawingPanel panel, final int _xpix, final int _ypix) {
 		if (enabled) {
-			GeneralPath tmpPath = (GeneralPath) positivePath.clone();
+			final GeneralPath tmpPath = (GeneralPath) positivePath.clone();
 			tmpPath.closePath();
-			GeneralPath ntmpPath = (GeneralPath) negativePath.clone();
+			final GeneralPath ntmpPath = (GeneralPath) negativePath.clone();
 			ntmpPath.closePath();
 			if (positiveShape != null
 					&& negativeShape != null
 					&& (tmpPath.createTransformedShape(panel.getPixelTransform()).contains(_xpix, _ypix) || ntmpPath
-							.createTransformedShape(panel.getPixelTransform()).contains(_xpix, _ypix)))
+							.createTransformedShape(panel.getPixelTransform()).contains(_xpix, _ypix))) {
 				return this;
+			}
 		}
 		return null;
 	}
 
-	public void setColor(Color _fillColor) {
+	public void setColor(final Color _fillColor) {
 		fillColor = _fillColor;
 	}
 
@@ -165,11 +177,11 @@ public class Potential implements Bounded {
 		return fillColor;
 	}
 
-	public void setHighLightColor(Color _highlight) {
+	public void setHighLightColor(final Color _highlight) {
 		highLightColor = _highlight;
 	}
 
-	public void setWidth(double vWidth) {
+	public void setWidth(final double vWidth) {
 		potentialWidth = vWidth;
 		buildPath();
 	}
@@ -178,44 +190,54 @@ public class Potential implements Bounded {
 		return potentialWidth;
 	}
 
+	@Override
 	public double getX() {
 		return xIPotential;
 	}
 
+	@Override
 	public double getXMax() {
 		return xmax;
 	}
 
+	@Override
 	public double getXMin() {
 		return xmin;
 	}
 
+	@Override
 	public double getY() {
 		return 0;
 	}
 
+	@Override
 	public double getYMax() {
 		return ymax;
 	}
 
+	@Override
 	public double getYMin() {
 		return ymin;
 	}
 
+	@Override
 	public boolean isEnabled() {
 		return enabled;
 	}
 
+	@Override
 	public boolean isMeasured() {
 		return false;
 	}
 
+	@Override
 	public void setEnabled(boolean enabled) {
 		enabled = enabled;
 	}
 
 	// move para o ponto x
-	public void setX(double x) {
+	@Override
+	public void setX(final double x) {
 		if (enabled) {
 			positivePath.transform(AffineTransform.getTranslateInstance(x - xIPotential, 0));
 			negativePath.transform(AffineTransform.getTranslateInstance(x - xIPotential, 0));
@@ -224,7 +246,8 @@ public class Potential implements Bounded {
 	}
 
 	// translacao (x,0) -> Usado para o arrasto do rato
-	public void setXY(double x, double y) {
+	@Override
+	public void setXY(final double x, final double y) {
 		if (enabled) {
 			xIPotential += x;
 			positivePath.transform(AffineTransform.getTranslateInstance(x, 0));
@@ -232,12 +255,14 @@ public class Potential implements Bounded {
 		}
 	}
 
-	public void setY(double y) {
+	@Override
+	public void setY(final double y) {
 	}
 
-	public void mouseOver(DrawingPanel panel) {
+	@Override
+	public void mouseOver(final DrawingPanel panel) {
 		positivePaintColor = highLightColor;
-		Graphics2D g2 = (Graphics2D) panel.getGraphics();
+		final Graphics2D g2 = (Graphics2D) panel.getGraphics();
 		g2.setPaint(positivePaintColor);
 		g2.draw(positiveShape);
 		g2.fill(positiveShape);
@@ -248,9 +273,10 @@ public class Potential implements Bounded {
 		g2.fill(negativeShape);
 	}
 
-	public void mouseOut(DrawingPanel panel) {
+	@Override
+	public void mouseOut(final DrawingPanel panel) {
 		positivePaintColor = fillColor;
-		Graphics2D g2 = (Graphics2D) panel.getGraphics();
+		final Graphics2D g2 = (Graphics2D) panel.getGraphics();
 		g2.setPaint(positivePaintColor);
 		g2.draw(positiveShape);
 		g2.fill(positiveShape);
@@ -261,42 +287,46 @@ public class Potential implements Bounded {
 		g2.fill(negativeShape);
 	}
 
-	public boolean intersect(Rectangle2D rect) {
-		GeneralPath tmpPath = (GeneralPath) positivePath.clone();
+	@Override
+	public boolean intersect(final Rectangle2D rect) {
+		final GeneralPath tmpPath = (GeneralPath) positivePath.clone();
 		tmpPath.closePath();
-		GeneralPath ntmpPath = (GeneralPath) negativePath.clone();
+		final GeneralPath ntmpPath = (GeneralPath) negativePath.clone();
 		ntmpPath.closePath();
 
 		if (positiveShape != null
 				&& negativeShape != null
 				&& (tmpPath.createTransformedShape(null).getBounds2D().intersects(rect) || ntmpPath
-						.createTransformedShape(null).getBounds2D().intersects(rect)))
+						.createTransformedShape(null).getBounds2D().intersects(rect))) {
 			return true;
+		}
 		return false;
 	}
 
-	public Rectangle2D getBounds(double x) {
-		GeneralPath tmpPath = (GeneralPath) positivePath.clone();
+	@Override
+	public Rectangle2D getBounds(final double x) {
+		final GeneralPath tmpPath = (GeneralPath) positivePath.clone();
 		tmpPath.closePath();
-		GeneralPath ntmpPath = (GeneralPath) negativePath.clone();
+		final GeneralPath ntmpPath = (GeneralPath) negativePath.clone();
 		ntmpPath.closePath();
 
 		tmpPath.transform(AffineTransform.getTranslateInstance(x, 0));
 		ntmpPath.transform(AffineTransform.getTranslateInstance(x, 0));
 
-		return tmpPath.createTransformedShape(null).getBounds2D().createUnion(
-				ntmpPath.createTransformedShape(null).getBounds2D());
+		return tmpPath.createTransformedShape(null).getBounds2D()
+				.createUnion(ntmpPath.createTransformedShape(null).getBounds2D());
 	}
 
 	public String getFunction() {
 		return vFunction.toString();
 	}
 
-	public void setFunction(String func) throws ParserException {
+	public void setFunction(final String func) throws ParserException {
 		vFunction = new ParsedFunction(func);
 		buildPath();
 	}
 
+	@Override
 	public String toString() {
 		return xIPotential + ":" + potentialWidth + ":" + getFunction() + ":" + isMedio;
 	}
@@ -305,14 +335,16 @@ public class Potential implements Bounded {
 		return isMedio;
 	}
 
-	public void setMedio(boolean _isMedio) {
+	public void setMedio(final boolean _isMedio) {
 		isMedio = _isMedio;
 	}
 
+	@Override
 	public Color getHighLightColor() {
 		return highLightColor;
 	}
 
+	@Override
 	public Color getPaintColor() {
 		return positivePaintColor;
 	}

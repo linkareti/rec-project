@@ -21,26 +21,26 @@ public class ServerMain {
 
 	private static String Tiro_HARDWARE_LOGGER = "Tiro.Logger";
 	static {
-		Logger l = LogManager.getLogManager().getLogger(Tiro_HARDWARE_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ServerMain.Tiro_HARDWARE_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(Tiro_HARDWARE_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ServerMain.Tiro_HARDWARE_LOGGER));
 		}
 	}
 
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		try {
 			ORBBean.getORBBean();
 
-			BaseHardware baseHardware = new BaseHardware(new TiroDriver());
+			final BaseHardware baseHardware = new BaseHardware(new TiroDriver());
 
 			Thread.currentThread().join();
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			ORBBean.getORBBean().killORB();
-			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(Tiro_HARDWARE_LOGGER));
+			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(ServerMain.Tiro_HARDWARE_LOGGER));
 		}
 	}
 }

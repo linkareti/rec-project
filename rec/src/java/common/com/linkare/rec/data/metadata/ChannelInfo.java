@@ -10,6 +10,11 @@ import com.linkare.rec.impl.data.FrequencyUtil;
 import com.linkare.rec.impl.exceptions.WrongConfigurationExceptionConstants;
 
 public final class ChannelInfo implements IDLEntity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3519483758318315599L;
+
 	/** Holds value of property frequencies. */
 	private FrequencyScale[] frequencies;
 
@@ -56,27 +61,28 @@ public final class ChannelInfo implements IDLEntity {
 	// @param channel_direction channel_direction struct member
 	// @param is_channel_independent is_channel_independent struct member
 	//
-	public ChannelInfo(String channel_name, com.linkare.rec.data.metadata.Scale[] scales, Scale actual_selected_scale,
-			com.linkare.rec.data.metadata.FrequencyScale[] frequencies, Frequency selected_frequency,
-			com.linkare.rec.data.metadata.ChannelParameter[] channel_parameters,
-			com.linkare.rec.data.metadata.ChannelDirection channel_direction, boolean is_channel_independent,
-			SamplesNumScale samplingScale) {
-		this.setChannelName(channel_name);
+	public ChannelInfo(final String channel_name, final com.linkare.rec.data.metadata.Scale[] scales,
+			final Scale actual_selected_scale, final com.linkare.rec.data.metadata.FrequencyScale[] frequencies,
+			final Frequency selected_frequency,
+			final com.linkare.rec.data.metadata.ChannelParameter[] channel_parameters,
+			final com.linkare.rec.data.metadata.ChannelDirection channel_direction,
+			final boolean is_channel_independent, final SamplesNumScale samplingScale) {
+		setChannelName(channel_name);
 		this.setScales(scales);
-		this.setActualSelectedScale(actual_selected_scale);
+		setActualSelectedScale(actual_selected_scale);
 		this.setFrequencies(frequencies);
-		this.setSelectedFrequency(selected_frequency);
+		setSelectedFrequency(selected_frequency);
 		this.setChannelParameters(channel_parameters);
-		this.setChannelDirection(channel_direction);
-		this.setChannelIndependent(is_channel_independent);
-		this.setSamplingScale(samplingScale);
+		setChannelDirection(channel_direction);
+		setChannelIndependent(is_channel_independent);
+		setSamplingScale(samplingScale);
 	}
 
 	//
 	// Copy Constructor
 	//
-	public ChannelInfo(ChannelInfo other) {
-		this.setChannelName(new String(other.getChannelName()));
+	public ChannelInfo(final ChannelInfo other) {
+		setChannelName(new String(other.getChannelName()));
 		Scale[] temp = null;
 		if (other.getScales() != null) {
 			temp = new Scale[other.getScales().length];
@@ -85,7 +91,7 @@ public final class ChannelInfo implements IDLEntity {
 		this.setScales(temp);
 		temp = null;
 
-		this.setActualSelectedScale(other.getActualSelectedScale());
+		setActualSelectedScale(other.getActualSelectedScale());
 
 		FrequencyScale[] temp2 = null;
 		if (other.getFrequencies() != null) {
@@ -96,7 +102,7 @@ public final class ChannelInfo implements IDLEntity {
 		this.setFrequencies(temp2);
 		temp2 = null;
 
-		this.setSelectedFrequency(other.getSelectedFrequency());
+		setSelectedFrequency(other.getSelectedFrequency());
 
 		ChannelParameter[] temp3 = null;
 		if (other.getChannelParameters() != null) {
@@ -106,10 +112,10 @@ public final class ChannelInfo implements IDLEntity {
 		this.setChannelParameters(temp3);
 		temp3 = null;
 
-		this.setChannelDirection(other.getChannelDirection());
-		this.setChannelIndependent(other.isChannelIndependent());
+		setChannelDirection(other.getChannelDirection());
+		setChannelIndependent(other.isChannelIndependent());
 
-		this.setSamplingScale(other.getSamplingScale());
+		setSamplingScale(other.getSamplingScale());
 	}
 
 	/**
@@ -118,7 +124,7 @@ public final class ChannelInfo implements IDLEntity {
 	 * @return Value of property channelName.
 	 */
 	public String getChannelName() {
-		return this.channelName;
+		return channelName;
 	}
 
 	/**
@@ -126,7 +132,7 @@ public final class ChannelInfo implements IDLEntity {
 	 * 
 	 * @param channelName New value of property channelName.
 	 */
-	public void setChannelName(String channelName) {
+	public void setChannelName(final String channelName) {
 		this.channelName = channelName;
 	}
 
@@ -136,8 +142,8 @@ public final class ChannelInfo implements IDLEntity {
 	 * @param index Index of the property.
 	 * @return Value of the property at <CODE>index</CODE>.
 	 */
-	public com.linkare.rec.data.metadata.Scale getScales(int index) {
-		return this.scales[index];
+	public com.linkare.rec.data.metadata.Scale getScales(final int index) {
+		return scales[index];
 	}
 
 	/**
@@ -146,7 +152,7 @@ public final class ChannelInfo implements IDLEntity {
 	 * @return Value of property scales.
 	 */
 	public com.linkare.rec.data.metadata.Scale[] getScales() {
-		return this.scales;
+		return scales;
 	}
 
 	/**
@@ -155,13 +161,14 @@ public final class ChannelInfo implements IDLEntity {
 	 * @param index Index of the property.
 	 * @param scales New value of the property at <CODE>index</CODE>.
 	 */
-	public void setScales(int index, com.linkare.rec.data.metadata.Scale scales) {
-		if (this.scales != null && index < this.scales.length)
+	public void setScales(final int index, final com.linkare.rec.data.metadata.Scale scales) {
+		if (this.scales != null && index < this.scales.length) {
 			this.scales[index] = scales;
-		else {
+		} else {
 			Scale[] temp = new Scale[index + 1];
-			if (this.scales != null)
+			if (this.scales != null) {
 				System.arraycopy(this.scales, 0, temp, 0, this.scales.length);
+			}
 
 			temp[index] = scales;
 			this.scales = temp;
@@ -170,11 +177,12 @@ public final class ChannelInfo implements IDLEntity {
 
 	}
 
-	public void addScales(com.linkare.rec.data.metadata.Scale scales) {
-		if (this.scales == null)
+	public void addScales(final com.linkare.rec.data.metadata.Scale scales) {
+		if (this.scales == null) {
 			setScales(0, scales);
-		else
+		} else {
 			setScales(this.scales.length, scales);
+		}
 	}
 
 	/**
@@ -182,7 +190,7 @@ public final class ChannelInfo implements IDLEntity {
 	 * 
 	 * @param scales New value of property scales.
 	 */
-	public void setScales(com.linkare.rec.data.metadata.Scale[] scales) {
+	public void setScales(final com.linkare.rec.data.metadata.Scale[] scales) {
 		this.scales = scales;
 	}
 
@@ -192,7 +200,7 @@ public final class ChannelInfo implements IDLEntity {
 	 * @return Value of property actualSelectedScale.
 	 */
 	public Scale getActualSelectedScale() {
-		return this.selected_scale;
+		return selected_scale;
 	}
 
 	/**
@@ -200,8 +208,8 @@ public final class ChannelInfo implements IDLEntity {
 	 * 
 	 * @param actualSelectedScale New value of property actualSelectedScale.
 	 */
-	public void setActualSelectedScale(Scale actualSelectedScale) {
-		this.selected_scale = actualSelectedScale;
+	public void setActualSelectedScale(final Scale actualSelectedScale) {
+		selected_scale = actualSelectedScale;
 	}
 
 	/**
@@ -210,9 +218,10 @@ public final class ChannelInfo implements IDLEntity {
 	 * @param index Index of the property.
 	 * @return Value of the property at <CODE>index</CODE>.
 	 */
-	public com.linkare.rec.data.metadata.FrequencyScale getFrequencies(int index) {
-		if (this.frequencies != null && index < this.frequencies.length)
-			return this.frequencies[index];
+	public com.linkare.rec.data.metadata.FrequencyScale getFrequencies(final int index) {
+		if (frequencies != null && index < frequencies.length) {
+			return frequencies[index];
+		}
 
 		throw new RuntimeException("No FrequencyScale available at that index...");
 	}
@@ -223,7 +232,7 @@ public final class ChannelInfo implements IDLEntity {
 	 * @return Value of property frequencies.
 	 */
 	public com.linkare.rec.data.metadata.FrequencyScale[] getFrequencies() {
-		return this.frequencies;
+		return frequencies;
 	}
 
 	/**
@@ -232,14 +241,15 @@ public final class ChannelInfo implements IDLEntity {
 	 * @param index Index of the property.
 	 * @param frequencies New value of the property at <CODE>index</CODE>.
 	 */
-	public void setFrequencies(int index, com.linkare.rec.data.metadata.FrequencyScale frequencies) {
+	public void setFrequencies(final int index, final com.linkare.rec.data.metadata.FrequencyScale frequencies) {
 
-		if (this.frequencies != null && index < this.frequencies.length)
+		if (this.frequencies != null && index < this.frequencies.length) {
 			this.frequencies[index] = frequencies;
-		else {
+		} else {
 			FrequencyScale[] temp = new FrequencyScale[index + 1];
-			if (this.frequencies != null)
+			if (this.frequencies != null) {
 				System.arraycopy(this.frequencies, 0, temp, 0, this.frequencies.length);
+			}
 
 			temp[index] = frequencies;
 			this.frequencies = temp;
@@ -248,12 +258,13 @@ public final class ChannelInfo implements IDLEntity {
 
 	}
 
-	public void addFrequencies(com.linkare.rec.data.metadata.FrequencyScale frequencies) {
+	public void addFrequencies(final com.linkare.rec.data.metadata.FrequencyScale frequencies) {
 
-		if (this.frequencies == null)
+		if (this.frequencies == null) {
 			setFrequencies(0, frequencies);
-		else
+		} else {
 			setFrequencies(this.frequencies.length, frequencies);
+		}
 
 	}
 
@@ -262,7 +273,7 @@ public final class ChannelInfo implements IDLEntity {
 	 * 
 	 * @param frequencies New value of property frequencies.
 	 */
-	public void setFrequencies(com.linkare.rec.data.metadata.FrequencyScale[] frequencies) {
+	public void setFrequencies(final com.linkare.rec.data.metadata.FrequencyScale[] frequencies) {
 		this.frequencies = frequencies;
 	}
 
@@ -272,7 +283,7 @@ public final class ChannelInfo implements IDLEntity {
 	 * @return Value of property actualSelectedFrequencyIndex.
 	 */
 	public Frequency getSelectedFrequency() {
-		return this.selectedFrequency;
+		return selectedFrequency;
 	}
 
 	/**
@@ -281,7 +292,7 @@ public final class ChannelInfo implements IDLEntity {
 	 * @param actualSelectedFrequencyIndex New value of property
 	 *            actualSelectedFrequencyIndex.
 	 */
-	public void setSelectedFrequency(Frequency selectedFrequency) {
+	public void setSelectedFrequency(final Frequency selectedFrequency) {
 		this.selectedFrequency = selectedFrequency;
 	}
 
@@ -291,24 +302,27 @@ public final class ChannelInfo implements IDLEntity {
 	 * @param index Index of the property.
 	 * @return Value of the property at <CODE>index</CODE>.
 	 */
-	public com.linkare.rec.data.metadata.ChannelParameter getChannelParameters(int index) {
-		return this.channelParameters[index];
+	public com.linkare.rec.data.metadata.ChannelParameter getChannelParameters(final int index) {
+		return channelParameters[index];
 	}
 
-	public com.linkare.rec.data.metadata.ChannelParameter getChannelParameter(String parameter_name) {
-		if (this.channelParameters != null && parameter_name != null) {
-			for (int i = 0; i < channelParameters.length; i++)
-				if (parameter_name.equals(channelParameters[i].getParameterName()))
-					return channelParameters[i];
+	public com.linkare.rec.data.metadata.ChannelParameter getChannelParameter(final String parameter_name) {
+		if (channelParameters != null && parameter_name != null) {
+			for (final ChannelParameter channelParameter : channelParameters) {
+				if (parameter_name.equals(channelParameter.getParameterName())) {
+					return channelParameter;
+				}
+			}
 		}
 		return null;
 
 	}
 
-	public String getChannelParameterValue(String parameter_name) {
+	public String getChannelParameterValue(final String parameter_name) {
 		ChannelParameter param = null;
-		if ((param = getChannelParameter(parameter_name)) != null)
+		if ((param = getChannelParameter(parameter_name)) != null) {
 			return param.getSelectedParameterValue();
+		}
 
 		return null;
 	}
@@ -319,7 +333,7 @@ public final class ChannelInfo implements IDLEntity {
 	 * @return Value of property channelParameters.
 	 */
 	public com.linkare.rec.data.metadata.ChannelParameter[] getChannelParameters() {
-		return this.channelParameters;
+		return channelParameters;
 	}
 
 	/**
@@ -328,13 +342,15 @@ public final class ChannelInfo implements IDLEntity {
 	 * @param index Index of the property.
 	 * @param channelParameters New value of the property at <CODE>index</CODE>.
 	 */
-	public void setChannelParameters(int index, com.linkare.rec.data.metadata.ChannelParameter channelParameters) {
-		if (this.channelParameters != null && index < this.channelParameters.length)
+	public void setChannelParameters(final int index,
+			final com.linkare.rec.data.metadata.ChannelParameter channelParameters) {
+		if (this.channelParameters != null && index < this.channelParameters.length) {
 			this.channelParameters[index] = channelParameters;
-		else {
+		} else {
 			ChannelParameter[] temp = new ChannelParameter[index + 1];
-			if (this.channelParameters != null)
+			if (this.channelParameters != null) {
 				System.arraycopy(this.channelParameters, 0, temp, 0, this.channelParameters.length);
+			}
 
 			temp[index] = channelParameters;
 			this.channelParameters = temp;
@@ -343,11 +359,12 @@ public final class ChannelInfo implements IDLEntity {
 
 	}
 
-	public void addChannelParameters(com.linkare.rec.data.metadata.ChannelParameter channelParameters) {
-		if (this.channelParameters == null)
+	public void addChannelParameters(final com.linkare.rec.data.metadata.ChannelParameter channelParameters) {
+		if (this.channelParameters == null) {
 			setChannelParameters(0, channelParameters);
-		else
+		} else {
 			setChannelParameters(this.channelParameters.length, channelParameters);
+		}
 
 	}
 
@@ -356,7 +373,7 @@ public final class ChannelInfo implements IDLEntity {
 	 * 
 	 * @param channelParameters New value of property channelParameters.
 	 */
-	public void setChannelParameters(com.linkare.rec.data.metadata.ChannelParameter[] channelParameters) {
+	public void setChannelParameters(final com.linkare.rec.data.metadata.ChannelParameter[] channelParameters) {
 		this.channelParameters = channelParameters;
 	}
 
@@ -366,7 +383,7 @@ public final class ChannelInfo implements IDLEntity {
 	 * @return Value of property channelDirection.
 	 */
 	public com.linkare.rec.data.metadata.ChannelDirection getChannelDirection() {
-		return this.channelDirection;
+		return channelDirection;
 	}
 
 	/**
@@ -374,7 +391,7 @@ public final class ChannelInfo implements IDLEntity {
 	 * 
 	 * @param channelDirection New value of property channelDirection.
 	 */
-	public void setChannelDirection(com.linkare.rec.data.metadata.ChannelDirection channelDirection) {
+	public void setChannelDirection(final com.linkare.rec.data.metadata.ChannelDirection channelDirection) {
 		this.channelDirection = channelDirection;
 	}
 
@@ -384,7 +401,7 @@ public final class ChannelInfo implements IDLEntity {
 	 * @return Value of property channelIndependent.
 	 */
 	public boolean isChannelIndependent() {
-		return this.channelIndependent;
+		return channelIndependent;
 	}
 
 	/**
@@ -392,7 +409,7 @@ public final class ChannelInfo implements IDLEntity {
 	 * 
 	 * @param channelIndependent New value of property channelIndependent.
 	 */
-	public void setChannelIndependent(boolean channelIndependent) {
+	public void setChannelIndependent(final boolean channelIndependent) {
 		this.channelIndependent = channelIndependent;
 	}
 
@@ -402,7 +419,7 @@ public final class ChannelInfo implements IDLEntity {
 	 * @return Value of property samplingScale.
 	 */
 	public com.linkare.rec.data.metadata.SamplesNumScale getSamplingScale() {
-		return this.samplingScale;
+		return samplingScale;
 	}
 
 	/**
@@ -410,7 +427,7 @@ public final class ChannelInfo implements IDLEntity {
 	 * 
 	 * @param samplingScale New value of property samplingScale.
 	 */
-	public void setSamplingScale(com.linkare.rec.data.metadata.SamplesNumScale samplingScale) {
+	public void setSamplingScale(final com.linkare.rec.data.metadata.SamplesNumScale samplingScale) {
 		this.samplingScale = samplingScale;
 	}
 
@@ -422,7 +439,7 @@ public final class ChannelInfo implements IDLEntity {
 	 * (channelParameters[i].getParameterName())); } }
 	 */
 
-	public void validateConfig(ChannelAcquisitionConfig config) throws WrongConfigurationException {
+	public void validateConfig(final ChannelAcquisitionConfig config) throws WrongConfigurationException {
 		// check selected frequency
 
 		boolean freq_ok = false;
@@ -439,8 +456,9 @@ public final class ChannelInfo implements IDLEntity {
 			}
 		}
 
-		if (!freq_ok)
+		if (!freq_ok) {
 			throw new WrongConfigurationException(WrongConfigurationExceptionConstants.FREQUENCY_NOT_IN_SCALES);
+		}
 
 		boolean params_ok = true;
 		if (config.getSelectedChannelParameters() == null) {
@@ -451,61 +469,73 @@ public final class ChannelInfo implements IDLEntity {
 			params_ok = true;
 		} else {
 			for (int i = 0; i < channelParameters.length && params_ok; i++) {
-				String param_value = config.getSelectedChannelParameterValue(channelParameters[i].getParameterName());
-				if (param_value != null)
+				final String param_value = config.getSelectedChannelParameterValue(channelParameters[i]
+						.getParameterName());
+				if (param_value != null) {
 					params_ok = params_ok && channelParameters[i].isSelectedValueValid(param_value);
+				}
 			}
 		}
 
-		if (!params_ok)
+		if (!params_ok) {
 			throw new WrongConfigurationException(WrongConfigurationExceptionConstants.PARAMETER_INVALID);
+		}
 
 		// check bigger then now, at least, or null
 		// not now! Maybe at a later time I'll have time to do it!
 		// config.getTimeStart();
 
 		// check total_samples with samplingScale
-		int total_samples = config.getTotalSamples();
+		final int total_samples = config.getTotalSamples();
 
-		if (samplingScale != null)
+		if (samplingScale != null) {
 			if (!(total_samples >= samplingScale.getMinSamples() && total_samples <= samplingScale.getMaxSamples() && ((total_samples - samplingScale
-					.getMinSamples()) % samplingScale.getStep()) == 0))
+					.getMinSamples()) % samplingScale.getStep()) == 0)) {
 				throw new WrongConfigurationException(WrongConfigurationExceptionConstants.SAMPLING_SCALE_INVALID);
+			}
+		}
 
-		com.linkare.rec.data.metadata.Scale scale_selected_in_conf = config.getSelectedScale();
-		if (scale_selected_in_conf == null)
+		final com.linkare.rec.data.metadata.Scale scale_selected_in_conf = config.getSelectedScale();
+		if (scale_selected_in_conf == null) {
 			return;
+		}
 
 		boolean scales_ok = false;
 		for (int i = 0; i < scales.length && !scales_ok; i++) {
 			scales_ok = scales_ok || scale_selected_in_conf.equals(scales[i]);
 		}
-		if (!scales_ok)
+		if (!scales_ok) {
 			throw new WrongConfigurationException(WrongConfigurationExceptionConstants.SCALE_INVALID);
+		}
 
 	}
 
-	public ChannelAcquisitionConfig createBaseChannelConfig(HardwareInfo info) {
+	public ChannelAcquisitionConfig createBaseChannelConfig(final HardwareInfo info) {
 		// check selected frequency
-		ChannelAcquisitionConfig config = new ChannelAcquisitionConfig();
+		final ChannelAcquisitionConfig config = new ChannelAcquisitionConfig();
 
-		if (frequencies != null && frequencies.length > 0 && frequencies[0] != null)
+		if (frequencies != null && frequencies.length > 0 && frequencies[0] != null) {
 			config.setSelectedFrequency(frequencies[0].getMinimumFrequency());
+		}
 
-		if (channelParameters != null)
-			for (int i = 0; i < channelParameters.length; i++)
-				config.addSelectedChannelParameter(new ParameterConfig(channelParameters[i].getParameterName(),
-						channelParameters[i].getSelectedParameterValue()));
+		if (channelParameters != null) {
+			for (final ChannelParameter channelParameter : channelParameters) {
+				config.addSelectedChannelParameter(new ParameterConfig(channelParameter.getParameterName(),
+						channelParameter.getSelectedParameterValue()));
+			}
+		}
 
 		config.setChannelName(getChannelName());
 
-		if (samplingScale != null)
+		if (samplingScale != null) {
 			config.setTotalSamples(samplingScale.getMinSamples());
-		else if (info.getSamplingScale() != null)
+		} else if (info.getSamplingScale() != null) {
 			config.setTotalSamples(info.getSamplingScale().getMinSamples());
+		}
 
-		if (scales != null && scales.length > 0 && scales[0] != null)
+		if (scales != null && scales.length > 0 && scales[0] != null) {
 			config.setSelectedScale(scales[0]);
+		}
 
 		// TODO - Commented out by JP to check serialization of nulls
 		// should revert as soon as debug ends...

@@ -12,6 +12,11 @@ package com.linkare.rec.impl.baseUI;
  */
 public class UsersListPanel extends javax.swing.JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2346045987202316165L;
+
 	/** Creates new form UsersListPanel */
 	public UsersListPanel() {
 		initComponents();

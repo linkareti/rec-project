@@ -31,6 +31,11 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  */
 public class SoundXYExperimentGraph extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7372493812734931548L;
+
 	/** Creates a new instance of MyDefaultXYExperimentGraph */
 	public SoundXYExperimentGraph() {
 		initComponents();
@@ -39,9 +44,9 @@ public class SoundXYExperimentGraph extends javax.swing.JPanel implements ExpDat
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(SoundXYExperimentGraph.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(SoundXYExperimentGraph.UI_CLIENT_LOGGER));
 		}
 	}
 
@@ -76,52 +81,58 @@ public class SoundXYExperimentGraph extends javax.swing.JPanel implements ExpDat
 	/** Holds value of property channelY. */
 	private int channelY;
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/chart16.gif"));
 	}
 
 	private ExpDataModel model;
 
-	public void setExpDataModel(ExpDataModel model) {
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
 		defaultXYDatasetProxy.setExpDataModel(model);
 		model.addExpDataModelListener(this);
 		this.model = model;
 	}
 
+	@Override
 	public String getName() {
 		return "Chart";
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
 
-	public void headerAvailable(HardwareAcquisitionConfig header) {
-		NumberAxis xAxis = new NumberAxis("Time (s)");
+	public void headerAvailable(final HardwareAcquisitionConfig header) {
+		final NumberAxis xAxis = new NumberAxis("Time (s)");
 		xAxis.setAutoRange(true);
 		xAxis.setAutoRangeStickyZero(false);
 		xAxis.setAutoRangeIncludesZero(false);
 
-		NumberAxis yAxis = new NumberAxis("");
+		final NumberAxis yAxis = new NumberAxis("");
 		yAxis.setAutoRange(true);
 		yAxis.setAutoRangeStickyZero(false);
 		yAxis.setAutoRangeIncludesZero(false);
 
-		XYToolTipGenerator tooltipGenerator = new StandardXYToolTipGenerator();
+		final XYToolTipGenerator tooltipGenerator = new StandardXYToolTipGenerator();
 
-		XYPlot plot = new XYPlot(defaultXYDatasetProxy, xAxis, yAxis, new StandardXYItemRenderer(
+		final XYPlot plot = new XYPlot(defaultXYDatasetProxy, xAxis, yAxis, new StandardXYItemRenderer(
 				StandardXYItemRenderer.SHAPES_AND_LINES, tooltipGenerator));
 
 		chart = new JFreeChart(getChartName(header), JFreeChart.DEFAULT_TITLE_FONT, plot, true);
-		ChartPanel panel = new ChartPanel(chart);
+		final ChartPanel panel = new ChartPanel(chart);
 
 		panel.setPreferredSize(new java.awt.Dimension(350, 250));
 		panel.setMouseZoomable(true, false);
@@ -129,7 +140,7 @@ public class SoundXYExperimentGraph extends javax.swing.JPanel implements ExpDat
 		scrollPane.remove(labelWaitData);
 		scrollPane.setViewportView(panel);
 	}
-	
+
 	protected String getChartName(final HardwareAcquisitionConfig header) {
 		return header.getFamiliarName();
 	}
@@ -143,31 +154,39 @@ public class SoundXYExperimentGraph extends javax.swing.JPanel implements ExpDat
 	 * }
 	 */
 
-	private boolean isScaleSet = false;
+	private final boolean isScaleSet = false;
 
 	private JFreeChart chart = null;
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
-		if (model != null)
+		if (model != null) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelStoped() {// BIG SILENT NOOP
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 

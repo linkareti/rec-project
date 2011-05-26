@@ -5,6 +5,10 @@ import org.omg.CORBA.portable.IDLEntity;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 
 public final class DataProducerConfig implements IDLEntity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4269600207092772012L;
 	private HardwareAcquisitionConfig hardwareConfig = null;
 	private String ID = null;
 	private String hardwareUniqueID = null;
@@ -12,7 +16,8 @@ public final class DataProducerConfig implements IDLEntity {
 	public DataProducerConfig() {
 	} // ctor
 
-	public DataProducerConfig(HardwareAcquisitionConfig hardwareConfig, String ID, String hardwareUniqueID) {
+	public DataProducerConfig(final HardwareAcquisitionConfig hardwareConfig, final String ID,
+			final String hardwareUniqueID) {
 		setID(ID);
 		setHardwareUniqueID(hardwareUniqueID);
 		setHardwareConfig(hardwareConfig);
@@ -34,7 +39,7 @@ public final class DataProducerConfig implements IDLEntity {
 	 * @param ID New value of property ID.
 	 * 
 	 */
-	public void setID(java.lang.String ID) {
+	public void setID(final java.lang.String ID) {
 		this.ID = ID;
 	}
 
@@ -54,7 +59,7 @@ public final class DataProducerConfig implements IDLEntity {
 	 * @param hardwareUniqueID New value of property hardwareUniqueID.
 	 * 
 	 */
-	public void setHardwareUniqueID(java.lang.String hardwareUniqueID) {
+	public void setHardwareUniqueID(final java.lang.String hardwareUniqueID) {
 		this.hardwareUniqueID = hardwareUniqueID;
 	}
 
@@ -74,7 +79,7 @@ public final class DataProducerConfig implements IDLEntity {
 	 * @param hardwareConfig New value of property hardwareConfig.
 	 * 
 	 */
-	public void setHardwareConfig(HardwareAcquisitionConfig hardwareConfig) {
+	public void setHardwareConfig(final HardwareAcquisitionConfig hardwareConfig) {
 		this.hardwareConfig = hardwareConfig;
 	}
 

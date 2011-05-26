@@ -64,47 +64,42 @@ public class DisplayNode extends AbstractConfigBean {
 	}
 
 	/**
-	 * @param order
-	 *            the order to set
+	 * @param order the order to set
 	 */
-	public void setOrder(int order) {
+	public void setOrder(final int order) {
 		changeSupport.firePropertyChange("order", this.order, this.order = order);
 	}
 
 	/**
-	 * @param enabled
-	 *            the enabled to set
+	 * @param enabled the enabled to set
 	 */
-	public void setEnabled(boolean enabled) {
+	public void setEnabled(final boolean enabled) {
 		changeSupport.firePropertyChange("enabled", this.enabled, this.enabled = enabled);
 	}
 
 	/**
-	 * @param visible
-	 *            the visible to set
+	 * @param visible the visible to set
 	 */
-	public void setVisible(boolean visible) {
+	public void setVisible(final boolean visible) {
 		changeSupport.firePropertyChange("visible", this.visible, this.visible = visible);
 	}
 
 	/**
-	 * @param selected
-	 *            the selected to set
+	 * @param selected the selected to set
 	 */
-	public void setSelected(boolean selected) {
+	public void setSelected(final boolean selected) {
 		changeSupport.firePropertyChange("selected", this.selected, this.selected = selected);
 	}
 
 	/**
-	 * @param connected
-	 *            the connected to set
+	 * @param connected the connected to set
 	 */
-	public void setConnected(boolean connected) {
+	public void setConnected(final boolean connected) {
 		changeSupport.firePropertyChange("connected", this.connected, this.connected = connected);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (obj == null) {
 			return false;
 		}
@@ -112,19 +107,19 @@ public class DisplayNode extends AbstractConfigBean {
 			return false;
 		}
 		final DisplayNode other = (DisplayNode) obj;
-		if (this.order != other.order) {
+		if (order != other.order) {
 			return false;
 		}
-		if (this.enabled != other.enabled) {
+		if (enabled != other.enabled) {
 			return false;
 		}
-		if (this.visible != other.visible) {
+		if (visible != other.visible) {
 			return false;
 		}
-		if (this.selected != other.selected) {
+		if (selected != other.selected) {
 			return false;
 		}
-		if (this.connected != other.connected) {
+		if (connected != other.connected) {
 			return false;
 		}
 		return true;
@@ -133,11 +128,11 @@ public class DisplayNode extends AbstractConfigBean {
 	@Override
 	public int hashCode() {
 		int hash = 7;
-		hash = 71 * hash + this.order;
-		hash = 71 * hash + (this.enabled ? 1 : 0);
-		hash = 71 * hash + (this.visible ? 1 : 0);
-		hash = 71 * hash + (this.selected ? 1 : 0);
-		hash = 71 * hash + (this.connected ? 1 : 0);
+		hash = 71 * hash + order;
+		hash = 71 * hash + (enabled ? 1 : 0);
+		hash = 71 * hash + (visible ? 1 : 0);
+		hash = 71 * hash + (selected ? 1 : 0);
+		hash = 71 * hash + (connected ? 1 : 0);
 		return hash;
 	}
 

@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.vcolisao.displays;
  */
 public class X1X2Y1Y2TimeChart extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 714942187731728387L;
+
 	/** Creates a new instance of AnguloIntensidadeChart */
 	public X1X2Y1Y2TimeChart() {
 		super();

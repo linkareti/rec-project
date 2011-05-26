@@ -17,6 +17,11 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class VisualMenuBar extends javax.swing.JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6539261637798041777L;
+
 	/** Creates new form VisualMenuBar */
 	public VisualMenuBar() {
 		initComponents();
@@ -54,7 +59,8 @@ public class VisualMenuBar extends javax.swing.JFrame {
 		jMenuItemAbout = new javax.swing.JMenuItem();
 
 		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent evt) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent evt) {
 				exitForm(evt);
 			}
 		});
@@ -70,7 +76,8 @@ public class VisualMenuBar extends javax.swing.JFrame {
 		jMenuItemConnect.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.tip.connect",
 				"Connect to the laboratory"));
 		jMenuItemConnect.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemConnectActionPerformed(evt);
 			}
 		});
@@ -171,13 +178,13 @@ public class VisualMenuBar extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
-	private void jMenuItemConnectActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jMenuItemConnectActionPerformed
+	private void jMenuItemConnectActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jMenuItemConnectActionPerformed
 	{// GEN-HEADEREND:event_jMenuItemConnectActionPerformed
 		// TODO add your handling code here:
 	}// GEN-LAST:event_jMenuItemConnectActionPerformed
 
 	/** Exit the Application */
-	private void exitForm(java.awt.event.WindowEvent evt)// GEN-FIRST:event_exitForm
+	private void exitForm(final java.awt.event.WindowEvent evt)// GEN-FIRST:event_exitForm
 	{
 		System.exit(0);
 	}// GEN-LAST:event_exitForm
@@ -185,7 +192,7 @@ public class VisualMenuBar extends javax.swing.JFrame {
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 		new VisualMenuBar().setVisible(true);
 	}
 

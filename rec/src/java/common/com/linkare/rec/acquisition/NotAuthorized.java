@@ -11,18 +11,18 @@ public final class NotAuthorized extends org.omg.CORBA.UserException {
 	 * 
 	 */
 	private static final long serialVersionUID = 2691006036877119027L;
-	public int errorCode = (int) 0;
+	public int errorCode = 0;
 
 	public NotAuthorized() {
 		super(NotAuthorizedHelper.id());
 	} // ctor
 
-	public NotAuthorized(int _errorCode) {
+	public NotAuthorized(final int _errorCode) {
 		super(NotAuthorizedHelper.id());
 		errorCode = _errorCode;
 	} // ctor
 
-	public NotAuthorized(String $reason, int _errorCode) {
+	public NotAuthorized(final String $reason, final int _errorCode) {
 		super(NotAuthorizedHelper.id() + "  " + $reason);
 		errorCode = _errorCode;
 	} // ctor

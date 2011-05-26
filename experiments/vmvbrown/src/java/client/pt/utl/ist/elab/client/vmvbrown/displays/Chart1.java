@@ -6,6 +6,8 @@
 
 package pt.utl.ist.elab.client.vmvbrown.displays;
 
+import javax.swing.SwingConstants;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
@@ -16,6 +18,10 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  */
 public class Chart1 extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1942148273379929763L;
 	private StaticChart chart;
 
 	/** Creates a new instance of Chart1 */
@@ -56,14 +62,15 @@ public class Chart1 extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimen
 	 * System.out.println(channels[1]-1); //acerto para o XML } }
 	 */
 
+	@Override
 	public void dataModelStartedNoData() {
-		HardwareAcquisitionConfig header = model.getAcquisitionConfig();
+		final HardwareAcquisitionConfig header = model.getAcquisitionConfig();
 
-		String graph1 = header.getSelectedHardwareParameterValue("graph1");
+		final String graph1 = header.getSelectedHardwareParameterValue("graph1");
 
 		if (!graph1.equalsIgnoreCase("")) { // grafico activo
 			if (header.getSelectedHardwareParameterValue("graph1Med").trim().equals("1") ? true : false) {
-				byte[] channels = nameToChannels(graph1);
+				final byte[] channels = Chart1.nameToChannels(graph1);
 				setChannelDisplayX(channels[0] - 1); // acerto para o XML
 				setChannelDisplayY(channels[1] - 1); // acerto para o XML
 				super.dataModelStartedNoData();
@@ -79,8 +86,8 @@ public class Chart1 extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimen
 				gridBagConstraints.weightx = 1;
 				gridBagConstraints.weighty = 1;
 
-				chart = new StaticChart(Integer.parseInt(header.getSelectedHardwareParameterValue("w")), Integer
-						.parseInt(header.getSelectedHardwareParameterValue("h")));
+				chart = new StaticChart(Integer.parseInt(header.getSelectedHardwareParameterValue("w")),
+						Integer.parseInt(header.getSelectedHardwareParameterValue("h")));
 				removeAll();
 				add(chart, gridBagConstraints);
 				updateUI();
@@ -97,33 +104,40 @@ public class Chart1 extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimen
 			gridBagConstraints.weightx = 1;
 			gridBagConstraints.weighty = 1;
 
-			javax.swing.JLabel label = new javax.swing.JLabel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
-					"rec.exp.displays.inactive"), javax.swing.JLabel.CENTER);
+			final javax.swing.JLabel label = new javax.swing.JLabel(java.util.ResourceBundle.getBundle(
+					"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.displays.inactive"),
+					SwingConstants.CENTER);
 			removeAll();
 			add(label, gridBagConstraints);
 			updateUI();
 		}
 	}
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 		if (chart != null) {
-			for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++)
-				if (model.getValueAt(i, 18) != null)
+			for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
+				if (model.getValueAt(i, 18) != null) {
 					chart.makeImage(model.getValueAt(i, 18).getValue().getByteArrayValue().getData());
-		} else
+				}
+			}
+		} else {
 			super.newSamples(evt);
+		}
 	}
 
 	private ExpDataModel model = null;
 
-	public void setExpDataModel(ExpDataModel model) {
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
 		super.setExpDataModel(model);
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.removeExpDataModelListener(this);
+		}
 		this.model = model;
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 
 	}
 
@@ -135,45 +149,48 @@ public class Chart1 extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimen
 	 * Chart1 stdim = new Chart1(); test.getContentPane().add(stdim);
 	 * test.pack(); test.setVisible(true); stdim.start(); }
 	 */
-	public static byte[] nameToChannels(String name) {
-		String[] str = name.split(" vs ");
-		byte[] axis = new byte[2];
+	public static byte[] nameToChannels(final String name) {
+		final String[] str = name.split(" vs ");
+		final byte[] axis = new byte[2];
 
 		for (int i = 0; i < 2; i++) {
-			if (str[i].equalsIgnoreCase("X"))
+			if (str[i].equalsIgnoreCase("X")) {
 				axis[i] = 2;
-			if (str[i].equalsIgnoreCase("Y"))
+			}
+			if (str[i].equalsIgnoreCase("Y")) {
 				axis[i] = 4;
-			if (str[i].equalsIgnoreCase("Z"))
+			}
+			if (str[i].equalsIgnoreCase("Z")) {
 				axis[i] = 6;
-			else if (str[i].equalsIgnoreCase("X^2"))
+			} else if (str[i].equalsIgnoreCase("X^2")) {
 				axis[i] = 8;
-			else if (str[i].equalsIgnoreCase("Y^2"))
+			} else if (str[i].equalsIgnoreCase("Y^2")) {
 				axis[i] = 10;
-			else if (str[i].equalsIgnoreCase("Z^2"))
+			} else if (str[i].equalsIgnoreCase("Z^2")) {
 				axis[i] = 12;
-			else if (str[i].equalsIgnoreCase("| r |^2"))
+			} else if (str[i].equalsIgnoreCase("| r |^2")) {
 				axis[i] = 14;
-			else if (str[i].equalsIgnoreCase("Vx"))
+			} else if (str[i].equalsIgnoreCase("Vx")) {
 				axis[i] = 3;
-			else if (str[i].equalsIgnoreCase("Vy"))
+			} else if (str[i].equalsIgnoreCase("Vy")) {
 				axis[i] = 5;
-			else if (str[i].equalsIgnoreCase("Vz"))
+			} else if (str[i].equalsIgnoreCase("Vz")) {
 				axis[i] = 7;
-			else if (str[i].equalsIgnoreCase("Vx^2"))
+			} else if (str[i].equalsIgnoreCase("Vx^2")) {
 				axis[i] = 9;
-			else if (str[i].equalsIgnoreCase("Vy^2"))
+			} else if (str[i].equalsIgnoreCase("Vy^2")) {
 				axis[i] = 11;
-			else if (str[i].equalsIgnoreCase("Vz^2"))
+			} else if (str[i].equalsIgnoreCase("Vz^2")) {
 				axis[i] = 13;
-			else if (str[i].equalsIgnoreCase("| v |^2"))
+			} else if (str[i].equalsIgnoreCase("| v |^2")) {
 				axis[i] = 15;
-			else if (str[i].equalsIgnoreCase("t"))
+			} else if (str[i].equalsIgnoreCase("t")) {
 				axis[i] = 18;
-			else if (str[i].equalsIgnoreCase("| r |"))
+			} else if (str[i].equalsIgnoreCase("| r |")) {
 				axis[i] = 16;
-			else if (str[i].equalsIgnoreCase("| v |"))
+			} else if (str[i].equalsIgnoreCase("| v |")) {
 				axis[i] = 17;
+			}
 		}
 		return axis;
 	}

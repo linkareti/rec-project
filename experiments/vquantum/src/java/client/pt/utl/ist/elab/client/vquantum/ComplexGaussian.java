@@ -45,9 +45,9 @@ public class ComplexGaussian implements Bounded {
 	private Shape gaussShape;
 	private Shape psiKShape;
 	private Color color = Color.ORANGE;
-	private Color highLightColor = Color.RED;
+	private final Color highLightColor = Color.RED;
 	private Color paintColor = color;
-	private Color paintKSColor = Color.GREEN;
+	private final Color paintKSColor = Color.GREEN;
 
 	private double xmax, xmin;
 	private double ymax, ymin;
@@ -69,68 +69,71 @@ public class ComplexGaussian implements Bounded {
 	private double xminKS;
 
 	/** Creates a new instance of ComplexGaussian */
-	public ComplexGaussian(double _dX0, double _x0, double _energy, int log2N, double _deltaX, int _display,
-			boolean _enabled) {
+	public ComplexGaussian(final double _dX0, final double _x0, final double _energy, final int log2N,
+			final double _deltaX, final int _display, final boolean _enabled) {
 		enabled = _enabled;
 		N = (int) Math.round(Math.pow(2, log2N));
 		dX0 = _dX0;
 		dx = dX0 / (N - 1);
 		x0 = _x0;
 		deltaX = _deltaX;
-		k0 = Math.sqrt(2 * _energy / h);
+		k0 = Math.sqrt(2 * _energy / ComplexGaussian.h);
 		dk = 2 * Math.PI / ((N - 1) * dx);
 
 		psi = new Complex[N];
-		for (int i = 0; i < N; i++)
+		for (int i = 0; i < N; i++) {
 			psi[i] = getInitialPsi(i * dx + x0 - dX0 / 2);
+		}
 		display = _display;
 		buildPath(display);
 	}
 
-	public void configGaussian(double _dX0, double _x0, double _energy, int log2N, double _deltaX, int _display,
-			boolean _enabled) {
+	public void configGaussian(final double _dX0, final double _x0, final double _energy, final int log2N,
+			final double _deltaX, final int _display, final boolean _enabled) {
 		enabled = _enabled;
 		N = (int) Math.round(Math.pow(2, log2N));
 		dX0 = _dX0;
 		dx = dX0 / (N - 1);
 		x0 = _x0;
 		deltaX = _deltaX;
-		k0 = Math.sqrt(2 * _energy / h);
+		k0 = Math.sqrt(2 * _energy / ComplexGaussian.h);
 		dk = 2 * Math.PI / ((N - 1) * dx);
 
 		psi = new Complex[N];
-		for (int i = 0; i < N; i++)
+		for (int i = 0; i < N; i++) {
 			psi[i] = getInitialPsi(i * dx + x0 - dX0 / 2);
+		}
 		display = _display;
 		buildPath(display);
 	}
 
-	public Complex getInitialPsi(double x) {
-		Complex _psi = Complex.expI(new Complex(-Math.pow((x - x0), 2) / (4 * deltaX * deltaX), k0 * x));
+	public Complex getInitialPsi(final double x) {
+		final Complex _psi = Complex.expI(new Complex(-Math.pow((x - x0), 2) / (4 * deltaX * deltaX), k0 * x));
 		_psi.times((1 / Math.pow((2 * Math.PI * deltaX * deltaX), 1 / 4)));
 
 		return _psi;
 	}
 
-	private void buildPath(int psiType) {
+	private void buildPath(final int psiType) {
 		generalPath = new GeneralPath();
 		double y = 0;
 		ymax = 0;
 		ymin = 0;
 		xmax = 0;
 		xmin = 0;
-		generalPath.moveTo((float) (x0 - dX0 / 2), (float) 0);
+		generalPath.moveTo((float) (x0 - dX0 / 2), 0);
 		for (int i = 0; i < psi.length; i++) {
-			if (!psi[i].isNumber())
+			if (!psi[i].isNumber()) {
 				return;
-			else {
-				double x = dx * i + x0 - dX0 / 2;
-				if (psiType == DISPLAY_PROBABILITY)
+			} else {
+				final double x = dx * i + x0 - dX0 / 2;
+				if (psiType == ComplexGaussian.DISPLAY_PROBABILITY) {
 					y = Math.pow(psi[i].abs(), 2);
-				else if (psiType == DISPLAY_REAL)
+				} else if (psiType == ComplexGaussian.DISPLAY_REAL) {
 					y = psi[i].getRe();
-				else if (psiType == DISPLAY_IMAGINARY)
+				} else if (psiType == ComplexGaussian.DISPLAY_IMAGINARY) {
 					y = psi[i].getIm();
+				}
 
 				ymax = Math.max(y, ymax);
 				ymin = Math.min(y, ymin);
@@ -146,11 +149,11 @@ public class ComplexGaussian implements Bounded {
 				generalPath.lineTo((float) x, (float) y);
 			}
 		}
-		generalPath.lineTo((float) (x0 + dX0 / 2), (float) 0);
+		generalPath.lineTo((float) (x0 + dX0 / 2), 0);
 	}
 
 	public void buildPsiKS() {
-		Complex[] psiKS = getPsiKS();
+		final Complex[] psiKS = getPsiKS();
 		psiKSPath = new GeneralPath();
 
 		ymaxKS = 0;
@@ -159,17 +162,18 @@ public class ComplexGaussian implements Bounded {
 		xminKS = 0;
 
 		for (int i = 0; i < psi.length; i++) {
-			if (!psiKS[i].isNumber())
+			if (!psiKS[i].isNumber()) {
 				return;
-			else {
-				double x = dk * i;
-				double y = Math.pow(psiKS[i].abs(), 2);
+			} else {
+				final double x = dk * i;
+				final double y = Math.pow(psiKS[i].abs(), 2);
 
 				// if (Math.abs(y) > 1e-4)
-				if (psiKSPath.getCurrentPoint() == null)
+				if (psiKSPath.getCurrentPoint() == null) {
 					psiKSPath.moveTo((float) x, (float) y);
-				else
+				} else {
 					psiKSPath.lineTo((float) x, (float) y);
+				}
 
 				ymaxKS = Math.max(y, ymaxKS);
 				yminKS = Math.min(y, yminKS);
@@ -181,7 +185,7 @@ public class ComplexGaussian implements Bounded {
 		isKSPathNew = true;
 	}
 
-	public void setShowingKS(boolean showing) {
+	public void setShowingKS(final boolean showing) {
 		showingKS = showing;
 	}
 
@@ -194,8 +198,8 @@ public class ComplexGaussian implements Bounded {
 	}
 
 	private Complex[] getPsiKS() {
-		Complex[] psiKS = FFT.calculateFFT(psi, (int) (Math.log(N) / Math.log(2)), 1);
-		Complex[] psiKSArranged = new Complex[psiKS.length];
+		final Complex[] psiKS = FFT.calculateFFT(psi, (int) (Math.log(N) / Math.log(2)), 1);
+		final Complex[] psiKSArranged = new Complex[psiKS.length];
 		for (int i = psiKS.length / 2; i < psiKS.length; i++) {
 			psiKSArranged[i - psiKS.length / 2] = psiKS[i];
 			psiKSArranged[i] = psiKS[i - psiKS.length / 2];
@@ -203,48 +207,51 @@ public class ComplexGaussian implements Bounded {
 		return psiKSArranged;
 	}
 
-	public void drawPsiKS(DrawingPanel panel, Graphics g) {
+	public void drawPsiKS(final DrawingPanel panel, final Graphics g) {
 		if (isKSPathNew) {
 			panel.setPreferredMinMax(xminKS, xmaxKS, yminKS, ymaxKS);
 			isKSPathNew = false;
 		}
 		panel.setPixelScale();
 		psiKShape = psiKSPath.createTransformedShape(panel.getPixelTransform());
-		Graphics2D g2 = (Graphics2D) g;
+		final Graphics2D g2 = (Graphics2D) g;
 		g2.setPaint(paintKSColor);
 		g2.draw(psiKShape);
 		g2.fill(psiKShape);
 		g2.setPaint(Color.BLACK);
-		g2.drawLine(panel.xToPix(dk * (N - (int) (N * 0.05))), panel.yToPix(yminKS), panel.xToPix(dk
-				* (N - (int) (N * 0.05))), panel.yToPix(ymaxKS));
+		g2.drawLine(panel.xToPix(dk * (N - (int) (N * 0.05))), panel.yToPix(yminKS),
+				panel.xToPix(dk * (N - (int) (N * 0.05))), panel.yToPix(ymaxKS));
 		g2.drawLine(panel.xToPix(dk * ((int) (N * 0.05))), panel.yToPix(yminKS), panel.xToPix(dk * ((int) (N * 0.05))),
 				panel.yToPix(ymaxKS));
 	}
 
-	public void draw(DrawingPanel panel, Graphics g) {
+	@Override
+	public void draw(final DrawingPanel panel, final Graphics g) {
 		gaussShape = generalPath.createTransformedShape(panel.getPixelTransform());
-		Graphics2D g2 = (Graphics2D) g;
+		final Graphics2D g2 = (Graphics2D) g;
 		g2.setPaint(paintColor);
 		g2.draw(gaussShape);
 		g2.fill(gaussShape);
 		g2.setPaint(Color.BLACK);
-		g2.drawLine(panel.xToPix(dx * (N - (int) (N * 0.05)) + x0 - dX0 / 2), panel.yToPix(ymin), panel.xToPix(dx
-				* (N - (int) (N * 0.05)) + x0 - dX0 / 2), panel.yToPix(ymax));
-		g2.drawLine(panel.xToPix(dx * ((int) (N * 0.05)) + x0 - dX0 / 2), panel.yToPix(ymin), panel.xToPix(dx
-				* ((int) (N * 0.05)) + x0 - dX0 / 2), panel.yToPix(ymax));
+		g2.drawLine(panel.xToPix(dx * (N - (int) (N * 0.05)) + x0 - dX0 / 2), panel.yToPix(ymin),
+				panel.xToPix(dx * (N - (int) (N * 0.05)) + x0 - dX0 / 2), panel.yToPix(ymax));
+		g2.drawLine(panel.xToPix(dx * ((int) (N * 0.05)) + x0 - dX0 / 2), panel.yToPix(ymin),
+				panel.xToPix(dx * ((int) (N * 0.05)) + x0 - dX0 / 2), panel.yToPix(ymax));
 	}
 
-	public Interactive findInteractive(DrawingPanel panel, int _xpix, int _ypix) {
+	@Override
+	public Interactive findInteractive(final DrawingPanel panel, final int _xpix, final int _ypix) {
 		if (enabled) {
-			GeneralPath tmpPath = (GeneralPath) generalPath.clone();
+			final GeneralPath tmpPath = (GeneralPath) generalPath.clone();
 			tmpPath.closePath();
-			if (gaussShape != null && tmpPath.createTransformedShape(panel.getPixelTransform()).contains(_xpix, _ypix))
+			if (gaussShape != null && tmpPath.createTransformedShape(panel.getPixelTransform()).contains(_xpix, _ypix)) {
 				return this;
+			}
 		}
 		return null;
 	}
 
-	public void setDisplay(int _display) {
+	public void setDisplay(final int _display) {
 		display = _display;
 		buildPath(display);
 	}
@@ -253,162 +260,190 @@ public class ComplexGaussian implements Bounded {
 		return display;
 	}
 
-	public void setColor(java.awt.Color _color) {
+	public void setColor(final java.awt.Color _color) {
 		color = _color;
 	}
 
-	public void setEnergy(double _energy) {
-		k0 = Math.sqrt(2 * _energy / h);
+	public void setEnergy(final double _energy) {
+		k0 = Math.sqrt(2 * _energy / ComplexGaussian.h);
 		psi = new Complex[N];
-		for (int i = 0; i < N; i++)
+		for (int i = 0; i < N; i++) {
 			psi[i] = getInitialPsi(i * dx + x0 - dX0 / 2);
+		}
 		buildPath(display);
-		if (showingKS)
+		if (showingKS) {
 			buildPsiKS();
+		}
 	}
 
 	public double getEnergy() {
-		return k0 * k0 * h / 2;
+		return k0 * k0 * ComplexGaussian.h / 2;
 	}
 
-	public void setLog2N(int n) {
+	public void setLog2N(final int n) {
 		N = (int) Math.pow(2, n);
 		dx = dX0 / (N - 1);
 		dk = 2 * Math.PI / ((N - 1) * dx);
 		psi = new Complex[N];
-		for (int i = 0; i < N; i++)
+		for (int i = 0; i < N; i++) {
 			psi[i] = getInitialPsi(i * dx + x0 - dX0 / 2);
+		}
 		buildPath(display);
-		if (showingKS)
+		if (showingKS) {
 			buildPsiKS();
+		}
 	}
 
-	public void setDX0(double _dX0) {
+	public void setDX0(final double _dX0) {
 		dX0 = _dX0;
-		if (dX0 / 8 < deltaX)
+		if (dX0 / 8 < deltaX) {
 			deltaX = dX0 / 8;
+		}
 		dx = dX0 / (N - 1);
 		dk = 2 * Math.PI / ((N - 1) * dx);
 		psi = new Complex[N];
-		for (int i = 0; i < N; i++)
+		for (int i = 0; i < N; i++) {
 			psi[i] = getInitialPsi(i * dx + x0 - dX0 / 2);
+		}
 		buildPath(display);
-		if (showingKS)
+		if (showingKS) {
 			buildPsiKS();
+		}
 	}
 
 	public double getDX0() {
 		return dX0;
 	}
 
-	public void setDeltaX(double _deltaX) {
+	public void setDeltaX(final double _deltaX) {
 		deltaX = _deltaX;
 		psi = new Complex[N];
-		for (int i = 0; i < N; i++)
+		for (int i = 0; i < N; i++) {
 			psi[i] = getInitialPsi(i * dx + x0 - dX0 / 2);
+		}
 		buildPath(display);
-		if (showingKS)
+		if (showingKS) {
 			buildPsiKS();
+		}
 	}
 
 	public double getDeltaX() {
 		return deltaX;
 	}
 
+	@Override
 	public double getX() {
 		return x0;
 	}
 
+	@Override
 	public double getXMax() {
 		return xmax;
 	}
 
+	@Override
 	public double getXMin() {
 		return xmin;
 	}
 
+	@Override
 	public double getY() {
 		return 0;
 	}
 
+	@Override
 	public double getYMax() {
 		return ymax;
 	}
 
+	@Override
 	public double getYMin() {
 		return ymin;
 	}
 
+	@Override
 	public boolean isEnabled() {
 		return enabled;
 	}
 
+	@Override
 	public boolean isMeasured() {
 		return false;
 	}
 
+	@Override
 	public void setEnabled(boolean enabled) {
 		enabled = enabled;
 	}
 
-	public void setX(double x) {
+	@Override
+	public void setX(final double x) {
 		if (enabled) {
 			generalPath.transform(AffineTransform.getTranslateInstance(x - x0, 0));
 			x0 = x;
 		}
 	}
 
-	public void setXY(double x, double y) {
+	@Override
+	public void setXY(final double x, final double y) {
 		if (enabled) {
 			x0 += x;
 			generalPath.transform(AffineTransform.getTranslateInstance(x, 0));
 		}
 	}
 
-	public void setY(double y) {
+	@Override
+	public void setY(final double y) {
 	}
 
-	public Rectangle2D getBounds(double x) {
+	@Override
+	public Rectangle2D getBounds(final double x) {
 		return new Rectangle2D.Double(0, 0, 0, 0);// new
 		// Rectangle2D.Double(x0+x-deltaX*3.5,-1,7*deltaX,2);
 	}
 
-	public void mouseOver(DrawingPanel panel) {
+	@Override
+	public void mouseOver(final DrawingPanel panel) {
 		paintColor = highLightColor;
-		Graphics2D g2 = (Graphics2D) panel.getGraphics();
+		final Graphics2D g2 = (Graphics2D) panel.getGraphics();
 		g2.setPaint(paintColor);
 		g2.draw(gaussShape);
 		g2.fill(gaussShape);
 	}
 
-	public void mouseOut(DrawingPanel panel) {
+	@Override
+	public void mouseOut(final DrawingPanel panel) {
 		paintColor = color;
-		Graphics2D g2 = (Graphics2D) panel.getGraphics();
+		final Graphics2D g2 = (Graphics2D) panel.getGraphics();
 		g2.setPaint(paintColor);
 		g2.draw(gaussShape);
 		g2.fill(gaussShape);
 	}
 
-	public boolean intersect(Rectangle2D rect) {
+	@Override
+	public boolean intersect(final Rectangle2D rect) {
 		// if (gaussShape != null &&
 		// rect.intersects(x0-deltaX*3.5,-1,7*deltaX,2))
 		// return true;
 		return false;
 	}
 
+	@Override
 	public Color getPaintColor() {
 		return paintColor;
 	}
 
+	@Override
 	public Color getHighLightColor() {
 		return highLightColor;
 	}
 
-	public void setPsi(Complex[] _psi) {
+	public void setPsi(final Complex[] _psi) {
 		psi = _psi;
 		buildPath(display);
-		if (showingKS)
+		if (showingKS) {
 			buildPsiKS();
+		}
 	}
 
 }

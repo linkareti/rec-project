@@ -6,6 +6,8 @@
 
 package pt.utl.ist.elab.client.aleatorio.displays;
 
+import javax.swing.SwingConstants;
+
 /**
  * 
  * @author Pedro Carvalho - LEFT - IST
@@ -13,6 +15,11 @@ package pt.utl.ist.elab.client.aleatorio.displays;
 public class SessionGraphDisplay extends javax.swing.JPanel implements
 		com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2300324570511383134L;
 
 	/** Creates new form GraphDisplay */
 	public SessionGraphDisplay() {
@@ -70,7 +77,7 @@ public class SessionGraphDisplay extends javax.swing.JPanel implements
 
 		sigmaText.setBackground(new java.awt.Color(204, 204, 204));
 		sigmaText.setEditable(false);
-		sigmaText.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		sigmaText.setHorizontalAlignment(SwingConstants.RIGHT);
 		sigmaText.setMinimumSize(new java.awt.Dimension(40, 20));
 		sigmaText.setName("sigmaText");
 		sessionStatValuesPanel.add(sigmaText);
@@ -82,7 +89,7 @@ public class SessionGraphDisplay extends javax.swing.JPanel implements
 
 		y0Text.setBackground(new java.awt.Color(204, 204, 204));
 		y0Text.setEditable(false);
-		y0Text.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+		y0Text.setHorizontalAlignment(SwingConstants.TRAILING);
 		y0Text.setMinimumSize(new java.awt.Dimension(40, 20));
 		y0Text.setName("y0Text");
 		sessionStatValuesPanel.add(y0Text);
@@ -94,7 +101,7 @@ public class SessionGraphDisplay extends javax.swing.JPanel implements
 
 		ampText.setBackground(new java.awt.Color(204, 204, 204));
 		ampText.setEditable(false);
-		ampText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		ampText.setHorizontalAlignment(SwingConstants.CENTER);
 		ampText.setName("ampText");
 		sessionStatValuesPanel.add(ampText);
 
@@ -128,7 +135,8 @@ public class SessionGraphDisplay extends javax.swing.JPanel implements
 		RefreshButton.setMinimumSize(new java.awt.Dimension(2, 2));
 		RefreshButton.setPreferredSize(new java.awt.Dimension(5, 5));
 		RefreshButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				refreshButtonActionPerformedHandler(evt);
 			}
 		});
@@ -141,19 +149,21 @@ public class SessionGraphDisplay extends javax.swing.JPanel implements
 
 	}// GEN-END:initComponents
 
-	private void refreshButtonActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_refreshButtonActionPerformedHandler
+	private void refreshButtonActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_refreshButtonActionPerformedHandler
 		// Add your handling code here:
-		double lambda = 0.01; // 0.001
-		double termEpsilon = 0.01;
-		int maxIter = 100;
+		final double lambda = 0.01; // 0.001
+		final double termEpsilon = 0.01;
+		final int maxIter = 100;
 		Amp = getMax(sessionY);
 
-		for (int i = 0; i < sessionY.length; i++)
-			if (sessionY[i] > 0)
+		for (int i = 0; i < sessionY.length; i++) {
+			if (sessionY[i] > 0) {
 				System.out.println("sessionY[" + i + "] = " + sessionY[i]);
+			}
+		}
 
-		double[] params = pt.utl.ist.elab.client.aleatorio.utils.LMFit.solve(sessionX, sessionY, mu, sigma, y0, Amp,
-				lambda, termEpsilon, maxIter);
+		final double[] params = pt.utl.ist.elab.client.aleatorio.utils.LMFit.solve(sessionX, sessionY, mu, sigma, y0,
+				Amp, lambda, termEpsilon, maxIter);
 		graphPanel.updateGraph(sessionX, sessionY, params[0], params[1], params[2], params[3]);
 		imageStorePanel.setImage(graphPanel.getImage());
 		imageStorePanel.repaint();
@@ -190,59 +200,68 @@ public class SessionGraphDisplay extends javax.swing.JPanel implements
 	// End of variables declaration//GEN-END:variables
 
 	// My Vars
-	private pt.utl.ist.elab.client.aleatorio.utils.StorageSingleton sessionGraphDisplaySingleton = pt.utl.ist.elab.client.aleatorio.utils.StorageSingleton
+	private final pt.utl.ist.elab.client.aleatorio.utils.StorageSingleton sessionGraphDisplaySingleton = pt.utl.ist.elab.client.aleatorio.utils.StorageSingleton
 			.getSingleton();
 	private int numberOfDice, minValueOfDie, maxValueOfDie, counts = 0;
 	private GraphPanel graphPanel;
-	private ImageStorePanel imageStorePanel = new ImageStorePanel();
+	private final ImageStorePanel imageStorePanel = new ImageStorePanel();
 	private double[] sessionX, sessionY;
 	private int[] xx = null;
 	private double mu, sigma, y0, Amp;
 	private com.linkare.rec.impl.client.experiment.ExpDataModel model;
-	private String name = "Session Statistics";
-	private javax.swing.Icon icon = new javax.swing.ImageIcon(getClass().getResource(
+	private final String name = "Session Statistics";
+	private final javax.swing.Icon icon = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/aleatorio/resources/AleatorioIcon.gif"));
 
 	/**
-	 *ExpDataDisplay Implementation
+	 * ExpDataDisplay Implementation
 	 */
-	public void setExpDataModel(com.linkare.rec.impl.client.experiment.ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final com.linkare.rec.impl.client.experiment.ExpDataModel model) {
+		if (this.model != null) {
 			model.removeExpDataModelListener(this);
+		}
 
 		this.model = model;
 
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 
 	}// setExpDataModel(ExpDataModel model)
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}// getDisplay()
 
+	@Override
 	public String getName() {
 		return name;
 	}// getName()
 
+	@Override
 	public javax.swing.Icon getIcon() {
 		return icon;
 	}// getIcon()
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}// getMenuBar()
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}// getToolBar()
 
 	/**
-	 *ExpDataModelListener implementation
+	 * ExpDataModelListener implementation
 	 */
 
-	public void newSamples(com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
-		int lastSample = evt.getSamplesEndIndex(), firstSample = evt.getSamplesStartIndex();
+	@Override
+	public void newSamples(final com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
+		final int lastSample = evt.getSamplesEndIndex(), firstSample = evt.getSamplesStartIndex();
 		for (int i = firstSample; i < lastSample + 1; i++) {
 			if (sessionX == null) {
 				/*
@@ -256,7 +275,7 @@ public class SessionGraphDisplay extends javax.swing.JPanel implements
 				 * byteArray2IntArray(configurationByteArray); }//if
 				 */
 				if (model.getValueAt(i, model.getChannelIndex("XX")) != null) {
-					byte[] xxByteArray = model.getValueAt(i, model.getChannelIndex("XX")).getValue()
+					final byte[] xxByteArray = model.getValueAt(i, model.getChannelIndex("XX")).getValue()
 							.getByteArrayValue().getData();
 					xx = byteArray2IntArray(xxByteArray); // xx[0] is the first
 					// element of
@@ -267,7 +286,7 @@ public class SessionGraphDisplay extends javax.swing.JPanel implements
 					sessionX = new double[xx[1] - xx[0] + 1];
 					sessionY = new double[sessionX.length];
 					for (int index = 0; index < sessionX.length; index++) {
-						sessionX[index] = (double) (xx[0] + index);
+						sessionX[index] = (xx[0] + index);
 						sessionY[index] = 0;
 					}
 					// these are just initial values for the fitting algorithm
@@ -306,55 +325,62 @@ public class SessionGraphDisplay extends javax.swing.JPanel implements
 					 */
 				}// if
 			}// if
-			// TODO FIXME out of bounds -14 again?!?!?
-//			if (model.getValueAt(i, model.getChannelIndex("CenterCount")) != null && xx != null) {
-//				// sessionY[sessionGraphDisplaySingleton.sessGetStoredInt() -
-//				// xx[0]]++;
-//				sessionY[model.getValueAt(i, model.getChannelIndex("CenterCount")).getValue().getIntValue() - xx[0]]++;
-//
-//				double lambda = 0.01; // 0.001
-//				double termEpsilon = 0.01;
-//				int maxIter = 100;
-//				Amp = getMax(sessionY);
-//				double[] params = pt.utl.ist.elab.client.aleatorio.utils.LMFit.solve(sessionX, sessionY, mu, sigma, y0,
-//						Amp, lambda, termEpsilon, maxIter);
-//				graphPanel.updateGraph(sessionX, sessionY, params[0], params[1], params[2], params[3]);
-//				imageStorePanel.setImage(graphPanel.getImage());
-//				imageStorePanel.repaint();
-//
-//				counts++;
-//				muText.setText(String.valueOf(params[0]));
-//				sigmaText.setText(String.valueOf(params[1]));
-//				y0Text.setText(String.valueOf(params[2]));
-//				ampText.setText(String.valueOf(params[3]));
-//				chiSqText.setText(String.valueOf(params[4]));
-//				countsText.setText(String.valueOf(counts));
-//			}// if
+				// TODO FIXME out of bounds -14 again?!?!?
+				// if (model.getValueAt(i, model.getChannelIndex("CenterCount"))
+				// != null && xx != null) {
+			// // sessionY[sessionGraphDisplaySingleton.sessGetStoredInt() -
+			// // xx[0]]++;
+			// sessionY[model.getValueAt(i,
+			// model.getChannelIndex("CenterCount")).getValue().getIntValue() -
+			// xx[0]]++;
+			//
+			// double lambda = 0.01; // 0.001
+			// double termEpsilon = 0.01;
+			// int maxIter = 100;
+			// Amp = getMax(sessionY);
+			// double[] params =
+			// pt.utl.ist.elab.client.aleatorio.utils.LMFit.solve(sessionX,
+			// sessionY, mu, sigma, y0,
+			// Amp, lambda, termEpsilon, maxIter);
+			// graphPanel.updateGraph(sessionX, sessionY, params[0], params[1],
+			// params[2], params[3]);
+			// imageStorePanel.setImage(graphPanel.getImage());
+			// imageStorePanel.repaint();
+			//
+			// counts++;
+			// muText.setText(String.valueOf(params[0]));
+			// sigmaText.setText(String.valueOf(params[1]));
+			// y0Text.setText(String.valueOf(params[2]));
+			// ampText.setText(String.valueOf(params[3]));
+			// chiSqText.setText(String.valueOf(params[4]));
+			// countsText.setText(String.valueOf(counts));
+			// }// if
 
 		}// for
 	}// newSamples(NewExpDataEvent evt)
 
+	@Override
 	public void dataModelStoped() {
 	}// dataModelStoped()
 
 	public void dataModelRunning() {
 	}// dataModelRunning()
 
-	public void headerAvailable(com.linkare.rec.data.config.HardwareAcquisitionConfig header) {
+	public void headerAvailable(final com.linkare.rec.data.config.HardwareAcquisitionConfig header) {
 	}// headerAvailable(HardwareAcquisitionConfig header)
 
 	/**
-	 *Utilities
+	 * Utilities
 	 */
 
-	private int[] byteArray2IntArray(byte[] byteArray) {
-		int[] temp = new int[byteArray.length / 4];
+	private int[] byteArray2IntArray(final byte[] byteArray) {
+		final int[] temp = new int[byteArray.length / 4];
 
 		for (int index = 0; index < temp.length; index++) {
-			temp[index] = (int) (byteArray[4 * index] & 0xff) << 24;
-			temp[index] = (int) (byteArray[4 * index + 1] & 0xff) << 16;
-			temp[index] += (int) (byteArray[4 * index + 2] & 0xff) << 8;
-			temp[index] += (int) (byteArray[4 * index + 3] & 0xff);
+			temp[index] = (byteArray[4 * index] & 0xff) << 24;
+			temp[index] = (byteArray[4 * index + 1] & 0xff) << 16;
+			temp[index] += (byteArray[4 * index + 2] & 0xff) << 8;
+			temp[index] += (byteArray[4 * index + 3] & 0xff);
 		}
 		return temp;
 	}// byteArray2IntArray(byte[] byteArray)
@@ -368,37 +394,44 @@ public class SessionGraphDisplay extends javax.swing.JPanel implements
 	 * array)
 	 */
 
-	private double getMax(double[] array) {
-		if (array == null)
+	private double getMax(final double[] array) {
+		if (array == null) {
 			return 0.;
+		}
 
 		double value = array[0];
-		for (int index = 1; index < array.length; index++)
+		for (int index = 1; index < array.length; index++) {
 			value = (array[index] > value) ? array[index] : value;
+		}
 
 		return value;
 	}// getMax(double[] array)
 
-	private int getCounts(double[] array) {
+	private int getCounts(final double[] array) {
 		counts = 0;
-		for (int i = 0; i < array.length; i++) {
-			counts += (int) array[i];
+		for (final double element : array) {
+			counts += (int) element;
 		}// for_i
 		return counts;
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 

@@ -16,12 +16,13 @@ import com.linkare.rec.impl.threading.util.EnumPriority;
 public class HardwareLockEvent implements Prioritazible {
 
 	/** Holds value of property milliseconds_to_lock_success. */
-	private long milliseconds_to_lock_success;
+	private final long milliseconds_to_lock_success;
 	private LockCountDown counter = null;
 	private DataClientForQueue lockerClient = null;
 
 	/** Creates a new instance of HardwareLockEvent */
-	public HardwareLockEvent(LockCountDown counter, long milliseconds_to_lock_success, DataClientForQueue lockerClient) {
+	public HardwareLockEvent(final LockCountDown counter, final long milliseconds_to_lock_success,
+			final DataClientForQueue lockerClient) {
 		this.counter = counter;
 		this.milliseconds_to_lock_success = milliseconds_to_lock_success;
 		this.lockerClient = lockerClient;
@@ -33,7 +34,7 @@ public class HardwareLockEvent implements Prioritazible {
 	 * @return Value of property milliseconds_to_lock_success.
 	 */
 	public long getMilliseconds_to_lock_success() {
-		return this.milliseconds_to_lock_success;
+		return milliseconds_to_lock_success;
 	}
 
 	public void startCountDown() {

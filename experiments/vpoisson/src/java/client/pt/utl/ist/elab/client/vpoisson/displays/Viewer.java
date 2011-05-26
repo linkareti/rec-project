@@ -8,6 +8,8 @@ package pt.utl.ist.elab.client.vpoisson.displays;
 
 import java.text.DecimalFormat;
 
+import javax.swing.JFrame;
+
 import org.opensourcephysics.frames.Scalar2DFrame;
 
 import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
@@ -24,11 +26,15 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * @author n0dP2
  */
 public class Viewer extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5546915428392701193L;
 	private double[][][] solutions = new double[20][30][10];
 	private int Nx = 0;
 	private int Ny = 0;
 	private int Nz = 0;
-	private DecimalFormat df = new DecimalFormat("0.000");
+	private final DecimalFormat df = new DecimalFormat("0.000");
 
 	public Viewer() {
 		initComponents();
@@ -72,7 +78,8 @@ public class Viewer extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 		jButtonShowSolutionX.setText(ReCResourceBundle.findString("poisson$rec.exp.poisson.show"));
 		jButtonShowSolutionX.setEnabled(false);
 		jButtonShowSolutionX.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonShowSolutionXActionPerformed(evt);
 			}
 		});
@@ -106,7 +113,8 @@ public class Viewer extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 		jSliderSolutionX.setPreferredSize(new java.awt.Dimension(100, 16));
 		jSliderSolutionX.setEnabled(false);
 		jSliderSolutionX.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderSolutionXStateChanged(evt);
 			}
 		});
@@ -127,7 +135,8 @@ public class Viewer extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 		jButtonShowSolutionY.setText(ReCResourceBundle.findString("poisson$rec.exp.poisson.show"));
 		jButtonShowSolutionY.setEnabled(false);
 		jButtonShowSolutionY.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonShowSolutionYActionPerformed(evt);
 			}
 		});
@@ -161,7 +170,8 @@ public class Viewer extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 		jSliderSolutionY.setPreferredSize(new java.awt.Dimension(100, 16));
 		jSliderSolutionY.setEnabled(false);
 		jSliderSolutionY.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderSolutionYStateChanged(evt);
 			}
 		});
@@ -182,7 +192,8 @@ public class Viewer extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 		jButtonShowSolutionZ.setText(ReCResourceBundle.findString("poisson$rec.exp.poisson.show"));
 		jButtonShowSolutionZ.setEnabled(false);
 		jButtonShowSolutionZ.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonShowSolutionZActionPerformed(evt);
 			}
 		});
@@ -209,7 +220,8 @@ public class Viewer extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 		jSliderSolutionZ.setPreferredSize(new java.awt.Dimension(100, 16));
 		jSliderSolutionZ.setEnabled(false);
 		jSliderSolutionZ.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderSolutionZStateChanged(evt);
 			}
 		});
@@ -250,82 +262,89 @@ public class Viewer extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 
 	}// GEN-END:initComponents
 
-	private void jSliderSolutionZStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderSolutionZStateChanged
+	private void jSliderSolutionZStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderSolutionZStateChanged
 	{// GEN-HEADEREND:event_jSliderSolutionZStateChanged
 		jLabelZCutN.setText("nz = " + jSliderSolutionZ.getValue());
 		jLabelZCut.setText("z="
 				+ df.format((jSliderSolutionZ.getValue() - 1) / (double) (jSliderSolutionZ.getMaximum() - 1)));
 	}// GEN-LAST:event_jSliderSolutionZStateChanged
 
-	private void jSliderSolutionYStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderSolutionYStateChanged
+	private void jSliderSolutionYStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderSolutionYStateChanged
 	{// GEN-HEADEREND:event_jSliderSolutionYStateChanged
 		jLabelYCutN.setText("ny = " + jSliderSolutionY.getValue());
 		jLabelYCut.setText("y="
 				+ df.format((jSliderSolutionY.getValue() - 1) / (double) (jSliderSolutionY.getMaximum() - 1)));
 	}// GEN-LAST:event_jSliderSolutionYStateChanged
 
-	private void jSliderSolutionXStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderSolutionXStateChanged
+	private void jSliderSolutionXStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderSolutionXStateChanged
 	{// GEN-HEADEREND:event_jSliderSolutionXStateChanged
 		jLabelXCutN.setText("nx = " + jSliderSolutionX.getValue());
 		jLabelXCut.setText("x="
 				+ df.format((jSliderSolutionX.getValue() - 1) / (double) (jSliderSolutionX.getMaximum() - 1)));
 	}// GEN-LAST:event_jSliderSolutionXStateChanged
 
-	private void jButtonShowSolutionZActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonShowSolutionZActionPerformed
+	private void jButtonShowSolutionZActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonShowSolutionZActionPerformed
 	{// GEN-HEADEREND:event_jButtonShowSolutionZActionPerformed
-		int zc = jSliderSolutionZ.getValue() - 1;
+		final int zc = jSliderSolutionZ.getValue() - 1;
 
-		double[][] zsol = new double[solutions.length][solutions[0].length];
+		final double[][] zsol = new double[solutions.length][solutions[0].length];
 		for (int i = 0; i < zsol.length; i++) {
-			double[] temp = new double[solutions[0].length];
-			for (int j = 0; j < temp.length; j++)
+			final double[] temp = new double[solutions[0].length];
+			for (int j = 0; j < temp.length; j++) {
 				temp[j] = solutions[i][j][zc];
+			}
 
 			System.arraycopy(temp, 0, zsol[i], 0, solutions[0].length);
 		}
-		String z = jLabelZCut.getText();
+		final String z = jLabelZCut.getText();
 		myScalar2DFrame(zsol, "x", "y", "rho at z = " + z);
 	}// GEN-LAST:event_jButtonShowSolutionZActionPerformed
 
-	private void jButtonShowSolutionYActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonShowSolutionYActionPerformed
+	private void jButtonShowSolutionYActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonShowSolutionYActionPerformed
 	{// GEN-HEADEREND:event_jButtonShowSolutionYActionPerformed
-		int yc = jSliderSolutionY.getValue() - 1;
+		final int yc = jSliderSolutionY.getValue() - 1;
 
-		double[][] ysol = new double[solutions.length][solutions[0][0].length];
-		for (int i = 0; i < ysol.length; i++)
+		final double[][] ysol = new double[solutions.length][solutions[0][0].length];
+		for (int i = 0; i < ysol.length; i++) {
 			System.arraycopy(solutions[i][yc], 0, ysol[i], 0, solutions[0][0].length);
-		String y = jLabelYCut.getText();
+		}
+		final String y = jLabelYCut.getText();
 		myScalar2DFrame(ysol, "x", "z", "rho at y = " + y);
 	}// GEN-LAST:event_jButtonShowSolutionYActionPerformed
 
-	private void jButtonShowSolutionXActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonShowSolutionXActionPerformed
+	private void jButtonShowSolutionXActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonShowSolutionXActionPerformed
 	{// GEN-HEADEREND:event_jButtonShowSolutionXActionPerformed
-		double[][] xsol = solutions[jSliderSolutionX.getValue() - 1];
-		String x = jLabelXCut.getText();
+		final double[][] xsol = solutions[jSliderSolutionX.getValue() - 1];
+		final String x = jLabelXCut.getText();
 		myScalar2DFrame(xsol, "y", "z", "rho at x = " + x);
 	}// GEN-LAST:event_jButtonShowSolutionXActionPerformed
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
 
 			if (model.getValueAt(i, 0) != null) {
 				solutions = (double[][][]) ByteUtil.byteArrayToObject(model.getValueAt(i, 0).getValue()
 						.getByteArrayValue().getData());
-				if (solutions != null)
+				if (solutions != null) {
 					enableAll();
+				}
 			}
 		}
 	}
 
 	// Queremos fazer alguma coisa quandos os dados acabarem?
+	@Override
 	public void dataModelEnded() {
 	}
 
 	// Queremos fazer alguma coisa quandos acontecer um erro?
+	@Override
 	public void dataModelError() {
 	}
 
 	// Queremos fazer alguma coisa quando for dado o start e existirem dados?
+	@Override
 	public void dataModelStarted() {
 	}
 
@@ -333,31 +352,38 @@ public class Viewer extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 	// dados?
 	// Eu garanto que quando chegamos a este estado, j? existe o header da
 	// experi?ncia!
+	@Override
 	public void dataModelStartedNoData() {
 		updateNs();
 	}
 
 	// Queremos fazer alguma coisa quando for dado parado?
+	@Override
 	public void dataModelStoped() {
 	}
 
 	// Queremos fazer alguma coisa em estado de espera?
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
 	// O icon associado a este painel!
+	@Override
 	public javax.swing.Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
@@ -365,27 +391,30 @@ public class Viewer extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 	// Este c?digo ? SEMPRE igual e tem de existir!
 	private ExpDataModel model = null;
 
-	public void setExpDataModel(ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
+		if (this.model != null) {
 			this.model.removeExpDataModelListener(this);
+		}
 		this.model = model;
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 
 	}
 
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 		ReCResourceBundle.loadResourceBundle("poisson",
 				"recresource:///pt/utl/ist/elab/client/vpoisson/resources/messages");
-		javax.swing.JFrame dummy = new javax.swing.JFrame();
+		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new Viewer());
-		dummy.setDefaultCloseOperation(dummy.EXIT_ON_CLOSE);
+		dummy.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		dummy.pack();
 		dummy.show();
 	}
 
 	private void updateNs() {
-		HardwareAcquisitionConfig header = model.getAcquisitionConfig();
+		final HardwareAcquisitionConfig header = model.getAcquisitionConfig();
 		Nx = Integer.parseInt(header.getSelectedHardwareParameterValue("Nx"));
 		Ny = Integer.parseInt(header.getSelectedHardwareParameterValue("Ny"));
 		Nz = Integer.parseInt(header.getSelectedHardwareParameterValue("Nz"));
@@ -404,32 +433,38 @@ public class Viewer extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 	}
 
 	// returns the minimum value of the 2d matrix m
-	private double getMatrixMin(double[][] m) {
+	private double getMatrixMin(final double[][] m) {
 		double min = m[0][0];
 
-		for (int x = 0; x < m.length; x++)
-			for (int y = 0; y < m[0].length; y++)
-				if (m[x][y] < min)
-					min = m[x][y];
+		for (final double[] element : m) {
+			for (int y = 0; y < m[0].length; y++) {
+				if (element[y] < min) {
+					min = element[y];
+				}
+			}
+		}
 
 		return min;
 	}
 
 	// returns the maximum value of the 2d matrix m
-	private double getMatrixMax(double[][] m) {
+	private double getMatrixMax(final double[][] m) {
 		double max = m[0][0];
 
-		for (int x = 0; x < m.length; x++)
-			for (int y = 0; y < m[0].length; y++)
-				if (m[x][y] > max)
-					max = m[x][y];
+		for (final double[] element : m) {
+			for (int y = 0; y < m[0].length; y++) {
+				if (element[y] > max) {
+					max = element[y];
+				}
+			}
+		}
 
 		return max;
 	}
 
 	// constructs and shows a Scalar2DFrame(OSP) with color legend
-	private void myScalar2DFrame(double[][] data, String label1, String label2, String title) {
-		Scalar2DFrame frame = new Scalar2DFrame(label1, label2, title);
+	private void myScalar2DFrame(final double[][] data, final String label1, final String label2, final String title) {
+		final Scalar2DFrame frame = new Scalar2DFrame(label1, label2, title);
 		frame.setPreferredMinMax(0.0, 1.0, 0.0, 1.0);
 		frame.setAutoscaleX(true);
 		frame.setAutoscaleY(true);
@@ -438,10 +473,10 @@ public class Viewer extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 
 		frame.show();
 
-		int w = frame.getDrawingPanel().getWidth();
-		int h = frame.getDrawingPanel().getHeight();
+		final int w = frame.getDrawingPanel().getWidth();
+		final int h = frame.getDrawingPanel().getHeight();
 
-		javax.swing.JPanel panel = new javax.swing.JPanel();
+		final javax.swing.JPanel panel = new javax.swing.JPanel();
 		panel.setBackground(java.awt.Color.BLUE);
 		panel.setMaximumSize(new java.awt.Dimension(w, h + 50));
 		panel.setMinimumSize(new java.awt.Dimension(w, h + 50));
@@ -449,7 +484,7 @@ public class Viewer extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 		panel.setLayout(null);
 		frame.getContentPane().add(panel);
 		frame.setSize(w, frame.getHeight() + 50);
-		javax.swing.JPanel legend = new javax.swing.JPanel();
+		final javax.swing.JPanel legend = new javax.swing.JPanel();
 		legend.setBackground(java.awt.Color.WHITE);
 		legend.setMaximumSize(new java.awt.Dimension(w, 50));
 		legend.setMinimumSize(new java.awt.Dimension(w, 50));
@@ -460,24 +495,24 @@ public class Viewer extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 
 		legend.setBounds(0, h, w, 50);
 
-		javax.swing.JPanel minColor = new javax.swing.JPanel();
+		final javax.swing.JPanel minColor = new javax.swing.JPanel();
 		minColor.setBackground(java.awt.Color.MAGENTA);
 		minColor.setMaximumSize(new java.awt.Dimension(w, 50));
 		minColor.setMinimumSize(new java.awt.Dimension(w, 50));
 		minColor.setPreferredSize(new java.awt.Dimension(w, 50));
 		minColor.setLayout(null);
 
-		javax.swing.JPanel maxColor = new javax.swing.JPanel();
+		final javax.swing.JPanel maxColor = new javax.swing.JPanel();
 		maxColor.setBackground(java.awt.Color.RED);
 		maxColor.setMaximumSize(new java.awt.Dimension(w, 50));
 		maxColor.setMinimumSize(new java.awt.Dimension(w, 50));
 		maxColor.setPreferredSize(new java.awt.Dimension(w, 50));
 		maxColor.setLayout(null);
 
-		javax.swing.JLabel minLabel = new javax.swing.JLabel();
+		final javax.swing.JLabel minLabel = new javax.swing.JLabel();
 		minLabel.setText("" + getMatrixMin(data));
 
-		javax.swing.JLabel maxLabel = new javax.swing.JLabel();
+		final javax.swing.JLabel maxLabel = new javax.swing.JLabel();
 		maxLabel.setText("" + getMatrixMax(data));
 
 		legend.add(minColor);

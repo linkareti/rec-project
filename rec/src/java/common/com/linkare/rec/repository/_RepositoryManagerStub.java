@@ -22,40 +22,43 @@ import com.linkare.rec.acquisition.UserInfoHelper;
 
 public class _RepositoryManagerStub extends ObjectImpl implements RepositoryManager {
 
-	public DataProducer getDataProducer(UserInfo user, String id) {
+	@Override
+	public DataProducer getDataProducer(final UserInfo user, final String id) {
 		InputStream $in = null;
 		try {
-			OutputStream $out = _request("getDataProducer", true);
+			final OutputStream $out = _request("getDataProducer", true);
 			UserInfoHelper.write($out, user);
 			DataProducerIdHelper.write($out, id);
 			$in = _invoke($out);
-			DataProducer $result = DataProducerHelper.read($in);
+			final DataProducer $result = DataProducerHelper.read($in);
 			return $result;
-		} catch (ApplicationException $ex) {
+		} catch (final ApplicationException $ex) {
 			$in = $ex.getInputStream();
-			String _id = $ex.getId();
+			final String _id = $ex.getId();
 			throw new MARSHAL(_id);
-		} catch (RemarshalException $rm) {
+		} catch (final RemarshalException $rm) {
 			return getDataProducer(user, id);
 		} finally {
 			_releaseReply($in);
 		}
 	} // getDataProducer
 
-	public DataProducerConfig[] listDataProducers(UserInfo user, HardwareAcquisitionConfigSearch[] search_params) {
+	@Override
+	public DataProducerConfig[] listDataProducers(final UserInfo user,
+			final HardwareAcquisitionConfigSearch[] search_params) {
 		InputStream $in = null;
 		try {
-			OutputStream $out = _request("listDataProducers", true);
+			final OutputStream $out = _request("listDataProducers", true);
 			UserInfoHelper.write($out, user);
 			VTHardwareAcquisitionConfigSearchListHelper.write($out, search_params);
 			$in = _invoke($out);
-			DataProducerConfig $result[] = DataProducerConfigListHelper.read($in);
+			final DataProducerConfig $result[] = DataProducerConfigListHelper.read($in);
 			return $result;
-		} catch (ApplicationException $ex) {
+		} catch (final ApplicationException $ex) {
 			$in = $ex.getInputStream();
-			String _id = $ex.getId();
+			final String _id = $ex.getId();
 			throw new MARSHAL(_id);
-		} catch (RemarshalException $rm) {
+		} catch (final RemarshalException $rm) {
 			return listDataProducers(user, search_params);
 		} finally {
 			_releaseReply($in);
@@ -65,23 +68,24 @@ public class _RepositoryManagerStub extends ObjectImpl implements RepositoryMana
 	// Type-specific CORBA::Object operations
 	private static String[] __ids = { "IDL:com/linkare/rec/repository/RepositoryManager:1.0" };
 
+	@Override
 	public String[] _ids() {
-		return (String[]) __ids.clone();
+		return _RepositoryManagerStub.__ids.clone();
 	}
 
-	private void readObject(ObjectInputStream s) throws IOException {
-		String str = s.readUTF();
-		String[] args = null;
-		Properties props = null;
-		Object obj = ORB.init(args, props).string_to_object(str);
-		Delegate delegate = ((ObjectImpl) obj)._get_delegate();
+	private void readObject(final ObjectInputStream s) throws IOException {
+		final String str = s.readUTF();
+		final String[] args = null;
+		final Properties props = null;
+		final Object obj = ORB.init(args, props).string_to_object(str);
+		final Delegate delegate = ((ObjectImpl) obj)._get_delegate();
 		_set_delegate(delegate);
 	}
 
-	private void writeObject(ObjectOutputStream s) throws IOException {
-		String[] args = null;
-		Properties props = null;
-		String str = ORB.init(args, props).object_to_string(this);
+	private void writeObject(final ObjectOutputStream s) throws IOException {
+		final String[] args = null;
+		final Properties props = null;
+		final String str = ORB.init(args, props).object_to_string(this);
 		s.writeUTF(str);
 	}
 } // class _RepositoryManagerStub

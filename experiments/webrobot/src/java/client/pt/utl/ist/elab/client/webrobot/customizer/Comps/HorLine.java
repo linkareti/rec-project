@@ -11,13 +11,17 @@ package pt.utl.ist.elab.client.webrobot.customizer.Comps;
  * @author André Neto - LEFT - IST
  */
 public class HorLine extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Block {
-	private int WIDTH = 77;
-	private int HEIGHT = 45;
-	private java.awt.Dimension dimension = new java.awt.Dimension(WIDTH, HEIGHT);
-	private int TIPO = 99;
-	private java.awt.Color backgroundColor = new java.awt.Color(204, 204, 204);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4576565510207461431L;
+	private final int WIDTH = 77;
+	private final int HEIGHT = 45;
+	private final java.awt.Dimension dimension = new java.awt.Dimension(WIDTH, HEIGHT);
+	private final int TIPO = 99;
+	private final java.awt.Color backgroundColor = new java.awt.Color(204, 204, 204);
 	private javax.swing.ImageIcon image;
-	private String fullNameDescription = "ligacao";
+	private final String fullNameDescription = "ligacao";
 
 	/** Creates a new instance of HorLine */
 	public HorLine() {
@@ -30,10 +34,11 @@ public class HorLine extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 		setOpaque(false);
 	}
 
-	public void paintComponent(java.awt.Graphics g) {
+	@Override
+	public void paintComponent(final java.awt.Graphics g) {
 		image = new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Comps/Icons/atribui.gif"));
-		java.awt.Graphics2D g2 = (java.awt.Graphics2D) g;
+		final java.awt.Graphics2D g2 = (java.awt.Graphics2D) g;
 		g2.setStroke(new java.awt.BasicStroke(3f));
 		g.setColor(backgroundColor);
 		g.fillRect(0, 0, this.getSize().width, this.getSize().height);
@@ -42,17 +47,21 @@ public class HorLine extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 		super.paintComponent(g);
 	}
 
+	@Override
 	public String getFullNameDescription() {
-		return this.fullNameDescription;
+		return fullNameDescription;
 	}
 
-	public void setPaintBottom(boolean paintLeft) {
+	@Override
+	public void setPaintBottom(final boolean paintLeft) {
 	}
 
+	@Override
 	public boolean isPaintBottom() {
 		return false;
 	}
 
+	@Override
 	public boolean isPaintLeft() {
 		return true;
 	}

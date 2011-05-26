@@ -25,19 +25,22 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 
 	/** Creates a new instance of StampRelayTranslator */
 	public StampConfigTranslator() {
-		super(COMMAND_IDENTIFIER);
+		super(StampConfigTranslator.COMMAND_IDENTIFIER);
 	}
 
-	public boolean translate(StampCommand command) {
-		if (command.getCommandIdentifier() == null)
+	@Override
+	public boolean translate(final StampCommand command) {
+		if (command.getCommandIdentifier() == null) {
 			return false;
-		if (!command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER))
+		}
+		if (!command.getCommandIdentifier().equalsIgnoreCase(StampConfigTranslator.COMMAND_IDENTIFIER)) {
 			return false;
+		}
 
-		int numsamples = ((Integer) command.getCommandData(NUMSAMPLES_STR)).intValue();
-		int xini = ((Integer) command.getCommandData(XINI_STR)).intValue();
-		int xfin = ((Integer) command.getCommandData(XFIN_STR)).intValue();
-		int calib = ((Integer) command.getCommandData(CALIB_STR)).intValue();
+		final int numsamples = ((Integer) command.getCommandData(StampConfigTranslator.NUMSAMPLES_STR)).intValue();
+		final int xini = ((Integer) command.getCommandData(StampConfigTranslator.XINI_STR)).intValue();
+		final int xfin = ((Integer) command.getCommandData(StampConfigTranslator.XFIN_STR)).intValue();
+		final int calib = ((Integer) command.getCommandData(StampConfigTranslator.CALIB_STR)).intValue();
 
 		if (xini > 900 || xini < 0) {
 			System.out.println("xini is wrong..." + xini);
@@ -65,21 +68,24 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 		}
 
 		String xinistr = "" + xini;
-		while (xinistr.length() < 3)
+		while (xinistr.length() < 3) {
 			xinistr = "0" + xinistr;
+		}
 
 		String xfinstr = "" + xfin;
-		while (xfinstr.length() < 3)
+		while (xfinstr.length() < 3) {
 			xfinstr = "0" + xfinstr;
+		}
 
 		String numSamplesStr = "" + (numsamples - 1);
-		while (numSamplesStr.length() < 3)
+		while (numSamplesStr.length() < 3) {
 			numSamplesStr = "0" + numSamplesStr;
+		}
 
-		String calibStr = "" + calib;
+		final String calibStr = "" + calib;
 
-		String commandStr = command.getCommandIdentifier() + " " + xinistr + " " + xfinstr + " " + numSamplesStr + " "
-				+ calibStr;
+		final String commandStr = command.getCommandIdentifier() + " " + xinistr + " " + xfinstr + " " + numSamplesStr
+				+ " " + calibStr;
 		command.setCommand(commandStr);
 
 		return true;

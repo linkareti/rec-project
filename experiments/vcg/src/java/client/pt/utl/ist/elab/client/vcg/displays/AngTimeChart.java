@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.vcg.displays;
  */
 public class AngTimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3449658561522268649L;
+
 	/** Creates a new instance of AngTimeChart */
 	public AngTimeChart() {
 		super();

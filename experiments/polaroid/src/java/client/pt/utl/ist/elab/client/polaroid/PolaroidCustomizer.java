@@ -19,6 +19,11 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 public class PolaroidCustomizer extends javax.swing.JPanel implements
 		com.linkare.rec.impl.client.customizer.ICustomizer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7184186711892553884L;
+
 	/** Creates new form PolaroidCustomizer */
 	public PolaroidCustomizer() {
 		initComponents();
@@ -66,7 +71,8 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
 		btnOK.setText(ReCResourceBundle.findString("polaroid$rec.exp.polaroid.lbl.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
 			}
 		});
@@ -78,7 +84,8 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 
 		btnCancel.setText(ReCResourceBundle.findString("polaroid$rec.exp.polaroid.lbl.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
 			}
 		});
@@ -97,7 +104,8 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 
 		btnDefaults.setText(ReCResourceBundle.findString("polaroid$rec.exp.dftcfg.polaroid.title.1"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
 			}
 		});
@@ -132,7 +140,8 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 		jSliderPolFixo.setMinimumSize(new java.awt.Dimension(300, 41));
 		jSliderPolFixo.setPreferredSize(new java.awt.Dimension(300, 41));
 		jSliderPolFixo.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderPolFixoStateChanged(evt);
 			}
 		});
@@ -142,7 +151,8 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 		jTextFieldPolFixo.setColumns(4);
 		jTextFieldPolFixo.setText("50");
 		jTextFieldPolFixo.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldPolFixoFocusLost(evt);
 			}
 		});
@@ -163,7 +173,8 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 		jSliderPolVarIni.setPaintTicks(true);
 		jSliderPolVarIni.setValue(20);
 		jSliderPolVarIni.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderPolVarIniStateChanged(evt);
 			}
 		});
@@ -173,7 +184,8 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 		jTextFieldPolVarIni.setColumns(4);
 		jTextFieldPolVarIni.setText("20");
 		jTextFieldPolVarIni.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldPolVarIniFocusLost(evt);
 			}
 		});
@@ -194,7 +206,8 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 		jSliderPolVarEnd.setPaintTicks(true);
 		jSliderPolVarEnd.setValue(120);
 		jSliderPolVarEnd.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderPolVarEndStateChanged(evt);
 			}
 		});
@@ -204,7 +217,8 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 		jTextFieldPolVarEnd.setColumns(4);
 		jTextFieldPolVarEnd.setText("120");
 		jTextFieldPolVarEnd.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldPolVarEndFocusLost(evt);
 			}
 		});
@@ -241,7 +255,7 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 
 	}// GEN-END:initComponents
 
-	private void btnDefaultsActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
+	private void btnDefaultsActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
 	{// GEN-HEADEREND:event_btnDefaultsActionPerformed
 		jSliderPolFixo.setValue(90);
 		jSliderPolVarIni.setValue(0);
@@ -250,12 +264,12 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 		jCheckBoxCalib.setSelected(false);
 	}// GEN-LAST:event_btnDefaultsActionPerformed
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
+	private void btnCancelActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
 	{// GEN-HEADEREND:event_btnCancelActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_btnCancelActionPerformed
 
-	private void btnOKActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
+	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
 		acqConfig.getSelectedHardwareParameter("PosIniPolMovel").setParameterValue("" + jSliderPolVarIni.getValue());
 		acqConfig.getSelectedHardwareParameter("PosEndPolMovel").setParameterValue("" + jSliderPolVarEnd.getValue());
@@ -273,54 +287,55 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_btnOKActionPerformed
 
-	private void jTextFieldPolVarEndFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldPolVarEndFocusLost
+	private void jTextFieldPolVarEndFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldPolVarEndFocusLost
 	{// GEN-HEADEREND:event_jTextFieldPolVarEndFocusLost
 		adjustSlider(jSliderPolVarEnd, jTextFieldPolVarEnd);
 	}// GEN-LAST:event_jTextFieldPolVarEndFocusLost
 
-	private void jTextFieldPolVarIniFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldPolVarIniFocusLost
+	private void jTextFieldPolVarIniFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldPolVarIniFocusLost
 	{// GEN-HEADEREND:event_jTextFieldPolVarIniFocusLost
 		adjustSlider(jSliderPolVarIni, jTextFieldPolVarIni);
 	}// GEN-LAST:event_jTextFieldPolVarIniFocusLost
 
-	private void jTextFieldPolFixoFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldPolFixoFocusLost
+	private void jTextFieldPolFixoFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldPolFixoFocusLost
 	{// GEN-HEADEREND:event_jTextFieldPolFixoFocusLost
 		adjustSlider(jSliderPolFixo, jTextFieldPolFixo);
 	}// GEN-LAST:event_jTextFieldPolFixoFocusLost
 
-	private void jSliderPolVarEndStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderPolVarEndStateChanged
+	private void jSliderPolVarEndStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderPolVarEndStateChanged
 	{// GEN-HEADEREND:event_jSliderPolVarEndStateChanged
 		jTextFieldPolVarEnd.setText("" + jSliderPolVarEnd.getValue());
 	}// GEN-LAST:event_jSliderPolVarEndStateChanged
 
-	private void jSliderPolVarIniStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderPolVarIniStateChanged
+	private void jSliderPolVarIniStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderPolVarIniStateChanged
 	{// GEN-HEADEREND:event_jSliderPolVarIniStateChanged
 		jTextFieldPolVarIni.setText("" + jSliderPolVarIni.getValue());
 	}// GEN-LAST:event_jSliderPolVarIniStateChanged
 
-	private void jSliderPolFixoStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderPolFixoStateChanged
+	private void jSliderPolFixoStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderPolFixoStateChanged
 	{// GEN-HEADEREND:event_jSliderPolFixoStateChanged
 		jTextFieldPolFixo.setText("" + jSliderPolFixo.getValue());
 	}// GEN-LAST:event_jSliderPolFixoStateChanged
 
-	private void adjustSlider(javax.swing.JSlider slider, javax.swing.JTextField field) {
+	private void adjustSlider(final javax.swing.JSlider slider, final javax.swing.JTextField field) {
 		int num = 0;
 		try {
 			num = Integer.parseInt(field.getText().trim());
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 			field.setText("" + slider.getValue());
 		}
-		if (num > slider.getMaximum() || num < slider.getMinimum())
+		if (num > slider.getMaximum() || num < slider.getMinimum()) {
 			field.setText("" + slider.getValue());
-		else
+		} else {
 			slider.setValue(num);
+		}
 	}
 
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String args[]) {
-		javax.swing.JFrame dummy = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new PolaroidCustomizer(), java.awt.BorderLayout.CENTER);
 		dummy.pack();
 		dummy.show();
@@ -334,7 +349,8 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -346,7 +362,8 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -356,9 +373,10 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -372,9 +390,10 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -386,43 +405,50 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
 		return acqConfig;
 	}
 
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
-			int posini = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("PosIniPolMovel"));
+			final int posini = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("PosIniPolMovel"));
 			jSliderPolVarIni.setValue(posini);
-			int posend = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("PosEndPolMovel"));
+			final int posend = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("PosEndPolMovel"));
 			jSliderPolVarIni.setValue(posend);
-			int posfixo = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("PosFixo"));
+			final int posfixo = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("PosFixo"));
 			jSliderPolVarIni.setValue(posfixo);
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
+	@Override
 	public javax.swing.JComponent getCustomizerComponent() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/polaroid/resources/polaroid_iconified.png"));
 	}
 
+	@Override
 	public String getCustomizerTitle() {
 		return ReCResourceBundle.findString("polaroid$rec.exp.polaroid.customizer.title");
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}

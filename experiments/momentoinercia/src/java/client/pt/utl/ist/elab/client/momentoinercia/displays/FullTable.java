@@ -14,12 +14,18 @@ import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
  */
 public class FullTable extends MultSeriesTable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9190786534189089869L;
+
 	/** Creates a new instance of TableFreqRMS */
 	public FullTable() {
 		super();
 		setColArray(new int[] { 2, 0, 1 });
 	}
 
+	@Override
 	public String getName() {
 		return "Tabela";
 	}

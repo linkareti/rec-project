@@ -12,9 +12,14 @@ package pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs;
  */
 public class ConfAtribui extends javax.swing.JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5849307904878224416L;
+
 	/** Creates new form ConfCompBin */
-	public ConfAtribui(java.awt.Frame parent, boolean modal,
-			pt.utl.ist.elab.client.webrobot.customizer.Models.ModelAtribui model) {
+	public ConfAtribui(final java.awt.Frame parent, final boolean modal,
+			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelAtribui model) {
 		super(parent, modal);
 		this.model = model;
 		initComponents();
@@ -47,19 +52,22 @@ public class ConfAtribui extends javax.swing.JDialog {
 		setTitle("Atribui\u00e7\u00e3o de valores \u00e0s vari\u00e1veis");
 		setResizable(false);
 		addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyPressed(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyPressed(final java.awt.event.KeyEvent evt) {
 				formKeyPressed(evt);
 			}
 		});
 
 		addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mouseClicked(final java.awt.event.MouseEvent evt) {
 				formMouseClicked(evt);
 			}
 		});
 
 		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent evt) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent evt) {
 				closeDialog(evt);
 			}
 		});
@@ -82,7 +90,8 @@ public class ConfAtribui extends javax.swing.JDialog {
 		jRadioButtonVar.setSelected(true);
 		buttonGroup.add(jRadioButtonVar);
 		jRadioButtonVar.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jRadioButtonVarMousePressed(evt);
 			}
 		});
@@ -92,7 +101,8 @@ public class ConfAtribui extends javax.swing.JDialog {
 		jRadioButtonInt.setForeground(new java.awt.Color(51, 0, 102));
 		buttonGroup.add(jRadioButtonInt);
 		jRadioButtonInt.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jRadioButtonIntMousePressed(evt);
 			}
 		});
@@ -129,13 +139,15 @@ public class ConfAtribui extends javax.swing.JDialog {
 		jButtonOk.setText("Ok");
 		jButtonOk.setPreferredSize(new java.awt.Dimension(73, 26));
 		jButtonOk.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jButtonOkKeyReleased(evt);
 			}
 		});
 
 		jButtonOk.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonOkMousePressed(evt);
 			}
 		});
@@ -145,7 +157,8 @@ public class ConfAtribui extends javax.swing.JDialog {
 		jButtonCancel.setForeground(new java.awt.Color(51, 0, 102));
 		jButtonCancel.setText("Cancel");
 		jButtonCancel.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonCancelMousePressed(evt);
 			}
 		});
@@ -157,7 +170,7 @@ public class ConfAtribui extends javax.swing.JDialog {
 		pack();
 	}// GEN-END:initComponents
 
-	private void jButtonOkKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jButtonOkKeyReleased
+	private void jButtonOkKeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jButtonOkKeyReleased
 		if (evt.getKeyCode() == 10) {
 			jButtonOkMousePressed(null);
 		} else if (evt.getKeyCode() == 27) {
@@ -165,7 +178,7 @@ public class ConfAtribui extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_jButtonOkKeyReleased
 
-	private void formKeyPressed(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_formKeyPressed
+	private void formKeyPressed(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_formKeyPressed
 		if (evt.getKeyCode() == 10) {
 			jButtonOkMousePressed(null);
 		} else if (evt.getKeyCode() == 27) {
@@ -173,26 +186,26 @@ public class ConfAtribui extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_formKeyPressed
 
-	private void formMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseClicked
+	private void formMouseClicked(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseClicked
 		this.requestFocus();
 	}// GEN-LAST:event_formMouseClicked
 
-	private void jButtonCancelMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonCancelMousePressed
+	private void jButtonCancelMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonCancelMousePressed
 		setCancel(true);
 		closeDialog(null);
 	}// GEN-LAST:event_jButtonCancelMousePressed
 
-	private void jRadioButtonIntMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jRadioButtonIntMousePressed
+	private void jRadioButtonIntMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jRadioButtonIntMousePressed
 		jComboBoxD3.setEnabled(false);
 		jTextFieldD3.setEnabled(true);
 	}// GEN-LAST:event_jRadioButtonIntMousePressed
 
-	private void jRadioButtonVarMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jRadioButtonVarMousePressed
+	private void jRadioButtonVarMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jRadioButtonVarMousePressed
 		jComboBoxD3.setEnabled(true);
 		jTextFieldD3.setEnabled(false);
 	}// GEN-LAST:event_jRadioButtonVarMousePressed
 
-	private void jButtonOkMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonOkMousePressed
+	private void jButtonOkMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonOkMousePressed
 		if (checkTextValues.isOK(jTextFieldD3)) {
 			model.setD1(jComboBoxD1.getSelectedItem().toString());
 			if (!jTextFieldD3.isEnabled()) {
@@ -209,7 +222,7 @@ public class ConfAtribui extends javax.swing.JDialog {
 	}// GEN-LAST:event_jButtonOkMousePressed
 
 	/** Closes the dialog */
-	private void closeDialog(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
+	private void closeDialog(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
 		if (evt != null) {
 			setCancel(true);
 		}
@@ -249,7 +262,7 @@ public class ConfAtribui extends javax.swing.JDialog {
 	 * @return Value of property cancel.
 	 */
 	public boolean isCancel() {
-		return this.cancel;
+		return cancel;
 	}
 
 	/**
@@ -257,7 +270,7 @@ public class ConfAtribui extends javax.swing.JDialog {
 	 * 
 	 * @param cancel New value of property cancel.
 	 */
-	public void setCancel(boolean cancel) {
+	public void setCancel(final boolean cancel) {
 		this.cancel = cancel;
 	}
 
@@ -278,8 +291,8 @@ public class ConfAtribui extends javax.swing.JDialog {
 	private javax.swing.JRadioButton jRadioButtonVar;
 	// End of variables declaration//GEN-END:variables
 	// My variables
-	private pt.utl.ist.elab.client.webrobot.customizer.Models.ModelAtribui model;
-	private pt.utl.ist.elab.client.webrobot.customizer.Utils.CheckTextValues checkTextValues = new pt.utl.ist.elab.client.webrobot.customizer.Utils.CheckTextValues(
+	private final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelAtribui model;
+	private final pt.utl.ist.elab.client.webrobot.customizer.Utils.CheckTextValues checkTextValues = new pt.utl.ist.elab.client.webrobot.customizer.Utils.CheckTextValues(
 			this);
 
 	/** Holds value of property cancel. */

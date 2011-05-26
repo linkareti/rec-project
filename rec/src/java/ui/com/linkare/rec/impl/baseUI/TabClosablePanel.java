@@ -12,6 +12,11 @@ package com.linkare.rec.impl.baseUI;
  */
 public class TabClosablePanel extends javax.swing.JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1083484748424259902L;
+
 	/** Creates new form TabClosablePanel */
 	public TabClosablePanel() {
 		initComponents();
@@ -31,15 +36,16 @@ public class TabClosablePanel extends javax.swing.JPanel {
 
 		jPanel1.setLayout(new java.awt.BorderLayout());
 
-		jButtonClose.setIcon(com.linkare.rec.impl.i18n.ReCResourceBundle.findImageIconOrDefault(
-				"ReCBaseUI$rec.bui.icon.close", new javax.swing.ImageIcon(getClass().getResource(
-						"/com/linkare/rec/impl/baseUI/resources/Close16.gif"))));
+		jButtonClose.setIcon(com.linkare.rec.impl.i18n.ReCResourceBundle
+				.findImageIconOrDefault("ReCBaseUI$rec.bui.icon.close", new javax.swing.ImageIcon(getClass()
+						.getResource("/com/linkare/rec/impl/baseUI/resources/Close16.gif"))));
 		jButtonClose.setToolTipText(com.linkare.rec.impl.i18n.ReCResourceBundle.findStringOrDefault(
 				"ReCBaseUI$rec.bui.tip.closeTab", "Close the current tab"));
 		jButtonClose.setBorder(null);
 		jButtonClose.setPreferredSize(new java.awt.Dimension(16, 16));
 		jButtonClose.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonCloseActionPerformed(evt);
 			}
 		});
@@ -50,7 +56,7 @@ public class TabClosablePanel extends javax.swing.JPanel {
 
 	}// GEN-END:initComponents
 
-	private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonCloseActionPerformed
+	private void jButtonCloseActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonCloseActionPerformed
 	{// GEN-HEADEREND:event_jButtonCloseActionPerformed
 		firePropertyChangeListenerPropertyChange(new java.beans.PropertyChangeEvent(this, "closed", Boolean.FALSE,
 				Boolean.TRUE));
@@ -61,7 +67,8 @@ public class TabClosablePanel extends javax.swing.JPanel {
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addPropertyChangeListener(java.beans.PropertyChangeListener listener) {
+	@Override
+	public synchronized void addPropertyChangeListener(final java.beans.PropertyChangeListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -73,7 +80,8 @@ public class TabClosablePanel extends javax.swing.JPanel {
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removePropertyChangeListener(java.beans.PropertyChangeListener listener) {
+	@Override
+	public synchronized void removePropertyChangeListener(final java.beans.PropertyChangeListener listener) {
 		listenerList.remove(java.beans.PropertyChangeListener.class, listener);
 	}
 
@@ -82,10 +90,11 @@ public class TabClosablePanel extends javax.swing.JPanel {
 	 * 
 	 * @param event The event to be fired
 	 */
-	private void firePropertyChangeListenerPropertyChange(java.beans.PropertyChangeEvent event) {
-		if (listenerList == null)
+	private void firePropertyChangeListenerPropertyChange(final java.beans.PropertyChangeEvent event) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == java.beans.PropertyChangeListener.class) {
 				((java.beans.PropertyChangeListener) listeners[i + 1]).propertyChange(event);

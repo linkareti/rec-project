@@ -13,7 +13,8 @@ package com.linkare.rec.impl.multicast.security;
 public interface ISecurityCommunicator {
 
 	/**
-	 * Send a message from multicast to clients that are going to be shutdown by the SecurityManager.
+	 * Send a message from multicast to clients that are going to be shutdown by
+	 * the SecurityManager.
 	 * 
 	 * @param clientTo
 	 * @param message

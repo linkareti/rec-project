@@ -7,6 +7,10 @@ import javax.swing.JPopupMenu;
 
 public class InfoPopup extends JPopupMenu implements PropertyChangeListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7356136168970010356L;
 	private MessagePane messagePane;
 
 	public InfoPopup() {
@@ -20,11 +24,11 @@ public class InfoPopup extends JPopupMenu implements PropertyChangeListener {
 	}
 
 	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
+	public void propertyChange(final PropertyChangeEvent evt) {
 		if (evt != null) {
 			if (evt.getSource() == messagePane) {
 				if (MessagePane.CLOSE_ME == evt.getPropertyName()) {
-					this.setVisible(false);
+					setVisible(false);
 				}
 			}
 		}

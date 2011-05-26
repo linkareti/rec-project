@@ -14,15 +14,17 @@ public abstract class AbstractCypressProcessor implements CypressProcessor {
 	private String commandIdentifier = null;
 
 	/** Creates a new instance of AbstractSerialPortProcessor */
-	public AbstractCypressProcessor(String commandIdentifier) {
+	public AbstractCypressProcessor(final String commandIdentifier) {
 		this.commandIdentifier = commandIdentifier;
 		CypressTranslatorProcessorManager.registerProcessor(this);
 	}
 
+	@Override
 	public String getCommandIdentifier() {
 		return commandIdentifier;
 	}
 
+	@Override
 	public boolean isData() {
 		return false;
 	}

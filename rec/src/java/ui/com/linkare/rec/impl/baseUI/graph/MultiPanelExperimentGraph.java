@@ -19,11 +19,15 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  */
 public class MultiPanelExperimentGraph extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3959924377110995179L;
 	private Object[] expDataList = null;
-	private javax.swing.JPanel jPanelContainer;
-	private javax.swing.JScrollPane jScrollPane1;
+	private final javax.swing.JPanel jPanelContainer;
+	private final javax.swing.JScrollPane jScrollPane1;
 
-	public MultiPanelExperimentGraph(Object[] expDataList) {
+	public MultiPanelExperimentGraph(final Object[] expDataList) {
 		this.expDataList = expDataList;
 		setLayout(new java.awt.BorderLayout());
 
@@ -31,8 +35,8 @@ public class MultiPanelExperimentGraph extends javax.swing.JPanel implements Exp
 		jPanelContainer = new javax.swing.JPanel();
 
 		jPanelContainer.setLayout(new java.awt.GridLayout(expDataList.length, 1));
-		for (int i = 0; i < expDataList.length; i++) {
-			jPanelContainer.add((java.awt.Component) expDataList[i]);
+		for (final Object element : expDataList) {
+			jPanelContainer.add((java.awt.Component) element);
 		}
 
 		jScrollPane1.setViewportView(jPanelContainer);
@@ -40,67 +44,79 @@ public class MultiPanelExperimentGraph extends javax.swing.JPanel implements Exp
 		add(jScrollPane1, java.awt.BorderLayout.CENTER);
 	}
 
+	@Override
 	public void dataModelStoped() {
-		for (int i = 0; i < expDataList.length; i++) {
-			((ExpDataModelListener) (expDataList[i])).dataModelStoped();
+		for (final Object element : expDataList) {
+			((ExpDataModelListener) (element)).dataModelStoped();
 		}
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/chart16.gif"));
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
 
-	public void newSamples(NewExpDataEvent evt) {
-		for (int i = 0; i < expDataList.length; i++) {
-			((ExpDataModelListener) (expDataList[i])).newSamples(evt);
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
+		for (final Object element : expDataList) {
+			((ExpDataModelListener) (element)).newSamples(evt);
 		}
 	}
 
-	public void setExpDataModel(ExpDataModel model) {
-		for (int i = 0; i < expDataList.length; i++) {
-			((ExpDataDisplay) (expDataList[i])).setExpDataModel(model);
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
+		for (final Object element : expDataList) {
+			((ExpDataDisplay) (element)).setExpDataModel(model);
 		}
 	}
 
+	@Override
 	public void dataModelEnded() {
-		for (int i = 0; i < expDataList.length; i++) {
-			((ExpDataModelListener) (expDataList[i])).dataModelEnded();
+		for (final Object element : expDataList) {
+			((ExpDataModelListener) (element)).dataModelEnded();
 		}
 	}
 
+	@Override
 	public void dataModelError() {
-		for (int i = 0; i < expDataList.length; i++) {
-			((ExpDataModelListener) (expDataList[i])).dataModelError();
+		for (final Object element : expDataList) {
+			((ExpDataModelListener) (element)).dataModelError();
 		}
 	}
 
+	@Override
 	public void dataModelStarted() {
-		for (int i = 0; i < expDataList.length; i++) {
-			((ExpDataModelListener) (expDataList[i])).dataModelStarted();
+		for (final Object element : expDataList) {
+			((ExpDataModelListener) (element)).dataModelStarted();
 		}
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
-		for (int i = 0; i < expDataList.length; i++) {
-			((ExpDataModelListener) (expDataList[i])).dataModelStartedNoData();
+		for (final Object element : expDataList) {
+			((ExpDataModelListener) (element)).dataModelStartedNoData();
 		}
 	}
 
+	@Override
 	public void dataModelWaiting() {
-		for (int i = 0; i < expDataList.length; i++) {
-			((ExpDataModelListener) (expDataList[i])).dataModelWaiting();
+		for (final Object element : expDataList) {
+			((ExpDataModelListener) (element)).dataModelWaiting();
 		}
 	}
 

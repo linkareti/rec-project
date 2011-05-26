@@ -19,7 +19,7 @@ public class IncorrectRs232ValuesException extends Exception {
 	 * 
 	 * @param message
 	 */
-	public IncorrectRs232ValuesException(String message) {
+	public IncorrectRs232ValuesException(final String message) {
 		super(message);
 	}
 

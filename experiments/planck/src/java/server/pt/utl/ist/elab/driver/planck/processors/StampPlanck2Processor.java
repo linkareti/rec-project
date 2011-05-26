@@ -19,7 +19,7 @@ public class StampPlanck2Processor extends AbstractStampProcessor {
 
 	/** Creates a new instance of StampHelloProcessor */
 	public StampPlanck2Processor() {
-		super(COMMAND_IDENTIFIER);
+		super(StampPlanck2Processor.COMMAND_IDENTIFIER);
 	}
 
 	/**
@@ -29,21 +29,23 @@ public class StampPlanck2Processor extends AbstractStampProcessor {
 	 * @return boolean - wether the processing was successfull
 	 * 
 	 */
-	public boolean process(StampCommand command) {
+	@Override
+	public boolean process(final StampCommand command) {
 		int potential = 0;
 
-		String[] splitedStr = command.getCommand().split(" ");
+		final String[] splitedStr = command.getCommand().split(" ");
 
-		if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedStr[0] != null) {
+		if (command.getCommandIdentifier().equalsIgnoreCase(StampPlanck2Processor.COMMAND_IDENTIFIER)
+				&& splitedStr[0] != null) {
 			try {
 				potential = Integer.parseInt(splitedStr[0]);
-				Float oPotential = new Float(potential * 5f / 4096f);
+				final Float oPotential = new Float(potential * 5f / 4096f);
 
-				command.addCommandData(FOTOCEL, oPotential);
+				command.addCommandData(StampPlanck2Processor.FOTOCEL, oPotential);
 
 				command.setData(true);
 				return true;
-			} catch (NumberFormatException e) {
+			} catch (final NumberFormatException e) {
 				e.printStackTrace();
 				return false;
 			}
@@ -52,6 +54,7 @@ public class StampPlanck2Processor extends AbstractStampProcessor {
 		return false;
 	}
 
+	@Override
 	public boolean isData() {
 		return true;
 	}

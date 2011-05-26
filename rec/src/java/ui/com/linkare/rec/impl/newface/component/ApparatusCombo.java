@@ -15,6 +15,10 @@ import javax.swing.JComboBox;
  */
 public class ApparatusCombo extends JComboBox {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3156287676979725717L;
 	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(ApparatusCombo.class.getName());
 

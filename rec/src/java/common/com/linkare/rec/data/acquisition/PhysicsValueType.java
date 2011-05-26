@@ -1,6 +1,11 @@
 package com.linkare.rec.data.acquisition;
 
 public class PhysicsValueType implements org.omg.CORBA.portable.IDLEntity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3829796353198794792L;
+
 	//
 	// Internal member value
 	//
@@ -14,7 +19,7 @@ public class PhysicsValueType implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member BooleanVal
 	//
-	public static final PhysicsValueType BooleanVal = new PhysicsValueType(_BooleanVal);
+	public static final PhysicsValueType BooleanVal = new PhysicsValueType(PhysicsValueType._BooleanVal);
 
 	//
 	// Enum member ByteVal value
@@ -24,7 +29,7 @@ public class PhysicsValueType implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member ByteVal
 	//
-	public static final PhysicsValueType ByteVal = new PhysicsValueType(_ByteVal);
+	public static final PhysicsValueType ByteVal = new PhysicsValueType(PhysicsValueType._ByteVal);
 
 	//
 	// Enum member ShortVal value
@@ -34,7 +39,7 @@ public class PhysicsValueType implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member ShortVal
 	//
-	public static final PhysicsValueType ShortVal = new PhysicsValueType(_ShortVal);
+	public static final PhysicsValueType ShortVal = new PhysicsValueType(PhysicsValueType._ShortVal);
 
 	//
 	// Enum member IntVal value
@@ -44,7 +49,7 @@ public class PhysicsValueType implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member IntVal
 	//
-	public static final PhysicsValueType IntVal = new PhysicsValueType(_IntVal);
+	public static final PhysicsValueType IntVal = new PhysicsValueType(PhysicsValueType._IntVal);
 
 	//
 	// Enum member LongVal value
@@ -54,7 +59,7 @@ public class PhysicsValueType implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member LongVal
 	//
-	public static final PhysicsValueType LongVal = new PhysicsValueType(_LongVal);
+	public static final PhysicsValueType LongVal = new PhysicsValueType(PhysicsValueType._LongVal);
 
 	//
 	// Enum member FloatVal value
@@ -64,7 +69,7 @@ public class PhysicsValueType implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member FloatVal
 	//
-	public static final PhysicsValueType FloatVal = new PhysicsValueType(_FloatVal);
+	public static final PhysicsValueType FloatVal = new PhysicsValueType(PhysicsValueType._FloatVal);
 
 	//
 	// Enum member DoubleVal value
@@ -74,7 +79,7 @@ public class PhysicsValueType implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member DoubleVal
 	//
-	public static final PhysicsValueType DoubleVal = new PhysicsValueType(_DoubleVal);
+	public static final PhysicsValueType DoubleVal = new PhysicsValueType(PhysicsValueType._DoubleVal);
 
 	//
 	// Enum member ByteArrayVal value
@@ -84,7 +89,7 @@ public class PhysicsValueType implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Enum member ByteArrayVal
 	//
-	public static final PhysicsValueType ByteArrayVal = new PhysicsValueType(_ByteArrayVal);
+	public static final PhysicsValueType ByteArrayVal = new PhysicsValueType(PhysicsValueType._ByteArrayVal);
 
 	//
 	// Return the internal member value
@@ -99,24 +104,24 @@ public class PhysicsValueType implements org.omg.CORBA.portable.IDLEntity {
 	// @param an enum value
 	// @return an enum member
 	//
-	public static PhysicsValueType from_int(int value) {
+	public static PhysicsValueType from_int(final int value) {
 		switch (value) {
 		case 0:
-			return BooleanVal;
+			return PhysicsValueType.BooleanVal;
 		case 1:
-			return ByteVal;
+			return PhysicsValueType.ByteVal;
 		case 2:
-			return ShortVal;
+			return PhysicsValueType.ShortVal;
 		case 3:
-			return IntVal;
+			return PhysicsValueType.IntVal;
 		case 4:
-			return LongVal;
+			return PhysicsValueType.LongVal;
 		case 5:
-			return FloatVal;
+			return PhysicsValueType.FloatVal;
 		case 6:
-			return DoubleVal;
+			return PhysicsValueType.DoubleVal;
 		case 7:
-			return ByteArrayVal;
+			return PhysicsValueType.ByteArrayVal;
 		}
 		throw new org.omg.CORBA.BAD_OPERATION();
 	}
@@ -125,7 +130,7 @@ public class PhysicsValueType implements org.omg.CORBA.portable.IDLEntity {
 	// Private constructor
 	// @param the enum value for this new member
 	//
-	private PhysicsValueType(int value) {
+	private PhysicsValueType(final int value) {
 		_PhysicsValueType_value = value;
 	}
 
@@ -137,7 +142,7 @@ public class PhysicsValueType implements org.omg.CORBA.portable.IDLEntity {
 		return _PhysicsValueType_value;
 	}
 
-	public void setValue(int value) {
+	public void setValue(final int value) {
 		_PhysicsValueType_value = value;
 	}
 

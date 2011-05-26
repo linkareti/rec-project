@@ -52,8 +52,9 @@ public class ModelFrente extends pt.utl.ist.elab.client.webrobot.customizer.Mode
 	 * 
 	 * @return Value of property d1.
 	 */
+	@Override
 	public String getD1() {
-		return this.d1;
+		return d1;
 	}
 
 	/**
@@ -61,7 +62,8 @@ public class ModelFrente extends pt.utl.ist.elab.client.webrobot.customizer.Mode
 	 * 
 	 * @param d1 New value of property d1.
 	 */
-	public void setD1(String d1) {
+	@Override
+	public void setD1(final String d1) {
 		this.d1 = d1;
 	}
 
@@ -70,8 +72,9 @@ public class ModelFrente extends pt.utl.ist.elab.client.webrobot.customizer.Mode
 	 * 
 	 * @return Value of property d2.
 	 */
+	@Override
 	public String getD2() {
-		return this.d2;
+		return d2;
 	}
 
 	/**
@@ -79,7 +82,8 @@ public class ModelFrente extends pt.utl.ist.elab.client.webrobot.customizer.Mode
 	 * 
 	 * @param d2 New value of property d2.
 	 */
-	public void setD2(String d2) {
+	@Override
+	public void setD2(final String d2) {
 		this.d2 = d2;
 	}
 
@@ -88,8 +92,9 @@ public class ModelFrente extends pt.utl.ist.elab.client.webrobot.customizer.Mode
 	 * 
 	 * @return Value of property d3.
 	 */
+	@Override
 	public String getD3() {
-		return this.d3;
+		return d3;
 	}
 
 	/**
@@ -97,7 +102,8 @@ public class ModelFrente extends pt.utl.ist.elab.client.webrobot.customizer.Mode
 	 * 
 	 * @param d3 New value of property d3.
 	 */
-	public void setD3(String d3) {
+	@Override
+	public void setD3(final String d3) {
 		this.d3 = d3;
 	}
 
@@ -106,8 +112,9 @@ public class ModelFrente extends pt.utl.ist.elab.client.webrobot.customizer.Mode
 	 * 
 	 * @return Value of property valor.
 	 */
+	@Override
 	public int getValor() {
-		return this.valor;
+		return valor;
 	}
 
 	/**
@@ -115,7 +122,8 @@ public class ModelFrente extends pt.utl.ist.elab.client.webrobot.customizer.Mode
 	 * 
 	 * @param valor New value of property valor.
 	 */
-	public void setValor(int valor) {
+	@Override
+	public void setValor(final int valor) {
 		this.valor = valor;
 	}
 
@@ -124,8 +132,9 @@ public class ModelFrente extends pt.utl.ist.elab.client.webrobot.customizer.Mode
 	 * 
 	 * @return Value of property valor2.
 	 */
+	@Override
 	public int getValor2() {
-		return this.valor2;
+		return valor2;
 	}
 
 	/**
@@ -133,7 +142,8 @@ public class ModelFrente extends pt.utl.ist.elab.client.webrobot.customizer.Mode
 	 * 
 	 * @param valor2 New value of property valor2.
 	 */
-	public void setValor2(int valor2) {
+	@Override
+	public void setValor2(final int valor2) {
 		this.valor2 = valor2;
 	}
 
@@ -142,8 +152,9 @@ public class ModelFrente extends pt.utl.ist.elab.client.webrobot.customizer.Mode
 	 * 
 	 * @return Value of property coluna.
 	 */
+	@Override
 	public int getColuna() {
-		return this.coluna;
+		return coluna;
 	}
 
 	/**
@@ -151,7 +162,8 @@ public class ModelFrente extends pt.utl.ist.elab.client.webrobot.customizer.Mode
 	 * 
 	 * @param coluna New value of property coluna.
 	 */
-	public void setColuna(int coluna) {
+	@Override
+	public void setColuna(final int coluna) {
 		this.coluna = coluna;
 	}
 
@@ -160,8 +172,9 @@ public class ModelFrente extends pt.utl.ist.elab.client.webrobot.customizer.Mode
 	 * 
 	 * @return Value of property nivel.
 	 */
+	@Override
 	public int getNivel() {
-		return this.nivel;
+		return nivel;
 	}
 
 	/**
@@ -169,8 +182,9 @@ public class ModelFrente extends pt.utl.ist.elab.client.webrobot.customizer.Mode
 	 * 
 	 * @param coluna New value of property nivel.
 	 */
-	public void setNivel(int Nivel) {
-		this.nivel = nivel;
+	@Override
+	public void setNivel(final int Nivel) {
+		nivel = nivel;
 	}
 
 	/**
@@ -178,8 +192,9 @@ public class ModelFrente extends pt.utl.ist.elab.client.webrobot.customizer.Mode
 	 * 
 	 * @return Value of property flag.
 	 */
+	@Override
 	public int getFlag() {
-		return this.flag;
+		return flag;
 	}
 
 	/**
@@ -187,7 +202,8 @@ public class ModelFrente extends pt.utl.ist.elab.client.webrobot.customizer.Mode
 	 * 
 	 * @param flag New value of property flag.
 	 */
-	public void setFlag(int flag) {
+	@Override
+	public void setFlag(final int flag) {
 		this.flag = flag;
 	}
 
@@ -196,8 +212,9 @@ public class ModelFrente extends pt.utl.ist.elab.client.webrobot.customizer.Mode
 	 * 
 	 * @return Value of property baixo.
 	 */
+	@Override
 	public char getBaixo() {
-		return this.baixo;
+		return baixo;
 	}
 
 	/**
@@ -205,7 +222,8 @@ public class ModelFrente extends pt.utl.ist.elab.client.webrobot.customizer.Mode
 	 * 
 	 * @param baixo New value of property baixo.
 	 */
-	public void setBaixo(char baixo) {
+	@Override
+	public void setBaixo(final char baixo) {
 		this.baixo = baixo;
 	}
 
@@ -214,8 +232,9 @@ public class ModelFrente extends pt.utl.ist.elab.client.webrobot.customizer.Mode
 	 * 
 	 * @return Value of property esquerda.
 	 */
+	@Override
 	public char getEsquerda() {
-		return this.esquerda;
+		return esquerda;
 	}
 
 	/**
@@ -223,7 +242,8 @@ public class ModelFrente extends pt.utl.ist.elab.client.webrobot.customizer.Mode
 	 * 
 	 * @param esquerda New value of property esquerda.
 	 */
-	public void setEsquerda(char esquerda) {
+	@Override
+	public void setEsquerda(final char esquerda) {
 		this.esquerda = esquerda;
 	}
 

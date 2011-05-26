@@ -29,10 +29,10 @@ import java.util.logging.Logger;
 
 import org.videolan.jvlc.MediaPlayer;
 import org.videolan.jvlc.internal.LibVlc;
-import org.videolan.jvlc.internal.LibVlcEventType;
 import org.videolan.jvlc.internal.LibVlc.LibVlcCallback;
 import org.videolan.jvlc.internal.LibVlc.libvlc_event_t;
 import org.videolan.jvlc.internal.LibVlc.media_player_time_changed;
+import org.videolan.jvlc.internal.LibVlcEventType;
 
 import com.sun.jna.Pointer;
 
@@ -42,8 +42,8 @@ public class MediaPlayerCallback implements LibVlcCallback {
 	private final MediaPlayerListener listener;
 	private final MediaPlayer mediaPlayer;
 
-	public MediaPlayerCallback(MediaPlayer mediaInstance, MediaPlayerListener listener) {
-		this.mediaPlayer = mediaInstance;
+	public MediaPlayerCallback(final MediaPlayer mediaInstance, final MediaPlayerListener listener) {
+		mediaPlayer = mediaInstance;
 		this.listener = listener;
 	}
 
@@ -51,7 +51,7 @@ public class MediaPlayerCallback implements LibVlcCallback {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void callback(libvlc_event_t libvlc_event, Pointer userData) {
+	public void callback(final libvlc_event_t libvlc_event, final Pointer userData) {
 		if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerPlaying.ordinal()) {
 			listener.playing(mediaPlayer);
 		} else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerPaused.ordinal()) {
@@ -66,7 +66,7 @@ public class MediaPlayerCallback implements LibVlcCallback {
 			// TODO suprimir listener.timeChanged quando foi feito um ajuste
 			// pelo user mas este ainda não foi feito no vídeo, de facto.
 			libvlc_event.event_type_specific.setType(LibVlc.media_player_time_changed.class);
-			LibVlc.media_player_time_changed timeChanged = (media_player_time_changed) libvlc_event.event_type_specific
+			final LibVlc.media_player_time_changed timeChanged = (media_player_time_changed) libvlc_event.event_type_specific
 					.readField("media_player_time_changed");
 
 			// Bruno Evita que em streaming sejam lançados e tratados eventos
@@ -75,10 +75,10 @@ public class MediaPlayerCallback implements LibVlcCallback {
 			listener.timeChanged(mediaPlayer, timeChanged.new_time);
 
 		} else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerEncounteredError.ordinal()) {
-			log.warning("Media player encountered error.");
+			MediaPlayerCallback.log.warning("Media player encountered error.");
 			listener.errorOccurred(mediaPlayer);
 		} else {
-			log.fine(String.format("Unsupported event error. Event id: {%d}", libvlc_event.type));
+			MediaPlayerCallback.log.fine(String.format("Unsupported event error. Event id: {%d}", libvlc_event.type));
 		}
 	}
 }

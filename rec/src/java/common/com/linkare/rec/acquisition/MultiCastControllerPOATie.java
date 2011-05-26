@@ -10,24 +10,25 @@ public class MultiCastControllerPOATie extends MultiCastControllerPOA {
 
 	// Constructors
 
-	public MultiCastControllerPOATie(com.linkare.rec.acquisition.MultiCastControllerOperations delegate) {
-		this._impl = delegate;
+	public MultiCastControllerPOATie(final com.linkare.rec.acquisition.MultiCastControllerOperations delegate) {
+		_impl = delegate;
 	}
 
-	public MultiCastControllerPOATie(com.linkare.rec.acquisition.MultiCastControllerOperations delegate,
-			org.omg.PortableServer.POA poa) {
-		this._impl = delegate;
-		this._poa = poa;
+	public MultiCastControllerPOATie(final com.linkare.rec.acquisition.MultiCastControllerOperations delegate,
+			final org.omg.PortableServer.POA poa) {
+		_impl = delegate;
+		_poa = poa;
 	}
 
 	public com.linkare.rec.acquisition.MultiCastControllerOperations _delegate() {
-		return this._impl;
+		return _impl;
 	}
 
-	public void _delegate(com.linkare.rec.acquisition.MultiCastControllerOperations delegate) {
-		this._impl = delegate;
+	public void _delegate(final com.linkare.rec.acquisition.MultiCastControllerOperations delegate) {
+		_impl = delegate;
 	}
 
+	@Override
 	public org.omg.PortableServer.POA _default_POA() {
 		if (_poa != null) {
 			return _poa;
@@ -37,30 +38,36 @@ public class MultiCastControllerPOATie extends MultiCastControllerPOA {
 	}
 
 	// version 5 - check permissions before givin' out the Hardware List
-	public com.linkare.rec.acquisition.MultiCastHardware[] enumerateHardware(com.linkare.rec.acquisition.UserInfo user)
-			throws com.linkare.rec.acquisition.NotRegistered, com.linkare.rec.acquisition.NotAuthorized {
+	@Override
+	public com.linkare.rec.acquisition.MultiCastHardware[] enumerateHardware(
+			final com.linkare.rec.acquisition.UserInfo user) throws com.linkare.rec.acquisition.NotRegistered,
+			com.linkare.rec.acquisition.NotAuthorized {
 		return _impl.enumerateHardware(user);
 	} // enumerateHardware
 
-	public void registerDataClient(com.linkare.rec.acquisition.DataClient data_client)
+	@Override
+	public void registerDataClient(final com.linkare.rec.acquisition.DataClient data_client)
 			throws com.linkare.rec.acquisition.MaximumClientsReached, com.linkare.rec.acquisition.NotAuthorized {
 		_impl.registerDataClient(data_client);
 	} // registerDataClient
 
 	// version 5 added suport for messages
-	public com.linkare.rec.acquisition.UserInfo[] getClientList(com.linkare.rec.acquisition.UserInfo user)
+	@Override
+	public com.linkare.rec.acquisition.UserInfo[] getClientList(final com.linkare.rec.acquisition.UserInfo user)
 			throws com.linkare.rec.acquisition.NotRegistered, com.linkare.rec.acquisition.NotAuthorized {
 		return _impl.getClientList(user);
 	} // getClientList
 
 	// version 5 added suport for messages
-	public void sendMessage(com.linkare.rec.acquisition.UserInfo user, String clientTo, String message)
+	@Override
+	public void sendMessage(final com.linkare.rec.acquisition.UserInfo user, final String clientTo, final String message)
 			throws com.linkare.rec.acquisition.NotRegistered, com.linkare.rec.acquisition.NotAuthorized {
 		_impl.sendMessage(user, clientTo, message);
 	} // sendMessage
 
 	// Version 7.0 Addition - Trying to remove dependy on NameService
-	public void registerHardware(com.linkare.rec.acquisition.Hardware hardware) {
+	@Override
+	public void registerHardware(final com.linkare.rec.acquisition.Hardware hardware) {
 		_impl.registerHardware(hardware);
 	} // registerHardware
 

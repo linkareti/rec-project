@@ -23,10 +23,10 @@ import com.linkare.rec.impl.data.PhysicsValFactory;
 
 public class MMDataProducer extends VirtualBaseDataSource implements ODE {
 	// O numero de canais(de dados) que existem!
-	private int NUM_CHANNELS = 3;
+	private final int NUM_CHANNELS = 3;
 
-	private double[] state = new double[] { 0.05, 0.0, 0.0 };// x,v,t
-	private double amp = 1.0;
+	private final double[] state = new double[] { 0.05, 0.0, 0.0 };// x,v,t
+	private final double amp = 1.0;
 	private double kmola = 1;
 	private double massa = 1.0;
 	private double atrito = 0;
@@ -38,19 +38,21 @@ public class MMDataProducer extends VirtualBaseDataSource implements ODE {
 	private VirtualBaseDriver driver = null;
 	private ODESolver odeSolver = null;
 
+	@Override
 	public double[] getState() {
 		return state;
 	}
 
-	public void getRate(double[] state, double[] rate) {
+	@Override
+	public void getRate(final double[] state, final double[] rate) {
 		rate[0] = state[1];// dx/dt
 		rate[1] = -kmola / massa * state[0] - atrito * state[1];// dv/dt=dx2/dt2
 		rate[2] = 1;// dt/dt
 	}
 
 	// Aproveitamos para inicializar todas as variáveis logo no construtor...
-	public MMDataProducer(VirtualBaseDriver driver, float kmola, float massa, float atrito, float xini, int tbs,
-			int nSamples) {
+	public MMDataProducer(final VirtualBaseDriver driver, final float kmola, final float massa, final float atrito,
+			final float xini, final int tbs, final int nSamples) {
 		this.driver = driver;
 		this.kmola = kmola;
 		this.massa = massa;
@@ -71,9 +73,10 @@ public class MMDataProducer extends VirtualBaseDataSource implements ODE {
 		private int currentSample = 0;
 		private float time = 0;
 
+		@Override
 		public void run() {
 			try {
-				sleep(1000);
+				Thread.sleep(1000);
 
 				// Enquanto a amostra actual for menor do que o numero de
 				// amostras pedido pelo cliente E ninguém tiver parado a
@@ -81,7 +84,7 @@ public class MMDataProducer extends VirtualBaseDataSource implements ODE {
 				while (currentSample < nSamples && !stopped) {
 					// envia as amostra calculadas!
 					// 1- cria um array com o numero de canais existentes!
-					PhysicsValue[] value = new PhysicsValue[NUM_CHANNELS];
+					final PhysicsValue[] value = new PhysicsValue[NUM_CHANNELS];
 
 					// envia no canal CORRESPONDENTE!!! o valor
 					value[0] = new PhysicsValue(PhysicsValFactory.fromFloat(time), getAcquisitionHeader()
@@ -101,7 +104,7 @@ public class MMDataProducer extends VirtualBaseDataSource implements ODE {
 					odeSolver.step();
 
 					// dorme o tbs que o utilizador pediu...
-					sleep(tbs);
+					Thread.sleep(tbs);
 
 					currentSample++;
 				}
@@ -111,12 +114,13 @@ public class MMDataProducer extends VirtualBaseDataSource implements ODE {
 
 				driver.stopVirtualHardware();
 
-			} catch (InterruptedException ie) {
+			} catch (final InterruptedException ie) {
 			}
 
 		}
 	}
 
+	@Override
 	public void startProduction() {
 		stopped = false;
 		new ProducerThread().start();
@@ -127,13 +131,14 @@ public class MMDataProducer extends VirtualBaseDataSource implements ODE {
 		setDataSourceEnded();
 	}
 
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 		/*
 		 * DPendulumDataProducer dp = new DPendulumDataProducer(null,90, 90, 10,
 		 * 0, 0.5f, 1.5f, 0.3f, 0.5f, 10, 10000); dp.startProduction();
 		 */
 	}
 
+	@Override
 	public void stopNow() {
 		stopped = true;
 		setDataSourceStoped();

@@ -18,7 +18,7 @@ public class StampStatSoundTempProcessor extends AbstractStampProcessor {
 
 	/** Creates a new instance of StampHelloProcessor */
 	public StampStatSoundTempProcessor() {
-		super(COMMAND_IDENTIFIER);
+		super(StampStatSoundTempProcessor.COMMAND_IDENTIFIER);
 	}
 
 	/**
@@ -28,17 +28,19 @@ public class StampStatSoundTempProcessor extends AbstractStampProcessor {
 	 * @return boolean - wether the processing was successfull
 	 * 
 	 */
-	public boolean process(StampCommand command) {
+	@Override
+	public boolean process(final StampCommand command) {
 		int temp = 0;
-		String[] splitedStr = command.getCommand().split(" ");
-		if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedStr[0] != null) {
+		final String[] splitedStr = command.getCommand().split(" ");
+		if (command.getCommandIdentifier().equalsIgnoreCase(StampStatSoundTempProcessor.COMMAND_IDENTIFIER)
+				&& splitedStr[0] != null) {
 			try {
 				temp = Integer.parseInt(splitedStr[0]);
-				Integer oTemp = new Integer(temp);
-				command.addCommandData(COMMAND_IDENTIFIER, oTemp);
+				final Integer oTemp = new Integer(temp);
+				command.addCommandData(StampStatSoundTempProcessor.COMMAND_IDENTIFIER, oTemp);
 				command.setData(true);
 				return true;
-			} catch (NumberFormatException e) {
+			} catch (final NumberFormatException e) {
 				e.printStackTrace();
 				return false;
 			}
@@ -46,6 +48,7 @@ public class StampStatSoundTempProcessor extends AbstractStampProcessor {
 		return false;
 	}
 
+	@Override
 	public boolean isData() {
 		return true;
 	}

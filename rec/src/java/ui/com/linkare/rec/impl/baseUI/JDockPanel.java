@@ -24,8 +24,12 @@ import javax.swing.JSplitPane;
  * @author André Neto - LEFT - IST
  */
 public class JDockPanel extends javax.swing.JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7603814220406790623L;
 	private Component lastComponent = null;
-	private Hashtable<Component, Double> lastPositionOfHidden = new Hashtable<Component, Double>();
+	private final Hashtable<Component, Double> lastPositionOfHidden = new Hashtable<Component, Double>();
 	private int dividerSize = 4;
 
 	/** Creates new form DockPanel */
@@ -48,40 +52,45 @@ public class JDockPanel extends javax.swing.JPanel {
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	// End of variables declaration//GEN-END:variables
 
-	public Component add(Component comp) {
+	@Override
+	public Component add(final Component comp) {
 		addDockable(comp, JSplitPane.RIGHT);
 		return comp;
 	}
 
-	public Component add(Component comp, int index) {
+	@Override
+	public Component add(final Component comp, final int index) {
 		addDockable(comp, JSplitPane.RIGHT);
 		return comp;
 	}
 
-	public void add(Component comp, Object constraints) {
+	@Override
+	public void add(final Component comp, final Object constraints) {
 		String orientation = JSplitPane.RIGHT;
 		if (constraints != null && constraints instanceof String) {
-			if (constraints.equals(BorderLayout.WEST))
+			if (constraints.equals(BorderLayout.WEST)) {
 				orientation = JSplitPane.LEFT;
-			else if (constraints.equals(BorderLayout.NORTH))
+			} else if (constraints.equals(BorderLayout.NORTH)) {
 				orientation = JSplitPane.TOP;
-			else if (constraints.equals(BorderLayout.SOUTH))
+			} else if (constraints.equals(BorderLayout.SOUTH)) {
 				orientation = JSplitPane.BOTTOM;
-			else if (constraints.equals(JSplitPane.TOP) || constraints.equals(JSplitPane.LEFT)
-					|| constraints.equals(JSplitPane.RIGHT) || constraints.equals(JSplitPane.BOTTOM))
+			} else if (constraints.equals(JSplitPane.TOP) || constraints.equals(JSplitPane.LEFT)
+					|| constraints.equals(JSplitPane.RIGHT) || constraints.equals(JSplitPane.BOTTOM)) {
 				orientation = (String) constraints;
+			}
 
 		}
 		addDockable(comp, orientation);
 
 	}
 
-	public void addDockable(Component dc, String splitPaneLocation) {
+	public void addDockable(Component dc, final String splitPaneLocation) {
 		mySelfRemoving = true;
 
 		if (dc != null) {
 			dc.addComponentListener(new ComponentAdapter() {
-				public void componentHidden(ComponentEvent evt) {
+				@Override
+				public void componentHidden(final ComponentEvent evt) {
 					// This way we lock the swing thread and it has to wait for
 					// us to finish first
 					// This only works inside the jdockpanel if it himself who
@@ -90,18 +99,20 @@ public class JDockPanel extends javax.swing.JPanel {
 					// own :(
 					final ComponentEvent event = evt;
 					try {
-						Thread t = new Thread() {
+						final Thread t = new Thread() {
+							@Override
 							public void run() {
 								hiddenComponent(event.getSource());
 							}
 						};
 						t.start();
 						t.join();
-					} catch (Exception ignored) {
+					} catch (final Exception ignored) {
 					}
 				}
 
-				public void componentShown(ComponentEvent evt) {
+				@Override
+				public void componentShown(final ComponentEvent evt) {
 					showedComponent(evt.getSource());
 				}
 
@@ -117,16 +128,16 @@ public class JDockPanel extends javax.swing.JPanel {
 		 */
 
 		if (dc instanceof JInternalFrame) {
-			JDesktopPane temp = new JDesktopPane();
+			final JDesktopPane temp = new JDesktopPane();
 			temp.setPreferredSize(dc.getPreferredSize());
 			temp.setMinimumSize(dc.getMinimumSize());
 			temp.setMaximumSize(dc.getMaximumSize());
-			JInternalFrame frame = (JInternalFrame) dc;
+			final JInternalFrame frame = (JInternalFrame) dc;
 
 			temp.add(frame);
 			try {
 				frame.setMaximum(true);
-			} catch (Exception ignored) {
+			} catch (final Exception ignored) {
 			}
 
 			dc = temp;
@@ -135,7 +146,7 @@ public class JDockPanel extends javax.swing.JPanel {
 		if (lastComponent == null) {
 			super.add(dc, BorderLayout.CENTER);
 		} else {
-			Container parent = lastComponent.getParent();
+			final Container parent = lastComponent.getParent();
 			if (parent == null) {
 				// System.out.println("Bosta da grande... o last component nunca pode ter um parent null ...  no mínimo seria this !");
 				mySelfRemoving = false;
@@ -149,22 +160,25 @@ public class JDockPanel extends javax.swing.JPanel {
 			 */
 
 			JSplitPane splitPane = null;
-			if (splitPaneLocation.equals(JSplitPane.LEFT) || splitPaneLocation.equals(JSplitPane.RIGHT))
+			if (splitPaneLocation.equals(JSplitPane.LEFT) || splitPaneLocation.equals(JSplitPane.RIGHT)) {
 				splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-			else
+			} else {
 				splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+			}
 
 			splitPane.setDividerSize(getDividerSize());
 
 			splitPane.addContainerListener(new ContainerAdapter() {
-				public void componentRemoved(ContainerEvent evt) {
+				@Override
+				public void componentRemoved(final ContainerEvent evt) {
 					componentWasRemoved(evt);
 				}
 			});
 
 			/*
-			 * splitPane.addPropertyChangeListener(splitPane.DIVIDER_LOCATION_PROPERTY
-			 * , new java.beans.PropertyChangeListener() { public void
+			 * splitPane.addPropertyChangeListener(splitPane.
+			 * DIVIDER_LOCATION_PROPERTY , new
+			 * java.beans.PropertyChangeListener() { public void
 			 * propertyChange(java.beans.PropertyChangeEvent evt) {
 			 * splitDividerChanged(evt); } } );
 			 */
@@ -229,7 +243,7 @@ public class JDockPanel extends javax.swing.JPanel {
 
 	private boolean mySelfRemoving = false;
 
-	public void removeDockable(Container parent, Component dc) {
+	public void removeDockable(final Container parent, Component dc) {
 		if (dc instanceof JInternalFrame) {
 			dc = dc.getParent();
 			dc.setVisible(false);
@@ -247,7 +261,7 @@ public class JDockPanel extends javax.swing.JPanel {
 			return;
 		}
 
-		Container grandParent = parent.getParent();
+		final Container grandParent = parent.getParent();
 
 		if (grandParent == null) {
 			// System.out.println("Bosta da grande... o parent nunca pode ter um grandparent null ...  no mínimo seria this !");
@@ -258,10 +272,11 @@ public class JDockPanel extends javax.swing.JPanel {
 		if (grandParent == this) {
 			if (parent instanceof JSplitPane) {
 				Component otherComp = null;
-				if (((JSplitPane) parent).getTopComponent() == null)
+				if (((JSplitPane) parent).getTopComponent() == null) {
 					otherComp = ((JSplitPane) parent).getBottomComponent();
-				else
+				} else {
 					otherComp = ((JSplitPane) parent).getTopComponent();
+				}
 
 				if (otherComp != null) {
 					((JSplitPane) parent).remove(otherComp);
@@ -269,8 +284,9 @@ public class JDockPanel extends javax.swing.JPanel {
 					grandParent.remove(parent);
 					super.add(otherComp, BorderLayout.CENTER);
 
-					if (lastComponent == dc)
+					if (lastComponent == dc) {
 						lastComponent = otherComp;
+					}
 				} else {
 					// System.out.println("Bosta da grande... o other component não pode ser null !");
 					mySelfRemoving = false;
@@ -288,31 +304,35 @@ public class JDockPanel extends javax.swing.JPanel {
 
 		if (grandParent instanceof JSplitPane) {
 			Component otherComp = null;
-			if (((JSplitPane) parent).getTopComponent() == null)
+			if (((JSplitPane) parent).getTopComponent() == null) {
 				otherComp = ((JSplitPane) parent).getBottomComponent();
-			else
+			} else {
 				otherComp = ((JSplitPane) parent).getTopComponent();
+			}
 
 			if (otherComp != null) {
 				((JSplitPane) parent).remove(otherComp);
 
 				boolean onTop = false;
-				if (((JSplitPane) grandParent).getTopComponent() == parent)
+				if (((JSplitPane) grandParent).getTopComponent() == parent) {
 					onTop = true;
+				}
 
-				int lastDividerLocation = ((JSplitPane) grandParent).getDividerLocation();
+				final int lastDividerLocation = ((JSplitPane) grandParent).getDividerLocation();
 
 				grandParent.remove(parent);
 
-				if (onTop)
+				if (onTop) {
 					((JSplitPane) grandParent).setTopComponent(otherComp);
-				else
+				} else {
 					((JSplitPane) grandParent).setBottomComponent(otherComp);
+				}
 
 				((JSplitPane) grandParent).setDividerLocation(lastDividerLocation);
 
-				if (lastComponent == dc)
+				if (lastComponent == dc) {
 					lastComponent = otherComp;
+				}
 			} else {
 				// System.out.println("Bosta da grande... o other component não pode ser null !");
 				mySelfRemoving = false;
@@ -327,7 +347,7 @@ public class JDockPanel extends javax.swing.JPanel {
 		mySelfRemoving = false;
 	}
 
-	public void componentWasRemoved(ContainerEvent evt) {
+	public void componentWasRemoved(final ContainerEvent evt) {
 
 		if (evt.getSource() != null) {
 			if (mySelfRemoving) {
@@ -344,20 +364,20 @@ public class JDockPanel extends javax.swing.JPanel {
 				((JDesktopPane) source).setVisible(false);
 			}
 
-			Component c = (Component) source;
+			final Component c = (Component) source;
 
 			if (c.getParent() != null && c.getParent() instanceof JSplitPane) {
 				// Store the divider has a percentage of the split pane
 				// dimension
 
-				JSplitPane parentSplit = (JSplitPane) c.getParent();
+				final JSplitPane parentSplit = (JSplitPane) c.getParent();
 
 				/*
 				 * if(lastPositionOfHidden.get(source) != null)
 				 * lastPositionOfHidden.remove(source);
 				 */
-				double dividerLocH = parentSplit.getDividerLocation() / (double) parentSplit.getHeight();
-				double dividerLocW = parentSplit.getDividerLocation() / (double) parentSplit.getWidth();
+				final double dividerLocH = parentSplit.getDividerLocation() / (double) parentSplit.getHeight();
+				final double dividerLocW = parentSplit.getDividerLocation() / (double) parentSplit.getWidth();
 
 				// If a component last position was 1 or 0, when it's redrawed
 				// it will get over the other component in the tab pane
@@ -367,11 +387,11 @@ public class JDockPanel extends javax.swing.JPanel {
 				 * dividerLocW = 0.5;
 				 */
 
-				Component top = parentSplit.getTopComponent();
-				Component bot = parentSplit.getBottomComponent();
+				final Component top = parentSplit.getTopComponent();
+				final Component bot = parentSplit.getBottomComponent();
 
 				if ((bot == c && top.isVisible()) || (top == c && bot.isVisible())) {
-					if (parentSplit.getOrientation() == parentSplit.VERTICAL_SPLIT) {
+					if (parentSplit.getOrientation() == JSplitPane.VERTICAL_SPLIT) {
 						lastPositionOfHidden.put(top, new Double(dividerLocH));
 						lastPositionOfHidden.put(bot, new Double(dividerLocH));
 					} else {
@@ -381,18 +401,19 @@ public class JDockPanel extends javax.swing.JPanel {
 				}
 				parentSplit.setDividerSize(0);
 
-				if (top.isVisible() && !bot.isVisible())
+				if (top.isVisible() && !bot.isVisible()) {
 					parentSplit.setDividerLocation(1.);
-				else if (!top.isVisible() && bot.isVisible())
+				} else if (!top.isVisible() && bot.isVisible()) {
 					parentSplit.setDividerLocation(0.);
-				else {
-					Container c2 = parentSplit.getParent();
+				} else {
+					final Container c2 = parentSplit.getParent();
 					if (c2 instanceof JSplitPane) {
-						JSplitPane grandParentSplit = (JSplitPane) c2;
-						if (grandParentSplit.getTopComponent() == parentSplit)
+						final JSplitPane grandParentSplit = (JSplitPane) c2;
+						if (grandParentSplit.getTopComponent() == parentSplit) {
 							grandParentSplit.setDividerLocation(0.);
-						else if (grandParentSplit.getBottomComponent() == parentSplit)
+						} else if (grandParentSplit.getBottomComponent() == parentSplit) {
 							grandParentSplit.setDividerLocation(1.);
+						}
 					} else if (c2 == this) {
 						setVisible(false);
 					}
@@ -419,10 +440,10 @@ public class JDockPanel extends javax.swing.JPanel {
 			if (parent == this) {
 				// BIG SILENT NOOP... for now!
 			} else if (parent != null && parent instanceof JSplitPane) {
-				JSplitPane parentSplit = (JSplitPane) parent;
+				final JSplitPane parentSplit = (JSplitPane) parent;
 				if (lastPositionOfHidden.get(c) != null) {
-					Component top = parentSplit.getTopComponent();
-					Component bot = parentSplit.getBottomComponent();
+					final Component top = parentSplit.getTopComponent();
+					final Component bot = parentSplit.getBottomComponent();
 
 					if (top.isVisible() && !bot.isVisible()) {
 						parentSplit.setDividerLocation(1.0);
@@ -431,7 +452,7 @@ public class JDockPanel extends javax.swing.JPanel {
 						parentSplit.setDividerLocation(0.0);
 						parentSplit.setDividerSize(0);
 					} else {
-						parentSplit.setDividerLocation(((Double) lastPositionOfHidden.get(source)).doubleValue());
+						parentSplit.setDividerLocation((lastPositionOfHidden.get(source)).doubleValue());
 						parentSplit.setDividerSize(getDividerSize());
 						lastPositionOfHidden.remove(top);
 						lastPositionOfHidden.remove(bot);
@@ -449,7 +470,7 @@ public class JDockPanel extends javax.swing.JPanel {
 	 * 
 	 */
 	public int getDividerSize() {
-		return this.dividerSize;
+		return dividerSize;
 	}
 
 	/**
@@ -458,7 +479,7 @@ public class JDockPanel extends javax.swing.JPanel {
 	 * @param dividerSize New value of property dividerSize.
 	 * 
 	 */
-	public void setDividerSize(int dividerSize) {
+	public void setDividerSize(final int dividerSize) {
 		this.dividerSize = dividerSize;
 	}
 

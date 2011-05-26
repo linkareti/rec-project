@@ -8,6 +8,7 @@ package com.linkare.rec.impl.newface.laf.flat.elabtheme;
 
 import java.util.Map;
 
+import com.linkare.rec.impl.newface.laf.flat.theme.AbstractStyle;
 import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 
 /**
@@ -27,14 +28,14 @@ public class ToolBarStyle extends DefaultStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return ToolBarStyle.ID;
 	}
 
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(BACKGROUND, BLACK_DEFAULT_COLOR);
-		map.put(BORDER, EMPTY_BORDER);
+		map.put(AbstractStyle.BACKGROUND, DefaultStyle.BLACK_DEFAULT_COLOR);
+		map.put(AbstractStyle.BORDER, DefaultStyle.EMPTY_BORDER);
 	}
 
 	// -------------------------------------------------------------------------

@@ -18,6 +18,10 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3910991417859398077L;
 	/** REC */
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
@@ -169,7 +173,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jComboBoxDayIni.setMinimumSize(new java.awt.Dimension(45, 25));
 		jComboBoxDayIni.setPreferredSize(new java.awt.Dimension(45, 20));
 		jComboBoxDayIni.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jComboBoxDayIniActionPerformed(evt);
 			}
 		});
@@ -185,7 +189,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jComboBoxHourIni.setMinimumSize(new java.awt.Dimension(45, 25));
 		jComboBoxHourIni.setPreferredSize(new java.awt.Dimension(45, 20));
 		jComboBoxHourIni.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jComboBoxHourIniActionPerformed(evt);
 			}
 		});
@@ -199,7 +203,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jComboBoxMonthIni.setMinimumSize(new java.awt.Dimension(90, 25));
 		jComboBoxMonthIni.setPreferredSize(new java.awt.Dimension(90, 20));
 		jComboBoxMonthIni.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jComboBoxMonthIniActionPerformed(evt);
 			}
 		});
@@ -213,7 +217,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jComboBoxYearIni.setMinimumSize(new java.awt.Dimension(60, 25));
 		jComboBoxYearIni.setPreferredSize(new java.awt.Dimension(80, 20));
 		jComboBoxYearIni.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jComboBoxYearIniActionPerformed(evt);
 			}
 		});
@@ -226,7 +230,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jComboBoxMonthFinal.setMinimumSize(new java.awt.Dimension(90, 25));
 		jComboBoxMonthFinal.setPreferredSize(new java.awt.Dimension(20, 15));
 		jComboBoxMonthFinal.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jComboBoxMonthFinalActionPerformed(evt);
 			}
 		});
@@ -240,7 +244,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jComboBoxYearFinal.setMinimumSize(new java.awt.Dimension(60, 25));
 		jComboBoxYearFinal.setPreferredSize(new java.awt.Dimension(20, 15));
 		jComboBoxYearFinal.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jComboBoxYearFinalActionPerformed(evt);
 			}
 		});
@@ -256,7 +260,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jComboBoxHourFinal.setMinimumSize(new java.awt.Dimension(45, 25));
 		jComboBoxHourFinal.setPreferredSize(new java.awt.Dimension(45, 20));
 		jComboBoxHourFinal.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jComboBoxHourFinalActionPerformed(evt);
 			}
 		});
@@ -273,7 +277,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jComboBoxDayFinal.setMinimumSize(new java.awt.Dimension(45, 25));
 		jComboBoxDayFinal.setPreferredSize(new java.awt.Dimension(45, 20));
 		jComboBoxDayFinal.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jComboBoxDayFinalActionPerformed(evt);
 			}
 		});
@@ -333,7 +337,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		jButtonHour.setText(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.nowtime"));
 		jButtonHour.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonHourActionPerformed(evt);
 			}
 		});
@@ -354,7 +358,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jButtonOK.setText(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.ok"));
 		jButtonOK.setEnabled(false);
 		jButtonOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonOKActionPerformed(evt);
 			}
 		});
@@ -363,7 +367,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		jButtonCancel.setText(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.cancel"));
 		jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonCancelActionPerformed(evt);
 			}
 		});
@@ -374,7 +378,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		jButtonDefault1.setText(ReCResourceBundle.findString("meteo$rec.exp.dftcfg.meteo.title.1"));
 		jButtonDefault1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonDefault1ActionPerformed(evt);
 			}
 		});
@@ -391,7 +395,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 	}// GEN-END:initComponents
 
-	private void jButtonDefault1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonDefault1ActionPerformed
+	private void jButtonDefault1ActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonDefault1ActionPerformed
 		jComboBoxMonthIni.setSelectedIndex(0);
 		jComboBoxDayIni.setSelectedIndex(0);
 		jComboBoxHourIni.setSelectedIndex(0);
@@ -409,45 +413,48 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		 */
 	}// GEN-LAST:event_jButtonDefault1ActionPerformed
 
-	private void jComboBoxDayFinalActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBoxDayFinalActionPerformed
-		if (!isVisible())
+	private void jComboBoxDayFinalActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBoxDayFinalActionPerformed
+		if (!isVisible()) {
 			return;
+		}
 
-		int monthFinal = jComboBoxMonthFinal.getSelectedIndex();
+		final int monthFinal = jComboBoxMonthFinal.getSelectedIndex();
 		int yearFinal = 2004;
-		if (jComboBoxYearFinal.getSelectedItem() != null)
+		if (jComboBoxYearFinal.getSelectedItem() != null) {
 			yearFinal = Integer.parseInt(jComboBoxYearFinal.getSelectedItem().toString());
-		int dayFinal = jComboBoxDayFinal.getSelectedIndex();
-		int hourFinal = jComboBoxHourFinal.getSelectedIndex();
-		int monthIni = jComboBoxMonthIni.getSelectedIndex();
+		}
+		final int dayFinal = jComboBoxDayFinal.getSelectedIndex();
+		final int hourFinal = jComboBoxHourFinal.getSelectedIndex();
+		final int monthIni = jComboBoxMonthIni.getSelectedIndex();
 		int yearIni = 2004;
-		if (jComboBoxYearIni.getSelectedItem() != null)
+		if (jComboBoxYearIni.getSelectedItem() != null) {
 			yearIni = Integer.parseInt(jComboBoxYearIni.getSelectedItem().toString());
-		int dayIni = jComboBoxDayIni.getSelectedIndex();
-		int hourIni = jComboBoxHourIni.getSelectedIndex();
+		}
+		final int dayIni = jComboBoxDayIni.getSelectedIndex();
+		final int hourIni = jComboBoxHourIni.getSelectedIndex();
 
-		if (yearFinal < yearIni)
+		if (yearFinal < yearIni) {
 			jButtonOK.setEnabled(false);
-		else {
-			if (yearFinal > yearIni)
+		} else {
+			if (yearFinal > yearIni) {
 				jButtonOK.setEnabled(true);
-			else {
-				if (monthFinal < monthIni)
+			} else {
+				if (monthFinal < monthIni) {
 					jButtonOK.setEnabled(false);
-				else {
-					if (monthFinal > monthIni)
+				} else {
+					if (monthFinal > monthIni) {
 						jButtonOK.setEnabled(true);
-					else {
-						if (dayFinal < dayIni)
+					} else {
+						if (dayFinal < dayIni) {
 							jButtonOK.setEnabled(false);
-						else {
-							if (dayFinal > dayIni)
+						} else {
+							if (dayFinal > dayIni) {
 								jButtonOK.setEnabled(true);
-							else {
+							} else {
 
-								if (hourFinal > hourIni)
+								if (hourFinal > hourIni) {
 									jButtonOK.setEnabled(true);
-								else {
+								} else {
 									jButtonOK.setEnabled(false);
 								}
 							}
@@ -459,45 +466,48 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		}
 	}// GEN-LAST:event_jComboBoxDayFinalActionPerformed
 
-	private void jComboBoxYearFinalActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBoxYearFinalActionPerformed
-		if (!isVisible())
+	private void jComboBoxYearFinalActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBoxYearFinalActionPerformed
+		if (!isVisible()) {
 			return;
+		}
 
-		int monthFinal = jComboBoxMonthFinal.getSelectedIndex();
+		final int monthFinal = jComboBoxMonthFinal.getSelectedIndex();
 		int yearFinal = 2004;
-		if (jComboBoxYearFinal.getSelectedItem() != null)
+		if (jComboBoxYearFinal.getSelectedItem() != null) {
 			yearFinal = Integer.parseInt(jComboBoxYearFinal.getSelectedItem().toString());
-		int dayFinal = jComboBoxDayFinal.getSelectedIndex();
-		int hourFinal = jComboBoxHourFinal.getSelectedIndex();
-		int monthIni = jComboBoxMonthIni.getSelectedIndex();
+		}
+		final int dayFinal = jComboBoxDayFinal.getSelectedIndex();
+		final int hourFinal = jComboBoxHourFinal.getSelectedIndex();
+		final int monthIni = jComboBoxMonthIni.getSelectedIndex();
 		int yearIni = 2004;
-		if (jComboBoxYearIni.getSelectedItem() != null)
+		if (jComboBoxYearIni.getSelectedItem() != null) {
 			yearIni = Integer.parseInt(jComboBoxYearIni.getSelectedItem().toString());
-		int dayIni = jComboBoxDayIni.getSelectedIndex();
-		int hourIni = jComboBoxHourIni.getSelectedIndex();
+		}
+		final int dayIni = jComboBoxDayIni.getSelectedIndex();
+		final int hourIni = jComboBoxHourIni.getSelectedIndex();
 
-		if (yearFinal < yearIni)
+		if (yearFinal < yearIni) {
 			jButtonOK.setEnabled(false);
-		else {
-			if (yearFinal > yearIni)
+		} else {
+			if (yearFinal > yearIni) {
 				jButtonOK.setEnabled(true);
-			else {
-				if (monthFinal < monthIni)
+			} else {
+				if (monthFinal < monthIni) {
 					jButtonOK.setEnabled(false);
-				else {
-					if (monthFinal > monthIni)
+				} else {
+					if (monthFinal > monthIni) {
 						jButtonOK.setEnabled(true);
-					else {
-						if (dayFinal < dayIni)
+					} else {
+						if (dayFinal < dayIni) {
 							jButtonOK.setEnabled(false);
-						else {
-							if (dayFinal > dayIni)
+						} else {
+							if (dayFinal > dayIni) {
 								jButtonOK.setEnabled(true);
-							else {
+							} else {
 
-								if (hourFinal > hourIni)
+								if (hourFinal > hourIni) {
 									jButtonOK.setEnabled(true);
-								else {
+								} else {
 									jButtonOK.setEnabled(false);
 								}
 							}
@@ -509,45 +519,48 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		}
 	}// GEN-LAST:event_jComboBoxYearFinalActionPerformed
 
-	private void jComboBoxYearIniActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBoxYearIniActionPerformed
-		if (!isVisible())
+	private void jComboBoxYearIniActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBoxYearIniActionPerformed
+		if (!isVisible()) {
 			return;
+		}
 
-		int monthFinal = jComboBoxMonthFinal.getSelectedIndex();
+		final int monthFinal = jComboBoxMonthFinal.getSelectedIndex();
 		int yearFinal = 2004;
-		if (jComboBoxYearFinal.getSelectedItem() != null)
+		if (jComboBoxYearFinal.getSelectedItem() != null) {
 			yearFinal = Integer.parseInt(jComboBoxYearFinal.getSelectedItem().toString());
-		int dayFinal = jComboBoxDayFinal.getSelectedIndex();
-		int hourFinal = jComboBoxHourFinal.getSelectedIndex();
-		int monthIni = jComboBoxMonthIni.getSelectedIndex();
+		}
+		final int dayFinal = jComboBoxDayFinal.getSelectedIndex();
+		final int hourFinal = jComboBoxHourFinal.getSelectedIndex();
+		final int monthIni = jComboBoxMonthIni.getSelectedIndex();
 		int yearIni = 2004;
-		if (jComboBoxYearIni.getSelectedItem() != null)
+		if (jComboBoxYearIni.getSelectedItem() != null) {
 			yearIni = Integer.parseInt(jComboBoxYearIni.getSelectedItem().toString());
-		int dayIni = jComboBoxDayIni.getSelectedIndex();
-		int hourIni = jComboBoxHourIni.getSelectedIndex();
+		}
+		final int dayIni = jComboBoxDayIni.getSelectedIndex();
+		final int hourIni = jComboBoxHourIni.getSelectedIndex();
 
-		if (yearFinal < yearIni)
+		if (yearFinal < yearIni) {
 			jButtonOK.setEnabled(false);
-		else {
-			if (yearFinal > yearIni)
+		} else {
+			if (yearFinal > yearIni) {
 				jButtonOK.setEnabled(true);
-			else {
-				if (monthFinal < monthIni)
+			} else {
+				if (monthFinal < monthIni) {
 					jButtonOK.setEnabled(false);
-				else {
-					if (monthFinal > monthIni)
+				} else {
+					if (monthFinal > monthIni) {
 						jButtonOK.setEnabled(true);
-					else {
-						if (dayFinal < dayIni)
+					} else {
+						if (dayFinal < dayIni) {
 							jButtonOK.setEnabled(false);
-						else {
-							if (dayFinal > dayIni)
+						} else {
+							if (dayFinal > dayIni) {
 								jButtonOK.setEnabled(true);
-							else {
+							} else {
 
-								if (hourFinal > hourIni)
+								if (hourFinal > hourIni) {
 									jButtonOK.setEnabled(true);
-								else {
+								} else {
 									jButtonOK.setEnabled(false);
 								}
 							}
@@ -559,45 +572,48 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		}
 	}// GEN-LAST:event_jComboBoxYearIniActionPerformed
 
-	private void jComboBoxDayIniActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBoxDayIniActionPerformed
-		if (!isVisible())
+	private void jComboBoxDayIniActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBoxDayIniActionPerformed
+		if (!isVisible()) {
 			return;
+		}
 
-		int monthFinal = jComboBoxMonthFinal.getSelectedIndex();
+		final int monthFinal = jComboBoxMonthFinal.getSelectedIndex();
 		int yearFinal = 2004;
-		if (jComboBoxYearFinal.getSelectedItem() != null)
+		if (jComboBoxYearFinal.getSelectedItem() != null) {
 			yearFinal = Integer.parseInt(jComboBoxYearFinal.getSelectedItem().toString());
-		int dayFinal = jComboBoxDayFinal.getSelectedIndex();
-		int hourFinal = jComboBoxHourFinal.getSelectedIndex();
-		int monthIni = jComboBoxMonthIni.getSelectedIndex();
+		}
+		final int dayFinal = jComboBoxDayFinal.getSelectedIndex();
+		final int hourFinal = jComboBoxHourFinal.getSelectedIndex();
+		final int monthIni = jComboBoxMonthIni.getSelectedIndex();
 		int yearIni = 2004;
-		if (jComboBoxYearIni.getSelectedItem() != null)
+		if (jComboBoxYearIni.getSelectedItem() != null) {
 			yearIni = Integer.parseInt(jComboBoxYearIni.getSelectedItem().toString());
-		int dayIni = jComboBoxDayIni.getSelectedIndex();
-		int hourIni = jComboBoxHourIni.getSelectedIndex();
+		}
+		final int dayIni = jComboBoxDayIni.getSelectedIndex();
+		final int hourIni = jComboBoxHourIni.getSelectedIndex();
 
-		if (yearFinal < yearIni)
+		if (yearFinal < yearIni) {
 			jButtonOK.setEnabled(false);
-		else {
-			if (yearFinal > yearIni)
+		} else {
+			if (yearFinal > yearIni) {
 				jButtonOK.setEnabled(true);
-			else {
-				if (monthFinal < monthIni)
+			} else {
+				if (monthFinal < monthIni) {
 					jButtonOK.setEnabled(false);
-				else {
-					if (monthFinal > monthIni)
+				} else {
+					if (monthFinal > monthIni) {
 						jButtonOK.setEnabled(true);
-					else {
-						if (dayFinal < dayIni)
+					} else {
+						if (dayFinal < dayIni) {
 							jButtonOK.setEnabled(false);
-						else {
-							if (dayFinal > dayIni)
+						} else {
+							if (dayFinal > dayIni) {
 								jButtonOK.setEnabled(true);
-							else {
+							} else {
 
-								if (hourFinal > hourIni)
+								if (hourFinal > hourIni) {
 									jButtonOK.setEnabled(true);
-								else {
+								} else {
 									jButtonOK.setEnabled(false);
 								}
 							}
@@ -609,45 +625,48 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		}
 	}// GEN-LAST:event_jComboBoxDayIniActionPerformed
 
-	private void jComboBoxHourIniActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBoxHourIniActionPerformed
-		if (!isVisible())
+	private void jComboBoxHourIniActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBoxHourIniActionPerformed
+		if (!isVisible()) {
 			return;
+		}
 
-		int monthFinal = jComboBoxMonthFinal.getSelectedIndex();
+		final int monthFinal = jComboBoxMonthFinal.getSelectedIndex();
 		int yearFinal = 2004;
-		if (jComboBoxYearFinal.getSelectedItem() != null)
+		if (jComboBoxYearFinal.getSelectedItem() != null) {
 			yearFinal = Integer.parseInt(jComboBoxYearFinal.getSelectedItem().toString());
-		int dayFinal = jComboBoxDayFinal.getSelectedIndex();
-		int hourFinal = jComboBoxHourFinal.getSelectedIndex();
-		int monthIni = jComboBoxMonthIni.getSelectedIndex();
+		}
+		final int dayFinal = jComboBoxDayFinal.getSelectedIndex();
+		final int hourFinal = jComboBoxHourFinal.getSelectedIndex();
+		final int monthIni = jComboBoxMonthIni.getSelectedIndex();
 		int yearIni = 2004;
-		if (jComboBoxYearIni.getSelectedItem() != null)
+		if (jComboBoxYearIni.getSelectedItem() != null) {
 			yearIni = Integer.parseInt(jComboBoxYearIni.getSelectedItem().toString());
-		int dayIni = jComboBoxDayIni.getSelectedIndex();
-		int hourIni = jComboBoxHourIni.getSelectedIndex();
+		}
+		final int dayIni = jComboBoxDayIni.getSelectedIndex();
+		final int hourIni = jComboBoxHourIni.getSelectedIndex();
 
-		if (yearFinal < yearIni)
+		if (yearFinal < yearIni) {
 			jButtonOK.setEnabled(false);
-		else {
-			if (yearFinal > yearIni)
+		} else {
+			if (yearFinal > yearIni) {
 				jButtonOK.setEnabled(true);
-			else {
-				if (monthFinal < monthIni)
+			} else {
+				if (monthFinal < monthIni) {
 					jButtonOK.setEnabled(false);
-				else {
-					if (monthFinal > monthIni)
+				} else {
+					if (monthFinal > monthIni) {
 						jButtonOK.setEnabled(true);
-					else {
-						if (dayFinal < dayIni)
+					} else {
+						if (dayFinal < dayIni) {
 							jButtonOK.setEnabled(false);
-						else {
-							if (dayFinal > dayIni)
+						} else {
+							if (dayFinal > dayIni) {
 								jButtonOK.setEnabled(true);
-							else {
+							} else {
 
-								if (hourFinal > hourIni)
+								if (hourFinal > hourIni) {
 									jButtonOK.setEnabled(true);
-								else {
+								} else {
 									jButtonOK.setEnabled(false);
 								}
 							}
@@ -660,45 +679,48 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 	}// GEN-LAST:event_jComboBoxHourIniActionPerformed
 
-	private void jComboBoxHourFinalActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBoxHourFinalActionPerformed
-		if (!isVisible())
+	private void jComboBoxHourFinalActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBoxHourFinalActionPerformed
+		if (!isVisible()) {
 			return;
+		}
 
-		int monthFinal = jComboBoxMonthFinal.getSelectedIndex();
+		final int monthFinal = jComboBoxMonthFinal.getSelectedIndex();
 		int yearFinal = 2004;
-		if (jComboBoxYearFinal.getSelectedItem() != null)
+		if (jComboBoxYearFinal.getSelectedItem() != null) {
 			yearFinal = Integer.parseInt(jComboBoxYearFinal.getSelectedItem().toString());
-		int dayFinal = jComboBoxDayFinal.getSelectedIndex();
-		int hourFinal = jComboBoxHourFinal.getSelectedIndex();
-		int monthIni = jComboBoxMonthIni.getSelectedIndex();
+		}
+		final int dayFinal = jComboBoxDayFinal.getSelectedIndex();
+		final int hourFinal = jComboBoxHourFinal.getSelectedIndex();
+		final int monthIni = jComboBoxMonthIni.getSelectedIndex();
 		int yearIni = 2004;
-		if (jComboBoxYearIni.getSelectedItem() != null)
+		if (jComboBoxYearIni.getSelectedItem() != null) {
 			yearIni = Integer.parseInt(jComboBoxYearIni.getSelectedItem().toString());
-		int dayIni = jComboBoxDayIni.getSelectedIndex();
-		int hourIni = jComboBoxHourIni.getSelectedIndex();
+		}
+		final int dayIni = jComboBoxDayIni.getSelectedIndex();
+		final int hourIni = jComboBoxHourIni.getSelectedIndex();
 
-		if (yearFinal < yearIni)
+		if (yearFinal < yearIni) {
 			jButtonOK.setEnabled(false);
-		else {
-			if (yearFinal > yearIni)
+		} else {
+			if (yearFinal > yearIni) {
 				jButtonOK.setEnabled(true);
-			else {
-				if (monthFinal < monthIni)
+			} else {
+				if (monthFinal < monthIni) {
 					jButtonOK.setEnabled(false);
-				else {
-					if (monthFinal > monthIni)
+				} else {
+					if (monthFinal > monthIni) {
 						jButtonOK.setEnabled(true);
-					else {
-						if (dayFinal < dayIni)
+					} else {
+						if (dayFinal < dayIni) {
 							jButtonOK.setEnabled(false);
-						else {
-							if (dayFinal > dayIni)
+						} else {
+							if (dayFinal > dayIni) {
 								jButtonOK.setEnabled(true);
-							else {
+							} else {
 
-								if (hourFinal > hourIni)
+								if (hourFinal > hourIni) {
 									jButtonOK.setEnabled(true);
-								else {
+								} else {
 									jButtonOK.setEnabled(false);
 								}
 							}
@@ -711,8 +733,8 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 	}// GEN-LAST:event_jComboBoxHourFinalActionPerformed
 
-	private void jButtonHourActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonHourActionPerformed
-		java.util.GregorianCalendar gc = new java.util.GregorianCalendar();
+	private void jButtonHourActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonHourActionPerformed
+		final java.util.GregorianCalendar gc = new java.util.GregorianCalendar();
 
 		jComboBoxMonthFinal.setSelectedIndex(gc.get(gc.MONTH));
 		jComboBoxDayFinal.setSelectedIndex(gc.get(gc.DAY_OF_MONTH) - 1);
@@ -721,7 +743,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 	}// GEN-LAST:event_jButtonHourActionPerformed
 
-	private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonOKActionPerformed
+	private void jButtonOKActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonOKActionPerformed
 		int sensors = 0;
 
 		/*
@@ -774,51 +796,50 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_jButtonOKActionPerformed
 
-	private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonCancelActionPerformed
+	private void jButtonCancelActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonCancelActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_jButtonCancelActionPerformed
 
-	private void jComboBoxMonthFinalActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBoxMonthFinalActionPerformed
-		if (!isVisible())
+	private void jComboBoxMonthFinalActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBoxMonthFinalActionPerformed
+		if (!isVisible()) {
 			return;
+		}
 
-		int month = jComboBoxMonthFinal.getSelectedIndex();
-		int year = Integer.parseInt(jComboBoxYearFinal.getSelectedItem().toString());
+		final int month = jComboBoxMonthFinal.getSelectedIndex();
+		final int year = Integer.parseInt(jComboBoxYearFinal.getSelectedItem().toString());
 		fillComboBox(getNumberOfDays(month, year), jComboBoxDayFinal);
 
-		int monthFinal = jComboBoxMonthFinal.getSelectedIndex();
-		int yearFinal = Integer.parseInt(jComboBoxYearFinal.getSelectedItem().toString());
-		int dayFinal = jComboBoxDayFinal.getSelectedIndex();
-		int hourFinal = jComboBoxHourFinal.getSelectedIndex();
-		int monthIni = jComboBoxMonthIni.getSelectedIndex();
-		int yearIni = Integer.parseInt(jComboBoxYearIni.getSelectedItem().toString());
-		int dayIni = jComboBoxDayIni.getSelectedIndex();
-		int hourIni = jComboBoxHourIni.getSelectedIndex();
+		final int monthFinal = jComboBoxMonthFinal.getSelectedIndex();
+		final int yearFinal = Integer.parseInt(jComboBoxYearFinal.getSelectedItem().toString());
+		final int dayFinal = jComboBoxDayFinal.getSelectedIndex();
+		final int hourFinal = jComboBoxHourFinal.getSelectedIndex();
+		final int monthIni = jComboBoxMonthIni.getSelectedIndex();
+		final int yearIni = Integer.parseInt(jComboBoxYearIni.getSelectedItem().toString());
+		final int dayIni = jComboBoxDayIni.getSelectedIndex();
+		final int hourIni = jComboBoxHourIni.getSelectedIndex();
 
-		if (yearFinal < yearIni)
+		if (yearFinal < yearIni) {
 			jButtonOK.setEnabled(false);
-		// isto � para se mudar e retirar esta textbox. Depois � s� p�r o que
-		// queres que ele fa�a
-		else {
-			if (yearFinal > yearIni)
+		} else {
+			if (yearFinal > yearIni) {
 				jButtonOK.setEnabled(true);
-			else {
-				if (monthFinal < monthIni)
+			} else {
+				if (monthFinal < monthIni) {
 					jButtonOK.setEnabled(false);
-				else {
-					if (monthFinal > monthIni)
+				} else {
+					if (monthFinal > monthIni) {
 						jButtonOK.setEnabled(true);
-					else {
-						if (dayFinal < dayIni)
+					} else {
+						if (dayFinal < dayIni) {
 							jButtonOK.setEnabled(false);
-						else {
-							if (dayFinal > dayIni)
+						} else {
+							if (dayFinal > dayIni) {
 								jButtonOK.setEnabled(true);
-							else {
+							} else {
 
-								if (hourFinal > hourIni)
+								if (hourFinal > hourIni) {
 									jButtonOK.setEnabled(true);
-								else {
+								} else {
 									jButtonOK.setEnabled(false);
 								}
 							}
@@ -831,47 +852,46 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 	}// GEN-LAST:event_jComboBoxMonthFinalActionPerformed
 
-	private void jComboBoxMonthIniActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBoxMonthIniActionPerformed
-		if (!isVisible())
+	private void jComboBoxMonthIniActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBoxMonthIniActionPerformed
+		if (!isVisible()) {
 			return;
+		}
 
-		int month = jComboBoxMonthIni.getSelectedIndex();
-		int year = Integer.parseInt(jComboBoxYearIni.getSelectedItem().toString());
+		final int month = jComboBoxMonthIni.getSelectedIndex();
+		final int year = Integer.parseInt(jComboBoxYearIni.getSelectedItem().toString());
 		fillComboBox(getNumberOfDays(month, year), jComboBoxDayIni);
 
-		int monthFinal = jComboBoxMonthFinal.getSelectedIndex();
-		int yearFinal = Integer.parseInt(jComboBoxYearFinal.getSelectedItem().toString());
-		int dayFinal = jComboBoxDayFinal.getSelectedIndex();
-		int hourFinal = jComboBoxHourFinal.getSelectedIndex();
-		int monthIni = jComboBoxMonthIni.getSelectedIndex();
-		int yearIni = Integer.parseInt(jComboBoxYearIni.getSelectedItem().toString());
-		int dayIni = jComboBoxDayIni.getSelectedIndex();
-		int hourIni = jComboBoxHourIni.getSelectedIndex();
+		final int monthFinal = jComboBoxMonthFinal.getSelectedIndex();
+		final int yearFinal = Integer.parseInt(jComboBoxYearFinal.getSelectedItem().toString());
+		final int dayFinal = jComboBoxDayFinal.getSelectedIndex();
+		final int hourFinal = jComboBoxHourFinal.getSelectedIndex();
+		final int monthIni = jComboBoxMonthIni.getSelectedIndex();
+		final int yearIni = Integer.parseInt(jComboBoxYearIni.getSelectedItem().toString());
+		final int dayIni = jComboBoxDayIni.getSelectedIndex();
+		final int hourIni = jComboBoxHourIni.getSelectedIndex();
 
-		if (yearFinal < yearIni)
+		if (yearFinal < yearIni) {
 			jButtonOK.setEnabled(false);
-		// isto � para se mudar e retirar esta textbox. Depois � s� p�r o que
-		// queres que ele fa�a
-		else {
-			if (yearFinal > yearIni)
+		} else {
+			if (yearFinal > yearIni) {
 				jButtonOK.setEnabled(true);
-			else {
-				if (monthFinal < monthIni)
+			} else {
+				if (monthFinal < monthIni) {
 					jButtonOK.setEnabled(false);
-				else {
-					if (monthFinal > monthIni)
+				} else {
+					if (monthFinal > monthIni) {
 						jButtonOK.setEnabled(true);
-					else {
-						if (dayFinal < dayIni)
+					} else {
+						if (dayFinal < dayIni) {
 							jButtonOK.setEnabled(false);
-						else {
-							if (dayFinal > dayIni)
+						} else {
+							if (dayFinal > dayIni) {
 								jButtonOK.setEnabled(true);
-							else {
+							} else {
 
-								if (hourFinal > hourIni)
+								if (hourFinal > hourIni) {
 									jButtonOK.setEnabled(true);
-								else {
+								} else {
 									jButtonOK.setEnabled(false);
 								}
 							}
@@ -883,16 +903,16 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		}
 	}// GEN-LAST:event_jComboBoxMonthIniActionPerformed
 
-	public static void main(String args[]) {
-		javax.swing.JFrame jf = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame jf = new javax.swing.JFrame();
 		jf.getContentPane().add(new MeteoCustomizer());
 		jf.pack();
 		jf.show();
 	}
 
-	private int getNumberOfDays(int month, int year) {
+	private int getNumberOfDays(final int month, final int year) {
 		/** January is 0 */
-		int[] m = new int[] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+		final int[] m = new int[] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 		if (month == 1) {
 			/** Fazer para as excep��es... */
@@ -906,7 +926,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		}
 	}
 
-	private void fillComboBox(int nDays, javax.swing.JComboBox box) {
+	private void fillComboBox(final int nDays, final javax.swing.JComboBox box) {
 		box.removeAllItems();
 		box.removeAllItems();
 		for (int i = 1; i <= nDays; i++) {
@@ -923,7 +943,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -936,7 +956,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 	 * @param listener The listener to remove.
 	 */
 
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -947,9 +967,10 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 	 */
 
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -963,9 +984,10 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).done();
@@ -993,7 +1015,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		return null;
 	}
 
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		System.out.println("Setting hardware acquisition config");
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
@@ -1033,7 +1055,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 			 */
 
 			if (acqConfig.getSelectedHardwareParameter("Resolution") != null) {
-				String res = acqConfig.getSelectedHardwareParameter("Resolution").getParameterValue();
+				final String res = acqConfig.getSelectedHardwareParameter("Resolution").getParameterValue();
 
 				if (res.equalsIgnoreCase("Daily")) {
 					jRadioButtonDay.setSelected(true);
@@ -1067,7 +1089,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		System.out.println("Setting hardware info");
 		this.hardwareInfo = hardwareInfo;
 
@@ -1080,7 +1102,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		try {
 			firstYear = Integer.parseInt(hardwareInfo.getHardwareParameter("StartYear").getParameterSelectionList()[0]);
 			lastYear = Integer.parseInt(hardwareInfo.getHardwareParameter("StartYear").getParameterSelectionList()[1]);
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 			nfe.printStackTrace();
 			return;
 		}

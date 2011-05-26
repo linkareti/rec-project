@@ -22,7 +22,7 @@ public class StampTimeProcessor extends AbstractStampProcessor {
 
 	/** Creates a new instance of StampHelloProcessor */
 	public StampTimeProcessor() {
-		super(COMMAND_IDENTIFIER);
+		super(StampTimeProcessor.COMMAND_IDENTIFIER);
 	}
 
 	/**
@@ -32,31 +32,32 @@ public class StampTimeProcessor extends AbstractStampProcessor {
 	 * @return boolean - wether the processing was successfull
 	 * 
 	 */
-	public boolean process(StampCommand command) {
+	@Override
+	public boolean process(final StampCommand command) {
 		int countedHits = 0;
 		int time = 0;
 		int height = 0;
 
-		String[] splitedStr = command.getCommand().split(" ");
+		final String[] splitedStr = command.getCommand().split(" ");
 
-		if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER)) {
+		if (command.getCommandIdentifier().equalsIgnoreCase(StampTimeProcessor.COMMAND_IDENTIFIER)) {
 			if (splitedStr[0] != null && splitedStr[1] != null && splitedStr[2] != null) {
 				try {
 					countedHits = Integer.parseInt(splitedStr[0]);
 					time = Integer.parseInt(splitedStr[1]);
 					height = Integer.parseInt(splitedStr[2]);
 
-					Integer nHits = new Integer(countedHits);
-					Integer Time = new Integer(time);
-					Integer Height = new Integer(height);
+					final Integer nHits = new Integer(countedHits);
+					final Integer Time = new Integer(time);
+					final Integer Height = new Integer(height);
 
-					command.addCommandData(HITS, nHits);
-					command.addCommandData(TIMER, Time);
-					command.addCommandData(HEIGHT, Height);
+					command.addCommandData(StampTimeProcessor.HITS, nHits);
+					command.addCommandData(StampTimeProcessor.TIMER, Time);
+					command.addCommandData(StampTimeProcessor.HEIGHT, Height);
 					command.setData(true);
 
 					return true;
-				} catch (NumberFormatException e) {
+				} catch (final NumberFormatException e) {
 					e.printStackTrace();
 					return false;
 				}
@@ -66,6 +67,7 @@ public class StampTimeProcessor extends AbstractStampProcessor {
 		return false;
 	}
 
+	@Override
 	public boolean isData() {
 		return true;
 	}

@@ -12,13 +12,13 @@ import com.linkare.rec.impl.threading.util.EnumPriority;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class HardwareRemoveEvt implements Prioritazible{
+public class HardwareRemoveEvt implements Prioritazible {
 
 	/** Holds value of property hardwareUniqueId. */
-	private String hardwareUniqueId;
+	private final String hardwareUniqueId;
 
 	/** Creates a new instance of HardwareRemoveEvt */
-	public HardwareRemoveEvt(String hardwareUniqueId) {
+	public HardwareRemoveEvt(final String hardwareUniqueId) {
 		this.hardwareUniqueId = hardwareUniqueId;
 	}
 
@@ -28,7 +28,7 @@ public class HardwareRemoveEvt implements Prioritazible{
 	 * @return Value of property hardwareUniqueId.
 	 */
 	public String getHardwareUniqueId() {
-		return this.hardwareUniqueId;
+		return hardwareUniqueId;
 	}
 
 	/**

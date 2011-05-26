@@ -27,7 +27,7 @@ public class Undo {
 		vectorUndo = new java.util.Vector(0);
 	}
 
-	public void addElement(Object element) {
+	public void addElement(final Object element) {
 		vectorUndo.addElement(element);
 		setUndoable(true);
 		if (vectorUndo.size() == 30) {
@@ -38,7 +38,7 @@ public class Undo {
 	public Object undoElement() {
 		try {
 			undo = vectorUndo.get(vectorUndo.size() - 1 - (index + 1));
-		} catch (java.lang.ArrayIndexOutOfBoundsException aioobe) {
+		} catch (final java.lang.ArrayIndexOutOfBoundsException aioobe) {
 			setUndoable(false);
 		}
 		index++;
@@ -52,7 +52,7 @@ public class Undo {
 	public Object redoElement() {
 		try {
 			redo = vectorUndo.get(vectorUndo.size() - index);
-		} catch (java.lang.ArrayIndexOutOfBoundsException aioobe) {
+		} catch (final java.lang.ArrayIndexOutOfBoundsException aioobe) {
 			setRedoable(false);
 		}
 		index--;
@@ -66,7 +66,7 @@ public class Undo {
 	 * @return Value of property undoable.
 	 */
 	public boolean isUndoable() {
-		return this.undoable;
+		return undoable;
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class Undo {
 	 * 
 	 * @param undoable New value of property undoable.
 	 */
-	public void setUndoable(boolean undoable) {
+	public void setUndoable(final boolean undoable) {
 		this.undoable = undoable;
 	}
 
@@ -84,7 +84,7 @@ public class Undo {
 	 * @return Value of property redoable.
 	 */
 	public boolean isRedoable() {
-		return this.redoable;
+		return redoable;
 	}
 
 	/**
@@ -92,7 +92,7 @@ public class Undo {
 	 * 
 	 * @param redoable New value of property redoable.
 	 */
-	public void setRedoable(boolean redoable) {
+	public void setRedoable(final boolean redoable) {
 		this.redoable = redoable;
 	}
 }

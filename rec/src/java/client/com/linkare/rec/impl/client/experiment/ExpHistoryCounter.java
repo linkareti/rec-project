@@ -18,13 +18,14 @@ public class ExpHistoryCounter {
 	private ExpHistoryCounter() {
 	}
 
-	public static long getExperimentNumber(String apparatusName) {
-		if (expCounter.get(apparatusName) == null)
-			expCounter.put(apparatusName, new Long(1));
+	public static long getExperimentNumber(final String apparatusName) {
+		if (ExpHistoryCounter.expCounter.get(apparatusName) == null) {
+			ExpHistoryCounter.expCounter.put(apparatusName, new Long(1));
+		}
 
-		Long counter = (Long) expCounter.get(apparatusName);
-		long retorna = counter.longValue();
-		expCounter.put(apparatusName, new Long(retorna + 1));
+		final Long counter = ExpHistoryCounter.expCounter.get(apparatusName);
+		final long retorna = counter.longValue();
+		ExpHistoryCounter.expCounter.put(apparatusName, new Long(retorna + 1));
 
 		return retorna;
 	}

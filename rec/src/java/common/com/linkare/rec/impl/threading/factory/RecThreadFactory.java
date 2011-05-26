@@ -15,14 +15,15 @@ public class RecThreadFactory implements ThreadFactory {
 	final String namePrefix;
 
 	public RecThreadFactory(final String prefix) {
-		SecurityManager s = System.getSecurityManager();
+		final SecurityManager s = System.getSecurityManager();
 		group = (s != null) ? s.getThreadGroup() : Thread.currentThread().getThreadGroup();
-		namePrefix = new StringBuilder("RecPool-").append(poolNumber.getAndIncrement()).append("-").append(prefix)
-				.append("-").toString();
+		namePrefix = new StringBuilder("RecPool-").append(RecThreadFactory.poolNumber.getAndIncrement()).append("-")
+				.append(prefix).append("-").toString();
 	}
 
-	public Thread newThread(Runnable r) {
-		Thread t = new Thread(group, r, namePrefix + threadNumber.getAndIncrement(), 0);
+	@Override
+	public Thread newThread(final Runnable r) {
+		final Thread t = new Thread(group, r, namePrefix + threadNumber.getAndIncrement(), 0);
 		if (t.isDaemon()) {
 			t.setDaemon(true);
 		}

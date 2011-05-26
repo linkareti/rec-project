@@ -61,8 +61,8 @@ public class OneTimeoutNode {
 	 * @param value allowed object is {@link BigInteger }
 	 * 
 	 */
-	public void setTime(BigInteger value) {
-		this.time = value;
+	public void setTime(final BigInteger value) {
+		time = value;
 	}
 
 }

@@ -56,9 +56,9 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	private static String APPARATUS_CLIENT_LOGGER = "ReC.ApparatusClientBean";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(APPARATUS_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 		}
 	}
 	private transient DataProducerWrapper dataProducerInEffect = null;
@@ -81,15 +81,20 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 
 	// private helper methods
 	private DataClient _this() {
-		if (_this != null)
+		if (_this != null) {
 			return _this;
+		}
 
 		try {
-			return (_this = DataClientHelper.narrow(ORBBean.getORBBean().getAutoIdRootPOA().servant_to_reference(
-					ORBBean.getORBBean().registerAutoIdRootPOAServant(DataClient.class, this, (oid = new ObjectID())))));
-		} catch (Exception e) {
-			LoggerUtil.logThrowable("Couldn't register this DataClient with ORB", e, Logger
-					.getLogger(APPARATUS_CLIENT_LOGGER));
+			return (_this = DataClientHelper.narrow(ORBBean
+					.getORBBean()
+					.getAutoIdRootPOA()
+					.servant_to_reference(
+							ORBBean.getORBBean().registerAutoIdRootPOAServant(DataClient.class, this,
+									(oid = new ObjectID())))));
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable("Couldn't register this DataClient with ORB", e,
+					Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 			return null;
 		}
 
@@ -105,12 +110,13 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 		boolean connected = false;
 		try {
 			connected = !mchw.getDelegate()._non_existent();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			connected = false;
 		}
 
-		if (!connected)
+		if (!connected) {
 			disconnect();
+		}
 
 		return connected;
 	}
@@ -124,7 +130,8 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 *            a username. IF using the default SecurityManager at the server
 	 *            (open access)
 	 */
-	public void setUserInfo(UserInfo userInfo) {
+	@Override
+	public void setUserInfo(final UserInfo userInfo) {
 		this.userInfo = userInfo;
 	}
 
@@ -135,16 +142,19 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * @return The UserInfo Object currently being used to identify the client
 	 *         with the apparatus server
 	 */
+	@Override
 	public com.linkare.rec.acquisition.UserInfo getUserInfo() {
 		// userInfo = _this().getUserInfo();
-		if (userInfo == null)
+		if (userInfo == null) {
 			userInfo = new UserInfo();
+		}
 		return userInfo;
 	}
 
 	/**
 	 * Implementation of Operations interface for CORBA comm
 	 */
+	@Override
 	public void hardwareChange() {
 		// silent noop - MCHardwares don't send HardwareChanges
 	}
@@ -155,7 +165,8 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * @param millisecs_to_lock_success The number of milliseconds until
 	 *            possibility of lock is lost
 	 */
-	public void hardwareLockable(long millisecs_to_lock_success) {
+	@Override
+	public void hardwareLockable(final long millisecs_to_lock_success) {
 		fireApparatusConnectorListenerApparatusLockable(millisecs_to_lock_success);
 		// lets make sure we are the first in the table since we have lock...
 		// refreshUsersList();
@@ -163,42 +174,44 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 
 	private HardwareState state = HardwareState.UNKNOWN;
 
-	public void hardwareStateChange(HardwareState newState) {
-		this.state = newState;
-		Logger.getLogger(APPARATUS_CLIENT_LOGGER).log(Level.INFO, "Received new State info:" + newState);
+	@Override
+	public void hardwareStateChange(final HardwareState newState) {
+		state = newState;
+		Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER).log(Level.INFO,
+				"Received new State info:" + newState);
 		processState();
 	}
 
 	private void processState() {
 		try {
-			if (state.equals(HardwareState.UNKNOWN))
+			if (state.equals(HardwareState.UNKNOWN)) {
 				fireApparatusConnectorListenerApparatusStateUnknow(null);
-			else if (state.equals(HardwareState.CONFIGURING))
+			} else if (state.equals(HardwareState.CONFIGURING)) {
 				fireApparatusConnectorListenerApparatusStateConfiguring(null);
-			else if (state.equals(HardwareState.CONFIGURED))
+			} else if (state.equals(HardwareState.CONFIGURED)) {
 				fireApparatusConnectorListenerApparatusStateConfigured(null);
-			else if (state.equals(HardwareState.STARTING))
+			} else if (state.equals(HardwareState.STARTING)) {
 				fireApparatusConnectorListenerApparatusStateStarting(null);
-			else if (state.equals(HardwareState.STARTED))
+			} else if (state.equals(HardwareState.STARTED)) {
 				fireApparatusConnectorListenerApparatusStateStarted(dataProducerInEffect);
-			else if (state.equals(HardwareState.STOPING)) {
+			} else if (state.equals(HardwareState.STOPING)) {
 				fireApparatusConnectorListenerApparatusStateStoping(null);
 				dataProducerInEffect = null;
-				locked = false;
+				// locked = false;
 			} else if (state.equals(HardwareState.STOPED)) {
 				fireApparatusConnectorListenerApparatusStateStoped(null);
 				dataProducerInEffect = null;
-				locked = false;
+				// locked = false;
 			} else if (state.equals(HardwareState.RESETING)) {
 				fireApparatusConnectorListenerApparatusStateReseting(null);
 				dataProducerInEffect = null;
-				locked = false;
+				// locked = false;
 			} else if (state.equals(HardwareState.RESETED)) {
 				fireApparatusConnectorListenerApparatusStateReseted(null);
 				dataProducerInEffect = null;
-				locked = false;
+				// locked = false;
 			}
-		} catch (Throwable e) {
+		} catch (final Throwable e) {
 			/*
 			 * System.out.println("**************************");
 			 * System.out.println("**************************");
@@ -212,7 +225,8 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 		}
 	}
 
-	public void receiveMessage(String clientFrom, String clientTo, String message) {
+	@Override
+	public void receiveMessage(final String clientFrom, final String clientTo, final String message) {
 		fireIChatMessageListenerNewChatMessage(new ChatMessageEvent(this, new UserInfo(clientFrom), new UserInfo(
 				clientTo == ChatMessageEvent.EVERYONE_USER ? ChatMessageEvent.EVERYONE_USER_ALIAS : clientTo), message));
 	}
@@ -224,7 +238,8 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addApparatusConnectorListener(ApparatusConnectorListener listener) {
+	@Override
+	public synchronized void addApparatusConnectorListener(final ApparatusConnectorListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -236,7 +251,8 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeApparatusConnectorListener(ApparatusConnectorListener listener) {
+	@Override
+	public synchronized void removeApparatusConnectorListener(final ApparatusConnectorListener listener) {
 		listenerList.remove(ApparatusConnectorListener.class, listener);
 	}
 
@@ -245,11 +261,11 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireApparatusConnectorListenerApparatusConnecting(String message) {
-		java.util.EventObject e = null;
-		if (listenerList == null)
+	private void fireApparatusConnectorListenerApparatusConnecting(final String message) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ApparatusConnectorListener.class) {
 				((ApparatusConnectorListener) listeners[i + 1]).apparatusConnecting(new ApparatusConnectorEvent(this,
@@ -263,7 +279,7 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireApparatusConnectorListenerApparatusConnected(String message) {
+	private void fireApparatusConnectorListenerApparatusConnected(final String message) {
 		/*
 		 * usersListRefreshThread = new UsersListRefresher();
 		 * 
@@ -274,9 +290,10 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 
 		fireIChatMessageListenerConnectionChanged(true);
 
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ApparatusConnectorListener.class) {
 				((ApparatusConnectorListener) listeners[i + 1]).apparatusConnected(new ApparatusConnectorEvent(this,
@@ -290,10 +307,11 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireApparatusConnectorListenerApparatusDisconnecting(String message) {
-		if (listenerList == null)
+	private void fireApparatusConnectorListenerApparatusDisconnecting(final String message) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ApparatusConnectorListener.class) {
 				((ApparatusConnectorListener) listeners[i + 1]).apparatusDisconnecting(new ApparatusConnectorEvent(
@@ -307,7 +325,7 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireApparatusConnectorListenerApparatusDisconnected(String message) {
+	private void fireApparatusConnectorListenerApparatusDisconnected(final String message) {
 		if (usersListRefreshThread != null) {
 			// fireIChatMessageListenerUsersListChanged(null);
 			fireExpUsersListChangeListenerUsersListChanged(null);
@@ -317,9 +335,10 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 
 		fireIChatMessageListenerConnectionChanged(false);
 
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ApparatusConnectorListener.class) {
 				((ApparatusConnectorListener) listeners[i + 1]).apparatusDisconnected(new ApparatusConnectorEvent(this,
@@ -333,11 +352,12 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireApparatusConnectorListenerApparatusUnreachable(String message) {
+	private void fireApparatusConnectorListenerApparatusUnreachable(final String message) {
 		disconnect();
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ApparatusConnectorListener.class) {
 				((ApparatusConnectorListener) listeners[i + 1]).apparatusUnreachable(new ApparatusConnectorEvent(this,
@@ -351,11 +371,12 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireApparatusConnectorListenerApparatusNotAuthorized(String message) {
+	private void fireApparatusConnectorListenerApparatusNotAuthorized(final String message) {
 		disconnect();
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ApparatusConnectorListener.class) {
 				((ApparatusConnectorListener) listeners[i + 1]).apparatusNotAuthorized(new ApparatusConnectorEvent(
@@ -369,11 +390,12 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireApparatusConnectorListenerApparatusMaxUsers(String message) {
+	private void fireApparatusConnectorListenerApparatusMaxUsers(final String message) {
 		disconnect();
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ApparatusConnectorListener.class) {
 				((ApparatusConnectorListener) listeners[i + 1]).apparatusMaxUsers(new ApparatusConnectorEvent(this,
@@ -387,12 +409,12 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireApparatusConnectorListenerApparatusNotRegistered(String message) {
+	private void fireApparatusConnectorListenerApparatusNotRegistered(final String message) {
 		disconnect();
-		java.util.EventObject e = null;
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ApparatusConnectorListener.class) {
 				((ApparatusConnectorListener) listeners[i + 1]).apparatusNotRegistered(new ApparatusConnectorEvent(
@@ -406,10 +428,11 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireApparatusConnectorListenerApparatusStateUnknow(String message) {
-		if (listenerList == null)
+	private void fireApparatusConnectorListenerApparatusStateUnknow(final String message) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ApparatusConnectorListener.class) {
 				((ApparatusConnectorListener) listeners[i + 1]).apparatusStateUnknow(new ApparatusConnectorEvent(this,
@@ -423,10 +446,11 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireApparatusConnectorListenerApparatusStateConfiguring(String message) {
-		if (listenerList == null)
+	private void fireApparatusConnectorListenerApparatusStateConfiguring(final String message) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ApparatusConnectorListener.class) {
 				((ApparatusConnectorListener) listeners[i + 1]).apparatusStateConfiguring(new ApparatusConnectorEvent(
@@ -440,10 +464,11 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireApparatusConnectorListenerApparatusStateConfigured(String message) {
-		if (listenerList == null)
+	private void fireApparatusConnectorListenerApparatusStateConfigured(final String message) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ApparatusConnectorListener.class) {
 				((ApparatusConnectorListener) listeners[i + 1]).apparatusStateConfigured(new ApparatusConnectorEvent(
@@ -457,10 +482,11 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireApparatusConnectorListenerApparatusStateStarting(String message) {
-		if (listenerList == null)
+	private void fireApparatusConnectorListenerApparatusStateStarting(final String message) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ApparatusConnectorListener.class) {
 				((ApparatusConnectorListener) listeners[i + 1]).apparatusStateStarting(new ApparatusConnectorEvent(
@@ -478,17 +504,19 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 		if (dataSource == null) {
 			try {
 				dataSource = new DataProducerWrapper(apparatus.getMultiCastHardware().getDataProducer(getUserInfo()));
-			} catch (Exception e) {
-				LoggerUtil.logThrowable("Data Source is null... unable to fetch it from MCHardware...", e, Logger
-						.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final Exception e) {
+				LoggerUtil.logThrowable("Data Source is null... unable to fetch it from MCHardware...", e,
+						Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 			}
 		}
-		if (dataSource == null)
+		if (dataSource == null) {
 			return;
+		}
 
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ApparatusConnectorListener.class) {
 				((ApparatusConnectorListener) listeners[i + 1]).apparatusStateStarted(new ApparatusConnectorEvent(this,
@@ -502,10 +530,11 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireApparatusConnectorListenerApparatusStateStoping(String message) {
-		if (listenerList == null)
+	private void fireApparatusConnectorListenerApparatusStateStoping(final String message) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ApparatusConnectorListener.class) {
 				((ApparatusConnectorListener) listeners[i + 1]).apparatusStateStoping(new ApparatusConnectorEvent(this,
@@ -519,10 +548,11 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireApparatusConnectorListenerApparatusStateStoped(String message) {
-		if (listenerList == null)
+	private void fireApparatusConnectorListenerApparatusStateStoped(final String message) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ApparatusConnectorListener.class) {
 				((ApparatusConnectorListener) listeners[i + 1]).apparatusStateStoped(new ApparatusConnectorEvent(this,
@@ -536,10 +566,11 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireApparatusConnectorListenerApparatusStateReseting(String message) {
-		if (listenerList == null)
+	private void fireApparatusConnectorListenerApparatusStateReseting(final String message) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ApparatusConnectorListener.class) {
 				((ApparatusConnectorListener) listeners[i + 1]).apparatusStateReseting(new ApparatusConnectorEvent(
@@ -553,10 +584,11 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireApparatusConnectorListenerApparatusStateReseted(String message) {
-		if (listenerList == null)
+	private void fireApparatusConnectorListenerApparatusStateReseted(final String message) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ApparatusConnectorListener.class) {
 				((ApparatusConnectorListener) listeners[i + 1]).apparatusStateReseted(new ApparatusConnectorEvent(this,
@@ -570,10 +602,11 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireApparatusConnectorListenerApparatusLockable(long millis_to_lock_success) {
-		if (listenerList == null)
+	private void fireApparatusConnectorListenerApparatusLockable(final long millis_to_lock_success) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ApparatusConnectorListener.class) {
 				((ApparatusConnectorListener) listeners[i + 1]).apparatusLockable(new ApparatusConnectorEvent(this,
@@ -587,10 +620,11 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireApparatusConnectorListenerApparatusIncorrectState(String message) {
-		if (listenerList == null)
+	private void fireApparatusConnectorListenerApparatusIncorrectState(final String message) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ApparatusConnectorListener.class) {
 				((ApparatusConnectorListener) listeners[i + 1]).apparatusIncorrectState(new ApparatusConnectorEvent(
@@ -604,10 +638,11 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireApparatusConnectorListenerApparatusLocked(String message) {
-		if (listenerList == null)
+	private void fireApparatusConnectorListenerApparatusLocked(final String message) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ApparatusConnectorListener.class) {
 				((ApparatusConnectorListener) listeners[i + 1]).apparatusLocked(new ApparatusConnectorEvent(this,
@@ -621,10 +656,11 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireApparatusConnectorListenerApparatusNotOwner(String message) {
-		if (listenerList == null)
+	private void fireApparatusConnectorListenerApparatusNotOwner(final String message) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ApparatusConnectorListener.class) {
 				((ApparatusConnectorListener) listeners[i + 1]).apparatusNotOwner(new ApparatusConnectorEvent(this,
@@ -638,10 +674,11 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireApparatusConnectorListenerApparatusStateConfigError(String message) {
-		if (listenerList == null)
+	private void fireApparatusConnectorListenerApparatusStateConfigError(final String message) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ApparatusConnectorListener.class) {
 				((ApparatusConnectorListener) listeners[i + 1]).apparatusStateConfigError(new ApparatusConnectorEvent(
@@ -650,6 +687,7 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 		}
 	}
 
+	@Override
 	public void stopAutoRefresh() {
 		if (usersListRefreshThread != null) {
 			usersListRefreshThread.stopNow();
@@ -657,16 +695,18 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 
 	}
 
-	public void startAutoRefresh(long delayMillis) {
+	@Override
+	public void startAutoRefresh(final long delayMillis) {
 		usersListRefreshPeriod = delayMillis;
 		if (usersListRefreshThread != null) {
 			usersListRefreshThread.stopNow();
 			while (usersListRefreshThread != null && usersListRefreshThread.isAlive()) {
-				Thread.currentThread().yield();
+				Thread.yield();
 			}
 
-			if (usersListRefreshThread == null)
+			if (usersListRefreshThread == null) {
 				return;
+			}
 		}
 		usersListRefreshThread = new UsersListRefresher();
 		usersListRefreshThread.start();
@@ -677,8 +717,9 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param listener The listener to register.
 	 */
+	@Override
 	public synchronized void addExpUsersListChangeListener(
-			com.linkare.rec.impl.client.experiment.ExpUsersListChangeListener listener) {
+			final com.linkare.rec.impl.client.experiment.ExpUsersListChangeListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -690,8 +731,9 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param listener The listener to remove.
 	 */
+	@Override
 	public synchronized void removeExpUsersListChangeListener(
-			com.linkare.rec.impl.client.experiment.ExpUsersListChangeListener listener) {
+			final com.linkare.rec.impl.client.experiment.ExpUsersListChangeListener listener) {
 		listenerList.remove(com.linkare.rec.impl.client.experiment.ExpUsersListChangeListener.class, listener);
 	}
 
@@ -700,10 +742,11 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param event The event to be fired
 	 */
-	private void fireExpUsersListChangeListenerUsersListChanged(UserInfo[] event) {
-		if (listenerList == null)
+	private void fireExpUsersListChangeListenerUsersListChanged(final UserInfo[] event) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ExpUsersListChangeListener.class) {
 				((ExpUsersListChangeListener) listeners[i + 1]).usersListChanged(new ExpUsersListEvent(this, event));
@@ -718,19 +761,20 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 		}
 	}
 
-	private Vector<UserInfo> usersList = new Vector<UserInfo>();
-	private Vector expUsersList = new Vector();
+	private final Vector<UserInfo> usersList = new Vector<UserInfo>();
+	// private Vector<UserInfo> expUsersList = new Vector<UserInfo>();
 
 	/** Holds value of property usersListRefreshPeriod. */
 	private long usersListRefreshPeriod = 20000;
 
 	private String roomName = null;
 
+	@Override
 	public String getRoomName() {
 		return roomName;
 	}
 
-	public void setRoomName(String roomName) {
+	public void setRoomName(final String roomName) {
 		this.roomName = roomName;
 		fireIChatMessageListenerRoomChanged(roomName);
 	}
@@ -740,60 +784,66 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 
 		try {
 			users = mchw.getClientList(getUserInfo());
-		} catch (NotRegistered e) {
+		} catch (final NotRegistered e) {
 			usersListRefreshThread.stopNow();
 			usersListRefreshThread = null;
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 			fireApparatusConnectorListenerApparatusNotRegistered(e.getMessage());
-		} catch (NotAuthorized na) {
-			LoggerUtil.logThrowable(null, na, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+		} catch (final NotAuthorized na) {
+			LoggerUtil.logThrowable(null, na, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 			fireApparatusConnectorListenerApparatusNotAuthorized(na.getMessage());
 		}
 
-		if (users == null)
+		if (users == null) {
 			return;
+		}
 
 		synchronized (usersList) {
 			usersList.clear();
-			for (int i = 0; i < users.length; i++) {
-				usersList.add(users[i]);
+			for (final UserInfo user : users) {
+				usersList.add(user);
 			}
 			// fireIChatMessageListenerUsersListChanged(getUsers());
 		}
 		fireExpUsersListChangeListenerUsersListChanged(getUsers());
 	}
 
+	@Override
 	public UserInfo[] getUsers() {
 		UserInfo[] usersObj = null;
 
 		synchronized (usersList) {
-			usersObj = (UserInfo[]) usersList.toArray(new UserInfo[0]);
+			usersObj = usersList.toArray(new UserInfo[0]);
 		}
 
 		UserInfo[] users = null;
 
-		if (usersObj != null)
+		if (usersObj != null) {
 			users = new UserInfo[usersObj.length + 1];
-		else
+		} else {
 			users = new UserInfo[1];
+		}
 
 		users[0] = new UserInfo(ChatMessageEvent.EVERYONE_USER_ALIAS);
 
-		if (usersObj != null)
-			for (int i = 0; i < usersObj.length; i++)
+		if (usersObj != null) {
+			for (int i = 0; i < usersObj.length; i++) {
 				users[i + 1] = usersObj[i];
+			}
+		}
 		return users;
 	}
 
-	public void sendMessage(ChatMessageEvent evt) {
+	@Override
+	public void sendMessage(final ChatMessageEvent evt) {
 		if (mchw != null) {
 			try {
 				mchw.sendMessage(getUserInfo(), evt.getUserTo().getUserName(), evt.getMessage());
-			} catch (NotRegistered e) {
+			} catch (final NotRegistered e) {
 				fireApparatusConnectorListenerApparatusNotRegistered(e.getMessage());
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
-			} catch (NotAuthorized na) {
-				LoggerUtil.logThrowable(null, na, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+			} catch (final NotAuthorized na) {
+				LoggerUtil.logThrowable(null, na, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusNotAuthorized(na.getMessage());
 			}
 		}
@@ -804,7 +854,8 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addChatMessageListener(IChatMessageListener listener) {
+	@Override
+	public synchronized void addChatMessageListener(final IChatMessageListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -816,7 +867,8 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeChatMessageListener(IChatMessageListener listener) {
+	@Override
+	public synchronized void removeChatMessageListener(final IChatMessageListener listener) {
 		listenerList.remove(IChatMessageListener.class, listener);
 	}
 
@@ -825,10 +877,11 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param event The event to be fired
 	 */
-	private void fireIChatMessageListenerConnectionChanged(boolean isConnected) {
-		if (listenerList == null)
+	private void fireIChatMessageListenerConnectionChanged(final boolean isConnected) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == IChatMessageListener.class) {
 				((IChatMessageListener) listeners[i + 1]).connectionChanged(new ChatConnectionEvent(this, isConnected));
@@ -841,10 +894,11 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param event The event to be fired
 	 */
-	private void fireIChatMessageListenerRoomChanged(String newRoomName) {
-		if (listenerList == null)
+	private void fireIChatMessageListenerRoomChanged(final String newRoomName) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == IChatMessageListener.class) {
 				((IChatMessageListener) listeners[i + 1]).roomChanged(new ChatRoomEvent(this, newRoomName));
@@ -872,10 +926,11 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param event The event to be fired
 	 */
-	private void fireIChatMessageListenerNewChatMessage(ChatMessageEvent evt) {
-		if (listenerList == null)
+	private void fireIChatMessageListenerNewChatMessage(final ChatMessageEvent evt) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == IChatMessageListener.class) {
@@ -890,7 +945,7 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * @return Value of property usersListRefreshPeriod.
 	 */
 	public long getUsersListRefreshPeriod() {
-		return this.usersListRefreshPeriod;
+		return usersListRefreshPeriod;
 	}
 
 	/**
@@ -899,7 +954,7 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * @param usersListRefreshPeriod New value of property
 	 *            usersListRefreshPeriod.
 	 */
-	public void setUsersListRefreshPeriod(long usersListRefreshPeriod) {
+	public void setUsersListRefreshPeriod(final long usersListRefreshPeriod) {
 		this.usersListRefreshPeriod = usersListRefreshPeriod;
 	}
 
@@ -909,7 +964,7 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * @return Value of property apparatus.
 	 */
 	public Apparatus getApparatus() {
-		return this.apparatus;
+		return apparatus;
 	}
 
 	/**
@@ -917,19 +972,21 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param apparatus New value of property apparatus.
 	 */
-	public void setApparatus(Apparatus apparatus) {
+	public void setApparatus(final Apparatus apparatus) {
 		this.apparatus = apparatus;
-		if (apparatus != null)
-			this.mchw = apparatus.getMultiCastHardware();
+		if (apparatus != null) {
+			mchw = apparatus.getMultiCastHardware();
+		}
 	}
 
+	@Override
 	public void connect() {
 		if (apparatus == null || apparatus.getMultiCastHardware() == null) {
 			fireApparatusConnectorListenerApparatusDisconnected(null);
 			return;
 		}
 		fireApparatusConnectorListenerApparatusConnecting(null);
-		this.mchw = apparatus.getMultiCastHardware();
+		mchw = apparatus.getMultiCastHardware();
 
 		try {
 			if (mchw.isConnected()) {
@@ -939,27 +996,28 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 					setRoomName(mchw.getHardwareInfo(getUserInfo()).getFamiliarName());
 					connectedBefore = true;
 					fireApparatusConnectorListenerApparatusConnected(null);
-				} catch (MaximumClientsReached e) {
-					LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+				} catch (final MaximumClientsReached e) {
+					LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 					fireApparatusConnectorListenerApparatusMaxUsers(e.getMessage());
-				} catch (NotAuthorized e) {
-					LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+				} catch (final NotAuthorized e) {
+					LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 					fireApparatusConnectorListenerApparatusNotAuthorized(e.getMessage());
-				} catch (NotAvailableException e) {
-					LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+				} catch (final NotAvailableException e) {
+					LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 					fireApparatusConnectorListenerApparatusDisconnected(e.getMessage());
 				}
 
 			} else {
 				fireApparatusConnectorListenerApparatusDisconnected(null);
 			}
-		} catch (Exception e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 			e.printStackTrace();
 			fireApparatusConnectorListenerApparatusUnreachable(e.getMessage());
 		}
 	}
 
+	@Override
 	public void disconnect() {
 		if (connectedBefore) {
 			try {
@@ -972,150 +1030,160 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 				// oid.getOid());
 				fireApparatusConnectorListenerApparatusDisconnected(null);
 				connectedBefore = false;
-			} catch (Exception e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final Exception e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				e.printStackTrace();
 			}
 		}
 	}
 
-	private void reconnect() {
-		disconnect();
-		connect();
-	}
+	// private void reconnect() {
+	// disconnect();
+	// connect();
+	// }
+	//
+	// private boolean locked = false;
 
-	private boolean locked = false;
-
+	@Override
 	public void lock() {
 		if (mchw != null) {
 			try {
 				mchw.requireLock(getUserInfo());
-				locked = true;
+				// locked = true;
 				fireApparatusConnectorListenerApparatusLocked(null);
-			} catch (IncorrectStateException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final IncorrectStateException e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusIncorrectState(e.getMessage());
-			} catch (NotAvailableException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final NotAvailableException e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusDisconnecting(e.getMessage());
-			} catch (NotRegistered e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final NotRegistered e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusNotRegistered(e.getMessage());
-			} catch (NotOwnerException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final NotOwnerException e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusNotOwner(e.getMessage());
-			} catch (NotAuthorized na) {
-				LoggerUtil.logThrowable(null, na, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final NotAuthorized na) {
+				LoggerUtil.logThrowable(null, na, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusNotAuthorized(na.getMessage());
 			}
-		} else
+		} else {
 			fireApparatusConnectorListenerApparatusDisconnected(null);
+		}
 
 	}
 
-	public void configure(HardwareAcquisitionConfig config) {
+	@Override
+	public void configure(final HardwareAcquisitionConfig config) {
 		if (mchw != null) {
 			try {
 				mchw.configure(getUserInfo(), config);
 
-			} catch (IncorrectStateException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final IncorrectStateException e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusIncorrectState(e.getMessage());
-			} catch (NotAvailableException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final NotAvailableException e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusDisconnecting(e.getMessage());
-			} catch (WrongConfigurationException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final WrongConfigurationException e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusStateConfigError(e.getMessage());
-			} catch (NotRegistered e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final NotRegistered e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusNotRegistered(e.getMessage());
-			} catch (NotOwnerException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final NotOwnerException e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusNotOwner(e.getMessage());
-			} catch (NotAuthorized na) {
-				LoggerUtil.logThrowable(null, na, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final NotAuthorized na) {
+				LoggerUtil.logThrowable(null, na, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusNotAuthorized(na.getMessage());
 			}
-		} else
+		} else {
 			fireApparatusConnectorListenerApparatusDisconnected(null);
+		}
 	}
 
+	@Override
 	public void reset() {
 		if (mchw != null) {
 			try {
 				mchw.reset(getUserInfo());
 				dataProducerInEffect = null;
-			} catch (IncorrectStateException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final IncorrectStateException e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusIncorrectState(e.getMessage());
-			} catch (NotAvailableException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final NotAvailableException e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusDisconnecting(e.getMessage());
-			} catch (NotRegistered e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final NotRegistered e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusNotRegistered(e.getMessage());
-			} catch (NotOwnerException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final NotOwnerException e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusNotOwner(e.getMessage());
-			} catch (NotAuthorized na) {
-				LoggerUtil.logThrowable(null, na, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final NotAuthorized na) {
+				LoggerUtil.logThrowable(null, na, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusNotAuthorized(na.getMessage());
 			}
-		} else
+		} else {
 			fireApparatusConnectorListenerApparatusDisconnected(null);
+		}
 	}
 
+	@Override
 	public void start() {
 		if (mchw != null) {
 			try {
-				DataProducer dataProducer = mchw.start(getUserInfo());
+				final DataProducer dataProducer = mchw.start(getUserInfo());
 				dataProducerInEffect = new DataProducerWrapper(dataProducer);
 
-			} catch (IncorrectStateException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final IncorrectStateException e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusIncorrectState(e.getMessage());
-			} catch (NotAvailableException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final NotAvailableException e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusDisconnecting(e.getMessage());
-			} catch (NotRegistered e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final NotRegistered e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusNotRegistered(e.getMessage());
-			} catch (NotOwnerException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final NotOwnerException e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusNotOwner(e.getMessage());
-			} catch (NotAuthorized na) {
-				LoggerUtil.logThrowable(null, na, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final NotAuthorized na) {
+				LoggerUtil.logThrowable(null, na, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusNotAuthorized(na.getMessage());
 			}
-		} else
+		} else {
 			fireApparatusConnectorListenerApparatusDisconnected(null);
+		}
 	}
 
+	@Override
 	public void stop() {
 		if (mchw != null) {
 			try {
 				mchw.stop(getUserInfo());
 				dataProducerInEffect = null;
 
-			} catch (IncorrectStateException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final IncorrectStateException e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusIncorrectState(e.getMessage());
-			} catch (NotAvailableException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final NotAvailableException e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusDisconnecting(e.getMessage());
-			} catch (NotRegistered e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final NotRegistered e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusNotRegistered(e.getMessage());
-			} catch (NotOwnerException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final NotOwnerException e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusNotOwner(e.getMessage());
-			} catch (NotAuthorized na) {
-				LoggerUtil.logThrowable(null, na, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			} catch (final NotAuthorized na) {
+				LoggerUtil.logThrowable(null, na, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 				fireApparatusConnectorListenerApparatusNotAuthorized(na.getMessage());
 			}
-		} else
+		} else {
 			fireApparatusConnectorListenerApparatusDisconnected(null);
+		}
 	}
 
 	private UsersListRefresher usersListRefreshThread = null;// new
@@ -1135,25 +1203,26 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 			stop = true;
 		}
 
+		@Override
 		public void run() {
 			while (!stop) {
 				while ((mchw == null || !mchw.isConnected()) && !stop) {
 					try {
-						sleep(usersListRefreshPeriod);
-					} catch (Exception e) {
-						LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+						Thread.sleep(usersListRefreshPeriod);
+					} catch (final Exception e) {
+						LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 						return;
 					}
 				}
 
 				while (!stop && mchw != null && mchw.isConnected()) {
 					try {
-						sleep(usersListRefreshPeriod);
+						Thread.sleep(usersListRefreshPeriod);
 						if (!stop) {
 							refreshUsersList();
 						}
-					} catch (Exception e) {
-						LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+					} catch (final Exception e) {
+						LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
 						return;
 					}
 				}

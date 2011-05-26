@@ -6,6 +6,8 @@
 
 package pt.utl.ist.elab.client.vm3;
 
+import javax.swing.JFrame;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
@@ -17,6 +19,11 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * @author n0dP2
  */
 public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3139626076070675598L;
 
 	/** Creates new form M3Customizer */
 	public M3Customizer() {
@@ -33,7 +40,8 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -45,7 +53,8 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -55,9 +64,10 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -71,9 +81,10 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -85,11 +96,13 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
 		return acqConfig;
 	}
 
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
 			textX.setText(acqConfig.getSelectedHardwareParameterValue("x0"));
@@ -101,28 +114,33 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
+	@Override
 	public javax.swing.JComponent getCustomizerComponent() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/vm3/resources/m3_iconified.png"));
 	}
 
 	// ESTE � PARA ALTERAR
+	@Override
 	public String getCustomizerTitle() {
 		return "3 Strings Experiment Configuration Utility";
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
@@ -192,7 +210,8 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		sliderMassa.setMinimumSize(new java.awt.Dimension(140, 24));
 		sliderMassa.setPreferredSize(new java.awt.Dimension(140, 24));
 		sliderMassa.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sliderMassaStateChanged(evt);
 			}
 		});
@@ -203,7 +222,8 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		textMassa.setMinimumSize(new java.awt.Dimension(35, 20));
 		textMassa.setPreferredSize(new java.awt.Dimension(35, 20));
 		textMassa.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				textMassaFocusLost(evt);
 			}
 		});
@@ -234,7 +254,8 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		sliderK1.setMinimumSize(new java.awt.Dimension(140, 24));
 		sliderK1.setPreferredSize(new java.awt.Dimension(140, 24));
 		sliderK1.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sliderK1StateChanged(evt);
 			}
 		});
@@ -245,7 +266,8 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		textK1.setMinimumSize(new java.awt.Dimension(35, 20));
 		textK1.setPreferredSize(new java.awt.Dimension(35, 20));
 		textK1.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				textK1FocusLost(evt);
 			}
 		});
@@ -276,7 +298,8 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		sliderK2.setMinimumSize(new java.awt.Dimension(140, 24));
 		sliderK2.setPreferredSize(new java.awt.Dimension(140, 24));
 		sliderK2.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sliderK2StateChanged(evt);
 			}
 		});
@@ -287,7 +310,8 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		textK2.setMinimumSize(new java.awt.Dimension(35, 20));
 		textK2.setPreferredSize(new java.awt.Dimension(35, 20));
 		textK2.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				textK2FocusLost(evt);
 			}
 		});
@@ -319,7 +343,8 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		sliderK3.setMinimumSize(new java.awt.Dimension(140, 24));
 		sliderK3.setPreferredSize(new java.awt.Dimension(140, 24));
 		sliderK3.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sliderK3StateChanged(evt);
 			}
 		});
@@ -330,7 +355,8 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		textK3.setMinimumSize(new java.awt.Dimension(35, 20));
 		textK3.setPreferredSize(new java.awt.Dimension(35, 20));
 		textK3.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				textK3FocusLost(evt);
 			}
 		});
@@ -363,7 +389,8 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		sliderTBS.setMinimumSize(new java.awt.Dimension(140, 24));
 		sliderTBS.setPreferredSize(new java.awt.Dimension(140, 24));
 		sliderTBS.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sliderTBSStateChanged(evt);
 			}
 		});
@@ -374,7 +401,8 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		textTBS.setMinimumSize(new java.awt.Dimension(35, 20));
 		textTBS.setPreferredSize(new java.awt.Dimension(35, 20));
 		textTBS.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				textTBSFocusLost(evt);
 			}
 		});
@@ -407,7 +435,8 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		sliderNS.setMinimumSize(new java.awt.Dimension(140, 24));
 		sliderNS.setPreferredSize(new java.awt.Dimension(140, 24));
 		sliderNS.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sliderNSStateChanged(evt);
 			}
 		});
@@ -418,7 +447,8 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		textNS.setMinimumSize(new java.awt.Dimension(35, 20));
 		textNS.setPreferredSize(new java.awt.Dimension(35, 20));
 		textNS.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				textNSFocusLost(evt);
 			}
 		});
@@ -458,20 +488,21 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		buttonOK.setPreferredSize(new java.awt.Dimension(140, 23));
 		buttonOK.setEnabled(false);
 		buttonOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				buttonOKActionPerformed(evt);
 			}
 		});
 
 		panelDefault.add(buttonOK, new java.awt.GridBagConstraints());
 
-		buttonCancel.setText(ReCResourceBundle
-				.findStringOrDefault("m3$rec.exp.customizer.title.cancel", "Cancel"));
+		buttonCancel.setText(ReCResourceBundle.findStringOrDefault("m3$rec.exp.customizer.title.cancel", "Cancel"));
 		buttonCancel.setMaximumSize(new java.awt.Dimension(140, 23));
 		buttonCancel.setMinimumSize(new java.awt.Dimension(140, 23));
 		buttonCancel.setPreferredSize(new java.awt.Dimension(140, 23));
 		buttonCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				buttonCancelActionPerformed(evt);
 			}
 		});
@@ -484,7 +515,8 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		buttonDefault.setMinimumSize(new java.awt.Dimension(160, 23));
 		buttonDefault.setPreferredSize(new java.awt.Dimension(160, 23));
 		buttonDefault.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				buttonDefaultActionPerformed(evt);
 			}
 		});
@@ -506,7 +538,8 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		textX.setText("5.0");
 		textX.setPreferredSize(new java.awt.Dimension(40, 20));
 		textX.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				textXFocusLost(evt);
 			}
 		});
@@ -520,7 +553,8 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		textY.setText("5.0");
 		textY.setPreferredSize(new java.awt.Dimension(40, 20));
 		textY.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				textYFocusLost(evt);
 			}
 		});
@@ -615,27 +649,27 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 
 	}// GEN-END:initComponents
 
-	private void sliderNSStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_sliderNSStateChanged
+	private void sliderNSStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_sliderNSStateChanged
 		textNS.setText(String.valueOf((int) QMethods.arredondar(sliderNS.getValue() * 0.01, 0)));
 		labelT.setText(ReCResourceBundle.findStringOrDefault("m3$rec.exp.customizer.title.12", "Simulation Time")
 				+ ": " + String.valueOf((int) (sliderTBS.getValue() * 1E-7 * sliderNS.getValue())) + " s");
 	}// GEN-LAST:event_sliderNSStateChanged
 
-	private void sliderTBSStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_sliderTBSStateChanged
+	private void sliderTBSStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_sliderTBSStateChanged
 		textTBS.setText(String.valueOf((int) QMethods.arredondar(sliderTBS.getValue() * 0.01, 0)));
 		labelT.setText(ReCResourceBundle.findStringOrDefault("m3$rec.exp.customizer.title.12", "Simulation Time")
 				+ ": " + String.valueOf((int) (sliderTBS.getValue() * 1E-7 * sliderNS.getValue())) + " s");
 	}// GEN-LAST:event_sliderTBSStateChanged
 
-	private void textNSFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textNSFocusLost
+	private void textNSFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textNSFocusLost
 		checkFloat(sliderNS, textNS, 1f, 500f);
 	}// GEN-LAST:event_textNSFocusLost
 
-	private void textTBSFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textTBSFocusLost
+	private void textTBSFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textTBSFocusLost
 		checkFloat(sliderTBS, textTBS, 50f, 500f);
 	}// GEN-LAST:event_textTBSFocusLost
 
-	private void buttonDefaultActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_buttonDefaultActionPerformed
+	private void buttonDefaultActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_buttonDefaultActionPerformed
 		textX.setText("5.0");
 		textY.setText("5.0");
 		sliderMassa.setValue(1);
@@ -647,50 +681,50 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		checkFloat(null, textY, -30f, 30f);
 	}// GEN-LAST:event_buttonDefaultActionPerformed
 
-	private void textYFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textYFocusLost
+	private void textYFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textYFocusLost
 		checkFloat(null, textY, -30f, 30f);
 	}// GEN-LAST:event_textYFocusLost
 
-	private void textXFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textXFocusLost
+	private void textXFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textXFocusLost
 		checkFloat(null, textX, -30f, 30f);
 	}// GEN-LAST:event_textXFocusLost
 
-	private void sliderK3StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_sliderK3StateChanged
+	private void sliderK3StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_sliderK3StateChanged
 		textK3.setText(String.valueOf(QMethods.arredondar(sliderK3.getValue() * 0.01, 2)));
 	}// GEN-LAST:event_sliderK3StateChanged
 
-	private void textK3FocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textK3FocusLost
+	private void textK3FocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textK3FocusLost
 		checkFloat(sliderK3, textK3, 0f, 10f);
 	}// GEN-LAST:event_textK3FocusLost
 
-	private void textK2FocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textK2FocusLost
+	private void textK2FocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textK2FocusLost
 		checkFloat(sliderK2, textK2, 0f, 10f);
 	}// GEN-LAST:event_textK2FocusLost
 
-	private void sliderK2StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_sliderK2StateChanged
+	private void sliderK2StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_sliderK2StateChanged
 		textK2.setText(String.valueOf(QMethods.arredondar(sliderK2.getValue() * 0.01, 2)));
 	}// GEN-LAST:event_sliderK2StateChanged
 
-	private void textK1FocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textK1FocusLost
+	private void textK1FocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textK1FocusLost
 		checkFloat(sliderK1, textK1, 0f, 10f);
 	}// GEN-LAST:event_textK1FocusLost
 
-	private void sliderK1StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_sliderK1StateChanged
+	private void sliderK1StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_sliderK1StateChanged
 		textK1.setText(String.valueOf(QMethods.arredondar(sliderK1.getValue() * 0.01, 2)));
 	}// GEN-LAST:event_sliderK1StateChanged
 
-	private void textMassaFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textMassaFocusLost
+	private void textMassaFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_textMassaFocusLost
 		checkFloat(sliderMassa, textMassa, 0.01f, 10f);
 	}// GEN-LAST:event_textMassaFocusLost
 
-	private void sliderMassaStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_sliderMassaStateChanged
+	private void sliderMassaStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_sliderMassaStateChanged
 		textMassa.setText(String.valueOf(QMethods.arredondar(sliderMassa.getValue() * 0.01, 2)));
 	}// GEN-LAST:event_sliderMassaStateChanged
 
-	private void buttonOKActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_buttonOKActionPerformed
-		acqConfig.setTotalSamples((int) (sliderNS.getValue() / 100));
+	private void buttonOKActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_buttonOKActionPerformed
+		acqConfig.setTotalSamples((sliderNS.getValue() / 100));
 
-		acqConfig.setSelectedFrequency(new Frequency((double) sliderTBS.getValue() * 0.01, hardwareInfo
+		acqConfig.setSelectedFrequency(new Frequency(sliderTBS.getValue() * 0.01, hardwareInfo
 				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
 				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
 
@@ -703,18 +737,19 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_buttonOKActionPerformed
 
-	private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_buttonCancelActionPerformed
+	private void buttonCancelActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_buttonCancelActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_buttonCancelActionPerformed
 
-	private void checkFloat(javax.swing.JSlider slider, javax.swing.JTextField text, float min, float max) {
+	private void checkFloat(final javax.swing.JSlider slider, final javax.swing.JTextField text, final float min,
+			final float max) {
 
 		boolean panel = false;
-		String test = text.getText();
+		final String test = text.getText();
 		float num;
 		try {
 			num = Float.parseFloat(test);
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			num = min;
 		}
 
@@ -723,9 +758,10 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		}
 		try {
 			slider.setValue((int) (100 * QMethods.arredondar(num, 2)));
-		} catch (NullPointerException e) {
-			if (num == min)
+		} catch (final NullPointerException e) {
+			if (num == min) {
 				num = 5f;
+			}
 			panel = true;
 		}
 		text.setText(Float.toString(num));
@@ -743,24 +779,23 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 			buttonOK.setEnabled(true);
 		}
 		if (panel == true) {
-			((DrawableMolas) panelMolas).fazMexer(Double.parseDouble(textX.getText()), Double.parseDouble(textY
-					.getText()));
+			((DrawableMolas) panelMolas).fazMexer(Double.parseDouble(textX.getText()),
+					Double.parseDouble(textY.getText()));
 		}
 	}
 
-	public static void main(String[] args) {
-		java.util.Locale loc = new java.util.Locale("pt", "PT");
+	public static void main(final String[] args) {
+		final java.util.Locale loc = new java.util.Locale("pt", "PT");
 		java.util.Locale.setDefault(loc);
 
 		System.out.println(java.util.Locale.getDefault());
 
-		ReCResourceBundle.loadResourceBundle("m3",
-				"recresource:///pt/utl/ist/elab/client/vm3/resources/messages");
+		ReCResourceBundle.loadResourceBundle("m3", "recresource:///pt/utl/ist/elab/client/vm3/resources/messages");
 
 		System.out.println(ReCResourceBundle.findString("m3$rec.exp.display.m3.tip.3"));
-		javax.swing.JFrame frame = new javax.swing.JFrame();
+		final javax.swing.JFrame frame = new javax.swing.JFrame();
 		frame.getContentPane().add(new M3Customizer());
-		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.show();
 	}

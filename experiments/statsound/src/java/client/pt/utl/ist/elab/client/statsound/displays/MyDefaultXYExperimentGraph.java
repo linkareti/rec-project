@@ -33,6 +33,11 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  */
 public class MyDefaultXYExperimentGraph extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7325512606316862650L;
+
 	/** Creates a new instance of MyDefaultXYExperimentGraph */
 	public MyDefaultXYExperimentGraph() {
 		initComponents();
@@ -41,9 +46,9 @@ public class MyDefaultXYExperimentGraph extends javax.swing.JPanel implements Ex
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(MyDefaultXYExperimentGraph.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(MyDefaultXYExperimentGraph.UI_CLIENT_LOGGER));
 		}
 	}
 
@@ -81,30 +86,36 @@ public class MyDefaultXYExperimentGraph extends javax.swing.JPanel implements Ex
 	/** Holds value of property channelY. */
 	private int channelY;
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/chart16.gif"));
 	}
 
 	private ExpDataModel model;
 
-	public void setExpDataModel(ExpDataModel model) {
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
 		defaultXYDatasetProxy.setExpDataModel(model);
 		model.addExpDataModelListener(this);
 		this.model = model;
 	}
 
+	@Override
 	public String getName() {
 		return "Chart";
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
@@ -112,15 +123,16 @@ public class MyDefaultXYExperimentGraph extends javax.swing.JPanel implements Ex
 	public void dataModelRunning() {// BIG SILENT NOOP
 	}
 
+	@Override
 	public void dataModelStoped() {// BIG SILENT NOOP
 	}
 
-	public void headerAvailable(HardwareAcquisitionConfig header) {
-		Scale scaleX = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getSelectedScale();
-		String chnX = ReCResourceBundle.findString(header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX())
-				.getChannelName());
-		String pusX = scaleX.getPhysicsUnitSymbol();
-		String multiplierX = scaleX.getMultiplier().toString();
+	public void headerAvailable(final HardwareAcquisitionConfig header) {
+		final Scale scaleX = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getSelectedScale();
+		final String chnX = ReCResourceBundle.findString(header.getChannelsConfig(
+				defaultXYDatasetProxy.getChannelDisplayX()).getChannelName());
+		final String pusX = scaleX.getPhysicsUnitSymbol();
+		final String multiplierX = scaleX.getMultiplier().toString();
 
 		Scale scaleY;
 		String chnY;
@@ -141,23 +153,23 @@ public class MyDefaultXYExperimentGraph extends javax.swing.JPanel implements Ex
 			multiplierY = scaleY.getMultiplier().toString();
 		}
 
-		NumberAxis xAxis = new NumberAxis(chnX + " [" + multiplierX + pusX + "]");
+		final NumberAxis xAxis = new NumberAxis(chnX + " [" + multiplierX + pusX + "]");
 		xAxis.setAutoRange(true);
 		xAxis.setAutoRangeStickyZero(false);
 		xAxis.setAutoRangeIncludesZero(false);
 
-		NumberAxis yAxis = new NumberAxis(chnY + " [" + multiplierY + pusY + "]");
+		final NumberAxis yAxis = new NumberAxis(chnY + " [" + multiplierY + pusY + "]");
 		yAxis.setAutoRange(true);
 		yAxis.setAutoRangeStickyZero(false);
 		yAxis.setAutoRangeIncludesZero(false);
 
-		XYToolTipGenerator tooltipGenerator = new StandardXYToolTipGenerator();
+		final XYToolTipGenerator tooltipGenerator = new StandardXYToolTipGenerator();
 
-		XYPlot plot = new XYPlot(defaultXYDatasetProxy, xAxis, yAxis, new StandardXYItemRenderer(
+		final XYPlot plot = new XYPlot(defaultXYDatasetProxy, xAxis, yAxis, new StandardXYItemRenderer(
 				StandardXYItemRenderer.SHAPES_AND_LINES, tooltipGenerator));
 
 		chart = new JFreeChart(getChartName(header), JFreeChart.DEFAULT_TITLE_FONT, plot, true);
-		ChartPanel panel = new ChartPanel(chart);
+		final ChartPanel panel = new ChartPanel(chart);
 
 		panel.setPreferredSize(new java.awt.Dimension(350, 250));
 		panel.setMouseZoomable(true, false);
@@ -186,11 +198,12 @@ public class MyDefaultXYExperimentGraph extends javax.swing.JPanel implements Ex
 	 * }
 	 */
 
-	private boolean isScaleSet = false;
+	private final boolean isScaleSet = false;
 
 	private JFreeChart chart = null;
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 
 	}
 
@@ -208,7 +221,7 @@ public class MyDefaultXYExperimentGraph extends javax.swing.JPanel implements Ex
 	 * 
 	 * @param channelDisplayX New value of property channelDisplayX.
 	 */
-	public void setChannelDisplayX(int channelDisplayX) {
+	public void setChannelDisplayX(final int channelDisplayX) {
 		defaultXYDatasetProxy.setChannelDisplayX(channelDisplayX);
 	}
 
@@ -226,7 +239,7 @@ public class MyDefaultXYExperimentGraph extends javax.swing.JPanel implements Ex
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
-	public void setChannelDisplayY(int channelDisplayY) {
+	public void setChannelDisplayY(final int channelDisplayY) {
 		defaultXYDatasetProxy.setChannelDisplayY(channelDisplayY);
 	}
 
@@ -235,7 +248,7 @@ public class MyDefaultXYExperimentGraph extends javax.swing.JPanel implements Ex
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
-	public int getChannelDisplayAtYArray(int channel) {
+	public int getChannelDisplayAtYArray(final int channel) {
 		return defaultXYDatasetProxy.getChannelDisplayAtYArray(channel);
 	}
 
@@ -253,24 +266,30 @@ public class MyDefaultXYExperimentGraph extends javax.swing.JPanel implements Ex
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
-	public void setChannelDisplayYArray(int[] channelDisplayYArray) {
+	public void setChannelDisplayYArray(final int[] channelDisplayYArray) {
 		defaultXYDatasetProxy.setChannelDisplayYArray(channelDisplayYArray);
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
-		if (model != null)
+		if (model != null) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 

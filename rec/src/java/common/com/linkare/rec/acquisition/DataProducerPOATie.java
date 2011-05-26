@@ -12,24 +12,25 @@ public class DataProducerPOATie extends DataProducerPOA {
 
 	// Constructors
 
-	public DataProducerPOATie(com.linkare.rec.acquisition.DataProducerOperations delegate) {
-		this._impl = delegate;
+	public DataProducerPOATie(final com.linkare.rec.acquisition.DataProducerOperations delegate) {
+		_impl = delegate;
 	}
 
-	public DataProducerPOATie(com.linkare.rec.acquisition.DataProducerOperations delegate,
-			org.omg.PortableServer.POA poa) {
-		this._impl = delegate;
-		this._poa = poa;
+	public DataProducerPOATie(final com.linkare.rec.acquisition.DataProducerOperations delegate,
+			final org.omg.PortableServer.POA poa) {
+		_impl = delegate;
+		_poa = poa;
 	}
 
 	public com.linkare.rec.acquisition.DataProducerOperations _delegate() {
-		return this._impl;
+		return _impl;
 	}
 
-	public void _delegate(com.linkare.rec.acquisition.DataProducerOperations delegate) {
-		this._impl = delegate;
+	public void _delegate(final com.linkare.rec.acquisition.DataProducerOperations delegate) {
+		_impl = delegate;
 	}
 
+	@Override
 	public org.omg.PortableServer.POA _default_POA() {
 		if (_poa != null) {
 			return _poa;
@@ -40,32 +41,38 @@ public class DataProducerPOATie extends DataProducerPOA {
 
 	// ::com::linkare::rec::data::metadata::HardwareAcquisitionHeader
 	// getAcquisitionHeader() raises (NotAvailableException);
+	@Override
 	public com.linkare.rec.data.config.HardwareAcquisitionConfig getAcquisitionHeader()
 			throws com.linkare.rec.acquisition.NotAvailableException {
 		return _impl.getAcquisitionHeader();
 	} // getAcquisitionHeader
 
 	// and getSamples(0,getMaxPacketNum());
-	public com.linkare.rec.data.acquisition.SamplesPacket[] getSamples(int num_packet_start, int num_packet_end)
-			throws com.linkare.rec.acquisition.NotAnAvailableSamplesPacketException {
+	@Override
+	public com.linkare.rec.data.acquisition.SamplesPacket[] getSamples(final int num_packet_start,
+			final int num_packet_end) throws com.linkare.rec.acquisition.NotAnAvailableSamplesPacketException {
 		return _impl.getSamples(num_packet_start, num_packet_end);
 	} // getSamples
 
 	// ::org::omg::CORBA::WStringValue getConfiguratorURL();
+	@Override
 	public String getDataProducerName() {
 		return _impl.getDataProducerName();
 	} // getDataProducerName
 
 	// Version 7.0 Change this... now we may get any of the states...
+	@Override
 	public com.linkare.rec.acquisition.DataProducerState getDataProducerState() {
 		return _impl.getDataProducerState();
 	} // getDataProducerState
 
+	@Override
 	public int getMaxPacketNum() {
 		return _impl.getMaxPacketNum();
 	} // getMaxPacketNum
 
-	public void registerDataReceiver(com.linkare.rec.acquisition.DataReceiver data_receiver)
+	@Override
+	public void registerDataReceiver(final com.linkare.rec.acquisition.DataReceiver data_receiver)
 			throws com.linkare.rec.acquisition.MaximumClientsReached {
 		_impl.registerDataReceiver(data_receiver);
 	} // registerDataReceiver

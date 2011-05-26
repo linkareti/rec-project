@@ -28,7 +28,7 @@ public class GenericSerialPortDriver extends AbstractSerialPortDriver {
 	}
 
 	@Override
-	public void extraValidateConfig(HardwareAcquisitionConfig config, HardwareInfo info)
+	public void extraValidateConfig(final HardwareAcquisitionConfig config, final HardwareInfo info)
 			throws WrongConfigurationException {
 
 	}

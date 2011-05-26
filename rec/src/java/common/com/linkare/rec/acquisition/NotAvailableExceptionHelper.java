@@ -10,58 +10,59 @@ package com.linkare.rec.acquisition;
 public abstract class NotAvailableExceptionHelper {
 	private static String _id = "IDL:com/linkare/rec/acquisition/NotAvailableException:1.0";
 
-	public static void insert(org.omg.CORBA.Any a, com.linkare.rec.acquisition.NotAvailableException that) {
-		org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
-		a.type(type());
-		write(out, that);
-		a.read_value(out.create_input_stream(), type());
+	public static void insert(final org.omg.CORBA.Any a, final com.linkare.rec.acquisition.NotAvailableException that) {
+		final org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
+		a.type(NotAvailableExceptionHelper.type());
+		NotAvailableExceptionHelper.write(out, that);
+		a.read_value(out.create_input_stream(), NotAvailableExceptionHelper.type());
 	}
 
-	public static com.linkare.rec.acquisition.NotAvailableException extract(org.omg.CORBA.Any a) {
-		return read(a.create_input_stream());
+	public static com.linkare.rec.acquisition.NotAvailableException extract(final org.omg.CORBA.Any a) {
+		return NotAvailableExceptionHelper.read(a.create_input_stream());
 	}
 
 	private static org.omg.CORBA.TypeCode __typeCode = null;
 	private static boolean __active = false;
 
 	synchronized public static org.omg.CORBA.TypeCode type() {
-		if (__typeCode == null) {
+		if (NotAvailableExceptionHelper.__typeCode == null) {
 			synchronized (org.omg.CORBA.TypeCode.class) {
-				if (__typeCode == null) {
-					if (__active) {
-						return org.omg.CORBA.ORB.init().create_recursive_tc(_id);
+				if (NotAvailableExceptionHelper.__typeCode == null) {
+					if (NotAvailableExceptionHelper.__active) {
+						return org.omg.CORBA.ORB.init().create_recursive_tc(NotAvailableExceptionHelper._id);
 					}
-					__active = true;
-					org.omg.CORBA.StructMember[] _members0 = new org.omg.CORBA.StructMember[1];
+					NotAvailableExceptionHelper.__active = true;
+					final org.omg.CORBA.StructMember[] _members0 = new org.omg.CORBA.StructMember[1];
 					org.omg.CORBA.TypeCode _tcOf_members0 = null;
 					_tcOf_members0 = org.omg.CORBA.ORB.init().get_primitive_tc(org.omg.CORBA.TCKind.tk_long);
 					_members0[0] = new org.omg.CORBA.StructMember("errorCode", _tcOf_members0, null);
-					__typeCode = org.omg.CORBA.ORB.init().create_exception_tc(
+					NotAvailableExceptionHelper.__typeCode = org.omg.CORBA.ORB.init().create_exception_tc(
 							com.linkare.rec.acquisition.NotAvailableExceptionHelper.id(), "NotAvailableException",
 							_members0);
-					__active = false;
+					NotAvailableExceptionHelper.__active = false;
 				}
 			}
 		}
-		return __typeCode;
+		return NotAvailableExceptionHelper.__typeCode;
 	}
 
 	public static String id() {
-		return _id;
+		return NotAvailableExceptionHelper._id;
 	}
 
-	public static com.linkare.rec.acquisition.NotAvailableException read(org.omg.CORBA.portable.InputStream istream) {
-		com.linkare.rec.acquisition.NotAvailableException value = new com.linkare.rec.acquisition.NotAvailableException();
+	public static com.linkare.rec.acquisition.NotAvailableException read(
+			final org.omg.CORBA.portable.InputStream istream) {
+		final com.linkare.rec.acquisition.NotAvailableException value = new com.linkare.rec.acquisition.NotAvailableException();
 		// read and discard the repository ID
 		istream.read_string();
 		value.errorCode = istream.read_long();
 		return value;
 	}
 
-	public static void write(org.omg.CORBA.portable.OutputStream ostream,
-			com.linkare.rec.acquisition.NotAvailableException value) {
+	public static void write(final org.omg.CORBA.portable.OutputStream ostream,
+			final com.linkare.rec.acquisition.NotAvailableException value) {
 		// write the repository ID
-		ostream.write_string(id());
+		ostream.write_string(NotAvailableExceptionHelper.id());
 		ostream.write_long(value.errorCode);
 	}
 

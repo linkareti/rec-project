@@ -22,29 +22,29 @@ public class ServerMain {
 	private static String T_HARDWARE_LOGGER = "THardware.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(T_HARDWARE_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ServerMain.T_HARDWARE_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(T_HARDWARE_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ServerMain.T_HARDWARE_LOGGER));
 		}
 	}
 
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		try {
 			ORBBean.getORBBean();
 
-			BaseHardware baseHardware = new BaseHardware(new MomInerciaStampDriver());
+			final BaseHardware baseHardware = new BaseHardware(new MomInerciaStampDriver());
 
 			try {
 				Thread.currentThread().join();
-			} catch (Exception ignored) {
+			} catch (final Exception ignored) {
 			}
 
 			ORBBean.getORBBean().killORB();
-		} catch (Exception e) {
-			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(T_HARDWARE_LOGGER));
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(ServerMain.T_HARDWARE_LOGGER));
 		}
 	}
 

@@ -13,7 +13,8 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 @XmlType
 public class Apparatus extends DisplayNode {
 
-	//FIXME - HFernandes - Please set it to null or document why we need this anyhow! 
+	// FIXME - HFernandes - Please set it to null or document why we need this
+	// anyhow!
 	private String displayStringBundleKey = "";
 
 	private String descriptionStringBundleKey = "";
@@ -26,7 +27,7 @@ public class Apparatus extends DisplayNode {
 
 	private String dataModelClassLocationBundleKey = "";
 
-	//private String videoLocation = "";
+	// private String videoLocation = "";
 
 	private String headerDisplayClassLocationBundleKey = "";
 
@@ -102,11 +103,11 @@ public class Apparatus extends DisplayNode {
 	/**
 	 * @return the videoLocation
 	 */
-	//Delete
-	//    @XmlAttribute
-	//    public String getVideoLocation() {
-	//        return videoLocation;
-	//    }
+	// Delete
+	// @XmlAttribute
+	// public String getVideoLocation() {
+	// return videoLocation;
+	// }
 	/**
 	 * @return the headerDisplayClassLocationBundleKey
 	 */
@@ -139,7 +140,7 @@ public class Apparatus extends DisplayNode {
 		return location;
 	}
 
-	//Bruno tem de estar como XmlElement ou assim????
+	// Bruno tem de estar como XmlElement ou assim????
 	/**
 	 * @return the mediaConfig
 	 */
@@ -177,135 +178,123 @@ public class Apparatus extends DisplayNode {
 	}
 
 	/**
-	 * @param displayStringBundleKey
-	 *            the displayStringBundleKey to set
+	 * @param displayStringBundleKey the displayStringBundleKey to set
 	 */
-	public void setDisplayStringBundleKey(String displayStringBundleKey) {
+	public void setDisplayStringBundleKey(final String displayStringBundleKey) {
 		this.displayStringBundleKey = displayStringBundleKey;
 	}
 
 	/**
-	 * @param descriptionStringBundleKey
-	 *            the descriptionStringBundleKey to set
+	 * @param descriptionStringBundleKey the descriptionStringBundleKey to set
 	 */
-	public void setDescriptionStringBundleKey(String descriptionStringBundleKey) {
+	public void setDescriptionStringBundleKey(final String descriptionStringBundleKey) {
 		this.descriptionStringBundleKey = descriptionStringBundleKey;
 	}
 
 	/**
-	 * @param iconLocationBundleKey
-	 *            the iconLocationBundleKey to set
+	 * @param iconLocationBundleKey the iconLocationBundleKey to set
 	 */
-	public void setIconLocationBundleKey(String iconLocationBundleKey) {
+	public void setIconLocationBundleKey(final String iconLocationBundleKey) {
 		this.iconLocationBundleKey = iconLocationBundleKey;
 	}
 
 	/**
-	 * @param desktopLocationBundleKey
-	 *            the desktopLocationBundleKey to set
+	 * @param desktopLocationBundleKey the desktopLocationBundleKey to set
 	 */
-	public void setDesktopLocationBundleKey(String desktopLocationBundleKey) {
+	public void setDesktopLocationBundleKey(final String desktopLocationBundleKey) {
 		this.desktopLocationBundleKey = desktopLocationBundleKey;
 	}
 
 	/**
-	 * @param toolTipBundleKey
-	 *            the toolTipBundleKey to set
+	 * @param toolTipBundleKey the toolTipBundleKey to set
 	 */
-	public void setToolTipBundleKey(String toolTipBundleKey) {
+	public void setToolTipBundleKey(final String toolTipBundleKey) {
 		this.toolTipBundleKey = toolTipBundleKey;
 	}
 
 	/**
-	 * @param dataModelClassLocationBundleKey
-	 *            the dataModelClassLocationBundleKey to set
+	 * @param dataModelClassLocationBundleKey the
+	 *            dataModelClassLocationBundleKey to set
 	 */
-	public void setDataModelClassLocationBundleKey(String dataModelClassLocationBundleKey) {
+	public void setDataModelClassLocationBundleKey(final String dataModelClassLocationBundleKey) {
 		this.dataModelClassLocationBundleKey = dataModelClassLocationBundleKey;
 	}
 
 	/**
-	 * @param videoLocation
-	 *            the videoLocation to set
+	 * @param videoLocation the videoLocation to set
 	 */
-	//Delete
-	//    public void setVideoLocation(String videoLocation) {
-	//        this.videoLocation = videoLocation;
-	//    }
+	// Delete
+	// public void setVideoLocation(String videoLocation) {
+	// this.videoLocation = videoLocation;
+	// }
 	/**
-	 * @param headerDisplayClassLocationBundleKey
-	 *            the headerDisplayClassLocationBundleKey to set
+	 * @param headerDisplayClassLocationBundleKey the
+	 *            headerDisplayClassLocationBundleKey to set
 	 */
-	public void setHeaderDisplayClassLocationBundleKey(String headerDisplayClassLocationBundleKey) {
+	public void setHeaderDisplayClassLocationBundleKey(final String headerDisplayClassLocationBundleKey) {
 		this.headerDisplayClassLocationBundleKey = headerDisplayClassLocationBundleKey;
 	}
 
 	/**
-	 * @param displayFactoryClassLocationBundleKey
-	 *            the displayFactoryClassLocationBundleKey to set
+	 * @param displayFactoryClassLocationBundleKey the
+	 *            displayFactoryClassLocationBundleKey to set
 	 */
-	public void setDisplayFactoryClassLocationBundleKey(String displayFactoryClassLocationBundleKey) {
+	public void setDisplayFactoryClassLocationBundleKey(final String displayFactoryClassLocationBundleKey) {
 		this.displayFactoryClassLocationBundleKey = displayFactoryClassLocationBundleKey;
 	}
 
 	/**
-	 * @param customizerClassLocationBundleKey
-	 *            the customizerClassLocationBundleKey to set
+	 * @param customizerClassLocationBundleKey the
+	 *            customizerClassLocationBundleKey to set
 	 */
-	public void setCustomizerClassLocationBundleKey(String customizerClassLocationBundleKey) {
+	public void setCustomizerClassLocationBundleKey(final String customizerClassLocationBundleKey) {
 		this.customizerClassLocationBundleKey = customizerClassLocationBundleKey;
 	}
 
 	/**
-	 * @param location
-	 *            the location to set
+	 * @param location the location to set
 	 */
-	public void setLocation(String location) {
+	public void setLocation(final String location) {
 		this.location = location;
 	}
 
 	/**
-	 * @param mediaConfig
-	 *            the mediaConfig to set
+	 * @param mediaConfig the mediaConfig to set
 	 */
-	public void setMediaConfig(MediaConfig mediaConfig) {
+	public void setMediaConfig(final MediaConfig mediaConfig) {
 		this.mediaConfig = mediaConfig;
 	}
 
 	/**
-	 * @param defaultAcquisitionConfig
-	 *            the defaultAcquisitionConfig to set
+	 * @param defaultAcquisitionConfig the defaultAcquisitionConfig to set
 	 */
-	public void setDefaultAcquisitionConfig(List<DefaultAcquisitionConfig> defaultAcquisitionConfig) {
+	public void setDefaultAcquisitionConfig(final List<DefaultAcquisitionConfig> defaultAcquisitionConfig) {
 		this.defaultAcquisitionConfig = defaultAcquisitionConfig;
 	}
 
 	/**
-	 * @param display
-	 *            the display to set
+	 * @param display the display to set
 	 */
-	public void setDisplay(List<Display> display) {
+	public void setDisplay(final List<Display> display) {
 		this.display = display;
 	}
 
 	/**
-	 * @param webResource
-	 *            the webResource to set
+	 * @param webResource the webResource to set
 	 */
-	public void setWebResource(List<WebResource> webResource) {
+	public void setWebResource(final List<WebResource> webResource) {
 		this.webResource = webResource;
 	}
 
 	/**
-	 * @param localizationBundle
-	 *            the localizationBundle to set
+	 * @param localizationBundle the localizationBundle to set
 	 */
-	public void setLocalizationBundle(List<LocalizationBundle> localizationBundle) {
+	public void setLocalizationBundle(final List<LocalizationBundle> localizationBundle) {
 		this.localizationBundle = localizationBundle;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (obj == null) {
 			return false;
 		}
@@ -313,59 +302,62 @@ public class Apparatus extends DisplayNode {
 			return false;
 		}
 		final Apparatus other = (Apparatus) obj;
-		if ((this.displayStringBundleKey == null) ? (other.displayStringBundleKey != null) : !this.displayStringBundleKey
+		if ((displayStringBundleKey == null) ? (other.displayStringBundleKey != null) : !displayStringBundleKey
 				.equals(other.displayStringBundleKey)) {
 			return false;
 		}
-		if ((this.iconLocationBundleKey == null) ? (other.iconLocationBundleKey != null) : !this.iconLocationBundleKey
+		if ((iconLocationBundleKey == null) ? (other.iconLocationBundleKey != null) : !iconLocationBundleKey
 				.equals(other.iconLocationBundleKey)) {
 			return false;
 		}
-		if ((this.desktopLocationBundleKey == null) ? (other.desktopLocationBundleKey != null) : !this.desktopLocationBundleKey
+		if ((desktopLocationBundleKey == null) ? (other.desktopLocationBundleKey != null) : !desktopLocationBundleKey
 				.equals(other.desktopLocationBundleKey)) {
 			return false;
 		}
-		if ((this.toolTipBundleKey == null) ? (other.toolTipBundleKey != null) : !this.toolTipBundleKey.equals(other.toolTipBundleKey)) {
+		if ((toolTipBundleKey == null) ? (other.toolTipBundleKey != null) : !toolTipBundleKey
+				.equals(other.toolTipBundleKey)) {
 			return false;
 		}
-		if ((this.dataModelClassLocationBundleKey == null) ? (other.dataModelClassLocationBundleKey != null)
-				: !this.dataModelClassLocationBundleKey.equals(other.dataModelClassLocationBundleKey)) {
+		if ((dataModelClassLocationBundleKey == null) ? (other.dataModelClassLocationBundleKey != null)
+				: !dataModelClassLocationBundleKey.equals(other.dataModelClassLocationBundleKey)) {
 			return false;
 		}
-		//Delete
-		//        if ((this.videoLocation == null) ? (other.videoLocation != null) : !this.videoLocation.equals(other.videoLocation)) {
-		//            return false;
-		//        }
-		if ((this.headerDisplayClassLocationBundleKey == null) ? (other.headerDisplayClassLocationBundleKey != null)
-				: !this.headerDisplayClassLocationBundleKey.equals(other.headerDisplayClassLocationBundleKey)) {
+		// Delete
+		// if ((this.videoLocation == null) ? (other.videoLocation != null) :
+		// !this.videoLocation.equals(other.videoLocation)) {
+		// return false;
+		// }
+		if ((headerDisplayClassLocationBundleKey == null) ? (other.headerDisplayClassLocationBundleKey != null)
+				: !headerDisplayClassLocationBundleKey.equals(other.headerDisplayClassLocationBundleKey)) {
 			return false;
 		}
-		if ((this.displayFactoryClassLocationBundleKey == null) ? (other.displayFactoryClassLocationBundleKey != null)
-				: !this.displayFactoryClassLocationBundleKey.equals(other.displayFactoryClassLocationBundleKey)) {
+		if ((displayFactoryClassLocationBundleKey == null) ? (other.displayFactoryClassLocationBundleKey != null)
+				: !displayFactoryClassLocationBundleKey.equals(other.displayFactoryClassLocationBundleKey)) {
 			return false;
 		}
-		if ((this.customizerClassLocationBundleKey == null) ? (other.customizerClassLocationBundleKey != null)
-				: !this.customizerClassLocationBundleKey.equals(other.customizerClassLocationBundleKey)) {
+		if ((customizerClassLocationBundleKey == null) ? (other.customizerClassLocationBundleKey != null)
+				: !customizerClassLocationBundleKey.equals(other.customizerClassLocationBundleKey)) {
 			return false;
 		}
-		if ((this.location == null) ? (other.location != null) : !this.location.equals(other.location)) {
+		if ((location == null) ? (other.location != null) : !location.equals(other.location)) {
 			return false;
 		}
-		if (this.mediaConfig != other.mediaConfig && (this.mediaConfig == null || !this.mediaConfig.equals(other.mediaConfig))) {
+		if (mediaConfig != other.mediaConfig && (mediaConfig == null || !mediaConfig.equals(other.mediaConfig))) {
 			return false;
 		}
-		if (this.defaultAcquisitionConfig != other.defaultAcquisitionConfig
-				&& (this.defaultAcquisitionConfig == null || !this.defaultAcquisitionConfig.equals(other.defaultAcquisitionConfig))) {
+		if (defaultAcquisitionConfig != other.defaultAcquisitionConfig
+				&& (defaultAcquisitionConfig == null || !defaultAcquisitionConfig
+						.equals(other.defaultAcquisitionConfig))) {
 			return false;
 		}
-		if (this.display != other.display && (this.display == null || !this.display.equals(other.display))) {
+		if (display != other.display && (display == null || !display.equals(other.display))) {
 			return false;
 		}
-		if (this.webResource != other.webResource && (this.webResource == null || !this.webResource.equals(other.webResource))) {
+		if (webResource != other.webResource && (webResource == null || !webResource.equals(other.webResource))) {
 			return false;
 		}
-		if (this.localizationBundle != other.localizationBundle
-				&& (this.localizationBundle == null || !this.localizationBundle.equals(other.localizationBundle))) {
+		if (localizationBundle != other.localizationBundle
+				&& (localizationBundle == null || !localizationBundle.equals(other.localizationBundle))) {
 			return false;
 		}
 		return true;
@@ -374,22 +366,25 @@ public class Apparatus extends DisplayNode {
 	@Override
 	public int hashCode() {
 		int hash = 7;
-		hash = 83 * hash + (this.displayStringBundleKey != null ? this.displayStringBundleKey.hashCode() : 0);
-		hash = 83 * hash + (this.iconLocationBundleKey != null ? this.iconLocationBundleKey.hashCode() : 0);
-		hash = 83 * hash + (this.desktopLocationBundleKey != null ? this.desktopLocationBundleKey.hashCode() : 0);
-		hash = 83 * hash + (this.toolTipBundleKey != null ? this.toolTipBundleKey.hashCode() : 0);
-		hash = 83 * hash + (this.dataModelClassLocationBundleKey != null ? this.dataModelClassLocationBundleKey.hashCode() : 0);
-		//Delete
-		//        hash = 83 * hash + (this.videoLocation != null ? this.videoLocation.hashCode() : 0);
-		hash = 83 * hash + (this.headerDisplayClassLocationBundleKey != null ? this.headerDisplayClassLocationBundleKey.hashCode() : 0);
-		hash = 83 * hash + (this.displayFactoryClassLocationBundleKey != null ? this.displayFactoryClassLocationBundleKey.hashCode() : 0);
-		hash = 83 * hash + (this.customizerClassLocationBundleKey != null ? this.customizerClassLocationBundleKey.hashCode() : 0);
-		hash = 83 * hash + (this.location != null ? this.location.hashCode() : 0);
-		hash = 83 * hash + (this.mediaConfig != null ? this.mediaConfig.hashCode() : 0);
-		hash = 83 * hash + (this.defaultAcquisitionConfig != null ? this.defaultAcquisitionConfig.hashCode() : 0);
-		hash = 83 * hash + (this.display != null ? this.display.hashCode() : 0);
-		hash = 83 * hash + (this.webResource != null ? this.webResource.hashCode() : 0);
-		hash = 83 * hash + (this.localizationBundle != null ? this.localizationBundle.hashCode() : 0);
+		hash = 83 * hash + (displayStringBundleKey != null ? displayStringBundleKey.hashCode() : 0);
+		hash = 83 * hash + (iconLocationBundleKey != null ? iconLocationBundleKey.hashCode() : 0);
+		hash = 83 * hash + (desktopLocationBundleKey != null ? desktopLocationBundleKey.hashCode() : 0);
+		hash = 83 * hash + (toolTipBundleKey != null ? toolTipBundleKey.hashCode() : 0);
+		hash = 83 * hash + (dataModelClassLocationBundleKey != null ? dataModelClassLocationBundleKey.hashCode() : 0);
+		// Delete
+		// hash = 83 * hash + (this.videoLocation != null ?
+		// this.videoLocation.hashCode() : 0);
+		hash = 83 * hash
+				+ (headerDisplayClassLocationBundleKey != null ? headerDisplayClassLocationBundleKey.hashCode() : 0);
+		hash = 83 * hash
+				+ (displayFactoryClassLocationBundleKey != null ? displayFactoryClassLocationBundleKey.hashCode() : 0);
+		hash = 83 * hash + (customizerClassLocationBundleKey != null ? customizerClassLocationBundleKey.hashCode() : 0);
+		hash = 83 * hash + (location != null ? location.hashCode() : 0);
+		hash = 83 * hash + (mediaConfig != null ? mediaConfig.hashCode() : 0);
+		hash = 83 * hash + (defaultAcquisitionConfig != null ? defaultAcquisitionConfig.hashCode() : 0);
+		hash = 83 * hash + (display != null ? display.hashCode() : 0);
+		hash = 83 * hash + (webResource != null ? webResource.hashCode() : 0);
+		hash = 83 * hash + (localizationBundle != null ? localizationBundle.hashCode() : 0);
 		return hash;
 	}
 

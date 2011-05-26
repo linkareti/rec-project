@@ -27,12 +27,16 @@ import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 
 public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelListener {
-	private DrawingPanel drawingPanel;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8758703409527846537L;
+	private final DrawingPanel drawingPanel;
 	private DrawableShape f1 = null;
 	private DrawableShape f2 = null;
 	private DrawableShape pto = null;
-	private VectorPlot campo;
-	private GridPointData data;
+	private final VectorPlot campo;
+	private final GridPointData data;
 
 	/** Creates a new instance of Animation */
 	public Animation() {
@@ -57,15 +61,16 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 		this.add(drawingPanel);
 	}
 
-	public static void main(String args[]) {
-		javax.swing.JFrame dummy = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new Animation());
 		dummy.pack();
 		dummy.show();
 	}
 
 	// Chegaram novas amostras!
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 		// Esta e' a maneira classica de tirar as amostras dos canais que nos
 		// interessam!
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
@@ -81,14 +86,17 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 	}
 
 	// Queremos fazer alguma coisa quandos os dados acabarem?
+	@Override
 	public void dataModelEnded() {
 	}
 
 	// Queremos fazer alguma coisa quandos acontecer um erro?
+	@Override
 	public void dataModelError() {
 	}
 
 	// Queremos fazer alguma coisa quando for dado o start e existirem dados?
+	@Override
 	public void dataModelStarted() {
 	}
 
@@ -96,8 +104,9 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 	// dados?
 	// Eu garanto que quando chegamos a este estado, ja' existe o header da
 	// experiencia!
+	@Override
 	public void dataModelStartedNoData() {
-		HardwareAcquisitionConfig header = model.getAcquisitionConfig();
+		final HardwareAcquisitionConfig header = model.getAcquisitionConfig();
 		// vamos la' ver o que o utilizador escolheu, para colocar a animacao
 		// nas posicoes iniciais correctas!
 		double value;
@@ -114,26 +123,32 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 	}
 
 	// Queremos fazer alguma coisa quando for dado parado?
+	@Override
 	public void dataModelStoped() {
 	}
 
 	// Queremos fazer alguma coisa em estado de espera?
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
 	// O icon associado a este painel!
+	@Override
 	public javax.swing.Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
@@ -141,11 +156,14 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 	// Este codigo e' SEMPRE igual e tem de existir!
 	private ExpDataModel model = null;
 
-	public void setExpDataModel(ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
+		if (this.model != null) {
 			this.model.removeExpDataModelListener(this);
+		}
 		this.model = model;
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 	}
 }

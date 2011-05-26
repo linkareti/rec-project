@@ -33,10 +33,10 @@ import java.util.List;
 import org.videolan.jvlc.event.MediaPlayerCallback;
 import org.videolan.jvlc.event.MediaPlayerListener;
 import org.videolan.jvlc.internal.LibVlc;
-import org.videolan.jvlc.internal.LibVlcEventType;
 import org.videolan.jvlc.internal.LibVlc.LibVlcEventManager;
 import org.videolan.jvlc.internal.LibVlc.LibVlcMediaInstance;
 import org.videolan.jvlc.internal.LibVlc.libvlc_exception_t;
+import org.videolan.jvlc.internal.LibVlcEventType;
 
 import com.sun.jna.Native;
 
@@ -48,7 +48,7 @@ public class MediaPlayer {
 
 	private final LibVlcEventManager eventManager;
 
-	private List<MediaPlayerCallback> callbacks = new ArrayList<MediaPlayerCallback>();
+	private final List<MediaPlayerCallback> callbacks = new ArrayList<MediaPlayerCallback>();
 
 	private MediaDescriptor mediaDescriptor;
 
@@ -62,23 +62,23 @@ public class MediaPlayer {
 	 */
 	// Bruno verificar se permite usar sempre o mesmo player durante toda a
 	// execução.
-	public MediaPlayer(JVLC jvlc) {
+	public MediaPlayer(final JVLC jvlc) {
 
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc = jvlc.getLibvlc();
-		this.instance = libvlc.libvlc_media_player_new(jvlc.getInstance(), exception);
+		instance = libvlc.libvlc_media_player_new(jvlc.getInstance(), exception);
 		eventManager = libvlc.libvlc_media_player_event_manager(instance, exception);
 	}
 
-	MediaPlayer(JVLC jvlc, LibVlcMediaInstance instance) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	MediaPlayer(final JVLC jvlc, final LibVlcMediaInstance instance) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		this.instance = instance;
 		libvlc = jvlc.getLibvlc();
 		eventManager = libvlc.libvlc_media_player_event_manager(instance, exception);
 	}
 
-	public MediaPlayer(MediaDescriptor mediaDescriptor) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public MediaPlayer(final MediaDescriptor mediaDescriptor) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc = mediaDescriptor.getLibvlc();
 		instance = libvlc.libvlc_media_player_new_from_media(mediaDescriptor.getInstance(), exception);
 		eventManager = libvlc.libvlc_media_player_event_manager(instance, exception);
@@ -90,47 +90,47 @@ public class MediaPlayer {
 	}
 
 	public void play() {
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc.libvlc_media_player_play(instance, exception);
 	}
 
 	public void stop() {
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc.libvlc_media_player_stop(instance, exception);
 	}
 
 	public void pause() {
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc.libvlc_media_player_pause(instance, exception);
 	}
 
 	public long getLength() {
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		return libvlc.libvlc_media_player_get_length(instance, exception);
 	}
 
 	public long getTime() {
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		return libvlc.libvlc_media_player_get_time(instance, exception);
 	}
 
-	public void setTime(long time) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public void setTime(final long time) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc.libvlc_media_player_set_time(instance, time, exception);
 	}
 
 	public float getPosition() {
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		return libvlc.libvlc_media_player_get_position(instance, exception);
 	}
 
-	public void setPosition(float position) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public void setPosition(final float position) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc.libvlc_media_player_set_position(instance, position, exception);
 	}
 
 	public boolean willPlay() {
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		return (libvlc.libvlc_media_player_will_play(instance, exception) == 1);
 	}
 
@@ -142,46 +142,46 @@ public class MediaPlayer {
 	 * @param width
 	 * @param height
 	 */
-	public void resize(int width, int height) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public void resize(final int width, final int height) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc.libvlc_video_resize(instance, width, height, exception);
 	}
 
 	public float getRate() {
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		return libvlc.libvlc_media_player_get_rate(instance, exception);
 	}
 
-	public void setRate(float rate) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public void setRate(final float rate) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc.libvlc_media_player_set_rate(instance, rate, exception);
 	}
 
-	public void setVideoOutput(Canvas canvas) {
-		int drawable = (int) Native.getComponentID(canvas);
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public void setVideoOutput(final Canvas canvas) {
+		final int drawable = (int) Native.getComponentID(canvas);
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc.libvlc_media_player_set_drawable(instance, drawable, exception);
 	}
 
 	public boolean hasVideoOutput() {
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		return (libvlc.libvlc_media_player_has_vout(instance, exception) == 1);
 	}
 
 	public float getFPS() {
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		return libvlc.libvlc_media_player_get_fps(instance, exception);
 	}
 
 	public void addListener(final MediaPlayerListener listener) {
-		MediaPlayerCallback callback = new MediaPlayerCallback(this, listener);
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final MediaPlayerCallback callback = new MediaPlayerCallback(this, listener);
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		// Bruno adicionar tb o buffering e tv o opening?
-		for (LibVlcEventType event : EnumSet.range(LibVlcEventType.libvlc_MediaPlayerOpening,
+		for (final LibVlcEventType event : EnumSet.range(LibVlcEventType.libvlc_MediaPlayerOpening,
 		// LibVlcEventType.libvlc_MediaPlayerPlaying,
-				// Bruno se em vez de time changed, for a position changed??????
-				// altera em pausa???
-				// LibVlcEventType.libvlc_MediaPlayerTimeChanged))
+		// Bruno se em vez de time changed, for a position changed??????
+		// altera em pausa???
+		// LibVlcEventType.libvlc_MediaPlayerTimeChanged))
 				LibVlcEventType.libvlc_MediaPlayerPositionChanged)) {
 			// Bruno de alguma forma não fazer event attach para determinado
 			// tipo. Adicionar tb o pause ao range??????
@@ -200,13 +200,13 @@ public class MediaPlayer {
 		}
 		try {
 			detachCallbacks();
-		} catch (Throwable e) {
+		} catch (final Throwable e) {
 			// TODO tratar excepção correctamente
 			e.printStackTrace();
 		}
 		try {
 			libvlc.libvlc_media_player_release(instance);
-		} catch (Throwable e) {
+		} catch (final Throwable e) {
 			// TODO tratar excepção correctamente
 			e.printStackTrace();
 		}
@@ -218,9 +218,9 @@ public class MediaPlayer {
 	 */
 	public void detachCallbacks() {
 
-		libvlc_exception_t exception = new libvlc_exception_t();
-		for (MediaPlayerCallback callback : callbacks) {
-			for (LibVlcEventType event : EnumSet.range(LibVlcEventType.libvlc_MediaPlayerOpening,
+		final libvlc_exception_t exception = new libvlc_exception_t();
+		for (final MediaPlayerCallback callback : callbacks) {
+			for (final LibVlcEventType event : EnumSet.range(LibVlcEventType.libvlc_MediaPlayerOpening,
 			// LibVlcEventType.libvlc_MediaPlayerPlaying,
 					LibVlcEventType.libvlc_MediaPlayerPositionChanged)) {
 				libvlc.libvlc_event_detach(eventManager, event.ordinal(), callback, null, exception);

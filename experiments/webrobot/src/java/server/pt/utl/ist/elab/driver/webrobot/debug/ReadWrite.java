@@ -12,6 +12,10 @@ package pt.utl.ist.elab.driver.webrobot.debug;
  */
 public class ReadWrite extends javax.swing.JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8770062658409056475L;
 	private pt.utl.ist.elab.driver.webrobot.serial.SerialComm serialComm;
 
 	/** Creates new form ReadWrite */
@@ -20,7 +24,7 @@ public class ReadWrite extends javax.swing.JFrame {
 		initComponents();
 	}
 
-	public ReadWrite(boolean asDriverDebug) {
+	public ReadWrite(final boolean asDriverDebug) {
 		initComponents();
 	}
 
@@ -73,7 +77,8 @@ public class ReadWrite extends javax.swing.JFrame {
 
 		setTitle("Debug state machine");
 		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent evt) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent evt) {
 				exitForm(evt);
 			}
 		});
@@ -90,7 +95,8 @@ public class ReadWrite extends javax.swing.JFrame {
 
 		jButtonWrite.setText("Write");
 		jButtonWrite.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonWriteActionPerformed(evt);
 			}
 		});
@@ -99,7 +105,8 @@ public class ReadWrite extends javax.swing.JFrame {
 
 		jButtonRead.setText("Read");
 		jButtonRead.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonReadActionPerformed(evt);
 			}
 		});
@@ -116,7 +123,8 @@ public class ReadWrite extends javax.swing.JFrame {
 		jProgressBarIR0.setMaximum(255);
 		jProgressBarIR0.setBorder(new javax.swing.border.TitledBorder("IR0"));
 		jProgressBarIR0.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jProgressBarIR0StateChanged(evt);
 			}
 		});
@@ -129,7 +137,8 @@ public class ReadWrite extends javax.swing.JFrame {
 		jProgressBarIR1.setMaximum(255);
 		jProgressBarIR1.setBorder(new javax.swing.border.TitledBorder("IR1"));
 		jProgressBarIR1.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jProgressBarIR1StateChanged(evt);
 			}
 		});
@@ -148,7 +157,8 @@ public class ReadWrite extends javax.swing.JFrame {
 		jProgressBarIR2.setMaximum(255);
 		jProgressBarIR2.setBorder(new javax.swing.border.TitledBorder("IR2"));
 		jProgressBarIR2.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jProgressBarIR2StateChanged(evt);
 			}
 		});
@@ -167,7 +177,8 @@ public class ReadWrite extends javax.swing.JFrame {
 		jProgressBarIR3.setMaximum(255);
 		jProgressBarIR3.setBorder(new javax.swing.border.TitledBorder("IR3"));
 		jProgressBarIR3.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jProgressBarIR3StateChanged(evt);
 			}
 		});
@@ -186,7 +197,8 @@ public class ReadWrite extends javax.swing.JFrame {
 		jProgressBarIR4.setMaximum(255);
 		jProgressBarIR4.setBorder(new javax.swing.border.TitledBorder("IR4"));
 		jProgressBarIR4.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jProgressBarIR4StateChanged(evt);
 			}
 		});
@@ -205,7 +217,8 @@ public class ReadWrite extends javax.swing.JFrame {
 		jProgressBarIR5.setMaximum(255);
 		jProgressBarIR5.setBorder(new javax.swing.border.TitledBorder("IR5"));
 		jProgressBarIR5.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jProgressBarIR5StateChanged(evt);
 			}
 		});
@@ -224,7 +237,8 @@ public class ReadWrite extends javax.swing.JFrame {
 		jProgressBarIR6.setMaximum(255);
 		jProgressBarIR6.setBorder(new javax.swing.border.TitledBorder("IR6"));
 		jProgressBarIR6.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jProgressBarIR6StateChanged(evt);
 			}
 		});
@@ -243,7 +257,8 @@ public class ReadWrite extends javax.swing.JFrame {
 		jProgressBarIR7.setMaximum(255);
 		jProgressBarIR7.setBorder(new javax.swing.border.TitledBorder("IR7"));
 		jProgressBarIR7.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jProgressBarIR7StateChanged(evt);
 			}
 		});
@@ -316,39 +331,39 @@ public class ReadWrite extends javax.swing.JFrame {
 		pack();
 	}// GEN-END:initComponents
 
-	private void jProgressBarIR7StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jProgressBarIR7StateChanged
+	private void jProgressBarIR7StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jProgressBarIR7StateChanged
 		jTextFieldIR7.setText("" + jProgressBarIR7.getValue());
 	}// GEN-LAST:event_jProgressBarIR7StateChanged
 
-	private void jProgressBarIR6StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jProgressBarIR6StateChanged
+	private void jProgressBarIR6StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jProgressBarIR6StateChanged
 		jTextFieldIR6.setText("" + jProgressBarIR6.getValue());
 	}// GEN-LAST:event_jProgressBarIR6StateChanged
 
-	private void jProgressBarIR5StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jProgressBarIR5StateChanged
+	private void jProgressBarIR5StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jProgressBarIR5StateChanged
 		jTextFieldIR5.setText("" + jProgressBarIR5.getValue());
 	}// GEN-LAST:event_jProgressBarIR5StateChanged
 
-	private void jProgressBarIR4StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jProgressBarIR4StateChanged
+	private void jProgressBarIR4StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jProgressBarIR4StateChanged
 		jTextFieldIR4.setText("" + jProgressBarIR4.getValue());
 	}// GEN-LAST:event_jProgressBarIR4StateChanged
 
-	private void jProgressBarIR3StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jProgressBarIR3StateChanged
+	private void jProgressBarIR3StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jProgressBarIR3StateChanged
 		jTextFieldIR3.setText("" + jProgressBarIR3.getValue());
 	}// GEN-LAST:event_jProgressBarIR3StateChanged
 
-	private void jProgressBarIR2StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jProgressBarIR2StateChanged
+	private void jProgressBarIR2StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jProgressBarIR2StateChanged
 		jTextFieldIR2.setText("" + jProgressBarIR2.getValue());
 	}// GEN-LAST:event_jProgressBarIR2StateChanged
 
-	private void jProgressBarIR1StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jProgressBarIR1StateChanged
+	private void jProgressBarIR1StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jProgressBarIR1StateChanged
 		jTextFieldIR1.setText("" + jProgressBarIR1.getValue());
 	}// GEN-LAST:event_jProgressBarIR1StateChanged
 
-	private void jProgressBarIR0StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jProgressBarIR0StateChanged
+	private void jProgressBarIR0StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jProgressBarIR0StateChanged
 		jTextFieldIR0.setText("" + jProgressBarIR0.getValue());
 	}// GEN-LAST:event_jProgressBarIR0StateChanged
 
-	private void jButtonReadActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonReadActionPerformed
+	private void jButtonReadActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonReadActionPerformed
 		serialComm.write(83);
 		serialComm.write(69);
 		serialComm.write(78);
@@ -356,7 +371,7 @@ public class ReadWrite extends javax.swing.JFrame {
 		serialComm.setReadMode();
 	}// GEN-LAST:event_jButtonReadActionPerformed
 
-	private void jButtonWriteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonWriteActionPerformed
+	private void jButtonWriteActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonWriteActionPerformed
 		serialComm.write(80);
 		serialComm.write(87);
 		serialComm.write(77);
@@ -365,11 +380,11 @@ public class ReadWrite extends javax.swing.JFrame {
 	}// GEN-LAST:event_jButtonWriteActionPerformed
 
 	/** Exit the Application */
-	private void exitForm(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_exitForm
+	private void exitForm(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_exitForm
 		System.exit(0);
 	}// GEN-LAST:event_exitForm
 
-	public void setValues(int[] values) {
+	public void setValues(final int[] values) {
 		for (int i = 0; i < values.length; i++) {
 			if (values[i] < 0) {
 				values[i] += 256;
@@ -429,14 +444,14 @@ public class ReadWrite extends javax.swing.JFrame {
 		jTextFieldA4.setText("" + values[12]);
 	}
 
-	public void setSerialText(String text) {
+	public void setSerialText(final String text) {
 		// jTextArea1.setText(text+"\n");
 	}
 
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 		new ReadWrite().show();
 	}
 

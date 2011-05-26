@@ -16,49 +16,56 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  */
 public class SoundXYDataSetProxy extends org.jfree.data.xy.AbstractXYDataset implements
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3302517327200027845L;
+
 	private ExpDataModel expDataModel;
 
 	private short[] audioDataLeft;
 	private short[] audioDataRight;
-	private double sampleRate = 48000.0;
+	private final double sampleRate = 48000.0;
 
 	/** Creates a new instance of SoundXYDataSetProxy */
 	public SoundXYDataSetProxy() {
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
-	public void headerAvailable(HardwareAcquisitionConfig header) {
+	public void headerAvailable(final HardwareAcquisitionConfig header) {
 		fireDatasetChanged();
 	}
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 		for (int s = evt.getSamplesStartIndex(); s <= evt.getSamplesEndIndex(); s++) {
 			if (expDataModel.getValueAt(s, expDataModel.getChannelIndex("wave")) == null) {
 				System.out.println("Returning null, for the channel:" + expDataModel.getChannelIndex("wave"));
 				return;
 			}
 			System.out.println("Got bytes");
-			byte[] audioBytes = expDataModel.getValueAt(s, expDataModel.getChannelIndex("wave")).getValue()
+			final byte[] audioBytes = expDataModel.getValueAt(s, expDataModel.getChannelIndex("wave")).getValue()
 					.getByteArrayValue().getData();
 			short[] leftData = null;
 			short[] rightData = null;
 			leftData = new short[audioBytes.length / 4];
 			rightData = new short[audioBytes.length / 4];
 			for (int i = 0; i + 4 <= audioBytes.length; i += 4) {
-				short LSBLeft = audioBytes[i];
-				short MSBLeft = audioBytes[i + 1];
-				short LSBRight = audioBytes[i + 2];
-				short MSBRight = audioBytes[i + 3];
+				final short LSBLeft = audioBytes[i];
+				final short MSBLeft = audioBytes[i + 1];
+				final short LSBRight = audioBytes[i + 2];
+				final short MSBRight = audioBytes[i + 3];
 
-				short left = (short) (MSBLeft << 8 | (255 & LSBLeft));
-				short right = (short) (MSBRight << 8 | (255 & LSBRight));
+				final short left = (short) (MSBLeft << 8 | (255 & LSBLeft));
+				final short right = (short) (MSBRight << 8 | (255 & LSBRight));
 				leftData[i / 4] = left;
 				rightData[i / 4] = right;
 			}
-			this.audioDataLeft = leftData;
-			this.audioDataRight = rightData;
+			audioDataLeft = leftData;
+			audioDataRight = rightData;
 			System.out.println("Dataset changed");
 			fireDatasetChanged();
 		}
@@ -69,6 +76,7 @@ public class SoundXYDataSetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 	 * 
 	 * @return the series count.
 	 */
+	@Override
 	public int getSeriesCount() {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			return 0;
@@ -83,7 +91,8 @@ public class SoundXYDataSetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 	 * 
 	 * @return the name of the series.
 	 */
-	public Comparable getSeriesKey(int series) {
+	@Override
+	public Comparable getSeriesKey(final int series) {
 		if (expDataModel == null || !expDataModel.isDataAvailable() || series >= expDataModel.getChannelCount()) {
 			return null;
 		}
@@ -100,7 +109,8 @@ public class SoundXYDataSetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 	 * 
 	 * @return the number of items within the series.
 	 */
-	public int getItemCount(int series) {
+	@Override
+	public int getItemCount(final int series) {
 		if (expDataModel == null || !expDataModel.isDataAvailable() || series >= expDataModel.getChannelCount()) {
 			return 0;
 		}
@@ -130,7 +140,8 @@ public class SoundXYDataSetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 	 * 
 	 * @return the x-value.
 	 */
-	public double getXValue(int series, int item) {
+	@Override
+	public double getXValue(final int series, final int item) {
 		if (expDataModel == null || !expDataModel.isDataAvailable() || series >= expDataModel.getChannelCount()) {
 			return 0;
 		}
@@ -149,7 +160,8 @@ public class SoundXYDataSetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 		}
 	}
 
-	public double getYValue(int series, int item) {
+	@Override
+	public double getYValue(final int series, final int item) {
 		if (expDataModel == null || !expDataModel.isDataAvailable() || series >= expDataModel.getChannelCount()) {
 			return 0;
 		}
@@ -174,7 +186,7 @@ public class SoundXYDataSetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 	 * @return Value of property expDataModel.
 	 */
 	public ExpDataModel getExpDataModel() {
-		return this.expDataModel;
+		return expDataModel;
 	}
 
 	/**
@@ -182,9 +194,10 @@ public class SoundXYDataSetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 	 * 
 	 * @param expDataModel New value of property expDataModel.
 	 */
-	public void setExpDataModel(ExpDataModel expDataModel) {
-		if (expDataModel != null)
+	public void setExpDataModel(final ExpDataModel expDataModel) {
+		if (expDataModel != null) {
 			expDataModel.removeExpDataModelListener(this);
+		}
 
 		this.expDataModel = expDataModel;
 
@@ -195,31 +208,39 @@ public class SoundXYDataSetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 		fireDatasetChanged();
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 		fireDatasetChanged();
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
-	public Number getX(int param, int param1) {
+	@Override
+	public Number getX(final int param, final int param1) {
 		return new Double(getXValue(param, param1));
 	}
 
-	public Number getY(int param, int param1) {
+	@Override
+	public Number getY(final int param, final int param1) {
 		return new Double(getYValue(param, param1));
 	}
 
+	@Override
 	public org.jfree.data.DomainOrder getDomainOrder() {
 		return org.jfree.data.DomainOrder.ASCENDING;
 	}

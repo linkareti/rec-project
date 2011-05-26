@@ -23,29 +23,33 @@ public class Handler extends java.net.URLStreamHandler {
 	/**
 	 * 
 	 */
-	public static final String RECRESOURCE_PROTOCOL_IDENTIFIER_ABSOLUTE_URL = RECRESOURCE_PROTOCOL_IDENTIFIER + "/";
+	public static final String RECRESOURCE_PROTOCOL_IDENTIFIER_ABSOLUTE_URL = Handler.RECRESOURCE_PROTOCOL_IDENTIFIER
+			+ "/";
 
-	public URLConnection openConnection(URL url) {
-		if (!url.toExternalForm().startsWith(RECRESOURCE_PROTOCOL_IDENTIFIER))
+	@Override
+	public URLConnection openConnection(final URL url) {
+		if (!url.toExternalForm().startsWith(Handler.RECRESOURCE_PROTOCOL_IDENTIFIER)) {
 			return null;
+		}
 
-		boolean rootClassLoader = url.toExternalForm().startsWith(RECRESOURCE_PROTOCOL_IDENTIFIER_ABSOLUTE_URL);
+		final boolean rootClassLoader = url.toExternalForm().startsWith(
+				Handler.RECRESOURCE_PROTOCOL_IDENTIFIER_ABSOLUTE_URL);
 
 		try {
 			URL resourceURL = null;
 
 			if (rootClassLoader) {
 				resourceURL = getClass().getClassLoader().getResource(
-						url.toExternalForm().substring(RECRESOURCE_PROTOCOL_IDENTIFIER_ABSOLUTE_URL.length()));
+						url.toExternalForm().substring(Handler.RECRESOURCE_PROTOCOL_IDENTIFIER_ABSOLUTE_URL.length()));
 			} else {
 				resourceURL = getClass().getResource(
-						url.toExternalForm().substring(RECRESOURCE_PROTOCOL_IDENTIFIER.length()));
+						url.toExternalForm().substring(Handler.RECRESOURCE_PROTOCOL_IDENTIFIER.length()));
 
 				// Maybe the user forgot to define the three (3) slashes but
 				// still wants an absolute URL... Try it!
 				if (resourceURL == null) {
 					resourceURL = getClass().getClassLoader().getResource(
-							url.toExternalForm().substring(RECRESOURCE_PROTOCOL_IDENTIFIER.length()));
+							url.toExternalForm().substring(Handler.RECRESOURCE_PROTOCOL_IDENTIFIER.length()));
 				}
 			}
 
@@ -54,7 +58,7 @@ public class Handler extends java.net.URLStreamHandler {
 			}
 			return resourceURL.openConnection();
 
-		} catch (java.io.IOException e) {
+		} catch (final java.io.IOException e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -67,7 +71,8 @@ public class Handler extends java.net.URLStreamHandler {
 	 * @param u the URL.
 	 * @return a string representation of the <code>URL</code> argument.
 	 */
-	protected String toExternalForm(URL u) {
+	@Override
+	protected String toExternalForm(final URL u) {
 		return u.getProtocol() + "://" + u.getHost() + (u.getPort() != -1 ? ":" + u.getPort() : "") + u.getFile();
 	}
 

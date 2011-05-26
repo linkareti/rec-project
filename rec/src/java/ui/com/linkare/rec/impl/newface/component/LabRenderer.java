@@ -17,10 +17,15 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.newface.config.Lab;
 
 /**
- *
+ * 
  * @author npadriano
  */
 public class LabRenderer extends JLabel implements ListCellRenderer {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4569484644830803732L;
 
 	private static final Border NO_FOCUS_BORDER = new EmptyBorder(1, 2, 1, 2);
 
@@ -29,16 +34,16 @@ public class LabRenderer extends JLabel implements ListCellRenderer {
 	public LabRenderer() {
 		super();
 		setOpaque(true);
-		setBorder(NO_FOCUS_BORDER);
+		setBorder(LabRenderer.NO_FOCUS_BORDER);
 	}
 
 	@Override
-	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-		
+	public Component getListCellRendererComponent(final JList list, final Object value, final int index,
+			final boolean isSelected, final boolean cellHasFocus) {
+
 		if (value != null) {
 			// Value must be an Lab
 			lab = (Lab) value;
-
 
 			if (isSelected) {
 				setBackground(list.getSelectionBackground());

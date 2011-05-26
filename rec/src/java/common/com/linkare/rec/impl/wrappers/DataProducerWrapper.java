@@ -35,14 +35,14 @@ public class DataProducerWrapper implements DataProducerOperations {
 	private static String DATA_PRODUCER_LOGGER = "DataProducer.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(DATA_PRODUCER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(DATA_PRODUCER_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER));
 		}
 	}
 
 	/** Creates a new instance of DataProducerWrapper */
-	public DataProducerWrapper(DataProducer delegate) {
+	public DataProducerWrapper(final DataProducer delegate) {
 		this.delegate = delegate;
 		checkConnect();
 	}
@@ -54,126 +54,134 @@ public class DataProducerWrapper implements DataProducerOperations {
 
 	private void checkConnect() {
 		if (delegate == null) {
-			Logger.getLogger(DATA_PRODUCER_LOGGER).log(Level.WARNING,
+			Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER).log(Level.WARNING,
 					"DataProducer  has not been set! Please set it first...");
 			connected = false;
 		}
 		try {
-			if (delegate._non_existent())
+			if (delegate._non_existent()) {
 				connected = false;
-			else
+			} else {
 				connected = true;
-		} catch (Exception e) {
+			}
+		} catch (final Exception e) {
 
 			LoggerUtil.logThrowable("Couldn't determine remote existence of DataProducer. Assuming disconnected...", e,
-					Logger.getLogger(DATA_PRODUCER_LOGGER));
+					Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER));
 			connected = false;
 		}
 	}
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionHeader() throws NotAvailableException {
 		if (delegate == null) {
-			Logger.getLogger(DATA_PRODUCER_LOGGER).log(Level.WARNING,
+			Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER).log(Level.WARNING,
 					"DataProducer has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.getAcquisitionHeader();
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(DATA_PRODUCER_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER));
 			checkConnect();
 			return null;
 		}
 	}
 
-	public SamplesPacket[] getSamples(int num_packet_start, int num_packet_end)
+	@Override
+	public SamplesPacket[] getSamples(final int num_packet_start, final int num_packet_end)
 			throws NotAnAvailableSamplesPacketException {
 		if (delegate == null) {
-			Logger.getLogger(DATA_PRODUCER_LOGGER).log(Level.WARNING,
+			Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER).log(Level.WARNING,
 					"DataProducer has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.getSamples(num_packet_start, num_packet_end);
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(DATA_PRODUCER_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER));
 			checkConnect();
 			return null;
 		}
 	}
 
+	@Override
 	public String getDataProducerName() {
 		if (delegate == null) {
-			Logger.getLogger(DATA_PRODUCER_LOGGER).log(Level.WARNING,
+			Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER).log(Level.WARNING,
 					"DataProducer has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.getDataProducerName();
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(DATA_PRODUCER_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER));
 			checkConnect();
 			return null;
 		}
 	}
 
+	@Override
 	public int getMaxPacketNum() {
 		if (delegate == null) {
-			Logger.getLogger(DATA_PRODUCER_LOGGER).log(Level.WARNING,
+			Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER).log(Level.WARNING,
 					"DataProducer has not been set! Please set it first...");
 			return -1;
 		}
 
 		try {
 			return delegate.getMaxPacketNum();
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(DATA_PRODUCER_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER));
 			checkConnect();
 			return -1;
 		}
 	}
 
+	@Override
 	public DataProducerState getDataProducerState() {
 		if (delegate == null) {
-			Logger.getLogger(DATA_PRODUCER_LOGGER).log(Level.WARNING,
+			Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER).log(Level.WARNING,
 					"DataProducer has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.getDataProducerState();
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable("Error calling getDataProducerState...", e, Logger.getLogger(DATA_PRODUCER_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable("Error calling getDataProducerState...", e,
+					Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER));
 			checkConnect();
 			return null;
 		}
 	}
 
-	public void registerDataReceiver(DataReceiver data_receiver) throws MaximumClientsReached {
+	@Override
+	public void registerDataReceiver(final DataReceiver data_receiver) throws MaximumClientsReached {
 		if (delegate == null) {
-			Logger.getLogger(DATA_PRODUCER_LOGGER).log(Level.WARNING,
+			Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER).log(Level.WARNING,
 					"DataProducer has not been set! Please set it first...");
 			return;
 		}
 
 		try {
 			delegate.registerDataReceiver(data_receiver);
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(DATA_PRODUCER_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER));
 			checkConnect();
 			return;
 		}
 	}
 
-	public boolean isSameDelegate(DataProducerWrapper other) {
-		return other.delegate._is_equivalent(this.delegate);
+	public boolean isSameDelegate(final DataProducerWrapper other) {
+		return other.delegate._is_equivalent(delegate);
 	}
 
-	public boolean isSameDelegate(DataProducer other) {
-		return other._is_equivalent(this.delegate);
+	public boolean isSameDelegate(final DataProducer other) {
+		return other._is_equivalent(delegate);
 	}
 
 	public DataProducer getDelegate() {

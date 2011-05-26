@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.meteo.displays;
  */
 public class PrecXYGraphDisplay extends MeteoTimeExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6176102905374049861L;
+
 	/** Creates a new instance of PVXYGraphDisplay */
 	public PrecXYGraphDisplay() {
 		super();
@@ -19,6 +24,7 @@ public class PrecXYGraphDisplay extends MeteoTimeExperimentGraph {
 		setChannelDisplayY(2);
 	}
 
+	@Override
 	public String getName() {
 		return "Precipitacao";
 	}

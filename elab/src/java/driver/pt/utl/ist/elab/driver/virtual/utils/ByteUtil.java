@@ -17,15 +17,15 @@ public class ByteUtil {
 	public ByteUtil() {
 	}
 
-	public static byte[] floatToByteArray(float value) {
-		ByteBuffer buf = ByteBuffer.allocate(4);
+	public static byte[] floatToByteArray(final float value) {
+		final ByteBuffer buf = ByteBuffer.allocate(4);
 
 		buf.putFloat(value);
 		return buf.array();
 	}
 
-	public static byte[] floatArrayToByteArray(float[] values) {
-		return getObjectAsByteArray(values);
+	public static byte[] floatArrayToByteArray(final float[] values) {
+		return ByteUtil.getObjectAsByteArray(values);
 		/*
 		 * byte[] toRet = new byte[4*values.length];
 		 * 
@@ -37,13 +37,13 @@ public class ByteUtil {
 
 	}
 
-	public static byte[] getObjectAsByteArray(Object o) {
+	public static byte[] getObjectAsByteArray(final Object o) {
 		System.out.println("Converting object as byte array...");
 		byte[] objectAsByteArray = null;
 		try {
-			java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
-			java.util.zip.GZIPOutputStream gz = new java.util.zip.GZIPOutputStream(baos);
-			java.io.ObjectOutputStream oos = new java.io.ObjectOutputStream(gz);
+			final java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+			final java.util.zip.GZIPOutputStream gz = new java.util.zip.GZIPOutputStream(baos);
+			final java.io.ObjectOutputStream oos = new java.io.ObjectOutputStream(gz);
 
 			oos.writeObject(o);
 			gz.finish();
@@ -52,44 +52,45 @@ public class ByteUtil {
 			oos.close();
 			gz.close();
 			baos.close();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 
 		return objectAsByteArray;
 	}
 
-	public static Object byteArrayToObject(byte[] p) {
+	public static Object byteArrayToObject(final byte[] p) {
 		System.out.println("Converting byte array to object...");
 		Object obj = null;
 		try {
-			java.io.ByteArrayInputStream braw = new java.io.ByteArrayInputStream(p);
-			java.util.zip.GZIPInputStream gzis = new java.util.zip.GZIPInputStream(braw);
-			java.io.ObjectInputStream ois = new java.io.ObjectInputStream(gzis);
+			final java.io.ByteArrayInputStream braw = new java.io.ByteArrayInputStream(p);
+			final java.util.zip.GZIPInputStream gzis = new java.util.zip.GZIPInputStream(braw);
+			final java.io.ObjectInputStream ois = new java.io.ObjectInputStream(gzis);
 
 			obj = ois.readObject();
 
 			ois.close();
 			gzis.close();
 			braw.close();
-		} catch (java.io.IOException ie) {
+		} catch (final java.io.IOException ie) {
 			ie.printStackTrace();
-		} catch (ClassNotFoundException e) {
+		} catch (final ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 
 		return obj;
 	}
 
-	public static float byteArrayToFloat(byte[] fvalue) {
-		ByteBuffer buf = ByteBuffer.allocate(fvalue.length);
+	public static float byteArrayToFloat(final byte[] fvalue) {
+		final ByteBuffer buf = ByteBuffer.allocate(fvalue.length);
 		buf.put(fvalue);
 		return buf.getFloat(0);
 	}
 
-	public static float[] byteArrayToFloatArray(byte[] values) {
-		if (values == null)
+	public static float[] byteArrayToFloatArray(final byte[] values) {
+		if (values == null) {
 			return null;
+		}
 
 		/*
 		 * float[] toRet = new float[values.length / 4]; for(int i=0;
@@ -98,11 +99,11 @@ public class ByteUtil {
 		 * values[4*i + 2]; toConvert[3] = values[4*i + 3]; toRet[i] =
 		 * byteArrayToFloat(toConvert); } return toRet;
 		 */
-		return (float[]) byteArrayToObject(values);
+		return (float[]) ByteUtil.byteArrayToObject(values);
 	}
 
-	public static void main(String args[]) {
-		float[] test = (float[]) byteArrayToObject(getObjectAsByteArray(new float[1458000]));
+	public static void main(final String args[]) {
+		final float[] test = (float[]) ByteUtil.byteArrayToObject(ByteUtil.getObjectAsByteArray(new float[1458000]));
 		System.out.println(test.length);
 
 	}

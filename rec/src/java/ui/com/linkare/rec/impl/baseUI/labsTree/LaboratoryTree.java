@@ -23,20 +23,24 @@ import com.linkare.rec.impl.baseUI.config.WebResource;
 
 /**
  * 
- * @author Jos� Pedro Pereira
+ * @author José Pedro Pereira - Linkare TI
  */
 public class LaboratoryTree extends javax.swing.JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1587212298587572664L;
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(LaboratoryTree.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(LaboratoryTree.UI_CLIENT_LOGGER));
 		}
 	}
-	private DisplayNodeTreeCellRenderer renderer;
-	private LabsTreeModel model;
-	private LabsTreeCellEditor realEditor;
+	private final DisplayNodeTreeCellRenderer renderer;
+	private final LabsTreeModel model;
+	private final LabsTreeCellEditor realEditor;
 
 	/** Creates new form LaboratoryHardwareTree */
 	public LaboratoryTree() {
@@ -44,7 +48,8 @@ public class LaboratoryTree extends javax.swing.JPanel {
 
 		// Use this to properly reload the tree when needed!
 		model.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-			public void propertyChange(java.beans.PropertyChangeEvent evt) {
+			@Override
+			public void propertyChange(final java.beans.PropertyChangeEvent evt) {
 				updateTree();
 			}
 		});
@@ -79,12 +84,14 @@ public class LaboratoryTree extends javax.swing.JPanel {
 		labTree.setScrollsOnExpand(false);
 		labTree.setShowsRootHandles(true);
 		labTree.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				labTreeMousePressed(evt);
 			}
 		});
 		labTree.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-			public void propertyChange(java.beans.PropertyChangeEvent evt) {
+			@Override
+			public void propertyChange(final java.beans.PropertyChangeEvent evt) {
 				labTreePropertyChange(evt);
 			}
 		});
@@ -95,36 +102,36 @@ public class LaboratoryTree extends javax.swing.JPanel {
 
 	}// GEN-END:initComponents
 
-	private void labTreePropertyChange(java.beans.PropertyChangeEvent evt)// GEN-FIRST:event_labTreePropertyChange
+	private void labTreePropertyChange(final java.beans.PropertyChangeEvent evt)// GEN-FIRST:event_labTreePropertyChange
 	{// GEN-HEADEREND:event_labTreePropertyChange
 		// it came from the editor, it was the only way I found to detect two
 		// clicks events in the editor...
 		if (evt.getPropertyName().equals("ddc")) {
-			TreePath selPath = labTree.getPathForRow(((Integer) evt.getNewValue()).intValue());
-			DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) selPath.getLastPathComponent();
-			Object o = currentNode.getUserObject();
+			final TreePath selPath = labTree.getPathForRow(((Integer) evt.getNewValue()).intValue());
+			final DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) selPath.getLastPathComponent();
+			final Object o = currentNode.getUserObject();
 
-			Lab l = getParentLab(currentNode);
-			Apparatus app = getParentApparatus(currentNode);
+			final Lab l = getParentLab(currentNode);
+			final Apparatus app = getParentApparatus(currentNode);
 			fireTreeSelectionChangeListenerDisplaySelectionChange(new DisplaySelectionEvent(this, (Display) o, app, l));
 		}
 	}// GEN-LAST:event_labTreePropertyChange
 
-	private void labTreeMousePressed(java.awt.event.MouseEvent evt)// GEN-FIRST:event_labTreeMousePressed
+	private void labTreeMousePressed(final java.awt.event.MouseEvent evt)// GEN-FIRST:event_labTreeMousePressed
 	{// GEN-HEADEREND:event_labTreeMousePressed
 		if (evt.getClickCount() == 2) {
-			int selRow = labTree.getRowForLocation(evt.getX(), evt.getY());
-			TreePath selPath = labTree.getPathForLocation(evt.getX(), evt.getY());
+			final int selRow = labTree.getRowForLocation(evt.getX(), evt.getY());
+			final TreePath selPath = labTree.getPathForLocation(evt.getX(), evt.getY());
 
 			if (selRow < 0) {
 				return;
 			}
 
-			DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) selPath.getLastPathComponent();
-			Object o = currentNode.getUserObject();
+			final DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) selPath.getLastPathComponent();
+			final Object o = currentNode.getUserObject();
 
-			Lab l = getParentLab(currentNode);
-			Apparatus app = getParentApparatus(currentNode);
+			final Lab l = getParentLab(currentNode);
+			final Apparatus app = getParentApparatus(currentNode);
 
 			if (o instanceof Lab) {
 				fireTreeSelectionChangeListenerLabSelectionChange(new LabSelectionEvent(this, (Lab) o));
@@ -152,10 +159,11 @@ public class LaboratoryTree extends javax.swing.JPanel {
 			if (o instanceof Apparatus) {
 				return (Apparatus) o;
 			}
-			if (node.getParent() != null)
+			if (node.getParent() != null) {
 				node = (DefaultMutableTreeNode) node.getParent();
-			else
+			} else {
 				return null;
+			}
 		}
 
 		return null;
@@ -169,10 +177,11 @@ public class LaboratoryTree extends javax.swing.JPanel {
 			if (o instanceof Lab) {
 				return (Lab) o;
 			}
-			if (node.getParent() != null)
+			if (node.getParent() != null) {
 				node = (DefaultMutableTreeNode) node.getParent();
-			else
+			} else {
 				return null;
+			}
 		}
 		return null;
 	}
@@ -183,7 +192,7 @@ public class LaboratoryTree extends javax.swing.JPanel {
 	 * @param listener The listener to register.
 	 */
 	public synchronized void addTreeSelectionChangeListener(
-			com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener listener) {
+			final com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -196,7 +205,7 @@ public class LaboratoryTree extends javax.swing.JPanel {
 	 * @param listener The listener to remove.
 	 */
 	public synchronized void removeTreeSelectionChangeListener(
-			com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener listener) {
+			final com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener listener) {
 		listenerList.remove(com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener.class, listener);
 	}
 
@@ -206,10 +215,11 @@ public class LaboratoryTree extends javax.swing.JPanel {
 	 * @param event The event to be fired
 	 */
 	private void fireTreeSelectionChangeListenerApparatusSelectionChange(
-			com.linkare.rec.impl.baseUI.labsTree.ApparatusSelectionEvent event) {
-		if (listenerList == null)
+			final com.linkare.rec.impl.baseUI.labsTree.ApparatusSelectionEvent event) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener.class) {
 				((com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener) listeners[i + 1])
@@ -224,10 +234,11 @@ public class LaboratoryTree extends javax.swing.JPanel {
 	 * @param event The event to be fired
 	 */
 	private void fireTreeSelectionChangeListenerDefaultConfigSelectionChange(
-			com.linkare.rec.impl.baseUI.labsTree.DefaultConfigSelectionEvent event) {
-		if (listenerList == null)
+			final com.linkare.rec.impl.baseUI.labsTree.DefaultConfigSelectionEvent event) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener.class) {
 				((com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener) listeners[i + 1])
@@ -242,10 +253,11 @@ public class LaboratoryTree extends javax.swing.JPanel {
 	 * @param event The event to be fired
 	 */
 	private void fireTreeSelectionChangeListenerDisplaySelectionChange(
-			com.linkare.rec.impl.baseUI.labsTree.DisplaySelectionEvent event) {
-		if (listenerList == null)
+			final com.linkare.rec.impl.baseUI.labsTree.DisplaySelectionEvent event) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener.class) {
 				((com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener) listeners[i + 1])
@@ -260,10 +272,11 @@ public class LaboratoryTree extends javax.swing.JPanel {
 	 * @param event The event to be fired
 	 */
 	private void fireTreeSelectionChangeListenerWebResourceSelectionChange(
-			com.linkare.rec.impl.baseUI.labsTree.WebResourceSelectionEvent event) {
-		if (listenerList == null)
+			final com.linkare.rec.impl.baseUI.labsTree.WebResourceSelectionEvent event) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener.class) {
 				((com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener) listeners[i + 1])
@@ -278,10 +291,11 @@ public class LaboratoryTree extends javax.swing.JPanel {
 	 * @param event The event to be fired
 	 */
 	private void fireTreeSelectionChangeListenerLabSelectionChange(
-			com.linkare.rec.impl.baseUI.labsTree.LabSelectionEvent event) {
-		if (listenerList == null)
+			final com.linkare.rec.impl.baseUI.labsTree.LabSelectionEvent event) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener.class) {
 				((com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener) listeners[i + 1])
@@ -290,7 +304,7 @@ public class LaboratoryTree extends javax.swing.JPanel {
 		}
 	}
 
-	public void populateTree(ReCBaseUIConfig config) {
+	public void populateTree(final ReCBaseUIConfig config) {
 		model.populateTree(config);
 	}
 
@@ -298,25 +312,29 @@ public class LaboratoryTree extends javax.swing.JPanel {
 		return model;
 	}
 
-	public Apparatus getApparatus(String uniqueID) {
+	public Apparatus getApparatus(final String uniqueID) {
 		return model.getApparatus(uniqueID);
 	}
 
 	public DisplayNode getCurrentSelectedNode() {
-		if (labTree.getSelectionPath() == null)
+		if (labTree.getSelectionPath() == null) {
 			return null;
+		}
 
-		Object selected = labTree.getSelectionPath().getLastPathComponent();
-		if (selected instanceof DefaultMutableTreeNode)
-			if (((DefaultMutableTreeNode) selected).getUserObject() instanceof DisplayNode)
+		final Object selected = labTree.getSelectionPath().getLastPathComponent();
+		if (selected instanceof DefaultMutableTreeNode) {
+			if (((DefaultMutableTreeNode) selected).getUserObject() instanceof DisplayNode) {
 				return (DisplayNode) ((DefaultMutableTreeNode) selected).getUserObject();
+			}
+		}
 
 		return null;
 	}
 
 	public void updateTree() {
-		if (!labTree.isVisible() || model == null)
+		if (!labTree.isVisible() || model == null) {
 			return;
+		}
 
 		synchronized (this) {
 			labTree.repaint();
@@ -325,53 +343,6 @@ public class LaboratoryTree extends javax.swing.JPanel {
 		 * java.util.ArrayList expandedPaths = getExpandedPaths();
 		 * model.reload(); expandPaths(expandedPaths);
 		 */
-	}
-
-	/**
-	 * Records the list of currently expanded paths in the specified tree. This
-	 * method is meant to be called before calling the <code>reload()</code>
-	 * methods to allow the tree to store the paths.
-	 * 
-	 * @param tree the tree
-	 * @param pathlist the list of expanded paths
-	 */
-	private java.util.ArrayList getExpandedPaths() {
-		java.util.ArrayList<TreePath> expandedPaths = new java.util.ArrayList<TreePath>();
-		addExpandedPaths(labTree.getPathForRow(0), expandedPaths);
-		return expandedPaths;
-	}
-
-	/**
-	 * Adds the expanded descendants of the specifed path in the specified tree
-	 * to the internal expanded list.
-	 * 
-	 * @param tree the tree
-	 * @param path the path
-	 * @param pathlist the list of expanded paths
-	 */
-	private void addExpandedPaths(javax.swing.tree.TreePath path, java.util.ArrayList<TreePath> pathlist) {
-		java.util.Enumeration enume = labTree.getExpandedDescendants(path);
-		if (enume == null)
-			return;
-		while (enume.hasMoreElements()) {
-			TreePath tp = (TreePath) enume.nextElement();
-			pathlist.add(tp);
-			addExpandedPaths(tp, pathlist);
-		}
-	}
-
-	/**
-	 * Re-expands the expanded paths in the specified tree. This method is meant
-	 * to be called before calling the <code>reload()</code> methods to allow
-	 * the tree to store the paths.
-	 * 
-	 * @param tree the tree
-	 * @param pathlist the list of expanded paths
-	 */
-	private void expandPaths(java.util.ArrayList pathlist) {
-		for (int i = 0; i < pathlist.size(); i++) {
-			labTree.expandPath((TreePath) pathlist.get(i));
-		}
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

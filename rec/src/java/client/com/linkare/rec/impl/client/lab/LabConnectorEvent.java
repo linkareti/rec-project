@@ -11,6 +11,10 @@ package com.linkare.rec.impl.client.lab;
  * @author André Neto - LEFT - IST
  */
 public class LabConnectorEvent extends java.util.EventObject {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7367317849376992724L;
 	public final static int STATUS_CONNECTING = 0;
 	public final static int STATUS_CONNECTED = 1;
 	public final static int STATUS_DISCONNECTING = 2;
@@ -22,7 +26,7 @@ public class LabConnectorEvent extends java.util.EventObject {
 
 	private int statusCode = 0;
 
-	public LabConnectorEvent(Object source, int statusCode) {
+	public LabConnectorEvent(final Object source, final int statusCode) {
 		super(source);
 		this.statusCode = statusCode;
 	}

@@ -29,7 +29,7 @@ public class MultiplierEditor extends AbstractSelectionListPropertyEditor
 	public MultiplierEditor()
 
 	{
-		String pack = this.getClass().getPackage().getName() + ".";
+		final String pack = this.getClass().getPackage().getName() + ".";
 
 		addTableValue(Multiplier.fento,
 
@@ -91,20 +91,20 @@ public class MultiplierEditor extends AbstractSelectionListPropertyEditor
 
 	}
 
-	public void setAsText(String text) throws IllegalArgumentException
+	@Override
+	public void setAsText(final String text) throws IllegalArgumentException
 
 	{
 
-		if (tagToObject(text) != null)
-
+		if (tagToObject(text) != null) {
 			setValueFromTag(text);
-
-		else
-
+		} else {
 			throw new IllegalArgumentException("That value isn't allowed! Possible values are:" + getTagsStringDesc());
+		}
 
 	}
 
+	@Override
 	public java.awt.Component getCustomEditor()
 
 	{

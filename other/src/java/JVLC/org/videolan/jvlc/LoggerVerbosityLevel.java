@@ -29,7 +29,7 @@ public enum LoggerVerbosityLevel {
 
 	INFO, ERROR, WARNING, DEBUG;
 
-	public static LoggerVerbosityLevel getSeverity(int ordinal) {
+	public static LoggerVerbosityLevel getSeverity(final int ordinal) {
 		return new LoggerVerbosityLevel[] { INFO, ERROR, WARNING, DEBUG }[ordinal];
 	}
 

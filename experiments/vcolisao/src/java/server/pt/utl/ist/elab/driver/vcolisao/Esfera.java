@@ -28,7 +28,8 @@ public class Esfera {
 	 * @param massa_
 	 */
 
-	public Esfera(double x_, double y_, double vX_, double vY_, double raio_, double massa_) {
+	public Esfera(final double x_, final double y_, final double vX_, final double vY_, final double raio_,
+			final double massa_) {
 		x = x_;
 		y = y_;
 		vX = vX_;
@@ -37,15 +38,15 @@ public class Esfera {
 		raio = raio_;
 	}
 
-	public static double dot(double[] v1, double[] v2) {
+	public static double dot(final double[] v1, final double[] v2) {
 		return v1[0] * v2[0] + v1[1] * v2[1];
 	}
 
-	public static double[] normalize(double[] vect) {
-		return new double[] { vect[0] / magnitude(vect), vect[1] / magnitude(vect) };
+	public static double[] normalize(final double[] vect) {
+		return new double[] { vect[0] / Esfera.magnitude(vect), vect[1] / Esfera.magnitude(vect) };
 	}
 
-	public static double magnitude(double[] vect) {
+	public static double magnitude(final double[] vect) {
 		return Math.sqrt(vect[0] * vect[0] + vect[1] * vect[1]);
 	}
 

@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.polaroid.displays;
  */
 public class AnguloIntensidadeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4892171422969259999L;
+
 	/** Creates a new instance of AnguloIntensidadeChart */
 	public AnguloIntensidadeChart() {
 		super();

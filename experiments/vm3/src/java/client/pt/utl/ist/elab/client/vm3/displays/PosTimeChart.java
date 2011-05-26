@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.vm3.displays;
  */
 public class PosTimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2400972701539423406L;
+
 	/** Creates a new instance of PosTimeChart */
 	public PosTimeChart() {
 		super();

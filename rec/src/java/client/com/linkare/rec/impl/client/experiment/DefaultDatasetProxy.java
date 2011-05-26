@@ -19,32 +19,44 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 public class DefaultDatasetProxy extends org.jfree.data.xy.AbstractXYDataset implements
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6749791719295215655L;
+
 	/** Creates a new instance of DefaultXYDatasetProxy */
 	public DefaultDatasetProxy() {
 
 	}
 
+	@Override
 	public void dataModelWaiting() {
 		fireDatasetChanged();
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 		fireDatasetChanged();
 	}
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 		fireDatasetChanged();
 	}
 
@@ -53,6 +65,7 @@ public class DefaultDatasetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 	 * 
 	 * @return the series count.
 	 */
+	@Override
 	public int getSeriesCount() {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			return 0;
@@ -68,16 +81,17 @@ public class DefaultDatasetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 	 * 
 	 * @return the name of the series.
 	 */
-	public Comparable getSeriesKey(int series) {
+	@Override
+	public Comparable getSeriesKey(final int series) {
 		if (expDataModel == null || !expDataModel.isDataAvailable() || series >= expDataModel.getChannelCount()) {
 			return null;
 		}
 
-		String multiplier = expDataModel.getChannelConfig(getChannelDisplay()).getSelectedScale().getMultiplier()
+		final String multiplier = expDataModel.getChannelConfig(getChannelDisplay()).getSelectedScale().getMultiplier()
 				.toString();
-		String ph_unit_symbol = expDataModel.getChannelConfig(getChannelDisplay()).getSelectedScale()
+		final String ph_unit_symbol = expDataModel.getChannelConfig(getChannelDisplay()).getSelectedScale()
 				.getPhysicsUnitSymbol();
-		String ch_name = ReCResourceBundle.findString(expDataModel.getChannelConfig(getChannelDisplay())
+		final String ch_name = ReCResourceBundle.findString(expDataModel.getChannelConfig(getChannelDisplay())
 				.getChannelName());
 
 		return ch_name + " [" + multiplier + ph_unit_symbol + "]";
@@ -90,13 +104,15 @@ public class DefaultDatasetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 	 * 
 	 * @return the number of items within the series.
 	 */
-	public int getItemCount(int series) {
+	@Override
+	public int getItemCount(final int series) {
 		if (expDataModel == null || !expDataModel.isDataAvailable() || series >= expDataModel.getChannelCount()) {
 			return 0;
 		}
 
-		if (expDataModel.getTotalSamples() == -1)
+		if (expDataModel.getTotalSamples() == -1) {
 			return 0;
+		}
 		return expDataModel.getTotalSamples();
 	}
 
@@ -111,14 +127,15 @@ public class DefaultDatasetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 	 * 
 	 * @return the x-value.
 	 */
-	public double getXValue(int series, int item) {
+	@Override
+	public double getXValue(final int series, final int item) {
 		if (expDataModel.getAcquisitionConfig() == null || expDataModel == null || !expDataModel.isDataAvailable()
 				|| series >= expDataModel.getChannelCount()) {
 			return 0;
 		}
 
-		return expDataModel.getAcquisitionConfig().getTimeStart().getElapsedTimeInMillis(
-				expDataModel.getTimeStamp(item));
+		return expDataModel.getAcquisitionConfig().getTimeStart()
+				.getElapsedTimeInMillis(expDataModel.getTimeStamp(item));
 	}
 
 	/**
@@ -129,7 +146,8 @@ public class DefaultDatasetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 	 * 
 	 * @return the y-value.
 	 */
-	public double getYValue(int series, int item) {
+	@Override
+	public double getYValue(final int series, final int item) {
 		if (expDataModel == null || !expDataModel.isDataAvailable() || series >= expDataModel.getChannelCount()) {
 			return 0;
 		}
@@ -148,7 +166,7 @@ public class DefaultDatasetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 	 * @return Value of property expDataModel.
 	 */
 	public ExpDataModel getExpDataModel() {
-		return this.expDataModel;
+		return expDataModel;
 	}
 
 	/**
@@ -156,9 +174,10 @@ public class DefaultDatasetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 	 * 
 	 * @param expDataModel New value of property expDataModel.
 	 */
-	public void setExpDataModel(ExpDataModel expDataModel) {
-		if (expDataModel != null)
+	public void setExpDataModel(final ExpDataModel expDataModel) {
+		if (expDataModel != null) {
 			expDataModel.removeExpDataModelListener(this);
+		}
 
 		this.expDataModel = expDataModel;
 
@@ -175,7 +194,7 @@ public class DefaultDatasetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 	 * @return Value of property channelDisplay.
 	 */
 	public int getChannelDisplay() {
-		return this.channelDisplay;
+		return channelDisplay;
 	}
 
 	/**
@@ -183,7 +202,7 @@ public class DefaultDatasetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 	 * 
 	 * @param channelDisplay New value of property channelDisplay.
 	 */
-	public void setChannelDisplay(int channelDisplay) {
+	public void setChannelDisplay(final int channelDisplay) {
 		this.channelDisplay = channelDisplay;
 	}
 
@@ -195,22 +214,22 @@ public class DefaultDatasetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 	 * 
 	 * @return the ending X value for the specified series and item.
 	 */
-	public double getEndXValue(int series, int item) {
+	public double getEndXValue(final int series, final int item) {
 		if (expDataModel == null || !expDataModel.isDataAvailable() || series >= expDataModel.getChannelCount()
 				|| expDataModel.getAcquisitionConfig() == null) {
 			return 0;
 		}
 		long half_step_millis = 0;
-		Frequency sel_freq = expDataModel.getAcquisitionConfig().getSelectedFrequency();
-		if (sel_freq.getFrequencyDefType() == FrequencyDefType.SamplingIntervalType)
+		final Frequency sel_freq = expDataModel.getAcquisitionConfig().getSelectedFrequency();
+		if (sel_freq.getFrequencyDefType() == FrequencyDefType.SamplingIntervalType) {
 			half_step_millis = (long) Math.floor(sel_freq.getFrequency() * sel_freq.getMultiplier().getExpValue()
 					/ Multiplier.mili.getExpValue() / 2.);
-		else
+		} else {
 			half_step_millis = (long) Math.floor((1. / (sel_freq.getFrequency() * sel_freq.getMultiplier()
-					.getExpValue()))
-					/ Multiplier.mili.getExpValue() / 2.);
+					.getExpValue())) / Multiplier.mili.getExpValue() / 2.);
+		}
 
-		DateTime timeStamp = expDataModel.getTimeStamp(item);
+		final DateTime timeStamp = expDataModel.getTimeStamp(item);
 		timeStamp.addMillis(+half_step_millis);
 		return expDataModel.getAcquisitionConfig().getTimeStart().getElapsedTimeInMillis(timeStamp);
 
@@ -224,7 +243,7 @@ public class DefaultDatasetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 	 * 
 	 * @return the ending Y value for the specified series and item.
 	 */
-	public double getEndYValue(int series, int item) {
+	public double getEndYValue(final int series, final int item) {
 		return getYValue(series, item);
 	}
 
@@ -236,22 +255,22 @@ public class DefaultDatasetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 	 * 
 	 * @return the starting X value for the specified series and item.
 	 */
-	public double getStartXValue(int series, int item) {
+	public double getStartXValue(final int series, final int item) {
 		if (expDataModel == null || !expDataModel.isDataAvailable() || series >= expDataModel.getChannelCount()
 				|| expDataModel.getAcquisitionConfig() == null) {
 			return 0;
 		}
 		long half_step_millis = 0;
-		Frequency sel_freq = expDataModel.getAcquisitionConfig().getSelectedFrequency();
-		if (sel_freq.getFrequencyDefType() == FrequencyDefType.SamplingIntervalType)
+		final Frequency sel_freq = expDataModel.getAcquisitionConfig().getSelectedFrequency();
+		if (sel_freq.getFrequencyDefType() == FrequencyDefType.SamplingIntervalType) {
 			half_step_millis = (long) Math.floor(sel_freq.getFrequency() * sel_freq.getMultiplier().getExpValue()
 					/ Multiplier.mili.getExpValue() / 2.);
-		else
+		} else {
 			half_step_millis = (long) Math.floor((1. / (sel_freq.getFrequency() * sel_freq.getMultiplier()
-					.getExpValue()))
-					/ Multiplier.mili.getExpValue() / 2.);
+					.getExpValue())) / Multiplier.mili.getExpValue() / 2.);
+		}
 
-		DateTime timeStamp = expDataModel.getTimeStamp(item);
+		final DateTime timeStamp = expDataModel.getTimeStamp(item);
 		timeStamp.addMillis(-half_step_millis);
 		return expDataModel.getAcquisitionConfig().getTimeStart().getElapsedTimeInMillis(timeStamp);
 	}
@@ -264,34 +283,37 @@ public class DefaultDatasetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 	 * 
 	 * @return starting Y value for the specified series and item.
 	 */
-	public double getStartYValue(int series, int item) {
+	public double getStartYValue(final int series, final int item) {
 		return 0;
 	}
 
-	public Number getEndX(int series, int item) {
+	public Number getEndX(final int series, final int item) {
 		return new Double(getEndXValue(series, item));
 	}
 
-	public Number getEndY(int series, int item) {
+	public Number getEndY(final int series, final int item) {
 		return new Double(getEndYValue(series, item));
 	}
 
-	public Number getStartX(int series, int item) {
+	public Number getStartX(final int series, final int item) {
 		return new Double(getStartXValue(series, item));
 	}
 
-	public Number getStartY(int series, int item) {
+	public Number getStartY(final int series, final int item) {
 		return new Double(getStartYValue(series, item));
 	}
 
-	public Number getX(int series, int item) {
+	@Override
+	public Number getX(final int series, final int item) {
 		return new Double(getXValue(series, item));
 	}
 
-	public Number getY(int series, int item) {
+	@Override
+	public Number getY(final int series, final int item) {
 		return new Double(getYValue(series, item));
 	}
 
+	@Override
 	public org.jfree.data.DomainOrder getDomainOrder() {
 		return org.jfree.data.DomainOrder.NONE;
 	}

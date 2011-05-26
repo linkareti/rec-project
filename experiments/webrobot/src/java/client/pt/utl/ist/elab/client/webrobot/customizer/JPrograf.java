@@ -63,10 +63,14 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * @author Andr�
  */
 public class JPrograf extends javax.swing.JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2937456048523484592L;
 	WebRobotCustomizer customizer;
 
 	/** Creates new form WebRobotCustomizer */
-	public JPrograf(WebRobotCustomizer customizer) {
+	public JPrograf(final WebRobotCustomizer customizer) {
 		this.customizer = customizer;
 		/**
 		 * For the help system!
@@ -85,8 +89,8 @@ public class JPrograf extends javax.swing.JPanel {
 		initComponents();
 
 		/** For the dialogs... */
-		jFrameDummy = new javax.swing.JFrame();
-		new CenterFrame(jFrameDummy);
+		JPrograf.jFrameDummy = new javax.swing.JFrame();
+		new CenterFrame(JPrograf.jFrameDummy);
 
 		// Adds the start button!
 		jPanelContainer.setLayout(new AbsoluteLayout());
@@ -98,15 +102,15 @@ public class JPrograf extends javax.swing.JPanel {
 		jButtonProgStart.setMinimumSize(new java.awt.Dimension(71, 45));
 		jButtonProgStart.setPreferredSize(new java.awt.Dimension(71, 45));
 		jButtonProgStart.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonProgStartMousePressed(evt);
 			}
 		});
 		jPanelContainer.add(jButtonProgStart, new AbsoluteConstraints(0, 0, -1, -1));
 
 		// Creates the objects to undo/redo!
-		undoBlock = new Undo();
-		undoWiring = new Undo();
+		JPrograf.undoBlock = new Undo();
+		JPrograf.undoWiring = new Undo();
 
 		// For undo reasons (size of the vector) I update the display twice,
 		// it's not very pretty...update in the next version!
@@ -201,7 +205,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemNew.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/New16.gif")));
 		jMenuItemNew.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemNewActionPerformed(evt);
 			}
 		});
@@ -215,7 +219,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Open16.gif")));
 		jMenuItemOpen.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemOpenActionPerformed(evt);
 			}
 		});
@@ -229,7 +233,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemSave.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Save16.gif")));
 		jMenuItemSave.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemSaveActionPerformed(evt);
 			}
 		});
@@ -241,7 +245,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemSaveAs.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/SaveAs16.gif")));
 		jMenuItemSaveAs.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemSaveAsActionPerformed(evt);
 			}
 		});
@@ -255,7 +259,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Print16.gif")));
 		jMenuItemPrint.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemPrintActionPerformed(evt);
 			}
 		});
@@ -271,7 +275,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemOK.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/ok16.gif")));
 		jMenuItemOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemOKActionPerformed(evt);
 			}
 		});
@@ -284,7 +288,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Cancel16.gif")));
 		jMenuItemCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemCancelActionPerformed(evt);
 			}
 		});
@@ -300,7 +304,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemUndo.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Undo16.gif")));
 		jMenuItemUndo.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemUndoActionPerformed(evt);
 			}
 		});
@@ -315,7 +319,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemRedo.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Redo16.gif")));
 		jMenuItemRedo.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemRedoActionPerformed(evt);
 			}
 		});
@@ -331,7 +335,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemCopy.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Copy16.gif")));
 		jMenuItemCopy.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemCopyActionPerformed(evt);
 			}
 		});
@@ -345,7 +349,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemPaste.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Paste16.gif")));
 		jMenuItemPaste.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemPasteActionPerformed(evt);
 			}
 		});
@@ -360,7 +364,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemHelp.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Help16.gif")));
 		jMenuItemHelp.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemHelpActionPerformed(evt);
 			}
 		});
@@ -374,7 +378,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/About16.gif")));
 		jMenuItemAbout.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemAboutActionPerformed(evt);
 			}
 		});
@@ -400,7 +404,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemNew1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/New16.gif")));
 		jMenuItemNew1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemNewActionPerformed(evt);
 			}
 		});
@@ -414,7 +418,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemOpen1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Open16.gif")));
 		jMenuItemOpen1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemOpenActionPerformed(evt);
 			}
 		});
@@ -428,7 +432,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemSave1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Save16.gif")));
 		jMenuItemSave1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemSaveActionPerformed(evt);
 			}
 		});
@@ -440,7 +444,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemSaveAs1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/SaveAs16.gif")));
 		jMenuItemSaveAs1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemSaveAsActionPerformed(evt);
 			}
 		});
@@ -454,7 +458,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemPrint1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Print16.gif")));
 		jMenuItemPrint1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemPrintActionPerformed(evt);
 			}
 		});
@@ -470,7 +474,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemOK1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/ok16.gif")));
 		jMenuItemOK1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemOKActionPerformed(evt);
 			}
 		});
@@ -483,7 +487,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemCancel1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Cancel16.gif")));
 		jMenuItemCancel1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemCancelActionPerformed(evt);
 			}
 		});
@@ -501,7 +505,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemUndo1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Undo16.gif")));
 		jMenuItemUndo1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemUndoActionPerformed(evt);
 			}
 		});
@@ -516,7 +520,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemRedo1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Redo16.gif")));
 		jMenuItemRedo1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemRedoActionPerformed(evt);
 			}
 		});
@@ -532,7 +536,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemCopy1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Copy16.gif")));
 		jMenuItemCopy1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemCopyActionPerformed(evt);
 			}
 		});
@@ -546,7 +550,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemPaste1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Paste16.gif")));
 		jMenuItemPaste1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemPasteActionPerformed(evt);
 			}
 		});
@@ -563,7 +567,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemHelp1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Help16.gif")));
 		jMenuItemHelp1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemHelp1ActionPerformed(evt);
 			}
 		});
@@ -577,7 +581,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemAbout1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/About16.gif")));
 		jMenuItemAbout1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemAboutActionPerformed(evt);
 			}
 		});
@@ -679,7 +683,7 @@ public class JPrograf extends javax.swing.JPanel {
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Flow16.gif")));
 		jButton1.setToolTipText("Default");
 		jButton1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButton1ActionPerformed(evt);
 			}
 		});
@@ -690,7 +694,7 @@ public class JPrograf extends javax.swing.JPanel {
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/ok16.gif")));
 		jButtonOK.setToolTipText("Concluir o diagrama de estados");
 		jButtonOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonOKActionPerformed(evt);
 			}
 		});
@@ -701,7 +705,7 @@ public class JPrograf extends javax.swing.JPanel {
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Cancel16.gif")));
 		jButtonCancel.setToolTipText("Cancelar diagrama de estados");
 		jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonCancelActionPerformed(evt);
 			}
 		});
@@ -717,12 +721,12 @@ public class JPrograf extends javax.swing.JPanel {
 
 		jPanelContainer.setPreferredSize(new java.awt.Dimension(5000, 5000));
 		jPanelContainer.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jPanelContainerMousePressed(evt);
 			}
 		});
 		jPanelContainer.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-			public void mouseMoved(java.awt.event.MouseEvent evt) {
+			public void mouseMoved(final java.awt.event.MouseEvent evt) {
 				jPanelContainerMouseMoved(evt);
 			}
 		});
@@ -755,7 +759,7 @@ public class JPrograf extends javax.swing.JPanel {
 
 	}// GEN-END:initComponents
 
-	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
+	private void jButton1ActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
 		jMenuItemNewActionPerformed(null);
 		if (actionNewCanceled) {
 			actionNewCanceled = false;
@@ -765,43 +769,43 @@ public class JPrograf extends javax.swing.JPanel {
 		try {
 			url = new java.net.URL(ReCResourceBundle.findStringOrDefault("webrobot$rec.exp.url.webrobot.4",
 					"http://elab.ist.utl.pt/rec/eLab/webrobot/default.grf"));
-		} catch (java.net.MalformedURLException murle) {
+		} catch (final java.net.MalformedURLException murle) {
 			System.out.println("The url is wrong!!");
 			return;
 		}
 		try {
-			java.net.URLConnection urlCon = url.openConnection();
-			java.io.InputStream is = urlCon.getInputStream();
+			final java.net.URLConnection urlCon = url.openConnection();
+			final java.io.InputStream is = urlCon.getInputStream();
 			openFile(is);
-		} catch (java.io.IOException ioe) {
+		} catch (final java.io.IOException ioe) {
 			javax.swing.JOptionPane.showMessageDialog(this, "N�o foi possivel abrir o ficheiro:\n" + url, "Erro!",
 					javax.swing.JOptionPane.ERROR_MESSAGE);
 		}
 	}// GEN-LAST:event_jButton1ActionPerformed
 
-	private void jMenuItemHelpActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemHelpActionPerformed
+	private void jMenuItemHelpActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemHelpActionPerformed
 		jMenuItemHelp1ActionPerformed(evt);
 	}// GEN-LAST:event_jMenuItemHelpActionPerformed
 
-	private void jMenuItemHelp1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemHelp1ActionPerformed
+	private void jMenuItemHelp1ActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemHelp1ActionPerformed
 		try {
-			java.net.URL url = new java.net.URL(helpURL);
-			BasicService bs = (BasicService) ServiceManager.lookup("javax.jnlp.BasicService");
+			final java.net.URL url = new java.net.URL(helpURL);
+			final BasicService bs = (BasicService) ServiceManager.lookup("javax.jnlp.BasicService");
 			bs.showDocument(url);
-		} catch (Exception exc) {
+		} catch (final Exception exc) {
 			exc.printStackTrace();
 		}
 	}// GEN-LAST:event_jMenuItemHelp1ActionPerformed
 
-	private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonCancelActionPerformed
+	private void jButtonCancelActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonCancelActionPerformed
 		jMenuItemCancelActionPerformed(evt);
 	}// GEN-LAST:event_jButtonCancelActionPerformed
 
-	private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonOKActionPerformed
+	private void jButtonOKActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonOKActionPerformed
 		jMenuItemOKActionPerformed(evt);
 	}// GEN-LAST:event_jButtonOKActionPerformed
 
-	private void jPanelContainerMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanelContainerMousePressed
+	private void jPanelContainerMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanelContainerMousePressed
 		if (evt.getModifiers() == java.awt.event.InputEvent.BUTTON1_MASK) {
 			/**
 			 * If in the Copy UI was selected the option to get the column and
@@ -848,11 +852,11 @@ public class JPrograf extends javax.swing.JPanel {
 		}
 	}// GEN-LAST:event_jPanelContainerMousePressed
 
-	private void jPanelContainerMouseMoved(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanelContainerMouseMoved
+	private void jPanelContainerMouseMoved(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanelContainerMouseMoved
 		updateBottomPanel(evt.getX(), evt.getY());
 	}// GEN-LAST:event_jPanelContainerMouseMoved
 
-	private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemAboutActionPerformed
+	private void jMenuItemAboutActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemAboutActionPerformed
 		javax.swing.JOptionPane
 				.showMessageDialog(
 						this,
@@ -862,7 +866,7 @@ public class JPrograf extends javax.swing.JPanel {
 										.getResource("/pt/utl/ist/elab/client/webrobot/customizer/Icons/JPrograf.gif")));
 	}// GEN-LAST:event_jMenuItemAboutActionPerformed
 
-	private void jMenuItemPasteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemPasteActionPerformed
+	private void jMenuItemPasteActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemPasteActionPerformed
 		/**
 		 * Paste Possibilities: 1-Paste Right(evt=null) 2-Paste
 		 * Left(evt.getID()==-1) 3-Paste with right click(evt.getID()==-1)
@@ -994,15 +998,15 @@ public class JPrograf extends javax.swing.JPanel {
 		}
 	}// GEN-LAST:event_jMenuItemPasteActionPerformed
 
-	private void jMenuItemCopyActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemCopyActionPerformed
+	private void jMenuItemCopyActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemCopyActionPerformed
 		/** Copy */
 
 		/**
 		 * Why tempMatrix? Because we have to create new comps, otherwise we'll
 		 * keep pointing to the existing components and will lose them
 		 */
-		pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] tempMatrix = matrixToCopy;
-		String[][] tempMatrixWiring = matrixWiringToCopy;
+		final pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] tempMatrix = matrixToCopy;
+		final String[][] tempMatrixWiring = matrixWiringToCopy;
 
 		/**
 		 * If the evt wasn't null(comes from the paste) and different from -2
@@ -1140,11 +1144,11 @@ public class JPrograf extends javax.swing.JPanel {
 		copyPaste.addData(matrixWiringToCopy);
 	}// GEN-LAST:event_jMenuItemCopyActionPerformed
 
-	private void jMenuItemRedoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemRedoActionPerformed
-		if (undoBlock.isRedoable()) {
-			pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] matrixUndo = (pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][]) undoBlock
+	private void jMenuItemRedoActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemRedoActionPerformed
+		if (JPrograf.undoBlock.isRedoable()) {
+			final pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] matrixUndo = (pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][]) JPrograf.undoBlock
 					.redoElement();
-			String[][] matrixUndoWiring = (String[][]) undoWiring.redoElement();
+			final String[][] matrixUndoWiring = (String[][]) JPrograf.undoWiring.redoElement();
 			if (matrixUndo == null) {
 				return;
 			}
@@ -1158,11 +1162,11 @@ public class JPrograf extends javax.swing.JPanel {
 		}
 	}// GEN-LAST:event_jMenuItemRedoActionPerformed
 
-	private void jMenuItemUndoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemUndoActionPerformed
-		if (undoBlock.isUndoable()) {
-			pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] matrixUndo = (pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][]) undoBlock
+	private void jMenuItemUndoActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemUndoActionPerformed
+		if (JPrograf.undoBlock.isUndoable()) {
+			final pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] matrixUndo = (pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][]) JPrograf.undoBlock
 					.undoElement();
-			String[][] matrixUndoWiring = (String[][]) undoWiring.undoElement();
+			final String[][] matrixUndoWiring = (String[][]) JPrograf.undoWiring.undoElement();
 			if (matrixUndo == null) {
 				return;
 			}
@@ -1176,7 +1180,7 @@ public class JPrograf extends javax.swing.JPanel {
 		}
 	}// GEN-LAST:event_jMenuItemUndoActionPerformed
 
-	private void jMenuItemCancelActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemCancelActionPerformed
+	private void jMenuItemCancelActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemCancelActionPerformed
 		int exit = javax.swing.JOptionPane.NO_OPTION;
 		if (haveBeenChanges) {
 			exit = javax.swing.JOptionPane.showOptionDialog(this, "Existem altera��es n�o gravadas!\nSair?", "Sair",
@@ -1191,21 +1195,21 @@ public class JPrograf extends javax.swing.JPanel {
 		}
 	}// GEN-LAST:event_jMenuItemCancelActionPerformed
 
-	private void jMenuItemPrintActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemPrintActionPerformed
+	private void jMenuItemPrintActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemPrintActionPerformed
 		new PrintComponent(jPanelContainer);
 	}// GEN-LAST:event_jMenuItemPrintActionPerformed
 
-	private void jMenuItemOKActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemOKActionPerformed
-		SaveData sd = new SaveData(null, matrix, confInOut, ivpwm, maxRow, maxColumn);
-		String flowChart = sd.getSavedString();
+	private void jMenuItemOKActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemOKActionPerformed
+		final SaveData sd = new SaveData(null, matrix, confInOut, ivpwm, maxRow, maxColumn);
+		final String flowChart = sd.getSavedString();
 		acqConfig.setTotalSamples(hardwareInfo.getSamplingScale().getMaxSamples());
 		acqConfig.getSelectedHardwareParameter("FlowChart").setParameterValue(flowChart);
 		acqConfig.setSelectedFrequency(hardwareInfo.getSelectedFrequency());
 		customizer.fireICustomizerListenerDone();
 	}// GEN-LAST:event_jMenuItemOKActionPerformed
 
-	private void jMenuItemSaveAsActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemSaveAsActionPerformed
-		int returnValue = jFileChooserSave.showSaveDialog(this);
+	private void jMenuItemSaveAsActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemSaveAsActionPerformed
+		final int returnValue = jFileChooserSave.showSaveDialog(this);
 		if (returnValue == jFileChooserSave.APPROVE_OPTION) {
 			haveBeenChanges = false;
 			if (jFileChooserSave.getFileFilter().equals(prografExtension)) {
@@ -1220,7 +1224,7 @@ public class JPrograf extends javax.swing.JPanel {
 		}
 	}// GEN-LAST:event_jMenuItemSaveAsActionPerformed
 
-	private void jMenuItemSaveActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemSaveActionPerformed
+	private void jMenuItemSaveActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemSaveActionPerformed
 		if (saveFile == null) {
 			jMenuItemSaveAsActionPerformed(evt);
 		} else {
@@ -1229,8 +1233,8 @@ public class JPrograf extends javax.swing.JPanel {
 		}
 	}// GEN-LAST:event_jMenuItemSaveActionPerformed
 
-	private void jMenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemOpenActionPerformed
-		int returnValue = jFileChooserOpen.showOpenDialog(this);
+	private void jMenuItemOpenActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemOpenActionPerformed
+		final int returnValue = jFileChooserOpen.showOpenDialog(this);
 		if (returnValue == jFileChooserOpen.APPROVE_OPTION) {
 			jMenuItemNewActionPerformed(null);
 			if (actionNewCanceled) {
@@ -1240,13 +1244,14 @@ public class JPrograf extends javax.swing.JPanel {
 			if (jFileChooserOpen.getFileFilter().equals(prografExtension)) {
 				extension = prografExtension.getExtension();
 			}
-			String path = jFileChooserOpen.getSelectedFile().getPath();
-			java.io.File openFile = new java.io.File(path);
+			final String path = jFileChooserOpen.getSelectedFile().getPath();
+			final java.io.File openFile = new java.io.File(path);
 			try {
 				openFile(openFile);
-			} catch (java.io.IOException ioe) {
-				javax.swing.JOptionPane.showMessageDialog(this, "N�o foi possivel abrir o ficheiro:\n"
-						+ openFile.getPath(), "Erro!", javax.swing.JOptionPane.ERROR_MESSAGE);
+			} catch (final java.io.IOException ioe) {
+				javax.swing.JOptionPane.showMessageDialog(this,
+						"N�o foi possivel abrir o ficheiro:\n" + openFile.getPath(), "Erro!",
+						javax.swing.JOptionPane.ERROR_MESSAGE);
 			}
 			saveFile = openFile;
 			haveBeenChanges = false;
@@ -1255,7 +1260,7 @@ public class JPrograf extends javax.swing.JPanel {
 
 	private boolean actionNewCanceled = false;
 
-	private void jMenuItemNewActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemNewActionPerformed
+	private void jMenuItemNewActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemNewActionPerformed
 		int save = javax.swing.JOptionPane.NO_OPTION;
 		if (haveBeenChanges) {
 			save = javax.swing.JOptionPane.showOptionDialog(this, "Deseja gravar altera��es?", "Novo",
@@ -1276,9 +1281,9 @@ public class JPrograf extends javax.swing.JPanel {
 		clearDisplay();
 	}// GEN-LAST:event_jMenuItemNewActionPerformed
 
-	private void jButtonProgStartMousePressed(java.awt.event.MouseEvent evt) {
-		confInOut = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfInOut(jFrameDummy, true,
-				modelConfInOut);
+	private void jButtonProgStartMousePressed(final java.awt.event.MouseEvent evt) {
+		confInOut = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfInOut(JPrograf.jFrameDummy, true,
+				JPrograf.modelConfInOut);
 		new CenterFrame(this, confInOut);
 		confInOut.show();
 	}
@@ -1288,20 +1293,20 @@ public class JPrograf extends javax.swing.JPanel {
 	 * must get the event from this component, this is why I've added a mouse
 	 * moved event to the components
 	 */
-	private void compMouseMoved(java.awt.event.MouseEvent evt) {
-		pt.utl.ist.elab.client.webrobot.customizer.Comps.Block comp = (pt.utl.ist.elab.client.webrobot.customizer.Comps.Block) evt
+	private void compMouseMoved(final java.awt.event.MouseEvent evt) {
+		final pt.utl.ist.elab.client.webrobot.customizer.Comps.Block comp = (pt.utl.ist.elab.client.webrobot.customizer.Comps.Block) evt
 				.getSource();
 		updateBottomPanel(comp.getX(), comp.getY());
 	}
 
 	/** If one clicks over a block */
-	private void compMousePressed(java.awt.event.MouseEvent evt) {
-		pt.utl.ist.elab.client.webrobot.customizer.Comps.Block comp = (pt.utl.ist.elab.client.webrobot.customizer.Comps.Block) evt
+	private void compMousePressed(final java.awt.event.MouseEvent evt) {
+		final pt.utl.ist.elab.client.webrobot.customizer.Comps.Block comp = (pt.utl.ist.elab.client.webrobot.customizer.Comps.Block) evt
 				.getSource();
-		int posX = comp.getX();
-		int posY = comp.getY();
+		final int posX = comp.getX();
+		final int posY = comp.getY();
 		int row = getRow(posY);
-		int col = getColumn(posX);
+		final int col = getColumn(posX);
 
 		if (evt.getModifiers() == java.awt.event.InputEvent.BUTTON1_MASK) {
 			/**
@@ -1337,7 +1342,7 @@ public class JPrograf extends javax.swing.JPanel {
 				return;
 			}
 			if (editSubDel.getSelection() == 1) {
-				comp.edit(jFrameDummy);
+				comp.edit(JPrograf.jFrameDummy);
 			} else if (editSubDel.getSelection() == 2) {
 				addSelectedButton(posX, posY + COL_HEIGHT, 0, false, false);
 			}
@@ -1361,11 +1366,11 @@ public class JPrograf extends javax.swing.JPanel {
 				 */
 				if ((isConnectionBlock(matrix[row][col]) && (matrix[row + 1][col] != null
 						|| matrixWiring[row][col] == "<-" || matrixWiring[row][col + 1] == "<-"))) {
-					subBlock = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.SubBlock(jFrameDummy, true,
-							comp.getTipo(), true);
+					subBlock = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.SubBlock(
+							JPrograf.jFrameDummy, true, comp.getTipo(), true);
 				} else {
-					subBlock = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.SubBlock(jFrameDummy, true,
-							comp.getTipo(), false);
+					subBlock = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.SubBlock(
+							JPrograf.jFrameDummy, true, comp.getTipo(), false);
 				}
 				/**
 				 * subBlock.setSubTipo(-1), for the case of one selects ok
@@ -1389,7 +1394,8 @@ public class JPrograf extends javax.swing.JPanel {
 				 */
 				rowToCopyIni = row;
 				colToCopyIni = col;
-				java.awt.event.ActionEvent aEvt2 = new java.awt.event.ActionEvent((Object) jPanelContainer, -2, null);
+				final java.awt.event.ActionEvent aEvt2 = new java.awt.event.ActionEvent((Object) jPanelContainer, -2,
+						null);
 				jMenuItemCopyActionPerformed(aEvt2);// aEvt2 just to send not
 				// null...
 			}
@@ -1433,7 +1439,7 @@ public class JPrograf extends javax.swing.JPanel {
 				 * row+1!
 				 */
 				else {
-					int maxAllowedCol = getMaxAllowedColumn(row, col);
+					final int maxAllowedCol = getMaxAllowedColumn(row, col);
 					for (int iCol = col; iCol < maxAllowedCol; iCol++) {
 						for (int iRow = row; iRow < maxRow + 1; iRow++) {
 							delBlock(row, col, true);
@@ -1457,7 +1463,7 @@ public class JPrograf extends javax.swing.JPanel {
 			/**
 			 * Tests if the component is of type 1,2,12 or 13
 			 */
-			boolean[] leftRight = isAddLeftRight(row, col, comp);
+			final boolean[] leftRight = isAddLeftRight(row, col, comp);
 			addEsquerda = leftRight[0];
 			addDireita = leftRight[1];
 			addPasteEsquerda = leftRight[2];
@@ -1467,8 +1473,8 @@ public class JPrograf extends javax.swing.JPanel {
 			 * With a right click on the component one can do -1-cancel 1-add
 			 * left 2-add right 3-paste left 4-paste right
 			 */
-			introMethod = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.IntroMethod(jFrameDummy, true,
-					addEsquerda, addDireita, addPasteEsquerda, addPasteDireita);
+			introMethod = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.IntroMethod(
+					JPrograf.jFrameDummy, true, addEsquerda, addDireita, addPasteEsquerda, addPasteDireita);
 			new CenterFrame(this, introMethod);
 			introMethod.show();
 			if (introMethod.getSelOption() == -1) {
@@ -1500,7 +1506,7 @@ public class JPrograf extends javax.swing.JPanel {
 				 * Get the correct column, where to add the button, and if
 				 * needed shift the columns to the right
 				 */
-				int correctColumn = shiftColRight(row, col, 1);
+				final int correctColumn = shiftColRight(row, col, 1);
 				matrix[row][correctColumn] = null;
 				matrixWiring[row][correctColumn] = "<-";
 				addSelectedButton((correctColumn - 1) * COL_WIDTH, posY, 0, false, true);
@@ -1510,7 +1516,7 @@ public class JPrograf extends javax.swing.JPanel {
 				 */
 				rowToPaste = row;
 				colToPaste = col;
-				pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] tempBlock = copyPaste.getMatrixData();
+				final pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] tempBlock = copyPaste.getMatrixData();
 				/**
 				 * Shift the columns to the right, with the argument -2, to
 				 * inform the method that is has to do something special(do not
@@ -1528,7 +1534,8 @@ public class JPrograf extends javax.swing.JPanel {
 				 * Create an event with -1 to notify the paste method that is
 				 * has to do a left paste
 				 */
-				java.awt.event.ActionEvent aEvt = new java.awt.event.ActionEvent((Object) jPanelContainer, -1, null);
+				final java.awt.event.ActionEvent aEvt = new java.awt.event.ActionEvent((Object) jPanelContainer, -1,
+						null);
 				jMenuItemPasteActionPerformed(aEvt);
 
 				/**
@@ -1571,8 +1578,8 @@ public class JPrograf extends javax.swing.JPanel {
 	 * @param args the command line arguments
 	 */
 	/** Only for debug!! */
-	public static void main(String args[]) {
-		javax.swing.JFrame jf = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame jf = new javax.swing.JFrame();
 		jf.getContentPane().add(new JPrograf(null));
 		jf.pack();
 		jf.show();
@@ -1581,7 +1588,7 @@ public class JPrograf extends javax.swing.JPanel {
 	/**
 	 * Get the column with the mouse X position in the panel
 	 */
-	public int getColumn(int x) {
+	public int getColumn(final int x) {
 		column = (int) (x / COL_WIDTH + 1);
 		if (maxColumn < column) {
 			maxColumn = column;
@@ -1592,7 +1599,7 @@ public class JPrograf extends javax.swing.JPanel {
 	/**
 	 * Get the row with the mouse Y position in the panel
 	 */
-	public int getRow(int y) {
+	public int getRow(final int y) {
 		row = (int) (y / COL_HEIGHT + 1);
 		if (maxRow < row) {
 			maxRow = row;
@@ -1604,11 +1611,11 @@ public class JPrograf extends javax.swing.JPanel {
 	 * See if it is valid to add a component. It is always ok to add if it has a
 	 * component in the row above, that isn't a horLine
 	 */
-	public boolean isAddCompValid(int x, int y, boolean substitute) {
+	public boolean isAddCompValid(final int x, final int y, final boolean substitute) {
 		if ((jPanelContainer.getComponentAt(x, y - COL_HEIGHT) != null
 				&& jPanelContainer.getComponentAt(x, y - COL_HEIGHT) != jPanelContainer && !jPanelContainer
-				.getComponentAt(x, y - COL_HEIGHT).getClass().getName().startsWith(
-						"pt.utl.ist.elab.client.webrobot.customizer.Comps.HorLine"))
+				.getComponentAt(x, y - COL_HEIGHT).getClass().getName()
+				.startsWith("pt.utl.ist.elab.client.webrobot.customizer.Comps.HorLine"))
 				|| (substitute)) {
 			return true;
 		} else {
@@ -1619,7 +1626,7 @@ public class JPrograf extends javax.swing.JPanel {
 	/**
 	 * Try to add a component in row, col of matrix, and matrixWiring
 	 */
-	private void addComp(int row, int col, pt.utl.ist.elab.client.webrobot.customizer.Comps.Block comp) {
+	private void addComp(final int row, final int col, final pt.utl.ist.elab.client.webrobot.customizer.Comps.Block comp) {
 		/**
 		 * If in the component configuration UI the user canceled the addition
 		 * of the button, do nothing and return
@@ -1655,7 +1662,8 @@ public class JPrograf extends javax.swing.JPanel {
 	 * The same of addComp, but for components of type 12 or 13 ->Next version
 	 * join addComp and addCompAnd
 	 */
-	private void addCompAnd(int row, int col, pt.utl.ist.elab.client.webrobot.customizer.Comps.Block compAnd) {
+	private void addCompAnd(final int row, final int col,
+			final pt.utl.ist.elab.client.webrobot.customizer.Comps.Block compAnd) {
 		if (compAnd.isCancel()) {
 			actionCanceled = true;
 			return;
@@ -1694,19 +1702,19 @@ public class JPrograf extends javax.swing.JPanel {
 	 * Adds the components two different types of events: mouse pressed,
 	 * (horLine doesn't have this event) mouse moved
 	 */
-	private void addCompEvents(pt.utl.ist.elab.client.webrobot.customizer.Comps.Block comp) {
+	private void addCompEvents(final pt.utl.ist.elab.client.webrobot.customizer.Comps.Block comp) {
 		if (comp == null) {
 			return;
 		}
 		if (!isHorLine(comp)) {
 			comp.addMouseListener(new java.awt.event.MouseAdapter() {
-				public void mousePressed(java.awt.event.MouseEvent evt2) {
+				public void mousePressed(final java.awt.event.MouseEvent evt2) {
 					compMousePressed(evt2);
 				}
 			});
 		}
 		comp.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-			public void mouseMoved(java.awt.event.MouseEvent evt) {
+			public void mouseMoved(final java.awt.event.MouseEvent evt) {
 				compMouseMoved(evt);
 			}
 		});
@@ -1715,9 +1723,10 @@ public class JPrograf extends javax.swing.JPanel {
 	/**
 	 * Adds the selected button!
 	 */
-	private void addSelectedButton(int posX, int posY, int tipo, boolean substitute, boolean paintLeft) {
-		int row = getRow(posY);
-		int col = getColumn(posX);
+	private void addSelectedButton(final int posX, final int posY, final int tipo, final boolean substitute,
+			final boolean paintLeft) {
+		final int row = getRow(posY);
+		final int col = getColumn(posX);
 		if (!isAddCompValid(posX, posY, substitute)) {
 			/**
 			 * Let add the component to the right of some component
@@ -1733,43 +1742,44 @@ public class JPrograf extends javax.swing.JPanel {
 		 * button to substitute!
 		 */
 		if ((getSelectedButton() == 1 && !substitute) || (substitute && tipo == 1)) {
-			compInt = new pt.utl.ist.elab.client.webrobot.customizer.Comps.CompInt(jFrameDummy);
+			compInt = new pt.utl.ist.elab.client.webrobot.customizer.Comps.CompInt(JPrograf.jFrameDummy);
 			addComp(row, col, compInt);
 		} else if ((getSelectedButton() == 2 && !substitute) || (substitute && tipo == 2)) {
-			compBin = new pt.utl.ist.elab.client.webrobot.customizer.Comps.CompBin(jFrameDummy);
+			compBin = new pt.utl.ist.elab.client.webrobot.customizer.Comps.CompBin(JPrograf.jFrameDummy);
 			addComp(row, col, compBin);
 		} else if ((getSelectedButton() == 12 && !substitute) || (substitute && tipo == 12)) {
-			compAndInt = new pt.utl.ist.elab.client.webrobot.customizer.Comps.CompAndInt(jFrameDummy);
+			compAndInt = new pt.utl.ist.elab.client.webrobot.customizer.Comps.CompAndInt(JPrograf.jFrameDummy);
 			addCompAnd(row, col, compAndInt);
 		} else if ((getSelectedButton() == 13 && !substitute) || (substitute && tipo == 13)) {
-			compAndBin = new pt.utl.ist.elab.client.webrobot.customizer.Comps.CompAndBin(jFrameDummy);
+			compAndBin = new pt.utl.ist.elab.client.webrobot.customizer.Comps.CompAndBin(JPrograf.jFrameDummy);
 			addCompAnd(row, col, compAndBin);
 		} else if ((getSelectedButton() == 10 && !substitute) || (substitute && tipo == 10)) {
-			atribui = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Atribui(jFrameDummy);
+			atribui = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Atribui(JPrograf.jFrameDummy);
 			addComp(row, col, atribui);
 		} else if ((getSelectedButton() == 11 && !substitute) || (substitute && tipo == 11)) {
-			incDec = new pt.utl.ist.elab.client.webrobot.customizer.Comps.IncDec(jFrameDummy);
+			incDec = new pt.utl.ist.elab.client.webrobot.customizer.Comps.IncDec(JPrograf.jFrameDummy);
 			addComp(row, col, incDec);
 		} else if ((getSelectedButton() == 9 && !substitute) || (substitute && tipo == 9)) {
-			setReset = new pt.utl.ist.elab.client.webrobot.customizer.Comps.SetReset(jFrameDummy);
+			setReset = new pt.utl.ist.elab.client.webrobot.customizer.Comps.SetReset(JPrograf.jFrameDummy);
 			addComp(row, col, setReset);
 		} else if ((getSelectedButton() == 8 && !substitute) || (substitute && tipo == 8)) {
-			pwm = new pt.utl.ist.elab.client.webrobot.customizer.Comps.PWM(jFrameDummy);
+			pwm = new pt.utl.ist.elab.client.webrobot.customizer.Comps.PWM(JPrograf.jFrameDummy);
 			addComp(row, col, pwm);
 		} else if ((getSelectedButton() == 14 && !substitute) || (substitute && tipo == 14)) {
-			ivpwm = new pt.utl.ist.elab.client.webrobot.customizer.Comps.IVPWM(jFrameDummy, modelIVPWM);
+			ivpwm = new pt.utl.ist.elab.client.webrobot.customizer.Comps.IVPWM(JPrograf.jFrameDummy,
+					JPrograf.modelIVPWM);
 			addComp(row, col, ivpwm);
 		} else if ((getSelectedButton() == 3 && !substitute) || (substitute && tipo == 3)) {
-			frente = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Frente(jFrameDummy);
+			frente = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Frente(JPrograf.jFrameDummy);
 			addComp(row, col, frente);
 		} else if ((getSelectedButton() == 4 && !substitute) || (substitute && tipo == 4)) {
-			marchAtras = new pt.utl.ist.elab.client.webrobot.customizer.Comps.MarchAtras(jFrameDummy);
+			marchAtras = new pt.utl.ist.elab.client.webrobot.customizer.Comps.MarchAtras(JPrograf.jFrameDummy);
 			addComp(row, col, marchAtras);
 		} else if ((getSelectedButton() == 5 && !substitute) || (substitute && tipo == 5)) {
-			direita = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Direita(jFrameDummy);
+			direita = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Direita(JPrograf.jFrameDummy);
 			addComp(row, col, direita);
 		} else if ((getSelectedButton() == 6 && !substitute) || (substitute && tipo == 6)) {
-			esquerda = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Esquerda(jFrameDummy);
+			esquerda = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Esquerda(JPrograf.jFrameDummy);
 			addComp(row, col, esquerda);
 		}
 	}
@@ -1778,8 +1788,8 @@ public class JPrograf extends javax.swing.JPanel {
 	 * Creates a new block based on the tpye and making a copy of the model of
 	 * the component, that is to be copied
 	 */
-	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Block createNewBlock(int tipo,
-			pt.utl.ist.elab.client.webrobot.customizer.Models.ModelBlock model) {
+	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Block createNewBlock(final int tipo,
+			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelBlock model) {
 		if (tipo == 1) {
 			compInt = new pt.utl.ist.elab.client.webrobot.customizer.Comps.CompInt(
 					(pt.utl.ist.elab.client.webrobot.customizer.Models.ModelCompInt) model);
@@ -1813,7 +1823,7 @@ public class JPrograf extends javax.swing.JPanel {
 					(pt.utl.ist.elab.client.webrobot.customizer.Models.ModelPWM) model);
 			return pwm;
 		} else if (tipo == 14) {
-			ivpwm = new pt.utl.ist.elab.client.webrobot.customizer.Comps.IVPWM(modelIVPWM);
+			ivpwm = new pt.utl.ist.elab.client.webrobot.customizer.Comps.IVPWM(JPrograf.modelIVPWM);
 			return ivpwm;
 		} else if (tipo == 3) {
 			frente = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Frente(
@@ -1838,7 +1848,7 @@ public class JPrograf extends javax.swing.JPanel {
 	/**
 	 * Creates a new model for a component, based on the component type
 	 */
-	private pt.utl.ist.elab.client.webrobot.customizer.Models.ModelBlock getModel(int tipo) {
+	private pt.utl.ist.elab.client.webrobot.customizer.Models.ModelBlock getModel(final int tipo) {
 		if (tipo == 1) {
 			modelCompInt = new pt.utl.ist.elab.client.webrobot.customizer.Models.ModelCompInt();
 			return modelCompInt;
@@ -1876,7 +1886,7 @@ public class JPrograf extends javax.swing.JPanel {
 			modelCompAndBin = new pt.utl.ist.elab.client.webrobot.customizer.Models.ModelCompAndBin();
 			return modelCompAndBin;
 		} else if (tipo == 14) {
-			return modelIVPWM;
+			return JPrograf.modelIVPWM;
 		}
 		return null;
 	}
@@ -1920,8 +1930,8 @@ public class JPrograf extends javax.swing.JPanel {
 	 * BEGINS AT ROW 4, COL1 X ... X-X-X-X-X-X-X X-X X SHIFTED (All the comps
 	 * that had connections in this col, went down X-X has well) X
 	 */
-	private void shiftRowDownFixedCol(int row, int col) {
-		int maxColAllowed = getMaxAllowedColumn(row, col);
+	private void shiftRowDownFixedCol(final int row, final int col) {
+		final int maxColAllowed = getMaxAllowedColumn(row, col);
 		for (int iRow = maxRow; iRow > row - 1; iRow--) {
 			for (int iCol = col; iCol < maxColAllowed; iCol++) {
 				matrix[iRow + 1][iCol] = matrix[iRow][iCol];
@@ -1937,8 +1947,8 @@ public class JPrograf extends javax.swing.JPanel {
 	 * The same of the previous method, but brings rows UP. Meaning the row+n+1
 	 * to row+n
 	 */
-	private void shiftRowUpFixedCol(int row, int col) {
-		int maxColAllowed = getMaxAllowedColumn(row, col);
+	private void shiftRowUpFixedCol(final int row, final int col) {
+		final int maxColAllowed = getMaxAllowedColumn(row, col);
 		for (int iRow = row; iRow < maxRow + 1; iRow++) {
 			for (int iCol = col; iCol < maxColAllowed; iCol++) {
 				matrix[iRow][iCol] = matrix[iRow + 1][iCol];
@@ -1953,9 +1963,9 @@ public class JPrograf extends javax.swing.JPanel {
 	 * Shift the columns to the right, and returns the column, where the
 	 * components to insert should be inserted!
 	 */
-	private int shiftColRight(int row, int col, int enlargeColToReturn) {
+	private int shiftColRight(final int row, final int col, int enlargeColToReturn) {
 		int colToReturn = col + 1;
-		int originalRow = row;
+		final int originalRow = row;
 		for (int iCol = col + 1; iCol < maxColumn + 1; iCol++) {
 			/**
 			 * If one didn't want to arrive to maxColumn, since it found a
@@ -2031,7 +2041,7 @@ public class JPrograf extends javax.swing.JPanel {
 	 * Method called from addLeft and pasteLeft: Shift all the components in
 	 * this column, beginning in THIS row, to the right
 	 */
-	private void shiftColRightLeftSelected(int row, int col) {
+	private void shiftColRightLeftSelected(final int row, final int col) {
 		for (int iRow = row; iRow < maxRow + 1; iRow++) {
 			matrix[iRow][col + 1] = matrix[iRow][col];
 			matrixWiring[iRow][col + 1] = matrixWiring[iRow][col];
@@ -2044,7 +2054,7 @@ public class JPrograf extends javax.swing.JPanel {
 	 * Shift the columns one time to the place of col. Meaning that col+n+1
 	 * becomes col+n
 	 */
-	private void shiftColLeft(int row, int col) {
+	private void shiftColLeft(final int row, final int col) {
 		for (int iCol = col; iCol < maxColumn; iCol++) {
 			for (int iRow = 0; iRow < maxRow + 1; iRow++) {
 				if (matrix[iRow][iCol] != null && (matrix[iRow][iCol + 1] == null || isHorLine(iRow, iCol + 1))) {
@@ -2062,7 +2072,7 @@ public class JPrograf extends javax.swing.JPanel {
 	 * Deletes a block! If delColumn is selected, than don't test if it can
 	 * delete a block!
 	 */
-	private void delBlock(int row, int col, boolean delColumn) {
+	private void delBlock(final int row, final int col, final boolean delColumn) {
 		/**
 		 * Can't delete a block, if it a comparison block, and the block at
 		 * row+1 isn't of comparison, or if the block at row-1 is null and the
@@ -2103,8 +2113,7 @@ public class JPrograf extends javax.swing.JPanel {
 		 * of type 12 or 13)
 		 */
 		if ((matrix[row][col] == null && matrixWiring[row][col + 1] != null && matrixWiring[row][col + 1]
-				.startsWith("<-"))
-				|| isColEmpty(col)) {
+				.startsWith("<-")) || isColEmpty(col)) {
 			shiftColLeft(row, col);
 			shiftedColsInDel = true;
 		}
@@ -2114,9 +2123,9 @@ public class JPrograf extends javax.swing.JPanel {
 	 * The method that takes care of updating the data of the bottom of the
 	 * panel
 	 */
-	private void updateBottomPanel(int x, int y) {
-		int rowCl = (int) (y / COL_HEIGHT + 1);
-		int colCl = (int) (x / COL_WIDTH + 1);
+	private void updateBottomPanel(final int x, final int y) {
+		final int rowCl = (int) (y / COL_HEIGHT + 1);
+		final int colCl = (int) (x / COL_WIDTH + 1);
 		jLabelNumComps.setText("N� total de blocos = " + countTotalBlocks());
 		jLabelRow.setText("Linha = " + rowCl);
 		jLabelCol.setText("Coluna = " + colCl);
@@ -2146,10 +2155,10 @@ public class JPrograf extends javax.swing.JPanel {
 				matrixWiring[iRow][iCol] = null;
 			}
 		}
-		undoBlock = null;
-		undoWiring = null;
-		undoBlock = new Undo();
-		undoWiring = new Undo();
+		JPrograf.undoBlock = null;
+		JPrograf.undoWiring = null;
+		JPrograf.undoBlock = new Undo();
+		JPrograf.undoWiring = new Undo();
 		/**
 		 * Two times for undo reasons...ugly, change in next version
 		 */
@@ -2178,7 +2187,7 @@ public class JPrograf extends javax.swing.JPanel {
 	/**
 	 * Returns the first row that ISN'T null in this column
 	 */
-	private int getFirtNonNullRow(int col) {
+	private int getFirtNonNullRow(final int col) {
 		for (int iRow = 0; iRow < maxRow + 1; iRow++) {
 			if (matrix[iRow][col] != null && !isHorLine(iRow, col)) {
 				return iRow;
@@ -2218,7 +2227,7 @@ public class JPrograf extends javax.swing.JPanel {
 	 * that must copy, or delete, etc. until col 3. (remember that the copy
 	 * method, starts to check for connections at row+1!!)
 	 */
-	private int getMaxAllowedColumn(int row, int col) {
+	private int getMaxAllowedColumn(final int row, final int col) {
 		int maxColAllowed = col;
 		boolean abort = false;
 		if (matrix[row + 1][col] == null) {
@@ -2245,11 +2254,11 @@ public class JPrograf extends javax.swing.JPanel {
 	/**
 	 * Checks if in the matrix at the position (rowXcol), there is a HorLine
 	 */
-	private boolean isHorLine(int row, int col) {
+	private boolean isHorLine(final int row, final int col) {
 		if (matrix[row][col] == null) {
 			return false;
-		} else if (matrix[row][col].getClass().getName().startsWith(
-				"pt.utl.ist.elab.client.webrobot.customizer.Comps.HorLine")) {
+		} else if (matrix[row][col].getClass().getName()
+				.startsWith("pt.utl.ist.elab.client.webrobot.customizer.Comps.HorLine")) {
 			return true;
 		} else {
 			return false;
@@ -2259,7 +2268,7 @@ public class JPrograf extends javax.swing.JPanel {
 	/**
 	 * Checks if the block is a HorLine
 	 */
-	private boolean isHorLine(pt.utl.ist.elab.client.webrobot.customizer.Comps.Block comp) {
+	private boolean isHorLine(final pt.utl.ist.elab.client.webrobot.customizer.Comps.Block comp) {
 		if (comp == null) {
 			return false;
 		} else if (comp.getClass().getName().startsWith("pt.utl.ist.elab.client.webrobot.customizer.Comps.HorLine")) {
@@ -2273,7 +2282,7 @@ public class JPrograf extends javax.swing.JPanel {
 	 * This method is used to see if the column is empty HorLines don't count as
 	 * blocks, meaning that a column with horLines will return empty!
 	 */
-	private boolean isColEmpty(int col) {
+	private boolean isColEmpty(final int col) {
 		boolean empty = true;
 		for (int iRow = 2; iRow < maxRow + 1; iRow++) {
 			if (matrix[iRow][col] != null && !isHorLine(iRow, col)) {
@@ -2286,7 +2295,7 @@ public class JPrograf extends javax.swing.JPanel {
 	/**
 	 * Tests if a component is of type 1,2,12 or 13
 	 */
-	private boolean isConnectionBlock(pt.utl.ist.elab.client.webrobot.customizer.Comps.Block comp) {
+	private boolean isConnectionBlock(final pt.utl.ist.elab.client.webrobot.customizer.Comps.Block comp) {
 		if (comp == null) {
 			return false;
 		}
@@ -2302,9 +2311,10 @@ public class JPrograf extends javax.swing.JPanel {
 	 * clicks in it with the right button Tests: 1-Can have addLeft 2-Can have
 	 * addRight 3-Can have pasteLeft 4-Can have pasteRight
 	 */
-	private boolean[] isAddLeftRight(int row, int col, pt.utl.ist.elab.client.webrobot.customizer.Comps.Block comp) {
-		pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] tempPaste = copyPaste.getMatrixData();
-		boolean[] retBoolean = new boolean[4];
+	private boolean[] isAddLeftRight(final int row, final int col,
+			final pt.utl.ist.elab.client.webrobot.customizer.Comps.Block comp) {
+		final pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] tempPaste = copyPaste.getMatrixData();
+		final boolean[] retBoolean = new boolean[4];
 		if (comp == null) {
 			retBoolean[0] = false;
 			retBoolean[1] = false;
@@ -2407,7 +2417,7 @@ public class JPrograf extends javax.swing.JPanel {
 	/**
 	 * Draw the matrix in the screen
 	 */
-	private void updateDisplay(boolean addToUndo) {
+	private void updateDisplay(final boolean addToUndo) {
 		/**
 		 * First clean all the blocks
 		 */
@@ -2505,26 +2515,26 @@ public class JPrograf extends javax.swing.JPanel {
 		 * this isn't added to undo!
 		 */
 		if (addToUndo) {
-			pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] matrixUndo = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[maxRow + 5][maxColumn + 5];
-			String[][] matrixWiringUndo = new String[maxRow + 5][maxColumn + 5];
+			final pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] matrixUndo = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[maxRow + 5][maxColumn + 5];
+			final String[][] matrixWiringUndo = new String[maxRow + 5][maxColumn + 5];
 			for (int iRow = 0; iRow < maxRow + 1; iRow++) {
 				for (int iCol = 0; iCol < maxColumn + 1; iCol++) {
 					matrixUndo[iRow][iCol] = matrix[iRow][iCol];
 					matrixWiringUndo[iRow][iCol] = matrixWiring[iRow][iCol];
 				}
 			}
-			undoBlock.addElement(matrixUndo);
-			undoWiring.addElement(matrixWiringUndo);
+			JPrograf.undoBlock.addElement(matrixUndo);
+			JPrograf.undoWiring.addElement(matrixWiringUndo);
 		}
 		jPanelContainer.revalidate();
 	}
 
-	private void openFile(java.io.InputStream is) throws java.io.IOException {
+	private void openFile(final java.io.InputStream is) throws java.io.IOException {
 		String data;
 		endedRowCol = false;// for treatData()!
 		counter = 0;// for treatData()!
 		int check;
-		int lineSeparator = (int) System.getProperty("line.separator").charAt(0);
+		final int lineSeparator = (int) System.getProperty("line.separator").charAt(0);
 		StringBuffer buffer = new StringBuffer(100);
 		;
 
@@ -2555,7 +2565,7 @@ public class JPrograf extends javax.swing.JPanel {
 			 */
 			data = buffer.toString().trim();
 			treatData(data);
-		} catch (java.io.IOException ioe) {
+		} catch (final java.io.IOException ioe) {
 			System.out.println(ioe);
 		}
 		is.close();
@@ -2570,15 +2580,15 @@ public class JPrograf extends javax.swing.JPanel {
 	 * This opens the file and then sends every line of information to
 	 * treatData()
 	 */
-	private void openFile(java.io.File openFile) throws java.io.IOException {
+	private void openFile(final java.io.File openFile) throws java.io.IOException {
 		String data;
 		endedRowCol = false;// for treatData()!
 		counter = 0;// for treatData()!
 		int check;
-		int lineSeparator = (int) System.getProperty("line.separator").charAt(0);
+		final int lineSeparator = (int) System.getProperty("line.separator").charAt(0);
 		StringBuffer buffer = new StringBuffer(100);
 		;
-		java.io.FileInputStream fileInputStream = new java.io.FileInputStream(openFile);
+		final java.io.FileInputStream fileInputStream = new java.io.FileInputStream(openFile);
 
 		try {
 			buffer = new StringBuffer(200);
@@ -2607,7 +2617,7 @@ public class JPrograf extends javax.swing.JPanel {
 			 */
 			data = buffer.toString().trim();
 			treatData(data);
-		} catch (java.io.IOException ioe) {
+		} catch (final java.io.IOException ioe) {
 			System.out.println(ioe);
 		}
 		fileInputStream.close();
@@ -2622,7 +2632,7 @@ public class JPrograf extends javax.swing.JPanel {
 	 * Treats the data: creates new components, and new models with the data
 	 * from the file! The method is very obvious but long...
 	 */
-	private void treatData(String data) {
+	private void treatData(final String data) {
 		int coluna = 0;
 		int nivel = 0;
 		int tipo = 0;
@@ -2648,7 +2658,7 @@ public class JPrograf extends javax.swing.JPanel {
 			return;
 		}
 		if (!endedRowCol) {
-			java.util.StringTokenizer st = new java.util.StringTokenizer(data, ",");
+			final java.util.StringTokenizer st = new java.util.StringTokenizer(data, ",");
 			while (st.hasMoreTokens()) {
 				try {
 					coluna = Integer.parseInt(st.nextToken().trim().substring("coluna=".length()));
@@ -2669,13 +2679,13 @@ public class JPrograf extends javax.swing.JPanel {
 					valor = Integer.parseInt(st.nextToken().trim().substring("valor=".length()));
 					valor2 = Integer.parseInt(st.nextToken().trim().substring("valor2=".length()));
 					temp = st.nextToken().trim();
-					java.util.StringTokenizer st2 = new java.util.StringTokenizer(temp);
+					final java.util.StringTokenizer st2 = new java.util.StringTokenizer(temp);
 					while (st2.hasMoreTokens()) {
 						flag = Integer.parseInt(st2.nextToken().trim().substring("flag=".length()));
 						baixo = st2.nextToken().trim().substring("baixo=".length());
 					}
 					temp2 = st.nextToken().trim();
-					java.util.StringTokenizer st3 = new java.util.StringTokenizer(temp2);
+					final java.util.StringTokenizer st3 = new java.util.StringTokenizer(temp2);
 					if (st3.countTokens() == 1) {
 						esquerda = st3.nextToken().trim().substring("esquerda=".length());
 					} else {
@@ -2719,7 +2729,7 @@ public class JPrograf extends javax.swing.JPanel {
 						maxRow = nivel;
 					}
 					return;
-				} catch (java.lang.NumberFormatException nfe) {
+				} catch (final java.lang.NumberFormatException nfe) {
 					javax.swing.JOptionPane.showMessageDialog(this, "Aten��o!\nEste ficheiro n�o � v�lido!", "Erro!",
 							javax.swing.JOptionPane.ERROR_MESSAGE);
 					isFileValid = false;
@@ -2738,19 +2748,19 @@ public class JPrograf extends javax.swing.JPanel {
 			return;
 		} else if (counter == 4) {
 			try {
-				java.util.StringTokenizer st4 = new java.util.StringTokenizer(data);
-				modelConfInOut.setB0(Integer.parseInt(st4.nextToken()));
-				modelConfInOut.setB1(Integer.parseInt(st4.nextToken()));
-				modelConfInOut.setB2(Integer.parseInt(st4.nextToken()));
-				modelConfInOut.setB3(Integer.parseInt(st4.nextToken()));
-				modelConfInOut.setB4(Integer.parseInt(st4.nextToken()));
-				modelConfInOut.setB5(Integer.parseInt(st4.nextToken()));
-				modelConfInOut.setB6(Integer.parseInt(st4.nextToken()));
-				modelConfInOut.setB7(Integer.parseInt(st4.nextToken()));
-				modelConfInOut.setC0(Integer.parseInt(st4.nextToken()));
-				modelConfInOut.setC3(Integer.parseInt(st4.nextToken()));
+				final java.util.StringTokenizer st4 = new java.util.StringTokenizer(data);
+				JPrograf.modelConfInOut.setB0(Integer.parseInt(st4.nextToken()));
+				JPrograf.modelConfInOut.setB1(Integer.parseInt(st4.nextToken()));
+				JPrograf.modelConfInOut.setB2(Integer.parseInt(st4.nextToken()));
+				JPrograf.modelConfInOut.setB3(Integer.parseInt(st4.nextToken()));
+				JPrograf.modelConfInOut.setB4(Integer.parseInt(st4.nextToken()));
+				JPrograf.modelConfInOut.setB5(Integer.parseInt(st4.nextToken()));
+				JPrograf.modelConfInOut.setB6(Integer.parseInt(st4.nextToken()));
+				JPrograf.modelConfInOut.setB7(Integer.parseInt(st4.nextToken()));
+				JPrograf.modelConfInOut.setC0(Integer.parseInt(st4.nextToken()));
+				JPrograf.modelConfInOut.setC3(Integer.parseInt(st4.nextToken()));
 				return;
-			} catch (java.lang.NumberFormatException nfe) {
+			} catch (final java.lang.NumberFormatException nfe) {
 				javax.swing.JOptionPane.showMessageDialog(this, "Aten��o!\nEste ficheiro n�o � v�lido!", "Erro!",
 						javax.swing.JOptionPane.ERROR_MESSAGE);
 				isFileValid = false;
@@ -2758,14 +2768,14 @@ public class JPrograf extends javax.swing.JPanel {
 			}
 		} else if (counter == 5) {
 			try {
-				java.util.StringTokenizer st5 = new java.util.StringTokenizer(data);
-				modelConfInOut.setA1(Integer.parseInt(st5.nextToken()));
-				modelConfInOut.setA2(Integer.parseInt(st5.nextToken()));
-				modelConfInOut.setA3(Integer.parseInt(st5.nextToken()));
-				modelConfInOut.setA4(Integer.parseInt(st5.nextToken()));
-				String dummyVar = st5.nextToken();
+				final java.util.StringTokenizer st5 = new java.util.StringTokenizer(data);
+				JPrograf.modelConfInOut.setA1(Integer.parseInt(st5.nextToken()));
+				JPrograf.modelConfInOut.setA2(Integer.parseInt(st5.nextToken()));
+				JPrograf.modelConfInOut.setA3(Integer.parseInt(st5.nextToken()));
+				JPrograf.modelConfInOut.setA4(Integer.parseInt(st5.nextToken()));
+				final String dummyVar = st5.nextToken();
 				return;
-			} catch (java.lang.NumberFormatException nfe) {
+			} catch (final java.lang.NumberFormatException nfe) {
 				javax.swing.JOptionPane.showMessageDialog(this, "Aten��o!\nEste ficheiro n�o � v�lido!", "Erro!",
 						javax.swing.JOptionPane.ERROR_MESSAGE);
 				isFileValid = false;
@@ -2773,19 +2783,19 @@ public class JPrograf extends javax.swing.JPanel {
 			}
 		} else if (counter == 6) {
 			try {
-				java.util.StringTokenizer st6 = new java.util.StringTokenizer(data);
-				modelConfInOut.setV1(Integer.parseInt(st6.nextToken()));
-				modelConfInOut.setV2(Integer.parseInt(st6.nextToken()));
-				modelConfInOut.setV3(Integer.parseInt(st6.nextToken()));
-				modelConfInOut.setV4(Integer.parseInt(st6.nextToken()));
-				modelConfInOut.setV5(Integer.parseInt(st6.nextToken()));
-			} catch (java.lang.NumberFormatException nfe) {
+				final java.util.StringTokenizer st6 = new java.util.StringTokenizer(data);
+				JPrograf.modelConfInOut.setV1(Integer.parseInt(st6.nextToken()));
+				JPrograf.modelConfInOut.setV2(Integer.parseInt(st6.nextToken()));
+				JPrograf.modelConfInOut.setV3(Integer.parseInt(st6.nextToken()));
+				JPrograf.modelConfInOut.setV4(Integer.parseInt(st6.nextToken()));
+				JPrograf.modelConfInOut.setV5(Integer.parseInt(st6.nextToken()));
+			} catch (final java.lang.NumberFormatException nfe) {
 				javax.swing.JOptionPane.showMessageDialog(this, "Aten��o!\nEste ficheiro n�o � v�lido!", "Erro!",
 						javax.swing.JOptionPane.ERROR_MESSAGE);
 				isFileValid = false;
 				return;
 			}
-			confInOut.setModel(modelConfInOut);
+			confInOut.setModel(JPrograf.modelConfInOut);
 			confInOut.readModel();
 			return;
 		}
@@ -2796,7 +2806,7 @@ public class JPrograf extends javax.swing.JPanel {
 			return;
 		}
 		if (counter2 < iValuesSize) {
-			java.util.StringTokenizer st = new java.util.StringTokenizer(data, "\t");
+			final java.util.StringTokenizer st = new java.util.StringTokenizer(data, "\t");
 			iValues[counter2][0] = st.nextToken();
 			iValues[counter2][1] = new Integer(st.nextToken().trim());
 			iValues[counter2][2] = new Integer(st.nextToken().trim());
@@ -2804,36 +2814,36 @@ public class JPrograf extends javax.swing.JPanel {
 			counter = 7;
 			return;
 		}
-		modelIVPWM.setIValues(iValues);
+		JPrograf.modelIVPWM.setIValues(iValues);
 		if (counter == 8) {
-			java.util.StringTokenizer st2 = new java.util.StringTokenizer(data);
-			modelIVPWM.setI0Value(Integer.parseInt(st2.nextToken().trim()));
-			modelIVPWM.setI1Value(Integer.parseInt(st2.nextToken().trim()));
-			modelIVPWM.setI2Value(Integer.parseInt(st2.nextToken().trim()));
-			modelIVPWM.setI3Value(Integer.parseInt(st2.nextToken().trim()));
-			modelIVPWM.setI4Value(Integer.parseInt(st2.nextToken().trim()));
-			modelIVPWM.setI5Value(Integer.parseInt(st2.nextToken().trim()));
-			modelIVPWM.setI6Value(Integer.parseInt(st2.nextToken().trim()));
-			modelIVPWM.setI7Value(Integer.parseInt(st2.nextToken().trim()));
+			final java.util.StringTokenizer st2 = new java.util.StringTokenizer(data);
+			JPrograf.modelIVPWM.setI0Value(Integer.parseInt(st2.nextToken().trim()));
+			JPrograf.modelIVPWM.setI1Value(Integer.parseInt(st2.nextToken().trim()));
+			JPrograf.modelIVPWM.setI2Value(Integer.parseInt(st2.nextToken().trim()));
+			JPrograf.modelIVPWM.setI3Value(Integer.parseInt(st2.nextToken().trim()));
+			JPrograf.modelIVPWM.setI4Value(Integer.parseInt(st2.nextToken().trim()));
+			JPrograf.modelIVPWM.setI5Value(Integer.parseInt(st2.nextToken().trim()));
+			JPrograf.modelIVPWM.setI6Value(Integer.parseInt(st2.nextToken().trim()));
+			JPrograf.modelIVPWM.setI7Value(Integer.parseInt(st2.nextToken().trim()));
 			return;
 		}
 		if (counter == 9) {
-			java.util.StringTokenizer st3 = new java.util.StringTokenizer(data);
-			modelIVPWM.setI0State(Integer.parseInt(st3.nextToken().trim()));
-			modelIVPWM.setI1State(Integer.parseInt(st3.nextToken().trim()));
-			modelIVPWM.setI2State(Integer.parseInt(st3.nextToken().trim()));
-			modelIVPWM.setI3State(Integer.parseInt(st3.nextToken().trim()));
-			modelIVPWM.setI4State(Integer.parseInt(st3.nextToken().trim()));
-			modelIVPWM.setI5State(Integer.parseInt(st3.nextToken().trim()));
-			modelIVPWM.setI6State(Integer.parseInt(st3.nextToken().trim()));
-			modelIVPWM.setI7State(Integer.parseInt(st3.nextToken().trim()));
+			final java.util.StringTokenizer st3 = new java.util.StringTokenizer(data);
+			JPrograf.modelIVPWM.setI0State(Integer.parseInt(st3.nextToken().trim()));
+			JPrograf.modelIVPWM.setI1State(Integer.parseInt(st3.nextToken().trim()));
+			JPrograf.modelIVPWM.setI2State(Integer.parseInt(st3.nextToken().trim()));
+			JPrograf.modelIVPWM.setI3State(Integer.parseInt(st3.nextToken().trim()));
+			JPrograf.modelIVPWM.setI4State(Integer.parseInt(st3.nextToken().trim()));
+			JPrograf.modelIVPWM.setI5State(Integer.parseInt(st3.nextToken().trim()));
+			JPrograf.modelIVPWM.setI6State(Integer.parseInt(st3.nextToken().trim()));
+			JPrograf.modelIVPWM.setI7State(Integer.parseInt(st3.nextToken().trim()));
 		}
 		/**
 		 * The ivpwm share all the same model...update the model, so it can read
 		 * the right values....if the user selects to edit or to create a new
 		 * one
 		 */
-		ivpwm = new pt.utl.ist.elab.client.webrobot.customizer.Comps.IVPWM(modelIVPWM);
+		ivpwm = new pt.utl.ist.elab.client.webrobot.customizer.Comps.IVPWM(JPrograf.modelIVPWM);
 	}
 
 	/**
@@ -2842,7 +2852,7 @@ public class JPrograf extends javax.swing.JPanel {
 	 * @return Value of property runStandAloneApp.
 	 */
 	public boolean isRunStandAloneApp() {
-		return this.runStandAloneApp;
+		return runStandAloneApp;
 	}
 
 	/**
@@ -2850,7 +2860,7 @@ public class JPrograf extends javax.swing.JPanel {
 	 * 
 	 * @param runStandAloneApp New value of property runStandAloneApp.
 	 */
-	public void setRunStandAloneApp(boolean runStandAloneApp) {
+	public void setRunStandAloneApp(final boolean runStandAloneApp) {
 		this.runStandAloneApp = runStandAloneApp;
 	}
 
@@ -2861,16 +2871,16 @@ public class JPrograf extends javax.swing.JPanel {
 		return acqConfig;
 	}
 
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
 	public javax.swing.JMenuBar getMenuBar() {
@@ -2886,7 +2896,7 @@ public class JPrograf extends javax.swing.JPanel {
 	}
 
 	public String getCustomizerTitle() {
-		return TITLE_VERSION;
+		return JPrograf.TITLE_VERSION;
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2968,10 +2978,10 @@ public class JPrograf extends javax.swing.JPanel {
 	private int column = 1;
 	private int maxRow = 1;
 	private int maxColumn = 1;
-	private int COL_WIDTH = 77;
-	private int COL_HEIGHT = 45;
-	private int MAX_COLUMNS = 1000;
-	private int MAX_ROWS = 1000;
+	private final int COL_WIDTH = 77;
+	private final int COL_HEIGHT = 45;
+	private final int MAX_COLUMNS = 1000;
+	private final int MAX_ROWS = 1000;
 	private int colToCopyIni;
 	private int rowToCopyIni;
 	private int colToCopyEnd;
@@ -3004,42 +3014,42 @@ public class JPrograf extends javax.swing.JPanel {
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.SetReset setReset;
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.PWM pwm;
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.IVPWM ivpwm = new pt.utl.ist.elab.client.webrobot.customizer.Comps.IVPWM(
-			modelIVPWM);
+			JPrograf.modelIVPWM);
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Frente frente;
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.MarchAtras marchAtras;
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Direita direita;
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Esquerda esquerda;
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.HorLine horLine;
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfInOut confInOut = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfInOut(
-			jFrameDummy, true, modelConfInOut);
-	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.EditSubDel editSubDel = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.EditSubDel(
-			jFrameDummy, true);
+			JPrograf.jFrameDummy, true, JPrograf.modelConfInOut);
+	private final pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.EditSubDel editSubDel = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.EditSubDel(
+			JPrograf.jFrameDummy, true);
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.IntroMethod introMethod;
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.SubBlock subBlock;
-	private javax.swing.JButton jButtonProgStart;
+	private final javax.swing.JButton jButtonProgStart;
 	private boolean endedRowCol = false;
 	private boolean isFileValid = true;
 	private boolean haveBeenChanges = false;
-	private boolean hasFileChanged = true;
-	private boolean paintTop = false;
-	private boolean isThereAnotherCompDown = false;
+	private final boolean hasFileChanged = true;
+	private final boolean paintTop = false;
+	private final boolean isThereAnotherCompDown = false;
 	private boolean addDireita = false;
 	private boolean addEsquerda = false;
 	private boolean addPasteDireita = false;
 	private boolean addPasteEsquerda = false;
 	private boolean actionCanceled = false;
 	private boolean shiftedColsInDel = false;
-	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] matrix = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[MAX_ROWS][MAX_COLUMNS];
-	private String[][] matrixWiring = new String[MAX_ROWS][MAX_COLUMNS];
+	private final pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] matrix = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[MAX_ROWS][MAX_COLUMNS];
+	private final String[][] matrixWiring = new String[MAX_ROWS][MAX_COLUMNS];
 	private static Undo undoBlock;
 	private static Undo undoWiring;
-	private javax.swing.ImageIcon iconPrograf = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.ImageIcon iconPrograf = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/customizer/Icons/JPrograf.gif"));
-	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfCopy confCopy = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfCopy(
-			jFrameDummy, true);
-	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfPaste confPaste = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfPaste(
-			jFrameDummy, true);
-	private CopyPaste copyPaste = new CopyPaste();
+	private final pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfCopy confCopy = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfCopy(
+			JPrograf.jFrameDummy, true);
+	private final pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfPaste confPaste = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfPaste(
+			JPrograf.jFrameDummy, true);
+	private final CopyPaste copyPaste = new CopyPaste();
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] matrixToCopy = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[3][3];// Security
 	// initialization
 	private String[][] matrixWiringToCopy = new String[3][3];// Security
@@ -3048,11 +3058,11 @@ public class JPrograf extends javax.swing.JPanel {
 	// initialization
 	private String[][] matrixWiringPaste = new String[3][3];// Security
 	// initialization
-	private ExtensionFilter prografExtension = new ExtensionFilter("grf", "ext");
+	private final ExtensionFilter prografExtension = new ExtensionFilter("grf", "ext");
 	private String extension = "";
 	private Object iValues[][];
-	private Object[] YES_NO_OPTS = { "Sim", "N�o" };
-	private Object[] YES_NO_CANCEL_OPTS = { "Sim", "N�o", "Cancelar" };
+	private final Object[] YES_NO_OPTS = { "Sim", "N�o" };
+	private final Object[] YES_NO_CANCEL_OPTS = { "Sim", "N�o", "Cancelar" };
 	private java.io.File saveFile = null;
 	private static String TITLE_VERSION = "JPrograf 1.1.2";
 	private static javax.swing.JFrame jFrameDummy;
@@ -3061,7 +3071,7 @@ public class JPrograf extends javax.swing.JPanel {
 	private boolean runStandAloneApp = false;
 
 	/** Help variables */
-	private String helpURL = ReCResourceBundle.findStringOrDefault("webrobot$rec.exp.url.webrobot.3",
+	private final String helpURL = ReCResourceBundle.findStringOrDefault("webrobot$rec.exp.url.webrobot.3",
 			"http://www.e-escola.pt/site-bin/licao_frame.asp?tema_id=43&mat_id=82&dif_id=1");
 
 	/*

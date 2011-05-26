@@ -21,15 +21,15 @@ public class HardwareInit {
 	/** Creates a new instance of HardwareInit */
 	public HardwareInit() {
 		// Initializes the webcam
-		this.webcam = new WebCamThread();
-		this.soundBoard = new SoundThread();
+		webcam = new WebCamThread();
+		soundBoard = new SoundThread();
 	}
 
 	public WebCamThread getWebCamThread() {
-		return this.webcam;
+		return webcam;
 	}
 
 	public SoundThread getSoundThread() {
-		return this.soundBoard;
+		return soundBoard;
 	}
 }

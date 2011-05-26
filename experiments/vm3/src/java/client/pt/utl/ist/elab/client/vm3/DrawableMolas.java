@@ -22,29 +22,30 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * @author n0dP2
  */
 public class DrawableMolas extends InteractivePanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3486840453324466136L;
 	public InteractiveSpring mola1, mola2, mola3;
-	private InteractiveText mola1T, mola2T, mola3T;
+	private final InteractiveText mola1T, mola2T, mola3T;
 	public InteractiveCircle bola;
 	public Dataset caixa;
 	private int rato;
 	public M3Customizer gui;
 
-	public DrawableMolas(M3Customizer gui_) {
+	public DrawableMolas(final M3Customizer gui_) {
 		gui = gui_;
 		setShowCoordinates(false);
 
 		setPreferredMinMax(-2.5, 12.5, -2.5, 12.5);
 		setPreferredSize(new Dimension(250, 250));
-		mola1T = new InteractiveText(ReCResourceBundle.findStringOrDefault("m3$rec.exp.customizer.title.6",
-				"Spring 1"));
+		mola1T = new InteractiveText(ReCResourceBundle.findStringOrDefault("m3$rec.exp.customizer.title.6", "Spring 1"));
 		mola1T.getStyle().setEdgeColor(new Color(255, 228, 0));
 		mola1T.setXY(5, 11);
-		mola3T = new InteractiveText(ReCResourceBundle.findStringOrDefault("m3$rec.exp.customizer.title.8",
-				"Spring 3"));
+		mola3T = new InteractiveText(ReCResourceBundle.findStringOrDefault("m3$rec.exp.customizer.title.8", "Spring 3"));
 		mola3T.getStyle().setEdgeColor(new Color(255, 228, 0));
 		mola3T.setXY(10, -1);
-		mola2T = new InteractiveText(ReCResourceBundle.findStringOrDefault("m3$rec.exp.customizer.title.7",
-				"Spring 2"));
+		mola2T = new InteractiveText(ReCResourceBundle.findStringOrDefault("m3$rec.exp.customizer.title.7", "Spring 2"));
 		mola2T.getStyle().setEdgeColor(new Color(255, 228, 0));
 		mola2T.setXY(0, -1);
 
@@ -85,7 +86,8 @@ public class DrawableMolas extends InteractivePanel {
 
 	}
 
-	public void handleMouseAction(InteractivePanel panel, java.awt.event.MouseEvent evt) {
+	@Override
+	public void handleMouseAction(final InteractivePanel panel, final java.awt.event.MouseEvent evt) {
 		double mousey, mousex;
 		if (panel.getMouseAction() == InteractivePanel.MOUSE_DRAGGED) {
 			mousex = panel.getMouseX();
@@ -96,7 +98,7 @@ public class DrawableMolas extends InteractivePanel {
 
 	}
 
-	public void fazMexer(double mousex, double mousey) {
+	public void fazMexer(final double mousex, final double mousey) {
 		try {
 			bola.setXY(mousex, mousey);
 			mola1.setSizeX(mousex - 5);
@@ -117,12 +119,12 @@ public class DrawableMolas extends InteractivePanel {
 			} else {
 				gui.labelInf1.setText("");
 				gui.labelInf2.setForeground(new java.awt.Color(0, 125, 0));
-				gui.labelInf2.setText(ReCResourceBundle.findStringOrDefault("m3$rec.exp.customizer.title.11",
-						"Ready."));
+				gui.labelInf2
+						.setText(ReCResourceBundle.findStringOrDefault("m3$rec.exp.customizer.title.11", "Ready."));
 				gui.buttonOK.setEnabled(true);
 			}
 			repaint();
-		} catch (NullPointerException e) {
+		} catch (final NullPointerException e) {
 		}
 	}
 

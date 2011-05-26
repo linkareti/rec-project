@@ -29,9 +29,9 @@ public class TStampDataSource extends AbstractStampDataSource {
 	public static String HEAT_DS_LOGGER = "HeatDataSource.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(HEAT_DS_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(TStampDataSource.HEAT_DS_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(HEAT_DS_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(TStampDataSource.HEAT_DS_LOGGER));
 		}
 	}
 
@@ -44,9 +44,11 @@ public class TStampDataSource extends AbstractStampDataSource {
 	private int counter = 0;
 	private int total_samples = 0;
 
-	public void processDataCommand(StampCommand cmd) {
-		if (cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null)
+	@Override
+	public void processDataCommand(final StampCommand cmd) {
+		if (cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null) {
 			return;
+		}
 
 		if (cmd.getCommandIdentifier().equals(StampTProcessor.COMMAND_IDENTIFIER)) {
 
@@ -59,7 +61,7 @@ public class TStampDataSource extends AbstractStampDataSource {
 			float temperature1Copper;
 			float temperature2Copper;
 			float temperature3Copper;
-			PhysicsValue[] values = new PhysicsValue[10];
+			final PhysicsValue[] values = new PhysicsValue[10];
 			try {
 				temperature1Brass = ((Float) cmd.getCommandData(StampTProcessor.TEMPERATURE_1_BRASS)).floatValue();
 				temperature2Brass = ((Float) cmd.getCommandData(StampTProcessor.TEMPERATURE_2_BRASS)).floatValue();
@@ -70,37 +72,37 @@ public class TStampDataSource extends AbstractStampDataSource {
 				temperature1Copper = ((Float) cmd.getCommandData(StampTProcessor.TEMPERATURE_1_COPPER)).floatValue();
 				temperature2Copper = ((Float) cmd.getCommandData(StampTProcessor.TEMPERATURE_2_COPPER)).floatValue();
 				temperature3Copper = ((Float) cmd.getCommandData(StampTProcessor.TEMPERATURE_3_COPPER)).floatValue();
-			} catch (ClassCastException e) {
+			} catch (final ClassCastException e) {
 				e.printStackTrace();
 				return;
 			}
 
-			if (temperature1Brass > TEMP_MAX_BRASS) {
-				temperature1Brass = TEMP_MAX_BRASS;
+			if (temperature1Brass > TStampDataSource.TEMP_MAX_BRASS) {
+				temperature1Brass = TStampDataSource.TEMP_MAX_BRASS;
 			}
-			if (temperature2Brass > TEMP_MAX_BRASS) {
-				temperature2Brass = TEMP_MAX_BRASS;
+			if (temperature2Brass > TStampDataSource.TEMP_MAX_BRASS) {
+				temperature2Brass = TStampDataSource.TEMP_MAX_BRASS;
 			}
-			if (temperature3Brass > TEMP_MAX_BRASS) {
-				temperature3Brass = TEMP_MAX_BRASS;
+			if (temperature3Brass > TStampDataSource.TEMP_MAX_BRASS) {
+				temperature3Brass = TStampDataSource.TEMP_MAX_BRASS;
 			}
-			if (temperature1Iron > TEMP_MAX_IRON) {
-				temperature1Iron = TEMP_MAX_IRON;
+			if (temperature1Iron > TStampDataSource.TEMP_MAX_IRON) {
+				temperature1Iron = TStampDataSource.TEMP_MAX_IRON;
 			}
-			if (temperature2Iron > TEMP_MAX_IRON) {
-				temperature2Iron = TEMP_MAX_IRON;
+			if (temperature2Iron > TStampDataSource.TEMP_MAX_IRON) {
+				temperature2Iron = TStampDataSource.TEMP_MAX_IRON;
 			}
-			if (temperature3Iron > TEMP_MAX_IRON) {
-				temperature3Iron = TEMP_MAX_IRON;
+			if (temperature3Iron > TStampDataSource.TEMP_MAX_IRON) {
+				temperature3Iron = TStampDataSource.TEMP_MAX_IRON;
 			}
-			if (temperature1Copper > TEMP_MAX_COPPER) {
-				temperature1Copper = TEMP_MAX_COPPER;
+			if (temperature1Copper > TStampDataSource.TEMP_MAX_COPPER) {
+				temperature1Copper = TStampDataSource.TEMP_MAX_COPPER;
 			}
-			if (temperature2Copper > TEMP_MAX_COPPER) {
-				temperature2Copper = TEMP_MAX_COPPER;
+			if (temperature2Copper > TStampDataSource.TEMP_MAX_COPPER) {
+				temperature2Copper = TStampDataSource.TEMP_MAX_COPPER;
 			}
-			if (temperature3Copper > TEMP_MAX_COPPER) {
-				temperature3Copper = TEMP_MAX_COPPER;
+			if (temperature3Copper > TStampDataSource.TEMP_MAX_COPPER) {
+				temperature3Copper = TStampDataSource.TEMP_MAX_COPPER;
 			}
 
 			values[0] = PhysicsValueFactory.fromFloat(temperature1Brass, getAcquisitionHeader().getChannelsConfig(0)
@@ -133,13 +135,15 @@ public class TStampDataSource extends AbstractStampDataSource {
 
 			super.addDataRow(values);
 			counter++;
-			if (counter == total_samples || stopped)
+			if (counter == total_samples || stopped) {
 				setDataSourceEnded();
+			}
 		}
 
 	}
 
-	public void setAcquisitionHeader(HardwareAcquisitionConfig config) {
+	@Override
+	public void setAcquisitionHeader(final HardwareAcquisitionConfig config) {
 		super.setAcquisitionHeader(config);
 		total_samples = config.getTotalSamples();
 		delay_time = (float) (getAcquisitionHeader().getSelectedFrequency().getFrequency());
@@ -148,6 +152,7 @@ public class TStampDataSource extends AbstractStampDataSource {
 
 	private boolean stopped = false;
 
+	@Override
 	public void stopNow() {
 		stopped = true;
 		setDataSourceStoped();

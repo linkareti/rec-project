@@ -25,8 +25,13 @@ public class Apparatus {
 	public Apparatus() {
 	}
 
-	/** Creates a new instance of Apparatus */
-	public Apparatus(MultiCastHardwareWrapper mCHardware, HardwareInfo hardwareInfo) {
+	/**
+	 * Creates a new instance of Apparatus
+	 * 
+	 * @param mCHardware
+	 * @param hardwareInfo
+	 */
+	public Apparatus(final MultiCastHardwareWrapper mCHardware, final HardwareInfo hardwareInfo) {
 		setMultiCastHardware(mCHardware);
 		setHardwareInfo(hardwareInfo);
 	}
@@ -37,7 +42,7 @@ public class Apparatus {
 	 * @return Value of property mCHardware.
 	 */
 	public MultiCastHardwareWrapper getMultiCastHardware() {
-		return this.mCHardware;
+		return mCHardware;
 	}
 
 	/**
@@ -45,7 +50,7 @@ public class Apparatus {
 	 * 
 	 * @param mCHardware New value of property mCHardware.
 	 */
-	public void setMultiCastHardware(MultiCastHardwareWrapper mCHardware) {
+	public void setMultiCastHardware(final MultiCastHardwareWrapper mCHardware) {
 		this.mCHardware = mCHardware;
 	}
 
@@ -55,7 +60,7 @@ public class Apparatus {
 	 * @return Value of property hardwareInfo.
 	 */
 	public HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
 	/**
@@ -63,14 +68,17 @@ public class Apparatus {
 	 * 
 	 * @param hardwareInfo New value of property hardwareInfo.
 	 */
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
+	@Override
 	public String toString() {
-		if (hardwareInfo != null)
-			if (hardwareInfo.getFamiliarName() != null)
+		if (hardwareInfo != null) {
+			if (hardwareInfo.getFamiliarName() != null) {
 				return hardwareInfo.getFamiliarName();
+			}
+		}
 
 		return "Unknown apparatus";
 	}

@@ -57,47 +57,42 @@ public class Display extends DisplayNode {
 	}
 
 	/**
-	 * @param offlineCapable
-	 *            the offlineCapable to set
+	 * @param offlineCapable the offlineCapable to set
 	 */
-	public void setOfflineCapable(boolean offlineCapable) {
+	public void setOfflineCapable(final boolean offlineCapable) {
 		this.offlineCapable = offlineCapable;
 	}
 
 	/**
-	 * @param displayStringBundleKey
-	 *            the displayStringBundleKey to set
+	 * @param displayStringBundleKey the displayStringBundleKey to set
 	 */
-	public void setDisplayStringBundleKey(String displayStringBundleKey) {
+	public void setDisplayStringBundleKey(final String displayStringBundleKey) {
 		this.displayStringBundleKey = displayStringBundleKey;
 	}
 
 	/**
-	 * @param iconLocationBundleKey
-	 *            the iconLocationBundleKey to set
+	 * @param iconLocationBundleKey the iconLocationBundleKey to set
 	 */
-	public void setIconLocationBundleKey(String iconLocationBundleKey) {
+	public void setIconLocationBundleKey(final String iconLocationBundleKey) {
 		this.iconLocationBundleKey = iconLocationBundleKey;
 	}
 
 	/**
-	 * @param toolTipBundleKey
-	 *            the toolTipBundleKey to set
+	 * @param toolTipBundleKey the toolTipBundleKey to set
 	 */
-	public void setToolTipBundleKey(String toolTipBundleKey) {
+	public void setToolTipBundleKey(final String toolTipBundleKey) {
 		this.toolTipBundleKey = toolTipBundleKey;
 	}
 
 	/**
-	 * @param classLocationBundleKey
-	 *            the classLocationBundleKey to set
+	 * @param classLocationBundleKey the classLocationBundleKey to set
 	 */
-	public void setClassLocationBundleKey(String classLocationBundleKey) {
+	public void setClassLocationBundleKey(final String classLocationBundleKey) {
 		this.classLocationBundleKey = classLocationBundleKey;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (obj == null) {
 			return false;
 		}
@@ -105,21 +100,22 @@ public class Display extends DisplayNode {
 			return false;
 		}
 		final Display other = (Display) obj;
-		if (this.offlineCapable != other.offlineCapable) {
+		if (offlineCapable != other.offlineCapable) {
 			return false;
 		}
-		if ((this.displayStringBundleKey == null) ? (other.displayStringBundleKey != null) : !this.displayStringBundleKey
+		if ((displayStringBundleKey == null) ? (other.displayStringBundleKey != null) : !displayStringBundleKey
 				.equals(other.displayStringBundleKey)) {
 			return false;
 		}
-		if ((this.iconLocationBundleKey == null) ? (other.iconLocationBundleKey != null) : !this.iconLocationBundleKey
+		if ((iconLocationBundleKey == null) ? (other.iconLocationBundleKey != null) : !iconLocationBundleKey
 				.equals(other.iconLocationBundleKey)) {
 			return false;
 		}
-		if ((this.toolTipBundleKey == null) ? (other.toolTipBundleKey != null) : !this.toolTipBundleKey.equals(other.toolTipBundleKey)) {
+		if ((toolTipBundleKey == null) ? (other.toolTipBundleKey != null) : !toolTipBundleKey
+				.equals(other.toolTipBundleKey)) {
 			return false;
 		}
-		if ((this.classLocationBundleKey == null) ? (other.classLocationBundleKey != null) : !this.classLocationBundleKey
+		if ((classLocationBundleKey == null) ? (other.classLocationBundleKey != null) : !classLocationBundleKey
 				.equals(other.classLocationBundleKey)) {
 			return false;
 		}
@@ -129,11 +125,11 @@ public class Display extends DisplayNode {
 	@Override
 	public int hashCode() {
 		int hash = 3;
-		hash = 29 * hash + (this.offlineCapable ? 1 : 0);
-		hash = 29 * hash + (this.displayStringBundleKey != null ? this.displayStringBundleKey.hashCode() : 0);
-		hash = 29 * hash + (this.iconLocationBundleKey != null ? this.iconLocationBundleKey.hashCode() : 0);
-		hash = 29 * hash + (this.toolTipBundleKey != null ? this.toolTipBundleKey.hashCode() : 0);
-		hash = 29 * hash + (this.classLocationBundleKey != null ? this.classLocationBundleKey.hashCode() : 0);
+		hash = 29 * hash + (offlineCapable ? 1 : 0);
+		hash = 29 * hash + (displayStringBundleKey != null ? displayStringBundleKey.hashCode() : 0);
+		hash = 29 * hash + (iconLocationBundleKey != null ? iconLocationBundleKey.hashCode() : 0);
+		hash = 29 * hash + (toolTipBundleKey != null ? toolTipBundleKey.hashCode() : 0);
+		hash = 29 * hash + (classLocationBundleKey != null ? classLocationBundleKey.hashCode() : 0);
 		return hash;
 	}
 

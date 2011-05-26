@@ -15,20 +15,22 @@ public abstract class DataProducerPOA extends org.omg.PortableServer.Servant imp
 
 	private static java.util.Hashtable _methods = new java.util.Hashtable();
 	static {
-		_methods.put("getAcquisitionHeader", new java.lang.Integer(0));
-		_methods.put("getSamples", new java.lang.Integer(1));
-		_methods.put("getDataProducerName", new java.lang.Integer(2));
-		_methods.put("getDataProducerState", new java.lang.Integer(3));
-		_methods.put("getMaxPacketNum", new java.lang.Integer(4));
-		_methods.put("registerDataReceiver", new java.lang.Integer(5));
+		DataProducerPOA._methods.put("getAcquisitionHeader", new java.lang.Integer(0));
+		DataProducerPOA._methods.put("getSamples", new java.lang.Integer(1));
+		DataProducerPOA._methods.put("getDataProducerName", new java.lang.Integer(2));
+		DataProducerPOA._methods.put("getDataProducerState", new java.lang.Integer(3));
+		DataProducerPOA._methods.put("getMaxPacketNum", new java.lang.Integer(4));
+		DataProducerPOA._methods.put("registerDataReceiver", new java.lang.Integer(5));
 	}
 
-	public org.omg.CORBA.portable.OutputStream _invoke(String $method, org.omg.CORBA.portable.InputStream in,
-			org.omg.CORBA.portable.ResponseHandler $rh) {
+	@Override
+	public org.omg.CORBA.portable.OutputStream _invoke(final String $method,
+			final org.omg.CORBA.portable.InputStream in, final org.omg.CORBA.portable.ResponseHandler $rh) {
 		org.omg.CORBA.portable.OutputStream out = null;
-		java.lang.Integer __method = (java.lang.Integer) _methods.get($method);
-		if (__method == null)
+		final java.lang.Integer __method = (java.lang.Integer) DataProducerPOA._methods.get($method);
+		if (__method == null) {
 			throw new org.omg.CORBA.BAD_OPERATION(0, org.omg.CORBA.CompletionStatus.COMPLETED_MAYBE);
+		}
 
 		switch (__method.intValue()) {
 
@@ -38,10 +40,10 @@ public abstract class DataProducerPOA extends org.omg.PortableServer.Servant imp
 		{
 			try {
 				com.linkare.rec.data.config.HardwareAcquisitionConfig $result = null;
-				$result = this.getAcquisitionHeader();
+				$result = getAcquisitionHeader();
 				out = $rh.createReply();
 				com.linkare.rec.data.config.HardwareAcquisitionConfigHelper.write(out, $result);
-			} catch (com.linkare.rec.acquisition.NotAvailableException $ex) {
+			} catch (final com.linkare.rec.acquisition.NotAvailableException $ex) {
 				out = $rh.createExceptionReply();
 				com.linkare.rec.acquisition.NotAvailableExceptionHelper.write(out, $ex);
 			}
@@ -52,13 +54,13 @@ public abstract class DataProducerPOA extends org.omg.PortableServer.Servant imp
 		case 1: // com/linkare/rec/acquisition/DataProducer/getSamples
 		{
 			try {
-				int num_packet_start = in.read_long();
-				int num_packet_end = in.read_long();
+				final int num_packet_start = in.read_long();
+				final int num_packet_end = in.read_long();
 				com.linkare.rec.data.acquisition.SamplesPacket $result[] = null;
-				$result = this.getSamples(num_packet_start, num_packet_end);
+				$result = getSamples(num_packet_start, num_packet_end);
 				out = $rh.createReply();
 				com.linkare.rec.data.acquisition.SamplesPacketListHelper.write(out, $result);
-			} catch (com.linkare.rec.acquisition.NotAnAvailableSamplesPacketException $ex) {
+			} catch (final com.linkare.rec.acquisition.NotAnAvailableSamplesPacketException $ex) {
 				out = $rh.createExceptionReply();
 				com.linkare.rec.acquisition.NotAnAvailableSamplesPacketExceptionHelper.write(out, $ex);
 			}
@@ -69,7 +71,7 @@ public abstract class DataProducerPOA extends org.omg.PortableServer.Servant imp
 		case 2: // com/linkare/rec/acquisition/DataProducer/getDataProducerName
 		{
 			String $result = null;
-			$result = this.getDataProducerName();
+			$result = getDataProducerName();
 			out = $rh.createReply();
 			org.omg.CORBA.WStringValueHelper.write(out, $result);
 			break;
@@ -79,7 +81,7 @@ public abstract class DataProducerPOA extends org.omg.PortableServer.Servant imp
 		case 3: // com/linkare/rec/acquisition/DataProducer/getDataProducerState
 		{
 			com.linkare.rec.acquisition.DataProducerState $result = null;
-			$result = this.getDataProducerState();
+			$result = getDataProducerState();
 			out = $rh.createReply();
 			com.linkare.rec.acquisition.DataProducerStateHelper.write(out, $result);
 			break;
@@ -87,8 +89,8 @@ public abstract class DataProducerPOA extends org.omg.PortableServer.Servant imp
 
 		case 4: // com/linkare/rec/acquisition/DataProducer/getMaxPacketNum
 		{
-			int $result = (int) 0;
-			$result = this.getMaxPacketNum();
+			int $result = 0;
+			$result = getMaxPacketNum();
 			out = $rh.createReply();
 			out.write_long($result);
 			break;
@@ -97,11 +99,11 @@ public abstract class DataProducerPOA extends org.omg.PortableServer.Servant imp
 		case 5: // com/linkare/rec/acquisition/DataProducer/registerDataReceiver
 		{
 			try {
-				com.linkare.rec.acquisition.DataReceiver data_receiver = com.linkare.rec.acquisition.DataReceiverHelper
+				final com.linkare.rec.acquisition.DataReceiver data_receiver = com.linkare.rec.acquisition.DataReceiverHelper
 						.read(in);
-				this.registerDataReceiver(data_receiver);
+				registerDataReceiver(data_receiver);
 				out = $rh.createReply();
-			} catch (com.linkare.rec.acquisition.MaximumClientsReached $ex) {
+			} catch (final com.linkare.rec.acquisition.MaximumClientsReached $ex) {
 				out = $rh.createExceptionReply();
 				com.linkare.rec.acquisition.MaximumClientsReachedHelper.write(out, $ex);
 			}
@@ -118,15 +120,16 @@ public abstract class DataProducerPOA extends org.omg.PortableServer.Servant imp
 	// Type-specific CORBA::Object operations
 	private static String[] __ids = { "IDL:com/linkare/rec/acquisition/DataProducer:1.0" };
 
-	public String[] _all_interfaces(org.omg.PortableServer.POA poa, byte[] objectId) {
-		return (String[]) __ids.clone();
+	@Override
+	public String[] _all_interfaces(final org.omg.PortableServer.POA poa, final byte[] objectId) {
+		return DataProducerPOA.__ids.clone();
 	}
 
 	public DataProducer _this() {
 		return DataProducerHelper.narrow(super._this_object());
 	}
 
-	public DataProducer _this(org.omg.CORBA.ORB orb) {
+	public DataProducer _this(final org.omg.CORBA.ORB orb) {
 		return DataProducerHelper.narrow(super._this_object(orb));
 	}
 

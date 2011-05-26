@@ -21,6 +21,10 @@ public class StatusPanel extends javax.swing.JPanel {
 	 * "Unknown");
 	 */
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3052779638392783714L;
 	private String status = "";
 	private String lblStatus = "";
 
@@ -56,7 +60,7 @@ public class StatusPanel extends javax.swing.JPanel {
 	 * @return Value of property status.
 	 */
 	public String getStatus() {
-		return this.status;
+		return status;
 	}
 
 	/**
@@ -64,7 +68,7 @@ public class StatusPanel extends javax.swing.JPanel {
 	 * 
 	 * @param status New value of property status.
 	 */
-	public void setStatus(String status) {
+	public void setStatus(final String status) {
 		this.status = status;
 		jLabelStatusState.setText(status);
 	}
@@ -75,7 +79,7 @@ public class StatusPanel extends javax.swing.JPanel {
 	 * @return Value of property lblStatus.
 	 */
 	public String getLblStatus() {
-		return this.lblStatus;
+		return lblStatus;
 	}
 
 	/**
@@ -83,7 +87,7 @@ public class StatusPanel extends javax.swing.JPanel {
 	 * 
 	 * @param status New value of property lblStatus.
 	 */
-	public void setLblStatus(String lblStatus) {
+	public void setLblStatus(final String lblStatus) {
 		this.lblStatus = lblStatus;
 		jLabelStatus.setText(lblStatus);
 	}

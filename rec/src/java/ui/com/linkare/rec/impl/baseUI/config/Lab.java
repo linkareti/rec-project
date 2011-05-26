@@ -33,47 +33,48 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 	private String _DisplayStringBundleKey = "";
 	private String _Location = "";
 	private String _DesktopLocationBundleKey = "";
-	private List<Apparatus> _Apparatus = new ArrayList<Apparatus>(); // List<Apparatus>
-	private List<WebResource> _WebResource = new ArrayList<WebResource>(); // List<WebResource>
-	private List<LocalizationBundle> _LocalizationBundle = new ArrayList<LocalizationBundle>(); // List<LocalizationBundle>
+	private final List<Apparatus> _Apparatus = new ArrayList<Apparatus>(); // List<Apparatus>
+	private final List<WebResource> _WebResource = new ArrayList<WebResource>(); // List<WebResource>
+	private final List<LocalizationBundle> _LocalizationBundle = new ArrayList<LocalizationBundle>(); // List<LocalizationBundle>
 	private PropertyChangeSupport eventListeners;
 
 	public Lab() {
 	}
 
 	// Deep copy
-	public Lab(com.linkare.rec.impl.baseUI.config.Lab source) {
+	public Lab(final com.linkare.rec.impl.baseUI.config.Lab source) {
 		_Order = source._Order;
 		_IconLocationBundleKey = source._IconLocationBundleKey;
 		_ToolTipBundleKey = source._ToolTipBundleKey;
 		_DisplayStringBundleKey = source._DisplayStringBundleKey;
 		_DesktopLocationBundleKey = source._DesktopLocationBundleKey;
 		_Location = source._Location;
-		for (Iterator it = source._Apparatus.iterator(); it.hasNext();) {
+		for (final Object element : source._Apparatus) {
 			_Apparatus.add(new com.linkare.rec.impl.baseUI.config.Apparatus(
-					(com.linkare.rec.impl.baseUI.config.Apparatus) it.next()));
+					(com.linkare.rec.impl.baseUI.config.Apparatus) element));
 		}
-		for (Iterator it = source._WebResource.iterator(); it.hasNext();) {
+		for (final Object element : source._WebResource) {
 			_WebResource.add(new com.linkare.rec.impl.baseUI.config.WebResource(
-					(com.linkare.rec.impl.baseUI.config.WebResource) it.next()));
+					(com.linkare.rec.impl.baseUI.config.WebResource) element));
 		}
-		for (Iterator it = source._LocalizationBundle.iterator(); it.hasNext();) {
+		for (final Object element : source._LocalizationBundle) {
 			_LocalizationBundle.add(new com.linkare.rec.impl.baseUI.config.LocalizationBundle(
-					(com.linkare.rec.impl.baseUI.config.LocalizationBundle) it.next()));
+					(com.linkare.rec.impl.baseUI.config.LocalizationBundle) element));
 		}
 		eventListeners = source.eventListeners;
 	}
 
 	// This attribute is mandatory
 	@Override
-	public void setOrder(int value) {
+	public void setOrder(final int value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "order", new Integer(getOrder()), new Integer(value));
 		}
 		_Order = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	// It was returning a String...changed to int and added get_Order() (this
@@ -84,28 +85,31 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 	}
 
 	// This attribute is mandatory
-	public void setIconLocationBundleKey(String value) {
+	public void setIconLocationBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "iconLocationBundleKey", getIconLocationBundleKey(), value);
 		}
 		_IconLocationBundleKey = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
+	@Override
 	public String getIconLocationBundleKey() {
 		return _IconLocationBundleKey;
 	}
 
-	public void setDesktopLocationBundleKey(String value) {
+	public void setDesktopLocationBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "desktopLocationBundleKey", getIconLocationBundleKey(), value);
 		}
 		_DesktopLocationBundleKey = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public String getDesktopLocationBundleKey() {
@@ -113,29 +117,32 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 	}
 
 	// This attribute is mandatory
-	public void setToolTipBundleKey(String value) {
+	public void setToolTipBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "toolTipBundleKey", getToolTipBundleKey(), value);
 		}
 		_ToolTipBundleKey = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
+	@Override
 	public String getToolTipBundleKey() {
 		return _ToolTipBundleKey;
 	}
 
 	// This attribute is mandatory
-	public void setDisplayStringBundleKey(String value) {
+	public void setDisplayStringBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "displayStringBundleKey", getDisplayStringBundleKey(), value);
 		}
 		_DisplayStringBundleKey = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public String getDisplayStringBundleKey() {
@@ -143,14 +150,15 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 	}
 
 	// This attribute is mandatory
-	public void setLocation(String value) {
+	public void setLocation(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "location", getLocation(), value);
 		}
 		_Location = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public String getLocation() {
@@ -159,8 +167,9 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 
 	// This attribute is an array, possibly empty
 	public void setApparatus(com.linkare.rec.impl.baseUI.config.Apparatus[] value) {
-		if (value == null)
+		if (value == null) {
 			value = new Apparatus[0];
+		}
 		// Make the foreign beans take on our property change event listeners.
 		for (int i = 0; i < value.length; ++i) {
 			if (value[i] != null) {
@@ -175,23 +184,24 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 		for (int i = 0; i < value.length; ++i) {
 			_Apparatus.add(value[i]);
 		}
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
-	public void setApparatus(int index, com.linkare.rec.impl.baseUI.config.Apparatus value) {
+	public void setApparatus(final int index, final com.linkare.rec.impl.baseUI.config.Apparatus value) {
 		// Make the foreign beans take on our property change event listeners.
 		value._setPropertyChangeSupport(eventListeners);
 		if (eventListeners != null) {
-			PropertyChangeEvent event = new PropertyChangeEvent(this, "apparatus.i" + index, _Apparatus.get(index),
-					value);
+			final PropertyChangeEvent event = new PropertyChangeEvent(this, "apparatus.i" + index,
+					_Apparatus.get(index), value);
 			eventListeners.firePropertyChange(event);
 		}
 		_Apparatus.set(index, value);
 	}
 
 	public com.linkare.rec.impl.baseUI.config.Apparatus[] getApparatus() {
-		Apparatus[] arr = new Apparatus[_Apparatus.size()];
+		final Apparatus[] arr = new Apparatus[_Apparatus.size()];
 		return _Apparatus.toArray(arr);
 	}
 
@@ -199,7 +209,7 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 		return _Apparatus;
 	}
 
-	public com.linkare.rec.impl.baseUI.config.Apparatus getApparatus(int index) {
+	public com.linkare.rec.impl.baseUI.config.Apparatus getApparatus(final int index) {
 		return _Apparatus.get(index);
 	}
 
@@ -208,25 +218,25 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 		return _Apparatus.size();
 	}
 
-	public int addApparatus(com.linkare.rec.impl.baseUI.config.Apparatus value) {
+	public int addApparatus(final com.linkare.rec.impl.baseUI.config.Apparatus value) {
 		// Make the foreign beans take on our property change event listeners.
 		value._setPropertyChangeSupport(eventListeners);
 		_Apparatus.add(value);
 		if (eventListeners != null) {
-			PropertyChangeEvent event = new PropertyChangeEvent(this, "apparatus.i" + (_Apparatus.size() - 1), null,
-					value);
+			final PropertyChangeEvent event = new PropertyChangeEvent(this, "apparatus.i" + (_Apparatus.size() - 1),
+					null, value);
 			eventListeners.firePropertyChange(event);
 		}
 		return _Apparatus.size() - 1;
 	}
 
 	// Search from the end looking for @param value, and then remove it.
-	public int removeApparatus(com.linkare.rec.impl.baseUI.config.Apparatus value) {
-		int pos = _Apparatus.indexOf(value);
+	public int removeApparatus(final com.linkare.rec.impl.baseUI.config.Apparatus value) {
+		final int pos = _Apparatus.indexOf(value);
 		if (pos >= 0) {
 			_Apparatus.remove(pos);
 			if (eventListeners != null) {
-				PropertyChangeEvent event = new PropertyChangeEvent(this, "apparatus.i" + pos, value, null);
+				final PropertyChangeEvent event = new PropertyChangeEvent(this, "apparatus.i" + pos, value, null);
 				eventListeners.firePropertyChange(event);
 			}
 		}
@@ -235,8 +245,9 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 
 	// This attribute is an array, possibly empty
 	public void setWebResource(com.linkare.rec.impl.baseUI.config.WebResource[] value) {
-		if (value == null)
+		if (value == null) {
 			value = new WebResource[0];
+		}
 		// Make the foreign beans take on our property change event listeners.
 		for (int i = 0; i < value.length; ++i) {
 			if (value[i] != null) {
@@ -251,23 +262,24 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 		for (int i = 0; i < value.length; ++i) {
 			_WebResource.add(value[i]);
 		}
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
-	public void setWebResource(int index, com.linkare.rec.impl.baseUI.config.WebResource value) {
+	public void setWebResource(final int index, final com.linkare.rec.impl.baseUI.config.WebResource value) {
 		// Make the foreign beans take on our property change event listeners.
 		value._setPropertyChangeSupport(eventListeners);
 		if (eventListeners != null) {
-			PropertyChangeEvent event = new PropertyChangeEvent(this, "webResource.i" + index, _WebResource.get(index),
-					value);
+			final PropertyChangeEvent event = new PropertyChangeEvent(this, "webResource.i" + index,
+					_WebResource.get(index), value);
 			eventListeners.firePropertyChange(event);
 		}
 		_WebResource.set(index, value);
 	}
 
 	public com.linkare.rec.impl.baseUI.config.WebResource[] getWebResource() {
-		WebResource[] arr = new WebResource[_WebResource.size()];
+		final WebResource[] arr = new WebResource[_WebResource.size()];
 		return _WebResource.toArray(arr);
 	}
 
@@ -275,7 +287,7 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 		return _WebResource;
 	}
 
-	public com.linkare.rec.impl.baseUI.config.WebResource getWebResource(int index) {
+	public com.linkare.rec.impl.baseUI.config.WebResource getWebResource(final int index) {
 		return _WebResource.get(index);
 	}
 
@@ -284,25 +296,25 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 		return _WebResource.size();
 	}
 
-	public int addWebResource(com.linkare.rec.impl.baseUI.config.WebResource value) {
+	public int addWebResource(final com.linkare.rec.impl.baseUI.config.WebResource value) {
 		// Make the foreign beans take on our property change event listeners.
 		value._setPropertyChangeSupport(eventListeners);
 		_WebResource.add(value);
 		if (eventListeners != null) {
-			PropertyChangeEvent event = new PropertyChangeEvent(this, "webResource.i" + (_WebResource.size() - 1),
-					null, value);
+			final PropertyChangeEvent event = new PropertyChangeEvent(this,
+					"webResource.i" + (_WebResource.size() - 1), null, value);
 			eventListeners.firePropertyChange(event);
 		}
 		return _WebResource.size() - 1;
 	}
 
 	// Search from the end looking for @param value, and then remove it.
-	public int removeWebResource(com.linkare.rec.impl.baseUI.config.WebResource value) {
-		int pos = _WebResource.indexOf(value);
+	public int removeWebResource(final com.linkare.rec.impl.baseUI.config.WebResource value) {
+		final int pos = _WebResource.indexOf(value);
 		if (pos >= 0) {
 			_WebResource.remove(pos);
 			if (eventListeners != null) {
-				PropertyChangeEvent event = new PropertyChangeEvent(this, "webResource.i" + pos, value, null);
+				final PropertyChangeEvent event = new PropertyChangeEvent(this, "webResource.i" + pos, value, null);
 				eventListeners.firePropertyChange(event);
 			}
 		}
@@ -311,8 +323,9 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 
 	// This attribute is an array, possibly empty
 	public void setLocalizationBundle(com.linkare.rec.impl.baseUI.config.LocalizationBundle[] value) {
-		if (value == null)
+		if (value == null) {
 			value = new LocalizationBundle[0];
+		}
 		// Make the foreign beans take on our property change event listeners.
 		for (int i = 0; i < value.length; ++i) {
 			if (value[i] != null) {
@@ -327,15 +340,16 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 		for (int i = 0; i < value.length; ++i) {
 			_LocalizationBundle.add(value[i]);
 		}
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
-	public void setLocalizationBundle(int index, com.linkare.rec.impl.baseUI.config.LocalizationBundle value) {
+	public void setLocalizationBundle(final int index, final com.linkare.rec.impl.baseUI.config.LocalizationBundle value) {
 		// Make the foreign beans take on our property change event listeners.
 		value._setPropertyChangeSupport(eventListeners);
 		if (eventListeners != null) {
-			PropertyChangeEvent event = new PropertyChangeEvent(this, "localizationBundle.i" + index,
+			final PropertyChangeEvent event = new PropertyChangeEvent(this, "localizationBundle.i" + index,
 					_LocalizationBundle.get(index), value);
 			eventListeners.firePropertyChange(event);
 		}
@@ -343,7 +357,7 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 	}
 
 	public com.linkare.rec.impl.baseUI.config.LocalizationBundle[] getLocalizationBundle() {
-		LocalizationBundle[] arr = new LocalizationBundle[_LocalizationBundle.size()];
+		final LocalizationBundle[] arr = new LocalizationBundle[_LocalizationBundle.size()];
 		return _LocalizationBundle.toArray(arr);
 	}
 
@@ -351,7 +365,7 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 		return _LocalizationBundle;
 	}
 
-	public com.linkare.rec.impl.baseUI.config.LocalizationBundle getLocalizationBundle(int index) {
+	public com.linkare.rec.impl.baseUI.config.LocalizationBundle getLocalizationBundle(final int index) {
 		return _LocalizationBundle.get(index);
 	}
 
@@ -360,12 +374,12 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 		return _LocalizationBundle.size();
 	}
 
-	public int addLocalizationBundle(com.linkare.rec.impl.baseUI.config.LocalizationBundle value) {
+	public int addLocalizationBundle(final com.linkare.rec.impl.baseUI.config.LocalizationBundle value) {
 		// Make the foreign beans take on our property change event listeners.
 		value._setPropertyChangeSupport(eventListeners);
 		_LocalizationBundle.add(value);
 		if (eventListeners != null) {
-			PropertyChangeEvent event = new PropertyChangeEvent(this, "localizationBundle.i"
+			final PropertyChangeEvent event = new PropertyChangeEvent(this, "localizationBundle.i"
 					+ (_LocalizationBundle.size() - 1), null, value);
 			eventListeners.firePropertyChange(event);
 		}
@@ -373,19 +387,21 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 	}
 
 	// Search from the end looking for @param value, and then remove it.
-	public int removeLocalizationBundle(com.linkare.rec.impl.baseUI.config.LocalizationBundle value) {
-		int pos = _LocalizationBundle.indexOf(value);
+	public int removeLocalizationBundle(final com.linkare.rec.impl.baseUI.config.LocalizationBundle value) {
+		final int pos = _LocalizationBundle.indexOf(value);
 		if (pos >= 0) {
 			_LocalizationBundle.remove(pos);
 			if (eventListeners != null) {
-				PropertyChangeEvent event = new PropertyChangeEvent(this, "localizationBundle.i" + pos, value, null);
+				final PropertyChangeEvent event = new PropertyChangeEvent(this, "localizationBundle.i" + pos, value,
+						null);
 				eventListeners.firePropertyChange(event);
 			}
 		}
 		return pos;
 	}
 
-	public void writeNode(Writer out, String nodeName, String indent) throws IOException {
+	@Override
+	public void writeNode(final Writer out, final String nodeName, final String indent) throws IOException {
 		out.write(indent);
 		out.write("<");
 		out.write(nodeName);
@@ -432,24 +448,21 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 			out.write("'"); // NOI18N
 		}
 		out.write(">\n");
-		String nextIndent = indent + "	";
-		for (Iterator it = _Apparatus.iterator(); it.hasNext();) {
-			com.linkare.rec.impl.baseUI.config.Apparatus element = (com.linkare.rec.impl.baseUI.config.Apparatus) it
-					.next();
+		final String nextIndent = indent + "	";
+		for (final Object element2 : _Apparatus) {
+			final com.linkare.rec.impl.baseUI.config.Apparatus element = (com.linkare.rec.impl.baseUI.config.Apparatus) element2;
 			if (element != null) {
 				element.writeNode(out, "Apparatus", nextIndent);
 			}
 		}
-		for (Iterator it = _WebResource.iterator(); it.hasNext();) {
-			com.linkare.rec.impl.baseUI.config.WebResource element = (com.linkare.rec.impl.baseUI.config.WebResource) it
-					.next();
+		for (final Object element2 : _WebResource) {
+			final com.linkare.rec.impl.baseUI.config.WebResource element = (com.linkare.rec.impl.baseUI.config.WebResource) element2;
 			if (element != null) {
 				element.writeNode(out, "WebResource", nextIndent);
 			}
 		}
-		for (Iterator it = _LocalizationBundle.iterator(); it.hasNext();) {
-			com.linkare.rec.impl.baseUI.config.LocalizationBundle element = (com.linkare.rec.impl.baseUI.config.LocalizationBundle) it
-					.next();
+		for (final Object element2 : _LocalizationBundle) {
+			final com.linkare.rec.impl.baseUI.config.LocalizationBundle element = (com.linkare.rec.impl.baseUI.config.LocalizationBundle) element2;
 			if (element != null) {
 				element.writeNode(out, "LocalizationBundle", nextIndent);
 			}
@@ -458,9 +471,10 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 		out.write("</" + nodeName + ">\n");
 	}
 
-	public void readNode(Node node) {
+	@Override
+	public void readNode(final Node node) {
 		if (node.hasAttributes()) {
-			NamedNodeMap attrs = node.getAttributes();
+			final NamedNodeMap attrs = node.getAttributes();
 			Attr attr;
 			attr = (Attr) attrs.getNamedItem("order");
 			if (attr != null) {
@@ -487,24 +501,24 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 				_Location = attr.getValue();
 			}
 		}
-		NodeList children = node.getChildNodes();
+		final NodeList children = node.getChildNodes();
 		for (int i = 0, size = children.getLength(); i < size; ++i) {
-			Node childNode = children.item(i);
-			String childNodeName = (childNode.getLocalName() == null ? childNode.getNodeName().intern() : childNode
-					.getLocalName().intern());
+			final Node childNode = children.item(i);
+			final String childNodeName = (childNode.getLocalName() == null ? childNode.getNodeName().intern()
+					: childNode.getLocalName().intern());
 
 			if (childNodeName.equals("Apparatus")) {
-				Apparatus aApparatus = new com.linkare.rec.impl.baseUI.config.Apparatus();
+				final Apparatus aApparatus = new com.linkare.rec.impl.baseUI.config.Apparatus();
 				aApparatus._setPropertyChangeSupport(eventListeners);
 				aApparatus.readNode(childNode);
 				_Apparatus.add(aApparatus);
 			} else if (childNodeName.equals("WebResource")) {
-				WebResource aWebResource = new com.linkare.rec.impl.baseUI.config.WebResource();
+				final WebResource aWebResource = new com.linkare.rec.impl.baseUI.config.WebResource();
 				aWebResource._setPropertyChangeSupport(eventListeners);
 				aWebResource.readNode(childNode);
 				_WebResource.add(aWebResource);
 			} else if (childNodeName.equals("LocalizationBundle")) {
-				LocalizationBundle aLocalizationBundle = new com.linkare.rec.impl.baseUI.config.LocalizationBundle();
+				final LocalizationBundle aLocalizationBundle = new com.linkare.rec.impl.baseUI.config.LocalizationBundle();
 				aLocalizationBundle._setPropertyChangeSupport(eventListeners);
 				aLocalizationBundle.readNode(childNode);
 				_LocalizationBundle.add(aLocalizationBundle);
@@ -515,10 +529,11 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 		}
 	}
 
-	public ReCResourceBundle loadLocalizationBundle(LocalizationBundle bundle) {
+	public ReCResourceBundle loadLocalizationBundle(final LocalizationBundle bundle) {
 		return ReCResourceBundle.loadResourceBundle(bundle.getName(), bundle.getLocation());
 	}
-	
+
+	@Override
 	public void validate() throws ValidateException {
 		// Validating property order
 
@@ -542,7 +557,7 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 		}
 		// Validating property apparatus
 		for (int _index = 0; _index < sizeApparatus(); ++_index) {
-			com.linkare.rec.impl.baseUI.config.Apparatus element = getApparatus(_index);
+			final com.linkare.rec.impl.baseUI.config.Apparatus element = getApparatus(_index);
 			if (element != null) {
 				element.validate();
 			}
@@ -552,49 +567,48 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 		}
 		// Validating property webResource
 		for (int _index = 0; _index < sizeWebResource(); ++_index) {
-			com.linkare.rec.impl.baseUI.config.WebResource element = getWebResource(_index);
+			final com.linkare.rec.impl.baseUI.config.WebResource element = getWebResource(_index);
 			if (element != null) {
 				element.validate();
 			}
 		}
 		// Validating property localizationBundle
 		for (int _index = 0; _index < sizeLocalizationBundle(); ++_index) {
-			com.linkare.rec.impl.baseUI.config.LocalizationBundle element = getLocalizationBundle(_index);
+			final com.linkare.rec.impl.baseUI.config.LocalizationBundle element = getLocalizationBundle(_index);
 			if (element != null) {
 				element.validate();
 			}
 		}
 	}
 
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
+	@Override
+	public void addPropertyChangeListener(final PropertyChangeListener listener) {
 		if (eventListeners == null) {
 			eventListeners = new PropertyChangeSupport(this);
 		}
 		eventListeners.addPropertyChangeListener(listener);
-		for (Iterator it = _Apparatus.iterator(); it.hasNext();) {
-			com.linkare.rec.impl.baseUI.config.Apparatus element = (com.linkare.rec.impl.baseUI.config.Apparatus) it
-					.next();
+		for (final Object element2 : _Apparatus) {
+			final com.linkare.rec.impl.baseUI.config.Apparatus element = (com.linkare.rec.impl.baseUI.config.Apparatus) element2;
 			if (element != null) {
 				element.addPropertyChangeListener(listener);
 			}
 		}
-		for (Iterator it = _WebResource.iterator(); it.hasNext();) {
-			com.linkare.rec.impl.baseUI.config.WebResource element = (com.linkare.rec.impl.baseUI.config.WebResource) it
-					.next();
+		for (final Object element2 : _WebResource) {
+			final com.linkare.rec.impl.baseUI.config.WebResource element = (com.linkare.rec.impl.baseUI.config.WebResource) element2;
 			if (element != null) {
 				element.addPropertyChangeListener(listener);
 			}
 		}
-		for (Iterator it = _LocalizationBundle.iterator(); it.hasNext();) {
-			com.linkare.rec.impl.baseUI.config.LocalizationBundle element = (com.linkare.rec.impl.baseUI.config.LocalizationBundle) it
-					.next();
+		for (final Object element2 : _LocalizationBundle) {
+			final com.linkare.rec.impl.baseUI.config.LocalizationBundle element = (com.linkare.rec.impl.baseUI.config.LocalizationBundle) element2;
 			if (element != null) {
 				element.addPropertyChangeListener(listener);
 			}
 		}
 	}
 
-	public void removePropertyChangeListener(PropertyChangeListener listener) {
+	@Override
+	public void removePropertyChangeListener(final PropertyChangeListener listener) {
 		if (eventListeners == null) {
 			return;
 		}
@@ -604,78 +618,90 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 		}
 	}
 
-	public void _setPropertyChangeSupport(PropertyChangeSupport listeners) {
+	@Override
+	public void _setPropertyChangeSupport(final PropertyChangeSupport listeners) {
 		eventListeners = listeners;
 	}
 
-	public void changePropertyByName(String name, Object value) {
-		if (name == null)
+	public void changePropertyByName(String name, final Object value) {
+		if (name == null) {
 			return;
+		}
 		name = name.intern();
-		if (name == "order")
+		if (name == "order") {
 			setOrder(((Number) value).intValue());
-		else if (name == "iconLocationBundleKey")
+		} else if (name == "iconLocationBundleKey") {
 			setIconLocationBundleKey((String) value);
-		else if (name == "desktopLocationBundleKey")
+		} else if (name == "desktopLocationBundleKey") {
 			setDesktopLocationBundleKey((String) value);
-		else if (name == "toolTipBundleKey")
+		} else if (name == "toolTipBundleKey") {
 			setToolTipBundleKey((String) value);
-		else if (name == "displayStringBundleKey")
+		} else if (name == "displayStringBundleKey") {
 			setDisplayStringBundleKey((String) value);
-		else if (name == "location")
+		} else if (name == "location") {
 			setLocation((String) value);
-		else if (name == "apparatus")
+		} else if (name == "apparatus") {
 			addApparatus((Apparatus) value);
-		else if (name == "apparatus[]")
+		} else if (name == "apparatus[]") {
 			setApparatus((Apparatus[]) value);
-		else if (name == "webResource")
+		} else if (name == "webResource") {
 			addWebResource((WebResource) value);
-		else if (name == "webResource[]")
+		} else if (name == "webResource[]") {
 			setWebResource((WebResource[]) value);
-		else if (name == "localizationBundle")
+		} else if (name == "localizationBundle") {
 			addLocalizationBundle((LocalizationBundle) value);
-		else if (name == "localizationBundle[]")
+		} else if (name == "localizationBundle[]") {
 			setLocalizationBundle((LocalizationBundle[]) value);
-		else
+		} else {
 			throw new IllegalArgumentException(name + " is not a valid property name for Lab");
+		}
 	}
 
-	public Object fetchPropertyByName(String name) {
-		if (name == "order")
+	public Object fetchPropertyByName(final String name) {
+		if (name == "order") {
 			return new Integer(getOrder());
-		if (name == "iconLocationBundleKey")
+		}
+		if (name == "iconLocationBundleKey") {
 			return getIconLocationBundleKey();
-		if (name == "desktopLocationBundleKey")
+		}
+		if (name == "desktopLocationBundleKey") {
 			return getDesktopLocationBundleKey();
-		if (name == "toolTipBundleKey")
+		}
+		if (name == "toolTipBundleKey") {
 			return getToolTipBundleKey();
-		if (name == "displayStringBundleKey")
+		}
+		if (name == "displayStringBundleKey") {
 			return getDisplayStringBundleKey();
-		if (name == "location")
+		}
+		if (name == "location") {
 			return getLocation();
-		if (name == "apparatus[]")
+		}
+		if (name == "apparatus[]") {
 			return getApparatus();
-		if (name == "webResource[]")
+		}
+		if (name == "webResource[]") {
 			return getWebResource();
-		if (name == "localizationBundle[]")
+		}
+		if (name == "localizationBundle[]") {
 			return getLocalizationBundle();
+		}
 		throw new IllegalArgumentException(name + " is not a valid property name for Lab");
 	}
 
 	// Return an array of all of the properties that are beans and are set.
-	public com.linkare.rec.impl.baseUI.config.CommonBean[] childBeans(boolean recursive) {
-		List<CommonBean> children = new LinkedList<CommonBean>();
+	@Override
+	public com.linkare.rec.impl.baseUI.config.CommonBean[] childBeans(final boolean recursive) {
+		final List<CommonBean> children = new LinkedList<CommonBean>();
 		childBeans(recursive, children);
-		com.linkare.rec.impl.baseUI.config.CommonBean[] result = new com.linkare.rec.impl.baseUI.config.CommonBean[children
+		final com.linkare.rec.impl.baseUI.config.CommonBean[] result = new com.linkare.rec.impl.baseUI.config.CommonBean[children
 				.size()];
 		return (com.linkare.rec.impl.baseUI.config.CommonBean[]) children.toArray(result);
 	}
 
 	// Put all child beans into the beans list.
-	public void childBeans(boolean recursive, List<CommonBean> beans) {
-		for (Iterator it = _Apparatus.iterator(); it.hasNext();) {
-			com.linkare.rec.impl.baseUI.config.Apparatus element = (com.linkare.rec.impl.baseUI.config.Apparatus) it
-					.next();
+	public void childBeans(final boolean recursive, final List<CommonBean> beans) {
+		for (final Object element2 : _Apparatus) {
+			final com.linkare.rec.impl.baseUI.config.Apparatus element = (com.linkare.rec.impl.baseUI.config.Apparatus) element2;
 			if (element != null) {
 				if (recursive) {
 					element.childBeans(true, beans);
@@ -683,9 +709,8 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 				beans.add(element);
 			}
 		}
-		for (Iterator it = _WebResource.iterator(); it.hasNext();) {
-			com.linkare.rec.impl.baseUI.config.WebResource element = (com.linkare.rec.impl.baseUI.config.WebResource) it
-					.next();
+		for (final Object element2 : _WebResource) {
+			final com.linkare.rec.impl.baseUI.config.WebResource element = (com.linkare.rec.impl.baseUI.config.WebResource) element2;
 			if (element != null) {
 				if (recursive) {
 					element.childBeans(true, beans);
@@ -693,9 +718,8 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 				beans.add(element);
 			}
 		}
-		for (Iterator it = _LocalizationBundle.iterator(); it.hasNext();) {
-			com.linkare.rec.impl.baseUI.config.LocalizationBundle element = (com.linkare.rec.impl.baseUI.config.LocalizationBundle) it
-					.next();
+		for (final Object element2 : _LocalizationBundle) {
+			final com.linkare.rec.impl.baseUI.config.LocalizationBundle element = (com.linkare.rec.impl.baseUI.config.LocalizationBundle) element2;
 			if (element != null) {
 				if (recursive) {
 					element.childBeans(true, beans);
@@ -706,61 +730,75 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (o == this)
+	public boolean equals(final Object o) {
+		if (o == this) {
 			return true;
-		if (!(o instanceof com.linkare.rec.impl.baseUI.config.Lab))
+		}
+		if (!(o instanceof com.linkare.rec.impl.baseUI.config.Lab)) {
 			return false;
-		com.linkare.rec.impl.baseUI.config.Lab inst = (com.linkare.rec.impl.baseUI.config.Lab) o;
-		if (_Order != inst._Order)
+		}
+		final com.linkare.rec.impl.baseUI.config.Lab inst = (com.linkare.rec.impl.baseUI.config.Lab) o;
+		if (_Order != inst._Order) {
 			return false;
+		}
 		if (!(_IconLocationBundleKey == null ? inst._IconLocationBundleKey == null : _IconLocationBundleKey
-				.equals(inst._IconLocationBundleKey)))
+				.equals(inst._IconLocationBundleKey))) {
 			return false;
+		}
 		if (!(_DesktopLocationBundleKey == null ? inst._DesktopLocationBundleKey == null : _DesktopLocationBundleKey
-				.equals(inst._DesktopLocationBundleKey)))
+				.equals(inst._DesktopLocationBundleKey))) {
 			return false;
+		}
 		if (!(_ToolTipBundleKey == null ? inst._ToolTipBundleKey == null : _ToolTipBundleKey
-				.equals(inst._ToolTipBundleKey)))
+				.equals(inst._ToolTipBundleKey))) {
 			return false;
+		}
 		if (!(_DisplayStringBundleKey == null ? inst._DisplayStringBundleKey == null : _DisplayStringBundleKey
-				.equals(inst._DisplayStringBundleKey)))
+				.equals(inst._DisplayStringBundleKey))) {
 			return false;
-		if (!(_Location == null ? inst._Location == null : _Location.equals(inst._Location)))
+		}
+		if (!(_Location == null ? inst._Location == null : _Location.equals(inst._Location))) {
 			return false;
-		if (sizeApparatus() != inst.sizeApparatus())
+		}
+		if (sizeApparatus() != inst.sizeApparatus()) {
 			return false;
+		}
 		// Compare every element.
 		for (Iterator it = _Apparatus.iterator(), it2 = inst._Apparatus.iterator(); it.hasNext() && it2.hasNext();) {
-			com.linkare.rec.impl.baseUI.config.Apparatus element = (com.linkare.rec.impl.baseUI.config.Apparatus) it
+			final com.linkare.rec.impl.baseUI.config.Apparatus element = (com.linkare.rec.impl.baseUI.config.Apparatus) it
 					.next();
-			com.linkare.rec.impl.baseUI.config.Apparatus element2 = (com.linkare.rec.impl.baseUI.config.Apparatus) it2
+			final com.linkare.rec.impl.baseUI.config.Apparatus element2 = (com.linkare.rec.impl.baseUI.config.Apparatus) it2
 					.next();
-			if (!(element == null ? element2 == null : element.equals(element2)))
+			if (!(element == null ? element2 == null : element.equals(element2))) {
 				return false;
+			}
 		}
-		if (sizeWebResource() != inst.sizeWebResource())
+		if (sizeWebResource() != inst.sizeWebResource()) {
 			return false;
+		}
 		// Compare every element.
 		for (Iterator it = _WebResource.iterator(), it2 = inst._WebResource.iterator(); it.hasNext() && it2.hasNext();) {
-			com.linkare.rec.impl.baseUI.config.WebResource element = (com.linkare.rec.impl.baseUI.config.WebResource) it
+			final com.linkare.rec.impl.baseUI.config.WebResource element = (com.linkare.rec.impl.baseUI.config.WebResource) it
 					.next();
-			com.linkare.rec.impl.baseUI.config.WebResource element2 = (com.linkare.rec.impl.baseUI.config.WebResource) it2
+			final com.linkare.rec.impl.baseUI.config.WebResource element2 = (com.linkare.rec.impl.baseUI.config.WebResource) it2
 					.next();
-			if (!(element == null ? element2 == null : element.equals(element2)))
+			if (!(element == null ? element2 == null : element.equals(element2))) {
 				return false;
+			}
 		}
-		if (sizeLocalizationBundle() != inst.sizeLocalizationBundle())
+		if (sizeLocalizationBundle() != inst.sizeLocalizationBundle()) {
 			return false;
+		}
 		// Compare every element.
 		for (Iterator it = _LocalizationBundle.iterator(), it2 = inst._LocalizationBundle.iterator(); it.hasNext()
 				&& it2.hasNext();) {
-			com.linkare.rec.impl.baseUI.config.LocalizationBundle element = (com.linkare.rec.impl.baseUI.config.LocalizationBundle) it
+			final com.linkare.rec.impl.baseUI.config.LocalizationBundle element = (com.linkare.rec.impl.baseUI.config.LocalizationBundle) it
 					.next();
-			com.linkare.rec.impl.baseUI.config.LocalizationBundle element2 = (com.linkare.rec.impl.baseUI.config.LocalizationBundle) it2
+			final com.linkare.rec.impl.baseUI.config.LocalizationBundle element2 = (com.linkare.rec.impl.baseUI.config.LocalizationBundle) it2
 					.next();
-			if (!(element == null ? element2 == null : element.equals(element2)))
+			if (!(element == null ? element2 == null : element.equals(element2))) {
 				return false;
+			}
 		}
 		return true;
 	}
@@ -780,10 +818,10 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 	}
 
 	public String toString() {
-		StringWriter sw = new StringWriter();
+		final StringWriter sw = new StringWriter();
 		try {
 			writeNode(sw, "Lab", "");
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			// How can we actually get an IOException on a StringWriter?
 			// We'll just ignore it.
 		}

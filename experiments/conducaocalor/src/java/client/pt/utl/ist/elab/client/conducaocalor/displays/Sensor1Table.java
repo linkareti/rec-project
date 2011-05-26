@@ -14,12 +14,18 @@ import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
  */
 public class Sensor1Table extends MultSeriesTable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8271363126525605915L;
+
 	/** Creates a new instance of TableFreqRMS */
 	public Sensor1Table() {
 		super();
 		setColArray(new int[] { 9, 0, 3, 6 });
 	}
 
+	@Override
 	public String getName() {
 		return "Sensor 1";
 	}

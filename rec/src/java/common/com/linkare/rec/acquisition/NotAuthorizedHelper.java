@@ -10,57 +10,57 @@ package com.linkare.rec.acquisition;
 public abstract class NotAuthorizedHelper {
 	private static String _id = "IDL:com/linkare/rec/acquisition/NotAuthorized:1.0";
 
-	public static void insert(org.omg.CORBA.Any a, com.linkare.rec.acquisition.NotAuthorized that) {
-		org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
-		a.type(type());
-		write(out, that);
-		a.read_value(out.create_input_stream(), type());
+	public static void insert(final org.omg.CORBA.Any a, final com.linkare.rec.acquisition.NotAuthorized that) {
+		final org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
+		a.type(NotAuthorizedHelper.type());
+		NotAuthorizedHelper.write(out, that);
+		a.read_value(out.create_input_stream(), NotAuthorizedHelper.type());
 	}
 
-	public static com.linkare.rec.acquisition.NotAuthorized extract(org.omg.CORBA.Any a) {
-		return read(a.create_input_stream());
+	public static com.linkare.rec.acquisition.NotAuthorized extract(final org.omg.CORBA.Any a) {
+		return NotAuthorizedHelper.read(a.create_input_stream());
 	}
 
 	private static org.omg.CORBA.TypeCode __typeCode = null;
 	private static boolean __active = false;
 
 	synchronized public static org.omg.CORBA.TypeCode type() {
-		if (__typeCode == null) {
+		if (NotAuthorizedHelper.__typeCode == null) {
 			synchronized (org.omg.CORBA.TypeCode.class) {
-				if (__typeCode == null) {
-					if (__active) {
-						return org.omg.CORBA.ORB.init().create_recursive_tc(_id);
+				if (NotAuthorizedHelper.__typeCode == null) {
+					if (NotAuthorizedHelper.__active) {
+						return org.omg.CORBA.ORB.init().create_recursive_tc(NotAuthorizedHelper._id);
 					}
-					__active = true;
-					org.omg.CORBA.StructMember[] _members0 = new org.omg.CORBA.StructMember[1];
+					NotAuthorizedHelper.__active = true;
+					final org.omg.CORBA.StructMember[] _members0 = new org.omg.CORBA.StructMember[1];
 					org.omg.CORBA.TypeCode _tcOf_members0 = null;
 					_tcOf_members0 = org.omg.CORBA.ORB.init().get_primitive_tc(org.omg.CORBA.TCKind.tk_long);
 					_members0[0] = new org.omg.CORBA.StructMember("errorCode", _tcOf_members0, null);
-					__typeCode = org.omg.CORBA.ORB.init().create_exception_tc(
+					NotAuthorizedHelper.__typeCode = org.omg.CORBA.ORB.init().create_exception_tc(
 							com.linkare.rec.acquisition.NotAuthorizedHelper.id(), "NotAuthorized", _members0);
-					__active = false;
+					NotAuthorizedHelper.__active = false;
 				}
 			}
 		}
-		return __typeCode;
+		return NotAuthorizedHelper.__typeCode;
 	}
 
 	public static String id() {
-		return _id;
+		return NotAuthorizedHelper._id;
 	}
 
-	public static com.linkare.rec.acquisition.NotAuthorized read(org.omg.CORBA.portable.InputStream istream) {
-		com.linkare.rec.acquisition.NotAuthorized value = new com.linkare.rec.acquisition.NotAuthorized();
+	public static com.linkare.rec.acquisition.NotAuthorized read(final org.omg.CORBA.portable.InputStream istream) {
+		final com.linkare.rec.acquisition.NotAuthorized value = new com.linkare.rec.acquisition.NotAuthorized();
 		// read and discard the repository ID
 		istream.read_string();
 		value.errorCode = istream.read_long();
 		return value;
 	}
 
-	public static void write(org.omg.CORBA.portable.OutputStream ostream,
-			com.linkare.rec.acquisition.NotAuthorized value) {
+	public static void write(final org.omg.CORBA.portable.OutputStream ostream,
+			final com.linkare.rec.acquisition.NotAuthorized value) {
 		// write the repository ID
-		ostream.write_string(id());
+		ostream.write_string(NotAuthorizedHelper.id());
 		ostream.write_long(value.errorCode);
 	}
 

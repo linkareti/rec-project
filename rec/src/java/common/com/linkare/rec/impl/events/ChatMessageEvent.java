@@ -37,7 +37,7 @@ public class ChatMessageEvent extends java.util.EventObject implements Prioritaz
 	private String message;
 
 	/** Creates a new instance of ChatMessageEvent */
-	public ChatMessageEvent(Object source, UserInfo userFrom, UserInfo userTo, String message) {
+	public ChatMessageEvent(final Object source, final UserInfo userFrom, final UserInfo userTo, final String message) {
 		super(source);
 		this.message = message;
 		this.userFrom = userFrom;
@@ -50,7 +50,7 @@ public class ChatMessageEvent extends java.util.EventObject implements Prioritaz
 	 * @return Value of property userTo.
 	 */
 	public UserInfo getUserTo() {
-		return this.userTo;
+		return userTo;
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class ChatMessageEvent extends java.util.EventObject implements Prioritaz
 	 * 
 	 * @param userTo New value of property userTo.
 	 */
-	public void setUserTo(UserInfo userTo) {
+	public void setUserTo(final UserInfo userTo) {
 		this.userTo = userTo;
 	}
 
@@ -68,7 +68,7 @@ public class ChatMessageEvent extends java.util.EventObject implements Prioritaz
 	 * @return Value of property userFrom.
 	 */
 	public UserInfo getUserFrom() {
-		return this.userFrom;
+		return userFrom;
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class ChatMessageEvent extends java.util.EventObject implements Prioritaz
 	 * 
 	 * @param userFrom New value of property userFrom.
 	 */
-	public void setUserFrom(UserInfo userFrom) {
+	public void setUserFrom(final UserInfo userFrom) {
 		this.userFrom = userFrom;
 	}
 
@@ -86,7 +86,7 @@ public class ChatMessageEvent extends java.util.EventObject implements Prioritaz
 	 * @return Value of property message.
 	 */
 	public String getMessage() {
-		return this.message;
+		return message;
 	}
 
 	/**
@@ -94,7 +94,7 @@ public class ChatMessageEvent extends java.util.EventObject implements Prioritaz
 	 * 
 	 * @param message New value of property message.
 	 */
-	public void setMessage(String message) {
+	public void setMessage(final String message) {
 		this.message = message;
 	}
 

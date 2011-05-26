@@ -16,25 +16,33 @@ import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 public class DataProducer2IDataSourceAdapter extends BaseDataSource {
 	private DataProducerWrapper delegateDataProducer = null;
 
-	/** Creates a new instance of DataProducer2IDataSourceAdapter */
-	public DataProducer2IDataSourceAdapter(DataProducerWrapper delegateDataProducer) {
+	/**
+	 * Creates a new instance of DataProducer2IDataSourceAdapter
+	 * 
+	 * @param delegateDataProducer
+	 */
+	public DataProducer2IDataSourceAdapter(final DataProducerWrapper delegateDataProducer) {
 		this.delegateDataProducer = delegateDataProducer;
 	}
 
+	@Override
 	public String getName() {
 		return delegateDataProducer.getDataProducerName();
 	}
 
 	int packetSize = 1;
 
+	@Override
 	public int getPacketSize() {
 		return packetSize;
 	}
 
-	public PhysicsValue[][] getSamples(int sampleIndexStart, int sampleIndexEnd) {
+	@Override
+	public PhysicsValue[][] getSamples(final int sampleIndexStart, final int sampleIndexEnd) {
 		return null;
 	}
 
+	@Override
 	public void stopNow() {
 	}
 

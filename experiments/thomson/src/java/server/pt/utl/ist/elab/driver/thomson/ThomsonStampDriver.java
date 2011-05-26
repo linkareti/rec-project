@@ -39,10 +39,10 @@ public class ThomsonStampDriver extends AbstractStampDriver {
 	private static String THOMSON_HARDWARE_DRIVER_LOGGER = "ThomsonHardwareDriver.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(THOMSON_HARDWARE_DRIVER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ThomsonStampDriver.THOMSON_HARDWARE_DRIVER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(THOMSON_HARDWARE_DRIVER_LOGGER));
-			Logger.getLogger(THOMSON_HARDWARE_DRIVER_LOGGER).log(Level.INFO, "Creating logger!");
+			LogManager.getLogManager().addLogger(Logger.getLogger(ThomsonStampDriver.THOMSON_HARDWARE_DRIVER_LOGGER));
+			Logger.getLogger(ThomsonStampDriver.THOMSON_HARDWARE_DRIVER_LOGGER).log(Level.INFO, "Creating logger!");
 		}
 	}
 
@@ -62,29 +62,38 @@ public class ThomsonStampDriver extends AbstractStampDriver {
 		System.out.println("OK! all created!");
 	}
 
-	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException {
+	@Override
+	public void configure(final HardwareAcquisitionConfig config, final HardwareInfo info)
+			throws WrongConfigurationException {
 
 		fireIDriverStateListenerDriverConfiguring();
 
-		stampConfig = new StampCommand(CONFIG_OUT_STRING);
+		stampConfig = new StampCommand(AbstractStampDriver.CONFIG_OUT_STRING);
 
-		stampConfig.addCommandData(StampConfigTranslator.V_ACELERACAO_STR, new Integer(Defaults.defaultIfEmpty(config
-				.getSelectedHardwareParameterValue(StampConfigTranslator.V_ACELERACAO_STR), info
-				.getHardwareParameterValue(StampConfigTranslator.V_ACELERACAO_STR))));
+		stampConfig.addCommandData(
+				StampConfigTranslator.V_ACELERACAO_STR,
+				new Integer(Defaults.defaultIfEmpty(
+						config.getSelectedHardwareParameterValue(StampConfigTranslator.V_ACELERACAO_STR),
+						info.getHardwareParameterValue(StampConfigTranslator.V_ACELERACAO_STR))));
 
-		stampConfig.addCommandData(StampConfigTranslator.I_BOBINES_STR, new Integer(Defaults.defaultIfEmpty(config
-				.getSelectedHardwareParameterValue(StampConfigTranslator.I_BOBINES_STR), info
-				.getHardwareParameterValue(StampConfigTranslator.I_BOBINES_STR))));
+		stampConfig.addCommandData(
+				StampConfigTranslator.I_BOBINES_STR,
+				new Integer(Defaults.defaultIfEmpty(
+						config.getSelectedHardwareParameterValue(StampConfigTranslator.I_BOBINES_STR),
+						info.getHardwareParameterValue(StampConfigTranslator.I_BOBINES_STR))));
 
-		stampConfig.addCommandData(StampConfigTranslator.MODO_STR, new String(Defaults.defaultIfEmpty(config
-				.getSelectedHardwareParameterValue(StampConfigTranslator.MODO_STR), info
-				.getHardwareParameterValue(StampConfigTranslator.MODO_STR))));
+		stampConfig.addCommandData(
+				StampConfigTranslator.MODO_STR,
+				new String(Defaults.defaultIfEmpty(
+						config.getSelectedHardwareParameterValue(StampConfigTranslator.MODO_STR),
+						info.getHardwareParameterValue(StampConfigTranslator.MODO_STR))));
 
 		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new Integer(config.getTotalSamples()));
 
-		StampTranslator translator = StampTranslatorProcessorManager.getTranslator(stampConfig);
-		if (!translator.translate(stampConfig))
+		final StampTranslator translator = StampTranslatorProcessorManager.getTranslator(stampConfig);
+		if (!translator.translate(stampConfig)) {
 			throw new WrongConfigurationException("Cannot translate StampCommand!", -1);
+		}
 
 		config.getChannelsConfig(0).setTotalSamples(config.getTotalSamples());
 		config.getChannelsConfig(1).setTotalSamples(config.getTotalSamples());
@@ -97,41 +106,47 @@ public class ThomsonStampDriver extends AbstractStampDriver {
 		fireIDriverStateListenerDriverConfigured();
 	}
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionHeader() {
 		return config;
 	}
 
+	@Override
 	public Object getHardwareInfo() {
 
-		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+				+ "/HardwareInfo.xml";
 		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
-		if (prop.indexOf("://") == -1)
+		if (prop.indexOf("://") == -1) {
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
+		}
 
 		java.net.URL url = null;
 		try {
 			url = ReCProtocols.getURL(prop);
-		} catch (Exception e) {
-			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger(STAMP_DRIVER_LOGGER));
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable("Unable to load resource: " + prop, e,
+					Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER));
 			e.printStackTrace();
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
-			} catch (Exception e2) {
+			} catch (final Exception e2) {
 				e2.printStackTrace();
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2, Logger
-						.getLogger(STAMP_DRIVER_LOGGER));
+				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
+						Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER));
 			}
 		}
 
 		System.out.println("Returning url = " + url);
-		java.io.File f = new java.io.File(url.getFile());
+		final java.io.File f = new java.io.File(url.getFile());
 		System.out.println("File = " + url.getFile());
-		if (f.exists())
+		if (f.exists()) {
 			System.out.println("File exists! COOL!");
-		else
+		} else {
 			System.out.println("SHIT");
-		Logger.getLogger(THOMSON_HARDWARE_DRIVER_LOGGER).log(Level.INFO, "Returning url = " + url);
+		}
+		Logger.getLogger(ThomsonStampDriver.THOMSON_HARDWARE_DRIVER_LOGGER).log(Level.INFO, "Returning url = " + url);
 
 		return url;
 
@@ -139,27 +154,31 @@ public class ThomsonStampDriver extends AbstractStampDriver {
 
 	private ThomsonStampDataSource dataSource = null;
 
+	@Override
 	public AbstractStampDataSource initDataSource() {
 		dataSource = new ThomsonStampDataSource();
 		dataSource.setAcquisitionHeader(getAcquisitionHeader());
 		return dataSource;
 	}
 
+	@Override
 	protected void loadExtraCommandHandlers() {
 		System.out.println("Loading command handlers...");
-		String packageName = getClass().getPackage().getName() + ".";
+		final String packageName = getClass().getPackage().getName() + ".";
 		StampTranslatorProcessorManager.initStampProcessorsTranslators(new String[] {
 				packageName + "processors.StampThomsonProcessor", packageName + "translators.StampConfigTranslator", });
 		System.out.println("Loaded command handlers...");
 	}
 
-	public void processCommand(StampCommand cmd) {
+	@Override
+	public void processCommand(final StampCommand cmd) {
 		if (cmd == null || cmd.getCommandIdentifier() == null) {
-			Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO, "Can not interpret command " + cmd);
+			Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER).log(Level.INFO,
+					"Can not interpret command " + cmd);
 			return;
 		}
 
-		if (cmd.getCommandIdentifier().equals(ID_STR)) {
+		if (cmd.getCommandIdentifier().equals(AbstractStampDriver.ID_STR)) {
 			if (waitingStart) {
 				waitingStart = false;
 				writeMessage(stampConfig.getCommand());
@@ -215,21 +234,25 @@ public class ThomsonStampDriver extends AbstractStampDriver {
 	private boolean initing = true;
 	private boolean waitingStart = false;
 	private boolean wroteStart = false;
-	private boolean waitingStop = false;
+	private final boolean waitingStop = false;
 	private boolean started = false;
 	private boolean stoping = false;
 	private boolean reseting = true;
 
+	@Override
 	public void startNow() throws TimedOutException {
-		if (stampConfig == null)
+		if (stampConfig == null) {
 			throw new TimedOutException("No configuration available yet!");
+		}
 
 		waitingStart = true;
 
 		WaitForConditionResult.waitForConditionTrue(new AbstractConditionDecisor() {
+			@Override
 			public ConditionResult getConditionResult() {
-				if (!waitingStart)
+				if (!waitingStart) {
 					return ConditionResult.CONDITION_MET_TRUE;
+				}
 
 				return ConditionResult.CONDITION_NOT_MET;
 			}

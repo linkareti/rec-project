@@ -73,22 +73,25 @@ public class ChannelsNode {
 		if (channel == null) {
 			channel = new ArrayList<OneChannelNode>();
 		}
-		return this.channel;
+		return channel;
 	}
 
-	public OneChannelNode getChannelToOrder(int order) {
-		if (channel == null)
+	public OneChannelNode getChannelToOrder(final int order) {
+		if (channel == null) {
 			return new OneChannelNode();
-		for (OneChannelNode oneChannelNode : channel) {
-			if (oneChannelNode.getOrder().intValue() == order)
+		}
+		for (final OneChannelNode oneChannelNode : channel) {
+			if (oneChannelNode.getOrder().intValue() == order) {
 				return oneChannelNode;
+			}
 		}
 		return new OneChannelNode();
 	}
 
-	public String formatValue(Double value) {
-		if (valueFormat == null)
+	public String formatValue(final Double value) {
+		if (valueFormat == null) {
 			return value.toString();
+		}
 		return valueFormat.format(value).toString();
 	}
 

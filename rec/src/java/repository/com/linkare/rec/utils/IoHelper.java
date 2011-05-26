@@ -4,11 +4,11 @@
  */
 package com.linkare.rec.utils;
 
-import com.linkare.rec.ejb.RecMDBBean;
 import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

@@ -11,6 +11,10 @@ package pt.utl.ist.elab.client.webrobot.customizer.Comps;
  * @author André Neto - LEFT - IST
  */
 public class Block extends javax.swing.JButton {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4820322656995726832L;
 	private int WIDTH;
 	private int HEIGHT;
 	private int LINEWIDTH;
@@ -23,8 +27,8 @@ public class Block extends javax.swing.JButton {
 	private String text;
 	private String fullNameDescription;
 	public java.awt.Color darkBlue = java.awt.Color.blue.darker();
-	public java.awt.Color highlightColor = new java.awt.Color(darkBlue.getRed(), darkBlue.getGreen(), darkBlue
-			.getBlue(), 50);
+	public java.awt.Color highlightColor = new java.awt.Color(darkBlue.getRed(), darkBlue.getGreen(),
+			darkBlue.getBlue(), 50);
 
 	/** Holds value of property paintBottom. */
 	private boolean paintBottom = false;
@@ -43,18 +47,19 @@ public class Block extends javax.swing.JButton {
 		super();
 	}
 
-	public void paintComponent(java.awt.Graphics g) {
+	@Override
+	public void paintComponent(final java.awt.Graphics g) {
 	}
 
 	public pt.utl.ist.elab.client.webrobot.customizer.Models.ModelBlock getDataModel() {
 		return model;
 	}
 
-	public void setDataModel(pt.utl.ist.elab.client.webrobot.customizer.Models.ModelBlock model) {
+	public void setDataModel(final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelBlock model) {
 		this.model = model;
 	}
 
-	public void edit(javax.swing.JFrame parent) {
+	public void edit(final javax.swing.JFrame parent) {
 	}
 
 	public int getTipo() {
@@ -62,7 +67,7 @@ public class Block extends javax.swing.JButton {
 	}
 
 	public String getFullNameDescription() {
-		return this.fullNameDescription;
+		return fullNameDescription;
 	}
 
 	/**
@@ -71,7 +76,7 @@ public class Block extends javax.swing.JButton {
 	 * @return Value of property paintBottom.
 	 */
 	public boolean isPaintBottom() {
-		return this.paintBottom;
+		return paintBottom;
 	}
 
 	/**
@@ -79,7 +84,7 @@ public class Block extends javax.swing.JButton {
 	 * 
 	 * @param paintBottom New value of property paintBottom.
 	 */
-	public void setPaintBottom(boolean paintBottom) {
+	public void setPaintBottom(final boolean paintBottom) {
 		this.paintBottom = paintBottom;
 	}
 
@@ -89,7 +94,7 @@ public class Block extends javax.swing.JButton {
 	 * @return Value of property paintLeft.
 	 */
 	public boolean isPaintLeft() {
-		return this.paintLeft;
+		return paintLeft;
 	}
 
 	/**
@@ -97,7 +102,7 @@ public class Block extends javax.swing.JButton {
 	 * 
 	 * @param paintLeft New value of property paintLeft.
 	 */
-	public void setPaintLeft(boolean paintLeft) {
+	public void setPaintLeft(final boolean paintLeft) {
 		this.paintLeft = paintLeft;
 	}
 
@@ -107,7 +112,7 @@ public class Block extends javax.swing.JButton {
 	 * @return Value of property anotherAnd.
 	 */
 	public boolean isAnotherAnd() {
-		return this.anotherAnd;
+		return anotherAnd;
 	}
 
 	/**
@@ -115,7 +120,7 @@ public class Block extends javax.swing.JButton {
 	 * 
 	 * @param anotherAnd New value of property anotherAnd.
 	 */
-	public void setAnotherAnd(boolean anotherAnd) {
+	public void setAnotherAnd(final boolean anotherAnd) {
 		this.anotherAnd = anotherAnd;
 	}
 
@@ -125,7 +130,7 @@ public class Block extends javax.swing.JButton {
 	 * @return Value of property cancel.
 	 */
 	public boolean isCancel() {
-		return this.cancel;
+		return cancel;
 	}
 
 	/**
@@ -133,7 +138,7 @@ public class Block extends javax.swing.JButton {
 	 * 
 	 * @param cancel New value of property cancel.
 	 */
-	public void setCancel(boolean cancel) {
+	public void setCancel(final boolean cancel) {
 		this.cancel = cancel;
 	}
 }

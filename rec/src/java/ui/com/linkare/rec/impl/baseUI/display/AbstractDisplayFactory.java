@@ -16,11 +16,14 @@ public abstract class AbstractDisplayFactory implements DisplayFactory {
 	private com.linkare.rec.data.metadata.HardwareInfo hinfo = null;
 	private com.linkare.rec.impl.baseUI.config.Display[] displays = null;
 
+	@Override
 	public abstract void destroyDisplays();
 
+	@Override
 	public abstract com.linkare.rec.impl.client.experiment.ExpDataDisplay[] getDisplays();
 
-	public void init(com.linkare.rec.impl.baseUI.config.Display[] displays) {
+	@Override
+	public void init(final com.linkare.rec.impl.baseUI.config.Display[] displays) {
 		this.displays = displays;
 	}
 
@@ -28,11 +31,13 @@ public abstract class AbstractDisplayFactory implements DisplayFactory {
 		return displays;
 	}
 
-	public void setAcquisitionConfig(com.linkare.rec.data.config.HardwareAcquisitionConfig hconfig) {
+	@Override
+	public void setAcquisitionConfig(final com.linkare.rec.data.config.HardwareAcquisitionConfig hconfig) {
 		this.hconfig = hconfig;
 	}
 
-	public void setAcquisitionInfo(com.linkare.rec.data.metadata.HardwareInfo hinfo) {
+	@Override
+	public void setAcquisitionInfo(final com.linkare.rec.data.metadata.HardwareInfo hinfo) {
 		this.hinfo = hinfo;
 	}
 

@@ -12,6 +12,7 @@ import java.util.Map;
 
 import javax.swing.plaf.FontUIResource;
 
+import com.linkare.rec.impl.newface.laf.flat.theme.AbstractStyle;
 import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 
 /**
@@ -34,15 +35,15 @@ public class PanelStyle extends DefaultStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return PanelStyle.ID;
 	}
 
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(BACKGROUND, PANEL_BACKGROUND);
-		map.put(FOREGROUND, PANEL_FOREGROUND);
-		map.put(FONT, new FontUIResource("Arial", Font.PLAIN, 20));
+		map.put(AbstractStyle.BACKGROUND, PanelStyle.PANEL_BACKGROUND);
+		map.put(AbstractStyle.FOREGROUND, PanelStyle.PANEL_FOREGROUND);
+		map.put(AbstractStyle.FONT, new FontUIResource("Arial", Font.PLAIN, 20));
 	}
 
 	// -------------------------------------------------------------------------

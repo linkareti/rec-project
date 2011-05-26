@@ -63,8 +63,8 @@ public class OneErrorNode {
 	 * @param value allowed object is {@link BigInteger }
 	 * 
 	 */
-	public void setCode(BigInteger value) {
-		this.code = value;
+	public void setCode(final BigInteger value) {
+		code = value;
 	}
 
 	/**
@@ -83,8 +83,8 @@ public class OneErrorNode {
 	 * @param value allowed object is {@link String }
 	 * 
 	 */
-	public void setKey(String value) {
-		this.key = value;
+	public void setKey(final String value) {
+		key = value;
 	}
 
 	/**
@@ -103,8 +103,8 @@ public class OneErrorNode {
 	 * @param value allowed object is {@link String }
 	 * 
 	 */
-	public void setMessage(String value) {
-		this.message = value;
+	public void setMessage(final String value) {
+		message = value;
 	}
 
 }

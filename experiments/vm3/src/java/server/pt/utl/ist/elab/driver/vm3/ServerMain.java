@@ -21,9 +21,9 @@ public class ServerMain {
 
 	private static String M3_HARDWARE_LOGGER = "M3.Logger";
 	static {
-		Logger l = LogManager.getLogManager().getLogger(M3_HARDWARE_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ServerMain.M3_HARDWARE_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(M3_HARDWARE_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ServerMain.M3_HARDWARE_LOGGER));
 		}
 	}
 
@@ -34,18 +34,18 @@ public class ServerMain {
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 
 		try {
 			ORBBean.getORBBean();
 
-			BaseHardware baseHardware = new BaseHardware(new M3Driver());
+			final BaseHardware baseHardware = new BaseHardware(new M3Driver());
 
 			Thread.currentThread().join();
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			ORBBean.getORBBean().killORB();
-			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(M3_HARDWARE_LOGGER));
+			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(ServerMain.M3_HARDWARE_LOGGER));
 		}
 		// TODO code application logic here
 	}

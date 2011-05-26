@@ -11,6 +11,8 @@ package com.linkare.editor;
  * @author André Neto - LEFT - IST
  */
 
+import java.awt.image.ImageObserver;
+
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -58,7 +60,8 @@ public class DefaultConfigBuilder extends javax.swing.JFrame implements ICustomi
 		jDialog1.setTitle("Customizer Properties...");
 		jButtonOK.setText("OK");
 		jButtonOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonOKActionPerformed(evt);
 			}
 		});
@@ -105,7 +108,8 @@ public class DefaultConfigBuilder extends javax.swing.JFrame implements ICustomi
 
 		jButtonBrowse.setText("Browse");
 		jButtonBrowse.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonBrowseActionPerformed(evt);
 			}
 		});
@@ -118,14 +122,16 @@ public class DefaultConfigBuilder extends javax.swing.JFrame implements ICustomi
 		jDialog1.getContentPane().add(jPanel3, java.awt.BorderLayout.NORTH);
 
 		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent evt) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent evt) {
 				exitForm(evt);
 			}
 		});
 
 		jButtonOpen.setText("Open Customizer");
 		jButtonOpen.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonOpenActionPerformed(evt);
 			}
 		});
@@ -137,31 +143,32 @@ public class DefaultConfigBuilder extends javax.swing.JFrame implements ICustomi
 		pack();
 	}// GEN-END:initComponents
 
-	private void jButtonBrowseActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonBrowseActionPerformed
+	private void jButtonBrowseActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonBrowseActionPerformed
 	{// GEN-HEADEREND:event_jButtonBrowseActionPerformed
-		JFileChooser jfc = new JFileChooser();
-		int answer = jfc.showOpenDialog(this);
-		if (answer != JFileChooser.APPROVE_OPTION)
+		final JFileChooser jfc = new JFileChooser();
+		final int answer = jfc.showOpenDialog(this);
+		if (answer != JFileChooser.APPROVE_OPTION) {
 			return;
+		}
 
 		jTextFieldHInfoXML.setText(jfc.getSelectedFile().getAbsolutePath());
 	}// GEN-LAST:event_jButtonBrowseActionPerformed
 
-	private void jButtonOpenActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonOpenActionPerformed
+	private void jButtonOpenActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonOpenActionPerformed
 	{// GEN-HEADEREND:event_jButtonOpenActionPerformed
 		jDialog1.pack();
 		jDialog1.setVisible(true);
 	}// GEN-LAST:event_jButtonOpenActionPerformed
 
-	private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonOKActionPerformed
+	private void jButtonOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonOKActionPerformed
 	{// GEN-HEADEREND:event_jButtonOKActionPerformed
 		try {
 			customizer = CustomizerUIUtil.loadCustomizer(jTextFieldURL.getText().trim());
-			HardwareInfo hinfo = HardwareInfoXMLReader.readHardwareInfo(jTextFieldHInfoXML.getText().trim());
+			final HardwareInfo hinfo = HardwareInfoXMLReader.readHardwareInfo(jTextFieldHInfoXML.getText().trim());
 			customizer.setHardwareAcquisitionConfig(hinfo.createBaseHardwareAcquisitionConfig());
 			customizer.setHardwareInfo(hinfo);
 			customizer.addICustomizerListener(this);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			JOptionPane.showMessageDialog(this, "An error occurred while loading the customizer..." + e.getMessage(),
 					"Error", JOptionPane.ERROR_MESSAGE);
 			return;
@@ -176,7 +183,7 @@ public class DefaultConfigBuilder extends javax.swing.JFrame implements ICustomi
 	}// GEN-LAST:event_jButtonOKActionPerformed
 
 	/** Exit the Application */
-	private void exitForm(java.awt.event.WindowEvent evt)// GEN-FIRST:event_exitForm
+	private void exitForm(final java.awt.event.WindowEvent evt)// GEN-FIRST:event_exitForm
 	{
 		System.exit(0);
 	}// GEN-LAST:event_exitForm
@@ -184,31 +191,34 @@ public class DefaultConfigBuilder extends javax.swing.JFrame implements ICustomi
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 		new DefaultConfigBuilder().setVisible(true);
 	}
 
+	@Override
 	public void canceled() {
 		getContentPane().remove(customizer.getCustomizerComponent());
 		pack();
 	}
 
+	@Override
 	public void done() {
-		JFileChooser jfc = new JFileChooser();
-		int answer = jfc.showSaveDialog(this);
-		if (answer != JFileChooser.APPROVE_OPTION)
+		final JFileChooser jfc = new JFileChooser();
+		final int answer = jfc.showSaveDialog(this);
+		if (answer != JFileChooser.APPROVE_OPTION) {
 			return;
+		}
 
 		try {
-			java.io.File f = jfc.getSelectedFile();
-			java.io.FileOutputStream fos = new java.io.FileOutputStream(f);
-			java.io.ObjectOutputStream oos = new java.io.ObjectOutputStream(fos);
+			final java.io.File f = jfc.getSelectedFile();
+			final java.io.FileOutputStream fos = new java.io.FileOutputStream(f);
+			final java.io.ObjectOutputStream oos = new java.io.ObjectOutputStream(fos);
 			oos.writeObject(customizer.getAcquisitionConfig());
 			fos.close();
 			oos.close();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			JOptionPane.showMessageDialog(this, "There was an error serializing the customizer acquisition config..."
-					+ e.getMessage(), "Error", JOptionPane.ERROR);
+					+ e.getMessage(), "Error", ImageObserver.ERROR);
 		}
 	}
 

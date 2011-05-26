@@ -79,7 +79,7 @@ public class OneChannelNode {
 		if (transferFunction == null) {
 			transferFunction = new ArrayList<TransferFunctionNode>();
 		}
-		return this.transferFunction;
+		return transferFunction;
 	}
 
 	/**
@@ -98,8 +98,8 @@ public class OneChannelNode {
 	 * @param value allowed object is {@link String }
 	 * 
 	 */
-	public void setFormat(String value) {
-		this.format = value;
+	public void setFormat(final String value) {
+		format = value;
 	}
 
 	/**
@@ -118,46 +118,57 @@ public class OneChannelNode {
 	 * @param value allowed object is {@link BigInteger }
 	 * 
 	 */
-	public void setOrder(BigInteger value) {
-		this.order = value;
+	public void setOrder(final BigInteger value) {
+		order = value;
 	}
 
-	public Double calculate(Double value) {
+	public Double calculate(final Double value) {
 		if (transferFunction == null || transferFunction.isEmpty()) {
 			return value;
 		}
-		
+
 		Double total = 0D;
-		for (TransferFunctionNode node : transferFunction) {
-			for (LinearFunctionNode linear : node.getLinear()) {
-				total = total + pD(linear.getParam().getWeight()) * value - pD(linear.getParam().getCenter());
+		for (final TransferFunctionNode node : transferFunction) {
+			for (final LinearFunctionNode linear : node.getLinear()) {
+				total = total + OneChannelNode.pD(linear.getParam().getWeight()) * value
+						- OneChannelNode.pD(linear.getParam().getCenter());
 			}
-			for (PowerFunctionNode power : node.getPower()) {
-				total = total + pD(power.getParam().getWeight())
-						* Math.pow((value - pD(power.getParam().getCenter())), pD(power.getParam().getPower()));
+			for (final PowerFunctionNode power : node.getPower()) {
+				total = total
+						+ OneChannelNode.pD(power.getParam().getWeight())
+						* Math.pow((value - OneChannelNode.pD(power.getParam().getCenter())),
+								OneChannelNode.pD(power.getParam().getPower()));
 			}
-			for (ExpFunctionNode expon : node.getExponential()) {
-				total = total + pD(expon.getParam().getWeight())
-						* Math.exp(pD(expon.getParam().getCoeficient()) * (value - pD(expon.getParam().getCenter())));
+			for (final ExpFunctionNode expon : node.getExponential()) {
+				total = total
+						+ OneChannelNode.pD(expon.getParam().getWeight())
+						* Math.exp(OneChannelNode.pD(expon.getParam().getCoeficient())
+								* (value - OneChannelNode.pD(expon.getParam().getCenter())));
 			}
-			for (LogFunctionNode log : node.getLogarithm()) {
-				total = total + pD(log.getParam().getWeight())
-						* Math.log(pD(log.getParam().getCoeficient()) * (value - pD(log.getParam().getCenter())));
+			for (final LogFunctionNode log : node.getLogarithm()) {
+				total = total
+						+ OneChannelNode.pD(log.getParam().getWeight())
+						* Math.log(OneChannelNode.pD(log.getParam().getCoeficient())
+								* (value - OneChannelNode.pD(log.getParam().getCenter())));
 			}
-			for (SinFunctionNode sin : node.getSin()) {
-				total = total + pD(sin.getParam().getWeight())
-						* Math.sin(pD(sin.getParam().getCoeficient()) * value - pD(sin.getParam().getDelta()));
+			for (final SinFunctionNode sin : node.getSin()) {
+				total = total
+						+ OneChannelNode.pD(sin.getParam().getWeight())
+						* Math.sin(OneChannelNode.pD(sin.getParam().getCoeficient()) * value
+								- OneChannelNode.pD(sin.getParam().getDelta()));
 			}
-			for (TgFunctionNode tg : node.getTg()) {
-				total = total + pD(tg.getParam().getWeight())
-						* Math.tan(pD(tg.getParam().getCoeficient()) * value - pD(tg.getParam().getDelta()));
+			for (final TgFunctionNode tg : node.getTg()) {
+				total = total
+						+ OneChannelNode.pD(tg.getParam().getWeight())
+						* Math.tan(OneChannelNode.pD(tg.getParam().getCoeficient()) * value
+								- OneChannelNode.pD(tg.getParam().getDelta()));
 			}
 		}
-		
+
 		return total;
 	}
-	
-	private static Double pD(String s) {
+
+	private static Double pD(final String s) {
 		return Double.parseDouble(s);
 	}
 

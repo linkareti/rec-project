@@ -76,7 +76,8 @@ public class TransferFunctionNode {
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list
 	 * {@link LinearFunctionNode }
-	 * @return 
+	 * 
+	 * @return
 	 * 
 	 * 
 	 */
@@ -84,7 +85,7 @@ public class TransferFunctionNode {
 		if (linear == null) {
 			linear = new ArrayList<LinearFunctionNode>();
 		}
-		return this.linear;
+		return linear;
 	}
 
 	/**
@@ -107,7 +108,8 @@ public class TransferFunctionNode {
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list
 	 * {@link PowerFunctionNode }
-	 * @return 
+	 * 
+	 * @return
 	 * 
 	 * 
 	 */
@@ -115,7 +117,7 @@ public class TransferFunctionNode {
 		if (power == null) {
 			power = new ArrayList<PowerFunctionNode>();
 		}
-		return this.power;
+		return power;
 	}
 
 	/**
@@ -138,7 +140,8 @@ public class TransferFunctionNode {
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list
 	 * {@link ExpFunctionNode }
-	 * @return 
+	 * 
+	 * @return
 	 * 
 	 * 
 	 */
@@ -146,7 +149,7 @@ public class TransferFunctionNode {
 		if (exponential == null) {
 			exponential = new ArrayList<ExpFunctionNode>();
 		}
-		return this.exponential;
+		return exponential;
 	}
 
 	/**
@@ -169,7 +172,8 @@ public class TransferFunctionNode {
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list
 	 * {@link LogFunctionNode }
-	 * @return 
+	 * 
+	 * @return
 	 * 
 	 * 
 	 */
@@ -177,7 +181,7 @@ public class TransferFunctionNode {
 		if (logarithm == null) {
 			logarithm = new ArrayList<LogFunctionNode>();
 		}
-		return this.logarithm;
+		return logarithm;
 	}
 
 	/**
@@ -200,7 +204,8 @@ public class TransferFunctionNode {
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list
 	 * {@link SinFunctionNode }
-	 * @return 
+	 * 
+	 * @return
 	 * 
 	 * 
 	 */
@@ -208,7 +213,7 @@ public class TransferFunctionNode {
 		if (sin == null) {
 			sin = new ArrayList<SinFunctionNode>();
 		}
-		return this.sin;
+		return sin;
 	}
 
 	/**
@@ -231,7 +236,8 @@ public class TransferFunctionNode {
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list
 	 * {@link TgFunctionNode }
-	 * @return 
+	 * 
+	 * @return
 	 * 
 	 * 
 	 */
@@ -239,7 +245,7 @@ public class TransferFunctionNode {
 		if (tg == null) {
 			tg = new ArrayList<TgFunctionNode>();
 		}
-		return this.tg;
+		return tg;
 	}
 
 	/**
@@ -258,8 +264,8 @@ public class TransferFunctionNode {
 	 * @param value allowed object is {@link String }
 	 * 
 	 */
-	public void setType(String value) {
-		this.type = value;
+	public void setType(final String value) {
+		type = value;
 	}
 
 }

@@ -42,7 +42,7 @@ public abstract class DisplayNode {
 	 * @param order New value of property order.
 	 * 
 	 */
-	public void setOrder(int order) {
+	public void setOrder(final int order) {
 		this.order = order;
 	}
 
@@ -56,8 +56,8 @@ public abstract class DisplayNode {
 	}
 
 	public String getToolTipText() {
-		return ReCResourceBundle.findStringOrDefault(getToolTipBundleKey(), ReCResourceBundle.findStringOrDefault(
-				getDisplayNameBundleKey(), ""));
+		return ReCResourceBundle.findStringOrDefault(getToolTipBundleKey(),
+				ReCResourceBundle.findStringOrDefault(getDisplayNameBundleKey(), ""));
 	}
 
 	/**
@@ -76,7 +76,7 @@ public abstract class DisplayNode {
 	 * @param enabled New value of property enabled.
 	 * 
 	 */
-	public void setEnabled(boolean enabled) {
+	public void setEnabled(final boolean enabled) {
 		this.enabled = enabled;
 		firePropertyChangeListenerPropertyChange(new java.beans.PropertyChangeEvent(this, "enable", new Boolean(
 				!enabled), new Boolean(enabled)));
@@ -98,7 +98,7 @@ public abstract class DisplayNode {
 	 * @param connected New value of property connected.
 	 * 
 	 */
-	public void setConnected(boolean connected) {
+	public void setConnected(final boolean connected) {
 		this.connected = connected;
 		firePropertyChangeListenerPropertyChange(new java.beans.PropertyChangeEvent(this, "connected", new Boolean(
 				!connected), new Boolean(connected)));
@@ -111,7 +111,7 @@ public abstract class DisplayNode {
 	 * 
 	 */
 	public boolean isVisible() {
-		return this.visible;
+		return visible;
 	}
 
 	/**
@@ -120,7 +120,7 @@ public abstract class DisplayNode {
 	 * @param visible New value of property visible.
 	 * 
 	 */
-	public void setVisible(boolean visible) {
+	public void setVisible(final boolean visible) {
 		this.visible = visible;
 	}
 
@@ -135,7 +135,7 @@ public abstract class DisplayNode {
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addDisplayNodePropertyChangeListener(java.beans.PropertyChangeListener listener) {
+	public synchronized void addDisplayNodePropertyChangeListener(final java.beans.PropertyChangeListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -147,7 +147,7 @@ public abstract class DisplayNode {
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeDisplayNodePropertyChangeListener(java.beans.PropertyChangeListener listener) {
+	public synchronized void removeDisplayNodePropertyChangeListener(final java.beans.PropertyChangeListener listener) {
 		listenerList.remove(java.beans.PropertyChangeListener.class, listener);
 	}
 
@@ -156,10 +156,11 @@ public abstract class DisplayNode {
 	 * 
 	 * @param event The event to be fired
 	 */
-	private void firePropertyChangeListenerPropertyChange(java.beans.PropertyChangeEvent event) {
-		if (listenerList == null)
+	private void firePropertyChangeListenerPropertyChange(final java.beans.PropertyChangeEvent event) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == java.beans.PropertyChangeListener.class) {
 				((java.beans.PropertyChangeListener) listeners[i + 1]).propertyChange(event);
@@ -173,7 +174,7 @@ public abstract class DisplayNode {
 	 * @return Value of property selected.
 	 */
 	public boolean isSelected() {
-		return this.selected;
+		return selected;
 	}
 
 	/**
@@ -181,9 +182,10 @@ public abstract class DisplayNode {
 	 * 
 	 * @param selected New value of property selected.
 	 */
-	public void setSelected(boolean selected) {
-		if (selected == this.selected)
+	public void setSelected(final boolean selected) {
+		if (selected == this.selected) {
 			return;
+		}
 		this.selected = selected;
 		firePropertyChangeListenerPropertyChange(new java.beans.PropertyChangeEvent(this, "selected", new Boolean(
 				!selected), new Boolean(selected)));

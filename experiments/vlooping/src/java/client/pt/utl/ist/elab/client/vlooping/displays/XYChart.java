@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.vlooping.displays;
  */
 public class XYChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8730771619728980091L;
+
 	/** Creates a new instance of AnguloIntensidadeChart */
 	public XYChart() {
 		super();

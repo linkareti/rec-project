@@ -38,8 +38,9 @@ public abstract class BaseDataSource implements IDataSource {
 	 * 
 	 * @return Value of property name.
 	 */
+	@Override
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	/**
@@ -47,7 +48,7 @@ public abstract class BaseDataSource implements IDataSource {
 	 * 
 	 * @param name New value of property name.
 	 */
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 
@@ -56,8 +57,9 @@ public abstract class BaseDataSource implements IDataSource {
 	 * 
 	 * @return Value of property packetSize.
 	 */
+	@Override
 	public int getPacketSize() {
-		return this.packetSize;
+		return packetSize;
 	}
 
 	/**
@@ -65,42 +67,47 @@ public abstract class BaseDataSource implements IDataSource {
 	 * 
 	 * @param packetSize New value of property packetSize.
 	 */
-	public void setPacketSize(int packetSize) {
+	public void setPacketSize(final int packetSize) {
 		this.packetSize = packetSize;
 	}
 
-	public PhysicsValue[][] getSamples(int sampleIndexStart, int sampleIndexEnd) throws SamplesReadException {
+	@Override
+	public PhysicsValue[][] getSamples(final int sampleIndexStart, final int sampleIndexEnd)
+			throws SamplesReadException {
 		return samples.getSamples(sampleIndexStart, sampleIndexEnd);
 	}
 
-	public void addDataRows(PhysicsValue[][] dataSamples) {
+	public void addDataRows(final PhysicsValue[][] dataSamples) {
 		samples.addDataRows(dataSamples);
 	}
 
-	public void addDataRow(PhysicsValue[] dataSample) {
+	public void addDataRow(final PhysicsValue[] dataSample) {
 		samples.addDataRows(dataSample);
 	}
 
 	private HardwareAcquisitionConfig config = null;
 
 	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
+	// private javax.swing.event.EventListenerList listenerList = null;
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionHeader() {
 		return config;
 	}
 
-	public void setAcquisitionHeader(HardwareAcquisitionConfig config) {
+	public void setAcquisitionHeader(final HardwareAcquisitionConfig config) {
 		this.config = config;
-		if (config != null)
+		if (config != null) {
 			setTotalSamples(config.getTotalSamples());
+		}
 	}
 
+	@Override
 	public int getTotalSamples() {
 		return samples.getTotalSamples();
 	}
 
-	public void setTotalSamples(int totalSamples) {
+	public void setTotalSamples(final int totalSamples) {
 		samples.setTotalSamples(totalSamples);
 	}
 
@@ -110,7 +117,8 @@ public abstract class BaseDataSource implements IDataSource {
 	 * @param listener The listener to register.
 	 * 
 	 */
-	public void addIDataSourceListener(IDataSourceListener listener) {
+	@Override
+	public void addIDataSourceListener(final IDataSourceListener listener) {
 		listenerIDataSourceListener = listener;
 	}
 
@@ -120,7 +128,8 @@ public abstract class BaseDataSource implements IDataSource {
 	 * @param listener The listener to remove.
 	 * 
 	 */
-	public void removeIDataSourceListener(IDataSourceListener listener) {
+	@Override
+	public void removeIDataSourceListener(final IDataSourceListener listener) {
 		listenerIDataSourceListener = null;
 	}
 
@@ -130,11 +139,11 @@ public abstract class BaseDataSource implements IDataSource {
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 * 
 	 */
-	private void fireDataSourceWaiting() {
-		if (listenerIDataSourceListener == null)
-			return;
-		listenerIDataSourceListener.dataSourceWaiting();
-	}
+	// private void fireDataSourceWaiting() {
+	// if (listenerIDataSourceListener == null)
+	// return;
+	// listenerIDataSourceListener.dataSourceWaiting();
+	// }
 
 	/**
 	 * Notifies the registered listener about the event.
@@ -143,8 +152,9 @@ public abstract class BaseDataSource implements IDataSource {
 	 * 
 	 */
 	private void fireDataSourceStarted() {
-		if (listenerIDataSourceListener == null)
+		if (listenerIDataSourceListener == null) {
 			return;
+		}
 		listenerIDataSourceListener.dataSourceStarted();
 	}
 
@@ -155,8 +165,9 @@ public abstract class BaseDataSource implements IDataSource {
 	 * 
 	 */
 	private void fireDataSourceEnded() {
-		if (listenerIDataSourceListener == null)
+		if (listenerIDataSourceListener == null) {
 			return;
+		}
 		listenerIDataSourceListener.dataSourceEnded();
 	}
 
@@ -167,8 +178,9 @@ public abstract class BaseDataSource implements IDataSource {
 	 * 
 	 */
 	private void fireDataSourceStoped() {
-		if (listenerIDataSourceListener == null)
+		if (listenerIDataSourceListener == null) {
 			return;
+		}
 		listenerIDataSourceListener.dataSourceStoped();
 	}
 
@@ -178,11 +190,11 @@ public abstract class BaseDataSource implements IDataSource {
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 * 
 	 */
-	private void fireDataSourceError() {
-		if (listenerIDataSourceListener == null)
-			return;
-		listenerIDataSourceListener.dataSourceError();
-	}
+	// private void fireDataSourceError() {
+	// if (listenerIDataSourceListener == null)
+	// return;
+	// listenerIDataSourceListener.dataSourceError();
+	// }
 
 	/**
 	 * Registers SamplesSourceEventListener to receive events.
@@ -190,7 +202,8 @@ public abstract class BaseDataSource implements IDataSource {
 	 * @param listener The listener to register.
 	 * 
 	 */
-	public void addSamplesSourceEventListener(SamplesSourceEventListener listener) {
+	@Override
+	public void addSamplesSourceEventListener(final SamplesSourceEventListener listener) {
 		samples.addSamplesSourceEventListener(listener);
 	}
 
@@ -200,10 +213,12 @@ public abstract class BaseDataSource implements IDataSource {
 	 * @param listener The listener to remove.
 	 * 
 	 */
-	public void removeSamplesSourceEventListener(SamplesSourceEventListener listener) {
+	@Override
+	public void removeSamplesSourceEventListener(final SamplesSourceEventListener listener) {
 		samples.removeSamplesSourceEventListener(listener);
 	}
 
+	@Override
 	public int getLastSampleNum() {
 		return samples.getLastSampleNum();
 	}

@@ -19,12 +19,17 @@ import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
  */
 public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8867121109535980389L;
+
 	/** Creates new form DigitalChartDisplay */
 	public DigitalChartDisplay() {
 		initComponents();
 		dataDigital = new DefaultChartModelProxy(8, 8, true);
-		org.jfree.chart.JFreeChart chart = org.jfree.chart.ChartFactory.createXYLineChart(name, "Tempo(s)", "Valor",
-				dataDigital, org.jfree.chart.plot.PlotOrientation.VERTICAL, true, true, false);
+		final org.jfree.chart.JFreeChart chart = org.jfree.chart.ChartFactory.createXYLineChart(name, "Tempo(s)",
+				"Valor", dataDigital, org.jfree.chart.plot.PlotOrientation.VERTICAL, true, true, false);
 		chartPanel = new org.jfree.chart.ChartPanel(chart);
 		chartPanel.setPreferredSize(new java.awt.Dimension(600, 400));
 		add(chartPanel, java.awt.BorderLayout.CENTER);
@@ -58,7 +63,8 @@ public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDi
 		jButtonB0.setPreferredSize(new java.awt.Dimension(30, 28));
 		jButtonB0.setEnabled(false);
 		jButtonB0.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonB0MousePressed(evt);
 			}
 		});
@@ -73,7 +79,8 @@ public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDi
 		jButtonB1.setMinimumSize(new java.awt.Dimension(30, 28));
 		jButtonB1.setPreferredSize(new java.awt.Dimension(30, 28));
 		jButtonB1.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonB1MousePressed(evt);
 			}
 		});
@@ -88,7 +95,8 @@ public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDi
 		jButtonB2.setMinimumSize(new java.awt.Dimension(30, 28));
 		jButtonB2.setPreferredSize(new java.awt.Dimension(30, 28));
 		jButtonB2.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonB2MousePressed(evt);
 			}
 		});
@@ -103,7 +111,8 @@ public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDi
 		jButtonB3.setMinimumSize(new java.awt.Dimension(30, 28));
 		jButtonB3.setPreferredSize(new java.awt.Dimension(30, 28));
 		jButtonB3.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonB3MousePressed(evt);
 			}
 		});
@@ -118,7 +127,8 @@ public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDi
 		jButtonB4.setMinimumSize(new java.awt.Dimension(30, 28));
 		jButtonB4.setPreferredSize(new java.awt.Dimension(30, 28));
 		jButtonB4.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonB4MousePressed(evt);
 			}
 		});
@@ -133,7 +143,8 @@ public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDi
 		jButtonB5.setMinimumSize(new java.awt.Dimension(30, 28));
 		jButtonB5.setPreferredSize(new java.awt.Dimension(30, 28));
 		jButtonB5.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonB5MousePressed(evt);
 			}
 		});
@@ -148,7 +159,8 @@ public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDi
 		jButtonB6.setMinimumSize(new java.awt.Dimension(30, 28));
 		jButtonB6.setPreferredSize(new java.awt.Dimension(30, 28));
 		jButtonB6.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonB6MousePressed(evt);
 			}
 		});
@@ -163,7 +175,8 @@ public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDi
 		jButtonB7.setMinimumSize(new java.awt.Dimension(30, 28));
 		jButtonB7.setPreferredSize(new java.awt.Dimension(30, 28));
 		jButtonB7.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonB7MousePressed(evt);
 			}
 		});
@@ -177,7 +190,8 @@ public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDi
 		jButtonPrint.setMinimumSize(new java.awt.Dimension(30, 28));
 		jButtonPrint.setPreferredSize(new java.awt.Dimension(30, 28));
 		jButtonPrint.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonPrintActionPerformed(evt);
 			}
 		});
@@ -188,7 +202,7 @@ public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDi
 
 	}// GEN-END:initComponents
 
-	private void jButtonB7MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonB7MousePressed
+	private void jButtonB7MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonB7MousePressed
 		if (jButtonB7.isEnabled()) {
 			dataDigital.setSeriesVisible(true, 7);
 			jButtonB7.setEnabled(false);
@@ -198,7 +212,7 @@ public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDi
 		}
 	}// GEN-LAST:event_jButtonB7MousePressed
 
-	private void jButtonB6MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonB6MousePressed
+	private void jButtonB6MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonB6MousePressed
 		if (jButtonB6.isEnabled()) {
 			dataDigital.setSeriesVisible(true, 6);
 			jButtonB6.setEnabled(false);
@@ -208,7 +222,7 @@ public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDi
 		}
 	}// GEN-LAST:event_jButtonB6MousePressed
 
-	private void jButtonB5MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonB5MousePressed
+	private void jButtonB5MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonB5MousePressed
 		if (jButtonB5.isEnabled()) {
 			dataDigital.setSeriesVisible(true, 5);
 			jButtonB5.setEnabled(false);
@@ -218,7 +232,7 @@ public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDi
 		}
 	}// GEN-LAST:event_jButtonB5MousePressed
 
-	private void jButtonB4MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonB4MousePressed
+	private void jButtonB4MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonB4MousePressed
 		if (jButtonB4.isEnabled()) {
 			dataDigital.setSeriesVisible(true, 4);
 			jButtonB4.setEnabled(false);
@@ -228,7 +242,7 @@ public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDi
 		}
 	}// GEN-LAST:event_jButtonB4MousePressed
 
-	private void jButtonB3MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonB3MousePressed
+	private void jButtonB3MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonB3MousePressed
 		if (jButtonB3.isEnabled()) {
 			dataDigital.setSeriesVisible(true, 3);
 			jButtonB3.setEnabled(false);
@@ -238,7 +252,7 @@ public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDi
 		}
 	}// GEN-LAST:event_jButtonB3MousePressed
 
-	private void jButtonB2MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonB2MousePressed
+	private void jButtonB2MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonB2MousePressed
 		if (jButtonB2.isEnabled()) {
 			dataDigital.setSeriesVisible(true, 2);
 			jButtonB2.setEnabled(false);
@@ -248,7 +262,7 @@ public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDi
 		}
 	}// GEN-LAST:event_jButtonB2MousePressed
 
-	private void jButtonB1MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonB1MousePressed
+	private void jButtonB1MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonB1MousePressed
 		if (jButtonB1.isEnabled()) {
 			dataDigital.setSeriesVisible(true, 1);
 			jButtonB1.setEnabled(false);
@@ -258,7 +272,7 @@ public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDi
 		}
 	}// GEN-LAST:event_jButtonB1MousePressed
 
-	private void jButtonB0MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonB0MousePressed
+	private void jButtonB0MousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonB0MousePressed
 		if (jButtonB0.isEnabled()) {
 			dataDigital.setSeriesVisible(true, 0);
 			jButtonB0.setEnabled(false);
@@ -268,7 +282,7 @@ public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDi
 		}
 	}// GEN-LAST:event_jButtonB0MousePressed
 
-	private void jButtonPrintActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonPrintActionPerformed
+	private void jButtonPrintActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonPrintActionPerformed
 		printChart();
 	}// GEN-LAST:event_jButtonPrintActionPerformed
 
@@ -276,21 +290,26 @@ public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDi
 		new PrintComponent(chartPanel);
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.Icon getIcon() {
 		return icon;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
-	public void setExpDataModel(ExpDataModel expDataModel) {
-		if (expDataModel != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel expDataModel) {
+		if (expDataModel != null) {
 			expDataModel.removeExpDataModelListener(this);
+		}
 
 		this.expDataModel = expDataModel;
 
@@ -300,10 +319,12 @@ public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDi
 		}
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
@@ -312,31 +333,38 @@ public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDi
 		dataDigital.dataModelRunning();
 	}
 
+	@Override
 	public void dataModelStoped() {
 		dataDigital.dataModelStoped();
 	}
 
-	public void headerAvailable(com.linkare.rec.data.config.HardwareAcquisitionConfig hardwareAcquisitionConfig) {
+	public void headerAvailable(final com.linkare.rec.data.config.HardwareAcquisitionConfig hardwareAcquisitionConfig) {
 		dataDigital.headerAvailable(hardwareAcquisitionConfig);
 	}
 
-	public void newSamples(com.linkare.rec.impl.client.experiment.NewExpDataEvent newExpDataEvent) {
+	@Override
+	public void newSamples(final com.linkare.rec.impl.client.experiment.NewExpDataEvent newExpDataEvent) {
 		dataDigital.newSamples(newExpDataEvent);
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 		headerAvailable(expDataModel.getAcquisitionConfig());
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
@@ -353,9 +381,9 @@ public class DigitalChartDisplay extends javax.swing.JPanel implements ExpDataDi
 	private javax.swing.JButton jButtonB6;
 	// End of variables declaration//GEN-END:variables
 	private ExpDataModel expDataModel;
-	private javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/displays/resources/ChartD16.gif"));
-	private String name = "Entradas digitais";
+	private final String name = "Entradas digitais";
 	private DefaultChartModelProxy dataDigital = null;
-	private org.jfree.chart.ChartPanel chartPanel;
+	private final org.jfree.chart.ChartPanel chartPanel;
 }

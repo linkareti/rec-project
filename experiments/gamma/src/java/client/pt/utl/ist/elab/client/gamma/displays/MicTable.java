@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.gamma.displays;
  */
 public class MicTable extends com.linkare.rec.impl.baseUI.table.MultSeriesTable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8748119887625653495L;
+
 	/** Creates a new instance of AnguloIntensidadeChart */
 	public MicTable() {
 		super();

@@ -11,7 +11,7 @@ package com.linkare.rec.impl.newface.config;
 public class OrderedItemComparator implements java.util.Comparator<OrderedItem> {
 
 	@Override
-	public int compare(OrderedItem o1, OrderedItem o2) {
+	public int compare(final OrderedItem o1, final OrderedItem o2) {
 		if (o1 == o2) {
 			return 0;
 		}

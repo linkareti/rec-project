@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.gamma.displays;
  */
 public class OscTable extends com.linkare.rec.impl.baseUI.table.MultSeriesTable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7030541293096070223L;
+
 	/** Creates a new instance of AnguloIntensidadeChart */
 	public OscTable() {
 		super();

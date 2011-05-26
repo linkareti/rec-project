@@ -24,26 +24,29 @@ public class PolaroidStampDataSource extends AbstractStampDataSource {
 	public PolaroidStampDataSource() {
 	}
 
-	private int timeDelayMillis = -1;
-	private float delay_time = 0;
+	private final int timeDelayMillis = -1;
+	private final float delay_time = 0;
 	private int counter = 0;
 	private int total_samples = 0;
 
-	public void processDataCommand(StampCommand cmd) {
-		if (stopped)
+	@Override
+	public void processDataCommand(final StampCommand cmd) {
+		if (stopped) {
 			return;
+		}
 
-		if (stopped || cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null)
+		if (stopped || cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null) {
 			return;
+		}
 
 		if (cmd.getCommandIdentifier().equals(StampPolaroidProcessor.COMMAND_IDENTIFIER)) {
 			int angulo;
 			float intensidade;
-			PhysicsValue[] values = new PhysicsValue[2];
+			final PhysicsValue[] values = new PhysicsValue[2];
 			try {
 				angulo = ((Integer) cmd.getCommandData(StampPolaroidProcessor.ANGULO)).intValue();
 				intensidade = ((Float) cmd.getCommandData(StampPolaroidProcessor.INTENSIDADE)).floatValue();
-			} catch (ClassCastException e) {
+			} catch (final ClassCastException e) {
 				e.printStackTrace();
 				return;
 			}
@@ -58,12 +61,14 @@ public class PolaroidStampDataSource extends AbstractStampDataSource {
 			super.addDataRow(values);
 
 			counter++;
-			if (counter == total_samples)
+			if (counter == total_samples) {
 				setDataSourceEnded();
+			}
 		}
 	}
 
-	public void setAcquisitionHeader(HardwareAcquisitionConfig config) {
+	@Override
+	public void setAcquisitionHeader(final HardwareAcquisitionConfig config) {
 		super.setAcquisitionHeader(config);
 
 		total_samples = config.getTotalSamples();
@@ -72,6 +77,7 @@ public class PolaroidStampDataSource extends AbstractStampDataSource {
 
 	private boolean stopped = false;
 
+	@Override
 	public void stopNow() {
 		stopped = true;
 		setDataSourceStoped();

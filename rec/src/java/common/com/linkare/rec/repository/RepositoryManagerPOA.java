@@ -24,23 +24,25 @@ public abstract class RepositoryManagerPOA extends Servant implements Repository
 
 	private static Hashtable _methods = new Hashtable();
 	static {
-		_methods.put("getDataProducer", new java.lang.Integer(0));
-		_methods.put("listDataProducers", new java.lang.Integer(1));
+		RepositoryManagerPOA._methods.put("getDataProducer", new java.lang.Integer(0));
+		RepositoryManagerPOA._methods.put("listDataProducers", new java.lang.Integer(1));
 	}
 
-	public OutputStream _invoke(String $method, InputStream in, ResponseHandler $rh) {
+	@Override
+	public OutputStream _invoke(final String $method, final InputStream in, final ResponseHandler $rh) {
 		OutputStream out = null;
-		java.lang.Integer __method = (java.lang.Integer) _methods.get($method);
-		if (__method == null)
+		final java.lang.Integer __method = (java.lang.Integer) RepositoryManagerPOA._methods.get($method);
+		if (__method == null) {
 			throw new BAD_OPERATION(0, CompletionStatus.COMPLETED_MAYBE);
+		}
 
 		switch (__method.intValue()) {
 		case 0: // com/linkare/rec/repository/RepositoryManager/getDataProducer
 		{
-			UserInfo user = UserInfoHelper.read(in);
-			String id = DataProducerIdHelper.read(in);
+			final UserInfo user = UserInfoHelper.read(in);
+			final String id = DataProducerIdHelper.read(in);
 			DataProducer $result = null;
-			$result = this.getDataProducer(user, id);
+			$result = getDataProducer(user, id);
 			out = $rh.createReply();
 			DataProducerHelper.write(out, $result);
 			break;
@@ -48,10 +50,11 @@ public abstract class RepositoryManagerPOA extends Servant implements Repository
 
 		case 1: // com/linkare/rec/repository/RepositoryManager/listDataProducers
 		{
-			UserInfo user = UserInfoHelper.read(in);
-			HardwareAcquisitionConfigSearch[] search_params = VTHardwareAcquisitionConfigSearchListHelper.read(in);
+			final UserInfo user = UserInfoHelper.read(in);
+			final HardwareAcquisitionConfigSearch[] search_params = VTHardwareAcquisitionConfigSearchListHelper
+					.read(in);
 			DataProducerConfig $result[] = null;
-			$result = this.listDataProducers(user, search_params);
+			$result = listDataProducers(user, search_params);
 			out = $rh.createReply();
 			DataProducerConfigListHelper.write(out, $result);
 			break;
@@ -67,15 +70,16 @@ public abstract class RepositoryManagerPOA extends Servant implements Repository
 	// Type-specific CORBA::Object operations
 	private static String[] __ids = { "IDL:com/linkare/rec/repository/RepositoryManager:1.0" };
 
-	public String[] _all_interfaces(POA poa, byte[] objectId) {
-		return (String[]) __ids.clone();
+	@Override
+	public String[] _all_interfaces(final POA poa, final byte[] objectId) {
+		return RepositoryManagerPOA.__ids.clone();
 	}
 
 	public RepositoryManager _this() {
 		return RepositoryManagerHelper.narrow(super._this_object());
 	}
 
-	public RepositoryManager _this(ORB orb) {
+	public RepositoryManager _this(final ORB orb) {
 		return RepositoryManagerHelper.narrow(super._this_object(orb));
 	}
 

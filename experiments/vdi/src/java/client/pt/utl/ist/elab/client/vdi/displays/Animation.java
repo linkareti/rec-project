@@ -28,20 +28,24 @@ import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 
 public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelListener {
-	private PlottingPanel plottingPanel1, plottingPanel2, plottingPanelTotal;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7656919865300131429L;
+	private final PlottingPanel plottingPanel1, plottingPanel2, plottingPanelTotal;
 	private DrawableShape di1 = null, di1T = null, di1g = null;
 	private DrawableShape di2 = null, di2T = null, di2g = null;
 	private DrawableShape de1 = null, de1T = null, de1g = null;
 	private DrawableShape de2 = null, de2T = null, de2g = null;
 	private Dataset plano = null;
-	private JPanel panelEsquerda;
+	private final JPanel panelEsquerda;
 	private double distX1, distY1, distX2, distY2;
 
 	/** Creates a new instance of Animation */
 	public Animation() {
-		double xi = 0.15 * Math.cos(Math.toRadians(70));
+		final double xi = 0.15 * Math.cos(Math.toRadians(70));
 		;
-		double yi = 0.15 * Math.sin(Math.toRadians(70));
+		final double yi = 0.15 * Math.sin(Math.toRadians(70));
 
 		plottingPanel1 = new PlottingPanel("X (m)", "Y (m)", "1");
 		plottingPanel2 = new PlottingPanel("X (m)", "Y (m)", "2");
@@ -62,13 +66,13 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 		di2.setMarkerColor(java.awt.Color.white, java.awt.Color.black);
 		de2.setMarkerColor(java.awt.Color.red, java.awt.Color.black);
 
-		double beta = (Math.PI / 2.0) - Math.toRadians(20);
+		final double beta = (Math.PI / 2.0) - Math.toRadians(20);
 
-		double x1T = 5 * 0.15 * Math.cos(beta);
-		double y1T = 5 * 0.15 * Math.sin(beta);
+		final double x1T = 5 * 0.15 * Math.cos(beta);
+		final double y1T = 5 * 0.15 * Math.sin(beta);
 
-		double x2T = 5 * 0.15 * Math.cos(beta);
-		double y2T = 5 * 0.15 * Math.sin(beta);
+		final double x2T = 5 * 0.15 * Math.cos(beta);
+		final double y2T = 5 * 0.15 * Math.sin(beta);
 
 		distX1 = x1T - xi;
 		distY1 = y1T - yi;
@@ -122,7 +126,7 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 		plottingPanel2.setPreferredSize(new java.awt.Dimension(200, 200));
 		plottingPanelTotal.setPreferredSize(new java.awt.Dimension(299, 213));
 
-		JPanel panelGraficos = new JPanel();
+		final JPanel panelGraficos = new JPanel();
 		panelGraficos.setLayout(new BoxLayout(panelGraficos, BoxLayout.Y_AXIS));
 		panelGraficos.add(plottingPanel1);
 		panelGraficos.add(plottingPanel2);
@@ -132,20 +136,21 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 		panelEsquerda.add(plottingPanel1);
 		panelEsquerda.add(plottingPanel2);
 
-		this.setLayout(new FlowLayout());
+		setLayout(new FlowLayout());
 		this.add(panelEsquerda);
 		this.add(plottingPanelTotal);
 	}
 
-	public static void main(String args[]) {
-		javax.swing.JFrame dummy = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new Animation());
 		dummy.pack();
 		dummy.show();
 	}
 
 	// Chegaram novas amostras!
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 		// Esta e' a maneira classica de tirar as amostras dos canais que nos
 		// interessam!
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
@@ -197,14 +202,17 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 	}
 
 	// Queremos fazer alguma coisa quandos os dados acabarem?
+	@Override
 	public void dataModelEnded() {
 	}
 
 	// Queremos fazer alguma coisa quandos acontecer um erro?
+	@Override
 	public void dataModelError() {
 	}
 
 	// Queremos fazer alguma coisa quando for dado o start e existirem dados?
+	@Override
 	public void dataModelStarted() {
 	}
 
@@ -212,29 +220,30 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 	// dados?
 	// Eu garanto que quando chegamos a este estado, ja' existe o header da
 	// experiencia!
+	@Override
 	public void dataModelStartedNoData() {
-		HardwareAcquisitionConfig header = model.getAcquisitionConfig();
+		final HardwareAcquisitionConfig header = model.getAcquisitionConfig();
 		// vamos la' ver o que o utilizador escolheu, para colocar a animacao
 		// nas posicoes iniciais correctas!
 
-		double rint1 = (Double.parseDouble(header.getSelectedHardwareParameterValue("r1i")));
+		final double rint1 = (Double.parseDouble(header.getSelectedHardwareParameterValue("r1i")));
 
-		double rext1 = (Double.parseDouble(header.getSelectedHardwareParameterValue("r1e")));
+		final double rext1 = (Double.parseDouble(header.getSelectedHardwareParameterValue("r1e")));
 
-		double rint2 = (Double.parseDouble(header.getSelectedHardwareParameterValue("r2i")));
+		final double rint2 = (Double.parseDouble(header.getSelectedHardwareParameterValue("r2i")));
 
-		double rext2 = (Double.parseDouble(header.getSelectedHardwareParameterValue("r2e")));
+		final double rext2 = (Double.parseDouble(header.getSelectedHardwareParameterValue("r2e")));
 
-		double ang = (Double.parseDouble(header.getSelectedHardwareParameterValue("inc")));
+		final double ang = (Double.parseDouble(header.getSelectedHardwareParameterValue("inc")));
 
-		double xi1 = rext1 * Math.cos((Math.PI / 2.0) - Math.toRadians(ang));
-		double yi1 = rext1 * Math.sin((Math.PI / 2.0) - Math.toRadians(ang));
+		final double xi1 = rext1 * Math.cos((Math.PI / 2.0) - Math.toRadians(ang));
+		final double yi1 = rext1 * Math.sin((Math.PI / 2.0) - Math.toRadians(ang));
 
 		di1 = DrawableShape.createCircle(xi1, yi1, 2 * rint1);
 		de1 = DrawableShape.createCircle(xi1, yi1, 2 * rext1);
 
-		double xi2 = rext2 * Math.cos((Math.PI / 2.0) - Math.toRadians(ang));
-		double yi2 = rext2 * Math.sin((Math.PI / 2.0) - Math.toRadians(ang));
+		final double xi2 = rext2 * Math.cos((Math.PI / 2.0) - Math.toRadians(ang));
+		final double yi2 = rext2 * Math.sin((Math.PI / 2.0) - Math.toRadians(ang));
 
 		di2 = DrawableShape.createCircle(xi2, yi2, 2 * rint2);
 		de2 = DrawableShape.createCircle(xi2, yi2, 2 * rext2);
@@ -244,7 +253,7 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 		di2.setMarkerColor(java.awt.Color.white, java.awt.Color.black);
 		de2.setMarkerColor(java.awt.Color.red, java.awt.Color.black);
 
-		double m = Math.tan(Math.toRadians(-ang));
+		final double m = Math.tan(Math.toRadians(-ang));
 		plano = new Dataset(java.awt.Color.black, java.awt.Color.black, true);
 		plano.append(-5, -5 * m);
 		plano.append(100, 100 * m);
@@ -276,13 +285,13 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 		plottingPanel1.setPreferredMinMax(xi1 - 1, xi1 + 1, yi1 - 1, yi1 + 1);
 		plottingPanel2.setPreferredMinMax(xi2 - 1, xi2 + 1, yi2 - 1, yi2 + 1);
 
-		double beta = (Math.PI / 2.0) - Math.toRadians(ang);
+		final double beta = (Math.PI / 2.0) - Math.toRadians(ang);
 
-		double x1T = 5 * rext1 * Math.cos(beta);
-		double y1T = 5 * rext1 * Math.sin(beta);
+		final double x1T = 5 * rext1 * Math.cos(beta);
+		final double y1T = 5 * rext1 * Math.sin(beta);
 
-		double x2T = 5 * rext2 * Math.cos(beta);
-		double y2T = 5 * rext2 * Math.sin(beta);
+		final double x2T = 5 * rext2 * Math.cos(beta);
+		final double y2T = 5 * rext2 * Math.sin(beta);
 
 		distX1 = x1T - xi1;
 		distY1 = y1T - yi1;
@@ -308,26 +317,32 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 	}
 
 	// Queremos fazer alguma coisa quando for dado parado?
+	@Override
 	public void dataModelStoped() {
 	}
 
 	// Queremos fazer alguma coisa em estado de espera?
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
 	// O icon associado a este painel!
+	@Override
 	public javax.swing.Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
@@ -335,11 +350,14 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 	// Este codigo e' SEMPRE igual e tem de existir!
 	private ExpDataModel model = null;
 
-	public void setExpDataModel(ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
+		if (this.model != null) {
 			this.model.removeExpDataModelListener(this);
+		}
 		this.model = model;
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 	}
 }

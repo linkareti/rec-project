@@ -12,18 +12,18 @@ public final class NotAvailableException extends org.omg.CORBA.UserException {
 	 * 
 	 */
 	private static final long serialVersionUID = 626900809322540180L;
-	public int errorCode = (int) 0;
+	public int errorCode = 0;
 
 	public NotAvailableException() {
 		super(NotAvailableExceptionHelper.id());
 	} // ctor
 
-	public NotAvailableException(int _errorCode) {
+	public NotAvailableException(final int _errorCode) {
 		super(NotAvailableExceptionHelper.id());
 		errorCode = _errorCode;
 	} // ctor
 
-	public NotAvailableException(String $reason, int _errorCode) {
+	public NotAvailableException(final String $reason, final int _errorCode) {
 		super(NotAvailableExceptionHelper.id() + "  " + $reason);
 		errorCode = _errorCode;
 	} // ctor

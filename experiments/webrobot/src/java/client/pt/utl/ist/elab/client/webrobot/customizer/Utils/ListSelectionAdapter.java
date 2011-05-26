@@ -16,7 +16,8 @@ public class ListSelectionAdapter implements javax.swing.event.ListSelectionList
 	public ListSelectionAdapter() {
 	}
 
-	public void valueChanged(javax.swing.event.ListSelectionEvent listSelectionEvent) {
+	@Override
+	public void valueChanged(final javax.swing.event.ListSelectionEvent listSelectionEvent) {
 	}
 
 }

@@ -16,16 +16,21 @@ import java.util.logging.Logger;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class CountDownProgressPanel extends javax.swing.JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6222531369055474855L;
+
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(CountDownProgressPanel.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(CountDownProgressPanel.UI_CLIENT_LOGGER));
 		}
 	}
 
-	private String lockFor = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.lockableFor",
+	private final String lockFor = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.lockableFor",
 			"Lockable for: ");
 
 	/** Creates new form CountDownProgressPanel */
@@ -34,7 +39,7 @@ public class CountDownProgressPanel extends javax.swing.JPanel {
 	}
 
 	private class Runner extends Thread {
-		
+
 		/**
 		 * Creates the <code>CountDownProgressPanel.Runner</code>.
 		 */
@@ -42,7 +47,8 @@ public class CountDownProgressPanel extends javax.swing.JPanel {
 			super();
 			setName(getName() + " - CountDownProgressPanel - Runner");
 		}
-		
+
+		@Override
 		public void run() {
 			counter = countDownFrom;
 			stop = false;
@@ -54,7 +60,7 @@ public class CountDownProgressPanel extends javax.swing.JPanel {
 					jProgressBar.setValue(counter);
 					jProgressBar.setString(lockFor + " " + counter + "s !");
 					counter -= updateRate;
-					sleep(updateRate * 1000);
+					Thread.sleep(updateRate * 1000);
 				}
 
 				firePropertyChangeListenerPropertyChange(new java.beans.PropertyChangeEvent(this, "progressEnd",
@@ -62,7 +68,7 @@ public class CountDownProgressPanel extends javax.swing.JPanel {
 				jProgressBar.setString("");
 				jProgressBar.setValue(0);
 				stop = true;
-			} catch (InterruptedException ignored) {
+			} catch (final InterruptedException ignored) {
 			}
 		}
 	}
@@ -83,7 +89,7 @@ public class CountDownProgressPanel extends javax.swing.JPanel {
 
 	}// GEN-END:initComponents
 
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 		new CountDownProgressPanel();
 	}
 
@@ -97,7 +103,7 @@ public class CountDownProgressPanel extends javax.swing.JPanel {
 	 * @return Value of property countDownFrom.
 	 */
 	public int getCountDownFrom() {
-		return this.countDownFrom;
+		return countDownFrom;
 	}
 
 	/**
@@ -105,7 +111,7 @@ public class CountDownProgressPanel extends javax.swing.JPanel {
 	 * 
 	 * @param countDownFrom New value of property countDownFrom.
 	 */
-	public void setCountDownFrom(int countDownFrom) {
+	public void setCountDownFrom(final int countDownFrom) {
 		this.countDownFrom = countDownFrom;
 	}
 
@@ -115,7 +121,7 @@ public class CountDownProgressPanel extends javax.swing.JPanel {
 	 * @return Value of property countDownTo.
 	 */
 	public int getCountDownTo() {
-		return this.countDownTo;
+		return countDownTo;
 	}
 
 	/**
@@ -123,7 +129,7 @@ public class CountDownProgressPanel extends javax.swing.JPanel {
 	 * 
 	 * @param countDownTo New value of property countDownTo.
 	 */
-	public void setCountDownTo(int countDownTo) {
+	public void setCountDownTo(final int countDownTo) {
 		this.countDownTo = countDownTo;
 	}
 
@@ -133,7 +139,7 @@ public class CountDownProgressPanel extends javax.swing.JPanel {
 	 * @return Value of property updateRate.
 	 */
 	public int getUpdateRate() {
-		return this.updateRate;
+		return updateRate;
 	}
 
 	/**
@@ -141,7 +147,7 @@ public class CountDownProgressPanel extends javax.swing.JPanel {
 	 * 
 	 * @param updateRate New value of property updateRate.
 	 */
-	public void setUpdateRate(int updateRate) {
+	public void setUpdateRate(final int updateRate) {
 		this.updateRate = updateRate;
 	}
 
@@ -151,7 +157,7 @@ public class CountDownProgressPanel extends javax.swing.JPanel {
 	 * @return Value of property counter.
 	 */
 	public int getCounter() {
-		return this.counter;
+		return counter;
 	}
 
 	/**
@@ -160,7 +166,7 @@ public class CountDownProgressPanel extends javax.swing.JPanel {
 	 * @return Value of property stop.
 	 */
 	public boolean isStop() {
-		return this.stop;
+		return stop;
 	}
 
 	/**
@@ -168,7 +174,7 @@ public class CountDownProgressPanel extends javax.swing.JPanel {
 	 * 
 	 * @param stop New value of property stop.
 	 */
-	public void setStop(boolean stop) {
+	public void setStop(final boolean stop) {
 		this.stop = stop;
 	}
 
@@ -178,7 +184,7 @@ public class CountDownProgressPanel extends javax.swing.JPanel {
 	 * @return Value of property indeterminate.
 	 */
 	public boolean isIndeterminate() {
-		return this.indeterminate;
+		return indeterminate;
 	}
 
 	/**
@@ -186,7 +192,7 @@ public class CountDownProgressPanel extends javax.swing.JPanel {
 	 * 
 	 * @param indeterminate New value of property indeterminate.
 	 */
-	public void setIndeterminate(boolean indeterminate) {
+	public void setIndeterminate(final boolean indeterminate) {
 		this.indeterminate = indeterminate;
 		jProgressBar.setIndeterminate(indeterminate);
 	}
@@ -196,7 +202,8 @@ public class CountDownProgressPanel extends javax.swing.JPanel {
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addPropertyChangeListener(java.beans.PropertyChangeListener listener) {
+	@Override
+	public synchronized void addPropertyChangeListener(final java.beans.PropertyChangeListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -208,7 +215,8 @@ public class CountDownProgressPanel extends javax.swing.JPanel {
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removePropertyChangeListener(java.beans.PropertyChangeListener listener) {
+	@Override
+	public synchronized void removePropertyChangeListener(final java.beans.PropertyChangeListener listener) {
 		listenerList.remove(java.beans.PropertyChangeListener.class, listener);
 	}
 
@@ -217,10 +225,11 @@ public class CountDownProgressPanel extends javax.swing.JPanel {
 	 * 
 	 * @param event The event to be fired
 	 */
-	private void firePropertyChangeListenerPropertyChange(java.beans.PropertyChangeEvent event) {
-		if (listenerList == null)
+	private void firePropertyChangeListenerPropertyChange(final java.beans.PropertyChangeEvent event) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == java.beans.PropertyChangeListener.class) {
 				((java.beans.PropertyChangeListener) listeners[i + 1]).propertyChange(event);

@@ -15,11 +15,15 @@ import com.linkare.rec.impl.baseUI.config.Lab;
 
 public class LabSelectionEvent extends java.util.EventObject {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3174550932608912559L;
 	/** Holds value of property Lab. */
-	private Lab lab;
+	private final Lab lab;
 
 	/** Creates a new instance of LabSelectionEvent */
-	public LabSelectionEvent(Object source, Lab lab) {
+	public LabSelectionEvent(final Object source, final Lab lab) {
 		super(source);
 		this.lab = lab;
 	}
@@ -30,6 +34,6 @@ public class LabSelectionEvent extends java.util.EventObject {
 	 * @return Value of property Lab.
 	 */
 	public Lab getLab() {
-		return this.lab;
+		return lab;
 	}
 }

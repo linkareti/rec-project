@@ -36,32 +36,33 @@ public class MeteoDataProducer extends BaseDataSource {
 
 	private boolean stopProduction = false;
 
-	private boolean[] selected = new boolean[NUM_CHANNELS - 1];
+	private boolean[] selected = new boolean[MeteoDataProducer.NUM_CHANNELS - 1];
 
-	private SerialComm sc = null;
+	private final SerialComm sc = null;
 
 	/** sql */
 	private Connection conn = null;
 
 	private MeteoDriver driver = null;
 
-	public MeteoDataProducer(MeteoDriver driver) {
+	public MeteoDataProducer(final MeteoDriver driver) {
 		conn = driver.getSQLConnection();
 		this.driver = driver;
 	}
 
 	private class ProducerThread extends Thread {
+		@Override
 		public void run() {
 			try {
-				sleep(1000);
+				Thread.sleep(1000);
 				sendSamples(0, new float[8]);
 
 				String resString = "";
-				if (resolution == HOURLY) {
+				if (resolution == MeteoDataProducer.HOURLY) {
 					resString = "HOUR";
-				} else if (resolution == DAILY) {
+				} else if (resolution == MeteoDataProducer.DAILY) {
 					resString = "DAYOFMONTH";
-				} else if (resolution == MONTHLY) {
+				} else if (resolution == MeteoDataProducer.MONTHLY) {
 					resString = "MONTH";
 				} else {
 					resString = "YEAR";
@@ -74,7 +75,7 @@ public class MeteoDataProducer extends BaseDataSource {
 								+ "(time_of_acq) as delta, HOUR(time_of_acq) as delta_hour, DAYOFMONTH(time_of_acq) as delta_day, MONTH(time_of_acq) as delta_month, YEAR(time_of_acq) as delta_year from meteo where time_of_acq >='"
 								+ startDate + "' AND time_of_acq<='" + stopDate + "' order by time_of_acq;");
 
-				ResultSet rs = ps.executeQuery();
+				final ResultSet rs = ps.executeQuery();
 
 				String lastValue = "";
 
@@ -125,16 +126,16 @@ public class MeteoDataProducer extends BaseDataSource {
 
 						rs.previous();
 
-						int hour = Integer.parseInt(rs.getString("delta_hour"));
-						int day = Integer.parseInt(rs.getString("delta_day"));
-						int month = Integer.parseInt(rs.getString("delta_month")) - 1;
-						int year = Integer.parseInt(rs.getString("delta_year"));
+						final int hour = Integer.parseInt(rs.getString("delta_hour"));
+						final int day = Integer.parseInt(rs.getString("delta_day"));
+						final int month = Integer.parseInt(rs.getString("delta_month")) - 1;
+						final int year = Integer.parseInt(rs.getString("delta_year"));
 
-						if (resolution == HOURLY) {
+						if (resolution == MeteoDataProducer.HOURLY) {
 							time = new java.util.GregorianCalendar(year, month, day, hour, 0).getTime().getTime();
-						} else if (resolution == DAILY) {
+						} else if (resolution == MeteoDataProducer.DAILY) {
 							time = new java.util.GregorianCalendar(year, month, day, 0, 0).getTime().getTime();
-						} else if (resolution == MONTHLY) {
+						} else if (resolution == MeteoDataProducer.MONTHLY) {
 							time = new java.util.GregorianCalendar(year, month, 1, 0, 0).getTime().getTime();
 						} else {
 							time = new java.util.GregorianCalendar(year, 1, 1, 0, 0).getTime().getTime();
@@ -142,7 +143,7 @@ public class MeteoDataProducer extends BaseDataSource {
 
 						rs.next();
 
-						float[] vals = new float[NUM_CHANNELS - 1];
+						final float[] vals = new float[MeteoDataProducer.NUM_CHANNELS - 1];
 						vals[0] = temp;
 						vals[1] = prec;
 						vals[2] = dirVento;
@@ -164,7 +165,7 @@ public class MeteoDataProducer extends BaseDataSource {
 						lum = 0;
 						counter = 0;
 
-						sleep(200);
+						Thread.sleep(200);
 					}
 
 					prec += rs.getFloat("prec");
@@ -188,22 +189,22 @@ public class MeteoDataProducer extends BaseDataSource {
 						// lum /= counter;
 						lum = getLumValue(lum / counter);
 
-						int hour = Integer.parseInt(rs.getString("delta_hour"));
-						int day = Integer.parseInt(rs.getString("delta_day"));
-						int month = Integer.parseInt(rs.getString("delta_month")) - 1;
-						int year = Integer.parseInt(rs.getString("delta_year"));
+						final int hour = Integer.parseInt(rs.getString("delta_hour"));
+						final int day = Integer.parseInt(rs.getString("delta_day"));
+						final int month = Integer.parseInt(rs.getString("delta_month")) - 1;
+						final int year = Integer.parseInt(rs.getString("delta_year"));
 
-						if (resolution == HOURLY) {
+						if (resolution == MeteoDataProducer.HOURLY) {
 							time = new java.util.GregorianCalendar(year, month, day, hour, 0).getTime().getTime();
-						} else if (resolution == DAILY) {
+						} else if (resolution == MeteoDataProducer.DAILY) {
 							time = new java.util.GregorianCalendar(year, month, day, 0, 0).getTime().getTime();
-						} else if (resolution == MONTHLY) {
+						} else if (resolution == MeteoDataProducer.MONTHLY) {
 							time = new java.util.GregorianCalendar(year, month, 1, 0, 0).getTime().getTime();
 						} else {
 							time = new java.util.GregorianCalendar(year, 1, 1, 0, 0).getTime().getTime();
 						}
 
-						float[] vals = new float[NUM_CHANNELS - 1];
+						final float[] vals = new float[MeteoDataProducer.NUM_CHANNELS - 1];
 						vals[0] = temp;
 						vals[1] = prec;
 						vals[2] = dirVento;
@@ -218,21 +219,21 @@ public class MeteoDataProducer extends BaseDataSource {
 				}
 				rs.close();
 				ps.close();
-			} catch (SQLException sqle) {
+			} catch (final SQLException sqle) {
 				System.out.println(sqle.getMessage());
-			} catch (InterruptedException ie) {
+			} catch (final InterruptedException ie) {
 				ie.printStackTrace();
 			}
 
 			try {
 				/** sleep a little bit...before setting run to false */
-				sleep(1000);
+				Thread.sleep(1000);
 				setDataEnded();
 				driver.stop(null);
 				join(100);
-			} catch (com.linkare.rec.acquisition.IncorrectStateException ise) {
+			} catch (final com.linkare.rec.acquisition.IncorrectStateException ise) {
 				ise.printStackTrace();
-			} catch (InterruptedException ie) {
+			} catch (final InterruptedException ie) {
 				ie.printStackTrace();
 			}
 		}
@@ -242,11 +243,11 @@ public class MeteoDataProducer extends BaseDataSource {
 		super.setDataSourceEnded();
 	}
 
-	private void sendSamples(long time, float[] vals) {
+	private void sendSamples(final long time, final float[] vals) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		PhysicsValue[] values = new PhysicsValue[NUM_CHANNELS];
+		final PhysicsValue[] values = new PhysicsValue[MeteoDataProducer.NUM_CHANNELS];
 
 		if (time == 0) {
 			try {
@@ -268,7 +269,7 @@ public class MeteoDataProducer extends BaseDataSource {
 					vals[6] = getLumValue(rs.getFloat("lum"));
 					vals[7] = rs.getFloat("pressao");
 				}
-			} catch (SQLException sqle) {
+			} catch (final SQLException sqle) {
 				sqle.printStackTrace();
 			}
 		} else {
@@ -324,7 +325,7 @@ public class MeteoDataProducer extends BaseDataSource {
 
 	private int nSamples = 0;
 
-	public int checkNSamples(String startDate, String stopDate, int resolution) {
+	public int checkNSamples(final String startDate, final String stopDate, final int resolution) {
 		this.startDate = startDate;
 		this.stopDate = stopDate;
 		this.resolution = resolution;
@@ -334,18 +335,18 @@ public class MeteoDataProducer extends BaseDataSource {
 
 		nSamples = 0;
 		try {
-			if (resolution == HOURLY) {
+			if (resolution == MeteoDataProducer.HOURLY) {
 				ps = conn.prepareStatement("select count(time_of_acq) from meteo where time_of_acq>='" + startDate
 						+ "' AND time_of_acq<='" + stopDate + "';");
-			} else if (resolution == DAILY) {
+			} else if (resolution == MeteoDataProducer.DAILY) {
 				ps = conn
 						.prepareStatement("select count(distinct to_days(time_of_acq)) from meteo where time_of_acq>='"
 								+ startDate + "' AND time_of_acq<='" + stopDate + "';");
-			} else if (resolution == MONTHLY) {
+			} else if (resolution == MeteoDataProducer.MONTHLY) {
 				ps = conn
 						.prepareStatement("select count(distinct EXTRACT(YEAR_MONTH from time_of_acq)) from meteo where time_of_acq>='"
 								+ startDate + "' AND time_of_acq<='" + stopDate + "';");
-			} else if (resolution == YEARLY) {
+			} else if (resolution == MeteoDataProducer.YEARLY) {
 				ps = conn.prepareStatement("select count(distinct YEAR(time_of_acq)) from meteo where time_of_acq>='"
 						+ startDate + "' AND time_of_acq<='" + stopDate + "';");
 			}
@@ -358,7 +359,7 @@ public class MeteoDataProducer extends BaseDataSource {
 				ps.close();
 				rs.close();
 			}
-		} catch (SQLException sqle) {
+		} catch (final SQLException sqle) {
 			sqle.printStackTrace();
 		}
 
@@ -390,14 +391,14 @@ public class MeteoDataProducer extends BaseDataSource {
 
 			ps.close();
 			rs.close();
-		} catch (SQLException sqle) {
+		} catch (final SQLException sqle) {
 			sqle.printStackTrace();
 		}
 
 		return lum;
 	}
 
-	public void startProduction(boolean[] selected) {
+	public void startProduction(final boolean[] selected) {
 		stopProduction = false;
 		this.selected = selected;
 
@@ -412,9 +413,10 @@ public class MeteoDataProducer extends BaseDataSource {
 		stopProduction = true;
 	}
 
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 	}
 
+	@Override
 	public void stopNow() {
 		stopProduction();
 		setDataSourceStoped();

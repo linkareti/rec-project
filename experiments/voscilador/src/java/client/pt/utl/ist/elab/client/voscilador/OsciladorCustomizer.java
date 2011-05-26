@@ -21,6 +21,11 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 public class OsciladorCustomizer extends javax.swing.JPanel implements
 		com.linkare.rec.impl.client.customizer.ICustomizer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6613597765922649379L;
+
 	/** Creates new form OsciladorCustomizer */
 	public OsciladorCustomizer() {
 		initComponents();
@@ -77,7 +82,8 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 		jButtonDafaultConfig.setMinimumSize(new java.awt.Dimension(100, 40));
 		jButtonDafaultConfig.setPreferredSize(new java.awt.Dimension(100, 40));
 		jButtonDafaultConfig.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonDafaultConfigActionPerformed(evt);
 			}
 		});
@@ -87,14 +93,15 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 		gridBagConstraints.gridy = 3;
 		jPanelButtons.add(jButtonDafaultConfig, gridBagConstraints);
 
-		jButtonStop.setText(ReCResourceBundle.findStringOrDefault("oscilador$rec.exp.customizer.title.cancel",
-				"Cancel"));
+		jButtonStop.setText(ReCResourceBundle
+				.findStringOrDefault("oscilador$rec.exp.customizer.title.cancel", "Cancel"));
 		jButtonStop.setMargin(new java.awt.Insets(0, 0, 0, 0));
 		jButtonStop.setMaximumSize(new java.awt.Dimension(100, 40));
 		jButtonStop.setMinimumSize(new java.awt.Dimension(100, 40));
 		jButtonStop.setPreferredSize(new java.awt.Dimension(100, 40));
 		jButtonStop.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonStopActionPerformed(evt);
 			}
 		});
@@ -104,14 +111,14 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 		gridBagConstraints.gridy = 1;
 		jPanelButtons.add(jButtonStop, gridBagConstraints);
 
-		jButtonStart.setText(ReCResourceBundle.findStringOrDefault("oscilador$rec.exp.customizer.title.ok",
-				"Start"));
+		jButtonStart.setText(ReCResourceBundle.findStringOrDefault("oscilador$rec.exp.customizer.title.ok", "Start"));
 		jButtonStart.setMargin(new java.awt.Insets(0, 0, 0, 0));
 		jButtonStart.setMaximumSize(new java.awt.Dimension(100, 40));
 		jButtonStart.setMinimumSize(new java.awt.Dimension(100, 40));
 		jButtonStart.setPreferredSize(new java.awt.Dimension(100, 40));
 		jButtonStart.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonStartActionPerformed(evt);
 			}
 		});
@@ -176,12 +183,14 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 		jTextFieldA.setMinimumSize(new java.awt.Dimension(50, 20));
 		jTextFieldA.setPreferredSize(new java.awt.Dimension(50, 20));
 		jTextFieldA.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldAFocusLost(evt);
 			}
 		});
 		jTextFieldA.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jTextFieldAKeyReleased(evt);
 			}
 		});
@@ -196,17 +205,20 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 		jTextFieldFrequencia.setMinimumSize(new java.awt.Dimension(50, 20));
 		jTextFieldFrequencia.setPreferredSize(new java.awt.Dimension(50, 20));
 		jTextFieldFrequencia.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jTextFieldFrequenciaActionPerformed(evt);
 			}
 		});
 		jTextFieldFrequencia.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldFrequenciaFocusLost(evt);
 			}
 		});
 		jTextFieldFrequencia.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jTextFieldFrequenciaKeyReleased(evt);
 			}
 		});
@@ -221,12 +233,14 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 		jTextFieldAltura.setMinimumSize(new java.awt.Dimension(50, 20));
 		jTextFieldAltura.setPreferredSize(new java.awt.Dimension(50, 20));
 		jTextFieldAltura.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldAlturaFocusLost(evt);
 			}
 		});
 		jTextFieldAltura.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jTextFieldAlturaKeyReleased(evt);
 			}
 		});
@@ -241,12 +255,14 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 		jTextFieldG.setMinimumSize(new java.awt.Dimension(50, 20));
 		jTextFieldG.setPreferredSize(new java.awt.Dimension(50, 20));
 		jTextFieldG.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldGFocusLost(evt);
 			}
 		});
 		jTextFieldG.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jTextFieldGKeyReleased(evt);
 			}
 		});
@@ -257,16 +273,15 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 		jPanelInput.add(jTextFieldG, gridBagConstraints);
 
 		jLabelA.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabelA.setText(ReCResourceBundle.findStringOrDefault("oscilador$rec.exp.customizer.title.a",
-				"Parabola Width"));
+		jLabelA.setText(ReCResourceBundle.findStringOrDefault("oscilador$rec.exp.customizer.title.a", "Parabola Width"));
 		jLabelA.setMaximumSize(new java.awt.Dimension(300, 15));
 		jLabelA.setMinimumSize(new java.awt.Dimension(300, 15));
 		jLabelA.setPreferredSize(new java.awt.Dimension(300, 15));
 		jPanelInput.add(jLabelA, new java.awt.GridBagConstraints());
 
 		jLabelFrequencia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabelFrequencia.setText(ReCResourceBundle.findStringOrDefault(
-				"oscilador$rec.exp.customizer.title.frequencia", "Rotation Frequency"));
+		jLabelFrequencia.setText(ReCResourceBundle.findStringOrDefault("oscilador$rec.exp.customizer.title.frequencia",
+				"Rotation Frequency"));
 		jLabelFrequencia.setMaximumSize(new java.awt.Dimension(300, 15));
 		jLabelFrequencia.setMinimumSize(new java.awt.Dimension(300, 15));
 		jLabelFrequencia.setPreferredSize(new java.awt.Dimension(300, 15));
@@ -276,8 +291,8 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 		jPanelInput.add(jLabelFrequencia, gridBagConstraints);
 
 		jLabelAltura.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabelAltura.setText(ReCResourceBundle.findStringOrDefault(
-				"oscilador$rec.exp.customizer.title.alturaInicial", "Starting Position"));
+		jLabelAltura.setText(ReCResourceBundle.findStringOrDefault("oscilador$rec.exp.customizer.title.alturaInicial",
+				"Starting Position"));
 		jLabelAltura.setMaximumSize(new java.awt.Dimension(300, 15));
 		jLabelAltura.setMinimumSize(new java.awt.Dimension(300, 15));
 		jLabelAltura.setPreferredSize(new java.awt.Dimension(300, 15));
@@ -301,17 +316,17 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 
 	}// GEN-END:initComponents
 
-	private void jTextFieldFrequenciaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextFieldFrequenciaActionPerformed
+	private void jTextFieldFrequenciaActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextFieldFrequenciaActionPerformed
 		// TODO add your handling code here:
 	}// GEN-LAST:event_jTextFieldFrequenciaActionPerformed
 
-	private void jTextFieldFrequenciaKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldFrequenciaKeyReleased
+	private void jTextFieldFrequenciaKeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldFrequenciaKeyReleased
 		if (evt.getKeyCode() == 10) { // Enter pressionado
 			jPanelControl.requestFocusInWindow();
 		}
 	}// GEN-LAST:event_jTextFieldFrequenciaKeyReleased
 
-	private void jTextFieldFrequenciaFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldFrequenciaFocusLost
+	private void jTextFieldFrequenciaFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldFrequenciaFocusLost
 		try {
 			// Guarda o valor da frequencia
 			frequencia = Double.parseDouble(jTextFieldFrequencia.getText().trim());
@@ -321,19 +336,19 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 				JOptionPane.showMessageDialog(this, "O valor introduzido � negativo!", "Erro no Input",
 						JOptionPane.ERROR_MESSAGE);
 			}
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 			frequencia = 0.5; // Apanhou uma excepcao
 		}
 		jTextFieldFrequencia.setText("" + frequencia); // Actualiza o jTextField
 	}// GEN-LAST:event_jTextFieldFrequenciaFocusLost
 
-	private void jTextFieldAlturaKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldAlturaKeyReleased
+	private void jTextFieldAlturaKeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldAlturaKeyReleased
 		if (evt.getKeyCode() == 10) { // Enter pressionado
 			jPanelControl.requestFocusInWindow();
 		}
 	}// GEN-LAST:event_jTextFieldAlturaKeyReleased
 
-	private void jTextFieldAlturaFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldAlturaFocusLost
+	private void jTextFieldAlturaFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldAlturaFocusLost
 		try {
 			// Guarda o valor da altura inicial
 			alturaInicial = Double.parseDouble(jTextFieldAltura.getText().trim());
@@ -343,19 +358,19 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 				JOptionPane.showMessageDialog(this, "O valor introduzido � negativo!", "Erro no Input",
 						JOptionPane.ERROR_MESSAGE);
 			}
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 			alturaInicial = 0.2; // Apanhou uma excepcao
 		}
 		jTextFieldAltura.setText("" + alturaInicial); // Actualiza o jTextField
 	}// GEN-LAST:event_jTextFieldAlturaFocusLost
 
-	private void jTextFieldGKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldGKeyReleased
+	private void jTextFieldGKeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldGKeyReleased
 		if (evt.getKeyCode() == 10) { // Enter pressionado
 			jPanelControl.requestFocusInWindow();
 		}
 	}// GEN-LAST:event_jTextFieldGKeyReleased
 
-	private void jTextFieldGFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldGFocusLost
+	private void jTextFieldGFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldGFocusLost
 		try {
 			// Guarda o valor da altura inicial
 			g = Double.parseDouble(jTextFieldG.getText().trim());
@@ -365,19 +380,19 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 				JOptionPane.showMessageDialog(this, "O valor introduzido � negativo!", "Erro no Input",
 						JOptionPane.ERROR_MESSAGE);
 			}
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 			g = 9.8; // Apanhou uma excepcao
 		}
 		jTextFieldG.setText("" + g); // Actualiza o jTextField
 	}// GEN-LAST:event_jTextFieldGFocusLost
 
-	private void jTextFieldAKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldAKeyReleased
+	private void jTextFieldAKeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldAKeyReleased
 		if (evt.getKeyCode() == 10) { // Enter pressionado
 			jPanelControl.requestFocusInWindow();
 		}
 	}// GEN-LAST:event_jTextFieldAKeyReleased
 
-	private void jTextFieldAFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldAFocusLost
+	private void jTextFieldAFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldAFocusLost
 		try {
 			// Guarda o valor de a
 			a = Double.parseDouble(jTextFieldA.getText().trim());
@@ -387,19 +402,19 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 				JOptionPane.showMessageDialog(this, "O valor deste par�metro tem de ser positivo!", "Erro no Input",
 						JOptionPane.ERROR_MESSAGE);
 			}
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 			a = 1; // Apanhou uma excepcao
 		}
 		jTextFieldA.setText("" + a); // Actualiza o jTextField
 
 	}// GEN-LAST:event_jTextFieldAFocusLost
 
-	private void jButtonStartActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonStartActionPerformed
+	private void jButtonStartActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonStartActionPerformed
 		acqConfig.setTotalSamples(jSliderNSamples.getValue());
 
-		acqConfig.setSelectedFrequency(new Frequency((double) jSliderTBS.getValue(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
+		acqConfig.setSelectedFrequency(new Frequency(jSliderTBS.getValue(), hardwareInfo.getHardwareFrequencies(0)
+				.getMinimumFrequency().getMultiplier(), hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency()
+				.getFrequencyDefType()));
 		acqConfig.getSelectedHardwareParameter("alturaInicial").setParameterValue("" + alturaInicial);
 		acqConfig.getSelectedHardwareParameter("g").setParameterValue("" + g);
 		acqConfig.getSelectedHardwareParameter("a").setParameterValue("" + a);
@@ -407,11 +422,11 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_jButtonStartActionPerformed
 
-	private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonStopActionPerformed
+	private void jButtonStopActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonStopActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_jButtonStopActionPerformed
 
-	private void jButtonDafaultConfigActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonDafaultConfigActionPerformed
+	private void jButtonDafaultConfigActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonDafaultConfigActionPerformed
 		jSliderNSamples.setValue(100);
 		jSliderTBS.setValue(100);
 		jButtonStop.setEnabled(false);
@@ -425,8 +440,8 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 
 	}// GEN-LAST:event_jButtonDafaultConfigActionPerformed
 
-	public static void main(String args[]) {
-		javax.swing.JFrame dummy = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new OsciladorCustomizer());
 		dummy.pack();
 		dummy.show();
@@ -442,7 +457,8 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -454,7 +470,8 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -464,9 +481,10 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -480,9 +498,10 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -494,39 +513,46 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
 		return acqConfig;
 	}
 
 	// ESTE É PARA ALTERAR
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		// Aqui são fornecidos parametros do ultimo utilizador que fez a exp, e'
 		// bom manter!
 		this.acqConfig = acqConfig;
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
+	@Override
 	public javax.swing.JComponent getCustomizerComponent() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/voscilador/resources/oscilador_iconified.png"));
 	}
 
 	// ESTE É PARA ALTERAR
+	@Override
 	public String getCustomizerTitle() {
 		return "Forced Oscillator Experiment Configuration Utility";
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}

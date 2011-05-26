@@ -30,12 +30,15 @@ public class DefaultStyle extends AbstractStyle {
 
 	// Debug
 
-	//	public static final BorderUIResource DEBUG_RED_BORDER = new BorderUIResource(BorderFactory
-	//			.createLineBorder(Color.RED));
-	//	public static final BorderUIResource DEBUG_GREEN_BORDER = new BorderUIResource(BorderFactory
-	//			.createLineBorder(Color.GREEN));
-	//	public static final BorderUIResource DEBUG_BLUE_BORDER = new BorderUIResource(BorderFactory
-	//			.createLineBorder(Color.BLUE));
+	// public static final BorderUIResource DEBUG_RED_BORDER = new
+	// BorderUIResource(BorderFactory
+	// .createLineBorder(Color.RED));
+	// public static final BorderUIResource DEBUG_GREEN_BORDER = new
+	// BorderUIResource(BorderFactory
+	// .createLineBorder(Color.GREEN));
+	// public static final BorderUIResource DEBUG_BLUE_BORDER = new
+	// BorderUIResource(BorderFactory
+	// .createLineBorder(Color.BLUE));
 
 	// Colors
 
@@ -55,12 +58,15 @@ public class DefaultStyle extends AbstractStyle {
 
 	// Borders
 
-	public static final Border SOLID_THIN_BLACK_BORDER = BorderFactory.createLineBorder(BLACK_DEFAULT_COLOR);
+	public static final Border SOLID_THIN_BLACK_BORDER = BorderFactory
+			.createLineBorder(DefaultStyle.BLACK_DEFAULT_COLOR);
 
 	public static final BorderUIResource EMPTY_BORDER = new BorderUIResource(BorderFactory.createEmptyBorder());
 
-	public static final BorderUIResource EMPTY_BORDER_MARGIN_2 = new BorderUIResource(BorderFactory.createEmptyBorder(4, 6, 4, 6));
-	public static final BorderUIResource EMPTY_BORDER_MARGIN_4 = new BorderUIResource(BorderFactory.createEmptyBorder(6, 4, 4, 4));
+	public static final BorderUIResource EMPTY_BORDER_MARGIN_2 = new BorderUIResource(BorderFactory.createEmptyBorder(
+			4, 6, 4, 6));
+	public static final BorderUIResource EMPTY_BORDER_MARGIN_4 = new BorderUIResource(BorderFactory.createEmptyBorder(
+			6, 4, 4, 4));
 
 	/**
 	 * Creates the <code>DefaultStyle</code>.
@@ -70,13 +76,13 @@ public class DefaultStyle extends AbstractStyle {
 	}
 
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		// Common properties definition
-		map.put(FOREGROUND, DEFAULT_FOREGROUND);
-		map.put(FONT, DEFAULT_FONT);
-		map.put(SELECTION_BACKGROUND, SELECTION_BACKGROUND_DEFAULT_COLOR);
-		map.put(SELECTION_FOREGROUND, SELECTION_FOREGROUND_DEFAULT_COLOR);
-		map.put(DEFAULT_WHITE, WHITE_DEFAULT_COLOR);
+		map.put(AbstractStyle.FOREGROUND, DefaultStyle.DEFAULT_FOREGROUND);
+		map.put(AbstractStyle.FONT, DefaultStyle.DEFAULT_FONT);
+		map.put(AbstractStyle.SELECTION_BACKGROUND, DefaultStyle.SELECTION_BACKGROUND_DEFAULT_COLOR);
+		map.put(AbstractStyle.SELECTION_FOREGROUND, DefaultStyle.SELECTION_FOREGROUND_DEFAULT_COLOR);
+		map.put(AbstractStyle.DEFAULT_WHITE, DefaultStyle.WHITE_DEFAULT_COLOR);
 	}
 
 	// -------------------------------------------------------------------------
@@ -87,7 +93,7 @@ public class DefaultStyle extends AbstractStyle {
 	 */
 	@XmlAttribute
 	public String getForeground() {
-		return getPropertyMap().get(FOREGROUND).toString();
+		return getPropertyMap().get(AbstractStyle.FOREGROUND).toString();
 	}
 
 	/**
@@ -95,7 +101,7 @@ public class DefaultStyle extends AbstractStyle {
 	 */
 	@XmlAttribute
 	public String getFont() {
-		return getPropertyMap().get(FONT).toString();
+		return getPropertyMap().get(AbstractStyle.FONT).toString();
 	}
 
 	// (...)

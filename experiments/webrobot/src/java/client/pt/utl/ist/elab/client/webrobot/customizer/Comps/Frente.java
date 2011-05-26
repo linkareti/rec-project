@@ -11,18 +11,22 @@ package pt.utl.ist.elab.client.webrobot.customizer.Comps;
  * @author André Neto - LEFT - IST
  */
 public class Frente extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Block {
-	private int WIDTH = 77;
-	private int HEIGHT = 45;
-	private int LINEWIDTH = 6;
-	private java.awt.Dimension dimension = new java.awt.Dimension(WIDTH, HEIGHT);
-	private int TIPO = 3;
-	private javax.swing.ImageIcon image = new javax.swing.ImageIcon(getClass().getResource(
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3304161679669966674L;
+	private final int WIDTH = 77;
+	private final int HEIGHT = 45;
+	private final int LINEWIDTH = 6;
+	private final java.awt.Dimension dimension = new java.awt.Dimension(WIDTH, HEIGHT);
+	private final int TIPO = 3;
+	private final javax.swing.ImageIcon image = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/webrobot/customizer/Comps/Icons/frente.gif"));
 	private pt.utl.ist.elab.client.webrobot.customizer.Models.ModelFrente model;
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfFrente confFrente;
-	private java.awt.Color backgroundColor = new java.awt.Color(204, 204, 204);
+	private final java.awt.Color backgroundColor = new java.awt.Color(204, 204, 204);
 	private String text;
-	private String fullNameDescription = "Segue em frente";
+	private final String fullNameDescription = "Segue em frente";
 
 	/** Holds value of property paintBottom. */
 	private boolean paintBottom = false;
@@ -34,7 +38,7 @@ public class Frente extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Blo
 	private boolean cancel = false;
 
 	/** Creates a new instance of CompInt */
-	public Frente(javax.swing.JFrame parent) {
+	public Frente(final javax.swing.JFrame parent) {
 		super();
 		setCancel(false);
 		model = new pt.utl.ist.elab.client.webrobot.customizer.Models.ModelFrente();
@@ -54,7 +58,7 @@ public class Frente extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Blo
 		text = "";
 	}
 
-	public Frente(pt.utl.ist.elab.client.webrobot.customizer.Models.ModelFrente model) {
+	public Frente(final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelFrente model) {
 		super();
 		setCancel(false);
 		this.model = new pt.utl.ist.elab.client.webrobot.customizer.Models.ModelFrente();
@@ -77,48 +81,52 @@ public class Frente extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Blo
 		text = "";
 	}
 
-	public void paintComponent(java.awt.Graphics g) {
-		java.awt.Graphics2D g2 = (java.awt.Graphics2D) g;
+	@Override
+	public void paintComponent(final java.awt.Graphics g) {
+		final java.awt.Graphics2D g2 = (java.awt.Graphics2D) g;
 		g2.setStroke(new java.awt.BasicStroke(3f));
 		g.setColor(backgroundColor);
 		g.fillRect(0, 0, this.getSize().width, this.getSize().height);
 		g.drawImage(image.getImage(), 0, 0, image.getIconWidth(), image.getIconHeight(), null);
 		g.setColor(java.awt.Color.black);
 		if (paintBottom) {
-			g2.drawLine(image.getIconWidth() / 2, image.getIconHeight(), image.getIconWidth() / 2, image
-					.getIconHeight()
-					+ LINEWIDTH);
+			g2.drawLine(image.getIconWidth() / 2, image.getIconHeight(), image.getIconWidth() / 2,
+					image.getIconHeight() + LINEWIDTH);
 		}
 		if (paintLeft) {
-			g2.drawLine(image.getIconWidth(), image.getIconHeight() / 2, image.getIconWidth() + LINEWIDTH, image
-					.getIconHeight() / 2);
+			g2.drawLine(image.getIconWidth(), image.getIconHeight() / 2, image.getIconWidth() + LINEWIDTH,
+					image.getIconHeight() / 2);
 		}
 		g.setColor(java.awt.Color.black);
 		text = "" + model.getValor();
-		g.drawString(text, (int) (image.getIconWidth() / 4), image.getIconWidth() / 3);
+		g.drawString(text, (image.getIconWidth() / 4), image.getIconWidth() / 3);
 		super.paintComponent(g);
 	}
 
+	@Override
 	public pt.utl.ist.elab.client.webrobot.customizer.Models.ModelBlock getDataModel() {
 		return model;
 	}
 
-	public void setDataModel(pt.utl.ist.elab.client.webrobot.customizer.Models.ModelFrente model) {
+	public void setDataModel(final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelFrente model) {
 		this.model = model;
 	}
 
-	public void edit(javax.swing.JFrame parent) {
+	@Override
+	public void edit(final javax.swing.JFrame parent) {
 		confFrente = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfFrente(parent, true, model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confFrente);
 		confFrente.show();
 	}
 
+	@Override
 	public int getTipo() {
 		return TIPO;
 	}
 
+	@Override
 	public String getFullNameDescription() {
-		return this.fullNameDescription;
+		return fullNameDescription;
 	}
 
 	/**
@@ -126,8 +134,9 @@ public class Frente extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Blo
 	 * 
 	 * @return Value of property paintBottom.
 	 */
+	@Override
 	public boolean isPaintBottom() {
-		return this.paintBottom;
+		return paintBottom;
 	}
 
 	/**
@@ -135,7 +144,8 @@ public class Frente extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Blo
 	 * 
 	 * @param paintBottom New value of property paintBottom.
 	 */
-	public void setPaintBottom(boolean paintBottom) {
+	@Override
+	public void setPaintBottom(final boolean paintBottom) {
 		this.paintBottom = paintBottom;
 		repaint();
 	}
@@ -145,8 +155,9 @@ public class Frente extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Blo
 	 * 
 	 * @return Value of property paintLeft.
 	 */
+	@Override
 	public boolean isPaintLeft() {
-		return this.paintLeft;
+		return paintLeft;
 	}
 
 	/**
@@ -154,7 +165,8 @@ public class Frente extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Blo
 	 * 
 	 * @param paintLeft New value of property paintLeft.
 	 */
-	public void setPaintLeft(boolean paintLeft) {
+	@Override
+	public void setPaintLeft(final boolean paintLeft) {
 		this.paintLeft = paintLeft;
 		repaint();
 	}
@@ -164,8 +176,9 @@ public class Frente extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Blo
 	 * 
 	 * @return Value of property cancel.
 	 */
+	@Override
 	public boolean isCancel() {
-		return this.cancel;
+		return cancel;
 	}
 
 	/**
@@ -173,7 +186,8 @@ public class Frente extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Blo
 	 * 
 	 * @param cancel New value of property cancel.
 	 */
-	public void setCancel(boolean cancel) {
+	@Override
+	public void setCancel(final boolean cancel) {
 		this.cancel = cancel;
 	}
 }

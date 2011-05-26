@@ -18,75 +18,79 @@ import com.linkare.rec.impl.baseUI.config.Lab;
 
 public abstract class DisplayTreeNodeUtils {
 	/** Disable all the nodes in a lab */
-	public static void disableLab(Lab lab) {
-		if (lab == null)
+	public static void disableLab(final Lab lab) {
+		if (lab == null) {
 			return;
+		}
 
 		lab.setEnabled(false);
-		Apparatus[] apps = lab.getApparatus();
-		for (int i = 0; i < apps.length; i++) {
-			apps[i].setEnabled(false);
-			apps[i].setConnected(false);
+		final Apparatus[] apps = lab.getApparatus();
+		for (final Apparatus app : apps) {
+			app.setEnabled(false);
+			app.setConnected(false);
 
-			Display[] displays = apps[i].getDisplay();
+			final Display[] displays = app.getDisplay();
 			for (int d = 0; d < displays.length; d++) {
-				if (!displays[d].getOfflineCapable())
+				if (!displays[d].getOfflineCapable()) {
 					displays[d].setEnabled(false);
+				}
 			}
 
-			DefaultAcquisitionConfig[] dfacq = apps[i].getDefaultAcquisitionConfig();
-			for (int a = 0; a < dfacq.length; a++) {
-				dfacq[a].setEnabled(false);
+			final DefaultAcquisitionConfig[] dfacq = app.getDefaultAcquisitionConfig();
+			for (final DefaultAcquisitionConfig element : dfacq) {
+				element.setEnabled(false);
 			}
 		}
 	}
 
 	/** Disable all the nodes in a lab */
-	public static void disableAllApparatus(Lab lab) {
-		if (lab == null)
+	public static void disableAllApparatus(final Lab lab) {
+		if (lab == null) {
 			return;
+		}
 
-		Apparatus[] apps = lab.getApparatus();
-		for (int i = 0; i < apps.length; i++) {
-			Display[] displays = apps[i].getDisplay();
+		final Apparatus[] apps = lab.getApparatus();
+		for (final Apparatus app : apps) {
+			final Display[] displays = app.getDisplay();
 			for (int d = 0; d < displays.length; d++) {
-				if (!displays[d].getOfflineCapable())
+				if (!displays[d].getOfflineCapable()) {
 					displays[d].setEnabled(false);
+				}
 			}
 
-			DefaultAcquisitionConfig[] dfacq = apps[i].getDefaultAcquisitionConfig();
-			for (int a = 0; a < dfacq.length; a++) {
-				dfacq[a].setEnabled(false);
+			final DefaultAcquisitionConfig[] dfacq = app.getDefaultAcquisitionConfig();
+			for (final DefaultAcquisitionConfig element : dfacq) {
+				element.setEnabled(false);
 			}
 
-			apps[i].setEnabled(false);
-			apps[i].setConnected(false);
+			app.setEnabled(false);
+			app.setConnected(false);
 		}
 	}
 
-	public static void enableAllApparatusContents(Apparatus app) {
-		com.linkare.rec.impl.baseUI.config.Display[] dps = app.getDisplay();
+	public static void enableAllApparatusContents(final Apparatus app) {
+		final com.linkare.rec.impl.baseUI.config.Display[] dps = app.getDisplay();
 		app.setConnected(true);
-		for (int j = 0; j < dps.length; j++) {
-			dps[j].setEnabled(true);
+		for (final Display dp : dps) {
+			dp.setEnabled(true);
 		}
 
-		com.linkare.rec.impl.baseUI.config.DefaultAcquisitionConfig[] dftacq = app.getDefaultAcquisitionConfig();
-		for (int z = 0; z < dftacq.length; z++) {
-			dftacq[z].setEnabled(true);
+		final com.linkare.rec.impl.baseUI.config.DefaultAcquisitionConfig[] dftacq = app.getDefaultAcquisitionConfig();
+		for (final DefaultAcquisitionConfig element : dftacq) {
+			element.setEnabled(true);
 		}
 	}
 
-	public static void disableAllApparatusContents(Apparatus app) {
-		com.linkare.rec.impl.baseUI.config.Display[] dps = app.getDisplay();
+	public static void disableAllApparatusContents(final Apparatus app) {
+		final com.linkare.rec.impl.baseUI.config.Display[] dps = app.getDisplay();
 		app.setConnected(false);
-		for (int j = 0; j < dps.length; j++) {
-			dps[j].setEnabled(false);
+		for (final Display dp : dps) {
+			dp.setEnabled(false);
 		}
 
-		com.linkare.rec.impl.baseUI.config.DefaultAcquisitionConfig[] dftacq = app.getDefaultAcquisitionConfig();
-		for (int z = 0; z < dftacq.length; z++) {
-			dftacq[z].setEnabled(false);
+		final com.linkare.rec.impl.baseUI.config.DefaultAcquisitionConfig[] dftacq = app.getDefaultAcquisitionConfig();
+		for (final DefaultAcquisitionConfig element : dftacq) {
+			element.setEnabled(false);
 		}
 	}
 }

@@ -11,18 +11,21 @@ public final class VTHardwareAcquisitionConfigSearchListHolder implements Stream
 	public VTHardwareAcquisitionConfigSearchListHolder() {
 	}
 
-	public VTHardwareAcquisitionConfigSearchListHolder(HardwareAcquisitionConfigSearch[] initialValue) {
+	public VTHardwareAcquisitionConfigSearchListHolder(final HardwareAcquisitionConfigSearch[] initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(InputStream i) {
+	@Override
+	public void _read(final InputStream i) {
 		value = VTHardwareAcquisitionConfigSearchListHelper.read(i);
 	}
 
-	public void _write(OutputStream o) {
+	@Override
+	public void _write(final OutputStream o) {
 		VTHardwareAcquisitionConfigSearchListHelper.write(o, value);
 	}
 
+	@Override
 	public TypeCode _type() {
 		return VTHardwareAcquisitionConfigSearchListHelper.type();
 	}

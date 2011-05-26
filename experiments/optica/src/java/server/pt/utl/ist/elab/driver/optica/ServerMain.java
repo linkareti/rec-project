@@ -16,16 +16,16 @@ public class ServerMain {
 	private static String OPTICA_HARDWARE_LOGGER = "OpticaHardware.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(OPTICA_HARDWARE_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ServerMain.OPTICA_HARDWARE_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(OPTICA_HARDWARE_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ServerMain.OPTICA_HARDWARE_LOGGER));
 		}
 	}
 
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		try {
 			ORBBean.getORBBean();
 
@@ -33,12 +33,12 @@ public class ServerMain {
 
 			try {
 				Thread.currentThread().join();
-			} catch (Exception ignored) {
+			} catch (final Exception ignored) {
 			}
 
 			ORBBean.getORBBean().killORB();
-		} catch (Exception e) {
-			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(OPTICA_HARDWARE_LOGGER));
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(ServerMain.OPTICA_HARDWARE_LOGGER));
 		}
 	}
 

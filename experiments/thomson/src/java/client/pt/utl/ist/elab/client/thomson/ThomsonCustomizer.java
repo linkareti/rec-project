@@ -11,12 +11,19 @@ package pt.utl.ist.elab.client.thomson;
  * @author André Neto - LEFT - IST
  */
 
+import javax.swing.SwingConstants;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.client.customizer.ICustomizerListener;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2142273204510667774L;
+
 	/** Creates new form ThomsonCustomizer */
 	public ThomsonCustomizer() {
 		initComponents();
@@ -80,7 +87,8 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 		jSliderTAce.setPreferredSize(new java.awt.Dimension(300, 59));
 		jSliderTAce.setValueIsAdjusting(true);
 		jSliderTAce.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderTAceStateChanged(evt);
 			}
 		});
@@ -95,11 +103,12 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 
 		jTextFieldTAce.setBackground(new java.awt.Color(0, 255, 255));
 		jTextFieldTAce.setColumns(5);
-		jTextFieldTAce.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		jTextFieldTAce.setHorizontalAlignment(SwingConstants.RIGHT);
 		jTextFieldTAce.setText("4000");
 		jTextFieldTAce.setVerifyInputWhenFocusTarget(false);
 		jTextFieldTAce.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldTAceFocusLost(evt);
 			}
 		});
@@ -126,7 +135,8 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 		jSliderTDef.setEnabled(false);
 		jSliderTDef.setValueIsAdjusting(true);
 		jSliderTDef.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderTDefStateChanged(evt);
 			}
 		});
@@ -141,12 +151,13 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 
 		jTextFieldTDef.setBackground(new java.awt.Color(0, 255, 255));
 		jTextFieldTDef.setColumns(5);
-		jTextFieldTDef.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		jTextFieldTDef.setHorizontalAlignment(SwingConstants.RIGHT);
 		jTextFieldTDef.setText("0");
 		jTextFieldTDef.setVerifyInputWhenFocusTarget(false);
 		jTextFieldTDef.setEnabled(false);
 		jTextFieldTDef.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldTDefFocusLost(evt);
 			}
 		});
@@ -175,7 +186,8 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 		jSliderIHelm.setPreferredSize(new java.awt.Dimension(300, 59));
 		jSliderIHelm.setValueIsAdjusting(true);
 		jSliderIHelm.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderIHelmStateChanged(evt);
 			}
 		});
@@ -190,11 +202,12 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 
 		jTextFieldIHelm.setBackground(new java.awt.Color(0, 255, 255));
 		jTextFieldIHelm.setColumns(5);
-		jTextFieldIHelm.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		jTextFieldIHelm.setHorizontalAlignment(SwingConstants.RIGHT);
 		jTextFieldIHelm.setText("800");
 		jTextFieldIHelm.setVerifyInputWhenFocusTarget(false);
 		jTextFieldIHelm.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldIHelmFocusLost(evt);
 			}
 		});
@@ -218,7 +231,8 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 		jRadioButtonB.setText(ReCResourceBundle.findString("thomson$rec.exp.thomson.lbl.magdef"));
 		buttonGroup1.add(jRadioButtonB);
 		jRadioButtonB.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseReleased(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mouseReleased(final java.awt.event.MouseEvent evt) {
 				jRadioButtonBMouseReleased(evt);
 			}
 		});
@@ -228,7 +242,8 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 		jRadioButtonF.setText(ReCResourceBundle.findString("thomson$rec.exp.thomson.lbl.eqforce"));
 		buttonGroup1.add(jRadioButtonF);
 		jRadioButtonF.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseReleased(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mouseReleased(final java.awt.event.MouseEvent evt) {
 				jRadioButtonFMouseReleased(evt);
 			}
 		});
@@ -255,7 +270,8 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 		jButtonOK.setFont(new java.awt.Font("Comic Sans MS", 1, 12));
 		jButtonOK.setText(ReCResourceBundle.findString("thomson$rec.exp.thomson.lbl.ok"));
 		jButtonOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonOKActionPerformed(evt);
 			}
 		});
@@ -268,7 +284,8 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 		jButtonCancel.setFont(new java.awt.Font("Comic Sans MS", 1, 12));
 		jButtonCancel.setText(ReCResourceBundle.findString("thomson$rec.exp.thomson.lbl.cancel"));
 		jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonCancelActionPerformed(evt);
 			}
 		});
@@ -288,7 +305,8 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 		jButtonDefaults.setFont(new java.awt.Font("Comic Sans MS", 1, 12));
 		jButtonDefaults.setText(ReCResourceBundle.findString("thomson$rec.exp.dftcfg.thomson.title.1"));
 		jButtonDefaults.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonDefaultsActionPerformed(evt);
 			}
 		});
@@ -309,12 +327,12 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 
 	}// GEN-END:initComponents
 
-	private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonCancelActionPerformed
+	private void jButtonCancelActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonCancelActionPerformed
 	{// GEN-HEADEREND:event_jButtonCancelActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_jButtonCancelActionPerformed
 
-	private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonOKActionPerformed
+	private void jButtonOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonOKActionPerformed
 	{// GEN-HEADEREND:event_jButtonOKActionPerformed
 		acqConfig.getSelectedHardwareParameter("correntebobines").setParameterValue("" + jSliderIHelm.getValue());
 		acqConfig.getSelectedHardwareParameter("tensaoaceleracao").setParameterValue("" + jSliderTAce.getValue());
@@ -325,7 +343,7 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_jButtonOKActionPerformed
 
-	private void jButtonDefaultsActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonDefaultsActionPerformed
+	private void jButtonDefaultsActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonDefaultsActionPerformed
 	{// GEN-HEADEREND:event_jButtonDefaultsActionPerformed
 		jRadioButtonB.setSelected(true);
 		jCheckBoxVideo.setSelected(false);
@@ -338,68 +356,71 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 		jSliderIHelm.setValue(400);
 	}// GEN-LAST:event_jButtonDefaultsActionPerformed
 
-	private void jRadioButtonFMouseReleased(java.awt.event.MouseEvent evt)// GEN-FIRST:event_jRadioButtonFMouseReleased
+	private void jRadioButtonFMouseReleased(final java.awt.event.MouseEvent evt)// GEN-FIRST:event_jRadioButtonFMouseReleased
 	{// GEN-HEADEREND:event_jRadioButtonFMouseReleased
 		jSliderTDef.setEnabled(true);
 		jTextFieldTDef.setEnabled(true);
 		jSliderTDef.setValue(jSliderTAce.getValue());
 	}// GEN-LAST:event_jRadioButtonFMouseReleased
 
-	private void jRadioButtonBMouseReleased(java.awt.event.MouseEvent evt)// GEN-FIRST:event_jRadioButtonBMouseReleased
+	private void jRadioButtonBMouseReleased(final java.awt.event.MouseEvent evt)// GEN-FIRST:event_jRadioButtonBMouseReleased
 	{// GEN-HEADEREND:event_jRadioButtonBMouseReleased
 		jSliderTDef.setEnabled(false);
 		jTextFieldTDef.setEnabled(false);
 		jSliderTDef.setValue(0);
 	}// GEN-LAST:event_jRadioButtonBMouseReleased
 
-	private void jTextFieldIHelmFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldIHelmFocusLost
+	private void jTextFieldIHelmFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldIHelmFocusLost
 	{// GEN-HEADEREND:event_jTextFieldIHelmFocusLost
 		adjustSlider(jSliderIHelm, jTextFieldIHelm);
 	}// GEN-LAST:event_jTextFieldIHelmFocusLost
 
-	private void jSliderIHelmStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderIHelmStateChanged
+	private void jSliderIHelmStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderIHelmStateChanged
 	{// GEN-HEADEREND:event_jSliderIHelmStateChanged
 		jTextFieldIHelm.setText("" + jSliderIHelm.getValue());
 	}// GEN-LAST:event_jSliderIHelmStateChanged
 
-	private void jTextFieldTDefFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldTDefFocusLost
+	private void jTextFieldTDefFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldTDefFocusLost
 	{// GEN-HEADEREND:event_jTextFieldTDefFocusLost
 		adjustSlider(jSliderTDef, jTextFieldTDef);
 	}// GEN-LAST:event_jTextFieldTDefFocusLost
 
-	private void jSliderTDefStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderTDefStateChanged
+	private void jSliderTDefStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderTDefStateChanged
 	{// GEN-HEADEREND:event_jSliderTDefStateChanged
 		jTextFieldTDef.setText("" + jSliderTDef.getValue());
 		if (jSliderTDef.isEnabled() && jSliderTDef.getValue() < 500) {
 			jSliderTDef.setValue(500);
 		}
-		if (jSliderTDef.isEnabled())
+		if (jSliderTDef.isEnabled()) {
 			jSliderTAce.setValue(jSliderTDef.getValue());
+		}
 	}// GEN-LAST:event_jSliderTDefStateChanged
 
-	private void jTextFieldTAceFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldTAceFocusLost
+	private void jTextFieldTAceFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldTAceFocusLost
 	{// GEN-HEADEREND:event_jTextFieldTAceFocusLost
 		adjustSlider(jSliderTAce, jTextFieldTAce);
 	}// GEN-LAST:event_jTextFieldTAceFocusLost
 
-	private void jSliderTAceStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderTAceStateChanged
+	private void jSliderTAceStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderTAceStateChanged
 	{// GEN-HEADEREND:event_jSliderTAceStateChanged
 		jTextFieldTAce.setText("" + jSliderTAce.getValue());
-		if (jSliderTDef.isEnabled())
+		if (jSliderTDef.isEnabled()) {
 			jSliderTDef.setValue(jSliderTAce.getValue());
+		}
 	}// GEN-LAST:event_jSliderTAceStateChanged
 
-	private void adjustSlider(javax.swing.JSlider slider, javax.swing.JTextField field) {
+	private void adjustSlider(final javax.swing.JSlider slider, final javax.swing.JTextField field) {
 		int num = 0;
 		try {
 			num = Integer.parseInt(field.getText().trim());
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 			field.setText("" + slider.getValue());
 		}
-		if (num > slider.getMaximum() || num < slider.getMinimum())
+		if (num > slider.getMaximum() || num < slider.getMinimum()) {
 			field.setText("" + slider.getValue());
-		else
+		} else {
 			slider.setValue(num);
+		}
 	}
 
 	/*
@@ -416,7 +437,8 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -428,7 +450,8 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -438,9 +461,10 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -454,9 +478,10 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -468,46 +493,53 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
 		return acqConfig;
 	}
 
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
-			int ta = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("tensaoaceleracao"));
+			final int ta = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("tensaoaceleracao"));
 			jSliderTAce.setValue(ta);
-			int bobines = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("correntebobines"));
+			final int bobines = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("correntebobines"));
 			jSliderIHelm.setValue(bobines);
-			int video = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("video"));
+			final int video = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("video"));
 			jCheckBoxVideo.setSelected(video == 1);
-			String modo = acqConfig.getSelectedHardwareParameterValue("modo");
+			final String modo = acqConfig.getSelectedHardwareParameterValue("modo");
 
 			jRadioButtonB.setSelected(modo.equals("defmag"));
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
+	@Override
 	public javax.swing.JComponent getCustomizerComponent() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/thomson/resources/thomson_iconified.png"));
 	}
 
+	@Override
 	public String getCustomizerTitle() {
 		return ReCResourceBundle.findString("thomson$rec.exp.thomson.customizer.title");
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}

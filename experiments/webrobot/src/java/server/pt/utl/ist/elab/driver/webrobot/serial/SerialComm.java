@@ -70,9 +70,9 @@ public class SerialComm implements gnu.io.SerialPortEventListener {
 		setWriteMode();
 	}
 
-	public SerialComm(pt.utl.ist.elab.driver.webrobot.debug.ReadWrite readWrite) {
+	public SerialComm(final pt.utl.ist.elab.driver.webrobot.debug.ReadWrite readWrite) {
 		readProps();
-		this.readWrite = readWrite;
+		SerialComm.readWrite = readWrite;
 		configurePort();
 		setWriteMode();
 	}
@@ -85,7 +85,7 @@ public class SerialComm implements gnu.io.SerialPortEventListener {
 			props = new java.util.Properties();
 			props.load(is);
 			is.close();
-		} catch (java.io.FileNotFoundException fnfe) {
+		} catch (final java.io.FileNotFoundException fnfe) {
 			System.out.println("Couldn't found the file...\n" + fnfe);
 			resourceLocation = getClass().getResource(
 					"/pt/utl/ist/elab/driver/webrobot/configs/WebRobotProps.properties").getFile();
@@ -95,72 +95,73 @@ public class SerialComm implements gnu.io.SerialPortEventListener {
 				props = new java.util.Properties();
 				props.load(is);
 				is.close();
-			} catch (java.io.FileNotFoundException fnfe2) {
+			} catch (final java.io.FileNotFoundException fnfe2) {
 				System.out.println("Couldn't found the file...\n" + fnfe2);
-			} catch (java.io.IOException ioe2) {
+			} catch (final java.io.IOException ioe2) {
 				System.out.println("Exception...\n" + ioe2);
 			}
-		} catch (java.io.IOException ioe) {
+		} catch (final java.io.IOException ioe) {
 			System.out.println("Exception...\n" + ioe);
 		}
-		comName = props.getProperty("comName");
-		baud = Integer.parseInt(props.getProperty("baud"), 10);
-		databits = Integer.parseInt(props.getProperty("databits"), 10);
-		flowcontrol = Integer.parseInt(props.getProperty("flowcontrol"), 10);
-		parity = Integer.parseInt(props.getProperty("parity"), 10);
-		stopbits = Integer.parseInt(props.getProperty("stopbits"), 10);
+		SerialComm.comName = props.getProperty("comName");
+		SerialComm.baud = Integer.parseInt(props.getProperty("baud"), 10);
+		SerialComm.databits = Integer.parseInt(props.getProperty("databits"), 10);
+		SerialComm.flowcontrol = Integer.parseInt(props.getProperty("flowcontrol"), 10);
+		SerialComm.parity = Integer.parseInt(props.getProperty("parity"), 10);
+		SerialComm.stopbits = Integer.parseInt(props.getProperty("stopbits"), 10);
 	}
 
 	public synchronized void configurePort() {
 		try {
-			commPortIdentifier = gnu.io.CommPortIdentifier.getPortIdentifier(comName);
-		} catch (gnu.io.NoSuchPortException nspe) {
-			System.out.println("A porta:" + comName + " n�o foi encontrada\n" + nspe);
+			SerialComm.commPortIdentifier = gnu.io.CommPortIdentifier.getPortIdentifier(SerialComm.comName);
+		} catch (final gnu.io.NoSuchPortException nspe) {
+			System.out.println("A porta:" + SerialComm.comName + " n�o foi encontrada\n" + nspe);
 			return;
 		}
 
 		try {
-			serialPort = (gnu.io.SerialPort) commPortIdentifier.open(appName, 2000);
-		} catch (gnu.io.PortInUseException piue) {
+			SerialComm.serialPort = (gnu.io.SerialPort) SerialComm.commPortIdentifier.open(SerialComm.appName, 2000);
+		} catch (final gnu.io.PortInUseException piue) {
 			System.out.println("Esta porta est� a ser usada por outra aplica��o\n" + piue);
 			return;
 		}
 
 		try {
-			serialPort.setSerialPortParams(baud, databits, stopbits, parity);
-		} catch (gnu.io.UnsupportedCommOperationException ucoe) {
+			SerialComm.serialPort.setSerialPortParams(SerialComm.baud, SerialComm.databits, SerialComm.stopbits,
+					SerialComm.parity);
+		} catch (final gnu.io.UnsupportedCommOperationException ucoe) {
 			System.out.println("N�o consegui abrir a porta com os parametros selecionados!\n" + ucoe
 					+ "\nA porta ser� fechada");
-			System.out.println("baud=" + baud);
-			System.out.println("databits=" + databits);
+			System.out.println("baud=" + SerialComm.baud);
+			System.out.println("databits=" + SerialComm.databits);
 			System.out.println("databits_default=" + gnu.io.SerialPort.DATABITS_8);
-			System.out.println("stopbits=" + stopbits);
+			System.out.println("stopbits=" + SerialComm.stopbits);
 			System.out.println("stopbits_default=" + gnu.io.SerialPort.STOPBITS_1);
-			System.out.println("parity=" + parity);
+			System.out.println("parity=" + SerialComm.parity);
 			System.out.println("parity_none=" + gnu.io.SerialPort.PARITY_NONE);
-			serialPort.close();
+			SerialComm.serialPort.close();
 			return;
 		}
 
 		try {
-			serialPort.setFlowControlMode(flowcontrol);
-		} catch (gnu.io.UnsupportedCommOperationException ucoe) {
+			SerialComm.serialPort.setFlowControlMode(SerialComm.flowcontrol);
+		} catch (final gnu.io.UnsupportedCommOperationException ucoe) {
 			System.out.println("O flow control escolhido n�o � suportado...\n" + ucoe + "\nA porta ser� fechada");
-			serialPort.close();
+			SerialComm.serialPort.close();
 			return;
 		}
 
 		try {
-			serialPort.addEventListener(this);
-			serialPort.notifyOnDataAvailable(true);
-		} catch (java.util.TooManyListenersException tmle) {
+			SerialComm.serialPort.addEventListener(this);
+			SerialComm.serialPort.notifyOnDataAvailable(true);
+		} catch (final java.util.TooManyListenersException tmle) {
 			System.out.println("Demasiados listeners...\n" + tmle);
 		}
 
 		try {
-			inputStream = serialPort.getInputStream();
-			outputStream = serialPort.getOutputStream();
-		} catch (java.io.IOException ioe) {
+			SerialComm.inputStream = SerialComm.serialPort.getInputStream();
+			SerialComm.outputStream = SerialComm.serialPort.getOutputStream();
+		} catch (final java.io.IOException ioe) {
 			System.out.println("N�o consegui criar as streams...\n" + ioe);
 		}
 		setPortOpened(true);
@@ -178,9 +179,9 @@ public class SerialComm implements gnu.io.SerialPortEventListener {
 		}
 		setWriteMode();
 		try {
-			outputStream.write((byte) data);
-			outputStream.flush();
-		} catch (java.io.IOException ioe) {
+			SerialComm.outputStream.write((byte) data);
+			SerialComm.outputStream.flush();
+		} catch (final java.io.IOException ioe) {
 			System.out.println("N�o consegui escrever na porta s�rie\n" + ioe);
 		}
 		/**
@@ -244,17 +245,18 @@ public class SerialComm implements gnu.io.SerialPortEventListener {
 	private int readByte = 0;
 	private int nBytes = 0;
 
-	public synchronized void serialEvent(gnu.io.SerialPortEvent serialPortEvent) {
+	@Override
+	public synchronized void serialEvent(final gnu.io.SerialPortEvent serialPortEvent) {
 		try {
 			if (serialPortEvent.getEventType() == gnu.io.SerialPortEvent.DATA_AVAILABLE) {
-				if (serialPort.isRTS()) {
+				if (SerialComm.serialPort.isRTS()) {
 					return;
 				}
 				Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 
 				try {
-					while (inputStream.available() > 0) {
-						readByte = inputStream.read();
+					while (SerialComm.inputStream.available() > 0) {
+						readByte = SerialComm.inputStream.read();
 
 						/**
 						 * If an 'A' (waitConf=false)was received first and it
@@ -289,7 +291,7 @@ public class SerialComm implements gnu.io.SerialPortEventListener {
 							break;
 						}
 					}
-				} catch (java.io.IOException ioe) {
+				} catch (final java.io.IOException ioe) {
 					System.out.println("Erros ao ler da porta s�rie\n" + ioe);
 				}
 
@@ -299,13 +301,13 @@ public class SerialComm implements gnu.io.SerialPortEventListener {
 					if (robotStateMachine != null) {
 						robotStateMachine.setNewData(true);
 					}
-					if (readWrite != null) {
-						readWrite.setValues(sensorsState);
+					if (SerialComm.readWrite != null) {
+						SerialComm.readWrite.setValues(sensorsState);
 					}
 					arrayFilled = false;
 				}
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			System.out.println(e);
 		}
 	}
@@ -317,11 +319,11 @@ public class SerialComm implements gnu.io.SerialPortEventListener {
 	}
 
 	public void setWriteMode() {
-		serialPort.setRTS(true);
+		SerialComm.serialPort.setRTS(true);
 	}
 
 	public void setReadMode() {
-		serialPort.setRTS(false);
+		SerialComm.serialPort.setRTS(false);
 	}
 
 	private boolean restarting = false;
@@ -330,26 +332,27 @@ public class SerialComm implements gnu.io.SerialPortEventListener {
 		restarting = true;
 		setWriteMode();
 		try {
-			Thread.currentThread().sleep(100);
-		} catch (InterruptedException ie) {
+			Thread.currentThread();
+			Thread.sleep(100);
+		} catch (final InterruptedException ie) {
 		}
 		restarting = false;
 	}
 
-	public void registerStateMachine(RobotStateMachine robotStateMachine) {
+	public void registerStateMachine(final RobotStateMachine robotStateMachine) {
 		this.robotStateMachine = robotStateMachine;
 	}
 
 	public boolean isPortOpened() {
-		return portOpened;
+		return SerialComm.portOpened;
 	}
 
-	public void setPortOpened(boolean portOpened) {
-		this.portOpened = portOpened;
+	public void setPortOpened(final boolean portOpened) {
+		SerialComm.portOpened = portOpened;
 	}
 
 	public String getSerialData() {
-		return arrivedString;
+		return SerialComm.arrivedString;
 	}
 
 	public void closePort() {
@@ -357,12 +360,12 @@ public class SerialComm implements gnu.io.SerialPortEventListener {
 			return;
 		}
 		try {
-			outputStream.close();
-			inputStream.close();
-		} catch (java.io.IOException ioe) {
+			SerialComm.outputStream.close();
+			SerialComm.inputStream.close();
+		} catch (final java.io.IOException ioe) {
 			System.out.println("N�o consegui fechar as streams");
 		}
-		serialPort.close();
+		SerialComm.serialPort.close();
 		setPortOpened(false);
 	}
 }

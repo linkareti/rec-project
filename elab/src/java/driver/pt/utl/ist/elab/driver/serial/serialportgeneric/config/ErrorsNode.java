@@ -69,7 +69,7 @@ public class ErrorsNode {
 		if (error == null) {
 			error = new ArrayList<OneErrorNode>();
 		}
-		return this.error;
+		return error;
 	}
 
 }

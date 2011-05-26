@@ -31,13 +31,14 @@ import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
 import com.linkare.rec.impl.utils.QueueLogger;
 
-public abstract class AbstractStampDriver extends BaseDriver implements StampFinderListener, StampCommandListener, QueueLogger {
+public abstract class AbstractStampDriver extends BaseDriver implements StampFinderListener, StampCommandListener,
+		QueueLogger {
 	protected static String STAMP_DRIVER_LOGGER = "StampDriver.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(STAMP_DRIVER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(STAMP_DRIVER_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER));
 		}
 	}
 
@@ -49,7 +50,7 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 
 	private BaseStampIO stampIO = null;
 	private StampFinder stampFinder = new StampFinder();
-	private EventQueue stampCommands;
+	private final EventQueue stampCommands;
 	protected AbstractStampDataSource dataSource = null;
 
 	public AbstractStampDriver() {
@@ -73,29 +74,34 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 	protected abstract void loadExtraCommandHandlers();
 
 	/*** Base Driver impl ***/
-	public void extraValidateConfig(HardwareAcquisitionConfig config, HardwareInfo info)
+	@Override
+	public void extraValidateConfig(final HardwareAcquisitionConfig config, final HardwareInfo info)
 			throws WrongConfigurationException {
 		// silent noop - main validation is OK
 	}
 
+	@Override
 	public String getDriverUniqueID() {
-		return ID_STR;
+		return AbstractStampDriver.ID_STR;
 	}
 
-	public void setDriverUniqueID(String IdStr) {
-		ID_STR = IdStr;
+	public void setDriverUniqueID(final String IdStr) {
+		AbstractStampDriver.ID_STR = IdStr;
 		stampFinder.setStampIdentifier(IdStr);
 	}
 
-	public void init(HardwareInfo info) {
+	@Override
+	public void init(final HardwareInfo info) {
 
-		if (stampIO != null)
+		if (stampIO != null) {
 			stampIO.shutdown();
+		}
 
 		stampIO = null;
 		stampFinder.startSearch();
 		try {
 			WaitForConditionResult.waitForConditionTrue(new AbstractConditionDecisor() {
+				@Override
 				public ConditionResult getConditionResult() {
 					synchronized (stampFinder) {
 						if (stampIO != null) {
@@ -105,44 +111,49 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 					return ConditionResult.CONDITION_NOT_MET;
 				}
 			}, 120 * 1000, stampFinder.getTimeOutPerPort());
-		} catch (TimedOutException e) {
-			LoggerUtil.logThrowable("Couldn't find port for STAMP in " + 120 + "s", e, Logger
-					.getLogger(STAMP_DRIVER_LOGGER));
+		} catch (final TimedOutException e) {
+			LoggerUtil.logThrowable("Couldn't find port for STAMP in " + 120 + "s", e,
+					Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER));
 
 		}
 
 		if (stampIO != null) {
 			fireIDriverStateListenerDriverInited();
-		} else
+		} else {
 			fireIDriverStateListenerDriverShutdown();
+		}
 	}
 
 	protected HardwareAcquisitionConfig config = null;
 	protected HardwareInfo info = null;
 
-	public void reset(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public void reset(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverReseting();
 		stampIO.reopen();
 		fireIDriverStateListenerDriverReseted();
 	}
 
+	@Override
 	public void shutdown() {
-		if (stampIO != null)
+		if (stampIO != null) {
 			stampIO.shutdown();
+		}
 
 		super.shutDownNow();
 	}
 
-	public IDataSource start(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public IDataSource start(final HardwareInfo info) throws IncorrectStateException {
 		dataSource = initDataSource();
 		dataSource.setAcquisitionHeader(getAcquisitionHeader());
 
 		if (dataSource != null) {
 			try {
 				startNow();
-			} catch (TimedOutException e) {
-				LoggerUtil.logThrowable("Error on start... - rethrowing IncorrectStateException!", e, Logger
-						.getLogger(STAMP_DRIVER_LOGGER));
+			} catch (final TimedOutException e) {
+				LoggerUtil.logThrowable("Error on start... - rethrowing IncorrectStateException!", e,
+						Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER));
 				// I'll try to reopen the stamp...this way it il not get stuck
 				// here...at least I hope so!
 				fireIDriverStateListenerDriverReseting();
@@ -151,20 +162,23 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 				throw new IncorrectStateException();
 			}
 			return dataSource;
-		} else
+		} else {
 			return null;
+		}
 
 	}
 
 	public abstract void startNow() throws TimedOutException;
 
-	public IDataSource startOutput(HardwareInfo info, IDataSource source) throws IncorrectStateException {
+	@Override
+	public IDataSource startOutput(final HardwareInfo info, final IDataSource source) throws IncorrectStateException {
 		// big silent noop - does nothing -
 		// current version does not support startOutput
 		return null;
 	}
 
-	public void stop(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public void stop(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverStoping();
 		stampIO.reopen();
 		fireIDriverStateListenerDriverStoped();
@@ -175,7 +189,8 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 	}
 
 	/** StampFinderListener impl **/
-	public void stampFound(SerialPort sPort) {
+	@Override
+	public void stampFound(final SerialPort sPort) {
 		synchronized (stampFinder) {
 			stampIO = new BaseStampIO();
 			stampIO.setApplicationNameLockPort(stampFinder.getApplicationNameLockPort());
@@ -191,31 +206,35 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 		}
 	}
 
-	public void handleStampCommand(StampCommand command) {
-		StampProcessor processor = command.getProcessor();
+	@Override
+	public void handleStampCommand(final StampCommand command) {
+		final StampProcessor processor = command.getProcessor();
 		if (processor == null) {
-			Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO,
+			Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER).log(Level.INFO,
 					"Didn't get a processor for command " + command.getCommandIdentifier());
-			Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO, "Droping the command, as it is not understood!");
+			Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER).log(Level.INFO,
+					"Droping the command, as it is not understood!");
 			return;
 		}
 
 		if (processor.isData() && dataSource != null) {
 			if (!processor.process(command)) {
-				Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO,
+				Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER).log(Level.INFO,
 						"Couldn't process data command in CommandDispatcher... Strange...");
 				return;
 			}
 
-			if (dataSource != null)
+			if (dataSource != null) {
 				dataSource.processDataCommand(command);
-			else
-				Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO, "No data source to process command...");
+			} else {
+				Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER).log(Level.INFO,
+						"No data source to process command...");
+			}
 
 			// stampCommands.addEvent(command);
 		} else {
 			if (!processor.process(command)) {
-				Logger.getLogger(STAMP_DRIVER_LOGGER).log(
+				Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER).log(
 						Level.INFO,
 						"The processor didn't understand the message... Ooooppsss... Message was : "
 								+ command.getCommand() + " !");
@@ -233,7 +252,8 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 
 	public class CommandDispatcher implements EventQueueDispatcher {
 
-		public void dispatchEvent(Object evt) {
+		@Override
+		public void dispatchEvent(final Object evt) {
 			/*
 			 * if(evt instanceof StampCommand) { StampCommand
 			 * cmd=(StampCommand)evt; StampProcessor
@@ -250,15 +270,17 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 			 * ); } else
 			 */
 			if (evt instanceof StopEvent) {
-				if (dataSource != null)
+				if (dataSource != null) {
 					// dataSource.setRunning(false);
 					dataSource.stopNow();
+				}
 			} else {
-				Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO,
+				Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER).log(Level.INFO,
 						"CommandDispatcher doesn't know how to deal with other than StampCommand's");
 			}
 		}
 
+		@Override
 		public int getPriority() {
 			return Thread.NORM_PRIORITY + 2;
 		}
@@ -282,7 +304,7 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 	 * @param applicationNameLockPort New value of property
 	 *            applicationNameLockPort.
 	 */
-	public void setApplicationNameLockPort(String applicationNameLockPort) {
+	public void setApplicationNameLockPort(final String applicationNameLockPort) {
 		stampFinder.setApplicationNameLockPort(applicationNameLockPort);
 	}
 
@@ -300,7 +322,7 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 	 * 
 	 * @param portParity New value of property portParity.
 	 */
-	public void setPortParity(int portParity) {
+	public void setPortParity(final int portParity) {
 		stampFinder.setPortParity(portParity);
 	}
 
@@ -318,7 +340,7 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 	 * 
 	 * @param portBaudRate New value of property portBaudRate.
 	 */
-	public void setPortBaudRate(int portBaudRate) {
+	public void setPortBaudRate(final int portBaudRate) {
 		stampFinder.setPortBaudRate(portBaudRate);
 	}
 
@@ -336,7 +358,7 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 	 * 
 	 * @param portDataBits New value of property portDataBits.
 	 */
-	public void setPortDataBits(int portDataBits) {
+	public void setPortDataBits(final int portDataBits) {
 		stampFinder.setPortDataBits(portDataBits);
 	}
 
@@ -354,7 +376,7 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 	 * 
 	 * @param portStopBits New value of property portStopBits.
 	 */
-	public void setPortStopBits(int portStopBits) {
+	public void setPortStopBits(final int portStopBits) {
 		stampFinder.setPortStopBits(portStopBits);
 	}
 
@@ -372,7 +394,7 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 	 * 
 	 * @param timeOutPerPort New value of property timeOutPerPort.
 	 */
-	public void setTimeOutPerPort(long timeOutPerPort) {
+	public void setTimeOutPerPort(final long timeOutPerPort) {
 		stampFinder.setTimeOutPerPort(timeOutPerPort);
 	}
 
@@ -392,7 +414,7 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 	 * @param DTR New value of property DTR.
 	 * 
 	 */
-	public void setDTR(boolean DTR) {
+	public void setDTR(final boolean DTR) {
 		stampFinder.setDTR(DTR);
 	}
 
@@ -412,7 +434,7 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 	 * @param RTS New value of property RTS.
 	 * 
 	 */
-	public void setRTS(boolean RTS) {
+	public void setRTS(final boolean RTS) {
 		stampFinder.setRTS(RTS);
 	}
 
@@ -432,29 +454,30 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 	 * @param waitForEcho New value of property waitForEcho.
 	 * 
 	 */
-	public void setWaitForEcho(boolean waitForEcho) {
+	public void setWaitForEcho(final boolean waitForEcho) {
 		stampFinder.setWaitForEcho(waitForEcho);
 	}
 
-	protected void writeMessage(String message) {
-		if (stampIO != null)
+	protected void writeMessage(final String message) {
+		if (stampIO != null) {
 			stampIO.writeMessage(message);
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void log(Level debugLevel, String message) {
-		Logger.getLogger(STAMP_DRIVER_LOGGER).log(debugLevel, message);
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void logThrowable(String message, Throwable t) {
-		LoggerUtil.logThrowable(message, t, Logger.getLogger(STAMP_DRIVER_LOGGER));
+	public void log(final Level debugLevel, final String message) {
+		Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER).log(debugLevel, message);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void logThrowable(final String message, final Throwable t) {
+		LoggerUtil.logThrowable(message, t, Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER));
 	}
 
 }

@@ -79,7 +79,7 @@ public class DataConfigInternationalization {
 		// Static class
 	}
 
-	public static String toString(Scale scale) {
+	public static String toString(final Scale scale) {
 		if (scale == null) {
 			return String.valueOf(scale);
 		}
@@ -92,94 +92,122 @@ public class DataConfigInternationalization {
 				+ scale.getPhysicsUnitSymbol() + " - " + ReCResourceBundle.findString(scale.getPhysicsUnitName());
 	}
 
-	public static String toString(ChannelAcquisitionConfig config) {
+	public static String toString(final ChannelAcquisitionConfig config) {
 		if (config == null) {
 			return String.valueOf(config);
 		}
 
-		StringBuilder strBufOut = new StringBuilder();
-		String linesep = System.getProperty("line.separator");
+		final StringBuilder strBufOut = new StringBuilder();
+		final String linesep = System.getProperty("line.separator");
 
-		if (config.getChannelName() != null)
-			strBufOut.append("\t" + CHANNEL_NAME).append(ReCResourceBundle.findString(config.getChannelName()))
-					.append(linesep);
+		if (config.getChannelName() != null) {
+			strBufOut.append("\t" + DataConfigInternationalization.CHANNEL_NAME)
+					.append(ReCResourceBundle.findString(config.getChannelName())).append(linesep);
+		}
 
-		if (config.getTimeStart() != null)
-			strBufOut.append("\t" + CHANNEL_START_TIME).append(config.getTimeStart().toSimpleString()).append(linesep);
+		if (config.getTimeStart() != null) {
+			strBufOut.append("\t" + DataConfigInternationalization.CHANNEL_START_TIME)
+					.append(config.getTimeStart().toSimpleString()).append(linesep);
+		}
 
-		if (config.getSelectedFrequency() != null)
-			strBufOut.append("\t" + CHANNEL_FREQUENCY).append(config.getSelectedFrequency()).append(linesep);
+		if (config.getSelectedFrequency() != null) {
+			strBufOut.append("\t" + DataConfigInternationalization.CHANNEL_FREQUENCY)
+					.append(config.getSelectedFrequency()).append(linesep);
+		}
 
-		if (config.getSelectedScale() != null)
-			strBufOut.append("\t" + CHANNEL_SCALE).append(toString(config.getSelectedScale())).append(linesep);
+		if (config.getSelectedScale() != null) {
+			strBufOut.append("\t" + DataConfigInternationalization.CHANNEL_SCALE)
+					.append(DataConfigInternationalization.toString(config.getSelectedScale())).append(linesep);
+		}
 
-		if (config.getTotalSamples() != com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value)
-			strBufOut.append("\t" + CHANNEL_TOTAL_SAMPLES).append(config.getTotalSamples()).append(linesep);
-		else if (config.getTotalSamples() == com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value)
-			strBufOut.append("\t" + CHANNEL_TOTAL_SAMPLES_UNDETERMINED).append(linesep);
+		if (config.getTotalSamples() != com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value) {
+			strBufOut.append("\t" + DataConfigInternationalization.CHANNEL_TOTAL_SAMPLES)
+					.append(config.getTotalSamples()).append(linesep);
+		} else if (config.getTotalSamples() == com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value) {
+			strBufOut.append("\t" + DataConfigInternationalization.CHANNEL_TOTAL_SAMPLES_UNDETERMINED).append(linesep);
+		}
 
 		if (config.getSelectedChannelParameters() != null) {
-			strBufOut.append("\t" + CHANNEL_PARAMETERS).append(linesep);
+			strBufOut.append("\t" + DataConfigInternationalization.CHANNEL_PARAMETERS).append(linesep);
 			for (int i = 0; i < config.getSelectedChannelParameters().length; i++) {
-				if (config.getSelectedChannelParameters(i) != null)
+				if (config.getSelectedChannelParameters(i) != null) {
 					strBufOut.append("\t\t").append(config.getSelectedChannelParameters(i)).append(linesep);
+				}
 			}
 		}
 
 		return strBufOut.toString();
 	}
 
-	public static String toString(HardwareAcquisitionConfig config) {
+	public static String toString(final HardwareAcquisitionConfig config) {
 		if (config == null) {
 			return String.valueOf(config);
 		}
 
-		StringBuilder strBufOut = new StringBuilder();
-		String linesep = System.getProperty("line.separator");
+		final StringBuilder strBufOut = new StringBuilder();
+		final String linesep = System.getProperty("line.separator");
 
-		if (config.getFamiliarName() != null)
-			strBufOut.append(APPARATUS).append(config.getFamiliarName()).append(linesep);
+		if (config.getFamiliarName() != null) {
+			strBufOut.append(DataConfigInternationalization.APPARATUS).append(config.getFamiliarName()).append(linesep);
+		}
 
-		if (config.getTimeStart() != null)
-			strBufOut.append(EXPERIENCE_START_TIME).append(config.getTimeStart().toSimpleString()).append(linesep);
+		if (config.getTimeStart() != null) {
+			strBufOut.append(DataConfigInternationalization.EXPERIENCE_START_TIME)
+					.append(config.getTimeStart().toSimpleString()).append(linesep);
+		}
 
-		if (config.getSelectedFrequency() != null)
-			strBufOut.append(FREQUENCY).append(config.getSelectedFrequency()).append(linesep);
+		if (config.getSelectedFrequency() != null) {
+			strBufOut.append(DataConfigInternationalization.FREQUENCY).append(config.getSelectedFrequency())
+					.append(linesep);
+		}
 
-		if (config.getTotalSamples() != com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value)
-			strBufOut.append(TOTAL_SAMPLES).append(config.getTotalSamples()).append(linesep);
-		else if (config.getTotalSamples() == com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value)
-			strBufOut.append(TOTAL_SAMPLES_UNDETERMINED).append(linesep);
+		if (config.getTotalSamples() != com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value) {
+			strBufOut.append(DataConfigInternationalization.TOTAL_SAMPLES).append(config.getTotalSamples())
+					.append(linesep);
+		} else if (config.getTotalSamples() == com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value) {
+			strBufOut.append(DataConfigInternationalization.TOTAL_SAMPLES_UNDETERMINED).append(linesep);
+		}
 
 		if (config.getSelectedHardwareParameters() != null) {
-			strBufOut.append(PARAMETERS).append(linesep);
+			strBufOut.append(DataConfigInternationalization.PARAMETERS).append(linesep);
 			for (int i = 0; i < config.getSelectedHardwareParameters().length; i++) {
-				if (config.getSelectedHardwareParameters(i) != null)
+				if (config.getSelectedHardwareParameters(i) != null) {
 					strBufOut.append("\t").append(config.getSelectedHardwareParameters(i)).append(linesep);
+				}
 			}
 		}
 
 		if (config.getChannelsConfig() != null) {
-			strBufOut.append(CHANNELS_CONFIGURATION).append(linesep);
+			strBufOut.append(DataConfigInternationalization.CHANNELS_CONFIGURATION).append(linesep);
 			for (int i = 0; i < config.getChannelsConfig().length; i++) {
-				if (config.getChannelsConfig(i) != null)
-					strBufOut.append("\t" + CHANNEL + i + CONFIGURATION).append(linesep)
-							.append(toString(config.getChannelsConfig(i))).append(linesep);
-				else
-					strBufOut.append("\t" + CHANNEL + i + CONFIGURATION_UNDEFINED).append(linesep);
+				if (config.getChannelsConfig(i) != null) {
+					strBufOut
+							.append("\t" + DataConfigInternationalization.CHANNEL + i
+									+ DataConfigInternationalization.CONFIGURATION).append(linesep)
+							.append(DataConfigInternationalization.toString(config.getChannelsConfig(i)))
+							.append(linesep);
+				} else {
+					strBufOut.append(
+							"\t" + DataConfigInternationalization.CHANNEL + i
+									+ DataConfigInternationalization.CONFIGURATION_UNDEFINED).append(linesep);
+				}
 			}
 		}
 
 		return strBufOut.toString();
 	}
 
-	public static String toString(ParameterConfig config) {
+	public static String toString(final ParameterConfig config) {
 		if (config == null) {
 			return String.valueOf(config);
 		}
 
-		return "" + (config.getParameterName() == null ? UNDEFINED_PARAMETER_NAME : config.getParameterName()) + " : "
-				+ (config.getParameterValue() == null ? UNDEFINED : config.getParameterValue());
+		return ""
+				+ (config.getParameterName() == null ? DataConfigInternationalization.UNDEFINED_PARAMETER_NAME : config
+						.getParameterName())
+				+ " : "
+				+ (config.getParameterValue() == null ? DataConfigInternationalization.UNDEFINED : config
+						.getParameterValue());
 	}
 
 }

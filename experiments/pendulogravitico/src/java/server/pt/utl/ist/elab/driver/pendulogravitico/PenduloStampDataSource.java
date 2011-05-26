@@ -31,9 +31,9 @@ public class PenduloStampDataSource extends AbstractStampDataSource {
 	public static String PENDULO_DS_LOGGER = "PenduloDataSource.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(PENDULO_DS_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(PenduloStampDataSource.PENDULO_DS_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(PENDULO_DS_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(PenduloStampDataSource.PENDULO_DS_LOGGER));
 		}
 	}
 
@@ -41,19 +41,21 @@ public class PenduloStampDataSource extends AbstractStampDataSource {
 	public PenduloStampDataSource() {
 	}
 
-	public void processDataCommand(StampCommand cmd) {
-		if (stopped || cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null)
+	@Override
+	public void processDataCommand(final StampCommand cmd) {
+		if (stopped || cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null) {
 			return;
+		}
 
 		if (cmd.getCommandIdentifier().equals(StampPenduloProcessor.COMMAND_IDENTIFIER)) {
 			float angle = 0;
 			float angle_adc = 0;
 
-			PhysicsValue[] values = new PhysicsValue[1];
+			final PhysicsValue[] values = new PhysicsValue[1];
 			try {
-				if (calib_angle == -1)
+				if (calib_angle == -1) {
 					calib_angle = ((Float) cmd.getCommandData(StampPenduloProcessor.ANGLE_ADC)).floatValue();
-				else {
+				} else {
 					angle_adc = ((Float) cmd.getCommandData(StampPenduloProcessor.ANGLE_ADC)).floatValue();
 
 					angle = (calib_angle - angle_adc) / 49.41f;
@@ -63,13 +65,13 @@ public class PenduloStampDataSource extends AbstractStampDataSource {
 					super.addDataRow(values);
 
 				}
-			} catch (ClassCastException e) {
+			} catch (final ClassCastException e) {
 				e.printStackTrace();
 				return;
 			}
 
 			if (counter == total_samples) {
-				Logger.getLogger(PENDULO_DS_LOGGER).log(Level.INFO, "DataSource Ended");
+				Logger.getLogger(PenduloStampDataSource.PENDULO_DS_LOGGER).log(Level.INFO, "DataSource Ended");
 				setDataSourceEnded();
 			}
 
@@ -78,7 +80,8 @@ public class PenduloStampDataSource extends AbstractStampDataSource {
 
 	}
 
-	public void setAcquisitionHeader(HardwareAcquisitionConfig config) {
+	@Override
+	public void setAcquisitionHeader(final HardwareAcquisitionConfig config) {
 		super.setAcquisitionHeader(config);
 		total_samples = config.getTotalSamples();
 		calib_angle = -1;
@@ -86,6 +89,7 @@ public class PenduloStampDataSource extends AbstractStampDataSource {
 
 	private boolean stopped = false;
 
+	@Override
 	public void stopNow() {
 		stopped = true;
 		setDataSourceStoped();

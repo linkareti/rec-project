@@ -12,12 +12,15 @@ package com.linkare.rec.impl.baseUI.config;
  */
 public class OrderedItemComparator implements java.util.Comparator<OrderedItem> {
 
-	public int compare(OrderedItem o1, OrderedItem o2) {
-		if (o1 == o2)
+	@Override
+	public int compare(final OrderedItem o1, final OrderedItem o2) {
+		if (o1 == o2) {
 			return 0;
+		}
 
-		if (o1 == null || o2 == null)
+		if (o1 == null || o2 == null) {
 			return 0;
+		}
 
 		return (o1.getOrder() - o2.getOrder());
 	}

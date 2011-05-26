@@ -11,18 +11,18 @@ public final class NotRegistered extends org.omg.CORBA.UserException {
 	 * 
 	 */
 	private static final long serialVersionUID = -4973483160449363596L;
-	public int errorCode = (int) 0;
+	public int errorCode = 0;
 
 	public NotRegistered() {
 		super(NotRegisteredHelper.id());
 	} // ctor
 
-	public NotRegistered(int _errorCode) {
+	public NotRegistered(final int _errorCode) {
 		super(NotRegisteredHelper.id());
 		errorCode = _errorCode;
 	} // ctor
 
-	public NotRegistered(String $reason, int _errorCode) {
+	public NotRegistered(final String $reason, final int _errorCode) {
 		super(NotRegisteredHelper.id() + "  " + $reason);
 		errorCode = _errorCode;
 	} // ctor

@@ -11,18 +11,21 @@ public final class VTFrequencySearchHolder implements Streamable {
 	public VTFrequencySearchHolder() {
 	}
 
-	public VTFrequencySearchHolder(FrequencySearch initialValue) {
+	public VTFrequencySearchHolder(final FrequencySearch initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(InputStream i) {
+	@Override
+	public void _read(final InputStream i) {
 		value = VTFrequencySearchHelper.read(i);
 	}
 
-	public void _write(OutputStream o) {
+	@Override
+	public void _write(final OutputStream o) {
 		VTFrequencySearchHelper.write(o, value);
 	}
 
+	@Override
 	public TypeCode _type() {
 		return VTFrequencySearchHelper.type();
 	}

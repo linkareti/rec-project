@@ -22,9 +22,9 @@ import com.linkare.rec.impl.data.PhysicsValFactory;
 
 public class OsciladorDataProducer extends VirtualBaseDataSource implements ODE {
 
-	private int NUM_CHANNELS = 16;
+	private final int NUM_CHANNELS = 16;
 
-	private double[] state;
+	private final double[] state;
 
 	private double raioMax;
 	private double g = 9.8;
@@ -38,11 +38,13 @@ public class OsciladorDataProducer extends VirtualBaseDataSource implements ODE 
 	private VirtualBaseDriver driver = null;
 	private ODESolver odeSolver = null;
 
+	@Override
 	public double[] getState() {
 		return state;
 	}
 
-	public void getRate(double[] state, double[] rate) {
+	@Override
+	public void getRate(final double[] state, final double[] rate) {
 		rate[0] = state[1];
 		rate[1] = (4 * Math.PI * Math.PI * frequencia * frequencia * state[0] - 2 * g * a * state[0] - 4 * a * a
 				* state[0] * state[1] * state[1])
@@ -61,8 +63,8 @@ public class OsciladorDataProducer extends VirtualBaseDataSource implements ODE 
 	 * @param tbs
 	 * @param nSamples
 	 */
-	public OsciladorDataProducer(VirtualBaseDriver driver, float g, float a, float frequencia, float alturaInicial,
-			int tbs, int nSamples) {
+	public OsciladorDataProducer(final VirtualBaseDriver driver, final float g, final float a, final float frequencia,
+			final float alturaInicial, final int tbs, final int nSamples) {
 		this.driver = driver;
 		this.g = g;
 		this.a = a;
@@ -81,9 +83,10 @@ public class OsciladorDataProducer extends VirtualBaseDataSource implements ODE 
 		private float time = 0;
 		private float angulo = 0;
 
+		@Override
 		public void run() {
 			try {
-				sleep(1000);
+				Thread.sleep(1000);
 
 				// Enquanto a amostra actual for menor do que o numero de
 				// amostras pedido pelo cliente E ninguém tiver parado a
@@ -91,7 +94,7 @@ public class OsciladorDataProducer extends VirtualBaseDataSource implements ODE 
 				while (currentSample <= nSamples && !stopped) {
 					// envia as amostra calculadas!
 					// 1- cria um array com o numero de canais existentes!
-					PhysicsValue[] value = new PhysicsValue[NUM_CHANNELS];
+					final PhysicsValue[] value = new PhysicsValue[NUM_CHANNELS];
 
 					// envia no canal CORRESPONDENTE!!! o valor
 					// tempo
@@ -116,18 +119,18 @@ public class OsciladorDataProducer extends VirtualBaseDataSource implements ODE 
 							getAcquisitionHeader().getChannelsConfig(4).getSelectedScale().getDefaultErrorValue(),
 							getAcquisitionHeader().getChannelsConfig(4).getSelectedScale().getMultiplier());
 					// vX
-					value[5] = new PhysicsValue(PhysicsValFactory
-							.fromFloat((float) (state[1] * Math.sin(angulo) + state[0] * 2 * Math.PI * frequencia
-									* Math.cos(angulo))), getAcquisitionHeader().getChannelsConfig(5)
-							.getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader().getChannelsConfig(5)
-							.getSelectedScale().getMultiplier());
+					value[5] = new PhysicsValue(
+							PhysicsValFactory.fromFloat((float) (state[1] * Math.sin(angulo) + state[0] * 2 * Math.PI
+									* frequencia * Math.cos(angulo))), getAcquisitionHeader().getChannelsConfig(5)
+									.getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
+									.getChannelsConfig(5).getSelectedScale().getMultiplier());
 
 					// vY
-					value[6] = new PhysicsValue(PhysicsValFactory
-							.fromFloat((float) (state[1] * Math.cos(angulo) - state[0] * 2 * Math.PI * frequencia
-									* Math.sin(angulo))), getAcquisitionHeader().getChannelsConfig(6)
-							.getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader().getChannelsConfig(6)
-							.getSelectedScale().getMultiplier());
+					value[6] = new PhysicsValue(
+							PhysicsValFactory.fromFloat((float) (state[1] * Math.cos(angulo) - state[0] * 2 * Math.PI
+									* frequencia * Math.sin(angulo))), getAcquisitionHeader().getChannelsConfig(6)
+									.getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
+									.getChannelsConfig(6).getSelectedScale().getMultiplier());
 
 					// vZ
 					value[7] = new PhysicsValue(PhysicsValFactory.fromFloat((float) (2 * a * state[0] * state[1])),
@@ -137,8 +140,9 @@ public class OsciladorDataProducer extends VirtualBaseDataSource implements ODE 
 					// v
 					value[8] = new PhysicsValue(PhysicsValFactory.fromFloat((float) (Math.sqrt(Math.pow((state[1]
 							* Math.sin(angulo) + state[0] * 2 * Math.PI * frequencia * Math.cos(angulo)), 2)
-							+ Math.pow((state[1] * Math.cos(angulo) - state[0] * 2 * Math.PI * frequencia
-									* Math.sin(angulo)), 2) + Math.pow((2 * a * state[0] * state[1]), 2)))),
+							+ Math.pow(
+									(state[1] * Math.cos(angulo) - state[0] * 2 * Math.PI * frequencia
+											* Math.sin(angulo)), 2) + Math.pow((2 * a * state[0] * state[1]), 2)))),
 							getAcquisitionHeader().getChannelsConfig(8).getSelectedScale().getDefaultErrorValue(),
 							getAcquisitionHeader().getChannelsConfig(8).getSelectedScale().getMultiplier());
 					// vraio
@@ -146,19 +150,23 @@ public class OsciladorDataProducer extends VirtualBaseDataSource implements ODE 
 							.getChannelsConfig(9).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
 							.getChannelsConfig(9).getSelectedScale().getMultiplier());
 					// Energia Mec�nica
-					value[10] = new PhysicsValue(PhysicsValFactory
-							.fromFloat((float) (a * state[0] * state[0] * g + 0.5 * (Math.pow(state[1]
-									* Math.sin(angulo) + state[0] * 2 * Math.PI * frequencia * Math.cos(angulo), 2)
-									+ Math.pow(state[1] * Math.cos(angulo) - state[0] * 2 * Math.PI * frequencia
-											* Math.sin(angulo), 2) + Math.pow(2 * a * state[0] * state[1], 2)))),
+					value[10] = new PhysicsValue(
+							PhysicsValFactory
+									.fromFloat((float) (a * state[0] * state[0] * g + 0.5 * (Math.pow(
+											state[1] * Math.sin(angulo) + state[0] * 2 * Math.PI * frequencia
+													* Math.cos(angulo), 2)
+											+ Math.pow(state[1] * Math.cos(angulo) - state[0] * 2 * Math.PI
+													* frequencia * Math.sin(angulo), 2) + Math.pow(2 * a * state[0]
+											* state[1], 2)))),
 							getAcquisitionHeader().getChannelsConfig(10).getSelectedScale().getDefaultErrorValue(),
 							getAcquisitionHeader().getChannelsConfig(10).getSelectedScale().getMultiplier());
 
 					// Energia Cin�tica
-					value[11] = new PhysicsValue(PhysicsValFactory.fromFloat((float) (0.5 * (Math.pow(state[1]
-							* Math.sin(angulo) + state[0] * 2 * Math.PI * frequencia * Math.cos(angulo), 2)
-							+ Math.pow(state[1] * Math.cos(angulo) - state[0] * 2 * Math.PI * frequencia
-									* Math.sin(angulo), 2) + Math.pow(2 * a * state[0] * state[1], 2)))),
+					value[11] = new PhysicsValue(PhysicsValFactory.fromFloat((float) (0.5 * (Math.pow(
+							state[1] * Math.sin(angulo) + state[0] * 2 * Math.PI * frequencia * Math.cos(angulo), 2)
+							+ Math.pow(
+									state[1] * Math.cos(angulo) - state[0] * 2 * Math.PI * frequencia
+											* Math.sin(angulo), 2) + Math.pow(2 * a * state[0] * state[1], 2)))),
 							getAcquisitionHeader().getChannelsConfig(11).getSelectedScale().getDefaultErrorValue(),
 							getAcquisitionHeader().getChannelsConfig(11).getSelectedScale().getMultiplier());
 
@@ -168,7 +176,7 @@ public class OsciladorDataProducer extends VirtualBaseDataSource implements ODE 
 							getAcquisitionHeader().getChannelsConfig(12).getSelectedScale().getMultiplier());
 
 					// Angulo
-					value[13] = new PhysicsValue(PhysicsValFactory.fromFloat((float) (angulo)), getAcquisitionHeader()
+					value[13] = new PhysicsValue(PhysicsValFactory.fromFloat((angulo)), getAcquisitionHeader()
 							.getChannelsConfig(13).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
 							.getChannelsConfig(13).getSelectedScale().getMultiplier());
 
@@ -197,7 +205,7 @@ public class OsciladorDataProducer extends VirtualBaseDataSource implements ODE 
 					odeSolver.step();
 
 					// dorme o tbs que o utilizador pediu...
-					sleep(tbs);
+					Thread.sleep(tbs);
 
 					currentSample++;
 				}
@@ -207,12 +215,13 @@ public class OsciladorDataProducer extends VirtualBaseDataSource implements ODE 
 
 				driver.stopVirtualHardware();
 
-			} catch (InterruptedException ie) {
+			} catch (final InterruptedException ie) {
 			}
 
 		}
 	}
 
+	@Override
 	public void startProduction() {
 		stopped = false;
 		new ProducerThread().start();
@@ -223,12 +232,13 @@ public class OsciladorDataProducer extends VirtualBaseDataSource implements ODE 
 		setDataSourceEnded();
 	}
 
-	public static void main(String args[]) {
-		OsciladorDataProducer oscil = new OsciladorDataProducer(null, 9.8F, 1.0F, 0.5F, 0.2F, 100, 100);
+	public static void main(final String args[]) {
+		final OsciladorDataProducer oscil = new OsciladorDataProducer(null, 9.8F, 1.0F, 0.5F, 0.2F, 100, 100);
 		oscil.startProduction();
 
 	}
 
+	@Override
 	public void stopNow() {
 		stopped = true;
 		setDataSourceStoped();

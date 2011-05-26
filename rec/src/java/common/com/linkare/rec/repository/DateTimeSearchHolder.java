@@ -11,18 +11,21 @@ public final class DateTimeSearchHolder implements Streamable {
 	public DateTimeSearchHolder() {
 	}
 
-	public DateTimeSearchHolder(DateTimeSearch initialValue) {
+	public DateTimeSearchHolder(final DateTimeSearch initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(InputStream i) {
+	@Override
+	public void _read(final InputStream i) {
 		value = DateTimeSearchHelper.read(i);
 	}
 
-	public void _write(OutputStream o) {
+	@Override
+	public void _write(final OutputStream o) {
 		DateTimeSearchHelper.write(o, value);
 	}
 
+	@Override
 	public TypeCode _type() {
 		return DateTimeSearchHelper.type();
 	}

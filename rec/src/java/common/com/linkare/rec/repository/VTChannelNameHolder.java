@@ -11,18 +11,21 @@ public final class VTChannelNameHolder implements Streamable {
 	public VTChannelNameHolder() {
 	}
 
-	public VTChannelNameHolder(String initialValue) {
+	public VTChannelNameHolder(final String initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(InputStream i) {
+	@Override
+	public void _read(final InputStream i) {
 		value = VTChannelNameHelper.read(i);
 	}
 
-	public void _write(OutputStream o) {
+	@Override
+	public void _write(final OutputStream o) {
 		VTChannelNameHelper.write(o, value);
 	}
 
+	@Override
 	public TypeCode _type() {
 		return VTChannelNameHelper.type();
 	}

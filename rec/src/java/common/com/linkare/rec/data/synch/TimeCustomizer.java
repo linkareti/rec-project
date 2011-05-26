@@ -14,6 +14,11 @@ import java.beans.Beans;
  */
 public class TimeCustomizer extends javax.swing.JPanel implements java.beans.Customizer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6809500773372758384L;
+
 	/** Creates new customizer TimeCustomizer */
 	public TimeCustomizer() {
 		initComponents();
@@ -113,7 +118,8 @@ public class TimeCustomizer extends javax.swing.JPanel implements java.beans.Cus
 
 		hourSelector.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
 		hourSelector.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				hourSelectorStateChanged(evt);
 			}
 		});
@@ -126,7 +132,8 @@ public class TimeCustomizer extends javax.swing.JPanel implements java.beans.Cus
 
 		minuteSelector.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
 		minuteSelector.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				minuteSelectorStateChanged(evt);
 			}
 		});
@@ -139,7 +146,8 @@ public class TimeCustomizer extends javax.swing.JPanel implements java.beans.Cus
 
 		secondSelector.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
 		secondSelector.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				secondSelectorStateChanged(evt);
 			}
 		});
@@ -152,7 +160,8 @@ public class TimeCustomizer extends javax.swing.JPanel implements java.beans.Cus
 
 		miliSelector.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, 1));
 		miliSelector.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				miliSelectorStateChanged(evt);
 			}
 		});
@@ -165,7 +174,8 @@ public class TimeCustomizer extends javax.swing.JPanel implements java.beans.Cus
 
 		microSelector.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, 1));
 		microSelector.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				microSelectorStateChanged(evt);
 			}
 		});
@@ -178,7 +188,8 @@ public class TimeCustomizer extends javax.swing.JPanel implements java.beans.Cus
 
 		nanoSelector.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, 1));
 		nanoSelector.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				nanoSelectorStateChanged(evt);
 			}
 		});
@@ -191,7 +202,8 @@ public class TimeCustomizer extends javax.swing.JPanel implements java.beans.Cus
 
 		picoSelector.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, 1));
 		picoSelector.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				picoSelectorStateChanged(evt);
 			}
 		});
@@ -204,52 +216,52 @@ public class TimeCustomizer extends javax.swing.JPanel implements java.beans.Cus
 
 	}// GEN-END:initComponents
 
-	private void minuteSelectorStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_minuteSelectorStateChanged
+	private void minuteSelectorStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_minuteSelectorStateChanged
 	{// GEN-HEADEREND:event_minuteSelectorStateChanged
 		actualizeBean();
 	}// GEN-LAST:event_minuteSelectorStateChanged
 
-	private void picoSelectorStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_picoSelectorStateChanged
+	private void picoSelectorStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_picoSelectorStateChanged
 	{// GEN-HEADEREND:event_picoSelectorStateChanged
 		actualizeBean();
 	}// GEN-LAST:event_picoSelectorStateChanged
 
-	private void nanoSelectorStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_nanoSelectorStateChanged
+	private void nanoSelectorStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_nanoSelectorStateChanged
 	{// GEN-HEADEREND:event_nanoSelectorStateChanged
 		actualizeBean();
 	}// GEN-LAST:event_nanoSelectorStateChanged
 
-	private void microSelectorStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_microSelectorStateChanged
+	private void microSelectorStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_microSelectorStateChanged
 	{// GEN-HEADEREND:event_microSelectorStateChanged
 		actualizeBean();
 	}// GEN-LAST:event_microSelectorStateChanged
 
-	private void miliSelectorStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_miliSelectorStateChanged
+	private void miliSelectorStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_miliSelectorStateChanged
 	{// GEN-HEADEREND:event_miliSelectorStateChanged
 		actualizeBean();
 	}// GEN-LAST:event_miliSelectorStateChanged
 
-	private void secondSelectorStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_secondSelectorStateChanged
+	private void secondSelectorStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_secondSelectorStateChanged
 	{// GEN-HEADEREND:event_secondSelectorStateChanged
 		actualizeBean();
 	}// GEN-LAST:event_secondSelectorStateChanged
 
-	private void hourSelectorStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_hourSelectorStateChanged
+	private void hourSelectorStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_hourSelectorStateChanged
 	{// GEN-HEADEREND:event_hourSelectorStateChanged
 		actualizeBean();
 	}// GEN-LAST:event_hourSelectorStateChanged
 
-	private void yearSelectorActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_yearSelectorActionPerformed
+	private void yearSelectorActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_yearSelectorActionPerformed
 	{// GEN-HEADEREND:event_yearSelectorActionPerformed
 		actualizeBean();
 	}// GEN-LAST:event_yearSelectorActionPerformed
 
-	private void daySelectorActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_daySelectorActionPerformed
+	private void daySelectorActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_daySelectorActionPerformed
 	{// GEN-HEADEREND:event_daySelectorActionPerformed
 		actualizeBean();
 	}// GEN-LAST:event_daySelectorActionPerformed
 
-	private void monthSelectorActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_monthSelectorActionPerformed
+	private void monthSelectorActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_monthSelectorActionPerformed
 	{// GEN-HEADEREND:event_monthSelectorActionPerformed
 		actualizeBean();
 	}// GEN-LAST:event_monthSelectorActionPerformed
@@ -258,7 +270,8 @@ public class TimeCustomizer extends javax.swing.JPanel implements java.beans.Cus
 		return mybean;
 	}
 
-	public void setObject(Object obj) {
+	@Override
+	public void setObject(final Object obj) {
 
 		if (Beans.isInstanceOf(obj, Time.class)) {
 			mybean = (Time) Beans.getInstanceOf(obj, Time.class);
@@ -270,30 +283,31 @@ public class TimeCustomizer extends javax.swing.JPanel implements java.beans.Cus
 
 	private void actualizeSelectors() {
 		actualizingSelectors = true;
-		picoSelector.setValue(new Integer((int) mybean.getPicos()));
-		nanoSelector.setValue(new Integer((int) mybean.getNanos()));
-		microSelector.setValue(new Integer((int) mybean.getMicros()));
-		miliSelector.setValue(new Integer((int) mybean.getMilis()));
-		secondSelector.setValue(new Integer((int) mybean.getSeconds()));
-		minuteSelector.setValue(new Integer((int) mybean.getMinutes()));
-		hourSelector.setValue(new Integer((int) mybean.getHours()));
+		picoSelector.setValue(new Integer(mybean.getPicos()));
+		nanoSelector.setValue(new Integer(mybean.getNanos()));
+		microSelector.setValue(new Integer(mybean.getMicros()));
+		miliSelector.setValue(new Integer(mybean.getMilis()));
+		secondSelector.setValue(new Integer(mybean.getSeconds()));
+		minuteSelector.setValue(new Integer(mybean.getMinutes()));
+		hourSelector.setValue(new Integer(mybean.getHours()));
 		actualizingSelectors = false;
 	}
 
 	private void actualizeBean() {
-		if (actualizingSelectors)
+		if (actualizingSelectors) {
 			return;
+		}
 
 		try {
-			Time oldbean = new Time(mybean);
+			final Time oldbean = new Time(mybean);
 
-			int picos = ((Integer) picoSelector.getValue()).intValue();
-			int nanos = ((Integer) nanoSelector.getValue()).intValue();
-			int micros = ((Integer) microSelector.getValue()).intValue();
-			int milis = ((Integer) miliSelector.getValue()).intValue();
-			int seconds = ((Integer) secondSelector.getValue()).intValue();
-			int minutes = ((Integer) minuteSelector.getValue()).intValue();
-			int hours = ((Integer) hourSelector.getValue()).intValue();
+			final int picos = ((Integer) picoSelector.getValue()).intValue();
+			final int nanos = ((Integer) nanoSelector.getValue()).intValue();
+			final int micros = ((Integer) microSelector.getValue()).intValue();
+			final int milis = ((Integer) miliSelector.getValue()).intValue();
+			final int seconds = ((Integer) secondSelector.getValue()).intValue();
+			final int minutes = ((Integer) minuteSelector.getValue()).intValue();
+			final int hours = ((Integer) hourSelector.getValue()).intValue();
 
 			mybean.setPicos((short) picos);
 			mybean.setNanos((short) nanos);
@@ -315,7 +329,7 @@ public class TimeCustomizer extends javax.swing.JPanel implements java.beans.Cus
 			actualizeSelectors();
 
 			timeShowLbl.setText(mybean.toString());
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}

@@ -43,13 +43,13 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	private HardwareAcquisitionConfig acqHeader = null;
 	private String apparatusName = null;
 
-	private transient DataReceiver _this = null;
+	// private transient DataReceiver _this = null;
 	private transient ObjectID oid = null;
 
 	private int largestnumsample = MaxPacketNumUnknown.value;
 
-	private boolean running = false;
-	private boolean runnedOnce = false;
+	// private boolean running = false;
+	// private boolean runnedOnce = false;
 
 	private SamplesPacketSourceDepacketizer depacketizer = null;
 
@@ -62,9 +62,9 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	private javax.swing.event.EventListenerList listenerList = null;
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(DATA_RECEIVER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(DATA_RECEIVER_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER));
 		}
 	}
 
@@ -78,19 +78,22 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	}
 
 	private DataReceiver getDataReceiver() {
-		if (_thisDataReceiver != null)
+		if (_thisDataReceiver != null) {
 			return _thisDataReceiver;
+		}
 
 		try {
-			return (_thisDataReceiver = DataReceiverHelper.narrow(ORBBean.getORBBean().getAutoIdRootPOA()
+			return (_thisDataReceiver = DataReceiverHelper.narrow(ORBBean
+					.getORBBean()
+					.getAutoIdRootPOA()
 					.servant_to_reference(
 							ORBBean.getORBBean().registerAutoIdRootPOAServant(DataReceiver.class, this,
 									(oid = new ObjectID())))));
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
-			LoggerUtil.logThrowable("DataReceiver not registered with ORB...", e, LogManager.getLogManager().getLogger(
-					DATA_RECEIVER_LOGGER));
+			LoggerUtil.logThrowable("DataReceiver not registered with ORB...", e,
+					LogManager.getLogManager().getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER));
 			return null;
 		}
 
@@ -102,7 +105,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	 * @return Value of property remoteDataProducer.
 	 */
 	public com.linkare.rec.impl.wrappers.DataProducerWrapper getDpwDataSource() {
-		return this.remoteDataProducer;
+		return remoteDataProducer;
 	}
 
 	/**
@@ -110,9 +113,10 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	 * 
 	 * @param remoteDataProducer New value of property remoteDataProducer.
 	 */
-	public void setDpwDataSource(DataProducerWrapper remoteDataProducer) throws MaximumClientsReached {
+	@Override
+	public void setDpwDataSource(final DataProducerWrapper remoteDataProducer) throws MaximumClientsReached {
 		if (!remoteDataProducer.isConnected()) {
-			Logger.getLogger(DATA_RECEIVER_LOGGER).log(Level.SEVERE,
+			Logger.getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER).log(Level.SEVERE,
 					"DataProducer is disconnected! Check it out, please...");
 		}
 		this.remoteDataProducer = remoteDataProducer;
@@ -121,9 +125,10 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 			try {
 				this.remoteDataProducer.registerDataReceiver(_thisDataReceiver);
 
-			} catch (MaximumClientsReached e) {
+			} catch (final MaximumClientsReached e) {
 				// System.out.println("NOT Registered with dataProducer");
-				LoggerUtil.logThrowable(null, e, LogManager.getLogManager().getLogger(DATA_RECEIVER_LOGGER));
+				LoggerUtil.logThrowable(null, e,
+						LogManager.getLogManager().getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER));
 				throw e;
 			}
 		}
@@ -135,32 +140,35 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 		dataProducerRunningCheck.startCheck();
 	}
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		if (acqHeader != null)
+		if (acqHeader != null) {
 			return acqHeader;
-		else {
+		} else {
 			try {
 				acqHeader = remoteDataProducer.getAcquisitionHeader();
 
-			} catch (NotAvailableException nae) {
-				LoggerUtil.logThrowable("Couldn't get Acquisition Header!", nae, LogManager.getLogManager().getLogger(
-						DATA_RECEIVER_LOGGER));
+			} catch (final NotAvailableException nae) {
+				LoggerUtil.logThrowable("Couldn't get Acquisition Header!", nae,
+						LogManager.getLogManager().getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER));
 			}
 		}
 
 		return acqHeader;
 	}
 
+	@Override
 	public String getApparatusName() {
-		if (apparatusName != null)
+		if (apparatusName != null) {
 			return apparatusName;
+		}
 
 		try {
 			apparatusName = getAcquisitionConfig().getFamiliarName();
 			return apparatusName;
-		} catch (NullPointerException npe) {
+		} catch (final NullPointerException npe) {
 			LoggerUtil.logThrowable("Couldn't get Apparatus Name from Acquisition Header!", npe, LogManager
-					.getLogManager().getLogger(DATA_RECEIVER_LOGGER));
+					.getLogManager().getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER));
 		}
 
 		return "Unknown";
@@ -171,26 +179,29 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public void addExpDataModelListener(com.linkare.rec.impl.client.experiment.ExpDataModelListener listener) {
-		if (listener == null)
+	@Override
+	public void addExpDataModelListener(final com.linkare.rec.impl.client.experiment.ExpDataModelListener listener) {
+		if (listener == null) {
 			return;
+		}
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
 		listenerList.add(com.linkare.rec.impl.client.experiment.ExpDataModelListener.class, listener);
 
-		if (getDataCollectorState().equals(DataCollectorState.DP_ENDED))
+		if (getDataCollectorState().equals(DataCollectorState.DP_ENDED)) {
 			fireExpDataModelListenerDataModelEnded();
-		else if (getDataCollectorState().equals(DataCollectorState.DP_ERROR))
+		} else if (getDataCollectorState().equals(DataCollectorState.DP_ERROR)) {
 			fireExpDataModelListenerDataModelError();
-		else if (getDataCollectorState().equals(DataCollectorState.DP_STARTED))
+		} else if (getDataCollectorState().equals(DataCollectorState.DP_STARTED)) {
 			fireExpDataModelListenerDataModelStarted();
-		else if (getDataCollectorState().equals(DataCollectorState.DP_STARTED_NODATA))
+		} else if (getDataCollectorState().equals(DataCollectorState.DP_STARTED_NODATA)) {
 			fireExpDataModelListenerDataModelStartedNoData();
-		else if (getDataCollectorState().equals(DataCollectorState.DP_STOPED))
+		} else if (getDataCollectorState().equals(DataCollectorState.DP_STOPED)) {
 			fireExpDataModelListenerDataModelStoped();
-		else if (getDataCollectorState().equals(DataCollectorState.DP_WAITING))
+		} else if (getDataCollectorState().equals(DataCollectorState.DP_WAITING)) {
 			fireExpDataModelListenerDataModelWaiting();
+		}
 	}
 
 	/**
@@ -198,9 +209,11 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public void removeExpDataModelListener(com.linkare.rec.impl.client.experiment.ExpDataModelListener listener) {
-		if (listener != null && listenerList != null)
+	@Override
+	public void removeExpDataModelListener(final com.linkare.rec.impl.client.experiment.ExpDataModelListener listener) {
+		if (listener != null && listenerList != null) {
 			listenerList.remove(com.linkare.rec.impl.client.experiment.ExpDataModelListener.class, listener);
+		}
 	}
 
 	/**
@@ -209,9 +222,10 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	 * 
 	 */
 	private void fireExpDataModelListenerDataModelStoped() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == com.linkare.rec.impl.client.experiment.ExpDataModelListener.class) {
 				((com.linkare.rec.impl.client.experiment.ExpDataModelListener) listeners[i + 1]).dataModelStoped();
@@ -225,9 +239,10 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	 * 
 	 */
 	private void fireExpDataModelListenerDataModelStarted() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == com.linkare.rec.impl.client.experiment.ExpDataModelListener.class) {
 				((com.linkare.rec.impl.client.experiment.ExpDataModelListener) listeners[i + 1]).dataModelStarted();
@@ -241,9 +256,10 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	 * 
 	 */
 	private void fireExpDataModelListenerDataModelStartedNoData() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == com.linkare.rec.impl.client.experiment.ExpDataModelListener.class) {
 				((com.linkare.rec.impl.client.experiment.ExpDataModelListener) listeners[i + 1])
@@ -258,9 +274,10 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	 * 
 	 */
 	private void fireExpDataModelListenerDataModelError() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == com.linkare.rec.impl.client.experiment.ExpDataModelListener.class) {
 				((com.linkare.rec.impl.client.experiment.ExpDataModelListener) listeners[i + 1]).dataModelError();
@@ -274,9 +291,10 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	 * 
 	 */
 	private void fireExpDataModelListenerDataModelEnded() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == com.linkare.rec.impl.client.experiment.ExpDataModelListener.class) {
 				((com.linkare.rec.impl.client.experiment.ExpDataModelListener) listeners[i + 1]).dataModelEnded();
@@ -290,9 +308,10 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	 * 
 	 */
 	private void fireExpDataModelListenerDataModelWaiting() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == com.linkare.rec.impl.client.experiment.ExpDataModelListener.class) {
 				((com.linkare.rec.impl.client.experiment.ExpDataModelListener) listeners[i + 1]).dataModelWaiting();
@@ -305,10 +324,11 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	 * 
 	 * @param event The event to be fired
 	 */
-	private void fireExpDataModelListenerNewSamples(NewExpDataEvent event) {
-		if (listenerList == null)
+	private void fireExpDataModelListenerNewSamples(final NewExpDataEvent event) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == com.linkare.rec.impl.client.experiment.ExpDataModelListener.class) {
 				((com.linkare.rec.impl.client.experiment.ExpDataModelListener) listeners[i + 1]).newSamples(event);
@@ -316,10 +336,12 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 		}
 	}
 
-	public void stateChanged(com.linkare.rec.acquisition.DataProducerState newState) {
+	@Override
+	public void stateChanged(final com.linkare.rec.acquisition.DataProducerState newState) {
 		setRemoteDataProducerState(newState);
 	}
 
+	@Override
 	public void fireStateChanged() {
 		System.out.println("State CHANGED!");
 		if (getDataCollectorState().equals(com.linkare.rec.impl.utils.DataCollectorState.DP_ENDED)) {
@@ -342,23 +364,24 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 		}
 	}
 
-	public void registerDataReceiver(com.linkare.rec.acquisition.DataReceiver data_receiver)
+	public void registerDataReceiver(final com.linkare.rec.acquisition.DataReceiver data_receiver)
 			throws com.linkare.rec.acquisition.MaximumClientsReached {
 		try {
-			this.remoteDataProducer.registerDataReceiver(data_receiver);
-			newSamples(this.remoteDataProducer.getMaxPacketNum());
-		} catch (com.linkare.rec.acquisition.MaximumClientsReached e) {
-			LoggerUtil.logThrowable(null, e, LogManager.getLogManager().getLogger(DATA_RECEIVER_LOGGER));
+			remoteDataProducer.registerDataReceiver(data_receiver);
+			newSamples(remoteDataProducer.getMaxPacketNum());
+		} catch (final com.linkare.rec.acquisition.MaximumClientsReached e) {
+			LoggerUtil.logThrowable(null, e,
+					LogManager.getLogManager().getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER));
 			throw e;
 		}
 	}
 
-	private boolean remoteDataProducerEnded = false;
+	// private boolean remoteDataProducerEnded = false;
 
 	public void producerIsStoped() {
 		largestnumsample = remoteDataProducer.getMaxPacketNum();
 
-		remoteDataProducerEnded = true;
+		// remoteDataProducerEnded = true;
 	}
 
 	/**
@@ -366,6 +389,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	 * 
 	 * @return Value of property totalSamples.
 	 */
+	@Override
 	public int getTotalSamples() {
 		// o lastSampleNum por omissao tem -1 pois o primeiro index e' o 0
 		// (zero)
@@ -375,7 +399,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	private void deactivateDataReceiver() {
 		try {
 			ORBBean.getORBBean().deactivateServant(oid.getOid());
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 
@@ -404,26 +428,33 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 		return remoteDataProducer.getDataProducerName();
 	}
 
+	@Override
 	public DataProducerWrapper getRemoteDataProducer() {
 		return remoteDataProducer;
 	}
 
-	public void log(Level debugLevel, String message) {
-		Logger.getLogger(DATA_RECEIVER_LOGGER).log(debugLevel, message);
+	@Override
+	public void log(final Level debugLevel, final String message) {
+		Logger.getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER).log(debugLevel, message);
 	}
 
-	public void logThrowable(String message, Throwable t) {
-		LoggerUtil.logThrowable(t.getMessage(), t, LogManager.getLogManager().getLogger(DATA_RECEIVER_LOGGER));
+	@Override
+	public void logThrowable(final String message, final Throwable t) {
+		LoggerUtil.logThrowable(t.getMessage(), t,
+				LogManager.getLogManager().getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER));
 	}
 
+	@Override
 	public void pause() {
 		setPause(true);
 	}
 
+	@Override
 	public void play() {
 		setPause(false);
 	}
 
+	@Override
 	public void stopNow() {
 		producerIsStoped();
 
@@ -436,16 +467,18 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	 * 
 	 * @return Value of property dataAvailable.
 	 */
+	@Override
 	public boolean isDataAvailable() {
 		return (acqHeader != null);
 	}
 
-	public SamplesPacket[] getSamplesPackets(int packetStartIndex, int packetEndIndex)
+	public SamplesPacket[] getSamplesPackets(final int packetStartIndex, final int packetEndIndex)
 			throws SamplesPacketReadException {
 		try {
 			return remoteDataProducer.getSamples(packetStartIndex, packetEndIndex);
-		} catch (Exception e) {
-			LoggerUtil.logThrowable(e.getMessage(), e, LogManager.getLogManager().getLogger(DATA_RECEIVER_LOGGER));
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable(e.getMessage(), e,
+					LogManager.getLogManager().getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER));
 			return null;
 		}
 	}
@@ -456,7 +489,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	 * @param listener The listener to register.
 	 */
 	public synchronized void addSamplesPacketSourceEventListener(
-			com.linkare.rec.impl.data.SamplesPacketSourceEventListener listener) {
+			final com.linkare.rec.impl.data.SamplesPacketSourceEventListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -469,7 +502,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	 * @param listener The listener to remove.
 	 */
 	public synchronized void removeSamplesPacketSourceEventListener(
-			com.linkare.rec.impl.data.SamplesPacketSourceEventListener listener) {
+			final com.linkare.rec.impl.data.SamplesPacketSourceEventListener listener) {
 		listenerList.remove(com.linkare.rec.impl.data.SamplesPacketSourceEventListener.class, listener);
 	}
 
@@ -478,23 +511,27 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	 * 
 	 * @param event The event to be fired
 	 */
-	private void fireSamplesPacketSourceEventListenerNewSamplesPackets(
-			com.linkare.rec.impl.data.SamplesPacketSourceEvent event) {
-		if (listenerList == null)
-			return;
-		Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == com.linkare.rec.impl.data.SamplesPacketSourceEventListener.class) {
-				((com.linkare.rec.impl.data.SamplesPacketSourceEventListener) listeners[i + 1])
-						.newSamplesPackets(event);
-			}
-		}
-	}
+	// private void fireSamplesPacketSourceEventListenerNewSamplesPackets(
+	// com.linkare.rec.impl.data.SamplesPacketSourceEvent event) {
+	// if (listenerList == null)
+	// return;
+	// Object[] listeners = listenerList.getListenerList();
+	// for (int i = listeners.length - 2; i >= 0; i -= 2) {
+	// if (listeners[i] ==
+	// com.linkare.rec.impl.data.SamplesPacketSourceEventListener.class) {
+	// ((com.linkare.rec.impl.data.SamplesPacketSourceEventListener) listeners[i
+	// + 1])
+	// .newSamplesPackets(event);
+	// }
+	// }
+	// }
 
+	@Override
 	public boolean isRunning() {
 		boolean run = false;
-		if (!isPause() && !isExit())
+		if (!isPause() && !isExit()) {
 			run = true;
+		}
 		return run;
 	}
 
@@ -504,18 +541,20 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	 * @return Value of property totalSamples.
 	 */
 
-	public com.linkare.rec.data.acquisition.PhysicsValue getValueAt(int sampleIndex, int channelIndex) {
+	@Override
+	public com.linkare.rec.data.acquisition.PhysicsValue getValueAt(final int sampleIndex, final int channelIndex) {
 		try {
 			return depacketizer.getSamples(sampleIndex, sampleIndex)[0][channelIndex];
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
-			LoggerUtil.logThrowable("Exception when getValueAt() from AbstractDataModel", e, Logger
-					.getLogger(DATA_RECEIVER_LOGGER));
+			LoggerUtil.logThrowable("Exception when getValueAt() from AbstractDataModel", e,
+					Logger.getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER));
 			return null;
 		}
 	}
 
-	public void newSamples(int largestNumPacket) {
+	@Override
+	public void newSamples(final int largestNumPacket) {
 		setLargestPacketKnown(largestNumPacket);
 	}
 
@@ -541,17 +580,18 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 
 	/*********************************************************************************/
 	private class SamplesDepacketizingAdapter implements SamplesSourceEventListener {
-		public void newSamples(SamplesSourceEvent evt) {
+		@Override
+		public void newSamples(final SamplesSourceEvent evt) {
 			try {
 				fireExpDataModelListenerNewSamples(evt.getSampleLargestIndex());
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				LoggerUtil.logThrowable("Exception when newSamples(SamplesSourceEvent evt) from AbstractDataModel", e,
-						Logger.getLogger(DATA_RECEIVER_LOGGER));
+						Logger.getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER));
 			}
 		}
 	}
 
-	protected void fireExpDataModelListenerNewSamples(int sampleLargestIndex) {
+	protected void fireExpDataModelListenerNewSamples(final int sampleLargestIndex) {
 		if (sampleLargestIndex > largestnumsample) {
 			largestnumsample = sampleLargestIndex;
 			fireExpDataModelListenerNewSamples(new NewExpDataEvent(this, lastsample, largestnumsample));
@@ -581,7 +621,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 				start();
 				try {
 					this.wait();
-				} catch (Exception ignored) {
+				} catch (final Exception ignored) {
 				}
 			}
 		}
@@ -589,49 +629,52 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 		public void shutdown() {
 			shutdown = true;
 			synchronized (this) {
-				this.notifyAll();
+				notifyAll();
 			}
 			try {
 				currentThread.join(10000);
-			} catch (Exception ignored) {
+			} catch (final Exception ignored) {
 			}
 		}
 
 		public void checked() {
 			millisChecked = System.currentTimeMillis();
 			synchronized (this) {
-				this.notifyAll();
+				notifyAll();
 			}
 		}
 
+		@Override
 		public void run() {
-			currentThread = currentThread();
+			currentThread = Thread.currentThread();
 			synchronized (this) {
-				this.notifyAll();
+				notifyAll();
 			}
 			while (!shutdown) {
 				synchronized (this) {
 					try {
 						this.wait(5000);
-					} catch (Exception ignored) {
+					} catch (final Exception ignored) {
 					}
 				}
 
 				if (millisChecked + 5000 < System.currentTimeMillis()) {
 					try {
 						if (!remoteDataProducer.isConnected()) {
-							Logger.getLogger(DATA_RECEIVER_LOGGER).log(Level.WARNING,
+							Logger.getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER).log(Level.WARNING,
 									"remote Data Producer is gone... tested connected and it returned false...");
 							remoteDataProducerGone();
 							return;
-						} else
+						} else {
 							checked();
+						}
 
-					} catch (Exception e) {
+					} catch (final Exception e) {
 						LoggerUtil
 								.logThrowable(
 										"remote Data Producer is gone... tested connected and it has blown with an exception...",
-										e, LogManager.getLogManager().getLogger(DATA_RECEIVER_LOGGER));
+										e,
+										LogManager.getLogManager().getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER));
 						remoteDataProducerGone();
 						return;
 					}

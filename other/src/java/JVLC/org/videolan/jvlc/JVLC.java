@@ -51,53 +51,53 @@ public class JVLC {
 	private volatile boolean released;
 
 	public JVLC() {
-		String[] args = new String[] {};
+		final String[] args = new String[] {};
 		instance = createInstance(args);
 		mediaList = new MediaList(this);
 	}
 
-	public JVLC(String[] args) {
+	public JVLC(final String[] args) {
 		instance = createInstance(args);
 	}
 
-	public JVLC(String args) {
+	public JVLC(final String args) {
 		this(args.split(" "));
 	}
 
 	/*
 	 * Core methods
 	 */
-	private LibVlcInstance createInstance(String[] args) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	private LibVlcInstance createInstance(final String[] args) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		return libvlc.libvlc_new(args.length, args, exception);
 	}
 
-	public MediaPlayer play(String media) {
-		MediaDescriptor mediaDescriptor = new MediaDescriptor(this, media);
-		MediaPlayer mediaInstance = new MediaPlayer(mediaDescriptor);
+	public MediaPlayer play(final String media) {
+		final MediaDescriptor mediaDescriptor = new MediaDescriptor(this, media);
+		final MediaPlayer mediaInstance = new MediaPlayer(mediaDescriptor);
 		mediaInstance.play();
 		// Bruno o media descriptor é libertado logo após o play?
 		mediaDescriptor.release();
 		return mediaInstance;
 	}
 
-	public void setVideoOutput(Canvas canvas) {
-		long drawable = Native.getComponentID(canvas);
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public void setVideoOutput(final Canvas canvas) {
+		final long drawable = Native.getComponentID(canvas);
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc.libvlc_video_set_parent(instance, drawable, exception);
 	}
 
-	public void setVideoOutput(Canvas canvas, LibVlcMediaInstance mediaInstance) {
-		long drawable = Native.getComponentID(canvas);
-		libvlc_exception_t exception = new libvlc_exception_t();
-		libvlc.libvlc_media_player_set_drawable(mediaInstance, (int)drawable, exception);
+	public void setVideoOutput(final Canvas canvas, final LibVlcMediaInstance mediaInstance) {
+		final long drawable = Native.getComponentID(canvas);
+		final libvlc_exception_t exception = new libvlc_exception_t();
+		libvlc.libvlc_media_player_set_drawable(mediaInstance, (int) drawable, exception);
 	}
 
 	public Logger getLogger() {
 		return new Logger(this);
 	}
 
-	public void setMediaList(MediaList list) {
+	public void setMediaList(final MediaList list) {
 		mediaList = list;
 	}
 
@@ -114,18 +114,18 @@ public class JVLC {
 		if (vlm != null) {
 			vlm.release();
 		}
-		this.vlm = new VLM(this);
+		vlm = new VLM(this);
 		return vlm;
 	}
 
 	public LoggerVerbosityLevel getLogVerbosity() {
-		libvlc_exception_t exception = new libvlc_exception_t();
-		int level = libvlc.libvlc_get_log_verbosity(instance, exception);
+		final libvlc_exception_t exception = new libvlc_exception_t();
+		final int level = libvlc.libvlc_get_log_verbosity(instance, exception);
 		return LoggerVerbosityLevel.getSeverity(level);
 	}
 
-	public void setLogVerbosity(LoggerVerbosityLevel level) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public void setLogVerbosity(final LoggerVerbosityLevel level) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc.libvlc_set_log_verbosity(instance, level.ordinal(), exception);
 	}
 

@@ -30,7 +30,8 @@ public abstract class BaseDriver implements com.linkare.rec.impl.driver.IDriver 
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addIDriverStateListener(com.linkare.rec.impl.driver.IDriverStateListener listener)
+	@Override
+	public synchronized void addIDriverStateListener(final com.linkare.rec.impl.driver.IDriverStateListener listener)
 			throws java.util.TooManyListenersException {
 		if (listenerIDriverStateListener != null) {
 			throw new java.util.TooManyListenersException();
@@ -43,7 +44,8 @@ public abstract class BaseDriver implements com.linkare.rec.impl.driver.IDriver 
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeIDriverStateListener(com.linkare.rec.impl.driver.IDriverStateListener listener) {
+	@Override
+	public synchronized void removeIDriverStateListener(final com.linkare.rec.impl.driver.IDriverStateListener listener) {
 		listenerIDriverStateListener = null;
 	}
 
@@ -53,8 +55,9 @@ public abstract class BaseDriver implements com.linkare.rec.impl.driver.IDriver 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	protected void fireIDriverStateListenerDriverInited() {
-		if (listenerIDriverStateListener == null)
+		if (listenerIDriverStateListener == null) {
 			return;
+		}
 		listenerIDriverStateListener.driverInited();
 	}
 
@@ -64,8 +67,9 @@ public abstract class BaseDriver implements com.linkare.rec.impl.driver.IDriver 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	protected void fireIDriverStateListenerDriverConfiguring() {
-		if (listenerIDriverStateListener == null)
+		if (listenerIDriverStateListener == null) {
 			return;
+		}
 		listenerIDriverStateListener.driverConfiguring();
 	}
 
@@ -75,8 +79,9 @@ public abstract class BaseDriver implements com.linkare.rec.impl.driver.IDriver 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	protected void fireIDriverStateListenerDriverConfigured() {
-		if (listenerIDriverStateListener == null)
+		if (listenerIDriverStateListener == null) {
 			return;
+		}
 		listenerIDriverStateListener.driverConfigured();
 	}
 
@@ -86,8 +91,9 @@ public abstract class BaseDriver implements com.linkare.rec.impl.driver.IDriver 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	protected void fireIDriverStateListenerDriverStarting() {
-		if (listenerIDriverStateListener == null)
+		if (listenerIDriverStateListener == null) {
 			return;
+		}
 		listenerIDriverStateListener.driverStarting();
 	}
 
@@ -97,8 +103,9 @@ public abstract class BaseDriver implements com.linkare.rec.impl.driver.IDriver 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	protected void fireIDriverStateListenerDriverStarted() {
-		if (listenerIDriverStateListener == null)
+		if (listenerIDriverStateListener == null) {
 			return;
+		}
 		listenerIDriverStateListener.driverStarted();
 	}
 
@@ -108,8 +115,9 @@ public abstract class BaseDriver implements com.linkare.rec.impl.driver.IDriver 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	protected void fireIDriverStateListenerDriverStoping() {
-		if (listenerIDriverStateListener == null)
+		if (listenerIDriverStateListener == null) {
 			return;
+		}
 		listenerIDriverStateListener.driverStoping();
 	}
 
@@ -119,8 +127,9 @@ public abstract class BaseDriver implements com.linkare.rec.impl.driver.IDriver 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	protected void fireIDriverStateListenerDriverStoped() {
-		if (listenerIDriverStateListener == null)
+		if (listenerIDriverStateListener == null) {
 			return;
+		}
 		listenerIDriverStateListener.driverStoped();
 	}
 
@@ -130,8 +139,9 @@ public abstract class BaseDriver implements com.linkare.rec.impl.driver.IDriver 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	protected void fireIDriverStateListenerDriverReseting() {
-		if (listenerIDriverStateListener == null)
+		if (listenerIDriverStateListener == null) {
 			return;
+		}
 		listenerIDriverStateListener.driverReseting();
 	}
 
@@ -141,8 +151,9 @@ public abstract class BaseDriver implements com.linkare.rec.impl.driver.IDriver 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	protected void fireIDriverStateListenerDriverReseted() {
-		if (listenerIDriverStateListener == null)
+		if (listenerIDriverStateListener == null) {
 			return;
+		}
 		listenerIDriverStateListener.driverReseted();
 	}
 
@@ -152,8 +163,9 @@ public abstract class BaseDriver implements com.linkare.rec.impl.driver.IDriver 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	protected void fireIDriverStateListenerDriverShutdown() {
-		if (listenerIDriverStateListener == null)
+		if (listenerIDriverStateListener == null) {
 			return;
+		}
 		listenerIDriverStateListener.driverShutdown();
 	}
 
@@ -161,18 +173,19 @@ public abstract class BaseDriver implements com.linkare.rec.impl.driver.IDriver 
 		fireIDriverStateListenerDriverShutdown();
 	}
 
-	public void config(HardwareAcquisitionConfig config, HardwareInfo info) throws IncorrectStateException,
+	@Override
+	public void config(final HardwareAcquisitionConfig config, final HardwareInfo info) throws IncorrectStateException,
 			WrongConfigurationException {
 		fireIDriverStateListenerDriverConfiguring();
 		try {
 			info.validateConfig(config);
 			extraValidateConfig(config, info);
 			configure(config, info);
-		} catch (WrongConfigurationException e) {
+		} catch (final WrongConfigurationException e) {
 			fireIDriverStateListenerDriverStoped();
 			e.printStackTrace();
 			throw e;
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			throw new WrongConfigurationException(20);
 		}

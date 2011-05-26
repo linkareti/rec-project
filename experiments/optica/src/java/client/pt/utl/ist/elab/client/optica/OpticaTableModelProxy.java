@@ -19,20 +19,23 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * 
  * @author npadriano
  */
-public class OpticaTableModelProxy extends DefaultTableModel implements ExpDataModelListener, com.linkare.rec.impl.client.experiment.ExpDataModelContainer {
+public class OpticaTableModelProxy extends DefaultTableModel implements ExpDataModelListener,
+		com.linkare.rec.impl.client.experiment.ExpDataModelContainer {
 
 	/** Generated UID */
 	private static final long serialVersionUID = 9080219184984549795L;
-	
+
 	/** Holds value of property expDataModel. */
 	private ExpDataModel expDataModel = null;
 
 	// BIG SILENT NOOP
+	@Override
 	public void dataModelWaiting() {
 		fireTableStructureChanged();
 	}
 
 	// BIG SILENT NOOP
+	@Override
 	public void dataModelStoped() {
 		// fireTableDataChanged();
 	}
@@ -45,11 +48,13 @@ public class OpticaTableModelProxy extends DefaultTableModel implements ExpDataM
 	 * @param columnIndex the index of the column
 	 * @return the common ancestor class of the object values in the model.
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
-	public Class getColumnClass(int columnIndex) {
+	public Class getColumnClass(final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
-			if (columnIndex == 0)
+			if (columnIndex == 0) {
 				return String.class;
+			}
 			return null;
 		}
 		return String.class;
@@ -63,9 +68,11 @@ public class OpticaTableModelProxy extends DefaultTableModel implements ExpDataM
 	 * @return the number of columns in the model
 	 * @see #getRowCount
 	 */
+	@Override
 	public int getColumnCount() {
-		if (expDataModel == null || !expDataModel.isDataAvailable())
+		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			return 1;
+		}
 
 		return expDataModel.getChannelCount() + 1;
 	}
@@ -78,7 +85,8 @@ public class OpticaTableModelProxy extends DefaultTableModel implements ExpDataM
 	 * @param columnIndex the index of the column
 	 * @return the name of the column
 	 */
-	public String getColumnName(int columnIndex) {
+	@Override
+	public String getColumnName(final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			if (columnIndex == 0) {
 				return ReCResourceBundle.findString("ReCBaseUI$rec.bui.lbl.nodata");
@@ -88,12 +96,15 @@ public class OpticaTableModelProxy extends DefaultTableModel implements ExpDataM
 		if (columnIndex == 0) {
 			return ReCResourceBundle.findString("ReCBaseUI$rec.bui.table.model.column.sample");
 		}
-		
-		int channelIndex = columnIndex - 1;
-		
-		String ch_name = ReCResourceBundle.findString(expDataModel.getChannelConfig(channelIndex).getChannelName());
-		String multiplier = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getMultiplier().toString();
-		String ph_unit_symbol = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getPhysicsUnitSymbol();
+
+		final int channelIndex = columnIndex - 1;
+
+		final String ch_name = ReCResourceBundle.findString(expDataModel.getChannelConfig(channelIndex)
+				.getChannelName());
+		final String multiplier = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getMultiplier()
+				.toString();
+		final String ph_unit_symbol = expDataModel.getChannelConfig(channelIndex).getSelectedScale()
+				.getPhysicsUnitSymbol();
 
 		return ch_name + " [" + multiplier + ph_unit_symbol + "]";
 	}
@@ -106,13 +117,15 @@ public class OpticaTableModelProxy extends DefaultTableModel implements ExpDataM
 	 * @return the number of rows in the model
 	 * @see #getColumnCount
 	 */
+	@Override
 	public int getRowCount() {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			return 0;
 		}
 
-		if (expDataModel.getTotalSamples() == -1)
+		if (expDataModel.getTotalSamples() == -1) {
 			return 0;
+		}
 		return expDataModel.getTotalSamples();
 	}
 
@@ -124,15 +137,17 @@ public class OpticaTableModelProxy extends DefaultTableModel implements ExpDataM
 	 * @param columnIndex the column whose value is to be queried
 	 * @return the value Object at the specified cell
 	 */
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		if (expDataModel == null || !expDataModel.isDataAvailable())
+	@Override
+	public Object getValueAt(final int rowIndex, final int columnIndex) {
+		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			return null;
+		}
 
 		if (columnIndex == 0) {
 			return String.valueOf(rowIndex + 1);
 		}
-		int channelIndex = columnIndex - 1;
-		PhysicsValue value = expDataModel.getValueAt(rowIndex, channelIndex);
+		final int channelIndex = columnIndex - 1;
+		final PhysicsValue value = expDataModel.getValueAt(rowIndex, channelIndex);
 		return value.getValue().toEngineeringNotation();
 	}
 
@@ -146,15 +161,17 @@ public class OpticaTableModelProxy extends DefaultTableModel implements ExpDataM
 	 * @return true if the cell is editable
 	 * @see #setValueAt
 	 */
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
+	@Override
+	public boolean isCellEditable(final int rowIndex, final int columnIndex) {
 		return false;
 	}
 
 	private int lastnewsamples = 0;
 
-	public void newSamples(NewExpDataEvent evt) {
-		fireTableRowsInserted(Math.min(evt.getSamplesStartIndex(), lastnewsamples), (lastnewsamples = evt
-				.getSamplesEndIndex()));
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
+		fireTableRowsInserted(Math.min(evt.getSamplesStartIndex(), lastnewsamples),
+				(lastnewsamples = evt.getSamplesEndIndex()));
 	}
 
 	/**
@@ -162,8 +179,9 @@ public class OpticaTableModelProxy extends DefaultTableModel implements ExpDataM
 	 * 
 	 * @return Value of property expDataModel.
 	 */
+	@Override
 	public ExpDataModel getExpDataModel() {
-		return this.expDataModel;
+		return expDataModel;
 	}
 
 	/**
@@ -171,9 +189,11 @@ public class OpticaTableModelProxy extends DefaultTableModel implements ExpDataM
 	 * 
 	 * @param expDataModel New value of property expDataModel.
 	 */
-	public void setExpDataModel(ExpDataModel expDataModel) {
-		if (expDataModel != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel expDataModel) {
+		if (expDataModel != null) {
 			expDataModel.removeExpDataModelListener(this);
+		}
 
 		this.expDataModel = expDataModel;
 
@@ -185,20 +205,24 @@ public class OpticaTableModelProxy extends DefaultTableModel implements ExpDataM
 
 	}
 
-	public void headerAvailable(HardwareAcquisitionConfig header) {
+	public void headerAvailable(final HardwareAcquisitionConfig header) {
 		fireTableStructureChanged();
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 		fireTableStructureChanged();
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 }

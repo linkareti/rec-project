@@ -6,12 +6,15 @@
 
 package com.linkare.rec.impl.baseUI;
 
-
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
 public class ExpHistoryPanelNew extends javax.swing.JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4873003064180256937L;
 	private ExperimentHistoryRenderer renderer = null;
 
 	/** Creates new form ExpHistoryPanel */
@@ -19,13 +22,14 @@ public class ExpHistoryPanelNew extends javax.swing.JPanel {
 		initComponents();
 		renderer = new ExperimentHistoryRenderer(this);
 		/*
-		 * tableExperiments.getColumnModel().getColumn(0).setCellRenderer(cellEditorRenderer
+		 * tableExperiments.getColumnModel().getColumn(0).setCellRenderer(
+		 * cellEditorRenderer
 		 * );tableExperiments.getColumnModel().getColumn(0).setCellEditor(
 		 * cellEditorRenderer); tableExperiments.setRowHeight(16);
 		 */
 	}
 
-	public void setBackgroundImage(java.awt.Image image, boolean fill) {
+	public void setBackgroundImage(final java.awt.Image image, final boolean fill) {
 		panelExpList.setBorder(new ImageBorder(image, fill));
 	}
 
@@ -57,21 +61,21 @@ public class ExpHistoryPanelNew extends javax.swing.JPanel {
 
 	// End of variables declaration//GEN-END:variables
 
-	public void addExpHistory(ExpHistoryUINode item) {
+	public void addExpHistory(final ExpHistoryUINode item) {
 		try {
-			javax.swing.JComponent comp = renderer.getJComponent(item);
+			final javax.swing.JComponent comp = renderer.getJComponent(item);
 			panelExpList.add(comp);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void removeExpHistory(javax.swing.JComponent comp) {
+	public void removeExpHistory(final javax.swing.JComponent comp) {
 
 		try {
 			panelExpList.remove(comp);
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}

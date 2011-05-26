@@ -14,12 +14,12 @@ import com.linkare.rec.impl.client.experiment.MultSeriesTableModelProxy;
  */
 public class CSVMultSeriesTableModelProxy implements CSVModel {
 
-	private MultSeriesTableModelProxy model;
+	private final MultSeriesTableModelProxy model;
 
 	/**
 	 * Creates the <code>CSVMultSeriesTableModelProxy</code>.
 	 */
-	public CSVMultSeriesTableModelProxy(MultSeriesTableModelProxy model) {
+	public CSVMultSeriesTableModelProxy(final MultSeriesTableModelProxy model) {
 		this.model = model;
 	}
 
@@ -27,7 +27,7 @@ public class CSVMultSeriesTableModelProxy implements CSVModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getCell(int row, int col) {
+	public String getCell(final int row, final int col) {
 		return model.getValueAt(row, col).toString();
 	}
 
@@ -43,7 +43,7 @@ public class CSVMultSeriesTableModelProxy implements CSVModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getColumnHeader(int index) {
+	public String getColumnHeader(final int index) {
 		return model.getColumnName(index);
 	}
 

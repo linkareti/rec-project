@@ -15,6 +15,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -23,6 +24,10 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		com.linkare.rec.impl.client.customizer.ICustomizer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1578264648612435627L;
 	private static int MAX_FREQ = 150;
 	private static int MIN_FREQ = 20;
 	private static int MAX_SAMPLES = 20;
@@ -33,9 +38,9 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 	/** Creates new form AleatorioCustomizer */
 	public AleatorioCustomizerComponent() {
 		initComponents();
-		
+
 		initWatchMovieCheckBox();
-		
+
 		initComponentsManual();
 	}
 
@@ -81,7 +86,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		numberOfSamplesSlider.setValue(5);
 		numberOfSamplesSlider.setName("numberOfSamplesSlider");
 		// Cria a tabela com as labels para a barra do numberOfSamples
-		java.util.Hashtable hSamples = new java.util.Hashtable();
+		final java.util.Hashtable hSamples = new java.util.Hashtable();
 		hSamples.put(new Integer(1), new javax.swing.JLabel("1"));
 		hSamples.put(new Integer(5), new javax.swing.JLabel("5"));
 		hSamples.put(new Integer(10), new javax.swing.JLabel("10"));
@@ -90,7 +95,8 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		// associa a tabela de labels com a barra do numberOfSamples
 		numberOfSamplesSlider.setLabelTable(hSamples);
 		numberOfSamplesSlider.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-			public void mouseDragged(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mouseDragged(final java.awt.event.MouseEvent evt) {
 				numberOfSamplesSliderMouseDraggedHandler(evt);
 			}
 		});
@@ -102,12 +108,14 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		numberOfSamplesText.setMinimumSize(new java.awt.Dimension(60, 20));
 		numberOfSamplesText.setName("numberOfSamplesText");
 		numberOfSamplesText.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				numberOfSamplesTextActionPerformedHandler(evt);
 			}
 		});
 		numberOfSamplesText.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyTyped(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyTyped(final java.awt.event.KeyEvent evt) {
 				numberOfSamplesTextKeyTypedHandler(evt);
 			}
 		});
@@ -127,7 +135,8 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		soundDurationSlider.setValue(2500);
 		soundDurationSlider.setName("soundDurationSlider");
 		soundDurationSlider.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-			public void mouseDragged(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mouseDragged(final java.awt.event.MouseEvent evt) {
 				soundDurationSliderMouseDraggedHandler(evt);
 			}
 		});
@@ -138,12 +147,14 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		soundDurationText.setText(String.valueOf(soundDurationSlider.getValue()));
 		soundDurationText.setName("soundDurationText");
 		soundDurationText.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				soundDurationTextActionPerformedHandler(evt);
 			}
 		});
 		soundDurationText.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyTyped(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyTyped(final java.awt.event.KeyEvent evt) {
 				soundDurationTextKeyTypedHandler(evt);
 			}
 		});
@@ -164,7 +175,8 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		okButton.setMnemonic('o');
 		okButton.setText(ReCResourceBundle.findString("aleatorio$rec.exp.aleatorio.lbl.ok"));
 		okButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				okButtonActionPerformedHandler(evt);
 			}
 		});
@@ -174,7 +186,8 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		cancelButton.setMnemonic('c');
 		cancelButton.setText(ReCResourceBundle.findString("aleatorio$rec.exp.aleatorio.lbl.cancel"));
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				cancelButtonActionPerformedHandler(evt);
 			}
 		});
@@ -193,7 +206,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		frequency1Slider.setMaximum(150);
 		frequency1Slider.setMinimum(20);
 		frequency1Slider.setMinorTickSpacing(10);
-		frequency1Slider.setOrientation(javax.swing.JSlider.VERTICAL);
+		frequency1Slider.setOrientation(SwingConstants.VERTICAL);
 		frequency1Slider.setPaintLabels(true);
 		frequency1Slider.setPaintTicks(true);
 		frequency1Slider.setToolTipText("Select the Initial frequency of the sound wave.");
@@ -201,7 +214,8 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		frequency1Slider.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
 				.findString("aleatorio$rec.exp.aleatorio.lbl.1freq")));
 		frequency1Slider.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-			public void mouseDragged(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mouseDragged(final java.awt.event.MouseEvent evt) {
 				frequency1SliderMouseDraggedHandler(evt);
 			}
 		});
@@ -212,7 +226,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		frequency2Slider.setMaximum(150);
 		frequency2Slider.setMinimum(20);
 		frequency2Slider.setMinorTickSpacing(10);
-		frequency2Slider.setOrientation(javax.swing.JSlider.VERTICAL);
+		frequency2Slider.setOrientation(SwingConstants.VERTICAL);
 		frequency2Slider.setPaintLabels(true);
 		frequency2Slider.setPaintTicks(true);
 		frequency2Slider.setToolTipText("Select the final frequency of the sound wave.");
@@ -220,7 +234,8 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		frequency2Slider.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
 				.findString("aleatorio$rec.exp.aleatorio.lbl.ffreq")));
 		frequency2Slider.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-			public void mouseDragged(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mouseDragged(final java.awt.event.MouseEvent evt) {
 				frequency2SliderMouseDraggedHandler(evt);
 			}
 		});
@@ -230,7 +245,8 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		frequency1Text.setColumns(3);
 		frequency1Text.setText(String.valueOf(frequency1Slider.getValue()));
 		frequency1Text.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				frequency1TextActionPerformedHandler(evt);
 			}
 		});
@@ -243,7 +259,8 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		frequency2Text.setColumns(3);
 		frequency2Text.setText(String.valueOf(frequency2Slider.getValue()));
 		frequency2Text.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				frequency2TextActionPerformedHandler(evt);
 			}
 		});
@@ -261,77 +278,81 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 
 	}// GEN-END:initComponents
 
-	private void frequency2SliderMouseDraggedHandler(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_frequency2SliderMouseDraggedHandler
+	private void frequency2SliderMouseDraggedHandler(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_frequency2SliderMouseDraggedHandler
 		// Add your handling code here:
 		frequency2Text.setText(String.valueOf(frequency2Slider.getValue()));
 	}// GEN-LAST:event_frequency2SliderMouseDraggedHandler
 
-	private void frequency1SliderMouseDraggedHandler(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_frequency1SliderMouseDraggedHandler
+	private void frequency1SliderMouseDraggedHandler(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_frequency1SliderMouseDraggedHandler
 		// Add your handling code here:
 		frequency1Text.setText(String.valueOf(frequency1Slider.getValue()));
 	}// GEN-LAST:event_frequency1SliderMouseDraggedHandler
 
-	private void soundDurationTextKeyTypedHandler(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_soundDurationTextKeyTypedHandler
+	private void soundDurationTextKeyTypedHandler(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_soundDurationTextKeyTypedHandler
 		// Add your handling code here:
 		if (isNumber(evt) || evt.getKeyCode() == (java.awt.event.KeyEvent.VK_BACK_SPACE)
 				|| evt.getKeyCode() == (java.awt.event.KeyEvent.VK_DELETE)) {
-			if (soundDurationText.getText() == "")
+			if (soundDurationText.getText() == "") {
 				; // do nothing
-			else if (Integer.getInteger(soundDurationText.getText()).intValue() < MIN_SOUND_DURATION) {
-				soundDurationSlider.setValue(MIN_SOUND_DURATION);
-				soundDurationText.setText(String.valueOf(MIN_SOUND_DURATION));
-			} else if (Integer.getInteger(soundDurationText.getText()).intValue() > MAX_SOUND_DURATION) {
-				soundDurationSlider.setValue(MAX_SOUND_DURATION);
-				soundDurationText.setText(String.valueOf(MAX_SOUND_DURATION));
-			} else
+			} else if (Integer.getInteger(soundDurationText.getText()).intValue() < AleatorioCustomizerComponent.MIN_SOUND_DURATION) {
+				soundDurationSlider.setValue(AleatorioCustomizerComponent.MIN_SOUND_DURATION);
+				soundDurationText.setText(String.valueOf(AleatorioCustomizerComponent.MIN_SOUND_DURATION));
+			} else if (Integer.getInteger(soundDurationText.getText()).intValue() > AleatorioCustomizerComponent.MAX_SOUND_DURATION) {
+				soundDurationSlider.setValue(AleatorioCustomizerComponent.MAX_SOUND_DURATION);
+				soundDurationText.setText(String.valueOf(AleatorioCustomizerComponent.MAX_SOUND_DURATION));
+			} else {
 				soundDurationSlider.setValue(Integer.getInteger(soundDurationText.getText()).intValue());
+			}
 		}
 	}// GEN-LAST:event_soundDurationTextKeyTypedHandler
 
-	private void soundDurationTextActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_soundDurationTextActionPerformedHandler
+	private void soundDurationTextActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_soundDurationTextActionPerformedHandler
 		// Add your handling code here:
-		if (soundDurationText.getText() == "")
+		if (soundDurationText.getText() == "") {
 			; // do nothing
-		else
+		} else {
 			try {
 				soundDurationSlider.setValue(Integer.parseInt(soundDurationText.getText()));
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 			}
+		}
 	}// GEN-LAST:event_soundDurationTextActionPerformedHandler
 
-	private void soundDurationSliderMouseDraggedHandler(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_soundDurationSliderMouseDraggedHandler
+	private void soundDurationSliderMouseDraggedHandler(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_soundDurationSliderMouseDraggedHandler
 		// Add your handling code here:
 		soundDurationText.setText(String.valueOf(soundDurationSlider.getValue()));
 	}// GEN-LAST:event_soundDurationSliderMouseDraggedHandler
 
-	private void frequency2TextActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_frequency2TextActionPerformedHandler
+	private void frequency2TextActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_frequency2TextActionPerformedHandler
 		// Add your handling code here:
-		String sValue = frequency2Text.getText();
+		final String sValue = frequency2Text.getText();
 		try {
-			int nValue = Integer.parseInt(sValue);
-			if (nValue > frequency2Slider.getMinimum() && nValue < frequency2Slider.getMaximum())
+			final int nValue = Integer.parseInt(sValue);
+			if (nValue > frequency2Slider.getMinimum() && nValue < frequency2Slider.getMaximum()) {
 				frequency2Slider.setValue(nValue);
-		} catch (NumberFormatException e) {
+			}
+		} catch (final NumberFormatException e) {
 		}
 	}// GEN-LAST:event_frequency2TextActionPerformedHandler
 
-	private void frequency1TextActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_frequency1TextActionPerformedHandler
+	private void frequency1TextActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_frequency1TextActionPerformedHandler
 		// Add your handling code here:
-		String sValue = frequency1Text.getText();
+		final String sValue = frequency1Text.getText();
 		try {
-			int nValue = Integer.parseInt(sValue);
-			if (nValue > frequency1Slider.getMinimum() && nValue < frequency1Slider.getMaximum())
+			final int nValue = Integer.parseInt(sValue);
+			if (nValue > frequency1Slider.getMinimum() && nValue < frequency1Slider.getMaximum()) {
 				frequency1Slider.setValue(nValue);
-		} catch (NumberFormatException e) {
+			}
+		} catch (final NumberFormatException e) {
 		}
 	}// GEN-LAST:event_frequency1TextActionPerformedHandler
 
-	private void cancelButtonActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformedHandler
+	private void cancelButtonActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformedHandler
 		// Add your handling code here:
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_cancelButtonActionPerformedHandler
 
-	private void okButtonActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformedHandler
+	private void okButtonActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformedHandler
 		// Add your handling code here:
 		acqConfig.getSelectedHardwareParameter("NumberOfSamples").setParameterValue(
 				"" + numberOfSamplesSlider.getValue());
@@ -345,44 +366,46 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_okButtonActionPerformedHandler
 
-	private void numberOfSamplesSliderMouseDraggedHandler(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_numberOfSamplesSliderMouseDraggedHandler
+	private void numberOfSamplesSliderMouseDraggedHandler(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_numberOfSamplesSliderMouseDraggedHandler
 		// Add your handling code here:
 		numberOfSamplesText.setText(String.valueOf(numberOfSamplesSlider.getValue()));
 	}// GEN-LAST:event_numberOfSamplesSliderMouseDraggedHandler
 
-	private void numberOfSamplesTextKeyTypedHandler(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_numberOfSamplesTextKeyTypedHandler
+	private void numberOfSamplesTextKeyTypedHandler(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_numberOfSamplesTextKeyTypedHandler
 		// Add your handling code here:
 		if (isNumber(evt) || evt.getKeyCode() == (java.awt.event.KeyEvent.VK_BACK_SPACE)
 				|| evt.getKeyCode() == (java.awt.event.KeyEvent.VK_DELETE)) {
-			if (numberOfSamplesText.getText() == "")
+			if (numberOfSamplesText.getText() == "") {
 				; // do nothing
-			else if (Integer.getInteger(numberOfSamplesText.getText()).intValue() < MIN_SAMPLES) {
-				numberOfSamplesSlider.setValue(MIN_SAMPLES);
-				numberOfSamplesText.setText(String.valueOf(MIN_SAMPLES));
-			} else if (Integer.getInteger(numberOfSamplesText.getText()).intValue() > MAX_SAMPLES) {
-				numberOfSamplesSlider.setValue(MAX_SAMPLES);
-				numberOfSamplesText.setText(String.valueOf(MAX_SAMPLES));
-			} else
+			} else if (Integer.getInteger(numberOfSamplesText.getText()).intValue() < AleatorioCustomizerComponent.MIN_SAMPLES) {
+				numberOfSamplesSlider.setValue(AleatorioCustomizerComponent.MIN_SAMPLES);
+				numberOfSamplesText.setText(String.valueOf(AleatorioCustomizerComponent.MIN_SAMPLES));
+			} else if (Integer.getInteger(numberOfSamplesText.getText()).intValue() > AleatorioCustomizerComponent.MAX_SAMPLES) {
+				numberOfSamplesSlider.setValue(AleatorioCustomizerComponent.MAX_SAMPLES);
+				numberOfSamplesText.setText(String.valueOf(AleatorioCustomizerComponent.MAX_SAMPLES));
+			} else {
 				numberOfSamplesSlider.setValue(Integer.getInteger(numberOfSamplesText.getText()).intValue());
+			}
 		}
 
 	}// GEN-LAST:event_numberOfSamplesTextKeyTypedHandler
 
-	private void numberOfSamplesTextActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_numberOfSamplesTextActionPerformedHandler
+	private void numberOfSamplesTextActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_numberOfSamplesTextActionPerformedHandler
 		// Add your handling code here:
-		if (numberOfSamplesText.getText() == "")
+		if (numberOfSamplesText.getText() == "") {
 			; // do nothing
-		else if (Integer.getInteger(numberOfSamplesText.getText()).intValue() < MIN_SAMPLES) {
-			numberOfSamplesSlider.setValue(MIN_SAMPLES);
-			numberOfSamplesText.setText(String.valueOf(MIN_SAMPLES));
-		} else if (Integer.getInteger(numberOfSamplesText.getText()).intValue() > MAX_SAMPLES) {
-			numberOfSamplesSlider.setValue(MAX_SAMPLES);
-			numberOfSamplesText.setText(String.valueOf(MAX_SAMPLES));
-		} else
+		} else if (Integer.getInteger(numberOfSamplesText.getText()).intValue() < AleatorioCustomizerComponent.MIN_SAMPLES) {
+			numberOfSamplesSlider.setValue(AleatorioCustomizerComponent.MIN_SAMPLES);
+			numberOfSamplesText.setText(String.valueOf(AleatorioCustomizerComponent.MIN_SAMPLES));
+		} else if (Integer.getInteger(numberOfSamplesText.getText()).intValue() > AleatorioCustomizerComponent.MAX_SAMPLES) {
+			numberOfSamplesSlider.setValue(AleatorioCustomizerComponent.MAX_SAMPLES);
+			numberOfSamplesText.setText(String.valueOf(AleatorioCustomizerComponent.MAX_SAMPLES));
+		} else {
 			try {
 				numberOfSamplesSlider.setValue(Integer.parseInt(numberOfSamplesText.getText()));
-			} catch (NumberFormatException nfe) {
+			} catch (final NumberFormatException nfe) {
 			}
+		}
 
 	}// GEN-LAST:event_numberOfSamplesTextActionPerformedHandler
 
@@ -413,7 +436,9 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(com.linkare.rec.impl.client.customizer.ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(
+			final com.linkare.rec.impl.client.customizer.ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -425,8 +450,9 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 	 * 
 	 * @param listener The listener to remove.
 	 */
+	@Override
 	public synchronized void removeICustomizerListener(
-			com.linkare.rec.impl.client.customizer.ICustomizerListener listener) {
+			final com.linkare.rec.impl.client.customizer.ICustomizerListener listener) {
 		listenerList.remove(com.linkare.rec.impl.client.customizer.ICustomizerListener.class, listener);
 	}
 
@@ -436,9 +462,10 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == com.linkare.rec.impl.client.customizer.ICustomizerListener.class) {
 				((com.linkare.rec.impl.client.customizer.ICustomizerListener) listeners[i + 1]).canceled();
@@ -452,39 +479,43 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == com.linkare.rec.impl.client.customizer.ICustomizerListener.class) {
 				((com.linkare.rec.impl.client.customizer.ICustomizerListener) listeners[i + 1]).done();
 			}
 		}
 	}
-	
+
 	private void initWatchMovieCheckBox() {
-	    ChangeListener changeListener = new ChangeListener() {
-	        public void stateChanged(ChangeEvent changeEvent) {
-	        	boolean isSelected = watchMovieCheckBox.isSelected();
-	        	if (isSelected) {
-	        		numberOfSamplesText.setText("1");
-	        		numberOfSamplesSlider.setValue(1);
-	        	}
-	        	numberOfSamplesText.setEnabled(!isSelected);
-	        	numberOfSamplesSlider.setEnabled(!isSelected);
-	        }
-	      };
+		final ChangeListener changeListener = new ChangeListener() {
+			@Override
+			public void stateChanged(final ChangeEvent changeEvent) {
+				final boolean isSelected = watchMovieCheckBox.isSelected();
+				if (isSelected) {
+					numberOfSamplesText.setText("1");
+					numberOfSamplesSlider.setValue(1);
+				}
+				numberOfSamplesText.setEnabled(!isSelected);
+				numberOfSamplesSlider.setEnabled(!isSelected);
+			}
+		};
 		watchMovieCheckBox.addChangeListener(changeListener);
 	}
 
 	private com.linkare.rec.data.metadata.HardwareInfo hardwareInfo = null;
 	private com.linkare.rec.data.config.HardwareAcquisitionConfig acqConfig = null;
 
+	@Override
 	public com.linkare.rec.data.config.HardwareAcquisitionConfig getAcquisitionConfig() {
 		return acqConfig;
 	}
 
-	public void setHardwareAcquisitionConfig(com.linkare.rec.data.config.HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final com.linkare.rec.data.config.HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
 			numberOfSamplesSlider.setValue(acqConfig.getTotalSamples());
@@ -493,15 +524,15 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 			Integer soundDurationI = new Integer(-1);
 			try {
 				soundDurationI = Integer.valueOf(acqConfig.getSelectedHardwareParameterValue("SoundWaveDuration"));
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				e.printStackTrace();
 			}
-			int soundDuration = soundDurationI.intValue();
+			final int soundDuration = soundDurationI.intValue();
 
 			soundDurationSlider.setValue(soundDuration);
 			soundDurationText.setText(acqConfig.getSelectedHardwareParameterValue("SoundWaveDuration"));
 
-			String movieOn = acqConfig.getSelectedHardwareParameter("MovieOnOff").getParameterValue();
+			final String movieOn = acqConfig.getSelectedHardwareParameter("MovieOnOff").getParameterValue();
 
 			watchMovieCheckBox.setSelected(movieOn == "1");
 
@@ -509,7 +540,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 			try {
 				frequencyI = Integer.valueOf(acqConfig.getSelectedHardwareParameterValue("InitialFrequency"));
 				System.out.println("frequencyI: " + frequencyI);
-			} catch (NumberFormatException e) {
+			} catch (final NumberFormatException e) {
 				e.printStackTrace();
 			}
 
@@ -518,7 +549,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 
 			try {
 				frequencyI = Integer.valueOf(acqConfig.getSelectedHardwareParameterValue("FinalFrequency"));
-			} catch (NumberFormatException e) {
+			} catch (final NumberFormatException e) {
 				e.printStackTrace();
 			}
 
@@ -528,65 +559,71 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 
 	}
 
-	public void setHardwareInfo(com.linkare.rec.data.metadata.HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final com.linkare.rec.data.metadata.HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected com.linkare.rec.data.metadata.HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
+	@Override
 	public javax.swing.JComponent getCustomizerComponent() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/aleatorio/resources/AleatorioIcon.gif"));
 	}
 
+	@Override
 	public String getCustomizerTitle() {
 		return ReCResourceBundle.findString("aleatorio$rec.exp.aleatorio.customizer.title");
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
 	/**
-	 *Utilities
+	 * Utilities
 	 */
 
-	private boolean isNumber(java.awt.event.KeyEvent evt) {
-		if (evt.getKeyCode() == (java.awt.event.KeyEvent.VK_0))
+	private boolean isNumber(final java.awt.event.KeyEvent evt) {
+		if (evt.getKeyCode() == (java.awt.event.KeyEvent.VK_0)) {
 			return true;
-		else if (evt.getKeyCode() == (java.awt.event.KeyEvent.VK_1))
+		} else if (evt.getKeyCode() == (java.awt.event.KeyEvent.VK_1)) {
 			return true;
-		else if (evt.getKeyCode() == (java.awt.event.KeyEvent.VK_2))
+		} else if (evt.getKeyCode() == (java.awt.event.KeyEvent.VK_2)) {
 			return true;
-		else if (evt.getKeyCode() == (java.awt.event.KeyEvent.VK_3))
+		} else if (evt.getKeyCode() == (java.awt.event.KeyEvent.VK_3)) {
 			return true;
-		else if (evt.getKeyCode() == (java.awt.event.KeyEvent.VK_4))
+		} else if (evt.getKeyCode() == (java.awt.event.KeyEvent.VK_4)) {
 			return true;
-		else if (evt.getKeyCode() == (java.awt.event.KeyEvent.VK_5))
+		} else if (evt.getKeyCode() == (java.awt.event.KeyEvent.VK_5)) {
 			return true;
-		else if (evt.getKeyCode() == (java.awt.event.KeyEvent.VK_6))
+		} else if (evt.getKeyCode() == (java.awt.event.KeyEvent.VK_6)) {
 			return true;
-		else if (evt.getKeyCode() == (java.awt.event.KeyEvent.VK_7))
+		} else if (evt.getKeyCode() == (java.awt.event.KeyEvent.VK_7)) {
 			return true;
-		else if (evt.getKeyCode() == (java.awt.event.KeyEvent.VK_8))
+		} else if (evt.getKeyCode() == (java.awt.event.KeyEvent.VK_8)) {
 			return true;
-		else if (evt.getKeyCode() == (java.awt.event.KeyEvent.VK_9))
+		} else if (evt.getKeyCode() == (java.awt.event.KeyEvent.VK_9)) {
 			return true;
-		else
+		} else {
 			return false;
+		}
 	}
-	
+
 	private void initComponentsManual() {
-		Dictionary<Integer, JLabel> sliderLabels = new Hashtable<Integer, JLabel>();
-        sliderLabels.put(new Integer(1500), new JLabel("1500"));
-        sliderLabels.put(new Integer(5000), new JLabel("5000"));
-        sliderLabels.put(new Integer(10000), new JLabel("10000"));
-        soundDurationSlider.setLabelTable(sliderLabels);
+		final Dictionary<Integer, JLabel> sliderLabels = new Hashtable<Integer, JLabel>();
+		sliderLabels.put(new Integer(1500), new JLabel("1500"));
+		sliderLabels.put(new Integer(5000), new JLabel("5000"));
+		sliderLabels.put(new Integer(10000), new JLabel("10000"));
+		soundDurationSlider.setLabelTable(sliderLabels);
 	}
 }

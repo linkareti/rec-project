@@ -25,9 +25,9 @@ import pt.utl.ist.elab.driver.aleatorio.Utils.Oscilador;
 public class SoundThread implements Runnable {
 
 	private static final int EXTERNAL_BUFFER_SIZE = 44100;
-	private float waveSampleRate = 44100.0F; // sampleRate do audio
+	private final float waveSampleRate = 44100.0F; // sampleRate do audio
 	// determina o formato do audio
-	private AudioFormat waveFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, waveSampleRate, 16, 2, 4,
+	private final AudioFormat waveFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, waveSampleRate, 16, 2, 4,
 			waveSampleRate, false);
 
 	private float waveFrequency1; // frequency of the audio wave in Hz
@@ -44,20 +44,21 @@ public class SoundThread implements Runnable {
 	}
 
 	/**
-	 *Runs the thread. This is where the actual playing is done
+	 * Runs the thread. This is where the actual playing is done
 	 */
+	@Override
 	public void run() {
 		System.out.println(">>>Starting the sound line!");
 		// starts the linha
 		linha.start();
 
 		int nBytesRead = 0;
-		byte[] abData = new byte[EXTERNAL_BUFFER_SIZE];
+		final byte[] abData = new byte[SoundThread.EXTERNAL_BUFFER_SIZE];
 		System.out.println(">>>Reading the sound data!");
 		while (nBytesRead != -1) {
 			try {
 				nBytesRead = audiostream.read(abData, 0, abData.length);
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				e.printStackTrace();
 			}
 			if (nBytesRead >= 0) {
@@ -75,32 +76,32 @@ public class SoundThread implements Runnable {
 	public void newLine() {
 		System.out.println(">>> Creating new oscilator!");
 		try {
-			audiostream = new Oscilador(this.waveFrequency1, this.waveFrequency2, waveAmplitude, length, waveFormat);
-		} catch (Exception e) {
+			audiostream = new Oscilador(waveFrequency1, waveFrequency2, waveAmplitude, length, waveFormat);
+		} catch (final Exception e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
 
-		DataLine.Info informacao = new DataLine.Info(SourceDataLine.class, waveFormat);
+		final DataLine.Info informacao = new DataLine.Info(SourceDataLine.class, waveFormat);
 
 		try {
 			linha = (SourceDataLine) AudioSystem.getLine(informacao);
 			linha.open(waveFormat);
-		} catch (LineUnavailableException e) {
+		} catch (final LineUnavailableException e) {
 			e.printStackTrace();
 			System.exit(1);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
 	}// newLine
 
-	public void configure(float waveFrequency1, float waveFrequency2, float waveDuration) {
+	public void configure(final float waveFrequency1, final float waveFrequency2, final float waveDuration) {
 		this.waveFrequency1 = waveFrequency1;
 		this.waveFrequency2 = waveFrequency2;
 		this.waveDuration = waveDuration;
 
-		this.length = Math.round(waveSampleRate * this.waveDuration); // length
+		length = Math.round(waveSampleRate * this.waveDuration); // length
 		// of
 		// stream
 		// in
@@ -129,7 +130,7 @@ public class SoundThread implements Runnable {
 	 */
 
 	/**
-	 *Emergency stop playing (don't know if it works)
+	 * Emergency stop playing (don't know if it works)
 	 */
 	public synchronized void stopWave() {
 		linha.drain();
@@ -137,9 +138,9 @@ public class SoundThread implements Runnable {
 	}
 
 	/**
-	 *Setters and getters
+	 * Setters and getters
 	 */
-	public void setFrequency1(float waveFrequency1) {
+	public void setFrequency1(final float waveFrequency1) {
 		this.waveFrequency1 = waveFrequency1;
 	}
 
@@ -147,7 +148,7 @@ public class SoundThread implements Runnable {
 		return waveFrequency1;
 	}
 
-	public void setFrequency2(float waveFrequency2) {
+	public void setFrequency2(final float waveFrequency2) {
 		this.waveFrequency2 = waveFrequency2;
 	}
 
@@ -155,7 +156,7 @@ public class SoundThread implements Runnable {
 		return waveFrequency2;
 	}
 
-	public void setAmplitude(float waveAmplitude) {
+	public void setAmplitude(final float waveAmplitude) {
 		this.waveAmplitude = waveAmplitude;
 	}
 
@@ -163,7 +164,7 @@ public class SoundThread implements Runnable {
 		return waveAmplitude;
 	}
 
-	public void setDuration(float waveDuration) {
+	public void setDuration(final float waveDuration) {
 		this.waveDuration = waveDuration;
 	}
 
@@ -171,10 +172,11 @@ public class SoundThread implements Runnable {
 		return waveDuration;
 	}
 
+	@Override
 	public void finalize() throws Throwable {
 		try {
 			super.finalize();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw e.fillInStackTrace();
 		}
 	}// finalize

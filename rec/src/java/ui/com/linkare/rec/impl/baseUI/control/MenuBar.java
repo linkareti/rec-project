@@ -29,6 +29,11 @@ import com.linkare.rec.impl.baseUI.labsTree.WebResourceSelectionEvent;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class MenuBar extends javax.swing.JMenuBar {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2978991476103395524L;
+
 	/** Creates a new instance of MenuBar */
 	public MenuBar() {
 		super();
@@ -67,7 +72,8 @@ public class MenuBar extends javax.swing.JMenuBar {
 		jMenuItemConnect.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.tip.connect",
 				"Connect to the laboratory"));
 		jMenuItemConnect.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "connect", Boolean.FALSE,
 						Boolean.TRUE));
 			}
@@ -76,7 +82,8 @@ public class MenuBar extends javax.swing.JMenuBar {
 
 		jCheckBoxAutoPlay.setText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.autoplay", "Auto Play"));
 		jCheckBoxAutoPlay.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "autoplay", Boolean.FALSE,
 						Boolean.TRUE));
 			}
@@ -87,7 +94,8 @@ public class MenuBar extends javax.swing.JMenuBar {
 
 		jMenuItemExit.setText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.exit", "Exit"));
 		jMenuItemExit.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "exit", Boolean.FALSE,
 						Boolean.TRUE));
 			}
@@ -106,7 +114,8 @@ public class MenuBar extends javax.swing.JMenuBar {
 		jMenuItemApparatus.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.tip.apparatus",
 				"Toggle apparatus list"));
 		jMenuItemApparatus.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "tree", Boolean.FALSE,
 						Boolean.TRUE));
 			}
@@ -119,7 +128,8 @@ public class MenuBar extends javax.swing.JMenuBar {
 		jMenuItemUsers.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.tip.userslist",
 				"Toggle users list"));
 		jMenuItemUsers.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "users", Boolean.FALSE,
 						Boolean.TRUE));
 			}
@@ -133,7 +143,8 @@ public class MenuBar extends javax.swing.JMenuBar {
 		jMenuItemChat.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.tip.userslist",
 				"Toggles users list"));
 		jMenuItemChat.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "chat", Boolean.FALSE,
 						Boolean.TRUE));
 			}
@@ -147,7 +158,8 @@ public class MenuBar extends javax.swing.JMenuBar {
 		jMenuItemVideo.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.tip.video",
 				"Toggle video"));
 		jMenuItemVideo.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "video", Boolean.FALSE,
 						Boolean.TRUE));
 			}
@@ -163,7 +175,8 @@ public class MenuBar extends javax.swing.JMenuBar {
 		jMenuItemToolLab.setText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.toolbarLab",
 				"Laboratory Toolbar"));
 		jMenuItemToolLab.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "ToolbarLab", Boolean.FALSE,
 						Boolean.TRUE));
 			}
@@ -175,7 +188,8 @@ public class MenuBar extends javax.swing.JMenuBar {
 		jMenuItemToolView.setText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.toolbarView",
 				"View Toolbar"));
 		jMenuItemToolView.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "ToolbarView", Boolean.FALSE,
 						Boolean.TRUE));
 			}
@@ -191,7 +205,8 @@ public class MenuBar extends javax.swing.JMenuBar {
 
 		jMenuItemCascade.setText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.cascade", "Cascade"));
 		jMenuItemCascade.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "cascade", Boolean.FALSE,
 						Boolean.TRUE));
 			}
@@ -200,7 +215,8 @@ public class MenuBar extends javax.swing.JMenuBar {
 
 		jMenuItemTile.setText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.tile", "Tile"));
 		jMenuItemTile.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "tile", Boolean.FALSE,
 						Boolean.TRUE));
 			}
@@ -217,7 +233,8 @@ public class MenuBar extends javax.swing.JMenuBar {
 				new ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/Information16.gif"))));
 		jMenuItemContents.setText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.contents", "Contents"));
 		jMenuItemContents.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "contents", Boolean.FALSE,
 						Boolean.TRUE));
 			}
@@ -228,7 +245,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 				getClass().getResource("/com/linkare/rec/impl/baseUI/resources/About16.gif"))));
 		jMenuItemAbout.setText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.about", "About"));
 		jMenuItemAbout.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "about", Boolean.FALSE,
 						Boolean.TRUE));
 			}
@@ -241,9 +258,10 @@ public class MenuBar extends javax.swing.JMenuBar {
 
 	private JMenu jMenuApp = null;
 
-	public void addApparatusMenu(Lab lab, Apparatus apparatusConfig) {
-		if (jMenuApp != null)
+	public void addApparatusMenu(final Lab lab, final Apparatus apparatusConfig) {
+		if (jMenuApp != null) {
 			remove(jMenuApp);
+		}
 		remove(jMenuHelp);
 
 		jMenuApp = new JMenu(apparatusConfig.getText());
@@ -251,18 +269,18 @@ public class MenuBar extends javax.swing.JMenuBar {
 		final Lab labf = lab;
 		final Apparatus appf = apparatusConfig;
 
-		WebResource[] wr = apparatusConfig.getWebResource();
-		for (int wri = 0; wri < wr.length; wri++) {
-			JMenuItem writem = new JMenuItem();
-			if (wr[wri].getText() != null)
-				writem.setText(wr[wri].getText());
-			if (wr[wri].getIcon() != null)
-				writem.setIcon(wr[wri].getIcon());
-
-			final WebResource wrf = wr[wri];
+		final WebResource[] wr = apparatusConfig.getWebResource();
+		for (final WebResource wrf : wr) {
+			final JMenuItem writem = new JMenuItem();
+			if (wrf.getText() != null) {
+				writem.setText(wrf.getText());
+			}
+			if (wrf.getIcon() != null) {
+				writem.setIcon(wrf.getIcon());
+			}
 
 			writem.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent evt) {
+				public void actionPerformed(final java.awt.event.ActionEvent evt) {
 					fireTreeSelectionChangeListenerWebResourceSelectionChange(new WebResourceSelectionEvent(this, wrf,
 							appf, labf));
 				}
@@ -272,18 +290,18 @@ public class MenuBar extends javax.swing.JMenuBar {
 		}
 		jMenuApp.add(new javax.swing.JSeparator());
 
-		DefaultAcquisitionConfig[] dfacq = apparatusConfig.getDefaultAcquisitionConfig();
-		for (int dfacqi = 0; dfacqi < dfacq.length; dfacqi++) {
-			JMenuItem dfacqitem = new JMenuItem();
-			if (dfacq[dfacqi].getText() != null)
-				dfacqitem.setText(dfacq[dfacqi].getText());
-			if (dfacq[dfacqi].getIcon() != null)
-				dfacqitem.setIcon(dfacq[dfacqi].getIcon());
-
-			final DefaultAcquisitionConfig dfacqf = dfacq[dfacqi];
+		final DefaultAcquisitionConfig[] dfacq = apparatusConfig.getDefaultAcquisitionConfig();
+		for (final DefaultAcquisitionConfig dfacqf : dfacq) {
+			final JMenuItem dfacqitem = new JMenuItem();
+			if (dfacqf.getText() != null) {
+				dfacqitem.setText(dfacqf.getText());
+			}
+			if (dfacqf.getIcon() != null) {
+				dfacqitem.setIcon(dfacqf.getIcon());
+			}
 
 			dfacqitem.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent evt) {
+				public void actionPerformed(final java.awt.event.ActionEvent evt) {
 					fireTreeSelectionChangeListenerDefaultConfigSelectionChange(new DefaultConfigSelectionEvent(this,
 							dfacqf, appf, labf));
 				}
@@ -293,32 +311,33 @@ public class MenuBar extends javax.swing.JMenuBar {
 		}
 		jMenuApp.add(new javax.swing.JSeparator());
 
-		Display[] dsp = apparatusConfig.getDisplay();
-		for (int dspi = 0; dspi < dsp.length; dspi++) {
-			JCheckBoxMenuItem dspitem = new JCheckBoxMenuItem();
-			if (dsp[dspi].getText() != null)
-				dspitem.setText(dsp[dspi].getText());
-			if (dsp[dspi].getIcon() != null)
-				dspitem.setIcon(dsp[dspi].getIcon());
+		final Display[] dsp = apparatusConfig.getDisplay();
+		for (final Display dspf : dsp) {
+			final JCheckBoxMenuItem dspitem = new JCheckBoxMenuItem();
+			if (dspf.getText() != null) {
+				dspitem.setText(dspf.getText());
+			}
+			if (dspf.getIcon() != null) {
+				dspitem.setIcon(dspf.getIcon());
+			}
 
-			dspitem.setSelected(dsp[dspi].isSelected());
+			dspitem.setSelected(dspf.isSelected());
 
 			final JCheckBoxMenuItem dspitemf = dspitem;
-			final Display dspf = dsp[dspi];
-
 			dspitem.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent evt) {
+				public void actionPerformed(final java.awt.event.ActionEvent evt) {
 					dspf.setSelected(dspitemf.isSelected());
 				}
 			});
 
-			dsp[dspi].addDisplayNodePropertyChangeListener(new java.beans.PropertyChangeListener() {
-				public void propertyChange(java.beans.PropertyChangeEvent event) {
+			dspf.addDisplayNodePropertyChangeListener(new java.beans.PropertyChangeListener() {
+				public void propertyChange(final java.beans.PropertyChangeEvent event) {
 					if (event.getPropertyName().equals("selected")) {
-						if (event.getNewValue().toString().equals("true"))
+						if (event.getNewValue().toString().equals("true")) {
 							dspitemf.setSelected(true);
-						else
+						} else {
 							dspitemf.setSelected(false);
+						}
 					}
 				}
 			});
@@ -326,14 +345,16 @@ public class MenuBar extends javax.swing.JMenuBar {
 			jMenuApp.add(dspitem);
 
 			if (dspf.getOfflineCapable()) {
-				JMenuItem dspItemOffline = new JMenuItem();
-				if (dspf.getText() != null)
+				final JMenuItem dspItemOffline = new JMenuItem();
+				if (dspf.getText() != null) {
 					dspItemOffline.setText(dspf.getText());
-				if (dspf.getIcon() != null)
+				}
+				if (dspf.getIcon() != null) {
 					dspItemOffline.setIcon(dspf.getIcon());
+				}
 
 				dspItemOffline.addActionListener(new java.awt.event.ActionListener() {
-					public void actionPerformed(java.awt.event.ActionEvent evt) {
+					public void actionPerformed(final java.awt.event.ActionEvent evt) {
 						fireTreeSelectionChangeListenerDisplaySelectionChange(new DisplaySelectionEvent(this, dspf,
 								appf, labf));
 					}
@@ -350,8 +371,9 @@ public class MenuBar extends javax.swing.JMenuBar {
 
 	public void removeApparatus() {
 		remove(jMenuHelp);
-		if (jMenuApp != null)
+		if (jMenuApp != null) {
 			remove(jMenuApp);
+		}
 		jMenuApp = null;
 		add(jMenuHelp);
 		validate();
@@ -362,7 +384,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addPropertyChangeListener(java.beans.PropertyChangeListener listener) {
+	public synchronized void addPropertyChangeListener(final java.beans.PropertyChangeListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -374,7 +396,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removePropertyChangeListener(java.beans.PropertyChangeListener listener) {
+	public synchronized void removePropertyChangeListener(final java.beans.PropertyChangeListener listener) {
 		listenerList.remove(java.beans.PropertyChangeListener.class, listener);
 	}
 
@@ -383,10 +405,11 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * 
 	 * @param event The event to be fired
 	 */
-	private void firePropertyChangeListenerPropertyChange(java.beans.PropertyChangeEvent event) {
-		if (listenerList == null)
+	private void firePropertyChangeListenerPropertyChange(final java.beans.PropertyChangeEvent event) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == java.beans.PropertyChangeListener.class) {
 				((java.beans.PropertyChangeListener) listeners[i + 1]).propertyChange(event);
@@ -400,7 +423,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * @return Value of property enableConnect.
 	 */
 	public boolean isEnableConnect() {
-		return this.enableConnect;
+		return enableConnect;
 	}
 
 	/**
@@ -408,7 +431,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * 
 	 * @param enableConnect New value of property enableConnect.
 	 */
-	public void setEnableConnect(boolean enableConnect) {
+	public void setEnableConnect(final boolean enableConnect) {
 		this.enableConnect = enableConnect;
 		jMenuItemConnect.setEnabled(enableConnect);
 	}
@@ -419,7 +442,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * @return Value of property enableAbout.
 	 */
 	public boolean isEnableAbout() {
-		return this.enableAbout;
+		return enableAbout;
 	}
 
 	/**
@@ -427,7 +450,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * 
 	 * @param enableAbout New value of property enableAbout.
 	 */
-	public void setEnableAbout(boolean enableAbout) {
+	public void setEnableAbout(final boolean enableAbout) {
 		this.enableAbout = enableAbout;
 		jMenuItemAbout.setEnabled(enableAbout);
 	}
@@ -438,7 +461,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * @return Value of property enableApparatus.
 	 */
 	public boolean isEnableApparatus() {
-		return this.enableApparatus;
+		return enableApparatus;
 	}
 
 	/**
@@ -446,7 +469,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * 
 	 * @param enableApparatus New value of property enableApparatus.
 	 */
-	public void setEnableApparatus(boolean enableApparatus) {
+	public void setEnableApparatus(final boolean enableApparatus) {
 		this.enableApparatus = enableApparatus;
 		jMenuItemApparatus.setEnabled(enableApparatus);
 	}
@@ -457,7 +480,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * @return Value of property enableCascade.
 	 */
 	public boolean isEnableCascade() {
-		return this.enableCascade;
+		return enableCascade;
 	}
 
 	/**
@@ -465,7 +488,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * 
 	 * @param enableCascade New value of property enableCascade.
 	 */
-	public void setEnableCascade(boolean enableCascade) {
+	public void setEnableCascade(final boolean enableCascade) {
 		this.enableCascade = enableCascade;
 		jMenuItemCascade.setEnabled(enableCascade);
 	}
@@ -476,7 +499,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * @return Value of property enableChat.
 	 */
 	public boolean isEnableChat() {
-		return this.enableChat;
+		return enableChat;
 	}
 
 	/**
@@ -484,7 +507,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * 
 	 * @param enableChat New value of property enableChat.
 	 */
-	public void setEnableChat(boolean enableChat) {
+	public void setEnableChat(final boolean enableChat) {
 		this.enableChat = enableChat;
 		jMenuItemChat.setEnabled(enableChat);
 	}
@@ -495,7 +518,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * @return Value of property enableContents.
 	 */
 	public boolean isEnableContents() {
-		return this.enableContents;
+		return enableContents;
 	}
 
 	/**
@@ -503,7 +526,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * 
 	 * @param enableContents New value of property enableContents.
 	 */
-	public void setEnableContents(boolean enableContents) {
+	public void setEnableContents(final boolean enableContents) {
 		this.enableContents = enableContents;
 		jMenuItemContents.setEnabled(enableContents);
 	}
@@ -514,7 +537,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * @return Value of property enableExit.
 	 */
 	public boolean isEnableExit() {
-		return this.enableExit;
+		return enableExit;
 	}
 
 	/**
@@ -522,7 +545,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * 
 	 * @param enableExit New value of property enableExit.
 	 */
-	public void setEnableExit(boolean enableExit) {
+	public void setEnableExit(final boolean enableExit) {
 		this.enableExit = enableExit;
 		jMenuItemExit.setEnabled(enableExit);
 	}
@@ -533,7 +556,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * @return Value of property enableTile.
 	 */
 	public boolean isEnableTile() {
-		return this.enableTile;
+		return enableTile;
 	}
 
 	/**
@@ -541,7 +564,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * 
 	 * @param enableTile New value of property enableTile.
 	 */
-	public void setEnableTile(boolean enableTile) {
+	public void setEnableTile(final boolean enableTile) {
 		this.enableTile = enableTile;
 		jMenuItemTile.setEnabled(enableTile);
 	}
@@ -560,7 +583,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * 
 	 * @param enableToolLab New value of property enableToolLab.
 	 */
-	public void setEnableToolLab(boolean enableToolLab) {
+	public void setEnableToolLab(final boolean enableToolLab) {
 		this.enableToolLab = enableToolLab;
 		jMenuItemToolLab.setEnabled(enableToolLab);
 	}
@@ -571,7 +594,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * @return Value of property enableToolView.
 	 */
 	public boolean isEnableToolView() {
-		return this.enableToolView;
+		return enableToolView;
 	}
 
 	/**
@@ -579,7 +602,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * 
 	 * @param enableToolView New value of property enableToolView.
 	 */
-	public void setEnableToolView(boolean enableToolView) {
+	public void setEnableToolView(final boolean enableToolView) {
 		this.enableToolView = enableToolView;
 		jMenuItemToolView.setEnabled(true);
 	}
@@ -590,7 +613,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * @return Value of property enableUsers.
 	 */
 	public boolean isEnableUsers() {
-		return this.enableUsers;
+		return enableUsers;
 	}
 
 	/**
@@ -598,7 +621,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * 
 	 * @param enableUsers New value of property enableUsers.
 	 */
-	public void setEnableUsers(boolean enableUsers) {
+	public void setEnableUsers(final boolean enableUsers) {
 		this.enableUsers = enableUsers;
 		jMenuItemUsers.setEnabled(true);
 	}
@@ -609,7 +632,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * @return Value of property enableVideo.
 	 */
 	public boolean isEnableVideo() {
-		return this.enableVideo;
+		return enableVideo;
 	}
 
 	/**
@@ -617,7 +640,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * 
 	 * @param enableVideo New value of property enableVideo.
 	 */
-	public void setEnableVideo(boolean enableVideo) {
+	public void setEnableVideo(final boolean enableVideo) {
 		this.enableVideo = enableVideo;
 		jMenuItemVideo.setEnabled(enableVideo);
 	}
@@ -628,7 +651,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * @return Value of property enableAutoPlay.
 	 */
 	public boolean isEnableAutoPlay() {
-		return this.enableAutoPlay;
+		return enableAutoPlay;
 	}
 
 	/**
@@ -636,7 +659,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * 
 	 * @param enableAutoPlay New value of property enableAutoPlay.
 	 */
-	public void setEnableAutoPlay(boolean enableAutoPlay) {
+	public void setEnableAutoPlay(final boolean enableAutoPlay) {
 		this.enableAutoPlay = enableAutoPlay;
 		jCheckBoxAutoPlay.setEnabled(enableAutoPlay);
 	}
@@ -647,7 +670,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * @return Value of property selectAutoPlay.
 	 */
 	public boolean isSelectAutoPlay() {
-		return this.selectAutoPlay;
+		return selectAutoPlay;
 	}
 
 	/**
@@ -655,7 +678,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * 
 	 * @param selectAutoPlay New value of property selectAutoPlay.
 	 */
-	public void setSelectAutoPlay(boolean selectAutoPlay) {
+	public void setSelectAutoPlay(final boolean selectAutoPlay) {
 		this.selectAutoPlay = selectAutoPlay;
 		jCheckBoxAutoPlay.setSelected(selectAutoPlay);
 	}
@@ -666,7 +689,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * @param listener The listener to register.
 	 */
 	public synchronized void addTreeSelectionChangeListener(
-			com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener listener) {
+			final com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener listener) {
 		if (listenerListTree == null) {
 			listenerListTree = new javax.swing.event.EventListenerList();
 		}
@@ -679,7 +702,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * @param listener The listener to remove.
 	 */
 	public synchronized void removeTreeSelectionChangeListener(
-			com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener listener) {
+			final com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener listener) {
 		listenerListTree.remove(com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener.class, listener);
 	}
 
@@ -689,10 +712,11 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * @param event The event to be fired
 	 */
 	private void fireTreeSelectionChangeListenerDefaultConfigSelectionChange(
-			com.linkare.rec.impl.baseUI.labsTree.DefaultConfigSelectionEvent event) {
-		if (listenerListTree == null)
+			final com.linkare.rec.impl.baseUI.labsTree.DefaultConfigSelectionEvent event) {
+		if (listenerListTree == null) {
 			return;
-		Object[] listeners = listenerListTree.getListenerList();
+		}
+		final Object[] listeners = listenerListTree.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener.class) {
 				((com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener) listeners[i + 1])
@@ -707,10 +731,11 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * @param event The event to be fired
 	 */
 	private void fireTreeSelectionChangeListenerDisplaySelectionChange(
-			com.linkare.rec.impl.baseUI.labsTree.DisplaySelectionEvent event) {
-		if (listenerListTree == null)
+			final com.linkare.rec.impl.baseUI.labsTree.DisplaySelectionEvent event) {
+		if (listenerListTree == null) {
 			return;
-		Object[] listeners = listenerListTree.getListenerList();
+		}
+		final Object[] listeners = listenerListTree.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener.class) {
 				((com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener) listeners[i + 1])
@@ -725,10 +750,11 @@ public class MenuBar extends javax.swing.JMenuBar {
 	 * @param event The event to be fired
 	 */
 	private void fireTreeSelectionChangeListenerWebResourceSelectionChange(
-			com.linkare.rec.impl.baseUI.labsTree.WebResourceSelectionEvent event) {
-		if (listenerListTree == null)
+			final com.linkare.rec.impl.baseUI.labsTree.WebResourceSelectionEvent event) {
+		if (listenerListTree == null) {
 			return;
-		Object[] listeners = listenerListTree.getListenerList();
+		}
+		final Object[] listeners = listenerListTree.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener.class) {
 				((com.linkare.rec.impl.baseUI.labsTree.TreeSelectionChangeListener) listeners[i + 1])

@@ -36,21 +36,24 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 
 	/** Creates a new instance of StampRelayTranslator */
 	public StampConfigTranslator() {
-		super(COMMAND_IDENTIFIER);
+		super(StampConfigTranslator.COMMAND_IDENTIFIER);
 	}
 
-	public boolean translate(StampCommand command) {
-		if (command.getCommandIdentifier() == null)
+	@Override
+	public boolean translate(final StampCommand command) {
+		if (command.getCommandIdentifier() == null) {
 			return false;
-		if (!command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER))
+		}
+		if (!command.getCommandIdentifier().equalsIgnoreCase(StampConfigTranslator.COMMAND_IDENTIFIER)) {
 			return false;
+		}
 
 		int mode = -1;
 		int material = -1;
-		String modeStr = (String) command.getCommandData(MODE_STR);
-		String materialStr = (String) command.getCommandData(MATERIAL_STR);
-		int height = Integer.parseInt((String) command.getCommandData(HEIGHT_STR)) / 10;
-		int numsamples = ((Integer) command.getCommandData(NUMSAMPLES_STR)).intValue();
+		final String modeStr = (String) command.getCommandData(StampConfigTranslator.MODE_STR);
+		final String materialStr = (String) command.getCommandData(StampConfigTranslator.MATERIAL_STR);
+		final int height = Integer.parseInt((String) command.getCommandData(StampConfigTranslator.HEIGHT_STR)) / 10;
+		final int numsamples = ((Integer) command.getCommandData(StampConfigTranslator.NUMSAMPLES_STR)).intValue();
 
 		for (int i = 0; i < RadioactividadeStampDriver.ACQUISITION_MODES.length; i++) {
 			System.out.println("Comparing: " + modeStr + " with " + RadioactividadeStampDriver.ACQUISITION_MODES[i]);
@@ -74,24 +77,26 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 			System.out.println("Wrong Material");
 			return false;
 		}
-		if (height < MIN_HEIGHT || height > MAX_HEIGHT) {
+		if (height < StampConfigTranslator.MIN_HEIGHT || height > StampConfigTranslator.MAX_HEIGHT) {
 			System.out.println("Wrong height");
 			return false;
 		}
-		if (numsamples < MIN_SAMPLES || numsamples > MAX_SAMPLES) {
+		if (numsamples < StampConfigTranslator.MIN_SAMPLES || numsamples > StampConfigTranslator.MAX_SAMPLES) {
 			System.out.println("Wrong height");
 			return false;
 		}
 
 		String heightStr = "" + height;
-		while (heightStr.length() < 2)
+		while (heightStr.length() < 2) {
 			heightStr = "0" + heightStr;
+		}
 
 		String numSamplesStr = "" + (numsamples - 1);
-		while (numSamplesStr.length() < 2)
+		while (numSamplesStr.length() < 2) {
 			numSamplesStr = "0" + numSamplesStr;
+		}
 
-		String commandStr = command.getCommandIdentifier() + " " + heightStr + " " + material + " " + mode + " "
+		final String commandStr = command.getCommandIdentifier() + " " + heightStr + " " + material + " " + mode + " "
 				+ numSamplesStr;
 		command.setCommand(commandStr);
 

@@ -19,7 +19,7 @@ public class StampPenduloProcessor extends AbstractStampProcessor {
 
 	/** Creates a new instance of StampHelloProcessor */
 	public StampPenduloProcessor() {
-		super(COMMAND_IDENTIFIER);
+		super(StampPenduloProcessor.COMMAND_IDENTIFIER);
 	}
 
 	/**
@@ -29,21 +29,23 @@ public class StampPenduloProcessor extends AbstractStampProcessor {
 	 * @return boolean - wether the processing was successfull
 	 * 
 	 */
-	public boolean process(StampCommand command) {
+	@Override
+	public boolean process(final StampCommand command) {
 		float angle = 0;
-		String[] splitedStr = command.getCommand().split(" ");
+		final String[] splitedStr = command.getCommand().split(" ");
 
-		if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedStr[0] != null) {
+		if (command.getCommandIdentifier().equalsIgnoreCase(StampPenduloProcessor.COMMAND_IDENTIFIER)
+				&& splitedStr[0] != null) {
 			try {
 				angle = Float.parseFloat(splitedStr[0]);
-				Float oangle = new Float(angle);
-				command.addCommandData(ANGLE_ADC, oangle);
+				final Float oangle = new Float(angle);
+				command.addCommandData(StampPenduloProcessor.ANGLE_ADC, oangle);
 
 				command.setData(true);
 
 				return true;
 
-			} catch (NumberFormatException e) {
+			} catch (final NumberFormatException e) {
 				e.printStackTrace();
 				return false;
 			}
@@ -52,6 +54,7 @@ public class StampPenduloProcessor extends AbstractStampProcessor {
 		return false;
 	}
 
+	@Override
 	public boolean isData() {
 		return true;
 	}

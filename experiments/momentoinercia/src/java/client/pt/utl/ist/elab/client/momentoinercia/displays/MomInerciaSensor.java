@@ -30,14 +30,18 @@ public class MomInerciaSensor extends javax.swing.JPanel implements
 		com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
 
-	private BufferedImage disk1 = new BufferedImage(300, 46, BufferedImage.TYPE_INT_ARGB);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6674978256154227101L;
+	private final BufferedImage disk1 = new BufferedImage(300, 46, BufferedImage.TYPE_INT_ARGB);
 	private BufferedImage disk2 = null;
-	private Icon icon = new javax.swing.ImageIcon(getClass().getResource(
+	private final Icon icon = new javax.swing.ImageIcon(getClass().getResource(
 			"/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
 
 	private int imgHeight = 0;
 	private int imgWidth = 0;
-	private int y_disk2 = 0;
+	private final int y_disk2 = 0;
 	private int interval = 50;
 	private int d1Pos = 0;
 	private int d2Pos = 0;
@@ -54,18 +58,19 @@ public class MomInerciaSensor extends javax.swing.JPanel implements
 		setMinimumSize(getPreferredSize());
 		setMaximumSize(getPreferredSize());
 
-		Graphics2D g2D1 = (Graphics2D) disk1.getGraphics();
+		final Graphics2D g2D1 = (Graphics2D) disk1.getGraphics();
 
 		g2D1.setColor(Color.black);
 
 		g2D1.drawOval(0, DISK_B, 2 * DISK_A, 2 * DISK_B);
 
-		GradientPaint gp1 = new GradientPaint(0, 0, Color.blue.darker(), DISK_A, DISK_B, Color.blue.brighter(), true);
+		final GradientPaint gp1 = new GradientPaint(0, 0, Color.blue.darker(), DISK_A, DISK_B, Color.blue.brighter(),
+				true);
 		g2D1.setPaint(gp1);
 
 		g2D1.fillOval(0, 0, 2 * DISK_A, 2 * DISK_B);
 
-		g2D1.setStroke(new BasicStroke((float) DISK_B));
+		g2D1.setStroke(new BasicStroke(DISK_B));
 
 		g2D1.drawOval(0, DISK_B / 2, 2 * DISK_A, 2 * DISK_B);
 
@@ -83,6 +88,7 @@ public class MomInerciaSensor extends javax.swing.JPanel implements
 	private int speed = 300;
 
 	private class DiskThread extends Thread {
+		@Override
 		public void run() {
 			while (rotate) {
 				if (started) {
@@ -103,14 +109,14 @@ public class MomInerciaSensor extends javax.swing.JPanel implements
 				}
 
 				try {
-					sleep(speed);
-				} catch (InterruptedException ie) {
+					Thread.sleep(speed);
+				} catch (final InterruptedException ie) {
 					ie.printStackTrace();
 				}
 			}
 			try {
 				join(200);
-			} catch (InterruptedException ie) {
+			} catch (final InterruptedException ie) {
 				ie.printStackTrace();
 			}
 		}
@@ -151,18 +157,19 @@ public class MomInerciaSensor extends javax.swing.JPanel implements
 	 * @see #getComponentGraphics
 	 * @see #repaint
 	 */
-	public void paint(Graphics g) {
+	@Override
+	public void paint(final Graphics g) {
 		super.paint(g);
 
 		imgWidth = (int) getBounds().getWidth();
 		imgHeight = (int) getBounds().getHeight();
 
 		x_start = imgWidth / 2 - disk1.getWidth() / 2;
-		int y_start = imgHeight / 2 + disk1.getHeight() / 2;
+		final int y_start = imgHeight / 2 + disk1.getHeight() / 2;
 
-		int y_start2 = y_start - interval - disk1.getHeight() / 2 + 6;
+		final int y_start2 = y_start - interval - disk1.getHeight() / 2 + 6;
 
-		Graphics2D g2D = (Graphics2D) g;
+		final Graphics2D g2D = (Graphics2D) g;
 		g2D.drawImage(disk1, x_start, y_start, disk1.getWidth(), disk1.getHeight(), null);
 
 		g2D.setColor(Color.yellow);
@@ -198,42 +205,49 @@ public class MomInerciaSensor extends javax.swing.JPanel implements
 		}
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public Icon getIcon() {
 		return icon;
 	}
 
 	private ExpDataModel model = null;
 
-	public void setExpDataModel(ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
+		if (this.model != null) {
 			this.model.removeExpDataModelListener(this);
+		}
 		this.model = model;
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 
 	}
 
 	public void dataModelRunning() {
 	}
 
+	@Override
 	public void dataModelStoped() {
 		rotate = false;
 	}
 
 	private float drop = 120;
 
-	public void headerAvailable(HardwareAcquisitionConfig header) {
-		if (header == null)
+	public void headerAvailable(final HardwareAcquisitionConfig header) {
+		if (header == null) {
 			return;
+		}
 
-		int lIter = Integer.parseInt(header.getSelectedHardwareParameterValue("Launch Iteration"));
-		float cFreq = (float) (header.getSelectedFrequency().getFrequency());
+		final int lIter = Integer.parseInt(header.getSelectedHardwareParameterValue("Launch Iteration"));
+		final float cFreq = (float) (header.getSelectedFrequency().getFrequency());
 
-		String iteration = header.getSelectedHardwareParameterValue("Iteration");
+		final String iteration = header.getSelectedHardwareParameterValue("Iteration");
 
 		if (iteration.equalsIgnoreCase("Both") || iteration.equalsIgnoreCase("Launch")) {
 			drop = lIter * cFreq / 1000f;
@@ -250,11 +264,12 @@ public class MomInerciaSensor extends javax.swing.JPanel implements
 	}
 
 	private HardwareAcquisitionConfig header = null;
-	private boolean acqHeaderInited = false;
+	private final boolean acqHeaderInited = false;
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 		started = true;
-		int rpmSpeed = model.getValueAt(evt.getSamplesStartIndex(), 0).getValueNumber().intValue();
+		final int rpmSpeed = model.getValueAt(evt.getSamplesStartIndex(), 0).getValueNumber().intValue();
 		if (rpmSpeed < 1) {
 			rotate = false;
 			started = false;
@@ -268,14 +283,17 @@ public class MomInerciaSensor extends javax.swing.JPanel implements
 		}
 	}
 
+	@Override
 	public String getName() {
 		return "Discos";
 	}
 
+	@Override
 	public JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public JToolBar getToolBar() {
 		return null;
 	}
@@ -287,9 +305,9 @@ public class MomInerciaSensor extends javax.swing.JPanel implements
 		new DiskThread().start();
 	}
 
-	public static void main(String args[]) {
-		MomInerciaSensor mm = new MomInerciaSensor();
-		javax.swing.JFrame jf = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final MomInerciaSensor mm = new MomInerciaSensor();
+		final javax.swing.JFrame jf = new javax.swing.JFrame();
 		jf.getContentPane().add(mm);
 		jf.pack();
 		jf.show();
@@ -301,8 +319,9 @@ public class MomInerciaSensor extends javax.swing.JPanel implements
 			mm.speed = 7200 / i * 2;
 			// System.out.println(mm.speed);
 			try {
-				Thread.currentThread().sleep(500);
-			} catch (Exception e) {
+				Thread.currentThread();
+				Thread.sleep(500);
+			} catch (final Exception e) {
 			}
 
 			if (i < 3000) {
@@ -311,19 +330,24 @@ public class MomInerciaSensor extends javax.swing.JPanel implements
 		}
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 		headerAvailable(model.getAcquisitionConfig());
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 

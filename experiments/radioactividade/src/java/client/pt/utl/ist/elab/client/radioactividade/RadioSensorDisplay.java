@@ -18,6 +18,11 @@ import com.linkare.rec.impl.client.experiment.ExpDataModel;
  */
 public class RadioSensorDisplay extends JPanel implements ExpDataDisplay {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 533373792543481619L;
+
 	/** Creates new form PenduloSensorDisplay */
 	public RadioSensorDisplay() {
 		initComponents();
@@ -51,23 +56,28 @@ public class RadioSensorDisplay extends JPanel implements ExpDataDisplay {
 
 	// End of variables declaration//GEN-END:variables
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public Icon getIcon() {
 		return sensorDisplay1.getIcon();
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return sensorDisplay1.getMenuBar();
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return sensorDisplay1.getToolBar();
 	}
 
-	public void setExpDataModel(ExpDataModel model) {
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
 		sensorDisplay1.setExpDataModel(model);
 	}
 

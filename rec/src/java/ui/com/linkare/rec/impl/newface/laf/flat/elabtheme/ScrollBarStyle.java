@@ -16,7 +16,7 @@ public class ScrollBarStyle extends DefaultStyle {
 
 	public static final String ID = "ScrollBar";
 
-	//PROPERTIES
+	// PROPERTIES
 	public static final String PT_WIDTH = "width";
 
 	/**
@@ -28,13 +28,13 @@ public class ScrollBarStyle extends DefaultStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return ScrollBarStyle.ID;
 	}
 
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(PT_WIDTH, 18);
+		map.put(ScrollBarStyle.PT_WIDTH, 18);
 	}
 
 	// -------------------------------------------------------------------------

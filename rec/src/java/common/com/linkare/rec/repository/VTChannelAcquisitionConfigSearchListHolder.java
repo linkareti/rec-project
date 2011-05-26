@@ -11,18 +11,21 @@ public final class VTChannelAcquisitionConfigSearchListHolder implements Streama
 	public VTChannelAcquisitionConfigSearchListHolder() {
 	}
 
-	public VTChannelAcquisitionConfigSearchListHolder(ChannelAcquisitionConfigSearch[] initialValue) {
+	public VTChannelAcquisitionConfigSearchListHolder(final ChannelAcquisitionConfigSearch[] initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(InputStream i) {
+	@Override
+	public void _read(final InputStream i) {
 		value = VTChannelAcquisitionConfigSearchListHelper.read(i);
 	}
 
-	public void _write(OutputStream o) {
+	@Override
+	public void _write(final OutputStream o) {
 		VTChannelAcquisitionConfigSearchListHelper.write(o, value);
 	}
 
+	@Override
 	public TypeCode _type() {
 		return VTChannelAcquisitionConfigSearchListHelper.type();
 	}

@@ -14,6 +14,11 @@ import com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph;
  */
 public class PowerGraph extends MultSeriesXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2094904581561530632L;
+
 	/** Creates a new instance of Sensor1Graph */
 	public PowerGraph() {
 		setChannelDisplayX(2);
@@ -21,6 +26,7 @@ public class PowerGraph extends MultSeriesXYExperimentGraph {
 		setUpdatePercentage(10);
 	}
 
+	@Override
 	public String getName() {
 		return "Pot�ncia dissipada";
 	}

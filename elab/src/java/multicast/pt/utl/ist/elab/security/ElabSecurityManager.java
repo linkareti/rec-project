@@ -34,9 +34,9 @@ import com.linkare.rec.impl.multicast.security.ResourceType;
 public class ElabSecurityManager implements ISecurityManager {
 	private static String ELAB_SECURITY_MANAGER_LOGGER = "ELABSecurity.Logger";
 	static {
-		Logger l = LogManager.getLogManager().getLogger(ELAB_SECURITY_MANAGER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ElabSecurityManager.ELAB_SECURITY_MANAGER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(ELAB_SECURITY_MANAGER_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ElabSecurityManager.ELAB_SECURITY_MANAGER_LOGGER));
 		}
 	}
 
@@ -48,10 +48,12 @@ public class ElabSecurityManager implements ISecurityManager {
 		logins = new File("logins.txt");
 	}
 
-	private String LS = System.getProperty("line.separator");
+	private final String LS = System.getProperty("line.separator");
 
-	public boolean authenticate(IResource resource, IUser user) {
-		Logger.getLogger(ELAB_SECURITY_MANAGER_LOGGER).log(Level.INFO, "Authenticating " + user.getUserName());
+	@Override
+	public boolean authenticate(final IResource resource, final IUser user) {
+		Logger.getLogger(ElabSecurityManager.ELAB_SECURITY_MANAGER_LOGGER).log(Level.INFO,
+				"Authenticating " + user.getUserName());
 
 		// First try to authenticate from the members db...
 		// String userName = user.getUserName();
@@ -71,31 +73,34 @@ public class ElabSecurityManager implements ISecurityManager {
 		return true;
 	}
 
-	public boolean authorize(com.linkare.rec.impl.multicast.security.IResource resource,
-			com.linkare.rec.impl.multicast.security.IUser user, com.linkare.rec.impl.multicast.security.IOperation op) {
-		String userName = user.getUserName();
+	@Override
+	public boolean authorize(final com.linkare.rec.impl.multicast.security.IResource resource,
+			final com.linkare.rec.impl.multicast.security.IUser user,
+			final com.linkare.rec.impl.multicast.security.IOperation op) {
+		final String userName = user.getUserName();
 		if (op.getOperation() == IOperation.OP_START) {
 			try {
-				GregorianCalendar cal = new GregorianCalendar();
+				final GregorianCalendar cal = new GregorianCalendar();
 				fw = new FileWriter(logins, true);
 				resource.getResourceType();
 				fw.write(userName + " started: "
-						+ (String) resource.getProperties().get(ResourceType.MCCONTROLLER.getPropertyKey()) + " in: "
-						+ cal.get(GregorianCalendar.DAY_OF_MONTH) + "/" + (cal.get(Calendar.MONTH) + 1) + "/"
+						+ resource.getProperties().get(ResourceType.MCCONTROLLER.getPropertyKey()) + " in: "
+						+ cal.get(Calendar.DAY_OF_MONTH) + "/" + (cal.get(Calendar.MONTH) + 1) + "/"
 						+ cal.get(Calendar.YEAR) + " at " + cal.get(Calendar.HOUR_OF_DAY) + ":"
 						+ cal.get(Calendar.MINUTE) + LS);
 				fw.close();
-			} catch (Exception e) {
-				LoggerUtil.logThrowable("Error writting to file...", e, Logger.getLogger(ELAB_SECURITY_MANAGER_LOGGER));
+			} catch (final Exception e) {
+				LoggerUtil.logThrowable("Error writting to file...", e,
+						Logger.getLogger(ElabSecurityManager.ELAB_SECURITY_MANAGER_LOGGER));
 			}
 		}
 
 		return true;
 	}
 
-	public static void main(String args[]) {
-		String userName = "andre";
-		GregorianCalendar cal = new GregorianCalendar();
+	public static void main(final String args[]) {
+		final String userName = "andre";
+		final GregorianCalendar cal = new GregorianCalendar();
 		System.out.println(userName + "logged in to lab in: " + cal.get(Calendar.DAY_OF_MONTH) + "/"
 				+ (cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR) + " at " + cal.get(Calendar.HOUR_OF_DAY)
 				+ ":" + cal.get(Calendar.MINUTE));
@@ -105,7 +110,7 @@ public class ElabSecurityManager implements ISecurityManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void registerMultiCastHardware(List<ReCMultiCastHardware> multiCastHardwares) {
+	public void registerMultiCastHardware(final List<ReCMultiCastHardware> multiCastHardwares) {
 		// this security implementation doesn't require the multicast hardwares
 	}
 
@@ -113,7 +118,7 @@ public class ElabSecurityManager implements ISecurityManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void registerSecurityCommunicator(ISecurityCommunicator communicator) {
+	public void registerSecurityCommunicator(final ISecurityCommunicator communicator) {
 		// this security implementation doesn't require the multicast hardwares
 	}
 

@@ -20,7 +20,7 @@ public class OneParameterNodeOrderComparator implements Comparator<OneParameterN
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int compare(OneParameterNode arg0, OneParameterNode arg1) {
+	public int compare(final OneParameterNode arg0, final OneParameterNode arg1) {
 		return arg0.getOrder().compareTo(arg1.getOrder());
 	}
 

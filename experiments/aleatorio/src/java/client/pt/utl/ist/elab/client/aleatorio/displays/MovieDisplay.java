@@ -15,7 +15,11 @@ import com.linkare.rec.data.acquisition.PhysicsValue;
 public class MovieDisplay extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
 
-	private java.awt.Image image = null;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4842266797803515883L;
+	private final java.awt.Image image = null;
 	private static final int FRAME_RATE = 5;
 
 	/** Creates new form MovieDisplay */
@@ -54,7 +58,8 @@ public class MovieDisplay extends javax.swing.JPanel implements com.linkare.rec.
 				"/pt/utl/ist/elab/client/aleatorio/resources/Play.gif")));
 		playButton.setEnabled(false);
 		playButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				playButtonActionPerformedHandler(evt);
 			}
 		});
@@ -69,7 +74,8 @@ public class MovieDisplay extends javax.swing.JPanel implements com.linkare.rec.
 		repeatButton.setToolTipText("Rewind");
 		repeatButton.setEnabled(false);
 		repeatButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				repeatActionPerformedHandler(evt);
 			}
 		});
@@ -85,13 +91,15 @@ public class MovieDisplay extends javax.swing.JPanel implements com.linkare.rec.
 		movieSlider.setPaintTicks(true);
 		movieSlider.setValue(0);
 		movieSlider.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				movieSliderKeyReleasedHandler(evt);
 			}
 		});
 
 		movieSlider.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseReleased(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mouseReleased(final java.awt.event.MouseEvent evt) {
 				movieSliderMouseReleasedHandler(evt);
 			}
 		});
@@ -104,7 +112,8 @@ public class MovieDisplay extends javax.swing.JPanel implements com.linkare.rec.
 				"/pt/utl/ist/elab/client/aleatorio/resources/Pause.gif")));
 		pauseButton.setEnabled(false);
 		pauseButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				pauseButtonActionPerformedHandler(evt);
 			}
 		});
@@ -122,48 +131,51 @@ public class MovieDisplay extends javax.swing.JPanel implements com.linkare.rec.
 		viewingPanel.add(imageStore, java.awt.BorderLayout.CENTER);
 	}
 
-	private void movieSliderKeyReleasedHandler(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_movieSliderKeyReleasedHandler
+	private void movieSliderKeyReleasedHandler(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_movieSliderKeyReleasedHandler
 		// Add your handling code here:
 		movieIndex = movieSlider.getValue();
 		if (!play) {
 			(new Thread(new PlayLoop())).start();
 		}// if
-		else
+		else {
 			play = false;
+		}
 	}// GEN-LAST:event_movieSliderKeyReleasedHandler
 
-	private void movieSliderMouseReleasedHandler(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_movieSliderMouseReleasedHandler
+	private void movieSliderMouseReleasedHandler(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_movieSliderMouseReleasedHandler
 		// Add your handling code here:
 		movieIndex = movieSlider.getValue();
 		if (!play) {
 			(new Thread(new PlayLoop())).start();
 		}// if
-		else
+		else {
 			play = false;
+		}
 	}// GEN-LAST:event_movieSliderMouseReleasedHandler
 
-	private void pauseButtonActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_pauseButtonActionPerformedHandler
+	private void pauseButtonActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_pauseButtonActionPerformedHandler
 		// Add your handling code here:
 		play = false;
 	}// GEN-LAST:event_pauseButtonActionPerformedHandler
 
-	private void repeatActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_repeatActionPerformedHandler
+	private void repeatActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_repeatActionPerformedHandler
 		// Add your handling code here:
-		if (play)
+		if (play) {
 			movieIndex = -1;
-		else {
+		} else {
 			movieIndex = 0;
 			movieSlider.setValue(0);
 			(new Thread(new PlayLoop())).start();
 		}
 	}// GEN-LAST:event_repeatActionPerformedHandler
 
-	private void playButtonActionPerformedHandler(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_playButtonActionPerformedHandler
+	private void playButtonActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_playButtonActionPerformedHandler
 		// Add your handling code here:
 		play = true;
 
-		if (movieIndex >= movieCounter)
+		if (movieIndex >= movieCounter) {
 			movieIndex = 0;
+		}
 		playButton.setEnabled(false);
 		pauseButton.setEnabled(true);
 		// playPauseButton.setIcon(pauseIcon);
@@ -182,76 +194,85 @@ public class MovieDisplay extends javax.swing.JPanel implements com.linkare.rec.
 	// My Vars
 	boolean play = false;
 	boolean repeat = false;
-	private javax.swing.Icon playIcon = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.Icon playIcon = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/aleatorio/resources/Play.gif"));
-	private javax.swing.Icon pauseIcon = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.Icon pauseIcon = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/aleatorio/resources/Pause.gif"));
-	private javax.swing.Icon repeatIcon = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.Icon repeatIcon = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/aleatorio/resources/Undo.gif"));
-	private javax.swing.Icon icon = new javax.swing.ImageIcon(getClass().getResource(
+	private final javax.swing.Icon icon = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/aleatorio/resources/Movie_sm.gif"));
 	// java.util.Vector movieVector = new java.util.Vector();
 	// java.awt.Image[] movieArray = null;
 	// java.util.Vector movieBytesArray = null;
 
 	private com.linkare.rec.impl.client.experiment.ExpDataModel model;
-	private String name = "Movie";
+	private final String name = "Movie";
 
 	private int movieIndex = 0;
-	private int movieCounter = 0;
-	private int imageWidth = 640;
-	private int imageHeight = 480;
+	private final int movieCounter = 0;
+	private final int imageWidth = 640;
+	private final int imageHeight = 480;
 
 	/** Holds value of property moviesIndex. */
 	private int moviesIndex;
 
-	private ImageStorePanel imageStore = new ImageStorePanel();
+	private final ImageStorePanel imageStore = new ImageStorePanel();
 
 	/**
-	 *ExpDataDisplay Implementation
+	 * ExpDataDisplay Implementation
 	 */
-	public void setExpDataModel(com.linkare.rec.impl.client.experiment.ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final com.linkare.rec.impl.client.experiment.ExpDataModel model) {
+		if (this.model != null) {
 			model.removeExpDataModelListener(this);
+		}
 
 		this.model = model;
 
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 
 	}// setExpDataModel(ExpDataModel model)
 
 	private int moviesNum = 0;
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}// getDisplay()
 
+	@Override
 	public String getName() {
 		return name;
 	}// getName()
 
+	@Override
 	public javax.swing.Icon getIcon() {
 		return icon;
 	}// getIcon()
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}// getMenuBar()
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}// getToolBar()
 
 	/**
-	 *ExpDataModelListener implementation
+	 * ExpDataModelListener implementation
 	 */
 
 	private boolean passedNull = true;
 
-	public void newSamples(com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
-			byte[] imageByteArray = null;
+			final byte[] imageByteArray = null;
 			if (model.getValueAt(i, model.getChannelIndex("Movie")) != null) {
 				if (moviesFrameCounter == null) {
 					moviesFrameCounter = new int[0];
@@ -259,12 +280,12 @@ public class MovieDisplay extends javax.swing.JPanel implements com.linkare.rec.
 				}
 
 				if (passedNull) {
-					int[] tempMoviesFrameCounter = new int[moviesFrameCounter.length + 1];
+					final int[] tempMoviesFrameCounter = new int[moviesFrameCounter.length + 1];
 					System.arraycopy(moviesFrameCounter, 0, tempMoviesFrameCounter, 0, moviesFrameCounter.length);
 					tempMoviesFrameCounter[moviesFrameCounter.length] = 1;
 					moviesFrameCounter = tempMoviesFrameCounter;
 
-					int[] tempStartFrameCounter = new int[startFrameCounter.length + 1];
+					final int[] tempStartFrameCounter = new int[startFrameCounter.length + 1];
 					System.arraycopy(startFrameCounter, 0, tempStartFrameCounter, 0, startFrameCounter.length);
 					tempStartFrameCounter[startFrameCounter.length] = i;
 					startFrameCounter = tempStartFrameCounter;
@@ -272,13 +293,14 @@ public class MovieDisplay extends javax.swing.JPanel implements com.linkare.rec.
 					passedNull = false;
 
 					moviesNum++;
-				} else
+				} else {
 					moviesFrameCounter[moviesFrameCounter.length - 1]++;
-				// if (movieBytesArray == null)
-				// movieBytesArray = new
-				// java.util.Vector(model.getTotalSamples());
-				// else
-				// movieArray = addArrayEntry(movieArray);
+					// if (movieBytesArray == null)
+					// movieBytesArray = new
+					// java.util.Vector(model.getTotalSamples());
+					// else
+					// movieArray = addArrayEntry(movieArray);
+				}
 
 				// imageByteArray = model.getValueAt(lastSample,
 				// model.getChannelIndex("Movie")).getValue().getByteArrayValue().getData();
@@ -301,29 +323,30 @@ public class MovieDisplay extends javax.swing.JPanel implements com.linkare.rec.
 
 	}// newSamples(NewExpDataEvent evt)
 
+	@Override
 	public void dataModelStoped() {
 	}// dataModelStoped()
 
 	public void dataModelRunning() {
 	}// dataModelRunning()
 
-	public void headerAvailable(com.linkare.rec.data.config.HardwareAcquisitionConfig header) {
+	public void headerAvailable(final com.linkare.rec.data.config.HardwareAcquisitionConfig header) {
 	}// headerAvailable(HardwareAcquisitionConfig header)
 
 	/**
-	 *Utilities
+	 * Utilities
 	 */
 
-	private java.awt.Image byteArray2Image(byte[] byteArray) {
-		java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+	private java.awt.Image byteArray2Image(final byte[] byteArray) {
+		final java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
 		try {
 			baos.write(byteArray);
-		} catch (java.io.IOException e) {
+		} catch (final java.io.IOException e) {
 		}
 
-		java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(baos.toByteArray());
+		final java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(baos.toByteArray());
 
-		javax.imageio.stream.MemoryCacheImageInputStream mciis = new javax.imageio.stream.MemoryCacheImageInputStream(
+		final javax.imageio.stream.MemoryCacheImageInputStream mciis = new javax.imageio.stream.MemoryCacheImageInputStream(
 				bais);
 
 		java.awt.image.BufferedImage bImage = null;
@@ -331,15 +354,16 @@ public class MovieDisplay extends javax.swing.JPanel implements com.linkare.rec.
 		// converting the jpg byteArray into an image
 		try {
 			bImage = javax.imageio.ImageIO.read(mciis);
-		} catch (java.io.IOException e) {
+		} catch (final java.io.IOException e) {
 		}
 
-		return (java.awt.Image) bImage;
+		return bImage;
 	}// byteArray2Image(byte[] byteArray)
 
 	class PlayLoop extends Thread {
+		@Override
 		public void run() {
-			int sleepTime = 1000 / FRAME_RATE;
+			final int sleepTime = 1000 / MovieDisplay.FRAME_RATE;
 			// imageStore.setDisplaySize(new
 			// java.awt.Dimension((int)viewingPanel.getSize().getWidth(),
 			// (int)viewingPanel.getSize().getHeight()));
@@ -364,7 +388,7 @@ public class MovieDisplay extends javax.swing.JPanel implements com.linkare.rec.
 						synchronized (this) {
 							try {
 								this.wait(sleepTime);
-							} catch (InterruptedException e) {
+							} catch (final InterruptedException e) {
 							}
 						}
 					}// if
@@ -393,7 +417,7 @@ public class MovieDisplay extends javax.swing.JPanel implements com.linkare.rec.
 	 * @return Value of property moviesIndex.
 	 */
 	public int getMoviesIndex() {
-		return this.moviesIndex;
+		return moviesIndex;
 	}
 
 	/**
@@ -401,7 +425,7 @@ public class MovieDisplay extends javax.swing.JPanel implements com.linkare.rec.
 	 * 
 	 * @param moviesIndex New value of property moviesIndex.
 	 */
-	public void setMoviesIndex(int moviesIndex) {
+	public void setMoviesIndex(final int moviesIndex) {
 		this.moviesIndex = moviesIndex;
 	}
 
@@ -419,11 +443,13 @@ public class MovieDisplay extends javax.swing.JPanel implements com.linkare.rec.
 		return moviesNum;
 	}
 
-	public byte[] getMovieFrame(int index) {
-		if (moviesIndex > moviesNum)
+	public byte[] getMovieFrame(final int index) {
+		if (moviesIndex > moviesNum) {
 			return null;
-		if (index >= moviesFrameCounter[moviesIndex])
+		}
+		if (index >= moviesFrameCounter[moviesIndex]) {
 			return null;
+		}
 
 		// System.out.println("moviesIndex="+moviesIndex);
 		// System.out.println("index="+index);
@@ -431,27 +457,34 @@ public class MovieDisplay extends javax.swing.JPanel implements com.linkare.rec.
 		// System.out.println("startFrameCounter[moviesIndex]="+startFrameCounter[moviesIndex]);
 		// System.out.println("model.getValueAt(model.getChannelIndex(\"Movie\"),startFrameCounter[moviesIndex]+index)="+model.getValueAt(startFrameCounter[moviesIndex]+index,model.getChannelIndex("Movie")));
 
-		PhysicsValue value = model.getValueAt(startFrameCounter[moviesIndex] + index, model.getChannelIndex("Movie"));
+		final PhysicsValue value = model.getValueAt(startFrameCounter[moviesIndex] + index,
+				model.getChannelIndex("Movie"));
 		if (value != null && value.getValue() != null && value.getValue().getByteArrayValue() != null) {
 			return value.getValue().getByteArrayValue().getData();
 		}
 		return null;
-		
-//		return model.getValueAt(startFrameCounter[moviesIndex] + index, model.getChannelIndex("Movie")).getValue().getByteArrayValue().getData();
+
+		// return model.getValueAt(startFrameCounter[moviesIndex] + index,
+		// model.getChannelIndex("Movie")).getValue().getByteArrayValue().getData();
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 

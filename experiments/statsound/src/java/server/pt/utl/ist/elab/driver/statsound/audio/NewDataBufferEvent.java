@@ -15,7 +15,7 @@ public class NewDataBufferEvent {
 	javax.media.Buffer buffer;
 
 	/** Creates a new instance of NewDataBufferEvent */
-	public NewDataBufferEvent(javax.media.Buffer buffer) {
+	public NewDataBufferEvent(final javax.media.Buffer buffer) {
 		this.buffer = buffer;
 	}
 

@@ -24,8 +24,9 @@ public class SerialPortTranslator {
 	 */
 	private SerialPortTranslator() {
 	}
-	
-	public static boolean translateConfig(SerialPortCommand command, List<OneParameterNode> commandParameterNodes) {
+
+	public static boolean translateConfig(final SerialPortCommand command,
+			final List<OneParameterNode> commandParameterNodes) {
 
 		// check if it is a cfg command and has parameters
 		if (command.getCommandIdentifier() == null
@@ -33,25 +34,25 @@ public class SerialPortTranslator {
 				|| commandParameterNodes == null || commandParameterNodes.size() == 0) {
 			return false;
 		}
-		
+
 		// the parameter values validation must be made in the GUI
-		
+
 		// ordering list by order
 		Collections.sort(commandParameterNodes, new OneParameterNodeOrderComparator());
-		
+
 		// build the command
-		StringBuilder commandStr = new StringBuilder(command.getCommandIdentifier());
-		for (OneParameterNode oneParameterNode : commandParameterNodes) {
-			String parameterValue = command.getCommandData(oneParameterNode.getOrder().toString());
-			String formatedParameterValue = oneParameterNode.formatOutput(Double.valueOf(parameterValue));
+		final StringBuilder commandStr = new StringBuilder(command.getCommandIdentifier());
+		for (final OneParameterNode oneParameterNode : commandParameterNodes) {
+			final String parameterValue = command.getCommandData(oneParameterNode.getOrder().toString());
+			final String formatedParameterValue = oneParameterNode.formatOutput(Double.valueOf(parameterValue));
 			commandStr.append("\t").append(formatedParameterValue);
 		}
 		command.setCommand(commandStr.toString());
 
 		return true;
 	}
-	
-	public static void translate(SerialPortCommand command) {
+
+	public static void translate(final SerialPortCommand command) {
 		command.setCommand(command.getCommandIdentifier());
 	}
 

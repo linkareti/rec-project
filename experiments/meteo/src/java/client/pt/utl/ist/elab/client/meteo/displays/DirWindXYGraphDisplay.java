@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.meteo.displays;
  */
 public class DirWindXYGraphDisplay extends MeteoTimeExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4681168056634185544L;
+
 	/** Creates a new instance of PVXYGraphDisplay */
 	public DirWindXYGraphDisplay() {
 		super();
@@ -19,6 +24,7 @@ public class DirWindXYGraphDisplay extends MeteoTimeExperimentGraph {
 		setChannelDisplayY(3);
 	}
 
+	@Override
 	public String getName() {
 		return "Direccao do vento";
 	}

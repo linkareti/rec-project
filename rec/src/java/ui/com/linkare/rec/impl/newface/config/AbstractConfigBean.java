@@ -26,51 +26,48 @@ public abstract class AbstractConfigBean {
 	}
 
 	/**
-	 * @param listener
-	 *            The PropertyChangeListener to be added
+	 * @param listener The PropertyChangeListener to be added
 	 * 
 	 * @see PropertyChangeSupport#addPropertyChangeListener(PropertyChangeListener)
 	 */
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
+	public void addPropertyChangeListener(final PropertyChangeListener listener) {
 		changeSupport.addPropertyChangeListener(listener);
 	}
 
 	/**
-	 * @param propertyName
-	 *            The name of the property to listen on.
-	 * @param listener
-	 *            The PropertyChangeListener to be added
+	 * @param propertyName The name of the property to listen on.
+	 * @param listener The PropertyChangeListener to be added
 	 * 
-	 * @see PropertyChangeSupport#addPropertyChangeListener(String, PropertyChangeListener)
+	 * @see PropertyChangeSupport#addPropertyChangeListener(String,
+	 *      PropertyChangeListener)
 	 */
-	public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
+	public void addPropertyChangeListener(final String propertyName, final PropertyChangeListener listener) {
 		changeSupport.addPropertyChangeListener(propertyName, listener);
 	}
 
 	/**
-	 * @param listener
-	 *            The PropertyChangeListener to be removed
+	 * @param listener The PropertyChangeListener to be removed
 	 * 
 	 * @see PropertyChangeSupport#removePropertyChangeListener(PropertyChangeListener)
 	 */
-	public void removePropertyChangeListener(PropertyChangeListener listener) {
+	public void removePropertyChangeListener(final PropertyChangeListener listener) {
 		changeSupport.removePropertyChangeListener(listener);
 	}
 
 	/**
-	 * @param propertyName
-	 *            The name of the property that was listened on.
-	 * @param listener
-	 *            The PropertyChangeListener to be removed
+	 * @param propertyName The name of the property that was listened on.
+	 * @param listener The PropertyChangeListener to be removed
 	 * 
-	 * @see PropertyChangeSupport#removePropertyChangeListener(String, PropertyChangeListener)
+	 * @see PropertyChangeSupport#removePropertyChangeListener(String,
+	 *      PropertyChangeListener)
 	 */
-	public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
+	public void removePropertyChangeListener(final String propertyName, final PropertyChangeListener listener) {
 		changeSupport.removePropertyChangeListener(propertyName, listener);
 	}
 
 	/**
-	 * @return all of the <code>PropertyChangeListeners</code> added or an empty array if no listeners have been added
+	 * @return all of the <code>PropertyChangeListeners</code> added or an empty
+	 *         array if no listeners have been added
 	 * 
 	 * @see PropertyChangeSupport#getPropertyChangeListeners()
 	 */
@@ -79,15 +76,15 @@ public abstract class AbstractConfigBean {
 	}
 
 	/**
-	 * @param propertyName
-	 *            The name of the property being listened to
+	 * @param propertyName The name of the property being listened to
 	 * 
-	 * @return all of the <code>PropertyChangeListeners</code> associated with the named property. If no such listeners
-	 *         have been added, or if <code>propertyName</code> is null, an empty array is returned.
+	 * @return all of the <code>PropertyChangeListeners</code> associated with
+	 *         the named property. If no such listeners have been added, or if
+	 *         <code>propertyName</code> is null, an empty array is returned.
 	 * 
 	 * @see PropertyChangeSupport#getPropertyChangeListeners(String)
 	 */
-	public PropertyChangeListener[] getPropertyChangeListeners(String propertyName) {
+	public PropertyChangeListener[] getPropertyChangeListeners(final String propertyName) {
 		return changeSupport.getPropertyChangeListeners(propertyName);
 	}
 }

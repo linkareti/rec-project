@@ -3,24 +3,24 @@ package com.linkare.rec.data.acquisition;
 abstract public class PhysicsValHelper {
 	private static String _id = "IDL:com/linkare/rec/data/acquisitionData/PhysicsVal:1.0";
 
-	public static void insert(org.omg.CORBA.Any a, com.linkare.rec.data.acquisition.PhysicsVal that) {
-		org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
-		a.type(type());
-		write(out, that);
-		a.read_value(out.create_input_stream(), type());
+	public static void insert(final org.omg.CORBA.Any a, final com.linkare.rec.data.acquisition.PhysicsVal that) {
+		final org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
+		a.type(PhysicsValHelper.type());
+		PhysicsValHelper.write(out, that);
+		a.read_value(out.create_input_stream(), PhysicsValHelper.type());
 	}
 
-	public static com.linkare.rec.data.acquisition.PhysicsVal extract(org.omg.CORBA.Any a) {
-		return read(a.create_input_stream());
+	public static com.linkare.rec.data.acquisition.PhysicsVal extract(final org.omg.CORBA.Any a) {
+		return PhysicsValHelper.read(a.create_input_stream());
 	}
 
 	private static org.omg.CORBA.TypeCode __typeCode = null;
 
 	synchronized public static org.omg.CORBA.TypeCode type() {
-		if (__typeCode == null) {
+		if (PhysicsValHelper.__typeCode == null) {
 			org.omg.CORBA.TypeCode _disTypeCode0;
 			_disTypeCode0 = com.linkare.rec.data.acquisition.PhysicsValueTypeHelper.type();
-			org.omg.CORBA.UnionMember[] _members0 = new org.omg.CORBA.UnionMember[8];
+			final org.omg.CORBA.UnionMember[] _members0 = new org.omg.CORBA.UnionMember[8];
 			org.omg.CORBA.TypeCode _tcOf_members0;
 			org.omg.CORBA.Any _anyOf_members0;
 
@@ -79,18 +79,18 @@ abstract public class PhysicsValHelper {
 					com.linkare.rec.data.acquisition.PhysicsValueType.ByteArrayVal);
 			_tcOf_members0 = com.linkare.rec.data.acquisition.ByteArrayValueHelper.type();
 			_members0[7] = new org.omg.CORBA.UnionMember("byte_array_value", _anyOf_members0, _tcOf_members0, null);
-			__typeCode = org.omg.CORBA.ORB.init().create_union_tc(
+			PhysicsValHelper.__typeCode = org.omg.CORBA.ORB.init().create_union_tc(
 					com.linkare.rec.data.acquisition.PhysicsValHelper.id(), "PhysicsVal", _disTypeCode0, _members0);
 		}
-		return __typeCode;
+		return PhysicsValHelper.__typeCode;
 	}
 
 	public static String id() {
-		return _id;
+		return PhysicsValHelper._id;
 	}
 
-	public static com.linkare.rec.data.acquisition.PhysicsVal read(org.omg.CORBA.portable.InputStream istream) {
-		com.linkare.rec.data.acquisition.PhysicsVal new_one = new com.linkare.rec.data.acquisition.PhysicsVal();
+	public static com.linkare.rec.data.acquisition.PhysicsVal read(final org.omg.CORBA.portable.InputStream istream) {
+		final com.linkare.rec.data.acquisition.PhysicsVal new_one = new com.linkare.rec.data.acquisition.PhysicsVal();
 
 		new_one.setDiscriminator(com.linkare.rec.data.acquisition.PhysicsValueTypeHelper.read(istream));
 		if (new_one.getDiscriminator().value() == com.linkare.rec.data.acquisition.PhysicsValueType._BooleanVal) {
@@ -114,8 +114,8 @@ abstract public class PhysicsValHelper {
 		return new_one;
 	}
 
-	public static void write(org.omg.CORBA.portable.OutputStream ostream,
-			com.linkare.rec.data.acquisition.PhysicsVal value) {
+	public static void write(final org.omg.CORBA.portable.OutputStream ostream,
+			final com.linkare.rec.data.acquisition.PhysicsVal value) {
 		com.linkare.rec.data.acquisition.PhysicsValueTypeHelper.write(ostream, value.getDiscriminator());
 		if (value.getDiscriminator().value() == com.linkare.rec.data.acquisition.PhysicsValueType._BooleanVal) {
 			ostream.write_boolean(value.isBooleanValue());

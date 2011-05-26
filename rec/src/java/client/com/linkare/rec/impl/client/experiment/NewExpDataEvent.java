@@ -17,6 +17,11 @@ import com.linkare.rec.impl.utils.IntersectableEvent;
  */
 public class NewExpDataEvent extends java.util.EventObject implements IntersectableEvent {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 574403812294394017L;
+
 	/** Holds value of property samplesStartRow. */
 	private int samplesStartIndex;
 
@@ -24,7 +29,7 @@ public class NewExpDataEvent extends java.util.EventObject implements Intersecta
 	private int samplesEndIndex;
 
 	/** Creates a new instance of NewSamplesEvent */
-	public NewExpDataEvent(Object source, int samplesStartIndex, int samplesEndIndex) {
+	public NewExpDataEvent(final Object source, final int samplesStartIndex, final int samplesEndIndex) {
 		super(source);
 		this.samplesStartIndex = samplesStartIndex;
 		this.samplesEndIndex = samplesEndIndex;
@@ -36,7 +41,7 @@ public class NewExpDataEvent extends java.util.EventObject implements Intersecta
 	 * @return Value of property samplesStartRow.
 	 */
 	public int getSamplesStartIndex() {
-		return this.samplesStartIndex;
+		return samplesStartIndex;
 	}
 
 	/**
@@ -45,15 +50,16 @@ public class NewExpDataEvent extends java.util.EventObject implements Intersecta
 	 * @return Value of property samplesEndIndex.
 	 */
 	public int getSamplesEndIndex() {
-		return this.samplesEndIndex;
+		return samplesEndIndex;
 	}
 
-	public boolean intersectTo(IntersectableEvent other) {
+	@Override
+	public boolean intersectTo(final IntersectableEvent other) {
 		if (other == null || !(other instanceof NewExpDataEvent)) {
 			return false;
 		}
 
-		NewExpDataEvent evt = (NewExpDataEvent) other;
+		final NewExpDataEvent evt = (NewExpDataEvent) other;
 		samplesStartIndex = Math.min(samplesStartIndex, evt.getSamplesStartIndex());
 		samplesEndIndex = Math.max(samplesEndIndex, evt.getSamplesEndIndex());
 

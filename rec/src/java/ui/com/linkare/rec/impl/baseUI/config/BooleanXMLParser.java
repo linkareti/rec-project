@@ -12,18 +12,20 @@ package com.linkare.rec.impl.baseUI.config;
  */
 public class BooleanXMLParser {
 
-	public static boolean parseBoolean(String value) {
-		if (value == null)
+	public static boolean parseBoolean(final String value) {
+		if (value == null) {
 			return false;
+		}
 
 		if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("1") || value.equalsIgnoreCase("on")
-				|| value.equalsIgnoreCase("yes"))
+				|| value.equalsIgnoreCase("yes")) {
 			return true;
-		else
+		} else {
 			return false;
+		}
 	}
 
-	public static String toString(boolean value) {
+	public static String toString(final boolean value) {
 		return value ? "true" : "false";
 	}
 }

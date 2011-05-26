@@ -12,12 +12,17 @@ package pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs;
  */
 public class ConfInOut extends javax.swing.JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3471345210234947864L;
+
 	/** Creates new form ConfInOut */
-	public ConfInOut(java.awt.Frame parent, boolean modal,
-			pt.utl.ist.elab.client.webrobot.customizer.Models.ModelConfInOut model) {
+	public ConfInOut(final java.awt.Frame parent, final boolean modal,
+			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelConfInOut model) {
 		super(parent, modal);
 		initComponents();
-		this.modelConfInOut = model;
+		modelConfInOut = model;
 		readModel();
 		jButtonConfInOutOk.requestFocus();
 	}
@@ -98,19 +103,22 @@ public class ConfInOut extends javax.swing.JDialog {
 		setTitle("Configura\u00e7\u00e3o Entradas/Sa\u00eddas");
 		setResizable(false);
 		addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyPressed(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyPressed(final java.awt.event.KeyEvent evt) {
 				formKeyPressed(evt);
 			}
 		});
 
 		addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mouseClicked(final java.awt.event.MouseEvent evt) {
 				formMouseClicked(evt);
 			}
 		});
 
 		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent evt) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent evt) {
 				exitForm(evt);
 			}
 		});
@@ -126,12 +134,12 @@ public class ConfInOut extends javax.swing.JDialog {
 				new java.awt.Font("Arial", 0, 11), new java.awt.Color(51, 0, 102)));
 		jPanelAnalogic.setPreferredSize(new java.awt.Dimension(170, 100));
 		jCheckBoxA1.setForeground(new java.awt.Color(51, 0, 102));
-		jCheckBoxA1.setSelected(intBoolean(modelConfInOut.getA1()));
+		jCheckBoxA1.setSelected(intBoolean(ConfInOut.modelConfInOut.getA1()));
 		jCheckBoxA1.setText("A1");
 		jPanelAnalogic.add(jCheckBoxA1, new java.awt.GridBagConstraints());
 
 		jCheckBoxA2.setForeground(new java.awt.Color(51, 0, 102));
-		jCheckBoxA2.setSelected(intBoolean(modelConfInOut.getA2()));
+		jCheckBoxA2.setSelected(intBoolean(ConfInOut.modelConfInOut.getA2()));
 		jCheckBoxA2.setText("A2");
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
@@ -139,7 +147,7 @@ public class ConfInOut extends javax.swing.JDialog {
 		jPanelAnalogic.add(jCheckBoxA2, gridBagConstraints);
 
 		jCheckBoxA3.setForeground(new java.awt.Color(51, 0, 102));
-		jCheckBoxA3.setSelected(intBoolean(modelConfInOut.getA3()));
+		jCheckBoxA3.setSelected(intBoolean(ConfInOut.modelConfInOut.getA3()));
 		jCheckBoxA3.setText("A3");
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -147,7 +155,7 @@ public class ConfInOut extends javax.swing.JDialog {
 		jPanelAnalogic.add(jCheckBoxA3, gridBagConstraints);
 
 		jCheckBoxA4.setForeground(new java.awt.Color(51, 0, 102));
-		jCheckBoxA4.setSelected(intBoolean(modelConfInOut.getA4()));
+		jCheckBoxA4.setSelected(intBoolean(ConfInOut.modelConfInOut.getA4()));
 		jCheckBoxA4.setText("A4");
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
@@ -170,7 +178,7 @@ public class ConfInOut extends javax.swing.JDialog {
 
 		jTextFieldV1.setColumns(3);
 		jTextFieldV1.setForeground(new java.awt.Color(51, 0, 102));
-		jTextFieldV1.setText("" + modelConfInOut.getV1());
+		jTextFieldV1.setText("" + ConfInOut.modelConfInOut.getV1());
 		jPanelIniVarAux.add(jTextFieldV1);
 
 		jLabelV2.setForeground(new java.awt.Color(51, 0, 102));
@@ -180,7 +188,7 @@ public class ConfInOut extends javax.swing.JDialog {
 
 		jTextFieldV2.setColumns(3);
 		jTextFieldV2.setForeground(new java.awt.Color(51, 0, 102));
-		jTextFieldV2.setText("" + modelConfInOut.getV2());
+		jTextFieldV2.setText("" + ConfInOut.modelConfInOut.getV2());
 		jPanelIniVarAux.add(jTextFieldV2);
 
 		jLabelV3.setForeground(new java.awt.Color(51, 0, 102));
@@ -190,7 +198,7 @@ public class ConfInOut extends javax.swing.JDialog {
 
 		jTextFieldV3.setColumns(3);
 		jTextFieldV3.setForeground(new java.awt.Color(51, 0, 102));
-		jTextFieldV3.setText("" + modelConfInOut.getV3());
+		jTextFieldV3.setText("" + ConfInOut.modelConfInOut.getV3());
 		jPanelIniVarAux.add(jTextFieldV3);
 
 		jLabelV4.setForeground(new java.awt.Color(51, 0, 102));
@@ -200,7 +208,7 @@ public class ConfInOut extends javax.swing.JDialog {
 
 		jTextFieldV4.setColumns(3);
 		jTextFieldV4.setForeground(new java.awt.Color(51, 0, 102));
-		jTextFieldV4.setText("" + modelConfInOut.getV4());
+		jTextFieldV4.setText("" + ConfInOut.modelConfInOut.getV4());
 		jPanelIniVarAux.add(jTextFieldV4);
 
 		jLabelV5.setForeground(new java.awt.Color(51, 0, 102));
@@ -210,7 +218,7 @@ public class ConfInOut extends javax.swing.JDialog {
 
 		jTextFieldV5.setColumns(3);
 		jTextFieldV5.setForeground(new java.awt.Color(51, 0, 102));
-		jTextFieldV5.setText("" + modelConfInOut.getV5());
+		jTextFieldV5.setText("" + ConfInOut.modelConfInOut.getV5());
 		jPanelIniVarAux.add(jTextFieldV5);
 
 		jPanelConfInOutOpts.add(jPanelIniVarAux, java.awt.BorderLayout.CENTER);
@@ -249,12 +257,12 @@ public class ConfInOut extends javax.swing.JDialog {
 				javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11),
 				new java.awt.Color(51, 0, 102)));
 		jRadioButtonB0Out.setForeground(new java.awt.Color(51, 0, 102));
-		jRadioButtonB0Out.setSelected(!intBoolean(modelConfInOut.getB0()));
+		jRadioButtonB0Out.setSelected(!intBoolean(ConfInOut.modelConfInOut.getB0()));
 		buttonGroupB0.add(jRadioButtonB0Out);
 		jPanelB0.add(jRadioButtonB0Out);
 
 		jRadioButtonB0In.setForeground(new java.awt.Color(51, 0, 102));
-		jRadioButtonB0In.setSelected(intBoolean(modelConfInOut.getB0()));
+		jRadioButtonB0In.setSelected(intBoolean(ConfInOut.modelConfInOut.getB0()));
 		buttonGroupB0.add(jRadioButtonB0In);
 		jPanelB0.add(jRadioButtonB0In);
 
@@ -266,12 +274,12 @@ public class ConfInOut extends javax.swing.JDialog {
 				javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11),
 				new java.awt.Color(51, 0, 102)));
 		jRadioButtonB1Out.setForeground(new java.awt.Color(51, 0, 102));
-		jRadioButtonB1Out.setSelected(!intBoolean(modelConfInOut.getB1()));
+		jRadioButtonB1Out.setSelected(!intBoolean(ConfInOut.modelConfInOut.getB1()));
 		buttonGroupB1.add(jRadioButtonB1Out);
 		jPanelB1.add(jRadioButtonB1Out);
 
 		jRadioButtonB1In.setForeground(new java.awt.Color(51, 0, 102));
-		jRadioButtonB1In.setSelected(intBoolean(modelConfInOut.getB1()));
+		jRadioButtonB1In.setSelected(intBoolean(ConfInOut.modelConfInOut.getB1()));
 		buttonGroupB1.add(jRadioButtonB1In);
 		jPanelB1.add(jRadioButtonB1In);
 
@@ -283,12 +291,12 @@ public class ConfInOut extends javax.swing.JDialog {
 				javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11),
 				new java.awt.Color(51, 0, 102)));
 		jRadioButtonB2Out.setForeground(new java.awt.Color(51, 0, 102));
-		jRadioButtonB2Out.setSelected(!intBoolean(modelConfInOut.getB2()));
+		jRadioButtonB2Out.setSelected(!intBoolean(ConfInOut.modelConfInOut.getB2()));
 		buttonGroupB2.add(jRadioButtonB2Out);
 		jPanelB2.add(jRadioButtonB2Out);
 
 		jRadioButtonB2In.setForeground(new java.awt.Color(51, 0, 102));
-		jRadioButtonB2In.setSelected(intBoolean(modelConfInOut.getB2()));
+		jRadioButtonB2In.setSelected(intBoolean(ConfInOut.modelConfInOut.getB2()));
 		buttonGroupB2.add(jRadioButtonB2In);
 		jPanelB2.add(jRadioButtonB2In);
 
@@ -300,12 +308,12 @@ public class ConfInOut extends javax.swing.JDialog {
 				javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11),
 				new java.awt.Color(51, 0, 102)));
 		jRadioButtonB3Out.setForeground(new java.awt.Color(51, 0, 102));
-		jRadioButtonB3Out.setSelected(!intBoolean(modelConfInOut.getB3()));
+		jRadioButtonB3Out.setSelected(!intBoolean(ConfInOut.modelConfInOut.getB3()));
 		buttonGroupB3.add(jRadioButtonB3Out);
 		jPanelB3.add(jRadioButtonB3Out);
 
 		jRadioButtonB3In.setForeground(new java.awt.Color(51, 0, 102));
-		jRadioButtonB3In.setSelected(intBoolean(modelConfInOut.getB3()));
+		jRadioButtonB3In.setSelected(intBoolean(ConfInOut.modelConfInOut.getB3()));
 		buttonGroupB3.add(jRadioButtonB3In);
 		jPanelB3.add(jRadioButtonB3In);
 
@@ -317,12 +325,12 @@ public class ConfInOut extends javax.swing.JDialog {
 				javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11),
 				new java.awt.Color(51, 0, 102)));
 		jRadioButtonB4Out.setForeground(new java.awt.Color(51, 0, 102));
-		jRadioButtonB4Out.setSelected(!intBoolean(modelConfInOut.getB4()));
+		jRadioButtonB4Out.setSelected(!intBoolean(ConfInOut.modelConfInOut.getB4()));
 		buttonGroupB4.add(jRadioButtonB4Out);
 		jPanelB4.add(jRadioButtonB4Out);
 
 		jRadioButtonB4In.setForeground(new java.awt.Color(51, 0, 102));
-		jRadioButtonB4In.setSelected(intBoolean(modelConfInOut.getB4()));
+		jRadioButtonB4In.setSelected(intBoolean(ConfInOut.modelConfInOut.getB4()));
 		buttonGroupB4.add(jRadioButtonB4In);
 		jPanelB4.add(jRadioButtonB4In);
 
@@ -334,12 +342,12 @@ public class ConfInOut extends javax.swing.JDialog {
 				javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11),
 				new java.awt.Color(51, 0, 102)));
 		jRadioButtonB5Out.setForeground(new java.awt.Color(51, 0, 102));
-		jRadioButtonB5Out.setSelected(!intBoolean(modelConfInOut.getB5()));
+		jRadioButtonB5Out.setSelected(!intBoolean(ConfInOut.modelConfInOut.getB5()));
 		buttonGroupB5.add(jRadioButtonB5Out);
 		jPanelB5.add(jRadioButtonB5Out);
 
 		jRadioButtonB5In.setForeground(new java.awt.Color(51, 0, 102));
-		jRadioButtonB5In.setSelected(intBoolean(modelConfInOut.getB5()));
+		jRadioButtonB5In.setSelected(intBoolean(ConfInOut.modelConfInOut.getB5()));
 		buttonGroupB5.add(jRadioButtonB5In);
 		jPanelB5.add(jRadioButtonB5In);
 
@@ -351,12 +359,12 @@ public class ConfInOut extends javax.swing.JDialog {
 				javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11),
 				new java.awt.Color(51, 0, 102)));
 		jRadioButtonB6Out.setForeground(new java.awt.Color(51, 0, 102));
-		jRadioButtonB6Out.setSelected(!intBoolean(modelConfInOut.getB6()));
+		jRadioButtonB6Out.setSelected(!intBoolean(ConfInOut.modelConfInOut.getB6()));
 		buttonGroupB6.add(jRadioButtonB6Out);
 		jPanelB6.add(jRadioButtonB6Out);
 
 		jRadioButtonB6In.setForeground(new java.awt.Color(51, 0, 102));
-		jRadioButtonB6In.setSelected(intBoolean(modelConfInOut.getB6()));
+		jRadioButtonB6In.setSelected(intBoolean(ConfInOut.modelConfInOut.getB6()));
 		buttonGroupB6.add(jRadioButtonB6In);
 		jPanelB6.add(jRadioButtonB6In);
 
@@ -368,12 +376,12 @@ public class ConfInOut extends javax.swing.JDialog {
 				javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11),
 				new java.awt.Color(51, 0, 102)));
 		jRadioButtonB7Out.setForeground(new java.awt.Color(51, 0, 102));
-		jRadioButtonB7Out.setSelected(!intBoolean(modelConfInOut.getB7()));
+		jRadioButtonB7Out.setSelected(!intBoolean(ConfInOut.modelConfInOut.getB7()));
 		buttonGroupB7.add(jRadioButtonB7Out);
 		jPanelB7.add(jRadioButtonB7Out);
 
 		jRadioButtonB7In.setForeground(new java.awt.Color(51, 0, 102));
-		jRadioButtonB7In.setSelected(intBoolean(modelConfInOut.getB7()));
+		jRadioButtonB7In.setSelected(intBoolean(ConfInOut.modelConfInOut.getB7()));
 		buttonGroupB7.add(jRadioButtonB7In);
 		jPanelB7.add(jRadioButtonB7In);
 
@@ -385,12 +393,12 @@ public class ConfInOut extends javax.swing.JDialog {
 				javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11),
 				new java.awt.Color(51, 0, 102)));
 		jRadioButtonC0Out.setForeground(new java.awt.Color(51, 0, 102));
-		jRadioButtonC0Out.setSelected(!intBoolean(modelConfInOut.getC0()));
+		jRadioButtonC0Out.setSelected(!intBoolean(ConfInOut.modelConfInOut.getC0()));
 		buttonGroupC0.add(jRadioButtonC0Out);
 		jPanelC0.add(jRadioButtonC0Out);
 
 		jRadioButtonC0In.setForeground(new java.awt.Color(51, 0, 102));
-		jRadioButtonC0In.setSelected(intBoolean(modelConfInOut.getC0()));
+		jRadioButtonC0In.setSelected(intBoolean(ConfInOut.modelConfInOut.getC0()));
 		buttonGroupC0.add(jRadioButtonC0In);
 		jPanelC0.add(jRadioButtonC0In);
 
@@ -402,12 +410,12 @@ public class ConfInOut extends javax.swing.JDialog {
 				javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11),
 				new java.awt.Color(51, 0, 102)));
 		jRadioButtonC3Out.setForeground(new java.awt.Color(51, 0, 102));
-		jRadioButtonC3Out.setSelected(!intBoolean(modelConfInOut.getC3()));
+		jRadioButtonC3Out.setSelected(!intBoolean(ConfInOut.modelConfInOut.getC3()));
 		buttonGroupC3.add(jRadioButtonC3Out);
 		jPanelC3.add(jRadioButtonC3Out);
 
 		jRadioButtonC3In.setForeground(new java.awt.Color(51, 0, 102));
-		jRadioButtonC3In.setSelected(intBoolean(modelConfInOut.getC3()));
+		jRadioButtonC3In.setSelected(intBoolean(ConfInOut.modelConfInOut.getC3()));
 		buttonGroupC3.add(jRadioButtonC3In);
 		jPanelC3.add(jRadioButtonC3In);
 
@@ -422,13 +430,15 @@ public class ConfInOut extends javax.swing.JDialog {
 		jButtonConfInOutOk.setMaximumSize(new java.awt.Dimension(73, 26));
 		jButtonConfInOutOk.setPreferredSize(new java.awt.Dimension(73, 26));
 		jButtonConfInOutOk.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jButtonConfInOutOkKeyReleased(evt);
 			}
 		});
 
 		jButtonConfInOutOk.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonConfInOutOkMousePressed(evt);
 			}
 		});
@@ -438,7 +448,8 @@ public class ConfInOut extends javax.swing.JDialog {
 		jButtonConfInOutCancel.setForeground(new java.awt.Color(51, 0, 102));
 		jButtonConfInOutCancel.setText("Cancel");
 		jButtonConfInOutCancel.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonConfInOutCancelMousePressed(evt);
 			}
 		});
@@ -450,7 +461,7 @@ public class ConfInOut extends javax.swing.JDialog {
 		pack();
 	}// GEN-END:initComponents
 
-	private void jButtonConfInOutOkKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jButtonConfInOutOkKeyReleased
+	private void jButtonConfInOutOkKeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jButtonConfInOutOkKeyReleased
 		if (evt.getKeyCode() == 10) {
 			jButtonConfInOutOkMousePressed(null);
 		} else if (evt.getKeyCode() == 27) {
@@ -458,15 +469,15 @@ public class ConfInOut extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_jButtonConfInOutOkKeyReleased
 
-	private void jButtonConfInOutCancelMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonConfInOutCancelMousePressed
-		this.hide();
+	private void jButtonConfInOutCancelMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonConfInOutCancelMousePressed
+		hide();
 	}// GEN-LAST:event_jButtonConfInOutCancelMousePressed
 
-	private void formMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseClicked
+	private void formMouseClicked(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseClicked
 		this.requestFocus();
 	}// GEN-LAST:event_formMouseClicked
 
-	private void formKeyPressed(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_formKeyPressed
+	private void formKeyPressed(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_formKeyPressed
 		if (evt.getKeyCode() == 10) {
 			jButtonConfInOutOkMousePressed(null);
 		} else if (evt.getKeyCode() == 27) {
@@ -474,84 +485,84 @@ public class ConfInOut extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_formKeyPressed
 
-	private void jButtonConfInOutOkMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonConfInOutOkMousePressed
+	private void jButtonConfInOutOkMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonConfInOutOkMousePressed
 		if (checkTextValues.isOK(jTextFieldV1) && checkTextValues.isOK(jTextFieldV2)
 				&& checkTextValues.isOK(jTextFieldV3) && checkTextValues.isOK(jTextFieldV4)
 				&& checkTextValues.isOK(jTextFieldV5)) {
-			modelConfInOut.setA1(booleanInt(jCheckBoxA1.isSelected()));
-			modelConfInOut.setA2(booleanInt(jCheckBoxA2.isSelected()));
-			modelConfInOut.setA3(booleanInt(jCheckBoxA3.isSelected()));
-			modelConfInOut.setA4(booleanInt(jCheckBoxA4.isSelected()));
-			modelConfInOut.setV1(new Integer(jTextFieldV1.getText()).intValue());
-			modelConfInOut.setV2(new Integer(jTextFieldV2.getText()).intValue());
-			modelConfInOut.setV3(new Integer(jTextFieldV3.getText()).intValue());
-			modelConfInOut.setV4(new Integer(jTextFieldV4.getText()).intValue());
-			modelConfInOut.setV5(new Integer(jTextFieldV5.getText()).intValue());
-			modelConfInOut.setB0(booleanInt(jRadioButtonB0Out.isSelected()));
-			modelConfInOut.setB1(booleanInt(jRadioButtonB1Out.isSelected()));
-			modelConfInOut.setB2(booleanInt(jRadioButtonB2Out.isSelected()));
-			modelConfInOut.setB3(booleanInt(jRadioButtonB3Out.isSelected()));
-			modelConfInOut.setB4(booleanInt(jRadioButtonB4Out.isSelected()));
-			modelConfInOut.setB5(booleanInt(jRadioButtonB5Out.isSelected()));
-			modelConfInOut.setB6(booleanInt(jRadioButtonB6Out.isSelected()));
-			modelConfInOut.setB7(booleanInt(jRadioButtonB7Out.isSelected()));
-			this.hide();
+			ConfInOut.modelConfInOut.setA1(booleanInt(jCheckBoxA1.isSelected()));
+			ConfInOut.modelConfInOut.setA2(booleanInt(jCheckBoxA2.isSelected()));
+			ConfInOut.modelConfInOut.setA3(booleanInt(jCheckBoxA3.isSelected()));
+			ConfInOut.modelConfInOut.setA4(booleanInt(jCheckBoxA4.isSelected()));
+			ConfInOut.modelConfInOut.setV1(new Integer(jTextFieldV1.getText()).intValue());
+			ConfInOut.modelConfInOut.setV2(new Integer(jTextFieldV2.getText()).intValue());
+			ConfInOut.modelConfInOut.setV3(new Integer(jTextFieldV3.getText()).intValue());
+			ConfInOut.modelConfInOut.setV4(new Integer(jTextFieldV4.getText()).intValue());
+			ConfInOut.modelConfInOut.setV5(new Integer(jTextFieldV5.getText()).intValue());
+			ConfInOut.modelConfInOut.setB0(booleanInt(jRadioButtonB0Out.isSelected()));
+			ConfInOut.modelConfInOut.setB1(booleanInt(jRadioButtonB1Out.isSelected()));
+			ConfInOut.modelConfInOut.setB2(booleanInt(jRadioButtonB2Out.isSelected()));
+			ConfInOut.modelConfInOut.setB3(booleanInt(jRadioButtonB3Out.isSelected()));
+			ConfInOut.modelConfInOut.setB4(booleanInt(jRadioButtonB4Out.isSelected()));
+			ConfInOut.modelConfInOut.setB5(booleanInt(jRadioButtonB5Out.isSelected()));
+			ConfInOut.modelConfInOut.setB6(booleanInt(jRadioButtonB6Out.isSelected()));
+			ConfInOut.modelConfInOut.setB7(booleanInt(jRadioButtonB7Out.isSelected()));
+			hide();
 		}
 	}// GEN-LAST:event_jButtonConfInOutOkMousePressed
 
 	/** Exit the Application */
-	private void exitForm(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_exitForm
+	private void exitForm(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_exitForm
 		if (evt != null) {
-			this.hide();
+			hide();
 		}
 	}// GEN-LAST:event_exitForm
 
-	private boolean intBoolean(int value) {
+	private boolean intBoolean(final int value) {
 		return (value == 1) ? true : false;
 	}
 
-	private int booleanInt(boolean value) {
+	private int booleanInt(final boolean value) {
 		return (value) ? 1 : 0;
 	}
 
 	public void readModel() {
-		jCheckBoxA1.setSelected(intBoolean(modelConfInOut.getA1()));
-		jCheckBoxA2.setSelected(intBoolean(modelConfInOut.getA2()));
-		jCheckBoxA3.setSelected(intBoolean(modelConfInOut.getA3()));
-		jCheckBoxA4.setSelected(intBoolean(modelConfInOut.getA4()));
-		jRadioButtonB0Out.setSelected(!intBoolean(modelConfInOut.getB0()));
-		jRadioButtonB0In.setSelected(intBoolean(modelConfInOut.getB0()));
-		jRadioButtonB1Out.setSelected(!intBoolean(modelConfInOut.getB1()));
-		jRadioButtonB1In.setSelected(intBoolean(modelConfInOut.getB1()));
-		jRadioButtonB2Out.setSelected(!intBoolean(modelConfInOut.getB2()));
-		jRadioButtonB2In.setSelected(intBoolean(modelConfInOut.getB2()));
-		jRadioButtonB3Out.setSelected(!intBoolean(modelConfInOut.getB3()));
-		jRadioButtonB3In.setSelected(intBoolean(modelConfInOut.getB3()));
-		jRadioButtonB4Out.setSelected(!intBoolean(modelConfInOut.getB4()));
-		jRadioButtonB4In.setSelected(intBoolean(modelConfInOut.getB4()));
-		jRadioButtonB5Out.setSelected(!intBoolean(modelConfInOut.getB5()));
-		jRadioButtonB5In.setSelected(intBoolean(modelConfInOut.getB5()));
-		jRadioButtonB6Out.setSelected(!intBoolean(modelConfInOut.getB6()));
-		jRadioButtonB6In.setSelected(intBoolean(modelConfInOut.getB6()));
-		jRadioButtonB7Out.setSelected(!intBoolean(modelConfInOut.getB7()));
-		jRadioButtonB7In.setSelected(intBoolean(modelConfInOut.getB7()));
-		jRadioButtonC0Out.setSelected(!intBoolean(modelConfInOut.getC0()));
-		jRadioButtonC0In.setSelected(intBoolean(modelConfInOut.getC0()));
-		jRadioButtonC3Out.setSelected(!intBoolean(modelConfInOut.getC3()));
-		jRadioButtonC3In.setSelected(intBoolean(modelConfInOut.getC3()));
-		jTextFieldV1.setText("" + modelConfInOut.getV1());
-		jTextFieldV2.setText("" + modelConfInOut.getV2());
-		jTextFieldV3.setText("" + modelConfInOut.getV3());
-		jTextFieldV4.setText("" + modelConfInOut.getV4());
-		jTextFieldV5.setText("" + modelConfInOut.getV5());
+		jCheckBoxA1.setSelected(intBoolean(ConfInOut.modelConfInOut.getA1()));
+		jCheckBoxA2.setSelected(intBoolean(ConfInOut.modelConfInOut.getA2()));
+		jCheckBoxA3.setSelected(intBoolean(ConfInOut.modelConfInOut.getA3()));
+		jCheckBoxA4.setSelected(intBoolean(ConfInOut.modelConfInOut.getA4()));
+		jRadioButtonB0Out.setSelected(!intBoolean(ConfInOut.modelConfInOut.getB0()));
+		jRadioButtonB0In.setSelected(intBoolean(ConfInOut.modelConfInOut.getB0()));
+		jRadioButtonB1Out.setSelected(!intBoolean(ConfInOut.modelConfInOut.getB1()));
+		jRadioButtonB1In.setSelected(intBoolean(ConfInOut.modelConfInOut.getB1()));
+		jRadioButtonB2Out.setSelected(!intBoolean(ConfInOut.modelConfInOut.getB2()));
+		jRadioButtonB2In.setSelected(intBoolean(ConfInOut.modelConfInOut.getB2()));
+		jRadioButtonB3Out.setSelected(!intBoolean(ConfInOut.modelConfInOut.getB3()));
+		jRadioButtonB3In.setSelected(intBoolean(ConfInOut.modelConfInOut.getB3()));
+		jRadioButtonB4Out.setSelected(!intBoolean(ConfInOut.modelConfInOut.getB4()));
+		jRadioButtonB4In.setSelected(intBoolean(ConfInOut.modelConfInOut.getB4()));
+		jRadioButtonB5Out.setSelected(!intBoolean(ConfInOut.modelConfInOut.getB5()));
+		jRadioButtonB5In.setSelected(intBoolean(ConfInOut.modelConfInOut.getB5()));
+		jRadioButtonB6Out.setSelected(!intBoolean(ConfInOut.modelConfInOut.getB6()));
+		jRadioButtonB6In.setSelected(intBoolean(ConfInOut.modelConfInOut.getB6()));
+		jRadioButtonB7Out.setSelected(!intBoolean(ConfInOut.modelConfInOut.getB7()));
+		jRadioButtonB7In.setSelected(intBoolean(ConfInOut.modelConfInOut.getB7()));
+		jRadioButtonC0Out.setSelected(!intBoolean(ConfInOut.modelConfInOut.getC0()));
+		jRadioButtonC0In.setSelected(intBoolean(ConfInOut.modelConfInOut.getC0()));
+		jRadioButtonC3Out.setSelected(!intBoolean(ConfInOut.modelConfInOut.getC3()));
+		jRadioButtonC3In.setSelected(intBoolean(ConfInOut.modelConfInOut.getC3()));
+		jTextFieldV1.setText("" + ConfInOut.modelConfInOut.getV1());
+		jTextFieldV2.setText("" + ConfInOut.modelConfInOut.getV2());
+		jTextFieldV3.setText("" + ConfInOut.modelConfInOut.getV3());
+		jTextFieldV4.setText("" + ConfInOut.modelConfInOut.getV4());
+		jTextFieldV5.setText("" + ConfInOut.modelConfInOut.getV5());
 	}
 
 	public pt.utl.ist.elab.client.webrobot.customizer.Models.ModelConfInOut getModel() {
-		return modelConfInOut;
+		return ConfInOut.modelConfInOut;
 	}
 
-	public void setModel(pt.utl.ist.elab.client.webrobot.customizer.Models.ModelConfInOut modelConfInOut) {
-		this.modelConfInOut = modelConfInOut;
+	public void setModel(final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelConfInOut modelConfInOut) {
+		ConfInOut.modelConfInOut = modelConfInOut;
 	}
 
 	/**
@@ -560,7 +571,7 @@ public class ConfInOut extends javax.swing.JDialog {
 	 * @return Value of property cancel.
 	 */
 	public boolean isCancel() {
-		return this.cancel;
+		return cancel;
 	}
 
 	/**
@@ -568,7 +579,7 @@ public class ConfInOut extends javax.swing.JDialog {
 	 * 
 	 * @param cancel New value of property cancel.
 	 */
-	public void setCancel(boolean cancel) {
+	public void setCancel(final boolean cancel) {
 		this.cancel = cancel;
 	}
 
@@ -641,7 +652,7 @@ public class ConfInOut extends javax.swing.JDialog {
 
 	// My variables
 	private static pt.utl.ist.elab.client.webrobot.customizer.Models.ModelConfInOut modelConfInOut = new pt.utl.ist.elab.client.webrobot.customizer.Models.ModelConfInOut();
-	private pt.utl.ist.elab.client.webrobot.customizer.Utils.CheckTextValues checkTextValues = new pt.utl.ist.elab.client.webrobot.customizer.Utils.CheckTextValues(
+	private final pt.utl.ist.elab.client.webrobot.customizer.Utils.CheckTextValues checkTextValues = new pt.utl.ist.elab.client.webrobot.customizer.Utils.CheckTextValues(
 			this);
 
 	/** Holds value of property cancel. */

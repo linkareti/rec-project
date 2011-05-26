@@ -21,21 +21,22 @@ public class LocalizationBundle implements com.linkare.rec.impl.baseUI.config.Co
 	}
 
 	// Deep copy
-	public LocalizationBundle(com.linkare.rec.impl.baseUI.config.LocalizationBundle source) {
+	public LocalizationBundle(final com.linkare.rec.impl.baseUI.config.LocalizationBundle source) {
 		_Location = source._Location;
 		_Name = source._Name;
 		eventListeners = source.eventListeners;
 	}
 
 	// This attribute is mandatory
-	public void setLocation(java.lang.String value) {
+	public void setLocation(final java.lang.String value) {
 		java.beans.PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new java.beans.PropertyChangeEvent(this, "location", getLocation(), value);
 		}
 		_Location = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public java.lang.String getLocation() {
@@ -43,21 +44,24 @@ public class LocalizationBundle implements com.linkare.rec.impl.baseUI.config.Co
 	}
 
 	// This attribute is mandatory
-	public void setName(java.lang.String value) {
+	public void setName(final java.lang.String value) {
 		java.beans.PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new java.beans.PropertyChangeEvent(this, "name", getName(), value);
 		}
 		_Name = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public java.lang.String getName() {
 		return _Name;
 	}
 
-	public void writeNode(java.io.Writer out, String nodeName, String indent) throws java.io.IOException {
+	@Override
+	public void writeNode(final java.io.Writer out, final String nodeName, final String indent)
+			throws java.io.IOException {
 		out.write(indent);
 		out.write("<");
 		out.write(nodeName);
@@ -76,14 +80,15 @@ public class LocalizationBundle implements com.linkare.rec.impl.baseUI.config.Co
 			out.write("'"); // NOI18N
 		}
 		out.write(">\n");
-		String nextIndent = indent + "	";
+		final String nextIndent = indent + "	";
 		out.write(indent);
 		out.write("</" + nodeName + ">\n");
 	}
 
-	public void readNode(org.w3c.dom.Node node) {
+	@Override
+	public void readNode(final org.w3c.dom.Node node) {
 		if (node.hasAttributes()) {
-			org.w3c.dom.NamedNodeMap attrs = node.getAttributes();
+			final org.w3c.dom.NamedNodeMap attrs = node.getAttributes();
 			org.w3c.dom.Attr attr;
 			attr = (org.w3c.dom.Attr) attrs.getNamedItem("location");
 			if (attr != null) {
@@ -94,11 +99,11 @@ public class LocalizationBundle implements com.linkare.rec.impl.baseUI.config.Co
 				_Name = attr.getValue();
 			}
 		}
-		org.w3c.dom.NodeList children = node.getChildNodes();
+		final org.w3c.dom.NodeList children = node.getChildNodes();
 		for (int i = 0, size = children.getLength(); i < size; ++i) {
-			org.w3c.dom.Node childNode = children.item(i);
-			String childNodeName = (childNode.getLocalName() == null ? childNode.getNodeName().intern() : childNode
-					.getLocalName().intern());
+			final org.w3c.dom.Node childNode = children.item(i);
+			final String childNodeName = (childNode.getLocalName() == null ? childNode.getNodeName().intern()
+					: childNode.getLocalName().intern());
 			String childNodeValue = "";
 			if (childNode.getFirstChild() != null) {
 				childNodeValue = childNode.getFirstChild().getNodeValue();
@@ -106,8 +111,9 @@ public class LocalizationBundle implements com.linkare.rec.impl.baseUI.config.Co
 		}
 	}
 
+	@Override
 	public void validate() throws com.linkare.rec.impl.baseUI.config.ReCBaseUIConfig.ValidateException {
-		boolean restrictionFailure = false;
+		final boolean restrictionFailure = false;
 		// Validating property location
 		if (getLocation() == null) {
 			throw new com.linkare.rec.impl.baseUI.config.ReCBaseUIConfig.ValidateException("getLocation() == null",
@@ -120,14 +126,16 @@ public class LocalizationBundle implements com.linkare.rec.impl.baseUI.config.Co
 		}
 	}
 
-	public void addPropertyChangeListener(java.beans.PropertyChangeListener listener) {
+	@Override
+	public void addPropertyChangeListener(final java.beans.PropertyChangeListener listener) {
 		if (eventListeners == null) {
 			eventListeners = new java.beans.PropertyChangeSupport(this);
 		}
 		eventListeners.addPropertyChangeListener(listener);
 	}
 
-	public void removePropertyChangeListener(java.beans.PropertyChangeListener listener) {
+	@Override
+	public void removePropertyChangeListener(final java.beans.PropertyChangeListener listener) {
 		if (eventListeners == null) {
 			return;
 		}
@@ -137,56 +145,69 @@ public class LocalizationBundle implements com.linkare.rec.impl.baseUI.config.Co
 		}
 	}
 
-	public void _setPropertyChangeSupport(java.beans.PropertyChangeSupport listeners) {
+	@Override
+	public void _setPropertyChangeSupport(final java.beans.PropertyChangeSupport listeners) {
 		eventListeners = listeners;
 	}
 
-	public void changePropertyByName(String name, Object value) {
-		if (name == null)
+	public void changePropertyByName(String name, final Object value) {
+		if (name == null) {
 			return;
+		}
 		name = name.intern();
-		if (name.equals("location"))
+		if (name.equals("location")) {
 			setLocation((java.lang.String) value);
-		else if (name.equals("name"))
+		} else if (name.equals("name")) {
 			setName((java.lang.String) value);
-		else
+		} else {
 			throw new IllegalArgumentException(name + " is not a valid property name for LocalizationBundle");
+		}
 	}
 
-	public Object fetchPropertyByName(String name) {
-		if (name.equals("location"))
+	public Object fetchPropertyByName(final String name) {
+		if (name.equals("location")) {
 			return getLocation();
-		if (name.equals("name"))
+		}
+		if (name.equals("name")) {
 			return getName();
+		}
 		throw new IllegalArgumentException(name + " is not a valid property name for LocalizationBundle");
 	}
 
 	// Return an array of all of the properties that are beans and are set.
-	public CommonBean[] childBeans(boolean recursive) {
-		List<CommonBean> children = new LinkedList<CommonBean>();
+	@Override
+	public CommonBean[] childBeans(final boolean recursive) {
+		final List<CommonBean> children = new LinkedList<CommonBean>();
 		childBeans(recursive, children);
-		com.linkare.rec.impl.baseUI.config.CommonBean[] result = new com.linkare.rec.impl.baseUI.config.CommonBean[children
+		final com.linkare.rec.impl.baseUI.config.CommonBean[] result = new com.linkare.rec.impl.baseUI.config.CommonBean[children
 				.size()];
-		return (com.linkare.rec.impl.baseUI.config.CommonBean[]) children.toArray(result);
+		return children.toArray(result);
 	}
 
 	// Put all child beans into the beans list.
-	public void childBeans(boolean recursive, java.util.List beans) {
+	@Override
+	public void childBeans(final boolean recursive, final java.util.List beans) {
 	}
 
-	public boolean equals(Object o) {
-		if (o == this)
+	@Override
+	public boolean equals(final Object o) {
+		if (o == this) {
 			return true;
-		if (!(o instanceof com.linkare.rec.impl.baseUI.config.LocalizationBundle))
+		}
+		if (!(o instanceof com.linkare.rec.impl.baseUI.config.LocalizationBundle)) {
 			return false;
-		com.linkare.rec.impl.baseUI.config.LocalizationBundle inst = (com.linkare.rec.impl.baseUI.config.LocalizationBundle) o;
-		if (!(_Location == null ? inst._Location == null : _Location.equals(inst._Location)))
+		}
+		final com.linkare.rec.impl.baseUI.config.LocalizationBundle inst = (com.linkare.rec.impl.baseUI.config.LocalizationBundle) o;
+		if (!(_Location == null ? inst._Location == null : _Location.equals(inst._Location))) {
 			return false;
-		if (!(_Name == null ? inst._Name == null : _Name.equals(inst._Name)))
+		}
+		if (!(_Name == null ? inst._Name == null : _Name.equals(inst._Name))) {
 			return false;
+		}
 		return true;
 	}
 
+	@Override
 	public int hashCode() {
 		int result = 17;
 		result = 37 * result + (_Location == null ? 0 : _Location.hashCode());
@@ -194,11 +215,12 @@ public class LocalizationBundle implements com.linkare.rec.impl.baseUI.config.Co
 		return result;
 	}
 
+	@Override
 	public String toString() {
-		java.io.StringWriter sw = new java.io.StringWriter();
+		final java.io.StringWriter sw = new java.io.StringWriter();
 		try {
 			writeNode(sw, "LocalizationBundle", "");
-		} catch (java.io.IOException e) {
+		} catch (final java.io.IOException e) {
 			// How can we actually get an IOException on a StringWriter?
 			// We'll just ignore it.
 		}

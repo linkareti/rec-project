@@ -25,7 +25,7 @@ public class PasswordFieldStyle extends TextFieldStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return PasswordFieldStyle.ID;
 	}
 
 	// -------------------------------------------------------------------------

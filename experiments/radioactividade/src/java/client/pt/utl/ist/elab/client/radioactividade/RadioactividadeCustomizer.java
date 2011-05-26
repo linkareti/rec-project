@@ -6,6 +6,8 @@
 
 package pt.utl.ist.elab.client.radioactividade;
 
+import javax.swing.SwingConstants;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.client.customizer.ICustomizerListener;
@@ -17,6 +19,11 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  */
 public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 		com.linkare.rec.impl.client.customizer.ICustomizer {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1792002135967440974L;
 
 	/** Creates new form RadioactividadeCustomizer */
 	public RadioactividadeCustomizer() {
@@ -68,7 +75,8 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 
 		btnOK.setText(ReCResourceBundle.findString("radioactividade$rec.exp.radio.lbl.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
 			}
 		});
@@ -80,7 +88,8 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 
 		btnCancel.setText(ReCResourceBundle.findString("radioactividade$rec.exp.radio.lbl.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
 			}
 		});
@@ -99,7 +108,8 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 
 		btnDefaults.setText(ReCResourceBundle.findString("radioactividade$rec.exp.dftcfg.radio.title.1"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
 			}
 		});
@@ -160,12 +170,13 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 		jPanel6.setPreferredSize(new java.awt.Dimension(140, 80));
 		sldNumSamples.setMajorTickSpacing(10);
 		sldNumSamples.setMinorTickSpacing(1);
-		sldNumSamples.setOrientation(javax.swing.JSlider.VERTICAL);
+		sldNumSamples.setOrientation(SwingConstants.VERTICAL);
 		sldNumSamples.setPaintLabels(true);
 		sldNumSamples.setPaintTicks(true);
 		sldNumSamples.setMaximumSize(new java.awt.Dimension(1000, 32767));
 		sldNumSamples.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sldNumSamplesStateChanged(evt);
 			}
 		});
@@ -176,13 +187,14 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 		gridBagConstraints.weighty = 10.0;
 		jPanel6.add(sldNumSamples, gridBagConstraints);
 
-		tfNumSamples.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		tfNumSamples.setHorizontalAlignment(SwingConstants.RIGHT);
 		tfNumSamples.setText("50");
 		tfNumSamples.setMaximumSize(new java.awt.Dimension(30, 16));
 		tfNumSamples.setMinimumSize(new java.awt.Dimension(30, 16));
 		tfNumSamples.setPreferredSize(new java.awt.Dimension(30, 16));
 		tfNumSamples.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				tfNumSamplesFocusLost(evt);
 			}
 		});
@@ -200,7 +212,7 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 		jPanel1.setMinimumSize(new java.awt.Dimension(90, 225));
 		jPanel1.setPreferredSize(new java.awt.Dimension(90, 225));
 		sldDetectorHeight.setMajorTickSpacing(10);
-		sldDetectorHeight.setOrientation(javax.swing.JSlider.VERTICAL);
+		sldDetectorHeight.setOrientation(SwingConstants.VERTICAL);
 		sldDetectorHeight.setPaintLabels(true);
 		sldDetectorHeight.setPaintTicks(true);
 		sldDetectorHeight.setSnapToTicks(true);
@@ -343,23 +355,25 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 
 	}// GEN-END:initComponents
 
-	private void tfNumSamplesFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfNumSamplesFocusLost
+	private void tfNumSamplesFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfNumSamplesFocusLost
 	{// GEN-HEADEREND:event_tfNumSamplesFocusLost
-		String strNumSamples = tfNumSamples.getText();
-		if (strNumSamples.trim().equals(""))
+		final String strNumSamples = tfNumSamples.getText();
+		if (strNumSamples.trim().equals("")) {
 			return;
+		}
 		try {
-			int numSamples = Integer.parseInt(strNumSamples);
-			if (numSamples <= sldNumSamples.getMaximum() && numSamples > sldNumSamples.getMinimum())
+			final int numSamples = Integer.parseInt(strNumSamples);
+			if (numSamples <= sldNumSamples.getMaximum() && numSamples > sldNumSamples.getMinimum()) {
 				sldNumSamples.setValue(numSamples);
-			else
+			} else {
 				tfNumSamples.setText("" + sldNumSamples.getValue());
-		} catch (Exception e) {
+			}
+		} catch (final Exception e) {
 			tfNumSamples.setText("" + sldNumSamples.getValue());
 		}
 	}// GEN-LAST:event_tfNumSamplesFocusLost
 
-	private void sldNumSamplesStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldNumSamplesStateChanged
+	private void sldNumSamplesStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldNumSamplesStateChanged
 	{// GEN-HEADEREND:event_sldNumSamplesStateChanged
 		if (sldNumSamples.getValueIsAdjusting()) {
 			if (sldNumSamples.getValue() == 0) {
@@ -370,7 +384,7 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 		}
 	}// GEN-LAST:event_sldNumSamplesStateChanged
 
-	private void btnDefaultsActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
+	private void btnDefaultsActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
 	{// GEN-HEADEREND:event_btnDefaultsActionPerformed
 		btnWood.setSelected(true);
 		btnModeCounter.setSelected(true);
@@ -379,38 +393,39 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 		sldDetectorHeight.setValue(50);
 	}// GEN-LAST:event_btnDefaultsActionPerformed
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
+	private void btnCancelActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
 	{// GEN-HEADEREND:event_btnCancelActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_btnCancelActionPerformed
 
-	private void btnOKActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
+	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
 
 		acqConfig.setTotalSamples(sldNumSamples.getValue() == 0 ? 1 : sldNumSamples.getValue());
 		acqConfig.getSelectedHardwareParameter("Altura do detector").setParameterValue(
 				"" + sldDetectorHeight.getValue());
 		String strMaterial = null;
-		if (btnWood.isSelected())
+		if (btnWood.isSelected()) {
 			strMaterial = "Madeira [10mm]";
-		else if (btnCork.isSelected())
+		} else if (btnCork.isSelected()) {
 			strMaterial = "Corticite [10mm]";
-		else if (btnBrick.isSelected())
+		} else if (btnBrick.isSelected()) {
 			strMaterial = "Tijolo [10mm]";
-		else if (btnCopper2.isSelected())
+		} else if (btnCopper2.isSelected()) {
 			strMaterial = "Cobre [0.2mm]";
-		else if (btnCopper4.isSelected())
+		} else if (btnCopper4.isSelected()) {
 			strMaterial = "Cobre [0.4mm]";
-		else if (btnCopper8.isSelected())
+		} else if (btnCopper8.isSelected()) {
 			strMaterial = "Cobre [0.8mm]";
-		else if (btnCopper16.isSelected())
+		} else if (btnCopper16.isSelected()) {
 			strMaterial = "Cobre [1.6mm]";
-		else if (btnCopper32.isSelected())
+		} else if (btnCopper32.isSelected()) {
 			strMaterial = "Cobre [3.2mm]";
-		else if (btnAir.isSelected())
+		} else if (btnAir.isSelected()) {
 			strMaterial = "Janela de controlo (Ar)";
-		else if (btnLead.isSelected())
+		} else if (btnLead.isSelected()) {
 			strMaterial = "Chumbo (isolante)";
+		}
 
 		acqConfig.getSelectedHardwareParameter("Material").setParameterValue(strMaterial);
 
@@ -459,7 +474,8 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -471,7 +487,8 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -481,9 +498,10 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -497,9 +515,10 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -511,11 +530,13 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
 		return acqConfig;
 	}
 
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
 			sldNumSamples.setValue(acqConfig.getTotalSamples());
@@ -523,51 +544,57 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 			sldDetectorHeight.setValue(Integer.parseInt(acqConfig
 					.getSelectedHardwareParameterValue("Altura do detector")));
 			btnModeCounter.setSelected(true);
-			String strMaterial = acqConfig.getSelectedHardwareParameterValue("Material");
-			if (strMaterial.equals("Madeira [10mm]"))
+			final String strMaterial = acqConfig.getSelectedHardwareParameterValue("Material");
+			if (strMaterial.equals("Madeira [10mm]")) {
 				btnWood.setSelected(true);
-			else if (strMaterial.equals("Corticite [10mm]"))
+			} else if (strMaterial.equals("Corticite [10mm]")) {
 				btnCork.setSelected(true);
-			else if (strMaterial.equals("Tijolo [10mm]"))
+			} else if (strMaterial.equals("Tijolo [10mm]")) {
 				btnBrick.setSelected(true);
-			else if (strMaterial.equals("Cobre [0.2mm]"))
+			} else if (strMaterial.equals("Cobre [0.2mm]")) {
 				btnCopper2.setSelected(true);
-			else if (strMaterial.equals("Cobre [0.4mm]"))
+			} else if (strMaterial.equals("Cobre [0.4mm]")) {
 				btnCopper4.setSelected(true);
-			else if (strMaterial.equals("Cobre [0.8mm]"))
+			} else if (strMaterial.equals("Cobre [0.8mm]")) {
 				btnCopper8.setSelected(true);
-			else if (strMaterial.equals("Cobre [1.6mm]"))
+			} else if (strMaterial.equals("Cobre [1.6mm]")) {
 				btnCopper16.setSelected(true);
-			else if (strMaterial.equals("Cobre [3.2mm]"))
+			} else if (strMaterial.equals("Cobre [3.2mm]")) {
 				btnCopper32.setSelected(true);
-			else if (strMaterial.equals("Janela de controlo (Ar)"))
+			} else if (strMaterial.equals("Janela de controlo (Ar)")) {
 				btnAir.setSelected(true);
-			else if (strMaterial.equals("Chumbo (isolante)"))
+			} else if (strMaterial.equals("Chumbo (isolante)")) {
 				btnLead.setSelected(true);
+			}
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
+	@Override
 	public javax.swing.JComponent getCustomizerComponent() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/radioactividade/resources/radioactividade_iconified.gif"));
 	}
 
+	@Override
 	public String getCustomizerTitle() {
 		return ReCResourceBundle.findString("radioactividade$rec.exp.radio.customizer.title");
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}

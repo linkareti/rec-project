@@ -7,6 +7,7 @@
 package com.linkare.rec.impl.baseUI;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.text.Collator;
 import java.util.Arrays;
@@ -40,12 +41,16 @@ import com.linkare.rec.impl.utils.EventQueueDispatcher;
  * @author Jos� Pedro Pereira
  */
 public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessageListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1145354357218562367L;
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ChatFrame.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ChatFrame.UI_CLIENT_LOGGER));
 		}
 	}
 	private boolean isConnected = false;
@@ -70,7 +75,7 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 
 		comboUsersChat.setRenderer(new ChatCellRenderer());
 
-		this.setTitle(CHAT_STR + "[" + DISCONNECTED_STR + "]");
+		setTitle(ChatFrame.CHAT_STR + "[" + ChatFrame.DISCONNECTED_STR + "]");
 
 		editPaneChat.setContentType("text/html");
 		editPaneChat
@@ -79,26 +84,29 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 
 	private class ChatCellRenderer implements ListCellRenderer {
 
-		public java.awt.Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
-				boolean cellHasFocus) {
-			JPanel panel = new JPanel();
+		@Override
+		public java.awt.Component getListCellRendererComponent(final JList list, final Object value, final int index,
+				final boolean isSelected, final boolean cellHasFocus) {
+			final JPanel panel = new JPanel();
 			panel.setLayout(new java.awt.BorderLayout());
 
 			if (value instanceof UserInfo) {
-				JPanel panelinfo = new JPanel();
-				UserInfo user = (UserInfo) value;
+				final JPanel panelinfo = new JPanel();
+				final UserInfo user = (UserInfo) value;
 
 				String userName = user.getUserName();
-				if (userName.equals(ChatMessageEvent.EVERYONE_USER_ALIAS))
-					userName = EVERYONE_STR;
-				JLabel jLabelName = new JLabel(userName);
+				if (userName.equals(ChatMessageEvent.EVERYONE_USER_ALIAS)) {
+					userName = ChatFrame.EVERYONE_STR;
+				}
+				final JLabel jLabelName = new JLabel(userName);
 
-				JLabel jLabelIcon = new JLabel();
-				Apparatus app = getApparatus(user.getHardwaresConnectedTo());
+				final JLabel jLabelIcon = new JLabel();
+				final Apparatus app = getApparatus(user.getHardwaresConnectedTo());
 				if (app != null) {
 					jLabelIcon.setIcon(app.getIcon());
-				} else
+				} else {
 					jLabelIcon.setIcon(null);
+				}
 
 				panelinfo.add(jLabelName);
 				panelinfo.add(jLabelIcon);
@@ -110,13 +118,14 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 
 	}
 
-	private Apparatus getApparatus(String uniqueID) {
-		DefaultMutableTreeNode root = LabsTreeModel.treeRoot;
-		if (root == null || uniqueID == null)
+	private Apparatus getApparatus(final String uniqueID) {
+		final DefaultMutableTreeNode root = LabsTreeModel.treeRoot;
+		if (root == null || uniqueID == null) {
 			return null;
-		java.util.Enumeration allChild = ((DefaultMutableTreeNode) root).breadthFirstEnumeration();
+		}
+		final java.util.Enumeration allChild = (root).breadthFirstEnumeration();
 		while (allChild.hasMoreElements()) {
-			Object currentNode = ((DefaultMutableTreeNode) allChild.nextElement()).getUserObject();
+			final Object currentNode = ((DefaultMutableTreeNode) allChild.nextElement()).getUserObject();
 			if (currentNode instanceof Apparatus) {
 				if (((Apparatus) currentNode).getLocation().equals(uniqueID)) {
 					return (Apparatus) currentNode;
@@ -127,13 +136,16 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 		return null;
 	}
 
-	public void newChatMessage(ChatMessageEvent evt) {
+	@Override
+	public void newChatMessage(final ChatMessageEvent evt) {
 		String userFrom = evt.getUserFrom().getUserName();
 		String userTo = evt.getUserTo().getUserName();
-		if (userFrom.equals(ChatMessageEvent.EVERYONE_USER_ALIAS))
-			userFrom = EVERYONE_STR;
-		if (userTo.equals(ChatMessageEvent.EVERYONE_USER_ALIAS))
-			userTo = EVERYONE_STR;
+		if (userFrom.equals(ChatMessageEvent.EVERYONE_USER_ALIAS)) {
+			userFrom = ChatFrame.EVERYONE_STR;
+		}
+		if (userTo.equals(ChatMessageEvent.EVERYONE_USER_ALIAS)) {
+			userTo = ChatFrame.EVERYONE_STR;
+		}
 
 		String htmlMessage = "<p style=\"padding-top: 0px;padding-left: 0px;padding-right: 0px;padding-bottom: 0px; margin: 0px 0px 0px 0px;\">";
 		htmlMessage += "<font style=\"color: red;\">[ </font>";
@@ -151,51 +163,56 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 			final HTMLDocument docHTML = (HTMLDocument) editPaneChat.getDocument();
 			final String message = htmlMessage;
 			SwingUtilities.invokeLater(new Runnable() {
+				@Override
 				public void run() {
 					try {
 						docHTML.insertBeforeEnd(docHTML.getElement("messages"), message);
 						editPaneChat.scrollToReference("messagesEnd");
-					} catch (Exception e) {
-						LoggerUtil.logThrowable(null, e, Logger.getLogger(UI_CLIENT_LOGGER));
+					} catch (final Exception e) {
+						LoggerUtil.logThrowable(null, e, Logger.getLogger(ChatFrame.UI_CLIENT_LOGGER));
 					}
 				}
 			});
 		}
 	}
 
-	public void connectionChanged(com.linkare.rec.impl.client.chat.ChatConnectionEvent event) {
-		this.isConnected = event.isConnected();
-		String title = CHAT_STR;
-		title = title + " " + (isConnected ? CONNECTED_STR : DISCONNECTED_STR);
+	@Override
+	public void connectionChanged(final com.linkare.rec.impl.client.chat.ChatConnectionEvent event) {
+		isConnected = event.isConnected();
+		String title = ChatFrame.CHAT_STR;
+		title = title + " " + (isConnected ? ChatFrame.CONNECTED_STR : ChatFrame.DISCONNECTED_STR);
 		if (!isConnected) {
 			roomName = null;
 		} else {
-			title += (roomName == null ? " [" + DEFAULT_ROOM_STR + "]" : " [" + roomName + "]");
+			title += (roomName == null ? " [" + ChatFrame.DEFAULT_ROOM_STR + "]" : " [" + roomName + "]");
 		}
 
-		this.setTitle(title);
+		setTitle(title);
 
 	}
 
-	public void roomChanged(com.linkare.rec.impl.client.chat.ChatRoomEvent event) {
+	@Override
+	public void roomChanged(final com.linkare.rec.impl.client.chat.ChatRoomEvent event) {
 		roomName = event.getNewRoomName();
-		String title = CHAT_STR;
-		title = title + " " + (isConnected ? CONNECTED_STR : DISCONNECTED_STR);
-		if (!isConnected)
+		String title = ChatFrame.CHAT_STR;
+		title = title + " " + (isConnected ? ChatFrame.CONNECTED_STR : ChatFrame.DISCONNECTED_STR);
+		if (!isConnected) {
 			roomName = null;
-		else {
-			title += roomName == null ? " [" + DEFAULT_ROOM_STR + "]" : " [" + roomName + "]";
+		} else {
+			title += roomName == null ? " [" + ChatFrame.DEFAULT_ROOM_STR + "]" : " [" + roomName + "]";
 		}
 
 		final String titleF = title;
 		SwingUtilities.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				setTitle(titleF);
 			}
 		});
 	}
 
-	public void userListChanged(UserInfo[] newUsersList) {
+	@Override
+	public void userListChanged(final UserInfo[] newUsersList) {
 		final Object selected = comboUsersChat.getSelectedItem().toString();
 
 		if (newUsersList == null) {
@@ -205,28 +222,37 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 		}
 
 		Arrays.sort(newUsersList, new Comparator<UserInfo>() {
-			public int compare(UserInfo u1, UserInfo u2) {
-				if (u1 == null && u2 == null)
+			@Override
+			public int compare(final UserInfo u1, final UserInfo u2) {
+				if (u1 == null && u2 == null) {
 					return 0;
+				}
 
-				if (u1 == null)
+				if (u1 == null) {
 					return -1;
-				if (u2 == null)
+				}
+				if (u2 == null) {
 					return +1;
+				}
 
-				if (u1.getUserName() == null && u2.getUserName() == null)
+				if (u1.getUserName() == null && u2.getUserName() == null) {
 					return 0;
-				if (u1.getUserName() == null || u1.getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS))
+				}
+				if (u1.getUserName() == null || u1.getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS)) {
 					return -1;
-				if (u2.getUserName() == null)
+				}
+				if (u2.getUserName() == null) {
 					return +1;
+				}
 
 				return Collator.getInstance().compare(u1.getUserName(), u2.getUserName());
 			}
 
-			public boolean equals(Object other) {
-				if (other == null || !(other.getClass() == this.getClass()))
+			@Override
+			public boolean equals(final Object other) {
+				if (other == null || !(other.getClass() == this.getClass())) {
 					return false;
+				}
 
 				return true;
 			}
@@ -239,15 +265,17 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 
 		final UserInfo[] finalNewUsersList = new UserInfo[newUsersList.length - 1];
 		for (int i = 0; i < newUsersList.length; i++) {
-			if (newUsersList[i].getUserName().equals(getUser().getUserName()))
+			if (newUsersList[i].getUserName().equals(getUser().getUserName())) {
 				foundHimSelf = true;
-			else if (foundHimSelf)
+			} else if (foundHimSelf) {
 				finalNewUsersList[i - 1] = newUsersList[i];
-			else
+			} else {
 				finalNewUsersList[i] = newUsersList[i];
+			}
 		}
 
 		SwingUtilities.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				comboUsersChat.setModel(new DefaultComboBoxModel(finalNewUsersList));
 				for (int i = 0; i < comboUsersChat.getItemCount(); i++) {
@@ -263,10 +291,11 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 
 	private void cleanUsersList() {
 		((DefaultComboBoxModel) comboUsersChat.getModel()).removeAllElements();
-		((DefaultComboBoxModel) comboUsersChat.getModel()).addElement(UNAVAILABLE_STR);
+		((DefaultComboBoxModel) comboUsersChat.getModel()).addElement(ChatFrame.UNAVAILABLE_STR);
 		SwingUtilities.invokeLater(new Runnable() {
+			@Override
 			public void run() {
-				comboUsersChat.setSelectedItem(UNAVAILABLE_STR);
+				comboUsersChat.setSelectedItem(ChatFrame.UNAVAILABLE_STR);
 			}
 		});
 
@@ -312,7 +341,7 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 
 		jPanel3.setLayout(new java.awt.GridBagLayout());
 
-		comboUsersChat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { UNAVAILABLE_STR }));
+		comboUsersChat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ChatFrame.UNAVAILABLE_STR }));
 		comboUsersChat.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.tip.selectUsers",
 				"Select users to send message to"));
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -327,7 +356,8 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 		clearMessagesBtn.setToolTipText(ReCResourceBundle.findStringOrDefault(
 				"ReCBaseUI$rec.bui.tip.clearChatMessages", "Clear Chat Messages"));
 		clearMessagesBtn.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				clearMessagesBtnActionPerformed(evt);
 			}
 		});
@@ -352,7 +382,8 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 		taChatMessage.setWrapStyleWord(true);
 		taChatMessage.setMinimumSize(new java.awt.Dimension(200, 16));
 		taChatMessage.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyPressed(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyPressed(final java.awt.event.KeyEvent evt) {
 				taChatMessageKeyPressed(evt);
 			}
 		});
@@ -371,7 +402,8 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 		btnSendChatMessage.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.tip.sendMessage",
 				"Click to Send Message"));
 		btnSendChatMessage.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnSendChatMessageActionPerformed(evt);
 			}
 		});
@@ -390,7 +422,7 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 		pack();
 	}// GEN-END:initComponents
 
-	private void clearMessagesBtnActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_clearMessagesBtnActionPerformed
+	private void clearMessagesBtnActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_clearMessagesBtnActionPerformed
 	{// GEN-HEADEREND:event_clearMessagesBtnActionPerformed
 		synchronized (editPaneChat) {
 			editPaneChat
@@ -398,21 +430,23 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 		}
 	}// GEN-LAST:event_clearMessagesBtnActionPerformed
 
-	private void taChatMessageKeyPressed(java.awt.event.KeyEvent evt)// GEN-FIRST:event_taChatMessageKeyPressed
+	private void taChatMessageKeyPressed(final java.awt.event.KeyEvent evt)// GEN-FIRST:event_taChatMessageKeyPressed
 	{// GEN-HEADEREND:event_taChatMessageKeyPressed
-		if ((evt.getModifiers() & KeyEvent.SHIFT_MASK) == 0 && evt.getKeyCode() == KeyEvent.VK_ENTER)
+		if ((evt.getModifiers() & InputEvent.SHIFT_MASK) == 0 && evt.getKeyCode() == KeyEvent.VK_ENTER) {
 			btnSendChatMessageActionPerformed(new ActionEvent(btnSendChatMessage, 1, "Send ChatMessage"));
-		else if ((evt.getModifiers() & KeyEvent.SHIFT_MASK) != 0 && evt.getKeyCode() == KeyEvent.VK_ENTER
-				&& !taChatMessage.getText().trim().equals(""))
+		} else if ((evt.getModifiers() & InputEvent.SHIFT_MASK) != 0 && evt.getKeyCode() == KeyEvent.VK_ENTER
+				&& !taChatMessage.getText().trim().equals("")) {
 			taChatMessage.setText(taChatMessage.getText() + System.getProperty("line.separator"));
+		}
 
 		evt.consume();
 	}// GEN-LAST:event_taChatMessageKeyPressed
 
-	private void btnSendChatMessageActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnSendChatMessageActionPerformed
+	private void btnSendChatMessageActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnSendChatMessageActionPerformed
 	{// GEN-HEADEREND:event_btnSendChatMessageActionPerformed
-		if (taChatMessage.getText().trim().equals(""))
+		if (taChatMessage.getText().trim().equals("")) {
 			return;
+		}
 
 		if (user == null || chatServer == null || !(comboUsersChat.getSelectedItem() instanceof UserInfo)) {
 			/*
@@ -425,13 +459,14 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 			 */
 			return;
 		} else {
-			ChatMessageEvent newMessage = new ChatMessageEvent(this, user, (UserInfo) comboUsersChat.getSelectedItem(),
-					taChatMessage.getText());
+			final ChatMessageEvent newMessage = new ChatMessageEvent(this, user,
+					(UserInfo) comboUsersChat.getSelectedItem(), taChatMessage.getText());
 			messageQueue.addEvent(newMessage);
 
 			if (!((UserInfo) comboUsersChat.getSelectedItem()).getUserName().equals(
-					ChatMessageEvent.EVERYONE_USER_ALIAS))
+					ChatMessageEvent.EVERYONE_USER_ALIAS)) {
 				newChatMessage(newMessage);
+			}
 		}
 
 		taChatMessage.setText("");
@@ -440,11 +475,14 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 
 	private class MessageQueueDispatcher implements EventQueueDispatcher {
 
-		public void dispatchEvent(Object evt) {
-			if (evt instanceof ChatMessageEvent && chatServer != null)
+		@Override
+		public void dispatchEvent(final Object evt) {
+			if (evt instanceof ChatMessageEvent && chatServer != null) {
 				chatServer.sendMessage((ChatMessageEvent) evt);
+			}
 		}
 
+		@Override
 		public int getPriority() {
 			return Thread.NORM_PRIORITY - 1;
 		}
@@ -461,7 +499,7 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 	 * @return Value of property setChatServer.
 	 */
 	public IChatServer getChatServer() {
-		return this.chatServer;
+		return chatServer;
 	}
 
 	/**
@@ -469,14 +507,17 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 	 * 
 	 * @param setChatServer New value of property setChatServer.
 	 */
-	public void setChatServer(IChatServer chatServer) {
-		if (chatServer != null)
+	public void setChatServer(final IChatServer chatServer) {
+		if (chatServer != null) {
 			chatServer.removeChatMessageListener(this);
+		}
 		this.chatServer = chatServer;
-		if (chatServer != null)
+		if (chatServer != null) {
 			chatServer.addChatMessageListener(this);
-		if (messageQueue == null)
+		}
+		if (messageQueue == null) {
 			messageQueue = new EventQueue(new MessageQueueDispatcher(), "ChatServer - " + getUser());
+		}
 	}
 
 	/**
@@ -485,7 +526,7 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 	 * @return Value of property user.
 	 */
 	public UserInfo getUser() {
-		return this.user;
+		return user;
 	}
 
 	/**
@@ -493,7 +534,7 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 	 * 
 	 * @param user New value of property user.
 	 */
-	public void setUser(UserInfo user) {
+	public void setUser(final UserInfo user) {
 		this.user = user;
 	}
 

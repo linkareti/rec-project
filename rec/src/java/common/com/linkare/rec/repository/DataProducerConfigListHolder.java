@@ -11,18 +11,21 @@ public final class DataProducerConfigListHolder implements Streamable {
 	public DataProducerConfigListHolder() {
 	}
 
-	public DataProducerConfigListHolder(DataProducerConfig[] initialValue) {
+	public DataProducerConfigListHolder(final DataProducerConfig[] initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(InputStream i) {
+	@Override
+	public void _read(final InputStream i) {
 		value = DataProducerConfigListHelper.read(i);
 	}
 
-	public void _write(OutputStream o) {
+	@Override
+	public void _write(final OutputStream o) {
 		DataProducerConfigListHelper.write(o, value);
 	}
 
+	@Override
 	public TypeCode _type() {
 		return DataProducerConfigListHelper.type();
 	}

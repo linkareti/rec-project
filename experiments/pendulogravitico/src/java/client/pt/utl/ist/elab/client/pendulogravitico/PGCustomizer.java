@@ -9,6 +9,7 @@ package pt.utl.ist.elab.client.pendulogravitico;
 import java.util.Hashtable;
 
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
@@ -22,12 +23,16 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  */
 public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2445381185564223649L;
 	java.text.DecimalFormat df = new java.text.DecimalFormat("0.0#");
 
 	/** Creates new form RadioactividadeCustomizer */
 	public PGCustomizer() {
 		initComponents();
-		Hashtable slidersHLabels = new Hashtable(11);
+		final Hashtable slidersHLabels = new Hashtable(11);
 		slidersHLabels.put(new Integer(152), new JLabel("15.2"));
 		slidersHLabels.put(new Integer(160), new JLabel("16.0"));
 		slidersHLabels.put(new Integer(170), new JLabel("17.0"));
@@ -42,7 +47,7 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		sldHeight.setLabelTable(slidersHLabels);
 
-		Hashtable slidersTLabels = new Hashtable(12);
+		final Hashtable slidersTLabels = new Hashtable(12);
 		slidersTLabels.put(new Integer(11), new JLabel("1.1"));
 		slidersTLabels.put(new Integer(20), new JLabel("2.0"));
 		slidersTLabels.put(new Integer(30), new JLabel("3.0"));
@@ -105,7 +110,8 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
 		btnOK.setText(ReCResourceBundle.findString("pendulogravitico$rec.exp.lbl.pg.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
 			}
 		});
@@ -117,7 +123,8 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		btnCancel.setText(ReCResourceBundle.findString("pendulogravitico$rec.exp.lbl.pg.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
 			}
 		});
@@ -136,7 +143,8 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		btnDefaults.setText(ReCResourceBundle.findString("pendulogravitico$rec.exp.lbl.pg.dftacq"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
 			}
 		});
@@ -175,7 +183,8 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		sldAngle.setMinimumSize(new java.awt.Dimension(250, 42));
 		sldAngle.setPreferredSize(new java.awt.Dimension(250, 42));
 		sldAngle.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sldAngleStateChanged(evt);
 			}
 		});
@@ -185,13 +194,14 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel7.setLayout(new java.awt.GridBagLayout());
 
 		tfAngle.setColumns(3);
-		tfAngle.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		tfAngle.setHorizontalAlignment(SwingConstants.RIGHT);
 		tfAngle.setText("5.0");
 		tfAngle.setMaximumSize(new java.awt.Dimension(30, 16));
 		tfAngle.setMinimumSize(new java.awt.Dimension(30, 16));
 		tfAngle.setPreferredSize(new java.awt.Dimension(37, 16));
 		tfAngle.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				tfAngleFocusLost(evt);
 			}
 		});
@@ -222,7 +232,8 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		sldNumSamples.setMinimumSize(new java.awt.Dimension(250, 42));
 		sldNumSamples.setPreferredSize(new java.awt.Dimension(250, 42));
 		sldNumSamples.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sldNumSamplesStateChanged(evt);
 			}
 		});
@@ -237,13 +248,14 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel8.setLayout(new java.awt.GridBagLayout());
 
 		tfNumSamples.setColumns(3);
-		tfNumSamples.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		tfNumSamples.setHorizontalAlignment(SwingConstants.RIGHT);
 		tfNumSamples.setText("250");
 		tfNumSamples.setMaximumSize(new java.awt.Dimension(30, 16));
 		tfNumSamples.setMinimumSize(new java.awt.Dimension(30, 16));
 		tfNumSamples.setPreferredSize(new java.awt.Dimension(37, 16));
 		tfNumSamples.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				tfNumSamplesFocusLost(evt);
 			}
 		});
@@ -276,7 +288,8 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		sldFreq.setMinimumSize(new java.awt.Dimension(255, 80));
 		sldFreq.setPreferredSize(new java.awt.Dimension(255, 80));
 		sldFreq.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sldFreqStateChanged(evt);
 			}
 		});
@@ -286,13 +299,14 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel9.setLayout(new java.awt.GridBagLayout());
 
 		tfFreq.setColumns(3);
-		tfFreq.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		tfFreq.setHorizontalAlignment(SwingConstants.RIGHT);
 		tfFreq.setText("100");
 		tfFreq.setMaximumSize(new java.awt.Dimension(30, 16));
 		tfFreq.setMinimumSize(new java.awt.Dimension(30, 16));
 		tfFreq.setPreferredSize(new java.awt.Dimension(37, 16));
 		tfFreq.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				tfFreqFocusLost(evt);
 			}
 		});
@@ -318,7 +332,7 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		sldHeight.setMaximum(248);
 		sldHeight.setMinimum(152);
 		sldHeight.setMinorTickSpacing(1);
-		sldHeight.setOrientation(javax.swing.JSlider.VERTICAL);
+		sldHeight.setOrientation(SwingConstants.VERTICAL);
 		sldHeight.setPaintLabels(true);
 		sldHeight.setPaintTicks(true);
 		sldHeight.setPaintTrack(false);
@@ -327,7 +341,8 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		sldHeight.setMinimumSize(new java.awt.Dimension(50, 250));
 		sldHeight.setPreferredSize(new java.awt.Dimension(50, 250));
 		sldHeight.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sldHeightStateChanged(evt);
 			}
 		});
@@ -337,13 +352,14 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel4.setLayout(new java.awt.GridBagLayout());
 
 		tfHeight.setColumns(3);
-		tfHeight.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		tfHeight.setHorizontalAlignment(SwingConstants.RIGHT);
 		tfHeight.setText("23.0");
 		tfHeight.setMaximumSize(new java.awt.Dimension(30, 16));
 		tfHeight.setMinimumSize(new java.awt.Dimension(30, 16));
 		tfHeight.setPreferredSize(new java.awt.Dimension(37, 16));
 		tfHeight.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				tfHeightFocusLost(evt);
 			}
 		});
@@ -358,84 +374,92 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 	}// GEN-END:initComponents
 
-	private void tfAngleFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfAngleFocusLost
+	private void tfAngleFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfAngleFocusLost
 	{// GEN-HEADEREND:event_tfAngleFocusLost
-		String strAngle = tfAngle.getText();
-		if (strAngle.trim().equals(""))
+		final String strAngle = tfAngle.getText();
+		if (strAngle.trim().equals("")) {
 			return;
+		}
 		try {
-			int angle = (int) (Float.parseFloat(strAngle) * 10);
-			if (angle <= sldAngle.getMaximum() && angle > sldAngle.getMinimum())
+			final int angle = (int) (Float.parseFloat(strAngle) * 10);
+			if (angle <= sldAngle.getMaximum() && angle > sldAngle.getMinimum()) {
 				sldAngle.setValue(angle);
-			else
+			} else {
 				tfAngle.setText("" + sldAngle.getValue() / 10f);
-		} catch (Exception e) {
+			}
+		} catch (final Exception e) {
 			tfAngle.setText("" + sldAngle.getValue() / 10f);
 		}
 	}// GEN-LAST:event_tfAngleFocusLost
 
-	private void tfNumSamplesFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfNumSamplesFocusLost
+	private void tfNumSamplesFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfNumSamplesFocusLost
 	{// GEN-HEADEREND:event_tfNumSamplesFocusLost
-		String strNumSamples = tfNumSamples.getText();
-		if (strNumSamples.trim().equals(""))
+		final String strNumSamples = tfNumSamples.getText();
+		if (strNumSamples.trim().equals("")) {
 			return;
+		}
 		try {
-			int numSamples = Integer.parseInt(strNumSamples);
-			if (numSamples <= sldNumSamples.getMaximum() && numSamples > sldNumSamples.getMinimum())
+			final int numSamples = Integer.parseInt(strNumSamples);
+			if (numSamples <= sldNumSamples.getMaximum() && numSamples > sldNumSamples.getMinimum()) {
 				sldNumSamples.setValue(numSamples);
-			else
+			} else {
 				tfNumSamples.setText("" + sldNumSamples.getValue());
-		} catch (Exception e) {
+			}
+		} catch (final Exception e) {
 			tfNumSamples.setText("" + sldNumSamples.getValue());
 		}
 		checkMaxNumSamples();
 
 	}// GEN-LAST:event_tfNumSamplesFocusLost
 
-	private void tfFreqFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfFreqFocusLost
+	private void tfFreqFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfFreqFocusLost
 	{// GEN-HEADEREND:event_tfFreqFocusLost
-		String strFreq = tfFreq.getText();
-		if (strFreq.trim().equals(""))
+		final String strFreq = tfFreq.getText();
+		if (strFreq.trim().equals("")) {
 			return;
+		}
 		try {
-			int Freq = Integer.parseInt(strFreq);
-			if (Freq <= sldFreq.getMaximum() && Freq > sldFreq.getMinimum())
+			final int Freq = Integer.parseInt(strFreq);
+			if (Freq <= sldFreq.getMaximum() && Freq > sldFreq.getMinimum()) {
 				sldFreq.setValue(Freq);
-			else
+			} else {
 				tfFreq.setText("" + sldFreq.getValue());
-		} catch (Exception e) {
+			}
+		} catch (final Exception e) {
 			tfFreq.setText("" + sldFreq.getValue());
 		}
 		checkMaxNumSamples();
 	}// GEN-LAST:event_tfFreqFocusLost
 
-	private void tfHeightFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfHeightFocusLost
+	private void tfHeightFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfHeightFocusLost
 	{// GEN-HEADEREND:event_tfHeightFocusLost
-		String strHeight = tfHeight.getText();
-		if (strHeight.trim().equals(""))
+		final String strHeight = tfHeight.getText();
+		if (strHeight.trim().equals("")) {
 			return;
+		}
 		try {
-			int height = (int) (Float.parseFloat(strHeight) * 10);
-			if (height <= sldHeight.getMaximum() && height > sldHeight.getMinimum())
+			final int height = (int) (Float.parseFloat(strHeight) * 10);
+			if (height <= sldHeight.getMaximum() && height > sldHeight.getMinimum()) {
 				sldHeight.setValue(height);
-			else
+			} else {
 				tfHeight.setText("" + sldHeight.getValue() / 10f);
-		} catch (Exception e) {
+			}
+		} catch (final Exception e) {
 			tfHeight.setText("" + sldHeight.getValue() / 10f);
 		}
 	}// GEN-LAST:event_tfHeightFocusLost
 
-	private void sldHeightStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldHeightStateChanged
+	private void sldHeightStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldHeightStateChanged
 	{// GEN-HEADEREND:event_sldHeightStateChanged
 		tfHeight.setText("" + (sldHeight.getValue() / 10f));
 	}// GEN-LAST:event_sldHeightStateChanged
 
-	private void sldAngleStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldAngleStateChanged
+	private void sldAngleStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldAngleStateChanged
 	{// GEN-HEADEREND:event_sldAngleStateChanged
 		tfAngle.setText("" + (sldAngle.getValue() / 10f));
 	}// GEN-LAST:event_sldAngleStateChanged
 
-	private void sldFreqStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldFreqStateChanged
+	private void sldFreqStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldFreqStateChanged
 	{// GEN-HEADEREND:event_sldFreqStateChanged
 		if (sldFreq.getValue() == 0) {
 			sldFreq.setValue(1);
@@ -450,17 +474,18 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		lblErrorSamplesTooHigh.setEnabled((((float) sldNumSamples.getValue() / sldFreq.getValue()) > 60));
 		btnOK.setEnabled(!lblErrorSamplesTooHigh.isEnabled());
 
-		if (!btnOK.isEnabled())
-			lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("pendulogravitico$rec.exp.lbl.pg.maxsamples",
-					"The number of samples must be: ")
+		if (!btnOK.isEnabled()) {
+			lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault(
+					"pendulogravitico$rec.exp.lbl.pg.maxsamples", "The number of samples must be: ")
 					+ (sldFreq.getValue() * 60));
-		else
-			lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("pendulogravitico$rec.exp.lbl.pg.time",
-					"Exp duration: ")
+		} else {
+			lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault(
+					"pendulogravitico$rec.exp.lbl.pg.time", "Exp duration: ")
 					+ df.format((float) sldNumSamples.getValue() / sldFreq.getValue()) + " s");
+		}
 	}
 
-	private void sldNumSamplesStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldNumSamplesStateChanged
+	private void sldNumSamplesStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldNumSamplesStateChanged
 	{// GEN-HEADEREND:event_sldNumSamplesStateChanged
 
 		if (sldNumSamples.getValue() == 0) {
@@ -472,7 +497,7 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 	}// GEN-LAST:event_sldNumSamplesStateChanged
 
-	private void btnDefaultsActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
+	private void btnDefaultsActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
 	{// GEN-HEADEREND:event_btnDefaultsActionPerformed
 		sldNumSamples.setValue(250);
 		tfNumSamples.setText("250");
@@ -484,27 +509,27 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		tfHeight.setText("" + 23.0);
 	}// GEN-LAST:event_btnDefaultsActionPerformed
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
+	private void btnCancelActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
 	{// GEN-HEADEREND:event_btnCancelActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_btnCancelActionPerformed
 
-	private void btnOKActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
+	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
 
 		acqConfig.setTotalSamples(sldNumSamples.getValue() == 0 ? 1 : sldNumSamples.getValue());
 		acqConfig.getSelectedHardwareParameter("Altura").setParameterValue("" + sldHeight.getValue() / 10f);
 		acqConfig.getSelectedHardwareParameter("Angulo inicial").setParameterValue("" + sldAngle.getValue() / 10f);
-		acqConfig.setSelectedFrequency(new Frequency((double) sldFreq.getValue(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier()));
+		acqConfig.setSelectedFrequency(new Frequency(sldFreq.getValue(), hardwareInfo.getHardwareFrequencies(0)
+				.getMinimumFrequency().getMultiplier()));
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_btnOKActionPerformed
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		ReCResourceBundle.loadResourceBundle("pg",
 				"recresource:///pt/utl/ist/elab/client/pendulogravitico/resources/messages");
-		javax.swing.JFrame dummy = new javax.swing.JFrame();
-		PGCustomizer pg = new PGCustomizer();
+		final javax.swing.JFrame dummy = new javax.swing.JFrame();
+		final PGCustomizer pg = new PGCustomizer();
 		dummy.getContentPane().add(pg, java.awt.BorderLayout.CENTER);
 		dummy.pack();
 		dummy.show();
@@ -546,7 +571,8 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -558,7 +584,8 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -568,9 +595,10 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -584,9 +612,10 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -598,50 +627,57 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
 		return acqConfig;
 	}
 
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
 			sldNumSamples.setValue(acqConfig.getTotalSamples());
 			tfNumSamples.setText("" + acqConfig.getTotalSamples());
-			float height = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("Altura"));
+			final float height = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("Altura"));
 			sldHeight.setValue((int) (height * 10));
 			// tfHeight.setText(""+height);
-			float teta = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("Angulo inicial"));
+			final float teta = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("Angulo inicial"));
 			sldAngle.setValue((int) (teta * 10));
 			// tfAngle.setText(""+teta);
 
-			int freq = (int) acqConfig.getSelectedFrequency().getFrequency();
+			final int freq = (int) acqConfig.getSelectedFrequency().getFrequency();
 			sldFreq.setValue(freq);
 			tfFreq.setText("" + freq);
 
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
+	@Override
 	public javax.swing.JComponent getCustomizerComponent() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/pendulogravitico/resources/pendulo_iconified.gif"));
 	}
 
+	@Override
 	public String getCustomizerTitle() {
 		return "Gravity Pendulum Experiment Configuration Utility";
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}

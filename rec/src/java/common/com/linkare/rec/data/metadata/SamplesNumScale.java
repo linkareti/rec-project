@@ -1,6 +1,11 @@
 package com.linkare.rec.data.metadata;
 
 public final class SamplesNumScale implements org.omg.CORBA.portable.IDLEntity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3031903642831545687L;
+
 	/** Holds value of property minSamples. */
 	private int minSamples;
 
@@ -13,7 +18,7 @@ public final class SamplesNumScale implements org.omg.CORBA.portable.IDLEntity {
 	public SamplesNumScale() {
 	} // ctor
 
-	public SamplesNumScale(int min_samples, int max_samples, int step) {
+	public SamplesNumScale(final int min_samples, final int max_samples, final int step) {
 		setMinSamples(min_samples);
 		setMaxSamples(max_samples);
 		setStep(step);
@@ -25,7 +30,7 @@ public final class SamplesNumScale implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property minSamples.
 	 */
 	public int getMinSamples() {
-		return this.minSamples;
+		return minSamples;
 	}
 
 	/**
@@ -33,7 +38,7 @@ public final class SamplesNumScale implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param minSamples New value of property minSamples.
 	 */
-	public void setMinSamples(int minSamples) {
+	public void setMinSamples(final int minSamples) {
 		this.minSamples = minSamples;
 	}
 
@@ -43,7 +48,7 @@ public final class SamplesNumScale implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property maxSamples.
 	 */
 	public int getMaxSamples() {
-		return this.maxSamples;
+		return maxSamples;
 	}
 
 	/**
@@ -51,7 +56,7 @@ public final class SamplesNumScale implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param maxSamples New value of property maxSamples.
 	 */
-	public void setMaxSamples(int maxSamples) {
+	public void setMaxSamples(final int maxSamples) {
 		this.maxSamples = maxSamples;
 	}
 
@@ -61,7 +66,7 @@ public final class SamplesNumScale implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property step.
 	 */
 	public int getStep() {
-		return this.step;
+		return step;
 	}
 
 	/**
@@ -69,7 +74,7 @@ public final class SamplesNumScale implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param step New value of property step.
 	 */
-	public void setStep(int step) {
+	public void setStep(final int step) {
 		this.step = step;
 	}
 

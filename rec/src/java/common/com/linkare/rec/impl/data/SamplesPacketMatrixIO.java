@@ -18,6 +18,10 @@ import com.linkare.rec.data.acquisition.SamplesPacket;
  * @author José Pedro Pereira - Linkare TI
  */
 public class SamplesPacketMatrixIO implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2275422019247210861L;
 	SequencedObjectIO ioDelegate = null;
 
 	public SamplesPacketMatrixIO() throws IOException {
@@ -40,30 +44,31 @@ public class SamplesPacketMatrixIO implements Serializable {
 	 * @param file New value of property file.
 	 * 
 	 */
-	public void setFile(File file) throws IOException {
+	public void setFile(final File file) throws IOException {
 		ioDelegate.setFile(file);
 	}
 
-	public SamplesPacket[] getSamplesPackets(int packetStart, int packetEnd) throws SamplesPacketReadException {
+	public SamplesPacket[] getSamplesPackets(final int packetStart, final int packetEnd)
+			throws SamplesPacketReadException {
 		try {
-			Object[] oRead = ioDelegate.readObjects(packetStart, packetEnd);
-			SamplesPacket[] retVal = new SamplesPacket[packetEnd - packetStart + 1];
+			final Object[] oRead = ioDelegate.readObjects(packetStart, packetEnd);
+			final SamplesPacket[] retVal = new SamplesPacket[packetEnd - packetStart + 1];
 			System.arraycopy(oRead, 0, retVal, 0, retVal.length);
 			return retVal;
-		} catch (SequencedObjectReadException e) {
+		} catch (final SequencedObjectReadException e) {
 			throw new SamplesPacketReadException(e, e.getErrorIndex());
 		}
 	}
 
-	public void write(SamplesPacket[] packets) throws IOException {
+	public void write(final SamplesPacket[] packets) throws IOException {
 		ioDelegate.writeObjects(packets);
 	}
 
-	public void write(Object[] packets) throws IOException {
+	public void write(final Object[] packets) throws IOException {
 		ioDelegate.writeObjects(packets);
 	}
 
-	public void write(ArrayList packets) throws IOException {
+	public void write(final ArrayList packets) throws IOException {
 		ioDelegate.writeObjects(packets.toArray());
 	}
 

@@ -41,13 +41,13 @@ public class MediaList {
 
 	private final LibVlcEventManager eventManager;
 
-	private List<String> items = new ArrayList<String>();
+	private final List<String> items = new ArrayList<String>();
 
 	private boolean released;
 
-	public MediaList(JVLC jvlc) {
+	public MediaList(final JVLC jvlc) {
 		this.jvlc = jvlc;
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		instance = jvlc.getLibvlc().libvlc_media_list_new(jvlc.getInstance(), exception);
 		eventManager = jvlc.getLibvlc().libvlc_media_list_event_manager(instance, exception);
 	}
@@ -55,20 +55,20 @@ public class MediaList {
 	/**
 	 * @param mrl The media resource locator to add to the media list.
 	 */
-	public void addMedia(String mrl) {
-		MediaDescriptor descriptor = new MediaDescriptor(jvlc, mrl);
+	public void addMedia(final String mrl) {
+		final MediaDescriptor descriptor = new MediaDescriptor(jvlc, mrl);
 		addMedia(descriptor);
 	}
 
 	/**
 	 * @param descriptor The media descriptor to add to the media list.
 	 */
-	public void addMedia(MediaDescriptor descriptor) {
+	public void addMedia(final MediaDescriptor descriptor) {
 		if (items.contains(descriptor.getMrl())) {
 			return;
 		}
 		items.add(descriptor.getMrl());
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		jvlc.getLibvlc().libvlc_media_list_add_media(instance, descriptor.getInstance(), exception);
 	}
 
@@ -76,7 +76,7 @@ public class MediaList {
 	 * @return The current number of items in the media list.
 	 */
 	public int size() {
-		libvlc_exception_t exception = new libvlc_exception_t();
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		return jvlc.getLibvlc().libvlc_media_list_count(instance, exception);
 	}
 
@@ -84,8 +84,8 @@ public class MediaList {
 	 * @param descriptor The media descriptor to get the index of.
 	 * @return The index of the media descriptor, or -1 if not found.
 	 */
-	public int indexOf(MediaDescriptor descriptor) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public int indexOf(final MediaDescriptor descriptor) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		return jvlc.getLibvlc().libvlc_media_list_index_of_item(instance, descriptor.getInstance(), exception);
 	}
 
@@ -95,15 +95,16 @@ public class MediaList {
 	 * @throws IndexOutOfBoundsException if index is bigger than size() or < 0,
 	 *             or there are no items in the media_list.
 	 */
-	public MediaDescriptor getMediaDescriptorAtIndex(int index) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public MediaDescriptor getMediaDescriptorAtIndex(final int index) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		if (size() == 0) {
 			throw new IndexOutOfBoundsException();
 		}
 		if (index < 0 || index > size()) {
 			throw new IndexOutOfBoundsException();
 		}
-		LibVlcMediaDescriptor descriptor = jvlc.getLibvlc().libvlc_media_list_item_at_index(instance, index, exception);
+		final LibVlcMediaDescriptor descriptor = jvlc.getLibvlc().libvlc_media_list_item_at_index(instance, index,
+				exception);
 		return new MediaDescriptor(jvlc, descriptor);
 	}
 
@@ -111,8 +112,8 @@ public class MediaList {
 	 * @param index The index of the media to remove.
 	 * @return True if the media was successfully removed, false otherwise.
 	 */
-	public boolean removeMedia(int index) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public boolean removeMedia(final int index) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		jvlc.getLibvlc().libvlc_media_list_remove_index(instance, index, exception);
 		if (exception.raised == 0) {
 			items.remove(index);
@@ -124,8 +125,8 @@ public class MediaList {
 	/**
 	 * @param mrl The media descriptor mrl.
 	 */
-	public boolean removeMedia(String mrl) {
-		int index = items.indexOf(mrl);
+	public boolean removeMedia(final String mrl) {
+		final int index = items.indexOf(mrl);
 		if (index == -1) {
 			return false;
 		}
@@ -135,9 +136,9 @@ public class MediaList {
 	/**
 	 * @param mediaDescriptor The media descriptor to remove.
 	 */
-	public boolean removeMedia(MediaDescriptor mediaDescriptor) {
-		String mrl = mediaDescriptor.getMrl();
-		int index = items.indexOf(mrl);
+	public boolean removeMedia(final MediaDescriptor mediaDescriptor) {
+		final String mrl = mediaDescriptor.getMrl();
+		final int index = items.indexOf(mrl);
 		if (index == -1) {
 			return false;
 		}
@@ -157,8 +158,8 @@ public class MediaList {
 	 * @param descriptor The media descriptor to insert.
 	 * @param index The index of the inserted media descriptor.
 	 */
-	public void insertMediaDescriptor(MediaDescriptor descriptor, int index) {
-		libvlc_exception_t exception = new libvlc_exception_t();
+	public void insertMediaDescriptor(final MediaDescriptor descriptor, final int index) {
+		final libvlc_exception_t exception = new libvlc_exception_t();
 		jvlc.getLibvlc().libvlc_media_list_insert_media(instance, descriptor.getInstance(), index, exception);
 	}
 

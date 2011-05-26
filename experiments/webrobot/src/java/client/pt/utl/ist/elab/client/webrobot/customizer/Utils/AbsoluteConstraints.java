@@ -47,7 +47,7 @@ public class AbsoluteConstraints implements java.io.Serializable {
 	 * 
 	 * @param pos The position to be represented by this AbsoluteConstraints
 	 */
-	public AbsoluteConstraints(Point pos) {
+	public AbsoluteConstraints(final Point pos) {
 		this(pos.x, pos.y);
 	}
 
@@ -57,7 +57,7 @@ public class AbsoluteConstraints implements java.io.Serializable {
 	 * @param x The X position to be represented by this AbsoluteConstraints
 	 * @param y The Y position to be represented by this AbsoluteConstraints
 	 */
-	public AbsoluteConstraints(int x, int y) {
+	public AbsoluteConstraints(final int x, final int y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -69,12 +69,12 @@ public class AbsoluteConstraints implements java.io.Serializable {
 	 * @param size The size to be represented by this AbsoluteConstraints or
 	 *            null if the component's preferred size should be used
 	 */
-	public AbsoluteConstraints(Point pos, Dimension size) {
-		this.x = pos.x;
-		this.y = pos.y;
+	public AbsoluteConstraints(final Point pos, final Dimension size) {
+		x = pos.x;
+		y = pos.y;
 		if (size != null) {
-			this.width = size.width;
-			this.height = size.height;
+			width = size.width;
+			height = size.height;
 		}
 	}
 
@@ -88,7 +88,7 @@ public class AbsoluteConstraints implements java.io.Serializable {
 	 * @param height The height to be represented by this AbsoluteConstraints or
 	 *            -1 if the component's preferred height should be used
 	 */
-	public AbsoluteConstraints(int x, int y, int width, int height) {
+	public AbsoluteConstraints(final int x, final int y, final int width, final int height) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -121,6 +121,7 @@ public class AbsoluteConstraints implements java.io.Serializable {
 		return height;
 	}
 
+	@Override
 	public String toString() {
 		return super.toString() + " [x=" + x + ", y=" + y + ", width=" + width + ", height=" + height + "]";
 	}

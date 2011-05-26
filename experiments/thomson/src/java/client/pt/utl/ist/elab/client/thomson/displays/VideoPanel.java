@@ -23,9 +23,13 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 public class VideoPanel extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3698366782431260691L;
 	private int currentFrame = 0;
 	private boolean pause = false;
-	private Vector indexes;
+	private final Vector indexes;
 	private int[] im_index = null;
 
 	/** Creates new form videoPanel */
@@ -35,9 +39,11 @@ public class VideoPanel extends javax.swing.JPanel implements com.linkare.rec.im
 	}
 
 	private class Player extends Thread {
+		@Override
 		public void run() {
-			if (im_index != null)
+			if (im_index != null) {
 				System.out.println("numberOfFrameAvailable= " + im_index.length);
+			}
 
 			while (im_index != null && currentFrame < im_index.length && !pause) {
 				currentFrame++;
@@ -46,8 +52,8 @@ public class VideoPanel extends javax.swing.JPanel implements com.linkare.rec.im
 				// model.getChannelIndex("Video")).getValue().getByteArrayValue().getData()));
 				jSliderFrame.setValue(currentFrame);
 				try {
-					sleep(500);
-				} catch (InterruptedException ie) {
+					Thread.sleep(500);
+				} catch (final InterruptedException ie) {
 					ie.printStackTrace();
 				}
 			}
@@ -83,7 +89,8 @@ public class VideoPanel extends javax.swing.JPanel implements com.linkare.rec.im
 		play_button.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/thomson/resources/play.gif")));
 		play_button.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				play_buttonActionPerformed(evt);
 			}
 		});
@@ -94,7 +101,8 @@ public class VideoPanel extends javax.swing.JPanel implements com.linkare.rec.im
 				"/pt/utl/ist/elab/client/thomson/resources/pause.gif")));
 		stop_button.setEnabled(false);
 		stop_button.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				stop_buttonActionPerformed(evt);
 			}
 		});
@@ -109,7 +117,8 @@ public class VideoPanel extends javax.swing.JPanel implements com.linkare.rec.im
 		jSliderFrame.setSnapToTicks(true);
 		jSliderFrame.setValue(0);
 		jSliderFrame.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderFrameStateChanged(evt);
 			}
 		});
@@ -127,24 +136,26 @@ public class VideoPanel extends javax.swing.JPanel implements com.linkare.rec.im
 
 	}// GEN-END:initComponents
 
-	private void stop_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_stop_buttonActionPerformed
+	private void stop_buttonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_stop_buttonActionPerformed
 		pause = true;
 	}// GEN-LAST:event_stop_buttonActionPerformed
 
-	private void play_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_play_buttonActionPerformed
-		if (currentFrame == (numberOfFrameAvailable - 1))
+	private void play_buttonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_play_buttonActionPerformed
+		if (currentFrame == (numberOfFrameAvailable - 1)) {
 			currentFrame = 0;
+		}
 		new Player().start();
 		play_button.setEnabled(false);
 		stop_button.setEnabled(true);
 	}// GEN-LAST:event_play_buttonActionPerformed
 
-	private void jSliderFrameStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderFrameStateChanged
+	private void jSliderFrameStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderFrameStateChanged
 	{// GEN-HEADEREND:event_jSliderFrameStateChanged
-		if (im_index == null || im_index.length < 1)
+		if (im_index == null || im_index.length < 1) {
 			return;
+		}
 
-		int temp_frame = jSliderFrame.getValue();
+		final int temp_frame = jSliderFrame.getValue();
 
 		if (temp_frame > (im_index.length - 1)) {
 			jSliderFrame.setValue(currentFrame);
@@ -159,54 +170,66 @@ public class VideoPanel extends javax.swing.JPanel implements com.linkare.rec.im
 				.getByteArrayValue().getData()));
 	}// GEN-LAST:event_jSliderFrameStateChanged
 
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 
-		javax.swing.JFrame dummy = new javax.swing.JFrame();
+		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new VideoPanel(), java.awt.BorderLayout.CENTER);
 		dummy.pack();
 		dummy.show();
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/thomson/resources/thomson_iconified.png"));
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
 
-	private int numberOfFrameAvailable = 0;
+	private final int numberOfFrameAvailable = 0;
 
-	public void newSamples(com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
-		if (model == null)
+	@Override
+	public void newSamples(final com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
+		if (model == null) {
 			return;
+		}
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
 			if (model.getValueAt(i, model.getChannelIndex("Video")) != null) {
 				indexes.add(new Integer(i));
@@ -220,68 +243,75 @@ public class VideoPanel extends javax.swing.JPanel implements com.linkare.rec.im
 
 	private com.linkare.rec.impl.client.experiment.ExpDataModel model = null;
 
-	public void setExpDataModel(com.linkare.rec.impl.client.experiment.ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final com.linkare.rec.impl.client.experiment.ExpDataModel model) {
+		if (this.model != null) {
 			model.removeExpDataModelListener(this);
+		}
 
 		this.model = model;
 
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 	}
 
-	private void paintImage(java.awt.Image img) {
+	private void paintImage(final java.awt.Image img) {
 		jPanelVideo.setBorder(new ImageBorder(img, true));
 	}
 
 	public class ImageBorder implements Border {
-		private Image image;
+		private final Image image;
 
 		/** Creates a new instance of ImageBorder */
-		public ImageBorder(Image image, boolean fill) {
+		public ImageBorder(final Image image, final boolean fill) {
 			this.image = image;
 			this.fill = fill;
 		}
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+		@Override
+		public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int width,
+				final int height) {
 			if (image == null) {
 				return;
 			}
 			if (!fill) {
-				int x0 = x + (width - image.getWidth(null)) / 2;
-				int y0 = y + (height - image.getHeight(null)) / 2;
+				final int x0 = x + (width - image.getWidth(null)) / 2;
+				final int y0 = y + (height - image.getHeight(null)) / 2;
 				g.drawImage(image, x0, y0, null);
 			} else {
 				g.drawImage(image, 0, 0, width, height, null);
 			}
 		}
 
-		public Insets getBorderInsets(Component c) {
+		@Override
+		public Insets getBorderInsets(final Component c) {
 			return new Insets(0, 0, 0, 0);
 		}
 
+		@Override
 		public boolean isBorderOpaque() {
 			return true;
 		}
 
 		private boolean fill = true;
 
-		public void setFill(boolean fill) {
+		public void setFill(final boolean fill) {
 			this.fill = fill;
 		}
 	}
 
-	private java.awt.Image byteArray2Image(byte[] byteArray) {
-		java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+	private java.awt.Image byteArray2Image(final byte[] byteArray) {
+		final java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
 		try {
 			baos.write(byteArray);
-		} catch (java.io.IOException e) {
+		} catch (final java.io.IOException e) {
 			e.printStackTrace();
 		}
 
-		java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(baos.toByteArray());
+		final java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(baos.toByteArray());
 
-		javax.imageio.stream.MemoryCacheImageInputStream mciis = new javax.imageio.stream.MemoryCacheImageInputStream(
+		final javax.imageio.stream.MemoryCacheImageInputStream mciis = new javax.imageio.stream.MemoryCacheImageInputStream(
 				bais);
 
 		java.awt.image.BufferedImage bImage = null;
@@ -289,13 +319,14 @@ public class VideoPanel extends javax.swing.JPanel implements com.linkare.rec.im
 		// converting the jpg byteArray into an image
 		try {
 			bImage = javax.imageio.ImageIO.read(mciis);
-		} catch (java.io.IOException e) {
+		} catch (final java.io.IOException e) {
 			e.printStackTrace();
 		}
 
-		return (java.awt.Image) bImage;
+		return bImage;
 	}// byteArray2Image(byte[] byteArray)
 
+	@Override
 	public String getName() {
 		return ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.thomson.title.video", "Video");
 	}

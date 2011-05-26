@@ -19,7 +19,7 @@ public class FileObjectOutputStream extends ObjectOutputStream {
 	private File file = null;
 
 	/** Creates a new instance of FileObjectOutputStream */
-	public FileObjectOutputStream(File file) throws IOException {
+	public FileObjectOutputStream(final File file) throws IOException {
 		super(new FileOutputStream(file));
 		setFile(file);
 	}
@@ -40,7 +40,7 @@ public class FileObjectOutputStream extends ObjectOutputStream {
 	 * @param file New value of property file.
 	 * 
 	 */
-	public void setFile(File file) {
+	public void setFile(final File file) {
 		this.file = file;
 	}
 

@@ -36,27 +36,28 @@ public class LabsTreeCellEditor implements TreeCellEditor {
 
 	private Object value = null;
 	private DisplayNode dtn = null;
-	private java.awt.Color unSelectedColor = UIManager.getColor("Tree.textBackground");
-	private java.awt.Color selectedColor = UIManager.getColor("Tree.selectionBorderColor");
+	private final java.awt.Color unSelectedColor = UIManager.getColor("Tree.textBackground");
+	private final java.awt.Color selectedColor = UIManager.getColor("Tree.selectionBorderColor");
 
-	public Component getTreeCellEditorComponent(JTree tree, Object value, boolean isSelected, boolean expanded,
-			boolean leaf, int row) {
+	@Override
+	public Component getTreeCellEditorComponent(final JTree tree, final Object value, final boolean isSelected,
+			final boolean expanded, final boolean leaf, final int row) {
 		this.value = value;
-		DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
-		Object o = node.getUserObject();
+		final DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
+		final Object o = node.getUserObject();
 
 		if (o instanceof DisplayNode) {
 			dtn = (DisplayNode) o;
 
-			JPanel panel = new JPanel(new java.awt.BorderLayout());
+			final JPanel panel = new JPanel(new java.awt.BorderLayout());
 			panel.setBackground(UIManager.getColor("Tree.textBackground"));
 
-			JCheckBox checkBox = new JCheckBox();
+			final JCheckBox checkBox = new JCheckBox();
 			checkBox.setBackground(UIManager.getColor("Tree.textBackground"));
 
 			if (o instanceof Display) {
 				if (dtn.getIcon() != null) {
-					JLabel labelIcon = new JLabel();
+					final JLabel labelIcon = new JLabel();
 					labelIcon.setBackground(UIManager.getColor("Tree.textBackground"));
 					panel.add(labelIcon, java.awt.BorderLayout.WEST);
 					labelIcon.setIcon(dtn.getIcon());
@@ -65,7 +66,7 @@ public class LabsTreeCellEditor implements TreeCellEditor {
 				}
 
 				if (dtn.getText() != null) {
-					JLabel label = new JLabel();
+					final JLabel label = new JLabel();
 					label.setFont(new java.awt.Font("Dialog", 0, 12));
 					label.setBackground(UIManager.getColor("Tree.textBackground"));
 					label.setText(dtn.getText());
@@ -75,9 +76,11 @@ public class LabsTreeCellEditor implements TreeCellEditor {
 					final int rowf = row;
 
 					label.addMouseListener(new java.awt.event.MouseAdapter() {
-						public void mousePressed(java.awt.event.MouseEvent evt) {
-							if (evt.getClickCount() == 2)
+						@Override
+						public void mousePressed(final java.awt.event.MouseEvent evt) {
+							if (evt.getClickCount() == 2) {
 								treef.firePropertyChange("ddc", 0, rowf);
+							}
 						}
 					});
 
@@ -89,27 +92,31 @@ public class LabsTreeCellEditor implements TreeCellEditor {
 				checkBox.setSelected(dtn.isSelected());
 
 				checkBox.addItemListener(new ItemListener() {
-					public void itemStateChanged(ItemEvent evt) {
+					@Override
+					public void itemStateChanged(final ItemEvent evt) {
 						dtn.setSelected(evt.getStateChange() == ItemEvent.SELECTED);
 					}
 				});
 
 				final JCheckBox checkBoxf = checkBox;
 				dtn.addDisplayNodePropertyChangeListener(new java.beans.PropertyChangeListener() {
-					public void propertyChange(java.beans.PropertyChangeEvent event) {
+					@Override
+					public void propertyChange(final java.beans.PropertyChangeEvent event) {
 						if (event.getPropertyName().equals("selected")) {
-							if (event.getNewValue().toString().equals("true"))
+							if (event.getNewValue().toString().equals("true")) {
 								checkBoxf.setSelected(true);
-							else
+							} else {
 								checkBoxf.setSelected(false);
+							}
 						}
 					}
 				});
 
-				if (isSelected)
+				if (isSelected) {
 					panel.setBackground(selectedColor);
-				else
+				} else {
 					panel.setBackground(unSelectedColor);
+				}
 
 				if (dtn.getToolTipText() != null) {
 					panel.setToolTipText("<html>" + dtn.getToolTipText() + "</html>");
@@ -122,29 +129,35 @@ public class LabsTreeCellEditor implements TreeCellEditor {
 		return new JPanel();
 	}
 
+	@Override
 	public Object getCellEditorValue() {
 		return value;
 	}
 
-	public void addCellEditorListener(CellEditorListener l) {
+	@Override
+	public void addCellEditorListener(final CellEditorListener l) {
 	}
 
-	public void removeCellEditorListener(CellEditorListener l) {
+	@Override
+	public void removeCellEditorListener(final CellEditorListener l) {
 	}
 
+	@Override
 	public void cancelCellEditing() {
 	}
 
+	@Override
 	public boolean stopCellEditing() {
 		return true;
 	}
 
-	public boolean isCellEditable(EventObject event) {
+	@Override
+	public boolean isCellEditable(final EventObject event) {
 		if (event.getSource() instanceof JTree) {
-			JTree source = (JTree) event.getSource();
+			final JTree source = (JTree) event.getSource();
 			Object selected = null;
 			if (event instanceof java.awt.event.MouseEvent) {
-				java.awt.event.MouseEvent evt = (java.awt.event.MouseEvent) event;
+				final java.awt.event.MouseEvent evt = (java.awt.event.MouseEvent) event;
 				selected = ((JTree) event.getSource()).getClosestPathForLocation(evt.getX(), evt.getY())
 						.getLastPathComponent();
 			} else {
@@ -152,7 +165,7 @@ public class LabsTreeCellEditor implements TreeCellEditor {
 			}
 
 			if (selected instanceof DefaultMutableTreeNode) {
-				Object o = ((DefaultMutableTreeNode) selected).getUserObject();
+				final Object o = ((DefaultMutableTreeNode) selected).getUserObject();
 				if (o instanceof Display) {
 					return true;
 				}
@@ -162,9 +175,10 @@ public class LabsTreeCellEditor implements TreeCellEditor {
 		return false;
 	}
 
-	public boolean shouldSelectCell(EventObject selectCell) {
+	@Override
+	public boolean shouldSelectCell(final EventObject selectCell) {
 		if (selectCell instanceof MouseEvent) {
-			MouseEvent e = (MouseEvent) selectCell;
+			final MouseEvent e = (MouseEvent) selectCell;
 
 			return e.getID() != MouseEvent.MOUSE_DRAGGED;
 		}

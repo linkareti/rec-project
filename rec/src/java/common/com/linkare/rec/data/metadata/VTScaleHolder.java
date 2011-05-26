@@ -6,18 +6,21 @@ public final class VTScaleHolder implements org.omg.CORBA.portable.Streamable {
 	public VTScaleHolder() {
 	}
 
-	public VTScaleHolder(com.linkare.rec.data.metadata.Scale initialValue) {
+	public VTScaleHolder(final com.linkare.rec.data.metadata.Scale initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(org.omg.CORBA.portable.InputStream i) {
+	@Override
+	public void _read(final org.omg.CORBA.portable.InputStream i) {
 		value = com.linkare.rec.data.metadata.VTScaleHelper.read(i);
 	}
 
-	public void _write(org.omg.CORBA.portable.OutputStream o) {
+	@Override
+	public void _write(final org.omg.CORBA.portable.OutputStream o) {
 		com.linkare.rec.data.metadata.VTScaleHelper.write(o, value);
 	}
 
+	@Override
 	public org.omg.CORBA.TypeCode _type() {
 		return com.linkare.rec.data.metadata.VTScaleHelper.type();
 	}

@@ -22,12 +22,17 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  */
 public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTableModel implements
 		ExpUsersListChangeListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1242039289732037050L;
+
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(DefaulExpUsersListTableModel.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(DefaulExpUsersListTableModel.UI_CLIENT_LOGGER));
 		}
 	}
 	public static long CONTROL_NOW = 0;
@@ -39,12 +44,12 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 	/** Holds value of property expUsersListSource. */
 	private ExpUsersListSource expUsersListSource;
 
-	private String noUsersList;
-	private String lblUserName;
-	private String lbltime_to_control_min;
-	private String lbltime_to_control_max;
-	private String lblInControl;
-	private String lblControlNow;
+	private final String noUsersList;
+	private final String lblUserName;
+	private final String lbltime_to_control_min;
+	private final String lbltime_to_control_max;
+	private final String lblInControl;
+	private final String lblControlNow;
 
 	/** Creates a new instance of DefaulExptUsersListTableModel */
 	public DefaulExpUsersListTableModel() {
@@ -61,59 +66,73 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 		setDataVector(new Object[0][1], new Object[] { noUsersList });
 	}
 
-	public void usersListChanged(ExpUsersListEvent evt) {
-		UserInfo[] expUsers = evt.getUserInfo();
+	@Override
+	public void usersListChanged(final ExpUsersListEvent evt) {
+		final UserInfo[] expUsers = evt.getUserInfo();
 		if (expUsers == null) {
 			setDataVector(new Object[0][1], new Object[] { noUsersList });
 			return;
 		}
 
 		Arrays.sort(expUsers, new Comparator<UserInfo>() {
-			public int compare(UserInfo u1, UserInfo u2) {
-				if (u1 == null && u2 == null)
+			@Override
+			public int compare(final UserInfo u1, final UserInfo u2) {
+				if (u1 == null && u2 == null) {
 					return 0;
+				}
 
-				if (u1 == null)
+				if (u1 == null) {
 					return -1;
-				if (u2 == null)
+				}
+				if (u2 == null) {
 					return +1;
+				}
 
-				if (u1.getNextLockTime() == null && u2.getNextLockTime() == null)
+				if (u1.getNextLockTime() == null && u2.getNextLockTime() == null) {
 					return 0;
-				if (u1.getNextLockTime() == null)
+				}
+				if (u1.getNextLockTime() == null) {
 					return -1;
-				if (u2.getNextLockTime() == null)
+				}
+				if (u2.getNextLockTime() == null) {
 					return +1;
-				if (u1.getNextLockTime()[0] == null)
+				}
+				if (u1.getNextLockTime()[0] == null) {
 					return -1;
-				if (u2.getNextLockTime()[0] == null)
+				}
+				if (u2.getNextLockTime()[0] == null) {
 					return +1;
+				}
 
 				if (u1.getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS)
-						|| u1.getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS))
+						|| u1.getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS)) {
 					return 0;
+				}
 
-				if (u1.getNextLockTime()[0].getMilliSeconds() - u2.getNextLockTime()[0].getMilliSeconds() == 0)
+				if (u1.getNextLockTime()[0].getMilliSeconds() - u2.getNextLockTime()[0].getMilliSeconds() == 0) {
 					return 0;
+				}
 
 				return (u1.getNextLockTime()[0].getMilliSeconds() - u2.getNextLockTime()[0].getMilliSeconds()) > 0 ? +1
 						: -1;
 			}
 
-			public boolean equals(Object other) {
-				if (other == null || !(other.getClass() == this.getClass()))
+			@Override
+			public boolean equals(final Object other) {
+				if (other == null || !(other.getClass() == this.getClass())) {
 					return false;
+				}
 
 				return true;
 			}
 		});
 
-		Vector<String[]> expUsersList = new Vector<String[]>(expUsers.length);
+		final Vector<String[]> expUsersList = new Vector<String[]>(expUsers.length);
 
 		for (int i = 0; i < expUsers.length; i++) {
 			if (expUsers[i].getUserName() != null
 					&& !expUsers[i].getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS)) {
-				String userName = expUsers[i].getUserName();
+				final String userName = expUsers[i].getUserName();
 				String controlInMin = "";
 				String controlInMax = "";
 				if (expUsers[i].getLockedTime() != null && expUsers[i].getLockedTime().getMilliSeconds() != 0) {
@@ -121,11 +140,13 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 					controlInMax = "" + expUsers[i].getLockedTime().toSimpleString();
 				} else {
 					if (expUsers[i].getNextLockTime() != null
-							&& expUsers[i].getNextLockTime()[UserInfo.MIN_TIME_LOCK] != null)
+							&& expUsers[i].getNextLockTime()[UserInfo.MIN_TIME_LOCK] != null) {
 						controlInMin = expUsers[i].getNextLockTime()[UserInfo.MIN_TIME_LOCK].toSimpleStringTimeFirst();
+					}
 					if (expUsers[i].getNextLockTime() != null
-							&& expUsers[i].getNextLockTime()[UserInfo.MAX_TIME_LOCK] != null)
+							&& expUsers[i].getNextLockTime()[UserInfo.MAX_TIME_LOCK] != null) {
 						controlInMax = expUsers[i].getNextLockTime()[UserInfo.MAX_TIME_LOCK].toSimpleStringTimeFirst();
+					}
 
 				}
 
@@ -145,9 +166,9 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 		}
 
 		expUsersList.trimToSize();
-		Object[] values = expUsersList.toArray();
+		final Object[] values = expUsersList.toArray();
 
-		Object[][] valuesMatrix = new Object[values.length][];
+		final Object[][] valuesMatrix = new Object[values.length][];
 		System.arraycopy(values, 0, valuesMatrix, 0, values.length);
 
 		setDataVector(valuesMatrix, new Object[] { lblUserName, lbltime_to_control_min, lbltime_to_control_max });
@@ -165,7 +186,8 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 	 * @return true if the cell is editable
 	 * @see #setValueAt
 	 */
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
+	@Override
+	public boolean isCellEditable(final int rowIndex, final int columnIndex) {
 		return false;
 	}
 
@@ -175,7 +197,7 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 	 * @return Value of property expUsersListSource.
 	 */
 	public ExpUsersListSource getExpUsersListSource() {
-		return this.expUsersListSource;
+		return expUsersListSource;
 	}
 
 	/**
@@ -183,36 +205,41 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 	 * 
 	 * @param expUsersListSource New value of property expUsersListSource.
 	 */
-	public void setExpUsersListSource(ExpUsersListSource expUsersListSource) {
+	public void setExpUsersListSource(final ExpUsersListSource expUsersListSource) {
 		this.expUsersListSource = expUsersListSource;
-		if (expUsersListSource != null)
+		if (expUsersListSource != null) {
 			expUsersListSource.addExpUsersListChangeListener(this);
+		}
 
 		chechRefresh();
 	}
 
 	private void startAutoRefresh() {
-		if (expUsersListSource != null)
+		if (expUsersListSource != null) {
 			expUsersListSource.startAutoRefresh(delay_refresh);
+		}
 	}
 
 	private void stopAutoRefresh() {
-		if (expUsersListSource != null)
+		if (expUsersListSource != null) {
 			expUsersListSource.stopAutoRefresh();
+		}
 	}
 
 	private long delay_refresh = -1;
 
-	public void setAutoRefresh(long delay_refresh) {
+	public void setAutoRefresh(final long delay_refresh) {
 		this.delay_refresh = delay_refresh;
 		chechRefresh();
 	}
 
 	private void chechRefresh() {
-		if (delay_refresh > 0)
+		if (delay_refresh > 0) {
 			startAutoRefresh();
-		if (delay_refresh <= 0)
+		}
+		if (delay_refresh <= 0) {
 			stopAutoRefresh();
+		}
 	}
 
 }

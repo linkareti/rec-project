@@ -11,6 +11,7 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import pt.utl.ist.elab.driver.webrobot.serial.SerialComm;
+import pt.utl.ist.elab.driver.webrobot.utils.JPrografBlock;
 
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.impl.data.PhysicsValFactory;
@@ -23,9 +24,9 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	protected static String WR_DS_LOGGER = "WebRobotStateMachine.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(WR_DS_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(RobotStateMachine.WR_DS_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(WR_DS_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(RobotStateMachine.WR_DS_LOGGER));
 		}
 	}
 
@@ -187,7 +188,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	/**
 	 * Use to reset the state machine
 	 */
-	private boolean reset = false;
+	private final boolean reset = false;
 
 	/**
 	 * Stop the state machine until new data comes from the robot
@@ -214,7 +215,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	private Thread dataProducerThread;
 
 	/** Ask for serial data every x miliseconds */
-	private int ASKER_INT = 250;
+	private final int ASKER_INT = 250;
 
 	/** The experiment duration in seconds */
 	private int EXP_DURATION = 240;
@@ -264,7 +265,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	/** Battery vars */
 	private boolean batFull = false;
 	private boolean batDown = false;
-	private int counterBat = 0;
+	private final int counterBat = 0;
 	private int batDownVal = 150;
 	private int batFullVal = 245;
 
@@ -278,7 +279,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	volatile private boolean reseting = false;
 	volatile private boolean stoping = false;
 	volatile private boolean stoped = false;
-	private int numChannels = 23;
+	private final int numChannels = 23;
 	private PhysicsValue[] values = null;
 
 	/** Register the number of samples sent to the user */
@@ -300,16 +301,16 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * If the state machine reaches its end without sending any pwm...let's send
 	 * the last one
 	 */
-	private int tempPWM1 = 127;
-	private int tempPWM2 = 127;
-	private boolean sentPWM = false;
+	private final int tempPWM1 = 127;
+	private final int tempPWM2 = 127;
+	private final boolean sentPWM = false;
 
 	/** To comunicate with the robot */
-	private SerialComm serialComm;
+	private final SerialComm serialComm;
 
 	/** Border test vars */
-	private int borderSens = 235;
-	private int chargingValue = 50;
+	private final int borderSens = 235;
+	private final int chargingValue = 50;
 
 	/** Vels max values */
 	private int MAX_PWM = 255;
@@ -325,12 +326,12 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	private int acqTime = 500;
 
 	/** Creates a new instance of RobotServer */
-	public RobotStateMachine(RobotDriver hardware) {
+	public RobotStateMachine(final RobotDriver hardware) {
 		/** Read the properties from the file */
 		readProps();
 		this.hardware = hardware;
-		this.serialComm = hardware.getSerialComm();
-		this.serialComm.registerStateMachine(this);
+		serialComm = hardware.getSerialComm();
+		serialComm.registerStateMachine(this);
 
 		/** Just for security, lets send the PWM to stop the robot */
 		sendPWM(127, 127, false);
@@ -346,7 +347,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 		for (int i = 0; i < numChannels; i++) {
 			channelsValues[i] = 0;
 		}
-		Logger.getLogger(WR_DS_LOGGER).log(Level.INFO, "State Machine Started!");
+		Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO, "State Machine Started!");
 	}
 
 	/* Method that reads the properties... */
@@ -358,8 +359,8 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 			props = new java.util.Properties();
 			props.load(is);
 			is.close();
-		} catch (java.io.FileNotFoundException fnfe) {
-			Logger.getLogger(WR_DS_LOGGER).log(Level.INFO, "Couldn't found the file...\n" + fnfe);
+		} catch (final java.io.FileNotFoundException fnfe) {
+			Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO, "Couldn't found the file...\n" + fnfe);
 			resourceLocation = getClass().getResource(
 					"/pt/utl/ist/elab/driver/webrobot/configs/WebRobotProps.properties").getFile();
 			try {
@@ -368,13 +369,14 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 				props = new java.util.Properties();
 				props.load(is);
 				is.close();
-			} catch (java.io.FileNotFoundException fnfe2) {
-				Logger.getLogger(WR_DS_LOGGER).log(Level.INFO, "Couldn't found the file...\n" + fnfe2);
-			} catch (java.io.IOException ioe2) {
-				Logger.getLogger(WR_DS_LOGGER).log(Level.INFO, "Exception...\n" + ioe2);
+			} catch (final java.io.FileNotFoundException fnfe2) {
+				Logger.getLogger(RobotStateMachine.WR_DS_LOGGER)
+						.log(Level.INFO, "Couldn't found the file...\n" + fnfe2);
+			} catch (final java.io.IOException ioe2) {
+				Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO, "Exception...\n" + ioe2);
 			}
-		} catch (java.io.IOException ioe) {
-			Logger.getLogger(WR_DS_LOGGER).log(Level.INFO, "Exception...\n" + ioe);
+		} catch (final java.io.IOException ioe) {
+			Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO, "Exception...\n" + ioe);
 		}
 		try {
 			WALK_SPEED_AHEAH = Integer.parseInt(props.getProperty("velAhead"), 10);
@@ -404,8 +406,8 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 			I3BORDER = Integer.parseInt(props.getProperty("I3BORDER"));
 			I4BORDER = Integer.parseInt(props.getProperty("I4BORDER"));
 			I5BORDER = Integer.parseInt(props.getProperty("I5BORDER"));
-		} catch (Exception e) {
-			Logger.getLogger(WR_DS_LOGGER).log(Level.INFO, "Erro ao ler as propriedades\n" + e);
+		} catch (final Exception e) {
+			Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO, "Erro ao ler as propriedades\n" + e);
 		}
 	}
 
@@ -492,15 +494,16 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 						 */
 						restarted = false;
 
-						Logger.getLogger(WR_DS_LOGGER).log(Level.INFO, "Sending sample number:" + nSamples);
+						Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO,
+								"Sending sample number:" + nSamples);
 
 						/** Send............................... */
 						addDataRow(values);
 					}
 					try {
 						dataProducerThread.sleep(2000);
-					} catch (InterruptedException e) {
-						Logger.getLogger(WR_DS_LOGGER).log(Level.INFO, e.toString());
+					} catch (final InterruptedException e) {
+						Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO, e.toString());
 					}
 				} // end while(!reseting && !stoping)
 
@@ -510,7 +513,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 				endProduction();
 
 				/** Park the robot */
-				Logger.getLogger(WR_DS_LOGGER).log(Level.INFO, "Parking the robot");
+				Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO, "Parking the robot");
 				parkRobot();
 
 				/**
@@ -526,7 +529,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 					 * then I guess it's parked...
 					 */
 					if (parked && counterParked > 2) {
-						Logger.getLogger(WR_DS_LOGGER).log(Level.INFO, "The robot is Parked!!!");
+						Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO, "The robot is Parked!!!");
 						stoping = false;
 						counterParked = 0;
 						sendPWM(127, 127, false);
@@ -540,8 +543,8 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 					}
 					try {
 						Thread.currentThread().sleep(acqTime);
-					} catch (InterruptedException e) {
-						Logger.getLogger(WR_DS_LOGGER).log(Level.INFO, e.toString());
+					} catch (final InterruptedException e) {
+						Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO, e.toString());
 					}
 				}// end while stoping
 
@@ -551,10 +554,12 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 				 * a value good enough
 				 */
 				int batCounter = 0;
-				Logger.getLogger(WR_DS_LOGGER).log(Level.INFO, "The min value for the bat is:" + batDownVal);
+				Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO,
+						"The min value for the bat is:" + batDownVal);
 
 				while (batCounter < 4) {
-					Logger.getLogger(WR_DS_LOGGER).log(Level.INFO, "Current battery value is:" + a1State);
+					Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO,
+							"Current battery value is:" + a1State);
 					if (!isBatteryDown()) {
 						batCounter++;
 					} else {
@@ -563,8 +568,9 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 					try {
 						sensorsValues = getSensorsValues();
 						Thread.currentThread().sleep(2000);
-					} catch (InterruptedException ie) {
-						Logger.getLogger(WR_DS_LOGGER).log(Level.INFO, "Interrupted Exception\n" + ie);
+					} catch (final InterruptedException ie) {
+						Logger.getLogger(RobotStateMachine.WR_DS_LOGGER)
+								.log(Level.INFO, "Interrupted Exception\n" + ie);
 					}
 				}
 				stoped = true;
@@ -577,8 +583,8 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 			}
 			try {
 				dataProducerThread.join(50);
-			} catch (InterruptedException ie) {
-				Logger.getLogger(WR_DS_LOGGER).log(Level.INFO, "Error in the thread\n" + ie);
+			} catch (final InterruptedException ie) {
+				Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO, "Error in the thread\n" + ie);
 			}
 			killGeneralThread();
 			serialTimer.cancel();
@@ -589,7 +595,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * Since I send the values from an inner class, I must override this method
 	 * in the super class
 	 */
-	public void addDataRow(PhysicsValue[] dataSample) {
+	public void addDataRow(final PhysicsValue[] dataSample) {
 		super.addDataRow(dataSample);
 	}
 
@@ -621,8 +627,9 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 					 */
 					try {
 						Thread.currentThread().sleep(acqTime);
-					} catch (InterruptedException ie) {
-						Logger.getLogger(WR_DS_LOGGER).log(Level.INFO, "Interrupted Exception:\n" + ie);
+					} catch (final InterruptedException ie) {
+						Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO,
+								"Interrupted Exception:\n" + ie);
 					}
 					stoping = true;
 					finished = true;
@@ -678,8 +685,8 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 						/** Make the thread sleep for 250ms */
 						try {
 							generalThread.sleep(250);
-						} catch (InterruptedException e) {
-							Logger.getLogger(WR_DS_LOGGER).log(Level.INFO, "Error" + e);
+						} catch (final InterruptedException e) {
+							Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO, "Error" + e);
 						}
 					}
 					counter = 0;
@@ -696,8 +703,8 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 			}
 			try {
 				generalThread.join(100);
-			} catch (InterruptedException ie) {
-				Logger.getLogger(WR_DS_LOGGER).log(Level.INFO, "Error in the thread\n" + ie);
+			} catch (final InterruptedException ie) {
+				Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO, "Error in the thread\n" + ie);
 			}
 		}
 	}
@@ -712,19 +719,20 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	}
 
 	/** Starts the state machine! */
-	public void startStateMachine(String flowString) {
-		java.io.File flowFile = new java.io.File("tempFlow.grf");
+	public void startStateMachine(final String flowString) {
+		final java.io.File flowFile = new java.io.File("tempFlow.grf");
 		try {
-			java.io.FileWriter fileWriter = new java.io.FileWriter(flowFile);
+			final java.io.FileWriter fileWriter = new java.io.FileWriter(flowFile);
 			fileWriter.write(flowString);
 			fileWriter.close();
-		} catch (java.io.IOException ioe) {
-			Logger.getLogger(WR_DS_LOGGER).log(Level.INFO, "Error when writing the flow file\n" + ioe);
+		} catch (final java.io.IOException ioe) {
+			Logger.getLogger(RobotStateMachine.WR_DS_LOGGER)
+					.log(Level.INFO, "Error when writing the flow file\n" + ioe);
 		}
 		startStateMachine(flowFile);
 	}
 
-	public void startStateMachine(java.io.File file) {
+	public void startStateMachine(final java.io.File file) {
 		/** Get the file the user sent! */
 		/** Open the file, construct the matrixs and come back! */
 		openFile = new pt.utl.ist.elab.driver.webrobot.utils.OpenFile(this, file);
@@ -745,11 +753,11 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	}
 
 	/** This method creates the ivpwm matrix! */
-	private void createIVPWMatrix(Object[][] iValues) {
+	private void createIVPWMatrix(final Object[][] iValues) {
 		/** How big will be this matrix? */
-		int numRowsIValue = iValues.length;
+		final int numRowsIValue = iValues.length;
 		int iRowIVPWM = 0;
-		int numCols = countRealColumns();
+		final int numCols = countRealColumns();
 		matrixIVPWM = new pt.utl.ist.elab.driver.webrobot.utils.JPrografBlock[numCols + 1][numRowsIValue];
 
 		/**
@@ -918,7 +926,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 		/**
 		 * Gets the block to test!
 		 */
-		pt.utl.ist.elab.driver.webrobot.utils.JPrografBlock stateBlock = matrix[currentRow][currentCol];
+		final pt.utl.ist.elab.driver.webrobot.utils.JPrografBlock stateBlock = matrix[currentRow][currentCol];
 
 		/**
 		 * If the block is null do one of two: 1-Restart the state machine (if
@@ -939,9 +947,9 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 		 */
 		int d1 = getDIntValue(stateBlock.getD1());
 		int d3 = getDIntValue(stateBlock.getD3());
-		int valor = stateBlock.getValor();
-		int valor2 = stateBlock.getValor2();
-		int flag = stateBlock.getFlag();
+		final int valor = stateBlock.getValor();
+		final int valor2 = stateBlock.getValor2();
+		final int flag = stateBlock.getFlag();
 
 		if (stateBlock.getTipo() == 1 || stateBlock.getTipo() == 2 || stateBlock.getTipo() == 12
 				|| stateBlock.getTipo() == 13) {
@@ -1137,24 +1145,24 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 		 */
 		else if (stateBlock.getTipo() == 14) {
 			for (int iCol = 0; iCol < matrixIVPWM[0].length; iCol++) {
-				for (int iRow = 0; iRow < matrixIVPWM.length; iRow++) {
-					if (matrixIVPWM[iRow][iCol] == null) {
+				for (final JPrografBlock[] element : matrixIVPWM) {
+					if (element[iCol] == null) {
 						continue;
 					}
-					d1 = getDIntValue(matrixIVPWM[iRow][iCol].getD1());
-					d3 = matrixIVPWM[iRow][iCol].getValor();
-					if (matrixIVPWM[iRow][iCol].getD2().trim().equalsIgnoreCase("<")) {
+					d1 = getDIntValue(element[iCol].getD1());
+					d3 = element[iCol].getValor();
+					if (element[iCol].getD2().trim().equalsIgnoreCase("<")) {
 						if (d1 > d3) {
 							break;
 						}
-					} else if (matrixIVPWM[iRow][iCol].getD2().trim().equalsIgnoreCase(">")) {
+					} else if (element[iCol].getD2().trim().equalsIgnoreCase(">")) {
 						if (d1 < d3) {
 							break;
 						}
 					}
-					if (matrixIVPWM[iRow][iCol].getTipo() == 8) {
+					if (element[iCol].getTipo() == 8) {
 						currentIVPWMcol = iCol;
-						sendPWM(matrixIVPWM[iRow][iCol].getValor(), matrixIVPWM[iRow][iCol].getValor2(), true);
+						sendPWM(element[iCol].getValor(), element[iCol].getValor2(), true);
 						currentRow++;
 						return;
 					}
@@ -1173,7 +1181,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	/**
 	 * Sends the pwm to the motors
 	 */
-	private void sendPWM(int valor, int valor2, boolean waitSerial) {
+	private void sendPWM(int valor, int valor2, final boolean waitSerial) {
 		if (waitSerial) {
 			setWaitSerial(true);
 		} else {
@@ -1206,7 +1214,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	private int currentPWM1 = 127;
 	private int currentPWM2 = 127;
 
-	private void sendSerialPWM(int PWM1, int PWM2) {
+	private void sendSerialPWM(final int PWM1, final int PWM2) {
 		serialComm.write(80);
 		serialComm.write(87);
 		serialComm.write(77);
@@ -1217,7 +1225,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	/**
 	 * Returns the value of the asked sensors
 	 */
-	private int getDIntValue(String strd1) {
+	private int getDIntValue(final String strd1) {
 		if (strd1.trim().equalsIgnoreCase("I0")) {
 			return getI0State();
 		} else if (strd1.trim().equalsIgnoreCase("I1")) {
@@ -1406,7 +1414,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 		killGeneralThread();
 		try {
 			Thread.currentThread().sleep(5000);
-		} catch (InterruptedException ie) {
+		} catch (final InterruptedException ie) {
 		}
 		sendPWM(127, 127, false);
 		file = new java.io.File("parkRobot.grf");
@@ -1446,13 +1454,13 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 		return batFull;
 	}
 
-	private boolean isOverBorder(boolean init) {
+	private boolean isOverBorder(final boolean init) {
 		boolean overBoarder = false;
 		if ((i2State > I2BORDER || i3State > I3BORDER || i4State > I4BORDER || i5State > I5BORDER)) {
 			overBoarder = true;
 			if (!init) {
 				sendPWM(127, 127, false);
-				Logger.getLogger(WR_DS_LOGGER).log(Level.INFO, "The border was crossed!!!!");
+				Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO, "The border was crossed!!!!");
 			}
 
 		}
@@ -1716,7 +1724,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param a1State New value of property a1State.
 	 */
-	public void setA1State(int a1State) {
+	public void setA1State(final int a1State) {
 		this.a1State = a1State;
 	}
 
@@ -1725,7 +1733,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param a2State New value of property a2State.
 	 */
-	public void setA2State(int a2State) {
+	public void setA2State(final int a2State) {
 		this.a2State = a2State;
 	}
 
@@ -1734,7 +1742,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param a3State New value of property a3State.
 	 */
-	public void setA3State(int a3State) {
+	public void setA3State(final int a3State) {
 		this.a3State = a3State;
 	}
 
@@ -1743,7 +1751,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param a4State New value of property a4State.
 	 */
-	public void setA4State(int a4State) {
+	public void setA4State(final int a4State) {
 		this.a4State = a4State;
 	}
 
@@ -1752,7 +1760,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param a5State New value of property a5State.
 	 */
-	public void setA5State(int a5State) {
+	public void setA5State(final int a5State) {
 		this.a5State = a5State;
 	}
 
@@ -1761,7 +1769,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param b0State New value of property b0State.
 	 */
-	public void setB0State(int b0State) {
+	public void setB0State(final int b0State) {
 		this.b0State = b0State;
 	}
 
@@ -1770,7 +1778,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param b1State New value of property b1State.
 	 */
-	public void setB1State(int b1State) {
+	public void setB1State(final int b1State) {
 		this.b1State = b1State;
 	}
 
@@ -1779,7 +1787,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param b2State New value of property b2State.
 	 */
-	public void setB2State(int b2State) {
+	public void setB2State(final int b2State) {
 		this.b2State = b2State;
 	}
 
@@ -1788,7 +1796,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param b3State New value of property b3State.
 	 */
-	public void setB3State(int b3State) {
+	public void setB3State(final int b3State) {
 		this.b3State = b3State;
 	}
 
@@ -1797,7 +1805,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param b4State New value of property b4State.
 	 */
-	public void setB4State(int b4State) {
+	public void setB4State(final int b4State) {
 		this.b4State = b4State;
 	}
 
@@ -1806,7 +1814,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param b5State New value of property b5State.
 	 */
-	public void setB5State(int b5State) {
+	public void setB5State(final int b5State) {
 		this.b5State = b5State;
 	}
 
@@ -1815,7 +1823,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param b6State New value of property b6State.
 	 */
-	public void setB6State(int b6State) {
+	public void setB6State(final int b6State) {
 		this.b6State = b6State;
 	}
 
@@ -1824,7 +1832,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param b7State New value of property b7State.
 	 */
-	public void setB7State(int b7State) {
+	public void setB7State(final int b7State) {
 		this.b7State = b7State;
 	}
 
@@ -1833,7 +1841,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i0State New value of property i0State.
 	 */
-	public void setI0State(int i0State) {
+	public void setI0State(final int i0State) {
 		this.i0State = i0State;
 	}
 
@@ -1842,7 +1850,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i1State New value of property i1State.
 	 */
-	public void setI1State(int i1State) {
+	public void setI1State(final int i1State) {
 		this.i1State = i1State;
 	}
 
@@ -1851,7 +1859,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i1State New value of property i2State.
 	 */
-	public void setI2State(int i2State) {
+	public void setI2State(final int i2State) {
 		this.i2State = i2State;
 	}
 
@@ -1860,7 +1868,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i1State New value of property i3State.
 	 */
-	public void setI3State(int i3State) {
+	public void setI3State(final int i3State) {
 		this.i3State = i3State;
 	}
 
@@ -1869,7 +1877,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i1State New value of property i4State.
 	 */
-	public void setI4State(int i4State) {
+	public void setI4State(final int i4State) {
 		this.i4State = i4State;
 	}
 
@@ -1878,7 +1886,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i1State New value of property i5State.
 	 */
-	public void setI5State(int i5State) {
+	public void setI5State(final int i5State) {
 		this.i5State = i5State;
 	}
 
@@ -1887,7 +1895,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i1State New value of property i6State.
 	 */
-	public void setI6State(int i6State) {
+	public void setI6State(final int i6State) {
 		this.i6State = i6State;
 	}
 
@@ -1896,7 +1904,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i1State New value of property i7State.
 	 */
-	public void setI7State(int i7State) {
+	public void setI7State(final int i7State) {
 		this.i7State = i7State;
 	}
 
@@ -1905,7 +1913,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param v1State New value of property v1State.
 	 */
-	public void setV1State(int v1State) {
+	public void setV1State(final int v1State) {
 		this.v1State = v1State;
 	}
 
@@ -1914,7 +1922,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param v2State New value of property v2State.
 	 */
-	public void setV2State(int v2State) {
+	public void setV2State(final int v2State) {
 		this.v2State = v2State;
 	}
 
@@ -1923,7 +1931,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param v3State New value of property v3State.
 	 */
-	public void setV3State(int v3State) {
+	public void setV3State(final int v3State) {
 		this.v3State = v3State;
 	}
 
@@ -1932,7 +1940,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param v4State New value of property v4State.
 	 */
-	public void setV4State(int v4State) {
+	public void setV4State(final int v4State) {
 		this.v4State = v4State;
 	}
 
@@ -1941,7 +1949,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param v5State New value of property v5State.
 	 */
-	public void setV5State(int v5State) {
+	public void setV5State(final int v5State) {
 		this.v5State = v5State;
 	}
 
@@ -1950,7 +1958,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param c0State New value of property c0State.
 	 */
-	public void setC0State(int c0State) {
+	public void setC0State(final int c0State) {
 		this.c0State = c0State;
 	}
 
@@ -1959,7 +1967,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param c3State New value of property c3State.
 	 */
-	public void setC3State(int c3State) {
+	public void setC3State(final int c3State) {
 		this.c3State = c3State;
 	}
 
@@ -2058,7 +2066,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param b0InOut New value of property b0InOut.
 	 */
-	public void setB0InOut(int b0InOut) {
+	public void setB0InOut(final int b0InOut) {
 		this.b0InOut = b0InOut;
 	}
 
@@ -2067,7 +2075,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param b1InOut New value of property b1InOut.
 	 */
-	public void setB1InOut(int b1InOut) {
+	public void setB1InOut(final int b1InOut) {
 		this.b1InOut = b1InOut;
 	}
 
@@ -2076,7 +2084,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param b2InOut New value of property b2InOut.
 	 */
-	public void setB2InOut(int b2InOut) {
+	public void setB2InOut(final int b2InOut) {
 		this.b2InOut = b2InOut;
 	}
 
@@ -2085,7 +2093,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param b3InOut New value of property b3InOut.
 	 */
-	public void setB3InOut(int b3InOut) {
+	public void setB3InOut(final int b3InOut) {
 		this.b3InOut = b3InOut;
 	}
 
@@ -2094,7 +2102,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param b4InOut New value of property b4InOut.
 	 */
-	public void setB4InOut(int b4InOut) {
+	public void setB4InOut(final int b4InOut) {
 		this.b4InOut = b4InOut;
 	}
 
@@ -2103,7 +2111,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param b5InOut New value of property b5InOut.
 	 */
-	public void setB5InOut(int b5InOut) {
+	public void setB5InOut(final int b5InOut) {
 		this.b5InOut = b5InOut;
 	}
 
@@ -2112,7 +2120,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param b7InOut New value of property b7InOut.
 	 */
-	public void setB7InOut(int b7InOut) {
+	public void setB7InOut(final int b7InOut) {
 		this.b7InOut = b7InOut;
 	}
 
@@ -2121,7 +2129,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param c0InOut New value of property c0InOut.
 	 */
-	public void setC0InOut(int c0InOut) {
+	public void setC0InOut(final int c0InOut) {
 		this.c0InOut = c0InOut;
 	}
 
@@ -2130,7 +2138,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param c3InOut New value of property c3InOut.
 	 */
-	public void setC3InOut(int c3InOut) {
+	public void setC3InOut(final int c3InOut) {
 		this.c3InOut = c3InOut;
 	}
 
@@ -2139,7 +2147,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param b6InOut New value of property b6InOut.
 	 */
-	public void setB6InOut(int b6InOut) {
+	public void setB6InOut(final int b6InOut) {
 		this.b6InOut = b6InOut;
 	}
 
@@ -2157,7 +2165,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i0Sensitivity New value of property i0Sensitivity.
 	 */
-	public void setI0Sensitivity(int i0Sensitivity) {
+	public void setI0Sensitivity(final int i0Sensitivity) {
 		this.i0Sensitivity = i0Sensitivity;
 	}
 
@@ -2175,7 +2183,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i1Sensitivity New value of property i1Sensitivity.
 	 */
-	public void setI1Sensitivity(int i1Sensitivity) {
+	public void setI1Sensitivity(final int i1Sensitivity) {
 		this.i1Sensitivity = i1Sensitivity;
 	}
 
@@ -2193,7 +2201,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i2Sensitivity New value of property i2Sensitivity.
 	 */
-	public void setI2Sensitivity(int i2Sensitivity) {
+	public void setI2Sensitivity(final int i2Sensitivity) {
 		this.i2Sensitivity = i2Sensitivity;
 	}
 
@@ -2211,7 +2219,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i3Sensitivity New value of property i3Sensitivity.
 	 */
-	public void setI3Sensitivity(int i3Sensitivity) {
+	public void setI3Sensitivity(final int i3Sensitivity) {
 		this.i3Sensitivity = i3Sensitivity;
 	}
 
@@ -2229,7 +2237,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i4Sensitivity New value of property i4Sensitivity.
 	 */
-	public void setI4Sensitivity(int i4Sensitivity) {
+	public void setI4Sensitivity(final int i4Sensitivity) {
 		this.i4Sensitivity = i4Sensitivity;
 	}
 
@@ -2247,7 +2255,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i5Sensitivity New value of property i5Sensitivity.
 	 */
-	public void setI5Sensitivity(int i5Sensitivity) {
+	public void setI5Sensitivity(final int i5Sensitivity) {
 		this.i5Sensitivity = i5Sensitivity;
 	}
 
@@ -2265,7 +2273,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i6Sensitivity New value of property i6Sensitivity.
 	 */
-	public void setI6Sensitivity(int i6Sensitivity) {
+	public void setI6Sensitivity(final int i6Sensitivity) {
 		this.i6Sensitivity = i6Sensitivity;
 	}
 
@@ -2283,7 +2291,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i7Sensitivity New value of property i7Sensitivity.
 	 */
-	public void setI7Sensitivity(int i7Sensitivity) {
+	public void setI7Sensitivity(final int i7Sensitivity) {
 		this.i7Sensitivity = i7Sensitivity;
 	}
 
@@ -2301,7 +2309,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i0OnOff New value of property i0OnOff.
 	 */
-	public void setI0OnOff(int i0OnOff) {
+	public void setI0OnOff(final int i0OnOff) {
 		this.i0OnOff = i0OnOff;
 	}
 
@@ -2319,7 +2327,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i1OnOff New value of property i1OnOff.
 	 */
-	public void setI1OnOff(int i1OnOff) {
+	public void setI1OnOff(final int i1OnOff) {
 		this.i1OnOff = i1OnOff;
 	}
 
@@ -2337,7 +2345,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i2OnOff New value of property i2OnOff.
 	 */
-	public void setI2OnOff(int i2OnOff) {
+	public void setI2OnOff(final int i2OnOff) {
 		this.i2OnOff = i2OnOff;
 	}
 
@@ -2355,7 +2363,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i3OnOff New value of property i3OnOff.
 	 */
-	public void setI3OnOff(int i3OnOff) {
+	public void setI3OnOff(final int i3OnOff) {
 		this.i3OnOff = i3OnOff;
 	}
 
@@ -2373,7 +2381,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i4OnOff New value of property i4OnOff.
 	 */
-	public void setI4OnOff(int i4OnOff) {
+	public void setI4OnOff(final int i4OnOff) {
 		this.i4OnOff = i4OnOff;
 	}
 
@@ -2391,7 +2399,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i5OnOff New value of property i5OnOff.
 	 */
-	public void setI5OnOff(int i5OnOff) {
+	public void setI5OnOff(final int i5OnOff) {
 		this.i5OnOff = i5OnOff;
 	}
 
@@ -2409,7 +2417,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i6OnOff New value of property i6OnOff.
 	 */
-	public void setI6OnOff(int i6OnOff) {
+	public void setI6OnOff(final int i6OnOff) {
 		this.i6OnOff = i6OnOff;
 	}
 
@@ -2427,15 +2435,15 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param i7OnOff New value of property i7OnOff.
 	 */
-	public void setI7OnOff(int i7OnOff) {
+	public void setI7OnOff(final int i7OnOff) {
 		this.i7OnOff = i7OnOff;
 	}
 
-	public void setWalking(boolean walking) {
+	public void setWalking(final boolean walking) {
 		this.walking = walking;
 	}
 
-	public void setWaitSerial(boolean waitSerial) {
+	public void setWaitSerial(final boolean waitSerial) {
 		this.waitSerial = waitSerial;
 	}
 
@@ -2445,7 +2453,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * @return Value of property flowString.
 	 */
 	public String getFlowString() {
-		return this.flowString;
+		return flowString;
 	}
 
 	/**
@@ -2453,11 +2461,11 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * 
 	 * @param flowString New value of property flowString.
 	 */
-	public void setFlowString(String flowString) {
+	public void setFlowString(final String flowString) {
 		this.flowString = flowString;
 	}
 
-	public void setNewData(boolean newData) {
+	public void setNewData(final boolean newData) {
 		this.newData = newData;
 	}
 
@@ -2487,12 +2495,12 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 			}
 			counterTime++;
 			if (counterTime > 40) {
-				Logger.getLogger(WR_DS_LOGGER).log(Level.INFO, "Exit because of timeout");
+				Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO, "Exit because of timeout");
 				break;
 			}
 			try {
 				Thread.currentThread().sleep(1500);
-			} catch (InterruptedException ie) {
+			} catch (final InterruptedException ie) {
 			}
 		}
 		init = false;
@@ -2500,7 +2508,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 		killGeneralThread();
 		try {
 			Thread.currentThread().sleep(1000);
-		} catch (InterruptedException ie) {
+		} catch (final InterruptedException ie) {
 		}
 		atStartPosition = true;
 	}
@@ -2521,7 +2529,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 		totalSamples = getAcquisitionHeader().getTotalSamples();
 		setTotalSamples(totalSamples);
 		acqTime = (int) (1 / getAcquisitionHeader().getSelectedFrequency().getFrequency() * 1000);
-		Logger.getLogger(WR_DS_LOGGER).log(Level.INFO, "acqTime=" + acqTime);
+		Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO, "acqTime=" + acqTime);
 		counter = 0;
 		runningGeneralThread = true;
 		generalThread = new generalThread();

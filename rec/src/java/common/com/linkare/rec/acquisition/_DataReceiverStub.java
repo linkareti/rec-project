@@ -11,18 +11,19 @@ public class _DataReceiverStub extends org.omg.CORBA.portable.ObjectImpl impleme
 
 	// Version 7.0 Changed this... we must only inform of the largest packet
 	// known... all the packets before should be there
-	public void newSamples(int largestNumPacket) {
+	@Override
+	public void newSamples(final int largestNumPacket) {
 		org.omg.CORBA.portable.InputStream $in = null;
 		try {
-			org.omg.CORBA.portable.OutputStream $out = _request("newSamples", true);
+			final org.omg.CORBA.portable.OutputStream $out = _request("newSamples", true);
 			$out.write_long(largestNumPacket);
 			$in = _invoke($out);
 			return;
-		} catch (org.omg.CORBA.portable.ApplicationException $ex) {
+		} catch (final org.omg.CORBA.portable.ApplicationException $ex) {
 			$in = $ex.getInputStream();
-			String _id = $ex.getId();
+			final String _id = $ex.getId();
 			throw new org.omg.CORBA.MARSHAL(_id);
-		} catch (org.omg.CORBA.portable.RemarshalException $rm) {
+		} catch (final org.omg.CORBA.portable.RemarshalException $rm) {
 			newSamples(largestNumPacket);
 		} finally {
 			_releaseReply($in);
@@ -30,18 +31,19 @@ public class _DataReceiverStub extends org.omg.CORBA.portable.ObjectImpl impleme
 	} // newSamples
 
 	// Version 7.0 Changed this... now we may inform of changes in state
-	public void stateChanged(com.linkare.rec.acquisition.DataProducerState newState) {
+	@Override
+	public void stateChanged(final com.linkare.rec.acquisition.DataProducerState newState) {
 		org.omg.CORBA.portable.InputStream $in = null;
 		try {
-			org.omg.CORBA.portable.OutputStream $out = _request("stateChanged", true);
+			final org.omg.CORBA.portable.OutputStream $out = _request("stateChanged", true);
 			com.linkare.rec.acquisition.DataProducerStateHelper.write($out, newState);
 			$in = _invoke($out);
 			return;
-		} catch (org.omg.CORBA.portable.ApplicationException $ex) {
+		} catch (final org.omg.CORBA.portable.ApplicationException $ex) {
 			$in = $ex.getInputStream();
-			String _id = $ex.getId();
+			final String _id = $ex.getId();
 			throw new org.omg.CORBA.MARSHAL(_id);
-		} catch (org.omg.CORBA.portable.RemarshalException $rm) {
+		} catch (final org.omg.CORBA.portable.RemarshalException $rm) {
 			stateChanged(newState);
 		} finally {
 			_releaseReply($in);
@@ -49,17 +51,18 @@ public class _DataReceiverStub extends org.omg.CORBA.portable.ObjectImpl impleme
 	} // stateChanged
 
 	// Version 7.0 Changed this... now we may inform of changes in clientsList
+	@Override
 	public void clientsListChanged() {
 		org.omg.CORBA.portable.InputStream $in = null;
 		try {
-			org.omg.CORBA.portable.OutputStream $out = _request("clientsListChanged", true);
+			final org.omg.CORBA.portable.OutputStream $out = _request("clientsListChanged", true);
 			$in = _invoke($out);
 			return;
-		} catch (org.omg.CORBA.portable.ApplicationException $ex) {
+		} catch (final org.omg.CORBA.portable.ApplicationException $ex) {
 			$in = $ex.getInputStream();
-			String _id = $ex.getId();
+			final String _id = $ex.getId();
 			throw new org.omg.CORBA.MARSHAL(_id);
-		} catch (org.omg.CORBA.portable.RemarshalException $rm) {
+		} catch (final org.omg.CORBA.portable.RemarshalException $rm) {
 			clientsListChanged();
 		} finally {
 			_releaseReply($in);
@@ -69,23 +72,24 @@ public class _DataReceiverStub extends org.omg.CORBA.portable.ObjectImpl impleme
 	// Type-specific CORBA::Object operations
 	private static String[] __ids = { "IDL:com/linkare/rec/acquisition/DataReceiver:1.0" };
 
+	@Override
 	public String[] _ids() {
-		return (String[]) __ids.clone();
+		return _DataReceiverStub.__ids.clone();
 	}
 
-	private void readObject(java.io.ObjectInputStream s) throws java.io.IOException {
-		String str = s.readUTF();
-		String[] args = null;
-		java.util.Properties props = null;
-		org.omg.CORBA.Object obj = org.omg.CORBA.ORB.init(args, props).string_to_object(str);
-		org.omg.CORBA.portable.Delegate delegate = ((org.omg.CORBA.portable.ObjectImpl) obj)._get_delegate();
+	private void readObject(final java.io.ObjectInputStream s) throws java.io.IOException {
+		final String str = s.readUTF();
+		final String[] args = null;
+		final java.util.Properties props = null;
+		final org.omg.CORBA.Object obj = org.omg.CORBA.ORB.init(args, props).string_to_object(str);
+		final org.omg.CORBA.portable.Delegate delegate = ((org.omg.CORBA.portable.ObjectImpl) obj)._get_delegate();
 		_set_delegate(delegate);
 	}
 
-	private void writeObject(java.io.ObjectOutputStream s) throws java.io.IOException {
-		String[] args = null;
-		java.util.Properties props = null;
-		String str = org.omg.CORBA.ORB.init(args, props).object_to_string(this);
+	private void writeObject(final java.io.ObjectOutputStream s) throws java.io.IOException {
+		final String[] args = null;
+		final java.util.Properties props = null;
+		final String str = org.omg.CORBA.ORB.init(args, props).object_to_string(this);
 		s.writeUTF(str);
 	}
 } // class _DataReceiverStub

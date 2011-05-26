@@ -6,6 +6,10 @@
 
 package pt.utl.ist.elab.client.planck;
 
+import java.awt.event.ItemEvent;
+
+import javax.swing.SwingConstants;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.client.customizer.ICustomizerListener;
@@ -17,12 +21,16 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  */
 public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 753043981351945518L;
 	java.text.DecimalFormat df = null;
 
 	/** Creates new form RadioactividadeCustomizer */
 	public PlanckCustomizer() {
 		initComponents();
-		java.util.Hashtable ht = new java.util.Hashtable(10);
+		final java.util.Hashtable ht = new java.util.Hashtable(10);
 		ht.put(new Integer(120), new javax.swing.JLabel("" + 12));
 		ht.put(new Integer(130), new javax.swing.JLabel("" + 13));
 		ht.put(new Integer(140), new javax.swing.JLabel("" + 14));
@@ -105,7 +113,8 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 		jRadioButtonVar.setText(ReCResourceBundle.findString("planck$rec.exp.customizer.title.1.check.1"));
 		buttonGroup1.add(jRadioButtonVar);
 		jRadioButtonVar.addItemListener(new java.awt.event.ItemListener() {
-			public void itemStateChanged(java.awt.event.ItemEvent evt) {
+			@Override
+			public void itemStateChanged(final java.awt.event.ItemEvent evt) {
 				jRadioButtonVarItemStateChanged(evt);
 			}
 		});
@@ -218,7 +227,8 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 		jSliderAng.setMinimumSize(new java.awt.Dimension(355, 80));
 		jSliderAng.setPreferredSize(new java.awt.Dimension(355, 80));
 		jSliderAng.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderAngStateChanged(evt);
 			}
 		});
@@ -230,13 +240,14 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 		jPanel1.add(jSliderAng, gridBagConstraints);
 
 		jTextFieldAng.setColumns(3);
-		jTextFieldAng.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		jTextFieldAng.setHorizontalAlignment(SwingConstants.RIGHT);
 		jTextFieldAng.setText("12");
 		jTextFieldAng.setMaximumSize(new java.awt.Dimension(30, 16));
 		jTextFieldAng.setMinimumSize(new java.awt.Dimension(30, 16));
 		jTextFieldAng.setPreferredSize(new java.awt.Dimension(37, 16));
 		jTextFieldAng.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldAngFocusLost(evt);
 			}
 		});
@@ -263,7 +274,8 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 		jSliderNumSamples.setMinimumSize(new java.awt.Dimension(355, 80));
 		jSliderNumSamples.setPreferredSize(new java.awt.Dimension(355, 80));
 		jSliderNumSamples.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderNumSamplesStateChanged(evt);
 			}
 		});
@@ -275,13 +287,14 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 		jPanel6.add(jSliderNumSamples, gridBagConstraints);
 
 		jTextFieldSamples.setColumns(4);
-		jTextFieldSamples.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		jTextFieldSamples.setHorizontalAlignment(SwingConstants.RIGHT);
 		jTextFieldSamples.setText("200");
 		jTextFieldSamples.setMaximumSize(new java.awt.Dimension(30, 16));
 		jTextFieldSamples.setMinimumSize(new java.awt.Dimension(30, 16));
 		jTextFieldSamples.setPreferredSize(new java.awt.Dimension(48, 16));
 		jTextFieldSamples.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				jTextFieldSamplesFocusLost(evt);
 			}
 		});
@@ -304,7 +317,8 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
 		btnOK.setText(ReCResourceBundle.findString("planck$rec.exp.planck.lbl.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
 			}
 		});
@@ -316,7 +330,8 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		btnCancel.setText(ReCResourceBundle.findString("planck$rec.exp.planck.lbl.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
 			}
 		});
@@ -335,7 +350,8 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		btnDefaults.setText(ReCResourceBundle.findString("planck$rec.exp.dftcfg.planck.title.1"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
 			}
 		});
@@ -356,8 +372,8 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 
 	}// GEN-END:initComponents
 
-	private void jRadioButtonVarItemStateChanged(java.awt.event.ItemEvent evt) {// GEN-FIRST:event_jRadioButtonVarItemStateChanged
-		if (evt.getStateChange() == evt.SELECTED) {
+	private void jRadioButtonVarItemStateChanged(final java.awt.event.ItemEvent evt) {// GEN-FIRST:event_jRadioButtonVarItemStateChanged
+		if (evt.getStateChange() == ItemEvent.SELECTED) {
 			jSliderAng.setEnabled(false);
 			jTextFieldAng.setEnabled(false);
 			// jSliderNumSamples.setMaximum(500);
@@ -374,41 +390,45 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 		}
 	}// GEN-LAST:event_jRadioButtonVarItemStateChanged
 
-	private void jTextFieldSamplesFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldSamplesFocusLost
-		String strNumSamples = jTextFieldSamples.getText();
-		if (strNumSamples.trim().equals(""))
+	private void jTextFieldSamplesFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldSamplesFocusLost
+		final String strNumSamples = jTextFieldSamples.getText();
+		if (strNumSamples.trim().equals("")) {
 			return;
+		}
 		try {
-			int numSamples = Integer.parseInt(strNumSamples);
-			if (numSamples <= jSliderNumSamples.getMaximum() && numSamples > jSliderNumSamples.getMinimum())
+			final int numSamples = Integer.parseInt(strNumSamples);
+			if (numSamples <= jSliderNumSamples.getMaximum() && numSamples > jSliderNumSamples.getMinimum()) {
 				jSliderNumSamples.setValue(numSamples);
-			else
+			} else {
 				jTextFieldSamples.setText("" + jSliderNumSamples.getValue());
-		} catch (Exception e) {
+			}
+		} catch (final Exception e) {
 			jTextFieldSamples.setText("" + jSliderNumSamples.getValue());
 		}
 	}// GEN-LAST:event_jTextFieldSamplesFocusLost
 
-	private void jTextFieldAngFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldAngFocusLost
-		String strAng = jTextFieldAng.getText();
-		if (strAng.trim().equals(""))
+	private void jTextFieldAngFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldAngFocusLost
+		final String strAng = jTextFieldAng.getText();
+		if (strAng.trim().equals("")) {
 			return;
+		}
 		try {
-			int Ang = (int) (10 * Float.parseFloat(strAng));
-			if (Ang <= jSliderAng.getMaximum() && Ang > jSliderAng.getMinimum())
+			final int Ang = (int) (10 * Float.parseFloat(strAng));
+			if (Ang <= jSliderAng.getMaximum() && Ang > jSliderAng.getMinimum()) {
 				jSliderAng.setValue(Ang);
-			else
+			} else {
 				jTextFieldAng.setText(df.format(jSliderAng.getValue() / 10f));
-		} catch (Exception e) {
+			}
+		} catch (final Exception e) {
 			jTextFieldAng.setText(df.format(jSliderAng.getValue() / 10f));
 		}
 	}// GEN-LAST:event_jTextFieldAngFocusLost
 
-	private void jSliderAngStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderAngStateChanged
+	private void jSliderAngStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderAngStateChanged
 		jTextFieldAng.setText(df.format(jSliderAng.getValue() / 10f));
 	}// GEN-LAST:event_jSliderAngStateChanged
 
-	private void jSliderNumSamplesStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderNumSamplesStateChanged
+	private void jSliderNumSamplesStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderNumSamplesStateChanged
 		if (jSliderNumSamples.getValue() == 0) {
 			jSliderNumSamples.setValue(1);
 
@@ -416,7 +436,7 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 		jTextFieldSamples.setText("" + jSliderNumSamples.getValue());
 	}// GEN-LAST:event_jSliderNumSamplesStateChanged
 
-	private void btnDefaultsActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
+	private void btnDefaultsActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
 	{// GEN-HEADEREND:event_btnDefaultsActionPerformed
 		jSliderNumSamples.setValue(200);
 		jTextFieldSamples.setText("200");
@@ -427,12 +447,12 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 		jRadioButtonGray60.setSelected(true);
 	}// GEN-LAST:event_btnDefaultsActionPerformed
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
+	private void btnCancelActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
 	{// GEN-HEADEREND:event_btnCancelActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_btnCancelActionPerformed
 
-	private void btnOKActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
+	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
 		acqConfig.setTotalSamples(jSliderNumSamples.getValue());
 
@@ -538,7 +558,8 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -550,7 +571,8 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -560,9 +582,10 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -576,9 +599,10 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -590,25 +614,27 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
 		return acqConfig;
 	}
 
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
 			jSliderNumSamples.setValue(acqConfig.getTotalSamples());
 
 			jSliderAng.setValue((int) (Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("AngPos")) * 10));
 
-			String sMode = acqConfig.getSelectedHardwareParameterValue("Mode");
+			final String sMode = acqConfig.getSelectedHardwareParameterValue("Mode");
 			if (sMode.equalsIgnoreCase("All")) {
 				jRadioButtonVar.setSelected(true);
 			} else {
 				jRadioButtonFix.setSelected(true);
 			}
 
-			String filter1 = acqConfig.getSelectedHardwareParameterValue("Filter1");
+			final String filter1 = acqConfig.getSelectedHardwareParameterValue("Filter1");
 			if (filter1.equalsIgnoreCase("Pink")) {
 				jRadioButtonColor1.setSelected(true);
 			} else if (filter1.equalsIgnoreCase("Yellow")) {
@@ -619,7 +645,7 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 				jRadioButtonColor4.setSelected(true);
 			}
 
-			String filter2 = acqConfig.getSelectedHardwareParameterValue("Filter2");
+			final String filter2 = acqConfig.getSelectedHardwareParameterValue("Filter2");
 			if (filter2.equalsIgnoreCase("0")) {
 				jRadioButtonGray0.setSelected(true);
 			} else if (filter2.equalsIgnoreCase("20")) {
@@ -636,36 +662,41 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
+	@Override
 	public javax.swing.JComponent getCustomizerComponent() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/planck/resources/planck_iconified.gif"));
 	}
 
+	@Override
 	public String getCustomizerTitle() {
 		return ReCResourceBundle.findString("planck$rec.exp.customizer.title");
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 		ReCResourceBundle.loadResourceBundle("planck",
 				"recresource:///pt/utl/ist/elab/client/planck/resources/messages");
-		javax.swing.JFrame jf = new javax.swing.JFrame();
-		PlanckCustomizer pc = new PlanckCustomizer();
+		final javax.swing.JFrame jf = new javax.swing.JFrame();
+		final PlanckCustomizer pc = new PlanckCustomizer();
 		jf.getContentPane().add(pc, java.awt.BorderLayout.CENTER);
 		jf.pack();
 		jf.show();

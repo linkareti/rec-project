@@ -12,6 +12,8 @@ import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
+import com.linkare.rec.impl.newface.laf.flat.theme.AbstractStyle;
+
 /**
  * 
  * @author João Florindo
@@ -20,13 +22,14 @@ public class EditorPaneStyle extends DefaultStyle {
 
 	public static final String ID = "EditorPane";
 
-	public static final Border THIN_BLUE_BORDER = BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new Color(
-			0x517DA8)), javax.swing.BorderFactory.createEmptyBorder(2, 3, 2, 3));
+	public static final Border THIN_BLUE_BORDER = BorderFactory.createCompoundBorder(
+			javax.swing.BorderFactory.createLineBorder(new Color(0x517DA8)),
+			javax.swing.BorderFactory.createEmptyBorder(2, 3, 2, 3));
 
-	//COLORS	
+	// COLORS
 	private static final Color COLOR_BORDER_SOLID_THIN_BLUE = new Color(0x8CABB3);
-	private static final Color COLOR_EDITORPANE_FG = BLACK_DEFAULT_COLOR;
-	private static final Color COLOR_EDITORPANE_BG = WHITE_DEFAULT_COLOR;
+	private static final Color COLOR_EDITORPANE_FG = DefaultStyle.BLACK_DEFAULT_COLOR;
+	private static final Color COLOR_EDITORPANE_BG = DefaultStyle.WHITE_DEFAULT_COLOR;
 
 	/**
 	 * Creates the <code>EditorPaneStyle</code>.
@@ -37,15 +40,16 @@ public class EditorPaneStyle extends DefaultStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return EditorPaneStyle.ID;
 	}
 
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		super.updatePropertyMap(map);
-//		map.put(BORDER, THIN_BLUE_BORDER);   //IF uncomment create double border in chatbox
-		map.put(FOREGROUND, COLOR_EDITORPANE_FG);
-		map.put(BACKGROUND, COLOR_EDITORPANE_BG);
+		// map.put(BORDER, THIN_BLUE_BORDER); //IF uncomment create double
+		// border in chatbox
+		map.put(AbstractStyle.FOREGROUND, EditorPaneStyle.COLOR_EDITORPANE_FG);
+		map.put(AbstractStyle.BACKGROUND, EditorPaneStyle.COLOR_EDITORPANE_BG);
 	}
 
 }

@@ -35,12 +35,12 @@ public class FlatLAFResources {
 		private String name;
 		private Insets insets;
 
-		FlatLAFImageResourcesEnum(String resourceName) {
-			this.name = resourceName;
+		FlatLAFImageResourcesEnum(final String resourceName) {
+			name = resourceName;
 		}
 
-		FlatLAFImageResourcesEnum(String resourceName, Insets insets) {
-			this.name = resourceName;
+		FlatLAFImageResourcesEnum(final String resourceName, final Insets insets) {
+			name = resourceName;
 			this.insets = insets;
 		}
 
@@ -57,19 +57,19 @@ public class FlatLAFResources {
 		super();
 	}
 
-	public static BufferedImage getImage(FlatLAFImageResourcesEnum key) {
+	public static BufferedImage getImage(final FlatLAFImageResourcesEnum key) {
 		BufferedImage result = null;
 		try {
-			URL resource = FlatLAFResources.class.getResource(key.getName());
+			final URL resource = FlatLAFResources.class.getResource(key.getName());
 			result = ImageIO.read(resource);
-		} catch (IOException e) {
-			log.log(Level.SEVERE, "Could not read the resource", e);
+		} catch (final IOException e) {
+			FlatLAFResources.log.log(Level.SEVERE, "Could not read the resource", e);
 		}
 		return result;
 	}
 
-	public static ImageIcon getImageIcon(FlatLAFImageResourcesEnum key) {
-		URL resource = FlatLAFResources.class.getResource(key.getName());
+	public static ImageIcon getImageIcon(final FlatLAFImageResourcesEnum key) {
+		final URL resource = FlatLAFResources.class.getResource(key.getName());
 		return new ImageIcon(resource);
 	}
 }

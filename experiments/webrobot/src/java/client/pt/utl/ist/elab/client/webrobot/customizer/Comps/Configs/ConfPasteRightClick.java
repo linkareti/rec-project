@@ -12,8 +12,13 @@ package pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs;
  */
 public class ConfPasteRightClick extends javax.swing.JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3059892826084796698L;
+
 	/** Creates new form ConfCompBin */
-	public ConfPasteRightClick(java.awt.Frame parent, boolean modal) {
+	public ConfPasteRightClick(final java.awt.Frame parent, final boolean modal) {
 		super(parent, modal);
 		initComponents();
 		setCancel(false);
@@ -34,19 +39,22 @@ public class ConfPasteRightClick extends javax.swing.JDialog {
 		setTitle("Colar");
 		setResizable(false);
 		addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyPressed(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyPressed(final java.awt.event.KeyEvent evt) {
 				formKeyPressed(evt);
 			}
 		});
 
 		addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mouseClicked(final java.awt.event.MouseEvent evt) {
 				formMouseClicked(evt);
 			}
 		});
 
 		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent evt) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent evt) {
 				closeDialog(evt);
 			}
 		});
@@ -61,7 +69,8 @@ public class ConfPasteRightClick extends javax.swing.JDialog {
 		jButtonPaste.setText("Colar");
 		jButtonPaste.setToolTipText("Colar nesta posi\u00e7\u00e3o");
 		jButtonPaste.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonPasteMousePressed(evt);
 			}
 		});
@@ -77,7 +86,8 @@ public class ConfPasteRightClick extends javax.swing.JDialog {
 		jButtonCancel.setForeground(new java.awt.Color(51, 0, 102));
 		jButtonCancel.setText("Cancel");
 		jButtonCancel.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonCancelMousePressed(evt);
 			}
 		});
@@ -89,13 +99,13 @@ public class ConfPasteRightClick extends javax.swing.JDialog {
 		pack();
 	}// GEN-END:initComponents
 
-	private void jButtonPasteMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonPasteMousePressed
+	private void jButtonPasteMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonPasteMousePressed
 		setPaste(true);
 		setCancel(false);
 		closeDialog(null);
 	}// GEN-LAST:event_jButtonPasteMousePressed
 
-	private void formKeyPressed(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_formKeyPressed
+	private void formKeyPressed(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_formKeyPressed
 		if (evt.getKeyCode() == 10) {
 			jButtonPasteMousePressed(null);
 		} else if (evt.getKeyCode() == 27) {
@@ -103,17 +113,17 @@ public class ConfPasteRightClick extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_formKeyPressed
 
-	private void formMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseClicked
+	private void formMouseClicked(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseClicked
 		this.requestFocus();
 	}// GEN-LAST:event_formMouseClicked
 
-	private void jButtonCancelMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonCancelMousePressed
+	private void jButtonCancelMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonCancelMousePressed
 		setCancel(true);
 		closeDialog(null);
 	}// GEN-LAST:event_jButtonCancelMousePressed
 
 	/** Closes the dialog */
-	private void closeDialog(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
+	private void closeDialog(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
 		if (evt != null) {
 			setCancel(true);
 		}
@@ -135,7 +145,7 @@ public class ConfPasteRightClick extends javax.swing.JDialog {
 	 * @return Value of property cancel.
 	 */
 	public boolean isCancel() {
-		return this.cancel;
+		return cancel;
 	}
 
 	/**
@@ -143,7 +153,7 @@ public class ConfPasteRightClick extends javax.swing.JDialog {
 	 * 
 	 * @param cancel New value of property cancel.
 	 */
-	public void setCancel(boolean cancel) {
+	public void setCancel(final boolean cancel) {
 		this.cancel = cancel;
 	}
 
@@ -153,7 +163,7 @@ public class ConfPasteRightClick extends javax.swing.JDialog {
 	 * @return Value of property paste.
 	 */
 	public boolean isPaste() {
-		return this.paste;
+		return paste;
 	}
 
 	/**
@@ -161,7 +171,7 @@ public class ConfPasteRightClick extends javax.swing.JDialog {
 	 * 
 	 * @param paste New value of property paste.
 	 */
-	public void setPaste(boolean paste) {
+	public void setPaste(final boolean paste) {
 		this.paste = paste;
 	}
 

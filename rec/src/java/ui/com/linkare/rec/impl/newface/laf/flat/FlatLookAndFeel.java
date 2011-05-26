@@ -26,16 +26,16 @@ import com.linkare.rec.impl.newface.laf.flat.theme.FlatTheme;
  * @author João Florindo
  */
 public class FlatLookAndFeel extends
-//	SynthLookAndFeel // The LAF from Java 5
-		MetalLookAndFeel // The current base LAF for Flat 
-//BasicLookAndFeel // The initial default Base LAF for FlatLookAndFeel. 
+// SynthLookAndFeel // The LAF from Java 5
+		MetalLookAndFeel // The current base LAF for Flat
+// BasicLookAndFeel // The initial default Base LAF for FlatLookAndFeel.
 {
 
 	private static final Logger log = Logger.getLogger(FlatLookAndFeel.class.getName());
 
 	private static final long serialVersionUID = 3410155899630816365L;
 
-	private FlatTheme theme;
+	private final FlatTheme theme;
 
 	/** Creates a new FlatLookAndFeel with the default ElabTheme */
 	public FlatLookAndFeel() {
@@ -47,10 +47,10 @@ public class FlatLookAndFeel extends
 	 * 
 	 * @param theme
 	 */
-	public FlatLookAndFeel(FlatTheme theme) {
+	public FlatLookAndFeel(final FlatTheme theme) {
 		this.theme = theme;
 		// FIXME Disabled because it causes a bug on VideoCanvas rendering
-		//FlatFocusRenderer.install(); // Setup focus
+		// FlatFocusRenderer.install(); // Setup focus
 	}
 
 	@Override
@@ -83,34 +83,34 @@ public class FlatLookAndFeel extends
 	}
 
 	@Override
-	protected void initClassDefaults(UIDefaults table) {
+	protected void initClassDefaults(final UIDefaults table) {
 		super.initClassDefaults(table);
 
-		Object[] classDefaults = { "SplitPaneUI", BasicSplitPaneUI.class.getName(), "ScrollBarUI", FlatScrollBarUI.class.getName(),
-				"ComboBoxUI", FlatComboBoxUI.class.getName(), "TabbedPaneUI", FlatTabbedPaneUI.class.getName(), "MenuUI",
-				BasicMenuUI.class.getName(),
+		final Object[] classDefaults = { "SplitPaneUI", BasicSplitPaneUI.class.getName(), "ScrollBarUI",
+				FlatScrollBarUI.class.getName(), "ComboBoxUI", FlatComboBoxUI.class.getName(), "TabbedPaneUI",
+				FlatTabbedPaneUI.class.getName(), "MenuUI", BasicMenuUI.class.getName(),
 				// TODO Change Names
 				"FlatButtonUI", FlatButtonUI.class.getName(), "ButtonUI", FlatOriginalButtonUI.class.getName(),
 
-				"RadioButtonUI", FlatRadioButtonUI.class.getName(), "CheckBoxUI", FlatCheckBoxUI.class.getName(), "SliderUI",
-				FlatSliderUI.class.getName(), "FlatTableUI", FlatTableUI.class.getName(), };
+				"RadioButtonUI", FlatRadioButtonUI.class.getName(), "CheckBoxUI", FlatCheckBoxUI.class.getName(),
+				"SliderUI", FlatSliderUI.class.getName(), "FlatTableUI", FlatTableUI.class.getName(), };
 
-		if (log.isLoggable(Level.FINER)) {
-			log.finer("FlatLookAndFeel Class Defaults: " + Arrays.deepToString(classDefaults));
+		if (FlatLookAndFeel.log.isLoggable(Level.FINER)) {
+			FlatLookAndFeel.log.finer("FlatLookAndFeel Class Defaults: " + Arrays.deepToString(classDefaults));
 		}
 
 		table.putDefaults(classDefaults);
 	}
 
 	@Override
-	protected void initComponentDefaults(UIDefaults table) {
+	protected void initComponentDefaults(final UIDefaults table) {
 		super.initComponentDefaults(table);
 		// TODO Set key bindings like Nimbus LAF
 	}
 
 	@Override
 	public UIDefaults getDefaults() {
-		UIDefaults table = super.getDefaults();
+		final UIDefaults table = super.getDefaults();
 		theme.addCustomEntriesToTable(table);
 		return table;
 	}

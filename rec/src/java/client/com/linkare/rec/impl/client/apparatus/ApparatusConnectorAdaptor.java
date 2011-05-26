@@ -13,70 +13,92 @@ package com.linkare.rec.impl.client.apparatus;
 public abstract class ApparatusConnectorAdaptor implements
 		com.linkare.rec.impl.client.apparatus.ApparatusConnectorListener {
 
-	public void apparatusConnected(ApparatusConnectorEvent evt) {
+	@Override
+	public void apparatusConnected(final ApparatusConnectorEvent evt) {
 	}
 
-	public void apparatusConnecting(ApparatusConnectorEvent evt) {
+	@Override
+	public void apparatusConnecting(final ApparatusConnectorEvent evt) {
 	}
 
-	public void apparatusDisconnected(ApparatusConnectorEvent evt) {
+	@Override
+	public void apparatusDisconnected(final ApparatusConnectorEvent evt) {
 	}
 
-	public void apparatusDisconnecting(ApparatusConnectorEvent evt) {
+	@Override
+	public void apparatusDisconnecting(final ApparatusConnectorEvent evt) {
 	}
 
-	public void apparatusIncorrectState(ApparatusConnectorEvent evt) {
+	@Override
+	public void apparatusIncorrectState(final ApparatusConnectorEvent evt) {
 	}
 
-	public void apparatusLockable(ApparatusConnectorEvent evt) {
+	@Override
+	public void apparatusLockable(final ApparatusConnectorEvent evt) {
 	}
 
-	public void apparatusLocked(ApparatusConnectorEvent evt) {
+	@Override
+	public void apparatusLocked(final ApparatusConnectorEvent evt) {
 	}
 
-	public void apparatusMaxUsers(ApparatusConnectorEvent evt) {
+	@Override
+	public void apparatusMaxUsers(final ApparatusConnectorEvent evt) {
 	}
 
-	public void apparatusNotAuthorized(ApparatusConnectorEvent evt) {
+	@Override
+	public void apparatusNotAuthorized(final ApparatusConnectorEvent evt) {
 	}
 
-	public void apparatusNotOwner(ApparatusConnectorEvent evt) {
+	@Override
+	public void apparatusNotOwner(final ApparatusConnectorEvent evt) {
 	}
 
-	public void apparatusNotRegistered(ApparatusConnectorEvent evt) {
+	@Override
+	public void apparatusNotRegistered(final ApparatusConnectorEvent evt) {
 	}
 
-	public void apparatusStateConfigError(ApparatusConnectorEvent evt) {
+	@Override
+	public void apparatusStateConfigError(final ApparatusConnectorEvent evt) {
 	}
 
-	public void apparatusStateConfigured(ApparatusConnectorEvent evt) {
+	@Override
+	public void apparatusStateConfigured(final ApparatusConnectorEvent evt) {
 	}
 
-	public void apparatusStateConfiguring(ApparatusConnectorEvent evt) {
+	@Override
+	public void apparatusStateConfiguring(final ApparatusConnectorEvent evt) {
 	}
 
-	public void apparatusStateReseted(ApparatusConnectorEvent evt) {
+	@Override
+	public void apparatusStateReseted(final ApparatusConnectorEvent evt) {
 	}
 
-	public void apparatusStateReseting(ApparatusConnectorEvent evt) {
+	@Override
+	public void apparatusStateReseting(final ApparatusConnectorEvent evt) {
 	}
 
-	public void apparatusStateStarted(ApparatusConnectorEvent evt) {
+	@Override
+	public void apparatusStateStarted(final ApparatusConnectorEvent evt) {
 	}
 
-	public void apparatusStateStarting(ApparatusConnectorEvent evt) {
+	@Override
+	public void apparatusStateStarting(final ApparatusConnectorEvent evt) {
 	}
 
-	public void apparatusStateStoped(ApparatusConnectorEvent evt) {
+	@Override
+	public void apparatusStateStoped(final ApparatusConnectorEvent evt) {
 	}
 
-	public void apparatusStateStoping(ApparatusConnectorEvent evt) {
+	@Override
+	public void apparatusStateStoping(final ApparatusConnectorEvent evt) {
 	}
 
-	public void apparatusStateUnknow(ApparatusConnectorEvent evt) {
+	@Override
+	public void apparatusStateUnknow(final ApparatusConnectorEvent evt) {
 	}
 
-	public void apparatusUnreachable(ApparatusConnectorEvent evt) {
+	@Override
+	public void apparatusUnreachable(final ApparatusConnectorEvent evt) {
 	}
 
 }

@@ -27,6 +27,10 @@ import java.util.Map;
  * @author José Pedro Pereira - Linkare TI
  */
 public class IndexedObjectIO implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7448912281979433566L;
 	private transient File file;
 	private boolean file_dirty = false;
 	private boolean isTemporary = false;
@@ -36,12 +40,12 @@ public class IndexedObjectIO implements Serializable {
 	private long lastPos = 0;
 
 	/** Creates a new instance of IndexedObjectIO */
-	public IndexedObjectIO(File f) throws IOException {
+	public IndexedObjectIO(final File f) throws IOException {
 		setFile(f);
 	}
 
 	/** Creates a new instance of IndexedObjectIO */
-	public IndexedObjectIO(String path) throws IOException {
+	public IndexedObjectIO(final String path) throws IOException {
 		setFile(new File(path));
 	}
 
@@ -72,29 +76,31 @@ public class IndexedObjectIO implements Serializable {
 
 		lastPos = 0;
 
-		if (file != null && f != null && f.equals(file))
+		if (file != null && f != null && f.equals(file)) {
 			return;
-		else {
+		} else {
 			objectsLocations = new HashMap<Object, long[]>();
 
 			if (f == null) {
 				f = File.createTempFile("TempIndexedObjectIO_", ".mser");
 				isTemporary = true;
-				if (file != null)
+				if (file != null) {
 					file.delete();
+				}
 			} else {
 				isTemporary = false;
-				if (!f.exists())
+				if (!f.exists()) {
 					f.createNewFile();
+				}
 				if (file != null) {
 					closeIO();
 
 					// System.out.println("Renaming file from:" +
 					// file.getAbsolutePath() + "to:" + f.getAbsolutePath());
 
-					FileInputStream fis = new FileInputStream(file);
-					FileOutputStream fos = new FileOutputStream(f);
-					byte[] dataChunk = new byte[1024];
+					final FileInputStream fis = new FileInputStream(file);
+					final FileOutputStream fos = new FileOutputStream(f);
+					final byte[] dataChunk = new byte[1024];
 					int bytesCount = 0;
 					while ((bytesCount = fis.read(dataChunk)) != -1) {
 						fos.write(dataChunk, 0, bytesCount);
@@ -108,7 +114,7 @@ public class IndexedObjectIO implements Serializable {
 				}
 			}
 
-			this.file = f;
+			file = f;
 			file_dirty = true;
 			openIO();
 		}
@@ -124,7 +130,7 @@ public class IndexedObjectIO implements Serializable {
 				raf.close();
 				raf = null;
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 		// System.out.println("No exception here at closeIO");
@@ -145,10 +151,11 @@ public class IndexedObjectIO implements Serializable {
 		}
 	}
 
-	public Object[] readObjects(Object[] keys) throws IndexedObjectReadException {
+	public Object[] readObjects(final Object[] keys) throws IndexedObjectReadException {
 		Object[] retVal = null;
-		if (keys == null)
+		if (keys == null) {
 			throw new IndexedObjectReadException(new IOException("Unable to read Objects - keys are null"), null);
+		}
 
 		retVal = new Object[keys.length];
 
@@ -160,15 +167,16 @@ public class IndexedObjectIO implements Serializable {
 
 	}
 
-	public Object readObject(Object key) throws IndexedObjectReadException {
+	public Object readObject(final Object key) throws IndexedObjectReadException {
 
-		long[] location = (long[]) objectsLocations.get(key);
+		final long[] location = objectsLocations.get(key);
 
-		if (location == null)
+		if (location == null) {
 			throw new IndexedObjectReadException(new IOException("Unable to read Object - key doesn't exist here!"),
 					key);
+		}
 
-		byte[] data = new byte[(int) (location[1] - location[0] + 1)];
+		final byte[] data = new byte[(int) (location[1] - location[0] + 1)];
 		Object retVal = null;
 		synchronized (raf) {
 			try {
@@ -181,14 +189,14 @@ public class IndexedObjectIO implements Serializable {
 
 				raf.seek(location[0]);
 				raf.readFully(data);
-				ByteArrayInputStream bais = new ByteArrayInputStream(data);
+				final ByteArrayInputStream bais = new ByteArrayInputStream(data);
 
 				// nc
-				BufferedInputStream bis = new BufferedInputStream(bais);
+				final BufferedInputStream bis = new BufferedInputStream(bais);
 				// *nc
 
 				// ObjectInputStream ois=new ObjectInputStream(bais);
-				ObjectInputStream ois = new ObjectInputStream(bis);
+				final ObjectInputStream ois = new ObjectInputStream(bis);
 				retVal = ois.readObject();
 				ois.close();
 
@@ -196,10 +204,10 @@ public class IndexedObjectIO implements Serializable {
 				bis.close();
 				bais.close();
 				// *nc
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				e.printStackTrace();
 				throw new IndexedObjectReadException(e, key);
-			} catch (ClassNotFoundException e) {
+			} catch (final ClassNotFoundException e) {
 				throw new IndexedObjectReadException(new IOException(e.getMessage()), key);
 			}
 		}
@@ -207,21 +215,22 @@ public class IndexedObjectIO implements Serializable {
 		return retVal;
 	}
 
-	public Object removeObject(Object key) throws IndexedObjectReadException {
-		Object retVal = readObject(key);
+	public Object removeObject(final Object key) throws IndexedObjectReadException {
+		final Object retVal = readObject(key);
 		objectsLocations.remove(key);
 		return retVal;
 	}
 
-	public Object[] removeObjects(Object[] keys) throws IndexedObjectReadException {
-		Object[] retVal = readObjects(keys);
-		for (int i = 0; i < keys.length; i++)
-			objectsLocations.remove(keys[i]);
+	public Object[] removeObjects(final Object[] keys) throws IndexedObjectReadException {
+		final Object[] retVal = readObjects(keys);
+		for (final Object key : keys) {
+			objectsLocations.remove(key);
+		}
 
 		return retVal;
 	}
 
-	public void writeObject(Object key, Object value) throws IOException {
+	public void writeObject(final Object key, final Object value) throws IOException {
 		synchronized (raf) {
 			try {
 				// THE FILE LENGTH WASN'T WORKING IN WINDOWS...
@@ -229,11 +238,12 @@ public class IndexedObjectIO implements Serializable {
 
 				long startPos = 0;
 
-				if (lastPos > 0)
+				if (lastPos > 0) {
 					startPos = lastPos + 1;
+				}
 
 				// nc
-				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 				seqWriteStream = new ObjectOutputStream(baos);
 				// *nc
 
@@ -249,12 +259,12 @@ public class IndexedObjectIO implements Serializable {
 				seqWriteStream.close();
 
 				// long endPos=getFile().length()-1;
-				long endPos = startPos + baos.toByteArray().length - 1;
+				final long endPos = startPos + baos.toByteArray().length - 1;
 
 				lastPos = endPos;
 
 				objectsLocations.put(key, new long[] { startPos, endPos });
-			} catch (java.io.IOException ioe) {
+			} catch (final java.io.IOException ioe) {
 				/*
 				 * System.out.println("********************");
 				 * System.out.println("Exception at indexed Object IO");
@@ -266,10 +276,10 @@ public class IndexedObjectIO implements Serializable {
 		}
 	}
 
-	public void writeObjects(Map objects) throws IOException {
-		Iterator iter = objects.entrySet().iterator();
+	public void writeObjects(final Map objects) throws IOException {
+		final Iterator iter = objects.entrySet().iterator();
 		while (iter.hasNext()) {
-			Map.Entry entry = (Map.Entry) iter.next();
+			final Map.Entry entry = (Map.Entry) iter.next();
 			writeObject(entry.getKey(), entry.getValue());
 		}
 	}
@@ -278,10 +288,11 @@ public class IndexedObjectIO implements Serializable {
 		return objectsLocations == null ? 0 : objectsLocations.size();
 	}
 
-	public boolean moveToFile(File newFile) throws IOException {
-		boolean retVal = getFile().renameTo(newFile);
-		if (!retVal)
+	public boolean moveToFile(final File newFile) throws IOException {
+		final boolean retVal = getFile().renameTo(newFile);
+		if (!retVal) {
 			return retVal;
+		}
 
 		isTemporary = false;
 		closeIO();
@@ -290,17 +301,18 @@ public class IndexedObjectIO implements Serializable {
 	}
 
 	// private static final long serialVersionUID=1938846425062959110L;
-	private void writeObject(ObjectOutputStream oos) throws IOException {
+	private void writeObject(final ObjectOutputStream oos) throws IOException {
 		oos.defaultWriteObject();
 		oos.writeUTF(getFile().getAbsolutePath());
 	}
 
-	private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException, NotActiveException {
+	private void readObject(final ObjectInputStream ois) throws IOException, ClassNotFoundException, NotActiveException {
 		ois.defaultReadObject();
-		String path = ois.readUTF();
+		final String path = ois.readUTF();
 		setFile(new File(path));
 	}
 
+	@Override
 	protected void finalize() throws Throwable {
 		try {
 			// System.out.println("Class not need any more  - IndexedObjectIO...");
@@ -315,7 +327,7 @@ public class IndexedObjectIO implements Serializable {
 				// System.out.println("Deleting File...!");
 				getFile().delete();
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			/*
 			 * System.out.println("*******************************");
 			 * System.out.println("*******************************");

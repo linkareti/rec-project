@@ -22,7 +22,7 @@ public class AboutDialogBeanInfo extends SimpleBeanInfo {
 	// Bean descriptor //GEN-FIRST:BeanDescriptor
 	/* lazy BeanDescriptor */
 	private static BeanDescriptor getBdescriptor() {
-		BeanDescriptor beanDescriptor = new BeanDescriptor(AboutDialog.class, null);// GEN-HEADEREND:BeanDescriptor
+		final BeanDescriptor beanDescriptor = new BeanDescriptor(AboutDialog.class, null);// GEN-HEADEREND:BeanDescriptor
 
 		// Here you can add code for customizing the BeanDescriptor.
 
@@ -124,163 +124,190 @@ public class AboutDialogBeanInfo extends SimpleBeanInfo {
 	// Property array
 	/* lazy PropertyDescriptor */
 	private static PropertyDescriptor[] getPdescriptor() {
-		PropertyDescriptor[] properties = new PropertyDescriptor[90];
+		final PropertyDescriptor[] properties = new PropertyDescriptor[90];
 
 		try {
-			properties[PROPERTY_accessibleContext] = new PropertyDescriptor("accessibleContext", AboutDialog.class,
-					"getAccessibleContext", null);
-			properties[PROPERTY_active] = new PropertyDescriptor("active", AboutDialog.class, "isActive", null);
-			properties[PROPERTY_alignmentX] = new PropertyDescriptor("alignmentX", AboutDialog.class, "getAlignmentX",
-					null);
-			properties[PROPERTY_alignmentY] = new PropertyDescriptor("alignmentY", AboutDialog.class, "getAlignmentY",
-					null);
-			properties[PROPERTY_background] = new PropertyDescriptor("background", AboutDialog.class, "getBackground",
-					"setBackground");
-			properties[PROPERTY_backgroundSet] = new PropertyDescriptor("backgroundSet", AboutDialog.class,
-					"isBackgroundSet", null);
-			properties[PROPERTY_bounds] = new PropertyDescriptor("bounds", AboutDialog.class, "getBounds", "setBounds");
-			properties[PROPERTY_bufferStrategy] = new PropertyDescriptor("bufferStrategy", AboutDialog.class,
-					"getBufferStrategy", null);
-			properties[PROPERTY_colorModel] = new PropertyDescriptor("colorModel", AboutDialog.class, "getColorModel",
-					null);
-			properties[PROPERTY_component] = new IndexedPropertyDescriptor("component", AboutDialog.class, null, null,
-					"getComponent", null);
-			properties[PROPERTY_componentCount] = new PropertyDescriptor("componentCount", AboutDialog.class,
-					"getComponentCount", null);
-			properties[PROPERTY_componentListeners] = new PropertyDescriptor("componentListeners", AboutDialog.class,
-					"getComponentListeners", null);
-			properties[PROPERTY_componentOrientation] = new PropertyDescriptor("componentOrientation",
-					AboutDialog.class, "getComponentOrientation", "setComponentOrientation");
-			properties[PROPERTY_components] = new PropertyDescriptor("components", AboutDialog.class, "getComponents",
-					null);
-			properties[PROPERTY_containerListeners] = new PropertyDescriptor("containerListeners", AboutDialog.class,
-					"getContainerListeners", null);
-			properties[PROPERTY_contentPane] = new PropertyDescriptor("contentPane", AboutDialog.class,
-					"getContentPane", "setContentPane");
-			properties[PROPERTY_cursor] = new PropertyDescriptor("cursor", AboutDialog.class, "getCursor", "setCursor");
-			properties[PROPERTY_cursorSet] = new PropertyDescriptor("cursorSet", AboutDialog.class, "isCursorSet", null);
-			properties[PROPERTY_defaultCloseOperation] = new PropertyDescriptor("defaultCloseOperation",
-					AboutDialog.class, "getDefaultCloseOperation", "setDefaultCloseOperation");
-			properties[PROPERTY_displayable] = new PropertyDescriptor("displayable", AboutDialog.class,
-					"isDisplayable", null);
-			properties[PROPERTY_doubleBuffered] = new PropertyDescriptor("doubleBuffered", AboutDialog.class,
-					"isDoubleBuffered", null);
-			properties[PROPERTY_dropTarget] = new PropertyDescriptor("dropTarget", AboutDialog.class, "getDropTarget",
-					"setDropTarget");
-			properties[PROPERTY_enabled] = new PropertyDescriptor("enabled", AboutDialog.class, "isEnabled",
-					"setEnabled");
-			properties[PROPERTY_focusable] = new PropertyDescriptor("focusable", AboutDialog.class, "isFocusable",
-					"setFocusable");
-			properties[PROPERTY_focusableWindow] = new PropertyDescriptor("focusableWindow", AboutDialog.class,
-					"isFocusableWindow", null);
-			properties[PROPERTY_focusableWindowState] = new PropertyDescriptor("focusableWindowState",
-					AboutDialog.class, "getFocusableWindowState", "setFocusableWindowState");
-			properties[PROPERTY_focusCycleRoot] = new PropertyDescriptor("focusCycleRoot", AboutDialog.class,
-					"isFocusCycleRoot", "setFocusCycleRoot");
-			properties[PROPERTY_focusCycleRootAncestor] = new PropertyDescriptor("focusCycleRootAncestor",
-					AboutDialog.class, "getFocusCycleRootAncestor", null);
-			properties[PROPERTY_focused] = new PropertyDescriptor("focused", AboutDialog.class, "isFocused", null);
-			properties[PROPERTY_focusListeners] = new PropertyDescriptor("focusListeners", AboutDialog.class,
-					"getFocusListeners", null);
-			properties[PROPERTY_focusOwner] = new PropertyDescriptor("focusOwner", AboutDialog.class, "isFocusOwner",
-					null);
-			properties[PROPERTY_focusTraversable] = new PropertyDescriptor("focusTraversable", AboutDialog.class,
-					"isFocusTraversable", null);
-			properties[PROPERTY_focusTraversalKeys] = new IndexedPropertyDescriptor("focusTraversalKeys",
-					AboutDialog.class, null, null, "getFocusTraversalKeys", "setFocusTraversalKeys");
-			properties[PROPERTY_focusTraversalKeysEnabled] = new PropertyDescriptor("focusTraversalKeysEnabled",
-					AboutDialog.class, "getFocusTraversalKeysEnabled", "setFocusTraversalKeysEnabled");
-			properties[PROPERTY_focusTraversalPolicy] = new PropertyDescriptor("focusTraversalPolicy",
-					AboutDialog.class, "getFocusTraversalPolicy", "setFocusTraversalPolicy");
-			properties[PROPERTY_focusTraversalPolicySet] = new PropertyDescriptor("focusTraversalPolicySet",
-					AboutDialog.class, "isFocusTraversalPolicySet", null);
-			properties[PROPERTY_font] = new PropertyDescriptor("font", AboutDialog.class, "getFont", "setFont");
-			properties[PROPERTY_fontSet] = new PropertyDescriptor("fontSet", AboutDialog.class, "isFontSet", null);
-			properties[PROPERTY_foreground] = new PropertyDescriptor("foreground", AboutDialog.class, "getForeground",
-					"setForeground");
-			properties[PROPERTY_foregroundSet] = new PropertyDescriptor("foregroundSet", AboutDialog.class,
-					"isForegroundSet", null);
-			properties[PROPERTY_glassPane] = new PropertyDescriptor("glassPane", AboutDialog.class, "getGlassPane",
-					"setGlassPane");
-			properties[PROPERTY_graphics] = new PropertyDescriptor("graphics", AboutDialog.class, "getGraphics", null);
-			properties[PROPERTY_graphicsConfiguration] = new PropertyDescriptor("graphicsConfiguration",
-					AboutDialog.class, "getGraphicsConfiguration", null);
-			properties[PROPERTY_height] = new PropertyDescriptor("height", AboutDialog.class, "getHeight", null);
-			properties[PROPERTY_hierarchyBoundsListeners] = new PropertyDescriptor("hierarchyBoundsListeners",
-					AboutDialog.class, "getHierarchyBoundsListeners", null);
-			properties[PROPERTY_hierarchyListeners] = new PropertyDescriptor("hierarchyListeners", AboutDialog.class,
-					"getHierarchyListeners", null);
-			properties[PROPERTY_ignoreRepaint] = new PropertyDescriptor("ignoreRepaint", AboutDialog.class,
-					"getIgnoreRepaint", "setIgnoreRepaint");
-			properties[PROPERTY_inputContext] = new PropertyDescriptor("inputContext", AboutDialog.class,
-					"getInputContext", null);
-			properties[PROPERTY_inputMethodListeners] = new PropertyDescriptor("inputMethodListeners",
-					AboutDialog.class, "getInputMethodListeners", null);
-			properties[PROPERTY_inputMethodRequests] = new PropertyDescriptor("inputMethodRequests", AboutDialog.class,
-					"getInputMethodRequests", null);
-			properties[PROPERTY_insets] = new PropertyDescriptor("insets", AboutDialog.class, "getInsets", null);
-			properties[PROPERTY_JMenuBar] = new PropertyDescriptor("JMenuBar", AboutDialog.class, "getJMenuBar",
-					"setJMenuBar");
-			properties[PROPERTY_keyListeners] = new PropertyDescriptor("keyListeners", AboutDialog.class,
-					"getKeyListeners", null);
-			properties[PROPERTY_layeredPane] = new PropertyDescriptor("layeredPane", AboutDialog.class,
-					"getLayeredPane", "setLayeredPane");
-			properties[PROPERTY_layout] = new PropertyDescriptor("layout", AboutDialog.class, "getLayout", "setLayout");
-			properties[PROPERTY_lightweight] = new PropertyDescriptor("lightweight", AboutDialog.class,
-					"isLightweight", null);
-			properties[PROPERTY_locale] = new PropertyDescriptor("locale", AboutDialog.class, "getLocale", "setLocale");
-			properties[PROPERTY_locationOnScreen] = new PropertyDescriptor("locationOnScreen", AboutDialog.class,
-					"getLocationOnScreen", null);
-			properties[PROPERTY_locationRelativeTo] = new PropertyDescriptor("locationRelativeTo", AboutDialog.class,
-					null, "setLocationRelativeTo");
-			properties[PROPERTY_maximumSize] = new PropertyDescriptor("maximumSize", AboutDialog.class,
-					"getMaximumSize", null);
-			properties[PROPERTY_minimumSize] = new PropertyDescriptor("minimumSize", AboutDialog.class,
-					"getMinimumSize", null);
-			properties[PROPERTY_modal] = new PropertyDescriptor("modal", AboutDialog.class, "isModal", "setModal");
-			properties[PROPERTY_mostRecentFocusOwner] = new PropertyDescriptor("mostRecentFocusOwner",
-					AboutDialog.class, "getMostRecentFocusOwner", null);
-			properties[PROPERTY_mouseListeners] = new PropertyDescriptor("mouseListeners", AboutDialog.class,
-					"getMouseListeners", null);
-			properties[PROPERTY_mouseMotionListeners] = new PropertyDescriptor("mouseMotionListeners",
-					AboutDialog.class, "getMouseMotionListeners", null);
-			properties[PROPERTY_mouseWheelListeners] = new PropertyDescriptor("mouseWheelListeners", AboutDialog.class,
-					"getMouseWheelListeners", null);
-			properties[PROPERTY_name] = new PropertyDescriptor("name", AboutDialog.class, "getName", "setName");
-			properties[PROPERTY_opaque] = new PropertyDescriptor("opaque", AboutDialog.class, "isOpaque", null);
-			properties[PROPERTY_ownedWindows] = new PropertyDescriptor("ownedWindows", AboutDialog.class,
-					"getOwnedWindows", null);
-			properties[PROPERTY_owner] = new PropertyDescriptor("owner", AboutDialog.class, "getOwner", null);
-			properties[PROPERTY_parent] = new PropertyDescriptor("parent", AboutDialog.class, "getParent", null);
-			properties[PROPERTY_peer] = new PropertyDescriptor("peer", AboutDialog.class, "getPeer", null);
-			properties[PROPERTY_preferredSize] = new PropertyDescriptor("preferredSize", AboutDialog.class,
-					"getPreferredSize", null);
-			properties[PROPERTY_propertyChangeListeners] = new PropertyDescriptor("propertyChangeListeners",
-					AboutDialog.class, "getPropertyChangeListeners", null);
-			properties[PROPERTY_resizable] = new PropertyDescriptor("resizable", AboutDialog.class, "isResizable",
-					"setResizable");
-			properties[PROPERTY_rootPane] = new PropertyDescriptor("rootPane", AboutDialog.class, "getRootPane", null);
-			properties[PROPERTY_showing] = new PropertyDescriptor("showing", AboutDialog.class, "isShowing", null);
-			properties[PROPERTY_title] = new PropertyDescriptor("title", AboutDialog.class, "getTitle", "setTitle");
-			properties[PROPERTY_toolkit] = new PropertyDescriptor("toolkit", AboutDialog.class, "getToolkit", null);
-			properties[PROPERTY_treeLock] = new PropertyDescriptor("treeLock", AboutDialog.class, "getTreeLock", null);
-			properties[PROPERTY_undecorated] = new PropertyDescriptor("undecorated", AboutDialog.class,
-					"isUndecorated", "setUndecorated");
-			properties[PROPERTY_valid] = new PropertyDescriptor("valid", AboutDialog.class, "isValid", null);
-			properties[PROPERTY_visible] = new PropertyDescriptor("visible", AboutDialog.class, "isVisible",
-					"setVisible");
-			properties[PROPERTY_warningString] = new PropertyDescriptor("warningString", AboutDialog.class,
-					"getWarningString", null);
-			properties[PROPERTY_width] = new PropertyDescriptor("width", AboutDialog.class, "getWidth", null);
-			properties[PROPERTY_windowFocusListeners] = new PropertyDescriptor("windowFocusListeners",
-					AboutDialog.class, "getWindowFocusListeners", null);
-			properties[PROPERTY_windowListeners] = new PropertyDescriptor("windowListeners", AboutDialog.class,
-					"getWindowListeners", null);
-			properties[PROPERTY_windowStateListeners] = new PropertyDescriptor("windowStateListeners",
-					AboutDialog.class, "getWindowStateListeners", null);
-			properties[PROPERTY_x] = new PropertyDescriptor("x", AboutDialog.class, "getX", null);
-			properties[PROPERTY_y] = new PropertyDescriptor("y", AboutDialog.class, "getY", null);
-		} catch (IntrospectionException e) {
+			properties[AboutDialogBeanInfo.PROPERTY_accessibleContext] = new PropertyDescriptor("accessibleContext",
+					AboutDialog.class, "getAccessibleContext", null);
+			properties[AboutDialogBeanInfo.PROPERTY_active] = new PropertyDescriptor("active", AboutDialog.class,
+					"isActive", null);
+			properties[AboutDialogBeanInfo.PROPERTY_alignmentX] = new PropertyDescriptor("alignmentX",
+					AboutDialog.class, "getAlignmentX", null);
+			properties[AboutDialogBeanInfo.PROPERTY_alignmentY] = new PropertyDescriptor("alignmentY",
+					AboutDialog.class, "getAlignmentY", null);
+			properties[AboutDialogBeanInfo.PROPERTY_background] = new PropertyDescriptor("background",
+					AboutDialog.class, "getBackground", "setBackground");
+			properties[AboutDialogBeanInfo.PROPERTY_backgroundSet] = new PropertyDescriptor("backgroundSet",
+					AboutDialog.class, "isBackgroundSet", null);
+			properties[AboutDialogBeanInfo.PROPERTY_bounds] = new PropertyDescriptor("bounds", AboutDialog.class,
+					"getBounds", "setBounds");
+			properties[AboutDialogBeanInfo.PROPERTY_bufferStrategy] = new PropertyDescriptor("bufferStrategy",
+					AboutDialog.class, "getBufferStrategy", null);
+			properties[AboutDialogBeanInfo.PROPERTY_colorModel] = new PropertyDescriptor("colorModel",
+					AboutDialog.class, "getColorModel", null);
+			properties[AboutDialogBeanInfo.PROPERTY_component] = new IndexedPropertyDescriptor("component",
+					AboutDialog.class, null, null, "getComponent", null);
+			properties[AboutDialogBeanInfo.PROPERTY_componentCount] = new PropertyDescriptor("componentCount",
+					AboutDialog.class, "getComponentCount", null);
+			properties[AboutDialogBeanInfo.PROPERTY_componentListeners] = new PropertyDescriptor("componentListeners",
+					AboutDialog.class, "getComponentListeners", null);
+			properties[AboutDialogBeanInfo.PROPERTY_componentOrientation] = new PropertyDescriptor(
+					"componentOrientation", AboutDialog.class, "getComponentOrientation", "setComponentOrientation");
+			properties[AboutDialogBeanInfo.PROPERTY_components] = new PropertyDescriptor("components",
+					AboutDialog.class, "getComponents", null);
+			properties[AboutDialogBeanInfo.PROPERTY_containerListeners] = new PropertyDescriptor("containerListeners",
+					AboutDialog.class, "getContainerListeners", null);
+			properties[AboutDialogBeanInfo.PROPERTY_contentPane] = new PropertyDescriptor("contentPane",
+					AboutDialog.class, "getContentPane", "setContentPane");
+			properties[AboutDialogBeanInfo.PROPERTY_cursor] = new PropertyDescriptor("cursor", AboutDialog.class,
+					"getCursor", "setCursor");
+			properties[AboutDialogBeanInfo.PROPERTY_cursorSet] = new PropertyDescriptor("cursorSet", AboutDialog.class,
+					"isCursorSet", null);
+			properties[AboutDialogBeanInfo.PROPERTY_defaultCloseOperation] = new PropertyDescriptor(
+					"defaultCloseOperation", AboutDialog.class, "getDefaultCloseOperation", "setDefaultCloseOperation");
+			properties[AboutDialogBeanInfo.PROPERTY_displayable] = new PropertyDescriptor("displayable",
+					AboutDialog.class, "isDisplayable", null);
+			properties[AboutDialogBeanInfo.PROPERTY_doubleBuffered] = new PropertyDescriptor("doubleBuffered",
+					AboutDialog.class, "isDoubleBuffered", null);
+			properties[AboutDialogBeanInfo.PROPERTY_dropTarget] = new PropertyDescriptor("dropTarget",
+					AboutDialog.class, "getDropTarget", "setDropTarget");
+			properties[AboutDialogBeanInfo.PROPERTY_enabled] = new PropertyDescriptor("enabled", AboutDialog.class,
+					"isEnabled", "setEnabled");
+			properties[AboutDialogBeanInfo.PROPERTY_focusable] = new PropertyDescriptor("focusable", AboutDialog.class,
+					"isFocusable", "setFocusable");
+			properties[AboutDialogBeanInfo.PROPERTY_focusableWindow] = new PropertyDescriptor("focusableWindow",
+					AboutDialog.class, "isFocusableWindow", null);
+			properties[AboutDialogBeanInfo.PROPERTY_focusableWindowState] = new PropertyDescriptor(
+					"focusableWindowState", AboutDialog.class, "getFocusableWindowState", "setFocusableWindowState");
+			properties[AboutDialogBeanInfo.PROPERTY_focusCycleRoot] = new PropertyDescriptor("focusCycleRoot",
+					AboutDialog.class, "isFocusCycleRoot", "setFocusCycleRoot");
+			properties[AboutDialogBeanInfo.PROPERTY_focusCycleRootAncestor] = new PropertyDescriptor(
+					"focusCycleRootAncestor", AboutDialog.class, "getFocusCycleRootAncestor", null);
+			properties[AboutDialogBeanInfo.PROPERTY_focused] = new PropertyDescriptor("focused", AboutDialog.class,
+					"isFocused", null);
+			properties[AboutDialogBeanInfo.PROPERTY_focusListeners] = new PropertyDescriptor("focusListeners",
+					AboutDialog.class, "getFocusListeners", null);
+			properties[AboutDialogBeanInfo.PROPERTY_focusOwner] = new PropertyDescriptor("focusOwner",
+					AboutDialog.class, "isFocusOwner", null);
+			properties[AboutDialogBeanInfo.PROPERTY_focusTraversable] = new PropertyDescriptor("focusTraversable",
+					AboutDialog.class, "isFocusTraversable", null);
+			properties[AboutDialogBeanInfo.PROPERTY_focusTraversalKeys] = new IndexedPropertyDescriptor(
+					"focusTraversalKeys", AboutDialog.class, null, null, "getFocusTraversalKeys",
+					"setFocusTraversalKeys");
+			properties[AboutDialogBeanInfo.PROPERTY_focusTraversalKeysEnabled] = new PropertyDescriptor(
+					"focusTraversalKeysEnabled", AboutDialog.class, "getFocusTraversalKeysEnabled",
+					"setFocusTraversalKeysEnabled");
+			properties[AboutDialogBeanInfo.PROPERTY_focusTraversalPolicy] = new PropertyDescriptor(
+					"focusTraversalPolicy", AboutDialog.class, "getFocusTraversalPolicy", "setFocusTraversalPolicy");
+			properties[AboutDialogBeanInfo.PROPERTY_focusTraversalPolicySet] = new PropertyDescriptor(
+					"focusTraversalPolicySet", AboutDialog.class, "isFocusTraversalPolicySet", null);
+			properties[AboutDialogBeanInfo.PROPERTY_font] = new PropertyDescriptor("font", AboutDialog.class,
+					"getFont", "setFont");
+			properties[AboutDialogBeanInfo.PROPERTY_fontSet] = new PropertyDescriptor("fontSet", AboutDialog.class,
+					"isFontSet", null);
+			properties[AboutDialogBeanInfo.PROPERTY_foreground] = new PropertyDescriptor("foreground",
+					AboutDialog.class, "getForeground", "setForeground");
+			properties[AboutDialogBeanInfo.PROPERTY_foregroundSet] = new PropertyDescriptor("foregroundSet",
+					AboutDialog.class, "isForegroundSet", null);
+			properties[AboutDialogBeanInfo.PROPERTY_glassPane] = new PropertyDescriptor("glassPane", AboutDialog.class,
+					"getGlassPane", "setGlassPane");
+			properties[AboutDialogBeanInfo.PROPERTY_graphics] = new PropertyDescriptor("graphics", AboutDialog.class,
+					"getGraphics", null);
+			properties[AboutDialogBeanInfo.PROPERTY_graphicsConfiguration] = new PropertyDescriptor(
+					"graphicsConfiguration", AboutDialog.class, "getGraphicsConfiguration", null);
+			properties[AboutDialogBeanInfo.PROPERTY_height] = new PropertyDescriptor("height", AboutDialog.class,
+					"getHeight", null);
+			properties[AboutDialogBeanInfo.PROPERTY_hierarchyBoundsListeners] = new PropertyDescriptor(
+					"hierarchyBoundsListeners", AboutDialog.class, "getHierarchyBoundsListeners", null);
+			properties[AboutDialogBeanInfo.PROPERTY_hierarchyListeners] = new PropertyDescriptor("hierarchyListeners",
+					AboutDialog.class, "getHierarchyListeners", null);
+			properties[AboutDialogBeanInfo.PROPERTY_ignoreRepaint] = new PropertyDescriptor("ignoreRepaint",
+					AboutDialog.class, "getIgnoreRepaint", "setIgnoreRepaint");
+			properties[AboutDialogBeanInfo.PROPERTY_inputContext] = new PropertyDescriptor("inputContext",
+					AboutDialog.class, "getInputContext", null);
+			properties[AboutDialogBeanInfo.PROPERTY_inputMethodListeners] = new PropertyDescriptor(
+					"inputMethodListeners", AboutDialog.class, "getInputMethodListeners", null);
+			properties[AboutDialogBeanInfo.PROPERTY_inputMethodRequests] = new PropertyDescriptor(
+					"inputMethodRequests", AboutDialog.class, "getInputMethodRequests", null);
+			properties[AboutDialogBeanInfo.PROPERTY_insets] = new PropertyDescriptor("insets", AboutDialog.class,
+					"getInsets", null);
+			properties[AboutDialogBeanInfo.PROPERTY_JMenuBar] = new PropertyDescriptor("JMenuBar", AboutDialog.class,
+					"getJMenuBar", "setJMenuBar");
+			properties[AboutDialogBeanInfo.PROPERTY_keyListeners] = new PropertyDescriptor("keyListeners",
+					AboutDialog.class, "getKeyListeners", null);
+			properties[AboutDialogBeanInfo.PROPERTY_layeredPane] = new PropertyDescriptor("layeredPane",
+					AboutDialog.class, "getLayeredPane", "setLayeredPane");
+			properties[AboutDialogBeanInfo.PROPERTY_layout] = new PropertyDescriptor("layout", AboutDialog.class,
+					"getLayout", "setLayout");
+			properties[AboutDialogBeanInfo.PROPERTY_lightweight] = new PropertyDescriptor("lightweight",
+					AboutDialog.class, "isLightweight", null);
+			properties[AboutDialogBeanInfo.PROPERTY_locale] = new PropertyDescriptor("locale", AboutDialog.class,
+					"getLocale", "setLocale");
+			properties[AboutDialogBeanInfo.PROPERTY_locationOnScreen] = new PropertyDescriptor("locationOnScreen",
+					AboutDialog.class, "getLocationOnScreen", null);
+			properties[AboutDialogBeanInfo.PROPERTY_locationRelativeTo] = new PropertyDescriptor("locationRelativeTo",
+					AboutDialog.class, null, "setLocationRelativeTo");
+			properties[AboutDialogBeanInfo.PROPERTY_maximumSize] = new PropertyDescriptor("maximumSize",
+					AboutDialog.class, "getMaximumSize", null);
+			properties[AboutDialogBeanInfo.PROPERTY_minimumSize] = new PropertyDescriptor("minimumSize",
+					AboutDialog.class, "getMinimumSize", null);
+			properties[AboutDialogBeanInfo.PROPERTY_modal] = new PropertyDescriptor("modal", AboutDialog.class,
+					"isModal", "setModal");
+			properties[AboutDialogBeanInfo.PROPERTY_mostRecentFocusOwner] = new PropertyDescriptor(
+					"mostRecentFocusOwner", AboutDialog.class, "getMostRecentFocusOwner", null);
+			properties[AboutDialogBeanInfo.PROPERTY_mouseListeners] = new PropertyDescriptor("mouseListeners",
+					AboutDialog.class, "getMouseListeners", null);
+			properties[AboutDialogBeanInfo.PROPERTY_mouseMotionListeners] = new PropertyDescriptor(
+					"mouseMotionListeners", AboutDialog.class, "getMouseMotionListeners", null);
+			properties[AboutDialogBeanInfo.PROPERTY_mouseWheelListeners] = new PropertyDescriptor(
+					"mouseWheelListeners", AboutDialog.class, "getMouseWheelListeners", null);
+			properties[AboutDialogBeanInfo.PROPERTY_name] = new PropertyDescriptor("name", AboutDialog.class,
+					"getName", "setName");
+			properties[AboutDialogBeanInfo.PROPERTY_opaque] = new PropertyDescriptor("opaque", AboutDialog.class,
+					"isOpaque", null);
+			properties[AboutDialogBeanInfo.PROPERTY_ownedWindows] = new PropertyDescriptor("ownedWindows",
+					AboutDialog.class, "getOwnedWindows", null);
+			properties[AboutDialogBeanInfo.PROPERTY_owner] = new PropertyDescriptor("owner", AboutDialog.class,
+					"getOwner", null);
+			properties[AboutDialogBeanInfo.PROPERTY_parent] = new PropertyDescriptor("parent", AboutDialog.class,
+					"getParent", null);
+			properties[AboutDialogBeanInfo.PROPERTY_peer] = new PropertyDescriptor("peer", AboutDialog.class,
+					"getPeer", null);
+			properties[AboutDialogBeanInfo.PROPERTY_preferredSize] = new PropertyDescriptor("preferredSize",
+					AboutDialog.class, "getPreferredSize", null);
+			properties[AboutDialogBeanInfo.PROPERTY_propertyChangeListeners] = new PropertyDescriptor(
+					"propertyChangeListeners", AboutDialog.class, "getPropertyChangeListeners", null);
+			properties[AboutDialogBeanInfo.PROPERTY_resizable] = new PropertyDescriptor("resizable", AboutDialog.class,
+					"isResizable", "setResizable");
+			properties[AboutDialogBeanInfo.PROPERTY_rootPane] = new PropertyDescriptor("rootPane", AboutDialog.class,
+					"getRootPane", null);
+			properties[AboutDialogBeanInfo.PROPERTY_showing] = new PropertyDescriptor("showing", AboutDialog.class,
+					"isShowing", null);
+			properties[AboutDialogBeanInfo.PROPERTY_title] = new PropertyDescriptor("title", AboutDialog.class,
+					"getTitle", "setTitle");
+			properties[AboutDialogBeanInfo.PROPERTY_toolkit] = new PropertyDescriptor("toolkit", AboutDialog.class,
+					"getToolkit", null);
+			properties[AboutDialogBeanInfo.PROPERTY_treeLock] = new PropertyDescriptor("treeLock", AboutDialog.class,
+					"getTreeLock", null);
+			properties[AboutDialogBeanInfo.PROPERTY_undecorated] = new PropertyDescriptor("undecorated",
+					AboutDialog.class, "isUndecorated", "setUndecorated");
+			properties[AboutDialogBeanInfo.PROPERTY_valid] = new PropertyDescriptor("valid", AboutDialog.class,
+					"isValid", null);
+			properties[AboutDialogBeanInfo.PROPERTY_visible] = new PropertyDescriptor("visible", AboutDialog.class,
+					"isVisible", "setVisible");
+			properties[AboutDialogBeanInfo.PROPERTY_warningString] = new PropertyDescriptor("warningString",
+					AboutDialog.class, "getWarningString", null);
+			properties[AboutDialogBeanInfo.PROPERTY_width] = new PropertyDescriptor("width", AboutDialog.class,
+					"getWidth", null);
+			properties[AboutDialogBeanInfo.PROPERTY_windowFocusListeners] = new PropertyDescriptor(
+					"windowFocusListeners", AboutDialog.class, "getWindowFocusListeners", null);
+			properties[AboutDialogBeanInfo.PROPERTY_windowListeners] = new PropertyDescriptor("windowListeners",
+					AboutDialog.class, "getWindowListeners", null);
+			properties[AboutDialogBeanInfo.PROPERTY_windowStateListeners] = new PropertyDescriptor(
+					"windowStateListeners", AboutDialog.class, "getWindowStateListeners", null);
+			properties[AboutDialogBeanInfo.PROPERTY_x] = new PropertyDescriptor("x", AboutDialog.class, "getX", null);
+			properties[AboutDialogBeanInfo.PROPERTY_y] = new PropertyDescriptor("y", AboutDialog.class, "getY", null);
+		} catch (final IntrospectionException e) {
 		}// GEN-HEADEREND:Properties
 
 		// Here you can add code for customizing the properties array.
@@ -307,60 +334,65 @@ public class AboutDialogBeanInfo extends SimpleBeanInfo {
 	// EventSet array
 	/* lazy EventSetDescriptor */
 	private static EventSetDescriptor[] getEdescriptor() {
-		EventSetDescriptor[] eventSets = new EventSetDescriptor[14];
+		final EventSetDescriptor[] eventSets = new EventSetDescriptor[14];
 
 		try {
-			eventSets[EVENT_componentListener] = new EventSetDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class,
-					"componentListener", java.awt.event.ComponentListener.class, new String[] { "componentHidden",
-							"componentMoved", "componentResized", "componentShown" }, "addComponentListener",
-					"removeComponentListener");
-			eventSets[EVENT_containerListener] = new EventSetDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class,
-					"containerListener", java.awt.event.ContainerListener.class, new String[] { "componentAdded",
-							"componentRemoved" }, "addContainerListener", "removeContainerListener");
-			eventSets[EVENT_focusListener] = new EventSetDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class,
-					"focusListener", java.awt.event.FocusListener.class, new String[] { "focusGained", "focusLost" },
-					"addFocusListener", "removeFocusListener");
-			eventSets[EVENT_hierarchyBoundsListener] = new EventSetDescriptor(
+			eventSets[AboutDialogBeanInfo.EVENT_componentListener] = new EventSetDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class, "componentListener",
+					java.awt.event.ComponentListener.class, new String[] { "componentHidden", "componentMoved",
+							"componentResized", "componentShown" }, "addComponentListener", "removeComponentListener");
+			eventSets[AboutDialogBeanInfo.EVENT_containerListener] = new EventSetDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class, "containerListener",
+					java.awt.event.ContainerListener.class, new String[] { "componentAdded", "componentRemoved" },
+					"addContainerListener", "removeContainerListener");
+			eventSets[AboutDialogBeanInfo.EVENT_focusListener] = new EventSetDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class, "focusListener", java.awt.event.FocusListener.class,
+					new String[] { "focusGained", "focusLost" }, "addFocusListener", "removeFocusListener");
+			eventSets[AboutDialogBeanInfo.EVENT_hierarchyBoundsListener] = new EventSetDescriptor(
 					com.linkare.rec.impl.baseUI.AboutDialog.class, "hierarchyBoundsListener",
 					java.awt.event.HierarchyBoundsListener.class, new String[] { "ancestorMoved", "ancestorResized" },
 					"addHierarchyBoundsListener", "removeHierarchyBoundsListener");
-			eventSets[EVENT_hierarchyListener] = new EventSetDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class,
-					"hierarchyListener", java.awt.event.HierarchyListener.class, new String[] { "hierarchyChanged" },
+			eventSets[AboutDialogBeanInfo.EVENT_hierarchyListener] = new EventSetDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class, "hierarchyListener",
+					java.awt.event.HierarchyListener.class, new String[] { "hierarchyChanged" },
 					"addHierarchyListener", "removeHierarchyListener");
-			eventSets[EVENT_inputMethodListener] = new EventSetDescriptor(
+			eventSets[AboutDialogBeanInfo.EVENT_inputMethodListener] = new EventSetDescriptor(
 					com.linkare.rec.impl.baseUI.AboutDialog.class, "inputMethodListener",
 					java.awt.event.InputMethodListener.class, new String[] { "caretPositionChanged",
 							"inputMethodTextChanged" }, "addInputMethodListener", "removeInputMethodListener");
-			eventSets[EVENT_keyListener] = new EventSetDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class,
-					"keyListener", java.awt.event.KeyListener.class, new String[] { "keyPressed", "keyReleased",
-							"keyTyped" }, "addKeyListener", "removeKeyListener");
-			eventSets[EVENT_mouseListener] = new EventSetDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class,
-					"mouseListener", java.awt.event.MouseListener.class, new String[] { "mouseClicked", "mouseEntered",
-							"mouseExited", "mousePressed", "mouseReleased" }, "addMouseListener", "removeMouseListener");
-			eventSets[EVENT_mouseMotionListener] = new EventSetDescriptor(
+			eventSets[AboutDialogBeanInfo.EVENT_keyListener] = new EventSetDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class, "keyListener", java.awt.event.KeyListener.class,
+					new String[] { "keyPressed", "keyReleased", "keyTyped" }, "addKeyListener", "removeKeyListener");
+			eventSets[AboutDialogBeanInfo.EVENT_mouseListener] = new EventSetDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class, "mouseListener", java.awt.event.MouseListener.class,
+					new String[] { "mouseClicked", "mouseEntered", "mouseExited", "mousePressed", "mouseReleased" },
+					"addMouseListener", "removeMouseListener");
+			eventSets[AboutDialogBeanInfo.EVENT_mouseMotionListener] = new EventSetDescriptor(
 					com.linkare.rec.impl.baseUI.AboutDialog.class, "mouseMotionListener",
 					java.awt.event.MouseMotionListener.class, new String[] { "mouseDragged", "mouseMoved" },
 					"addMouseMotionListener", "removeMouseMotionListener");
-			eventSets[EVENT_mouseWheelListener] = new EventSetDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class,
-					"mouseWheelListener", java.awt.event.MouseWheelListener.class, new String[] { "mouseWheelMoved" },
+			eventSets[AboutDialogBeanInfo.EVENT_mouseWheelListener] = new EventSetDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class, "mouseWheelListener",
+					java.awt.event.MouseWheelListener.class, new String[] { "mouseWheelMoved" },
 					"addMouseWheelListener", "removeMouseWheelListener");
-			eventSets[EVENT_propertyChangeListener] = new EventSetDescriptor(
+			eventSets[AboutDialogBeanInfo.EVENT_propertyChangeListener] = new EventSetDescriptor(
 					com.linkare.rec.impl.baseUI.AboutDialog.class, "propertyChangeListener",
 					java.beans.PropertyChangeListener.class, new String[] { "propertyChange" },
 					"addPropertyChangeListener", "removePropertyChangeListener");
-			eventSets[EVENT_windowFocusListener] = new EventSetDescriptor(
+			eventSets[AboutDialogBeanInfo.EVENT_windowFocusListener] = new EventSetDescriptor(
 					com.linkare.rec.impl.baseUI.AboutDialog.class, "windowFocusListener",
 					java.awt.event.WindowFocusListener.class, new String[] { "windowGainedFocus", "windowLostFocus" },
 					"addWindowFocusListener", "removeWindowFocusListener");
-			eventSets[EVENT_windowListener] = new EventSetDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class,
-					"windowListener", java.awt.event.WindowListener.class, new String[] { "windowActivated",
-							"windowClosed", "windowClosing", "windowDeactivated", "windowDeiconified",
-							"windowIconified", "windowOpened" }, "addWindowListener", "removeWindowListener");
-			eventSets[EVENT_windowStateListener] = new EventSetDescriptor(
+			eventSets[AboutDialogBeanInfo.EVENT_windowListener] = new EventSetDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class, "windowListener",
+					java.awt.event.WindowListener.class, new String[] { "windowActivated", "windowClosed",
+							"windowClosing", "windowDeactivated", "windowDeiconified", "windowIconified",
+							"windowOpened" }, "addWindowListener", "removeWindowListener");
+			eventSets[AboutDialogBeanInfo.EVENT_windowStateListener] = new EventSetDescriptor(
 					com.linkare.rec.impl.baseUI.AboutDialog.class, "windowStateListener",
 					java.awt.event.WindowStateListener.class, new String[] { "windowStateChanged" },
 					"addWindowStateListener", "removeWindowStateListener");
-		} catch (IntrospectionException e) {
+		} catch (final IntrospectionException e) {
 		}// GEN-HEADEREND:Events
 
 		// Here you can add code for customizing the event sets array.
@@ -464,292 +496,340 @@ public class AboutDialogBeanInfo extends SimpleBeanInfo {
 	// Method array
 	/* lazy MethodDescriptor */
 	private static MethodDescriptor[] getMdescriptor() {
-		MethodDescriptor[] methods = new MethodDescriptor[91];
+		final MethodDescriptor[] methods = new MethodDescriptor[91];
 
 		try {
-			methods[METHOD_action0] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"action", new Class[] { java.awt.Event.class, java.lang.Object.class }));
-			methods[METHOD_action0].setDisplayName("");
-			methods[METHOD_add1] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("add",
-					new Class[] { java.awt.Component.class }));
-			methods[METHOD_add1].setDisplayName("");
-			methods[METHOD_addNotify2] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"addNotify", new Class[] {}));
-			methods[METHOD_addNotify2].setDisplayName("");
-			methods[METHOD_addPropertyChangeListener3] = new MethodDescriptor(
+			methods[AboutDialogBeanInfo.METHOD_action0] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("action", new Class[] {
+							java.awt.Event.class, java.lang.Object.class }));
+			methods[AboutDialogBeanInfo.METHOD_action0].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_add1] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("add",
+							new Class[] { java.awt.Component.class }));
+			methods[AboutDialogBeanInfo.METHOD_add1].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_addNotify2] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("addNotify", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_addNotify2].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_addPropertyChangeListener3] = new MethodDescriptor(
 					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("addPropertyChangeListener", new Class[] {
 							java.lang.String.class, java.beans.PropertyChangeListener.class }));
-			methods[METHOD_addPropertyChangeListener3].setDisplayName("");
-			methods[METHOD_applyComponentOrientation4] = new MethodDescriptor(
+			methods[AboutDialogBeanInfo.METHOD_addPropertyChangeListener3].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_applyComponentOrientation4] = new MethodDescriptor(
 					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("applyComponentOrientation",
 							new Class[] { java.awt.ComponentOrientation.class }));
-			methods[METHOD_applyComponentOrientation4].setDisplayName("");
-			methods[METHOD_applyResourceBundle5] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("applyResourceBundle", new Class[] { java.util.ResourceBundle.class }));
-			methods[METHOD_applyResourceBundle5].setDisplayName("");
-			methods[METHOD_areFocusTraversalKeysSet6] = new MethodDescriptor(
+			methods[AboutDialogBeanInfo.METHOD_applyComponentOrientation4].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_applyResourceBundle5] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("applyResourceBundle",
+							new Class[] { java.util.ResourceBundle.class }));
+			methods[AboutDialogBeanInfo.METHOD_applyResourceBundle5].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_areFocusTraversalKeysSet6] = new MethodDescriptor(
 					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("areFocusTraversalKeysSet",
 							new Class[] { Integer.TYPE }));
-			methods[METHOD_areFocusTraversalKeysSet6].setDisplayName("");
-			methods[METHOD_bounds7] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"bounds", new Class[] {}));
-			methods[METHOD_bounds7].setDisplayName("");
-			methods[METHOD_checkImage8] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"checkImage", new Class[] { java.awt.Image.class, java.awt.image.ImageObserver.class }));
-			methods[METHOD_checkImage8].setDisplayName("");
-			methods[METHOD_contains9] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"contains", new Class[] { Integer.TYPE, Integer.TYPE }));
-			methods[METHOD_contains9].setDisplayName("");
-			methods[METHOD_countComponents10] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("countComponents", new Class[] {}));
-			methods[METHOD_countComponents10].setDisplayName("");
-			methods[METHOD_createBufferStrategy11] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("createBufferStrategy", new Class[] { Integer.TYPE }));
-			methods[METHOD_createBufferStrategy11].setDisplayName("");
-			methods[METHOD_createImage12] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("createImage", new Class[] { java.awt.image.ImageProducer.class }));
-			methods[METHOD_createImage12].setDisplayName("");
-			methods[METHOD_createVolatileImage13] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("createVolatileImage", new Class[] { Integer.TYPE, Integer.TYPE }));
-			methods[METHOD_createVolatileImage13].setDisplayName("");
-			methods[METHOD_deliverEvent14] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("deliverEvent", new Class[] { java.awt.Event.class }));
-			methods[METHOD_deliverEvent14].setDisplayName("");
-			methods[METHOD_disable15] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"disable", new Class[] {}));
-			methods[METHOD_disable15].setDisplayName("");
-			methods[METHOD_dispatchEvent16] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("dispatchEvent", new Class[] { java.awt.AWTEvent.class }));
-			methods[METHOD_dispatchEvent16].setDisplayName("");
-			methods[METHOD_dispose17] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"dispose", new Class[] {}));
-			methods[METHOD_dispose17].setDisplayName("");
-			methods[METHOD_doLayout18] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"doLayout", new Class[] {}));
-			methods[METHOD_doLayout18].setDisplayName("");
-			methods[METHOD_enable19] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"enable", new Class[] {}));
-			methods[METHOD_enable19].setDisplayName("");
-			methods[METHOD_enableInputMethods20] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("enableInputMethods", new Class[] { Boolean.TYPE }));
-			methods[METHOD_enableInputMethods20].setDisplayName("");
-			methods[METHOD_findComponentAt21] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("findComponentAt", new Class[] { Integer.TYPE, Integer.TYPE }));
-			methods[METHOD_findComponentAt21].setDisplayName("");
-			methods[METHOD_getBounds22] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"getBounds", new Class[] { java.awt.Rectangle.class }));
-			methods[METHOD_getBounds22].setDisplayName("");
-			methods[METHOD_getComponentAt23] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("getComponentAt", new Class[] { Integer.TYPE, Integer.TYPE }));
-			methods[METHOD_getComponentAt23].setDisplayName("");
-			methods[METHOD_getFocusOwner24] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("getFocusOwner", new Class[] {}));
-			methods[METHOD_getFocusOwner24].setDisplayName("");
-			methods[METHOD_getFontMetrics25] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("getFontMetrics", new Class[] { java.awt.Font.class }));
-			methods[METHOD_getFontMetrics25].setDisplayName("");
-			methods[METHOD_getListeners26] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("getListeners", new Class[] { java.lang.Class.class }));
-			methods[METHOD_getListeners26].setDisplayName("");
-			methods[METHOD_getLocation27] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("getLocation", new Class[] {}));
-			methods[METHOD_getLocation27].setDisplayName("");
-			methods[METHOD_getPropertyChangeListeners28] = new MethodDescriptor(
+			methods[AboutDialogBeanInfo.METHOD_areFocusTraversalKeysSet6].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_bounds7] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("bounds", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_bounds7].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_checkImage8] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("checkImage", new Class[] {
+							java.awt.Image.class, java.awt.image.ImageObserver.class }));
+			methods[AboutDialogBeanInfo.METHOD_checkImage8].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_contains9] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("contains", new Class[] { Integer.TYPE,
+							Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_contains9].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_countComponents10] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("countComponents", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_countComponents10].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_createBufferStrategy11] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("createBufferStrategy",
+							new Class[] { Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_createBufferStrategy11].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_createImage12] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("createImage",
+							new Class[] { java.awt.image.ImageProducer.class }));
+			methods[AboutDialogBeanInfo.METHOD_createImage12].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_createVolatileImage13] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("createVolatileImage", new Class[] {
+							Integer.TYPE, Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_createVolatileImage13].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_deliverEvent14] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("deliverEvent",
+							new Class[] { java.awt.Event.class }));
+			methods[AboutDialogBeanInfo.METHOD_deliverEvent14].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_disable15] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("disable", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_disable15].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_dispatchEvent16] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("dispatchEvent",
+							new Class[] { java.awt.AWTEvent.class }));
+			methods[AboutDialogBeanInfo.METHOD_dispatchEvent16].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_dispose17] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("dispose", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_dispose17].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_doLayout18] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("doLayout", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_doLayout18].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_enable19] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("enable", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_enable19].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_enableInputMethods20] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("enableInputMethods",
+							new Class[] { Boolean.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_enableInputMethods20].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_findComponentAt21] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("findComponentAt", new Class[] {
+							Integer.TYPE, Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_findComponentAt21].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_getBounds22] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("getBounds",
+							new Class[] { java.awt.Rectangle.class }));
+			methods[AboutDialogBeanInfo.METHOD_getBounds22].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_getComponentAt23] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("getComponentAt", new Class[] {
+							Integer.TYPE, Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_getComponentAt23].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_getFocusOwner24] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("getFocusOwner", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_getFocusOwner24].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_getFontMetrics25] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("getFontMetrics",
+							new Class[] { java.awt.Font.class }));
+			methods[AboutDialogBeanInfo.METHOD_getFontMetrics25].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_getListeners26] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("getListeners",
+							new Class[] { java.lang.Class.class }));
+			methods[AboutDialogBeanInfo.METHOD_getListeners26].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_getLocation27] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("getLocation", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_getLocation27].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_getPropertyChangeListeners28] = new MethodDescriptor(
 					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("getPropertyChangeListeners",
 							new Class[] { java.lang.String.class }));
-			methods[METHOD_getPropertyChangeListeners28].setDisplayName("");
-			methods[METHOD_getSize29] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"getSize", new Class[] {}));
-			methods[METHOD_getSize29].setDisplayName("");
-			methods[METHOD_gotFocus30] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"gotFocus", new Class[] { java.awt.Event.class, java.lang.Object.class }));
-			methods[METHOD_gotFocus30].setDisplayName("");
-			methods[METHOD_handleEvent31] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("handleEvent", new Class[] { java.awt.Event.class }));
-			methods[METHOD_handleEvent31].setDisplayName("");
-			methods[METHOD_hasFocus32] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"hasFocus", new Class[] {}));
-			methods[METHOD_hasFocus32].setDisplayName("");
-			methods[METHOD_hide33] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"hide", new Class[] {}));
-			methods[METHOD_hide33].setDisplayName("");
-			methods[METHOD_imageUpdate34] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("imageUpdate", new Class[] { java.awt.Image.class, Integer.TYPE, Integer.TYPE,
-							Integer.TYPE, Integer.TYPE, Integer.TYPE }));
-			methods[METHOD_imageUpdate34].setDisplayName("");
-			methods[METHOD_insets35] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"insets", new Class[] {}));
-			methods[METHOD_insets35].setDisplayName("");
-			methods[METHOD_inside36] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"inside", new Class[] { Integer.TYPE, Integer.TYPE }));
-			methods[METHOD_inside36].setDisplayName("");
-			methods[METHOD_invalidate37] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("invalidate", new Class[] {}));
-			methods[METHOD_invalidate37].setDisplayName("");
-			methods[METHOD_isAncestorOf38] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("isAncestorOf", new Class[] { java.awt.Component.class }));
-			methods[METHOD_isAncestorOf38].setDisplayName("");
-			methods[METHOD_isDefaultLookAndFeelDecorated39] = new MethodDescriptor(
+			methods[AboutDialogBeanInfo.METHOD_getPropertyChangeListeners28].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_getSize29] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("getSize", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_getSize29].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_gotFocus30] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("gotFocus", new Class[] {
+							java.awt.Event.class, java.lang.Object.class }));
+			methods[AboutDialogBeanInfo.METHOD_gotFocus30].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_handleEvent31] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("handleEvent",
+							new Class[] { java.awt.Event.class }));
+			methods[AboutDialogBeanInfo.METHOD_handleEvent31].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_hasFocus32] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("hasFocus", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_hasFocus32].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_hide33] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("hide", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_hide33].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_imageUpdate34] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("imageUpdate",
+							new Class[] { java.awt.Image.class, Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE,
+									Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_imageUpdate34].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_insets35] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("insets", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_insets35].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_inside36] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("inside", new Class[] { Integer.TYPE,
+							Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_inside36].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_invalidate37] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("invalidate", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_invalidate37].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_isAncestorOf38] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("isAncestorOf",
+							new Class[] { java.awt.Component.class }));
+			methods[AboutDialogBeanInfo.METHOD_isAncestorOf38].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_isDefaultLookAndFeelDecorated39] = new MethodDescriptor(
 					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("isDefaultLookAndFeelDecorated",
 							new Class[] {}));
-			methods[METHOD_isDefaultLookAndFeelDecorated39].setDisplayName("");
-			methods[METHOD_isFocusCycleRoot40] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("isFocusCycleRoot", new Class[] { java.awt.Container.class }));
-			methods[METHOD_isFocusCycleRoot40].setDisplayName("");
-			methods[METHOD_keyDown41] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"keyDown", new Class[] { java.awt.Event.class, Integer.TYPE }));
-			methods[METHOD_keyDown41].setDisplayName("");
-			methods[METHOD_keyUp42] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"keyUp", new Class[] { java.awt.Event.class, Integer.TYPE }));
-			methods[METHOD_keyUp42].setDisplayName("");
-			methods[METHOD_layout43] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"layout", new Class[] {}));
-			methods[METHOD_layout43].setDisplayName("");
-			methods[METHOD_list44] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"list", new Class[] { java.io.PrintStream.class, Integer.TYPE }));
-			methods[METHOD_list44].setDisplayName("");
-			methods[METHOD_locate45] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"locate", new Class[] { Integer.TYPE, Integer.TYPE }));
-			methods[METHOD_locate45].setDisplayName("");
-			methods[METHOD_location46] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"location", new Class[] {}));
-			methods[METHOD_location46].setDisplayName("");
-			methods[METHOD_lostFocus47] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"lostFocus", new Class[] { java.awt.Event.class, java.lang.Object.class }));
-			methods[METHOD_lostFocus47].setDisplayName("");
-			methods[METHOD_minimumSize48] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("minimumSize", new Class[] {}));
-			methods[METHOD_minimumSize48].setDisplayName("");
-			methods[METHOD_mouseDown49] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"mouseDown", new Class[] { java.awt.Event.class, Integer.TYPE, Integer.TYPE }));
-			methods[METHOD_mouseDown49].setDisplayName("");
-			methods[METHOD_mouseDrag50] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"mouseDrag", new Class[] { java.awt.Event.class, Integer.TYPE, Integer.TYPE }));
-			methods[METHOD_mouseDrag50].setDisplayName("");
-			methods[METHOD_mouseEnter51] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("mouseEnter", new Class[] { java.awt.Event.class, Integer.TYPE, Integer.TYPE }));
-			methods[METHOD_mouseEnter51].setDisplayName("");
-			methods[METHOD_mouseExit52] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"mouseExit", new Class[] { java.awt.Event.class, Integer.TYPE, Integer.TYPE }));
-			methods[METHOD_mouseExit52].setDisplayName("");
-			methods[METHOD_mouseMove53] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"mouseMove", new Class[] { java.awt.Event.class, Integer.TYPE, Integer.TYPE }));
-			methods[METHOD_mouseMove53].setDisplayName("");
-			methods[METHOD_mouseUp54] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"mouseUp", new Class[] { java.awt.Event.class, Integer.TYPE, Integer.TYPE }));
-			methods[METHOD_mouseUp54].setDisplayName("");
-			methods[METHOD_move55] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"move", new Class[] { Integer.TYPE, Integer.TYPE }));
-			methods[METHOD_move55].setDisplayName("");
-			methods[METHOD_nextFocus56] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"nextFocus", new Class[] {}));
-			methods[METHOD_nextFocus56].setDisplayName("");
-			methods[METHOD_pack57] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"pack", new Class[] {}));
-			methods[METHOD_pack57].setDisplayName("");
-			methods[METHOD_paint58] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"paint", new Class[] { java.awt.Graphics.class }));
-			methods[METHOD_paint58].setDisplayName("");
-			methods[METHOD_paintAll59] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"paintAll", new Class[] { java.awt.Graphics.class }));
-			methods[METHOD_paintAll59].setDisplayName("");
-			methods[METHOD_paintComponents60] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("paintComponents", new Class[] { java.awt.Graphics.class }));
-			methods[METHOD_paintComponents60].setDisplayName("");
-			methods[METHOD_postEvent61] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"postEvent", new Class[] { java.awt.Event.class }));
-			methods[METHOD_postEvent61].setDisplayName("");
-			methods[METHOD_preferredSize62] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("preferredSize", new Class[] {}));
-			methods[METHOD_preferredSize62].setDisplayName("");
-			methods[METHOD_prepareImage63] = new MethodDescriptor(
+			methods[AboutDialogBeanInfo.METHOD_isDefaultLookAndFeelDecorated39].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_isFocusCycleRoot40] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("isFocusCycleRoot",
+							new Class[] { java.awt.Container.class }));
+			methods[AboutDialogBeanInfo.METHOD_isFocusCycleRoot40].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_keyDown41] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("keyDown", new Class[] {
+							java.awt.Event.class, Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_keyDown41].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_keyUp42] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("keyUp", new Class[] {
+							java.awt.Event.class, Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_keyUp42].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_layout43] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("layout", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_layout43].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_list44] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("list", new Class[] {
+							java.io.PrintStream.class, Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_list44].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_locate45] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("locate", new Class[] { Integer.TYPE,
+							Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_locate45].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_location46] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("location", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_location46].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_lostFocus47] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("lostFocus", new Class[] {
+							java.awt.Event.class, java.lang.Object.class }));
+			methods[AboutDialogBeanInfo.METHOD_lostFocus47].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_minimumSize48] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("minimumSize", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_minimumSize48].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_mouseDown49] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("mouseDown", new Class[] {
+							java.awt.Event.class, Integer.TYPE, Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_mouseDown49].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_mouseDrag50] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("mouseDrag", new Class[] {
+							java.awt.Event.class, Integer.TYPE, Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_mouseDrag50].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_mouseEnter51] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("mouseEnter", new Class[] {
+							java.awt.Event.class, Integer.TYPE, Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_mouseEnter51].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_mouseExit52] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("mouseExit", new Class[] {
+							java.awt.Event.class, Integer.TYPE, Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_mouseExit52].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_mouseMove53] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("mouseMove", new Class[] {
+							java.awt.Event.class, Integer.TYPE, Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_mouseMove53].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_mouseUp54] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("mouseUp", new Class[] {
+							java.awt.Event.class, Integer.TYPE, Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_mouseUp54].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_move55] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("move", new Class[] { Integer.TYPE,
+							Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_move55].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_nextFocus56] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("nextFocus", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_nextFocus56].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_pack57] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("pack", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_pack57].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_paint58] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("paint",
+							new Class[] { java.awt.Graphics.class }));
+			methods[AboutDialogBeanInfo.METHOD_paint58].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_paintAll59] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("paintAll",
+							new Class[] { java.awt.Graphics.class }));
+			methods[AboutDialogBeanInfo.METHOD_paintAll59].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_paintComponents60] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("paintComponents",
+							new Class[] { java.awt.Graphics.class }));
+			methods[AboutDialogBeanInfo.METHOD_paintComponents60].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_postEvent61] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("postEvent",
+							new Class[] { java.awt.Event.class }));
+			methods[AboutDialogBeanInfo.METHOD_postEvent61].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_preferredSize62] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("preferredSize", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_preferredSize62].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_prepareImage63] = new MethodDescriptor(
 					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("prepareImage", new Class[] {
 							java.awt.Image.class, java.awt.image.ImageObserver.class }));
-			methods[METHOD_prepareImage63].setDisplayName("");
-			methods[METHOD_print64] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"print", new Class[] { java.awt.Graphics.class }));
-			methods[METHOD_print64].setDisplayName("");
-			methods[METHOD_printAll65] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"printAll", new Class[] { java.awt.Graphics.class }));
-			methods[METHOD_printAll65].setDisplayName("");
-			methods[METHOD_printComponents66] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("printComponents", new Class[] { java.awt.Graphics.class }));
-			methods[METHOD_printComponents66].setDisplayName("");
-			methods[METHOD_remove67] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"remove", new Class[] { java.awt.Component.class }));
-			methods[METHOD_remove67].setDisplayName("");
-			methods[METHOD_removeAll68] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"removeAll", new Class[] {}));
-			methods[METHOD_removeAll68].setDisplayName("");
-			methods[METHOD_removeNotify69] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("removeNotify", new Class[] {}));
-			methods[METHOD_removeNotify69].setDisplayName("");
-			methods[METHOD_removePropertyChangeListener70] = new MethodDescriptor(
+			methods[AboutDialogBeanInfo.METHOD_prepareImage63].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_print64] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("print",
+							new Class[] { java.awt.Graphics.class }));
+			methods[AboutDialogBeanInfo.METHOD_print64].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_printAll65] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("printAll",
+							new Class[] { java.awt.Graphics.class }));
+			methods[AboutDialogBeanInfo.METHOD_printAll65].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_printComponents66] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("printComponents",
+							new Class[] { java.awt.Graphics.class }));
+			methods[AboutDialogBeanInfo.METHOD_printComponents66].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_remove67] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("remove",
+							new Class[] { java.awt.Component.class }));
+			methods[AboutDialogBeanInfo.METHOD_remove67].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_removeAll68] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("removeAll", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_removeAll68].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_removeNotify69] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("removeNotify", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_removeNotify69].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_removePropertyChangeListener70] = new MethodDescriptor(
 					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("removePropertyChangeListener",
 							new Class[] { java.lang.String.class, java.beans.PropertyChangeListener.class }));
-			methods[METHOD_removePropertyChangeListener70].setDisplayName("");
-			methods[METHOD_repaint71] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"repaint", new Class[] {}));
-			methods[METHOD_repaint71].setDisplayName("");
-			methods[METHOD_requestFocus72] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("requestFocus", new Class[] {}));
-			methods[METHOD_requestFocus72].setDisplayName("");
-			methods[METHOD_requestFocusInWindow73] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("requestFocusInWindow", new Class[] {}));
-			methods[METHOD_requestFocusInWindow73].setDisplayName("");
-			methods[METHOD_reshape74] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"reshape", new Class[] { Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE }));
-			methods[METHOD_reshape74].setDisplayName("");
-			methods[METHOD_resize75] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"resize", new Class[] { Integer.TYPE, Integer.TYPE }));
-			methods[METHOD_resize75].setDisplayName("");
-			methods[METHOD_setBounds76] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"setBounds", new Class[] { Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE }));
-			methods[METHOD_setBounds76].setDisplayName("");
-			methods[METHOD_setDefaultLookAndFeelDecorated77] = new MethodDescriptor(
+			methods[AboutDialogBeanInfo.METHOD_removePropertyChangeListener70].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_repaint71] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("repaint", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_repaint71].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_requestFocus72] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("requestFocus", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_requestFocus72].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_requestFocusInWindow73] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("requestFocusInWindow", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_requestFocusInWindow73].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_reshape74] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("reshape", new Class[] { Integer.TYPE,
+							Integer.TYPE, Integer.TYPE, Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_reshape74].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_resize75] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("resize", new Class[] { Integer.TYPE,
+							Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_resize75].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_setBounds76] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("setBounds", new Class[] { Integer.TYPE,
+							Integer.TYPE, Integer.TYPE, Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_setBounds76].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_setDefaultLookAndFeelDecorated77] = new MethodDescriptor(
 					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("setDefaultLookAndFeelDecorated",
 							new Class[] { Boolean.TYPE }));
-			methods[METHOD_setDefaultLookAndFeelDecorated77].setDisplayName("");
-			methods[METHOD_setLocation78] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("setLocation", new Class[] { Integer.TYPE, Integer.TYPE }));
-			methods[METHOD_setLocation78].setDisplayName("");
-			methods[METHOD_setSize79] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"setSize", new Class[] { Integer.TYPE, Integer.TYPE }));
-			methods[METHOD_setSize79].setDisplayName("");
-			methods[METHOD_show80] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"show", new Class[] {}));
-			methods[METHOD_show80].setDisplayName("");
-			methods[METHOD_size81] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"size", new Class[] {}));
-			methods[METHOD_size81].setDisplayName("");
-			methods[METHOD_toBack82] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"toBack", new Class[] {}));
-			methods[METHOD_toBack82].setDisplayName("");
-			methods[METHOD_toFront83] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"toFront", new Class[] {}));
-			methods[METHOD_toFront83].setDisplayName("");
-			methods[METHOD_toString84] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"toString", new Class[] {}));
-			methods[METHOD_toString84].setDisplayName("");
-			methods[METHOD_transferFocus85] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("transferFocus", new Class[] {}));
-			methods[METHOD_transferFocus85].setDisplayName("");
-			methods[METHOD_transferFocusBackward86] = new MethodDescriptor(
+			methods[AboutDialogBeanInfo.METHOD_setDefaultLookAndFeelDecorated77].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_setLocation78] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("setLocation", new Class[] { Integer.TYPE,
+							Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_setLocation78].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_setSize79] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("setSize", new Class[] { Integer.TYPE,
+							Integer.TYPE }));
+			methods[AboutDialogBeanInfo.METHOD_setSize79].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_show80] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("show", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_show80].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_size81] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("size", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_size81].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_toBack82] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("toBack", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_toBack82].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_toFront83] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("toFront", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_toFront83].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_toString84] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("toString", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_toString84].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_transferFocus85] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("transferFocus", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_transferFocus85].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_transferFocusBackward86] = new MethodDescriptor(
 					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("transferFocusBackward", new Class[] {}));
-			methods[METHOD_transferFocusBackward86].setDisplayName("");
-			methods[METHOD_transferFocusDownCycle87] = new MethodDescriptor(
+			methods[AboutDialogBeanInfo.METHOD_transferFocusBackward86].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_transferFocusDownCycle87] = new MethodDescriptor(
 					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("transferFocusDownCycle", new Class[] {}));
-			methods[METHOD_transferFocusDownCycle87].setDisplayName("");
-			methods[METHOD_transferFocusUpCycle88] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class
-					.getMethod("transferFocusUpCycle", new Class[] {}));
-			methods[METHOD_transferFocusUpCycle88].setDisplayName("");
-			methods[METHOD_update89] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"update", new Class[] { java.awt.Graphics.class }));
-			methods[METHOD_update89].setDisplayName("");
-			methods[METHOD_validate90] = new MethodDescriptor(com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod(
-					"validate", new Class[] {}));
-			methods[METHOD_validate90].setDisplayName("");
-		} catch (Exception e) {
+			methods[AboutDialogBeanInfo.METHOD_transferFocusDownCycle87].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_transferFocusUpCycle88] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("transferFocusUpCycle", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_transferFocusUpCycle88].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_update89] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("update",
+							new Class[] { java.awt.Graphics.class }));
+			methods[AboutDialogBeanInfo.METHOD_update89].setDisplayName("");
+			methods[AboutDialogBeanInfo.METHOD_validate90] = new MethodDescriptor(
+					com.linkare.rec.impl.baseUI.AboutDialog.class.getMethod("validate", new Class[] {}));
+			methods[AboutDialogBeanInfo.METHOD_validate90].setDisplayName("");
+		} catch (final Exception e) {
 		}// GEN-HEADEREND:Methods
 
 		// Here you can add code for customizing the methods array.
@@ -774,7 +854,7 @@ public class AboutDialogBeanInfo extends SimpleBeanInfo {
 	 *         automatic analysis.
 	 */
 	public BeanDescriptor getBeanDescriptor() {
-		return getBdescriptor();
+		return AboutDialogBeanInfo.getBdescriptor();
 	}
 
 	/**
@@ -791,7 +871,7 @@ public class AboutDialogBeanInfo extends SimpleBeanInfo {
 	 *         IndexedPropertyDescriptor.
 	 */
 	public PropertyDescriptor[] getPropertyDescriptors() {
-		return getPdescriptor();
+		return AboutDialogBeanInfo.getPdescriptor();
 	}
 
 	/**
@@ -802,7 +882,7 @@ public class AboutDialogBeanInfo extends SimpleBeanInfo {
 	 *         obtained by automatic analysis.
 	 */
 	public EventSetDescriptor[] getEventSetDescriptors() {
-		return getEdescriptor();
+		return AboutDialogBeanInfo.getEdescriptor();
 	}
 
 	/**
@@ -813,7 +893,7 @@ public class AboutDialogBeanInfo extends SimpleBeanInfo {
 	 *         obtained by automatic analysis.
 	 */
 	public MethodDescriptor[] getMethodDescriptors() {
-		return getMdescriptor();
+		return AboutDialogBeanInfo.getMdescriptor();
 	}
 
 	/**
@@ -827,7 +907,7 @@ public class AboutDialogBeanInfo extends SimpleBeanInfo {
 	 *         Returns -1 if there is no default property.
 	 */
 	public int getDefaultPropertyIndex() {
-		return defaultPropertyIndex;
+		return AboutDialogBeanInfo.defaultPropertyIndex;
 	}
 
 	/**
@@ -840,6 +920,6 @@ public class AboutDialogBeanInfo extends SimpleBeanInfo {
 	 *         Returns -1 if there is no default event.
 	 */
 	public int getDefaultEventIndex() {
-		return defaultEventIndex;
+		return AboutDialogBeanInfo.defaultEventIndex;
 	}
 }

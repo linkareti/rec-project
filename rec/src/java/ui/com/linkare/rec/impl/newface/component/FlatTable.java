@@ -10,6 +10,10 @@ import javax.swing.plaf.basic.BasicTableUI;
  */
 public class FlatTable extends JTable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3193305648628424644L;
 	private static final String uiClassID = "FlatTableUI";
 
 	public FlatTable() {
@@ -27,9 +31,8 @@ public class FlatTable extends JTable {
 
 	@Override
 	public String getUIClassID() {
-		return uiClassID;
+		return FlatTable.uiClassID;
 	}
-
 
 	@Override
 	public boolean isEnabled() {

@@ -21,16 +21,24 @@ import javax.swing.JComponent;
 public class FlatComboBoxIcon implements Icon, Serializable {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8200352117513893373L;
+
+	/**
 	 * Paints the horizontal bars for the
 	 */
-	public void paintIcon(Component c, Graphics g, int x, int y) {
-		JComponent component = (JComponent) c;
-		int iconWidth = getIconWidth();
+	@Override
+	public void paintIcon(final Component c, final Graphics g, final int x, final int y) {
+		final JComponent component = (JComponent) c;
+		final int iconWidth = getIconWidth();
 
 		g.translate(x, y);
 
-		//		g.setColor( component.isEnabled() ? FlatTheme.getValue("ComboBox" + AbstractStyle.ARROWBUTTON_ENABLEDFOREGROUND) : 
-		//			FlatTheme.getValue("ComboBox" + AbstractStyle.ARROWBUTTON_DISABLEDFOREGROUND) );
+		// g.setColor( component.isEnabled() ? FlatTheme.getValue("ComboBox" +
+		// AbstractStyle.ARROWBUTTON_ENABLEDFOREGROUND) :
+		// FlatTheme.getValue("ComboBox" +
+		// AbstractStyle.ARROWBUTTON_DISABLEDFOREGROUND) );
 		g.setColor(component.isEnabled() ? Color.white : Color.white);
 		g.drawLine(0, 0, iconWidth - 1, 0);
 		g.drawLine(1, 1, 1 + (iconWidth - 3), 1);
@@ -44,6 +52,7 @@ public class FlatComboBoxIcon implements Icon, Serializable {
 	/**
 	 * Created a stub to satisfy the interface.
 	 */
+	@Override
 	public int getIconWidth() {
 		return 10;
 	}
@@ -51,6 +60,7 @@ public class FlatComboBoxIcon implements Icon, Serializable {
 	/**
 	 * Created a stub to satisfy the interface.
 	 */
+	@Override
 	public int getIconHeight() {
 		return 5;
 	}

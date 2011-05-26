@@ -11,18 +11,21 @@ public final class ChannelAcquisitionConfigSearchListHolder implements Streamabl
 	public ChannelAcquisitionConfigSearchListHolder() {
 	}
 
-	public ChannelAcquisitionConfigSearchListHolder(ChannelAcquisitionConfigSearch[] initialValue) {
+	public ChannelAcquisitionConfigSearchListHolder(final ChannelAcquisitionConfigSearch[] initialValue) {
 		value = initialValue;
 	}
 
-	public void _read(InputStream i) {
+	@Override
+	public void _read(final InputStream i) {
 		value = ChannelAcquisitionConfigSearchListHelper.read(i);
 	}
 
-	public void _write(OutputStream o) {
+	@Override
+	public void _write(final OutputStream o) {
 		ChannelAcquisitionConfigSearchListHelper.write(o, value);
 	}
 
+	@Override
 	public TypeCode _type() {
 		return ChannelAcquisitionConfigSearchListHelper.type();
 	}

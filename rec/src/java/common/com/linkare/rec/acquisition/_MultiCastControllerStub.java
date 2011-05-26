@@ -10,50 +10,55 @@ public class _MultiCastControllerStub extends org.omg.CORBA.portable.ObjectImpl 
 		com.linkare.rec.acquisition.MultiCastController {
 
 	// version 5 - check permissions before givin' out the Hardware List
-	public com.linkare.rec.acquisition.MultiCastHardware[] enumerateHardware(com.linkare.rec.acquisition.UserInfo user)
-			throws com.linkare.rec.acquisition.NotRegistered, com.linkare.rec.acquisition.NotAuthorized {
+	@Override
+	public com.linkare.rec.acquisition.MultiCastHardware[] enumerateHardware(
+			final com.linkare.rec.acquisition.UserInfo user) throws com.linkare.rec.acquisition.NotRegistered,
+			com.linkare.rec.acquisition.NotAuthorized {
 		org.omg.CORBA.portable.InputStream $in = null;
 		try {
-			org.omg.CORBA.portable.OutputStream $out = _request("enumerateHardware", true);
+			final org.omg.CORBA.portable.OutputStream $out = _request("enumerateHardware", true);
 			com.linkare.rec.acquisition.UserInfoHelper.write($out, user);
 			$in = _invoke($out);
-			com.linkare.rec.acquisition.MultiCastHardware[] $result = com.linkare.rec.acquisition.VTMultiCastHardwareListHelper
+			final com.linkare.rec.acquisition.MultiCastHardware[] $result = com.linkare.rec.acquisition.VTMultiCastHardwareListHelper
 					.read($in);
 			return $result;
-		} catch (org.omg.CORBA.portable.ApplicationException $ex) {
+		} catch (final org.omg.CORBA.portable.ApplicationException $ex) {
 			$in = $ex.getInputStream();
-			String _id = $ex.getId();
-			if (_id.equals("IDL:com/linkare/rec/acquisition/NotRegistered:1.0"))
+			final String _id = $ex.getId();
+			if (_id.equals("IDL:com/linkare/rec/acquisition/NotRegistered:1.0")) {
 				throw com.linkare.rec.acquisition.NotRegisteredHelper.read($in);
-			else if (_id.equals("IDL:com/linkare/rec/acquisition/NotAuthorized:1.0"))
+			} else if (_id.equals("IDL:com/linkare/rec/acquisition/NotAuthorized:1.0")) {
 				throw com.linkare.rec.acquisition.NotAuthorizedHelper.read($in);
-			else
+			} else {
 				throw new org.omg.CORBA.MARSHAL(_id);
-		} catch (org.omg.CORBA.portable.RemarshalException $rm) {
+			}
+		} catch (final org.omg.CORBA.portable.RemarshalException $rm) {
 			return enumerateHardware(user);
 		} finally {
 			_releaseReply($in);
 		}
 	} // enumerateHardware
 
-	public void registerDataClient(com.linkare.rec.acquisition.DataClient data_client)
+	@Override
+	public void registerDataClient(final com.linkare.rec.acquisition.DataClient data_client)
 			throws com.linkare.rec.acquisition.MaximumClientsReached, com.linkare.rec.acquisition.NotAuthorized {
 		org.omg.CORBA.portable.InputStream $in = null;
 		try {
-			org.omg.CORBA.portable.OutputStream $out = _request("registerDataClient", true);
+			final org.omg.CORBA.portable.OutputStream $out = _request("registerDataClient", true);
 			com.linkare.rec.acquisition.DataClientHelper.write($out, data_client);
 			$in = _invoke($out);
 			return;
-		} catch (org.omg.CORBA.portable.ApplicationException $ex) {
+		} catch (final org.omg.CORBA.portable.ApplicationException $ex) {
 			$in = $ex.getInputStream();
-			String _id = $ex.getId();
-			if (_id.equals("IDL:com/linkare/rec/acquisition/MaximumClientsReached:1.0"))
+			final String _id = $ex.getId();
+			if (_id.equals("IDL:com/linkare/rec/acquisition/MaximumClientsReached:1.0")) {
 				throw com.linkare.rec.acquisition.MaximumClientsReachedHelper.read($in);
-			else if (_id.equals("IDL:com/linkare/rec/acquisition/NotAuthorized:1.0"))
+			} else if (_id.equals("IDL:com/linkare/rec/acquisition/NotAuthorized:1.0")) {
 				throw com.linkare.rec.acquisition.NotAuthorizedHelper.read($in);
-			else
+			} else {
 				throw new org.omg.CORBA.MARSHAL(_id);
-		} catch (org.omg.CORBA.portable.RemarshalException $rm) {
+			}
+		} catch (final org.omg.CORBA.portable.RemarshalException $rm) {
 			registerDataClient(data_client);
 		} finally {
 			_releaseReply($in);
@@ -61,25 +66,28 @@ public class _MultiCastControllerStub extends org.omg.CORBA.portable.ObjectImpl 
 	} // registerDataClient
 
 	// version 5 added suport for messages
-	public com.linkare.rec.acquisition.UserInfo[] getClientList(com.linkare.rec.acquisition.UserInfo user)
+	@Override
+	public com.linkare.rec.acquisition.UserInfo[] getClientList(final com.linkare.rec.acquisition.UserInfo user)
 			throws com.linkare.rec.acquisition.NotRegistered, com.linkare.rec.acquisition.NotAuthorized {
 		org.omg.CORBA.portable.InputStream $in = null;
 		try {
-			org.omg.CORBA.portable.OutputStream $out = _request("getClientList", true);
+			final org.omg.CORBA.portable.OutputStream $out = _request("getClientList", true);
 			com.linkare.rec.acquisition.UserInfoHelper.write($out, user);
 			$in = _invoke($out);
-			com.linkare.rec.acquisition.UserInfo[] $result = com.linkare.rec.acquisition.VTUserInfoListHelper.read($in);
+			final com.linkare.rec.acquisition.UserInfo[] $result = com.linkare.rec.acquisition.VTUserInfoListHelper
+					.read($in);
 			return $result;
-		} catch (org.omg.CORBA.portable.ApplicationException $ex) {
+		} catch (final org.omg.CORBA.portable.ApplicationException $ex) {
 			$in = $ex.getInputStream();
-			String _id = $ex.getId();
-			if (_id.equals("IDL:com/linkare/rec/acquisition/NotRegistered:1.0"))
+			final String _id = $ex.getId();
+			if (_id.equals("IDL:com/linkare/rec/acquisition/NotRegistered:1.0")) {
 				throw com.linkare.rec.acquisition.NotRegisteredHelper.read($in);
-			else if (_id.equals("IDL:com/linkare/rec/acquisition/NotAuthorized:1.0"))
+			} else if (_id.equals("IDL:com/linkare/rec/acquisition/NotAuthorized:1.0")) {
 				throw com.linkare.rec.acquisition.NotAuthorizedHelper.read($in);
-			else
+			} else {
 				throw new org.omg.CORBA.MARSHAL(_id);
-		} catch (org.omg.CORBA.portable.RemarshalException $rm) {
+			}
+		} catch (final org.omg.CORBA.portable.RemarshalException $rm) {
 			return getClientList(user);
 		} finally {
 			_releaseReply($in);
@@ -87,26 +95,28 @@ public class _MultiCastControllerStub extends org.omg.CORBA.portable.ObjectImpl 
 	} // getClientList
 
 	// version 5 added suport for messages
-	public void sendMessage(com.linkare.rec.acquisition.UserInfo user, String clientTo, String message)
+	@Override
+	public void sendMessage(final com.linkare.rec.acquisition.UserInfo user, final String clientTo, final String message)
 			throws com.linkare.rec.acquisition.NotRegistered, com.linkare.rec.acquisition.NotAuthorized {
 		org.omg.CORBA.portable.InputStream $in = null;
 		try {
-			org.omg.CORBA.portable.OutputStream $out = _request("sendMessage", true);
+			final org.omg.CORBA.portable.OutputStream $out = _request("sendMessage", true);
 			com.linkare.rec.acquisition.UserInfoHelper.write($out, user);
 			com.linkare.rec.acquisition.VTClientNameHelper.write($out, clientTo);
 			$out.write_wstring(message);
 			$in = _invoke($out);
 			return;
-		} catch (org.omg.CORBA.portable.ApplicationException $ex) {
+		} catch (final org.omg.CORBA.portable.ApplicationException $ex) {
 			$in = $ex.getInputStream();
-			String _id = $ex.getId();
-			if (_id.equals("IDL:com/linkare/rec/acquisition/NotRegistered:1.0"))
+			final String _id = $ex.getId();
+			if (_id.equals("IDL:com/linkare/rec/acquisition/NotRegistered:1.0")) {
 				throw com.linkare.rec.acquisition.NotRegisteredHelper.read($in);
-			else if (_id.equals("IDL:com/linkare/rec/acquisition/NotAuthorized:1.0"))
+			} else if (_id.equals("IDL:com/linkare/rec/acquisition/NotAuthorized:1.0")) {
 				throw com.linkare.rec.acquisition.NotAuthorizedHelper.read($in);
-			else
+			} else {
 				throw new org.omg.CORBA.MARSHAL(_id);
-		} catch (org.omg.CORBA.portable.RemarshalException $rm) {
+			}
+		} catch (final org.omg.CORBA.portable.RemarshalException $rm) {
 			sendMessage(user, clientTo, message);
 		} finally {
 			_releaseReply($in);
@@ -114,18 +124,19 @@ public class _MultiCastControllerStub extends org.omg.CORBA.portable.ObjectImpl 
 	} // sendMessage
 
 	// Version 7.0 Addition - Trying to remove dependy on NameService
-	public void registerHardware(com.linkare.rec.acquisition.Hardware hardware) {
+	@Override
+	public void registerHardware(final com.linkare.rec.acquisition.Hardware hardware) {
 		org.omg.CORBA.portable.InputStream $in = null;
 		try {
-			org.omg.CORBA.portable.OutputStream $out = _request("registerHardware", true);
+			final org.omg.CORBA.portable.OutputStream $out = _request("registerHardware", true);
 			com.linkare.rec.acquisition.HardwareHelper.write($out, hardware);
 			$in = _invoke($out);
 			return;
-		} catch (org.omg.CORBA.portable.ApplicationException $ex) {
+		} catch (final org.omg.CORBA.portable.ApplicationException $ex) {
 			$in = $ex.getInputStream();
-			String _id = $ex.getId();
+			final String _id = $ex.getId();
 			throw new org.omg.CORBA.MARSHAL(_id);
-		} catch (org.omg.CORBA.portable.RemarshalException $rm) {
+		} catch (final org.omg.CORBA.portable.RemarshalException $rm) {
 			registerHardware(hardware);
 		} finally {
 			_releaseReply($in);
@@ -135,23 +146,24 @@ public class _MultiCastControllerStub extends org.omg.CORBA.portable.ObjectImpl 
 	// Type-specific CORBA::Object operations
 	private static String[] __ids = { "IDL:com/linkare/rec/acquisition/MultiCastController:1.0" };
 
+	@Override
 	public String[] _ids() {
-		return (String[]) __ids.clone();
+		return _MultiCastControllerStub.__ids.clone();
 	}
 
-	private void readObject(java.io.ObjectInputStream s) throws java.io.IOException {
-		String str = s.readUTF();
-		String[] args = null;
-		java.util.Properties props = null;
-		org.omg.CORBA.Object obj = org.omg.CORBA.ORB.init(args, props).string_to_object(str);
-		org.omg.CORBA.portable.Delegate delegate = ((org.omg.CORBA.portable.ObjectImpl) obj)._get_delegate();
+	private void readObject(final java.io.ObjectInputStream s) throws java.io.IOException {
+		final String str = s.readUTF();
+		final String[] args = null;
+		final java.util.Properties props = null;
+		final org.omg.CORBA.Object obj = org.omg.CORBA.ORB.init(args, props).string_to_object(str);
+		final org.omg.CORBA.portable.Delegate delegate = ((org.omg.CORBA.portable.ObjectImpl) obj)._get_delegate();
 		_set_delegate(delegate);
 	}
 
-	private void writeObject(java.io.ObjectOutputStream s) throws java.io.IOException {
-		String[] args = null;
-		java.util.Properties props = null;
-		String str = org.omg.CORBA.ORB.init(args, props).object_to_string(this);
+	private void writeObject(final java.io.ObjectOutputStream s) throws java.io.IOException {
+		final String[] args = null;
+		final java.util.Properties props = null;
+		final String str = org.omg.CORBA.ORB.init(args, props).object_to_string(this);
 		s.writeUTF(str);
 	}
 } // class _MultiCastControllerStub

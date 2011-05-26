@@ -23,15 +23,26 @@ public class IndexedPropertyObject {
 	/** Holds value of property valueClass. */
 	private Class<?> valueClass;
 
-	/** Creates a new instance of IndexedPropertyObject */
-	public IndexedPropertyObject(PropertyEditor propertyEditor, Class<?> valueClass) {
+	/**
+	 * Creates a new instance of IndexedPropertyObject
+	 * 
+	 * @param propertyEditor The editor for the property
+	 * @param valueClass the type of the property
+	 */
+	public IndexedPropertyObject(final PropertyEditor propertyEditor, final Class<?> valueClass) {
 		setPropertyEditor(propertyEditor);
 		setValueClass(valueClass);
 		setValue(null);
 	}
 
-	/** Creates a new instance of IndexedPropertyObject */
-	public IndexedPropertyObject(PropertyEditor propertyEditor, Class<?> valueClass, Object value) {
+	/**
+	 * Creates a new instance of IndexedPropertyObject
+	 * 
+	 * @param propertyEditor The editor for the property
+	 * @param valueClass the type of the property
+	 * @param value The current property's value
+	 */
+	public IndexedPropertyObject(final PropertyEditor propertyEditor, final Class<?> valueClass, final Object value) {
 		this(propertyEditor, valueClass);
 		setValue(value);
 	}
@@ -43,7 +54,7 @@ public class IndexedPropertyObject {
 	 * 
 	 */
 	public Object getValue() {
-		return this.value;
+		return value;
 	}
 
 	/**
@@ -52,28 +63,29 @@ public class IndexedPropertyObject {
 	 * @param value New value of property value.
 	 * 
 	 */
-	public void setValue(Object value) {
+	public void setValue(final Object value) {
 		this.value = value;
 		if (this.value == null && getValueClass().isPrimitive()) {
 			try {
-				if (getValueClass() == boolean.class)
+				if (getValueClass() == boolean.class) {
 					this.value = new Boolean(false);
-				else if (getValueClass() == byte.class)
+				} else if (getValueClass() == byte.class) {
 					this.value = new Byte((byte) 0);
-				else if (getValueClass() == char.class)
+				} else if (getValueClass() == char.class) {
 					this.value = new Character(' ');
-				else if (getValueClass() == short.class)
+				} else if (getValueClass() == short.class) {
 					this.value = new Short((short) 0);
-				else if (getValueClass() == int.class)
+				} else if (getValueClass() == int.class) {
 					this.value = new Integer(0);
-				else if (getValueClass() == long.class)
+				} else if (getValueClass() == long.class) {
 					this.value = new Long(0);
-				else if (getValueClass() == float.class)
+				} else if (getValueClass() == float.class) {
 					this.value = new Float(0.F);
-				else if (getValueClass() == double.class)
+				} else if (getValueClass() == double.class) {
 					this.value = new Double(0.);
+				}
 
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				javax.swing.JOptionPane.showMessageDialog(null, "Couldn't init value...\n\r" + e.getMessage());
 			}
 		}
@@ -86,7 +98,7 @@ public class IndexedPropertyObject {
 	 * 
 	 */
 	public PropertyEditor getPropertyEditor() {
-		return this.propertyEditor;
+		return propertyEditor;
 	}
 
 	/**
@@ -95,7 +107,7 @@ public class IndexedPropertyObject {
 	 * @param propertyEditor New value of property propertyEditor.
 	 * 
 	 */
-	public void setPropertyEditor(PropertyEditor propertyEditor) {
+	public void setPropertyEditor(final PropertyEditor propertyEditor) {
 		this.propertyEditor = propertyEditor;
 	}
 
@@ -106,7 +118,7 @@ public class IndexedPropertyObject {
 	 * 
 	 */
 	public Class<?> getValueClass() {
-		return this.valueClass;
+		return valueClass;
 	}
 
 	/**
@@ -115,7 +127,7 @@ public class IndexedPropertyObject {
 	 * @param valueClass New value of property valueClass.
 	 * 
 	 */
-	public void setValueClass(Class<?> valueClass) {
+	public void setValueClass(final Class<?> valueClass) {
 		this.valueClass = valueClass;
 	}
 

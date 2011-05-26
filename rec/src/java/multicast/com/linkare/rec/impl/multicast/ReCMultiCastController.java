@@ -54,12 +54,12 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 	public static final String SYSPROP_MULTICAST_INIT_REF = "ReC.MultiCastController.InitRef";
 
 	public static final String MULTICAST_INIT_REF = Defaults.defaultIfEmpty(
-			System.getProperty(SYSPROP_MULTICAST_INIT_REF), "MultiCastController");
+			System.getProperty(ReCMultiCastController.SYSPROP_MULTICAST_INIT_REF), "MultiCastController");
 
 	public static final String SYSPROP_MULTICAST_BIND_NAME = "ReC.MultiCastController.BindName";
 
 	public static final String MULTICAST_BIND_NAME = Defaults.defaultIfEmpty(
-			System.getProperty(SYSPROP_MULTICAST_BIND_NAME), "MultiCastController");
+			System.getProperty(ReCMultiCastController.SYSPROP_MULTICAST_BIND_NAME), "MultiCastController");
 
 	/*
 	 * i18n support
@@ -102,15 +102,16 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 	/*
 	 * The maximum number of clients to register with this lab
 	 */
-	private static final int MAXIMUM_CLIENTS = MAXIMUM_CLIENTS_PER_HARDWARE * MAXIMUM_HARDWARES;
+	private static final int MAXIMUM_CLIENTS = ReCMultiCastController.MAXIMUM_CLIENTS_PER_HARDWARE
+			* ReCMultiCastController.MAXIMUM_HARDWARES;
 
 	/**
 	 * Creates a new instance of ReCMultiCastController
 	 */
 	public ReCMultiCastController() {
 		// log the number of clients available to the hardware
-		log(Level.INFO, "MAXIMUM_CLIENTS_PER_HARDWARE = " + MAXIMUM_CLIENTS_PER_HARDWARE + " MAXIMUM_CLIENTS="
-				+ MAXIMUM_CLIENTS);
+		log(Level.INFO, "MAXIMUM_CLIENTS_PER_HARDWARE = " + ReCMultiCastController.MAXIMUM_CLIENTS_PER_HARDWARE
+				+ " MAXIMUM_CLIENTS=" + ReCMultiCastController.MAXIMUM_CLIENTS);
 
 		resource = new DefaultResource();
 
@@ -118,9 +119,9 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 		String multiCastLocation = "";
 		try {
 			multiCastLocation = InetAddress.getLocalHost().getCanonicalHostName();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			LoggerUtil.logThrowable("Error determining MultiCastController Location", e,
-					Logger.getLogger(MCCONTROLLER_LOGGER));
+					Logger.getLogger(ReCMultiCastController.MCCONTROLLER_LOGGER));
 		}
 
 		try {
@@ -132,7 +133,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 			resource.getProperties().put(resource.getResourceType().getPropertyKey(), multiCastLocation);
 
 			// Create a client queue with a max of MAXIMUM_CLIENTS
-			clientQueue = new ClientQueue(clientQueueAdapter, MAXIMUM_CLIENTS);
+			clientQueue = new ClientQueue(clientQueueAdapter, ReCMultiCastController.MAXIMUM_CLIENTS);
 
 			// Initialize Security Manager
 			SecurityManagerFactory.getSecurityManager().registerMultiCastHardware(multiCastHardwares);
@@ -144,10 +145,10 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 			ManagementFactory.getPlatformMBeanServer().registerMBean(new ThreadPoolExecutorStatistics(),
 					MBeanObjectNameFactory.getThreadPoolExecutorStatisticsObjectName());
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			// REMOVE THIS TRY CATCH BLOCK AFTER FINISHING THE TEST PHASE...
 			LoggerUtil.logThrowable("Error initializing the ReCMultiCastController", e,
-					Logger.getLogger(MCCONTROLLER_LOGGER));
+					Logger.getLogger(ReCMultiCastController.MCCONTROLLER_LOGGER));
 		}
 
 		// Create a hardware connection checker
@@ -160,13 +161,15 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 
 	/* my Remote Interface Implementation* */
 
-	public void registerDataClient(DataClient data_client) throws NotAuthorized, MaximumClientsReached {
+	@Override
+	public void registerDataClient(final DataClient data_client) throws NotAuthorized, MaximumClientsReached {
 		clientQueue.add(data_client, resource);
 	}
 
-	public MultiCastHardware[] enumerateHardware(UserInfo user) throws NotRegistered, NotAuthorized {
-		IOperation op1 = new DefaultOperation(IOperation.OP_ENUM_HARDWARES);
-		DefaultUser userOp = new DefaultUser(user);
+	@Override
+	public MultiCastHardware[] enumerateHardware(final UserInfo user) throws NotRegistered, NotAuthorized {
+		final IOperation op1 = new DefaultOperation(IOperation.OP_ENUM_HARDWARES);
+		final DefaultUser userOp = new DefaultUser(user);
 
 		if (!clientQueue.contains(user)) {
 			log(Level.INFO, "Client " + user.getUserName()
@@ -186,11 +189,12 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 	/**
 	 * @see com.linkare.rec.acquisition.MultiCastControllerOperations#getClientList(com.linkare.rec.acquisition.UserInfo)
 	 */
-	public UserInfo[] getClientList(UserInfo user) throws NotRegistered, NotAuthorized {
+	@Override
+	public UserInfo[] getClientList(final UserInfo user) throws NotRegistered, NotAuthorized {
 		log(Level.FINEST,
 				"Controller - Getting the client list for user "
 						+ (user == null ? "(user is null)" : user.getUserName()));
-		UserInfo[] retVal = clientQueue.getUsers(user, resource);
+		final UserInfo[] retVal = clientQueue.getUsers(user, resource);
 		log(Level.FINEST, "Controller - Got as retVal " + retVal);
 		return retVal;
 	}
@@ -199,7 +203,9 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 	 * @see com.linkare.rec.acquisition.MultiCastControllerOperations#sendMessage(com.linkare.rec.acquisition.UserInfo,
 	 *      java.lang.String, java.lang.String)
 	 */
-	public void sendMessage(UserInfo user, String clientTo, String message) throws NotRegistered, NotAuthorized {
+	@Override
+	public void sendMessage(final UserInfo user, final String clientTo, final String message) throws NotRegistered,
+			NotAuthorized {
 		clientQueue.sendChatMessage(user, clientTo, message, resource);
 	}
 
@@ -207,7 +213,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void sendMulticastMessage(String clientTo, String message) {
+	public void sendMulticastMessage(final String clientTo, final String message) {
 		clientQueue.sendMulticastChatMessage(clientTo, message);
 	}
 
@@ -216,8 +222,9 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 	 * com.linkare.rec.acquisition.MultiCastControllerOperations#registerHardware
 	 * (com.linkare.rec.acquisition.Hardware)
 	 */
-	public void registerHardware(Hardware hardware) {
-		HardwareAddEvt evt = new HardwareAddEvt(hardware);
+	@Override
+	public void registerHardware(final Hardware hardware) {
+		final HardwareAddEvt evt = new HardwareAddEvt(hardware);
 		hardwareChangeAdapter.hardwareAdded(evt);
 	}
 
@@ -236,6 +243,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 	/**
 	 * Call shutdown from finalizer to free resources
 	 */
+	@Override
 	protected void finalize() throws Throwable {
 		shutdown();
 	}
@@ -243,8 +251,8 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 	/*
 	 * Internal method to log messages
 	 */
-	private void log(Level l, String message) {
-		Logger.getLogger(MCCONTROLLER_LOGGER).log(l, message);
+	private void log(final Level l, final String message) {
+		Logger.getLogger(ReCMultiCastController.MCCONTROLLER_LOGGER).log(l, message);
 	}
 
 	/* Inner Class - Hardware Connection Checker */
@@ -266,6 +274,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 		// // }
 		// }
 
+		@Override
 		public void run() {
 			// while (!shutdown) {
 			// synchronized (this) {
@@ -277,8 +286,8 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 			// }
 			// }
 			synchronized (multiCastHardwares) {
-				for (Iterator<ReCMultiCastHardware> it = multiCastHardwares.iterator(); it.hasNext();) {
-					ReCMultiCastHardware rmch = it.next();
+				for (final Iterator<ReCMultiCastHardware> it = multiCastHardwares.iterator(); it.hasNext();) {
+					final ReCMultiCastHardware rmch = it.next();
 					try {
 						if (!rmch.getHardware().isConnected()) {
 							log(Level.FINEST, "Hardware " + rmch.getHardwareUniqueId() + " is gone! Shutting it down!");
@@ -292,7 +301,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 							log(Level.FINEST, "Clients were told that hardware " + rmch.getHardwareUniqueId()
 									+ " is gone!");
 						}
-					} catch (Exception e) {
+					} catch (final Exception e) {
 						logThrowable("MultiCastController - Error cheking hardware connection status!", e);
 					}
 				}
@@ -305,8 +314,8 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 		 * {@inheritDoc}
 		 */
 		@Override
-		public void logThrowable(String message, Throwable throwable) {
-			LoggerUtil.logThrowable(message, throwable, Logger.getLogger(MCCONTROLLER_LOGGER));
+		public void logThrowable(final String message, final Throwable throwable) {
+			LoggerUtil.logThrowable(message, throwable, Logger.getLogger(ReCMultiCastController.MCCONTROLLER_LOGGER));
 		}
 	}
 
@@ -322,7 +331,8 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 			multiCastHardwares = new LinkedList<ReCMultiCastHardware>();
 		}
 
-		public void hardwareAdded(HardwareAddEvt evt) {
+		@Override
+		public void hardwareAdded(final HardwareAddEvt evt) {
 			boolean changed = false;
 			synchronized (multiCastHardwares) {
 
@@ -335,16 +345,16 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 						log(Level.WARNING, "Error Trying to add an Hardware - Couldn't get it's ID");
 						return;
 					}
-				} catch (Throwable t) {
+				} catch (final Throwable t) {
 					log(Level.WARNING, "Exception occurred while access hardware info. " + t.getMessage());
 					return;
 				}
 
 				hardwareId = evt.getHardware().getHardwareInfo().getHardwareUniqueID();
 
-				Iterator<ReCMultiCastHardware> iter = multiCastHardwares.iterator();
+				final Iterator<ReCMultiCastHardware> iter = multiCastHardwares.iterator();
 				while (iter.hasNext()) {// trying to find if hardware exists
-					ReCMultiCastHardware hardware = (ReCMultiCastHardware) iter.next();
+					final ReCMultiCastHardware hardware = iter.next();
 					if (hardware.getHardwareUniqueId().equals(hardwareId)) {// oppps,
 						// allready
 						// exists
@@ -377,25 +387,25 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 				}
 				// if we got here means hardware was not found... Yuppi! A new
 				// Hardware!
-				if (multiCastHardwares.size() >= MAXIMUM_HARDWARES) {// Shaaamme,,,,
+				if (multiCastHardwares.size() >= ReCMultiCastController.MAXIMUM_HARDWARES) {// Shaaamme,,,,
 					// I'm
 					// full
 					log(Level.INFO, "Didn't register Harware with id " + hardwareId
 							+ " because I don't have any more slots available. My Hardwares Limit is "
-							+ MAXIMUM_HARDWARES);
+							+ ReCMultiCastController.MAXIMUM_HARDWARES);
 					return;
 				}
 
 				// PLUS, not full yet... Yuppi!
 				ReCMultiCastHardware addedHardware = null;
 				try {
-					DefaultResource hardwareResource = resource.createChildResource();
+					final DefaultResource hardwareResource = resource.createChildResource();
 					addedHardware = new ReCMultiCastHardware(hardwareResource, evt.getHardware(),
-							MAXIMUM_CLIENTS_PER_HARDWARE, clientQueue);
-				} catch (Exception e) {
+							ReCMultiCastController.MAXIMUM_CLIENTS_PER_HARDWARE, clientQueue);
+				} catch (final Exception e) {
 					LoggerUtil.logThrowable(
 							"Couldn't create a ReCMultiCastHardware for a Hardware that is registering!", e,
-							Logger.getLogger(MCCONTROLLER_LOGGER));
+							Logger.getLogger(ReCMultiCastController.MCCONTROLLER_LOGGER));
 					return;
 				}
 
@@ -409,22 +419,23 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 			}
 		}
 
-		public MultiCastHardware[] enumerateHardwares(IUser userOp) {
-			ArrayList<MultiCastHardware> multicastHardwareArrayList = new ArrayList<MultiCastHardware>(
+		public MultiCastHardware[] enumerateHardwares(final IUser userOp) {
+			final ArrayList<MultiCastHardware> multicastHardwareArrayList = new ArrayList<MultiCastHardware>(
 					multiCastHardwares.size());
-			IOperation op = new DefaultOperation(IOperation.OP_LIST_HARDWARE);
+			final IOperation op = new DefaultOperation(IOperation.OP_LIST_HARDWARE);
 
 			synchronized (multiCastHardwares) {
-				Iterator<ReCMultiCastHardware> iter = multiCastHardwares.iterator();
+				final Iterator<ReCMultiCastHardware> iter = multiCastHardwares.iterator();
 
 				while (iter.hasNext()) {
-					ReCMultiCastHardware mchardware = (ReCMultiCastHardware) iter.next();
+					final ReCMultiCastHardware mchardware = iter.next();
 					op.getProperties().put(IOperation.PROPKEY_HARDWARE_ID, mchardware.getHardwareUniqueId());
-					if (SecurityManagerFactory.authorize(mchardware.getResource(), userOp, op))
+					if (SecurityManagerFactory.authorize(mchardware.getResource(), userOp, op)) {
 						multicastHardwareArrayList.add(mchardware._this());
+					}
 				}
 			}
-			MultiCastHardware[] retVal = new MultiCastHardware[multicastHardwareArrayList.size()];
+			final MultiCastHardware[] retVal = new MultiCastHardware[multicastHardwareArrayList.size()];
 			System.arraycopy(multicastHardwareArrayList.toArray(), 0, retVal, 0, retVal.length);
 			return retVal;
 		}
@@ -433,10 +444,11 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 			synchronized (multiCastHardwares) {
 				log(Level.INFO, "Shutting down HardwareChangeAdapter and all the Hardwares!");
 
-				Iterator<ReCMultiCastHardware> iter = multiCastHardwares.iterator();
+				final Iterator<ReCMultiCastHardware> iter = multiCastHardwares.iterator();
 
-				while (iter.hasNext())
-					((ReCMultiCastHardware) iter.next()).shutdown();
+				while (iter.hasNext()) {
+					(iter.next()).shutdown();
+				}
 			}
 		}
 
@@ -445,16 +457,19 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 	/* Inner class - ClientQueueListener implementation */
 	private class ClientQueueAdapter implements IClientQueueListener {
 
-		public void dataClientForQueueIsGone(com.linkare.rec.impl.multicast.DataClientForQueue dcfq) {
+		@Override
+		public void dataClientForQueueIsGone(final com.linkare.rec.impl.multicast.DataClientForQueue dcfq) {
 			// BIG Silent noop...
 		}
 
-		public void log(Level debugLevel, String message) {
+		@Override
+		public void log(final Level debugLevel, final String message) {
 			ReCMultiCastController.this.log(debugLevel, message);
 		}
 
-		public void logThrowable(String message, Throwable t) {
-			LoggerUtil.logThrowable(message, t, Logger.getLogger(MCCONTROLLER_LOGGER));
+		@Override
+		public void logThrowable(final String message, final Throwable t) {
+			LoggerUtil.logThrowable(message, t, Logger.getLogger(ReCMultiCastController.MCCONTROLLER_LOGGER));
 		}
 
 	}

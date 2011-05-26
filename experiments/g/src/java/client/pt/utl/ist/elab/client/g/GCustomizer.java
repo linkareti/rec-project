@@ -6,6 +6,8 @@
 
 package pt.utl.ist.elab.client.g;
 
+import javax.swing.SwingConstants;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
@@ -17,6 +19,11 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * @author José Pedro Pereira - Linkare TI
  */
 public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1096972350154947471L;
 
 	/** Creates new form RadioactividadeCustomizer */
 	public GCustomizer() {
@@ -61,7 +68,8 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
 		btnOK.setText(ReCResourceBundle.findString("g$rec.exp.g.lbl.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
 			}
 		});
@@ -73,7 +81,8 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 
 		btnCancel.setText(ReCResourceBundle.findString("g$rec.exp.g.lbl.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
 			}
 		});
@@ -92,7 +101,8 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 
 		btnDefaults.setText(ReCResourceBundle.findString("g$rec.exp.g.lbl.dftcfg"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
 			}
 		});
@@ -127,7 +137,8 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		sldPos1.setMinimumSize(new java.awt.Dimension(250, 42));
 		sldPos1.setPreferredSize(new java.awt.Dimension(250, 42));
 		sldPos1.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sldPos1StateChanged(evt);
 			}
 		});
@@ -140,10 +151,11 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		jPanel5.add(sldPos1, gridBagConstraints);
 
 		tfPos1.setColumns(3);
-		tfPos1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		tfPos1.setHorizontalAlignment(SwingConstants.RIGHT);
 		tfPos1.setText("50");
 		tfPos1.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				tfPos1FocusLost(evt);
 			}
 		});
@@ -154,9 +166,7 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
-		jPanel1
-				.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-						.findString("g$rec.exp.g.lbl.tbs")));
+		jPanel1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findString("g$rec.exp.g.lbl.tbs")));
 		jPanel1.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel1.setPreferredSize(new java.awt.Dimension(350, 80));
 		sldFreq.setMajorTickSpacing(40);
@@ -169,7 +179,8 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		sldFreq.setMinimumSize(new java.awt.Dimension(255, 80));
 		sldFreq.setPreferredSize(new java.awt.Dimension(255, 80));
 		sldFreq.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sldFreqStateChanged(evt);
 			}
 		});
@@ -181,13 +192,14 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		jPanel1.add(sldFreq, gridBagConstraints);
 
 		tfFreq.setColumns(3);
-		tfFreq.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		tfFreq.setHorizontalAlignment(SwingConstants.RIGHT);
 		tfFreq.setText("50");
 		tfFreq.setMaximumSize(new java.awt.Dimension(30, 16));
 		tfFreq.setMinimumSize(new java.awt.Dimension(30, 16));
 		tfFreq.setPreferredSize(new java.awt.Dimension(37, 16));
 		tfFreq.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				tfFreqFocusLost(evt);
 			}
 		});
@@ -201,8 +213,7 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 
 		jPanel6.setLayout(new java.awt.GridBagLayout());
 
-		jPanel6.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("g$rec.exp.g.lbl.nsamples")));
+		jPanel6.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findString("g$rec.exp.g.lbl.nsamples")));
 		jPanel6.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
 		jPanel6.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel6.setPreferredSize(new java.awt.Dimension(350, 80));
@@ -216,7 +227,8 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		sldNumSamples.setMinimumSize(new java.awt.Dimension(250, 42));
 		sldNumSamples.setPreferredSize(new java.awt.Dimension(250, 42));
 		sldNumSamples.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				sldNumSamplesStateChanged(evt);
 			}
 		});
@@ -230,13 +242,14 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		jPanel6.add(sldNumSamples, gridBagConstraints);
 
 		tfNumSamples.setColumns(3);
-		tfNumSamples.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+		tfNumSamples.setHorizontalAlignment(SwingConstants.RIGHT);
 		tfNumSamples.setText("50");
 		tfNumSamples.setMaximumSize(new java.awt.Dimension(30, 16));
 		tfNumSamples.setMinimumSize(new java.awt.Dimension(30, 16));
 		tfNumSamples.setPreferredSize(new java.awt.Dimension(37, 16));
 		tfNumSamples.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusLost(java.awt.event.FocusEvent evt) {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
 				tfNumSamplesFocusLost(evt);
 			}
 		});
@@ -264,65 +277,71 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 
 	}// GEN-END:initComponents
 
-	private void tfNumSamplesFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfNumSamplesFocusLost
+	private void tfNumSamplesFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfNumSamplesFocusLost
 	{// GEN-HEADEREND:event_tfNumSamplesFocusLost
-		String strNumSamples = tfNumSamples.getText();
-		if (strNumSamples.trim().equals(""))
+		final String strNumSamples = tfNumSamples.getText();
+		if (strNumSamples.trim().equals("")) {
 			return;
+		}
 		try {
-			int numSamples = Integer.parseInt(strNumSamples);
-			if (numSamples <= sldNumSamples.getMaximum() && numSamples > sldNumSamples.getMinimum())
+			final int numSamples = Integer.parseInt(strNumSamples);
+			if (numSamples <= sldNumSamples.getMaximum() && numSamples > sldNumSamples.getMinimum()) {
 				sldNumSamples.setValue(numSamples);
-			else
+			} else {
 				tfNumSamples.setText("" + sldNumSamples.getValue());
-		} catch (Exception e) {
+			}
+		} catch (final Exception e) {
 			tfNumSamples.setText("" + sldNumSamples.getValue());
 		}
 		checkMaxNumSamples();
 
 	}// GEN-LAST:event_tfNumSamplesFocusLost
 
-	private void tfFreqFocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfFreqFocusLost
+	private void tfFreqFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfFreqFocusLost
 	{// GEN-HEADEREND:event_tfFreqFocusLost
-		String strFreq = tfFreq.getText();
-		if (strFreq.trim().equals(""))
+		final String strFreq = tfFreq.getText();
+		if (strFreq.trim().equals("")) {
 			return;
+		}
 		try {
-			int Freq = Integer.parseInt(strFreq);
-			if (Freq <= sldFreq.getMaximum() && Freq > sldFreq.getMinimum())
+			final int Freq = Integer.parseInt(strFreq);
+			if (Freq <= sldFreq.getMaximum() && Freq > sldFreq.getMinimum()) {
 				sldFreq.setValue(Freq);
-			else
+			} else {
 				tfFreq.setText("" + sldFreq.getValue());
-		} catch (Exception e) {
+			}
+		} catch (final Exception e) {
 			tfFreq.setText("" + sldFreq.getValue());
 		}
 		checkMaxNumSamples();
 	}// GEN-LAST:event_tfFreqFocusLost
 
-	private void tfPos1FocusLost(java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfPos1FocusLost
+	private void tfPos1FocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfPos1FocusLost
 	{// GEN-HEADEREND:event_tfPos1FocusLost
-		String strPos1 = tfPos1.getText();
+		final String strPos1 = tfPos1.getText();
 
-		if (strPos1.trim().equals(""))
+		if (strPos1.trim().equals("")) {
 			return;
+		}
 		try {
-			int Pos1 = Integer.parseInt(strPos1);
-			if (Pos1 <= sldPos1.getMaximum() && Pos1 > sldPos1.getMinimum())
+			final int Pos1 = Integer.parseInt(strPos1);
+			if (Pos1 <= sldPos1.getMaximum() && Pos1 > sldPos1.getMinimum()) {
 				sldPos1.setValue(Pos1);
-			else
+			} else {
 				tfPos1.setText("" + sldPos1.getValue());
+			}
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			tfPos1.setText("" + sldPos1.getValue());
 		}
 	}// GEN-LAST:event_tfPos1FocusLost
 
-	private void sldPos1StateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos1StateChanged
+	private void sldPos1StateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos1StateChanged
 	{// GEN-HEADEREND:event_sldPos1StateChanged
 		tfPos1.setText("" + sldPos1.getValue());
 	}// GEN-LAST:event_sldPos1StateChanged
 
-	private void sldFreqStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldFreqStateChanged
+	private void sldFreqStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldFreqStateChanged
 	{// GEN-HEADEREND:event_sldFreqStateChanged
 
 		tfFreq.setText("" + sldFreq.getValue());
@@ -330,7 +349,7 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		checkMaxNumSamples();
 	}// GEN-LAST:event_sldFreqStateChanged
 
-	private void sldNumSamplesStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldNumSamplesStateChanged
+	private void sldNumSamplesStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldNumSamplesStateChanged
 	{// GEN-HEADEREND:event_sldNumSamplesStateChanged
 
 		if (sldNumSamples.getValue() == 0) {
@@ -343,14 +362,13 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 	}// GEN-LAST:event_sldNumSamplesStateChanged
 
 	public void checkMaxNumSamples() {
-		float maxValue = Math.min(500.F, 500.F - ((float) sldFreq.getValue() - 1.F) * 480.F / 249.F);
+		final float maxValue = Math.min(500.F, 500.F - (sldFreq.getValue() - 1.F) * 480.F / 249.F);
 		lblErrorSamplesTooHigh.setEnabled(sldNumSamples.getValue() > maxValue);
 		btnOK.setEnabled(!lblErrorSamplesTooHigh.isEnabled());
-		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("g$rec.exp.g.lbl.maxsamples")
-				+ (int) maxValue);
+		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("g$rec.exp.g.lbl.maxsamples") + (int) maxValue);
 	}
 
-	private void btnDefaultsActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
+	private void btnDefaultsActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
 	{// GEN-HEADEREND:event_btnDefaultsActionPerformed
 		sldNumSamples.setValue(70);
 		tfNumSamples.setText("70");
@@ -360,18 +378,18 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		tfFreq.setText("" + 30);
 	}// GEN-LAST:event_btnDefaultsActionPerformed
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
+	private void btnCancelActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
 	{// GEN-HEADEREND:event_btnCancelActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_btnCancelActionPerformed
 
-	private void btnOKActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
+	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
 		acqConfig.setTotalSamples(sldNumSamples.getValue() == 0 ? 1 : sldNumSamples.getValue());
 		acqConfig.getSelectedHardwareParameter("power").setParameterValue("" + sldPos1.getValue());
-		acqConfig.setSelectedFrequency(new Frequency((double) sldFreq.getValue(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
+		acqConfig.setSelectedFrequency(new Frequency(sldFreq.getValue(), hardwareInfo.getHardwareFrequencies(0)
+				.getMinimumFrequency().getMultiplier(), hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency()
+				.getFrequencyDefType()));
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_btnOKActionPerformed
 
@@ -403,7 +421,8 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -415,7 +434,8 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -425,9 +445,10 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -441,9 +462,10 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -455,47 +477,54 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
 		return acqConfig;
 	}
 
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
 			sldNumSamples.setValue(acqConfig.getTotalSamples());
 			tfNumSamples.setText("" + acqConfig.getTotalSamples());
 
-			int freq = (int) acqConfig.getSelectedFrequency().getFrequency();
+			final int freq = (int) acqConfig.getSelectedFrequency().getFrequency();
 			sldFreq.setValue(freq);
 			tfFreq.setText("" + freq);
 
-			int power = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("power"));
+			final int power = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("power"));
 			sldPos1.setValue(power);
 			tfPos1.setText("" + power);
 
 		}
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
+	@Override
 	public javax.swing.JComponent getCustomizerComponent() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource("/pt/utl/ist/elab/client/g/resources/g_iconified.gif"));
 	}
 
+	@Override
 	public String getCustomizerTitle() {
 		return ReCResourceBundle.findString("g$rec.exp.g.customizer.title");
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}

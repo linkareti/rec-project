@@ -19,18 +19,16 @@ import com.linkare.rec.acquisition.MultiCastControllerPOATie;
 import com.linkare.rec.impl.multicast.ReCMultiCastController;
 import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.impl.utils.ORBBean;
-import com.linkare.rec.openorb.SoTimeoutDecorationStrategy;
-import com.linkare.rec.openorb.SoTimeoutDecorationStrategy.Factory;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
 public class MultiCastControllerMain {
-	
-	private static final boolean SHOW_GUI = Boolean.parseBoolean(Defaults.defaultIfEmpty(System
-			.getProperty("ReC.MultiCastController.ShowGUI"), "false"));
-	
+
+	private static final boolean SHOW_GUI = Boolean.parseBoolean(Defaults.defaultIfEmpty(
+			System.getProperty("ReC.MultiCastController.ShowGUI"), "false"));
+
 	/** Creates a new instance of MultiCastControllerMain */
 	public MultiCastControllerMain() {
 
@@ -39,30 +37,30 @@ public class MultiCastControllerMain {
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		ReCMultiCastController mcc = null;
 		try {
 			ORBBean.getORBBean();
 
 			mcc = new ReCMultiCastController();
-			MultiCastControllerPOATie mccpoatie = (MultiCastControllerPOATie) ORBBean.getORBBean()
+			final MultiCastControllerPOATie mccpoatie = (MultiCastControllerPOATie) ORBBean.getORBBean()
 					.registerRootPOAServant(MultiCastController.class, mcc,
 							ReCMultiCastController.MULTICAST_INIT_REF.getBytes());
-			String corbaURL = ORBBean.getORBBean().bindObjectToCorbalocService(
+			final String corbaURL = ORBBean.getORBBean().bindObjectToCorbalocService(
 					ReCMultiCastController.MULTICAST_BIND_NAME,
 					ORBBean.getORBBean().getRootPOA().servant_to_reference(mccpoatie));
 
 			System.out.println("MultiCastController listening for requests at URL " + corbaURL);
 
-			if (!GraphicsEnvironment.isHeadless() && SHOW_GUI) {
-				JFrame frameForKill = new JFrame();
-				JButton btnExit = new JButton("End MulticastController!");
+			if (!GraphicsEnvironment.isHeadless() && MultiCastControllerMain.SHOW_GUI) {
+				final JFrame frameForKill = new JFrame();
+				final JButton btnExit = new JButton("End MulticastController!");
 				btnExit.setBackground(Color.red);
 				btnExit.setForeground(Color.white);
 				btnExit.addActionListener(new ActionListener() {
 
 					@Override
-					public void actionPerformed(ActionEvent e) {
+					public void actionPerformed(final ActionEvent e) {
 						System.exit(-1);
 
 					}
@@ -74,7 +72,7 @@ public class MultiCastControllerMain {
 
 			Thread.currentThread().join();
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			System.out.println("Abnormal exit...");
 			ORBBean.getORBBean().killORB();
 			mcc.shutdown();

@@ -6,13 +6,17 @@ import com.linkare.rec.data.synch.Frequency;
 import com.linkare.rec.impl.data.FrequencyUtil;
 
 public final class FrequencySearch implements IDLEntity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2786058809078546424L;
 	private Frequency minFrequency = null;
 	private Frequency maxFrequency = null;
 
 	public FrequencySearch() {
 	}
 
-	public FrequencySearch(Frequency minFrequency, Frequency maxFrequency) {
+	public FrequencySearch(final Frequency minFrequency, final Frequency maxFrequency) {
 		setMinFrequency(minFrequency);
 		setMaxFrequency(maxFrequency);
 	}
@@ -33,7 +37,7 @@ public final class FrequencySearch implements IDLEntity {
 	 * @param minFrequency New value of property minFrequency.
 	 * 
 	 */
-	public void setMinFrequency(Frequency minFrequency) {
+	public void setMinFrequency(final Frequency minFrequency) {
 		this.minFrequency = minFrequency;
 	}
 
@@ -53,17 +57,19 @@ public final class FrequencySearch implements IDLEntity {
 	 * @param maxFrequency New value of property maxFrequency.
 	 * 
 	 */
-	public void setMaxFrequency(Frequency maxFrequency) {
+	public void setMaxFrequency(final Frequency maxFrequency) {
 		this.maxFrequency = maxFrequency;
 	}
 
-	public boolean isValid(Frequency f) {
+	public boolean isValid(final Frequency f) {
 		Frequency tempMinFrequency = getMinFrequency();
 		Frequency tempMaxFrequency = getMaxFrequency();
-		if (getMinFrequency() == null)
+		if (getMinFrequency() == null) {
 			tempMinFrequency = f;
-		if (getMaxFrequency() == null)
+		}
+		if (getMaxFrequency() == null) {
 			tempMaxFrequency = f;
+		}
 
 		return (FrequencyUtil.isLessThanOrEqual(f, tempMinFrequency) && FrequencyUtil.isMoreThanOrEqual(f,
 				tempMaxFrequency));

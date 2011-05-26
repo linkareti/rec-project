@@ -18,6 +18,11 @@ import javax.swing.Timer;
  */
 public class ProgressCicle extends JLabel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6785925675296083188L;
+
 	private static final Logger log = Logger.getLogger(ProgressCicle.class.getName());
 
 	public enum State {
@@ -38,28 +43,29 @@ public class ProgressCicle extends JLabel {
 		super();
 	}
 
-	public ProgressCicle(Icon idleIcon, final Icon[] busyIcons, int busyAnimationRate) {
+	public ProgressCicle(final Icon idleIcon, final Icon[] busyIcons, final int busyAnimationRate) {
 		super(idleIcon);
 		setIcon(idleIcon);
 		setBusyIcons(busyIcons);
-		this.currentState = State.IDLE;
+		currentState = State.IDLE;
 	}
 
-	private void initBusyIconTimer(int busyAnimationRate, final Icon[] busyIcons) {
+	private void initBusyIconTimer(final int busyAnimationRate, final Icon[] busyIcons) {
 		busyIconTimer = new Timer(busyAnimationRate, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			@Override
+			public void actionPerformed(final ActionEvent e) {
 				busyIconIndex = (busyIconIndex + 1) % busyIcons.length;
 				ProgressCicle.this.setIcon(busyIcons[busyIconIndex]);
 			}
 		});
 	}
 
-	public void setIdleIcon(Icon idleIcon) {
+	public void setIdleIcon(final Icon idleIcon) {
 		this.idleIcon = idleIcon;
 		setIcon(idleIcon);
 	}
 
-	public void setBusyIcons(Icon[] busyIcons) {
+	public void setBusyIcons(final Icon[] busyIcons) {
 		this.busyIcons = busyIcons;
 		initBusyIconTimer(30, busyIcons);
 	}
@@ -72,7 +78,7 @@ public class ProgressCicle extends JLabel {
 		return currentState == State.RUNNING;
 	}
 
-	public void setState(State newState) {
+	public void setState(final State newState) {
 		if (currentState != newState) {
 			if (State.RUNNING == newState) {
 				setIcon(busyIcons[0]);

@@ -14,6 +14,11 @@ import java.beans.Beans;
  */
 public class DateCustomizer extends javax.swing.JPanel implements java.beans.Customizer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1447854559890610103L;
+
 	/** Creates new customizer TimeCustomizer */
 	public DateCustomizer() {
 		initComponents();
@@ -74,10 +79,11 @@ public class DateCustomizer extends javax.swing.JPanel implements java.beans.Cus
 		add(dateShowLbl, gridBagConstraints);
 
 		daySelector.setMinimumSize(new java.awt.Dimension(50, 24));
-		daySelector.setModel(new javax.swing.SpinnerNumberModel((int) mybean.getDay(), 0, 32, 1));
+		daySelector.setModel(new javax.swing.SpinnerNumberModel(mybean.getDay(), 0, 32, 1));
 		daySelector.setPreferredSize(new java.awt.Dimension(40, 24));
 		daySelector.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				daySelectorStateChanged(evt);
 			}
 		});
@@ -91,7 +97,8 @@ public class DateCustomizer extends javax.swing.JPanel implements java.beans.Cus
 		monthSelector.setModel(new com.linkare.rec.data.synch.base.SpinnerMonthModel());
 		monthSelector.setPreferredSize(new java.awt.Dimension(100, 24));
 		monthSelector.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				monthSelectorStateChanged(evt);
 			}
 		});
@@ -102,10 +109,11 @@ public class DateCustomizer extends javax.swing.JPanel implements java.beans.Cus
 		gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
 		add(monthSelector, gridBagConstraints);
 
-		yearSelector.setModel(new javax.swing.SpinnerNumberModel((int) mybean.getYear(), 1900, 2200, 1));
+		yearSelector.setModel(new javax.swing.SpinnerNumberModel(mybean.getYear(), 1900, 2200, 1));
 		yearSelector.setPreferredSize(new java.awt.Dimension(70, 24));
 		yearSelector.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				yearSelectorStateChanged(evt);
 			}
 		});
@@ -118,31 +126,32 @@ public class DateCustomizer extends javax.swing.JPanel implements java.beans.Cus
 
 	}
 
-	private void yearSelectorStateChanged(javax.swing.event.ChangeEvent evt) {
+	private void yearSelectorStateChanged(final javax.swing.event.ChangeEvent evt) {
 		actualizeBean();
 	}
 
-	private void monthSelectorStateChanged(javax.swing.event.ChangeEvent evt) {
+	private void monthSelectorStateChanged(final javax.swing.event.ChangeEvent evt) {
 		actualizeBean();
 	}
 
-	private void daySelectorStateChanged(javax.swing.event.ChangeEvent evt) {
+	private void daySelectorStateChanged(final javax.swing.event.ChangeEvent evt) {
 		actualizeBean();
 	}
 
-	private void yearSelectorActionPerformed(java.awt.event.ActionEvent evt) {
+	private void yearSelectorActionPerformed(final java.awt.event.ActionEvent evt) {
 		actualizeBean();
 	}
 
-	private void daySelectorActionPerformed(java.awt.event.ActionEvent evt) {
+	private void daySelectorActionPerformed(final java.awt.event.ActionEvent evt) {
 		actualizeBean();
 	}
 
-	private void monthSelectorActionPerformed(java.awt.event.ActionEvent evt) {
+	private void monthSelectorActionPerformed(final java.awt.event.ActionEvent evt) {
 		actualizeBean();
 	}
 
-	public void setObject(Object obj) {
+	@Override
+	public void setObject(final Object obj) {
 
 		if (Beans.isInstanceOf(obj, Date.class)) {
 			mybean = (Date) Beans.getInstanceOf(obj, Date.class);
@@ -154,25 +163,26 @@ public class DateCustomizer extends javax.swing.JPanel implements java.beans.Cus
 
 	private void actualizeSelectors() {
 		actualizingSelectors = true;
-		daySelector.setValue(new Integer((int) mybean.getDay()));
+		daySelector.setValue(new Integer(mybean.getDay()));
 		monthSelector.setValue(com.linkare.rec.data.synch.base.MonthMap.getMonthNamefromNumber(mybean.getMonth()
 				+ java.util.Calendar.JANUARY - 1));
-		yearSelector.setValue(new Integer((int) mybean.getYear()));
+		yearSelector.setValue(new Integer(mybean.getYear()));
 		dateShowLbl.setText(mybean.toString());
 		actualizingSelectors = false;
 	}
 
 	private void actualizeBean() {
-		if (actualizingSelectors)
+		if (actualizingSelectors) {
 			return;
+		}
 
 		try {
-			int day = ((Integer) daySelector.getValue()).intValue();
-			int month = com.linkare.rec.data.synch.base.MonthMap.getMonthNumberfromName((String) monthSelector
+			final int day = ((Integer) daySelector.getValue()).intValue();
+			final int month = com.linkare.rec.data.synch.base.MonthMap.getMonthNumberfromName((String) monthSelector
 					.getValue());
-			int year = ((Integer) yearSelector.getValue()).intValue();
+			final int year = ((Integer) yearSelector.getValue()).intValue();
 
-			java.util.GregorianCalendar cl = new java.util.GregorianCalendar(year, month, day);
+			final java.util.GregorianCalendar cl = new java.util.GregorianCalendar(year, month, day);
 
 			mybean.setDay((byte) cl.get(java.util.Calendar.DATE));
 			mybean.setMonth((byte) (cl.get(java.util.Calendar.MONTH) - java.util.Calendar.JANUARY + 1));
@@ -186,7 +196,7 @@ public class DateCustomizer extends javax.swing.JPanel implements java.beans.Cus
 			actualizeSelectors();
 
 			dateShowLbl.setText(mybean.toString());
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}

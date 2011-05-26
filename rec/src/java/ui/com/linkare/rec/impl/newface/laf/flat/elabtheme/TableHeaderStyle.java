@@ -9,13 +9,15 @@ package com.linkare.rec.impl.newface.laf.flat.elabtheme;
 import java.awt.Color;
 import java.util.Map;
 
+import com.linkare.rec.impl.newface.laf.flat.theme.AbstractStyle;
+
 /**
  * 
  * @author João FLorindo
  */
 public class TableHeaderStyle extends DefaultStyle {
 
-	//ENABLED COLORS
+	// ENABLED COLORS
 	private static final Color COLOR_HEADER_BG = new Color(0xCED7D5);
 	private static final Color COLOR_HEADER_FG = new Color(0x41494D);
 
@@ -30,15 +32,15 @@ public class TableHeaderStyle extends DefaultStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return TableHeaderStyle.ID;
 	}
 
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(FOREGROUND, COLOR_HEADER_FG);
-		map.put(BACKGROUND, COLOR_HEADER_BG);
-		map.put("cellBorder", EMPTY_BORDER_MARGIN_4);
-		map.put(FONT, DEFAULT_FONT.deriveFont(java.awt.Font.BOLD));
+		map.put(AbstractStyle.FOREGROUND, TableHeaderStyle.COLOR_HEADER_FG);
+		map.put(AbstractStyle.BACKGROUND, TableHeaderStyle.COLOR_HEADER_BG);
+		map.put("cellBorder", DefaultStyle.EMPTY_BORDER_MARGIN_4);
+		map.put(AbstractStyle.FONT, DefaultStyle.DEFAULT_FONT.deriveFont(java.awt.Font.BOLD));
 	}
 }

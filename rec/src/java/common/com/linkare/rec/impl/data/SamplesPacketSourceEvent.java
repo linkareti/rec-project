@@ -14,20 +14,26 @@ import com.linkare.rec.impl.utils.IntersectableEvent;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class SamplesPacketSourceEvent extends java.util.EventObject implements IntersectableEvent,Prioritazible {
+public class SamplesPacketSourceEvent extends java.util.EventObject implements IntersectableEvent, Prioritazible {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3009716302549977110L;
 	private int packetLargestIndex;
 
 	/** Creates a new instance of SamplesSourceEvent */
-	public SamplesPacketSourceEvent(SamplesPacketSource source, int packetLargestIndex) {
+	public SamplesPacketSourceEvent(final SamplesPacketSource source, final int packetLargestIndex) {
 		super(source);
 		setPacketLargestIndex(packetLargestIndex);
 	}
 
-	public boolean intersectTo(IntersectableEvent other) {
-		if (other == null || !(other instanceof SamplesPacketSourceEvent))
+	@Override
+	public boolean intersectTo(final IntersectableEvent other) {
+		if (other == null || !(other instanceof SamplesPacketSourceEvent)) {
 			return false;
+		}
 
-		SamplesPacketSourceEvent evt = (SamplesPacketSourceEvent) other;
+		final SamplesPacketSourceEvent evt = (SamplesPacketSourceEvent) other;
 		setPacketLargestIndex(Math.max(getPacketLargestIndex(), evt.getPacketLargestIndex()));
 		return true;
 	}
@@ -48,7 +54,7 @@ public class SamplesPacketSourceEvent extends java.util.EventObject implements I
 	 * @param packetLargestIndex New value of property packetLargestIndex.
 	 * 
 	 */
-	private void setPacketLargestIndex(int packetLargestIndex) {
+	private void setPacketLargestIndex(final int packetLargestIndex) {
 		this.packetLargestIndex = packetLargestIndex;
 	}
 

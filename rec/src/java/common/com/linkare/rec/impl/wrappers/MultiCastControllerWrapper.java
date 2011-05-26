@@ -51,7 +51,7 @@ public class MultiCastControllerWrapper implements MultiCastControllerOperations
 	 *            that this will check the connection state on start, so
 	 *            delegate should be a valid reference as obtained from CORBA
 	 */
-	public MultiCastControllerWrapper(MultiCastController delegate) {
+	public MultiCastControllerWrapper(final MultiCastController delegate) {
 		// Save the delegate reference
 		this.delegate = delegate;
 		// Check that the delegate is up an' running
@@ -69,11 +69,12 @@ public class MultiCastControllerWrapper implements MultiCastControllerOperations
 		}
 		try {
 			// try to check if it the delegate is non_existent
-			if (delegate._non_existent())
+			if (delegate._non_existent()) {
 				connected = false;
-			else
+			} else {
 				connected = true;
-		} catch (Exception e) {
+			}
+		} catch (final Exception e) {
 			// Catch any possible exception in the remote call...
 			logThrowable("Couldn't determine remote existence of MultiCastController. Assuming disconnected...", e);
 			// assume it is not connected
@@ -103,9 +104,9 @@ public class MultiCastControllerWrapper implements MultiCastControllerOperations
 	 *         same server as the other wrapper
 	 * @see org.omg.CORBA.Object#_is_equivalent(org.omg.CORBA.Object)
 	 */
-	public boolean isSameDelegate(MultiCastControllerWrapper other) {
+	public boolean isSameDelegate(final MultiCastControllerWrapper other) {
 		// The _is_equivalent
-		return other.delegate._is_equivalent(this.delegate);
+		return other.delegate._is_equivalent(delegate);
 	}
 
 	/**
@@ -118,8 +119,8 @@ public class MultiCastControllerWrapper implements MultiCastControllerOperations
 	 *         same server as the other delegate
 	 * @see org.omg.CORBA.Object#_is_equivalent(org.omg.CORBA.Object)
 	 */
-	public boolean isSameDelegate(MultiCastController other) {
-		return other._is_equivalent(this.delegate);
+	public boolean isSameDelegate(final MultiCastController other) {
+		return other._is_equivalent(delegate);
 	}
 
 	/**
@@ -135,17 +136,18 @@ public class MultiCastControllerWrapper implements MultiCastControllerOperations
 	 * @see MultiCastControllerOperations#enumerateHardware(UserInfo)
 	 * 
 	 */
-	public MultiCastHardware[] enumerateHardware(UserInfo user) throws NotRegistered, NotAuthorized {
+	@Override
+	public MultiCastHardware[] enumerateHardware(final UserInfo user) throws NotRegistered, NotAuthorized {
 		if (delegate == null) {
-			Logger.getLogger(MCCONTROLLER_LOGGER).log(Level.WARNING,
+			Logger.getLogger(MultiCastControllerWrapper.MCCONTROLLER_LOGGER).log(Level.WARNING,
 					"MultiCastController has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.enumerateHardware(user);
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(MCCONTROLLER_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(MultiCastControllerWrapper.MCCONTROLLER_LOGGER));
 			checkConnect();
 		}
 
@@ -155,7 +157,8 @@ public class MultiCastControllerWrapper implements MultiCastControllerOperations
 	/**
 	 * @see MultiCastControllerOperations#getClientList(com.linkare.rec.acquisition.UserInfo)
 	 */
-	public UserInfo[] getClientList(UserInfo user) throws NotRegistered, NotAuthorized {
+	@Override
+	public UserInfo[] getClientList(final UserInfo user) throws NotRegistered, NotAuthorized {
 		if (delegate == null) {
 			log(Level.WARNING, "MultiCastController has not been set! Please set it first...");
 			return null;
@@ -163,7 +166,7 @@ public class MultiCastControllerWrapper implements MultiCastControllerOperations
 
 		try {
 			return delegate.getClientList(user);
-		} catch (SystemException e) {
+		} catch (final SystemException e) {
 			logThrowable(null, e);
 			checkConnect();
 		}
@@ -174,7 +177,8 @@ public class MultiCastControllerWrapper implements MultiCastControllerOperations
 	/**
 	 * @see MultiCastControllerOperations#registerDataClient(DataClient)
 	 */
-	public void registerDataClient(DataClient data_client) throws MaximumClientsReached, NotAuthorized {
+	@Override
+	public void registerDataClient(final DataClient data_client) throws MaximumClientsReached, NotAuthorized {
 		if (delegate == null) {
 			log(Level.WARNING, "MultiCastController has not been set! Please set it first...");
 			return;
@@ -182,7 +186,7 @@ public class MultiCastControllerWrapper implements MultiCastControllerOperations
 
 		try {
 			delegate.registerDataClient(data_client);
-		} catch (SystemException e) {
+		} catch (final SystemException e) {
 			logThrowable(null, e);
 			checkConnect();
 		}
@@ -191,7 +195,8 @@ public class MultiCastControllerWrapper implements MultiCastControllerOperations
 	/**
 	 * @see MultiCastControllerOperations#registerHardware(Hardware)
 	 */
-	public void registerHardware(Hardware hardware) {
+	@Override
+	public void registerHardware(final Hardware hardware) {
 		if (delegate == null) {
 			log(Level.WARNING, "MultiCastController has not been set! Please set it first...");
 			return;
@@ -199,7 +204,7 @@ public class MultiCastControllerWrapper implements MultiCastControllerOperations
 
 		try {
 			delegate.registerHardware(hardware);
-		} catch (SystemException e) {
+		} catch (final SystemException e) {
 			logThrowable(null, e);
 			checkConnect();
 		}
@@ -209,7 +214,9 @@ public class MultiCastControllerWrapper implements MultiCastControllerOperations
 	 * @see MultiCastControllerOperations#sendMessage(UserInfo, String, String)
 	 * 
 	 */
-	public void sendMessage(UserInfo user, String clientTo, String message) throws NotRegistered, NotAuthorized {
+	@Override
+	public void sendMessage(final UserInfo user, final String clientTo, final String message) throws NotRegistered,
+			NotAuthorized {
 		if (delegate == null) {
 			log(Level.WARNING, "MultiCastController has not been set! Please set it first...");
 			return;
@@ -217,7 +224,7 @@ public class MultiCastControllerWrapper implements MultiCastControllerOperations
 
 		try {
 			delegate.sendMessage(user, clientTo, message);
-		} catch (SystemException e) {
+		} catch (final SystemException e) {
 			logThrowable(null, e);
 			checkConnect();
 		}
@@ -226,14 +233,14 @@ public class MultiCastControllerWrapper implements MultiCastControllerOperations
 	/*
 	 * Internal method to log messages
 	 */
-	private void log(Level l, String message) {
-		Logger.getLogger(MCCONTROLLER_LOGGER).log(l, message);
+	private void log(final Level l, final String message) {
+		Logger.getLogger(MultiCastControllerWrapper.MCCONTROLLER_LOGGER).log(l, message);
 	}
 
 	/*
 	 * Internal method to log exceptions
 	 */
-	private void logThrowable(String message, Throwable t) {
-		Logger.getLogger(MCCONTROLLER_LOGGER).log(Level.ALL, message, t);
+	private void logThrowable(final String message, final Throwable t) {
+		Logger.getLogger(MultiCastControllerWrapper.MCCONTROLLER_LOGGER).log(Level.ALL, message, t);
 	}
 }

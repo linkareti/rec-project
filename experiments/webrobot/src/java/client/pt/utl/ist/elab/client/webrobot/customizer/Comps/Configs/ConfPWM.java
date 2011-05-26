@@ -12,9 +12,14 @@ package pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs;
  */
 public class ConfPWM extends javax.swing.JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4369597833470516609L;
+
 	/** Creates new form ConfCompBin */
-	public ConfPWM(java.awt.Frame parent, boolean modal,
-			pt.utl.ist.elab.client.webrobot.customizer.Models.ModelPWM model) {
+	public ConfPWM(final java.awt.Frame parent, final boolean modal,
+			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelPWM model) {
 		super(parent, modal);
 		this.model = model;
 		initComponents();
@@ -50,19 +55,22 @@ public class ConfPWM extends javax.swing.JDialog {
 
 		setTitle("Configura\u00e7\u00e3o do PWM");
 		addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyPressed(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyPressed(final java.awt.event.KeyEvent evt) {
 				formKeyPressed(evt);
 			}
 		});
 
 		addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mouseClicked(final java.awt.event.MouseEvent evt) {
 				formMouseClicked(evt);
 			}
 		});
 
 		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent evt) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent evt) {
 				closeDialog(evt);
 			}
 		});
@@ -83,7 +91,8 @@ public class ConfPWM extends javax.swing.JDialog {
 			jCheckBoxPWM1.setSelected(false);
 		}
 		jCheckBoxPWM1.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jCheckBoxPWM1StateChanged(evt);
 			}
 		});
@@ -99,7 +108,8 @@ public class ConfPWM extends javax.swing.JDialog {
 			jTextFieldPWM1.setEnabled(false);
 		}
 		jTextFieldPWM1.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jTextFieldPWM1KeyReleased(evt);
 			}
 		});
@@ -111,7 +121,7 @@ public class ConfPWM extends javax.swing.JDialog {
 		jSliderPWM1.setPaintLabels(true);
 		jSliderPWM1.setPaintTicks(true);
 		jSliderPWM1.setValue(model.getValor());
-		java.util.Hashtable labelTable = new java.util.Hashtable();
+		final java.util.Hashtable labelTable = new java.util.Hashtable();
 		labelTable.put(new Integer(0), new javax.swing.JLabel("Atr�s"));
 		labelTable.put(new Integer(128), new javax.swing.JLabel("Parado"));
 		labelTable.put(new Integer(255), new javax.swing.JLabel("Frente"));
@@ -123,7 +133,8 @@ public class ConfPWM extends javax.swing.JDialog {
 		}
 
 		jSliderPWM1.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderPWM1StateChanged(evt);
 			}
 		});
@@ -154,7 +165,8 @@ public class ConfPWM extends javax.swing.JDialog {
 			jCheckBoxPWM2.setSelected(false);
 		}
 		jCheckBoxPWM2.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jCheckBoxPWM2StateChanged(evt);
 			}
 		});
@@ -170,7 +182,8 @@ public class ConfPWM extends javax.swing.JDialog {
 			jTextFieldPWM2.setEnabled(false);
 		}
 		jTextFieldPWM2.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jTextFieldPWM2KeyReleased(evt);
 			}
 		});
@@ -190,7 +203,8 @@ public class ConfPWM extends javax.swing.JDialog {
 		}
 
 		jSliderPWM2.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSliderPWM2StateChanged(evt);
 			}
 		});
@@ -216,13 +230,15 @@ public class ConfPWM extends javax.swing.JDialog {
 		jButtonOk.setText("Ok");
 		jButtonOk.setPreferredSize(new java.awt.Dimension(73, 26));
 		jButtonOk.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyReleased(final java.awt.event.KeyEvent evt) {
 				jButtonOkKeyReleased(evt);
 			}
 		});
 
 		jButtonOk.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonOkMousePressed(evt);
 			}
 		});
@@ -232,7 +248,8 @@ public class ConfPWM extends javax.swing.JDialog {
 		jButtonCancel.setForeground(new java.awt.Color(51, 0, 102));
 		jButtonCancel.setText("Cancel");
 		jButtonCancel.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+			@Override
+			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonCancelMousePressed(evt);
 			}
 		});
@@ -244,7 +261,7 @@ public class ConfPWM extends javax.swing.JDialog {
 		pack();
 	}// GEN-END:initComponents
 
-	private void jButtonOkKeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jButtonOkKeyReleased
+	private void jButtonOkKeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jButtonOkKeyReleased
 		if (evt.getKeyCode() == 10) {
 			jButtonOkMousePressed(null);
 		} else if (evt.getKeyCode() == 27) {
@@ -252,7 +269,7 @@ public class ConfPWM extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_jButtonOkKeyReleased
 
-	private void formKeyPressed(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_formKeyPressed
+	private void formKeyPressed(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_formKeyPressed
 		if (evt.getKeyCode() == 10) {
 			jButtonOkMousePressed(null);
 		} else if (evt.getKeyCode() == 27) {
@@ -260,7 +277,7 @@ public class ConfPWM extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_formKeyPressed
 
-	private void jCheckBoxPWM1StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jCheckBoxPWM1StateChanged
+	private void jCheckBoxPWM1StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jCheckBoxPWM1StateChanged
 		if (jCheckBoxPWM1.isSelected()) {
 			jSliderPWM1.setEnabled(true);
 			jTextFieldPWM1.setEnabled(true);
@@ -270,7 +287,7 @@ public class ConfPWM extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_jCheckBoxPWM1StateChanged
 
-	private void jCheckBoxPWM2StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jCheckBoxPWM2StateChanged
+	private void jCheckBoxPWM2StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jCheckBoxPWM2StateChanged
 		if (jCheckBoxPWM2.isSelected()) {
 			jSliderPWM2.setEnabled(true);
 			jTextFieldPWM2.setEnabled(true);
@@ -280,7 +297,7 @@ public class ConfPWM extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_jCheckBoxPWM2StateChanged
 
-	private void jTextFieldPWM2KeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldPWM2KeyReleased
+	private void jTextFieldPWM2KeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldPWM2KeyReleased
 		try {
 			if (new Integer(jTextFieldPWM2.getText()).intValue() < 1) {
 				jTextFieldPWM2.setText("" + 1);
@@ -288,15 +305,15 @@ public class ConfPWM extends javax.swing.JDialog {
 				jTextFieldPWM2.setText("" + 255);
 			}
 			jSliderPWM2.setValue(new Integer(jTextFieldPWM2.getText()).intValue());
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 		}
 	}// GEN-LAST:event_jTextFieldPWM2KeyReleased
 
-	private void jSliderPWM2StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderPWM2StateChanged
+	private void jSliderPWM2StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderPWM2StateChanged
 		jTextFieldPWM2.setText("" + jSliderPWM2.getValue());
 	}// GEN-LAST:event_jSliderPWM2StateChanged
 
-	private void jTextFieldPWM1KeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldPWM1KeyReleased
+	private void jTextFieldPWM1KeyReleased(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextFieldPWM1KeyReleased
 		try {
 			if (new Integer(jTextFieldPWM1.getText()).intValue() < 1) {
 				jTextFieldPWM1.setText("" + 1);
@@ -304,24 +321,24 @@ public class ConfPWM extends javax.swing.JDialog {
 				jTextFieldPWM1.setText("" + 255);
 			}
 			jSliderPWM1.setValue(new Integer(jTextFieldPWM1.getText()).intValue());
-		} catch (NumberFormatException nfe) {
+		} catch (final NumberFormatException nfe) {
 		}
 	}// GEN-LAST:event_jTextFieldPWM1KeyReleased
 
-	private void jSliderPWM1StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderPWM1StateChanged
+	private void jSliderPWM1StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderPWM1StateChanged
 		jTextFieldPWM1.setText("" + jSliderPWM1.getValue());
 	}// GEN-LAST:event_jSliderPWM1StateChanged
 
-	private void formMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseClicked
+	private void formMouseClicked(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseClicked
 		this.requestFocus();
 	}// GEN-LAST:event_formMouseClicked
 
-	private void jButtonCancelMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonCancelMousePressed
+	private void jButtonCancelMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonCancelMousePressed
 		setCancel(true);
 		closeDialog(null);
 	}// GEN-LAST:event_jButtonCancelMousePressed
 
-	private void jButtonOkMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonOkMousePressed
+	private void jButtonOkMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonOkMousePressed
 		if (checkTextValues.isOK(jTextFieldPWM1) && checkTextValues.isOK(jTextFieldPWM2)) {
 			if (jCheckBoxPWM1.isSelected() && jCheckBoxPWM2.isSelected()) {
 				model.setValor(new Integer(jTextFieldPWM1.getText()).intValue());
@@ -345,7 +362,7 @@ public class ConfPWM extends javax.swing.JDialog {
 	}// GEN-LAST:event_jButtonOkMousePressed
 
 	/** Closes the dialog */
-	private void closeDialog(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
+	private void closeDialog(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
 		if (evt != null) {
 			setCancel(true);
 		}
@@ -396,7 +413,7 @@ public class ConfPWM extends javax.swing.JDialog {
 	 * @return Value of property cancel.
 	 */
 	public boolean isCancel() {
-		return this.cancel;
+		return cancel;
 	}
 
 	/**
@@ -404,7 +421,7 @@ public class ConfPWM extends javax.swing.JDialog {
 	 * 
 	 * @param cancel New value of property cancel.
 	 */
-	public void setCancel(boolean cancel) {
+	public void setCancel(final boolean cancel) {
 		this.cancel = cancel;
 	}
 
@@ -427,10 +444,10 @@ public class ConfPWM extends javax.swing.JDialog {
 	private javax.swing.JPanel jPanelTop;
 	// End of variables declaration//GEN-END:variables
 	// My variables
-	private pt.utl.ist.elab.client.webrobot.customizer.Models.ModelPWM model;
-	private pt.utl.ist.elab.client.webrobot.customizer.Utils.CheckTextValues checkTextValues = new pt.utl.ist.elab.client.webrobot.customizer.Utils.CheckTextValues(
+	private final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelPWM model;
+	private final pt.utl.ist.elab.client.webrobot.customizer.Utils.CheckTextValues checkTextValues = new pt.utl.ist.elab.client.webrobot.customizer.Utils.CheckTextValues(
 			this);
-	private java.text.DecimalFormat df = new java.text.DecimalFormat("##0.00");
+	private final java.text.DecimalFormat df = new java.text.DecimalFormat("##0.00");
 
 	/** Holds value of property cancel. */
 	private boolean cancel = false;

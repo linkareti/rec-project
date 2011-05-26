@@ -9,23 +9,24 @@ public class RepositoryManagerPOATie extends RepositoryManagerPOA {
 
 	// Constructors
 
-	public RepositoryManagerPOATie(RepositoryManagerOperations delegate) {
-		this._impl = delegate;
+	public RepositoryManagerPOATie(final RepositoryManagerOperations delegate) {
+		_impl = delegate;
 	}
 
-	public RepositoryManagerPOATie(RepositoryManagerOperations delegate, POA poa) {
-		this._impl = delegate;
-		this._poa = poa;
+	public RepositoryManagerPOATie(final RepositoryManagerOperations delegate, final POA poa) {
+		_impl = delegate;
+		_poa = poa;
 	}
 
 	public RepositoryManagerOperations _delegate() {
-		return this._impl;
+		return _impl;
 	}
 
-	public void _delegate(RepositoryManagerOperations delegate) {
-		this._impl = delegate;
+	public void _delegate(final RepositoryManagerOperations delegate) {
+		_impl = delegate;
 	}
 
+	@Override
 	public POA _default_POA() {
 		if (_poa != null) {
 			return _poa;
@@ -34,11 +35,14 @@ public class RepositoryManagerPOATie extends RepositoryManagerPOA {
 		}
 	}
 
-	public DataProducer getDataProducer(UserInfo user, String id) {
+	@Override
+	public DataProducer getDataProducer(final UserInfo user, final String id) {
 		return _impl.getDataProducer(user, id);
 	} // getDataProducer
 
-	public DataProducerConfig[] listDataProducers(UserInfo user, HardwareAcquisitionConfigSearch[] search_params) {
+	@Override
+	public DataProducerConfig[] listDataProducers(final UserInfo user,
+			final HardwareAcquisitionConfigSearch[] search_params) {
 		return _impl.listDataProducers(user, search_params);
 	} // listDataProducers
 

@@ -14,6 +14,11 @@ import javax.swing.tree.DefaultMutableTreeNode;
  */
 public class DefaultLabApparatusTreeModel extends javax.swing.tree.DefaultTreeModel implements
 		com.linkare.rec.impl.client.apparatus.ApparatusListSourceListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7299653052710611555L;
+
 	private static final DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("Laboratory", true);
 
 	/** Holds value of property apparatusListSource. */
@@ -21,7 +26,7 @@ public class DefaultLabApparatusTreeModel extends javax.swing.tree.DefaultTreeMo
 
 	/** Creates a new instance of DefaultLabApparatusTreeModel */
 	public DefaultLabApparatusTreeModel() {
-		super(rootNode);
+		super(DefaultLabApparatusTreeModel.rootNode);
 	}
 
 	/**
@@ -30,7 +35,7 @@ public class DefaultLabApparatusTreeModel extends javax.swing.tree.DefaultTreeMo
 	 * @return Value of property apparatusListSource.
 	 */
 	public ApparatusListSource getApparatusListSource() {
-		return this.apparatusListSource;
+		return apparatusListSource;
 	}
 
 	/**
@@ -38,7 +43,7 @@ public class DefaultLabApparatusTreeModel extends javax.swing.tree.DefaultTreeMo
 	 * 
 	 * @param apparatusListSource New value of property apparatusListSource.
 	 */
-	public void setApparatusListSource(ApparatusListSource apparatusListSource) {
+	public void setApparatusListSource(final ApparatusListSource apparatusListSource) {
 		if (this.apparatusListSource != null) {
 			this.apparatusListSource.removeApparatusListSourceListener(this);
 		}
@@ -48,24 +53,26 @@ public class DefaultLabApparatusTreeModel extends javax.swing.tree.DefaultTreeMo
 		}
 	}
 
-	public void apparatusListChanged(ApparatusListChangeEvent newApparatusListEvt) {
-		rootNode.removeAllChildren();
+	@Override
+	public void apparatusListChanged(final ApparatusListChangeEvent newApparatusListEvt) {
+		DefaultLabApparatusTreeModel.rootNode.removeAllChildren();
 
 		// this.reload();
 
-		if (newApparatusListEvt == null)
+		if (newApparatusListEvt == null) {
 			return;
+		}
 
-		Apparatus[] newApparatusList = newApparatusListEvt.getApparatus();
+		final Apparatus[] newApparatusList = newApparatusListEvt.getApparatus();
 
-		if (newApparatusList == null)
+		if (newApparatusList == null) {
 			return;
+		}
 
-		for (int i = 0; i < newApparatusList.length; i++) {
-			Apparatus apparatus = newApparatusList[i];
+		for (final Apparatus apparatus : newApparatusList) {
 			if (apparatus != null) {
-				DefaultMutableTreeNode node = new DefaultMutableTreeNode(apparatus, false);
-				rootNode.add(node);
+				final DefaultMutableTreeNode node = new DefaultMutableTreeNode(apparatus, false);
+				DefaultLabApparatusTreeModel.rootNode.add(node);
 			}
 		}
 

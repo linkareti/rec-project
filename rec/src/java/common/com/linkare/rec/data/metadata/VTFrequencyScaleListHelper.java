@@ -8,77 +8,83 @@ public final class VTFrequencyScaleListHelper implements org.omg.CORBA.portable.
 	public VTFrequencyScaleListHelper() {
 	}
 
-	public static void insert(org.omg.CORBA.Any a, com.linkare.rec.data.metadata.FrequencyScale[] that) {
-		org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
-		a.type(type());
-		write(out, that);
-		a.read_value(out.create_input_stream(), type());
+	public static void insert(final org.omg.CORBA.Any a, final com.linkare.rec.data.metadata.FrequencyScale[] that) {
+		final org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
+		a.type(VTFrequencyScaleListHelper.type());
+		VTFrequencyScaleListHelper.write(out, that);
+		a.read_value(out.create_input_stream(), VTFrequencyScaleListHelper.type());
 	}
 
-	public static com.linkare.rec.data.metadata.FrequencyScale[] extract(org.omg.CORBA.Any a) {
-		return read(a.create_input_stream());
+	public static com.linkare.rec.data.metadata.FrequencyScale[] extract(final org.omg.CORBA.Any a) {
+		return VTFrequencyScaleListHelper.read(a.create_input_stream());
 	}
 
 	private static org.omg.CORBA.TypeCode __typeCode = null;
 	private static boolean __active = false;
 
 	synchronized public static org.omg.CORBA.TypeCode type() {
-		if (__typeCode == null) {
+		if (VTFrequencyScaleListHelper.__typeCode == null) {
 			synchronized (org.omg.CORBA.TypeCode.class) {
-				if (__typeCode == null) {
-					if (__active) {
-						return org.omg.CORBA.ORB.init().create_recursive_tc(_id);
+				if (VTFrequencyScaleListHelper.__typeCode == null) {
+					if (VTFrequencyScaleListHelper.__active) {
+						return org.omg.CORBA.ORB.init().create_recursive_tc(VTFrequencyScaleListHelper._id);
 					}
-					__active = true;
-					__typeCode = com.linkare.rec.data.metadata.FrequencyScaleHelper.type();
-					__typeCode = org.omg.CORBA.ORB.init().create_sequence_tc(0, __typeCode);
-					__typeCode = org.omg.CORBA.ORB.init().create_alias_tc(
+					VTFrequencyScaleListHelper.__active = true;
+					VTFrequencyScaleListHelper.__typeCode = com.linkare.rec.data.metadata.FrequencyScaleHelper.type();
+					VTFrequencyScaleListHelper.__typeCode = org.omg.CORBA.ORB.init().create_sequence_tc(0,
+							VTFrequencyScaleListHelper.__typeCode);
+					VTFrequencyScaleListHelper.__typeCode = org.omg.CORBA.ORB.init().create_alias_tc(
 							com.linkare.rec.data.metadata.FrequencyScaleListHelper.id(), "FrequencyScaleList",
-							__typeCode);
-					__typeCode = org.omg.CORBA.ORB.init().create_value_box_tc(_id, "VTFrequencyScaleList", __typeCode);
-					__active = false;
+							VTFrequencyScaleListHelper.__typeCode);
+					VTFrequencyScaleListHelper.__typeCode = org.omg.CORBA.ORB.init().create_value_box_tc(
+							VTFrequencyScaleListHelper._id, "VTFrequencyScaleList",
+							VTFrequencyScaleListHelper.__typeCode);
+					VTFrequencyScaleListHelper.__active = false;
 				}
 			}
 		}
-		return __typeCode;
+		return VTFrequencyScaleListHelper.__typeCode;
 	}
 
 	public static String id() {
-		return _id;
+		return VTFrequencyScaleListHelper._id;
 	}
 
-	public static com.linkare.rec.data.metadata.FrequencyScale[] read(org.omg.CORBA.portable.InputStream istream) {
+	public static com.linkare.rec.data.metadata.FrequencyScale[] read(final org.omg.CORBA.portable.InputStream istream) {
 		if (!(istream instanceof org.omg.CORBA_2_3.portable.InputStream)) {
 			throw new org.omg.CORBA.BAD_PARAM();
 		}
 		return (com.linkare.rec.data.metadata.FrequencyScale[]) ((org.omg.CORBA_2_3.portable.InputStream) istream)
-				.read_value(_instance);
+				.read_value(VTFrequencyScaleListHelper._instance);
 	}
 
-	public java.io.Serializable read_value(org.omg.CORBA.portable.InputStream istream) {
+	@Override
+	public java.io.Serializable read_value(final org.omg.CORBA.portable.InputStream istream) {
 		com.linkare.rec.data.metadata.FrequencyScale[] tmp;
 		tmp = com.linkare.rec.data.metadata.FrequencyScaleListHelper.read(istream);
-		return (java.io.Serializable) tmp;
+		return tmp;
 	}
 
-	public static void write(org.omg.CORBA.portable.OutputStream ostream,
-			com.linkare.rec.data.metadata.FrequencyScale[] value) {
+	public static void write(final org.omg.CORBA.portable.OutputStream ostream,
+			final com.linkare.rec.data.metadata.FrequencyScale[] value) {
 		if (!(ostream instanceof org.omg.CORBA_2_3.portable.OutputStream)) {
 			throw new org.omg.CORBA.BAD_PARAM();
 		}
-		((org.omg.CORBA_2_3.portable.OutputStream) ostream).write_value(value, _instance);
+		((org.omg.CORBA_2_3.portable.OutputStream) ostream).write_value(value, VTFrequencyScaleListHelper._instance);
 	}
 
-	public void write_value(org.omg.CORBA.portable.OutputStream ostream, java.io.Serializable value) {
+	@Override
+	public void write_value(final org.omg.CORBA.portable.OutputStream ostream, final java.io.Serializable value) {
 		if (!(value instanceof com.linkare.rec.data.metadata.FrequencyScale[])) {
 			throw new org.omg.CORBA.MARSHAL();
 		}
-		com.linkare.rec.data.metadata.FrequencyScale[] valueType = (com.linkare.rec.data.metadata.FrequencyScale[]) value;
+		final com.linkare.rec.data.metadata.FrequencyScale[] valueType = (com.linkare.rec.data.metadata.FrequencyScale[]) value;
 		com.linkare.rec.data.metadata.FrequencyScaleListHelper.write(ostream, valueType);
 	}
 
+	@Override
 	public String get_id() {
-		return _id;
+		return VTFrequencyScaleListHelper._id;
 	}
 
 }

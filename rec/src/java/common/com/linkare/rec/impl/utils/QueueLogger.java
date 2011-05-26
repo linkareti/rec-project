@@ -13,9 +13,9 @@ import java.util.logging.Level;
  * @author npadriano
  */
 public interface QueueLogger {
-	
+
 	public void log(Level debugLevel, String message);
-	
+
 	public void logThrowable(String message, Throwable t);
 
 }

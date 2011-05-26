@@ -13,12 +13,12 @@ public class DateLabelBeanInfo extends SimpleBeanInfo {
 	private static BeanDescriptor beanDescriptor = new BeanDescriptor(DateLabel.class, null);
 
 	private static BeanDescriptor getBdescriptor() {
-		return beanDescriptor;
+		return DateLabelBeanInfo.beanDescriptor;
 	}
 
 	static {
-		beanDescriptor.setDisplayName("ELAB Date Label");
-		beanDescriptor.setShortDescription("Label para Dates");// GEN-HEADEREND:BeanDescriptor
+		DateLabelBeanInfo.beanDescriptor.setDisplayName("ELAB Date Label");
+		DateLabelBeanInfo.beanDescriptor.setShortDescription("Label para Dates");// GEN-HEADEREND:BeanDescriptor
 
 		// Here you can add code for customizing the BeanDescriptor.
 
@@ -32,18 +32,21 @@ public class DateLabelBeanInfo extends SimpleBeanInfo {
 	private static PropertyDescriptor[] properties = new PropertyDescriptor[2];
 
 	private static PropertyDescriptor[] getPdescriptor() {
-		return properties;
+		return DateLabelBeanInfo.properties;
 	}
 
 	static {
 		try {
-			properties[PROPERTY_date] = new PropertyDescriptor("date", DateLabel.class, "getDate", "setDate");
-			properties[PROPERTY_date].setPreferred(true);
-			properties[PROPERTY_date].setDisplayName("Data");
-			properties[PROPERTY_date].setPropertyEditorClass(com.linkare.rec.data.synch.DateEditor.class);
-			properties[PROPERTY_text] = new PropertyDescriptor("text", DateLabel.class, "getText", null);
-			properties[PROPERTY_text].setHidden(true);
-		} catch (IntrospectionException e) {
+			DateLabelBeanInfo.properties[DateLabelBeanInfo.PROPERTY_date] = new PropertyDescriptor("date",
+					DateLabel.class, "getDate", "setDate");
+			DateLabelBeanInfo.properties[DateLabelBeanInfo.PROPERTY_date].setPreferred(true);
+			DateLabelBeanInfo.properties[DateLabelBeanInfo.PROPERTY_date].setDisplayName("Data");
+			DateLabelBeanInfo.properties[DateLabelBeanInfo.PROPERTY_date]
+					.setPropertyEditorClass(com.linkare.rec.data.synch.DateEditor.class);
+			DateLabelBeanInfo.properties[DateLabelBeanInfo.PROPERTY_text] = new PropertyDescriptor("text",
+					DateLabel.class, "getText", null);
+			DateLabelBeanInfo.properties[DateLabelBeanInfo.PROPERTY_text].setHidden(true);
+		} catch (final IntrospectionException e) {
 		}// GEN-HEADEREND:Properties
 
 		// Here you can add code for customizing the properties array.
@@ -56,7 +59,7 @@ public class DateLabelBeanInfo extends SimpleBeanInfo {
 	private static EventSetDescriptor[] eventSets = new EventSetDescriptor[0];
 
 	private static EventSetDescriptor[] getEdescriptor() {
-		return eventSets;
+		return DateLabelBeanInfo.eventSets;
 	}
 
 	// GEN-HEADEREND:Events
@@ -71,7 +74,7 @@ public class DateLabelBeanInfo extends SimpleBeanInfo {
 	private static MethodDescriptor[] methods = new MethodDescriptor[0];
 
 	private static MethodDescriptor[] getMdescriptor() {
-		return methods;
+		return DateLabelBeanInfo.methods;
 	}
 
 	// GEN-HEADEREND:Methods
@@ -105,8 +108,9 @@ public class DateLabelBeanInfo extends SimpleBeanInfo {
 	 *         May return null if the information should be obtained by
 	 *         automatic analysis.
 	 */
+	@Override
 	public BeanDescriptor getBeanDescriptor() {
-		return getBdescriptor();
+		return DateLabelBeanInfo.getBdescriptor();
 	}
 
 	/**
@@ -122,8 +126,9 @@ public class DateLabelBeanInfo extends SimpleBeanInfo {
 	 *         "instanceof" to check if a given PropertyDescriptor is an
 	 *         IndexedPropertyDescriptor.
 	 */
+	@Override
 	public PropertyDescriptor[] getPropertyDescriptors() {
-		return getPdescriptor();
+		return DateLabelBeanInfo.getPdescriptor();
 	}
 
 	/**
@@ -133,8 +138,9 @@ public class DateLabelBeanInfo extends SimpleBeanInfo {
 	 *         fired by this bean. May return null if the information should be
 	 *         obtained by automatic analysis.
 	 */
+	@Override
 	public EventSetDescriptor[] getEventSetDescriptors() {
-		return getEdescriptor();
+		return DateLabelBeanInfo.getEdescriptor();
 	}
 
 	/**
@@ -144,8 +150,9 @@ public class DateLabelBeanInfo extends SimpleBeanInfo {
 	 *         by this bean. May return null if the information should be
 	 *         obtained by automatic analysis.
 	 */
+	@Override
 	public MethodDescriptor[] getMethodDescriptors() {
-		return getMdescriptor();
+		return DateLabelBeanInfo.getMdescriptor();
 	}
 
 	/**
@@ -158,8 +165,9 @@ public class DateLabelBeanInfo extends SimpleBeanInfo {
 	 *         <P>
 	 *         Returns -1 if there is no default property.
 	 */
+	@Override
 	public int getDefaultPropertyIndex() {
-		return defaultPropertyIndex;
+		return DateLabelBeanInfo.defaultPropertyIndex;
 	}
 
 	/**
@@ -171,8 +179,9 @@ public class DateLabelBeanInfo extends SimpleBeanInfo {
 	 *         <P>
 	 *         Returns -1 if there is no default event.
 	 */
+	@Override
 	public int getDefaultEventIndex() {
-		return defaultEventIndex;
+		return DateLabelBeanInfo.defaultEventIndex;
 	}
 
 	/**
@@ -196,39 +205,44 @@ public class DateLabelBeanInfo extends SimpleBeanInfo {
 	 * @return An image object representing the requested icon. May return null
 	 *         if no suitable icon is available.
 	 */
-	public java.awt.Image getIcon(int iconKind) {
+	@Override
+	public java.awt.Image getIcon(final int iconKind) {
 		switch (iconKind) {
 		case ICON_COLOR_16x16:
-			if (iconNameC16 == null)
+			if (DateLabelBeanInfo.iconNameC16 == null) {
 				return null;
-			else {
-				if (iconColor16 == null)
-					iconColor16 = loadImage(iconNameC16);
-				return iconColor16;
+			} else {
+				if (DateLabelBeanInfo.iconColor16 == null) {
+					DateLabelBeanInfo.iconColor16 = loadImage(DateLabelBeanInfo.iconNameC16);
+				}
+				return DateLabelBeanInfo.iconColor16;
 			}
 		case ICON_COLOR_32x32:
-			if (iconNameC32 == null)
+			if (DateLabelBeanInfo.iconNameC32 == null) {
 				return null;
-			else {
-				if (iconColor32 == null)
-					iconColor32 = loadImage(iconNameC32);
-				return iconColor32;
+			} else {
+				if (DateLabelBeanInfo.iconColor32 == null) {
+					DateLabelBeanInfo.iconColor32 = loadImage(DateLabelBeanInfo.iconNameC32);
+				}
+				return DateLabelBeanInfo.iconColor32;
 			}
 		case ICON_MONO_16x16:
-			if (iconNameM16 == null)
+			if (DateLabelBeanInfo.iconNameM16 == null) {
 				return null;
-			else {
-				if (iconMono16 == null)
-					iconMono16 = loadImage(iconNameM16);
-				return iconMono16;
+			} else {
+				if (DateLabelBeanInfo.iconMono16 == null) {
+					DateLabelBeanInfo.iconMono16 = loadImage(DateLabelBeanInfo.iconNameM16);
+				}
+				return DateLabelBeanInfo.iconMono16;
 			}
 		case ICON_MONO_32x32:
-			if (iconNameM32 == null)
+			if (DateLabelBeanInfo.iconNameM32 == null) {
 				return null;
-			else {
-				if (iconMono32 == null)
-					iconMono32 = loadImage(iconNameM32);
-				return iconMono32;
+			} else {
+				if (DateLabelBeanInfo.iconMono32 == null) {
+					DateLabelBeanInfo.iconMono32 = loadImage(DateLabelBeanInfo.iconNameM32);
+				}
+				return DateLabelBeanInfo.iconMono32;
 			}
 		default:
 			return null;

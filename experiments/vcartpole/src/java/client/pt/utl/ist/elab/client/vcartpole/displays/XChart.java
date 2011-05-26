@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.vcartpole.displays;
  */
 public class XChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 372965724684815857L;
+
 	/** Creates a new instance of XChart */
 	public XChart() {
 		super();

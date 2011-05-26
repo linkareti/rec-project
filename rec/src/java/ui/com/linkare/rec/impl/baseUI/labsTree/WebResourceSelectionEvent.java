@@ -17,21 +17,25 @@ import com.linkare.rec.impl.baseUI.config.WebResource;
 
 public class WebResourceSelectionEvent extends ApparatusSelectionEvent {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2946313989803255566L;
 	/** Holds value of property WebResource. */
-	private WebResource wr;
+	private final WebResource wr;
 
 	/** Creates a new instance of WebResourceSelectionEvent */
-	public WebResourceSelectionEvent(Object source, WebResource wr) {
+	public WebResourceSelectionEvent(final Object source, final WebResource wr) {
 		this(source, wr, null, null);
 	}
 
 	/** Creates a new instance of WebResourceSelectionEvent */
-	public WebResourceSelectionEvent(Object source, WebResource wr, Apparatus app) {
+	public WebResourceSelectionEvent(final Object source, final WebResource wr, final Apparatus app) {
 		this(source, wr, app, null);
 	}
 
 	/** Creates a new instance of WebResourceSelectionEvent */
-	public WebResourceSelectionEvent(Object source, WebResource wr, Apparatus app, Lab lab) {
+	public WebResourceSelectionEvent(final Object source, final WebResource wr, final Apparatus app, final Lab lab) {
 		super(source, app, lab);
 		this.wr = wr;
 	}
@@ -42,6 +46,6 @@ public class WebResourceSelectionEvent extends ApparatusSelectionEvent {
 	 * @return Value of property WebResource.
 	 */
 	public WebResource getWebResource() {
-		return this.wr;
+		return wr;
 	}
 }

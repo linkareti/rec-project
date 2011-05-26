@@ -22,30 +22,32 @@ import com.linkare.rec.impl.data.PhysicsValFactory;
  */
 public class M3DataProducer extends VirtualBaseDataSource implements ODE {
 
-	private int NUM_CHANNELS = 5;
-	private double a = 10; // lado da caixa
-	private double l1 = 5, l2 = Math.sqrt(50), l3 = Math.sqrt(50); // comprimento
+	private final int NUM_CHANNELS = 5;
+	private final double a = 10; // lado da caixa
+	private final double l1 = 5, l2 = Math.sqrt(50), l3 = Math.sqrt(50); // comprimento
 	// natural
 	// das molas
-	private double[] state = new double[5];
-	private double k1;
-	private double k2;
-	private double k3;
-	private double massa;
-	private double x0;
-	private double y0;
-	private int tbs;
-	private int nSamples;
+	private final double[] state = new double[5];
+	private final double k1;
+	private final double k2;
+	private final double k3;
+	private final double massa;
+	private final double x0;
+	private final double y0;
+	private final int tbs;
+	private final int nSamples;
 
 	private boolean stopped = false;
 	private VirtualBaseDriver driver = null;
 	private ODESolver odeSolver = null;
 
+	@Override
 	public double[] getState() {
 		return state;
 	}
 
-	public void getRate(double[] state, double[] rate) {
+	@Override
+	public void getRate(final double[] state, final double[] rate) {
 		rate[0] = state[1];
 		rate[1] = (k1 * (a / 2 - state[0])
 				* (-l1 * Math.pow((Math.pow((a - state[2]), 2) + Math.pow((a / 2 - state[0]), 2)), -0.5) + 1.0) + k2
@@ -63,8 +65,8 @@ public class M3DataProducer extends VirtualBaseDataSource implements ODE {
 	}
 
 	// Aproveitamos para inicializar todas as vari�veis logo no construtor...
-	public M3DataProducer(VirtualBaseDriver driver, float massa, float k1, float k2, float k3, float x0, float y0,
-			int tbs, int nSamples) {
+	public M3DataProducer(final VirtualBaseDriver driver, final float massa, final float k1, final float k2,
+			final float k3, final float x0, final float y0, final int tbs, final int nSamples) {
 		this.driver = driver;
 		this.massa = massa;
 		this.k1 = k1;
@@ -91,9 +93,10 @@ public class M3DataProducer extends VirtualBaseDataSource implements ODE {
 		private int currentSample = 0;
 		private float time = 0;
 
+		@Override
 		public void run() {
 			try {
-				sleep(1000);
+				Thread.sleep(1000);
 
 				// Enquanto a amostra actual for menor do que o numero de
 				// amostras pedido pelo cliente E ningu�m tiver parado a
@@ -101,7 +104,7 @@ public class M3DataProducer extends VirtualBaseDataSource implements ODE {
 				while (currentSample < nSamples && !stopped) {
 					// envia as amostra calculadas!
 					// 1- cria um array com o numero de canais existentes!
-					PhysicsValue[] value = new PhysicsValue[NUM_CHANNELS];
+					final PhysicsValue[] value = new PhysicsValue[NUM_CHANNELS];
 
 					// envia no canal CORRESPONDENTE!!! o valor
 					// envie-se o tempo
@@ -134,7 +137,7 @@ public class M3DataProducer extends VirtualBaseDataSource implements ODE {
 					odeSolver.step();
 
 					// dorme o tbs que o utilizador pediu...
-					sleep(tbs);
+					Thread.sleep(tbs);
 
 					currentSample++;
 				}
@@ -144,12 +147,13 @@ public class M3DataProducer extends VirtualBaseDataSource implements ODE {
 
 				driver.stopVirtualHardware();
 
-			} catch (InterruptedException ie) {
+			} catch (final InterruptedException ie) {
 			}
 
 		}
 	}
 
+	@Override
 	public void startProduction() {
 		stopped = false;
 		new ProducerThread().start();
@@ -160,10 +164,11 @@ public class M3DataProducer extends VirtualBaseDataSource implements ODE {
 		setDataSourceEnded();
 	}
 
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 
 	}
 
+	@Override
 	public void stopNow() {
 		stopped = true;
 		setDataSourceStoped();

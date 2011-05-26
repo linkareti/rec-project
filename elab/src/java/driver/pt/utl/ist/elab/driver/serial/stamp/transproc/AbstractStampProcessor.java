@@ -14,15 +14,17 @@ public abstract class AbstractStampProcessor implements StampProcessor {
 	private String commandIdentifier = null;
 
 	/** Creates a new instance of AbstractSerialPortProcessor */
-	public AbstractStampProcessor(String commandIdentifier) {
+	public AbstractStampProcessor(final String commandIdentifier) {
 		this.commandIdentifier = commandIdentifier;
 		StampTranslatorProcessorManager.registerProcessor(this);
 	}
 
+	@Override
 	public String getCommandIdentifier() {
 		return commandIdentifier;
 	}
 
+	@Override
 	public boolean isData() {
 		return false;
 	}

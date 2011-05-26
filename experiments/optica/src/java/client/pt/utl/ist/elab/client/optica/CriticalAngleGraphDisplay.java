@@ -16,7 +16,7 @@ public class CriticalAngleGraphDisplay extends MultSeriesXYExperimentGraph {
 
 	/** Generated UID */
 	private static final long serialVersionUID = -38458033188305378L;
-	
+
 	/**
 	 * Creates the <code>CriticalAngleGraphDisplay</code>.
 	 */

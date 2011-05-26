@@ -76,15 +76,17 @@ public class ParametersNode {
 		if (parameter == null) {
 			parameter = new ArrayList<OneParameterNode>();
 		}
-		return this.parameter;
+		return parameter;
 	}
 
-	public OneParameterNode getParameterToOrder(int order) {
-		if (parameter == null)
+	public OneParameterNode getParameterToOrder(final int order) {
+		if (parameter == null) {
 			return new OneParameterNode();
-		for (OneParameterNode oneParameterNode : parameter) {
-			if (oneParameterNode.getOrder().intValue() == order)
+		}
+		for (final OneParameterNode oneParameterNode : parameter) {
+			if (oneParameterNode.getOrder().intValue() == order) {
 				return oneParameterNode;
+			}
 		}
 		return new OneParameterNode();
 	}

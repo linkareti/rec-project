@@ -9,34 +9,36 @@ import javax.swing.border.Border;
 import javax.swing.plaf.FontUIResource;
 
 import com.linkare.rec.impl.newface.laf.flat.FlatComboBoxUI;
+import com.linkare.rec.impl.newface.laf.flat.theme.AbstractStyle;
 
 public class ComboBoxStyle extends DefaultStyle {
 
 	public static final String ID = "ComboBox";
 
-	//LABEL FONT
+	// LABEL FONT
 	public static final Font FONT_COMBOBOX = new FontUIResource("Arial", Font.BOLD, 12);
 
-	//PROPERTIES
+	// PROPERTIES
 	private static final String PT_COMBOBOX_BG = "background";
 	private static final String PT_COMBOBOX_FG = "foreground";
 	private static final String PT_SELECTIONBACKGROUND = "selectionBackground";
 	private static final String PT_SELECTIONFOREGROUND = "selectionForeground";
 
-	//COLORS	
+	// COLORS
 	private static final Color COLOR_BORDER_SOLID_THIN_BLUE = new Color(0x8CABB3);
-	private static final Color COLOR_COMBOBOX_FG = BLACK_DEFAULT_COLOR;
-	private static final Color COLOR_COMBOBOX_BG = WHITE_DEFAULT_COLOR;
+	private static final Color COLOR_COMBOBOX_FG = DefaultStyle.BLACK_DEFAULT_COLOR;
+	private static final Color COLOR_COMBOBOX_BG = DefaultStyle.WHITE_DEFAULT_COLOR;
 	private static final Color COLOR_COMBOBOX_FONT = new Color(0x64797F);
 	private static final Color COLOR_SELECTION_BG = new Color(0xFCEFCD);
-	private static final Color COLOR_SELECTION_FG = BLACK_DEFAULT_COLOR;
-	private static final Color COLOR_ARROW_ENABLED = WHITE_DEFAULT_COLOR;
-	private static final Color COLOR_ARROW_DISABLED = WHITE_DEFAULT_COLOR;
+	private static final Color COLOR_SELECTION_FG = DefaultStyle.BLACK_DEFAULT_COLOR;
+	private static final Color COLOR_ARROW_ENABLED = DefaultStyle.WHITE_DEFAULT_COLOR;
+	private static final Color COLOR_ARROW_DISABLED = DefaultStyle.WHITE_DEFAULT_COLOR;
 
-	//BORDER
-	private static final Border BORDER_COMBOBOX = BorderFactory.createLineBorder(COLOR_BORDER_SOLID_THIN_BLUE);
+	// BORDER
+	private static final Border BORDER_COMBOBOX = BorderFactory
+			.createLineBorder(ComboBoxStyle.COLOR_BORDER_SOLID_THIN_BLUE);
 
-	//COMBOBOXUI
+	// COMBOBOXUI
 	private static final FlatComboBoxUI flatComboBoxUI = null;
 
 	/**
@@ -48,18 +50,18 @@ public class ComboBoxStyle extends DefaultStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return ComboBoxStyle.ID;
 	}
 
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(BORDER, BORDER_COMBOBOX);
-		map.put(PT_COMBOBOX_FG, COLOR_COMBOBOX_FG);
-		map.put(PT_COMBOBOX_BG, COLOR_COMBOBOX_BG);
-		map.put(PT_SELECTIONBACKGROUND, COLOR_SELECTION_BG);
-		map.put(PT_SELECTIONFOREGROUND, COLOR_SELECTION_FG);
+		map.put(AbstractStyle.BORDER, ComboBoxStyle.BORDER_COMBOBOX);
+		map.put(ComboBoxStyle.PT_COMBOBOX_FG, ComboBoxStyle.COLOR_COMBOBOX_FG);
+		map.put(ComboBoxStyle.PT_COMBOBOX_BG, ComboBoxStyle.COLOR_COMBOBOX_BG);
+		map.put(ComboBoxStyle.PT_SELECTIONBACKGROUND, ComboBoxStyle.COLOR_SELECTION_BG);
+		map.put(ComboBoxStyle.PT_SELECTIONFOREGROUND, ComboBoxStyle.COLOR_SELECTION_FG);
 
-		map.put(FONT, FONT_COMBOBOX);
+		map.put(AbstractStyle.FONT, ComboBoxStyle.FONT_COMBOBOX);
 	}
 }

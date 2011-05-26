@@ -52,13 +52,15 @@ public class ElabTheme extends FlatTheme {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void addCustomEntriesToTable(UIDefaults table) {
+	public void addCustomEntriesToTable(final UIDefaults table) {
 		super.addCustomEntriesToTable(table);
 
 		// Add custom theme entries to ui defaults
-		Object[] defaults = new Object[] { GRADIENT_DARKCOLOR, GRADIENT_DARKCOLOR_VALUE, GRADIENT_LIGHTCOLOR, GRADIENT_LIGHTCOLOR_VALUE,
-				ENABLED_FOREGROUND_ON_DARK, ENABLED_FOREGROUND_ON_DARK_VALUE, DISABLED_FOREGROUND_ON_DARK,
-				DISABLED_FOREGROUND_ON_DARK_VALUE, SELECTION_FOREGROUND_ON_DARK, SELECTION_FOREGROUND_ON_DARK_VALUE, };
+		final Object[] defaults = new Object[] { ElabTheme.GRADIENT_DARKCOLOR, ElabTheme.GRADIENT_DARKCOLOR_VALUE,
+				ElabTheme.GRADIENT_LIGHTCOLOR, ElabTheme.GRADIENT_LIGHTCOLOR_VALUE,
+				ElabTheme.ENABLED_FOREGROUND_ON_DARK, ElabTheme.ENABLED_FOREGROUND_ON_DARK_VALUE,
+				ElabTheme.DISABLED_FOREGROUND_ON_DARK, ElabTheme.DISABLED_FOREGROUND_ON_DARK_VALUE,
+				ElabTheme.SELECTION_FOREGROUND_ON_DARK, ElabTheme.SELECTION_FOREGROUND_ON_DARK_VALUE, };
 		table.putDefaults(defaults);
 	}
 
@@ -67,7 +69,7 @@ public class ElabTheme extends FlatTheme {
 	 */
 	@Override
 	protected Set<Class<? extends AbstractStyle>> registerStyles() {
-		Set<Class<? extends AbstractStyle>> result = new HashSet<Class<? extends AbstractStyle>>();
+		final Set<Class<? extends AbstractStyle>> result = new HashSet<Class<? extends AbstractStyle>>();
 
 		result.add(DefaultStyle.class);
 		result.add(MenuBarStyle.class);

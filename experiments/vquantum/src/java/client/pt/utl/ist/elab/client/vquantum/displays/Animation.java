@@ -11,11 +11,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
-//FIXME - client should never depend on driver part
-//import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
-//import pt.utl.ist.elab.driver.virtual.utils.Complex;
-//import pt.utl.ist.elab.driver.vquantum.QuantumDataProducer;
 import pt.utl.ist.elab.client.vquantum.ComplexGaussian;
 import pt.utl.ist.elab.client.vquantum.Quantum;
 
@@ -30,6 +27,11 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  * @author nomead
  */
 public class Animation extends Quantum implements ExpDataDisplay, ExpDataModelListener {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5018781901552435877L;
 
 	/** Creates a new instance of Animation */
 	public Animation() {
@@ -47,152 +49,168 @@ public class Animation extends Quantum implements ExpDataDisplay, ExpDataModelLi
 		setPreferredMinMax(-60, 40, -1, 1);
 		repaint();
 
-		//FIXME - client should never depend on driver part
-//		QuantumDataProducer q = new QuantumDataProducer(null, 100, -10, 100, 11, 2, 1e-5, 5e-20, 5e-18, 200, false,
-//				true, true);
+		// FIXME - client should never depend on driver part
+		// QuantumDataProducer q = new QuantumDataProducer(null, 100, -10, 100,
+		// 11, 2, 1e-5, 5e-20, 5e-18, 200, false,
+		// true, true);
 		// q.configPotentials("0.0:5.0:f(x) = 100:false#6.0:1.0:f(x) = 50:false#");
-//		q
-//				.configPotentials("0.0:4.0:f(x) = -cos(x)*5:false#5.0:5.0:f(x) = sin(x)*5:false#10.5:2.0:f(x) = exp(-x*25)+3:false#-3.0:2.0:f(x) = 255:false#-5.0:1.5:f(x) = 90+x^3+4*x^2+5+cos(3*x):false");
-//		q.start(this);
+		// q
+		// .configPotentials("0.0:4.0:f(x) = -cos(x)*5:false#5.0:5.0:f(x) = sin(x)*5:false#10.5:2.0:f(x) = exp(-x*25)+3:false#-3.0:2.0:f(x) = 255:false#-5.0:1.5:f(x) = 90+x^3+4*x^2+5+cos(3*x):false");
+		// q.start(this);
 	}
 
-	public void moves(byte[] mv) {
-		//FIXME - client should never depend on driver part
-//		setPsi((Complex[]) ByteUtil.byteArrayToObject(mv));
+	public void moves(final byte[] mv) {
+		// FIXME - client should never depend on driver part
+		// setPsi((Complex[]) ByteUtil.byteArrayToObject(mv));
 		repaint();
 	}
 
-	public static void main(String args[]) {
-		javax.swing.JFrame test = new javax.swing.JFrame();
+	public static void main(final String args[]) {
+		final javax.swing.JFrame test = new javax.swing.JFrame();
 		test.addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent e) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent e) {
 				System.exit(0);
 			};
 		});
-		Animation stdim = new Animation();
+		final Animation stdim = new Animation();
 		test.getContentPane().add(stdim);
 		test.pack();
 		test.setVisible(true);
 		stdim.start();
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
-		HardwareAcquisitionConfig header = model.getAcquisitionConfig();
+		final HardwareAcquisitionConfig header = model.getAcquisitionConfig();
 
-		double x0 = Double.parseDouble(header.getSelectedHardwareParameterValue("x0"));
-		int deltaX = Integer.parseInt(header.getSelectedHardwareParameterValue("deltaX"));
-		int log2N = Byte.parseByte(header.getSelectedHardwareParameterValue("log2N"));
-		int dX0 = Integer.parseInt(header.getSelectedHardwareParameterValue("dX0"));
+		final double x0 = Double.parseDouble(header.getSelectedHardwareParameterValue("x0"));
+		final int deltaX = Integer.parseInt(header.getSelectedHardwareParameterValue("deltaX"));
+		final int log2N = Byte.parseByte(header.getSelectedHardwareParameterValue("log2N"));
+		final int dX0 = Integer.parseInt(header.getSelectedHardwareParameterValue("dX0"));
 
-		String xE = header.getSelectedHardwareParameterValue("xEnergy");
-		String nE = header.getSelectedHardwareParameterValue("nEnergy");
+		final String xE = header.getSelectedHardwareParameterValue("xEnergy");
+		final String nE = header.getSelectedHardwareParameterValue("nEnergy");
 
-		double energy = Double.parseDouble(xE + "e" + nE);
+		final double energy = Double.parseDouble(xE + "e" + nE);
 
 		clearPotentials();
 		configPotentials(header.getSelectedHardwareParameterValue("potentials"), false);
 		configGaussian(dX0, x0, energy, log2N, deltaX, ComplexGaussian.DISPLAY_PROBABILITY, true);
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.Icon getIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public javax.swing.JToolBar getToolBar() {
 		return null;
 	}
 
-	public void newSamples(NewExpDataEvent evt) {
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
 			// sample, canal
-			if (model.getValueAt(i, 0) != null)
+			if (model.getValueAt(i, 0) != null) {
 				moves(model.getValueAt(i, 0).getValue().getByteArrayValue().getData());
-			else if (model.getValueAt(i, 7) != null)
-				messageDialog(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/messages").getString(
-						"rec.exp.customizer.title.35"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/messages").getString(
-						"rec.exp.displays.dialog.tip.3"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/messages").getString(
-						"rec.exp.displays.dialog.title.3"), null, java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/messages").getString(
-						"rec.exp.displays.dialog.title.1"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/messages").getString(
-						"rec.exp.displays.dialog.tip.1"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/messages").getString(
-						"rec.exp.displays.dialog.title.2"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/messages").getString(
-						"rec.exp.displays.dialog.tip.2"));
-			else if (model.getValueAt(i, 8) != null)
-				messageDialog(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/messages").getString(
-						"rec.exp.customizer.title.36"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/messages").getString(
-						"rec.exp.displays.dialog.tip.4"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/messages").getString(
-						"rec.exp.displays.dialog.title.3"), null, java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/messages").getString(
-						"rec.exp.displays.dialog.title.1"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/messages").getString(
-						"rec.exp.displays.dialog.tip.1"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/messages").getString(
-						"rec.exp.displays.dialog.title.2"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/messages").getString(
-						"rec.exp.displays.dialog.tip.2"));
+			} else if (model.getValueAt(i, 7) != null) {
+				messageDialog(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages")
+						.getString("rec.exp.customizer.title.35"),
+						java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages")
+								.getString("rec.exp.displays.dialog.tip.3"),
+						java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages")
+								.getString("rec.exp.displays.dialog.title.3"), null,
+						java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages")
+								.getString("rec.exp.displays.dialog.title.1"),
+						java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages")
+								.getString("rec.exp.displays.dialog.tip.1"),
+						java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages")
+								.getString("rec.exp.displays.dialog.title.2"),
+						java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages")
+								.getString("rec.exp.displays.dialog.tip.2"));
+			} else if (model.getValueAt(i, 8) != null) {
+				messageDialog(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages")
+						.getString("rec.exp.customizer.title.36"),
+						java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages")
+								.getString("rec.exp.displays.dialog.tip.4"),
+						java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages")
+								.getString("rec.exp.displays.dialog.title.3"), null,
+						java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages")
+								.getString("rec.exp.displays.dialog.title.1"),
+						java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages")
+								.getString("rec.exp.displays.dialog.tip.1"),
+						java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages")
+								.getString("rec.exp.displays.dialog.title.2"),
+						java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages")
+								.getString("rec.exp.displays.dialog.tip.2"));
+			}
 		}
 	}
 
 	private ExpDataModel model = null;
 
-	public void setExpDataModel(ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
+		if (this.model != null) {
 			this.model.removeExpDataModelListener(this);
+		}
 		this.model = model;
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 
 	}
 
-	public void messageDialog(String message, String messageTooltip, String title, String toolTip,
-			String continueTitle, String continueToolTip, String stopTitle, String stopToolTip) {
+	public void messageDialog(final String message, final String messageTooltip, final String title,
+			final String toolTip, final String continueTitle, final String continueToolTip, final String stopTitle,
+			final String stopToolTip) {
 		pause();
 		java.awt.GridBagConstraints gridBagConstraints;
 
-		JDialog tempDialog = new JDialog(new JFrame(), title, true);
+		final JDialog tempDialog = new JDialog(new JFrame(), title, true);
 
-		JPanel dialogPanel = new JPanel();
-		JLabel messageLabel = new JLabel(message);
-		JButton stopButton = new JButton();
-		JButton continueButton = new JButton();
+		final JPanel dialogPanel = new JPanel();
+		final JLabel messageLabel = new JLabel(message);
+		final JButton stopButton = new JButton();
+		final JButton continueButton = new JButton();
 
 		tempDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		dialogPanel.setLayout(new java.awt.GridBagLayout());
 
 		messageLabel.setToolTipText(messageTooltip);
-		messageLabel.setHorizontalAlignment(messageLabel.CENTER);
+		messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		messageLabel.setMinimumSize(new java.awt.Dimension(300, 47));
 		messageLabel.setPreferredSize(new java.awt.Dimension(300, 47));
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -208,7 +226,8 @@ public class Animation extends Quantum implements ExpDataDisplay, ExpDataModelLi
 		continueButton.setText(continueTitle);
 		continueButton.setToolTipText(continueToolTip);
 		continueButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				((JDialog) ((JButton) evt.getSource()).getTopLevelAncestor()).dispose();
 				resume();
 			}
@@ -224,7 +243,8 @@ public class Animation extends Quantum implements ExpDataDisplay, ExpDataModelLi
 		stopButton.setText(stopTitle);
 		stopButton.setToolTipText(stopToolTip);
 		stopButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				((JDialog) ((JButton) evt.getSource()).getTopLevelAncestor()).dispose();
 				stop();
 			}
@@ -241,8 +261,8 @@ public class Animation extends Quantum implements ExpDataDisplay, ExpDataModelLi
 
 		tempDialog.pack();
 
-		java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-		java.awt.Dimension tempSize = tempDialog.getSize();
+		final java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+		final java.awt.Dimension tempSize = tempDialog.getSize();
 		tempDialog.setLocation((int) ((screenSize.width - tempSize.getWidth()) / 2d),
 				(int) ((screenSize.height - tempSize.getHeight()) / 2d));
 

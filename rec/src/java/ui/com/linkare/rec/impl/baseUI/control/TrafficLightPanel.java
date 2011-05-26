@@ -17,15 +17,19 @@ import javax.swing.Timer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class TrafficLightPanel extends javax.swing.JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7963654850508099730L;
 	private Icon greenOn = null;
 	private Icon greenOff = null;
 	private Icon redOn = null;
 	private Icon redOff = null;
 	private Icon yellowOn = null;
 	private Icon yellowOff = null;
-	private Icon yellowBlink = null;
+	private final Icon yellowBlink = null;
 
-	private byte status = 0;
+	private final byte status = 0;
 	public static final byte OFF = 0;
 	public static final byte GREEN = 1;
 	public static final byte YELLOW = 2;
@@ -37,22 +41,27 @@ public class TrafficLightPanel extends javax.swing.JPanel {
 
 	/** Creates new form TrafficLightPanel */
 	public TrafficLightPanel() {
-		greenOn = ReCResourceBundle.findImageIconOrDefault("ReCBaseUI$rec.bui.icon.trafficGreenOn",
+		greenOn = ReCResourceBundle.findImageIconOrDefault(
+				"ReCBaseUI$rec.bui.icon.trafficGreenOn",
 				new javax.swing.ImageIcon(getClass().getResource(
 						"/com/linkare/rec/impl/baseUI/resources/green_on_16.png")));
-		greenOff = ReCResourceBundle.findImageIconOrDefault("ReCBaseUI$rec.bui.icon.trafficGreenOff",
+		greenOff = ReCResourceBundle.findImageIconOrDefault(
+				"ReCBaseUI$rec.bui.icon.trafficGreenOff",
 				new javax.swing.ImageIcon(getClass().getResource(
 						"/com/linkare/rec/impl/baseUI/resources/green_off_16.png")));
 		redOn = ReCResourceBundle.findImageIconOrDefault("ReCBaseUI$rec.bui.icon.trafficRedOn",
 				new javax.swing.ImageIcon(getClass()
 						.getResource("/com/linkare/rec/impl/baseUI/resources/red_on_16.png")));
-		redOff = ReCResourceBundle.findImageIconOrDefault("ReCBaseUI$rec.bui.icon.trafficRedOff",
+		redOff = ReCResourceBundle.findImageIconOrDefault(
+				"ReCBaseUI$rec.bui.icon.trafficRedOff",
 				new javax.swing.ImageIcon(getClass().getResource(
 						"/com/linkare/rec/impl/baseUI/resources/red_off_16.png")));
-		yellowOn = ReCResourceBundle.findImageIconOrDefault("ReCBaseUI$rec.bui.icon.trafficYellowOn",
+		yellowOn = ReCResourceBundle.findImageIconOrDefault(
+				"ReCBaseUI$rec.bui.icon.trafficYellowOn",
 				new javax.swing.ImageIcon(getClass().getResource(
 						"/com/linkare/rec/impl/baseUI/resources/yellow_on_16.png")));
-		yellowOff = ReCResourceBundle.findImageIconOrDefault("ReCBaseUI$rec.bui.icon.trafficYellowOff",
+		yellowOff = ReCResourceBundle.findImageIconOrDefault(
+				"ReCBaseUI$rec.bui.icon.trafficYellowOff",
 				new javax.swing.ImageIcon(getClass().getResource(
 						"/com/linkare/rec/impl/baseUI/resources/yellow_off_16.png")));
 		// yellowBlink =
@@ -63,7 +72,8 @@ public class TrafficLightPanel extends javax.swing.JPanel {
 		initComponents();
 
 		blinker = new Timer(500, new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				if (blinkON) {
 					jLabelYellow.setIcon(yellowOff);
 				} else {
@@ -101,28 +111,28 @@ public class TrafficLightPanel extends javax.swing.JPanel {
 
 	}// GEN-END:initComponents
 
-	public void changeTrafficStatus(byte status) {
+	public void changeTrafficStatus(final byte status) {
 		if (blinker.isRunning()) {
 			blinker.stop();
 		}
 
-		if (status == OFF) {
+		if (status == TrafficLightPanel.OFF) {
 			jLabelGreen.setIcon(greenOff);
 			jLabelYellow.setIcon(yellowOff);
 			jLabelRed.setIcon(redOff);
-		} else if (status == GREEN) {
+		} else if (status == TrafficLightPanel.GREEN) {
 			jLabelGreen.setIcon(greenOn);
 			jLabelYellow.setIcon(yellowOff);
 			jLabelRed.setIcon(redOff);
-		} else if (status == YELLOW) {
+		} else if (status == TrafficLightPanel.YELLOW) {
 			jLabelGreen.setIcon(greenOff);
 			jLabelYellow.setIcon(yellowOn);
 			jLabelRed.setIcon(redOff);
-		} else if (status == RED) {
+		} else if (status == TrafficLightPanel.RED) {
 			jLabelGreen.setIcon(greenOff);
 			jLabelYellow.setIcon(yellowOff);
 			jLabelRed.setIcon(redOn);
-		} else if (status == BLINK) {
+		} else if (status == TrafficLightPanel.BLINK) {
 			jLabelGreen.setIcon(greenOff);
 			jLabelRed.setIcon(redOff);
 			blinker.start();

@@ -12,6 +12,11 @@ package pt.utl.ist.elab.driver.webrobot.debug;
  */
 public class Game extends javax.swing.JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6330013247858482497L;
+
 	/** Creates new form Game */
 	public Game() {
 		initComponents();
@@ -26,13 +31,15 @@ public class Game extends javax.swing.JFrame {
 	private void initComponents() {// GEN-BEGIN:initComponents
 
 		addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyPressed(java.awt.event.KeyEvent evt) {
+			@Override
+			public void keyPressed(final java.awt.event.KeyEvent evt) {
 				formKeyPressed(evt);
 			}
 		});
 
 		addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent evt) {
+			@Override
+			public void windowClosing(final java.awt.event.WindowEvent evt) {
 				exitForm(evt);
 			}
 		});
@@ -40,51 +47,51 @@ public class Game extends javax.swing.JFrame {
 		pack();
 	}// GEN-END:initComponents
 
-	private void formKeyPressed(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_formKeyPressed
+	private void formKeyPressed(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_formKeyPressed
 		if (evt.getKeyChar() == 'w') {
-			serialComm.write(80);
-			serialComm.write(87);
-			serialComm.write(77);
-			serialComm.write(170);
-			serialComm.write(170);
+			Game.serialComm.write(80);
+			Game.serialComm.write(87);
+			Game.serialComm.write(77);
+			Game.serialComm.write(170);
+			Game.serialComm.write(170);
 		} else if (evt.getKeyChar() == 's') {
-			serialComm.write(80);
-			serialComm.write(87);
-			serialComm.write(77);
-			serialComm.write(100);
-			serialComm.write(100);
+			Game.serialComm.write(80);
+			Game.serialComm.write(87);
+			Game.serialComm.write(77);
+			Game.serialComm.write(100);
+			Game.serialComm.write(100);
 		} else if (evt.getKeyChar() == 'o') {
-			serialComm.write(80);
-			serialComm.write(87);
-			serialComm.write(77);
-			serialComm.write(127);
-			serialComm.write(170);
+			Game.serialComm.write(80);
+			Game.serialComm.write(87);
+			Game.serialComm.write(77);
+			Game.serialComm.write(127);
+			Game.serialComm.write(170);
 		} else if (evt.getKeyChar() == 'p') {
-			serialComm.write(80);
-			serialComm.write(87);
-			serialComm.write(77);
-			serialComm.write(170);
-			serialComm.write(127);
+			Game.serialComm.write(80);
+			Game.serialComm.write(87);
+			Game.serialComm.write(77);
+			Game.serialComm.write(170);
+			Game.serialComm.write(127);
 		} else if (evt.getKeyChar() == 'z') {
-			serialComm.write(80);
-			serialComm.write(87);
-			serialComm.write(77);
-			serialComm.write(127);
-			serialComm.write(127);
+			Game.serialComm.write(80);
+			Game.serialComm.write(87);
+			Game.serialComm.write(77);
+			Game.serialComm.write(127);
+			Game.serialComm.write(127);
 		}
 	}// GEN-LAST:event_formKeyPressed
 
 	/** Exit the Application */
-	private void exitForm(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_exitForm
+	private void exitForm(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_exitForm
 		System.exit(0);
 	}// GEN-LAST:event_exitForm
 
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 		new Game().show();
-		serialComm = new pt.utl.ist.elab.driver.webrobot.serial.SerialComm();
+		Game.serialComm = new pt.utl.ist.elab.driver.webrobot.serial.SerialComm();
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

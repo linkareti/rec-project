@@ -53,7 +53,7 @@ public class GravadorVideo {
 
 	protected VideoFormat currentFormat = null;
 	public Format[] videoFormats = null;
-	private javax.swing.Timer timer2; // timer para tirar fotos ao sitema
+	private final javax.swing.Timer timer2; // timer para tirar fotos ao sitema
 
 	private final int WIDTH = 640;
 	private final int HEIGHT = 480;
@@ -62,7 +62,8 @@ public class GravadorVideo {
 	public GravadorVideo() {
 
 		timer2 = new javax.swing.Timer(3000, new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				timer2OnTime(evt);
 			}
 		});
@@ -70,9 +71,10 @@ public class GravadorVideo {
 		timer2.setRepeats(true);
 	}
 
-	public int addFrame(java.awt.Image img) {
-		if (video_done || video.length <= n_frames)
+	public int addFrame(final java.awt.Image img) {
+		if (video_done || video.length <= n_frames) {
 			return n_frames;
+		}
 
 		if (img != null) {
 			video[n_frames] = img;
@@ -88,12 +90,12 @@ public class GravadorVideo {
 	}
 
 	public java.awt.Image[] getVideo() {
-		java.awt.Image[] toRet = video;
+		final java.awt.Image[] toRet = video;
 		video = new java.awt.Image[9];
 		return toRet;
 	}
 
-	public java.awt.Image getFrame(int numero_do_frame) {
+	public java.awt.Image getFrame(final int numero_do_frame) {
 
 		if (numero_do_frame < n_frames) {
 			return (video[numero_do_frame - 1]);
@@ -117,7 +119,7 @@ public class GravadorVideo {
 
 	public java.awt.Image tirarFoto() {
 
-		java.awt.Image img = grabFrameImage();
+		final java.awt.Image img = grabFrameImage();
 		if (img == null) {
 			System.err.println("Error : Could not grab frame");
 		}
@@ -130,10 +132,11 @@ public class GravadorVideo {
 		try {
 			if (!initialise()) {
 				System.out.println("Web Cam not detected / initialised");
-			} else
+			} else {
 				init = true;
+			}
 			System.out.println("Web Cam initialised!!!");
-		} catch (Exception ex) {
+		} catch (final Exception ex) {
 			ex.printStackTrace();
 		}
 
@@ -146,7 +149,7 @@ public class GravadorVideo {
 		init = false;
 	}
 
-	private void timer2OnTime(java.awt.event.ActionEvent evt) {
+	private void timer2OnTime(final java.awt.event.ActionEvent evt) {
 		addFrame(tirarFoto());
 	}
 
@@ -156,7 +159,7 @@ public class GravadorVideo {
 
 	private DataSource ds = null;
 
-	public boolean initialise(CaptureDeviceInfo _deviceInfo) throws Exception {
+	public boolean initialise(final CaptureDeviceInfo _deviceInfo) throws Exception {
 		webCamDeviceInfo = _deviceInfo;
 
 		if (webCamDeviceInfo != null) {
@@ -166,31 +169,35 @@ public class GravadorVideo {
 				VideoFormat wantedFormat = null;
 				int w = 0;
 				int h = 0;
-				for (int i = 0; i < videoFormats.length; i++) {
-					wantedFormat = (VideoFormat) videoFormats[i];
+				for (final Format videoFormat : videoFormats) {
+					wantedFormat = (VideoFormat) videoFormat;
 					w = (int) wantedFormat.getSize().getWidth();
 					h = (int) wantedFormat.getSize().getHeight();
 
-					if (w == WIDTH && h == HEIGHT)
+					if (w == WIDTH && h == HEIGHT) {
 						break;
+					}
 				}
 
 				ml = webCamDeviceInfo.getLocator();
 				if (ml != null) {
 					ds = Manager.createDataSource(ml);
 
-					FormatControl[] formatControls = ((CaptureDevice) ds).getFormatControls();
+					final FormatControl[] formatControls = ((CaptureDevice) ds).getFormatControls();
 
 					Format finalFormat = null;
-					for (int i = 0; i < formatControls.length; i++) {
-						if (formatControls == null)
+					for (final FormatControl formatControl2 : formatControls) {
+						if (formatControls == null) {
 							continue;
-						if ((finalFormat = formatControls[i].setFormat(wantedFormat)) != null)
+						}
+						if ((finalFormat = formatControl2.setFormat(wantedFormat)) != null) {
 							break;
+						}
 					}
 
-					if (finalFormat == null)
+					if (finalFormat == null) {
 						System.out.println("Couldn't set the desired format...using the default!");
+					}
 
 					ds.connect();
 					player = Manager.createRealizedPlayer(ds);
@@ -200,13 +207,13 @@ public class GravadorVideo {
 					System.err.println("Error : No MediaLocator for " + webCamDeviceInfo.getName());
 					return (false);
 				}
-			} catch (IOException ioEx) {
+			} catch (final IOException ioEx) {
 				ioEx.printStackTrace();
 				return (false);
-			} catch (NoPlayerException npex) {
+			} catch (final NoPlayerException npex) {
 				npex.printStackTrace();
 				return (false);
-			} catch (CannotRealizeException nre) {
+			} catch (final CannotRealizeException nre) {
 				nre.printStackTrace();
 				return (false);
 			}
@@ -216,7 +223,7 @@ public class GravadorVideo {
 	}
 
 	public CaptureDeviceInfo autoDetect() {
-		Vector list = CaptureDeviceManager.getDeviceList(null);
+		final Vector list = CaptureDeviceManager.getDeviceList(null);
 		CaptureDeviceInfo devInfo = null;
 
 		if (list != null) {
@@ -242,15 +249,14 @@ public class GravadorVideo {
 
 	public void deviceInfo() {
 		if (webCamDeviceInfo != null) {
-			Format[] formats = webCamDeviceInfo.getFormats();
+			final Format[] formats = webCamDeviceInfo.getFormats();
 
 			if ((formats != null) && (formats.length > 0)) {
 			}
 
-			for (int i = 0; i < formats.length; i++) {
-				Format aFormat = formats[i];
+			for (final Format aFormat : formats) {
 				if (aFormat instanceof VideoFormat) {
-					Dimension dim = ((VideoFormat) aFormat).getSize();
+					final Dimension dim = ((VideoFormat) aFormat).getSize();
 				}
 			}
 		} else {
@@ -258,6 +264,7 @@ public class GravadorVideo {
 		}
 	}
 
+	@Override
 	protected void finalize() throws Throwable {
 		playerClose();
 		super.finalize();
@@ -274,7 +281,7 @@ public class GravadorVideo {
 	public Buffer grabFrameBuffer() {
 		if (player != null) {
 
-			FrameGrabbingControl fgc = (FrameGrabbingControl) player
+			final FrameGrabbingControl fgc = (FrameGrabbingControl) player
 					.getControl("javax.media.control.FrameGrabbingControl");
 
 			if (fgc != null) {
@@ -290,12 +297,12 @@ public class GravadorVideo {
 	}
 
 	public Image grabFrameImage() {
-		Buffer buffer = grabFrameBuffer();
+		final Buffer buffer = grabFrameBuffer();
 		if (buffer != null) {
 			// Convert it to an image
-			BufferToImage btoi = new BufferToImage((VideoFormat) buffer.getFormat());
+			final BufferToImage btoi = new BufferToImage((VideoFormat) buffer.getFormat());
 			if (btoi != null) {
-				Image image = btoi.createImage(buffer);
+				final Image image = btoi.createImage(buffer);
 				if (image != null) {
 					return (image);
 				} else {

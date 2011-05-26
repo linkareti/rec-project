@@ -12,6 +12,10 @@ package com.linkare.rec.data.synch.base;
  */
 public class FrequencyLabel extends javax.swing.JLabel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2856699886301004982L;
 	/** Holds value of property frequency. */
 	private com.linkare.rec.data.synch.Frequency frequency;
 
@@ -19,14 +23,17 @@ public class FrequencyLabel extends javax.swing.JLabel {
 	public FrequencyLabel() {
 	}
 
+	@Override
 	public String getText() {
-		if (this.frequency == null)
+		if (frequency == null) {
 			return "";
+		}
 
-		return this.frequency.toString();
+		return frequency.toString();
 	}
 
-	public void setText(String str) {
+	@Override
+	public void setText(final String str) {
 	}
 
 	/**
@@ -35,7 +42,7 @@ public class FrequencyLabel extends javax.swing.JLabel {
 	 * @return Value of property frequency.
 	 */
 	public com.linkare.rec.data.synch.Frequency getFrequency() {
-		return this.frequency;
+		return frequency;
 	}
 
 	/**
@@ -43,7 +50,7 @@ public class FrequencyLabel extends javax.swing.JLabel {
 	 * 
 	 * @param frequency New value of property frequency.
 	 */
-	public void setFrequency(com.linkare.rec.data.synch.Frequency frequency) {
+	public void setFrequency(final com.linkare.rec.data.synch.Frequency frequency) {
 		this.frequency = frequency;
 		repaint();
 	}

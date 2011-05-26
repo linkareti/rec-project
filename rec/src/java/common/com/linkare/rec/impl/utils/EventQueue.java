@@ -10,7 +10,6 @@
 
 package com.linkare.rec.impl.utils;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -39,7 +38,6 @@ public class EventQueue {
 	private final EventQueueDispatcher dispatcher;
 	private final List<Prioritazible> levts;
 	private volatile boolean stopdispatching = false;
-	
 
 	/**
 	 * Permits cancel all tasks if someone call shutdown on this queue
@@ -52,7 +50,6 @@ public class EventQueue {
 	 * 
 	 */
 	private final ReadWriteLock mainLock;
-	
 
 	/**
 	 * Creates a new instance of EventQueue
@@ -60,7 +57,7 @@ public class EventQueue {
 	 * @param dispatcher
 	 * @param threadName
 	 */
-	public EventQueue(EventQueueDispatcher dispatcher, String threadName) {
+	public EventQueue(final EventQueueDispatcher dispatcher, final String threadName) {
 		this.dispatcher = dispatcher;
 		levts = new LinkedList<Prioritazible>();
 		stopdispatching = false;
@@ -76,22 +73,22 @@ public class EventQueue {
 	 * @param threadName
 	 * @param logger
 	 */
-	public EventQueue(EventQueueDispatcher dispatcher, String threadName, QueueLogger logger) {
+	public EventQueue(final EventQueueDispatcher dispatcher, final String threadName, final QueueLogger logger) {
 		this(dispatcher, threadName);
 
 		this.logger = logger;
 	}
 
-	public void addEvent(Prioritazible evt) {
+	public void addEvent(final Prioritazible evt) {
 		log(Level.FINEST, "EventQueue add event " + evt);
 
-		final Lock writeLock = this.mainLock.writeLock();
+		final Lock writeLock = mainLock.writeLock();
 		writeLock.lock();
 		try {
 			levts.add(evt);
 
 			cleanDoneTasks();
-			
+
 			// add task to execute in processing manager
 			tasks.add(ProcessingManager.getInstance().submit(new PriorityRunnableImpl(evt.getPriority())));
 		} finally {
@@ -134,7 +131,7 @@ public class EventQueue {
 	 */
 	public boolean hasEvents() {
 
-		final Lock readLock = this.mainLock.readLock();
+		final Lock readLock = mainLock.readLock();
 		readLock.lock();
 		try {
 			return !levts.isEmpty();
@@ -148,7 +145,7 @@ public class EventQueue {
 		log(Level.FINE, "EventQueue received shutdown. Queue size = " + levts.size());
 
 		stopdispatching = true;
-		final Lock writeLock = this.mainLock.writeLock();
+		final Lock writeLock = mainLock.writeLock();
 		writeLock.lock();
 		try {
 			cancelAllTasks();
@@ -165,7 +162,7 @@ public class EventQueue {
 	}
 
 	public boolean isEmpty() {
-		final Lock readLock = this.mainLock.readLock();
+		final Lock readLock = mainLock.readLock();
 		readLock.lock();
 		try {
 			return !levts.isEmpty();
@@ -174,13 +171,13 @@ public class EventQueue {
 		}
 	}
 
-	public void log(Level debugLevel, String message) {
+	public void log(final Level debugLevel, final String message) {
 		if (logger != null) {
 			logger.log(debugLevel, message);
 		}
 	}
 
-	public void logThrowable(String message, Throwable t) {
+	public void logThrowable(final String message, final Throwable t) {
 		if (logger != null) {
 			logger.logThrowable(message, t);
 		}
@@ -198,12 +195,11 @@ public class EventQueue {
 	private class PriorityRunnableImpl implements PriorityRunnable {
 
 		private final EnumPriority eventPriority;
-		
-		private PriorityRunnableImpl(final EnumPriority priority){
-			this.eventPriority=priority;
+
+		private PriorityRunnableImpl(final EnumPriority priority) {
+			eventPriority = priority;
 		}
-		
-		
+
 		private boolean isInterrupted() {
 			return Thread.currentThread().isInterrupted();
 		}
@@ -233,9 +229,9 @@ public class EventQueue {
 					}
 
 				}
-			} catch (InterruptedException e) {
+			} catch (final InterruptedException e) {
 				log(Level.FINER, "This runnable has been interrupted " + e.toString());
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				logThrowable("Exception ocorred in event queue thread ", e);
 			}
 		}
@@ -250,7 +246,7 @@ public class EventQueue {
 
 		private Object getEvent() throws InterruptedException {
 
-			final Lock writeLock = EventQueue.this.mainLock.writeLock();
+			final Lock writeLock = mainLock.writeLock();
 			writeLock.lockInterruptibly();
 			try {
 				if (!levts.isEmpty()) {
@@ -264,7 +260,7 @@ public class EventQueue {
 
 		private void intersectEvent(final IntersectableEvent intersectableEvent) throws InterruptedException {
 
-			final Lock writeLock = EventQueue.this.mainLock.writeLock();
+			final Lock writeLock = mainLock.writeLock();
 
 			writeLock.lockInterruptibly();
 			try {
@@ -290,6 +286,5 @@ public class EventQueue {
 			}
 		}
 	}
-
 
 }

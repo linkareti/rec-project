@@ -12,6 +12,11 @@ package pt.utl.ist.elab.driver.aleatorio.Utils;
  */
 public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.Cloneable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1282678821698764103L;
+
 	/** Creates a new instance of ImageAnalyser */
 	public ImageAnalyser_old() {
 	}
@@ -51,8 +56,8 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 	public int imageHeight;
 	private int area;
 
-	private int maxSizeOfArray = 1024; // just to keep a good slack
-	private int houghCircles[][] = new int[maxSizeOfArray][2];
+	private final int maxSizeOfArray = 1024; // just to keep a good slack
+	private final int houghCircles[][] = new int[maxSizeOfArray][2];
 	private int convolutionCircles[][] = new int[maxSizeOfArray][2];
 	private int fullCircles[][] = new int[maxSizeOfArray][2];
 	private int houghCenterCounter; // stores the count of the number of spots
@@ -76,8 +81,8 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 	private int maxClusterSize;
 	private int maxDiceCount;
 
-	public ImageAnalyser_old(java.awt.Image image) {
-		this.originalImage = image;
+	public ImageAnalyser_old(final java.awt.Image image) {
+		originalImage = image;
 		setImage(image, "original");
 		imageWidth = originalImage.getWidth(this);
 		imageHeight = originalImage.getHeight(this);
@@ -85,10 +90,11 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 	}
 
 	/**
-	 *sets the parameters that will be used by the algorithms
+	 * sets the parameters that will be used by the algorithms
 	 */
-	public void setParams(int BWThreshold, int radius, int houghThreshold1, int houghThreshold2, int houghThreshold3,
-			int convolutionThreshold, int maxClusterSize, int maxDiceCount) {
+	public void setParams(final int BWThreshold, final int radius, final int houghThreshold1,
+			final int houghThreshold2, final int houghThreshold3, final int convolutionThreshold,
+			final int maxClusterSize, final int maxDiceCount) {
 		this.BWThreshold = BWThreshold;
 		this.radius = radius;
 		this.houghThreshold1 = houghThreshold1;
@@ -132,45 +138,47 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 	}// resetImages
 
 	public java.awt.Image conversionBW() {
-		int imageWidth = originalImage.getWidth(this);
-		int imageHeight = originalImage.getHeight(this);
-		int area = imageWidth * imageHeight;
+		final int imageWidth = originalImage.getWidth(this);
+		final int imageHeight = originalImage.getHeight(this);
+		final int area = imageWidth * imageHeight;
 
-		int inPixels[] = new int[area];
-		int outPixels[] = new int[area];
+		final int inPixels[] = new int[area];
+		final int outPixels[] = new int[area];
 
-		java.awt.image.PixelGrabber pg = new java.awt.image.PixelGrabber(originalImage, 0, 0, imageWidth, imageHeight,
-				inPixels, 0, imageWidth);
+		final java.awt.image.PixelGrabber pg = new java.awt.image.PixelGrabber(originalImage, 0, 0, imageWidth,
+				imageHeight, inPixels, 0, imageWidth);
 		try {
 			pg.grabPixels();
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
 
 		for (int index = 0; index < inPixels.length; index++) {
-			int r = (inPixels[index] & 0x00ff0000) >> 16; // retrieving RGB
+			final int r = (inPixels[index] & 0x00ff0000) >> 16; // retrieving
+																// RGB
 			// components
-			int g = (inPixels[index] & 0x0000ff00) >> 8;
-			int b = (inPixels[index] & 0x000000ff);
-			if ((r + g + b) / 3 > BWThreshold) // comparing the grayscale value
+			final int g = (inPixels[index] & 0x0000ff00) >> 8;
+			final int b = (inPixels[index] & 0x000000ff);
+			if ((r + g + b) / 3 > BWThreshold) {
 				// to the threshold
 				outPixels[index] = 0xffffffff; // and building the intArray with
-			// the B&W values
-			else
+				// the B&W values
+			} else {
 				outPixels[index] = 0xff000000;
+			}
 		}
 
-		java.awt.image.MemoryImageSource mis = new java.awt.image.MemoryImageSource(imageWidth, imageHeight, outPixels,
-				0, imageWidth);
+		final java.awt.image.MemoryImageSource mis = new java.awt.image.MemoryImageSource(imageWidth, imageHeight,
+				outPixels, 0, imageWidth);
 		BWImage = createImage(mis);
 		// this might not be necessary (it's just to wait untill the image is in
 		// the variable BWImage)
-		java.awt.MediaTracker tracker = new java.awt.MediaTracker(this);
+		final java.awt.MediaTracker tracker = new java.awt.MediaTracker(this);
 		tracker.addImage(BWImage, 0);
 		try {
 			tracker.waitForAll();
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
@@ -193,85 +201,86 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 	}// conversionBW(java.awt.Image image, int threshold)
 
 	public java.awt.Image edgeDetector() {
-		int imageWidth = originalImage.getWidth(this);
-		int imageHeight = originalImage.getHeight(this);
+		final int imageWidth = originalImage.getWidth(this);
+		final int imageHeight = originalImage.getHeight(this);
 
-		java.awt.image.BufferedImage inputImage = new java.awt.image.BufferedImage(imageWidth, imageHeight,
+		final java.awt.image.BufferedImage inputImage = new java.awt.image.BufferedImage(imageWidth, imageHeight,
 				java.awt.image.BufferedImage.TYPE_INT_RGB);
-		java.awt.image.BufferedImage outputImage = new java.awt.image.BufferedImage(imageWidth, imageHeight,
+		final java.awt.image.BufferedImage outputImage = new java.awt.image.BufferedImage(imageWidth, imageHeight,
 				java.awt.image.BufferedImage.TYPE_INT_RGB);
 
-		java.awt.Graphics2D inputContext = inputImage.createGraphics();
+		final java.awt.Graphics2D inputContext = inputImage.createGraphics();
 
 		inputContext.drawImage(BWImage, 0, 0, imageWidth, imageHeight, this);
 
-		float[] elements = { 0.0f, -3.0f, 0.0f, // build the filter
+		final float[] elements = { 0.0f, -3.0f, 0.0f, // build the filter
 				-3.0f, 12.0f, -3.0f, 0.0f, -3.0f, 0.0f };
-		java.awt.image.Kernel kernel = new java.awt.image.Kernel(3, 3, elements);
-		java.awt.image.ConvolveOp cop = new java.awt.image.ConvolveOp(kernel, java.awt.image.ConvolveOp.EDGE_NO_OP,
-				null);
+		final java.awt.image.Kernel kernel = new java.awt.image.Kernel(3, 3, elements);
+		final java.awt.image.ConvolveOp cop = new java.awt.image.ConvolveOp(kernel,
+				java.awt.image.ConvolveOp.EDGE_NO_OP, null);
 
 		cop.filter(inputImage, outputImage); // apply the filter
-		edgesImage = (java.awt.Image) outputImage;
+		edgesImage = outputImage;
 		setImage(edgesImage, "edges");
 		return edgesImage;
 	}// edgeDetector(java.awt.Image image)
 
 	public java.awt.Image houghTransform() {
-		int imageWidth = originalImage.getWidth(this);
-		int imageHeight = originalImage.getHeight(this);
-		int area = imageWidth * imageHeight;
-		int inPixels[] = new int[area];
-		int outPixels[] = new int[area];
+		final int imageWidth = originalImage.getWidth(this);
+		final int imageHeight = originalImage.getHeight(this);
+		final int area = imageWidth * imageHeight;
+		final int inPixels[] = new int[area];
+		final int outPixels[] = new int[area];
 
-		java.awt.image.PixelGrabber pg = new java.awt.image.PixelGrabber(edgesImage, 0, 0, imageWidth, imageHeight,
-				inPixels, 0, imageWidth);
+		final java.awt.image.PixelGrabber pg = new java.awt.image.PixelGrabber(edgesImage, 0, 0, imageWidth,
+				imageHeight, inPixels, 0, imageWidth);
 		try {
 			pg.grabPixels();
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
 
-		for (int index = 0; index < inPixels.length; index++)
+		for (int index = 0; index < inPixels.length; index++) {
 			outPixels[index] = 0xff000000;
+		}
 
 		for (int index = 0; index < inPixels.length; index++) {
 			// Se estamos num pixel que e contorno, entao desenha um circulo
 			// de raio 'raio' em torno desse pixel, na imagem de output
 			if (inPixels[index] == 0xffffffff) {
-				int x = index % imageWidth;
-				int y = index / imageWidth;
+				final int x = index % imageWidth;
+				final int y = index / imageWidth;
 
 				for (int rIndex = 0; rIndex <= radius; rIndex++) {
 					try {
 						outPixels[(y - rIndex) * imageWidth + x - (radius - rIndex)] += 0xff0a0a0a;
-					} catch (ArrayIndexOutOfBoundsException e) {
+					} catch (final ArrayIndexOutOfBoundsException e) {
 					}
 					try {
 						outPixels[(y + rIndex) * imageWidth + x - (radius - rIndex)] += 0xff0a0a0a;
-					} catch (ArrayIndexOutOfBoundsException e) {
+					} catch (final ArrayIndexOutOfBoundsException e) {
 					}
 					try {
 						outPixels[(y - rIndex) * imageWidth + x + (radius - rIndex)] += 0xff0a0a0a;
-					} catch (ArrayIndexOutOfBoundsException e) {
+					} catch (final ArrayIndexOutOfBoundsException e) {
 					}
 					try {
 						outPixels[(y + rIndex) * imageWidth + x + (radius - rIndex)] += 0xff0a0a0a;
-					} catch (ArrayIndexOutOfBoundsException e) {
+					} catch (final ArrayIndexOutOfBoundsException e) {
 					}
 				}
 			}
 		}
-		java.awt.image.MemoryImageSource mis = new java.awt.image.MemoryImageSource(imageWidth, imageHeight, outPixels,
-				0, imageWidth);
+		final java.awt.image.MemoryImageSource mis = new java.awt.image.MemoryImageSource(imageWidth, imageHeight,
+				outPixels, 0, imageWidth);
 		houghImage = createImage(mis);
 
-		java.awt.MediaTracker tracker = new java.awt.MediaTracker(this);
+		final java.awt.MediaTracker tracker = new java.awt.MediaTracker(this);
 		tracker.addImage(houghImage, 0);
 		try {
 			tracker.waitForAll();
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
@@ -301,11 +310,11 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 
 		if (originalPixels == null) {
 			originalPixels = new int[area];
-			java.awt.image.PixelGrabber pg1 = new java.awt.image.PixelGrabber(originalImage, 0, 0, imageWidth,
+			final java.awt.image.PixelGrabber pg1 = new java.awt.image.PixelGrabber(originalImage, 0, 0, imageWidth,
 					imageHeight, originalPixels, 0, imageWidth);
 			try {
 				pg1.grabPixels();
-			} catch (InterruptedException e) {
+			} catch (final InterruptedException e) {
 				e.printStackTrace();
 				System.exit(1);
 			}// catch
@@ -316,11 +325,11 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 
 		if (houghPixels == null) {
 			houghPixels = new int[area];
-			java.awt.image.PixelGrabber pg = new java.awt.image.PixelGrabber(houghImage, 0, 0, imageWidth, imageHeight,
-					houghPixels, 0, imageWidth);
+			final java.awt.image.PixelGrabber pg = new java.awt.image.PixelGrabber(houghImage, 0, 0, imageWidth,
+					imageHeight, houghPixels, 0, imageWidth);
 			try {
 				pg.grabPixels();
-			} catch (InterruptedException e) {
+			} catch (final InterruptedException e) {
 				e.printStackTrace();
 				System.exit(1);
 			}// catch
@@ -341,24 +350,21 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					// (houghPixels[index+imageWidth] &0x000000ff) +
 					// (houghPixels[index+1] &0x000000ff) +
 					// (houghPixels[index+imageWidth+1] &0x000000ff))/4.;
-					media = (double) ((houghPixels[index] & 0x000000ff)
-							+ (houghPixels[index - imageWidth - 1] & 0x000000ff)
+					media = ((houghPixels[index] & 0x000000ff) + (houghPixels[index - imageWidth - 1] & 0x000000ff)
 							+ (houghPixels[index - imageWidth + 1] & 0x000000ff)
 							+ (houghPixels[index + imageWidth - 1] & 0x000000ff) + (houghPixels[index + imageWidth + 1] & 0x000000ff)) / 5.;
 					media = max(
 							media,
-							(double) ((houghPixels[index] & 0x000000ff)
-									+ (houghPixels[index - imageWidth] & 0x000000ff)
+							((houghPixels[index] & 0x000000ff) + (houghPixels[index - imageWidth] & 0x000000ff)
 									+ (houghPixels[index - 1] & 0x000000ff) + (houghPixels[index + 1] & 0x000000ff) + (houghPixels[index
 									+ imageWidth] & 0x000000ff)) / 5.);
 					media = max(
 							media,
-							(double) ((houghPixels[index] & 0x000000ff)
-									+ (houghPixels[index - imageWidth + 1] & 0x000000ff)
+							((houghPixels[index] & 0x000000ff) + (houghPixels[index - imageWidth + 1] & 0x000000ff)
 									+ (houghPixels[index + imageWidth] & 0x000000ff)
 									+ (houghPixels[index + 1] & 0x000000ff) + (houghPixels[index + imageWidth] & 0x000000ff)) / 4.);
-				} catch (ArrayIndexOutOfBoundsException e) {
-					media = (double) houghPixels[index];
+				} catch (final ArrayIndexOutOfBoundsException e) {
+					media = houghPixels[index];
 				}
 
 				if (media >= houghThreshold2) {
@@ -368,8 +374,8 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					// found and if "media" is greater than
 					// that which has been found
 					for (int indexa = 0; indexa <= center_counter; indexa++) {
-						if (Math.abs(houghCircles[indexa][0] - x) < Math.ceil((double) radius / 2.)
-								&& Math.abs(houghCircles[indexa][1] - y) < Math.ceil((double) radius / 2.)) {
+						if (Math.abs(houghCircles[indexa][0] - x) < Math.ceil(radius / 2.)
+								&& Math.abs(houghCircles[indexa][1] - y) < Math.ceil(radius / 2.)) {
 							if (info[indexa] <= media && (BWPixels[index] & 0x000000ff) != 255) {
 								// System.out.println("Overwriting " +
 								// circulos[indexa][0] + ";" +
@@ -389,26 +395,35 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 						}// else_if
 					}
 					int whiteCounter = 0;
-					if ((BWPixels[index - imageWidth - 1] & 0x000000ff) == 255)
+					if ((BWPixels[index - imageWidth - 1] & 0x000000ff) == 255) {
 						whiteCounter++;
-					if ((BWPixels[index - imageWidth] & 0x000000ff) == 255)
+					}
+					if ((BWPixels[index - imageWidth] & 0x000000ff) == 255) {
 						whiteCounter++;
-					if ((BWPixels[index - imageWidth + 1] & 0x000000ff) == 255)
+					}
+					if ((BWPixels[index - imageWidth + 1] & 0x000000ff) == 255) {
 						whiteCounter++;
-					if ((BWPixels[index - 1] & 0x000000ff) == 255)
+					}
+					if ((BWPixels[index - 1] & 0x000000ff) == 255) {
 						whiteCounter++;
-					if ((BWPixels[index] & 0x000000ff) == 255)
+					}
+					if ((BWPixels[index] & 0x000000ff) == 255) {
 						whiteCounter++;
-					if ((BWPixels[index + 1] & 0x000000ff) == 255)
+					}
+					if ((BWPixels[index + 1] & 0x000000ff) == 255) {
 						whiteCounter++;
-					if ((BWPixels[index + imageWidth - 1] & 0x000000ff) == 255)
+					}
+					if ((BWPixels[index + imageWidth - 1] & 0x000000ff) == 255) {
 						whiteCounter++;
-					if ((BWPixels[index + imageWidth] & 0x000000ff) == 255)
+					}
+					if ((BWPixels[index + imageWidth] & 0x000000ff) == 255) {
 						whiteCounter++;
-					if ((BWPixels[index + imageWidth + 1] & 0x000000ff) == 255)
+					}
+					if ((BWPixels[index + imageWidth + 1] & 0x000000ff) == 255) {
 						whiteCounter++;
+					}
 
-					boolean whiteEdgeCheck = whiteCounter > 2 ? false : true;
+					final boolean whiteEdgeCheck = whiteCounter > 2 ? false : true;
 
 					if (!presente && (whiteEdgeCheck || media > houghThreshold3)) {
 						// System.out.println("Adding " + x + ";" + y +
@@ -428,31 +443,31 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			outPixels[indice] = 0xffff00ff;
 			try {
 				outPixels[indice - imageWidth - 1] = 0xffff00ff;
-			} catch (ArrayIndexOutOfBoundsException e) {
+			} catch (final ArrayIndexOutOfBoundsException e) {
 			}
 			try {
 				outPixels[indice - imageWidth + 1] = 0xffff00ff;
-			} catch (ArrayIndexOutOfBoundsException e) {
+			} catch (final ArrayIndexOutOfBoundsException e) {
 			}
 			try {
 				outPixels[indice + imageWidth - 1] = 0xffff00ff;
-			} catch (ArrayIndexOutOfBoundsException e) {
+			} catch (final ArrayIndexOutOfBoundsException e) {
 			}
 			try {
 				outPixels[indice + imageWidth + 1] = 0xffff00ff;
-			} catch (ArrayIndexOutOfBoundsException e) {
+			} catch (final ArrayIndexOutOfBoundsException e) {
 			}
 		}
 		// Builds the final image
-		java.awt.image.MemoryImageSource mis = new java.awt.image.MemoryImageSource(imageWidth, imageHeight, outPixels,
-				0, imageWidth);
-		java.awt.Image outImage = createImage(mis);
+		final java.awt.image.MemoryImageSource mis = new java.awt.image.MemoryImageSource(imageWidth, imageHeight,
+				outPixels, 0, imageWidth);
+		final java.awt.Image outImage = createImage(mis);
 
-		java.awt.MediaTracker tracker = new java.awt.MediaTracker(this);
+		final java.awt.MediaTracker tracker = new java.awt.MediaTracker(this);
 		tracker.addImage(outImage, 0);
 		try {
 			tracker.waitForAll();
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
@@ -481,38 +496,40 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 	}// houghCount()
 
 	public java.awt.Image convolutionTransform() {
-		int inPixels[] = new int[area];
-		int outPixels[] = new int[area];
+		final int inPixels[] = new int[area];
+		final int outPixels[] = new int[area];
 
 		// setting up mask according to the radius specified
-		int maskWidth = radius * 2, maskHeight = radius * 2, maskArea = maskWidth * maskHeight;
+		final int maskWidth = radius * 2, maskHeight = radius * 2, maskArea = maskWidth * maskHeight;
 
-		float[] mask = new float[maskArea];
+		final float[] mask = new float[maskArea];
 		int x, y;
 		double theta;
 		for (int angleIndex = 0; angleIndex < 90; angleIndex += 2) {
-			theta = (double) angleIndex * java.lang.Math.PI / 180;
-			x = (int) (radius * (double) (java.lang.Math.cos(theta) + 1));
-			y = (int) (radius * (double) (-java.lang.Math.sin(theta) + 1));
+			theta = angleIndex * java.lang.Math.PI / 180;
+			x = (int) (radius * (java.lang.Math.cos(theta) + 1));
+			y = (int) (radius * (-java.lang.Math.sin(theta) + 1));
 			mask[x + y * maskWidth] = 1.0f;
 		}
 
 		int indexShift = 0;
-		for (int maskIndex = 0; maskIndex < maskWidth; maskIndex++)
+		for (int maskIndex = 0; maskIndex < maskWidth; maskIndex++) {
 			if (mask[maskIndex] != 0) {
 				indexShift = maskIndex;
 				break;
 			}
+		}
 
 		float maskSum = 0;
-		for (int maskIndex = 0; maskIndex < maskArea; maskIndex++)
+		for (int maskIndex = 0; maskIndex < maskArea; maskIndex++) {
 			maskSum += mask[maskIndex];
+		}
 
-		java.awt.image.PixelGrabber pg = new java.awt.image.PixelGrabber(edgesImage, 0, 0, imageWidth, imageHeight,
-				inPixels, 0, imageWidth);
+		final java.awt.image.PixelGrabber pg = new java.awt.image.PixelGrabber(edgesImage, 0, 0, imageWidth,
+				imageHeight, inPixels, 0, imageWidth);
 		try {
 			pg.grabPixels();
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
@@ -531,29 +548,33 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		int pixelValue = 0;
 		// Performing the convolution, at last!
 		for (int imageIndex = 0; imageIndex < area; imageIndex++) {
-			if (imageIndex < maskHeight / 2 * imageWidth + maskWidth / 2)
+			if (imageIndex < maskHeight / 2 * imageWidth + maskWidth / 2) {
 				outPixels[imageIndex] = 0xff000000;
+			}
 
 			convResult = 0;
 
 			try {
 				pixelValue = inPixels[imageIndex + indexShift] & 0x00ffffff;
-			} catch (ArrayIndexOutOfBoundsException e) {
+			} catch (final ArrayIndexOutOfBoundsException e) {
 			}
 
-			if (pixelValue > 0)
-				for (int maskIndex = 0; maskIndex < maskArea; maskIndex++)
+			if (pixelValue > 0) {
+				for (int maskIndex = 0; maskIndex < maskArea; maskIndex++) {
 					try {
 						convResult += mask[maskIndex]
 								* (inPixels[imageIndex + (maskIndex / maskWidth * imageWidth) + maskIndex % maskWidth] & 0x000000ff);
-					} catch (ArrayIndexOutOfBoundsException e) {
+					} catch (final ArrayIndexOutOfBoundsException e) {
 					}
+				}
+			}
 
 			convResult = convResult / maskSum;
-			if (imageHeight - imageIndex / imageWidth > maskHeight)
+			if (imageHeight - imageIndex / imageWidth > maskHeight) {
 				try {
 					outPixels[imageIndex + (maskHeight >> 1) * imageWidth + (maskWidth >> 1)] = 0xff000000 + /*
-																											 * ((
+																											 * (
+																											 * (
 																											 * int
 																											 * )
 																											 * convResult
@@ -571,19 +592,20 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 																											 * )
 																											 * +
 																											 */(int) convResult;
-				} catch (ArrayIndexOutOfBoundsException e) {
+				} catch (final ArrayIndexOutOfBoundsException e) {
 				}
+			}
 		}
 
-		java.awt.image.MemoryImageSource mis = new java.awt.image.MemoryImageSource(imageWidth, imageHeight, outPixels,
-				0, imageWidth);
+		final java.awt.image.MemoryImageSource mis = new java.awt.image.MemoryImageSource(imageWidth, imageHeight,
+				outPixels, 0, imageWidth);
 		convolutionImage = createImage(mis);
 
-		java.awt.MediaTracker tracker = new java.awt.MediaTracker(this);
+		final java.awt.MediaTracker tracker = new java.awt.MediaTracker(this);
 		tracker.addImage(convolutionImage, 0);
 		try {
 			tracker.waitForAll();
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
@@ -593,18 +615,18 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 	}// convolutionTransform()
 
 	public java.awt.Image convolutionCount() {
-		int convPixels[] = new int[area];
+		final int convPixels[] = new int[area];
 
-		int circles[][] = new int[maxSizeOfArray][2];
+		final int circles[][] = new int[maxSizeOfArray][2];
 		info = new double[maxSizeOfArray];
 
 		convolutionCenterCounter = 0;
 
-		java.awt.image.PixelGrabber pg = new java.awt.image.PixelGrabber(convolutionImage, 0, 0, imageWidth,
+		final java.awt.image.PixelGrabber pg = new java.awt.image.PixelGrabber(convolutionImage, 0, 0, imageWidth,
 				imageHeight, convPixels, 0, imageWidth);
 		try {
 			pg.grabPixels();
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
@@ -612,12 +634,12 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		boolean presente = false;
 
 		for (int imageIndex = 0; imageIndex < area; imageIndex++) {
-			int valor = convPixels[imageIndex] & 0x000000ff;
+			final int valor = convPixels[imageIndex] & 0x000000ff;
 			if (valor > convolutionThreshold) {
-				int x = imageIndex % imageWidth;
-				int y = imageIndex / imageWidth;
+				final int x = imageIndex % imageWidth;
+				final int y = imageIndex / imageWidth;
 				presente = false;
-				for (int indexa = 0; indexa < convolutionCenterCounter; indexa++)
+				for (int indexa = 0; indexa < convolutionCenterCounter; indexa++) {
 					if (Math.abs(circles[indexa][0] - x) < radius && Math.abs(circles[indexa][1] - y) < radius) {
 						if (info[indexa] < valor) {
 							circles[indexa][0] = x;
@@ -625,6 +647,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 						}
 						presente = true;
 					}
+				}
 				if (!presente) {
 					circles[convolutionCenterCounter][0] = x;
 					circles[convolutionCenterCounter][1] = y;
@@ -641,38 +664,39 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 	}// convolutionCount(java.awt.Image image, int threshold, int radius)
 
 	/**
-	 *Performs all the counting routines and merges the results Assumes that
+	 * Performs all the counting routines and merges the results Assumes that
 	 * the image has already been transformed
 	 */
 	public java.awt.Image fullCount() {
 		houghCount();
 		convolutionCount();
 		int circlesCounter = 0;
-		int circles[][] = new int[houghCircles.length + convolutionCircles.length][2];
+		final int circles[][] = new int[houghCircles.length + convolutionCircles.length][2];
 
 		double minDistance = 0;
 		double distance;
 		int closestIndex = -1;
-		int foundConvIndex[] = new int[convolutionCircles.length];
+		final int foundConvIndex[] = new int[convolutionCircles.length];
 		int foundConvIndexCounter = 0;
 		boolean found = false;
 
-		for (int houghIndex = 0; houghIndex < houghCircles.length; houghIndex++) {
+		for (final int[] houghCircle : houghCircles) {
 			found = false;
 			minDistance = 0;
-			int houghX = houghCircles[houghIndex][0];
-			int houghY = houghCircles[houghIndex][1];
+			final int houghX = houghCircle[0];
+			final int houghY = houghCircle[1];
 
 			for (int convIndex = 0; convIndex < convolutionCircles.length; convIndex++) {
-				int convX = convolutionCircles[convIndex][0];
-				int convY = convolutionCircles[convIndex][1];
+				final int convX = convolutionCircles[convIndex][0];
+				final int convY = convolutionCircles[convIndex][1];
 				if ((distance = java.lang.Math.sqrt((double) (houghX - convX) * (houghX - convX)
-						+ (double) (houghY - convY) * (houghY - convY))) < radius)
+						+ (double) (houghY - convY) * (houghY - convY))) < radius) {
 					if (distance < minDistance) {
 						minDistance = distance;
 						closestIndex = convIndex;
 						found = true;
 					}
+				}
 			}
 
 			if (found) // if found, take the average of the two
@@ -693,9 +717,11 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		// Add the circles found with the convolution algorithm
 		for (int index = 0; index < foundConvIndex.length; index++) {
 			found = false;
-			for (int convIndex = 0; convIndex < foundConvIndex.length; convIndex++)
-				if (foundConvIndex[convIndex] == index)
+			for (final int element : foundConvIndex) {
+				if (element == index) {
 					found = true;
+				}
+			}
 
 			if (!found) {
 				circles[circlesCounter][0] = convolutionCircles[index][0];
@@ -721,8 +747,8 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		// System.out.println("First Check for non spots!");
 
 		for (int i = 0; i < center_counter; i++) {
-			int pixelIndex = refineCenters[i][0] + refineCenters[i][1] * imageWidth;
-			boolean isItSpot = ((Boolean) isSpot(pixelIndex, radius, true, false).get(0)).booleanValue();
+			final int pixelIndex = refineCenters[i][0] + refineCenters[i][1] * imageWidth;
+			final boolean isItSpot = ((Boolean) isSpot(pixelIndex, radius, true, false).get(0)).booleanValue();
 			if (!isItSpot) {
 				// System.out.println("Removing spot " + i +
 				// " -> ("+houghCircles[i][0]+";"+houghCircles[i][1]+")");
@@ -735,7 +761,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			// nearest black pixel
 			{
 				if ((BWPixels[pixelIndex] & 0x000000ff) == 255) {
-					int[] changedCircle = getNearestBlackPixel(pixelIndex, radius);
+					final int[] changedCircle = getNearestBlackPixel(pixelIndex, radius);
 					// System.out.println("Changing spot in white from ("+houghCircles[i][0]+","+houghCircles[i][1]+") to ("+changedCircle[0]+","+changedCircle[1]+")");
 					refineCenters[i][0] = changedCircle[0];
 					refineCenters[i][1] = changedCircle[1];
@@ -746,7 +772,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		// System.out.println("Clustering...");
 		// Counting the number of Dice by clustering
 		int currentX, currentY;
-		int maxDice = 1024;
+		final int maxDice = 1024;
 		vClusters = new java.util.Vector(maxDice); // is a vector of vectors
 		java.util.Vector[] vDie = new java.util.Vector[maxDice]; // is an array
 		// of
@@ -795,7 +821,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 							break;
 						}// if
 					}// for
-					// meanX = meanX / vDieSize; meanY = meanY / vDieSize;
+						// meanX = meanX / vDieSize; meanY = meanY / vDieSize;
 					if (belongsToDie) {
 						// System.out.println("esta pinta pertence ao dado " +
 						// clusterIndex);
@@ -834,7 +860,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		// System.out.println("No. de Clusters: " + vClusters.size());
 		cluster_counter = vClusters.size();
 
-		int dieSize = 6, maxWhileCounter = 6;
+		final int dieSize = 6, maxWhileCounter = 6;
 		boolean falseExists = true;
 		int whileCounter = 0, previousCrash = -1, previousIndex = -1, repeatCounter = 0;
 		// parsing clusters to find parasite spots
@@ -843,15 +869,16 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			for (int index = 0, forCounter = 0; index < cluster_counter && forCounter < 3 * cluster_counter
 					&& repeatCounter < 12; index++, forCounter++) {
 				if (index != previousCrash) {
-					if (index == previousIndex)
+					if (index == previousIndex) {
 						repeatCounter++;
+					}
 					// get the centers of all clusters
 					clusterCenters = getClusterCenters(vDie);
 
 					vDieSize = vDie[index].size() - 1;
 
 					java.util.Vector vDieContinue;
-					double maxmaxDist = (double) maxClusterSize / 2. * 1.196;// *1.45;//*1.35;
+					final double maxmaxDist = maxClusterSize / 2. * 1.196;// *1.45;//*1.35;
 					// //
 					// *
 					// 1.195;
@@ -859,7 +886,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					// check if this cluster is a part of a die which is in
 					// another cluster
 					for (int index1 = index + 1; index1 < cluster_counter; index1++) {
-						double dist = java.lang.Math
+						final double dist = java.lang.Math
 								.sqrt((double) (clusterCenters[index][0] - clusterCenters[index1][0])
 										* (clusterCenters[index][0] - clusterCenters[index1][0])
 										+ (double) (clusterCenters[index][1] - clusterCenters[index1][1])
@@ -875,7 +902,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					}// for_index1
 
 					centers = refineCenters;
-					int cluster_counter_save = cluster_counter;
+					final int cluster_counter_save = cluster_counter;
 					vDieSize = vDie[index].size() - 1;
 
 					// System.out.println("Checking Die " + index + " : " +
@@ -884,17 +911,19 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					// Check dies with 1 spot in them
 					if (vDieSize == 1) {
 						if (vDie[index].get(1).equals(Boolean.FALSE)) {
-							int[] pixelIndex = new int[1];
+							final int[] pixelIndex = new int[1];
 							pixelIndex[0] = centers[((Integer) vDie[index].get(0)).intValue()][0]
 									+ centers[((Integer) vDie[index].get(0)).intValue()][1] * imageWidth;
 							java.util.Vector checkDie1Vector;
 							if (isOne(pixelIndex, maxClusterSize)) {
 								checkDie1Vector = checkDie1(vDie, index, centers, info, radius, maxClusterSize, true);
 							}// if
-							else
+							else {
 								checkDie1Vector = checkDie1(vDie, index, centers, info, radius, maxClusterSize, false);
-							if (checkDie1Vector.get(1).equals(Boolean.TRUE))
+							}
+							if (checkDie1Vector.get(1).equals(Boolean.TRUE)) {
 								checkDie1Vector = checkDie1(vDie, index, centers, info, radius, maxClusterSize, true);
+							}
 							vDie = (java.util.Vector[]) checkDie1Vector.get(0);
 						}// if
 					}// if_vDieSize_1
@@ -903,8 +932,9 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					else if (vDieSize >= 2) {
 						vDieContinue = checkDie(vDie, index, centers, info, maxClusterSize, radius, -1);
 						vDie = (java.util.Vector[]) vDieContinue.get(0);
-						if (!((Boolean) vDieContinue.get(1)).booleanValue())
+						if (!((Boolean) vDieContinue.get(1)).booleanValue()) {
 							index--;
+						}
 						if (cluster_counter != vClusters.size()) {
 							for (int indexa = 0; indexa < cluster_counter; indexa++) {
 								vClusters.setElementAt(vDie[indexa], indexa);
@@ -913,19 +943,22 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 						}// if
 					}// if_vDieSize>=3
 
-					if (cluster_counter_save > cluster_counter)
+					if (cluster_counter_save > cluster_counter) {
 						index -= (cluster_counter_save - cluster_counter);
-					if (index < 0)
+					}
+					if (index < 0) {
 						index = 0;
+					}
 				}// if
 				previousIndex = index;
 				// check if this cluster is a part of a die which is in another
 				// cluster
 				for (int index1 = index + 1; index1 < cluster_counter; index1++) {
-					double dist = java.lang.Math.sqrt((double) (clusterCenters[index][0] - clusterCenters[index1][0])
-							* (clusterCenters[index][0] - clusterCenters[index1][0])
-							+ (double) (clusterCenters[index][1] - clusterCenters[index1][1])
-							* (clusterCenters[index][1] - clusterCenters[index1][1]));
+					final double dist = java.lang.Math
+							.sqrt((double) (clusterCenters[index][0] - clusterCenters[index1][0])
+									* (clusterCenters[index][0] - clusterCenters[index1][0])
+									+ (double) (clusterCenters[index][1] - clusterCenters[index1][1])
+									* (clusterCenters[index][1] - clusterCenters[index1][1]));
 					if (dist <= maxClusterSize / 4
 							|| (vDie[index].size() == 2 && vDie[index1].size() == 2 && dist <= maxClusterSize / 2.59)) {
 						vDie = mergeClusters(vDie, index, index1);
@@ -984,15 +1017,15 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		// have originalPixels, but houghCountPixels...?!?!??????
 		// {
 		originalPixels = new int[area];
-		java.awt.image.PixelGrabber pg1 = new java.awt.image.PixelGrabber(originalImage, 0, 0, imageWidth, imageHeight,
-				originalPixels, 0, imageWidth);
+		final java.awt.image.PixelGrabber pg1 = new java.awt.image.PixelGrabber(originalImage, 0, 0, imageWidth,
+				imageHeight, originalPixels, 0, imageWidth);
 		try {
 			pg1.grabPixels();
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			e.printStackTrace();
 			System.exit(1);
 		}// catch
-		// }//if
+			// }//if
 		outPixels = originalPixels;
 
 		for (int clusterIndex = 0; clusterIndex < cluster_counter; clusterIndex++) {
@@ -1071,26 +1104,26 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					yMean = yMean / (vDie[clusterIndex].size() - 1);
 					indice = yMean * imageWidth + xMean;
 					for (int circleIndex = 0; circleIndex < 90; circleIndex++) {
-						theta = (double) circleIndex * java.lang.Math.PI / 180; // angle
+						theta = circleIndex * java.lang.Math.PI / 180; // angle
 						// in
 						// radians
 						x = (int) ((double) (maxClusterSize + 5) / 2 * java.lang.Math.cos(theta));
 						y = (int) ((double) (maxClusterSize + 5) / 2 * java.lang.Math.sin(theta));
 						try {
 							outPixels[(yMean + y) * imageWidth + (xMean + x)] = 0xffff00ff;
-						} catch (ArrayIndexOutOfBoundsException e) {
+						} catch (final ArrayIndexOutOfBoundsException e) {
 						}
 						try {
 							outPixels[(yMean + y) * imageWidth + (xMean - x)] = 0xffff00ff;
-						} catch (ArrayIndexOutOfBoundsException e) {
+						} catch (final ArrayIndexOutOfBoundsException e) {
 						}
 						try {
 							outPixels[(yMean - y) * imageWidth + (xMean + x)] = 0xffff00ff;
-						} catch (ArrayIndexOutOfBoundsException e) {
+						} catch (final ArrayIndexOutOfBoundsException e) {
 						}
 						try {
 							outPixels[(yMean - y) * imageWidth + (xMean - x)] = 0xffff00ff;
-						} catch (ArrayIndexOutOfBoundsException e) {
+						} catch (final ArrayIndexOutOfBoundsException e) {
 						}
 					}
 
@@ -1106,33 +1139,33 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				outPixels[indice] = cor;
 				try {
 					outPixels[indice - imageWidth - 1] = cor;
-				} catch (ArrayIndexOutOfBoundsException e) {
+				} catch (final ArrayIndexOutOfBoundsException e) {
 				}
 				try {
 					outPixels[indice - imageWidth + 1] = cor;
-				} catch (ArrayIndexOutOfBoundsException e) {
+				} catch (final ArrayIndexOutOfBoundsException e) {
 				}
 				try {
 					outPixels[indice + imageWidth - 1] = cor;
-				} catch (ArrayIndexOutOfBoundsException e) {
+				} catch (final ArrayIndexOutOfBoundsException e) {
 				}
 				try {
 					outPixels[indice + imageWidth + 1] = cor;
-				} catch (ArrayIndexOutOfBoundsException e) {
+				} catch (final ArrayIndexOutOfBoundsException e) {
 				}
 			}
 		}// for
 
 		// Builds the final image
-		java.awt.image.MemoryImageSource mis = new java.awt.image.MemoryImageSource(imageWidth, imageHeight, outPixels,
-				0, imageWidth);
+		final java.awt.image.MemoryImageSource mis = new java.awt.image.MemoryImageSource(imageWidth, imageHeight,
+				outPixels, 0, imageWidth);
 		fullCountImage = createImage(mis);
 
-		java.awt.MediaTracker tracker = new java.awt.MediaTracker(this);
+		final java.awt.MediaTracker tracker = new java.awt.MediaTracker(this);
 		tracker.addImage(fullCountImage, 0);
 		try {
 			tracker.waitForAll();
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
@@ -1157,9 +1190,10 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			// find the minimumin vDie
 			for (int ii = 0; ii < cluster_counter; ii++) {
 				for (int ij = 0; ij < vDie[ii].size() - 1; ij++) {
-					int temp = ((Integer) vDie[ii].get(ij)).intValue();
-					if (temp < minim && temp > minimBefore)
+					final int temp = ((Integer) vDie[ii].get(ij)).intValue();
+					if (temp < minim && temp > minimBefore) {
 						minim = temp;
+					}
 				}// for_ij
 			}// for_ii
 			fullCircles[i][0] = centers[minim][0];// houghCircles[minim][0];
@@ -1171,14 +1205,14 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		return fullCountImage;
 	}// refineCount
 
-	private java.awt.Image buildImage(int[][] centers, int centersCounter) {
-		int pixels[] = new int[area];
+	private java.awt.Image buildImage(final int[][] centers, final int centersCounter) {
+		final int pixels[] = new int[area];
 
-		java.awt.image.PixelGrabber pg = new java.awt.image.PixelGrabber(originalImage, 0, 0, imageWidth, imageHeight,
-				pixels, 0, imageWidth);
+		final java.awt.image.PixelGrabber pg = new java.awt.image.PixelGrabber(originalImage, 0, 0, imageWidth,
+				imageHeight, pixels, 0, imageWidth);
 		try {
 			pg.grabPixels();
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
@@ -1189,47 +1223,49 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			pixels[indice] = 0xffff00ff;
 			try {
 				pixels[indice - imageWidth - 1] = 0xffff00ff;
-			} catch (ArrayIndexOutOfBoundsException e) {
+			} catch (final ArrayIndexOutOfBoundsException e) {
 			}
 			try {
 				pixels[indice - imageWidth + 1] = 0xffff00ff;
-			} catch (ArrayIndexOutOfBoundsException e) {
+			} catch (final ArrayIndexOutOfBoundsException e) {
 			}
 			try {
 				pixels[indice + imageWidth - 1] = 0xffff00ff;
-			} catch (ArrayIndexOutOfBoundsException e) {
+			} catch (final ArrayIndexOutOfBoundsException e) {
 			}
 			try {
 				pixels[indice + imageWidth + 1] = 0xffff00ff;
-			} catch (ArrayIndexOutOfBoundsException e) {
+			} catch (final ArrayIndexOutOfBoundsException e) {
 			}
 		}
 		// Builds the final image
-		java.awt.image.MemoryImageSource mis = new java.awt.image.MemoryImageSource(imageWidth, imageHeight, pixels, 0,
-				imageWidth);
-		java.awt.Image image = createImage(mis);
+		final java.awt.image.MemoryImageSource mis = new java.awt.image.MemoryImageSource(imageWidth, imageHeight,
+				pixels, 0, imageWidth);
+		final java.awt.Image image = createImage(mis);
 
-		java.awt.MediaTracker tracker = new java.awt.MediaTracker(this);
+		final java.awt.MediaTracker tracker = new java.awt.MediaTracker(this);
 		tracker.addImage(image, 0);
 		try {
 			tracker.waitForAll();
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
 		return image;
 	}// buildImage(int[][] centers, int centersCounter)
 
-	private void countClusters(int[][] circles) {
+	private void countClusters(final int[][] circles) {
 		// Counting the number of Dice by clustering
 		int currentX, currentY;
 		int x, y;
-		int maxDice = 256;
+		final int maxDice = 256;
 
-		java.util.Vector vClusters = new java.util.Vector(maxDice); // is a
+		final java.util.Vector vClusters = new java.util.Vector(maxDice); // is
+																			// a
 		// vector of
 		// vectors
-		java.util.Vector[] vDie = new java.util.Vector[maxDice]; // is an array
+		final java.util.Vector[] vDie = new java.util.Vector[maxDice]; // is an
+																		// array
 		// of
 		// vectors
 		// of ints
@@ -1270,8 +1306,9 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 						belongsToClusters = true;
 						vDie[clusterIndex].addElement(new Integer(centerIndex));
 						break;
-					} else if (clusterIndex == vClusters.size() - 1)
+					} else if (clusterIndex == vClusters.size() - 1) {
 						belongsToClusters = false;
+					}
 
 					belongsToDie = true;
 				}
@@ -1306,7 +1343,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 	}// getCenters()
 
 	public int[] imageSize() {
-		int[] size = { 0, 0 };
+		final int[] size = { 0, 0 };
 
 		if (image != null) {
 			size[0] = image.getWidth(this);
@@ -1318,45 +1355,48 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		return (size);
 	}// imageSize()
 
-	public void setImage(java.awt.Image image) {
+	public void setImage(final java.awt.Image image) {
 		this.image = image;
-		this.currentImageType = "unknown";
+		currentImageType = "unknown";
 	}
 
-	private void setImage(java.awt.Image image, String currentImageType) {
+	private void setImage(final java.awt.Image image, final String currentImageType) {
 		this.currentImageType = currentImageType;
 		this.image = image;
 	}// setImage(java.awt.Image image, String currentImageType)
 
-	public java.awt.Image getImage(String imageType) {
-		if (imageType == "unknown")
+	public java.awt.Image getImage(final String imageType) {
+		if (imageType == "unknown") {
 			return null;
-		else if (imageType == "Original" || imageType == "Original")
+		} else if (imageType == "Original" || imageType == "Original") {
 			return originalImage;
-		else if (imageType == "BW" || imageType == "bw")
+		} else if (imageType == "BW" || imageType == "bw") {
 			return BWImage;
-		else if (imageType == "Edges" || imageType == "edges")
+		} else if (imageType == "Edges" || imageType == "edges") {
 			return edgesImage;
-		else if (imageType == "Hough" || imageType == "hough")
+		} else if (imageType == "Hough" || imageType == "hough") {
 			return houghImage;
-		else if (imageType == "Convolution" || imageType == "convolution" || imageType == "Conv" || imageType == "conv")
+		} else if (imageType == "Convolution" || imageType == "convolution" || imageType == "Conv"
+				|| imageType == "conv") {
 			return convolutionImage;
-		else if (imageType == "count" || imageType == "Count")
+		} else if (imageType == "count" || imageType == "Count") {
 			return fullCountImage;
-		else
+		} else {
 			return originalImage;
+		}
 
 	}// getImage(String imageType)
 
 	/**
-	 *Implementation of Cloneable
+	 * Implementation of Cloneable
 	 */
+	@Override
 	public Object clone() {
 		Object clone = null;
 		try {
 			// get our superclass to do the cloning for us
 			clone = super.clone();
-		} catch (CloneNotSupportedException e) {
+		} catch (final CloneNotSupportedException e) {
 			// ignore this, because we know we're cloneable
 		}
 
@@ -1364,46 +1404,52 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 	}// clone()
 
 	/**
-	 *Math Functions
+	 * Math Functions
 	 */
-	private int max(int a, int b) {
-		if (a > b)
+	private int max(final int a, final int b) {
+		if (a > b) {
 			return a;
+		}
 		return b;
 	}// max_int
 
-	private double max(double a, double b) {
-		if (a > b)
+	private double max(final double a, final double b) {
+		if (a > b) {
 			return a;
+		}
 		return b;
 	}// max_double
 
-	private int min(int a, int b) {
-		if (a < b)
+	private int min(final int a, final int b) {
+		if (a < b) {
 			return a;
+		}
 		return b;
 	}// min
 
-	private int abs(int a) {
-		if (a < 0)
+	private int abs(final int a) {
+		if (a < 0) {
 			return (-a);
+		}
 		return a;
 	}// abs
 
-	private double abs(double a) {
-		if (a < 0)
+	private double abs(final double a) {
+		if (a < 0) {
 			return -a;
+		}
 		return a;
 	}// abs
 
 	/**
 	 * number! (factorial)
 	 */
-	private int permutations(int number) {
-		if (number < 0)
+	private int permutations(final int number) {
+		if (number < 0) {
 			return 0;
-		else if (number == 0)
+		} else if (number == 0) {
 			return 1;
+		}
 
 		int returnNumber = 1;
 		for (int i = 2; i <= number; i++) {
@@ -1414,102 +1460,117 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 	}// permutations
 
 	/**
-	 *n_C_k = n! / ( k! * (n-k)! )
+	 * n_C_k = n! / ( k! * (n-k)! )
 	 */
-	private int combinations(int n, int k) {
-		if (n < k)
+	private int combinations(final int n, final int k) {
+		if (n < k) {
 			return 0;
+		}
 		return (permutations(n) / (permutations(k) * permutations(n - k)));
 	}// combinations
 
 	/**
-	 *Functions for Array Operations
+	 * Functions for Array Operations
 	 */
 
-	private int[] removeArrayEntry(int[] array, int index) {
-		int[] newArray = new int[array.length - 1];
+	private int[] removeArrayEntry(final int[] array, final int index) {
+		final int[] newArray = new int[array.length - 1];
 		for (int i = 0; i < array.length; i++) {
-			if (i < index)
+			if (i < index) {
 				newArray[i] = array[i];
-			else if (i > index)
+			} else if (i > index) {
 				newArray[i - 1] = array[i];
+			}
 		}// for
 
 		return newArray;
 	}// removeArrayEntry_int[]
 
-	private double[] removeArrayEntry(double[] array, int index) {
-		double[] newArray = new double[array.length - 1];
+	private double[] removeArrayEntry(final double[] array, final int index) {
+		final double[] newArray = new double[array.length - 1];
 		for (int i = 0; i < array.length; i++) {
-			if (i < index)
+			if (i < index) {
 				newArray[i] = array[i];
-			else if (i > index)
+			} else if (i > index) {
 				newArray[i - 1] = array[i];
+			}
 		}// for
 
 		return newArray;
 	}// removeArrayEntry_double[]
 
-	private int[][] removeArrayEntry(int[][] array, int index, int level) {
+	private int[][] removeArrayEntry(final int[][] array, final int index, final int level) {
 		int[][] newArray;
-		if (level == 0)
+		if (level == 0) {
 			newArray = new int[array.length - 1][array[0].length];
-		else
+		} else {
 			newArray = new int[array.length][array[0].length - 1];
+		}
 
 		if (level == 0) {
 			for (int i = 0; i < array.length; i++) {
-				if (i < index)
-					for (int j = 0; j < array[0].length; j++)
+				if (i < index) {
+					for (int j = 0; j < array[0].length; j++) {
 						newArray[i][j] = array[i][j];
-				else if (i > index)
-					for (int j = 0; j < array[0].length; j++)
+					}
+				} else if (i > index) {
+					for (int j = 0; j < array[0].length; j++) {
 						newArray[i - 1][j] = array[i][j];
+					}
+				}
 			}// for
 		}// if
 		else if (level == 1) {
 			for (int i = 0; i < array.length; i++) {
-				for (int j = 0; j < array[0].length; j++)
-					if (j < index)
+				for (int j = 0; j < array[0].length; j++) {
+					if (j < index) {
 						newArray[i][j] = array[i][j];
-					else if (j > index)
+					} else if (j > index) {
 						newArray[i][j - 1] = array[i][j];
+					}
+				}
 			}// for
 		}// else if
 		return newArray;
 	}// removeArrayEntry_int[][]
 
-	private double[][] removeArrayEntry(double[][] array, int index, int level) {
+	private double[][] removeArrayEntry(final double[][] array, final int index, final int level) {
 		double[][] newArray;
-		if (level == 0)
+		if (level == 0) {
 			newArray = new double[array.length - 1][array[0].length];
-		else
+		} else {
 			newArray = new double[array.length][array[0].length - 1];
+		}
 
 		if (level == 0) {
 			for (int i = 0; i < array.length; i++) {
-				if (i < index)
-					for (int j = 0; j < array[0].length; j++)
+				if (i < index) {
+					for (int j = 0; j < array[0].length; j++) {
 						newArray[i][j] = array[i][j];
-				else if (i > index)
-					for (int j = 0; j < array[0].length; j++)
+					}
+				} else if (i > index) {
+					for (int j = 0; j < array[0].length; j++) {
 						newArray[i - 1][j] = array[i][j];
+					}
+				}
 			}// for
 		}// if
 		else if (level == 1) {
 			for (int i = 0; i < array.length; i++) {
-				for (int j = 0; j < array[0].length; j++)
-					if (j < index)
+				for (int j = 0; j < array[0].length; j++) {
+					if (j < index) {
 						newArray[i][j] = array[i][j];
-					else if (j > index)
+					} else if (j > index) {
 						newArray[i][j - 1] = array[i][j];
+					}
+				}
 			}// for
 		}// else if
 		return newArray;
 	}// removeArrayEntry_double[][]
 
-	private int[] addArrayEntry(int[] array, int newEntry) {
-		int[] newArray = new int[array.length + 1];
+	private int[] addArrayEntry(final int[] array, final int newEntry) {
+		final int[] newArray = new int[array.length + 1];
 		for (int i = 0; i < array.length; i++) {
 			newArray[i] = array[i];
 		}// for_i
@@ -1518,8 +1579,8 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		return newArray;
 	}// addArrayEntry_int[]
 
-	private double[] addArrayEntry(double[] array, double newEntry) {
-		double[] newArray = new double[array.length + 1];
+	private double[] addArrayEntry(final double[] array, final double newEntry) {
+		final double[] newArray = new double[array.length + 1];
 		for (int i = 0; i < array.length; i++) {
 			newArray[i] = array[i];
 		}// for_i
@@ -1529,10 +1590,10 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 	}// addArrayEntry_double[]
 
 	/**
-	 *Cluster Operations
+	 * Cluster Operations
 	 */
-	private int[][] getClusterCenters(java.util.Vector[] vDie) {
-		int[][] clusterCentersThis = new int[cluster_counter][2];
+	private int[][] getClusterCenters(final java.util.Vector[] vDie) {
+		final int[][] clusterCentersThis = new int[cluster_counter][2];
 		// System.out.println("getClusterCenters -- cluster_counter:"+cluster_counter);
 		for (int index1 = 0; index1 < cluster_counter; index1++) {
 			for (int index2 = 0; index2 < vDie[index1].size() - 1; index2++) {
@@ -1540,7 +1601,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				// System.out.println(index1 + ", " + index2);
 				try {
 					centerIndex = Integer.parseInt(vDie[index1].get(index2).toString());
-				} catch (NumberFormatException e) {
+				} catch (final NumberFormatException e) {
 				}
 				// System.out.println(centerIndex + ";  " +
 				// centers[centerIndex][0] + "; " + centers[centerIndex][1]);
@@ -1557,7 +1618,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		return clusterCentersThis;
 	}// getClusterCenters
 
-	private java.util.Vector[] mergeClusters(java.util.Vector[] vDie, int index1, int index2) {
+	private java.util.Vector[] mergeClusters(final java.util.Vector[] vDie, final int index1, final int index2) {
 		// System.out.println("Merging clusters " + index1 + " and " + index2 +
 		// ".");
 		for (int index = 0; index < vDie[index2].size(); index++) // copying
@@ -1567,12 +1628,13 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		// to
 		// cluster 1
 		{
-			if (index == 0)
+			if (index == 0) {
 				vDie[index1].set(vDie[index1].size() - 1, vDie[index2].get(index));
-			else
+			} else {
 				vDie[index1].addElement(vDie[index2].get(index));
+			}
 		}// for_index
-		// deleting cluster 2
+			// deleting cluster 2
 		for (int index = index2 + 1; index < vDie.length; index++) {
 			vDie[index - 1] = vDie[index];
 		}// for_index
@@ -1580,8 +1642,8 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		return vDie;
 	}// mergeClusters
 
-	private java.util.Vector[] changeSpot(java.util.Vector[] vDie, int sourceCluster, int sourceIndex,
-			int destinyCluster) {
+	private java.util.Vector[] changeSpot(final java.util.Vector[] vDie, final int sourceCluster,
+			final int sourceIndex, final int destinyCluster) {
 		// System.out.println("Changing spot " +
 		// vDie[sourceCluster].get(sourceIndex) + " from cluster " +
 		// sourceCluster + " to cluster " + destinyCluster);
@@ -1592,7 +1654,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		return vDie;
 	}// changeSpot
 
-	private java.util.Vector[] removeSpot(java.util.Vector[] vDie, int vDieIndex, int index) {
+	private java.util.Vector[] removeSpot(final java.util.Vector[] vDie, final int vDieIndex, final int index) {
 		// System.out.println("removing spot " + vDie[vDieIndex].get(index));
 		vDie[vDieIndex].remove(index);
 		// System.out.println("After removing spot => die:" + vDieIndex + " : "+
@@ -1602,14 +1664,15 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 	}// removeSpot
 
 	/**
-	 *spot Checking
+	 * spot Checking
 	 */
 	// checks the pixels of the B&W image
-	private java.util.Vector isSpot(int pixelIndex, int raio, boolean isProbableSix, boolean isProbableOne) {
-		int[] imSize = imageSize();
-		int imageWidth = imSize[0], imageHeight = imSize[1], numberOfFalses = 0;
-		boolean badTopRight = true, badTop = true, badTopLeft = true, badRight = true, badBottomRight = true, badBottom = true, badBottomLeft = true, badLeft = true;
-		java.util.Vector toReturn = new java.util.Vector(4);
+	private java.util.Vector isSpot(final int pixelIndex, final int raio, final boolean isProbableSix,
+			final boolean isProbableOne) {
+		final int[] imSize = imageSize();
+		final int imageWidth = imSize[0], imageHeight = imSize[1], numberOfFalses = 0;
+		final boolean badTopRight = true, badTop = true, badTopLeft = true, badRight = true, badBottomRight = true, badBottom = true, badBottomLeft = true, badLeft = true;
+		final java.util.Vector toReturn = new java.util.Vector(4);
 		toReturn.add(0, Boolean.FALSE);
 		toReturn.add(1, new Integer(0)); // zeroCounter
 		toReturn.add(2, new Integer(0)); // oneCounter
@@ -1630,41 +1693,49 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		int topPixCount = 0, topRightPixCount = 0, rightPixCount = 0, bottomRightPixCount = 0;
 		int bottomPixCount = 0, bottomLeftPixCount = 0, leftPixCount = 0, topLeftPixCount = 0;
 
-		int xCenter = pixelIndex % imageWidth, yCenter = pixelIndex / imageWidth;
-		int maxIndex = java.lang.Math.min(java.lang.Math.min(xCenter, imageWidth - xCenter), java.lang.Math.min(
-				yCenter, imageHeight - yCenter));
+		final int xCenter = pixelIndex % imageWidth, yCenter = pixelIndex / imageWidth;
+		final int maxIndex = java.lang.Math.min(java.lang.Math.min(xCenter, imageWidth - xCenter),
+				java.lang.Math.min(yCenter, imageHeight - yCenter));
 
 		for (int index = 1; index < maxIndex; index++) {
-			if (topPixCount == 0 && (BWPixels[pixelIndex - index * imageWidth] & 0x000000ff) == 255)
+			if (topPixCount == 0 && (BWPixels[pixelIndex - index * imageWidth] & 0x000000ff) == 255) {
 				topPixCount = index;
-			if (topRightPixCount == 0 && (BWPixels[pixelIndex - index * imageWidth + index] & 0x000000ff) == 255)
+			}
+			if (topRightPixCount == 0 && (BWPixels[pixelIndex - index * imageWidth + index] & 0x000000ff) == 255) {
 				topRightPixCount = index;
-			if (rightPixCount == 0 && (BWPixels[pixelIndex + index] & 0x000000ff) == 255)
+			}
+			if (rightPixCount == 0 && (BWPixels[pixelIndex + index] & 0x000000ff) == 255) {
 				rightPixCount = index;
-			if (bottomRightPixCount == 0 && (BWPixels[pixelIndex + index * imageWidth + index] & 0x000000ff) == 255)
+			}
+			if (bottomRightPixCount == 0 && (BWPixels[pixelIndex + index * imageWidth + index] & 0x000000ff) == 255) {
 				bottomRightPixCount = index;
-			if (bottomPixCount == 0 && (BWPixels[pixelIndex + index * imageWidth] & 0x000000ff) == 255)
+			}
+			if (bottomPixCount == 0 && (BWPixels[pixelIndex + index * imageWidth] & 0x000000ff) == 255) {
 				bottomPixCount = index;
-			if (bottomLeftPixCount == 0 && (BWPixels[pixelIndex + index * imageWidth - index] & 0x000000ff) == 255)
+			}
+			if (bottomLeftPixCount == 0 && (BWPixels[pixelIndex + index * imageWidth - index] & 0x000000ff) == 255) {
 				bottomLeftPixCount = index;
-			if (leftPixCount == 0 && (BWPixels[pixelIndex - index] & 0x000000ff) == 255)
+			}
+			if (leftPixCount == 0 && (BWPixels[pixelIndex - index] & 0x000000ff) == 255) {
 				leftPixCount = index;
-			if (topLeftPixCount == 0 && (BWPixels[pixelIndex - index * imageWidth - index] & 0x000000ff) == 255)
+			}
+			if (topLeftPixCount == 0 && (BWPixels[pixelIndex - index * imageWidth - index] & 0x000000ff) == 255) {
 				topLeftPixCount = index;
+			}
 		}// for_index
 
-		int sumCount = topPixCount + topRightPixCount + rightPixCount + bottomRightPixCount + bottomPixCount
+		final int sumCount = topPixCount + topRightPixCount + rightPixCount + bottomRightPixCount + bottomPixCount
 				+ bottomLeftPixCount + leftPixCount + topLeftPixCount;
 		double temp1 = Math.sqrt((double) (topRightPixCount) * (topRightPixCount)
 				+ (double) (topPixCount - topRightPixCount) * (topPixCount - topRightPixCount));
 		double temp2 = Math.sqrt((double) (rightPixCount) * (rightPixCount) + (double) (topPixCount) * (topPixCount));
 		double temp3 = Math.sqrt((double) (bottomRightPixCount) * (bottomRightPixCount)
 				+ (double) (topPixCount + bottomRightPixCount) * (topPixCount + bottomRightPixCount));
-		double temp4 = (double) (topPixCount + bottomPixCount);
+		double temp4 = (topPixCount + bottomPixCount);
 		double temp5 = Math.sqrt((double) (bottomLeftPixCount) * (bottomLeftPixCount)
 				+ (double) (topPixCount + bottomLeftPixCount) * (topPixCount + bottomLeftPixCount));
 		double temp6 = Math.sqrt((double) (leftPixCount) * (leftPixCount) + (double) (topPixCount) * (topPixCount));
-		double temp7 = Math.sqrt((double) (topLeftPixCount) * (topLeftPixCount)
+		final double temp7 = Math.sqrt((double) (topLeftPixCount) * (topLeftPixCount)
 				+ (double) (topPixCount - topLeftPixCount) * (topPixCount - topLeftPixCount));
 
 		double maxDiffD = max(max(max(temp1, temp2), max(temp3, temp4)), max(max(temp5, temp6), temp7));
@@ -1675,7 +1746,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				+ (double) (topRightPixCount + bottomRightPixCount) * (topRightPixCount + bottomRightPixCount));
 		temp3 = Math.sqrt((double) (topRightPixCount) * (topRightPixCount)
 				+ (double) (topRightPixCount + bottomPixCount) * (topRightPixCount + bottomPixCount));
-		temp4 = (double) (topRightPixCount + bottomLeftPixCount) * Math.sqrt(2);
+		temp4 = (topRightPixCount + bottomLeftPixCount) * Math.sqrt(2);
 		temp5 = Math.sqrt((double) (topRightPixCount + leftPixCount) * (topRightPixCount + leftPixCount)
 				+ (double) (topRightPixCount) * (topRightPixCount));
 		temp6 = Math.sqrt((double) (topRightPixCount + topLeftPixCount) * (topRightPixCount + topLeftPixCount)
@@ -1688,7 +1759,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		temp2 = Math.sqrt((double) (rightPixCount) * (rightPixCount) + (double) (bottomPixCount) * (bottomPixCount));
 		temp3 = Math.sqrt((double) (rightPixCount + bottomLeftPixCount) * (rightPixCount + bottomLeftPixCount)
 				+ (double) (bottomLeftPixCount) * (bottomLeftPixCount));
-		temp4 = (double) (rightPixCount + leftPixCount);
+		temp4 = (rightPixCount + leftPixCount);
 		temp5 = Math.sqrt((double) (rightPixCount + topLeftPixCount) * (rightPixCount + topLeftPixCount)
 				+ (double) (topLeftPixCount) * (topLeftPixCount));
 
@@ -1701,7 +1772,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				* (bottomRightPixCount - bottomLeftPixCount));
 		temp3 = Math.sqrt((double) (bottomRightPixCount + leftPixCount) * (bottomRightPixCount + leftPixCount)
 				+ (double) (bottomRightPixCount) * (bottomRightPixCount));
-		temp4 = (double) (bottomRightPixCount + topLeftPixCount) * Math.sqrt(2);
+		temp4 = (bottomRightPixCount + topLeftPixCount) * Math.sqrt(2);
 
 		maxDiffD = max(max(max(temp1, temp2), max(temp3, temp4)), maxDiffD);
 
@@ -1725,7 +1796,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 
 		maxDiffD = max(temp1, maxDiffD);
 
-		int maxDiff = (int) Math.round(maxDiffD);
+		final int maxDiff = (int) Math.round(maxDiffD);
 
 		// System.out.println("top:" + topPixCount + ", topRight:" +
 		// topRightPixCount + ", right:" + rightPixCount + ", bottomRight:" +
@@ -1735,22 +1806,30 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 
 		// check for zeros
 		int zeroCounter = 0;
-		if (topPixCount == 0)
+		if (topPixCount == 0) {
 			zeroCounter++;
-		if (topRightPixCount == 0)
+		}
+		if (topRightPixCount == 0) {
 			zeroCounter++;
-		if (rightPixCount == 0)
+		}
+		if (rightPixCount == 0) {
 			zeroCounter++;
-		if (bottomRightPixCount == 0)
+		}
+		if (bottomRightPixCount == 0) {
 			zeroCounter++;
-		if (bottomPixCount == 0)
+		}
+		if (bottomPixCount == 0) {
 			zeroCounter++;
-		if (bottomLeftPixCount == 0)
+		}
+		if (bottomLeftPixCount == 0) {
 			zeroCounter++;
-		if (leftPixCount == 0)
+		}
+		if (leftPixCount == 0) {
 			zeroCounter++;
-		if (topLeftPixCount == 0)
+		}
+		if (topLeftPixCount == 0) {
 			zeroCounter++;
+		}
 
 		if (zeroCounter > 2) {
 			// System.out.println("zeroCounter("+zeroCounter+") >=2");
@@ -1763,48 +1842,66 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		// zeroCounter = 0; we don't reset the zerCounter so we can find spots
 		// that have a zero and something else
 		// 4.6 * 5 = 23 ; I need this to be smaller than 24 and larger than 22
-		int minCount = 2, maxCount;
+		final int minCount = 2;
+		int maxCount;
 		int maxCounter = 0;
 
-		if (isProbableSix)
+		if (isProbableSix) {
 			maxCount = (int) (5.2 * raio);
-		else
+		} else {
 			maxCount = (int) (2.2 * raio);// raio+2;
+		}
 
-		if (topPixCount > maxCount)
+		if (topPixCount > maxCount) {
 			maxCounter++;
-		if (topRightPixCount > maxCount)
+		}
+		if (topRightPixCount > maxCount) {
 			maxCounter++;
-		if (rightPixCount > maxCount)
+		}
+		if (rightPixCount > maxCount) {
 			maxCounter++;
-		if (bottomRightPixCount > maxCount)
+		}
+		if (bottomRightPixCount > maxCount) {
 			maxCounter++;
-		if (bottomPixCount > maxCount)
+		}
+		if (bottomPixCount > maxCount) {
 			maxCounter++;
-		if (bottomLeftPixCount > maxCount)
+		}
+		if (bottomLeftPixCount > maxCount) {
 			maxCounter++;
-		if (leftPixCount > maxCount)
+		}
+		if (leftPixCount > maxCount) {
 			maxCounter++;
-		if (topLeftPixCount > maxCount)
+		}
+		if (topLeftPixCount > maxCount) {
 			maxCounter++;
+		}
 
 		int oneCounter = 0;
-		if (topPixCount < minCount && topPixCount > 0)
+		if (topPixCount < minCount && topPixCount > 0) {
 			oneCounter++;
-		if (topRightPixCount < minCount && topRightPixCount > 0)
+		}
+		if (topRightPixCount < minCount && topRightPixCount > 0) {
 			oneCounter++;
-		if (rightPixCount < minCount && rightPixCount > 0)
+		}
+		if (rightPixCount < minCount && rightPixCount > 0) {
 			oneCounter++;
-		if (bottomRightPixCount < minCount && bottomRightPixCount > 0)
+		}
+		if (bottomRightPixCount < minCount && bottomRightPixCount > 0) {
 			oneCounter++;
-		if (bottomPixCount < minCount && bottomPixCount > 0)
+		}
+		if (bottomPixCount < minCount && bottomPixCount > 0) {
 			oneCounter++;
-		if (bottomLeftPixCount < minCount && bottomLeftPixCount > 0)
+		}
+		if (bottomLeftPixCount < minCount && bottomLeftPixCount > 0) {
 			oneCounter++;
-		if (leftPixCount < minCount && leftPixCount > 0)
+		}
+		if (leftPixCount < minCount && leftPixCount > 0) {
 			oneCounter++;
-		if (topLeftPixCount < minCount && topLeftPixCount > 0)
+		}
+		if (topLeftPixCount < minCount && topLeftPixCount > 0) {
 			oneCounter++;
+		}
 
 		toReturn.set(1, new Integer(zeroCounter)); // zeroCounter
 		toReturn.set(2, new Integer(oneCounter)); // oneCounter
@@ -1841,11 +1938,12 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			// System.out.println("maxCounter("+maxCounter+") > 1 && maxDiff("+maxDiff+") > maxCount("+maxCount+")");
 			return toReturn;
 		}// if
-		// int maxmaxDiff = 4, minSumCount = 22;
-		// if (oneCounter > 2 && maxDiff > maxmaxDiff && sumCount < minSumCount)
-		// return false;
+			// int maxmaxDiff = 4, minSumCount = 22;
+			// if (oneCounter > 2 && maxDiff > maxmaxDiff && sumCount <
+			// minSumCount)
+			// return false;
 
-		int minSumCount = 21;// 24;//18;
+		final int minSumCount = 21;// 24;//18;
 		if (oneCounter > 6)// 5
 		{
 			// System.out.println("oneCounter("+oneCounter+") > 6");
@@ -1872,10 +1970,11 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 	}// isSpot
 
 	/**
-	 *Spot Count Checking
+	 * Spot Count Checking
 	 */
 
-	private boolean checkSpotCount(double[] distance, int spotCount, int[] pixelIndex, int maxClusterSize) {
+	private boolean checkSpotCount(final double[] distance, final int spotCount, final int[] pixelIndex,
+			final int maxClusterSize) {
 		boolean spotCountIsCorrect = false;
 		switch (spotCount) {
 		case 1:
@@ -1903,18 +2002,20 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		return spotCountIsCorrect;
 	}// checkSpotCount
 
-	private boolean isOne(int[] pixelIndex, int maxClusterSize) {
+	private boolean isOne(final int[] pixelIndex, final int maxClusterSize) {
 
-		int x1, y1, centerIndex1 = 0;
-		int imageWidth = imageSize()[0];
+		int x1, y1;
+		final int centerIndex1 = 0;
+		final int imageWidth = imageSize()[0];
 		// double maxmaxDist = (double)maxClusterSize/2. * 1.195;
 
 		x1 = pixelIndex[0] % imageWidth;
 		y1 = pixelIndex[0] / imageWidth;
 		// check pixels in a star like manner to determine if this is really a
 		// 'one'
-		boolean[] isPreviousWhite = new boolean[8], done = new boolean[8];
-		int[] side = new int[8]; // start at the top and move clockWise (side[0]
+		final boolean[] isPreviousWhite = new boolean[8], done = new boolean[8];
+		final int[] side = new int[8]; // start at the top and move clockWise
+										// (side[0]
 		// == top ; side[2] == right, etc...)
 
 		for (int i = 0; i < 8; i++) {
@@ -1929,7 +2030,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			int pixel = -1;
 			try {
 				pixel = (BWPixels[x + y * imageWidth] & 0x000000ff);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 			}
 			if (pixel == 0) {
 				if (isPreviousWhite[0] && side[0] != 0 && !done[0]) {
@@ -1940,15 +2041,16 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			}// if
 			else {
 				isPreviousWhite[0] = true;
-				if (side[0] == 0)
+				if (side[0] == 0) {
 					side[0] = i;
+				}
 			}// else
 
 			x = x1 + i;
 			y = y1 - i; // top-right
 			try {
 				pixel = (BWPixels[x + y * imageWidth] & 0x000000ff);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 			}
 			if (pixel == 0) {
 				if (isPreviousWhite[1] && side[1] != 0 && !done[1]) {
@@ -1959,15 +2061,16 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			}// if
 			else {
 				isPreviousWhite[1] = true;
-				if (side[1] == 0)
+				if (side[1] == 0) {
 					side[1] = i;
+				}
 			}// else
 
 			x = x1 + i;
 			y = y1; // right
 			try {
 				pixel = (BWPixels[x + y * imageWidth] & 0x000000ff);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 			}
 			if (pixel == 0) {
 				if (isPreviousWhite[2] && side[2] != 0 && !done[2]) {
@@ -1978,8 +2081,9 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			}// if
 			else {
 				isPreviousWhite[2] = true;
-				if (side[2] == 0)
+				if (side[2] == 0) {
 					side[2] = i;
+				}
 			}// else
 
 			x = x1 + i;
@@ -1988,7 +2092,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			// ((BWPixels[x+y*imageWidth]&0x000000ff) == 0));
 			try {
 				pixel = (BWPixels[x + y * imageWidth] & 0x000000ff);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 			}
 			if (pixel == 0) {
 				if (isPreviousWhite[3] && side[3] != 0 && !done[3]) {
@@ -1999,15 +2103,16 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			}// if
 			else {
 				isPreviousWhite[3] = true;
-				if (side[3] == 0)
+				if (side[3] == 0) {
 					side[3] = i;
+				}
 			}// else
 
 			x = x1;
 			y = y1 + i; // bottom
 			try {
 				pixel = (BWPixels[x + y * imageWidth] & 0x000000ff);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 			}
 			if (pixel == 0) {
 				if (isPreviousWhite[4] && side[4] != 0 && !done[4]) {
@@ -2018,15 +2123,16 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			}// if
 			else {
 				isPreviousWhite[4] = true;
-				if (side[4] == 0)
+				if (side[4] == 0) {
 					side[4] = i;
+				}
 			}// else
 
 			x = x1 - i;
 			y = y1 + i; // bottom-left
 			try {
 				pixel = (BWPixels[x + y * imageWidth] & 0x000000ff);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 			}
 			if (pixel == 0) {
 				if (isPreviousWhite[5] && side[5] != 0 && !done[5]) {
@@ -2037,15 +2143,16 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			}// if
 			else {
 				isPreviousWhite[5] = true;
-				if (side[5] == 0)
+				if (side[5] == 0) {
 					side[5] = i;
+				}
 			}// else
 
 			x = x1 - i;
 			y = y1; // left
 			try {
 				pixel = (BWPixels[x + y * imageWidth] & 0x000000ff);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 			}
 			if (pixel == 0) {
 				if (isPreviousWhite[6] && side[6] != 0 && !done[6]) {
@@ -2056,15 +2163,16 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			}// if
 			else {
 				isPreviousWhite[6] = true;
-				if (side[6] == 0)
+				if (side[6] == 0) {
 					side[6] = i;
+				}
 			}// else
 
 			x = x1 - i;
 			y = y1 - i; // top-left
 			try {
 				pixel = (BWPixels[x + y * imageWidth] & 0x000000ff);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 			}
 			if (pixel == 0) {
 				if (isPreviousWhite[7] && side[7] != 0 && !done[7]) {
@@ -2075,14 +2183,15 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			}// if
 			else {
 				isPreviousWhite[7] = true;
-				if (side[7] == 0)
+				if (side[7] == 0) {
 					side[7] = i;
+				}
 			}// else
 
 		}// for_i
 
-		int minStraight = (int) ((double) maxClusterSize / 3.3);
-		int maxStraight = (int) ((double) maxClusterSize / 1.5);
+		final int minStraight = (int) (maxClusterSize / 3.3);
+		final int maxStraight = (int) (maxClusterSize / 1.5);
 		int lessThanMinCounter = 0, moreThanMaxCounter = 0, consecutiveLessThanMinCounter = 0;
 		boolean good = true, wasBeforeLessThanMin = false;
 		for (int i = 0; i < 8; i++) {
@@ -2090,8 +2199,9 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			// +" ;minStraight:"+ minStraight + " ;maxStraight:"+maxStraight);
 			if (side[i] < minStraight) {
 				lessThanMinCounter++;
-				if (wasBeforeLessThanMin)
+				if (wasBeforeLessThanMin) {
 					consecutiveLessThanMinCounter++;
+				}
 				wasBeforeLessThanMin = true;
 			} else if (side[i] > maxStraight) {
 				moreThanMaxCounter++;
@@ -2102,16 +2212,17 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			}// else
 		}// for_i
 		if ((lessThanMinCounter > 2 && consecutiveLessThanMinCounter > 0)
-				|| (lessThanMinCounter > 3 && consecutiveLessThanMinCounter == 0) || moreThanMaxCounter > 0)
+				|| (lessThanMinCounter > 3 && consecutiveLessThanMinCounter == 0) || moreThanMaxCounter > 0) {
 			good = false;
+		}
 
 		return good;
 	}// isOne
 
-	private boolean isTwo(double[] distance, int[] pixelIndex, boolean isRelaxed) {
-		double minDist = 10.770329614269007, maxDist = 15.811388300841896;// 15.033296378372908;
+	private boolean isTwo(final double[] distance, final int[] pixelIndex, final boolean isRelaxed) {
+		final double minDist = 10.770329614269007, maxDist = 15.811388300841896;// 15.033296378372908;
 		// System.out.println(distance[0] + "; " + distance[1]);
-		int[] whiteCounters = countWhitePatches(pixelIndex[0], pixelIndex[1]);
+		final int[] whiteCounters = countWhitePatches(pixelIndex[0], pixelIndex[1]);
 		int whiteCounterNumMin = 0, whiteCounterNumMax = 0, minWhitePixelCounter = 0, maxWhitePixelCounter = 0;
 		if (isRelaxed) {
 			whiteCounterNumMin = 0;
@@ -2130,78 +2241,87 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		// +"; whitePixelCounter:"+whiteCounters[1]+", max:"+maxWhitePixelCounter+", min:"+minWhitePixelCounter);
 		if (distance[0] >= minDist && distance[0] <= maxDist && distance[1] >= minDist && distance[1] <= maxDist
 				&& whiteCounters[0] >= whiteCounterNumMin && whiteCounters[0] <= whiteCounterNumMax
-				&& whiteCounters[1] >= minWhitePixelCounter && whiteCounters[1] <= maxWhitePixelCounter)
+				&& whiteCounters[1] >= minWhitePixelCounter && whiteCounters[1] <= maxWhitePixelCounter) {
 			return true;
+		}
 		return false;
 	}// isTwo
 
-	private boolean isThree(double[] distance, int[] pixelIndex) {
-		double minDistCenter = 0.0, maxDistCenter = 1.4142135623730951, minDist = 10.770329614269007, maxDist = 14.866068747318506;
-		double distance1 = distance[0];
-		double distance2 = distance[1];
-		double distance3 = distance[2];
-		int startPixelIndex = 0, endPixelIndex = 0, minWhiteCounter = 2, maxWhiteCounter = 2, minWhitePixelCounter = 4, maxWhitePixelCounter = 13;
+	private boolean isThree(final double[] distance, final int[] pixelIndex) {
+		final double minDistCenter = 0.0, maxDistCenter = 1.4142135623730951, minDist = 10.770329614269007, maxDist = 14.866068747318506;
+		final double distance1 = distance[0];
+		final double distance2 = distance[1];
+		final double distance3 = distance[2];
+		int startPixelIndex = 0, endPixelIndex = 0;
+		final int minWhiteCounter = 2, maxWhiteCounter = 2, minWhitePixelCounter = 4, maxWhitePixelCounter = 13;
 
 		for (int i = 0; i < 3; i++) {
-			if (startPixelIndex != 0 && distance[i] >= minDist)
+			if (startPixelIndex != 0 && distance[i] >= minDist) {
 				endPixelIndex = pixelIndex[i];
-			if (startPixelIndex == 0 && distance[i] >= minDist)
+			}
+			if (startPixelIndex == 0 && distance[i] >= minDist) {
 				startPixelIndex = pixelIndex[i];
+			}
 		}// for_i
-		// System.out.println("start: ("+startPixelIndex%imageSize()[0]+","+startPixelIndex/imageSize()[0]+") ::: end: ("+endPixelIndex%imageSize()[0]+","+endPixelIndex/imageSize()[0]+")");
-		int[] whiteCounters = countWhitePatches(startPixelIndex, endPixelIndex);
+			// System.out.println("start: ("+startPixelIndex%imageSize()[0]+","+startPixelIndex/imageSize()[0]+") ::: end: ("+endPixelIndex%imageSize()[0]+","+endPixelIndex/imageSize()[0]+")");
+		final int[] whiteCounters = countWhitePatches(startPixelIndex, endPixelIndex);
 		// System.out.println("whiteCounter:"+whiteCounters[0]+
 		// ",pixelCounter:"+whiteCounters[1]);
 		// System.out.println(distance1 + "; " + distance2 + "; " + distance3);
 		int centerSpot = 0;
 		// First check if there is a spot in the middle. If not, then we have a
 		// bad detection. let's try to fix it!
-		if (distance1 <= maxDistCenter && distance1 >= minDistCenter)
+		if (distance1 <= maxDistCenter && distance1 >= minDistCenter) {
 			centerSpot = 1;
-		else if (centerSpot == 0 && distance2 <= maxDistCenter && distance2 >= minDistCenter)
+		} else if (centerSpot == 0 && distance2 <= maxDistCenter && distance2 >= minDistCenter) {
 			centerSpot = 2;
-		else if (centerSpot == 0 && distance3 <= maxDistCenter && distance3 >= minDistCenter)
+		} else if (centerSpot == 0 && distance3 <= maxDistCenter && distance3 >= minDistCenter) {
 			centerSpot = 3;
-		else
+		} else {
 			return false;
-		if (centerSpot != 0)// there is a spot in the middle! cehck if the
+		}
+		if (centerSpot != 0) {
 			// orthers are at the correct distance!
 			switch (centerSpot) {
 			case 1:
 				if (distance2 >= minDist && distance2 <= maxDist && distance3 >= minDist && distance3 <= maxDist
 						&& whiteCounters[0] >= minWhiteCounter && whiteCounters[0] <= maxWhiteCounter
-						&& whiteCounters[1] >= minWhitePixelCounter && whiteCounters[1] <= maxWhitePixelCounter)
+						&& whiteCounters[1] >= minWhitePixelCounter && whiteCounters[1] <= maxWhitePixelCounter) {
 					return true;
+				}
 				break;
 			case 2:
 				if (distance1 >= minDist && distance1 <= maxDist && distance3 >= minDist && distance3 <= maxDist
 						&& whiteCounters[0] >= minWhiteCounter && whiteCounters[0] <= maxWhiteCounter
-						&& whiteCounters[1] >= minWhitePixelCounter && whiteCounters[1] <= maxWhitePixelCounter)
+						&& whiteCounters[1] >= minWhitePixelCounter && whiteCounters[1] <= maxWhitePixelCounter) {
 					return true;
+				}
 				break;
 			case 3:
 				if (distance1 >= minDist && distance1 <= maxDist && distance2 >= minDist && distance2 <= maxDist
 						&& whiteCounters[0] >= minWhiteCounter && whiteCounters[0] <= maxWhiteCounter
-						&& whiteCounters[1] >= minWhitePixelCounter && whiteCounters[1] <= maxWhitePixelCounter)
+						&& whiteCounters[1] >= minWhitePixelCounter && whiteCounters[1] <= maxWhitePixelCounter) {
 					return true;
+				}
 				break;
 			}// switch
+		}
 		return false;
 	}// isThree
 
-	private boolean isFour(double[] distance, int[] pixelIndex) {
-		double minDist = 9.848857801796104, maxDist = 15.297058540778355;
-		double minPointDist = 12, maxPointDist = 22;
-		int[] x = new int[4], y = new int[4];
-		double[][] pointDist = new double[4][4];
+	private boolean isFour(final double[] distance, final int[] pixelIndex) {
+		final double minDist = 9.848857801796104, maxDist = 15.297058540778355;
+		final double minPointDist = 12, maxPointDist = 22;
+		final int[] x = new int[4], y = new int[4];
+		final double[][] pointDist = new double[4][4];
 		for (int i = 0; i < 4; i++) {
 			x[i] = pixelIndex[i] % imageSize()[0];
 			y[i] = pixelIndex[i] / imageSize()[0];
 		}// for_i
-		// System.out.println(distance[0] + "; " + distance[1] + "; " +
-		// distance[2] + "; " + distance[3]);
-		// First check if there is bad detection! (The four spots must be at
-		// aprox. the same dist from the center)
+			// System.out.println(distance[0] + "; " + distance[1] + "; " +
+			// distance[2] + "; " + distance[3]);
+			// First check if there is bad detection! (The four spots must be at
+			// aprox. the same dist from the center)
 		if ((distance[0] <= maxDist && distance[0] >= minDist) && (distance[1] <= maxDist && distance[1] >= minDist)
 				&& (distance[2] <= maxDist && distance[2] >= minDist)
 				&& (distance[3] <= maxDist && distance[3] >= minDist)) {
@@ -2213,23 +2333,25 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					// System.out.println("dist from point ("+x[i]+","+y[i]+") to ("+x[j]+","+y[j]+"): "+pointDist[i][j]);
 				}// for_j
 			}// for_i
-			int[] smallDistCount = new int[4];
-			int[] largeDistCount = new int[4];
+			final int[] smallDistCount = new int[4];
+			final int[] largeDistCount = new int[4];
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < 4; j++) {
 					// System.out.println("dist from ("+x[i]+","+y[i]+") to ("+x[j]+","+y[j]+"): "+pointDist[i][j]);
-					if (pointDist[i][j] > minPointDist && pointDist[i][j] < maxPointDist)
+					if (pointDist[i][j] > minPointDist && pointDist[i][j] < maxPointDist) {
 						smallDistCount[i]++;
-					else if (pointDist[i][j] >= maxPointDist)
+					} else if (pointDist[i][j] >= maxPointDist) {
 						largeDistCount[i]++;
+					}
 				}// for_j
 			}// for_i
 
 			for (int i = 0; i < 4; i++) {
 				// System.out.println("smallDistCount["+i+"]: "+smallDistCount[i]
 				// + "; largeDistCount["+i+"]: "+largeDistCount[i]);
-				if (!(smallDistCount[i] == 2 && largeDistCount[i] == 1))
+				if (!(smallDistCount[i] == 2 && largeDistCount[i] == 1)) {
 					return false;
+				}
 			}// for_i
 			return true;
 		}// if
@@ -2237,117 +2359,142 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		return false;
 	}// isFour
 
-	private boolean isFive(double[] distance) {
-		double minDistCenter = 0.0, maxDistCenter = 2.23606797749979, minDist = 9.433981132056603, maxDist = 15.231546211727817;
-		double distance1 = distance[0];
-		double distance2 = distance[1];
-		double distance3 = distance[2];
-		double distance4 = distance[3];
-		double distance5 = distance[4];
+	private boolean isFive(final double[] distance) {
+		final double minDistCenter = 0.0, maxDistCenter = 2.23606797749979, minDist = 9.433981132056603, maxDist = 15.231546211727817;
+		final double distance1 = distance[0];
+		final double distance2 = distance[1];
+		final double distance3 = distance[2];
+		final double distance4 = distance[3];
+		final double distance5 = distance[4];
 		int centerSpot = 0;
 
 		// System.out.println(distance1 + "; " + distance2 + "; " + distance3 +
 		// "; " + distance4 + "; " + distance5);
 		// First check if there is a spot in the middle. If not, then we have a
 		// bad detection. let's try to fix it!
-		if (distance1 <= maxDistCenter)
+		if (distance1 <= maxDistCenter) {
 			centerSpot = 1;
-		else if (centerSpot == 0 && distance2 <= maxDistCenter)
+		} else if (centerSpot == 0 && distance2 <= maxDistCenter) {
 			centerSpot = 2;
-		else if (centerSpot == 0 && distance3 <= maxDistCenter)
+		} else if (centerSpot == 0 && distance3 <= maxDistCenter) {
 			centerSpot = 3;
-		else if (centerSpot == 0 && distance4 <= maxDistCenter)
+		} else if (centerSpot == 0 && distance4 <= maxDistCenter) {
 			centerSpot = 4;
-		else if (centerSpot == 0 && distance5 <= maxDistCenter)
+		} else if (centerSpot == 0 && distance5 <= maxDistCenter) {
 			centerSpot = 5;
-		else
+		} else {
 			return false;
-		if (centerSpot != 0)// there is a spot in the middle! cehck if the
+		}
+		if (centerSpot != 0) {
 			// orthers are at the correct distance!
 			switch (centerSpot) {
 			case 1:
 				if (distance2 >= minDist && distance2 <= maxDist && distance3 >= minDist && distance3 <= maxDist
-						&& distance4 >= minDist && distance4 <= maxDist && distance5 >= minDist && distance5 <= maxDist)
+						&& distance4 >= minDist && distance4 <= maxDist && distance5 >= minDist && distance5 <= maxDist) {
 					return true;
+				}
 				break;
 			case 2:
 				if (distance1 >= minDist && distance1 <= maxDist && distance3 >= minDist && distance3 <= maxDist
-						&& distance4 >= minDist && distance4 <= maxDist && distance5 >= minDist && distance5 <= maxDist)
+						&& distance4 >= minDist && distance4 <= maxDist && distance5 >= minDist && distance5 <= maxDist) {
 					return true;
+				}
 				break;
 			case 3:
 				if (distance1 >= minDist && distance1 <= maxDist && distance2 >= minDist && distance2 <= maxDist
-						&& distance4 >= minDist && distance4 <= maxDist && distance5 >= minDist && distance5 <= maxDist)
+						&& distance4 >= minDist && distance4 <= maxDist && distance5 >= minDist && distance5 <= maxDist) {
 					return true;
+				}
 				break;
 			case 4:
 				if (distance1 >= minDist && distance1 <= maxDist && distance2 >= minDist && distance2 <= maxDist
-						&& distance3 >= minDist && distance3 <= maxDist && distance5 >= minDist && distance5 <= maxDist)
+						&& distance3 >= minDist && distance3 <= maxDist && distance5 >= minDist && distance5 <= maxDist) {
 					return true;
+				}
 				break;
 			case 5:
 				if (distance1 >= minDist && distance1 <= maxDist && distance2 >= minDist && distance2 <= maxDist
-						&& distance3 >= minDist && distance3 <= maxDist && distance4 >= minDist && distance4 <= maxDist)
+						&& distance3 >= minDist && distance3 <= maxDist && distance4 >= minDist && distance4 <= maxDist) {
 					return true;
+				}
 				break;
 			}// switch
+		}
 		return false;
 	}// isFive
 
-	private boolean isSix(double[] distance, int[] pixelIndex) {
+	private boolean isSix(final double[] distance, final int[] pixelIndex) {
 		int dotsNear = 0, dotsFar = 0, dotsOut = 0;
-		double minDistNear = 6.708203932499369, maxDistNear = 12.041594578792296, minDist = 9.848857801796104, maxDist = 15.524174696260024;
-		double distance1 = distance[0];
-		double distance2 = distance[1];
-		double distance3 = distance[2];
-		double distance4 = distance[3];
-		double distance5 = distance[4];
-		double distance6 = distance[5];
+		final double minDistNear = 6.708203932499369, maxDistNear = 12.041594578792296, minDist = 9.848857801796104, maxDist = 15.524174696260024;
+		final double distance1 = distance[0];
+		final double distance2 = distance[1];
+		final double distance3 = distance[2];
+		final double distance4 = distance[3];
+		final double distance5 = distance[4];
+		final double distance6 = distance[5];
 
 		// System.out.println(distance1 + "; " + distance2 + "; " + distance3 +
 		// "; " + distance4 + "; " + distance5 + "; " + distance6);
 
-		if (distance1 >= minDistNear && distance1 <= maxDistNear)
+		if (distance1 >= minDistNear && distance1 <= maxDistNear) {
 			dotsNear++;
-		if (distance1 >= minDist && distance1 <= maxDist)
+		}
+		if (distance1 >= minDist && distance1 <= maxDist) {
 			dotsFar++;
-		if (distance1 < minDistNear || (distance1 > maxDistNear && distance1 < minDist) || distance1 > maxDist)
+		}
+		if (distance1 < minDistNear || (distance1 > maxDistNear && distance1 < minDist) || distance1 > maxDist) {
 			dotsOut++;
-		if (distance2 >= minDistNear && distance2 <= maxDistNear)
+		}
+		if (distance2 >= minDistNear && distance2 <= maxDistNear) {
 			dotsNear++;
-		if (distance2 >= minDist && distance2 <= maxDist)
+		}
+		if (distance2 >= minDist && distance2 <= maxDist) {
 			dotsFar++;
-		if (distance2 < minDistNear || (distance2 > maxDistNear && distance2 < minDist) || distance2 > maxDist)
+		}
+		if (distance2 < minDistNear || (distance2 > maxDistNear && distance2 < minDist) || distance2 > maxDist) {
 			dotsOut++;
-		if (distance3 >= minDistNear && distance3 <= maxDistNear)
+		}
+		if (distance3 >= minDistNear && distance3 <= maxDistNear) {
 			dotsNear++;
-		if (distance3 >= minDist && distance3 <= maxDist)
+		}
+		if (distance3 >= minDist && distance3 <= maxDist) {
 			dotsFar++;
-		if (distance3 < minDistNear || (distance3 > maxDistNear && distance3 < minDist) || distance3 > maxDist)
+		}
+		if (distance3 < minDistNear || (distance3 > maxDistNear && distance3 < minDist) || distance3 > maxDist) {
 			dotsOut++;
-		if (distance4 >= minDistNear && distance4 <= maxDistNear)
+		}
+		if (distance4 >= minDistNear && distance4 <= maxDistNear) {
 			dotsNear++;
-		if (distance4 >= minDist && distance4 <= maxDist)
+		}
+		if (distance4 >= minDist && distance4 <= maxDist) {
 			dotsFar++;
-		if (distance4 < minDistNear || (distance4 > maxDistNear && distance4 < minDist) || distance4 > maxDist)
+		}
+		if (distance4 < minDistNear || (distance4 > maxDistNear && distance4 < minDist) || distance4 > maxDist) {
 			dotsOut++;
-		if (distance5 >= minDistNear && distance5 <= maxDistNear)
+		}
+		if (distance5 >= minDistNear && distance5 <= maxDistNear) {
 			dotsNear++;
-		if (distance5 >= minDist && distance5 <= maxDist)
+		}
+		if (distance5 >= minDist && distance5 <= maxDist) {
 			dotsFar++;
-		if (distance5 < minDistNear || (distance5 > maxDistNear && distance5 < minDist) || distance5 > maxDist)
+		}
+		if (distance5 < minDistNear || (distance5 > maxDistNear && distance5 < minDist) || distance5 > maxDist) {
 			dotsOut++;
-		if (distance6 >= minDistNear && distance6 <= maxDistNear)
+		}
+		if (distance6 >= minDistNear && distance6 <= maxDistNear) {
 			dotsNear++;
-		if (distance6 >= minDist && distance6 <= maxDist)
+		}
+		if (distance6 >= minDist && distance6 <= maxDist) {
 			dotsFar++;
-		if (distance6 < minDistNear || (distance6 > maxDistNear && distance6 < minDist) || distance6 > maxDist)
+		}
+		if (distance6 < minDistNear || (distance6 > maxDistNear && distance6 < minDist) || distance6 > maxDist) {
 			dotsOut++;
+		}
 
 		// refined to find real six's
 
-		int[] nearerSpots = new int[2];
-		int minWhitePixelCounter = 7;
+		final int[] nearerSpots = new int[2];
+		final int minWhitePixelCounter = 7;
 		double minDist1 = 1000, minDist2 = 1000;
 		for (int i = 0; i < 6; i++) {
 			if (distance[i] <= minDist1) {
@@ -2363,8 +2510,8 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			}// if
 		}// for_i
 
-		int[][] points = new int[6][2];
-		int imageWidth = imageSize()[0];
+		final int[][] points = new int[6][2];
+		final int imageWidth = imageSize()[0];
 		for (int i = 0; i < 6; i++) {
 			points[i][0] = pixelIndex[i] % imageWidth;
 			points[i][1] = pixelIndex[i] / imageWidth;
@@ -2375,12 +2522,12 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		// for each one of them, there should be two spots near it and not near
 		// the other
 		// for the first:
-		int[] nearerSpots1 = new int[2];
+		final int[] nearerSpots1 = new int[2];
 		minDist1 = 1000;
 		minDist2 = 1000;
 		for (int i = 0; i < 6; i++) {
 			if (i != nearerSpots[0] && i != nearerSpots[1]) {
-				double tempDist = java.lang.Math.sqrt((double) (points[i][0] - points[nearerSpots[0]][0])
+				final double tempDist = java.lang.Math.sqrt((double) (points[i][0] - points[nearerSpots[0]][0])
 						* (points[i][0] - points[nearerSpots[0]][0])
 						+ (double) (points[i][1] - points[nearerSpots[0]][1])
 						* (points[i][1] - points[nearerSpots[0]][1]));
@@ -2392,7 +2539,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		}// for_i
 		for (int i = 0; i < 6; i++) {
 			if (i != nearerSpots[0] && i != nearerSpots[1] && i != nearerSpots1[0]) {
-				double tempDist = java.lang.Math.sqrt((double) (points[i][0] - points[nearerSpots[0]][0])
+				final double tempDist = java.lang.Math.sqrt((double) (points[i][0] - points[nearerSpots[0]][0])
 						* (points[i][0] - points[nearerSpots[0]][0])
 						+ (double) (points[i][1] - points[nearerSpots[0]][1])
 						* (points[i][1] - points[nearerSpots[0]][1]));
@@ -2402,14 +2549,14 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				}// if
 			}// if
 		}// for_i
-		// System.out.println("Spots nearest to the fisrt nearerSpot: ("+points[nearerSpots1[0]][0]+","+points[nearerSpots1[0]][1]+") & ("+points[nearerSpots1[1]][0]+","+points[nearerSpots1[1]][1]+")");
-		// for the second:
-		int[] nearerSpots2 = new int[2];
+			// System.out.println("Spots nearest to the fisrt nearerSpot: ("+points[nearerSpots1[0]][0]+","+points[nearerSpots1[0]][1]+") & ("+points[nearerSpots1[1]][0]+","+points[nearerSpots1[1]][1]+")");
+			// for the second:
+		final int[] nearerSpots2 = new int[2];
 		minDist1 = 1000;
 		minDist2 = 1000;
 		for (int i = 0; i < 6; i++) {
 			if (i != nearerSpots[0] && i != nearerSpots[1]) {
-				double tempDist = java.lang.Math.sqrt((double) (points[i][0] - points[nearerSpots[1]][0])
+				final double tempDist = java.lang.Math.sqrt((double) (points[i][0] - points[nearerSpots[1]][0])
 						* (points[i][0] - points[nearerSpots[1]][0])
 						+ (double) (points[i][1] - points[nearerSpots[1]][1])
 						* (points[i][1] - points[nearerSpots[1]][1]));
@@ -2421,7 +2568,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		}// for_i
 		for (int i = 0; i < 6; i++) {
 			if (i != nearerSpots[0] && i != nearerSpots[1] && i != nearerSpots2[0]) {
-				double tempDist = java.lang.Math.sqrt((double) (points[i][0] - points[nearerSpots[1]][0])
+				final double tempDist = java.lang.Math.sqrt((double) (points[i][0] - points[nearerSpots[1]][0])
 						* (points[i][0] - points[nearerSpots[1]][0])
 						+ (double) (points[i][1] - points[nearerSpots[1]][1])
 						* (points[i][1] - points[nearerSpots[1]][1]));
@@ -2431,9 +2578,10 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				}// if
 			}// if
 		}// for_i
-		// System.out.println("Spots nearest to the second nearerSpot: ("+points[nearerSpots2[0]][0]+","+points[nearerSpots2[0]][1]+") & ("+points[nearerSpots2[1]][0]+","+points[nearerSpots2[1]][1]+")");
-		// Check if there is any overlap between the two sets of spots nearer to
-		// the two central spots
+			// System.out.println("Spots nearest to the second nearerSpot: ("+points[nearerSpots2[0]][0]+","+points[nearerSpots2[0]][1]+") & ("+points[nearerSpots2[1]][0]+","+points[nearerSpots2[1]][1]+")");
+			// Check if there is any overlap between the two sets of spots
+			// nearer to
+			// the two central spots
 		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 2; j++) {
 				if (nearerSpots1[i] == nearerSpots2[j]) {
@@ -2444,7 +2592,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			}// for_j
 		}// for_i
 
-		if (dotsOut == 0 && dotsFar >= 4 && dotsFar <= 6)
+		if (dotsOut == 0 && dotsFar >= 4 && dotsFar <= 6) {
 			if (dotsNear >= 2) {
 				/*
 				 * System.out.println("Possible Six! Checking Slopes!"); for
@@ -2453,44 +2601,48 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				 */
 				return true;
 			}
+		}
 		return false;
 
 	}// isSix
 
 	/**
-	 *Misc
+	 * Misc
 	 */
-	private int[] getNearestBlackPixel(int pixelIndex, int raio) {
-		int imageWidth = imageSize()[0], x = pixelIndex % imageWidth, y = pixelIndex / imageWidth;
-		int[] coords = new int[2];
+	private int[] getNearestBlackPixel(final int pixelIndex, final int raio) {
+		final int imageWidth = imageSize()[0], x = pixelIndex % imageWidth, y = pixelIndex / imageWidth;
+		final int[] coords = new int[2];
 		int horMultiplier, verMultiplier;
 		for (int i = 0; i < raio; i++) // we're expecting it to be near
 		{
 			for (int j = 0; j < 8; j++) {
-				if (j == 7 || j == 0 || j == 1)
+				if (j == 7 || j == 0 || j == 1) {
 					horMultiplier = -1;
-				else if (j == 6 || j == 2)
+				} else if (j == 6 || j == 2) {
 					horMultiplier = 0;
-				else
+				} else {
 					horMultiplier = +1;
-				if (j == 1 || j == 2 || j == 3)
+				}
+				if (j == 1 || j == 2 || j == 3) {
 					verMultiplier = +1;
-				else if (j == 0 || j == 4)
+				} else if (j == 0 || j == 4) {
 					verMultiplier = 0;
-				else
+				} else {
 					verMultiplier = -1;
+				}
 
 				coords[0] = x + horMultiplier * i;
 				coords[1] = y + verMultiplier * i;
-				if ((BWPixels[coords[0] + coords[1] * imageWidth] & 0x000000ff) == 0)
+				if ((BWPixels[coords[0] + coords[1] * imageWidth] & 0x000000ff) == 0) {
 					return coords;
+				}
 			}// for_j
 		}// for_i
 		return coords;
 	}// getNearestBlackPixel
 
-	private int[] buildArrayXY(int[] indexSource, String XY) {
-		int[] returnArray = new int[indexSource.length];
+	private int[] buildArrayXY(final int[] indexSource, final String XY) {
+		final int[] returnArray = new int[indexSource.length];
 		if (XY.equalsIgnoreCase("x")) {
 			for (int i = 0; i < indexSource.length; i++) {
 				returnArray[i] = centers[indexSource[i]][0];
@@ -2507,13 +2659,14 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 	}// buildArrayXY
 
 	/**
-	 *returns a int[] int[0] ==> whitePatchCounter int[1] ==> whitePixelCounter
+	 * returns a int[] int[0] ==> whitePatchCounter int[1] ==> whitePixelCounter
 	 */
-	private int[] countWhitePatches(int startPixelIndex, int endPixelIndex) {
-		int imageWidth = imageSize()[0], whitePatchCounter = 0, whitePixelCounter = 0;
+	private int[] countWhitePatches(final int startPixelIndex, final int endPixelIndex) {
+		final int imageWidth = imageSize()[0];
+		int whitePatchCounter = 0, whitePixelCounter = 0;
 		int startX = startPixelIndex % imageWidth, endX = endPixelIndex % imageWidth;
 		int startY = startPixelIndex / imageWidth, endY = endPixelIndex / imageWidth;
-		int[] firstPoint = new int[2], lastPoint = new int[2];
+		final int[] firstPoint = new int[2], lastPoint = new int[2];
 		if (abs(endX - startX) >= abs(endY - startY)) // chooses the path with
 		// more pixels for
 		// greatest accuracy
@@ -2525,7 +2678,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				endY = startPixelIndex / imageWidth;
 			}// else
 			boolean isWhite = false, isPreviousWhite = false;
-			double slope = (double) (endY - startY) / (double) (endX - startX);
+			final double slope = (double) (endY - startY) / (double) (endX - startX);
 			int pixelIndex, y;
 
 			// System.out.println("startPoint:" + startX + ", " + startY +
@@ -2563,7 +2716,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				endX = startPixelIndex % imageWidth;
 			}// else
 			boolean isWhite = false, isPreviousWhite = false;
-			double slope = (double) (endY - startY) / (double) (endX - startX);
+			final double slope = (double) (endY - startY) / (double) (endX - startX);
 			int pixelIndex, x;
 			// System.out.println("startPoint:" + startX + ", " + startY +
 			// ", endPoint:" + endX + ", " + endY);
@@ -2592,35 +2745,39 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				isPreviousWhite = isWhite;
 			}// for_y
 		}// else
-		// System.out.println("whitePixelCounter:"+ whitePixelCounter +
-		// "; whitePatchCounter: "+ whitePatchCounter);
-		int[] toReturn = new int[2];
+			// System.out.println("whitePixelCounter:"+ whitePixelCounter +
+			// "; whitePatchCounter: "+ whitePatchCounter);
+		final int[] toReturn = new int[2];
 		toReturn[0] = whitePatchCounter;// toReturn[1] = whitePixelCounter;
-		toReturn[1] = max(whitePixelCounter, (int) java.lang.Math.round(java.lang.Math
-				.sqrt((double) (firstPoint[0] - lastPoint[0]) * (firstPoint[0] - lastPoint[0])
-						+ (double) (firstPoint[1] - lastPoint[1]) * (firstPoint[1] - lastPoint[1]))));
+		toReturn[1] = max(
+				whitePixelCounter,
+				(int) java.lang.Math.round(java.lang.Math.sqrt((double) (firstPoint[0] - lastPoint[0])
+						* (firstPoint[0] - lastPoint[0]) + (double) (firstPoint[1] - lastPoint[1])
+						* (firstPoint[1] - lastPoint[1]))));
 		return toReturn;
 	}// countWhitePatches
 
 	/**
-	 *Tests and Attempts
+	 * Tests and Attempts
 	 */
 	/**
-	 *Creates a die without the spots proposed to be removed and checks if the
+	 * Creates a die without the spots proposed to be removed and checks if the
 	 * result is an ok die. If so, returns true, else, returns false
 	 */
-	private boolean tryRemove(java.util.Vector[] vDie, int vDieIndex, int spotsExpected, int[] spotsToRemove,
-			int[] pixelIndex, int raio, int maxClusterSize) {
-		int[] vDieTest = new int[spotsExpected];
-		int[] xTest = new int[spotsExpected], yTest = new int[spotsExpected], pixelIndexTest = new int[spotsExpected];
+	private boolean tryRemove(final java.util.Vector[] vDie, final int vDieIndex, final int spotsExpected,
+			final int[] spotsToRemove, final int[] pixelIndex, final int raio, final int maxClusterSize) {
+		final int[] vDieTest = new int[spotsExpected];
+		final int[] xTest = new int[spotsExpected], yTest = new int[spotsExpected], pixelIndexTest = new int[spotsExpected];
 		double[] distanceTest;
 		int testPos = 0;
-		int spotCount = vDie[vDieIndex].size() - 1;
+		final int spotCount = vDie[vDieIndex].size() - 1;
 		for (int j = 0; j < spotCount; j++) {
 			boolean temp = true;
-			for (int i = 0; i < spotsToRemove.length; i++)
-				if (j == spotsToRemove[i])
+			for (final int element : spotsToRemove) {
+				if (j == element) {
 					temp = false;
+				}
+			}
 
 			if (temp) {
 				vDieTest[testPos] = Integer.parseInt(vDie[vDieIndex].get(j).toString());
@@ -2658,11 +2815,11 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 	 * Spans a number of spots and removes them from the die if the result is
 	 * ok.
 	 */
-	private java.util.Vector testRemove(java.util.Vector[] vDie, int vDieIndex, int testDieSize, int[] pixelIndex,
-			int raio, int maxClusterSize, int[] x, int[] y, int externalCounter) {
-		int spotCount = vDie[vDieIndex].size() - 1;
-		int dieDiff = spotCount - testDieSize;
-		int numberOfTests = combinations(spotCount, testDieSize);
+	private java.util.Vector testRemove(java.util.Vector[] vDie, final int vDieIndex, final int testDieSize,
+			int[] pixelIndex, final int raio, final int maxClusterSize, int[] x, int[] y, final int externalCounter) {
+		final int spotCount = vDie[vDieIndex].size() - 1;
+		final int dieDiff = spotCount - testDieSize;
+		final int numberOfTests = combinations(spotCount, testDieSize);
 		// System.out.println("Number Of Tests: " + numberOfTests + " = " +
 		// spotCount + "_C_" + testDieSize);
 		// for (int testIndex=0; testIndex< numberOfTests; testIndex++)
@@ -2670,7 +2827,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 
 		if (spotCount - testDieSize > 4) {
 			// System.out.println("Die with an excess of more than 4 spots! Ignoring it Completely!!");
-			java.util.Vector vDieXYpI = new java.util.Vector(4);
+			final java.util.Vector vDieXYpI = new java.util.Vector(4);
 			vDieXYpI.add(0, vDie);
 			vDieXYpI.add(1, x);
 			vDieXYpI.add(2, y);
@@ -2679,18 +2836,18 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			return vDieXYpI;
 		}// if
 
-		int[] vDieTest = new int[testDieSize];
-		int[] xTest = new int[testDieSize], yTest = new int[testDieSize];
-		double[] distanceTest;
-		int[] spotsToRemove = new int[dieDiff];
+		final int[] vDieTest = new int[testDieSize];
+		final int[] xTest = new int[testDieSize], yTest = new int[testDieSize];
+		final double[] distanceTest;
+		final int[] spotsToRemove = new int[dieDiff];
 
 		for (int indexa = 0; indexa < spotCount; indexa++) {
 			spotsToRemove[0] = indexa;
 			if (dieDiff == 1) {
 				if (tryRemove(vDie, vDieIndex, testDieSize, spotsToRemove, pixelIndex, raio, maxClusterSize)) {
-					java.util.Vector vDieXYpI = new java.util.Vector(4);
-					java.util.Vector isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio, true, false);
-					int counterSum = ((Integer) isSpotVector.get(1)).intValue()
+					final java.util.Vector vDieXYpI = new java.util.Vector(4);
+					final java.util.Vector isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio, true, false);
+					final int counterSum = ((Integer) isSpotVector.get(1)).intValue()
 							+ ((Integer) isSpotVector.get(2)).intValue() + ((Integer) isSpotVector.get(3)).intValue();
 
 					if (testDieSize == 6 && externalCounter > 1 && counterSum < 1) {
@@ -2714,7 +2871,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 						cluster_counter++;
 						clusterCenters = getClusterCenters(vDie); // update
 						// clusterCenters
-						java.util.Vector checkSpotsResult = checkSpots(vDie, vDieIndex, x, y, pixelIndex, raio,
+						final java.util.Vector checkSpotsResult = checkSpots(vDie, vDieIndex, x, y, pixelIndex, raio,
 								maxClusterSize);
 						// System.out.println("vDie in TestRemove:"+((java.util.Vector[])checkSpotsResult.get(0))[vDieIndex]);
 						if (((Boolean) checkSpotsResult.get(4)).equals(Boolean.TRUE)) {
@@ -2750,7 +2907,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					spotsToRemove[1] = indexb;
 					if (dieDiff == 2) {
 						if (tryRemove(vDie, vDieIndex, testDieSize, spotsToRemove, pixelIndex, raio, maxClusterSize)) {
-							java.util.Vector vDieXYpI = new java.util.Vector(4);
+							final java.util.Vector vDieXYpI = new java.util.Vector(4);
 							java.util.Vector isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio, true, false);
 							int counterSum = ((Integer) isSpotVector.get(1)).intValue()
 									+ ((Integer) isSpotVector.get(2)).intValue()
@@ -2792,8 +2949,8 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 								cluster_counter++;
 								clusterCenters = getClusterCenters(vDie); // update
 								// clusterCenters
-								java.util.Vector checkSpotsResult = checkSpots(vDie, vDieIndex, x, y, pixelIndex, raio,
-										maxClusterSize);
+								final java.util.Vector checkSpotsResult = checkSpots(vDie, vDieIndex, x, y, pixelIndex,
+										raio, maxClusterSize);
 								if (((Boolean) checkSpotsResult.get(4)).equals(Boolean.TRUE)) {
 									// System.out.println("Setting Die "+vDieIndex
 									// + " as TRUE!");
@@ -2825,7 +2982,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 							if (dieDiff == 3) {
 								if (tryRemove(vDie, vDieIndex, testDieSize, spotsToRemove, pixelIndex, raio,
 										maxClusterSize)) {
-									java.util.Vector vDieXYpI = new java.util.Vector(4);
+									final java.util.Vector vDieXYpI = new java.util.Vector(4);
 									java.util.Vector isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio, true,
 											false);
 									int counterSum = ((Integer) isSpotVector.get(1)).intValue()
@@ -2884,7 +3041,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 										clusterCenters = getClusterCenters(vDie); // update
 										// clusterCenters
 
-										java.util.Vector checkSpotsResult = checkSpots(vDie, vDieIndex, x, y,
+										final java.util.Vector checkSpotsResult = checkSpots(vDie, vDieIndex, x, y,
 												pixelIndex, raio, maxClusterSize);
 
 										if (((Boolean) checkSpotsResult.get(4)).equals(Boolean.TRUE)) {
@@ -2898,7 +3055,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 											y = (int[]) checkSpotsResult.get(2);
 											pixelIndex = (int[]) checkSpotsResult.get(3);
 										}// else
-										// cluster_counter++;
+											// cluster_counter++;
 										clusterCenters = getClusterCenters(vDie); // update
 										// clusterCenters
 									}// else
@@ -2919,7 +3076,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 									if (dieDiff == 4) {
 										if (tryRemove(vDie, vDieIndex, testDieSize, spotsToRemove, pixelIndex, raio,
 												maxClusterSize)) {
-											java.util.Vector vDieXYpI = new java.util.Vector(4);
+											final java.util.Vector vDieXYpI = new java.util.Vector(4);
 											java.util.Vector isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio,
 													true, false);
 											int counterSum = ((Integer) isSpotVector.get(1)).intValue()
@@ -2990,8 +3147,8 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 												cluster_counter++;
 												clusterCenters = getClusterCenters(vDie); // update
 												// clusterCenters
-												java.util.Vector checkSpotsResult = checkSpots(vDie, vDieIndex, x, y,
-														pixelIndex, raio, maxClusterSize);
+												final java.util.Vector checkSpotsResult = checkSpots(vDie, vDieIndex,
+														x, y, pixelIndex, raio, maxClusterSize);
 												if (((Boolean) checkSpotsResult.get(4)).equals(Boolean.TRUE)) {
 													// System.out.println("Setting Die "+vDieIndex
 													// + " as TRUE!");
@@ -3027,9 +3184,9 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				}// for_indexb
 			}// else
 		}// for_indexa
-		// }//for_testIndex
+			// }//for_testIndex
 
-		java.util.Vector vDieXYpI = new java.util.Vector(4);
+		final java.util.Vector vDieXYpI = new java.util.Vector(4);
 		vDieXYpI.add(0, vDie);
 		vDieXYpI.add(1, x);
 		vDieXYpI.add(2, y);
@@ -3039,37 +3196,38 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 	}// testRemove
 
 	private java.util.Vector checkForSpotsThatReallyBelongToThis(java.util.Vector[] vDie, int vDieIndex, int[] x,
-			int[] y, int[] pixelIndex, int maxClusterSize) {
+			int[] y, int[] pixelIndex, final int maxClusterSize) {
 		int spotCount = vDie[vDieIndex].size() - 1;
-		java.util.Vector toReturn = new java.util.Vector(5);
+		final java.util.Vector toReturn = new java.util.Vector(5);
 		toReturn.add(0, vDie);
 		toReturn.add(1, x);
 		toReturn.add(2, y);
 		toReturn.add(3, pixelIndex);
 		toReturn.add(4, new Integer(vDieIndex));
-		double maxTwoDist = maxClusterSize / 2.1257;// 15.524174696260024;
+		final double maxTwoDist = maxClusterSize / 2.1257;// 15.524174696260024;
 		// if we have a two, it may be a part of a six (or a five, but this is
 		// unlikely to happen)
-		double maxThreeDist = maxClusterSize / 2.2195;// 2.62;
+		final double maxThreeDist = maxClusterSize / 2.2195;// 2.62;
 		// if we have a three, it may be part of a five! so we search for any
 		// spot that can is near enough
-		double maxFourDist = maxClusterSize / 1.83;
+		final double maxFourDist = maxClusterSize / 1.83;
 		double maxDist;
-		if (spotCount == 2)
+		if (spotCount == 2) {
 			maxDist = maxTwoDist;
-		else if (spotCount == 3)
+		} else if (spotCount == 3) {
 			maxDist = maxThreeDist;
-		else
+		} else {
 			return toReturn;
+		}
 
 		for (int i = 0; i < cluster_counter; i++) {
 			if (i != vDieIndex && vDie[i].get(vDie[i].size() - 1).equals(Boolean.FALSE)) {
 				for (int j = 0; j < vDie[i].size() - 1; j++) {
 					// if (spotCount == 4)
 					// maxDist = maxFourDist;
-					int x_temp = centers[((Integer) vDie[i].get(j)).intValue()][0];
-					int y_temp = centers[((Integer) vDie[i].get(j)).intValue()][1];
-					double dist = java.lang.Math.sqrt((double) (x_temp - clusterCenters[vDieIndex][0])
+					final int x_temp = centers[((Integer) vDie[i].get(j)).intValue()][0];
+					final int y_temp = centers[((Integer) vDie[i].get(j)).intValue()][1];
+					final double dist = java.lang.Math.sqrt((double) (x_temp - clusterCenters[vDieIndex][0])
 							* (x_temp - clusterCenters[vDieIndex][0])
 							+ (double) (y_temp - clusterCenters[vDieIndex][1])
 							* (y_temp - clusterCenters[vDieIndex][1]));
@@ -3083,24 +3241,28 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 						j--;
 						if (vDie[i].size() == 1) {
 							// System.out.println("Die "+i+" has been depleted!");
-							if (vDieIndex != cluster_counter - 1)
+							if (vDieIndex != cluster_counter - 1) {
 								for (int ii = i + 1; ii < vDie.length; ii++) {
 									vDie[ii - 1] = vDie[ii];
 								}// for_i
+							}
 
 							vDie[cluster_counter - 1] = null;
 
 							cluster_counter--;
 							i--;
-							if (i == vDieIndex)
+							if (i == vDieIndex) {
 								i++;
+							}
 
 							// clusterCenters = getClusterCenters(vDie);
-							if (vDieIndex > i)
+							if (vDieIndex > i) {
 								vDieIndex--;
+							}
 
-							if (i >= cluster_counter)
+							if (i >= cluster_counter) {
 								break;
+							}
 						}// if
 					}// if
 				}// for_j
@@ -3116,34 +3278,34 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 
 	/**
 	 * 
-	 *Die Checking This is the core of post processing
+	 * Die Checking This is the core of post processing
 	 * 
 	 */
 	/*
 	 * This only works for dies with 3 or more spots detected. twos and ones are
 	 * separate cases!
 	 */
-	private java.util.Vector checkDie(java.util.Vector[] vDie, int vDieIndex, int[][] centers, double[] info,
-			int maxClusterSize, int raio, int insideCluster) {
+	private java.util.Vector checkDie(java.util.Vector[] vDie, int vDieIndex, final int[][] centers,
+			final double[] info, final int maxClusterSize, final int raio, final int insideCluster) {
 
 		if (vDie[vDieIndex].get(vDie[vDieIndex].size() - 1).equals(Boolean.TRUE)) {
-			java.util.Vector toReturn = new java.util.Vector(2);
+			final java.util.Vector toReturn = new java.util.Vector(2);
 			toReturn.add(0, vDie);
 			toReturn.add(1, Boolean.TRUE);
 			return toReturn;
 		}// if
 
-		int[] imSize = imageSize();
-		int imageWidth = imSize[0];
+		final int[] imSize = imageSize();
+		final int imageWidth = imSize[0];
 		int x_mean = 0, y_mean = 0, spotCount = vDie[vDieIndex].size() - 1;
 		int[] x = new int[spotCount];
 		int[] y = new int[spotCount];
-		int[] centerIndex = new int[spotCount];
+		final int[] centerIndex = new int[spotCount];
 
-		double[] media = new double[spotCount];
+		final double[] media = new double[spotCount];
 		double[] distance = new double[spotCount];
 
-		double maxmaxDist = (double) maxClusterSize / 2. * 1.196;// *1.45;//
+		final double maxmaxDist = maxClusterSize / 2. * 1.196;// *1.45;//
 
 		clusterCenters = getClusterCenters(vDie);
 		x_mean = clusterCenters[vDieIndex][0];
@@ -3159,7 +3321,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				distance[index] = java.lang.Math.sqrt((double) (x_mean - x[index]) * (x_mean - x[index])
 						+ (double) (y_mean - y[index]) * (y_mean - y[index]));
 			}
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 		}
 
 		// First check if this is a spotCount. If not, then we have a bad
@@ -3169,9 +3331,10 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		// to investigate here!
 		distance = new double[spotCount];
 		int[] pixelIndex = new int[spotCount];
-		for (int indexa = 0; indexa < distance.length; indexa++)
+		for (int indexa = 0; indexa < distance.length; indexa++) {
 			distance[indexa] = java.lang.Math.sqrt((double) (x_mean - x[indexa]) * (x_mean - x[indexa])
 					+ (double) (y_mean - y[indexa]) * (y_mean - y[indexa]));
+		}
 
 		pixelIndex = new int[spotCount];
 
@@ -3179,7 +3342,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			pixelIndex[index] = y[index] * imageWidth + x[index];
 		}// for
 
-		java.util.Vector toReturn = new java.util.Vector(2);
+		final java.util.Vector toReturn = new java.util.Vector(2);
 
 		int whileCounter = 0;
 		boolean isSpotCountOK = checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize);
@@ -3188,7 +3351,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			areSpotsOK = ((Boolean) isSpot(pixelIndex[i], raio, vDie[vDieIndex].size() - 1 >= 6 ? true : false,
 					vDie[vDieIndex].size() - 1 == 1 ? true : false).get(0)).booleanValue();
 		}// for_i
-		int maxWhileCounter = 6;
+		final int maxWhileCounter = 6;
 		// System.out.println("SpotCount: "+spotCount);
 		while (spotCount > 0 && (!isSpotCountOK || !areSpotsOK) && whileCounter < maxWhileCounter) {
 			// if(!isSpotCountOK)System.out.println("[0]spotCount check Failed!! spotCount: "
@@ -3203,10 +3366,12 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				if (isOne(pixelIndex, maxClusterSize)) {
 					checkDie1Vector = checkDie1(vDie, vDieIndex, centers, info, raio, maxClusterSize, true);
 				}// if
-				else
+				else {
 					checkDie1Vector = checkDie1(vDie, vDieIndex, centers, info, raio, maxClusterSize, false);
-				if (checkDie1Vector.get(1).equals(Boolean.TRUE))
+				}
+				if (checkDie1Vector.get(1).equals(Boolean.TRUE)) {
 					checkDie1Vector = checkDie1(vDie, vDieIndex, centers, info, raio, maxClusterSize, true);
+				}
 
 				/*
 				 * vDie = checkDie1(vDie, vDieIndex, centers, info, raio,
@@ -3216,14 +3381,14 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				 * ((Boolean)vDie
 				 * [vDieIndex].get(vDie[vDieIndex].size()-1)).booleanValue());
 				 */
-				toReturn.add(0, (java.util.Vector[]) checkDie1Vector.get(0));
-				toReturn.add(1, (Boolean) checkDie1Vector.get(1));
+				toReturn.add(0, checkDie1Vector.get(0));
+				toReturn.add(1, checkDie1Vector.get(1));
 				return toReturn;
 				// return vDie;
 			}// if
 			else if (spotCount == 2) {
-				double minDist = 10.770329614269007, maxDist = 15.811388300841896;// 13.6;
-				double[][] distMin_cluster = new double[2][2];
+				final double minDist = 10.770329614269007, maxDist = 15.811388300841896;// 13.6;
+				final double[][] distMin_cluster = new double[2][2];
 
 				clusterCenters = getClusterCenters(vDie);
 
@@ -3231,7 +3396,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					centerIndex[0] = Integer.parseInt(vDie[vDieIndex].get(0).toString());
 					centerIndex[1] = Integer.parseInt(vDie[vDieIndex].get(1).toString());
 				}// try
-				catch (NumberFormatException e) {
+				catch (final NumberFormatException e) {
 				}
 
 				x[0] = centers[centerIndex[0]][0];
@@ -3262,26 +3427,26 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				pixelIndex[1] = y[1] * imageWidth + x[1];
 				boolean isProbableSix0 = false, isProbableSix1 = false;
 
-				int maxDistForConsecutiveSpotsInSix = 10, minWhite = 2;
+				final int maxDistForConsecutiveSpotsInSix = 10, minWhite = 2;
 				// check if this spot can belong to some die that may be a six
 				for (int i = 0; i < cluster_counter; i++) {
 					for (int j = 0; j < vDie[i].size() - 1; j++) {
-						int x_temp = centers[((Integer) vDie[i].get(j)).intValue()][0], y_temp = centers[((Integer) vDie[i]
+						final int x_temp = centers[((Integer) vDie[i].get(j)).intValue()][0], y_temp = centers[((Integer) vDie[i]
 								.get(j)).intValue()][1];
-						int startPixelIndex = x_temp + y_temp * imageWidth;
+						final int startPixelIndex = x_temp + y_temp * imageWidth;
 						if (((Integer) vDie[i].get(j)).intValue() != ((Integer) vDie[vDieIndex].get(0)).intValue()
 								&& vDie[i].get(vDie[i].size() - 1).equals(Boolean.FALSE)) {
 							// System.out.println(((Integer)vDie[i].get(j)).intValue()
 							// +"!="+((Integer)vDie[vDieIndex].get(0)).intValue()
 							// );
 							// System.out.println("vDie["+i+"], spot("+j+")" );
-							int endPixelIndex = x[0] + y[0] * imageWidth;
-							int[] whitePatches = countWhitePatches(startPixelIndex, endPixelIndex);
+							final int endPixelIndex = x[0] + y[0] * imageWidth;
+							final int[] whitePatches = countWhitePatches(startPixelIndex, endPixelIndex);
 							double tempDist = java.lang.Math.sqrt((double) (x[0] - x_temp) * (x[0] - x_temp)
 									+ (double) (y[0] - y_temp) * (y[0] - y_temp));
 							// check distance between cluster centers so we can
 							// say that this is not a six.
-							int maxDistForSingleCluster = (int) ((double) maxClusterSize / 1.22);
+							final int maxDistForSingleCluster = (int) (maxClusterSize / 1.22);
 							tempDist = java.lang.Math
 									.sqrt((double) (centers[((Integer) vDie[vDieIndex].get(0)).intValue()][0] - centers[((Integer) vDie[i]
 											.get(j)).intValue()][0])
@@ -3306,13 +3471,13 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 						if (((Integer) vDie[i].get(j)).intValue() != ((Integer) vDie[vDieIndex].get(1)).intValue()
 								&& vDie[i].get(vDie[i].size() - 1).equals(Boolean.FALSE)) {
 							// System.out.println("vDie["+i+"], spot("+j+")" );
-							int endPixelIndex = x[1] + y[1] * imageWidth;
-							int[] whitePatches = countWhitePatches(startPixelIndex, endPixelIndex);
+							final int endPixelIndex = x[1] + y[1] * imageWidth;
+							final int[] whitePatches = countWhitePatches(startPixelIndex, endPixelIndex);
 							double tempDist = java.lang.Math.sqrt((double) (x[1] - x_temp) * (x[1] - x_temp)
 									+ (double) (y[1] - y_temp) * (y[1] - y_temp));
 							// check distance between cluster centers so we can
 							// say that this is not a six.
-							int maxDistForSingleCluster = (int) ((double) maxClusterSize / 1.22);
+							final int maxDistForSingleCluster = (int) (maxClusterSize / 1.22);
 							tempDist = java.lang.Math.sqrt((double) (x[1] - x_temp) * (x[1] - x_temp)
 									+ (double) (y[1] - y_temp) * (y[1] - y_temp));
 							// System.out.println("tempDist:" + tempDist +
@@ -3401,18 +3566,21 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 						if (isOne(pixelIndex, maxClusterSize)) {
 							checkDie1Vector = checkDie1(vDie, vDieIndex, centers, info, raio, maxClusterSize, true);
 						}// if
-						else
+						else {
 							checkDie1Vector = checkDie1(vDie, vDieIndex, centers, info, raio, maxClusterSize, false);
-						if (checkDie1Vector.get(1).equals(Boolean.TRUE))
+						}
+						if (checkDie1Vector.get(1).equals(Boolean.TRUE)) {
 							checkDie1Vector = checkDie1(vDie, vDieIndex, centers, info, raio, maxClusterSize, true);
-						toReturn.add(0, (java.util.Vector[]) checkDie1Vector.get(0));
-						toReturn.add(1, (Boolean) checkDie1Vector.get(1));
+						}
+						toReturn.add(0, checkDie1Vector.get(0));
+						toReturn.add(1, checkDie1Vector.get(1));
 						return toReturn;
 						// return vDie;
 					}// if
 				}// if
-				// any other case, we have something which is not a two, but is
-				// a die, so it must be a three or more
+					// any other case, we have something which is not a two, but
+					// is
+					// a die, so it must be a three or more
 
 				// System.out.println("SpotCount:"+ spotCount);
 				if (spotCount > 0 && checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize)) {
@@ -3442,12 +3610,13 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					// return toReturn;
 				}// if
 				if (spotCount == 0) {
-					if (vDieIndex != cluster_counter - 1)
+					if (vDieIndex != cluster_counter - 1) {
 						for (int i = vDieIndex + 1; i < vDie.length; i++) {
 							vDie[i - 1] = vDie[i];
 						}// for_i
-					else
+					} else {
 						vDie[cluster_counter - 1] = null;
+					}
 
 					cluster_counter--;
 
@@ -3456,7 +3625,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					return toReturn;
 
 				}// else_if
-				// return vDie;
+					// return vDie;
 			}// if
 
 			// check if there are spots that are on the background
@@ -3473,7 +3642,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			// distMin_cluster = (double[][])vDieXYpIdM.get(4);
 
 			toReturn.add(0, vDie);
-			toReturn.add(1, (Boolean) vDieXYpIdM.get(4));
+			toReturn.add(1, vDieXYpIdM.get(4));
 
 			if (((Boolean) vDieXYpIdM.get(4)).equals(Boolean.TRUE)) {
 				// System.out.println("Setting die " + vDieIndex + "=>" +
@@ -3482,11 +3651,12 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				return toReturn;
 			}// if
 
-			if (x.length == 0)// && vDieIndex == cluster_counter)
+			if (x.length == 0) {
 				return toReturn;
+			}
 			spotCount = vDie[vDieIndex].size() - 1;
 			if (spotCount != x.length) {
-				int[] intArray = new int[spotCount];
+				final int[] intArray = new int[spotCount];
 				for (int i = 0; i < vDie[vDieIndex].size() - 1; i++) {
 					intArray[i] = ((Integer) vDie[vDieIndex].get(i)).intValue();
 				}// for_i
@@ -3511,7 +3681,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			y = (int[]) vDieXYpIdM.get(2);
 			pixelIndex = (int[]) vDieXYpIdM.get(3);
 			toReturn.add(0, vDie);
-			toReturn.add(1, (Boolean) vDieXYpIdM.get(4));
+			toReturn.add(1, vDieXYpIdM.get(4));
 
 			if (((Boolean) vDieXYpIdM.get(4)).equals(Boolean.TRUE)) {
 				// System.out.println("Setting die " + vDieIndex + "=>" +
@@ -3520,11 +3690,12 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				return toReturn;
 			}// if
 
-			if (x.length == 0)// && vDieIndex == cluster_counter)
+			if (x.length == 0) {
 				return toReturn;
+			}
 			spotCount = vDie[vDieIndex].size() - 1;
 			if (spotCount != x.length) {
-				int[] intArray = new int[spotCount];
+				final int[] intArray = new int[spotCount];
 				for (int i = 0; i < vDie[vDieIndex].size() - 1; i++) {
 					intArray[i] = ((Integer) vDie[vDieIndex].get(i)).intValue();
 				}// for_i
@@ -3549,7 +3720,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			// distMin_cluster = (double[][])vDieXYpIdM.get(4);
 
 			toReturn.add(0, vDie);
-			toReturn.add(1, (Boolean) vDieXYpIdM.get(4));
+			toReturn.add(1, vDieXYpIdM.get(4));
 
 			if (((Boolean) vDieXYpIdM.get(4)).equals(Boolean.TRUE)) {
 				// System.out.println("Setting die " + vDieIndex + "=>" +
@@ -3562,14 +3733,15 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			// System.out.println("vDieIndex: " + vDieIndex + ", vDie: " +
 			// vDie[vDieIndex] + ", cluster_counter:" + cluster_counter +
 			// "x.length" + x.length);
-			if (x.length == 0)// && vDieIndex == cluster_counter)
+			if (x.length == 0) {
 				return toReturn;
-			// return vDie;
+				// return vDie;
+			}
 
 			spotCount = vDie[vDieIndex].size() - 1;
 
 			if (spotCount != x.length) {
-				int[] intArray = new int[spotCount];
+				final int[] intArray = new int[spotCount];
 				for (int i = 0; i < vDie[vDieIndex].size() - 1; i++) {
 					intArray[i] = ((Integer) vDie[vDieIndex].get(i)).intValue();
 				}// for_i
@@ -3597,9 +3769,10 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					x_mean = clusterCenters[vDieIndex][0];
 					y_mean = clusterCenters[vDieIndex][1];
 					distance = new double[spotCount];
-					for (int indexa = 0; indexa < spotCount; indexa++)
+					for (int indexa = 0; indexa < spotCount; indexa++) {
 						distance[indexa] = java.lang.Math.sqrt((double) (x_mean - x[indexa]) * (x_mean - x[indexa])
 								+ (double) (y_mean - y[indexa]) * (y_mean - y[indexa]));
+					}
 					if (!checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize) && spotCount > 5) {
 						// checking for 5
 						// System.out.println("Checking for FIVE!");
@@ -3614,9 +3787,10 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 						x_mean = clusterCenters[vDieIndex][0];
 						y_mean = clusterCenters[vDieIndex][1];
 						distance = new double[spotCount];
-						for (int indexa = 0; indexa < spotCount; indexa++)
+						for (int indexa = 0; indexa < spotCount; indexa++) {
 							distance[indexa] = java.lang.Math.sqrt((double) (x_mean - x[indexa]) * (x_mean - x[indexa])
 									+ (double) (y_mean - y[indexa]) * (y_mean - y[indexa]));
+						}
 						if (!checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize) && spotCount > 4) {
 							// checking for 4
 							// System.out.println("Checking for FOUR!");
@@ -3631,9 +3805,10 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 							x_mean = clusterCenters[vDieIndex][0];
 							y_mean = clusterCenters[vDieIndex][1];
 							distance = new double[spotCount];
-							for (int indexa = 0; indexa < spotCount; indexa++)
+							for (int indexa = 0; indexa < spotCount; indexa++) {
 								distance[indexa] = java.lang.Math.sqrt((double) (x_mean - x[indexa])
 										* (x_mean - x[indexa]) + (double) (y_mean - y[indexa]) * (y_mean - y[indexa]));
+							}
 							if (!checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize) && spotCount > 3) {
 								// checking for 3
 								// System.out.println("Checking for THREE!");
@@ -3648,10 +3823,11 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 								x_mean = clusterCenters[vDieIndex][0];
 								y_mean = clusterCenters[vDieIndex][1];
 								distance = new double[spotCount];
-								for (int indexa = 0; indexa < spotCount; indexa++)
+								for (int indexa = 0; indexa < spotCount; indexa++) {
 									distance[indexa] = java.lang.Math.sqrt((double) (x_mean - x[indexa])
 											* (x_mean - x[indexa]) + (double) (y_mean - y[indexa])
 											* (y_mean - y[indexa]));
+								}
 								if (!checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize) && spotCount > 2) {
 									// checking for 2
 									// System.out.println("Checking for TWO!");
@@ -3666,10 +3842,11 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 									x_mean = clusterCenters[vDieIndex][0];
 									y_mean = clusterCenters[vDieIndex][1];
 									distance = new double[spotCount];
-									for (int indexa = 0; indexa < spotCount; indexa++)
+									for (int indexa = 0; indexa < spotCount; indexa++) {
 										distance[indexa] = java.lang.Math.sqrt((double) (x_mean - x[indexa])
 												* (x_mean - x[indexa]) + (double) (y_mean - y[indexa])
 												* (y_mean - y[indexa]));
+									}
 									if (!checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize)) {
 										// System.out.println("die " + vDieIndex
 										// +
@@ -3738,9 +3915,10 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 						x_mean = clusterCenters[vDieIndex][0];
 						y_mean = clusterCenters[vDieIndex][1];
 						distance = new double[spotCount];
-						for (int indexa = 0; indexa < spotCount; indexa++)
+						for (int indexa = 0; indexa < spotCount; indexa++) {
 							distance[indexa] = java.lang.Math.sqrt((double) (x_mean - x[indexa]) * (x_mean - x[indexa])
 									+ (double) (y_mean - y[indexa]) * (y_mean - y[indexa]));
+						}
 						if (!checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize) && spotCount > 3) {
 							// checking for 3
 							// System.out.println("Checking for THREE!");
@@ -3755,9 +3933,10 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 							x_mean = clusterCenters[vDieIndex][0];
 							y_mean = clusterCenters[vDieIndex][1];
 							distance = new double[spotCount];
-							for (int indexa = 0; indexa < spotCount; indexa++)
+							for (int indexa = 0; indexa < spotCount; indexa++) {
 								distance[indexa] = java.lang.Math.sqrt((double) (x_mean - x[indexa])
 										* (x_mean - x[indexa]) + (double) (y_mean - y[indexa]) * (y_mean - y[indexa]));
+							}
 							if (!checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize) && spotCount > 2) {
 								// checking for 2
 								// System.out.println("Checking for TWO!");
@@ -3772,10 +3951,11 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 								x_mean = clusterCenters[vDieIndex][0];
 								y_mean = clusterCenters[vDieIndex][1];
 								distance = new double[spotCount];
-								for (int indexa = 0; indexa < spotCount; indexa++)
+								for (int indexa = 0; indexa < spotCount; indexa++) {
 									distance[indexa] = java.lang.Math.sqrt((double) (x_mean - x[indexa])
 											* (x_mean - x[indexa]) + (double) (y_mean - y[indexa])
 											* (y_mean - y[indexa]));
+								}
 								if (!checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize)) {
 									// System.out.println("die " + vDieIndex +
 									// " is not a 2, a 3, a 4, nor a 5!!");
@@ -3818,9 +3998,10 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					x_mean = clusterCenters[vDieIndex][0];
 					y_mean = clusterCenters[vDieIndex][1];
 					distance = new double[spotCount];
-					for (int indexa = 0; indexa < spotCount; indexa++)
+					for (int indexa = 0; indexa < spotCount; indexa++) {
 						distance[indexa] = java.lang.Math.sqrt((double) (x_mean - x[indexa]) * (x_mean - x[indexa])
 								+ (double) (y_mean - y[indexa]) * (y_mean - y[indexa]));
+					}
 					if (!checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize) && spotCount > 3) {
 						// checking for 3
 						// System.out.println("Checking for THREE!");
@@ -3835,9 +4016,10 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 						x_mean = clusterCenters[vDieIndex][0];
 						y_mean = clusterCenters[vDieIndex][1];
 						distance = new double[spotCount];
-						for (int indexa = 0; indexa < spotCount; indexa++)
+						for (int indexa = 0; indexa < spotCount; indexa++) {
 							distance[indexa] = java.lang.Math.sqrt((double) (x_mean - x[indexa]) * (x_mean - x[indexa])
 									+ (double) (y_mean - y[indexa]) * (y_mean - y[indexa]));
+						}
 						if (!checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize) && spotCount > 2) {
 							// checking for 2
 							// System.out.println("Checking for TWO!");
@@ -3852,9 +4034,10 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 							x_mean = clusterCenters[vDieIndex][0];
 							y_mean = clusterCenters[vDieIndex][1];
 							distance = new double[spotCount];
-							for (int indexa = 0; indexa < spotCount; indexa++)
+							for (int indexa = 0; indexa < spotCount; indexa++) {
 								distance[indexa] = java.lang.Math.sqrt((double) (x_mean - x[indexa])
 										* (x_mean - x[indexa]) + (double) (y_mean - y[indexa]) * (y_mean - y[indexa]));
+							}
 							if (!checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize)) {
 								// System.out.println("die " + vDieIndex +
 								// " is not a 2, a 3, nor a 4!!");
@@ -3890,9 +4073,10 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					x_mean = clusterCenters[vDieIndex][0];
 					y_mean = clusterCenters[vDieIndex][1];
 					distance = new double[spotCount];
-					for (int indexa = 0; indexa < spotCount; indexa++)
+					for (int indexa = 0; indexa < spotCount; indexa++) {
 						distance[indexa] = java.lang.Math.sqrt((double) (x_mean - x[indexa]) * (x_mean - x[indexa])
 								+ (double) (y_mean - y[indexa]) * (y_mean - y[indexa]));
+					}
 					if (!checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize) && spotCount > 2) {
 						// checking for 2
 						// System.out.println("Checking for TWO!");
@@ -3907,9 +4091,10 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 						x_mean = clusterCenters[vDieIndex][0];
 						y_mean = clusterCenters[vDieIndex][1];
 						distance = new double[spotCount];
-						for (int indexa = 0; indexa < spotCount; indexa++)
+						for (int indexa = 0; indexa < spotCount; indexa++) {
 							distance[indexa] = java.lang.Math.sqrt((double) (x_mean - x[indexa]) * (x_mean - x[indexa])
 									+ (double) (y_mean - y[indexa]) * (y_mean - y[indexa]));
+						}
 						if (!checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize)) {
 							// System.out.println("die " + vDieIndex +
 							// " is not a 2, nor a 3!!");
@@ -3939,9 +4124,10 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					x_mean = clusterCenters[vDieIndex][0];
 					y_mean = clusterCenters[vDieIndex][1];
 					distance = new double[spotCount];
-					for (int indexa = 0; indexa < spotCount; indexa++)
+					for (int indexa = 0; indexa < spotCount; indexa++) {
 						distance[indexa] = java.lang.Math.sqrt((double) (x_mean - x[indexa]) * (x_mean - x[indexa])
 								+ (double) (y_mean - y[indexa]) * (y_mean - y[indexa]));
+					}
 					if (!checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize)) {
 						// System.out.println("die " + vDieIndex +
 						// " is not a 2!!");
@@ -3971,9 +4157,10 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			x_mean = clusterCenters[vDieIndex][0];
 			y_mean = clusterCenters[vDieIndex][1];
 			distance = new double[spotCount];
-			for (int indexa = 0; indexa < spotCount; indexa++)
+			for (int indexa = 0; indexa < spotCount; indexa++) {
 				distance[indexa] = java.lang.Math.sqrt((double) (x_mean - x[indexa]) * (x_mean - x[indexa])
 						+ (double) (y_mean - y[indexa]) * (y_mean - y[indexa]));
+			}
 			if (checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize)) {
 				// System.out.println("Setting die " + vDieIndex + "=>" +
 				// vDie[vDieIndex] + " as TRUE!");
@@ -3996,21 +4183,22 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			pixelIndex = (int[]) vDieXYpIdM.get(3);
 			vDieIndex = ((Integer) vDieXYpIdM.get(4)).intValue();
 			toReturn.add(0, vDie);
-			toReturn.add(1, (Boolean) vDieXYpIdM.get(5));
+			toReturn.add(1, vDieXYpIdM.get(5));
 
 			if (((Boolean) vDieXYpIdM.get(5)).equals(Boolean.TRUE)) {
 				// vDie[vDieIndex].set(vDie[vDieIndex].size()-1, Boolean.TRUE);
 				return toReturn;
 			}// if
-			// return vDie;
+				// return vDie;
 
-			if (x.length == 0 && vDieIndex == cluster_counter)
+			if (x.length == 0 && vDieIndex == cluster_counter) {
 				return toReturn;
+			}
 
 			spotCount = vDie[vDieIndex].size() - 1;
 
 			if (spotCount != x.length) {
-				int[] intArray = new int[spotCount];
+				final int[] intArray = new int[spotCount];
 				for (int i = 0; i < vDie[vDieIndex].size() - 1; i++) {
 					intArray[i] = ((Integer) vDie[vDieIndex].get(i)).intValue();
 				}// for_i
@@ -4026,9 +4214,10 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			x_mean = clusterCenters[vDieIndex][0];
 			y_mean = clusterCenters[vDieIndex][1];
 			distance = new double[spotCount];
-			for (int indexa = 0; indexa < spotCount; indexa++)
+			for (int indexa = 0; indexa < spotCount; indexa++) {
 				distance[indexa] = java.lang.Math.sqrt((double) (x_mean - x[indexa]) * (x_mean - x[indexa])
 						+ (double) (y_mean - y[indexa]) * (y_mean - y[indexa]));
+			}
 
 			isSpotCountOK = checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize);
 			// System.out.println("At the end, spotCount: " + spotCount +
@@ -4054,8 +4243,8 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				vClusters.addElement(vDie[cluster_counter]);
 				cluster_counter++;
 			}// while
-			// System.out.println("die " + vDieIndex + " keeps spot " +
-			// vDie[vDieIndex].get(0));
+				// System.out.println("die " + vDieIndex + " keeps spot " +
+				// vDie[vDieIndex].get(0));
 			clusterCenters = getClusterCenters(vDie); // update clusterCenters
 			// checking if the result leads to any one
 			pixelIndex = new int[1];
@@ -4065,15 +4254,17 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			if (isOne(pixelIndex, maxClusterSize)) {
 				checkDie1Vector = checkDie1(vDie, vDieIndex, centers, info, raio, maxClusterSize, true);
 			}// if
-			else
+			else {
 				checkDie1Vector = checkDie1(vDie, vDieIndex, centers, info, raio, maxClusterSize, false);
-			if (checkDie1Vector.get(1).equals(Boolean.TRUE))
+			}
+			if (checkDie1Vector.get(1).equals(Boolean.TRUE)) {
 				checkDie1Vector = checkDie1(vDie, vDieIndex, centers, info, raio, maxClusterSize, true);
+			}
 
 			// //vDie = checkDie1(vDie, cluster_counter-1, centers, info, raio,
 			// maxClusterSize, true);
-			toReturn.add(0, (java.util.Vector[]) checkDie1Vector.get(0));
-			toReturn.add(1, (Boolean) checkDie1Vector.get(1));
+			toReturn.add(0, checkDie1Vector.get(0));
+			toReturn.add(1, checkDie1Vector.get(1));
 
 			return toReturn;
 
@@ -4091,15 +4282,15 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		// return vDie;
 	}// checkDie
 
-	private java.util.Vector checkDie1(java.util.Vector[] vDie, int vDieIndex, int[][] centers, double[] info,
-			int raio, int maxClusterSize, boolean isProbableOne) {
+	private java.util.Vector checkDie1(java.util.Vector[] vDie, int vDieIndex, final int[][] centers,
+			final double[] info, final int raio, final int maxClusterSize, final boolean isProbableOne) {
 		// System.out.println("Checking a die with 1 spot!");
 
 		int x1, y1, centerIndex1 = 0;
 		double media1;
-		int imageWidth = imageSize()[0];
-		double maxmaxDist = (double) maxClusterSize / 2. * 1.196; // =19.7175
-		java.util.Vector toReturn = new java.util.Vector(2);
+		final int imageWidth = imageSize()[0];
+		double maxmaxDist = maxClusterSize / 2. * 1.196; // =19.7175
+		final java.util.Vector toReturn = new java.util.Vector(2);
 		toReturn.add(0, vDie);
 		toReturn.add(1, Boolean.TRUE);// is TRUE when the checkDie1 returns the
 		// same die with the same spot. FALSE
@@ -4107,7 +4298,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 
 		try {
 			centerIndex1 = Integer.parseInt(vDie[vDieIndex].get(0).toString());
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 		}
 
 		x1 = centers[centerIndex1][0];
@@ -4116,14 +4307,14 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 
 		// System.out.println(x1 + ", " + y1);
 
-		int pixelIndex1 = y1 * imageWidth + x1;
+		final int pixelIndex1 = y1 * imageWidth + x1;
 		boolean isRelaxedSpot = true;
 		// check if it's a spot. if not, remove the cluster!
 		if (isSpot(pixelIndex1, raio, true, false).get(0).equals(Boolean.FALSE)) {
 			isRelaxedSpot = false;
 		}// if
-		java.util.Vector isSpotVector = isSpot(pixelIndex1, raio, false, true);
-		int maxZeroCount = 1, maxOneCount = 2, maxMaxCount = 1;
+		final java.util.Vector isSpotVector = isSpot(pixelIndex1, raio, false, true);
+		final int maxZeroCount = 1, maxOneCount = 2, maxMaxCount = 1;
 		if (!isRelaxedSpot && isSpotVector.get(0).equals(Boolean.FALSE)
 				&& ((Integer) isSpotVector.get(1)).intValue() > maxZeroCount
 				|| ((Integer) isSpotVector.get(2)).intValue() > maxOneCount
@@ -4159,7 +4350,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					if (index1 != vDieIndex) // we don't want to compare this
 					// with it self, now do we??
 					{
-						double dist = java.lang.Math.sqrt((clusterCenters[index1][0] - x1)
+						final double dist = java.lang.Math.sqrt((clusterCenters[index1][0] - x1)
 								* (clusterCenters[index1][0] - x1) + (clusterCenters[index1][1] - y1)
 								* (clusterCenters[index1][1] - y1));
 						if (dist < distMin1_clusterCenter[0]) {
@@ -4170,16 +4361,17 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 						}// if_dist
 					}// if_index1!index
 
-					if (vDie[(int) distMin1_clusterCenter[1]].size() == 2)
-						maxmaxDist = (double) maxClusterSize / 2. * 1.52;
-					else
-						maxmaxDist = (double) maxClusterSize / 2. * 1.2122;// *
-					// 1.195;
+					if (vDie[(int) distMin1_clusterCenter[1]].size() == 2) {
+						maxmaxDist = maxClusterSize / 2. * 1.52;
+					} else {
+						maxmaxDist = maxClusterSize / 2. * 1.2122;// *
+						// 1.195;
+					}
 
-					double[] tempDist = new double[2];
+					final double[] tempDist = new double[2];
 					tempDist[0] = distMin1_clusterCenter[0] / 2;
 					tempDist[1] = distMin1_clusterCenter[0] / 2;
-					int[] tempPixelIndex = new int[2];
+					final int[] tempPixelIndex = new int[2];
 					tempPixelIndex[0] = y1 * imageWidth + x1;
 					tempPixelIndex[1] = (int) distMin1_clusterCenter[2];
 					// System.out.println("minDist: " +
@@ -4240,21 +4432,21 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					// center within range, try to get a spot from that other
 					// die.
 					for (int i = 0; i < vDie[((int) distMin1_clusterCenter[1])].size() - 1; i++) {
-						int x = centers[((Integer) vDie[((int) distMin1_clusterCenter[1])].get(i)).intValue()][0], y = centers[((Integer) vDie[((int) distMin1_clusterCenter[1])]
+						final int x = centers[((Integer) vDie[((int) distMin1_clusterCenter[1])].get(i)).intValue()][0], y = centers[((Integer) vDie[((int) distMin1_clusterCenter[1])]
 								.get(i)).intValue()][1];
-						double testDist = java.lang.Math.sqrt((double) (x1 - x) * (x1 - x) + (double) (y1 - y)
+						final double testDist = java.lang.Math.sqrt((double) (x1 - x) * (x1 - x) + (double) (y1 - y)
 								* (y1 - y));
-						maxmaxDist = (double) maxClusterSize * 0.795; // 1.59/2
+						maxmaxDist = maxClusterSize * 0.795; // 1.59/2
 						// =
 						// 0.795
 						// System.out.println("Testing spot " +
 						// vDie[((int)distMin1_clusterCenter[1])].get(i) +
 						// "("+x+","+y+")" +", is at dist: "+testDist +
 						// ", maxmaxDist:"+maxmaxDist);
-						double[] tempDist = new double[2];
+						final double[] tempDist = new double[2];
 						tempDist[0] = testDist / 2;
 						tempDist[1] = tempDist[0];
-						int[] tempPixelIndex = new int[2];
+						final int[] tempPixelIndex = new int[2];
 						tempPixelIndex[0] = x1 + y1 * imageWidth;
 						tempPixelIndex[1] = x + y * imageWidth;
 						if (testDist < maxmaxDist && isTwo(tempDist, tempPixelIndex, false)) {
@@ -4263,15 +4455,18 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 								// System.out.println("vDie " +
 								// (int)(distMin1_clusterCenter[1]) +
 								// " has been depleted!");
-								if ((int) distMin1_clusterCenter[1] != cluster_counter - 1)
-									for (int k = (int) distMin1_clusterCenter[1] + 1; k < vDie.length; k++)
+								if ((int) distMin1_clusterCenter[1] != cluster_counter - 1) {
+									for (int k = (int) distMin1_clusterCenter[1] + 1; k < vDie.length; k++) {
 										vDie[k - 1] = vDie[k];
-								else
+									}
+								} else {
 									vDie[cluster_counter - 1] = null;
+								}
 
 								cluster_counter--;
-								if (vDieIndex == cluster_counter)
+								if (vDieIndex == cluster_counter) {
 									vDieIndex--;
+								}
 
 								clusterCenters = getClusterCenters(vDie);
 								break;
@@ -4281,21 +4476,21 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 						}// if
 
 					}// for_i
-					// return toReturn;
+						// return toReturn;
 				}// if
-				// check if it can make a two with any spot available
-				// System.out.println("testing to get a spot and form a two!");
+					// check if it can make a two with any spot available
+					// System.out.println("testing to get a spot and form a two!");
 				for (int i = 0; i < cluster_counter && vDie[vDieIndex].size() == 2; i++) {
 					if (vDie[i].get(vDie[i].size() - 1).equals(Boolean.FALSE) && i != vDieIndex) {
 						for (int j = 0; j < vDie[i].size() - 1; j++) {
-							int x0 = centers[((Integer) vDie[i].get(j)).intValue()][0];
-							int y0 = centers[((Integer) vDie[i].get(j)).intValue()][1];
-							int pixelIndex0 = x0 + y0 * imageWidth;
-							double testDist = java.lang.Math.sqrt((double) (x1 - x0) * (x1 - x0) + (double) (y1 - y0)
-									* (y1 - y0));
+							final int x0 = centers[((Integer) vDie[i].get(j)).intValue()][0];
+							final int y0 = centers[((Integer) vDie[i].get(j)).intValue()][1];
+							final int pixelIndex0 = x0 + y0 * imageWidth;
+							final double testDist = java.lang.Math.sqrt((double) (x1 - x0) * (x1 - x0)
+									+ (double) (y1 - y0) * (y1 - y0));
 							// System.out.println("testDist:"+testDist);
-							double[] testDistance = new double[2];
-							int[] pixelIndex = new int[2];
+							final double[] testDistance = new double[2];
+							final int[] pixelIndex = new int[2];
 							testDistance[0] = testDist / 2.;
 							testDistance[1] = testDistance[0];
 							pixelIndex[0] = x1 + y1 * imageWidth;
@@ -4313,12 +4508,13 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 						}// for_j
 					}// if
 				}// for_i
-				// System.out.println("Setting die " + vDieIndex + "=>" +
-				// vDie[vDieIndex] + " as TRUE!");
-				// vDie[vDieIndex].set(vDie[vDieIndex].size()-1, Boolean.TRUE);
+					// System.out.println("Setting die " + vDieIndex + "=>" +
+					// vDie[vDieIndex] + " as TRUE!");
+					// vDie[vDieIndex].set(vDie[vDieIndex].size()-1,
+					// Boolean.TRUE);
 			}// if
 			else {
-				int[] pixelIndex = new int[1];
+				final int[] pixelIndex = new int[1];
 				pixelIndex[0] = pixelIndex1;
 
 				if (!isOne(pixelIndex, maxClusterSize)) {
@@ -4327,12 +4523,13 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					vDie = removeSpot(vDie, vDieIndex, 0);
 
 					// System.out.println("[1a]This die has been depleted!");
-					if (vDieIndex != cluster_counter - 1)
+					if (vDieIndex != cluster_counter - 1) {
 						for (int i = vDieIndex + 1; i < vDie.length; i++) {
 							vDie[i - 1] = vDie[i];
 						}// for_i
-					else
+					} else {
 						vDie[cluster_counter - 1] = null;
+					}
 
 					cluster_counter--;
 					clusterCenters = getClusterCenters(vDie);
@@ -4350,8 +4547,8 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		return toReturn;
 	}// checkDie1
 
-	private java.util.Vector checkDoubleSpots(java.util.Vector[] vDie, int vDieIndex, int[] x, int[] y,
-			int[] pixelIndex, int raio, int maxClusterSize) {
+	private java.util.Vector checkDoubleSpots(java.util.Vector[] vDie, final int vDieIndex, int[] x, int[] y,
+			int[] pixelIndex, final int raio, final int maxClusterSize) {
 		if (vDie[vDieIndex].get(vDie[vDieIndex].size() - 1).equals(Boolean.TRUE)) // if
 		// this
 		// die
@@ -4360,7 +4557,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		// do
 		// nothing!
 		{
-			java.util.Vector vDieXYpI = new java.util.Vector(5);
+			final java.util.Vector vDieXYpI = new java.util.Vector(5);
 			vDieXYpI.add(0, vDie);
 			vDieXYpI.add(1, x);
 			vDieXYpI.add(2, y);
@@ -4368,23 +4565,24 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			vDieXYpI.add(4, Boolean.TRUE);
 			return vDieXYpI;
 		}// if
-		// System.out.println("Checking Double Spots!");
+			// System.out.println("Checking Double Spots!");
 		int spotCount = vDie[vDieIndex].size() - 1, x_mean, y_mean;
 		double[] distance;
-		java.util.Vector vDieXYpI = new java.util.Vector(5);
+		final java.util.Vector vDieXYpI = new java.util.Vector(5);
 		for (int indexa = 0; indexa < spotCount; indexa++) {
-			int xa = x[indexa];
-			int ya = y[indexa];
+			final int xa = x[indexa];
+			final int ya = y[indexa];
 			boolean removed = false;
-			boolean aIsSpot = ((Boolean) isSpot(pixelIndex[indexa], raio, spotCount < 6 ? false : true,
+			final boolean aIsSpot = ((Boolean) isSpot(pixelIndex[indexa], raio, spotCount < 6 ? false : true,
 					spotCount == 1 ? true : false).get(0)).booleanValue();
 			for (int indexb = 0; indexb < spotCount; indexb++) {
 				// System.out.println(">>Before!   spotCount:" + spotCount +
 				// ", indexa:" + indexa + ", indexb:" + indexb);
 				if (indexa != indexb && aIsSpot) {
-					int xb = x[indexb];
-					int yb = y[indexb];
-					double dist = java.lang.Math.sqrt((double) (xa - xb) * (xa - xb) + (double) (ya - yb) * (ya - yb));
+					final int xb = x[indexb];
+					final int yb = y[indexb];
+					final double dist = java.lang.Math.sqrt((double) (xa - xb) * (xa - xb) + (double) (ya - yb)
+							* (ya - yb));
 					// System.out.println("Spot " + xa+";"+ya + " to " +
 					// xb+";"+yb + " = " + dist);
 					if (dist <= raio + 1) // raio
@@ -4398,12 +4596,13 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 						--spotCount;
 						if (spotCount == 0) {
 							// System.out.println("[2]This die has been depleted!");
-							if (vDieIndex != cluster_counter - 1)
+							if (vDieIndex != cluster_counter - 1) {
 								for (int i = vDieIndex + 1; i < vDie.length; i++) {
 									vDie[i - 1] = vDie[i];
 								}// for_i
-							else
+							} else {
 								vDie[cluster_counter - 1] = null;
+							}
 
 							cluster_counter--;
 							clusterCenters = getClusterCenters(vDie);
@@ -4420,9 +4619,10 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 						x_mean = clusterCenters[vDieIndex][0];
 						y_mean = clusterCenters[vDieIndex][1];
 						distance = new double[spotCount];
-						for (int indexc = 0; indexc < distance.length; indexc++)
+						for (int indexc = 0; indexc < distance.length; indexc++) {
 							distance[indexc] = java.lang.Math.sqrt((double) (x_mean - x[indexc]) * (x_mean - x[indexc])
 									+ (double) (y_mean - y[indexc]) * (y_mean - y[indexc]));
+						}
 						if (checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize)) {
 							// System.out.println("Spot Count is correct after removal double spots!");
 							// System.out.println("Setting die " + vDieIndex +
@@ -4435,21 +4635,23 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 							vDieXYpI.add(4, new Boolean(true));
 							return vDieXYpI;
 						}// if
-						// else{
-						// System.out.println("[2]spotCount check Failed!! spotCount: "
-						// + spotCount);}
+							// else{
+							// System.out.println("[2]spotCount check Failed!! spotCount: "
+							// + spotCount);}
 						--indexb;
 						removed = true;
 					}// if
 				}// if
-				if (spotCount == indexa && spotCount > 1)
+				if (spotCount == indexa && spotCount > 1) {
 					indexa--;
-				// System.out.println(">>After!   spotCount:" + spotCount +
-				// ", indexa:" + indexa + ", indexb:" + indexb);
+					// System.out.println(">>After!   spotCount:" + spotCount +
+					// ", indexa:" + indexa + ", indexb:" + indexb);
+				}
 
 			}// for_indexb
-			if (removed)
+			if (removed) {
 				--indexa;
+			}
 		}// for_indexa
 
 		vDieXYpI.add(0, vDie);
@@ -4460,8 +4662,10 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		return vDieXYpI;
 	}// checkDoubleSpots
 
-	private java.util.Vector checkSpots(java.util.Vector[] vDie, int vDieIndex, int[] x, int[] y, int[] pixelIndex,
-			int raio, int maxClusterSize)// , double[][] distMin_cluster)
+	private java.util.Vector checkSpots(java.util.Vector[] vDie, final int vDieIndex, int[] x, int[] y,
+			int[] pixelIndex, final int raio, final int maxClusterSize)// ,
+																		// double[][]
+																		// distMin_cluster)
 	{
 		if (vDie[vDieIndex].get(vDie[vDieIndex].size() - 1).equals(Boolean.TRUE)) // if
 		// this
@@ -4471,7 +4675,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		// do
 		// nothing!
 		{
-			java.util.Vector vDieXYpI = new java.util.Vector(5);
+			final java.util.Vector vDieXYpI = new java.util.Vector(5);
 			vDieXYpI.add(0, vDie);
 			vDieXYpI.add(1, x);
 			vDieXYpI.add(2, y);
@@ -4484,26 +4688,29 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 
 		if (spotCount == 3) {
 			int startPixelIndex = 0, endPixelIndex = 0;
-			double minDist = maxClusterSize / 3.064;// 10.770234986945169712793733681462;
+			final double minDist = maxClusterSize / 3.064;// 10.770234986945169712793733681462;
 			int x_mean = clusterCenters[vDieIndex][0], y_mean = clusterCenters[vDieIndex][1];
 			double[] distance = new double[spotCount];
-			for (int indexa = 0; indexa < distance.length; indexa++)
+			for (int indexa = 0; indexa < distance.length; indexa++) {
 				distance[indexa] = java.lang.Math.sqrt((double) (x_mean - x[indexa]) * (x_mean - x[indexa])
 						+ (double) (y_mean - y[indexa]) * (y_mean - y[indexa]));
+			}
 			for (int i = 0; i < 3; i++) {
-				if (startPixelIndex != 0 && distance[i] >= minDist)
+				if (startPixelIndex != 0 && distance[i] >= minDist) {
 					endPixelIndex = pixelIndex[i];
-				if (startPixelIndex == 0 && distance[i] >= minDist)
+				}
+				if (startPixelIndex == 0 && distance[i] >= minDist) {
 					startPixelIndex = pixelIndex[i];
+				}
 			}// for_i
-			// System.out.println("startPoint: (" +
-			// startPixelIndex%imageSize()[0]+","+startPixelIndex/imageSize()[0]+"); endPoint: ("+endPixelIndex%imageSize()[0]+","+endPixelIndex/imageSize()[0]+").");
-			int[] whiteCounters = countWhitePatches(startPixelIndex, endPixelIndex);
+				// System.out.println("startPoint: (" +
+				// startPixelIndex%imageSize()[0]+","+startPixelIndex/imageSize()[0]+"); endPoint: ("+endPixelIndex%imageSize()[0]+","+endPixelIndex/imageSize()[0]+").");
+			final int[] whiteCounters = countWhitePatches(startPixelIndex, endPixelIndex);
 			if (whiteCounters[0] < 2) {
 				// get worst spot, to remove!
-				int[] counter = new int[3];
+				final int[] counter = new int[3];
 				for (int i = 0; i < spotCount; i++) {
-					java.util.Vector isSpotVector = isSpot(pixelIndex[i], raio, true, false);
+					final java.util.Vector isSpotVector = isSpot(pixelIndex[i], raio, true, false);
 					counter[i] = ((Integer) isSpotVector.get(1)).intValue();
 					counter[i] += ((Integer) isSpotVector.get(2)).intValue();
 					counter[i] += ((Integer) isSpotVector.get(3)).intValue();
@@ -4535,13 +4742,14 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					x_mean = clusterCenters[vDieIndex][0];
 					y_mean = clusterCenters[vDieIndex][1];
 					distance = new double[spotCount];
-					for (int indexa = 0; indexa < distance.length; indexa++)
+					for (int indexa = 0; indexa < distance.length; indexa++) {
 						distance[indexa] = java.lang.Math.sqrt((double) (x_mean - x[indexa]) * (x_mean - x[indexa])
 								+ (double) (y_mean - y[indexa]) * (y_mean - y[indexa]));
+					}
 					if (checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize)) {
 						// System.out.println("Setting die "+vDieIndex+" as TRUE!");
 						vDie[vDieIndex].set(vDie[vDieIndex].size() - 1, Boolean.TRUE);
-						java.util.Vector vDieXYpI = new java.util.Vector(5);
+						final java.util.Vector vDieXYpI = new java.util.Vector(5);
 						vDieXYpI.add(0, vDie);
 						vDieXYpI.add(1, x);
 						vDieXYpI.add(2, y);
@@ -4553,16 +4761,16 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			}// if
 		}// if
 
-		java.util.Vector vDieXYpI = new java.util.Vector(5);
-		double maxmaxDist = (double) maxClusterSize / 2;// * 1.196;
-		int imageWidth = imageSize()[0], minWhite = 2;
+		final java.util.Vector vDieXYpI = new java.util.Vector(5);
+		final double maxmaxDist = (double) maxClusterSize / 2;// * 1.196;
+		final int imageWidth = imageSize()[0], minWhite = 2;
 
 		for (int index = 0; index < spotCount; index++) {
 			// distMin_cluster[index][0] = 1000;
 
 			// Check if it's really a spot and, remove if not; move, if yes.
 			boolean isProbableSix = false;
-			int maxDistForConsecutiveSpotsInSix = 10;
+			final int maxDistForConsecutiveSpotsInSix = 10;
 			// check if this spot can belong to some die that may be a six
 			for (int i = 0; i < cluster_counter && !isProbableSix; i++) {
 				for (int j = 0; j < vDie[i].size() - 1 && !isProbableSix; j++) {
@@ -4573,11 +4781,11 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 						else {
 							// System.out.println("vDie["+i+"], spot("+j+")" );
 							// System.out.println("spotCount:" + spotCount);
-							int x_temp = centers[((Integer) vDie[i].get(j)).intValue()][0], y_temp = centers[((Integer) vDie[i]
+							final int x_temp = centers[((Integer) vDie[i].get(j)).intValue()][0], y_temp = centers[((Integer) vDie[i]
 									.get(j)).intValue()][1];
-							int startPixelIndex = x_temp + y_temp * imageWidth, endPixelIndex = x[index] + y[index]
-									* imageWidth;
-							int[] whitePatches = countWhitePatches(startPixelIndex, endPixelIndex);
+							final int startPixelIndex = x_temp + y_temp * imageWidth, endPixelIndex = x[index]
+									+ y[index] * imageWidth;
+							final int[] whitePatches = countWhitePatches(startPixelIndex, endPixelIndex);
 							double tempDist = java.lang.Math.sqrt((double) (x[index] - x_temp) * (x[index] - x_temp)
 									+ (double) (y[index] - y_temp) * (y[index] - y_temp));
 							// System.out.println("tempDist: "+tempDist+";from spot 38 to die:"+i+", spot:"+vDie[i].get(j)+"; this die:"+vDieIndex+"=>"+vDie[vDieIndex]);
@@ -4588,7 +4796,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 								if (spotCount <= 2) {
 									// check distance between cluster centers so
 									// we can say that this is not a six.
-									int maxDistForSingleCluster = (int) ((double) maxClusterSize / 1.22);
+									final int maxDistForSingleCluster = (int) (maxClusterSize / 1.22);
 									tempDist = java.lang.Math
 											.sqrt((double) (clusterCenters[vDieIndex][0] - clusterCenters[i][0])
 													* (clusterCenters[vDieIndex][0] - clusterCenters[i][0])
@@ -4598,15 +4806,17 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 									// + ", max:" + maxDistForSingleCluster +
 									// ", cluster:" + i + "=="+vDie[i]);
 									if (tempDist < maxDistForSingleCluster
-											&& vDie[i].get(vDie[i].size() - 1).equals(Boolean.FALSE))
+											&& vDie[i].get(vDie[i].size() - 1).equals(Boolean.FALSE)) {
 										isProbableSix = true;
+									}
 								}// if
-								else
+								else {
 									isProbableSix = true;
+								}
 							}// if
 						}// else
-						// System.out.println("temp point:"+x_temp+", "+y_temp
-						// +"; " + isProbableSix);
+							// System.out.println("temp point:"+x_temp+", "+y_temp
+							// +"; " + isProbableSix);
 					}// if
 				}// for_j
 			}// for_i
@@ -4625,7 +4835,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			 */
 			// System.out.println("checking spot " + vDie[vDieIndex].get(index)
 			// + ", ("+x[index]+", "+y[index]+"),");
-			java.util.Vector isSpotVector = isSpot(pixelIndex[index], raio, isProbableSix, spotCount == 1 ? true
+			final java.util.Vector isSpotVector = isSpot(pixelIndex[index], raio, isProbableSix, spotCount == 1 ? true
 					: false);
 			if (isSpotVector.get(0).equals(Boolean.FALSE)) {
 				// System.out.println("Is not Spot!");
@@ -4639,12 +4849,13 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				spotCount--;
 				if (spotCount == 0) {
 					// System.out.println("[3]This die has been depleted!");
-					if (vDieIndex != cluster_counter - 1)
+					if (vDieIndex != cluster_counter - 1) {
 						for (int i = vDieIndex + 1; i < vDie.length; i++) {
 							vDie[i - 1] = vDie[i];
 						}// for_i
-					else
+					} else {
 						vDie[cluster_counter - 1] = null;
+					}
 
 					cluster_counter--;
 					clusterCenters = getClusterCenters(vDie);
@@ -4657,11 +4868,12 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				}// if
 				clusterCenters = getClusterCenters(vDie);
 
-				int x_mean = clusterCenters[vDieIndex][0], y_mean = clusterCenters[vDieIndex][1];
-				double[] distance = new double[spotCount];
-				for (int indexa = 0; indexa < distance.length; indexa++)
+				final int x_mean = clusterCenters[vDieIndex][0], y_mean = clusterCenters[vDieIndex][1];
+				final double[] distance = new double[spotCount];
+				for (int indexa = 0; indexa < distance.length; indexa++) {
 					distance[indexa] = java.lang.Math.sqrt((double) (x_mean - x[indexa]) * (x_mean - x[indexa])
 							+ (double) (y_mean - y[indexa]) * (y_mean - y[indexa]));
+				}
 				if (checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize)) {
 					// System.out.println("Spot Count is correct after removal non spots!");
 					// System.out.println("Setting die " + vDieIndex + "=>" +
@@ -4675,9 +4887,9 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					vDieXYpI.add(4, Boolean.TRUE);
 					return vDieXYpI;
 				}// if
-				// else
-				// System.out.println("[3]spotCount check Failed!! spotCount: "
-				// + spotCount);
+					// else
+					// System.out.println("[3]spotCount check Failed!! spotCount: "
+					// + spotCount);
 				index--;
 			}// if
 		}// for_index
@@ -4691,8 +4903,9 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		return vDieXYpI;
 	}// checkSpots
 
-	private java.util.Vector checkIfSpotsBelongToAnother(java.util.Vector[] vDie, int vDieIndex, int[] x, int[] y,
-			int[] pixelIndex, int raio, int maxClusterSize, int insideCluster, double[] info) {
+	private java.util.Vector checkIfSpotsBelongToAnother(java.util.Vector[] vDie, final int vDieIndex, int[] x,
+			int[] y, int[] pixelIndex, final int raio, final int maxClusterSize, final int insideCluster,
+			final double[] info) {
 		if (vDie[vDieIndex].get(vDie[vDieIndex].size() - 1).equals(Boolean.TRUE)) // if
 		// this
 		// die
@@ -4701,8 +4914,8 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		// do
 		// nothing!
 		{
-			java.util.Vector vDieXYpIdM = new java.util.Vector(5);
-			double[][] distMin_cluster = new double[vDie[vDieIndex].size() - 1][2];
+			final java.util.Vector vDieXYpIdM = new java.util.Vector(5);
+			final double[][] distMin_cluster = new double[vDie[vDieIndex].size() - 1][2];
 			vDieXYpIdM.add(0, vDie);
 			vDieXYpIdM.add(1, x);
 			vDieXYpIdM.add(2, y);
@@ -4710,9 +4923,9 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			vDieXYpIdM.add(4, Boolean.TRUE);
 			return vDieXYpIdM;
 		}// if
-		// System.out.println("Checking if spots belong to another Die!");
+			// System.out.println("Checking if spots belong to another Die!");
 		int spotCount = vDie[vDieIndex].size() - 1;
-		java.util.Vector vDieXYpIdM = new java.util.Vector(6);
+		final java.util.Vector vDieXYpIdM = new java.util.Vector(6);
 		double maxmaxDist;// = (double)maxClusterSize/2. * 1.195;
 
 		double[][] distMin_cluster = new double[spotCount][2];
@@ -4726,7 +4939,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			// self, now do we??
 			{
 				for (int index1 = 0; index1 < spotCount; index1++) {
-					double dist = java.lang.Math.sqrt((clusterCenters[index][0] - x[index1])
+					final double dist = java.lang.Math.sqrt((clusterCenters[index][0] - x[index1])
 							* (clusterCenters[index][0] - x[index1]) + (clusterCenters[index][1] - y[index1])
 							* (clusterCenters[index][1] - y[index1]));
 					if (dist < distMin_cluster[index1][0]) {
@@ -4774,31 +4987,32 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			// the
 			// way!
 			{ // if we have a two, it might be a part of a three or a five
-				maxmaxDist = (double) maxClusterSize / 2. * 1.59;
+				maxmaxDist = maxClusterSize / 2. * 1.59;
 				// System.out.println("die " + ((int)distMin_cluster[index][1])
 				// + " is a "+
 				// (vDie[((int)distMin_cluster[index][1])].size()-1)+". maxmaxDist:"
 				// + maxmaxDist);
 			}// if
-			else
-				maxmaxDist = (double) maxClusterSize / 1.52;
-			// System.out.println("distMin:" + distMin_cluster[index][0] +
-			// ", maxmaxDist = " + maxmaxDist + ", vDie:" +
-			// vDie[((int)distMin_cluster[index][1])]);
-			// if(temp && distMin_cluster[index][0]<maxmaxDist)
+			else {
+				maxmaxDist = maxClusterSize / 1.52;
+				// System.out.println("distMin:" + distMin_cluster[index][0] +
+				// ", maxmaxDist = " + maxmaxDist + ", vDie:" +
+				// vDie[((int)distMin_cluster[index][1])]);
+				// if(temp && distMin_cluster[index][0]<maxmaxDist)
+			}
 
 			if (distMin_cluster[index][0] < maxmaxDist) {
 				// if the other die is ok, test if it is still ok, after
 				// receiving the spot from this die.
-				int testvDieIndex = (int) minDistSpotClusterXY[index][2];
+				final int testvDieIndex = (int) minDistSpotClusterXY[index][2];
 				// System.out.println("Die " + testvDieIndex + ": "+
 				// vDie[testvDieIndex]);
 				if (vDie[testvDieIndex].get(vDie[testvDieIndex].size() - 1).equals(Boolean.TRUE)) {
 					if (!(vDie[testvDieIndex].size() - 2 == 0)) {
 						// building stuff to test resulting die
-						int[] testX = new int[vDie[testvDieIndex].size()];
-						int[] testY = new int[vDie[testvDieIndex].size()];
-						int[] testPixelIndex = new int[testX.length];
+						final int[] testX = new int[vDie[testvDieIndex].size()];
+						final int[] testY = new int[vDie[testvDieIndex].size()];
+						final int[] testPixelIndex = new int[testX.length];
 
 						int testX_mean = 0, testY_mean = 0;
 						for (int i = 0; i < vDie[testvDieIndex].size() - 1; i++) {
@@ -4815,9 +5029,9 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 						// + "; die:"+vDie[vDieIndex] +
 						// "; pos:"+((int)minDistSpotClusterXY[index][1]-numberOfRemovedSpotsInDie)+"; numberOfRemovedSpotsInDie:"+numberOfRemovedSpotsInDie+"spot:"+minDistSpotClusterXY[index][1]);
 						int testIndex = (int) minDistSpotClusterXY[index][1] - numberOfRemovedSpots[index];
-						if (testIndex < 0)
+						if (testIndex < 0) {
 							testIndex = 0;
-						else if (testIndex >= vDie[vDieIndex].size() - 1) {
+						} else if (testIndex >= vDie[vDieIndex].size() - 1) {
 							numberOfRemovedSpots[index] += testIndex - (vDie[vDieIndex].size() - 2);
 							testIndex = vDie[vDieIndex].size() - 2;
 						}// else_if
@@ -4828,21 +5042,23 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 						testX_mean += testX[testX.length - 1];
 						testY_mean += testY[testX.length - 1];
 
-						java.util.Vector[] fakevDie = new java.util.Vector[vDie.length];
+						final java.util.Vector[] fakevDie = new java.util.Vector[vDie.length];
 
 						for (int i = 0; i < vDie.length; i++) {
-							if (vDie[i] != null)
+							if (vDie[i] != null) {
 								fakevDie[i] = (java.util.Vector) vDie[i].clone();
+							}
 						}// for_i
 
 						fakevDie[testvDieIndex].add(fakevDie[testvDieIndex].size() - 1, vDie[vDieIndex].get(testIndex));
 						testX_mean = testX_mean / testX.length;
 						testY_mean = testY_mean / testY.length;
-						double[] distance = new double[testX.length];
-						for (int indexa = 0; indexa < testX.length; indexa++)
+						final double[] distance = new double[testX.length];
+						for (int indexa = 0; indexa < testX.length; indexa++) {
 							distance[indexa] = java.lang.Math.sqrt((double) (testX_mean - testX[indexa])
 									* (testX_mean - testX[indexa]) + (double) (testY_mean - testY[indexa])
 									* (testY_mean - testY[indexa]));
+						}
 						// System.out.println("spotCount:"+testX.length+", pixelIndex.length:"+pixelIndex.length);
 						if (!checkSpotCount(distance, testX.length, testPixelIndex, maxClusterSize)) {
 							vDieXYpIdM.add(0, vDie);
@@ -4855,21 +5071,21 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					}// if
 				}// if
 
-				int clusterIndex = (int) distMin_cluster[index][1];
-				int imageWidth = imageSize()[0];
+				final int clusterIndex = (int) distMin_cluster[index][1];
+				final int imageWidth = imageSize()[0];
 				if (vDie[clusterIndex].size() == 2) {
 					// System.out.println("Checking if this can belong to a two!");
 					// we're going to check if the result is a real two. if not,
 					// we'll keep them apart!
-					int[] pixelIndexTest = new int[2];
-					double[] distanceTest = new double[2];
+					final int[] pixelIndexTest = new int[2];
+					final double[] distanceTest = new double[2];
 
 					pixelIndexTest[0] = centers[((Integer) vDie[clusterIndex].get(0)).intValue()][1] * imageWidth
 							+ centers[((Integer) vDie[clusterIndex].get(0)).intValue()][0];
 					pixelIndexTest[1] = pixelIndex[index];
-					int x0 = centers[((Integer) vDie[clusterIndex].get(0)).intValue()][0], x1 = centers[((Integer) vDie[vDieIndex]
+					final int x0 = centers[((Integer) vDie[clusterIndex].get(0)).intValue()][0], x1 = centers[((Integer) vDie[vDieIndex]
 							.get(index)).intValue()][0];
-					int y0 = centers[((Integer) vDie[clusterIndex].get(0)).intValue()][1], y1 = centers[((Integer) vDie[vDieIndex]
+					final int y0 = centers[((Integer) vDie[clusterIndex].get(0)).intValue()][1], y1 = centers[((Integer) vDie[vDieIndex]
 							.get(index)).intValue()][1];
 					distanceTest[0] = Math.sqrt((double) (x0 - x1) * (x0 - x1) + (double) (y0 - y1) * (y0 - y1)) / 2;
 					distanceTest[1] = distanceTest[0];
@@ -4896,12 +5112,13 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 
 						if (spotCount == 0) {
 							// System.out.println("[4]This die ("+vDieIndex+") has been depleted!");
-							if (vDieIndex != cluster_counter - 1)
+							if (vDieIndex != cluster_counter - 1) {
 								for (int i = vDieIndex + 1; i < vDie.length; i++) {
 									vDie[i - 1] = vDie[i];
 								}// for_i
-							else
+							} else {
 								vDie[cluster_counter - 1] = null;
+							}
 
 							cluster_counter--;
 							clusterCenters = getClusterCenters(vDie);
@@ -4948,12 +5165,13 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 
 					if (spotCount == 0) {
 						// System.out.println("[4]This die has been depleted!");
-						if (vDieIndex != cluster_counter - 1)
+						if (vDieIndex != cluster_counter - 1) {
 							for (int i = vDieIndex + 1; i < vDie.length; i++) {
 								vDie[i - 1] = vDie[i];
 							}// for_i
-						else
+						} else {
 							vDie[cluster_counter - 1] = null;
+						}
 
 						cluster_counter--;
 						clusterCenters = getClusterCenters(vDie);
@@ -4972,9 +5190,10 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				clusterCenters = getClusterCenters(vDie);
 
 				// System.out.println(vDie[vDieIndex]);
-				int sizeBeforeCheck = vDie[vDieIndex].size();
-				java.util.Vector dieBeforeCheck = (java.util.Vector) vDie[vDieIndex].clone();
-				java.util.Vector checkSpotsResult = checkSpots(vDie, vDieIndex, x, y, pixelIndex, raio, maxClusterSize);
+				final int sizeBeforeCheck = vDie[vDieIndex].size();
+				final java.util.Vector dieBeforeCheck = (java.util.Vector) vDie[vDieIndex].clone();
+				final java.util.Vector checkSpotsResult = checkSpots(vDie, vDieIndex, x, y, pixelIndex, raio,
+						maxClusterSize);
 				// System.out.println("Size after checking spots: "+(((java.util.Vector[])checkSpotsResult.get(0))[vDieIndex].size()-1));
 				vDie = (java.util.Vector[]) checkSpotsResult.get(0);
 				x = (int[]) checkSpotsResult.get(1);
@@ -4996,7 +5215,8 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 							}// for_j
 							break;
 						}// if
-						// there is something not yet right! work in progress!!!
+							// there is something not yet right! work in
+							// progress!!!
 					}// for_i
 				}// if
 
@@ -5010,11 +5230,12 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					return vDieXYpIdM;
 				}// if
 				spotCount = vDie[vDieIndex].size() - 1;
-				int x_mean = clusterCenters[vDieIndex][0], y_mean = clusterCenters[vDieIndex][1];
-				double[] distance = new double[spotCount];
-				for (int indexa = 0; indexa < distance.length; indexa++)
+				final int x_mean = clusterCenters[vDieIndex][0], y_mean = clusterCenters[vDieIndex][1];
+				final double[] distance = new double[spotCount];
+				for (int indexa = 0; indexa < distance.length; indexa++) {
 					distance[indexa] = java.lang.Math.sqrt((double) (x_mean - x[indexa]) * (x_mean - x[indexa])
 							+ (double) (y_mean - y[indexa]) * (y_mean - y[indexa]));
+				}
 				if (spotCount != 1 && checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize)) {
 					// System.out.println("Spot Count is correct after giving away spots!");
 					// System.out.println("Setting die " + vDieIndex + "=>" +
@@ -5037,13 +5258,15 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					if (isOne(pixelIndex, maxClusterSize)) {
 						checkDie1Vector = checkDie1(vDie, vDieIndex, centers, info, raio, maxClusterSize, true);
 					}// if
-					else
+					else {
 						checkDie1Vector = checkDie1(vDie, vDieIndex, centers, info, raio, maxClusterSize, false);
-					if (checkDie1Vector.get(1).equals(Boolean.TRUE))
+					}
+					if (checkDie1Vector.get(1).equals(Boolean.TRUE)) {
 						checkDie1Vector = checkDie1(vDie, vDieIndex, centers, info, raio, maxClusterSize, true);
+					}
 					// java.util.Vector checkDie1Vector = checkDie1(vDie,
 					// vDieIndex, centers, info, raio, maxClusterSize, false);
-					vDieXYpIdM.add(0, (java.util.Vector[]) checkDie1Vector.get(0));
+					vDieXYpIdM.add(0, checkDie1Vector.get(0));
 					vDieXYpIdM.add(1, x);
 					vDieXYpIdM.add(2, y);
 					vDieXYpIdM.add(3, pixelIndex);
@@ -5051,8 +5274,8 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 
 					return vDieXYpIdM;
 				}// else_if
-				// else{System.out.println("[4]check Spot Count Failed!! spotCount:"
-				// + spotCount);}
+					// else{System.out.println("[4]check Spot Count Failed!! spotCount:"
+					// + spotCount);}
 			}// if
 		}// for_index
 
@@ -5067,7 +5290,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 	}// checkIfSpotBelongsToAnother
 
 	private java.util.Vector checkSpotsFromOthers(java.util.Vector[] vDie, int vDieIndex, int[] x, int[] y,
-			int[] pixelIndex, int raio, int maxClusterSize) {
+			int[] pixelIndex, final int raio, final int maxClusterSize) {
 		if (vDie[vDieIndex].get(vDie[vDieIndex].size() - 1).equals(Boolean.TRUE)) // if
 		// this
 		// die
@@ -5076,7 +5299,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		// do
 		// nothing!
 		{
-			java.util.Vector vDieXYpI = new java.util.Vector(6);
+			final java.util.Vector vDieXYpI = new java.util.Vector(6);
 			vDieXYpI.add(0, vDie);
 			vDieXYpI.add(1, x);
 			vDieXYpI.add(2, y);
@@ -5085,12 +5308,12 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			vDieXYpI.add(5, Boolean.TRUE);
 			return vDieXYpI;
 		}// if
-		// System.out.println("Checking spots from other dies!");
+			// System.out.println("Checking spots from other dies!");
 		int spotCount = vDie[vDieIndex].size() - 1;
-		java.util.Vector vDieXYpI = new java.util.Vector(6);
-		int imageWidth = imageSize()[0];
+		final java.util.Vector vDieXYpI = new java.util.Vector(6);
+		final int imageWidth = imageSize()[0];
 		double[] minDistSpotClusterXY;
-		double maxmaxDist = maxClusterSize / 1.4;
+		final double maxmaxDist = maxClusterSize / 1.4;
 		int whileCounter = 0;
 
 		while (spotCount < 6 && whileCounter < 6) // if(spotCount < 6)
@@ -5101,12 +5324,12 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 
 			for (int i = 0; i < cluster_counter; i++) {
 				if (i != vDieIndex) {
-					int dieSize = vDie[i].size() - 1;
+					final int dieSize = vDie[i].size() - 1;
 					// System.out.println(vDie[i]);
 					for (int j = 0; j < dieSize; j++) {
-						int xTest = centers[Integer.parseInt(vDie[i].get(j).toString())][0];
-						int yTest = centers[Integer.parseInt(vDie[i].get(j).toString())][1];
-						double distTest = java.lang.Math.sqrt((double) (xTest - clusterCenters[vDieIndex][0])
+						final int xTest = centers[Integer.parseInt(vDie[i].get(j).toString())][0];
+						final int yTest = centers[Integer.parseInt(vDie[i].get(j).toString())][1];
+						final double distTest = java.lang.Math.sqrt((double) (xTest - clusterCenters[vDieIndex][0])
 								* (xTest - clusterCenters[vDieIndex][0])
 								+ (double) (yTest - clusterCenters[vDieIndex][1])
 								* (yTest - clusterCenters[vDieIndex][1]));
@@ -5124,19 +5347,19 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 					}// for_j
 				}// if
 			}// for_i
-			// System.out.println("minDist: " + minDistSpotClusterXY[0]+
-			// ", maxmaxDist:" + maxmaxDist);
+				// System.out.println("minDist: " + minDistSpotClusterXY[0]+
+				// ", maxmaxDist:" + maxmaxDist);
 			if (minDistSpotClusterXY[0] < maxmaxDist) {
 				// first, check if the die from where the spot os comming is ok
 				// if it is, check if the resulting die is ok, too!
 				// if it's not, just go get it!
-				int testvDieIndex = (int) minDistSpotClusterXY[2];
+				final int testvDieIndex = (int) minDistSpotClusterXY[2];
 				if (vDie[testvDieIndex].get(vDie[testvDieIndex].size() - 1).equals(Boolean.TRUE)) {
 					if (vDie[testvDieIndex].size() - 2 != 0) {
 						// building stuff to test resulting die
-						int[] testX = new int[vDie[testvDieIndex].size() - 2];
-						int[] testY = new int[vDie[testvDieIndex].size() - 2];
-						int[] testPixelIndex = new int[vDie[testvDieIndex].size() - 2];
+						final int[] testX = new int[vDie[testvDieIndex].size() - 2];
+						final int[] testY = new int[vDie[testvDieIndex].size() - 2];
+						final int[] testPixelIndex = new int[vDie[testvDieIndex].size() - 2];
 						int testX_mean = 0, testY_mean = 0;
 						for (int i = 0; i < vDie[testvDieIndex].size() - 1; i++) {
 							if (i < minDistSpotClusterXY[1]) {
@@ -5155,21 +5378,23 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 							}// else_if
 						}// for_i
 
-						java.util.Vector[] fakevDie = new java.util.Vector[vDie.length];
+						final java.util.Vector[] fakevDie = new java.util.Vector[vDie.length];
 
 						for (int i = 0; i < vDie.length; i++) {
-							if (vDie[i] != null)
+							if (vDie[i] != null) {
 								fakevDie[i] = (java.util.Vector) vDie[i].clone();
+							}
 						}// for_i
 
 						fakevDie[testvDieIndex].remove((int) minDistSpotClusterXY[1]);
 						testX_mean = testX_mean / testX.length;
 						testY_mean = testY_mean / testY.length;
-						double[] distance = new double[testX.length];
-						for (int indexa = 0; indexa < testX.length; indexa++)
+						final double[] distance = new double[testX.length];
+						for (int indexa = 0; indexa < testX.length; indexa++) {
 							distance[indexa] = java.lang.Math.sqrt((double) (testX_mean - testX[indexa])
 									* (testX_mean - testX[indexa]) + (double) (testY_mean - testY[indexa])
 									* (testY_mean - testY[indexa]));
+						}
 
 						if (!checkSpotCount(distance, testX.length, testPixelIndex, maxClusterSize)) {
 							vDieXYpI.add(0, vDie);
@@ -5201,15 +5426,18 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				if (vDie[(int) (minDistSpotClusterXY[2])].size() - 1 == 0) {
 					// System.out.println("vDie " +
 					// (int)(minDistSpotClusterXY[2]) + " has been depleted!");
-					if ((int) minDistSpotClusterXY[2] != cluster_counter - 1)
-						for (int k = (int) minDistSpotClusterXY[2] + 1; k < vDie.length; k++)
+					if ((int) minDistSpotClusterXY[2] != cluster_counter - 1) {
+						for (int k = (int) minDistSpotClusterXY[2] + 1; k < vDie.length; k++) {
 							vDie[k - 1] = vDie[k];
-					else
+						}
+					} else {
 						vDie[cluster_counter - 1] = null;
+					}
 
 					cluster_counter--;
-					if (vDieIndex == cluster_counter + 1)
+					if (vDieIndex == cluster_counter + 1) {
 						vDieIndex--;
+					}
 
 					clusterCenters = getClusterCenters(vDie);
 
@@ -5225,11 +5453,12 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 				}// if
 				clusterCenters = getClusterCenters(vDie);
 				spotCount = vDie[vDieIndex].size() - 1;
-				int x_mean = clusterCenters[vDieIndex][0], y_mean = clusterCenters[vDieIndex][1];
-				double[] distance = new double[spotCount];
-				for (int indexa = 0; indexa < spotCount; indexa++)
+				final int x_mean = clusterCenters[vDieIndex][0], y_mean = clusterCenters[vDieIndex][1];
+				final double[] distance = new double[spotCount];
+				for (int indexa = 0; indexa < spotCount; indexa++) {
 					distance[indexa] = java.lang.Math.sqrt((double) (x_mean - x[indexa]) * (x_mean - x[indexa])
 							+ (double) (y_mean - y[indexa]) * (y_mean - y[indexa]));
+				}
 				if (checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize)) {
 					// System.out.println("Spot Count is correct after getting spots!");
 					// System.out.println("Setting die " + vDieIndex + "=>" +
@@ -5244,8 +5473,8 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 
 					return vDieXYpI;
 				}// if
-				// else{System.out.println("[6]check Spot Count Failed!! spotCount:"
-				// + spotCount);}
+					// else{System.out.println("[6]check Spot Count Failed!! spotCount:"
+					// + spotCount);}
 
 			}// if
 			else {

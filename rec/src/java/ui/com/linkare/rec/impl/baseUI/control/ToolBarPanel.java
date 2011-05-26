@@ -20,12 +20,16 @@ import javax.swing.ImageIcon;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class ToolBarPanel extends javax.swing.JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6821378059946290956L;
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ToolBarPanel.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ToolBarPanel.UI_CLIENT_LOGGER));
 		}
 	}
 
@@ -59,7 +63,8 @@ public class ToolBarPanel extends javax.swing.JPanel {
 		jButtonConnect.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.tip.connect",
 				"Connect to the laboratory"));
 		jButtonConnect.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonConnectActionPerformed(evt);
 			}
 		});
@@ -70,7 +75,8 @@ public class ToolBarPanel extends javax.swing.JPanel {
 		jCheckBoxAutoPlay.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.tip.autoplay",
 				"Automatically connect to the apparatus"));
 		jCheckBoxAutoPlay.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jCheckBoxAutoPlayActionPerformed(evt);
 			}
 		});
@@ -84,7 +90,8 @@ public class ToolBarPanel extends javax.swing.JPanel {
 		jButtonUsers.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.tip.userslist",
 				"Toggle users list"));
 		jButtonUsers.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonUsersActionPerformed(evt);
 			}
 		});
@@ -94,7 +101,8 @@ public class ToolBarPanel extends javax.swing.JPanel {
 		jToggleButtonHistory.setIcon(ReCResourceBundle.findImageIconOrDefault("ReCBaseUI$rec.bui.icon.experiment",
 				new ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/Experiment16.gif"))));
 		jToggleButtonHistory.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jToggleButtonHistoryActionPerformed(evt);
 			}
 		});
@@ -105,7 +113,8 @@ public class ToolBarPanel extends javax.swing.JPanel {
 				getClass().getResource("/com/linkare/rec/impl/baseUI/resources/Chat16.gif"))));
 		jButtonChat.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.tip.chat2", "Toggle chat"));
 		jButtonChat.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonChatActionPerformed(evt);
 			}
 		});
@@ -117,7 +126,8 @@ public class ToolBarPanel extends javax.swing.JPanel {
 		jButtonVideo.setToolTipText(ReCResourceBundle
 				.findStringOrDefault("ReCBaseUI$rec.bui.tip.video", "Toggle video"));
 		jButtonVideo.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonVideoActionPerformed(evt);
 			}
 		});
@@ -129,7 +139,8 @@ public class ToolBarPanel extends javax.swing.JPanel {
 		jButtonApparatus.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.tip.apparatus",
 				"Toggle Apparatus tree"));
 		jButtonApparatus.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonApparatusActionPerformed(evt);
 			}
 		});
@@ -142,37 +153,37 @@ public class ToolBarPanel extends javax.swing.JPanel {
 
 	}// GEN-END:initComponents
 
-	private void jToggleButtonHistoryActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jToggleButtonHistoryActionPerformed
+	private void jToggleButtonHistoryActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jToggleButtonHistoryActionPerformed
 	{// GEN-HEADEREND:event_jToggleButtonHistoryActionPerformed
 		firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "history", Boolean.FALSE, Boolean.TRUE));
 	}// GEN-LAST:event_jToggleButtonHistoryActionPerformed
 
-	private void jCheckBoxAutoPlayActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jCheckBoxAutoPlayActionPerformed
+	private void jCheckBoxAutoPlayActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jCheckBoxAutoPlayActionPerformed
 	{// GEN-HEADEREND:event_jCheckBoxAutoPlayActionPerformed
 		firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "autoplay", Boolean.FALSE, Boolean.TRUE));
 	}// GEN-LAST:event_jCheckBoxAutoPlayActionPerformed
 
-	private void jButtonApparatusActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonApparatusActionPerformed
+	private void jButtonApparatusActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonApparatusActionPerformed
 	{// GEN-HEADEREND:event_jButtonApparatusActionPerformed
 		firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "tree", Boolean.FALSE, Boolean.TRUE));
 	}// GEN-LAST:event_jButtonApparatusActionPerformed
 
-	private void jButtonVideoActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonVideoActionPerformed
+	private void jButtonVideoActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonVideoActionPerformed
 	{// GEN-HEADEREND:event_jButtonVideoActionPerformed
 		firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "video", Boolean.FALSE, Boolean.TRUE));
 	}// GEN-LAST:event_jButtonVideoActionPerformed
 
-	private void jButtonChatActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonChatActionPerformed
+	private void jButtonChatActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonChatActionPerformed
 	{// GEN-HEADEREND:event_jButtonChatActionPerformed
 		firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "chat", Boolean.FALSE, Boolean.TRUE));
 	}// GEN-LAST:event_jButtonChatActionPerformed
 
-	private void jButtonUsersActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonUsersActionPerformed
+	private void jButtonUsersActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonUsersActionPerformed
 	{// GEN-HEADEREND:event_jButtonUsersActionPerformed
 		firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "users", Boolean.FALSE, Boolean.TRUE));
 	}// GEN-LAST:event_jButtonUsersActionPerformed
 
-	private void jButtonConnectActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonConnectActionPerformed
+	private void jButtonConnectActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonConnectActionPerformed
 	{// GEN-HEADEREND:event_jButtonConnectActionPerformed
 		firePropertyChangeListenerPropertyChange(new PropertyChangeEvent(this, "connect", Boolean.FALSE, Boolean.TRUE));
 	}// GEN-LAST:event_jButtonConnectActionPerformed
@@ -183,7 +194,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * @return Value of property enableConnect.
 	 */
 	public boolean isEnableConnect() {
-		return this.enableConnect;
+		return enableConnect;
 	}
 
 	/**
@@ -191,7 +202,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * 
 	 * @param enableConnect New value of property enableConnect.
 	 */
-	public void setEnableConnect(boolean enableConnect) {
+	public void setEnableConnect(final boolean enableConnect) {
 		jButtonConnect.setEnabled(enableConnect);
 		this.enableConnect = enableConnect;
 	}
@@ -202,7 +213,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * @return Value of property enableAutoPlay.
 	 */
 	public boolean isEnableAutoPlay() {
-		return this.enableAutoPlay;
+		return enableAutoPlay;
 	}
 
 	/**
@@ -210,7 +221,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * 
 	 * @param enableAutoPlay New value of property enableAutoPlay.
 	 */
-	public void setEnableAutoPlay(boolean enableAutoPlay) {
+	public void setEnableAutoPlay(final boolean enableAutoPlay) {
 		jCheckBoxAutoPlay.setEnabled(enableAutoPlay);
 		this.enableAutoPlay = enableAutoPlay;
 	}
@@ -221,7 +232,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * @return Value of property enableVideo.
 	 */
 	public boolean isEnableVideo() {
-		return this.enableVideo;
+		return enableVideo;
 	}
 
 	/**
@@ -229,7 +240,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * 
 	 * @param enableVideo New value of property enableVideo.
 	 */
-	public void setEnableVideo(boolean enableVideo) {
+	public void setEnableVideo(final boolean enableVideo) {
 		jButtonVideo.setEnabled(enableVideo);
 		this.enableVideo = enableVideo;
 	}
@@ -240,7 +251,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * @return Value of property enableChat.
 	 */
 	public boolean isEnableChat() {
-		return this.enableChat;
+		return enableChat;
 	}
 
 	/**
@@ -248,7 +259,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * 
 	 * @param enableChat New value of property enableChat.
 	 */
-	public void setEnableChat(boolean enableChat) {
+	public void setEnableChat(final boolean enableChat) {
 		jButtonChat.setEnabled(enableChat);
 		this.enableChat = enableChat;
 	}
@@ -259,7 +270,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * @return Value of property enableApparatusTree.
 	 */
 	public boolean isEnableApparatusTree() {
-		return this.enableApparatusTree;
+		return enableApparatusTree;
 	}
 
 	/**
@@ -267,7 +278,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * 
 	 * @param enableApparatusTree New value of property enableApparatusTree.
 	 */
-	public void setEnableApparatusTree(boolean enableApparatusTree) {
+	public void setEnableApparatusTree(final boolean enableApparatusTree) {
 		jButtonApparatus.setEnabled(enableApparatusTree);
 		this.enableApparatusTree = enableApparatusTree;
 	}
@@ -278,7 +289,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * @return Value of property enableUsersList.
 	 */
 	public boolean isEnableUsersList() {
-		return this.enableUsersList;
+		return enableUsersList;
 	}
 
 	/**
@@ -286,7 +297,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * 
 	 * @param enableUsersList New value of property enableUsersList.
 	 */
-	public void setEnableUsersList(boolean enableUsersList) {
+	public void setEnableUsersList(final boolean enableUsersList) {
 		jButtonUsers.setEnabled(enableUsersList);
 		this.enableUsersList = enableUsersList;
 	}
@@ -296,7 +307,8 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addPropertyChangeListener(java.beans.PropertyChangeListener listener) {
+	@Override
+	public synchronized void addPropertyChangeListener(final java.beans.PropertyChangeListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -308,7 +320,8 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removePropertyChangeListener(java.beans.PropertyChangeListener listener) {
+	@Override
+	public synchronized void removePropertyChangeListener(final java.beans.PropertyChangeListener listener) {
 		listenerList.remove(java.beans.PropertyChangeListener.class, listener);
 	}
 
@@ -317,10 +330,11 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * 
 	 * @param event The event to be fired
 	 */
-	private void firePropertyChangeListenerPropertyChange(java.beans.PropertyChangeEvent event) {
-		if (listenerList == null)
+	private void firePropertyChangeListenerPropertyChange(final java.beans.PropertyChangeEvent event) {
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == java.beans.PropertyChangeListener.class) {
 				((java.beans.PropertyChangeListener) listeners[i + 1]).propertyChange(event);
@@ -334,7 +348,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * @return Value of property selectApparatusTree.
 	 */
 	public boolean isSelectApparatusTree() {
-		return this.selectApparatusTree;
+		return selectApparatusTree;
 	}
 
 	/**
@@ -342,7 +356,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * 
 	 * @param selectApparatusTree New value of property selectApparatusTree.
 	 */
-	public void setSelectApparatusTree(boolean selectApparatusTree) {
+	public void setSelectApparatusTree(final boolean selectApparatusTree) {
 		jButtonApparatus.setSelected(selectApparatusTree);
 		this.selectApparatusTree = selectApparatusTree;
 	}
@@ -353,7 +367,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * @return Value of property selectChat.
 	 */
 	public boolean isSelectChat() {
-		return this.selectChat;
+		return selectChat;
 	}
 
 	/**
@@ -361,7 +375,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * 
 	 * @param selectChat New value of property selectChat.
 	 */
-	public void setSelectChat(boolean selectChat) {
+	public void setSelectChat(final boolean selectChat) {
 		jButtonChat.setSelected(selectChat);
 		this.selectChat = selectChat;
 	}
@@ -372,7 +386,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * @return Value of property selectVideo.
 	 */
 	public boolean isSelectVideo() {
-		return this.selectVideo;
+		return selectVideo;
 	}
 
 	/**
@@ -380,7 +394,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * 
 	 * @param selectVideo New value of property selectVideo.
 	 */
-	public void setSelectVideo(boolean selectVideo) {
+	public void setSelectVideo(final boolean selectVideo) {
 		jButtonVideo.setSelected(selectVideo);
 		this.selectVideo = selectVideo;
 	}
@@ -391,7 +405,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * @return Value of property selectUsersList.
 	 */
 	public boolean isSelectUsersList() {
-		return this.selectUsersList;
+		return selectUsersList;
 	}
 
 	/**
@@ -399,7 +413,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * 
 	 * @param selectUsersList New value of property selectUsersList.
 	 */
-	public void setSelectUsersList(boolean selectUsersList) {
+	public void setSelectUsersList(final boolean selectUsersList) {
 		jButtonUsers.setSelected(selectUsersList);
 		this.selectUsersList = selectUsersList;
 	}
@@ -410,7 +424,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * @return Value of property selectConnect.
 	 */
 	public boolean isSelectConnect() {
-		return this.selectConnect;
+		return selectConnect;
 	}
 
 	/**
@@ -418,15 +432,16 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * 
 	 * @param selectConnect New value of property selectConnect.
 	 */
-	public void setSelectConnect(boolean selectConnect) {
+	public void setSelectConnect(final boolean selectConnect) {
 		jButtonConnect.setSelected(selectConnect);
 		this.selectConnect = selectConnect;
-		if (selectConnect)
+		if (selectConnect) {
 			jButtonConnect.setIcon(ReCResourceBundle.findImageIconOrDefault("ReCBaseUI$rec.bui.icon.disconnect",
 					new ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/earth16_cuted.gif"))));
-		else
+		} else {
 			jButtonConnect.setIcon(ReCResourceBundle.findImageIconOrDefault("ReCBaseUI$rec.bui.icon.connect",
 					new ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/earth16.gif"))));
+		}
 	}
 
 	/**
@@ -435,7 +450,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * @return Value of property selectAutoPlay.
 	 */
 	public boolean isSelectAutoPlay() {
-		return this.selectAutoPlay;
+		return selectAutoPlay;
 	}
 
 	/**
@@ -443,7 +458,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * 
 	 * @param selectAutoPlay New value of property selectAutoPlay.
 	 */
-	public void setSelectAutoPlay(boolean selectAutoPlay) {
+	public void setSelectAutoPlay(final boolean selectAutoPlay) {
 		jCheckBoxAutoPlay.setSelected(selectAutoPlay);
 		this.selectAutoPlay = selectAutoPlay;
 	}
@@ -454,7 +469,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * @return Value of property showLabToolBar.
 	 */
 	public boolean isShowLabToolBar() {
-		return this.showLabToolBar;
+		return showLabToolBar;
 	}
 
 	/**
@@ -462,7 +477,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * 
 	 * @param showLabToolBar New value of property showLabToolBar.
 	 */
-	public void setShowLabToolBar(boolean showLabToolBar) {
+	public void setShowLabToolBar(final boolean showLabToolBar) {
 		this.showLabToolBar = showLabToolBar;
 		if (showLabToolBar) {
 			jToolBar1.add(jToolBarLab, 0);
@@ -478,7 +493,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * @return Value of property showViewToolBar.
 	 */
 	public boolean isShowViewToolBar() {
-		return this.showViewToolBar;
+		return showViewToolBar;
 	}
 
 	/**
@@ -486,7 +501,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * 
 	 * @param showViewToolBar New value of property showViewToolBar.
 	 */
-	public void setShowViewToolBar(boolean showViewToolBar) {
+	public void setShowViewToolBar(final boolean showViewToolBar) {
 		this.showViewToolBar = showViewToolBar;
 		if (showViewToolBar) {
 			jToolBar1.add(jToolBarView);
@@ -502,7 +517,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * @return Value of property enableHistory.
 	 */
 	public boolean isEnableHistory() {
-		return this.enableHistory;
+		return enableHistory;
 	}
 
 	/**
@@ -510,7 +525,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * 
 	 * @param enableHistory New value of property enableHistory.
 	 */
-	public void setEnableHistory(boolean enableHistory) {
+	public void setEnableHistory(final boolean enableHistory) {
 		this.enableHistory = enableHistory;
 		jToggleButtonHistory.setEnabled(enableHistory);
 	}
@@ -521,7 +536,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * @return Value of property selectHistory.
 	 */
 	public boolean isSelectHistory() {
-		return this.selectHistory;
+		return selectHistory;
 	}
 
 	/**
@@ -529,7 +544,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
 	 * 
 	 * @param selectHistory New value of property selectHistory.
 	 */
-	public void setSelectHistory(boolean selectHistory) {
+	public void setSelectHistory(final boolean selectHistory) {
 		this.selectHistory = selectHistory;
 		jToggleButtonHistory.setSelected(selectHistory);
 	}

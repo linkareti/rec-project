@@ -36,32 +36,34 @@ public class HardwareWrapper implements HardwareOperations {
 	private static String HARDWARE_LOGGER = "Hardware.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(HARDWARE_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(HardwareWrapper.HARDWARE_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(HARDWARE_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER));
 		}
 	}
 
 	/** Creates a new instance of HardwareWrapper */
-	public HardwareWrapper(Hardware delegate) {
+	public HardwareWrapper(final Hardware delegate) {
 		this.delegate = delegate;
 		checkConnect();
 	}
 
 	private void checkConnect() {
 		if (delegate == null) {
-			Logger.getLogger(HARDWARE_LOGGER).log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			connected = false;
 		}
 		try {
-			if (delegate._non_existent())
+			if (delegate._non_existent()) {
 				connected = false;
-			else
+			} else {
 				connected = true;
-		} catch (Exception e) {
+			}
+		} catch (final Exception e) {
 
 			LoggerUtil.logThrowable("Couldn't determine remote existence of Hardware. Assuming disconnected...", e,
-					Logger.getLogger(HARDWARE_LOGGER));
+					Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER));
 			connected = false;
 		}
 	}
@@ -71,168 +73,190 @@ public class HardwareWrapper implements HardwareOperations {
 		return connected;
 	}
 
-	public void configure(HardwareAcquisitionConfig config) throws IncorrectStateException, WrongConfigurationException {
+	@Override
+	public void configure(final HardwareAcquisitionConfig config) throws IncorrectStateException,
+			WrongConfigurationException {
 		if (delegate == null) {
-			Logger.getLogger(HARDWARE_LOGGER).log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			return;
 		}
 
 		try {
 			delegate.configure(config);
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(HARDWARE_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER));
 			checkConnect();
 		}
 
 	}
 
+	@Override
 	public DataClient getDataClient() {
 		if (delegate == null) {
-			Logger.getLogger(HARDWARE_LOGGER).log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.getDataClient();
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(HARDWARE_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER));
 			checkConnect();
 		}
 
 		return null;
 	}
 
+	@Override
 	public DataProducer getDataProducer() throws IncorrectStateException, NotAvailableException {
 		if (delegate == null) {
-			Logger.getLogger(HARDWARE_LOGGER).log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.getDataProducer();
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(HARDWARE_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER));
 			checkConnect();
 		}
 
 		return null;
 	}
 
+	@Override
 	public HardwareInfo getHardwareInfo() {
 		if (delegate == null) {
-			Logger.getLogger(HARDWARE_LOGGER).log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.getHardwareInfo();
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(HARDWARE_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER));
 			checkConnect();
 		}
 
 		return null;
 	}
 
+	@Override
 	public HardwareState getHardwareState() {
 		if (delegate == null) {
-			Logger.getLogger(HARDWARE_LOGGER).log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.getHardwareState();
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(HARDWARE_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER));
 			checkConnect();
 		}
 
 		return null;
 	}
 
-	public void registerDataClient(DataClient data_client) throws NotAuthorized {
+	@Override
+	public void registerDataClient(final DataClient data_client) throws NotAuthorized {
 		if (delegate == null) {
-			Logger.getLogger(HARDWARE_LOGGER).log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			return;
 		}
 
 		try {
 			delegate.registerDataClient(data_client);
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(HARDWARE_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER));
 			checkConnect();
 		}
 
 	}
 
+	@Override
 	public void reset() throws IncorrectStateException {
 		if (delegate == null) {
-			Logger.getLogger(HARDWARE_LOGGER).log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			return;
 		}
 
 		try {
 			delegate.reset();
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(HARDWARE_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER));
 			checkConnect();
 		}
 
 	}
 
-	public DataProducer start(DataReceiver receiver) throws IncorrectStateException {
+	@Override
+	public DataProducer start(final DataReceiver receiver) throws IncorrectStateException {
 		if (delegate == null) {
-			Logger.getLogger(HARDWARE_LOGGER).log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.start(receiver);
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(HARDWARE_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER));
 			checkConnect();
 		}
 
 		return null;
 	}
 
-	public DataProducer startOutput(DataReceiver receiver, DataProducer data_source) throws IncorrectStateException {
+	@Override
+	public DataProducer startOutput(final DataReceiver receiver, final DataProducer data_source)
+			throws IncorrectStateException {
 		if (delegate == null) {
-			Logger.getLogger(HARDWARE_LOGGER).log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.startOutput(receiver, data_source);
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(HARDWARE_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER));
 			checkConnect();
 		}
 
 		return null;
 	}
 
+	@Override
 	public void stop() throws IncorrectStateException {
 		if (delegate == null) {
-			Logger.getLogger(HARDWARE_LOGGER).log(Level.WARNING, "Hardware has not been set! Please set it first...");
+			Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER).log(Level.WARNING,
+					"Hardware has not been set! Please set it first...");
 			return;
 		}
 
 		try {
 			delegate.stop();
-		} catch (SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(HARDWARE_LOGGER));
+		} catch (final SystemException e) {
+			LoggerUtil.logThrowable(null, e, Logger.getLogger(HardwareWrapper.HARDWARE_LOGGER));
 			checkConnect();
 		}
 
 	}
 
-	public boolean isSameDelegate(HardwareWrapper other) {
-		return other.delegate._is_equivalent(this.delegate);
+	public boolean isSameDelegate(final HardwareWrapper other) {
+		return other.delegate._is_equivalent(delegate);
 	}
 
-	public boolean isSameDelegate(Hardware other) {
-		return other._is_equivalent(this.delegate);
+	public boolean isSameDelegate(final Hardware other) {
+		return other._is_equivalent(delegate);
 	}
 
 	public Hardware getDelegate() {

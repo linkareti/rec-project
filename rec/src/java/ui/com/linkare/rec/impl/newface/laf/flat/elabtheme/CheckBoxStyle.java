@@ -12,17 +12,19 @@ import java.util.Map;
 
 import javax.swing.plaf.FontUIResource;
 
+import com.linkare.rec.impl.newface.laf.flat.theme.AbstractStyle;
+
 /**
  * 
  * @author joao
  */
 public class CheckBoxStyle extends DefaultStyle {
 
-	//LABEL FONT
+	// LABEL FONT
 	public static final Font FONT_CHECKBOX = new FontUIResource("Arial", Font.BOLD, 12);
 
-	private static final Color COLOR_CHECKBOX_FG = BLACK_DEFAULT_COLOR;
-	private static final Color COLOR_CHECKBOX_BG = WHITE_DEFAULT_COLOR;
+	private static final Color COLOR_CHECKBOX_FG = DefaultStyle.BLACK_DEFAULT_COLOR;
+	private static final Color COLOR_CHECKBOX_BG = DefaultStyle.WHITE_DEFAULT_COLOR;
 
 	public static final String ID = "CheckBox";
 
@@ -35,15 +37,15 @@ public class CheckBoxStyle extends DefaultStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return ID;
+		return CheckBoxStyle.ID;
 	}
 
 	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
+	public void updatePropertyMap(final Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(FOREGROUND, COLOR_CHECKBOX_FG);
-		map.put(BACKGROUND, COLOR_CHECKBOX_BG);
+		map.put(AbstractStyle.FOREGROUND, CheckBoxStyle.COLOR_CHECKBOX_FG);
+		map.put(AbstractStyle.BACKGROUND, CheckBoxStyle.COLOR_CHECKBOX_BG);
 
-		map.put(FONT, FONT_CHECKBOX);
+		map.put(AbstractStyle.FONT, CheckBoxStyle.FONT_CHECKBOX);
 	}
 }

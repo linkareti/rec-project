@@ -1,6 +1,11 @@
 package com.linkare.rec.data.synch;
 
 public final class Frequency implements org.omg.CORBA.portable.IDLEntity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3126854141310261406L;
+
 	//
 	// Struct member value
 	//
@@ -23,7 +28,7 @@ public final class Frequency implements org.omg.CORBA.portable.IDLEntity {
 		this(1., com.linkare.rec.data.Multiplier.none, FrequencyDefType.FrequencyType);
 	}
 
-	public Frequency(double frequency) {
+	public Frequency(final double frequency) {
 		this(frequency, com.linkare.rec.data.Multiplier.none, FrequencyDefType.FrequencyType);
 	}
 
@@ -32,7 +37,7 @@ public final class Frequency implements org.omg.CORBA.portable.IDLEntity {
 	// @param value value struct member
 	// @param applied_multiplier applied_multiplier struct member
 	//
-	public Frequency(double frequency, com.linkare.rec.data.Multiplier applied_multiplier) {
+	public Frequency(final double frequency, final com.linkare.rec.data.Multiplier applied_multiplier) {
 		this(frequency, applied_multiplier, FrequencyDefType.FrequencyType);
 
 	}
@@ -43,8 +48,8 @@ public final class Frequency implements org.omg.CORBA.portable.IDLEntity {
 	// @param applied_multiplier applied_multiplier struct member
 	// @param frequency_def_type frequency_def_type struct member
 	//
-	public Frequency(double frequency, com.linkare.rec.data.Multiplier applied_multiplier,
-			FrequencyDefType frequency_def_type) {
+	public Frequency(final double frequency, final com.linkare.rec.data.Multiplier applied_multiplier,
+			final FrequencyDefType frequency_def_type) {
 		setFrequency(frequency);
 		setMultiplier(applied_multiplier);
 		setFrequencyDefType(frequency_def_type);
@@ -53,10 +58,10 @@ public final class Frequency implements org.omg.CORBA.portable.IDLEntity {
 	//
 	// Copy Constructor
 	//
-	public Frequency(Frequency other) {
-		this.setFrequency(other.getFrequency());
-		this.setMultiplier(new com.linkare.rec.data.Multiplier(other.getMultiplier()));
-		this.setFrequencyDefType(other.getFrequencyDefType());
+	public Frequency(final Frequency other) {
+		setFrequency(other.getFrequency());
+		setMultiplier(new com.linkare.rec.data.Multiplier(other.getMultiplier()));
+		setFrequencyDefType(other.getFrequencyDefType());
 	}
 
 	/**
@@ -65,7 +70,7 @@ public final class Frequency implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property multiplier.
 	 */
 	public com.linkare.rec.data.Multiplier getMultiplier() {
-		return this.applied_multiplier;
+		return applied_multiplier;
 	}
 
 	/**
@@ -73,8 +78,8 @@ public final class Frequency implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param multiplier New value of property multiplier.
 	 */
-	public void setMultiplier(com.linkare.rec.data.Multiplier multiplier) {
-		this.applied_multiplier = multiplier;
+	public void setMultiplier(final com.linkare.rec.data.Multiplier multiplier) {
+		applied_multiplier = multiplier;
 	}
 
 	/**
@@ -83,7 +88,7 @@ public final class Frequency implements org.omg.CORBA.portable.IDLEntity {
 	 * @return Value of property frequency.
 	 */
 	public double getFrequency() {
-		return this.frequency;
+		return frequency;
 	}
 
 	/**
@@ -91,22 +96,24 @@ public final class Frequency implements org.omg.CORBA.portable.IDLEntity {
 	 * 
 	 * @param frequency New value of property frequency.
 	 */
-	public void setFrequency(double frequency) {
-		if (frequency <= 0)
+	public void setFrequency(final double frequency) {
+		if (frequency <= 0) {
 			throw new RuntimeException("Frequency values must be positive: value tried=" + frequency);
+		}
 		this.frequency = frequency;
 	}
 
-	public void setFrequencyDefType(FrequencyDefType frequency_def_type) {
+	public void setFrequencyDefType(final FrequencyDefType frequency_def_type) {
 		this.frequency_def_type = frequency_def_type;
 	}
 
 	public FrequencyDefType getFrequencyDefType() {
-		return this.frequency_def_type;
+		return frequency_def_type;
 	}
 
+	@Override
 	public String toString() {
-		java.text.NumberFormat ff = java.text.NumberFormat.getNumberInstance();
+		final java.text.NumberFormat ff = java.text.NumberFormat.getNumberInstance();
 		ff.setMinimumFractionDigits(2);
 		ff.setMaximumFractionDigits(2);
 

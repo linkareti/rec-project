@@ -14,6 +14,11 @@ import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
  */
 public class CoeficientsTable extends MultSeriesTable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5174544680493953879L;
+
 	/** Creates a new instance of CoeficientsTable */
 	public CoeficientsTable() {
 		super();

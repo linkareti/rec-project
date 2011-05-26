@@ -12,12 +12,12 @@ package pt.utl.ist.elab.driver.webrobot.utils;
  */
 public class OpenFile {
 
-	private java.io.File file;
-	private pt.utl.ist.elab.driver.webrobot.utils.JPrografBlock[][] matrix;
-	private String[][] matrixWiring;
+	private final java.io.File file;
+	private final pt.utl.ist.elab.driver.webrobot.utils.JPrografBlock[][] matrix;
+	private final String[][] matrixWiring;
 	private Object[][] iValues;
 	private pt.utl.ist.elab.driver.webrobot.utils.JPrografBlock block;
-	private pt.utl.ist.elab.driver.webrobot.RobotStateMachine robotStateMachine;
+	private final pt.utl.ist.elab.driver.webrobot.RobotStateMachine robotStateMachine;
 	private final static int MAX_ROWS = 1000;
 	private final static int MAX_COLUMNS = 1000;
 	private int counter;
@@ -27,14 +27,14 @@ public class OpenFile {
 	private boolean isFileValid = true;
 
 	/** Creates a new instance of openFile */
-	public OpenFile(pt.utl.ist.elab.driver.webrobot.RobotStateMachine robotStateMachine, java.io.File file) {
+	public OpenFile(final pt.utl.ist.elab.driver.webrobot.RobotStateMachine robotStateMachine, final java.io.File file) {
 		this.robotStateMachine = robotStateMachine;
 		this.file = file;
-		matrix = new pt.utl.ist.elab.driver.webrobot.utils.JPrografBlock[MAX_ROWS][MAX_COLUMNS];
-		matrixWiring = new String[MAX_ROWS][MAX_COLUMNS];
+		matrix = new pt.utl.ist.elab.driver.webrobot.utils.JPrografBlock[OpenFile.MAX_ROWS][OpenFile.MAX_COLUMNS];
+		matrixWiring = new String[OpenFile.MAX_ROWS][OpenFile.MAX_COLUMNS];
 		try {
 			openFile(file);
-		} catch (java.io.IOException ioe) {
+		} catch (final java.io.IOException ioe) {
 			System.out.println("Could not open the file...\n" + ioe);
 		}
 	}
@@ -43,15 +43,15 @@ public class OpenFile {
 	 * This opens the file and then sends every line of information to
 	 * treatData()
 	 */
-	private void openFile(java.io.File openFile) throws java.io.IOException {
+	private void openFile(final java.io.File openFile) throws java.io.IOException {
 		String data;
 		endedRowCol = false;// for treatData()!
 		counter = 0;// for treatData()!
 		int check;
-		int lineSeparator = (int) System.getProperty("line.separator").charAt(0);
+		final int lineSeparator = System.getProperty("line.separator").charAt(0);
 		StringBuffer buffer = new StringBuffer(100);
 		;
-		java.io.FileInputStream fileInputStream = new java.io.FileInputStream(openFile);
+		final java.io.FileInputStream fileInputStream = new java.io.FileInputStream(openFile);
 
 		try {
 			buffer = new StringBuffer(200);
@@ -80,7 +80,7 @@ public class OpenFile {
 			 */
 			data = buffer.toString().trim();
 			treatData(data);
-		} catch (java.io.IOException ioe) {
+		} catch (final java.io.IOException ioe) {
 			System.out.println(ioe);
 		}
 		fileInputStream.close();
@@ -94,7 +94,7 @@ public class OpenFile {
 	 * Treats the data: creates new components with the data from the file! The
 	 * method is very obvious, but long...
 	 */
-	private void treatData(String data) {
+	private void treatData(final String data) {
 		int coluna = 0;
 		int nivel = 0;
 		int tipo = 0;
@@ -121,7 +121,7 @@ public class OpenFile {
 			return;
 		}
 		if (!endedRowCol) {
-			java.util.StringTokenizer st = new java.util.StringTokenizer(data, ",");
+			final java.util.StringTokenizer st = new java.util.StringTokenizer(data, ",");
 			while (st.hasMoreTokens()) {
 				try {
 					coluna = Integer.parseInt(st.nextToken().trim().substring("coluna=".length()));
@@ -142,13 +142,13 @@ public class OpenFile {
 					valor = Integer.parseInt(st.nextToken().trim().substring("valor=".length()));
 					valor2 = Integer.parseInt(st.nextToken().trim().substring("valor2=".length()));
 					temp = st.nextToken().trim();
-					java.util.StringTokenizer st2 = new java.util.StringTokenizer(temp);
+					final java.util.StringTokenizer st2 = new java.util.StringTokenizer(temp);
 					while (st2.hasMoreTokens()) {
 						flag = Integer.parseInt(st2.nextToken().trim().substring("flag=".length()));
 						baixo = st2.nextToken().trim().substring("baixo=".length());
 					}
 					temp2 = st.nextToken().trim();
-					java.util.StringTokenizer st3 = new java.util.StringTokenizer(temp2);
+					final java.util.StringTokenizer st3 = new java.util.StringTokenizer(temp2);
 					if (st3.countTokens() == 1) {
 						esquerda = st3.nextToken().trim().substring("esquerda=".length());
 					} else {
@@ -172,7 +172,7 @@ public class OpenFile {
 					block.setValor2(valor2);
 					matrix[nivel][coluna] = block;
 					return;
-				} catch (java.lang.NumberFormatException nfe) {
+				} catch (final java.lang.NumberFormatException nfe) {
 					isFileValid = false;
 					return;
 				}
@@ -189,7 +189,7 @@ public class OpenFile {
 			return;
 		} else if (counter == 4) {
 			try {
-				java.util.StringTokenizer st4 = new java.util.StringTokenizer(data);
+				final java.util.StringTokenizer st4 = new java.util.StringTokenizer(data);
 				robotStateMachine.setB0InOut(Integer.parseInt(st4.nextToken()));
 				robotStateMachine.setB1InOut(Integer.parseInt(st4.nextToken()));
 				robotStateMachine.setB2InOut(Integer.parseInt(st4.nextToken()));
@@ -201,32 +201,32 @@ public class OpenFile {
 				robotStateMachine.setC0InOut(Integer.parseInt(st4.nextToken()));
 				robotStateMachine.setC3InOut(Integer.parseInt(st4.nextToken()));
 				return;
-			} catch (java.lang.NumberFormatException nfe) {
+			} catch (final java.lang.NumberFormatException nfe) {
 				isFileValid = false;
 				return;
 			}
 		} else if (counter == 5) {
 			try {
-				java.util.StringTokenizer st5 = new java.util.StringTokenizer(data);
+				final java.util.StringTokenizer st5 = new java.util.StringTokenizer(data);
 				robotStateMachine.setA1State(Integer.parseInt(st5.nextToken()));
 				robotStateMachine.setA2State(Integer.parseInt(st5.nextToken()));
 				robotStateMachine.setA3State(Integer.parseInt(st5.nextToken()));
 				robotStateMachine.setA4State(Integer.parseInt(st5.nextToken()));
-				String dummyVar = st5.nextToken();
+				final String dummyVar = st5.nextToken();
 				return;
-			} catch (java.lang.NumberFormatException nfe) {
+			} catch (final java.lang.NumberFormatException nfe) {
 				isFileValid = false;
 				return;
 			}
 		} else if (counter == 6) {
 			try {
-				java.util.StringTokenizer st6 = new java.util.StringTokenizer(data);
+				final java.util.StringTokenizer st6 = new java.util.StringTokenizer(data);
 				robotStateMachine.setV1State(Integer.parseInt(st6.nextToken()));
 				robotStateMachine.setV2State(Integer.parseInt(st6.nextToken()));
 				robotStateMachine.setV3State(Integer.parseInt(st6.nextToken()));
 				robotStateMachine.setV4State(Integer.parseInt(st6.nextToken()));
 				robotStateMachine.setV5State(Integer.parseInt(st6.nextToken()));
-			} catch (java.lang.NumberFormatException nfe) {
+			} catch (final java.lang.NumberFormatException nfe) {
 				isFileValid = false;
 				return;
 			}
@@ -239,7 +239,7 @@ public class OpenFile {
 			return;
 		}
 		if (counter2 < iValuesSize) {
-			java.util.StringTokenizer st = new java.util.StringTokenizer(data, "\t");
+			final java.util.StringTokenizer st = new java.util.StringTokenizer(data, "\t");
 			iValues[counter2][0] = st.nextToken();
 			iValues[counter2][1] = new Integer(st.nextToken().trim());
 			iValues[counter2][2] = new Integer(st.nextToken().trim());
@@ -248,7 +248,7 @@ public class OpenFile {
 			return;
 		}
 		if (counter == 8) {
-			java.util.StringTokenizer st2 = new java.util.StringTokenizer(data);
+			final java.util.StringTokenizer st2 = new java.util.StringTokenizer(data);
 			robotStateMachine.setI0Sensitivity(Integer.parseInt(st2.nextToken().trim()));
 			robotStateMachine.setI1Sensitivity(Integer.parseInt(st2.nextToken().trim()));
 			robotStateMachine.setI2Sensitivity(Integer.parseInt(st2.nextToken().trim()));
@@ -260,7 +260,7 @@ public class OpenFile {
 			return;
 		}
 		if (counter == 9) {
-			java.util.StringTokenizer st3 = new java.util.StringTokenizer(data);
+			final java.util.StringTokenizer st3 = new java.util.StringTokenizer(data);
 			robotStateMachine.setI0OnOff(Integer.parseInt(st3.nextToken().trim()));
 			robotStateMachine.setI1OnOff(Integer.parseInt(st3.nextToken().trim()));
 			robotStateMachine.setI2OnOff(Integer.parseInt(st3.nextToken().trim()));
@@ -273,8 +273,8 @@ public class OpenFile {
 	}
 
 	private void updateConnections() {
-		for (int iRow = 2; iRow < MAX_ROWS - 1; iRow++) {
-			for (int iCol = MAX_COLUMNS - 1; iCol > 1; iCol--) {
+		for (int iRow = 2; iRow < OpenFile.MAX_ROWS - 1; iRow++) {
+			for (int iCol = OpenFile.MAX_COLUMNS - 1; iCol > 1; iCol--) {
 				if (matrixWiring[iRow][iCol] != null && matrixWiring[iRow][iCol].startsWith("<-")
 						&& matrix[iRow][iCol - 1] == null) {
 					matrixWiring[iRow][iCol - 1] = "<-";

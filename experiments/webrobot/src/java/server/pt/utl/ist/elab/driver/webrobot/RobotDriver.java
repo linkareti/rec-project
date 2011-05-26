@@ -27,9 +27,9 @@ public class RobotDriver extends BaseDriver {
 	protected static String WR_DRIVER_LOGGER = "WebRobotDriver.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(WR_DRIVER_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(RobotDriver.WR_DRIVER_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(WR_DRIVER_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(RobotDriver.WR_DRIVER_LOGGER));
 		}
 	}
 	/* Hardware and driver related variables */
@@ -53,30 +53,33 @@ public class RobotDriver extends BaseDriver {
 	}
 
 	public static RobotDriver Create() {
-		if (SingletonDriver == null) {
-			SingletonDriver = new RobotDriver();
+		if (RobotDriver.SingletonDriver == null) {
+			RobotDriver.SingletonDriver = new RobotDriver();
 		}
-		return SingletonDriver;
+		return RobotDriver.SingletonDriver;
 	}
 
-	public void config(HardwareAcquisitionConfig config, HardwareInfo info) throws IncorrectStateException,
+	@Override
+	public void config(final HardwareAcquisitionConfig config, final HardwareInfo info) throws IncorrectStateException,
 			WrongConfigurationException {
 		fireIDriverStateListenerDriverConfiguring();
-		Logger.getLogger(WR_DRIVER_LOGGER).log(Level.INFO, "Starting config");
+		Logger.getLogger(RobotDriver.WR_DRIVER_LOGGER).log(Level.INFO, "Starting config");
 		info.validateConfig(config);
 		extraValidateConfig(config, info);
 		try {
 			configure(config, info);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			throw new WrongConfigurationException("Erro no config...", 20);
 		}
 	}
 
-	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException {
+	@Override
+	public void configure(final HardwareAcquisitionConfig config, final HardwareInfo info)
+			throws WrongConfigurationException {
 		this.config = config;
 		this.info = info;
-		ParameterConfig[] selectedParams = config.getSelectedHardwareParameters();
+		final ParameterConfig[] selectedParams = config.getSelectedHardwareParameters();
 
 		if (selectedParams != null) {
 			/**
@@ -84,16 +87,16 @@ public class RobotDriver extends BaseDriver {
 			 * understand this better if I need to look at this later...
 			 */
 			ParameterConfig flowParam = null;
-			for (int i = 0; i < selectedParams.length; i++) {
-				if (selectedParams[i].getParameterName().equalsIgnoreCase("FlowChart")) {
-					flowParam = selectedParams[i];
+			for (final ParameterConfig selectedParam : selectedParams) {
+				if (selectedParam.getParameterName().equalsIgnoreCase("FlowChart")) {
+					flowParam = selectedParam;
 					flowChartString = flowParam.getParameterValue();
 				}
 			}
 		}
 		/** I don't want null files!! Why are you sending them? */
 		if (flowChartString == null) {
-			Logger.getLogger(WR_DRIVER_LOGGER).log(Level.INFO, "Flow chart String is NULL!!!");
+			Logger.getLogger(RobotDriver.WR_DRIVER_LOGGER).log(Level.INFO, "Flow chart String is NULL!!!");
 			flowChartString = "";
 		}
 
@@ -106,30 +109,35 @@ public class RobotDriver extends BaseDriver {
 			config.getChannelsConfig(i).setTotalSamples(config.getTotalSamples());
 		}
 		fireIDriverStateListenerDriverConfigured();
-		Logger.getLogger(WR_DRIVER_LOGGER).log(Level.INFO, "Configured");
+		Logger.getLogger(RobotDriver.WR_DRIVER_LOGGER).log(Level.INFO, "Configured");
 	}
 
-	public void extraValidateConfig(HardwareAcquisitionConfig config, HardwareInfo info)
+	@Override
+	public void extraValidateConfig(final HardwareAcquisitionConfig config, final HardwareInfo info)
 			throws WrongConfigurationException {
 		/** not going to use */
 	}
 
+	@Override
 	public String getDriverUniqueID() {
-		return DRIVER_UNIQUE_ID;
+		return RobotDriver.DRIVER_UNIQUE_ID;
 	}
 
-	public void init(HardwareInfo info) {
+	@Override
+	public void init(final HardwareInfo info) {
 		/** Open the serial connection */
 		serialComm = new pt.utl.ist.elab.driver.webrobot.serial.SerialComm();
-		Logger.getLogger(WR_DRIVER_LOGGER).log(Level.INFO, "The serial port is opened!");
+		Logger.getLogger(RobotDriver.WR_DRIVER_LOGGER).log(Level.INFO, "The serial port is opened!");
 		dataSource = new RobotStateMachine(this);
 		fireIDriverStateListenerDriverInited();
 	}
 
-	public void reset(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public void reset(final HardwareInfo info) throws IncorrectStateException {
 		/** Reset in not supported in webrobot */
 	}
 
+	@Override
 	public void shutdown() {
 		if (dataSource != null) {
 			dataSource.shutdown();
@@ -137,71 +145,78 @@ public class RobotDriver extends BaseDriver {
 		super.shutDownNow();
 	}
 
-	public IDataSource start(HardwareInfo info) throws IncorrectStateException {
-		Logger.getLogger(WR_DRIVER_LOGGER).log(Level.INFO, "Starting!");
+	@Override
+	public IDataSource start(final HardwareInfo info) throws IncorrectStateException {
+		Logger.getLogger(RobotDriver.WR_DRIVER_LOGGER).log(Level.INFO, "Starting!");
 		fireIDriverStateListenerDriverStarting();
 		dataSource = new RobotStateMachine(this);
 		dataSource.setAtStartPosition();
 		while (!dataSource.isAtStartPosition()) {
 			try {
-				Thread.currentThread().sleep(2000);
-			} catch (InterruptedException ie) {
+				Thread.currentThread();
+				Thread.sleep(2000);
+			} catch (final InterruptedException ie) {
 			}
 		}
-		Logger.getLogger(WR_DRIVER_LOGGER).log(Level.INFO, "The robot is at the start position");
+		Logger.getLogger(RobotDriver.WR_DRIVER_LOGGER).log(Level.INFO, "The robot is at the start position");
 		dataSource.setFlowString(flowChartString);
 		dataSource.setAcquisitionHeader(config);
 		dataSource.startProduction();
-		Logger.getLogger(WR_DRIVER_LOGGER).log(Level.INFO, "Ready to start");
+		Logger.getLogger(RobotDriver.WR_DRIVER_LOGGER).log(Level.INFO, "Ready to start");
 		fireIDriverStateListenerDriverStarted();
-		Logger.getLogger(WR_DRIVER_LOGGER).log(Level.INFO, "Started!");
+		Logger.getLogger(RobotDriver.WR_DRIVER_LOGGER).log(Level.INFO, "Started!");
 		// dataSource.setRunning(true);
 		return dataSource;
 	}
 
-	public IDataSource startOutput(HardwareInfo info, IDataSource source) throws IncorrectStateException {
+	@Override
+	public IDataSource startOutput(final HardwareInfo info, final IDataSource source) throws IncorrectStateException {
 		/** Don't know what is startOutput... */
 		return null;
 	}
 
-	public void stop(HardwareInfo info) throws IncorrectStateException {
+	@Override
+	public void stop(final HardwareInfo info) throws IncorrectStateException {
 		dataSource.stopProduction();
 	}
 
+	@Override
 	public Object getHardwareInfo() {
 		fireIDriverStateListenerDriverReseting();
 
-		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+				+ "/HardwareInfo.xml";
 		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
-		if (prop.indexOf("://") == -1)
+		if (prop.indexOf("://") == -1) {
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
+		}
 
 		java.net.URL url = null;
 		try {
 			url = ReCProtocols.getURL(prop);
 			fireIDriverStateListenerDriverReseted();
-		} catch (java.net.MalformedURLException e) {
+		} catch (final java.net.MalformedURLException e) {
 			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger("WebRobot"));
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
 				fireIDriverStateListenerDriverReseted();
-			} catch (java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2, Logger
-						.getLogger("WebRobot"));
+			} catch (final java.net.MalformedURLException e2) {
+				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
+						Logger.getLogger("WebRobot"));
 			}
 		}
 		return url;
 	}
 
 	public void setStoping() {
-		Logger.getLogger(WR_DRIVER_LOGGER).log(Level.INFO, "Stoping");
+		Logger.getLogger(RobotDriver.WR_DRIVER_LOGGER).log(Level.INFO, "Stoping");
 		fireIDriverStateListenerDriverStoping();
 		// dataSource.setRunning(false);
 	}
 
 	public void setStoped() {
-		Logger.getLogger(WR_DRIVER_LOGGER).log(Level.INFO, "Stoped");
+		Logger.getLogger(RobotDriver.WR_DRIVER_LOGGER).log(Level.INFO, "Stoped");
 		fireIDriverStateListenerDriverStoped();
 	}
 

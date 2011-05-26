@@ -36,8 +36,8 @@ public class WebResource extends DisplayNode implements CommonBean, OrderedItem 
 	}
 
 	// Deep copy
-	public WebResource(WebResource source) {
-		this.setOrder(source.getOrder());
+	public WebResource(final WebResource source) {
+		setOrder(source.getOrder());
 		_InternalBrowser = source._InternalBrowser;
 		_ToolTipLocationBundleKey = source._ToolTipLocationBundleKey;
 		_DisplayStringBundleKey = source._DisplayStringBundleKey;
@@ -47,30 +47,34 @@ public class WebResource extends DisplayNode implements CommonBean, OrderedItem 
 	}
 
 	// This attribute is mandatory
-	public void setOrder(int value) {
+	@Override
+	public void setOrder(final int value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "order", new Integer(getOrder()), new Integer(value));
 		}
 		_Order = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
+	@Override
 	public int getOrder() {
 		return _Order;
 	}
 
 	// This attribute is mandatory
-	public void setInternalBrowser(boolean value) {
+	public void setInternalBrowser(final boolean value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "internalBrowser", new Boolean(isInternalBrowser()), new Boolean(
 					value));
 		}
 		_InternalBrowser = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public boolean isInternalBrowser() {
@@ -78,14 +82,15 @@ public class WebResource extends DisplayNode implements CommonBean, OrderedItem 
 	}
 
 	// This attribute is mandatory
-	public void setToolTipLocationBundleKey(String value) {
+	public void setToolTipLocationBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "toolTipLocationBundleKey", getToolTipLocationBundleKey(), value);
 		}
 		_ToolTipLocationBundleKey = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public String getToolTipLocationBundleKey() {
@@ -93,14 +98,15 @@ public class WebResource extends DisplayNode implements CommonBean, OrderedItem 
 	}
 
 	// This attribute is mandatory
-	public void setDisplayStringBundleKey(String value) {
+	public void setDisplayStringBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "displayStringBundleKey", getDisplayStringBundleKey(), value);
 		}
 		_DisplayStringBundleKey = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public String getDisplayStringBundleKey() {
@@ -108,36 +114,40 @@ public class WebResource extends DisplayNode implements CommonBean, OrderedItem 
 	}
 
 	// This attribute is mandatory
-	public void setIconLocationBundleKey(String value) {
+	public void setIconLocationBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "iconLocationBundleKey", getIconLocationBundleKey(), value);
 		}
 		_IconLocationBundleKey = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
+	@Override
 	public String getIconLocationBundleKey() {
 		return _IconLocationBundleKey;
 	}
 
 	// This attribute is mandatory
-	public void setLocationBundleKey(String value) {
+	public void setLocationBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
 			event = new PropertyChangeEvent(this, "locationBundleKey", getLocationBundleKey(), value);
 		}
 		_LocationBundleKey = value;
-		if (eventListeners != null)
+		if (eventListeners != null) {
 			eventListeners.firePropertyChange(event);
+		}
 	}
 
 	public String getLocationBundleKey() {
 		return _LocationBundleKey;
 	}
 
-	public void writeNode(Writer out, String nodeName, String indent) throws IOException {
+	@Override
+	public void writeNode(final Writer out, final String nodeName, final String indent) throws IOException {
 		out.write(indent);
 		out.write("<");
 		out.write(nodeName);
@@ -181,14 +191,15 @@ public class WebResource extends DisplayNode implements CommonBean, OrderedItem 
 			out.write("'"); // NOI18N
 		}
 		out.write(">\n");
-		String nextIndent = indent + "	";
+		final String nextIndent = indent + "	";
 		out.write(indent);
 		out.write("</" + nodeName + ">\n");
 	}
 
-	public void readNode(Node node) {
+	@Override
+	public void readNode(final Node node) {
 		if (node.hasAttributes()) {
-			NamedNodeMap attrs = node.getAttributes();
+			final NamedNodeMap attrs = node.getAttributes();
 			Attr attr;
 			attr = (Attr) attrs.getNamedItem("order");
 			if (attr != null) {
@@ -215,11 +226,11 @@ public class WebResource extends DisplayNode implements CommonBean, OrderedItem 
 				_LocationBundleKey = attr.getValue();
 			}
 		}
-		NodeList children = node.getChildNodes();
+		final NodeList children = node.getChildNodes();
 		for (int i = 0, size = children.getLength(); i < size; ++i) {
-			Node childNode = children.item(i);
-			String childNodeName = (childNode.getLocalName() == null ? childNode.getNodeName().intern() : childNode
-					.getLocalName().intern());
+			final Node childNode = children.item(i);
+			final String childNodeName = (childNode.getLocalName() == null ? childNode.getNodeName().intern()
+					: childNode.getLocalName().intern());
 			String childNodeValue = "";
 			if (childNode.getFirstChild() != null) {
 				childNodeValue = childNode.getFirstChild().getNodeValue();
@@ -227,8 +238,9 @@ public class WebResource extends DisplayNode implements CommonBean, OrderedItem 
 		}
 	}
 
+	@Override
 	public void validate() throws ReCBaseUIConfig.ValidateException {
-		boolean restrictionFailure = false;
+		final boolean restrictionFailure = false;
 
 		/*
 		 * if (getToolTipLocationBundleKey() == null) { throw new
@@ -252,14 +264,16 @@ public class WebResource extends DisplayNode implements CommonBean, OrderedItem 
 		}
 	}
 
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
+	@Override
+	public void addPropertyChangeListener(final PropertyChangeListener listener) {
 		if (eventListeners == null) {
 			eventListeners = new PropertyChangeSupport(this);
 		}
 		eventListeners.addPropertyChangeListener(listener);
 	}
 
-	public void removePropertyChangeListener(PropertyChangeListener listener) {
+	@Override
+	public void removePropertyChangeListener(final PropertyChangeListener listener) {
 		if (eventListeners == null) {
 			return;
 		}
@@ -269,49 +283,62 @@ public class WebResource extends DisplayNode implements CommonBean, OrderedItem 
 		}
 	}
 
-	public void _setPropertyChangeSupport(PropertyChangeSupport listeners) {
+	@Override
+	public void _setPropertyChangeSupport(final PropertyChangeSupport listeners) {
 		eventListeners = listeners;
 	}
 
 	// Return an array of all of the properties that are beans and are set.
-	public CommonBean[] childBeans(boolean recursive) {
-		List<CommonBean> children = new LinkedList<CommonBean>();
+	@Override
+	public CommonBean[] childBeans(final boolean recursive) {
+		final List<CommonBean> children = new LinkedList<CommonBean>();
 		childBeans(recursive, children);
-		CommonBean[] result = new CommonBean[children.size()];
-		return (CommonBean[]) children.toArray(result);
+		final CommonBean[] result = new CommonBean[children.size()];
+		return children.toArray(result);
 	}
 
 	// Put all child beans into the beans list.
-	public void childBeans(boolean recursive, List beans) {
+	@Override
+	public void childBeans(final boolean recursive, final List beans) {
 	}
 
-	public boolean equals(Object o) {
-		if (o == this)
+	@Override
+	public boolean equals(final Object o) {
+		if (o == this) {
 			return true;
-		if (!(o instanceof WebResource))
+		}
+		if (!(o instanceof WebResource)) {
 			return false;
-		WebResource inst = (WebResource) o;
+		}
+		final WebResource inst = (WebResource) o;
 		// Order an InternalBrowser can't be null..
 
-		if (_Order != inst._Order)
+		if (_Order != inst._Order) {
 			return false;
-		if (_InternalBrowser != inst._InternalBrowser)
+		}
+		if (_InternalBrowser != inst._InternalBrowser) {
 			return false;
+		}
 		if (!(_ToolTipLocationBundleKey == null ? inst._ToolTipLocationBundleKey == null : _ToolTipLocationBundleKey
-				.equals(inst._ToolTipLocationBundleKey)))
+				.equals(inst._ToolTipLocationBundleKey))) {
 			return false;
+		}
 		if (!(_DisplayStringBundleKey == null ? inst._DisplayStringBundleKey == null : _DisplayStringBundleKey
-				.equals(inst._DisplayStringBundleKey)))
+				.equals(inst._DisplayStringBundleKey))) {
 			return false;
+		}
 		if (!(_IconLocationBundleKey == null ? inst._IconLocationBundleKey == null : _IconLocationBundleKey
-				.equals(inst._IconLocationBundleKey)))
+				.equals(inst._IconLocationBundleKey))) {
 			return false;
+		}
 		if (!(_LocationBundleKey == null ? inst._LocationBundleKey == null : _LocationBundleKey
-				.equals(inst._LocationBundleKey)))
+				.equals(inst._LocationBundleKey))) {
 			return false;
+		}
 		return true;
 	}
 
+	@Override
 	public int hashCode() {
 		int result = 17;
 		result = 37 * result + _Order;
@@ -327,24 +354,27 @@ public class WebResource extends DisplayNode implements CommonBean, OrderedItem 
 		try {
 			return new java.net.URL(ReCResourceBundle.findStringOrDefault(getLocationBundleKey(),
 					"http://www.e-escola.pt"));
-		} catch (java.net.MalformedURLException e) {
+		} catch (final java.net.MalformedURLException e) {
 			throw e;
 		}
 	}
 
+	@Override
 	public String getDisplayNameBundleKey() {
 		return getDisplayStringBundleKey();
 	}
 
+	@Override
 	public String getToolTipBundleKey() {
 		return getToolTipLocationBundleKey();
 	}
 
+	@Override
 	public String toString() {
-		StringWriter sw = new StringWriter();
+		final StringWriter sw = new StringWriter();
 		try {
 			writeNode(sw, "WebResource", "");
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			// How can we actually get an IOException on a StringWriter?
 			// We'll just ignore it.
 		}

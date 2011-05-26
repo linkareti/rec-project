@@ -29,12 +29,17 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  */
 public class SeringeSensor extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
-	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1207470508728415849L;
+
 	private static final DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
-	private BufferedImage imgEmbolo = new BufferedImage(30, 57, BufferedImage.TYPE_INT_ARGB);
-	private BufferedImage imgSeringe = new BufferedImage(36, 65, BufferedImage.TYPE_INT_ARGB);
-	private Icon icon = new javax.swing.ImageIcon(getClass().getResource(
+	private final BufferedImage imgEmbolo = new BufferedImage(30, 57, BufferedImage.TYPE_INT_ARGB);
+	private final BufferedImage imgSeringe = new BufferedImage(36, 65, BufferedImage.TYPE_INT_ARGB);
+	private final Icon icon = new javax.swing.ImageIcon(getClass().getResource(
 			"/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
 
 	/** Creates new form SeringeSensor */
@@ -100,23 +105,25 @@ public class SeringeSensor extends javax.swing.JPanel implements com.linkare.rec
 	 * @see #getComponentGraphics
 	 * @see #repaint
 	 */
-	public void paint(Graphics g) {
+	@Override
+	public void paint(final Graphics g) {
 		super.paint(g);
-		if (pressure == null || volume == null)
+		if (pressure == null || volume == null) {
 			return;
+		}
 
-		Graphics2D g2D = (Graphics2D) g;
+		final Graphics2D g2D = (Graphics2D) g;
 
-		double pressure = this.pressure.getValue().toDouble();
-		double volume = this.volume.getValue().toDouble();
+		final double pressure = this.pressure.getValue().toDouble();
+		final double volume = this.volume.getValue().toDouble();
 
-		int imgWidth = (int) getBounds().getWidth();
-		int imgHeight = (int) getBounds().getHeight();
-		int center_x = imgWidth / 2 - imgSeringe.getWidth() / 2;
-		int center_y = imgHeight / 2 - imgSeringe.getHeight() / 2 - imgEmbolo.getHeight() / 2;
+		final int imgWidth = (int) getBounds().getWidth();
+		final int imgHeight = (int) getBounds().getHeight();
+		final int center_x = imgWidth / 2 - imgSeringe.getWidth() / 2;
+		final int center_y = imgHeight / 2 - imgSeringe.getHeight() / 2 - imgEmbolo.getHeight() / 2;
 
 		g2D.drawImage(imgSeringe, center_x, center_y, imgSeringe.getWidth(), imgSeringe.getHeight(), null);
-		int volumepos = (int) Math.floor(40. * (volume - VOL_MIN) / (VOL_MAX - VOL_MIN));
+		final int volumepos = (int) Math.floor(40. * (volume - VOL_MIN) / (VOL_MAX - VOL_MIN));
 		int pressureColor = 155 * (int) Math.floor((pressure - PRESS_MIN) / (PRESS_MAX - PRESS_MIN));
 		if (pressureColor > 155) {
 			pressureColor = 155;
@@ -133,9 +140,9 @@ public class SeringeSensor extends javax.swing.JPanel implements com.linkare.rec
 				+ header.getChannelsConfig(0).getSelectedScale().getPhysicsUnitSymbol() + "] = " + (int) pressure,
 				center_x + imgSeringe.getWidth() + 10, center_y + imgSeringe.getHeight());
 		g2D.drawString("V [" + header.getChannelsConfig(1).getSelectedScale().getMultiplier()
-				+ header.getChannelsConfig(1).getSelectedScale().getPhysicsUnitSymbol() + "] = " + decimalFormat.format(volume),
-				center_x + imgSeringe.getWidth() + 10, center_y + imgSeringe.getHeight()
-						+ g2D.getFontMetrics().getHeight() + 8);
+				+ header.getChannelsConfig(1).getSelectedScale().getPhysicsUnitSymbol() + "] = "
+				+ SeringeSensor.decimalFormat.format(volume), center_x + imgSeringe.getWidth() + 10, center_y
+				+ imgSeringe.getHeight() + g2D.getFontMetrics().getHeight() + 8);
 
 	}
 
@@ -146,38 +153,45 @@ public class SeringeSensor extends javax.swing.JPanel implements com.linkare.rec
 	private PhysicsValue pressure = null;
 	private PhysicsValue volume = null;
 
-	public void setPressureAndVolume(PhysicsValue pressure, PhysicsValue volume) {
+	public void setPressureAndVolume(final PhysicsValue pressure, final PhysicsValue volume) {
 		this.pressure = pressure;
 		this.volume = volume;
 		repaint();
 	}
 
+	@Override
 	public javax.swing.JComponent getDisplay() {
 		return this;
 	}
 
+	@Override
 	public Icon getIcon() {
 		return icon;
 	}
 
 	private ExpDataModel model = null;
 
-	public void setExpDataModel(ExpDataModel model) {
-		if (this.model != null)
+	@Override
+	public void setExpDataModel(final ExpDataModel model) {
+		if (this.model != null) {
 			this.model.removeExpDataModelListener(this);
+		}
 		this.model = model;
-		if (this.model != null)
+		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+		}
 
 	}
 
+	@Override
 	public void dataModelWaiting() {
 	}
 
+	@Override
 	public void dataModelStoped() {
 	}
 
-	public void headerAvailable(HardwareAcquisitionConfig header) {
+	public void headerAvailable(final HardwareAcquisitionConfig header) {
 		acqHeaderInited = true;
 
 		if (header != null) {
@@ -193,35 +207,44 @@ public class SeringeSensor extends javax.swing.JPanel implements com.linkare.rec
 	private HardwareAcquisitionConfig header = null;
 	private boolean acqHeaderInited = false;
 
-	public void newSamples(NewExpDataEvent evt) {
-		if (!acqHeaderInited)
+	@Override
+	public void newSamples(final NewExpDataEvent evt) {
+		if (!acqHeaderInited) {
 			headerAvailable(model.getAcquisitionConfig());
+		}
 
-		int lastsample = evt.getSamplesEndIndex();
+		final int lastsample = evt.getSamplesEndIndex();
 		setPressureAndVolume(model.getValueAt(lastsample, 0), model.getValueAt(lastsample, 1));
 	}
 
+	@Override
 	public String getName() {
 		return "Sensor";
 	}
 
+	@Override
 	public JMenuBar getMenuBar() {
 		return null;
 	}
 
+	@Override
 	public JToolBar getToolBar() {
 		return null;
 	}
 
+	@Override
 	public void dataModelEnded() {
 	}
 
+	@Override
 	public void dataModelError() {
 	}
 
+	@Override
 	public void dataModelStarted() {
 	}
 
+	@Override
 	public void dataModelStartedNoData() {
 	}
 

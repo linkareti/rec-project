@@ -8,7 +8,6 @@ package com.linkare.rec.impl.events;
 
 import com.linkare.rec.impl.utils.IntersectableEvent;
 
-
 /**
  * 
  * @author npadriano
@@ -17,21 +16,23 @@ public class NewPoisonSamplesEvent extends NewSamplesEvent {
 
 	/**
 	 * Creates the <code>NewSamplesPoisonEvent</code>.
+	 * 
 	 * @param largestNumPacket
 	 */
-	public NewPoisonSamplesEvent(int largestNumPacket) {
+	public NewPoisonSamplesEvent(final int largestNumPacket) {
 		super(largestNumPacket);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean intersectTo(IntersectableEvent other) {
-		if (!(other instanceof NewPoisonSamplesEvent))
+	public boolean intersectTo(final IntersectableEvent other) {
+		if (!(other instanceof NewPoisonSamplesEvent)) {
 			return false;
-		
-		NewPoisonSamplesEvent evt = (NewPoisonSamplesEvent) other;
+		}
+
+		final NewPoisonSamplesEvent evt = (NewPoisonSamplesEvent) other;
 		setLargestNumPacket(Math.max(getLargestNumPacket(), evt.getLargestNumPacket()));
 		return true;
 	}
@@ -43,7 +44,7 @@ public class NewPoisonSamplesEvent extends NewSamplesEvent {
 	public boolean isPoisoned() {
 		return true;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */

@@ -12,6 +12,11 @@ package pt.utl.ist.elab.client.voscilador.displays;
  */
 public class METimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -723312698351999916L;
+
 	/** Creates a new instance of AnguloIntensidadeChart */
 	public METimeChart() {
 		super();

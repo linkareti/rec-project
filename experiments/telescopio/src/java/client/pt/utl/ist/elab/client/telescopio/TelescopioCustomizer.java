@@ -5,6 +5,8 @@
  */
 package pt.utl.ist.elab.client.telescopio;
 
+import javax.swing.ScrollPaneConstants;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.client.customizer.ICustomizerListener;
@@ -13,6 +15,10 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 public class TelescopioCustomizer extends javax.swing.JPanel implements
 		com.linkare.rec.impl.client.customizer.ICustomizer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1484102371248701339L;
 	final Ceu novoCeu = new Ceu();
 
 	public TelescopioCustomizer() {
@@ -21,12 +27,19 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 
 		// Cria��o da Lista a partir do vector de objetos visiveis da classe Ceu
 		jList1.setModel(new javax.swing.AbstractListModel() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -6046558377927448130L;
+
+			@Override
 			public int getSize() {
-				return novoCeu.comprimentoVisivel;
+				return Ceu.comprimentoVisivel;
 			}
 
-			public Object getElementAt(int i) {
-				return novoCeu.objectos_visiveis[i].getNome();
+			@Override
+			public Object getElementAt(final int i) {
+				return Ceu.objectos_visiveis[i].getNome();
 			}
 		});
 
@@ -79,14 +92,15 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 				.findString("telescopio$rec.exp.telescopio.lbl.panelobjs")));
 		jPanel4.setLayout(new java.awt.BorderLayout());
 
-		jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		jScrollPane1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		jScrollPane1.setAutoscrolls(true);
 		jList1.setBorder(new javax.swing.border.EtchedBorder());
 		jList1.setMaximumSize(new java.awt.Dimension(15, 15));
 		jList1.setMinimumSize(new java.awt.Dimension(15, 15));
 		jList1.setVisibleRowCount(3);
 		jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-			public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+			@Override
+			public void valueChanged(final javax.swing.event.ListSelectionEvent evt) {
 				jList1ValueChanged(evt);
 			}
 		});
@@ -142,7 +156,8 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 
 		jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ms", "s" }));
 		jComboBox1.addItemListener(new java.awt.event.ItemListener() {
-			public void itemStateChanged(java.awt.event.ItemEvent evt) {
+			@Override
+			public void itemStateChanged(final java.awt.event.ItemEvent evt) {
 				jComboBox1ItemStateChanged(evt);
 			}
 		});
@@ -162,7 +177,8 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 		jSlider1.setPaintTicks(true);
 		jSlider1.setValue(60);
 		jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
-			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
 				jSlider1StateChanged(evt);
 			}
 		});
@@ -189,7 +205,8 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 		jButtonConfirm.setText(ReCResourceBundle.findString("telescopio$rec.exp.telescopio.lbl.ok"));
 		jButtonConfirm.setMaximumSize(new java.awt.Dimension(20, 10));
 		jButtonConfirm.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonConfirmActionPerformed(evt);
 				jButton1ActionPerformed(evt);
 			}
@@ -199,7 +216,8 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 
 		jButtonCancel.setText(ReCResourceBundle.findString("telescopio$rec.exp.telescopio.lbl.cancel"));
 		jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			@Override
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonCancelActionPerformed(evt);
 			}
 		});
@@ -218,12 +236,12 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 
 	}// GEN-END:initComponents
 
-	private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSlider1StateChanged
+	private void jSlider1StateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSlider1StateChanged
 	{// GEN-HEADEREND:event_jSlider1StateChanged
 		jTextField1.setText("" + jSlider1.getValue());
 	}// GEN-LAST:event_jSlider1StateChanged
 
-	private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt)// GEN-FIRST:event_jComboBox1ItemStateChanged
+	private void jComboBox1ItemStateChanged(final java.awt.event.ItemEvent evt)// GEN-FIRST:event_jComboBox1ItemStateChanged
 	{// GEN-HEADEREND:event_jComboBox1ItemStateChanged
 		if (jComboBox1.getSelectedIndex() == 0) {
 			jSlider1.setMaximum(1000);
@@ -237,26 +255,26 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 		jSlider1.repaint();
 	}// GEN-LAST:event_jComboBox1ItemStateChanged
 
-	private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonCancelActionPerformed
+	private void jButtonCancelActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonCancelActionPerformed
 	{// GEN-HEADEREND:event_jButtonCancelActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_jButtonCancelActionPerformed
 
-	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButton1ActionPerformed
+	private void jButton1ActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButton1ActionPerformed
 	{// GEN-HEADEREND:event_jButton1ActionPerformed
 		// TODO add your handling code here:
 	}// GEN-LAST:event_jButton1ActionPerformed
 
 	int tempo_escala = 1;
 
-	private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {// GEN-FIRST:event_jList1ValueChanged
-		int index = jList1.getSelectedIndex();
-		jLabel1.setText(novoCeu.objectos_visiveis[index].getComment());
+	private void jList1ValueChanged(final javax.swing.event.ListSelectionEvent evt) {// GEN-FIRST:event_jList1ValueChanged
+		final int index = jList1.getSelectedIndex();
+		jLabel1.setText(Ceu.objectos_visiveis[index].getComment());
 	}// GEN-LAST:event_jList1ValueChanged
 
-	private void jButtonConfirmActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonConfirmActionPerformed
+	private void jButtonConfirmActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonConfirmActionPerformed
 	{// GEN-HEADEREND:event_jButtonConfirmActionPerformed
-		int index = jList1.getSelectedIndex();
+		final int index = jList1.getSelectedIndex();
 
 		switch (jComboBox1.getSelectedIndex()) {
 		case 0:
@@ -272,10 +290,10 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 			break;
 		}
 		int tempo = jSlider1.getValue() * tempo_escala;
-		String name = novoCeu.objectos_visiveis[index].getNomeObjecto();
+		final String name = Ceu.objectos_visiveis[index].getNomeObjecto();
 
 		if (jRadioButtonDefault.isSelected()) {
-			tempo = (int) Double.parseDouble(novoCeu.objectos_visiveis[index].getTempo());
+			tempo = (int) Double.parseDouble(Ceu.objectos_visiveis[index].getTempo());
 		}
 
 		acqConfig.getSelectedHardwareParameter("TempoExp").setParameterValue("" + tempo);
@@ -288,15 +306,15 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 
 	}// GEN-LAST:event_jButtonConfirmActionPerformed
 
-	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
+	private void jButton2ActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
 		// TODO add your handling code here:
 	}// GEN-LAST:event_jButton2ActionPerformed
 
-	private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton2MouseClicked
+	private void jButton2MouseClicked(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton2MouseClicked
 
 	}// GEN-LAST:event_jButton2MouseClicked
 
-	private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton1MouseClicked
+	private void jButton1MouseClicked(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton1MouseClicked
 		/*
 		 * int index= jList1.getSelectedIndex();
 		 * tester.mandarObjecto(novoCeu.objectos_visiveis
@@ -304,10 +322,10 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 		 */
 	}// GEN-LAST:event_jButton1MouseClicked
 
-	public static void main(String args[]) {
+	public static void main(final String args[]) {
 		ReCResourceBundle.loadResourceBundle("telescopio",
 				"recresource:///pt/utl/ist/elab/client/telescopio/resources/messages");
-		javax.swing.JFrame dummy = new javax.swing.JFrame();
+		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new TelescopioCustomizer());
 		dummy.pack();
 		dummy.show();
@@ -321,7 +339,8 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -333,7 +352,8 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+	@Override
+	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
 		listenerList.remove(ICustomizerListener.class, listener);
 	}
 
@@ -343,9 +363,10 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 				((ICustomizerListener) listeners[i + 1]).canceled();
@@ -359,9 +380,10 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
 	private void fireICustomizerListenerDone() {
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
-		Object[] listeners = listenerList.getListenerList();
+		}
+		final Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == ICustomizerListener.class) {
 
@@ -373,35 +395,42 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 
+	@Override
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
 		return acqConfig;
 	}
 
-	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+	@Override
+	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 	}
 
-	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+	@Override
+	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
 	}
 
 	protected HardwareInfo getHardwareInfo() {
-		return this.hardwareInfo;
+		return hardwareInfo;
 	}
 
+	@Override
 	public javax.swing.JComponent getCustomizerComponent() {
 		return this;
 	}
 
+	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/telescopio/resources/telescopio_iconified.png"));
 	}
 
+	@Override
 	public String getCustomizerTitle() {
 		return "Telescope Experiment Configuration Utility";
 	}
 
+	@Override
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;
 	}

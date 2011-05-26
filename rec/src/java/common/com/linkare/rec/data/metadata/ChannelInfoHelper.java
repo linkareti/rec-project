@@ -3,29 +3,29 @@ package com.linkare.rec.data.metadata;
 abstract public class ChannelInfoHelper {
 	private static String _id = "IDL:com/linkare/rec/data/metadata/ChannelInfo:1.0";
 
-	public static void insert(org.omg.CORBA.Any a, com.linkare.rec.data.metadata.ChannelInfo that) {
-		org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
-		a.type(type());
-		write(out, that);
-		a.read_value(out.create_input_stream(), type());
+	public static void insert(final org.omg.CORBA.Any a, final com.linkare.rec.data.metadata.ChannelInfo that) {
+		final org.omg.CORBA.portable.OutputStream out = a.create_output_stream();
+		a.type(ChannelInfoHelper.type());
+		ChannelInfoHelper.write(out, that);
+		a.read_value(out.create_input_stream(), ChannelInfoHelper.type());
 	}
 
-	public static com.linkare.rec.data.metadata.ChannelInfo extract(org.omg.CORBA.Any a) {
-		return read(a.create_input_stream());
+	public static com.linkare.rec.data.metadata.ChannelInfo extract(final org.omg.CORBA.Any a) {
+		return ChannelInfoHelper.read(a.create_input_stream());
 	}
 
 	private static org.omg.CORBA.TypeCode __typeCode = null;
 	private static boolean __active = false;
 
 	synchronized public static org.omg.CORBA.TypeCode type() {
-		if (__typeCode == null) {
+		if (ChannelInfoHelper.__typeCode == null) {
 			synchronized (org.omg.CORBA.TypeCode.class) {
-				if (__typeCode == null) {
-					if (__active) {
-						return org.omg.CORBA.ORB.init().create_recursive_tc(_id);
+				if (ChannelInfoHelper.__typeCode == null) {
+					if (ChannelInfoHelper.__active) {
+						return org.omg.CORBA.ORB.init().create_recursive_tc(ChannelInfoHelper._id);
 					}
-					__active = true;
-					org.omg.CORBA.StructMember[] _members0 = new org.omg.CORBA.StructMember[9];
+					ChannelInfoHelper.__active = true;
+					final org.omg.CORBA.StructMember[] _members0 = new org.omg.CORBA.StructMember[9];
 					org.omg.CORBA.TypeCode _tcOf_members0 = null;
 					_tcOf_members0 = org.omg.CORBA.ORB.init().create_wstring_tc(0);
 					_tcOf_members0 = org.omg.CORBA.ORB.init().create_alias_tc(
@@ -50,22 +50,22 @@ abstract public class ChannelInfoHelper {
 					_members0[7] = new org.omg.CORBA.StructMember("is_channel_independent", _tcOf_members0, null);
 					_tcOf_members0 = com.linkare.rec.data.metadata.VTSamplesNumScaleHelper.type();
 					_members0[8] = new org.omg.CORBA.StructMember("sampling_scale", _tcOf_members0, null);
-					__typeCode = org.omg.CORBA.ORB.init().create_struct_tc(
+					ChannelInfoHelper.__typeCode = org.omg.CORBA.ORB.init().create_struct_tc(
 							com.linkare.rec.data.metadata.ChannelInfoHelper.id(), "ChannelInfo", _members0);
-					__active = false;
+					ChannelInfoHelper.__active = false;
 				}
 			}
 		}
-		return __typeCode;
+		return ChannelInfoHelper.__typeCode;
 	}
 
 	public static String id() {
-		return _id;
+		return ChannelInfoHelper._id;
 	}
 
-	public static com.linkare.rec.data.metadata.ChannelInfo read(org.omg.CORBA.portable.InputStream istream) {
+	public static com.linkare.rec.data.metadata.ChannelInfo read(final org.omg.CORBA.portable.InputStream istream) {
 
-		com.linkare.rec.data.metadata.ChannelInfo new_one = new com.linkare.rec.data.metadata.ChannelInfo();
+		final com.linkare.rec.data.metadata.ChannelInfo new_one = new com.linkare.rec.data.metadata.ChannelInfo();
 
 		new_one.setChannelName(com.linkare.rec.data.metadata.ChannelNameHelper.read(istream));
 		new_one.setScales(com.linkare.rec.data.metadata.ScaleListHelper.read(istream));
@@ -79,8 +79,8 @@ abstract public class ChannelInfoHelper {
 		return new_one;
 	}
 
-	public static void write(org.omg.CORBA.portable.OutputStream ostream,
-			com.linkare.rec.data.metadata.ChannelInfo value) {
+	public static void write(final org.omg.CORBA.portable.OutputStream ostream,
+			final com.linkare.rec.data.metadata.ChannelInfo value) {
 
 		com.linkare.rec.data.metadata.ChannelNameHelper.write(ostream, value.getChannelName());
 		com.linkare.rec.data.metadata.ScaleListHelper.write(ostream, value.getScales());

@@ -9,7 +9,12 @@ import java.util.EventObject;
  */
 public class MediaStoppedEvent extends EventObject {
 
-	public MediaStoppedEvent(Object source) {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3677208682116460474L;
+
+	public MediaStoppedEvent(final Object source) {
 		super(source);
 	}
 }

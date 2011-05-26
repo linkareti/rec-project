@@ -14,12 +14,12 @@ public abstract class AbstractCypressTranslatorAndProcessor implements CypressTr
 	private String commandIdentifier = null;
 
 	/** Creates a new instance of AbstractSerialPortTranslatorAndProcessor */
-	public AbstractCypressTranslatorAndProcessor(String commandIdentifier) {
+	public AbstractCypressTranslatorAndProcessor(final String commandIdentifier) {
 		this.commandIdentifier = commandIdentifier;
 		CypressTranslatorProcessorManager.registerProcessor(this);
 	}
 
-	public boolean accepts(CypressCommand command) {
+	public boolean accepts(final CypressCommand command) {
 		return commandIdentifier.equals(command.getCommandIdentifier());
 	}
 

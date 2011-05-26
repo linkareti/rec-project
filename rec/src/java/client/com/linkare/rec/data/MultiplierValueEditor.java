@@ -16,7 +16,7 @@ public class MultiplierValueEditor extends AbstractSelectionListPropertyEditor {
 
 	/** Creates new MultiplierEditor */
 	public MultiplierValueEditor() {
-		String pack = this.getClass().getPackage().getName() + ".";
+		final String pack = this.getClass().getPackage().getName() + ".";
 		addTableValue(new Byte(Multiplier.fento.getValue()), "f (1E-15)", pack + "Multiplier.fento.getValue()");
 		addTableValue(new Byte(Multiplier.pico.getValue()), "p (1E-12)", pack + "Multiplier.pico.getValue()");
 		addTableValue(new Byte(Multiplier.nano.getValue()), "n (1E-9)", pack + "Multiplier.nano.getValue()");
@@ -30,13 +30,16 @@ public class MultiplierValueEditor extends AbstractSelectionListPropertyEditor {
 
 	}
 
-	public void setAsText(String text) throws IllegalArgumentException {
-		if (tagToObject(text) != null)
+	@Override
+	public void setAsText(final String text) throws IllegalArgumentException {
+		if (tagToObject(text) != null) {
 			setValueFromTag(text);
-		else
+		} else {
 			throw new IllegalArgumentException("That value isn't allowed! Possible values are:" + getTagsStringDesc());
+		}
 	}
 
+	@Override
 	public java.awt.Component getCustomEditor() {
 		return getBaseRecCustomEditor();
 	}

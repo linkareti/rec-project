@@ -13,19 +13,25 @@ import com.linkare.rec.impl.utils.IntersectableEvent;
  * @author José Pedro Pereira - Linkare TI
  */
 public class SamplesSourceEvent extends java.util.EventObject implements IntersectableEvent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7869653039926379840L;
 	private int sampleLargestIndex;
 
 	/** Creates a new instance of SamplesSourceEvent */
-	public SamplesSourceEvent(SamplesSource source, int sampleLargestIndex) {
+	public SamplesSourceEvent(final SamplesSource source, final int sampleLargestIndex) {
 		super(source);
 		setSampleLargestIndex(sampleLargestIndex);
 	}
 
-	public boolean intersectTo(IntersectableEvent other) {
-		if (other == null || !(other instanceof SamplesSourceEvent))
+	@Override
+	public boolean intersectTo(final IntersectableEvent other) {
+		if (other == null || !(other instanceof SamplesSourceEvent)) {
 			return false;
+		}
 
-		SamplesSourceEvent evt = (SamplesSourceEvent) other;
+		final SamplesSourceEvent evt = (SamplesSourceEvent) other;
 		setSampleLargestIndex(Math.max(getSampleLargestIndex(), evt.getSampleLargestIndex()));
 		return true;
 	}
@@ -46,7 +52,7 @@ public class SamplesSourceEvent extends java.util.EventObject implements Interse
 	 * @param sampleLargestIndex New value of property sampleLargestIndex.
 	 * 
 	 */
-	private void setSampleLargestIndex(int sampleLargestIndex) {
+	private void setSampleLargestIndex(final int sampleLargestIndex) {
 		this.sampleLargestIndex = sampleLargestIndex;
 	}
 
