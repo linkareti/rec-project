@@ -1,0 +1,136 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui"><p:tab id="step1">
+	<h:form>
+		<h:inputHidden value="#{userController.selected.idInternal}" />
+		<h:inputHidden value="#{userController.selected.version}" />
+
+		<p:panel header="#{bundle['page.user.wizard.step1.title']}"
+			toggleable="true" closable="false" toggleSpeed="500">
+
+			<h:panelGrid columns="3">
+				<h:outputLabel value="#{bundle['user.username']}" for="username" />
+				<h:inputText id="username" value="#{userWizard.user.username}"
+					title="#{bundle['user.username']}" required="true"
+					label="#{bundle['user.username']}"
+					readonly="#{operation != 'create'}" size="30" maxlength="30">
+					<f:validateLength minimum="5" maximum="30" />
+				</h:inputText>
+				<p:message for="username" />
+
+				<h:outputLabel value="#{bundle['user.login.password']}"
+					for="password" rendered="#{operation != 'view'}" />
+				<p:password id="password" binding="#{userWizard.passwordInput}"
+					value="#{userWizard.user.login.password}"
+					title="#{bundle['user.login.password']}" required="true"
+					label="#{bundle['user.login.password']}" inline="true"
+					rendered="#{operation != 'view'}" />
+				<p:message for="password" rendered="#{operation != 'view'}" />
+
+				<h:outputLabel value="#{bundle['user.login.confirmPassword']}"
+					for="confirmPassword" rendered="#{operation != 'view'}" />
+				<p:password id="confirmPassword"
+					binding="#{userWizard.confirmPasswordInput}"
+					value="#{userWizard.user.login.confirmPassword}"
+					validator="#{userWizard.validatePasswords}"
+					title="#{bundle['user.login.confirmPassword']}"
+					required="#{operation != 'view'}"
+					label="#{bundle['user.login.confirmPassword']}" inline="true"
+					rendered="#{operation != 'view'}" />
+				<p:message for="confirmPassword" rendered="#{operation != 'view'}" />
+			</h:panelGrid>
+			<p:commandButton value="#{bundle['operation.save']}"
+				actionListener="#{userWizard.save}" ajax="false"
+				rendered="#{operation != 'view'}" update="msg" />
+		</p:panel>
+
+		<p:ajaxStatus>
+			<f:facet name="start">
+				<h:graphicImage value="../design/ajaxloading.gif" />
+			</f:facet>
+
+			<f:facet name="complete">
+				<h:outputText value="" />
+			</f:facet>
+		</p:ajaxStatus>
+	</h:form>
+</p:tab> <p:tab id="step2">
+	<h:form>
+		<h:inputHidden value="#{userController.selected.idInternal}" />
+		<h:inputHidden value="#{userController.selected.version}" />
+
+		<p:panel header="#{bundle['page.user.wizard.step2.title']}"
+			toggleable="true" closable="false" toggleSpeed="500" collapsed="true">
+
+			<h:panelGrid columns="3">
+				<h:outputLabel value="#{bundle['person.personName.firstName']}"
+					for="firstName" />
+				<h:inputText id="firstName"
+					value="#{userWizard.user.subject.name.firstName}"
+					title="#{bundle['person.personName.firstName']}" required="true"
+					readonly="#{operation == 'view'}"
+					label="#{bundle['person.personName.firstName']}" />
+				<p:message for="firstName" />
+
+				<h:outputLabel value="#{bundle['person.personName.lastName']}"
+					for="lastName" />
+				<h:inputText id="lastName"
+					value="#{userWizard.user.subject.name.lastName}"
+					title="#{bundle['person.personName.lastName']}" required="true"
+					readonly="#{operation == 'view'}"
+					label="#{bundle['person.personName.lastName']}" />
+				<p:message for="lastName" />
+			</h:panelGrid>
+			<p:commandButton value="#{bundle['operation.save']}"
+				actionListener="#{userWizard.save}" ajax="false"
+				rendered="#{operation != 'view'}" update="msg" />
+		</p:panel>
+
+		<p:ajaxStatus>
+			<f:facet name="start">
+				<h:graphicImage value="../design/ajaxloading.gif" />
+			</f:facet>
+
+			<f:facet name="complete">
+				<h:outputText value="" />
+			</f:facet>
+		</p:ajaxStatus>
+	</h:form>
+</p:tab> <p:tab id="step3">
+
+	<h:form>
+		<h:inputHidden value="#{userController.selected.idInternal}" />
+		<h:inputHidden value="#{userController.selected.version}" />
+
+		<p:panel header="#{bundle['page.user.wizard.step3.title']}"
+			toggleable="true" closable="false" toggleSpeed="500" collapsed="true">
+
+			<h:panelGrid columns="3">
+				<h:outputLabel value="#{bundle['person.emailAddress.email']}"
+					for="email" />
+				<h:inputText id="email"
+					value="#{userWizard.user.subject.emailAddress.email}"
+					title="#{bundle['person.emailAddress.email']}" required="true"
+					readonly="#{operation == 'view'}"
+					validator="#{userWizard.validateEmail}"
+					label="#{bundle['person.emailAddress.email']}" />
+				<p:message for="email" />
+			</h:panelGrid>
+			<p:commandButton value="#{bundle['operation.save']}"
+				actionListener="#{userWizard.save}" ajax="false"
+				rendered="#{operation != 'view'}" update="msg" />
+		</p:panel>
+
+		<p:ajaxStatus>
+			<f:facet name="start">
+				<h:graphicImage value="../design/ajaxloading.gif" />
+			</f:facet>
+
+			<f:facet name="complete">
+				<h:outputText value="" />
+			</f:facet>
+		</p:ajaxStatus>
+	</h:form>
+</p:tab></div>
