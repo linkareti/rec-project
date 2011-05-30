@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8'?>
+ 
+
+<!ELEMENT DefaultAcquisitionConfig EMPTY>
+<!ATTLIST DefaultAcquisitionConfig
+    order CDATA #REQUIRED
+    displayStringBundleKey CDATA #REQUIRED
+    iconLocationBundleKey CDATA ""
+    toolTipBundleKey CDATA ""
+    classLocationBundleKey CDATA #REQUIRED
+  >
+  
+  
+<!ELEMENT Display EMPTY>
+<!ATTLIST Display
+    order CDATA #REQUIRED
+    offlineCapable (true|false|0|1|yes|no) "false"
+    displayStringBundleKey CDATA #REQUIRED
+    iconLocationBundleKey CDATA ""
+    toolTipBundleKey CDATA ""
+    classLocationBundleKey CDATA #REQUIRED
+  >
+
+<!ELEMENT Apparatus (DefaultAcquisitionConfig|Display|WebResource|LocalizationBundle)*>
+<!ATTLIST Apparatus
+    order CDATA #REQUIRED
+    displayStringBundleKey CDATA #REQUIRED
+    displayFactoryClassLocationBundleKey CDATA ""
+    iconLocationBundleKey CDATA ""
+    toolTipBundleKey CDATA ""
+    dataModelClassLocationBundleKey CDATA ""
+    videoLocation CDATA ""
+    headerDisplayClassLocationBundleKey CDATA ""
+    location CDATA #REQUIRED
+    customizerClassLocationBundleKey CDATA #REQUIRED
+  >
+
+<!ELEMENT Lab (Apparatus|WebResource|LocalizationBundle)*>
+<!ATTLIST Lab
+    order CDATA #REQUIRED
+    iconLocationBundleKey CDATA ""
+    toolTipBundleKey CDATA ""
+    displayStringBundleKey CDATA #REQUIRED
+    location CDATA #REQUIRED
+  >
+
+<!ELEMENT WebResource EMPTY>
+<!ATTLIST WebResource
+    order CDATA #REQUIRED
+    internalBrowser (true|false|0|1|yes|no) "false"
+    toolTipLocationBundleKey CDATA ""
+    displayStringBundleKey CDATA #REQUIRED
+    iconLocationBundleKey CDATA ""
+    locationBundleKey CDATA #REQUIRED
+  >
+
+<!ELEMENT LocalizationBundle EMPTY>
+<!ATTLIST LocalizationBundle
+    location CDATA #REQUIRED
+    name CDATA #REQUIRED
+  >
+
+<!ELEMENT ReCBaseUIConfig (Lab|WebResource|LocalizationBundle)*>
+<!ATTLIST ReCBaseUIConfig
+    aboutPageLocationBundleKey CDATA ""
+    autoConnectLab (true|false|0|1|yes|no) "false"
+    showVideoFrame (true|false|0|1|yes|no) "false"
+    enableVideoFrame (true|false|0|1|yes|no) "true"
+    showChatFrame (true|false|0|1|yes|no) "false"
+    enableChatFrame (true|false|0|1|yes|no) "true"
+    showUserList (true|false|0|1|yes|no) "false"
+    enableUsersList (true|false|0|1|yes|no) "true"
+    usersListRefreshRateMs CDATA "2000"
+    enterApparatusChatRoom (true|false|0|1|yes|no) "false"
+    iconLocationBundleKey CDATA ""
+    frameTitleBundleKey CDATA #REQUIRED
+    iconSponsorLocationBundleKey CDATA ""
+    helpPageLocationBundleKey CDATA ""
+  >
