@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="SCONDUCTOR_V1.0" familiarName="Semicondutores" name="Semicondutores" version="01" manufacturer="Elab - TFComp" driverVersion="v1">
+    <description>
+        <![CDATA[ 
+        Esta experiência serve para - não esquecer de alterar esta descrição
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+    <customizer href="pt.utl.ist.elab.virtual.client.semiconductor.SCustomizer"/>
+
+   <parameter name="Material" type="SelectionListValue" value="Silicio">
+        <selection-list>
+            <value order="1">Silicio</value>
+            <value order="2">GaAs</value>
+        </selection-list>
+    </parameter>    
+    <parameter name="Juncao" type="SelectionListValue" value="Linear">
+        <selection-list>
+            <value order="1">Linear</value>
+            <value order="2">Abrupta</value>
+        </selection-list>
+    </parameter>    
+    <parameter name="N Dadores INI" type="ContinuousValue" value="16">
+        <selection-list>
+            <value order="1">13</value>
+            <value order="2">19</value>
+	    <value order="3">0.01</value>
+        </selection-list>
+    </parameter>
+    <parameter name="N Dadores END" type="ContinuousValue" value="16">
+        <selection-list>
+            <value order="1">13</value>
+            <value order="2">19</value>
+	    <value order="3">0.01</value>
+        </selection-list>
+    </parameter>
+    <parameter name="N Aceitadores INI" type="ContinuousValue" value="16">
+        <selection-list>
+            <value order="1">13</value>
+            <value order="2">19</value>
+	    <value order="3">0.01</value>
+        </selection-list>
+    </parameter>
+    <parameter name="N Aceitadores END" type="ContinuousValue" value="16">
+        <selection-list>
+            <value order="1">13</value>
+            <value order="2">19</value>
+	    <value order="3">0.01</value>
+        </selection-list>
+    </parameter>
+    <parameter name="Temp INI" type="ContinuousValue" value="350">
+        <selection-list>
+            <value order="1">100</value>
+            <value order="2">600</value>
+	    <value order="3">0.01</value>
+        </selection-list>
+    </parameter>
+    <parameter name="Temp END" type="ContinuousValue" value="350">
+        <selection-list>
+            <value order="1">100</value>
+            <value order="2">600</value>
+	    <value order="3">0.01</value>
+        </selection-list>
+    </parameter>
+    <parameter name="V ext INI" type="ContinuousValue" value="0">
+        <selection-list>
+            <value order="1">-10</value>
+            <value order="2">10</value>
+	    <value order="3">0.01</value>
+        </selection-list>
+    </parameter>
+    <parameter name="V ext END" type="ContinuousValue" value="0">
+        <selection-list>
+            <value order="1">-10</value>
+            <value order="2">10</value>
+	    <value order="3">0.01</value>
+        </selection-list>
+    </parameter>
+    <parameter name="Imp Gradient" type="ContinuousValue" value="21">
+        <selection-list>
+            <value order="1">19</value>
+            <value order="2">23</value>
+	    <value order="3">0.01</value>
+        </selection-list>
+    </parameter>    
+            
+    <frequency-scale label="Sampling Interval">
+        <min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">100</Frequency></min-frequency>
+        <max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">500</Frequency></max-frequency>
+        <step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="SamplingIntervalType" multiplier="none">300</Frequency>
+    
+    <sampling-scale>
+        <min-samples>100</min-samples>
+        <max-samples>500</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+
+    <ChannelInfo name="W" independent="false" direction="CHANNEL_INPUT">
+        <scale label="W" physicsunitname="centimetro" physicsunitsymbol="cm" multiplier="none" selected="true">
+            <min><PhysicsVal type="double">0</PhysicsVal></min>
+            <max><PhysicsVal type="double">100000</PhysicsVal></max>
+            <step><PhysicsVal type="double">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="double">1</PhysicsVal></errordefault>
+        </scale>  
+    </ChannelInfo>                  
+    <ChannelInfo name="Egap" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Egap" physicsunitname="eV" physicsunitsymbol="eV" multiplier="none" selected="true">
+            <min><PhysicsVal type="double">0.0</PhysicsVal></min>
+            <max><PhysicsVal type="double">20.0</PhysicsVal></max>
+            <step><PhysicsVal type="double">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="double">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Vbi" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Vbi" physicsunitname="Volt" physicsunitsymbol="V" multiplier="none" selected="true">
+            <min><PhysicsVal type="double">0.0</PhysicsVal></min>
+            <max><PhysicsVal type="double">10.0</PhysicsVal></max>
+            <step><PhysicsVal type="double">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="double">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="E" independent="false" direction="CHANNEL_INPUT">
+        <scale label="E" physicsunitname="V/cm" physicsunitsymbol="V/cm" multiplier="none" selected="true">
+            <min><PhysicsVal type="double">-1000.0</PhysicsVal></min>
+            <max><PhysicsVal type="double">1000.0</PhysicsVal></max>
+            <step><PhysicsVal type="double">0.0001</PhysicsVal></step>
+            <errordefault><PhysicsVal type="double">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>    
+    <ChannelInfo name="Temperatura" independent="false" direction="CHANNEL_INPUT">
+        <scale label="T" physicsunitname="Kelvin" physicsunitsymbol="K" multiplier="none" selected="true">
+            <min><PhysicsVal type="double">100</PhysicsVal></min>
+            <max><PhysicsVal type="double">600</PhysicsVal></max>
+            <step><PhysicsVal type="double">0.0001</PhysicsVal></step>
+            <errordefault><PhysicsVal type="double">1</PhysicsVal></errordefault>
+        </scale>  
+    </ChannelInfo>
+    <ChannelInfo name="Nivel Fermi" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Nivel Fermi" physicsunitname="eV" physicsunitsymbol="eV" multiplier="none" selected="true">
+            <min><PhysicsVal type="double">-100.0</PhysicsVal></min>
+            <max><PhysicsVal type="double">100.0</PhysicsVal></max>
+            <step><PhysicsVal type="double">0.0001</PhysicsVal></step>
+            <errordefault><PhysicsVal type="double">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>    
+    <ChannelInfo name="Concentracao Dadores" independent="false" direction="CHANNEL_INPUT">
+        <scale label="nD" physicsunitname="centimetro^-3" physicsunitsymbol="cm^-3" multiplier="none" selected="true">
+            <min><PhysicsVal type="double">0</PhysicsVal></min>
+            <max><PhysicsVal type="double">1000000000000000000000000</PhysicsVal></max>
+            <step><PhysicsVal type="double">0.0001</PhysicsVal></step>
+            <errordefault><PhysicsVal type="double">1</PhysicsVal></errordefault>
+        </scale>  
+    </ChannelInfo>
+    <ChannelInfo name="Concentracao Aceitadores" independent="false" direction="CHANNEL_INPUT">
+        <scale label="nA" physicsunitname="centimetro^-3" physicsunitsymbol="cm^-3" multiplier="none" selected="true">
+            <min><PhysicsVal type="double">0</PhysicsVal></min>
+            <max><PhysicsVal type="double">1000000000000000000000000</PhysicsVal></max>
+            <step><PhysicsVal type="double">0.0001</PhysicsVal></step>
+            <errordefault><PhysicsVal type="double">1</PhysicsVal></errordefault>
+        </scale>  
+    </ChannelInfo>
+    <ChannelInfo name="Potencial" independent="false" direction="CHANNEL_INPUT">
+        <scale label="V" physicsunitname="Volt" physicsunitsymbol="V" multiplier="none" selected="true">
+            <min><PhysicsVal type="double">-10</PhysicsVal></min>
+            <max><PhysicsVal type="double">10</PhysicsVal></max>
+            <step><PhysicsVal type="double">0.0001</PhysicsVal></step>
+            <errordefault><PhysicsVal type="double">1</PhysicsVal></errordefault>
+        </scale>  
+    </ChannelInfo>
+ </HardwareInfo>
