@@ -1,0 +1,69 @@
+<Apparatus location="ELAB_WEBROBOT_V01"
+	customizerClassLocationBundleKey="webrobot$rec.exp.customizer.webrobot"
+	toolTipBundleKey="webrobot$rec.exp.tip.webrobot" iconLocationBundleKey="webrobot$rec.exp.icon.webrobot"
+	displayStringBundleKey="webrobot$rec.exp.title.webrobot"
+	desktopLocationBundleKey="webrobot$rec.exp.background.webrobot" order="1">
+	<LocalizationBundle name="webrobot"
+		location="recresource:///pt/utl/ist/elab/client/webrobot/resources/messages" />
+	<WebResource locationBundleKey="webrobot$rec.exp.url.webrobot.1"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="webrobot$rec.exp.url.webrobot.title.1"
+		toolTipLocationBundleKey="webrobot$rec.exp.url.webrobot.title.1"
+		internalBrowser="false" order="1" />
+	<WebResource locationBundleKey="webrobot$rec.exp.url.webrobot.2"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="webrobot$rec.exp.url.webrobot.title.2"
+		toolTipLocationBundleKey="webrobot$rec.exp.url.webrobot.title.2"
+		internalBrowser="false" order="2" />
+	<WebResource locationBundleKey="webrobot$rec.exp.url.webrobot.3"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="webrobot$rec.exp.url.webrobot.title.3"
+		toolTipLocationBundleKey="webrobot$rec.exp.url.webrobot.title.3"
+		internalBrowser="false" order="3" />
+	<WebResource locationBundleKey="webrobot$rec.exp.url.webrobot.video"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+		displayStringBundleKey="webrobot$rec.exp.url.webrobot.title.video"
+		toolTipLocationBundleKey="webrobot$rec.exp.url.webrobot.title.video"
+		internalBrowser="false" order="4" />
+	<Display classLocationBundleKey="webrobot$rec.exp.display.webrobot.loc.sensor"
+		toolTipBundleKey="webrobot$rec.exp.display.webrobot.tip.sensor"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="webrobot$rec.exp.display.webrobot.title.sensor"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="webrobot$rec.exp.display.webrobot.loc.sensor.2"
+		toolTipBundleKey="webrobot$rec.exp.display.webrobot.tip.sensor.2"
+		iconLocationBundleKey="webrobot$rec.exp.display.webrobot.icon.sensor.2"
+		displayStringBundleKey="webrobot$rec.exp.display.webrobot.title.sensor.2"
+		offlineCapable="false" order="2" />
+	<Display classLocationBundleKey="webrobot$rec.exp.display.webrobot.loc.1"
+		toolTipBundleKey="webrobot$rec.exp.display.webrobot.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="webrobot$rec.exp.display.webrobot.title.1"
+		offlineCapable="false" order="3" />
+	<Display classLocationBundleKey="webrobot$rec.exp.display.webrobot.loc.2"
+		toolTipBundleKey="webrobot$rec.exp.display.webrobot.tip.2"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="webrobot$rec.exp.display.webrobot.title.2"
+		offlineCapable="false" order="4" />
+	<Display classLocationBundleKey="webrobot$rec.exp.display.webrobot.loc.3"
+		toolTipBundleKey="webrobot$rec.exp.display.webrobot.tip.3"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="webrobot$rec.exp.display.webrobot.title.3"
+		offlineCapable="false" order="5" />
+	<Display classLocationBundleKey="webrobot$rec.exp.display.webrobot.loc.4"
+		toolTipBundleKey="webrobot$rec.exp.display.webrobot.tip.4"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="webrobot$rec.exp.display.webrobot.title.4"
+		offlineCapable="false" order="6" />
+	<Display classLocationBundleKey="webrobot$rec.exp.display.webrobot.loc.5"
+		toolTipBundleKey="webrobot$rec.exp.display.webrobot.tip.5"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="webrobot$rec.exp.display.webrobot.title.5"
+		offlineCapable="false" order="7" />
+	<Display classLocationBundleKey="webrobot$rec.exp.display.webrobot.loc.6"
+		toolTipBundleKey="webrobot$rec.exp.display.webrobot.tip.6"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="webrobot$rec.exp.display.webrobot.title.6"
+		offlineCapable="false" order="8" />
+</Apparatus>
+		

@@ -1,0 +1,24 @@
+<apparatus toolTipBundleKey="polaroid$rec.exp.tip.polaroid"
+	location="ELAB_POLAROID_V1.3" iconLocationBundleKey="polaroid$rec.exp.icon.polaroid"
+	headerDisplayClassLocationBundleKey=""
+	displayStringBundleKey="polaroid$rec.exp.title.polaroid"
+	displayFactoryClassLocationBundleKey=""
+	desktopLocationBundleKey="polaroid$rec.exp.background.polaroid"
+	dataModelClassLocationBundleKey=""
+	customizerClassLocationBundleKey="polaroid$rec.exp.customizer.polaroid"
+	visible="true" selected="true" order="0" enabled="false" connected="false">
+		<localizationBundle name="polaroid"
+		location="recresource:///pt/utl/ist/elab/client/polaroid/resources/messages" />
+	<mediaConfig videoLocation="polaroid$rec.exp.url.polaroid.video"
+		canSave="true" offlinePlay="true" />
+	<display toolTipBundleKey="polaroid$rec.exp.display.polaroid.tip.1"
+		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="polaroid$rec.exp.display.polaroid.title.1"
+		classLocationBundleKey="polaroid$rec.exp.display.polaroid.loc.1"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="polaroid$rec.exp.display.polaroid.tip.2"
+	offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+	displayStringBundleKey="polaroid$rec.exp.display.polaroid.title.2"
+	classLocationBundleKey="polaroid$rec.exp.display.polaroid.loc.2"
+	visible="true" selected="true" order="0" enabled="false" connected="false" />
+</apparatus>
