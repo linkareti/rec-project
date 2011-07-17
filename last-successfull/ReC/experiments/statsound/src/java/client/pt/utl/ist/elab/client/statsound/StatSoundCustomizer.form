@@ -1,0 +1,1520 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="soundVelocityMicGroup">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="statSoundIMicGroup">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="statSoundIIMicGroup">
+    </Component>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="name" type="java.lang.String" value="Form" noResource="true"/>
+  </Properties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="2"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jTabbedPaneStatSound" min="-2" pref="855" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="12" pref="12" max="12" attributes="0"/>
+                      <Component id="jPanelSend" pref="843" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jTabbedPaneStatSound" min="-2" pref="320" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanelSend" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jPanelSend">
+      <Properties>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[350, 42]"/>
+        </Property>
+        <Property name="name" type="java.lang.String" value="jPanelSend" noResource="true"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[350, 42]"/>
+        </Property>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JButton" name="jButtonOK">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.ok" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+            </Property>
+            <Property name="name" type="java.lang.String" value="jButtonOK" noResource="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonOKActionPerformed"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+              <GridBagConstraints gridX="0" gridY="1" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonCancel">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.cancel" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+            </Property>
+            <Property name="name" type="java.lang.String" value="jButtonCancel" noResource="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelActionPerformed"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+              <GridBagConstraints gridX="1" gridY="1" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="jLabel1" noResource="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+              <GridBagConstraints gridX="2" gridY="1" gridWidth="1" gridHeight="1" fill="2" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="10.0" weightY="0.0"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonDefaults">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.dftcfg.statsound.title.1" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+            </Property>
+            <Property name="name" type="java.lang.String" value="jButtonDefaults" noResource="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDefaultsActionPerformed"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+              <GridBagConstraints gridX="3" gridY="1" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JTabbedPane" name="jTabbedPaneStatSound">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="jTabbedPaneStatSound" noResource="true"/>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="jPanelSoundSpeed">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="jPanelSoundSpeed" noResource="true"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[1000, 637]"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Velocidade do Som">
+                <Property name="tabTitle" type="java.lang.String" resourceKey="jPanelSoundSpeed.TabConstraints.tabTitle"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jPanelSoundVelocityMics" min="-2" pref="410" max="-2" attributes="0"/>
+                              <EmptySpace min="10" pref="10" max="10" attributes="0"/>
+                              <Component id="jPanelSoundVelocityNSamples" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jPanelSoundVelocityPiston" min="-2" pref="410" max="-2" attributes="0"/>
+                              <EmptySpace min="10" pref="10" max="10" attributes="0"/>
+                              <Component id="jPanelSoundVelocityWaveForm" min="-2" pref="400" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jPanelSoundVelocityFrequency" min="-2" pref="410" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="12" pref="12" max="12" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jPanelSoundVelocityMics" min="-2" max="-2" attributes="0"/>
+                          <Component id="jPanelSoundVelocityNSamples" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jPanelSoundVelocityPiston" min="-2" max="-2" attributes="0"/>
+                          <Component id="jPanelSoundVelocityWaveForm" min="-2" pref="80" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                      <Component id="jPanelSoundVelocityFrequency" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="jPanelSoundVelocityMics">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Canais">
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.channels" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+                <Property name="name" type="java.lang.String" value="jPanelSoundVelocityMics" noResource="true"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[408, 95]"/>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace pref="15" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                  <Component id="jLabelSoundVelocityMic1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="59" pref="59" max="59" attributes="0"/>
+                                  <Component id="jLabelSoundVelocityMic2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="15" pref="15" max="15" attributes="0"/>
+                                  <Component id="jLabelSoundVelocityMic3" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="15" pref="15" max="15" attributes="0"/>
+                                  <Component id="jLabelSoundVelocityMic4" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabelSoundVelocityCH1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="20" pref="20" max="20" attributes="0"/>
+                                  <Component id="jRadioButtonSoundVelocityMic1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="24" pref="24" max="24" attributes="0"/>
+                                  <Component id="jLabelSoundVelocityCH2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="18" pref="18" max="18" attributes="0"/>
+                                  <Component id="jRadioButtonSoundVelocityMic2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="27" pref="27" max="27" attributes="0"/>
+                                  <Component id="jRadioButtonSoundVelocityMic3" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="27" pref="27" max="27" attributes="0"/>
+                                  <Component id="jRadioButtonSoundVelocityMic4" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxSoundVelocityHeat" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabelSoundVelocityMic1" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
+                              <Component id="jLabelSoundVelocityMic2" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
+                              <Component id="jLabelSoundVelocityMic3" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
+                              <Component id="jLabelSoundVelocityMic4" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="2" pref="2" max="2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabelSoundVelocityCH1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jRadioButtonSoundVelocityMic1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelSoundVelocityCH2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jRadioButtonSoundVelocityMic2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jRadioButtonSoundVelocityMic3" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                  <Component id="jCheckBoxSoundVelocityHeat" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonSoundVelocityMic4" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="16" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabelSoundVelocityMic1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jLabelSoundVelocityMic1.text"/>
+                    <Property name="name" type="java.lang.String" value="jLabelSoundVelocityMic1" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelSoundVelocityMic2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jLabelSoundVelocityMic2.text"/>
+                    <Property name="name" type="java.lang.String" value="jLabelSoundVelocityMic2" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelSoundVelocityMic3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jLabelSoundVelocityMic3.text"/>
+                    <Property name="name" type="java.lang.String" value="jLabelSoundVelocityMic3" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelSoundVelocityMic4">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jLabelSoundVelocityMic4.text"/>
+                    <Property name="name" type="java.lang.String" value="jLabelSoundVelocityMic4" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelSoundVelocityCH1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jLabelSoundVelocityCH1.text"/>
+                    <Property name="name" type="java.lang.String" value="jLabelSoundVelocityCH1" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelSoundVelocityCH2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jLabelSoundVelocityCH2.text"/>
+                    <Property name="name" type="java.lang.String" value="jLabelSoundVelocityCH2" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButtonSoundVelocityMic1">
+                  <Properties>
+                    <Property name="selected" type="boolean" value="true"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="jRadioButtonSoundVelocityMic1" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButtonSoundVelocityMic2">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="soundVelocityMicGroup"/>
+                    </Property>
+                    <Property name="selected" type="boolean" value="true"/>
+                    <Property name="name" type="java.lang.String" value="jRadioButtonSoundVelocityMic2" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButtonSoundVelocityMic3">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="soundVelocityMicGroup"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="jRadioButtonSoundVelocityMic3" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButtonSoundVelocityMic4">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="soundVelocityMicGroup"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="jRadioButtonSoundVelocityMic4" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="jCheckBoxSoundVelocityHeat">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.heating" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="jCheckBoxSoundVelocityHeat" noResource="true"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanelSoundVelocityNSamples">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="N&#xba; de amostras">
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.nsamples" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+                <Property name="name" type="java.lang.String" value="jPanelSoundVelocityNSamples" noResource="true"/>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jSliderSoundVelocityNSamples" min="-2" pref="350" max="-2" attributes="0"/>
+                          <Component id="jTextFieldSoundVelocityNSamples" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="87" pref="87" max="87" attributes="0"/>
+                          <Component id="jLabelSoundVelocityNSamplesAlert" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jSliderSoundVelocityNSamples" min="-2" pref="55" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                                  <Component id="jTextFieldSoundVelocityNSamples" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="jLabelSoundVelocityNSamplesAlert" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JTextField" name="jTextFieldSoundVelocityNSamples">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" resourceKey="jTextFieldSoundVelocityNSamples.text"/>
+                    <Property name="focusable" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="jTextFieldSoundVelocityNSamples" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelSoundVelocityNSamplesAlert">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" resourceKey="jLabelSoundVelocityNSamplesAlert.foreground"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.maxsamples" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="jLabelSoundVelocityNSamplesAlert" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JSlider" name="jSliderSoundVelocityNSamples">
+                  <Properties>
+                    <Property name="majorTickSpacing" type="int" value="500"/>
+                    <Property name="maximum" type="int" value="5000"/>
+                    <Property name="minimum" type="int" value="500"/>
+                    <Property name="minorTickSpacing" type="int" value="500"/>
+                    <Property name="paintLabels" type="boolean" value="true"/>
+                    <Property name="paintTicks" type="boolean" value="true"/>
+                    <Property name="name" type="java.lang.String" value="jSliderSoundVelocityNSamples" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderSoundVelocityNSamplesStateChanged"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanelSoundVelocityPiston">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Posi&#xe7;&#xe3;o do &#xea;mbolo [mm]">
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.piston" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" resourceKey="jPanelSoundVelocityPiston.foreground"/>
+                <Property name="name" type="java.lang.String" value="jPanelSoundVelocityPiston" noResource="true"/>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jSliderSoundVelocityPiston" min="-2" pref="350" max="-2" attributes="0"/>
+                          <Component id="jTextFieldSoundVelocityPiston" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jSliderSoundVelocityPiston" min="-2" pref="55" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                          <Component id="jTextFieldSoundVelocityPiston" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JSlider" name="jSliderSoundVelocityPiston">
+                  <Properties>
+                    <Property name="majorTickSpacing" type="int" value="40"/>
+                    <Property name="maximum" type="int" value="1484"/>
+                    <Property name="minimum" type="int" value="1264"/>
+                    <Property name="minorTickSpacing" type="int" value="20"/>
+                    <Property name="paintLabels" type="boolean" value="true"/>
+                    <Property name="paintTicks" type="boolean" value="true"/>
+                    <Property name="value" type="int" value="1300"/>
+                    <Property name="name" type="java.lang.String" value="jSliderSoundVelocityPiston" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderSoundVelocityPistonStateChanged"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JTextField" name="jTextFieldSoundVelocityPiston">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" resourceKey="jTextFieldSoundVelocityPiston.text"/>
+                    <Property name="focusable" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="jTextFieldSoundVelocityPiston" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanelSoundVelocityWaveForm">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Forma de onda">
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.waveform" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+                <Property name="name" type="java.lang.String" value="jPanelSoundVelocityWaveForm" noResource="true"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[408, 200]"/>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="15" pref="15" max="15" attributes="0"/>
+                          <Component id="jLabelSoundVelocityWaveForm" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="jComboBoxSoundVelocityWaveForm" min="-2" pref="200" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabelSoundVelocityWaveForm" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="jComboBoxSoundVelocityWaveForm" min="-2" pref="20" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="25" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabelSoundVelocityWaveForm">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.waveform" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="jLabelSoundVelocityWaveForm" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="jComboBoxSoundVelocityWaveForm">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="0"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="jComboBoxSoundVelocityWaveForm" noResource="true"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanelSoundVelocityFrequency">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Frequ&#xea;ncia [Hz]">
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.frequency" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+                <Property name="name" type="java.lang.String" value="jPanelSoundVelocityFrequency" noResource="true"/>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jSliderSoundVelocityFrequency" min="-2" pref="350" max="-2" attributes="0"/>
+                          <Component id="jTextFieldSoundVelocityFrequency" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jSliderSoundVelocityFrequency" min="-2" pref="55" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                          <Component id="jTextFieldSoundVelocityFrequency" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JSlider" name="jSliderSoundVelocityFrequency">
+                  <Properties>
+                    <Property name="majorTickSpacing" type="int" value="200"/>
+                    <Property name="maximum" type="int" value="2000"/>
+                    <Property name="minimum" type="int" value="100"/>
+                    <Property name="minorTickSpacing" type="int" value="100"/>
+                    <Property name="paintLabels" type="boolean" value="true"/>
+                    <Property name="paintTicks" type="boolean" value="true"/>
+                    <Property name="value" type="int" value="250"/>
+                    <Property name="name" type="java.lang.String" value="jSliderSoundVelocityFrequency" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderSoundVelocityFrequencyStateChanged"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JTextField" name="jTextFieldSoundVelocityFrequency">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" resourceKey="jTextFieldSoundVelocityFrequency.text"/>
+                    <Property name="focusable" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="jTextFieldSoundVelocityFrequency" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanelStatSoundI">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="jPanelStatSoundI" noResource="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Ondas estacion&#xe1;rias I">
+                <Property name="tabTitle" type="java.lang.String" resourceKey="jPanelStatSoundI.TabConstraints.tabTitle"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+            <Property name="useNullLayout" type="boolean" value="true"/>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="jPanelStatSoundIMics">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Canais">
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.channels" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+                <Property name="name" type="java.lang.String" value="jPanelStatSoundIMics" noResource="true"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="12" y="12" width="410" height="-1"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace pref="15" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                  <Component id="jLabelStatSoundIMic1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="59" pref="59" max="59" attributes="0"/>
+                                  <Component id="jLabelStatSoundIMic2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="15" pref="15" max="15" attributes="0"/>
+                                  <Component id="jLabelStatSoundIMic3" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="15" pref="15" max="15" attributes="0"/>
+                                  <Component id="jLabelStatSoundIMic4" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabelStatSoundICH1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="20" pref="20" max="20" attributes="0"/>
+                                  <Component id="jRadioButtonStatSoundIMic1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="24" pref="24" max="24" attributes="0"/>
+                                  <Component id="jLabelStatSoundICH2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="18" pref="18" max="18" attributes="0"/>
+                                  <Component id="jRadioButtonStatSoundIMic2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="27" pref="27" max="27" attributes="0"/>
+                                  <Component id="jRadioButtonStatSoundIMic3" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="27" pref="27" max="27" attributes="0"/>
+                                  <Component id="jRadioButtonStatSoundIMic4" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxStatSoundIHeat" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabelStatSoundIMic1" min="-2" pref="23" max="-2" attributes="0"/>
+                              <Component id="jLabelStatSoundIMic2" min="-2" pref="23" max="-2" attributes="0"/>
+                              <Component id="jLabelStatSoundIMic3" min="-2" pref="23" max="-2" attributes="0"/>
+                              <Component id="jLabelStatSoundIMic4" min="-2" pref="23" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="2" pref="2" max="2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabelStatSoundICH1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jRadioButtonStatSoundIMic1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelStatSoundICH2" min="-2" max="-2" attributes="0"/>
+                              <Component id="jRadioButtonStatSoundIMic2" min="-2" max="-2" attributes="0"/>
+                              <Component id="jRadioButtonStatSoundIMic3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                  <Component id="jCheckBoxStatSoundIHeat" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonStatSoundIMic4" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="16" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabelStatSoundIMic1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundIMic1.text"/>
+                    <Property name="name" type="java.lang.String" value="jLabelStatSoundIMic1" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelStatSoundIMic2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundIMic2.text"/>
+                    <Property name="name" type="java.lang.String" value="jLabelStatSoundIMic2" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelStatSoundIMic3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundIMic3.text"/>
+                    <Property name="name" type="java.lang.String" value="jLabelStatSoundIMic3" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelStatSoundIMic4">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundIMic4.text"/>
+                    <Property name="name" type="java.lang.String" value="jLabelStatSoundIMic4" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelStatSoundICH1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundICH1.text"/>
+                    <Property name="name" type="java.lang.String" value="jLabelStatSoundICH1" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelStatSoundICH2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundICH2.text"/>
+                    <Property name="name" type="java.lang.String" value="jLabelStatSoundICH2" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButtonStatSoundIMic1">
+                  <Properties>
+                    <Property name="selected" type="boolean" value="true"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="jRadioButtonStatSoundIMic1" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButtonStatSoundIMic2">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="statSoundIMicGroup"/>
+                    </Property>
+                    <Property name="selected" type="boolean" value="true"/>
+                    <Property name="name" type="java.lang.String" value="jRadioButtonStatSoundIMic2" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButtonStatSoundIMic3">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="statSoundIMicGroup"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="jRadioButtonStatSoundIMic3" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButtonStatSoundIMic4">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="statSoundIMicGroup"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="jRadioButtonStatSoundIMic4" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="jCheckBoxStatSoundIHeat">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.heating" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="jCheckBoxStatSoundIHeat" noResource="true"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanelStatSoundINSamples">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="N&#xba; de amostras">
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.nsamples" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+                <Property name="name" type="java.lang.String" value="jPanelStatSoundINSamples" noResource="true"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="432" y="12" width="-1" height="-1"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jSliderStatSoundINSamples" min="-2" pref="350" max="-2" attributes="0"/>
+                          <Component id="jTextFieldStatSoundINSamples" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="87" pref="87" max="87" attributes="0"/>
+                          <Component id="jLabelStatSoundINSamplesAlert" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jSliderStatSoundINSamples" min="-2" pref="55" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                                  <Component id="jTextFieldStatSoundINSamples" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="jLabelStatSoundINSamplesAlert" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JTextField" name="jTextFieldStatSoundINSamples">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundINSamples.text"/>
+                    <Property name="focusable" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="jTextFieldStatSoundINSamples" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelStatSoundINSamplesAlert">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" resourceKey="jLabelStatSoundINSamplesAlert.foreground"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.maxsamples" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="jLabelStatSoundINSamplesAlert" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JSlider" name="jSliderStatSoundINSamples">
+                  <Properties>
+                    <Property name="majorTickSpacing" type="int" value="40"/>
+                    <Property name="maximum" type="int" value="130"/>
+                    <Property name="minimum" type="int" value="1"/>
+                    <Property name="minorTickSpacing" type="int" value="20"/>
+                    <Property name="paintLabels" type="boolean" value="true"/>
+                    <Property name="paintTicks" type="boolean" value="true"/>
+                    <Property name="name" type="java.lang.String" value="jSliderStatSoundINSamples" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderStatSoundINSamplesStateChanged"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanelStatSoundPistonIInitial">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Posi&#xe7;&#xe3;o do &#xea;mbolo [mm]">
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.pistonstart" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+                <Property name="name" type="java.lang.String" value="jPanelStatSoundPistonIInitial" noResource="true"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="12" y="113" width="410" height="-1"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jSliderStatSoundIPistonInitial" min="-2" pref="350" max="-2" attributes="0"/>
+                          <Component id="jTextFieldStatSoundIPistonInitial" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jSliderStatSoundIPistonInitial" min="-2" pref="55" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                          <Component id="jTextFieldStatSoundIPistonInitial" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JSlider" name="jSliderStatSoundIPistonInitial">
+                  <Properties>
+                    <Property name="majorTickSpacing" type="int" value="40"/>
+                    <Property name="maximum" type="int" value="1484"/>
+                    <Property name="minimum" type="int" value="1264"/>
+                    <Property name="minorTickSpacing" type="int" value="20"/>
+                    <Property name="paintLabels" type="boolean" value="true"/>
+                    <Property name="paintTicks" type="boolean" value="true"/>
+                    <Property name="value" type="int" value="1300"/>
+                    <Property name="name" type="java.lang.String" value="jSliderStatSoundIPistonInitial" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderStatSoundIPistonInitialStateChanged"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JTextField" name="jTextFieldStatSoundIPistonInitial">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIPistonInitial.text"/>
+                    <Property name="focusable" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIPistonInitial" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanelStatSoundIPistonEnd">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Posi&#xe7;&#xe3;o final do &#xea;mbolo [mm]">
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.pistonend" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+                <Property name="name" type="java.lang.String" value="jPanelStatSoundIPistonEnd" noResource="true"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="432" y="113" width="-1" height="-1"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jSliderStatSoundIPistonEnd" min="-2" pref="350" max="-2" attributes="0"/>
+                          <Component id="jTextFieldStatSoundIPistonEnd" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jSliderStatSoundIPistonEnd" min="-2" pref="55" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                          <Component id="jTextFieldStatSoundIPistonEnd" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JSlider" name="jSliderStatSoundIPistonEnd">
+                  <Properties>
+                    <Property name="majorTickSpacing" type="int" value="40"/>
+                    <Property name="maximum" type="int" value="1484"/>
+                    <Property name="minimum" type="int" value="1264"/>
+                    <Property name="minorTickSpacing" type="int" value="20"/>
+                    <Property name="paintLabels" type="boolean" value="true"/>
+                    <Property name="paintTicks" type="boolean" value="true"/>
+                    <Property name="value" type="int" value="1400"/>
+                    <Property name="name" type="java.lang.String" value="jSliderStatSoundIPistonEnd" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderStatSoundIPistonEndStateChanged"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JTextField" name="jTextFieldStatSoundIPistonEnd">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIPistonEnd.text"/>
+                    <Property name="focusable" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIPistonEnd" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanelStatSoundIFrequency">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Frequ&#xea;ncia [Hz]">
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.frequency" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+                <Property name="name" type="java.lang.String" value="jPanelStatSoundIFrequency" noResource="true"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="12" y="199" width="410" height="-1"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jSliderStatSoundIFrequency" min="-2" pref="350" max="-2" attributes="0"/>
+                          <Component id="jTextFieldStatSoundIFrequency" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jSliderStatSoundIFrequency" min="-2" pref="55" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                          <Component id="jTextFieldStatSoundIFrequency" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JSlider" name="jSliderStatSoundIFrequency">
+                  <Properties>
+                    <Property name="majorTickSpacing" type="int" value="200"/>
+                    <Property name="maximum" type="int" value="2000"/>
+                    <Property name="minimum" type="int" value="100"/>
+                    <Property name="minorTickSpacing" type="int" value="100"/>
+                    <Property name="paintLabels" type="boolean" value="true"/>
+                    <Property name="paintTicks" type="boolean" value="true"/>
+                    <Property name="value" type="int" value="250"/>
+                    <Property name="name" type="java.lang.String" value="jSliderStatSoundIFrequency" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderStatSoundIFrequencyStateChanged"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JTextField" name="jTextFieldStatSoundIFrequency">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIFrequency.text"/>
+                    <Property name="focusable" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIFrequency" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanelStatSoundII">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="jPanelStatSoundII" noResource="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Ondas estacion&#xe1;rias II">
+                <Property name="tabTitle" type="java.lang.String" resourceKey="jPanelStatSoundII.TabConstraints.tabTitle"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+            <Property name="useNullLayout" type="boolean" value="true"/>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="jPanelStatSoundIIMics">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Canais">
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.channels" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+                <Property name="name" type="java.lang.String" value="jPanelStatSoundIIMics" noResource="true"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="12" y="12" width="410" height="-1"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace pref="15" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                  <Component id="jLabelStatSoundIIMic1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="59" pref="59" max="59" attributes="0"/>
+                                  <Component id="jLabelStatSoundIIMic2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="15" pref="15" max="15" attributes="0"/>
+                                  <Component id="jLabelStatSoundIIMic3" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="15" pref="15" max="15" attributes="0"/>
+                                  <Component id="jLabelStatSoundIIMic4" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabelStatSoundIICH1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="20" pref="20" max="20" attributes="0"/>
+                                  <Component id="jRadioButtonStatSoundIIMic1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="24" pref="24" max="24" attributes="0"/>
+                                  <Component id="jLabelStatSoundIICH2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="18" pref="18" max="18" attributes="0"/>
+                                  <Component id="jRadioButtonStatSoundIIMic2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="27" pref="27" max="27" attributes="0"/>
+                                  <Component id="jRadioButtonStatSoundIIMic3" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="27" pref="27" max="27" attributes="0"/>
+                                  <Component id="jRadioButtonStatSoundIIMic4" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxStatSoundIIHeat" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabelStatSoundIIMic1" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
+                              <Component id="jLabelStatSoundIIMic2" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
+                              <Component id="jLabelStatSoundIIMic3" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
+                              <Component id="jLabelStatSoundIIMic4" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="2" pref="2" max="2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabelStatSoundIICH1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jRadioButtonStatSoundIIMic1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelStatSoundIICH2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jRadioButtonStatSoundIIMic2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jRadioButtonStatSoundIIMic3" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                  <Component id="jCheckBoxStatSoundIIHeat" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonStatSoundIIMic4" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="16" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabelStatSoundIIMic1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundIIMic1.text"/>
+                    <Property name="name" type="java.lang.String" value="jLabelStatSoundIIMic1" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelStatSoundIIMic2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundIIMic2.text"/>
+                    <Property name="name" type="java.lang.String" value="jLabelStatSoundIIMic2" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelStatSoundIIMic3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundIIMic3.text"/>
+                    <Property name="name" type="java.lang.String" value="jLabelStatSoundIIMic3" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelStatSoundIIMic4">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundIIMic4.text"/>
+                    <Property name="name" type="java.lang.String" value="jLabelStatSoundIIMic4" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelStatSoundIICH1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundIICH1.text"/>
+                    <Property name="name" type="java.lang.String" value="jLabelStatSoundIICH1" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelStatSoundIICH2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundIICH2.text"/>
+                    <Property name="name" type="java.lang.String" value="jLabelStatSoundIICH2" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButtonStatSoundIIMic1">
+                  <Properties>
+                    <Property name="selected" type="boolean" value="true"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="jRadioButtonStatSoundIIMic1" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButtonStatSoundIIMic2">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="statSoundIIMicGroup"/>
+                    </Property>
+                    <Property name="selected" type="boolean" value="true"/>
+                    <Property name="name" type="java.lang.String" value="jRadioButtonStatSoundIIMic2" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButtonStatSoundIIMic3">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="statSoundIIMicGroup"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="jRadioButtonStatSoundIIMic3" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButtonStatSoundIIMic4">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="statSoundIIMicGroup"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="jRadioButtonStatSoundIIMic4" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="jCheckBoxStatSoundIIHeat">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.heating" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="jCheckBoxStatSoundIIHeat" noResource="true"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanelStatSoundIINSamples">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="N&#xba; de amostras">
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.nsamples" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+                <Property name="name" type="java.lang.String" value="jPanelStatSoundIINSamples" noResource="true"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="432" y="12" width="-1" height="-1"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jSliderStatSoundIINSamples" min="-2" pref="350" max="-2" attributes="0"/>
+                          <Component id="jTextFieldStatSoundIINSamples" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="87" pref="87" max="87" attributes="0"/>
+                          <Component id="jLabelStatSoundIINSamplesAlert" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jSliderStatSoundIINSamples" min="-2" pref="55" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                                  <Component id="jTextFieldStatSoundIINSamples" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="jLabelStatSoundIINSamplesAlert" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JTextField" name="jTextFieldStatSoundIINSamples">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIINSamples.text"/>
+                    <Property name="focusable" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIINSamples" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelStatSoundIINSamplesAlert">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" resourceKey="jLabelStatSoundIINSamplesAlert.foreground"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.maxsamples" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="jLabelStatSoundIINSamplesAlert" noResource="true"/>
+                  </Properties>
+                  <AccessibilityProperties>
+                    <Property name="AccessibleContext.accessibleName" type="java.lang.String" resourceKey="jLabelStatSoundIINSamplesAlert.AccessibleContext.accessibleName"/>
+                  </AccessibilityProperties>
+                </Component>
+                <Component class="javax.swing.JSlider" name="jSliderStatSoundIINSamples">
+                  <Properties>
+                    <Property name="majorTickSpacing" type="int" value="100"/>
+                    <Property name="maximum" type="int" value="600"/>
+                    <Property name="minimum" type="int" value="1"/>
+                    <Property name="minorTickSpacing" type="int" value="50"/>
+                    <Property name="paintLabels" type="boolean" value="true"/>
+                    <Property name="paintTicks" type="boolean" value="true"/>
+                    <Property name="snapToTicks" type="boolean" value="true"/>
+                    <Property name="value" type="int" value="400"/>
+                    <Property name="name" type="java.lang.String" value="jSliderStatSoundIINSamples" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderStatSoundIINSamplesStateChanged"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanelStatSoundIIPiston">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Posi&#xe7;&#xe3;o do &#xea;mbolo [mm]">
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.piston" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+                <Property name="name" type="java.lang.String" value="jPanelStatSoundIIPiston" noResource="true"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="12" y="113" width="410" height="-1"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jSliderStatSoundIIPiston" min="-2" pref="350" max="-2" attributes="0"/>
+                          <Component id="jTextFieldStatSoundIIPiston" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jSliderStatSoundIIPiston" min="-2" pref="55" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                          <Component id="jTextFieldStatSoundIIPiston" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JSlider" name="jSliderStatSoundIIPiston">
+                  <Properties>
+                    <Property name="majorTickSpacing" type="int" value="40"/>
+                    <Property name="maximum" type="int" value="1484"/>
+                    <Property name="minimum" type="int" value="1264"/>
+                    <Property name="minorTickSpacing" type="int" value="20"/>
+                    <Property name="paintLabels" type="boolean" value="true"/>
+                    <Property name="paintTicks" type="boolean" value="true"/>
+                    <Property name="value" type="int" value="1300"/>
+                    <Property name="name" type="java.lang.String" value="jSliderStatSoundIIPiston" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderStatSoundIIPistonStateChanged"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JTextField" name="jTextFieldStatSoundIIPiston">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIIPiston.text"/>
+                    <Property name="focusable" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIIPiston" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanelStatSoundIIFrequencyInitial">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Frequ&#xea;ncia inicial [Hz]">
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.freqstart" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+                <Property name="name" type="java.lang.String" value="jPanelStatSoundIIFrequencyInitial" noResource="true"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="12" y="199" width="410" height="-1"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jSliderStatSoundIIFrequencyInitial" min="-2" pref="350" max="-2" attributes="0"/>
+                          <Component id="jTextFieldStatSoundIIFrequencyInitial" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jSliderStatSoundIIFrequencyInitial" min="-2" pref="55" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                          <Component id="jTextFieldStatSoundIIFrequencyInitial" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JSlider" name="jSliderStatSoundIIFrequencyInitial">
+                  <Properties>
+                    <Property name="majorTickSpacing" type="int" value="200"/>
+                    <Property name="maximum" type="int" value="2000"/>
+                    <Property name="minimum" type="int" value="100"/>
+                    <Property name="minorTickSpacing" type="int" value="100"/>
+                    <Property name="paintLabels" type="boolean" value="true"/>
+                    <Property name="paintTicks" type="boolean" value="true"/>
+                    <Property name="value" type="int" value="250"/>
+                    <Property name="name" type="java.lang.String" value="jSliderStatSoundIIFrequencyInitial" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderStatSoundIIFrequencyInitialStateChanged"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JTextField" name="jTextFieldStatSoundIIFrequencyInitial">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIIFrequencyInitial.text"/>
+                    <Property name="focusable" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIIFrequencyInitial" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanelStatSoundIIFrequencyEnd">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Frequ&#xea;ncia final [Hz]">
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.efreq" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+                <Property name="name" type="java.lang.String" value="jPanelStatSoundIIFrequencyEnd" noResource="true"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="432" y="199" width="-1" height="-1"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jSliderStatSoundIIFrequencyEnd" min="-2" pref="350" max="-2" attributes="0"/>
+                          <Component id="jTextFieldStatSoundIIFrequencyEnd" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jSliderStatSoundIIFrequencyEnd" alignment="0" min="-2" pref="55" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                          <Component id="jTextFieldStatSoundIIFrequencyEnd" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JSlider" name="jSliderStatSoundIIFrequencyEnd">
+                  <Properties>
+                    <Property name="majorTickSpacing" type="int" value="200"/>
+                    <Property name="maximum" type="int" value="2000"/>
+                    <Property name="minimum" type="int" value="100"/>
+                    <Property name="minorTickSpacing" type="int" value="100"/>
+                    <Property name="paintLabels" type="boolean" value="true"/>
+                    <Property name="paintTicks" type="boolean" value="true"/>
+                    <Property name="value" type="int" value="1000"/>
+                    <Property name="name" type="java.lang.String" value="jSliderStatSoundIIFrequencyEnd" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderStatSoundIIFrequencyEndStateChanged"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JTextField" name="jTextFieldStatSoundIIFrequencyEnd">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIIFrequencyEnd.text"/>
+                    <Property name="focusable" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIIFrequencyEnd" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>
