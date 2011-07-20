@@ -27,37 +27,6 @@
 		<weld.extensions.version>1.0.0-CR2</weld.extensions.version>
 	</properties>
 
-	<repositories>
-		<!-- Several key Java EE APIs and RIs are missing from the Maven Central 
-			Repository -->
-		<!-- The goal is to eventually eliminate the reliance on the JBoss repository -->
-		<repository>
-			<id>jboss-repo</id>
-			<name>JBoss maven repository</name>
-			<url>http://repository.jboss.com/maven2/</url>
-		</repository>
-		<repository>
-			<id>jboss-repo-org</id>
-			<name>JBoss.org maven repository</name>
-			<url>http://repository.jboss.org/maven2/</url>
-		</repository>
-		<repository>
-			<id>prime-repo</id>
-			<name>Prime Technology Maven Repository</name>
-			<url>http://repository.prime.com.tr</url>
-			<layout>default</layout>
-		</repository>
-		<repository>
-			<id>java-net</id>
-			<name>Java.net</name>
-			<url>http://download.java.net/maven</url>
-		</repository>
-		<repository>
-			<id>java-net2</id>
-			<name>Java.net</name>
-			<url>http://download.java.net/maven/2</url>
-		</repository>
-	</repositories>
 	<dependencyManagement>
 		<dependencies>
 			<!-- Import scope will provide versions for dependencies below. -->
