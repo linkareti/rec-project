@@ -4,15 +4,25 @@ import java.awt.Component;
 
 import javax.media.Control;
 
-public class TriangularFunctorControl implements Control {
+public class TriangularFunctorControl implements FunctorControl {
 
-    public TriangularFunctorControl(FunctorType functorType) {
-	// TODO Auto-generated constructor stub
-    }
+	private final TriangularFunctor functor;
 
-    @Override
-    public Component getControlComponent() {
-	return null;
-    }
+	public TriangularFunctorControl(final FunctorType functorType) {
+		this.functor = (TriangularFunctor) functorType.getFunctor();
+	}
+
+	@Override
+	public Component getControlComponent() {
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setFrequency(double frequency) {
+		this.functor.setFrequency(frequency);
+	}
 
 }

@@ -194,6 +194,17 @@ public abstract class BaseDriver implements com.linkare.rec.impl.driver.IDriver 
 	public abstract void extraValidateConfig(HardwareAcquisitionConfig config, HardwareInfo info)
 			throws WrongConfigurationException;
 
+	/**
+	 * 
+	 * @param config the configuration from the GUI. This is the DTO that
+	 *            contains the selected parameters, chosen by the end user.
+	 * @param info the configuration parameters for the hardware. It represents
+	 *            the XML hardware configuration file specified for an
+	 *            experiment.
+	 * @throws WrongConfigurationException
+	 * @throws IncorrectStateException
+	 * @throws TimedOutException
+	 */
 	public abstract void configure(HardwareAcquisitionConfig config, HardwareInfo info)
 			throws WrongConfigurationException, IncorrectStateException, TimedOutException;
 }

@@ -2,18 +2,25 @@ package com.linkare.rec.jmf.media.protocol.function;
 
 import java.awt.Component;
 
-import javax.media.Control;
+public class PulseFunctorControl implements FunctorControl {
 
-public class PulseFunctorControl implements Control {
+	private final PulseFunctor functor;
 
-    public PulseFunctorControl(FunctorType functorType) {
-	// TODO Auto-generated constructor stub
-    }
+	public PulseFunctorControl(final FunctorType functorType) {
+		this.functor = (PulseFunctor) functorType.getFunctor();
+	}
 
-    @Override
-    public Component getControlComponent() {
-	// TODO Auto-generated method stub
-	return null;
-    }
+	@Override
+	public Component getControlComponent() {
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setFrequency(double frequency) {
+		this.functor.setFrequency(frequency);
+	}
 
 }

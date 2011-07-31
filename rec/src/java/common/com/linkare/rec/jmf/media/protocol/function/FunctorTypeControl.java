@@ -29,7 +29,7 @@ public class FunctorTypeControl implements Control {
 	return this.dataSource.getFunctorType();
     }
 
-    public Control getFunctorControl() {
+    public FunctorControl getFunctorControl() {
 	return getFunctorType().getFunctorControl();
     }
     

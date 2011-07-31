@@ -3,9 +3,9 @@
  *
  * Created on 12 de Novembro de 2002, 15:44
  */
-
 package pt.utl.ist.elab.driver.statsound.translators;
 
+import static pt.utl.ist.elab.driver.statsound.StatSoundStampDriver.*;
 import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDriver;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.AbstractStampTranslator;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
@@ -17,12 +17,6 @@ import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 public class StampConfigTranslator extends AbstractStampTranslator {
 
 	public static final String COMMAND_IDENTIFIER = AbstractStampDriver.CONFIG_OUT_STRING;
-
-	public static final String NUMSAMPLES_STR = "number of samples";
-	public static final String POS_INIT_STR = "Piston start";
-	public static final String POS_FIN_STR = "Piston end";
-	public static final String STATUS_STR = "Status";
-	public static final String RESET_STR = "Calibration";
 
 	/** Creates a new instance of StampRelayTranslator */
 	public StampConfigTranslator() {
@@ -37,12 +31,11 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 		if (!command.getCommandIdentifier().equalsIgnoreCase(StampConfigTranslator.COMMAND_IDENTIFIER)) {
 			return false;
 		}
-		final int numSamples = ((Integer) command.getCommandData(StampConfigTranslator.NUMSAMPLES_STR)).intValue();
-		final int xini = ((Integer) command.getCommandData(StampConfigTranslator.POS_INIT_STR)).intValue() - 1264;
-		final int xfin = ((Integer) command.getCommandData(StampConfigTranslator.POS_FIN_STR)).intValue() - 1264;
-		final int reset = ((Integer) command.getCommandData(StampConfigTranslator.RESET_STR)).intValue();
-
-		final String status = (String) command.getCommandData(StampConfigTranslator.STATUS_STR);
+		final int numSamples = ((Integer) command.getCommandData(NUMSAMPLES_COMMAND_PART)).intValue();
+		final int xini = ((Integer) command.getCommandData(PISTON_START_COMMAND_PART)).intValue() - 1264;
+		final int xfin = ((Integer) command.getCommandData(PISTON_END_COMMAND_PART)).intValue() - 1264;
+		final int reset = ((Integer) command.getCommandData(CALIBRATION_COMMAND_PART)).intValue();
+		final String status = (String) command.getCommandData(STATUS_COMMAND_PART);
 
 		String numSamplesStr = "" + numSamples;
 		while (numSamplesStr.length() < 3) {

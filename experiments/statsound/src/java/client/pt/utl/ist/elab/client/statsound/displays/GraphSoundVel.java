@@ -19,10 +19,8 @@ public class GraphSoundVel extends SoundVelocityExperimentGraph {
 
 	public GraphSoundVel() {
 		super();
-		// time - calculated on the proxy of the experiment graph
-		setChannelDisplayX(111);
-		// wave1 and wave2
-		setChannelDisplayYArray(new int[] { 4, 5 });
+		setChannelDisplayX(ChannelConfigConstants.ACQUISITION_TIME_INDEX);
+		setChannelDisplayYArray(new int[] { ChannelConfigConstants.WAVE1_INDEX, ChannelConfigConstants.WAVE1_INDEX });
 	}
 
 	@Override

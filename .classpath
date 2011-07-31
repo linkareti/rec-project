@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="rec/src/java/client"/>
+	<classpathentry kind="src" path="experiments/boylemariotte/src/java/client"/>
+	<classpathentry kind="src" path="experiments/boylemariotte/src/java/server"/>
 	<classpathentry kind="src" path="rec/src/java/common"/>
 	<classpathentry kind="src" path="rec/src/java/ui"/>
 	<classpathentry kind="src" path="other/src/java/JVLC"/>

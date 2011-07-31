@@ -28,9 +28,6 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  */
 public class SoundVelocityExperimentGraph extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3005704584221537484L;
 
 	private JFreeChart chart;

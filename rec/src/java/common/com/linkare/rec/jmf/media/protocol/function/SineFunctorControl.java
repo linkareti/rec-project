@@ -4,7 +4,7 @@ import java.awt.Component;
 
 import javax.media.Control;
 
-public class SineFunctorControl implements Control {
+public class SineFunctorControl implements FunctorControl  {
 
     private SineFunctor functor;
 
@@ -26,7 +26,7 @@ public class SineFunctorControl implements Control {
     }
 
     public void setPhase(double phase) {
-	this.functor.setFrequency(phase);
+	this.functor.setPhase(phase);
     }
 
     public double getPhase() {

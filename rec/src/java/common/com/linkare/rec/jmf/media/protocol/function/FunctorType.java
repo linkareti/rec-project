@@ -15,8 +15,8 @@ public enum FunctorType {
 		}
 
 		@Override
-		public Control getFunctorControl() {
-		    return null;
+		public FunctorControl getFunctorControl() {
+		    return FunctorControl.NULLOP_CONTROL;
 		}
 	},
 	SIN_WAVE(new SineFunctor(), "sin") {
@@ -54,7 +54,7 @@ public enum FunctorType {
 		}
 
 		@Override
-		public Control getFunctorControl() {
+		public FunctorControl getFunctorControl() {
 		    return new SineFunctorControl(this);
 		}
 	},
@@ -82,7 +82,7 @@ public enum FunctorType {
 			triangularFunctor.setFrequency(frequency);
 		}
 		@Override
-		public Control getFunctorControl() {
+		public FunctorControl getFunctorControl() {
 		    return new TriangularFunctorControl(this);
 		}
 	},
@@ -125,7 +125,7 @@ public enum FunctorType {
 
 		}
 		@Override
-		public Control getFunctorControl() {
+		public FunctorControl getFunctorControl() {
 		    return new PulseFunctorControl(this);
 		}
 
@@ -138,8 +138,8 @@ public enum FunctorType {
 						+ " does not support any options (" + optionsStr + ")");
 		}
 		@Override
-		public Control getFunctorControl() {
-		    return null;
+		public FunctorControl  getFunctorControl() {
+		    return FunctorControl.NULLOP_CONTROL;
 		}
 
 	},
@@ -151,8 +151,8 @@ public enum FunctorType {
 						+ " does not support any options (" + optionsStr + ")");
 		}
 		@Override
-		public Control getFunctorControl() {
-		    return null;
+		public FunctorControl  getFunctorControl() {
+		    return FunctorControl.NULLOP_CONTROL;
 		}
 
 	};
@@ -184,6 +184,6 @@ public enum FunctorType {
 
 	public abstract void parseOptions(String optionsStr);
 
-	public abstract Control getFunctorControl();
+	public abstract FunctorControl  getFunctorControl();
 	
 }

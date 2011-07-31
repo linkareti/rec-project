@@ -10,21 +10,27 @@ import java.io.IOException;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
-//import java.util.Hashtable;
+import pt.utl.ist.elab.driver.statsound.SoundWaveType;
+
 /**
  * 
  * @author PC
  */
 public class SoundThread implements Runnable {
 
+	public static final int SIN_WAVE = 0;
+
+	public static final int PINK_NOISE = 1;
+
+	public static final int PULSE = 2;
+
 	private static final int EXTERNAL_BUFFER_SIZE = 44100;
+
 	private final float waveSampleRate = 11025.0F; // 44100.0F; // sampleRate do
 													// audio
+
 	private final float waveUltraSampleRate = 44100.0F; // sampleRate do audio
 	// determina o formato do audio
 	private final AudioFormat waveFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, waveSampleRate, 16, 1, 2,
@@ -44,6 +50,9 @@ public class SoundThread implements Runnable {
 	private int soundType = -1;
 	private int wait;
 
+	// new stuff!
+	private SoundWaveType soundWaveType;
+
 	/** Creates a new instance of SoundThread */
 	public SoundThread() {
 	}
@@ -52,15 +61,18 @@ public class SoundThread implements Runnable {
 		soundType = type;
 	}
 
+	public SoundThread(final SoundWaveType soundWaveType) {
+		this.soundWaveType = soundWaveType;
+	}
+
 	/**
 	 * Runs the thread. This is where the actual playing is done
 	 */
 	@Override
 	public void run() {
 		System.out.println(">>>Starting the sound line!");
-		// starts the linha
-		linha.start();
-
+		// TODO: I'm here, at the moment. The generator code must be executed
+		// here, I guess...
 		int nBytesRead = 0;
 		final byte[] abData = new byte[SoundThread.EXTERNAL_BUFFER_SIZE];
 		System.out.println(">>>Reading the sound data!");
@@ -78,59 +90,7 @@ public class SoundThread implements Runnable {
 		}
 		System.out.println(">>>Draining the sound data!");
 		linha.drain();
-		// System.out.println(">>>Closing the sound line");
-		// linha.close();
-
-		// Thread.currentThread().interrupt();
 	}
-
-	public void newLine() {
-		System.out.println(">>> Creating new oscilator!");
-		try {
-			switch (soundType) {
-			case SoundThread.WAVE:
-				audiostream = new Oscilador(waveFrequency1 * 2, waveFrequency2 * 2, waveAmplitude, length, waveFormat,
-						1);
-				break;
-			case SoundThread.PULSE:
-				// audiostream = new Oscilador(this.waveFrequency1*2,
-				// this.waveFrequency2*2, waveAmplitude, length,
-				// waveFormatUltra, 3);
-				audiostream = new Oscilador(waveFrequency1 * 2, waveFrequency2 * 2, waveAmplitude, length, waveFormat,
-						3);
-				break;
-			case SoundThread.PINK_NOISE:
-				// audiostream = new Oscilador(this.waveFrequency1,
-				// this.waveFrequency2, waveAmplitude, length, waveFormatUltra,
-				// 2);
-				audiostream = new Oscilador(waveFrequency1 * 2, waveFrequency2 * 2, waveAmplitude, length, waveFormat,
-						2);
-				break;
-			case -1:
-				System.out.println("NOT DEFINED");
-			}
-
-		} catch (final Exception e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
-
-		final DataLine.Info informacao = new DataLine.Info(SourceDataLine.class, waveFormat);
-
-		try {
-			linha = (SourceDataLine) AudioSystem.getLine(informacao);
-			// if (soundType == SoundThread.WAVE)
-			linha.open(waveFormat);
-			// else
-			// linha.open(waveFormatUltra);
-		} catch (final LineUnavailableException e) {
-			e.printStackTrace();
-			System.exit(1);
-		} catch (final Exception e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
-	}// newLine
 
 	public void configure(final float waveFrequency1, final float waveFrequency2, final float waveDuration,
 			final int wait) {
@@ -197,9 +157,4 @@ public class SoundThread implements Runnable {
 			throw e.fillInStackTrace();
 		}
 	}// finalize
-
-	public static final int WAVE = 0;
-	public static final int PINK_NOISE = 1;
-	public static final int PULSE = 2;
-
 }

@@ -56,8 +56,8 @@ public class Handler implements DataSink, BufferTransferHandler {
 	    channelData.fromBuffer(buffer);
 	    DataSinkEvent event = new DataSinkEvent(this, "new.frame.available");
 	    for (DataSinkListener listener : listeners) {
-		listener.dataSinkUpdate(event);
-	    }
+				listener.dataSinkUpdate(event);
+			}
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}

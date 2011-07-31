@@ -28,9 +28,18 @@ public class TableSoundVelocity extends MultSeriesTable {
 	 */
 	public TableSoundVelocity() {
 		super(new TableSoundVelocityModelProxy());
-		// sample number, acquisition time, wave1, wave2, piston position,
-		// temperature
-		setColArray(new int[] { 100, 111, 4, 5, 0, 1 });
+		// Add two dummy values at the beginning of the colArray
+		// (SAMPLE_NUMBER_INDEX, ACQUISITION_TIME_INDEX) related to
+		// values that do not come directly from the PhysicsValue[] but that are
+		// necessary for the presentation of data. Notice that the colArray
+		// actually contains the indexes that should be searched from the
+		// PhysicsValue[] and, in this case, the sample and acquisition number
+		// do not come from it.
+		setColArray(new int[] { ChannelConfigConstants.SAMPLE_NUMBER_INDEX,
+				ChannelConfigConstants.ACQUISITION_TIME_INDEX, ChannelConfigConstants.POSITION_INDEX,
+				ChannelConfigConstants.VRMS1_INDEX, ChannelConfigConstants.VRMS2_INDEX,
+				ChannelConfigConstants.WAVE1_INDEX, ChannelConfigConstants.WAVE2_INDEX,
+				ChannelConfigConstants.FREQUENCY_INDEX });
 	}
 
 	@Override

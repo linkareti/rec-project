@@ -1,8 +1,5 @@
 package pt.utl.ist.elab.client.statsound.displays;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
@@ -17,7 +14,6 @@ public class TableSoundVelocityModelProxy extends com.linkare.rec.impl.client.ex
 	 * 
 	 */
 	private static final long serialVersionUID = 1258510618135751233L;
-	private static final MathContext MATH_CONTEXT = new MathContext(2);
 
 	/**
 	 * Returns the number of columns in the model. A <code>JTable</code> uses
@@ -37,8 +33,10 @@ public class TableSoundVelocityModelProxy extends com.linkare.rec.impl.client.ex
 
 	/**
 	 * Returns the name of the column at <code>columnIndex</code>. This is used
-	 * to initialize the table's column header name. Note: this name does not
-	 * need to be unique; two columns in a table can have the same name.
+	 * to initialise the table's column header.
+	 * 
+	 * Note: this name does not need to be unique! Two columns in a table can
+	 * have the same name.
 	 * 
 	 * @param columnIndex the index of the column
 	 * @return the name of the column
@@ -58,13 +56,17 @@ public class TableSoundVelocityModelProxy extends com.linkare.rec.impl.client.ex
 		case 1:
 			return ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.acquisitionTime");
 		case 2:
-			return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.3.name");
-		case 3:
-			return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.4.name");
-		case 4:
 			return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.0.name");
-		case 5:
+		case 3:
 			return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.1.name");
+		case 4:
+			return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.2.name");
+		case 5:
+			return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.3.name");
+		case 6:
+			return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.4.name");
+		case 7:
+			return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.5.name");
 		}
 		return "?";
 	}
@@ -87,9 +89,7 @@ public class TableSoundVelocityModelProxy extends com.linkare.rec.impl.client.ex
 			return String.valueOf(rowIndex + 1);
 		} else if (columnIndex == 1) {
 			// acquisition time
-			BigDecimal time = new BigDecimal(((double) rowIndex + 1) / ((double)11.025));
-			time = time.setScale(2, BigDecimal.ROUND_HALF_DOWN);
-			return time.round(TableSoundVelocityModelProxy.MATH_CONTEXT);
+			return expDataModel.getTimeStamp(rowIndex).getTime().getMilis();
 		}
 		final PhysicsValue value = expDataModel.getValueAt(rowIndex, getColAtArray(columnIndex));
 		if (value == null) {
