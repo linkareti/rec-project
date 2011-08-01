@@ -16,6 +16,13 @@ import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
  */
 public class StampConfigTranslator extends AbstractStampTranslator {
 
+	/**
+	 * The position sent to the hardware is related to a base/reference piston
+	 * position. Therefore, we do not send what we get from the client but,
+	 * instead, we send the delta.
+	 */
+	private static final int BASE_PISTON_POSITION = 1263;
+
 	public static final String COMMAND_IDENTIFIER = AbstractStampDriver.CONFIG_OUT_STRING;
 
 	/** Creates a new instance of StampRelayTranslator */
@@ -32,8 +39,9 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 			return false;
 		}
 		final int numSamples = ((Integer) command.getCommandData(NUMSAMPLES_COMMAND_PART)).intValue();
-		final int xini = ((Integer) command.getCommandData(PISTON_START_COMMAND_PART)).intValue() - 1264;
-		final int xfin = ((Integer) command.getCommandData(PISTON_END_COMMAND_PART)).intValue() - 1264;
+		final int xini = ((Integer) command.getCommandData(PISTON_START_COMMAND_PART)).intValue()
+				- BASE_PISTON_POSITION;
+		final int xfin = ((Integer) command.getCommandData(PISTON_END_COMMAND_PART)).intValue() - BASE_PISTON_POSITION;
 		final int reset = ((Integer) command.getCommandData(CALIBRATION_COMMAND_PART)).intValue();
 		final String status = (String) command.getCommandData(STATUS_COMMAND_PART);
 

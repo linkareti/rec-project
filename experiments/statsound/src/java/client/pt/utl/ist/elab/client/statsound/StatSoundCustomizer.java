@@ -22,6 +22,7 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 public class StatSoundCustomizer extends javax.swing.JPanel implements
 		com.linkare.rec.impl.client.customizer.ICustomizer {
 
+	private static final long serialVersionUID = -5352646489640019503L;
 	// types of experiments
 	private static final String VARY_FREQ = "Vary Freq";
 	private static final String VARY_PISTON = "Vary Piston";
@@ -34,7 +35,6 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 	private static final String PISTON_START = "piston.start";
 	private static final String EXPERIMENT_TYPE = "experiment.type";
 
-	private static final long serialVersionUID = -5352646489640019503L;
 	public static final int MIN_VALUE_FOR_VALID_SOUND_VELOCITY_CONFIG = 100000;
 	/** Init vars */
 	// Sound velocity tab
@@ -68,8 +68,8 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 
 		final String sin = ReCResourceBundle.findString("statsound$rec.exp.statsound.lbl.sin");
 		final String triangular = ReCResourceBundle.findString("statsound$rec.exp.statsound.lbl.triangular");
-		final String whiteNoise = ReCResourceBundle.findString("statsound$rec.exp.statsound.lbl.pinkNoise");
-		final String pinkNoise = ReCResourceBundle.findString("statsound$rec.exp.statsound.lbl.whiteNoise");
+		final String pinkNoise = ReCResourceBundle.findString("statsound$rec.exp.statsound.lbl.pinkNoise");
+		final String whiteNoise = ReCResourceBundle.findString("statsound$rec.exp.statsound.lbl.whiteNoise");
 		final String pulse = ReCResourceBundle.findString("statsound$rec.exp.statsound.lbl.pulse");
 
 		jComboBoxSoundVelocityWaveForm.addItem(sin);

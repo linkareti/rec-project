@@ -36,8 +36,7 @@ public class StampStatSoundProcessor extends AbstractStampProcessor {
 				&& splitedStr[0] != null) {
 			try {
 				pos = Integer.parseInt(splitedStr[0]);
-				final Integer oPos = new Integer(pos);
-				command.addCommandData(StampStatSoundProcessor.COMMAND_IDENTIFIER, oPos);
+				command.addCommandData(StampStatSoundProcessor.COMMAND_IDENTIFIER, pos);
 				command.setData(true);
 				return true;
 			} catch (final NumberFormatException e) {

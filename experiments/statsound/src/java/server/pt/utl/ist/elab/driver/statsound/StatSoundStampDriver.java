@@ -425,6 +425,8 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		}
 
 		if (cmd.getCommandIdentifier().equals(AbstractStampDriver.ID_STR)) {
+			// the driver is controlling the state machine so, while the
+			// data source is not ended, simply ignore the hardware messages
 			if (dataSource != null && !dataSource.isExpEnded()) {
 				LOGGER.fine("Returning");
 				return;
@@ -436,6 +438,12 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		} else if (cmd.getCommandIdentifier().equals(StampConfiguredProcessor.COMMAND_IDENTIFIER)) {
 			processStampConfiguredCommand();
 		} else if (cmd.getCommandIdentifier().equals(StampNotConfiguredProcessor.COMMAND_IDENTIFIER)) {
+			// the driver is controlling the state machine so, while the
+			// data source is not ended, simply ignore the hardware messages
+			if (dataSource != null && !dataSource.isExpEnded()) {
+				LOGGER.fine("Returning");
+				return;
+			}
 			processStampNotConfiguredCommand();
 		}
 	}

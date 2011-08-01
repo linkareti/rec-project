@@ -1,5 +1,7 @@
 package pt.utl.ist.elab.client.statsound.displays;
 
+import java.math.MathContext;
+
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
@@ -14,6 +16,8 @@ public class TableSoundVelocityModelProxy extends com.linkare.rec.impl.client.ex
 	 * 
 	 */
 	private static final long serialVersionUID = 1258510618135751233L;
+
+	private static final MathContext MATH_CONTEXT = new MathContext(2);
 
 	/**
 	 * Returns the number of columns in the model. A <code>JTable</code> uses
@@ -89,7 +93,8 @@ public class TableSoundVelocityModelProxy extends com.linkare.rec.impl.client.ex
 			return String.valueOf(rowIndex + 1);
 		} else if (columnIndex == 1) {
 			// acquisition time
-			return expDataModel.getTimeStamp(rowIndex).getTime().getMilis();
+			final long milisInMicros = expDataModel.getTimeStamp(rowIndex).getTime().getMilis() * 1000;
+			return milisInMicros + expDataModel.getTimeStamp(rowIndex).getTime().getMicros();
 		}
 		final PhysicsValue value = expDataModel.getValueAt(rowIndex, getColAtArray(columnIndex));
 		if (value == null) {
