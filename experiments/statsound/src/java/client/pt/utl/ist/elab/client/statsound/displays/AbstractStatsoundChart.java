@@ -83,6 +83,10 @@ public abstract class AbstractStatsoundChart extends javax.swing.JPanel implemen
 		this.model = model;
 	}
 
+	public ExpDataModel getExpDataModel() {
+		return datasetProxy == null ? null : datasetProxy.getExpDataModel();
+	}
+
 	@Override
 	public String getName() {
 		return "Chart";
