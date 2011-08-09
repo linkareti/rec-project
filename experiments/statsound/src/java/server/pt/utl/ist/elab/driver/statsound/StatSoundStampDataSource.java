@@ -220,10 +220,10 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				.getChannelsConfig(VRMS1_INDEX).getSelectedScale().getMultiplier());
 		values[VRMS2_INDEX] = channelVRMS1 == null ? null : PhysicsValueFactory.fromDouble(channelVRMS2, config
 				.getChannelsConfig(VRMS2_INDEX).getSelectedScale().getMultiplier());
-		values[WAVE1_INDEX] = PhysicsValueFactory.fromLong(wave1, config.getChannelsConfig(WAVE1_INDEX)
-				.getSelectedScale());
-		values[WAVE2_INDEX] = PhysicsValueFactory.fromLong(wave2, config.getChannelsConfig(WAVE2_INDEX)
-				.getSelectedScale());
+		values[WAVE1_INDEX] = wave1 == null ? null : PhysicsValueFactory.fromLong(wave1,
+				config.getChannelsConfig(WAVE1_INDEX).getSelectedScale());
+		values[WAVE2_INDEX] = wave2 == null ? null : PhysicsValueFactory.fromLong(wave2,
+				config.getChannelsConfig(WAVE2_INDEX).getSelectedScale());
 		values[FREQUENCY_INDEX] = PhysicsValueFactory.fromDouble(frequency, config.getChannelsConfig(FREQUENCY_INDEX)
 				.getSelectedScale());
 		return values;
