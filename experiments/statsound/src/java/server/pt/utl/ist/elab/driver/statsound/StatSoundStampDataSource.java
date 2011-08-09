@@ -325,6 +325,12 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 	@Override
 	public void setDataSourceEnded() {
 		super.setDataSourceEnded();
+		playSilence();
 		expEnded = true;
+	}
+
+	private void playSilence() {
+		FunctorTypeControl functorTypeControl = (FunctorTypeControl) control;
+		functorTypeControl.setFunctorType(FunctorType.SILENCE);
 	}
 }

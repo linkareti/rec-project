@@ -9,7 +9,6 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.labels.StandardXYToolTipGenerator;
-import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
 
@@ -26,7 +25,7 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * @author Paulo Zenida - Linkare TI
  * 
  */
-public class SoundVelocityExperimentGraph extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener {
+public abstract class AbstractStatsoundChart extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener {
 
 	private static final long serialVersionUID = -3005704584221537484L;
 
@@ -34,27 +33,27 @@ public class SoundVelocityExperimentGraph extends javax.swing.JPanel implements 
 
 	private ExpDataModel model;
 
-	private SoundVelocityDataSetProxy datasetProxy;
+	private StatsoundChartDataSetProxy datasetProxy;
 
 	private javax.swing.JScrollPane scrollPane;
 
 	private javax.swing.JLabel labelWaitData;
 
-	public SoundVelocityExperimentGraph() {
+	public AbstractStatsoundChart() {
 		initComponents();
 	}
 
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
-		final Logger l = LogManager.getLogManager().getLogger(SoundVelocityExperimentGraph.UI_CLIENT_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(AbstractStatsoundChart.UI_CLIENT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(SoundVelocityExperimentGraph.UI_CLIENT_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(AbstractStatsoundChart.UI_CLIENT_LOGGER));
 		}
 	}
 
 	private void initComponents() {
-		datasetProxy = new SoundVelocityDataSetProxy();
+		datasetProxy = new StatsoundChartDataSetProxy();
 		scrollPane = new javax.swing.JScrollPane();
 		labelWaitData = new javax.swing.JLabel();
 
@@ -107,8 +106,10 @@ public class SoundVelocityExperimentGraph extends javax.swing.JPanel implements 
 	}
 
 	public void headerAvailable(final HardwareAcquisitionConfig header) {
-		// Scale scaleX =
-		// header.getChannelsConfig(datasetProxy.getChannelDisplayX()).getSelectedScale();
+		if (header == null) {
+			return;
+		}
+
 		final String chnX = ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.acquisitionTime");
 
 		Scale scaleY;
@@ -116,34 +117,30 @@ public class SoundVelocityExperimentGraph extends javax.swing.JPanel implements 
 		String pusY;
 		String multiplierY;
 
-		if (getChannelDisplayYArray().length == 0) {
-			scaleY = header.getChannelsConfig(datasetProxy.getChannelDisplayY()).getSelectedScale();
-			chnY = ReCResourceBundle.findString(header.getChannelsConfig(datasetProxy.getChannelDisplayY())
-					.getChannelName());
-			pusY = scaleY.getPhysicsUnitSymbol();
-			multiplierY = scaleY.getMultiplier().toString();
-		} else {
-			scaleY = header.getChannelsConfig(datasetProxy.getChannelDisplayAtYArray(0)).getSelectedScale();
-			chnY = ReCResourceBundle.findString(header.getChannelsConfig(datasetProxy.getChannelDisplayAtYArray(0))
-					.getChannelName());
-			pusY = scaleY.getPhysicsUnitSymbol();
-			multiplierY = scaleY.getMultiplier().toString();
-		}
+		scaleY = header.getChannelsConfig(datasetProxy.getChannelDisplayAtYArray(0)).getSelectedScale();
+		chnY = header.getChannelsConfig(datasetProxy.getChannelDisplayAtYArray(0)).getChannelName();
+		pusY = scaleY.getPhysicsUnitSymbol();
+		multiplierY = scaleY.getMultiplier().toString();
 
 		final NumberAxis xAxis = new NumberAxis(chnX);
 		xAxis.setAutoRange(true);
 		xAxis.setAutoRangeStickyZero(false);
 		xAxis.setAutoRangeIncludesZero(false);
 
-		final NumberAxis yAxis = new NumberAxis(chnY + " [" + multiplierY + pusY + "]");
+		NumberAxis yAxis = null;
+		if (datasetProxy.getChannelDisplayYArray().length == 1) {
+			yAxis = new NumberAxis(chnY + " [" + multiplierY + pusY + "]");
+		} else {
+			yAxis = new NumberAxis("");
+		}
 		yAxis.setAutoRange(true);
 		yAxis.setAutoRangeStickyZero(false);
 		yAxis.setAutoRangeIncludesZero(false);
 
-		final XYToolTipGenerator tooltipGenerator = new StandardXYToolTipGenerator();
-
 		final XYPlot plot = new XYPlot(datasetProxy, xAxis, yAxis, new StandardXYItemRenderer(
-				StandardXYItemRenderer.SHAPES_AND_LINES, tooltipGenerator));
+				StandardXYItemRenderer.SHAPES_AND_LINES, new StandardXYToolTipGenerator()));
+		plot.setRenderer(new StandardXYItemRenderer(StandardXYItemRenderer.SHAPES_AND_LINES,
+				new StandardXYToolTipGenerator()));
 
 		chart = new JFreeChart(getChartName(header), JFreeChart.DEFAULT_TITLE_FONT, plot, true);
 		final ChartPanel panel = new ChartPanel(chart);
