@@ -472,7 +472,6 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		dataSource.setFreqIni(freqIni);
 		dataSource.setFreqFin(freqFin);
 		dataSource.setFreqStep(step);
-		dataSource.setNSamples(nSamples);
 		dataSource.setControl(player.getControl(FunctorTypeControl.class.getName()));
 		dataSource.setWaveForm(waveForm);
 		dataSource.setExpEnded(false);

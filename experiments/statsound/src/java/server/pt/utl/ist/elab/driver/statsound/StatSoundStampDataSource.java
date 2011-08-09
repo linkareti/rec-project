@@ -63,8 +63,6 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 	private int freqFin;
 
-	private int nSamples;
-
 	Integer temp = null;
 
 	private double step = 1;
@@ -271,13 +269,6 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 	public void setFreqStep(final double step) {
 		this.step = step;
-	}
-
-	/**
-	 * @param nSamples the nSamples to set
-	 */
-	public void setNSamples(int nSamples) {
-		this.nSamples = nSamples;
 	}
 
 	/**
