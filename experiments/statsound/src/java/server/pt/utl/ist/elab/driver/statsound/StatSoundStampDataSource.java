@@ -61,6 +61,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 	private int freqIni;
 
+	private int freqFin;
+
 	private int nSamples;
 
 	Integer temp = null;
@@ -149,13 +151,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 	private void handleProtocolVaryFrequency(final int pos) {
 		final FunctorControl functorControl = newWaveTypeOnFunctorControl();
-		double currentValueFreq = freqIni;
-		// This is similar to the simpler iteration from freqInit till the end,
-		// adding the step. However, iterating through the samples using an
-		// integer guarantees precision (notice that the frequency is a double
-		// type).
-		for (int i = 0; i < nSamples; i++) {
-			currentValueFreq = freqIni + (i * step);
+		for (double currentValueFreq = freqIni; currentValueFreq <= freqFin; currentValueFreq += step) {
 			functorControl.setFrequency(currentValueFreq);
 
 			waitBeforeCapture();
@@ -267,6 +263,10 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 	public void setFreqIni(final int freqIni) {
 		this.freqIni = freqIni;
+	}
+
+	public void setFreqFin(final int freqFin) {
+		this.freqFin = freqFin;
 	}
 
 	public void setFreqStep(final double step) {

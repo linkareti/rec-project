@@ -271,9 +271,9 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		final TypeOfExperiment typeOfExperiment = TypeOfExperiment.from(experimentTypeParameter);
 		switch (typeOfExperiment) {
 		case SOUND_VELOCITY:
-		case STATSOUND_VARY_FREQUENCY:
 			nSamples = 1;
 			break;
+		case STATSOUND_VARY_FREQUENCY:
 		case STATSOUND_VARY_PISTON:
 			nSamples = config.getTotalSamples();
 			break;
@@ -292,7 +292,6 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		waveForm = SoundWaveType.from(config.getSelectedHardwareParameterValue(WAVE_FORM_PARAMETER));
 		pistonStart = Integer.valueOf(config.getSelectedHardwareParameterValue(PISTON_START_PARAMETER));
 		pistonEnd = Integer.valueOf(config.getSelectedHardwareParameterValue(PISTON_END_PARAMETER));
-
 	}
 
 	@Override
@@ -471,6 +470,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 		config.setTimeStart(new DateTime());
 		dataSource.setFreqIni(freqIni);
+		dataSource.setFreqFin(freqFin);
 		dataSource.setFreqStep(step);
 		dataSource.setNSamples(nSamples);
 		dataSource.setControl(player.getControl(FunctorTypeControl.class.getName()));
