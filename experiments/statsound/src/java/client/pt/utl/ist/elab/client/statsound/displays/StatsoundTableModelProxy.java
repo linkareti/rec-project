@@ -1,5 +1,7 @@
 package pt.utl.ist.elab.client.statsound.displays;
 
+import pt.utl.ist.elab.client.statsound.TypeOfExperiment;
+
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
@@ -11,6 +13,10 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 public class StatsoundTableModelProxy extends com.linkare.rec.impl.client.experiment.MultSeriesTableModelProxy {
 
 	private static final long serialVersionUID = 1258510618135751233L;
+
+	private TypeOfExperiment typeOfExperiment;
+
+	private static final String EXPERIMENT_TYPE = "experiment.type";
 
 	/**
 	 * Returns the number of columns in the model. A <code>JTable</code> uses
@@ -47,23 +53,53 @@ public class StatsoundTableModelProxy extends com.linkare.rec.impl.client.experi
 				return null;
 			}
 		}
+		final String experimentTypeParameter = getExpDataModel().getAcquisitionConfig()
+				.getSelectedHardwareParameterValue(EXPERIMENT_TYPE);
+		typeOfExperiment = TypeOfExperiment.from(experimentTypeParameter);
 		switch (columnIndex) {
 		case 0:
 			return ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.sampleNumber");
 		case 1:
 			return ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.acquisitionTime");
 		case 2:
-			return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.0.name");
+			switch (typeOfExperiment) {
+			case SOUND_VELOCITY:
+				// wave1
+				return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.3.name");
+			case STATSOUND_VARY_FREQUENCY:
+				// vrms1
+				return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.1.name");
+			case STATSOUND_VARY_PISTON:
+				// position
+				return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.0.name");
+			default:
+				return "Unknown for " + typeOfExperiment + " in index 2";
+			}
 		case 3:
-			return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.1.name");
+			switch (typeOfExperiment) {
+			case SOUND_VELOCITY:
+				// wave2
+				return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.4.name");
+			case STATSOUND_VARY_FREQUENCY:
+				// vrms2
+				return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.2.name");
+			case STATSOUND_VARY_PISTON:
+				// vrms1
+				return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.1.name");
+			default:
+				return "Unknown for " + typeOfExperiment + " in index 3";
+			}
 		case 4:
-			return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.2.name");
-		case 5:
-			return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.3.name");
-		case 6:
-			return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.4.name");
-		case 7:
-			return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.5.name");
+			switch (typeOfExperiment) {
+			case STATSOUND_VARY_FREQUENCY:
+				// frequency
+				return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.5.name");
+			case STATSOUND_VARY_PISTON:
+				// vrms2
+				return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.2.name");
+			default:
+				return "Unknown for " + typeOfExperiment + " in index 4";
+			}
 		}
 		return "?";
 	}
@@ -120,5 +156,19 @@ public class StatsoundTableModelProxy extends com.linkare.rec.impl.client.experi
 			return null;
 		}
 		return String.class;
+	}
+
+	/**
+	 * @return the typeOfExperiment
+	 */
+	public TypeOfExperiment getTypeOfExperiment() {
+		return typeOfExperiment;
+	}
+
+	/**
+	 * @param typeOfExperiment the typeOfExperiment to set
+	 */
+	public void setTypeOfExperiment(TypeOfExperiment typeOfExperiment) {
+		this.typeOfExperiment = typeOfExperiment;
 	}
 }

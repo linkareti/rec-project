@@ -53,13 +53,11 @@ public class StatsoundChart extends AbstractStatsoundChart {
 			setChannelDisplayYArray(new int[] { ChannelConfigConstants.WAVE1_INDEX, ChannelConfigConstants.WAVE2_INDEX });
 			break;
 		case STATSOUND_VARY_FREQUENCY:
-			// TODO: Put here the X that should be presented
-			setChannelDisplayX(ChannelConfigConstants.ACQUISITION_TIME_INDEX);
+			setChannelDisplayX(ChannelConfigConstants.FREQUENCY_INDEX);
 			setChannelDisplayYArray(new int[] { ChannelConfigConstants.VRMS1_INDEX, ChannelConfigConstants.VRMS2_INDEX });
 			break;
 		case STATSOUND_VARY_PISTON:
-			// TODO: Put here the X that should be presented
-			setChannelDisplayX(ChannelConfigConstants.ACQUISITION_TIME_INDEX);
+			setChannelDisplayX(ChannelConfigConstants.POSITION_INDEX);
 			setChannelDisplayYArray(new int[] { ChannelConfigConstants.VRMS1_INDEX, ChannelConfigConstants.VRMS2_INDEX });
 			break;
 		}

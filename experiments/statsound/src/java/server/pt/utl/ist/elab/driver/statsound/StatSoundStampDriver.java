@@ -112,6 +112,8 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 	private int nSamples = 0;
 
+	private int numberOfInvocationsToHardware = 0;
+
 	private SoundWaveType waveForm = SoundWaveType.SIN;
 
 	private int pistonStart = 0;
@@ -244,7 +246,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 	private void prepareCommand(final HardwareAcquisitionConfig config) {
 		stampConfigCommand = new StampCommand(AbstractStampDriver.CONFIG_OUT_STRING);
-		stampConfigCommand.addCommandData(NUMSAMPLES_COMMAND_PART, nSamples);
+		stampConfigCommand.addCommandData(NUMSAMPLES_COMMAND_PART, numberOfInvocationsToHardware);
 		stampConfigCommand.addCommandData(PISTON_START_COMMAND_PART, this.pistonStart);
 		stampConfigCommand.addCommandData(PISTON_END_COMMAND_PART, this.pistonEnd);
 		stampConfigCommand.addCommandData(STATUS_COMMAND_PART,
@@ -269,11 +271,12 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 			freqIni = temp;
 		}
 		/*
-		 * The samples must be calculated according to the type of experiment:
+		 * The numberOfInvocationsToHardware must be calculated according to the
+		 * type of experiment:
 		 * 
 		 * - For the sound velocity and vary frequency, it should be 1
 		 * 
-		 * - For the sound piston, it should be 1.
+		 * - For the sound piston, it should be the number of chosen samples.
 		 * 
 		 * This is understandable because the nSamples controls the number of
 		 * executions I'll ask the serial port hardware to run.
@@ -282,11 +285,11 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		final TypeOfExperiment typeOfExperiment = TypeOfExperiment.from(experimentTypeParameter);
 		switch (typeOfExperiment) {
 		case SOUND_VELOCITY:
-			nSamples = 1;
-			break;
 		case STATSOUND_VARY_FREQUENCY:
+			numberOfInvocationsToHardware = 1;
+			break;
 		case STATSOUND_VARY_PISTON:
-			nSamples = config.getTotalSamples();
+			numberOfInvocationsToHardware = config.getTotalSamples();
 			break;
 		default:
 			break;
@@ -485,6 +488,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		dataSource.setFreqStep(step);
 		dataSource.setControl(player.getControl(FunctorTypeControl.class.getName()));
 		dataSource.setWaveForm(waveForm);
+		dataSource.setNSamples(nSamples);
 		dataSource.setExpEnded(false);
 		dataSource.setCaptureDevice(soundCaptureDevice);
 		fireIDriverStateListenerDriverStarted();

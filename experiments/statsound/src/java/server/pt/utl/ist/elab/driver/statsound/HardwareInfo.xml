@@ -59,11 +59,11 @@
 	</parameter>
 	<!-- 
 		The status refers to the chosen microphones. The possible values present if each micro in each position is 
-		active or inactive, as follows, from left to right:
+		active or inactive, as follows, from left to right, ending with the flag to control if the heating is on/off
 		-> Microphone 2: 0 or 1 to state if it is selected or not
 		-> Microphone 3: 0 or 1 to state if it is selected or not
 		-> Microphone 4: 0 or 1 to state if it is selected or not
-		-> Microphone 1: 0 or 1 to state if it is selected or not. This is the microphone that is always selected
+		-> Heating on? : 0 or 1 to state if it is on or off
 	 -->
 	<parameter name="status" type="SelectionListValue" value="0000">
 		<selection-list>

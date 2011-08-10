@@ -63,6 +63,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 	private int freqFin;
 
+	private int nSamples;
+
 	Integer temp = null;
 
 	private double step = 1;
@@ -132,13 +134,13 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 		newWaveTypeOnFunctorControl().setFrequency(freqIni);
 		waitBeforeCapture();
 		ChannelDataFrame channelDataFrame = soundCaptureDevice.captureFrame();
-		// for (int i = 0; i < channelDataFrame.getChannelData(0).length; i +=
-		// 4) {
-		for (int i = 0; i < 2000; i += 4) {
+		for (int i = 0; i < nSamples; i += 4) {
 			long wave1 = channelDataFrame.getChannelData(0)[i];
 			long wave2 = channelDataFrame.getChannelData(1)[i];
 			double channelVRMS1 = channelDataFrame.getChannelVRMS(0);
 			double channelVRMS2 = channelDataFrame.getChannelVRMS(1);
+			LOGGER.log(Level.INFO, i + ": wave1 before conversion = " + wave1);
+			LOGGER.log(Level.INFO, i + ": wave2 before conversion = " + wave2);
 			PhysicsValue[] values = fillInValues(pos, channelVRMS1, channelVRMS2, wave1, wave2, freqIni);
 			super.addDataRow(values);
 		}
@@ -146,7 +148,13 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 	private void handleProtocolVaryFrequency(final int pos) {
 		final FunctorControl functorControl = newWaveTypeOnFunctorControl();
-		for (double currentValueFreq = freqIni; currentValueFreq <= freqFin; currentValueFreq += step) {
+		double currentValueFreq = freqIni;
+		// This is similar to the simpler iteration from freqInit till the end,
+		// adding the step. However, iterating through the samples using an
+		// integer guarantees precision (notice that the frequency is a double
+		// type).
+		for (int i = 0; i < nSamples; i++) {
+			currentValueFreq = freqIni + (i * step);
 			functorControl.setFrequency(currentValueFreq);
 
 			waitBeforeCapture();
@@ -250,6 +258,13 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 	public void setFreqStep(final double step) {
 		this.step = step;
+	}
+
+	/**
+	 * @param nSamples the nSamples to set
+	 */
+	public void setNSamples(int nSamples) {
+		this.nSamples = nSamples;
 	}
 
 	/**
