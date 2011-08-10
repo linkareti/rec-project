@@ -113,10 +113,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 			case SOUND_VELOCITY:
 				handleProtocolSoundVelocity(pos);
 				break;
-			default:
-				// TODO: Throw an exception?
-				break;
 			}
+			finishedMyJob();
 		} else if (cmd.getCommandIdentifier().equals(StampStatSoundTempProcessor.COMMAND_IDENTIFIER)) {
 			try {
 				// TODO: What?!!!!!
@@ -144,7 +142,6 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 			PhysicsValue[] values = fillInValues(pos, channelVRMS1, channelVRMS2, wave1, wave2, freqIni);
 			super.addDataRow(values);
 		}
-		setDataSourceEnded();
 	}
 
 	private void handleProtocolVaryFrequency(final int pos) {
@@ -160,7 +157,6 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 			PhysicsValue[] values = fillInValues(pos, channelVRMS1, channelVRMS2, null, null, currentValueFreq);
 			super.addDataRow(values);
 		}
-		setDataSourceEnded();
 	}
 
 	private void handleProtocolVaryPiston(final int pos) {
@@ -172,7 +168,6 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 		double channelVRMS2 = channelDataFrame.getChannelVRMS(1);
 		PhysicsValue[] values = fillInValues(pos, channelVRMS1, channelVRMS2, null, null, freqIni);
 		super.addDataRow(values);
-		setDataSourceEnded();
 	}
 
 	/**
@@ -227,20 +222,6 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 	public void setAcquisitionHeader(final HardwareAcquisitionConfig config) {
 		this.config = config;
 		super.setAcquisitionHeader(config);
-	}
-
-	public void stopPlaying() {
-		LOGGER.log(Level.FINEST, "Data source stop playing done!");
-	}
-
-	public void stopAcquiring() {
-		// SHUIT UP!!!
-		((FunctorTypeControl) control).setFunctorType(FunctorType.SILENCE);
-		if (config.getSelectedHardwareParameterValue(EXPERIMENT_TYPE_PARAMETER).equalsIgnoreCase(
-				StatSoundStampDataSource.SOUND_VELOCITY)) {
-			return;
-		}
-		LOGGER.log(Level.FINEST, "Data source stop acquiring done!");
 	}
 
 	public boolean isExpEnded() {
@@ -308,6 +289,20 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 	public void setCaptureDevice(Handler soundCaptureDevice) {
 		this.soundCaptureDevice = soundCaptureDevice;
 
+	}
+
+	/**
+	 * The datasource should only state that it has finished its job. The
+	 * driver, itself, is the only one that should really stop the experiment.
+	 * This means that the driver should never invoke directly the method
+	 * <code>setDataSourceEnded()</code>. However, the driver must know if the
+	 * datasource has finished its job or not. Therefore, the datasource invokes
+	 * this method after any handler method so that the internal variable
+	 * <code>expEnded</code> may be set to true.
+	 */
+	private void finishedMyJob() {
+		expEnded = true;
+		playSilence();
 	}
 
 	/**

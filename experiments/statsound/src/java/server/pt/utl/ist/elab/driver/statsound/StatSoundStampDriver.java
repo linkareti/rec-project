@@ -78,6 +78,17 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 	public static final String CALIBRATION_COMMAND_PART = CALIBRATION_PARAMETER;
 
 	// other stuff
+	private boolean initing = true;
+
+	private boolean waitingStart = false;
+
+	private boolean wroteStart = false;
+
+	private boolean started = false;
+
+	private boolean stoping = false;
+
+	private boolean reseting = true;
 
 	private static final String CAPTURE_DEVICE_URL = "capture.device.url";
 
@@ -510,23 +521,12 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		}
 	}
 
-	private boolean initing = true;
-	private boolean waitingStart = false;
-	private boolean wroteStart = false;
-	private final boolean waitingStop = false;
-	private boolean started = false;
-	private boolean stoping = false;
-	private boolean reseting = true;
-
 	@Override
 	public void stopDataSource() {
 		super.stopDataSource();
 		if (dataSource != null) {
 			LOGGER.fine("Stoping data source!");
-			dataSource.stopPlaying();
-			dataSource.stopAcquiring();
-			// dataSource.setRunning(false);
-			dataSource.setExpEnded(true);
+			dataSource.setDataSourceEnded();
 			LOGGER.fine("Finished stop data source!");
 		}
 	}
