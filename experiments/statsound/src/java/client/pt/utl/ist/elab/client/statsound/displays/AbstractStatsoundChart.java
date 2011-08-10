@@ -78,9 +78,11 @@ public abstract class AbstractStatsoundChart extends javax.swing.JPanel implemen
 
 	@Override
 	public void setExpDataModel(final ExpDataModel model) {
-		datasetProxy.setExpDataModel(model);
-		model.addExpDataModelListener(this);
-		this.model = model;
+		if (model != null) {
+			datasetProxy.setExpDataModel(model);
+			model.addExpDataModelListener(this);
+			this.model = model;
+		}
 	}
 
 	public ExpDataModel getExpDataModel() {
@@ -113,30 +115,12 @@ public abstract class AbstractStatsoundChart extends javax.swing.JPanel implemen
 		if (header == null) {
 			return;
 		}
-
-		final String chnX = ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.acquisitionTime");
-
-		Scale scaleY;
-		String chnY;
-		String pusY;
-		String multiplierY;
-
-		scaleY = header.getChannelsConfig(datasetProxy.getChannelDisplayAtYArray(0)).getSelectedScale();
-		chnY = header.getChannelsConfig(datasetProxy.getChannelDisplayAtYArray(0)).getChannelName();
-		pusY = scaleY.getPhysicsUnitSymbol();
-		multiplierY = scaleY.getMultiplier().toString();
-
-		final NumberAxis xAxis = new NumberAxis(chnX);
+		final NumberAxis xAxis = new NumberAxis("");
 		xAxis.setAutoRange(true);
 		xAxis.setAutoRangeStickyZero(false);
 		xAxis.setAutoRangeIncludesZero(false);
 
-		NumberAxis yAxis = null;
-		if (datasetProxy.getChannelDisplayYArray().length == 1) {
-			yAxis = new NumberAxis(chnY + " [" + multiplierY + pusY + "]");
-		} else {
-			yAxis = new NumberAxis("");
-		}
+		NumberAxis yAxis = new NumberAxis("");
 		yAxis.setAutoRange(true);
 		yAxis.setAutoRangeStickyZero(false);
 		yAxis.setAutoRangeIncludesZero(false);

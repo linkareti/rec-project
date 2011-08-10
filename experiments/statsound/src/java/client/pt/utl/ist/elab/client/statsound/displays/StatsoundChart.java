@@ -42,22 +42,27 @@ public class StatsoundChart extends AbstractStatsoundChart {
 	@Override
 	public void setExpDataModel(ExpDataModel model) {
 		super.setExpDataModel(model);
-		final String experimentTypeParameter = getExpDataModel().getAcquisitionConfig()
-				.getSelectedHardwareParameterValue(EXPERIMENT_TYPE);
-		typeOfExperiment = TypeOfExperiment.from(experimentTypeParameter);
-		switch (typeOfExperiment) {
-		case SOUND_VELOCITY:
-			setChannelDisplayX(ChannelConfigConstants.ACQUISITION_TIME_INDEX);
-			setChannelDisplayYArray(new int[] { ChannelConfigConstants.WAVE1_INDEX, ChannelConfigConstants.WAVE2_INDEX });
-			break;
-		case STATSOUND_VARY_FREQUENCY:
-			setChannelDisplayX(ChannelConfigConstants.FREQUENCY_INDEX);
-			setChannelDisplayYArray(new int[] { ChannelConfigConstants.VRMS1_INDEX, ChannelConfigConstants.VRMS2_INDEX });
-			break;
-		case STATSOUND_VARY_PISTON:
-			setChannelDisplayX(ChannelConfigConstants.POSITION_INDEX);
-			setChannelDisplayYArray(new int[] { ChannelConfigConstants.VRMS1_INDEX, ChannelConfigConstants.VRMS2_INDEX });
-			break;
+		if (model != null) {
+			final String experimentTypeParameter = getExpDataModel().getAcquisitionConfig()
+					.getSelectedHardwareParameterValue(EXPERIMENT_TYPE);
+			typeOfExperiment = TypeOfExperiment.from(experimentTypeParameter);
+			switch (typeOfExperiment) {
+			case SOUND_VELOCITY:
+				setChannelDisplayX(ChannelConfigConstants.ACQUISITION_TIME_INDEX);
+				setChannelDisplayYArray(new int[] { ChannelConfigConstants.WAVE1_INDEX,
+						ChannelConfigConstants.WAVE2_INDEX });
+				break;
+			case STATSOUND_VARY_FREQUENCY:
+				setChannelDisplayX(ChannelConfigConstants.FREQUENCY_INDEX);
+				setChannelDisplayYArray(new int[] { ChannelConfigConstants.VRMS1_INDEX,
+						ChannelConfigConstants.VRMS2_INDEX });
+				break;
+			case STATSOUND_VARY_PISTON:
+				setChannelDisplayX(ChannelConfigConstants.POSITION_INDEX);
+				setChannelDisplayYArray(new int[] { ChannelConfigConstants.VRMS1_INDEX,
+						ChannelConfigConstants.VRMS2_INDEX });
+				break;
+			}
 		}
 	}
 }

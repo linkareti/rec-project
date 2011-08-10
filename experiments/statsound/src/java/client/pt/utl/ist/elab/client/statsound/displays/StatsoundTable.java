@@ -47,33 +47,37 @@ public class StatsoundTable extends MultSeriesTable {
 	@Override
 	public void setExpDataModel(ExpDataModel model) {
 		super.setExpDataModel(model);
-		final String experimentTypeParameter = getExpDataModel().getAcquisitionConfig()
-				.getSelectedHardwareParameterValue(EXPERIMENT_TYPE);
-		typeOfExperiment = TypeOfExperiment.from(experimentTypeParameter);
+		if (model != null) {
+			final String experimentTypeParameter = model.getAcquisitionConfig().getSelectedHardwareParameterValue(
+					EXPERIMENT_TYPE);
+			typeOfExperiment = TypeOfExperiment.from(experimentTypeParameter);
 
-		// Add two dummy values at the beginning of the colArray
-		// (SAMPLE_NUMBER_INDEX, ACQUISITION_TIME_INDEX) related to
-		// values that do not come directly from the PhysicsValue[] but that are
-		// necessary for the presentation of data. Notice that the colArray
-		// actually contains the indexes that should be searched from the
-		// PhysicsValue[] and, in this case, the sample and acquisition number
-		// do not come from it.
-		switch (typeOfExperiment) {
-		case SOUND_VELOCITY:
-			setColArray(new int[] { ChannelConfigConstants.SAMPLE_NUMBER_INDEX,
-					ChannelConfigConstants.ACQUISITION_TIME_INDEX, ChannelConfigConstants.WAVE1_INDEX,
-					ChannelConfigConstants.WAVE2_INDEX });
-			break;
-		case STATSOUND_VARY_FREQUENCY:
-			setColArray(new int[] { ChannelConfigConstants.SAMPLE_NUMBER_INDEX,
-					ChannelConfigConstants.ACQUISITION_TIME_INDEX, ChannelConfigConstants.VRMS1_INDEX,
-					ChannelConfigConstants.VRMS2_INDEX, ChannelConfigConstants.FREQUENCY_INDEX });
-			break;
-		case STATSOUND_VARY_PISTON:
-			setColArray(new int[] { ChannelConfigConstants.SAMPLE_NUMBER_INDEX,
-					ChannelConfigConstants.ACQUISITION_TIME_INDEX, ChannelConfigConstants.POSITION_INDEX,
-					ChannelConfigConstants.VRMS1_INDEX, ChannelConfigConstants.VRMS2_INDEX });
-			break;
+			// Add two dummy values at the beginning of the colArray
+			// (SAMPLE_NUMBER_INDEX, ACQUISITION_TIME_INDEX) related to
+			// values that do not come directly from the PhysicsValue[] but that
+			// are
+			// necessary for the presentation of data. Notice that the colArray
+			// actually contains the indexes that should be searched from the
+			// PhysicsValue[] and, in this case, the sample and acquisition
+			// number
+			// do not come from it.
+			switch (typeOfExperiment) {
+			case SOUND_VELOCITY:
+				setColArray(new int[] { ChannelConfigConstants.SAMPLE_NUMBER_INDEX,
+						ChannelConfigConstants.ACQUISITION_TIME_INDEX, ChannelConfigConstants.WAVE1_INDEX,
+						ChannelConfigConstants.WAVE2_INDEX });
+				break;
+			case STATSOUND_VARY_FREQUENCY:
+				setColArray(new int[] { ChannelConfigConstants.SAMPLE_NUMBER_INDEX,
+						ChannelConfigConstants.ACQUISITION_TIME_INDEX, ChannelConfigConstants.VRMS1_INDEX,
+						ChannelConfigConstants.VRMS2_INDEX, ChannelConfigConstants.FREQUENCY_INDEX });
+				break;
+			case STATSOUND_VARY_PISTON:
+				setColArray(new int[] { ChannelConfigConstants.SAMPLE_NUMBER_INDEX,
+						ChannelConfigConstants.ACQUISITION_TIME_INDEX, ChannelConfigConstants.POSITION_INDEX,
+						ChannelConfigConstants.VRMS1_INDEX, ChannelConfigConstants.VRMS2_INDEX });
+				break;
+			}
 		}
 	}
 }

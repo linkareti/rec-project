@@ -1,6 +1,6 @@
 package pt.utl.ist.elab.client.statsound.displays;
 
-import java.math.MathContext;
+import pt.utl.ist.elab.client.statsound.TypeOfExperiment;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
@@ -20,6 +20,8 @@ public class StatsoundChartDataSetProxy extends org.jfree.data.xy.AbstractXYData
 	private int[] channelDisplayYArray;
 
 	private ExpDataModel expDataModel;
+
+	private static final String EXPERIMENT_TYPE = "experiment.type";
 
 	/** Holds value of property channelDisplay. */
 	private int channelDisplayX;
@@ -78,25 +80,44 @@ public class StatsoundChartDataSetProxy extends org.jfree.data.xy.AbstractXYData
 			return null;
 		}
 
-		final String ch_nameX = ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.acquisitionTime");
-
-		String multiplierY;
-		String ph_unit_symbolY;
-		String ch_nameY;
-
-		if (getChannelDisplayYArray().length == 0) {
-			multiplierY = expDataModel.getChannelConfig(getChannelDisplayY()).getSelectedScale().getMultiplier()
-					.toString();
-			ph_unit_symbolY = expDataModel.getChannelConfig(getChannelDisplayY()).getSelectedScale()
-					.getPhysicsUnitSymbol();
-			ch_nameY = ReCResourceBundle.findString(expDataModel.getChannelConfig(getChannelDisplayY())
-					.getChannelName());
-		} else {
+		final String experimentTypeParameter = getExpDataModel().getAcquisitionConfig()
+				.getSelectedHardwareParameterValue(EXPERIMENT_TYPE);
+		final TypeOfExperiment typeOfExperiment = TypeOfExperiment.from(experimentTypeParameter);
+		String ch_nameX = null;
+		String ch_nameY = null;
+		switch (typeOfExperiment) {
+		case SOUND_VELOCITY:
+			ch_nameX = ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.acquisitionTime");
 			if (series == 0) {
+				// wave1
 				ch_nameY = ReCResourceBundle.findString("statsound$rec.exp.statsound.hardwareinfo.channel.3.name");
 			} else {
+				// wave2
 				ch_nameY = ReCResourceBundle.findString("statsound$rec.exp.statsound.hardwareinfo.channel.4.name");
 			}
+			break;
+		case STATSOUND_VARY_FREQUENCY:
+			// frequency
+			ch_nameX = ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.frequency");
+			if (series == 0) {
+				// vrms1
+				ch_nameY = ReCResourceBundle.findString("statsound$rec.exp.statsound.hardwareinfo.channel.1.name");
+			} else {
+				// vrms2
+				ch_nameY = ReCResourceBundle.findString("statsound$rec.exp.statsound.hardwareinfo.channel.2.name");
+			}
+			break;
+		case STATSOUND_VARY_PISTON:
+			// position
+			ch_nameX = ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.piston");
+			if (series == 0) {
+				// vrms1
+				ch_nameY = ReCResourceBundle.findString("statsound$rec.exp.statsound.hardwareinfo.channel.1.name");
+			} else {
+				// vrms2
+				ch_nameY = ReCResourceBundle.findString("statsound$rec.exp.statsound.hardwareinfo.channel.2.name");
+			}
+			break;
 		}
 		return ch_nameX + " vs " + ch_nameY;
 	}
@@ -136,9 +157,23 @@ public class StatsoundChartDataSetProxy extends org.jfree.data.xy.AbstractXYData
 		if (expDataModel == null || !expDataModel.isDataAvailable() || series >= expDataModel.getChannelCount()) {
 			return 0;
 		}
-		// acquisition time
-		final long milisInMicros = expDataModel.getTimeStamp(item).getTime().getMilis() * 1000;
-		return milisInMicros + expDataModel.getTimeStamp(item).getTime().getMicros();
+		final String experimentTypeParameter = getExpDataModel().getAcquisitionConfig()
+				.getSelectedHardwareParameterValue(EXPERIMENT_TYPE);
+		final TypeOfExperiment typeOfExperiment = TypeOfExperiment.from(experimentTypeParameter);
+		switch (typeOfExperiment) {
+		case SOUND_VELOCITY:
+			// acquisition time
+			final long milisInMicros = expDataModel.getTimeStamp(item).getTime().getMilis() * 1000;
+			return milisInMicros + expDataModel.getTimeStamp(item).getTime().getMicros();
+		case STATSOUND_VARY_FREQUENCY:
+			// frequency
+			return expDataModel.getValueAt(item, getChannelDisplayX()).getValueNumber().doubleValue();
+		case STATSOUND_VARY_PISTON:
+			// position
+			return expDataModel.getValueAt(item, getChannelDisplayX()).getValueNumber().doubleValue();
+		}
+		return 0;
+
 	}
 
 	@Override
