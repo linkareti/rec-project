@@ -470,14 +470,13 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		if (waitingStart && wroteStart) {
 			waitingStart = false;
 			fireIDriverStateListenerDriverStoped();
-			stopDataSource();
 		} else if (started) {
 			LOGGER.fine("Started not configured!");
 			started = false;
 			fireIDriverStateListenerDriverReseting();
 			fireIDriverStateListenerDriverReseted();
-			stopDataSource();
 		}
+		stopDataSource();
 	}
 
 	private void processStampStartCommand() {
