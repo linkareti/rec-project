@@ -61,8 +61,6 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 	private int freqIni;
 
-	private int freqFin;
-
 	private int nSamples;
 
 	Integer temp = null;
@@ -250,10 +248,6 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 	public void setFreqIni(final int freqIni) {
 		this.freqIni = freqIni;
-	}
-
-	public void setFreqFin(final int freqFin) {
-		this.freqFin = freqFin;
 	}
 
 	public void setFreqStep(final double step) {

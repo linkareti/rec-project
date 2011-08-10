@@ -360,6 +360,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		PackageManager.setProtocolPrefixList(protocolPrefixList);
 		PackageManager.commitProtocolPrefixList();
 
+		@SuppressWarnings("unchecked")
 		Vector<String> contentPrefixList = PackageManager.getContentPrefixList();
 		if (!contentPrefixList.contains(JMF_PACKAGE)) {
 			contentPrefixList.add(JMF_PACKAGE);
@@ -484,7 +485,6 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 		config.setTimeStart(new DateTime());
 		dataSource.setFreqIni(freqIni);
-		dataSource.setFreqFin(freqFin);
 		dataSource.setFreqStep(step);
 		dataSource.setControl(player.getControl(FunctorTypeControl.class.getName()));
 		dataSource.setWaveForm(waveForm);
