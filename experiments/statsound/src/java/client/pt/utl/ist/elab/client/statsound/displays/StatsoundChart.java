@@ -24,8 +24,6 @@ public class StatsoundChart extends AbstractStatsoundChart {
 
 	public StatsoundChart() {
 		super();
-		setChannelDisplayX(ChannelConfigConstants.ACQUISITION_TIME_INDEX);
-		setChannelDisplayYArray(new int[] { ChannelConfigConstants.WAVE1_INDEX, ChannelConfigConstants.WAVE2_INDEX });
 	}
 
 	@Override

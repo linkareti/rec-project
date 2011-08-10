@@ -270,6 +270,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 			freqFin = freqIni;
 			freqIni = temp;
 		}
+		nSamples = config.getTotalSamples();
 		/*
 		 * The numberOfInvocationsToHardware must be calculated according to the
 		 * type of experiment:
