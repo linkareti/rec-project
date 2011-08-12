@@ -515,18 +515,19 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 			LOGGER.fine("Reseting");
 			reseting = false;
 			fireIDriverStateListenerDriverReseted();
-			stopDataSource();
 		} else if (started) {
 			LOGGER.fine("Started");
 			started = false;
 			fireIDriverStateListenerDriverStoping();
 			fireIDriverStateListenerDriverStoped();
-			stopDataSource();
 		} else if (initing) {
 			LOGGER.fine("Initing");
 			initing = false;
 			fireIDriverStateListenerDriverReseting();
 			fireIDriverStateListenerDriverReseted();
+		}
+		if (dataSource != null && dataSource.isExpEnded()) {
+			stopDataSource();
 		}
 	}
 
