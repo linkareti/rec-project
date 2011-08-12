@@ -468,16 +468,22 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 	}
 
 	private void processStampNotConfiguredCommand() {
+		LOGGER.info("Processing command " + StampNotConfiguredProcessor.COMMAND_IDENTIFIER);
+		LOGGER.info("waitingStart: " + waitingStart);
+		LOGGER.info("wroteStart: " + wroteStart);
 		if (waitingStart && wroteStart) {
 			waitingStart = false;
 			fireIDriverStateListenerDriverStoped();
+			stopDataSource();
+			LOGGER.info("stopped datasource because waitingStart and wroteStart are true");
 		} else if (started) {
 			LOGGER.fine("Started not configured!");
 			started = false;
 			fireIDriverStateListenerDriverReseting();
 			fireIDriverStateListenerDriverReseted();
+			stopDataSource();
+			LOGGER.info("stopped datasource because started is true");
 		}
-		stopDataSource();
 	}
 
 	private void processStampStartCommand() {
