@@ -471,8 +471,8 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 		jPanelSoundVelocityPiston.setName("jPanelSoundVelocityPiston"); // NOI18N
 
 		jSliderSoundVelocityPiston.setMajorTickSpacing(40);
-		jSliderSoundVelocityPiston.setMaximum(1484);
-		jSliderSoundVelocityPiston.setMinimum(1264);
+		jSliderSoundVelocityPiston.setMaximum(1480);
+		jSliderSoundVelocityPiston.setMinimum(1258);
 		jSliderSoundVelocityPiston.setMinorTickSpacing(20);
 		jSliderSoundVelocityPiston.setPaintLabels(true);
 		jSliderSoundVelocityPiston.setPaintTicks(true);
@@ -858,8 +858,8 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 		jPanelStatSoundPistonIInitial.setName("jPanelStatSoundPistonIInitial"); // NOI18N
 
 		jSliderStatSoundIPistonInitial.setMajorTickSpacing(40);
-		jSliderStatSoundIPistonInitial.setMaximum(1484);
-		jSliderStatSoundIPistonInitial.setMinimum(1264);
+		jSliderStatSoundIPistonInitial.setMaximum(1480);
+		jSliderStatSoundIPistonInitial.setMinimum(1258);
 		jSliderStatSoundIPistonInitial.setMinorTickSpacing(20);
 		jSliderStatSoundIPistonInitial.setPaintLabels(true);
 		jSliderStatSoundIPistonInitial.setPaintTicks(true);
@@ -909,8 +909,8 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 		jPanelStatSoundIPistonEnd.setName("jPanelStatSoundIPistonEnd"); // NOI18N
 
 		jSliderStatSoundIPistonEnd.setMajorTickSpacing(40);
-		jSliderStatSoundIPistonEnd.setMaximum(1484);
-		jSliderStatSoundIPistonEnd.setMinimum(1264);
+		jSliderStatSoundIPistonEnd.setMaximum(1480);
+		jSliderStatSoundIPistonEnd.setMinimum(1258);
 		jSliderStatSoundIPistonEnd.setMinorTickSpacing(20);
 		jSliderStatSoundIPistonEnd.setPaintLabels(true);
 		jSliderStatSoundIPistonEnd.setPaintTicks(true);
@@ -1201,8 +1201,8 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 		jPanelStatSoundIIPiston.setName("jPanelStatSoundIIPiston"); // NOI18N
 
 		jSliderStatSoundIIPiston.setMajorTickSpacing(40);
-		jSliderStatSoundIIPiston.setMaximum(1484);
-		jSliderStatSoundIIPiston.setMinimum(1264);
+		jSliderStatSoundIIPiston.setMaximum(1480);
+		jSliderStatSoundIIPiston.setMinimum(1258);
 		jSliderStatSoundIIPiston.setMinorTickSpacing(20);
 		jSliderStatSoundIIPiston.setPaintLabels(true);
 		jSliderStatSoundIIPiston.setPaintTicks(true);
