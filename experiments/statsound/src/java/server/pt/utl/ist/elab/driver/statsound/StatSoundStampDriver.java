@@ -73,7 +73,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 	// command parameters
 	public static final String NUMSAMPLES_COMMAND_PART = "number of samples";
 	public static final String PISTON_START_COMMAND_PART = PISTON_START_PARAMETER;
-	public static final String PISTON_END_COMMAND_PART = PISTON_START_PARAMETER;
+	public static final String PISTON_END_COMMAND_PART = PISTON_END_PARAMETER;
 	public static final String STATUS_COMMAND_PART = STATUS_PARAMETER;
 	public static final String CALIBRATION_COMMAND_PART = CALIBRATION_PARAMETER;
 
