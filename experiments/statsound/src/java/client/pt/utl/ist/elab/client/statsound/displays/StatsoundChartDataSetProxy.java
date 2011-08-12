@@ -162,9 +162,7 @@ public class StatsoundChartDataSetProxy extends org.jfree.data.xy.AbstractXYData
 		final TypeOfExperiment typeOfExperiment = TypeOfExperiment.from(experimentTypeParameter);
 		switch (typeOfExperiment) {
 		case SOUND_VELOCITY:
-			// acquisition time
-			final long milisInMicros = expDataModel.getTimeStamp(item).getTime().getMilis() * 1000;
-			return milisInMicros + expDataModel.getTimeStamp(item).getTime().getMicros();
+			return getAcquisitionTimeInMicros(item);
 		case STATSOUND_VARY_FREQUENCY:
 			// frequency
 			return expDataModel.getValueAt(item, getChannelDisplayX()).getValueNumber().doubleValue();
@@ -174,6 +172,16 @@ public class StatsoundChartDataSetProxy extends org.jfree.data.xy.AbstractXYData
 		}
 		return 0;
 
+	}
+
+	private double getAcquisitionTimeInMicros(final int item) {
+		// acquisition time
+		long relativeMilisTime = expDataModel.getTimeStamp(item).getTime().getMilis()
+				- expDataModel.getTimeStamp(0).getTime().getMilis();
+		long relativeMicrosTime = expDataModel.getTimeStamp(item).getTime().getMicros()
+				- expDataModel.getTimeStamp(0).getTime().getMicros();
+		final long milisInMicros = relativeMilisTime * 1000;
+		return milisInMicros + relativeMicrosTime;
 	}
 
 	@Override

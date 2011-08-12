@@ -121,15 +121,23 @@ public class StatsoundTableModelProxy extends com.linkare.rec.impl.client.experi
 			// sample number
 			return String.valueOf(rowIndex + 1);
 		} else if (columnIndex == 1) {
-			// acquisition time
-			final long milisInMicros = expDataModel.getTimeStamp(rowIndex).getTime().getMilis() * 1000;
-			return milisInMicros + expDataModel.getTimeStamp(rowIndex).getTime().getMicros();
+			return getAcquisitionTimeInMicros(rowIndex);
 		}
 		final PhysicsValue value = expDataModel.getValueAt(rowIndex, getColAtArray(columnIndex));
 		if (value == null) {
 			return null;
 		}
 		return value.getValue().toString();
+	}
+
+	private long getAcquisitionTimeInMicros(final int rowIndex) {
+		// acquisition time
+		long relativeMilisTime = expDataModel.getTimeStamp(rowIndex).getTime().getMilis()
+				- expDataModel.getTimeStamp(0).getTime().getMilis();
+		long relativeMicrosTime = expDataModel.getTimeStamp(rowIndex).getTime().getMicros()
+				- expDataModel.getTimeStamp(0).getTime().getMicros();
+		final long milisInMicros = relativeMilisTime * 1000;
+		return milisInMicros + relativeMicrosTime;
 	}
 
 	public void headerAvailable(final HardwareAcquisitionConfig header) {
