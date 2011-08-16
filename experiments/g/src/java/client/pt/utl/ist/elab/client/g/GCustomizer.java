@@ -285,7 +285,7 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		}
 		try {
 			final int numSamples = Integer.parseInt(strNumSamples);
-			if (numSamples <= sldNumSamples.getMaximum() && numSamples > sldNumSamples.getMinimum()) {
+			if (numSamples <= sldNumSamples.getMaximum() && numSamples >= sldNumSamples.getMinimum()) {
 				sldNumSamples.setValue(numSamples);
 			} else {
 				tfNumSamples.setText("" + sldNumSamples.getValue());
@@ -305,7 +305,7 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		}
 		try {
 			final int Freq = Integer.parseInt(strFreq);
-			if (Freq <= sldFreq.getMaximum() && Freq > sldFreq.getMinimum()) {
+			if (Freq <= sldFreq.getMaximum() && Freq >= sldFreq.getMinimum()) {
 				sldFreq.setValue(Freq);
 			} else {
 				tfFreq.setText("" + sldFreq.getValue());
@@ -325,7 +325,7 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		}
 		try {
 			final int Pos1 = Integer.parseInt(strPos1);
-			if (Pos1 <= sldPos1.getMaximum() && Pos1 > sldPos1.getMinimum()) {
+			if (Pos1 <= sldPos1.getMaximum() && Pos1 >= sldPos1.getMinimum()) {
 				sldPos1.setValue(Pos1);
 			} else {
 				tfPos1.setText("" + sldPos1.getValue());

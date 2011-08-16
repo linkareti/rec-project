@@ -206,7 +206,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="15" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
@@ -388,12 +388,14 @@
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldSoundVelocityNSamples.text"/>
-                    <Property name="focusable" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldSoundVelocityNSamples" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[40, 19]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldSoundVelocityNSamplesFocusLost"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelSoundVelocityNSamplesAlert">
                   <Properties>
@@ -473,12 +475,14 @@
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldSoundVelocityPiston.text"/>
-                    <Property name="focusable" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldSoundVelocityPiston" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[40, 19]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldSoundVelocityPistonFocusLost"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -593,12 +597,14 @@
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldSoundVelocityFrequency.text"/>
-                    <Property name="focusable" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldSoundVelocityFrequency" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[40, 19]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldSoundVelocityFrequencyFocusLost"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -641,7 +647,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="15" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
@@ -828,12 +834,14 @@
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundINSamples.text"/>
-                    <Property name="focusable" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundINSamples" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[40, 19]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldStatSoundINSamplesFocusLost"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelStatSoundINSamplesAlert">
                   <Properties>
@@ -917,12 +925,14 @@
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIPistonInitial.text"/>
-                    <Property name="focusable" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIPistonInitial" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[40, 19]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldStatSoundIPistonInitialFocusLost"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -982,12 +992,14 @@
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIPistonEnd.text"/>
-                    <Property name="focusable" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIPistonEnd" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[40, 19]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldStatSoundIPistonEndFocusLost"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -1047,12 +1059,14 @@
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIFrequency.text"/>
-                    <Property name="focusable" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIFrequency" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[40, 19]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldStatSoundIFrequencyFocusLost"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -1095,7 +1109,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="15" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
@@ -1282,12 +1296,14 @@
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIINSamples.text"/>
-                    <Property name="focusable" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIINSamples" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[40, 19]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldStatSoundIINSamplesFocusLost"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelStatSoundIINSamplesAlert">
                   <Properties>
@@ -1310,7 +1326,6 @@
                     <Property name="minorTickSpacing" type="int" value="50"/>
                     <Property name="paintLabels" type="boolean" value="true"/>
                     <Property name="paintTicks" type="boolean" value="true"/>
-                    <Property name="snapToTicks" type="boolean" value="true"/>
                     <Property name="value" type="int" value="400"/>
                     <Property name="name" type="java.lang.String" value="jSliderStatSoundIINSamples" noResource="true"/>
                   </Properties>
@@ -1376,12 +1391,14 @@
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIIPiston.text"/>
-                    <Property name="focusable" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIIPiston" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[40, 19]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldStatSoundIIPistonFocusLost"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -1441,12 +1458,14 @@
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIIFrequencyInitial.text"/>
-                    <Property name="focusable" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIIFrequencyInitial" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[40, 19]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldStatSoundIIFrequencyInitialFocusLost"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -1506,12 +1525,14 @@
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIIFrequencyEnd.text"/>
-                    <Property name="focusable" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIIFrequencyEnd" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[40, 19]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldStatSoundIIFrequencyEndFocusLost"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
