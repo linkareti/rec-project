@@ -36,7 +36,7 @@ import com.linkare.rec.jmf.media.protocol.function.FunctorTypeControl;
  */
 public class StatSoundStampDataSource extends AbstractStampDataSource implements DataSoundListener {
 
-	private static final String STAMP_DRIVER_LOGGER = "StampDriver.Logger";
+	
 
 	private final int POSITION_INDEX = 0;
 
@@ -83,7 +83,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 	private int numberOfPosReceivedFromHardware;
 
-	private static final Logger LOGGER = Logger.getLogger(STAMP_DRIVER_LOGGER);
+	private static final Logger LOGGER = Logger.getLogger(StatSoundStampDriver.class.getName());
 
 	/** Creates a new instance of RadioactividadeStampDataSource */
 	public StatSoundStampDataSource() {
@@ -101,18 +101,12 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				LOGGER.log(Level.FINEST, "Hardware is too friendly... sending me more data than I asked!!! Bye bye!");
 				return;
 			}
+			
 			final String experimentTypeParameter = config.getSelectedHardwareParameterValue(EXPERIMENT_TYPE_PARAMETER);
 			final TypeOfExperiment typeOfExperiment = TypeOfExperiment.from(experimentTypeParameter);
-			final Object commandData = cmd.getCommandData(StampStatSoundProcessor.COMMAND_IDENTIFIER);
-			Integer pos = null;
-			try {
-				pos = Integer.valueOf(String.valueOf(commandData));
-				numberOfPosReceivedFromHardware++;
-			} catch (final NumberFormatException e) {
-				LOGGER.log(Level.WARNING, "Error getting the position");
-				e.printStackTrace();
-				return;
-			}
+			final Integer pos = (Integer) cmd.getCommandData(StampStatSoundProcessor.COMMAND_IDENTIFIER);
+			numberOfPosReceivedFromHardware++;
+
 			switch (typeOfExperiment) {
 			case STATSOUND_VARY_PISTON:
 				handleProtocolVaryPiston(pos);

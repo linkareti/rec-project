@@ -6,8 +6,11 @@
 
 package pt.utl.ist.elab.driver.statsound.processors;
 
+import java.util.logging.Logger;
+
 import pt.utl.ist.elab.driver.serial.stamp.transproc.AbstractStampProcessor;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
+import pt.utl.ist.elab.driver.statsound.StatSoundStampDriver;
 
 /**
  * 
@@ -15,6 +18,8 @@ import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
  */
 public class StampStatSoundProcessor extends AbstractStampProcessor {
 	public static final String COMMAND_IDENTIFIER = "POS";
+	
+	private static final Logger LOGGER = Logger.getLogger(StatSoundStampDriver.class.getName());
 
 	/** Creates a new instance of StampHelloProcessor */
 	public StampStatSoundProcessor() {
@@ -36,6 +41,7 @@ public class StampStatSoundProcessor extends AbstractStampProcessor {
 				&& splitedStr[0] != null) {
 			try {
 				pos = Integer.parseInt(splitedStr[0]);
+				LOGGER.fine(">>>>> Directly from HARDWARE POS="+pos);
 				command.addCommandData(StampStatSoundProcessor.COMMAND_IDENTIFIER, pos);
 				command.setData(true);
 				return true;

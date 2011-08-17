@@ -102,8 +102,8 @@
 	</frequency-scale>
 	<Frequency type="FrequencyType" multiplier="none">11025</Frequency>
 	<sampling-scale>
-		<min-samples>10</min-samples>
-		<max-samples>2000</max-samples>
+		<min-samples>1</min-samples>
+		<max-samples>5000</max-samples>
 		<step-samples>1</step-samples>
 	</sampling-scale>
 	<!-- position -->
