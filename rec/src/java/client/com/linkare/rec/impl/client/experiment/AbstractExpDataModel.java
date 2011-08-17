@@ -136,7 +136,6 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 			}
 		}
 
-		// TODO: pzenida - Check with JP if this is necessary. I got a NPE when getting the total samples....
 		if (getAcquisitionConfig() != null) {
 			setTotalSamples(getAcquisitionConfig().getTotalSamples());
 			setFrequency((long) getAcquisitionConfig().getSelectedFrequency().getFrequency());

@@ -22,6 +22,7 @@ import pt.utl.ist.elab.driver.statsound.processors.StampStatSoundTempProcessor;
 
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.synch.FrequencyDefType;
 import com.linkare.rec.impl.data.PhysicsValueFactory;
 import com.linkare.rec.jmf.media.datasink.capture.ChannelDataFrame;
 import com.linkare.rec.jmf.media.datasink.capture.Handler;
@@ -78,6 +79,10 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 	// new stuff:
 	private Control control;
 
+	private int numberOfInvocationsToHardware;
+
+	private int numberOfPosReceivedFromHardware;
+
 	private static final Logger LOGGER = Logger.getLogger(STAMP_DRIVER_LOGGER);
 
 	/** Creates a new instance of RadioactividadeStampDataSource */
@@ -92,12 +97,17 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 		}
 
 		if (cmd.getCommandIdentifier().equals(StampStatSoundProcessor.COMMAND_IDENTIFIER)) {
+			if (numberOfPosReceivedFromHardware >= numberOfInvocationsToHardware) {
+				LOGGER.log(Level.FINEST, "Hardware is too friendly... sending me more data than I asked!!! Bye bye!");
+				return;
+			}
 			final String experimentTypeParameter = config.getSelectedHardwareParameterValue(EXPERIMENT_TYPE_PARAMETER);
 			final TypeOfExperiment typeOfExperiment = TypeOfExperiment.from(experimentTypeParameter);
 			final Object commandData = cmd.getCommandData(StampStatSoundProcessor.COMMAND_IDENTIFIER);
 			Integer pos = null;
 			try {
 				pos = Integer.valueOf(String.valueOf(commandData));
+				numberOfPosReceivedFromHardware++;
 			} catch (final NumberFormatException e) {
 				LOGGER.log(Level.WARNING, "Error getting the position");
 				e.printStackTrace();
@@ -132,14 +142,22 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 		newWaveTypeOnFunctorControl().setFrequency(freqIni);
 		waitBeforeCapture();
 		ChannelDataFrame channelDataFrame = soundCaptureDevice.captureFrame();
-		for (int i = 0; i < nSamples; i += 4) {
-			long wave1 = channelDataFrame.getChannelData(0)[i];
-			long wave2 = channelDataFrame.getChannelData(1)[i];
-			double channelVRMS1 = channelDataFrame.getChannelVRMS(0);
-			double channelVRMS2 = channelDataFrame.getChannelVRMS(1);
-			LOGGER.log(Level.INFO, i + ": wave1 before conversion = " + wave1);
-			LOGGER.log(Level.INFO, i + ": wave2 before conversion = " + wave2);
-			PhysicsValue[] values = fillInValues(pos, channelVRMS1, channelVRMS2, wave1, wave2, freqIni);
+
+		double frequencyInHz = config.getSelectedFrequency().getFrequency()
+				* config.getSelectedFrequency().getMultiplier().getExpValue();
+		if (config.getSelectedFrequency().getFrequencyDefType().getValue() == FrequencyDefType.SamplingIntervalType
+				.getValue()) {
+			frequencyInHz = 1. / frequencyInHz;
+		}
+
+		int overSampleDisplacement = (int) (channelDataFrame.getCaptureFormat().getSampleRate() / frequencyInHz);
+
+		for (int i = 0; i < nSamples; i++) {
+			long wave1 = channelDataFrame.getChannelData(0)[i * overSampleDisplacement];
+			long wave2 = channelDataFrame.getChannelData(1)[i * overSampleDisplacement];
+			// double channelVRMS1 = channelDataFrame.getChannelVRMS(0);
+			// double channelVRMS2 = channelDataFrame.getChannelVRMS(1);
+			PhysicsValue[] values = fillInValues(pos, null, null, wave1, wave2, freqIni);
 			super.addDataRow(values);
 		}
 	}
@@ -328,5 +346,12 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 		if (control != null) {
 			functorTypeControl.setFunctorType(FunctorType.SILENCE);
 		}
+	}
+
+	/**
+	 * @param numberOfInvocationsToHardware
+	 */
+	public void setNumberOfInvocationsToHardware(int numberOfInvocationsToHardware) {
+		this.numberOfInvocationsToHardware = numberOfInvocationsToHardware;
 	}
 }

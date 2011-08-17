@@ -439,7 +439,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 			return;
 		}
 
-		if (cmd.getCommandIdentifier().equals(AbstractStampDriver.ID_STR)) {
+		if (cmd.getCommandIdentifier().equals(getDriverUniqueID())) {
 			// the driver is controlling the state machine so, while the
 			// data source is not ended, simply ignore the hardware messages
 			if (dataSource != null && !dataSource.isExpEnded()) {
@@ -495,6 +495,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		dataSource.setNSamples(nSamples);
 		dataSource.setExpEnded(false);
 		dataSource.setCaptureDevice(soundCaptureDevice);
+		dataSource.setNumberOfInvocationsToHardware(numberOfInvocationsToHardware);
 		fireIDriverStateListenerDriverStarted();
 	}
 
@@ -562,7 +563,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		if (stampConfigCommand == null) {
 			throw new TimedOutException("No configuration available yet!");
 		}
-
+		
 		waitingStart = true;
 
 		WaitForConditionResult.waitForConditionTrue(new AbstractConditionDecisor() {
