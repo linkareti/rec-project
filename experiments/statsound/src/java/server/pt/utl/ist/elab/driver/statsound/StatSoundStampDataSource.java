@@ -216,7 +216,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 			Thread.sleep(250);
 			// Wait for wave to play for at least a while so that we don't catch
 			// the train running
-			Thread.sleep(250);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// FIXME - Handle this correctly
 			LOGGER.warning("Unable to wait for sound stability...");

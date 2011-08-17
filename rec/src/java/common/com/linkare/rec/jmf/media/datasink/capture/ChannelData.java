@@ -1,7 +1,5 @@
 package com.linkare.rec.jmf.media.datasink.capture;
 
-import java.math.BigInteger;
-
 import javax.media.Buffer;
 import javax.media.format.AudioFormat;
 
@@ -10,28 +8,26 @@ public class ChannelData {
 	private static final int BYTE_11111111 = 255;
 	private static final int BITS_PER_BYTE = 8;
 
-	private long[][] channelsData = new long[0][0];
+	private long[][] channelWaveValues = new long[0][0];
 	private double[] channelsVRMS;
 
-	private long[][] tempData;
+	private long[][] tempWaveValues;
 	private double[] tempVRMS;
 
+	private static final int[] BUFFER_LOCK = new int[0];
+	private Buffer buffer;
+
 	private AudioFormat audioFormat;
-	
+
 	public ChannelData() {
 
 	}
 
-	public void fromBuffer(Buffer buffer) {
-		byte[] data = new byte[buffer.getLength()];
-		System.arraycopy(buffer.getData(), buffer.getOffset(), data, 0, buffer.getLength());
-		audioFormat = (AudioFormat) buffer.getFormat();
-		final int numChannels = audioFormat.getChannels();
-		final int sizeOfSampleInBytes = audioFormat.getSampleSizeInBits() / BITS_PER_BYTE;
-		allocateChannelsData(numChannels, data.length);
-		final boolean signed = audioFormat.getSigned() == AudioFormat.SIGNED;
-		final boolean bigEndian = audioFormat.getEndian() == AudioFormat.BIG_ENDIAN;
-		calculateChannelData(data, sizeOfSampleInBytes, numChannels, signed, bigEndian);
+	public void setBuffer(Buffer buffer) {
+		// just hold on to it for later use... if needed!
+		synchronized (BUFFER_LOCK) {
+			this.buffer = buffer;
+		}
 	}
 
 	private void calculateChannelData(byte[] data, int sizeOfSampleInBytes, int numChannels, boolean signed,
@@ -45,20 +41,18 @@ public class ChannelData {
 			for (int sampleNr = 0; sampleNr < data.length; sampleNr += sampleIncrementOffset) {
 				System.arraycopy(data, sampleNr + channel * sizeOfSampleInBytes, sampleData, 0, sampleData.length);
 				long sampleValue = bigEndian ? fromBigEndian(sampleData, signed) : fromLittleEndian(sampleData, signed);
-				tempData[channel][sampleNr] = sampleValue;
+				tempWaveValues[channel][sampleNr] = sampleValue;
 				accumulatedPower += sampleValue * sampleValue;
 			}
-			accumulatedPower = Math.sqrt(accumulatedPower) / tempData[channel].length;
+			accumulatedPower = Math.sqrt(accumulatedPower) / tempWaveValues[channel].length;
 			tempVRMS[channel] = Math.log(accumulatedPower);
 		}
-		synchronized (channelsData) {
-			channelsData = tempData;
-			channelsVRMS = tempVRMS;
-		}
+		channelWaveValues = tempWaveValues;
+		channelsVRMS = tempVRMS;
 	}
 
 	private void allocateChannelsData(int numChannels, int length) {
-		tempData = new long[numChannels][length];
+		tempWaveValues = new long[numChannels][length];
 		tempVRMS = new double[numChannels];
 	}
 
@@ -96,9 +90,19 @@ public class ChannelData {
 	}
 
 	public ChannelDataFrame readDataFrame() {
-		synchronized (channelsData) {
-			return new ChannelDataFrame(channelsData, channelsVRMS,audioFormat);
+		byte[] data = new byte[buffer.getLength()];
+		synchronized (BUFFER_LOCK) {
+			System.arraycopy(buffer.getData(), buffer.getOffset(), data, 0, buffer.getLength());
+			audioFormat = (AudioFormat) buffer.getFormat();
 		}
+
+		final int numChannels = audioFormat.getChannels();
+		final int sizeOfSampleInBytes = audioFormat.getSampleSizeInBits() / BITS_PER_BYTE;
+		allocateChannelsData(numChannels, data.length);
+		final boolean signed = audioFormat.getSigned() == AudioFormat.SIGNED;
+		final boolean bigEndian = audioFormat.getEndian() == AudioFormat.BIG_ENDIAN;
+		calculateChannelData(data, sizeOfSampleInBytes, numChannels, signed, bigEndian);
+		return new ChannelDataFrame(channelWaveValues, channelsVRMS, audioFormat);
 	}
 
 }
