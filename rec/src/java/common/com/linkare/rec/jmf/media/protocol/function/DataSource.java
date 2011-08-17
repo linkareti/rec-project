@@ -359,7 +359,6 @@ public class DataSource extends PushBufferDataSource {
 						newFunctorBeanInfo.getPropertyDescriptors().length);
 				for (PropertyDescriptor newPropertyDesc : newFunctorBeanInfo.getPropertyDescriptors()) {
 					newFunctorProperties.put(newPropertyDesc.getName(), newPropertyDesc);
-					System.out.println("New functor property " + newPropertyDesc.getName());
 				}
 
 				for (PropertyDescriptor propertyDesc : oldFunctorBeanInfo.getPropertyDescriptors()) {
