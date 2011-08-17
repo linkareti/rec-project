@@ -108,7 +108,6 @@
 	<classpathentry kind="lib" path="elab/lib/java/driver/RXTXcomm.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/driver/jsr80.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/driver/jsr80_ri.jar"/>
-	<classpathentry kind="lib" path="elab/lib/java/driver/jmf.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/common/tools-1.4.0.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/client/fits1.3.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/client/jfreechart-1.0.9.jar"/>
@@ -188,5 +187,6 @@
 	<classpathentry kind="lib" path="rec/lib/java/multicast/glassfish/stats77.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/multicast/glassfish/tiger-types-osgi.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/multicast/glassfish/transaction-internal-api.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/common/jmf.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
