@@ -545,14 +545,6 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		LOGGER.fine("Stop called!");
 		fireIDriverStateListenerDriverStoping();
 		stopDataSource();
-
-		// cleanup the player
-		if (player != null) {
-			player.stop();
-			player.deallocate();
-			player.close();
-		}
-
 		stoping = true;
 	}
 
@@ -577,7 +569,24 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 			}
 		}, 400000, 1000);
 
-		// now, it is time to start the player
-		player.start();
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void shutdown() {
+		try {
+			if(player!=null){
+				player.stop();
+				player.deallocate();
+				player.close();
+				player=null;
+			}
+		}catch(Exception ignored){}
+		
+		super.shutdown();
+		
+	}
+	
 }
