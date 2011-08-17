@@ -29,10 +29,10 @@ public final class ProcessingManager {
 	public static final String SYSPROP_THREAD_IDLE_TIME = "DReC.MultiCast.ProcessingManager.Thread.Idletime";
 
 	private static final int MAX_POOL_SIZE_MAX_PRIORITY = Defaults.defaultIfEmpty(
-			System.getProperty(ProcessingManager.SYSPROP_MAX_POOL_SIZE_MAX_PRIORITY), 100);
+			System.getProperty(ProcessingManager.SYSPROP_MAX_POOL_SIZE_MAX_PRIORITY), 1);
 
 	private static final int CORE_POOL_SIZE_MAX_PRIORITY = Defaults.defaultIfEmpty(
-			System.getProperty(ProcessingManager.SYSPROP_CORE_POOL_SIZE_MAX_PRIORITY), 50);
+			System.getProperty(ProcessingManager.SYSPROP_CORE_POOL_SIZE_MAX_PRIORITY), 1);
 
 	private static final int MAX_POOL_SIZE_MEDIUM_PRIORITY = Defaults.defaultIfEmpty(
 			System.getProperty(ProcessingManager.SYSPROP_MAX_POOL_SIZE_MEDIUM_PRIORITY), 20);
