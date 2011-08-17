@@ -61,7 +61,7 @@
 	<target name="pre-zip.dist.harwareserver" description="Pre zip dist hardwareserver creation for aleatorio">
 
 		<replace file="${experiments.build.dir}/StartstatsoundDriver.sh" propertyFile="build.properties">
-			<replacefilter token="export DRIVER_EXPERIMENT_CLASSPATH=" value="export DRIVER_EXPERIMENT_CLASSPATH=$DRIVER_BASE_DIR/lib/jmf.jar" />
+			<replacefilter token="export DRIVER_EXPERIMENT_CLASSPATH=" value="export DRIVER_EXPERIMENT_CLASSPATH=$DRIVER_BASE_DIR/lib/jmf.jar:$DRIVER_BASE_DIR/lib/jmf.properties" />
 			<replacefilter token="java.awt.headless=true" value="java.awt.headless=false" />
 		</replace>
 
