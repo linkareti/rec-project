@@ -66,7 +66,7 @@
 				<classpath>
 					<path refid="compile.experiment.client.classpath" />
 					<fileset dir="experiments/@{experiment.name}/lib/java/client">
-						<include name="**/*.jar" />
+						<include name="**/*" />
 					</fileset>
 				</classpath>
 				<compilerarg value="-Xlint:unchecked, cast, -serial" />
@@ -114,7 +114,7 @@
 				<classpath>
 					<path refid="compile.experiment.driver.classpath" />
 					<fileset dir="experiments/@{experiment.name}/lib/java/server">
-						<include name="**/*.jar" />
+						<include name="**/*" />
 					</fileset>
 				</classpath>
 				<compilerarg value="-Xlint:unchecked, cast, -serial" />
@@ -235,7 +235,7 @@
 					<pathelement location="${elab.client.classes.dir}/" />
 					<pathelement location="${experiments.classes.dir}/@{experiment.name}/client/" />
 					<fileset dir="experiments/@{experiment.name}/lib/java/client/">
-						<include name="**/*.jar" />
+						<include name="**/*" />
 					</fileset>
 				</classpath>
 				<jvmarg value="-Xms${min.memory}" />
@@ -267,7 +267,7 @@
 					<pathelement location="${elab.client.classes.dir}/" />
 					<pathelement location="${experiments.classes.dir}/@{experiment.name}/client/" />
 					<fileset dir="experiments/@{experiment.name}/lib/java/client/">
-						<include name="**/*.jar" />
+						<include name="**/*" />
 					</fileset>
 				</classpath>
 				<jvmarg value="-Xdebug" />
@@ -302,7 +302,7 @@
 					<pathelement location="${elab.hardwareserver.classes.dir}/" />
 					<pathelement location="${experiments.classes.dir}/@{experiment.name}/server/" />
 					<fileset dir="experiments/@{experiment.name}/lib/java/server/">
-						<include name="**/*.jar" />
+						<include name="**/*" />
 					</fileset>
 				</classpath>
 				<jvmarg value="-Xms${min.memory}" />
@@ -353,7 +353,7 @@
 					<pathelement location="${elab.hardwareserver.classes.dir}/" />
 					<pathelement location="${experiments.classes.dir}/@{experiment.name}/server/" />
 					<fileset dir="experiments/@{experiment.name}/lib/java/server/">
-						<include name="**/*.jar" />
+						<include name="**/*" />
 					</fileset>
 				</classpath>
 				<jvmarg value="-Xms${min.memory}" />

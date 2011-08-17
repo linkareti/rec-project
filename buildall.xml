@@ -155,7 +155,7 @@
 				<zipfileset file="${multicast.build.dir}/ReCMulticastController.jar" prefix="multicast" />
 				<zipfileset file="${multicast.build.dir}/ReCCommon.jar" prefix="multicast" />
 
-				<zipfileset dir="${multicast.build.dir}/lib" includes="**/*.jar" prefix="multicast/lib" />
+				<zipfileset dir="${multicast.build.dir}/lib" includes="**/*" prefix="multicast/lib" />
 				<zipfileset file="${multicast.build.dir}/etc/loggers.config.properties" fullpath="multicast/etc/loggers.config.properties" />
 				<zipfileset file="${multicast.build.dir}/@{lab.name}/etc/openorb.xml" fullpath="multicast/etc/openorb.xml" />
 				
@@ -245,16 +245,16 @@
 		<mkdir dir="${client.build.dir}/lib" />
 		<copy todir="${client.build.dir}/lib" overwrite="true" failonerror="false">
 			<fileset dir="${rec.common.lib.dir}">
-				<include name="*.jar" />
+				<include name="*" />
 			</fileset>
 			<fileset dir="${rec.client.lib.dir}">
-				<include name="*.jar" />
+				<include name="*" />
 			</fileset>
 			<fileset dir="${elab.client.lib.dir}">
-				<include name="*.jar" />
+				<include name="*" />
 			</fileset>
 			<fileset dir="${jvlc.lib.dir}">
-				<include name="*.jar" />
+				<include name="*" />
 			</fileset>
 		</copy>
 	</target>
