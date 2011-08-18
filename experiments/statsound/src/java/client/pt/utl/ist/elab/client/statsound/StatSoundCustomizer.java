@@ -38,20 +38,23 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
     private static final String EXPERIMENT_TYPE = "experiment.type";
     public static final int MIN_VALUE_FOR_VALID_SOUND_VELOCITY_CONFIG = 100000;
     /** Init vars */
+    //
+    private static final int MAX_PISTON_POSITION = 1481;
+    private static final int MIN_PISTON_POSITION = 1264;
     // Sound velocity tab
-    private final int DEFAULT_SOUND_VELOCITY_NSAMPLES = 500;
-    private final int DEFAULT_SOUND_VELOCITY_PISTON = 1300;
-    private final int DEFAULT_SOUND_VELOCITY_FREQUENCY = 250;
+    private static final int DEFAULT_SOUND_VELOCITY_NSAMPLES = 500;
+    private static final int DEFAULT_SOUND_VELOCITY_PISTON = 1300;
+    private static final int DEFAULT_SOUND_VELOCITY_FREQUENCY = 250;
     // Statsound I tab
-    private final int DEFAULT_STATSOUND_I_NSAMPLES = 50;
-    private final int DEFAULT_STATSOUND_I_FREQUENCY = 250;
-    private final int DEFAULT_STATSOUND_I_PISTON_INITIAL = 1300;
-    private final int DEFAULT_STATSOUND_I_PISTON_END = 1400;
+    private static final int DEFAULT_STATSOUND_I_NSAMPLES = 50;
+    private static final int DEFAULT_STATSOUND_I_FREQUENCY = 250;
+    private static final int DEFAULT_STATSOUND_I_PISTON_INITIAL = 1300;
+    private static final int DEFAULT_STATSOUND_I_PISTON_END = 1400;
     // Statsound II tab
-    private final int DEFAULT_STATSOUND_II_NSAMPLES = 400;
-    private final int DEFAULT_STATSOUND_II_FREQUENCY_INITIAL = 250;
-    private final int DEFAULT_STATSOUND_II_FREQUENCY_END = 1000;
-    private final int DEFAULT_STATSOUND_II_PISTON = 1300;
+    private static final int DEFAULT_STATSOUND_II_NSAMPLES = 400;
+    private static final int DEFAULT_STATSOUND_II_FREQUENCY_INITIAL = 250;
+    private static final int DEFAULT_STATSOUND_II_FREQUENCY_END = 1000;
+    private static final int DEFAULT_STATSOUND_II_PISTON = 1300;
     private static final String MIN_SAMPLES_STR = ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.minsamples");
     private static final String MAX_SAMPLES_STR = ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.maxsamples");
     /** REC */
@@ -438,8 +441,8 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelSoundVelocityPiston.setName("jPanelSoundVelocityPiston"); // NOI18N
 
         jSliderSoundVelocityPiston.setMajorTickSpacing(40);
-        jSliderSoundVelocityPiston.setMaximum(1484);
-        jSliderSoundVelocityPiston.setMinimum(1264);
+        jSliderSoundVelocityPiston.setMaximum(MAX_PISTON_POSITION);
+        jSliderSoundVelocityPiston.setMinimum(MIN_PISTON_POSITION);
         jSliderSoundVelocityPiston.setMinorTickSpacing(20);
         jSliderSoundVelocityPiston.setPaintLabels(true);
         jSliderSoundVelocityPiston.setPaintTicks(true);
@@ -744,8 +747,8 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelStatSoundPistonIInitial.setName("jPanelStatSoundPistonIInitial"); // NOI18N
 
         jSliderStatSoundIPistonInitial.setMajorTickSpacing(40);
-        jSliderStatSoundIPistonInitial.setMaximum(1484);
-        jSliderStatSoundIPistonInitial.setMinimum(1264);
+        jSliderStatSoundIPistonInitial.setMaximum(MAX_PISTON_POSITION);
+        jSliderStatSoundIPistonInitial.setMinimum(MIN_PISTON_POSITION);
         jSliderStatSoundIPistonInitial.setMinorTickSpacing(20);
         jSliderStatSoundIPistonInitial.setPaintLabels(true);
         jSliderStatSoundIPistonInitial.setPaintTicks(true);
@@ -790,8 +793,8 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelStatSoundIPistonEnd.setName("jPanelStatSoundIPistonEnd"); // NOI18N
 
         jSliderStatSoundIPistonEnd.setMajorTickSpacing(40);
-        jSliderStatSoundIPistonEnd.setMaximum(1484);
-        jSliderStatSoundIPistonEnd.setMinimum(1264);
+        jSliderStatSoundIPistonEnd.setMaximum(MAX_PISTON_POSITION);
+        jSliderStatSoundIPistonEnd.setMinimum(MIN_PISTON_POSITION);
         jSliderStatSoundIPistonEnd.setMinorTickSpacing(20);
         jSliderStatSoundIPistonEnd.setPaintLabels(true);
         jSliderStatSoundIPistonEnd.setPaintTicks(true);
@@ -1040,8 +1043,8 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelStatSoundIIPiston.setName("jPanelStatSoundIIPiston"); // NOI18N
 
         jSliderStatSoundIIPiston.setMajorTickSpacing(40);
-        jSliderStatSoundIIPiston.setMaximum(1484);
-        jSliderStatSoundIIPiston.setMinimum(1264);
+        jSliderStatSoundIIPiston.setMaximum(MAX_PISTON_POSITION);
+        jSliderStatSoundIIPiston.setMinimum(MIN_PISTON_POSITION);
         jSliderStatSoundIIPiston.setMinorTickSpacing(20);
         jSliderStatSoundIIPiston.setPaintLabels(true);
         jSliderStatSoundIIPiston.setPaintTicks(true);

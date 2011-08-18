@@ -13,15 +13,15 @@
 
 	<parameter name="piston.start" type="ContinuousValue" value="1300">
 		<selection-list>
-			<value order="1">1258</value>
-			<value order="2">1480</value>
+			<value order="1">1264</value>
+			<value order="2">1481</value>
 			<value order="3">1</value>
 		</selection-list>
 	</parameter>
 	<parameter name="piston.end" value="1300" type="ContinuousValue">
 		<selection-list>
-			<value order="1">1258</value>
-			<value order="2">1480</value>
+			<value order="1">1264</value>
+			<value order="2">1481</value>
 			<value order="3">1</value>
 		</selection-list>
 	</parameter>
@@ -110,10 +110,10 @@
 	<ChannelInfo name="statsound$rec.exp.statsound.hardwareinfo.channel.0.name" independent="false" direction="CHANNEL_INPUT">
 		<scale label="statsound$rec.exp.statsound.hardwareinfo.channel.0.label" physicsunitname="statsound$rec.exp.statsound.hardwareinfo.channel.0.physicsunitname"
 			physicsunitsymbol="mm" multiplier="none" selected="true">
-			<min><PhysicsVal type="int">250</PhysicsVal></min>
-			<max><PhysicsVal type="int">1480</PhysicsVal></max>
-			<step><PhysicsVal type="int">10</PhysicsVal></step>
-			<errordefault><PhysicsVal type="int">5</PhysicsVal></errordefault>
+			<min><PhysicsVal type="int">1264</PhysicsVal></min>
+			<max><PhysicsVal type="int">1481</PhysicsVal></max>
+			<step><PhysicsVal type="int">1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 	<!-- vrms 1 -->
@@ -140,8 +140,8 @@
 	<ChannelInfo name="statsound$rec.exp.statsound.hardwareinfo.channel.3.name" independent="false" direction="CHANNEL_INPUT">
 		<scale label="statsound$rec.exp.statsound.hardwareinfo.channel.3.label" physicsunitname="statsound$rec.exp.statsound.hardwareinfo.channel.3.physicsunitname"
 			physicsunitsymbol="" multiplier="none" selected="true">
-			<min><PhysicsVal type="int">-32768</PhysicsVal></min>
-			<max><PhysicsVal type="int">32767</PhysicsVal></max>
+			<min><PhysicsVal type="int">0</PhysicsVal></min>
+			<max><PhysicsVal type="int">65536</PhysicsVal></max>
 			<step><PhysicsVal type="int">1</PhysicsVal></step>
 			<errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
 		</scale>
@@ -150,8 +150,8 @@
 	<ChannelInfo name="statsound$rec.exp.statsound.hardwareinfo.channel.4.name" independent="false" direction="CHANNEL_INPUT">
 		<scale label="statsound$rec.exp.statsound.hardwareinfo.channel.4.label" physicsunitname="statsound$rec.exp.statsound.hardwareinfo.channel.4.physicsunitname"
 			physicsunitsymbol="" multiplier="none" selected="true">
-			<min><PhysicsVal type="int">-32768</PhysicsVal></min>
-			<max><PhysicsVal type="int">32767</PhysicsVal></max>
+			<min><PhysicsVal type="int">0</PhysicsVal></min>
+			<max><PhysicsVal type="int">65536</PhysicsVal></max>
 			<step><PhysicsVal type="int">1</PhysicsVal></step>
 			<errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
 		</scale>

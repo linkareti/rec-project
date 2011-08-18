@@ -32,7 +32,7 @@ public class Handler implements DataSink, BufferTransferHandler {
 	private MediaLocator outputLocator;
 
 	private List<DataSinkListener> listeners = new Vector<DataSinkListener>();
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
