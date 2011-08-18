@@ -6,7 +6,6 @@
  */
 package com.linkare.rec.impl.client.experiment;
 
-
 /**
  * 
  * @author npadriano

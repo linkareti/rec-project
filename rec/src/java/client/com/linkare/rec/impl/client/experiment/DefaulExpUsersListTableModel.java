@@ -137,7 +137,7 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 
 				}
 
-				if (i == 1 && controlInMin!=null && controlInMin.equals(controlInMax)) {
+				if (i == 1 && controlInMin != null && controlInMin.equals(controlInMax)) {
 					controlInMin = lblControlNow;
 					controlInMax = controlInMin;
 				}
