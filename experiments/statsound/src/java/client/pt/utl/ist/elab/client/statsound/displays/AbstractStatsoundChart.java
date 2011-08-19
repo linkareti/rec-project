@@ -1,5 +1,6 @@
 package pt.utl.ist.elab.client.statsound.displays;
 
+import java.awt.RenderingHints;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -129,11 +130,20 @@ public abstract class AbstractStatsoundChart extends javax.swing.JPanel implemen
 				StandardXYItemRenderer.SHAPES_AND_LINES, new StandardXYToolTipGenerator()));
 		plot.setRenderer(new StandardXYItemRenderer(StandardXYItemRenderer.SHAPES_AND_LINES,
 				new StandardXYToolTipGenerator()));
-		
-		
 
 		chart = new JFreeChart(getChartName(header), JFreeChart.DEFAULT_TITLE_FONT, plot, true);
 		final ChartPanel panel = new ChartPanel(chart);
+
+		RenderingHints hints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
+		hints.put(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED);
+		hints.put(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_SPEED);
+		hints.put(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_DISABLE);
+		hints.put(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_OFF);
+		hints.put(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+		hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
+		hints.put(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_DEFAULT);
+		hints.put(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
+		chart.setRenderingHints(hints);
 
 		panel.setPreferredSize(new java.awt.Dimension(350, 250));
 		panel.setMouseZoomable(true, false);
