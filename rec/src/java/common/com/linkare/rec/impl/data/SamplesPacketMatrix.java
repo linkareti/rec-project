@@ -273,6 +273,9 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable {
 		final double maxMem = heapMemoryUsage.getMax();
 		final double availableMem = heapMemoryUsage.getMax() - heapMemoryUsage.getUsed();
 		final double currentPercentFreeMem = 100. * availableMem / maxMem;
+		if(currentPercentFreeMem <= percentFreeThreshold) {
+			System.out.println(">>>>>>>>>>> Returning TRUE from shouldSerialize in SamplesPacketMatrix!");
+		}
 		return currentPercentFreeMem <= percentFreeThreshold;
 	}
 
