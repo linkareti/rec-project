@@ -89,6 +89,10 @@ public class Handler implements DataSink, BufferTransferHandler {
 				LOGGER.fine("Offset of buffer[" + (receivedBufferNumber) + "]:" + buffer.getOffset());
 				LOGGER.fine("Timestamp of buffer[" + (receivedBufferNumber) + "]:" + buffer.getTimeStamp());
 				LOGGER.fine("Duration of buffer[" + (receivedBufferNumber) + "]:" + buffer.getDuration());
+				
+				LOGGER.fine("IsDiscard on buffer [" + (receivedBufferNumber) + "]:" + buffer.isDiscard());
+				LOGGER.fine("IsEOM on buffer [" + (receivedBufferNumber) + "]:" + buffer.isEOM());
+				
 				LOGGER.fine("Flags of buffer[" + (receivedBufferNumber) + "]:" + expressBufferFlags(buffer.getFlags()));
 			}
 

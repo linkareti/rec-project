@@ -7,6 +7,7 @@
 package pt.utl.ist.elab.driver.statsound;
 
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +26,9 @@ import javax.media.RealizeCompleteEvent;
 import javax.media.StartEvent;
 import javax.media.format.AudioFormat;
 import javax.media.protocol.DataSource;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.TargetDataLine;
 
 import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDataSource;
 import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDriver;
@@ -356,17 +360,52 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 		if (!protocolPrefixList.contains(JMF_PACKAGE)) {
 			protocolPrefixList.add(JMF_PACKAGE);
+			PackageManager.setProtocolPrefixList(protocolPrefixList);
+			PackageManager.commitProtocolPrefixList();
 		}
-		PackageManager.setProtocolPrefixList(protocolPrefixList);
-		PackageManager.commitProtocolPrefixList();
 
 		@SuppressWarnings("unchecked")
 		Vector<String> contentPrefixList = PackageManager.getContentPrefixList();
 		if (!contentPrefixList.contains(JMF_PACKAGE)) {
 			contentPrefixList.add(JMF_PACKAGE);
+			PackageManager.setContentPrefixList(protocolPrefixList);
+			PackageManager.commitContentPrefixList();
 		}
-		PackageManager.setContentPrefixList(protocolPrefixList);
-		PackageManager.commitContentPrefixList();
+
+		try {
+			DataLine.Info lineInfo = new DataLine.Info(TargetDataLine.class, null, AudioSystem.NOT_SPECIFIED);
+
+			if (!AudioSystem.isLineSupported(lineInfo)) {
+				throw new Exception("AudioSystem.isLineSupported said 'false'");
+			}
+
+			// It's there, start to register JavaSound with CaptureDeviceManager
+			Vector devices = (Vector) CaptureDeviceManager.getDeviceList(null).clone();
+
+			// remove the old javasound capturers
+			String name;
+			Enumeration enumDevices = devices.elements();
+			while (enumDevices.hasMoreElements()) {
+				CaptureDeviceInfo cdi = (CaptureDeviceInfo) enumDevices.nextElement();
+				name = cdi.getName();
+				if (name.startsWith("JavaSound"))
+					CaptureDeviceManager.removeDevice(cdi);
+			}
+
+			// collect javasound capture device info from JavaSoundSourceStream
+			// and register them with CaptureDeviceManager
+			CaptureDeviceInfo[] cdi = com.sun.media.protocol.javasound.JavaSoundSourceStream.listCaptureDeviceInfo();
+			if (cdi != null) {
+				for (int i = 0; i < cdi.length; i++) {
+					CaptureDeviceManager.addDevice(cdi[i]);
+				}
+				CaptureDeviceManager.commit();
+				LOGGER.fine("JavaSoundAuto: Committed ok");
+			}
+
+		} catch (Exception e) {
+			throw new RuntimeException("Unable to detect java sound capture device... No sound board???", e);
+		}
 
 		String deviceLocation = System.getProperty(CAPTURE_DEVICE_URL);
 
@@ -555,7 +594,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		if (stampConfigCommand == null) {
 			throw new TimedOutException("No configuration available yet!");
 		}
-		
+
 		waitingStart = true;
 
 		WaitForConditionResult.waitForConditionTrue(new AbstractConditionDecisor() {
@@ -570,23 +609,24 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		}, 400000, 1000);
 
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void shutdown() {
 		try {
-			if(player!=null){
+			if (player != null) {
 				player.stop();
 				player.deallocate();
 				player.close();
-				player=null;
+				player = null;
 			}
-		}catch(Exception ignored){}
-		
+		} catch (Exception ignored) {
+		}
+
 		super.shutdown();
-		
+
 	}
-	
+
 }
