@@ -1,5 +1,6 @@
 package com.linkare.rec.jmf.media.datasink.capture;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,11 +47,16 @@ public class ChannelData {
 
 		for (int channel = 0; channel < numChannels; channel++) {
 			double accumulatedPower = 0;
-
-			for (int sampleNr = 0; sampleNr < tempWaveValues.length; sampleNr += 1) {
-				System.arraycopy(data, sampleNr*sampleIncrementOffset + channel * sizeOfSampleInBytes, sampleData, 0, sampleData.length);
+			
+			int displacementOfSampleForChannelIndex = channel * sizeOfSampleInBytes;
+			
+			for (int sampleNr = 0; sampleNr < tempWaveValues.length; sampleNr ++) {
+				System.arraycopy(data, (sampleNr*sampleIncrementOffset) + displacementOfSampleForChannelIndex, sampleData, 0, sampleData.length);
 				double sampleValue = bigEndian ? fromBigEndian(sampleData, signed) : fromLittleEndian(sampleData,
 						signed);
+				//FIXME - just testing stuff
+				System.out.println("sampleValue="+sampleValue);
+				
 				tempWaveValues[channel][sampleNr] = sampleValue;
 				accumulatedPower += sampleValue * sampleValue;
 			}
@@ -63,6 +69,8 @@ public class ChannelData {
 
 	private void allocateChannelsData(int numChannels, int sampleSizeInBytes, int lengthInBytes) {
 		tempWaveValues = new double[numChannels][lengthInBytes / (numChannels * sampleSizeInBytes)];
+		//FIXME - just to test
+		Arrays.fill(tempWaveValues, -0.2);
 		tempVRMS = new double[numChannels];
 	}
 
@@ -114,8 +122,7 @@ public class ChannelData {
 			audioFormat = (AudioFormat) buffer.getFormat();
 			normalizationValue = Math.pow(2, audioFormat.getSampleSizeInBits() - 1);
 			if (LOGGING_IS_AT_FINE_LEVEL) {
-				LOGGER.fine("Timestamp of buffer :" + buffer.getTimeStamp() + " - "
-						+ toDeltaTime(buffer.getTimeStamp()));
+				LOGGER.fine("Timestamp of buffer :" + buffer.getTimeStamp());
 			}
 		}
 
@@ -128,32 +135,4 @@ public class ChannelData {
 		return new ChannelDataFrame(channelWaveValues, channelsVRMS, audioFormat);
 	}
 
-	/**
-	 * @param timeStamp
-	 * @return
-	 */
-	private String toDeltaTime(long timeStamp) {
-		StringBuilder sb=new StringBuilder();
-		double timeStampPrecision=timeStamp;
-		
-		long nanos=(long)(timeStampPrecision/1000. - timeStamp/1000)*1000;
-		timeStamp=timeStamp/1000;
-		timeStampPrecision=timeStamp;
-		
-		long micros=(long)(timeStampPrecision/1000. - timeStamp/1000)*1000;
-		timeStamp=timeStamp/1000;
-		timeStampPrecision=timeStamp;
-		
-		long millis=(long)(timeStampPrecision/1000. - timeStamp/1000)*1000;
-		
-		timeStamp=timeStamp/1000;
-		timeStampPrecision=timeStamp;
-		
-		long hours=timeStamp/60*60;
-		long minutes=(timeStamp-hours*60*60)/60;
-		long seconds=timeStamp-hours*60*60-minutes*60;
-		
-		sb.append(hours).append(":").append(minutes).append(":").append(seconds).append(".").append(millis).append(".").append(micros).append(".").append(nanos);
-		return sb.toString();
-	}
 }
