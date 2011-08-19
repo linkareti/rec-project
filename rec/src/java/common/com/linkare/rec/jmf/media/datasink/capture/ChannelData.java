@@ -1,9 +1,6 @@
 package com.linkare.rec.jmf.media.datasink.capture;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.LinkedList;
 
 import javax.media.Buffer;
 import javax.media.format.AudioFormat;
@@ -12,7 +9,6 @@ public class ChannelData {
 
 	private static final int BYTE_11111111 = 255;
 	private static final int BITS_PER_BYTE = 8;
-	private static final int NUMBER_OF_CHANNELS = 2;
 
 	private double[][] channelWaveValues = new double[0][0];
 	private double[] channelsVRMS;
@@ -21,22 +17,23 @@ public class ChannelData {
 	private double[] tempVRMS;
 
 	private static final int[] BUFFER_LOCK = new int[0];
-	private Buffer buffer;
+	private LinkedList<Buffer> buffers;
 
 	private AudioFormat audioFormat;
 	private static double normalizationValue;
 
-	private static final Logger LOGGER = Logger.getLogger(ChannelData.class.getName());
-	private static final boolean LOGGING_IS_AT_FINE_LEVEL = LOGGER.isLoggable(Level.FINE);
-
 	public ChannelData() {
+		buffers = new LinkedList<Buffer>();
 
 	}
 
 	public void setBuffer(Buffer buffer) {
 		// just hold on to it for later use... if needed!
 		synchronized (BUFFER_LOCK) {
-			this.buffer = buffer;
+			if (buffers.size() >= 5) {
+				buffers.remove(0);
+			}
+			buffers.add(buffer);
 		}
 	}
 
@@ -115,14 +112,21 @@ public class ChannelData {
 	}
 
 	public ChannelDataFrame readDataFrame() {
-		byte[] data = new byte[buffer.getLength()];
+		byte[] data = null;
 		synchronized (BUFFER_LOCK) {
-			System.arraycopy(buffer.getData(), buffer.getOffset(), data, 0, buffer.getLength());
-			audioFormat = (AudioFormat) buffer.getFormat();
-			normalizationValue = Math.pow(2, audioFormat.getSampleSizeInBits() - 1);
-			if (LOGGING_IS_AT_FINE_LEVEL) {
-				LOGGER.fine("Timestamp of buffer :" + buffer.getTimeStamp());
+			int totalLenOfBuffers = 0;
+			for (Buffer b : buffers) {
+				totalLenOfBuffers += b.getLength();
 			}
+			data = new byte[totalLenOfBuffers];
+			int offSetData = 0;
+			for (Buffer b : buffers) {
+				System.arraycopy(b.getData(), b.getOffset(), data, offSetData, b.getLength());
+				offSetData += b.getLength();
+			}
+
+			audioFormat = (AudioFormat) buffers.get(0).getFormat();
+			normalizationValue = Math.pow(2, audioFormat.getSampleSizeInBits() - 1);
 		}
 
 		final int numChannels = audioFormat.getChannels();
