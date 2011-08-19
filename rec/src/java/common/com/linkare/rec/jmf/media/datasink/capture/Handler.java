@@ -80,7 +80,7 @@ public class Handler implements DataSink, BufferTransferHandler {
 			for (DataSinkListener listener : listeners) {
 				listener.dataSinkUpdate(event);
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
