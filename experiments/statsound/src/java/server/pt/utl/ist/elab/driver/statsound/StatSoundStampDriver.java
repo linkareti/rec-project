@@ -60,10 +60,6 @@ import com.linkare.rec.jmf.media.protocol.function.FunctorTypeControl;
  */
 public class StatSoundStampDriver extends AbstractStampDriver {
 
-	/**
-	 * 
-	 */
-	private static final String CAPTURE_LOCATOR = "capture://44100/16/2";
 	// parameters
 	public static final String PISTON_START_PARAMETER = "piston.start";
 	public static final String PISTON_END_PARAMETER = "piston.end";
@@ -104,7 +100,11 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 	private static final String JMF_PACKAGE = "com.linkare.rec.jmf";
 
-	private static final String SILENCE_FUNCTION = "function://44100/16/silence";
+	private static final double SAMPLE_RATE= 11025;
+
+	private static final String CAPTURE_LOCATOR = "capture://"+SAMPLE_RATE+"/16/2";
+
+	private static final String SILENCE_FUNCTION = "function://"+SAMPLE_RATE+"/16/silence";
 
 	private static final String APPLICATION_NAME_LOCK_PORT = "Stationary Sound Stamp Driver V0.1";
 
@@ -143,8 +143,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 	private int endian = javax.media.format.AudioFormat.LITTLE_ENDIAN;
 
-	private double sampleRate = 44100;
-
+	
 	private int signed = AudioFormat.SIGNED;
 
 	private Player player;
@@ -423,7 +422,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 		String deviceLocation = System.getProperty(CAPTURE_DEVICE_URL);
 
-		AudioFormat audioFormat = new AudioFormat(AudioFormat.LINEAR, sampleRate, bitsPerChannel, numChannels,
+		AudioFormat audioFormat = new AudioFormat(AudioFormat.LINEAR, SAMPLE_RATE, bitsPerChannel, numChannels,
 				this.endian, this.signed);
 
 		if (deviceLocation == null) {
