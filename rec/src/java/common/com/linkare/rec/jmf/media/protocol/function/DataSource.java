@@ -247,7 +247,7 @@ public class DataSource extends PushBufferDataSource {
 					functor = DataSource.this.functorType.getFunctor();
 				}
 				int sampleSizeInBits = DataSource.this.audioFormat.getSampleSizeInBits();
-				sizeOfGeneratingArray = (int) (DataSource.this.sampleSizeInBytes * DataSource.this.sampleRate / 4 * DataSource.this.numChannels);
+				sizeOfGeneratingArray = (int) (DataSource.this.sampleSizeInBytes * DataSource.this.sampleRate * DataSource.this.numChannels / 10);
 				generatingBuffer = new byte[sizeOfGeneratingArray];
 				double multiplyFactor = Math.pow(2, sampleSizeInBits) - 1;
 				boolean bigEndian = DataSource.this.audioFormat.getEndian() == AudioFormat.BIG_ENDIAN;
