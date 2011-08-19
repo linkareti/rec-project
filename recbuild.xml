@@ -280,10 +280,10 @@
 
 		<copy todir="${hardwareserver.build.dir}/lib" overwrite="true">
 			<fileset dir="${rec.common.lib.dir}">
-				<include name="**/*.jar" />
+				<include name="**/*" />
 			</fileset>
 			<fileset dir="${rec.hardwareserver.lib.dir}">
-				<include name="**/*.jar" />
+				<include name="**/*" />
 			</fileset>
 		</copy>
 
@@ -356,10 +356,10 @@
 
 		<copy todir="${multicast.build.dir}/lib" overwrite="true">
 			<fileset dir="${rec.common.lib.dir}">
-				<include name="**/*.jar" />
+				<include name="**/*" />
 			</fileset>
 			<fileset dir="${rec.multicast.lib.dir}">
-				<include name="**/*.jar" />
+				<include name="**/*" />
 			</fileset>
 		</copy>
 

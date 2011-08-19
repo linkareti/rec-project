@@ -1,11 +1,13 @@
-/**
- * 
- */
 package com.linkare.rec.jmf.media.datasink.capture;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.media.Buffer;
 import javax.media.DataSink;
@@ -20,7 +22,7 @@ import javax.media.protocol.PushBufferDataSource;
 import javax.media.protocol.PushBufferStream;
 
 /**
- * @author jpereira
+ * @author José Pedro Pereira - Linkare TI
  * 
  */
 public class Handler implements DataSink, BufferTransferHandler {
@@ -32,7 +34,32 @@ public class Handler implements DataSink, BufferTransferHandler {
 	private MediaLocator outputLocator;
 
 	private List<DataSinkListener> listeners = new Vector<DataSinkListener>();
-	
+
+	private boolean printed = false;
+
+	private Buffer buffer = new Buffer();
+
+	private static int receivedBufferNumber = 0;
+
+	private static final Logger LOGGER = Logger.getLogger(Handler.class.getName());
+
+	private static final boolean LOGGING_IS_AT_FINE_LEVEL = LOGGER.isLoggable(Level.FINE);
+
+	private static final Map<Integer, String> ALL_BUFFER_FLAGS = new HashMap<Integer, String>();
+	static {
+		Field[] allBufferFields = Buffer.class.getDeclaredFields();
+		for (Field field : allBufferFields) {
+			if (field.getName().startsWith("FLAG_")) {
+				try {
+					Integer fieldValue = field.getInt(null);
+					ALL_BUFFER_FLAGS.put(fieldValue, field.getName());
+				} catch (IllegalArgumentException e) {
+				} catch (IllegalAccessException e) {
+				}
+			}
+		}
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -52,8 +79,19 @@ public class Handler implements DataSink, BufferTransferHandler {
 	@Override
 	public void transferData(PushBufferStream stream) {
 		try {
-			Buffer buffer = new Buffer();
+			buffer.setData(null);
 			stream.read(buffer);
+
+			if (LOGGING_IS_AT_FINE_LEVEL) {
+				LOGGER.fine("Buffer Nr " + (receivedBufferNumber++));
+				LOGGER.fine("Seq Nr of buffer[" + (receivedBufferNumber) + "]:" + buffer.getSequenceNumber());
+				LOGGER.fine("Length of buffer[" + (receivedBufferNumber) + "]:" + buffer.getLength());
+				LOGGER.fine("Offset of buffer[" + (receivedBufferNumber) + "]:" + buffer.getOffset());
+				LOGGER.fine("Timestamp of buffer[" + (receivedBufferNumber) + "]:" + buffer.getTimeStamp());
+				LOGGER.fine("Duration of buffer[" + (receivedBufferNumber) + "]:" + buffer.getDuration());
+				LOGGER.fine("Flags of buffer[" + (receivedBufferNumber) + "]:" + expressBufferFlags(buffer.getFlags()));
+			}
+
 			channelData.setBuffer(buffer);
 			DataSinkEvent event = new DataSinkEvent(this, "new.frame.available");
 			for (DataSinkListener listener : listeners) {
@@ -62,6 +100,20 @@ public class Handler implements DataSink, BufferTransferHandler {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * @param flags
+	 * @return
+	 */
+	private String expressBufferFlags(int flags) {
+		StringBuilder sb = new StringBuilder();
+		for (Map.Entry<Integer, String> flagEntry : ALL_BUFFER_FLAGS.entrySet()) {
+			if ((flagEntry.getKey().intValue() & flags) == flagEntry.getKey().intValue()) {
+				sb.append(flagEntry.getValue()).append("|");
+			}
+		}
+		return sb.length() > 0 ? sb.substring(0, sb.length() - 1) : "";
 	}
 
 	@Override
@@ -118,29 +170,6 @@ public class Handler implements DataSink, BufferTransferHandler {
 
 	public ChannelDataFrame captureFrame() {
 		return channelData.readDataFrame();
-	}
-
-	private boolean printed = false;
-
-	public void printDataFrame() {
-		ChannelDataFrame frame = captureFrame();
-
-		if (!printed) {
-			for (int i = 0; i < frame.getNumChannels(); i++) {
-				long[] dataChannel = frame.getChannelData(i);
-				double vrms = frame.getChannelVRMS(i);
-
-				System.out.println("Channel[" + i + "].data");
-				for (long sample : dataChannel) {
-					System.out.println(sample);
-				}
-				System.out.println("Channel[" + i + "].vrms=" + vrms);
-
-			}
-			if (frame.getChannelData(0).length > 0) {
-				printed = true;
-			}
-		}
 	}
 
 }

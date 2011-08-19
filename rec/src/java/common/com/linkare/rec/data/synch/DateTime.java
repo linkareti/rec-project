@@ -132,9 +132,16 @@ public final class DateTime implements org.omg.CORBA.portable.IDLEntity {
 	}
 
 	public long getElapsedTimeInMillis(final DateTime other) {
-		return (other.getMilliSeconds() - getMilliSeconds());
+		return (other.getMilliSeconds() - this.getMilliSeconds());
 	}
 
+	public long getElapsedTimeInMicros(final DateTime other) {
+		double millis=getElapsedTimeInMillis(other);
+		double micros=other.getTime().getMicros()-this.getTime().getMicros();
+		return (long)(micros+(millis*1E3));
+	}
+	
+	
 	public void addMillis(final long millis) {
 		final java.util.Calendar c = new java.util.GregorianCalendar(getDate().getYear(), getDate().getMonth(),
 				getDate().getDay(), getTime().getHours(), getTime().getMinutes(), getTime().getSeconds());

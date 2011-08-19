@@ -46,4 +46,8 @@ public enum TypeOfExperiment {
 		}
 		throw new IllegalArgumentException("Could not find type of experiment for " + value);
 	}
+	
+	public static void main(String[] args) {
+		System.out.println(Double.MAX_VALUE);
+	}
 }

@@ -7,17 +7,19 @@ public class ChannelData {
 
 	private static final int BYTE_11111111 = 255;
 	private static final int BITS_PER_BYTE = 8;
+	private static final int NUMBER_OF_CHANNELS = 2;
 
-	private long[][] channelWaveValues = new long[0][0];
+	private double[][] channelWaveValues = new double[0][0];
 	private double[] channelsVRMS;
 
-	private long[][] tempWaveValues;
+	private double[][] tempWaveValues;
 	private double[] tempVRMS;
 
 	private static final int[] BUFFER_LOCK = new int[0];
 	private Buffer buffer;
 
 	private AudioFormat audioFormat;
+	private static double normalizationValue;
 
 	public ChannelData() {
 
@@ -40,23 +42,23 @@ public class ChannelData {
 
 			for (int sampleNr = 0; sampleNr < data.length; sampleNr += sampleIncrementOffset) {
 				System.arraycopy(data, sampleNr + channel * sizeOfSampleInBytes, sampleData, 0, sampleData.length);
-				long sampleValue = bigEndian ? fromBigEndian(sampleData, signed) : fromLittleEndian(sampleData, signed);
+				double sampleValue = bigEndian ? fromBigEndian(sampleData, signed) : fromLittleEndian(sampleData,
+						signed);
 				tempWaveValues[channel][sampleNr] = sampleValue;
 				accumulatedPower += sampleValue * sampleValue;
 			}
-			accumulatedPower = Math.sqrt(accumulatedPower) / tempWaveValues[channel].length;
-			tempVRMS[channel] = Math.log(accumulatedPower);
+			tempVRMS[channel] = 10 * Math.log10(accumulatedPower);
 		}
 		channelWaveValues = tempWaveValues;
 		channelsVRMS = tempVRMS;
 	}
 
 	private void allocateChannelsData(int numChannels, int length) {
-		tempWaveValues = new long[numChannels][length];
+		tempWaveValues = new double[numChannels][length];
 		tempVRMS = new double[numChannels];
 	}
 
-	private static long fromLittleEndian(byte[] data, boolean signed) {
+	private static double fromLittleEndian(byte[] data, boolean signed) {
 		long val = 0;
 		long signingDisplacement = signed ? Byte.MIN_VALUE : 0;
 		for (int i = 0; i < data.length; i++) {
@@ -69,10 +71,10 @@ public class ChannelData {
 			// sum it to the running value
 			val = val | currentByte << positionalByteShift;
 		}
-		return val;
+		return convertToScale(val);
 	}
 
-	private static long fromBigEndian(byte[] data, boolean signed) {
+	private static double fromBigEndian(byte[] data, boolean signed) {
 		long val = 0;
 		int maxI = data.length - 1;
 		long signingDisplacement = signed ? Byte.MIN_VALUE : 0;
@@ -86,7 +88,15 @@ public class ChannelData {
 			// sum it to the running value
 			val = val | (currentByte << positionalByteShift);
 		}
-		return val;
+		return convertToScale(val);
+	}
+
+	private static double convertToScale(long val) {
+		// bring the initial value to the 0 in terms of scale
+		double result = val - normalizationValue;
+		// normalize the value to the -1 to 1 scale
+		result /= normalizationValue;
+		return result;
 	}
 
 	public ChannelDataFrame readDataFrame() {
@@ -94,6 +104,7 @@ public class ChannelData {
 		synchronized (BUFFER_LOCK) {
 			System.arraycopy(buffer.getData(), buffer.getOffset(), data, 0, buffer.getLength());
 			audioFormat = (AudioFormat) buffer.getFormat();
+			normalizationValue=Math.pow(2,audioFormat.getSampleSizeInBits()-1);
 		}
 
 		final int numChannels = audioFormat.getChannels();
@@ -104,5 +115,4 @@ public class ChannelData {
 		calculateChannelData(data, sizeOfSampleInBytes, numChannels, signed, bigEndian);
 		return new ChannelDataFrame(channelWaveValues, channelsVRMS, audioFormat);
 	}
-
 }

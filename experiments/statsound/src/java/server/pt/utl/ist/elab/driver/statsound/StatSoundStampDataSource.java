@@ -147,8 +147,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 		int overSampleDisplacement = (int) (channelDataFrame.getCaptureFormat().getSampleRate() / frequencyInHz);
 
 		for (int i = 0; i < nSamples; i++) {
-			long wave1 = channelDataFrame.getChannelData(0)[i * overSampleDisplacement];
-			long wave2 = channelDataFrame.getChannelData(1)[i * overSampleDisplacement];
+			double wave1 = channelDataFrame.getChannelData(0)[i * overSampleDisplacement];
+			double wave2 = channelDataFrame.getChannelData(1)[i * overSampleDisplacement];
 			// double channelVRMS1 = channelDataFrame.getChannelVRMS(0);
 			// double channelVRMS2 = channelDataFrame.getChannelVRMS(1);
 			PhysicsValue[] values = fillInValues(pos, null, null, wave1, wave2, freqIni);
@@ -219,7 +219,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 	}
 
 	private PhysicsValue[] fillInValues(final int position, final Double channelVRMS1, final Double channelVRMS2,
-			final Long wave1, final Long wave2, final double frequency) {
+			final Double wave1, final Double wave2, final double frequency) {
 		PhysicsValue[] values = new PhysicsValue[config.getChannelsConfig().length];
 		values[POSITION_INDEX] = PhysicsValueFactory.fromInt(position, config.getChannelsConfig(POSITION_INDEX)
 				.getSelectedScale());
@@ -227,9 +227,9 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				.getChannelsConfig(VRMS1_INDEX).getSelectedScale().getMultiplier());
 		values[VRMS2_INDEX] = channelVRMS1 == null ? null : PhysicsValueFactory.fromDouble(channelVRMS2, config
 				.getChannelsConfig(VRMS2_INDEX).getSelectedScale().getMultiplier());
-		values[WAVE1_INDEX] = wave1 == null ? null : PhysicsValueFactory.fromLong(wave1,
+		values[WAVE1_INDEX] = wave1 == null ? null : PhysicsValueFactory.fromDouble(wave1,
 				config.getChannelsConfig(WAVE1_INDEX).getSelectedScale());
-		values[WAVE2_INDEX] = wave2 == null ? null : PhysicsValueFactory.fromLong(wave2,
+		values[WAVE2_INDEX] = wave2 == null ? null : PhysicsValueFactory.fromDouble(wave2,
 				config.getChannelsConfig(WAVE2_INDEX).getSelectedScale());
 		values[FREQUENCY_INDEX] = PhysicsValueFactory.fromDouble(frequency, config.getChannelsConfig(FREQUENCY_INDEX)
 				.getSelectedScale());

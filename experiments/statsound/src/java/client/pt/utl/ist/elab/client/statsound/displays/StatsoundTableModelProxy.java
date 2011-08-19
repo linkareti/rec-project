@@ -131,13 +131,7 @@ public class StatsoundTableModelProxy extends com.linkare.rec.impl.client.experi
 	}
 
 	private long getAcquisitionTimeInMicros(final int rowIndex) {
-		// acquisition time
-		long relativeMilisTime = expDataModel.getTimeStamp(rowIndex).getTime().getMilis()
-				- expDataModel.getTimeStamp(0).getTime().getMilis();
-		long relativeMicrosTime = expDataModel.getTimeStamp(rowIndex).getTime().getMicros()
-				- expDataModel.getTimeStamp(0).getTime().getMicros();
-		final long milisInMicros = relativeMilisTime * 1000;
-		return milisInMicros + relativeMicrosTime;
+		return expDataModel.getTimeStamp(rowIndex).getElapsedTimeInMicros(expDataModel.getTimeStamp(0));
 	}
 
 	public void headerAvailable(final HardwareAcquisitionConfig header) {

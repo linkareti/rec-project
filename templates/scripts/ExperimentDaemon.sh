@@ -5,13 +5,18 @@
 #
 
 BASE_USER=elab
+CURDIR=`pwd`
+CURUSER=`id -nu`
 
 RETVAL=0
 
 start() {
         echo "Starting @experiment.name@ $BASE_USER Service"
-#         su -l $BASE_USER -c "nohup ./Start@experiment.name@Driver.sh &"
-        `sh Start@experiment.name@Driver.sh &>/dev/null`
+        if [ "x$CURUSER" != "x$BASE_USER" ]; then
+             su -l $BASE_USER -c "nohup $CURDIR/Start@experiment.name@Driver.sh 2>&1 >/dev/null"
+        else
+             nohup $CURDIR/Start@experiment.name@Driver.sh 2>&1 >/dev/null
+        fi
         RETVAL=$?
         echo
         [ $RETVAL -eq 0 ] && touch @experiment.name@.lock || \
@@ -23,8 +28,11 @@ stop() {
         then
             PID=`cat @experiment.name@.pid`
             echo "Stopping @experiment.name@ $BASE_USER Service"
-#             su -l $BASE_USER -c kill $PID
-            `kill $PID`
+            if [ "x$CURUSER" != "x$BASE_USER" ]; then
+                su -l $BASE_USER -c kill $PID
+            else
+                `kill $PID`
+            fi
             RETVAL=$?
             echo
             [ $RETVAL -eq 0 ] && rm -rf @experiment.name@.lock && rm -rf @experiment.name@.pid || \

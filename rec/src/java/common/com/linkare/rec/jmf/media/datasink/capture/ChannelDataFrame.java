@@ -4,21 +4,21 @@ import javax.media.format.AudioFormat;
 
 public class ChannelDataFrame {
 
-	private long[][] channelsData;
+	private double[][] channelsData;
 	private double[] channelsVRMS;
 	private AudioFormat captureFormat;
 
-	public ChannelDataFrame(long[][] channelsData, double[] channelsVRMS, AudioFormat captureFormat) {
+	public ChannelDataFrame(double[][] channelsData, double[] channelsVRMS, AudioFormat captureFormat) {
 		this.channelsData = channelsData;
 		this.channelsVRMS = channelsVRMS;
 		this.captureFormat = captureFormat;
 	}
 
-	public long[][] getChannelsData() {
+	public double[][] getChannelsData() {
 		return channelsData;
 	}
 
-	public void setChannelsData(long[][] channelsData) {
+	public void setChannelsData(double[][] channelsData) {
 		this.channelsData = channelsData;
 	}
 
@@ -34,7 +34,7 @@ public class ChannelDataFrame {
 		return channelsData.length;
 	}
 
-	public long[] getChannelData(int channel) {
+	public double[] getChannelData(int channel) {
 		return channelsData[channel];
 	}
 

@@ -120,40 +120,50 @@
 	<ChannelInfo name="statsound$rec.exp.statsound.hardwareinfo.channel.1.name" independent="false" direction="CHANNEL_INPUT">
 		<scale label="statsound$rec.exp.statsound.hardwareinfo.channel.1.label" physicsunitname="statsound$rec.exp.statsound.hardwareinfo.channel.1.physicsunitname"
 			physicsunitsymbol="dB" multiplier="none" selected="true">
-			<min><PhysicsVal type="double">1</PhysicsVal></min>
-			<max><PhysicsVal type="double">25</PhysicsVal></max>
-			<step><PhysicsVal type="double">1</PhysicsVal></step>
-			<errordefault><PhysicsVal type="double">0.5</PhysicsVal></errordefault>
+			<min><PhysicsVal type="double">0</PhysicsVal></min>
+			<max><PhysicsVal type="double">1.7E308</PhysicsVal></max>
+			<step><PhysicsVal type="double">0.00002</PhysicsVal></step>
+			<errordefault><PhysicsVal type="double">0.00001</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 	<!-- vrms 2 -->
 	<ChannelInfo name="statsound$rec.exp.statsound.hardwareinfo.channel.2.name" independent="false" direction="CHANNEL_INPUT">
 		<scale label="statsound$rec.exp.statsound.hardwareinfo.channel.2.label" physicsunitname="statsound$rec.exp.statsound.hardwareinfo.channel.2.physicsunitname"
 			physicsunitsymbol="dB" multiplier="none" selected="true">
-			<min><PhysicsVal type="double">1</PhysicsVal></min>
-			<max><PhysicsVal type="double">25</PhysicsVal></max>
-			<step><PhysicsVal type="double">1</PhysicsVal></step>
-			<errordefault><PhysicsVal type="double">0.5</PhysicsVal></errordefault>
+			<min><PhysicsVal type="double">0</PhysicsVal></min>
+			<max><PhysicsVal type="double">1.7E308</PhysicsVal></max>
+			<step><PhysicsVal type="double">0.00002</PhysicsVal></step>
+			<errordefault><PhysicsVal type="double">0.00001</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 	<!-- Wave 1 -->
 	<ChannelInfo name="statsound$rec.exp.statsound.hardwareinfo.channel.3.name" independent="false" direction="CHANNEL_INPUT">
 		<scale label="statsound$rec.exp.statsound.hardwareinfo.channel.3.label" physicsunitname="statsound$rec.exp.statsound.hardwareinfo.channel.3.physicsunitname"
 			physicsunitsymbol="" multiplier="none" selected="true">
-			<min><PhysicsVal type="int">0</PhysicsVal></min>
-			<max><PhysicsVal type="int">65536</PhysicsVal></max>
-			<step><PhysicsVal type="int">1</PhysicsVal></step>
-			<errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+			<min><PhysicsVal type="double">-1</PhysicsVal></min>
+			<max><PhysicsVal type="double">1</PhysicsVal></max>
+			<!-- The step was calculated with: 2 / 2^16, which is:
+				 2 - the value between the scale -1 to 1
+				 2^16 - 2 to the power of the number of bits per sample 
+			-->
+			<step><PhysicsVal type="double">0.00002</PhysicsVal></step>
+			<!-- The error was calculated as the step / 2, because it should be half of the step -->
+			<errordefault><PhysicsVal type="double">0.00001</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 	<!-- Wave 2 -->
 	<ChannelInfo name="statsound$rec.exp.statsound.hardwareinfo.channel.4.name" independent="false" direction="CHANNEL_INPUT">
 		<scale label="statsound$rec.exp.statsound.hardwareinfo.channel.4.label" physicsunitname="statsound$rec.exp.statsound.hardwareinfo.channel.4.physicsunitname"
 			physicsunitsymbol="" multiplier="none" selected="true">
-			<min><PhysicsVal type="int">0</PhysicsVal></min>
-			<max><PhysicsVal type="int">65536</PhysicsVal></max>
-			<step><PhysicsVal type="int">1</PhysicsVal></step>
-			<errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+			<min><PhysicsVal type="double">-1</PhysicsVal></min>
+			<max><PhysicsVal type="double">1</PhysicsVal></max>
+			<!-- The step was calculated with: 2 / 2^16, which is:
+				 2 - the value between the scale -1 to 1
+				 2^16 - 2 to the power of the number of bits per sample 
+			-->
+			<step><PhysicsVal type="double">0.00002</PhysicsVal></step>
+			<!-- The error was calculated as the step / 2, because it should be half of the step -->
+			<errordefault><PhysicsVal type="double">0.00001</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 	<!-- Frequency -->

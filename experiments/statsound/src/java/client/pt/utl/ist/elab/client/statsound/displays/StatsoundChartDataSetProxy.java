@@ -174,14 +174,8 @@ public class StatsoundChartDataSetProxy extends org.jfree.data.xy.AbstractXYData
 
 	}
 
-	private double getAcquisitionTimeInMicros(final int item) {
-		// acquisition time
-		long relativeMilisTime = expDataModel.getTimeStamp(item).getTime().getMilis()
-				- expDataModel.getTimeStamp(0).getTime().getMilis();
-		long relativeMicrosTime = expDataModel.getTimeStamp(item).getTime().getMicros()
-				- expDataModel.getTimeStamp(0).getTime().getMicros();
-		final long milisInMicros = relativeMilisTime * 1000;
-		return milisInMicros + relativeMicrosTime;
+	private long getAcquisitionTimeInMicros(final int item) {
+		return expDataModel.getTimeStamp(item).getElapsedTimeInMicros(expDataModel.getTimeStamp(0));
 	}
 
 	@Override

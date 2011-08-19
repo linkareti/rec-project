@@ -254,7 +254,7 @@
 
 		<copy todir="${hardwareserver.build.dir}/lib" overwrite="true">
 			<fileset dir="${elab.hardwareserver.lib.dir}">
-				<include name="**/*.jar" />
+				<include name="**/*" />
 			</fileset>
 		</copy>
 
@@ -308,7 +308,7 @@
 
 		<copy todir="${multicast.build.dir}/lib" overwrite="true">
 			<fileset dir="${elab.multicast.lib.dir}">
-				<include name="**/*.jar" />
+				<include name="**/*" />
 			</fileset>
 		</copy>
 
