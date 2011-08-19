@@ -373,36 +373,43 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		}
 
 		try {
-			DataLine.Info lineInfo = new DataLine.Info(TargetDataLine.class, null, AudioSystem.NOT_SPECIFIED);
-
-			if (!AudioSystem.isLineSupported(lineInfo)) {
-				throw new Exception("AudioSystem.isLineSupported said 'false'");
-			}
 
 			// It's there, start to register JavaSound with CaptureDeviceManager
 			Vector devices = (Vector) CaptureDeviceManager.getDeviceList(null).clone();
 
-			// remove the old javasound capturers
+			// detect if javasound capturers are already defined!
+			boolean foundJavaSoundDevice = false;
 			String name;
 			Enumeration enumDevices = devices.elements();
 			while (enumDevices.hasMoreElements()) {
 				CaptureDeviceInfo cdi = (CaptureDeviceInfo) enumDevices.nextElement();
 				name = cdi.getName();
-				if (name.startsWith("JavaSound"))
-					CaptureDeviceManager.removeDevice(cdi);
-			}
-
-			// collect javasound capture device info from JavaSoundSourceStream
-			// and register them with CaptureDeviceManager
-			CaptureDeviceInfo[] cdi = com.sun.media.protocol.javasound.JavaSoundSourceStream.listCaptureDeviceInfo();
-			if (cdi != null) {
-				for (int i = 0; i < cdi.length; i++) {
-					CaptureDeviceManager.addDevice(cdi[i]);
+				if (name.startsWith("JavaSound")) {
+					foundJavaSoundDevice = true;
+					break;
 				}
-				CaptureDeviceManager.commit();
-				LOGGER.fine("JavaSoundAuto: Committed ok");
 			}
 
+			if (!foundJavaSoundDevice) {
+				DataLine.Info lineInfo = new DataLine.Info(TargetDataLine.class, null, AudioSystem.NOT_SPECIFIED);
+
+				if (!AudioSystem.isLineSupported(lineInfo)) {
+					throw new Exception("AudioSystem.isLineSupported said 'false'");
+				}
+
+				// collect javasound capture device info from
+				// JavaSoundSourceStream
+				// and register them with CaptureDeviceManager
+				CaptureDeviceInfo[] cdi = com.sun.media.protocol.javasound.JavaSoundSourceStream
+						.listCaptureDeviceInfo();
+				if (cdi != null) {
+					for (int i = 0; i < cdi.length; i++) {
+						CaptureDeviceManager.addDevice(cdi[i]);
+					}
+					CaptureDeviceManager.commit();
+					LOGGER.fine("JavaSoundAuto: Committed ok");
+				}
+			}
 		} catch (Exception e) {
 			throw new RuntimeException("Unable to detect java sound capture device... No sound board???", e);
 		}
