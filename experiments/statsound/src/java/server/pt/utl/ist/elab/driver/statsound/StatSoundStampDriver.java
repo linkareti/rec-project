@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 import javax.media.CaptureDeviceInfo;
 import javax.media.CaptureDeviceManager;
+import javax.media.Control;
 import javax.media.ControllerAdapter;
 import javax.media.DataSink;
 import javax.media.Manager;
@@ -52,6 +53,8 @@ import com.linkare.rec.impl.threading.TimedOutException;
 import com.linkare.rec.impl.threading.WaitForConditionResult;
 import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.jmf.media.datasink.capture.Handler;
+import com.linkare.rec.jmf.media.protocol.function.FunctorControl;
+import com.linkare.rec.jmf.media.protocol.function.FunctorType;
 import com.linkare.rec.jmf.media.protocol.function.FunctorTypeControl;
 
 /**
@@ -440,6 +443,20 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		}
 		initPlayerWithSilence();
 		initCaptureDevice(deviceLocation);
+
+		FunctorTypeControl functorTypeControl = (FunctorTypeControl) player.getControl(FunctorTypeControl.class
+				.getName());
+
+		long startMarkerTimeStamp = System.currentTimeMillis();
+		functorTypeControl.setFunctorType(FunctorType.MARKER);
+		try {
+			soundCaptureDevice.calibrateWithMarker(startMarkerTimeStamp);
+			LOGGER.info("Calibration of sound capture lazyness was calculated at "+soundCaptureDevice.getDeltaTime()+" ms");
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
+
+		functorTypeControl.setFunctorType(FunctorType.SILENCE);
 	}
 
 	private void initCaptureDevice(String deviceLocation) {
