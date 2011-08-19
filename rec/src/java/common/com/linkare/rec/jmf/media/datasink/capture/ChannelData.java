@@ -47,11 +47,11 @@ public class ChannelData {
 		for (int channel = 0; channel < numChannels; channel++) {
 			double accumulatedPower = 0;
 
-			for (int sampleNr = 0; sampleNr < data.length; sampleNr += sampleIncrementOffset) {
-				System.arraycopy(data, sampleNr + channel * sizeOfSampleInBytes, sampleData, 0, sampleData.length);
+			for (int sampleNr = 0; sampleNr < tempWaveValues.length; sampleNr += 1) {
+				System.arraycopy(data, sampleNr*sampleIncrementOffset + channel * sizeOfSampleInBytes, sampleData, 0, sampleData.length);
 				double sampleValue = bigEndian ? fromBigEndian(sampleData, signed) : fromLittleEndian(sampleData,
 						signed);
-				tempWaveValues[channel][sampleNr/sampleIncrementOffset] = sampleValue;
+				tempWaveValues[channel][sampleNr] = sampleValue;
 				accumulatedPower += sampleValue * sampleValue;
 			}
 			double meanPower = accumulatedPower / (double) tempWaveValues.length;
