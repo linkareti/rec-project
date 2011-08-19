@@ -70,7 +70,9 @@ public class ChannelData {
 	private void allocateChannelsData(int numChannels, int sampleSizeInBytes, int lengthInBytes) {
 		tempWaveValues = new double[numChannels][lengthInBytes / (numChannels * sampleSizeInBytes)];
 		//FIXME - just to test
-		Arrays.fill(tempWaveValues, -0.2);
+		for (double[] tempWaveValueChannel : tempWaveValues) {
+			Arrays.fill(tempWaveValueChannel, -0.2);
+		}
 		tempVRMS = new double[numChannels];
 	}
 
