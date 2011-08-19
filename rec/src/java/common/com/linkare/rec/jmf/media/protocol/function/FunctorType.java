@@ -8,15 +8,15 @@ public enum FunctorType {
 	SILENCE(new SilenceFunctor(), "silence") {
 		@Override
 		public void parseOptions(String optionsStr) {
-		    System.out.println(optionsStr);
+			System.out.println(optionsStr);
 			if (optionsStr != null && optionsStr.trim().length() > 0)
-				throw new RuntimeException(this.getFunctionName()
-						+ " does not support any options (" + optionsStr + ")");
+				throw new RuntimeException(this.getFunctionName() + " does not support any options (" + optionsStr
+						+ ")");
 		}
 
 		@Override
 		public FunctorControl getFunctorControl() {
-		    return FunctorControl.NULLOP_CONTROL;
+			return FunctorControl.NULLOP_CONTROL;
 		}
 	},
 	SIN_WAVE(new SineFunctor(), "sin") {
@@ -24,8 +24,7 @@ public enum FunctorType {
 		public void parseOptions(String optionsStr) {
 			StringTokenizer tokens = new StringTokenizer(optionsStr, "/", false);
 			if (tokens.countTokens() != 2)
-				throw new RuntimeException(this.getFunctionName()
-						+ " only supports options /<frequency>/<phase> ("
+				throw new RuntimeException(this.getFunctionName() + " only supports options /<frequency>/<phase> ("
 						+ optionsStr + ")");
 			String frequencyStr = tokens.nextToken();
 			String phaseStr = tokens.nextToken();
@@ -36,26 +35,24 @@ public enum FunctorType {
 			try {
 				frequency = Double.parseDouble(frequencyStr);
 			} catch (NumberFormatException e) {
-				throw new RuntimeException(this.getFunctionName()
-						+ " frequency option must be a valid number ("
+				throw new RuntimeException(this.getFunctionName() + " frequency option must be a valid number ("
 						+ frequencyStr + ")");
 			}
 			try {
 				phase = Double.parseDouble(phaseStr);
 			} catch (NumberFormatException e) {
-				throw new RuntimeException(this.getFunctionName()
-						+ " phase option must be a valid number (" + phaseStr
+				throw new RuntimeException(this.getFunctionName() + " phase option must be a valid number (" + phaseStr
 						+ ")");
 			}
 			SineFunctor sineFunctor = (SineFunctor) this.getFunctor();
 			sineFunctor.setFrequency(frequency);
-			System.out.println("Frequency is "+frequency);
+			System.out.println("Frequency is " + frequency);
 			sineFunctor.setPhase(phase);
 		}
 
 		@Override
 		public FunctorControl getFunctorControl() {
-		    return new SineFunctorControl(this);
+			return new SineFunctorControl(this);
 		}
 	},
 	TRIANGULAR_WAVE(new TriangularFunctor(), "triangle") {
@@ -63,9 +60,8 @@ public enum FunctorType {
 		public void parseOptions(String optionsStr) {
 			StringTokenizer tokens = new StringTokenizer(optionsStr, "/", false);
 			if (tokens.countTokens() != 1)
-				throw new RuntimeException(this.getFunctionName()
-						+ " only supports options /<frequency> (" + optionsStr
-						+ ")");
+				throw new RuntimeException(this.getFunctionName() + " only supports options /<frequency> ("
+						+ optionsStr + ")");
 			String frequencyStr = tokens.nextToken();
 
 			double frequency = 0;
@@ -73,17 +69,16 @@ public enum FunctorType {
 			try {
 				frequency = Double.parseDouble(frequencyStr);
 			} catch (NumberFormatException e) {
-				throw new RuntimeException(this.getFunctionName()
-						+ " frequency option must be a valid number ("
+				throw new RuntimeException(this.getFunctionName() + " frequency option must be a valid number ("
 						+ frequencyStr + ")");
 			}
-			TriangularFunctor triangularFunctor = (TriangularFunctor) this
-					.getFunctor();
+			TriangularFunctor triangularFunctor = (TriangularFunctor) this.getFunctor();
 			triangularFunctor.setFrequency(frequency);
 		}
+
 		@Override
 		public FunctorControl getFunctorControl() {
-		    return new TriangularFunctorControl(this);
+			return new TriangularFunctorControl(this);
 		}
 	},
 	PULSE(new PulseFunctor(), "pulse") {
@@ -91,10 +86,8 @@ public enum FunctorType {
 		public void parseOptions(String optionsStr) {
 			StringTokenizer tokens = new StringTokenizer(optionsStr, "/", false);
 			if (tokens.countTokens() != 2)
-				throw new RuntimeException(
-						this.getFunctionName()
-								+ " only supports options /<frequency>/<pulseLengthPercent> ("
-								+ optionsStr + ")");
+				throw new RuntimeException(this.getFunctionName()
+						+ " only supports options /<frequency>/<pulseLengthPercent> (" + optionsStr + ")");
 			String frequencyStr = tokens.nextToken();
 			String pulseLengthPercentStr = tokens.nextToken();
 
@@ -103,8 +96,7 @@ public enum FunctorType {
 			try {
 				frequency = Double.parseDouble(frequencyStr);
 			} catch (NumberFormatException e) {
-				throw new RuntimeException(this.getFunctionName()
-						+ " frequency option must be a valid number ("
+				throw new RuntimeException(this.getFunctionName() + " frequency option must be a valid number ("
 						+ frequencyStr + ")");
 			}
 			try {
@@ -113,10 +105,8 @@ public enum FunctorType {
 					throw new NumberFormatException();
 
 			} catch (NumberFormatException e) {
-				throw new RuntimeException(
-						this.getFunctionName()
-								+ " pulseLength option must be a valid number between 0 and 1 ("
-								+ pulseLengthPercentStr + ")");
+				throw new RuntimeException(this.getFunctionName()
+						+ " pulseLength option must be a valid number between 0 and 1 (" + pulseLengthPercentStr + ")");
 			}
 
 			PulseFunctor pulseFunctor = (PulseFunctor) this.getFunctor();
@@ -124,9 +114,10 @@ public enum FunctorType {
 			pulseFunctor.setPulseLengthPercent(pulseLengthPercent);
 
 		}
+
 		@Override
 		public FunctorControl getFunctorControl() {
-		    return new PulseFunctorControl(this);
+			return new PulseFunctorControl(this);
 		}
 
 	},
@@ -134,12 +125,13 @@ public enum FunctorType {
 		@Override
 		public void parseOptions(String optionsStr) {
 			if (optionsStr != null && optionsStr.trim().length() > 0)
-				throw new RuntimeException(this.getFunctionName()
-						+ " does not support any options (" + optionsStr + ")");
+				throw new RuntimeException(this.getFunctionName() + " does not support any options (" + optionsStr
+						+ ")");
 		}
+
 		@Override
-		public FunctorControl  getFunctorControl() {
-		    return FunctorControl.NULLOP_CONTROL;
+		public FunctorControl getFunctorControl() {
+			return FunctorControl.NULLOP_CONTROL;
 		}
 
 	},
@@ -147,15 +139,33 @@ public enum FunctorType {
 		@Override
 		public void parseOptions(String optionsStr) {
 			if (optionsStr != null && optionsStr.trim().length() > 0)
-				throw new RuntimeException(this.getFunctionName()
-						+ " does not support any options (" + optionsStr + ")");
-		}
-		@Override
-		public FunctorControl  getFunctorControl() {
-		    return FunctorControl.NULLOP_CONTROL;
+				throw new RuntimeException(this.getFunctionName() + " does not support any options (" + optionsStr
+						+ ")");
 		}
 
-	};
+		@Override
+		public FunctorControl getFunctorControl() {
+			return FunctorControl.NULLOP_CONTROL;
+		}
+
+	},
+	MARKER(new MarkerFunctor(), "marker") {
+
+		@Override
+		public void parseOptions(String optionsStr) {
+			if (optionsStr != null && optionsStr.trim().length() > 0)
+				throw new RuntimeException(this.getFunctionName() + " does not support any options (" + optionsStr
+						+ ")");
+		}
+
+		@Override
+		public FunctorControl getFunctorControl() {
+			return FunctorControl.NULLOP_CONTROL;
+		}
+
+	}
+
+	;
 
 	private Functor functor;
 	private String functionName;
@@ -184,6 +194,6 @@ public enum FunctorType {
 
 	public abstract void parseOptions(String optionsStr);
 
-	public abstract FunctorControl  getFunctorControl();
-	
+	public abstract FunctorControl getFunctorControl();
+
 }

@@ -34,21 +34,14 @@ public class Handler implements DataSink, BufferTransferHandler {
 	private List<DataSinkListener> listeners = new Vector<DataSinkListener>();
 
 	private Buffer buffer = new Buffer();
-	
-	private static final Map<Integer, String> ALL_BUFFER_FLAGS = new HashMap<Integer, String>();
-	static {
-		Field[] allBufferFields = Buffer.class.getDeclaredFields();
-		for (Field field : allBufferFields) {
-			if (field.getName().startsWith("FLAG_")) {
-				try {
-					Integer fieldValue = field.getInt(null);
-					ALL_BUFFER_FLAGS.put(fieldValue, field.getName());
-				} catch (IllegalArgumentException e) {
-				} catch (IllegalAccessException e) {
-				}
-			}
-		}
-	}
+
+	private volatile boolean calibrating = false;
+
+	private long deltaTime;
+
+	private long markerDetectedTimeStamp;
+
+	private double zeroLevelVRMS = Double.MAX_VALUE;
 
 	/*
 	 * (non-Javadoc)
@@ -72,6 +65,17 @@ public class Handler implements DataSink, BufferTransferHandler {
 			buffer.setData(null);
 			stream.read(buffer);
 			channelData.setBuffer(buffer);
+
+			if (calibrating) {
+				ChannelDataFrame readDataFrame = channelData.readDataFrame();
+				if (readDataFrame.getChannelsVRMS()[0] > zeroLevelVRMS * 0.1) {
+					calibrating = false;
+					markerDetectedTimeStamp = System.currentTimeMillis();
+				} else {
+					zeroLevelVRMS = readDataFrame.getChannelsVRMS()[0];
+				}
+			}
+
 			DataSinkEvent event = new DataSinkEvent(this, "new.frame.available");
 			for (DataSinkListener listener : listeners) {
 				listener.dataSinkUpdate(event);
@@ -136,6 +140,25 @@ public class Handler implements DataSink, BufferTransferHandler {
 	public ChannelDataFrame captureFrame() {
 		return channelData.readDataFrame();
 	}
-	
+
+	/**
+	 * @param startMarkerTimeStamp
+	 * @throws InterruptedException
+	 */
+	public void calibrateWithMarker(long startMarkerTimeStamp) throws InterruptedException {
+		zeroLevelVRMS = Double.MAX_VALUE;
+		calibrating = true;
+		while (calibrating) {
+			Thread.sleep(1000);
+		}
+		deltaTime = markerDetectedTimeStamp - startMarkerTimeStamp;
+	}
+
+	/**
+	 * @return the deltaTime
+	 */
+	public long getDeltaTime() {
+		return deltaTime;
+	}
 
 }
