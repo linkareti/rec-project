@@ -100,11 +100,11 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 	private static final String JMF_PACKAGE = "com.linkare.rec.jmf";
 
-	private static final double SAMPLE_RATE= 11025;
+	private static final double SAMPLE_RATE = 11025;
 
-	private static final String CAPTURE_LOCATOR = "capture://"+SAMPLE_RATE+"/16/2";
+	private static final String CAPTURE_LOCATOR = "capture://" + SAMPLE_RATE + "/16/2";
 
-	private static final String SILENCE_FUNCTION = "function://"+SAMPLE_RATE+"/16/silence";
+	private static final String SILENCE_FUNCTION = "function://" + SAMPLE_RATE + "/16/silence";
 
 	private static final String APPLICATION_NAME_LOCK_PORT = "Stationary Sound Stamp Driver V0.1";
 
@@ -143,7 +143,6 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 	private int endian = javax.media.format.AudioFormat.LITTLE_ENDIAN;
 
-	
 	private int signed = AudioFormat.SIGNED;
 
 	private Player player;
@@ -184,15 +183,17 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		fireIDriverStateListenerDriverConfigured();
 	}
 
-	private void initPlayerWithSilence() {
+	private void initPlayerWithSilence() throws NoPlayerException, IOException {
 		final String locatorString = SILENCE_FUNCTION;
 		LOGGER.info("Creating player...");
 		try {
 			player = Manager.createPlayer(new MediaLocator(locatorString));
 		} catch (NoPlayerException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
+			throw e;
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
+			throw e;
 		}
 
 		// TODO: The following code should use a Java barrier
@@ -444,7 +445,14 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 				return;
 			}
 		}
-		initPlayerWithSilence();
+
+		try {
+			initPlayerWithSilence();
+		} catch (NoPlayerException e) {
+			throw new RuntimeException(e);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 		initCaptureDevice(deviceLocation);
 
 		// FunctorTypeControl functorTypeControl = (FunctorTypeControl)
@@ -477,6 +485,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 				sink.start();
 				dataSource.start();
 			} catch (Exception e) {
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				throw new RuntimeException("The sound driver is facing problems " + e.getMessage(), e);
 			}
 		}
