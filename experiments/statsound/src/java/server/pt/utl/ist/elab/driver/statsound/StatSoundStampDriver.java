@@ -448,7 +448,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 				.getName());
 
 		long startMarkerTimeStamp = System.currentTimeMillis();
-		functorTypeControl.setFunctorType(FunctorType.MARKER);
+		functorTypeControl.setFunctorType(FunctorType.WHITE_NOISE);
 		try {
 			soundCaptureDevice.calibrateWithMarker(startMarkerTimeStamp);
 			LOGGER.info("Calibration of sound capture lazyness was calculated at "+soundCaptureDevice.getDeltaTime()+" ms");
