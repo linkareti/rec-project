@@ -444,19 +444,19 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		initPlayerWithSilence();
 		initCaptureDevice(deviceLocation);
 
-		FunctorTypeControl functorTypeControl = (FunctorTypeControl) player.getControl(FunctorTypeControl.class
-				.getName());
-
-		long startMarkerTimeStamp = System.currentTimeMillis();
-		functorTypeControl.setFunctorType(FunctorType.WHITE_NOISE);
-		try {
-			soundCaptureDevice.calibrateWithMarker(startMarkerTimeStamp);
-			LOGGER.info("Calibration of sound capture lazyness was calculated at "+soundCaptureDevice.getDeltaTime()+" ms");
-		} catch (InterruptedException e) {
-			throw new RuntimeException(e);
-		}
-
-		functorTypeControl.setFunctorType(FunctorType.SILENCE);
+//		FunctorTypeControl functorTypeControl = (FunctorTypeControl) player.getControl(FunctorTypeControl.class
+//				.getName());
+//
+//		long startMarkerTimeStamp = System.currentTimeMillis();
+//		functorTypeControl.setFunctorType(FunctorType.WHITE_NOISE);
+//		try {
+//			soundCaptureDevice.calibrateWithMarker(startMarkerTimeStamp);
+//			LOGGER.info("Calibration of sound capture lazyness was calculated at "+soundCaptureDevice.getDeltaTime()+" ms");
+//		} catch (InterruptedException e) {
+//			throw new RuntimeException(e);
+//		}
+//
+//		functorTypeControl.setFunctorType(FunctorType.SILENCE);
 	}
 
 	private void initCaptureDevice(String deviceLocation) {
