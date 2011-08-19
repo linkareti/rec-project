@@ -120,8 +120,8 @@
 	<ChannelInfo name="statsound$rec.exp.statsound.hardwareinfo.channel.1.name" independent="false" direction="CHANNEL_INPUT">
 		<scale label="statsound$rec.exp.statsound.hardwareinfo.channel.1.label" physicsunitname="statsound$rec.exp.statsound.hardwareinfo.channel.1.physicsunitname"
 			physicsunitsymbol="dB" multiplier="none" selected="true">
-			<min><PhysicsVal type="double">0</PhysicsVal></min>
-			<max><PhysicsVal type="double">1.7E308</PhysicsVal></max>
+			<min><PhysicsVal type="double">-1.7E308</PhysicsVal></min>
+			<max><PhysicsVal type="double">0</PhysicsVal></max>
 			<step><PhysicsVal type="double">0.00002</PhysicsVal></step>
 			<errordefault><PhysicsVal type="double">0.00001</PhysicsVal></errordefault>
 		</scale>
@@ -130,8 +130,8 @@
 	<ChannelInfo name="statsound$rec.exp.statsound.hardwareinfo.channel.2.name" independent="false" direction="CHANNEL_INPUT">
 		<scale label="statsound$rec.exp.statsound.hardwareinfo.channel.2.label" physicsunitname="statsound$rec.exp.statsound.hardwareinfo.channel.2.physicsunitname"
 			physicsunitsymbol="dB" multiplier="none" selected="true">
-			<min><PhysicsVal type="double">0</PhysicsVal></min>
-			<max><PhysicsVal type="double">1.7E308</PhysicsVal></max>
+			<min><PhysicsVal type="double">-1.7E308</PhysicsVal></min>
+			<max><PhysicsVal type="double">0</PhysicsVal></max>
 			<step><PhysicsVal type="double">0.00002</PhysicsVal></step>
 			<errordefault><PhysicsVal type="double">0.00001</PhysicsVal></errordefault>
 		</scale>
