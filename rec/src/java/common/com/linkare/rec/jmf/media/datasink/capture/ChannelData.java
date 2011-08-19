@@ -47,20 +47,21 @@ public class ChannelData {
 
 		for (int channel = 0; channel < numChannels; channel++) {
 			double accumulatedPower = 0;
-			
+
 			int displacementOfSampleForChannelIndex = channel * sizeOfSampleInBytes;
-			
-			for (int sampleNr = 0; sampleNr < tempWaveValues.length; sampleNr ++) {
-				System.arraycopy(data, (sampleNr*sampleIncrementOffset) + displacementOfSampleForChannelIndex, sampleData, 0, sampleData.length);
+
+			for (int sampleNr = 0; sampleNr < tempWaveValues[channel].length; sampleNr++) {
+				System.arraycopy(data, (sampleNr * sampleIncrementOffset) + displacementOfSampleForChannelIndex,
+						sampleData, 0, sampleData.length);
 				double sampleValue = bigEndian ? fromBigEndian(sampleData, signed) : fromLittleEndian(sampleData,
 						signed);
-				//FIXME - just testing stuff
-				System.out.println("sampleValue="+sampleValue);
-				
+				// FIXME - just testing stuff
+				System.out.println("sampleValue=" + sampleValue);
+
 				tempWaveValues[channel][sampleNr] = sampleValue;
 				accumulatedPower += sampleValue * sampleValue;
 			}
-			double meanPower = accumulatedPower / (double) tempWaveValues.length;
+			double meanPower = accumulatedPower / (double) tempWaveValues[channel].length;
 			tempVRMS[channel] = 10 * Math.log10(meanPower);
 		}
 		channelWaveValues = tempWaveValues;
@@ -69,10 +70,6 @@ public class ChannelData {
 
 	private void allocateChannelsData(int numChannels, int sampleSizeInBytes, int lengthInBytes) {
 		tempWaveValues = new double[numChannels][lengthInBytes / (numChannels * sampleSizeInBytes)];
-		//FIXME - just to test
-		for (double[] tempWaveValueChannel : tempWaveValues) {
-			Arrays.fill(tempWaveValueChannel, -0.2);
-		}
 		tempVRMS = new double[numChannels];
 	}
 
