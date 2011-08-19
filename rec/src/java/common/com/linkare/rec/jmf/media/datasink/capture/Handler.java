@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.media.Buffer;
 import javax.media.DataSink;
@@ -35,16 +33,8 @@ public class Handler implements DataSink, BufferTransferHandler {
 
 	private List<DataSinkListener> listeners = new Vector<DataSinkListener>();
 
-	private boolean printed = false;
-
 	private Buffer buffer = new Buffer();
-
-	private static int receivedBufferNumber = 0;
-
-	private static final Logger LOGGER = Logger.getLogger(Handler.class.getName());
-
-	private static final boolean LOGGING_IS_AT_FINE_LEVEL = LOGGER.isLoggable(Level.FINE);
-
+	
 	private static final Map<Integer, String> ALL_BUFFER_FLAGS = new HashMap<Integer, String>();
 	static {
 		Field[] allBufferFields = Buffer.class.getDeclaredFields();
@@ -81,21 +71,6 @@ public class Handler implements DataSink, BufferTransferHandler {
 		try {
 			buffer.setData(null);
 			stream.read(buffer);
-
-			if (LOGGING_IS_AT_FINE_LEVEL) {
-				LOGGER.fine("Buffer Nr " + (receivedBufferNumber++));
-				LOGGER.fine("Seq Nr of buffer[" + (receivedBufferNumber) + "]:" + buffer.getSequenceNumber());
-				LOGGER.fine("Length of buffer[" + (receivedBufferNumber) + "]:" + buffer.getLength());
-				LOGGER.fine("Offset of buffer[" + (receivedBufferNumber) + "]:" + buffer.getOffset());
-				LOGGER.fine("Timestamp of buffer[" + (receivedBufferNumber) + "]:" + buffer.getTimeStamp());
-				LOGGER.fine("Duration of buffer[" + (receivedBufferNumber) + "]:" + buffer.getDuration());
-				
-				LOGGER.fine("IsDiscard on buffer [" + (receivedBufferNumber) + "]:" + buffer.isDiscard());
-				LOGGER.fine("IsEOM on buffer [" + (receivedBufferNumber) + "]:" + buffer.isEOM());
-				
-				LOGGER.fine("Flags of buffer[" + (receivedBufferNumber) + "]:" + expressBufferFlags(buffer.getFlags()));
-			}
-
 			channelData.setBuffer(buffer);
 			DataSinkEvent event = new DataSinkEvent(this, "new.frame.available");
 			for (DataSinkListener listener : listeners) {
@@ -104,20 +79,6 @@ public class Handler implements DataSink, BufferTransferHandler {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * @param flags
-	 * @return
-	 */
-	private String expressBufferFlags(int flags) {
-		StringBuilder sb = new StringBuilder();
-		for (Map.Entry<Integer, String> flagEntry : ALL_BUFFER_FLAGS.entrySet()) {
-			if ((flagEntry.getKey().intValue() & flags) == flagEntry.getKey().intValue()) {
-				sb.append(flagEntry.getValue()).append("|");
-			}
-		}
-		return sb.length() > 0 ? sb.substring(0, sb.length() - 1) : "";
 	}
 
 	@Override
@@ -175,5 +136,6 @@ public class Handler implements DataSink, BufferTransferHandler {
 	public ChannelDataFrame captureFrame() {
 		return channelData.readDataFrame();
 	}
+	
 
 }

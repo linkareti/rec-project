@@ -131,7 +131,7 @@ public class StatsoundTableModelProxy extends com.linkare.rec.impl.client.experi
 	}
 
 	private long getAcquisitionTimeInMicros(final int rowIndex) {
-		return expDataModel.getTimeStamp(rowIndex).getElapsedTimeInMicros(expDataModel.getTimeStamp(0));
+		return expDataModel.getTimeStamp(0).getElapsedTimeInMicros(expDataModel.getTimeStamp(rowIndex));
 	}
 
 	public void headerAvailable(final HardwareAcquisitionConfig header) {

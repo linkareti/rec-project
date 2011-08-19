@@ -1,5 +1,9 @@
 package com.linkare.rec.jmf.media.datasink.capture;
 
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.media.Buffer;
 import javax.media.format.AudioFormat;
 
@@ -20,6 +24,9 @@ public class ChannelData {
 
 	private AudioFormat audioFormat;
 	private static double normalizationValue;
+
+	private static final Logger LOGGER = Logger.getLogger(ChannelData.class.getName());
+	private static final boolean LOGGING_IS_AT_FINE_LEVEL = LOGGER.isLoggable(Level.FINE);
 
 	public ChannelData() {
 
@@ -47,14 +54,15 @@ public class ChannelData {
 				tempWaveValues[channel][sampleNr] = sampleValue;
 				accumulatedPower += sampleValue * sampleValue;
 			}
-			tempVRMS[channel] = 10 * Math.log10(accumulatedPower);
+			double meanPower = accumulatedPower / (double) tempWaveValues.length;
+			tempVRMS[channel] = 10 * Math.log10(meanPower);
 		}
 		channelWaveValues = tempWaveValues;
 		channelsVRMS = tempVRMS;
 	}
 
-	private void allocateChannelsData(int numChannels, int length) {
-		tempWaveValues = new double[numChannels][length];
+	private void allocateChannelsData(int numChannels, int sampleSizeInBytes, int lengthInBytes) {
+		tempWaveValues = new double[numChannels][lengthInBytes / (numChannels * sampleSizeInBytes)];
 		tempVRMS = new double[numChannels];
 	}
 
@@ -104,15 +112,48 @@ public class ChannelData {
 		synchronized (BUFFER_LOCK) {
 			System.arraycopy(buffer.getData(), buffer.getOffset(), data, 0, buffer.getLength());
 			audioFormat = (AudioFormat) buffer.getFormat();
-			normalizationValue=Math.pow(2,audioFormat.getSampleSizeInBits()-1);
+			normalizationValue = Math.pow(2, audioFormat.getSampleSizeInBits() - 1);
+			if (LOGGING_IS_AT_FINE_LEVEL) {
+				LOGGER.fine("Timestamp of buffer :" + buffer.getTimeStamp() + " - "
+						+ toDeltaTime(buffer.getTimeStamp()));
+			}
 		}
 
 		final int numChannels = audioFormat.getChannels();
 		final int sizeOfSampleInBytes = audioFormat.getSampleSizeInBits() / BITS_PER_BYTE;
-		allocateChannelsData(numChannels, data.length);
+		allocateChannelsData(numChannels, sizeOfSampleInBytes, data.length);
 		final boolean signed = audioFormat.getSigned() == AudioFormat.SIGNED;
 		final boolean bigEndian = audioFormat.getEndian() == AudioFormat.BIG_ENDIAN;
 		calculateChannelData(data, sizeOfSampleInBytes, numChannels, signed, bigEndian);
 		return new ChannelDataFrame(channelWaveValues, channelsVRMS, audioFormat);
+	}
+
+	/**
+	 * @param timeStamp
+	 * @return
+	 */
+	private String toDeltaTime(long timeStamp) {
+		StringBuilder sb=new StringBuilder();
+		double timeStampPrecision=timeStamp;
+		
+		long nanos=(long)(timeStampPrecision/1000. - timeStamp/1000)*1000;
+		timeStamp=timeStamp/1000;
+		timeStampPrecision=timeStamp;
+		
+		long micros=(long)(timeStampPrecision/1000. - timeStamp/1000)*1000;
+		timeStamp=timeStamp/1000;
+		timeStampPrecision=timeStamp;
+		
+		long millis=(long)(timeStampPrecision/1000. - timeStamp/1000)*1000;
+		
+		timeStamp=timeStamp/1000;
+		timeStampPrecision=timeStamp;
+		
+		long hours=timeStamp/60*60;
+		long minutes=(timeStamp-hours*60*60)/60;
+		long seconds=timeStamp-hours*60*60-minutes*60;
+		
+		sb.append(hours).append(":").append(minutes).append(":").append(seconds).append(".").append(millis).append(".").append(micros).append(".").append(nanos);
+		return sb.toString();
 	}
 }
