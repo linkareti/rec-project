@@ -308,7 +308,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 	 */
 	private void finishedMyJob() {
 		expEnded = true;
-		//playSilence();
+		playSilence();
 	}
 
 	/**

@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 
 import javax.media.CaptureDeviceInfo;
 import javax.media.CaptureDeviceManager;
-import javax.media.Control;
 import javax.media.ControllerAdapter;
 import javax.media.DataSink;
 import javax.media.Manager;
@@ -53,8 +52,6 @@ import com.linkare.rec.impl.threading.TimedOutException;
 import com.linkare.rec.impl.threading.WaitForConditionResult;
 import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.jmf.media.datasink.capture.Handler;
-import com.linkare.rec.jmf.media.protocol.function.FunctorControl;
-import com.linkare.rec.jmf.media.protocol.function.FunctorType;
 import com.linkare.rec.jmf.media.protocol.function.FunctorTypeControl;
 
 /**
@@ -291,13 +288,21 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		 */
 		final String experimentTypeParameter = config.getSelectedHardwareParameterValue(EXPERIMENT_TYPE_PARAMETER);
 		final TypeOfExperiment typeOfExperiment = TypeOfExperiment.from(experimentTypeParameter);
+		String waveFormString = config.getSelectedHardwareParameterValue(WAVE_FORM_PARAMETER);
 		switch (typeOfExperiment) {
 		case SOUND_VELOCITY:
+			numberOfInvocationsToHardware = 1;
+			waveForm = SoundWaveType.from(waveFormString);
+			break;
 		case STATSOUND_VARY_FREQUENCY:
 			numberOfInvocationsToHardware = 1;
+			// The Sin is the only wave that makes sense for this protocol
+			waveForm = SoundWaveType.SIN;
 			break;
 		case STATSOUND_VARY_PISTON:
 			numberOfInvocationsToHardware = config.getTotalSamples();
+			// The Sin is the only wave that makes sense for this protocol
+			waveForm = SoundWaveType.SIN;
 			break;
 		default:
 			break;
@@ -311,7 +316,6 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 			freqIni = freqFin;
 		}
 		LOGGER.fine("Step = " + step);
-		waveForm = SoundWaveType.from(config.getSelectedHardwareParameterValue(WAVE_FORM_PARAMETER));
 		pistonStart = Integer.valueOf(config.getSelectedHardwareParameterValue(PISTON_START_PARAMETER));
 		pistonEnd = Integer.valueOf(config.getSelectedHardwareParameterValue(PISTON_END_PARAMETER));
 	}
@@ -444,19 +448,20 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		initPlayerWithSilence();
 		initCaptureDevice(deviceLocation);
 
-//		FunctorTypeControl functorTypeControl = (FunctorTypeControl) player.getControl(FunctorTypeControl.class
-//				.getName());
-//
-//		long startMarkerTimeStamp = System.currentTimeMillis();
-//		functorTypeControl.setFunctorType(FunctorType.WHITE_NOISE);
-//		try {
-//			soundCaptureDevice.calibrateWithMarker(startMarkerTimeStamp);
-//			LOGGER.info("Calibration of sound capture lazyness was calculated at "+soundCaptureDevice.getDeltaTime()+" ms");
-//		} catch (InterruptedException e) {
-//			throw new RuntimeException(e);
-//		}
-//
-//		functorTypeControl.setFunctorType(FunctorType.SILENCE);
+		// FunctorTypeControl functorTypeControl = (FunctorTypeControl)
+		// player.getControl(FunctorTypeControl.class
+		// .getName());
+		//
+		// long startMarkerTimeStamp = System.currentTimeMillis();
+		// functorTypeControl.setFunctorType(FunctorType.WHITE_NOISE);
+		// try {
+		// soundCaptureDevice.calibrateWithMarker(startMarkerTimeStamp);
+		// LOGGER.info("Calibration of sound capture lazyness was calculated at "+soundCaptureDevice.getDeltaTime()+" ms");
+		// } catch (InterruptedException e) {
+		// throw new RuntimeException(e);
+		// }
+		//
+		// functorTypeControl.setFunctorType(FunctorType.SILENCE);
 	}
 
 	private void initCaptureDevice(String deviceLocation) {
