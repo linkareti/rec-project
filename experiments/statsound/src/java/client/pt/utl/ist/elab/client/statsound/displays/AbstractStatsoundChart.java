@@ -129,6 +129,8 @@ public abstract class AbstractStatsoundChart extends javax.swing.JPanel implemen
 				StandardXYItemRenderer.SHAPES_AND_LINES, new StandardXYToolTipGenerator()));
 		plot.setRenderer(new StandardXYItemRenderer(StandardXYItemRenderer.SHAPES_AND_LINES,
 				new StandardXYToolTipGenerator()));
+		
+		
 
 		chart = new JFreeChart(getChartName(header), JFreeChart.DEFAULT_TITLE_FONT, plot, true);
 		final ChartPanel panel = new ChartPanel(chart);

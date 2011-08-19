@@ -15,8 +15,6 @@ import javax.media.Control;
 
 import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDataSource;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
-import pt.utl.ist.elab.driver.statsound.audio.DataSoundListener;
-import pt.utl.ist.elab.driver.statsound.audio.NewDataBufferEvent;
 import pt.utl.ist.elab.driver.statsound.processors.StampStatSoundProcessor;
 import pt.utl.ist.elab.driver.statsound.processors.StampStatSoundTempProcessor;
 
@@ -34,9 +32,7 @@ import com.linkare.rec.jmf.media.protocol.function.FunctorTypeControl;
  * 
  * @author José Pedro Pereira - Linkare TI & André
  */
-public class StatSoundStampDataSource extends AbstractStampDataSource implements DataSoundListener {
-
-	
+public class StatSoundStampDataSource extends AbstractStampDataSource {
 
 	private final int POSITION_INDEX = 0;
 
@@ -101,7 +97,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				LOGGER.log(Level.FINEST, "Hardware is too friendly... sending me more data than I asked!!! Bye bye!");
 				return;
 			}
-			
+
 			final String experimentTypeParameter = config.getSelectedHardwareParameterValue(EXPERIMENT_TYPE_PARAMETER);
 			final TypeOfExperiment typeOfExperiment = TypeOfExperiment.from(experimentTypeParameter);
 			final Integer pos = (Integer) cmd.getCommandData(StampStatSoundProcessor.COMMAND_IDENTIFIER);
@@ -285,17 +281,6 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 	 */
 	public void setControl(Control control) {
 		this.control = control;
-	}
-
-	@Override
-	public void bufferAvailable(final NewDataBufferEvent evt) {
-	}
-
-	@Override
-	public void rmsAvailable() {
-		synchronized (syncWait) {
-			syncWait.notifyAll();
-		}
 	}
 
 	@Override
