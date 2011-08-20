@@ -494,10 +494,8 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 					if (control instanceof BufferControl) {
 						BufferControl bufferControl = (BufferControl) control;
 						LOGGER.info("Length of Buffer is = " + bufferControl.getBufferLength());
-					}
-					if (control instanceof FrameRateControl) {
-						FrameRateControl frameRateControl = (FrameRateControl) control;
-						LOGGER.info("FrameRate is = " + frameRateControl.getFrameRate());
+						bufferControl.setBufferLength(1L);
+						LOGGER.info("Length of Buffer is now = " + bufferControl.getBufferLength());
 					}
 				}
 
