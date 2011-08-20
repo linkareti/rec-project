@@ -37,7 +37,7 @@ public class Handler implements DataSink, BufferTransferHandler {
 
 	private volatile boolean calibrating = false;
 
-	private long deltaTime = 250;
+	private long deltaTime = 1000;
 
 	private long markerDetectedTimeStamp;
 
