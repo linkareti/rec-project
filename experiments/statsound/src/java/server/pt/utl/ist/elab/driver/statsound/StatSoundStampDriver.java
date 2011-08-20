@@ -102,7 +102,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 	private static final String JMF_PACKAGE = "com.linkare.rec.jmf";
 
-	private static final double SAMPLE_RATE = 11025;
+	private static final int SAMPLE_RATE = 11025;
 
 	private static final String CAPTURE_LOCATOR = "capture://" + SAMPLE_RATE + "/16/2";
 
