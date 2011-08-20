@@ -24,6 +24,8 @@ import javax.media.Player;
 import javax.media.PrefetchCompleteEvent;
 import javax.media.RealizeCompleteEvent;
 import javax.media.StartEvent;
+import javax.media.control.BufferControl;
+import javax.media.control.FrameRateControl;
 import javax.media.format.AudioFormat;
 import javax.media.protocol.DataSource;
 import javax.sound.sampled.AudioSystem;
@@ -446,6 +448,8 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 			}
 		}
 
+		initCaptureDevice(deviceLocation);
+
 		try {
 			initPlayerWithSilence();
 		} catch (NoPlayerException e) {
@@ -453,7 +457,6 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		initCaptureDevice(deviceLocation);
 
 		// FunctorTypeControl functorTypeControl = (FunctorTypeControl)
 		// player.getControl(FunctorTypeControl.class
@@ -484,6 +487,20 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 				soundCaptureDevice = (Handler) sink;
 				sink.start();
 				dataSource.start();
+
+				Object[] controls = dataSource.getControls();
+				for (Object control : controls) {
+					LOGGER.info("There is a control object : " + control.getClass().getName());
+					if (control instanceof BufferControl) {
+						BufferControl bufferControl = (BufferControl) control;
+						LOGGER.info("Length of Buffer is = " + bufferControl.getBufferLength());
+					}
+					if (control instanceof FrameRateControl) {
+						FrameRateControl frameRateControl = (FrameRateControl) control;
+						LOGGER.info("FrameRate is = " + frameRateControl.getFrameRate());
+					}
+				}
+
 			} catch (Exception e) {
 				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				throw new RuntimeException("The sound driver is facing problems " + e.getMessage(), e);
