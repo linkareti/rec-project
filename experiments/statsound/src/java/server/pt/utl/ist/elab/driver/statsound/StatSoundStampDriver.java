@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 import javax.media.CaptureDeviceInfo;
 import javax.media.CaptureDeviceManager;
+import javax.media.Control;
 import javax.media.ControllerAdapter;
 import javax.media.DataSink;
 import javax.media.Manager;
@@ -54,6 +55,7 @@ import com.linkare.rec.impl.threading.TimedOutException;
 import com.linkare.rec.impl.threading.WaitForConditionResult;
 import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.jmf.media.datasink.capture.Handler;
+import com.linkare.rec.jmf.media.protocol.function.FunctorType;
 import com.linkare.rec.jmf.media.protocol.function.FunctorTypeControl;
 
 /**
@@ -107,6 +109,8 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 	private static final String CAPTURE_LOCATOR = "capture://" + SAMPLE_RATE + "/16/2";
 
 	private static final String SILENCE_FUNCTION = "function://" + SAMPLE_RATE + "/16/silence";
+	
+	private static final String WHITENOISE_START_FUNCTION = "function://" + SAMPLE_RATE + "/16/whitenoise";
 
 	private static final String APPLICATION_NAME_LOCK_PORT = "Stationary Sound Stamp Driver V0.1";
 
@@ -186,7 +190,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 	}
 
 	private void initPlayerWithSilence() throws NoPlayerException, IOException {
-		final String locatorString = SILENCE_FUNCTION;
+		final String locatorString = WHITENOISE_START_FUNCTION;
 		LOGGER.info("Creating player...");
 		try {
 			player = Manager.createPlayer(new MediaLocator(locatorString));
@@ -210,11 +214,16 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 			@Override
 			public void prefetchComplete(PrefetchCompleteEvent e) {
+				LOGGER.fine("Notify prefectchWait of start!");
+				
 				synchronized (prefetchWait) {
 					prefetchWait.notifyAll();
 				}
 				LOGGER.fine("Starting player...");
 				player.start();
+				
+				FunctorTypeControl control = (FunctorTypeControl) player.getControl(FunctorTypeControl.class.getName());
+				control.setFunctorType(FunctorType.SILENCE);
 			}
 
 			@Override
