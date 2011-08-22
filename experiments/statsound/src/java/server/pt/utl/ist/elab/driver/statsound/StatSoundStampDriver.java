@@ -29,7 +29,6 @@ import javax.media.RealizeCompleteEvent;
 import javax.media.ResourceUnavailableEvent;
 import javax.media.SizeChangeEvent;
 import javax.media.Time;
-import javax.media.control.FramePositioningControl;
 import javax.media.format.AudioFormat;
 import javax.media.protocol.DataSource;
 import javax.sound.sampled.AudioSystem;
@@ -64,7 +63,7 @@ import com.linkare.rec.jmf.media.protocol.function.FunctorTypeControl;
  * 
  * @author José Pedro Pereira - Linkare TI & André
  */
-public class StatSoundStampDriver extends AbstractStampDriver implements ControllerListener {
+public class StatSoundStampDriver extends AbstractStampDriver {
 
 	// parameters
 	public static final String PISTON_START_PARAMETER = "piston.start";
@@ -207,7 +206,30 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 			throw e;
 		}
 
-		player.addControllerListener(this);
+		player.addControllerListener(new ControllerListener() {
+
+			@Override
+			public void controllerUpdate(ControllerEvent evt) {
+				if (evt instanceof ConfigureCompleteEvent || evt instanceof RealizeCompleteEvent
+						|| evt instanceof PrefetchCompleteEvent) {
+					synchronized (waitSync) {
+						stateTransitionOK = true;
+						waitSync.notifyAll();
+					}
+				} else if (evt instanceof ResourceUnavailableEvent) {
+					synchronized (waitSync) {
+						stateTransitionOK = false;
+						waitSync.notifyAll();
+					}
+				} else if (evt instanceof EndOfMediaEvent) {
+					player.setMediaTime(new Time(0));
+					// p.start();
+					// p.close();
+					// System.exit(0);
+				} else if (evt instanceof SizeChangeEvent) {
+				}
+			}
+		});
 
 		LOGGER.fine("Realizing player...");
 		player.realize();
@@ -244,31 +266,6 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 			}
 		}
 		return stateTransitionOK;
-	}
-
-	/**
-	 * Controller Listener.
-	 */
-	@Override
-	public void controllerUpdate(ControllerEvent evt) {
-		if (evt instanceof ConfigureCompleteEvent || evt instanceof RealizeCompleteEvent
-				|| evt instanceof PrefetchCompleteEvent) {
-			synchronized (waitSync) {
-				stateTransitionOK = true;
-				waitSync.notifyAll();
-			}
-		} else if (evt instanceof ResourceUnavailableEvent) {
-			synchronized (waitSync) {
-				stateTransitionOK = false;
-				waitSync.notifyAll();
-			}
-		} else if (evt instanceof EndOfMediaEvent) {
-			player.setMediaTime(new Time(0));
-			// p.start();
-			// p.close();
-			// System.exit(0);
-		} else if (evt instanceof SizeChangeEvent) {
-		}
 	}
 
 	private void sendCommandToHardware() throws WrongConfigurationException {
