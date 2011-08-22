@@ -15,6 +15,7 @@ public class ChannelData {
 
 	private double[][] tempWaveValues;
 	private double[] tempVRMS;
+	private int length;
 
 	private static final int[] BUFFER_LOCK = new int[0];
 	private LinkedList<Buffer> buffers;
@@ -37,8 +38,20 @@ public class ChannelData {
 		}
 	}
 
-	private void calculateChannelData(byte[] data, int sizeOfSampleInBytes, int numChannels, boolean signed,
-			boolean bigEndian) {
+	/**
+	 * 
+	 * @param data
+	 * @param sizeOfSampleInBytes
+	 * @param numChannels
+	 * @param signed
+	 * @param bigEndian
+	 * @param overSampleDisplacement
+	 * @param loadWaveValues flag to control if the allocation is to be
+	 *            performed for the wave values or for the VRMS.
+	 */
+	private void calculateChannelData(final byte[] data, final int sizeOfSampleInBytes, final int numChannels,
+			final boolean signed, final boolean bigEndian, final int overSampleDisplacement,
+			final boolean loadWaveValues) {
 		final int sampleIncrementOffset = sizeOfSampleInBytes * numChannels;
 		byte[] sampleData = new byte[sizeOfSampleInBytes];
 
@@ -47,27 +60,43 @@ public class ChannelData {
 
 			int displacementOfSampleForChannelIndex = channel * sizeOfSampleInBytes;
 
-			for (int sampleNr = 0; sampleNr < tempWaveValues[channel].length; sampleNr++) {
-				System.arraycopy(data, (sampleNr * sampleIncrementOffset) + displacementOfSampleForChannelIndex,
-						sampleData, 0, sampleData.length);
+			for (int sampleNr = 0; sampleNr < length; sampleNr++) {
+				System.arraycopy(data, (sampleNr * sampleIncrementOffset) + displacementOfSampleForChannelIndex
+						+ (sampleNr * overSampleDisplacement), sampleData, 0, sampleData.length);
 				double sampleValue = bigEndian ? fromBigEndian(sampleData, signed) : fromLittleEndian(sampleData,
 						signed);
-				// FIXME - just testing stuff
-				System.out.println("sampleValue=" + sampleValue);
-
-				tempWaveValues[channel][sampleNr] = sampleValue;
-				accumulatedPower += sampleValue * sampleValue;
+				if (loadWaveValues) {
+					tempWaveValues[channel][sampleNr] = sampleValue;
+				} else {
+					accumulatedPower += sampleValue * sampleValue;
+				}
 			}
-			double meanPower = accumulatedPower / (double) tempWaveValues[channel].length;
-			tempVRMS[channel] = 10 * Math.log10(meanPower);
+			if (!loadWaveValues) {
+				double meanPower = accumulatedPower / (double) tempWaveValues[channel].length;
+				tempVRMS[channel] = 10 * Math.log10(meanPower);
+			}
 		}
 		channelWaveValues = tempWaveValues;
 		channelsVRMS = tempVRMS;
 	}
 
-	private void allocateChannelsData(int numChannels, int sampleSizeInBytes, int lengthInBytes) {
-		tempWaveValues = new double[numChannels][lengthInBytes / (numChannels * sampleSizeInBytes)];
-		tempVRMS = new double[numChannels];
+	/**
+	 * 
+	 * @param numChannels
+	 * @param sampleSizeInBytes
+	 * @param lengthInBytes
+	 * @param overSampleDisplacement
+	 * @param loadWaveValues flag to control if the allocation is to be
+	 *            performed for the wave values or for the VRMS.
+	 */
+	private void allocateChannelsData(final int numChannels, final int sampleSizeInBytes, final int lengthInBytes,
+			final int overSampleDisplacement, final boolean loadWaveValues) {
+		length = (lengthInBytes / (numChannels * sampleSizeInBytes)) / overSampleDisplacement;
+		if (loadWaveValues) {
+			tempWaveValues = new double[numChannels][length];
+		} else {
+			tempVRMS = new double[numChannels];
+		}
 	}
 
 	private static double fromLittleEndian(byte[] data, boolean signed) {
@@ -111,7 +140,16 @@ public class ChannelData {
 		return result;
 	}
 
-	public ChannelDataFrame readDataFrame() {
+	/**
+	 * 
+	 * @param switchToLoadWavesOrVRMS the desired frequency in Hz we wish to
+	 *            capture.
+	 * @param loadWaveValues flag to control if the allocation is to be
+	 *            performed for the wave values or for the VRMS. When true, it
+	 *            loads only the waves. When false, it loads only the VRMS.
+	 * @return
+	 */
+	public ChannelDataFrame readDataFrame(final double switchToLoadWavesOrVRMS, final boolean loadWaveValues) {
 		byte[] data = null;
 		synchronized (BUFFER_LOCK) {
 			int totalLenOfBuffers = 0;
@@ -131,10 +169,12 @@ public class ChannelData {
 
 		final int numChannels = audioFormat.getChannels();
 		final int sizeOfSampleInBytes = audioFormat.getSampleSizeInBits() / BITS_PER_BYTE;
-		allocateChannelsData(numChannels, sizeOfSampleInBytes, data.length);
+		final int overSampleDisplacement = (int) (audioFormat.getSampleRate() / switchToLoadWavesOrVRMS);
+		allocateChannelsData(numChannels, sizeOfSampleInBytes, data.length, overSampleDisplacement, loadWaveValues);
 		final boolean signed = audioFormat.getSigned() == AudioFormat.SIGNED;
 		final boolean bigEndian = audioFormat.getEndian() == AudioFormat.BIG_ENDIAN;
-		calculateChannelData(data, sizeOfSampleInBytes, numChannels, signed, bigEndian);
+		calculateChannelData(data, sizeOfSampleInBytes, numChannels, signed, bigEndian, overSampleDisplacement,
+				loadWaveValues);
 		return new ChannelDataFrame(channelWaveValues, channelsVRMS, audioFormat);
 	}
 

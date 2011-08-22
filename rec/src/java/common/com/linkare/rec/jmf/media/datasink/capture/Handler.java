@@ -1,10 +1,7 @@
 package com.linkare.rec.jmf.media.datasink.capture;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
 import javax.media.Buffer;
@@ -35,13 +32,7 @@ public class Handler implements DataSink, BufferTransferHandler {
 
 	private Buffer buffer = new Buffer();
 
-	private volatile boolean calibrating = false;
-
 	private long deltaTime = 1000;
-
-	private long markerDetectedTimeStamp;
-
-	private double zeroLevelVRMS = Double.MAX_VALUE;
 
 	/*
 	 * (non-Javadoc)
@@ -65,17 +56,6 @@ public class Handler implements DataSink, BufferTransferHandler {
 			buffer.setData(null);
 			stream.read(buffer);
 			channelData.setBuffer(buffer);
-
-			if (calibrating) {
-				ChannelDataFrame readDataFrame = channelData.readDataFrame();
-				if (readDataFrame.getChannelsVRMS()[0] > zeroLevelVRMS * 0.1) {
-					calibrating = false;
-					markerDetectedTimeStamp = System.currentTimeMillis();
-				} else {
-					zeroLevelVRMS = readDataFrame.getChannelsVRMS()[0];
-				}
-			}
-
 			DataSinkEvent event = new DataSinkEvent(this, "new.frame.available");
 			for (DataSinkListener listener : listeners) {
 				listener.dataSinkUpdate(event);
@@ -137,21 +117,16 @@ public class Handler implements DataSink, BufferTransferHandler {
 		this.listeners.remove(listener);
 	}
 
-	public ChannelDataFrame captureFrame() {
-		return channelData.readDataFrame();
-	}
-
 	/**
-	 * @param startMarkerTimeStamp
-	 * @throws InterruptedException
+	 * 
+	 * @param frequencyInHz the desired frequency in Hz we wish to capture.
+	 * @param switchToLoadWavesOrVRMS flag to control if the allocation is to be
+	 *            performed for the wave values or for the VRMS. When true, it
+	 *            loads only the waves. When false, it loads only the VRMS.
+	 * @return
 	 */
-	public void calibrateWithMarker(long startMarkerTimeStamp) throws InterruptedException {
-		zeroLevelVRMS = Double.MAX_VALUE;
-		calibrating = true;
-		while (calibrating) {
-			Thread.sleep(1000);
-		}
-		deltaTime = markerDetectedTimeStamp - startMarkerTimeStamp;
+	public ChannelDataFrame captureFrame(final double frequencyInHz, final boolean switchToLoadWavesOrVRMS) {
+		return channelData.readDataFrame(frequencyInHz, switchToLoadWavesOrVRMS);
 	}
 
 	/**

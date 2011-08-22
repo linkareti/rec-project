@@ -102,16 +102,17 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 			final TypeOfExperiment typeOfExperiment = TypeOfExperiment.from(experimentTypeParameter);
 			final Integer pos = (Integer) cmd.getCommandData(StampStatSoundProcessor.COMMAND_IDENTIFIER);
 			numberOfPosReceivedFromHardware++;
+			final double frequencyInHz = getDesiredFrequencyFromConfig();
 
 			switch (typeOfExperiment) {
 			case STATSOUND_VARY_PISTON:
-				handleProtocolVaryPiston(pos);
+				handleProtocolVaryPiston(pos, frequencyInHz);
 				break;
 			case STATSOUND_VARY_FREQUENCY:
-				handleProtocolVaryFrequency(pos);
+				handleProtocolVaryFrequency(pos, frequencyInHz);
 				break;
 			case SOUND_VELOCITY:
-				handleProtocolSoundVelocity(pos);
+				handleProtocolSoundVelocity(pos, frequencyInHz);
 				break;
 			}
 			finishedMyJob();
@@ -128,31 +129,31 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 		}
 	}
 
-	private void handleProtocolSoundVelocity(final int pos) {
-		newWaveTypeOnFunctorControl().setFrequency(freqIni);
-		waitBeforeCapture();
-		ChannelDataFrame channelDataFrame = soundCaptureDevice.captureFrame();
-
+	private double getDesiredFrequencyFromConfig() {
 		double frequencyInHz = config.getSelectedFrequency().getFrequency()
 				* config.getSelectedFrequency().getMultiplier().getExpValue();
 		if (config.getSelectedFrequency().getFrequencyDefType().getValue() == FrequencyDefType.SamplingIntervalType
 				.getValue()) {
 			frequencyInHz = 1. / frequencyInHz;
 		}
+		return frequencyInHz;
+	}
 
-		int overSampleDisplacement = (int) (channelDataFrame.getCaptureFormat().getSampleRate() / frequencyInHz);
+	private void handleProtocolSoundVelocity(final int pos, final double frequencyInHz) {
+		newWaveTypeOnFunctorControl().setFrequency(freqIni);
+		waitBeforeCapture();
+
+		ChannelDataFrame channelDataFrame = soundCaptureDevice.captureFrame(frequencyInHz, true);
 
 		for (int i = 0; i < nSamples; i++) {
-			double wave1 = channelDataFrame.getChannelData(0)[i * overSampleDisplacement];
-			double wave2 = channelDataFrame.getChannelData(1)[i * overSampleDisplacement];
-			// double channelVRMS1 = channelDataFrame.getChannelVRMS(0);
-			// double channelVRMS2 = channelDataFrame.getChannelVRMS(1);
+			double wave1 = channelDataFrame.getChannelData(0)[i];
+			double wave2 = channelDataFrame.getChannelData(1)[i];
 			PhysicsValue[] values = fillInValues(pos, null, null, wave1, wave2, freqIni);
 			super.addDataRow(values);
 		}
 	}
 
-	private void handleProtocolVaryFrequency(final int pos) {
+	private void handleProtocolVaryFrequency(final int pos, final double frequencyInHz) {
 		final FunctorControl functorControl = newWaveTypeOnFunctorControl();
 		double currentValueFreq = freqIni;
 		// This is similar to the simpler iteration from freqInit till the end,
@@ -164,7 +165,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 			functorControl.setFrequency(currentValueFreq);
 
 			waitBeforeCapture();
-			ChannelDataFrame channelDataFrame = soundCaptureDevice.captureFrame();
+			ChannelDataFrame channelDataFrame = soundCaptureDevice.captureFrame(frequencyInHz, false);
 			double channelVRMS1 = channelDataFrame.getChannelVRMS(0);
 			double channelVRMS2 = channelDataFrame.getChannelVRMS(1);
 
@@ -173,11 +174,11 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 		}
 	}
 
-	private void handleProtocolVaryPiston(final int pos) {
+	private void handleProtocolVaryPiston(final int pos, final double frequencyInHz) {
 		newWaveTypeOnFunctorControl().setFrequency(freqIni);
 		waitBeforeCapture();
 
-		ChannelDataFrame channelDataFrame = soundCaptureDevice.captureFrame();
+		ChannelDataFrame channelDataFrame = soundCaptureDevice.captureFrame(frequencyInHz, false);
 		double channelVRMS1 = channelDataFrame.getChannelVRMS(0);
 		double channelVRMS2 = channelDataFrame.getChannelVRMS(1);
 		PhysicsValue[] values = fillInValues(pos, channelVRMS1, channelVRMS2, null, null, freqIni);
