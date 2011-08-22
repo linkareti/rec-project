@@ -29,6 +29,7 @@ import javax.media.RealizeCompleteEvent;
 import javax.media.ResourceUnavailableEvent;
 import javax.media.SizeChangeEvent;
 import javax.media.Time;
+import javax.media.TransitionEvent;
 import javax.media.format.AudioFormat;
 import javax.media.protocol.DataSource;
 import javax.sound.sampled.AudioSystem;
@@ -195,7 +196,7 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 
 	private void initPlayerWithSilence() throws NoPlayerException, IOException {
 		final String locatorString = SILENCE_FUNCTION;
-		LOGGER.info("Creating player...");
+		LOGGER.info("Creating player for " + locatorString);
 		try {
 			player = Manager.createPlayer(new MediaLocator(locatorString));
 		} catch (NoPlayerException e) {
@@ -267,6 +268,10 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 			// p.close();
 			// System.exit(0);
 		} else if (evt instanceof SizeChangeEvent) {
+		} else if (evt instanceof TransitionEvent) {
+			TransitionEvent transitionEvent = (TransitionEvent) evt;
+			LOGGER.fine("Transition event. Previous = " + transitionEvent.getPreviousState() + ", Current = "
+					+ transitionEvent.getCurrentState() + ", Next = " + transitionEvent.getTargetState());
 		}
 	}
 
@@ -393,6 +398,7 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 	public void init(HardwareInfo info) {
 		super.init(info);
 		final String deviceLocation = initJMFAndGetDeviceLocation();
+		initCaptureDevice(deviceLocation);
 		try {
 			initPlayerWithSilence();
 		} catch (NoPlayerException e) {
@@ -400,7 +406,6 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		initCaptureDevice(deviceLocation);
 	}
 
 	private String initJMFAndGetDeviceLocation() {
@@ -493,11 +498,12 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 	}
 
 	private void initCaptureDevice(final String deviceLocation) {
+		DataSource dataSource = null;
 		if (deviceLocation != null) {
 			MediaLocator locator = new MediaLocator(deviceLocation);
 			LOGGER.fine("Capturing from " + locator);
 			try {
-				DataSource dataSource = Manager.createDataSource(locator);
+				dataSource = Manager.createDataSource(locator);
 				String destinationLocator = CAPTURE_LOCATOR;
 				DataSink sink = Manager.createDataSink(dataSource, new MediaLocator(destinationLocator));
 				sink.open();
