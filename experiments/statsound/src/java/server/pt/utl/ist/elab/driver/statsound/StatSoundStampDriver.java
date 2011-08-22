@@ -30,6 +30,7 @@ import javax.media.ResourceUnavailableEvent;
 import javax.media.SizeChangeEvent;
 import javax.media.Time;
 import javax.media.TransitionEvent;
+import javax.media.control.BufferControl;
 import javax.media.format.AudioFormat;
 import javax.media.protocol.DataSource;
 import javax.sound.sampled.AudioSystem;
@@ -522,6 +523,17 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 				soundCaptureDevice = (Handler) sink;
 				sink.start();
 				dataSource.start();
+
+				Object[] controls = dataSource.getControls();
+				for (Object control : controls) {
+					LOGGER.info("There is a control object : " + control.getClass().getName());
+					if (control instanceof BufferControl) {
+						BufferControl bufferControl = (BufferControl) control;
+						LOGGER.info("Length of Buffer is = " + bufferControl.getBufferLength());
+						bufferControl.setBufferLength(1L);
+						LOGGER.info("Length of Buffer is now = " + bufferControl.getBufferLength());
+					}
+				}
 			} catch (Exception e) {
 				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				throw new RuntimeException("The sound driver is facing problems " + e.getMessage(), e);
