@@ -58,6 +58,7 @@ import com.linkare.rec.impl.threading.TimedOutException;
 import com.linkare.rec.impl.threading.WaitForConditionResult;
 import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.jmf.media.datasink.capture.Handler;
+import com.linkare.rec.jmf.media.protocol.function.FunctorType;
 import com.linkare.rec.jmf.media.protocol.function.FunctorTypeControl;
 
 /**
@@ -228,6 +229,16 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 			player.close();
 			throw new RuntimeException("Failed to prefecth the player");
 		}
+		player.start();
+		if (!waitForState(Player.Started)) {
+			// cleanup the player
+			player.stop();
+			player.deallocate();
+			player.close();
+			throw new RuntimeException("Failed to prefecth the player");
+		}
+		FunctorTypeControl control = (FunctorTypeControl) player.getControl(FunctorTypeControl.class.getName());
+		control.setFunctorType(FunctorType.SILENCE);
 	}
 
 	/**
