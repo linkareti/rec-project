@@ -249,7 +249,20 @@ public class DataSource extends PushBufferDataSource {
 				int sampleSizeInBits = DataSource.this.audioFormat.getSampleSizeInBits();
 				sizeOfGeneratingArray = (int) (DataSource.this.sampleSizeInBytes * DataSource.this.numChannels * (int) (DataSource.this.sampleRate / 10));
 				generatingBuffer = new byte[sizeOfGeneratingArray];
-				double multiplyFactor = Math.pow(2, sampleSizeInBits) - 1;
+				// The functors generate a value between -1 and 1, and this
+				// value should be multiplied by the
+				// maximum generation value for the wave quantization in
+				// place... as the wave is signed, there are
+				// the scale is divided by 2 (positives and negatives - hence
+				// the sampleSizeInBits-1 in exponent)
+				// but the positive values include the 0, hence the -1
+				// subtracted from the power
+				double multiplyFactor = Math.pow(2, sampleSizeInBits - 1) - 1;
+				// but now, we don't want to overflow, so let's decrease this
+				// multiplyFactor by 10% (only using 90% of the available
+				// scale), which should make us generate
+				// sound in between a nice scaled value
+				multiplyFactor *= 0.9;
 				boolean bigEndian = DataSource.this.audioFormat.getEndian() == AudioFormat.BIG_ENDIAN;
 				boolean signed = DataSource.this.audioFormat.getSigned() == AudioFormat.SIGNED;
 				int incrementOnArray = DataSource.this.sampleSizeInBytes * DataSource.this.numChannels;
