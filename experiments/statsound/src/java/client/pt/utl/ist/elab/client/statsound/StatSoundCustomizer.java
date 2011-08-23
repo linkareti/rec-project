@@ -14,6 +14,9 @@ import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.client.customizer.ICustomizerListener;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
+
+import javax.swing.JCheckBox;
+import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 
@@ -1498,11 +1501,38 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_jButtonCancelActionPerformed
 
+	private String getStatusFromSelectedOptions(final JRadioButton mic2, final JRadioButton mic3,
+			final JRadioButton mic4, final JCheckBox heating) {
+		final StringBuilder status = new StringBuilder("");
+		if (mic2.isSelected()) {
+			status.append("1");
+		} else {
+			status.append("0");
+		}
+		if (mic3.isSelected()) {
+			status.append("1");
+		} else {
+			status.append("0");
+		}
+		if (mic4.isSelected()) {
+			status.append("1");
+		} else {
+			status.append("0");
+		}
+		if (heating.isSelected()) {
+			status.append("1");
+		} else {
+			status.append("0");
+		}
+		return status.toString();
+	}
+
 	private void jButtonOKActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonOKActionPerformed
 
 		int protocol = 1;
 		protocol = jTabbedPaneStatSound.getSelectedIndex() + 1;
 		String waveToSend = null;
+		String status = "";
 		switch (protocol) {
 		// Sound velocity
 		case 1:
@@ -1535,6 +1565,8 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 			acqConfig.getSelectedHardwareParameter(FREQUENCY_END).setParameterValue(
 					"" + jSliderSoundVelocityFrequency.getValue());
 			acqConfig.getSelectedHardwareParameter(WAVE_FORM).setParameterValue(waveToSend);
+			status = getStatusFromSelectedOptions(jRadioButtonSoundVelocityMic2, jRadioButtonSoundVelocityMic3,
+					jRadioButtonSoundVelocityMic4, jCheckBoxSoundVelocityHeat);
 			break;
 		// Vary piston
 		case 2:
@@ -1550,6 +1582,8 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 					"" + jSliderStatSoundIFrequency.getValue());
 			waveToSend = "SIN";
 			acqConfig.getSelectedHardwareParameter(WAVE_FORM).setParameterValue(waveToSend);
+			status = getStatusFromSelectedOptions(jRadioButtonStatSoundIMic2, jRadioButtonStatSoundIMic3,
+					jRadioButtonStatSoundIMic4, jCheckBoxStatSoundIHeat);
 			break;
 		// Vary frequency
 		case 3:
@@ -1565,31 +1599,11 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 					"" + jSliderStatSoundIIFrequencyEnd.getValue());
 			waveToSend = "SIN";
 			acqConfig.getSelectedHardwareParameter(WAVE_FORM).setParameterValue(waveToSend);
+			status = getStatusFromSelectedOptions(jRadioButtonStatSoundIIMic2, jRadioButtonStatSoundIIMic3,
+					jRadioButtonStatSoundIIMic4, jCheckBoxStatSoundIIHeat);
 			break;
 		default:
 			return;
-		}
-
-		String status = "";
-		if (jRadioButtonSoundVelocityMic2.isSelected()) {
-			status += "1";
-		} else {
-			status += "0";
-		}
-		if (jRadioButtonSoundVelocityMic3.isSelected()) {
-			status += "1";
-		} else {
-			status += "0";
-		}
-		if (jRadioButtonSoundVelocityMic4.isSelected()) {
-			status += "1";
-		} else {
-			status += "0";
-		}
-		if (jCheckBoxSoundVelocityHeat.isSelected()) {
-			status += "1";
-		} else {
-			status += "0";
 		}
 		acqConfig.getSelectedHardwareParameter("status").setParameterValue(status);
 		acqConfig.getSelectedHardwareParameter("calibration").setParameterValue("1");
