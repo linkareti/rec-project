@@ -10,19 +10,20 @@ public class PulseFunctor implements Functor {
 
 	private double frequency = 1.;
 
-	private double period = 1. / frequency;
+	private double pulseLength = 1. / frequency;
 
-	private double pulseLength = period * pulseLengthPercent;
+	private double period = pulseLength / pulseLengthPercent;
 
 	public void setPulseLengthPercent(double percent) {
 		this.pulseLengthPercent = percent;
-		this.pulseLength = period * percent;
+		this.pulseLength = 1. / frequency;
+		this.period = pulseLength / pulseLengthPercent;
 	}
 
 	public void setFrequency(double frequency) {
 		this.frequency = frequency;
-		this.period = 1. / frequency;
-		this.pulseLength = period * pulseLengthPercent;
+		this.pulseLength = 1. / frequency;
+		this.period = pulseLength / pulseLengthPercent;
 	}
 
 	@Override
@@ -37,7 +38,7 @@ public class PulseFunctor implements Functor {
 			currentTime -= period;
 		}
 
-		return (currentTime > (period - pulseLength)) ? 1. : 0.;
+		return (currentTime < pulseLength) ? 1. : 0.;
 	}
 
 	@Override
