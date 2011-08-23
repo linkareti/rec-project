@@ -224,7 +224,8 @@
 						<zipfileset file="${hardwareserver.build.dir}/ReCCommon.jar" prefix="hardwareserver" />
 
 						<zipfileset dir="${hardwareserver.build.dir}/lib" includes="**/*" prefix="hardwareserver/lib" />
-
+						<zipfileset dir="${experiments.build.dir}/@{experiment.name}/lib" includes="**/*" prefix="hardwareserver/lib" />
+						
 						<zipfileset file="${experiments.build.dir}/etc/loggers.config.properties" fullpath="hardwareserver/etc/loggers.config.properties" />
 						<zipfileset file="${hardwareserver.build.dir}/@{lab.name}/etc/openorb.xml" fullpath="hardwareserver/etc/openorb.xml" />
 						<zipfileset file="experiments/@{experiment.name}/etc/Rs232Config.xml" fullpath="hardwareserver/etc/Rs232Config.xml" />

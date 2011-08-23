@@ -420,6 +420,19 @@
 			<jar.experiment.driver experiment.name="@{experiment.name}" />
 			<sign.experiment experiment.name="@{experiment.name}" />
 			<create.jnlp.for.experiment experiment.name="@{experiment.name}" />
+			
+			<copy todir="${client.build.dir}/lib" overwrite="true">
+				<fileset dir="experiments/@{experiment.name}/lib/java/client">
+					<include name="**/*" />
+				</fileset>
+			</copy>
+				
+			<copy todir="${experiments.build.dir}/@{experiment.name}/lib" overwrite="true">
+				<fileset dir="experiments/@{experiment.name}/lib/java/server">
+					<include name="**/*" />
+				</fileset>
+			</copy>
+				
 		</sequential>
 	</macrodef>
 
