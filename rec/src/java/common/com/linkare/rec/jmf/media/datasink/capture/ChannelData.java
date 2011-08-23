@@ -13,9 +13,12 @@ public class ChannelData {
 	private double[][] channelWaveValues = new double[0][0];
 	private double[] channelsVRMS;
 
+	// when calculating the VRMS, use just this number of points to speed up
+	// calculation
+	private static final int VRMS_NR_SAMPLES = 1024;
+
 	private double[][] tempWaveValues;
 	private double[] tempVRMS;
-	private int length;
 
 	private static final int[] BUFFER_LOCK = new int[0];
 	private LinkedList<Buffer> buffers;
@@ -60,6 +63,9 @@ public class ChannelData {
 
 			int displacementOfSampleForChannelIndex = channel * sizeOfSampleInBytes;
 
+			int length = loadWaveValues ? ((data.length / (numChannels * sizeOfSampleInBytes)) / overSampleDisplacement)
+					: VRMS_NR_SAMPLES;
+
 			for (int sampleNr = 0; sampleNr < length; sampleNr++) {
 				System.arraycopy(data, (sampleNr * sampleIncrementOffset) + displacementOfSampleForChannelIndex
 						+ (sampleNr * overSampleDisplacement), sampleData, 0, sampleData.length);
@@ -91,8 +97,9 @@ public class ChannelData {
 	 */
 	private void allocateChannelsData(final int numChannels, final int sampleSizeInBytes, final int lengthInBytes,
 			final int overSampleDisplacement, final boolean loadWaveValues) {
-		length = (lengthInBytes / (numChannels * sampleSizeInBytes)) / overSampleDisplacement;
+
 		if (loadWaveValues) {
+			int length = (lengthInBytes / (numChannels * sampleSizeInBytes)) / overSampleDisplacement;
 			tempWaveValues = new double[numChannels][length];
 		} else {
 			tempVRMS = new double[numChannels];
@@ -151,24 +158,38 @@ public class ChannelData {
 	 */
 	public ChannelDataFrame readDataFrame(final double switchToLoadWavesOrVRMS, final boolean loadWaveValues) {
 		byte[] data = null;
+		int numChannels = 0;
+		int sizeOfSampleInBytes = 0;
 		synchronized (BUFFER_LOCK) {
+			audioFormat = (AudioFormat) buffers.get(0).getFormat();
+			numChannels = audioFormat.getChannels();
+			sizeOfSampleInBytes = audioFormat.getSampleSizeInBits() / BITS_PER_BYTE;
+
 			int totalLenOfBuffers = 0;
 			for (Buffer b : buffers) {
 				totalLenOfBuffers += b.getLength();
+				// for RMS we don't need all the buffers... just the first 1024
+				// samples is enough
+				if (!loadWaveValues && totalLenOfBuffers >= (VRMS_NR_SAMPLES * numChannels * sizeOfSampleInBytes)) {
+					break;
+				}
 			}
+
 			data = new byte[totalLenOfBuffers];
 			int offSetData = 0;
 			for (Buffer b : buffers) {
 				System.arraycopy(b.getData(), b.getOffset(), data, offSetData, b.getLength());
 				offSetData += b.getLength();
+				// for RMS we don't need all the buffers... just the first 1024
+				// samples is enough
+				if (!loadWaveValues && offSetData >= (VRMS_NR_SAMPLES * numChannels * sizeOfSampleInBytes)) {
+					break;
+				}
 			}
 
-			audioFormat = (AudioFormat) buffers.get(0).getFormat();
-			normalizationValue = Math.pow(2, audioFormat.getSampleSizeInBits() - 1);
 		}
 
-		final int numChannels = audioFormat.getChannels();
-		final int sizeOfSampleInBytes = audioFormat.getSampleSizeInBits() / BITS_PER_BYTE;
+		normalizationValue = Math.pow(2, audioFormat.getSampleSizeInBits() - 1);
 		final int overSampleDisplacement = (int) (audioFormat.getSampleRate() / switchToLoadWavesOrVRMS);
 		allocateChannelsData(numChannels, sizeOfSampleInBytes, data.length, overSampleDisplacement, loadWaveValues);
 		final boolean signed = audioFormat.getSigned() == AudioFormat.SIGNED;
@@ -177,5 +198,4 @@ public class ChannelData {
 				loadWaveValues);
 		return new ChannelDataFrame(channelWaveValues, channelsVRMS, audioFormat);
 	}
-
 }
