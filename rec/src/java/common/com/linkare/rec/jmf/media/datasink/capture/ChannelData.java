@@ -19,6 +19,7 @@ public class ChannelData {
 
 	private double[][] tempWaveValues;
 	private double[] tempVRMS;
+	private int length;
 
 	private static final int[] BUFFER_LOCK = new int[0];
 	private LinkedList<Buffer> buffers;
@@ -78,7 +79,7 @@ public class ChannelData {
 				}
 			}
 			if (!loadWaveValues) {
-				double meanPower = accumulatedPower / (double) tempWaveValues[channel].length;
+				double meanPower = accumulatedPower / (double) length;
 				tempVRMS[channel] = 10 * Math.log10(meanPower);
 			}
 		}
@@ -97,9 +98,8 @@ public class ChannelData {
 	 */
 	private void allocateChannelsData(final int numChannels, final int sampleSizeInBytes, final int lengthInBytes,
 			final int overSampleDisplacement, final boolean loadWaveValues) {
-
+		length = (lengthInBytes / (numChannels * sampleSizeInBytes)) / overSampleDisplacement;
 		if (loadWaveValues) {
-			int length = (lengthInBytes / (numChannels * sampleSizeInBytes)) / overSampleDisplacement;
 			tempWaveValues = new double[numChannels][length];
 		} else {
 			tempVRMS = new double[numChannels];
