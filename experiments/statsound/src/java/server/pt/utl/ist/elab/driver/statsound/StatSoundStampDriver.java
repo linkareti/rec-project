@@ -305,12 +305,12 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 		stampConfigCommand = new StampCommand(AbstractStampDriver.CONFIG_OUT_STRING);
 		// hack: in order to be able to always control the hardware, I always
 		// tell the stamp to be invoked only once
-		stampConfigCommand.addCommandData(NUMSAMPLES_COMMAND_PART, 1);
+		stampConfigCommand.addCommandData(NUMSAMPLES_COMMAND_PART, numberOfInvocationsToHardware);
 		stampConfigCommand.addCommandData(PISTON_START_COMMAND_PART, this.pistonStart);
 		// hack: in order to be able to always control the hardware, I can't
 		// tell stamp to move by itself. Instead, I'm the one that has to tell
 		// him where to move next...
-		stampConfigCommand.addCommandData(PISTON_END_COMMAND_PART, this.pistonStart);
+		stampConfigCommand.addCommandData(PISTON_END_COMMAND_PART, this.pistonEnd);
 		stampConfigCommand.addCommandData(STATUS_COMMAND_PART,
 				config.getSelectedHardwareParameterValue(STATUS_COMMAND_PART));
 		stampConfigCommand.addCommandData(CALIBRATION_COMMAND_PART,

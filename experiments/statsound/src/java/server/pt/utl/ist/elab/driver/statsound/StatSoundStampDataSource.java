@@ -123,7 +123,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 			switch (typeOfExperiment) {
 			case STATSOUND_VARY_PISTON:
 				handleProtocolVaryPiston(pos, frequencyInHz);
-				sendNextCommandIfNecessary(pos);
+//				sendNextCommandIfNecessary(pos);
 				break;
 			case STATSOUND_VARY_FREQUENCY:
 				handleProtocolVaryFrequency(pos, frequencyInHz);
