@@ -123,16 +123,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 			switch (typeOfExperiment) {
 			case STATSOUND_VARY_PISTON:
 				handleProtocolVaryPiston(pos, frequencyInHz);
-				if (numberOfPosReceivedFromHardware < numberOfInvocationsToHardware) {
-					int newPos = (int) Math.floor((double) (pos + stepInHardware));
-					driver.prepareCommandForNextStatement(newPos);
-					try {
-						driver.sendCommandToHardware();
-					} catch (WrongConfigurationException e) {
-						LOGGER.log(Level.SEVERE,
-								"It was not possible to send the command in the next statement invocation!!!", e);
-					}
-				}
+				sendNextCommandIfNecessary(pos);
 				break;
 			case STATSOUND_VARY_FREQUENCY:
 				handleProtocolVaryFrequency(pos, frequencyInHz);
@@ -153,6 +144,23 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 				LOGGER.log(Level.INFO, "Exception on temp if");
 				e.printStackTrace();
 				return;
+			}
+		}
+	}
+
+	private void sendNextCommandIfNecessary(final Integer pos) {
+		if (numberOfPosReceivedFromHardware < numberOfInvocationsToHardware) {
+			int newPos = (int) Math.floor((double) (pos + stepInHardware));
+			LOGGER.fine("Number of pos received (" + numberOfPosReceivedFromHardware
+					+ ") < number of invocations to hardware (" + numberOfInvocationsToHardware
+					+ ") - Sending a new command without calibration from the datasource. Moving from position " + pos
+					+ " to " + newPos);
+			driver.prepareCommandForNextStatement(newPos);
+			try {
+				driver.sendCommandToHardware();
+			} catch (WrongConfigurationException e) {
+				LOGGER.log(Level.SEVERE, "It was not possible to send the command in the next statement invocation!!!",
+						e);
 			}
 		}
 	}
