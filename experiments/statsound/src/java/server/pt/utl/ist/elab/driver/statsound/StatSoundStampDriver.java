@@ -232,13 +232,15 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 			player.close();
 			throw new RuntimeException("Failed to prefecth the player");
 		}
+
+		LOGGER.fine("Starting player...");
 		player.start();
 		if (!waitForState(Player.Started)) {
 			// cleanup the player
 			player.stop();
 			player.deallocate();
 			player.close();
-			throw new RuntimeException("Failed to prefecth the player");
+			throw new RuntimeException("Failed to start the player");
 		}
 		FunctorTypeControl control = (FunctorTypeControl) player.getControl(FunctorTypeControl.class.getName());
 		control.setFunctorType(FunctorType.SILENCE);
