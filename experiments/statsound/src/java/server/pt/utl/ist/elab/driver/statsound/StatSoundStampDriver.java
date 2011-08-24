@@ -384,15 +384,16 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 			step = 1;
 			freqFin = freqIni;
 		}
+		LOGGER.fine("Step = " + step);
+		pistonStart = Integer.valueOf(config.getSelectedHardwareParameterValue(PISTON_START_PARAMETER));
+		pistonEnd = Integer.valueOf(config.getSelectedHardwareParameterValue(PISTON_END_PARAMETER));
 		if (numberOfInvocationsToHardware > 1) {
-			stepInHardware = Math.abs((double) (pistonEnd - pistonStart)) / ((numberOfInvocationsToHardware - 1));
+			stepInHardware = (pistonEnd - pistonStart) / (numberOfInvocationsToHardware - 1);
 		} else {
 			stepInHardware = 1;
 			pistonEnd = pistonStart;
 		}
-		LOGGER.fine("Step = " + step);
-		pistonStart = Integer.valueOf(config.getSelectedHardwareParameterValue(PISTON_START_PARAMETER));
-		pistonEnd = Integer.valueOf(config.getSelectedHardwareParameterValue(PISTON_END_PARAMETER));
+		LOGGER.fine("Step in hardware = " + stepInHardware);
 	}
 
 	@Override
