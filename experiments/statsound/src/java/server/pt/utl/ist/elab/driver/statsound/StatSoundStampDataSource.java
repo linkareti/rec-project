@@ -106,10 +106,10 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 		}
 
 		if (cmd.getCommandIdentifier().equals(StampStatSoundProcessor.COMMAND_IDENTIFIER)) {
-			ignore = !ignore;
-			if (ignore) {
-				return;
-			}
+			// ignore = !ignore;
+			// if (ignore) {
+			// return;
+			// }
 			if (numberOfPosReceivedFromHardware >= numberOfInvocationsToHardware) {
 				LOGGER.log(Level.FINEST, "Hardware is too friendly... sending me more data than I asked!!! Bye bye!");
 				return;
@@ -132,9 +132,10 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 				handleProtocolSoundVelocity(pos, frequencyInHz);
 				break;
 			}
-			if (numberOfPosReceivedFromHardware == numberOfInvocationsToHardware) {
-				finishedMyJob();
-			}
+			// if (numberOfPosReceivedFromHardware ==
+			// numberOfInvocationsToHardware) {
+			finishedMyJob();
+			// }
 		} else if (cmd.getCommandIdentifier().equals(StampStatSoundTempProcessor.COMMAND_IDENTIFIER)) {
 			try {
 				// TODO: What?!!!!!
