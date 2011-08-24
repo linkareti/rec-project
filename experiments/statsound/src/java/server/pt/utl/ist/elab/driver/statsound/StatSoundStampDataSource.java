@@ -18,6 +18,7 @@ import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 import pt.utl.ist.elab.driver.statsound.processors.StampStatSoundProcessor;
 import pt.utl.ist.elab.driver.statsound.processors.StampStatSoundTempProcessor;
 
+import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.synch.FrequencyDefType;
@@ -64,6 +65,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 
 	private double step = 1;
 
+	private double stepInHardware = 1;
+
 	private HardwareAcquisitionConfig config;
 
 	PhysicsValue[] oldValues = new PhysicsValue[7];
@@ -79,6 +82,16 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 
 	private int numberOfPosReceivedFromHardware;
 
+	private StatSoundStampDriver driver;
+
+	/*
+	 * There's a bug in the STAMP code that makes the hardware return results
+	 * twice, when we ask for one single point. This flag should control if we
+	 * are getting that 2nd point or not and, if that is the case, simply ignore
+	 * and proceed.
+	 */
+	private boolean ignore = false;
+
 	private static final Logger LOGGER = Logger.getLogger(StatSoundStampDriver.class.getName());
 
 	/** Creates a new instance of RadioactividadeStampDataSource */
@@ -93,6 +106,10 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 		}
 
 		if (cmd.getCommandIdentifier().equals(StampStatSoundProcessor.COMMAND_IDENTIFIER)) {
+			if (ignore) {
+				ignore = !ignore;
+				return;
+			}
 			if (numberOfPosReceivedFromHardware >= numberOfInvocationsToHardware) {
 				LOGGER.log(Level.FINEST, "Hardware is too friendly... sending me more data than I asked!!! Bye bye!");
 				return;
@@ -103,10 +120,19 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 			final Integer pos = (Integer) cmd.getCommandData(StampStatSoundProcessor.COMMAND_IDENTIFIER);
 			numberOfPosReceivedFromHardware++;
 			final double frequencyInHz = getDesiredFrequencyFromConfig();
-
 			switch (typeOfExperiment) {
 			case STATSOUND_VARY_PISTON:
 				handleProtocolVaryPiston(pos, frequencyInHz);
+				if (numberOfPosReceivedFromHardware < numberOfInvocationsToHardware) {
+					int newPos = (int) Math.floor((double) (pos + stepInHardware));
+					driver.prepareCommandForNextStatement(newPos);
+					try {
+						driver.sendCommandToHardware();
+					} catch (WrongConfigurationException e) {
+						LOGGER.log(Level.SEVERE,
+								"It was not possible to send the command in the next statement invocation!!!", e);
+					}
+				}
 				break;
 			case STATSOUND_VARY_FREQUENCY:
 				handleProtocolVaryFrequency(pos, frequencyInHz);
@@ -115,7 +141,9 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 				handleProtocolSoundVelocity(pos, frequencyInHz);
 				break;
 			}
-			finishedMyJob();
+			if (numberOfPosReceivedFromHardware == numberOfInvocationsToHardware) {
+				finishedMyJob();
+			}
 		} else if (cmd.getCommandIdentifier().equals(StampStatSoundTempProcessor.COMMAND_IDENTIFIER)) {
 			try {
 				// TODO: What?!!!!!
@@ -177,7 +205,6 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 	private void handleProtocolVaryPiston(final int pos, final double frequencyInHz) {
 		newWaveTypeOnFunctorControl().setFrequency(freqIni);
 		waitBeforeCapture();
-
 		ChannelDataFrame channelDataFrame = soundCaptureDevice.captureFrame(frequencyInHz, false);
 		double channelVRMS1 = channelDataFrame.getChannelVRMS(0);
 		double channelVRMS2 = channelDataFrame.getChannelVRMS(1);
@@ -333,5 +360,20 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 	 */
 	public void setNumberOfInvocationsToHardware(int numberOfInvocationsToHardware) {
 		this.numberOfInvocationsToHardware = numberOfInvocationsToHardware;
+	}
+
+	/**
+	 * 
+	 * @param driver
+	 */
+	public void setDriver(final StatSoundStampDriver driver) {
+		this.driver = driver;
+	}
+
+	/**
+	 * @param stepInHardware
+	 */
+	public void setStepInHardware(double stepInHardware) {
+		this.stepInHardware = stepInHardware;
 	}
 }

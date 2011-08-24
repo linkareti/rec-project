@@ -138,6 +138,8 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 
 	private double step = 0;
 
+	private double stepInHardware = 0;
+
 	private StatSoundStampDataSource dataSource;
 
 	// new stuff:
@@ -287,7 +289,7 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 		}
 	}
 
-	private void sendCommandToHardware() throws WrongConfigurationException {
+	void sendCommandToHardware() throws WrongConfigurationException {
 		// The translator is, basically, the entity that sends the command from
 		// the software to the hardware
 		final StampTranslator translator = StampTranslatorProcessorManager.getTranslator(stampConfigCommand);
@@ -299,13 +301,29 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 
 	private void prepareCommand(final HardwareAcquisitionConfig config) {
 		stampConfigCommand = new StampCommand(AbstractStampDriver.CONFIG_OUT_STRING);
-		stampConfigCommand.addCommandData(NUMSAMPLES_COMMAND_PART, numberOfInvocationsToHardware);
+		// hack: in order to be able to always control the hardware, I always
+		// tell the stamp to be invoked only once
+		stampConfigCommand.addCommandData(NUMSAMPLES_COMMAND_PART, 1);
 		stampConfigCommand.addCommandData(PISTON_START_COMMAND_PART, this.pistonStart);
-		stampConfigCommand.addCommandData(PISTON_END_COMMAND_PART, this.pistonEnd);
+		// hack: in order to be able to always control the hardware, I can't
+		// tell stamp to move by itself. Instead, I'm the one that has to tell
+		// him where to move next...
+		stampConfigCommand.addCommandData(PISTON_END_COMMAND_PART, this.pistonStart);
 		stampConfigCommand.addCommandData(STATUS_COMMAND_PART,
 				config.getSelectedHardwareParameterValue(STATUS_COMMAND_PART));
 		stampConfigCommand.addCommandData(CALIBRATION_COMMAND_PART,
 				Integer.valueOf(config.getSelectedHardwareParameterValue(CALIBRATION_COMMAND_PART)));
+	}
+
+	void prepareCommandForNextStatement(final int pos) {
+		stampConfigCommand = new StampCommand(AbstractStampDriver.CONFIG_OUT_STRING);
+		stampConfigCommand.addCommandData(NUMSAMPLES_COMMAND_PART, 1);
+		stampConfigCommand.addCommandData(PISTON_START_COMMAND_PART, pos);
+		stampConfigCommand.addCommandData(PISTON_END_COMMAND_PART, pos);
+		stampConfigCommand.addCommandData(STATUS_COMMAND_PART,
+				config.getSelectedHardwareParameterValue(STATUS_COMMAND_PART));
+		// never calibrate on the non first invocations to the hardware!
+		stampConfigCommand.addCommandData(CALIBRATION_COMMAND_PART, 0);
 	}
 
 	private void initInternalParameters(final HardwareAcquisitionConfig config) {
@@ -362,7 +380,13 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 		} else {
 			/** Step needs to be bigger than 1 to get out of the for cycle */
 			step = 1;
-			freqIni = freqFin;
+			freqFin = freqIni;
+		}
+		if (numberOfInvocationsToHardware > 1) {
+			stepInHardware = Math.abs((double) (pistonEnd - pistonStart)) / ((numberOfInvocationsToHardware - 1));
+		} else {
+			stepInHardware = 1;
+			pistonEnd = pistonStart;
 		}
 		LOGGER.fine("Step = " + step);
 		pistonStart = Integer.valueOf(config.getSelectedHardwareParameterValue(PISTON_START_PARAMETER));
@@ -622,6 +646,8 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 		dataSource.setExpEnded(false);
 		dataSource.setCaptureDevice(soundCaptureDevice);
 		dataSource.setNumberOfInvocationsToHardware(numberOfInvocationsToHardware);
+		dataSource.setDriver(this);
+		dataSource.setStepInHardware(stepInHardware);
 		fireIDriverStateListenerDriverStarted();
 	}
 
