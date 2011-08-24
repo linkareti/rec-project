@@ -591,7 +591,6 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 					"Can not interpret command " + cmd);
 			return;
 		}
-
 		if (cmd.getCommandIdentifier().equals(getDriverUniqueID())) {
 			// the driver is controlling the state machine so, while the
 			// data source is not ended, simply ignore the hardware messages
@@ -601,9 +600,17 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 			}
 			processAbstractStampDriverIdCommand();
 		} else if (cmd.getCommandIdentifier().equals(StampStartProcessor.COMMAND_IDENTIFIER)) {
+			if (dataSource != null && !dataSource.isExpEnded()) {
+				LOGGER.fine("Returning");
+				return;
+			}
 			// actually process the command, preparing the data source.
 			processStampStartCommand();
 		} else if (cmd.getCommandIdentifier().equals(StampConfiguredProcessor.COMMAND_IDENTIFIER)) {
+			if (dataSource != null && !dataSource.isExpEnded()) {
+				LOGGER.fine("Returning");
+				return;
+			}
 			processStampConfiguredCommand();
 		} else if (cmd.getCommandIdentifier().equals(StampNotConfiguredProcessor.COMMAND_IDENTIFIER)) {
 			// the driver is controlling the state machine so, while the

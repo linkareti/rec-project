@@ -107,9 +107,9 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 
 		if (cmd.getCommandIdentifier().equals(StampStatSoundProcessor.COMMAND_IDENTIFIER)) {
 			if (ignore) {
-				ignore = !ignore;
 				return;
 			}
+			ignore = !ignore;
 			if (numberOfPosReceivedFromHardware >= numberOfInvocationsToHardware) {
 				LOGGER.log(Level.FINEST, "Hardware is too friendly... sending me more data than I asked!!! Bye bye!");
 				return;
@@ -156,12 +156,18 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 					+ ") - Sending a new command without calibration from the datasource. Moving from position " + pos
 					+ " to " + newPos);
 			driver.prepareCommandForNextStatement(newPos);
-			try {
-				driver.sendCommandToHardware();
-			} catch (WrongConfigurationException e) {
-				LOGGER.log(Level.SEVERE, "It was not possible to send the command in the next statement invocation!!!",
-						e);
-			}
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						driver.sendCommandToHardware();
+					} catch (WrongConfigurationException e) {
+						LOGGER.log(Level.SEVERE,
+								"It was not possible to send the command in the next statement invocation!!!", e);
+						throw new RuntimeException(e);
+					}
+				}
+			}).start();
 		}
 	}
 
