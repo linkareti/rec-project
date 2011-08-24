@@ -90,7 +90,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 	 * are getting that 2nd point or not and, if that is the case, simply ignore
 	 * and proceed.
 	 */
-	private boolean ignore = false;
+	private boolean ignore = true;
 
 	private static final Logger LOGGER = Logger.getLogger(StatSoundStampDriver.class.getName());
 
@@ -106,10 +106,10 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 		}
 
 		if (cmd.getCommandIdentifier().equals(StampStatSoundProcessor.COMMAND_IDENTIFIER)) {
+			ignore = !ignore;
 			if (ignore) {
 				return;
 			}
-			ignore = !ignore;
 			if (numberOfPosReceivedFromHardware >= numberOfInvocationsToHardware) {
 				LOGGER.log(Level.FINEST, "Hardware is too friendly... sending me more data than I asked!!! Bye bye!");
 				return;
@@ -123,7 +123,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 			switch (typeOfExperiment) {
 			case STATSOUND_VARY_PISTON:
 				handleProtocolVaryPiston(pos, frequencyInHz);
-//				sendNextCommandIfNecessary(pos);
+				// sendNextCommandIfNecessary(pos);
 				break;
 			case STATSOUND_VARY_FREQUENCY:
 				handleProtocolVaryFrequency(pos, frequencyInHz);
