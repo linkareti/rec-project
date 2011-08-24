@@ -204,8 +204,8 @@ public class DataSource extends PushBufferDataSource {
 			if (innerGenerationThread != null) {
 				stop = true;
 				try {
-					if (Thread.currentThread() != innerGenerationThread) {
-						innerGenerationThread.join();
+					if (Thread.currentThread() != innerGenerationThread && innerGenerationThread.isAlive()) {
+						innerGenerationThread.join(1000);
 					}
 					innerGenerationThread = null;
 				} catch (InterruptedException e) {
