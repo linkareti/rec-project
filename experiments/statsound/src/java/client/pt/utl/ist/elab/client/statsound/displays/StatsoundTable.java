@@ -69,13 +69,13 @@ public class StatsoundTable extends MultSeriesTable {
 				break;
 			case STATSOUND_VARY_FREQUENCY:
 				setColArray(new int[] { ChannelConfigConstants.SAMPLE_NUMBER_INDEX,
-						ChannelConfigConstants.ACQUISITION_TIME_INDEX, ChannelConfigConstants.VRMS1_INDEX,
-						ChannelConfigConstants.VRMS2_INDEX, ChannelConfigConstants.FREQUENCY_INDEX });
+						ChannelConfigConstants.FREQUENCY_INDEX, ChannelConfigConstants.VRMS1_INDEX,
+						ChannelConfigConstants.VRMS2_INDEX });
 				break;
 			case STATSOUND_VARY_PISTON:
 				setColArray(new int[] { ChannelConfigConstants.SAMPLE_NUMBER_INDEX,
-						ChannelConfigConstants.ACQUISITION_TIME_INDEX, ChannelConfigConstants.POSITION_INDEX,
-						ChannelConfigConstants.VRMS1_INDEX, ChannelConfigConstants.VRMS2_INDEX });
+						ChannelConfigConstants.POSITION_INDEX, ChannelConfigConstants.VRMS1_INDEX,
+						ChannelConfigConstants.VRMS2_INDEX });
 				break;
 			}
 		}

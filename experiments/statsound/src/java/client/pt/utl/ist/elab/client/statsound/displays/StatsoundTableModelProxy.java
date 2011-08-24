@@ -53,25 +53,33 @@ public class StatsoundTableModelProxy extends com.linkare.rec.impl.client.experi
 				return null;
 			}
 		}
-		final String experimentTypeParameter = getExpDataModel().getAcquisitionConfig()
-				.getSelectedHardwareParameterValue(EXPERIMENT_TYPE);
-		typeOfExperiment = TypeOfExperiment.from(experimentTypeParameter);
+		initTypeOfExperimentIfNecessary();
 		switch (columnIndex) {
 		case 0:
 			return ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.sampleNumber");
 		case 1:
-			return ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.acquisitionTime");
+			switch (typeOfExperiment) {
+			case SOUND_VELOCITY:
+				// acquisition time
+				return ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.acquisitionTime");
+			case STATSOUND_VARY_FREQUENCY:
+				// frequency
+				return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.5.name");
+			case STATSOUND_VARY_PISTON:
+				// position
+				return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.0.name");
+			default:
+				return "Unknown for " + typeOfExperiment + " in index 2";
+			}
 		case 2:
 			switch (typeOfExperiment) {
 			case SOUND_VELOCITY:
 				// wave1
 				return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.3.name");
 			case STATSOUND_VARY_FREQUENCY:
+			case STATSOUND_VARY_PISTON:
 				// vrms1
 				return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.1.name");
-			case STATSOUND_VARY_PISTON:
-				// position
-				return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.0.name");
 			default:
 				return "Unknown for " + typeOfExperiment + " in index 2";
 			}
@@ -81,27 +89,22 @@ public class StatsoundTableModelProxy extends com.linkare.rec.impl.client.experi
 				// wave2
 				return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.4.name");
 			case STATSOUND_VARY_FREQUENCY:
+			case STATSOUND_VARY_PISTON:
 				// vrms2
 				return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.2.name");
-			case STATSOUND_VARY_PISTON:
-				// vrms1
-				return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.1.name");
 			default:
 				return "Unknown for " + typeOfExperiment + " in index 3";
 			}
-		case 4:
-			switch (typeOfExperiment) {
-			case STATSOUND_VARY_FREQUENCY:
-				// frequency
-				return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.5.name");
-			case STATSOUND_VARY_PISTON:
-				// vrms2
-				return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.2.name");
-			default:
-				return "Unknown for " + typeOfExperiment + " in index 4";
-			}
 		}
 		return "?";
+	}
+
+	private void initTypeOfExperimentIfNecessary() {
+		if (typeOfExperiment == null) {
+			final String experimentTypeParameter = getExpDataModel().getAcquisitionConfig()
+					.getSelectedHardwareParameterValue(EXPERIMENT_TYPE);
+			typeOfExperiment = TypeOfExperiment.from(experimentTypeParameter);
+		}
 	}
 
 	/**
@@ -117,10 +120,11 @@ public class StatsoundTableModelProxy extends com.linkare.rec.impl.client.experi
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			return null;
 		}
+		initTypeOfExperimentIfNecessary();
 		if (columnIndex == 0) {
 			// sample number
 			return String.valueOf(rowIndex + 1);
-		} else if (columnIndex == 1) {
+		} else if (columnIndex == 1 && typeOfExperiment == TypeOfExperiment.SOUND_VELOCITY) {
 			return getAcquisitionTimeInMicros(rowIndex);
 		}
 		final PhysicsValue value = expDataModel.getValueAt(rowIndex, getColAtArray(columnIndex));
@@ -136,7 +140,6 @@ public class StatsoundTableModelProxy extends com.linkare.rec.impl.client.experi
 
 	public void headerAvailable(final HardwareAcquisitionConfig header) {
 		fireTableStructureChanged();
-		// super doesn't have this method defined
 	}
 
 	@Override
@@ -158,19 +161,5 @@ public class StatsoundTableModelProxy extends com.linkare.rec.impl.client.experi
 			return null;
 		}
 		return String.class;
-	}
-
-	/**
-	 * @return the typeOfExperiment
-	 */
-	public TypeOfExperiment getTypeOfExperiment() {
-		return typeOfExperiment;
-	}
-
-	/**
-	 * @param typeOfExperiment the typeOfExperiment to set
-	 */
-	public void setTypeOfExperiment(TypeOfExperiment typeOfExperiment) {
-		this.typeOfExperiment = typeOfExperiment;
 	}
 }
