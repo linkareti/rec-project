@@ -305,15 +305,16 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 		stampConfigCommand = new StampCommand(AbstractStampDriver.CONFIG_OUT_STRING);
 		// hack: in order to be able to always control the hardware, I always
 		// tell the stamp to be invoked only once
-		// stampConfigCommand.addCommandData(NUMSAMPLES_COMMAND_PART, 1);
-		stampConfigCommand.addCommandData(NUMSAMPLES_COMMAND_PART, numberOfInvocationsToHardware);
+		stampConfigCommand.addCommandData(NUMSAMPLES_COMMAND_PART, 1);
+		// stampConfigCommand.addCommandData(NUMSAMPLES_COMMAND_PART,
+		// numberOfInvocationsToHardware);
 		stampConfigCommand.addCommandData(PISTON_START_COMMAND_PART, this.pistonStart);
 		// hack: in order to be able to always control the hardware, I can't
 		// tell stamp to move by itself. Instead, I'm the one that has to tell
 		// him where to move next...
+		stampConfigCommand.addCommandData(PISTON_END_COMMAND_PART, this.pistonStart);
 		// stampConfigCommand.addCommandData(PISTON_END_COMMAND_PART,
-		// this.pistonStart);
-		stampConfigCommand.addCommandData(PISTON_END_COMMAND_PART, this.pistonEnd);
+		// this.pistonEnd);
 		stampConfigCommand.addCommandData(STATUS_COMMAND_PART,
 				config.getSelectedHardwareParameterValue(STATUS_COMMAND_PART));
 		stampConfigCommand.addCommandData(CALIBRATION_COMMAND_PART,
@@ -659,12 +660,22 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 		dataSource.setExpEnded(false);
 		dataSource.setCaptureDevice(soundCaptureDevice);
 		dataSource.setNumberOfInvocationsToHardware(numberOfInvocationsToHardware);
-		dataSource.setDriver(this);
 		dataSource.setStepInHardware(stepInHardware);
 		fireIDriverStateListenerDriverStarted();
 	}
 
 	private void processAbstractStampDriverIdCommand() {
+		if (dataSource != null
+				&& dataSource.getNumberOfPosReceivedFromHardware() < dataSource.getNumberOfInvocationsToHardware()) {
+			int nextPosition = (int) (dataSource.getPosition() + dataSource.getStepInHardware());
+			LOGGER.fine("Preparing new configure command. Last position = " + dataSource.getPosition() + ", Step = "
+					+ dataSource.getStepInHardware() + ", Next position = " + nextPosition);
+			prepareCommandForNextStatement(nextPosition);
+			writeMessage(stampConfigCommand.getCommand());
+			fireIDriverStateListenerDriverStarting();
+			return;
+		}
+
 		if (waitingStart) {
 			LOGGER.fine("Waiting start");
 			waitingStart = false;

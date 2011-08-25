@@ -18,7 +18,6 @@ import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 import pt.utl.ist.elab.driver.statsound.processors.StampStatSoundProcessor;
 import pt.utl.ist.elab.driver.statsound.processors.StampStatSoundTempProcessor;
 
-import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.synch.FrequencyDefType;
@@ -82,15 +81,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 
 	private int numberOfPosReceivedFromHardware;
 
-	private StatSoundStampDriver driver;
-
-	/*
-	 * There's a bug in the STAMP code that makes the hardware return results
-	 * twice, when we ask for one single point. This flag should control if we
-	 * are getting that 2nd point or not and, if that is the case, simply ignore
-	 * and proceed.
-	 */
-	private boolean ignore = true;
+	private int position;
 
 	private static final Logger LOGGER = Logger.getLogger(StatSoundStampDriver.class.getName());
 
@@ -106,10 +97,6 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 		}
 
 		if (cmd.getCommandIdentifier().equals(StampStatSoundProcessor.COMMAND_IDENTIFIER)) {
-			// ignore = !ignore;
-			// if (ignore) {
-			// return;
-			// }
 			if (numberOfPosReceivedFromHardware >= numberOfInvocationsToHardware) {
 				LOGGER.log(Level.FINEST, "Hardware is too friendly... sending me more data than I asked!!! Bye bye!");
 				return;
@@ -117,25 +104,21 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 
 			final String experimentTypeParameter = config.getSelectedHardwareParameterValue(EXPERIMENT_TYPE_PARAMETER);
 			final TypeOfExperiment typeOfExperiment = TypeOfExperiment.from(experimentTypeParameter);
-			final Integer pos = (Integer) cmd.getCommandData(StampStatSoundProcessor.COMMAND_IDENTIFIER);
+			position = (Integer) cmd.getCommandData(StampStatSoundProcessor.COMMAND_IDENTIFIER);
 			numberOfPosReceivedFromHardware++;
 			final double frequencyInHz = getDesiredFrequencyFromConfig();
 			switch (typeOfExperiment) {
 			case STATSOUND_VARY_PISTON:
-				handleProtocolVaryPiston(pos, frequencyInHz);
-				// sendNextCommandIfNecessary(pos);
+				handleProtocolVaryPiston(position, frequencyInHz);
 				break;
 			case STATSOUND_VARY_FREQUENCY:
-				handleProtocolVaryFrequency(pos, frequencyInHz);
+				handleProtocolVaryFrequency(position, frequencyInHz);
 				break;
 			case SOUND_VELOCITY:
-				handleProtocolSoundVelocity(pos, frequencyInHz);
+				handleProtocolSoundVelocity(position, frequencyInHz);
 				break;
 			}
-			// if (numberOfPosReceivedFromHardware ==
-			// numberOfInvocationsToHardware) {
 			finishedMyJob();
-			// }
 		} else if (cmd.getCommandIdentifier().equals(StampStatSoundTempProcessor.COMMAND_IDENTIFIER)) {
 			try {
 				// TODO: What?!!!!!
@@ -146,29 +129,6 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 				e.printStackTrace();
 				return;
 			}
-		}
-	}
-
-	private void sendNextCommandIfNecessary(final Integer pos) {
-		if (numberOfPosReceivedFromHardware < numberOfInvocationsToHardware) {
-			int newPos = (int) Math.floor((double) (pos + stepInHardware));
-			LOGGER.fine("Number of pos received (" + numberOfPosReceivedFromHardware
-					+ ") < number of invocations to hardware (" + numberOfInvocationsToHardware
-					+ ") - Sending a new command without calibration from the datasource. Moving from position " + pos
-					+ " to " + newPos);
-			driver.prepareCommandForNextStatement(newPos);
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					try {
-						driver.sendCommandToHardware();
-					} catch (WrongConfigurationException e) {
-						LOGGER.log(Level.SEVERE,
-								"It was not possible to send the command in the next statement invocation!!!", e);
-						throw new RuntimeException(e);
-					}
-				}
-			}).start();
 		}
 	}
 
@@ -378,17 +338,37 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 	}
 
 	/**
-	 * 
-	 * @param driver
-	 */
-	public void setDriver(final StatSoundStampDriver driver) {
-		this.driver = driver;
-	}
-
-	/**
 	 * @param stepInHardware
 	 */
 	public void setStepInHardware(double stepInHardware) {
 		this.stepInHardware = stepInHardware;
+	}
+
+	/**
+	 * @return the stepInHardware
+	 */
+	public double getStepInHardware() {
+		return stepInHardware;
+	}
+
+	/**
+	 * @return the numberOfInvocationsToHardware
+	 */
+	public int getNumberOfInvocationsToHardware() {
+		return numberOfInvocationsToHardware;
+	}
+
+	/**
+	 * @return the numberOfPosReceivedFromHardware
+	 */
+	public int getNumberOfPosReceivedFromHardware() {
+		return numberOfPosReceivedFromHardware;
+	}
+
+	/**
+	 * @return the position
+	 */
+	public int getPosition() {
+		return position;
 	}
 }
