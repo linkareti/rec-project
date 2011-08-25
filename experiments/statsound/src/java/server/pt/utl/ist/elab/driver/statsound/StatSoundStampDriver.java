@@ -192,7 +192,7 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 
 		initInternalParameters(config);
 		prepareCommand(config);
-		sendCommandToHardware();
+		translateCommandFromParameters();
 
 		// notify that my work is finished
 		fireIDriverStateListenerDriverConfigured();
@@ -291,7 +291,13 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 		}
 	}
 
-	void sendCommandToHardware() throws WrongConfigurationException {
+	/**
+	 * This method actually creates the command string from the parameters
+	 * passed in to the stampConfigCommand.
+	 * 
+	 * @throws WrongConfigurationException
+	 */
+	void translateCommandFromParameters() throws WrongConfigurationException {
 		// The translator is, basically, the entity that sends the command from
 		// the software to the hardware
 		final StampTranslator translator = StampTranslatorProcessorManager.getTranslator(stampConfigCommand);
@@ -668,7 +674,9 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 		if (dataSource != null
 				&& dataSource.getNumberOfPosReceivedFromHardware() < dataSource.getNumberOfInvocationsToHardware()) {
 			int nextPosition = (int) (dataSource.getPosition() + dataSource.getStepInHardware());
-			LOGGER.fine("Preparing new configure command. Last position = " + dataSource.getPosition() + ", Step = "
+			LOGGER.fine("Number of pos received (" + dataSource.getNumberOfPosReceivedFromHardware()
+					+ ") < Number of invocations (" + dataSource.getNumberOfInvocationsToHardware()
+					+ "). Preparing new configure command. Last position = " + dataSource.getPosition() + ", Step = "
 					+ dataSource.getStepInHardware() + ", Next position = " + nextPosition);
 			prepareCommandForNextStatement(nextPosition);
 			writeMessage(stampConfigCommand.getCommand());
