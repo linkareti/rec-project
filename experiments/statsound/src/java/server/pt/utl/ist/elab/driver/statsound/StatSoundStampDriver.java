@@ -604,7 +604,8 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 		if (cmd.getCommandIdentifier().equals(getDriverUniqueID())) {
 			// the driver is controlling the state machine so, while the
 			// data source is not ended, simply ignore the hardware messages
-			if (dataSource != null && !dataSource.isExpEnded()) {
+			if (dataSource != null
+					&& dataSource.getNumberOfPosReceivedFromHardware() < dataSource.getNumberOfInvocationsToHardware()) {
 				LOGGER.fine("Returning");
 				return;
 			}
@@ -625,7 +626,8 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 		} else if (cmd.getCommandIdentifier().equals(StampNotConfiguredProcessor.COMMAND_IDENTIFIER)) {
 			// the driver is controlling the state machine so, while the
 			// data source is not ended, simply ignore the hardware messages
-			if (dataSource != null && !dataSource.isExpEnded()) {
+			if (dataSource != null
+					&& dataSource.getNumberOfPosReceivedFromHardware() < dataSource.getNumberOfInvocationsToHardware()) {
 				LOGGER.fine("Returning");
 				return;
 			}
