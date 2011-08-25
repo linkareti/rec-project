@@ -682,7 +682,7 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 					+ dataSource.getStepInHardware() + ", Next position = " + nextPosition);
 			prepareCommandForNextStatement(nextPosition);
 			writeMessage(stampConfigCommand.getCommand());
-			fireIDriverStateListenerDriverStarting();
+			// fireIDriverStateListenerDriverStarting();
 			return;
 		}
 
