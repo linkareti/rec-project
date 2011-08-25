@@ -612,8 +612,16 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 							+ "). Preparing new configure command. Last position = " + dataSource.getPosition()
 							+ ", Step = " + dataSource.getStepInHardware() + ", Next position = " + nextPosition);
 					prepareCommandForNextStatement(nextPosition);
+					try {
+						translateCommandFromParameters();
+					} catch (WrongConfigurationException e) {
+						// TODO: pzenida - Ask JP if we should do something
+						// about the states of the driver and the datasource
+						// here...
+						LOGGER.log(Level.SEVERE,
+								"Oops! Something wrong when sending the sequence commands to hardware", e);
+					}
 					writeMessage(stampConfigCommand.getCommand());
-					// fireIDriverStateListenerDriverStarting();
 				}
 				return;
 			}
