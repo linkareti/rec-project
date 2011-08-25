@@ -126,7 +126,9 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 				handleProtocolSoundVelocity(position, frequencyInHz);
 				break;
 			}
-			finishedMyJob();
+			if (numberOfPosReceivedFromHardware >= numberOfInvocationsToHardware) {
+				finishedMyJob();
+			}
 		} else if (cmd.getCommandIdentifier().equals(StampStatSoundTempProcessor.COMMAND_IDENTIFIER)) {
 			try {
 				// TODO: What?!!!!!
