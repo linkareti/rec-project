@@ -32,7 +32,7 @@ public class Handler implements DataSink, BufferTransferHandler {
 
 	private Buffer buffer = new Buffer();
 
-	private long deltaTime = 250;
+	private long deltaTime = 1000;
 
 	/*
 	 * (non-Javadoc)
