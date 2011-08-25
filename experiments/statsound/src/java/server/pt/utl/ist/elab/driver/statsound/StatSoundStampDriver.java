@@ -605,7 +605,16 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 			// the driver is controlling the state machine so, while the
 			// data source is not ended, simply ignore the hardware messages
 			if (dataSource != null && !dataSource.isExpEnded()) {
-				LOGGER.fine("Returning");
+				if (dataSource.getNumberOfPosReceivedFromHardware() < dataSource.getNumberOfInvocationsToHardware()) {
+					int nextPosition = (int) (dataSource.getPosition() + dataSource.getStepInHardware());
+					LOGGER.fine("Number of pos received (" + dataSource.getNumberOfPosReceivedFromHardware()
+							+ ") < Number of invocations (" + dataSource.getNumberOfInvocationsToHardware()
+							+ "). Preparing new configure command. Last position = " + dataSource.getPosition()
+							+ ", Step = " + dataSource.getStepInHardware() + ", Next position = " + nextPosition);
+					prepareCommandForNextStatement(nextPosition);
+					writeMessage(stampConfigCommand.getCommand());
+					// fireIDriverStateListenerDriverStarting();
+				}
 				return;
 			}
 			processAbstractStampDriverIdCommand();
@@ -671,19 +680,6 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 	}
 
 	private void processAbstractStampDriverIdCommand() {
-		if (dataSource != null
-				&& dataSource.getNumberOfPosReceivedFromHardware() < dataSource.getNumberOfInvocationsToHardware()) {
-			int nextPosition = (int) (dataSource.getPosition() + dataSource.getStepInHardware());
-			LOGGER.fine("Number of pos received (" + dataSource.getNumberOfPosReceivedFromHardware()
-					+ ") < Number of invocations (" + dataSource.getNumberOfInvocationsToHardware()
-					+ "). Preparing new configure command. Last position = " + dataSource.getPosition() + ", Step = "
-					+ dataSource.getStepInHardware() + ", Next position = " + nextPosition);
-			prepareCommandForNextStatement(nextPosition);
-			writeMessage(stampConfigCommand.getCommand());
-			// fireIDriverStateListenerDriverStarting();
-			return;
-		}
-
 		if (waitingStart) {
 			LOGGER.fine("Waiting start");
 			waitingStart = false;
