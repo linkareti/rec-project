@@ -83,6 +83,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 
 	private int position;
 
+	private boolean ignore = true;
+
 	private static final Logger LOGGER = Logger.getLogger(StatSoundStampDriver.class.getName());
 
 	/** Creates a new instance of RadioactividadeStampDataSource */
@@ -99,6 +101,12 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 		if (cmd.getCommandIdentifier().equals(StampStatSoundProcessor.COMMAND_IDENTIFIER)) {
 			if (numberOfPosReceivedFromHardware >= numberOfInvocationsToHardware) {
 				LOGGER.log(Level.FINEST, "Hardware is too friendly... sending me more data than I asked!!! Bye bye!");
+				return;
+			}
+
+			ignore = !ignore;
+			if (ignore) {
+				LOGGER.fine("Ignoring the 2nd buggy result from hardware");
 				return;
 			}
 
