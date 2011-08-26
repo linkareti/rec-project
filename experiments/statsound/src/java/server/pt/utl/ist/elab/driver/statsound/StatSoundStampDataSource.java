@@ -212,24 +212,23 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 	}
 
 	private void waitBeforeCapture() {
-		return;
 
 		// FIXME - We should calculate how much time for the sound player buffer
 		// to get empty...
 		// this should be calculated in terms of SOUND_GENERATION_BUFFER_SIZE /
 		// SOUND_GENERATION_FREQUENCY
-		// try {
-		// // Wait for buffer to empty and generate a new with the correct
-		// // frequency
-		// Thread.sleep(250);
-		// // Wait for wave to play for at least a while so that we don't catch
-		// // the train running
-		// Thread.sleep(soundCaptureDevice.getDeltaTime());
-		// } catch (InterruptedException e) {
-		// // FIXME - Handle this correctly
-		// LOGGER.warning("Unable to wait for sound stability...");
-		// this.stopNow();
-		// }
+		try {
+			// Wait for buffer to empty and generate a new with the correct
+			// frequency
+			Thread.sleep(250);
+			// Wait for wave to play for at least a while so that we don't catch
+			// the train running
+			//Thread.sleep(soundCaptureDevice.getDeltaTime());
+		} catch (InterruptedException e) {
+			// FIXME - Handle this correctly
+			LOGGER.warning("Unable to wait for sound stability...");
+			this.stopNow();
+		}
 	}
 
 	private PhysicsValue[] fillInValues(final int position, final Double channelVRMS1, final Double channelVRMS2,
