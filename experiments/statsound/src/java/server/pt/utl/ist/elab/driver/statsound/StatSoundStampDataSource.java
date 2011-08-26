@@ -115,7 +115,6 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 			final String experimentTypeParameter = config.getSelectedHardwareParameterValue(EXPERIMENT_TYPE_PARAMETER);
 			final TypeOfExperiment typeOfExperiment = TypeOfExperiment.from(experimentTypeParameter);
 			int position = (Integer) cmd.getCommandData(StampStatSoundProcessor.COMMAND_IDENTIFIER);
-			int nextPosition = getNextPosition();
 			numberOfPosReceivedFromHardware++;
 			final double frequencyInHz = getDesiredFrequencyFromConfig();
 			switch (typeOfExperiment) {
