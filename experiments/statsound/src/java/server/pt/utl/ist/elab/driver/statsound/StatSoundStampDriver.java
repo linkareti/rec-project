@@ -335,6 +335,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		super.init(info);
 
 		ReCJMFUtils.initReCJMFPackages();
+		ReCJMFUtils.autoDetectJavaSoundDevices();
 		final String deviceLocation = ReCJMFUtils.locateCaptureDeviceForParameters(SAMPLE_RATE, bitsPerChannel,
 				numChannels, endian, signed);
 
@@ -343,7 +344,6 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 	}
 
 	private void initCaptureDevice(final String deviceLocation) {
-		ReCJMFUtils.autoDetectJavaSoundDevices();
 		try {
 			DataSource dataSource = ReCJMFUtils.locateDataSource(deviceLocation, 16L);
 			soundCaptureDevice = ReCJMFUtils.createCaptureDeviceFor(dataSource, SAMPLE_RATE, bitsPerChannel,
