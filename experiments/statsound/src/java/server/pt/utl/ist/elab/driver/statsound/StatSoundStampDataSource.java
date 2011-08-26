@@ -114,20 +114,19 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 
 			final String experimentTypeParameter = config.getSelectedHardwareParameterValue(EXPERIMENT_TYPE_PARAMETER);
 			final TypeOfExperiment typeOfExperiment = TypeOfExperiment.from(experimentTypeParameter);
-			// int position = (Integer)
-			// cmd.getCommandData(StampStatSoundProcessor.COMMAND_IDENTIFIER);
+			int position = (Integer) cmd.getCommandData(StampStatSoundProcessor.COMMAND_IDENTIFIER);
 			int nextPosition = getNextPosition();
 			numberOfPosReceivedFromHardware++;
 			final double frequencyInHz = getDesiredFrequencyFromConfig();
 			switch (typeOfExperiment) {
 			case STATSOUND_VARY_PISTON:
-				handleProtocolVaryPiston(nextPosition, frequencyInHz);
+				handleProtocolVaryPiston(position, frequencyInHz);
 				break;
 			case STATSOUND_VARY_FREQUENCY:
-				handleProtocolVaryFrequency(nextPosition, frequencyInHz);
+				handleProtocolVaryFrequency(position, frequencyInHz);
 				break;
 			case SOUND_VELOCITY:
-				handleProtocolSoundVelocity(nextPosition, frequencyInHz);
+				handleProtocolSoundVelocity(position, frequencyInHz);
 				break;
 			}
 			if (numberOfPosReceivedFromHardware >= numberOfInvocationsToHardware) {
@@ -215,23 +214,23 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 
 	private void waitBeforeCapture() {
 		return;
-		
+
 		// FIXME - We should calculate how much time for the sound player buffer
 		// to get empty...
 		// this should be calculated in terms of SOUND_GENERATION_BUFFER_SIZE /
 		// SOUND_GENERATION_FREQUENCY
-//		try {
-//			// Wait for buffer to empty and generate a new with the correct
-//			// frequency
-//			Thread.sleep(250);
-//			// Wait for wave to play for at least a while so that we don't catch
-//			// the train running
-//			Thread.sleep(soundCaptureDevice.getDeltaTime());
-//		} catch (InterruptedException e) {
-//			// FIXME - Handle this correctly
-//			LOGGER.warning("Unable to wait for sound stability...");
-//			this.stopNow();
-//		}
+		// try {
+		// // Wait for buffer to empty and generate a new with the correct
+		// // frequency
+		// Thread.sleep(250);
+		// // Wait for wave to play for at least a while so that we don't catch
+		// // the train running
+		// Thread.sleep(soundCaptureDevice.getDeltaTime());
+		// } catch (InterruptedException e) {
+		// // FIXME - Handle this correctly
+		// LOGGER.warning("Unable to wait for sound stability...");
+		// this.stopNow();
+		// }
 	}
 
 	private PhysicsValue[] fillInValues(final int position, final Double channelVRMS1, final Double channelVRMS2,
