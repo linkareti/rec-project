@@ -12,7 +12,7 @@ public class PulseFunctorControl implements FunctorControl {
 
 	@Override
 	public Component getControlComponent() {
-		return null;
+		return new PulseFunctorControlComponent(this);
 	}
 
 	/**
@@ -21,6 +21,14 @@ public class PulseFunctorControl implements FunctorControl {
 	@Override
 	public void setFrequency(double frequency) {
 		this.functor.setFrequency(frequency);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public double getFrequency() {
+		return this.functor.getFrequency();
 	}
 
 }

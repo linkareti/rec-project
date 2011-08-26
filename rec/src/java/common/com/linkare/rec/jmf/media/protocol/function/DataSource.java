@@ -1,13 +1,8 @@
 package com.linkare.rec.jmf.media.protocol.function;
 
-import java.beans.BeanInfo;
-import java.beans.IntrospectionException;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.Map;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.StringTokenizer;
 
 import javax.media.Buffer;
@@ -24,8 +19,6 @@ import javax.media.protocol.PushBufferStream;
 import javax.media.protocol.SourceStream;
 
 public class DataSource extends PushBufferDataSource {
-
-	private static final int BYTE_11111111 = 255;
 
 	private static final int BITS_PER_BYTE = 8;
 
@@ -46,6 +39,8 @@ public class DataSource extends PushBufferDataSource {
 	private PushBufferStream[] pushSourceStreams = new PushBufferStream[] { pushSourceStream };
 
 	public Object[] controls = new Object[0];
+
+	private FunctorDataControl functorDataControl = new FunctorDataControl();
 
 	public DataSource() {
 	}
@@ -111,7 +106,7 @@ public class DataSource extends PushBufferDataSource {
 
 		FunctorTypeControl functorControl = new FunctorTypeControl(this);
 
-		controls = new Object[] { formatControl, functorControl };
+		controls = new Object[] { formatControl, functorControl, functorDataControl };
 
 	}
 
@@ -167,7 +162,9 @@ public class DataSource extends PushBufferDataSource {
 
 		private Thread innerGenerationThread = null;
 
-		private byte[] generatingBuffer = null;
+		private ByteBuffer generatingBuffer = null;
+
+		// private byte[] generatingBuffer = null;
 
 		private volatile boolean stop = false;
 
@@ -238,52 +235,78 @@ public class DataSource extends PushBufferDataSource {
 			return controls;
 		}
 
+		/**
+		 * @param generatingBuffer
+		 * @param sampleSizeInBytes
+		 * @param value
+		 */
+		private void putOnBuffer(long value) {
+			for (int i = 0; i < numChannels; i++) {
+				switch (sampleSizeInBytes) {
+				case 1:// byte
+					generatingBuffer.put((byte) value);
+					break;
+				case 2:// short
+					generatingBuffer.putShort((short) value);
+					break;
+				case 4:// int
+					generatingBuffer.putInt((int) value);
+					break;
+				case 8:// long
+					generatingBuffer.putLong(value);
+					break;
+				}
+			}
+		}
+
 		@Override
 		public void run() {
+
+			int sampleSizeInBits = DataSource.this.audioFormat.getSampleSizeInBits();
+			sizeOfGeneratingArray = (int) (DataSource.this.sampleSizeInBytes * DataSource.this.numChannels * (int) (DataSource.this.sampleRate / 4));
+			generatingBuffer = ByteBuffer.allocate(sizeOfGeneratingArray);
+			// The functors generate a value between -1 and 1, and this
+			// value should be multiplied by the
+			// maximum generation value for the wave quantization in
+			// place... as the wave is signed, there are
+			// the scale is divided by 2 (positives and negatives - hence
+			// the sampleSizeInBits-1 in exponent)
+			// but the positive values include the 0, hence the -1
+			// subtracted from the power
+			double multiplyFactor = Math.pow(2, sampleSizeInBits - 1) - 1;
+			// but now, we don't want to overflow, so let's decrease this
+			// multiplyFactor by 10% (only using 90% of the available
+			// scale), which should make us generate
+			// sound in between a nice scaled value
+			multiplyFactor *= 0.9;
+
+			boolean bigEndian = DataSource.this.audioFormat.getEndian() == AudioFormat.BIG_ENDIAN;
+			// boolean signed = DataSource.this.audioFormat.getSigned() ==
+			// AudioFormat.SIGNED;
+			int incrementOnArray = DataSource.this.sampleSizeInBytes * DataSource.this.numChannels;
+
+			generatingBuffer.order(bigEndian ? ByteOrder.BIG_ENDIAN : ByteOrder.LITTLE_ENDIAN);
+
 			while (!stop) {
 
 				final Functor functor;
+				final FunctorType functorTypeLocal;
 				synchronized (functorType) {
-					functor = DataSource.this.functorType.getFunctor();
+					functorTypeLocal = DataSource.this.functorType;
 				}
-				int sampleSizeInBits = DataSource.this.audioFormat.getSampleSizeInBits();
-				sizeOfGeneratingArray = (int) (DataSource.this.sampleSizeInBytes * DataSource.this.numChannels * (int) (DataSource.this.sampleRate / 10));
-				generatingBuffer = new byte[sizeOfGeneratingArray];
-				// The functors generate a value between -1 and 1, and this
-				// value should be multiplied by the
-				// maximum generation value for the wave quantization in
-				// place... as the wave is signed, there are
-				// the scale is divided by 2 (positives and negatives - hence
-				// the sampleSizeInBits-1 in exponent)
-				// but the positive values include the 0, hence the -1
-				// subtracted from the power
-				double multiplyFactor = Math.pow(2, sampleSizeInBits - 1) - 1;
-				// but now, we don't want to overflow, so let's decrease this
-				// multiplyFactor by 10% (only using 90% of the available
-				// scale), which should make us generate
-				// sound in between a nice scaled value
-				multiplyFactor *= 0.9;
-				boolean bigEndian = DataSource.this.audioFormat.getEndian() == AudioFormat.BIG_ENDIAN;
-				boolean signed = DataSource.this.audioFormat.getSigned() == AudioFormat.SIGNED;
-				int incrementOnArray = DataSource.this.sampleSizeInBytes * DataSource.this.numChannels;
+				functor = functorTypeLocal.getFunctor();
 
-				for (int i = 0; i < generatingBuffer.length && !stop; i += incrementOnArray) {
+				generatingBuffer.rewind();
+
+				for (int i = 0; i < generatingBuffer.limit() && !stop; i += incrementOnArray) {
 					long value = (long) Math.floor(functor.getNextValue() * multiplyFactor);
-					// now convert the value according to big ending/little
-					// endian
-					byte[] byteArrayValue = bigEndian ? toBigEndian(value, DataSource.this.sampleSizeInBytes, signed)
-							: toLittleEndian(value, DataSource.this.sampleSizeInBytes, signed);
-					// Do not use BigInteger class because toByteArray() method
-					// returns the two's complement
+					putOnBuffer(value);
+					DataSource.this.functorDataControl.notifyNewValues(value);
 
-					// Iterate on channels - keeping same value for right or
-					// left
-					for (int c = 0; c < DataSource.this.numChannels; c++) {
-						int destPos = i + c * DataSource.this.sampleSizeInBytes;
+				}
 
-						System.arraycopy(byteArrayValue, 0, generatingBuffer, destPos,
-								DataSource.this.sampleSizeInBytes);
-					}
+				synchronized (functorTypeLocal) {
+					functorTypeLocal.notifyAll();
 				}
 
 				if (!stop) {
@@ -302,8 +325,8 @@ public class DataSource extends PushBufferDataSource {
 		@Override
 		public void read(Buffer buffer) throws IOException {
 			buffer.setFormat(audioFormat);
-			buffer.setData(generatingBuffer);
-			buffer.setLength(generatingBuffer.length);
+			buffer.setData(generatingBuffer.array());
+			buffer.setLength(generatingBuffer.capacity());
 			buffer.setDiscard(false);
 			buffer.setOffset(0);
 			buffer.setSequenceNumber(bufferSequenceNr++);
@@ -316,40 +339,6 @@ public class DataSource extends PushBufferDataSource {
 
 	}
 
-	private static byte[] toLittleEndian(long val, int numBytes, boolean signed) {
-		byte[] data = new byte[numBytes];
-		// if the byte[] data is to be signed, displace it to the lower bound
-		// value for a byte...
-		long signingDisplacement = signed ? Byte.MIN_VALUE : 0;
-		for (int i = 0; i < numBytes; i++) {
-			// on little endian encoding,
-			int positionalByteShift = i * BITS_PER_BYTE;
-			// keep only the latest 8 bits from each block of 8 bits (byte)
-			long currentByte = (val >> positionalByteShift) & BYTE_11111111;
-			// sign as required
-			currentByte = currentByte - signingDisplacement;
-			// cast it to byte
-			data[i] = (byte) currentByte;
-		}
-
-		return data;
-	}
-
-	private static byte[] toBigEndian(long val, int numBytes, boolean signed) {
-		byte[] data = toLittleEndian(val, numBytes, signed);
-		byte temp;
-		int lenOfTheArray = data.length;
-		int uboundOfTheArray = lenOfTheArray - 1;
-		// just have to reverse the bytes up to the middle of the array... easy
-		// and quick
-		for (int positionFromStart = 0, positionFromEnd = uboundOfTheArray; positionFromStart < lenOfTheArray / 2; positionFromStart++, positionFromEnd--) {
-			temp = data[positionFromStart];
-			data[positionFromStart] = data[positionFromEnd];
-			data[positionFromEnd] = temp;
-		}
-		return data;
-	}
-
 	public Format getAudioFormat() {
 		return audioFormat;
 	}
@@ -360,43 +349,53 @@ public class DataSource extends PushBufferDataSource {
 
 	public void setFunctorType(FunctorType functorType) {
 		synchronized (this.functorType) {
-			Functor oldFunctor = this.functorType.getFunctor();
+			FunctorType oldFunctor = this.functorType;
 			this.functorType = functorType;
-
-			Functor newFunctor = this.getFunctorType().getFunctor();
-
+			this.functorType.getFunctor().setTimeDelta(1. / sampleRate);
 			try {
-				BeanInfo oldFunctorBeanInfo = java.beans.Introspector.getBeanInfo(oldFunctor.getClass());
-				BeanInfo newFunctorBeanInfo = Introspector.getBeanInfo(newFunctor.getClass());
-				Map<String, PropertyDescriptor> newFunctorProperties = new HashMap<String, PropertyDescriptor>(
-						newFunctorBeanInfo.getPropertyDescriptors().length);
-				for (PropertyDescriptor newPropertyDesc : newFunctorBeanInfo.getPropertyDescriptors()) {
-					newFunctorProperties.put(newPropertyDesc.getName(), newPropertyDesc);
-				}
-
-				for (PropertyDescriptor propertyDesc : oldFunctorBeanInfo.getPropertyDescriptors()) {
-					if (propertyDesc.getReadMethod() != null
-							&& newFunctorProperties.containsKey(propertyDesc.getName())) {
-						PropertyDescriptor newPropertyDesc = newFunctorProperties.get(propertyDesc.getName());
-						if (newPropertyDesc.getWriteMethod() != null
-								&& newPropertyDesc.getPropertyType() == propertyDesc.getPropertyType()) {
-							Object oldValue = propertyDesc.getReadMethod().invoke(oldFunctor);
-							newPropertyDesc.getWriteMethod().invoke(newFunctor, oldValue);
-						}
-					}
-				}
-
-			} catch (IntrospectionException e) {
-				e.printStackTrace();
-			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
+				oldFunctor.wait(1000);
+			} catch (InterruptedException e) {
 			}
 
-			this.functorType.getFunctor().setTimeDelta(1. / sampleRate);
+			// try {
+			// BeanInfo oldFunctorBeanInfo =
+			// java.beans.Introspector.getBeanInfo(oldFunctor.getClass());
+			// BeanInfo newFunctorBeanInfo =
+			// Introspector.getBeanInfo(newFunctor.getClass());
+			// Map<String, PropertyDescriptor> newFunctorProperties = new
+			// HashMap<String, PropertyDescriptor>(
+			// newFunctorBeanInfo.getPropertyDescriptors().length);
+			// for (PropertyDescriptor newPropertyDesc :
+			// newFunctorBeanInfo.getPropertyDescriptors()) {
+			// newFunctorProperties.put(newPropertyDesc.getName(),
+			// newPropertyDesc);
+			// }
+			//
+			// for (PropertyDescriptor propertyDesc :
+			// oldFunctorBeanInfo.getPropertyDescriptors()) {
+			// if (propertyDesc.getReadMethod() != null
+			// && newFunctorProperties.containsKey(propertyDesc.getName())) {
+			// PropertyDescriptor newPropertyDesc =
+			// newFunctorProperties.get(propertyDesc.getName());
+			// if (newPropertyDesc.getWriteMethod() != null
+			// && newPropertyDesc.getPropertyType() ==
+			// propertyDesc.getPropertyType()) {
+			// Object oldValue =
+			// propertyDesc.getReadMethod().invoke(oldFunctor);
+			// newPropertyDesc.getWriteMethod().invoke(newFunctor, oldValue);
+			// }
+			// }
+			// }
+			//
+			// } catch (IntrospectionException e) {
+			// e.printStackTrace();
+			// } catch (IllegalArgumentException e) {
+			// e.printStackTrace();
+			// } catch (IllegalAccessException e) {
+			// e.printStackTrace();
+			// } catch (InvocationTargetException e) {
+			// e.printStackTrace();
+			// }
 
 		}
 

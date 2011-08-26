@@ -2,8 +2,6 @@ package com.linkare.rec.jmf.media.protocol.function;
 
 import java.awt.Component;
 
-import javax.media.Control;
-
 public class TriangularFunctorControl implements FunctorControl {
 
 	private final TriangularFunctor functor;
@@ -14,7 +12,7 @@ public class TriangularFunctorControl implements FunctorControl {
 
 	@Override
 	public Component getControlComponent() {
-		return null;
+		return new TriangularFunctorControlComponent(this);
 	}
 
 	/**
@@ -23,6 +21,14 @@ public class TriangularFunctorControl implements FunctorControl {
 	@Override
 	public void setFrequency(double frequency) {
 		this.functor.setFrequency(frequency);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public double getFrequency() {
+		return this.functor.getFrequency();
 	}
 
 }

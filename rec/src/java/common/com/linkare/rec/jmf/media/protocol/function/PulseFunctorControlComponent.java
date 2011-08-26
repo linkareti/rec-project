@@ -7,20 +7,20 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class SineFunctorControlComponent extends JPanel {
+public class PulseFunctorControlComponent extends JPanel {
 
 	/**
      * 
      */
 	private static final long serialVersionUID = 9020402813301420731L;
 
-	private SineFunctorControl sineFunctorControl;
+	private PulseFunctorControl pulseFunctorControl;
 
-	public SineFunctorControlComponent(SineFunctorControl sineFunctorControl) {
-		this.sineFunctorControl = sineFunctorControl;
+	public PulseFunctorControlComponent(PulseFunctorControl pulseFunctorControl) {
+		this.pulseFunctorControl = pulseFunctorControl;
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-		this.add(new JLabel("Frequency Sin"));
+		this.add(new JLabel("Frequency Pulse"));
 		final JSlider frequencyRangeSlider = new JSlider(20, 20000, 20);
 		this.add(frequencyRangeSlider);
 
@@ -29,7 +29,7 @@ public class SineFunctorControlComponent extends JPanel {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				int frequency = frequencyRangeSlider.getValue();
-				SineFunctorControlComponent.this.sineFunctorControl.setFrequency(frequency);
+				PulseFunctorControlComponent.this.pulseFunctorControl.setFrequency(frequency);
 			}
 		});
 

@@ -14,13 +14,13 @@ public class PulseFunctor implements Functor {
 
 	private double period = pulseLength / pulseLengthPercent;
 
-	public void setPulseLengthPercent(double percent) {
+	public synchronized void setPulseLengthPercent(double percent) {
 		this.pulseLengthPercent = percent;
 		this.pulseLength = 1. / frequency;
 		this.period = pulseLength / pulseLengthPercent;
 	}
 
-	public void setFrequency(double frequency) {
+	public synchronized void setFrequency(double frequency) {
 		this.frequency = frequency;
 		this.pulseLength = 1. / frequency;
 		this.period = pulseLength / pulseLengthPercent;
@@ -32,7 +32,7 @@ public class PulseFunctor implements Functor {
 	}
 
 	@Override
-	public double getNextValue() {
+	public synchronized double getNextValue() {
 		currentTime += this.timeDelta;
 		if (currentTime > period) {
 			currentTime -= period;

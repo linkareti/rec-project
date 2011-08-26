@@ -10,20 +10,30 @@ import java.awt.Component;
 
 /**
  * 
- * @author Paulo Zenida - Linkare TI
+ * @author José Pedro Pereira - Linkare TI
  */
 public interface FunctorControl extends javax.media.Control {
 
 	FunctorControl NULLOP_CONTROL = new FunctorControl() {
+		private double frequency = Double.MAX_VALUE;
+
 		@Override
 		public void setFrequency(double frequency) {
+			this.frequency = frequency;
 		}
 
 		@Override
 		public Component getControlComponent() {
 			return null;
-		};
+		}
+
+		@Override
+		public double getFrequency() {
+			return frequency;
+		}
 	};
 
 	public void setFrequency(double frequency);
+
+	public double getFrequency();
 }

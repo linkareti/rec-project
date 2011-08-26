@@ -8,25 +8,21 @@ package com.linkare.rec.jmf.media.protocol.function;
 
 /**
  * 
- * @author Paulo Zenida - Linkare TI
+ * @author José Pedro Pereira - Linkare TI
  */
-public class MarkerFunctor implements Functor {
+public class MarkerFunctor extends WhiteNoiseFunctor {
 
-	private double timeDelta;
+	private double currentTime = 0;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public void setTimeDelta(double seconds) {
-		this.timeDelta = seconds;
+	public synchronized double getNextValue() {
+		currentTime += getTimeDelta();
+		if (currentTime > 10) {
+			currentTime -= 10;
+		}
+		return currentTime < 0.2 ? super.getNextValue() : 0.;
 	}
-
-	@Override
-	public double getNextValue() {
-		return 1.;
-	}
-
-	@Override
-	public double getTimeDelta() {
-		return timeDelta;
-	}
-
 }

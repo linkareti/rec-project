@@ -2,8 +2,6 @@ package com.linkare.rec.jmf.media.protocol.function;
 
 import java.util.StringTokenizer;
 
-import javax.media.Control;
-
 public enum FunctorType {
 	SILENCE(new SilenceFunctor(), "silence") {
 		@Override
@@ -23,14 +21,12 @@ public enum FunctorType {
 		@Override
 		public void parseOptions(String optionsStr) {
 			StringTokenizer tokens = new StringTokenizer(optionsStr, "/", false);
-			if (tokens.countTokens() != 2)
-				throw new RuntimeException(this.getFunctionName() + " only supports options /<frequency>/<phase> ("
+			if (tokens.countTokens() != 1)
+				throw new RuntimeException(this.getFunctionName() + " only supports options /<frequency> ("
 						+ optionsStr + ")");
 			String frequencyStr = tokens.nextToken();
-			String phaseStr = tokens.nextToken();
 
 			double frequency = 0;
-			double phase = 0;
 
 			try {
 				frequency = Double.parseDouble(frequencyStr);
@@ -38,16 +34,9 @@ public enum FunctorType {
 				throw new RuntimeException(this.getFunctionName() + " frequency option must be a valid number ("
 						+ frequencyStr + ")");
 			}
-			try {
-				phase = Double.parseDouble(phaseStr);
-			} catch (NumberFormatException e) {
-				throw new RuntimeException(this.getFunctionName() + " phase option must be a valid number (" + phaseStr
-						+ ")");
-			}
 			SineFunctor sineFunctor = (SineFunctor) this.getFunctor();
 			sineFunctor.setFrequency(frequency);
 			System.out.println("Frequency is " + frequency);
-			sineFunctor.setPhase(phase);
 		}
 
 		@Override
