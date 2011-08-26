@@ -199,7 +199,6 @@ public class ReCJMFUtils {
 
 				boolean currentTransitionOK = false;
 
-				System.out.println("Controller event: " + evt.toString());
 				LOGGER.fine("Controller event: " + evt.toString());
 
 				if (evt instanceof ConfigureCompleteEvent || evt instanceof RealizeCompleteEvent
@@ -222,7 +221,7 @@ public class ReCJMFUtils {
 				synchronized (waitSync) {
 					try {
 						while (player.getState() < state && stateTransitionOK) {
-							System.out.println("Waiting for state " + state + " and player state is now "
+							LOGGER.fine("Waiting for state " + state + " and player state is now "
 									+ player.getState());
 							waitSync.wait();
 						}

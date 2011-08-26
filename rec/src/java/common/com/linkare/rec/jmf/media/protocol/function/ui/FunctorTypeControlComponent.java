@@ -76,7 +76,6 @@ public class FunctorTypeControlComponent extends JPanel {
 		}
 		if (this.functorTypeControl != null && this.functorTypeControl.getFunctorControl() != null
 				&& this.functorTypeControl.getFunctorControl().getControlComponent() != null) {
-			System.out.println("adding component " + this.functorTypeControl.getFunctorControl().getControlComponent());
 			this.add(this.functorTypeControl.getFunctorControl().getControlComponent(), BorderLayout.CENTER);
 		}
 		Container parent = this.getParent();

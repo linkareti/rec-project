@@ -19,6 +19,8 @@ import javax.media.protocol.DataSource;
 import javax.media.protocol.PushBufferDataSource;
 import javax.media.protocol.PushBufferStream;
 
+import com.linkare.rec.jmf.ReCJMFUtils;
+
 /**
  * @author José Pedro Pereira - Linkare TI
  * 
@@ -48,7 +50,7 @@ public class Handler implements DataSink, BufferTransferHandler {
 	 */
 	@Override
 	public void setSource(DataSource source) throws IOException, IncompatibleSourceException {
-		System.out.println("++++++++ SET SOURCE");
+		ReCJMFUtils.LOGGER.fine("++++++++ SET SOURCE");
 		this.dataSource = source;
 
 		if (this.dataSource != null && ContentDescriptor.RAW.equals(this.dataSource.getContentType())
@@ -92,7 +94,7 @@ public class Handler implements DataSink, BufferTransferHandler {
 			double timeSinceLastBuffer = System.currentTimeMillis() - currentTime;
 
 			if (timeSinceLastBuffer > 2 * bufferLengthInTime) {
-				System.out.println("Time since last acquisition was " + timeSinceLastBuffer
+				ReCJMFUtils.LOGGER.fine("Time since last acquisition was " + timeSinceLastBuffer
 						+ "ms but the buffer transferred only represents " + bufferLengthInTime + "ms");
 
 				restartDataSource();
@@ -139,7 +141,7 @@ public class Handler implements DataSink, BufferTransferHandler {
 
 	@Override
 	public void setOutputLocator(MediaLocator output) {
-		System.out.println("++++++++ SET OUTPUT LOCATOR");
+		ReCJMFUtils.LOGGER.fine("++++++++ SET OUTPUT LOCATOR");
 		this.outputLocator = output;
 
 	}
@@ -167,18 +169,18 @@ public class Handler implements DataSink, BufferTransferHandler {
 
 	@Override
 	public void open() throws IOException, SecurityException {
-		System.out.println("++++++++ OPENING");
+		ReCJMFUtils.LOGGER.fine("++++++++ OPENING");
 
 	}
 
 	@Override
 	public void close() {
-		System.out.println("++++++++ CLOSING");
+		ReCJMFUtils.LOGGER.fine("++++++++ CLOSING");
 	}
 
 	@Override
 	public String getContentType() {
-		System.out.println("++++++++ GET CONTENT TYPE");
+		ReCJMFUtils.LOGGER.fine("++++++++ GET CONTENT TYPE");
 		return ContentDescriptor.RAW;
 	}
 

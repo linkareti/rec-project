@@ -2,11 +2,12 @@ package com.linkare.rec.jmf.media.protocol.function;
 
 import java.util.StringTokenizer;
 
+import com.linkare.rec.jmf.ReCJMFUtils;
+
 public enum FunctorType {
 	SILENCE(new SilenceFunctor(), "silence") {
 		@Override
 		public void parseOptions(String optionsStr) {
-			System.out.println(optionsStr);
 			if (optionsStr != null && optionsStr.trim().length() > 0)
 				throw new RuntimeException(this.getFunctionName() + " does not support any options (" + optionsStr
 						+ ")");
@@ -36,7 +37,7 @@ public enum FunctorType {
 			}
 			SineFunctor sineFunctor = (SineFunctor) this.getFunctor();
 			sineFunctor.setFrequency(frequency);
-			System.out.println("Frequency is " + frequency);
+			ReCJMFUtils.LOGGER.fine("Frequency is " + frequency);
 		}
 
 		@Override

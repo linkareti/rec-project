@@ -6,6 +6,8 @@ import java.nio.ByteOrder;
 import javax.media.Buffer;
 import javax.media.format.AudioFormat;
 
+import com.linkare.rec.jmf.ReCJMFUtils;
+
 public class ChannelData {
 
 	private static final int BITS_PER_BYTE = 8;
@@ -152,7 +154,7 @@ public class ChannelData {
 			capturing = false;
 			long timeEnd = System.currentTimeMillis();
 			if ((timeEnd - startTime) > 1.1 * ((double) numSamples) * 1000. / acquisitionFrequency) {
-				System.out.println("Done Capturing - oops - took to long: " + (timeEnd - startTime));
+				ReCJMFUtils.LOGGER.fine("Done Capturing - oops - took to long: " + (timeEnd - startTime));
 			}
 
 			startTime = System.currentTimeMillis();
