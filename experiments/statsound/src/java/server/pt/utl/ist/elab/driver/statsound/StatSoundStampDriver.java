@@ -66,17 +66,17 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 	public static final String CALIBRATION_COMMAND_PART = CALIBRATION_PARAMETER;
 
 	// other stuff
-	private boolean initing = true;
+	private volatile boolean initing = true;
 
-	private boolean waitingStart = false;
+	private volatile boolean waitingStart = false;
 
-	private boolean wroteStart = false;
+	private volatile boolean wroteStart = false;
 
-	private boolean started = false;
+	private volatile boolean started = false;
 
-	private boolean stoping = false;
+	private volatile boolean stoping = false;
 
-	private boolean reseting = true;
+	private volatile boolean reseting = true;
 
 	private static final String HARDWARE_INFO_XML = "/HardwareInfo.xml";
 
@@ -397,11 +397,13 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 					try {
 						translateCommandFromParameters();
 					} catch (WrongConfigurationException e) {
-						// TODO: pzenida - Ask JP if we should do something
-						// about the states of the driver and the datasource
-						// here...
 						LOGGER.log(Level.SEVERE,
 								"Oops! Something wrong when sending the sequence commands to hardware", e);
+						dataSource.stopNow();
+						stopDataSource();
+						fireIDriverStateListenerDriverReseting();
+						fireIDriverStateListenerDriverReseted();
+						return;
 					}
 					writeMessage(stampConfigCommand.getCommand());
 				}

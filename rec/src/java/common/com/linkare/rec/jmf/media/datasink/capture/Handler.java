@@ -25,6 +25,8 @@ import javax.media.protocol.PushBufferStream;
  */
 public class Handler implements DataSink, BufferTransferHandler {
 
+	private static final double NANOS_TO_MILLIS = 1000 * 1000;
+
 	private ChannelData channelData = new ChannelData();
 
 	private DataSource dataSource;
@@ -52,7 +54,7 @@ public class Handler implements DataSink, BufferTransferHandler {
 		if (this.dataSource != null && ContentDescriptor.RAW.equals(this.dataSource.getContentType())
 				&& dataSource instanceof PushBufferDataSource) {
 
-			currentTime=System.currentTimeMillis();
+			currentTime = System.currentTimeMillis();
 			((PushBufferDataSource) dataSource).getStreams()[0].setTransferHandler(this);
 
 			Object[] controls = dataSource.getControls();
@@ -85,14 +87,14 @@ public class Handler implements DataSink, BufferTransferHandler {
 
 			AudioFormat currentFormat = (AudioFormat) buffer.getFormat();
 
-			double bufferLengthInTime = currentFormat.computeDuration(buffer.getLength()) / 1000000.;
+			double bufferLengthInTime = currentFormat.computeDuration(buffer.getLength()) / NANOS_TO_MILLIS;
 
 			double timeSinceLastBuffer = System.currentTimeMillis() - currentTime;
-			
-			if (timeSinceLastBuffer > 2 * bufferLengthInTime ) {
+
+			if (timeSinceLastBuffer > 2 * bufferLengthInTime) {
 				System.out.println("Time since last acquisition was " + timeSinceLastBuffer
 						+ "ms but the buffer transferred only represents " + bufferLengthInTime + "ms");
-				
+
 				restartDataSource();
 			}
 
@@ -210,10 +212,6 @@ public class Handler implements DataSink, BufferTransferHandler {
 		return this.deltaTime;
 	}
 
-	/**
-	 * 
-	 * @author José Pedro Pereira - Linkare TI
-	 */
 	public class NotificationThread extends Thread {
 		private volatile boolean stop = false;
 		private final DataSinkEvent event = new DataSinkEvent(Handler.this, "new.frame.available");
