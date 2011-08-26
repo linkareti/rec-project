@@ -18,6 +18,8 @@ import javax.media.protocol.PushBufferDataSource;
 import javax.media.protocol.PushBufferStream;
 import javax.media.protocol.SourceStream;
 
+import com.linkare.rec.jmf.ReCJMFUtils;
+
 public class DataSource extends PushBufferDataSource {
 
 	private static final int BITS_PER_BYTE = 8;
@@ -164,7 +166,7 @@ public class DataSource extends PushBufferDataSource {
 
 		private ByteBuffer generatingBuffer = null;
 
-		// private byte[] generatingBuffer = null;
+		private byte[] lastTransferData = new byte[0];
 
 		private volatile boolean stop = false;
 
@@ -194,6 +196,7 @@ public class DataSource extends PushBufferDataSource {
 				stop = false;
 				innerGenerationThread = new Thread(this);
 				innerGenerationThread.start();
+				notificationThread.start();
 			}
 		}
 
@@ -203,6 +206,8 @@ public class DataSource extends PushBufferDataSource {
 				try {
 					if (Thread.currentThread() != innerGenerationThread && innerGenerationThread.isAlive()) {
 						innerGenerationThread.join(1000);
+						notificationThread.stopNow();
+						notificationThread = new NotificationThread();
 					}
 					innerGenerationThread = null;
 				} catch (InterruptedException e) {
@@ -263,8 +268,10 @@ public class DataSource extends PushBufferDataSource {
 		public void run() {
 
 			int sampleSizeInBits = DataSource.this.audioFormat.getSampleSizeInBits();
-			sizeOfGeneratingArray = (int) (DataSource.this.sampleSizeInBytes * DataSource.this.numChannels * (int) (DataSource.this.sampleRate / 4));
+			sizeOfGeneratingArray = (int) (DataSource.this.sampleSizeInBytes * DataSource.this.numChannels * (int) (DataSource.this.sampleRate));
 			generatingBuffer = ByteBuffer.allocate(sizeOfGeneratingArray);
+			lastTransferData = new byte[sizeOfGeneratingArray];
+			long generationTime = DataSource.this.audioFormat.computeDuration(sizeOfGeneratingArray) / 1000000;
 			// The functors generate a value between -1 and 1, and this
 			// value should be multiplied by the
 			// maximum generation value for the wave quantization in
@@ -287,8 +294,12 @@ public class DataSource extends PushBufferDataSource {
 
 			generatingBuffer.order(bigEndian ? ByteOrder.BIG_ENDIAN : ByteOrder.LITTLE_ENDIAN);
 
+			int countOutput = 0;
+
+			long startTime = System.currentTimeMillis();
 			while (!stop) {
 
+				startTime = System.currentTimeMillis();
 				final Functor functor;
 				final FunctorType functorTypeLocal;
 				synchronized (functorType) {
@@ -302,19 +313,63 @@ public class DataSource extends PushBufferDataSource {
 					long value = (long) Math.floor(functor.getNextValue() * multiplyFactor);
 					putOnBuffer(value);
 					DataSource.this.functorDataControl.notifyNewValues(value);
-
 				}
+
+				countOutput++;
 
 				synchronized (functorTypeLocal) {
 					functorTypeLocal.notifyAll();
 				}
 
 				if (!stop) {
-					bufferTransferHandler.transferData(this);
-				}
+					synchronized (lastTransferData) {
+						generatingBuffer.rewind();
+						generatingBuffer.get(lastTransferData);
+					}
 
+					synchronized (notificationThread) {
+						notificationThread.notifyAll();
+					}
+
+					long deltaTime = System.currentTimeMillis() - startTime;
+					if (deltaTime > generationTime) {
+						ReCJMFUtils.LOGGER.fine("Taking too long to generate a buffer ... Time should be :"
+								+ generationTime + " and we are generating in " + deltaTime + "ms");
+					}
+				}
 			}
 
+		}
+
+		private NotificationThread notificationThread = new NotificationThread();
+
+		public class NotificationThread extends Thread {
+
+			@Override
+			public void run() {
+				while (!stop) {
+					synchronized (this) {
+						try {
+							this.wait();
+						} catch (InterruptedException e) {
+							stop = true;
+						}
+					}
+					if (!stop) {
+						bufferTransferHandler.transferData(FunctionWavePushBufferStream.this);
+					}
+				}
+			}
+
+			/**
+			 * 
+			 */
+			public void stopNow() {
+				stop = true;
+				synchronized (this) {
+					this.notifyAll();
+				}
+			}
 		}
 
 		@Override
@@ -324,12 +379,14 @@ public class DataSource extends PushBufferDataSource {
 
 		@Override
 		public void read(Buffer buffer) throws IOException {
-			buffer.setFormat(audioFormat);
-			buffer.setData(generatingBuffer.array());
-			buffer.setLength(generatingBuffer.capacity());
-			buffer.setDiscard(false);
-			buffer.setOffset(0);
-			buffer.setSequenceNumber(bufferSequenceNr++);
+			synchronized (lastTransferData) {
+				buffer.setFormat(audioFormat);
+				buffer.setData(lastTransferData);
+				buffer.setLength(lastTransferData.length);
+				buffer.setDiscard(false);
+				buffer.setOffset(0);
+				buffer.setSequenceNumber(bufferSequenceNr++);
+			}
 		}
 
 		@Override

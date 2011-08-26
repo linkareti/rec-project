@@ -27,7 +27,7 @@ import com.linkare.rec.jmf.media.protocol.function.FunctorDataControl.FunctorDat
 public class FunctorDataProxyDataSet implements FunctorDataControlListener, XYDataset {
 
 	private XYPlot xyPlot;
-	private long[] yValues = new long[1024];
+	private long[] yValues = new long[5000];
 	private long[] yValuesTemp = new long[yValues.length];
 	private EventListenerList listeners = new EventListenerList();
 	private DatasetGroup datasetGroup;

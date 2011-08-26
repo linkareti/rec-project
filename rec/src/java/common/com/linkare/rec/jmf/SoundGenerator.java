@@ -33,9 +33,9 @@ public class SoundGenerator {
 
 		ReCJMFUtils.initReCJMFPackages();
 
-		//String locatorString = "function://44100/16/sin/440/0";
+		String locatorString = "function://44100/16/sin/441";
 		// String locatorString = "function://44100/16/silence";
-		String locatorString = "function://44100/16/triangle/440";
+		//String locatorString = "function://44100/16/triangle/440";
 		// String locatorString = "function://44100/16/pulse/100/0.10";
 		// String locatorString = "function://44100/16/pinknoise";
 		// String locatorString = "function://44100/16/whitenoise";

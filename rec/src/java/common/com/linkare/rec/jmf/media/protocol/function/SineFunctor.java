@@ -30,6 +30,7 @@ public class SineFunctor implements Functor {
 	public synchronized void setFrequency(double frequency) {
 		this.frequency = frequency;
 		this.period = 1. / frequency;
+		System.out.println("Period = "+period);
 	}
 
 	public double getTimeDelta() {
