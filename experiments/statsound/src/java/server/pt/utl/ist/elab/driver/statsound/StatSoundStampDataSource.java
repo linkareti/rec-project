@@ -11,8 +11,6 @@ import static pt.utl.ist.elab.driver.statsound.StatSoundStampDriver.EXPERIMENT_T
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.media.Control;
-
 import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDataSource;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 import pt.utl.ist.elab.driver.statsound.processors.StampStatSoundProcessor;
@@ -24,7 +22,6 @@ import com.linkare.rec.data.synch.FrequencyDefType;
 import com.linkare.rec.impl.data.PhysicsValueFactory;
 import com.linkare.rec.jmf.media.datasink.capture.ChannelDataFrame;
 import com.linkare.rec.jmf.media.datasink.capture.Handler;
-import com.linkare.rec.jmf.media.protocol.function.FunctorControl;
 import com.linkare.rec.jmf.media.protocol.function.FunctorType;
 import com.linkare.rec.jmf.media.protocol.function.FunctorTypeControl;
 
@@ -54,8 +51,6 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 
 	public static final String SOUND_VELOCITY = "Sound Vel";
 
-	private SoundWaveType waveForm = SoundWaveType.SIN;
-
 	private int freqIni;
 
 	private int nSamples;
@@ -74,8 +69,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 
 	private Handler soundCaptureDevice;
 
-	// new stuff:
-	private Control control;
+	private FunctorTypeControl control;
 
 	private int numberOfInvocationsToHardware;
 
@@ -155,7 +149,6 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 	}
 
 	private void handleProtocolSoundVelocity(final int pos, final double frequencyInHz) {
-		newWaveTypeOnFunctorControl().setFrequency(freqIni);
 		waitBeforeCapture();
 
 		ChannelDataFrame channelDataFrame = soundCaptureDevice.captureFrame(nSamples, frequencyInHz, true);
@@ -169,7 +162,6 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 	}
 
 	private void handleProtocolVaryFrequency(final int pos, final double frequencyInHz) {
-		final FunctorControl functorControl = newWaveTypeOnFunctorControl();
 		double currentValueFreq = freqIni;
 		// This is similar to the simpler iteration from freqInit till the end,
 		// adding the step. However, iterating through the samples using an
@@ -177,7 +169,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 		// type).
 		for (int i = 0; i < nSamples; i++) {
 			currentValueFreq = freqIni + (i * step);
-			functorControl.setFrequency(currentValueFreq);
+			getControl().getFunctorControl().setFrequency(currentValueFreq);
 
 			waitBeforeCapture();
 			ChannelDataFrame channelDataFrame = soundCaptureDevice.captureFrame(VRMS_CAPTURE_SAMPLES, frequencyInHz,
@@ -191,7 +183,6 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 	}
 
 	private void handleProtocolVaryPiston(final int pos, final double frequencyInHz) {
-		newWaveTypeOnFunctorControl().setFrequency(freqIni);
 		waitBeforeCapture();
 		ChannelDataFrame channelDataFrame = soundCaptureDevice.captureFrame(VRMS_CAPTURE_SAMPLES, frequencyInHz, false);
 		double channelVRMS1 = channelDataFrame.getChannelVRMS(0);
@@ -205,11 +196,11 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 	 * has been initiated in the driver with a silence wave type. This means
 	 * that, by simply changing the wave type, the expected sound will come up.
 	 */
-	private FunctorControl newWaveTypeOnFunctorControl() {
-		FunctorTypeControl functorTypeControl = (FunctorTypeControl) control;
-		functorTypeControl.setFunctorType(waveForm.getFunctorType());
-		return functorTypeControl.getFunctorControl();
-	}
+	// private FunctorControl newWaveTypeOnFunctorControl() {
+	// FunctorTypeControl functorTypeControl = (FunctorTypeControl) control;
+	// functorTypeControl.setFunctorType(waveForm.getFunctorType());
+	// return functorTypeControl.getFunctorControl();
+	// }
 
 	private void waitBeforeCapture() {
 
@@ -223,7 +214,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 			Thread.sleep(250);
 			// Wait for wave to play for at least a while so that we don't catch
 			// the train running
-			//Thread.sleep(soundCaptureDevice.getDeltaTime());
+			// Thread.sleep(soundCaptureDevice.getDeltaTime());
 		} catch (InterruptedException e) {
 			// FIXME - Handle this correctly
 			LOGGER.warning("Unable to wait for sound stability...");
@@ -268,11 +259,13 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 	}
 
 	public void setWaveForm(final SoundWaveType waveForm) {
-		this.waveForm = waveForm;
+		getControl().setFunctorType(waveForm.getFunctorType());
+		// this.waveForm = waveForm;
 	}
 
 	public void setFreqIni(final int freqIni) {
 		this.freqIni = freqIni;
+		getControl().getFunctorControl().setFrequency(freqIni);
 	}
 
 	public void setFreqStep(final double step) {
@@ -289,14 +282,14 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 	/**
 	 * @return the control
 	 */
-	public Control getControl() {
+	public FunctorTypeControl getControl() {
 		return control;
 	}
 
 	/**
 	 * @param control the control to set
 	 */
-	public void setControl(Control control) {
+	public void setControl(FunctorTypeControl control) {
 		this.control = control;
 	}
 
@@ -338,10 +331,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 	}
 
 	private void playSilence() {
-		FunctorTypeControl functorTypeControl = (FunctorTypeControl) control;
-		if (control != null) {
-			functorTypeControl.setFunctorType(FunctorType.SILENCE);
-		}
+		getControl().setFunctorType(FunctorType.SILENCE);
 	}
 
 	/**

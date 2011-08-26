@@ -132,6 +132,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 	private Player player;
 
 	private Handler soundCaptureDevice;
+	private FunctorTypeControl playerFunctorTypeControl;
 
 	private static final Logger LOGGER = Logger.getLogger(StatSoundStampDriver.class.getName());
 
@@ -171,6 +172,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 	private void initPlayerWithSilence() {
 		try {
 			this.player = ReCJMFUtils.createAndStartPlayer(SILENCE_FUNCTION);
+			playerFunctorTypeControl = (FunctorTypeControl) player.getControl(FunctorTypeControl.class.getName());
 		} catch (NoPlayerException e) {
 			throw new RuntimeException(e);
 		} catch (IOException e) {
@@ -462,7 +464,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		dataSource.setFreqIni(freqIni);
 		dataSource.setFreqStep(step);
 		dataSource.setPistonStart(pistonStart);
-		dataSource.setControl(player.getControl(FunctorTypeControl.class.getName()));
+		dataSource.setControl(playerFunctorTypeControl);
 		dataSource.setWaveForm(waveForm);
 		dataSource.setNSamples(nSamples);
 		dataSource.setExpEnded(false);

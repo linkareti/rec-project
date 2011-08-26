@@ -35,7 +35,8 @@ public class ServerMain {
 		try {
 			ORBBean.getORBBean();
 
-			final BaseHardware baseHardware = new BaseHardware(new StatSoundStampDriver());
+			// final BaseHardware baseHardware =
+			new BaseHardware(new StatSoundStampDriver());
 
 			try {
 				Thread.currentThread().join();
