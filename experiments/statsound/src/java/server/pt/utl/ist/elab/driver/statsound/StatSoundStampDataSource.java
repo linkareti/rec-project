@@ -87,6 +87,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 
 	private static final Logger LOGGER = Logger.getLogger(StatSoundStampDriver.class.getName());
 
+	private static final int VRMS_CAPTURE_SAMPLES = 1024;
+
 	/** Creates a new instance of RadioactividadeStampDataSource */
 	public StatSoundStampDataSource() {
 	}
@@ -158,7 +160,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 		newWaveTypeOnFunctorControl().setFrequency(freqIni);
 		waitBeforeCapture();
 
-		ChannelDataFrame channelDataFrame = soundCaptureDevice.captureFrame(frequencyInHz, true);
+		ChannelDataFrame channelDataFrame = soundCaptureDevice.captureFrame(nSamples, frequencyInHz, true);
 
 		for (int i = 0; i < nSamples; i++) {
 			double wave1 = channelDataFrame.getChannelData(0)[i];
@@ -180,7 +182,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 			functorControl.setFrequency(currentValueFreq);
 
 			waitBeforeCapture();
-			ChannelDataFrame channelDataFrame = soundCaptureDevice.captureFrame(frequencyInHz, false);
+			ChannelDataFrame channelDataFrame = soundCaptureDevice.captureFrame(VRMS_CAPTURE_SAMPLES, frequencyInHz,
+					false);
 			double channelVRMS1 = channelDataFrame.getChannelVRMS(0);
 			double channelVRMS2 = channelDataFrame.getChannelVRMS(1);
 
@@ -192,7 +195,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 	private void handleProtocolVaryPiston(final int pos, final double frequencyInHz) {
 		newWaveTypeOnFunctorControl().setFrequency(freqIni);
 		waitBeforeCapture();
-		ChannelDataFrame channelDataFrame = soundCaptureDevice.captureFrame(frequencyInHz, false);
+		ChannelDataFrame channelDataFrame = soundCaptureDevice.captureFrame(VRMS_CAPTURE_SAMPLES, frequencyInHz, false);
 		double channelVRMS1 = channelDataFrame.getChannelVRMS(0);
 		double channelVRMS2 = channelDataFrame.getChannelVRMS(1);
 		PhysicsValue[] values = fillInValues(pos, channelVRMS1, channelVRMS2, null, null, freqIni);

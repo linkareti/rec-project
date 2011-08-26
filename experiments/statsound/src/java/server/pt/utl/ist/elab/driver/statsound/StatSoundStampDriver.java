@@ -555,12 +555,12 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 				dataSource = Manager.createDataSource(locator);
 				String destinationLocator = CAPTURE_LOCATOR;
 				DataSink sink = Manager.createDataSink(dataSource, new MediaLocator(destinationLocator));
-				sink.open();
-				dataSource.connect();
+				//sink.open();
+				//dataSource.connect();
 				soundCaptureDevice = (Handler) sink;
 				sink.start();
 				dataSource.start();
-
+				
 				Object[] controls = dataSource.getControls();
 				for (Object control : controls) {
 					LOGGER.info("There is a control object : " + control.getClass().getName());
@@ -601,6 +601,7 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 					"Can not interpret command " + cmd);
 			return;
 		}
+
 		if (cmd.getCommandIdentifier().equals(getDriverUniqueID())) {
 			// the driver is controlling the state machine so, while the
 			// data source is not ended, simply ignore the hardware messages
