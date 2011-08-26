@@ -87,17 +87,19 @@ public class Handler implements DataSink, BufferTransferHandler {
 			buffer.setData(null);
 			stream.read(buffer);
 
-			AudioFormat currentFormat = (AudioFormat) buffer.getFormat();
+			if (!channelData.isCapturing()) {
+				AudioFormat currentFormat = (AudioFormat) buffer.getFormat();
 
-			double bufferLengthInTime = currentFormat.computeDuration(buffer.getLength()) / NANOS_TO_MILLIS;
+				double bufferLengthInTime = currentFormat.computeDuration(buffer.getLength()) / NANOS_TO_MILLIS;
 
-			double timeSinceLastBuffer = System.currentTimeMillis() - currentTime;
+				double timeSinceLastBuffer = System.currentTimeMillis() - currentTime;
 
-			if (timeSinceLastBuffer > 2 * bufferLengthInTime) {
-				ReCJMFUtils.LOGGER.fine("Time since last acquisition was " + timeSinceLastBuffer
-						+ "ms but the buffer transferred only represents " + bufferLengthInTime + "ms");
+				if (timeSinceLastBuffer > 2 * bufferLengthInTime) {
+					ReCJMFUtils.LOGGER.fine("Time since last acquisition was " + timeSinceLastBuffer
+							+ "ms but the buffer transferred only represents " + bufferLengthInTime + "ms");
 
-				restartDataSource();
+					restartDataSource();
+				}
 			}
 
 			currentTime = System.currentTimeMillis();
@@ -169,18 +171,14 @@ public class Handler implements DataSink, BufferTransferHandler {
 
 	@Override
 	public void open() throws IOException, SecurityException {
-		ReCJMFUtils.LOGGER.fine("++++++++ OPENING");
-
 	}
 
 	@Override
 	public void close() {
-		ReCJMFUtils.LOGGER.fine("++++++++ CLOSING");
 	}
 
 	@Override
 	public String getContentType() {
-		ReCJMFUtils.LOGGER.fine("++++++++ GET CONTENT TYPE");
 		return ContentDescriptor.RAW;
 	}
 

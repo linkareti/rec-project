@@ -19,6 +19,7 @@ public class ChannelData {
 
 	private volatile boolean capturing = false;
 
+	
 	private AudioFormat audioFormat;
 	private static double normalizationValue;
 
@@ -177,4 +178,9 @@ public class ChannelData {
 	public void setAudioFormat(final AudioFormat audioFormat) {
 		this.audioFormat = audioFormat;
 	}
+	
+	public boolean isCapturing() {
+		return capturing;
+	}
+
 }
