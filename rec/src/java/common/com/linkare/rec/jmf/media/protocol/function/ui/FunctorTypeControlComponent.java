@@ -1,6 +1,8 @@
 package com.linkare.rec.jmf.media.protocol.function.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Window;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
@@ -14,8 +16,8 @@ public class FunctorTypeControlComponent extends JPanel {
 
 	private FunctorTypeControl functorTypeControl;
 
-	public FunctorTypeControlComponent(FunctorTypeControl functorTypeControl) {
-		this.functorTypeControl = functorTypeControl;
+	public FunctorTypeControlComponent(FunctorTypeControl functorTypeControl2) {
+		this.functorTypeControl = functorTypeControl2;
 		this.setLayout(new BorderLayout());
 
 		JComboBox comboType = new JComboBox();
@@ -44,8 +46,11 @@ public class FunctorTypeControlComponent extends JPanel {
 
 			@Override
 			public void setSelectedItem(Object anItem) {
-				FunctorTypeControlComponent.this.functorTypeControl.setFunctorType((FunctorType) anItem);
-				refreshFunctorControlComponent();
+				final FunctorType oldFunctor = functorTypeControl.getFunctorType();
+				FunctorType newFunctor = (FunctorType) anItem;
+				newFunctor.getFunctorControl().setFrequency(oldFunctor.getFunctorControl().getFrequency());
+				functorTypeControl.setFunctorType(newFunctor);
+				refreshFunctorControlComponent(oldFunctor);
 			}
 
 			@Override
@@ -62,15 +67,25 @@ public class FunctorTypeControlComponent extends JPanel {
 
 	}
 
-	private void refreshFunctorControlComponent() {
-		if (this.getComponentCount() > 1) {
+	private void refreshFunctorControlComponent(FunctorType oldFunctor) {
+
+		if (oldFunctor != null && oldFunctor.getFunctorControl() != null
+				&& oldFunctor.getFunctorControl().getControlComponent() != null) {
+			// removing old component
 			this.remove(1);
 		}
 		if (this.functorTypeControl != null && this.functorTypeControl.getFunctorControl() != null
 				&& this.functorTypeControl.getFunctorControl().getControlComponent() != null) {
+			System.out.println("adding component " + this.functorTypeControl.getFunctorControl().getControlComponent());
 			this.add(this.functorTypeControl.getFunctorControl().getControlComponent(), BorderLayout.CENTER);
 		}
-		repaint();
+		Container parent = this.getParent();
+		while (!(parent instanceof Window) && parent != null) {
+			parent = parent.getParent();
+		}
+		if (parent != null) {
+			((Window) parent).pack();
+		}
 	}
 
 	/**
