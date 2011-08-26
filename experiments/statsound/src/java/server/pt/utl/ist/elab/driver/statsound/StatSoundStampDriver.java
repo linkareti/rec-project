@@ -606,11 +606,10 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 			// data source is not ended, simply ignore the hardware messages
 			if (dataSource != null && !dataSource.isExpEnded()) {
 				if (dataSource.getNumberOfPosReceivedFromHardware() < dataSource.getNumberOfInvocationsToHardware()) {
-					int nextPosition = (int) (dataSource.getPosition() + dataSource.getStepInHardware());
-					LOGGER.fine("Number of pos received (" + dataSource.getNumberOfPosReceivedFromHardware()
-							+ ") < Number of invocations (" + dataSource.getNumberOfInvocationsToHardware()
-							+ "). Preparing new configure command. Last position = " + dataSource.getPosition()
-							+ ", Step = " + dataSource.getStepInHardware() + ", Next position = " + nextPosition);
+					int nextPosition = dataSource.getNextPosition();
+					LOGGER.fine(dataSource.getNumberOfPosReceivedFromHardware() + " < "
+							+ dataSource.getNumberOfInvocationsToHardware() + ": Sending new cfg for position "
+							+ nextPosition);
 					prepareCommandForNextStatement(nextPosition);
 					try {
 						translateCommandFromParameters();
@@ -677,6 +676,7 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 		config.setTimeStart(new DateTime());
 		dataSource.setFreqIni(freqIni);
 		dataSource.setFreqStep(step);
+		dataSource.setPistonStart(pistonStart);
 		dataSource.setControl(player.getControl(FunctorTypeControl.class.getName()));
 		dataSource.setWaveForm(waveForm);
 		dataSource.setNSamples(nSamples);

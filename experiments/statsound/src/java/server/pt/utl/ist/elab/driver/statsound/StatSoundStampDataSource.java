@@ -81,9 +81,9 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 
 	private int numberOfPosReceivedFromHardware;
 
-	private int position;
-
 	private boolean ignore = true;
+
+	private int pistonStart;
 
 	private static final Logger LOGGER = Logger.getLogger(StatSoundStampDriver.class.getName());
 
@@ -112,18 +112,20 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 
 			final String experimentTypeParameter = config.getSelectedHardwareParameterValue(EXPERIMENT_TYPE_PARAMETER);
 			final TypeOfExperiment typeOfExperiment = TypeOfExperiment.from(experimentTypeParameter);
-			position = (Integer) cmd.getCommandData(StampStatSoundProcessor.COMMAND_IDENTIFIER);
+			// int position = (Integer)
+			// cmd.getCommandData(StampStatSoundProcessor.COMMAND_IDENTIFIER);
+			int nextPosition = getNextPosition();
 			numberOfPosReceivedFromHardware++;
 			final double frequencyInHz = getDesiredFrequencyFromConfig();
 			switch (typeOfExperiment) {
 			case STATSOUND_VARY_PISTON:
-				handleProtocolVaryPiston(position, frequencyInHz);
+				handleProtocolVaryPiston(nextPosition, frequencyInHz);
 				break;
 			case STATSOUND_VARY_FREQUENCY:
-				handleProtocolVaryFrequency(position, frequencyInHz);
+				handleProtocolVaryFrequency(nextPosition, frequencyInHz);
 				break;
 			case SOUND_VELOCITY:
-				handleProtocolSoundVelocity(position, frequencyInHz);
+				handleProtocolSoundVelocity(nextPosition, frequencyInHz);
 				break;
 			}
 			if (numberOfPosReceivedFromHardware >= numberOfInvocationsToHardware) {
@@ -376,9 +378,14 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 	}
 
 	/**
-	 * @return the position
+	 * @param pistonStart
 	 */
-	public int getPosition() {
-		return position;
+	public void setPistonStart(int pistonStart) {
+		this.pistonStart = pistonStart;
+	}
+
+	public int getNextPosition() {
+		double stepForInvocationNumber = stepInHardware * numberOfPosReceivedFromHardware;
+		return (int) (pistonStart + stepForInvocationNumber);
 	}
 }
