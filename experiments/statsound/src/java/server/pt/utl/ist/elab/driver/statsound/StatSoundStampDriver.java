@@ -7,35 +7,15 @@
 package pt.utl.ist.elab.driver.statsound;
 
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.media.CaptureDeviceInfo;
-import javax.media.CaptureDeviceManager;
-import javax.media.ConfigureCompleteEvent;
-import javax.media.ControllerEvent;
-import javax.media.ControllerListener;
-import javax.media.DataSink;
-import javax.media.EndOfMediaEvent;
-import javax.media.Manager;
-import javax.media.MediaLocator;
+import javax.media.NoDataSinkException;
+import javax.media.NoDataSourceException;
 import javax.media.NoPlayerException;
-import javax.media.PackageManager;
 import javax.media.Player;
-import javax.media.PrefetchCompleteEvent;
-import javax.media.RealizeCompleteEvent;
-import javax.media.ResourceUnavailableEvent;
-import javax.media.SizeChangeEvent;
-import javax.media.Time;
-import javax.media.TransitionEvent;
-import javax.media.control.BufferControl;
 import javax.media.format.AudioFormat;
 import javax.media.protocol.DataSource;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.TargetDataLine;
 
 import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDataSource;
 import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDriver;
@@ -58,15 +38,15 @@ import com.linkare.rec.impl.threading.AbstractConditionDecisor;
 import com.linkare.rec.impl.threading.TimedOutException;
 import com.linkare.rec.impl.threading.WaitForConditionResult;
 import com.linkare.rec.impl.utils.Defaults;
+import com.linkare.rec.jmf.ReCJMFUtils;
 import com.linkare.rec.jmf.media.datasink.capture.Handler;
-import com.linkare.rec.jmf.media.protocol.function.FunctorType;
 import com.linkare.rec.jmf.media.protocol.function.FunctorTypeControl;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI & André
  */
-public class StatSoundStampDriver extends AbstractStampDriver implements ControllerListener {
+public class StatSoundStampDriver extends AbstractStampDriver {
 
 	// parameters
 	public static final String PISTON_START_PARAMETER = "piston.start";
@@ -98,19 +78,13 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 
 	private boolean reseting = true;
 
-	private static final String CAPTURE_DEVICE_URL = "capture.device.url";
-
 	private static final String HARDWARE_INFO_XML = "/HardwareInfo.xml";
 
 	private static final String USER_DIR = "user.dir";
 
 	private static final String HARDWARE_INFO = "HardwareInfo";
 
-	private static final String JMF_PACKAGE = "com.linkare.rec.jmf";
-
 	private static final int SAMPLE_RATE = 11025;
-
-	private static final String CAPTURE_LOCATOR = "capture://" + SAMPLE_RATE + "/16/2";
 
 	private static final String SILENCE_FUNCTION = "function://" + SAMPLE_RATE + "/16/silence";
 
@@ -155,10 +129,6 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 
 	private int signed = AudioFormat.SIGNED;
 
-	private Object waitSync = new Object();
-
-	private boolean stateTransitionOK = true;
-
 	private Player player;
 
 	private Handler soundCaptureDevice;
@@ -198,96 +168,13 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 		fireIDriverStateListenerDriverConfigured();
 	}
 
-	private void initPlayerWithSilence() throws NoPlayerException, IOException {
-		final String locatorString = SILENCE_FUNCTION;
-		LOGGER.info("Creating player for " + locatorString);
+	private void initPlayerWithSilence() {
 		try {
-			player = Manager.createPlayer(new MediaLocator(locatorString));
+			this.player = ReCJMFUtils.createAndStartPlayer(SILENCE_FUNCTION);
 		} catch (NoPlayerException e) {
-			LOGGER.log(Level.SEVERE, e.getMessage(), e);
-			throw e;
+			throw new RuntimeException(e);
 		} catch (IOException e) {
-			LOGGER.log(Level.SEVERE, e.getMessage(), e);
-			throw e;
-		}
-
-		player.addControllerListener(this);
-
-		LOGGER.fine("Realizing player...");
-		player.realize();
-		if (!waitForState(Player.Realized)) {
-			// cleanup the player
-			player.stop();
-			player.deallocate();
-			player.close();
-			throw new RuntimeException("Failed to realize the player");
-		}
-
-		LOGGER.fine("Prefetching player...");
-		player.prefetch();
-		if (!waitForState(Player.Prefetched)) {
-			// cleanup the player
-			player.stop();
-			player.deallocate();
-			player.close();
-			throw new RuntimeException("Failed to prefecth the player");
-		}
-
-		LOGGER.fine("Starting player...");
-		player.start();
-		if (!waitForState(Player.Started)) {
-			// cleanup the player
-			player.stop();
-			player.deallocate();
-			player.close();
-			throw new RuntimeException("Failed to start the player");
-		}
-		FunctorTypeControl control = (FunctorTypeControl) player.getControl(FunctorTypeControl.class.getName());
-		control.setFunctorType(FunctorType.SILENCE);
-	}
-
-	/**
-	 * Block until the player has transitioned to the given state. Return false
-	 * if the transition failed.
-	 */
-	private boolean waitForState(int state) {
-		synchronized (waitSync) {
-			try {
-				while (player.getState() < state && stateTransitionOK) {
-					waitSync.wait();
-				}
-			} catch (Exception e) {
-			}
-		}
-		return stateTransitionOK;
-	}
-
-	/**
-	 * Controller Listener.
-	 */
-	@Override
-	public void controllerUpdate(ControllerEvent evt) {
-		if (evt instanceof ConfigureCompleteEvent || evt instanceof RealizeCompleteEvent
-				|| evt instanceof PrefetchCompleteEvent) {
-			synchronized (waitSync) {
-				stateTransitionOK = true;
-				waitSync.notifyAll();
-			}
-		} else if (evt instanceof ResourceUnavailableEvent) {
-			synchronized (waitSync) {
-				stateTransitionOK = false;
-				waitSync.notifyAll();
-			}
-		} else if (evt instanceof EndOfMediaEvent) {
-			player.setMediaTime(new Time(0));
-			// p.start();
-			// p.close();
-			// System.exit(0);
-		} else if (evt instanceof SizeChangeEvent) {
-		} else if (evt instanceof TransitionEvent) {
-			TransitionEvent transitionEvent = (TransitionEvent) evt;
-			LOGGER.fine("Transition event. Previous = " + transitionEvent.getPreviousState() + ", Current = "
-					+ transitionEvent.getCurrentState() + ", Next = " + transitionEvent.getTargetState());
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -446,135 +333,30 @@ public class StatSoundStampDriver extends AbstractStampDriver implements Control
 	@Override
 	public void init(HardwareInfo info) {
 		super.init(info);
-		final String deviceLocation = initJMFAndGetDeviceLocation();
+
+		ReCJMFUtils.initReCJMFPackages();
+		final String deviceLocation = ReCJMFUtils.locateCaptureDeviceForParameters(SAMPLE_RATE, bitsPerChannel,
+				numChannels, endian, signed);
+
 		initCaptureDevice(deviceLocation);
-		try {
-			initPlayerWithSilence();
-		} catch (NoPlayerException e) {
-			throw new RuntimeException(e);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	private String initJMFAndGetDeviceLocation() {
-		String deviceLocation = System.getProperty(CAPTURE_DEVICE_URL);
-		@SuppressWarnings("unchecked")
-		Vector<String> protocolPrefixList = PackageManager.getProtocolPrefixList();
-
-		if (!protocolPrefixList.contains(JMF_PACKAGE)) {
-			protocolPrefixList.add(JMF_PACKAGE);
-			PackageManager.setProtocolPrefixList(protocolPrefixList);
-			PackageManager.commitProtocolPrefixList();
-		}
-
-		@SuppressWarnings("unchecked")
-		Vector<String> contentPrefixList = PackageManager.getContentPrefixList();
-		if (!contentPrefixList.contains(JMF_PACKAGE)) {
-			contentPrefixList.add(JMF_PACKAGE);
-			PackageManager.setContentPrefixList(protocolPrefixList);
-			PackageManager.commitContentPrefixList();
-		}
-
-		try {
-
-			// It's there, start to register JavaSound with CaptureDeviceManager
-			@SuppressWarnings("unchecked")
-			Vector<CaptureDeviceInfo> devices = (Vector<CaptureDeviceInfo>) CaptureDeviceManager.getDeviceList(null)
-					.clone();
-
-			// detect if javasound capturers are already defined!
-			boolean foundJavaSoundDevice = false;
-			String name;
-			final Enumeration<CaptureDeviceInfo> enumDevices = devices.elements();
-			while (enumDevices.hasMoreElements()) {
-				CaptureDeviceInfo cdi = enumDevices.nextElement();
-				name = cdi.getName();
-				if (name.startsWith("JavaSound")) {
-					foundJavaSoundDevice = true;
-					break;
-				}
-			}
-
-			if (!foundJavaSoundDevice) {
-				DataLine.Info lineInfo = new DataLine.Info(TargetDataLine.class, null, AudioSystem.NOT_SPECIFIED);
-
-				if (!AudioSystem.isLineSupported(lineInfo)) {
-					throw new Exception("AudioSystem.isLineSupported said 'false'");
-				}
-
-				// collect javasound capture device info from
-				// JavaSoundSourceStream
-				// and register them with CaptureDeviceManager
-				CaptureDeviceInfo[] cdi = com.sun.media.protocol.javasound.JavaSoundSourceStream
-						.listCaptureDeviceInfo();
-				if (cdi != null) {
-					for (int i = 0; i < cdi.length; i++) {
-						CaptureDeviceManager.addDevice(cdi[i]);
-					}
-					CaptureDeviceManager.commit();
-					LOGGER.fine("JavaSoundAuto: Committed ok");
-				}
-			}
-		} catch (Exception e) {
-			throw new RuntimeException("Unable to detect java sound capture device... No sound board???", e);
-		}
-
-		AudioFormat audioFormat = new AudioFormat(AudioFormat.LINEAR, SAMPLE_RATE, bitsPerChannel, numChannels,
-				this.endian, this.signed);
-
-		if (deviceLocation == null) {
-			@SuppressWarnings("unchecked")
-			Vector<CaptureDeviceInfo> deviceList = CaptureDeviceManager.getDeviceList(audioFormat);
-			if (deviceList != null && deviceList.size() > 0) {
-				for (CaptureDeviceInfo captureDeviceInfo : deviceList) {
-					LOGGER.info("Found device at " + captureDeviceInfo.getLocator().toExternalForm());
-				}
-				if (deviceList.size() > 1) {
-					LOGGER.severe("Please specify the correct device by setting the system property "
-							+ CAPTURE_DEVICE_URL);
-				} else {
-					deviceLocation = deviceList.get(0).getLocator().toExternalForm();
-				}
-			} else {
-				LOGGER.severe("Did not find any device matching the characteristics...");
-				LOGGER.severe("Please use the auto-detect funcions of JMFRegistry (will be opened now if possible) and commit the changes...");
-				throw new RuntimeException(
-						"It was not possible to find any device matching the desired characteristics");
-			}
-		}
-		return deviceLocation;
+		initPlayerWithSilence();
 	}
 
 	private void initCaptureDevice(final String deviceLocation) {
-		DataSource dataSource = null;
-		if (deviceLocation != null) {
-			MediaLocator locator = new MediaLocator(deviceLocation);
-			LOGGER.fine("Capturing from " + locator);
-			try {
-				dataSource = Manager.createDataSource(locator);
-				String destinationLocator = CAPTURE_LOCATOR;
-				DataSink sink = Manager.createDataSink(dataSource, new MediaLocator(destinationLocator));
-				//sink.open();
-				//dataSource.connect();
-				soundCaptureDevice = (Handler) sink;
-				sink.start();
-				dataSource.start();
-				
-				Object[] controls = dataSource.getControls();
-				for (Object control : controls) {
-					LOGGER.info("There is a control object : " + control.getClass().getName());
-					if (control instanceof BufferControl) {
-						BufferControl bufferControl = (BufferControl) control;
-						LOGGER.info("Length of Buffer is = " + bufferControl.getBufferLength());
-						bufferControl.setBufferLength(1L);
-						LOGGER.info("Length of Buffer is now = " + bufferControl.getBufferLength());
-					}
-				}
-			} catch (Exception e) {
-				LOGGER.log(Level.SEVERE, e.getMessage(), e);
-				throw new RuntimeException("The sound driver is facing problems " + e.getMessage(), e);
-			}
+		ReCJMFUtils.autoDetectJavaSoundDevices();
+		try {
+			DataSource dataSource = ReCJMFUtils.locateDataSource(deviceLocation, 16L);
+			soundCaptureDevice = ReCJMFUtils.createCaptureDeviceFor(dataSource, SAMPLE_RATE, bitsPerChannel,
+					numChannels);
+			ReCJMFUtils.startCapturing(dataSource, soundCaptureDevice);
+		} catch (NoDataSourceException e) {
+			throw new RuntimeException(e);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} catch (NoDataSinkException e) {
+			throw new RuntimeException(e);
+		} catch (SecurityException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
