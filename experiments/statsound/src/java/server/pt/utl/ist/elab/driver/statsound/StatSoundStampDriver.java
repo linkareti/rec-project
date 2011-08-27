@@ -461,14 +461,14 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		started = true;
 
 		config.setTimeStart(new DateTime());
+		dataSource.setControl(playerFunctorTypeControl);
+		dataSource.setCaptureDevice(soundCaptureDevice);
 		dataSource.setFreqIni(freqIni);
 		dataSource.setFreqStep(step);
 		dataSource.setPistonStart(pistonStart);
-		dataSource.setControl(playerFunctorTypeControl);
 		dataSource.setWaveForm(waveForm);
 		dataSource.setNSamples(nSamples);
 		dataSource.setExpEnded(false);
-		dataSource.setCaptureDevice(soundCaptureDevice);
 		dataSource.setNumberOfInvocationsToHardware(numberOfInvocationsToHardware);
 		dataSource.setStepInHardware(stepInHardware);
 		fireIDriverStateListenerDriverStarted();
