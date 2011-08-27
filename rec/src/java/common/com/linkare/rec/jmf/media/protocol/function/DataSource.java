@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.StringTokenizer;
+import java.util.logging.Logger;
 
 import javax.media.Buffer;
 import javax.media.Duration;
@@ -40,6 +41,9 @@ public class DataSource extends PullBufferDataSource {
 	public Object[] controls = new Object[0];
 
 	private FunctorDataControl functorDataControl = new FunctorDataControl();
+	
+	private static final Logger LOGGER = Logger.getLogger(DataSource.class.getName());
+
 
 	public DataSource() {
 	}
@@ -160,6 +164,7 @@ public class DataSource extends PullBufferDataSource {
 
 	private class FunctionWavePullBufferStream implements PullBufferStream {
 
+
 		private ByteBuffer generatingBuffer = null;
 
 		private int sizeOfGeneratingArray;
@@ -270,6 +275,7 @@ public class DataSource extends PullBufferDataSource {
 			synchronized (functorType) {
 				functorTypeLocal = DataSource.this.functorType;
 			}
+			LOGGER.fine(">>>>> Generating sound of type "+functorTypeLocal.getFunctionName()+" with frequency "+functorTypeLocal.getFunctorControl().getFrequency());
 			functor = functorTypeLocal.getFunctor();
 
 			generatingBuffer.rewind();

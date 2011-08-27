@@ -3,6 +3,7 @@ package com.linkare.rec.jmf.media.datasink.capture;
 import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Logger;
 
 import javax.media.Buffer;
 import javax.media.DataSink;
@@ -19,8 +20,6 @@ import javax.media.protocol.DataSource;
 import javax.media.protocol.PushBufferDataSource;
 import javax.media.protocol.PushBufferStream;
 
-import com.linkare.rec.jmf.ReCJMFUtils;
-
 /**
  * @author José Pedro Pereira - Linkare TI
  * 
@@ -28,6 +27,8 @@ import com.linkare.rec.jmf.ReCJMFUtils;
 public class Handler implements DataSink, BufferTransferHandler {
 
 	private static final double NANOS_TO_MILLIS = 1000 * 1000;
+
+	private static final Logger LOGGER = Logger.getLogger(Handler.class.getName());
 
 	private ChannelData channelData = new ChannelData();
 
@@ -50,7 +51,6 @@ public class Handler implements DataSink, BufferTransferHandler {
 	 */
 	@Override
 	public void setSource(DataSource source) throws IOException, IncompatibleSourceException {
-		ReCJMFUtils.LOGGER.fine("++++++++ SET SOURCE");
 		this.dataSource = source;
 
 		if (this.dataSource != null && ContentDescriptor.RAW.equals(this.dataSource.getContentType())
@@ -95,7 +95,7 @@ public class Handler implements DataSink, BufferTransferHandler {
 				double timeSinceLastBuffer = System.currentTimeMillis() - currentTime;
 
 				if (timeSinceLastBuffer > 2 * bufferLengthInTime) {
-					ReCJMFUtils.LOGGER.fine("Time since last acquisition was " + timeSinceLastBuffer
+					LOGGER.fine("Time since last acquisition was " + timeSinceLastBuffer
 							+ "ms but the buffer transferred only represents " + bufferLengthInTime + "ms");
 
 					restartDataSource();
@@ -143,7 +143,6 @@ public class Handler implements DataSink, BufferTransferHandler {
 
 	@Override
 	public void setOutputLocator(MediaLocator output) {
-		ReCJMFUtils.LOGGER.fine("++++++++ SET OUTPUT LOCATOR");
 		this.outputLocator = output;
 
 	}
