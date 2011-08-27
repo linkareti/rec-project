@@ -12,15 +12,12 @@ import javax.media.MediaLocator;
 import javax.media.Time;
 import javax.media.control.FormatControl;
 import javax.media.format.AudioFormat;
-import javax.media.protocol.BufferTransferHandler;
 import javax.media.protocol.ContentDescriptor;
-import javax.media.protocol.PushBufferDataSource;
-import javax.media.protocol.PushBufferStream;
+import javax.media.protocol.PullBufferDataSource;
+import javax.media.protocol.PullBufferStream;
 import javax.media.protocol.SourceStream;
 
-import com.linkare.rec.jmf.ReCJMFUtils;
-
-public class DataSource extends PushBufferDataSource {
+public class DataSource extends PullBufferDataSource {
 
 	private static final int BITS_PER_BYTE = 8;
 
@@ -37,8 +34,8 @@ public class DataSource extends PushBufferDataSource {
 
 	private FunctorType functorType = FunctorType.SILENCE;
 
-	private FunctionWavePushBufferStream pushSourceStream = new FunctionWavePushBufferStream();
-	private PushBufferStream[] pushSourceStreams = new PushBufferStream[] { pushSourceStream };
+	private FunctionWavePullBufferStream pullSourceStream = null;
+	private PullBufferStream[] pullSourceStreams = new PullBufferStream[1];
 
 	public Object[] controls = new Object[0];
 
@@ -48,8 +45,8 @@ public class DataSource extends PushBufferDataSource {
 	}
 
 	@Override
-	public PushBufferStream[] getStreams() {
-		return this.pushSourceStreams;
+	public PullBufferStream[] getStreams() {
+		return this.pullSourceStreams;
 	}
 
 	@Override
@@ -110,6 +107,9 @@ public class DataSource extends PushBufferDataSource {
 
 		controls = new Object[] { formatControl, functorControl, functorDataControl };
 
+		pullSourceStream = new FunctionWavePullBufferStream();
+		pullSourceStreams[0] = pullSourceStream;
+
 	}
 
 	private void validateSampleSizeInBytes(MediaLocator locator, String bitsPerChannelStr, int bitsPerChannel) {
@@ -152,29 +152,53 @@ public class DataSource extends PushBufferDataSource {
 
 	@Override
 	public void start() throws IOException {
-		this.pushSourceStream.start();
 	}
 
 	@Override
 	public void stop() throws IOException {
-		this.pushSourceStream.stop();
 	}
 
-	private class FunctionWavePushBufferStream implements Runnable, PushBufferStream {
-
-		private Thread innerGenerationThread = null;
+	private class FunctionWavePullBufferStream implements PullBufferStream {
 
 		private ByteBuffer generatingBuffer = null;
-
-		private byte[] lastTransferData = new byte[0];
-
-		private volatile boolean stop = false;
-
-		private volatile BufferTransferHandler bufferTransferHandler;
 
 		private int sizeOfGeneratingArray;
 
 		private int bufferSequenceNr;
+
+		double multiplyFactor = 1.;
+
+		private int incrementOnArray = 1;
+
+		/**
+		 * Creates the <code>DataSource.FunctionWavePullBufferStream</code>.
+		 */
+		public FunctionWavePullBufferStream() {
+			int sampleSizeInBits = DataSource.this.audioFormat.getSampleSizeInBits();
+			sizeOfGeneratingArray = (int) (DataSource.this.sampleSizeInBytes * DataSource.this.numChannels * (int) (DataSource.this.sampleRate / 10));
+			System.out.println("Size of generating array : " + sizeOfGeneratingArray);
+			generatingBuffer = ByteBuffer.allocate(sizeOfGeneratingArray);
+			// The functors generate a value between -1 and 1, and this
+			// value should be multiplied by the
+			// maximum generation value for the wave quantization in
+			// place... as the wave is signed, there are
+			// the scale is divided by 2 (positives and negatives - hence
+			// the sampleSizeInBits-1 in exponent)
+			// but the positive values include the 0, hence the -1
+			// subtracted from the power
+			multiplyFactor = Math.pow(2, sampleSizeInBits - 1) - 1;
+			// but now, we don't want to overflow, so let's decrease this
+			// multiplyFactor by 10% (only using 90% of the available
+			// scale), which should make us generate
+			// sound in between a nice scaled value
+			multiplyFactor *= 0.9;
+
+			boolean bigEndian = DataSource.this.audioFormat.getEndian() == AudioFormat.BIG_ENDIAN;
+			incrementOnArray = DataSource.this.sampleSizeInBytes * DataSource.this.numChannels;
+
+			generatingBuffer.order(bigEndian ? ByteOrder.BIG_ENDIAN : ByteOrder.LITTLE_ENDIAN);
+
+		}
 
 		@Override
 		public boolean endOfStream() {
@@ -189,31 +213,6 @@ public class DataSource extends PushBufferDataSource {
 		@Override
 		public long getContentLength() {
 			return SourceStream.LENGTH_UNKNOWN;
-		}
-
-		private void start() {
-			if (innerGenerationThread == null) {
-				stop = false;
-				innerGenerationThread = new Thread(this);
-				innerGenerationThread.start();
-				notificationThread.start();
-			}
-		}
-
-		private void stop() {
-			if (innerGenerationThread != null) {
-				stop = true;
-				try {
-					if (Thread.currentThread() != innerGenerationThread && innerGenerationThread.isAlive()) {
-						innerGenerationThread.join(1000);
-						notificationThread.stopNow();
-						notificationThread = new NotificationThread();
-					}
-					innerGenerationThread = null;
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 		@Override
@@ -264,112 +263,26 @@ public class DataSource extends PushBufferDataSource {
 			}
 		}
 
-		@Override
-		public void run() {
+		public void calculateNextFrame() {
 
-			int sampleSizeInBits = DataSource.this.audioFormat.getSampleSizeInBits();
-			sizeOfGeneratingArray = (int) (DataSource.this.sampleSizeInBytes * DataSource.this.numChannels * (int) (DataSource.this.sampleRate));
-			generatingBuffer = ByteBuffer.allocate(sizeOfGeneratingArray);
-			lastTransferData = new byte[sizeOfGeneratingArray];
-			long generationTime = DataSource.this.audioFormat.computeDuration(sizeOfGeneratingArray) / 1000000;
-			// The functors generate a value between -1 and 1, and this
-			// value should be multiplied by the
-			// maximum generation value for the wave quantization in
-			// place... as the wave is signed, there are
-			// the scale is divided by 2 (positives and negatives - hence
-			// the sampleSizeInBits-1 in exponent)
-			// but the positive values include the 0, hence the -1
-			// subtracted from the power
-			double multiplyFactor = Math.pow(2, sampleSizeInBits - 1) - 1;
-			// but now, we don't want to overflow, so let's decrease this
-			// multiplyFactor by 10% (only using 90% of the available
-			// scale), which should make us generate
-			// sound in between a nice scaled value
-			multiplyFactor *= 0.9;
+			final Functor functor;
+			final FunctorType functorTypeLocal;
+			synchronized (functorType) {
+				functorTypeLocal = DataSource.this.functorType;
+			}
+			functor = functorTypeLocal.getFunctor();
 
-			boolean bigEndian = DataSource.this.audioFormat.getEndian() == AudioFormat.BIG_ENDIAN;
-			// boolean signed = DataSource.this.audioFormat.getSigned() ==
-			// AudioFormat.SIGNED;
-			int incrementOnArray = DataSource.this.sampleSizeInBytes * DataSource.this.numChannels;
+			generatingBuffer.rewind();
 
-			generatingBuffer.order(bigEndian ? ByteOrder.BIG_ENDIAN : ByteOrder.LITTLE_ENDIAN);
-
-			int countOutput = 0;
-
-			long startTime = System.currentTimeMillis();
-			while (!stop) {
-
-				startTime = System.currentTimeMillis();
-				final Functor functor;
-				final FunctorType functorTypeLocal;
-				synchronized (functorType) {
-					functorTypeLocal = DataSource.this.functorType;
-				}
-				functor = functorTypeLocal.getFunctor();
-
-				generatingBuffer.rewind();
-
-				for (int i = 0; i < generatingBuffer.limit() && !stop; i += incrementOnArray) {
-					long value = (long) Math.floor(functor.getNextValue() * multiplyFactor);
-					putOnBuffer(value);
-					DataSource.this.functorDataControl.notifyNewValues(value);
-				}
-
-				countOutput++;
-
-				synchronized (functorTypeLocal) {
-					functorTypeLocal.notifyAll();
-				}
-
-				if (!stop) {
-					synchronized (lastTransferData) {
-						generatingBuffer.rewind();
-						generatingBuffer.get(lastTransferData);
-					}
-
-					synchronized (notificationThread) {
-						notificationThread.notifyAll();
-					}
-
-					long deltaTime = System.currentTimeMillis() - startTime;
-					if (deltaTime > generationTime) {
-						ReCJMFUtils.LOGGER.fine("Taking too long to generate a buffer ... Time should be :"
-								+ generationTime + " and we are generating in " + deltaTime + "ms");
-					}
-				}
+			for (int i = 0; i < generatingBuffer.limit(); i += incrementOnArray) {
+				long value = (long) Math.floor(functor.getNextValue() * multiplyFactor);
+				DataSource.this.functorDataControl.notifyNewValues(value);
+				putOnBuffer(value);
+			}
+			synchronized (functorTypeLocal) {
+				functorTypeLocal.notifyAll();
 			}
 
-		}
-
-		private NotificationThread notificationThread = new NotificationThread();
-
-		public class NotificationThread extends Thread {
-
-			@Override
-			public void run() {
-				while (!stop) {
-					synchronized (this) {
-						try {
-							this.wait();
-						} catch (InterruptedException e) {
-							stop = true;
-						}
-					}
-					if (!stop) {
-						bufferTransferHandler.transferData(FunctionWavePushBufferStream.this);
-					}
-				}
-			}
-
-			/**
-			 * 
-			 */
-			public void stopNow() {
-				stop = true;
-				synchronized (this) {
-					this.notifyAll();
-				}
-			}
 		}
 
 		@Override
@@ -379,19 +292,21 @@ public class DataSource extends PushBufferDataSource {
 
 		@Override
 		public void read(Buffer buffer) throws IOException {
-			synchronized (lastTransferData) {
-				buffer.setFormat(audioFormat);
-				buffer.setData(lastTransferData);
-				buffer.setLength(lastTransferData.length);
-				buffer.setDiscard(false);
-				buffer.setOffset(0);
-				buffer.setSequenceNumber(bufferSequenceNr++);
-			}
+			calculateNextFrame();
+			buffer.setFormat(audioFormat);
+			buffer.setLength(generatingBuffer.capacity());
+			buffer.setData(generatingBuffer.array());
+			buffer.setDiscard(false);
+			buffer.setOffset(0);
+			buffer.setSequenceNumber(bufferSequenceNr++);
 		}
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
-		public void setTransferHandler(BufferTransferHandler transferHandler) {
-			this.bufferTransferHandler = transferHandler;
+		public boolean willReadBlock() {
+			return false;
 		}
 
 	}

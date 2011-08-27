@@ -33,14 +33,13 @@ public class SoundGenerator {
 
 		ReCJMFUtils.initReCJMFPackages();
 
-		String locatorString = "function://44100/16/sin/441";
+		String locatorString = "function://44100/16/sin/373.431";
 		// String locatorString = "function://44100/16/silence";
-		//String locatorString = "function://44100/16/triangle/440";
+		// String locatorString = "function://44100/16/triangle/440";
 		// String locatorString = "function://44100/16/pulse/100/0.10";
 		// String locatorString = "function://44100/16/pinknoise";
 		// String locatorString = "function://44100/16/whitenoise";
 
-		System.out.println("Creating player...");
 		final Player player = ReCJMFUtils.createAndStartPlayer(locatorString);
 
 		final JFrame window = new JFrame("Function Sound Player");
@@ -48,9 +47,7 @@ public class SoundGenerator {
 		window.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				System.out.println("Stopping player");
 				player.stop();
-				System.out.println("player stoped");
 				System.exit(0);
 			}
 		});
@@ -94,7 +91,7 @@ public class SoundGenerator {
 		window.getContentPane().add(panel, BorderLayout.CENTER);
 		window.pack();
 		window.setVisible(true);
-		
+
 		functorDataProxyDataSet.start();
 	}
 

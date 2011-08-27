@@ -22,6 +22,7 @@ public class SineFunctorControlComponent extends JPanel {
 
 		this.add(new JLabel("Frequency Sin"));
 		final JSlider frequencyRangeSlider = new JSlider(20, 20000, 20);
+		frequencyRangeSlider.setValue((int) sineFunctorControl.getFrequency());
 		this.add(frequencyRangeSlider);
 
 		frequencyRangeSlider.getModel().addChangeListener(new ChangeListener() {

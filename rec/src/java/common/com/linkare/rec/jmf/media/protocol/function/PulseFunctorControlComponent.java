@@ -23,7 +23,8 @@ public class PulseFunctorControlComponent extends JPanel {
 		this.add(new JLabel("Frequency Pulse"));
 		final JSlider frequencyRangeSlider = new JSlider(20, 20000, 20);
 		this.add(frequencyRangeSlider);
-
+		frequencyRangeSlider.setValue((int) pulseFunctorControl.getFrequency());
+		
 		frequencyRangeSlider.getModel().addChangeListener(new ChangeListener() {
 
 			@Override

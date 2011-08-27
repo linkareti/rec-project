@@ -15,6 +15,7 @@ public class SineFunctor implements Functor {
 	@Override
 	public void setTimeDelta(double seconds) {
 		this.timeDelta = seconds;
+		System.out.println("time-delta=" + timeDelta);
 	}
 
 	@Override
@@ -30,7 +31,7 @@ public class SineFunctor implements Functor {
 	public synchronized void setFrequency(double frequency) {
 		this.frequency = frequency;
 		this.period = 1. / frequency;
-		System.out.println("Period = "+period);
+		currentTime = 0;
 	}
 
 	public double getTimeDelta() {

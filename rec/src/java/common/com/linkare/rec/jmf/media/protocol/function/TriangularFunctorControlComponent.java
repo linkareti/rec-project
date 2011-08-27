@@ -22,6 +22,7 @@ public class TriangularFunctorControlComponent extends JPanel {
 
 		this.add(new JLabel("Frequency Triangular"));
 		final JSlider frequencyRangeSlider = new JSlider(20, 20000, 20);
+		frequencyRangeSlider.setValue((int) triangularFunctorControl.getFrequency());
 		this.add(frequencyRangeSlider);
 
 		frequencyRangeSlider.getModel().addChangeListener(new ChangeListener() {
