@@ -181,6 +181,8 @@ public class DataSource extends PullBufferDataSource {
 
 		private int incrementOnArray = 1;
 
+		private long lastDebugTime = System.currentTimeMillis();
+
 		/**
 		 * Creates the <code>DataSource.FunctionWavePullBufferStream</code>.
 		 */
@@ -278,11 +280,13 @@ public class DataSource extends PullBufferDataSource {
 
 			final Functor functor;
 			final FunctorType functorTypeLocal;
-			synchronized (functorType) {
+			synchronized (DataSource.this.functorType) {
 				functorTypeLocal = DataSource.this.functorType;
 			}
-			LOGGER.fine(">>>>> Generating sound of type " + functorTypeLocal.getFunctionName() + " with frequency "
-					+ functorTypeLocal.getFunctorControl().getFrequency());
+			if (System.currentTimeMillis() - lastDebugTime > 2000) {
+				LOGGER.fine(">>>>> Functor " + functorTypeLocal.getFunctionName() + " with frequency "
+						+ functorTypeLocal.getFunctorControl().getFrequency());
+			}
 			functor = functorTypeLocal.getFunctor();
 
 			generatingBuffer.rewind();
@@ -293,6 +297,10 @@ public class DataSource extends PullBufferDataSource {
 				putOnBuffer(value);
 			}
 			synchronized (functorTypeLocal) {
+				if (waitingOnFunctorType) {
+					LOGGER.fine("Releasing the functor type set waiting thread...");
+				}
+				waitingOnFunctorType = false;
 				functorTypeLocal.notifyAll();
 			}
 
@@ -332,55 +340,28 @@ public class DataSource extends PullBufferDataSource {
 		return functorType;
 	}
 
+	private boolean waitingOnFunctorType = false;
+
 	public void setFunctorType(FunctorType functorType) {
-		synchronized (this.functorType) {
-			FunctorType oldFunctor = this.functorType;
+		LOGGER.fine("Setting new functor type " + functorType.getFunctionName());
+		FunctorType oldFunctor = this.functorType;
+
+		synchronized (oldFunctor) {
 			this.functorType = functorType;
 			this.functorType.getFunctor().setTimeDelta(1. / sampleRate);
 			try {
-				oldFunctor.wait(1000);
+				LOGGER.fine("Waiting 1s on OLD functor type for NEW functor type to be applied. "
+						+ oldFunctor.getFunctionName());
+				waitingOnFunctorType = true;
+				oldFunctor.wait(10000);
+				if (waitingOnFunctorType) {
+					LOGGER.fine("Got out by timeout instead of correctly waiting for functor type application");
+				} else {
+					LOGGER.fine("New Functor type should be applied by now " + this.functorType.getFunctionName());
+				}
+				waitingOnFunctorType = false;
 			} catch (InterruptedException e) {
 			}
-
-			// try {
-			// BeanInfo oldFunctorBeanInfo =
-			// java.beans.Introspector.getBeanInfo(oldFunctor.getClass());
-			// BeanInfo newFunctorBeanInfo =
-			// Introspector.getBeanInfo(newFunctor.getClass());
-			// Map<String, PropertyDescriptor> newFunctorProperties = new
-			// HashMap<String, PropertyDescriptor>(
-			// newFunctorBeanInfo.getPropertyDescriptors().length);
-			// for (PropertyDescriptor newPropertyDesc :
-			// newFunctorBeanInfo.getPropertyDescriptors()) {
-			// newFunctorProperties.put(newPropertyDesc.getName(),
-			// newPropertyDesc);
-			// }
-			//
-			// for (PropertyDescriptor propertyDesc :
-			// oldFunctorBeanInfo.getPropertyDescriptors()) {
-			// if (propertyDesc.getReadMethod() != null
-			// && newFunctorProperties.containsKey(propertyDesc.getName())) {
-			// PropertyDescriptor newPropertyDesc =
-			// newFunctorProperties.get(propertyDesc.getName());
-			// if (newPropertyDesc.getWriteMethod() != null
-			// && newPropertyDesc.getPropertyType() ==
-			// propertyDesc.getPropertyType()) {
-			// Object oldValue =
-			// propertyDesc.getReadMethod().invoke(oldFunctor);
-			// newPropertyDesc.getWriteMethod().invoke(newFunctor, oldValue);
-			// }
-			// }
-			// }
-			//
-			// } catch (IntrospectionException e) {
-			// e.printStackTrace();
-			// } catch (IllegalArgumentException e) {
-			// e.printStackTrace();
-			// } catch (IllegalAccessException e) {
-			// e.printStackTrace();
-			// } catch (InvocationTargetException e) {
-			// e.printStackTrace();
-			// }
 
 		}
 
