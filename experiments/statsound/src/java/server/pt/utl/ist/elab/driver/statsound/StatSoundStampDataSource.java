@@ -259,16 +259,19 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 	}
 
 	public void setWaveForm(final SoundWaveType waveForm) {
+		LOGGER.fine("Wave form is " + waveForm.name());
 		getControl().setFunctorType(waveForm.getFunctorType());
-		// this.waveForm = waveForm;
+		LOGGER.fine("Functor type is now set to " + getControl().getFunctorType().getFunctionName());
 	}
 
 	public void setFreqIni(final int freqIni) {
 		this.freqIni = freqIni;
 		LOGGER.fine("Control is " + getControl());
 		LOGGER.fine("Functor Control is " + getControl().getFunctorControl());
-		LOGGER.fine("Frequency is " + getControl().getFunctorControl().getFrequency());
+		LOGGER.fine("Frequency was " + getControl().getFunctorControl().getFrequency());
 		getControl().getFunctorControl().setFrequency(freqIni);
+		LOGGER.fine("Frequency is now " + getControl().getFunctorControl().getFrequency());
+
 	}
 
 	public void setFreqStep(final double step) {
@@ -293,9 +296,9 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 	 * @param control the control to set
 	 */
 	public void setControl(FunctorTypeControl control) {
-		LOGGER.fine("Control was "+this.control);
+		LOGGER.fine("Control was " + this.control);
 		this.control = control;
-		LOGGER.fine("Control is now "+this.control);
+		LOGGER.fine("Control is now " + this.control);
 	}
 
 	@Override

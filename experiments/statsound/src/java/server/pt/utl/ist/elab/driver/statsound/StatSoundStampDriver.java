@@ -235,6 +235,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		// start configuration...
 		this.config = config;
 		freqIni = Integer.parseInt(config.getSelectedHardwareParameterValue(FREQUENCY_START_PARAMETER));
+		LOGGER.fine("freqIni is now "+freqIni);
 		freqFin = Integer.parseInt(config.getSelectedHardwareParameterValue(FREQUENCY_END_PARAMETER));
 		// switch them, if the final frequency is before the initial frequency
 		if (freqFin < freqIni) {
@@ -463,6 +464,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		config.setTimeStart(new DateTime());
 		dataSource.setControl(playerFunctorTypeControl);
 		dataSource.setCaptureDevice(soundCaptureDevice);
+		LOGGER.fine("Setting freq ini on datasource to "+freqIni);
 		dataSource.setFreqIni(freqIni);
 		dataSource.setFreqStep(step);
 		dataSource.setPistonStart(pistonStart);

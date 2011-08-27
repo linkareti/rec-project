@@ -41,15 +41,22 @@ public class DataSource extends PullBufferDataSource {
 	public Object[] controls = new Object[0];
 
 	private FunctorDataControl functorDataControl = new FunctorDataControl();
-	
-	private static final Logger LOGGER = Logger.getLogger(DataSource.class.getName());
 
+	private static final Logger LOGGER = Logger.getLogger(DataSource.class.getName());
 
 	public DataSource() {
 	}
 
 	@Override
 	public PullBufferStream[] getStreams() {
+		LOGGER.fine("Returning streams " + (pullSourceStreams != null ? pullSourceStreams.length : 0));
+		if (pullSourceStreams != null) {
+			for (PullBufferStream pullSourceStream : pullSourceStreams) {
+				if (pullSourceStream != null) {
+					LOGGER.fine("Stream " + pullSourceStream.getClass().getName());
+				}
+			}
+		}
 		return this.pullSourceStreams;
 	}
 
@@ -164,7 +171,6 @@ public class DataSource extends PullBufferDataSource {
 
 	private class FunctionWavePullBufferStream implements PullBufferStream {
 
-
 		private ByteBuffer generatingBuffer = null;
 
 		private int sizeOfGeneratingArray;
@@ -181,7 +187,7 @@ public class DataSource extends PullBufferDataSource {
 		public FunctionWavePullBufferStream() {
 			int sampleSizeInBits = DataSource.this.audioFormat.getSampleSizeInBits();
 			sizeOfGeneratingArray = (int) (DataSource.this.sampleSizeInBytes * DataSource.this.numChannels * (int) (DataSource.this.sampleRate / 10));
-			System.out.println("Size of generating array : " + sizeOfGeneratingArray);
+			LOGGER.fine("Size of generating array : " + sizeOfGeneratingArray);
 			generatingBuffer = ByteBuffer.allocate(sizeOfGeneratingArray);
 			// The functors generate a value between -1 and 1, and this
 			// value should be multiplied by the
@@ -275,7 +281,8 @@ public class DataSource extends PullBufferDataSource {
 			synchronized (functorType) {
 				functorTypeLocal = DataSource.this.functorType;
 			}
-			LOGGER.fine(">>>>> Generating sound of type "+functorTypeLocal.getFunctionName()+" with frequency "+functorTypeLocal.getFunctorControl().getFrequency());
+			LOGGER.fine(">>>>> Generating sound of type " + functorTypeLocal.getFunctionName() + " with frequency "
+					+ functorTypeLocal.getFunctorControl().getFrequency());
 			functor = functorTypeLocal.getFunctor();
 
 			generatingBuffer.rewind();

@@ -224,6 +224,7 @@ public class ReCJMFUtils {
 							LOGGER.fine("Waiting for state " + state + " and player state is now "
 									+ player.getState());
 							waitSync.wait();
+							LOGGER.fine("State " + state + " " +(stateTransitionOK?"achieved":"NOT achieved!"));
 						}
 					} catch (Exception e) {
 						e.printStackTrace();

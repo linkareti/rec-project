@@ -156,7 +156,7 @@ public class StatsoundTableModelProxy extends com.linkare.rec.impl.client.experi
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Class getColumnClass(final int columnIndex) {
+	public Class<String> getColumnClass(final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			return null;
 		}
