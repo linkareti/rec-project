@@ -211,7 +211,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 		try {
 			// Wait for buffer to empty and generate a new with the correct
 			// frequency
-			Thread.sleep(250);
+			Thread.sleep(100);
 			// Wait for wave to play for at least a while so that we don't catch
 			// the train running
 			// Thread.sleep(soundCaptureDevice.getDeltaTime());
