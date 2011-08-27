@@ -19,7 +19,7 @@ public class SineFunctor implements Functor {
 	}
 
 	@Override
-	public synchronized double getNextValue() {
+	public double getNextValue() {
 		currentTime += this.timeDelta;
 		while (currentTime > period) {
 			currentTime -= period;
@@ -28,7 +28,7 @@ public class SineFunctor implements Functor {
 		return Math.sin(TWO_PI * frequency * currentTime);
 	}
 
-	public synchronized void setFrequency(double frequency) {
+	public void setFrequency(double frequency) {
 		this.frequency = frequency;
 		this.period = 1. / frequency;
 		currentTime = 0;

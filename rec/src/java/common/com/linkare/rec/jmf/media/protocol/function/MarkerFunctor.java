@@ -18,7 +18,7 @@ public class MarkerFunctor extends WhiteNoiseFunctor {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public synchronized double getNextValue() {
+	public double getNextValue() {
 		currentTime += getTimeDelta();
 		if (currentTime > 10) {
 			currentTime -= 10;

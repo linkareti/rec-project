@@ -17,12 +17,12 @@ public class TriangularFunctor implements Functor {
 	private double currentCenter = 0;
 
 	@Override
-	public synchronized void setTimeDelta(double seconds) {
+	public void setTimeDelta(double seconds) {
 		this.timeDelta = seconds;
 	}
 
 	@Override
-	public synchronized double getNextValue() {
+	public double getNextValue() {
 		currentTime += this.timeDelta;
 		while (currentTime > period) {
 			currentTime -= period;
@@ -43,7 +43,7 @@ public class TriangularFunctor implements Functor {
 		return currentSlope * (currentTime - currentCenter);
 	}
 
-	public synchronized void setFrequency(double frequency) {
+	public void setFrequency(double frequency) {
 		this.frequency = frequency;
 		this.period = 1. / frequency;
 		this.deltaPeriod = this.period / 4.;
