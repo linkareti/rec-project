@@ -321,18 +321,18 @@ public class ORBBean {
 		}
 	}
 
-	public Servant registerDataProducerPOAServant(final Class remoteInterface, final java.lang.Object servantDelegate,
+	public Servant registerDataProducerPOAServant(final Class<?> remoteInterface, final java.lang.Object servantDelegate,
 			final byte[] oid, final ServantManager deactivator) throws Exception {
 		synchronized (orb_synch) {
 			final String delegateInterfaceName = remoteInterface.getName() + "Operations";
-			final Class delegateInterface = Class.forName(delegateInterfaceName, false, this.getClass()
+			final Class<?> delegateInterface = Class.forName(delegateInterfaceName, false, this.getClass()
 					.getClassLoader());
 
 			final String poaTieServantClassName = remoteInterface.getName() + "POATie";
-			final Class poaTieServantClass = Class.forName(poaTieServantClassName, false, this.getClass()
+			final Class<?> poaTieServantClass = Class.forName(poaTieServantClassName, false, this.getClass()
 					.getClassLoader());
 
-			final Constructor servantCtr = poaTieServantClass
+			final Constructor<?> servantCtr = poaTieServantClass
 					.getConstructor(new Class[] { delegateInterface, POA.class });
 
 			final Servant servant = (Servant) servantCtr.newInstance(new java.lang.Object[] { servantDelegate,
@@ -344,18 +344,18 @@ public class ORBBean {
 		}
 	}
 
-	public Servant registerRootPOAServant(final Class remoteInterface, final java.lang.Object servantDelegate,
+	public Servant registerRootPOAServant(final Class<?> remoteInterface, final java.lang.Object servantDelegate,
 			final byte[] oid) throws Exception {
 		synchronized (orb_synch) {
 			final String delegateInterfaceName = remoteInterface.getName() + "Operations";
-			final Class delegateInterface = Class.forName(delegateInterfaceName, false, this.getClass()
+			final Class<?> delegateInterface = Class.forName(delegateInterfaceName, false, this.getClass()
 					.getClassLoader());
 
 			final String poaTieServantClassName = remoteInterface.getName() + "POATie";
-			final Class poaTieServantClass = Class.forName(poaTieServantClassName, false, this.getClass()
+			final Class<?> poaTieServantClass = Class.forName(poaTieServantClassName, false, this.getClass()
 					.getClassLoader());
 
-			final Constructor servantCtr = poaTieServantClass
+			final Constructor<?> servantCtr = poaTieServantClass
 					.getConstructor(new Class[] { delegateInterface, POA.class });
 
 			final Servant servant = (Servant) servantCtr.newInstance(new java.lang.Object[] { servantDelegate,
@@ -367,18 +367,18 @@ public class ORBBean {
 		}
 	}
 
-	public Servant registerAutoIdRootPOAServant(final Class remoteInterface, final java.lang.Object servantDelegate,
+	public Servant registerAutoIdRootPOAServant(final Class<?> remoteInterface, final java.lang.Object servantDelegate,
 			final ObjectID oidOut) throws Exception {
 		synchronized (orb_synch) {
 			final String delegateInterfaceName = remoteInterface.getName() + "Operations";
-			final Class delegateInterface = Class.forName(delegateInterfaceName, false, this.getClass()
+			final Class<?> delegateInterface = Class.forName(delegateInterfaceName, false, this.getClass()
 					.getClassLoader());
 
 			final String poaTieServantClassName = remoteInterface.getName() + "POATie";
-			final Class poaTieServantClass = Class.forName(poaTieServantClassName, false, this.getClass()
+			final Class<?> poaTieServantClass = Class.forName(poaTieServantClassName, false, this.getClass()
 					.getClassLoader());
 
-			final Constructor servantCtr = poaTieServantClass
+			final Constructor<?> servantCtr = poaTieServantClass
 					.getConstructor(new Class[] { delegateInterface, POA.class });
 
 			final Servant servant = (Servant) servantCtr.newInstance(new java.lang.Object[] { servantDelegate,
@@ -535,9 +535,9 @@ public class ORBBean {
 			 */
 
 			// And now for Openorb 1.4.0
-			final Class cls_clz = Thread.currentThread().getContextClassLoader()
+			final Class<?> cls_clz = Thread.currentThread().getContextClassLoader()
 					.loadClass("org.openorb.orb.corbaloc.CorbalocService");
-			final Class clsstub_clz = Thread.currentThread().getContextClassLoader()
+			final Class<?> clsstub_clz = Thread.currentThread().getContextClassLoader()
 					.loadClass("org.openorb.orb.corbaloc._CorbalocServiceStub");
 
 			/*
@@ -579,7 +579,7 @@ public class ORBBean {
 					 * "org.openorb.net.Address" );
 					 */
 
-					final Class orgOpenorbOrbNetAddressClz = Thread.currentThread().getContextClassLoader()
+					final Class<?> orgOpenorbOrbNetAddressClz = Thread.currentThread().getContextClassLoader()
 							.loadClass("org.openorb.orb.net.Address");
 
 					/*
@@ -592,7 +592,7 @@ public class ORBBean {
 					 */
 
 					// And now for Openorb 1.4.0
-					final Class orgOpenorbOrbCoreDelegateClz = Thread.currentThread().getContextClassLoader()
+					final Class<?> orgOpenorbOrbCoreDelegateClz = Thread.currentThread().getContextClassLoader()
 							.loadClass("org.openorb.orb.core.Delegate");
 
 					final Method getAddresses = orgOpenorbOrbCoreDelegateClz.getMethod("getAddresses",
@@ -631,7 +631,7 @@ public class ORBBean {
 		return result;
 	}
 
-	private java.lang.Object getStubInstance(final Class clz, final org.omg.CORBA.Object obj) {
+	private java.lang.Object getStubInstance(final Class<?> clz, final org.omg.CORBA.Object obj) {
 		java.lang.Object result = null;
 		try {
 			try {
@@ -645,7 +645,7 @@ public class ORBBean {
 				// JDK 1.3
 				// create an instance of _NamingContextStub (constructor takes
 				// Delegate)
-				final Constructor ctor = clz.getConstructor(new Class[] { Delegate.class });
+				final Constructor<?> ctor = clz.getConstructor(new Class[] { Delegate.class });
 				result = ctor.newInstance(new java.lang.Object[] { ((ObjectImpl) obj)._get_delegate() });
 			}
 		} catch (final Exception ex) {

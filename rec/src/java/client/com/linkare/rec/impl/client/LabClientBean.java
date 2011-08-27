@@ -13,7 +13,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import com.linkare.rec.acquisition.DataClient;
@@ -40,7 +39,6 @@ import com.linkare.rec.impl.client.lab.LabConnector;
 import com.linkare.rec.impl.client.lab.LabConnectorEvent;
 import com.linkare.rec.impl.client.lab.LabConnectorListener;
 import com.linkare.rec.impl.events.ChatMessageEvent;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.ORBBean;
 import com.linkare.rec.impl.utils.ObjectID;
 import com.linkare.rec.impl.wrappers.MultiCastControllerWrapper;
@@ -58,18 +56,9 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 		ExpUsersListSource {
 
 	/*
-	 * Define the Logger name for the lab
-	 */
-	private static String LAB_CLIENT_LOGGER = "ReC.LaboratoryClientBean";
-	/*
 	 * Staticaly initialize the logger for the Lab client
 	 */
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(LabClientBean.LAB_CLIENT_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER));
-		}
-	}
+	private static final Logger LOGGER = Logger.getLogger(LabClientBean.class.getName());
 
 	/*
 	 * The Executor to use when doing parallel tasks
@@ -85,7 +74,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 
 	private transient ObjectID oid = null;
 
-	public boolean connectedBefore = false;
+	private boolean connectedBefore = false;
 
 	private Collection<Apparatus> apparatusList = new ArrayList<Apparatus>();
 
@@ -127,8 +116,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 									(oid = new ObjectID())))));
 
 		} catch (final Exception e) {
-			LoggerUtil.logThrowable("Couldn't register this DataClient with ORB", e,
-					Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER));
+			LOGGER.log(Level.SEVERE, "Couldn't register this DataClient with ORB", e);
 			return null;
 		}
 
@@ -156,7 +144,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 
 	@Override
 	public void hardwareChange() {
-		Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER).log(Level.INFO, "Hardware Change information received...");
+		LOGGER.log(Level.INFO, "Hardware Change information received...");
 
 		(new Thread() {
 			@Override
@@ -173,14 +161,12 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 			final MultiCastHardware[] hardwares = mcw.enumerateHardware(getUserInfo());
 
 			if (hardwares == null) {
-				Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER).log(Level.WARNING,
+				LOGGER.log(Level.WARNING,
 						"There are no hardwares available at the Laboratory that this user may access");
 				return;
 			}
-			Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER).log(
-					Level.FINE,
-					"There are " + hardwares.length
-							+ " hardwares available at the Laboratory that this user may access");
+			LOGGER.log(Level.FINE, "There are " + hardwares.length
+					+ " hardwares available at the Laboratory that this user may access");
 
 			final ArrayList<Apparatus> apparatusListTemp = new ArrayList<Apparatus>(hardwares == null ? 0
 					: hardwares.length);
@@ -192,8 +178,8 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 					final HardwareInfo hardwareInfo = mchw.getHardwareInfo(getUserInfo());
 
 					if (hardwareInfo == null) {
-						Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER).log(Level.INFO,
-								"Can't get HardwareInfo for hardware index " + i + " of max index " + hardwares.length);
+						LOGGER.log(Level.INFO, "Can't get HardwareInfo for hardware index " + i + " of max index "
+								+ hardwares.length);
 						continue;
 					}
 
@@ -207,25 +193,23 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 				newApparatusList[i] = apparatusListTemp.get(i);
 			}
 
-			Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER).log(Level.INFO,
+			LOGGER.log(Level.INFO,
 					"Hardwares received from Multicast. New Aparatus list: " + Arrays.deepToString(newApparatusList));
 
 			apparatusList = apparatusListTemp;
 			fireApparatusListSourceListenerApparatusChanged(new ApparatusListChangeEvent(this, newApparatusList));
 
 		} catch (final NotRegistered e) {
-			e.printStackTrace();
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER));
+			LOGGER.log(Level.WARNING, e.getMessage(), e);
 			fireLabConnectorListenerLabStatusChanged(LabConnectorEvent.STATUS_NOT_REGISTERED);
-		} catch (final NotAuthorized na) {
-			na.printStackTrace();
-			LoggerUtil.logThrowable(null, na, Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER));
+		} catch (final NotAuthorized e) {
+			LOGGER.log(Level.WARNING, e.getMessage(), e);
 			fireLabConnectorListenerLabStatusChanged(LabConnectorEvent.STATUS_NOT_AUTHORIZED);
 		}
 	}
 
 	@Override
-	public void hardwareLockable(final long millisecs_to_lock_success) {
+	public void hardwareLockable(final long milliSecondsToLockSuccess) {
 		// silent noop
 	}
 
@@ -236,8 +220,8 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 
 	@Override
 	public void receiveMessage(final String clientFrom, final String clientTo, final String message) {
-		Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER).log(Level.INFO,
-				"Received a remote message: " + message + ", coming from " + clientFrom + " to->" + clientTo);
+		LOGGER.log(Level.INFO, "Received a remote message: " + message + ", coming from " + clientFrom + " to->"
+				+ clientTo);
 		fireIChatMessageListenerNewChatMessage(new ChatMessageEvent(this, new UserInfo(clientFrom), new UserInfo(
 				clientTo == ChatMessageEvent.EVERYONE_USER ? ChatMessageEvent.EVERYONE_USER_ALIAS : clientTo), message));
 	}
@@ -297,7 +281,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 			connectThread.start();
 			// connectThread.join();
 		} catch (final Exception e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER));
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -325,7 +309,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 			try {
 				final MultiCastController mcc = MultiCastControllerHelper.narrow(o);
 				if (mcc != null) {
-					System.out.println("mcw is being build with " + mcc);
+					LOGGER.info("mcw is being build with " + mcc);
 					mcw = new MultiCastControllerWrapper(mcc);
 					if (mcw.isConnected()) {
 						try {
@@ -337,7 +321,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 								return;
 							}
 							mcw.registerDataClient(_this());
-							System.out.println("Registered data client on mcw");
+							LOGGER.info("Registered data client on mcw");
 							fireLabConnectorListenerLabStatusChanged(LabConnectorEvent.STATUS_CONNECTED);
 							fireIChatMessageListenerConnectionChanged(true);
 
@@ -362,13 +346,12 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 
 							connectedBefore = true;
 						} catch (final MaximumClientsReached e) {
-							LoggerUtil.logThrowable("Error registring data client. Server maximum capacity reached.",
-									e, Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER));
+							LOGGER.log(Level.WARNING, "Error registring data client. Server maximum capacity reached.",
+									e);
 							fireLabConnectorListenerLabStatusChanged(LabConnectorEvent.STATUS_MAX_USERS);
 							fireIChatMessageListenerConnectionChanged(false);
 						} catch (final NotAuthorized e) {
-							LoggerUtil.logThrowable("Error registring data client. User not authorized.", e,
-									Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER));
+							LOGGER.log(Level.WARNING, "Error registring data client. User not authorized.", e);
 							fireLabConnectorListenerLabStatusChanged(LabConnectorEvent.STATUS_NOT_AUTHORIZED);
 							fireIChatMessageListenerConnectionChanged(false);
 						}
@@ -383,14 +366,12 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 				}
 
 			} catch (final Exception e) {
-				e.printStackTrace();
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireLabConnectorListenerLabStatusChanged(LabConnectorEvent.STATUS_UNREACHABLE);
 			}
 
 		} catch (final Exception e) {
-			e.printStackTrace();
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER));
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			fireLabConnectorListenerLabStatusChanged(LabConnectorEvent.STATUS_UNREACHABLE);
 			fireIChatMessageListenerConnectionChanged(false);
 		}
@@ -451,8 +432,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 				try {
 					((LabConnectorListener) listeners[i + 1]).labStatusChanged(new LabConnectorEvent(this, statusCode));
 				} catch (final Exception e) {
-					LoggerUtil.logThrowable("Unable to send lab status change information to listener", e,
-							Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER));
+					LOGGER.log(Level.SEVERE, "Unable to send lab status change information to listener", e);
 				}
 			}
 		}
@@ -508,8 +488,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 					((com.linkare.rec.impl.client.apparatus.ApparatusListSourceListener) listeners[i + 1])
 							.apparatusListChanged(newApparatusList);
 				} catch (final Exception e) {
-					LoggerUtil.logThrowable("Unable to inform listener of apparatus list changes!", e,
-							Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER));
+					LOGGER.log(Level.SEVERE, "Unable to inform listener of apparatus list changes!", e);
 				}
 			}
 		}
@@ -519,19 +498,19 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 	public void sendMessage(final ChatMessageEvent evt) {
 		if (mcw != null) {
 			try {
-				System.out.println("MCW is " + mcw);
-				System.out.println("getUserInfo() " + getUserInfo());
-				System.out.println("evt.getUserTo() " + evt.getUserTo());
+				LOGGER.fine("MCW is " + mcw);
+				LOGGER.fine("getUserInfo() " + getUserInfo());
+				LOGGER.fine("evt.getUserTo() " + evt.getUserTo());
 				if (evt.getUserTo() != null) {
-					System.out.println("evt.getUserTo().getUserName()" + evt.getUserTo().getUserName());
+					LOGGER.fine("evt.getUserTo().getUserName()" + evt.getUserTo().getUserName());
 				}
-				System.out.println("evt.getMessage() " + evt.getMessage());
+				LOGGER.fine("evt.getMessage() " + evt.getMessage());
 				mcw.sendMessage(getUserInfo(), evt.getUserTo().getUserName(), evt.getMessage());
 			} catch (final NotRegistered e) {
+				LOGGER.log(Level.WARNING, e.getMessage(), e);
 				fireLabConnectorListenerLabStatusChanged(LabConnectorEvent.STATUS_NOT_REGISTERED);
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER));
-			} catch (final NotAuthorized na) {
-				LoggerUtil.logThrowable(null, na, Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER));
+			} catch (final NotAuthorized e) {
+				LOGGER.log(Level.WARNING, e.getMessage(), e);
 				fireLabConnectorListenerLabStatusChanged(LabConnectorEvent.STATUS_NOT_AUTHORIZED);
 			}
 		}
@@ -548,11 +527,11 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 		try {
 			users = mcw.getClientList(getUserInfo());
 		} catch (final NotRegistered e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER));
+			LOGGER.log(Level.WARNING, e.getMessage(), e);
 			fireLabConnectorListenerLabStatusChanged(LabConnectorEvent.STATUS_NOT_REGISTERED);
 			fireIChatMessageListenerConnectionChanged(false);
-		} catch (final NotAuthorized na) {
-			LoggerUtil.logThrowable(null, na, Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER));
+		} catch (final NotAuthorized e) {
+			LOGGER.log(Level.WARNING, e.getMessage(), e);
 			fireLabConnectorListenerLabStatusChanged(LabConnectorEvent.STATUS_NOT_AUTHORIZED);
 		}
 
@@ -588,9 +567,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 		users[0] = new UserInfo(ChatMessageEvent.EVERYONE_USER_ALIAS);
 
 		if (usersObj != null) {
-			for (int i = 0; i < usersObj.length; i++) {
-				users[i + 1] = usersObj[i];
-			}
+			System.arraycopy(usersObj, 0, users, 1, usersObj.length);
 		}
 		return users;
 	}
@@ -641,8 +618,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 					((IChatMessageListener) listeners[i + 1]).connectionChanged(new ChatConnectionEvent(this,
 							isConnected));
 				} catch (final Exception e) {
-					LoggerUtil.logThrowable("Unable to deliver connection change event to listener", e,
-							Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER));
+					LOGGER.log(Level.SEVERE, "Unable to deliver connection change event to listener", e);
 				}
 
 			}
@@ -652,29 +628,6 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 		}
 
 	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param event The event to be fired
-	 */
-	// private void fireIChatMessageListenerRoomChanged(String newRoomName) {
-	// if (listenerList == null)
-	// return;
-	// Object[] listeners = listenerList.getListenerList();
-	// for (int i = listeners.length - 2; i >= 0; i -= 2) {
-	// if (listeners[i] == IChatMessageListener.class) {
-	// try {
-	// ((IChatMessageListener) listeners[i + 1]).roomChanged(new
-	// ChatRoomEvent(this, newRoomName));
-	// } catch (Exception e) {
-	// LoggerUtil.logThrowable("Unable to deliver chat room change event to listener",
-	// e, Logger
-	// .getLogger(LAB_CLIENT_LOGGER));
-	// }
-	// }
-	// }
-	// }
 
 	/**
 	 * Notifies all registered listeners about the event.
@@ -695,8 +648,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 					((IChatMessageListener) listeners[i + 1]).userListChanged(event);
 				}
 			} catch (final Exception e) {
-				LoggerUtil.logThrowable("Unable to deliver users list change event to listener", e,
-						Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, "Unable to deliver users list change event to listener", e);
 			}
 
 		}
@@ -717,8 +669,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 				try {
 					((IChatMessageListener) listeners[i + 1]).newChatMessage(evt);
 				} catch (final Exception e) {
-					LoggerUtil.logThrowable("Unable to deliver chat message to listener", e,
-							Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER));
+					LOGGER.log(Level.SEVERE, "Unable to deliver chat message to listener", e);
 				}
 			}
 		}
@@ -810,7 +761,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 					try {
 						Thread.sleep(usersListRefreshPeriod);
 					} catch (final Exception e) {
-						LoggerUtil.logThrowable(null, e, Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER));
+						LOGGER.log(Level.WARNING, e.getMessage(), e);
 						return;
 					}
 				}
@@ -824,7 +775,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 						// refreshHardwares();
 						Thread.sleep(usersListRefreshPeriod);
 					} catch (final Exception e) {
-						LoggerUtil.logThrowable(null, e, Logger.getLogger(LabClientBean.LAB_CLIENT_LOGGER));
+						LOGGER.log(Level.WARNING, e.getMessage(), e);
 						return;
 					}
 				}

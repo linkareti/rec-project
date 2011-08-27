@@ -108,7 +108,7 @@ public class MultSeriesXYInBlockDataSetProxy extends org.jfree.data.xy.AbstractX
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public Comparable getSeriesKey(final int series) {
+	public Comparable<?> getSeriesKey(final int series) {
 		if (expDataModel == null || !expDataModel.isDataAvailable() || series > (seriesCount - 1)) {
 			return null;
 		}

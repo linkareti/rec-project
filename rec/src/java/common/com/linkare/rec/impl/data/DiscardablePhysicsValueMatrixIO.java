@@ -59,7 +59,7 @@ public class DiscardablePhysicsValueMatrixIO {
 		}
 	}
 
-	public void write(final Map samples) throws IOException {
+	public void write(final Map<?, ?> samples) throws IOException {
 		ioDelegate.writeObjects(samples);
 	}
 

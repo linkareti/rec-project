@@ -28,7 +28,6 @@ package org.videolan.jvlc;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.videolan.jvlc.internal.LibVlc.LibVlcEventManager;
 import org.videolan.jvlc.internal.LibVlc.LibVlcMediaDescriptor;
 import org.videolan.jvlc.internal.LibVlc.LibVlcMediaList;
 import org.videolan.jvlc.internal.LibVlc.libvlc_exception_t;
@@ -39,7 +38,7 @@ public class MediaList {
 
 	private final LibVlcMediaList instance;
 
-	private final LibVlcEventManager eventManager;
+	//private final LibVlcEventManager eventManager;
 
 	private final List<String> items = new ArrayList<String>();
 
@@ -49,7 +48,8 @@ public class MediaList {
 		this.jvlc = jvlc;
 		final libvlc_exception_t exception = new libvlc_exception_t();
 		instance = jvlc.getLibvlc().libvlc_media_list_new(jvlc.getInstance(), exception);
-		eventManager = jvlc.getLibvlc().libvlc_media_list_event_manager(instance, exception);
+		//eventManager = jvlc.getLibvlc().libvlc_media_list_event_manager(instance, exception);
+		jvlc.getLibvlc().libvlc_media_list_event_manager(instance, exception);
 	}
 
 	/**
@@ -124,6 +124,7 @@ public class MediaList {
 
 	/**
 	 * @param mrl The media descriptor mrl.
+	 * @return if remove was successfull
 	 */
 	public boolean removeMedia(final String mrl) {
 		final int index = items.indexOf(mrl);
@@ -135,6 +136,7 @@ public class MediaList {
 
 	/**
 	 * @param mediaDescriptor The media descriptor to remove.
+	 * @return true if remove was successfull
 	 */
 	public boolean removeMedia(final MediaDescriptor mediaDescriptor) {
 		final String mrl = mediaDescriptor.getMrl();

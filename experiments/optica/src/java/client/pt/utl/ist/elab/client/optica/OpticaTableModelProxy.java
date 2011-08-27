@@ -50,7 +50,7 @@ public class OpticaTableModelProxy extends DefaultTableModel implements ExpDataM
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public Class getColumnClass(final int columnIndex) {
+	public Class<String> getColumnClass(final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			if (columnIndex == 0) {
 				return String.class;

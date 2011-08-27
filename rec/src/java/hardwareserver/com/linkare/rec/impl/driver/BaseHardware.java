@@ -12,9 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import javax.swing.JButton;
@@ -34,7 +34,6 @@ import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.events.HardwareStateChangeEvent;
 import com.linkare.rec.impl.exceptions.IncorrectStateExceptionConstants;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
@@ -50,14 +49,8 @@ import com.linkare.rec.impl.wrappers.DataProducerWrapper;
  * @author José Pedro Pereira - Linkare TI
  */
 public class BaseHardware implements HardwareOperations, BaseDataProducerListener, QueueLogger {
-	private static String BASE_HARDWARE_LOGGER = "BaseHardware.Logger";
 
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(BaseHardware.BASE_HARDWARE_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER));
-		}
-	}
+	private static final Logger LOGGER = Logger.getLogger(BaseHardware.class.getName());
 
 	private static final boolean SHOW_GUI = Boolean.parseBoolean(Defaults.defaultIfEmpty(
 			System.getProperty("ReC.Driver.ShowGUI"), "false"));
@@ -71,7 +64,8 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 	// private HardwareAcquisitionConfig config = null;
 
 	private BaseDataProducer dataProducerInEffect = null;
-	private final Vector<BaseDataProducer> oldDataProducers = new Vector<BaseDataProducer>();
+
+	private final List<BaseDataProducer> oldDataProducers = new Vector<BaseDataProducer>();
 
 	protected DataClientWrapper dataClient = null;
 
@@ -88,15 +82,14 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 
 			_this = thisRemoteObject._this();
 
-			Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER).log(Level.INFO,
-					"Registering this hardware with name " + "com/linkare/rec/hardwares/" + driver.getDriverUniqueID());
+			LOGGER.info("Registering this hardware with name " + "com/linkare/rec/hardwares/"
+					+ driver.getDriverUniqueID());
 
 			refBinder.setHardware(_this);
 
 			return _this;
 		} catch (final Exception e) {
-			LoggerUtil.logThrowable("Couldn't register BaseHardware with ORB...", e,
-					Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER));
+			LOGGER.log(Level.SEVERE, "Couldn't register BaseHardware with ORB...", e);
 			try {
 				driver.shutdown();
 			} catch (final Exception ignored) {
@@ -163,10 +156,9 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 	EventQueue eventQueue = null;
 
 	public BaseHardware() {
-		Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER).log(Level.INFO, "Instatiating the BaseHardware.");
+		LOGGER.info("Instatiating the BaseHardware.");
 
-		Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER).log(Level.INFO,
-				"Creating EventQueue for data client dispatcher.");
+		LOGGER.info("Creating EventQueue for data client dispatcher.");
 		eventQueue = new EventQueue(new BaseHardwareDataClientDispatcher(), this.getClass().getSimpleName(), this);
 
 		if (!GraphicsEnvironment.isHeadless() && BaseHardware.SHOW_GUI) {
@@ -214,8 +206,8 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 	 * 
 	 * @param driver New value of property driver.
 	 */
-	public void setDriver(final IDriver driver) {
-		Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER).log(Level.FINE, "Setting the driver for the BaseHardware.");
+	public final void setDriver(final IDriver driver) {
+		LOGGER.log(Level.FINE, "Setting the driver for the BaseHardware.");
 
 		if (this.driver != null) {
 			this.driver.removeIDriverStateListener(stateMachine);
@@ -227,8 +219,7 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 			try {
 				driver.addIDriverStateListener(stateMachine);
 			} catch (final java.util.TooManyListenersException e) {
-				LoggerUtil.logThrowable("Couldn't register IDriverStateListener with Driver...", e,
-						Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER));
+				LOGGER.log(Level.WARNING, "Couldn't register IDriverStateListener with Driver...", e);
 			}
 			readInHardwareInfo(driver.getHardwareInfo());
 			driver.init(getHardwareInfo());
@@ -241,8 +232,7 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 	}
 
 	private void startup() {
-		Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER)
-				.log(Level.INFO, "Driver started up... Register with ORB...");
+		LOGGER.info("Driver started up... Register with ORB...");
 		_this();
 	}
 
@@ -281,8 +271,7 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 				throw new RuntimeException("Not possible to read HardwareInfo");
 			}
 		} catch (final Exception e) {
-			LoggerUtil.logThrowable("Couldn't read HardwareInfo from Driver", e,
-					Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER));
+			LOGGER.log(Level.WARNING, "Couldn't read HardwareInfo from Driver", e);
 		}
 	}
 
@@ -333,14 +322,10 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 		try {
 			driver.config(config, getHardwareInfo());
 		} catch (final WrongConfigurationException e) {
-			Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER).log(Level.WARNING,
-					"Invalid configuration. Thowing the exception.", e);
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, "Invalid configuration. Thowing the exception.", e);
 			throw e;
 		} catch (final Exception e) {
-			Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER)
-					.log(Level.WARNING, "Error configuring the hardware.", e);
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, "Error configuring the hardware.", e);
 		}
 
 	}
@@ -417,7 +402,7 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 					HardwareState.STOPING);
 		}
 
-		Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER).log(Level.INFO, "Reseting Driver...");
+		LOGGER.info("Reseting Driver...");
 		try {
 			if (dataProducerInEffect != null) {
 				dataProducerInEffect.stopNow();
@@ -445,7 +430,7 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 					HardwareState.RESETING);
 		}
 
-		Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER).log(Level.INFO, "Reseting Driver...");
+		LOGGER.info("Reseting Driver...");
 		try {
 			driver.reset(getHardwareInfo());
 		} catch (final IncorrectStateException e) {
@@ -471,14 +456,13 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 			try {
 				if (o instanceof HardwareStateChangeEvent) {
 					if (dataClient != null) {
-						Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER).log(Level.FINE,
+						LOGGER.log(Level.FINE,
 								"Dispatching hardware state [" + ((HardwareStateChangeEvent) o).getNewState() + "]");
 						dataClient.hardwareStateChange(((HardwareStateChangeEvent) o).getNewState());
 					}
 				}
 			} catch (final Exception e) {
-				LoggerUtil.logThrowable("Error comunicating HardwareStateChange to dataClient", e,
-						Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER));
+				LOGGER.log(Level.WARNING, "Error comunicating HardwareStateChange to dataClient", e);
 			}
 		}
 
@@ -494,7 +478,7 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 	 */
 	@Override
 	public void log(final Level debugLevel, final String message) {
-		Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER).log(debugLevel, message);
+		LOGGER.log(debugLevel, message);
 	}
 
 	/**
@@ -502,7 +486,7 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 	 */
 	@Override
 	public void logThrowable(final String message, final Throwable t) {
-		LoggerUtil.logThrowable(message, t, Logger.getLogger(BaseHardware.BASE_HARDWARE_LOGGER));
+		LOGGER.log(Level.SEVERE, message, t);
 	}
 
 }

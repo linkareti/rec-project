@@ -169,7 +169,7 @@ public class QuantumDataProducer extends VirtualBaseDataSource implements Runnab
 		final String[] pots = strPotentials.split("#");
 		final double[][] tmpPotentials = new double[pots.length][2];
 
-		final java.util.ArrayList tmpList = new java.util.ArrayList();
+		final java.util.ArrayList<double[]> tmpList = new java.util.ArrayList();
 
 		for (int i = 0; i < pots.length; i++) {
 			final String[] potsSet = pots[i].split(":");

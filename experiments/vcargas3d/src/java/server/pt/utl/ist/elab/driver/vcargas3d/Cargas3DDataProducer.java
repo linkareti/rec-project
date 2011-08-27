@@ -11,6 +11,9 @@ package pt.utl.ist.elab.driver.vcargas3d;
  * @author  n0dP2
  */
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.opensourcephysics.displayejs.InteractiveCharge;
 
 import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
@@ -29,25 +32,25 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 	private final int NUM_CHANNELS = 2;
 
 	private VirtualBaseDriver driver = null;
-	private final java.util.ArrayList sistema;
+	private final List<InteractiveCharge> sistema;
 
 	// Aproveitamos para inicializar todas as vari�veis logo no construtor...
-	public Cargas3DDataProducer(final VirtualBaseDriver driver, final java.util.ArrayList sistema) {
+	public Cargas3DDataProducer(final VirtualBaseDriver driver, final List<InteractiveCharge> sistema) {
 		this.driver = driver;
 		this.sistema = sistema;
 	}
 
-	public Cargas3DDataProducer(final java.util.ArrayList sistema) {
+	public Cargas3DDataProducer(final List<InteractiveCharge> sistema) {
 		// panel.setPreferredMinMax(0,10,0,10, 0,10);
 		this.sistema = sistema;
 	}
 
-	// Este � o processo que nos vai simular e criar as amostras para enviar ao
+	// Este é o processo que nos vai simular e criar as amostras para enviar ao
 	// cliente!
 	private class ProducerThread extends Thread {
 
-		private final java.util.ArrayList linhas = new java.util.ArrayList();
-		private final java.util.ArrayList[][] superficies = new java.util.ArrayList[3][20];
+		private final ArrayList<ArrayList<Object>> linhas = new ArrayList<ArrayList<Object>>();
+		private final List<List<List<Float>>> superficies = new ArrayList<List<List<Float>>>(3);
 
 		private float x, y, z;
 		private float rx, ry, rz, r;
@@ -55,14 +58,14 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 		private float EF;
 		private float ExF = 0, EyF = 0, EzF = 0, E = 0;
 
-		public java.util.ArrayList calculaLinhas() {
+		public ArrayList<ArrayList<Object>> calculaLinhas() {
 			for (int i = 0; i < sistema.size(); i++) {
 				pontos(3, i);
 			}
 			return linhas;
 		}
 
-		public java.util.ArrayList[][] calculaSuperficies() {
+		public List<List<List<Float>>> calculaSuperficies() {
 			calculaSuperficiesMaxMin();
 			calculaSuperficiesFinal();
 			return superficies;
@@ -71,9 +74,12 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 		// porque 20?
 		// do espaco dividido em 50, apenas sao mais relevantes
 		// para estudo os primeiros 20
-		java.util.ArrayList listax[] = new java.util.ArrayList[20];
-		java.util.ArrayList listay[] = new java.util.ArrayList[20];
-		java.util.ArrayList listaz[] = new java.util.ArrayList[20];
+		@SuppressWarnings("unchecked")
+		List<List<Float>> listax = new ArrayList<List<Float>>(20);
+		@SuppressWarnings("unchecked")
+		List<List<Float>> listay = new ArrayList<List<Float>>(20);
+		@SuppressWarnings("unchecked")
+		List<List<Float>> listaz = new ArrayList<List<Float>>(20);
 		double EFmin, EFmax;
 		// EFmin e EFmax arredondados
 		int EFFmin, EFFmax;
@@ -89,7 +95,8 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 					for (z = 0f; z < 10; z = z + 0.1f) {
 
 						calculaCampo();
-						final int EFF = pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondarInt(EF);
+						// /final int EFF =
+						// pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondarInt(EF);
 
 						// considere-se apenas o campo dentro de certos
 						// limites na caixa
@@ -102,7 +109,7 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 							// seja
 							// para
 							// sempre
-							final InteractiveCharge carga = ((InteractiveCharge) sistema.get(i));
+							final InteractiveCharge carga = sistema.get(i);
 							if ((x < carga.getX() + 0.5 && x > carga.getX() - 0.5)
 									|| (y < carga.getY() + 0.5 && y > carga.getY() - 0.5)
 									|| (z < carga.getZ() + 0.5 && z > carga.getZ() - 0.5) || z > 8 || z < 3 || y > 8
@@ -135,9 +142,9 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 
 			// inicializem-se as listas
 			for (int i = 0; i < 20; i++) {
-				listax[i] = new java.util.ArrayList();
-				listay[i] = new java.util.ArrayList();
-				listaz[i] = new java.util.ArrayList();
+				listax.set(i, new ArrayList<Float>());
+				listay.set(i, new ArrayList<Float>());
+				listaz.set(i, new ArrayList<Float>());
 			}
 
 			for (x = 0f; x < 10; x = x + 0.1f) {
@@ -153,17 +160,17 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 							final int modulo = i * razao + EFFmin;
 							// adicione-se a lista
 							if (modulo > EFF - meio && modulo < EFF + meio && EFF < EFFmax) {
-								listax[i - 1].add(new Float(x));
-								listay[i - 1].add(new Float(y));
-								listaz[i - 1].add(new Float(z));
+								listax.get(i - 1).add(new Float(x));
+								listay.get(i - 1).add(new Float(y));
+								listaz.get(i - 1).add(new Float(z));
 							}
 						}
 					}
 				}
 			}
-			superficies[0] = listax;
-			superficies[1] = listay;
-			superficies[2] = listaz;
+			superficies.set(0, listax);
+			superficies.set(1, listay);
+			superficies.set(2, listaz);
 			// setArray();
 		}
 
@@ -177,7 +184,7 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 			E = 0;
 
 			for (int i = 0; i < sistema.size(); i++) {
-				final InteractiveCharge carga = ((InteractiveCharge) sistema.get(i));
+				final InteractiveCharge carga = sistema.get(i);
 				rx = x - (float) (carga).getX();
 				ry = y - (float) (carga).getY();
 				rz = z - (float) (carga).getZ();
@@ -198,7 +205,7 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 		}
 
 		private void pontos(final int densidade, final int nparticula) {
-			final InteractiveCharge carga = ((InteractiveCharge) sistema.get(nparticula));
+			final InteractiveCharge carga = sistema.get(nparticula);
 			final double r = 0.15;
 			double x = 0, y = 0, z = 0;
 			double x1, y1, z1;
@@ -223,8 +230,8 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 			}
 		}
 
-		private java.util.ArrayList calculaLinha(final double x0, final double y0, final double z0, final double Q) {
-			final java.util.ArrayList linha = new java.util.ArrayList();
+		private ArrayList<Object> calculaLinha(final double x0, final double y0, final double z0, final double Q) {
+			final ArrayList<Object> linha = new ArrayList<Object>();
 			if (Q < 0) {
 				linha.add("neg");
 			}
@@ -271,7 +278,7 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 
 				// se a linha for de encontro a uma carga, pare-se o calculo
 				for (int i = 0; i < sistema.size(); i++) {
-					final InteractiveCharge carga = ((InteractiveCharge) sistema.get(i));
+					final InteractiveCharge carga = sistema.get(i);
 					if ((x < carga.getX() + 0.15 && x > carga.getX() - 0.15)
 							&& (y < carga.getY() + 0.15 && y > carga.getY() - 0.15)
 							&& (z < carga.getZ() + 0.15 && z > carga.getZ() - 0.15)) {
@@ -285,7 +292,7 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 
 		@Override
 		public void run() {
-			// java.util.ArrayList sup20=new java.util.ArrayList();
+			// ArrayList sup20=new ArrayList();
 			// toPanelSuperficies(calculaSuperficies(),sup20);
 			// panel.addDrawable((org.opensourcephysics.displayejs.InteractivePoints)(sup20.get(10)));
 			// panel.repaint();

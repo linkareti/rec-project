@@ -43,7 +43,7 @@ public class DefaultTableModelProxy extends javax.swing.table.DefaultTableModel 
 	 * @return the common ancestor class of the object values in the model.
 	 */
 	@Override
-	public Class getColumnClass(final int columnIndex) {
+	public Class<String> getColumnClass(final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			if (columnIndex == 0) {
 				return String.class;

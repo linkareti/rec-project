@@ -329,7 +329,7 @@ public class ConfIVPWM extends javax.swing.JDialog {
 			boolean[] canEdit = new boolean[] { false, false, false };
 
 			@Override
-			public Class getColumnClass(final int c) {
+			public Class<? extends Object> getColumnClass(final int c) {
 				return getValueAt(0, c).getClass();
 			}
 

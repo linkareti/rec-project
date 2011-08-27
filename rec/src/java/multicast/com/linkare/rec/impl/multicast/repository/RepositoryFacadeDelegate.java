@@ -50,7 +50,7 @@ public final class RepositoryFacadeDelegate {
 		try {
 
 			if (oid == null) {
-				throw new NullPointerException("oid cannot be null");
+				throw new RepositoryException("oid cannot be null");
 			}
 
 			return DTOMapperUtils.mapToRecMultiCastDataProducer(repositoryFacade.getExperimentResultByOID(oid));

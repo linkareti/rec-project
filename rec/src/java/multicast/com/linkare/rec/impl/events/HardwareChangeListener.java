@@ -11,7 +11,11 @@ package com.linkare.rec.impl.events;
  * @author José Pedro Pereira - Linkare TI
  */
 public interface HardwareChangeListener {
-	/** handler for new Hardwares available on the system... */
+	/**
+	 * handler for new Hardwares available on the system...
+	 * 
+	 * @param evt
+	 */
 	public void hardwareAdded(HardwareAddEvt evt);
 
 	/** handler for Hardwares removed from the system... */

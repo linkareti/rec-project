@@ -279,7 +279,7 @@ public class DataClientForQueue implements QueueLogger {
 					// aqui o evento de HardwareLock que esta na Queue e
 					// desmultiplicado
 					// para true CORBA way
-					dcw.hardwareLockable(evt.getMilliseconds_to_lock_success());
+					dcw.hardwareLockable(evt.getMillisecondsToLockSuccess());
 					// para alem disso, o proprio evento tem consigo
 					// um Thread para fazer o countDown...
 					evt.startCountDown();

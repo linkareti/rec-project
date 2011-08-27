@@ -15,6 +15,7 @@ package pt.utl.ist.elab.client.vmm;
  *
  */
 
+import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
@@ -34,25 +35,25 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	public MMCustomizer() {
 		initComponents();
 		// Maneira classica de alterar os labels do slider
-		final java.util.Hashtable htK = new java.util.Hashtable(10);
+		final java.util.Hashtable<Integer, JLabel> htK = new java.util.Hashtable(10);
 		for (int i = 0; i < 21; i += 2) {
 			htK.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
 		}
 		jSliderK.setLabelTable(htK);
 
-		final java.util.Hashtable htM = new java.util.Hashtable(20);
+		final java.util.Hashtable<Integer, JLabel> htM = new java.util.Hashtable(20);
 		for (int i = 0; i < 51; i += 5) {
 			htM.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
 		}
 		jSliderM.setLabelTable(htM);
 
-		final java.util.Hashtable htFric = new java.util.Hashtable(10);
+		final java.util.Hashtable<Integer, JLabel> htFric = new java.util.Hashtable(10);
 		for (int i = 0; i < 11; i++) {
 			htFric.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
 		}
 		jSliderFric.setLabelTable(htFric);
 
-		final java.util.Hashtable htX0 = new java.util.Hashtable(10);
+		final java.util.Hashtable<Integer, JLabel> htX0 = new java.util.Hashtable(10);
 		for (int i = -20; i < 21; i += 5) {
 			htX0.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
 		}

@@ -27,8 +27,8 @@ public class StampTranslatorProcessorManager {
 		}
 	}
 
-	private static Hashtable translators = new Hashtable(5);
-	private static Hashtable processors = new Hashtable(5);
+	private static Hashtable<String, StampTranslator> translators = new Hashtable<String, StampTranslator>(5);
+	private static Hashtable<String, StampProcessor> processors = new Hashtable<String, StampProcessor>(5);
 
 	/** Creates a new instance of SerialPortTranslatorManager */
 	private StampTranslatorProcessorManager() {
@@ -68,7 +68,7 @@ public class StampTranslatorProcessorManager {
 
 	public static void initStampProcessorTranslator(final String className) {
 		try {
-			final Class c = Class.forName(className);
+			final Class<?> c = Class.forName(className);
 			c.newInstance();
 		} catch (final Exception e) {
 			LoggerUtil.logThrowable("Unable to load class:" + className, e,
@@ -79,7 +79,7 @@ public class StampTranslatorProcessorManager {
 	public static void initStampProcessorsTranslators(final String[] classNames) {
 		for (final String className : classNames) {
 			try {
-				final Class c = Class.forName(className);
+				final Class<?> c = Class.forName(className);
 				c.newInstance();
 			} catch (final Exception e) {
 				LoggerUtil.logThrowable("Unable to load class:" + className, e,

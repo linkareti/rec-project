@@ -161,7 +161,7 @@ public class DefaultHistogramDatasetProxy extends org.jfree.data.xy.AbstractInte
 	 * @return the name of the series.
 	 */
 	@Override
-	public Comparable getSeriesKey(final int series) {
+	public Comparable<?> getSeriesKey(final int series) {
 		if (oCountHits == null) {
 			return null;
 		}

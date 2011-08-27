@@ -48,7 +48,7 @@ public class DigitalTableModelProxy extends javax.swing.table.DefaultTableModel 
 	 * @return the common ancestor class of the object values in the model.
 	 */
 	@Override
-	public Class getColumnClass(final int columnIndex) {
+	public Class<?> getColumnClass(final int columnIndex) {
 		if (columnIndex > 0) {
 			return Integer.class;
 		} else {

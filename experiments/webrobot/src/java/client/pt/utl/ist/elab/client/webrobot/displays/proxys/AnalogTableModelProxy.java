@@ -48,7 +48,7 @@ public class AnalogTableModelProxy extends javax.swing.table.DefaultTableModel i
 	 * @return the common ancestor class of the object values in the model.
 	 */
 	@Override
-	public Class getColumnClass(final int columnIndex) {
+	public Class<?> getColumnClass(final int columnIndex) {
 		if (columnIndex > 0) {
 			return Integer.class;
 		} else {

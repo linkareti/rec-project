@@ -19,7 +19,7 @@ import com.linkare.rec.impl.utils.SerializationHelper;
  */
 public class FSRepository implements IRepository {
 
-	private static final String baseDir = new StringBuilder(System.getProperty("user.dir")).append(File.separator)
+	private static final String BASE_DIR = new StringBuilder(System.getProperty("user.dir")).append(File.separator)
 			.append("DataProducers").toString();
 
 	/**
@@ -68,7 +68,7 @@ public class FSRepository implements IRepository {
 
 		private FSInformation(final String filename) {
 			final int barPos = filename.lastIndexOf(File.separator);
-			this.dir = new StringBuilder(baseDir).append(File.separator).append(filename.substring(0, barPos))
+			this.dir = new StringBuilder(BASE_DIR).append(File.separator).append(filename.substring(0, barPos))
 					.toString();
 			this.filename = filename.substring(barPos + 1);
 		}

@@ -997,7 +997,8 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 
 	private void kdTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_kdTextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(kdTextField, kdSlider, 1);
+			// final double val =
+			GUtils.validateInput(kdTextField, kdSlider, 1);
 		} catch (final NumberFormatException e) {
 			kdTextField.setText(Integer.toString(kdSlider.getValue()));
 		}
@@ -1005,7 +1006,8 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 
 	private void kiTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_kiTextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(kiTextField, kiSlider, 1);
+			// final double val =
+			GUtils.validateInput(kiTextField, kiSlider, 1);
 		} catch (final NumberFormatException e) {
 			kiTextField.setText(Integer.toString(kiSlider.getValue()));
 		}
@@ -1013,7 +1015,8 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 
 	private void kpTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_kpTextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(kpTextField, kpSlider, 1);
+			// final double val =
+			GUtils.validateInput(kpTextField, kpSlider, 1);
 		} catch (final NumberFormatException e) {
 			kpTextField.setText(Integer.toString(kpSlider.getValue()));
 		}
@@ -1047,10 +1050,6 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 			editTextField.setText(Integer.toString(editSlider.getValue()));
 		}
 	}// GEN-LAST:event_editTextFieldFocusLost
-
-	private void formWindowClosing(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowClosing
-		System.exit(0);// A FORM PASSOU-SE
-	}// GEN-LAST:event_formWindowClosing
 
 	private void sucAngleSliderMouseDragged(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_sucAngleSliderMouseDragged
 		cartPole.setSuccessAngle(Math.toRadians(sucAngleSlider.getValue()));
@@ -1120,8 +1119,8 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		final double xMax = (double) xMaxSlider.getValue() / 100d;
 
 		final double action = cartPole.getAction() / 10d;
-		final int tbs = tbsSlider.getValue();
-		final int nSamples = samplesSlider.getValue();
+		// final int tbs = tbsSlider.getValue();
+		// final int nSamples = samplesSlider.getValue();
 
 		final int kp = kpSlider.getValue();
 		final int ki = kiSlider.getValue();
@@ -1181,7 +1180,8 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 
 	private void dragPoleTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_dragPoleTextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(dragPoleTextField, dragPoleSlider, 1);
+			// final double val =
+			GUtils.validateInput(dragPoleTextField, dragPoleSlider, 1);
 		} catch (final NumberFormatException e) {
 			dragPoleTextField.setText(Integer.toString(dragPoleSlider.getValue()));
 		}
@@ -1193,7 +1193,8 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 
 	private void dragCartTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_dragCartTextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(dragCartTextField, dragCartSlider, 1);
+			// final double val =
+			GUtils.validateInput(dragCartTextField, dragCartSlider, 1);
 		} catch (final NumberFormatException e) {
 			dragCartTextField.setText(Integer.toString(dragCartSlider.getValue()));
 		}
@@ -1205,7 +1206,8 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 
 	private void samplesTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_samplesTextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(samplesTextField, samplesSlider, 1);
+			// final double val =
+			GUtils.validateInput(samplesTextField, samplesSlider, 1);
 		} catch (final NumberFormatException e) {
 			samplesTextField.setText(Integer.toString(samplesSlider.getValue()));
 		}
@@ -1217,7 +1219,8 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 
 	private void tbsTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_tbsTextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(tbsTextField, tbsSlider, 1);
+			// final double val =
+			GUtils.validateInput(tbsTextField, tbsSlider, 1);
 		} catch (final NumberFormatException e) {
 			tbsTextField.setText(Integer.toString(tbsSlider.getValue()));
 		}
@@ -1229,7 +1232,8 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 
 	private void gTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_gTextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(gTextField, gSlider, 1);
+			// final double val =
+			GUtils.validateInput(gTextField, gSlider, 1);
 		} catch (final NumberFormatException e) {
 			gTextField.setText(Integer.toString(gSlider.getValue()));
 		}
@@ -1302,7 +1306,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		test.addWindowListener(new java.awt.event.WindowAdapter() {
 			public void windowClosing(final java.awt.event.WindowEvent e) {
 				System.exit(0);
-			};
+			}
 		});
 		test.getContentPane().add(new CartPoleCustomizer());
 		test.pack();

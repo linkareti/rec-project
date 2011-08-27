@@ -77,13 +77,14 @@ public class MultSeriesXYExperimentGraphExtended extends javax.swing.JPanel impl
 	private MultSeriesXYDataSetProxyExtended defaultXYDatasetProxy;
 	private javax.swing.JScrollPane scrollPane;
 	private javax.swing.JLabel labelWaitData;
+
 	// End of variables declaration
 
-	/** Holds value of property channelX. */
-	private int channelX;
+	/* Holds value of property channelX. */
+	// private int channelX;
 
-	/** Holds value of property channelY. */
-	private int channelY;
+	/* Holds value of property channelY. */
+	// private int channelY;
 
 	@Override
 	public javax.swing.JComponent getDisplay() {
@@ -220,7 +221,7 @@ public class MultSeriesXYExperimentGraphExtended extends javax.swing.JPanel impl
 	 * }
 	 */
 
-	private final boolean isScaleSet = false;
+	// private final boolean isScaleSet = false;
 
 	private JFreeChart chart = null;
 
@@ -269,7 +270,8 @@ public class MultSeriesXYExperimentGraphExtended extends javax.swing.JPanel impl
 	/**
 	 * Setter for property channelDisplayY.
 	 * 
-	 * @param channelDisplayY New value of property channelDisplayY.
+	 * @param channel New value of property channel.
+	 * @return
 	 */
 	public int getChannelDisplayAtYArray(final int channel) {
 		return defaultXYDatasetProxy.getChannelDisplayAtYArray(channel);
@@ -278,37 +280,41 @@ public class MultSeriesXYExperimentGraphExtended extends javax.swing.JPanel impl
 	/**
 	 * Setter for property channelDisplayY.
 	 * 
-	 * @param channelDisplayY New value of property channelDisplayY.
+	 * @return
 	 */
 	public int[] getChannelDisplayYArray() {
 		return defaultXYDatasetProxy.getChannelDisplayYArray();
 	}
 
 	/**
-	 * Setter for property channelDisplayY.
+	 * Getter for property channelDisplayY.
 	 * 
-	 * @param channelDisplayY New value of property channelDisplayY.
+	 * @param channelDisplayYArray New value of property channelDisplayYArray.
 	 */
 	public void setChannelDisplayYArray(final int[] channelDisplayYArray) {
 		defaultXYDatasetProxy.setChannelDisplayYArray(channelDisplayYArray);
 	}
 
-	/** Deprecated!! Use getUpdateFrequency */
-	public int getUpdatePercentage() {
-		return getUpdateFrequency();
-	}
+	/* Deprecated!! Use getUpdateFrequency */
+	// public int getUpdatePercentage() {
+	// return getUpdateFrequency();
+	// }
 
-	/** Deprecated!! Use setUpdateFrequency */
-	public void setUpdatePercentage(final int updatePercentage) {
-		// this.updatePercentage = updatePercentage;
-		setUpdateFrequency(updatePercentage);
-	}
+	/* Deprecated!! Use setUpdateFrequency */
+	// public void setUpdatePercentage(final int updatePercentage) {
+	// // this.updatePercentage = updatePercentage;
+	// setUpdateFrequency(updatePercentage);
+	// }
 
 	public int getUpdateFrequency() {
 		return defaultXYDatasetProxy.getUpdateFrequency();
 	}
 
-	/** Update from updateFrequency to updateFrequency points */
+	/**
+	 * Update from updateFrequency to updateFrequency points
+	 * 
+	 * @param updateFrequency
+	 */
 	public void setUpdateFrequency(final int updateFrequency) {
 		defaultXYDatasetProxy.setUpdateFrequency(updateFrequency);
 	}

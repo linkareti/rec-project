@@ -57,7 +57,7 @@ public class VariablePanel extends JPanel {
 		slider = new JSlider(SwingConstants.HORIZONTAL, sliderMin, sliderMax, sliderInit);
 
 		// Hashtables para os sliders
-		final Hashtable labelTable = new Hashtable();
+		final Hashtable<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
 		labelTable.put(new Integer(sliderMin), new JLabel("" + min));
 		labelTable.put(new Integer((sliderMin + sliderMax) / 2),
 				new JLabel("" + arredondar((min + max) / 2.0, multiplier)));

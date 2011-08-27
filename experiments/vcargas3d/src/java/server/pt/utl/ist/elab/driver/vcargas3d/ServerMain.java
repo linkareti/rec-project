@@ -36,7 +36,8 @@ public class ServerMain {
 		try {
 			ORBBean.getORBBean();
 
-			final BaseHardware baseHardware = new BaseHardware(new Cargas3DDriver());
+			// final BaseHardware baseHardware =
+			new BaseHardware(new Cargas3DDriver());
 
 			Thread.currentThread().join();
 

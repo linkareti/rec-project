@@ -26,14 +26,13 @@
 package org.videolan.jvlc;
 
 import org.videolan.jvlc.internal.LibVlc;
-import org.videolan.jvlc.internal.LibVlc.LibVlcEventManager;
 import org.videolan.jvlc.internal.LibVlc.LibVlcMediaDescriptor;
 import org.videolan.jvlc.internal.LibVlc.libvlc_exception_t;
 
 public class MediaDescriptor {
 	private final LibVlcMediaDescriptor instance;
 	private final LibVlc libvlc;
-	private final LibVlcEventManager eventManager;
+	//private final LibVlcEventManager eventManager;
 	private boolean released;
 
 	/**
@@ -44,14 +43,16 @@ public class MediaDescriptor {
 		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc = jvlc.getLibvlc();
 		instance = libvlc.libvlc_media_new(jvlc.getInstance(), media, exception);
-		eventManager = libvlc.libvlc_media_event_manager(instance, exception);
+		//eventManager = libvlc.libvlc_media_event_manager(instance, exception);
+		libvlc.libvlc_media_event_manager(instance, exception);
 	}
 
 	MediaDescriptor(final JVLC jvlc, final LibVlcMediaDescriptor instance) {
 		final libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc = jvlc.getLibvlc();
 		this.instance = instance;
-		eventManager = libvlc.libvlc_media_event_manager(instance, exception);
+		//eventManager = libvlc.libvlc_media_event_manager(instance, exception);
+		libvlc.libvlc_media_event_manager(instance, exception);
 	}
 
 	public void addOption(final String option) {

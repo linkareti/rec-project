@@ -375,7 +375,7 @@ public class Display extends DisplayNode implements com.linkare.rec.impl.baseUI.
 
 	// Put all child beans into the beans list.
 	@Override
-	public void childBeans(final boolean recursive, final List beans) {
+	public void childBeans(final boolean recursive, final List<CommonBean> beans) {
 	}
 
 	@Override

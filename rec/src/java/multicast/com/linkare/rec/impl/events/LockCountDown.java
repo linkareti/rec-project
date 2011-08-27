@@ -12,6 +12,6 @@ package com.linkare.rec.impl.events;
  */
 public interface LockCountDown {
 
-	public void startCountDown(long milliseconds_to_lock_success);
+	public void startCountDown(long milliSecondsToLockSuccess);
 
 }

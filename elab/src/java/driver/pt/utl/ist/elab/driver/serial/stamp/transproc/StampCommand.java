@@ -16,7 +16,7 @@ public class StampCommand implements java.io.Serializable {
 	static final long serialVersionUID = -2953294044465039790L;
 	private String commandIdentifier = null;
 	private String command = null;
-	private HashMap commandDataMap = null;
+	private HashMap<Object, Object> commandDataMap = null;
 	private boolean isData = false;
 
 	/** Creates a new instance of SerialPortCommand */
@@ -42,7 +42,7 @@ public class StampCommand implements java.io.Serializable {
 
 	public void addCommandData(final Object commandDataKey, final Object commandDataObject) {
 		if (commandDataMap == null) {
-			commandDataMap = new HashMap(1);
+			commandDataMap = new HashMap<Object, Object>(1);
 		}
 
 		if (commandDataMap.containsKey(commandDataKey)) {

@@ -257,9 +257,9 @@ public class StampFinder {
 	}
 
 	public void startSearch() {
-		final Enumeration commPortIdentifiers = gnu.io.CommPortIdentifier.getPortIdentifiers();
+		final Enumeration<?> commPortIdentifiers = gnu.io.CommPortIdentifier.getPortIdentifiers();
 
-		final LinkedList tempPorts = new LinkedList();
+		final LinkedList<CommPortIdentifier> tempPorts = new LinkedList<CommPortIdentifier>();
 
 		Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO,
 				"Are there COMM Ports on the System? " + commPortIdentifiers.hasMoreElements());

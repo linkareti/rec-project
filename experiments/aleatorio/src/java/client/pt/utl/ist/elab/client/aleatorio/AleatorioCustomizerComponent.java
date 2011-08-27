@@ -86,7 +86,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		numberOfSamplesSlider.setValue(5);
 		numberOfSamplesSlider.setName("numberOfSamplesSlider");
 		// Cria a tabela com as labels para a barra do numberOfSamples
-		final java.util.Hashtable hSamples = new java.util.Hashtable();
+		final java.util.Hashtable<Integer, JLabel> hSamples = new java.util.Hashtable();
 		hSamples.put(new Integer(1), new javax.swing.JLabel("1"));
 		hSamples.put(new Integer(5), new javax.swing.JLabel("5"));
 		hSamples.put(new Integer(10), new javax.swing.JLabel("10"));

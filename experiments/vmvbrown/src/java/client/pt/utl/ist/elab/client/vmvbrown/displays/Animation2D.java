@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
@@ -91,8 +92,8 @@ public class Animation2D extends DrawingPanel implements Drawable, ActionListene
 		repaint();
 	}
 
-	private final boolean isMedVisible = true;
-	private final boolean isVisible = true;
+	private boolean isMedVisible = true;
+	private boolean isVisible = true;
 	private int numPart;
 	private double[][] state;
 
@@ -124,7 +125,8 @@ public class Animation2D extends DrawingPanel implements Drawable, ActionListene
 				topGutter = bottomGutter = Math.max(0, getHeight() - interiorDimension.height) / 2;
 			}
 		}
-		final java.util.ArrayList tempList = getDrawables();
+		@SuppressWarnings("unchecked")
+		final ArrayList<Drawable> tempList = getDrawables();
 		scale(tempList);
 		setPixelScale();
 		g.setColor(getBackground());

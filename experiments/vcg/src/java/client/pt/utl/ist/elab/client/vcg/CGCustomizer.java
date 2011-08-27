@@ -15,6 +15,8 @@ package pt.utl.ist.elab.client.vcg;
  * angInit -> graus
  *
  */
+import javax.swing.JLabel;
+
 import org.opensourcephysics.display.Circle;
 import org.opensourcephysics.display.DrawingPanel;
 import org.opensourcephysics.display.axes.XAxis;
@@ -74,7 +76,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		gridBagConstraints.weighty = 0;
 		add(reg, gridBagConstraints);
 
-		final java.util.Hashtable htK = new java.util.Hashtable(9);
+		final java.util.Hashtable<Integer, JLabel> htK = new java.util.Hashtable(9);
 		htK.put(new Integer(-89), new javax.swing.JLabel("" + (-89)));
 		for (int i = -70; i <= 70; i += 20) {
 			htK.put(new Integer(i), new javax.swing.JLabel("" + i));

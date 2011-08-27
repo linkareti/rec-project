@@ -8,6 +8,7 @@ package pt.utl.ist.elab.client.planck;
 
 import java.awt.event.ItemEvent;
 
+import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
@@ -30,7 +31,7 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 	/** Creates new form RadioactividadeCustomizer */
 	public PlanckCustomizer() {
 		initComponents();
-		final java.util.Hashtable ht = new java.util.Hashtable(10);
+		final java.util.Hashtable<Integer, JLabel> ht = new java.util.Hashtable(10);
 		ht.put(new Integer(120), new javax.swing.JLabel("" + 12));
 		ht.put(new Integer(130), new javax.swing.JLabel("" + 13));
 		ht.put(new Integer(140), new javax.swing.JLabel("" + 14));

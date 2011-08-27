@@ -1,7 +1,6 @@
 package com.linkare.rec.impl.driver;
 
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import javax.swing.event.EventListenerList;
@@ -26,7 +25,6 @@ import com.linkare.rec.impl.data.SamplesSourcePacketizer;
 import com.linkare.rec.impl.events.DataProducerStateChangeEvent;
 import com.linkare.rec.impl.exceptions.NotAnAvailableSamplesPacketExceptionConstants;
 import com.linkare.rec.impl.exceptions.NotAvailableExceptionConstants;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
 import com.linkare.rec.impl.utils.ORBBean;
@@ -35,22 +33,15 @@ import com.linkare.rec.impl.wrappers.DataReceiverWrapper;
 
 public class BaseDataProducer implements DataProducerOperations, QueueLogger {
 	private DataProducerState dataProducerState = DataProducerState.DP_WAITING;
-	private static String BASE_DATAPRODUCER_LOGGER = "BaseDataProducer.Logger";
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER));
-		}
-	}
+	private static final Logger LOGGER = Logger.getLogger(BaseDataProducer.class.getName());
 
 	// private transient BaseHardware hardware=null;
 	private transient IDataSource dataSource = null;
 	private transient boolean dataSourceInitiated = false;
 	private transient DataReceiverWrapper dataReceiver = null;
 	private transient DataProducer _this = null;
-	public SamplesSourcePacketizer packetizer = null;
-	public EventQueue eventQueueDataReceiver = null;
+	private SamplesSourcePacketizer packetizer = null;
+	private EventQueue eventQueueDataReceiver = null;
 
 	// private helper methods
 	public DataProducer _this() {
@@ -59,17 +50,14 @@ public class BaseDataProducer implements DataProducerOperations, QueueLogger {
 		}
 
 		try {
-			Servant registeredServant = ORBBean.getORBBean().registerAutoIdRootPOAServant(DataProducer.class, this, null);
-			org.omg.CORBA.Object thisReference = ORBBean
-					.getORBBean()
-					.getAutoIdRootPOA()
-					.servant_to_reference(
-							registeredServant);
+			Servant registeredServant = ORBBean.getORBBean().registerAutoIdRootPOAServant(DataProducer.class, this,
+					null);
+			org.omg.CORBA.Object thisReference = ORBBean.getORBBean().getAutoIdRootPOA()
+					.servant_to_reference(registeredServant);
 			_this = DataProducerHelper.narrow(thisReference);
 			return _this;
 		} catch (final Exception e) {
-			LoggerUtil.logThrowable("Couldn't Register this BaseDataProducer with ORB", e,
-					Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER));
+			LOGGER.log(Level.WARNING, "Couldn't Register this BaseDataProducer with ORB", e);
 			return null;
 		}
 
@@ -95,8 +83,7 @@ public class BaseDataProducer implements DataProducerOperations, QueueLogger {
 		try {
 			registerDataReceiver(dataReceiver);
 		} catch (final MaximumClientsReached e) {
-			LoggerUtil.logThrowable("Unable to register DataReceiver with this BaseDataProducer", e,
-					Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER));
+			LOGGER.log(Level.WARNING, "Unable to register DataReceiver with this BaseDataProducer", e);
 		}
 	}
 
@@ -111,30 +98,30 @@ public class BaseDataProducer implements DataProducerOperations, QueueLogger {
 
 	private class DataProducerEventsDispatcher implements EventQueueDispatcher {
 
+		/**
+		 * 
+		 */
+
 		@Override
 		public void dispatchEvent(final Object o) {
 			if (o instanceof SamplesPacketSourceEvent) {
 				final int num_packet = ((SamplesPacketSourceEvent) o).getPacketLargestIndex();
 				if (dataReceiver != null) {
 					try {
-						Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER).log(Level.INFO,
-								"New data packet available : " + num_packet);
+						LOGGER.log(Level.INFO, "New data packet available : " + num_packet);
 						dataReceiver.newSamples(num_packet);
 					} catch (final Exception e) {
-						LoggerUtil.logThrowable("Exception informing DataReceiver of new samples " + num_packet, e,
-								Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER));
+						LOGGER.log(Level.WARNING, "Exception informing DataReceiver of new samples " + num_packet, e);
 					}
 				}
 			} else if (o instanceof DataProducerStateChangeEvent) {
 				if (dataReceiver != null) {
 					final DataProducerStateChangeEvent event = (DataProducerStateChangeEvent) o;
 					try {
-						Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER).log(Level.INFO,
-								"Data Producer is:" + event.getDataProducerState());
+						LOGGER.log(Level.INFO, "Data Producer is:" + event.getDataProducerState());
 						dataReceiver.stateChanged(event.getDataProducerState());
 					} catch (final Exception e) {
-						LoggerUtil.logThrowable("Exception informing DataReceiver of data Producer stoped!", e,
-								Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER));
+						LOGGER.log(Level.WARNING, "Exception informing DataReceiver of data Producer stoped!", e);
 					}
 				}
 			}
@@ -151,15 +138,13 @@ public class BaseDataProducer implements DataProducerOperations, QueueLogger {
 	private EventListenerList listenerList = null;
 
 	private void fireNewSamples(final SamplesPacketSourceEvent evt) {
-		Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER).log(Level.INFO,
-				"New packet available : " + evt.getPacketLargestIndex());
+		LOGGER.fine("New packet available : " + evt.getPacketLargestIndex());
 		setDataProducerState(DataProducerState.DP_STARTED);
 		eventQueueDataReceiver.addEvent(evt);
 	}
 
 	private void fireStateChanged() {
-		Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER).log(Level.INFO,
-				"Producer is now :" + getDataProducerState());
+		LOGGER.fine("Producer is now :" + getDataProducerState());
 		eventQueueDataReceiver.addEvent(new DataProducerStateChangeEvent(getDataProducerState()));
 	}
 
@@ -345,7 +330,7 @@ public class BaseDataProducer implements DataProducerOperations, QueueLogger {
 	 */
 	@Override
 	public void log(final Level debugLevel, final String message) {
-		Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER).log(debugLevel, message);
+		LOGGER.log(debugLevel, message);
 	}
 
 	/**
@@ -353,7 +338,7 @@ public class BaseDataProducer implements DataProducerOperations, QueueLogger {
 	 */
 	@Override
 	public void logThrowable(final String message, final Throwable t) {
-		LoggerUtil.logThrowable(message, t, Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER));
+		LOGGER.log(Level.SEVERE, message, t);
 	}
 
 }

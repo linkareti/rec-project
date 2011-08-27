@@ -19,7 +19,7 @@ public class CypressCommand implements java.io.Serializable {
 	private static final long serialVersionUID = -3655605015145642602L;
 	private String commandIdentifier = null;
 	private String command = null;
-	private HashMap commandDataMap = null;
+	private HashMap<Object, Object> commandDataMap = null;
 	private boolean isData = false;
 
 	/** Creates a new instance of SerialPortCommand */
@@ -45,7 +45,7 @@ public class CypressCommand implements java.io.Serializable {
 
 	public void addCommandData(final Object commandDataKey, final Object commandDataObject) {
 		if (commandDataMap == null) {
-			commandDataMap = new HashMap(1);
+			commandDataMap = new HashMap<Object, Object>(1);
 		}
 
 		if (commandDataMap.containsKey(commandDataKey)) {

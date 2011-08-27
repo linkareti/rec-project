@@ -46,7 +46,7 @@ public class PinHoleTableModelProxy extends DefaultTableModel implements ExpData
 	 * @return the common ancestor class of the object values in the model.
 	 */
 	@SuppressWarnings("unchecked")
-	public Class getColumnClass(int columnIndex) {
+	public Class<String> getColumnClass(int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			if (columnIndex == 0)
 				return String.class;

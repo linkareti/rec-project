@@ -256,7 +256,7 @@ public class Animation extends CartPole implements ExpDataDisplay, ExpDataModelL
 		tempDialog.setLocation((int) ((screenSize.width - tempSize.getWidth()) / 2d),
 				(int) ((screenSize.height - tempSize.getHeight()) / 2d));
 
-		tempDialog.show();
+		tempDialog.setVisible(true);
 	}
 
 	public void pause() {

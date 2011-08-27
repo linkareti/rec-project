@@ -15,30 +15,36 @@ import com.linkare.rec.impl.threading.util.EnumPriority;
  */
 public class HardwareLockEvent implements Prioritazible {
 
-	/** Holds value of property milliseconds_to_lock_success. */
-	private final long milliseconds_to_lock_success;
+	/** Holds value of property millisecondsToLockSuccess. */
+	private final long millisecondsToLockSuccess;
 	private LockCountDown counter = null;
 	private DataClientForQueue lockerClient = null;
 
-	/** Creates a new instance of HardwareLockEvent */
-	public HardwareLockEvent(final LockCountDown counter, final long milliseconds_to_lock_success,
+	/**
+	 * Creates a new instance of HardwareLockEvent
+	 * 
+	 * @param counter
+	 * @param millisecondsToLockSuccess
+	 * @param lockerClient
+	 */
+	public HardwareLockEvent(final LockCountDown counter, final long millisecondsToLockSuccess,
 			final DataClientForQueue lockerClient) {
 		this.counter = counter;
-		this.milliseconds_to_lock_success = milliseconds_to_lock_success;
+		this.millisecondsToLockSuccess = millisecondsToLockSuccess;
 		this.lockerClient = lockerClient;
 	}
 
 	/**
-	 * Getter for property milliseconds_to_lock_success.
+	 * Getter for property millisecondsToLockSuccess.
 	 * 
-	 * @return Value of property milliseconds_to_lock_success.
+	 * @return Value of property millisecondsToLockSuccess.
 	 */
-	public long getMilliseconds_to_lock_success() {
-		return milliseconds_to_lock_success;
+	public long getMillisecondsToLockSuccess() {
+		return millisecondsToLockSuccess;
 	}
 
 	public void startCountDown() {
-		counter.startCountDown(milliseconds_to_lock_success);
+		counter.startCountDown(millisecondsToLockSuccess);
 	}
 
 	public DataClientForQueue getLockerClient() {

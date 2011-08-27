@@ -8,6 +8,7 @@ package pt.utl.ist.elab.driver.vcargas3d;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.opensourcephysics.displayejs.InteractiveCharge;
 
@@ -35,19 +36,20 @@ public class Sistema {
 	// dummy.show();
 	// }
 
-	public static ArrayList sistema = new ArrayList();
+	public static List<InteractiveCharge> sistema = new ArrayList<InteractiveCharge>();
 
-	public static ArrayList novaCarga(final float x, final float y, final float z, final float q) {
+	public static List<InteractiveCharge> novaCarga(final float x, final float y, final float z, final float q) {
 		Sistema.sistema.add(Sistema.set(x, y, z, q));
 		return Sistema.sistema;
 	}
 
-	public static ArrayList editarCarga(final float x, final float y, final float z, final float q, final int i) {
+	public static List<InteractiveCharge> editarCarga(final float x, final float y, final float z, final float q,
+			final int i) {
 		Sistema.sistema.set(i, Sistema.set(x, y, z, q));
 		return Sistema.sistema;
 	}
 
-	public static ArrayList apagarCarga(final int i) {
+	public static List<InteractiveCharge> apagarCarga(final int i) {
 		Sistema.sistema.remove(i);
 		return Sistema.sistema;
 	}
@@ -70,27 +72,25 @@ public class Sistema {
 		return carga;
 	}
 
-	public static java.util.ArrayList stringToSistema(final String str) {
+	public static List<InteractiveCharge> stringToSistema(final String str) {
 		Sistema.sistema.clear();
 		final String[] str2 = str.split("&");
 		for (final String element : str2) {
 			final String[] str3 = element.split("#");
-			for (final String element2 : str3) {
-				try {
-					final float X = Float.parseFloat(str3[0]);
-					final float Y = Float.parseFloat(str3[1]);
-					final float Z = Float.parseFloat(str3[2]);
-					final float Q = Float.parseFloat(str3[3]);
-					Sistema.novaCarga(X, Y, Z, Q);
-				} catch (final NumberFormatException e) {
-				}
+			try {
+				final float X = Float.parseFloat(str3[0]);
+				final float Y = Float.parseFloat(str3[1]);
+				final float Z = Float.parseFloat(str3[2]);
+				final float Q = Float.parseFloat(str3[3]);
+				Sistema.novaCarga(X, Y, Z, Q);
+			} catch (final NumberFormatException e) {
 			}
 		}
 		return Sistema.sistema;
 	}
 
 	public static String sistemaToString() {
-		final java.util.ArrayList sist = Sistema.sistema;
+		final List<InteractiveCharge> sist = Sistema.sistema;
 		String str = new String();
 		String X, Y, Z, Q;
 		for (int i = 0; i < sist.size(); i++) {

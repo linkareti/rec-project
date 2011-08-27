@@ -168,7 +168,7 @@ public class InteractiveCartPole extends CartPole implements InteractionListener
 			@Override
 			public void windowClosing(final java.awt.event.WindowEvent e) {
 				System.exit(0);
-			};
+			}
 		});
 		test.getContentPane().add(new InteractiveCartPole());
 		test.pack();

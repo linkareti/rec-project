@@ -6,6 +6,8 @@
 
 package pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs;
 
+import javax.swing.JLabel;
+
 /**
  * 
  * @author Andr�
@@ -121,7 +123,7 @@ public class ConfPWM extends javax.swing.JDialog {
 		jSliderPWM1.setPaintLabels(true);
 		jSliderPWM1.setPaintTicks(true);
 		jSliderPWM1.setValue(model.getValor());
-		final java.util.Hashtable labelTable = new java.util.Hashtable();
+		final java.util.Hashtable<Integer, JLabel> labelTable = new java.util.Hashtable();
 		labelTable.put(new Integer(0), new javax.swing.JLabel("Atr�s"));
 		labelTable.put(new Integer(128), new javax.swing.JLabel("Parado"));
 		labelTable.put(new Integer(255), new javax.swing.JLabel("Frente"));

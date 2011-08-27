@@ -40,7 +40,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	public PVCustomizer() {
 		initComponents();
 
-		final Hashtable slidersPosLabels = new Hashtable(4);
+		final Hashtable<Integer,JLabel> slidersPosLabels = new Hashtable<Integer, JLabel>(4);
 		slidersPosLabels.put(new Integer(4000), new JLabel("4.0"));
 		slidersPosLabels.put(new Integer(5000), new JLabel("5.0"));
 		slidersPosLabels.put(new Integer(6000), new JLabel("6.0"));

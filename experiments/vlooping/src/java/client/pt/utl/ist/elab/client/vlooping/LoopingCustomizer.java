@@ -9,6 +9,7 @@ package pt.utl.ist.elab.client.vlooping;
 import java.awt.Color;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import org.opensourcephysics.display.Circle;
@@ -38,7 +39,7 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 		initComponents();
 		initTrajectory();
 
-		java.util.Hashtable ht = new java.util.Hashtable(7);
+		java.util.Hashtable<Integer, JLabel> ht = new java.util.Hashtable(7);
 		for (int i = 0; i <= 980; i += 200) {
 			ht.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
 		}

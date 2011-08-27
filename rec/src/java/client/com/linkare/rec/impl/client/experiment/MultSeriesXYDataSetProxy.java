@@ -106,7 +106,7 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 	 * @return the name of the series.
 	 */
 	@Override
-	public Comparable getSeriesKey(final int series) {
+	public Comparable<?> getSeriesKey(final int series) {
 		if (expDataModel == null || !expDataModel.isDataAvailable() || series >= expDataModel.getChannelCount()) {
 			return null;
 		}

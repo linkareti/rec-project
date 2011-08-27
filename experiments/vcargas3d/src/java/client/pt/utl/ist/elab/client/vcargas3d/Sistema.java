@@ -35,7 +35,7 @@ public class Sistema {
 	// dummy.show();
 	// }
 
-	public static ArrayList sistema = new ArrayList();
+	public static ArrayList<InteractiveCharge> sistema = new ArrayList();
 
 	public static ArrayList novaCarga(final float x, final float y, final float z, final float q) {
 		Sistema.sistema.add(Sistema.set(x, y, z, q));

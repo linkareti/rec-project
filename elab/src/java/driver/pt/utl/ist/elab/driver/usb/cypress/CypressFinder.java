@@ -289,7 +289,7 @@ public class CypressFinder {
 
 		/* this is just normal recursion. Nothing special. */
 		if (usbDevice.isUsbHub()) {
-			final List devices = ((UsbHub) usbDevice).getAttachedUsbDevices();
+			final List<?> devices = ((UsbHub) usbDevice).getAttachedUsbDevices();
 			for (int i = 0; i < devices.size(); i++) {
 				list.addAll(getUsbDevicesWithId((UsbDevice) devices.get(i), vendorId, productId));
 			}
@@ -336,7 +336,7 @@ public class CypressFinder {
 
 			final UsbHub virtualRootUsbHub = getVirtualRootUsbHub();
 
-			List usbDevices = null;
+			List<?> usbDevices = null;
 
 			usbDevices = getUsbDevicesWithId(virtualRootUsbHub, vendorID, productID);
 

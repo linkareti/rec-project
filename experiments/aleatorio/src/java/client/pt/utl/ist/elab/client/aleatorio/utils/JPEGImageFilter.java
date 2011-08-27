@@ -12,7 +12,7 @@ package pt.utl.ist.elab.client.aleatorio.utils;
  */
 public class JPEGImageFilter extends javax.swing.filechooser.FileFilter {
 
-	private java.util.Hashtable filtros = null;
+	private java.util.Hashtable<String, JPEGImageFilter> filtros = null;
 	private String fullDescription = "JPEG Image Files";
 	private final String description = null;
 

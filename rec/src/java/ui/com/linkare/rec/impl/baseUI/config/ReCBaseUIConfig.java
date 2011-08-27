@@ -592,7 +592,7 @@ public class ReCBaseUIConfig implements CommonBean {
 		return arr;
 	}
 
-	public List fetchLabList() {
+	public List<Lab> fetchLabList() {
 		return _Lab;
 	}
 
@@ -676,7 +676,7 @@ public class ReCBaseUIConfig implements CommonBean {
 		return arr;
 	}
 
-	public List fetchWebResourceList() {
+	public List<WebResource> fetchWebResourceList() {
 		return _WebResource;
 	}
 
@@ -1252,7 +1252,7 @@ public class ReCBaseUIConfig implements CommonBean {
 			return false;
 		}
 		// Compare every element.
-		for (Iterator it = _Lab.iterator(), it2 = inst._Lab.iterator(); it.hasNext() && it2.hasNext();) {
+		for (Iterator<Lab> it = _Lab.iterator(), it2 = inst._Lab.iterator(); it.hasNext() && it2.hasNext();) {
 			final Lab element = (Lab) it.next();
 			final Lab element2 = (Lab) it2.next();
 			if (!(element == null ? element2 == null : element.equals(element2))) {
@@ -1263,7 +1263,7 @@ public class ReCBaseUIConfig implements CommonBean {
 			return false;
 		}
 		// Compare every element.
-		for (Iterator it = _WebResource.iterator(), it2 = inst._WebResource.iterator(); it.hasNext() && it2.hasNext();) {
+		for (Iterator<WebResource> it = _WebResource.iterator(), it2 = inst._WebResource.iterator(); it.hasNext() && it2.hasNext();) {
 			final WebResource element = (WebResource) it.next();
 			final WebResource element2 = (WebResource) it2.next();
 			if (!(element == null ? element2 == null : element.equals(element2))) {

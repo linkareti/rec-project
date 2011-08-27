@@ -276,8 +276,8 @@ public class IndexedObjectIO implements Serializable {
 		}
 	}
 
-	public void writeObjects(final Map objects) throws IOException {
-		final Iterator iter = objects.entrySet().iterator();
+	public void writeObjects(final Map<?, ?> objects) throws IOException {
+		final Iterator<?> iter = objects.entrySet().iterator();
 		while (iter.hasNext()) {
 			final Map.Entry entry = (Map.Entry) iter.next();
 			writeObject(entry.getKey(), entry.getValue());

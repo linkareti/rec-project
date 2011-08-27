@@ -6,6 +6,8 @@
 
 package pt.utl.ist.elab.driver.aleatorio.Utils;
 
+import java.util.Vector;
+
 /**
  * 
  * @author Pedro Carvalho - LEFT - IST
@@ -70,7 +72,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 	private double[] info;
 	private int centers[][];
 	private int clusterCenters[][];
-	private java.util.Vector vClusters;
+	private java.util.Vector<Vector<?>> vClusters;
 
 	private int BWThreshold;
 	private int radius;
@@ -1260,7 +1262,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		int x, y;
 		final int maxDice = 256;
 
-		final java.util.Vector vClusters = new java.util.Vector(maxDice); // is
+		final java.util.Vector<Vector<?>> vClusters = new java.util.Vector(maxDice); // is
 																			// a
 		// vector of
 		// vectors
@@ -1672,7 +1674,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 		final int[] imSize = imageSize();
 		final int imageWidth = imSize[0], imageHeight = imSize[1], numberOfFalses = 0;
 		final boolean badTopRight = true, badTop = true, badTopLeft = true, badRight = true, badBottomRight = true, badBottom = true, badBottomLeft = true, badLeft = true;
-		final java.util.Vector toReturn = new java.util.Vector(4);
+		final java.util.Vector<Comparable> toReturn = new java.util.Vector(4);
 		toReturn.add(0, Boolean.FALSE);
 		toReturn.add(1, new Integer(0)); // zeroCounter
 		toReturn.add(2, new Integer(0)); // oneCounter
@@ -2827,7 +2829,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 
 		if (spotCount - testDieSize > 4) {
 			// System.out.println("Die with an excess of more than 4 spots! Ignoring it Completely!!");
-			final java.util.Vector vDieXYpI = new java.util.Vector(4);
+			final java.util.Vector<Object> vDieXYpI = new java.util.Vector(4);
 			vDieXYpI.add(0, vDie);
 			vDieXYpI.add(1, x);
 			vDieXYpI.add(2, y);
@@ -2845,7 +2847,7 @@ public class ImageAnalyser_old extends javax.swing.JPanel implements java.lang.C
 			spotsToRemove[0] = indexa;
 			if (dieDiff == 1) {
 				if (tryRemove(vDie, vDieIndex, testDieSize, spotsToRemove, pixelIndex, raio, maxClusterSize)) {
-					final java.util.Vector vDieXYpI = new java.util.Vector(4);
+					final java.util.Vector<Object> vDieXYpI = new java.util.Vector(4);
 					final java.util.Vector isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio, true, false);
 					final int counterSum = ((Integer) isSpotVector.get(1)).intValue()
 							+ ((Integer) isSpotVector.get(2)).intValue() + ((Integer) isSpotVector.get(3)).intValue();

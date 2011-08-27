@@ -223,7 +223,7 @@ public class GravadorVideo {
 	}
 
 	public CaptureDeviceInfo autoDetect() {
-		final Vector list = CaptureDeviceManager.getDeviceList(null);
+		final Vector<?> list = CaptureDeviceManager.getDeviceList(null);
 		CaptureDeviceInfo devInfo = null;
 
 		if (list != null) {

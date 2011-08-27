@@ -6,6 +6,9 @@
 
 package com.linkare.rec.impl.driver;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.linkare.rec.acquisition.IncorrectStateException;
 import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
@@ -20,6 +23,8 @@ public abstract class BaseDriver implements com.linkare.rec.impl.driver.IDriver 
 
 	/** Utility field holding the IDriverStateListener. */
 	private transient com.linkare.rec.impl.driver.IDriverStateListener listenerIDriverStateListener = null;
+
+	private static final Logger LOGGER = Logger.getLogger(BaseDriver.class.getName());
 
 	/** Creates a new instance of BaseDriver */
 	public BaseDriver() {
@@ -183,10 +188,9 @@ public abstract class BaseDriver implements com.linkare.rec.impl.driver.IDriver 
 			configure(config, info);
 		} catch (final WrongConfigurationException e) {
 			fireIDriverStateListenerDriverStoped();
-			e.printStackTrace();
 			throw e;
 		} catch (final Exception e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE,e.getMessage(),e);
 			throw new WrongConfigurationException(20);
 		}
 	}

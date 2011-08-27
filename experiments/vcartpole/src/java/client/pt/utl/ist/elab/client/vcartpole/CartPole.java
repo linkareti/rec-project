@@ -26,6 +26,7 @@ import javax.swing.JOptionPane;
 
 import org.jfree.chart.encoders.EncoderUtil;
 import org.jfree.chart.encoders.ImageFormat;
+import org.opensourcephysics.display.Drawable;
 import org.opensourcephysics.displayejs.DrawingPanel3D;
 import org.opensourcephysics.displayejs.Group;
 import org.opensourcephysics.displayejs.InteractionListener;
@@ -542,7 +543,8 @@ public class CartPole extends DrawingPanel3D implements ActionListener, MouseLis
 				topGutter = bottomGutter = Math.max(0, getHeight() - interiorDimension.height) / 2;
 			}
 		}
-		final java.util.ArrayList tempList = getDrawables();
+		@SuppressWarnings("unchecked")
+		final java.util.ArrayList<Drawable> tempList = getDrawables();
 		scale(tempList);
 		setPixelScale();
 		g.setColor(getBackground());
@@ -687,7 +689,7 @@ public class CartPole extends DrawingPanel3D implements ActionListener, MouseLis
 			@Override
 			public void windowClosing(final java.awt.event.WindowEvent e) {
 				System.exit(0);
-			};
+			}
 		});
 		test.getContentPane().add(new CartPole());
 		test.pack();

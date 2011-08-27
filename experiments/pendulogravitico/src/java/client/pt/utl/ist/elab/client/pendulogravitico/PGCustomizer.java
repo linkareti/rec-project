@@ -32,7 +32,7 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	/** Creates new form RadioactividadeCustomizer */
 	public PGCustomizer() {
 		initComponents();
-		final Hashtable slidersHLabels = new Hashtable(11);
+		final Hashtable<Integer, JLabel> slidersHLabels = new Hashtable<Integer, JLabel>(11);
 		slidersHLabels.put(new Integer(152), new JLabel("15.2"));
 		slidersHLabels.put(new Integer(160), new JLabel("16.0"));
 		slidersHLabels.put(new Integer(170), new JLabel("17.0"));
@@ -47,7 +47,7 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		sldHeight.setLabelTable(slidersHLabels);
 
-		final Hashtable slidersTLabels = new Hashtable(12);
+		final Hashtable<Integer, JLabel> slidersTLabels = new Hashtable<Integer, JLabel>(12);
 		slidersTLabels.put(new Integer(11), new JLabel("1.1"));
 		slidersTLabels.put(new Integer(20), new JLabel("2.0"));
 		slidersTLabels.put(new Integer(30), new JLabel("3.0"));

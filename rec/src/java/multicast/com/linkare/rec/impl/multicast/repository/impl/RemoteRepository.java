@@ -23,7 +23,7 @@ public class RemoteRepository implements IRepository {
 	public void persistExperimentResult(Object experimentResult, String oid) throws RepositoryException {
 
 		if (experimentResult == null || oid == null) {
-			throw new NullPointerException("experimentResult or oid cannot be null");
+			throw new RepositoryException("experimentResult or oid cannot be null");
 		}
 
 		if (!(experimentResult instanceof ReCMultiCastDataProducer)) {

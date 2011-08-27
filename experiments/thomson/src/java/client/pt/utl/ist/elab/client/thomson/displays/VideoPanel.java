@@ -29,13 +29,13 @@ public class VideoPanel extends javax.swing.JPanel implements com.linkare.rec.im
 	private static final long serialVersionUID = -3698366782431260691L;
 	private int currentFrame = 0;
 	private boolean pause = false;
-	private final Vector indexes;
+	private final Vector<Integer> indexes;
 	private int[] im_index = null;
 
 	/** Creates new form videoPanel */
 	public VideoPanel() {
 		initComponents();
-		indexes = new Vector();
+		indexes = new Vector<Integer>();
 	}
 
 	private class Player extends Thread {

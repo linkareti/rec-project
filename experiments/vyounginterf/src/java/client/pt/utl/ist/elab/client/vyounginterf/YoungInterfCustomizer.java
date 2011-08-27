@@ -14,6 +14,7 @@ package pt.utl.ist.elab.client.vyounginterf;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
@@ -34,14 +35,14 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 		initWavelenghtChooser();
 		initComponents();
 
-		final java.util.Hashtable htDFendas = new java.util.Hashtable(7);
+		final java.util.Hashtable<Integer, JLabel> htDFendas = new java.util.Hashtable(7);
 		for (int i = 0; i <= 600; i += 100) {
 			htDFendas.put(new Integer(i), new javax.swing.JLabel("" + i / 100F));
 		}
 		htDFendas.put(new Integer(10), new javax.swing.JLabel("0.10"));
 		jSliderDFendas.setLabelTable(htDFendas);
 
-		final java.util.Hashtable htDPlanos = new java.util.Hashtable(10);
+		final java.util.Hashtable<Integer, JLabel> htDPlanos = new java.util.Hashtable(10);
 		for (int i = 0; i < 601; i += 100) {
 			htDPlanos.put(new Integer(i), new javax.swing.JLabel("" + i / 100F));
 		}

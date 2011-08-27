@@ -17,7 +17,11 @@ public class HardwareRemoveEvt implements Prioritazible {
 	/** Holds value of property hardwareUniqueId. */
 	private final String hardwareUniqueId;
 
-	/** Creates a new instance of HardwareRemoveEvt */
+	/**
+	 * Creates a new instance of HardwareRemoveEvt
+	 * 
+	 * @param hardwareUniqueId
+	 */
 	public HardwareRemoveEvt(final String hardwareUniqueId) {
 		this.hardwareUniqueId = hardwareUniqueId;
 	}

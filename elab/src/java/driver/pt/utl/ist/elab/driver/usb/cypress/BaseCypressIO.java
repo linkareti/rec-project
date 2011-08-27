@@ -119,7 +119,7 @@ public class BaseCypressIO implements UsbDeviceListener, UsbPipeListener {
 
 				Logger.getLogger(BaseCypressIO.CYPRESS_IO_LOGGER).log(Level.INFO, "Going to configure the device!");
 
-				final List ifaces = device.getActiveUsbConfiguration().getUsbInterfaces();
+				final List<?> ifaces = device.getActiveUsbConfiguration().getUsbInterfaces();
 
 				UsbInterface usbInterface = null;
 
@@ -128,19 +128,19 @@ public class BaseCypressIO implements UsbDeviceListener, UsbPipeListener {
 
 				Logger.getLogger(BaseCypressIO.CYPRESS_IO_LOGGER).log(Level.INFO, "Setting interface!");
 
-				final List configs = device.getUsbConfigurations();
+				final List<?> configs = device.getUsbConfigurations();
 				for (int i = 0; i < configs.size(); i++) {
-					final List inter = ((UsbConfigurationImp) configs.get(i)).getUsbInterfaces();
+					final List<?> inter = ((UsbConfigurationImp) configs.get(i)).getUsbInterfaces();
 					usbInterface = (UsbInterface) inter.get(0);
 					usbInterface.claim();
 				}
 
-				final List settings = usbInterface.getSettings();
+				final List<?> settings = usbInterface.getSettings();
 
 				final UsbInterface settingOne = (UsbInterface) settings.get(1);
 				StandardRequest.setInterface(device, interfaceNumber, alternateSetting);
 
-				final List endPoints = settingOne.getUsbEndpoints();
+				final List<?> endPoints = settingOne.getUsbEndpoints();
 
 				final UsbEndpoint endPointIn = (UsbEndpoint) endPoints.get(inputChannelNumber);
 				final UsbEndpoint endPointOut = (UsbEndpoint) endPoints.get(outputChannelNumber);

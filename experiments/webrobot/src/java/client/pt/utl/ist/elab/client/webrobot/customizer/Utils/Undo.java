@@ -12,7 +12,7 @@ package pt.utl.ist.elab.client.webrobot.customizer.Utils;
  */
 public class Undo {
 	int index = 0;
-	java.util.Vector vectorUndo;
+	java.util.Vector<Object> vectorUndo;
 	Object undo = null;
 	Object redo = null;
 

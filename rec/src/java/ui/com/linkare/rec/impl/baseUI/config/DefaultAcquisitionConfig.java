@@ -310,7 +310,7 @@ public class DefaultAcquisitionConfig extends DisplayNode implements com.linkare
 
 	// Put all child beans into the beans list.
 	@Override
-	public void childBeans(final boolean recursive, final List beans) {
+	public void childBeans(final boolean recursive, final List<CommonBean> beans) {
 	}
 
 	@Override

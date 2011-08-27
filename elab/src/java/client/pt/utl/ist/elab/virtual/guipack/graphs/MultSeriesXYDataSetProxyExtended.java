@@ -306,7 +306,7 @@ public class MultSeriesXYDataSetProxyExtended extends org.jfree.data.general.Abs
 	/**
 	 * Setter for property channelDisplay.
 	 * 
-	 * @param channelDisplay New value of property channelDisplay.
+	 * @param channelDisplayX New value of property channelDisplay.
 	 */
 	public void setChannelDisplayX(final int channelDisplayX) {
 		this.channelDisplayX = channelDisplayX;
@@ -315,7 +315,8 @@ public class MultSeriesXYDataSetProxyExtended extends org.jfree.data.general.Abs
 	/**
 	 * Setter for property channelDisplayY.
 	 * 
-	 * @param channelDisplayY New value of property channelDisplayY.
+	 * @param series New value of property series.
+	 * @return the channel display y array position of series
 	 */
 	public int getChannelDisplayAtYArray(final int series) {
 		return channelDisplayYArray[series];
@@ -324,7 +325,7 @@ public class MultSeriesXYDataSetProxyExtended extends org.jfree.data.general.Abs
 	/**
 	 * Setter for property channelDisplayY.
 	 * 
-	 * @param channelDisplayY New value of property channelDisplayY.
+	 * @return the channel display y array
 	 */
 	public int[] getChannelDisplayYArray() {
 		return channelDisplayYArray;
@@ -333,30 +334,34 @@ public class MultSeriesXYDataSetProxyExtended extends org.jfree.data.general.Abs
 	/**
 	 * Setter for property channelDisplayY.
 	 * 
-	 * @param channelDisplayY New value of property channelDisplayY.
+	 * @param channelDisplayYArray New value of property channelDisplayY.
 	 */
 	public void setChannelDisplayYArray(final int[] channelDisplayYArray) {
 		this.channelDisplayYArray = channelDisplayYArray;
 	}
 
-	private final int updatePercentage = 10;
+	// private final int updatePercentage = 10;
+	//
+	// /** Deprecated!! Use getUpdateFrequency */
+	// public int getUpdatePercentage() {
+	// return updateFrequency;
+	// }
 
-	/** Deprecated!! Use getUpdateFrequency */
-	public int getUpdatePercentage() {
-		return updateFrequency;
-	}
-
-	/** Deprecated!! Use setUpdateFrequency */
-	public void setUpdatePercentage(final int updatePercentage) {
-		// this.updatePercentage = updatePercentage;
-		setUpdateFrequency(updatePercentage);
-	}
+	/* Deprecated!! Use setUpdateFrequency */
+	// public void setUpdatePercentage(final int updatePercentage) {
+	// // this.updatePercentage = updatePercentage;
+	// setUpdateFrequency(updatePercentage);
+	// }
 
 	public int getUpdateFrequency() {
 		return updateFrequency;
 	}
 
-	/** Update from updateFrequency to updateFrequency points */
+	/**
+	 * Update from updateFrequency to updateFrequency points
+	 * 
+	 * @param updateFrequency
+	 */
 	public void setUpdateFrequency(int updateFrequency) {
 		if (updateFrequency < 1) {
 			updateFrequency = 1;
@@ -382,6 +387,7 @@ public class MultSeriesXYDataSetProxyExtended extends org.jfree.data.general.Abs
 	/**
 	 * {@inheritDoc}
 	 */
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Comparable getSeriesKey(final int arg0) {
 		throw new UnsupportedOperationException();
@@ -391,7 +397,7 @@ public class MultSeriesXYDataSetProxyExtended extends org.jfree.data.general.Abs
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int indexOf(final Comparable arg0) {
+	public int indexOf(@SuppressWarnings("rawtypes") final Comparable arg0) {
 		throw new UnsupportedOperationException();
 	}
 }

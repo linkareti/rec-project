@@ -18,7 +18,11 @@ public class HardwareAddEvt implements Prioritazible {
 	/** Holds value of property hardware. */
 	private final Hardware hardware;
 
-	/** Creates a new instance of HardwareAddEvt */
+	/**
+	 * Creates a new instance of HardwareAddEvt
+	 * 
+	 * @param hardware
+	 */
 	public HardwareAddEvt(final Hardware hardware) {
 		this.hardware = hardware;
 	}

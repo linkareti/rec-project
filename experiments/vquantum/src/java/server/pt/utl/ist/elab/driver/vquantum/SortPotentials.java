@@ -12,7 +12,7 @@ import java.util.Comparator;
  * 
  * @author nomead
  */
-public class SortPotentials implements Comparator {
+public class SortPotentials implements Comparator<Object> {
 
 	/**
 	 * Compara a posicao dos potenciais

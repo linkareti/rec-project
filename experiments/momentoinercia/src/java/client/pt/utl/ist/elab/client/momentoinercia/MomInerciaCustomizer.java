@@ -36,7 +36,7 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 	/** Creates new form RadioactividadeCustomizer */
 	public MomInerciaCustomizer() {
 		initComponents();
-		final Hashtable slidersLabels = new Hashtable(10);
+		final Hashtable<Integer, JLabel> slidersLabels = new Hashtable<Integer, JLabel>(10);
 		slidersLabels.put(new Integer(0), new JLabel("0.0"));
 		slidersLabels.put(new Integer(10000), new JLabel("10.0"));
 		slidersLabels.put(new Integer(20000), new JLabel("20.0"));

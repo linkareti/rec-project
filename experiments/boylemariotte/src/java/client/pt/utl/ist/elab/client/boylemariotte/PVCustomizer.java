@@ -23,7 +23,11 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * @author José Pedro Pereira - Linkare TI
  */
 public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
-	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -775367629564418034L;
 	private static DecimalFormat decimalFormat = new DecimalFormat("0.0");
 	static {
 		decimalFormat.setDecimalSeparatorAlwaysShown(true);
@@ -35,7 +39,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	public PVCustomizer() {
 		initComponents();
 
-		Hashtable slidersPosLabels = new Hashtable(4);
+		Hashtable<Integer, JLabel> slidersPosLabels = new Hashtable<Integer, JLabel>(4);
 		slidersPosLabels.put(new Integer(3000), new JLabel("3.0"));
 		slidersPosLabels.put(new Integer(5000), new JLabel("5.0"));
 		slidersPosLabels.put(new Integer(6000), new JLabel("6.0"));
@@ -43,7 +47,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		sldPos1.setLabelTable(slidersPosLabels);
 		sldPos2.setLabelTable(slidersPosLabels);
-		
+
 		NumberFormatter formatterUserPos1 = new NumberFormatter(decimalFormat);
 		NumberFormatter formatterUserPos2 = new NumberFormatter(decimalFormat);
 
@@ -134,7 +138,8 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		gridBagConstraints.weightx = 10.0;
 		jPanel2.add(jLabel1, gridBagConstraints);
 
-		btnDefaults.setText(ReCResourceBundle.findStringOrDefault("rec.exp.dftcfg.boylemariotte.title.1", "Default Config"));
+		btnDefaults.setText(ReCResourceBundle.findStringOrDefault("rec.exp.dftcfg.boylemariotte.title.1",
+				"Default Config"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
@@ -672,8 +677,8 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	}
 
 	public javax.swing.ImageIcon getCustomizerIcon() {
-		return new javax.swing.ImageIcon(getClass()
-				.getResource("/pt/utl/ist/elab/client/boylemariotte/resources/boylemariotte_iconified.gif"));
+		return new javax.swing.ImageIcon(getClass().getResource(
+				"/pt/utl/ist/elab/client/boylemariotte/resources/boylemariotte_iconified.gif"));
 	}
 
 	public String getCustomizerTitle() {

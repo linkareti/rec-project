@@ -6,6 +6,8 @@
 
 package pt.utl.ist.elab.client.webrobot.displays.proxys;
 
+import org.jfree.data.xy.XYSeries;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.synch.DateTime;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
@@ -28,7 +30,7 @@ public class DefaultChartModelProxy extends org.jfree.data.xy.XYSeriesCollection
 	private final boolean booleanValue;
 	private DateTime firstSampleTime = new DateTime();
 	private ExpDataModel expDataModel = null;
-	private java.util.Vector vectorXY;
+	private java.util.Vector<XYSeries> vectorXY;
 	private HardwareAcquisitionConfig header = null;
 
 	public DefaultChartModelProxy(final int startChannelIndex, final int numChannels, final boolean booleanValue) {

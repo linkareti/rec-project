@@ -38,9 +38,10 @@ public class Cargas3DDriver extends VirtualBaseDriver {
 	}
 
 	/* Hardware and driver related variables */
-	private static final String APPLICATION_IDENTIFIER = "E-Lab (Cargas3D Driver)";
+	// private static final String APPLICATION_IDENTIFIER =
+	// "E-Lab (Cargas3D Driver)";
 	private static final String DRIVER_UNIQUE_ID = "CARGAS3D_V1.0";
-	private static final String HW_VERSION = "0.1";
+	// private static final String HW_VERSION = "0.1";
 
 	protected VirtualBaseDataSource dataSource = null;
 	protected HardwareAcquisitionConfig config = null;

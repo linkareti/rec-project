@@ -7,6 +7,7 @@
 package pt.utl.ist.elab.client.vcolisao;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import org.opensourcephysics.display.Arrow;
 import org.opensourcephysics.display.Dataset;
@@ -36,7 +37,7 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 		initComponents();
 		initPreview();
 
-		java.util.Hashtable ht = new java.util.Hashtable(7);
+		java.util.Hashtable<Integer, JLabel> ht = new java.util.Hashtable(7);
 		ht = new java.util.Hashtable(7);
 		for (int i = 2; i <= 500; i += 83) {
 			ht.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));

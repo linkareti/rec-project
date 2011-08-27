@@ -9,6 +9,8 @@ package pt.utl.ist.elab.client.vcargas3d.displays;
 import javax.swing.JFrame;
 import javax.swing.SwingConstants;
 
+import org.opensourcephysics.displayejs.InteractivePoints;
+
 import pt.utl.ist.elab.client.vcargas3d.Sistema;
 import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
 
@@ -204,7 +206,7 @@ public class Superficies extends javax.swing.JPanel implements ExpDataDisplay, E
 		painel.repaint();
 	}
 
-	private void toPanelSuperficies(final java.util.ArrayList[][] superficies_, final java.util.ArrayList sup) {
+	private void toPanelSuperficies(final java.util.ArrayList[][] superficies_, final java.util.ArrayList<InteractivePoints> sup) {
 		java.util.ArrayList[] listax_;
 		java.util.ArrayList[] listay_;
 		java.util.ArrayList[] listaz_;

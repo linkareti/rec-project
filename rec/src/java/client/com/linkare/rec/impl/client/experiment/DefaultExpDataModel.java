@@ -71,7 +71,7 @@ public class DefaultExpDataModel extends AbstractExpDataModel {
 		return channelCount;
 	}
 
-	private Hashtable getChannels() {
+	private Hashtable<String, ChannelAcquisitionConfig> getChannels() {
 		if (channels != null) {
 			return channels;
 		}

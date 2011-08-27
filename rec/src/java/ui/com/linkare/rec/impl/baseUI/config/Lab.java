@@ -207,7 +207,7 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 		return _Apparatus.toArray(arr);
 	}
 
-	public List fetchApparatusList() {
+	public List<Apparatus> fetchApparatusList() {
 		return _Apparatus;
 	}
 
@@ -285,7 +285,7 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 		return _WebResource.toArray(arr);
 	}
 
-	public List fetchWebResourceList() {
+	public List<WebResource> fetchWebResourceList() {
 		return _WebResource;
 	}
 
@@ -363,7 +363,7 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 		return _LocalizationBundle.toArray(arr);
 	}
 
-	public List fetchLocalizationBundleList() {
+	public List<LocalizationBundle> fetchLocalizationBundleList() {
 		return _LocalizationBundle;
 	}
 
@@ -767,7 +767,7 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 			return false;
 		}
 		// Compare every element.
-		for (Iterator it = _Apparatus.iterator(), it2 = inst._Apparatus.iterator(); it.hasNext() && it2.hasNext();) {
+		for (Iterator<Apparatus> it = _Apparatus.iterator(), it2 = inst._Apparatus.iterator(); it.hasNext() && it2.hasNext();) {
 			final com.linkare.rec.impl.baseUI.config.Apparatus element = (com.linkare.rec.impl.baseUI.config.Apparatus) it
 					.next();
 			final com.linkare.rec.impl.baseUI.config.Apparatus element2 = (com.linkare.rec.impl.baseUI.config.Apparatus) it2
@@ -780,7 +780,7 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 			return false;
 		}
 		// Compare every element.
-		for (Iterator it = _WebResource.iterator(), it2 = inst._WebResource.iterator(); it.hasNext() && it2.hasNext();) {
+		for (Iterator<WebResource> it = _WebResource.iterator(), it2 = inst._WebResource.iterator(); it.hasNext() && it2.hasNext();) {
 			final com.linkare.rec.impl.baseUI.config.WebResource element = (com.linkare.rec.impl.baseUI.config.WebResource) it
 					.next();
 			final com.linkare.rec.impl.baseUI.config.WebResource element2 = (com.linkare.rec.impl.baseUI.config.WebResource) it2
@@ -793,7 +793,7 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 			return false;
 		}
 		// Compare every element.
-		for (Iterator it = _LocalizationBundle.iterator(), it2 = inst._LocalizationBundle.iterator(); it.hasNext()
+		for (Iterator<LocalizationBundle> it = _LocalizationBundle.iterator(), it2 = inst._LocalizationBundle.iterator(); it.hasNext()
 				&& it2.hasNext();) {
 			final com.linkare.rec.impl.baseUI.config.LocalizationBundle element = (com.linkare.rec.impl.baseUI.config.LocalizationBundle) it
 					.next();
