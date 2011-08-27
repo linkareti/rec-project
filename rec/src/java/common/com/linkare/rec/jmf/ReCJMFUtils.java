@@ -220,11 +220,16 @@ public class ReCJMFUtils {
 			public boolean waitForState(int state) {
 				synchronized (waitSync) {
 					try {
-						while (player.getState() < state && stateTransitionOK) {
-							LOGGER.fine("Waiting for state " + state + " and player state is now "
-									+ player.getState());
-							waitSync.wait();
-							LOGGER.fine("State " + state + " " +(stateTransitionOK?"achieved":"NOT achieved!"));
+						if (player.getState() < state) {
+							while (player.getState() < state && stateTransitionOK) {
+								LOGGER.fine("Waiting for state " + state + " and player state is now "
+										+ player.getState());
+								waitSync.wait();
+								LOGGER.fine("State " + state + " " + (stateTransitionOK ? "achieved" : "NOT achieved!"));
+							}
+						}
+						else {
+							LOGGER.fine("State " + state + " has allready been achieved before, so not waiting...");
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
