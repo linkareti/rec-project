@@ -350,6 +350,7 @@ public class DataSource extends PullBufferDataSource {
 		synchronized (oldFunctor) {
 			this.functorType = functorType;
 			this.functorType.getFunctor().setTimeDelta(1. / sampleRate);
+			this.functorType.getFunctorControl().setFrequency(oldFunctor.getFunctorControl().getFrequency());
 			try {
 				LOGGER.fine("Waiting 1s on OLD functor type for NEW functor type to be applied. "
 						+ oldFunctor.getFunctionName());
