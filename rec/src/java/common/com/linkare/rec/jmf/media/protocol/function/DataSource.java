@@ -284,6 +284,7 @@ public class DataSource extends PullBufferDataSource {
 				functorTypeLocal = DataSource.this.functorType;
 			}
 			if (System.currentTimeMillis() - lastDebugTime > 2000) {
+				lastDebugTime = System.currentTimeMillis();
 				LOGGER.fine(">>>>> Functor " + functorTypeLocal.getFunctionName() + " with frequency "
 						+ functorTypeLocal.getFunctorControl().getFrequency());
 			}
