@@ -293,7 +293,9 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 	 * @param control the control to set
 	 */
 	public void setControl(FunctorTypeControl control) {
+		LOGGER.fine("Control was "+this.control);
 		this.control = control;
+		LOGGER.fine("Control is now "+this.control);
 	}
 
 	@Override
