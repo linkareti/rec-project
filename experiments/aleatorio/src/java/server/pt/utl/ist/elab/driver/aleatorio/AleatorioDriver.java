@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 import pt.utl.ist.elab.driver.aleatorio.Hardware.HardwareInit;
 import pt.utl.ist.elab.driver.aleatorio.Hardware.SoundThread;
 import pt.utl.ist.elab.driver.aleatorio.Hardware.WebCamThread;
-import pt.utl.ist.elab.driver.aleatorio.Utils.ImageAnalyser;
 import pt.utl.ist.elab.driver.aleatorio.Utils.VideoReader;
 
 import com.linkare.rec.acquisition.IncorrectStateException;
@@ -40,7 +39,7 @@ public class AleatorioDriver extends BaseDriver {
 	public static final String HW_VERSION = "0.1";
 
 	private HardwareAcquisitionConfig config = null;
-	private HardwareInfo info = null;
+	// private HardwareInfo info = null;
 	private AleatorioDataSource aleatorioDataSource = null;
 
 	public WebCamThread webcam = null;
@@ -56,7 +55,7 @@ public class AleatorioDriver extends BaseDriver {
 	private long movieLength; // length of movie file in miliseconds
 	private static final long MOVIE_LENGTH = 10000; // Default movie length in
 	// miliseconds
-	private float waveFrequency; // frequency of sound wave in Hz
+	// private float waveFrequency; // frequency of sound wave in Hz
 	private static final float WAVE_FREQUENCY = 32.0F; // Default wave frequency
 	// inHz
 	private float frequency1, frequency2;
@@ -73,19 +72,20 @@ public class AleatorioDriver extends BaseDriver {
 	// to get good
 	// statistics
 
-	private static final int NUMBER_OF_DICE = 14; // this is the original number
+	// private static final int NUMBER_OF_DICE = 14; // this is the original
+	// number
 	// of dice
 
 	public static final int FRAME_RATE = 5; // number of frames per second
 	pt.utl.ist.elab.driver.aleatorio.Utils.ImageAnalyser imageAnalyser = null;
 	private java.awt.Image imageToAnalyze = null;
 
-	private int centerCounter;
+	// private int centerCounter;
 	private int[] centerCounterArray;
 
 	private int[][] centers;
 
-	private final boolean waitingStart = false;
+	// private final boolean waitingStart = false;
 
 	/** Creates a new instance of AleatorioDriver */
 	public AleatorioDriver() {
@@ -136,7 +136,7 @@ public class AleatorioDriver extends BaseDriver {
 
 	@Override
 	public void init(final HardwareInfo info) {
-		this.info = info;
+		// this.info = info;
 		// System.out.println(" HardwareInfo read from a file is= " + info);
 		// System.out.println(" Hardware Unique ID from file is: " +
 		// info.getHardwareUniqueID());
@@ -177,7 +177,7 @@ public class AleatorioDriver extends BaseDriver {
 			throws WrongConfigurationException {
 		fireIDriverStateListenerDriverConfiguring();
 
-		this.info = info;
+		// this.info = info;
 		aleatorioDataSource = new AleatorioDataSource(this);
 		final ParameterConfig[] selectedParams = config.getSelectedHardwareParameters();
 
@@ -395,9 +395,9 @@ public class AleatorioDriver extends BaseDriver {
 	}
 
 	/** Properties stuff... */
-	private final java.io.InputStream is = null;
-	private final java.io.File propFile = null;
-	private final String propertiesLocation = null;
+	// private final java.io.InputStream is = null;
+	// private final java.io.File propFile = null;
+	// private final String propertiesLocation = null;
 	private java.util.Properties props = null;
 
 	/**
@@ -420,67 +420,68 @@ public class AleatorioDriver extends BaseDriver {
 		return props;
 	}
 
-	private void analyseImage() {
-		java.awt.Image image;
-		if (movieOnOff) {
-			// while(dataSourceReader.lastFrame == null){}
-			while (imageToAnalyze == null) {
-			}
-			image = imageToAnalyze;
-		} else {
-			image = imageToAnalyze;
-			// image = webcam.getImage();
-		}
+	// private void analyseImage() {
+	// java.awt.Image image;
+	// if (movieOnOff) {
+	// // while(dataSourceReader.lastFrame == null){}
+	// while (imageToAnalyze == null) {
+	// }
+	// image = imageToAnalyze;
+	// } else {
+	// image = imageToAnalyze;
+	// // image = webcam.getImage();
+	// }
+	//
+	// imageAnalyser = new
+	// pt.utl.ist.elab.driver.aleatorio.Utils.ImageAnalyser(image);
+	// imageAnalyser.setParams(Integer.valueOf(props.getProperty("BWThreshold")).intValue(),
+	// Integer.valueOf(props.getProperty("radiusOfSpot")).intValue(),
+	// Integer.valueOf(props.getProperty("houghThreshold1")).intValue(),
+	// Integer.valueOf(props.getProperty("houghThreshold2")).intValue(),
+	// Integer.valueOf(props.getProperty("houghThreshold3")).intValue(),
+	// Integer.valueOf(props.getProperty("convThreshold")).intValue(),
+	// Integer.valueOf(props.getProperty("maxWidthOfDie")).intValue(),
+	// Integer.valueOf(props.getProperty("numberOfDice")).intValue());
+	//
+	// imageAnalyser.conversionBW();
+	// imageAnalyser.edgeDetector();
+	// imageAnalyser.houghTransform();
+	// imageAnalyser.houghCount();
+	// imageAnalyser.refineCount(ImageAnalyser.IMAGE_HOUGH);
+	// // imageAnalyser.convolutionTransform();
+	// // imageAnalyser.fullCount();
+	// centers = imageAnalyser.getCenters();
+	// // centerCounter = imageAnalyser.getCenterCounter();
+	// /*
+	// * javax.swing.JFrame imagemDialog = new javax.swing.JFrame();
+	// * imagemDialog.setTitle("Imagem Capturada"); ImageStorePanel
+	// * imagemCapturadaPanel = new
+	// * ImageStorePanel(imageAnalyser.getImage("count"));
+	// * imagemDialog.getContentPane().add(imagemCapturadaPanel); int[] dimIm
+	// * = imagemCapturadaPanel.imageSize(); imagemDialog.setSize(dimIm[0]+8,
+	// * dimIm[1]+27); //imagemDialog.pack();
+	// * imagemDialog.setDefaultCloseOperation
+	// * (javax.swing.JFrame.DISPOSE_ON_CLOSE); imagemDialog.show();
+	// * imagemDialog.repaint();
+	// */
+	// imageAnalyser.resetImages();
+	// // int pos = indexOf(aleatorioDataSource.statisticX, centerCounter);
+	// // aleatorioDataSource.updateStatisticsFile(centerCounter,
+	// // aleatorioDataSource.statisticY[pos]++);
+	// }
 
-		imageAnalyser = new pt.utl.ist.elab.driver.aleatorio.Utils.ImageAnalyser(image);
-		imageAnalyser.setParams(Integer.valueOf(props.getProperty("BWThreshold")).intValue(),
-				Integer.valueOf(props.getProperty("radiusOfSpot")).intValue(),
-				Integer.valueOf(props.getProperty("houghThreshold1")).intValue(),
-				Integer.valueOf(props.getProperty("houghThreshold2")).intValue(),
-				Integer.valueOf(props.getProperty("houghThreshold3")).intValue(),
-				Integer.valueOf(props.getProperty("convThreshold")).intValue(),
-				Integer.valueOf(props.getProperty("maxWidthOfDie")).intValue(),
-				Integer.valueOf(props.getProperty("numberOfDice")).intValue());
-
-		imageAnalyser.conversionBW();
-		imageAnalyser.edgeDetector();
-		imageAnalyser.houghTransform();
-		imageAnalyser.houghCount();
-		imageAnalyser.refineCount(ImageAnalyser.IMAGE_HOUGH);
-		// imageAnalyser.convolutionTransform();
-		// imageAnalyser.fullCount();
-		centers = imageAnalyser.getCenters();
-		centerCounter = imageAnalyser.getCenterCounter();
-		/*
-		 * javax.swing.JFrame imagemDialog = new javax.swing.JFrame();
-		 * imagemDialog.setTitle("Imagem Capturada"); ImageStorePanel
-		 * imagemCapturadaPanel = new
-		 * ImageStorePanel(imageAnalyser.getImage("count"));
-		 * imagemDialog.getContentPane().add(imagemCapturadaPanel); int[] dimIm
-		 * = imagemCapturadaPanel.imageSize(); imagemDialog.setSize(dimIm[0]+8,
-		 * dimIm[1]+27); //imagemDialog.pack();
-		 * imagemDialog.setDefaultCloseOperation
-		 * (javax.swing.JFrame.DISPOSE_ON_CLOSE); imagemDialog.show();
-		 * imagemDialog.repaint();
-		 */
-		imageAnalyser.resetImages();
-		// int pos = indexOf(aleatorioDataSource.statisticX, centerCounter);
-		// aleatorioDataSource.updateStatisticsFile(centerCounter,
-		// aleatorioDataSource.statisticY[pos]++);
-	}
-
-	/**
+	/*
 	 * returns the index of the first occurrence of 'val' in 'array' 'array' is
 	 * an array of ints and 'val' is an int
 	 */
-	private int indexOf(final int[] array, final int val) {
-		for (int index = 0; index < array.length; index++) {
-			if (array[index] == val) {
-				return index;
-			}
-		}
-		return -1;
-	}// indexOf(int[] array, int val)
+	// private int indexOf(final int[] array, final int val) {
+	// for (int index = 0; index < array.length; index++) {
+	// if (array[index] == val) {
+	// return index;
+	// }
+	// }
+	// return -1;
+	// }// indexOf(int[] array, int val)
 
 	public int[][] getCenters() {
 		return centers;
@@ -646,7 +647,8 @@ public class AleatorioDriver extends BaseDriver {
 	class RecordingThread extends Thread {
 		// private java.awt.Image[] movieFrames = null;
 		// private int frameCount = 0;
-		private static final int PAUSE_BETWEEN_FRAMES = 1000 / AleatorioDriver.FRAME_RATE;
+		// private static final int PAUSE_BETWEEN_FRAMES = 1000 /
+		// AleatorioDriver.FRAME_RATE;
 		private int totalFrames = 0;
 
 		// public Waiting waiting = new Waiting();

@@ -24,8 +24,6 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 	private java.awt.Image BWImage = null; // stores the B&W image
 	private int[] BWPixels;
 	private java.awt.Image edgesImage = null; // stores the image with the edges
-	// detected
-	private int[] edgesPixels;
 	private java.awt.Image houghImage = null; // stores the image of the hough
 	// transform
 	private int[] houghPixels;
@@ -43,12 +41,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 	// transform image
 	private int[] convolutionCountPixels;
 	private java.awt.Image fullCountImage = null; // stores the image after
-	// compiling both the
-	// counting algorithms
-	private int[] fullCountPixels;
 	private java.awt.Image refineCountImage = null;
-	private int[] refineCountPixels;
-
 	private String currentImageType = null; // keeps track of which image is in
 	// the variable image
 	public int imageWidth;
@@ -127,6 +120,14 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 
 	/**
 	 * sets the parameters that will be used by the algorithms
+	 * @param BWThreshold 
+	 * @param radius 
+	 * @param houghThreshold1 
+	 * @param houghThreshold2 
+	 * @param houghThreshold3 
+	 * @param convolutionThreshold 
+	 * @param maxClusterSize 
+	 * @param maxDiceCount 
 	 */
 	public void setParams(final int BWThreshold, final int radius, final int houghThreshold1,
 			final int houghThreshold2, final int houghThreshold3, final int convolutionThreshold,
@@ -287,7 +288,6 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 	public java.awt.Image houghCount() {
 		houghCenterCounter = 0; // reinicializa os contadores
 
-		final int circles[][] = new int[maxSizeOfArray][2];
 		houghInfo = new double[maxSizeOfArray];
 
 		originalPixels = new int[area];
@@ -466,16 +466,6 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 
 		final boolean[] mask = new boolean[maskArea];
 		int x, y;
-		final double theta;
-		// In the version of the contours
-		// for(int angleIndex = 0; angleIndex < 90; angleIndex+=2)
-		// {
-		// theta = (double)angleIndex * java.lang.Math.PI / 180;
-		// x = (int)(radius * (double)(java.lang.Math.cos(theta) + 1));
-		// y = (int)(radius * (double)(-java.lang.Math.sin(theta) + 1));
-		// mask[x + y * maskWidth] = 1.0f;
-		// }
-
 		for (int i = 0; i < maskArea; i++) {
 			x = i % maskWidth;
 			y = i / maskWidth;
@@ -670,6 +660,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 	 * the image has already been transformed
 	 * 
 	 * $$$%%% NOT USED %%%$$$
+	 * @return 
 	 */
 	public java.awt.Image fullCount() {
 		houghCount();
@@ -1172,8 +1163,6 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 			System.exit(1);
 		}
 		refineCountImage = outImage;
-		refineCountPixels = outPixels;
-
 		fullCircles = new int[center_counter][2];
 		int minimBefore = -1;
 		for (int i = 0; i < center_counter; i++) {
@@ -1404,7 +1393,6 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		BWImage = null;
 		BWPixels = null;
 		edgesImage = null;
-		edgesPixels = null;
 		houghImage = null;
 		houghPixels = null;
 		houghCountImage = null;
@@ -1412,7 +1400,6 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		convolutionImage = null;
 		convolutionCountImage = null;
 		fullCountImage = null;
-		fullCountPixels = null;
 	}// resetImages
 
 	public String getCurrentImageType() {
@@ -1462,13 +1449,6 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 	private int abs(final int a) {
 		if (a < 0) {
 			return (-a);
-		}
-		return a;
-	}// abs
-
-	private double abs(final double a) {
-		if (a < 0) {
-			return -a;
 		}
 		return a;
 	}// abs

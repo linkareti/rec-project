@@ -21,6 +21,13 @@ public class LMFit {
 
 	/**
 	 * Returns the value of ChiSquared
+	 * @param x 
+	 * @param y 
+	 * @param mu 
+	 * @param sigma 
+	 * @param y0 
+	 * @param Amp 
+	 * @return 
 	 */
 	public static double chiSq(final double[] x, final double[] y, final double mu, final double sigma,
 			final double y0, final double Amp) {
@@ -36,6 +43,12 @@ public class LMFit {
 
 	/**
 	 * Returns the value of the Gauss function
+	 * @param x 
+	 * @param mu 
+	 * @param sigma 
+	 * @param y0 
+	 * @param Amp 
+	 * @return 
 	 */
 	public static double gaussFunc(final double x, final double mu, final double sigma, final double y0,
 			final double Amp) {
@@ -84,6 +97,16 @@ public class LMFit {
 	 * 3*14=42 sigma = 1 y0 = 0 Amp = 1 lambda = 0.001 (from numerical recipies
 	 * in C) termEpsilon = 0.01 (from numerical recipies in C) maxIter = 10
 	 * (from Origin5.0)
+	 * @param x 
+	 * @param y 
+	 * @param mu 
+	 * @param sigma 
+	 * @param y0 
+	 * @param Amp 
+	 * @param lambda 
+	 * @param termEpsilon 
+	 * @param maxIter 
+	 * @return 
 	 */
 	public static double[] solve(final double[] x, final double[] y, double mu, double sigma, double y0, double Amp,
 			double lambda, final double termEpsilon, final int maxIter) {

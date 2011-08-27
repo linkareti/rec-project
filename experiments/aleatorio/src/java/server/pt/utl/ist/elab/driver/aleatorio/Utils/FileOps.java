@@ -22,7 +22,12 @@ public class FileOps {
 	public String[] dadosFileData = null;
 	private String filename = null;
 
-	/** Creates a new instance of FileOps */
+	/**
+	 * Creates a new instance of FileOps
+	 * 
+	 * @param filename
+	 * @param newFileProperties
+	 */
 	public FileOps(final String filename, final int[] newFileProperties) {
 
 		this.filename = filename;
@@ -35,20 +40,18 @@ public class FileOps {
 			}
 		} catch (final IOException e) {
 		}
-		;
 
 		byte[] dadosFileTempData = null;
 		try {
 			dadosFileTempData = new byte[(int) dadosFile.length()];
 		} catch (final IOException e) {
 		}
-		;
 
 		try {
 			dadosFile.read(dadosFileTempData, 0, (int) dadosFile.length());
 		} catch (final IOException e) {
 		}
-		;
+		
 		dadosFileData = parseTempData(dadosFileTempData);
 
 		closeFile();
@@ -207,7 +210,7 @@ public class FileOps {
 			tempBytes = new byte[(int) (dadosFile.length() - dadosFile.getFilePointer())];
 		} catch (final IOException e) {
 		}
-		;
+		
 		try {
 			dadosFile.read(tempBytes);
 		} catch (final IOException e) {

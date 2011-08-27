@@ -37,7 +37,11 @@ public class AleatorioDataSource extends BaseDataSource {
 	 */
 	private static final int NUM_CHANNELS = 6;
 
-	/** Creates a new instance of AleatorioDataSource */
+	/**
+	 * Creates a new instance of AleatorioDataSource
+	 * 
+	 * @param aleatorioDriver
+	 */
 	public AleatorioDataSource(final AleatorioDriver aleatorioDriver) {
 		this.aleatorioDriver = aleatorioDriver;
 	}

@@ -139,6 +139,7 @@ public class SoundThread implements Runnable {
 
 	/**
 	 * Setters and getters
+	 * @param waveFrequency1 
 	 */
 	public void setFrequency1(final float waveFrequency1) {
 		this.waveFrequency1 = waveFrequency1;

@@ -145,10 +145,7 @@ public class AccumulatedGraphDisplay extends javax.swing.JPanel implements
 	private javax.swing.JLabel sigmaLabel;
 	// End of variables declaration//GEN-END:variables
 
-	// My Vars
-	private final pt.utl.ist.elab.client.aleatorio.utils.StorageSingleton accuGraphDisplaySingleton = pt.utl.ist.elab.client.aleatorio.utils.StorageSingleton
-			.getSingleton();
-	private int numberOfDice, minValueOfDie, maxValueOfDie, counts = 0;
+	private int counts = 0;
 	private GraphPanel graphPanel;
 	private final ImageStorePanel imageStorePanel = new ImageStorePanel();
 	private double[] accuX = null, accuY = null;
@@ -317,17 +314,17 @@ public class AccumulatedGraphDisplay extends javax.swing.JPanel implements
 		return temp;
 	}// byteArray2IntArray(byte[] byteArray)
 
-	private int getIndexOfMax(final double[] array) {
-		double value = Double.MIN_VALUE;
-		int valueIndex = -1;
-		for (int index = 0; index < array.length; index++) {
-			if (array[index] > value) {
-				valueIndex = index;
-				value = array[index];
-			}
-		}
-		return valueIndex;
-	}// getIndexOfMax(double[] array)
+//	private int getIndexOfMax(final double[] array) {
+//		double value = Double.MIN_VALUE;
+//		int valueIndex = -1;
+//		for (int index = 0; index < array.length; index++) {
+//			if (array[index] > value) {
+//				valueIndex = index;
+//				value = array[index];
+//			}
+//		}
+//		return valueIndex;
+//	}// getIndexOfMax(double[] array)
 
 	private double getMax(final double[] array) {
 		if (array == null) {

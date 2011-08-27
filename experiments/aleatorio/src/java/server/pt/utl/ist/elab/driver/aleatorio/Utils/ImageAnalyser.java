@@ -25,7 +25,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 	private int[] BWPixels;
 	private java.awt.Image edgesImage = null; // stores the image with the edges
 	// detected
-	private int[] edgesPixels;
+	// private int[] edgesPixels;
 	private java.awt.Image houghImage = null; // stores the image of the hough
 	// transform
 	private int[] houghPixels;
@@ -45,9 +45,9 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 	private java.awt.Image fullCountImage = null; // stores the image after
 	// compiling both the
 	// counting algorithms
-	private int[] fullCountPixels;
+	// private int[] fullCountPixels;
 	private java.awt.Image refineCountImage = null;
-	private int[] refineCountPixels;
+	// private int[] refineCountPixels;
 
 	private String currentImageType = null; // keeps track of which image is in
 	// the variable image
@@ -127,6 +127,15 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 
 	/**
 	 * sets the parameters that will be used by the algorithms
+	 * 
+	 * @param BWThreshold
+	 * @param radius
+	 * @param houghThreshold1
+	 * @param houghThreshold2
+	 * @param houghThreshold3
+	 * @param convolutionThreshold
+	 * @param maxClusterSize
+	 * @param maxDiceCount
 	 */
 	public void setParams(final int BWThreshold, final int radius, final int houghThreshold1,
 			final int houghThreshold2, final int houghThreshold3, final int convolutionThreshold,
@@ -287,7 +296,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 	public java.awt.Image houghCount() {
 		houghCenterCounter = 0; // reinicializa os contadores
 
-		final int circles[][] = new int[maxSizeOfArray][2];
+		// final int circles[][] = new int[maxSizeOfArray][2];
 		houghInfo = new double[maxSizeOfArray];
 
 		originalPixels = new int[area];
@@ -466,7 +475,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 
 		final boolean[] mask = new boolean[maskArea];
 		int x, y;
-		final double theta;
+		// final double theta;
 		// In the version of the contours
 		// for(int angleIndex = 0; angleIndex < 90; angleIndex+=2)
 		// {
@@ -687,6 +696,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 	 * the image has already been transformed
 	 * 
 	 * $$$%%% NOT USED %%%$$$
+	 * 
+	 * @return
 	 */
 	public java.awt.Image fullCount() {
 		houghCount();
@@ -802,7 +813,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		// Counting the number of Dice by clustering
 		int currentX, currentY;
 		final int maxDice = 1024;
-		vClusters = new java.util.Vector(maxDice); // is a vector of vectors
+		vClusters = new java.util.Vector<Vector<?>>(maxDice); // is a vector of vectors
 		java.util.Vector[] vDie = new java.util.Vector[maxDice]; // is an array
 		// of
 		// vectors
@@ -901,7 +912,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 
 					vDieSize = vDie[index].size() - 1;
 
-					java.util.Vector vDieContinue;
+					java.util.Vector<Object> vDieContinue;
 					final double maxmaxDist = maxClusterSize / 2. * 1.196;// *1.45;//*1.35;
 					// //
 					// *
@@ -937,7 +948,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 							final int[] pixelIndex = new int[1];
 							pixelIndex[0] = centers[((Integer) vDie[index].get(0)).intValue()][0]
 									+ centers[((Integer) vDie[index].get(0)).intValue()][1] * imageWidth;
-							java.util.Vector checkDie1Vector;
+							java.util.Vector<Object> checkDie1Vector;
 							if (isOne(pixelIndex, maxClusterSize)) {
 								checkDie1Vector = checkDie1(vDie, index, centers, info, radius, maxClusterSize, true);
 							}// if
@@ -1022,7 +1033,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 					center_counter -= vDie[index].size() - 1;
 					for (int indexa = index + 1; indexa < cluster_counter; indexa++) {
 						vDie[indexa - 1].clear();
-						vDie[indexa - 1] = (java.util.Vector) vDie[indexa].clone();
+						vDie[indexa - 1] = (java.util.Vector<?>) vDie[indexa].clone();
 					}// for_indexa
 					vDie[cluster_counter - 1] = null;
 					cluster_counter--;
@@ -1189,7 +1200,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 			System.exit(1);
 		}
 		refineCountImage = outImage;
-		refineCountPixels = outPixels;
+		// refineCountPixels = outPixels;
 
 		fullCircles = new int[center_counter][2];
 		int minimBefore = -1;
@@ -1268,8 +1279,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		int x, y;
 		final int maxDice = 256;
 
-		final java.util.Vector<Vector<?>> vClusters = new java.util.Vector(maxDice); // is
-																			// a
+		final java.util.Vector<Vector<?>> vClusters = new java.util.Vector<Vector<?>>(maxDice); // is
+		// a
 		// vector of
 		// vectors
 		final java.util.Vector[] vDie = new java.util.Vector[maxDice]; // is an
@@ -1421,7 +1432,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		BWImage = null;
 		BWPixels = null;
 		edgesImage = null;
-		edgesPixels = null;
+		// edgesPixels = null;
 		houghImage = null;
 		houghPixels = null;
 		houghCountImage = null;
@@ -1429,7 +1440,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		convolutionImage = null;
 		convolutionCountImage = null;
 		fullCountImage = null;
-		fullCountPixels = null;
+		// fullCountPixels = null;
 	}// resetImages
 
 	public String getCurrentImageType() {
@@ -1469,12 +1480,12 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		return b;
 	}// max_double
 
-	private int min(final int a, final int b) {
-		if (a < b) {
-			return a;
-		}
-		return b;
-	}// min
+	// private int min(final int a, final int b) {
+	// if (a < b) {
+	// return a;
+	// }
+	// return b;
+	// }// min
 
 	private int abs(final int a) {
 		if (a < 0) {
@@ -1483,12 +1494,12 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		return a;
 	}// abs
 
-	private double abs(final double a) {
-		if (a < 0) {
-			return -a;
-		}
-		return a;
-	}// abs
+	// private double abs(final double a) {
+	// if (a < 0) {
+	// return -a;
+	// }
+	// return a;
+	// }// abs
 
 	/**
 	 * number! (factorial)
@@ -1718,12 +1729,12 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 	// checks the pixels of the B&W image and the corners of squares of side 13,
 	// 9 & 5, must be white (in either) and the center black, to be accepted as
 	// a spot
-	private java.util.Vector isSpot(final int pixelIndex, final int raio, final boolean isProbableSix,
+	private java.util.Vector<Comparable> isSpot(final int pixelIndex, final int raio, final boolean isProbableSix,
 			final boolean isProbableOne) {
 		final int[] imSize = imageSize();
 		final int imageWidth = imSize[0], imageHeight = imSize[1], numberOfFalses = 0;
 		final boolean badTopRight = true, badTop = true, badTopLeft = true, badRight = true, badBottomRight = true, badBottom = true, badBottomLeft = true, badLeft = true;
-		final java.util.Vector<Comparable> toReturn = new java.util.Vector(4);
+		final java.util.Vector<Comparable> toReturn = new java.util.Vector<Comparable>(4);
 		toReturn.add(0, Boolean.FALSE);
 		toReturn.add(1, new Integer(0)); // zeroCounter
 		toReturn.add(2, new Integer(0)); // oneCounter
@@ -2865,7 +2876,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 	 * Spans a number of spots and removes them from the die if the result is
 	 * ok.
 	 */
-	private java.util.Vector testRemove(java.util.Vector[] vDie, final int vDieIndex, final int testDieSize,
+	private java.util.Vector<Object> testRemove(java.util.Vector[] vDie, final int vDieIndex, final int testDieSize,
 			int[] pixelIndex, final int raio, final int maxClusterSize, int[] x, int[] y, final int externalCounter) {
 		final int spotCount = vDie[vDieIndex].size() - 1;
 		final int dieDiff = spotCount - testDieSize;
@@ -2877,7 +2888,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 
 		if (spotCount - testDieSize > 4) {
 			// System.out.println("Die with an excess of more than 4 spots! Ignoring it Completely!!");
-			final java.util.Vector<Object> vDieXYpI = new java.util.Vector(4);
+			final java.util.Vector<Object> vDieXYpI = new java.util.Vector<Object>(4);
 			vDieXYpI.add(0, vDie);
 			vDieXYpI.add(1, x);
 			vDieXYpI.add(2, y);
@@ -2895,8 +2906,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 			spotsToRemove[0] = indexa;
 			if (dieDiff == 1) {
 				if (tryRemove(vDie, vDieIndex, testDieSize, spotsToRemove, pixelIndex, raio, maxClusterSize)) {
-					final java.util.Vector vDieXYpI = new java.util.Vector(4);
-					final java.util.Vector isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio, true, false);
+					final java.util.Vector<Object> vDieXYpI = new java.util.Vector<Object>(4);
+					final java.util.Vector<Comparable> isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio, true, false);
 					final int counterSum = ((Integer) isSpotVector.get(1)).intValue()
 							+ ((Integer) isSpotVector.get(2)).intValue() + ((Integer) isSpotVector.get(3)).intValue();
 
@@ -2921,7 +2932,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 						cluster_counter++;
 						clusterCenters = getClusterCenters(vDie); // update
 						// clusterCenters
-						final java.util.Vector checkSpotsResult = checkSpots(vDie, vDieIndex, x, y, pixelIndex, raio,
+						final java.util.Vector<Object> checkSpotsResult = checkSpots(vDie, vDieIndex, x, y, pixelIndex, raio,
 								maxClusterSize);
 						// System.out.println("vDie in TestRemove:"+((java.util.Vector[])checkSpotsResult.get(0))[vDieIndex]);
 						if (((Boolean) checkSpotsResult.get(4)).equals(Boolean.TRUE)) {
@@ -2957,8 +2968,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 					spotsToRemove[1] = indexb;
 					if (dieDiff == 2) {
 						if (tryRemove(vDie, vDieIndex, testDieSize, spotsToRemove, pixelIndex, raio, maxClusterSize)) {
-							final java.util.Vector vDieXYpI = new java.util.Vector(4);
-							java.util.Vector isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio, true, false);
+							final java.util.Vector<Object> vDieXYpI = new java.util.Vector<Object>(4);
+							java.util.Vector<Comparable> isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio, true, false);
 							int counterSum = ((Integer) isSpotVector.get(1)).intValue()
 									+ ((Integer) isSpotVector.get(2)).intValue()
 									+ ((Integer) isSpotVector.get(3)).intValue();
@@ -2999,7 +3010,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 								cluster_counter++;
 								clusterCenters = getClusterCenters(vDie); // update
 								// clusterCenters
-								final java.util.Vector checkSpotsResult = checkSpots(vDie, vDieIndex, x, y, pixelIndex,
+								final java.util.Vector<Object> checkSpotsResult = checkSpots(vDie, vDieIndex, x, y, pixelIndex,
 										raio, maxClusterSize);
 								if (((Boolean) checkSpotsResult.get(4)).equals(Boolean.TRUE)) {
 									// System.out.println("Setting Die "+vDieIndex
@@ -3032,8 +3043,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 							if (dieDiff == 3) {
 								if (tryRemove(vDie, vDieIndex, testDieSize, spotsToRemove, pixelIndex, raio,
 										maxClusterSize)) {
-									final java.util.Vector vDieXYpI = new java.util.Vector(4);
-									java.util.Vector isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio, true,
+									final java.util.Vector<Object> vDieXYpI = new java.util.Vector<Object>(4);
+									java.util.Vector<Comparable> isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio, true,
 											false);
 									int counterSum = ((Integer) isSpotVector.get(1)).intValue()
 											+ ((Integer) isSpotVector.get(2)).intValue()
@@ -3091,7 +3102,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 										clusterCenters = getClusterCenters(vDie); // update
 										// clusterCenters
 
-										final java.util.Vector checkSpotsResult = checkSpots(vDie, vDieIndex, x, y,
+										final java.util.Vector<Object> checkSpotsResult = checkSpots(vDie, vDieIndex, x, y,
 												pixelIndex, raio, maxClusterSize);
 
 										if (((Boolean) checkSpotsResult.get(4)).equals(Boolean.TRUE)) {
@@ -3126,8 +3137,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 									if (dieDiff == 4) {
 										if (tryRemove(vDie, vDieIndex, testDieSize, spotsToRemove, pixelIndex, raio,
 												maxClusterSize)) {
-											final java.util.Vector vDieXYpI = new java.util.Vector(4);
-											java.util.Vector isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio,
+											final java.util.Vector<Object> vDieXYpI = new java.util.Vector<Object>(4);
+											java.util.Vector<Comparable> isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio,
 													true, false);
 											int counterSum = ((Integer) isSpotVector.get(1)).intValue()
 													+ ((Integer) isSpotVector.get(2)).intValue()
@@ -3197,7 +3208,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 												cluster_counter++;
 												clusterCenters = getClusterCenters(vDie); // update
 												// clusterCenters
-												final java.util.Vector checkSpotsResult = checkSpots(vDie, vDieIndex,
+												final java.util.Vector<Object> checkSpotsResult = checkSpots(vDie, vDieIndex,
 														x, y, pixelIndex, raio, maxClusterSize);
 												if (((Boolean) checkSpotsResult.get(4)).equals(Boolean.TRUE)) {
 													// System.out.println("Setting Die "+vDieIndex
@@ -3236,7 +3247,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		}// for_indexa
 			// }//for_testIndex
 
-		final java.util.Vector vDieXYpI = new java.util.Vector(4);
+		final java.util.Vector<Object> vDieXYpI = new java.util.Vector<Object>(4);
 		vDieXYpI.add(0, vDie);
 		vDieXYpI.add(1, x);
 		vDieXYpI.add(2, y);
@@ -3245,10 +3256,10 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		return vDieXYpI;
 	}// testRemove
 
-	private java.util.Vector checkForSpotsThatReallyBelongToThis(java.util.Vector[] vDie, int vDieIndex, int[] x,
+	private java.util.Vector<Object> checkForSpotsThatReallyBelongToThis(java.util.Vector[] vDie, int vDieIndex, int[] x,
 			int[] y, int[] pixelIndex, final int maxClusterSize) {
 		int spotCount = vDie[vDieIndex].size() - 1;
-		final java.util.Vector toReturn = new java.util.Vector(5);
+		final java.util.Vector<Object> toReturn = new java.util.Vector<Object>(5);
 		toReturn.add(0, vDie);
 		toReturn.add(1, x);
 		toReturn.add(2, y);
@@ -3335,11 +3346,11 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 	 * This only works for dies with 3 or more spots detected. twos and ones are
 	 * separate cases!
 	 */
-	private java.util.Vector checkDie(java.util.Vector[] vDie, int vDieIndex, final int[][] centers,
+	private java.util.Vector<Object> checkDie(java.util.Vector[] vDie, int vDieIndex, final int[][] centers,
 			final double[] info, final int maxClusterSize, final int raio, final int insideCluster) {
 
 		if (vDie[vDieIndex].get(vDie[vDieIndex].size() - 1).equals(Boolean.TRUE)) {
-			final java.util.Vector toReturn = new java.util.Vector(2);
+			final java.util.Vector<Object> toReturn = new java.util.Vector<Object>(2);
 			toReturn.add(0, vDie);
 			toReturn.add(1, Boolean.TRUE);
 			return toReturn;
@@ -3392,7 +3403,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 			pixelIndex[index] = y[index] * imageWidth + x[index];
 		}// for
 
-		final java.util.Vector toReturn = new java.util.Vector(2);
+		final java.util.Vector<Object> toReturn = new java.util.Vector<Object>(2);
 
 		int whileCounter = 0;
 		boolean isSpotCountOK = checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize);
@@ -3412,7 +3423,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 				pixelIndex = new int[1];
 				pixelIndex[0] = centers[((Integer) vDie[vDieIndex].get(0)).intValue()][0]
 						+ centers[((Integer) vDie[vDieIndex].get(0)).intValue()][1] * imageWidth;
-				java.util.Vector checkDie1Vector;
+				java.util.Vector<Object> checkDie1Vector;
 				if (isOne(pixelIndex, maxClusterSize)) {
 					checkDie1Vector = checkDie1(vDie, vDieIndex, centers, info, raio, maxClusterSize, true);
 				}// if
@@ -3612,7 +3623,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 						pixelIndex = new int[1];
 						pixelIndex[0] = centers[((Integer) vDie[vDieIndex].get(0)).intValue()][0]
 								+ centers[((Integer) vDie[vDieIndex].get(0)).intValue()][1] * imageWidth;
-						java.util.Vector checkDie1Vector;
+						java.util.Vector<Object> checkDie1Vector;
 						if (isOne(pixelIndex, maxClusterSize)) {
 							checkDie1Vector = checkDie1(vDie, vDieIndex, centers, info, raio, maxClusterSize, true);
 						}// if
@@ -3680,7 +3691,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 
 			// check if there are spots that are on the background
 			// double[][] distMin_cluster;// = new double[spotCount][2];
-			java.util.Vector vDieXYpIdM;
+			java.util.Vector<Object> vDieXYpIdM;
 
 			vDieXYpIdM = checkSpots(vDie, vDieIndex, x, y, pixelIndex, raio, maxClusterSize);// ,
 			// distMin_cluster);
@@ -4300,7 +4311,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 			pixelIndex = new int[1];
 			pixelIndex[0] = centers[((Integer) vDie[vDieIndex].get(0)).intValue()][0]
 					+ centers[((Integer) vDie[vDieIndex].get(0)).intValue()][1] * imageWidth;
-			java.util.Vector checkDie1Vector;
+			java.util.Vector<Object> checkDie1Vector;
 			if (isOne(pixelIndex, maxClusterSize)) {
 				checkDie1Vector = checkDie1(vDie, vDieIndex, centers, info, raio, maxClusterSize, true);
 			}// if
@@ -4332,7 +4343,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		// return vDie;
 	}// checkDie
 
-	private java.util.Vector checkDie1(java.util.Vector[] vDie, int vDieIndex, final int[][] centers,
+	private java.util.Vector<Object> checkDie1(java.util.Vector[] vDie, int vDieIndex, final int[][] centers,
 			final double[] info, final int raio, final int maxClusterSize, final boolean isProbableOne) {
 		// System.out.println("Checking a die with 1 spot!");
 
@@ -4340,7 +4351,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		double media1;
 		final int imageWidth = imageSize()[0];
 		double maxmaxDist = maxClusterSize / 2. * 1.196; // =19.7175
-		final java.util.Vector toReturn = new java.util.Vector(2);
+		final java.util.Vector<Object> toReturn = new java.util.Vector<Object>(2);
 		toReturn.add(0, vDie);
 		toReturn.add(1, Boolean.TRUE);// is TRUE when the checkDie1 returns the
 		// same die with the same spot. FALSE
@@ -4363,7 +4374,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		if (isSpot(pixelIndex1, raio, true, false).get(0).equals(Boolean.FALSE)) {
 			isRelaxedSpot = false;
 		}// if
-		final java.util.Vector isSpotVector = isSpot(pixelIndex1, raio, false, true);
+		final java.util.Vector<Comparable> isSpotVector = isSpot(pixelIndex1, raio, false, true);
 		final int maxZeroCount = 1, maxOneCount = 2, maxMaxCount = 1;
 		if (!isRelaxedSpot && isSpotVector.get(0).equals(Boolean.FALSE)
 				&& ((Integer) isSpotVector.get(1)).intValue() > maxZeroCount
@@ -4597,7 +4608,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		return toReturn;
 	}// checkDie1
 
-	private java.util.Vector checkDoubleSpots(java.util.Vector[] vDie, final int vDieIndex, int[] x, int[] y,
+	private java.util.Vector<Object> checkDoubleSpots(java.util.Vector[] vDie, final int vDieIndex, int[] x, int[] y,
 			int[] pixelIndex, final int raio, final int maxClusterSize) {
 		if (vDie[vDieIndex].get(vDie[vDieIndex].size() - 1).equals(Boolean.TRUE)) // if
 		// this
@@ -4607,7 +4618,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		// do
 		// nothing!
 		{
-			final java.util.Vector vDieXYpI = new java.util.Vector(5);
+			final java.util.Vector<Object> vDieXYpI = new java.util.Vector<Object>(5);
 			vDieXYpI.add(0, vDie);
 			vDieXYpI.add(1, x);
 			vDieXYpI.add(2, y);
@@ -4618,7 +4629,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 			// System.out.println("Checking Double Spots!");
 		int spotCount = vDie[vDieIndex].size() - 1, x_mean, y_mean;
 		double[] distance;
-		final java.util.Vector vDieXYpI = new java.util.Vector(5);
+		final java.util.Vector<Object> vDieXYpI = new java.util.Vector<Object>(5);
 		for (int indexa = 0; indexa < spotCount; indexa++) {
 			final int xa = x[indexa];
 			final int ya = y[indexa];
@@ -4712,7 +4723,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		return vDieXYpI;
 	}// checkDoubleSpots
 
-	private java.util.Vector checkSpots(java.util.Vector[] vDie, final int vDieIndex, int[] x, int[] y,
+	private java.util.Vector<Object> checkSpots(java.util.Vector[] vDie, final int vDieIndex, int[] x, int[] y,
 			int[] pixelIndex, final int raio, final int maxClusterSize)// ,
 																		// double[][]
 																		// distMin_cluster)
@@ -4725,7 +4736,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		// do
 		// nothing!
 		{
-			final java.util.Vector vDieXYpI = new java.util.Vector(5);
+			final java.util.Vector<Object> vDieXYpI = new java.util.Vector<Object>(5);
 			vDieXYpI.add(0, vDie);
 			vDieXYpI.add(1, x);
 			vDieXYpI.add(2, y);
@@ -4760,7 +4771,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 				// get worst spot, to remove!
 				final int[] counter = new int[3];
 				for (int i = 0; i < spotCount; i++) {
-					final java.util.Vector isSpotVector = isSpot(pixelIndex[i], raio, true, false);
+					final java.util.Vector<Comparable> isSpotVector = isSpot(pixelIndex[i], raio, true, false);
 					counter[i] = ((Integer) isSpotVector.get(1)).intValue();
 					counter[i] += ((Integer) isSpotVector.get(2)).intValue();
 					counter[i] += ((Integer) isSpotVector.get(3)).intValue();
@@ -4799,7 +4810,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 					if (checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize)) {
 						// System.out.println("Setting die "+vDieIndex+" as TRUE!");
 						vDie[vDieIndex].set(vDie[vDieIndex].size() - 1, Boolean.TRUE);
-						final java.util.Vector vDieXYpI = new java.util.Vector(5);
+						final java.util.Vector<Object> vDieXYpI = new java.util.Vector<Object>(5);
 						vDieXYpI.add(0, vDie);
 						vDieXYpI.add(1, x);
 						vDieXYpI.add(2, y);
@@ -4811,7 +4822,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 			}// if
 		}// if
 
-		final java.util.Vector vDieXYpI = new java.util.Vector(5);
+		final java.util.Vector<Object> vDieXYpI = new java.util.Vector<Object>(5);
 		final double maxmaxDist = (double) maxClusterSize / 2;// * 1.196;
 		final int imageWidth = imageSize()[0], minWhite = 2;
 
@@ -4885,7 +4896,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 			 */
 			// System.out.println("checking spot " + vDie[vDieIndex].get(index)
 			// + ", ("+x[index]+", "+y[index]+"),");
-			final java.util.Vector isSpotVector = isSpot(pixelIndex[index], raio, isProbableSix, spotCount == 1 ? true
+			final java.util.Vector<Comparable> isSpotVector = isSpot(pixelIndex[index], raio, isProbableSix, spotCount == 1 ? true
 					: false);
 			if (isSpotVector.get(0).equals(Boolean.FALSE)) {
 				// System.out.println("Is not Spot!");
@@ -4953,7 +4964,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		return vDieXYpI;
 	}// checkSpots
 
-	private java.util.Vector checkIfSpotsBelongToAnother(java.util.Vector[] vDie, final int vDieIndex, int[] x,
+	private java.util.Vector<Object> checkIfSpotsBelongToAnother(java.util.Vector[] vDie, final int vDieIndex, int[] x,
 			int[] y, int[] pixelIndex, final int raio, final int maxClusterSize, final int insideCluster,
 			final double[] info) {
 		if (vDie[vDieIndex].get(vDie[vDieIndex].size() - 1).equals(Boolean.TRUE)) // if
@@ -4964,7 +4975,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		// do
 		// nothing!
 		{
-			final java.util.Vector vDieXYpIdM = new java.util.Vector(5);
+			final java.util.Vector<Object> vDieXYpIdM = new java.util.Vector<Object>(5);
 			final double[][] distMin_cluster = new double[vDie[vDieIndex].size() - 1][2];
 			vDieXYpIdM.add(0, vDie);
 			vDieXYpIdM.add(1, x);
@@ -4975,7 +4986,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		}// if
 			// System.out.println("Checking if spots belong to another Die!");
 		int spotCount = vDie[vDieIndex].size() - 1;
-		final java.util.Vector vDieXYpIdM = new java.util.Vector(6);
+		final java.util.Vector<Object> vDieXYpIdM = new java.util.Vector<Object>(6);
 		double maxmaxDist;// = (double)maxClusterSize/2. * 1.195;
 
 		double[][] distMin_cluster = new double[spotCount][2];
@@ -5242,7 +5253,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 				// System.out.println(vDie[vDieIndex]);
 				final int sizeBeforeCheck = vDie[vDieIndex].size();
 				final java.util.Vector dieBeforeCheck = (java.util.Vector) vDie[vDieIndex].clone();
-				final java.util.Vector checkSpotsResult = checkSpots(vDie, vDieIndex, x, y, pixelIndex, raio,
+				final java.util.Vector<Object> checkSpotsResult = checkSpots(vDie, vDieIndex, x, y, pixelIndex, raio,
 						maxClusterSize);
 				// System.out.println("Size after checking spots: "+(((java.util.Vector[])checkSpotsResult.get(0))[vDieIndex].size()-1));
 				vDie = (java.util.Vector[]) checkSpotsResult.get(0);
@@ -5304,7 +5315,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 					pixelIndex = new int[1];
 					pixelIndex[0] = centers[((Integer) vDie[vDieIndex].get(0)).intValue()][0]
 							+ centers[((Integer) vDie[vDieIndex].get(0)).intValue()][1] * imageWidth;
-					java.util.Vector checkDie1Vector;
+					java.util.Vector<Object> checkDie1Vector;
 					if (isOne(pixelIndex, maxClusterSize)) {
 						checkDie1Vector = checkDie1(vDie, vDieIndex, centers, info, raio, maxClusterSize, true);
 					}// if
@@ -5339,7 +5350,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 
 	}// checkIfSpotBelongsToAnother
 
-	private java.util.Vector checkSpotsFromOthers(java.util.Vector[] vDie, int vDieIndex, int[] x, int[] y,
+	private java.util.Vector<Object> checkSpotsFromOthers(java.util.Vector[] vDie, int vDieIndex, int[] x, int[] y,
 			int[] pixelIndex, final int raio, final int maxClusterSize) {
 		if (vDie[vDieIndex].get(vDie[vDieIndex].size() - 1).equals(Boolean.TRUE)) // if
 		// this
@@ -5349,7 +5360,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		// do
 		// nothing!
 		{
-			final java.util.Vector vDieXYpI = new java.util.Vector(6);
+			final java.util.Vector<Object> vDieXYpI = new java.util.Vector<Object>(6);
 			vDieXYpI.add(0, vDie);
 			vDieXYpI.add(1, x);
 			vDieXYpI.add(2, y);
@@ -5360,7 +5371,7 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		}// if
 			// System.out.println("Checking spots from other dies!");
 		int spotCount = vDie[vDieIndex].size() - 1;
-		final java.util.Vector vDieXYpI = new java.util.Vector(6);
+		final java.util.Vector<Object> vDieXYpI = new java.util.Vector<Object>(6);
 		final int imageWidth = imageSize()[0];
 		double[] minDistSpotClusterXY;
 		final double maxmaxDist = maxClusterSize / 1.4;

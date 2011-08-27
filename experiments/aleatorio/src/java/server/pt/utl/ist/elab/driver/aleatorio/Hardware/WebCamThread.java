@@ -35,25 +35,13 @@ public class WebCamThread implements Runnable {
 
 	private static boolean debugDeviceList = false;
 
-	private static String defaultVideoDeviceName = "vfw:Microsoft WDM Image Capture (Win32):0";// Logitech
-	// USB
-	// Video
-	// Camera
-	private static String defaultVideoFormatString = "size=640x480, encoding=rgb, maxdatalength=921600";// "size=320x240, encoding=yuv, maxdatalength=115200";
-
 	private static CaptureDeviceInfo captureVideoDevice = null;
-	private static VideoFormat captureVideoFormat = null;
-
-	private DataSource processorDataSource;
 	private DataSink outputDataSink;
 
 	private static Player videoPlayer;
-	private final Image videoFrame = null;
 	private final int imageWidth = 640;
 	private final int imageHeight = 480;
 	public long milisecs; // length of the movie file in milisecs
-	private final String movieFileName = null;
-
 	private DataSource videoDataSource = null;
 
 	public boolean recording = false;
@@ -72,6 +60,7 @@ public class WebCamThread implements Runnable {
 	
 		System.out.println(">>> get list of all media devices ...");
 	
+		@SuppressWarnings("rawtypes")
 		java.util.Vector deviceListVector = CaptureDeviceManager.getDeviceList(null);
 		if (deviceListVector == null) {
 			System.out.println("... error: media device list vector is null, program aborted");
@@ -150,8 +139,6 @@ public class WebCamThread implements Runnable {
 	
 				Format finalFormat = null;
 				for (int i = 0; i < formatControls.length; i++) {
-					if (formatControls == null)
-						continue;
 					if ((finalFormat = formatControls[i].setFormat(wantedFormat)) != null)
 						break;
 				}
@@ -351,6 +338,7 @@ public class WebCamThread implements Runnable {
 	 */
 	/**
 	 * Configure the length of the movie file in milisecs
+	 * @param milisecs 
 	 */
 	public void configure(final long milisecs) {
 		System.out.println(">>> Configuring webcam for recording for " + milisecs + " milisecs.");
@@ -367,6 +355,7 @@ public class WebCamThread implements Runnable {
 
 	/**
 	 * Acquires an image from the webcam
+	 * @return 
 	 */
 	public Image getImage() {
 		if (!isVideoPlayerStarted()) {
@@ -407,6 +396,7 @@ public class WebCamThread implements Runnable {
 
 	/**
 	 * Grabs a frame and returns the buffer of that frame
+	 * @return 
 	 */
 	public Buffer grabFrameBuffer() {
 		// Control[] controls = videoPlayer.getControls();

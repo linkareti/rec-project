@@ -22,7 +22,12 @@ public class Oscilador extends AudioInputStream {
 	private int m_nBufferPosition;
 	private long m_lRemainingFrames;
 
-	/** Creates a new instance of Oscilador */
+	/** Creates a new instance of Oscilador 
+	 * @param frequencia1 
+	 * @param frequencia2 
+	 * @param amplitude 
+	 * @param lengthInFrames 
+	 * @param audioFormat */
 	public Oscilador(final float frequencia1, final float frequencia2, final float amplitude,
 			final long lengthInFrames, final AudioFormat audioFormat) {
 		super(new ByteArrayInputStream(new byte[0]), new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
@@ -36,17 +41,7 @@ public class Oscilador extends AudioInputStream {
 		// getFormat().getFrameSize();
 		final int nFullLengthInFrames = (int) lengthInFrames;
 
-		final int nFirstPeriodLengthInFrames = Math.round(getFormat().getFrameRate() / frequencia1);
-		final int nLastPeriodLengthInFrames = Math.round(getFormat().getFrameRate() / frequencia2);
-
 		final int nBufferLength = nFullLengthInFrames * getFormat().getFrameSize();
-
-		int freqSign = 0;
-		if (frequencia1 < frequencia2) {
-			freqSign = -1;
-		} else {
-			freqSign = 1;
-		}
 
 		// int nFreqDif = Math.round((frequencia1 - fequencia2) * freqSign);
 		final int lengthInSeconds = (int) Math.round((double) lengthInFrames / audioFormat.getFrameRate());
@@ -60,11 +55,6 @@ public class Oscilador extends AudioInputStream {
 		for (int nFrame = 0; nFrame < nFullLengthInFrames; nFrame++) {
 			final double dCurrentPeriod = 1. / (frequencia1 + (double) nFrame / (double) nFullLengthInFrames
 					* (frequencia2 - frequencia1));
-			final int nCurrentPeriodLengthInFrames = (int) Math.round(getFormat().getFrameRate() * dCurrentPeriod);
-			// float fPeriodPosition = (float) nFrame / ((float)
-			// nPeriodLengthInFrames;
-			// float fValue = (float) Math.cos(fPeriodPosition * 2.0 * Math.PI);
-
 			final float fFullPosition = (float) nFrame / (float) nFullLengthInFrames * (lengthInSeconds);
 
 			final float fValue = (float) Math.cos(fFullPosition * 2.0 * Math.PI / dCurrentPeriod);
