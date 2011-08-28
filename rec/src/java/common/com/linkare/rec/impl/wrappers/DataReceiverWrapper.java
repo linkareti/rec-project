@@ -35,7 +35,8 @@ public class DataReceiverWrapper implements DataReceiverOperations {
 		}
 	}
 
-	/** Creates a new instance of DataReceiverWrapper */
+	/** Creates a new instance of DataReceiverWrapper 
+	 * @param delegate */
 	public DataReceiverWrapper(final DataReceiver delegate) {
 		this.delegate = delegate;
 		checkConnect();

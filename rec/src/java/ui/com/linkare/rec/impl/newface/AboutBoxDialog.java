@@ -26,7 +26,9 @@ public class AboutBoxDialog extends javax.swing.JDialog {
 		this(parent, true);
 	}
 
-	/** Creates new form AboutBoxDialog */
+	/** Creates new form AboutBoxDialog 
+	 * @param parent 
+	 * @param modal */
 	public AboutBoxDialog(final java.awt.Frame parent, final boolean modal) {
 		super(parent, modal);
 		initComponents();

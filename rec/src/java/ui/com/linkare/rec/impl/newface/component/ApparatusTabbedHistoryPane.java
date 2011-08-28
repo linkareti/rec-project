@@ -34,7 +34,8 @@ public class ApparatusTabbedHistoryPane extends GradientPane {
 
 	public static final int TAB_RESULTS = 1;
 
-	/** Creates new form ApparatusTabbedPane */
+	/** Creates new form ApparatusTabbedPane 
+	 * @param experimentUIData */
 	public ApparatusTabbedHistoryPane(final ExperimentUIData experimentUIData) {
 		initComponents();
 		resultsActionBar.setPlayStopButtonVisible(false);

@@ -241,8 +241,10 @@ public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableMod
 
 	/**
 	 * Setter for property channelDisplayY.
+	 * @param col 
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
+	 * @return 
 	 */
 	public int getColAtArray(final int col) {
 		return colArray[col];
@@ -259,6 +261,7 @@ public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableMod
 
 	/**
 	 * Setter for property channelDisplayY.
+	 * @param colArray 
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */

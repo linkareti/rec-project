@@ -698,7 +698,7 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 		childBeans(recursive, children);
 		final com.linkare.rec.impl.baseUI.config.CommonBean[] result = new com.linkare.rec.impl.baseUI.config.CommonBean[children
 				.size()];
-		return (com.linkare.rec.impl.baseUI.config.CommonBean[]) children.toArray(result);
+		return children.toArray(result);
 	}
 
 	// Put all child beans into the beans list.
@@ -768,9 +768,9 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 		}
 		// Compare every element.
 		for (Iterator<Apparatus> it = _Apparatus.iterator(), it2 = inst._Apparatus.iterator(); it.hasNext() && it2.hasNext();) {
-			final com.linkare.rec.impl.baseUI.config.Apparatus element = (com.linkare.rec.impl.baseUI.config.Apparatus) it
+			final com.linkare.rec.impl.baseUI.config.Apparatus element = it
 					.next();
-			final com.linkare.rec.impl.baseUI.config.Apparatus element2 = (com.linkare.rec.impl.baseUI.config.Apparatus) it2
+			final com.linkare.rec.impl.baseUI.config.Apparatus element2 = it2
 					.next();
 			if (!(element == null ? element2 == null : element.equals(element2))) {
 				return false;
@@ -781,9 +781,9 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 		}
 		// Compare every element.
 		for (Iterator<WebResource> it = _WebResource.iterator(), it2 = inst._WebResource.iterator(); it.hasNext() && it2.hasNext();) {
-			final com.linkare.rec.impl.baseUI.config.WebResource element = (com.linkare.rec.impl.baseUI.config.WebResource) it
+			final com.linkare.rec.impl.baseUI.config.WebResource element = it
 					.next();
-			final com.linkare.rec.impl.baseUI.config.WebResource element2 = (com.linkare.rec.impl.baseUI.config.WebResource) it2
+			final com.linkare.rec.impl.baseUI.config.WebResource element2 = it2
 					.next();
 			if (!(element == null ? element2 == null : element.equals(element2))) {
 				return false;
@@ -795,9 +795,9 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 		// Compare every element.
 		for (Iterator<LocalizationBundle> it = _LocalizationBundle.iterator(), it2 = inst._LocalizationBundle.iterator(); it.hasNext()
 				&& it2.hasNext();) {
-			final com.linkare.rec.impl.baseUI.config.LocalizationBundle element = (com.linkare.rec.impl.baseUI.config.LocalizationBundle) it
+			final com.linkare.rec.impl.baseUI.config.LocalizationBundle element = it
 					.next();
-			final com.linkare.rec.impl.baseUI.config.LocalizationBundle element2 = (com.linkare.rec.impl.baseUI.config.LocalizationBundle) it2
+			final com.linkare.rec.impl.baseUI.config.LocalizationBundle element2 = it2
 					.next();
 			if (!(element == null ? element2 == null : element.equals(element2))) {
 				return false;

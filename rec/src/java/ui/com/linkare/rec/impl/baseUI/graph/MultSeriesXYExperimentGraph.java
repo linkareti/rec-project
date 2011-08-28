@@ -267,8 +267,10 @@ public class MultSeriesXYExperimentGraph extends javax.swing.JPanel implements E
 
 	/**
 	 * Setter for property channelDisplayY.
+	 * @param channel 
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
+	 * @return 
 	 */
 	public int getChannelDisplayAtYArray(final int channel) {
 		return defaultXYDatasetProxy.getChannelDisplayAtYArray(channel);
@@ -285,6 +287,7 @@ public class MultSeriesXYExperimentGraph extends javax.swing.JPanel implements E
 
 	/**
 	 * Setter for property channelDisplayY.
+	 * @param channelDisplayYArray 
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */

@@ -206,8 +206,10 @@ public abstract class AbstractStatsoundChart extends javax.swing.JPanel implemen
 
 	/**
 	 * Setter for property channelDisplayY.
+	 * @param channel 
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
+	 * @return 
 	 */
 	public int getChannelDisplayAtYArray(final int channel) {
 		return datasetProxy.getChannelDisplayAtYArray(channel);
@@ -224,6 +226,7 @@ public abstract class AbstractStatsoundChart extends javax.swing.JPanel implemen
 
 	/**
 	 * Setter for property channelDisplayY.
+	 * @param channelDisplayYArray 
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */

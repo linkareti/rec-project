@@ -24,17 +24,26 @@ public class DisplaySelectionEvent extends ApparatusSelectionEvent {
 	/** Holds value of property Display. */
 	private final Display dp;
 
-	/** Creates a new instance of DisplaySelectionEvent */
+	/** Creates a new instance of DisplaySelectionEvent 
+	 * @param source 
+	 * @param dp */
 	public DisplaySelectionEvent(final Object source, final Display dp) {
 		this(source, dp, null, null);
 	}
 
-	/** Creates a new instance of DisplaySelectionEvent */
+	/** Creates a new instance of DisplaySelectionEvent 
+	 * @param source 
+	 * @param dp 
+	 * @param app */
 	public DisplaySelectionEvent(final Object source, final Display dp, final Apparatus app) {
 		this(source, dp, app, null);
 	}
 
-	/** Creates a new instance of DisplaySelectionEvent */
+	/** Creates a new instance of DisplaySelectionEvent 
+	 * @param source 
+	 * @param dp 
+	 * @param app 
+	 * @param lab */
 	public DisplaySelectionEvent(final Object source, final Display dp, final Apparatus app, final Lab lab) {
 		super(source, app, lab);
 		this.dp = dp;

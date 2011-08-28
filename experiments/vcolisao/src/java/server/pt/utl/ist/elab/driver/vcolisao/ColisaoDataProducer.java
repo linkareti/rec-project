@@ -132,6 +132,8 @@ public class ColisaoDataProducer extends VirtualBaseDataSource {
 
 	/**
 	 * Arredonda um double para int de acordo com as casas decimais
+	 * @param number 
+	 * @return 
 	 */
 	public static int roundToInt(final double number) {
 		int rounded = 0;

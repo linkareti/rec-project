@@ -17,7 +17,10 @@ public class ConfMarchAtras extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = 1543816988717888575L;
 
-	/** Creates new form ConfCompBin */
+	/** Creates new form ConfCompBin 
+	 * @param parent 
+	 * @param modal 
+	 * @param model */
 	public ConfMarchAtras(final java.awt.Frame parent, final boolean modal,
 			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelMarchAtras model) {
 		super(parent, modal);

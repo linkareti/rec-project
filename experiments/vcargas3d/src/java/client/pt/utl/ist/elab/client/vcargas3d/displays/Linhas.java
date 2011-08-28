@@ -5,7 +5,11 @@ package pt.utl.ist.elab.client.vcargas3d.displays;
  * @author  n0dP2
  */
 
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
+
+import org.opensourcephysics.displayejs.InteractiveCharge;
 
 import pt.utl.ist.elab.client.vcargas3d.Sistema;
 import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
@@ -21,7 +25,7 @@ public class Linhas extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 	 * 
 	 */
 	private static final long serialVersionUID = 1443999347122115168L;
-	java.util.ArrayList sist;
+	java.util.ArrayList<InteractiveCharge> sist;
 	Painel painel = new Painel();
 
 	public Linhas() {
@@ -38,7 +42,7 @@ public class Linhas extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 		dummy.getContentPane().add(new Linhas());
 		dummy.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		dummy.pack();
-		dummy.show();
+		dummy.setVisible(true);
 	}
 
 	// Chegaram novas amostras!
@@ -53,8 +57,9 @@ public class Linhas extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 
 			// sample, canal
 			if (model.getValueAt(i, 0) != null) {
-				final java.util.ArrayList linhas = (java.util.ArrayList) ByteUtil.byteArrayToObject(model
-						.getValueAt(i, 0).getValue().getByteArrayValue().getData());
+				@SuppressWarnings("unchecked")
+				final java.util.ArrayList<ArrayList<? extends Object>> linhas = (java.util.ArrayList<ArrayList<? extends Object>>) ByteUtil
+						.byteArrayToObject(model.getValueAt(i, 0).getValue().getByteArrayValue().getData());
 				toPanelLinhas(painel, linhas);
 				painel.repaint();
 			}
@@ -139,16 +144,16 @@ public class Linhas extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 
 	private void addCargas() {
 		for (int i = 0; i < sist.size(); i++) {
-			painel.addDrawable((org.opensourcephysics.displayejs.InteractiveCharge) sist.get(i));
+			painel.addDrawable(sist.get(i));
 		}
 		painel.repaint();
 	}
 
 	private void toPanelLinhas(final org.opensourcephysics.displayejs.DrawingPanel3D panel_,
-			final java.util.ArrayList linhas_) {
+			final java.util.ArrayList<ArrayList<? extends Object>> linhas_) {
 		for (int i = 0; i < linhas_.size(); i++) {
 			final org.opensourcephysics.displayejs.InteractiveTrace linha_ = new org.opensourcephysics.displayejs.InteractiveTrace();
-			final String Q_ = (String) ((java.util.ArrayList) linhas_.get(i)).get(0);
+			final String Q_ = (String) linhas_.get(i).get(0);
 			if (Q_ == "neg") {
 				linha_.getStyle().setEdgeColor(new java.awt.Color(140, 140, 255));
 			}
@@ -159,8 +164,8 @@ public class Linhas extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 				linha_.getStyle().setEdgeColor(java.awt.Color.white);
 			}
 
-			for (int j = 1; j < ((java.util.ArrayList) linhas_.get(i)).size(); j++) {
-				final Float[] pontos_ = (Float[]) (((java.util.ArrayList) linhas_.get(i)).get(j));
+			for (int j = 1; j < linhas_.get(i).size(); j++) {
+				final Float[] pontos_ = (Float[]) (linhas_.get(i).get(j));
 				linha_.addPoint(pontos_[0].floatValue(), pontos_[1].floatValue(), pontos_[2].floatValue());
 			}
 

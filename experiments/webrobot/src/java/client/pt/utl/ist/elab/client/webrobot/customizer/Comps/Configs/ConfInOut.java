@@ -17,7 +17,10 @@ public class ConfInOut extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = 3471345210234947864L;
 
-	/** Creates new form ConfInOut */
+	/** Creates new form ConfInOut 
+	 * @param parent 
+	 * @param modal 
+	 * @param model */
 	public ConfInOut(final java.awt.Frame parent, final boolean modal,
 			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelConfInOut model) {
 		super(parent, modal);

@@ -138,7 +138,12 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 
 	private int maximumClients = 1;
 
-	/** Creates a new instance of MultiCastHardwareImpl */
+	/** Creates a new instance of MultiCastHardwareImpl 
+	 * @param resource 
+	 * @param hardware 
+	 * @param maximumClients 
+	 * @param mainQueue 
+	 * @throws Exception */
 	public ReCMultiCastHardware(final DefaultResource resource, final Hardware hardware, final int maximumClients,
 			final ClientQueue mainQueue) throws Exception {
 		this.mainQueue = mainQueue;

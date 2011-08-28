@@ -68,7 +68,14 @@ public class ComplexGaussian implements Bounded {
 	private double xmaxKS;
 	private double xminKS;
 
-	/** Creates a new instance of ComplexGaussian */
+	/** Creates a new instance of ComplexGaussian 
+	 * @param _dX0 
+	 * @param _x0 
+	 * @param _energy 
+	 * @param log2N 
+	 * @param _deltaX 
+	 * @param _display 
+	 * @param _enabled */
 	public ComplexGaussian(final double _dX0, final double _x0, final double _energy, final int log2N,
 			final double _deltaX, final int _display, final boolean _enabled) {
 		enabled = _enabled;

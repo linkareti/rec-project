@@ -400,8 +400,10 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 
 	/**
 	 * Setter for property channelDisplayY.
+	 * @param col 
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
+	 * @return 
 	 */
 	public int getColAtArray(final int col) {
 		return defaultTableModelProxy.getColAtArray(col);
@@ -418,6 +420,7 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 
 	/**
 	 * Setter for property channelDisplayY.
+	 * @param colArray 
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */

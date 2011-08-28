@@ -20,7 +20,10 @@ public class Disco implements ODE {
 	static public final double g = 9.8;
 	private final double[] state = new double[7];
 
-	/** Creates a new instance of Disco */
+	/** Creates a new instance of Disco 
+	 * @param raioInt 
+	 * @param raioExt 
+	 * @param angulo */
 	public Disco(final double raioInt, final double raioExt, final double angulo) {
 		ri = raioInt;
 		re = raioExt;

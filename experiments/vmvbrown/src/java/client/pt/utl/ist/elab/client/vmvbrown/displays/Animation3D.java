@@ -25,6 +25,7 @@ import javax.swing.JOptionPane;
 
 import org.jfree.chart.encoders.EncoderUtil;
 import org.jfree.chart.encoders.ImageFormat;
+import org.opensourcephysics.display.Drawable;
 import org.opensourcephysics.displayejs.DrawingPanel3D;
 import org.opensourcephysics.displayejs.InteractiveParticle;
 import org.opensourcephysics.displayejs.InteractiveSphere;
@@ -55,7 +56,8 @@ public class Animation3D extends DrawingPanel3D implements ActionListener, Mouse
 	private InteractiveTrace avgPos;
 	private InteractiveSphere[] parts;
 
-	/** Creates a new instance of Animation3D */
+	/** Creates a new instance of Animation3D 
+	 * @param display */
 	public Animation3D(final int display) {
 		super(display);
 		setDecorationType(DrawingPanel3D.DECORATION_AXES);
@@ -139,7 +141,7 @@ public class Animation3D extends DrawingPanel3D implements ActionListener, Mouse
 				topGutter = bottomGutter = Math.max(0, getHeight() - interiorDimension.height) / 2;
 			}
 		}
-		final java.util.ArrayList tempList = getDrawables();
+		final java.util.ArrayList<Drawable> tempList = getDrawables();
 		scale(tempList);
 		setPixelScale();
 		g.setColor(getBackground());

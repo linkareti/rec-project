@@ -605,6 +605,7 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 	 * Inseri um metodo main para testar o customizer Teste Ok 17-10-2004
 	 * 
 	 * @author Sergio Pino
+	 * @param args 
 	 */
 	public static void main(final String args[]) {
 		final javax.swing.JFrame jf = new javax.swing.JFrame();

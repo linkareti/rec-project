@@ -63,8 +63,8 @@ public class AbsoluteLayout implements LayoutManager2, java.io.Serializable {
 	public Dimension preferredLayoutSize(final Container parent) {
 		int maxWidth = 0;
 		int maxHeight = 0;
-		for (final java.util.Enumeration e = constraints.keys(); e.hasMoreElements();) {
-			final Component comp = (Component) e.nextElement();
+		for (final java.util.Enumeration<Component> e = constraints.keys(); e.hasMoreElements();) {
+			final Component comp = e.nextElement();
 			final AbsoluteConstraints ac = (AbsoluteConstraints) constraints.get(comp);
 			final Dimension size = comp.getPreferredSize();
 
@@ -98,8 +98,8 @@ public class AbsoluteLayout implements LayoutManager2, java.io.Serializable {
 	public Dimension minimumLayoutSize(final Container parent) {
 		int maxWidth = 0;
 		int maxHeight = 0;
-		for (final java.util.Enumeration e = constraints.keys(); e.hasMoreElements();) {
-			final Component comp = (Component) e.nextElement();
+		for (final java.util.Enumeration<Component> e = constraints.keys(); e.hasMoreElements();) {
+			final Component comp = e.nextElement();
 			final AbsoluteConstraints ac = (AbsoluteConstraints) constraints.get(comp);
 
 			final Dimension size = comp.getMinimumSize();
@@ -130,8 +130,8 @@ public class AbsoluteLayout implements LayoutManager2, java.io.Serializable {
 	 */
 	@Override
 	public void layoutContainer(final Container parent) {
-		for (final java.util.Enumeration e = constraints.keys(); e.hasMoreElements();) {
-			final Component comp = (Component) e.nextElement();
+		for (final java.util.Enumeration<Component> e = constraints.keys(); e.hasMoreElements();) {
+			final Component comp = e.nextElement();
 			final AbsoluteConstraints ac = (AbsoluteConstraints) constraints.get(comp);
 			final Dimension size = comp.getPreferredSize();
 			int width = ac.getWidth();

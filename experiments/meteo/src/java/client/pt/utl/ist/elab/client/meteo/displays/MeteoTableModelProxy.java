@@ -200,8 +200,10 @@ public class MeteoTableModelProxy extends javax.swing.table.DefaultTableModel im
 
 	/**
 	 * Setter for property channelDisplayY.
+	 * @param col 
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
+	 * @return 
 	 */
 	public int getColAtArray(final int col) {
 		return colArray[col];
@@ -218,6 +220,7 @@ public class MeteoTableModelProxy extends javax.swing.table.DefaultTableModel im
 
 	/**
 	 * Setter for property channelDisplayY.
+	 * @param colArray 
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */

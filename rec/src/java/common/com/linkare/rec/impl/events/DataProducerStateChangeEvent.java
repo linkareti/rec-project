@@ -16,7 +16,8 @@ import com.linkare.rec.impl.threading.util.EnumPriority;
 public class DataProducerStateChangeEvent implements Prioritazible {
 	DataProducerState dataProducerState = null;
 
-	/** Creates a new instance of DataEndedEvent */
+	/** Creates a new instance of DataEndedEvent 
+	 * @param dataProducerState */
 	public DataProducerStateChangeEvent(final DataProducerState dataProducerState) {
 		this.dataProducerState = dataProducerState;
 	}

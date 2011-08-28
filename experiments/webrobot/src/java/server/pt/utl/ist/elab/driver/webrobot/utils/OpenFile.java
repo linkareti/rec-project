@@ -26,7 +26,9 @@ public class OpenFile {
 	private boolean endedRowCol;
 	private boolean isFileValid = true;
 
-	/** Creates a new instance of openFile */
+	/** Creates a new instance of openFile 
+	 * @param robotStateMachine 
+	 * @param file */
 	public OpenFile(final pt.utl.ist.elab.driver.webrobot.RobotStateMachine robotStateMachine, final java.io.File file) {
 		this.robotStateMachine = robotStateMachine;
 		this.file = file;

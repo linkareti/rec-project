@@ -12,6 +12,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 
 import org.opensourcephysics.display.Dimensioned;
+import org.opensourcephysics.display.Drawable;
 import org.opensourcephysics.display.Histogram;
 import org.opensourcephysics.display.PlottingPanel;
 import org.opensourcephysics.display.axes.XYAxis;
@@ -112,9 +113,9 @@ public class FERHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 			topGutter = bottomGutter = Math.max(0, getHeight() - interiorDimension.height) / 2;
 		}
 		// brMessageBox.checkLocation(this);
-		java.util.ArrayList tempList;
+		java.util.ArrayList<Drawable> tempList;
 		synchronized (this) {
-			tempList = (java.util.ArrayList) drawableList.clone();
+			tempList = (java.util.ArrayList<Drawable>) drawableList.clone();
 		}
 		scale(tempList); // set the x and y scale based on the autoscale values
 		g.setColor(getBackground());

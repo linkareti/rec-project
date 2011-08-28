@@ -6,9 +6,15 @@
 
 package pt.utl.ist.elab.client.aleatorio.displays;
 
+import java.util.Iterator;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.ImageOutputStream;
+import javax.swing.JFileChooser;
 import javax.swing.SwingConstants;
 
 /**
@@ -644,7 +650,7 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 
 	private void originalButtonActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_originalButtonActionPerformedHandler
 		// Add your handling code here:
-		imagePanel.setImage(imagePanel.getImage(imagePanel.IMAGE_ORIGINAL));
+		imagePanel.setImage(imagePanel.getImage(AnalysisPanel.IMAGE_ORIGINAL));
 		BWThreshold = BWThresholdSlider.getValue();
 		houghThreshold1 = houghThreshold1Slider.getValue();
 		houghThreshold2 = houghThreshold2Slider.getValue();
@@ -677,7 +683,7 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 
 		chooser.setAccessory(jpegQualitySlider);
 		int returnVal = chooser.showSaveDialog(this);// more stuff to do here!!!
-		if (returnVal == chooser.APPROVE_OPTION) {
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			java.io.File file = chooser.getSelectedFile();
 			if (file.exists()) {
 				int act = javax.swing.JOptionPane.showConfirmDialog(null, file.toString() + " exists.  Overwrite?");
@@ -1080,6 +1086,9 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 
 	/**
 	 * Utilities
+	 * 
+	 * @param filename
+	 * @return
 	 */
 
 	public java.awt.Image openImage(final String filename) {
@@ -1098,15 +1107,17 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 			g.dispose();
 
 			final java.io.FileOutputStream out = new java.io.FileOutputStream(fileName);
-			final com.sun.image.codec.jpeg.JPEGImageEncoder encoder = com.sun.image.codec.jpeg.JPEGCodec
-					.createJPEGEncoder(out);
-			final com.sun.image.codec.jpeg.JPEGEncodeParam jep = com.sun.image.codec.jpeg.JPEGCodec
-					.getDefaultJPEGEncodeParam(bImage);
+			Iterator<ImageWriter> imageWritersByFormatName = ImageIO.getImageWritersByFormatName("jpeg");
+			ImageWriter writer = imageWritersByFormatName.next();
 
-			jep.setQuality((float) quality / 100, true);
-			encoder.setJPEGEncodeParam(jep);
-			encoder.encode(bImage);
+			ImageWriteParam writeParam = writer.getDefaultWriteParam();
+			writeParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+			writeParam.setCompressionQuality((float) ((float) quality / 100.));
 
+			writer.setOutput(ImageIO.createImageOutputStream(out));
+			writer.write(bImage);
+			
+			out.flush();
 			out.close();
 		} catch (final Exception e) {
 			e.printStackTrace();

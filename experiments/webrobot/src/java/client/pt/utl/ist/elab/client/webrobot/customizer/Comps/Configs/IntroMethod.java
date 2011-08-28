@@ -17,7 +17,13 @@ public class IntroMethod extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = -2310916843138604597L;
 
-	/** Creates new form IntroMethod */
+	/** Creates new form IntroMethod 
+	 * @param parent 
+	 * @param modal 
+	 * @param b1 
+	 * @param b2 
+	 * @param b3 
+	 * @param b4 */
 	public IntroMethod(final java.awt.Frame parent, final boolean modal, final boolean b1, final boolean b2,
 			final boolean b3, final boolean b4) {
 		super(parent, modal);

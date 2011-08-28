@@ -20,6 +20,7 @@ public class Tester {
 
 	/**
 	 * @param args the command line arguments
+	 * @throws WrongConfigurationException 
 	 */
 	public static void main(final String[] args) throws WrongConfigurationException {
 		final int[][] stupidQuestion = new int[3][4];

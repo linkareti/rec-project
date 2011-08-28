@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 
+import org.opensourcephysics.display.Drawable;
 import org.opensourcephysics.display.Interactive;
 import org.opensourcephysics.display.InteractiveMouseHandler;
 import org.opensourcephysics.display.InteractivePanel;
@@ -63,7 +64,7 @@ public class InteractiveQuantum extends Quantum implements InteractiveMouseHandl
 	}
 
 	private double xDrag, yDrag;
-	private double xPressed, yPressed;
+	private double xPressed;
 
 	@Override
 	public void handleMouseAction(final InteractivePanel panel, final MouseEvent evt) {
@@ -111,7 +112,7 @@ public class InteractiveQuantum extends Quantum implements InteractiveMouseHandl
 				yy = panel.pixToY(panel.getHeight() - 1 - bottomGutter);
 			}
 			xPressed = inter.getX();
-			yPressed = inter.getY();
+			inter.getY();
 			xDrag = xx;
 			yDrag = yy;
 			break;
@@ -165,7 +166,6 @@ public class InteractiveQuantum extends Quantum implements InteractiveMouseHandl
 				return;
 			}
 			double xxx = panel.getMouseX();
-			double yyy = panel.getMouseY();
 			if (evt.getX() < 1 + leftGutter) {
 				xxx = panel.pixToX(1 + leftGutter);
 			}
@@ -173,14 +173,13 @@ public class InteractiveQuantum extends Quantum implements InteractiveMouseHandl
 				xxx = panel.pixToX(panel.getWidth() - 1 - rightGutter);
 			}
 			if (evt.getY() < 1 + topGutter) {
-				yyy = panel.pixToY(1 + topGutter);
 			}
 			if (evt.getY() > panel.getHeight() - 1 - bottomGutter) {
-				yyy = panel.pixToY(panel.getHeight() - 1 - bottomGutter);
 			}
-			final java.util.ArrayList tmpArray = (java.util.ArrayList) drawableList.clone();
+			@SuppressWarnings("unchecked")
+			final java.util.ArrayList<Drawable> tmpArray = (java.util.ArrayList<Drawable>) drawableList.clone();
 			tmpArray.remove(iaDragable);
-			final java.util.Iterator it = tmpArray.iterator();
+			final java.util.Iterator<Drawable> it = tmpArray.iterator();
 
 			while (it.hasNext()) {
 				final java.lang.Object obj = it.next();
@@ -232,9 +231,10 @@ public class InteractiveQuantum extends Quantum implements InteractiveMouseHandl
 	}
 
 	private boolean checkBounds(final Bounded element) {
-		final java.util.ArrayList tmpArray = (java.util.ArrayList) drawableList.clone();
+		@SuppressWarnings("unchecked")
+		final java.util.ArrayList<Drawable> tmpArray = (java.util.ArrayList<Drawable>) drawableList.clone();
 		tmpArray.remove(tmpArray.size() - 1);
-		final java.util.Iterator it = tmpArray.iterator();
+		final java.util.Iterator<Drawable> it = tmpArray.iterator();
 
 		while (it.hasNext()) {
 			final java.lang.Object obj = it.next();
@@ -246,9 +246,10 @@ public class InteractiveQuantum extends Quantum implements InteractiveMouseHandl
 	}
 
 	public boolean checkBounds(final Bounded element, final double transl) {
-		final java.util.ArrayList tmpArray = (java.util.ArrayList) drawableList.clone();
+		@SuppressWarnings("unchecked")
+		final java.util.ArrayList<Drawable> tmpArray = (java.util.ArrayList<Drawable>) drawableList.clone();
 		tmpArray.remove(element);
-		final java.util.Iterator it = tmpArray.iterator();
+		final java.util.Iterator<Drawable> it = tmpArray.iterator();
 
 		while (it.hasNext()) {
 			final java.lang.Object obj = it.next();
@@ -260,9 +261,10 @@ public class InteractiveQuantum extends Quantum implements InteractiveMouseHandl
 	}
 
 	public boolean checkBoundsWidth(final Bounded pot, final double dx) {
-		final java.util.ArrayList tmpArray = (java.util.ArrayList) drawableList.clone();
+		@SuppressWarnings("unchecked")
+		final java.util.ArrayList<Drawable> tmpArray = (java.util.ArrayList<Drawable>) drawableList.clone();
 		tmpArray.remove(pot);
-		final java.util.Iterator it = tmpArray.iterator();
+		final java.util.Iterator<Drawable> it = tmpArray.iterator();
 
 		while (it.hasNext()) {
 			final java.lang.Object obj = it.next();

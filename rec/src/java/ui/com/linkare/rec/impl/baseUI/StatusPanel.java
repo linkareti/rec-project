@@ -84,6 +84,7 @@ public class StatusPanel extends javax.swing.JPanel {
 
 	/**
 	 * Setter for property lblStatus.
+	 * @param lblStatus 
 	 * 
 	 * @param status New value of property lblStatus.
 	 */

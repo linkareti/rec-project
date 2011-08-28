@@ -94,7 +94,7 @@ public class Sistema {
 		String str = new String();
 		String X, Y, Z, Q;
 		for (int i = 0; i < sist.size(); i++) {
-			final InteractiveCharge carg = ((InteractiveCharge) sist.get(i));
+			final InteractiveCharge carg = sist.get(i);
 			X = Float.toString((float) carg.getX());
 			Y = Float.toString((float) carg.getY());
 			Z = Float.toString((float) carg.getZ());

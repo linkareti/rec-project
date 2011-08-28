@@ -282,6 +282,7 @@ public class DefaultTimeSeriesCollectionProxy extends XYSeriesCollection impleme
 	 * Indexed setter for property channelIndexes.
 	 * 
 	 * @param index Index of the property.
+	 * @param channelIndex 
 	 * @param channelIndexes New value of the property at <CODE>index</CODE>.
 	 */
 	public void setChannelIndex(final int index, final int channelIndex) {

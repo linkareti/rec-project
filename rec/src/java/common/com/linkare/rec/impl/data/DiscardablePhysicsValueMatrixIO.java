@@ -27,6 +27,7 @@ public class DiscardablePhysicsValueMatrixIO {
 	 * Getter for property file.
 	 * 
 	 * @return Value of property file.
+	 * @throws IOException 
 	 * 
 	 */
 	public File getFile() throws IOException {

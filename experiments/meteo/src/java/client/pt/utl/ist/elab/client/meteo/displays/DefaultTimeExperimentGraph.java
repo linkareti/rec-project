@@ -165,6 +165,7 @@ public class DefaultTimeExperimentGraph extends javax.swing.JPanel implements Ex
 
 	/**
 	 * Setter for property channelDisplayX.
+	 * @param channelTime 
 	 * 
 	 * @param channelDisplayX New value of property channelDisplayX.
 	 */

@@ -23,12 +23,17 @@ public class ApparatusSelectionEvent extends LabSelectionEvent {
 	/** Holds value of property Apparatus. */
 	private final Apparatus app;
 
-	/** Creates a new instance of ApparatusSelectionEvent */
+	/** Creates a new instance of ApparatusSelectionEvent 
+	 * @param source 
+	 * @param app */
 	public ApparatusSelectionEvent(final Object source, final Apparatus app) {
 		this(source, app, null);
 	}
 
-	/** Creates a new instance of ApparatusSelectionEvent */
+	/** Creates a new instance of ApparatusSelectionEvent 
+	 * @param source 
+	 * @param app 
+	 * @param lab */
 	public ApparatusSelectionEvent(final Object source, final Apparatus app, final Lab lab) {
 		super(source, lab);
 		this.app = app;

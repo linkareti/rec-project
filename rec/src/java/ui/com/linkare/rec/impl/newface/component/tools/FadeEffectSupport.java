@@ -18,6 +18,7 @@ import javax.swing.Timer;
 /**
  * 
  * @author Henrique Fernandes
+ * @param <C> 
  */
 public class FadeEffectSupport<C extends JComponent> implements FadeEffect, ActionListener {
 

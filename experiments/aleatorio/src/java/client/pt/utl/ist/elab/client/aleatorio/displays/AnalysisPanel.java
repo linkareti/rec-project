@@ -120,14 +120,15 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 
 	/**
 	 * sets the parameters that will be used by the algorithms
-	 * @param BWThreshold 
-	 * @param radius 
-	 * @param houghThreshold1 
-	 * @param houghThreshold2 
-	 * @param houghThreshold3 
-	 * @param convolutionThreshold 
-	 * @param maxClusterSize 
-	 * @param maxDiceCount 
+	 * 
+	 * @param BWThreshold
+	 * @param radius
+	 * @param houghThreshold1
+	 * @param houghThreshold2
+	 * @param houghThreshold3
+	 * @param convolutionThreshold
+	 * @param maxClusterSize
+	 * @param maxDiceCount
 	 */
 	public void setParams(final int BWThreshold, final int radius, final int houghThreshold1,
 			final int houghThreshold2, final int houghThreshold3, final int convolutionThreshold,
@@ -660,7 +661,8 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 	 * the image has already been transformed
 	 * 
 	 * $$$%%% NOT USED %%%$$$
-	 * @return 
+	 * 
+	 * @return
 	 */
 	public java.awt.Image fullCount() {
 		houghCount();
@@ -1240,15 +1242,13 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		int x, y;
 		final int maxDice = 256;
 
-		final java.util.Vector<Vector<?>> vClusters = new java.util.Vector(maxDice); // is
-																			// a
-		// vector of
-		// vectors
-		final java.util.Vector[] vDie = new java.util.Vector[maxDice]; // is an
-																		// array
-		// of
-		// vectors
-		// of ints
+		// is a vector of vectors
+		final java.util.Vector<Vector<?>> vClusters = new java.util.Vector<Vector<?>>(maxDice);
+
+		// is an array of vectors of ints
+		@SuppressWarnings("unchecked")
+		final java.util.Vector<Integer>[] vDie = new java.util.Vector[maxDice]; 
+
 		int vDieSize;
 		boolean belongsToDie = true;
 		boolean belongsToClusters = true;
@@ -1259,7 +1259,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 			currentY = circles[centerIndex][1];
 
 			if (centerIndex == 0) {
-				vDie[0] = new java.util.Vector(center_counter);
+				vDie[0] = new java.util.Vector<Integer>(center_counter);
 				vDie[0].addElement(new Integer(0));
 				vClusters.addElement(vDie[0]);
 			} else {
@@ -1293,7 +1293,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 					belongsToDie = true;
 				}
 				if (belongsToClusters == false) {
-					vDie[vClusters.size()] = new java.util.Vector(center_counter);
+					vDie[vClusters.size()] = new java.util.Vector<Integer>(center_counter);
 					vDie[vClusters.size()].addElement(new Integer(centerIndex));
 					vClusters.addElement(vDie[vClusters.size()]);
 					belongsToDie = true;

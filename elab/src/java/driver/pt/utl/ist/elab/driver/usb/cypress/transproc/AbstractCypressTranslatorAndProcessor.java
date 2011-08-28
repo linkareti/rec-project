@@ -13,7 +13,8 @@ package pt.utl.ist.elab.driver.usb.cypress.transproc;
 public abstract class AbstractCypressTranslatorAndProcessor implements CypressTranslator, CypressProcessor {
 	private String commandIdentifier = null;
 
-	/** Creates a new instance of AbstractSerialPortTranslatorAndProcessor */
+	/** Creates a new instance of AbstractSerialPortTranslatorAndProcessor 
+	 * @param commandIdentifier */
 	public AbstractCypressTranslatorAndProcessor(final String commandIdentifier) {
 		this.commandIdentifier = commandIdentifier;
 		CypressTranslatorProcessorManager.registerProcessor(this);

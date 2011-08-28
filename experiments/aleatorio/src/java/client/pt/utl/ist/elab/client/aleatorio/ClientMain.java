@@ -17,7 +17,9 @@ import com.linkare.rec.impl.baseUI.ReCBaseUI;
 public class ClientMain {
 
 	private static String NAME = "ELAB_ALEATORIO_V02";
-	private static String PATH = "pt.utl.ist.elab.client.aleatorio.displays.";
+
+	// private static String PATH =
+	// "pt.utl.ist.elab.client.aleatorio.displays.";
 
 	/** Creates a new instance of ClientMain */
 	public ClientMain() {

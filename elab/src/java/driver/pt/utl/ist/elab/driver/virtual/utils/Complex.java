@@ -18,7 +18,9 @@ public class Complex implements java.io.Serializable {
 	private static final long serialVersionUID = -8301752841947664972L;
 	private double re, im;
 
-	/** Creates a new instance of Complex */
+	/** Creates a new instance of Complex 
+	 * @param _re 
+	 * @param _im */
 	public Complex(final double _re, final double _im) {
 		re = _re;
 		im = _im;

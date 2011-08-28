@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
 
 import org.jfree.chart.encoders.EncoderUtil;
 import org.jfree.chart.encoders.ImageFormat;
+import org.opensourcephysics.display.Drawable;
 import org.opensourcephysics.displayejs.DrawingPanel3D;
 import org.opensourcephysics.displayejs.Group;
 import org.opensourcephysics.displayejs.InteractionListener;
@@ -260,7 +261,7 @@ public class Tiro extends DrawingPanel3D implements ActionListener, MouseListene
 				topGutter = bottomGutter = Math.max(0, getHeight() - interiorDimension.height) / 2;
 			}
 		}
-		final java.util.ArrayList tempList = getDrawables();
+		final java.util.ArrayList<Drawable> tempList = getDrawables();
 		scale(tempList);
 		setPixelScale();
 		g.setColor(getBackground());

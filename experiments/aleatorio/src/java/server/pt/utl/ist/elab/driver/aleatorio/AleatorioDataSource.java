@@ -307,7 +307,6 @@ public class AleatorioDataSource extends BaseDataSource {
 		try {
 			javax.imageio.ImageIO.write(bImage, "jpg", mcios);
 		} catch (final java.io.IOException e) {
-		} catch (final com.sun.image.codec.jpeg.ImageFormatException e) {
 		}
 		/*
 		 * try {javax.imageio.ImageIO.write(bImage, "jpg", new

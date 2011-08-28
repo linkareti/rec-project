@@ -23,7 +23,9 @@ import javax.swing.border.Border;
 public class ImageBorder implements Border {
 	private final Image image;
 
-	/** Creates a new instance of ImageBorder */
+	/** Creates a new instance of ImageBorder 
+	 * @param image 
+	 * @param fill */
 	public ImageBorder(final Image image, final boolean fill) {
 		this.image = image;
 		this.fill = fill;

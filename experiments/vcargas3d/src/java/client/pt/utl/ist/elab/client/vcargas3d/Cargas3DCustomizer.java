@@ -870,7 +870,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		 * 
 		 */
 		private static final long serialVersionUID = 6354099059606762623L;
-		java.util.ArrayList sistema;
+		java.util.ArrayList<InteractiveCharge> sistema;
 		Interaction interaction = new Interaction();
 
 		public PainelCargas() {
@@ -895,7 +895,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 			clear();
 			sistema = Sistema.sistema;
 			for (int i = 0; i < sistema.size(); i++) {
-				final InteractiveCharge carga = (InteractiveCharge) sistema.get(i);
+				final InteractiveCharge carga = sistema.get(i);
 				carga.setEnabled(true);
 				addDrawable(carga);
 				carga.addListener(interaction);
@@ -909,7 +909,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		frame.getContentPane().add(new Cargas3DCustomizer());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
-		frame.show();
+		frame.setVisible(true);
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

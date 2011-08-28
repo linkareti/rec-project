@@ -248,20 +248,20 @@ public class GravadorVideo {
 	}
 
 	public void deviceInfo() {
-		if (webCamDeviceInfo != null) {
-			final Format[] formats = webCamDeviceInfo.getFormats();
+//		if (webCamDeviceInfo != null) {
+//			final Format[] formats = webCamDeviceInfo.getFormats();
 
-			if ((formats != null) && (formats.length > 0)) {
-			}
+//			if ((formats != null) && (formats.length > 0)) {
+//			}
 
-			for (final Format aFormat : formats) {
-				if (aFormat instanceof VideoFormat) {
-					final Dimension dim = ((VideoFormat) aFormat).getSize();
-				}
-			}
-		} else {
-			System.out.println("Error : No web cam detected");
-		}
+//			for (final Format aFormat : formats) {
+//				if (aFormat instanceof VideoFormat) {
+//					final Dimension dim = ((VideoFormat) aFormat).getSize();
+//				}
+//			}
+//		} else {
+//			System.out.println("Error : No web cam detected");
+//		}
 	}
 
 	@Override
@@ -301,18 +301,15 @@ public class GravadorVideo {
 		if (buffer != null) {
 			// Convert it to an image
 			final BufferToImage btoi = new BufferToImage((VideoFormat) buffer.getFormat());
-			if (btoi != null) {
-				final Image image = btoi.createImage(buffer);
-				if (image != null) {
-					return (image);
-				} else {
-					System.err.println("Error : BufferToImage cannot convert buffer");
-					return (null);
-				}
+
+			final Image image = btoi.createImage(buffer);
+			if (image != null) {
+				return (image);
 			} else {
-				System.err.println("Error : cannot create BufferToImage instance");
+				System.err.println("Error : BufferToImage cannot convert buffer");
 				return (null);
 			}
+
 		} else {
 			System.out.println("Error : Buffer grabbed is null");
 			return (null);

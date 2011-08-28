@@ -17,7 +17,9 @@ public class EditSubDel extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = -2075340700062065758L;
 
-	/** Creates new form EditSubDel */
+	/** Creates new form EditSubDel 
+	 * @param parent 
+	 * @param modal */
 	public EditSubDel(final java.awt.Frame parent, final boolean modal) {
 		super(parent, modal);
 		initComponents();

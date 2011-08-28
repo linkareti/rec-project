@@ -497,6 +497,7 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 
 	/**
 	 * Setter for property setChatServer.
+	 * @param chatServer 
 	 * 
 	 * @param setChatServer New value of property setChatServer.
 	 */

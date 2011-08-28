@@ -185,6 +185,7 @@ public class JPrografBlock {
 
 	/**
 	 * Setter for property nivel.
+	 * @param Nivel 
 	 * 
 	 * @param coluna New value of property nivel.
 	 */

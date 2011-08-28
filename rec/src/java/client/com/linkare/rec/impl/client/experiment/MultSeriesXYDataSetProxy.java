@@ -289,6 +289,7 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 
 	/**
 	 * Setter for property channelDisplay.
+	 * @param channelDisplayX 
 	 * 
 	 * @param channelDisplay New value of property channelDisplay.
 	 */
@@ -316,6 +317,7 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 
 	/**
 	 * Setter for property channelDisplayY.
+	 * @param channelDisplayYArray 
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */

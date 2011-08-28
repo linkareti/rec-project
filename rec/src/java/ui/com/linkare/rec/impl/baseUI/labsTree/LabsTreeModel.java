@@ -34,7 +34,9 @@ public class LabsTreeModel extends DefaultTreeModel {
 	// The tree root, static so it can be accessed by outside classes
 	public static DefaultMutableTreeNode treeRoot = null;
 
-	/** Creates a new instance of LabsTreeModel */
+	/** Creates a new instance of LabsTreeModel 
+	 * @param userObject 
+	 * @param allowsChildren */
 	public LabsTreeModel(final Object userObject, final boolean allowsChildren) {
 		super(new DefaultMutableTreeNode(userObject), true);
 	}
@@ -106,9 +108,9 @@ public class LabsTreeModel extends DefaultTreeModel {
 	}
 
 	public Apparatus getApparatus(final String uniqueID) {
-		final java.util.Enumeration allChild = ((DefaultMutableTreeNode) root).breadthFirstEnumeration();
+		final java.util.Enumeration<DefaultMutableTreeNode> allChild = ((DefaultMutableTreeNode) root).breadthFirstEnumeration();
 		while (allChild.hasMoreElements()) {
-			final Object currentNode = ((DefaultMutableTreeNode) allChild.nextElement()).getUserObject();
+			final Object currentNode = allChild.nextElement().getUserObject();
 			if (currentNode instanceof Apparatus) {
 				if (((Apparatus) currentNode).getLocation().equals(uniqueID)) {
 					return (Apparatus) currentNode;

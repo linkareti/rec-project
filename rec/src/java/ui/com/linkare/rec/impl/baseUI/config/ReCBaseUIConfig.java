@@ -582,12 +582,12 @@ public class ReCBaseUIConfig implements CommonBean {
 	}
 
 	public Lab[] getLab() {
-		return (Lab[]) _Lab.toArray(new Lab[0]);
+		return _Lab.toArray(new Lab[0]);
 	}
 
 	public Lab[] getOrderedLab() {
 		Lab[] arr = new Lab[_Lab.size()];
-		arr = (Lab[]) _Lab.toArray(arr);
+		arr = _Lab.toArray(arr);
 		Arrays.sort(arr, new OrderedItemComparator());
 		return arr;
 	}
@@ -597,7 +597,7 @@ public class ReCBaseUIConfig implements CommonBean {
 	}
 
 	public Lab getLab(final int index) {
-		return (Lab) _Lab.get(index);
+		return _Lab.get(index);
 	}
 
 	// Return the number of lab
@@ -666,12 +666,12 @@ public class ReCBaseUIConfig implements CommonBean {
 
 	public WebResource[] getWebResource() {
 		final WebResource[] arr = new WebResource[_WebResource.size()];
-		return (WebResource[]) _WebResource.toArray(arr);
+		return _WebResource.toArray(arr);
 	}
 
 	public WebResource[] getOrderedWebResource() {
 		WebResource[] arr = new WebResource[_WebResource.size()];
-		arr = (WebResource[]) _WebResource.toArray(arr);
+		arr = _WebResource.toArray(arr);
 		Arrays.sort(arr, new OrderedItemComparator());
 		return arr;
 	}
@@ -681,7 +681,7 @@ public class ReCBaseUIConfig implements CommonBean {
 	}
 
 	public WebResource getWebResource(final int index) {
-		return (WebResource) _WebResource.get(index);
+		return _WebResource.get(index);
 	}
 
 	// Return the number of webResource
@@ -1157,7 +1157,7 @@ public class ReCBaseUIConfig implements CommonBean {
 		final List<CommonBean> children = new LinkedList<CommonBean>();
 		childBeans(recursive, children);
 		final CommonBean[] result = new CommonBean[children.size()];
-		return (CommonBean[]) children.toArray(result);
+		return children.toArray(result);
 	}
 
 	// Put all child beans into the beans list.
@@ -1253,8 +1253,8 @@ public class ReCBaseUIConfig implements CommonBean {
 		}
 		// Compare every element.
 		for (Iterator<Lab> it = _Lab.iterator(), it2 = inst._Lab.iterator(); it.hasNext() && it2.hasNext();) {
-			final Lab element = (Lab) it.next();
-			final Lab element2 = (Lab) it2.next();
+			final Lab element = it.next();
+			final Lab element2 = it2.next();
 			if (!(element == null ? element2 == null : element.equals(element2))) {
 				return false;
 			}
@@ -1264,8 +1264,8 @@ public class ReCBaseUIConfig implements CommonBean {
 		}
 		// Compare every element.
 		for (Iterator<WebResource> it = _WebResource.iterator(), it2 = inst._WebResource.iterator(); it.hasNext() && it2.hasNext();) {
-			final WebResource element = (WebResource) it.next();
-			final WebResource element2 = (WebResource) it2.next();
+			final WebResource element = it.next();
+			final WebResource element2 = it2.next();
 			if (!(element == null ? element2 == null : element.equals(element2))) {
 				return false;
 			}

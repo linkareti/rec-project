@@ -186,7 +186,7 @@ public class LocalizationBundle implements com.linkare.rec.impl.baseUI.config.Co
 
 	// Put all child beans into the beans list.
 	@Override
-	public void childBeans(final boolean recursive, final java.util.List beans) {
+	public void childBeans(final boolean recursive, final java.util.List<CommonBean> beans) {
 	}
 
 	@Override

@@ -1388,6 +1388,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 	/**
 	 * Main method launching the application.
+	 * @param args 
 	 */
 	public static void main(final String[] args) {
 		Application.launch(ReCApplication.class, args);

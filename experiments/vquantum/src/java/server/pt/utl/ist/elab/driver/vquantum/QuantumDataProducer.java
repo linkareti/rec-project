@@ -23,6 +23,10 @@ import pt.utl.ist.elab.driver.virtual.utils.FFT;
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.impl.data.PhysicsValFactory;
 
+/**
+ * 
+ * @author Paulo Zenida - Linkare TI
+ */
 public class QuantumDataProducer extends VirtualBaseDataSource implements Runnable {
 	// O numero de canais(de dados) que existem!
 	private final int NUM_CHANNELS = 10;
@@ -99,6 +103,19 @@ public class QuantumDataProducer extends VirtualBaseDataSource implements Runnab
 	 * potencial (Angstroms) potential[2] -> espaco entre potenciais (Angstroms)
 	 * potential[3] -> valor do potencial (eV) _nPotentials -> numero de
 	 * potenciais _energy -> energia da particula (eV)
+	 * @param driver 
+	 * @param _dX0 
+	 * @param _x0 
+	 * @param _energy 
+	 * @param log2N 
+	 * @param _deltaX 
+	 * @param tol 
+	 * @param _dt 
+	 * @param _tbs 
+	 * @param _nSamples 
+	 * @param _wraparoundKS 
+	 * @param _wraparoundXS 
+	 * @param _tunneling 
 	 */
 	public QuantumDataProducer(final VirtualBaseDriver driver, final double _dX0, final double _x0,
 			final double _energy, final int log2N, final double _deltaX, final double tol, final double _dt,
@@ -169,7 +186,7 @@ public class QuantumDataProducer extends VirtualBaseDataSource implements Runnab
 		final String[] pots = strPotentials.split("#");
 		final double[][] tmpPotentials = new double[pots.length][2];
 
-		final java.util.ArrayList<double[]> tmpList = new java.util.ArrayList();
+		final java.util.ArrayList<double[]> tmpList = new java.util.ArrayList<double[]>();
 
 		for (int i = 0; i < pots.length; i++) {
 			final String[] potsSet = pots[i].split(":");
@@ -187,7 +204,7 @@ public class QuantumDataProducer extends VirtualBaseDataSource implements Runnab
 		java.util.Collections.sort(tmpList, new SortPotentials());
 		potentials = new double[tmpList.size()][2];
 		for (int i = 0; i < tmpList.size(); i++) {
-			potentials[i] = (double[]) tmpList.get(i);
+			potentials[i] = tmpList.get(i);
 			potentials[i][0] -= (x0 - (N - 1) * dx / 2);
 		}
 

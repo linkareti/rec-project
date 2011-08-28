@@ -9,6 +9,7 @@ package pt.utl.ist.elab.client.vcargas3d.displays;
 import javax.swing.JFrame;
 import javax.swing.SwingConstants;
 
+import org.opensourcephysics.displayejs.InteractiveCharge;
 import org.opensourcephysics.displayejs.InteractivePoints;
 
 import pt.utl.ist.elab.client.vcargas3d.Sistema;
@@ -30,9 +31,9 @@ public class Superficies extends javax.swing.JPanel implements ExpDataDisplay, E
 	 * 
 	 */
 	private static final long serialVersionUID = 6798743703031713247L;
-	java.util.ArrayList[][] superficies;
-	java.util.ArrayList sist;
-	java.util.ArrayList sup20 = new java.util.ArrayList();
+	java.util.ArrayList<Float>[][] superficies;
+	java.util.ArrayList<InteractiveCharge> sist;
+	java.util.ArrayList<InteractivePoints> sup20 = new java.util.ArrayList<InteractivePoints>();
 	/** Creates new form Superficies */
 	Painel painel = new Painel();
 
@@ -91,11 +92,12 @@ public class Superficies extends javax.swing.JPanel implements ExpDataDisplay, E
 	private void jSlider1StateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSlider1StateChanged
 		painel.clear();
 		addCargas();
-		painel.addDrawable((org.opensourcephysics.displayejs.InteractivePoints) sup20.get(jSlider1.getValue()));
+		painel.addDrawable(sup20.get(jSlider1.getValue()));
 		painel.setAlpha(painel.getAlpha());
 		painel.repaint();
 	}// GEN-LAST:event_jSlider1StateChanged
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void newSamples(final NewExpDataEvent evt) {
 		painel.clear();
@@ -105,10 +107,10 @@ public class Superficies extends javax.swing.JPanel implements ExpDataDisplay, E
 
 			// sample, canal
 			if (model.getValueAt(i, 1) != null) {
-				superficies = (java.util.ArrayList[][]) ByteUtil.byteArrayToObject(model.getValueAt(i, 1).getValue()
+				superficies = (java.util.ArrayList<Float>[][]) ByteUtil.byteArrayToObject(model.getValueAt(i, 1).getValue()
 						.getByteArrayValue().getData());
 				toPanelSuperficies(superficies, sup20);
-				painel.addDrawable((org.opensourcephysics.displayejs.InteractivePoints) (sup20.get(0)));
+				painel.addDrawable((sup20.get(0)));
 				painel.repaint();
 				jSlider1.setEnabled(true);
 			}
@@ -191,7 +193,7 @@ public class Superficies extends javax.swing.JPanel implements ExpDataDisplay, E
 		dummy.getContentPane().add(new Superficies());
 		dummy.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		dummy.pack();
-		dummy.show();
+		dummy.setVisible(true);
 	}
 
 	private void setCargasHeader() {
@@ -201,15 +203,16 @@ public class Superficies extends javax.swing.JPanel implements ExpDataDisplay, E
 
 	private void addCargas() {
 		for (int i = 0; i < sist.size(); i++) {
-			painel.addDrawable((org.opensourcephysics.displayejs.InteractiveCharge) sist.get(i));
+			painel.addDrawable(sist.get(i));
 		}
 		painel.repaint();
 	}
 
-	private void toPanelSuperficies(final java.util.ArrayList[][] superficies_, final java.util.ArrayList<InteractivePoints> sup) {
-		java.util.ArrayList[] listax_;
-		java.util.ArrayList[] listay_;
-		java.util.ArrayList[] listaz_;
+	private void toPanelSuperficies(final java.util.ArrayList<Float>[][] superficies_,
+			final java.util.ArrayList<InteractivePoints> sup) {
+		java.util.ArrayList<Float>[] listax_;
+		java.util.ArrayList<Float>[] listay_;
+		java.util.ArrayList<Float>[] listaz_;
 
 		listax_ = superficies_[0];
 		listay_ = superficies_[1];
@@ -222,9 +225,9 @@ public class Superficies extends javax.swing.JPanel implements ExpDataDisplay, E
 			arrayPontos = new double[listax_[i].size()][3];
 
 			for (int j = 0; j < listax_[i].size(); j++) {
-				arrayPontos[j][0] = (((Float) listax_[i].get(j)).floatValue());
-				arrayPontos[j][1] = (((Float) listay_[i].get(j)).floatValue());
-				arrayPontos[j][2] = (((Float) listaz_[i].get(j)).floatValue());
+				arrayPontos[j][0] = listax_[i].get(j).floatValue();
+				arrayPontos[j][1] = listay_[i].get(j).floatValue();
+				arrayPontos[j][2] = listaz_[i].get(j).floatValue();
 			}
 			if (listax_[i].size() != 0) {
 				superficie_.setData(arrayPontos);

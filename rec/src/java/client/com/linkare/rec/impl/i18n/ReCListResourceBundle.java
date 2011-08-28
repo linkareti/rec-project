@@ -16,7 +16,8 @@ import java.util.ListResourceBundle;
 public class ReCListResourceBundle extends ReCResourceBundle {
 	private ListResourceBundle delegate = null;
 
-	/** Creates a new instance of ReCListResourceBundle */
+	/** Creates a new instance of ReCListResourceBundle 
+	 * @param delegate */
 	public ReCListResourceBundle(final ListResourceBundle delegate) {
 		this.delegate = delegate;
 	}

@@ -29,12 +29,19 @@ public class WebResourceSelectionEvent extends ApparatusSelectionEvent {
 		this(source, wr, null, null);
 	}
 
-	/** Creates a new instance of WebResourceSelectionEvent */
+	/** Creates a new instance of WebResourceSelectionEvent 
+	 * @param source 
+	 * @param wr 
+	 * @param app */
 	public WebResourceSelectionEvent(final Object source, final WebResource wr, final Apparatus app) {
 		this(source, wr, app, null);
 	}
 
-	/** Creates a new instance of WebResourceSelectionEvent */
+	/** Creates a new instance of WebResourceSelectionEvent 
+	 * @param source 
+	 * @param wr 
+	 * @param app 
+	 * @param lab */
 	public WebResourceSelectionEvent(final Object source, final WebResource wr, final Apparatus app, final Lab lab) {
 		super(source, app, lab);
 		this.wr = wr;

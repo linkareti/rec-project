@@ -27,6 +27,7 @@ public class ExcelAdapter implements ActionListener {
 	/**
 	 * The Excel Adapter is constructed with a JTable on which it enables
 	 * Copy-Paste and acts as a Clipboard listener.
+	 * @param myJTable 
 	 */
 
 	public ExcelAdapter(final JTable myJTable) {

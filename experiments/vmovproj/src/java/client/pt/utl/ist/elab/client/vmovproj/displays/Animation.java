@@ -9,6 +9,7 @@ package pt.utl.ist.elab.client.vmovproj.displays;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
+import org.opensourcephysics.display.Drawable;
 import org.opensourcephysics.displayejs.DrawingPanel3D;
 import org.opensourcephysics.displayejs.InteractiveTrace;
 
@@ -133,7 +134,7 @@ public class Animation extends MovProj implements ExpDataDisplay, ExpDataModelLi
 				topGutter = bottomGutter = Math.max(0, getHeight() - interiorDimension.height) / 2;
 			}
 		}
-		final java.util.ArrayList tempList = getDrawables();
+		final java.util.ArrayList<Drawable> tempList = getDrawables();
 		scale(tempList);
 		setPixelScale();
 		g.setColor(getBackground());

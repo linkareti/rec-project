@@ -28,7 +28,10 @@ public class DefaultResource implements IResource {
 
 	private ResourceType resourceType = ResourceType.ROOT;
 
-	/** Creates a new instance of DefaultResource */
+	/** Creates a new instance of DefaultResource 
+	 * @param enclosingResource 
+	 * @param resourceType 
+	 * @param properties */
 	public DefaultResource(final IResource enclosingResource, final ResourceType resourceType,
 			final Map<String, String> properties) {
 		setProperties(properties);

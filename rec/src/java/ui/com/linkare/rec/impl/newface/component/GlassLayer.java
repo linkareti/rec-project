@@ -45,6 +45,7 @@ public class GlassLayer extends JComponent {
 
 	/**
 	 * Creates a new GlassPane.
+	 * @param eventsToCatch 
 	 */
 	public GlassLayer(final CatchEvents eventsToCatch) {
 		setBackground(GlassLayer.DEFAULT_BACKGROUND);

@@ -17,7 +17,10 @@ public class ConfDireita extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = -1958594978019131629L;
 
-	/** Creates new form ConfCompBin */
+	/** Creates new form ConfCompBin 
+	 * @param parent 
+	 * @param modal 
+	 * @param model */
 	public ConfDireita(final java.awt.Frame parent, final boolean modal,
 			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelDireita model) {
 		super(parent, modal);

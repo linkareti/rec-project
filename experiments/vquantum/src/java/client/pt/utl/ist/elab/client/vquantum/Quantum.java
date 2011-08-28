@@ -154,7 +154,7 @@ public class Quantum extends InteractivePanel implements InteractiveMouseHandler
 				topGutter = bottomGutter = Math.max(0, getHeight() - interiorDimension.height) / 2;
 			}
 		}
-		final java.util.ArrayList tempList = getDrawables();
+		final java.util.ArrayList<Drawable> tempList = getDrawables();
 		scale(tempList);
 		setPixelScale();
 		g.setColor(getBackground());
@@ -366,7 +366,7 @@ public class Quantum extends InteractivePanel implements InteractiveMouseHandler
 
 	public int getNumberOfPotentials() {
 		int n = 0;
-		final java.util.Iterator it = drawableList.iterator();
+		final java.util.Iterator<Drawable> it = drawableList.iterator();
 		while (it.hasNext()) {
 			final java.lang.Object obj = it.next();
 			if (obj instanceof Potential) {
@@ -377,10 +377,11 @@ public class Quantum extends InteractivePanel implements InteractiveMouseHandler
 	}
 
 	public String getPotentials() {
-		final java.util.ArrayList tmpArray = (java.util.ArrayList) drawableList.clone();
+		@SuppressWarnings("unchecked")
+		final java.util.ArrayList<Drawable> tmpArray = (java.util.ArrayList<Drawable>) drawableList.clone();
 		tmpArray.remove(gaussian);
 		tmpArray.remove(eixo);
-		final java.util.Iterator it = tmpArray.iterator();
+		final java.util.Iterator<Drawable> it = tmpArray.iterator();
 
 		String potentials = "";
 

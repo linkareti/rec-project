@@ -121,6 +121,7 @@ public class MDIDesktopPane extends JDesktopPane {
 	/**
 	 * Sets all component size properties ( maximum, minimum, preferred) to the
 	 * given dimension.
+	 * @param d 
 	 */
 	public void setAllSize(final Dimension d) {
 		setMinimumSize(d);

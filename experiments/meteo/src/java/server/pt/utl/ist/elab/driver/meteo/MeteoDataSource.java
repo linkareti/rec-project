@@ -63,7 +63,8 @@ public class MeteoDataSource implements SerialDataListener {
 
 	private java.util.Timer timer = null;
 
-	/** Creates a new instance of MeteoDataSource */
+	/** Creates a new instance of MeteoDataSource 
+	 * @param conn */
 	public MeteoDataSource(final Connection conn) {
 		sc = new SerialComm();
 		sc.addSerialDataListener(this);

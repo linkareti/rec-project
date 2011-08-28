@@ -17,7 +17,10 @@ public class ConfAtribui extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = -5849307904878224416L;
 
-	/** Creates new form ConfCompBin */
+	/** Creates new form ConfCompBin 
+	 * @param parent 
+	 * @param modal 
+	 * @param model */
 	public ConfAtribui(final java.awt.Frame parent, final boolean modal,
 			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelAtribui model) {
 		super(parent, modal);

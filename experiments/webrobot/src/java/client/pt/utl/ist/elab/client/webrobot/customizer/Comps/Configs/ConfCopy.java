@@ -17,7 +17,9 @@ public class ConfCopy extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = 5282877353270750357L;
 
-	/** Creates new form ConfCompBin */
+	/** Creates new form ConfCompBin 
+	 * @param parent 
+	 * @param modal */
 	public ConfCopy(final java.awt.Frame parent, final boolean modal) {
 		super(parent, modal);
 		initComponents();

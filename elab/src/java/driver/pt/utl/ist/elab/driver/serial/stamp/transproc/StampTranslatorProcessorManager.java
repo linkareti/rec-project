@@ -47,7 +47,7 @@ public class StampTranslatorProcessorManager {
 	}
 
 	public static StampTranslator getTranslator(final StampCommand command) {
-		return (StampTranslator) StampTranslatorProcessorManager.translators.get(command.getCommandIdentifier());
+		return StampTranslatorProcessorManager.translators.get(command.getCommandIdentifier());
 	}
 
 	public static void registerProcessor(final StampProcessor processor) {
@@ -63,7 +63,7 @@ public class StampTranslatorProcessorManager {
 	}
 
 	public static StampProcessor getProcessor(final StampCommand command) {
-		return (StampProcessor) StampTranslatorProcessorManager.processors.get(command.getCommandIdentifier());
+		return StampTranslatorProcessorManager.processors.get(command.getCommandIdentifier());
 	}
 
 	public static void initStampProcessorTranslator(final String className) {

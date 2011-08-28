@@ -23,6 +23,11 @@ public class PaintUtils {
 	 * image using the specified insets.
 	 * 
 	 * Based on SwingLabs, LGPL
+	 * @param g 
+	 * @param comp 
+	 * @param img 
+	 * @param ins 
+	 * @param pos 
 	 */
 	public static void tileStretchPaint(final Graphics g, final JComponent comp, final BufferedImage img,
 			final Insets ins, final Point pos) {

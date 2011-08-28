@@ -11,6 +11,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 
+import org.opensourcephysics.display.Drawable;
 import org.opensourcephysics.displayejs.DrawingPanel3D;
 import org.opensourcephysics.displayejs.InteractiveTrace;
 
@@ -114,7 +115,7 @@ public class Animation extends Pend2M implements ExpDataDisplay, ExpDataModelLis
 				topGutter = bottomGutter = Math.max(0, getHeight() - interiorDimension.height) / 2;
 			}
 		}
-		final java.util.ArrayList tempList = getDrawables();
+		final java.util.ArrayList<Drawable> tempList = getDrawables();
 		scale(tempList);
 		setPixelScale();
 		g.setColor(getBackground());

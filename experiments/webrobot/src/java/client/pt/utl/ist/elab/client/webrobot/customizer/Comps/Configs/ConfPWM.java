@@ -19,7 +19,10 @@ public class ConfPWM extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = 4369597833470516609L;
 
-	/** Creates new form ConfCompBin */
+	/** Creates new form ConfCompBin 
+	 * @param parent 
+	 * @param modal 
+	 * @param model */
 	public ConfPWM(final java.awt.Frame parent, final boolean modal,
 			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelPWM model) {
 		super(parent, modal);

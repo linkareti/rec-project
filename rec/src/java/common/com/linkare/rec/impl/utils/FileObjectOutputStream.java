@@ -18,7 +18,9 @@ import java.io.ObjectOutputStream;
 public class FileObjectOutputStream extends ObjectOutputStream {
 	private File file = null;
 
-	/** Creates a new instance of FileObjectOutputStream */
+	/** Creates a new instance of FileObjectOutputStream 
+	 * @param file 
+	 * @throws IOException */
 	public FileObjectOutputStream(final File file) throws IOException {
 		super(new FileOutputStream(file));
 		setFile(file);

@@ -227,6 +227,7 @@ public final class Scale implements org.omg.CORBA.portable.IDLEntity {
 
 	/**
 	 * Setter for property physicsUnitSymbol.
+	 * @param applied_multiplier 
 	 * 
 	 * @param physicsUnitSymbol New value of property physicsUnitSymbol.
 	 */

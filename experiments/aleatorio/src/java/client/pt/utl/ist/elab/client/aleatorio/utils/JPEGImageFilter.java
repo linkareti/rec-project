@@ -20,7 +20,7 @@ public class JPEGImageFilter extends javax.swing.filechooser.FileFilter {
 
 	/** Creates a new instance of JPEGImageFilter */
 	public JPEGImageFilter() {
-		filtros = new java.util.Hashtable(2);
+		filtros = new java.util.Hashtable<String, JPEGImageFilter>(2);
 		filtros.put("jpg", this);
 	}
 
@@ -45,7 +45,6 @@ public class JPEGImageFilter extends javax.swing.filechooser.FileFilter {
 			if (i > 0 && i < filename.length() - 1) {
 				return filename.substring(i + 1).toLowerCase();
 			}
-			;
 		}
 		return null;
 	}
@@ -56,11 +55,11 @@ public class JPEGImageFilter extends javax.swing.filechooser.FileFilter {
 			if (description == null || isExtensionListInDescription()) {
 				fullDescription = description == null ? "(" : description + " (";
 				// build the description from the extension list
-				final java.util.Enumeration extensions = filtros.keys();
+				final java.util.Enumeration<String> extensions = filtros.keys();
 				if (extensions != null) {
-					fullDescription += "." + (String) extensions.nextElement();
+					fullDescription += "." + extensions.nextElement();
 					while (extensions.hasMoreElements()) {
-						fullDescription += ", ." + (String) extensions.nextElement();
+						fullDescription += ", ." + extensions.nextElement();
 					}
 				}
 				fullDescription += ")";

@@ -45,7 +45,9 @@ public class GradientPane extends AbstractContentPane {
 		this(style, null);
 	}
 
-	/** Creates a new GradientPane */
+	/** Creates a new GradientPane 
+	 * @param style 
+	 * @param container */
 	public GradientPane(final GradientStyle style, final Window container) {
 		super(container);
 		this.style = style;

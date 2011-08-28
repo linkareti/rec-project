@@ -2045,7 +2045,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 				}
 			}
 
-			factory.init((Display[]) selectedDisplays.toArray(new Display[0]));
+			factory.init(selectedDisplays.toArray(new Display[0]));
 			factory.setAcquisitionInfo(expHistory.getApparatus().getHardwareInfo());
 			try {
 				factory.setAcquisitionConfig(expHistory.getProducerWrapper().getAcquisitionHeader());

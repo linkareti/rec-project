@@ -256,6 +256,7 @@ public class StatsoundChartDataSetProxy extends org.jfree.data.xy.AbstractXYData
 
 	/**
 	 * Setter for property channelDisplay.
+	 * @param channelDisplayX 
 	 * 
 	 * @param channelDisplay New value of property channelDisplay.
 	 */
@@ -283,6 +284,7 @@ public class StatsoundChartDataSetProxy extends org.jfree.data.xy.AbstractXYData
 
 	/**
 	 * Setter for property channelDisplayY.
+	 * @param channelDisplayYArray 
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */

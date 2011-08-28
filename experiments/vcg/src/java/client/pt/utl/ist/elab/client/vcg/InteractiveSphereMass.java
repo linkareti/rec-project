@@ -16,7 +16,8 @@ public class InteractiveSphereMass extends InteractiveSphere {
 
 	private double mass;
 
-	/** Creates a new instance of InteractiveSphereMass */
+	/** Creates a new instance of InteractiveSphereMass 
+	 * @param m */
 	public InteractiveSphereMass(final double m) {
 		mass = m;
 	}

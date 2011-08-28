@@ -39,17 +39,22 @@ public class IndexedObjectIO implements Serializable {
 	private HashMap<Object, long[]> objectsLocations = null;
 	private long lastPos = 0;
 
-	/** Creates a new instance of IndexedObjectIO */
+	/** Creates a new instance of IndexedObjectIO 
+	 * @param f 
+	 * @throws IOException */
 	public IndexedObjectIO(final File f) throws IOException {
 		setFile(f);
 	}
 
-	/** Creates a new instance of IndexedObjectIO */
+	/** Creates a new instance of IndexedObjectIO 
+	 * @param path 
+	 * @throws IOException */
 	public IndexedObjectIO(final String path) throws IOException {
 		setFile(new File(path));
 	}
 
-	/** Creates a new instance of IndexedObjectIO */
+	/** Creates a new instance of IndexedObjectIO 
+	 * @throws IOException */
 	public IndexedObjectIO() throws IOException {
 		setFile(null);
 	}
@@ -58,6 +63,7 @@ public class IndexedObjectIO implements Serializable {
 	 * Getter for property file.
 	 * 
 	 * @return Value of property file.
+	 * @throws IOException 
 	 * 
 	 */
 	public File getFile() throws IOException {
@@ -68,8 +74,10 @@ public class IndexedObjectIO implements Serializable {
 
 	/**
 	 * Setter for property file.
+	 * @param f 
 	 * 
 	 * @param file New value of property file.133.5
+	 * @throws IOException 
 	 * 
 	 */
 	public void setFile(File f) throws IOException {

@@ -20,6 +20,8 @@ public class IndexedObjectReadException extends java.io.IOException {
 	/**
 	 * Creates a new instance of <code>PacketReadException</code> without detail
 	 * message.
+	 * @param e 
+	 * @param errorObjectKey 
 	 */
 	public IndexedObjectReadException(final java.io.IOException e, final Object errorObjectKey) {
 		super(e.getMessage());

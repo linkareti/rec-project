@@ -18,6 +18,7 @@ public class CSVDefaultTableModelProxy implements CSVModel {
 
 	/**
 	 * Creates the <code>CSVDefaultTableModelProxy</code>.
+	 * @param model 
 	 */
 	public CSVDefaultTableModelProxy(final DefaultTableModel model) {
 		this.model = model;

@@ -17,7 +17,10 @@ public class ConfIVPWM extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = 7134889764646889284L;
 
-	/** Creates new form IVPWM */
+	/** Creates new form IVPWM 
+	 * @param parent 
+	 * @param modal 
+	 * @param model */
 	public ConfIVPWM(final java.awt.Frame parent, final boolean modal,
 			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIVPWM model) {
 		super(parent, modal);

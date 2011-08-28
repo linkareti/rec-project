@@ -20,6 +20,8 @@ public class SamplesReadException extends java.io.IOException {
 	/**
 	 * Creates a new instance of <code>PacketReadException</code> without detail
 	 * message.
+	 * @param e 
+	 * @param errorSampleNumber 
 	 */
 	public SamplesReadException(final java.io.IOException e, final int errorSampleNumber) {
 		super(e.getMessage());

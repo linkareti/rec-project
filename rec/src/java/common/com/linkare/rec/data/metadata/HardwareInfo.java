@@ -56,6 +56,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 
 	/**
 	 * Constructor with fields initialization
+	 * @param familiarName 
 	 * 
 	 * @param FamiliarName FamiliarName struct member
 	 * @param DriverVersion DriverVersion struct member
@@ -63,10 +64,13 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * @param HardwareVersion HardwareVersion struct member
 	 * @param HardwareManufacturer HardwareManufacturer struct member
 	 * @param DescriptionText DescriptionText struct member
+	 * @param url_customizer_class 
 	 * @param hardware_unique_id hardware_unique_id struct member
 	 * @param channels_info channels_info struct member
 	 * @param hardware_parameters hardware_parameters struct member
 	 * @param hardware_frequencies hardware_frequencies struct member
+	 * @param selectedFrequency 
+	 * @param samplingScale 
 	 */
 	public HardwareInfo(final String familiarName, final String DriverVersion, final String HardwareName,
 			final String HardwareVersion, final String HardwareManufacturer, final String DescriptionText,

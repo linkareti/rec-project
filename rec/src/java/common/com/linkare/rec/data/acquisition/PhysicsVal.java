@@ -116,6 +116,7 @@ public final class PhysicsVal implements IDLEntity {
 
 	/**
 	 * Setter for property booleanValue.
+	 * @param _boolean_value 
 	 * 
 	 * @param booleanValue New value of property booleanValue.
 	 */
@@ -140,6 +141,7 @@ public final class PhysicsVal implements IDLEntity {
 
 	/**
 	 * Setter for property byteValue.
+	 * @param _byte_value 
 	 * 
 	 * @param byteValue New value of property byteValue.
 	 */
@@ -164,6 +166,7 @@ public final class PhysicsVal implements IDLEntity {
 
 	/**
 	 * Setter for property shortValue.
+	 * @param _short_value 
 	 * 
 	 * @param shortValue New value of property shortValue.
 	 */
@@ -188,6 +191,7 @@ public final class PhysicsVal implements IDLEntity {
 
 	/**
 	 * Setter for property intValue.
+	 * @param _int_value 
 	 * 
 	 * @param intValue New value of property intValue.
 	 */
@@ -212,6 +216,7 @@ public final class PhysicsVal implements IDLEntity {
 
 	/**
 	 * Setter for property longValue.
+	 * @param _long_value 
 	 * 
 	 * @param longValue New value of property longValue.
 	 */
@@ -236,6 +241,7 @@ public final class PhysicsVal implements IDLEntity {
 
 	/**
 	 * Setter for property floatValue.
+	 * @param _float_value 
 	 * 
 	 * @param floatValue New value of property floatValue.
 	 */
@@ -260,6 +266,7 @@ public final class PhysicsVal implements IDLEntity {
 
 	/**
 	 * Setter for property doubleValue.
+	 * @param _double_value 
 	 * 
 	 * @param doubleValue New value of property doubleValue.
 	 */
@@ -283,6 +290,7 @@ public final class PhysicsVal implements IDLEntity {
 
 	/**
 	 * Setter for property byteArrayValue.
+	 * @param newValue 
 	 * 
 	 * @param byteArray New value of property byteArrayValue.
 	 */

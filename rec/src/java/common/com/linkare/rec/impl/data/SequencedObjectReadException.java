@@ -20,6 +20,8 @@ public class SequencedObjectReadException extends java.io.IOException {
 	/**
 	 * Creates a new instance of <code>PacketReadException</code> without detail
 	 * message.
+	 * @param e 
+	 * @param errorIndex 
 	 */
 	public SequencedObjectReadException(final java.io.IOException e, final int errorIndex) {
 		super(e.getMessage());

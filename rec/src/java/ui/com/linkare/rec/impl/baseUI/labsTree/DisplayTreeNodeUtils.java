@@ -17,7 +17,8 @@ import com.linkare.rec.impl.baseUI.config.Display;
 import com.linkare.rec.impl.baseUI.config.Lab;
 
 public abstract class DisplayTreeNodeUtils {
-	/** Disable all the nodes in a lab */
+	/** Disable all the nodes in a lab 
+	 * @param lab */
 	public static void disableLab(final Lab lab) {
 		if (lab == null) {
 			return;
@@ -43,7 +44,8 @@ public abstract class DisplayTreeNodeUtils {
 		}
 	}
 
-	/** Disable all the nodes in a lab */
+	/** Disable all the nodes in a lab 
+	 * @param lab */
 	public static void disableAllApparatus(final Lab lab) {
 		if (lab == null) {
 			return;

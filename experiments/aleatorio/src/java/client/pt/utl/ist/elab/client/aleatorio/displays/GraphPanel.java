@@ -43,7 +43,13 @@ public class GraphPanel extends JPanel {
 	private int maxY = 0;
 	private final double[] params = new double[4];
 
-	/** Creates a new instance of GraphPanel */
+	/** Creates a new instance of GraphPanel 
+	 * @param x 
+	 * @param y 
+	 * @param mu 
+	 * @param sigma 
+	 * @param y0 
+	 * @param Amp */
 	public GraphPanel(final double[] x, final double[] y, final double mu, final double sigma, final double y0,
 			final double Amp) {
 

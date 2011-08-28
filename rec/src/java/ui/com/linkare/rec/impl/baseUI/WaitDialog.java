@@ -17,7 +17,11 @@ public class WaitDialog extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = -5358412375727889540L;
 
-	/** Creates new form WaitDialog */
+	/** Creates new form WaitDialog 
+	 * @param parent 
+	 * @param modal 
+	 * @param message 
+	 * @param icon */
 	public WaitDialog(final java.awt.Frame parent, final boolean modal, final String message,
 			final javax.swing.ImageIcon icon) {
 		super(parent, modal);

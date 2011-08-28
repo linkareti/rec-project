@@ -18,7 +18,18 @@ public class ConfAddNewElement extends javax.swing.JDialog {
 	private static final long serialVersionUID = 1992710608092283689L;
 	private final Object[] returnObj = new Object[3];
 
-	/** Creates new form ConfCompBin */
+	/** Creates new form ConfCompBin 
+	 * @param parent 
+	 * @param modal 
+	 * @param i0State 
+	 * @param i1State 
+	 * @param i2State 
+	 * @param i3State 
+	 * @param i4State 
+	 * @param i5State 
+	 * @param i6State 
+	 * @param i7State 
+	 * @param row */
 	public ConfAddNewElement(final javax.swing.JDialog parent, final boolean modal, final boolean i0State,
 			final boolean i1State, final boolean i2State, final boolean i3State, final boolean i4State,
 			final boolean i5State, final boolean i6State, final boolean i7State, final Object[] row) {

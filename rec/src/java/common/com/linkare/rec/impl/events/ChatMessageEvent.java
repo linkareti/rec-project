@@ -36,7 +36,11 @@ public class ChatMessageEvent extends java.util.EventObject implements Prioritaz
 	/** Holds value of property message. */
 	private String message;
 
-	/** Creates a new instance of ChatMessageEvent */
+	/** Creates a new instance of ChatMessageEvent 
+	 * @param source 
+	 * @param userFrom 
+	 * @param userTo 
+	 * @param message */
 	public ChatMessageEvent(final Object source, final UserInfo userFrom, final UserInfo userTo, final String message) {
 		super(source);
 		this.message = message;

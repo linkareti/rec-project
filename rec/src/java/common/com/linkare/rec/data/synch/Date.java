@@ -64,6 +64,7 @@ public final class Date implements org.omg.CORBA.portable.IDLEntity {
 
 	/**
 	 * Setter for property day1.
+	 * @param day 
 	 * 
 	 * @param day1 New value of property day1.
 	 */

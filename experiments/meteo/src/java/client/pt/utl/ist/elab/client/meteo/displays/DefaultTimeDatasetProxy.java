@@ -186,6 +186,7 @@ public class DefaultTimeDatasetProxy extends org.jfree.data.xy.AbstractXYDataset
 
 	/**
 	 * Setter for property channelDisplay.
+	 * @param channelTime 
 	 * 
 	 * @param channelDisplay New value of property channelDisplay.
 	 */

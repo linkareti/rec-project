@@ -42,7 +42,8 @@ public class HardwareWrapper implements HardwareOperations {
 		}
 	}
 
-	/** Creates a new instance of HardwareWrapper */
+	/** Creates a new instance of HardwareWrapper 
+	 * @param delegate */
 	public HardwareWrapper(final Hardware delegate) {
 		this.delegate = delegate;
 		checkConnect();

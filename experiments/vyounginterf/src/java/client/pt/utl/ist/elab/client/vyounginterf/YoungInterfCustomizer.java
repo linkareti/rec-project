@@ -402,6 +402,8 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 
 	/**
 	 * Arredonda um double para int de acordo com as casas decimais
+	 * @param number 
+	 * @return 
 	 */
 	public int roundToInt(final double number) {
 		int rounded = 0;

@@ -69,7 +69,8 @@ public class JPrograf extends javax.swing.JPanel {
 	private static final long serialVersionUID = -2937456048523484592L;
 	WebRobotCustomizer customizer;
 
-	/** Creates new form WebRobotCustomizer */
+	/** Creates new form WebRobotCustomizer 
+	 * @param customizer */
 	public JPrograf(final WebRobotCustomizer customizer) {
 		this.customizer = customizer;
 		/**
@@ -1577,7 +1578,8 @@ public class JPrograf extends javax.swing.JPanel {
 	/**
 	 * @param args the command line arguments
 	 */
-	/** Only for debug!! */
+	/** Only for debug!! 
+	 * @param args */
 	public static void main(final String args[]) {
 		final javax.swing.JFrame jf = new javax.swing.JFrame();
 		jf.getContentPane().add(new JPrograf(null));

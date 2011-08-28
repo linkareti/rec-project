@@ -228,6 +228,7 @@ public class DefaultXYDatasetProxy extends org.jfree.data.xy.AbstractXYDataset i
 
 	/**
 	 * Setter for property channelDisplay.
+	 * @param channelDisplayX 
 	 * 
 	 * @param channelDisplay New value of property channelDisplay.
 	 */

@@ -22,7 +22,7 @@ public class OceanThemeAdaptor extends OceanTheme {
 		super.addCustomEntriesToTable(table);
 
 		// .30 0 DDE8F3 white secondary2
-		final java.util.List buttonGradient = Arrays.asList(new Object[] { new Float(.3f), new Float(0f),
+		final java.util.List<Object> buttonGradient = Arrays.asList(new Object[] { new Float(.3f), new Float(0f),
 				new ColorUIResource(0xd6e2e0), getWhite(), new ColorUIResource(0xd6e2e0) });
 
 		final Object[] defaults = new Object[] {

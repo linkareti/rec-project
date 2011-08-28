@@ -17,7 +17,10 @@ public class ConfFrente extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = 3565217291106884644L;
 
-	/** Creates new form ConfCompBin */
+	/** Creates new form ConfCompBin 
+	 * @param parent 
+	 * @param modal 
+	 * @param model */
 	public ConfFrente(final java.awt.Frame parent, final boolean modal,
 			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelFrente model) {
 		super(parent, modal);

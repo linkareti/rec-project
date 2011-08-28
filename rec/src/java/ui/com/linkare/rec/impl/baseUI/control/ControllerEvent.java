@@ -46,7 +46,9 @@ public class ControllerEvent extends java.util.EventObject {
 		this.trigger = trigger;
 	}
 
-	/** Creates a new instance of ControlEvent */
+	/** Creates a new instance of ControlEvent 
+	 * @param source 
+	 * @param customTrigger */
 	public ControllerEvent(final Object source, final String customTrigger) {
 		super(source);
 		this.customTrigger = customTrigger;

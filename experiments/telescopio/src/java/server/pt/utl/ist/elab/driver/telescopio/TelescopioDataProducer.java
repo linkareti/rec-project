@@ -28,7 +28,8 @@ public class TelescopioDataProducer extends BaseDataSource {
 
 	private TelescopioDriver driver = null;
 
-	/** Creates a new instance of TelescopioDataProducer */
+	/** Creates a new instance of TelescopioDataProducer 
+	 * @param driver */
 	public TelescopioDataProducer(final TelescopioDriver driver) {
 		this.driver = driver;
 

@@ -13,7 +13,8 @@ package pt.utl.ist.elab.driver.serial.stamp.transproc;
 public abstract class AbstractStampTranslator implements StampTranslator {
 	private String commandIdentifier = null;
 
-	/** Creates a new instance of SerialPortTranslatorAdapter */
+	/** Creates a new instance of SerialPortTranslatorAdapter 
+	 * @param commandIdentifier */
 	public AbstractStampTranslator(final String commandIdentifier) {
 		this.commandIdentifier = commandIdentifier;
 		StampTranslatorProcessorManager.registerTranslator(this);

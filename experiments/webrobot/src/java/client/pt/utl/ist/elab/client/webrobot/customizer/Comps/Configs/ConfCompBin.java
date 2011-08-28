@@ -17,7 +17,10 @@ public class ConfCompBin extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = -1544112769671504196L;
 
-	/** Creates new form ConfCompBin */
+	/** Creates new form ConfCompBin 
+	 * @param parent 
+	 * @param modal 
+	 * @param model */
 	public ConfCompBin(final java.awt.Frame parent, final boolean modal,
 			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelCompBin model) {
 		super(parent, modal);

@@ -27,13 +27,16 @@ public class DefaultOperation implements IOperation {
 		setProperties(new HashMap<String, Object>());
 	}
 
-	/** Creates a new instance of DefaultOperation */
+	/** Creates a new instance of DefaultOperation 
+	 * @param operation */
 	public DefaultOperation(final short operation) {
 		setOperation(operation);
 		setProperties(new HashMap<String, Object>());
 	}
 
-	/** Creates a new instance of DefaultOperation */
+	/** Creates a new instance of DefaultOperation 
+	 * @param operation 
+	 * @param properties */
 	public DefaultOperation(final short operation, final Map<String, Object> properties) {
 		setOperation(operation);
 		setProperties(properties);

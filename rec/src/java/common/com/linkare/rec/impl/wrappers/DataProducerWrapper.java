@@ -41,7 +41,8 @@ public class DataProducerWrapper implements DataProducerOperations {
 		}
 	}
 
-	/** Creates a new instance of DataProducerWrapper */
+	/** Creates a new instance of DataProducerWrapper 
+	 * @param delegate */
 	public DataProducerWrapper(final DataProducer delegate) {
 		this.delegate = delegate;
 		checkConnect();

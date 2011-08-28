@@ -12,7 +12,8 @@ package pt.utl.ist.elab.client.webrobot.utils;
  */
 public class CenterFrameOnScreen {
 
-	/** Creates a new instance of CenterFrameOnScreen */
+	/** Creates a new instance of CenterFrameOnScreen 
+	 * @param jFrame */
 	public CenterFrameOnScreen(final javax.swing.JFrame jFrame) {
 		final java.awt.Toolkit toolkit = java.awt.Toolkit.getDefaultToolkit();
 		final java.awt.Dimension screenDim = toolkit.getScreenSize();

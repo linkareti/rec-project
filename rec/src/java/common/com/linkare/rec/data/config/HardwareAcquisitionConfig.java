@@ -308,6 +308,7 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 
 	/**
 	 * Indexed getter for property channelsConfig.
+	 * @param channelName 
 	 * 
 	 * @param name Name of the channel.
 	 * @return Value of the property at <CODE>index</CODE>.

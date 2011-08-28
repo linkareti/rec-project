@@ -18,6 +18,7 @@ public class CSVMultSeriesTableModelProxy implements CSVModel {
 
 	/**
 	 * Creates the <code>CSVMultSeriesTableModelProxy</code>.
+	 * @param model 
 	 */
 	public CSVMultSeriesTableModelProxy(final MultSeriesTableModelProxy model) {
 		this.model = model;

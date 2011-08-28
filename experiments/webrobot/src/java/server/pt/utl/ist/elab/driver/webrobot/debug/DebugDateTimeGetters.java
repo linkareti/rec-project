@@ -77,7 +77,11 @@ public class DebugDateTimeGetters {
 		return (currentLongTime - startLongTime);
 	}
 
-	/** Returns the number of days, until this day in this year */
+	/** Returns the number of days, until this day in this year 
+	 * @param day 
+	 * @param month 
+	 * @param year 
+	 * @return */
 	public short getDayOfYear(final byte day, final byte month, final short year) {
 		short dayYear = day;
 		/** Remember december=11 and january=0 */

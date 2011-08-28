@@ -38,7 +38,7 @@ public class DefaultChartModelProxy extends org.jfree.data.xy.XYSeriesCollection
 		this.startChannelIndex = startChannelIndex;
 		this.numChannels = numChannels;
 		this.booleanValue = booleanValue;
-		vectorXY = new java.util.Vector(0);
+		vectorXY = new java.util.Vector<XYSeries>(0);
 	}
 
 	public void dataModelRunning() {
@@ -136,7 +136,7 @@ public class DefaultChartModelProxy extends org.jfree.data.xy.XYSeriesCollection
 	 * @param expDataModel New value of property expDataModel.
 	 */
 	public void setExpDataModel(final ExpDataModel expDataModel) {
-		vectorXY = new java.util.Vector(0);
+		vectorXY = new java.util.Vector<XYSeries>(0);
 		this.expDataModel = expDataModel;
 		fireDatasetChanged();
 	}
@@ -155,9 +155,9 @@ public class DefaultChartModelProxy extends org.jfree.data.xy.XYSeriesCollection
 
 	public void setSeriesVisible(final boolean value, final int series) {
 		if (value) {
-			addSeries((org.jfree.data.xy.XYSeries) vectorXY.elementAt(series));
+			addSeries(vectorXY.elementAt(series));
 		} else {
-			removeSeries((org.jfree.data.xy.XYSeries) vectorXY.elementAt(series));
+			removeSeries(vectorXY.elementAt(series));
 		}
 	}
 }

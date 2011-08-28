@@ -28,8 +28,8 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 	 * 
 	 */
 	private static final long serialVersionUID = 1578264648612435627L;
-	private static int MAX_FREQ = 150;
-	private static int MIN_FREQ = 20;
+	// private static int MAX_FREQ = 150;
+	// private static int MIN_FREQ = 20;
 	private static int MAX_SAMPLES = 20;
 	private static int MIN_SAMPLES = 1;
 	private static int MAX_SOUND_DURATION = 10000;
@@ -86,7 +86,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		numberOfSamplesSlider.setValue(5);
 		numberOfSamplesSlider.setName("numberOfSamplesSlider");
 		// Cria a tabela com as labels para a barra do numberOfSamples
-		final java.util.Hashtable<Integer, JLabel> hSamples = new java.util.Hashtable();
+		final java.util.Hashtable<Integer, JLabel> hSamples = new java.util.Hashtable<Integer, JLabel>();
 		hSamples.put(new Integer(1), new javax.swing.JLabel("1"));
 		hSamples.put(new Integer(5), new javax.swing.JLabel("5"));
 		hSamples.put(new Integer(10), new javax.swing.JLabel("10"));
@@ -293,7 +293,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		if (isNumber(evt) || evt.getKeyCode() == (java.awt.event.KeyEvent.VK_BACK_SPACE)
 				|| evt.getKeyCode() == (java.awt.event.KeyEvent.VK_DELETE)) {
 			if (soundDurationText.getText() == "") {
-				; // do nothing
+				// do nothing
 			} else if (Integer.getInteger(soundDurationText.getText()).intValue() < AleatorioCustomizerComponent.MIN_SOUND_DURATION) {
 				soundDurationSlider.setValue(AleatorioCustomizerComponent.MIN_SOUND_DURATION);
 				soundDurationText.setText(String.valueOf(AleatorioCustomizerComponent.MIN_SOUND_DURATION));
@@ -309,7 +309,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 	private void soundDurationTextActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_soundDurationTextActionPerformedHandler
 		// Add your handling code here:
 		if (soundDurationText.getText() == "") {
-			; // do nothing
+			// do nothing
 		} else {
 			try {
 				soundDurationSlider.setValue(Integer.parseInt(soundDurationText.getText()));
@@ -376,7 +376,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		if (isNumber(evt) || evt.getKeyCode() == (java.awt.event.KeyEvent.VK_BACK_SPACE)
 				|| evt.getKeyCode() == (java.awt.event.KeyEvent.VK_DELETE)) {
 			if (numberOfSamplesText.getText() == "") {
-				; // do nothing
+				// do nothing
 			} else if (Integer.getInteger(numberOfSamplesText.getText()).intValue() < AleatorioCustomizerComponent.MIN_SAMPLES) {
 				numberOfSamplesSlider.setValue(AleatorioCustomizerComponent.MIN_SAMPLES);
 				numberOfSamplesText.setText(String.valueOf(AleatorioCustomizerComponent.MIN_SAMPLES));
@@ -393,7 +393,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 	private void numberOfSamplesTextActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_numberOfSamplesTextActionPerformedHandler
 		// Add your handling code here:
 		if (numberOfSamplesText.getText() == "") {
-			; // do nothing
+			// do nothing
 		} else if (Integer.getInteger(numberOfSamplesText.getText()).intValue() < AleatorioCustomizerComponent.MIN_SAMPLES) {
 			numberOfSamplesSlider.setValue(AleatorioCustomizerComponent.MIN_SAMPLES);
 			numberOfSamplesText.setText(String.valueOf(AleatorioCustomizerComponent.MIN_SAMPLES));

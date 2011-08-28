@@ -277,6 +277,8 @@ public class youngImage extends JComponent {
 
 	/**
 	 * Arredonda um double para int de acordo com as casas decimais
+	 * @param number 
+	 * @return 
 	 */
 	public static int roundToInt(final double number) {
 		int rounded = 0;
@@ -292,6 +294,11 @@ public class youngImage extends JComponent {
 	 * calcula a intensidade normalizada (0-1) no ponto xReal, segundo as
 	 * coordenadas do eixo contido no plano de projec�ao e com centro no maximo
 	 * principal
+	 * @param xReal_ 
+	 * @param wl_ 
+	 * @param abertura_ 
+	 * @param distanciaPlano_ 
+	 * @return 
 	 */
 	public static double CalculateGama(final double xReal_, final double wl_, final double abertura_,
 			final double distanciaPlano_) { // start

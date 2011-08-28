@@ -19,7 +19,8 @@ public class StampCommand implements java.io.Serializable {
 	private HashMap<Object, Object> commandDataMap = null;
 	private boolean isData = false;
 
-	/** Creates a new instance of SerialPortCommand */
+	/** Creates a new instance of SerialPortCommand 
+	 * @param commandIdentifier */
 	public StampCommand(final String commandIdentifier) {
 		this.commandIdentifier = commandIdentifier;
 	}

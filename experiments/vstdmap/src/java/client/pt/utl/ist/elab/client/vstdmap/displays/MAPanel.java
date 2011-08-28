@@ -178,7 +178,7 @@ public class MAPanel extends PlottingPanel implements ActionListener, Printable 
 			leftGutter = rightGutter = Math.max(0, getWidth() - interiorDimension.width) / 2;
 			topGutter = bottomGutter = Math.max(0, getHeight() - interiorDimension.height) / 2;
 		}
-		final java.util.ArrayList tempList = getDrawables();
+		final java.util.ArrayList<Drawable> tempList = getDrawables();
 		g.setColor(getBackground());
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.black);

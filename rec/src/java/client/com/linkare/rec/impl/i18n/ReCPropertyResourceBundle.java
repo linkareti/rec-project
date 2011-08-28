@@ -18,7 +18,9 @@ import java.util.PropertyResourceBundle;
 public class ReCPropertyResourceBundle extends ReCResourceBundle {
 	public PropertyResourceBundle delegate = null;
 
-	/** Creates a new instance of ReCPropertyResourceBundle */
+	/** Creates a new instance of ReCPropertyResourceBundle 
+	 * @param is 
+	 * @throws IOException */
 	public ReCPropertyResourceBundle(final InputStream is) throws IOException {
 		delegate = new PropertyResourceBundle(is);
 	}

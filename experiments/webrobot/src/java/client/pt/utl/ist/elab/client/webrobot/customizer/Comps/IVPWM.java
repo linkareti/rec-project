@@ -37,7 +37,9 @@ public class IVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bloc
 	/** Holds value of property cancel. */
 	private boolean cancel = false;
 
-	/** Creates a new instance of CompInt */
+	/** Creates a new instance of CompInt 
+	 * @param parent 
+	 * @param model */
 	public IVPWM(final javax.swing.JFrame parent,
 			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIVPWM model) {
 		super();

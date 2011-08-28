@@ -35,7 +35,8 @@ public class ServerMain {
 		try {
 			ORBBean.getORBBean();
 
-			final BaseHardware baseHardware = new BaseHardware(new ThomsonStampDriver());
+			// final BaseHardware baseHardware =
+			new BaseHardware(new ThomsonStampDriver());
 
 			try {
 				Thread.currentThread().join();

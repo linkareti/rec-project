@@ -35,7 +35,10 @@ public class ExpHistory {
 	// private com.linkare.rec.impl.baseUI.config.Apparatus apparatusConfig =
 	// null;
 
-	/** Creates a new instance of ExperimentHistory */
+	/** Creates a new instance of ExperimentHistory 
+	 * @param expHistoryDisplayFactory 
+	 * @param producerWrapper 
+	 * @param apparatus */
 	public ExpHistory(final ExpHistoryDisplayFactory expHistoryDisplayFactory,
 			final DataProducerWrapper producerWrapper, final com.linkare.rec.impl.client.apparatus.Apparatus apparatus/*
 																													 * ,

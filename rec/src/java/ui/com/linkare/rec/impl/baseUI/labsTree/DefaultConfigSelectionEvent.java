@@ -24,17 +24,26 @@ public class DefaultConfigSelectionEvent extends ApparatusSelectionEvent {
 	/** Holds value of property DefaultConfig. */
 	private final DefaultAcquisitionConfig cfg;
 
-	/** Creates a new instance of DefaultConfigSelectionEvent */
+	/** Creates a new instance of DefaultConfigSelectionEvent 
+	 * @param source 
+	 * @param cfg */
 	public DefaultConfigSelectionEvent(final Object source, final DefaultAcquisitionConfig cfg) {
 		this(source, cfg, null, null);
 	}
 
-	/** Creates a new instance of DefaultConfigSelectionEvent */
+	/** Creates a new instance of DefaultConfigSelectionEvent 
+	 * @param source 
+	 * @param cfg 
+	 * @param app */
 	public DefaultConfigSelectionEvent(final Object source, final DefaultAcquisitionConfig cfg, final Apparatus app) {
 		this(source, cfg, app, null);
 	}
 
-	/** Creates a new instance of DefaultConfigSelectionEvent */
+	/** Creates a new instance of DefaultConfigSelectionEvent 
+	 * @param source 
+	 * @param cfg 
+	 * @param app 
+	 * @param lab */
 	public DefaultConfigSelectionEvent(final Object source, final DefaultAcquisitionConfig cfg, final Apparatus app,
 			final Lab lab) {
 		super(source, app, lab);

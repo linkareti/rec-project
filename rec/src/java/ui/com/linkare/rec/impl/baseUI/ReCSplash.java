@@ -39,7 +39,9 @@ public class ReCSplash extends javax.swing.JDialog {
 		jLabelImage.setIcon(recBaseUIConfig.getSplashIcon());
 	}
 
-	/** Creates new form ReCSplash */
+	/** Creates new form ReCSplash 
+	 * @param parent 
+	 * @param modal */
 	public ReCSplash(final java.awt.Frame parent, final boolean modal) {
 		super(parent, modal);
 		initComponents();
@@ -97,7 +99,8 @@ public class ReCSplash extends javax.swing.JDialog {
 		setBounds((screenSize.width - 410) / 2, (screenSize.height - 380) / 2, 410, 380);
 	}// GEN-END:initComponents
 
-	/** Closes the dialog */
+	/** Closes the dialog 
+	 * @param evt */
 	public void closeDialog(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
 		setVisible(false);
 		dispose();

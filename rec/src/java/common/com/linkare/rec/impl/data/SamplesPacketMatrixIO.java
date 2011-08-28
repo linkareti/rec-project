@@ -32,6 +32,7 @@ public class SamplesPacketMatrixIO implements Serializable {
 	 * Getter for property file.
 	 * 
 	 * @return Value of property file.
+	 * @throws IOException 
 	 * 
 	 */
 	public File getFile() throws IOException {
@@ -42,6 +43,7 @@ public class SamplesPacketMatrixIO implements Serializable {
 	 * Setter for property file.
 	 * 
 	 * @param file New value of property file.
+	 * @throws IOException 
 	 * 
 	 */
 	public void setFile(final File file) throws IOException {
