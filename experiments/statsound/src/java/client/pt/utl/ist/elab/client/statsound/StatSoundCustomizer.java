@@ -62,6 +62,9 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 			.findString("statsound$rec.exp.statsoud.lbl.minsamples");
 	private static final String MAX_SAMPLES_STR = ReCResourceBundle
 			.findString("statsound$rec.exp.statsoud.lbl.maxsamples");
+	private static final String SOUND_SPEED_NSAMPLES_MESSAGES_STR = ReCResourceBundle
+			.findString("statsound$rec.exp.statsoud.lbl.statsound.nsamplesMessage");
+
 	/** REC */
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
@@ -1676,8 +1679,6 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 		}
 		switch (protocol) {
 		case 1:
-			minSamples = Math.round(StatSoundCustomizer.MIN_VALUE_FOR_VALID_SOUND_VELOCITY_CONFIG
-					/ jSliderSoundVelocityNSamples.getValue());
 			if ((jSliderSoundVelocityNSamples.getValue() * jSliderSoundVelocityFrequency.getValue()) > StatSoundCustomizer.MIN_VALUE_FOR_VALID_SOUND_VELOCITY_CONFIG) {
 				jLabelSoundVelocityNSamplesAlert.setEnabled(false);
 				jLabelSoundVelocityNSamplesAlert.setVisible(false);
@@ -1687,7 +1688,8 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 				jLabelSoundVelocityNSamplesAlert.setVisible(true);
 				jButtonOK.setEnabled(false);
 			}
-			jLabelSoundVelocityNSamplesAlert.setText(StatSoundCustomizer.MIN_SAMPLES_STR + minSamples);
+			jLabelSoundVelocityNSamplesAlert.setText(SOUND_SPEED_NSAMPLES_MESSAGES_STR
+					+ StatSoundCustomizer.MIN_VALUE_FOR_VALID_SOUND_VELOCITY_CONFIG);
 			break;
 		case 2:
 			maxSamples = (int) (Math.abs(jSliderStatSoundIPistonInitial.getValue()
