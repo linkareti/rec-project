@@ -55,7 +55,7 @@ public class ChannelData {
 
 		bb.rewind();
 		for (int sampleNr = 0; sampleNr < numSamples; sampleNr++) {
-			bb.position(sampleNr * numChannels * overSampleDisplacement);
+			bb.position(sampleNr * sizeOfSampleInBytes * numChannels * overSampleDisplacement);
 			for (int channel = 0; channel < numChannels; channel++) {
 				double sampleValue = getData(sizeOfSampleInBytes);
 
