@@ -266,12 +266,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 
 	public void setFreqIni(final int freqIni) {
 		this.freqIni = freqIni;
-		LOGGER.fine("Control is " + getControl());
-		LOGGER.fine("Functor Control is " + getControl().getFunctorControl());
-		LOGGER.fine("Frequency was " + getControl().getFunctorControl().getFrequency());
 		getControl().getFunctorControl().setFrequency(freqIni);
-		LOGGER.fine("Frequency is now " + getControl().getFunctorControl().getFrequency());
-
 	}
 
 	public void setFreqStep(final double step) {
