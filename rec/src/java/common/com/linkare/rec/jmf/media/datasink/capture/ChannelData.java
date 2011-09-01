@@ -19,7 +19,6 @@ public class ChannelData {
 
 	private volatile boolean capturing = false;
 
-	
 	private AudioFormat audioFormat;
 	private static double normalizationValue;
 
@@ -55,8 +54,8 @@ public class ChannelData {
 			final boolean loadWaveValues) {
 
 		bb.rewind();
-
 		for (int sampleNr = 0; sampleNr < numSamples; sampleNr++) {
+			bb.position(sampleNr * numChannels * overSampleDisplacement);
 			for (int channel = 0; channel < numChannels; channel++) {
 				double sampleValue = getData(sizeOfSampleInBytes);
 
@@ -178,7 +177,7 @@ public class ChannelData {
 	public void setAudioFormat(final AudioFormat audioFormat) {
 		this.audioFormat = audioFormat;
 	}
-	
+
 	public boolean isCapturing() {
 		return capturing;
 	}
