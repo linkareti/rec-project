@@ -13,14 +13,14 @@
 
 	<parameter name="piston.start" type="ContinuousValue" value="1300">
 		<selection-list>
-			<value order="1">1260</value>
+			<value order="1">1264</value>
 			<value order="2">1480</value>
 			<value order="3">1</value>
 		</selection-list>
 	</parameter>
 	<parameter name="piston.end" value="1300" type="ContinuousValue">
 		<selection-list>
-			<value order="1">1260</value>
+			<value order="1">1264</value>
 			<value order="2">1480</value>
 			<value order="3">1</value>
 		</selection-list>

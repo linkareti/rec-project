@@ -21,7 +21,7 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 	 * position. Therefore, we do not send what we get from the client but,
 	 * instead, we send the delta.
 	 */
-	private static final int BASE_PISTON_POSITION = 1260;
+	private static final int BASE_PISTON_POSITION = 1264;
 
 	public static final String COMMAND_IDENTIFIER = AbstractStampDriver.CONFIG_OUT_STRING;
 
