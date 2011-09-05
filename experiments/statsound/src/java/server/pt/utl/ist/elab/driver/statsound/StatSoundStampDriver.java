@@ -110,9 +110,9 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 	private int freqFin = 0;
 
-	private double step = 0;
+	private double step = 0.;
 
-	private double stepInHardware = 0;
+	private double stepInHardware = 0.;
 
 	private StatSoundStampDataSource dataSource;
 
@@ -224,7 +224,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		stampConfigCommand.addCommandData(STATUS_COMMAND_PART,
 				config.getSelectedHardwareParameterValue(STATUS_COMMAND_PART));
 		// never calibrate on the non first invocations to the hardware!
-		stampConfigCommand.addCommandData(CALIBRATION_COMMAND_PART, 0);
+		stampConfigCommand.addCommandData(CALIBRATION_COMMAND_PART, 1);
 	}
 
 	private void initInternalParameters(final HardwareAcquisitionConfig config) {
@@ -235,7 +235,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		// start configuration...
 		this.config = config;
 		freqIni = Integer.parseInt(config.getSelectedHardwareParameterValue(FREQUENCY_START_PARAMETER));
-		LOGGER.fine("freqIni is now "+freqIni);
+		LOGGER.fine("freqIni is now " + freqIni);
 		freqFin = Integer.parseInt(config.getSelectedHardwareParameterValue(FREQUENCY_END_PARAMETER));
 		// switch them, if the final frequency is before the initial frequency
 		if (freqFin < freqIni) {
@@ -391,7 +391,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 			// the driver is controlling the state machine so, while the
 			// data source is not ended, simply ignore the hardware messages
 			if (dataSource != null && !dataSource.isExpEnded()) {
-				if (dataSource.getNumberOfPosReceivedFromHardware() < dataSource.getNumberOfInvocationsToHardware()) {
+				if (dataSource.getNumberOfPosReceivedFromHardware() <= dataSource.getNumberOfInvocationsToHardware()) {
 					int nextPosition = dataSource.getNextPosition();
 					LOGGER.fine(dataSource.getNumberOfPosReceivedFromHardware() + " < "
 							+ dataSource.getNumberOfInvocationsToHardware() + ": Sending new cfg for position "
@@ -464,7 +464,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		config.setTimeStart(new DateTime());
 		dataSource.setControl(playerFunctorTypeControl);
 		dataSource.setCaptureDevice(soundCaptureDevice);
-		LOGGER.fine("Setting freq ini on datasource to "+freqIni);
+		LOGGER.fine("Setting freq ini on datasource to " + freqIni);
 		dataSource.setFreqIni(freqIni);
 		dataSource.setFreqStep(step);
 		dataSource.setPistonStart(pistonStart);

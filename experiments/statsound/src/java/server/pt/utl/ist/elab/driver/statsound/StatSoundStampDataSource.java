@@ -57,9 +57,9 @@ public class StatSoundStampDataSource extends AbstractStampDataSource {
 
 	Integer temp = null;
 
-	private double step = 1;
+	private double step = 1.;
 
-	private double stepInHardware = 1;
+	private double stepInHardware = 1.;
 
 	private HardwareAcquisitionConfig config;
 
