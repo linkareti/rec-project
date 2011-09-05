@@ -224,7 +224,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		stampConfigCommand.addCommandData(STATUS_COMMAND_PART,
 				config.getSelectedHardwareParameterValue(STATUS_COMMAND_PART));
 		// never calibrate on the non first invocations to the hardware!
-		stampConfigCommand.addCommandData(CALIBRATION_COMMAND_PART, 1);
+		stampConfigCommand.addCommandData(CALIBRATION_COMMAND_PART, 0);
 	}
 
 	private void initInternalParameters(final HardwareAcquisitionConfig config) {
@@ -288,7 +288,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		pistonStart = Integer.valueOf(config.getSelectedHardwareParameterValue(PISTON_START_PARAMETER));
 		pistonEnd = Integer.valueOf(config.getSelectedHardwareParameterValue(PISTON_END_PARAMETER));
 		if (numberOfInvocationsToHardware > 1) {
-			stepInHardware = (pistonEnd - pistonStart) / (numberOfInvocationsToHardware - 1);
+			stepInHardware = (pistonEnd - pistonStart) / (numberOfInvocationsToHardware - 1.);
 		} else {
 			stepInHardware = 1;
 			pistonEnd = pistonStart;
