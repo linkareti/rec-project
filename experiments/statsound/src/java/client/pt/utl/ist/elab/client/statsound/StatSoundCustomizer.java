@@ -42,8 +42,8 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 	public static final int MIN_VALUE_FOR_VALID_SOUND_VELOCITY_CONFIG = 100000;
 	/** Init vars */
 	//
-	private static final int MAX_PISTON_POSITION = 1481;
-	private static final int MIN_PISTON_POSITION = 1264;
+	private static final int MAX_PISTON_POSITION = 1480;
+	private static final int MIN_PISTON_POSITION = 1260;
 	// Sound velocity tab
 	private static final int DEFAULT_SOUND_VELOCITY_NSAMPLES = 500;
 	private static final int DEFAULT_SOUND_VELOCITY_PISTON = 1300;
