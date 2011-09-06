@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="ELAB_STATSOUND_STAMP_V01" familiarName="Ondas estacionarias e velocidade do som"
+	name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
+	<description>
+        <![CDATA[ 
+        Nesta sala de controlo é possível determinar a velocidade de propagação do som.
+        ]]>
+	</description>
+	<customizer href="pt.utl.ist.elab.client.statsound.StatSoundCustomizer" />
+
+	<parameter name="piston.start" type="ContinuousValue" value="1300">
+		<selection-list>
+			<value order="1">1264</value>
+			<value order="2">1480</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
+	<parameter name="piston.end" value="1300" type="ContinuousValue">
+		<selection-list>
+			<value order="1">1264</value>
+			<value order="2">1480</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
+	<parameter name="frequency.start" type="ContinuousValue"
+		value="250">
+		<selection-list>
+			<value order="1">100</value>
+			<value order="2">2000</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
+	<parameter name="frequency.end" type="ContinuousValue" value="250">
+		<selection-list>
+			<value order="1">100</value>
+			<value order="2">2000</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
+	<parameter name="wave.form" type="SelectionListValue" value="SIN">
+		<selection-list>
+			<value order="1">SIN</value>
+			<value order="2">TRIANGULAR</value>
+			<value order="3">WHITE_NOISE</value>
+			<value order="4">PINK_NOISE</value>
+			<value order="5">PULSE</value>
+		</selection-list>
+	</parameter>
+	<parameter name="experiment.type" type="SelectionListValue"
+		value="Vary Piston">
+		<selection-list>
+			<value order="1">Vary Piston</value>
+			<value order="2">Vary Freq</value>
+			<value order="3">Sound Vel</value>
+		</selection-list>
+	</parameter>
+	<!-- 
+		The status refers to the chosen microphones. The possible values present if each micro in each position is 
+		active or inactive, as follows, from left to right, ending with the flag to control if the heating is on/off
+		-> Microphone 2: 0 or 1 to state if it is selected or not
+		-> Microphone 3: 0 or 1 to state if it is selected or not
+		-> Microphone 4: 0 or 1 to state if it is selected or not
+		-> Heating on? : 0 or 1 to state if it is on or off
+	 -->
+	<parameter name="status" type="SelectionListValue" value="0000">
+		<selection-list>
+			<value order="1">0000</value>
+			<value order="2">0001</value>
+			<value order="3">0010</value>
+			<value order="4">0011</value>
+			<value order="5">0100</value>
+			<value order="6">0101</value>
+			<value order="7">0110</value>
+			<value order="8">0111</value>
+			<value order="9">1000</value>
+		</selection-list>
+	</parameter>
+	<parameter name="calibration" type="OnOffValue"
+		value="1">
+		<selection-list>
+			<value order="1">1</value>
+			<value order="2">0</value>
+		</selection-list>
+	</parameter>
+	<frequency-scale label="Sampling Frequency Wave Form">
+		<min-frequency><Frequency type="FrequencyType" multiplier="none">11025</Frequency></min-frequency>
+		<max-frequency><Frequency type="FrequencyType" multiplier="none">11025</Frequency></max-frequency>
+		<step-frequency><Frequency type="FrequencyType" multiplier="none">1</Frequency>	</step-frequency>
+	</frequency-scale>
+	<frequency-scale label="Sampling Frequency Range Frequency">
+		<min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">510</Frequency></min-frequency>
+		<max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">510</Frequency></max-frequency>
+		<step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency>	</step-frequency>
+	</frequency-scale>
+	<frequency-scale label="Sampling Frequency Range Position">
+		<min-frequency><Frequency type="SamplingIntervalType" multiplier="none">1</Frequency></min-frequency>
+		<max-frequency><Frequency type="SamplingIntervalType" multiplier="none">1</Frequency></max-frequency>
+		<step-frequency><Frequency type="SamplingIntervalType" multiplier="none">1</Frequency>	</step-frequency>
+	</frequency-scale>
+	<Frequency type="FrequencyType" multiplier="none">11025</Frequency>
+	<sampling-scale>
+		<min-samples>1</min-samples>
+		<max-samples>5000</max-samples>
+		<step-samples>1</step-samples>
+	</sampling-scale>
+	<!-- position -->
+	<ChannelInfo name="statsound$rec.exp.statsound.hardwareinfo.channel.0.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="statsound$rec.exp.statsound.hardwareinfo.channel.0.label" physicsunitname="statsound$rec.exp.statsound.hardwareinfo.channel.0.physicsunitname"
+			physicsunitsymbol="mm" multiplier="none" selected="true">
+			<min><PhysicsVal type="int">1264</PhysicsVal></min>
+			<max><PhysicsVal type="int">1481</PhysicsVal></max>
+			<step><PhysicsVal type="int">1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+	<!-- vrms 1 -->
+	<ChannelInfo name="statsound$rec.exp.statsound.hardwareinfo.channel.1.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="statsound$rec.exp.statsound.hardwareinfo.channel.1.label" physicsunitname="statsound$rec.exp.statsound.hardwareinfo.channel.1.physicsunitname"
+			physicsunitsymbol="dB" multiplier="none" selected="true">
+			<min><PhysicsVal type="double">-1.7E308</PhysicsVal></min>
+			<max><PhysicsVal type="double">0</PhysicsVal></max>
+			<step><PhysicsVal type="double">0.00002</PhysicsVal></step>
+			<errordefault><PhysicsVal type="double">0.00001</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+	<!-- vrms 2 -->
+	<ChannelInfo name="statsound$rec.exp.statsound.hardwareinfo.channel.2.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="statsound$rec.exp.statsound.hardwareinfo.channel.2.label" physicsunitname="statsound$rec.exp.statsound.hardwareinfo.channel.2.physicsunitname"
+			physicsunitsymbol="dB" multiplier="none" selected="true">
+			<min><PhysicsVal type="double">-1.7E308</PhysicsVal></min>
+			<max><PhysicsVal type="double">0</PhysicsVal></max>
+			<step><PhysicsVal type="double">0.00002</PhysicsVal></step>
+			<errordefault><PhysicsVal type="double">0.00001</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+	<!-- Wave 1 -->
+	<ChannelInfo name="statsound$rec.exp.statsound.hardwareinfo.channel.3.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="statsound$rec.exp.statsound.hardwareinfo.channel.3.label" physicsunitname="statsound$rec.exp.statsound.hardwareinfo.channel.3.physicsunitname"
+			physicsunitsymbol="" multiplier="none" selected="true">
+			<min><PhysicsVal type="double">-1</PhysicsVal></min>
+			<max><PhysicsVal type="double">1</PhysicsVal></max>
+			<!-- The step was calculated with: 2 / 2^16, which is:
+				 2 - the value between the scale -1 to 1
+				 2^16 - 2 to the power of the number of bits per sample 
+			-->
+			<step><PhysicsVal type="double">0.00002</PhysicsVal></step>
+			<!-- The error was calculated as the step / 2, because it should be half of the step -->
+			<errordefault><PhysicsVal type="double">0.00001</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+	<!-- Wave 2 -->
+	<ChannelInfo name="statsound$rec.exp.statsound.hardwareinfo.channel.4.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="statsound$rec.exp.statsound.hardwareinfo.channel.4.label" physicsunitname="statsound$rec.exp.statsound.hardwareinfo.channel.4.physicsunitname"
+			physicsunitsymbol="" multiplier="none" selected="true">
+			<min><PhysicsVal type="double">-1</PhysicsVal></min>
+			<max><PhysicsVal type="double">1</PhysicsVal></max>
+			<!-- The step was calculated with: 2 / 2^16, which is:
+				 2 - the value between the scale -1 to 1
+				 2^16 - 2 to the power of the number of bits per sample 
+			-->
+			<step><PhysicsVal type="double">0.00002</PhysicsVal></step>
+			<!-- The error was calculated as the step / 2, because it should be half of the step -->
+			<errordefault><PhysicsVal type="double">0.00001</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+	<!-- Frequency -->
+	<ChannelInfo name="statsound$rec.exp.statsound.hardwareinfo.channel.5.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="statsound$rec.exp.statsound.hardwareinfo.channel.5.label" physicsunitname="statsound$rec.exp.statsound.hardwareinfo.channel.5.physicsunitname"
+			physicsunitsymbol="Hz" multiplier="none" selected="true">
+			<min><PhysicsVal type="int">100</PhysicsVal></min>
+			<max><PhysicsVal type="int">2000</PhysicsVal></max>
+			<step><PhysicsVal type="int">1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+</HardwareInfo>
