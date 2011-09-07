@@ -1,12 +1,17 @@
 package com.linkare.rec.jmf.media.protocol.function;
 
+/**
+ * 
+ * 
+ * @author José Pedro Pereira - Linkare TI
+ */
 public class PulseFunctor implements Functor {
 
 	private double currentTime = 0.;
 
 	private double timeDelta = 1.;
 
-	private double pulseLengthPercent = 0.1;
+	private double pulseLengthPercent = 0.01;
 
 	private double frequency = 1.;
 
