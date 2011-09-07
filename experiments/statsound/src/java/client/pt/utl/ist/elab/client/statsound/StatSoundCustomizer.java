@@ -41,9 +41,14 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 	private static final String EXPERIMENT_TYPE = "experiment.type";
 	public static final int MIN_VALUE_FOR_VALID_SOUND_VELOCITY_CONFIG = 100000;
 	/** Init vars */
-	//
-	private static final int MAX_PISTON_POSITION = 1480;
-	private static final int MIN_PISTON_POSITION = 1264;
+	// default values. Do not make it final because it should be set dynamically
+	// according to the HardwareInfo config.
+	private static int MAX_PISTON_POSITION = 1480;
+	private static int MIN_PISTON_POSITION = 1274;
+	private static final int INDEX_OF_MIN_POSITION_IN_PARAMETER_PISTON_START = 0;
+	private static final int INDEX_OF_MAX_POSITION_IN_PARAMETER_PISTON_START = 1;
+	private static final int INDEX_OF_STEP_IN_PARAMETER_PISTON_START = 2;
+	private static final double DEFAULT_VALUE_OF_PISTON_STEP = 1.69231;
 	// Sound velocity tab
 	private static final int DEFAULT_SOUND_VELOCITY_NSAMPLES = 500;
 	private static final int DEFAULT_SOUND_VELOCITY_PISTON = 1300;
@@ -1692,8 +1697,11 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 					+ StatSoundCustomizer.MIN_VALUE_FOR_VALID_SOUND_VELOCITY_CONFIG);
 			break;
 		case 2:
+			double step = hardwareInfo == null ? DEFAULT_VALUE_OF_PISTON_STEP : Double.valueOf(hardwareInfo
+					.getHardwareParameter(PISTON_START).getParameterSelectionList(
+							INDEX_OF_STEP_IN_PARAMETER_PISTON_START));
 			maxSamples = (int) (Math.abs(jSliderStatSoundIPistonInitial.getValue()
-					- jSliderStatSoundIPistonEnd.getValue()) / 1.69231);
+					- jSliderStatSoundIPistonEnd.getValue()) / step);
 			if (jSliderStatSoundINSamples.getValue() > maxSamples) {
 				jLabelStatSoundINSamplesAlert.setEnabled(true);
 				jLabelStatSoundINSamplesAlert.setVisible(true);
@@ -1909,5 +1917,11 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 
 	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
+		if (this.hardwareInfo != null) {
+			MIN_PISTON_POSITION = Integer.valueOf(this.hardwareInfo.getHardwareParameter(PISTON_START)
+					.getParameterSelectionList(INDEX_OF_MIN_POSITION_IN_PARAMETER_PISTON_START));
+			MAX_PISTON_POSITION = Integer.valueOf(this.hardwareInfo.getHardwareParameter(PISTON_START)
+					.getParameterSelectionList(INDEX_OF_MAX_POSITION_IN_PARAMETER_PISTON_START));
+		}
 	}
 }
