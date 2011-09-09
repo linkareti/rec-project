@@ -10,15 +10,15 @@
  */
 package pt.utl.ist.elab.client.statsound;
 
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
-
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
+
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
@@ -43,8 +43,8 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 	/** Init vars */
 	// default values. Do not make it final because it should be set dynamically
 	// according to the HardwareInfo config.
-	private static int MAX_PISTON_POSITION = 1480;
-	private static int MIN_PISTON_POSITION = 1274;
+	private static int MAX_PISTON_POSITION = 1478;
+	private static int MIN_PISTON_POSITION = 1271;
 	private static final int INDEX_OF_MIN_POSITION_IN_PARAMETER_PISTON_START = 0;
 	private static final int INDEX_OF_MAX_POSITION_IN_PARAMETER_PISTON_START = 1;
 	private static final int INDEX_OF_STEP_IN_PARAMETER_PISTON_START = 2;

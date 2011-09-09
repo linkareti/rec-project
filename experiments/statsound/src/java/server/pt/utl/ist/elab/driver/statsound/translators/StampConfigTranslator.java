@@ -5,7 +5,11 @@
  */
 package pt.utl.ist.elab.driver.statsound.translators;
 
-import static pt.utl.ist.elab.driver.statsound.StatSoundStampDriver.*;
+import static pt.utl.ist.elab.driver.statsound.StatSoundStampDriver.CALIBRATION_COMMAND_PART;
+import static pt.utl.ist.elab.driver.statsound.StatSoundStampDriver.NUMSAMPLES_COMMAND_PART;
+import static pt.utl.ist.elab.driver.statsound.StatSoundStampDriver.PISTON_END_COMMAND_PART;
+import static pt.utl.ist.elab.driver.statsound.StatSoundStampDriver.PISTON_START_COMMAND_PART;
+import static pt.utl.ist.elab.driver.statsound.StatSoundStampDriver.STATUS_COMMAND_PART;
 import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDriver;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.AbstractStampTranslator;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
@@ -21,7 +25,7 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 	 * position. Therefore, we do not send what we get from the client but,
 	 * instead, we send the delta.
 	 */
-	private static final int BASE_PISTON_POSITION = 1264;
+	private static final int BASE_PISTON_POSITION = 1261;
 
 	public static final String COMMAND_IDENTIFIER = AbstractStampDriver.CONFIG_OUT_STRING;
 
