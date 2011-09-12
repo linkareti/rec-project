@@ -7,7 +7,11 @@ echo Starting @experiment.name@ Driver
 INITIAL_HEAP_MEM=@hardwareserver.initial.heap@
 MAX_HEAP_MEM=@hardwareserver.max.heap@
 
-DRIVER_BASE_DIR=./hardwareserver
+BASE_USER=elab
+BASE_USER_HOMEDIR=~elab
+EXPERIMENT_NAME=@experiment.name@
+DEPLOY_DIR="$BASE_USER_HOMEDIR/rec-deployment/$EXPERIMENT_NAME"
+DRIVER_BASE_DIR="$DEPLOY_DIR/hardwareserver"
 
 export GENERIC_ORB_SYSPROPS="-Dorg.omg.CORBA.ORBClass=org.openorb.orb.core.ORB -Dorg.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton -Dopenorb.config=$DRIVER_BASE_DIR/etc/openorb.xml "
 export DRIVER_ORB_SYSPROPS="-Dopenorb.profile=ReCHardware -DReC.MultiCastController.InitRef=MultiCastController -DReC.PercentFreeMemoryThreshold2Serialization=10 -DReC.MultiCastDataProducer.GET_SAMPLES_IDLE_TIME=60 -DReC.Driver.ShowGUI=false"
@@ -41,4 +45,4 @@ echo ---------------------------------------------------------------------------
 java $BOOTCLASSPATH -classpath $RECCLASSPATH:$DRIVER_CLASSPATH:$DRIVER_EXPERIMENT_CLASSPATH $GENERIC_ORB_SYSPROPS $DRIVER_ORB_SYSPROPS $LOG_SYSPROPS $MEM_SYSPROPS $DRIVER_HARWARE_INFO_SYSPROPS $TOOLKIT_SYSPROPS $DEBUG @driver.main.class@ &
 
 PID=$!
-echo $PID > @experiment.name@.pid
+echo $PID > $DEPLOY_DIR/@experiment.name@.pid
