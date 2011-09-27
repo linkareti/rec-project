@@ -1,0 +1,59 @@
+<Apparatus location="ELAB_BOYLE_MARIOTTE_DSPIC_V1.0"
+	customizerClassLocationBundleKey="boylemariotte$rec.exp.customizer.boylemariotte"
+	toolTipBundleKey="boylemariotte$rec.exp.tip.boylemariotte" iconLocationBundleKey="boylemariotte$rec.exp.icon.boylemariotte"
+	descriptionStringBundleKey="boylemariotte$rec.exp.description.boylemariotte"
+	displayStringBundleKey="boylemariotte$rec.exp.title.boylemariotte" desktopLocationBundleKey="boylemariotte$rec.exp.background.boylemariotte"
+	order="1">
+	<LocalizationBundle name="boylemariotte"
+		location="recresource:///pt/utl/ist/elab/client/boylemariotte/resources/messages" />
+	<WebResource locationBundleKey="boylemariotte$rec.exp.url.boylemariotte.1"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="boylemariotte$rec.exp.url.boylemariotte.title.1"
+		toolTipLocationBundleKey="boylemariotte$rec.exp.url.boylemariotte.title.1" internalBrowser="false"
+		order="1" />
+	<WebResource locationBundleKey="boylemariotte$rec.exp.url.boylemariotte.2"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="boylemariotte$rec.exp.url.boylemariotte.title.2"
+		toolTipLocationBundleKey="boylemariotte$rec.exp.url.boylemariotte.title.2" internalBrowser="false"
+		order="2" />
+	<WebResource locationBundleKey="boylemariotte$rec.exp.url.boylemariotte.video"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+		displayStringBundleKey="boylemariotte$rec.exp.url.boylemariotte.title.video"
+		toolTipLocationBundleKey="boylemariotte$rec.exp.url.boylemariotte.title.video"
+		internalBrowser="false" order="3" />
+
+	<DefaultAcquisitionConfig
+		classLocationBundleKey="boylemariotte$rec.exp.dftcfg.boylemariotte.loc.1" toolTipBundleKey="boylemariotte$rec.exp.dftcfg.boylemariotte.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+		displayStringBundleKey="boylemariotte$rec.exp.dftcfg.boylemariotte.title.1" order="1" />
+
+	<!--Display classLocationBundleKey="boylemariotte$rec.exp.display.boylemariotte.loc.sensor"
+		toolTipBundleKey="boylemariotte$rec.exp.display.boylemariotte.tip.sensor"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="boylemariotte$rec.exp.display.boylemariotte.title.sensor"
+		offlineCapable="false" order="1" /-->
+	<Display classLocationBundleKey="boylemariotte$rec.exp.display.boylemariotte.loc.1"
+		toolTipBundleKey="boylemariotte$rec.exp.display.boylemariotte.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="boylemariotte$rec.exp.display.boylemariotte.title.1" offlineCapable="false"
+		order="1" />
+	<!-- Display classLocationBundleKey="boylemariotte$rec.exp.display.boylemariotte.loc.2"
+		toolTipBundleKey="boylemariotte$rec.exp.display.boylemariotte.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="boylemariotte$rec.exp.display.boylemariotte.title.2" offlineCapable="false"
+		order="2" />
+	<Display classLocationBundleKey="boylemariotte$rec.exp.display.boylemariotte.loc.3"
+		toolTipBundleKey="boylemariotte$rec.exp.display.boylemariotte.tip.3" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="boylemariotte$rec.exp.display.boylemariotte.title.3" offlineCapable="false"
+		order="3" />
+	<Display classLocationBundleKey="boylemariotte$rec.exp.display.boylemariotte.loc.4"
+		toolTipBundleKey="boylemariotte$rec.exp.display.boylemariotte.tip.4" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="boylemariotte$rec.exp.display.boylemariotte.title.4" offlineCapable="false"
+		order="4" />
+	<Display classLocationBundleKey="boylemariotte$rec.exp.display.boylemariotte.loc.5"
+		toolTipBundleKey="boylemariotte$rec.exp.display.boylemariotte.tip.5" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="boylemariotte$rec.exp.display.boylemariotte.title.5" offlineCapable="false"
+		order="5" / -->
+	<Display classLocationBundleKey="boylemariotte$rec.exp.display.boylemariotte.loc.5"
+		toolTipBundleKey="boylemariotte$rec.exp.display.boylemariotte.tip.5" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="boylemariotte$rec.exp.display.boylemariotte.title.5" offlineCapable="false"
+		order="1" />
+</Apparatus>
