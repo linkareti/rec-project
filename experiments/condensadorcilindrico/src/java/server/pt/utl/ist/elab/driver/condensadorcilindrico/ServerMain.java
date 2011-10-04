@@ -19,12 +19,12 @@ import com.linkare.rec.impl.utils.ORBBean;
  */
 public class ServerMain {
 
-	private static String PV_HARDWARE_LOGGER = "PVHardware.Logger";
+	private static String CC_HARDWARE_LOGGER = "CCHardware.Logger";
 
 	static {
-		final Logger l = LogManager.getLogManager().getLogger(ServerMain.PV_HARDWARE_LOGGER);
+		final Logger l = LogManager.getLogManager().getLogger(ServerMain.CC_HARDWARE_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(ServerMain.PV_HARDWARE_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(ServerMain.CC_HARDWARE_LOGGER));
 		}
 	}
 
@@ -44,7 +44,7 @@ public class ServerMain {
 
 			ORBBean.getORBBean().killORB();
 		} catch (final Exception e) {
-			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(ServerMain.PV_HARDWARE_LOGGER));
+			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(ServerMain.CC_HARDWARE_LOGGER));
 		}
 	}
 
