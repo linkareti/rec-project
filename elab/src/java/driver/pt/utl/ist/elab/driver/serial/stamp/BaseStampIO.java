@@ -138,7 +138,7 @@ public class BaseStampIO {
 						lineRead = null;
 						lineReadTemp = new StringBuffer(1024);
 						while (!exit) {
-							while (!inReader.ready()) {
+							while (inReader == null || !inReader.ready()) {
 								Thread.sleep(0, 500);
 							}
 							readChar = (char) inReader.read();
