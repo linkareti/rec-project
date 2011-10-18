@@ -1,0 +1,82 @@
+<h:form xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	<h:inputHidden id="idInternal"
+		value="#{experimentController.selected.idInternal}" />
+	<h:inputHidden id="version"
+		value="#{experimentController.selected.version}" />
+	<p:focus for="name" />
+	<h:panelGrid columns="3">
+		<h:outputLabel value="#{bundle['experiment.externalId']}"
+			for="externalId" />
+		<h:inputText id="externalId"
+			value="#{experimentController.selected.externalId}"
+			title="#{bundle['experiment.externalId']}" required="true"
+			label="#{bundle['experiment.externalId']}"
+			readonly="#{operation == 'view'}" />
+		<p:message for="externalId" />
+		<h:outputLabel value="#{bundle['experiment.name']}" for="name" />
+		<h:inputText id="name" value="#{experimentController.selected.name}"
+			title="#{bundle['experiment.name']}" required="true"
+			label="#{bundle['experiment.name']}"
+			readonly="#{operation == 'view'}" />
+		<p:message for="name" />
+		<h:outputLabel value="#{bundle['experiment.description']}"
+			for="description" />
+		<h:inputText id="description"
+			value="#{experimentController.selected.description}"
+			title="#{bundle['experiment.description']}"
+			readonly="#{operation == 'view'}" />
+		<p:message for="description" />
+		<h:outputLabel value="#{bundle['experiment.laboratory']}"
+			for="laboratory" />
+		<h:selectOneMenu id="laboratory"
+			value="#{experimentController.selected.laboratory}"
+			title="#{bundle['experiment.laboratory']}"
+			readonly="#{operation == 'view'}" converter="laboratoryConverter"
+			required="true" label="#{bundle['experiment.laboratory']}">
+			<f:selectItems
+				value="#{laboratoryController.itemsAvailableSelectOne}" />
+		</h:selectOneMenu>
+		<p:message for="laboratory" />
+		<h:outputLabel value="#{bundle['experiment.state.label']}"
+			for="stateLabel" />
+		<h:inputText id="stateLabel"
+			value="#{experimentController.selected.state.label}"
+			title="#{bundle['experiment.state.label']}"
+			readonly="#{operation == 'view'}" />
+		<p:message for="stateLabel" />
+		<h:outputLabel value="#{bundle['experiment.state.helpMessage']}"
+			for="stateHelpMessage" />
+		<h:inputText id="stateHelpMessage"
+			value="#{experimentController.selected.state.helpMessage}"
+			title="#{bundle['experiment.state.helpMessage']}"
+			readonly="#{operation == 'view'}" />
+		<p:message for="stateHelpMessage" />
+		<h:outputLabel value="#{bundle['experiment.state.url']}"
+			for="stateURL" />
+		<h:inputText id="stateURL"
+			value="#{experimentController.selected.state.url}"
+			title="#{bundle['experiment.state.url']}"
+			readonly="#{operation == 'view'}" />
+		<p:message for="stateURL" />
+		<h:outputLabel value="#{bundle['experiment.state.isActive']}"
+			for="stateActive" />
+		<h:selectBooleanCheckbox id="stateActive"
+			value="#{experimentController.selected.state.active}"
+			title="#{bundle['experiment.state.isActive']}"
+			readonly="#{operation == 'view'}" />
+		<p:message for="stateActive" />
+	</h:panelGrid>
+
+	<h:panelGroup rendered="#{operation == 'create'}">
+		<h:commandLink action="#{experimentController.create}"
+			value="#{bundle['operation.save']}" />
+	</h:panelGroup>
+	<h:panelGroup rendered="#{operation == 'edit'}">
+		<h:commandLink action="#{experimentController.update}"
+			value="#{bundle['operation.save']}" />
+	</h:panelGroup>
+</h:form>
