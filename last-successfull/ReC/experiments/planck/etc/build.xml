@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="planck" basedir=".">
+	<description>Specific Build file for planck in the elab project</description>
+
+
+	<!--
+	Only override this task on an as-needed basis. This task occurs before
+	any compilation is made, but right after the inicial setup of build and dist dirs
+	and their associated cleanup.
+	-->
+	<target name="pre-compile" description="Pre compile for planck">
+
+	</target>
+
+	<!--
+		Only override this task on an as-needed basis. This task occurs after
+		any compilation is made, but right after the inicial setup of build and dist dirs
+		and their associated cleanup.
+		-->
+	<target name="post-compile" description="Post compile for planck">
+
+	</target>
+
+
+	<!--
+	Only override this task on an as-needed basis. This task occurs before
+	any jar is packed, but right after the compile step of build.
+	-->
+	<target name="pre-jar" description="Pre jar creation for planck">
+
+	</target>
+
+	<!--
+		Only override this task on an as-needed basis. This task occurs after
+		any jar is packed, but right after the compile step of build.
+		-->
+	<target name="post-jar" description="Post jar creation for planck">
+
+	</target>
+
+	<!--
+	Only override this task on an as-needed basis. This task occurs before
+	any dist file is created, but right after the jar step of build.
+	-->
+	<target name="pre-dist" description="Pre dist creation for planck">
+
+	</target>
+
+	<!--
+		Only override this task on an as-needed basis. This task occurs after
+		any dist file is created, but right after the jar step of build.
+		-->
+	<target name="post-dist" description="Post dist creation for planck">
+
+	</target>
+
+
+</project>
