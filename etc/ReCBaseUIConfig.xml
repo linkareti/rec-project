@@ -752,12 +752,12 @@
                  toolTipLocationBundleKey="ReCExpStatSound$rec.exp.url.statsound.title.2"
                  internalBrowser="false"
                  order="2"/>
-            <!-- WebResource locationBundleKey="ReCExpStatSound$rec.exp.url.statsound.video"
+            <WebResource locationBundleKey="ReCExpStatSound$rec.exp.url.statsound.video"
                  iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
                  displayStringBundleKey="ReCExpStatSound$rec.exp.url.statsound.title.video"
                  toolTipLocationBundleKey="ReCExpStatSound$rec.exp.url.statsound.title.video"
                  internalBrowser="false"
-                 order="3"/ -->
+                 order="3"/>
 <!--            <DefaultAcquisitionConfig classLocationBundleKey="ReCExpStatSound$rec.exp.dftcfg.statsound.loc.1"
                      toolTipBundleKey="ReCExpStatSound$rec.exp.dftcfg.statsound.tip.1"
                      iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
