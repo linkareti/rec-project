@@ -1,0 +1,26 @@
+<Apparatus location="ELAB_CC_STAMP_V02"
+	customizerClassLocationBundleKey="condensadorcilindrico$rec.exp.customizer.cc"
+	toolTipBundleKey="condensadorcilindrico$rec.exp.tip.cc"
+	iconLocationBundleKey="condensadorcilindrico$rec.exp.icon.cc"
+	displayStringBundleKey="condensadorcilindrico$rec.exp.title.cc"
+	desktopLocationBundleKey="condensadorcilindrico$rec.exp.background.cc"
+	videoLocation="condensadorcilindrico$rec.exp.url.cc.video" order="1">
+	<LocalizationBundle name="condensadorcilindrico"
+		location="recresource:///pt/utl/ist/elab/client/condensadorcilindrico/resources/messages" />
+	<Display classLocationBundleKey="condensadorcilindrico$rec.exp.display.cc.loc.1"
+		toolTipBundleKey="condensadorcilindrico$rec.exp.display.cc.tip.1"
+		iconLocationBundleKey="ReCBaseCC$rec.bui.icon.sensor"
+		displayStringBundleKey="condensadorcilindrico$rec.exp.display.cc.title.1"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="condensadorcilindrico$rec.exp.display.cc.loc.2"
+		toolTipBundleKey="condensadorcilindrico$rec.exp.display.cc.tip.2"
+		iconLocationBundleKey="ReCBaseCC$rec.bui.icon.sensor"
+		displayStringBundleKey="condensadorcilindrico$rec.exp.display.cc.title.2"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="condensadorcilindrico$rec.exp.display.cc.loc.3"
+		toolTipBundleKey="condensadorcilindrico$rec.exp.display.cc.tip.3"
+		iconLocationBundleKey="ReCBaseCC$rec.bui.icon.sensor"
+		displayStringBundleKey="condensadorcilindrico$rec.exp.display.cc.title.3"
+		offlineCapable="false" order="1" />
+</Apparatus>
+	
