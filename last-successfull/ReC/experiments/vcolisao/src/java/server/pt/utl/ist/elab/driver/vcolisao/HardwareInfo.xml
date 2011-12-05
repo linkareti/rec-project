@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="COLISAO_V1.0" familiarName="Colisao" name="Colisao" version="01" manufacturer="Elab - UTL" driverVersion="v1">
+    <description>
+        <![CDATA[ 
+        Com esta experiencia pode-se simular a colisão de dois discos num plano, podendo estas colisões serem 
+        elásticas ou perfeitamente inelásticas, deste modo verificando a conservação do momento linear e/ou energia cinética.
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+            
+    <parameter name="v1" type="ContinuousValue" value="2">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">20</value>
+	    <value order="3">0.1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="v2" type="ContinuousValue" value="2">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">20</value>
+	    <value order="3">0.1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="m1" type="ContinuousValue" value="1.5">
+        <selection-list>
+            <value order="1">0.2</value>
+            <value order="2">50</value>
+	    <value order="3">0.1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="m2" type="ContinuousValue" value="1.5">
+        <selection-list>
+            <value order="1">0.2</value>
+            <value order="2">50</value>
+	    <value order="3">0.1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="r1" type="ContinuousValue" value="0.05">
+        <selection-list>
+            <value order="1">0.05</value>
+            <value order="2">1</value>
+	    <value order="3">0.01</value>
+        </selection-list>
+    </parameter>
+    <parameter name="r2" type="ContinuousValue" value="0.05">
+        <selection-list>
+            <value order="1">0.05</value>
+            <value order="2">1</value>
+	    <value order="3">0.01</value>
+        </selection-list>
+    </parameter>
+    <parameter name="a" type="ContinuousValue" value="0">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">360</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="elasticCollision" type="OnOffValue" value="1">
+        <selection-list>
+            <value order="1">1</value>
+            <value order="2">0</value>
+        </selection-list>
+    </parameter>
+    <!-- os proximos parametros não vamos utilizar nesta experiência, servem só como exemplo do que existe!-->
+    <!--<parameter name="Filter1" type="SelectionListValue" value="Pink">
+        <selection-list>
+            <value order="1">Pink</value>
+            <value order="2">Yellow</value>
+            <value order="3">Green</value>
+            <value order="4">Transparent</value>
+        </selection-list>
+    </parameter>  
+    <parameter name="calibrar" type="OnOffValue" value="0">
+        <selection-list>
+            <value order="1">1</value>
+            <value order="2">0</value>
+        </selection-list>
+    </parameter>-->
+    <!-- com o BlackBoxValue podem passar o que quiserem, e' para ser usado so' em casos MUITO especiais!!-->
+    <!--<parameter name="FlowChart" type="BlackBoxValue" value="none">  
+    </parameter> -->
+    <!--FIM DOS PARAMETROS EXEMPLO-->
+    
+    <frequency-scale label="Sampling Interval">
+        <min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></min-frequency>
+        <max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">25</Frequency></max-frequency>
+        <step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="SamplingIntervalType" multiplier="none">100</Frequency>
+    
+    <sampling-scale>
+        <min-samples>1</min-samples>
+        <max-samples>1001</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+
+    <ChannelInfo name="T. Relativo" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Tempo Relativo" physicsunitname="segundos" physicsunitsymbol="s" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">100000</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.001</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">1</PhysicsVal></errordefault>
+        </scale>  
+    </ChannelInfo>         
+    
+    <!--Posicao X1-->
+    <ChannelInfo name="x1" independent="false" direction="CHANNEL_INPUT">
+        <scale label="x1" physicsunitname="m" physicsunitsymbol="m" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1000.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">1000.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.02</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <!--Posicao Y1-->
+    <ChannelInfo name="y1" independent="false" direction="CHANNEL_INPUT">
+        <scale label="y1" physicsunitname="m" physicsunitsymbol="m" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1000.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">1000.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.02</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>         
+    <!--Posicao X2-->
+    <ChannelInfo name="x2" independent="false" direction="CHANNEL_INPUT">
+        <scale label="x2" physicsunitname="m" physicsunitsymbol="m" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1000.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">1000.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.02</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <!--Posicao Y2-->
+    <ChannelInfo name="y2" independent="false" direction="CHANNEL_INPUT">
+        <scale label="y2" physicsunitname="m" physicsunitsymbol="m" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1000.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">1000.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.02</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>         
+    <ChannelInfo name="Momento linear segundo X 1" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Px 1" physicsunitname="kg.m/s" physicsunitsymbol="kg.m/s" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1000.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">1000.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.02</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>    
+    <ChannelInfo name="Momento linear segundo Y 1" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Py 1" physicsunitname="kg.m/s" physicsunitsymbol="kg.m/s" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1000.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">1000.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.02</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>    
+    <ChannelInfo name="Momento linear segundo X 2" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Px 2" physicsunitname="kg.m/s" physicsunitsymbol="kg.m/s" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1000.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">1000.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.02</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>    
+    <ChannelInfo name="Momento linear segundo Y 2" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Py 2" physicsunitname="kg.m/s" physicsunitsymbol="kg.m/s" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1000.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">1000.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.02</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>    
+    <!-- Momento linear segundo X total -->
+    <ChannelInfo name="Px t" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Px t" physicsunitname="kg.m/s" physicsunitsymbol="kg.m/s" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-2000.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">2000.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.02</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <!-- Momento linear segundo Y total -->
+    <ChannelInfo name="Py t" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Py t" physicsunitname="kg.m/s" physicsunitsymbol="kg.m/s" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-2000.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">2000.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.02</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <!-- Energia Cinética 1 -->
+    <ChannelInfo name="Ec1" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Ec 1" physicsunitname="J" physicsunitsymbol="J" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">10000.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <!-- Energia Cinética 2 -->
+    <ChannelInfo name="Ec2" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Ec 2" physicsunitname="J" physicsunitsymbol="J" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">10000.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <!-- Energia Cinética Total -->
+    <ChannelInfo name="Ect" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Ec t" physicsunitname="J" physicsunitsymbol="J" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">20000.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+ </HardwareInfo>
