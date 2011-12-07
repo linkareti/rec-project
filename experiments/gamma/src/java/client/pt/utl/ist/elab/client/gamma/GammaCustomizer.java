@@ -171,12 +171,12 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
 				.findString("gamma$rec.exp.lbl.gamma.FreqAcq")));
 		jSliderAcqFreq.setMajorTickSpacing(50);
-		jSliderAcqFreq.setMaximum(1000);
-		jSliderAcqFreq.setMinimum(500);
+		jSliderAcqFreq.setMaximum(500);
+		jSliderAcqFreq.setMinimum(50);
 		jSliderAcqFreq.setPaintLabels(true);
 		jSliderAcqFreq.setPaintTicks(true);
 		jSliderAcqFreq.setSnapToTicks(true);
-		jSliderAcqFreq.setValue(1000);
+		jSliderAcqFreq.setValue(300);
 		jSliderAcqFreq.addChangeListener(new javax.swing.event.ChangeListener() {
 			@Override
 			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
@@ -187,7 +187,7 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel5.add(jSliderAcqFreq, java.awt.BorderLayout.CENTER);
 
 		jTextFieldAcqFreq.setColumns(4);
-		jTextFieldAcqFreq.setText("1000");
+		jTextFieldAcqFreq.setText("300");
 		jTextFieldAcqFreq.addFocusListener(new java.awt.event.FocusAdapter() {
 			@Override
 			public void focusLost(final java.awt.event.FocusEvent evt) {
@@ -248,7 +248,7 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 	private void btnDefaultsActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
 	{// GEN-HEADEREND:event_btnDefaultsActionPerformed
-		jSliderAcqFreq.setValue(1000);
+		jSliderAcqFreq.setValue(300);
 		jSliderNPoints.setValue(300);
 		jSliderVolume.setValue(10);
 	}// GEN-LAST:event_btnDefaultsActionPerformed
