@@ -249,7 +249,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		add(jPanel3, java.awt.BorderLayout.CENTER);
 
 		jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle
-				.findString("ReCExpPV$rec.exp.customizer.title1"))); // NOI18N
+				.findString("cc$rec.exp.customizer.title1"))); // NOI18N
 		jPanel5.setMinimumSize(new java.awt.Dimension(350, 160));
 		jPanel5.setPreferredSize(new java.awt.Dimension(350, 160));
 		jPanel5.setLayout(new java.awt.GridBagLayout());
