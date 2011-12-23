@@ -51,9 +51,9 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel4 = new javax.swing.JPanel();
 		jTextFieldVolume = new javax.swing.JTextField();
 		jPanel5 = new javax.swing.JPanel();
-		jSliderAcqFreq = new javax.swing.JSlider();
+		jSliderSTime = new javax.swing.JSlider();
 		jPanel6 = new javax.swing.JPanel();
-		jTextFieldAcqFreq = new javax.swing.JTextField();
+		jTextFieldSTime = new javax.swing.JTextField();
 		jPanel7 = new javax.swing.JPanel();
 		jSliderNPoints = new javax.swing.JSlider();
 		jPanel8 = new javax.swing.JPanel();
@@ -139,7 +139,7 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jSliderVolume.setPaintLabels(true);
 		jSliderVolume.setPaintTicks(true);
 		jSliderVolume.setSnapToTicks(true);
-		jSliderVolume.setValue(10);
+		jSliderVolume.setValue(13);
 		jSliderVolume.setMinimumSize(new java.awt.Dimension(300, 41));
 		jSliderVolume.setPreferredSize(new java.awt.Dimension(300, 41));
 		jSliderVolume.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -152,7 +152,7 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel3.add(jSliderVolume, java.awt.BorderLayout.CENTER);
 
 		jTextFieldVolume.setColumns(4);
-		jTextFieldVolume.setText("10");
+		jTextFieldVolume.setText("13");
 		jTextFieldVolume.addFocusListener(new java.awt.event.FocusAdapter() {
 			@Override
 			public void focusLost(final java.awt.event.FocusEvent evt) {
@@ -169,33 +169,33 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel5.setLayout(new java.awt.BorderLayout());
 
 		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("gamma$rec.exp.lbl.gamma.FreqAcq")));
-		jSliderAcqFreq.setMajorTickSpacing(50);
-		jSliderAcqFreq.setMaximum(500);
-		jSliderAcqFreq.setMinimum(50);
-		jSliderAcqFreq.setPaintLabels(true);
-		jSliderAcqFreq.setPaintTicks(true);
-		jSliderAcqFreq.setSnapToTicks(true);
-		jSliderAcqFreq.setValue(300);
-		jSliderAcqFreq.addChangeListener(new javax.swing.event.ChangeListener() {
+				.findString("gamma$rec.exp.lbl.gamma.STime")));
+		jSliderSTime.setMajorTickSpacing(5);
+		jSliderSTime.setMaximum(50);
+		jSliderSTime.setMinimum(1);
+		jSliderSTime.setPaintLabels(true);
+		jSliderSTime.setPaintTicks(true);
+		jSliderSTime.setSnapToTicks(true);
+		jSliderSTime.setValue(10);
+		jSliderSTime.addChangeListener(new javax.swing.event.ChangeListener() {
 			@Override
 			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
-				jSliderAcqFreqStateChanged(evt);
+				jSliderSTimeStateChanged(evt);
 			}
 		});
 
-		jPanel5.add(jSliderAcqFreq, java.awt.BorderLayout.CENTER);
+		jPanel5.add(jSliderSTime, java.awt.BorderLayout.CENTER);
 
-		jTextFieldAcqFreq.setColumns(4);
-		jTextFieldAcqFreq.setText("300");
-		jTextFieldAcqFreq.addFocusListener(new java.awt.event.FocusAdapter() {
+		jTextFieldSTime.setColumns(4);
+		jTextFieldSTime.setText("10");
+		jTextFieldSTime.addFocusListener(new java.awt.event.FocusAdapter() {
 			@Override
 			public void focusLost(final java.awt.event.FocusEvent evt) {
-				jTextFieldAcqFreqFocusLost(evt);
+				jTextFieldSTimeFocusLost(evt);
 			}
 		});
 
-		jPanel6.add(jTextFieldAcqFreq);
+		jPanel6.add(jTextFieldSTime);
 
 		jPanel5.add(jPanel6, java.awt.BorderLayout.EAST);
 
@@ -206,12 +206,12 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel7.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
 				.findString("gamma$rec.exp.lbl.gamma.NPoints")));
 		jSliderNPoints.setMajorTickSpacing(50);
-		jSliderNPoints.setMaximum(500);
-		jSliderNPoints.setMinimum(100);
+		jSliderNPoints.setMaximum(1000);
+		jSliderNPoints.setMinimum(1);
 		jSliderNPoints.setPaintLabels(true);
 		jSliderNPoints.setPaintTicks(true);
 		jSliderNPoints.setSnapToTicks(true);
-		jSliderNPoints.setValue(120);
+		jSliderNPoints.setValue(500);
 		jSliderNPoints.addChangeListener(new javax.swing.event.ChangeListener() {
 			@Override
 			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
@@ -222,7 +222,7 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel7.add(jSliderNPoints, java.awt.BorderLayout.CENTER);
 
 		jTextFieldNPoints.setColumns(4);
-		jTextFieldNPoints.setText("120");
+		jTextFieldNPoints.setText("500");
 		jTextFieldNPoints.addFocusListener(new java.awt.event.FocusAdapter() {
 			@Override
 			public void focusLost(final java.awt.event.FocusEvent evt) {
@@ -248,8 +248,8 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 	private void btnDefaultsActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
 	{// GEN-HEADEREND:event_btnDefaultsActionPerformed
-		jSliderAcqFreq.setValue(300);
-		jSliderNPoints.setValue(300);
+		jSliderSTime.setValue(1);
+		jSliderNPoints.setValue(200);
 		jSliderVolume.setValue(10);
 	}// GEN-LAST:event_btnDefaultsActionPerformed
 
@@ -262,7 +262,7 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 	{// GEN-HEADEREND:event_btnOKActionPerformed
 		acqConfig.getSelectedHardwareParameter("Volume").setParameterValue("" + jSliderVolume.getValue());
 
-		acqConfig.setSelectedFrequency(new Frequency(jSliderAcqFreq.getValue(), hardwareInfo.getHardwareFrequencies(0)
+		acqConfig.setSelectedFrequency(new Frequency(jSliderSTime.getValue(), hardwareInfo.getHardwareFrequencies(0)
 				.getMinimumFrequency().getMultiplier(), hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency()
 				.getFrequencyDefType()));
 
@@ -276,10 +276,10 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		adjustSlider(jSliderNPoints, jTextFieldNPoints);
 	}// GEN-LAST:event_jTextFieldNPointsFocusLost
 
-	private void jTextFieldAcqFreqFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldAcqFreqFocusLost
-	{// GEN-HEADEREND:event_jTextFieldAcqFreqFocusLost
-		adjustSlider(jSliderAcqFreq, jTextFieldAcqFreq);
-	}// GEN-LAST:event_jTextFieldAcqFreqFocusLost
+	private void jTextFieldSTimeFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldSTimeFocusLost
+	{// GEN-HEADEREND:event_jTextFieldSTimeFocusLost
+		adjustSlider(jSliderSTime, jTextFieldSTime);
+	}// GEN-LAST:event_jTextFieldSTimeFocusLost
 
 	private void jTextFieldVolumeFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_jTextFieldVolumeFocusLost
 	{// GEN-HEADEREND:event_jTextFieldVolumeFocusLost
@@ -291,10 +291,10 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jTextFieldNPoints.setText("" + jSliderNPoints.getValue());
 	}// GEN-LAST:event_jSliderNPointsStateChanged
 
-	private void jSliderAcqFreqStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderAcqFreqStateChanged
-	{// GEN-HEADEREND:event_jSliderAcqFreqStateChanged
-		jTextFieldAcqFreq.setText("" + jSliderAcqFreq.getValue());
-	}// GEN-LAST:event_jSliderAcqFreqStateChanged
+	private void jSliderSTimeStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderSTimeStateChanged
+	{// GEN-HEADEREND:event_jSliderSTimeStateChanged
+		jTextFieldSTime.setText("" + jSliderSTime.getValue());
+	}// GEN-LAST:event_jSliderSTimeStateChanged
 
 	private void jSliderVolumeStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderVolumeStateChanged
 	{// GEN-HEADEREND:event_jSliderVolumeStateChanged
@@ -400,8 +400,8 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		if (acqConfig != null) {
 			final int vol = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("Volume"));
 			jSliderVolume.setValue(vol);
-			final int acqFreq = (int) acqConfig.getSelectedFrequency().getFrequency();
-			jSliderAcqFreq.setValue(acqFreq);
+			final int STime = (int) acqConfig.getSelectedFrequency().getFrequency();
+			jSliderSTime.setValue(STime);
 			final int nsamples = acqConfig.getTotalSamples();
 			jSliderNPoints.setValue(nsamples);
 		}
@@ -453,10 +453,10 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 	private javax.swing.JPanel jPanel7;
 	private javax.swing.JPanel jPanel8;
 	private javax.swing.JPanel jPanel9;
-	private javax.swing.JSlider jSliderAcqFreq;
+	private javax.swing.JSlider jSliderSTime;
 	private javax.swing.JSlider jSliderNPoints;
 	private javax.swing.JSlider jSliderVolume;
-	private javax.swing.JTextField jTextFieldAcqFreq;
+	private javax.swing.JTextField jTextFieldSTime;
 	private javax.swing.JTextField jTextFieldNPoints;
 	private javax.swing.JTextField jTextFieldVolume;
 	// End of variables declaration//GEN-END:variables
