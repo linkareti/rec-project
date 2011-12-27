@@ -139,7 +139,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		gridBagConstraints.weighty = 1.0;
 		jPanel2.add(jLabel3, gridBagConstraints);
 
-		jChkCalibrate.setText(ReCResourceBundle.findString("cc$rec.exp.customizer.title4")); // NOI18N
+		jChkCalibrate.setText(ReCResourceBundle.findString("condensadorcilindrico$rec.exp.customizer.title4")); // NOI18N
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 3;
 		gridBagConstraints.gridy = 1;
@@ -151,7 +151,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.Y_AXIS));
 
 		jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle
-				.findString("cc$rec.exp.customizer.title2"))); // NOI18N
+				.findString("condensadorcilindrico$rec.exp.customizer.title2"))); // NOI18N
 		jPanel6.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
 		jPanel6.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel6.setPreferredSize(new java.awt.Dimension(350, 80));
@@ -201,7 +201,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel3.add(jPanel6);
 
 		jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle
-				.findString("cc$rec.exp.customizer.title3"))); // NOI18N
+				.findString("condensadorcilindrico$rec.exp.customizer.title3"))); // NOI18N
 		jPanel1.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel1.setPreferredSize(new java.awt.Dimension(350, 80));
 		jPanel1.setLayout(new java.awt.GridBagLayout());
@@ -249,7 +249,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		add(jPanel3, java.awt.BorderLayout.CENTER);
 
 		jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle
-				.findString("cc$rec.exp.customizer.title1"))); // NOI18N
+				.findString("condensadorcilindrico$rec.exp.customizer.title1"))); // NOI18N
 		jPanel5.setMinimumSize(new java.awt.Dimension(350, 160));
 		jPanel5.setPreferredSize(new java.awt.Dimension(350, 160));
 		jPanel5.setLayout(new java.awt.GridBagLayout());
@@ -304,7 +304,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		lblErrorVolsAreEqua.setForeground(new java.awt.Color(255, 0, 0));
 		lblErrorVolsAreEqua.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		lblErrorVolsAreEqua.setText(ReCResourceBundle.findString("cc$rec.exp.customizer.label1")); // NOI18N
+		lblErrorVolsAreEqua.setText(ReCResourceBundle.findString("condensadorcilindrico$rec.exp.customizer.label1")); // NOI18N
 		lblErrorVolsAreEqua.setEnabled(false);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -616,7 +616,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 	@Override
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findString("cc$rec.exp.cc.customizer.title");
+		return ReCResourceBundle.findString("condensadorcilindrico$rec.exp.cc.customizer.title");
 	}
 
 	@Override
