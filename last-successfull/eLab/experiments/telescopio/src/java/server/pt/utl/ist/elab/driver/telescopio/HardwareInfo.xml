@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="ELAB_TELESCOPIO_V01" familiarName="Telescopio" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
+    <description>
+        <![CDATA[ 
+        Esta experiência serve para - não esquecer de alterar esta descrição
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+        
+    <parameter name="TempoExp" type="ContinuousValue" value="1">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">9999999999</value>
+	    <value order="2">1</value>
+        </selection-list>
+    </parameter>
+        
+    <parameter name="Comando" type="BlackBoxValue" value="none">
+    </parameter>    
+    
+    <frequency-scale label="Sampling Interval">
+        <min-frequency><Frequency type="SamplingIntervalType" multiplier="none">1</Frequency></min-frequency>
+        <max-frequency><Frequency type="SamplingIntervalType" multiplier="none">10</Frequency></max-frequency>
+        <step-frequency><Frequency type="SamplingIntervalType" multiplier="none">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="SamplingIntervalType" multiplier="none">10</Frequency>
+    
+    <sampling-scale>
+        <min-samples>1</min-samples>
+        <max-samples>2</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+
+    <ChannelInfo name="Imagem_Telescopio" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Imagem_Telescopio" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></min>
+            <max><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></max>
+            <step><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></step>
+            <errordefault><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>    
+    <ChannelInfo name="Imagem_Flat" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Imagem_Buscador" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></min>
+            <max><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></max>
+            <step><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></step>
+            <errordefault><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>        
+    <ChannelInfo name="Imagem_DarkFrame" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Imagem_DarkFrame" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></min>
+            <max><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></max>
+            <step><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></step>
+            <errordefault><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Error_Channel" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Error_Channel" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="text/str"> </PhysicsVal></min>
+            <max><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="text/str"> </PhysicsVal></max>
+            <step><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="text/str"> </PhysicsVal></step>
+            <errordefault><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="text/str"> </PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>        
+</HardwareInfo>
+
