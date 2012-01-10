@@ -266,7 +266,7 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 				.getMinimumFrequency().getMultiplier(), hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency()
 				.getFrequencyDefType()));
 
-		acqConfig.setTotalSamples(jSliderNPoints.getValue() + 20);
+		acqConfig.setTotalSamples(jSliderNPoints.getValue();
 
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_btnOKActionPerformed
