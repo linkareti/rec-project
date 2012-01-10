@@ -38,12 +38,9 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 
 		final int numsamples = ((Integer) command.getCommandData(StampConfigTranslator.NUMSAMPLES_STR)).intValue();
 		final int volume = ((Integer) command.getCommandData(StampConfigTranslator.VOLUME_STR)).intValue();
+		final int frequency = ((Integer) command.getCommandData(StampConfigTranslator.FREQ_STR)).intValue();
 
-		final int vol_to_send = 350 - ((volume - 5) * 350) / 15;
-
-		final int T = (int) (1. / ((Integer) command.getCommandData(StampConfigTranslator.FREQ_STR)).doubleValue() / 5.4253E-04);
-
-		final String commandStr = command.getCommandIdentifier() + " " + vol_to_send + " " + T + " " + numsamples;
+		final String commandStr = command.getCommandIdentifier() + " " + volume + " " + frequency + " " + numsamples;
 		command.setCommand(commandStr);
 
 		return true;
