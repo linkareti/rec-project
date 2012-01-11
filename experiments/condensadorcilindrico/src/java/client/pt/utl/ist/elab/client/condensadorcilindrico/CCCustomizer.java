@@ -338,7 +338,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel5.add(tfPos2, gridBagConstraints);
 
 		add(jPanel5, java.awt.BorderLayout.NORTH);
-		jPanel5.getAccessibleContext().setAccessibleName("Distance Variation [mm]");
+
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void tfFreqFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfFreqFocusLost
