@@ -48,7 +48,7 @@ public final class PhysicsValConverter extends DozerConverter<PhysicsValDTO, Phy
 		result.setValue(((FloatVal) entity).getValue());
 		result.setValueType(PhysicsValueTypeEnum.FLOAT_VAL);
 	    } else if (entity instanceof DoubleVal) {
-		result.setValue(((BooleanVal) entity).getValue());
+		result.setValue(((DoubleVal) entity).getValue());
 		result.setValueType(PhysicsValueTypeEnum.DOUBLE_VAL);
 	    } else if (entity instanceof ByteArrayVal) {
 		result.setValue(DozerBeanMapperSingletonWrapper.getInstance().map(((ByteArrayVal) entity).getValue(), ByteArrayValueDTO.class));
