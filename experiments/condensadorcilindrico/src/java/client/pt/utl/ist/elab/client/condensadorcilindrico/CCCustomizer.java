@@ -31,8 +31,6 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
     /** Creates new form RadioactividadeCustomizer */
     public CCCustomizer() {
         initComponents();
-
-        checkPosOverlap();
     }
 
     /**
