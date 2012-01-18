@@ -42,9 +42,9 @@
     <Frequency type="SamplingIntervalType" multiplier="milli">10</Frequency>
     
     <sampling-scale>
-        <min-samples>1</min-samples>
-        <max-samples>20</max-samples>
-        <step-samples>1</step-samples>
+        <min-samples>2</min-samples>
+        <max-samples>670</max-samples>
+        <step-samples>100</step-samples>
     </sampling-scale>
     
     <ChannelInfo name="condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.0.name" independent="false" direction="CHANNEL_INPUT">

@@ -12,6 +12,7 @@ import javax.swing.text.NumberFormatter;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.ChannelParameter;
 import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.data.metadata.SamplesNumScale;
 import com.linkare.rec.data.synch.Frequency;
 import com.linkare.rec.impl.client.customizer.ICustomizerListener;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
@@ -28,6 +29,11 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
     
     private static ChannelParameter startPositionChannelParam;
     
+    private static ChannelParameter finalPositionChannelParam;
+    
+    private static SamplesNumScale numPointsSamplingScale;
+    
+
     /** Creates new form RadioactividadeCustomizer */
     public CCCustomizer() {
         initComponents();
@@ -239,10 +245,6 @@ private void tfInitPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 }//GEN-LAST:event_tfInitPosActionPerformed
 
     private void sldFinalPosStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldFinalPosStateChanged
-        if (sldFinalPos.getValue() == 0) {
-            sldFinalPos.setValue(1);
-
-        }
         tfFinalPos.setText("" + sldFinalPos.getValue());
     }//GEN-LAST:event_sldFinalPosStateChanged
 
@@ -308,9 +310,8 @@ private void tfInitPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
     private void sldNumPointsStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldFreqStateChanged
     {// GEN-HEADEREND:event_sldFreqStateChanged
-
         if (sldNumPoints.getValue() == 0) {
-            sldNumPoints.setValue(1);
+            sldNumPoints.setValue(2);
         }
         tfNumPoints.setText("" + sldNumPoints.getValue());
 
@@ -445,7 +446,9 @@ private void tfInitPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     public void setHardwareInfo(final HardwareInfo hardwareInfo) {
         this.hardwareInfo = hardwareInfo;
         startPositionChannelParam = hardwareInfo.getHardwareParameter("StartPosition");
-        
+        finalPositionChannelParam = hardwareInfo.getHardwareParameter("EndPosition");
+        numPointsSamplingScale = hardwareInfo.getSamplingScale();
+
         if (hardwareInfo != null) {
             setInitialValuesBasedOnHWInfo();
         }
@@ -482,14 +485,42 @@ private void tfInitPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         // Setting the slider for the inital position and its label values
         final Integer maxInitPos = Integer.parseInt(startPositionChannelParam.getParameterSelectionList(1));
         final Integer minInitPos = Integer.parseInt(startPositionChannelParam.getParameterSelectionList(0));
-        final Integer step = Integer.parseInt(startPositionChannelParam.getParameterSelectionList(2));
-        
-        final Hashtable initPosLabels = sldInitPos.createStandardLabels(step, minInitPos);
+        final Integer stepInitPos = Integer.parseInt(startPositionChannelParam.getParameterSelectionList(2));
+
+        sldInitPos.setMaximum(maxInitPos);
+        final Hashtable initPosLabels = sldInitPos.createStandardLabels(stepInitPos, minInitPos);
         initPosLabels.put(maxInitPos, new JLabel(maxInitPos.toString()));
-        
+
         sldInitPos.setLabelTable(initPosLabels);
         sldInitPos.setPaintLabels(true);
         sldInitPos.setPaintTrack(true);
+        
+        // Setting the slider for the final position and its label values
+        final Integer maxFinalPos = Integer.parseInt(finalPositionChannelParam.getParameterSelectionList(1));
+        final Integer minFinalPos = Integer.parseInt(finalPositionChannelParam.getParameterSelectionList(0));
+        final Integer stepFinalPos = Integer.parseInt(finalPositionChannelParam.getParameterSelectionList(2));
+        
+        sldFinalPos.setMaximum(maxFinalPos);
+        final Hashtable finalPosLabels = sldFinalPos.createStandardLabels(stepFinalPos, minFinalPos);
+        finalPosLabels.put(maxFinalPos, new JLabel(maxFinalPos.toString()));
+        
+        sldFinalPos.setLabelTable(finalPosLabels);
+        sldFinalPos.setPaintLabels(true);
+        sldFinalPos.setPaintTrack(true);
+        
+        // Setting the slider for the number of points and its label values
+        final Integer maxNumPointsPos = numPointsSamplingScale.getMaxSamples();
+        final Integer minNumPointsPos = numPointsSamplingScale.getMinSamples();
+        final Integer stepNumPointsPos = numPointsSamplingScale.getStep();
+        
+        sldNumPoints.setMaximum(maxNumPointsPos);
+        final Hashtable numPointsLabels = sldNumPoints.createStandardLabels(stepNumPointsPos, minNumPointsPos);
+        numPointsLabels.put(maxNumPointsPos, new JLabel(maxNumPointsPos.toString()));
+        
+        sldNumPoints.setLabelTable(finalPosLabels);
+        sldNumPoints.setPaintLabels(true);
+        sldNumPoints.setPaintTrack(true);
+
 
         final DecimalFormat format = new DecimalFormat("0.0");
         format.setDecimalSeparatorAlwaysShown(true);
