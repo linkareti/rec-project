@@ -21,7 +21,7 @@
         <selection-list>
             <value order="1">0</value>
             <value order="2">228</value>
-	    <value order="3">20</value>
+	    <value order="3">50</value>
         </selection-list>
     </parameter>
     
@@ -29,7 +29,7 @@
         <selection-list>
             <value order="1">0</value>
             <value order="2">228</value>
-            <value order="3">20</value>
+            <value order="3">50</value>
         </selection-list>
     </parameter>
     
@@ -37,7 +37,7 @@
     <frequency-scale label="Sampling Interval">
         <min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">2</Frequency></min-frequency>
         <max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">670</Frequency></max-frequency>
-        <step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">20</Frequency></step-frequency>
+        <step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">100</Frequency></step-frequency>
     </frequency-scale>
     <Frequency type="SamplingIntervalType" multiplier="milli">10</Frequency>
     

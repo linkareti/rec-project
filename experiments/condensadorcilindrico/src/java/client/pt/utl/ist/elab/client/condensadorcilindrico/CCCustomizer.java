@@ -27,7 +27,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
     private static final long serialVersionUID = 1374781526147471266L;
     
     private static ChannelParameter startPositionChannelParam;
-
+    
     /** Creates new form RadioactividadeCustomizer */
     public CCCustomizer() {
         initComponents();
@@ -127,7 +127,6 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         sldInitPos.setPaintLabels(true);
         sldInitPos.setPaintTicks(true);
         sldInitPos.setPaintTrack(false);
-        sldInitPos.setSnapToTicks(true);
         sldInitPos.setValue(0);
         sldInitPos.setMinimumSize(new java.awt.Dimension(250, 42));
         sldInitPos.setPreferredSize(new java.awt.Dimension(250, 42));
@@ -250,8 +249,7 @@ private void tfInitPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     }//GEN-LAST:event_sldFinalPosStateChanged
 
     private void sldInitPosStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldInitPosStateChanged
-        //tfPos1.setValue(new Float((t.getValue() / 1000.F)));
-        checkPosOverlap();
+        tfInitPos.setValue(sldInitPos.getValue());
     }//GEN-LAST:event_sldInitPosStateChanged
 
     private void tfNumPointsFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfFreqFocusLost
@@ -308,7 +306,6 @@ private void tfInitPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         } catch (final Exception e) {
             tfInitPos.setValue(new Float((sldInitPos.getValue() / 1000.F)));
         }
-        checkPosOverlap();
     }// GEN-LAST:event_tfPos1FocusLost
 
     private void sldNumPointsStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldFreqStateChanged
@@ -320,11 +317,6 @@ private void tfInitPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         tfNumPoints.setText("" + sldNumPoints.getValue());
 
     }// GEN-LAST:event_sldFreqStateChanged
-
-    private void checkPosOverlap() {
-//        lblErrorVolsAreEqua.setEnabled(sldInitPos.getValue() == sldPos2.getValue());
-//        btnOK.setEnabled(!lblErrorVolsAreEqua.isEnabled());
-    }
 
     private void btnCancelActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
     {// GEN-HEADEREND:event_btnCancelActionPerformed
@@ -490,28 +482,16 @@ private void tfInitPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private void setInitialValuesBasedOnHWInfo() {
 
         // Setting the slider for the inital position and its label values
-        final Hashtable<Integer, JLabel> initPosLabels = new Hashtable<Integer, JLabel>();
         final Integer maxInitPos = Integer.parseInt(startPositionChannelParam.getParameterSelectionList(1));
         final Integer minInitPos = Integer.parseInt(startPositionChannelParam.getParameterSelectionList(0));
-        final Integer middleInitPos = (maxInitPos - minInitPos) / 2;
-        final Integer ticksEvery = Integer.parseInt(startPositionChannelParam.getParameterSelectionList(2));
+        final Integer step = Integer.parseInt(startPositionChannelParam.getParameterSelectionList(2));
         
-        
-        sldInitPos.setMaximum(maxInitPos);
-        sldInitPos.setMinimum(minInitPos);
-        
-        initPosLabels.put(minInitPos, new JLabel(minInitPos.toString()));
-        initPosLabels.put(middleInitPos, new JLabel("middle"));
+        final Hashtable initPosLabels = sldInitPos.createStandardLabels(step, minInitPos);
         initPosLabels.put(maxInitPos, new JLabel(maxInitPos.toString()));
-        
-        for (int i = minInitPos; i < maxInitPos; i += ticksEvery) {
-            initPosLabels.put(i, new JLabel(i + ""));
-        }
         
         sldInitPos.setLabelTable(initPosLabels);
         sldInitPos.setPaintLabels(true);
         sldInitPos.setPaintTrack(true);
-        
 
         final DecimalFormat format = new DecimalFormat("0.0");
         format.setDecimalSeparatorAlwaysShown(true);
