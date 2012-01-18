@@ -25,19 +25,19 @@
         </selection-list>
     </parameter>
     
-    <parameter name="EndPosition" type="ContinuousValue" value="670">
+    <parameter name="EndPosition" type="ContinuousValue" value="228">
         <selection-list>
             <value order="1">0</value>
-            <value order="2">670</value>
-            <value order="3">0.1</value>
+            <value order="2">228</value>
+            <value order="3">20</value>
         </selection-list>
     </parameter>
     
     
     <frequency-scale label="Sampling Interval">
-        <min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></min-frequency>
+        <min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">2</Frequency></min-frequency>
         <max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">670</Frequency></max-frequency>
-        <step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
+        <step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">20</Frequency></step-frequency>
     </frequency-scale>
     <Frequency type="SamplingIntervalType" multiplier="milli">10</Frequency>
     
