@@ -1,38 +1,33 @@
-/*
- * RadioactividadeCustomizer.java
- *
- * Created on 16 de Maio de 2003, 10:11
- */
 package pt.utl.ist.elab.client.condensadorcilindrico;
 
-import java.text.DecimalFormat;
-
-import javax.swing.text.NumberFormatter;
-
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.config.ParameterConfig;
 import com.linkare.rec.data.metadata.ChannelParameter;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.metadata.SamplesNumScale;
-import com.linkare.rec.data.synch.Frequency;
 import com.linkare.rec.impl.client.customizer.ICustomizerListener;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import java.awt.Color;
+import java.text.MessageFormat;
 import java.util.Hashtable;
 import javax.swing.JLabel;
+import javax.swing.JSlider;
+import javax.swing.JTextField;
 
 /**
  * 
- * @author José Pedro Pereira - Linkare TI
+ * @author Ricardo Espírito Santo - Linkare TI
  */
 public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
 
     private static final long serialVersionUID = 1374781526147471266L;
-    
+    public static int MINIMUM_NUMBER_OF_POINTS;
     private static ChannelParameter startPositionChannelParam;
-    
     private static ChannelParameter finalPositionChannelParam;
-    
     private static SamplesNumScale numPointsSamplingScale;
-    
+    private static final int INIT_POS_DEFAULT_VALUE = 50;
+    private static final int FINAL_POS_DEFAULT_VALUE = 150;
+    private static final int NUM_POINTS_DEFAULT_VALUE = 10;
 
     /** Creates new form RadioactividadeCustomizer */
     public CCCustomizer() {
@@ -55,16 +50,18 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jChkCalibrate = new javax.swing.JCheckBox();
+        btnDefaultConfig = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
+        jPanelInitialPosition = new javax.swing.JPanel();
         sldInitPos = new javax.swing.JSlider();
-        tfInitPos = new javax.swing.JFormattedTextField();
-        jPanel6 = new javax.swing.JPanel();
+        tfInitPos = new javax.swing.JTextField();
+        jPanelFinalPosition = new javax.swing.JPanel();
         sldFinalPos = new javax.swing.JSlider();
         tfFinalPos = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
+        jPanelNumberOfPoints = new javax.swing.JPanel();
         sldNumPoints = new javax.swing.JSlider();
         tfNumPoints = new javax.swing.JTextField();
+        jLStatus = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(350, 460));
         setPreferredSize(new java.awt.Dimension(350, 460));
@@ -74,7 +71,8 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
-        btnOK.setText("OK");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/condensadorcilindrico/resources/messages"); // NOI18N
+        btnOK.setText(bundle.getString("rec.exp.cc.customizer.btn.OK")); // NOI18N
         btnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOKActionPerformed(evt);
@@ -85,7 +83,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         gridBagConstraints.gridy = 1;
         jPanel2.add(btnOK, gridBagConstraints);
 
-        btnCancel.setText("Cancel");
+        btnCancel.setText(bundle.getString("rec.exp.cc.customizer.btn.cancel")); // NOI18N
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
@@ -109,29 +107,40 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         gridBagConstraints.weighty = 1.0;
         jPanel2.add(jLabel3, gridBagConstraints);
 
-        jChkCalibrate.setText(ReCResourceBundle.findString("condensadorcilindrico$rec.exp.customizer.title4")); // NOI18N
+        jChkCalibrate.setText(ReCResourceBundle.findString("condensadorcilindrico$rec.exp.cc.customizer.calibrate")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
         jPanel2.add(jChkCalibrate, gridBagConstraints);
+
+        btnDefaultConfig.setText(bundle.getString("rec.exp.cc.customizer.btn.default")); // NOI18N
+        btnDefaultConfig.setToolTipText("Set the default values for this application");
+        btnDefaultConfig.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                defaultConfigActionPerfomed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        jPanel2.add(btnDefaultConfig, gridBagConstraints);
+        btnDefaultConfig.getAccessibleContext().setAccessibleDescription("");
 
         add(jPanel2, java.awt.BorderLayout.SOUTH);
 
         jPanel3.setMinimumSize(new java.awt.Dimension(350, 160));
         jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.Y_AXIS));
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("condensadorcilindrico$rec.exp.customizer.title1"))); // NOI18N
-        jPanel5.setMinimumSize(new java.awt.Dimension(350, 106));
-        jPanel5.setPreferredSize(new java.awt.Dimension(350, 106));
-        jPanel5.setLayout(new java.awt.GridBagLayout());
+        jPanelInitialPosition.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("condensadorcilindrico$rec.exp.customizer.title1"))); // NOI18N
+        jPanelInitialPosition.setMinimumSize(new java.awt.Dimension(350, 106));
+        jPanelInitialPosition.setPreferredSize(new java.awt.Dimension(350, 106));
+        jPanelInitialPosition.setLayout(new java.awt.GridBagLayout());
 
         sldInitPos.setMajorTickSpacing(100);
         sldInitPos.setMaximum(0);
         sldInitPos.setMinorTickSpacing(20);
         sldInitPos.setPaintLabels(true);
         sldInitPos.setPaintTicks(true);
-        sldInitPos.setPaintTrack(false);
-        sldInitPos.setValue(0);
         sldInitPos.setMinimumSize(new java.awt.Dimension(250, 42));
         sldInitPos.setPreferredSize(new java.awt.Dimension(250, 42));
         sldInitPos.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -139,39 +148,49 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
                 sldInitPosStateChanged(evt);
             }
         });
-        jPanel5.add(sldInitPos, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 90;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(34, 17, 30, 0);
+        jPanelInitialPosition.add(sldInitPos, gridBagConstraints);
 
         tfInitPos.setColumns(3);
         tfInitPos.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        tfInitPos.setText("0");
+        tfInitPos.setText("50");
+        tfInitPos.setMaximumSize(new java.awt.Dimension(30, 16));
         tfInitPos.setMinimumSize(new java.awt.Dimension(30, 16));
-        tfInitPos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfInitPosActionPerformed(evt);
-            }
-        });
+        tfInitPos.setPreferredSize(new java.awt.Dimension(37, 16));
         tfInitPos.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tfInitPosFocusLost(evt);
             }
         });
-        jPanel5.add(tfInitPos, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 7;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(32, 6, 0, 17);
+        jPanelInitialPosition.add(tfInitPos, gridBagConstraints);
 
-        jPanel3.add(jPanel5);
+        jPanel3.add(jPanelInitialPosition);
+        jPanelInitialPosition.getAccessibleContext().setAccessibleName(bundle.getString("rec.exp.customizer.title1")); // NOI18N
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("condensadorcilindrico$rec.exp.customizer.title2"))); // NOI18N
-        jPanel6.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
-        jPanel6.setMinimumSize(new java.awt.Dimension(350, 106));
-        jPanel6.setPreferredSize(new java.awt.Dimension(350, 106));
-        jPanel6.setLayout(new java.awt.GridBagLayout());
+        jPanelFinalPosition.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("condensadorcilindrico$rec.exp.customizer.title2"))); // NOI18N
+        jPanelFinalPosition.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        jPanelFinalPosition.setMinimumSize(new java.awt.Dimension(350, 106));
+        jPanelFinalPosition.setPreferredSize(new java.awt.Dimension(350, 106));
+        jPanelFinalPosition.setLayout(new java.awt.GridBagLayout());
 
         sldFinalPos.setMajorTickSpacing(40);
         sldFinalPos.setMaximum(240);
         sldFinalPos.setMinorTickSpacing(23);
         sldFinalPos.setPaintLabels(true);
         sldFinalPos.setPaintTicks(true);
-        sldFinalPos.setPaintTrack(false);
-        sldFinalPos.setMaximumSize(new java.awt.Dimension(1000, 32767));
         sldFinalPos.setMinimumSize(new java.awt.Dimension(250, 42));
         sldFinalPos.setPreferredSize(new java.awt.Dimension(250, 42));
         sldFinalPos.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -180,8 +199,13 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel6.add(sldFinalPos, gridBagConstraints);
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 90;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(34, 17, 30, 0);
+        jPanelFinalPosition.add(sldFinalPos, gridBagConstraints);
 
         tfFinalPos.setColumns(3);
         tfFinalPos.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -194,23 +218,29 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
                 tfFinalPosFocusLost(evt);
             }
         });
-        jPanel6.add(tfFinalPos, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 7;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(32, 6, 0, 17);
+        jPanelFinalPosition.add(tfFinalPos, gridBagConstraints);
 
-        jPanel3.add(jPanel6);
+        jPanel3.add(jPanelFinalPosition);
+        jPanelFinalPosition.getAccessibleContext().setAccessibleName(bundle.getString("rec.exp.customizer.title2")); // NOI18N
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("condensadorcilindrico$rec.exp.customizer.title3"))); // NOI18N
-        jPanel1.setMinimumSize(new java.awt.Dimension(350, 106));
-        jPanel1.setPreferredSize(new java.awt.Dimension(350, 106));
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        jPanelNumberOfPoints.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("condensadorcilindrico$rec.exp.customizer.title3"))); // NOI18N
+        jPanelNumberOfPoints.setMinimumSize(new java.awt.Dimension(350, 106));
+        jPanelNumberOfPoints.setPreferredSize(new java.awt.Dimension(350, 106));
+        jPanelNumberOfPoints.setLayout(new java.awt.GridBagLayout());
 
         sldNumPoints.setMajorTickSpacing(400);
         sldNumPoints.setMaximum(2000);
         sldNumPoints.setMinorTickSpacing(200);
         sldNumPoints.setPaintLabels(true);
         sldNumPoints.setPaintTicks(true);
-        sldNumPoints.setPaintTrack(false);
-        sldNumPoints.setMaximumSize(new java.awt.Dimension(1000, 32767));
-        sldNumPoints.setMinimumSize(new java.awt.Dimension(255, 80));
+        sldNumPoints.setMinimumSize(new java.awt.Dimension(250, 42));
         sldNumPoints.setPreferredSize(new java.awt.Dimension(250, 42));
         sldNumPoints.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -218,8 +248,13 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel1.add(sldNumPoints, gridBagConstraints);
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 90;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(34, 17, 30, 0);
+        jPanelNumberOfPoints.add(sldNumPoints, gridBagConstraints);
 
         tfNumPoints.setColumns(3);
         tfNumPoints.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -232,126 +267,149 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel1.add(tfNumPoints, gridBagConstraints);
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 7;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(32, 6, 0, 17);
+        jPanelNumberOfPoints.add(tfNumPoints, gridBagConstraints);
 
-        jPanel3.add(jPanel1);
+        jPanel3.add(jPanelNumberOfPoints);
+        jPanelNumberOfPoints.getAccessibleContext().setAccessibleName(bundle.getString("rec.exp.customizer.title3")); // NOI18N
+
+        jLStatus.setForeground(new java.awt.Color(238, 238, 238));
+        jLStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLStatus.setText("THIS TEXT is important for layout purposes do not delete this");
+        jLStatus.setAlignmentX(0.5F);
+        jLStatus.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel3.add(jLStatus);
+        jLStatus.getAccessibleContext().setAccessibleName("JLStatus");
 
         add(jPanel3, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-private void tfInitPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfInitPosActionPerformed
-// TODO add your handling code here:
-}//GEN-LAST:event_tfInitPosActionPerformed
-
     private void sldFinalPosStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldFinalPosStateChanged
-        tfFinalPos.setText("" + sldFinalPos.getValue());
+        tfFinalPos.setText(String.valueOf(sldFinalPos.getValue()));
+        ensureNumberOfPointsSmallerThanPosDiff();
     }//GEN-LAST:event_sldFinalPosStateChanged
 
     private void sldInitPosStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldInitPosStateChanged
-        tfInitPos.setValue(sldInitPos.getValue());
+        tfInitPos.setText(String.valueOf(sldInitPos.getValue()));
+        ensureNumberOfPointsSmallerThanPosDiff();
     }//GEN-LAST:event_sldInitPosStateChanged
 
-    private void tfNumPointsFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfFreqFocusLost
-    {// GEN-HEADEREND:event_tfFreqFocusLost
-        final String strFreq = tfNumPoints.getText();
-        if (strFreq.trim().equals("")) {
-            return;
+    private void sldNumPointsStateChanged(javax.swing.event.ChangeEvent evt) {
+        if (sldNumPoints.getValue() < MINIMUM_NUMBER_OF_POINTS) {
+            sldNumPoints.setValue(MINIMUM_NUMBER_OF_POINTS);
         }
-        try {
-            final int Freq = Integer.parseInt(strFreq);
-            if (Freq <= sldNumPoints.getMaximum() && Freq > sldNumPoints.getMinimum()) {
-                sldNumPoints.setValue(Freq);
-            } else {
-                tfNumPoints.setText("" + sldNumPoints.getValue());
-            }
-        } catch (final Exception e) {
-            tfNumPoints.setText("" + sldNumPoints.getValue());
-        }
-    }// GEN-LAST:event_tfFreqFocusLost
+        tfNumPoints.setText(String.valueOf(sldNumPoints.getValue()));
+        ensureNumberOfPointsSmallerThanPosDiff();
+    }
 
-    private void tfFinalPosFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfNumSamplesFocusLost
-    {// GEN-HEADEREND:event_tfNumSamplesFocusLost
-        final String strNumSamples = tfFinalPos.getText();
-        if (strNumSamples.trim().equals("")) {
-            return;
-        }
-        try {
-            final int numSamples = Integer.parseInt(strNumSamples);
-            if (numSamples <= sldFinalPos.getMaximum() && numSamples > sldFinalPos.getMinimum()) {
-                sldFinalPos.setValue(numSamples);
-            } else {
-                tfFinalPos.setText("" + sldFinalPos.getValue());
-            }
-        } catch (final Exception e) {
-            tfFinalPos.setText("" + sldFinalPos.getValue());
-        }
-    }// GEN-LAST:event_tfNumSamplesFocusLost
+    private void defaultConfigActionPerfomed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_defaultConfigActionPerfomed
+        sldInitPos.setValue(INIT_POS_DEFAULT_VALUE);
+        sldFinalPos.setValue(FINAL_POS_DEFAULT_VALUE);
+        sldNumPoints.setValue(NUM_POINTS_DEFAULT_VALUE);
+    }//GEN-LAST:event_defaultConfigActionPerfomed
 
-    private void tfInitPosFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfPos1FocusLost
-    {// GEN-HEADEREND:event_tfPos1FocusLost
-        final String strPos1 = tfInitPos.getText();
+    private void tfInitPosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfInitPosFocusLost
+        validateAndAssignInputtedValue(tfInitPos, sldInitPos);
+        ensureNumberOfPointsSmallerThanPosDiff();
+    }//GEN-LAST:event_tfInitPosFocusLost
 
-        if (strPos1.trim().equals("")) {
-            return;
-        }
-        try {
-            final int Pos1 = (int) (Float.parseFloat(strPos1) * 1000.F);
-            if (Pos1 <= sldInitPos.getMaximum() && Pos1 > sldInitPos.getMinimum()) {
-                sldInitPos.setValue(Pos1);
-            } else {
-                tfInitPos.setValue(new Float((sldInitPos.getValue() / 1000.F)));
-            }
+    private void tfFinalPosFocusLost(final java.awt.event.FocusEvent evt) {
+        validateAndAssignInputtedValue(tfFinalPos, sldFinalPos);
+        ensureNumberOfPointsSmallerThanPosDiff();
+    }
 
-        } catch (final Exception e) {
-            tfInitPos.setValue(new Float((sldInitPos.getValue() / 1000.F)));
-        }
-    }// GEN-LAST:event_tfPos1FocusLost
+    private void tfNumPointsFocusLost(java.awt.event.FocusEvent evt) {
+        validateAndAssignInputtedValue(tfNumPoints, sldNumPoints);
+        ensureNumberOfPointsSmallerThanPosDiff();
+    }
 
-    private void sldNumPointsStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldFreqStateChanged
-    {// GEN-HEADEREND:event_sldFreqStateChanged
-        if (sldNumPoints.getValue() == 0) {
-            sldNumPoints.setValue(2);
-        }
-        tfNumPoints.setText("" + sldNumPoints.getValue());
-
-    }// GEN-LAST:event_sldFreqStateChanged
-
-    private void btnCancelActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
-    {// GEN-HEADEREND:event_btnCancelActionPerformed
+    private void btnCancelActionPerformed(final java.awt.event.ActionEvent evt) {
         fireICustomizerListenerCanceled();
-    }// GEN-LAST:event_btnCancelActionPerformed
+    }
 
-    private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
-    {// GEN-HEADEREND:event_btnOKActionPerformed
-        final int nsamples = sldFinalPos.getValue() == 0 ? 1 : sldFinalPos.getValue();
-        acqConfig.setTotalSamples(nsamples + 1);
-        acqConfig.getSelectedHardwareParameter("StartPosition").setParameterValue("" + (sldInitPos.getValue() / 1000.F));
-//        acqConfig.getSelectedHardwareParameter("EndPosition").setParameterValue("" + (sldPos2.getValue() / 1000.F));
-        acqConfig.getSelectedHardwareParameter("Calibrate").setParameterValue(jChkCalibrate.isSelected() ? "1" : "0");
-        acqConfig.setSelectedFrequency(new Frequency(sldNumPoints.getValue(), hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
+    private void btnOKActionPerformed(final java.awt.event.ActionEvent evt) {
+        if (!ensureNumberOfPointsSmallerThanPosDiff()) {
+            return;
+        }
+
+
+        final ParameterConfig hwStartPosition = acqConfig.getSelectedHardwareParameter("StartPosition");
+        hwStartPosition.setParameterValue(String.valueOf(sldInitPos.getValue()));
+
+        final ParameterConfig hwEndPosition = acqConfig.getSelectedHardwareParameter("EndPosition");
+        hwEndPosition.setParameterValue(String.valueOf(sldFinalPos.getValue()));
+
+        acqConfig.setTotalSamples(sldNumPoints.getValue());
+        
+        final ParameterConfig hwCalibrated = acqConfig.getSelectedHardwareParameter("Calibrate");
+        hwCalibrated.setParameterValue(jChkCalibrate.isSelected() ? "1" : "0");
+
         fireICustomizerListenerDone();
-    }// GEN-LAST:event_btnOKActionPerformed
+    }
+
+    private boolean ensureNumberOfPointsSmallerThanPosDiff() {
+        final int initialPos = Integer.parseInt(tfInitPos.getText());
+        final int finalPos = Integer.parseInt(tfFinalPos.getText());
+        final int numPoints = Integer.parseInt(tfNumPoints.getText());
+        final boolean valid = numPoints < (Math.abs(finalPos - initialPos) - 1);
+        if (!valid) {
+            String errorMsg = ReCResourceBundle.findString("condensadorcilindrico$rec.exp.cc.customizer.validation.numberOfPointsSmallerThanPosDiff");
+            errorMsg = MessageFormat.format(errorMsg, numPoints, initialPos, finalPos);
+            jLStatus.setText(errorMsg);
+            jLStatus.setForeground(Color.RED);
+            btnOK.setEnabled(false);
+        } else {
+            btnOK.setEnabled(true);
+            jLStatus.setForeground(new Color(238, 238, 238));
+        }
+        return valid;
+    }
+
+    private void validateAndAssignInputtedValue(final JTextField tfThatChangedValue, final JSlider sldAssociatedWithTf) {
+        final String strNewValue = tfThatChangedValue.getText();
+        if (strNewValue.trim().isEmpty()) {
+            return;
+        }
+        try {
+            final int freq = Integer.parseInt(strNewValue);
+            if (freq <= sldAssociatedWithTf.getMaximum() && freq >= sldAssociatedWithTf.getMinimum()) {
+                sldAssociatedWithTf.setValue(freq);
+            } else {
+                tfThatChangedValue.setText(String.valueOf(sldAssociatedWithTf.getValue()));
+            }
+        } catch (final Exception e) {
+            tfThatChangedValue.setText(String.valueOf(sldAssociatedWithTf.getValue()));
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnDefaultConfig;
     private javax.swing.JButton btnOK;
     private javax.swing.JCheckBox jChkCalibrate;
+    private javax.swing.JLabel jLStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanelFinalPosition;
+    private javax.swing.JPanel jPanelInitialPosition;
+    private javax.swing.JPanel jPanelNumberOfPoints;
     private javax.swing.JSlider sldFinalPos;
     private javax.swing.JSlider sldInitPos;
     private javax.swing.JSlider sldNumPoints;
     private javax.swing.JTextField tfFinalPos;
-    private javax.swing.JFormattedTextField tfInitPos;
+    private javax.swing.JTextField tfInitPos;
     private javax.swing.JTextField tfNumPoints;
     // End of variables declaration//GEN-END:variables
     /** Utility field used by event firing mechanism. */
     private javax.swing.event.EventListenerList listenerList = null;
+    private HardwareInfo hardwareInfo = null;
+    private HardwareAcquisitionConfig acqConfig = null;
 
     /**
      * Registers ICustomizerListener to receive events.
@@ -410,8 +468,6 @@ private void tfInitPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             }
         }
     }
-    private HardwareInfo hardwareInfo = null;
-    private HardwareAcquisitionConfig acqConfig = null;
 
     @Override
     public HardwareAcquisitionConfig getAcquisitionConfig() {
@@ -421,20 +477,20 @@ private void tfInitPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     @Override
     public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
         this.acqConfig = acqConfig;
+
         if (acqConfig != null) {
-            final int nsamples = acqConfig.getTotalSamples() - 1;
-            sldFinalPos.setValue(nsamples);
-            tfFinalPos.setText("" + nsamples);
 
-            final int freq = (int) acqConfig.getSelectedFrequency().getFrequency();
+            final int currentStartPosition = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("StartPosition"));
+            sldInitPos.setValue(currentStartPosition);
+            tfInitPos.setText("" + currentStartPosition);
+
+            final int currentFinalPosition = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("EndPosition"));
+            sldFinalPos.setValue(currentFinalPosition);
+            tfFinalPos.setText(String.valueOf(currentFinalPosition));
+
+            final int freq = (int) acqConfig.getTotalSamples();
             sldNumPoints.setValue(freq);
-            tfNumPoints.setText("" + freq);
-
-            final float pos1f = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("StartPosition"));
-            final int pos1 = (int) Math.floor(pos1f * 1000.F);
-            sldInitPos.setValue(pos1);
-            tfInitPos.setValue(new Float(pos1f));
-
+            tfNumPoints.setText(String.valueOf(freq));
 
             final int calibrate = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("Calibrate"));
             jChkCalibrate.setSelected(calibrate != 0);
@@ -445,14 +501,65 @@ private void tfInitPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     @Override
     public void setHardwareInfo(final HardwareInfo hardwareInfo) {
         this.hardwareInfo = hardwareInfo;
-        startPositionChannelParam = hardwareInfo.getHardwareParameter("StartPosition");
-        finalPositionChannelParam = hardwareInfo.getHardwareParameter("EndPosition");
-        numPointsSamplingScale = hardwareInfo.getSamplingScale();
 
         if (hardwareInfo != null) {
-            setInitialValuesBasedOnHWInfo();
-        }
+            
+            startPositionChannelParam = hardwareInfo.getHardwareParameter("StartPosition");
+            finalPositionChannelParam = hardwareInfo.getHardwareParameter("EndPosition");
+            numPointsSamplingScale = hardwareInfo.getSamplingScale();
 
+
+            //Setting the initial value for the text field next to the slider
+            final String initialValueForInitialPos = startPositionChannelParam.getSelectedParameterValue();
+            tfInitPos.setText(initialValueForInitialPos);
+            sldInitPos.setValue(Integer.valueOf(initialValueForInitialPos));
+
+            // Setting the slider for the inital position and its label values
+            final Integer maxInitPos = Integer.parseInt(startPositionChannelParam.getParameterSelectionList(1));
+            final Integer minInitPos = Integer.parseInt(startPositionChannelParam.getParameterSelectionList(0));
+            final Integer stepInitPos = Integer.parseInt(startPositionChannelParam.getParameterSelectionList(2));
+
+            sldInitPos.setMaximum(maxInitPos);
+            final Hashtable initPosLabels = sldInitPos.createStandardLabels(stepInitPos, minInitPos);
+            initPosLabels.put(maxInitPos, new JLabel(maxInitPos.toString()));
+
+            sldInitPos.setLabelTable(initPosLabels);
+
+            //Setting the initial value for the text field next to the slider
+            final String initialValueForFinalPos = finalPositionChannelParam.getSelectedParameterValue();
+            tfFinalPos.setText(initialValueForFinalPos);
+            sldFinalPos.setValue(Integer.valueOf(initialValueForFinalPos));
+
+            // Setting the slider for the final position and its label values
+            final Integer maxFinalPos = Integer.parseInt(finalPositionChannelParam.getParameterSelectionList(1));
+            final Integer minFinalPos = Integer.parseInt(finalPositionChannelParam.getParameterSelectionList(0));
+            final Integer stepFinalPos = Integer.parseInt(finalPositionChannelParam.getParameterSelectionList(2));
+
+            sldFinalPos.setMaximum(maxFinalPos);
+            final Hashtable finalPosLabels = sldFinalPos.createStandardLabels(stepFinalPos, minFinalPos);
+            finalPosLabels.put(maxFinalPos, new JLabel(maxFinalPos.toString()));
+
+            sldFinalPos.setLabelTable(finalPosLabels);
+
+
+            // Setting the slider for the number of points and its label values
+            final Integer maxNumPointsPos = numPointsSamplingScale.getMaxSamples();
+            final Integer minNumPointsPos = numPointsSamplingScale.getMinSamples();
+            final Integer stepNumPointsPos = numPointsSamplingScale.getStep();
+
+            // Setting the minumum number of points as a global variable so that it can be checked while validating the user input
+            MINIMUM_NUMBER_OF_POINTS = minNumPointsPos;
+
+            sldNumPoints.setMaximum(maxNumPointsPos);
+            final Hashtable numPointsLabels = sldNumPoints.createStandardLabels(stepNumPointsPos, minNumPointsPos);
+            numPointsLabels.put(maxNumPointsPos, new JLabel(maxNumPointsPos.toString()));
+
+            sldNumPoints.setLabelTable(numPointsLabels);
+
+            // Setting the initial value for the text field next to the number of points - note that we cannot retrieve this from the XML so we assume the minimum value is OK
+            tfNumPoints.setText(String.valueOf(minNumPointsPos));
+            
+        }
     }
 
     protected HardwareInfo getHardwareInfo() {
@@ -466,8 +573,7 @@ private void tfInitPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
     @Override
     public javax.swing.ImageIcon getCustomizerIcon() {
-        return new javax.swing.ImageIcon(getClass().getResource(
-                "/pt/utl/ist/elab/client/condensadorcilindrico/resources/cc_iconified.gif"));
+        return new javax.swing.ImageIcon(ReCResourceBundle.findString("condensadorcilindrico$rec.exp.icon.cc"));
     }
 
     @Override
@@ -478,63 +584,5 @@ private void tfInitPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     @Override
     public javax.swing.JMenuBar getMenuBar() {
         return null;
-    }
-
-    private void setInitialValuesBasedOnHWInfo() {
-
-        // Setting the slider for the inital position and its label values
-        final Integer maxInitPos = Integer.parseInt(startPositionChannelParam.getParameterSelectionList(1));
-        final Integer minInitPos = Integer.parseInt(startPositionChannelParam.getParameterSelectionList(0));
-        final Integer stepInitPos = Integer.parseInt(startPositionChannelParam.getParameterSelectionList(2));
-
-        sldInitPos.setMaximum(maxInitPos);
-        final Hashtable initPosLabels = sldInitPos.createStandardLabels(stepInitPos, minInitPos);
-        initPosLabels.put(maxInitPos, new JLabel(maxInitPos.toString()));
-
-        sldInitPos.setLabelTable(initPosLabels);
-        sldInitPos.setPaintLabels(true);
-        sldInitPos.setPaintTrack(true);
-        
-        // Setting the slider for the final position and its label values
-        final Integer maxFinalPos = Integer.parseInt(finalPositionChannelParam.getParameterSelectionList(1));
-        final Integer minFinalPos = Integer.parseInt(finalPositionChannelParam.getParameterSelectionList(0));
-        final Integer stepFinalPos = Integer.parseInt(finalPositionChannelParam.getParameterSelectionList(2));
-        
-        sldFinalPos.setMaximum(maxFinalPos);
-        final Hashtable finalPosLabels = sldFinalPos.createStandardLabels(stepFinalPos, minFinalPos);
-        finalPosLabels.put(maxFinalPos, new JLabel(maxFinalPos.toString()));
-        
-        sldFinalPos.setLabelTable(finalPosLabels);
-        sldFinalPos.setPaintLabels(true);
-        sldFinalPos.setPaintTrack(true);
-        
-        // Setting the slider for the number of points and its label values
-        final Integer maxNumPointsPos = numPointsSamplingScale.getMaxSamples();
-        final Integer minNumPointsPos = numPointsSamplingScale.getMinSamples();
-        final Integer stepNumPointsPos = numPointsSamplingScale.getStep();
-        
-        sldNumPoints.setMaximum(maxNumPointsPos);
-        final Hashtable numPointsLabels = sldNumPoints.createStandardLabels(stepNumPointsPos, minNumPointsPos);
-        numPointsLabels.put(maxNumPointsPos, new JLabel(maxNumPointsPos.toString()));
-        
-        sldNumPoints.setLabelTable(finalPosLabels);
-        sldNumPoints.setPaintLabels(true);
-        sldNumPoints.setPaintTrack(true);
-
-
-        final DecimalFormat format = new DecimalFormat("0.0");
-        format.setDecimalSeparatorAlwaysShown(true);
-        format.setGroupingUsed(false);
-        format.setMinimumFractionDigits(1);
-        final NumberFormatter formatterUserPos1 = new NumberFormatter(format);
-        final NumberFormatter formatterUserPos2 = new NumberFormatter(format);
-
-        formatterUserPos1.setCommitsOnValidEdit(true);
-        formatterUserPos2.setCommitsOnValidEdit(true);
-
-        formatterUserPos1.setOverwriteMode(true);
-        formatterUserPos2.setOverwriteMode(true);
-
-        formatterUserPos1.install(tfInitPos);
     }
 }

@@ -34,7 +34,7 @@ public class EmbByteArrayValue implements Serializable {
     }
 
     public void setData(byte[] data) {
-        this.data = data;
+        this.data = data.clone();
     }
 
     public String getMimeType() {

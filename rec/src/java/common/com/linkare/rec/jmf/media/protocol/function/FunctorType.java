@@ -5,185 +5,192 @@ import java.util.StringTokenizer;
 import com.linkare.rec.jmf.ReCJMFUtils;
 
 public enum FunctorType {
-	SILENCE(new SilenceFunctor(), "silence") {
-		@Override
-		public void parseOptions(String optionsStr) {
-			if (optionsStr != null && optionsStr.trim().length() > 0)
-				throw new RuntimeException(this.getFunctionName() + " does not support any options (" + optionsStr
-						+ ")");
-		}
 
-		@Override
-		public FunctorControl getFunctorControl() {
-			return FunctorControl.NULLOP_CONTROL;
-		}
-	},
-	SIN_WAVE(new SineFunctor(), "sin") {
-		@Override
-		public void parseOptions(String optionsStr) {
-			StringTokenizer tokens = new StringTokenizer(optionsStr, "/", false);
-			if (tokens.countTokens() != 1)
-				throw new RuntimeException(this.getFunctionName() + " only supports options /<frequency> ("
-						+ optionsStr + ")");
-			String frequencyStr = tokens.nextToken();
+    SILENCE(new SilenceFunctor(), "silence") {
 
-			double frequency = 0;
+        @Override
+        public void parseOptions(String optionsStr) {
+            if (optionsStr != null && optionsStr.trim().length() > 0) {
+                throw new RuntimeException(this.getFunctionName() + " does not support any options (" + optionsStr
+                        + ")");
+            }
+        }
 
-			try {
-				frequency = Double.parseDouble(frequencyStr);
-			} catch (NumberFormatException e) {
-				throw new RuntimeException(this.getFunctionName() + " frequency option must be a valid number ("
-						+ frequencyStr + ")");
-			}
-			SineFunctor sineFunctor = (SineFunctor) this.getFunctor();
-			sineFunctor.setFrequency(frequency);
-			ReCJMFUtils.LOGGER.fine("Frequency is " + frequency);
-		}
+        @Override
+        public FunctorControl getFunctorControl() {
+            return FunctorControl.NULLOP_CONTROL;
+        }
+    },
+    SIN_WAVE(new SineFunctor(), "sin") {
 
-		@Override
-		public FunctorControl getFunctorControl() {
-			return new SineFunctorControl(this);
-		}
-	},
-	TRIANGULAR_WAVE(new TriangularFunctor(), "triangle") {
-		@Override
-		public void parseOptions(String optionsStr) {
-			StringTokenizer tokens = new StringTokenizer(optionsStr, "/", false);
-			if (tokens.countTokens() != 1)
-				throw new RuntimeException(this.getFunctionName() + " only supports options /<frequency> ("
-						+ optionsStr + ")");
-			String frequencyStr = tokens.nextToken();
+        @Override
+        public void parseOptions(String optionsStr) {
+            StringTokenizer tokens = new StringTokenizer(optionsStr, "/", false);
+            if (tokens.countTokens() != 1) {
+                throw new RuntimeException(this.getFunctionName() + " only supports options /<frequency> ("
+                        + optionsStr + ")");
+            }
+            String frequencyStr = tokens.nextToken();
 
-			double frequency = 0;
+            double frequency = 0;
 
-			try {
-				frequency = Double.parseDouble(frequencyStr);
-			} catch (NumberFormatException e) {
-				throw new RuntimeException(this.getFunctionName() + " frequency option must be a valid number ("
-						+ frequencyStr + ")");
-			}
-			TriangularFunctor triangularFunctor = (TriangularFunctor) this.getFunctor();
-			triangularFunctor.setFrequency(frequency);
-		}
+            try {
+                frequency = Double.parseDouble(frequencyStr);
+            } catch (NumberFormatException e) {
+                throw new RuntimeException(this.getFunctionName() + " frequency option must be a valid number ("
+                        + frequencyStr + ")");
+            }
+            SineFunctor sineFunctor = (SineFunctor) this.getFunctor();
+            sineFunctor.setFrequency(frequency);
+            ReCJMFUtils.LOGGER.fine("Frequency is " + frequency);
+        }
 
-		@Override
-		public FunctorControl getFunctorControl() {
-			return new TriangularFunctorControl(this);
-		}
-	},
-	PULSE(new PulseFunctor(), "pulse") {
-		@Override
-		public void parseOptions(String optionsStr) {
-			StringTokenizer tokens = new StringTokenizer(optionsStr, "/", false);
-			if (tokens.countTokens() != 2)
-				throw new RuntimeException(this.getFunctionName()
-						+ " only supports options /<frequency>/<pulseLengthPercent> (" + optionsStr + ")");
-			String frequencyStr = tokens.nextToken();
-			String pulseLengthPercentStr = tokens.nextToken();
+        @Override
+        public FunctorControl getFunctorControl() {
+            return new SineFunctorControl(this);
+        }
+    },
+    TRIANGULAR_WAVE(new TriangularFunctor(), "triangle") {
 
-			double frequency = 0;
-			double pulseLengthPercent = 0;
-			try {
-				frequency = Double.parseDouble(frequencyStr);
-			} catch (NumberFormatException e) {
-				throw new RuntimeException(this.getFunctionName() + " frequency option must be a valid number ("
-						+ frequencyStr + ")");
-			}
-			try {
-				pulseLengthPercent = Double.parseDouble(pulseLengthPercentStr);
-				if (pulseLengthPercent < 0. || pulseLengthPercent > 1.)
-					throw new NumberFormatException();
+        @Override
+        public void parseOptions(String optionsStr) {
+            StringTokenizer tokens = new StringTokenizer(optionsStr, "/", false);
+            if (tokens.countTokens() != 1) {
+                throw new RuntimeException(this.getFunctionName() + " only supports options /<frequency> ("
+                        + optionsStr + ")");
+            }
+            String frequencyStr = tokens.nextToken();
 
-			} catch (NumberFormatException e) {
-				throw new RuntimeException(this.getFunctionName()
-						+ " pulseLength option must be a valid number between 0 and 1 (" + pulseLengthPercentStr + ")");
-			}
+            double frequency = 0;
 
-			PulseFunctor pulseFunctor = (PulseFunctor) this.getFunctor();
-			pulseFunctor.setFrequency(frequency);
-			pulseFunctor.setPulseLengthPercent(pulseLengthPercent);
+            try {
+                frequency = Double.parseDouble(frequencyStr);
+            } catch (NumberFormatException e) {
+                throw new RuntimeException(this.getFunctionName() + " frequency option must be a valid number ("
+                        + frequencyStr + ")");
+            }
+            TriangularFunctor triangularFunctor = (TriangularFunctor) this.getFunctor();
+            triangularFunctor.setFrequency(frequency);
+        }
 
-		}
+        @Override
+        public FunctorControl getFunctorControl() {
+            return new TriangularFunctorControl(this);
+        }
+    },
+    PULSE(new PulseFunctor(), "pulse") {
 
-		@Override
-		public FunctorControl getFunctorControl() {
-			return new PulseFunctorControl(this);
-		}
+        @Override
+        public void parseOptions(String optionsStr) {
+            StringTokenizer tokens = new StringTokenizer(optionsStr, "/", false);
+            if (tokens.countTokens() != 2) {
+                throw new RuntimeException(this.getFunctionName()
+                        + " only supports options /<frequency>/<pulseLengthPercent> (" + optionsStr + ")");
+            }
+            String frequencyStr = tokens.nextToken();
+            String pulseLengthPercentStr = tokens.nextToken();
 
-	},
-	WHITE_NOISE(new WhiteNoiseFunctor(), "whitenoise") {
-		@Override
-		public void parseOptions(String optionsStr) {
-			if (optionsStr != null && optionsStr.trim().length() > 0)
-				throw new RuntimeException(this.getFunctionName() + " does not support any options (" + optionsStr
-						+ ")");
-		}
+            double frequency = 0;
+            double pulseLengthPercent = 0;
+            try {
+                frequency = Double.parseDouble(frequencyStr);
+            } catch (NumberFormatException e) {
+                throw new RuntimeException(this.getFunctionName() + " frequency option must be a valid number ("
+                        + frequencyStr + ")");
+            }
+            try {
+                pulseLengthPercent = Double.parseDouble(pulseLengthPercentStr);
+                if (pulseLengthPercent < 0. || pulseLengthPercent > 1.) {
+                    throw new NumberFormatException();
+                }
 
-		@Override
-		public FunctorControl getFunctorControl() {
-			return FunctorControl.NULLOP_CONTROL;
-		}
+            } catch (NumberFormatException e) {
+                throw new RuntimeException(this.getFunctionName()
+                        + " pulseLength option must be a valid number between 0 and 1 (" + pulseLengthPercentStr + ")");
+            }
 
-	},
-	PINK_NOISE(new PinkNoiseFunctor(), "pinknoise") {
-		@Override
-		public void parseOptions(String optionsStr) {
-			if (optionsStr != null && optionsStr.trim().length() > 0)
-				throw new RuntimeException(this.getFunctionName() + " does not support any options (" + optionsStr
-						+ ")");
-		}
+            PulseFunctor pulseFunctor = (PulseFunctor) this.getFunctor();
+            pulseFunctor.setFrequency(frequency);
+            pulseFunctor.setPulseLengthPercent(pulseLengthPercent);
 
-		@Override
-		public FunctorControl getFunctorControl() {
-			return FunctorControl.NULLOP_CONTROL;
-		}
+        }
 
-	},
-	MARKER(new MarkerFunctor(), "marker") {
+        @Override
+        public FunctorControl getFunctorControl() {
+            return new PulseFunctorControl(this);
+        }
+    },
+    WHITE_NOISE(new WhiteNoiseFunctor(), "whitenoise") {
 
-		@Override
-		public void parseOptions(String optionsStr) {
-			if (optionsStr != null && optionsStr.trim().length() > 0)
-				throw new RuntimeException(this.getFunctionName() + " does not support any options (" + optionsStr
-						+ ")");
-		}
+        @Override
+        public void parseOptions(String optionsStr) {
+            if (optionsStr != null && optionsStr.trim().length() > 0) {
+                throw new RuntimeException(this.getFunctionName() + " does not support any options (" + optionsStr
+                        + ")");
+            }
+        }
 
-		@Override
-		public FunctorControl getFunctorControl() {
-			return FunctorControl.NULLOP_CONTROL;
-		}
+        @Override
+        public FunctorControl getFunctorControl() {
+            return FunctorControl.NULLOP_CONTROL;
+        }
+    },
+    PINK_NOISE(new PinkNoiseFunctor(), "pinknoise") {
 
-	}
+        @Override
+        public void parseOptions(String optionsStr) {
+            if (optionsStr != null && optionsStr.trim().length() > 0) {
+                throw new RuntimeException(this.getFunctionName() + " does not support any options (" + optionsStr
+                        + ")");
+            }
+        }
 
-	;
+        @Override
+        public FunctorControl getFunctorControl() {
+            return FunctorControl.NULLOP_CONTROL;
+        }
+    },
+    MARKER(new MarkerFunctor(), "marker") {
 
-	private Functor functor;
-	private String functionName;
+        @Override
+        public void parseOptions(String optionsStr) {
+            if (optionsStr != null && optionsStr.trim().length() > 0) {
+                throw new RuntimeException(this.getFunctionName() + " does not support any options (" + optionsStr
+                        + ")");
+            }
+        }
 
-	public String getFunctionName() {
-		return functionName;
-	}
+        @Override
+        public FunctorControl getFunctorControl() {
+            return FunctorControl.NULLOP_CONTROL;
+        }
+    };
+    private Functor functor;
+    private String functionName;
 
-	private FunctorType(Functor functor, String functionName) {
-		this.functor = functor;
-		this.functionName = functionName;
-	}
+    public String getFunctionName() {
+        return functionName;
+    }
 
-	public Functor getFunctor() {
-		return functor;
-	}
+    private FunctorType(Functor functor, String functionName) {
+        this.functor = functor;
+        this.functionName = functionName;
+    }
 
-	public static FunctorType getByFunctionName(String functorTypeStr) {
-		for (FunctorType functorType : values()) {
-			if (functorType.functionName.equalsIgnoreCase(functorTypeStr)) {
-				return functorType;
-			}
-		}
-		return null;
-	}
+    public Functor getFunctor() {
+        return functor;
+    }
 
-	public abstract void parseOptions(String optionsStr);
+    public static FunctorType getByFunctionName(String functorTypeStr) {
+        for (FunctorType functorType : values()) {
+            if (functorType.functionName.equalsIgnoreCase(functorTypeStr)) {
+                return functorType;
+            }
+        }
+        return null;
+    }
 
-	public abstract FunctorControl getFunctorControl();
+    public abstract void parseOptions(String optionsStr);
 
+    public abstract FunctorControl getFunctorControl();
 }

@@ -1,9 +1,3 @@
-/*
- * RadioactividadeStampDriver.java
- *
- * Created on 15 de Maio de 2003, 19:38
- */
-
 package pt.utl.ist.elab.driver.condensadorcilindrico;
 
 import java.util.logging.Level;
@@ -37,7 +31,6 @@ import com.linkare.rec.impl.utils.Defaults;
 public class CCStampDriver extends AbstractStampDriver {
 	private StampCommand stampConfig = null;
 
-	/** Creates a new instance of RadioactividadeStampDriver */
 	public CCStampDriver() {
 		super();
 		setDriverUniqueID("ELAB_CC_STAMP_V02");
@@ -76,8 +69,8 @@ public class CCStampDriver extends AbstractStampDriver {
 
 		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new Integer(config.getTotalSamples()));
 
-		stampConfig.addCommandData(StampConfigTranslator.FREQ_INTERVAL_STR, new Integer((int) config
-				.getSelectedFrequency().getFrequency()));
+//		stampConfig.addCommandData(StampConfigTranslator.FREQ_INTERVAL_STR, new Integer((int) config
+//				.getSelectedFrequency().getFrequency()));
 
 		final StampTranslator translator = StampTranslatorProcessorManager.getTranslator(stampConfig);
 		if (!translator.translate(stampConfig)) {

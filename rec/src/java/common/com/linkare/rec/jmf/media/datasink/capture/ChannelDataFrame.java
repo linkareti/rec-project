@@ -4,56 +4,55 @@ import javax.media.format.AudioFormat;
 
 public class ChannelDataFrame {
 
-	private double[][] channelsData;
-	private double[] channelsVRMS;
-	private AudioFormat captureFormat;
+    private double[][] channelsData;
+    private double[] channelsVRMS;
+    private AudioFormat captureFormat;
 
-	public ChannelDataFrame(double[][] channelsData, double[] channelsVRMS, AudioFormat captureFormat) {
-		this.channelsData = channelsData;
-		this.channelsVRMS = channelsVRMS;
-		this.captureFormat = captureFormat;
-	}
+    public ChannelDataFrame(double[][] channelsData, double[] channelsVRMS, AudioFormat captureFormat) {
+        this.channelsData = channelsData.clone();
+        this.channelsVRMS = channelsVRMS.clone();
+        this.captureFormat = captureFormat;
+    }
 
-	public double[][] getChannelsData() {
-		return channelsData;
-	}
+    public double[][] getChannelsData() {
+        return channelsData;
+    }
 
-	public void setChannelsData(double[][] channelsData) {
-		this.channelsData = channelsData;
-	}
+    public void setChannelsData(double[][] channelsData) {
+        this.channelsData = channelsData.clone();
+    }
 
-	public double[] getChannelsVRMS() {
-		return channelsVRMS;
-	}
+    public double[] getChannelsVRMS() {
+        return channelsVRMS;
+    }
 
-	public void setChannelsVRMS(double[] channelsVRMS) {
-		this.channelsVRMS = channelsVRMS;
-	}
+    public void setChannelsVRMS(double[] channelsVRMS) {
+        this.channelsVRMS = channelsVRMS.clone();
+    }
 
-	public int getNumChannels() {
-		return channelsData.length;
-	}
+    public int getNumChannels() {
+        return channelsData.length;
+    }
 
-	public double[] getChannelData(int channel) {
-		return channelsData[channel];
-	}
+    public double[] getChannelData(int channel) {
+        return channelsData[channel];
+    }
 
-	public double getChannelVRMS(int channel) {
-		return channelsVRMS[channel];
-	}
+    public double getChannelVRMS(int channel) {
+        return channelsVRMS[channel];
+    }
 
-	/**
-	 * @return the captureFormat
-	 */
-	public AudioFormat getCaptureFormat() {
-		return captureFormat;
-	}
+    /**
+     * @return the captureFormat
+     */
+    public AudioFormat getCaptureFormat() {
+        return captureFormat;
+    }
 
-	/**
-	 * @param captureFormat the captureFormat to set
-	 */
-	public void setCaptureFormat(AudioFormat captureFormat) {
-		this.captureFormat = captureFormat;
-	}
-
+    /**
+     * @param captureFormat the captureFormat to set
+     */
+    public void setCaptureFormat(AudioFormat captureFormat) {
+        this.captureFormat = captureFormat;
+    }
 }

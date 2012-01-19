@@ -1,5 +1,5 @@
 /*
- * StampRelayTranslator.java
+ * StampConfigTranslator.java
  *
  * Created on 12 de Novembro de 2002, 15:44
  */
@@ -11,95 +11,43 @@ import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 
 /**
  * 
- * @author bruno
+ * @author Ricardo Espírito Santo - Linkare TI
  */
 public class StampConfigTranslator extends AbstractStampTranslator {
 
-	public static final String COMMAND_IDENTIFIER = AbstractStampDriver.CONFIG_OUT_STRING;
-	public static final String START_POS_STR = "StartPosition";
-	public static final String END_POS_STR = "EndPosition";
-	public static final String NUMSAMPLES_STR = "Numero de Amostras";
-	public static final String FREQ_INTERVAL_STR = "Intervalo entre amostras";
-	public static final String CALIBRATE_STR = "Calibrate";
+    public static final String COMMAND_IDENTIFIER = AbstractStampDriver.CONFIG_OUT_STRING;
+    public static final String START_POS_STR = "StartPosition";
+    public static final String END_POS_STR = "EndPosition";
+    public static final String NUMSAMPLES_STR = "Numero de Pontos";
+    public static final String CALIBRATE_STR = "Calibrate";
 
-	/** Creates a new instance of StampRelayTranslator */
-	public StampConfigTranslator() {
-		super(StampConfigTranslator.COMMAND_IDENTIFIER);
-	}
+    /** Creates a new instance of StampRelayTranslator */
+    public StampConfigTranslator() {
+        super(StampConfigTranslator.COMMAND_IDENTIFIER);
+    }
 
-	@Override
-	public boolean translate(final StampCommand command) {
-		if (command.getCommandIdentifier() == null) {
-			return false;
-		}
-		if (!command.getCommandIdentifier().equalsIgnoreCase(StampConfigTranslator.COMMAND_IDENTIFIER)) {
-			return false;
-		}
-		final int numsamples = ((Integer) command.getCommandData(StampConfigTranslator.NUMSAMPLES_STR)).intValue();
-		float startPosf = ((Float) command.getCommandData(StampConfigTranslator.START_POS_STR)).floatValue();
-		startPosf = startPosf * 10.F;
-		float endPosf = ((Float) command.getCommandData(StampConfigTranslator.END_POS_STR)).floatValue();
-		endPosf = endPosf * 10.F;
-		final int endPos = (int) Math.floor(endPosf);
-		final int startPos = (int) Math.floor(startPosf);
+    @Override
+    public boolean translate(final StampCommand command) {
+        if (command.getCommandIdentifier() == null
+                || !command.getCommandIdentifier().equalsIgnoreCase(StampConfigTranslator.COMMAND_IDENTIFIER)) {
+            return false;
+        }
 
-		final int numPoints = ((Integer) command.getCommandData(StampConfigTranslator.FREQ_INTERVAL_STR)).intValue();
-		final int calib = ((Integer) command.getCommandData(StampConfigTranslator.CALIBRATE_STR)).intValue();
+        int numPoints = ((Integer) command.getCommandData(NUMSAMPLES_STR)).intValue();
+        int startPos = ((Integer) command.getCommandData(START_POS_STR)).intValue();
+        int endPos = ((Integer) command.getCommandData(END_POS_STR)).intValue();
+        String calib = (String) command.getCommandData(CALIBRATE_STR);
+        
+        startPos = (670 / 228) * startPos;
+        endPos = (670 / 228) * endPos;
+        
 
-		if (startPos > 670 || startPos < 0) {
-			System.out.println("startPos is wrong..." + startPos);
-			return false;
-		}
+        final String commandStr = command.getCommandIdentifier() + " " + calib + " " + startPos + " " + endPos
+                + " " + numPoints;
+        
+        System.out.println("sending the command: " + commandStr);
 
-		if (endPos > 670 || endPos < 0) {
-			System.out.println("endPos is wrong..." + endPos);
-			return false;
-		}
-
-		if (endPos == startPos) {
-			System.out.println("startPos is equal to endPos...");
-			return false;
-		}
-
-		if (numsamples > 20) {
-			System.out.println("numsamples>20");
-			return false;
-		}
-
-		if (numsamples < 1) {
-			System.out.println("numsamples<1");
-			return false;
-		}
-
-		if (numPoints < 1 || numPoints > 670) {
-			System.out.println("numPoints is wrong..." + numPoints);
-			return false;
-		}
-
-		if (calib != 0 && calib != 1) {
-			System.out.println("Calib is wrong..." + calib);
-		}
-
-		String endPosStr = "" + endPos;
-		while (endPosStr.length() < 2) {
-			endPosStr = "0" + endPosStr;
-		}
-		String startPosStr = "" + startPos;
-		while (startPosStr.length() < 2) {
-			startPosStr = "0" + startPosStr;
-		}
-		String numSamplesStr = "" + numsamples;
-		while (numSamplesStr.length() < 3) {
-			numSamplesStr = "0" + numSamplesStr;
-		}
-		String numPointsStr = "" + numPoints;
-		while (numPointsStr.length() < 4) {
-			numPointsStr = "0" + numPointsStr;
-		}
-		final String commandStr = command.getCommandIdentifier() + " " + calib + " " + startPosStr + " " + endPosStr
-				+ " " + numPointsStr + " " + numSamplesStr;
-		command.setCommand(commandStr);
-
-		return true;
-	}
+        command.setCommand(commandStr);
+        return true;
+    }
 }
