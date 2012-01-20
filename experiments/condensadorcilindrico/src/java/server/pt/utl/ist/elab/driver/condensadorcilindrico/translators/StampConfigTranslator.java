@@ -36,7 +36,7 @@ public class StampConfigTranslator extends AbstractStampTranslator {
         int numPoints = ((Integer) command.getCommandData(NUMSAMPLES_STR)).intValue();
         int startPos = ((Integer) command.getCommandData(START_POS_STR)).intValue();
         int endPos = ((Integer) command.getCommandData(END_POS_STR)).intValue();
-        String calib = (String) command.getCommandData(CALIBRATE_STR);
+        int calib = ((Integer) command.getCommandData(CALIBRATE_STR)).intValue();
         
         startPos = (670 / 228) * startPos;
         endPos = (670 / 228) * endPos;
