@@ -48,11 +48,14 @@ public class CCStampDriver extends AbstractStampDriver {
 
         final String calibrateInfo = info.getHardwareParameterValue(StampConfigTranslator.CALIBRATE_STR);
         final String calibrateConfig = config.getSelectedHardwareParameterValue(StampConfigTranslator.CALIBRATE_STR);
+        final String initPosInfo = info.getHardwareParameterValue(StampConfigTranslator.START_POS_STR);
+        final String initPosConfig = config.getSelectedHardwareParameterValue(StampConfigTranslator.START_POS_STR);
         final String endPosInfo = info.getHardwareParameterValue(StampConfigTranslator.END_POS_STR);
         final String endPosConfig = config.getSelectedHardwareParameterValue(StampConfigTranslator.END_POS_STR);
         final int totalSamples = config.getTotalSamples();
         System.out.println("calibrateInfo: " + calibrateInfo + " calibrateConfig: " + calibrateConfig);
-        System.out.println("endPosInfo: " + endPosInfo + "endPosConfig: " + endPosConfig);        
+        System.out.println("initPosInfo: " + initPosInfo + " initPosConfig: " + initPosConfig);        
+        System.out.println("endPosInfo: " + endPosInfo + " endPosConfig: " + endPosConfig);        
         System.out.println("totalSamples: " + totalSamples);
 
         fireIDriverStateListenerDriverConfiguring();
@@ -63,6 +66,11 @@ public class CCStampDriver extends AbstractStampDriver {
                 StampConfigTranslator.CALIBRATE_STR,
                 new Float(Defaults.defaultIfEmpty(calibrateConfig, calibrateInfo)));
 
+        stampConfig.addCommandData(
+                StampConfigTranslator.START_POS_STR,
+                new Float(Defaults.defaultIfEmpty(initPosConfig, initPosInfo)));
+        
+        
         stampConfig.addCommandData(
                 StampConfigTranslator.END_POS_STR,
                 new Float(Defaults.defaultIfEmpty(endPosConfig, endPosInfo)));
