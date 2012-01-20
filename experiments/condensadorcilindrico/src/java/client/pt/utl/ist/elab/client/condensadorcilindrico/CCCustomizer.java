@@ -137,7 +137,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         jPanelInitialPosition.setPreferredSize(new java.awt.Dimension(350, 106));
         jPanelInitialPosition.setLayout(new java.awt.GridBagLayout());
 
-        sldInitPos.setMajorTickSpacing(100);
+        sldInitPos.setMajorTickSpacing(50);
         sldInitPos.setMaximum(0);
         sldInitPos.setMinorTickSpacing(20);
         sldInitPos.setPaintLabels(true);
@@ -187,7 +187,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         jPanelFinalPosition.setPreferredSize(new java.awt.Dimension(350, 106));
         jPanelFinalPosition.setLayout(new java.awt.GridBagLayout());
 
-        sldFinalPos.setMajorTickSpacing(40);
+        sldFinalPos.setMajorTickSpacing(50);
         sldFinalPos.setMaximum(240);
         sldFinalPos.setMinorTickSpacing(23);
         sldFinalPos.setPaintLabels(true);
@@ -236,7 +236,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         jPanelNumberOfPoints.setPreferredSize(new java.awt.Dimension(350, 106));
         jPanelNumberOfPoints.setLayout(new java.awt.GridBagLayout());
 
-        sldNumPoints.setMajorTickSpacing(400);
+        sldNumPoints.setMajorTickSpacing(100);
         sldNumPoints.setMaximum(2000);
         sldNumPoints.setMinorTickSpacing(200);
         sldNumPoints.setPaintLabels(true);
@@ -516,14 +516,12 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
             // Setting the slider for the inital position and its label values
             final Integer maxInitPos = Integer.parseInt(startPositionChannelParam.getParameterSelectionList(1));
-            final Integer minInitPos = Integer.parseInt(startPositionChannelParam.getParameterSelectionList(0));
-            final Integer stepInitPos = Integer.parseInt(startPositionChannelParam.getParameterSelectionList(2));
-
+           
             sldInitPos.setMaximum(maxInitPos);
-            final Hashtable initPosLabels = sldInitPos.createStandardLabels(stepInitPos, minInitPos);
-            initPosLabels.put(maxInitPos, new JLabel(maxInitPos.toString()));
+            sldInitPos.setMajorTickSpacing(Math.round(maxInitPos / 4));
+            sldInitPos.getLabelTable().put(maxInitPos, new JLabel(maxInitPos.toString()));
+            sldInitPos.setLabelTable(sldInitPos.getLabelTable());
 
-            sldInitPos.setLabelTable(initPosLabels);
 
             //Setting the initial value for the text field next to the slider
             final String initialValueForFinalPos = finalPositionChannelParam.getSelectedParameterValue();
@@ -532,29 +530,24 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
             // Setting the slider for the final position and its label values
             final Integer maxFinalPos = Integer.parseInt(finalPositionChannelParam.getParameterSelectionList(1));
-            final Integer minFinalPos = Integer.parseInt(finalPositionChannelParam.getParameterSelectionList(0));
-            final Integer stepFinalPos = Integer.parseInt(finalPositionChannelParam.getParameterSelectionList(2));
-
+    
             sldFinalPos.setMaximum(maxFinalPos);
-            final Hashtable finalPosLabels = sldFinalPos.createStandardLabels(stepFinalPos, minFinalPos);
-            finalPosLabels.put(maxFinalPos, new JLabel(maxFinalPos.toString()));
-
-            sldFinalPos.setLabelTable(finalPosLabels);
+            sldFinalPos.setMajorTickSpacing(Math.round(maxFinalPos / 4));
+            sldFinalPos.getLabelTable().put(maxFinalPos, new JLabel(maxFinalPos.toString()));
+            sldFinalPos.setLabelTable(sldFinalPos.getLabelTable());
 
 
             // Setting the slider for the number of points and its label values
             final Integer maxNumPointsPos = numPointsSamplingScale.getMaxSamples();
             final Integer minNumPointsPos = numPointsSamplingScale.getMinSamples();
-            final Integer stepNumPointsPos = numPointsSamplingScale.getStep();
 
             // Setting the minumum number of points as a global variable so that it can be checked while validating the user input
             MINIMUM_NUMBER_OF_POINTS = minNumPointsPos;
 
             sldNumPoints.setMaximum(maxNumPointsPos);
-            final Hashtable numPointsLabels = sldNumPoints.createStandardLabels(stepNumPointsPos, minNumPointsPos);
-            numPointsLabels.put(maxNumPointsPos, new JLabel(maxNumPointsPos.toString()));
-
-            sldNumPoints.setLabelTable(numPointsLabels);
+            sldNumPoints.setMajorTickSpacing(Math.round(maxNumPointsPos / 4));
+            sldNumPoints.getLabelTable().put(maxNumPointsPos, new JLabel(maxNumPointsPos.toString()));
+            sldNumPoints.setLabelTable(sldNumPoints.getLabelTable());
 
             // Setting the initial value for the text field next to the number of points - note that we cannot retrieve this from the XML so we assume the minimum value is OK
             tfNumPoints.setText(String.valueOf(minNumPointsPos));
