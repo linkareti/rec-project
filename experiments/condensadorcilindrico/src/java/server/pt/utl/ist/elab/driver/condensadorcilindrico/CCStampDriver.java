@@ -64,16 +64,16 @@ public class CCStampDriver extends AbstractStampDriver {
 
         stampConfig.addCommandData(
                 StampConfigTranslator.CALIBRATE_STR,
-                new Float(Defaults.defaultIfEmpty(calibrateConfig, calibrateInfo)));
+                new Integer(Defaults.defaultIfEmpty(calibrateConfig, calibrateInfo)));
 
         stampConfig.addCommandData(
                 StampConfigTranslator.START_POS_STR,
-                new Float(Defaults.defaultIfEmpty(initPosConfig, initPosInfo)));
+                new Integer(Defaults.defaultIfEmpty(initPosConfig, initPosInfo)));
         
         
         stampConfig.addCommandData(
                 StampConfigTranslator.END_POS_STR,
-                new Float(Defaults.defaultIfEmpty(endPosConfig, endPosInfo)));
+                new Integer(Defaults.defaultIfEmpty(endPosConfig, endPosInfo)));
 
         stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new Integer(totalSamples));
 
