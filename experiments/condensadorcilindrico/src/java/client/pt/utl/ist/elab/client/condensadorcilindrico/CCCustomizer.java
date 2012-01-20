@@ -1,5 +1,6 @@
 package pt.utl.ist.elab.client.condensadorcilindrico;
 
+import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.config.ParameterConfig;
 import com.linkare.rec.data.metadata.ChannelParameter;
@@ -337,7 +338,6 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
             return;
         }
 
-
         final ParameterConfig hwStartPosition = acqConfig.getSelectedHardwareParameter("StartPosition");
         hwStartPosition.setParameterValue(String.valueOf(sldInitPos.getValue()));
 
@@ -348,7 +348,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         
         final ParameterConfig hwCalibrated = acqConfig.getSelectedHardwareParameter("Calibrate");
         hwCalibrated.setParameterValue(jChkCalibrate.isSelected() ? "1" : "0");
-
+        
         fireICustomizerListenerDone();
     }
 

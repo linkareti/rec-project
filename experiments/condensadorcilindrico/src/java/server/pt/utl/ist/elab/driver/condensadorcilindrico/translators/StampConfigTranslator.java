@@ -18,7 +18,7 @@ public class StampConfigTranslator extends AbstractStampTranslator {
     public static final String COMMAND_IDENTIFIER = AbstractStampDriver.CONFIG_OUT_STRING;
     public static final String START_POS_STR = "StartPosition";
     public static final String END_POS_STR = "EndPosition";
-    public static final String NUMSAMPLES_STR = "Numero de Pontos";
+    public static final String NUMSAMPLES_STR = "Numero de Amostras";
     public static final String CALIBRATE_STR = "Calibrate";
 
     /** Creates a new instance of StampRelayTranslator */
