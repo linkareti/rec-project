@@ -6,6 +6,7 @@
 
 package pt.utl.ist.elab.driver.condensadorcilindrico.processors;
 
+import java.util.logging.Logger;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.AbstractStampProcessor;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 
@@ -18,6 +19,8 @@ public class StampCCProcessor extends AbstractStampProcessor {
 	public static final String CAPACIDADE_FREQ_STR = "CAPACIDADE_FREQ";
 	public static final String CAPACIDADE_FARAD_STR = "CAPACIDADE_FARAD";
 	public static final String DISTANCIA_STR = "VOLUME";
+        
+        private static final Logger LOGGER = Logger.getLogger(StampCCProcessor.class.getName());
 
 	/** Creates a new instance of StampHelloProcessor */
 	public StampCCProcessor() {
