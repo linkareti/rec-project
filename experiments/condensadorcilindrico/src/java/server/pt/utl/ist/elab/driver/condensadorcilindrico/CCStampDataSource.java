@@ -39,9 +39,9 @@ public class CCStampDataSource extends AbstractStampDataSource {
 			Float distancia;
 			final PhysicsValue[] values = new PhysicsValue[3];
 			try {
-				freq = (Float) cmd.getCommandData(StampCCProcessor.CAPACIDADE_FREQ_STR);
-				capacidade = (Float) cmd.getCommandData(StampCCProcessor.CAPACIDADE_FARAD_STR);
-				distancia = (Float) cmd.getCommandData(StampCCProcessor.DISTANCIA_STR);
+				freq = (Float) cmd.getCommandData(StampCCProcessor.FREQUENCE);
+				capacidade = (Float) cmd.getCommandData(StampCCProcessor.CAPACITANCE);
+				distancia = (Float) cmd.getCommandData(StampCCProcessor.DISTANCE);
 			} catch (final ClassCastException e) {
 				e.printStackTrace();
 				return;

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+<!-- Created by Ricardo Espírito Santo 24 Jan 2012 -->
 
 <HardwareInfo id="ELAB_CC_STAMP_V02" familiarName="Condensador Cilíndrico" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
     <description>
         <![CDATA[ 
-        Esta experiência serve para - não esquecer de alterar esta descrição
-        <b>Penso que pode ter coisas maradas aqui como html</b>
+        Esta experiência serve para estudar o efeito da variação da capacidade de um condensador num circuito RLC
         ]]>
     </description>
     
