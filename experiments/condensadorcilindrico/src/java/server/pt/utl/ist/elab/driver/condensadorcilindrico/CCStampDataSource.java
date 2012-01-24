@@ -34,23 +34,18 @@ public class CCStampDataSource extends AbstractStampDataSource {
 		}
 
 		if (cmd.getCommandIdentifier().equals(StampCCProcessor.COMMAND_IDENTIFIER)) {
-			Float freq;
-			Float capacidade;
-			Float distancia;
-			final PhysicsValue[] values = new PhysicsValue[3];
+			final Float capacity;
+			final Float distance;
+			final PhysicsValue[] values = new PhysicsValue[2];
 			try {
-				freq = (Float) cmd.getCommandData(StampCCProcessor.FREQUENCE);
-				capacidade = (Float) cmd.getCommandData(StampCCProcessor.CAPACITANCE);
-				distancia = (Float) cmd.getCommandData(StampCCProcessor.DISTANCE);
+				capacity = (Float) cmd.getCommandData(StampCCProcessor.CAPACITY);
+				distance = (Float) cmd.getCommandData(StampCCProcessor.DISTANCE);
 			} catch (final ClassCastException e) {
 				e.printStackTrace();
 				return;
 			}
-			final float valorFreq = freq.floatValue();
-			final float valorCapacidade = capacidade.floatValue();
-			final float valorDistancia = distancia.floatValue();
-			values[0] = PhysicsValueFactory.fromFloat(valorFreq, getAcquisitionHeader().getChannelsConfig(0)
-					.getSelectedScale());
+			final float valorCapacidade = capacity.floatValue();
+			final float valorDistancia = distance.floatValue();
 			values[1] = PhysicsValueFactory.fromFloat(valorCapacidade, getAcquisitionHeader().getChannelsConfig(1)
 					.getSelectedScale());
 			values[2] = PhysicsValueFactory.fromFloat(valorDistancia, getAcquisitionHeader().getChannelsConfig(2)
@@ -79,11 +74,8 @@ public class CCStampDataSource extends AbstractStampDataSource {
 		// setPacketSize((int)Math.ceil(1./(8.*config.getSelectedFrequency().getFrequency()*config.getSelectedFrequency().getMultiplier().getExpValue())));
 	}
 
-	private boolean stopped = false;
-
 	@Override
 	public void stopNow() {
-		stopped = true;
 		setDataSourceStoped();
 	}
 }

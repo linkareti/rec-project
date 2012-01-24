@@ -47,27 +47,22 @@
     </sampling-scale>
     
     <ChannelInfo name="condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.0.name" independent="false" direction="CHANNEL_INPUT">
-        <scale label="condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.0.label" 
-        physicsunitname="condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.0.physicsunitname" 
-        physicsunitsymbol="condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.0.physicsunitsymbol" 
-        multiplier="condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.0.physicsunitmultiplier" selected="true">
+        <scale label="condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.0.label" physicsunitname="condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.0.physicsunitname" physicsunitsymbol="Hz" multiplier="kilo" selected="true">
             <min><PhysicsVal type="float">0</PhysicsVal></min>
             <max><PhysicsVal type="float">670</PhysicsVal></max>
-            <step><PhysicsVal type="float">10</PhysicsVal></step>
-            <errordefault><PhysicsVal type="float">10</PhysicsVal></errordefault>
+            <step><PhysicsVal type="float">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.5</PhysicsVal></errordefault>
         </scale>
     </ChannelInfo>
     <ChannelInfo name="condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.1.name" independent="false" direction="CHANNEL_INPUT">
-        <scale label="condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.1.label" 
-        physicsunitname="condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.1.physicsunitname" 
-        physicsunitsymbol="condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.1.physicsunitsymbol" 
-        multiplier="condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.1.physicsunitmultiplier" selected="true">
+        <scale label="condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.1.label" physicsunitname="condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.1.physicsunitname" physicsunitsymbol="F" multiplier="pico" selected="true">
             <min><PhysicsVal type="float">0</PhysicsVal></min>
             <max><PhysicsVal type="float">65536</PhysicsVal></max>
-            <step><PhysicsVal type="float">10</PhysicsVal></step>
-            <errordefault><PhysicsVal type="float">10</PhysicsVal></errordefault>
+            <step><PhysicsVal type="float">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.5</PhysicsVal></errordefault>
         </scale>
     </ChannelInfo>
+
 
 </HardwareInfo>
 

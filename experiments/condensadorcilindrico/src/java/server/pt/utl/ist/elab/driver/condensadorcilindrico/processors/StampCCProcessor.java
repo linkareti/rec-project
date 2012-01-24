@@ -1,8 +1,3 @@
-/*
- * StampHelloProcessor.java
- *
- * Created on 12 de Novembro de 2002, 16:19
- */
 package pt.utl.ist.elab.driver.condensadorcilindrico.processors;
 
 import java.util.logging.Level;
@@ -18,16 +13,15 @@ import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 public class StampCCProcessor extends AbstractStampProcessor {
 
     public static final String COMMAND_IDENTIFIER = "C";
-    public static final String FREQUENCE = "FREQUENCE";
-    public static final String CAPACITANCE = "CAPACITANCE";
+    public static final String CAPACITY = "CAPACITY";
     public static final String DISTANCE = "DISTANCE";
     private static final Logger LOGGER = Logger.getLogger(StampCCProcessor.class.getName());
 
     /** 
-     * Creates a new instance of StampHelloProcessor 
+     * Creates a new instance of StampCCProcessor 
      */
     public StampCCProcessor() {
-        super(StampCCProcessor.COMMAND_IDENTIFIER);
+        super(COMMAND_IDENTIFIER);
     }
 
     @Override
@@ -35,19 +29,19 @@ public class StampCCProcessor extends AbstractStampProcessor {
 
         final String[] splitedCommand = command.getCommand().split(" ");
 
-        if (command.getCommandIdentifier().equalsIgnoreCase(StampCCProcessor.COMMAND_IDENTIFIER) && splitedCommand != null
+        if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedCommand != null
             && splitedCommand.length >= 2 && splitedCommand[0] != null && splitedCommand[1] != null) {
             try {
                 
                 final int distance = Integer.parseInt(splitedCommand[1]);
                 final Float floatDistance = new Float(distance / 1000);
-                command.addCommandData(StampCCProcessor.DISTANCE, floatDistance);
+                command.addCommandData(DISTANCE, floatDistance);
                 LOGGER.log(Level.FINEST, "PROCESSING the command got us Distance as: " + floatDistance);
                 
-                final int capacitance = Integer.parseInt(splitedCommand[2]);
-                final Float floatCapacitance = new Float(capacitance);
-                command.addCommandData(StampCCProcessor.CAPACITANCE, floatCapacitance);
-                LOGGER.log(Level.FINEST, "PROCESSING the command got us Capacitance as: " + floatCapacitance);
+                final int capacity = Integer.parseInt(splitedCommand[2]);
+                final Float floatCapacity = new Float(capacity);
+                command.addCommandData(CAPACITY, floatCapacity);
+                LOGGER.log(Level.FINEST, "PROCESSING the command got us Capacitance as: " + floatCapacity);
 
                 command.setData(true);
 
