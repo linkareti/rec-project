@@ -12,14 +12,15 @@ import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 
 /**
  * Parse and process the experiment's response
+ * 
  * @author Ricardo Espírito Santo - Linkare TI
  */
 public class StampCCProcessor extends AbstractStampProcessor {
 
     public static final String COMMAND_IDENTIFIER = "C";
-    public static final String CAPACIDADE_FREQ_STR = "CAPACIDADE_FREQ";
-    public static final String CAPACIDADE_FARAD_STR = "CAPACIDADE_FARAD";
-    public static final String DISTANCIA_STR = "VOLUME";
+    public static final String FREQUENCE = "FREQUENCE";
+    public static final String CAPACITANCE = "CAPACITANCE";
+    public static final String DISTANCE = "DISTANCE";
     private static final Logger LOGGER = Logger.getLogger(StampCCProcessor.class.getName());
 
     /** 
@@ -32,38 +33,30 @@ public class StampCCProcessor extends AbstractStampProcessor {
     @Override
     public boolean process(final StampCommand command) {
 
-        LOGGER.log(Level.FINER, "PROCESSING the following command: " + command);
+        final String[] splitedCommand = command.getCommand().split(" ");
 
-        float capacidadeFreq = 0.f;
-        float capacidadeFarad = 0.f;
-        float distancia = 0.f;
-        final String[] splitedStr = command.getCommand().split(" ");
-
-        if (command.getCommandIdentifier().equalsIgnoreCase(StampCCProcessor.COMMAND_IDENTIFIER) && splitedStr != null
-            && splitedStr.length >= 2 && splitedStr[0] != null && splitedStr[1] != null) {
+        if (command.getCommandIdentifier().equalsIgnoreCase(StampCCProcessor.COMMAND_IDENTIFIER) && splitedCommand != null
+            && splitedCommand.length >= 2 && splitedCommand[0] != null && splitedCommand[1] != null) {
             try {
-                capacidadeFreq = Integer.parseInt(splitedStr[0]);
-                final Float oCapacidadeFreq = new Float(capacidadeFreq);
-                command.addCommandData(StampCCProcessor.CAPACIDADE_FREQ_STR, oCapacidadeFreq);
-
-                capacidadeFarad = capacidadeFreq * 5 / 50;
-                final Float oCapacidadeFarad = new Float(capacidadeFreq);
-                command.addCommandData(StampCCProcessor.CAPACIDADE_FARAD_STR, oCapacidadeFarad);
-
-                distancia = Integer.parseInt(splitedStr[1]);
-                final Float oDistancia = new Float(distancia / 1000);
-                command.addCommandData(StampCCProcessor.DISTANCIA_STR, oDistancia);
+                
+                final int distance = Integer.parseInt(splitedCommand[1]);
+                final Float floatDistance = new Float(distance / 1000);
+                command.addCommandData(StampCCProcessor.DISTANCE, floatDistance);
+                LOGGER.log(Level.FINEST, "PROCESSING the command got us Distance as: " + floatDistance);
+                
+                final int capacitance = Integer.parseInt(splitedCommand[2]);
+                final Float floatCapacitance = new Float(capacitance);
+                command.addCommandData(StampCCProcessor.CAPACITANCE, floatCapacitance);
+                LOGGER.log(Level.FINEST, "PROCESSING the command got us Capacitance as: " + floatCapacitance);
 
                 command.setData(true);
 
                 return true;
-
             } catch (final NumberFormatException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.WARNING, "Couldn't process this command: [" + splitedCommand + "]");
                 return false;
             }
         }
-
         return false;
     }
 

@@ -8,7 +8,6 @@
  *
  * Created on 20/Abr/2009, 14:00:55
  */
-
 package com.linkare.rec.impl.newface.component;
 
 import java.awt.Component;
@@ -32,91 +31,90 @@ import com.linkare.rec.impl.newface.config.WebResource;
  */
 public class ApparatusDescriptionPane extends AbstractContentPane {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 405323800381364687L;
-	@SuppressWarnings("unused")
-	private static final Logger log = Logger.getLogger(ApparatusDescriptionPane.class.getName());
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 405323800381364687L;
+    @SuppressWarnings("unused")
+    private static final Logger log = Logger.getLogger(ApparatusDescriptionPane.class.getName());
 
-	/** Creates new form ApparatusPane */
-	public ApparatusDescriptionPane() {
-		initComponents();
-	}
+    /** Creates new form ApparatusPane */
+    public ApparatusDescriptionPane() {
+        initComponents();
+    }
 
-	public void setFieldsVisible(final boolean visible) {
-		for (final Component component : getComponents()) {
-			component.setVisible(visible);
-		}
-	}
+    public void setFieldsVisible(final boolean visible) {
+        for (final Component component : getComponents()) {
+            component.setVisible(visible);
+        }
+    }
 
-	/**
-	 * Updates the description pane with the given <code>Apparatus</code>
-	 * configuration.
-	 * 
-	 * @param apparatusConfig
-	 */
-	public void setApparatusConfig(final Apparatus apparatusConfig) {
+    /**
+     * Updates the description pane with the given <code>Apparatus</code>
+     * configuration.
+     * 
+     * @param apparatusConfig
+     */
+    public void setApparatusConfig(final Apparatus apparatusConfig) {
 
-		if (apparatusConfig == null) {
-			// TODO clear selection
-			return;
+        if (apparatusConfig == null) {
+            // TODO clear selection
+            return;
 
-		} else {
-			String desktopLocationBundleKey = null;
-			String displayStringBundleKey = null;
-			String descriptionStringBundleKey = null;
-			String webResourceLocation = null;
+        } else {
+            String desktopLocationBundleKey = null;
+            String displayStringBundleKey = null;
+            String descriptionStringBundleKey = null;
+            String webResourceLocation = null;
 
-			if (apparatusConfig.getDesktopLocationBundleKey() != null
-					&& apparatusConfig.getDesktopLocationBundleKey().trim().length() > 0) {
-				desktopLocationBundleKey = apparatusConfig.getDesktopLocationBundleKey();
-			}
-			if (apparatusConfig.getDisplayStringBundleKey() != null
-					&& apparatusConfig.getDisplayStringBundleKey().trim().length() > 0) {
-				displayStringBundleKey = apparatusConfig.getDisplayStringBundleKey();
-			}
-			if (apparatusConfig.getDescriptionStringBundleKey() != null
-					&& apparatusConfig.getDescriptionStringBundleKey().trim().length() > 0) {
-				descriptionStringBundleKey = apparatusConfig.getDescriptionStringBundleKey();
-			}
-			if (apparatusConfig.getWebResource() != null && apparatusConfig.getWebResource().size() > 0) {
-				String webResourceLocationBundleKey = null;
-				try {
-					// FIXME HFernandes - You should support more than one
-					// webresource... That is not uncommon... So, please, add
-					// links for every resource
-					// And then again, why are the links handled as buttons and
-					// not as hyperlinks inside some html... Please see the way
-					// we do it in Chat
-					// Get the first web resource for the link
-					final WebResource webResource = apparatusConfig.getWebResource().get(0);
-					webResourceLocationBundleKey = webResource.getLocationBundleKey();
-					webResourceLocation = ReCResourceBundle.findStringOrDefault(webResourceLocationBundleKey, null);
-				} catch (final MissingResourceException e) {
-					ApparatusDescriptionPane.log.warning("Could not find the resource " + webResourceLocationBundleKey
-							+ " on the experiment bundle");
-				}
-			}
+            if (apparatusConfig.getDesktopLocationBundleKey() != null
+                && apparatusConfig.getDesktopLocationBundleKey().trim().length() > 0) {
+                desktopLocationBundleKey = apparatusConfig.getDesktopLocationBundleKey();
+            }
+            if (apparatusConfig.getDisplayStringBundleKey() != null
+                && apparatusConfig.getDisplayStringBundleKey().trim().length() > 0) {
+                displayStringBundleKey = apparatusConfig.getDisplayStringBundleKey();
+            }
+            if (apparatusConfig.getDescriptionStringBundleKey() != null
+                && apparatusConfig.getDescriptionStringBundleKey().trim().length() > 0) {
+                descriptionStringBundleKey = apparatusConfig.getDescriptionStringBundleKey();
+            }
+            if (apparatusConfig.getWebResource() != null && apparatusConfig.getWebResource().size() > 0) {
+                String webResourceLocationBundleKey = null;
+                try {
+                    // FIXME HFernandes - You should support more than one
+                    // webresource... That is not uncommon... So, please, add
+                    // links for every resource
+                    // And then again, why are the links handled as buttons and
+                    // not as hyperlinks inside some html... Please see the way
+                    // we do it in Chat
+                    // Get the first web resource for the link
+                    final WebResource webResource = apparatusConfig.getWebResource().get(0);
+                    webResourceLocationBundleKey = webResource.getLocationBundleKey();
+                    webResourceLocation = ReCResourceBundle.findStringOrDefault(webResourceLocationBundleKey, null);
+                } catch (final MissingResourceException e) {
+                    ApparatusDescriptionPane.log.warning("Could not find the resource " + webResourceLocationBundleKey
+                        + " on the experiment bundle");
+                }
+            }
 
-			lblApparatusName.setText(ReCResourceBundle.findString(displayStringBundleKey));
-			// FIXME Set default icon
-			lblApparatusImg
-					.setIcon(ReCResourceBundle.findImageIconOrDefault(desktopLocationBundleKey, new ImageIcon()));
-			txtApparatusDescription.setText(ReCResourceBundle.findStringOrDefault(descriptionStringBundleKey,
-					"Apparatus description was not found."));
-			btnLink.setVisible(webResourceLocation != null);
-			btnLink.setActionCommand(webResourceLocation);
-		}
-	}
+            lblApparatusName.setText(ReCResourceBundle.findString(displayStringBundleKey));
+            // FIXME Set default icon
+            lblApparatusImg.setIcon(ReCResourceBundle.findImageIconOrDefault(desktopLocationBundleKey, new ImageIcon()));
+            txtApparatusDescription.setText(ReCResourceBundle.findStringOrDefault(descriptionStringBundleKey,
+                "Apparatus description was not found."));
+            btnLink.setVisible(webResourceLocation != null);
+            btnLink.setActionCommand(webResourceLocation);
+        }
+    }
 
-	/**
-	 * This method is called from within the constructor to initialize the form.
-	 * WARNING: Do NOT modify this code. The content of this method is always
-	 * regenerated by the Form Editor.
-	 */
-	@SuppressWarnings("unchecked")
-	// <editor-fold defaultstate="collapsed"
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed"
 	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
@@ -195,26 +193,25 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
 				resourceMap.getString("lblApparatusName.AccessibleContext.accessibleName")); // NOI18N
 	}// </editor-fold>//GEN-END:initComponents
 
-	private void onInfoButtonAction(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_onInfoButtonAction
-		final String actionCommand = btnLink.getActionCommand();
-		if (actionCommand != null && Desktop.isDesktopSupported()) {
-			final Desktop desktop = Desktop.getDesktop();
-			if (desktop.isSupported(Desktop.Action.BROWSE)) {
-				URI uri;
-				try {
-					ApparatusDescriptionPane.log.fine("Browsing " + actionCommand);
-					uri = new URI(actionCommand);
-					desktop.browse(uri);
-				} catch (final URISyntaxException e) {
-					ApparatusDescriptionPane.log.log(Level.SEVERE, "Invalid URL.", e);
-				} catch (final IOException e) {
-					ApparatusDescriptionPane.log.log(Level.SEVERE, "User browser not found.", e);
-				}
+    private void onInfoButtonAction(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_onInfoButtonAction
+        final String actionCommand = btnLink.getActionCommand();
+        if (actionCommand != null && Desktop.isDesktopSupported()) {
+            final Desktop desktop = Desktop.getDesktop();
+            if (desktop.isSupported(Desktop.Action.BROWSE)) {
+                URI uri;
+                try {
+                    ApparatusDescriptionPane.log.fine("Browsing " + actionCommand);
+                    uri = new URI(actionCommand);
+                    desktop.browse(uri);
+                } catch (final URISyntaxException e) {
+                    ApparatusDescriptionPane.log.log(Level.SEVERE, "Invalid URL.", e);
+                } catch (final IOException e) {
+                    ApparatusDescriptionPane.log.log(Level.SEVERE, "User browser not found.", e);
+                }
 
-			}
-		}
-	}// GEN-LAST:event_onInfoButtonAction
-
+            }
+        }
+    }// GEN-LAST:event_onInfoButtonAction
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JButton btnLink;
 	private javax.swing.JLabel lblApparatusImg;
@@ -222,5 +219,4 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
 	private javax.swing.JScrollPane scrollApparatusDescription;
 	private javax.swing.JTextPane txtApparatusDescription;
 	// End of variables declaration//GEN-END:variables
-
 }

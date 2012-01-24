@@ -99,5 +99,8 @@
                 <root id="test.src.dir" name="test/src/java/driver"/>
             </test-roots>
         </data>
+        <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>experiment's</word>
+        </spellchecker-wordlist>
     </configuration>
 </project>
