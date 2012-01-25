@@ -27,7 +27,7 @@ public class StampCCProcessor extends AbstractStampProcessor {
     @Override
     public boolean process(final StampCommand command) {
 
-        final String[] splitedCommand = command.getCommand().split(" ");
+        final String[] splitedCommand = command.getCommand().split("\t");
 
         if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedCommand != null && splitedCommand.length >= 3) {
             try {
