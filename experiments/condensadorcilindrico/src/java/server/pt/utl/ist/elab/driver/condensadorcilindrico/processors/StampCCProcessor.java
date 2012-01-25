@@ -42,6 +42,7 @@ public class StampCCProcessor extends AbstractStampProcessor {
             try {
 
                 if ("PARAMETROS".equals(splitedCommand[0]))  {
+                    LOGGER.log(Level.FINEST, "setting the parameters for sth");
                     // Do sth with this ?! dunno what yet
                 } else {
 
