@@ -27,6 +27,11 @@ public class StampCCProcessor extends AbstractStampProcessor {
     @Override
     public boolean process(final StampCommand command) {
 
+        if (command == null || command.getCommand() == null) {
+            LOGGER.log(Level.FINEST, "Ok got a null command or a command without any command in it!");
+            return false;
+        }
+        
         LOGGER.log(Level.FINEST, "Going to process a new Command: " + command.getCommand());
 
         final String[] splitedCommand = command.getCommand().split("\t");

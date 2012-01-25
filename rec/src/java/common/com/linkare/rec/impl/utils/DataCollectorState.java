@@ -104,7 +104,7 @@ public class DataCollectorState implements java.io.Serializable {
 
 	@Override
 	public boolean equals(final Object other) {
-		if (other == null || !(other instanceof DataCollectorState)) {
+		if (!(other instanceof DataCollectorState)) {
 			return false;
 		}
 

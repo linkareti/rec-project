@@ -23,6 +23,7 @@ import javax.swing.ImageIcon;
 
 import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.protocols.ReCProtocols;
+import java.util.Map;
 
 /**
  * 
@@ -49,7 +50,7 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 				Logger.getLogger(ReCResourceBundle.REC_RESBUNDLE_LOGGER));
 	}
 
-	private static HashMap<String, ReCResourceBundle> bundles = new HashMap<String, ReCResourceBundle>();
+	private static Map<String, ReCResourceBundle> bundles = new HashMap<String, ReCResourceBundle>();
 
 	public static String findString(final String bundleName, final String key) throws MissingResourceException {
 
@@ -253,7 +254,7 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 	private static ReCResourceBundle loadFromClassName(final String className) {
 		try {
 			final Object oBundle = ClassLoader.getSystemClassLoader().loadClass(className).newInstance();
-			if (oBundle != null && oBundle instanceof ReCResourceBundle) {
+			if (oBundle instanceof ReCResourceBundle) {
 				return (ReCResourceBundle) oBundle;
 			}
 		} catch (final Exception e) {

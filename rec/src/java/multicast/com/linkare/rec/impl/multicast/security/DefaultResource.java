@@ -137,7 +137,7 @@ public class DefaultResource implements IResource {
 
 	@Override
 	public boolean equals(final Object other) {
-		if (other == null || !(other instanceof IResource)) {
+		if (!(other instanceof IResource)) {
 			return false;
 		}
 

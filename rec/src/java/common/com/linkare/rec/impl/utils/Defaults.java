@@ -40,7 +40,7 @@ public class Defaults {
 	}
 
 	public static String defaultIfEmpty(final String value, final String defaultValue) {
-		if (value != null && !value.trim().equals("")) {
+		if (value != null && !value.trim().isEmpty()){
 			return value;
 		}
 
@@ -48,7 +48,7 @@ public class Defaults {
 	}
 
 	public static javax.swing.ImageIcon defaultIfEmpty(final Object value, final javax.swing.ImageIcon defaultValue) {
-		if (value != null && value instanceof javax.swing.ImageIcon) {
+		if (value instanceof javax.swing.ImageIcon) {
 			return (javax.swing.ImageIcon) value;
 		}
 

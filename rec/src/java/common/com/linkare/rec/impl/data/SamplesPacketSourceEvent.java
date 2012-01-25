@@ -29,7 +29,7 @@ public class SamplesPacketSourceEvent extends java.util.EventObject implements I
 
 	@Override
 	public boolean intersectTo(final IntersectableEvent other) {
-		if (other == null || !(other instanceof SamplesPacketSourceEvent)) {
+		if (!(other instanceof SamplesPacketSourceEvent)) {
 			return false;
 		}
 

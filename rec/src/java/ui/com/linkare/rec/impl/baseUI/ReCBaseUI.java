@@ -715,7 +715,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 				return;
 			}
 			final DisplayNode node = laboratoryTree.getCurrentSelectedNode();
-			if (node == null || !(node instanceof Lab)) {
+			if (!(node instanceof Lab)) {
 				final String errorMessage = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.error.lab",
 						"Please select a laboratory first!");
 				final String title = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.title.info", "Info");

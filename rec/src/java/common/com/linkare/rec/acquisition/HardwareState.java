@@ -176,7 +176,7 @@ public class HardwareState implements org.omg.CORBA.portable.IDLEntity {
 
 	@Override
 	public boolean equals(final Object other) {
-		if (other == null || !(other instanceof HardwareState)) {
+		if (!(other instanceof HardwareState)) {
 			return false;
 		}
 

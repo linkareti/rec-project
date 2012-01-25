@@ -128,7 +128,7 @@ public class DefaultPropertySheetCustomizer extends JPanel implements Customizer
 	private PropertyDescriptor getPropertyDescriptor(final Hashtable<String, PropertyDescriptor> hash, final String name) {
 		PropertyDescriptor pd = null;
 		final Object opd = hash.get(name);
-		if (opd != null && opd instanceof PropertyDescriptor) {
+		if (opd instanceof PropertyDescriptor) {
 			pd = (PropertyDescriptor) opd;
 		}
 

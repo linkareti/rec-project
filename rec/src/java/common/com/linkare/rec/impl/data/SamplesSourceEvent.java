@@ -27,7 +27,7 @@ public class SamplesSourceEvent extends java.util.EventObject implements Interse
 
 	@Override
 	public boolean intersectTo(final IntersectableEvent other) {
-		if (other == null || !(other instanceof SamplesSourceEvent)) {
+		if (!(other instanceof SamplesSourceEvent)) {
 			return false;
 		}
 

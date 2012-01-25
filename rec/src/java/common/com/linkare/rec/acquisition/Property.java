@@ -89,7 +89,7 @@ public final class Property implements IDLEntity {
 
 	@Override
 	public boolean equals(final Object other) {
-		if (other == null || !(other instanceof Property)) {
+		if (!(other instanceof Property)) {
 			return false;
 		}
 		final Property otherProp = (Property) other;

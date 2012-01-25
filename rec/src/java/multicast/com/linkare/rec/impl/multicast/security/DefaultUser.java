@@ -128,7 +128,7 @@ public class DefaultUser implements IUser {
     
 	@Override
 	public boolean equals(final Object other) {
-		if (other == null || !(other instanceof IUser)) {
+		if (!(other instanceof IUser)) {
 			return false;
 		}
 

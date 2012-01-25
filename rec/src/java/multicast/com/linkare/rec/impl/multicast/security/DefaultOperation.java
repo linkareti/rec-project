@@ -130,7 +130,7 @@ public class DefaultOperation implements IOperation {
     
 	@Override
 	public boolean equals(final Object other) {
-		if (other == null || !(other instanceof IOperation)) {
+		if (!(other instanceof IOperation)) {
 			return false;
 		}
 

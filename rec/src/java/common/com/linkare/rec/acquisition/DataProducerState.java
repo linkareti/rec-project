@@ -92,7 +92,7 @@ public class DataProducerState implements org.omg.CORBA.portable.IDLEntity {
 
 	@Override
 	public boolean equals(final Object other) {
-		if (other == null || !(other instanceof DataProducerState)) {
+		if (!(other instanceof DataProducerState)) {
 			return false;
 		}
 

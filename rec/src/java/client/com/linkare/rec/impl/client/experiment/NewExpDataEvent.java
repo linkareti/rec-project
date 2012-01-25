@@ -55,7 +55,7 @@ public class NewExpDataEvent extends java.util.EventObject implements Intersecta
 
 	@Override
 	public boolean intersectTo(final IntersectableEvent other) {
-		if (other == null || !(other instanceof NewExpDataEvent)) {
+		if (!(other instanceof NewExpDataEvent)) {
 			return false;
 		}
 
