@@ -1,5 +1,5 @@
 /*
- * RadioactividadeStampDataSource.java
+ * CCStampDataSource.java
  *
  * Created on 15 de Maio de 2003, 19:38
  */
@@ -13,17 +13,19 @@ import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.data.PhysicsValueFactory;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * 
- * @author José Pedro Pereira - Linkare TI
+ * @author Ricardo Espírito Santo - Linkare TI
  */
 public class CCStampDataSource extends AbstractStampDataSource {
 
 	private int counter = 0;
 	private int total_samples = 0;
+    private static final Logger LOGGER = Logger.getLogger(CCStampDataSource.class.getName());
 
-	/** Creates a new instance of RadioactividadeStampDataSource */
 	public CCStampDataSource() {
 	}
 
@@ -41,7 +43,7 @@ public class CCStampDataSource extends AbstractStampDataSource {
 				capacity = (Float) cmd.getCommandData(StampCCProcessor.CAPACITY);
 				distance = (Float) cmd.getCommandData(StampCCProcessor.DISTANCE);
 			} catch (final ClassCastException e) {
-				e.printStackTrace();
+				LOGGER.log(Level.SEVERE, "Couldn't parse the capacity or distance while processing data!", e);
 				return;
 			}
 			final float valorCapacidade = capacity.floatValue();
@@ -52,6 +54,8 @@ public class CCStampDataSource extends AbstractStampDataSource {
 					.getSelectedScale());
 			super.addDataRow(values);
 
+            LOGGER.log(Level.FINEST, "Added two new values as capacity: " + valorCapacidade + " and distance: " + valorDistancia);
+            
 			counter++;
 			if (counter == total_samples) {
 				try {
@@ -70,8 +74,6 @@ public class CCStampDataSource extends AbstractStampDataSource {
 		super.setAcquisitionHeader(config);
 
 		total_samples = config.getTotalSamples();
-
-		// setPacketSize((int)Math.ceil(1./(8.*config.getSelectedFrequency().getFrequency()*config.getSelectedFrequency().getMultiplier().getExpValue())));
 	}
 
 	@Override

@@ -5,6 +5,8 @@
  */
 package pt.utl.ist.elab.driver.condensadorcilindrico.translators;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDriver;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.AbstractStampTranslator;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
@@ -20,6 +22,7 @@ public class StampConfigTranslator extends AbstractStampTranslator {
     public static final String END_POS_STR = "EndPosition";
     public static final String NUMSAMPLES_STR = "Numero de Amostras";
     public static final String CALIBRATE_STR = "Calibrate";
+    private static final Logger LOGGER = Logger.getLogger(StampConfigTranslator.class.getName());
 
     /** Creates a new instance of StampRelayTranslator */
     public StampConfigTranslator() {
@@ -45,7 +48,7 @@ public class StampConfigTranslator extends AbstractStampTranslator {
         final String commandStr = command.getCommandIdentifier() + " " + calib + " " + startPos + " " + endPos
                 + " " + numPoints;
         
-        System.out.println("sending the command: " + commandStr);
+        LOGGER.log(Level.FINE, "sending the command: " + commandStr);
 
         command.setCommand(commandStr);
         return true;

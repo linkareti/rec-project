@@ -82,7 +82,7 @@ public enum NavigationWorkflow {
 			result = false;
 		}
 
-		result = (result == false) ? false : currentStateTransitions.contains(newState);
+		result = (!result) ? false : currentStateTransitions.contains(newState);
 
 		if (NavigationWorkflow.log.isLoggable(Level.FINE)) {
 			NavigationWorkflow.log.fine("Transition " + this + " => " + newState + " allowed? " + result);

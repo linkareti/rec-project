@@ -1,14 +1,13 @@
 /*
  * DefaultResource.java Created on 2 de Janeiro de 2004, 16:02
  */
-
 package com.linkare.rec.impl.multicast.security;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This class implements the default method for Resources, which area a way of
+ * This class implements the default method for Resources, which are a way of
  * integrating security in the SecurityManager
  * 
  * @see com.linkare.rec.impl.multicast.security.SecurityManagerFactory
@@ -17,9 +16,6 @@ import java.util.Map;
  */
 public class DefaultResource implements IResource {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7520963159666907685L;
 
 	private Map<String, String> properties = null;
@@ -130,10 +126,14 @@ public class DefaultResource implements IResource {
 
 	@Override
 	public String toString() {
-
 		return getResourceType().getName() + " @ " + getProperties().get(getResourceType().getPropertyKey());
 
 	}
+
+    @Override
+    public int hashCode() {
+        return getResourceType().hashCode() * getProperties().hashCode() * 17;
+    }
 
 	@Override
 	public boolean equals(final Object other) {

@@ -3,7 +3,6 @@
  *
  * Created on 2 de Janeiro de 2004, 16:02
  */
-
 package com.linkare.rec.impl.multicast.security;
 
 import java.util.HashMap;
@@ -122,6 +121,11 @@ public class DefaultUser implements IUser {
 		return getUserName();
 	}
 
+    @Override
+    public int hashCode() {
+        return getUserName().hashCode() * 13;
+    }
+    
 	@Override
 	public boolean equals(final Object other) {
 		if (other == null || !(other instanceof IUser)) {

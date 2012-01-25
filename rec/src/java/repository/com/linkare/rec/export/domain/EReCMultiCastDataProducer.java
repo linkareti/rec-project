@@ -2,7 +2,6 @@ package com.linkare.rec.export.domain;
 
 import com.linkare.rec.acquisition.NotAvailableException;
 import com.linkare.rec.data.acquisition.SamplesPacket;
-import com.linkare.rec.ejb.RecMDBBean;
 import com.linkare.rec.export.exceptions.InvalidMultiplierException;
 import com.linkare.rec.export.exceptions.InvalidTypeValException;
 import com.linkare.rec.impl.data.SamplesPacketMatrix;
@@ -11,8 +10,6 @@ import com.linkare.rec.impl.multicast.ReCMultiCastDataProducer;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;

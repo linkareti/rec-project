@@ -44,6 +44,8 @@ import com.linkare.rec.impl.utils.ORBBean;
 import com.linkare.rec.impl.utils.ObjectID;
 import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 import com.linkare.rec.impl.wrappers.MultiCastHardwareWrapper;
+import java.util.Arrays;
+import org.apache.commons.lang.ArrayUtils;
 
 /**
  * This class implements a client for a lab apparatus... It hides the sordid

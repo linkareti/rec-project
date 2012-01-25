@@ -24,8 +24,9 @@ public class PinkNoiseFunctor implements Functor {
 		}
 
 		// Fill the history with random values
-		for (int i = 0; i < 5 * POLES; i++)
+		for (int i = 0; i < 5 * POLES; i++) {
 			this.getNextValue();
+        }
 	}
 
 	@Override

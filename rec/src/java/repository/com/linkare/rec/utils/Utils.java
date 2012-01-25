@@ -166,9 +166,6 @@ public class Utils {
 //        escale.setStep(physicsValToEntity(scale.getStepValue()));
 //        return escale;
 //    }
-
-    
-    
     /**
      * 
      * 
@@ -218,8 +215,9 @@ public class Utils {
             } catch (IndexOutOfBoundsException ioob) {
                 throw new InvalidTypeValException("physicsVal.getDiscriminator().getValue(): " + physicsVal.getDiscriminator().getValue());
             }
-        }else
+        } else {
             return null;
+        }
 
     }//    /**
 //     * Mapping ByteArrayValue to EmbByteArrayValue
@@ -314,34 +312,3 @@ public class Utils {
 //        
 //    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

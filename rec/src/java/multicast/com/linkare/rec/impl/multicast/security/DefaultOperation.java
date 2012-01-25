@@ -3,7 +3,6 @@
  *
  * Created on 2 de Janeiro de 2004, 16:03
  */
-
 package com.linkare.rec.impl.multicast.security;
 
 import java.util.HashMap;
@@ -124,6 +123,11 @@ public class DefaultOperation implements IOperation {
 		}
 	}
 
+    @Override
+    public int hashCode() {
+        return getOperation() * getProperties().hashCode() * 13;
+    }
+    
 	@Override
 	public boolean equals(final Object other) {
 		if (other == null || !(other instanceof IOperation)) {

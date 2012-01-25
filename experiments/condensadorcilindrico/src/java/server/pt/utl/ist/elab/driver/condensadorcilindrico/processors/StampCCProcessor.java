@@ -30,7 +30,7 @@ public class StampCCProcessor extends AbstractStampProcessor {
         final String[] splitedCommand = command.getCommand().split(" ");
 
         if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedCommand != null
-            && splitedCommand.length >= 2 && splitedCommand[0] != null && splitedCommand[1] != null) {
+            && splitedCommand.length >= 2 && splitedCommand[0] != null && splitedCommand[1] != null && splitedCommand[2] != null) {
             try {
                 
                 final int distance = Integer.parseInt(splitedCommand[1]);
@@ -51,6 +51,7 @@ public class StampCCProcessor extends AbstractStampProcessor {
                 return false;
             }
         }
+        LOGGER.log(Level.WARNING, "Received a non COMMAND command:" + splitedCommand);
         return false;
     }
 
