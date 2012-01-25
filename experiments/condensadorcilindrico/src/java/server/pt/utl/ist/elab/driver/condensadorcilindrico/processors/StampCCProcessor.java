@@ -29,8 +29,7 @@ public class StampCCProcessor extends AbstractStampProcessor {
 
         final String[] splitedCommand = command.getCommand().split(" ");
 
-        if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedCommand != null
-            && splitedCommand.length >= 2 && splitedCommand[0] != null && splitedCommand[1] != null && splitedCommand[2] != null) {
+        if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedCommand != null) {
             try {
                 
                 LOGGER.log(Level.FINEST, "PROCESSING the following as the distance: " + splitedCommand[1]);
@@ -41,7 +40,7 @@ public class StampCCProcessor extends AbstractStampProcessor {
                 
                 LOGGER.log(Level.FINEST, "PROCESSING the following as the capacity: " + splitedCommand[2]);
                 final int capacity = Integer.parseInt(splitedCommand[2]);
-                final Double doubleCapacity = new Double(capacity) / 1000;
+                final Double doubleCapacity = new Double(capacity);
                 command.addCommandData(CAPACITY, doubleCapacity);
                 LOGGER.log(Level.FINEST, "PROCESSING the command got us Capacitance as: " + doubleCapacity);
 
@@ -53,7 +52,7 @@ public class StampCCProcessor extends AbstractStampProcessor {
                 return false;
             }
         }
-        LOGGER.log(Level.WARNING, "Received a non COMMAND command: " + command.getCommand());
+        LOGGER.log(Level.FINEST, "Received a non COMMAND command: " + command.getCommand());
         return false;
     }
 
