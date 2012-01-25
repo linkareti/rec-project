@@ -33,11 +33,13 @@ public class StampCCProcessor extends AbstractStampProcessor {
             && splitedCommand.length >= 2 && splitedCommand[0] != null && splitedCommand[1] != null && splitedCommand[2] != null) {
             try {
                 
+                LOGGER.log(Level.FINEST, "PROCESSING the following as the distance: " + splitedCommand[1]);
                 final int distance = Integer.parseInt(splitedCommand[1]);
                 final Float floatDistance = new Float(distance / 1000);
                 command.addCommandData(DISTANCE, floatDistance);
                 LOGGER.log(Level.FINEST, "PROCESSING the command got us Distance as: " + floatDistance);
                 
+                LOGGER.log(Level.FINEST, "PROCESSING the following as the capacity: " + splitedCommand[2]);
                 final int capacity = Integer.parseInt(splitedCommand[2]);
                 final Double doubleCapacity = new Double(capacity) / 1000;
                 command.addCommandData(CAPACITY, doubleCapacity);
@@ -47,11 +49,11 @@ public class StampCCProcessor extends AbstractStampProcessor {
 
                 return true;
             } catch (final NumberFormatException e) {
-                LOGGER.log(Level.WARNING, "Couldn't process this command: [" + splitedCommand + "]");
+                LOGGER.log(Level.WARNING, "Couldn't process this command: " + command.getCommand());
                 return false;
             }
         }
-        LOGGER.log(Level.WARNING, "Received a non COMMAND command:" + splitedCommand);
+        LOGGER.log(Level.WARNING, "Received a non COMMAND command: " + command.getCommand());
         return false;
     }
 

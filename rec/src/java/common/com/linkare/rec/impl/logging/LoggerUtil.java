@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * A simple utility class to help in
+ * A simple utility class to help in logging tasks
  * 
  * @author José Pedro Pereira
  */
@@ -13,7 +13,7 @@ public class LoggerUtil {
 	/**
 	 * This utility method writes a logging entry in SEVERE mode to the logger
 	 * and logs also the full stack trace and info message in FINEST level if
-	 * the logger is currenly configured to get that level of detail
+	 * the logger is currently configured to get that level of detail
 	 * 
 	 * The warning message printed also includes information at the last class,
 	 * method and line where the error really occurred
