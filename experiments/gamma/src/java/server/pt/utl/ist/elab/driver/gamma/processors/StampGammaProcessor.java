@@ -30,7 +30,7 @@ public class StampGammaProcessor extends AbstractStampProcessor {
 	 * This method makes the Processor process the command passed in...
 	 * 
 	 * @param command the command that this processor will have to process
-	 * @return boolean - wether the processing was successfull
+	 * @return boolean - wether the processing was successful
 	 * 
 	 */
 	@Override
