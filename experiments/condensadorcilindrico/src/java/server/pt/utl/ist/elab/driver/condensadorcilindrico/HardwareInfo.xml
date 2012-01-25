@@ -5,7 +5,7 @@
 <HardwareInfo id="ELAB_CC_STAMP_V02" familiarName="Condensador Cilíndrico" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
     <description>
         <![CDATA[ 
-        Esta experiência serve para estudar o efeito da variação da capacidade de um condensador num circuito RLC
+        Esta experiência destina-se a determinar a capacidade de um condensador cilíndrico coaxial variável. Este dispõe de duas secções, uma inicial com um dieléctrico diferente do ar, de PVC, e um segundo troço de ar, permitindo determinar a constante dielétrica relativa do PVC.
         ]]>
     </description>
     
@@ -57,7 +57,7 @@
     <ChannelInfo name="condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.1.name" independent="false" direction="CHANNEL_INPUT">
         <scale label="condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.1.label" physicsunitname="condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.1.physicsunitname" physicsunitsymbol="F" multiplier="pico" selected="true">
             <min><PhysicsVal type="float">0</PhysicsVal></min>
-            <max><PhysicsVal type="float">65536</PhysicsVal></max>
+            <max><PhysicsVal type="float">20000</PhysicsVal></max>
             <step><PhysicsVal type="float">1</PhysicsVal></step>
             <errordefault><PhysicsVal type="float">0.02</PhysicsVal></errordefault>
         </scale>

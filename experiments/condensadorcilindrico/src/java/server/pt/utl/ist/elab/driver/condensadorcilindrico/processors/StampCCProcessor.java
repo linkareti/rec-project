@@ -39,9 +39,9 @@ public class StampCCProcessor extends AbstractStampProcessor {
                 LOGGER.log(Level.FINEST, "PROCESSING the command got us Distance as: " + floatDistance);
                 
                 final int capacity = Integer.parseInt(splitedCommand[2]);
-                final Float floatCapacity = new Float(capacity);
-                command.addCommandData(CAPACITY, floatCapacity);
-                LOGGER.log(Level.FINEST, "PROCESSING the command got us Capacitance as: " + floatCapacity);
+                final Double doubleCapacity = new Double(capacity) / 1000;
+                command.addCommandData(CAPACITY, doubleCapacity);
+                LOGGER.log(Level.FINEST, "PROCESSING the command got us Capacitance as: " + doubleCapacity);
 
                 command.setData(true);
 
