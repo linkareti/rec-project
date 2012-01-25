@@ -39,33 +39,35 @@ public class StampCCProcessor extends AbstractStampProcessor {
         LOGGER.log(Level.FINEST, "starting to interpret it now...");
 
         if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedCommand != null && splitedCommand.length >= 2) {
-            try {
 
-                if ("PARAMETROS".equals(splitedCommand[0]))  {
-                    LOGGER.log(Level.FINEST, "setting the parameters for sth");
-                    // Do sth with this ?! dunno what yet
-                } else {
+            if ("PARAMETROS".equals(splitedCommand[0])) {
+                LOGGER.log(Level.FINEST, "setting the parameters for sth");
+                // Do sth with this ?! dunno what yet
+            } else {
 
+                try {
                     LOGGER.log(Level.FINEST, "PROCESSING the following as the distance: " + splitedCommand[0]);
                     final int distance = Integer.parseInt(splitedCommand[0]);
                     final Float floatDistance = new Float(distance / 1000);
                     command.addCommandData(DISTANCE, floatDistance);
-                    LOGGER.log(Level.FINEST, "PROCESSING the command got us Distance as: " + floatDistance);
+                    LOGGER.log(Level.FINEST, "got us Distance as: " + floatDistance);
 
                     LOGGER.log(Level.FINEST, "PROCESSING the following as the capacity: " + splitedCommand[1]);
                     final int capacity = Integer.parseInt(splitedCommand[1]);
                     final Double doubleCapacity = new Double(capacity);
                     command.addCommandData(CAPACITY, doubleCapacity);
-                    LOGGER.log(Level.FINEST, "PROCESSING the command got us Capacitance as: " + doubleCapacity);
+                    LOGGER.log(Level.FINEST, "got us Capacitance as: " + doubleCapacity);
+                } catch (final NumberFormatException e) {
+                    LOGGER.log(Level.WARNING, "Couldn't parse the numbers");
+                    return false;
                 }
-                
-                command.setData(true);
-                return true;
-            } catch (final NumberFormatException e) {
-                LOGGER.log(Level.WARNING, "Couldn't process this command: " + command.getCommand());
-                return false;
             }
+            LOGGER.log(Level.FINEST, "setting this as data and returning true");
+            command.setData(true);
+            return true;
         }
+        
+        LOGGER.log(Level.WARNING, "Couldn't process this command: " + command.getCommand());
         return false;
     }
 

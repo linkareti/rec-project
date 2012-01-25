@@ -67,7 +67,7 @@ public class JDockPanel extends javax.swing.JPanel {
 	@Override
 	public void add(final Component comp, final Object constraints) {
 		String orientation = JSplitPane.RIGHT;
-		if (constraints != null && constraints instanceof String) {
+		if (constraints instanceof String) {
 			if (constraints.equals(BorderLayout.WEST)) {
 				orientation = JSplitPane.LEFT;
 			} else if (constraints.equals(BorderLayout.NORTH)) {
@@ -366,7 +366,7 @@ public class JDockPanel extends javax.swing.JPanel {
 
 			final Component c = (Component) source;
 
-			if (c.getParent() != null && c.getParent() instanceof JSplitPane) {
+			if (c.getParent() instanceof JSplitPane) {
 				// Store the divider has a percentage of the split pane
 				// dimension
 
@@ -440,7 +440,7 @@ public class JDockPanel extends javax.swing.JPanel {
 			// if (parent == this) {
 			// // BIG SILENT NOOP... for now!
 			// } else
-				if (parent != null && parent instanceof JSplitPane) {
+				if (parent instanceof JSplitPane) {
 				final JSplitPane parentSplit = (JSplitPane) parent;
 				if (lastPositionOfHidden.get(c) != null) {
 					final Component top = parentSplit.getTopComponent();
