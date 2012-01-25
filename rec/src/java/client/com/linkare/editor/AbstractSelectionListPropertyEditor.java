@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.beans.PropertyEditorSupport;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -31,7 +32,7 @@ public abstract class AbstractSelectionListPropertyEditor extends PropertyEditor
 		super();
 	}
 
-	private Vector<Object> tagsInitStringsValueList = new Vector<Object>();
+	private List<Object> tagsInitStringsValueList = new Vector<Object>();
 
 	public void addTableValue(final Object value, final String tag, final String initString) {
 		tagsInitStringsValueList.add((new Object[] { tag, initString, value }));

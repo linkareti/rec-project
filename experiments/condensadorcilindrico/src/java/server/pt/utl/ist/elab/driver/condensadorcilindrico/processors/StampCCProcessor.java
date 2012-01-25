@@ -27,7 +27,7 @@ public class StampCCProcessor extends AbstractStampProcessor {
     @Override
     public boolean process(final StampCommand command) {
 
-        if (command == null || command.getCommand() == null) {
+        if (command == null || command.getCommand() == null || command.getCommand().isEmpty()) {
             LOGGER.log(Level.FINEST, "Ok got a null command or a command without any command in it!");
             return false;
         }

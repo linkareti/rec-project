@@ -9,7 +9,7 @@ package com.linkare.rec.impl.data;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 import com.linkare.rec.data.acquisition.SamplesPacket;
 
@@ -70,7 +70,7 @@ public class SamplesPacketMatrixIO implements Serializable {
 		ioDelegate.writeObjects(packets);
 	}
 
-	public void write(final ArrayList packets) throws IOException {
+	public void write(final List packets) throws IOException {
 		ioDelegate.writeObjects(packets.toArray());
 	}
 

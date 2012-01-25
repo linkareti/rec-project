@@ -7,6 +7,7 @@ import javax.swing.event.EventListenerList;
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.acquisition.SamplesPacket;
 import com.linkare.rec.data.synch.Frequency;
+import java.util.List;
 
 public class SamplesSourcePacketizer implements SamplesPacketSource {
 
@@ -14,7 +15,7 @@ public class SamplesSourcePacketizer implements SamplesPacketSource {
 	private SamplesSource samplesSource = null;
 	private Frequency frequency = null;
 	private int packetSize = 1;
-	private ArrayList<int[]> packetsLocations = null;
+	private List<int[]> packetsLocations = null;
 	private int totalPackets = 1;
 	private int totalSamples = SamplesSourcePacketizer.NOT_AVAILABLE_TOTAL_SAMPLES_VALUE;
 	private int countSamplesCurrentPacket = 0;
@@ -248,7 +249,7 @@ public class SamplesSourcePacketizer implements SamplesPacketSource {
 		}
 
 		if (packetsLocations != null) {
-			ArrayList<int[]> tempPacketsLocations = packetsLocations;
+			List<int[]> tempPacketsLocations = packetsLocations;
 			packetsLocations = new ArrayList<int[]>(totalPackets);
 			packetsLocations.addAll(tempPacketsLocations);
 			tempPacketsLocations = null;

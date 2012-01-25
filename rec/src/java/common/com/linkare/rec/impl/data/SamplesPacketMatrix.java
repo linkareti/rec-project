@@ -31,6 +31,7 @@ import com.linkare.rec.data.acquisition.SamplesPacket;
 import com.linkare.rec.impl.exceptions.NotAnAvailableSamplesPacketExceptionConstants;
 import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.FileObjectOutputStream;
+import java.util.List;
 
 /**
  * 
@@ -38,14 +39,8 @@ import com.linkare.rec.impl.utils.FileObjectOutputStream;
  * 
  */
 public class SamplesPacketMatrix implements SamplesPacketSource, Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8817657464936461384L;
 
-	/**
-	 * 
-	 */
 	private static final String TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG = "Tryed to serialize packets but error occurred";
 
 	// TODO - define this property in jnlp, build properties and startup
@@ -57,7 +52,7 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable {
 
 	private static final int PREDICTION_SIZE_READ = 10;
 
-	private transient ArrayList<SamplesPacket> samples = null;
+	private transient List<SamplesPacket> samples = null;
 
 	private transient SamplesPacketMatrixIO ioDelegate;
 

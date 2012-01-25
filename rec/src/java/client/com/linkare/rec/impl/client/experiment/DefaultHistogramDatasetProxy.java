@@ -6,6 +6,7 @@
 
 package com.linkare.rec.impl.client.experiment;
 
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -19,7 +20,7 @@ public class DefaultHistogramDatasetProxy extends org.jfree.data.xy.AbstractInte
 	 * 
 	 */
 	private static final long serialVersionUID = -9041444495240201995L;
-	private Vector<Long> oCountHits = null;
+	private List<Long> oCountHits = null;
 
 	/** Creates a new instance of DefaultXYDatasetProxy */
 	public DefaultHistogramDatasetProxy() {

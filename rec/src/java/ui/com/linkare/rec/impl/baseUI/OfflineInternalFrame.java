@@ -22,6 +22,7 @@ import javax.swing.SwingConstants;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.logging.LoggerUtil;
+import java.util.List;
 
 public class OfflineInternalFrame extends javax.swing.JInternalFrame {
 	/**
@@ -43,7 +44,7 @@ public class OfflineInternalFrame extends javax.swing.JInternalFrame {
 	 */
 	private String hardwareID;
 
-	private ArrayList<ExpDataDisplay> dataDisplayList = null;
+	private List<ExpDataDisplay> dataDisplayList = null;
 
 	private static final String DISPLAY_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.display",
 			"Display");

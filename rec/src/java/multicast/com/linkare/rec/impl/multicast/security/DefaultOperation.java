@@ -18,7 +18,7 @@ public class DefaultOperation implements IOperation {
 	 */
 	private static final long serialVersionUID = 1873349350151682256L;
 	private short operation;
-	private HashMap<String, Object> properties;
+	private Map<String, Object> properties;
 
 	/** Creates a new instance of DefaultOperation */
 	public DefaultOperation() {

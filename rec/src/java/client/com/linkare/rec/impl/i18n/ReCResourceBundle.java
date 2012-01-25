@@ -23,6 +23,7 @@ import javax.swing.ImageIcon;
 
 import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.protocols.ReCProtocols;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -54,7 +55,7 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 
 	public static String findString(final String bundleName, final String key) throws MissingResourceException {
 
-		final ArrayList<String> bundleNames = ReCResourceBundle.calculateLanguageVariants(bundleName,
+		final List<String> bundleNames = ReCResourceBundle.calculateLanguageVariants(bundleName,
 				Locale.getDefault());
 
 		ResourceBundle bundle = null;

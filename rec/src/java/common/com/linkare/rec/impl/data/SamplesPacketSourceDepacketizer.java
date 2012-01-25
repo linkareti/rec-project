@@ -15,6 +15,7 @@ import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.acquisition.SamplesPacket;
 import com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED;
 import com.linkare.rec.data.acquisition.TOTAL_SAMPLES_UNDEFINED;
+import java.util.List;
 
 /**
  * 
@@ -22,7 +23,7 @@ import com.linkare.rec.data.acquisition.TOTAL_SAMPLES_UNDEFINED;
  */
 public class SamplesPacketSourceDepacketizer implements SamplesSource {
 	private SamplesPacketSource samplesPacketSource;
-	private ArrayList<int[]> samplesLocations = null;
+	private List<int[]> samplesLocations = null;
 	private int lastSampleCount = TOTAL_SAMPLES_UNDEFINED.value;
 	private int largestPacketGot = TOTAL_PACKETS_UNDEFINED.value;
 	private SamplesPacketSourceAdapter adapter = null;
