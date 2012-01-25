@@ -29,15 +29,15 @@ public class StampCCProcessor extends AbstractStampProcessor {
 
         final String[] splitedCommand = command.getCommand().split(" ");
 
-        if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedCommand != null) {
+        if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedCommand != null && splitedCommand.length >= 3) {
             try {
-                
+
                 LOGGER.log(Level.FINEST, "PROCESSING the following as the distance: " + splitedCommand[1]);
                 final int distance = Integer.parseInt(splitedCommand[1]);
                 final Float floatDistance = new Float(distance / 1000);
                 command.addCommandData(DISTANCE, floatDistance);
                 LOGGER.log(Level.FINEST, "PROCESSING the command got us Distance as: " + floatDistance);
-                
+
                 LOGGER.log(Level.FINEST, "PROCESSING the following as the capacity: " + splitedCommand[2]);
                 final int capacity = Integer.parseInt(splitedCommand[2]);
                 final Double doubleCapacity = new Double(capacity);

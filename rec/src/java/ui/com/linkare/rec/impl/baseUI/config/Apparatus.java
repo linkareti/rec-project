@@ -85,7 +85,7 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 	public void setOrder(final int value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
-			event = new PropertyChangeEvent(this, "order", new Integer(getOrder()), new Integer(value));
+			event = new PropertyChangeEvent(this, "order", Integer.valueOf(getOrder()), Integer.valueOf(value));
 		}
 		_Order = value;
 		if (eventListeners != null) {

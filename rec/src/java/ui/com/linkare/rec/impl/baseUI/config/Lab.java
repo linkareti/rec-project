@@ -71,7 +71,7 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 	public void setOrder(final int value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
-			event = new PropertyChangeEvent(this, "order", new Integer(getOrder()), new Integer(value));
+			event = new PropertyChangeEvent(this, "order", Integer.valueOf(getOrder()), Integer.valueOf(value));
 		}
 		_Order = value;
 		if (eventListeners != null) {
@@ -631,29 +631,29 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 			return;
 		}
 		name = name.intern();
-		if (name == "order") {
+		if (name.equals("order")) {
 			setOrder(((Number) value).intValue());
-		} else if (name == "iconLocationBundleKey") {
+		} else if (name.equals("iconLocationBundleKey")) {
 			setIconLocationBundleKey((String) value);
-		} else if (name == "desktopLocationBundleKey") {
+		} else if (name.equals("desktopLocationBundleKey")) {
 			setDesktopLocationBundleKey((String) value);
-		} else if (name == "toolTipBundleKey") {
+		} else if (name.equals("toolTipBundleKey")) {
 			setToolTipBundleKey((String) value);
-		} else if (name == "displayStringBundleKey") {
+		} else if (name.equals("displayStringBundleKey")) {
 			setDisplayStringBundleKey((String) value);
-		} else if (name == "location") {
+		} else if (name.equals("location")) {
 			setLocation((String) value);
-		} else if (name == "apparatus") {
+		} else if (name.equals("apparatus")) {
 			addApparatus((Apparatus) value);
-		} else if (name == "apparatus[]") {
+		} else if (name.equals("apparatus[]")) {
 			setApparatus((Apparatus[]) value);
-		} else if (name == "webResource") {
+		} else if (name.equals("webResource")) {
 			addWebResource((WebResource) value);
-		} else if (name == "webResource[]") {
+		} else if (name.equals("webResource[]")) {
 			setWebResource((WebResource[]) value);
-		} else if (name == "localizationBundle") {
+		} else if (name.equals("localizationBundle")) {
 			addLocalizationBundle((LocalizationBundle) value);
-		} else if (name == "localizationBundle[]") {
+		} else if (name.equals("localizationBundle[]")) {
 			setLocalizationBundle((LocalizationBundle[]) value);
 		} else {
 			throw new IllegalArgumentException(name + " is not a valid property name for Lab");
@@ -661,31 +661,31 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 	}
 
 	public Object fetchPropertyByName(final String name) {
-		if (name == "order") {
-			return new Integer(getOrder());
+		if (name.equals("order")) {
+			return Integer.valueOf(getOrder());
 		}
-		if (name == "iconLocationBundleKey") {
+		if (name.equals("iconLocationBundleKey")) {
 			return getIconLocationBundleKey();
 		}
-		if (name == "desktopLocationBundleKey") {
+		if (name.equals("desktopLocationBundleKey")) {
 			return getDesktopLocationBundleKey();
 		}
-		if (name == "toolTipBundleKey") {
+		if (name.equals("toolTipBundleKey")) {
 			return getToolTipBundleKey();
 		}
-		if (name == "displayStringBundleKey") {
+		if (name.equals("displayStringBundleKey")) {
 			return getDisplayStringBundleKey();
 		}
-		if (name == "location") {
+		if (name.equals("location")) {
 			return getLocation();
 		}
-		if (name == "apparatus[]") {
+		if (name.equals("apparatus[]")) {
 			return getApparatus();
 		}
-		if (name == "webResource[]") {
+		if (name.equals("webResource[]")) {
 			return getWebResource();
 		}
-		if (name == "localizationBundle[]") {
+		if (name.equals("localizationBundle[]")) {
 			return getLocalizationBundle();
 		}
 		throw new IllegalArgumentException(name + " is not a valid property name for Lab");
