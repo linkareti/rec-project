@@ -1,0 +1,52 @@
+<h:form xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	<h:inputHidden id="idInternal"
+		value="#{groupController.selected.idInternal}" />
+	<h:inputHidden id="version" value="#{groupController.selected.version}" />
+	<h:inputHidden id="current" value="#{groupController.current}"
+		converter="groupConverter" rendered="#{operation != 'create'}" />
+	<p:focus for="name" />
+	<h:panelGrid columns="3">
+		<h:outputLabel value="#{bundle['group.name']}" for="name" />
+		<h:inputText id="name" value="#{groupController.selected.name}"
+			title="#{bundle['group.name']}" required="true"
+			label="#{bundle['group.name']}" readonly="#{operation != 'create'}" />
+		<p:message for="name" />
+		<h:outputLabel value="#{bundle['group.childUsers']}" for="members"
+			rendered="#{operation == 'edit'}" />
+		<p:pickList id="members" value="#{groupController.users}" var="user"
+			itemLabel="#{user.username}" itemValue="#{user}"
+			converter="userConverter" rendered="#{operation == 'edit'}">
+			<!-- 
+			<f:facet name="add">
+				<p:graphicImage value="/images/picklist/add.png"
+					styleClass="pickListControl" />
+			</f:facet>
+			<f:facet name="addAll">
+				<p:graphicImage value="/images/picklist/addall.png"
+					styleClass="pickListControl" />
+			</f:facet>
+			<f:facet name="remove">
+				<p:graphicImage value="/images/picklist/remove.png"
+					styleClass="pickListControl" />
+			</f:facet>
+			<f:facet name="removeAll">
+				<p:graphicImage value="/images/picklist/removeall.png"
+					styleClass="pickListControl" />
+			</f:facet>
+ -->
+		</p:pickList>
+
+		<h:commandLink action="#{groupController.setUsersMembership}"
+			value="#{bundle['operation.submit']}"
+			rendered="#{operation == 'edit'}" />
+
+	</h:panelGrid>
+	<h:panelGroup rendered="#{operation == 'create'}">
+		<h:commandLink action="#{groupController.create}"
+			value="#{bundle['operation.save']}" />
+	</h:panelGroup>
+</h:form>
