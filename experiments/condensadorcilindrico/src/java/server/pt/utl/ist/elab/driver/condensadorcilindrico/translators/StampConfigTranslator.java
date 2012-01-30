@@ -48,7 +48,7 @@ public class StampConfigTranslator extends AbstractStampTranslator {
         final String commandStr = command.getCommandIdentifier() + " " + calib + " " + startPos + " " + endPos
                 + " " + numPoints;
         
-        LOGGER.log(Level.FINE, "sending the command: " + commandStr);
+        LOGGER.fine("sending the command: " + commandStr);
 
         command.setCommand(commandStr);
         return true;

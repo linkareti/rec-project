@@ -47,7 +47,10 @@ public class StampCCProcessor extends AbstractStampProcessor {
 
             if ("PARAMETROS".equals(splitedCommand[0])) {
                 LOGGER.finest("setting the parameters for sth");
-                // Do sth with this ?! dunno what yet
+                final Integer param1 = Integer.valueOf(splitedCommand[1]); // 2303
+                final Integer param2 = Integer.valueOf(splitedCommand[2]); // 0
+                final Integer param3 = Integer.valueOf(splitedCommand[3]); // 100
+                final Integer param4 = Integer.valueOf(splitedCommand[4]); // 300
             } else {
 
                 try {

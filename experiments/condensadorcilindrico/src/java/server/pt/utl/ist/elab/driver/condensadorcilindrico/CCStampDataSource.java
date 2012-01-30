@@ -13,7 +13,6 @@ import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.data.PhysicsValFactory;
-import com.linkare.rec.impl.data.PhysicsValueFactory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

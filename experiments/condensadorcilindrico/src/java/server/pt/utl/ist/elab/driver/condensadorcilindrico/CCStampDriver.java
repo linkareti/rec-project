@@ -31,6 +31,8 @@ import com.linkare.rec.impl.utils.Defaults;
 public class CCStampDriver extends AbstractStampDriver {
 
     private StampCommand stampConfig = null;
+    
+    private static final Logger LOGGER = Logger.getLogger(CCStampDriver.class.getName());
 
     public CCStampDriver() {
         super();
@@ -53,10 +55,10 @@ public class CCStampDriver extends AbstractStampDriver {
         final String endPosInfo = info.getHardwareParameterValue(StampConfigTranslator.END_POS_STR);
         final String endPosConfig = config.getSelectedHardwareParameterValue(StampConfigTranslator.END_POS_STR);
         final int totalSamples = config.getTotalSamples();
-        System.out.println("calibrateInfo: " + calibrateInfo + " calibrateConfig: " + calibrateConfig);
-        System.out.println("initPosInfo: " + initPosInfo + " initPosConfig: " + initPosConfig);        
-        System.out.println("endPosInfo: " + endPosInfo + " endPosConfig: " + endPosConfig);        
-        System.out.println("totalSamples: " + totalSamples);
+        LOGGER.finest("calibrateInfo: " + calibrateInfo + " calibrateConfig: " + calibrateConfig);
+        LOGGER.finest("initPosInfo: " + initPosInfo + " initPosConfig: " + initPosConfig);        
+        LOGGER.finest("endPosInfo: " + endPosInfo + " endPosConfig: " + endPosConfig);        
+        LOGGER.finest("totalSamples: " + totalSamples);
 
         fireIDriverStateListenerDriverConfiguring();
 
@@ -141,8 +143,7 @@ public class CCStampDriver extends AbstractStampDriver {
     @Override
     public void processCommand(final StampCommand cmd) {
         if (cmd == null || cmd.getCommandIdentifier() == null) {
-            Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER).log(Level.INFO,
-                    "Can not interpret command " + cmd);
+            LOGGER.info("Can not interpret command " + cmd);
             return;
         }
 
@@ -191,12 +192,11 @@ public class CCStampDriver extends AbstractStampDriver {
                 super.stopDataSource();
             }
         }
-
     }
+    
     private boolean initing = true;
     private boolean waitingStart = false;
     private boolean wroteStart = false;
-    private final boolean waitingStop = false;
     private boolean started = false;
     private boolean stoping = false;
     private boolean reseting = true;
