@@ -53,7 +53,7 @@ public class Display extends DisplayNode implements com.linkare.rec.impl.baseUI.
 	public void setOrder(final int value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
-			event = new PropertyChangeEvent(this, "order", new Integer(getOrder()), new Integer(value));
+			event = new PropertyChangeEvent(this, "order", Integer.valueOf(getOrder()), Integer.valueOf(value));
 		}
 		_Order = value;
 		if (eventListeners != null) {
@@ -70,8 +70,8 @@ public class Display extends DisplayNode implements com.linkare.rec.impl.baseUI.
 	public void setOfflineCapable(final boolean value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
-			event = new PropertyChangeEvent(this, "offlineCapable", new Boolean(getOfflineCapable()),
-					new Boolean(value));
+			event = new PropertyChangeEvent(this, "offlineCapable", Boolean.valueOf(getOfflineCapable()),
+					Boolean.valueOf(value));
 		}
 		_OfflineCapable = value;
 		if (eventListeners != null) {
@@ -343,10 +343,10 @@ public class Display extends DisplayNode implements com.linkare.rec.impl.baseUI.
 
 	public Object fetchPropertyByName(final String name) {
 		if (name.equals("order")) {
-			return new Integer(getOrder());
+			return Integer.valueOf(getOrder());
 		}
 		if (name.equals("offlineCapable")) {
-			return new Boolean(getOfflineCapable());
+			return Boolean.valueOf(getOfflineCapable());
 		}
 		if (name.equals("displayStringBundleKey")) {
 			return getDisplayStringBundleKey();

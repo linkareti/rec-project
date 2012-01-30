@@ -46,7 +46,7 @@ public class IndexedPropertyObjectTableModel extends javax.swing.table.DefaultTa
 	@Override
 	public Object getValueAt(final int row, final int column) {
 		if (column == 0) {
-			return new Integer(row + 1);
+			return Integer.valueOf(row + 1);
 		} else {
 			return super.getValueAt(row, column);
 		}

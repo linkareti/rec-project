@@ -50,9 +50,9 @@ public class CCStampDataSource extends AbstractStampDataSource {
 			}
 			final float valorCapacidade = capacity.floatValue();
 			final float valorDistancia = distance.floatValue();
-			values[1] = PhysicsValueFactory.fromFloat(valorCapacidade, getAcquisitionHeader().getChannelsConfig(1)
+			values[0] = PhysicsValueFactory.fromFloat(valorDistancia, getAcquisitionHeader().getChannelsConfig(0)
 					.getSelectedScale());
-			values[2] = PhysicsValueFactory.fromFloat(valorDistancia, getAcquisitionHeader().getChannelsConfig(2)
+			values[1] = PhysicsValueFactory.fromFloat(valorCapacidade, getAcquisitionHeader().getChannelsConfig(1)
 					.getSelectedScale());
 			super.addDataRow(values);
 
@@ -64,11 +64,9 @@ public class CCStampDataSource extends AbstractStampDataSource {
 					Thread.currentThread();
 					Thread.sleep(1000);
 					setDataSourceEnded();
-				} catch (final InterruptedException ignored) {
-				}
+				} catch (final InterruptedException ignored) {}
 			}
 		}
-
 	}
 
 	@Override

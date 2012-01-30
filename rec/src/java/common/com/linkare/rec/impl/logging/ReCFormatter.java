@@ -68,7 +68,7 @@ public class ReCFormatter extends Formatter {
 	}
 
 	public static String getSimpleName(final String loggerName) {
-		final int lastIndex = loggerName.lastIndexOf(".");
+		final int lastIndex = loggerName.lastIndexOf('.');
 		if (lastIndex != -1) {
 			return loggerName.substring(lastIndex + 1);
 		}

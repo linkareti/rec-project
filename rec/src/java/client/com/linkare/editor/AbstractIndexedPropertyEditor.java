@@ -230,7 +230,7 @@ public abstract class AbstractIndexedPropertyEditor extends PropertyEditorSuppor
 		final ArrayList<String> splitStrList = new ArrayList<String>();
 		int locatePos = 0;
 		while (strCSArray.length() > 0) {
-			locatePos = strCSArray.indexOf(",", locatePos);
+			locatePos = strCSArray.indexOf(',', locatePos);
 			if (locatePos == -1) {
 				splitStrList.add(strCSArray);
 				break;

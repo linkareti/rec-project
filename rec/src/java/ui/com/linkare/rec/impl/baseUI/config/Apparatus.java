@@ -950,49 +950,49 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 	}
 
 	public Object fetchPropertyByName(final String name) {
-		if (name == "order") {
-			return new Integer(getOrder());
+		if (name.equals("order")) {
+			return Integer.valueOf(getOrder());
 		}
-		if (name == "displayStringBundleKey") {
+		if (name.equals("displayStringBundleKey")) {
 			return getDisplayStringBundleKey();
 		}
-		if (name == "iconLocationBundleKey") {
+		if (name.equals("iconLocationBundleKey")) {
 			return getIconLocationBundleKey();
 		}
-		if (name == "desktopLocationBundleKey") {
+		if (name.equals("desktopLocationBundleKey")) {
 			return getDesktopLocationBundleKey();
 		}
-		if (name == "toolTipBundleKey") {
+		if (name.equals("toolTipBundleKey")) {
 			return getToolTipBundleKey();
 		}
-		if (name == "dataModelClassLocationBundleKey") {
+		if (name.equals("dataModelClassLocationBundleKey")) {
 			return getDataModelClassLocationBundleKey();
 		}
-		if (name == "videoLocation") {
+		if (name.equals("videoLocation")) {
 			return getVideoLocation();
 		}
-		if (name == "headerDisplayClassLocationBundleKey") {
+		if (name.equals("headerDisplayClassLocationBundleKey")) {
 			return getHeaderDisplayClassLocationBundleKey();
 		}
-		if (name == "displayFactoryClassLocationBundleKey") {
+		if (name.equals("displayFactoryClassLocationBundleKey")) {
 			return getDisplayFactoryClassLocationBundleKey();
 		}
-		if (name == "location") {
+		if (name.equals("location")) {
 			return getLocation();
 		}
-		if (name == "customizerClassLocationBundleKey") {
+		if (name.equals("customizerClassLocationBundleKey")) {
 			return getCustomizerClassLocationBundleKey();
 		}
-		if (name == "defaultAcquisitionConfig[]") {
+		if (name.equals("defaultAcquisitionConfig[]")) {
 			return getDefaultAcquisitionConfig();
 		}
-		if (name == "display[]") {
+		if (name.equals("display[]")) {
 			return getDisplay();
 		}
-		if (name == "webResource[]") {
+		if (name.equals("webResource[]")) {
 			return getWebResource();
 		}
-		if (name == "localizationBundle[]") {
+		if (name.equals("localizationBundle[]")) {
 			return getLocalizationBundle();
 		}
 		throw new IllegalArgumentException(name + " is not a valid property name for Apparatus");

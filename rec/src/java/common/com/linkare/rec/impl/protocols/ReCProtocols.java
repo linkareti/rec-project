@@ -27,7 +27,7 @@ public class ReCProtocols {
 			final int protocolLength = Handler.RECRESOURCE_PROTOCOL_IDENTIFIER.length();
 			String file = "";
 			String host = "localhost";
-			if (spec.indexOf("/", protocolLength) != -1) {
+			if (spec.indexOf('/', protocolLength) != -1) {
 				host = spec.substring(protocolLength, spec.indexOf("/", protocolLength));
 
 				file += spec.substring(spec.indexOf("/", protocolLength));
@@ -37,9 +37,9 @@ public class ReCProtocols {
 
 			int port = -1;
 
-			if (host.indexOf(":") != -1) {
-				port = Integer.parseInt(host.substring(host.indexOf(":")));
-				host = host.substring(0, host.indexOf(":") - 1);
+			if (host.indexOf(':') != -1) {
+				port = Integer.parseInt(host.substring(host.indexOf(':')));
+				host = host.substring(0, host.indexOf(':') - 1);
 			}
 
 			final URL url = new URL(protocol, host, port, file,

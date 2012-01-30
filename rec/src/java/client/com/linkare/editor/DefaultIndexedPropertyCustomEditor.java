@@ -238,7 +238,7 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel {
 			final IndexedPropertyObject obj = new IndexedPropertyObject(componentPropertyEditor, getBaseArrayClass(),
 					null);
 			((DefaultTableModel) tblIndexedProperty.getModel()).addRow(new Object[] {
-					new Integer(tblIndexedProperty.getRowCount()), obj });
+					Integer.valueOf(tblIndexedProperty.getRowCount()), obj });
 		}
 
 	}// GEN-LAST:event_btnAddRowsActionPerformed
@@ -334,7 +334,7 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel {
 				final IndexedPropertyObject obj = new IndexedPropertyObject(componentPropertyEditor,
 						getBaseArrayClass(), java.lang.reflect.Array.get(value, i));
 				((DefaultTableModel) tblIndexedProperty.getModel()).addRow(new Object[] {
-						new Integer(tblIndexedProperty.getRowCount()), obj });
+						Integer.valueOf(tblIndexedProperty.getRowCount()), obj });
 			}
 		}
 

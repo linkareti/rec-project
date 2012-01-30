@@ -227,13 +227,13 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 			temp = temp.substring(0, fileExtLoc);
 		}
 
-		int loc = temp.lastIndexOf("_");
+		int loc = temp.lastIndexOf('_');
 
 		String bundleNameTemp = bundleName;
 
 		while (loc != -1) {
 			temp = temp.substring(0, loc);
-			bundleNameTemp = bundleNameTemp.substring(0, bundleNameTemp.lastIndexOf("_"));
+			bundleNameTemp = bundleNameTemp.substring(0, bundleNameTemp.lastIndexOf('_'));
 			ReCResourceBundle bundleParent = ReCResourceBundle.loadFromClassName(temp);
 			if (bundleParent != null) {
 				ReCResourceBundle.bundles.put(bundleNameTemp, bundleParent);
@@ -248,7 +248,7 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 				}
 			}
 
-			loc = temp.lastIndexOf("_");
+			loc = temp.lastIndexOf('_');
 		}
 	}
 

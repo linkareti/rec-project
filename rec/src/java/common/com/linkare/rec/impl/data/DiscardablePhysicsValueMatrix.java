@@ -219,7 +219,7 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 			return ioDelegate.remove(sampleIndex, sampleIndex)[0];
 		}
 
-		if (samplesRows.containsKey(new Integer(sampleIndex))) {
+		if (samplesRows.containsKey(Integer.valueOf(sampleIndex))) {
 			return samplesRows.remove(sampleIndex);
 		} else {
 			throw new SamplesReadException(new IOException("Error trying to read sample " + sampleIndex

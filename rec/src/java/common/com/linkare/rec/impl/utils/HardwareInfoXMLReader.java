@@ -671,7 +671,7 @@ public class HardwareInfoXMLReader {
 				if (nodeElement.getTagName().equals("value")) {
 					final String strOrderNum = ((Attr) node.getAttributes().getNamedItem("order")).getValue();
 					final String value = ((Text) node.getFirstChild()).getData();
-					tableSelectionList.put(new Integer(strOrderNum), value);
+					tableSelectionList.put(Integer.valueOf(strOrderNum), value);
 				}
 				break;
 			}

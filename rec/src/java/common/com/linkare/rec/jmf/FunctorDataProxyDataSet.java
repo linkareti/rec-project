@@ -90,7 +90,7 @@ public class FunctorDataProxyDataSet implements FunctorDataControlListener, XYDa
 	@SuppressWarnings("rawtypes")
 	@Override
 	public Comparable getSeriesKey(int series) {
-		return new String("Onda gerada");
+		return "Onda gerada";
 	}
 
 	@Override

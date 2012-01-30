@@ -85,7 +85,7 @@ public class FlatFocusRenderer implements PropertyChangeListener {
 				layeredPane = ((JDialog) window).getLayeredPane();
 			}
 			focusPainter = new FocusPainter(layeredPane);
-			layeredPane.add(focusPainter, new Integer(250));
+			layeredPane.add(focusPainter, Integer.valueOf(250));
 
 			focusComponentMap.put(window, focusPainter);
 		}

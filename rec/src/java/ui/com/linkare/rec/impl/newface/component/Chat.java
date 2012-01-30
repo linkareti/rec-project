@@ -232,12 +232,12 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 		if (user.equals(ChatMessageEvent.MULTICAST_USERNAME)) {
 			user = Chat.MULTICAST_STR;
 			if (ChatMessageEvent.SECURITY_COMMUNICATION_MSG_ON_KICK_KEY.equals(msg)) {
-				msg = new String(Chat.SECURITY_COMMUNICATOR_MSG_ON_KICK_STR);
+				msg = String.valueOf(Chat.SECURITY_COMMUNICATOR_MSG_ON_KICK_STR);
 			} else {
 				final Matcher matcher = Chat.securityCommunicationBeforeKickPattern.matcher(msg);
 				if (matcher.matches()) {
 					final String time = matcher.group(1);
-					msg = new String(Chat.SECURITY_COMMUNICATOR_MSG_BEFORE_KICK_STR).replace("{1}", time);
+					msg = String.valueOf(Chat.SECURITY_COMMUNICATOR_MSG_BEFORE_KICK_STR).replace("{1}", time);
 				}
 			}
 		}

@@ -48,7 +48,7 @@ public class DiscardablePhysicsValueMatrixIO {
 		try {
 			final Object[] keys = new Object[sampleEnd - sampleStart + 1];
 			for (int i = sampleStart; i <= sampleEnd; i++) {
-				keys[i - sampleStart] = new Integer(i);
+				keys[i - sampleStart] = Integer.valueOf(i);
 			}
 			final Object[] oRead = ioDelegate.removeObjects(keys);
 

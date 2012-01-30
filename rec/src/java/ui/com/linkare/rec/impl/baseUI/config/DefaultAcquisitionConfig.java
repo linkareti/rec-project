@@ -49,7 +49,7 @@ public class DefaultAcquisitionConfig extends DisplayNode implements com.linkare
 	public void setOrder(final int value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
-			event = new PropertyChangeEvent(this, "order", new Integer(getOrder()), new Integer(value));
+			event = new PropertyChangeEvent(this, "order", Integer.valueOf(getOrder()), Integer.valueOf(value));
 		}
 		_Order = value;
 		if (eventListeners != null) {
@@ -264,15 +264,15 @@ public class DefaultAcquisitionConfig extends DisplayNode implements com.linkare
 			return;
 		}
 		name = name.intern();
-		if (name == "order") {
+		if (name.equals("order")) {
 			setOrder(((Number) value).intValue());
-		} else if (name == "displayStringBundleKey") {
+		} else if (name.equals("displayStringBundleKey")) {
 			setDisplayStringBundleKey((String) value);
-		} else if (name == "iconLocationBundleKey") {
+		} else if (name.equals("iconLocationBundleKey")) {
 			setIconLocationBundleKey((String) value);
-		} else if (name == "toolTipBundleKey") {
+		} else if (name.equals("toolTipBundleKey")) {
 			setToolTipBundleKey((String) value);
-		} else if (name == "classLocationBundleKey") {
+		} else if (name.equals("classLocationBundleKey")) {
 			setClassLocationBundleKey((String) value);
 		} else {
 			throw new IllegalArgumentException(name + " is not a valid property name for DefaultAcquisitionConfig");
@@ -280,19 +280,19 @@ public class DefaultAcquisitionConfig extends DisplayNode implements com.linkare
 	}
 
 	public Object fetchPropertyByName(final String name) {
-		if (name == "order") {
-			return new Integer(getOrder());
+		if (name.equals("order")) {
+			return Integer.valueOf(getOrder());
 		}
-		if (name == "displayStringBundleKey") {
+		if (name.equals("displayStringBundleKey")) {
 			return getDisplayStringBundleKey();
 		}
-		if (name == "iconLocationBundleKey") {
+		if (name.equals("iconLocationBundleKey")) {
 			return getIconLocationBundleKey();
 		}
-		if (name == "toolTipBundleKey") {
+		if (name.equals("toolTipBundleKey")) {
 			return getToolTipBundleKey();
 		}
-		if (name == "classLocationBundleKey") {
+		if (name.equals("classLocationBundleKey")) {
 			return getClassLocationBundleKey();
 		}
 		throw new IllegalArgumentException(name + " is not a valid property name for DefaultAcquisitionConfig");

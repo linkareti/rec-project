@@ -68,21 +68,21 @@ public class IndexedPropertyObject {
 		if (this.value == null && getValueClass().isPrimitive()) {
 			try {
 				if (getValueClass() == boolean.class) {
-					this.value = new Boolean(false);
+					this.value = Boolean.valueOf(false);
 				} else if (getValueClass() == byte.class) {
-					this.value = new Byte((byte) 0);
+					this.value = Byte.valueOf((byte) 0);
 				} else if (getValueClass() == char.class) {
-					this.value = new Character(' ');
+					this.value = Character.valueOf(' ');
 				} else if (getValueClass() == short.class) {
-					this.value = new Short((short) 0);
+					this.value = Short.valueOf((short) 0);
 				} else if (getValueClass() == int.class) {
-					this.value = new Integer(0);
+					this.value = Integer.valueOf(0);
 				} else if (getValueClass() == long.class) {
-					this.value = new Long(0);
+					this.value = Long.valueOf(0);
 				} else if (getValueClass() == float.class) {
-					this.value = new Float(0.F);
+					this.value = Float.valueOf(0.F);
 				} else if (getValueClass() == double.class) {
-					this.value = new Double(0.);
+					this.value = Double.valueOf(0.);
 				}
 
 			} catch (final Exception e) {
