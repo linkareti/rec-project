@@ -12,6 +12,7 @@ import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.data.PhysicsValFactory;
 import com.linkare.rec.impl.data.PhysicsValueFactory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,12 +49,17 @@ public class CCStampDataSource extends AbstractStampDataSource {
 				LOGGER.log(Level.SEVERE, "Couldn't parse the capacity or distance while processing data!", e);
 				return;
 			}
-			final float valorCapacidade = capacity.floatValue();
 			final float valorDistancia = distance.floatValue();
-			values[0] = PhysicsValueFactory.fromFloat(valorDistancia, getAcquisitionHeader().getChannelsConfig(0)
-					.getSelectedScale());
-			values[1] = PhysicsValueFactory.fromFloat(valorCapacidade, getAcquisitionHeader().getChannelsConfig(1)
-					.getSelectedScale());
+			final float valorCapacidade = capacity.floatValue();
+            
+            values[0] = new PhysicsValue(PhysicsValFactory.fromFloat(valorDistancia), getAcquisitionHeader()
+						.getChannelsConfig(0).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
+						.getChannelsConfig(0).getSelectedScale().getMultiplier());
+            values[1] = new PhysicsValue(PhysicsValFactory.fromFloat(valorCapacidade), getAcquisitionHeader()
+						.getChannelsConfig(1).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
+						.getChannelsConfig(1).getSelectedScale().getMultiplier());
+            
+            
 			super.addDataRow(values);
 
             LOGGER.finest("Added two new values as capacity: " + valorCapacidade + " and distance: " + valorDistancia);
