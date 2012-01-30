@@ -1,6 +1,5 @@
 package pt.utl.ist.elab.driver.condensadorcilindrico.processors;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.AbstractStampProcessor;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
@@ -28,56 +27,53 @@ public class StampCCProcessor extends AbstractStampProcessor {
     public boolean process(final StampCommand command) {
 
         if (command == null || command.getCommand() == null || command.getCommand().isEmpty()) {
-            LOGGER.log(Level.FINEST, "Ok got a null command or a command without any command in it!");
-            return false;
+            LOGGER.finest("Ok got a null command or a command without any command in it!");
+            command.setData(false);
+            return command.isData();
         }
         
-        LOGGER.log(Level.FINEST, "Going to process a new Command: " + command.getCommand());
+        LOGGER.finest("Going to process a new Command: " + command.getCommand());
 
         final String[] splitedCommand = command.getCommand().split("\t");
-        LOGGER.log(Level.FINEST, "Splitting it into : " + splitedCommand.length + " parts as follows:");
+        LOGGER.finest("Splitting it into : " + splitedCommand.length + " parts as follows:");
 
         int i = 0;
         for (final String part : splitedCommand) {
-            LOGGER.log(Level.FINEST, i++ + ": " + part);
+            LOGGER.finest(i++ + ": " + part);
         }
-        LOGGER.log(Level.FINEST, "starting to interpret it now...");
+        LOGGER.finest("starting to interpret it now...");
 
         if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedCommand != null && splitedCommand.length >= 2) {
 
             if ("PARAMETROS".equals(splitedCommand[0])) {
-                LOGGER.log(Level.FINEST, "setting the parameters for sth");
+                LOGGER.finest("setting the parameters for sth");
                 // Do sth with this ?! dunno what yet
             } else {
 
                 try {
-                    LOGGER.log(Level.FINEST, "PROCESSING the following as the distance: " + splitedCommand[0]);
+                    LOGGER.finest("PROCESSING the following as the distance: " + splitedCommand[0]);
                     final int distance = Integer.parseInt(splitedCommand[0]);
                     final Float floatDistance = new Float(distance / 1000);
                     command.addCommandData(DISTANCE, floatDistance);
-                    LOGGER.log(Level.FINEST, "got us Distance as: " + floatDistance);
+                    LOGGER.finest("got us Distance as: " + floatDistance);
 
-                    LOGGER.log(Level.FINEST, "PROCESSING the following as the capacity: " + splitedCommand[1]);
+                    LOGGER.finest("PROCESSING the following as the capacity: " + splitedCommand[1]);
                     final int capacity = Integer.parseInt(splitedCommand[1]);
                     final Double doubleCapacity = new Double(capacity);
                     command.addCommandData(CAPACITY, doubleCapacity);
-                    LOGGER.log(Level.FINEST, "got us Capacitance as: " + doubleCapacity);
+                    LOGGER.finest("got us Capacitance as: " + doubleCapacity);
+                    command.setData(true);
                 } catch (final NumberFormatException e) {
-                    LOGGER.log(Level.WARNING, "Couldn't parse the numbers");
-                    return false;
+                    LOGGER.warning("Couldn't parse the numbers");
+                    command.setData(false);
                 }
             }
-            LOGGER.log(Level.FINEST, "setting this as data and returning true");
-            command.setData(true);
-            return true;
+            LOGGER.finest("setting this command as " + (command.isData() ? "" : "NOT ") + "data");
+            return command.isData();
         }
         
-        LOGGER.log(Level.WARNING, "Couldn't process this command: " + command.getCommand());
-        return false;
-    }
-
-    @Override
-    public boolean isData() {
-        return true;
+        LOGGER.warning("Couldn't process this command: " + command.getCommand());
+        command.setData(false);
+        return command.isData();
     }
 }

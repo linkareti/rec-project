@@ -32,10 +32,12 @@ public class CCStampDataSource extends AbstractStampDataSource {
 	@Override
 	public void processDataCommand(final StampCommand cmd) {
 		if (cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null) {
+            LOGGER.finest("discarting a non data or null command");
 			return;
 		}
 
 		if (cmd.getCommandIdentifier().equals(StampCCProcessor.COMMAND_IDENTIFIER)) {
+                        
 			final Float capacity;
 			final Float distance;
 			final PhysicsValue[] values = new PhysicsValue[2];
@@ -54,7 +56,7 @@ public class CCStampDataSource extends AbstractStampDataSource {
 					.getSelectedScale());
 			super.addDataRow(values);
 
-            LOGGER.log(Level.FINEST, "Added two new values as capacity: " + valorCapacidade + " and distance: " + valorDistancia);
+            LOGGER.finest("Added two new values as capacity: " + valorCapacidade + " and distance: " + valorDistancia);
             
 			counter++;
 			if (counter == total_samples) {
