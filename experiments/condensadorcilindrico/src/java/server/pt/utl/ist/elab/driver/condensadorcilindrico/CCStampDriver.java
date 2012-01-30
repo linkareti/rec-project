@@ -149,29 +149,35 @@ public class CCStampDriver extends AbstractStampDriver {
 
         if (cmd.getCommandIdentifier().equals(AbstractStampDriver.ID_STR)) {
             if (waitingStart) {
+                LOGGER.fine("Waiting start");
                 waitingStart = false;
                 writeMessage(stampConfig.getCommand());
                 wroteStart = false;
                 fireIDriverStateListenerDriverStarting();
             } else if (stoping) {
+                LOGGER.fine("stopping");
                 stoping = false;
                 fireIDriverStateListenerDriverStoping();
                 super.stopDataSource();
             } else if (reseting) {
+                LOGGER.fine("reseting");
                 reseting = false;
                 fireIDriverStateListenerDriverReseted();
                 super.stopDataSource();
             } else if (started) {
+                LOGGER.fine("started");
                 started = false;
                 fireIDriverStateListenerDriverStoping();
                 fireIDriverStateListenerDriverStoped();
                 super.stopDataSource();
             } else if (initing) {
+                LOGGER.fine("initing");
                 initing = false;
                 fireIDriverStateListenerDriverReseting();
                 fireIDriverStateListenerDriverReseted();
             }
         } else if (cmd.getCommandIdentifier().equals(StampStartProcessor.COMMAND_IDENTIFIER)) {
+            LOGGER.fine("starting");
             started = true;
             fireIDriverStateListenerDriverStarted();
             config.getChannelsConfig(0).setTimeStart(new DateTime());
@@ -179,13 +185,17 @@ public class CCStampDriver extends AbstractStampDriver {
             config.setTimeStart(new DateTime());
 
         } else if (cmd.getCommandIdentifier().equals(StampConfiguredProcessor.COMMAND_IDENTIFIER)) {
+            LOGGER.fine("configured");
             // OK to go... - still gonna receive start...!
         } else if (cmd.getCommandIdentifier().equals(StampNotConfiguredProcessor.COMMAND_IDENTIFIER)) {
+            LOGGER.fine("not configured");
             if (waitingStart && wroteStart) {
+                LOGGER.fine("waiting start but alreadt wrote start");
                 waitingStart = false;
                 fireIDriverStateListenerDriverStoped();
                 super.stopDataSource();
             } else if (started) {
+                LOGGER.fine("started2");
                 started = false;
                 fireIDriverStateListenerDriverReseting();
                 fireIDriverStateListenerDriverReseted();

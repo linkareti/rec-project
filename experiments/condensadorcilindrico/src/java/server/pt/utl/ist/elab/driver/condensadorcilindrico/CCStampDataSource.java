@@ -52,8 +52,8 @@ public class CCStampDataSource extends AbstractStampDataSource {
 			final float valorCapacidade = capacity.floatValue();
             
             values[0] = new PhysicsValue(PhysicsValFactory.fromFloat(valorDistancia), getAcquisitionHeader()
-						.getChannelsConfig(0).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
-						.getChannelsConfig(0).getSelectedScale().getMultiplier());
+						.getChannelsConfig(1).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
+						.getChannelsConfig(1).getSelectedScale().getMultiplier());
             values[1] = new PhysicsValue(PhysicsValFactory.fromFloat(valorCapacidade), getAcquisitionHeader()
 						.getChannelsConfig(1).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
 						.getChannelsConfig(1).getSelectedScale().getMultiplier());
