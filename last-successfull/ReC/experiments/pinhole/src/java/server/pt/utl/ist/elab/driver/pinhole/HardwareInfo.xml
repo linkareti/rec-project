@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<HardwareInfo id="ELAB_PIN_HOLE_DSPIC_V1.0" familiarName="pin-hole" name="dsPIC"
+	version="30F" manufacturer="Microchip" driverVersion="v1">
+
+	<!-- This elements are still just for test -->
+
+	<description>
+        <![CDATA[ 
+        Esta experiência serve para - não esquecer de alterar esta descrição
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+	</description>
+
+	<parameter name="protocolo" type="ContinuousValue" value="1">
+		<selection-list>
+			<value order="1">1</value>
+			<value order="2">2</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
+	<parameter name="pos_inital" type="ContinuousValue" value="148">
+		<selection-list>
+			<value order="1">148</value>
+			<value order="2">368</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
+	<parameter name="pos_final" type="ContinuousValue" value="368">
+		<selection-list>
+			<value order="1">148</value>
+			<value order="2">368</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
+	<parameter name="delta_pos" type="ContinuousValue" value="20">
+		<selection-list>
+			<value order="1">1</value>
+			<value order="2">220</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
+	<parameter name="delay" type="ContinuousValue" value="2">
+		<selection-list>
+			<value order="1">0</value>
+			<value order="2">30</value>
+			<value order="3">0.1</value>
+		</selection-list>
+	</parameter>
+	<parameter name="pin_hole" type="ContinuousValue" value="0.1">
+		<selection-list>
+			<value order="1">0.1</value>
+			<value order="2">2.6</value>
+			<value order="3">0.05</value>
+		</selection-list>
+	</parameter>
+	<parameter name="motor" type="ContinuousValue" value="2">
+		<selection-list>
+			<value order="1">0</value>
+			<value order="2">2</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
+
+	<frequency-scale label="Sampling Interval">
+		<min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">20</Frequency></min-frequency>
+		<max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">35000</Frequency></max-frequency>
+		<step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
+	</frequency-scale>
+	<Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency>
+
+	<sampling-scale>
+		<min-samples>1</min-samples>
+		<max-samples>220</max-samples>
+		<step-samples>1</step-samples>
+	</sampling-scale>
+
+	<ChannelInfo name="pinhole$rec.exp.pinhole.hardwareinfo.channel.0.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="pinhole$rec.exp.pinhole.hardwareinfo.channel.0.label" physicsunitname="pinhole$rec.exp.pinhole.hardwareinfo.channel.0.physicsunitname" physicsunitsymbol="mm" multiplier="none" selected="true">
+			<min><PhysicsVal type="float">0.1</PhysicsVal></min>
+			<max><PhysicsVal type="float">2.6</PhysicsVal></max>
+			<step><PhysicsVal type="float">0.05</PhysicsVal></step>
+			<errordefault><PhysicsVal type="float">0.1</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+
+	<ChannelInfo name="pinhole$rec.exp.pinhole.hardwareinfo.channel.1.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="pinhole$rec.exp.pinhole.hardwareinfo.channel.1.label" physicsunitname="pinhole$rec.exp.pinhole.hardwareinfo.channel.1.physicsunitname" physicsunitsymbol="mm" multiplier="none" selected="true">
+			<min><PhysicsVal type="int">148</PhysicsVal></min>
+			<max><PhysicsVal type="int">368</PhysicsVal></max>
+			<step><PhysicsVal type="int">1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="int">148</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+
+</HardwareInfo>
