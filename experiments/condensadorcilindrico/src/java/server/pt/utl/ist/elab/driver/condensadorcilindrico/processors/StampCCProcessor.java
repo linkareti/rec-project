@@ -25,11 +25,12 @@ public class StampCCProcessor extends AbstractStampProcessor {
 
     @Override
     public boolean process(final StampCommand command) {
+        
+        boolean messageProcessed = false;
 
         if (command == null || command.getCommand() == null || command.getCommand().isEmpty()) {
             LOGGER.finest("Ok got a null command or a command without any command in it!");
-            command.setData(false);
-            return command.isData();
+            return messageProcessed;
         }
         
         LOGGER.finest("Going to process a new Command: " + command.getCommand());
@@ -51,6 +52,8 @@ public class StampCCProcessor extends AbstractStampProcessor {
                 final Integer param2 = Integer.valueOf(splitedCommand[2]); // 0
                 final Integer param3 = Integer.valueOf(splitedCommand[3]); // 100
                 final Integer param4 = Integer.valueOf(splitedCommand[4]); // 300
+                messageProcessed = true;
+                return messageProcessed;
             } else {
 
                 try {
@@ -65,18 +68,24 @@ public class StampCCProcessor extends AbstractStampProcessor {
                     final Double doubleCapacity = new Double(capacity);
                     command.addCommandData(CAPACITY, doubleCapacity);
                     LOGGER.finest("got us Capacitance as: " + doubleCapacity);
-                    command.setData(true);
+                    messageProcessed = true;
                 } catch (final NumberFormatException e) {
                     LOGGER.warning("Couldn't parse the numbers");
-                    command.setData(false);
+                    messageProcessed = false;
                 }
             }
-            LOGGER.finest("setting this command as " + (command.isData() ? "" : "NOT ") + "data");
-            return command.isData();
+            LOGGER.finest("setting this command as " + (messageProcessed ? "" : "NOT ") + "data");
+            return messageProcessed;
         }
         
         LOGGER.warning("Couldn't process this command: " + command.getCommand());
-        command.setData(false);
-        return command.isData();
+        messageProcessed = false;
+        return messageProcessed;
     }
+    
+    @Override
+	public boolean isData() {
+		return true;
+	}
+    
 }

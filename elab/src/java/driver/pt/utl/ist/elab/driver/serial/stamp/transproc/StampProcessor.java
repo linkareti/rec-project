@@ -18,5 +18,10 @@ public interface StampProcessor {
      */
     public boolean process(final StampCommand command);
 
+    /**
+     * Marks the processor as a data processor or not. 
+     * 
+     * @return true if this processor is data and false otherwise.
+     */
     public boolean isData();
 }
