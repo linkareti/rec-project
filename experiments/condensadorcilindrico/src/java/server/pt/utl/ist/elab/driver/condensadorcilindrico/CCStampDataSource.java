@@ -13,7 +13,6 @@ import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.config.ChannelAcquisitionConfig;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.data.PhysicsValFactory;
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,6 +25,8 @@ public class CCStampDataSource extends AbstractStampDataSource {
     private int counter = 0;
     private int total_samples = 0;
     private static final Logger LOGGER = Logger.getLogger(CCStampDataSource.class.getName());
+    private static final String DISTANCE_CHANNEL_NAME = "Distance"; //TODO This should be read from a resource sth like -> ReCResourceBundle.findString("condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.0.name");
+    private static final String CAPACITY_CHANNEL_NAME = "Capacity"; //ReCResourceBundle.findString("condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.1.name");
 
     public CCStampDataSource() {
     }
@@ -53,11 +54,9 @@ public class CCStampDataSource extends AbstractStampDataSource {
             final float valorDistancia = distance.floatValue();
             final float valorCapacity = capacity.floatValue();
 
-            final String distanceChannelName = ReCResourceBundle.findString("condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.0.name");
-            final String capacityChannelName = ReCResourceBundle.findString("condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.1.name");
             
-            final ChannelAcquisitionConfig distanceChannel = getAcquisitionHeader().getChannelsConfig(distanceChannelName);
-            final ChannelAcquisitionConfig capacityChannel = getAcquisitionHeader().getChannelsConfig(capacityChannelName);
+            final ChannelAcquisitionConfig distanceChannel = getAcquisitionHeader().getChannelsConfig(DISTANCE_CHANNEL_NAME);
+            final ChannelAcquisitionConfig capacityChannel = getAcquisitionHeader().getChannelsConfig(CAPACITY_CHANNEL_NAME);
             
             values[0] = new PhysicsValue(PhysicsValFactory.fromFloat(valorDistancia),
                 distanceChannel.getSelectedScale().getDefaultErrorValue(),
