@@ -1,0 +1,59 @@
+<Apparatus location="ELAB_PIN_HOLE_DSPIC_V1.0"
+	customizerClassLocationBundleKey="pinhole$rec.exp.customizer.pinhole"
+	toolTipBundleKey="pinhole$rec.exp.tip.pinhole" iconLocationBundleKey="pinhole$rec.exp.icon.pinhole"
+	descriptionStringBundleKey="pinhole$rec.exp.description.pinhole"
+	displayStringBundleKey="pinhole$rec.exp.title.pinhole" desktopLocationBundleKey="pinhole$rec.exp.background.pinhole"
+	order="1">
+	<LocalizationBundle name="pinhole"
+		location="recresource:///pt/utl/ist/elab/client/pinhole/resources/messages" />
+	<WebResource locationBundleKey="pinhole$rec.exp.url.pinhole.1"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="pinhole$rec.exp.url.pinhole.title.1"
+		toolTipLocationBundleKey="pinhole$rec.exp.url.pinhole.title.1" internalBrowser="false"
+		order="1" />
+	<WebResource locationBundleKey="pinhole$rec.exp.url.pinhole.2"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="pinhole$rec.exp.url.pinhole.title.2"
+		toolTipLocationBundleKey="pinhole$rec.exp.url.pinhole.title.2" internalBrowser="false"
+		order="2" />
+	<WebResource locationBundleKey="pinhole$rec.exp.url.pinhole.video"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+		displayStringBundleKey="pinhole$rec.exp.url.pinhole.title.video"
+		toolTipLocationBundleKey="pinhole$rec.exp.url.pinhole.title.video"
+		internalBrowser="false" order="3" />
+
+	<DefaultAcquisitionConfig
+		classLocationBundleKey="pinhole$rec.exp.dftcfg.pinhole.loc.1" toolTipBundleKey="pinhole$rec.exp.dftcfg.pinhole.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+		displayStringBundleKey="pinhole$rec.exp.dftcfg.pinhole.title.1" order="1" />
+
+	<!--Display classLocationBundleKey="pinhole$rec.exp.display.pinhole.loc.sensor"
+		toolTipBundleKey="pinhole$rec.exp.display.pinhole.tip.sensor"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="pinhole$rec.exp.display.pinhole.title.sensor"
+		offlineCapable="false" order="1" /-->
+	<Display classLocationBundleKey="pinhole$rec.exp.display.pinhole.loc.1"
+		toolTipBundleKey="pinhole$rec.exp.display.pinhole.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="pinhole$rec.exp.display.pinhole.title.1" offlineCapable="false"
+		order="1" />
+	<!-- Display classLocationBundleKey="pinhole$rec.exp.display.pinhole.loc.2"
+		toolTipBundleKey="pinhole$rec.exp.display.pinhole.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="pinhole$rec.exp.display.pinhole.title.2" offlineCapable="false"
+		order="2" />
+	<Display classLocationBundleKey="pinhole$rec.exp.display.pinhole.loc.3"
+		toolTipBundleKey="pinhole$rec.exp.display.pinhole.tip.3" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="pinhole$rec.exp.display.pinhole.title.3" offlineCapable="false"
+		order="3" />
+	<Display classLocationBundleKey="pinhole$rec.exp.display.pinhole.loc.4"
+		toolTipBundleKey="pinhole$rec.exp.display.pinhole.tip.4" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="pinhole$rec.exp.display.pinhole.title.4" offlineCapable="false"
+		order="4" />
+	<Display classLocationBundleKey="pinhole$rec.exp.display.pinhole.loc.5"
+		toolTipBundleKey="pinhole$rec.exp.display.pinhole.tip.5" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="pinhole$rec.exp.display.pinhole.title.5" offlineCapable="false"
+		order="5" / -->
+	<Display classLocationBundleKey="pinhole$rec.exp.display.pinhole.loc.5"
+		toolTipBundleKey="pinhole$rec.exp.display.pinhole.tip.5" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="pinhole$rec.exp.display.pinhole.title.5" offlineCapable="false"
+		order="1" />
+</Apparatus>
