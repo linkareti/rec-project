@@ -29,6 +29,67 @@ import com.linkare.rec.impl.baseUI.config.ReCBaseUIConfig.ValidateException;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseUI.config.CommonBean, OrderedItem {
+	/**
+	 * 
+	 */
+	private static final String ORDER = "order";
+	/**
+	 * 
+	 */
+	private static final String DISPLAY_STRING_BUNDLE_KEY = "displayStringBundleKey";
+	/**
+	 * 
+	 */
+	private static final String ICON_LOCATION_BUNDLE_KEY = "iconLocationBundleKey";
+	/**
+	 * 
+	 */
+	private static final String DESKTOP_LOCATION_BUNDLE_KEY = "desktopLocationBundleKey";
+	/**
+	 * 
+	 */
+	private static final String TOOL_TIP_BUNDLE_KEY = "toolTipBundleKey";
+	/**
+	 * 
+	 */
+	private static final String DATA_MODEL_CLASS_LOCATION_BUNDLE_KEY = "dataModelClassLocationBundleKey";
+	/**
+	 * 
+	 */
+	private static final String VIDEO_LOCATION = "videoLocation";
+	/**
+	 * 
+	 */
+	private static final String HEADER_DISPLAY_CLASS_LOCATION_BUNDLE_KEY = "headerDisplayClassLocationBundleKey";
+	/**
+	 * 
+	 */
+	private static final String DISPLAY_FACTORY_CLASS_LOCATION_BUNDLE_KEY = "displayFactoryClassLocationBundleKey";
+	/**
+	 * 
+	 */
+	private static final String LOCATION = "location";
+	/**
+	 * 
+	 */
+	private static final String CUSTOMIZER_CLASS_LOCATION_BUNDLE_KEY = "customizerClassLocationBundleKey";
+	/**
+	 * 
+	 */
+	private static final String DEFAULT_ACQUISITION_CONFIG = "defaultAcquisitionConfig[]";
+	/**
+	 * 
+	 */
+	private static final String DISPLAY = "display[]";
+	/**
+	 * 
+	 */
+	private static final String WEB_RESOURCE = "webResource[]";
+	/**
+	 * 
+	 */
+	private static final String LOCALIZATION_BUNDLE = "localizationBundle[]";
+	
 	private int _Order = Integer.MAX_VALUE;
 	private String _DisplayStringBundleKey = "";
 	private String _IconLocationBundleKey = "";
@@ -85,7 +146,7 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 	public void setOrder(final int value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
-			event = new PropertyChangeEvent(this, "order", Integer.valueOf(getOrder()), Integer.valueOf(value));
+			event = new PropertyChangeEvent(this, ORDER, Integer.valueOf(getOrder()), Integer.valueOf(value));
 		}
 		_Order = value;
 		if (eventListeners != null) {
@@ -101,7 +162,7 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 	public void setDisplayStringBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
-			event = new PropertyChangeEvent(this, "displayStringBundleKey", getDisplayStringBundleKey(), value);
+			event = new PropertyChangeEvent(this, DISPLAY_STRING_BUNDLE_KEY, getDisplayStringBundleKey(), value);
 		}
 		_DisplayStringBundleKey = value;
 		if (eventListeners != null) {
@@ -117,7 +178,7 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 	public void setIconLocationBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
-			event = new PropertyChangeEvent(this, "iconLocationBundleKey", getIconLocationBundleKey(), value);
+			event = new PropertyChangeEvent(this, ICON_LOCATION_BUNDLE_KEY, getIconLocationBundleKey(), value);
 		}
 		_IconLocationBundleKey = value;
 		if (eventListeners != null) {
@@ -132,7 +193,7 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 	public void setDesktopLocationBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
-			event = new PropertyChangeEvent(this, "desktopLocationBundleKey", getIconLocationBundleKey(), value);
+			event = new PropertyChangeEvent(this, DESKTOP_LOCATION_BUNDLE_KEY, getIconLocationBundleKey(), value);
 		}
 		_DesktopLocationBundleKey = value;
 		if (eventListeners != null) {
@@ -148,7 +209,7 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 	public void setToolTipBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
-			event = new PropertyChangeEvent(this, "toolTipBundleKey", getToolTipBundleKey(), value);
+			event = new PropertyChangeEvent(this, TOOL_TIP_BUNDLE_KEY, getToolTipBundleKey(), value);
 		}
 		_ToolTipBundleKey = value;
 		if (eventListeners != null) {
@@ -164,7 +225,7 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 	public void setDataModelClassLocationBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
-			event = new PropertyChangeEvent(this, "dataModelClassLocationBundleKey",
+			event = new PropertyChangeEvent(this, DATA_MODEL_CLASS_LOCATION_BUNDLE_KEY,
 					getDataModelClassLocationBundleKey(), value);
 		}
 		_DataModelClassLocationBundleKey = value;
@@ -181,7 +242,7 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 	public void setVideoLocation(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
-			event = new PropertyChangeEvent(this, "videoLocation", getVideoLocation(), value);
+			event = new PropertyChangeEvent(this, VIDEO_LOCATION, getVideoLocation(), value);
 		}
 		_VideoLocation = value;
 		if (eventListeners != null) {
@@ -197,7 +258,7 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 	public void setHeaderDisplayClassLocationBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
-			event = new PropertyChangeEvent(this, "headerDisplayClassLocationBundleKey",
+			event = new PropertyChangeEvent(this, HEADER_DISPLAY_CLASS_LOCATION_BUNDLE_KEY,
 					getHeaderDisplayClassLocationBundleKey(), value);
 		}
 		_HeaderDisplayClassLocationBundleKey = value;
@@ -214,7 +275,7 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 	public void setDisplayFactoryClassLocationBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
-			event = new PropertyChangeEvent(this, "displayFactoryClassLocationBundleKey",
+			event = new PropertyChangeEvent(this, DISPLAY_FACTORY_CLASS_LOCATION_BUNDLE_KEY,
 					getDisplayFactoryClassLocationBundleKey(), value);
 		}
 		_DisplayFactoryClassLocationBundleKey = value;
@@ -231,7 +292,7 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 	public void setCustomizerClassLocationBundleKey(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
-			event = new PropertyChangeEvent(this, "customizerClassLocationBundleKey",
+			event = new PropertyChangeEvent(this, CUSTOMIZER_CLASS_LOCATION_BUNDLE_KEY,
 					getCustomizerClassLocationBundleKey(), value);
 		}
 		_Location = value;
@@ -248,7 +309,7 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 	public void setLocation(final String value) {
 		PropertyChangeEvent event = null;
 		if (eventListeners != null) {
-			event = new PropertyChangeEvent(this, "location", getLocation(), value);
+			event = new PropertyChangeEvent(this, LOCATION, getLocation(), value);
 		}
 		_Location = value;
 		if (eventListeners != null) {
@@ -691,47 +752,47 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 		if (node.hasAttributes()) {
 			final NamedNodeMap attrs = node.getAttributes();
 			Attr attr;
-			attr = (Attr) attrs.getNamedItem("order");
+			attr = (Attr) attrs.getNamedItem(ORDER);
 			if (attr != null) {
 				_Order = Integer.parseInt(attr.getValue());
 			}
-			attr = (Attr) attrs.getNamedItem("displayStringBundleKey");
+			attr = (Attr) attrs.getNamedItem(DISPLAY_STRING_BUNDLE_KEY);
 			if (attr != null) {
 				_DisplayStringBundleKey = attr.getValue();
 			}
-			attr = (Attr) attrs.getNamedItem("iconLocationBundleKey");
+			attr = (Attr) attrs.getNamedItem(ICON_LOCATION_BUNDLE_KEY);
 			if (attr != null) {
 				_IconLocationBundleKey = attr.getValue();
 			}
-			attr = (Attr) attrs.getNamedItem("desktopLocationBundleKey");
+			attr = (Attr) attrs.getNamedItem(DESKTOP_LOCATION_BUNDLE_KEY);
 			if (attr != null) {
 				_DesktopLocationBundleKey = attr.getValue();
 			}
-			attr = (Attr) attrs.getNamedItem("toolTipBundleKey");
+			attr = (Attr) attrs.getNamedItem(TOOL_TIP_BUNDLE_KEY);
 			if (attr != null) {
 				_ToolTipBundleKey = attr.getValue();
 			}
-			attr = (Attr) attrs.getNamedItem("dataModelClassLocationBundleKey");
+			attr = (Attr) attrs.getNamedItem(DATA_MODEL_CLASS_LOCATION_BUNDLE_KEY);
 			if (attr != null) {
 				_DataModelClassLocationBundleKey = attr.getValue();
 			}
-			attr = (Attr) attrs.getNamedItem("videoLocation");
+			attr = (Attr) attrs.getNamedItem(VIDEO_LOCATION);
 			if (attr != null) {
 				_VideoLocation = attr.getValue();
 			}
-			attr = (Attr) attrs.getNamedItem("headerDisplayClassLocationBundleKey");
+			attr = (Attr) attrs.getNamedItem(HEADER_DISPLAY_CLASS_LOCATION_BUNDLE_KEY);
 			if (attr != null) {
 				_HeaderDisplayClassLocationBundleKey = attr.getValue();
 			}
-			attr = (Attr) attrs.getNamedItem("displayFactoryClassLocationBundleKey");
+			attr = (Attr) attrs.getNamedItem(DISPLAY_FACTORY_CLASS_LOCATION_BUNDLE_KEY);
 			if (attr != null) {
 				_DisplayFactoryClassLocationBundleKey = attr.getValue();
 			}
-			attr = (Attr) attrs.getNamedItem("location");
+			attr = (Attr) attrs.getNamedItem(LOCATION);
 			if (attr != null) {
 				_Location = attr.getValue();
 			}
-			attr = (Attr) attrs.getNamedItem("customizerClassLocationBundleKey");
+			attr = (Attr) attrs.getNamedItem(CUSTOMIZER_CLASS_LOCATION_BUNDLE_KEY);
 			if (attr != null) {
 				_CustomizerClassLocationBundleKey = attr.getValue();
 			}
@@ -781,15 +842,15 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 
 		// Validating property apparatus
 		if (getCustomizerClassLocationBundleKey() == null) {
-			throw new ValidateException("getCustomizer() == null", "customizerClassLocationBundleKey", this); // NOI18N
+			throw new ValidateException("getCustomizer() == null", CUSTOMIZER_CLASS_LOCATION_BUNDLE_KEY, this); // NOI18N
 		}
 		// Validating property displayStringBundleKey
 		if (getDisplayStringBundleKey() == null) {
-			throw new ValidateException("getDisplayStringBundleKey() == null", "displayStringBundleKey", this); // NOI18N
+			throw new ValidateException("getDisplayStringBundleKey() == null", DISPLAY_STRING_BUNDLE_KEY, this); // NOI18N
 		}
 		// Validating property iconLocationBundleKey
 		if (getIconLocationBundleKey() == null) {
-			throw new ValidateException("getIconLocationBundleKey() == null", "iconLocationBundleKey", this); // NOI18N
+			throw new ValidateException("getIconLocationBundleKey() == null", ICON_LOCATION_BUNDLE_KEY, this); // NOI18N
 		}
 		// Validating property toolTipBundleKey
 		// Check if this is not optional! -> Indeed it should be optional
@@ -821,7 +882,7 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 		 */
 		// Validating property location
 		if (getLocation() == null) {
-			throw new ValidateException("getLocation() == null", "location", this); // NOI18N
+			throw new ValidateException("getLocation() == null", LOCATION, this); // NOI18N
 		}
 		// Validating property defaultAcquisitionConfig
 		for (int _index = 0; _index < sizeDefaultAcquisitionConfig(); ++_index) {
@@ -906,43 +967,43 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 			return;
 		}
 		name = name.intern();
-		if (name == "order") {
+		if (name == ORDER) {
 			setOrder(((Number) value).intValue());
-		} else if (name == "displayStringBundleKey") {
+		} else if (name == DISPLAY_STRING_BUNDLE_KEY) {
 			setDisplayStringBundleKey((String) value);
-		} else if (name == "iconLocationBundleKey") {
+		} else if (name == ICON_LOCATION_BUNDLE_KEY) {
 			setIconLocationBundleKey((String) value);
-		} else if (name == "desktopLocationBundleKey") {
+		} else if (name == DESKTOP_LOCATION_BUNDLE_KEY) {
 			setDesktopLocationBundleKey((String) value);
-		} else if (name == "toolTipBundleKey") {
+		} else if (name == TOOL_TIP_BUNDLE_KEY) {
 			setToolTipBundleKey((String) value);
-		} else if (name == "dataModelClassLocationBundleKey") {
+		} else if (name == DATA_MODEL_CLASS_LOCATION_BUNDLE_KEY) {
 			setDataModelClassLocationBundleKey((String) value);
-		} else if (name == "videoLocation") {
+		} else if (name == VIDEO_LOCATION) {
 			setVideoLocation((String) value);
-		} else if (name == "displayFactoryClassLocationBundleKey") {
+		} else if (name == DISPLAY_FACTORY_CLASS_LOCATION_BUNDLE_KEY) {
 			setDisplayFactoryClassLocationBundleKey((String) value);
-		} else if (name == "displayFactoryClassLocationBundleKey") {
+		} else if (name == DISPLAY_FACTORY_CLASS_LOCATION_BUNDLE_KEY) {
 			setHeaderDisplayClassLocationBundleKey((String) value);
-		} else if (name == "location") {
+		} else if (name == LOCATION) {
 			setLocation((String) value);
-		} else if (name == "customizerClassLocationBundleKey") {
+		} else if (name == CUSTOMIZER_CLASS_LOCATION_BUNDLE_KEY) {
 			setLocation((String) value);
 		} else if (name == "defaultAcquisitionConfig") {
 			addDefaultAcquisitionConfig((DefaultAcquisitionConfig) value);
-		} else if (name == "defaultAcquisitionConfig[]") {
+		} else if (name == DEFAULT_ACQUISITION_CONFIG) {
 			setDefaultAcquisitionConfig((DefaultAcquisitionConfig[]) value);
 		} else if (name == "display") {
 			addDisplay((Display) value);
-		} else if (name == "display[]") {
+		} else if (name == DISPLAY) {
 			setDisplay((Display[]) value);
 		} else if (name == "webResource") {
 			addWebResource((WebResource) value);
-		} else if (name == "webResource[]") {
+		} else if (name == WEB_RESOURCE) {
 			setWebResource((WebResource[]) value);
 		} else if (name == "localizationBundle") {
 			addLocalizationBundle((LocalizationBundle) value);
-		} else if (name == "localizationBundle[]") {
+		} else if (name == LOCALIZATION_BUNDLE) {
 			setLocalizationBundle((LocalizationBundle[]) value);
 		} else {
 			throw new IllegalArgumentException(name + " is not a valid property name for Apparatus");
@@ -950,49 +1011,49 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 	}
 
 	public Object fetchPropertyByName(final String name) {
-		if (name.equals("order")) {
+		if (ORDER.equals(name)) {
 			return Integer.valueOf(getOrder());
 		}
-		if (name.equals("displayStringBundleKey")) {
+		if (DISPLAY_STRING_BUNDLE_KEY.equals(name)) {
 			return getDisplayStringBundleKey();
 		}
-		if (name.equals("iconLocationBundleKey")) {
+		if (ICON_LOCATION_BUNDLE_KEY.equals(name)) {
 			return getIconLocationBundleKey();
 		}
-		if (name.equals("desktopLocationBundleKey")) {
+		if (DESKTOP_LOCATION_BUNDLE_KEY.equals(name)) {
 			return getDesktopLocationBundleKey();
 		}
-		if (name.equals("toolTipBundleKey")) {
+		if (TOOL_TIP_BUNDLE_KEY.equals(name)) {
 			return getToolTipBundleKey();
 		}
-		if (name.equals("dataModelClassLocationBundleKey")) {
+		if (DATA_MODEL_CLASS_LOCATION_BUNDLE_KEY.equals(name)) {
 			return getDataModelClassLocationBundleKey();
 		}
-		if (name.equals("videoLocation")) {
+		if (VIDEO_LOCATION.equals(name)) {
 			return getVideoLocation();
 		}
-		if (name.equals("headerDisplayClassLocationBundleKey")) {
+		if (HEADER_DISPLAY_CLASS_LOCATION_BUNDLE_KEY.equals(name)) {
 			return getHeaderDisplayClassLocationBundleKey();
 		}
-		if (name.equals("displayFactoryClassLocationBundleKey")) {
+		if (DISPLAY_FACTORY_CLASS_LOCATION_BUNDLE_KEY.equals(name)) {
 			return getDisplayFactoryClassLocationBundleKey();
 		}
-		if (name.equals("location")) {
+		if (LOCATION.equals(name)) {
 			return getLocation();
 		}
-		if (name.equals("customizerClassLocationBundleKey")) {
+		if (CUSTOMIZER_CLASS_LOCATION_BUNDLE_KEY.equals(name)) {
 			return getCustomizerClassLocationBundleKey();
 		}
-		if (name.equals("defaultAcquisitionConfig[]")) {
+		if (DEFAULT_ACQUISITION_CONFIG.equals(name)) {
 			return getDefaultAcquisitionConfig();
 		}
-		if (name.equals("display[]")) {
+		if (DISPLAY.equals(name)) {
 			return getDisplay();
 		}
-		if (name.equals("webResource[]")) {
+		if (WEB_RESOURCE.equals(name)) {
 			return getWebResource();
 		}
-		if (name.equals("localizationBundle[]")) {
+		if (LOCALIZATION_BUNDLE.equals(name)) {
 			return getLocalizationBundle();
 		}
 		throw new IllegalArgumentException(name + " is not a valid property name for Apparatus");
