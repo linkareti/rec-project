@@ -103,9 +103,9 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 		USERMESSAGE_TEMPLATE = userMessageTemplate.toString();
 		CHAT_TEMPLATE = chatTemplateResult.toString();
 
-		if (Chat.log.isLoggable(Level.INFO)) {
-			Chat.log.info(Chat.USERMESSAGE_TEMPLATE);
-			Chat.log.info(Chat.CHAT_TEMPLATE);
+		if (Chat.log.isLoggable(Level.FINEST)) {
+			Chat.log.finest(Chat.USERMESSAGE_TEMPLATE);
+			Chat.log.finest(Chat.CHAT_TEMPLATE);
 		}
 	}
 
@@ -120,14 +120,10 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 
 	private static class UserMessage {
 
-		private final String user;
-		private final String message;
 		private final String result;
 
 		public UserMessage(final String user, final String message) {
 			super();
-			this.user = user;
-			this.message = message;
 			result = Chat.USERMESSAGE_TEMPLATE.replaceFirst(Chat.__USER__, user).replaceFirst(Chat.__MESSAGE__,
 					StringEscapeUtils.escapeJava(message));
 		}
@@ -232,12 +228,12 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 		if (user.equals(ChatMessageEvent.MULTICAST_USERNAME)) {
 			user = Chat.MULTICAST_STR;
 			if (ChatMessageEvent.SECURITY_COMMUNICATION_MSG_ON_KICK_KEY.equals(msg)) {
-				msg = String.valueOf(Chat.SECURITY_COMMUNICATOR_MSG_ON_KICK_STR);
+				msg = Chat.SECURITY_COMMUNICATOR_MSG_ON_KICK_STR;
 			} else {
 				final Matcher matcher = Chat.securityCommunicationBeforeKickPattern.matcher(msg);
 				if (matcher.matches()) {
 					final String time = matcher.group(1);
-					msg = String.valueOf(Chat.SECURITY_COMMUNICATOR_MSG_BEFORE_KICK_STR).replace("{1}", time);
+					msg = Chat.SECURITY_COMMUNICATOR_MSG_BEFORE_KICK_STR.replace("{1}", time);
 				}
 			}
 		}
