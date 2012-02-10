@@ -58,10 +58,10 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
     }
 
     protected void loadCommandHandlers() {
-        StampTranslatorProcessorManager.initStampProcessorTranslator("pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampStartProcessor");
-        StampTranslatorProcessorManager.initStampProcessorTranslator("pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampConfiguredProcessor");
-        StampTranslatorProcessorManager.initStampProcessorTranslator("pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampNotConfiguredProcessor");
-        StampTranslatorProcessorManager.initStampProcessorTranslator("pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampIdProcessor");
+        StampTranslatorProcessorManager.initStampProcessorTranslator(pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampStartProcessor.class.getName());
+        StampTranslatorProcessorManager.initStampProcessorTranslator(pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampConfiguredProcessor.class.getName());
+        StampTranslatorProcessorManager.initStampProcessorTranslator(pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampNotConfiguredProcessor.class.getName());
+        StampTranslatorProcessorManager.initStampProcessorTranslator(pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampIdProcessor.class.getName());
         loadExtraCommandHandlers();
     }
 
