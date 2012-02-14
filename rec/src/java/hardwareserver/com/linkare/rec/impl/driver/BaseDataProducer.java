@@ -154,10 +154,18 @@ public class BaseDataProducer implements DataProducerOperations, QueueLogger {
 		try {
 			final SamplesPacket[] packets = packetizer.getSamplesPackets(packetStartIndex, packetEndIndex);
 			if (packetEndIndex == getMaxPacketNum()) {
+
+				LOGGER.log(Level.FINE, "----> packetEndIndex=getMaxPacketNum() [" + packetEndIndex
+						+ "] so telling everyone the DataProducer is now emptied out!");
+
 				fireDataProducerIsEmpty(this);
 			}
 			return packets;
 		} catch (final SamplesPacketReadException e) {
+
+			LOGGER.log(Level.FINE, "----> Someone came to fetch samples packets from " + packetStartIndex + " to "
+					+ packetEndIndex + "and they are not available...", e);
+
 			throw new NotAnAvailableSamplesPacketException(
 					NotAnAvailableSamplesPacketExceptionConstants.PACKET_NOT_FOUND_IN_CACHE, e.getErrorPacketNumber());
 		}
