@@ -108,6 +108,7 @@ public class LabsTreeModel extends DefaultTreeModel {
 	}
 
 	public Apparatus getApparatus(final String uniqueID) {
+		@SuppressWarnings("unchecked")
 		final java.util.Enumeration<DefaultMutableTreeNode> allChild = ((DefaultMutableTreeNode) root).breadthFirstEnumeration();
 		while (allChild.hasMoreElements()) {
 			final Object currentNode = allChild.nextElement().getUserObject();

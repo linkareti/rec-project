@@ -1002,6 +1002,7 @@ public final class DTOMapperUtils {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private static List<SamplesPacketDTO> getSamplesPacket(final byte[] samples) throws Exception {
 
 		ObjectInputStream objectInputStream = null;
