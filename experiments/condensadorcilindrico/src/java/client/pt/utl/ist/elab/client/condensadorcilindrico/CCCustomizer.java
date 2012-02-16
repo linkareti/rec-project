@@ -50,7 +50,6 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         btnCancel = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jChkCalibrate = new javax.swing.JCheckBox();
         btnDefaultConfig = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanelInitialPosition = new javax.swing.JPanel();
@@ -107,12 +106,6 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weighty = 1.0;
         jPanel2.add(jLabel3, gridBagConstraints);
-
-        jChkCalibrate.setText(ReCResourceBundle.findString("condensadorcilindrico$rec.exp.cc.customizer.calibrate")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
-        jPanel2.add(jChkCalibrate, gridBagConstraints);
 
         btnDefaultConfig.setText(bundle.getString("rec.exp.cc.customizer.btn.default")); // NOI18N
         btnDefaultConfig.setToolTipText("Set the default values for this application");
@@ -346,9 +339,6 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
         acqConfig.setTotalSamples(sldNumPoints.getValue());
         
-        final ParameterConfig hwCalibrated = acqConfig.getSelectedHardwareParameter("Calibrate");
-        hwCalibrated.setParameterValue(jChkCalibrate.isSelected() ? "1" : "0");
-        
         fireICustomizerListenerDone();
     }
 
@@ -396,7 +386,6 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDefaultConfig;
     private javax.swing.JButton btnOK;
-    private javax.swing.JCheckBox jChkCalibrate;
     private javax.swing.JLabel jLStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -497,9 +486,6 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
             final int freq = (int) acqConfig.getTotalSamples();
             sldNumPoints.setValue(freq);
             tfNumPoints.setText(String.valueOf(freq));
-
-            //final int calibrate = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("Calibrate"));
-            //jChkCalibrate.setSelected(calibrate != 0);
 
         }
     }
