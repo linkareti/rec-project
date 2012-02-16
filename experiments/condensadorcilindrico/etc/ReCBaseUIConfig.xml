@@ -12,15 +12,10 @@
 		iconLocationBundleKey="ReCBaseCC$rec.bui.icon.sensor"
 		displayStringBundleKey="condensadorcilindrico$rec.exp.display.cc.title.1"
 		offlineCapable="false" order="1" />
-	<Display classLocationBundleKey="condensadorcilindrico$rec.exp.display.cc.loc.2"
-		toolTipBundleKey="condensadorcilindrico$rec.exp.display.cc.tip.2"
+	<Display classLocationBundleKey="condensadorcilindrico$rec.exp.display.cc.loc.4"
+		toolTipBundleKey="condensadorcilindrico$rec.exp.display.cc.tip.4"
 		iconLocationBundleKey="ReCBaseCC$rec.bui.icon.sensor"
-		displayStringBundleKey="condensadorcilindrico$rec.exp.display.cc.title.2"
-		offlineCapable="false" order="1" />
-	<Display classLocationBundleKey="condensadorcilindrico$rec.exp.display.cc.loc.3"
-		toolTipBundleKey="condensadorcilindrico$rec.exp.display.cc.tip.3"
-		iconLocationBundleKey="ReCBaseCC$rec.bui.icon.sensor"
-		displayStringBundleKey="condensadorcilindrico$rec.exp.display.cc.title.3"
-		offlineCapable="false" order="1" />
+		displayStringBundleKey="condensadorcilindrico$rec.exp.display.cc.title.4"
+		offlineCapable="false" order="2" />
 </Apparatus>
 	

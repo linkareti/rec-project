@@ -1,6 +1,5 @@
 package pt.utl.ist.elab.driver.condensadorcilindrico;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import pt.utl.ist.elab.driver.condensadorcilindrico.translators.StampConfigTranslator;
@@ -48,14 +47,11 @@ public class CCStampDriver extends AbstractStampDriver {
     public void configure(final HardwareAcquisitionConfig config, final HardwareInfo info)
             throws WrongConfigurationException {
 
-        final String calibrateInfo = info.getHardwareParameterValue(StampConfigTranslator.CALIBRATE_STR);
-        final String calibrateConfig = config.getSelectedHardwareParameterValue(StampConfigTranslator.CALIBRATE_STR);
         final String initPosInfo = info.getHardwareParameterValue(StampConfigTranslator.START_POS_STR);
         final String initPosConfig = config.getSelectedHardwareParameterValue(StampConfigTranslator.START_POS_STR);
         final String endPosInfo = info.getHardwareParameterValue(StampConfigTranslator.END_POS_STR);
         final String endPosConfig = config.getSelectedHardwareParameterValue(StampConfigTranslator.END_POS_STR);
         final int totalSamples = config.getTotalSamples();
-        LOGGER.finest("calibrateInfo: " + calibrateInfo + " calibrateConfig: " + calibrateConfig);
         LOGGER.finest("initPosInfo: " + initPosInfo + " initPosConfig: " + initPosConfig);        
         LOGGER.finest("endPosInfo: " + endPosInfo + " endPosConfig: " + endPosConfig);        
         LOGGER.finest("totalSamples: " + totalSamples);
@@ -63,10 +59,6 @@ public class CCStampDriver extends AbstractStampDriver {
         fireIDriverStateListenerDriverConfiguring();
 
         stampConfig = new StampCommand(AbstractStampDriver.CONFIG_OUT_STRING);
-
-        stampConfig.addCommandData(
-                StampConfigTranslator.CALIBRATE_STR,
-                new Integer(Defaults.defaultIfEmpty(calibrateConfig, calibrateInfo)));
 
         stampConfig.addCommandData(
                 StampConfigTranslator.START_POS_STR,

@@ -4,7 +4,7 @@
  * Created on 10 de Julho de 2003, 11:14
  */
 
-package pt.utl.ist.elab.client.condensadorcilindrico;
+package pt.utl.ist.elab.client.condensadorcilindrico.displays;
 
 /**
  * 
@@ -16,7 +16,7 @@ public class CCCapacityXYGraphDisplay extends com.linkare.rec.impl.baseUI.graph.
 	/** Creates a new instance of CCRawXYGraphDisplay */
 	public CCCapacityXYGraphDisplay() {
 		super();
-		setChannelDisplayX(2);
+		setChannelDisplayX(0);
 		setChannelDisplayY(1);
 	}
 

@@ -15,15 +15,10 @@
 		offlineCapable="false" iconLocationBundleKey="ReCBaseCC$rec.bui.icon.sensor"
 		displayStringBundleKey="condensadorcilindrico$rec.exp.display.cc.title.1"
 		classLocationBundleKey="condensadorcilindrico$rec.exp.display.cc.loc.1"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
-	<display toolTipBundleKey="condensadorcilindrico$rec.exp.display.cc.tip.2"
+		visible="true" selected="true" order="1" enabled="false" connected="false" />
+	<display toolTipBundleKey="condensadorcilindrico$rec.exp.display.cc.tip.4"
 		offlineCapable="false" iconLocationBundleKey="ReCBaseCC$rec.bui.icon.sensor"
-		displayStringBundleKey="condensadorcilindrico$rec.exp.display.cc.title.2"
-		classLocationBundleKey="condensadorcilindrico$rec.exp.display.cc.loc.2"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
-	<display toolTipBundleKey="condensadorcilindrico$rec.exp.display.cc.tip.3"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseCC$rec.bui.icon.sensor"
-		displayStringBundleKey="condensadorcilindrico$rec.exp.display.cc.title.3"
-		classLocationBundleKey="condensadorcilindrico$rec.exp.display.cc.loc.3"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
+		displayStringBundleKey="condensadorcilindrico$rec.exp.display.cc.title.4"
+		classLocationBundleKey="condensadorcilindrico$rec.exp.display.cc.loc.4"
+		visible="true" selected="true" order="2" enabled="false" connected="false" />
 </apparatus>

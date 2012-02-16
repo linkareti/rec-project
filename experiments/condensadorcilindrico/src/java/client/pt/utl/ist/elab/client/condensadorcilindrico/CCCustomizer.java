@@ -353,13 +353,19 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
     }
 
     private boolean ensureNumberOfPointsSmallerThanPosDiff() {
-        final int initialPos = Integer.parseInt(tfInitPos.getText());
-        final int finalPos = Integer.parseInt(tfFinalPos.getText());
+        final float initialPos = (670f/228f)*Float.parseFloat(tfInitPos.getText());
+        final float finalPos = (670f/228f)*Float.parseFloat(tfFinalPos.getText());
         final int numPoints = Integer.parseInt(tfNumPoints.getText());
-        final boolean valid = numPoints < (Math.abs(finalPos - initialPos) - 1);
+        
+        int maxNumPoints=(int)(Math.abs(Math.floor(finalPos - initialPos)) - 1);
+        
+        final boolean valid = numPoints < maxNumPoints;
+        
+        
+        
         if (!valid) {
             String errorMsg = ReCResourceBundle.findString("condensadorcilindrico$rec.exp.cc.customizer.validation.numberOfPointsSmallerThanPosDiff");
-            errorMsg = MessageFormat.format(errorMsg, numPoints, initialPos, finalPos);
+            errorMsg = MessageFormat.format(errorMsg, maxNumPoints);
             jLStatus.setText(errorMsg);
             jLStatus.setForeground(Color.RED);
             btnOK.setEnabled(false);
@@ -376,9 +382,9 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
             return;
         }
         try {
-            final int freq = Integer.parseInt(strNewValue);
-            if (freq <= sldAssociatedWithTf.getMaximum() && freq >= sldAssociatedWithTf.getMinimum()) {
-                sldAssociatedWithTf.setValue(freq);
+            final int value = Integer.parseInt(strNewValue);
+            if (value <= sldAssociatedWithTf.getMaximum() && value >= sldAssociatedWithTf.getMinimum()) {
+                sldAssociatedWithTf.setValue(value);
             } else {
                 tfThatChangedValue.setText(String.valueOf(sldAssociatedWithTf.getValue()));
             }
