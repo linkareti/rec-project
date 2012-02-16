@@ -498,8 +498,8 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
             sldNumPoints.setValue(freq);
             tfNumPoints.setText(String.valueOf(freq));
 
-            final int calibrate = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("Calibrate"));
-            jChkCalibrate.setSelected(calibrate != 0);
+            //final int calibrate = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("Calibrate"));
+            //jChkCalibrate.setSelected(calibrate != 0);
 
         }
     }
