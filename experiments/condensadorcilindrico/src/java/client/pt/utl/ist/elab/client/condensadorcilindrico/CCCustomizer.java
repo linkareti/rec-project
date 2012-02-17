@@ -14,7 +14,6 @@ import java.util.Hashtable;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
-import javax.validation.constraints.Max;
 
 /**
  * 
