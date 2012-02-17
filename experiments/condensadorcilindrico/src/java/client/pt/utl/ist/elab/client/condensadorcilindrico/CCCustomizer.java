@@ -347,7 +347,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         final float finalPos = (670f/228f)*Float.parseFloat(tfFinalPos.getText());
         final int numPoints = Integer.parseInt(tfNumPoints.getText());
         
-        int maxNumPoints=(int)(Math.abs(finalPos - initialPos) - 1);
+        int maxNumPoints=(int)(Math.abs(finalPos - initialPos));
         
         final boolean valid = numPoints <= maxNumPoints;
         
@@ -355,7 +355,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         
         if (!valid) {
             String errorMsg = ReCResourceBundle.findString("condensadorcilindrico$rec.exp.cc.customizer.validation.numberOfPointsSmallerThanPosDiff");
-            int minNumPoints= sldNumPoints.getMinimum();
+            int minNumPoints= MINIMUM_NUMBER_OF_POINTS;
             int maxNumPointsInterval = Math.max(maxNumPoints, minNumPoints);
             errorMsg = MessageFormat.format(errorMsg, minNumPoints, maxNumPointsInterval);
             jLStatus.setText(errorMsg);
