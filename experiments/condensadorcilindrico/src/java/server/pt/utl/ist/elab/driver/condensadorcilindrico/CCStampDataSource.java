@@ -25,8 +25,8 @@ public class CCStampDataSource extends AbstractStampDataSource {
     private int counter = 0;
     private int total_samples = 0;
     private static final Logger LOGGER = Logger.getLogger(CCStampDataSource.class.getName());
-    private static final String DISTANCE_CHANNEL_NAME = "Distance"; //TODO This should be read from a resource sth like -> ReCResourceBundle.findString("condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.0.name");
-    private static final String CAPACITY_CHANNEL_NAME = "Capacity"; //ReCResourceBundle.findString("condensadorcilindrico$rec.exp.cc.hardwareinfo.channel.1.name");
+    private static final int DISTANCE_CHANNEL_INDEX = 0; 
+    private static final int CAPACITY_CHANNEL_INDEX = 1;
 
     public CCStampDataSource() {
     }
@@ -55,8 +55,8 @@ public class CCStampDataSource extends AbstractStampDataSource {
             final float valorCapacity = capacity.floatValue();
 
             
-            final ChannelAcquisitionConfig distanceChannel = getAcquisitionHeader().getChannelsConfig(DISTANCE_CHANNEL_NAME);
-            final ChannelAcquisitionConfig capacityChannel = getAcquisitionHeader().getChannelsConfig(CAPACITY_CHANNEL_NAME);
+            final ChannelAcquisitionConfig distanceChannel = getAcquisitionHeader().getChannelsConfig(DISTANCE_CHANNEL_INDEX);
+            final ChannelAcquisitionConfig capacityChannel = getAcquisitionHeader().getChannelsConfig(CAPACITY_CHANNEL_INDEX);
             
             values[0] = new PhysicsValue(PhysicsValFactory.fromFloat(valorDistancia),
                 distanceChannel.getSelectedScale().getDefaultErrorValue(),
