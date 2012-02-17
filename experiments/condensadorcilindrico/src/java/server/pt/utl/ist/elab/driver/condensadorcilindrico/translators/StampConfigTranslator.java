@@ -47,8 +47,8 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 		startPos = SCALE_FACTOR_POSITIONS_TO_HARDWARE * startPos;
 		endPos = SCALE_FACTOR_POSITIONS_TO_HARDWARE * endPos;
 
-		int startPosInt = (int) Math.floor(startPos);
-		int endPosInt = (int) Math.floor(endPos);
+		int startPosInt = (int) (startPos);
+		int endPosInt = (int) (endPos);
 
 		final String commandStr = command.getCommandIdentifier() + " " + startPosInt + " " + endPosInt + " "
 				+ numPoints;

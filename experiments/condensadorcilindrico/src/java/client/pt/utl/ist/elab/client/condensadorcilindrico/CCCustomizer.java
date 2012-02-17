@@ -14,6 +14,7 @@ import java.util.Hashtable;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
+import javax.validation.constraints.Max;
 
 /**
  * 
@@ -349,13 +350,15 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         
         int maxNumPoints=(int)(Math.abs(finalPos - initialPos) - 1);
         
-        final boolean valid = numPoints < maxNumPoints;
+        final boolean valid = numPoints <= maxNumPoints;
         
         
         
         if (!valid) {
             String errorMsg = ReCResourceBundle.findString("condensadorcilindrico$rec.exp.cc.customizer.validation.numberOfPointsSmallerThanPosDiff");
-            errorMsg = MessageFormat.format(errorMsg, maxNumPoints);
+            int minNumPoints= sldNumPoints.getMinimum();
+            int maxNumPointsInterval = Math.max(maxNumPoints, minNumPoints);
+            errorMsg = MessageFormat.format(errorMsg, minNumPoints, maxNumPointsInterval);
             jLStatus.setText(errorMsg);
             jLStatus.setForeground(Color.RED);
             btnOK.setEnabled(false);
