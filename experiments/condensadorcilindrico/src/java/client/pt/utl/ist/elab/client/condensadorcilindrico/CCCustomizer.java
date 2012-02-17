@@ -352,7 +352,6 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         final boolean valid = numPoints <= maxNumPoints;
         
         
-        
         if (!valid) {
             String errorMsg = ReCResourceBundle.findString("condensadorcilindrico$rec.exp.cc.customizer.validation.numberOfPointsSmallerThanPosDiff");
             int minNumPoints= MINIMUM_NUMBER_OF_POINTS;
