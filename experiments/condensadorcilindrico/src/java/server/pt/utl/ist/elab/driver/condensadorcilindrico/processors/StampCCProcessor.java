@@ -74,6 +74,7 @@ public class StampCCProcessor extends AbstractStampProcessor {
 					command.addCommandData(DISTANCE, distance);
 					LOGGER.finest("got us Distance as: " + distance);
 					messageProcessed = true;
+					command.setData(true);
 				} catch (final NumberFormatException e) {
 					LOGGER.warning("Couldn't parse the numbers");
 					messageProcessed = false;
