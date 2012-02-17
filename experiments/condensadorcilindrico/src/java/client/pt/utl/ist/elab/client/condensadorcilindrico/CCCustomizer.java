@@ -347,7 +347,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         final float finalPos = (670f/228f)*Float.parseFloat(tfFinalPos.getText());
         final int numPoints = Integer.parseInt(tfNumPoints.getText());
         
-        int maxNumPoints=(int)(Math.abs(Math.floor(finalPos - initialPos)) - 1);
+        int maxNumPoints=(int)(Math.abs(finalPos - initialPos) - 1);
         
         final boolean valid = numPoints < maxNumPoints;
         
