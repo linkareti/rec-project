@@ -1,33 +1,63 @@
 #!/bin/bash
 #
-# chkconfig: 35 91 9
-# description: Starts and stops the multicast_@lab.name@ daemon \
+# multicast_@lab.name@      This shell script takes care of starting and stopping multicast_@lab.name@ daemon
 #
+# chkconfig: 35 91 9
+#
+### BEGIN INIT INFO
+# Provides: multicast_@lab.name@
+# Required-Start: $network $syslog $glassfish
+# Required-Stop: $network $syslog
+# Default-Start:
+# Default-Stop:
+# Description: Starts and stops the multicast_@lab.name@ daemon
+# Short-Description: start and stop multicast_@lab.name@
+### END INIT INFO
 
 BASE_USER=elab
+BASE_USER_HOMEDIR=~elab
+BASE_DIR="$BASE_USER_HOMEDIR/rec-deployment/multicast_@lab.name@"
+CURDIR=`pwd`
+CURUSER=`id -nu`
 
 RETVAL=0
 
 start() {
+		cd $BASE_DIR
         echo "Starting multicast_@lab.name@ $BASE_USER Service"
-#         su -l $BASE_USER -c "nohup ./StartMultiCastController.sh &"
-        `sh StartMultiCastController.sh &>/dev/null`
+        if [ "x$CURUSER" != "x$BASE_USER" ]; then
+             su -l $BASE_USER -c "sh $BASE_DIR/StartMultiCastController.sh &>/dev/null"
+        else
+            `sh $BASE_DIR/StartMultiCastController.sh &>/dev/null`
+        fi
+		#`sudo -u elab sh StartMultiCastController.sh &>/dev/null`
         RETVAL=$?
         echo
-        [ $RETVAL -eq 0 ] && touch multicast_@lab.name@.lock || \
-           RETVAL=1
+        if [ $RETVAL -eq 0 ]; then
+                if [ "x$CURUSER" != "x$BASE_USER" ]; then
+                        su -l $BASE_USER -c "touch $BASE_DIR/multicast_@lab.name@.lock"
+                else
+                        touch $BASE_DIR/multicast_@lab.name@.lock
+                fi
+        else
+                RETVAL=1
+        fi
         return $RETVAL
 }
 stop() {
-        if [ -f multicast_@lab.name@.pid ]
+		cd $BASE_DIR
+        if [ -f $BASE_DIR/multicast_@lab.name@.pid ]
         then
-            PID=`cat multicast_@lab.name@.pid`
+            PID=`cat $BASE_DIR/multicast_@lab.name@.pid`
             echo "Stopping multicast_@lab.name@ $BASE_USER Service"
-#             su -l $BASE_USER -c kill $PID
-            `kill $PID`
+            if [ "x$CURUSER" != "x$BASE_USER" ]; then
+                su -l $BASE_USER -c "kill $PID"
+            else
+                `kill $PID`
+            fi
             RETVAL=$?
             echo
-            [ $RETVAL -eq 0 ] && rm -rf multicast_@lab.name@.lock && rm -rf multicast_@lab.name@.pid || \
+            [ $RETVAL -eq 0 ] && rm -rf $BASE_DIR/multicast_@lab.name@.lock && rm -rf $BASE_DIR/multicast_@lab.name@.pid || \
                RETVAL=1
             return $RETVAL
         else
@@ -41,9 +71,10 @@ restart() {
 }
         
 status() {
-        if [ -f multicast_@lab.name@.pid ]
+		cd $BASE_DIR
+        if [ -f $BASE_DIR/multicast_@lab.name@.pid ]
         then
-            PID=`cat multicast_@lab.name@.pid`
+            PID=`cat $BASE_DIR/multicast_@lab.name@.pid`
             if ps ax | grep -v grep | grep $PID > /dev/null
             then
                 echo "The service multicast_@lab.name@ is running."
