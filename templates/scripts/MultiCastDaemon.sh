@@ -26,11 +26,10 @@ start() {
 		cd $BASE_DIR
         echo "Starting multicast_@lab.name@ $BASE_USER Service"
         if [ "x$CURUSER" != "x$BASE_USER" ]; then
-             su -l $BASE_USER -c "sh $BASE_DIR/StartMultiCastController.sh &>/dev/null"
+             `sudo -u elab sh StartMultiCastController.sh &>/dev/null`
         else
             `sh $BASE_DIR/StartMultiCastController.sh &>/dev/null`
         fi
-		#`sudo -u elab sh StartMultiCastController.sh &>/dev/null`
         RETVAL=$?
         echo
         if [ $RETVAL -eq 0 ]; then
