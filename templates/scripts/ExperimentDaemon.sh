@@ -16,6 +16,7 @@ RETVAL=0
 
 start() {
         echo "Starting @experiment.name@ $BASE_USER Service"
+        cd $DEPLOY_DIR
         if [ "x$CURUSER" != "x$BASE_USER" ]; then
              su -l $BASE_USER -c "nohup $DEPLOY_DIR/Start@experiment.name@Driver.sh 2>&1 >/dev/null"
         else
@@ -23,8 +24,15 @@ start() {
         fi
         RETVAL=$?
         echo
-        [ $RETVAL -eq 0 ] && touch $DEPLOY_DIR/@experiment.name@.lock || \
-           RETVAL=1
+        if [ $RETVAL -eq 0 ]; then
+                if [ "x$CURUSER" != "x$BASE_USER" ]; then
+                        su -l $BASE_USER -c "touch $DEPLOY_DIR/@experiment.name@.lock"
+                else
+                        touch $DEPLOY_DIR/@experiment.name@.lock
+                fi
+        else
+                RETVAL=1
+        fi
         return $RETVAL
 }
 stop() {
@@ -33,7 +41,7 @@ stop() {
             PID=`cat $DEPLOY_DIR/@experiment.name@.pid`
             echo "Stopping @experiment.name@ $BASE_USER Service"
             if [ "x$CURUSER" != "x$BASE_USER" ]; then
-                su -l $BASE_USER -c kill $PID
+                su -l $BASE_USER -c "kill $PID"
             else
                 `kill $PID`
             fi
