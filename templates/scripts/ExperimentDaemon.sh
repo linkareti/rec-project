@@ -36,6 +36,7 @@ start() {
         return $RETVAL
 }
 stop() {
+		cd $DEPLOY_DIR
         if [ -f $DEPLOY_DIR/@experiment.name@.pid ]
         then
             PID=`cat $DEPLOY_DIR/@experiment.name@.pid`
@@ -60,6 +61,7 @@ restart() {
         start
 }
 status() {
+		cd $DEPLOY_DIR
         if [ -f $DEPLOY_DIR/@experiment.name@.pid ]
         then
             PID=`cat $DEPLOY_DIR/@experiment.name@.pid`
