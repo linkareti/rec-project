@@ -2,6 +2,7 @@
 	customizerClassLocationBundleKey="condensadorcilindrico$rec.exp.customizer.cc"
 	toolTipBundleKey="condensadorcilindrico$rec.exp.tip.cc"
 	iconLocationBundleKey="condensadorcilindrico$rec.exp.icon.cc"
+	descriptionStringBundleKey="condensadorcilindrico$rec.exp.description.cc"
 	displayStringBundleKey="condensadorcilindrico$rec.exp.title.cc"
 	desktopLocationBundleKey="condensadorcilindrico$rec.exp.background.cc"
 	videoLocation="condensadorcilindrico$rec.exp.url.cc.video" order="1">

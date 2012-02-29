@@ -1,6 +1,7 @@
 <Apparatus location="ELAB_GAMMA_V1.0"
 	customizerClassLocationBundleKey="gamma$rec.exp.customizer.gamma"
 	toolTipBundleKey="gamma$rec.exp.tip.gamma" iconLocationBundleKey="gamma$rec.exp.icon.gamma"
+	descriptionStringBundleKey="gamma$rec.exp.description.gamma"
 	displayStringBundleKey="gamma$rec.exp.title.gamma"
 	desktopLocationBundleKey="gamma$rec.exp.background.gamma" order="1">
 	<LocalizationBundle name="gamma"

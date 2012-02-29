@@ -1,6 +1,7 @@
 <apparatus toolTipBundleKey="condensadorcilindrico$rec.exp.tip.cc"
 	location="ELAB_CC_STAMP_V02" iconLocationBundleKey="condensadorcilindrico$rec.exp.icon.cc"
 	headerDisplayClassLocationBundleKey=""
+	descriptionStringBundleKey="condensadorcilindrico$rec.exp.description.cc"
 	displayStringBundleKey="condensadorcilindrico$rec.exp.title.cc"
 	displayFactoryClassLocationBundleKey=""
 	desktopLocationBundleKey="condensadorcilindrico$rec.exp.background.cc"
