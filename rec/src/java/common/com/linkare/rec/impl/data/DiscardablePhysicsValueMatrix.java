@@ -83,15 +83,10 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	/** Utility field used by event firing mechanism. */
 	private EventListenerList listenerList = null;
 
-	/**
-	 * The actual value of percentFreeThreshold as obtained from
-	 * {@link #FREE_THRESHOLD_VALUE}
-	 */
-	private double percentFreeThreshold = 0;
+	
 
 	/** Creates a new instance of PhysicsValueMatrix */
 	public DiscardablePhysicsValueMatrix() {
-		percentFreeThreshold = DiscardablePhysicsValueMatrix.FREE_THRESHOLD_VALUE;
 		setTotalSamples(totalSamples);
 	}
 
@@ -198,10 +193,10 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	 * memory
 	 * 
 	 * @return true if the free memory is lower or equals to
-	 *         {@link #percentFreeThreshold} maxMemory
+	 *         {@link #FREE_THRESHOLD_VALUE}/100. * maxMemory
 	 */
 	private boolean shouldSerialize() {
-		return (Runtime.getRuntime().freeMemory() <= percentFreeThreshold * Runtime.getRuntime().maxMemory());
+		return (double)Runtime.getRuntime().freeMemory() <= (FREE_THRESHOLD_VALUE/100.) * (double)Runtime.getRuntime().maxMemory();
 	}
 
 	/**
