@@ -73,7 +73,6 @@ public class CCStampDataSource extends AbstractStampDataSource {
             counter++;
             if (counter == total_samples) {
                 try {
-                    Thread.currentThread();
                     Thread.sleep(1000);
                     setDataSourceEnded();
                 } catch (final InterruptedException ignored) {

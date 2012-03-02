@@ -24,8 +24,7 @@ public class SamplesReadException extends java.io.IOException {
 	 * @param errorSampleNumber 
 	 */
 	public SamplesReadException(final java.io.IOException e, final int errorSampleNumber) {
-		super(e.getMessage());
-		setStackTrace(e.getStackTrace());
+		super(e.getMessage(),e);
 		this.errorSampleNumber = errorSampleNumber;
 	}
 

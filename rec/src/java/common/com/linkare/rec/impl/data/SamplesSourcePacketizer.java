@@ -71,7 +71,7 @@ public class SamplesSourcePacketizer implements SamplesPacketSource {
 				data = samplesSource.getSamples(packetLocations[0], packetLocations[1]);
 			} catch (final SamplesReadException e) {
 				throw new SamplesPacketReadException("Error reading sample index " + e.getErrorSampleNumber()
-						+ " for this packet", packetStartIndex + i);
+						+ " for this packet", e, packetStartIndex + i);
 			}
 
 			retVal[i] = new SamplesPacket(packetStartIndex + i, getTotalPackets(), data);

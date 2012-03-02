@@ -24,8 +24,7 @@ public class IndexedObjectReadException extends java.io.IOException {
 	 * @param errorObjectKey 
 	 */
 	public IndexedObjectReadException(final java.io.IOException e, final Object errorObjectKey) {
-		super(e.getMessage());
-		setStackTrace(e.getStackTrace());
+		super(e.getMessage(),e);
 		this.errorObjectKey = errorObjectKey;
 	}
 

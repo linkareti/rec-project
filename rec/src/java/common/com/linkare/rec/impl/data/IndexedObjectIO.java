@@ -39,22 +39,31 @@ public class IndexedObjectIO implements Serializable {
 	private HashMap<Object, long[]> objectsLocations = null;
 	private long lastPos = 0;
 
-	/** Creates a new instance of IndexedObjectIO 
-	 * @param f 
-	 * @throws IOException */
+	/**
+	 * Creates a new instance of IndexedObjectIO
+	 * 
+	 * @param f
+	 * @throws IOException
+	 */
 	public IndexedObjectIO(final File f) throws IOException {
 		setFile(f);
 	}
 
-	/** Creates a new instance of IndexedObjectIO 
-	 * @param path 
-	 * @throws IOException */
+	/**
+	 * Creates a new instance of IndexedObjectIO
+	 * 
+	 * @param path
+	 * @throws IOException
+	 */
 	public IndexedObjectIO(final String path) throws IOException {
 		setFile(new File(path));
 	}
 
-	/** Creates a new instance of IndexedObjectIO 
-	 * @throws IOException */
+	/**
+	 * Creates a new instance of IndexedObjectIO
+	 * 
+	 * @throws IOException
+	 */
 	public IndexedObjectIO() throws IOException {
 		setFile(null);
 	}
@@ -63,7 +72,7 @@ public class IndexedObjectIO implements Serializable {
 	 * Getter for property file.
 	 * 
 	 * @return Value of property file.
-	 * @throws IOException 
+	 * @throws IOException
 	 * 
 	 */
 	public File getFile() throws IOException {
@@ -74,10 +83,11 @@ public class IndexedObjectIO implements Serializable {
 
 	/**
 	 * Setter for property file.
-	 * @param f 
+	 * 
+	 * @param f
 	 * 
 	 * @param file New value of property file.133.5
-	 * @throws IOException 
+	 * @throws IOException
 	 * 
 	 */
 	public void setFile(File f) throws IOException {
@@ -213,7 +223,6 @@ public class IndexedObjectIO implements Serializable {
 				bais.close();
 				// *nc
 			} catch (final IOException e) {
-				e.printStackTrace();
 				throw new IndexedObjectReadException(e, key);
 			} catch (final ClassNotFoundException e) {
 				throw new IndexedObjectReadException(new IOException(e.getMessage()), key);
@@ -240,46 +249,38 @@ public class IndexedObjectIO implements Serializable {
 
 	public void writeObject(final Object key, final Object value) throws IOException {
 		synchronized (raf) {
-			try {
-				// THE FILE LENGTH WASN'T WORKING IN WINDOWS...
-				// long startPos=getFile().length();
 
-				long startPos = 0;
+			// THE FILE LENGTH WASN'T WORKING IN WINDOWS...
+			// long startPos=getFile().length();
 
-				if (lastPos > 0) {
-					startPos = lastPos + 1;
-				}
+			long startPos = 0;
 
-				// nc
-				final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-				seqWriteStream = new ObjectOutputStream(baos);
-				// *nc
-
-				seqWriteStream.writeObject(value);
-				seqWriteStream.flush();
-
-				// nc
-				raf.seek(startPos);
-				raf.write(baos.toByteArray());
-				// *nc
-
-				baos.close();
-				seqWriteStream.close();
-
-				// long endPos=getFile().length()-1;
-				final long endPos = startPos + baos.toByteArray().length - 1;
-
-				lastPos = endPos;
-
-				objectsLocations.put(key, new long[] { startPos, endPos });
-			} catch (final java.io.IOException ioe) {
-				/*
-				 * System.out.println("********************");
-				 * System.out.println("Exception at indexed Object IO");
-				 * System.out.println("********************");
-				 */
-				ioe.printStackTrace();
+			if (lastPos > 0) {
+				startPos = lastPos + 1;
 			}
+
+			// nc
+			final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			seqWriteStream = new ObjectOutputStream(baos);
+			// *nc
+
+			seqWriteStream.writeObject(value);
+			seqWriteStream.flush();
+
+			// nc
+			raf.seek(startPos);
+			raf.write(baos.toByteArray());
+			// *nc
+
+			baos.close();
+			seqWriteStream.close();
+
+			// long endPos=getFile().length()-1;
+			final long endPos = startPos + baos.toByteArray().length - 1;
+
+			lastPos = endPos;
+
+			objectsLocations.put(key, new long[] { startPos, endPos });
 
 		}
 	}

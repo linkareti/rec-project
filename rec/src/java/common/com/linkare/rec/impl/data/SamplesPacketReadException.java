@@ -20,15 +20,31 @@ public class SamplesPacketReadException extends java.io.IOException {
 	/**
 	 * Creates a new instance of <code>PacketReadException</code> without detail
 	 * message.
-	 * @param e 
-	 * @param errorPacketNumber 
+	 * 
+	 * @param cause
+	 * @param errorPacketNumber
 	 */
-	public SamplesPacketReadException(final java.io.IOException e, final int errorPacketNumber) {
-		super(e.getMessage());
-		setStackTrace(e.getStackTrace());
+	public SamplesPacketReadException(final Throwable cause, final int errorPacketNumber) {
+		super(cause.getMessage(), cause);
 		this.errorPacketNumber = errorPacketNumber;
 	}
 
+	/**
+	 * Creates the <code>SamplesPacketReadException</code>.
+	 * @param message
+	 * @param cause
+	 * @param errorPacketNumber
+	 */
+	public SamplesPacketReadException(final String message, final Throwable cause, final int errorPacketNumber) {
+		super(message, cause);
+		this.errorPacketNumber = errorPacketNumber;
+	}
+
+	/**
+	 * Creates the <code>SamplesPacketReadException</code>.
+	 * @param message
+	 * @param errorPacketNumber
+	 */
 	public SamplesPacketReadException(final String message, final int errorPacketNumber) {
 		super(message);
 		this.errorPacketNumber = errorPacketNumber;
