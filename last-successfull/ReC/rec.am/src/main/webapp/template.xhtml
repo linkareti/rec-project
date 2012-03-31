@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="title">Default Title</ui:insert></title>
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/resources/css/style.css" />
+</h:head>
+
+<h:body>
+	<p:growl id="msg" showDetail="true" globalOnly="true" />
+	<p:tooltip global="true" />
+
+	<div id="header"><ui:include src="header.xhtml" /></div>
+
+	<h:form>
+		<div id="nav">
+		<ul id="main_nav">
+			<li><h:commandLink value="#{bundle['menu.index']}"
+				action="/index" /></li>
+		</ul>
+		<ul id="ext_nav">
+			<li><a href="http://linkare.com/" target="_blank">Linkare</a></li>
+			<li><a href="http://www.ist.utl.pt/" target="_blank">IST</a></li>
+		</ul>
+		</div>
+	</h:form>
+
+	<div id="content">
+
+	<div id="left_col"><ui:insert name="menu"></ui:insert></div>
+
+	<div id="center">
+	<p><ui:insert name="body">Default Body</ui:insert></p>
+	</div>
+
+	<div id="right_col"><ui:include src="context.xhtml" /></div>
+
+	<div id="footer"><ui:include src="footer.xhtml" /></div>
+
+	</div>
+
+</h:body>
+</html>
