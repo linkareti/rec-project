@@ -1,0 +1,41 @@
+<apparatus toolTipBundleKey="g$rec.exp.tip.g" location="ELAB_G_STAMP_V02"
+	iconLocationBundleKey="g$rec.exp.icon.g"
+	headerDisplayClassLocationBundleKey="" displayStringBundleKey="g$rec.exp.title.g"
+	descriptionStringBundleKey="g$rec.exp.description.g"
+	displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="g$rec.exp.background.g"
+	dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="g$rec.exp.customizer.g"
+	visible="true" selected="true" order="0" enabled="false" connected="false">
+	<localizationBundle name="g"
+		location="recresource:///pt/utl/ist/elab/client/g/resources/messages" />
+	<defaultAcquisitionConfig toolTipBundleKey="g$rec.exp.dftcfg.g.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+		displayStringBundleKey="g$rec.exp.dftcfg.g.title.1"
+		classLocationBundleKey="g$rec.exp.dftcfg.g.loc.1" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
+	<mediaConfig videoLocation="g$rec.exp.url.g.video" canSave="true"
+		offlinePlay="true" />
+	<display toolTipBundleKey="g$rec.exp.display.g.tip.sensor"
+		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="g$rec.exp.display.g.title.sensor"
+		classLocationBundleKey="g$rec.exp.display.g.loc.sensor" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="g$rec.exp.display.g.tip.1"
+		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="g$rec.exp.display.g.title.1"
+		classLocationBundleKey="g$rec.exp.display.g.loc.1" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="g$rec.exp.display.g.tip.2"
+		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="g$rec.exp.display.g.title.2"
+		classLocationBundleKey="g$rec.exp.display.g.loc.2" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
+	<webResource toolTipLocationBundleKey="" internalBrowser="false"
+		iconLocationBundleKey="" visible="true" selected="true" order="0"
+		enabled="false" connected="false" />
+	<webResource toolTipLocationBundleKey="" internalBrowser="false"
+		iconLocationBundleKey="" visible="true" selected="true" order="0"
+		enabled="false" connected="false" />
+	<webResource toolTipLocationBundleKey="" internalBrowser="false"
+		iconLocationBundleKey="" visible="true" selected="true" order="0"
+		enabled="false" connected="false" />
+</apparatus>
