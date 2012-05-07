@@ -8,7 +8,7 @@ import java.util.List;
  * @author Artur Correia - Linkare TI
  * 
  */
-public class ColumnPhysicsValueDTO extends AbstractBaseDTO {
+public class RowPhysicsValueDTO extends AbstractBaseDTO {
 
     /**
      * 
@@ -16,7 +16,7 @@ public class ColumnPhysicsValueDTO extends AbstractBaseDTO {
     private static final long serialVersionUID = 1L;
     private List<PhysicsValueDTO> columnValues;
 
-    public ColumnPhysicsValueDTO() {
+    public RowPhysicsValueDTO() {
     }
 
     public List<PhysicsValueDTO> getColumnValues() {
@@ -30,7 +30,7 @@ public class ColumnPhysicsValueDTO extends AbstractBaseDTO {
     @Override
     public String toString() {
 	StringBuilder builder = new StringBuilder();
-	builder.append("ColumnPhysicsValueDTO [columnValues=");
+	builder.append("RowPhysicsValueDTO [columnValues=");
 	builder.append(columnValues);
 	builder.append("]");
 	return builder.toString();

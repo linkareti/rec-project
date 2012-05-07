@@ -19,7 +19,7 @@ public class SamplesPacketDTO extends AbstractBaseDTO {
 
     private int totalPackets;
 
-    private List<ColumnPhysicsValueDTO> data;
+    private List<RowPhysicsValueDTO> data;
 
     private DateTimeDTO timeStart = null;
 
@@ -42,11 +42,11 @@ public class SamplesPacketDTO extends AbstractBaseDTO {
 	this.totalPackets = totalPackets;
     }
 
-    public List<ColumnPhysicsValueDTO> getData() {
+    public List<RowPhysicsValueDTO> getData() {
 	return data;
     }
 
-    public void setData(List<ColumnPhysicsValueDTO> data) {
+    public void setData(List<RowPhysicsValueDTO> data) {
 	this.data = data;
     }
 
