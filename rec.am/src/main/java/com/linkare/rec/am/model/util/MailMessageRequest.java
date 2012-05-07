@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @author jpereira
@@ -27,6 +28,7 @@ public class MailMessageRequest implements Serializable {
     private String subject;
     private List<Attachment> attachments;
     private List<MimePart> mimeParts;
+    private Locale clientLocale;
 
     /**
      * 
@@ -37,6 +39,7 @@ public class MailMessageRequest implements Serializable {
     public MailMessageRequest(MailMessageRequest request, String to, String[] recipients) {
 	this(request.getFrom(), to, recipients, request.getContent(), request.getMailFormat(), request.getSubject(), request.getAttachments(),
 	     request.getMimeParts());
+	setClientLocale(request.getClientLocale());
     }
 
     public MailMessageRequest(String from, String to, String[] recipients, String content, MailFormatEnum mailFormat, String subject,
@@ -172,6 +175,14 @@ public class MailMessageRequest implements Serializable {
 	this.to = to;
     }
 
+    public Locale getClientLocale() {
+        return clientLocale;
+    }
+
+    public void setClientLocale(Locale clientLocale) {
+        this.clientLocale = clientLocale;
+    }
+
     public long calculateSizeBytes() {
 
 	ObjectOutputStream oos = null;
@@ -203,6 +214,6 @@ public class MailMessageRequest implements Serializable {
     @Override
     public String toString() {
 	return "MailMessageRequest [from=" + from + ", to=" + to + ", recipients=" + Arrays.toString(recipients) + ", content=" + content + ", mailFormat="
-		+ mailFormat + ", subject=" + subject + ", attachments=" + attachments + ", mimeParts=" + mimeParts + "]";
+		+ mailFormat + ", subject=" + subject + ", attachments=" + attachments + ", mimeParts=" + mimeParts + ", clientLocale=" + clientLocale + "]";
     }
 }

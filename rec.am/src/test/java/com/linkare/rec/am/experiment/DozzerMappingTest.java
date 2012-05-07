@@ -33,7 +33,7 @@ import com.linkare.rec.am.model.ShortVal;
 import com.linkare.rec.am.model.util.converter.DozerBeanMapperSingletonWrapper;
 import com.linkare.rec.am.repository.ByteArrayValueDTO;
 import com.linkare.rec.am.repository.ChannelAcquisitionConfigDTO;
-import com.linkare.rec.am.repository.ColumnPhysicsValueDTO;
+import com.linkare.rec.am.repository.RowPhysicsValueDTO;
 import com.linkare.rec.am.repository.DataProducerDTO;
 import com.linkare.rec.am.repository.DateTimeDTO;
 import com.linkare.rec.am.repository.FrequencyDTO;
@@ -304,14 +304,14 @@ public class DozzerMappingTest {
 	return Arrays.asList(new SamplesPacketDTO[] { getSamplesPacketDTO() });
     }
 
-    private ColumnPhysicsValueDTO getColumnPhysicsValueDTO() {
-	final ColumnPhysicsValueDTO dto = new ColumnPhysicsValueDTO();
+    private RowPhysicsValueDTO getColumnPhysicsValueDTO() {
+	final RowPhysicsValueDTO dto = new RowPhysicsValueDTO();
 	dto.setColumnValues(getPhysicsValueDTOs());
 	return dto;
     }
 
-    private List<ColumnPhysicsValueDTO> getColumnPhysicsValueDTOs() {
-	return Arrays.asList(new ColumnPhysicsValueDTO[] { getColumnPhysicsValueDTO() });
+    private List<RowPhysicsValueDTO> getColumnPhysicsValueDTOs() {
+	return Arrays.asList(new RowPhysicsValueDTO[] { getColumnPhysicsValueDTO() });
     }
 
     private PhysicsValueDTO getPhysicsValueDTO() {

@@ -13,7 +13,7 @@ import com.linkare.rec.am.model.util.NoValidRecipientsFoundForMessage;
 /**
  * 
  * @author Bruno Catarino - Linkare TI
- *
+ * 
  */
 @WebService
 @Remote
@@ -24,7 +24,8 @@ public interface MailServiceRemote {
      * 
      * @param request
      *            The information about the mail to process. The <code>to</code> or the <code>recipients</code> properties should be correctly filled with at
-     *            least one valid e-mail.
+     *            least one valid e-mail. The <code>subject</code> must be equal to the experience identifier (OID). This is mandatory, since this id will be
+     *            used to get the experience data from the database.
      * @throws BusinessException
      *             If an unexpected error occurs.
      * @throws NoValidRecipientsFoundForMessage

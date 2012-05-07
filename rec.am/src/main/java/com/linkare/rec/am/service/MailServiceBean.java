@@ -1,13 +1,23 @@
 package com.linkare.rec.am.service;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.rmi.RemoteException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import javax.activation.DataHandler;
 import javax.annotation.Resource;
@@ -40,15 +50,21 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 
+import com.linkare.rec.am.RepositoryFacade;
 import com.linkare.rec.am.model.ErrorMessage;
 import com.linkare.rec.am.model.FailedMailMessage;
 import com.linkare.rec.am.model.MessageCategory;
 import com.linkare.rec.am.model.util.Attachment;
 import com.linkare.rec.am.model.util.BusinessException;
+import com.linkare.rec.am.model.util.ExperimentDataXSVConverter;
 import com.linkare.rec.am.model.util.MailFormatEnum;
 import com.linkare.rec.am.model.util.MailMessageRequest;
 import com.linkare.rec.am.model.util.MimePart;
 import com.linkare.rec.am.model.util.NoValidRecipientsFoundForMessage;
+import com.linkare.rec.am.repository.ByteArrayValueDTO;
+import com.linkare.rec.am.repository.DataProducerDTO;
+import com.linkare.rec.am.repository.ParameterConfigDTO;
+import com.linkare.rec.am.repository.SamplesPacketDTO;
 
 /**
  * 
@@ -61,6 +77,7 @@ import com.linkare.rec.am.model.util.NoValidRecipientsFoundForMessage;
 public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
 
     private static final String ERROR_MESSAGES_FILE = "errorMessages";
+    private static final String MAIL_MESSAGES_FILE = "mailMessages";
 
     @Resource(mappedName = "mail/mailSession")
     private javax.mail.Session mailSession;
@@ -89,36 +106,238 @@ public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
     @EJB(beanInterface = ErrorMessageServiceLocal.class)
     private ErrorMessageServiceLocal errorMessageService;
 
+    @EJB(beanInterface = RepositoryFacade.class)
+    private RepositoryFacade repository;
+
+    /**
+     * Defines the {@link Locale} of the client that is currently using this instance of the EJB. This must be used only inside a transaction, to avoid sending
+     * the Locale as parameter in every method call made within a transaction, but when used, it should be nulled at the end of the method.
+     */
+    private Locale currentClientLocale;
+
     //TODO inject the resource bundle
     //    @Inject
     //    private transient ResourceBundle errorMessages;
     //
     //    @Produces
-    public ResourceBundle getResouceBundle() {
+    public ResourceBundle getErrorMessagesResouceBundle() {
 	return ResourceBundle.getBundle(ERROR_MESSAGES_FILE);
+    }
+
+    public ResourceBundle getMailMessagesResouceBundle() {
+	return ResourceBundle.getBundle(MAIL_MESSAGES_FILE, currentClientLocale != null ? currentClientLocale : Locale.getDefault());
     }
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     @Override
     public void sendMessages(MailMessageRequest mailMessageRequest, int failCount) {
 
-	Message message = new MimeMessage(mailSession);
-	prepareMessageToSend(message, mailMessageRequest);
+	currentClientLocale = mailMessageRequest.getClientLocale();
 
 	try {
 
+	    DataProducerDTO experienceData = repository.getExperimentResultByOID(mailMessageRequest.getSubject());
+	    if (experienceData == null) {
+		if (failCount < maxFailCount) {
+		    System.out.println("The experiment data is still not available. A retry will me made in " + (failCount * sendMailRetryMillis / 1000)
+			    + " seconds.");
+		    sendToTimer(mailMessageRequest, failCount);
+		} else {
+		    reportMessageError(getErrorMessagesResouceBundle().getString("mail.experience.unavailable"), mailMessageRequest.getSubject(), ++failCount);
+		}
+	    }
+
+	    String bodyMessage = generateBodyMessage(experienceData);
+	    mailMessageRequest.setContent(bodyMessage);
+
+	    List<Attachment> attachments = generateExperimentMailAttachments(experienceData);
+	    mailMessageRequest.setAttachments(attachments);
+
+	    Message message = new MimeMessage(mailSession);
+	    prepareMessageToSend(message, mailMessageRequest);
 	    Transport.send(message);
 
 	    //TODO change to injected log.
 	    System.out.println("Message sent to mailserver");
 
 	} catch (MessagingException e) {
-	    reportMessageError(getResouceBundle().getString("mail.server.failed"), mailMessageRequest.getSubject(),
+	    reportMessageError(getErrorMessagesResouceBundle().getString("mail.server.failed"), mailMessageRequest.getSubject(),
 			       Arrays.toString(mailMessageRequest.getRecipients()), ++failCount);
 	    if (failCount < maxFailCount) {
 		sendToTimer(mailMessageRequest, failCount);
 	    }
+	} catch (RemoteException e) {
+	    reportMessageError(getErrorMessagesResouceBundle().getString("mail.invalid.oid"), mailMessageRequest.getSubject());
+	    if (failCount < maxFailCount) {
+		sendToTimer(mailMessageRequest, failCount);
+	    }
+	} catch (IOException e) {
+	    reportMessageError(getErrorMessagesResouceBundle().getString("mail.create.attachment"), mailMessageRequest.getSubject());
+	    if (failCount < maxFailCount) {
+		sendToTimer(mailMessageRequest, failCount);
+	    }
+	} finally {
+	    // Clear the Locale before putting the EJB back in the pool.
+	    currentClientLocale = null;
 	}
+    }
+
+    private String generateBodyMessage(DataProducerDTO experienceData) {
+
+	String bodyMessage = getMailMessagesResouceBundle().getString("mail.body.text");
+
+	int experimentNameSeparatorIndex = experienceData.getOid().indexOf("/");
+	String experimentName = experienceData.getOid().substring(0, experimentNameSeparatorIndex);
+
+	//FIXME the user should be the user logged in the e-lab and not the user in the database (how is it really saved in the database?).
+	return MessageFormat.format(bodyMessage, experimentName, experienceData.getUser());
+    }
+
+    /**
+     * Generates all the attachments for the e-mail with the experiment results.
+     * 
+     * @param experienceData
+     *            Must contain the experiment data serialized and also the information about the channels.
+     * @return List of attachments with the tsv file and all the
+     * @throws IOException
+     */
+    private List<Attachment> generateExperimentMailAttachments(DataProducerDTO experienceData) throws IOException {
+
+	System.out.println(experienceData);
+
+	List<Attachment> listOfAttachments = new ArrayList<Attachment>();
+	List<SamplesPacketDTO> samples = getSamplePacketList(experienceData);
+	if (samples == null) {
+	    return listOfAttachments;
+	}
+	experienceData.setSamplesPacketMatrix(samples);
+
+	Attachment configurationFile = generateExperimentConfigurationAttachment(experienceData.getAcqHeader().getHardwareParameters());
+	listOfAttachments.add(configurationFile);
+
+	String binaryFilename = getMailMessagesResouceBundle().getString("attachment.binary.filename.prefix");
+	ExperimentDataXSVConverter converter = new ExperimentDataXSVConverter('\t', binaryFilename);
+	byte[] tsvFileByteArray = converter.toByteArray(experienceData);
+	Map<String, ByteArrayValueDTO> otherAttachmentsMap = converter.getReferencedBinaries();
+
+	String tsvFilename = getMailMessagesResouceBundle().getString("attachment.data.filename");
+	Attachment tsvFile = new Attachment();
+	tsvFile.setMimeType("text/tab-separated-values");
+	tsvFile.setFileName(tsvFilename + ".csv");
+	tsvFile.setFileContent(tsvFileByteArray);
+
+	listOfAttachments.add(tsvFile);
+	if (otherAttachmentsMap != null) {
+	    listOfAttachments.addAll(generateExperimentMailAdditionalAttachments(otherAttachmentsMap));
+	}
+
+	Attachment zipFile = zipAttachments(experienceData.getOid().replace("/", "_") + ".zip", listOfAttachments);
+	
+	listOfAttachments = new ArrayList<Attachment>();
+	listOfAttachments.add(zipFile);
+
+	System.out.println(listOfAttachments);
+
+	return listOfAttachments;
+    }
+
+    private Attachment zipAttachments(String filename, List<Attachment> listOfAttachments) {
+
+	ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+	ZipOutputStream zipOutput = new ZipOutputStream(byteStream);
+
+	try {
+	    for (Attachment attachment : listOfAttachments) {
+		ZipEntry entry = new ZipEntry(attachment.getFileName());
+		zipOutput.putNextEntry(entry);
+		zipOutput.write(attachment.getFileContent());
+	    }
+	} catch (IOException e) {
+	    e.printStackTrace();
+	} finally {
+	    try {
+		zipOutput.close();
+	    } catch (IOException e) {
+		e.printStackTrace();
+	    }
+	}
+
+	Attachment attachment = new Attachment();
+	attachment.setFileContent(byteStream.toByteArray());
+	attachment.setMimeType("application/zip");
+	attachment.setFileName(filename);
+	return attachment;
+    }
+
+    private Attachment generateExperimentConfigurationAttachment(List<ParameterConfigDTO> parameterConfigList) {
+
+	final String CR_LF = System.getProperty("line.separator");
+
+	StringBuilder configuration = new StringBuilder();
+	for (ParameterConfigDTO parameter : parameterConfigList) {
+	    configuration.append(parameter.getParameterName()).append(": ").append(parameter.getParameterValue()).append(CR_LF);
+	}
+
+	String configurationFilename = getMailMessagesResouceBundle().getString("attachment.configuration.filename");
+	Attachment configurationFile = new Attachment();
+	configurationFile.setMimeType("text/plain");
+	configurationFile.setFileName(configurationFilename + ".txt");
+	configurationFile.setFileContent(configuration.toString().getBytes());
+
+	return configurationFile;
+    }
+
+    /**
+     * Generates all the attachments "referenced" in cells of the tsv file that represent byte[] data. Each file maps to a value in a tsv cell with the same
+     * value as the file name (without file extension).
+     * 
+     * @param otherAttachmentsMap
+     * @return
+     */
+    private List<? extends Attachment> generateExperimentMailAdditionalAttachments(Map<String, ByteArrayValueDTO> otherAttachmentsMap) {
+
+	List<Attachment> attachments = new ArrayList<Attachment>();
+
+	for (String key : otherAttachmentsMap.keySet()) {
+
+	    ByteArrayValueDTO byteArrayValue = otherAttachmentsMap.get(key);
+
+	    String mimeType = byteArrayValue.getMimeType();
+	    int mimeTypeSeparatorIndex = mimeType.indexOf("/");
+
+	    String fileExtension = mimeTypeSeparatorIndex != -1 ? mimeType.substring(mimeTypeSeparatorIndex) : "bin";
+	    Attachment attachment = new Attachment(key + "." + fileExtension, byteArrayValue.getData(), mimeType);
+
+	    attachments.add(attachment);
+	}
+
+	return attachments;
+    }
+
+    private static List<SamplesPacketDTO> getSamplePacketList(final DataProducerDTO experienceData) {
+	List<SamplesPacketDTO> samples = null;
+	try {
+	    samples = getListFromByteArray(experienceData.getSamplesPacketMatrixSerialized());
+	} catch (IOException e) {
+	    System.out.println("Unable to read the experience data object from the stream.");
+	    e.printStackTrace();
+	} catch (ClassNotFoundException e) {
+	    System.out.println("The class " + SamplesPacketDTO.class.getName() + " is unknown.");
+	    e.printStackTrace();
+	}
+	return samples;
+    }
+
+    @SuppressWarnings("unchecked")
+    private static List<SamplesPacketDTO> getListFromByteArray(final byte[] samples) throws IOException, ClassNotFoundException {
+	List<SamplesPacketDTO> result = Collections.emptyList();
+	if (samples != null) {
+	    final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(samples);
+	    final ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
+	    result = (List<SamplesPacketDTO>) objectInputStream.readObject();
+	    objectInputStream.close();
+	}
+	return result;
     }
 
     private void prepareMessageToSend(final Message message, final MailMessageRequest mailMessageRequest) {
@@ -145,11 +364,11 @@ public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
 	    }
 
 	} catch (AddressException e) {
-	    reportMessageError(getResouceBundle().getString("mail.parsing.valid.email"), mailMessageRequest.getSubject(), mailMessageRequest.getFrom(),
-			       mailMessageRequest.getTo(), Arrays.toString(mailMessageRequest.getRecipients()));
+	    reportMessageError(getErrorMessagesResouceBundle().getString("mail.parsing.valid.email"), mailMessageRequest.getSubject(),
+			       mailMessageRequest.getFrom(), mailMessageRequest.getTo(), Arrays.toString(mailMessageRequest.getRecipients()));
 	    throw new BusinessException(e);
 	} catch (MessagingException e) {
-	    reportMessageError(getResouceBundle().getString("mail.properties.set"), mailMessageRequest.toShortString());
+	    reportMessageError(getErrorMessagesResouceBundle().getString("mail.properties.set"), mailMessageRequest.toShortString());
 	    throw new BusinessException(e);
 	}
     }
@@ -267,7 +486,7 @@ public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
 	Set<String> mergedValidatedRecipients = mergeAndValidateAllRecipients(request);
 
 	if (mergedValidatedRecipients.size() <= 0) {
-	    String msgPattern = getResouceBundle().getString("mail.no.valid.recipients");
+	    String msgPattern = getErrorMessagesResouceBundle().getString("mail.no.valid.recipients");
 	    reportMessageError(msgPattern, request.getSubject());
 	    throw new NoValidRecipientsFoundForMessage(MessageFormat.format(msgPattern, request.getSubject()));
 	}
@@ -353,7 +572,7 @@ public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
 	    }
 	}
 	if (invalidMails.size() > 0) {
-	    reportMessageError(getResouceBundle().getString("mail.invalid.email"), invalidMails.toString(), request.getSubject());
+	    reportMessageError(getErrorMessagesResouceBundle().getString("mail.invalid.email"), invalidMails.toString(), request.getSubject());
 	}
 	return mergedRecipients;
     }

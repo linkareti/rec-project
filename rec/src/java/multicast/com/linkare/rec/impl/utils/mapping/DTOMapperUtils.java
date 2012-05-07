@@ -26,7 +26,7 @@ import com.linkare.rec.acquisition.NotAvailableException;
 import com.linkare.rec.am.RepositoryFacade;
 import com.linkare.rec.am.repository.ByteArrayValueDTO;
 import com.linkare.rec.am.repository.ChannelAcquisitionConfigDTO;
-import com.linkare.rec.am.repository.ColumnPhysicsValueDTO;
+import com.linkare.rec.am.repository.RowPhysicsValueDTO;
 import com.linkare.rec.am.repository.DataProducerDTO;
 import com.linkare.rec.am.repository.DataProducerStateEnum;
 import com.linkare.rec.am.repository.DateTimeDTO;
@@ -181,11 +181,11 @@ public final class DTOMapperUtils {
 	 * @param data
 	 * @return
 	 */
-	private static List<ColumnPhysicsValueDTO> getListOfColumnPhysicsValueDTO(final PhysicsValue[][] data) {
-		List<ColumnPhysicsValueDTO> result = Collections.emptyList();
+	private static List<RowPhysicsValueDTO> getListOfColumnPhysicsValueDTO(final PhysicsValue[][] data) {
+		List<RowPhysicsValueDTO> result = Collections.emptyList();
 
 		if (data != null && data.length > 0) {
-			result = new ArrayList<ColumnPhysicsValueDTO>(data.length);
+			result = new ArrayList<RowPhysicsValueDTO>(data.length);
 			for (final PhysicsValue[] physicsValues : data) {
 				result.add(getColumnPhysicsValueDTO(physicsValues));
 			}
@@ -198,11 +198,11 @@ public final class DTOMapperUtils {
 	 * @param physicsValues
 	 * @return
 	 */
-	private static ColumnPhysicsValueDTO getColumnPhysicsValueDTO(final PhysicsValue[] physicsValues) {
-		ColumnPhysicsValueDTO result = null;
+	private static RowPhysicsValueDTO getColumnPhysicsValueDTO(final PhysicsValue[] physicsValues) {
+		RowPhysicsValueDTO result = null;
 
 		if (physicsValues != null && physicsValues.length > 0) {
-			result = new ColumnPhysicsValueDTO();
+			result = new RowPhysicsValueDTO();
 			result.setColumnValues(getPhysicsValueDTO(physicsValues));
 		}
 
@@ -575,7 +575,7 @@ public final class DTOMapperUtils {
 		return result;
 	}
 
-	private static PhysicsValue[][] getPhysicsValues(final List<ColumnPhysicsValueDTO> dtos) {
+	private static PhysicsValue[][] getPhysicsValues(final List<RowPhysicsValueDTO> dtos) {
 		PhysicsValue[][] result = new PhysicsValue[0][0];
 		if (dtos != null && dtos.size() > 0 && dtos.get(0) != null && dtos.get(0).getColumnValues() != null) {
 

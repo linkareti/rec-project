@@ -31,6 +31,7 @@ public class MailServiceTest {
 	try {
 	    InitialContext ic = new InitialContext(props);
 	    remote = (MailServiceRemote) ic.lookup("java:global/rec.am/mailService!com.linkare.rec.am.service.MailServiceRemote");
+
 	} catch (NamingException e) {
 	    e.printStackTrace();
 	} catch (Throwable e) {
@@ -43,8 +44,9 @@ public class MailServiceTest {
 	MailMessageRequest request = new MailMessageRequest();
 	request.setFrom("noreply@linkare.com");
 	request.setTo("bcatarino@linkare.com");
-	request.setRecipients(new String[] { "bcatarino@linkare.com", "bcatarino@gmail.com", "jflorindo@linkare.com", "gpereira@linkare.com" });
-	request.setSubject("Assync Mail Test");
+//	request.setRecipients(new String[] { "bcatarino@linkare.com", "bcatarino@gmail.com", "jflorindo@linkare.com", "gpereira@linkare.com" });
+	request.setRecipients(new String[] { "bcatarino@linkare.com" });
+	request.setSubject("PENDULO_DUPLO_MOTORIZADO_V1.0/Fri_May_04_11_52_29_WEST_2012");
 	request.setContent("Peço desculpa a quem receba o spam, mas isto é um teste! :D Just delete it and move on!!");
 	try {
 	    remote.queueMessage(request);
@@ -60,47 +62,47 @@ public class MailServiceTest {
 	}
     }
 
-    @Test
-    public void testQueueInvalidMail() {
-	MailMessageRequest request = new MailMessageRequest();
-	request.setFrom("noreply@linkare.com");
-	request.setTo("");
-	request.setRecipients(new String[] { "bcatarino@linkare.com", "aaaa", "teste", "bcatarino@gmail.com" });
-	request.setSubject("Another assync mail");
-	request.setContent("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz gfdgfdgfd fdfdfds");
-	try {
-	    remote.queueMessage(request);
-	} catch (BusinessException e) {
-	    e.printStackTrace();
-	    Assert.fail();
-	} catch (NoValidRecipientsFoundForMessage e) {
-	    e.printStackTrace();
-	    Assert.fail();
-	} catch (RemoteException e) {
-	    e.printStackTrace();
-	    Assert.fail();
-	}
-    }
-
-    @Test
-    public void testQueueNoValidRecipients() {
-	MailMessageRequest request = new MailMessageRequest();
-	request.setFrom("noreply@linkare.com");
-	request.setTo("");
-	request.setRecipients(new String[] { "aaaa", "teste" });
-	request.setSubject("No Recipients");
-	request.setContent("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz gfdgfdgfd fdfdfds");
-	try {
-	    remote.queueMessage(request);
-	} catch (BusinessException e) {
-	    e.printStackTrace();
-	    Assert.fail();
-	} catch (NoValidRecipientsFoundForMessage e) {
-	    e.printStackTrace();
-	    Assert.fail();
-	} catch (RemoteException e) {
-	    e.printStackTrace();
-	    Assert.fail();
-	}
-    }
+//    @Test
+//    public void testQueueInvalidMail() {
+//	MailMessageRequest request = new MailMessageRequest();
+//	request.setFrom("noreply@linkare.com");
+//	request.setTo("");
+//	request.setRecipients(new String[] { "bcatarino@linkare.com", "aaaa", "teste", "bcatarino@gmail.com" });
+//	request.setSubject("PENDULO_DUPLO_MOTORIZADO_V1.0/Wed_May_02_14_48_37_WEST_2012");
+//	request.setContent("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz gfdgfdgfd fdfdfds");
+//	try {
+//	    remote.queueMessage(request);
+//	} catch (BusinessException e) {
+//	    e.printStackTrace();
+//	    Assert.fail();
+//	} catch (NoValidRecipientsFoundForMessage e) {
+//	    e.printStackTrace();
+//	    Assert.fail();
+//	} catch (RemoteException e) {
+//	    e.printStackTrace();
+//	    Assert.fail();
+//	}
+//    }
+//
+//    @Test
+//    public void testQueueNoValidRecipients() {
+//	MailMessageRequest request = new MailMessageRequest();
+//	request.setFrom("noreply@linkare.com");
+//	request.setTo("");
+//	request.setRecipients(new String[] { "aaaa", "teste" });
+//	request.setSubject("PENDULO_DUPLO_MOTORIZADO_V1.0/Wed_May_02_14_32_51_WEST_2012");
+//	request.setContent("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz gfdgfdgfd fdfdfds");
+//	try {
+//	    remote.queueMessage(request);
+//	} catch (BusinessException e) {
+//	    e.printStackTrace();
+//	    Assert.fail();
+//	} catch (NoValidRecipientsFoundForMessage e) {
+//	    e.printStackTrace();
+//	    Assert.fail();
+//	} catch (RemoteException e) {
+//	    e.printStackTrace();
+//	    Assert.fail();
+//	}
+//    }
 }
