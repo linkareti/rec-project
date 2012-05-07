@@ -5,7 +5,7 @@
  * Linkare TI PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 
-package com.linkare.rec.impl.newface.config;
+package com.linkare.rec.am.config;
 
 /**
  * The <code>ReCModel</code> interface specifies the methods the

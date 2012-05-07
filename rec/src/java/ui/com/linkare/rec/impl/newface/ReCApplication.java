@@ -67,6 +67,11 @@ import org.jdesktop.application.SingleFrameApplication;
 import org.jdesktop.application.View;
 
 import com.linkare.rec.acquisition.UserInfo;
+import com.linkare.rec.am.config.Apparatus;
+import com.linkare.rec.am.config.Display;
+import com.linkare.rec.am.config.Lab;
+import com.linkare.rec.am.config.LocalizationBundle;
+import com.linkare.rec.am.config.ReCFaceConfig;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.ApparatusClientBean;
 import com.linkare.rec.impl.client.LabClientBean;
@@ -99,11 +104,6 @@ import com.linkare.rec.impl.newface.component.media.events.MediaApplicationEvent
 import com.linkare.rec.impl.newface.component.media.events.MediaNotConnectedEvent;
 import com.linkare.rec.impl.newface.component.media.events.MediaStoppedEvent;
 import com.linkare.rec.impl.newface.component.media.events.MediaTimeChangedEvent;
-import com.linkare.rec.impl.newface.config.Apparatus;
-import com.linkare.rec.impl.newface.config.Display;
-import com.linkare.rec.impl.newface.config.Lab;
-import com.linkare.rec.impl.newface.config.LocalizationBundle;
-import com.linkare.rec.impl.newface.config.ReCFaceConfig;
 import com.linkare.rec.impl.newface.display.DefaultDisplayFactory;
 import com.linkare.rec.impl.newface.display.DisplayFactory;
 import com.linkare.rec.impl.newface.utils.OS;

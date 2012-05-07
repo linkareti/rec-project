@@ -1,27 +1,21 @@
-package com.linkare.rec.impl.newface.config;
+package com.linkare.rec.am.config;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlType
-public class Display extends DisplayNode {
+public class DefaultAcquisitionConfig extends DisplayNode {
 
-	private boolean offlineCapable = false;
 	private String displayStringBundleKey = "";
+
 	private String iconLocationBundleKey = "";
+
 	private String toolTipBundleKey = "";
+
 	private String classLocationBundleKey = "";
 
-	public Display() {
+	public DefaultAcquisitionConfig() {
 		super();
-	}
-
-	/**
-	 * @return the offlineCapable
-	 */
-	@XmlAttribute
-	public boolean isOfflineCapable() {
-		return offlineCapable;
 	}
 
 	/**
@@ -54,13 +48,6 @@ public class Display extends DisplayNode {
 	@XmlAttribute
 	public String getClassLocationBundleKey() {
 		return classLocationBundleKey;
-	}
-
-	/**
-	 * @param offlineCapable the offlineCapable to set
-	 */
-	public void setOfflineCapable(final boolean offlineCapable) {
-		this.offlineCapable = offlineCapable;
 	}
 
 	/**
@@ -99,10 +86,7 @@ public class Display extends DisplayNode {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		final Display other = (Display) obj;
-		if (offlineCapable != other.offlineCapable) {
-			return false;
-		}
+		final DefaultAcquisitionConfig other = (DefaultAcquisitionConfig) obj;
 		if ((displayStringBundleKey == null) ? (other.displayStringBundleKey != null) : !displayStringBundleKey
 				.equals(other.displayStringBundleKey)) {
 			return false;
@@ -124,12 +108,11 @@ public class Display extends DisplayNode {
 
 	@Override
 	public int hashCode() {
-		int hash = 3;
-		hash = 29 * hash + (offlineCapable ? 1 : 0);
-		hash = 29 * hash + (displayStringBundleKey != null ? displayStringBundleKey.hashCode() : 0);
-		hash = 29 * hash + (iconLocationBundleKey != null ? iconLocationBundleKey.hashCode() : 0);
-		hash = 29 * hash + (toolTipBundleKey != null ? toolTipBundleKey.hashCode() : 0);
-		hash = 29 * hash + (classLocationBundleKey != null ? classLocationBundleKey.hashCode() : 0);
+		int hash = 7;
+		hash = 23 * hash + (displayStringBundleKey != null ? displayStringBundleKey.hashCode() : 0);
+		hash = 23 * hash + (iconLocationBundleKey != null ? iconLocationBundleKey.hashCode() : 0);
+		hash = 23 * hash + (toolTipBundleKey != null ? toolTipBundleKey.hashCode() : 0);
+		hash = 23 * hash + (classLocationBundleKey != null ? classLocationBundleKey.hashCode() : 0);
 		return hash;
 	}
 

@@ -1,4 +1,4 @@
-package com.linkare.rec.impl.newface.config;
+package com.linkare.rec.am.config;
 
 import java.util.ArrayList;
 import java.util.List;

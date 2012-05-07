@@ -141,6 +141,7 @@
 
 	<property name="rec.client.classes.dir" value="${build.dir.compile}/classes/rec/client" />
 	<property name="client.build.dir" value="${build.dir.jars}/client" />
+	<property name="client.rec.am.resources" value="rec.am/src/main/resources-rec" />
 	<property name="client.rec.am.webapp" value="rec.am/src/main/webapp" />
 
 	<property name="rec.client.src.java.dir" value="${basedir}/rec/src/java/client" />

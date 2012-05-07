@@ -2,10 +2,10 @@ package com.linkare.rec.impl.newface.display;
 
 import java.util.List;
 
+import com.linkare.rec.am.config.Display;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
-import com.linkare.rec.impl.newface.config.Display;
 
 public interface DisplayFactory {
 

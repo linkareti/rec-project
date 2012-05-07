@@ -13,9 +13,9 @@ import javax.swing.Icon;
 
 import org.jdesktop.application.Action;
 
+import com.linkare.rec.am.config.Lab;
 import com.linkare.rec.impl.newface.ReCApplication;
 import com.linkare.rec.impl.newface.component.ProgressCicle.State;
-import com.linkare.rec.impl.newface.config.Lab;
 import com.linkare.rec.impl.newface.utils.LAFConnector;
 import com.linkare.rec.impl.newface.utils.LAFConnector.SpecialELabProperties;
 import java.util.prefs.Preferences;

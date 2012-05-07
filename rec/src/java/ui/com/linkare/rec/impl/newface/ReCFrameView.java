@@ -41,6 +41,7 @@ import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
 import org.jdesktop.application.TaskMonitor;
 
+import com.linkare.rec.am.config.Apparatus;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent;
 import com.linkare.rec.impl.client.apparatus.ApparatusListChangeEvent;
@@ -72,7 +73,6 @@ import com.linkare.rec.impl.newface.component.UndecoratedDialog;
 import com.linkare.rec.impl.newface.component.UnexpectedErrorPane;
 import com.linkare.rec.impl.newface.component.VideoBox;
 import com.linkare.rec.impl.newface.component.media.VideoViewerController;
-import com.linkare.rec.impl.newface.config.Apparatus;
 import com.linkare.rec.impl.newface.utils.LAFConnector;
 import com.linkare.rec.impl.newface.utils.LAFConnector.SpecialELabProperties;
 import com.linkare.rec.impl.newface.utils.PreferencesUtils;

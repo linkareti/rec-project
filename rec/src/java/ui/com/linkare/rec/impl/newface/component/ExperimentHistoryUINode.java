@@ -5,6 +5,7 @@ import javax.swing.Icon;
 import com.linkare.rec.impl.client.apparatus.Apparatus;
 import com.linkare.rec.impl.client.experiment.ExpHistory;
 import com.linkare.rec.impl.client.experiment.ExpHistoryDisplayFactory;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 
 /**
@@ -12,7 +13,7 @@ import com.linkare.rec.impl.wrappers.DataProducerWrapper;
  */
 public class ExperimentHistoryUINode extends ExpHistory {
 
-	private final com.linkare.rec.impl.newface.config.Apparatus apparatusConfig;
+	private final com.linkare.rec.am.config.Apparatus apparatusConfig;
 
 	/**
 	 * Creates the <code>ExpHistoryUINode</code>.
@@ -24,12 +25,12 @@ public class ExperimentHistoryUINode extends ExpHistory {
 	 */
 	public ExperimentHistoryUINode(final ExpHistoryDisplayFactory expHistoryDisplayFactory,
 			final DataProducerWrapper producerWrapper, final Apparatus apparatus,
-			final com.linkare.rec.impl.newface.config.Apparatus apparatusConfig) {
+			final com.linkare.rec.am.config.Apparatus apparatusConfig) {
 		super(expHistoryDisplayFactory, producerWrapper, apparatus);
 		this.apparatusConfig = apparatusConfig;
 	}
 
-	public com.linkare.rec.impl.newface.config.Apparatus getApparatusConfig() {
+	public com.linkare.rec.am.config.Apparatus getApparatusConfig() {
 		return apparatusConfig;
 	}
 
@@ -39,7 +40,7 @@ public class ExperimentHistoryUINode extends ExpHistory {
 	 * @return Value of property apparatusIcon.
 	 */
 	public Icon getApparatusIcon() {
-		return apparatusConfig.getIcon();
+		return ReCResourceBundle.findImageIconOrDefault(apparatusConfig.getIconLocationBundleKey(), null);
 	}
 
 }

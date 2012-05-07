@@ -15,7 +15,7 @@ import java.util.Set;
 
 import javax.swing.DefaultComboBoxModel;
 
-import com.linkare.rec.impl.newface.config.Apparatus;
+import com.linkare.rec.am.config.Apparatus;
 
 /**
  * 

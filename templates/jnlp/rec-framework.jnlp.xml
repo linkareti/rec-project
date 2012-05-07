@@ -30,7 +30,7 @@
 		<description kind="tooltip">@rec.description.tooltip.en@
 		</description>
 		<description kind="short">@rec.description.short.en@
-			</description>
+		</description>
 		<related-content href="@linkare.home.url.en@">
 			<title>@linkare.home.title.en@</title>
 			<description>@linkare.home.description.en@</description>
@@ -58,26 +58,25 @@
 		<jar href="lib/OSP3D_sig.jar" />
 		<jar href="lib/vecmath_sig.jar" />
 
+		<jar href="lib/commons-i18n-0.0.1-SNAPSHOT_sig.jar" />
+		<jar href="lib/commons-net-0.0.1-SNAPSHOT_sig.jar" />
+		<jar href="lib/rec.am-api-0.0.1-SNAPSHOT_sig.jar" />
+
 		<!-- Jar ReC Client -->
 
 		<!-- Jar ReC Common -->
 
 		<!-- Jar ReC jvlc -->
 
-		<!--
-			property name="ReC.PercentFreeMemoryThreshold2Serialization"
-			value="80" /
-		-->
+		<!-- property name="ReC.PercentFreeMemoryThreshold2Serialization" value="80" 
+			/ -->
 
 	</resources>
 
-	<!--
-		*******************************************************************
-		****************** Resources por SO / Arch ************************
-		*******************************************************************
-	-->
+	<!-- ******************************************************************* 
+		****************** Resources por SO / Arch ************************ ******************************************************************* -->
 
-	<!-- falta archs x86-64 (ou x86_64?), amd64 e amd-->
+	<!-- falta archs x86-64 (ou x86_64?), amd64 e amd -->
 	<resources arch="x86" os="Windows">
 		<nativelib href="lib/libsvlc_win32_x86_sig.jar" />
 		<extension href="windows-vlc-installer.jnlp" name="WindowsInstaller" />

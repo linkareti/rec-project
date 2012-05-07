@@ -13,8 +13,8 @@ import javax.swing.ListCellRenderer;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import com.linkare.rec.am.config.Lab;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
-import com.linkare.rec.impl.newface.config.Lab;
 
 /**
  * 
