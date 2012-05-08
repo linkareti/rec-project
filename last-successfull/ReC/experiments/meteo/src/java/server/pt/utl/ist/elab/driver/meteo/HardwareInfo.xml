@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="ELAB_METEO_V01" familiarName="Meteorologia" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
+    <description>
+        <![CDATA[ 
+        Esta experiência serve para - não esquecer de alterar esta descrição
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+    <customizer href="pt.utl.ist.elab.client.meteo.MeteoCustomizer"/>
+        
+    <parameter name="Sensor" type="ContinuousValue" value="1">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">255</value>
+	    <value order="2">1</value>
+        </selection-list>
+    </parameter>
+    
+    <parameter name="Resolution" type="SelectionListValue" value="Daily">
+        <selection-list>
+            <value order="1">Daily</value>
+            <value order="2">Hourly</value>
+            <value order="3">Monthly</value>
+            <value order="4">Yearly</value>
+        </selection-list>
+    </parameter>    
+
+    <parameter name="StartDay" type="ContinuousValue" value="1">
+        <selection-list>
+            <value order="1">1</value>
+            <value order="2">31</value>
+	    <value order="2">1</value>
+        </selection-list>
+    </parameter>
+
+    <parameter name="StartHour" type="ContinuousValue" value="1">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">23</value>
+	    <value order="2">1</value>
+        </selection-list>
+    </parameter>
+
+    <parameter name="StartMonth" type="ContinuousValue" value="1">
+        <selection-list>
+            <value order="1">1</value>
+            <value order="2">12</value>
+	    <value order="2">1</value>
+        </selection-list>
+    </parameter>
+
+    <parameter name="StartYear" type="ContinuousValue" value="2004">
+        <selection-list>
+            <value order="1">2004</value>
+            <value order="2">5000</value>
+	    <value order="2">1</value>
+        </selection-list>
+    </parameter>
+
+    <parameter name="EndDay" type="ContinuousValue" value="1">
+        <selection-list>
+            <value order="1">1</value>
+            <value order="2">31</value>
+	    <value order="2">1</value>
+        </selection-list>
+    </parameter>
+
+    <parameter name="EndHour" type="ContinuousValue" value="1">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">23</value>
+	    <value order="2">1</value>
+        </selection-list>
+    </parameter>
+
+    <parameter name="EndMonth" type="ContinuousValue" value="1">
+        <selection-list>
+            <value order="1">1</value>
+            <value order="2">12</value>
+	    <value order="2">1</value>
+        </selection-list>
+    </parameter>
+
+    <parameter name="EndYear" type="ContinuousValue" value="2004">
+        <selection-list>
+            <value order="1">2004</value>
+            <value order="2">5000</value>
+	    <value order="2">1</value>
+        </selection-list>
+    </parameter>
+    
+    <frequency-scale label="Sampling Interval">
+        <min-frequency><Frequency type="SamplingIntervalType" multiplier="none">1</Frequency></min-frequency>
+        <max-frequency><Frequency type="SamplingIntervalType" multiplier="none">9999</Frequency></max-frequency>
+        <step-frequency><Frequency type="SamplingIntervalType" multiplier="none">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="SamplingIntervalType" multiplier="none">10</Frequency>
+    
+    <sampling-scale>
+        <min-samples>1</min-samples>
+        <max-samples>87600000</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+
+    <ChannelInfo name="Tempo" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Tempo" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="long">0</PhysicsVal></min>
+            <max><PhysicsVal type="long">9223372036854770000</PhysicsVal></max>            				 
+            <step><PhysicsVal type="long">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="long">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>        
+    <ChannelInfo name="Temperatura" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Temperatura [ºC]" physicsunitname="ºC" physicsunitsymbol="ºC" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-99999</PhysicsVal></min>
+            <max><PhysicsVal type="float">99999</PhysicsVal></max>
+            <step><PhysicsVal type="float">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Precipitação" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Precipitação [mm/h]" physicsunitname="mm/h" physicsunitsymbol="mm/h" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">999999</PhysicsVal></max>
+            <step><PhysicsVal type="float">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Dir_vento" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Direcção do vento" physicsunitname="º" physicsunitsymbol="º" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">360</PhysicsVal></max>
+            <step><PhysicsVal type="float">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Vel_vento" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Velocidade do vento" physicsunitname="km/h" physicsunitsymbol="km/h" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">5000</PhysicsVal></max>
+            <step><PhysicsVal type="float">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Humidade" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Humidade" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">500000</PhysicsVal></max>
+            <step><PhysicsVal type="float">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>    
+    <ChannelInfo name="Condensação" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Condensação" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">500000</PhysicsVal></max>
+            <step><PhysicsVal type="float">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Luminosidade" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Luminosidade" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">5000</PhysicsVal></max>
+            <step><PhysicsVal type="float">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Pressão" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Pressão atmosférica" physicsunitname="milibar" physicsunitsymbol="milibar" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">500000</PhysicsVal></max>
+            <step><PhysicsVal type="float">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>    
+
+</HardwareInfo>
+
