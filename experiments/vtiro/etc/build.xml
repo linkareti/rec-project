@@ -54,5 +54,12 @@
 
 	</target>
 
+	<!--
+	        Only override this task on an as-needed basis. This task occurs before
+	        the driver zip dist file is created, but right after the replace files step of build.
+	        -->
+	<target name="pre-zip.dist.harwareserver" description="Pre zip dist hardwareserver creation for tiro">
+
+	</target>
 
 </project>
