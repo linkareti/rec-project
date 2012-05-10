@@ -2,19 +2,22 @@ package com.linkare.rec.am.model.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import com.linkare.rec.am.repository.ByteArrayValueDTO;
 import com.linkare.rec.am.repository.ChannelAcquisitionConfigDTO;
 import com.linkare.rec.am.repository.DataProducerDTO;
 import com.linkare.rec.am.repository.MultiplierEnum;
-import com.linkare.rec.am.repository.ParameterConfigDTO;
 import com.linkare.rec.am.repository.PhysicsValDTO;
 import com.linkare.rec.am.repository.PhysicsValueDTO;
 import com.linkare.rec.am.repository.PhysicsValueTypeEnum;
 import com.linkare.rec.am.repository.RowPhysicsValueDTO;
 import com.linkare.rec.am.repository.SamplesPacketDTO;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * Class used to convert information from a listing to a file with columns separated by any character (thus the X in XSV). This can be used to generate CSVs,
@@ -29,6 +32,7 @@ public class ExperimentDataXSVConverter {
 
     private final char SEPARATOR;
     private final String BINARY_FILENAME_PREFIX;
+    private final DecimalFormat formatter;
 
     /**
      * Binary files that are part of the XSV data and that cannot be represented as a table. Instead, they are represented only as a string, and the client of
@@ -38,9 +42,19 @@ public class ExperimentDataXSVConverter {
      */
     private Map<String, ByteArrayValueDTO> referencedBinaries;
 
-    public ExperimentDataXSVConverter(char separator, String namePrefix) {
+    /**
+     * 
+     * @param separator
+     *            The column separator of the xsv file.
+     * @param namePrefix
+     *            The prefix to use, if binary filenames exist. The filename should have the form namePrefix1, namePrefix2 and so on.
+     * @param locale
+     *            The locale of the machine where the user executed this experience. It is used to format numbers according to the Locale.
+     */
+    public ExperimentDataXSVConverter(char separator, String namePrefix, Locale locale) {
 	this.SEPARATOR = separator;
 	this.BINARY_FILENAME_PREFIX = namePrefix;
+	this.formatter = new DecimalFormat("#.#E0#", DecimalFormatSymbols.getInstance(locale));
     }
 
     public Map<String, ByteArrayValueDTO> getReferencedBinaries() {
@@ -88,7 +102,7 @@ public class ExperimentDataXSVConverter {
 		MultiplierEnum columnMultiplier = channelsConfig.get(i).getScale().getMultiplier();
 		PhysicsValueDTO translatedValue = getConvertedValue(physicsValue, columnMultiplier);
 		if (translatedValue != null) {
-		    sampleRow.append(translatedValue.getValue().getValue()).append(SEPARATOR).append(translatedValue.getError().getValue());
+		    sampleRow.append(getLocalizedValue(translatedValue.getValue())).append(SEPARATOR).append(getLocalizedValue(translatedValue.getError()));
 		}
 	    }
 	    sampleRow.append(SEPARATOR);
@@ -97,17 +111,36 @@ public class ExperimentDataXSVConverter {
 	return sampleRow.toString();
     }
 
+    private Object getLocalizedValue(PhysicsValDTO value) {
+	if (value.getValueType() == PhysicsValueTypeEnum.BOOLEAN_VAL || value.getValueType() == PhysicsValueTypeEnum.BYTEARRAY_VAL) {
+	    return value.getValue();
+	}
+	String formattedValue = formatter.format(value.getValue());
+	return formattedValue.replace("E0", "");
+    }
+
     /**
-     * Creates the header of a XSV file. This means creating each column name, separated by {@link #SEPARATOR} and with a line break at the end.
+     * Creates the header of a XSV file. This means creating each column name with the unit symbol, separated by {@link #SEPARATOR} and with a line break at the
+     * end.
      * 
      * @param experienceData
      * @return
      */
     private String getXsvHeader(DataProducerDTO experienceData) {
+
 	StringBuilder sampleRow = new StringBuilder();
-	for (ParameterConfigDTO parameter : experienceData.getAcqHeader().getHardwareParameters()) {
-	    sampleRow.append(parameter.getParameterName()).append(SEPARATOR).append("e-").append(parameter.getParameterName()).append(SEPARATOR);
+
+	final String UNDETERMINED = "UndeterminedField";
+	for (int fieldCount = 0; fieldCount < experienceData.getAcqHeader().getChannelsConfig().size(); fieldCount++) {
+
+	    ChannelAcquisitionConfigDTO config = experienceData.getAcqHeader().getChannelsConfig().get(fieldCount);
+	    String channelName = ReCResourceBundle.findStringOrDefault(config.getChannelName(), UNDETERMINED + fieldCount);
+	    String symbol = ReCResourceBundle.findStringOrDefault(config.getScale().getPhysicsUnitSymbol(), config.getScale().getPhysicsUnitSymbol());
+
+	    sampleRow.append(channelName).append(" [").append(symbol).append("]").append(SEPARATOR);
+	    sampleRow.append("\u03b5 ").append(channelName).append(" [").append(symbol).append("]").append(SEPARATOR);
 	}
+
 	sampleRow.replace(sampleRow.length() - 1, sampleRow.length(), CR_LF);
 	return sampleRow.toString();
     }
@@ -141,7 +174,6 @@ public class ExperimentDataXSVConverter {
 	PhysicsValDTO newValue = convertNumericValue(physicsValue.getValue(), physicsValue.getAppliedMultiplier(), columnMultiplier);
 	converted.setValue(newValue);
 
-	//XXX is the error in a different unit?
 	PhysicsValDTO newError = convertNumericValue(physicsValue.getError(), physicsValue.getAppliedMultiplier(), columnMultiplier);
 	converted.setError(newError);
 

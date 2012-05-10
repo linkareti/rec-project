@@ -3,11 +3,16 @@ package com.linkare.rec.am.service;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.rmi.RemoteException;
+import java.text.DateFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
@@ -16,6 +21,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.ResourceBundle.Control;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -49,8 +55,15 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.xml.bind.JAXBException;
 
 import com.linkare.rec.am.RepositoryFacade;
+import com.linkare.rec.am.config.Apparatus;
+import com.linkare.rec.am.config.Lab;
+import com.linkare.rec.am.config.LocalizationBundle;
+import com.linkare.rec.am.config.ReCFaceConfig;
 import com.linkare.rec.am.model.ErrorMessage;
 import com.linkare.rec.am.model.FailedMailMessage;
 import com.linkare.rec.am.model.MessageCategory;
@@ -63,8 +76,9 @@ import com.linkare.rec.am.model.util.MimePart;
 import com.linkare.rec.am.model.util.NoValidRecipientsFoundForMessage;
 import com.linkare.rec.am.repository.ByteArrayValueDTO;
 import com.linkare.rec.am.repository.DataProducerDTO;
-import com.linkare.rec.am.repository.ParameterConfigDTO;
+import com.linkare.rec.am.repository.DateTimeDTO;
 import com.linkare.rec.am.repository.SamplesPacketDTO;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
@@ -91,14 +105,14 @@ public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
     //    @Inject
     //    private Logger log;
 
-    @Resource(mappedName = "recipientsPerBlockMaxSize")
-    private int recipientsPerBlockMaxSize;
+    //    @Resource(name = "recipientsPerBlockMaxSize")
+    //    private int recipientsPerBlockMaxSize;
 
-    @Resource(mappedName = "maxFailCount")
-    private int maxFailCount;
+    //    @Resource(name = "maxFailCount")
+    //    private Integer maxFailCount;
 
-    @Resource(mappedName = "sendMailRetryMillis")
-    private int sendMailRetryMillis;
+    //    @Resource(mappedName = "sendMailRetryMillis")
+    //    private int sendMailRetryMillis;
 
     @Resource
     private TimerService timerService;
@@ -115,6 +129,29 @@ public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
      */
     private Locale currentClientLocale;
 
+    static {
+	try {
+	    InputStream stream = MailServiceBean.class.getClassLoader().getResourceAsStream("ReCFaceConfig.xml");
+	    ReCFaceConfig recFaceConfig = ReCFaceConfig.unmarshall(stream);
+	    for (final LocalizationBundle bundle : recFaceConfig.getLocalizationBundle()) {
+		ReCResourceBundle.loadResourceBundle(bundle.getName(), bundle.getLocation());
+	    }
+	    for (final Lab lab : recFaceConfig.getLab()) {
+		for (final LocalizationBundle bundle : lab.getLocalizationBundle()) {
+		    ReCResourceBundle.loadResourceBundle(bundle.getName(), bundle.getLocation());
+		}
+		for (final Apparatus apparatus : lab.getApparatus()) {
+		    for (final LocalizationBundle bundle : apparatus.getLocalizationBundle()) {
+			ReCResourceBundle.loadResourceBundle(bundle.getName(), bundle.getLocation());
+		    }
+		}
+	    }
+	} catch (JAXBException e) {
+	    e.printStackTrace();
+	    throw new ExceptionInInitializerError("It was not possible to load ReCFaceConfig.xml");
+	}
+    }
+
     //TODO inject the resource bundle
     //    @Inject
     //    private transient ResourceBundle errorMessages;
@@ -125,33 +162,42 @@ public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
     }
 
     public ResourceBundle getMailMessagesResouceBundle() {
-	return ResourceBundle.getBundle(MAIL_MESSAGES_FILE, currentClientLocale != null ? currentClientLocale : Locale.getDefault());
+	return ResourceBundle.getBundle(MAIL_MESSAGES_FILE, currentClientLocale != null ? currentClientLocale : Locale.getDefault(),
+					Control.getNoFallbackControl(Control.FORMAT_PROPERTIES));
     }
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     @Override
-    public void sendMessages(MailMessageRequest mailMessageRequest, int failCount) {
+    public void sendMessages(MailMessageRequest mailMessageRequest, int numberOfTries) {
 
 	currentClientLocale = mailMessageRequest.getClientLocale();
 
+	final String experimentConfiguration = mailMessageRequest.getContent();
+
 	try {
+
+	    numberOfTries++;
 
 	    DataProducerDTO experienceData = repository.getExperimentResultByOID(mailMessageRequest.getSubject());
 	    if (experienceData == null) {
-		if (failCount < maxFailCount) {
-		    System.out.println("The experiment data is still not available. A retry will me made in " + (failCount * sendMailRetryMillis / 1000)
-			    + " seconds.");
-		    sendToTimer(mailMessageRequest, failCount);
+		if (numberOfTries < mailMessageRequest.getMaxFailCount()) {
+		    System.out.println("The experiment data is still not available. A retry will me made in "
+			    + (numberOfTries * mailMessageRequest.getSendMailRetryMillis() / 1000) + " seconds.");
+		    sendToTimer(mailMessageRequest, numberOfTries);
 		} else {
-		    reportMessageError(getErrorMessagesResouceBundle().getString("mail.experience.unavailable"), mailMessageRequest.getSubject(), ++failCount);
+		    reportMessageError(getErrorMessagesResouceBundle().getString("mail.experience.unavailable"), mailMessageRequest.getSubject(), numberOfTries);
 		}
+		return;
 	    }
 
 	    String bodyMessage = generateBodyMessage(experienceData);
 	    mailMessageRequest.setContent(bodyMessage);
 
-	    List<Attachment> attachments = generateExperimentMailAttachments(experienceData);
+	    List<Attachment> attachments = generateExperimentMailAttachments(experienceData, experimentConfiguration);
 	    mailMessageRequest.setAttachments(attachments);
+
+	    String subject = generateSubject(experienceData);
+	    mailMessageRequest.setSubject(subject);
 
 	    Message message = new MimeMessage(mailSession);
 	    prepareMessageToSend(message, mailMessageRequest);
@@ -162,19 +208,19 @@ public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
 
 	} catch (MessagingException e) {
 	    reportMessageError(getErrorMessagesResouceBundle().getString("mail.server.failed"), mailMessageRequest.getSubject(),
-			       Arrays.toString(mailMessageRequest.getRecipients()), ++failCount);
-	    if (failCount < maxFailCount) {
-		sendToTimer(mailMessageRequest, failCount);
+			       Arrays.toString(mailMessageRequest.getRecipients()), numberOfTries);
+	    if (numberOfTries < mailMessageRequest.getMaxFailCount()) {
+		sendToTimer(mailMessageRequest, numberOfTries);
 	    }
 	} catch (RemoteException e) {
 	    reportMessageError(getErrorMessagesResouceBundle().getString("mail.invalid.oid"), mailMessageRequest.getSubject());
-	    if (failCount < maxFailCount) {
-		sendToTimer(mailMessageRequest, failCount);
+	    if (numberOfTries < mailMessageRequest.getMaxFailCount()) {
+		sendToTimer(mailMessageRequest, numberOfTries);
 	    }
 	} catch (IOException e) {
 	    reportMessageError(getErrorMessagesResouceBundle().getString("mail.create.attachment"), mailMessageRequest.getSubject());
-	    if (failCount < maxFailCount) {
-		sendToTimer(mailMessageRequest, failCount);
+	    if (numberOfTries < mailMessageRequest.getMaxFailCount()) {
+		sendToTimer(mailMessageRequest, numberOfTries);
 	    }
 	} finally {
 	    // Clear the Locale before putting the EJB back in the pool.
@@ -182,15 +228,32 @@ public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
 	}
     }
 
+    private String generateSubject(DataProducerDTO experienceData) {
+
+	Date experimentDate = getExperienceStart(experienceData.getAcqHeader().getTimeStart());
+
+	String dayOfYear = DateFormat.getDateInstance(DateFormat.SHORT, currentClientLocale).format(experimentDate);
+	String hour = DateFormat.getTimeInstance(DateFormat.MEDIUM, currentClientLocale).format(experimentDate);
+	String timezone = new SimpleDateFormat("z").format(experimentDate);
+
+	String subjectPattern = getMailMessagesResouceBundle().getString("mail.subject.text");
+	return MessageFormat.format(subjectPattern, experienceData.getAcqHeader().getFamiliarName(), dayOfYear, hour, timezone);
+    }
+
     private String generateBodyMessage(DataProducerDTO experienceData) {
 
 	String bodyMessage = getMailMessagesResouceBundle().getString("mail.body.text");
+	String experimentName = experienceData.getAcqHeader().getFamiliarName();
+	char decimalSeparator = DecimalFormatSymbols.getInstance(currentClientLocale).getDecimalSeparator();
+	char groupingSeparator = DecimalFormatSymbols.getInstance(currentClientLocale).getGroupingSeparator();
 
-	int experimentNameSeparatorIndex = experienceData.getOid().indexOf("/");
-	String experimentName = experienceData.getOid().substring(0, experimentNameSeparatorIndex);
+	StringBuilder localeString = new StringBuilder(currentClientLocale.getDisplayLanguage(currentClientLocale));
+	if (currentClientLocale.getCountry() != null && !currentClientLocale.getCountry().equals("")) {
+	    localeString.append(" (").append(currentClientLocale.getDisplayCountry(currentClientLocale)).append(")");
+	}
 
-	//FIXME the user should be the user logged in the e-lab and not the user in the database (how is it really saved in the database?).
-	return MessageFormat.format(bodyMessage, experimentName, experienceData.getUser());
+	return MessageFormat.format(bodyMessage, experimentName, experienceData.getUser(), localeString.toString(), decimalSeparator, groupingSeparator,
+				    decimalSeparator, groupingSeparator);
     }
 
     /**
@@ -198,10 +261,12 @@ public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
      * 
      * @param experienceData
      *            Must contain the experiment data serialized and also the information about the channels.
-     * @return List of attachments with the tsv file and all the
+     * @param experienceConfiguration
+     *            A string representing the configuration for the experiment.
+     * @return
      * @throws IOException
      */
-    private List<Attachment> generateExperimentMailAttachments(DataProducerDTO experienceData) throws IOException {
+    private List<Attachment> generateExperimentMailAttachments(DataProducerDTO experienceData, String experienceConfiguration) throws IOException {
 
 	System.out.println(experienceData);
 
@@ -212,11 +277,12 @@ public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
 	}
 	experienceData.setSamplesPacketMatrix(samples);
 
-	Attachment configurationFile = generateExperimentConfigurationAttachment(experienceData.getAcqHeader().getHardwareParameters());
+	//	Attachment configurationFile = generateExperimentConfigurationAttachment(experienceData.getAcqHeader().getHardwareParameters());
+	Attachment configurationFile = generateExperimentConfigurationAttachment(experienceConfiguration);
 	listOfAttachments.add(configurationFile);
 
 	String binaryFilename = getMailMessagesResouceBundle().getString("attachment.binary.filename.prefix");
-	ExperimentDataXSVConverter converter = new ExperimentDataXSVConverter('\t', binaryFilename);
+	ExperimentDataXSVConverter converter = new ExperimentDataXSVConverter('\t', binaryFilename, currentClientLocale);
 	byte[] tsvFileByteArray = converter.toByteArray(experienceData);
 	Map<String, ByteArrayValueDTO> otherAttachmentsMap = converter.getReferencedBinaries();
 
@@ -231,14 +297,31 @@ public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
 	    listOfAttachments.addAll(generateExperimentMailAdditionalAttachments(otherAttachmentsMap));
 	}
 
-	Attachment zipFile = zipAttachments(experienceData.getOid().replace("/", "_") + ".zip", listOfAttachments);
-	
+	String executionDate = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss_z", currentClientLocale).format(getExperienceStart(experienceData.getAcqHeader()
+																	  .getTimeStart()));
+	int nameSeparatorCharIndex = experienceData.getOid().indexOf("/");
+	String fileName = experienceData.getOid().substring(0, nameSeparatorCharIndex);
+	StringBuilder buildFileName = new StringBuilder(fileName).append("_").append(executionDate).append(".zip");
+	Attachment zipFile = zipAttachments(buildFileName.toString(), listOfAttachments);
+
 	listOfAttachments = new ArrayList<Attachment>();
 	listOfAttachments.add(zipFile);
 
+	//TODO use logger
 	System.out.println(listOfAttachments);
 
 	return listOfAttachments;
+    }
+
+    private Date getExperienceStart(DateTimeDTO dto) {
+
+	Calendar calendar = Calendar.getInstance();
+	calendar.setTime(dto.getDate());
+	calendar.set(Calendar.HOUR_OF_DAY, dto.getHours());
+	calendar.set(Calendar.MINUTE, dto.getMinutes());
+	calendar.set(Calendar.SECOND, dto.getSeconds());
+
+	return calendar.getTime();
     }
 
     private Attachment zipAttachments(String filename, List<Attachment> listOfAttachments) {
@@ -269,20 +352,13 @@ public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
 	return attachment;
     }
 
-    private Attachment generateExperimentConfigurationAttachment(List<ParameterConfigDTO> parameterConfigList) {
-
-	final String CR_LF = System.getProperty("line.separator");
-
-	StringBuilder configuration = new StringBuilder();
-	for (ParameterConfigDTO parameter : parameterConfigList) {
-	    configuration.append(parameter.getParameterName()).append(": ").append(parameter.getParameterValue()).append(CR_LF);
-	}
+    private Attachment generateExperimentConfigurationAttachment(String configuration) {
 
 	String configurationFilename = getMailMessagesResouceBundle().getString("attachment.configuration.filename");
 	Attachment configurationFile = new Attachment();
 	configurationFile.setMimeType("text/plain");
 	configurationFile.setFileName(configurationFilename + ".txt");
-	configurationFile.setFileContent(configuration.toString().getBytes());
+	configurationFile.setFileContent(configuration.getBytes());
 
 	return configurationFile;
     }
@@ -399,7 +475,7 @@ public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
     private void sendToTimer(MailMessageRequest failedMessage, int failCount) {
 	TimerConfig config = new TimerConfig();
 	config.setInfo(new FailedMailMessage(failedMessage, failCount));
-	timerService.createSingleActionTimer(sendMailRetryMillis * failCount, config);
+	timerService.createSingleActionTimer(failedMessage.getSendMailRetryMillis() * failCount, config);
     }
 
     private void prepareMessageContent(Message message, MailMessageRequest mailMessageRequest) throws MessagingException {
@@ -455,6 +531,11 @@ public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
     @Override
     public void queueMessage(MailMessageRequest request) throws NoValidRecipientsFoundForMessage {
 
+	// Just to make sure the client programmer always sends the client locale.
+	if (request.getClientLocale() == null) {
+	    throw new IllegalArgumentException("The Client Locale is a mandatory field");
+	}
+
 	Connection connection = null;
 	Session queueSession = null;
 	MessageProducer sender = null;
@@ -465,7 +546,9 @@ public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
 	    queueSession = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 	    sender = queueSession.createProducer(queue);
 
-	    List<MailMessageRequest> messageRequests = splitMessageInBlocks(request, this.recipientsPerBlockMaxSize);
+	    lookupProperties(request);
+
+	    List<MailMessageRequest> messageRequests = splitMessageInBlocks(request, request.getRecipientsPerBlockMaxSize());
 
 	    ObjectMessage objectMessage = null;
 	    for (MailMessageRequest mailMessageRequest : messageRequests) {
@@ -476,6 +559,8 @@ public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
 
 	} catch (JMSException e) {
 	    throw new BusinessException(e);
+	} catch (NamingException e) {
+	    throw new BusinessException(e);
 	} finally {
 	    closeResources(connection, queueSession, sender);
 	}
@@ -485,6 +570,8 @@ public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
 	List<MailMessageRequest> requests = new ArrayList<MailMessageRequest>();
 	Set<String> mergedValidatedRecipients = mergeAndValidateAllRecipients(request);
 
+	// If "to" was present, it is already in the mergedValidatedRecipients, so it can be removed from the MailMessageRequest, to avoid sending the e-mail duplicated. 
+	request.setTo(null);
 	if (mergedValidatedRecipients.size() <= 0) {
 	    String msgPattern = getErrorMessagesResouceBundle().getString("mail.no.valid.recipients");
 	    reportMessageError(msgPattern, request.getSubject());
@@ -548,10 +635,12 @@ public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
 	HashSet<String> mergedRecipients = new HashSet<String>(request.getRecipients() != null ? request.getRecipients().length : 0);
 
 	Set<String> invalidMails = new HashSet<String>();
-	if (!isValidMail(request.getTo())) {
-	    invalidMails.add(request.getTo());
-	} else {
-	    mergedRecipients.add(request.getTo());
+	if (request.getTo() != null) {
+	    if (!isValidMail(request.getTo())) {
+		invalidMails.add(request.getTo());
+	    } else {
+		mergedRecipients.add(request.getTo());
+	    }
 	}
 	if (request.getRecipients() != null && request.getRecipients().length > 0) {
 	    for (int i = 0; i < request.getRecipients().length; i++) {
@@ -611,5 +700,21 @@ public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
     public void processTimer(final Timer timer) {
 	FailedMailMessage mailMessage = (FailedMailMessage) timer.getInfo();
 	sendMessages(mailMessage.getMailRequest(), mailMessage.getFailCount());
+    }
+
+    /**
+     * Looks up the jndi for the custom jndi names <code>recipientsPerBlockMaxSize</code>, <code>maxFailCount</code> and <code>sendMailRetryMillis</code> and
+     * sets the <code>request</code> with these properties, if they exist.
+     * 
+     * @param request
+     * @throws NamingException
+     *             If it's not possible to get the InitialContext or one of the properties.
+     */
+    private void lookupProperties(final MailMessageRequest request) throws NamingException {
+	InitialContext ic = new InitialContext();
+	Integer recipientsPerBlockMaxSize = (Integer) ic.lookup("recipientsPerBlockMaxSize");
+	Integer maxFailCount = (Integer) ic.lookup("maxFailCount");
+	Integer sendMailRetryMillis = (Integer) ic.lookup("sendMailRetryMillis");
+	request.setMailProperties(recipientsPerBlockMaxSize, maxFailCount, sendMailRetryMillis);
     }
 }

@@ -30,6 +30,10 @@ public class MailMessageRequest implements Serializable {
     private List<MimePart> mimeParts;
     private Locale clientLocale;
 
+    private int recipientsPerBlockMaxSize;
+    private int maxFailCount;
+    private int sendMailRetryMillis;
+
     /**
      * 
      */
@@ -40,6 +44,7 @@ public class MailMessageRequest implements Serializable {
 	this(request.getFrom(), to, recipients, request.getContent(), request.getMailFormat(), request.getSubject(), request.getAttachments(),
 	     request.getMimeParts());
 	setClientLocale(request.getClientLocale());
+	setMailProperties(request.getRecipientsPerBlockMaxSize(), request.getMaxFailCount(), request.getSendMailRetryMillis());
     }
 
     public MailMessageRequest(String from, String to, String[] recipients, String content, MailFormatEnum mailFormat, String subject,
@@ -176,11 +181,41 @@ public class MailMessageRequest implements Serializable {
     }
 
     public Locale getClientLocale() {
-        return clientLocale;
+	return clientLocale;
     }
 
     public void setClientLocale(Locale clientLocale) {
-        this.clientLocale = clientLocale;
+	this.clientLocale = clientLocale;
+    }
+
+    public int getRecipientsPerBlockMaxSize() {
+	return recipientsPerBlockMaxSize;
+    }
+
+    public void setRecipientsPerBlockMaxSize(int recipientsPerBlockMaxSize) {
+	this.recipientsPerBlockMaxSize = recipientsPerBlockMaxSize;
+    }
+
+    public int getMaxFailCount() {
+	return maxFailCount;
+    }
+
+    public void setMaxFailCount(int maxFailCount) {
+	this.maxFailCount = maxFailCount;
+    }
+
+    public int getSendMailRetryMillis() {
+	return sendMailRetryMillis;
+    }
+
+    public void setSendMailRetryMillis(int sendMailRetryMillis) {
+	this.sendMailRetryMillis = sendMailRetryMillis;
+    }
+
+    public void setMailProperties(int recipientsPerBlockMaxSize, int maxFailCount, int sendMailRetryMillis) {
+	setRecipientsPerBlockMaxSize(recipientsPerBlockMaxSize);
+	setMaxFailCount(maxFailCount);
+	setSendMailRetryMillis(sendMailRetryMillis);
     }
 
     public long calculateSizeBytes() {
