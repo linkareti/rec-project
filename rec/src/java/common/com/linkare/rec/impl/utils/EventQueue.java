@@ -10,8 +10,7 @@
 
 package com.linkare.rec.impl.utils;
 
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.EnumMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Future;
@@ -21,7 +20,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.logging.Level;
 
 import com.linkare.rec.impl.events.Prioritazible;
-import com.linkare.rec.impl.threading.PriorityRunnable;
 import com.linkare.rec.impl.threading.ProcessingManager;
 import com.linkare.rec.impl.threading.util.EnumPriority;
 
@@ -30,26 +28,32 @@ import com.linkare.rec.impl.threading.util.EnumPriority;
  * 
  * 
  * @author José Pedro Pereira - Linkare TI
+ * @author Artur Correia - Linkare TI
  */
 
 public class EventQueue {
 
 	private QueueLogger logger = null;
 	private final EventQueueDispatcher dispatcher;
-	private final List<Prioritazible> levts;
+	// private final List<Prioritazible> levts;
+	private EnumMap<EnumPriority, List<Prioritazible>> levts;
 	private volatile boolean stopdispatching = false;
 
+	private int countEvts = 0;
+
 	/**
-	 * Permits cancel all tasks if someone call shutdown on this queue
+	 * Permits cancel the task if someone call shutdown on this queue
 	 * 
 	 */
-	private final Collection<Future<?>> tasks;
+	private Future<?> task;
 
 	/**
 	 * main lock for concurrency.
 	 * 
 	 */
 	private final ReadWriteLock mainLock;
+
+	private final EventQueueRunnableImpl eventQueueRunnable;
 
 	/**
 	 * Creates a new instance of EventQueue
@@ -59,11 +63,14 @@ public class EventQueue {
 	 */
 	public EventQueue(final EventQueueDispatcher dispatcher, final String threadName) {
 		this.dispatcher = dispatcher;
-		levts = new LinkedList<Prioritazible>();
+		levts = new EnumMap<EnumPriority, List<Prioritazible>>(EnumPriority.class);
+		for (EnumPriority priority : EnumPriority.values()) {
+			levts.put(priority, new LinkedList<Prioritazible>());
+		}
 		stopdispatching = false;
-		tasks = new LinkedList<Future<?>>();
+		task = null;
 		mainLock = new ReentrantReadWriteLock();
-
+		eventQueueRunnable = new EventQueueRunnableImpl();
 	}
 
 	/**
@@ -81,46 +88,33 @@ public class EventQueue {
 
 	public void addEvent(final Prioritazible evt) {
 		log(Level.FINEST, "EventQueue add event " + evt);
-
 		final Lock writeLock = mainLock.writeLock();
 		writeLock.lock();
 		try {
-			levts.add(evt);
-
-			cleanDoneTasks();
+			countEvts++;
+			levts.get(evt.getPriority()).add(evt);
 
 			// add task to execute in processing manager
-			tasks.add(ProcessingManager.getInstance().submit(new PriorityRunnableImpl(evt.getPriority())));
+			if (countEvts == 1) {
+				submitSignalTask();
+			}
+
 		} finally {
 			writeLock.unlock();
 		}
 	}
 
-	/**
-	 * clean done tasks from list.
-	 * 
-	 */
-	private void cleanDoneTasks() {
-
-		// avoiding ConcurrentModificationException
-		final Iterator<Future<?>> iterator = tasks.iterator();
-		while (iterator.hasNext()) {
-			final Future<?> future = iterator.next();
-			if (future.isDone()) {
-				iterator.remove();
-			}
-		}
+	private void submitSignalTask() {
+		task = ProcessingManager.getInstance().submit(eventQueueRunnable);
 	}
 
 	/**
 	 * cancel all tasks if not already done
 	 * 
 	 */
-	private void cancelAllTasks() {
-		for (final Future<?> future : tasks) {
-			if (!future.isDone()) {
-				future.cancel(true);
-			}
+	private void cancelTask() {
+		if (task != null && !task.isDone()) {
+			task.cancel(true);
 		}
 	}
 
@@ -134,7 +128,7 @@ public class EventQueue {
 		final Lock readLock = mainLock.readLock();
 		readLock.lock();
 		try {
-			return !levts.isEmpty();
+			return countEvts != 0;
 		} finally {
 			readLock.unlock();
 		}
@@ -148,9 +142,10 @@ public class EventQueue {
 		final Lock writeLock = mainLock.writeLock();
 		writeLock.lock();
 		try {
-			cancelAllTasks();
-			tasks.clear();
+			cancelTask();
+			task = null;
 			levts.clear();
+			countEvts = 0;
 		} finally {
 			writeLock.unlock();
 		}
@@ -159,16 +154,6 @@ public class EventQueue {
 
 	public boolean isStopdispatching() {
 		return stopdispatching;
-	}
-
-	public boolean isEmpty() {
-		final Lock readLock = mainLock.readLock();
-		readLock.lock();
-		try {
-			return !levts.isEmpty();
-		} finally {
-			readLock.unlock();
-		}
 	}
 
 	public void log(final Level debugLevel, final String message) {
@@ -189,15 +174,12 @@ public class EventQueue {
 	 * This runnable should respond as soon as possible to interrupts.
 	 * 
 	 * 
-	 * @author artur
+	 * @author Artur Correia - Linkare TI
 	 */
 
-	private class PriorityRunnableImpl implements PriorityRunnable {
+	private class EventQueueRunnableImpl implements Runnable {
 
-		private final EnumPriority eventPriority;
-
-		private PriorityRunnableImpl(final EnumPriority priority) {
-			eventPriority = priority;
+		private EventQueueRunnableImpl() {
 		}
 
 		private boolean isInterrupted() {
@@ -214,12 +196,7 @@ public class EventQueue {
 
 				final Object evt = getEvent();
 
-				if (evt != null && !isInterrupted()) {
-
-					if (evt instanceof IntersectableEvent) {
-						intersectEvent((IntersectableEvent) evt);
-					}
-
+				if (evt != null) {
 					if (!isInterrupted()) {
 						log(Level.FINER, "EventQueue dispatching the event " + evt);
 						dispatcher.dispatchEvent(evt);
@@ -227,21 +204,17 @@ public class EventQueue {
 						log(Level.WARNING, "EventQueue isn't dispatching the event " + evt
 								+ " because the this runnable has been interrupted ");
 					}
-
 				}
+
 			} catch (final InterruptedException e) {
 				log(Level.FINER, "This runnable has been interrupted " + e.toString());
 			} catch (final Exception e) {
 				logThrowable("Exception ocorred in event queue thread ", e);
+			} finally {
+				if (hasEvents() && !isInterrupted()) {
+					submitSignalTask();
+				}
 			}
-		}
-
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public EnumPriority getPriority() {
-			return eventPriority;
 		}
 
 		private Object getEvent() throws InterruptedException {
@@ -249,8 +222,13 @@ public class EventQueue {
 			final Lock writeLock = mainLock.writeLock();
 			writeLock.lockInterruptibly();
 			try {
-				if (!levts.isEmpty()) {
-					return levts.remove(0);
+				if (hasEvents()) {
+					for (EnumPriority priority : EnumPriority.valuesOrderedByPriority()) {
+						if (!levts.get(priority).isEmpty()) {
+							countEvts--;
+							return intersectEvent(levts.get(priority), levts.get(priority).remove(0));
+						}
+					}
 				}
 				return null;
 			} finally {
@@ -258,33 +236,41 @@ public class EventQueue {
 			}
 		}
 
-		private void intersectEvent(final IntersectableEvent intersectableEvent) throws InterruptedException {
+		private Object intersectEvent(final List<Prioritazible> eventList, final Object event)
+				throws InterruptedException {
 
-			final Lock writeLock = mainLock.writeLock();
+			if (event instanceof IntersectableEvent) {
+				final IntersectableEvent intersectableEvent = (IntersectableEvent) event;
 
-			writeLock.lockInterruptibly();
-			try {
-				for (int i = levts.size() - 1; i >= 0 && !isInterrupted(); i--) {
+				final Lock writeLock = mainLock.writeLock();
 
-					final Object eventAfter = levts.get(i);
+				writeLock.lockInterruptibly();
+				try {
+					for (int i = eventList.size() - 1; i >= 0 && !isInterrupted(); i--) {
 
-					if (eventAfter instanceof IntersectableEvent) {
+						final Object eventAfter = eventList.get(i);
 
-						final IntersectableEvent intersectableEventAfter = (IntersectableEvent) eventAfter;
+						if (eventAfter instanceof IntersectableEvent) {
 
-						log(Level.FINEST, "EventQueue the event " + intersectableEvent + " might intersect "
-								+ eventAfter);
+							final IntersectableEvent intersectableEventAfter = (IntersectableEvent) eventAfter;
 
-						if (intersectableEvent.intersectTo(intersectableEventAfter)) {
-							log(Level.FINEST, "EventQueue removed the event at the index " + i);
-							levts.remove(i);
+							log(Level.FINEST, "EventQueue the event " + intersectableEvent + " might intersect "
+									+ eventAfter);
+
+							if (intersectableEvent.intersectTo(intersectableEventAfter)) {
+								log(Level.FINEST, "EventQueue removed the event at the index " + i);
+								eventList.remove(i);
+								countEvts--;
+							}
 						}
 					}
+				} finally {
+					writeLock.unlock();
 				}
-			} finally {
-				writeLock.unlock();
 			}
+			return event;
 		}
+
 	}
 
 }

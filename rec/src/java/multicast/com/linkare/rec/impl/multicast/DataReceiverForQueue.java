@@ -64,7 +64,7 @@ public class DataReceiverForQueue implements QueueLogger
 	}
 
 	public boolean isEmpty() {
-		return messageQueue.isEmpty();
+		return !messageQueue.hasEvents();
 	}
 
 	/* Proxy Logging methods */

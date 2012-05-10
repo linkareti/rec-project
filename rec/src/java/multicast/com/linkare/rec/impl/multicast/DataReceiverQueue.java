@@ -228,7 +228,7 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 	}
 
 	public boolean isEmpty() {
-		return messageQueue.isEmpty() && isDispatcherQueueEmpty();
+		return !messageQueue.hasEvents() && isDispatcherQueueEmpty();
 	}
 
 	private boolean isDispatcherQueueEmpty() {

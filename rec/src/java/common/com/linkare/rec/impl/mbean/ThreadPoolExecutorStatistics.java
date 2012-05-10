@@ -18,32 +18,18 @@ public class ThreadPoolExecutorStatistics implements ThreadPoolExecutorStatistic
 	 * {@inheritDoc}
 	 */
 	@Override
-	public com.linkare.rec.impl.threading.ThreadPoolExecutorStatistics getMaxThreadPoolStatistics() {
-		return ProcessingManager.getInstance().getMaxThreadPoolStatistics();
+	public com.linkare.rec.impl.threading.ThreadPoolExecutorStatistics getThreadPoolStatistics() {
+		return ProcessingManager.getInstance().getThreadPoolStatistics();
 	}
+
+
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public com.linkare.rec.impl.threading.ThreadPoolExecutorStatistics getMediumThreadPoolStatistics() {
-		return ProcessingManager.getInstance().getMediumThreadPoolStatistics();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public com.linkare.rec.impl.threading.ThreadPoolExecutorStatistics getMinThreadPoolStatistics() {
-		return ProcessingManager.getInstance().getMinThreadPoolStatistics();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setMaxThreadPoolCoreSize(final int corePoolSize) {
-		ProcessingManager.getInstance().setMaxThreadPoolCoreSize(corePoolSize);
+	public void setThreadPoolCoreSize(final int corePoolSize) {
+		ProcessingManager.getInstance().setThreadPoolCoreSize(corePoolSize);
 
 	}
 
@@ -51,88 +37,26 @@ public class ThreadPoolExecutorStatistics implements ThreadPoolExecutorStatistic
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int getMaxThreadPoolCoreSize() {
-		return ProcessingManager.getInstance().getMaxThreadPoolCoreSize();
+	public int getThreadPoolCoreSize() {
+		return ProcessingManager.getInstance().getThreadPoolCoreSize();
+	}
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setThreadPoolMaxSize(final int maxsize) {
+		ProcessingManager.getInstance().setThreadPoolMaxSize(maxsize);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setMediumThreadPoolCoreSize(final int corePoolSize) {
-		ProcessingManager.getInstance().setMaxThreadPoolCoreSize(corePoolSize);
+	public int getThreadPoolMaxSize() {
+		return ProcessingManager.getInstance().getThreadPoolMaxSize();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int getMediumThreadPoolCoreSize() {
-		return ProcessingManager.getInstance().getMediumThreadPoolCoreSize();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setMinThreadPoolCoreSize(final int corePoolSize) {
-		ProcessingManager.getInstance().setMinThreadPoolCoreSize(corePoolSize);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int getMinThreadPoolCoreSize() {
-		return ProcessingManager.getInstance().getMinThreadPoolCoreSize();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setMaxThreadPoolMaxSize(final int maxsize) {
-		ProcessingManager.getInstance().setMaxThreadPoolMaxSize(maxsize);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int getMaxThreadPoolMaxSize() {
-		return ProcessingManager.getInstance().getMaxThreadPoolMaxSize();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setMediumThreadPoolMaxSize(final int maxsize) {
-		ProcessingManager.getInstance().setMediumThreadPoolMaxSize(maxsize);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int getMediumThreadPoolMaxSize() {
-		return ProcessingManager.getInstance().getMediumThreadPoolMaxSize();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setMinThreadPoolMaxSize(final int maxsize) {
-		ProcessingManager.getInstance().setMinThreadPoolMaxSize(maxsize);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int getMinThreadPoolMaxSize() {
-		return ProcessingManager.getInstance().getMinThreadPoolMaxSize();
-	}
 
 }

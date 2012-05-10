@@ -259,12 +259,8 @@ mac.vlc.intaller.description.tooltip.en=VLC Installer for MaCOSX
 mac.vlc.intaller.description.short.en=VLC Installer for MaCOSX
 
 ##PROCESSINGMANAGER PROPERTIES##
-rec.processingmanager.minthreadpool.coresize= 1
-rec.processingmanager.minthreadpool.maxsize=10
-rec.processingmanager.mediumthreadpool.coresize=10
-rec.processingmanager.mediumthreadpool.maxsize=20
-rec.processingmanager.maxthreadpool.coresize=50
-rec.processingmanager.maxthreadpool.maxsize=100
+rec.processingmanager.threadpool.coresize=50
+rec.processingmanager.threadpool.maxsize=100
 #NANOSECONDS
 rec.processingmanager.thread.idletime=11
 

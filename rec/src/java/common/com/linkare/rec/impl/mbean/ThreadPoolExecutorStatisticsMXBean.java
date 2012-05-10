@@ -20,46 +20,16 @@ public interface ThreadPoolExecutorStatisticsMXBean {
 	 * 
 	 * @return
 	 */
-	public ThreadPoolExecutorStatistics getMaxThreadPoolStatistics();
+	public ThreadPoolExecutorStatistics getThreadPoolStatistics();
 
-	/**
-	 * 
-	 * Statistics of MediumPriorityThreadPool
-	 * 
-	 * @return
-	 */
-	public ThreadPoolExecutorStatistics getMediumThreadPoolStatistics();
 
-	/**
-	 * 
-	 * Statistics of MinPriorityThreadPool
-	 * 
-	 * @return
-	 */
-	public ThreadPoolExecutorStatistics getMinThreadPoolStatistics();
 
-	public void setMaxThreadPoolCoreSize(final int corePoolSize);
+	public void setThreadPoolCoreSize(final int corePoolSize);
 
-	public int getMaxThreadPoolCoreSize();
+	public int getThreadPoolCoreSize();
 
-	public void setMediumThreadPoolCoreSize(final int corePoolSize);
+	public void setThreadPoolMaxSize(final int maxsize);
 
-	public int getMediumThreadPoolCoreSize();
-
-	public void setMinThreadPoolCoreSize(final int corePoolSize);
-
-	public int getMinThreadPoolCoreSize();
-
-	public void setMaxThreadPoolMaxSize(final int maxsize);
-
-	public int getMaxThreadPoolMaxSize();
-
-	public void setMediumThreadPoolMaxSize(final int maxsize);
-
-	public int getMediumThreadPoolMaxSize();
-
-	public void setMinThreadPoolMaxSize(final int maxsize);
-
-	public int getMinThreadPoolMaxSize();
+	public int getThreadPoolMaxSize();
 
 }
