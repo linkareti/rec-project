@@ -10,14 +10,12 @@ import com.linkare.rec.impl.threading.util.EnumPriority;
 
 /**
  * 
- * @author artur
+ * @author Artur Correia - Linkare TI
  */
 public interface Prioritazible {
 	/**
-	 * Creates the <code>Prioritazible</code>.
 	 * 
-	 * @param readBuffer
+	 * @return the priority for this object
 	 */
-
 	public EnumPriority getPriority();
 }
