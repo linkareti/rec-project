@@ -2,7 +2,7 @@ package com.linkare.rec.am.model;
 
 import java.io.Serializable;
 
-import com.linkare.rec.am.model.util.MailMessageRequest;
+import com.linkare.rec.am.mail.MailMessageRequest;
 
 /**
  * Represents a mail message that failed to be sent.

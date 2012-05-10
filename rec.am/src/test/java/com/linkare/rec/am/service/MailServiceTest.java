@@ -12,9 +12,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.linkare.rec.am.mail.MailMessageRequest;
+import com.linkare.rec.am.mail.NoValidRecipientsFoundForMessage;
 import com.linkare.rec.am.model.util.BusinessException;
-import com.linkare.rec.am.model.util.MailMessageRequest;
-import com.linkare.rec.am.model.util.NoValidRecipientsFoundForMessage;
 
 public class MailServiceTest {
 

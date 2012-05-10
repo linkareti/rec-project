@@ -8,8 +8,8 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
 
+import com.linkare.rec.am.mail.MailMessageRequest;
 import com.linkare.rec.am.model.util.BusinessException;
-import com.linkare.rec.am.model.util.MailMessageRequest;
 
 /**
  * Processes mail messages on the mail JMS queue.

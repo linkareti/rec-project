@@ -6,10 +6,10 @@ import javax.ejb.Remote;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
+import com.linkare.rec.am.mail.MailMessageRequest;
+import com.linkare.rec.am.mail.NoValidRecipientsFoundForMessage;
 import com.linkare.rec.am.model.HardwareAcquisitionConfig;
 import com.linkare.rec.am.model.util.BusinessException;
-import com.linkare.rec.am.model.util.MailMessageRequest;
-import com.linkare.rec.am.model.util.NoValidRecipientsFoundForMessage;
 
 /**
  * 

@@ -2,8 +2,8 @@ package com.linkare.rec.am.service;
 
 import javax.ejb.Local;
 
+import com.linkare.rec.am.mail.MailMessageRequest;
 import com.linkare.rec.am.model.util.BusinessException;
-import com.linkare.rec.am.model.util.MailMessageRequest;
 
 /**
  * 
