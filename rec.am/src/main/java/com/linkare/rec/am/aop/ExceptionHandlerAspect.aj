@@ -2,11 +2,14 @@ package com.linkare.rec.am.aop;
 
 import com.linkare.pointcuts.JavaPointcuts;
 
+import org.aspectj.lang.annotation.SuppressAjWarnings;
+
 /**
  * 
  * @author Paulo Zenida - Linkare TI
  * 
  */
+@SuppressAjWarnings("adviceDidNotMatch")
 public abstract aspect ExceptionHandlerAspect {
 
     public pointcut exceptionHandleExecutions() : 
