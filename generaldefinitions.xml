@@ -127,9 +127,9 @@
 		<path refid="rec.common.compile.lib.path" />
 	</path>
 
-	<taskdef resource="net/sf/antcontrib/antlib.xml" >
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
 		<classpath>
-			<pathelement location="${rec.lib.dir}/compile/common/ant-contrib-1.0b3.jar"/>
+			<pathelement location="${rec.lib.dir}/compile/common/ant-contrib-1.0b3.jar" />
 		</classpath>
 	</taskdef>
 
@@ -403,8 +403,8 @@
 		<sequential>
 
 
-			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/rec-framework.jnlp" >
-				<filterset begintoken="@" endtoken="@" filtersfile="build.properties"/>
+			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/rec-framework.jnlp">
+				<filterset begintoken="@" endtoken="@" filtersfile="build.properties" />
 			</copy>
 			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}" />
 			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" propertyFile="build.properties">
@@ -580,6 +580,9 @@
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
 				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 				<replacefilter token="@client.main-class@" property="client.main-class" />
+				<replacefilter token="@rec.client.processingmanager.threadpool.coresize@" property="rec.client.processingmanager.threadpool.coresize" />
+				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
+				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
 			</replace>
 
 			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
@@ -593,7 +596,7 @@
 		<sequential>
 			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!--End Experiment Jars--&gt;">
 				<replacevalue>
-					<![CDATA[<jar href="@temporary.experiment.jar@"/>
+					<![CDATA[<jar href="@temporary.experiment.jar@" lazy="true"/>
 					<!--End Experiment Jars-->]]></replacevalue>
 			</replace>
 			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
@@ -770,6 +773,9 @@
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
 				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 				<replacefilter token="@client.main-class@" property="client.main-class" />
+				<replacefilter token="@rec.client.processingmanager.threadpool.coresize@" property="rec.client.processingmanager.threadpool.coresize" />
+				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
+				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
 			</replace>
 
 			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
@@ -783,7 +789,7 @@
 		<sequential>
 			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!--End Experiment Jars--&gt;">
 				<replacevalue>
-					<![CDATA[<jar href="@temporary.experiment.jar@"/>
+					<![CDATA[<jar href="@temporary.experiment.jar@" lazy="true"/>
 					<!--End Experiment Jars-->]]></replacevalue>
 			</replace>
 			<replace file="${client.build.dir}/elab-client.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
@@ -935,7 +941,7 @@
 	</macrodef>
 
 	<macrodef name="repack.all.jars.in.directory">
-		<attribute name="dir"/>
+		<attribute name="dir" />
 		<sequential>
 			<p200ant repack="true">
 				<fileset dir="@{dir}">
@@ -946,7 +952,7 @@
 	</macrodef>
 
 	<macrodef name="repack.jar">
-		<attribute name="file"/>
+		<attribute name="file" />
 		<sequential>
 			<p200ant repack="true">
 				<fileset file="@{file}" />

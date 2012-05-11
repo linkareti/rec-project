@@ -82,7 +82,7 @@ public class NewSamplesEvent implements IntersectableEvent, Prioritazible {
 	 */
 	@Override
 	public EnumPriority getPriority() {
-		return EnumPriority.MEDIUM;
+		return EnumPriority.MAXIMUM;
 	}
 
 }

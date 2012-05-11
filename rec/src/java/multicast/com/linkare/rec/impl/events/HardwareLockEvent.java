@@ -56,6 +56,6 @@ public class HardwareLockEvent implements Prioritazible {
 	 */
 	@Override
 	public EnumPriority getPriority() {
-		return EnumPriority.MAXIMUM;
+		return EnumPriority.MEDIUM;
 	}
 }

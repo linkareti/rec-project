@@ -394,6 +394,9 @@
 				<replacefilter token="@short@" property="@{experiment.name}.short" />
 				<replacefilter token="@j2se-version@" property="@{experiment.name}.j2se-version" />
 				<replacefilter token="@client.main-class@" property="@{experiment.name}.client.main-class" />
+				<replacefilter token="@rec.client.processingmanager.threadpool.coresize@" property="rec.client.processingmanager.threadpool.coresize" />
+				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
+				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
 			</replace>
 			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot;/&gt;" />
 			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />

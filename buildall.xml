@@ -120,8 +120,8 @@
 				<replacefilter token="@rec.am.securitymanager.near.lap.time.minutes@" property="rec.am.securitymanager.near.lap.time.minutes" />
 				<replacefilter token="@rec.am.securitymanager.refresh.lap.time.minutes@" property="rec.am.securitymanager.refresh.lap.time.minutes" />
 				<replacefilter token="@lab.name@" value="@{lab.name}" />
-				<replacefilter token="@rec.processingmanager.threadpool.coresize@" property="rec.processingmanager.threadpool.coresize" />
-				<replacefilter token="@rec.processingmanager.threadpool.maxsize@" property="rec.processingmanager.threadpool.maxsize" />
+				<replacefilter token="@rec.multicast.processingmanager.threadpool.coresize@" property="rec.multicast.processingmanager.threadpool.coresize" />
+				<replacefilter token="@rec.multicast.processingmanager.threadpool.maxsize@" property="rec.multicast.processingmanager.threadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
 				<replacefilter token="@com.sun.management.jmxremote.port@" property="@{lab.name}.rec.multicastcontroller.jmxremote.port" />
 				<replacefilter token="@java.rmi.server.hostname@" property="java.rmi.server.hostname" />
@@ -145,8 +145,8 @@
 				<replacefilter token="@rec.am.securitymanager.interval.lap.time.minutes@" property="rec.am.securitymanager.interval.lap.time.minutes" />
 				<replacefilter token="@rec.am.securitymanager.near.lap.time.minutes@" property="rec.am.securitymanager.near.lap.time.minutes" />
 				<replacefilter token="@rec.am.securitymanager.refresh.lap.time.minutes@" property="rec.am.securitymanager.refresh.lap.time.minutes" />
-				<replacefilter token="@rec.processingmanager.threadpool.coresize@" property="rec.processingmanager.threadpool.coresize" />
-				<replacefilter token="@rec.processingmanager.threadpool.maxsize@" property="rec.processingmanager.threadpool.maxsize" />
+				<replacefilter token="@rec.multicast.processingmanager.threadpool.coresize@" property="rec.multicast.processingmanager.threadpool.coresize" />
+				<replacefilter token="@rec.multicast.processingmanager.threadpool.maxsize@" property="rec.multicast.processingmanager.threadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
 				<replacefilter token="@com.sun.management.jmxremote.port@" property="@{lab.name}.rec.multicastcontroller.jmxremote.port" />
 				<replacefilter token="@java.rmi.server.hostname@" property="java.rmi.server.hostname" />
@@ -197,6 +197,9 @@
 						<replacefilter token="@experiment.name@" value="@{experiment.name}" />
 						<replacefilter token="@hardwareserver.initial.heap@" property="hardwareserver.initial.heap" />
 						<replacefilter token="@hardwareserver.max.heap@" property="hardwareserver.max.heap" />
+						<replacefilter token="@rec.driver.processingmanager.threadpool.coresize@" property="rec.driver.processingmanager.threadpool.coresize" />
+						<replacefilter token="@rec.driver.processingmanager.threadpool.maxsize@" property="rec.driver.processingmanager.threadpool.maxsize" />
+						<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
 					</replace>
 					<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" propertyFile="experiments/@{experiment.name}/etc/build.properties">
 						<replacefilter token="@driver.main.class@" property="@{experiment.name}.driver.main-class" />
@@ -212,6 +215,9 @@
 						<replacefilter token="@experiment.name@" value="@{experiment.name}" />
 						<replacefilter token="@hardwareserver.initial.heap@" property="hardwareserver.initial.heap" />
 						<replacefilter token="@hardwareserver.max.heap@" property="hardwareserver.max.heap" />
+						<replacefilter token="@rec.driver.processingmanager.threadpool.coresize@" property="rec.driver.processingmanager.threadpool.coresize" />
+						<replacefilter token="@rec.driver.processingmanager.threadpool.maxsize@" property="rec.driver.processingmanager.threadpool.maxsize" />
+						<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
 					</replace>
 					<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" propertyFile="experiments/@{experiment.name}/etc/build.properties">
 						<replacefilter token="@driver.main.class@" property="@{experiment.name}.driver.main-class" />

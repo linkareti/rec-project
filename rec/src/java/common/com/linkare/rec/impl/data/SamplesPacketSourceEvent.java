@@ -63,7 +63,7 @@ public class SamplesPacketSourceEvent extends java.util.EventObject implements I
 	 */
 	@Override
 	public EnumPriority getPriority() {
-		return EnumPriority.MEDIUM;
+		return EnumPriority.MAXIMUM;
 	}
 
 }
