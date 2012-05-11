@@ -62,7 +62,7 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 	private transient DataReceiverQueue dataReceiversQueue = null;
 	private transient DataReceiverQueueAdapter dataReceiverQueueAdapter = null;
 	private HardwareAcquisitionConfig cachedAcqHeader = null;
-	private String cachedDataProducerName = null;
+//	private String cachedDataProducerName = null;
 	private String oid = null;
 	private transient ReCMultiCastDataProducerListener reCMultiCastDataProducerListener = null;
 	private IResource resource = null;
@@ -84,9 +84,10 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 		// initInternalQueue();
 	}
 
-	public ReCMultiCastDataProducer(final IResource resource, final int maximum_receivers, final String fileName, final String user) {
+	public ReCMultiCastDataProducer(final IResource resource, final int maximum_receivers, final String oid,
+			final String user) {
 		super();
-		this.fileName = fileName;
+		this.oid = oid;
 
 		this.resource = resource;
 		this.maximum_receivers = maximum_receivers;
@@ -100,7 +101,7 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 			final String user) {
 		super(dataCollectorState, packetMatrix);
 		this.cachedAcqHeader = header;
-		this.cachedDataProducerName = dataProducerName;
+		//this.cachedDataProducerName = dataProducerName;
 		this.oid = oid;
 		this.user = user;
 	}
@@ -146,10 +147,10 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 	public void setOID(final String oid) {
 		this.oid = oid;
 		if (resource != null) {
-		final java.util.Map<String, String> props = resource.getProperties();
-		props.put(ResourceType.DATAPRODUCER.getPropertyKey(), oid);
-		((DefaultResource) resource).setProperties(props);
-	}
+			final java.util.Map<String, String> props = resource.getProperties();
+			props.put(ResourceType.DATAPRODUCER.getPropertyKey(), oid);
+			((DefaultResource) resource).setProperties(props);
+		}
 	}
 
 	public DataProducer _this() {
@@ -157,9 +158,9 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 			return _this;
 		}
 
-		if (oid == null) {
-			setOID(getFileName());
-		}
+//		if (oid == null) {
+//			setOID(getFileName());
+//		}
 
 		try {
 			log(Level.FINEST, "Trying to create DataProducer CORBA Object... " + getOID());
@@ -196,14 +197,15 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 	 */
 	@Override
 	public String getDataProducerName() {
-		if (cachedDataProducerName == null && remoteDataProducer != null) {
-			try {
-				cachedDataProducerName = remoteDataProducer.getDataProducerName();
-			} catch (final Exception e) {
-				logThrowable("Other reason - Couldn't get DataProducerName!", e);
-			}
-		}
-		return cachedDataProducerName;
+		// if (cachedDataProducerName == null && remoteDataProducer != null) {
+		// try {
+		// cachedDataProducerName = remoteDataProducer.getDataProducerName();
+		// } catch (final Exception e) {
+		// logThrowable("Other reason - Couldn't get DataProducerName!", e);
+		// }
+		// }
+		// return cachedDataProducerName;
+		return getOID();
 	}
 
 	@Override
@@ -240,11 +242,11 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 		}
 	}
 
-	private String fileName = null;
-
-	public String getFileName() {
-		return fileName;
-	}
+//	private String fileName = null;
+//
+//	public String getFileName() {
+//		return fileName;
+//	}
 
 	@Override
 	public void registerDataReceiver(final DataReceiver data_receiver) throws MaximumClientsReached {
