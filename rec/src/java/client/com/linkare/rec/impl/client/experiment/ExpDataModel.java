@@ -77,4 +77,12 @@ public interface ExpDataModel {
 	 */
 	public boolean isDataAvailable();
 
+	/**
+	 * Returns the object ID of the remote dataproducer, so it is a unique ID
+	 * for the experiment
+	 * 
+	 * @return
+	 */
+	public String getDataProducerName();
+
 }
