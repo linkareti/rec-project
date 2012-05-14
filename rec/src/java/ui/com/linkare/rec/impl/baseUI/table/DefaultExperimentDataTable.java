@@ -5,6 +5,7 @@
  */
 package com.linkare.rec.impl.baseUI.table;
 
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.baseUI.SendMailToQueue;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -352,7 +353,7 @@ public class DefaultExperimentDataTable extends javax.swing.JPanel implements Ex
                 if (sendMailBox.getTxtToMail().getText().trim().length() < 1) {
                     JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.SendMailBox").getString("addressee.empty"));
                 } else {
-                    String acquisitionConfig = expDataModelContainer.getExpDataModel().getAcquisitionConfig().toString();
+                	HardwareAcquisitionConfig acquisitionConfig = expDataModelContainer.getExpDataModel().getAcquisitionConfig();
                     String dataProducerName = expDataModelContainer.getExpDataModel().getDataProducerName();
 
                     String sendMailResponse = sendMailToQueue.sendMail(sendMailBox.getTxtToMail().getText(), acquisitionConfig, dataProducerName);

@@ -2,6 +2,8 @@ package com.linkare.rec.data.config;
 
 import java.util.ResourceBundle;
 
+import com.linkare.rec.data.metadata.Scale;
+
 public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.IDLEntity {
 
 	/**
@@ -81,15 +83,21 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 	// Copy Constructor
 	//
 	public ChannelAcquisitionConfig(final ChannelAcquisitionConfig other) {
-		setChannelName(new String(other.getChannelName()));
-		setTimeStart(new com.linkare.rec.data.synch.DateTime(other.getTimeStart()));
-		setSelectedFrequency(new com.linkare.rec.data.synch.Frequency(other.getSelectedFrequency()));
-		setSelectedScale(other.getSelectedScale());
+		setChannelName(other.getChannelName());
+		setTimeStart(other.getTimeStart() != null ? new com.linkare.rec.data.synch.DateTime(other.getTimeStart())
+				: null);
+		setSelectedFrequency(other.getSelectedFrequency() != null ? new com.linkare.rec.data.synch.Frequency(
+				other.getSelectedFrequency()) : null);
+		setSelectedScale(other.getSelectedScale() != null ? new Scale(other.getSelectedScale()) : null);
 
 		ParameterConfig[] temp = null;
 		if (other.getSelectedChannelParameters() != null) {
 			temp = new ParameterConfig[other.getSelectedChannelParameters().length];
-			System.arraycopy(other.getSelectedChannelParameters(), 0, temp, 0, temp.length);
+			for (int i = 0; i < other.getSelectedChannelParameters().length; i++) {
+				temp[i] = new ParameterConfig(other.getSelectedChannelParameters(i));
+			}
+			// DELETEME System.arraycopy(other.getSelectedChannelParameters(),
+			// 0, temp, 0, temp.length);
 		}
 
 		this.setSelectedChannelParameters(temp);

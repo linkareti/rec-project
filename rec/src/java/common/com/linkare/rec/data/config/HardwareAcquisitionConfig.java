@@ -94,15 +94,19 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 
 	public HardwareAcquisitionConfig(final HardwareAcquisitionConfig other) {
 
-		setFamiliarName(new String(other.getFamiliarName()));
-		setHardwareUniqueID(new String(other.getHardwareUniqueID()));
+		setFamiliarName(other.getFamiliarName());
+		setHardwareUniqueID(other.getHardwareUniqueID());
 		setTimeStart(new com.linkare.rec.data.synch.DateTime(other.getTimeStart()));
 		setSelectedFrequency(new com.linkare.rec.data.synch.Frequency(other.getSelectedFrequency()));
 
 		ParameterConfig[] temp = null;
 		if (other.getSelectedHardwareParameters() != null) {
 			temp = new ParameterConfig[other.getSelectedHardwareParameters().length];
-			System.arraycopy(other.getSelectedHardwareParameters(), 0, temp, 0, temp.length);
+			for (int i = 0; i < other.getSelectedHardwareParameters().length; i++) {
+				temp[i] = new ParameterConfig(other.getSelectedHardwareParameters(i));
+			}
+			// DELETEME System.arraycopy(other.getSelectedHardwareParameters(),
+			// 0, temp, 0, temp.length);
 		}
 		this.setSelectedHardwareParameters(temp);
 		temp = null;
@@ -110,7 +114,11 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 		ChannelAcquisitionConfig[] temp2 = null;
 		if (other.getChannelsConfig() != null) {
 			temp2 = new ChannelAcquisitionConfig[other.getChannelsConfig().length];
-			System.arraycopy(other.getChannelsConfig(), 0, temp2, 0, temp2.length);
+			for (int i = 0; i < other.getChannelsConfig().length; i++) {
+				temp2[i] = new ChannelAcquisitionConfig(other.getChannelsConfig(i));
+			}
+			// DELETEME System.arraycopy(other.getChannelsConfig(), 0, temp2, 0,
+			// temp2.length);
 		}
 		this.setChannelsConfig(temp2);
 		temp2 = null;
@@ -308,7 +316,8 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 
 	/**
 	 * Indexed getter for property channelsConfig.
-	 * @param channelName 
+	 * 
+	 * @param channelName
 	 * 
 	 * @param name Name of the channel.
 	 * @return Value of the property at <CODE>index</CODE>.

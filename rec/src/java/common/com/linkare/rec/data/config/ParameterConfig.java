@@ -44,8 +44,8 @@ public final class ParameterConfig implements org.omg.CORBA.portable.IDLEntity {
 	// Copy Constructor
 	//
 	public ParameterConfig(final ParameterConfig other) {
-		setParameterName(new String(other.getParameterName()));
-		setParameterValue(new String(other.getParameterValue()));
+		setParameterName(other.getParameterName());
+		setParameterValue(other.getParameterValue());
 	}
 
 	/**

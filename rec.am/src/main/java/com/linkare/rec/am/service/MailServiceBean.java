@@ -3,7 +3,6 @@ package com.linkare.rec.am.service;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.rmi.RemoteException;
 import java.text.DateFormat;
@@ -58,13 +57,8 @@ import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.xml.bind.JAXBException;
 
 import com.linkare.rec.am.RepositoryFacade;
-import com.linkare.rec.am.config.Apparatus;
-import com.linkare.rec.am.config.Lab;
-import com.linkare.rec.am.config.LocalizationBundle;
-import com.linkare.rec.am.config.ReCFaceConfig;
 import com.linkare.rec.am.mail.Attachment;
 import com.linkare.rec.am.mail.MailFormatEnum;
 import com.linkare.rec.am.mail.MailMessageRequest;
@@ -80,7 +74,6 @@ import com.linkare.rec.am.repository.ByteArrayValueDTO;
 import com.linkare.rec.am.repository.DataProducerDTO;
 import com.linkare.rec.am.repository.DateTimeDTO;
 import com.linkare.rec.am.repository.SamplesPacketDTO;
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
@@ -131,29 +124,6 @@ public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
      * the Locale as parameter in every method call made within a transaction, but when used, it should be nulled at the end of the method.
      */
     private Locale currentClientLocale;
-
-    static {
-	try {
-	    InputStream stream = MailServiceBean.class.getClassLoader().getResourceAsStream("ReCFaceConfig.xml");
-	    ReCFaceConfig recFaceConfig = ReCFaceConfig.unmarshall(stream);
-	    for (final LocalizationBundle bundle : recFaceConfig.getLocalizationBundle()) {
-		ReCResourceBundle.loadResourceBundle(bundle.getName(), bundle.getLocation());
-	    }
-	    for (final Lab lab : recFaceConfig.getLab()) {
-		for (final LocalizationBundle bundle : lab.getLocalizationBundle()) {
-		    ReCResourceBundle.loadResourceBundle(bundle.getName(), bundle.getLocation());
-		}
-		for (final Apparatus apparatus : lab.getApparatus()) {
-		    for (final LocalizationBundle bundle : apparatus.getLocalizationBundle()) {
-			ReCResourceBundle.loadResourceBundle(bundle.getName(), bundle.getLocation());
-		    }
-		}
-	    }
-	} catch (JAXBException e) {
-	    e.printStackTrace();
-	    throw new ExceptionInInitializerError("It was not possible to load ReCFaceConfig.xml");
-	}
-    }
 
     //TODO inject the resource bundle
     //    @Inject
