@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.ResourceBundle.Control;
+import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -44,6 +44,7 @@ import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
+import javax.jws.WebService;
 import javax.mail.Message;
 import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
@@ -67,6 +68,7 @@ import com.linkare.rec.am.config.ReCFaceConfig;
 import com.linkare.rec.am.mail.Attachment;
 import com.linkare.rec.am.mail.MailFormatEnum;
 import com.linkare.rec.am.mail.MailMessageRequest;
+import com.linkare.rec.am.mail.MailServiceRemote;
 import com.linkare.rec.am.mail.MimePart;
 import com.linkare.rec.am.mail.NoValidRecipientsFoundForMessage;
 import com.linkare.rec.am.model.ErrorMessage;
@@ -88,6 +90,7 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 @Stateless(name = "mailService")
 @Remote(value = MailServiceRemote.class)
 @Local(value = MailServiceLocal.class)
+@WebService(endpointInterface = "com.linkare.rec.am.mail.MailServiceRemote", name = "MailServiceWS", serviceName = "rec-services", portName = "mail", targetNamespace = "http://webservices.linkare.com/rec")
 public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
 
     private static final String ERROR_MESSAGES_FILE = "errorMessages";
@@ -422,9 +425,9 @@ public class MailServiceBean implements MailServiceRemote, MailServiceLocal {
 
 	    prepareMessageContent(message, mailMessageRequest);
 
-	    InternetAddress fromAddress = new InternetAddress(mailMessageRequest.getFrom());
-	    message.setFrom(fromAddress);
-	    message.setReplyTo(new InternetAddress[] { fromAddress });
+	    //	    InternetAddress fromAddress = new InternetAddress(mailMessageRequest.getFrom());
+	    //	    message.setFrom(fromAddress);
+	    //	    message.setReplyTo(new InternetAddress[] { fromAddress });
 
 	    Set<InternetAddress> recipients = new HashSet<InternetAddress>();
 	    if (mailMessageRequest.getRecipients() != null) {

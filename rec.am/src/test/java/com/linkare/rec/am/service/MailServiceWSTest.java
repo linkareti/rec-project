@@ -1,12 +1,13 @@
 package com.linkare.rec.am.service;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.Locale;
-import java.util.Properties;
 
 import javax.ejb.EJBException;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
+import javax.xml.namespace.QName;
+import javax.xml.ws.Service;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,29 +18,25 @@ import com.linkare.rec.am.mail.MailServiceRemote;
 import com.linkare.rec.am.mail.NoValidRecipientsFoundForMessage;
 import com.linkare.rec.am.model.util.BusinessException;
 
-public class MailServiceTest {
+public class MailServiceWSTest {
 
     private MailServiceRemote remote;
+    private String address;
+    private URL wsdlURL;
 
     @Before
     public void setup() {
 
-	Properties props = new Properties();
-	props.setProperty("java.naming.factory.initial", "com.sun.enterprise.naming.impl.SerialInitContextFactory");
-	props.setProperty("java.naming.factory.url.pkgs", "com.sun.enterprise.naming");
-	props.setProperty("java.naming.factory.state", "com.sun.corba.ee.impl.presentation.rmi.JNDIStateFactoryImpl");
-	props.setProperty("org.omg.CORBA.ORBInitialHost", "localhost");
-	props.setProperty("org.omg.CORBA.ORBInitialPort", "3700");
-
+	address = "http://localhost:8080/rec-services/MailServiceWS";
 	try {
-	    InitialContext ic = new InitialContext(props);
-	    remote = (MailServiceRemote) ic.lookup("java:global/rec.am/mailService!com.linkare.rec.am.service.MailServiceRemote");
-
-	} catch (NamingException e) {
-	    e.printStackTrace();
-	} catch (Throwable e) {
+	    wsdlURL = new URL(address + "?wsdl");
+	} catch (MalformedURLException e) {
+	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
+	
+	Service service = Service.create(wsdlURL, new QName("http://webservices.linkare.com/rec", "rec-services"));
+	remote = service.getPort(MailServiceRemote.class);
     }
 
     @Test

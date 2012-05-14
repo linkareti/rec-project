@@ -105,30 +105,6 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-
-		<!-- <dependency> -->
-		<!-- <groupId>org.slf4j</groupId> -->
-		<!-- <artifactId>slf4j-jdk14</artifactId> -->
-		<!-- <version>1.6.4</version> -->
-		<!-- </dependency> -->
-
-		<!-- <dependency> -->
-		<!-- <groupId>org.slf4j</groupId> -->
-		<!-- <artifactId>slf4j-api</artifactId> -->
-		<!-- <version>1.6.1</version> -->
-		<!-- </dependency> -->
-
-		<!-- <dependency> -->
-		<!-- <groupId>org.jboss.weld</groupId> -->
-		<!-- <artifactId>weld-logger</artifactId> -->
-		<!-- <version>1.0.0-CR2</version> -->
-		<!-- <scope>provided</scope> -->
-		<!-- </dependency> -->
-
-		<!-- JSF -->
-		<!-- JPA -->
-
-		<!-- Optional, but highly recommended. -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
@@ -328,24 +304,6 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>org.glassfish.common</groupId> -->
-		<!-- <artifactId>glassfish-naming</artifactId> -->
-		<!-- <version>3.2-b06</version> -->
-		<!-- <scope>test</scope> -->
-		<!-- <exclusions> -->
-		<!-- <exclusion> -->
-		<!-- <groupId>org.eclipse.persistence</groupId> -->
-		<!-- <artifactId>javax.persistence</artifactId> -->
-		<!-- </exclusion> -->
-		<!-- </exclusions> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.glassfish.extras</groupId> -->
-		<!-- <artifactId>appserv-rt</artifactId> -->
-		<!-- <version>3.2-b06</version> -->
-		<!-- <scope>test</scope> -->
-		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.glassfish.appclient</groupId>
 			<artifactId>gf-client</artifactId>
