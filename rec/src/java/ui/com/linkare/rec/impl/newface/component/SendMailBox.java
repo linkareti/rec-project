@@ -13,16 +13,30 @@ package com.linkare.rec.impl.newface.component;
 import com.linkare.rec.impl.newface.utils.LAFConnector;
 import com.linkare.rec.impl.newface.utils.LAFConnector.SpecialELabProperties;
 import java.awt.Color;
+import javax.swing.JButton;
+import javax.swing.JTextField;
 
 /**
  *
- * @author Gedsimon Pereira
+ * @author Gedsimon Pereira - Linkare TI
  */
 public class SendMailBox extends GradientPane {
 
     /** Creates new form SendMailBox */
     public SendMailBox() {
         initComponents();
+    }
+
+    public JTextField getTxtToMail() {
+        return txtToMail;
+    }
+
+    public JButton getBtnSend() {
+        return btnSend;
+    }
+
+    public JButton getBtnCancel() {
+        return btnCancel;
     }
 
     /** This method is called from within the constructor to
@@ -36,9 +50,9 @@ public class SendMailBox extends GradientPane {
 
         labelToMail = new javax.swing.JLabel();
         txtToMail = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         btnSend = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
 
         setName("Form"); // NOI18N
         setPreferredSize(new java.awt.Dimension(431, 147));
@@ -52,22 +66,25 @@ public class SendMailBox extends GradientPane {
         txtToMail.setToolTipText(resourceMap.getString("txtToMail.toolTipText")); // NOI18N
         txtToMail.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(Color.BLACK), javax.swing.BorderFactory.createEmptyBorder(2, 3, 2, 3)));
         txtToMail.setName("txtToMail"); // NOI18N
-        txtToMail.setNextFocusableComponent(btnSend);
         txtToMail.setPreferredSize(new java.awt.Dimension(215, 28));
+
+        jLabel1.setFont(resourceMap.getFont("jLabel1.font")); // NOI18N
+        jLabel1.setForeground(LAFConnector.getColor(SpecialELabProperties.SELECTION_FOREGROUND_ON_DARK));
+        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
+        jLabel1.setName("jLabel1"); // NOI18N
 
         btnSend.setText(resourceMap.getString("btnSend.text")); // NOI18N
         btnSend.setToolTipText(resourceMap.getString("btnSend.toolTipText")); // NOI18N
         btnSend.setName("btnSend"); // NOI18N
-        btnSend.setNextFocusableComponent(btnCancel);
 
         btnCancel.setText(resourceMap.getString("btnCancel.text")); // NOI18N
         btnCancel.setToolTipText(resourceMap.getString("btnCancel.toolTipText")); // NOI18N
         btnCancel.setName("btnCancel"); // NOI18N
-        btnCancel.setNextFocusableComponent(txtToMail);
-
-        jLabel1.setFont(resourceMap.getFont("jLabel1.font")); // NOI18N
-        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
-        jLabel1.setName("jLabel1"); // NOI18N
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -76,12 +93,12 @@ public class SendMailBox extends GradientPane {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtToMail, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
                     .addComponent(labelToMail)
+                    .addComponent(txtToMail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnSend)
-                        .addGap(26, 26, 26)
+                        .addGap(18, 18, 18)
                         .addComponent(btnCancel)))
                 .addContainerGap())
         );
@@ -92,15 +109,20 @@ public class SendMailBox extends GradientPane {
                 .addComponent(labelToMail)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtToMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
                     .addComponent(btnSend))
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(37, 37, 37))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.txtToMail.setText("");
+    }//GEN-LAST:event_btnCancelActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSend;

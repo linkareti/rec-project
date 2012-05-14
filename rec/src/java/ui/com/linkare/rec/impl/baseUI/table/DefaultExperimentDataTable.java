@@ -5,6 +5,7 @@
  */
 package com.linkare.rec.impl.baseUI.table;
 
+import com.linkare.rec.impl.baseUI.SendMailToQueue;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -36,6 +37,12 @@ import com.linkare.rec.impl.client.experiment.export.csv.ExportCSV;
 import com.linkare.rec.impl.client.experiment.export.printer.ExportPrinter;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.newface.component.ResultsActionBar;
+import com.linkare.rec.impl.newface.component.SendMailBox;
+import java.awt.Dimension;
+import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 /**
  * 
@@ -207,11 +214,13 @@ public class DefaultExperimentDataTable extends javax.swing.JPanel implements Ex
         btnSendMail.setPreferredSize(new java.awt.Dimension(25, 25));
         btnSendMail.setPressedIcon(resourceMap.getIcon("btnSendMail.pressedIcon")); // NOI18N
         btnSendMail.addActionListener(new java.awt.event.ActionListener() {
+
             @Override
             public void actionPerformed(final java.awt.event.ActionEvent evt) {
-                btnSendMailActionPerformed(evt);
+                openSendMailBox(evt);
             }
         });
+        setButtonBorder(btnSendMail);
         toolBarTable.add(btnSendMail);
 
         setLayout(new java.awt.BorderLayout());
@@ -322,9 +331,54 @@ public class DefaultExperimentDataTable extends javax.swing.JPanel implements Ex
             javax.swing.JOptionPane.showMessageDialog(this, e);
         }
     }// GEN-LAST:event_printBtnActionPerformed
+    JDialog dialog = new JDialog();
 
-    private void btnSendMailActionPerformed(java.awt.event.ActionEvent evt) {
-        
+    private void openSendMailBox(java.awt.event.ActionEvent evt) {
+        final SendMailBox sendMailBox = new com.linkare.rec.impl.newface.component.SendMailBox();
+        final boolean isPrivatePc = Preferences.userRoot().getBoolean("ElabPrivateComputer", true);
+        final SendMailToQueue sendMailToQueue = new SendMailToQueue();
+        sendMailBox.getBtnCancel().addActionListener(new java.awt.event.ActionListener() {
+
+            @Override
+            public void actionPerformed(final java.awt.event.ActionEvent evt) {
+                dialog.dispose();
+            }
+        });
+
+        sendMailBox.getBtnSend().addActionListener(new java.awt.event.ActionListener() {
+
+            @Override
+            public void actionPerformed(final java.awt.event.ActionEvent evt) {
+                if (sendMailBox.getTxtToMail().getText().trim().length() < 1) {
+                    JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.SendMailBox").getString("addressee.empty"));
+                } else {
+                    String acquisitionConfig = expDataModelContainer.getExpDataModel().getAcquisitionConfig().toString();
+                    String dataProducerName = expDataModelContainer.getExpDataModel().getDataProducerName();
+
+                    String sendMailResponse = sendMailToQueue.sendMail(sendMailBox.getTxtToMail().getText(), acquisitionConfig, dataProducerName);
+
+                    if (sendMailResponse == null) {
+                        JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.SendMailBox").getString("send.success"));
+                        if (isPrivatePc) {
+                            Preferences.userRoot().put("ElabRecipientsMail", sendMailBox.getTxtToMail().getText());
+                        }
+                        dialog.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, sendMailResponse);
+                    }
+                }
+            }
+        });
+        if (isPrivatePc) {
+            sendMailBox.getTxtToMail().setText(Preferences.userRoot().get("ElabRecipientsMail", ""));
+        }
+
+        dialog.getContentPane().add(sendMailBox);
+        dialog.setMinimumSize(new Dimension(441, 157));
+        dialog.setMaximumSize(new Dimension(441, 157));
+        dialog.setModal(true);
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
     }
 
     private void defaultTableModelProxyTableChanged(final javax.swing.event.TableModelEvent evt)// GEN-FIRST:event_defaultTableModelProxyTableChanged
@@ -402,10 +456,7 @@ public class DefaultExperimentDataTable extends javax.swing.JPanel implements Ex
             DefaultExperimentDataTable.log.warning("Error while trying to save data to file: " + ioe);
         }
     }
-    
-    private void sendMail(){
-        
-    }
+
     @Override
     public javax.swing.JComponent getDisplay() {
         return this;

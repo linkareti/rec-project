@@ -277,3 +277,6 @@ java.rmi.server.hostname=`hostname -i`
 
 ###EXPERIMENT REPOSITORY###
 rec.multicast.repository=com.linkare.rec.impl.multicast.repository.impl.RemoteRepository
+
+##REC.AM END POINT##
+rec.am.endpoint=http://localhost:8080/rec.am?wsdl

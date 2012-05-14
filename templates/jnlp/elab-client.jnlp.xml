@@ -63,12 +63,14 @@
 		<!-- change this value to disable video -->
 		<property name="video.enabled" value="@video.enabled@" />
 		<property name="vlc.plugins.filename" value="@vlc.plugins.filename@" />
-		
+               
+               <!--        Rec.Am Service          -->
+               
+               <property name="rec.am.endpoint" value="@rec.am.endpoint@" />
 		<!-- Processing manager thread pool -->
 		<property name="ReC.ProcessingManager.ThreadPool.Coresize" value="@rec.client.processingmanager.threadpool.coresize@"/>
 		<property name="ReC.ProcessingManager.ThreadPool.Maxsize" value="@rec.client.processingmanager.threadpool.maxsize@"/>
 		<property name="ReC.ProcessingManager.Thread.Idletime" value="@rec.processingmanager.thread.idletime@"/>
-
 	</resources>
 
 	<resources os="Linux">

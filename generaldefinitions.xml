@@ -400,8 +400,8 @@
 	-->
 
 	<macrodef name="create.jnlp.full.client.compile">
-		<sequential>
-
+                <sequential>
+                    
 
 			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/rec-framework.jnlp">
 				<filterset begintoken="@" endtoken="@" filtersfile="build.properties" />
@@ -559,7 +559,7 @@
 
 			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/elab-client.jnlp" />
 			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
-			<replace file="${elab.client.classes.dir}/elab-client.jnlp" propertyFile="build.properties">
+                        <replace file="${elab.client.classes.dir}/elab-client.jnlp" propertyFile="build.properties">
 				<replacefilter token="@elab.title@" property="elab.title" />
 				<replacefilter token="@elab.vendor@" property="elab.vendor" />
 				<replacefilter token="@elab.homepage@" property="elab.homepage" />
@@ -580,6 +580,7 @@
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
 				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 				<replacefilter token="@client.main-class@" property="client.main-class" />
+                                <replacefilter token="@rec.am.endpoint@"  property="rec.am.endpoint" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.coresize@" property="rec.client.processingmanager.threadpool.coresize" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
@@ -773,6 +774,7 @@
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
 				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 				<replacefilter token="@client.main-class@" property="client.main-class" />
+                                <replacefilter token="@rec.am.endpoint@"  property="rec.am.endpoint" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.coresize@" property="rec.client.processingmanager.threadpool.coresize" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
