@@ -11,6 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 /**
  * @author jpereira
  * @author Bruno Catarino - Linkare TI
@@ -28,6 +30,7 @@ public class MailMessageRequest implements Serializable {
     private String subject;
     private List<Attachment> attachments;
     private List<MimePart> mimeParts;
+    
     private Locale clientLocale;
 
     private int recipientsPerBlockMaxSize;
@@ -180,6 +183,7 @@ public class MailMessageRequest implements Serializable {
 	this.to = to;
     }
 
+    @XmlJavaTypeAdapter(value=LocaleXmlTypeAdapter.class)
     public Locale getClientLocale() {
 	return clientLocale;
     }
