@@ -394,6 +394,8 @@
 				<replacefilter token="@short@" property="@{experiment.name}.short" />
 				<replacefilter token="@j2se-version@" property="@{experiment.name}.j2se-version" />
 				<replacefilter token="@client.main-class@" property="@{experiment.name}.client.main-class" />
+			</replace>
+			<replace file="${client.build.dir}/@{experiment.name}.jnlp" propertyFile="build.properties">
 				<replacefilter token="@rec.client.processingmanager.threadpool.coresize@" property="rec.client.processingmanager.threadpool.coresize" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
@@ -423,19 +425,19 @@
 			<jar.experiment.driver experiment.name="@{experiment.name}" />
 			<sign.experiment experiment.name="@{experiment.name}" />
 			<create.jnlp.for.experiment experiment.name="@{experiment.name}" />
-			
+
 			<copy todir="${client.build.dir}/lib" overwrite="true">
 				<fileset dir="experiments/@{experiment.name}/lib/java/client">
 					<include name="**/*" />
 				</fileset>
 			</copy>
-				
+
 			<copy todir="${experiments.build.dir}/@{experiment.name}/lib" overwrite="true">
 				<fileset dir="experiments/@{experiment.name}/lib/java/server">
 					<include name="**/*" />
 				</fileset>
 			</copy>
-				
+
 		</sequential>
 	</macrodef>
 
