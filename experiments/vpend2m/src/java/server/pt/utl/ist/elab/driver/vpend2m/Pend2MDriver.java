@@ -16,6 +16,7 @@ import com.linkare.rec.acquisition.IncorrectStateException;
 import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.data.synch.DateTime;
 import com.linkare.rec.impl.driver.IDataSource;
 import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.protocols.ReCProtocols;
@@ -112,6 +113,7 @@ public class Pend2MDriver extends VirtualBaseDriver {
 
 	@Override
 	public IDataSource start(final HardwareInfo info) throws IncorrectStateException {
+		config.setTimeStart(new DateTime(System.currentTimeMillis()));
 		fireIDriverStateListenerDriverStarting();
 		dataSource.startProduction();
 		fireIDriverStateListenerDriverStarted();
