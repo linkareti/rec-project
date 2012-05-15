@@ -104,6 +104,7 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 		//this.cachedDataProducerName = dataProducerName;
 		this.oid = oid;
 		this.user = user;
+		initInternalQueue();
 	}
 
 	private void initInternalQueue() {
