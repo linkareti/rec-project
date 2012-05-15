@@ -2,6 +2,8 @@ package com.linkare.rec.data.config;
 
 import java.util.ResourceBundle;
 
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
+
 public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.IDLEntity {
 
 	/**
@@ -476,5 +478,27 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	public void setHardwareUniqueID(final String hardwareUniqueID) {
 		this.hardwareUniqueID = hardwareUniqueID;
 	}
+
+    /**
+     * Replicates an {@link HardwareAcquisitionConfig} and replaces the keys to {@link ReCResourceBundle} to the real values, depending of the {@link Locale}.
+     * 
+     * @param acquisitionConfig
+     *            The acquisition config to copy from.
+     * @return A new {@link HardwareAcquisitionConfig} with the values for the channel name, scale label, physics unit name and symbol translated from the
+     *         resource bundles, if they exist. If one of these keys do not exist, it will stay with the key as the value of the property.
+     */
+    public static HardwareAcquisitionConfig translatePropertyBundles(HardwareAcquisitionConfig acquisitionConfig) {
+	HardwareAcquisitionConfig otherConfig = new HardwareAcquisitionConfig(acquisitionConfig);
+	for (ChannelAcquisitionConfig channel : otherConfig.getChannelsConfig()) {
+	    channel.setChannelName(ReCResourceBundle.findStringOrDefault(channel.getChannelName(), channel.getChannelName()));
+	    channel.getSelectedScale().setScaleLabel(ReCResourceBundle.findStringOrDefault(channel.getSelectedScale().getScaleLabel(),
+											   channel.getSelectedScale().getScaleLabel()));
+	    channel.getSelectedScale().setPhysicsUnitName(ReCResourceBundle.findStringOrDefault(channel.getSelectedScale().getPhysicsUnitName(),
+												channel.getSelectedScale().getPhysicsUnitName()));
+	    channel.getSelectedScale().setPhysicsUnitSymbol(ReCResourceBundle.findStringOrDefault(channel.getSelectedScale().getPhysicsUnitSymbol(),
+												  channel.getSelectedScale().getPhysicsUnitSymbol()));
+	}
+	return otherConfig;
+    }
 
 } // class HardwareAcquisitionConfig

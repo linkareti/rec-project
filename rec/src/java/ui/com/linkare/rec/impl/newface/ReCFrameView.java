@@ -473,7 +473,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		if (config != null) {
 			getLoginBox().getContent().reset();
 			setGlassPaneVisible(true);
-			getExperimentHeaderInfoBox(config.toString()).setVisible(true);
+			getExperimentHeaderInfoBox(HardwareAcquisitionConfig.translatePropertyBundles(config).toString()).setVisible(true);
 		}
 	}
 
