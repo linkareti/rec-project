@@ -23,7 +23,7 @@ public class ClientMain {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		ReCBaseUI ui = new ReCBaseUI();
-		ui.setApparatusAutoConnectID("ELAB_PV_STAMP_V02");
+		ui.setApparatusAutoConnectID("ELAB_BOYLE_MARIOTTE_DSPIC_V1.0");
 		ui.setVisible(true);
 	}
 }

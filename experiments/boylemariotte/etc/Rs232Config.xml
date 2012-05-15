@@ -3,24 +3,24 @@
   <rs232 baud="115200" stopbits="1" paritybits="0" numbits="8" ports_restrict="/dev/ttyS0">
 	<parameters>
 	    <!-- vol_init -->
-	    <parameter output="0.0" input="0.0" maxvalue="8.0" minvalue="2.9" order="1">
+	    <parameter output="#000" input="#000" maxvalue="1000" minvalue="100" order="1">
 	    </parameter>
 	    <!-- vol_final -->
-	    <parameter output="0.0" input="0.0" maxvalue="8.0" minvalue="2.9" order="2">
+	    <parameter output="#000" input="#000" maxvalue="1000" minvalue="100" order="2">
 	    </parameter>
 	    <!--n_samples -->
-	    <parameter output="##0" input="##0" maxvalue="240" minvalue="0" order="3">
+	    <parameter output="#0" input="#0" maxvalue="45" minvalue="2" order="3">
 	    </parameter>
 	    <!-- tb_samples -->
-	    <parameter output="##0" input="##0" maxvalue="5000" minvalue="0" order="4">
+	    <parameter output="#000" input="#000" maxvalue="2000" minvalue="700" order="4">
 	    </parameter>
 	</parameters>
 	<channels>
 	    <!-- volume -->
-	    <channel format="0.0" order="1">
+	    <channel format="##00" order="1">
 	    </channel>
 	    <!-- pressure -->
-	    <channel format="###0.0" order="2">
+	    <channel format="#00" order="2">
 	    </channel>
 	</channels>
 	<timeout>
