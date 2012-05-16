@@ -42,45 +42,72 @@ public class RollPaperCustomizer extends javax.swing.JPanel implements ICustomiz
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
+        btnGo = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+        btnDefaultParameters = new javax.swing.JButton();
+        tabbedPaneConfig = new javax.swing.JTabbedPane();
+        panelHeigthConfig = new javax.swing.JPanel();
         panelHeigthFall1 = new javax.swing.JPanel();
         sliderHeigthFallOne = new javax.swing.JSlider();
         heigthFallValue1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         panelHeigthFall2 = new javax.swing.JPanel();
         sliderHeigthFallTwo = new javax.swing.JSlider();
         heigthFallValue2 = new javax.swing.JTextField();
+        panelGravityConfig = new javax.swing.JPanel();
         panelGravity = new javax.swing.JPanel();
         sliderGravity = new javax.swing.JSlider();
         txtGravityValue = new javax.swing.JTextField();
+        panelRadiusConfig = new javax.swing.JPanel();
         panelRadius1 = new javax.swing.JPanel();
         sliderRadius1 = new javax.swing.JSlider();
         txtRadiusValue1 = new javax.swing.JTextField();
         panelRadius2 = new javax.swing.JPanel();
-        sliderRadius2 = new javax.swing.JSlider();
         txtRadiusValue2 = new javax.swing.JTextField();
-        sliderRadius3 = new javax.swing.JSlider();
-        sliderRadius4 = new javax.swing.JSlider();
-        sliderRadius5 = new javax.swing.JSlider();
-        sliderRadius6 = new javax.swing.JSlider();
+        sliderRadius2 = new javax.swing.JSlider();
+        panelFrequencyConfig = new javax.swing.JPanel();
+        samplesPanel = new javax.swing.JPanel();
+        samplesSlider = new javax.swing.JSlider();
+        samplesTextField = new javax.swing.JTextField();
+        tbsPanel = new javax.swing.JPanel();
+        tbsSlider = new javax.swing.JSlider();
+        tbsTextField = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(406, 200));
         setLayout(null);
 
-        panelHeigthFall1.setBorder(javax.swing.BorderFactory.createTitledBorder("Heigth Fall (h1)"));
+        btnGo.setText("OK");
+        btnGo.setName("btnGo"); // NOI18N
+        add(btnGo);
+        btnGo.setBounds(10, 420, 47, 23);
+
+        btnCancel.setText("Cancel");
+        btnCancel.setName("btnCancel"); // NOI18N
+        add(btnCancel);
+        btnCancel.setBounds(60, 420, 65, 23);
+
+        btnDefaultParameters.setText("Default parameters");
+        btnDefaultParameters.setName("btnDefaultParameters"); // NOI18N
+        add(btnDefaultParameters);
+        btnDefaultParameters.setBounds(300, 420, 130, 23);
+
+        tabbedPaneConfig.setName("tabbedPaneConfig"); // NOI18N
+
+        panelHeigthConfig.setName("panelHeigthConfig"); // NOI18N
+
+        panelHeigthFall1.setBorder(javax.swing.BorderFactory.createTitledBorder("Heigth Fall (h1) [m]"));
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(RollPaperCustomizer.class);
         panelHeigthFall1.setForeground(resourceMap.getColor("jPanel1.foreground")); // NOI18N
         panelHeigthFall1.setMaximumSize(new java.awt.Dimension(0, 0));
         panelHeigthFall1.setName("heightSettings"); // NOI18N
 
         sliderHeigthFallOne.setMajorTickSpacing(10);
+        sliderHeigthFallOne.setMinimum(10);
         sliderHeigthFallOne.setMinorTickSpacing(2);
         sliderHeigthFallOne.setPaintLabels(true);
         sliderHeigthFallOne.setPaintTicks(true);
         sliderHeigthFallOne.setToolTipText("Heigth of fall");
-        sliderHeigthFallOne.setValue(2);
         sliderHeigthFallOne.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         sliderHeigthFallOne.setName("sliderHeigthFallOne"); // NOI18N
         sliderHeigthFallOne.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -118,36 +145,16 @@ public class RollPaperCustomizer extends javax.swing.JPanel implements ICustomiz
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        add(panelHeigthFall1);
-        panelHeigthFall1.setBounds(10, 20, 410, 70);
-        panelHeigthFall1.getAccessibleContext().setAccessibleName("Altura da queda");
-        panelHeigthFall1.getAccessibleContext().setAccessibleDescription("Altura da queda");
-
-        jButton1.setText("OK");
-        jButton1.setName("jButton1"); // NOI18N
-        add(jButton1);
-        jButton1.setBounds(10, 400, 47, 23);
-
-        jButton2.setText("Cancel");
-        jButton2.setName("jButton2"); // NOI18N
-        add(jButton2);
-        jButton2.setBounds(60, 400, 65, 23);
-
-        jButton3.setText("Default parameters");
-        jButton3.setName("jButton3"); // NOI18N
-        add(jButton3);
-        jButton3.setBounds(300, 400, 125, 23);
-
-        panelHeigthFall2.setBorder(javax.swing.BorderFactory.createTitledBorder("Heigth Fall (h2)"));
+        panelHeigthFall2.setBorder(javax.swing.BorderFactory.createTitledBorder("Heigth Fall (h2) [m]"));
         panelHeigthFall2.setMaximumSize(new java.awt.Dimension(0, 0));
         panelHeigthFall2.setName("panelHeigthFall2"); // NOI18N
 
         sliderHeigthFallTwo.setMajorTickSpacing(10);
+        sliderHeigthFallTwo.setMinimum(10);
         sliderHeigthFallTwo.setMinorTickSpacing(2);
         sliderHeigthFallTwo.setPaintLabels(true);
         sliderHeigthFallTwo.setPaintTicks(true);
         sliderHeigthFallTwo.setToolTipText("Heigth of fall");
-        sliderHeigthFallTwo.setValue(2);
         sliderHeigthFallTwo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         sliderHeigthFallTwo.setName("sliderHeigthFallTwo"); // NOI18N
         sliderHeigthFallTwo.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -174,14 +181,38 @@ public class RollPaperCustomizer extends javax.swing.JPanel implements ICustomiz
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeigthFall2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(heigthFallValue2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addGap(54, 54, 54))
             .addGroup(panelHeigthFall2Layout.createSequentialGroup()
                 .addComponent(sliderHeigthFallTwo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        add(panelHeigthFall2);
-        panelHeigthFall2.setBounds(10, 90, 410, 70);
+        javax.swing.GroupLayout panelHeigthConfigLayout = new javax.swing.GroupLayout(panelHeigthConfig);
+        panelHeigthConfig.setLayout(panelHeigthConfigLayout);
+        panelHeigthConfigLayout.setHorizontalGroup(
+            panelHeigthConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelHeigthConfigLayout.createSequentialGroup()
+                .addGroup(panelHeigthConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelHeigthFall1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelHeigthFall2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelHeigthConfigLayout.setVerticalGroup(
+            panelHeigthConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelHeigthConfigLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelHeigthFall1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelHeigthFall2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(65, Short.MAX_VALUE))
+        );
+
+        panelHeigthFall1.getAccessibleContext().setAccessibleName("Altura da queda");
+        panelHeigthFall1.getAccessibleContext().setAccessibleDescription("Altura da queda");
+
+        tabbedPaneConfig.addTab("Heigth Fall Configuration", panelHeigthConfig);
+
+        panelGravityConfig.setName("panelGravityConfig"); // NOI18N
 
         panelGravity.setBorder(javax.swing.BorderFactory.createTitledBorder("Gravity (g)"));
         panelGravity.setName("panelGravity"); // NOI18N
@@ -204,26 +235,45 @@ public class RollPaperCustomizer extends javax.swing.JPanel implements ICustomiz
         panelGravity.setLayout(panelGravityLayout);
         panelGravityLayout.setHorizontalGroup(
             panelGravityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelGravityLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGravityLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(sliderGravity, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtGravityValue, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap())
         );
         panelGravityLayout.setVerticalGroup(
             panelGravityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGravityLayout.createSequentialGroup()
-                .addComponent(sliderGravity, javax.swing.GroupLayout.PREFERRED_SIZE, 40, Short.MAX_VALUE)
-                .addGap(9, 9, 9))
-            .addGroup(panelGravityLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtGravityValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGroup(panelGravityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sliderGravity, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                    .addGroup(panelGravityLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(txtGravityValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(20, 20, 20))
         );
 
-        add(panelGravity);
-        panelGravity.setBounds(10, 160, 410, 70);
+        javax.swing.GroupLayout panelGravityConfigLayout = new javax.swing.GroupLayout(panelGravityConfig);
+        panelGravityConfig.setLayout(panelGravityConfigLayout);
+        panelGravityConfigLayout.setHorizontalGroup(
+            panelGravityConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGravityConfigLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelGravity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelGravityConfigLayout.setVerticalGroup(
+            panelGravityConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGravityConfigLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelGravity, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
+        );
+
+        tabbedPaneConfig.addTab("Gravity", panelGravityConfig);
+
+        panelRadiusConfig.setName("panelRadiusConfig"); // NOI18N
 
         panelRadius1.setBorder(javax.swing.BorderFactory.createTitledBorder("Radius (r1)"));
         panelRadius1.setMinimumSize(new java.awt.Dimension(410, 70));
@@ -246,7 +296,7 @@ public class RollPaperCustomizer extends javax.swing.JPanel implements ICustomiz
                 .addComponent(sliderRadius1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtRadiusValue1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         panelRadius1Layout.setVerticalGroup(
             panelRadius1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,89 +304,174 @@ public class RollPaperCustomizer extends javax.swing.JPanel implements ICustomiz
                 .addContainerGap()
                 .addComponent(txtRadiusValue1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(sliderRadius1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, Short.MAX_VALUE)
+            .addComponent(sliderRadius1, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
         );
-
-        add(panelRadius1);
-        panelRadius1.setBounds(10, 230, 410, 70);
 
         panelRadius2.setBorder(javax.swing.BorderFactory.createTitledBorder("Radius (r2)"));
         panelRadius2.setName("panelRadius2"); // NOI18N
+        panelRadius2.setLayout(new java.awt.GridBagLayout());
+
+        txtRadiusValue2.setName("txtRadiusValue2"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 29;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(31, 6, 0, 29);
+        panelRadius2.add(txtRadiusValue2, gridBagConstraints);
 
         sliderRadius2.setMajorTickSpacing(10);
         sliderRadius2.setMinorTickSpacing(2);
         sliderRadius2.setPaintLabels(true);
         sliderRadius2.setPaintTicks(true);
         sliderRadius2.setName("sliderRadius2"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 291;
+        gridBagConstraints.ipady = -2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 8, 59, 0);
+        panelRadius2.add(sliderRadius2, gridBagConstraints);
 
-        txtRadiusValue2.setName("txtRadiusValue2"); // NOI18N
-
-        sliderRadius3.setMajorTickSpacing(10);
-        sliderRadius3.setMinorTickSpacing(2);
-        sliderRadius3.setPaintLabels(true);
-        sliderRadius3.setPaintTicks(true);
-        sliderRadius3.setName("sliderRadius3"); // NOI18N
-
-        sliderRadius4.setMajorTickSpacing(10);
-        sliderRadius4.setMinorTickSpacing(2);
-        sliderRadius4.setPaintLabels(true);
-        sliderRadius4.setPaintTicks(true);
-        sliderRadius4.setName("sliderRadius4"); // NOI18N
-
-        sliderRadius5.setMajorTickSpacing(10);
-        sliderRadius5.setMinorTickSpacing(2);
-        sliderRadius5.setPaintLabels(true);
-        sliderRadius5.setPaintTicks(true);
-        sliderRadius5.setName("sliderRadius5"); // NOI18N
-
-        sliderRadius6.setMajorTickSpacing(10);
-        sliderRadius6.setMinorTickSpacing(2);
-        sliderRadius6.setPaintLabels(true);
-        sliderRadius6.setPaintTicks(true);
-        sliderRadius6.setName("sliderRadius6"); // NOI18N
-
-        javax.swing.GroupLayout panelRadius2Layout = new javax.swing.GroupLayout(panelRadius2);
-        panelRadius2.setLayout(panelRadius2Layout);
-        panelRadius2Layout.setHorizontalGroup(
-            panelRadius2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRadius2Layout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addGroup(panelRadius2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sliderRadius2, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sliderRadius3, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sliderRadius4, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sliderRadius5, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelRadius2Layout.createSequentialGroup()
-                        .addComponent(sliderRadius6, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtRadiusValue2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(28, Short.MAX_VALUE))
-        );
-        panelRadius2Layout.setVerticalGroup(
-            panelRadius2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRadius2Layout.createSequentialGroup()
-                .addComponent(sliderRadius6, javax.swing.GroupLayout.PREFERRED_SIZE, 43, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sliderRadius5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sliderRadius4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sliderRadius3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sliderRadius2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, Short.MAX_VALUE))
-            .addGroup(panelRadius2Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelRadiusConfigLayout = new javax.swing.GroupLayout(panelRadiusConfig);
+        panelRadiusConfig.setLayout(panelRadiusConfigLayout);
+        panelRadiusConfigLayout.setHorizontalGroup(
+            panelRadiusConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRadiusConfigLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtRadiusValue2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addGroup(panelRadiusConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelRadius1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelRadius2, javax.swing.GroupLayout.PREFERRED_SIZE, 405, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        panelRadiusConfigLayout.setVerticalGroup(
+            panelRadiusConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRadiusConfigLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(panelRadius1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(panelRadius2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        add(panelRadius2);
-        panelRadius2.setBounds(10, 300, 410, 70);
-    }// </editor-fold>//GEN-END:initComponents
+        tabbedPaneConfig.addTab("Radius", panelRadiusConfig);
 
-    private void sliderHeigthFallOneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderHeigthFallOneStateChanged
-        heigthFallValue1.setText("" + sliderHeigthFallOne.getValue());
-    }//GEN-LAST:event_sliderHeigthFallOneStateChanged
+        panelFrequencyConfig.setName("panelFrequencyConfig"); // NOI18N
+
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages"); // NOI18N
+        samplesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("rec.exp.customizer.title.samples"))); // NOI18N
+        samplesPanel.setToolTipText(bundle.getString("rec.exp.customizer.tip.samples")); // NOI18N
+        samplesPanel.setMinimumSize(new java.awt.Dimension(82, 83));
+        samplesPanel.setName("samplesPanel"); // NOI18N
+        samplesPanel.setPreferredSize(new java.awt.Dimension(82, 224));
+        samplesPanel.setLayout(new java.awt.GridBagLayout());
+
+        samplesSlider.setMajorTickSpacing(200);
+        samplesSlider.setMaximum(950);
+        samplesSlider.setMinimum(50);
+        samplesSlider.setMinorTickSpacing(50);
+        samplesSlider.setPaintLabels(true);
+        samplesSlider.setPaintTicks(true);
+        samplesSlider.setToolTipText(bundle.getString("rec.exp.customizer.tip.samples")); // NOI18N
+        samplesSlider.setValue(200);
+        samplesSlider.setMinimumSize(new java.awt.Dimension(200, 47));
+        samplesSlider.setName("samplesSlider"); // NOI18N
+        samplesSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                samplesSliderStateChanged(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        samplesPanel.add(samplesSlider, gridBagConstraints);
+
+        samplesTextField.setColumns(4);
+        samplesTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        samplesTextField.setText("200");
+        samplesTextField.setToolTipText(bundle.getString("rec.exp.customizer.tip.samples")); // NOI18N
+        samplesTextField.setMinimumSize(new java.awt.Dimension(43, 20));
+        samplesTextField.setName("samplesTextField"); // NOI18N
+        samplesTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                samplesTextFieldFocusLost(evt);
+            }
+        });
+        samplesPanel.add(samplesTextField, new java.awt.GridBagConstraints());
+
+        tbsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("rec.exp.customizer.title.tbs"))); // NOI18N
+        tbsPanel.setToolTipText(bundle.getString("rec.exp.customizer.tip.tbs")); // NOI18N
+        tbsPanel.setName("tbsPanel"); // NOI18N
+        tbsPanel.setPreferredSize(new java.awt.Dimension(82, 224));
+        tbsPanel.setLayout(new java.awt.GridBagLayout());
+
+        tbsSlider.setMajorTickSpacing(50);
+        tbsSlider.setMaximum(500);
+        tbsSlider.setMinimum(50);
+        tbsSlider.setMinorTickSpacing(10);
+        tbsSlider.setPaintLabels(true);
+        tbsSlider.setPaintTicks(true);
+        tbsSlider.setToolTipText(bundle.getString("rec.exp.customizer.tip.tbs")); // NOI18N
+        tbsSlider.setValue(100);
+        tbsSlider.setName("tbsSlider"); // NOI18N
+        tbsSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tbsSliderStateChanged(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        tbsPanel.add(tbsSlider, gridBagConstraints);
+
+        tbsTextField.setColumns(4);
+        tbsTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tbsTextField.setText("100");
+        tbsTextField.setToolTipText(bundle.getString("rec.exp.customizer.tip.tbs")); // NOI18N
+        tbsTextField.setMinimumSize(new java.awt.Dimension(43, 20));
+        tbsTextField.setName("tbsTextField"); // NOI18N
+        tbsTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tbsTextFieldFocusLost(evt);
+            }
+        });
+        tbsPanel.add(tbsTextField, new java.awt.GridBagConstraints());
+
+        javax.swing.GroupLayout panelFrequencyConfigLayout = new javax.swing.GroupLayout(panelFrequencyConfig);
+        panelFrequencyConfig.setLayout(panelFrequencyConfigLayout);
+        panelFrequencyConfigLayout.setHorizontalGroup(
+            panelFrequencyConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 415, Short.MAX_VALUE)
+            .addGroup(panelFrequencyConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFrequencyConfigLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(panelFrequencyConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(samplesPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+                        .addComponent(tbsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(76, 76, 76)))
+        );
+        panelFrequencyConfigLayout.setVerticalGroup(
+            panelFrequencyConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 222, Short.MAX_VALUE)
+            .addGroup(panelFrequencyConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelFrequencyConfigLayout.createSequentialGroup()
+                    .addGap(2, 2, 2)
+                    .addComponent(tbsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(samplesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        tabbedPaneConfig.addTab("Simulation Settings", panelFrequencyConfig);
+
+        add(tabbedPaneConfig);
+        tabbedPaneConfig.setBounds(10, 160, 420, 250);
+        tabbedPaneConfig.getAccessibleContext().setAccessibleName("tabbedPaneConfig");
+    }// </editor-fold>//GEN-END:initComponents
 
     private void sliderHeigthFallTwoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderHeigthFallTwoStateChanged
         heigthFallValue2.setText("" + sliderHeigthFallTwo.getValue());
@@ -347,28 +482,56 @@ public class RollPaperCustomizer extends javax.swing.JPanel implements ICustomiz
     }//GEN-LAST:event_sliderGravityStateChanged
 
     private void heigthFallValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heigthFallValue1ActionPerformed
-        sliderHeigthFallOne.setValue(Integer.valueOf(heigthFallValue1.getText()));
-    }//GEN-LAST:event_heigthFallValue1ActionPerformed
+
+        sliderHeigthFallOne.setValue(Integer.valueOf(heigthFallValue1.getText()));     }//GEN-LAST:event_heigthFallValue1ActionPerformed
+
+    private void sliderHeigthFallOneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderHeigthFallOneStateChanged
+
+        heigthFallValue1.setText("" + sliderHeigthFallOne.getValue());     }//GEN-LAST:event_sliderHeigthFallOneStateChanged
+
+    private void samplesSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_samplesSliderStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_samplesSliderStateChanged
+
+    private void samplesTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_samplesTextFieldFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_samplesTextFieldFocusLost
+
+    private void tbsSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tbsSliderStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbsSliderStateChanged
+
+    private void tbsTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tbsTextFieldFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbsTextFieldFocusLost
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnDefaultParameters;
+    private javax.swing.JButton btnGo;
     private javax.swing.JTextField heigthFallValue1;
     private javax.swing.JTextField heigthFallValue2;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JPanel panelFrequencyConfig;
     private javax.swing.JPanel panelGravity;
+    private javax.swing.JPanel panelGravityConfig;
+    private javax.swing.JPanel panelHeigthConfig;
     private javax.swing.JPanel panelHeigthFall1;
     private javax.swing.JPanel panelHeigthFall2;
     private javax.swing.JPanel panelRadius1;
     private javax.swing.JPanel panelRadius2;
+    private javax.swing.JPanel panelRadiusConfig;
+    private javax.swing.JPanel samplesPanel;
+    private javax.swing.JSlider samplesSlider;
+    private javax.swing.JTextField samplesTextField;
     private javax.swing.JSlider sliderGravity;
     private javax.swing.JSlider sliderHeigthFallOne;
     private javax.swing.JSlider sliderHeigthFallTwo;
     private javax.swing.JSlider sliderRadius1;
     private javax.swing.JSlider sliderRadius2;
-    private javax.swing.JSlider sliderRadius3;
-    private javax.swing.JSlider sliderRadius4;
-    private javax.swing.JSlider sliderRadius5;
-    private javax.swing.JSlider sliderRadius6;
+    private javax.swing.JTabbedPane tabbedPaneConfig;
+    private javax.swing.JPanel tbsPanel;
+    private javax.swing.JSlider tbsSlider;
+    private javax.swing.JTextField tbsTextField;
     private javax.swing.JTextField txtGravityValue;
     private javax.swing.JTextField txtRadiusValue1;
     private javax.swing.JTextField txtRadiusValue2;
