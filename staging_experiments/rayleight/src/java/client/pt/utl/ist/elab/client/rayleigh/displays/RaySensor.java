@@ -28,7 +28,7 @@ public class RaySensor extends javax.swing.JPanel implements com.linkare.rec.imp
 
 	private BufferedImage imgTube1 = new BufferedImage(50, 400, BufferedImage.TYPE_INT_ARGB);
 	private Icon icon = new javax.swing.ImageIcon(getClass().getResource(
-			"/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
+			"/com/linkare/rec/impl/newface/resources/legacy/sensor16.gif"));
 	private java.text.DecimalFormat decf = new java.text.DecimalFormat();
 
 	/** Creates new form SeringeSensor */

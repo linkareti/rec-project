@@ -6,7 +6,7 @@
 
 package pt.utl.ist.elab.client.vyounginterf.displays;
 
-import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
+import com.linkare.rec.impl.ui.table.MultSeriesTable;
 
 /**
  * 

@@ -56,7 +56,6 @@
         <extension name="OpenORBClient" href="openORB/OpenORBClient.jnlp" />
         
         <property name="ReCFaceConfig" value="config/ReCFaceConfig.xml" />
-        <property name="ReCBaseUIConfig" value="etc/ReCBaseUIConfig.xml" />
         <property name="org.omg.CORBA.ORBClass" value="org.openorb.orb.core.ORB" />
         <property name="org.omg.CORBA.ORBSingletonClass" value="org.openorb.orb.core.ORBSingleton" />
         <property name="ReC.MultiCastController.BindName" value="MultiCastController" />

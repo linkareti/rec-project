@@ -6,7 +6,7 @@
 
 package pt.utl.ist.elab.client.momentoInercia.displays;
 
-import com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph;
+import com.linkare.rec.impl.ui.graph.MultSeriesXYExperimentGraph;
 
 /**
  * 

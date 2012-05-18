@@ -31,7 +31,7 @@ public class DecaySensorDisplay extends JPanel implements ExpDataDisplay {
 	private void initComponents()// GEN-BEGIN:initComponents
 	{
 		jScrollPane1 = new javax.swing.JScrollPane();
-		sensorDisplay1 = new com.linkare.rec.impl.baseUI.display.SensorDisplay();
+		sensorDisplay1 = new com.linkare.rec.impl.ui.display.SensorDisplay();
 
 		setLayout(new java.awt.BorderLayout());
 
@@ -47,7 +47,7 @@ public class DecaySensorDisplay extends JPanel implements ExpDataDisplay {
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JScrollPane jScrollPane1;
-	private com.linkare.rec.impl.baseUI.display.SensorDisplay sensorDisplay1;
+	private com.linkare.rec.impl.ui.display.SensorDisplay sensorDisplay1;
 
 	// End of variables declaration//GEN-END:variables
 

@@ -11,17 +11,17 @@
 	<mediaConfig videoLocation="pendulogravitico$rec.exp.url.pg.video"
 		canSave="true" offlinePlay="true" />
 	<display toolTipBundleKey="pendulogravitico$rec.exp.display.pg.tip.sensor"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor"
 		displayStringBundleKey="pendulogravitico$rec.exp.display.pg.title.sensor"
 		classLocationBundleKey="pendulogravitico$rec.exp.display.pg.loc.sensor"
 		visible="true" selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="pendulogravitico$rec.exp.display.pg.tip.1"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table"
 		displayStringBundleKey="pendulogravitico$rec.exp.display.pg.title.1"
 		classLocationBundleKey="pendulogravitico$rec.exp.display.pg.loc.1"
 		visible="true" selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="pendulogravitico$rec.exp.display.pg.tip.2"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
 		displayStringBundleKey="pendulogravitico$rec.exp.display.pg.title.2"
 		classLocationBundleKey="pendulogravitico$rec.exp.display.pg.loc.2"
 		visible="true" selected="true" order="0" enabled="false" connected="false" />

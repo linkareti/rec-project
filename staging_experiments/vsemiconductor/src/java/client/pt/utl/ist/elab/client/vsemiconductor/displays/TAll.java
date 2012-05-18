@@ -11,7 +11,7 @@ package pt.utl.ist.elab.client.vsemiconductor.displays;
  * @author André Neto - LEFT - IST
  */
 
-public class TAll extends com.linkare.rec.impl.baseUI.graph.MultiPanelExperimentGraph {
+public class TAll extends com.linkare.rec.impl.ui.graph.MultiPanelExperimentGraph {
 
 	/** Creates a new instance of EGAll */
 	public TAll() {

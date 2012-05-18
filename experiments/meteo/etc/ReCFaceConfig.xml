@@ -1,8 +1,7 @@
 <apparatus toolTipBundleKey="meteo$rec.exp.tip.meteo"
 	location="ELAB_METEO_V01" iconLocationBundleKey="meteo$rec.exp.icon.meteo"
 	headerDisplayClassLocationBundleKey="" displayStringBundleKey="meteo$rec.exp.title.meteo"
-	displayFactoryClassLocationBundleKey=""
-	desktopLocationBundleKey="meteo$rec.exp.background.meteo"
+	displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="meteo$rec.exp.background.meteo"
 	dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="meteo$rec.exp.customizer.meteo"
 	visible="true" selected="true" order="0" enabled="false" connected="false">
 	<localizationBundle name="meteo"
@@ -10,55 +9,55 @@
 	<mediaConfig videoLocation="meteo$rec.exp.url.meteo.video"
 		canSave="true" offlinePlay="true" />
 	<display toolTipBundleKey="meteo$rec.exp.display.meteo.tip.sensor"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor"
 		displayStringBundleKey="meteo$rec.exp.display.meteo.title.sensor"
 		classLocationBundleKey="meteo$rec.exp.display.meteo.loc.sensor"
 		visible="true" selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="meteo$rec.exp.display.meteo.tip.1"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table"
 		displayStringBundleKey="meteo$rec.exp.display.meteo.title.1"
-		classLocationBundleKey="meteo$rec.exp.display.meteo.loc.1"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
+		classLocationBundleKey="meteo$rec.exp.display.meteo.loc.1" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="meteo$rec.exp.display.meteo.tip.2"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
 		displayStringBundleKey="meteo$rec.exp.display.meteo.title.2"
-		classLocationBundleKey="meteo$rec.exp.display.meteo.loc.2"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
+		classLocationBundleKey="meteo$rec.exp.display.meteo.loc.2" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="meteo$rec.exp.display.meteo.tip.3"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
 		displayStringBundleKey="meteo$rec.exp.display.meteo.title.3"
-		classLocationBundleKey="meteo$rec.exp.display.meteo.loc.3"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
+		classLocationBundleKey="meteo$rec.exp.display.meteo.loc.3" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="meteo$rec.exp.display.meteo.tip.4"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
 		displayStringBundleKey="meteo$rec.exp.display.meteo.title.4"
-		classLocationBundleKey="meteo$rec.exp.display.meteo.loc.4"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
+		classLocationBundleKey="meteo$rec.exp.display.meteo.loc.4" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="meteo$rec.exp.display.meteo.tip.5"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
 		displayStringBundleKey="meteo$rec.exp.display.meteo.title.5"
-		classLocationBundleKey="meteo$rec.exp.display.meteo.loc.5"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
+		classLocationBundleKey="meteo$rec.exp.display.meteo.loc.5" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="meteo$rec.exp.display.meteo.tip.6"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
 		displayStringBundleKey="meteo$rec.exp.display.meteo.title.6"
-		classLocationBundleKey="meteo$rec.exp.display.meteo.loc.6"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
+		classLocationBundleKey="meteo$rec.exp.display.meteo.loc.6" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="meteo$rec.exp.display.meteo.tip.7"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
 		displayStringBundleKey="meteo$rec.exp.display.meteo.title.7"
-		classLocationBundleKey="meteo$rec.exp.display.meteo.loc.7"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
+		classLocationBundleKey="meteo$rec.exp.display.meteo.loc.7" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="meteo$rec.exp.display.meteo.tip.8"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
 		displayStringBundleKey="meteo$rec.exp.display.meteo.title.8"
-		classLocationBundleKey="meteo$rec.exp.display.meteo.loc.8"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
+		classLocationBundleKey="meteo$rec.exp.display.meteo.loc.8" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="meteo$rec.exp.display.meteo.tip.9"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
 		displayStringBundleKey="meteo$rec.exp.display.meteo.title.9"
-		classLocationBundleKey="meteo$rec.exp.display.meteo.loc.9"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
+		classLocationBundleKey="meteo$rec.exp.display.meteo.loc.9" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
 	<webResource toolTipLocationBundleKey="" internalBrowser="false"
 		iconLocationBundleKey="" visible="true" selected="true" order="0"
 		enabled="false" connected="false" />

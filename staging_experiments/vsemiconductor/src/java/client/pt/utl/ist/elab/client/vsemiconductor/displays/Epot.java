@@ -10,9 +10,9 @@ package pt.utl.ist.elab.client.vsemiconductor.displays;
 
 /**
  * 
- * @author Pedro Queir� e Nuno Fernandes
+ * @author Pedro Queiró e Nuno Fernandes
  */
-public class Epot extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph {
+public class Epot extends com.linkare.rec.impl.ui.graph.MultSeriesXYExperimentGraph {
 
 	/** Creates a new instance of W */
 	public Epot() {

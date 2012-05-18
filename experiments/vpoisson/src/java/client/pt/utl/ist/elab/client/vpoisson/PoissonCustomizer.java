@@ -18,6 +18,7 @@ package pt.utl.ist.elab.client.vpoisson;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import org.opensourcephysics.numerics.ParsedMultiVarFunction;
 import org.opensourcephysics.numerics.ParserException;
@@ -816,10 +817,18 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 	public static void main(final String args[]) {
 		ReCResourceBundle.loadResourceBundle("poisson",
 				"recresource:///pt/utl/ist/elab/client/vpoisson/resources/messages");
-		final javax.swing.JFrame dummy = new javax.swing.JFrame();
-		dummy.getContentPane().add(new PoissonCustomizer());
-		dummy.pack();
-		dummy.show();
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				final javax.swing.JFrame dummy = new javax.swing.JFrame();
+				dummy.getContentPane().add(new PoissonCustomizer());
+				dummy.pack();
+				dummy.setVisible(true);
+			}
+		});
+		
 	}
 
 	private void verifyText(final JTextField field, final String dftValue) {

@@ -20,7 +20,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.EventListenerList;
 
-public class wavelenghtChooser extends javax.swing.JPanel {
+public class WavelenghtChooser extends javax.swing.JPanel {
 
 	// debugging main method
 	/*
@@ -38,7 +38,7 @@ public class wavelenghtChooser extends javax.swing.JPanel {
 	private static final long serialVersionUID = 8187478361284594697L;
 
 	/** Creates new form wavelenghtChooser */
-	public wavelenghtChooser() {
+	public WavelenghtChooser() {
 
 		initComponents();
 
@@ -262,9 +262,6 @@ class SpectrumCanvas extends java.awt.Canvas {
 		// for text
 		final Font little = new Font("Dialog", Font.PLAIN, 10);
 		final FontMetrics littlefm = getFontMetrics(little);
-
-		final Font big = new Font("Dialog", Font.BOLD, 14);
-		final FontMetrics bigfm = getFontMetrics(big);
 
 		// draw the Light spectrum
 		for (int i = 0; i < SpectrumCanvas.N; i++) {

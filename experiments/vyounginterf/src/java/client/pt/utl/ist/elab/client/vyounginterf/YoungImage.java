@@ -24,10 +24,11 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
-public class youngImage extends JComponent {
+public class YoungImage extends JComponent {
 
 	/**
 	 * 
@@ -42,66 +43,72 @@ public class youngImage extends JComponent {
 	static double larguraReal = 30; // em mm
 	static double distanciaPlano = 0.0001; // em m
 
-	static BufferedImage imagemBuffer = new BufferedImage((int) (youngImage.largura + 2 * youngImage.border),
-			(int) (youngImage.altura), BufferedImage.TYPE_INT_RGB);
+	static BufferedImage imagemBuffer = new BufferedImage((int) (YoungImage.largura + 2 * YoungImage.border),
+			(int) (YoungImage.altura), BufferedImage.TYPE_INT_RGB);
 
 	public static void main(final String[] args) {
 
-		final JFrame frame = new JFrame("Young's Interferences Test");
-		final youngImage panel = new youngImage();
-		panel.setLayout(new BorderLayout());
-		panel.setBackground(Color.BLACK);
-		frame.getContentPane().setLayout(new BorderLayout());
-		frame.getContentPane().add(panel);
-		panel.setPreferredSize(new Dimension(1200, 400));
-		frame.pack();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.show();
+		SwingUtilities.invokeLater(new Runnable() {
 
-		ReCResourceBundle.loadResourceBundle("younginterf",
-				"recresource:///pt/utl/ist/elab/client/vyounginterf/resources/messages");
+			@Override
+			public void run() {
+				final JFrame frame = new JFrame("Young's Interferences Test");
+				final YoungImage panel = new YoungImage();
+				panel.setLayout(new BorderLayout());
+				panel.setBackground(Color.BLACK);
+				frame.getContentPane().setLayout(new BorderLayout());
+				frame.getContentPane().add(panel);
+				panel.setPreferredSize(new Dimension(1200, 400));
+				frame.pack();
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setVisible(true);
 
-		final JFrame frame2 = new JFrame("Young's Interferences ImageIcon Test");
-		final JPanel pane = new JPanel(true);
+				ReCResourceBundle.loadResourceBundle("younginterf",
+						"recresource:///pt/utl/ist/elab/client/vyounginterf/resources/messages");
 
-		pane.setLayout(new BorderLayout());
-		pane.setBackground(Color.BLACK);
-		frame2.getContentPane().setLayout(new BorderLayout());
-		frame2.getContentPane().add(pane);
-		pane.setPreferredSize(new Dimension(1200, 400));
-		frame2.pack();
-		frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// frame2.show();
-		final javax.swing.ImageIcon icon_ = youngImage.createIcon();
-		final JLabel label = new JLabel(icon_);
+				final JFrame frame2 = new JFrame("Young's Interferences ImageIcon Test");
+				final JPanel pane = new JPanel(true);
 
-		pane.add(label);
+				pane.setLayout(new BorderLayout());
+				pane.setBackground(Color.BLACK);
+				frame2.getContentPane().setLayout(new BorderLayout());
+				frame2.getContentPane().add(pane);
+				pane.setPreferredSize(new Dimension(1200, 400));
+				frame2.pack();
+				frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				// frame2.show();
+				final javax.swing.ImageIcon icon_ = YoungImage.createIcon();
+				final JLabel label = new JLabel(icon_);
+
+				pane.add(label);
+			}
+		});
 
 	}// end main
 
 	public static javax.swing.ImageIcon createIcon() {
 
 		final javax.swing.ImageIcon icon = new ImageIcon(java.awt.Toolkit.getDefaultToolkit().createImage(
-				new java.awt.image.MemoryImageSource(youngImage.imagemBuffer.getWidth(), youngImage.imagemBuffer
-						.getHeight(), youngImage.Desenhar(), 0, youngImage.imagemBuffer.getWidth())));
+				new java.awt.image.MemoryImageSource(YoungImage.imagemBuffer.getWidth(), YoungImage.imagemBuffer
+						.getHeight(), YoungImage.Desenhar(), 0, YoungImage.imagemBuffer.getWidth())));
 		return icon;
 	}
 
 	@Override
 	public void paint(final Graphics g) {
-		youngImage.imagemBuffer.getGraphics().drawImage(
+		YoungImage.imagemBuffer.getGraphics().drawImage(
 				java.awt.Toolkit.getDefaultToolkit().createImage(
-						new java.awt.image.MemoryImageSource(youngImage.imagemBuffer.getWidth(),
-								youngImage.imagemBuffer.getHeight(), youngImage.Desenhar(), 0, youngImage.imagemBuffer
+						new java.awt.image.MemoryImageSource(YoungImage.imagemBuffer.getWidth(),
+								YoungImage.imagemBuffer.getHeight(), YoungImage.Desenhar(), 0, YoungImage.imagemBuffer
 										.getWidth())), 0, 0, null);
 
-		g.drawImage(youngImage.imagemBuffer, 0, 0, this);
+		g.drawImage(YoungImage.imagemBuffer, 0, 0, this);
 	}
 
 	public static int[] Desenhar() {
 
-		final BufferedImage imgBuf = new BufferedImage((int) (youngImage.largura + 2 * youngImage.border),
-				(int) (youngImage.altura), BufferedImage.TYPE_INT_RGB);
+		final BufferedImage imgBuf = new BufferedImage((int) (YoungImage.largura + 2 * YoungImage.border),
+				(int) (YoungImage.altura), BufferedImage.TYPE_INT_RGB);
 
 		final Graphics g = imgBuf.getGraphics();
 
@@ -113,19 +120,19 @@ public class youngImage extends JComponent {
 		final Font big = new Font("Dialog", Font.BOLD, 14);
 		// FontMetrics bigfm = getFontMetrics(big);
 
-		double derivadaI = 0;
+//		double derivadaI = 0;
 		double gama = 0;
-		final double gamA = 0;
-		double xReal = -youngImage.larguraReal / 2;
-		final double dx = youngImage.larguraReal / youngImage.largura;
+//		final double gamA = 0;
+		double xReal = -YoungImage.larguraReal / 2;
+		final double dx = YoungImage.larguraReal / YoungImage.largura;
 		// int xVirtual = (int)( largura*xReal/larguraReal + largura/2 );
-		int xVirtual = youngImage.roundToInt(youngImage.largura * xReal / youngImage.larguraReal + youngImage.largura
+		int xVirtual = YoungImage.roundToInt(YoungImage.largura * xReal / YoungImage.larguraReal + YoungImage.largura
 				/ 2);
-		final int xVirtualAnterior = xVirtual + 1;
+//		final int xVirtualAnterior = xVirtual + 1;
 		double gamaAnterior = gama;
 
 		// System.out.println("o valor de dx e': "+dx);
-		final double preCalc = (youngImage.wl * 10e-9 * youngImage.distanciaPlano / (youngImage.abertura * 10e-3)) * 1000;
+//		final double preCalc = (YoungImage.wl * 10e-9 * YoungImage.distanciaPlano / (YoungImage.abertura * 10e-3)) * 1000;
 		double deltaX = 0;
 		int tag = 0;
 		int tag_ = 0;
@@ -135,9 +142,9 @@ public class youngImage extends JComponent {
 		do {// start do cicle
 			passa = true;
 			gamaAnterior = gama;
-			gama = youngImage.CalculateGama(xReal, youngImage.wl, youngImage.abertura, youngImage.distanciaPlano);
+			gama = YoungImage.CalculateGama(xReal, YoungImage.wl, YoungImage.abertura, YoungImage.distanciaPlano);
 
-			derivadaI = (gama - gamaAnterior) / dx;
+//			derivadaI = (gama - gamaAnterior) / dx;
 
 			while (xReal >= 0 && passa) {
 				if (xReal >= -dx && xReal <= dx) {
@@ -172,30 +179,30 @@ public class youngImage extends JComponent {
 			// System.out.println("xVirtual e' "+xVirtual );
 			// System.out.println("xReal e' "+xReal + "\n");
 
-			final Color shade = Wavelength.wvColor((float) youngImage.wl, (float) gama);
+			final Color shade = Wavelength.wvColor((float) YoungImage.wl, (float) gama);
 
 			g.setColor(shade);
-			g.drawLine(xVirtual + youngImage.border, 110 + 60, xVirtual + youngImage.border, 190 + 60);
-			g.setColor(Wavelength.wvColor((float) youngImage.wl, 1));
+			g.drawLine(xVirtual + YoungImage.border, 110 + 60, xVirtual + YoungImage.border, 190 + 60);
+			g.setColor(Wavelength.wvColor((float) YoungImage.wl, 1));
 			// g.drawLine(xVirtual+border,100- (int)(gama*100), (int)(
 			// largura*(xReal+dx)/larguraReal + largura/2 )+border,100-
 			// (int)((CalculateGama((xReal+dx), wl, abertura,
 			// distanciaPlano))*100) );
 			g.drawLine(
-					xVirtual + youngImage.border,
-					149 - youngImage.roundToInt(gama * 100),
-					youngImage.roundToInt(youngImage.largura * (xReal + dx) / youngImage.larguraReal
-							+ youngImage.largura / 2)
-							+ youngImage.border, 149 - youngImage.roundToInt((youngImage.CalculateGama((xReal + dx),
-							youngImage.wl, youngImage.abertura, youngImage.distanciaPlano)) * 100));
+					xVirtual + YoungImage.border,
+					149 - YoungImage.roundToInt(gama * 100),
+					YoungImage.roundToInt(YoungImage.largura * (xReal + dx) / YoungImage.larguraReal
+							+ YoungImage.largura / 2)
+							+ YoungImage.border, 149 - YoungImage.roundToInt((YoungImage.CalculateGama((xReal + dx),
+							YoungImage.wl, YoungImage.abertura, YoungImage.distanciaPlano)) * 100));
 
 			// xVirtualAnterior = xVirtual;
 			xReal = xReal + dx;
 			// xVirtual = (int)( largura*xReal/larguraReal + largura/2 );
-			xVirtual = youngImage.roundToInt(youngImage.largura * xReal / youngImage.larguraReal + youngImage.largura
+			xVirtual = YoungImage.roundToInt(YoungImage.largura * xReal / YoungImage.larguraReal + YoungImage.largura
 					/ 2);
 
-		} while (xReal <= (youngImage.larguraReal + dx) / 2); // end do cicle
+		} while (xReal <= (YoungImage.larguraReal + dx) / 2); // end do cicle
 
 		// System.out.println("o valor de dx e': "+dx);
 
@@ -206,61 +213,61 @@ public class youngImage extends JComponent {
 		// +" =  " +(float)deltaX + " \u00b1 "+ (float)dx
 		// +" mm"+"  pre-calculado: " + preCalc ;
 		final String title = "\u03BB = "
-				+ youngImage.wl
+				+ YoungImage.wl
 				+ " nm                                                                                                                "
 				+ s1 + " =  " + (float) deltaX + " \u00b1 " + (float) dx + " mm";
 		// g.drawString(title, 2+border+bigfm.stringWidth(title), 20);
-		g.drawString(title, 2 + youngImage.border, 20);
+		g.drawString(title, 2 + YoungImage.border, 20);
 		// g.setFont(little);
 		// g.drawString(title, 2+border+littlefm.stringWidth(title), 30);
 		g.setFont(littleBold);
 
 		int i = 0;
 		// desenhar os eixos
-		g.drawLine(0 + youngImage.border, 101 + 50, (int) youngImage.largura + youngImage.border, 101 + 50);
-		g.drawLine(youngImage.roundToInt(youngImage.largura / 2) + youngImage.border, 0 + 50,
-				youngImage.roundToInt(youngImage.largura / 2) + youngImage.border, 100 + 50);
-		g.drawLine(youngImage.roundToInt(youngImage.largura / 2) + youngImage.border - 4, 0 + 48,
-				youngImage.roundToInt(youngImage.largura / 2) + 4 + youngImage.border, 0 + 48);
-		g.drawString("I Max ", youngImage.roundToInt(youngImage.largura / 2) + youngImage.border - 4, 0 + 40);
+		g.drawLine(0 + YoungImage.border, 101 + 50, (int) YoungImage.largura + YoungImage.border, 101 + 50);
+		g.drawLine(YoungImage.roundToInt(YoungImage.largura / 2) + YoungImage.border, 0 + 50,
+				YoungImage.roundToInt(YoungImage.largura / 2) + YoungImage.border, 100 + 50);
+		g.drawLine(YoungImage.roundToInt(YoungImage.largura / 2) + YoungImage.border - 4, 0 + 48,
+				YoungImage.roundToInt(YoungImage.largura / 2) + 4 + YoungImage.border, 0 + 48);
+		g.drawString("I Max ", YoungImage.roundToInt(YoungImage.largura / 2) + YoungImage.border - 4, 0 + 40);
 		g.setFont(little);
 		// desenhar os pontos dos eixos e legenda dos eixos
-		for (int conta = 0; conta <= (int) youngImage.largura / 2; conta = conta
-				+ youngImage.roundToInt(youngImage.largura / youngImage.larguraReal)) {
+		for (int conta = 0; conta <= (int) YoungImage.largura / 2; conta = conta
+				+ YoungImage.roundToInt(YoungImage.largura / YoungImage.larguraReal)) {
 			final String s = "" + i + "mm";
 			final String s_ = "" + (-i) + "mm";
-			g.drawLine(youngImage.border + (int) (youngImage.largura / 2) + conta, 90 + 50, youngImage.border
-					+ (int) (youngImage.largura / 2) + conta, 100 + 50);
-			g.drawLine(youngImage.border + (int) (youngImage.largura / 2) - conta, 90 + 50, youngImage.border
-					+ (int) (youngImage.largura / 2) - conta, 100 + 50);
+			g.drawLine(YoungImage.border + (int) (YoungImage.largura / 2) + conta, 90 + 50, YoungImage.border
+					+ (int) (YoungImage.largura / 2) + conta, 100 + 50);
+			g.drawLine(YoungImage.border + (int) (YoungImage.largura / 2) - conta, 90 + 50, YoungImage.border
+					+ (int) (YoungImage.largura / 2) - conta, 100 + 50);
 			// g.drawString(s,border + (int)(largura/2) +1+
 			// conta-(littlefm.stringWidth(s)/2) ,90+74);
 
-			g.drawString(s, youngImage.border + (int) (youngImage.largura / 2) + 1 + conta - (24 / 2), 90 + 74);
+			g.drawString(s, YoungImage.border + (int) (YoungImage.largura / 2) + 1 + conta - (24 / 2), 90 + 74);
 			// if(i!=0)g.drawString(s_,border + (int)(largura/2) -1-
 			// conta-(littlefm.stringWidth(s)/2) ,90+74);
 			if (i != 0) {
-				g.drawString(s_, youngImage.border + (int) (youngImage.largura / 2) - 1 - conta - (24 / 2), 90 + 74);
+				g.drawString(s_, YoungImage.border + (int) (YoungImage.largura / 2) - 1 - conta - (24 / 2), 90 + 74);
 			}
 			g.drawLine(
-					youngImage.border + (int) (youngImage.largura / 2) + conta
-							+ youngImage.roundToInt(1 * youngImage.largura / (youngImage.larguraReal * 2)),
+					YoungImage.border + (int) (YoungImage.largura / 2) + conta
+							+ YoungImage.roundToInt(1 * YoungImage.largura / (YoungImage.larguraReal * 2)),
 					100 + 50,
-					youngImage.border + (int) (youngImage.largura / 2) + conta
-							+ youngImage.roundToInt(1 * youngImage.largura / (youngImage.larguraReal * 2)), 95 + 50);
+					YoungImage.border + (int) (YoungImage.largura / 2) + conta
+							+ YoungImage.roundToInt(1 * YoungImage.largura / (YoungImage.larguraReal * 2)), 95 + 50);
 			g.drawLine(
-					youngImage.border + (int) (youngImage.largura / 2) - conta
-							- youngImage.roundToInt(1 * youngImage.largura / (youngImage.larguraReal * 2)),
+					YoungImage.border + (int) (YoungImage.largura / 2) - conta
+							- YoungImage.roundToInt(1 * YoungImage.largura / (YoungImage.larguraReal * 2)),
 					100 + 50,
-					youngImage.border + (int) (youngImage.largura / 2) - conta
-							- youngImage.roundToInt(1 * youngImage.largura / (youngImage.larguraReal * 2)), 95 + 50);
+					YoungImage.border + (int) (YoungImage.largura / 2) - conta
+							- YoungImage.roundToInt(1 * YoungImage.largura / (YoungImage.larguraReal * 2)), 95 + 50);
 			i++;
 		}
 
 		g.dispose();
 
-		final PixelGrabber pg = new PixelGrabber(imgBuf, 0, 0, (int) (youngImage.largura + 2 * youngImage.border),
-				(int) (youngImage.altura), false);
+		final PixelGrabber pg = new PixelGrabber(imgBuf, 0, 0, (int) (YoungImage.largura + 2 * YoungImage.border),
+				(int) (YoungImage.altura), false);
 
 		try {
 			pg.grabPixels();
@@ -277,8 +284,9 @@ public class youngImage extends JComponent {
 
 	/**
 	 * Arredonda um double para int de acordo com as casas decimais
-	 * @param number 
-	 * @return 
+	 * 
+	 * @param number
+	 * @return
 	 */
 	public static int roundToInt(final double number) {
 		int rounded = 0;
@@ -294,11 +302,12 @@ public class youngImage extends JComponent {
 	 * calcula a intensidade normalizada (0-1) no ponto xReal, segundo as
 	 * coordenadas do eixo contido no plano de projec�ao e com centro no maximo
 	 * principal
-	 * @param xReal_ 
-	 * @param wl_ 
-	 * @param abertura_ 
-	 * @param distanciaPlano_ 
-	 * @return 
+	 * 
+	 * @param xReal_
+	 * @param wl_
+	 * @param abertura_
+	 * @param distanciaPlano_
+	 * @return
 	 */
 	public static double CalculateGama(final double xReal_, final double wl_, final double abertura_,
 			final double distanciaPlano_) { // start

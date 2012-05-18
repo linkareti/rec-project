@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.vtiro.displays;
  * 
  * @author nomead
  */
-public class DistanceChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+public class DistanceChart extends com.linkare.rec.impl.ui.graph.DefaultXYExperimentGraph {
 
 	/**
 	 * 

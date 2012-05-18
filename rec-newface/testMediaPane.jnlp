@@ -22,7 +22,7 @@
         <property name="vlc.plugins.destdir" value=".eLab/native/plugins"/>
         <property name="vlc.plugins.filename" value="vlcplugins.zip"/>
 
-<!--	<j2se java-vm-args="-DReCFaceConfig=file:etc/ReCFaceConfig.xml -DReCBaseUIConfig=file:etc/ReCBaseUIConfig.xml -Dorg.omg.CORBA.ORBClass=org.openorb.orb.core.ORB -Dorg.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton -DReC.MultiCastController.BindName=MultiCastController -DReC.MultiCastController.InitRef=MultiCastController -Dopenorb.config=http://elab.ist.utl.pt/rec/openorb/OpenORB.xml -Dopenorb.profile=ReCClient -Djava.util.logging.config.file=etc/logging.properties" version="1.6+"/>-->
+<!--	<j2se java-vm-args="-DReCFaceConfig=file:etc/ReCFaceConfig.xml -Dorg.omg.CORBA.ORBClass=org.openorb.orb.core.ORB -Dorg.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton -DReC.MultiCastController.BindName=MultiCastController -DReC.MultiCastController.InitRef=MultiCastController -Dopenorb.config=http://elab.ist.utl.pt/rec/openorb/OpenORB.xml -Dopenorb.profile=ReCClient -Djava.util.logging.config.file=etc/logging.properties" version="1.6+"/>-->
 	<j2se version="1.6+"/>
         <jar eager="true" href="rec-newface.jar" main="true"/>
         <jar href="lib/appframework-1.0.3.jar"/>

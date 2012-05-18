@@ -16,6 +16,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
@@ -35,16 +36,16 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 		initWavelenghtChooser();
 		initComponents();
 
-		final java.util.Hashtable<Integer, JLabel> htDFendas = new java.util.Hashtable(7);
+		final java.util.Hashtable<Integer, JLabel> htDFendas = new java.util.Hashtable<Integer, JLabel>(7);
 		for (int i = 0; i <= 600; i += 100) {
-			htDFendas.put(new Integer(i), new javax.swing.JLabel("" + i / 100F));
+			htDFendas.put(i, new javax.swing.JLabel("" + i / 100F));
 		}
 		htDFendas.put(new Integer(10), new javax.swing.JLabel("0.10"));
 		jSliderDFendas.setLabelTable(htDFendas);
 
-		final java.util.Hashtable<Integer, JLabel> htDPlanos = new java.util.Hashtable(10);
+		final java.util.Hashtable<Integer, JLabel> htDPlanos = new java.util.Hashtable<Integer, JLabel>(10);
 		for (int i = 0; i < 601; i += 100) {
-			htDPlanos.put(new Integer(i), new javax.swing.JLabel("" + i / 100F));
+			htDPlanos.put(i, new javax.swing.JLabel("" + i / 100F));
 		}
 		jSliderDPlanos.setLabelTable(htDPlanos);
 
@@ -56,11 +57,17 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 		ReCResourceBundle.loadResourceBundle("younginterf",
 				"recresource:///pt/utl/ist/elab/client/vyounginterf/resources/messages");
 
-		final javax.swing.JFrame dummy = new javax.swing.JFrame();
-		dummy.getContentPane().add(new YoungInterfCustomizer());
-		dummy.pack();
-		dummy.show();
-		dummy.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				final javax.swing.JFrame dummy = new javax.swing.JFrame();
+				dummy.getContentPane().add(new YoungInterfCustomizer());
+				dummy.pack();
+				dummy.setVisible(true);
+				dummy.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			}
+		});
 
 	}
 
@@ -70,7 +77,7 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 	 * comprimento de onda (em nm).
 	 */
 	private void initWavelenghtChooser() {
-		YoungInterfCustomizer.wave = new wavelenghtChooser();
+		YoungInterfCustomizer.wave = new WavelenghtChooser();
 		YoungInterfCustomizer.wave.setPreferredSize(new Dimension(430, 60));
 		YoungInterfCustomizer.wave.addChangeListener(new javax.swing.event.ChangeListener() {
 			@Override
@@ -352,7 +359,7 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 	}
 
 	// Metodos que verificam a validade do que foi introduzido na text field
-	private void adjustSlider(final wavelenghtChooser waveLC, final javax.swing.JTextField field) {
+	private void adjustSlider(final WavelenghtChooser waveLC, final javax.swing.JTextField field) {
 		int num = 0;
 		try {
 			num = Integer.parseInt(field.getText().trim());
@@ -402,8 +409,9 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 
 	/**
 	 * Arredonda um double para int de acordo com as casas decimais
-	 * @param number 
-	 * @return 
+	 * 
+	 * @param number
+	 * @return
 	 */
 	public int roundToInt(final double number) {
 		int rounded = 0;
@@ -561,6 +569,6 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 	private javax.swing.JTextField jTextFieldDPlanos;
 	private javax.swing.JTextField jTextFieldWave;
 	// End of variables declaration//GEN-END:variables
-	private static wavelenghtChooser wave;
+	private static WavelenghtChooser wave;
 
 } // end YoungInterfCustomizer

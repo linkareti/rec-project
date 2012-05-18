@@ -8,24 +8,24 @@
 	<localizationBundle name="radioactividade"
 		location="recresource:///pt/utl/ist/elab/client/radioactividade/resources/messages" />
 	<defaultAcquisitionConfig toolTipBundleKey="radioactividade$rec.exp.dftcfg.radio.tip.1"
-		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+		iconLocationBundleKey="ReCUI$rec.ui.icon.customize"
 		displayStringBundleKey="radioactividade$rec.exp.dftcfg.radio.title.1"
 		classLocationBundleKey="radioactividade$rec.exp.dftcfg.radio.loc.1"
 		visible="true" selected="true" order="0" enabled="false" connected="false" />
 	<mediaConfig videoLocation="radioactividade$rec.exp.url.radio.video"
 		canSave="true" offlinePlay="true" />
 	<display toolTipBundleKey="radioactividade$rec.exp.display.radio.tip.sensor"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor"
 		displayStringBundleKey="radioactividade$rec.exp.display.radio.title.sensor"
 		classLocationBundleKey="radioactividade$rec.exp.display.radio.loc.sensor"
 		visible="true" selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="radioactividade$rec.exp.display.radio.tip.1"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table"
 		displayStringBundleKey="radioactividade$rec.exp.display.radio.title.1"
 		classLocationBundleKey="radioactividade$rec.exp.display.radio.loc.1"
 		visible="true" selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="radioactividade$rec.exp.display.radio.tip.2"
-	offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+	offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
 	displayStringBundleKey="radioactividade$rec.exp.display.radio.title.2"
 	classLocationBundleKey="radioactividade$rec.exp.display.radio.loc.2"
 	visible="true" selected="true" order="0" enabled="false" connected="false" />

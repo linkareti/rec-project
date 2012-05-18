@@ -17,7 +17,7 @@ import org.opensourcephysics.display.Histogram;
 import org.opensourcephysics.display.PlottingPanel;
 import org.opensourcephysics.display.axes.XYAxis;
 
-import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
+import pt.utl.ist.elab.common.virtual.utils.ByteUtil;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
@@ -73,6 +73,7 @@ public class STDHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 		// repaint();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void paintEverything(final Graphics g) {
 		// find the cliping rectangle within a scroll pane viewport
@@ -144,7 +145,7 @@ public class STDHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 			@Override
 			public void windowClosing(final java.awt.event.WindowEvent e) {
 				System.exit(0);
-			};
+			}
 		});
 		final STDHistogram stdim = new STDHistogram();
 		test.getContentPane().add(stdim);
@@ -229,7 +230,7 @@ public class STDHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 
 	@Override
 	public javax.swing.Icon getIcon() {
-		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
+		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/newface/resources/legacy/sensor16.gif"));
 	}
 
 	@Override

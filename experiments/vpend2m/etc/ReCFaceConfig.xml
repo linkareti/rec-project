@@ -14,25 +14,25 @@
 		canSave="true" offlinePlay="true" /-->
 	<display classLocationBundleKey="pend2m$rec.exp.display.pend2m.loc.anim"
 		toolTipBundleKey="pend2m$rec.exp.display.pend2m.tip.anim"
-		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		iconLocationBundleKey="ReCUI$rec.ui.icon.sensor"
 		displayStringBundleKey="pend2m$rec.exp.display.pend2m.title.anim"
 		offlineCapable="false" order="1" visible="true" selected="true"
 		enabled="false" connected="false" />
 	<display classLocationBundleKey="pend2m$rec.exp.display.pend2m.loc.3"
 		toolTipBundleKey="pend2m$rec.exp.display.pend2m.tip.3"
-		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		iconLocationBundleKey="ReCUI$rec.ui.icon.table"
 		displayStringBundleKey="pend2m$rec.exp.display.pend2m.title.3"
 		offlineCapable="false" order="2" visible="true" selected="true"
 		enabled="false" connected="false" />
 	<display classLocationBundleKey="pend2m$rec.exp.display.pend2m.loc.1"
 		toolTipBundleKey="pend2m$rec.exp.display.pend2m.tip.1"
-		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
 		displayStringBundleKey="pend2m$rec.exp.display.pend2m.title.1"
 		offlineCapable="false" order="3" visible="true" selected="true"
 		enabled="false" connected="false" />
 	<display classLocationBundleKey="pend2m$rec.exp.display.pend2m.loc.2"
 		toolTipBundleKey="pend2m$rec.exp.display.pend2m.tip.2"
-		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
 		displayStringBundleKey="pend2m$rec.exp.display.pend2m.title.2"
 		offlineCapable="false" order="4" visible="true" selected="true"
 		enabled="false" connected="false" />

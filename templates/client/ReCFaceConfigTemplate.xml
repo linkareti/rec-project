@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <reCFaceConfig usersListRefreshRateMs="10000"
-	splashIconLocationBundleKey="ReCBaseUI$rec.bui.icon.splash"
+	splashIconLocationBundleKey="ReCUI$rec.ui.icon.splash"
 	showVideoFrame="false" showUserList="true" showChatFrame="true"
 	iconSponsorLocationBundleKey="bundleName#bundleKey"
-	iconLocationBundleKey="ReCBaseUI$rec.bui.icon.frame"
-	helpPageLocationBundleKey="ReCBaseUI$rec.bui.url.help"
-	frameTitleBundleKey="ReCBaseUI$rec.bui.title.frame"
+	iconLocationBundleKey="ReCUI$rec.ui.icon.frame"
+	helpPageLocationBundleKey="ReCUI$rec.ui.url.help"
+	frameTitleBundleKey="ReCUI$rec.ui.title.frame"
 	enterApparatusChatRoom="true" enableVideoFrame="false" enableUsersList="true"
 	enableLoginPassword="false" enableChatFrame="true" autoConnectLab="false"
 	appPreferredWidth="848" appPreferredHeight="478"
-	aboutPageLocationBundleKey="ReCBaseUI$rec.bui.url.about">
-	<localizationBundle name="ReCBaseUI"
-		location="recresource:///com/linkare/rec/impl/baseUI/resources/ReCBaseUI" />
+	aboutPageLocationBundleKey="ReCUI$rec.ui.url.about">
+	<localizationBundle name="ReCUI"
+		location="recresource:///com/linkare/rec/impl/newface/resources/ReCUI" />
 	<localizationBundle name="ReCLabeLab"
 		location="recresource:///pt/utl/ist/elab/resources/ReCLabeLab" />
 	

@@ -10,25 +10,25 @@
 	visible="true" selected="true" order="0" enabled="false" connected="false">
 	<localizationBundle name="aleatorio"
 		location="recresource:///pt/utl/ist/elab/client/aleatorio/resources/messages" />
-	<!-- mediaConfig videoLocation="aleatorio$rec.exp.url.aleatorio.video"
-		canSave="true" offlinePlay="true" / -->
+	<!-- mediaConfig videoLocation="aleatorio$rec.exp.url.aleatorio.video" canSave="true" 
+		offlinePlay="true" / -->
 	<display toolTipBundleKey="aleatorio$rec.exp.display.aleatorio.tip.1"
 		offlineCapable="false" iconLocationBundleKey="aleatorio$rec.exp.display.aleatorio.icon.1"
 		displayStringBundleKey="aleatorio$rec.exp.display.aleatorio.title.1"
 		classLocationBundleKey="aleatorio$rec.exp.display.aleatorio.loc.1"
 		visible="true" selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="aleatorio$rec.exp.display.aleatorio.tip.2"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
 		displayStringBundleKey="aleatorio$rec.exp.display.aleatorio.title.2"
 		classLocationBundleKey="aleatorio$rec.exp.display.aleatorio.loc.2"
 		visible="true" selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="aleatorio$rec.exp.display.aleatorio.tip.3"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
 		displayStringBundleKey="aleatorio$rec.exp.display.aleatorio.title.3"
 		classLocationBundleKey="aleatorio$rec.exp.display.aleatorio.loc.3"
 		visible="true" selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="aleatorio$rec.exp.display.aleatorio.tip.4"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.movie"
 		displayStringBundleKey="aleatorio$rec.exp.display.aleatorio.title.4"
 		classLocationBundleKey="aleatorio$rec.exp.display.aleatorio.loc.4"
 		visible="true" selected="true" order="0" enabled="false" connected="false" />

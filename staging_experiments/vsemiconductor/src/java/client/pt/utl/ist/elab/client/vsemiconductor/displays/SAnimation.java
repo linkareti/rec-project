@@ -37,7 +37,7 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 public class SAnimation extends JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
 	private boolean started = false;
-	private Icon icon = new ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
+	private Icon icon = new ImageIcon(getClass().getResource("/com/linkare/rec/impl/newface/resources/legacy/sensor16.gif"));
 
 	private int rectHeight = 50;
 	private int pWidth, nWidth, lNodo;

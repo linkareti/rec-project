@@ -9,10 +9,12 @@ package pt.utl.ist.elab.client.vpoisson.displays;
 import java.text.DecimalFormat;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 import org.opensourcephysics.frames.Scalar2DFrame;
 
-import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
+import pt.utl.ist.elab.common.virtual.utils.ByteUtil;
+
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
@@ -375,7 +377,7 @@ public class Viewer extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 	// O icon associado a este painel!
 	@Override
 	public javax.swing.Icon getIcon() {
-		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
+		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/newface/resources/legacy/sensor16.gif"));
 	}
 
 	@Override
@@ -406,11 +408,18 @@ public class Viewer extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 	public static void main(final String args[]) {
 		ReCResourceBundle.loadResourceBundle("poisson",
 				"recresource:///pt/utl/ist/elab/client/vpoisson/resources/messages");
-		final javax.swing.JFrame dummy = new javax.swing.JFrame();
-		dummy.getContentPane().add(new Viewer());
-		dummy.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		dummy.pack();
-		dummy.show();
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				final javax.swing.JFrame dummy = new javax.swing.JFrame();
+				dummy.getContentPane().add(new Viewer());
+				dummy.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				dummy.pack();
+				dummy.setVisible(true);
+			}
+		});
 	}
 
 	private void updateNs() {

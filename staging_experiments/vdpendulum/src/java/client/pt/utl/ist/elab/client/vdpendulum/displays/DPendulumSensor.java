@@ -36,7 +36,7 @@ public class DPendulumSensor extends javax.swing.JPanel implements
 	private float theta2 = (float) Math.PI / 4;
 
 	private boolean started = false;
-	private Icon icon = new ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
+	private Icon icon = new ImageIcon(getClass().getResource("/com/linkare/rec/impl/newface/resources/legacy/sensor16.gif"));
 
 	/** Creates new form DPendulumSensor */
 	public DPendulumSensor() {

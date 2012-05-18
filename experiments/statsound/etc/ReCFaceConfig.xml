@@ -9,15 +9,15 @@
 	visible="true" selected="true" order="0" enabled="false" connected="false">
 	<localizationBundle name="statsound"
 		location="recresource:///pt/utl/ist/elab/client/statsound/resources/messages" />
-	<mediaConfig videoLocation="statsound$rec.exp.url.statsound.video" canSave="true" 
-		offlinePlay="true" />
+	<mediaConfig videoLocation="statsound$rec.exp.url.statsound.video"
+		canSave="true" offlinePlay="true" />
 	<display toolTipBundleKey="statsound$rec.exp.display.statsound.tip.statsoundTable"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table"
 		displayStringBundleKey="statsound$rec.exp.display.statsound.title.statsoundTable"
 		classLocationBundleKey="statsound$rec.exp.display.statsound.loc.statsoundTable"
 		visible="true" selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="statsound$rec.exp.display.statsound.tip.statsoundChart"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
 		displayStringBundleKey="statsound$rec.exp.display.statsound.title.statsoundChart"
 		classLocationBundleKey="statsound$rec.exp.display.statsound.loc.statsoundChart"
 		visible="true" selected="true" order="1" enabled="false" connected="false" />

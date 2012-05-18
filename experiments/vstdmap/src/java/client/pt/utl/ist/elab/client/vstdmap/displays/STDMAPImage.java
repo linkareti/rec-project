@@ -11,7 +11,8 @@ package pt.utl.ist.elab.client.vstdmap.displays;
  */
 import java.awt.image.BufferedImage;
 
-import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
+import pt.utl.ist.elab.client.virtual.MAPanel;
+import pt.utl.ist.elab.common.virtual.utils.ByteUtil;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
@@ -238,7 +239,7 @@ public class STDMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModel
 	// O icon associado a este painel!
 	@Override
 	public javax.swing.Icon getIcon() {
-		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
+		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/newface/resources/legacy/sensor16.gif"));
 	}
 
 	@Override

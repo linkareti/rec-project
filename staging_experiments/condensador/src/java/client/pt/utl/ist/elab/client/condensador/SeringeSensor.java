@@ -36,7 +36,7 @@ public class SeringeSensor extends javax.swing.JPanel implements com.linkare.rec
 	private BufferedImage imgEmbolo = new BufferedImage(30, 57, BufferedImage.TYPE_INT_ARGB);
 	private BufferedImage imgSeringe = new BufferedImage(36, 65, BufferedImage.TYPE_INT_ARGB);
 	private Icon icon = new javax.swing.ImageIcon(getClass().getResource(
-			"/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
+			"/com/linkare/rec/impl/newface/resources/legacy/sensor16.gif"));
 
 	/** Creates new form SeringeSensor */
 	public SeringeSensor() {

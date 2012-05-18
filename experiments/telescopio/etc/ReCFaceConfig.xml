@@ -7,7 +7,7 @@
 	dataModelClassLocationBundleKey=""
 	customizerClassLocationBundleKey="telescopio$rec.exp.customizer.telescopio"
 	visible="true" selected="true" order="0" enabled="false" connected="false">
-		<localizationBundle name="telescopio"
+	<localizationBundle name="telescopio"
 		location="recresource:///pt/utl/ist/elab/client/telescopio/resources/messages" />
 	<mediaConfig videoLocation="telescopio$rec.exp.url.telescopio.video"
 		canSave="true" offlinePlay="true" />
@@ -22,8 +22,8 @@
 		classLocationBundleKey="telescopio$rec.exp.display.telescopio.loc.2"
 		visible="true" selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="telescopio$rec.exp.display.telescopio.tip.3"
-	offlineCapable="true" iconLocationBundleKey="telescopio$rec.exp.display.icon.open"
-	displayStringBundleKey="telescopio$rec.exp.display.telescopio.title.3"
-	classLocationBundleKey="telescopio$rec.exp.display.telescopio.loc.3"
-	visible="true" selected="true" order="0" enabled="false" connected="false" />
+		offlineCapable="true" iconLocationBundleKey="telescopio$rec.exp.display.icon.open"
+		displayStringBundleKey="telescopio$rec.exp.display.telescopio.title.3"
+		classLocationBundleKey="telescopio$rec.exp.display.telescopio.loc.3"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
 </apparatus>

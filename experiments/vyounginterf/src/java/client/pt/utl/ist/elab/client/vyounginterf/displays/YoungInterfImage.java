@@ -20,7 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
+import pt.utl.ist.elab.common.virtual.utils.ByteUtil;
 
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;

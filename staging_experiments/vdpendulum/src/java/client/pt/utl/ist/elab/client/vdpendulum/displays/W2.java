@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.vdpendulum.displays;
  * 
  * @author André Neto - LEFT - IST
  */
-public class W2 extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+public class W2 extends com.linkare.rec.impl.ui.graph.DefaultXYExperimentGraph {
 
 	/** Creates a new instance of Theta1 */
 	public W2() {
