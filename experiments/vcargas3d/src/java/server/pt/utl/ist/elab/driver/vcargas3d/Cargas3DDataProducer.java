@@ -16,9 +16,9 @@ import java.util.List;
 
 import org.opensourcephysics.displayejs.InteractiveCharge;
 
+import pt.utl.ist.elab.common.virtual.utils.ByteUtil;
 import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
 import pt.utl.ist.elab.driver.virtual.VirtualBaseDriver;
-import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
 
 import com.linkare.rec.data.acquisition.PhysicsVal;
 import com.linkare.rec.data.acquisition.PhysicsValue;
@@ -126,8 +126,8 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 					}
 				}
 			}
-			EFFmin = pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondarInt(EFmin);
-			EFFmax = pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondarInt(EFmax);
+			EFFmin = pt.utl.ist.elab.common.virtual.utils.QMethods.arredondarInt(EFmin);
+			EFFmax = pt.utl.ist.elab.common.virtual.utils.QMethods.arredondarInt(EFmax);
 			// calculou-se o minimo e maximo
 			// volte-se a calcular para selecionar os valores
 			// tendo em consideracao o max e o min
@@ -138,7 +138,7 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 
 			// divisao do espaco a considerar para
 			// o modulo do campo
-			final int razao = pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondarInt((EFmax - EFmin) / 50);
+			final int razao = pt.utl.ist.elab.common.virtual.utils.QMethods.arredondarInt((EFmax - EFmin) / 50);
 
 			// inicializem-se as listas
 			for (int i = 0; i < 20; i++) {
@@ -152,7 +152,7 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 					for (z = 0f; z < 10; z = z + 0.1f) {
 
 						calculaCampo();
-						final int EFF = pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondarInt(EF);
+						final int EFF = pt.utl.ist.elab.common.virtual.utils.QMethods.arredondarInt(EF);
 						// o meio e' a tolerancia em guardar os pontos
 						final int meio = (int) (EFF * 0.02);
 						for (int i = 1; i <= 20; i++) {
