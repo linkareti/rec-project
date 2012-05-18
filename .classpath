@@ -92,7 +92,6 @@
 	<classpathentry kind="src" path="elab/src/java/common"/>
 	<classpathentry kind="src" path="experiments/vpoisson/src/java/client"/>
 	<classpathentry kind="src" path="experiments/vpoisson/src/java/server"/>
-	<classpathentry kind="src" path="other/src/java/utilities"/>
 	<classpathentry kind="src" path="experiments/aleatorio/src/java/common"/>
 	<classpathentry kind="src" path="experiments/boylemariotte/src/java/common"/>
 	<classpathentry kind="src" path="experiments/meteo/src/java/common"/>
