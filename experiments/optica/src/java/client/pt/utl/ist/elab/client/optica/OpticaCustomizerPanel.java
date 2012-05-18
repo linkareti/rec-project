@@ -56,1025 +56,1326 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed"
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-
-        buttonGroupCalibration = new javax.swing.ButtonGroup();
-        buttonGroupEnergyConservationIsPolarization = new javax.swing.ButtonGroup();
-        jTabbedPaneOptica = new javax.swing.JTabbedPane();
-        jPanelSnell = new javax.swing.JPanel();
-        jPanelSnellAngleVariation = new javax.swing.JPanel();
-        jSliderSnellAngleVarationMin = new javax.swing.JSlider();
-        jSliderSnellAngleVarationMax = new javax.swing.JSlider();
-        jLabelSnellAngleVaration = new javax.swing.JLabel();
-        jFormattedTextFieldSnellAngleVarationMax = new javax.swing.JFormattedTextField();
-        jFormattedTextFieldSnellAngleVarationMin = new javax.swing.JFormattedTextField();
-        jPanelSnellDelta = new javax.swing.JPanel();
-        jSliderSnellDelta = new javax.swing.JSlider();
-        jLabelSnellDelta = new javax.swing.JLabel();
-        jFormattedTextFieldSnellDelta = new javax.swing.JFormattedTextField();
-        jPanelSnellDelay = new javax.swing.JPanel();
-        jSliderSnellDelay = new javax.swing.JSlider();
-        jLabelSnellDelay = new javax.swing.JLabel();
-        jFormattedTextFieldSnellDelay = new javax.swing.JFormattedTextField();
-        jPanelEnergyConservation = new javax.swing.JPanel();
-        jPanelEnergyConservationPexiglass = new javax.swing.JPanel();
-        jSliderEnergyConservationPexiglass = new javax.swing.JSlider();
-        jFormattedTextFieldEnergyConservationPexiglass = new javax.swing.JFormattedTextField();
-        jPanelEnergyConservationPolarization = new javax.swing.JPanel();
-        jSliderEnergyConservationPolarization = new javax.swing.JSlider();
-        jFormattedTextFieldEnergyConservationPolarization = new javax.swing.JFormattedTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanelEnergyConservationIsPolarization = new javax.swing.JPanel();
-        jRadioButtonEnergyConservationIsPolarizationYes = new javax.swing.JRadioButton();
-        jRadioButtonEnergyConservationIsPolarizationNo = new javax.swing.JRadioButton();
-        jPanelCriticalAngle = new javax.swing.JPanel();
-        jPanelCriticalAngleVariation = new javax.swing.JPanel();
-        jSliderCriticalAngleVarationMin = new javax.swing.JSlider();
-        jSliderCriticalAngleVarationMax = new javax.swing.JSlider();
-        jLabelCriticalAngleVaration = new javax.swing.JLabel();
-        jFormattedTextFieldCriticalAngleVarationMax = new javax.swing.JFormattedTextField();
-        jFormattedTextFieldCriticalAngleVarationMin = new javax.swing.JFormattedTextField();
-        jPanelCriticalAngleAngle = new javax.swing.JPanel();
-        jCheckBoxCriticalAngleMinimalAngle = new javax.swing.JCheckBox();
-        jCheckBoxCriticalAngleMediumAngle = new javax.swing.JCheckBox();
-        jCheckBoxCriticalAngleMaximumAngle = new javax.swing.JCheckBox();
-        jPanelBrewsterAngle = new javax.swing.JPanel();
-        jPanelBrewsterAngleVariation = new javax.swing.JPanel();
-        jSliderBrewsterAngleVarationMin = new javax.swing.JSlider();
-        jSliderBrewsterAngleVarationMax = new javax.swing.JSlider();
-        jLabelBrewsterAngleVaration = new javax.swing.JLabel();
-        jFormattedTextFieldBrewsterAngleVarationMax = new javax.swing.JFormattedTextField();
-        jFormattedTextFieldBrewsterAngleVarationMin = new javax.swing.JFormattedTextField();
-        jPanelBrewsterAnglePolarization = new javax.swing.JPanel();
-        jSliderBrewsterAnglePolarization = new javax.swing.JSlider();
-        jFormattedTextFieldBrewsterAnglePolarization = new javax.swing.JFormattedTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jPanelBrewsterAngleAngle = new javax.swing.JPanel();
-        jCheckBoxBrewsterAngleMinimalAngle = new javax.swing.JCheckBox();
-        jCheckBoxBrewsterAngleMediumAngle = new javax.swing.JCheckBox();
-        jCheckBoxBrewsterAngleMaximumAngle = new javax.swing.JCheckBox();
-        jPanelCalibration = new javax.swing.JPanel();
-        jPanelCalibrationButtons = new javax.swing.JPanel();
-        jCheckBoxCalibrationPexiglass = new javax.swing.JCheckBox();
-        jCheckBoxCalibrationSensor = new javax.swing.JCheckBox();
-        jPanelControlButtons = new javax.swing.JPanel();
-        jButtonOk = new javax.swing.JButton();
-        jButtonCancel = new javax.swing.JButton();
-        jButtonDefaultConfig = new javax.swing.JButton();
-
-        setMinimumSize(new java.awt.Dimension(350, 490));
-        setName("OpticaCustomizer"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(350, 490));
-        setLayout(new java.awt.BorderLayout());
-
-        jTabbedPaneOptica.setName("jTabbedPaneOptica"); // NOI18N
-        jTabbedPaneOptica.setPreferredSize(new java.awt.Dimension(350, 417));
-        jTabbedPaneOptica.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jTabbedPaneOpticaStateChanged(evt);
-            }
-        });
-
-        jPanelSnell.setName("jPanelSnell"); // NOI18N
-        jPanelSnell.setPreferredSize(new java.awt.Dimension(350, 372));
-
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(OpticaCustomizerPanel.class);
-        jPanelSnellAngleVariation.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelSnellAngleVariation.border.title"))); // NOI18N
-        jPanelSnellAngleVariation.setName("jPanelSnellAngleVariation"); // NOI18N
-        jPanelSnellAngleVariation.setPreferredSize(new java.awt.Dimension(330, 126));
-
-        jSliderSnellAngleVarationMin.setMajorTickSpacing(900);
-        jSliderSnellAngleVarationMin.setMaximum(3600);
-        jSliderSnellAngleVarationMin.setMinorTickSpacing(2);
-        jSliderSnellAngleVarationMin.setPaintLabels(true);
-        jSliderSnellAngleVarationMin.setSnapToTicks(true);
-        jSliderSnellAngleVarationMin.setValue(0);
-        jSliderSnellAngleVarationMin.setMinimumSize(new java.awt.Dimension(250, 16));
-        jSliderSnellAngleVarationMin.setName("jSliderSnellAngleVarationMin"); // NOI18N
-        jSliderSnellAngleVarationMin.setPreferredSize(new java.awt.Dimension(250, 42));
-        jSliderSnellAngleVarationMin.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSliderSnellAngleVarationMinStateChanged(evt);
-            }
-        });
-
-        jSliderSnellAngleVarationMax.setMajorTickSpacing(900);
-        jSliderSnellAngleVarationMax.setMaximum(3600);
-        jSliderSnellAngleVarationMax.setMinorTickSpacing(2);
-        jSliderSnellAngleVarationMax.setPaintLabels(true);
-        jSliderSnellAngleVarationMax.setSnapToTicks(true);
-        jSliderSnellAngleVarationMax.setValue(3600);
-        jSliderSnellAngleVarationMax.setMinimumSize(new java.awt.Dimension(250, 16));
-        jSliderSnellAngleVarationMax.setName("jSliderSnellAngleVarationMax"); // NOI18N
-        jSliderSnellAngleVarationMax.setPreferredSize(new java.awt.Dimension(250, 42));
-        jSliderSnellAngleVarationMax.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSliderSnellAngleVarationMaxStateChanged(evt);
-            }
-        });
-
-        jLabelSnellAngleVaration.setForeground(resourceMap.getColor("jLabelSnellAngleVaration.foreground")); // NOI18N
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/optica/resources/messages"); // NOI18N
-        jLabelSnellAngleVaration.setText(bundle.getString("rec.exp.optica.lbl.maxsamples")); // NOI18N
-        jLabelSnellAngleVaration.setEnabled(false);
-        jLabelSnellAngleVaration.setName("jLabelSnellAngleVaration"); // NOI18N
-
-        jFormattedTextFieldSnellAngleVarationMax.setText(resourceMap.getString("jFormattedTextFieldSnellAngleVarationMax.text")); // NOI18N
-        jFormattedTextFieldSnellAngleVarationMax.setMaximumSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldSnellAngleVarationMax.setMinimumSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldSnellAngleVarationMax.setName("jFormattedTextFieldSnellAngleVarationMax"); // NOI18N
-        jFormattedTextFieldSnellAngleVarationMax.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jFormattedTextFieldSnellAngleVarationMaxFocusLost(evt);
-            }
-        });
-
-        jFormattedTextFieldSnellAngleVarationMin.setText(resourceMap.getString("jFormattedTextFieldSnellAngleVarationMin.text")); // NOI18N
-        jFormattedTextFieldSnellAngleVarationMin.setMaximumSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldSnellAngleVarationMin.setMinimumSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldSnellAngleVarationMin.setName("jFormattedTextFieldSnellAngleVarationMin"); // NOI18N
-        jFormattedTextFieldSnellAngleVarationMin.setPreferredSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldSnellAngleVarationMin.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jFormattedTextFieldSnellAngleVarationMinFocusLost(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelSnellAngleVariationLayout = new javax.swing.GroupLayout(jPanelSnellAngleVariation);
-        jPanelSnellAngleVariation.setLayout(jPanelSnellAngleVariationLayout);
-        jPanelSnellAngleVariationLayout.setHorizontalGroup(
-            jPanelSnellAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelSnellAngleVariationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelSnellAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelSnellAngleVariationLayout.createSequentialGroup()
-                        .addComponent(jSliderSnellAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldSnellAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelSnellAngleVariationLayout.createSequentialGroup()
-                        .addComponent(jSliderSnellAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldSnellAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabelSnellAngleVaration, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelSnellAngleVariationLayout.setVerticalGroup(
-            jPanelSnellAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelSnellAngleVariationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelSnellAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jFormattedTextFieldSnellAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSliderSnellAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelSnellAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jFormattedTextFieldSnellAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSliderSnellAngleVarationMax, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelSnellAngleVaration))
-        );
-
-        jPanelSnellDelta.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelSnellDelta.border.title"))); // NOI18N
-        jPanelSnellDelta.setName("jPanelSnellDelta"); // NOI18N
-        jPanelSnellDelta.setPreferredSize(new java.awt.Dimension(330, 95));
-
-        jSliderSnellDelta.setMajorTickSpacing(900);
-        jSliderSnellDelta.setMaximum(3600);
-        jSliderSnellDelta.setMinimum(2);
-        jSliderSnellDelta.setMinorTickSpacing(2);
-        jSliderSnellDelta.setPaintLabels(true);
-        jSliderSnellDelta.setSnapToTicks(true);
-        jSliderSnellDelta.setValue(150);
-        jSliderSnellDelta.setMinimumSize(new java.awt.Dimension(250, 16));
-        jSliderSnellDelta.setName("jSliderSnellDelta"); // NOI18N
-        jSliderSnellDelta.setPreferredSize(new java.awt.Dimension(250, 42));
-        jSliderSnellDelta.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSliderSnellDeltaStateChanged(evt);
-            }
-        });
-
-        jLabelSnellDelta.setForeground(resourceMap.getColor("jLabelSnellDelta.foreground")); // NOI18N
-        jLabelSnellDelta.setText(resourceMap.getString("jLabelSnellDelta.text")); // NOI18N
-        jLabelSnellDelta.setEnabled(false);
-        jLabelSnellDelta.setName("jLabelSnellDelta"); // NOI18N
-
-        jFormattedTextFieldSnellDelta.setText(resourceMap.getString("jFormattedTextFieldSnellDelta.text")); // NOI18N
-        jFormattedTextFieldSnellDelta.setMaximumSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldSnellDelta.setMinimumSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldSnellDelta.setName("jFormattedTextFieldSnellDelta"); // NOI18N
-        jFormattedTextFieldSnellDelta.setPreferredSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldSnellDelta.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jFormattedTextFieldSnellDeltaFocusLost(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelSnellDeltaLayout = new javax.swing.GroupLayout(jPanelSnellDelta);
-        jPanelSnellDelta.setLayout(jPanelSnellDeltaLayout);
-        jPanelSnellDeltaLayout.setHorizontalGroup(
-            jPanelSnellDeltaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelSnellDeltaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelSnellDeltaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelSnellDeltaLayout.createSequentialGroup()
-                        .addComponent(jSliderSnellDelta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldSnellDelta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabelSnellDelta, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelSnellDeltaLayout.setVerticalGroup(
-            jPanelSnellDeltaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelSnellDeltaLayout.createSequentialGroup()
-                .addGroup(jPanelSnellDeltaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelSnellDeltaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jFormattedTextFieldSnellDelta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE))
-                    .addGroup(jPanelSnellDeltaLayout.createSequentialGroup()
-                        .addComponent(jSliderSnellDelta, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(jLabelSnellDelta)
-                .addContainerGap())
-        );
-
-        jPanelSnellDelay.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelSnellDelay.border.title"))); // NOI18N
-        jPanelSnellDelay.setName("jPanelSnellDelay"); // NOI18N
-        jPanelSnellDelay.setPreferredSize(new java.awt.Dimension(330, 95));
-
-        jSliderSnellDelay.setMajorTickSpacing(10);
-        jSliderSnellDelay.setMaximum(50);
-        jSliderSnellDelay.setMinorTickSpacing(1);
-        jSliderSnellDelay.setPaintLabels(true);
-        jSliderSnellDelay.setSnapToTicks(true);
-        jSliderSnellDelay.setValue(25);
-        jSliderSnellDelay.setMinimumSize(new java.awt.Dimension(250, 16));
-        jSliderSnellDelay.setName("jSliderSnellDelay"); // NOI18N
-        jSliderSnellDelay.setPreferredSize(new java.awt.Dimension(250, 42));
-        jSliderSnellDelay.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSliderSnellDelayStateChanged(evt);
-            }
-        });
-
-        jLabelSnellDelay.setForeground(resourceMap.getColor("jLabelSnellDelay.foreground")); // NOI18N
-        jLabelSnellDelay.setText(resourceMap.getString("jLabelSnellDelay.text")); // NOI18N
-        jLabelSnellDelay.setEnabled(false);
-        jLabelSnellDelay.setName("jLabelSnellDelay"); // NOI18N
-
-        jFormattedTextFieldSnellDelay.setText(resourceMap.getString("jFormattedTextFieldSnellDelay.text")); // NOI18N
-        jFormattedTextFieldSnellDelay.setMaximumSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldSnellDelay.setMinimumSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldSnellDelay.setName("jFormattedTextFieldSnellDelay"); // NOI18N
-        jFormattedTextFieldSnellDelay.setPreferredSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldSnellDelay.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jFormattedTextFieldSnellDelayFocusLost(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelSnellDelayLayout = new javax.swing.GroupLayout(jPanelSnellDelay);
-        jPanelSnellDelay.setLayout(jPanelSnellDelayLayout);
-        jPanelSnellDelayLayout.setHorizontalGroup(
-            jPanelSnellDelayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelSnellDelayLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelSnellDelayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelSnellDelayLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jSliderSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jFormattedTextFieldSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabelSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelSnellDelayLayout.setVerticalGroup(
-            jPanelSnellDelayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelSnellDelayLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelSnellDelayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelSnellDelayLayout.createSequentialGroup()
-                        .addComponent(jFormattedTextFieldSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35))
-                    .addGroup(jPanelSnellDelayLayout.createSequentialGroup()
-                        .addComponent(jSliderSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addComponent(jLabelSnellDelay)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanelSnellLayout = new javax.swing.GroupLayout(jPanelSnell);
-        jPanelSnell.setLayout(jPanelSnellLayout);
-        jPanelSnellLayout.setHorizontalGroup(
-            jPanelSnellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelSnellLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelSnellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelSnellAngleVariation, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelSnellDelta, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(56, Short.MAX_VALUE))
-        );
-        jPanelSnellLayout.setVerticalGroup(
-            jPanelSnellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSnellLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelSnellAngleVariation, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelSnellDelta, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
-        );
-
-        jTabbedPaneOptica.addTab(resourceMap.getString("jPanelSnell.TabConstraints.tabTitle"), jPanelSnell); // NOI18N
-
-        jPanelEnergyConservation.setName("jPanelEnergyConservation"); // NOI18N
-
-        jPanelEnergyConservationPexiglass.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelEnergyConservationPexiglass.border.title"))); // NOI18N
-        jPanelEnergyConservationPexiglass.setName("jPanelEnergyConservationPexiglass"); // NOI18N
-
-        jSliderEnergyConservationPexiglass.setMajorTickSpacing(900);
-        jSliderEnergyConservationPexiglass.setMaximum(3600);
-        jSliderEnergyConservationPexiglass.setMinorTickSpacing(2);
-        jSliderEnergyConservationPexiglass.setPaintLabels(true);
-        jSliderEnergyConservationPexiglass.setSnapToTicks(true);
-        jSliderEnergyConservationPexiglass.setValue(900);
-        jSliderEnergyConservationPexiglass.setMinimumSize(new java.awt.Dimension(250, 16));
-        jSliderEnergyConservationPexiglass.setName("jSliderEnergyConservationPexiglass"); // NOI18N
-        jSliderEnergyConservationPexiglass.setPreferredSize(new java.awt.Dimension(250, 42));
-        jSliderEnergyConservationPexiglass.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSliderEnergyConservationPexiglassStateChanged(evt);
-            }
-        });
-
-        jFormattedTextFieldEnergyConservationPexiglass.setText(resourceMap.getString("jFormattedTextFieldEnergyConservationPexiglass.text")); // NOI18N
-        jFormattedTextFieldEnergyConservationPexiglass.setMaximumSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldEnergyConservationPexiglass.setMinimumSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldEnergyConservationPexiglass.setName("jFormattedTextFieldEnergyConservationPexiglass"); // NOI18N
-        jFormattedTextFieldEnergyConservationPexiglass.setPreferredSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldEnergyConservationPexiglass.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jFormattedTextFieldEnergyConservationPexiglassFocusLost(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelEnergyConservationPexiglassLayout = new javax.swing.GroupLayout(jPanelEnergyConservationPexiglass);
-        jPanelEnergyConservationPexiglass.setLayout(jPanelEnergyConservationPexiglassLayout);
-        jPanelEnergyConservationPexiglassLayout.setHorizontalGroup(
-            jPanelEnergyConservationPexiglassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelEnergyConservationPexiglassLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jSliderEnergyConservationPexiglass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextFieldEnergyConservationPexiglass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelEnergyConservationPexiglassLayout.setVerticalGroup(
-            jPanelEnergyConservationPexiglassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelEnergyConservationPexiglassLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelEnergyConservationPexiglassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jFormattedTextFieldEnergyConservationPexiglass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSliderEnergyConservationPexiglass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanelEnergyConservationPolarization.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelEnergyConservationPolarization.border.title"))); // NOI18N
-        jPanelEnergyConservationPolarization.setName("jPanelEnergyConservationPolarization"); // NOI18N
-
-        jSliderEnergyConservationPolarization.setMajorTickSpacing(225);
-        jSliderEnergyConservationPolarization.setMaximum(900);
-        jSliderEnergyConservationPolarization.setMinorTickSpacing(2);
-        jSliderEnergyConservationPolarization.setPaintLabels(true);
-        jSliderEnergyConservationPolarization.setSnapToTicks(true);
-        jSliderEnergyConservationPolarization.setValue(0);
-        jSliderEnergyConservationPolarization.setMinimumSize(new java.awt.Dimension(250, 16));
-        jSliderEnergyConservationPolarization.setName("jSliderEnergyConservationPolarization"); // NOI18N
-        jSliderEnergyConservationPolarization.setPreferredSize(new java.awt.Dimension(250, 42));
-        jSliderEnergyConservationPolarization.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSliderEnergyConservationPolarizationStateChanged(evt);
-            }
-        });
-
-        jFormattedTextFieldEnergyConservationPolarization.setText(resourceMap.getString("jFormattedTextFieldEnergyConservationPolarization.text")); // NOI18N
-        jFormattedTextFieldEnergyConservationPolarization.setMaximumSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldEnergyConservationPolarization.setMinimumSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldEnergyConservationPolarization.setName("jFormattedTextFieldEnergyConservationPolarization"); // NOI18N
-        jFormattedTextFieldEnergyConservationPolarization.setPreferredSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldEnergyConservationPolarization.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jFormattedTextFieldEnergyConservationPolarizationFocusLost(evt);
-            }
-        });
-
-        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
-        jLabel1.setName("jLabel1"); // NOI18N
-
-        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
-        jLabel2.setName("jLabel2"); // NOI18N
-
-        javax.swing.GroupLayout jPanelEnergyConservationPolarizationLayout = new javax.swing.GroupLayout(jPanelEnergyConservationPolarization);
-        jPanelEnergyConservationPolarization.setLayout(jPanelEnergyConservationPolarizationLayout);
-        jPanelEnergyConservationPolarizationLayout.setHorizontalGroup(
-            jPanelEnergyConservationPolarizationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelEnergyConservationPolarizationLayout.createSequentialGroup()
-                .addGroup(jPanelEnergyConservationPolarizationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanelEnergyConservationPolarizationLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSliderEnergyConservationPolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelEnergyConservationPolarizationLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextFieldEnergyConservationPolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelEnergyConservationPolarizationLayout.setVerticalGroup(
-            jPanelEnergyConservationPolarizationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelEnergyConservationPolarizationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelEnergyConservationPolarizationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jFormattedTextFieldEnergyConservationPolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSliderEnergyConservationPolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelEnergyConservationPolarizationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addContainerGap())
-        );
-
-        jPanelEnergyConservationIsPolarization.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelEnergyConservationIsPolarization.border.title"))); // NOI18N
-        jPanelEnergyConservationIsPolarization.setName("jPanelEnergyConservationIsPolarization"); // NOI18N
-
-        buttonGroupEnergyConservationIsPolarization.add(jRadioButtonEnergyConservationIsPolarizationYes);
-        jRadioButtonEnergyConservationIsPolarizationYes.setSelected(true);
-        jRadioButtonEnergyConservationIsPolarizationYes.setText(resourceMap.getString("jRadioButtonEnergyConservationIsPolarizationYes.text")); // NOI18N
-        jRadioButtonEnergyConservationIsPolarizationYes.setName("jRadioButtonEnergyConservationIsPolarizationYes"); // NOI18N
-
-        buttonGroupEnergyConservationIsPolarization.add(jRadioButtonEnergyConservationIsPolarizationNo);
-        jRadioButtonEnergyConservationIsPolarizationNo.setText(resourceMap.getString("jRadioButtonEnergyConservationIsPolarizationNo.text")); // NOI18N
-        jRadioButtonEnergyConservationIsPolarizationNo.setName("jRadioButtonEnergyConservationIsPolarizationNo"); // NOI18N
-
-        javax.swing.GroupLayout jPanelEnergyConservationIsPolarizationLayout = new javax.swing.GroupLayout(jPanelEnergyConservationIsPolarization);
-        jPanelEnergyConservationIsPolarization.setLayout(jPanelEnergyConservationIsPolarizationLayout);
-        jPanelEnergyConservationIsPolarizationLayout.setHorizontalGroup(
-            jPanelEnergyConservationIsPolarizationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelEnergyConservationIsPolarizationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelEnergyConservationIsPolarizationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButtonEnergyConservationIsPolarizationYes)
-                    .addComponent(jRadioButtonEnergyConservationIsPolarizationNo))
-                .addContainerGap(263, Short.MAX_VALUE))
-        );
-        jPanelEnergyConservationIsPolarizationLayout.setVerticalGroup(
-            jPanelEnergyConservationIsPolarizationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelEnergyConservationIsPolarizationLayout.createSequentialGroup()
-                .addComponent(jRadioButtonEnergyConservationIsPolarizationYes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButtonEnergyConservationIsPolarizationNo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanelEnergyConservationLayout = new javax.swing.GroupLayout(jPanelEnergyConservation);
-        jPanelEnergyConservation.setLayout(jPanelEnergyConservationLayout);
-        jPanelEnergyConservationLayout.setHorizontalGroup(
-            jPanelEnergyConservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelEnergyConservationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelEnergyConservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanelEnergyConservationPexiglass, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelEnergyConservationPolarization, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelEnergyConservationIsPolarization, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-        jPanelEnergyConservationLayout.setVerticalGroup(
-            jPanelEnergyConservationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelEnergyConservationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelEnergyConservationPexiglass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelEnergyConservationPolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelEnergyConservationIsPolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(141, Short.MAX_VALUE))
-        );
-
-        jTabbedPaneOptica.addTab(resourceMap.getString("jPanelEnergyConservation.TabConstraints.tabTitle"), jPanelEnergyConservation); // NOI18N
-
-        jPanelCriticalAngle.setName("jPanelCriticalAngle"); // NOI18N
-
-        jPanelCriticalAngleVariation.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelCriticalAngleVariation.border.title"))); // NOI18N
-        jPanelCriticalAngleVariation.setName("jPanelCriticalAngleVariation"); // NOI18N
-        jPanelCriticalAngleVariation.setPreferredSize(new java.awt.Dimension(330, 126));
-
-        jSliderCriticalAngleVarationMin.setMajorTickSpacing(900);
-        jSliderCriticalAngleVarationMin.setMaximum(3600);
-        jSliderCriticalAngleVarationMin.setMinorTickSpacing(2);
-        jSliderCriticalAngleVarationMin.setPaintLabels(true);
-        jSliderCriticalAngleVarationMin.setSnapToTicks(true);
-        jSliderCriticalAngleVarationMin.setValue(3050);
-        jSliderCriticalAngleVarationMin.setMinimumSize(new java.awt.Dimension(250, 16));
-        jSliderCriticalAngleVarationMin.setName("jSliderCriticalAngleVarationMin"); // NOI18N
-        jSliderCriticalAngleVarationMin.setPreferredSize(new java.awt.Dimension(250, 42));
-        jSliderCriticalAngleVarationMin.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSliderCriticalAngleVarationMinStateChanged(evt);
-            }
-        });
-
-        jSliderCriticalAngleVarationMax.setMajorTickSpacing(900);
-        jSliderCriticalAngleVarationMax.setMaximum(3600);
-        jSliderCriticalAngleVarationMax.setMinorTickSpacing(2);
-        jSliderCriticalAngleVarationMax.setPaintLabels(true);
-        jSliderCriticalAngleVarationMax.setSnapToTicks(true);
-        jSliderCriticalAngleVarationMax.setValue(3200);
-        jSliderCriticalAngleVarationMax.setMinimumSize(new java.awt.Dimension(250, 16));
-        jSliderCriticalAngleVarationMax.setName("jSliderCriticalAngleVarationMax"); // NOI18N
-        jSliderCriticalAngleVarationMax.setPreferredSize(new java.awt.Dimension(250, 42));
-        jSliderCriticalAngleVarationMax.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSliderCriticalAngleVarationMaxStateChanged(evt);
-            }
-        });
-
-        jLabelCriticalAngleVaration.setForeground(resourceMap.getColor("jLabelCriticalAngleVaration.foreground")); // NOI18N
-        jLabelCriticalAngleVaration.setText(resourceMap.getString("jLabelCriticalAngleVaration.text")); // NOI18N
-        jLabelCriticalAngleVaration.setEnabled(false);
-        jLabelCriticalAngleVaration.setName("jLabelCriticalAngleVaration"); // NOI18N
-
-        jFormattedTextFieldCriticalAngleVarationMax.setText(resourceMap.getString("jFormattedTextFieldCriticalAngleVarationMax.text")); // NOI18N
-        jFormattedTextFieldCriticalAngleVarationMax.setMaximumSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldCriticalAngleVarationMax.setMinimumSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldCriticalAngleVarationMax.setName("jFormattedTextFieldCriticalAngleVarationMax"); // NOI18N
-        jFormattedTextFieldCriticalAngleVarationMax.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jFormattedTextFieldCriticalAngleVarationMaxFocusLost(evt);
-            }
-        });
-
-        jFormattedTextFieldCriticalAngleVarationMin.setText(resourceMap.getString("jFormattedTextFieldCriticalAngleVarationMin.text")); // NOI18N
-        jFormattedTextFieldCriticalAngleVarationMin.setMaximumSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldCriticalAngleVarationMin.setMinimumSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldCriticalAngleVarationMin.setName("jFormattedTextFieldCriticalAngleVarationMin"); // NOI18N
-        jFormattedTextFieldCriticalAngleVarationMin.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jFormattedTextFieldCriticalAngleVarationMinFocusLost(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelCriticalAngleVariationLayout = new javax.swing.GroupLayout(jPanelCriticalAngleVariation);
-        jPanelCriticalAngleVariation.setLayout(jPanelCriticalAngleVariationLayout);
-        jPanelCriticalAngleVariationLayout.setHorizontalGroup(
-            jPanelCriticalAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCriticalAngleVariationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelCriticalAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelCriticalAngleVariationLayout.createSequentialGroup()
-                        .addComponent(jSliderCriticalAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldCriticalAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabelCriticalAngleVaration, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelCriticalAngleVariationLayout.createSequentialGroup()
-                        .addComponent(jSliderCriticalAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldCriticalAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelCriticalAngleVariationLayout.setVerticalGroup(
-            jPanelCriticalAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCriticalAngleVariationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelCriticalAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSliderCriticalAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldCriticalAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelCriticalAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSliderCriticalAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldCriticalAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelCriticalAngleVaration)
-                .addGap(24, 24, 24))
-        );
-
-        jPanelCriticalAngleAngle.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelCriticalAngleAngle.border.title"))); // NOI18N
-        jPanelCriticalAngleAngle.setName("jPanelCriticalAngleAngle"); // NOI18N
-        jPanelCriticalAngleAngle.setPreferredSize(new java.awt.Dimension(330, 95));
-
-        jCheckBoxCriticalAngleMinimalAngle.setSelected(true);
-        jCheckBoxCriticalAngleMinimalAngle.setText(resourceMap.getString("jCheckBoxCriticalAngleMinimalAngle.text")); // NOI18N
-        jCheckBoxCriticalAngleMinimalAngle.setName("jCheckBoxCriticalAngleMinimalAngle"); // NOI18N
-
-        jCheckBoxCriticalAngleMediumAngle.setSelected(true);
-        jCheckBoxCriticalAngleMediumAngle.setText(resourceMap.getString("jCheckBoxCriticalAngleMediumAngle.text")); // NOI18N
-        jCheckBoxCriticalAngleMediumAngle.setName("jCheckBoxCriticalAngleMediumAngle"); // NOI18N
-
-        jCheckBoxCriticalAngleMaximumAngle.setSelected(true);
-        jCheckBoxCriticalAngleMaximumAngle.setText(resourceMap.getString("jCheckBoxCriticalAngleMaximumAngle.text")); // NOI18N
-        jCheckBoxCriticalAngleMaximumAngle.setName("jCheckBoxCriticalAngleMaximumAngle"); // NOI18N
-
-        javax.swing.GroupLayout jPanelCriticalAngleAngleLayout = new javax.swing.GroupLayout(jPanelCriticalAngleAngle);
-        jPanelCriticalAngleAngle.setLayout(jPanelCriticalAngleAngleLayout);
-        jPanelCriticalAngleAngleLayout.setHorizontalGroup(
-            jPanelCriticalAngleAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCriticalAngleAngleLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jCheckBoxCriticalAngleMinimalAngle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBoxCriticalAngleMediumAngle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBoxCriticalAngleMaximumAngle)
-                .addContainerGap(76, Short.MAX_VALUE))
-        );
-        jPanelCriticalAngleAngleLayout.setVerticalGroup(
-            jPanelCriticalAngleAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCriticalAngleAngleLayout.createSequentialGroup()
-                .addGroup(jPanelCriticalAngleAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBoxCriticalAngleMinimalAngle)
-                    .addComponent(jCheckBoxCriticalAngleMediumAngle)
-                    .addComponent(jCheckBoxCriticalAngleMaximumAngle))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanelCriticalAngleLayout = new javax.swing.GroupLayout(jPanelCriticalAngle);
-        jPanelCriticalAngle.setLayout(jPanelCriticalAngleLayout);
-        jPanelCriticalAngleLayout.setHorizontalGroup(
-            jPanelCriticalAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCriticalAngleLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelCriticalAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelCriticalAngleVariation, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelCriticalAngleAngle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(56, Short.MAX_VALUE))
-        );
-        jPanelCriticalAngleLayout.setVerticalGroup(
-            jPanelCriticalAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCriticalAngleLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelCriticalAngleVariation, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelCriticalAngleAngle, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(232, Short.MAX_VALUE))
-        );
-
-        jTabbedPaneOptica.addTab(resourceMap.getString("jPanelCriticalAngle.TabConstraints.tabTitle"), jPanelCriticalAngle); // NOI18N
-
-        jPanelBrewsterAngle.setName("jPanelBrewsterAngle"); // NOI18N
-
-        jPanelBrewsterAngleVariation.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelBrewsterAngleVariation.border.title"))); // NOI18N
-        jPanelBrewsterAngleVariation.setName("jPanelBrewsterAngleVariation"); // NOI18N
-        jPanelBrewsterAngleVariation.setPreferredSize(new java.awt.Dimension(330, 126));
-
-        jSliderBrewsterAngleVarationMin.setMajorTickSpacing(900);
-        jSliderBrewsterAngleVarationMin.setMaximum(3600);
-        jSliderBrewsterAngleVarationMin.setMinorTickSpacing(2);
-        jSliderBrewsterAngleVarationMin.setPaintLabels(true);
-        jSliderBrewsterAngleVarationMin.setSnapToTicks(true);
-        jSliderBrewsterAngleVarationMin.setValue(170);
-        jSliderBrewsterAngleVarationMin.setMinimumSize(new java.awt.Dimension(250, 16));
-        jSliderBrewsterAngleVarationMin.setName("jSliderBrewsterAngleVarationMin"); // NOI18N
-        jSliderBrewsterAngleVarationMin.setPreferredSize(new java.awt.Dimension(250, 42));
-        jSliderBrewsterAngleVarationMin.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSliderBrewsterAngleVarationMinStateChanged(evt);
-            }
-        });
-
-        jSliderBrewsterAngleVarationMax.setMajorTickSpacing(900);
-        jSliderBrewsterAngleVarationMax.setMaximum(3600);
-        jSliderBrewsterAngleVarationMax.setMinorTickSpacing(2);
-        jSliderBrewsterAngleVarationMax.setPaintLabels(true);
-        jSliderBrewsterAngleVarationMax.setSnapToTicks(true);
-        jSliderBrewsterAngleVarationMax.setValue(370);
-        jSliderBrewsterAngleVarationMax.setMinimumSize(new java.awt.Dimension(250, 16));
-        jSliderBrewsterAngleVarationMax.setName("jSliderBrewsterAngleVarationMax"); // NOI18N
-        jSliderBrewsterAngleVarationMax.setPreferredSize(new java.awt.Dimension(250, 42));
-        jSliderBrewsterAngleVarationMax.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSliderBrewsterAngleVarationMaxStateChanged(evt);
-            }
-        });
-
-        jLabelBrewsterAngleVaration.setForeground(resourceMap.getColor("jLabelBrewsterAngleVaration.foreground")); // NOI18N
-        jLabelBrewsterAngleVaration.setText(resourceMap.getString("jLabelBrewsterAngleVaration.text")); // NOI18N
-        jLabelBrewsterAngleVaration.setEnabled(false);
-        jLabelBrewsterAngleVaration.setName("jLabelBrewsterAngleVaration"); // NOI18N
-
-        jFormattedTextFieldBrewsterAngleVarationMax.setText(resourceMap.getString("jFormattedTextFieldBrewsterAngleVarationMax.text")); // NOI18N
-        jFormattedTextFieldBrewsterAngleVarationMax.setMaximumSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldBrewsterAngleVarationMax.setMinimumSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldBrewsterAngleVarationMax.setName("jFormattedTextFieldBrewsterAngleVarationMax"); // NOI18N
-        jFormattedTextFieldBrewsterAngleVarationMax.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jFormattedTextFieldBrewsterAngleVarationMaxFocusLost(evt);
-            }
-        });
-
-        jFormattedTextFieldBrewsterAngleVarationMin.setText(resourceMap.getString("jFormattedTextFieldBrewsterAngleVarationMin.text")); // NOI18N
-        jFormattedTextFieldBrewsterAngleVarationMin.setMaximumSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldBrewsterAngleVarationMin.setMinimumSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldBrewsterAngleVarationMin.setName("jFormattedTextFieldBrewsterAngleVarationMin"); // NOI18N
-        jFormattedTextFieldBrewsterAngleVarationMin.setPreferredSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldBrewsterAngleVarationMin.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jFormattedTextFieldBrewsterAngleVarationMinFocusLost(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelBrewsterAngleVariationLayout = new javax.swing.GroupLayout(jPanelBrewsterAngleVariation);
-        jPanelBrewsterAngleVariation.setLayout(jPanelBrewsterAngleVariationLayout);
-        jPanelBrewsterAngleVariationLayout.setHorizontalGroup(
-            jPanelBrewsterAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBrewsterAngleVariationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelBrewsterAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelBrewsterAngleVariationLayout.createSequentialGroup()
-                        .addComponent(jSliderBrewsterAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldBrewsterAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabelBrewsterAngleVaration, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelBrewsterAngleVariationLayout.createSequentialGroup()
-                        .addComponent(jSliderBrewsterAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldBrewsterAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelBrewsterAngleVariationLayout.setVerticalGroup(
-            jPanelBrewsterAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBrewsterAngleVariationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelBrewsterAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSliderBrewsterAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldBrewsterAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelBrewsterAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSliderBrewsterAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldBrewsterAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelBrewsterAngleVaration)
-                .addGap(3, 3, 3))
-        );
-
-        jPanelBrewsterAnglePolarization.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelBrewsterAnglePolarization.border.title"))); // NOI18N
-        jPanelBrewsterAnglePolarization.setName("jPanelBrewsterAnglePolarization"); // NOI18N
-
-        jSliderBrewsterAnglePolarization.setMajorTickSpacing(225);
-        jSliderBrewsterAnglePolarization.setMaximum(900);
-        jSliderBrewsterAnglePolarization.setMinorTickSpacing(2);
-        jSliderBrewsterAnglePolarization.setPaintLabels(true);
-        jSliderBrewsterAnglePolarization.setSnapToTicks(true);
-        jSliderBrewsterAnglePolarization.setValue(900);
-        jSliderBrewsterAnglePolarization.setMinimumSize(new java.awt.Dimension(250, 16));
-        jSliderBrewsterAnglePolarization.setName("jSliderBrewsterAnglePolarization"); // NOI18N
-        jSliderBrewsterAnglePolarization.setPreferredSize(new java.awt.Dimension(250, 42));
-        jSliderBrewsterAnglePolarization.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSliderBrewsterAnglePolarizationStateChanged(evt);
-            }
-        });
-
-        jFormattedTextFieldBrewsterAnglePolarization.setText(resourceMap.getString("jFormattedTextFieldBrewsterAnglePolarization.text")); // NOI18N
-        jFormattedTextFieldBrewsterAnglePolarization.setMaximumSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldBrewsterAnglePolarization.setMinimumSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldBrewsterAnglePolarization.setName("jFormattedTextFieldBrewsterAnglePolarization"); // NOI18N
-        jFormattedTextFieldBrewsterAnglePolarization.setPreferredSize(new java.awt.Dimension(40, 19));
-        jFormattedTextFieldBrewsterAnglePolarization.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jFormattedTextFieldBrewsterAnglePolarizationFocusLost(evt);
-            }
-        });
-
-        jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
-        jLabel3.setName("jLabel3"); // NOI18N
-
-        jLabel4.setText(resourceMap.getString("jLabel4.text")); // NOI18N
-        jLabel4.setName("jLabel4"); // NOI18N
-
-        javax.swing.GroupLayout jPanelBrewsterAnglePolarizationLayout = new javax.swing.GroupLayout(jPanelBrewsterAnglePolarization);
-        jPanelBrewsterAnglePolarization.setLayout(jPanelBrewsterAnglePolarizationLayout);
-        jPanelBrewsterAnglePolarizationLayout.setHorizontalGroup(
-            jPanelBrewsterAnglePolarizationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBrewsterAnglePolarizationLayout.createSequentialGroup()
-                .addGroup(jPanelBrewsterAnglePolarizationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanelBrewsterAnglePolarizationLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSliderBrewsterAnglePolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelBrewsterAnglePolarizationLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextFieldBrewsterAnglePolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelBrewsterAnglePolarizationLayout.setVerticalGroup(
-            jPanelBrewsterAnglePolarizationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBrewsterAnglePolarizationLayout.createSequentialGroup()
-                .addGroup(jPanelBrewsterAnglePolarizationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelBrewsterAnglePolarizationLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSliderBrewsterAnglePolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelBrewsterAnglePolarizationLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jFormattedTextFieldBrewsterAnglePolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelBrewsterAnglePolarizationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3))
-                .addContainerGap())
-        );
-
-        jPanelBrewsterAngleAngle.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelBrewsterAngleAngle.border.title"))); // NOI18N
-        jPanelBrewsterAngleAngle.setName("jPanelBrewsterAngleAngle"); // NOI18N
-        jPanelBrewsterAngleAngle.setPreferredSize(new java.awt.Dimension(330, 95));
-
-        jCheckBoxBrewsterAngleMinimalAngle.setSelected(true);
-        jCheckBoxBrewsterAngleMinimalAngle.setText(resourceMap.getString("jCheckBoxBrewsterAngleMinimalAngle.text")); // NOI18N
-        jCheckBoxBrewsterAngleMinimalAngle.setName("jCheckBoxBrewsterAngleMinimalAngle"); // NOI18N
-
-        jCheckBoxBrewsterAngleMediumAngle.setSelected(true);
-        jCheckBoxBrewsterAngleMediumAngle.setText(resourceMap.getString("jCheckBoxBrewsterAngleMediumAngle.text")); // NOI18N
-        jCheckBoxBrewsterAngleMediumAngle.setName("jCheckBoxBrewsterAngleMediumAngle"); // NOI18N
-
-        jCheckBoxBrewsterAngleMaximumAngle.setSelected(true);
-        jCheckBoxBrewsterAngleMaximumAngle.setText(resourceMap.getString("jCheckBoxBrewsterAngleMaximumAngle.text")); // NOI18N
-        jCheckBoxBrewsterAngleMaximumAngle.setName("jCheckBoxBrewsterAngleMaximumAngle"); // NOI18N
-
-        javax.swing.GroupLayout jPanelBrewsterAngleAngleLayout = new javax.swing.GroupLayout(jPanelBrewsterAngleAngle);
-        jPanelBrewsterAngleAngle.setLayout(jPanelBrewsterAngleAngleLayout);
-        jPanelBrewsterAngleAngleLayout.setHorizontalGroup(
-            jPanelBrewsterAngleAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBrewsterAngleAngleLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jCheckBoxBrewsterAngleMinimalAngle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBoxBrewsterAngleMediumAngle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBoxBrewsterAngleMaximumAngle)
-                .addContainerGap(76, Short.MAX_VALUE))
-        );
-        jPanelBrewsterAngleAngleLayout.setVerticalGroup(
-            jPanelBrewsterAngleAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBrewsterAngleAngleLayout.createSequentialGroup()
-                .addGroup(jPanelBrewsterAngleAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBoxBrewsterAngleMinimalAngle)
-                    .addComponent(jCheckBoxBrewsterAngleMediumAngle)
-                    .addComponent(jCheckBoxBrewsterAngleMaximumAngle))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanelBrewsterAngleLayout = new javax.swing.GroupLayout(jPanelBrewsterAngle);
-        jPanelBrewsterAngle.setLayout(jPanelBrewsterAngleLayout);
-        jPanelBrewsterAngleLayout.setHorizontalGroup(
-            jPanelBrewsterAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBrewsterAngleLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelBrewsterAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelBrewsterAnglePolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelBrewsterAngleVariation, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelBrewsterAngleAngle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(48, Short.MAX_VALUE))
-        );
-        jPanelBrewsterAngleLayout.setVerticalGroup(
-            jPanelBrewsterAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBrewsterAngleLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelBrewsterAngleVariation, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelBrewsterAnglePolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanelBrewsterAngleAngle, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(102, Short.MAX_VALUE))
-        );
-
-        jTabbedPaneOptica.addTab(resourceMap.getString("jPanelBrewsterAngle.TabConstraints.tabTitle"), jPanelBrewsterAngle); // NOI18N
-
-        jPanelCalibration.setName("jPanelCalibration"); // NOI18N
-
-        jPanelCalibrationButtons.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelCalibrationButtons.border.title"))); // NOI18N
-        jPanelCalibrationButtons.setName("jPanelCalibrationButtons"); // NOI18N
-        jPanelCalibrationButtons.setPreferredSize(new java.awt.Dimension(330, 83));
-
-        jCheckBoxCalibrationPexiglass.setSelected(true);
-        jCheckBoxCalibrationPexiglass.setText(resourceMap.getString("jCheckBoxCalibrationPexiglass.text")); // NOI18N
-        jCheckBoxCalibrationPexiglass.setName("jCheckBoxCalibrationPexiglass"); // NOI18N
-        jCheckBoxCalibrationPexiglass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxCalibrationPexiglassActionPerformed(evt);
-            }
-        });
-
-        jCheckBoxCalibrationSensor.setText(resourceMap.getString("jCheckBoxCalibrationSensor.text")); // NOI18N
-        jCheckBoxCalibrationSensor.setName("jCheckBoxCalibrationSensor"); // NOI18N
-        jCheckBoxCalibrationSensor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxCalibrationSensorActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelCalibrationButtonsLayout = new javax.swing.GroupLayout(jPanelCalibrationButtons);
-        jPanelCalibrationButtons.setLayout(jPanelCalibrationButtonsLayout);
-        jPanelCalibrationButtonsLayout.setHorizontalGroup(
-            jPanelCalibrationButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCalibrationButtonsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelCalibrationButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBoxCalibrationPexiglass)
-                    .addComponent(jCheckBoxCalibrationSensor))
-                .addContainerGap(223, Short.MAX_VALUE))
-        );
-        jPanelCalibrationButtonsLayout.setVerticalGroup(
-            jPanelCalibrationButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCalibrationButtonsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jCheckBoxCalibrationPexiglass)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBoxCalibrationSensor)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanelCalibrationLayout = new javax.swing.GroupLayout(jPanelCalibration);
-        jPanelCalibration.setLayout(jPanelCalibrationLayout);
-        jPanelCalibrationLayout.setHorizontalGroup(
-            jPanelCalibrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCalibrationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelCalibrationButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanelCalibrationLayout.setVerticalGroup(
-            jPanelCalibrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCalibrationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelCalibrationButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(360, Short.MAX_VALUE))
-        );
-
-        jTabbedPaneOptica.addTab(resourceMap.getString("jPanelCalibration.TabConstraints.tabTitle"), jPanelCalibration); // NOI18N
-
-        add(jTabbedPaneOptica, java.awt.BorderLayout.CENTER);
-
-        jPanelControlButtons.setName("jPanelControlButtons"); // NOI18N
-        jPanelControlButtons.setPreferredSize(new java.awt.Dimension(350, 37));
-
-        jButtonOk.setLabel(resourceMap.getString("Ok.label")); // NOI18N
-        jButtonOk.setName("Ok"); // NOI18N
-        jButtonOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonOkActionPerformed(evt);
-            }
-        });
-
-        jButtonCancel.setLabel(resourceMap.getString("Cancel.label")); // NOI18N
-        jButtonCancel.setName("Cancel"); // NOI18N
-        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancelActionPerformed(evt);
-            }
-        });
-
-        jButtonDefaultConfig.setLabel(resourceMap.getString("DefaultConfig.label")); // NOI18N
-        jButtonDefaultConfig.setName("DefaultConfig"); // NOI18N
-        jButtonDefaultConfig.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDefaultConfigActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelControlButtonsLayout = new javax.swing.GroupLayout(jPanelControlButtons);
-        jPanelControlButtons.setLayout(jPanelControlButtonsLayout);
-        jPanelControlButtonsLayout.setHorizontalGroup(
-            jPanelControlButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelControlButtonsLayout.createSequentialGroup()
-                .addComponent(jButtonOk)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonCancel)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonDefaultConfig)
-                .addContainerGap(119, Short.MAX_VALUE))
-        );
-        jPanelControlButtonsLayout.setVerticalGroup(
-            jPanelControlButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelControlButtonsLayout.createSequentialGroup()
-                .addGroup(jPanelControlButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonOk)
-                    .addComponent(jButtonCancel)
-                    .addComponent(jButtonDefaultConfig))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jButtonOk.getAccessibleContext().setAccessibleName(resourceMap.getString("Ok.AccessibleContext.accessibleName")); // NOI18N
-        jButtonCancel.getAccessibleContext().setAccessibleName(resourceMap.getString("jButtonCancel.AccessibleContext.accessibleName")); // NOI18N
-        jButtonDefaultConfig.getAccessibleContext().setAccessibleName(resourceMap.getString("jButtonDefaultConfig.AccessibleContext.accessibleName")); // NOI18N
-
-        add(jPanelControlButtons, java.awt.BorderLayout.PAGE_END);
-    }// </editor-fold>//GEN-END:initComponents
+	// desc="Generated Code">//GEN-BEGIN:initComponents
+	private void initComponents() {
+
+		buttonGroupCalibration = new javax.swing.ButtonGroup();
+		buttonGroupEnergyConservationIsPolarization = new javax.swing.ButtonGroup();
+		jTabbedPaneOptica = new javax.swing.JTabbedPane();
+		jPanelSnell = new javax.swing.JPanel();
+		jPanelSnellAngleVariation = new javax.swing.JPanel();
+		jSliderSnellAngleVarationMin = new javax.swing.JSlider();
+		jSliderSnellAngleVarationMax = new javax.swing.JSlider();
+		jLabelSnellAngleVaration = new javax.swing.JLabel();
+		jFormattedTextFieldSnellAngleVarationMax = new javax.swing.JFormattedTextField();
+		jFormattedTextFieldSnellAngleVarationMin = new javax.swing.JFormattedTextField();
+		jPanelSnellDelta = new javax.swing.JPanel();
+		jSliderSnellDelta = new javax.swing.JSlider();
+		jLabelSnellDelta = new javax.swing.JLabel();
+		jFormattedTextFieldSnellDelta = new javax.swing.JFormattedTextField();
+		jPanelSnellDelay = new javax.swing.JPanel();
+		jSliderSnellDelay = new javax.swing.JSlider();
+		jLabelSnellDelay = new javax.swing.JLabel();
+		jFormattedTextFieldSnellDelay = new javax.swing.JFormattedTextField();
+		jPanelEnergyConservation = new javax.swing.JPanel();
+		jPanelEnergyConservationPexiglass = new javax.swing.JPanel();
+		jSliderEnergyConservationPexiglass = new javax.swing.JSlider();
+		jFormattedTextFieldEnergyConservationPexiglass = new javax.swing.JFormattedTextField();
+		jPanelEnergyConservationPolarization = new javax.swing.JPanel();
+		jSliderEnergyConservationPolarization = new javax.swing.JSlider();
+		jFormattedTextFieldEnergyConservationPolarization = new javax.swing.JFormattedTextField();
+		jLabel1 = new javax.swing.JLabel();
+		jLabel2 = new javax.swing.JLabel();
+		jPanelEnergyConservationIsPolarization = new javax.swing.JPanel();
+		jRadioButtonEnergyConservationIsPolarizationYes = new javax.swing.JRadioButton();
+		jRadioButtonEnergyConservationIsPolarizationNo = new javax.swing.JRadioButton();
+		jPanelCriticalAngle = new javax.swing.JPanel();
+		jPanelCriticalAngleVariation = new javax.swing.JPanel();
+		jSliderCriticalAngleVarationMin = new javax.swing.JSlider();
+		jSliderCriticalAngleVarationMax = new javax.swing.JSlider();
+		jLabelCriticalAngleVaration = new javax.swing.JLabel();
+		jFormattedTextFieldCriticalAngleVarationMax = new javax.swing.JFormattedTextField();
+		jFormattedTextFieldCriticalAngleVarationMin = new javax.swing.JFormattedTextField();
+		jPanelCriticalAngleAngle = new javax.swing.JPanel();
+		jCheckBoxCriticalAngleMinimalAngle = new javax.swing.JCheckBox();
+		jCheckBoxCriticalAngleMediumAngle = new javax.swing.JCheckBox();
+		jCheckBoxCriticalAngleMaximumAngle = new javax.swing.JCheckBox();
+		jPanelBrewsterAngle = new javax.swing.JPanel();
+		jPanelBrewsterAngleVariation = new javax.swing.JPanel();
+		jSliderBrewsterAngleVarationMin = new javax.swing.JSlider();
+		jSliderBrewsterAngleVarationMax = new javax.swing.JSlider();
+		jLabelBrewsterAngleVaration = new javax.swing.JLabel();
+		jFormattedTextFieldBrewsterAngleVarationMax = new javax.swing.JFormattedTextField();
+		jFormattedTextFieldBrewsterAngleVarationMin = new javax.swing.JFormattedTextField();
+		jPanelBrewsterAnglePolarization = new javax.swing.JPanel();
+		jSliderBrewsterAnglePolarization = new javax.swing.JSlider();
+		jFormattedTextFieldBrewsterAnglePolarization = new javax.swing.JFormattedTextField();
+		jLabel3 = new javax.swing.JLabel();
+		jLabel4 = new javax.swing.JLabel();
+		jPanelBrewsterAngleAngle = new javax.swing.JPanel();
+		jCheckBoxBrewsterAngleMinimalAngle = new javax.swing.JCheckBox();
+		jCheckBoxBrewsterAngleMediumAngle = new javax.swing.JCheckBox();
+		jCheckBoxBrewsterAngleMaximumAngle = new javax.swing.JCheckBox();
+		jPanelCalibration = new javax.swing.JPanel();
+		jPanelCalibrationButtons = new javax.swing.JPanel();
+		jCheckBoxCalibrationPexiglass = new javax.swing.JCheckBox();
+		jCheckBoxCalibrationSensor = new javax.swing.JCheckBox();
+		jPanelControlButtons = new javax.swing.JPanel();
+		jButtonOk = new javax.swing.JButton();
+		jButtonCancel = new javax.swing.JButton();
+		jButtonDefaultConfig = new javax.swing.JButton();
+
+		setMinimumSize(new java.awt.Dimension(350, 490));
+		setName("OpticaCustomizer"); // NOI18N
+		setPreferredSize(new java.awt.Dimension(350, 490));
+		setLayout(new java.awt.BorderLayout());
+
+		jTabbedPaneOptica.setName("jTabbedPaneOptica"); // NOI18N
+		jTabbedPaneOptica.setPreferredSize(new java.awt.Dimension(350, 417));
+		jTabbedPaneOptica.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
+				jTabbedPaneOpticaStateChanged(evt);
+			}
+		});
+
+		jPanelSnell.setName("jPanelSnell"); // NOI18N
+		jPanelSnell.setPreferredSize(new java.awt.Dimension(350, 372));
+
+		final org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application
+				.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext()
+				.getResourceMap(OpticaCustomizerPanel.class);
+		jPanelSnellAngleVariation.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap
+				.getString("jPanelSnellAngleVariation.border.title"))); // NOI18N
+		jPanelSnellAngleVariation.setName("jPanelSnellAngleVariation"); // NOI18N
+		jPanelSnellAngleVariation.setPreferredSize(new java.awt.Dimension(330, 126));
+
+		jSliderSnellAngleVarationMin.setMajorTickSpacing(900);
+		jSliderSnellAngleVarationMin.setMaximum(3600);
+		jSliderSnellAngleVarationMin.setMinorTickSpacing(2);
+		jSliderSnellAngleVarationMin.setPaintLabels(true);
+		jSliderSnellAngleVarationMin.setSnapToTicks(true);
+		jSliderSnellAngleVarationMin.setValue(0);
+		jSliderSnellAngleVarationMin.setMinimumSize(new java.awt.Dimension(250, 16));
+		jSliderSnellAngleVarationMin.setName("jSliderSnellAngleVarationMin"); // NOI18N
+		jSliderSnellAngleVarationMin.setPreferredSize(new java.awt.Dimension(250, 42));
+		jSliderSnellAngleVarationMin.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
+				jSliderSnellAngleVarationMinStateChanged(evt);
+			}
+		});
+
+		jSliderSnellAngleVarationMax.setMajorTickSpacing(900);
+		jSliderSnellAngleVarationMax.setMaximum(3600);
+		jSliderSnellAngleVarationMax.setMinorTickSpacing(2);
+		jSliderSnellAngleVarationMax.setPaintLabels(true);
+		jSliderSnellAngleVarationMax.setSnapToTicks(true);
+		jSliderSnellAngleVarationMax.setValue(3600);
+		jSliderSnellAngleVarationMax.setMinimumSize(new java.awt.Dimension(250, 16));
+		jSliderSnellAngleVarationMax.setName("jSliderSnellAngleVarationMax"); // NOI18N
+		jSliderSnellAngleVarationMax.setPreferredSize(new java.awt.Dimension(250, 42));
+		jSliderSnellAngleVarationMax.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
+				jSliderSnellAngleVarationMaxStateChanged(evt);
+			}
+		});
+
+		jLabelSnellAngleVaration.setForeground(resourceMap.getColor("jLabelSnellAngleVaration.foreground")); // NOI18N
+		jLabelSnellAngleVaration.setText(resourceMap.getString("jLabelSnellAngleVaration.text")); // NOI18N
+		jLabelSnellAngleVaration.setEnabled(false);
+		jLabelSnellAngleVaration.setName("jLabelSnellAngleVaration"); // NOI18N
+
+		jFormattedTextFieldSnellAngleVarationMax.setText(resourceMap
+				.getString("jFormattedTextFieldSnellAngleVarationMax.text")); // NOI18N
+		jFormattedTextFieldSnellAngleVarationMax.setMaximumSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldSnellAngleVarationMax.setMinimumSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldSnellAngleVarationMax.setName("jFormattedTextFieldSnellAngleVarationMax"); // NOI18N
+		jFormattedTextFieldSnellAngleVarationMax.addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
+				jFormattedTextFieldSnellAngleVarationMaxFocusLost(evt);
+			}
+		});
+
+		jFormattedTextFieldSnellAngleVarationMin.setText(resourceMap
+				.getString("jFormattedTextFieldSnellAngleVarationMin.text")); // NOI18N
+		jFormattedTextFieldSnellAngleVarationMin.setMaximumSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldSnellAngleVarationMin.setMinimumSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldSnellAngleVarationMin.setName("jFormattedTextFieldSnellAngleVarationMin"); // NOI18N
+		jFormattedTextFieldSnellAngleVarationMin.setPreferredSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldSnellAngleVarationMin.addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
+				jFormattedTextFieldSnellAngleVarationMinFocusLost(evt);
+			}
+		});
+
+		final javax.swing.GroupLayout jPanelSnellAngleVariationLayout = new javax.swing.GroupLayout(
+				jPanelSnellAngleVariation);
+		jPanelSnellAngleVariation.setLayout(jPanelSnellAngleVariationLayout);
+		jPanelSnellAngleVariationLayout.setHorizontalGroup(jPanelSnellAngleVariationLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelSnellAngleVariationLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(
+								jPanelSnellAngleVariationLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addGroup(
+												jPanelSnellAngleVariationLayout
+														.createSequentialGroup()
+														.addComponent(jSliderSnellAngleVarationMin,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(
+																javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+														.addComponent(jFormattedTextFieldSnellAngleVarationMin,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addComponent(jLabelSnellAngleVaration, javax.swing.GroupLayout.PREFERRED_SIZE,
+												323, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addGroup(
+												jPanelSnellAngleVariationLayout
+														.createSequentialGroup()
+														.addComponent(jSliderSnellAngleVarationMax,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(
+																javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+														.addComponent(jFormattedTextFieldSnellAngleVarationMax,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE)))
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		jPanelSnellAngleVariationLayout.setVerticalGroup(jPanelSnellAngleVariationLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelSnellAngleVariationLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(
+								jPanelSnellAngleVariationLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addComponent(jFormattedTextFieldSnellAngleVarationMin,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(jSliderSnellAngleVarationMin,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(
+								jPanelSnellAngleVariationLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addComponent(jSliderSnellAngleVarationMax,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(jFormattedTextFieldSnellAngleVarationMax,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(jLabelSnellAngleVaration).addGap(24, 24, 24)));
+
+		jPanelSnellDelta.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap
+				.getString("jPanelSnellDelta.border.title"))); // NOI18N
+		jPanelSnellDelta.setName("jPanelSnellDelta"); // NOI18N
+		jPanelSnellDelta.setPreferredSize(new java.awt.Dimension(330, 95));
+
+		jSliderSnellDelta.setMajorTickSpacing(900);
+		jSliderSnellDelta.setMaximum(3600);
+		jSliderSnellDelta.setMinimum(2);
+		jSliderSnellDelta.setMinorTickSpacing(2);
+		jSliderSnellDelta.setPaintLabels(true);
+		jSliderSnellDelta.setSnapToTicks(true);
+		jSliderSnellDelta.setValue(150);
+		jSliderSnellDelta.setMinimumSize(new java.awt.Dimension(250, 16));
+		jSliderSnellDelta.setName("jSliderSnellDelta"); // NOI18N
+		jSliderSnellDelta.setPreferredSize(new java.awt.Dimension(250, 42));
+		jSliderSnellDelta.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
+				jSliderSnellDeltaStateChanged(evt);
+			}
+		});
+
+		jLabelSnellDelta.setForeground(resourceMap.getColor("jLabelSnellDelta.foreground")); // NOI18N
+		jLabelSnellDelta.setText(resourceMap.getString("jLabelSnellDelta.text")); // NOI18N
+		jLabelSnellDelta.setEnabled(false);
+		jLabelSnellDelta.setName("jLabelSnellDelta"); // NOI18N
+
+		jFormattedTextFieldSnellDelta.setText(resourceMap.getString("jFormattedTextFieldSnellDelta.text")); // NOI18N
+		jFormattedTextFieldSnellDelta.setMaximumSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldSnellDelta.setMinimumSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldSnellDelta.setName("jFormattedTextFieldSnellDelta"); // NOI18N
+		jFormattedTextFieldSnellDelta.setPreferredSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldSnellDelta.addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
+				jFormattedTextFieldSnellDeltaFocusLost(evt);
+			}
+		});
+
+		final javax.swing.GroupLayout jPanelSnellDeltaLayout = new javax.swing.GroupLayout(jPanelSnellDelta);
+		jPanelSnellDelta.setLayout(jPanelSnellDeltaLayout);
+		jPanelSnellDeltaLayout.setHorizontalGroup(jPanelSnellDeltaLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelSnellDeltaLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(
+								jPanelSnellDeltaLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addGroup(
+												jPanelSnellDeltaLayout
+														.createSequentialGroup()
+														.addComponent(jSliderSnellDelta,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(
+																javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+														.addComponent(jFormattedTextFieldSnellDelta,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addComponent(jLabelSnellDelta, javax.swing.GroupLayout.PREFERRED_SIZE, 323,
+												javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		jPanelSnellDeltaLayout.setVerticalGroup(jPanelSnellDeltaLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelSnellDeltaLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(
+								jPanelSnellDeltaLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addComponent(jSliderSnellDelta, javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(jFormattedTextFieldSnellDelta,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(jLabelSnellDelta)
+						.addContainerGap()));
+
+		jPanelSnellDelay.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap
+				.getString("jPanelSnellDelay.border.title"))); // NOI18N
+		jPanelSnellDelay.setName("jPanelSnellDelay"); // NOI18N
+		jPanelSnellDelay.setPreferredSize(new java.awt.Dimension(330, 95));
+
+		jSliderSnellDelay.setMajorTickSpacing(10);
+		jSliderSnellDelay.setMaximum(50);
+		jSliderSnellDelay.setMinorTickSpacing(1);
+		jSliderSnellDelay.setPaintLabels(true);
+		jSliderSnellDelay.setSnapToTicks(true);
+		jSliderSnellDelay.setValue(25);
+		jSliderSnellDelay.setMinimumSize(new java.awt.Dimension(250, 16));
+		jSliderSnellDelay.setName("jSliderSnellDelay"); // NOI18N
+		jSliderSnellDelay.setPreferredSize(new java.awt.Dimension(250, 42));
+		jSliderSnellDelay.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
+				jSliderSnellDelayStateChanged(evt);
+			}
+		});
+
+		jLabelSnellDelay.setForeground(resourceMap.getColor("jLabelSnellDelay.foreground")); // NOI18N
+		jLabelSnellDelay.setText(resourceMap.getString("jLabelSnellDelay.text")); // NOI18N
+		jLabelSnellDelay.setEnabled(false);
+		jLabelSnellDelay.setName("jLabelSnellDelay"); // NOI18N
+
+		jFormattedTextFieldSnellDelay.setText(resourceMap.getString("jFormattedTextFieldSnellDelay.text")); // NOI18N
+		jFormattedTextFieldSnellDelay.setMaximumSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldSnellDelay.setMinimumSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldSnellDelay.setName("jFormattedTextFieldSnellDelay"); // NOI18N
+		jFormattedTextFieldSnellDelay.setPreferredSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldSnellDelay.addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
+				jFormattedTextFieldSnellDelayFocusLost(evt);
+			}
+		});
+
+		final javax.swing.GroupLayout jPanelSnellDelayLayout = new javax.swing.GroupLayout(jPanelSnellDelay);
+		jPanelSnellDelay.setLayout(jPanelSnellDelayLayout);
+		jPanelSnellDelayLayout.setHorizontalGroup(jPanelSnellDelayLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelSnellDelayLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(
+								jPanelSnellDelayLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addGroup(
+												jPanelSnellDelayLayout
+														.createSequentialGroup()
+														.addGap(10, 10, 10)
+														.addComponent(jSliderSnellDelay,
+																javax.swing.GroupLayout.PREFERRED_SIZE, 234,
+																javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(
+																javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+														.addComponent(jFormattedTextFieldSnellDelay,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addComponent(jLabelSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 323,
+												javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		jPanelSnellDelayLayout.setVerticalGroup(jPanelSnellDelayLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelSnellDelayLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(
+								jPanelSnellDelayLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addComponent(jSliderSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(jFormattedTextFieldSnellDelay,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+						.addComponent(jLabelSnellDelay)
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+
+		final javax.swing.GroupLayout jPanelSnellLayout = new javax.swing.GroupLayout(jPanelSnell);
+		jPanelSnell.setLayout(jPanelSnellLayout);
+		jPanelSnellLayout.setHorizontalGroup(jPanelSnellLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelSnellLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(
+								jPanelSnellLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+										.addComponent(jPanelSnellAngleVariation,
+												javax.swing.GroupLayout.PREFERRED_SIZE, 330,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addGroup(
+												jPanelSnellLayout
+														.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+														.addComponent(jPanelSnellDelta,
+																javax.swing.GroupLayout.PREFERRED_SIZE, 330,
+																javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addComponent(jPanelSnellDelay,
+																javax.swing.GroupLayout.PREFERRED_SIZE, 330,
+																javax.swing.GroupLayout.PREFERRED_SIZE)))
+						.addContainerGap()));
+		jPanelSnellLayout.setVerticalGroup(jPanelSnellLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelSnellLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(jPanelSnellAngleVariation, javax.swing.GroupLayout.PREFERRED_SIZE, 153,
+								javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jPanelSnellDelta, javax.swing.GroupLayout.PREFERRED_SIZE, 107,
+								javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jPanelSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 107,
+								javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(17, Short.MAX_VALUE)));
+
+		jTabbedPaneOptica.addTab(resourceMap.getString("jPanelSnell.TabConstraints.tabTitle"), jPanelSnell); // NOI18N
+
+		jPanelEnergyConservation.setName("jPanelEnergyConservation"); // NOI18N
+
+		jPanelEnergyConservationPexiglass.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap
+				.getString("jPanelEnergyConservationPexiglass.border.title"))); // NOI18N
+		jPanelEnergyConservationPexiglass.setName("jPanelEnergyConservationPexiglass"); // NOI18N
+
+		jSliderEnergyConservationPexiglass.setMajorTickSpacing(900);
+		jSliderEnergyConservationPexiglass.setMaximum(3600);
+		jSliderEnergyConservationPexiglass.setMinorTickSpacing(2);
+		jSliderEnergyConservationPexiglass.setPaintLabels(true);
+		jSliderEnergyConservationPexiglass.setSnapToTicks(true);
+		jSliderEnergyConservationPexiglass.setValue(900);
+		jSliderEnergyConservationPexiglass.setMinimumSize(new java.awt.Dimension(250, 16));
+		jSliderEnergyConservationPexiglass.setName("jSliderEnergyConservationPexiglass"); // NOI18N
+		jSliderEnergyConservationPexiglass.setPreferredSize(new java.awt.Dimension(250, 42));
+		jSliderEnergyConservationPexiglass.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
+				jSliderEnergyConservationPexiglassStateChanged(evt);
+			}
+		});
+
+		jFormattedTextFieldEnergyConservationPexiglass.setText(resourceMap
+				.getString("jFormattedTextFieldEnergyConservationPexiglass.text")); // NOI18N
+		jFormattedTextFieldEnergyConservationPexiglass.setMaximumSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldEnergyConservationPexiglass.setMinimumSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldEnergyConservationPexiglass.setName("jFormattedTextFieldEnergyConservationPexiglass"); // NOI18N
+		jFormattedTextFieldEnergyConservationPexiglass.setPreferredSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldEnergyConservationPexiglass.addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
+				jFormattedTextFieldEnergyConservationPexiglassFocusLost(evt);
+			}
+		});
+
+		final javax.swing.GroupLayout jPanelEnergyConservationPexiglassLayout = new javax.swing.GroupLayout(
+				jPanelEnergyConservationPexiglass);
+		jPanelEnergyConservationPexiglass.setLayout(jPanelEnergyConservationPexiglassLayout);
+		jPanelEnergyConservationPexiglassLayout.setHorizontalGroup(jPanelEnergyConservationPexiglassLayout
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+						jPanelEnergyConservationPexiglassLayout
+								.createSequentialGroup()
+								.addContainerGap()
+								.addComponent(jSliderEnergyConservationPexiglass,
+										javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(jFormattedTextFieldEnergyConservationPexiglass,
+										javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		jPanelEnergyConservationPexiglassLayout.setVerticalGroup(jPanelEnergyConservationPexiglassLayout
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+						jPanelEnergyConservationPexiglassLayout
+								.createSequentialGroup()
+								.addContainerGap()
+								.addGroup(
+										jPanelEnergyConservationPexiglassLayout
+												.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(jFormattedTextFieldEnergyConservationPexiglass,
+														javax.swing.GroupLayout.PREFERRED_SIZE,
+														javax.swing.GroupLayout.DEFAULT_SIZE,
+														javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addComponent(jSliderEnergyConservationPexiglass,
+														javax.swing.GroupLayout.PREFERRED_SIZE,
+														javax.swing.GroupLayout.DEFAULT_SIZE,
+														javax.swing.GroupLayout.PREFERRED_SIZE))
+								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+
+		jPanelEnergyConservationPolarization.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap
+				.getString("jPanelEnergyConservationPolarization.border.title"))); // NOI18N
+		jPanelEnergyConservationPolarization.setName("jPanelEnergyConservationPolarization"); // NOI18N
+
+		jSliderEnergyConservationPolarization.setMajorTickSpacing(225);
+		jSliderEnergyConservationPolarization.setMaximum(900);
+		jSliderEnergyConservationPolarization.setMinorTickSpacing(2);
+		jSliderEnergyConservationPolarization.setPaintLabels(true);
+		jSliderEnergyConservationPolarization.setSnapToTicks(true);
+		jSliderEnergyConservationPolarization.setValue(0);
+		jSliderEnergyConservationPolarization.setMinimumSize(new java.awt.Dimension(250, 16));
+		jSliderEnergyConservationPolarization.setName("jSliderEnergyConservationPolarization"); // NOI18N
+		jSliderEnergyConservationPolarization.setPreferredSize(new java.awt.Dimension(250, 42));
+		jSliderEnergyConservationPolarization.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
+				jSliderEnergyConservationPolarizationStateChanged(evt);
+			}
+		});
+
+		jFormattedTextFieldEnergyConservationPolarization.setText(resourceMap
+				.getString("jFormattedTextFieldEnergyConservationPolarization.text")); // NOI18N
+		jFormattedTextFieldEnergyConservationPolarization.setMaximumSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldEnergyConservationPolarization.setMinimumSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldEnergyConservationPolarization.setName("jFormattedTextFieldEnergyConservationPolarization"); // NOI18N
+		jFormattedTextFieldEnergyConservationPolarization.setPreferredSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldEnergyConservationPolarization.addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
+				jFormattedTextFieldEnergyConservationPolarizationFocusLost(evt);
+			}
+		});
+
+		jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
+		jLabel1.setName("jLabel1"); // NOI18N
+
+		jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
+		jLabel2.setName("jLabel2"); // NOI18N
+
+		final javax.swing.GroupLayout jPanelEnergyConservationPolarizationLayout = new javax.swing.GroupLayout(
+				jPanelEnergyConservationPolarization);
+		jPanelEnergyConservationPolarization.setLayout(jPanelEnergyConservationPolarizationLayout);
+		jPanelEnergyConservationPolarizationLayout
+				.setHorizontalGroup(jPanelEnergyConservationPolarizationLayout
+						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(
+								jPanelEnergyConservationPolarizationLayout
+										.createSequentialGroup()
+										.addGroup(
+												jPanelEnergyConservationPolarizationLayout
+														.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING,
+																false)
+														.addGroup(
+																jPanelEnergyConservationPolarizationLayout
+																		.createSequentialGroup()
+																		.addContainerGap()
+																		.addComponent(
+																				jSliderEnergyConservationPolarization,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				javax.swing.GroupLayout.DEFAULT_SIZE,
+																				javax.swing.GroupLayout.PREFERRED_SIZE))
+														.addGroup(
+																jPanelEnergyConservationPolarizationLayout
+																		.createSequentialGroup()
+																		.addComponent(jLabel1)
+																		.addPreferredGap(
+																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+																				javax.swing.GroupLayout.DEFAULT_SIZE,
+																				Short.MAX_VALUE).addComponent(jLabel2)))
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(jFormattedTextFieldEnergyConservationPolarization,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		jPanelEnergyConservationPolarizationLayout.setVerticalGroup(jPanelEnergyConservationPolarizationLayout
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+						jPanelEnergyConservationPolarizationLayout
+								.createSequentialGroup()
+								.addContainerGap()
+								.addGroup(
+										jPanelEnergyConservationPolarizationLayout
+												.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(jFormattedTextFieldEnergyConservationPolarization,
+														javax.swing.GroupLayout.PREFERRED_SIZE,
+														javax.swing.GroupLayout.DEFAULT_SIZE,
+														javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addComponent(jSliderEnergyConservationPolarization,
+														javax.swing.GroupLayout.PREFERRED_SIZE,
+														javax.swing.GroupLayout.DEFAULT_SIZE,
+														javax.swing.GroupLayout.PREFERRED_SIZE))
+								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addGroup(
+										jPanelEnergyConservationPolarizationLayout
+												.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(jLabel2).addComponent(jLabel1)).addContainerGap()));
+
+		jPanelEnergyConservationIsPolarization.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap
+				.getString("jPanelEnergyConservationIsPolarization.border.title"))); // NOI18N
+		jPanelEnergyConservationIsPolarization.setName("jPanelEnergyConservationIsPolarization"); // NOI18N
+
+		buttonGroupEnergyConservationIsPolarization.add(jRadioButtonEnergyConservationIsPolarizationYes);
+		jRadioButtonEnergyConservationIsPolarizationYes.setSelected(true);
+		jRadioButtonEnergyConservationIsPolarizationYes.setText(resourceMap
+				.getString("jRadioButtonEnergyConservationIsPolarizationYes.text")); // NOI18N
+		jRadioButtonEnergyConservationIsPolarizationYes.setName("jRadioButtonEnergyConservationIsPolarizationYes"); // NOI18N
+
+		buttonGroupEnergyConservationIsPolarization.add(jRadioButtonEnergyConservationIsPolarizationNo);
+		jRadioButtonEnergyConservationIsPolarizationNo.setText(resourceMap
+				.getString("jRadioButtonEnergyConservationIsPolarizationNo.text")); // NOI18N
+		jRadioButtonEnergyConservationIsPolarizationNo.setName("jRadioButtonEnergyConservationIsPolarizationNo"); // NOI18N
+
+		final javax.swing.GroupLayout jPanelEnergyConservationIsPolarizationLayout = new javax.swing.GroupLayout(
+				jPanelEnergyConservationIsPolarization);
+		jPanelEnergyConservationIsPolarization.setLayout(jPanelEnergyConservationIsPolarizationLayout);
+		jPanelEnergyConservationIsPolarizationLayout.setHorizontalGroup(jPanelEnergyConservationIsPolarizationLayout
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+						jPanelEnergyConservationIsPolarizationLayout
+								.createSequentialGroup()
+								.addContainerGap()
+								.addGroup(
+										jPanelEnergyConservationIsPolarizationLayout
+												.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(jRadioButtonEnergyConservationIsPolarizationYes)
+												.addComponent(jRadioButtonEnergyConservationIsPolarizationNo))
+								.addContainerGap(263, Short.MAX_VALUE)));
+		jPanelEnergyConservationIsPolarizationLayout.setVerticalGroup(jPanelEnergyConservationIsPolarizationLayout
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+						jPanelEnergyConservationIsPolarizationLayout.createSequentialGroup()
+								.addComponent(jRadioButtonEnergyConservationIsPolarizationYes)
+								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(jRadioButtonEnergyConservationIsPolarizationNo)
+								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+
+		final javax.swing.GroupLayout jPanelEnergyConservationLayout = new javax.swing.GroupLayout(
+				jPanelEnergyConservation);
+		jPanelEnergyConservation.setLayout(jPanelEnergyConservationLayout);
+		jPanelEnergyConservationLayout.setHorizontalGroup(jPanelEnergyConservationLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				javax.swing.GroupLayout.Alignment.TRAILING,
+				jPanelEnergyConservationLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(
+								jPanelEnergyConservationLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+										.addComponent(jPanelEnergyConservationPexiglass,
+												javax.swing.GroupLayout.Alignment.LEADING,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(jPanelEnergyConservationPolarization,
+												javax.swing.GroupLayout.Alignment.LEADING,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(jPanelEnergyConservationIsPolarization,
+												javax.swing.GroupLayout.Alignment.LEADING,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE)).addContainerGap()));
+		jPanelEnergyConservationLayout.setVerticalGroup(jPanelEnergyConservationLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelEnergyConservationLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(jPanelEnergyConservationPexiglass, javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jPanelEnergyConservationPolarization, javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jPanelEnergyConservationIsPolarization, javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(102, Short.MAX_VALUE)));
+
+		jTabbedPaneOptica.addTab(resourceMap.getString("jPanelEnergyConservation.TabConstraints.tabTitle"),
+				jPanelEnergyConservation); // NOI18N
+
+		jPanelCriticalAngle.setName("jPanelCriticalAngle"); // NOI18N
+
+		jPanelCriticalAngleVariation.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap
+				.getString("jPanelCriticalAngleVariation.border.title"))); // NOI18N
+		jPanelCriticalAngleVariation.setName("jPanelCriticalAngleVariation"); // NOI18N
+		jPanelCriticalAngleVariation.setPreferredSize(new java.awt.Dimension(330, 126));
+
+		jSliderCriticalAngleVarationMin.setMajorTickSpacing(900);
+		jSliderCriticalAngleVarationMin.setMaximum(3600);
+		jSliderCriticalAngleVarationMin.setMinorTickSpacing(2);
+		jSliderCriticalAngleVarationMin.setPaintLabels(true);
+		jSliderCriticalAngleVarationMin.setSnapToTicks(true);
+		jSliderCriticalAngleVarationMin.setValue(3050);
+		jSliderCriticalAngleVarationMin.setMinimumSize(new java.awt.Dimension(250, 16));
+		jSliderCriticalAngleVarationMin.setName("jSliderCriticalAngleVarationMin"); // NOI18N
+		jSliderCriticalAngleVarationMin.setPreferredSize(new java.awt.Dimension(250, 42));
+		jSliderCriticalAngleVarationMin.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
+				jSliderCriticalAngleVarationMinStateChanged(evt);
+			}
+		});
+
+		jSliderCriticalAngleVarationMax.setMajorTickSpacing(900);
+		jSliderCriticalAngleVarationMax.setMaximum(3600);
+		jSliderCriticalAngleVarationMax.setMinorTickSpacing(2);
+		jSliderCriticalAngleVarationMax.setPaintLabels(true);
+		jSliderCriticalAngleVarationMax.setSnapToTicks(true);
+		jSliderCriticalAngleVarationMax.setValue(3200);
+		jSliderCriticalAngleVarationMax.setMinimumSize(new java.awt.Dimension(250, 16));
+		jSliderCriticalAngleVarationMax.setName("jSliderCriticalAngleVarationMax"); // NOI18N
+		jSliderCriticalAngleVarationMax.setPreferredSize(new java.awt.Dimension(250, 42));
+		jSliderCriticalAngleVarationMax.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
+				jSliderCriticalAngleVarationMaxStateChanged(evt);
+			}
+		});
+
+		jLabelCriticalAngleVaration.setForeground(resourceMap.getColor("jLabelCriticalAngleVaration.foreground")); // NOI18N
+		jLabelCriticalAngleVaration.setText(resourceMap.getString("jLabelCriticalAngleVaration.text")); // NOI18N
+		jLabelCriticalAngleVaration.setEnabled(false);
+		jLabelCriticalAngleVaration.setName("jLabelCriticalAngleVaration"); // NOI18N
+
+		jFormattedTextFieldCriticalAngleVarationMax.setText(resourceMap
+				.getString("jFormattedTextFieldCriticalAngleVarationMax.text")); // NOI18N
+		jFormattedTextFieldCriticalAngleVarationMax.setMaximumSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldCriticalAngleVarationMax.setMinimumSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldCriticalAngleVarationMax.setName("jFormattedTextFieldCriticalAngleVarationMax"); // NOI18N
+		jFormattedTextFieldCriticalAngleVarationMax.addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
+				jFormattedTextFieldCriticalAngleVarationMaxFocusLost(evt);
+			}
+		});
+
+		jFormattedTextFieldCriticalAngleVarationMin.setText(resourceMap
+				.getString("jFormattedTextFieldCriticalAngleVarationMin.text")); // NOI18N
+		jFormattedTextFieldCriticalAngleVarationMin.setMaximumSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldCriticalAngleVarationMin.setMinimumSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldCriticalAngleVarationMin.setName("jFormattedTextFieldCriticalAngleVarationMin"); // NOI18N
+		jFormattedTextFieldCriticalAngleVarationMin.addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
+				jFormattedTextFieldCriticalAngleVarationMinFocusLost(evt);
+			}
+		});
+
+		final javax.swing.GroupLayout jPanelCriticalAngleVariationLayout = new javax.swing.GroupLayout(
+				jPanelCriticalAngleVariation);
+		jPanelCriticalAngleVariation.setLayout(jPanelCriticalAngleVariationLayout);
+		jPanelCriticalAngleVariationLayout.setHorizontalGroup(jPanelCriticalAngleVariationLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelCriticalAngleVariationLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(
+								jPanelCriticalAngleVariationLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addGroup(
+												jPanelCriticalAngleVariationLayout
+														.createSequentialGroup()
+														.addComponent(jSliderCriticalAngleVarationMin,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(
+																javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+														.addComponent(jFormattedTextFieldCriticalAngleVarationMin,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addComponent(jLabelCriticalAngleVaration,
+												javax.swing.GroupLayout.PREFERRED_SIZE, 323,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addGroup(
+												jPanelCriticalAngleVariationLayout
+														.createSequentialGroup()
+														.addComponent(jSliderCriticalAngleVarationMax,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(
+																javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+														.addComponent(jFormattedTextFieldCriticalAngleVarationMax,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE)))
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		jPanelCriticalAngleVariationLayout.setVerticalGroup(jPanelCriticalAngleVariationLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelCriticalAngleVariationLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(
+								jPanelCriticalAngleVariationLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addComponent(jSliderCriticalAngleVarationMin,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(jFormattedTextFieldCriticalAngleVarationMin,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(
+								jPanelCriticalAngleVariationLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addComponent(jSliderCriticalAngleVarationMax,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(jFormattedTextFieldCriticalAngleVarationMax,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(jLabelCriticalAngleVaration).addGap(24, 24, 24)));
+
+		jPanelCriticalAngleAngle.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap
+				.getString("jPanelCriticalAngleAngle.border.title"))); // NOI18N
+		jPanelCriticalAngleAngle.setName("jPanelCriticalAngleAngle"); // NOI18N
+		jPanelCriticalAngleAngle.setPreferredSize(new java.awt.Dimension(330, 95));
+
+		jCheckBoxCriticalAngleMinimalAngle.setSelected(true);
+		jCheckBoxCriticalAngleMinimalAngle.setText(resourceMap.getString("jCheckBoxCriticalAngleMinimalAngle.text")); // NOI18N
+		jCheckBoxCriticalAngleMinimalAngle.setName("jCheckBoxCriticalAngleMinimalAngle"); // NOI18N
+
+		jCheckBoxCriticalAngleMediumAngle.setSelected(true);
+		jCheckBoxCriticalAngleMediumAngle.setText(resourceMap.getString("jCheckBoxCriticalAngleMediumAngle.text")); // NOI18N
+		jCheckBoxCriticalAngleMediumAngle.setName("jCheckBoxCriticalAngleMediumAngle"); // NOI18N
+
+		jCheckBoxCriticalAngleMaximumAngle.setSelected(true);
+		jCheckBoxCriticalAngleMaximumAngle.setText(resourceMap.getString("jCheckBoxCriticalAngleMaximumAngle.text")); // NOI18N
+		jCheckBoxCriticalAngleMaximumAngle.setName("jCheckBoxCriticalAngleMaximumAngle"); // NOI18N
+
+		final javax.swing.GroupLayout jPanelCriticalAngleAngleLayout = new javax.swing.GroupLayout(
+				jPanelCriticalAngleAngle);
+		jPanelCriticalAngleAngle.setLayout(jPanelCriticalAngleAngleLayout);
+		jPanelCriticalAngleAngleLayout.setHorizontalGroup(jPanelCriticalAngleAngleLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelCriticalAngleAngleLayout.createSequentialGroup().addContainerGap()
+						.addComponent(jCheckBoxCriticalAngleMinimalAngle)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+						.addComponent(jCheckBoxCriticalAngleMediumAngle)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+						.addComponent(jCheckBoxCriticalAngleMaximumAngle).addContainerGap(95, Short.MAX_VALUE)));
+		jPanelCriticalAngleAngleLayout.setVerticalGroup(jPanelCriticalAngleAngleLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelCriticalAngleAngleLayout
+						.createSequentialGroup()
+						.addGroup(
+								jPanelCriticalAngleAngleLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+										.addComponent(jCheckBoxCriticalAngleMinimalAngle)
+										.addComponent(jCheckBoxCriticalAngleMediumAngle)
+										.addComponent(jCheckBoxCriticalAngleMaximumAngle))
+						.addContainerGap(10, Short.MAX_VALUE)));
+
+		final javax.swing.GroupLayout jPanelCriticalAngleLayout = new javax.swing.GroupLayout(jPanelCriticalAngle);
+		jPanelCriticalAngle.setLayout(jPanelCriticalAngleLayout);
+		jPanelCriticalAngleLayout.setHorizontalGroup(jPanelCriticalAngleLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelCriticalAngleLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(
+								jPanelCriticalAngleLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addComponent(jPanelCriticalAngleVariation,
+												javax.swing.GroupLayout.PREFERRED_SIZE, 330,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(jPanelCriticalAngleAngle, javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		jPanelCriticalAngleLayout.setVerticalGroup(jPanelCriticalAngleLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelCriticalAngleLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(jPanelCriticalAngleVariation, javax.swing.GroupLayout.PREFERRED_SIZE, 155,
+								javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jPanelCriticalAngleAngle, javax.swing.GroupLayout.PREFERRED_SIZE, 58,
+								javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(177, Short.MAX_VALUE)));
+
+		jTabbedPaneOptica.addTab(resourceMap.getString("jPanelCriticalAngle.TabConstraints.tabTitle"),
+				jPanelCriticalAngle); // NOI18N
+
+		jPanelBrewsterAngle.setName("jPanelBrewsterAngle"); // NOI18N
+
+		jPanelBrewsterAngleVariation.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap
+				.getString("jPanelBrewsterAngleVariation.border.title"))); // NOI18N
+		jPanelBrewsterAngleVariation.setName("jPanelBrewsterAngleVariation"); // NOI18N
+		jPanelBrewsterAngleVariation.setPreferredSize(new java.awt.Dimension(330, 126));
+
+		jSliderBrewsterAngleVarationMin.setMajorTickSpacing(900);
+		jSliderBrewsterAngleVarationMin.setMaximum(3600);
+		jSliderBrewsterAngleVarationMin.setMinorTickSpacing(2);
+		jSliderBrewsterAngleVarationMin.setPaintLabels(true);
+		jSliderBrewsterAngleVarationMin.setSnapToTicks(true);
+		jSliderBrewsterAngleVarationMin.setValue(170);
+		jSliderBrewsterAngleVarationMin.setMinimumSize(new java.awt.Dimension(250, 16));
+		jSliderBrewsterAngleVarationMin.setName("jSliderBrewsterAngleVarationMin"); // NOI18N
+		jSliderBrewsterAngleVarationMin.setPreferredSize(new java.awt.Dimension(250, 42));
+		jSliderBrewsterAngleVarationMin.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
+				jSliderBrewsterAngleVarationMinStateChanged(evt);
+			}
+		});
+
+		jSliderBrewsterAngleVarationMax.setMajorTickSpacing(900);
+		jSliderBrewsterAngleVarationMax.setMaximum(3600);
+		jSliderBrewsterAngleVarationMax.setMinorTickSpacing(2);
+		jSliderBrewsterAngleVarationMax.setPaintLabels(true);
+		jSliderBrewsterAngleVarationMax.setSnapToTicks(true);
+		jSliderBrewsterAngleVarationMax.setValue(370);
+		jSliderBrewsterAngleVarationMax.setMinimumSize(new java.awt.Dimension(250, 16));
+		jSliderBrewsterAngleVarationMax.setName("jSliderBrewsterAngleVarationMax"); // NOI18N
+		jSliderBrewsterAngleVarationMax.setPreferredSize(new java.awt.Dimension(250, 42));
+		jSliderBrewsterAngleVarationMax.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
+				jSliderBrewsterAngleVarationMaxStateChanged(evt);
+			}
+		});
+
+		jLabelBrewsterAngleVaration.setForeground(resourceMap.getColor("jLabelBrewsterAngleVaration.foreground")); // NOI18N
+		jLabelBrewsterAngleVaration.setText(resourceMap.getString("jLabelBrewsterAngleVaration.text")); // NOI18N
+		jLabelBrewsterAngleVaration.setEnabled(false);
+		jLabelBrewsterAngleVaration.setName("jLabelBrewsterAngleVaration"); // NOI18N
+
+		jFormattedTextFieldBrewsterAngleVarationMax.setText(resourceMap
+				.getString("jFormattedTextFieldBrewsterAngleVarationMax.text")); // NOI18N
+		jFormattedTextFieldBrewsterAngleVarationMax.setMaximumSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldBrewsterAngleVarationMax.setMinimumSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldBrewsterAngleVarationMax.setName("jFormattedTextFieldBrewsterAngleVarationMax"); // NOI18N
+		jFormattedTextFieldBrewsterAngleVarationMax.addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
+				jFormattedTextFieldBrewsterAngleVarationMaxFocusLost(evt);
+			}
+		});
+
+		jFormattedTextFieldBrewsterAngleVarationMin.setText(resourceMap
+				.getString("jFormattedTextFieldBrewsterAngleVarationMin.text")); // NOI18N
+		jFormattedTextFieldBrewsterAngleVarationMin.setMaximumSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldBrewsterAngleVarationMin.setMinimumSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldBrewsterAngleVarationMin.setName("jFormattedTextFieldBrewsterAngleVarationMin"); // NOI18N
+		jFormattedTextFieldBrewsterAngleVarationMin.setPreferredSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldBrewsterAngleVarationMin.addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
+				jFormattedTextFieldBrewsterAngleVarationMinFocusLost(evt);
+			}
+		});
+
+		final javax.swing.GroupLayout jPanelBrewsterAngleVariationLayout = new javax.swing.GroupLayout(
+				jPanelBrewsterAngleVariation);
+		jPanelBrewsterAngleVariation.setLayout(jPanelBrewsterAngleVariationLayout);
+		jPanelBrewsterAngleVariationLayout.setHorizontalGroup(jPanelBrewsterAngleVariationLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelBrewsterAngleVariationLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(
+								jPanelBrewsterAngleVariationLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addGroup(
+												jPanelBrewsterAngleVariationLayout
+														.createSequentialGroup()
+														.addComponent(jSliderBrewsterAngleVarationMin,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(
+																javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+														.addComponent(jFormattedTextFieldBrewsterAngleVarationMin,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addComponent(jLabelBrewsterAngleVaration,
+												javax.swing.GroupLayout.PREFERRED_SIZE, 323,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addGroup(
+												jPanelBrewsterAngleVariationLayout
+														.createSequentialGroup()
+														.addComponent(jSliderBrewsterAngleVarationMax,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(
+																javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+														.addComponent(jFormattedTextFieldBrewsterAngleVarationMax,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE)))
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		jPanelBrewsterAngleVariationLayout.setVerticalGroup(jPanelBrewsterAngleVariationLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelBrewsterAngleVariationLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(
+								jPanelBrewsterAngleVariationLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addComponent(jSliderBrewsterAngleVarationMin,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(jFormattedTextFieldBrewsterAngleVarationMin,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(
+								jPanelBrewsterAngleVariationLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addComponent(jSliderBrewsterAngleVarationMax,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(jFormattedTextFieldBrewsterAngleVarationMax,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(jLabelBrewsterAngleVaration).addGap(3, 3, 3)));
+
+		jPanelBrewsterAnglePolarization.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap
+				.getString("jPanelBrewsterAnglePolarization.border.title"))); // NOI18N
+		jPanelBrewsterAnglePolarization.setName("jPanelBrewsterAnglePolarization"); // NOI18N
+
+		jSliderBrewsterAnglePolarization.setMajorTickSpacing(225);
+		jSliderBrewsterAnglePolarization.setMaximum(900);
+		jSliderBrewsterAnglePolarization.setMinorTickSpacing(2);
+		jSliderBrewsterAnglePolarization.setPaintLabels(true);
+		jSliderBrewsterAnglePolarization.setSnapToTicks(true);
+		jSliderBrewsterAnglePolarization.setValue(900);
+		jSliderBrewsterAnglePolarization.setMinimumSize(new java.awt.Dimension(250, 16));
+		jSliderBrewsterAnglePolarization.setName("jSliderBrewsterAnglePolarization"); // NOI18N
+		jSliderBrewsterAnglePolarization.setPreferredSize(new java.awt.Dimension(250, 42));
+		jSliderBrewsterAnglePolarization.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
+				jSliderBrewsterAnglePolarizationStateChanged(evt);
+			}
+		});
+
+		jFormattedTextFieldBrewsterAnglePolarization.setText(resourceMap
+				.getString("jFormattedTextFieldBrewsterAnglePolarization.text")); // NOI18N
+		jFormattedTextFieldBrewsterAnglePolarization.setMaximumSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldBrewsterAnglePolarization.setMinimumSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldBrewsterAnglePolarization.setName("jFormattedTextFieldBrewsterAnglePolarization"); // NOI18N
+		jFormattedTextFieldBrewsterAnglePolarization.setPreferredSize(new java.awt.Dimension(40, 19));
+		jFormattedTextFieldBrewsterAnglePolarization.addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusLost(final java.awt.event.FocusEvent evt) {
+				jFormattedTextFieldBrewsterAnglePolarizationFocusLost(evt);
+			}
+		});
+
+		jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
+		jLabel3.setName("jLabel3"); // NOI18N
+
+		jLabel4.setText(resourceMap.getString("jLabel4.text")); // NOI18N
+		jLabel4.setName("jLabel4"); // NOI18N
+
+		final javax.swing.GroupLayout jPanelBrewsterAnglePolarizationLayout = new javax.swing.GroupLayout(
+				jPanelBrewsterAnglePolarization);
+		jPanelBrewsterAnglePolarization.setLayout(jPanelBrewsterAnglePolarizationLayout);
+		jPanelBrewsterAnglePolarizationLayout
+				.setHorizontalGroup(jPanelBrewsterAnglePolarizationLayout
+						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(
+								jPanelBrewsterAnglePolarizationLayout
+										.createSequentialGroup()
+										.addGroup(
+												jPanelBrewsterAnglePolarizationLayout
+														.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING,
+																false)
+														.addGroup(
+																jPanelBrewsterAnglePolarizationLayout
+																		.createSequentialGroup()
+																		.addContainerGap()
+																		.addComponent(jSliderBrewsterAnglePolarization,
+																				javax.swing.GroupLayout.PREFERRED_SIZE,
+																				javax.swing.GroupLayout.DEFAULT_SIZE,
+																				javax.swing.GroupLayout.PREFERRED_SIZE))
+														.addGroup(
+																jPanelBrewsterAnglePolarizationLayout
+																		.createSequentialGroup()
+																		.addComponent(jLabel3)
+																		.addPreferredGap(
+																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+																				javax.swing.GroupLayout.DEFAULT_SIZE,
+																				Short.MAX_VALUE).addComponent(jLabel4)))
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(jFormattedTextFieldBrewsterAnglePolarization,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		jPanelBrewsterAnglePolarizationLayout.setVerticalGroup(jPanelBrewsterAnglePolarizationLayout
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+						jPanelBrewsterAnglePolarizationLayout
+								.createSequentialGroup()
+								.addGroup(
+										jPanelBrewsterAnglePolarizationLayout
+												.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+												.addGroup(
+														jPanelBrewsterAnglePolarizationLayout
+																.createSequentialGroup()
+																.addContainerGap()
+																.addComponent(jSliderBrewsterAnglePolarization,
+																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.PREFERRED_SIZE))
+												.addGroup(
+														jPanelBrewsterAnglePolarizationLayout
+																.createSequentialGroup()
+																.addGap(21, 21, 21)
+																.addComponent(
+																		jFormattedTextFieldBrewsterAnglePolarization,
+																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		javax.swing.GroupLayout.PREFERRED_SIZE)))
+								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addGroup(
+										jPanelBrewsterAnglePolarizationLayout
+												.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(jLabel4).addComponent(jLabel3)).addContainerGap()));
+
+		jPanelBrewsterAngleAngle.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap
+				.getString("jPanelBrewsterAngleAngle.border.title"))); // NOI18N
+		jPanelBrewsterAngleAngle.setName("jPanelBrewsterAngleAngle"); // NOI18N
+		jPanelBrewsterAngleAngle.setPreferredSize(new java.awt.Dimension(330, 95));
+
+		jCheckBoxBrewsterAngleMinimalAngle.setSelected(true);
+		jCheckBoxBrewsterAngleMinimalAngle.setText(resourceMap.getString("jCheckBoxBrewsterAngleMinimalAngle.text")); // NOI18N
+		jCheckBoxBrewsterAngleMinimalAngle.setName("jCheckBoxBrewsterAngleMinimalAngle"); // NOI18N
+
+		jCheckBoxBrewsterAngleMediumAngle.setSelected(true);
+		jCheckBoxBrewsterAngleMediumAngle.setText(resourceMap.getString("jCheckBoxBrewsterAngleMediumAngle.text")); // NOI18N
+		jCheckBoxBrewsterAngleMediumAngle.setName("jCheckBoxBrewsterAngleMediumAngle"); // NOI18N
+
+		jCheckBoxBrewsterAngleMaximumAngle.setSelected(true);
+		jCheckBoxBrewsterAngleMaximumAngle.setText(resourceMap.getString("jCheckBoxBrewsterAngleMaximumAngle.text")); // NOI18N
+		jCheckBoxBrewsterAngleMaximumAngle.setName("jCheckBoxBrewsterAngleMaximumAngle"); // NOI18N
+
+		final javax.swing.GroupLayout jPanelBrewsterAngleAngleLayout = new javax.swing.GroupLayout(
+				jPanelBrewsterAngleAngle);
+		jPanelBrewsterAngleAngle.setLayout(jPanelBrewsterAngleAngleLayout);
+		jPanelBrewsterAngleAngleLayout.setHorizontalGroup(jPanelBrewsterAngleAngleLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelBrewsterAngleAngleLayout.createSequentialGroup().addContainerGap()
+						.addComponent(jCheckBoxBrewsterAngleMinimalAngle)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+						.addComponent(jCheckBoxBrewsterAngleMediumAngle)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+						.addComponent(jCheckBoxBrewsterAngleMaximumAngle).addContainerGap(95, Short.MAX_VALUE)));
+		jPanelBrewsterAngleAngleLayout.setVerticalGroup(jPanelBrewsterAngleAngleLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelBrewsterAngleAngleLayout
+						.createSequentialGroup()
+						.addGroup(
+								jPanelBrewsterAngleAngleLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+										.addComponent(jCheckBoxBrewsterAngleMinimalAngle)
+										.addComponent(jCheckBoxBrewsterAngleMediumAngle)
+										.addComponent(jCheckBoxBrewsterAngleMaximumAngle))
+						.addContainerGap(10, Short.MAX_VALUE)));
+
+		final javax.swing.GroupLayout jPanelBrewsterAngleLayout = new javax.swing.GroupLayout(jPanelBrewsterAngle);
+		jPanelBrewsterAngle.setLayout(jPanelBrewsterAngleLayout);
+		jPanelBrewsterAngleLayout.setHorizontalGroup(jPanelBrewsterAngleLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelBrewsterAngleLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(
+								jPanelBrewsterAngleLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addComponent(jPanelBrewsterAnglePolarization,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(jPanelBrewsterAngleVariation,
+												javax.swing.GroupLayout.PREFERRED_SIZE, 330,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(jPanelBrewsterAngleAngle, javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		jPanelBrewsterAngleLayout.setVerticalGroup(jPanelBrewsterAngleLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelBrewsterAngleLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(jPanelBrewsterAngleVariation, javax.swing.GroupLayout.PREFERRED_SIZE, 151,
+								javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jPanelBrewsterAnglePolarization, javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(18, 18, 18)
+						.addComponent(jPanelBrewsterAngleAngle, javax.swing.GroupLayout.PREFERRED_SIZE, 58,
+								javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(51, Short.MAX_VALUE)));
+
+		jTabbedPaneOptica.addTab(resourceMap.getString("jPanelBrewsterAngle.TabConstraints.tabTitle"),
+				jPanelBrewsterAngle); // NOI18N
+
+		jPanelCalibration.setName("jPanelCalibration"); // NOI18N
+
+		jPanelCalibrationButtons.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap
+				.getString("jPanelCalibrationButtons.border.title"))); // NOI18N
+		jPanelCalibrationButtons.setName("jPanelCalibrationButtons"); // NOI18N
+		jPanelCalibrationButtons.setPreferredSize(new java.awt.Dimension(330, 83));
+
+		jCheckBoxCalibrationPexiglass.setSelected(true);
+		jCheckBoxCalibrationPexiglass.setText(resourceMap.getString("jCheckBoxCalibrationPexiglass.text")); // NOI18N
+		jCheckBoxCalibrationPexiglass.setName("jCheckBoxCalibrationPexiglass"); // NOI18N
+		jCheckBoxCalibrationPexiglass.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
+				jCheckBoxCalibrationPexiglassActionPerformed(evt);
+			}
+		});
+
+		jCheckBoxCalibrationSensor.setText(resourceMap.getString("jCheckBoxCalibrationSensor.text")); // NOI18N
+		jCheckBoxCalibrationSensor.setName("jCheckBoxCalibrationSensor"); // NOI18N
+		jCheckBoxCalibrationSensor.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
+				jCheckBoxCalibrationSensorActionPerformed(evt);
+			}
+		});
+
+		final javax.swing.GroupLayout jPanelCalibrationButtonsLayout = new javax.swing.GroupLayout(
+				jPanelCalibrationButtons);
+		jPanelCalibrationButtons.setLayout(jPanelCalibrationButtonsLayout);
+		jPanelCalibrationButtonsLayout.setHorizontalGroup(jPanelCalibrationButtonsLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelCalibrationButtonsLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(
+								jPanelCalibrationButtonsLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addComponent(jCheckBoxCalibrationPexiglass)
+										.addComponent(jCheckBoxCalibrationSensor))
+						.addContainerGap(229, Short.MAX_VALUE)));
+		jPanelCalibrationButtonsLayout.setVerticalGroup(jPanelCalibrationButtonsLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelCalibrationButtonsLayout.createSequentialGroup().addContainerGap()
+						.addComponent(jCheckBoxCalibrationPexiglass)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+						.addComponent(jCheckBoxCalibrationSensor)
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+
+		final javax.swing.GroupLayout jPanelCalibrationLayout = new javax.swing.GroupLayout(jPanelCalibration);
+		jPanelCalibration.setLayout(jPanelCalibrationLayout);
+		jPanelCalibrationLayout.setHorizontalGroup(jPanelCalibrationLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelCalibrationLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(jPanelCalibrationButtons, javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap()));
+		jPanelCalibrationLayout.setVerticalGroup(jPanelCalibrationLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelCalibrationLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(jPanelCalibrationButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 91,
+								javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(305, Short.MAX_VALUE)));
+
+		jTabbedPaneOptica.addTab(resourceMap.getString("jPanelCalibration.TabConstraints.tabTitle"), jPanelCalibration); // NOI18N
+
+		add(jTabbedPaneOptica, java.awt.BorderLayout.CENTER);
+
+		jPanelControlButtons.setName("jPanelControlButtons"); // NOI18N
+		jPanelControlButtons.setPreferredSize(new java.awt.Dimension(350, 37));
+
+		jButtonOk.setLabel(resourceMap.getString("Ok.label")); // NOI18N
+		jButtonOk.setName("Ok"); // NOI18N
+		jButtonOk.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
+				jButtonOkActionPerformed(evt);
+			}
+		});
+
+		jButtonCancel.setLabel(resourceMap.getString("Cancel.label")); // NOI18N
+		jButtonCancel.setName("Cancel"); // NOI18N
+		jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
+				jButtonCancelActionPerformed(evt);
+			}
+		});
+
+		jButtonDefaultConfig.setLabel(resourceMap.getString("DefaultConfig.label")); // NOI18N
+		jButtonDefaultConfig.setName("DefaultConfig"); // NOI18N
+		jButtonDefaultConfig.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
+				jButtonDefaultConfigActionPerformed(evt);
+			}
+		});
+
+		final javax.swing.GroupLayout jPanelControlButtonsLayout = new javax.swing.GroupLayout(jPanelControlButtons);
+		jPanelControlButtons.setLayout(jPanelControlButtonsLayout);
+		jPanelControlButtonsLayout.setHorizontalGroup(jPanelControlButtonsLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelControlButtonsLayout.createSequentialGroup().addComponent(jButtonOk)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jButtonCancel).addGap(18, 18, 18).addComponent(jButtonDefaultConfig)
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		jPanelControlButtonsLayout.setVerticalGroup(jPanelControlButtonsLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelControlButtonsLayout
+						.createSequentialGroup()
+						.addGroup(
+								jPanelControlButtonsLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+										.addComponent(jButtonOk).addComponent(jButtonCancel)
+										.addComponent(jButtonDefaultConfig))
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+
+		jButtonOk.getAccessibleContext()
+				.setAccessibleName(resourceMap.getString("Ok.AccessibleContext.accessibleName")); // NOI18N
+		jButtonCancel.getAccessibleContext().setAccessibleName(
+				resourceMap.getString("jButtonCancel.AccessibleContext.accessibleName")); // NOI18N
+		jButtonDefaultConfig.getAccessibleContext().setAccessibleName(
+				resourceMap.getString("jButtonDefaultConfig.AccessibleContext.accessibleName")); // NOI18N
+
+		add(jPanelControlButtons, java.awt.BorderLayout.PAGE_END);
+	}// </editor-fold>//GEN-END:initComponents
 
 	private void jButtonCancelActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonCancelActionPerformed
 		fireICustomizerListenerCanceled();
@@ -1389,73 +1690,74 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements
 		validateScreen();
 	}// GEN-LAST:event_jCheckBoxCalibrationSensorActionPerformed
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroupCalibration;
-    private javax.swing.ButtonGroup buttonGroupEnergyConservationIsPolarization;
-    private javax.swing.JButton jButtonCancel;
-    private javax.swing.JButton jButtonDefaultConfig;
-    private javax.swing.JButton jButtonOk;
-    private javax.swing.JCheckBox jCheckBoxBrewsterAngleMaximumAngle;
-    private javax.swing.JCheckBox jCheckBoxBrewsterAngleMediumAngle;
-    private javax.swing.JCheckBox jCheckBoxBrewsterAngleMinimalAngle;
-    private javax.swing.JCheckBox jCheckBoxCalibrationPexiglass;
-    private javax.swing.JCheckBox jCheckBoxCalibrationSensor;
-    private javax.swing.JCheckBox jCheckBoxCriticalAngleMaximumAngle;
-    private javax.swing.JCheckBox jCheckBoxCriticalAngleMediumAngle;
-    private javax.swing.JCheckBox jCheckBoxCriticalAngleMinimalAngle;
-    private javax.swing.JFormattedTextField jFormattedTextFieldBrewsterAnglePolarization;
-    private javax.swing.JFormattedTextField jFormattedTextFieldBrewsterAngleVarationMax;
-    private javax.swing.JFormattedTextField jFormattedTextFieldBrewsterAngleVarationMin;
-    private javax.swing.JFormattedTextField jFormattedTextFieldCriticalAngleVarationMax;
-    private javax.swing.JFormattedTextField jFormattedTextFieldCriticalAngleVarationMin;
-    private javax.swing.JFormattedTextField jFormattedTextFieldEnergyConservationPexiglass;
-    private javax.swing.JFormattedTextField jFormattedTextFieldEnergyConservationPolarization;
-    private javax.swing.JFormattedTextField jFormattedTextFieldSnellAngleVarationMax;
-    private javax.swing.JFormattedTextField jFormattedTextFieldSnellAngleVarationMin;
-    private javax.swing.JFormattedTextField jFormattedTextFieldSnellDelay;
-    private javax.swing.JFormattedTextField jFormattedTextFieldSnellDelta;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabelBrewsterAngleVaration;
-    private javax.swing.JLabel jLabelCriticalAngleVaration;
-    private javax.swing.JLabel jLabelSnellAngleVaration;
-    private javax.swing.JLabel jLabelSnellDelay;
-    private javax.swing.JLabel jLabelSnellDelta;
-    private javax.swing.JPanel jPanelBrewsterAngle;
-    private javax.swing.JPanel jPanelBrewsterAngleAngle;
-    private javax.swing.JPanel jPanelBrewsterAnglePolarization;
-    private javax.swing.JPanel jPanelBrewsterAngleVariation;
-    private javax.swing.JPanel jPanelCalibration;
-    private javax.swing.JPanel jPanelCalibrationButtons;
-    private javax.swing.JPanel jPanelControlButtons;
-    private javax.swing.JPanel jPanelCriticalAngle;
-    private javax.swing.JPanel jPanelCriticalAngleAngle;
-    private javax.swing.JPanel jPanelCriticalAngleVariation;
-    private javax.swing.JPanel jPanelEnergyConservation;
-    private javax.swing.JPanel jPanelEnergyConservationIsPolarization;
-    private javax.swing.JPanel jPanelEnergyConservationPexiglass;
-    private javax.swing.JPanel jPanelEnergyConservationPolarization;
-    private javax.swing.JPanel jPanelSnell;
-    private javax.swing.JPanel jPanelSnellAngleVariation;
-    private javax.swing.JPanel jPanelSnellDelay;
-    private javax.swing.JPanel jPanelSnellDelta;
-    private javax.swing.JRadioButton jRadioButtonEnergyConservationIsPolarizationNo;
-    private javax.swing.JRadioButton jRadioButtonEnergyConservationIsPolarizationYes;
-    private javax.swing.JSlider jSliderBrewsterAnglePolarization;
-    private javax.swing.JSlider jSliderBrewsterAngleVarationMax;
-    private javax.swing.JSlider jSliderBrewsterAngleVarationMin;
-    private javax.swing.JSlider jSliderCriticalAngleVarationMax;
-    private javax.swing.JSlider jSliderCriticalAngleVarationMin;
-    private javax.swing.JSlider jSliderEnergyConservationPexiglass;
-    private javax.swing.JSlider jSliderEnergyConservationPolarization;
-    private javax.swing.JSlider jSliderSnellAngleVarationMax;
-    private javax.swing.JSlider jSliderSnellAngleVarationMin;
-    private javax.swing.JSlider jSliderSnellDelay;
-    private javax.swing.JSlider jSliderSnellDelta;
-    private javax.swing.JTabbedPane jTabbedPaneOptica;
-    // End of variables declaration//GEN-END:variables
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.ButtonGroup buttonGroupCalibration;
+	private javax.swing.ButtonGroup buttonGroupEnergyConservationIsPolarization;
+	private javax.swing.JButton jButtonCancel;
+	private javax.swing.JButton jButtonDefaultConfig;
+	private javax.swing.JButton jButtonOk;
+	private javax.swing.JCheckBox jCheckBoxBrewsterAngleMaximumAngle;
+	private javax.swing.JCheckBox jCheckBoxBrewsterAngleMediumAngle;
+	private javax.swing.JCheckBox jCheckBoxBrewsterAngleMinimalAngle;
+	private javax.swing.JCheckBox jCheckBoxCalibrationPexiglass;
+	private javax.swing.JCheckBox jCheckBoxCalibrationSensor;
+	private javax.swing.JCheckBox jCheckBoxCriticalAngleMaximumAngle;
+	private javax.swing.JCheckBox jCheckBoxCriticalAngleMediumAngle;
+	private javax.swing.JCheckBox jCheckBoxCriticalAngleMinimalAngle;
+	private javax.swing.JFormattedTextField jFormattedTextFieldBrewsterAnglePolarization;
+	private javax.swing.JFormattedTextField jFormattedTextFieldBrewsterAngleVarationMax;
+	private javax.swing.JFormattedTextField jFormattedTextFieldBrewsterAngleVarationMin;
+	private javax.swing.JFormattedTextField jFormattedTextFieldCriticalAngleVarationMax;
+	private javax.swing.JFormattedTextField jFormattedTextFieldCriticalAngleVarationMin;
+	private javax.swing.JFormattedTextField jFormattedTextFieldEnergyConservationPexiglass;
+	private javax.swing.JFormattedTextField jFormattedTextFieldEnergyConservationPolarization;
+	private javax.swing.JFormattedTextField jFormattedTextFieldSnellAngleVarationMax;
+	private javax.swing.JFormattedTextField jFormattedTextFieldSnellAngleVarationMin;
+	private javax.swing.JFormattedTextField jFormattedTextFieldSnellDelay;
+	private javax.swing.JFormattedTextField jFormattedTextFieldSnellDelta;
+	private javax.swing.JLabel jLabel1;
+	private javax.swing.JLabel jLabel2;
+	private javax.swing.JLabel jLabel3;
+	private javax.swing.JLabel jLabel4;
+	private javax.swing.JLabel jLabelBrewsterAngleVaration;
+	private javax.swing.JLabel jLabelCriticalAngleVaration;
+	private javax.swing.JLabel jLabelSnellAngleVaration;
+	private javax.swing.JLabel jLabelSnellDelay;
+	private javax.swing.JLabel jLabelSnellDelta;
+	private javax.swing.JPanel jPanelBrewsterAngle;
+	private javax.swing.JPanel jPanelBrewsterAngleAngle;
+	private javax.swing.JPanel jPanelBrewsterAnglePolarization;
+	private javax.swing.JPanel jPanelBrewsterAngleVariation;
+	private javax.swing.JPanel jPanelCalibration;
+	private javax.swing.JPanel jPanelCalibrationButtons;
+	private javax.swing.JPanel jPanelControlButtons;
+	private javax.swing.JPanel jPanelCriticalAngle;
+	private javax.swing.JPanel jPanelCriticalAngleAngle;
+	private javax.swing.JPanel jPanelCriticalAngleVariation;
+	private javax.swing.JPanel jPanelEnergyConservation;
+	private javax.swing.JPanel jPanelEnergyConservationIsPolarization;
+	private javax.swing.JPanel jPanelEnergyConservationPexiglass;
+	private javax.swing.JPanel jPanelEnergyConservationPolarization;
+	private javax.swing.JPanel jPanelSnell;
+	private javax.swing.JPanel jPanelSnellAngleVariation;
+	private javax.swing.JPanel jPanelSnellDelay;
+	private javax.swing.JPanel jPanelSnellDelta;
+	private javax.swing.JRadioButton jRadioButtonEnergyConservationIsPolarizationNo;
+	private javax.swing.JRadioButton jRadioButtonEnergyConservationIsPolarizationYes;
+	private javax.swing.JSlider jSliderBrewsterAnglePolarization;
+	private javax.swing.JSlider jSliderBrewsterAngleVarationMax;
+	private javax.swing.JSlider jSliderBrewsterAngleVarationMin;
+	private javax.swing.JSlider jSliderCriticalAngleVarationMax;
+	private javax.swing.JSlider jSliderCriticalAngleVarationMin;
+	private javax.swing.JSlider jSliderEnergyConservationPexiglass;
+	private javax.swing.JSlider jSliderEnergyConservationPolarization;
+	private javax.swing.JSlider jSliderSnellAngleVarationMax;
+	private javax.swing.JSlider jSliderSnellAngleVarationMin;
+	private javax.swing.JSlider jSliderSnellDelay;
+	private javax.swing.JSlider jSliderSnellDelta;
+	private javax.swing.JTabbedPane jTabbedPaneOptica;
+
+	// End of variables declaration//GEN-END:variables
 
 	/**
 	 * Registers ICustomizerListener to receive events.
@@ -1618,7 +1920,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements
 		slidersAngle0360Labels.put(new Integer(900), new JLabel("90.0"));
 		slidersAngle0360Labels.put(new Integer(1800), new JLabel("180.0"));
 		slidersAngle0360Labels.put(new Integer(2700), new JLabel("270.0"));
-		slidersAngle0360Labels.put(new Integer(3600), new JLabel("380.0"));
+		slidersAngle0360Labels.put(new Integer(3600), new JLabel("360.0"));
 
 		final Dictionary<Integer, JLabel> slidersAngle02360Labels = new Hashtable<Integer, JLabel>();
 		slidersAngle02360Labels.put(new Integer(2), new JLabel("0.2"));
