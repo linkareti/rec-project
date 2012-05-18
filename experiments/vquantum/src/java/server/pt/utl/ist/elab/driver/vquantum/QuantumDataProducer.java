@@ -14,11 +14,11 @@ package pt.utl.ist.elab.driver.vquantum;
 import org.opensourcephysics.numerics.ParsedFunction;
 import org.opensourcephysics.numerics.ParserException;
 
+import pt.utl.ist.elab.common.virtual.utils.ByteUtil;
+import pt.utl.ist.elab.common.virtual.utils.Complex;
+import pt.utl.ist.elab.common.virtual.utils.FFT;
 import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
 import pt.utl.ist.elab.driver.virtual.VirtualBaseDriver;
-import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
-import pt.utl.ist.elab.driver.virtual.utils.Complex;
-import pt.utl.ist.elab.driver.virtual.utils.FFT;
 
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.impl.data.PhysicsValFactory;

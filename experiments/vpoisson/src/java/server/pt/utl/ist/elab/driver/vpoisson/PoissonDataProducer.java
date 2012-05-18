@@ -18,9 +18,9 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import pt.utl.ist.elab.common.virtual.utils.ByteUtil;
 import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
 import pt.utl.ist.elab.driver.virtual.VirtualBaseDriver;
-import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
 
 import com.linkare.rec.data.acquisition.PhysicsVal;
 import com.linkare.rec.data.acquisition.PhysicsValue;

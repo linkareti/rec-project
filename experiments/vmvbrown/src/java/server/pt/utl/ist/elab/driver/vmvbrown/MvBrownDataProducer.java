@@ -645,7 +645,7 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 								f[i + 1] = (float) state[i][2];
 							}
 
-							final byte[] b = pt.utl.ist.elab.driver.virtual.utils.ByteUtil.floatArrayToByteArray(f);
+							final byte[] b = pt.utl.ist.elab.common.virtual.utils.ByteUtil.floatArrayToByteArray(f);
 
 							value[0] = new PhysicsValue(PhysicsValFactory.fromByteArray(b, "data/raw"), null,
 									com.linkare.rec.data.Multiplier.none);
@@ -658,7 +658,7 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 								f[i + 2] = (float) state[i][4];
 							}
 
-							final byte[] b = pt.utl.ist.elab.driver.virtual.utils.ByteUtil.floatArrayToByteArray(f);
+							final byte[] b = pt.utl.ist.elab.common.virtual.utils.ByteUtil.floatArrayToByteArray(f);
 							value[0] = new PhysicsValue(PhysicsValFactory.fromByteArray(b, "data/raw"), null,
 									com.linkare.rec.data.Multiplier.none);
 						} else {
@@ -668,7 +668,7 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {// implements
 								f[i] = (float) state[i][0];
 							}
 
-							final byte[] b = pt.utl.ist.elab.driver.virtual.utils.ByteUtil.floatArrayToByteArray(f);
+							final byte[] b = pt.utl.ist.elab.common.virtual.utils.ByteUtil.floatArrayToByteArray(f);
 							value[0] = new PhysicsValue(PhysicsValFactory.fromByteArray(b, "data/raw"), null,
 									com.linkare.rec.data.Multiplier.none);
 						}
