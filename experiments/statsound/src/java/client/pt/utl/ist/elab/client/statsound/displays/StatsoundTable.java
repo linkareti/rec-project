@@ -2,9 +2,9 @@ package pt.utl.ist.elab.client.statsound.displays;
 
 import pt.utl.ist.elab.client.statsound.TypeOfExperiment;
 
-import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import com.linkare.rec.impl.ui.table.MultSeriesTable;
 
 /**
  * 

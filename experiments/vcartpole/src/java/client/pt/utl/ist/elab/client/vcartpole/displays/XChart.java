@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.vcartpole.displays;
  * 
  * @author nomead
  */
-public class XChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+public class XChart extends com.linkare.rec.impl.ui.graph.DefaultXYExperimentGraph {
 
 	/**
 	 * 

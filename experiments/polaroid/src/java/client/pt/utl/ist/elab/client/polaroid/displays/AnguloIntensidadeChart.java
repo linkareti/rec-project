@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.polaroid.displays;
  * 
  * @author André Neto - LEFT - IST
  */
-public class AnguloIntensidadeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+public class AnguloIntensidadeChart extends com.linkare.rec.impl.ui.graph.DefaultXYExperimentGraph {
 
 	/**
 	 * 

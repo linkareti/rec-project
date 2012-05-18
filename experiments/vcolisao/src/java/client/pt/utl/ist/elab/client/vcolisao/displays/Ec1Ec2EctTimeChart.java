@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.vcolisao.displays;
  * 
  * @author Emanuel A.
  */
-public class Ec1Ec2EctTimeChart extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph {
+public class Ec1Ec2EctTimeChart extends com.linkare.rec.impl.ui.graph.MultSeriesXYExperimentGraph {
 
 	/**
 	 * 

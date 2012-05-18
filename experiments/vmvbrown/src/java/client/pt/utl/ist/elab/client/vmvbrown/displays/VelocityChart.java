@@ -15,7 +15,7 @@ import com.linkare.rec.impl.client.experiment.ExpDataModel;
  * 
  * @author nomead
  */
-public class VelocityChart extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph {
+public class VelocityChart extends com.linkare.rec.impl.ui.graph.MultSeriesXYExperimentGraph {
 
 	/**
 	 * 

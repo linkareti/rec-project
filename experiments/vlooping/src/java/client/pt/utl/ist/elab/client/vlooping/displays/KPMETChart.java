@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.vlooping.displays;
  * 
  * @author Emanuel A.
  */
-public class KPMETChart extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph {
+public class KPMETChart extends com.linkare.rec.impl.ui.graph.MultSeriesXYExperimentGraph {
 
 	/**
 	 * 

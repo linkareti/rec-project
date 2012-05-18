@@ -111,7 +111,7 @@ public class Animation extends pt.utl.ist.elab.client.vm3.DrawableMolas implemen
 	// O icon associado a este painel!
 	@Override
 	public javax.swing.Icon getIcon() {
-		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
+		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/newface/resources/legacy/sensor16.gif"));
 	}
 
 	@Override

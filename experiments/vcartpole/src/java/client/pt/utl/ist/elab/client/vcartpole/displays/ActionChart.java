@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.vcartpole.displays;
  * 
  * @author nomead
  */
-public class ActionChart extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph {
+public class ActionChart extends com.linkare.rec.impl.ui.graph.MultSeriesXYExperimentGraph {
 
 	/**
 	 * 

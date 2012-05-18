@@ -44,15 +44,6 @@ public abstract class AbstractStatsoundChart extends javax.swing.JPanel implemen
 		initComponents();
 	}
 
-	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(AbstractStatsoundChart.UI_CLIENT_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(AbstractStatsoundChart.UI_CLIENT_LOGGER));
-		}
-	}
-
 	private void initComponents() {
 		datasetProxy = new StatsoundChartDataSetProxy();
 		scrollPane = new javax.swing.JScrollPane();
@@ -74,7 +65,7 @@ public abstract class AbstractStatsoundChart extends javax.swing.JPanel implemen
 
 	@Override
 	public Icon getIcon() {
-		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/chart16.gif"));
+		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/newface/resources/legacy/chart16.gif"));
 	}
 
 	@Override

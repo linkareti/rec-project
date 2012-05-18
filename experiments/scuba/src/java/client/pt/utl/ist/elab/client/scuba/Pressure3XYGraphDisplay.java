@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.scuba;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class Pressure3XYGraphDisplay extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+public class Pressure3XYGraphDisplay extends com.linkare.rec.impl.ui.graph.DefaultXYExperimentGraph {
 
 	/**
 	 * 

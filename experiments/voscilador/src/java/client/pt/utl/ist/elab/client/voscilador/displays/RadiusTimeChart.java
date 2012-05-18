@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.voscilador.displays;
  * 
  * @author RF
  */
-public class RadiusTimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+public class RadiusTimeChart extends com.linkare.rec.impl.ui.graph.DefaultXYExperimentGraph {
 
 	/**
 	 * 

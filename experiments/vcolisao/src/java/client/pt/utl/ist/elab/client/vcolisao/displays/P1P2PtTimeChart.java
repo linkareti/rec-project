@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.vcolisao.displays;
  * 
  * @author Emanuel A.
  */
-public class P1P2PtTimeChart extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph {
+public class P1P2PtTimeChart extends com.linkare.rec.impl.ui.graph.MultSeriesXYExperimentGraph {
 
 	/**
 	 * 

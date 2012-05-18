@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.vm3.displays;
  * 
  * @author n0dP2
  */
-public class PosTimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+public class PosTimeChart extends com.linkare.rec.impl.ui.graph.DefaultXYExperimentGraph {
 
 	/**
 	 * 

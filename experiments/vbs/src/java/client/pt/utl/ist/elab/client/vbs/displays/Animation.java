@@ -18,7 +18,7 @@ import org.opensourcephysics.display.DrawingPanel;
 import org.opensourcephysics.display2d.GridPointData;
 import org.opensourcephysics.display2d.VectorPlot;
 
-import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
+import pt.utl.ist.elab.common.virtual.utils.ByteUtil;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
@@ -140,7 +140,7 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 	// O icon associado a este painel!
 	@Override
 	public javax.swing.Icon getIcon() {
-		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
+		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/newface/resources/legacy/sensor16.gif"));
 	}
 
 	@Override

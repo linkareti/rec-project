@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.vdi.displays;
  * 
  * @author Queiro'
  */
-public class WTime2Chart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+public class WTime2Chart extends com.linkare.rec.impl.ui.graph.DefaultXYExperimentGraph {
 	/**
 	 * 
 	 */

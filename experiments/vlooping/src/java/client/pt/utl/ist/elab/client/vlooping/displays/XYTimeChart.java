@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.vlooping.displays;
  * 
  * @author Emanuel Antunes
  */
-public class XYTimeChart extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph {
+public class XYTimeChart extends com.linkare.rec.impl.ui.graph.MultSeriesXYExperimentGraph {
 
 	/**
 	 * 

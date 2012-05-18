@@ -15,7 +15,7 @@ import com.linkare.rec.impl.client.experiment.ExpDataModel;
  * 
  * @author nomead
  */
-public class Chart2 extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+public class Chart2 extends com.linkare.rec.impl.ui.graph.DefaultXYExperimentGraph {
 
 	/**
 	 * 

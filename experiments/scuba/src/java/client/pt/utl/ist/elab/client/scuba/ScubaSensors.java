@@ -41,7 +41,7 @@ public class ScubaSensors extends javax.swing.JPanel implements com.linkare.rec.
 	private final BufferedImage imgTube4 = new BufferedImage(imgTube1.getWidth(), imgTube1.getHeight(),
 			BufferedImage.TYPE_INT_ARGB);
 	private final Icon icon = new javax.swing.ImageIcon(getClass().getResource(
-			"/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
+			"/com/linkare/rec/impl/newface/resources/legacy/sensor16.gif"));
 
 	/** Creates new form SeringeSensor */
 	public ScubaSensors() {

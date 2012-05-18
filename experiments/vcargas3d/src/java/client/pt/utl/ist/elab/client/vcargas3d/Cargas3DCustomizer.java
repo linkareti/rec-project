@@ -852,13 +852,13 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 				setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 				carga.getStyle().setFillPattern(cor);
 
-				textX1.setText(Double.toString(pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondar(carga.getX(),
+				textX1.setText(Double.toString(pt.utl.ist.elab.common.virtual.utils.QMethods.arredondar(carga.getX(),
 						2)));
-				textY1.setText(Double.toString(pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondar(carga.getY(),
+				textY1.setText(Double.toString(pt.utl.ist.elab.common.virtual.utils.QMethods.arredondar(carga.getY(),
 						2)));
-				textZ1.setText(Double.toString(pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondar(carga.getZ(),
+				textZ1.setText(Double.toString(pt.utl.ist.elab.common.virtual.utils.QMethods.arredondar(carga.getZ(),
 						2)));
-				textQ1.setText(Float.toString(pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondar(
+				textQ1.setText(Float.toString(pt.utl.ist.elab.common.virtual.utils.QMethods.arredondar(
 						carga.getCharge(), 2)));
 			}
 		}

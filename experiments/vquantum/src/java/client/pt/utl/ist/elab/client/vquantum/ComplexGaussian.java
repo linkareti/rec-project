@@ -17,8 +17,8 @@ import java.awt.geom.Rectangle2D;
 import org.opensourcephysics.display.DrawingPanel;
 import org.opensourcephysics.display.Interactive;
 
-import pt.utl.ist.elab.driver.virtual.utils.Complex;
-import pt.utl.ist.elab.driver.virtual.utils.FFT;
+import pt.utl.ist.elab.common.virtual.utils.Complex;
+import pt.utl.ist.elab.common.virtual.utils.FFT;
 
 /**
  * 

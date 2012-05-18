@@ -31,7 +31,7 @@ import org.opensourcephysics.displayejs.InteractiveParticle;
 import org.opensourcephysics.displayejs.InteractiveSphere;
 import org.opensourcephysics.displayejs.InteractiveTrace;
 
-import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
+import pt.utl.ist.elab.common.virtual.utils.ByteUtil;
 
 /**
  * 

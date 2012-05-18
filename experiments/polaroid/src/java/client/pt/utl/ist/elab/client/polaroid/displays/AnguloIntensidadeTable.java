@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.polaroid.displays;
  * 
  * @author André Neto - LEFT - IST
  */
-public class AnguloIntensidadeTable extends com.linkare.rec.impl.baseUI.table.MultSeriesTable {
+public class AnguloIntensidadeTable extends com.linkare.rec.impl.ui.table.MultSeriesTable {
 
 	/**
 	 * 

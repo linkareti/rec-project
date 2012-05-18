@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.pv;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class PVXYGraphDisplay extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+public class PVXYGraphDisplay extends com.linkare.rec.impl.ui.graph.DefaultXYExperimentGraph {
 
 	/**
 	 * 

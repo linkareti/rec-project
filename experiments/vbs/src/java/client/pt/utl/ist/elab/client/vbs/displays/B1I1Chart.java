@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.vbs.displays;
  * 
  * @author Queiro'
  */
-public class B1I1Chart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+public class B1I1Chart extends com.linkare.rec.impl.ui.graph.DefaultXYExperimentGraph {
 	/**
 	 * 
 	 */

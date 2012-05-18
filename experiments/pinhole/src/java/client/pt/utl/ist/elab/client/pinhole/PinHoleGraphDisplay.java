@@ -6,7 +6,8 @@
  */
 package pt.utl.ist.elab.client.pinhole;
 
-import com.linkare.rec.impl.baseUI.graph.MultSeriesXYInBlockExperimentGraph;
+import com.linkare.rec.impl.ui.graph.MultSeriesXYInBlockExperimentGraph;
+
 import pt.utl.ist.elab.client.pinhole.PinHoleCustomizerPanel;
 
 /**

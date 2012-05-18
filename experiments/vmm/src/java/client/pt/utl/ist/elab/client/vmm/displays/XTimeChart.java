@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.vmm.displays;
  * 
  * @author André Neto - LEFT - IST
  */
-public class XTimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+public class XTimeChart extends com.linkare.rec.impl.ui.graph.DefaultXYExperimentGraph {
 
 	/**
 	 * 

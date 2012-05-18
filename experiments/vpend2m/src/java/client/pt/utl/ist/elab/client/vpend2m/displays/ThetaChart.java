@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.vpend2m.displays;
  * 
  * @author Antonio J. R. Figueiredo Last Review : 6/04/2005
  */
-public class ThetaChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+public class ThetaChart extends com.linkare.rec.impl.ui.graph.DefaultXYExperimentGraph {
 
 	/**
 	 * 

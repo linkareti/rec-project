@@ -16,7 +16,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="com.linkare.rec.impl.baseUI.display.SensorDisplay" name="sensorDisplay1">
+        <Component class="com.linkare.rec.impl.ui.display.SensorDisplay" name="sensorDisplay1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>

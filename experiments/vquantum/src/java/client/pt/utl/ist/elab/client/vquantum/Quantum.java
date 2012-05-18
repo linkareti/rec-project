@@ -41,7 +41,7 @@ import org.opensourcephysics.display.InteractivePanel;
 import org.opensourcephysics.display.axes.XAxis;
 import org.opensourcephysics.display.axes.XYAxis;
 
-import pt.utl.ist.elab.driver.virtual.utils.Complex;
+import pt.utl.ist.elab.common.virtual.utils.Complex;
 
 /**
  * 

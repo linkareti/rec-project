@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.vlooping.displays;
  * 
  * @author Emanuel Antunes
  */
-public class XYChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+public class XYChart extends com.linkare.rec.impl.ui.graph.DefaultXYExperimentGraph {
 
 	/**
 	 * 

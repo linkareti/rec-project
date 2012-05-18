@@ -48,7 +48,7 @@ public class StatsoundTableModelProxy extends com.linkare.rec.impl.client.experi
 	public String getColumnName(final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			if (columnIndex == 0) {
-				return ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.nodata", "No data available...");
+				return ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.lbl.nodata", "No data available...");
 			} else {
 				return null;
 			}
