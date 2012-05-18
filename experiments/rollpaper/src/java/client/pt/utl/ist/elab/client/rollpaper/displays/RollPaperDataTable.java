@@ -4,7 +4,7 @@
  */
 package pt.utl.ist.elab.client.rollpaper.displays;
 
-import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
+import com.linkare.rec.impl.ui.table.MultSeriesTable;
 
 /**
  *
