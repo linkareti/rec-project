@@ -6,9 +6,6 @@
 
 package pt.utl.ist.elab.virtual.guipack.graphs;
 
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
-
 import javax.swing.Icon;
 
 import org.jfree.chart.ChartPanel;
@@ -42,15 +39,7 @@ public class MultSeriesXYExperimentGraphExtended extends javax.swing.JPanel impl
 		initComponents();
 	}
 
-	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(MultSeriesXYExperimentGraphExtended.UI_CLIENT_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager()
-					.addLogger(Logger.getLogger(MultSeriesXYExperimentGraphExtended.UI_CLIENT_LOGGER));
-		}
-	}
+//	private static final Logger LOGGER = Logger.getLogger(MultSeriesXYDataSetProxyExtended.class.getName());
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
@@ -93,7 +82,7 @@ public class MultSeriesXYExperimentGraphExtended extends javax.swing.JPanel impl
 
 	@Override
 	public Icon getIcon() {
-		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/chart16.gif"));
+		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/newface/resources/legacy/chart16.gif"));
 	}
 
 	ExpDataModel expDataModel = null;
