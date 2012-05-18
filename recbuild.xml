@@ -41,7 +41,7 @@
 		<mkdir dir="${jvlc.classes.dir}" />
 		<mkdir dir="${jvlc.classes.dir}/META-INF" />
 
-		<javac srcdir="${jvlc.src.java.dir}" destdir="${jvlc.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+		<javac srcdir="${jvlc.src.java.dir}" destdir="${jvlc.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="true">
 			<include name="**/*.java" />
 			<classpath refid="jvlc.libs.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
@@ -103,7 +103,7 @@
 		<mkdir dir="${rec.common.classes.dir}" />
 		<mkdir dir="${rec.common.classes.dir}/META-INF" />
 
-		<javac srcdir="${rec.common.src.java.dir}" destdir="${rec.common.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+		<javac srcdir="${rec.common.src.java.dir}" destdir="${rec.common.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
 			<include name="**/*.java" />
 			<classpath refid="rec.common.libs.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
@@ -165,7 +165,7 @@
 		<mkdir dir="${rec.client.classes.dir}" />
 		<mkdir dir="${rec.client.classes.dir}/META-INF" />
 
-		<javac srcdir="${rec.client.src.java.dir}" destdir="${rec.client.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+		<javac srcdir="${rec.client.src.java.dir}" destdir="${rec.client.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
 			<include name="**/*.java" />
 			<classpath refid="rec.compile.client.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
@@ -178,7 +178,7 @@
 			</fileset>
 		</copy>
 
-		<javac srcdir="${rec.ui.src.java.dir}" destdir="${rec.client.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+		<javac srcdir="${rec.ui.src.java.dir}" destdir="${rec.client.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
 			<include name="**/*.java" />
 			<classpath refid="rec.compile.client.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
@@ -225,8 +225,8 @@
 		<copy file="${common.build.dir}/ReCCommon_sig.jar" todir="${client.build.dir}" />
 		<copy file="${jvlc.build.dir}/ReCjvlc_sig.jar" todir="${client.build.dir}" />
 
-		<copy file="${common.build.dir}/ReCCommon_sig.jar.pack.gz" todir="${client.build.dir}" failonerror="false"/>
-		<copy file="${jvlc.build.dir}/ReCjvlc_sig.jar.pack.gz" todir="${client.build.dir}" failonerror="false"/>
+		<copy file="${common.build.dir}/ReCCommon_sig.jar.pack.gz" todir="${client.build.dir}" failonerror="false" />
+		<copy file="${jvlc.build.dir}/ReCjvlc_sig.jar.pack.gz" todir="${client.build.dir}" failonerror="false" />
 
 		<copy file="${templates.dir.openorb}/OpenORBClientTemplate.xml" overwrite="yes" tofile="${client.build.dir}/etc/openorb.xml" />
 
@@ -246,7 +246,7 @@
 		<mkdir dir="${rec.hardwareserver.classes.dir}" />
 		<mkdir dir="${rec.hardwareserver.classes.dir}/META-INF" />
 
-		<javac srcdir="${rec.hardwareserver.src.java.dir}" destdir="${rec.hardwareserver.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+		<javac srcdir="${rec.hardwareserver.src.java.dir}" destdir="${rec.hardwareserver.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
 			<include name="**/*.java" />
 			<classpath refid="rec.compile.hardwareserver.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
@@ -321,7 +321,7 @@
 		<mkdir dir="${rec.multicast.classes.dir}" />
 		<mkdir dir="${rec.multicast.classes.dir}/META-INF" />
 
-		<javac srcdir="${rec.multicast.src.java.dir}" destdir="${rec.multicast.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+		<javac srcdir="${rec.multicast.src.java.dir}" destdir="${rec.multicast.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
 			<include name="**/*.java" />
 			<classpath refid="rec.compile.multicastcontroller.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />

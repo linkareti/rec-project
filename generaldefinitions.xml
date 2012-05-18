@@ -267,6 +267,46 @@
 	</path>
 
 	<!--
+			=====================================================
+			=================== Elab Common =====================
+			=====================================================
+	-->
+
+	<property name="elab.lib.dir" value="${basedir}/elab/lib" />
+
+	<property name="elab.common.classes.dir" value="${build.dir.compile}/classes/elab/common" />
+	<property name="elab.common.src.java.dir" value="${basedir}/elab/src/java/common" />
+	<property name="elab.common.lib.dir" value="${elab.lib.dir}/java/common" />
+
+	<path id="elab.common.lib.path">
+		<fileset dir="${elab.common.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="elab.common.compile.lib.path">
+		<fileset dir="${elab.lib.dir}/compile/common/">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="elab.common.libs.classpath">
+		<path refid="elab.common.lib.path" />
+		<path refid="elab.common.compile.lib.path" />
+	</path>
+
+	<path id="elab.compile.common.dependencies.classpath">
+		<path refid="rec.common.libs.classpath" />
+		<pathelement location="${rec.common.classes.dir}/" />
+	</path>
+
+	<path id="elab.compile.common.classpath">
+		<path refid="elab.common.libs.classpath" />
+		<path refid="elab.compile.common.dependencies.classpath" />
+	</path>
+
+
+	<!--
 		=====================================================
 		=================== Elab Client =====================
 		=====================================================
@@ -303,6 +343,8 @@
 		<pathelement location="${rec.client.classes.dir}/" />
 		<path refid="rec.common.libs.classpath" />
 		<pathelement location="${rec.common.classes.dir}/" />
+		<path refid="elab.common.libs.classpath" />
+		<pathelement location="${elab.common.classes.dir}" />
 	</path>
 
 	<path id="elab.compile.client.classpath">
@@ -345,6 +387,8 @@
 		<path refid="rec.hardwareserver.libs.classpath" />
 		<pathelement location="${rec.common.classes.dir}/" />
 		<path refid="rec.common.libs.classpath" />
+		<path refid="elab.common.libs.classpath" />
+		<pathelement location="${elab.common.classes.dir}" />
 	</path>
 
 	<path id="elab.compile.hardwareserver.classpath">
@@ -400,9 +444,7 @@
 	-->
 
 	<macrodef name="create.jnlp.full.client.compile">
-                <sequential>
-                    
-
+		<sequential>
 			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/rec-framework.jnlp">
 				<filterset begintoken="@" endtoken="@" filtersfile="build.properties" />
 			</copy>
@@ -559,7 +601,7 @@
 
 			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/elab-client.jnlp" />
 			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
-                        <replace file="${elab.client.classes.dir}/elab-client.jnlp" propertyFile="build.properties">
+			<replace file="${elab.client.classes.dir}/elab-client.jnlp" propertyFile="build.properties">
 				<replacefilter token="@elab.title@" property="elab.title" />
 				<replacefilter token="@elab.vendor@" property="elab.vendor" />
 				<replacefilter token="@elab.homepage@" property="elab.homepage" />
@@ -580,7 +622,7 @@
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
 				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 				<replacefilter token="@client.main-class@" property="client.main-class" />
-                                <replacefilter token="@rec.am.endpoint@"  property="rec.am.endpoint" />
+				<replacefilter token="@rec.am.endpoint@" property="rec.am.endpoint" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.coresize@" property="rec.client.processingmanager.threadpool.coresize" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
@@ -774,13 +816,15 @@
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
 				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 				<replacefilter token="@client.main-class@" property="client.main-class" />
-                                <replacefilter token="@rec.am.endpoint@"  property="rec.am.endpoint" />
+				<replacefilter token="@rec.am.endpoint@" property="rec.am.endpoint" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.coresize@" property="rec.client.processingmanager.threadpool.coresize" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
+				<replacefilter token="@jnlp.file@" value="elab-client.jnlp" />
 			</replace>
 
 			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
+			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Comon --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot; main=&quot;true&quot; /&gt;" />
 
 			<process.list task="add.experiment.to.full.jnlp.build" list="${experiment.list}" attribute.name="experiment.name" />
 		</sequential>
@@ -818,8 +862,6 @@
 	<property name="jnlp.windowsinstaller.template.file" value="${basedir}/templates/jnlp/windows-vlc-installer.jnlp.xml" />
 
 
-	<property name="baseuiconfig.template.file" value="${basedir}/templates/client/ReCBaseUIConfigTemplate.xml" />
-	<property name="baseuiconfig.lab.template.file" value="${basedir}/templates/client/ReCBaseUIConfigLabTemplate.xml" />
 	<property name="faceconfig.template.file" value="${basedir}/templates/client/ReCFaceConfigTemplate.xml" />
 	<property name="faceconfig.lab.template.file" value="${basedir}/templates/client/ReCFaceConfigLabTemplate.xml" />
 
@@ -921,7 +963,7 @@
 			<mkdir dir="@{destination.dir.name}" />
 
 			<signjar storetype="${rec.storetype}" destDir="@{destination.dir.name}" keystore="${rec.keystore}" keypass="${rec.keypass}" storepass="${rec.storepass}" alias="${rec.alias}">
-				<fileset dir="@{source.dir.name}" includes="*.jar" excludes="*_sig.jar" />
+				<fileset dir="@{source.dir.name}" includes="**/*.jar" excludes="**/*_sig.jar" />
 				<globmapper from="*.jar" to="*_sig.jar" />
 			</signjar>
 
@@ -935,7 +977,7 @@
 			<mkdir dir="@{destination.dir.name}" />
 
 			<signjar storetype="${elab.storetype}" destDir="@{destination.dir.name}" keystore="${elab.keystore}" keypass="${elab.keypass}" storepass="${elab.storepass}" alias="${elab.alias}">
-				<fileset dir="@{source.dir.name}" includes="*.jar" excludes="*_sig.jar" />
+				<fileset dir="@{source.dir.name}" includes="**/*.jar" excludes="**/*_sig.jar" />
 				<globmapper from="*.jar" to="*_sig.jar" />
 			</signjar>
 
@@ -947,7 +989,7 @@
 		<sequential>
 			<p200ant repack="true">
 				<fileset dir="@{dir}">
-					<include name="*.jar" />
+					<include name="**/*.jar" />
 				</fileset>
 			</p200ant>
 		</sequential>
@@ -1000,6 +1042,8 @@
 		<pathelement location="${rec.client.classes.dir}" />
 		<pathelement location="${rec.ui.classes.dir}" />
 		<path refid="rec.client.libs.classpath" />
+		<pathelement location="${elab.common.classes.dir}" />
+		<path refid="elab.common.libs.classpath" />
 		<pathelement location="${elab.client.classes.dir}" />
 		<path refid="elab.client.libs.classpath" />
 	</path>
@@ -1009,61 +1053,12 @@
 		<path refid="rec.common.libs.classpath" />
 		<pathelement location="${rec.hardwareserver.classes.dir}" />
 		<path refid="rec.hardwareserver.libs.classpath" />
+		<pathelement location="${elab.common.classes.dir}" />
+		<path refid="elab.common.libs.classpath" />
 		<pathelement location="${elab.hardwareserver.classes.dir}" />
 		<path refid="elab.hardwareserver.libs.classpath" />
 	</path>
 
-	<macrodef name="create.baseuiconfig">
-		<sequential>
-			<copy file="${baseuiconfig.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ReCBaseUIConfig.xml" />
-
-			<process.list task="add.lab.baseuiconfig" list="${lab.list}" attribute.name="lab.name" />
-
-		</sequential>
-	</macrodef>
-
-	<macrodef name="add.lab.baseuiconfig">
-		<attribute name="lab.name" />
-		<sequential>
-
-			<loadfile property="@{lab.name}.baseuiconfig" srcFile="${baseuiconfig.lab.template.file}" />
-
-			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" token="&lt;!--End Lab configuration--&gt;">
-				<replacevalue>
-					<![CDATA[@temporary.lab@
-			<!--End Lab configuration-->]]></replacevalue>
-			</replace>
-			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" token="@temporary.lab@" value="${@{lab.name}.baseuiconfig}" />
-
-			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" propertyFile="build.properties">
-				<replacefilter token="@multicast.controller.host@" property="@{lab.name}.multicast.controller.host" />
-				<replacefilter token="@multicast.controller.port@" property="@{lab.name}.multicast.controller.port" />
-				<replacefilter token="@lab.name@" property="@{lab.name}.rec.am.lab.id" />
-			</replace>
-
-			<process.list task="add.experiment.baseuiconfig" list="${@{lab.name}.experiment.list}" attribute.name="experiment.name" />
-
-			<!-- experiment apparatus comments -->
-			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" token="&lt;!--Start Apparatus configuration--&gt;" value="&lt;!--Start @{lab.name} Apparatus configuration--&gt;" />
-			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" token="&lt;!--End Apparatus configuration--&gt;" value="&lt;!--End @{lab.name} Apparatus configuration--&gt;" />
-
-		</sequential>
-	</macrodef>
-
-	<macrodef name="add.experiment.baseuiconfig">
-		<attribute name="experiment.name" />
-		<sequential>
-
-			<loadfile property="@{experiment.name}.baseuiconfig" srcFile="experiments/@{experiment.name}/etc/ReCBaseUIConfig.xml" />
-
-			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" token="&lt;!--End Apparatus configuration--&gt;">
-				<replacevalue>
-					<![CDATA[@temporary.experiment.apparatus@
-		<!--End Apparatus configuration-->]]></replacevalue>
-			</replace>
-			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" token="@temporary.experiment.apparatus@" value="${@{experiment.name}.baseuiconfig}" />
-		</sequential>
-	</macrodef>
 
 	<macrodef name="create.faceconfig">
 		<sequential>

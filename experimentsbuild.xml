@@ -61,11 +61,16 @@
 
 			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-compile" />
 
-			<javac srcdir="experiments/@{experiment.name}/src/java/client" destdir="${experiments.classes.dir}/@{experiment.name}/client" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+			<javac destdir="${experiments.classes.dir}/@{experiment.name}/client" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+				<src path="experiments/@{experiment.name}/src/java/client" />
+				<src path="experiments/@{experiment.name}/src/java/common" />
 				<include name="**/*.java" />
 				<classpath>
 					<path refid="compile.experiment.client.classpath" />
 					<fileset dir="experiments/@{experiment.name}/lib/java/client">
+						<include name="**/*" />
+					</fileset>
+					<fileset dir="experiments/@{experiment.name}/lib/java/common">
 						<include name="**/*" />
 					</fileset>
 				</classpath>
@@ -74,6 +79,10 @@
 
 			<copy todir="${experiments.classes.dir}/@{experiment.name}/client" overwrite="true">
 				<fileset dir="experiments/@{experiment.name}/src/java/client">
+					<exclude name="**/*.java" />
+					<exclude name="**/*.form" />
+				</fileset>
+				<fileset dir="experiments/@{experiment.name}/src/java/common">
 					<exclude name="**/*.java" />
 					<exclude name="**/*.form" />
 				</fileset>
@@ -109,11 +118,16 @@
 
 			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-compile" />
 
-			<javac srcdir="experiments/@{experiment.name}/src/java/server" destdir="${experiments.classes.dir}/@{experiment.name}/server" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+			<javac destdir="${experiments.classes.dir}/@{experiment.name}/server" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+				<src path="experiments/@{experiment.name}/src/java/server" />
+				<src path="experiments/@{experiment.name}/src/java/common" />
 				<include name="**/*.java" />
 				<classpath>
 					<path refid="compile.experiment.driver.classpath" />
 					<fileset dir="experiments/@{experiment.name}/lib/java/server">
+						<include name="**/*" />
+					</fileset>
+					<fileset dir="experiments/@{experiment.name}/lib/java/common">
 						<include name="**/*" />
 					</fileset>
 				</classpath>
@@ -121,6 +135,10 @@
 			</javac>
 
 			<copy todir="${experiments.classes.dir}/@{experiment.name}/server" overwrite="true">
+				<fileset dir="experiments/@{experiment.name}/src/java/common">
+					<exclude name="**/*.java" />
+					<exclude name="**/*.form" />
+				</fileset>
 				<fileset dir="experiments/@{experiment.name}/src/java/server">
 					<exclude name="**/*.java" />
 					<exclude name="**/*.form" />
@@ -248,7 +266,12 @@
 				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
 				<sysproperty key="openorb.config" value="${client.build.dir}/etc/openorb.xml" />
-				<sysproperty key="ReCBaseUIConfig" value="file:///${elab.client.classes.dir}/ReCBaseUIConfig.xml" />
+				<sysproperty key="ReC.ProcessingManager.ThreadPool.Coresize" value="${rec.client.processingmanager.threadpool.coresize}" />
+				<sysproperty key="ReC.ProcessingManager.ThreadPool.Maxsize" value="${rec.client.processingmanager.threadpool.maxsize}" />
+				<sysproperty key="ReC.ProcessingManager.Thread.Idletime" value="${rec.processingmanager.thread.idletime}" />
+				<sysproperty key="vlc.plugins.destdir" value="${vlc.plugins.destdir}" />
+				<sysproperty key="vlc.plugins.filename" value="${vlc.plugins.filename}" />
+				<sysproperty key="video.enabled" value="${video.enabled}" />
 			</java>
 		</sequential>
 	</macrodef>
@@ -282,7 +305,12 @@
 				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
 				<sysproperty key="openorb.config" value="${client.build.dir}/etc/openorb.xml" />
-				<sysproperty key="ReCBaseUIConfig" value="file:///${elab.client.classes.dir}/ReCBaseUIConfig.xml" />
+				<sysproperty key="ReC.ProcessingManager.ThreadPool.Coresize" value="${rec.client.processingmanager.threadpool.coresize}" />
+				<sysproperty key="ReC.ProcessingManager.ThreadPool.Maxsize" value="${rec.client.processingmanager.threadpool.maxsize}" />
+				<sysproperty key="ReC.ProcessingManager.Thread.Idletime" value="${rec.processingmanager.thread.idletime}" />
+				<sysproperty key="vlc.plugins.destdir" value="${vlc.plugins.destdir}" />
+				<sysproperty key="vlc.plugins.filename" value="${vlc.plugins.filename}" />
+				<sysproperty key="video.enabled" value="${video.enabled}" />
 			</java>
 		</sequential>
 	</macrodef>
@@ -316,6 +344,9 @@
 				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
 				<sysproperty key="openorb.config" value="${rec.hardwareserver.classes.dir}/openorb.xml" />
+				<sysproperty key="ReC.ProcessingManager.ThreadPool.Coresize" value="${rec.driver.processingmanager.threadpool.coresize}" />
+				<sysproperty key="ReC.ProcessingManager.ThreadPool.Maxsize" value="${rec.driver.processingmanager.threadpool.maxsize}" />
+				<sysproperty key="ReC.ProcessingManager.Thread.Idletime" value="${rec.processingmanager.thread.idletime}" />
 			</java>
 		</sequential>
 	</macrodef>
@@ -369,6 +400,9 @@
 				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
 				<sysproperty key="openorb.config" value="${rec.hardwareserver.classes.dir}/openorb.xml" />
+				<sysproperty key="ReC.ProcessingManager.ThreadPool.Coresize" value="${rec.driver.processingmanager.threadpool.coresize}" />
+				<sysproperty key="ReC.ProcessingManager.ThreadPool.Maxsize" value="${rec.driver.processingmanager.threadpool.maxsize}" />
+				<sysproperty key="ReC.ProcessingManager.Thread.Idletime" value="${rec.processingmanager.thread.idletime}" />
 			</java>
 		</sequential>
 	</macrodef>
@@ -384,23 +418,53 @@
 		<sequential>
 			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/@{experiment.name}.jnlp" />
 			<replace file="${client.build.dir}/@{experiment.name}.jnlp" propertyFile="experiments/@{experiment.name}/etc/build.properties">
-				<replacefilter token="@codebase@" property="@{experiment.name}.codebase" />
-				<replacefilter token="@href@" property="@{experiment.name}.href" />
-				<replacefilter token="@title@" property="@{experiment.name}.title" />
-				<replacefilter token="@vendor@" property="@{experiment.name}.vendor" />
-				<replacefilter token="@homepage@" property="@{experiment.name}.homepage" />
-				<replacefilter token="@one-line@" property="@{experiment.name}.one-line" />
-				<replacefilter token="@tooltip@" property="@{experiment.name}.tooltip" />
-				<replacefilter token="@short@" property="@{experiment.name}.short" />
+				<replacefilter token="@elab.title@" property="@{experiment.name}.title" />
+				<replacefilter token="@elab.vendor@" property="@{experiment.name}.vendor" />
+				<replacefilter token="@elab.homepage@" property="@{experiment.name}.homepage" />
+
+				<replacefilter token="@elab.description.oneline@" property="@{experiment.name}.description.oneline" />
+				<replacefilter token="@elab.description.tooltip@" property="@{experiment.name}.description.tooltip" />
+				<replacefilter token="@elab.description.short@" property="@{experiment.name}.description.short" />
+				<replacefilter token="@elab.icon@" property="@{experiment.name}.icon" />
+				<replacefilter token="@elab.icon.splash@" property="@{experiment.name}.icon.splash" />
+				<replacefilter token="@elab.title.en@" property="@{experiment.name}.title.en" />
+				<replacefilter token="@elab.homepage.en@" property="@{experiment.name}.homepage.en" />
+				<replacefilter token="@elab.description.en@" property="@{experiment.name}.description.en" />
+				<replacefilter token="@elab.description.oneline.en@" property="@{experiment.name}.description.oneline.en" />
+				<replacefilter token="@elab.description.tooltip.en@" property="@{experiment.name}.description.tooltip.en" />
+				<replacefilter token="@elab.description.short.en@" property="@{experiment.name}.description.short.en" />
+
 				<replacefilter token="@j2se-version@" property="@{experiment.name}.j2se-version" />
 				<replacefilter token="@client.main-class@" property="@{experiment.name}.client.main-class" />
+				<replacefilter token="@jnlp.file@" value="@{experiment.name}.jnlp" />
 			</replace>
 			<replace file="${client.build.dir}/@{experiment.name}.jnlp" propertyFile="build.properties">
+				<replacefilter token="@codebase@" property="codebase" />
+				<replacefilter token="@elab.title@" property="elab.title" />
+				<replacefilter token="@elab.vendor@" property="elab.vendor" />
+				<replacefilter token="@elab.homepage@" property="elab.homepage" />
+				<replacefilter token="@elab.description@" property="elab.description" />
+				<replacefilter token="@elab.description.oneline@" property="elab.description.oneline" />
+				<replacefilter token="@elab.description.tooltip@" property="elab.description.tooltip" />
+				<replacefilter token="@elab.description.short@" property="elab.description.short" />
+				<replacefilter token="@elab.icon@" property="elab.icon" />
+				<replacefilter token="@elab.icon.splash@" property="elab.icon.splash" />
+				<replacefilter token="@elab.title.en@" property="elab.title.en" />
+				<replacefilter token="@elab.homepage.en@" property="elab.homepage.en" />
+				<replacefilter token="@elab.description.en@" property="elab.description.en" />
+				<replacefilter token="@elab.description.oneline.en@" property="elab.description.oneline.en" />
+				<replacefilter token="@elab.description.tooltip.en@" property="elab.description.tooltip.en" />
+				<replacefilter token="@elab.description.short.en@" property="elab.description.short.en" />
+				<replacefilter token="@j2se-version@" property="j2se-version" />
+				<replacefilter token="@video.enabled@" property="video.enabled" />
+				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
+				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.coresize@" property="rec.client.processingmanager.threadpool.coresize" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
 			</replace>
 			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot;/&gt;" />
+			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot;/&gt;" />
 			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
 			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
 			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar ReC jvlc --&gt;" value="&lt;jar href=&quot;ReCjvlc_sig.jar&quot;/&gt;" />

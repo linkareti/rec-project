@@ -62,7 +62,7 @@
 			</fileset>
 		</copy>
 		<copy overwrite="true" todir="${client.rec.am.resources}">
-			<cutdirsmapper dirs="2"/>
+			<cutdirsmapper dirs="2" />
 			<!--regexpmapper from="^.*/client/(.*)\.properties$$" to="\1.properties"/-->
 			<fileset dir="${experiments.classes.dir}">
 				<include name="**/client/**/*.properties" />
@@ -89,7 +89,6 @@
 
 			<zipfileset file="${templates.dir.logs}/client.loggers.config.properties" fullpath="client/etc/loggers.config.properties" />
 			<zipfileset file="${client.build.dir}/etc/openorb.xml" fullpath="client/etc/openorb.xml" />
-			<zipfileset file="${client.build.dir}/etc/ReCBaseUIConfig.xml" fullpath="client/etc/ReCBaseUIConfig.xml" />
 			<zipfileset file="${client.build.dir}/etc/ReCFaceConfig.xml" fullpath="client/etc/ReCFaceConfig.xml" />
 		</zip>
 
@@ -262,6 +261,9 @@
 				<include name="*" />
 			</fileset>
 			<fileset dir="${rec.client.lib.dir}">
+				<include name="*" />
+			</fileset>
+			<fileset dir="${elab.common.lib.dir}">
 				<include name="*" />
 			</fileset>
 			<fileset dir="${elab.client.lib.dir}">
