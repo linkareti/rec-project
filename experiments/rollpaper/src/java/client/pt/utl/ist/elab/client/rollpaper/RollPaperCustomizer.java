@@ -570,7 +570,7 @@ public class RollPaperCustomizer extends javax.swing.JPanel implements ICustomiz
     @Override
     public void setHardwareInfo(final HardwareInfo hardwareInfo) {
         this.hardwareInfo = hardwareInfo;
-        ChannelParameter h1Parameter = this.hardwareInfo.getHardwareParameter("h1");
+        ChannelParameter h1Parameter = this.hardwareInfo.getHardwareParameter("height1");
         sliderHeigthFallOne.setMaximum(Integer.valueOf(h1Parameter.getParameterSelectionList()[MAXIMUM_VALUE_INDEX]));
         sliderHeigthFallOne.setMinimum(Integer.valueOf(h1Parameter.getParameterSelectionList()[MINIMUM_VALUE_INDEX]));
         sliderHeigthFallOne.setMinorTickSpacing(Integer.valueOf(h1Parameter.getParameterSelectionList()[STEP_VALUE_INDEX]));
@@ -581,7 +581,7 @@ public class RollPaperCustomizer extends javax.swing.JPanel implements ICustomiz
     @Override
     public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
         this.acqConfig = acqConfig;
-        String h1CurrentSelectedValue = acqConfig.getSelectedHardwareParameterValue("h1");
+        String h1CurrentSelectedValue = acqConfig.getSelectedHardwareParameterValue("height");
         heigthFallValue1.setText(h1CurrentSelectedValue);
         sliderHeigthFallOne.setValue(Integer.valueOf(heigthFallValue1.getText()));
         //... more code after this ...
