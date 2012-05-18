@@ -14,13 +14,12 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-//TODO Check PropertyChangeListener add on indexed properties
-
 @XmlRootElement
 public class ReCFaceConfig extends AbstractConfigBean {
 
 	@SuppressWarnings("unused")
-	private static final Logger log = Logger.getLogger(ReCFaceConfig.class.getName());
+	private static final Logger log = Logger.getLogger(ReCFaceConfig.class
+			.getName());
 
 	private boolean autoConnectLab = false;
 
@@ -78,8 +77,10 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	/**
 	 * Marshalls the current configuration to the OutputStream.
 	 * 
-	 * @param os OutputStream
-	 * @throws JAXBException If a JAXB error occours.
+	 * @param os
+	 *            OutputStream
+	 * @throws JAXBException
+	 *             If a JAXB error occours.
 	 */
 	public void marshall(final OutputStream os) throws JAXBException {
 		final JAXBContext jc = JAXBContext.newInstance(ReCFaceConfig.class);
@@ -92,10 +93,13 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	/**
 	 * Unmarshalls a new <code>ReCConfig</code> from the input stream.
 	 * 
-	 * @param is The source input stream
-	 * @throws JAXBException If a JAXB error occours.
+	 * @param is
+	 *            The source input stream
+	 * @throws JAXBException
+	 *             If a JAXB error occours.
 	 */
-	public static ReCFaceConfig unmarshall(final InputStream is) throws JAXBException {
+	public static ReCFaceConfig unmarshall(final InputStream is)
+			throws JAXBException {
 		final JAXBContext jc = JAXBContext.newInstance(ReCFaceConfig.class);
 		final Unmarshaller un = jc.createUnmarshaller();
 		return (ReCFaceConfig) un.unmarshal(is);
@@ -293,177 +297,222 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	// Setters
 
 	/**
-	 * @param appPreferredWidth the appPreferredWidth to set
+	 * @param appPreferredWidth
+	 *            the appPreferredWidth to set
 	 */
 	public void setAppPreferredWidth(final int appPreferredWidth) {
 		this.appPreferredWidth = appPreferredWidth;
 	}
 
 	/**
-	 * @param appPreferredHeight the appPreferredHeight to set
+	 * @param appPreferredHeight
+	 *            the appPreferredHeight to set
 	 */
 	public void setAppPreferredHeight(final int appPreferredHeight) {
 		this.appPreferredHeight = appPreferredHeight;
 	}
 
 	/**
-	 * @param autoConnectLab the autoConnectLab to set
+	 * @param autoConnectLab
+	 *            the autoConnectLab to set
 	 */
 	public void setAutoConnectLab(final boolean autoConnectLab) {
-		changeSupport.firePropertyChange("autoConnectLab", this.autoConnectLab, this.autoConnectLab = autoConnectLab);
+		changeSupport.firePropertyChange("autoConnectLab", this.autoConnectLab,
+				this.autoConnectLab = autoConnectLab);
 	}
 
 	/**
-	 * @param showVideoFrame the showVideoFrame to set
+	 * @param showVideoFrame
+	 *            the showVideoFrame to set
 	 */
 	public void setShowVideoFrame(final boolean showVideoFrame) {
-		changeSupport.firePropertyChange("showVideoFrame", this.showVideoFrame, this.showVideoFrame = showVideoFrame);
+		changeSupport.firePropertyChange("showVideoFrame", this.showVideoFrame,
+				this.showVideoFrame = showVideoFrame);
 	}
 
 	/**
-	 * @param enableVideoFrame the enableVideoFrame to set
+	 * @param enableVideoFrame
+	 *            the enableVideoFrame to set
 	 */
 	public void setEnableVideoFrame(final boolean enableVideoFrame) {
-		changeSupport.firePropertyChange("enableVideoFrame", this.enableVideoFrame,
-				this.enableVideoFrame = enableVideoFrame);
+		changeSupport
+				.firePropertyChange("enableVideoFrame", this.enableVideoFrame,
+						this.enableVideoFrame = enableVideoFrame);
 	}
 
 	/**
-	 * @param enableLoginPassword the enableLoginPassword to set
+	 * @param enableLoginPassword
+	 *            the enableLoginPassword to set
 	 */
 	public void setEnableLoginPassword(final boolean enableLoginPassword) {
-		changeSupport.firePropertyChange("enableLoginPassword", this.enableLoginPassword,
+		changeSupport.firePropertyChange("enableLoginPassword",
+				this.enableLoginPassword,
 				this.enableLoginPassword = enableLoginPassword);
 	}
 
 	/**
-	 * @param showChatFrame the showChatFrame to set
+	 * @param showChatFrame
+	 *            the showChatFrame to set
 	 */
 	public void setShowChatFrame(final boolean showChatFrame) {
-		changeSupport.firePropertyChange("showChatFrame", this.showChatFrame, this.showChatFrame = showChatFrame);
+		changeSupport.firePropertyChange("showChatFrame", this.showChatFrame,
+				this.showChatFrame = showChatFrame);
 	}
 
 	/**
-	 * @param enableChatFrame the enableChatFrame to set
+	 * @param enableChatFrame
+	 *            the enableChatFrame to set
 	 */
 	public void setEnableChatFrame(final boolean enableChatFrame) {
-		changeSupport.firePropertyChange("enableChatFrame", this.enableChatFrame,
-				this.enableChatFrame = enableChatFrame);
+		changeSupport.firePropertyChange("enableChatFrame",
+				this.enableChatFrame, this.enableChatFrame = enableChatFrame);
 	}
 
 	/**
-	 * @param showUserList the showUserList to set
+	 * @param showUserList
+	 *            the showUserList to set
 	 */
 	public void setShowUserList(final boolean showUserList) {
-		changeSupport.firePropertyChange("showUserList", this.showUserList, this.showUserList = showUserList);
+		changeSupport.firePropertyChange("showUserList", this.showUserList,
+				this.showUserList = showUserList);
 	}
 
 	/**
-	 * @param enableUsersList the enableUsersList to set
+	 * @param enableUsersList
+	 *            the enableUsersList to set
 	 */
 	public void setEnableUsersList(final boolean enableUsersList) {
-		changeSupport.firePropertyChange("enableUsersList", this.enableUsersList,
-				this.enableUsersList = enableUsersList);
+		changeSupport.firePropertyChange("enableUsersList",
+				this.enableUsersList, this.enableUsersList = enableUsersList);
 	}
 
 	/**
-	 * @param usersListRefreshRateMs the usersListRefreshRateMs to set
+	 * @param usersListRefreshRateMs
+	 *            the usersListRefreshRateMs to set
 	 */
 	public void setUsersListRefreshRateMs(final long usersListRefreshRateMs) {
-		changeSupport.firePropertyChange("usersListRefreshRateMs", this.usersListRefreshRateMs,
+		changeSupport.firePropertyChange("usersListRefreshRateMs",
+				this.usersListRefreshRateMs,
 				this.usersListRefreshRateMs = usersListRefreshRateMs);
 	}
 
 	/**
-	 * @param enterApparatusChatRoom the enterApparatusChatRoom to set
+	 * @param enterApparatusChatRoom
+	 *            the enterApparatusChatRoom to set
 	 */
 	public void setEnterApparatusChatRoom(final boolean enterApparatusChatRoom) {
-		changeSupport.firePropertyChange("enterApparatusChatRoom", this.enterApparatusChatRoom,
+		changeSupport.firePropertyChange("enterApparatusChatRoom",
+				this.enterApparatusChatRoom,
 				this.enterApparatusChatRoom = enterApparatusChatRoom);
 	}
 
 	/**
-	 * @param aboutPageLocationBundleKey the aboutPageLocationBundleKey to set
+	 * @param aboutPageLocationBundleKey
+	 *            the aboutPageLocationBundleKey to set
 	 */
-	public void setAboutPageLocationBundleKey(final String aboutPageLocationBundleKey) {
-		changeSupport.firePropertyChange("aboutPageLocationBundleKey", this.aboutPageLocationBundleKey,
+	public void setAboutPageLocationBundleKey(
+			final String aboutPageLocationBundleKey) {
+		changeSupport.firePropertyChange("aboutPageLocationBundleKey",
+				this.aboutPageLocationBundleKey,
 				this.aboutPageLocationBundleKey = aboutPageLocationBundleKey);
 	}
 
 	/**
-	 * @param splashIconLocationBundleKey the splashIconLocationBundleKey to set
+	 * @param splashIconLocationBundleKey
+	 *            the splashIconLocationBundleKey to set
 	 */
-	public void setSplashIconLocationBundleKey(final String splashIconLocationBundleKey) {
-		changeSupport.firePropertyChange("splashIconLocationBundleKey", this.splashIconLocationBundleKey,
+	public void setSplashIconLocationBundleKey(
+			final String splashIconLocationBundleKey) {
+		changeSupport.firePropertyChange("splashIconLocationBundleKey",
+				this.splashIconLocationBundleKey,
 				this.splashIconLocationBundleKey = splashIconLocationBundleKey);
 	}
 
 	/**
-	 * @param iconLocationBundleKey the iconLocationBundleKey to set
+	 * @param iconLocationBundleKey
+	 *            the iconLocationBundleKey to set
 	 */
 	public void setIconLocationBundleKey(final String iconLocationBundleKey) {
-		changeSupport.firePropertyChange("iconLocationBundleKey", this.iconLocationBundleKey,
+		changeSupport.firePropertyChange("iconLocationBundleKey",
+				this.iconLocationBundleKey,
 				this.iconLocationBundleKey = iconLocationBundleKey);
 	}
 
 	/**
-	 * @param desktopLocationBundleKey the desktopLocationBundleKey to set
+	 * @param desktopLocationBundleKey
+	 *            the desktopLocationBundleKey to set
 	 */
-	public void setDesktopLocationBundleKey(final String desktopLocationBundleKey) {
-		changeSupport.firePropertyChange("desktopLocationBundleKey", this.desktopLocationBundleKey,
+	public void setDesktopLocationBundleKey(
+			final String desktopLocationBundleKey) {
+		changeSupport.firePropertyChange("desktopLocationBundleKey",
+				this.desktopLocationBundleKey,
 				this.desktopLocationBundleKey = desktopLocationBundleKey);
 	}
 
 	/**
-	 * @param frameTitleBundleKey the frameTitleBundleKey to set
+	 * @param frameTitleBundleKey
+	 *            the frameTitleBundleKey to set
 	 */
 	public void setFrameTitleBundleKey(final String frameTitleBundleKey) {
-		changeSupport.firePropertyChange("frameTitleBundleKey", this.frameTitleBundleKey,
+		changeSupport.firePropertyChange("frameTitleBundleKey",
+				this.frameTitleBundleKey,
 				this.frameTitleBundleKey = frameTitleBundleKey);
 	}
 
 	/**
-	 * @param iconSponsorLocationBundleKey the iconSponsorLocationBundleKey to
-	 *            set
+	 * @param iconSponsorLocationBundleKey
+	 *            the iconSponsorLocationBundleKey to set
 	 */
-	public void setIconSponsorLocationBundleKey(final String iconSponsorLocationBundleKey) {
-		changeSupport.firePropertyChange("iconSponsorLocationBundleKey", this.iconSponsorLocationBundleKey,
-				this.iconSponsorLocationBundleKey = iconSponsorLocationBundleKey);
+	public void setIconSponsorLocationBundleKey(
+			final String iconSponsorLocationBundleKey) {
+		changeSupport
+				.firePropertyChange(
+						"iconSponsorLocationBundleKey",
+						this.iconSponsorLocationBundleKey,
+						this.iconSponsorLocationBundleKey = iconSponsorLocationBundleKey);
 	}
 
 	/**
-	 * @param helpPageLocationBundleKey the helpPageLocationBundleKey to set
+	 * @param helpPageLocationBundleKey
+	 *            the helpPageLocationBundleKey to set
 	 */
-	public void setHelpPageLocationBundleKey(final String helpPageLocationBundleKey) {
-		changeSupport.firePropertyChange("helpPageLocationBundleKey", this.helpPageLocationBundleKey,
+	public void setHelpPageLocationBundleKey(
+			final String helpPageLocationBundleKey) {
+		changeSupport.firePropertyChange("helpPageLocationBundleKey",
+				this.helpPageLocationBundleKey,
 				this.helpPageLocationBundleKey = helpPageLocationBundleKey);
 	}
 
 	/**
-	 * @param mediaConfig the mediaConfig to set
+	 * @param mediaConfig
+	 *            the mediaConfig to set
 	 */
 	// Delete
 	// public void setMediaConfig(MediaConfig mediaConfig) {
 	// this.mediaConfig = mediaConfig;
 	// }
 	/**
-	 * @param lab the lab to set
+	 * @param lab
+	 *            the lab to set
 	 */
 	public void setLab(final List<Lab> lab) {
 		labList = lab;
 	}
 
 	/**
-	 * @param webResource the webResource to set
+	 * @param webResource
+	 *            the webResource to set
 	 */
 	public void setWebResource(final List<WebResource> webResource) {
 		webResourceList = webResource;
 	}
 
 	/**
-	 * @param localizationBundle the localizationBundle to set
+	 * @param localizationBundle
+	 *            the localizationBundle to set
 	 */
-	public void setLocalizationBundle(final List<LocalizationBundle> localizationBundle) {
+	public void setLocalizationBundle(
+			final List<LocalizationBundle> localizationBundle) {
 		localizationBundleList = localizationBundle;
 	}
 
@@ -507,31 +556,36 @@ public class ReCFaceConfig extends AbstractConfigBean {
 			return false;
 		}
 		if ((aboutPageLocationBundleKey == null) ? (other.aboutPageLocationBundleKey != null)
-				: !aboutPageLocationBundleKey.equals(other.aboutPageLocationBundleKey)) {
+				: !aboutPageLocationBundleKey
+						.equals(other.aboutPageLocationBundleKey)) {
 			return false;
 		}
 		if ((splashIconLocationBundleKey == null) ? (other.splashIconLocationBundleKey != null)
-				: !splashIconLocationBundleKey.equals(other.splashIconLocationBundleKey)) {
+				: !splashIconLocationBundleKey
+						.equals(other.splashIconLocationBundleKey)) {
 			return false;
 		}
-		if ((iconLocationBundleKey == null) ? (other.iconLocationBundleKey != null) : !iconLocationBundleKey
-				.equals(other.iconLocationBundleKey)) {
+		if ((iconLocationBundleKey == null) ? (other.iconLocationBundleKey != null)
+				: !iconLocationBundleKey.equals(other.iconLocationBundleKey)) {
 			return false;
 		}
-		if ((desktopLocationBundleKey == null) ? (other.desktopLocationBundleKey != null) : !desktopLocationBundleKey
-				.equals(other.desktopLocationBundleKey)) {
+		if ((desktopLocationBundleKey == null) ? (other.desktopLocationBundleKey != null)
+				: !desktopLocationBundleKey
+						.equals(other.desktopLocationBundleKey)) {
 			return false;
 		}
-		if ((frameTitleBundleKey == null) ? (other.frameTitleBundleKey != null) : !frameTitleBundleKey
-				.equals(other.frameTitleBundleKey)) {
+		if ((frameTitleBundleKey == null) ? (other.frameTitleBundleKey != null)
+				: !frameTitleBundleKey.equals(other.frameTitleBundleKey)) {
 			return false;
 		}
 		if ((iconSponsorLocationBundleKey == null) ? (other.iconSponsorLocationBundleKey != null)
-				: !iconSponsorLocationBundleKey.equals(other.iconSponsorLocationBundleKey)) {
+				: !iconSponsorLocationBundleKey
+						.equals(other.iconSponsorLocationBundleKey)) {
 			return false;
 		}
 		if ((helpPageLocationBundleKey == null) ? (other.helpPageLocationBundleKey != null)
-				: !helpPageLocationBundleKey.equals(other.helpPageLocationBundleKey)) {
+				: !helpPageLocationBundleKey
+						.equals(other.helpPageLocationBundleKey)) {
 			return false;
 		}
 		// Delete
@@ -539,15 +593,18 @@ public class ReCFaceConfig extends AbstractConfigBean {
 		// null || !this.mediaConfig.equals(other.mediaConfig))) {
 		// return false;
 		// }
-		if (labList != other.labList && (labList == null || !labList.equals(other.labList))) {
+		if (labList != other.labList
+				&& (labList == null || !labList.equals(other.labList))) {
 			return false;
 		}
 		if (webResourceList != other.webResourceList
-				&& (webResourceList == null || !webResourceList.equals(other.webResourceList))) {
+				&& (webResourceList == null || !webResourceList
+						.equals(other.webResourceList))) {
 			return false;
 		}
 		if (localizationBundleList != other.localizationBundleList
-				&& (localizationBundleList == null || !localizationBundleList.equals(other.localizationBundleList))) {
+				&& (localizationBundleList == null || !localizationBundleList
+						.equals(other.localizationBundleList))) {
 			return false;
 		}
 		if (appPreferredWidth != other.appPreferredWidth) {
@@ -570,20 +627,47 @@ public class ReCFaceConfig extends AbstractConfigBean {
 		hash = 59 * hash + (enableChatFrame ? 1 : 0);
 		hash = 59 * hash + (showUserList ? 1 : 0);
 		hash = 59 * hash + (enableUsersList ? 1 : 0);
-		hash = 59 * hash + (int) (usersListRefreshRateMs ^ (usersListRefreshRateMs >>> 32));
+		hash = 59
+				* hash
+				+ (int) (usersListRefreshRateMs ^ (usersListRefreshRateMs >>> 32));
 		hash = 59 * hash + (enterApparatusChatRoom ? 1 : 0);
-		hash = 59 * hash + (aboutPageLocationBundleKey != null ? aboutPageLocationBundleKey.hashCode() : 0);
-		hash = 59 * hash + (splashIconLocationBundleKey != null ? splashIconLocationBundleKey.hashCode() : 0);
-		hash = 59 * hash + (iconLocationBundleKey != null ? iconLocationBundleKey.hashCode() : 0);
-		hash = 59 * hash + (desktopLocationBundleKey != null ? desktopLocationBundleKey.hashCode() : 0);
-		hash = 59 * hash + (frameTitleBundleKey != null ? frameTitleBundleKey.hashCode() : 0);
-		hash = 59 * hash + (iconSponsorLocationBundleKey != null ? iconSponsorLocationBundleKey.hashCode() : 0);
-		hash = 59 * hash + (helpPageLocationBundleKey != null ? helpPageLocationBundleKey.hashCode() : 0);
+		hash = 59
+				* hash
+				+ (aboutPageLocationBundleKey != null ? aboutPageLocationBundleKey
+						.hashCode() : 0);
+		hash = 59
+				* hash
+				+ (splashIconLocationBundleKey != null ? splashIconLocationBundleKey
+						.hashCode() : 0);
+		hash = 59
+				* hash
+				+ (iconLocationBundleKey != null ? iconLocationBundleKey
+						.hashCode() : 0);
+		hash = 59
+				* hash
+				+ (desktopLocationBundleKey != null ? desktopLocationBundleKey
+						.hashCode() : 0);
+		hash = 59
+				* hash
+				+ (frameTitleBundleKey != null ? frameTitleBundleKey.hashCode()
+						: 0);
+		hash = 59
+				* hash
+				+ (iconSponsorLocationBundleKey != null ? iconSponsorLocationBundleKey
+						.hashCode() : 0);
+		hash = 59
+				* hash
+				+ (helpPageLocationBundleKey != null ? helpPageLocationBundleKey
+						.hashCode() : 0);
 		// Delete hash = 83 * hash + (this.mediaConfig != null ?
 		// this.mediaConfig.hashCode() : 0);
 		hash = 59 * hash + (labList != null ? labList.hashCode() : 0);
-		hash = 59 * hash + (webResourceList != null ? webResourceList.hashCode() : 0);
-		hash = 59 * hash + (localizationBundleList != null ? localizationBundleList.hashCode() : 0);
+		hash = 59 * hash
+				+ (webResourceList != null ? webResourceList.hashCode() : 0);
+		hash = 59
+				* hash
+				+ (localizationBundleList != null ? localizationBundleList
+						.hashCode() : 0);
 		hash = 59 * hash + appPreferredWidth;
 		hash = 59 * hash + appPreferredHeight;
 		return hash;
