@@ -56,7 +56,7 @@ public class TSensor extends javax.swing.JPanel implements com.linkare.rec.impl.
 	private int t33 = TSensor.MIN_TEMPERATURE;
 
 	private final Icon icon = new javax.swing.ImageIcon(getClass().getResource(
-			"/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
+			"/com/linkare/rec/impl/newface/resources/legacy/sensor16.gif"));
 
 	/** Creates new form StatSoundSensor */
 	public TSensor() {

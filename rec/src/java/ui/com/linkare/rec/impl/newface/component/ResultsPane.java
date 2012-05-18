@@ -135,7 +135,7 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 
 	}
 
-	private static final String DISPLAY_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.display",
+	private static final String DISPLAY_STR = ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.lbl.display",
 			"Display");
 
 	private static final int BUTTON_LIMIT = 2;
@@ -370,34 +370,34 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 	}
 
 	// private static final String RUNNING_STR =
-	// ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.running",
+	// ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.status.running",
 	// "Running");
 	// private static final String STATUS_STR =
-	// ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.experiment",
+	// ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.status.experiment",
 	// "Experiment status");
 	// private static final String PAUSED_STR =
-	// ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.paused",
+	// ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.status.paused",
 	// "Paused");
 	// private static final String STOPED_STR =
-	// ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.stoped",
+	// ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.status.stoped",
 	// "Stopped");
 	// private static final String WAITING_STR =
-	// ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.waitingData",
+	// ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.status.waitingData",
 	// "Waiting for data...");
 	// private static final String NODATA_STR =
-	// ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.nodata",
+	// ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.status.nodata",
 	// "The experiment started but no data was available to fetch");
 	// private static final String STARTED_NODATA_STR =
-	// ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.startedNoData",
+	// ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.status.startedNoData",
 	// "Started, no data available yet...");
 	// private static final String DATA_ENDED_STR =
-	// ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.ended",
+	// ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.status.ended",
 	// "Data Ended");
 	// private static final String DATA_MODEL_ERROR1_STR =
-	// ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.error.dataModel",
+	// ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.error.dataModel",
 	// "Data Model error!");
 	// private static final String DATA_MODEL_ERROR2_STR =
-	// ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.error.dataModel.2",
+	// ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.error.dataModel.2",
 	// "Serious error in the data model, data was lost!");
 	// private static final String EXPERIMENT_INFO = "$experiment-info";
 

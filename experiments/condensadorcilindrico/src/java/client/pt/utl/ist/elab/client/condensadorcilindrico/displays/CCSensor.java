@@ -35,7 +35,7 @@ public class CCSensor extends javax.swing.JPanel implements com.linkare.rec.impl
 	private final BufferedImage imgTube1 = new BufferedImage(290, 30, BufferedImage.TYPE_INT_ARGB);
 	private final BufferedImage imgPiston = new BufferedImage(50, 28, BufferedImage.TYPE_INT_ARGB);
 	private final Icon icon = new javax.swing.ImageIcon(getClass().getResource(
-			"/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
+			"/com/linkare/rec/impl/newface/resources/legacy/sensor16.gif"));
 
 	private double freq = 500;
 	private final double SOUND_VEL = 345;

@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.g;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class HeightTimeXYGraphDisplay extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+public class HeightTimeXYGraphDisplay extends com.linkare.rec.impl.ui.graph.DefaultXYExperimentGraph {
 
 	/**
 	 * 

@@ -110,12 +110,12 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 	}
 
 	private static final String MULTICAST_STR = ReCResourceBundle.findStringOrDefault(
-			"ReCBaseUI$rec.bui.lbl.multicast", "Server");
+			"ReCUI$rec.ui.lbl.multicast", "Server");
 	private static final String SECURITY_COMMUNICATOR_MSG_BEFORE_KICK_STR = ReCResourceBundle.findStringOrDefault(
-			"ReCBaseUI$rec.bui.lbl.multicast.security.communicator.msg.before.kick",
+			"ReCUI$rec.ui.lbl.multicast.security.communicator.msg.before.kick",
 			"Warning! You are going to be kicked from the experiment because there is an experiment reservation.");
 	private static final String SECURITY_COMMUNICATOR_MSG_ON_KICK_STR = ReCResourceBundle.findStringOrDefault(
-			"ReCBaseUI$rec.bui.lbl.multicast.security.communicator.msg.on.kick",
+			"ReCUI$rec.ui.lbl.multicast.security.communicator.msg.on.kick",
 			"Info! You were kicked from the experiment because there is an experiment reservation.");
 
 	private static class UserMessage {

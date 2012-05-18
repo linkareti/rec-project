@@ -812,13 +812,13 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	}
 
 	private void maxUsers() {
-		final String errorMessage = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.maxUsers",
+		final String errorMessage = ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.status.maxUsers",
 				"Sorry, the lab is full. Please try again later...");
 		errorConnectingToApparatus(errorMessage);
 	}
 
 	private void notAuthorized() {
-		final String errorMessage = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.notAuthorized",
+		final String errorMessage = ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.status.notAuthorized",
 				"Not authorized, please confirm your login/password and try again!");
 		errorConnectingToApparatus(errorMessage);
 	}
@@ -907,7 +907,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		// showing this message can be necessary because the status bar message
 		// is going to be hidden with stopped message
 		final String errorMessage = ReCResourceBundle.findStringOrDefault(
-				"ReCBaseUI$rec.bui.status.apparatus.config.error.state",
+				"ReCUI$rec.ui.status.apparatus.config.error.state",
 				"The experiment has a wrong configuration! Please check the customizer.");
 		JOptionPane.showMessageDialog(null, errorMessage);
 	}
@@ -921,7 +921,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		getApparatusTabbedPane().getExperimentActionBar().setPlayStopButtonEnabled(false);
 
 		final String errorMessage = ReCResourceBundle.findStringOrDefault(
-				"ReCBaseUI$rec.bui.status.apparatus.incorrect.state",
+				"ReCUI$rec.ui.status.apparatus.incorrect.state",
 				"The experiment is in an incorrect state! Please contact the administrator.");
 		errorConnectingToApparatus(errorMessage);
 	}

@@ -7,8 +7,6 @@
 package pt.utl.ist.elab.client.meteo.displays;
 
 import java.text.SimpleDateFormat;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 import javax.swing.Icon;
 
@@ -37,15 +35,7 @@ public class DefaultTimeExperimentGraph extends javax.swing.JPanel implements Ex
 	 * 
 	 */
 	private static final long serialVersionUID = 3346506712021056751L;
-	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 	private DefaultTimeDatasetProxy defaultTimeDatasetProxy = null;
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(DefaultTimeExperimentGraph.UI_CLIENT_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(DefaultTimeExperimentGraph.UI_CLIENT_LOGGER));
-		}
-	}
 
 	/** Creates new form DefaultExperimentGraph */
 	public DefaultTimeExperimentGraph() {
@@ -78,10 +68,10 @@ public class DefaultTimeExperimentGraph extends javax.swing.JPanel implements Ex
 	// End of variables declaration//GEN-END:variables
 
 	/** Holds value of property channelX. */
-	private int channelTime;
+//	private int channelTime;
 
 	/** Holds value of property channelY. */
-	private int channelY;
+//	private int channelY;
 
 	@Override
 	public javax.swing.JComponent getDisplay() {
@@ -90,7 +80,7 @@ public class DefaultTimeExperimentGraph extends javax.swing.JPanel implements Ex
 
 	@Override
 	public Icon getIcon() {
-		return new javax.swing.ImageIcon("/com/linkare/rec/impl/baseUI/resources/chart16.gif");
+		return new javax.swing.ImageIcon("/com/linkare/rec/impl/newface/resources/legacy/chart16.gif");
 	}
 
 	private ExpDataModel model = null;
@@ -147,7 +137,7 @@ public class DefaultTimeExperimentGraph extends javax.swing.JPanel implements Ex
 		scrollPane.setViewportView(panel);
 	}
 
-	private final boolean isScaleSet = false;
+//	private final boolean isScaleSet = false;
 
 	@Override
 	public void newSamples(final NewExpDataEvent evt) {

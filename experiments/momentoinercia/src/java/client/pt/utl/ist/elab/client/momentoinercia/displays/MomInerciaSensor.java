@@ -37,7 +37,7 @@ public class MomInerciaSensor extends javax.swing.JPanel implements
 	private final BufferedImage disk1 = new BufferedImage(300, 46, BufferedImage.TYPE_INT_ARGB);
 	private BufferedImage disk2 = null;
 	private final Icon icon = new javax.swing.ImageIcon(getClass().getResource(
-			"/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
+			"/com/linkare/rec/impl/newface/resources/legacy/sensor16.gif"));
 
 	private int imgHeight = 0;
 	private int imgWidth = 0;

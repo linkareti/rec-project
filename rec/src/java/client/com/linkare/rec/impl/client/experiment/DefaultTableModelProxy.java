@@ -88,21 +88,21 @@ public class DefaultTableModelProxy extends javax.swing.table.DefaultTableModel 
 	public String getColumnName(final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			if (columnIndex == 0) {
-				return ReCResourceBundle.findString("ReCBaseUI$rec.bui.lbl.nodata");
+				return ReCResourceBundle.findString("ReCUI$rec.ui.lbl.nodata");
 			}
 			return null;
 		}
 		if (columnIndex == 0) {
-			return ReCResourceBundle.findString("ReCBaseUI$rec.bui.table.model.column.sample");
+			return ReCResourceBundle.findString("ReCUI$rec.ui.table.model.column.sample");
 		}
 		if (columnIndex == 1) {
-			return ReCResourceBundle.findString("ReCBaseUI$rec.bui.table.model.column.date");
+			return ReCResourceBundle.findString("ReCUI$rec.ui.table.model.column.date");
 		}
 		if (columnIndex == 2) {
-			return ReCResourceBundle.findString("ReCBaseUI$rec.bui.table.model.column.time");
+			return ReCResourceBundle.findString("ReCUI$rec.ui.table.model.column.time");
 		}
 		if (columnIndex == 3) {
-			return ReCResourceBundle.findString("ReCBaseUI$rec.bui.table.model.column.milliseconds");
+			return ReCResourceBundle.findString("ReCUI$rec.ui.table.model.column.milliseconds");
 		}
 
 		final int channelIndex = (int) Math.floor((columnIndex - 4.) / 2.);

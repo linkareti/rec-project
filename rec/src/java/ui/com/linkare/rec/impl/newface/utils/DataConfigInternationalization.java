@@ -19,61 +19,61 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 public class DataConfigInternationalization {
 
 	private static final String CHANNEL_NAME = ReCResourceBundle
-			.findString("ReCBaseUI$rec.bui.channel.acquisition.config.data.channel.name");
+			.findString("ReCUI$rec.ui.channel.acquisition.config.data.channel.name");
 
 	private static final String CHANNEL_START_TIME = ReCResourceBundle
-			.findString("ReCBaseUI$rec.bui.channel.acquisition.config.data.channel.start.time");
+			.findString("ReCUI$rec.ui.channel.acquisition.config.data.channel.start.time");
 
 	private static final String CHANNEL_FREQUENCY = ReCResourceBundle
-			.findString("ReCBaseUI$rec.bui.channel.acquisition.config.data.channel.frequency");
+			.findString("ReCUI$rec.ui.channel.acquisition.config.data.channel.frequency");
 
 	private static final String CHANNEL_SCALE = ReCResourceBundle
-			.findString("ReCBaseUI$rec.bui.channel.acquisition.config.data.channel.scale");
+			.findString("ReCUI$rec.ui.channel.acquisition.config.data.channel.scale");
 
 	private static final String CHANNEL_TOTAL_SAMPLES = ReCResourceBundle
-			.findString("ReCBaseUI$rec.bui.channel.acquisition.config.data.channel.total.samples");
+			.findString("ReCUI$rec.ui.channel.acquisition.config.data.channel.total.samples");
 
 	private static final String CHANNEL_TOTAL_SAMPLES_UNDETERMINED = ReCResourceBundle
-			.findString("ReCBaseUI$rec.bui.channel.acquisition.config.data.channel.total.samples.undetermined");
+			.findString("ReCUI$rec.ui.channel.acquisition.config.data.channel.total.samples.undetermined");
 
 	private static final String CHANNEL_PARAMETERS = ReCResourceBundle
-			.findString("ReCBaseUI$rec.bui.channel.acquisition.config.data.channel.parameters");
+			.findString("ReCUI$rec.ui.channel.acquisition.config.data.channel.parameters");
 
 	private static final String APPARATUS = ReCResourceBundle
-			.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.apparatus");
+			.findString("ReCUI$rec.ui.hardware.acquisition.config.apparatus");
 
 	private static final String EXPERIENCE_START_TIME = ReCResourceBundle
-			.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.experience.start.time");
+			.findString("ReCUI$rec.ui.hardware.acquisition.config.experience.start.time");
 
 	private static final String FREQUENCY = ReCResourceBundle
-			.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.frequency");
+			.findString("ReCUI$rec.ui.hardware.acquisition.config.frequency");
 
 	private static final String TOTAL_SAMPLES = ReCResourceBundle
-			.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.total.samples");
+			.findString("ReCUI$rec.ui.hardware.acquisition.config.total.samples");
 
 	private static final String TOTAL_SAMPLES_UNDETERMINED = ReCResourceBundle
-			.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.total.samples.undetermined");
+			.findString("ReCUI$rec.ui.hardware.acquisition.config.total.samples.undetermined");
 
 	private static final String PARAMETERS = ReCResourceBundle
-			.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.parameters");
+			.findString("ReCUI$rec.ui.hardware.acquisition.config.parameters");
 
 	private static final String CHANNELS_CONFIGURATION = ReCResourceBundle
-			.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.channels.onfiguration");
+			.findString("ReCUI$rec.ui.hardware.acquisition.config.channels.onfiguration");
 
 	private static final String CHANNEL = ReCResourceBundle
-			.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.channel");
+			.findString("ReCUI$rec.ui.hardware.acquisition.config.channel");
 
 	private static final String CONFIGURATION = ReCResourceBundle
-			.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.configuration");
+			.findString("ReCUI$rec.ui.hardware.acquisition.config.configuration");
 
 	private static final String CONFIGURATION_UNDEFINED = ReCResourceBundle
-			.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.configuration.undefined");
+			.findString("ReCUI$rec.ui.hardware.acquisition.config.configuration.undefined");
 
 	private static final String UNDEFINED_PARAMETER_NAME = ReCResourceBundle
-			.findString("ReCBaseUI$rec.bui.parameter.config.undefined.parameter.name");
+			.findString("ReCUI$rec.ui.parameter.config.undefined.parameter.name");
 
 	private static final String UNDEFINED = ReCResourceBundle
-			.findString("ReCBaseUI$rec.bui.parameter.config.undefined");
+			.findString("ReCUI$rec.ui.parameter.config.undefined");
 
 	private DataConfigInternationalization() {
 		// Static class

@@ -30,14 +30,6 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 	 */
 	private static final long serialVersionUID = 65808857012891459L;
 
-	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(DefaulExpUsersListTableModel.UI_CLIENT_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(DefaulExpUsersListTableModel.UI_CLIENT_LOGGER));
-		}
-	}
 	public static long CONTROL_NOW = 0;
 
 	public static long CONTROL_AVAILABLE = -1;
@@ -57,14 +49,14 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 	/** Creates a new instance of DefaulExptUsersListTableModel */
 	public DefaulExpUsersListTableModel() {
 		super();
-		noUsersList = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.noUsersList",
+		noUsersList = ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.lbl.noUsersList",
 				"No Users List Available");
-		lblUserName = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.username", "Username:");
-		lblInControl = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.inControl", "In control since");
-		lblControlNow = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.controlNow", "now!");
-		lbltime_to_control_min = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.timeToControlMin",
+		lblUserName = ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.lbl.username", "Username:");
+		lblInControl = ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.lbl.inControl", "In control since");
+		lblControlNow = ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.lbl.controlNow", "now!");
+		lbltime_to_control_min = ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.lbl.timeToControlMin",
 				"Control at (min)");
-		lbltime_to_control_max = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.timeToControlMax",
+		lbltime_to_control_max = ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.lbl.timeToControlMax",
 				"Control at (max)");
 		setDataVector(new Object[0][1], new Object[] { noUsersList });
 	}

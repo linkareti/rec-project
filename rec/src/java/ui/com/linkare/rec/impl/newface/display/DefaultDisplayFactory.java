@@ -20,7 +20,7 @@ public class DefaultDisplayFactory extends AbstractDisplayFactory {
 
 	@Override
 	public void destroyDisplays() {
-		// Big silent noop (As seen on RecBaseUI)
+		// Big silent noop 
 	}
 
 	@Override

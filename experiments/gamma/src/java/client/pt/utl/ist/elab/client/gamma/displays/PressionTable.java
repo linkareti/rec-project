@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.gamma.displays;
  * 
  * @author André Neto - LEFT - IST
  */
-public class PressionTable extends com.linkare.rec.impl.baseUI.table.MultSeriesTable {
+public class PressionTable extends com.linkare.rec.impl.ui.table.MultSeriesTable {
 
 	/**
 	 * 

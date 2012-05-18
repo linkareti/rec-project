@@ -6,7 +6,7 @@
  */
 package pt.utl.ist.elab.client.optica;
 
-import com.linkare.rec.impl.baseUI.table.DefaultExperimentDataTable;
+import com.linkare.rec.impl.ui.table.DefaultExperimentDataTable;
 
 /**
  * 

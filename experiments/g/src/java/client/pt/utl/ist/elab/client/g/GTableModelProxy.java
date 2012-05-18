@@ -92,12 +92,12 @@ public class GTableModelProxy extends javax.swing.table.DefaultTableModel implem
 	public String getColumnName(final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			if (columnIndex == 0) {
-				return ReCResourceBundle.findString("ReCBaseUI$rec.bui.lbl.nodata");
+				return ReCResourceBundle.findString("ReCUI$rec.ui.lbl.nodata");
 			}
 			return null;
 		}
 		if (columnIndex == 0) {
-			return ReCResourceBundle.findString("ReCBaseUI$rec.bui.table.model.column.sample");
+			return ReCResourceBundle.findString("ReCUI$rec.ui.table.model.column.sample");
 		}
 
 		final int channelIndex = (int) Math.floor((columnIndex - 1.) / 2.);

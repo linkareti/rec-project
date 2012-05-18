@@ -284,7 +284,7 @@ public class MeteoRecent extends javax.swing.JPanel implements ExpDataDisplay, E
 
 	@Override
 	public javax.swing.Icon getIcon() {
-		return new javax.swing.ImageIcon("/com/linkare/rec/impl/baseUI/resources/table16.gif");
+		return new javax.swing.ImageIcon("/com/linkare/rec/impl/newface/resources/legacy/table16.gif");
 	}
 
 	private ExpDataModel expDataModel = null;

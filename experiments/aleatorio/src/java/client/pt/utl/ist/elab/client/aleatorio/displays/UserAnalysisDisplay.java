@@ -6,14 +6,13 @@
 
 package pt.utl.ist.elab.client.aleatorio.displays;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Iterator;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
-import javax.imageio.stream.ImageOutputStream;
 import javax.swing.JFileChooser;
 import javax.swing.SwingConstants;
 
@@ -518,7 +517,7 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 
 	private void refineConvCountButtonActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_refineConvCountButtonActionPerformedHandler
 		// Add your handling code here:
-		imagePanel.refineCount(imagePanel.IMAGE_CONVOLUTION);
+		imagePanel.refineCount(AnalysisPanel.IMAGE_CONVOLUTION);
 		numberOfSpotsText.setText(String.valueOf(imagePanel.getCenterCounter()));
 		numberOfDiceText.setText(String.valueOf(imagePanel.getClusterCounter()));
 		this.repaint();
@@ -595,7 +594,7 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 
 	private void refineHoughCountButtonActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_refineHoughCountButtonActionPerformedHandler
 		// Add your handling code here:
-		imagePanel.refineCount(imagePanel.IMAGE_HOUGH);
+		imagePanel.refineCount(AnalysisPanel.IMAGE_HOUGH);
 		numberOfSpotsText.setText(String.valueOf(imagePanel.getCenterCounter()));
 		numberOfDiceText.setText(String.valueOf(imagePanel.getClusterCounter()));
 		this.repaint();
@@ -735,7 +734,7 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 			// imagePanel.setImage(image);
 			while (image.getWidth(imagePanel) < 0) {
 				try {
-					Thread.currentThread().sleep(50);
+					Thread.sleep(50);
 				} catch (final InterruptedException e) {
 				}
 			}
@@ -1003,14 +1002,6 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 	private int numberOfExpectedDice;
 	private static final int NUMBER_OF_EXPECTED_DICE = 14;
 
-	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(UserAnalysisDisplay.UI_CLIENT_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(UserAnalysisDisplay.UI_CLIENT_LOGGER));
-		}
-	}
-
 	/**
 	 * ExpDataDisplay Implementation
 	 */
@@ -1125,10 +1116,10 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 	}
 
 	private boolean isNumber(final String numberString) {
-		int numberInt;
-		if (numberString != "") {
+		
+		if (numberString!=null && numberString != "") {
 			try {
-				numberInt = Integer.parseInt(numberString);
+				Integer.parseInt(numberString);
 			} catch (final NumberFormatException e) {
 				return false;
 			}

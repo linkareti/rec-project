@@ -1211,7 +1211,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			try {
 				final ArrayList<ExpDataDisplay> experimentDataDisplays = new ArrayList<ExpDataDisplay>();
 				final Object dataDisplayTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
-						"com.linkare.rec.impl.baseUI.DefaultExperimentDataTable");
+						"com.linkare.rec.impl.ui.DefaultExperimentDataTable");
 				if (java.beans.Beans.isInstanceOf(dataDisplayTemp, ExpDataDisplay.class)) {
 					experimentDataDisplays.set(0, (ExpDataDisplay) dataDisplayTemp);
 				}

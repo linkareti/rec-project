@@ -6,8 +6,6 @@
 
 package com.linkare.rec.impl.client.experiment;
 
-import javax.swing.Icon;
-
 import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 
 /**
@@ -18,12 +16,7 @@ public class ExpHistory {
 
 	private ExpHistoryDisplayFactory expHistoryDisplayFactory = null;
 	private DataProducerWrapper producerWrapper = null;
-	private final Icon apparatusIcon = null;
-	private boolean deleted = false;
 	private long expCount = 0;
-
-	/** Utility field used by event firing mechanism. */
-	private final javax.swing.event.EventListenerList listenerList = null;
 
 	/** Holds value of property locallyOwned. */
 	private boolean locallyOwned = false;
@@ -32,37 +25,20 @@ public class ExpHistory {
 
 	private com.linkare.rec.impl.client.apparatus.Apparatus apparatus = null;
 
-	// private com.linkare.rec.impl.baseUI.config.Apparatus apparatusConfig =
-	// null;
-
-	/** Creates a new instance of ExperimentHistory 
-	 * @param expHistoryDisplayFactory 
-	 * @param producerWrapper 
-	 * @param apparatus */
+	/**
+	 * Creates a new instance of ExperimentHistory
+	 * 
+	 * @param expHistoryDisplayFactory
+	 * @param producerWrapper
+	 * @param apparatus
+	 */
 	public ExpHistory(final ExpHistoryDisplayFactory expHistoryDisplayFactory,
-			final DataProducerWrapper producerWrapper, final com.linkare.rec.impl.client.apparatus.Apparatus apparatus/*
-																													 * ,
-																													 * com
-																													 * .
-																													 * linkare
-																													 * .
-																													 * rec
-																													 * .
-																													 * impl
-																													 * .
-																													 * baseUI
-																													 * .
-																													 * config
-																													 * .
-																													 * Apparatus
-																													 * apparatusConfig
-																													 */) {
+			final DataProducerWrapper producerWrapper, final com.linkare.rec.impl.client.apparatus.Apparatus apparatus) {
 
 		this.expHistoryDisplayFactory = expHistoryDisplayFactory;
 		this.producerWrapper = producerWrapper;
 		expCount = ExpHistoryCounter.getExperimentNumber(apparatus.getHardwareInfo().getHardwareUniqueID());
 		this.apparatus = apparatus;
-		// this.apparatusConfig = apparatusConfig;
 	}
 
 	public DataProducerWrapper getProducerWrapper() {
@@ -71,15 +47,6 @@ public class ExpHistory {
 
 	public com.linkare.rec.impl.client.apparatus.Apparatus getApparatus() {
 		return apparatus;
-	}
-
-	// public com.linkare.rec.impl.baseUI.config.Apparatus getApparatusConfig()
-	// {
-	// return this.apparatusConfig;
-	// }
-
-	public void setDelete() {
-		deleted = true;
 	}
 
 	public void startExperiment() {

@@ -27,7 +27,7 @@ public class OpticaSensor extends javax.swing.JPanel implements com.linkare.rec.
 
 	private final BufferedImage imgTube1 = new BufferedImage(50, 200, BufferedImage.TYPE_INT_ARGB);
 	private final Icon icon = new javax.swing.ImageIcon(getClass().getResource(
-			"/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
+			"/com/linkare/rec/impl/newface/resources/legacy/sensor16.gif"));
 
 	/** Creates new form SeringeSensor */
 	public OpticaSensor() {

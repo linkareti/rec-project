@@ -6,15 +6,44 @@ package com.linkare.rec.impl.newface;
  */
 public enum ReCSystemProperty {
 
-	// RECBASEUICONFIG("ReCBaseUIConfig", true),
-	RECFACECONFIG("ReCFaceConfig", true), REC_MULTICASTCONTROLLER_BINDNAME("ReC.MultiCastController.BindName", true), OPENORB_CONFIG(
-			"openorb.config", true), OPENORB_PROFILE("openorb.profile", true), ORG_OMG_CORBA_ORBCLASS(
-			"org.omg.CORBA.ORBClass", true), ORG_OMG_CORBA_ORBSINGLETONCLASS("org.omg.CORBA.ORBSingletonClass", true),
+	/**
+	 * The ReCFaceConfig.xml url location
+	 */
+	RECFACECONFIG("ReCFaceConfig", true),
+	/**
+	 * The MultiCastController bind name
+	 */
+	REC_MULTICASTCONTROLLER_BINDNAME("ReC.MultiCastController.BindName", true),
+	/**
+	 * The openorb configuration file
+	 */
+	OPENORB_CONFIG("openorb.config", true),
+	/**
+	 * The openorb profile
+	 */
+	OPENORB_PROFILE("openorb.profile", true),
+	/**
+	 * The ORB Class
+	 */
+	ORG_OMG_CORBA_ORBCLASS("org.omg.CORBA.ORBClass", true),
+	/**
+	 * The ORB SingletonClass
+	 */
+	ORG_OMG_CORBA_ORBSINGLETONCLASS("org.omg.CORBA.ORBSingletonClass", true),
 
+	/**
+	 * Wether video is enabled or not
+	 */
 	VIDEO_ENABLED("video.enabled", false),
 
-	VLC_PLUGINS_FILENAME("vlc.plugins.filename", ReCApplication.IS_VIDEO_ENABLED), VLC_PLUGINS_DESTDIR(
-			"vlc.plugins.destdir", ReCApplication.IS_VIDEO_ENABLED);
+	/**
+	 * The VLC plugins file name
+	 */
+	VLC_PLUGINS_FILENAME("vlc.plugins.filename", ReCApplication.IS_VIDEO_ENABLED),
+	/**
+	 * The VLC plugins destination dir
+	 */
+	VLC_PLUGINS_DESTDIR("vlc.plugins.destdir", ReCApplication.IS_VIDEO_ENABLED);
 
 	String name;
 	boolean required;

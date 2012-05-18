@@ -9,7 +9,6 @@ package com.linkare.rec.impl.newface.component;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Vector;
-import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 
@@ -34,17 +33,8 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 	 */
 	private static final long serialVersionUID = 3818534711946836500L;
 
-	// private static String UI_CLIENT_LOGGER="ReC.baseUI";
-	//
-	// static
-	// {
-	// Logger l=LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
-	// if(l==null)
-	// {
-	// LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
-	// }
-	// }
-	private static final Logger log = Logger.getLogger(DefaulExpUsersListTableModel.class.getName());
+
+//	private static final Logger LOGGER = Logger.getLogger(DefaulExpUsersListTableModel.class.getName());
 
 	public static long CONTROL_NOW = 0;
 
@@ -59,8 +49,8 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 	private String lblUserName;
 	private String lbltime_to_control_min;
 	private String lbltime_to_control_max;
-	private String lblInControl;
-	private String lblControlNow;
+//	private String lblInControl;
+//	private String lblControlNow;
 
 	/** Creates a new instance of DefaulExptUsersListTableModel */
 	public DefaulExpUsersListTableModel() {
@@ -78,10 +68,10 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 		noUsersList = resourceMap.getString("noUsersList.text");
 		lblUserName = resourceMap.getString("lblUserName.text");
 		// lblInControl =
-		// ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.inControl",
+		// ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.lbl.inControl",
 		// "In control since");
 		// lblControlNow =
-		// ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.controlNow",
+		// ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.lbl.controlNow",
 		// "now!");
 		lbltime_to_control_min = resourceMap.getString("lbltime_to_control_min.text");
 		lbltime_to_control_max = resourceMap.getString("lbltime_to_control_max.text");

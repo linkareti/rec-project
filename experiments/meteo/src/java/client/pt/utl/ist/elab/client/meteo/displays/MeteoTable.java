@@ -27,30 +27,23 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.impl.baseUI.table.ExcelAdapter;
-import com.linkare.rec.impl.baseUI.utils.ExtensionFilter;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
+import com.linkare.rec.impl.ui.table.ExcelAdapter;
+import com.linkare.rec.impl.utils.ExtensionFilter;
 
 /**
  * 
- * @author José Pedro Pereira - Linkare TI & Andr�
+ * @author José Pedro Pereira - Linkare TI & André
  */
 public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Printable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8961298577399250212L;
-	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 	private ExcelAdapter excelAdapter = null;
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(MeteoTable.UI_CLIENT_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(MeteoTable.UI_CLIENT_LOGGER));
-		}
-	}
 
 	/** Creates new form DefaultExperimentDataTable */
 	public MeteoTable() {
@@ -84,7 +77,7 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 
 		toolBarTable.setRollover(true);
 		printBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/com/linkare/rec/impl/baseUI/resources/Print16.gif")));
+				"/com/linkare/rec/impl/newface/resources/legacy/Print16.gif")));
 		printBtn.setToolTipText("Print");
 		printBtn.addActionListener(new java.awt.event.ActionListener() {
 			@Override
@@ -96,7 +89,7 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 		toolBarTable.add(printBtn);
 
 		saveBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/com/linkare/rec/impl/baseUI/resources/Save16.gif")));
+				"/com/linkare/rec/impl/newface/resources/legacy/Save16.gif")));
 		saveBtn.setToolTipText("Save csv file");
 		saveBtn.addActionListener(new java.awt.event.ActionListener() {
 			@Override
@@ -107,7 +100,7 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 		toolBarTable.add(saveBtn);
 
 		copyBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/com/linkare/rec/impl/baseUI/resources/Copy16.gif")));
+				"/com/linkare/rec/impl/newface/resources/legacy/Copy16.gif")));
 		copyBtn.setToolTipText("Copy to Clipboard in Excel Format");
 		copyBtn.addActionListener(new java.awt.event.ActionListener() {
 			@Override
@@ -117,7 +110,7 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 		});
 		toolBarTable.add(copyBtn);
 		selectAllBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/com/linkare/rec/impl/baseUI/resources/tableSelectAll16.gif")));
+				"/com/linkare/rec/impl/newface/resources/legacy/tableSelectAll16.gif")));
 		selectAllBtn.setToolTipText("Select All");
 		selectAllBtn.addActionListener(new java.awt.event.ActionListener() {
 			@Override
@@ -236,7 +229,7 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 
 	@Override
 	public Icon getIcon() {
-		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/table16.gif"));
+		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/newface/resources/legacy/table16.gif"));
 	}
 
 	@Override
@@ -400,10 +393,11 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 
 	/**
 	 * Setter for property channelDisplayY.
-	 * @param col 
+	 * 
+	 * @param col
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
-	 * @return 
+	 * @return
 	 */
 	public int getColAtArray(final int col) {
 		return defaultTableModelProxy.getColAtArray(col);
@@ -420,7 +414,8 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 
 	/**
 	 * Setter for property channelDisplayY.
-	 * @param colArray 
+	 * 
+	 * @param colArray
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */

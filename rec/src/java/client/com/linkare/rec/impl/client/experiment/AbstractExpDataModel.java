@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 
 import org.omg.PortableServer.Servant;
 
+import com.linkare.rec.acquisition.DataProducer;
 import com.linkare.rec.acquisition.DataReceiver;
 import com.linkare.rec.acquisition.DataReceiverHelper;
 import com.linkare.rec.acquisition.DataReceiverOperations;
@@ -32,6 +33,10 @@ import com.linkare.rec.impl.utils.ObjectID;
 import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 
 /**
+ * Abstract implementation of the {@link ExpDataModel} wich is also a
+ * {@link DataCollector} and implements the delegate for the
+ * {@link DataReceiver} CORBA interface through the
+ * {@link DataReceiverOperations} CORBA business interface
  * 
  * @author André Neto - LEFT - IST
  */
@@ -40,24 +45,42 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	/** Gnerated UID */
 	private static final long serialVersionUID = 5721300601918680941L;
 
+	/** The logger name */
 	private static String DATA_RECEIVER_LOGGER = "DataReceiver.Logger";
 
+	/**
+	 * Cache of the acquisition configuration
+	 */
 	private HardwareAcquisitionConfig acqHeader = null;
+
+	/**
+	 * Cache of the apparatus familiar name (hardware familiar name)
+	 */
 	private String apparatusName = null;
 
 	// private transient DataReceiver _this = null;
 	private transient ObjectID oid = null;
 
+	/**
+	 * The currently highest sample index
+	 */
 	private int largestnumsample = MaxPacketNumUnknown.value;
 
 	// private boolean running = false;
 	// private boolean runnedOnce = false;
 
+	/**
+	 * Auxiliary object to help in "depacketizing" the samples packets
+	 */
 	private SamplesPacketSourceDepacketizer depacketizer = null;
 
 	/** Holds value of property remoteDataProducer. */
 	private com.linkare.rec.impl.wrappers.DataProducerWrapper remoteDataProducer;
 
+	/**
+	 * A thread that pings the {@link DataProducer} remote endpoint to check if
+	 * it's still alive
+	 */
 	private DataProducerRunningCheck dataProducerRunningCheck = null;
 
 	/** Utility field used by event firing mechanism. */
@@ -70,6 +93,9 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 		}
 	}
 
+	/**
+	 * The CORBA registered reference
+	 */
 	private DataReceiver _thisDataReceiver = null;
 
 	public AbstractExpDataModel() {

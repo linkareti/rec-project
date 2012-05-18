@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.g;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class GDataTable extends com.linkare.rec.impl.baseUI.table.DefaultExperimentDataTable {
+public class GDataTable extends com.linkare.rec.impl.ui.table.DefaultExperimentDataTable {
 
 	/**
 	 * 
