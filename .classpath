@@ -4,7 +4,7 @@
 	<classpathentry kind="src" path="experiments/boylemariotte/src/java/client"/>
 	<classpathentry kind="src" path="experiments/boylemariotte/src/java/server"/>
 	<classpathentry kind="src" path="rec/src/java/common"/>
-	<classpathentry kind="src" path="rec/src/java/ui"/>
+	<classpathentry excluding="com/linkare/rec/impl/baseUI/config/|com/linkare/rec/impl/baseUI/labsTree/|com/linkare/rec/impl/baseUI/mdi/|com/linkare/rec/impl/baseUI/resources/|com/linkare/rec/impl/baseUI/utils/|com/linkare/rec/impl/baseUI/AboutDialog.java|com/linkare/rec/impl/baseUI/AboutDialogBeanInfo.java|com/linkare/rec/impl/baseUI/AcquisitionHeaderDisplay.java|com/linkare/rec/impl/baseUI/ChatFrame.java|com/linkare/rec/impl/baseUI/ExperimentHistoryPanel.java|com/linkare/rec/impl/baseUI/ExperimentHistoryRenderer.java|com/linkare/rec/impl/baseUI/ExperimentInternalFrame.java|com/linkare/rec/impl/baseUI/ExpHistoryPanelNew.java|com/linkare/rec/impl/baseUI/ExpHistoryUINode.java|com/linkare/rec/impl/baseUI/ImageBorder.java|com/linkare/rec/impl/baseUI/InternalBrowser.java|com/linkare/rec/impl/baseUI/JAcquisitionHeaderDisplay.java|com/linkare/rec/impl/baseUI/JDockPanel.java|com/linkare/rec/impl/baseUI/LoginFrame.java|com/linkare/rec/impl/baseUI/OfflineInternalFrame.java|com/linkare/rec/impl/baseUI/ReCBaseUI.java|com/linkare/rec/impl/baseUI/ReCSplash.java|com/linkare/rec/impl/baseUI/SendMailToQueue.java|com/linkare/rec/impl/baseUI/StatusPanel.java|com/linkare/rec/impl/baseUI/TabClosablePanel.java|com/linkare/rec/impl/baseUI/UsersListPanel.java|com/linkare/rec/impl/baseUI/WaitDialog.java|com/linkare/rec/impl/baseUI/control/|com/linkare/rec/impl/baseUI/display/AbstractDisplayFactory.java|com/linkare/rec/impl/baseUI/display/DefaultDisplayFactory.java|com/linkare/rec/impl/baseUI/display/DefaultExperimentHeaderInfo.java|com/linkare/rec/impl/baseUI/display/DisplayFactory.java|com/linkare/rec/impl/ui/display/AbstractDisplayFactory.java|com/linkare/rec/impl/ui/display/DefaultDisplayFactory.java|com/linkare/rec/impl/ui/display/DefaultExperimentHeaderInfo.java|com/linkare/rec/impl/ui/display/DisplayFactory.java" kind="src" path="rec/src/java/ui"/>
 	<classpathentry kind="src" path="other/src/java/JVLC"/>
 	<classpathentry kind="src" path="elab/src/java/client"/>
 	<classpathentry kind="src" path="elab/src/java/ui"/>
@@ -80,8 +80,6 @@
 	<classpathentry kind="src" path="experiments/vpend2m/src/java/server"/>
 	<classpathentry kind="src" path="experiments/vquantum/src/java/client"/>
 	<classpathentry kind="src" path="experiments/vquantum/src/java/server"/>
-	<classpathentry kind="src" path="experiments/vstdmap/src/java/client"/>
-	<classpathentry kind="src" path="experiments/vstdmap/src/java/server"/>
 	<classpathentry kind="src" path="experiments/vtiro/src/java/client"/>
 	<classpathentry kind="src" path="experiments/vtiro/src/java/server"/>
 	<classpathentry kind="src" path="experiments/vyounginterf/src/java/client"/>
@@ -89,6 +87,55 @@
 	<classpathentry kind="src" path="experiments/webrobot/src/java/client"/>
 	<classpathentry kind="src" path="experiments/webrobot/src/java/server"/>
 	<classpathentry kind="src" path="test/src/java/driver"/>
+	<classpathentry kind="src" path="experiments/vstdmap/src/java/client"/>
+	<classpathentry kind="src" path="experiments/vstdmap/src/java/server"/>
+	<classpathentry kind="src" path="elab/src/java/common"/>
+	<classpathentry kind="src" path="experiments/vpoisson/src/java/client"/>
+	<classpathentry kind="src" path="experiments/vpoisson/src/java/server"/>
+	<classpathentry kind="src" path="other/src/java/utilities"/>
+	<classpathentry kind="src" path="experiments/aleatorio/src/java/common"/>
+	<classpathentry kind="src" path="experiments/boylemariotte/src/java/common"/>
+	<classpathentry kind="src" path="experiments/meteo/src/java/common"/>
+	<classpathentry kind="src" path="experiments/condensadorcilindrico/src/java/common"/>
+	<classpathentry kind="src" path="experiments/conducaocalor/src/java/common"/>
+	<classpathentry kind="src" path="experiments/g/src/java/common"/>
+	<classpathentry kind="src" path="experiments/gamma/src/java/common"/>
+	<classpathentry kind="src" path="experiments/momentoinercia/src/java/common"/>
+	<classpathentry kind="src" path="experiments/optica/src/java/common"/>
+	<classpathentry kind="src" path="experiments/pendulo/src/java/common"/>
+	<classpathentry kind="src" path="experiments/pendulogravitico/src/java/common"/>
+	<classpathentry kind="src" path="experiments/pinhole/src/java/common"/>
+	<classpathentry kind="src" path="experiments/planck/src/java/common"/>
+	<classpathentry kind="src" path="experiments/polaroid/src/java/common"/>
+	<classpathentry kind="src" path="experiments/pv/src/java/common"/>
+	<classpathentry kind="src" path="experiments/radioactividade/src/java/common"/>
+	<classpathentry kind="src" path="experiments/rollpaper/src/java/client"/>
+	<classpathentry kind="src" path="experiments/rollpaper/src/java/common"/>
+	<classpathentry kind="src" path="experiments/rollpaper/src/java/server"/>
+	<classpathentry kind="src" path="experiments/scuba/src/java/common"/>
+	<classpathentry kind="src" path="experiments/statsound/src/java/common"/>
+	<classpathentry kind="src" path="experiments/telescopio/src/java/common"/>
+	<classpathentry kind="src" path="experiments/thomson/src/java/common"/>
+	<classpathentry kind="src" path="experiments/vbs/src/java/common"/>
+	<classpathentry kind="src" path="experiments/vcargas3d/src/java/common"/>
+	<classpathentry kind="src" path="experiments/vcartpole/src/java/common"/>
+	<classpathentry kind="src" path="experiments/vcg/src/java/common"/>
+	<classpathentry kind="src" path="experiments/vcolisao/src/java/common"/>
+	<classpathentry kind="src" path="experiments/vdi/src/java/common"/>
+	<classpathentry kind="src" path="experiments/vfermap/src/java/common"/>
+	<classpathentry kind="src" path="experiments/vlooping/src/java/common"/>
+	<classpathentry kind="src" path="experiments/vm3/src/java/common"/>
+	<classpathentry kind="src" path="experiments/vmm/src/java/common"/>
+	<classpathentry kind="src" path="experiments/vmovproj/src/java/common"/>
+	<classpathentry kind="src" path="experiments/vmvbrown/src/java/common"/>
+	<classpathentry kind="src" path="experiments/voscilador/src/java/common"/>
+	<classpathentry kind="src" path="experiments/vpend2m/src/java/common"/>
+	<classpathentry kind="src" path="experiments/vpoisson/src/java/common"/>
+	<classpathentry kind="src" path="experiments/vquantum/src/java/common"/>
+	<classpathentry kind="src" path="experiments/vstdmap/src/java/common"/>
+	<classpathentry kind="src" path="experiments/vtiro/src/java/common"/>
+	<classpathentry kind="src" path="experiments/vyounginterf/src/java/common"/>
+	<classpathentry kind="src" path="experiments/webrobot/src/java/common"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="rec/lib/java/client/appframework-1.0.3.jar"/>
@@ -113,14 +160,8 @@
 	<classpathentry kind="lib" path="elab/lib/java/client/jfreechart-1.0.9.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/client/OSP.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/client/OSP3D.jar"/>
-	<classpathentry kind="lib" path="elab/lib/java/client/vecmath.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/driver/JCFN.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/driver/OSP.jar"/>
-	<classpathentry kind="lib" path="elab/lib/linux/3d/j3daudio.jar"/>
-	<classpathentry kind="lib" path="elab/lib/linux/3d/j3dcore.jar"/>
-	<classpathentry kind="lib" path="elab/lib/linux/3d/j3dutils.jar"/>
-	<classpathentry kind="lib" path="elab/lib/linux/3d/native.jar"/>
-	<classpathentry kind="lib" path="elab/lib/linux/3d/vecmath.jar"/>
 	<classpathentry kind="lib" path="lib/test/commons-beanutils-1.8.0.jar"/>
 	<classpathentry kind="lib" path="lib/test/commons-beanutils-core-1.8.0.jar"/>
 	<classpathentry kind="lib" path="lib/test/commons-logging.jar"/>
@@ -188,5 +229,10 @@
 	<classpathentry kind="lib" path="rec/lib/java/multicast/glassfish/tiger-types-osgi.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/multicast/glassfish/transaction-internal-api.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/common/jmf.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/client/commons-i18n-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/client/commons-net-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="elab/lib/java/common/j3dcore.jar"/>
+	<classpathentry kind="lib" path="elab/lib/java/common/j3dutils.jar"/>
+	<classpathentry kind="lib" path="elab/lib/java/common/vecmath.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
