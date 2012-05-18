@@ -36,6 +36,7 @@ import com.linkare.rec.impl.multicast.security.DefaultUser;
 import com.linkare.rec.impl.multicast.security.IOperation;
 import com.linkare.rec.impl.multicast.security.ISecurityCommunicator;
 import com.linkare.rec.impl.multicast.security.IUser;
+import com.linkare.rec.impl.multicast.security.OperationType;
 import com.linkare.rec.impl.multicast.security.SecurityManagerFactory;
 import com.linkare.rec.impl.threading.ExecutorScheduler;
 import com.linkare.rec.impl.threading.ScheduledWorkUnit;
@@ -168,7 +169,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 
 	@Override
 	public MultiCastHardware[] enumerateHardware(final UserInfo user) throws NotRegistered, NotAuthorized {
-		final IOperation op1 = new DefaultOperation(IOperation.OP_ENUM_HARDWARES);
+		final IOperation op1 = new DefaultOperation(OperationType.OP_ENUM_HARDWARES);
 		final DefaultUser userOp = new DefaultUser(user);
 
 		if (!clientQueue.contains(user)) {
@@ -422,7 +423,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 		public MultiCastHardware[] enumerateHardwares(final IUser userOp) {
 			final ArrayList<MultiCastHardware> multicastHardwareArrayList = new ArrayList<MultiCastHardware>(
 					multiCastHardwares.size());
-			final IOperation op = new DefaultOperation(IOperation.OP_LIST_HARDWARE);
+			final IOperation op = new DefaultOperation(OperationType.OP_LIST_HARDWARE);
 
 			synchronized (multiCastHardwares) {
 				final Iterator<ReCMultiCastHardware> iter = multiCastHardwares.iterator();

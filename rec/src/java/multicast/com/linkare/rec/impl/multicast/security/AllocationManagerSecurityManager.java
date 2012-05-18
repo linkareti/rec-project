@@ -333,10 +333,10 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 				hardwareResource.getResourceType().getPropertyKey()));
 
 		if (!currentAllocation.isEmpty()) {
-			if (op.getOperation() == IOperation.OP_GET_DATAPRODUCER
-					|| op.getOperation() == IOperation.OP_GET_DATAPRODUCERSTATE
-					|| op.getOperation() == IOperation.OP_GET_SAMPLES || op.getOperation() == IOperation.OP_STOP) {
-				if (op.getOperation() == IOperation.OP_STOP) {
+			if (op.getOperation() == OperationType.OP_GET_DATAPRODUCER
+					|| op.getOperation() == OperationType.OP_GET_DATAPRODUCERSTATE
+					|| op.getOperation() == OperationType.OP_GET_SAMPLES || op.getOperation() == OperationType.OP_STOP) {
+				if (op.getOperation() == OperationType.OP_STOP) {
 					return checkUserAsOwner(currentAllocation, user.getUserName());
 				} else {
 					return checkUserOrOwner(currentAllocation, user.getUserName());
@@ -364,8 +364,8 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 				resource.getResourceType().getPropertyKey()));
 
 		if (!currentAllocation.isEmpty()) {
-			if (op.getOperation() == IOperation.OP_LOCK || op.getOperation() == IOperation.OP_CONFIG
-					|| op.getOperation() == IOperation.OP_START || op.getOperation() == IOperation.OP_START_OUTPUT) {
+			if (op.getOperation() == OperationType.OP_LOCK || op.getOperation() == OperationType.OP_CONFIG
+					|| op.getOperation() == OperationType.OP_START || op.getOperation() == OperationType.OP_START_OUTPUT) {
 				final boolean checkUserAsOwner = checkUserAsOwner(currentAllocation, user.getUserName());
 				Logger.getLogger(AllocationManagerSecurityManager.MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
 						Level.FINEST, "Hardware operations is [" + checkUserAsOwner + "]");

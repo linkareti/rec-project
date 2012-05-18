@@ -17,26 +17,32 @@ public class DefaultOperation implements IOperation {
 	 * 
 	 */
 	private static final long serialVersionUID = 1873349350151682256L;
-	private short operation;
+	private OperationType operation;
 	private Map<String, Object> properties;
 
 	/** Creates a new instance of DefaultOperation */
 	public DefaultOperation() {
-		setOperation((short) -1);
+		setOperation(OperationType.UNKNOWN);
 		setProperties(new HashMap<String, Object>());
 	}
 
-	/** Creates a new instance of DefaultOperation 
-	 * @param operation */
-	public DefaultOperation(final short operation) {
+	/**
+	 * Creates a new instance of DefaultOperation
+	 * 
+	 * @param operation
+	 */
+	public DefaultOperation(final OperationType operation) {
 		setOperation(operation);
 		setProperties(new HashMap<String, Object>());
 	}
 
-	/** Creates a new instance of DefaultOperation 
-	 * @param operation 
-	 * @param properties */
-	public DefaultOperation(final short operation, final Map<String, Object> properties) {
+	/**
+	 * Creates a new instance of DefaultOperation
+	 * 
+	 * @param operation
+	 * @param properties
+	 */
+	public DefaultOperation(final OperationType operation, final Map<String, Object> properties) {
 		setOperation(operation);
 		setProperties(properties);
 	}
@@ -48,7 +54,7 @@ public class DefaultOperation implements IOperation {
 	 * 
 	 */
 	@Override
-	public short getOperation() {
+	public OperationType getOperation() {
 		return operation;
 	}
 
@@ -58,7 +64,7 @@ public class DefaultOperation implements IOperation {
 	 * @param operation New value of property operation.
 	 * 
 	 */
-	public void setOperation(final short operation) {
+	public void setOperation(final OperationType operation) {
 		this.operation = operation;
 	}
 
@@ -123,11 +129,11 @@ public class DefaultOperation implements IOperation {
 		}
 	}
 
-    @Override
-    public int hashCode() {
-        return getOperation() * getProperties().hashCode() * 13;
-    }
-    
+	@Override
+	public int hashCode() {
+		return getOperation().hashCode() + getProperties().hashCode() * 31;
+	}
+
 	@Override
 	public boolean equals(final Object other) {
 		if (!(other instanceof IOperation)) {

@@ -30,6 +30,7 @@ import com.linkare.rec.impl.multicast.security.DefaultOperation;
 import com.linkare.rec.impl.multicast.security.DefaultUser;
 import com.linkare.rec.impl.multicast.security.IOperation;
 import com.linkare.rec.impl.multicast.security.IResource;
+import com.linkare.rec.impl.multicast.security.OperationType;
 import com.linkare.rec.impl.multicast.security.SecurityManagerFactory;
 import com.linkare.rec.impl.threading.ExecutorScheduler;
 import com.linkare.rec.impl.threading.ScheduledWorkUnit;
@@ -80,8 +81,8 @@ public class ClientQueue implements QueueLogger {
 
 	/* Delegate Implementations for MCHardware & MCController */
 	public UserInfo[] getUsers(final UserInfo user, final IResource resource) throws NotRegistered, NotAuthorized {
-		final IOperation op1 = new DefaultOperation(IOperation.OP_ENUM_USERS);
-		final DefaultOperation opList = new DefaultOperation(IOperation.OP_LIST_USER);
+		final IOperation op1 = new DefaultOperation(OperationType.OP_ENUM_USERS);
+		final DefaultOperation opList = new DefaultOperation(OperationType.OP_LIST_USER);
 		final DefaultUser securityUser = new DefaultUser(user);
 
 		if (!contains(user)) {
@@ -150,7 +151,7 @@ public class ClientQueue implements QueueLogger {
 				otherUser = new UserInfo(ChatMessageEvent.EVERYONE_USER);
 			}
 
-			final DefaultOperation op = new DefaultOperation(IOperation.OP_SEND_MESSAGE);
+			final DefaultOperation op = new DefaultOperation(OperationType.OP_SEND_MESSAGE);
 			op.getProperties().put(IOperation.PROPKEY_USERID_OTHER, otherUser);
 
 			if (!SecurityManagerFactory.authorize(resource, new DefaultUser(user), op)) {
@@ -178,7 +179,7 @@ public class ClientQueue implements QueueLogger {
 
 			final UserInfo adminUser = new UserInfo(ChatMessageEvent.MULTICAST_USERNAME);
 
-			final DefaultOperation op = new DefaultOperation(IOperation.OP_SEND_MESSAGE);
+			final DefaultOperation op = new DefaultOperation(OperationType.OP_SEND_MESSAGE);
 			op.getProperties().put(IOperation.PROPKEY_USERID_OTHER, otherUser);
 
 			messageQueue.addEvent(new ChatMessageEvent(this, adminUser, otherUser, message));

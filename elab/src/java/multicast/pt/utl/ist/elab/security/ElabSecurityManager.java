@@ -24,11 +24,11 @@ import java.util.logging.Logger;
 
 import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
-import com.linkare.rec.impl.multicast.security.IOperation;
 import com.linkare.rec.impl.multicast.security.IResource;
 import com.linkare.rec.impl.multicast.security.ISecurityCommunicator;
 import com.linkare.rec.impl.multicast.security.ISecurityManager;
 import com.linkare.rec.impl.multicast.security.IUser;
+import com.linkare.rec.impl.multicast.security.OperationType;
 import com.linkare.rec.impl.multicast.security.ResourceType;
 
 public class ElabSecurityManager implements ISecurityManager {
@@ -78,7 +78,7 @@ public class ElabSecurityManager implements ISecurityManager {
 			final com.linkare.rec.impl.multicast.security.IUser user,
 			final com.linkare.rec.impl.multicast.security.IOperation op) {
 		final String userName = user.getUserName();
-		if (op.getOperation() == IOperation.OP_START) {
+		if (op.getOperation() == OperationType.OP_START) {
 			try {
 				final GregorianCalendar cal = new GregorianCalendar();
 				fw = new FileWriter(logins, true);

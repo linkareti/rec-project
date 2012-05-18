@@ -45,6 +45,7 @@ import com.linkare.rec.impl.multicast.security.DefaultOperation;
 import com.linkare.rec.impl.multicast.security.DefaultResource;
 import com.linkare.rec.impl.multicast.security.DefaultUser;
 import com.linkare.rec.impl.multicast.security.IOperation;
+import com.linkare.rec.impl.multicast.security.OperationType;
 import com.linkare.rec.impl.multicast.security.ResourceType;
 import com.linkare.rec.impl.multicast.security.SecurityManagerFactory;
 import com.linkare.rec.impl.threading.AbstractConditionDecisor;
@@ -196,7 +197,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 	@Override
 	public void requireLock(final UserInfo user) throws IncorrectStateException, NotAvailableException,
 			NotOwnerException, NotAuthorized {
-		final DefaultOperation op = new DefaultOperation(IOperation.OP_LOCK);
+		final DefaultOperation op = new DefaultOperation(OperationType.OP_LOCK);
 		op.getProperties().put(IOperation.PROPKEY_HARDWARESTATE, getHardwareState());
 		final DefaultUser securityUser = new DefaultUser(user);
 
@@ -267,7 +268,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 		log(Level.INFO, "Received the configuration [" + configuration + "] from user [" + user
 				+ "] and the hardware state is [" + getHardwareState() + "]");
 
-		final DefaultOperation op = new DefaultOperation(IOperation.OP_CONFIG);
+		final DefaultOperation op = new DefaultOperation(OperationType.OP_CONFIG);
 		op.getProperties().put(IOperation.PROPKEY_HARDWARESTATE, getHardwareState());
 		op.getProperties().put(IOperation.PROPKEY_ACQ_CONFIG, configuration);
 		final DefaultUser securityUser = new DefaultUser(user);
@@ -297,7 +298,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 	public DataProducer start(final UserInfo user) throws IncorrectStateException, NotAvailableException,
 			NotOwnerException, NotAuthorized {
 
-		final DefaultOperation op = new DefaultOperation(IOperation.OP_START);
+		final DefaultOperation op = new DefaultOperation(OperationType.OP_START);
 		op.getProperties().put(IOperation.PROPKEY_HARDWARESTATE, getHardwareState());
 		final DefaultUser securityUser = new DefaultUser(user);
 
@@ -343,7 +344,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 	@Override
 	public DataProducer startOutput(final UserInfo user, final DataProducer data_source)
 			throws IncorrectStateException, NotAvailableException, NotOwnerException, NotAuthorized {
-		final DefaultOperation op = new DefaultOperation(IOperation.OP_START_OUTPUT);
+		final DefaultOperation op = new DefaultOperation(OperationType.OP_START_OUTPUT);
 		op.getProperties().put(IOperation.PROPKEY_HARDWARESTATE, getHardwareState());
 		op.getProperties().put(IOperation.PROPKEY_REMOTE_DATAPRODUCER, data_source);
 		final DefaultUser securityUser = new DefaultUser(user);
@@ -392,7 +393,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 	public void stop(final UserInfo user) throws IncorrectStateException, NotAvailableException, NotOwnerException,
 			NotAuthorized {
 
-		final DefaultOperation op = new DefaultOperation(IOperation.OP_STOP);
+		final DefaultOperation op = new DefaultOperation(OperationType.OP_STOP);
 		op.getProperties().put(IOperation.PROPKEY_HARDWARESTATE, getHardwareState());
 		final DefaultUser securityUser = new DefaultUser(user);
 
@@ -415,7 +416,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 	@Override
 	public void reset(final UserInfo user) throws IncorrectStateException, NotAvailableException, NotOwnerException,
 			NotAuthorized {
-		final DefaultOperation op = new DefaultOperation(IOperation.OP_RESET);
+		final DefaultOperation op = new DefaultOperation(OperationType.OP_RESET);
 		op.getProperties().put(IOperation.PROPKEY_HARDWARESTATE, getHardwareState());
 		final DefaultUser securityUser = new DefaultUser(user);
 
@@ -449,7 +450,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			throw new NotAvailableException(NotAvailableExceptionConstants.NO_DATA_PRODUCER_AT_THIS_MOMENT);
 		}
 
-		final DefaultOperation op = new DefaultOperation(IOperation.OP_GET_DATAPRODUCER);
+		final DefaultOperation op = new DefaultOperation(OperationType.OP_GET_DATAPRODUCER);
 		final DefaultUser securityUser = new DefaultUser(user);
 
 		if (!SecurityManagerFactory.authorize(producer.getResource(), securityUser, op)) {
@@ -477,7 +478,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 					+ getHardwareUniqueId());
 			throw new NotRegistered();
 		}
-		final DefaultOperation op = new DefaultOperation(IOperation.OP_GET_HARDWAREINFO);
+		final DefaultOperation op = new DefaultOperation(OperationType.OP_GET_HARDWAREINFO);
 		final HardwareInfo hardwareInfo = getHardwareInfo();
 		op.getProperties().put(IOperation.PROPKEY_HARDWAREINFO, hardwareInfo);
 		final DefaultUser securityUser = new DefaultUser(user);
@@ -499,7 +500,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			throw new NotRegistered();
 		}
 
-		final DefaultOperation op = new DefaultOperation(IOperation.OP_GET_HARDWARESTATE);
+		final DefaultOperation op = new DefaultOperation(OperationType.OP_GET_HARDWARESTATE);
 		op.getProperties().put(IOperation.PROPKEY_HARDWARESTATE, getHardwareState());
 		final DefaultUser securityUser = new DefaultUser(user);
 
