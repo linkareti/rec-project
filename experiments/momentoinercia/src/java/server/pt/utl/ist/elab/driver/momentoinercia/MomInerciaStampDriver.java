@@ -127,9 +127,7 @@ public class MomInerciaStampDriver extends AbstractStampDriver {
 
 	@Override
 	public AbstractStampDataSource initDataSource() {
-		final MomInerciaStampDataSource dataSource = new MomInerciaStampDataSource();
-		dataSource.setAcquisitionHeader(getAcquisitionHeader());
-		return dataSource;
+		return new MomInerciaStampDataSource();
 	}
 
 	@Override

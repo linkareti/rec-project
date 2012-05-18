@@ -119,9 +119,7 @@ public class GammaStampDriver extends AbstractStampDriver {
 
 	@Override
 	public AbstractStampDataSource initDataSource() {
-		final GammaStampDataSource initialDataSource = new GammaStampDataSource();
-		initialDataSource.setAcquisitionHeader(getAcquisitionHeader());
-		return initialDataSource;
+		return new GammaStampDataSource();
 	}
 
 	@Override

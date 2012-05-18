@@ -120,9 +120,7 @@ public class CCStampDriver extends AbstractStampDriver {
 
     @Override
     public AbstractStampDataSource initDataSource() {
-        final CCStampDataSource dataSource = new CCStampDataSource();
-        dataSource.setAcquisitionHeader(getAcquisitionHeader());
-        return dataSource;
+        return new CCStampDataSource();
     }
 
     @Override

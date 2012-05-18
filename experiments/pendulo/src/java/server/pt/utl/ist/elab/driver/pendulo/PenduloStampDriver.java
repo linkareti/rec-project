@@ -123,9 +123,7 @@ public class PenduloStampDriver extends AbstractStampDriver {
 
 	@Override
 	public AbstractStampDataSource initDataSource() {
-		final PenduloStampDataSource dataSource = new PenduloStampDataSource();
-		dataSource.setAcquisitionHeader(getAcquisitionHeader());
-		return dataSource;
+		return new PenduloStampDataSource();
 	}
 
 	@Override
