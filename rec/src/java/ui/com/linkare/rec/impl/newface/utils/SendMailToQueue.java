@@ -11,7 +11,6 @@ import com.linkare.rec.am.mail.MailMessageRequest;
 import com.linkare.rec.am.mail.MailServiceRemote;
 import com.linkare.rec.am.mail.NoValidRecipientsFoundForMessage;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.impl.newface.utils.WSServiceLocator;
 import com.linkare.rec.impl.ui.table.DefaultExperimentDataTable;
 
 /**
@@ -67,6 +66,7 @@ public class SendMailToQueue {
     }
 
     public static boolean checkMaxNumberRecipients(String[] recipients) {
-	return recipients.length > 5 ? true : false;
+        int maxNumberRecipientes = Integer.parseInt(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.SendMailBox").getString("number.max.recipientes"));
+	return recipients.length > maxNumberRecipientes ? true : false;
     }
 }
