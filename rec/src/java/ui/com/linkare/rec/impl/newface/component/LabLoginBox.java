@@ -18,6 +18,7 @@ import com.linkare.rec.impl.newface.ReCApplication;
 import com.linkare.rec.impl.newface.component.ProgressCicle.State;
 import com.linkare.rec.impl.newface.utils.LAFConnector;
 import com.linkare.rec.impl.newface.utils.LAFConnector.SpecialELabProperties;
+import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
 /**
@@ -52,6 +53,14 @@ public class LabLoginBox extends GradientPane {
 	public void setBusyIcons(final Icon[] busyIcons) {
 		progressCicle.setBusyIcons(busyIcons);
 	}
+        
+        public void refreshView(){
+            labelUsername.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.LabLoginBox").getString("labelUsername.text"));
+            labelPassword.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.LabLoginBox").getString("labelPassword.text"));
+            btnGo.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.LabLoginBox").getString("next.Action.text"));
+            btnQuit.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.LabLoginBox").getString("btnQuit.text"));
+            checkBoxComputerType.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.LabLoginBox").getString("checkBoxComputerType.text"));
+        }
 
 	/**
 	 * This method is called from within the constructor to initialize the form.

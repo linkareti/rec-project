@@ -11,6 +11,8 @@
 
 package com.linkare.rec.impl.newface.component;
 
+import java.util.ResourceBundle;
+
 /**
  * 
  * @author Henrique Fernandes
@@ -33,7 +35,10 @@ public class ChatBox extends AbstractContentPane {
 	public Chat getChat() {
 		return chat;
 	}
-
+        
+        public void refreshView(){
+            lblChatRoom.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.ChatBox").getString("lblChatRoom.text"));
+        }
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is always

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.1" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
@@ -49,7 +49,9 @@
             <Font bold="true" component="lblVideo" property="font" relativeSize="false" size="11"/>
           </FontInfo>
         </Property>
-        <Property name="text" type="java.lang.String" resourceKey="lblVideo.text"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="com/linkare/rec/impl/newface/component/resources/VideoBox.properties" key="lblVideo.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="name" type="java.lang.String" value="lblVideo" noResource="true"/>
       </Properties>
     </Component>

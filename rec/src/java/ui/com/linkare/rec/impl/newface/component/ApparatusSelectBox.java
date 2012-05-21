@@ -17,6 +17,7 @@ import org.jdesktop.application.Action;
 
 import com.linkare.rec.impl.newface.ReCApplication;
 import com.linkare.rec.impl.newface.ReCFrameView;
+import java.util.ResourceBundle;
 
 /**
  * 
@@ -89,7 +90,10 @@ public class ApparatusSelectBox extends AbstractContentPane {
 		// TODO this is fixing the focus repaint problem. Find a better way.
 		repaint();
 	}
-
+        public void refreshView(){
+            lblChooseApparatus.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.ApparatusSelectBox").getString("lblChooseApparatus.text"));
+            btnToggleEnter.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.ApparatusSelectBox").getString("btnToggleEnter.text"));
+        }
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is always

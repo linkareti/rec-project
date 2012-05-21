@@ -13,6 +13,7 @@ package com.linkare.rec.impl.newface.component;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.util.ResourceBundle;
 
 /**
  * 
@@ -79,7 +80,10 @@ public class VideoBox extends AbstractContentPane {
 			videoCanvas.setSize(width, height);
 		}
 	}
-
+        
+        public void refreshView(){
+            lblVideo.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.VideoBox").getString("lblVideo.text"));
+        }
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is always
@@ -87,59 +91,63 @@ public class VideoBox extends AbstractContentPane {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-		lblVideo = new javax.swing.JLabel();
-		videoPanel = new javax.swing.JPanel();
-		videoCanvas = new java.awt.Canvas();
+        lblVideo = new javax.swing.JLabel();
+        videoPanel = new javax.swing.JPanel();
+        videoCanvas = new java.awt.Canvas();
 
-		setName("Form"); // NOI18N
+        setName("Form"); // NOI18N
 
-		lblVideo.setFont(lblVideo.getFont().deriveFont(lblVideo.getFont().getStyle() | java.awt.Font.BOLD, 11));
-		final org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application
-				.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext()
-				.getResourceMap(VideoBox.class);
-		lblVideo.setText(resourceMap.getString("lblVideo.text")); // NOI18N
-		lblVideo.setName("lblVideo"); // NOI18N
+        lblVideo.setFont(lblVideo.getFont().deriveFont(lblVideo.getFont().getStyle() | java.awt.Font.BOLD, 11));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/linkare/rec/impl/newface/component/resources/VideoBox"); // NOI18N
+        lblVideo.setText(bundle.getString("lblVideo.text")); // NOI18N
+        lblVideo.setName("lblVideo"); // NOI18N
 
-		videoPanel.setBorder(javax.swing.BorderFactory.createLineBorder(null));
-		videoPanel.setName("videoPanel"); // NOI18N
+        videoPanel.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        videoPanel.setName("videoPanel"); // NOI18N
 
-		videoCanvas.setBackground(resourceMap.getColor("videoCanvas.background")); // NOI18N
-		videoCanvas.setName("videoCanvas"); // NOI18N
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(VideoBox.class);
+        videoCanvas.setBackground(resourceMap.getColor("videoCanvas.background")); // NOI18N
+        videoCanvas.setName("videoCanvas"); // NOI18N
 
-		final javax.swing.GroupLayout videoPanelLayout = new javax.swing.GroupLayout(videoPanel);
-		videoPanel.setLayout(videoPanelLayout);
-		videoPanelLayout.setHorizontalGroup(videoPanelLayout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addComponent(videoCanvas,
-				javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE));
-		videoPanelLayout.setVerticalGroup(videoPanelLayout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addComponent(videoCanvas,
-				javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE));
+        javax.swing.GroupLayout videoPanelLayout = new javax.swing.GroupLayout(videoPanel);
+        videoPanel.setLayout(videoPanelLayout);
+        videoPanelLayout.setHorizontalGroup(
+            videoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(videoCanvas, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+        );
+        videoPanelLayout.setVerticalGroup(
+            videoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(videoCanvas, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+        );
 
-		final javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-		setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				layout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(
-								layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-										.addComponent(videoPanel, javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(lblVideo)).addContainerGap()));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				layout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(lblVideo)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(videoPanel, javax.swing.GroupLayout.DEFAULT_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addContainerGap()));
-	}// </editor-fold>//GEN-END:initComponents
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(videoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblVideo))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblVideo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(videoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+    }// </editor-fold>//GEN-END:initComponents
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JLabel lblVideo;
-	private java.awt.Canvas videoCanvas;
-	private javax.swing.JPanel videoPanel;
-	// End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lblVideo;
+    private java.awt.Canvas videoCanvas;
+    private javax.swing.JPanel videoPanel;
+    // End of variables declaration//GEN-END:variables
 }

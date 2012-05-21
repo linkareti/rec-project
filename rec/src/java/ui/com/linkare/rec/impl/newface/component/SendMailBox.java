@@ -13,6 +13,9 @@ package com.linkare.rec.impl.newface.component;
 import com.linkare.rec.impl.newface.utils.LAFConnector;
 import com.linkare.rec.impl.newface.utils.LAFConnector.SpecialELabProperties;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.FocusTraversalPolicy;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -25,6 +28,45 @@ public class SendMailBox extends GradientPane {
     /** Creates new form SendMailBox */
     public SendMailBox() {
         initComponents();
+        setFocusTraversalPolicyProvider(true);
+        this.setFocusTraversalPolicy(new FocusTraversalPolicy() {
+            private final Component[] COMPONENT_ORDER = new Component[]{txtToMail, btnSend, btnCancel};
+
+            @Override
+            public Component getLastComponent(Container aContainer) {
+                return COMPONENT_ORDER[COMPONENT_ORDER.length - 1];
+            }
+
+            @Override
+            public Component getFirstComponent(Container aContainer) {
+                return COMPONENT_ORDER[0];
+            }
+
+            @Override
+            public Component getDefaultComponent(Container aContainer) {
+                return COMPONENT_ORDER[0];
+            }
+
+            @Override
+            public Component getComponentBefore(Container aContainer, Component aComponent) {
+                for (int i = 0; i < COMPONENT_ORDER.length; i++) {
+                    if (aComponent == COMPONENT_ORDER[i]) {
+                        return COMPONENT_ORDER[i - 1 < 0 ? i - 1 + COMPONENT_ORDER.length : i - 1];
+                    }
+                }
+                return null;
+            }
+
+            @Override
+            public Component getComponentAfter(Container aContainer, Component aComponent) {
+                for (int i = 0; i < COMPONENT_ORDER.length; i++) {
+                    if (aComponent == COMPONENT_ORDER[i]) {
+                        return COMPONENT_ORDER[i + 1 > COMPONENT_ORDER.length ? i + 1 - COMPONENT_ORDER.length : i + 1];
+                    }
+                }
+                return null;
+            }
+        });
     }
 
     public JTextField getTxtToMail() {
@@ -122,7 +164,6 @@ public class SendMailBox extends GradientPane {
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.txtToMail.setText("");
     }//GEN-LAST:event_btnCancelActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSend;
