@@ -119,6 +119,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
             Locale.setDefault(new Locale(Preferences.userRoot().get("ElabUserLocale", Locale.getDefault().toString())));
         }
         final ResourceMap resourceMap = getResourceMap();
+
         // Get status resources
         // Icon idleIcon, final Icon[] busyIcons, int busyAnimationRate
         ReCFrameView.idleIcon = resourceMap.getIcon("StatusBar.idleIcon");
@@ -342,6 +343,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
     public JDialog getAboutBox() {
         if (aboutBox == null) {
             final JFrame mainFrame = recApplication.getMainFrame();
+            // aboutBox = new ReCAboutBox(mainFrame);
+            // aboutBox = new AboutDialog();
             aboutBox = new AboutBoxDialog(mainFrame);
             aboutBox.setLocationRelativeTo(mainFrame);
         }
@@ -511,7 +514,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
             selected = chooser.getSelectedFile();
 
             if (!isVLCExecutable(selected)) {
-                if (JOptionPane.showConfirmDialog(getFrame(), getResourceMap().getString("vlcexecutablefile.text"), "",
+                if (JOptionPane.showConfirmDialog(getFrame(),
+                        "Não seleccionou um executável de VLC válido. Deseja prosseguir sem vídeo?", "",
                         JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
                     proceed = false;
                 }
@@ -562,7 +566,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         // Update Apparatus Description Pane info
         getApparatusDescriptionPane().setApparatusConfig(recApplication.getSelectedApparatusConfig());
     }
-    
+
     @Override
     public void labStateChanged(final LabConnectorEvent evt) {
 
@@ -809,13 +813,13 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
     }
 
     private void maxUsers() {
-        final String errorMessage = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.maxUsers",
+        final String errorMessage = ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.status.maxUsers",
                 "Sorry, the lab is full. Please try again later...");
         errorConnectingToApparatus(errorMessage);
     }
 
     private void notAuthorized() {
-        final String errorMessage = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.notAuthorized",
+        final String errorMessage = ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.status.notAuthorized",
                 "Not authorized, please confirm your login/password and try again!");
         errorConnectingToApparatus(errorMessage);
     }
@@ -845,30 +849,14 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
             getExperimentStatusActionBar().setActionStateLabelVisible(true);
 
-<<<<<<< .mine
             apparatusLockTimer.setInitialDelay(1); // ready, set
             apparatusLockTimer.start(); // go
         }
     }
-=======
-	private void maxUsers() {
-		final String errorMessage = ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.status.maxUsers",
-				"Sorry, the lab is full. Please try again later...");
-		errorConnectingToApparatus(errorMessage);
-	}
->>>>>>> .r21946
 
-<<<<<<< .mine
     private void lockApparatus() {
         apparatusLockTimer.stop();
     }
-=======
-	private void notAuthorized() {
-		final String errorMessage = ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.status.notAuthorized",
-				"Not authorized, please confirm your login/password and try again!");
-		errorConnectingToApparatus(errorMessage);
-	}
->>>>>>> .r21946
 
     private void configuringApparatus() {
         getExperimentStatusActionBar().setActionStateText(
@@ -920,7 +908,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         // showing this message can be necessary because the status bar message
         // is going to be hidden with stopped message
         final String errorMessage = ReCResourceBundle.findStringOrDefault(
-                "ReCBaseUI$rec.bui.status.apparatus.config.error.state",
+                "ReCUI$rec.ui.status.apparatus.config.error.state",
                 "The experiment has a wrong configuration! Please check the customizer.");
         JOptionPane.showMessageDialog(null, errorMessage);
     }
@@ -934,7 +922,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         getApparatusTabbedPane().getExperimentActionBar().setPlayStopButtonEnabled(false);
 
         final String errorMessage = ReCResourceBundle.findStringOrDefault(
-                "ReCBaseUI$rec.bui.status.apparatus.incorrect.state",
+                "ReCUI$rec.ui.status.apparatus.incorrect.state",
                 "The experiment is in an incorrect state! Please contact the administrator.");
         errorConnectingToApparatus(errorMessage);
     }
@@ -964,23 +952,12 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
     private void showExperimentResults(final ExperimentUIData experimentUIData) {
         getLayoutContainerPane().getApparatusTabbedPane().setDataDisplays(experimentUIData.getDataDisplays());
 
-<<<<<<< .mine
         getResultsPane().setExperimentResults(experimentUIData.getHistoryUINode(), experimentUIData.getDataModel(),
                 experimentUIData.getDataDisplays());
-=======
-		// showing this message can be necessary because the status bar message
-		// is going to be hidden with stopped message
-		final String errorMessage = ReCResourceBundle.findStringOrDefault(
-				"ReCUI$rec.ui.status.apparatus.config.error.state",
-				"The experiment has a wrong configuration! Please check the customizer.");
-		JOptionPane.showMessageDialog(null, errorMessage);
-	}
->>>>>>> .r21946
 
         getApparatusTabbedPane().setTabIndexEnabled(ApparatusTabbedPane.TAB_RESULTS, true);
     }
 
-<<<<<<< .mine
     private ResultsPane getResultsPane() {
         if (resultsPane == null) {
             resultsPane = new ResultsPane();
@@ -988,13 +965,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         }
         return resultsPane;
     }
-=======
-		final String errorMessage = ReCResourceBundle.findStringOrDefault(
-				"ReCUI$rec.ui.status.apparatus.incorrect.state",
-				"The experiment is in an incorrect state! Please contact the administrator.");
-		errorConnectingToApparatus(errorMessage);
-	}
->>>>>>> .r21946
 
     private void apparatusLockTimerTick() {
         final long lockCountDown = TimeUtils.msToSeconds(millisToLockSuccess
@@ -1259,7 +1229,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         }
 
     }
-    
+
     public void refreshView() {
         toolBtnConnect.setText(getResourceMap().getString("toolBtnConnect.text"));
         toolBtnConnect.getAccessibleContext().setAccessibleName(
@@ -1267,15 +1237,15 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         progressCicleTask.setText(getResourceMap().getString("progressCicleTask.text"));
         updateMenu(menuBar);
     }
-    
+
     public void updateMenu(JMenuBar menuBar) {
         List<javax.swing.JMenu> menuFather = new ArrayList<javax.swing.JMenu>();
         List<javax.swing.JMenuItem> menuChild = new ArrayList<javax.swing.JMenuItem>();
         javax.swing.MenuElement[] jMenuElement = menuBar.getSubElements();
 
         for (int i = 0; i < jMenuElement.length; i++) {
-            menuFather.add((JMenu)jMenuElement[i]);
-            getMenuChild((JMenu)jMenuElement[i], menuChild);
+            menuFather.add((JMenu) jMenuElement[i]);
+            getMenuChild((JMenu) jMenuElement[i], menuChild);
         }
 
         for (JMenu jMenu : menuFather) {
@@ -1285,15 +1255,16 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         for (JMenuItem jMenuItem : menuChild) {
             jMenuItem.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.resources.ReCFrameView").getString(jMenuItem.getName() + ".text"));
         }
-        
+
     }
-    public void getMenuChild(JMenu jMenu,List<JMenuItem> menuChild){
+
+    public void getMenuChild(JMenu jMenu, List<JMenuItem> menuChild) {
         java.awt.Component[] componentsChild;
-        componentsChild = jMenu.getMenuComponents();  
-        for (int i = 0; i < componentsChild.length; i++) {  
-           if (componentsChild[i] instanceof javax.swing.JMenuItem) {
-               menuChild.add((JMenuItem)componentsChild[i]);
-           }
+        componentsChild = jMenu.getMenuComponents();
+        for (int i = 0; i < componentsChild.length; i++) {
+            if (componentsChild[i] instanceof javax.swing.JMenuItem) {
+                menuChild.add((JMenuItem) componentsChild[i]);
+            }
         }
     }
 }
