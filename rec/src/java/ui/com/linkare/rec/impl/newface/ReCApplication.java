@@ -1431,5 +1431,9 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		}
 
 	}
+        
+        public void refreshView(String locale){
+            fireApplicationEvent(new ReCAppEvent(this, ReCCommand.REFRESH_VIEW, locale));
+        }
 
 }

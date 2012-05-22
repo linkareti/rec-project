@@ -193,7 +193,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
                 }
             }
         });
-        addNewEntranceInMenu();
     }
 
     /**
@@ -343,8 +342,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
     public JDialog getAboutBox() {
         if (aboutBox == null) {
             final JFrame mainFrame = recApplication.getMainFrame();
-            // aboutBox = new ReCAboutBox(mainFrame);
-            // aboutBox = new AboutDialog();
             aboutBox = new AboutBoxDialog(mainFrame);
             aboutBox.setLocationRelativeTo(mainFrame);
         }
@@ -464,6 +461,9 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
             case ASK_FOR_VLC:
                 askForVLC();
                 break;
+            case REFRESH_VIEW:
+                setUserLocale((String)evt.getValue());
+                break;
         }
     }
 
@@ -515,7 +515,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
             if (!isVLCExecutable(selected)) {
                 if (JOptionPane.showConfirmDialog(getFrame(),
-                        "Não seleccionou um executável de VLC válido. Deseja prosseguir sem vídeo?", "",
+                        getResourceMap().getString("vlcexecutablefile.text"), "",
                         JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
                     proceed = false;
                 }
@@ -1179,42 +1179,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
     private javax.swing.JMenuItem menuItemPortuguese = new javax.swing.JMenuItem();
     private javax.swing.JPopupMenu.Separator sepLanguage1 = new javax.swing.JPopupMenu.Separator();
     private javax.swing.JMenuItem menuItemEnglish = new javax.swing.JMenuItem();
-
-    private void addNewEntranceInMenu() {
-        menuLanguage.setText(getResourceMap().getString("menuLanguage.text")); // NOI18N
-        menuLanguage.setName("menuLanguage"); // NOI18N
-
-        menuItemPortuguese.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
-        menuItemPortuguese.setIcon(getResourceMap().getIcon("menuItemPortuguese.icon")); // NOI18N
-        menuItemPortuguese.setText(getResourceMap().getString("menuItemPortuguese.text")); // NOI18N
-        menuItemPortuguese.setName("menuItemPortuguese"); // NOI18N
-        menuItemPortuguese.addActionListener(new java.awt.event.ActionListener() {
-
-            @Override
-            public void actionPerformed(final java.awt.event.ActionEvent evt) {
-                setUserLocale("pt");
-            }
-        });
-
-        menuLanguage.add(menuItemPortuguese);
-
-        sepLanguage1.setName("sepLanguage1"); // NOI18N
-        menuLanguage.add(sepLanguage1);
-
-        menuItemEnglish.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
-        menuItemEnglish.setIcon(getResourceMap().getIcon("menuItemEnglish.icon")); // NOI18N
-        menuItemEnglish.setText(getResourceMap().getString("menuItemEnglish.text")); // NOI18N
-        menuItemEnglish.setName("menuItemEnglish"); // NOI18N
-        menuItemEnglish.addActionListener(new java.awt.event.ActionListener() {
-
-            @Override
-            public void actionPerformed(final java.awt.event.ActionEvent evt) {
-                setUserLocale("en");
-            }
-        });
-        menuLanguage.add(menuItemEnglish);
-        menuBar.add(menuLanguage);
-    }
 
     public void setUserLocale(String locale) {
         Locale.setDefault(new Locale(locale));
