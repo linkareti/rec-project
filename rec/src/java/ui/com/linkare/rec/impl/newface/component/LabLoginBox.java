@@ -82,9 +82,11 @@ public class LabLoginBox extends GradientPane {
         txtPassword = new javax.swing.JPasswordField();
         btnQuit = new com.linkare.rec.impl.newface.component.FlatButton();
         checkBoxComputerType = new javax.swing.JCheckBox();
+        labelLanguage = new javax.swing.JLabel();
+        langCombo = new javax.swing.JComboBox();
 
         setName("Form"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(360, 280));
+        setPreferredSize(new java.awt.Dimension(360, 360));
 
         labelUsername.setFont(labelUsername.getFont().deriveFont(labelUsername.getFont().getStyle() | java.awt.Font.BOLD));
         labelUsername.setForeground(LAFConnector.getColor(SpecialELabProperties.SELECTION_FOREGROUND_ON_DARK));
@@ -144,36 +146,52 @@ public class LabLoginBox extends GradientPane {
         checkBoxComputerType.setContentAreaFilled(false);
         checkBoxComputerType.setName("checkBoxComputerType"); // NOI18N
 
+        labelLanguage.setFont(labelLanguage.getFont().deriveFont(labelLanguage.getFont().getStyle() | java.awt.Font.BOLD));
+        labelLanguage.setForeground(LAFConnector.getColor(SpecialELabProperties.SELECTION_FOREGROUND_ON_DARK));
+        labelLanguage.setText(resourceMap.getString("labelLanguage.text")); // NOI18N
+        labelLanguage.setName("labelLanguage"); // NOI18N
+
+        langCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Português", "English" }));
+        langCombo.setName("langCombo"); // NOI18N
+        langCombo.setRenderer(new com.linkare.rec.impl.newface.component.LabRenderer());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(labelUsername)
-                        .addComponent(labelPassword)
-                        .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
-                        .addComponent(labelPassword1)
-                        .addComponent(labCombo, 0, 246, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnGo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
-                            .addComponent(btnQuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(checkBoxComputerType)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnGo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                        .addComponent(btnQuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(labelLanguage)
+                        .addGap(208, 208, 208))
+                    .addComponent(labelUsername)
+                    .addComponent(labelPassword)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                    .addComponent(labelPassword1)
+                    .addComponent(labCombo, 0, 264, Short.MAX_VALUE)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                    .addComponent(langCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addComponent(progressCicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addComponent(checkBoxComputerType)
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(203, 203, 203)
+                        .addComponent(progressCicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(labelUsername)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,14 +203,17 @@ public class LabLoginBox extends GradientPane {
                         .addComponent(labelPassword1)
                         .addGap(6, 6, 6)
                         .addComponent(labCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelLanguage)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(langCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnGo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnQuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(checkBoxComputerType))
-                    .addComponent(progressCicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                            .addComponent(btnQuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addComponent(checkBoxComputerType)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -233,9 +254,11 @@ public class LabLoginBox extends GradientPane {
     private com.linkare.rec.impl.newface.component.FlatButton btnQuit;
     private javax.swing.JCheckBox checkBoxComputerType;
     private javax.swing.JComboBox labCombo;
+    private javax.swing.JLabel labelLanguage;
     private javax.swing.JLabel labelPassword;
     private javax.swing.JLabel labelPassword1;
     private javax.swing.JLabel labelUsername;
+    private javax.swing.JComboBox langCombo;
     private com.linkare.rec.impl.newface.component.ProgressCicle progressCicle;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;

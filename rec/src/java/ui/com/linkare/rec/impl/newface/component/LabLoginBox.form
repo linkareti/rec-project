@@ -4,7 +4,7 @@
   <Properties>
     <Property name="name" type="java.lang.String" value="Form" noResource="true"/>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[360, 280]"/>
+      <Dimension value="[360, 360]"/>
     </Property>
   </Properties>
   <AuxValues>
@@ -22,38 +22,46 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                      <Component id="labelUsername" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="labelPassword" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtPassword" alignment="0" pref="246" max="32767" attributes="1"/>
-                      <Component id="labelPassword1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="labCombo" alignment="0" pref="246" max="32767" attributes="1"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="btnGo" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="99" max="32767" attributes="0"/>
-                          <Component id="btnQuit" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="txtUsername" alignment="0" pref="246" max="32767" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="checkBoxComputerType" min="-2" max="-2" attributes="1"/>
-                      <EmptySpace pref="45" max="-2" attributes="0"/>
+                      <Component id="btnGo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="106" max="32767" attributes="0"/>
+                      <Component id="btnQuit" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="labelLanguage" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="208" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="labelUsername" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelPassword" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtPassword" alignment="0" pref="264" max="32767" attributes="1"/>
+                  <Component id="labelPassword1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="labCombo" alignment="0" pref="264" max="32767" attributes="1"/>
+                  <Component id="txtUsername" alignment="0" pref="264" max="32767" attributes="0"/>
+                  <Component id="langCombo" alignment="0" min="-2" pref="264" max="-2" attributes="1"/>
               </Group>
               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               <Component id="progressCicle" min="-2" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <Component id="checkBoxComputerType" min="-2" max="-2" attributes="1"/>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="203" max="-2" attributes="0"/>
+                      <Component id="progressCicle" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="labelUsername" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtUsername" min="-2" max="-2" attributes="0"/>
@@ -65,17 +73,20 @@
                       <Component id="labelPassword1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="6" pref="6" max="6" attributes="0"/>
                       <Component id="labCombo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="labelLanguage" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="langCombo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnGo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnQuit" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="checkBoxComputerType" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="progressCicle" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="22" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="checkBoxComputerType" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="38" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -215,6 +226,34 @@
         </Property>
         <Property name="contentAreaFilled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="checkBoxComputerType" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelLanguage">
+      <Properties>
+        <Property name="font" type="java.awt.Font" noResource="true" editor="org.netbeans.modules.form.editors2.FontEditor">
+          <FontInfo relative="true">
+            <Font bold="true" component="labelLanguage" property="font" relativeSize="true" size="0"/>
+          </FontInfo>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="LAFConnector.getColor(SpecialELabProperties.SELECTION_FOREGROUND_ON_DARK)" type="code"/>
+        </Property>
+        <Property name="text" type="java.lang.String" resourceKey="labelLanguage.text"/>
+        <Property name="name" type="java.lang.String" value="labelLanguage" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="langCombo">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="2">
+            <StringItem index="0" value="Portugu&#xea;s"/>
+            <StringItem index="1" value="English"/>
+          </StringArray>
+        </Property>
+        <Property name="name" type="java.lang.String" value="langCombo" noResource="true"/>
+        <Property name="renderer" type="javax.swing.ListCellRenderer" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new com.linkare.rec.impl.newface.component.LabRenderer()" type="code"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>
