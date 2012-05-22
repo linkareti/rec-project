@@ -91,7 +91,6 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         jPanel1 = new javax.swing.JPanel();
         sldFreq = new javax.swing.JSlider();
         tfFreq = new javax.swing.JTextField();
-        lblSamplingIntervalTooHigh = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         sldPos1 = new javax.swing.JSlider();
         sldPos2 = new javax.swing.JSlider();
@@ -260,18 +259,6 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel1.add(tfFreq, gridBagConstraints);
 
-        lblSamplingIntervalTooHigh.setForeground(new java.awt.Color(255, 0, 0));
-        lblSamplingIntervalTooHigh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSamplingIntervalTooHigh.setText(ReCResourceBundle.findString("boylemariotte$rec.exp.customizer.label3")); // NOI18N
-        lblSamplingIntervalTooHigh.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel1.add(lblSamplingIntervalTooHigh, gridBagConstraints);
-        lblSamplingIntervalTooHigh.getAccessibleContext().setAccessibleName(ReCResourceBundle.findStringOrDefault("rec.exp.customizer.label3","The time between samples"));
-
         jPanel3.add(jPanel1);
 
         add(jPanel3, java.awt.BorderLayout.CENTER);
@@ -284,12 +271,11 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         sldPos1.setMajorTickSpacing(300);
         sldPos1.setMaximum(1000);
         sldPos1.setMinimum(100);
-        sldPos1.setMinorTickSpacing(50);
+        sldPos1.setMinorTickSpacing(20);
         sldPos1.setPaintLabels(true);
         sldPos1.setPaintTicks(true);
         sldPos1.setPaintTrack(false);
         sldPos1.setSnapToTicks(true);
-        sldPos1.setValue(100);
         sldPos1.setMinimumSize(new java.awt.Dimension(250, 42));
         sldPos1.setPreferredSize(new java.awt.Dimension(250, 42));
         sldPos1.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -307,7 +293,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         sldPos2.setMajorTickSpacing(300);
         sldPos2.setMaximum(1000);
         sldPos2.setMinimum(100);
-        sldPos2.setMinorTickSpacing(50);
+        sldPos2.setMinorTickSpacing(20);
         sldPos2.setPaintLabels(true);
         sldPos2.setPaintTicks(true);
         sldPos2.setPaintTrack(false);
@@ -414,13 +400,13 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		if (strPos2.trim().equals(""))
 			return;
 		try {
-			int Pos2 = (int) (Float.parseFloat(strPos2) * 1000.F);
+			int Pos2 = Integer.parseInt(strPos2);
 			if (Pos2 <= sldPos2.getMaximum() && Pos2 > sldPos2.getMinimum())
 				sldPos2.setValue(Pos2);
 			else
-				tfPos2.setValue(decimalFormat.format(new Float(((float) sldPos2.getValue() / 1000.F))));
+				tfPos2.setValue(sldPos2.getValue());
 		} catch (Exception e) {
-			tfPos2.setValue(decimalFormat.format(new Float(((float) sldPos2.getValue() / 1000.F))));
+			tfPos2.setValue(sldPos2.getValue());
 		}
 		checkPosOverlap();
 		checkMaxNumSamples();
@@ -433,15 +419,15 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		if (strPos1.trim().equals(""))
 			return;
 		try {
-			int Pos1 = (int) (Float.parseFloat(strPos1) * 1000.F);
+			int Pos1 = Integer.parseInt(strPos1);
 			if (Pos1 <= sldPos1.getMaximum() && Pos1 > sldPos1.getMinimum())
 				sldPos1.setValue(Pos1);
 			else {
-				tfPos1.setValue(decimalFormat.format(new Float(((float) sldPos1.getValue() / 1000.F))));
+				tfPos1.setValue(sldPos1.getValue());
 			}
 
 		} catch (Exception e) {
-			tfPos1.setValue(decimalFormat.format(new Float(((float) sldPos1.getValue() / 1000.F))));
+			tfPos1.setValue(sldPos1.getValue());
 		}
 		checkPosOverlap();
 		checkMaxNumSamples();
@@ -451,7 +437,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	private void sldPos1StateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos1StateChanged
 	{// GEN-HEADEREND:event_sldPos1StateChanged
 
-		tfPos1.setValue(decimalFormat.format(new Float(((float) sldPos1.getValue() / 1000.F))));
+		tfPos1.setValue(sldPos1.getValue());
 		checkPosOverlap();
 		checkMaxNumSamples();
 
@@ -460,7 +446,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	private void sldPos2StateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos2StateChanged
 	{// GEN-HEADEREND:event_sldPos2StateChanged
 
-		tfPos2.setValue(decimalFormat.format(new Float(((float) sldPos2.getValue() / 1000.F))));
+		tfPos2.setValue(sldPos2.getValue());
 		checkPosOverlap();
 		checkMaxNumSamples();
 
@@ -492,39 +478,36 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 	private void checkPosOverlap() {
 		lblErrorVolsAreEqua.setEnabled(sldPos1.getValue() == sldPos2.getValue());
-		btnOK.setEnabled(!lblErrorVolsAreEqua.isEnabled() && !lblErrorSamplesTooHigh.isEnabled()
-				&& !lblSamplingIntervalTooHigh.isEnabled());
+		btnOK.setEnabled(!lblErrorVolsAreEqua.isEnabled() && !lblErrorSamplesTooHigh.isEnabled());
 	}
 
 	private void checkMaxNumSamples() {
 		lblErrorSamplesTooHigh
-				.setEnabled((float) Math.abs(sldPos2.getValue() - sldPos1.getValue()) * 80. / 1000.F < sldNumSamples
+				.setEnabled((float) Math.abs(sldPos2.getValue() - sldPos1.getValue())  < 20*sldNumSamples
 						.getValue());
-		btnOK.setEnabled(!lblErrorVolsAreEqua.isEnabled() && !lblErrorSamplesTooHigh.isEnabled()
-				&& !lblSamplingIntervalTooHigh.isEnabled());
+		btnOK.setEnabled(!lblErrorVolsAreEqua.isEnabled() && !lblErrorSamplesTooHigh.isEnabled());
 		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("boylemariotte$rec.exp.customizer.label2")
-				+ (int) Math.floor((float) Math.abs(sldPos2.getValue() - sldPos1.getValue()) * 80. / 1000.F));
+				+ (int) (Math.floor((float) Math.abs(sldPos2.getValue() - sldPos1.getValue()))/20.F));
 	}
 
 	public void checkMaxTime() {
-		float maxValue = Math.min((float) sldFreq.getMaximum(), 72000.F / (float) sldNumSamples.getValue());
-		lblSamplingIntervalTooHigh.setEnabled(sldFreq.getValue() > maxValue);
-		btnOK.setEnabled(!lblErrorVolsAreEqua.isEnabled() && !lblErrorSamplesTooHigh.isEnabled()
-				&& !lblSamplingIntervalTooHigh.isEnabled());
-		lblSamplingIntervalTooHigh.setText(ReCResourceBundle.findString("boylemariotte$rec.exp.customizer.label2")
-				+ (int) maxValue);
+//		float maxValue = Math.min((float) sldFreq.getMaximum(), 72000.F / (float) sldNumSamples.getValue());
+//		lblSamplingIntervalTooHigh.setEnabled(sldFreq.getValue() > maxValue);
+		btnOK.setEnabled(!lblErrorVolsAreEqua.isEnabled() && !lblErrorSamplesTooHigh.isEnabled());
+//		lblSamplingIntervalTooHigh.setText(ReCResourceBundle.findString("boylemariotte$rec.exp.customizer.label2")
+//				+ (int) maxValue);
 	}
 
 	private void btnDefaultsActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
 	{// GEN-HEADEREND:event_btnDefaultsActionPerformed
 		sldNumSamples.setValue(18);
 		tfNumSamples.setText("18");
-		sldPos1.setValue(4000);
-		tfPos1.setValue(decimalFormat.format(new Float(4.0)));
-		sldPos2.setValue(7000);
-		tfPos2.setValue(decimalFormat.format(new Float(7.0)));
-		sldFreq.setValue(150);
-		tfFreq.setText("150");
+		sldPos1.setValue(100);
+		tfPos1.setValue(100);
+		sldPos2.setValue(1000);
+		tfPos2.setValue(1000);
+		sldFreq.setValue(700);
+		tfFreq.setText("700");
 	}// GEN-LAST:event_btnDefaultsActionPerformed
 
 	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
@@ -534,12 +517,15 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 	private void btnOKActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
-		int nsamples = sldNumSamples.getValue() == 0 ? 1 : sldNumSamples.getValue();
-		acqConfig.setTotalSamples(nsamples);
-		acqConfig.getSelectedHardwareParameter("UserPosLow").setParameterValue(
-				"" + ((float) sldPos1.getValue() / 1000.F));
-		acqConfig.getSelectedHardwareParameter("UserPosHigh").setParameterValue(
-				"" + ((float) sldPos2.getValue() / 1000.F));
+		acqConfig.getSelectedHardwareParameter("vol_init").setParameterValue(
+				"" + (sldPos1.getValue()));
+		acqConfig.getSelectedHardwareParameter("vol_final").setParameterValue(
+				"" + (sldPos2.getValue()));
+                acqConfig.getSelectedHardwareParameter("n_samples").setParameterValue(
+				"" + (sldNumSamples.getValue()));
+                acqConfig.setTotalSamples(sldNumSamples.getValue());
+                acqConfig.getSelectedHardwareParameter("tb_samples").setParameterValue(
+				"" + (sldFreq.getValue()));
 		acqConfig.setSelectedFrequency(new Frequency((double) sldFreq.getValue(), hardwareInfo
 				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
 				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
@@ -559,7 +545,6 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
     private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel lblErrorSamplesTooHigh;
     private javax.swing.JLabel lblErrorVolsAreEqua;
-    private javax.swing.JLabel lblSamplingIntervalTooHigh;
     private javax.swing.JSlider sldFreq;
     private javax.swing.JSlider sldNumSamples;
     private javax.swing.JSlider sldPos1;
@@ -645,15 +630,13 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 			sldFreq.setValue(freq);
 			tfFreq.setText("" + freq);
 
-			float pos1f = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("UserPosLow"));
-			int pos1 = (int) Math.floor(pos1f * 1000.F);
+			int pos1 = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("vol_init"));
 			sldPos1.setValue(pos1);
-			tfPos1.setValue(decimalFormat.format(new Float(pos1f)));
+			tfPos1.setValue(pos1);
 
-			float pos2f = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("UserPosHigh"));
-			int pos2 = (int) Math.floor(pos2f * 1000.F);
+			int pos2 = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("vol_final"));
 			sldPos2.setValue(pos2);
-			tfPos2.setValue(decimalFormat.format(new Float(pos2f)));
+			tfPos2.setValue(pos2);
 		}
 	}
 
