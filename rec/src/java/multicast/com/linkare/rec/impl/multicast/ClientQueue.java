@@ -546,13 +546,6 @@ public class ClientQueue implements QueueLogger {
 			}
 		}
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public void logThrowable(final String message, final Throwable throwable) {
-			getClientQueueListener().logThrowable(message, throwable);
-		}
 	}
 
 	/* End Inner Class - Clients Connection Checker */

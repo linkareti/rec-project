@@ -397,13 +397,6 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 
 		}
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public void logThrowable(final String message, final Throwable throwable) {
-			DataReceiverQueue.this.logThrowable(message, throwable);
-		}
 	}
 
 	/* End Inner Class - DataReceivers Connection Checker */

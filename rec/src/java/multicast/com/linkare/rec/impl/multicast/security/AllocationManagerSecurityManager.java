@@ -474,14 +474,6 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 			refreshAllocations(nearTime.getTime(), farTime.getTime());
 		}
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public void logThrowable(final String message, final Throwable throwable) {
-			Logger.getLogger(AllocationManagerSecurityManager.MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.SEVERE,
-					message, throwable);
-		}
 	}
 
 	public class ClientsAllocationCheckScheduledUnit extends ScheduledWorkUnit {
@@ -595,14 +587,6 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 			return usernames;
 		}
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public void logThrowable(final String message, final Throwable throwable) {
-			Logger.getLogger(AllocationManagerSecurityManager.MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.SEVERE,
-					message, throwable);
-		}
 	}
 
 	private Map<String, List<AllocationDTO>> findCurrentAllocations() {

@@ -10,7 +10,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.net.InetAddress;
+import java.util.HashMap;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.omg.PortableServer.POA;
 import org.omg.PortableServer.Servant;
@@ -31,6 +34,7 @@ import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.data.SamplesPacketMatrix;
 import com.linkare.rec.impl.data.SamplesPacketReadException;
 import com.linkare.rec.impl.exceptions.NotAnAvailableSamplesPacketExceptionConstants;
+import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.multicast.security.DefaultResource;
 import com.linkare.rec.impl.multicast.security.IResource;
 import com.linkare.rec.impl.multicast.security.ResourceType;
@@ -62,7 +66,7 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 	private transient DataReceiverQueue dataReceiversQueue = null;
 	private transient DataReceiverQueueAdapter dataReceiverQueueAdapter = null;
 	private HardwareAcquisitionConfig cachedAcqHeader = null;
-//	private String cachedDataProducerName = null;
+	// private String cachedDataProducerName = null;
 	private String oid = null;
 	private transient ReCMultiCastDataProducerListener reCMultiCastDataProducerListener = null;
 	private IResource resource = null;
@@ -80,16 +84,14 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 
 	private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
 		stream.defaultReadObject();
-		// TODO pq inicializar as queues? lanca threads q n morrem
-		// initInternalQueue();
+		setOID(oid);
 	}
 
 	public ReCMultiCastDataProducer(final IResource resource, final int maximum_receivers, final String oid,
 			final String user) {
 		super();
-		this.oid = oid;
-
 		this.resource = resource;
+		this.setOID(oid);
 		this.maximum_receivers = maximum_receivers;
 		initInternalQueue();
 		dataReceiver = new ReCMultiCastDataProducerDataReceiver();
@@ -100,9 +102,30 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 			final String oid, final DataCollectorState dataCollectorState, final SamplesPacketMatrix packetMatrix,
 			final String user) {
 		super(dataCollectorState, packetMatrix);
+
+		// Try to determine the MultiCastController address
+		String multiCastLocation = "";
+		try {
+			multiCastLocation = InetAddress.getLocalHost().getCanonicalHostName();
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable("Error determining MultiCastController Location", e,
+					Logger.getLogger(ReCMultiCastController.MCCONTROLLER_LOGGER));
+		}
+
+		DefaultResource parentMCControllerResource = new DefaultResource();
+		parentMCControllerResource.getProperties().put(parentMCControllerResource.getResourceType().getPropertyKey(),
+				multiCastLocation);
+
+		DefaultResource parentHardwareResource = new DefaultResource(parentMCControllerResource);
+		parentHardwareResource.getProperties().put(parentHardwareResource.getResourceType().getPropertyKey(),
+				header.getHardwareUniqueID());
+
+		DefaultResource dataProducerResource = new DefaultResource(parentHardwareResource);
+		this.resource = dataProducerResource;
+
 		this.cachedAcqHeader = header;
-		//this.cachedDataProducerName = dataProducerName;
-		this.oid = oid;
+		// this.cachedDataProducerName = dataProducerName;
+		this.setOID(oid);
 		this.user = user;
 		initInternalQueue();
 	}
@@ -147,11 +170,8 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 
 	public void setOID(final String oid) {
 		this.oid = oid;
-		if (resource != null) {
-			final java.util.Map<String, String> props = resource.getProperties();
-			props.put(ResourceType.DATAPRODUCER.getPropertyKey(), oid);
-			((DefaultResource) resource).setProperties(props);
-		}
+		final java.util.Map<String, String> props = resource.getProperties();
+		props.put(resource.getResourceType().getPropertyKey(), oid);
 	}
 
 	public DataProducer _this() {
@@ -159,9 +179,9 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 			return _this;
 		}
 
-//		if (oid == null) {
-//			setOID(getFileName());
-//		}
+		// if (oid == null) {
+		// setOID(getFileName());
+		// }
 
 		try {
 			log(Level.FINEST, "Trying to create DataProducer CORBA Object... " + getOID());
@@ -243,11 +263,11 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 		}
 	}
 
-//	private String fileName = null;
-//
-//	public String getFileName() {
-//		return fileName;
-//	}
+	// private String fileName = null;
+	//
+	// public String getFileName() {
+	// return fileName;
+	// }
 
 	@Override
 	public void registerDataReceiver(final DataReceiver data_receiver) throws MaximumClientsReached {

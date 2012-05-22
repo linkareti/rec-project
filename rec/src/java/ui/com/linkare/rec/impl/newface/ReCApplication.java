@@ -1048,7 +1048,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			apparatusClientBean.start();
 		} else {
 			// TODO Check if this is really needed.
-			ReCApplication.log.severe("Appartus SHOULD be locked?");
+			ReCApplication.log.severe("Apparatus SHOULD be locked?");
 		}
 
 		// Forward event to the view
