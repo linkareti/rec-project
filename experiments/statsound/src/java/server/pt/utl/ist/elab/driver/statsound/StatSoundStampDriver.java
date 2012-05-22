@@ -366,7 +366,6 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 	@Override
 	public AbstractStampDataSource initDataSource() {
 		dataSource = new StatSoundStampDataSource();
-		dataSource.setAcquisitionHeader(getAcquisitionHeader());
 		return dataSource;
 	}
 

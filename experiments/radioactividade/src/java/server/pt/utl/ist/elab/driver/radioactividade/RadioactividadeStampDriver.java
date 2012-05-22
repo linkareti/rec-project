@@ -119,9 +119,7 @@ public class RadioactividadeStampDriver extends AbstractStampDriver {
 
 	@Override
 	public AbstractStampDataSource initDataSource() {
-		final RadioactividadeStampDataSource dataSource = new RadioactividadeStampDataSource();
-		dataSource.setAcquisitionHeader(getAcquisitionHeader());
-		return dataSource;
+		return new RadioactividadeStampDataSource();
 	}
 
 	@Override
@@ -196,7 +194,7 @@ public class RadioactividadeStampDriver extends AbstractStampDriver {
 	private boolean initing = true;
 	private boolean waitingStart = false;
 	private boolean wroteStart = false;
-	private final boolean waitingStop = false;
+//	private final boolean waitingStop = false;
 	private boolean started = false;
 	private boolean stoping = false;
 	private boolean reseting = true;

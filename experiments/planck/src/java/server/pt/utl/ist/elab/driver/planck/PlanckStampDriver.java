@@ -130,9 +130,7 @@ public class PlanckStampDriver extends AbstractStampDriver {
 
 	@Override
 	public AbstractStampDataSource initDataSource() {
-		final PlanckStampDataSource dataSource = new PlanckStampDataSource();
-		dataSource.setAcquisitionHeader(getAcquisitionHeader());
-		return dataSource;
+		return new PlanckStampDataSource();
 	}
 
 	@Override
@@ -208,7 +206,7 @@ public class PlanckStampDriver extends AbstractStampDriver {
 	private boolean initing = true;
 	private boolean waitingStart = false;
 	private boolean wroteStart = false;
-	private final boolean waitingStop = false;
+//	private final boolean waitingStop = false;
 	private boolean started = false;
 	private boolean stoping = false;
 	private boolean reseting = true;

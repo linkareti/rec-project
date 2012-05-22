@@ -157,7 +157,6 @@ public class ThomsonStampDriver extends AbstractStampDriver {
 	@Override
 	public AbstractStampDataSource initDataSource() {
 		dataSource = new ThomsonStampDataSource();
-		dataSource.setAcquisitionHeader(getAcquisitionHeader());
 		return dataSource;
 	}
 
@@ -234,7 +233,7 @@ public class ThomsonStampDriver extends AbstractStampDriver {
 	private boolean initing = true;
 	private boolean waitingStart = false;
 	private boolean wroteStart = false;
-	//private final boolean waitingStop = false;
+	// private final boolean waitingStop = false;
 	private boolean started = false;
 	private boolean stoping = false;
 	private boolean reseting = true;

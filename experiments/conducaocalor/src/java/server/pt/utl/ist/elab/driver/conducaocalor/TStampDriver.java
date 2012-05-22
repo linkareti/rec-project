@@ -163,16 +163,7 @@ public class TStampDriver extends AbstractStampDriver {
 
 	@Override
 	public AbstractStampDataSource initDataSource() {
-		Logger.getLogger(TStampDriver.HEAT_DRIVER_LOGGER).log(Level.INFO, "************************************");
-		Logger.getLogger(TStampDriver.HEAT_DRIVER_LOGGER).log(Level.INFO, "INITING DATA SOURCE");
-		Logger.getLogger(TStampDriver.HEAT_DRIVER_LOGGER).log(Level.INFO, "************************************");
-		final TStampDataSource dataSource = new TStampDataSource();
-		dataSource.setAcquisitionHeader(getAcquisitionHeader());
-		Logger.getLogger(TStampDriver.HEAT_DRIVER_LOGGER).log(Level.INFO, "************************************");
-		Logger.getLogger(TStampDriver.HEAT_DRIVER_LOGGER).log(Level.INFO, "INITED DATA SOURCE");
-		Logger.getLogger(TStampDriver.HEAT_DRIVER_LOGGER).log(Level.INFO, "************************************");
-
-		return dataSource;
+		return new TStampDataSource();
 	}
 
 	@Override
@@ -252,7 +243,7 @@ public class TStampDriver extends AbstractStampDriver {
 	private boolean initing = true;
 	private boolean waitingStart = false;
 	private boolean wroteStart = false;
-	private final boolean waitingStop = false;
+//	private final boolean waitingStop = false;
 	private boolean started = false;
 	private boolean stoping = false;
 	private boolean reseting = true;

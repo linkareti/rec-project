@@ -136,9 +136,7 @@ public class ScubaStampDriver extends AbstractStampDriver {
 
 	@Override
 	public AbstractStampDataSource initDataSource() {
-		final ScubaStampDataSource dataSource = new ScubaStampDataSource();
-		dataSource.setAcquisitionHeader(getAcquisitionHeader());
-		return dataSource;
+		return new ScubaStampDataSource();
 	}
 
 	@Override
@@ -213,7 +211,7 @@ public class ScubaStampDriver extends AbstractStampDriver {
 	private boolean initing = true;
 	private boolean waitingStart = false;
 	private boolean wroteStart = false;
-	private final boolean waitingStop = false;
+//	private final boolean waitingStop = false;
 	private boolean started = false;
 	private boolean stoping = false;
 	private boolean reseting = true;

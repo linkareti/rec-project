@@ -139,9 +139,7 @@ public class PolaroidStampDriver extends AbstractStampDriver {
 
 	@Override
 	public AbstractStampDataSource initDataSource() {
-		final PolaroidStampDataSource dataSource = new PolaroidStampDataSource();
-		dataSource.setAcquisitionHeader(getAcquisitionHeader());
-		return dataSource;
+		return new PolaroidStampDataSource();
 	}
 
 	@Override
@@ -213,7 +211,7 @@ public class PolaroidStampDriver extends AbstractStampDriver {
 	private boolean initing = true;
 	private boolean waitingStart = false;
 	private boolean wroteStart = false;
-	private final boolean waitingStop = false;
+//	private final boolean waitingStop = false;
 	private boolean started = false;
 	private boolean stoping = false;
 	private boolean reseting = true;
