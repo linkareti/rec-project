@@ -45,8 +45,8 @@
 	</parameter>
 
 	<frequency-scale label="Sampling Interval">
-		<min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">20</Frequency></min-frequency>
-		<max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">60000</Frequency></max-frequency>
+		<min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">700</Frequency></min-frequency>
+		<max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">2000</Frequency></max-frequency>
 		<step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
 	</frequency-scale>
 	<Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency>
@@ -57,8 +57,8 @@
 		<step-samples>1</step-samples>
 	</sampling-scale>
 
-	<ChannelInfo name="boylemariotte$rec.exp.boylemariotte.hardwareinfo.channel.1.name" independent="false" direction="CHANNEL_INPUT">
-		<scale label="boylemariotte$rec.exp.boylemariotte.hardwareinfo.channel.1.label" physicsunitname="boylemariotte$rec.exp.boylemariotte.hardwareinfo.channel.1.physicsunitname" physicsunitsymbol="uL" multiplier="none" selected="true">
+	<ChannelInfo name="boylemariotte$rec.exp.boylemariotte.hardwareinfo.channel.0.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="boylemariotte$rec.exp.boylemariotte.hardwareinfo.channel.0.label" physicsunitname="boylemariotte$rec.exp.boylemariotte.hardwareinfo.channel.0.physicsunitname" physicsunitsymbol="uL" multiplier="none" selected="true">
 			<min><PhysicsVal type="int">0</PhysicsVal></min>
 			<max><PhysicsVal type="int">1100</PhysicsVal></max>
 			<step><PhysicsVal type="int">1</PhysicsVal></step>
@@ -66,8 +66,8 @@
 		</scale>
 	</ChannelInfo>
 
-	<ChannelInfo name="boylemariotte$rec.exp.boylemariotte.hardwareinfo.channel.2.name" independent="false" direction="CHANNEL_INPUT">
-		<scale label="boylemariotte$rec.exp.boylemariotte.hardwareinfo.channel.2.label" physicsunitname="boylemariotte$rec.exp.boylemariotte.hardwareinfo.channel.2.physicsunitname" physicsunitsymbol="kPa" multiplier="none" selected="true">
+	<ChannelInfo name="boylemariotte$rec.exp.boylemariotte.hardwareinfo.channel.1.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="boylemariotte$rec.exp.boylemariotte.hardwareinfo.channel.1.label" physicsunitname="boylemariotte$rec.exp.boylemariotte.hardwareinfo.channel.1.physicsunitname" physicsunitsymbol="kPa" multiplier="none" selected="true">
 			<min><PhysicsVal type="int">0</PhysicsVal></min>
 			<max><PhysicsVal type="int">700</PhysicsVal></max>
 			<step><PhysicsVal type="int">1</PhysicsVal></step>
