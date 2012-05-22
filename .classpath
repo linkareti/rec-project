@@ -188,5 +188,7 @@
 	<classpathentry kind="lib" path="rec/lib/java/multicast/glassfish/tiger-types-osgi.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/multicast/glassfish/transaction-internal-api.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/common/jmf.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/common/commons-i18n-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/common/commons-net-0.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
