@@ -88,11 +88,11 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 	// (locking=true && locked=false)
 	// locking (locking=true & locked=true) or allready locked (locking=false &
 	// locked=true)
-	private boolean locking = false;
+	private volatile boolean locking = false;
 
-	private boolean locked = false;
+	private volatile boolean locked = false;
 
-	private boolean startCalled = false;
+	private volatile boolean startCalled = false;
 
 	private MultiCastExperimentStats experimentStats;
 
@@ -109,7 +109,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 
 	private int ChangeOwnerInNextLockCycle = ReCMultiCastHardware.OWNER_CHANGE;
 
-	private boolean shuttingDown = false;
+	private volatile boolean shuttingDown = false;
 
 	// TODO - put the LockCycler in the constructor...
 	private LockCycler currentLocker = null;
@@ -138,12 +138,15 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 
 	private int maximumClients = 1;
 
-	/** Creates a new instance of MultiCastHardwareImpl 
-	 * @param resource 
-	 * @param hardware 
-	 * @param maximumClients 
-	 * @param mainQueue 
-	 * @throws Exception */
+	/**
+	 * Creates a new instance of MultiCastHardwareImpl
+	 * 
+	 * @param resource
+	 * @param hardware
+	 * @param maximumClients
+	 * @param mainQueue
+	 * @throws Exception
+	 */
 	public ReCMultiCastHardware(final DefaultResource resource, final Hardware hardware, final int maximumClients,
 			final ClientQueue mainQueue) throws Exception {
 		this.mainQueue = mainQueue;
@@ -223,8 +226,9 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 					ChangeOwnerInNextLockCycle = ReCMultiCastHardware.OWNER_ONLY_HAD_STOP_LOCK;
 				}
 
+				
 				startCalled = false;
-
+				
 				locking = false;
 				locked = true;
 				cancelTimeoutCycleLockChecker();
@@ -305,7 +309,13 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_OPERATION);
 		}
 
-		startCalled = true;
+		synchronized (this) {
+			if (startCalled) {
+				throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_OPERATION_MSG,
+						NotAuthorizedConstants.NOT_AUTHORIZED_OPERATION);
+			}
+			startCalled = true;
+		}
 		verifyShuttingDown();
 		verifyOwnership(user);
 		// se nao rebentar na linha anterior podemos dar lock se o estado for ok
@@ -352,7 +362,13 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_OPERATION);
 		}
 
-		startCalled = true;
+		synchronized (this) {
+			if (startCalled) {
+				throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_OPERATION_MSG,
+						NotAuthorizedConstants.NOT_AUTHORIZED_OPERATION);
+			}
+			startCalled = true;
+		}
 		verifyShuttingDown();
 		verifyOwnership(user);
 		// se nao rebentar na linha anteriro podemos dar lock se o estado for ok
@@ -999,33 +1015,18 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 		/*** BIG SILENT NOOPS ***/
 
 		@Override
-		public void hardwareChange() {/* Nope - hardwares won't call this method */
+		public void hardwareChange() {
+			// NOOP - Hardwares won't call this method
 		}
 
 		@Override
-		public void hardwareLockable(final long millisecs_to_lock_success) {/*
-																			 * Nope
-																			 * -
-																			 * hardwares
-																			 * won
-																			 * 't
-																			 * call
-																			 * this
-																			 * method
-																			 */
+		public void hardwareLockable(final long millisecs_to_lock_success) {
+			// NOOP - Hardwares won't call this method
 		}
 
 		@Override
-		public void receiveMessage(final String clientFrom, final String clientTo, final String message) {/*
-																										 * Nope
-																										 * -
-																										 * hardwares
-																										 * won
-																										 * 't
-																										 * call
-																										 * this
-																										 * method
-																										 */
+		public void receiveMessage(final String clientFrom, final String clientTo, final String message) {
+			// NOOP - Hardwares won't call this method
 		}
 
 		/*** END BIG SILENT NOOPS ***/
