@@ -39,8 +39,10 @@ import com.linkare.rec.impl.client.chat.IChatMessageListener;
 import com.linkare.rec.impl.client.chat.IChatServer;
 import com.linkare.rec.impl.events.ChatMessageEvent;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import com.linkare.rec.impl.newface.utils.RemoveBadWord;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
+import java.util.Locale;
 
 /**
  * 
@@ -117,7 +119,7 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 	private static final String SECURITY_COMMUNICATOR_MSG_ON_KICK_STR = ReCResourceBundle.findStringOrDefault(
 			"ReCUI$rec.ui.lbl.multicast.security.communicator.msg.on.kick",
 			"Info! You were kicked from the experiment because there is an experiment reservation.");
-
+        static RemoveBadWord removeBadWord = new RemoveBadWord();
 	private static class UserMessage {
 
 		private final String result;
@@ -240,6 +242,8 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 
 		if (msg.length() > 0) {
 			final String userFrom = user;
+                        removeBadWord.getBadWordRegexList(Locale.getDefault().getLanguage());
+                        msg = removeBadWord.filterBadWord(msg);
 			final String escapedMsg = StringEscapeUtils.escapeHtml(msg);
 
 			final Element msgList = getHTMLDocument().getElement(Chat.MESSAGE_LIST);
