@@ -1175,10 +1175,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
     private UndecoratedDialog<ExperimentHeaderInfoBox> experimentInfoBox;
     private static DefaultDialog<UnexpectedErrorPane> unexpectedErrorBox;
     private final GlassLayer glassPane = new GlassLayer(CatchEvents.NONE);
-    private javax.swing.JMenu menuLanguage = new javax.swing.JMenu();
-    private javax.swing.JMenuItem menuItemPortuguese = new javax.swing.JMenuItem();
-    private javax.swing.JPopupMenu.Separator sepLanguage1 = new javax.swing.JPopupMenu.Separator();
-    private javax.swing.JMenuItem menuItemEnglish = new javax.swing.JMenuItem();
 
     public void setUserLocale(String locale) {
         Locale.setDefault(new Locale(locale));
