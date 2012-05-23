@@ -26,7 +26,7 @@ public class SendMailToQueue {
 
     public String sendMail(final String recipients, final HardwareAcquisitionConfig acquisitionConfig, final String dataProducerName) {
 
-	String lookupAddress = System.getProperty("rec.am.endpoint");
+	String lookupAddress = System.getProperty("rec.am.endpoint")+"/MailServiceWS";
 	try {
 	    if (checkMaxNumberRecipients(recipients.split(";")))
 		return ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.SendMailBox").getString("error.number.max.addressee");
