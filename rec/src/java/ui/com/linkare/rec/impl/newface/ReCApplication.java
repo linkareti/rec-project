@@ -144,7 +144,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			}
 		} catch (final UnsatisfiedLinkError e) {
 			ReCApplication.log.severe(e.toString());
-			fireApplicationEvent(new ReCAppEvent(this, ReCCommand.ASK_FOR_VLC));
+			fireApplicationEvent(new ReCAppEvent(this, ReCCommand.CHOOSE_VLC, true));
 		}
 	}
 
@@ -194,6 +194,11 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			ReCApplication.log.info("VLC not installed on the specified directory");
 		}
 	}
+        
+        @Action
+        public void playMediaExternalAction() {
+            playMediaExternal(mediaController.getMediaURL());
+        }
 
 	/**
 	 * Plays the media identified by the given mrl.
@@ -210,12 +215,26 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		}
 
 		if (mediaController != null) {
+		    try {
 			mediaController.setMediaToPlay(mrl);
 			mediaController.play();
+		    } catch (UnsatisfiedLinkError e) {
+			askForVlcAction(true);
+			playMediaExternal(mrl);
+		    }
 		} else {
 			playMediaExternal(mrl);
 		}
 	}
+        
+	public void askForVlcAction(boolean ask) {
+	    fireApplicationEvent(new ReCAppEvent(this, ReCCommand.CHOOSE_VLC, ask));
+	}
+	
+        @Action
+        public void askForVlcAction() {
+            askForVlcAction(false);
+        }
 
 	/**
 	 * Set the media identified by the given mrl.

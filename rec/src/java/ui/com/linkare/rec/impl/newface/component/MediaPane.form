@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.1" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[300, 500]"/>
@@ -25,19 +25,26 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="chatBox" alignment="0" pref="229" max="32767" attributes="1"/>
-          <Component id="jSeparator1" alignment="0" pref="229" max="32767" attributes="0"/>
-          <Component id="videoBox" alignment="0" pref="229" max="32767" attributes="1"/>
+          <Component id="chatBox" alignment="0" pref="233" max="32767" attributes="1"/>
+          <Component id="jSeparator1" alignment="0" pref="233" max="32767" attributes="0"/>
+          <Component id="videoBox" alignment="0" pref="233" max="32767" attributes="1"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="clickHereLabel" pref="209" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="videoBox" min="-2" pref="155" max="-2" attributes="0"/>
+              <Component id="videoBox" min="-2" pref="161" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+              <Component id="clickHereLabel" min="-2" pref="42" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+              <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="chatBox" pref="298" max="32767" attributes="0"/>
+              <Component id="chatBox" pref="252" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -57,6 +64,18 @@
       <Properties>
         <Property name="name" type="java.lang.String" value="jSeparator1" noResource="true"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="clickHereLabel">
+      <Properties>
+        <Property name="font" type="java.awt.Font" resourceKey="clickHereLabel.font"/>
+        <Property name="text" type="java.lang.String" resourceKey="clickHereLabel.text"/>
+        <Property name="name" type="java.lang.String" value="clickHereLabel" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="clickHereLabelMouseEntered"/>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="clickHereLabelMouseExited"/>
+        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="clickHereLabelMouseReleased"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -458,8 +458,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
             case SHOW_EXPERIMENT_HISTORY:
                 showExperimentHistory((ExperimentUIData) evt.getValue());
                 break;
-            case ASK_FOR_VLC:
-                askForVLC();
+            case CHOOSE_VLC:
+                askForVLC((Boolean) evt.getValue());
                 break;
             case REFRESH_VIEW:
                 setUserLocale((String)evt.getValue());
@@ -479,27 +479,34 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         }
     }
 
-    private void askForVLC() {
+    private void askForVLC(boolean ask) {
 
         final String LINE_SEPARATOR = System.getProperty("line.separator");
         final String key = VideoViewerController.VLC_PATH_KEY;
 
         final String vlcPath = PreferencesUtils.readUserPreference(key);
-        if (vlcPath == null) {
+        if (ask) {
+            if (vlcPath == null) {
 
-            final int result = JOptionPane.showConfirmDialog(getFrame(),
-                    "Não foi possível iniciar a reprodução de vídeo. " + LINE_SEPARATOR
-                    + "No entanto, pode visualizar a experiência instalando " + LINE_SEPARATOR
-                    + "o VLC. Deseja especificar a directoria de instalação do VLC?", "",
-                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-
-            if (result == JOptionPane.YES_OPTION) {
-
-                final File executable = getVLCExecutableFile();
-                ReCFrameView.log.info("Selected file was: " + executable.getAbsolutePath());
-                PreferencesUtils.writeUserPreference(key, executable.getAbsolutePath());
+                final int result = JOptionPane.showConfirmDialog(getFrame(),
+                        "Não foi possível iniciar a reprodução de vídeo. " + LINE_SEPARATOR
+                        + "No entanto, pode visualizar a experiência instalando " + LINE_SEPARATOR
+                        + "o VLC. Deseja especificar a directoria de instalação do VLC?", "",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+    
+                if (result == JOptionPane.YES_OPTION) {
+                    defineVlcExecutable(key);
+                }
             }
+        } else {
+            defineVlcExecutable(key);            
         }
+    }
+    
+    private void defineVlcExecutable(String key) {
+	final File executable = getVLCExecutableFile();
+        ReCFrameView.log.info("Selected file was: " + executable.getAbsolutePath());
+        PreferencesUtils.writeUserPreference(key, executable.getAbsolutePath());
     }
 
     private File getVLCExecutableFile() {
@@ -717,6 +724,14 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
             apparatusTabbedPane.setTabIndexEnabled(ApparatusTabbedPane.TAB_RESULTS, false);
         }
     }
+    
+    private void setMediaToPlay(String mrl) {
+	try {
+	    recApplication.setMediaToPlay(mrl);
+	} catch (UnsatisfiedLinkError e) {
+	    askForVLC(true);
+	}
+    }
 
     /*
      * Connection to Apparatus. Adds and shows Costumizer.
@@ -727,7 +742,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         if (recApplication.isApparatusVideoEnabled() && recApplication.getMediaController() != null) {
             ReCFrameView.log.info("Video is enable for the selected apparatus.");
             getVideoBox().initializeVideoOutput();
-            recApplication.setMediaToPlay(recApplication.getCurrentApparatusVideoLocation());
+            setMediaToPlay(recApplication.getCurrentApparatusVideoLocation());
             recApplication.setVideoOutput(getVideoBox().getVideoOutput());
             recApplication.playMedia();
         } else {
@@ -752,6 +767,9 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
         // Goto customizer tab
         getApparatusTabbedPane().setSelectedTabIndex(ApparatusTabbedPane.TAB_CUSTOMIZER);
+	if (recApplication.getCurrentApparatusVideoLocation() != null) {
+	    getLayoutContainerPane().getMediaPane().getClickHereLabel().setVisible(true);
+	}
 
         // Update UserList Pane
         updateUserListPane();
@@ -808,6 +826,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         getApparatusSelectBox().toggleApparatusStateActionData(true);
         getApparatusCombo().setEnabled(true);
         getLayoutContainerPane().disableApparatusTabbedPane();
+        getLayoutContainerPane().getMediaPane().getClickHereLabel().setVisible(false);
         updateStatus(getResourceMap().getString("lblTaskMessage.connectedToLab.text",
                 recApplication.getCurrentLabName()));
     }
