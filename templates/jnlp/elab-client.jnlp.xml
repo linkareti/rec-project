@@ -20,6 +20,7 @@
 	</information>
 	<information locale="en">
 		<title>@elab.title.en@</title>
+		<vendor>@elab.vendor@</vendor>
 		<homepage href="@elab.homepage.en@" />
 		<description>@elab.description.en@</description>
 		<description kind="one-line">@elab.description.oneline.en@
@@ -48,6 +49,7 @@
 		<extension name="JFreeChartClient" href="jfreechart.jnlp" />
 		<extension name="OpenORBClient" href="openorb.jnlp" />
 		<extension name="ReCFramework" href="rec-framework.jnlp" />
+		<extension name="Java3D" href="j3d.jnlp" />
 		<!--<extension name="JHelp" href="jhelp.jnlp"/>-->
 
 		<property name="ReCFaceConfig" value="@codebase@/etc/ReCFaceConfig.xml" />

@@ -36,6 +36,8 @@
 			<delete dir="${experiments.classes.dir}/@{experiment.name}" />
 			<delete file="${build.dir.compile}/@{experiment.name}Client.jar" />
 			<delete file="${build.dir.compile}/@{experiment.name}Client_sig.jar" />
+			<delete file="${build.dir.compile}/@{experiment.name}Client_sig.jar.pack.gz" />
+
 			<!--delete file="${client.build.dir}/@{experiment.name}Client.jar"/>
 			<delete file="${client.build.dir}/@{experiment.name}Client_sig.jar"/>
 			<delete file="${hardwareserver.build.dir}/@{experiment.name}Driver.jar"/>
@@ -221,6 +223,14 @@
 	</target>
 
 
+	<macrodef name="repack200.experiment" description="Packages and compresses the jar for p200 distribution.">
+		<attribute name="experiment.name" />
+
+		<sequential>
+			<repack.jar file="${client.build.dir}/@{experiment.name}Client.jar" />
+		</sequential>
+	</macrodef>
+
 	<macrodef name="sign.experiment">
 		<attribute name="experiment.name" />
 
@@ -229,6 +239,15 @@
 				<fileset dir="${client.build.dir}" includes="@{experiment.name}Client.jar" excludes="*_sig.jar" />
 				<globmapper from="*.jar" to="*_sig.jar" />
 			</signjar>
+			<delete file="${client.build.dir}/@{experiment.name}Client.jar"/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="pack200.experiment" description="Packages and compresses the jar for p200 distribution.">
+		<attribute name="experiment.name" />
+
+		<sequential>
+			<pack.200.jar file="${client.build.dir}/@{experiment.name}Client_sig.jar" />
 		</sequential>
 	</macrodef>
 
@@ -236,7 +255,9 @@
 		<fail unless="experiment.list"> experiments.list must be set to package
 				that list of experiments. define it in build.properties or pass 
 				it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
+		<process.list task="repack200.experiment" list="${experiment.list}" attribute.name="experiment.name" />
 		<process.list task="sign.experiment" list="${experiment.list}" attribute.name="experiment.name" />
+		<process.list task="pack200.experiment" list="${experiment.list}" attribute.name="experiment.name" />
 	</target>
 
 	<macrodef name="run.experiment.client">
@@ -485,19 +506,29 @@
 			<clean.experiment experiment.name="@{experiment.name}" />
 			<compile.experiment.client experiment.name="@{experiment.name}" />
 			<compile.experiment.driver experiment.name="@{experiment.name}" />
+
 			<jar.experiment.client experiment.name="@{experiment.name}" />
-			<jar.experiment.driver experiment.name="@{experiment.name}" />
+			<repack200.experiment experiment.name="@{experiment.name}" />
 			<sign.experiment experiment.name="@{experiment.name}" />
+			<pack200.experiment experiment.name="@{experiment.name}" />
+			<jar.experiment.driver experiment.name="@{experiment.name}" />
+
 			<create.jnlp.for.experiment experiment.name="@{experiment.name}" />
 
 			<copy todir="${client.build.dir}/lib" overwrite="true">
 				<fileset dir="experiments/@{experiment.name}/lib/java/client">
 					<include name="**/*" />
 				</fileset>
+				<fileset dir="experiments/@{experiment.name}/lib/java/common">
+					<include name="**/*" />
+				</fileset>
 			</copy>
 
 			<copy todir="${experiments.build.dir}/@{experiment.name}/lib" overwrite="true">
 				<fileset dir="experiments/@{experiment.name}/lib/java/server">
+					<include name="**/*" />
+				</fileset>
+				<fileset dir="experiments/@{experiment.name}/lib/java/common">
 					<include name="**/*" />
 				</fileset>
 			</copy>
