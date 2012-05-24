@@ -19,4 +19,7 @@ public interface RecServiceRemote {
     
     @WebMethod
     List<BadWordDTO> getBadWordRegexByLocale(String locale) throws RemoteException;
+    
+    @WebMethod
+    List<BadWordDTO> getAllBadWordRegex() throws RemoteException;
 }
