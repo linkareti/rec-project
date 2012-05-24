@@ -125,6 +125,7 @@
 				<replacefilter token="@com.sun.management.jmxremote.port@" property="@{lab.name}.rec.multicastcontroller.jmxremote.port" />
 				<replacefilter token="@java.rmi.server.hostname@" property="java.rmi.server.hostname" />
 				<replacefilter token="@rec.multicast.repository@" property="rec.multicast.repository" />
+                                <replacefilter token="@rec.multicast.badwordmanager.refresh.lap.time.minutes@" property="rec.multicast.badwordmanager.refresh.lap.time.minutes" />
 			</replace>
 
 			<copy file="${templates.dir.scripts}/MultiCastDaemon.sh" overwrite="yes" tofile="${multicast.build.dir}/MultiCastDaemon.sh" />
@@ -150,6 +151,7 @@
 				<replacefilter token="@com.sun.management.jmxremote.port@" property="@{lab.name}.rec.multicastcontroller.jmxremote.port" />
 				<replacefilter token="@java.rmi.server.hostname@" property="java.rmi.server.hostname" />
 				<replacefilter token="@rec.multicast.repository@" property="rec.multicast.repository" />
+                                <replacefilter token="@rec.multicast.badwordmanager.refresh.lap.time.minutes@" property="rec.multicast.badwordmanager.refresh.lap.time.minutes" />
 			</replace>
 
 			<copy file="${templates.dir.logs}/multicast.loggers.config.properties" overwrite="yes" tofile="${multicast.build.dir}/etc/loggers.config.properties" />

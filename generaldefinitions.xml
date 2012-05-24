@@ -497,6 +497,11 @@
 				<replacefilter token="@openorb.description.short@" property="openorb.description.short" />
 			</replace>
 
+			<copy file="${jnlp.j3d.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/j3d.jnlp">
+				<filterset begintoken="@" endtoken="@" filtersfile="build.properties" />
+			</copy>
+			<replace file="${elab.client.classes.dir}/j3d.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}" />
+
 			<copy file="${jnlp.jfreechart.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/jfreechart.jnlp" />
 			<replace file="${elab.client.classes.dir}/jfreechart.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
 			<replace file="${elab.client.classes.dir}/jfreechart.jnlp" propertyFile="build.properties">
@@ -693,6 +698,13 @@
 				<replacefilter token="@openorb.description.short@" property="openorb.description.short" />
 			</replace>
 
+			<copy file="${jnlp.j3d.template.file}" overwrite="yes" tofile="${client.build.dir}/j3d.jnlp">
+				<filterset begintoken="@" endtoken="@" filtersfile="build.properties" />
+			</copy>
+			<replace file="${client.build.dir}/j3d.jnlp" propertyFile="build.properties">
+				<replacefilter token="@codebase@" property="codebase" />
+			</replace>
+
 			<copy file="${jnlp.jfreechart.template.file}" overwrite="yes" tofile="${client.build.dir}/jfreechart.jnlp" />
 			<replace file="${client.build.dir}/jfreechart.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
@@ -856,6 +868,7 @@
 
 	<property name="jnlp.orb.template.file" value="${basedir}/templates/jnlp/openorb.jnlp.xml" />
 	<property name="jnlp.jfreechart.template.file" value="${basedir}/templates/jnlp/jfreechart.jnlp.xml" />
+	<property name="jnlp.j3d.template.file" value="${basedir}/templates/jnlp/j3d.jnlp.xml" />
 
 	<property name="jnlp.linuxinstaller.template.file" value="${basedir}/templates/jnlp/linux-vlc-installer.jnlp.xml" />
 	<property name="jnlp.macinstaller.template.file" value="${basedir}/templates/jnlp/macosx-vlc-installer.jnlp.xml" />

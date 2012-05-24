@@ -33,7 +33,7 @@ public class LoggerUtil {
 				}
 			}
 
-			logger.log(Level.SEVERE, info_message);
+			logger.log(Level.SEVERE, info_message, t);
 		}
 
 		if (t != null && logger != null && logger.isLoggable(Level.FINEST)) {

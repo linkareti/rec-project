@@ -181,6 +181,37 @@ linkare.home.title.en=Linkare TI's Homepage
 linkare.home.description.en=Linkare TI's webSite, the provider of Remote Experienced Control Framework
 linkare.home.icon=images/linkare_icon.jpg
 
+
+#and the next ones for the Java3D framework and the Oracle vendor
+j3d.title=Java 3D Framework
+j3d.vendor=java.net
+j3d.homepage=http://java3d.java.net
+j3d.description=Projecto para componentes 3D em Java
+j3d.description.oneline=Java 3D
+j3d.description.tooltip=Components 3D - Java
+j3d.description.short=Componentes 3D - Java
+j3d.icon=images/j3d_icon.jpg
+j3d.icon.splash=images/j3d_splash.jpg
+j3d.home.url=http://java.net
+j3d.home.title=Página inicial do java.net
+j3d.home.description=Página de entrada do sítio da internet do fornecedor da framework 'Java 3D', java.net
+j3d.home.icon=images/java.net_icon.jpg
+j3d.title.en=Java 3D Framework
+j3d.vendor.en=java.net
+j3d.homepage.en=http://java3d.java.net
+j3d.description.en=Java 3D components development project
+j3d.description.oneline.en=Java 3D
+j3d.description.tooltip.en=3D Components - Java
+j3d.description.short.en=3D Components - Java
+j3d.icon.en=images/j3d_icon.jpg
+j3d.icon.splash.en=images/j3d_splash.jpg
+j3d.home.url.en=http://java.net
+j3d.home.title.en=Homepage java.net
+j3d.home.description.en=Entrance page of the Java 3D Framework supplier, java.net.
+j3d.home.icon.en=images/java.net_icon.jpg
+
+
+
 #The next ones relate to the JFreeChart underlying library
 jfreechart.title=JFreeChart Library
 jfreechart.vendor=JFree.org - David Gilbert (Object Refinery Limited)
@@ -279,4 +310,7 @@ java.rmi.server.hostname=`hostname -i`
 rec.multicast.repository=com.linkare.rec.impl.multicast.repository.impl.RemoteRepository
 
 ##REC.AM END POINT##
-rec.am.endpoint=http://localhost:8080/rec-services/MailServiceWS
+rec.am.endpoint=http://localhost:8080/rec-services
+
+##SYSTEM PROPERTIES - Chat##
+rec.multicast.badwordmanager.refresh.lap.time.minutes=1440

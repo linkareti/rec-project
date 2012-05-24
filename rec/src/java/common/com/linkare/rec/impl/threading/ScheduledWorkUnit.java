@@ -1,6 +1,8 @@
 package com.linkare.rec.impl.threading;
 
 import java.util.concurrent.ScheduledFuture;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public abstract class ScheduledWorkUnit {
 
@@ -22,6 +24,8 @@ public abstract class ScheduledWorkUnit {
 	 *            execution
 	 * @param throwable The exception stack trace
 	 */
-	public abstract void logThrowable(String message, Throwable throwable);
+	public void logThrowable(String message, Throwable throwable) {
+		Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, message, throwable);
+	}
 
 }

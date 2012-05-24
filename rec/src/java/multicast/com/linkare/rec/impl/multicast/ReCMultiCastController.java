@@ -310,14 +310,6 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 			}
 			// }
 		}
-
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public void logThrowable(final String message, final Throwable throwable) {
-			LoggerUtil.logThrowable(message, throwable, Logger.getLogger(ReCMultiCastController.MCCONTROLLER_LOGGER));
-		}
 	}
 
 	/* End Inner Class - Hardware Connection Checker */

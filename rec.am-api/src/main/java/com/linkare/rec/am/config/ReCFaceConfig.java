@@ -318,7 +318,8 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	 */
 	public void setAutoConnectLab(final boolean autoConnectLab) {
 		changeSupport.firePropertyChange("autoConnectLab", this.autoConnectLab,
-				this.autoConnectLab = autoConnectLab);
+				autoConnectLab);
+		this.autoConnectLab = autoConnectLab;
 	}
 
 	/**
@@ -335,9 +336,9 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	 *            the enableVideoFrame to set
 	 */
 	public void setEnableVideoFrame(final boolean enableVideoFrame) {
-		changeSupport
-				.firePropertyChange("enableVideoFrame", this.enableVideoFrame,
-						this.enableVideoFrame = enableVideoFrame);
+		changeSupport.firePropertyChange("enableVideoFrame",
+				this.enableVideoFrame, enableVideoFrame);
+		this.enableVideoFrame = enableVideoFrame;
 	}
 
 	/**
@@ -346,8 +347,8 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	 */
 	public void setEnableLoginPassword(final boolean enableLoginPassword) {
 		changeSupport.firePropertyChange("enableLoginPassword",
-				this.enableLoginPassword,
-				this.enableLoginPassword = enableLoginPassword);
+				this.enableLoginPassword, enableLoginPassword);
+		this.enableLoginPassword = enableLoginPassword;
 	}
 
 	/**
@@ -356,7 +357,8 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	 */
 	public void setShowChatFrame(final boolean showChatFrame) {
 		changeSupport.firePropertyChange("showChatFrame", this.showChatFrame,
-				this.showChatFrame = showChatFrame);
+				showChatFrame);
+		this.showChatFrame = showChatFrame;
 	}
 
 	/**
@@ -365,7 +367,8 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	 */
 	public void setEnableChatFrame(final boolean enableChatFrame) {
 		changeSupport.firePropertyChange("enableChatFrame",
-				this.enableChatFrame, this.enableChatFrame = enableChatFrame);
+				this.enableChatFrame, enableChatFrame);
+		this.enableChatFrame = enableChatFrame;
 	}
 
 	/**
@@ -374,7 +377,8 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	 */
 	public void setShowUserList(final boolean showUserList) {
 		changeSupport.firePropertyChange("showUserList", this.showUserList,
-				this.showUserList = showUserList);
+				showUserList);
+		this.showUserList = showUserList;
 	}
 
 	/**
@@ -383,7 +387,8 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	 */
 	public void setEnableUsersList(final boolean enableUsersList) {
 		changeSupport.firePropertyChange("enableUsersList",
-				this.enableUsersList, this.enableUsersList = enableUsersList);
+				this.enableUsersList, enableUsersList);
+		this.enableUsersList = enableUsersList;
 	}
 
 	/**
@@ -392,8 +397,8 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	 */
 	public void setUsersListRefreshRateMs(final long usersListRefreshRateMs) {
 		changeSupport.firePropertyChange("usersListRefreshRateMs",
-				this.usersListRefreshRateMs,
-				this.usersListRefreshRateMs = usersListRefreshRateMs);
+				this.usersListRefreshRateMs, usersListRefreshRateMs);
+		this.usersListRefreshRateMs = usersListRefreshRateMs;
 	}
 
 	/**
@@ -402,8 +407,8 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	 */
 	public void setEnterApparatusChatRoom(final boolean enterApparatusChatRoom) {
 		changeSupport.firePropertyChange("enterApparatusChatRoom",
-				this.enterApparatusChatRoom,
-				this.enterApparatusChatRoom = enterApparatusChatRoom);
+				this.enterApparatusChatRoom, enterApparatusChatRoom);
+		this.enterApparatusChatRoom = enterApparatusChatRoom;
 	}
 
 	/**
@@ -413,8 +418,8 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	public void setAboutPageLocationBundleKey(
 			final String aboutPageLocationBundleKey) {
 		changeSupport.firePropertyChange("aboutPageLocationBundleKey",
-				this.aboutPageLocationBundleKey,
-				this.aboutPageLocationBundleKey = aboutPageLocationBundleKey);
+				this.aboutPageLocationBundleKey, aboutPageLocationBundleKey);
+		this.aboutPageLocationBundleKey = aboutPageLocationBundleKey;
 	}
 
 	/**
@@ -424,8 +429,8 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	public void setSplashIconLocationBundleKey(
 			final String splashIconLocationBundleKey) {
 		changeSupport.firePropertyChange("splashIconLocationBundleKey",
-				this.splashIconLocationBundleKey,
-				this.splashIconLocationBundleKey = splashIconLocationBundleKey);
+				this.splashIconLocationBundleKey, splashIconLocationBundleKey);
+		this.splashIconLocationBundleKey = splashIconLocationBundleKey;
 	}
 
 	/**
@@ -434,8 +439,8 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	 */
 	public void setIconLocationBundleKey(final String iconLocationBundleKey) {
 		changeSupport.firePropertyChange("iconLocationBundleKey",
-				this.iconLocationBundleKey,
-				this.iconLocationBundleKey = iconLocationBundleKey);
+				this.iconLocationBundleKey, iconLocationBundleKey);
+		this.iconLocationBundleKey = iconLocationBundleKey;
 	}
 
 	/**
@@ -445,8 +450,8 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	public void setDesktopLocationBundleKey(
 			final String desktopLocationBundleKey) {
 		changeSupport.firePropertyChange("desktopLocationBundleKey",
-				this.desktopLocationBundleKey,
-				this.desktopLocationBundleKey = desktopLocationBundleKey);
+				this.desktopLocationBundleKey, desktopLocationBundleKey);
+		this.desktopLocationBundleKey = desktopLocationBundleKey;
 	}
 
 	/**
@@ -455,8 +460,8 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	 */
 	public void setFrameTitleBundleKey(final String frameTitleBundleKey) {
 		changeSupport.firePropertyChange("frameTitleBundleKey",
-				this.frameTitleBundleKey,
-				this.frameTitleBundleKey = frameTitleBundleKey);
+				this.frameTitleBundleKey, frameTitleBundleKey);
+		this.frameTitleBundleKey = frameTitleBundleKey;
 	}
 
 	/**
@@ -466,10 +471,10 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	public void setIconSponsorLocationBundleKey(
 			final String iconSponsorLocationBundleKey) {
 		changeSupport
-				.firePropertyChange(
-						"iconSponsorLocationBundleKey",
+				.firePropertyChange("iconSponsorLocationBundleKey",
 						this.iconSponsorLocationBundleKey,
-						this.iconSponsorLocationBundleKey = iconSponsorLocationBundleKey);
+						iconSponsorLocationBundleKey);
+		this.iconSponsorLocationBundleKey = iconSponsorLocationBundleKey;
 	}
 
 	/**
@@ -479,8 +484,8 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	public void setHelpPageLocationBundleKey(
 			final String helpPageLocationBundleKey) {
 		changeSupport.firePropertyChange("helpPageLocationBundleKey",
-				this.helpPageLocationBundleKey,
-				this.helpPageLocationBundleKey = helpPageLocationBundleKey);
+				this.helpPageLocationBundleKey, helpPageLocationBundleKey);
+		this.helpPageLocationBundleKey = helpPageLocationBundleKey;
 	}
 
 	/**

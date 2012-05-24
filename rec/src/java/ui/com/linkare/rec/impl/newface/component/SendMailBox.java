@@ -101,10 +101,11 @@ public class SendMailBox extends GradientPane {
 
         labelToMail.setFont(labelToMail.getFont().deriveFont(labelToMail.getFont().getStyle() | java.awt.Font.BOLD));
         labelToMail.setForeground(LAFConnector.getColor(SpecialELabProperties.SELECTION_FOREGROUND_ON_DARK));
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(SendMailBox.class);
-        labelToMail.setText(resourceMap.getString("labelToMail.text")); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/linkare/rec/impl/newface/component/resources/SendMailBox"); // NOI18N
+        labelToMail.setText(bundle.getString("labelToMail.text")); // NOI18N
         labelToMail.setName("labelToMail"); // NOI18N
 
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(SendMailBox.class);
         txtToMail.setToolTipText(resourceMap.getString("txtToMail.toolTipText")); // NOI18N
         txtToMail.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(Color.BLACK), javax.swing.BorderFactory.createEmptyBorder(2, 3, 2, 3)));
         txtToMail.setName("txtToMail"); // NOI18N
@@ -112,14 +113,15 @@ public class SendMailBox extends GradientPane {
 
         jLabel1.setFont(resourceMap.getFont("jLabel1.font")); // NOI18N
         jLabel1.setForeground(LAFConnector.getColor(SpecialELabProperties.SELECTION_FOREGROUND_ON_DARK));
-        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
+        jLabel1.setText(bundle.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
 
         btnSend.setText(resourceMap.getString("btnSend.text")); // NOI18N
         btnSend.setToolTipText(resourceMap.getString("btnSend.toolTipText")); // NOI18N
+        btnSend.setLabel(bundle.getString("btnSend.text")); // NOI18N
         btnSend.setName("btnSend"); // NOI18N
 
-        btnCancel.setText(resourceMap.getString("btnCancel.text")); // NOI18N
+        btnCancel.setText(bundle.getString("btnCancel.text")); // NOI18N
         btnCancel.setToolTipText(resourceMap.getString("btnCancel.toolTipText")); // NOI18N
         btnCancel.setName("btnCancel"); // NOI18N
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
