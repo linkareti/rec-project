@@ -32,8 +32,9 @@ public abstract class DataCollector extends Thread implements Serializable {
 	private static final long serialVersionUID = -5606372174593582642L;
 
 	private static String DATA_RECEIVER_LOGGER = "DataReceiver.Logger";
+
+
 	private transient Thread acquisitionThread = null;
-	private boolean acquisitionThreadInited = false;
 	private final Object synchWaitFetchData = new boolean[0];
 	private SamplesPacketMatrix samplesPackets = null;
 	private int largestPacketKnown = MaxPacketNumUnknown.value;
@@ -96,8 +97,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 	// }
 
 	public void initAcquisitionThread() {
-		if (!acquisitionThreadInited) {
-			acquisitionThreadInited = true;
+		if (getState() == Thread.State.NEW) {
 			start();
 		}
 	}
@@ -146,7 +146,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 		} else if (newState.equals(DataCollectorState.DP_ENDED)) {
 			if (!(dataCollectorState.equals(DataCollectorState.DP_WAITING)
 					|| dataCollectorState.equals(DataCollectorState.DP_STARTED_NODATA) || dataCollectorState
-					.equals(DataCollectorState.DP_STARTED))) {
+						.equals(DataCollectorState.DP_STARTED))) {
 				log(Level.INFO, "Trying to set Data Collector State to " + newState
 						+ " while current DataProducer State is " + dataCollectorState
 						+ " - this transition is not possible!");
@@ -157,7 +157,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 		} else if (newState.equals(DataCollectorState.DP_STOPED)) {
 			if (!(dataCollectorState.equals(DataCollectorState.DP_WAITING)
 					|| dataCollectorState.equals(DataCollectorState.DP_STARTED_NODATA) || dataCollectorState
-					.equals(DataCollectorState.DP_STARTED))) {
+						.equals(DataCollectorState.DP_STARTED))) {
 				log(Level.INFO, "Trying to set Data Collector State to " + newState
 						+ " while current DataProducer State is " + dataCollectorState
 						+ " - this transition is not possible!");
@@ -468,13 +468,9 @@ public abstract class DataCollector extends Thread implements Serializable {
 
 	private class DataCollectorFetchPacketCheck extends ScheduledWorkUnit {
 
-		private final int periodChecker = 60; // seconds // TODO must be a
-												// system
+		private final int periodChecker = 60; // seconds
 		// property
-		private final int timeSpend = 5 * 60 * 1000; // milliseconds // TODO
-														// must be a
-
-		// system property
+		private final int timeSpend = 5 * 60 * 1000; // milliseconds
 
 		DataCollectorFetchPacketCheck() {
 			ExecutorScheduler.scheduleAtFixedRate(this, 1, periodChecker, SECONDS);
@@ -490,13 +486,6 @@ public abstract class DataCollector extends Thread implements Serializable {
 			}
 		}
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public void logThrowable(final String message, final Throwable throwable) {
-			logThrowable(message, throwable);
-		}
 	}
 
 }

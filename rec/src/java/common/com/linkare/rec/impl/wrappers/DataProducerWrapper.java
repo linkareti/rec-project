@@ -29,7 +29,7 @@ import com.linkare.rec.impl.logging.LoggerUtil;
  */
 public class DataProducerWrapper implements DataProducerOperations {
 
-	private DataProducer delegate = null;
+	private volatile DataProducer delegate = null;
 	private boolean connected = false;
 
 	private static String DATA_PRODUCER_LOGGER = "DataProducer.Logger";
@@ -41,10 +41,17 @@ public class DataProducerWrapper implements DataProducerOperations {
 		}
 	}
 
-	/** Creates a new instance of DataProducerWrapper 
-	 * @param delegate */
+	/**
+	 * Creates a new instance of DataProducerWrapper
+	 * 
+	 * @param delegate
+	 */
 	public DataProducerWrapper(final DataProducer delegate) {
 		this.delegate = delegate;
+		if (this.delegate == null) {
+			throw new NullPointerException(
+					"Someone is trying to create a DataProducerWrapper for a non-existing delegate... Check by the Stack Trace");
+		}
 		checkConnect();
 	}
 
@@ -58,6 +65,9 @@ public class DataProducerWrapper implements DataProducerOperations {
 			Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER).log(Level.WARNING,
 					"DataProducer  has not been set! Please set it first...");
 			connected = false;
+			// Why check on delegate if delegate is null? BTW, how can it ever
+			// be null?
+			return;
 		}
 		try {
 			if (delegate._non_existent()) {
