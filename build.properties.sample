@@ -310,4 +310,7 @@ java.rmi.server.hostname=`hostname -i`
 rec.multicast.repository=com.linkare.rec.impl.multicast.repository.impl.RemoteRepository
 
 ##REC.AM END POINT##
-rec.am.endpoint=http://localhost:8080/rec-services/MailServiceWS
+rec.am.endpoint=http://localhost:8080/rec-services
+
+##SYSTEM PROPERTIES - Chat##
+rec.multicast.badwordmanager.refresh.lap.time.minutes=1440
