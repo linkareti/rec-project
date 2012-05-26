@@ -1,0 +1,175 @@
+[Header]
+MagicCookie={0b13fe8c-dfe0-40eb-8900-6712719559a7}
+Version=1.0
+[File000]
+Location=D:\eLab\Optica_apresentacao_elab_2\adc.o
+Folder=Intermediary
+DeviceName=dsPIC30F4013
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Programas\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|Library\adc.c|Library\delays.c|Library\rec_generic_driver.c|Library\servo.c|Library\step_motor.c|Library\step_motor2.c|Library\timer.c|Library\uart_stdio.c|optica_exp.c|Library\protocolos.c|Library\maq_de_estados.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall
+TraceCmdString=
+DebugOptions=
+[File001]
+Location=D:\eLab\Optica_apresentacao_elab_2\delays.o
+Folder=Intermediary
+DeviceName=dsPIC30F4013
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Programas\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|Library\adc.c|Library\delays.c|Library\rec_generic_driver.c|Library\servo.c|Library\step_motor.c|Library\step_motor2.c|Library\timer.c|Library\uart_stdio.c|optica_exp.c|Library\protocolos.c|Library\maq_de_estados.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall
+TraceCmdString=
+DebugOptions=
+[File002]
+Location=D:\eLab\Optica_apresentacao_elab_2\rec_generic_driver.o
+Folder=Intermediary
+DeviceName=dsPIC30F4013
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Programas\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|Library\adc.c|Library\delays.c|Library\rec_generic_driver.c|Library\servo.c|Library\step_motor.c|Library\step_motor2.c|Library\timer.c|Library\uart_stdio.c|optica_exp.c|Library\protocolos.c|Library\maq_de_estados.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall
+TraceCmdString=
+DebugOptions=
+[File003]
+Location=D:\eLab\Optica_apresentacao_elab_2\servo.o
+Folder=Intermediary
+DeviceName=dsPIC30F4013
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Programas\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|Library\adc.c|Library\delays.c|Library\rec_generic_driver.c|Library\servo.c|Library\step_motor.c|Library\step_motor2.c|Library\timer.c|Library\uart_stdio.c|optica_exp.c|Library\protocolos.c|Library\maq_de_estados.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall
+TraceCmdString=
+DebugOptions=
+[File004]
+Location=D:\eLab\Optica_apresentacao_elab_2\step_motor.o
+Folder=Intermediary
+DeviceName=dsPIC30F4013
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Programas\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|Library\adc.c|Library\delays.c|Library\rec_generic_driver.c|Library\servo.c|Library\step_motor.c|Library\step_motor2.c|Library\timer.c|Library\uart_stdio.c|optica_exp.c|Library\protocolos.c|Library\maq_de_estados.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall
+TraceCmdString=
+DebugOptions=
+[File005]
+Location=D:\eLab\Optica_apresentacao_elab_2\step_motor2.o
+Folder=Intermediary
+DeviceName=dsPIC30F4013
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Programas\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|Library\adc.c|Library\delays.c|Library\rec_generic_driver.c|Library\servo.c|Library\step_motor.c|Library\step_motor2.c|Library\timer.c|Library\uart_stdio.c|optica_exp.c|Library\protocolos.c|Library\maq_de_estados.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall
+TraceCmdString=
+DebugOptions=
+[File006]
+Location=D:\eLab\Optica_apresentacao_elab_2\timer.o
+Folder=Intermediary
+DeviceName=dsPIC30F4013
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Programas\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|Library\adc.c|Library\delays.c|Library\rec_generic_driver.c|Library\servo.c|Library\step_motor.c|Library\step_motor2.c|Library\timer.c|Library\uart_stdio.c|optica_exp.c|Library\protocolos.c|Library\maq_de_estados.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall
+TraceCmdString=
+DebugOptions=
+[File007]
+Location=D:\eLab\Optica_apresentacao_elab_2\uart_stdio.o
+Folder=Intermediary
+DeviceName=dsPIC30F4013
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Programas\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|Library\adc.c|Library\delays.c|Library\rec_generic_driver.c|Library\servo.c|Library\step_motor.c|Library\step_motor2.c|Library\timer.c|Library\uart_stdio.c|optica_exp.c|Library\protocolos.c|Library\maq_de_estados.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall
+TraceCmdString=
+DebugOptions=
+[File008]
+Location=D:\eLab\Optica_apresentacao_elab_2\optica_exp.o
+Folder=Intermediary
+DeviceName=dsPIC30F4013
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Programas\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|Library\adc.c|Library\delays.c|Library\rec_generic_driver.c|Library\servo.c|Library\step_motor.c|Library\step_motor2.c|Library\timer.c|Library\uart_stdio.c|optica_exp.c|Library\protocolos.c|Library\maq_de_estados.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall
+TraceCmdString=
+DebugOptions=
+[File009]
+Location=D:\eLab\Optica_apresentacao_elab_2\protocolos.o
+Folder=Intermediary
+DeviceName=dsPIC30F4013
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Programas\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|Library\adc.c|Library\delays.c|Library\rec_generic_driver.c|Library\servo.c|Library\step_motor.c|Library\step_motor2.c|Library\timer.c|Library\uart_stdio.c|optica_exp.c|Library\protocolos.c|Library\maq_de_estados.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall
+TraceCmdString=
+DebugOptions=
+[File010]
+Location=D:\eLab\Optica_apresentacao_elab_2\maq_de_estados.o
+Folder=Intermediary
+DeviceName=dsPIC30F4013
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Programas\Microchip\MPLAB C30\bin\pic30-gcc.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|Library\adc.c|Library\delays.c|Library\rec_generic_driver.c|Library\servo.c|Library\step_motor.c|Library\step_motor2.c|Library\timer.c|Library\uart_stdio.c|optica_exp.c|Library\protocolos.c|Library\maq_de_estados.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall
+TraceCmdString=
+DebugOptions=
+[File011]
+Location=D:\eLab\Optica_apresentacao_elab_2\optica.cof
+Folder=Output
+DeviceName=dsPIC30F4013
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={433C3D55-811D-409D-A6BF-159CF9355B42}
+LanguageToolLocation=C:\Programas\Microchip\MPLAB C30\bin\pic30-ld.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|Library\adc.c|Library\delays.c|Library\rec_generic_driver.c|Library\servo.c|Library\step_motor.c|Library\step_motor2.c|Library\timer.c|Library\uart_stdio.c|optica_exp.c|Library\protocolos.c|Library\maq_de_estados.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=--heap=128 -Map="$(BINDIR_)$(TARGETBASE).map" --report-mem -o"$(BINDIR_)$(TARGETBASE).$(TARGETSUFFIX)"
+TraceCmdString=
+DebugOptions=
+[File012]
+Location=D:\eLab\Optica_apresentacao_elab_2\optica.hex
+Folder=Output
+DeviceName=dsPIC30F4013
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={433C3D55-811D-409D-A6BF-159CF9355B42}
+LanguageToolLocation=C:\Programas\Microchip\MPLAB C30\bin\pic30-ld.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib||$(LKRDIR)||
+SOLK=<src>|Library\adc.c|Library\delays.c|Library\rec_generic_driver.c|Library\servo.c|Library\step_motor.c|Library\step_motor2.c|Library\timer.c|Library\uart_stdio.c|optica_exp.c|Library\protocolos.c|Library\maq_de_estados.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=--heap=128 -Map="$(BINDIR_)$(TARGETBASE).map" --report-mem -o"$(BINDIR_)$(TARGETBASE).$(TARGETSUFFIX)"
+TraceCmdString=
+DebugOptions=
+[TOOL_LOC_STAMPS]
+tool_loc{069BD372-6CA0-40D4-BF2F-5DC806D05083}=C:\Programas\Microchip\MPLAB C30\bin\pic30-gcc.exe
+tool_loc{433C3D55-811D-409D-A6BF-159CF9355B42}=C:\Programas\Microchip\MPLAB C30\bin\pic30-ld.exe
