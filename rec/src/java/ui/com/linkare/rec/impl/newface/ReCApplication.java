@@ -108,7 +108,7 @@ import com.linkare.rec.impl.newface.display.DefaultDisplayFactory;
 import com.linkare.rec.impl.newface.display.DisplayFactory;
 import com.linkare.rec.impl.newface.utils.OS;
 import com.linkare.rec.impl.newface.utils.PreferencesUtils;
-import com.linkare.rec.impl.protocols.ReCProtocols;
+import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.impl.utils.ORBBean;
 
 /**
@@ -596,7 +596,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 				ReCApplication.log
 						.fine("Unmarshalling ReCFaceConfig from input stream location = " + configLocationUrl);
 			}
-			final InputStream is = ReCProtocols.getURL(configLocationUrl).openConnection().getInputStream();
+			final InputStream is = Protocols.getURL(configLocationUrl).openConnection().getInputStream();
 			recFaceConfig = ReCFaceConfig.unmarshall(is);
 			ReCApplication.log.info("ReCFaceConfig is unmarshalled.");
 

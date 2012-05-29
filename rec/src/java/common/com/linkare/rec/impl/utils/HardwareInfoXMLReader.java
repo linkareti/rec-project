@@ -46,7 +46,7 @@ import com.linkare.rec.data.metadata.SamplesNumScale;
 import com.linkare.rec.data.metadata.Scale;
 import com.linkare.rec.data.synch.Frequency;
 import com.linkare.rec.data.synch.FrequencyDefType;
-import com.linkare.rec.impl.protocols.ReCProtocols;
+import com.linkare.net.protocols.Protocols;
 
 public class HardwareInfoXMLReader {
 
@@ -395,7 +395,7 @@ public class HardwareInfoXMLReader {
 					if (attrurl != null) {
 						try {
 							final String url = attrurl.getValue();
-							final ByteArrayValBuffer buffer = new ByteArrayValBuffer(ReCProtocols.getURL(url));
+							final ByteArrayValBuffer buffer = new ByteArrayValBuffer(Protocols.getURL(url));
 							if (mime != null && mime.length() > 0) {
 								buffer.setMimeType(mime);
 							}
@@ -417,11 +417,11 @@ public class HardwareInfoXMLReader {
 
 							if (mime != null) {
 								final ByteArrayValBuffer buffer = new ByteArrayValBuffer(mime,
-										ReCProtocols.getURL(file));
+										Protocols.getURL(file));
 								value.setByteArrayValue(buffer.getByteArrayValue());
 								return value;
 							} else {
-								final ByteArrayValBuffer buffer = new ByteArrayValBuffer(ReCProtocols.getURL(file));
+								final ByteArrayValBuffer buffer = new ByteArrayValBuffer(Protocols.getURL(file));
 								value.setByteArrayValue(buffer.getByteArrayValue());
 								return value;
 							}

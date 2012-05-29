@@ -48,7 +48,7 @@ import com.linkare.rec.impl.driver.BaseDriver;
 import com.linkare.rec.impl.driver.BaseHardware;
 import com.linkare.rec.impl.driver.IDataSource;
 import com.linkare.rec.impl.logging.LoggerUtil;
-import com.linkare.rec.impl.protocols.ReCProtocols;
+import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.impl.threading.AbstractConditionDecisor;
 import com.linkare.rec.impl.threading.TimedOutException;
 import com.linkare.rec.impl.threading.WaitForConditionResult;
@@ -231,7 +231,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 		java.net.URL url = null;
 		try {
-			url = ReCProtocols.getURL(prop);
+			url = Protocols.getURL(prop);
 		} catch (final java.net.MalformedURLException e) {
 			LoggerUtil.logThrowable("Unable to load resource: " + prop, e,
 					Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER));
