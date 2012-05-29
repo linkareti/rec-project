@@ -454,6 +454,7 @@
 				<replacefilter token="@elab.description.oneline.en@" property="@{experiment.name}.description.oneline.en" />
 				<replacefilter token="@elab.description.tooltip.en@" property="@{experiment.name}.description.tooltip.en" />
 				<replacefilter token="@elab.description.short.en@" property="@{experiment.name}.description.short.en" />
+                                <replacefilter token="@rec.apparatus.autoconnect.id@" property="@{experiment.name}.apparatus.autoconnect.id" />
 
 				<replacefilter token="@j2se-version@" property="@{experiment.name}.j2se-version" />
 				<replacefilter token="@client.main-class@" property="@{experiment.name}.client.main-class" />
@@ -480,6 +481,7 @@
 				<replacefilter token="@video.enabled@" property="video.enabled" />
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
 				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
+                                <replacefilter token="@rec.am.endpoint@" property="rec.am.endpoint" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.coresize@" property="rec.client.processingmanager.threadpool.coresize" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
@@ -492,10 +494,10 @@
 
 			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!--End Experiment Jars--&gt;">
 				<replacevalue>
-					<![CDATA[<jar href="client/@temporary.experiment.jar@" main="true"/>
+					<![CDATA[<jar href="@temporary.experiment.jar@" main="true"/>
 					<!--End Experiment Jars-->]]></replacevalue>
 			</replace>
-			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="@temporary.experiment.jar@" value="client/@{experiment.name}Client_sig.jar" />
+			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
 
 		</sequential>
 	</macrodef>

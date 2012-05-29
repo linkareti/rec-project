@@ -19,6 +19,7 @@ export PROCESSINGMANAGER_SYSPROPS="-DReC.ProcessingManager.ThreadPool.Coresize=@
 #export JMX_SYSPROPS="-Djava.rmi.server.hostname=@java.rmi.server.hostname@ -Dcom.sun.management.jmxremote.authenticate=true -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port=@com.sun.management.jmxremote.port@ -Dcom.sun.management.jmxremote.access.file=$MULTICAST_BASE_DIR/etc/jmxremote.access -Dcom.sun.management.jmxremote.password.file=$MULTICAST_BASE_DIR/etc/jmxremote.password"
 #export REPOSITORY_SYSPROPS="-DReC.MultiCast.Repository=@rec.multicast.repository@"
 export SYSPROP_BADWORD_REFRESH_TIME_LAP_MINUTES=-DReC.MultiCast.BadWordManager.Refresh.Lap.Time.Minutes=@rec.multicast.badwordmanager.refresh.lap.time.minutes@
+export SYSPROP_APPARATUS_AUTOCONNECT_ID=-DReC.Apparatus.AutoConnectID=@rec.apparatus.autoconnect.id@
 
 export RECCLASSPATH=$MULTICAST_BASE_DIR/lib/xml-apis.jar:$MULTICAST_BASE_DIR/lib/tools-1.4.0.jar:$MULTICAST_BASE_DIR/lib/openorb_orb-1.4.0.jar:$MULTICAST_BASE_DIR/lib/openorb_pss-1.4.0.jar:$MULTICAST_BASE_DIR/lib/openorb_ots-1.4.0.jar:$MULTICAST_BASE_DIR/lib/logkit.jar:$MULTICAST_BASE_DIR/lib/xercesImpl.jar:$MULTICAST_BASE_DIR/lib/avalon-framework.jar
 export MULTICAST_CLASSPATH=$MULTICAST_BASE_DIR/ReCMulticastController.jar:$MULTICAST_BASE_DIR/ELabMulticastController.jar:$MULTICAST_BASE_DIR/ReCCommon.jar:$MULTICAST_BASE_DIR/lib/rec.am-api-0.0.1-SNAPSHOT.jar:$MULTICAST_BASE_DIR/lib/commons-0.0.1.jar:$MULTICAST_BASE_DIR/lib/glassfish/ejb-container.jar:$MULTICAST_BASE_DIR/lib/glassfish/appclient.security.jar
@@ -34,7 +35,7 @@ echo ClassPath        : $RECCLASSPATH;$MULTICAST_CLASSPATH
 echo --------------------------------------------------------------------------------
 echo System Properties: $GENERIC_ORB_SYSPROPS $MULTICAST_ORB_SYSPROPS $LOG_SYSPROPS $MEM_SYSPROPS 
 
-java $BOOTCLASSPATH -classpath $RECCLASSPATH:$MULTICAST_CLASSPATH $GENERIC_ORB_SYSPROPS $SECURITYMANAGER_SYSPROPS $SECURITYMANAGER_TIMES_SYSPROPS $ALLOCATIONMANAGER_SYSPROPS $PROCESSINGMANAGER_SYSPROPS $JMX_SYSPROPS $REPOSITORY_SYSPROPS $MULTICAST_ORB_SYSPROPS $LOG_SYSPROPS $MEM_SYSPROPS $TOOLKIT_SYSPROPS $SYSPROP_BADWORD_REFRESH_TIME_LAP_MINUTES $DEBUG com.linkare.rec.impl.multicast.startup.MultiCastControllerMain &
+java $BOOTCLASSPATH -classpath $RECCLASSPATH:$MULTICAST_CLASSPATH $GENERIC_ORB_SYSPROPS $SECURITYMANAGER_SYSPROPS $SECURITYMANAGER_TIMES_SYSPROPS $ALLOCATIONMANAGER_SYSPROPS $PROCESSINGMANAGER_SYSPROPS $JMX_SYSPROPS $REPOSITORY_SYSPROPS $MULTICAST_ORB_SYSPROPS $LOG_SYSPROPS $MEM_SYSPROPS $TOOLKIT_SYSPROPS $SYSPROP_BADWORD_REFRESH_TIME_LAP_MINUTES $SYSPROP_APPARATUS_AUTOCONNECT_ID $DEBUG com.linkare.rec.impl.multicast.startup.MultiCastControllerMain &
 
 PID=$!
 echo $PID > multicast_@lab.name@.pid

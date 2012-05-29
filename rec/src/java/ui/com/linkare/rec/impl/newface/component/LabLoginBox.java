@@ -37,6 +37,9 @@ public class LabLoginBox extends GradientPane {
         initComponents();
         txtUsername.setText(System.getProperty("user.name"));
         checkBoxComputerType.setSelected(!Preferences.userRoot().getBoolean("ElabPrivateComputer", true));
+        if (recApplication.isAutoConnectLab()) {
+            labCombo.setEnabled(false);
+        }
     }
 
     public void setLoginProgressVisible(final boolean visible) {
@@ -225,13 +228,12 @@ public class LabLoginBox extends GradientPane {
 
         recApplication.setUserInfo(getUsername(), getPassword());
 
-        // set lab with selected from lab combo
-        final Lab lab = (Lab) labCombo.getSelectedItem();
-        recApplication.setCurrentLab(lab);
-
-        // Connect
-        recApplication.connect();
-
+        // set lab with selected from lab combo if autoconnect is false
+        if (!recApplication.isAutoConnectLab()){
+            Lab lab = (Lab) labCombo.getSelectedItem();
+            recApplication.setCurrentLab(lab);
+        }
+            
         //set the user preference
         Preferences.userRoot().putBoolean("ElabPrivateComputer", !checkBoxComputerType.isSelected());
 
@@ -241,6 +243,9 @@ public class LabLoginBox extends GradientPane {
             locale = "en";
         }
         recApplication.refreshView(locale);
+        
+        // Connect
+        recApplication.connect();
     }
 
     public String getUsername() {

@@ -51,6 +51,8 @@ public final class BadWordManager {
     public String filterBadWord(String message) {
         Pattern pat;
         Matcher matcher = null;
+        if(badWordDTO == null)
+            return message;
         for (BadWordDTO badword : badWordDTO) {
             pat = Pattern.compile("\\b" + badword.getRegex() + "\\b", Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
             matcher = pat.matcher(message);

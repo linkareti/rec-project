@@ -67,10 +67,13 @@
 		<property name="video.enabled" value="@video.enabled@" />
 		<property name="vlc.plugins.filename" value="@vlc.plugins.filename@" />
                
-               <!--        Rec.Am Service          -->
-               
+               <!-- Rec.Am Service -->
                <property name="rec.am.endpoint" value="@rec.am.endpoint@" />
-		<!-- Processing manager thread pool -->
+               
+               <!-- Auto Connect ID -->
+               <property name="rec.apparatus.autoconnect.id" value="@rec.apparatus.autoconnect.id@" />
+		
+                <!-- Processing manager thread pool -->
 		<property name="ReC.ProcessingManager.ThreadPool.Coresize" value="@rec.client.processingmanager.threadpool.coresize@"/>
 		<property name="ReC.ProcessingManager.ThreadPool.Maxsize" value="@rec.client.processingmanager.threadpool.maxsize@"/>
 		<property name="ReC.ProcessingManager.Thread.Idletime" value="@rec.processingmanager.thread.idletime@"/>
