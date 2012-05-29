@@ -10,7 +10,7 @@ import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.driver.BaseDriver;
 import com.linkare.rec.impl.driver.IDataSource;
 import com.linkare.rec.impl.logging.LoggerUtil;
-import com.linkare.rec.impl.protocols.ReCProtocols;
+import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.impl.threading.TimedOutException;
 import com.linkare.rec.impl.utils.Defaults;
 
@@ -56,7 +56,7 @@ public class RollPaperDriver extends BaseDriver {
 
 	java.net.URL url = null;
 	try {
-	    url = ReCProtocols.getURL(prop);
+	    url = Protocols.getURL(prop);
 	} catch (final java.net.MalformedURLException e) {
 	    LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger(ROLLPAPER_DRIVER_LOGGER));
 	    try {

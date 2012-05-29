@@ -23,7 +23,7 @@ import com.linkare.rec.data.synch.DateTime;
 import com.linkare.rec.impl.driver.BaseDriver;
 import com.linkare.rec.impl.driver.IDataSource;
 import com.linkare.rec.impl.logging.LoggerUtil;
-import com.linkare.rec.impl.protocols.ReCProtocols;
+import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.impl.utils.Defaults;
 
 /**
@@ -101,7 +101,7 @@ public class AleatorioDriver extends BaseDriver {
 	 */
 	@Override
 	public Object getHardwareInfo() {
-		// com.linkare.rec.impl.protocols.ReCProtocols.init();
+		// com.linkare.net.protocols.Protocols.init();
 
 		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
 				+ "/HardwareInfo.xml";
@@ -113,7 +113,7 @@ public class AleatorioDriver extends BaseDriver {
 
 		java.net.URL url = null;
 		try {
-			url = ReCProtocols.getURL(prop);
+			url = Protocols.getURL(prop);
 			fireIDriverStateListenerDriverReseted();// why is this here and not
 			// in GDriver?
 		} catch (final java.net.MalformedURLException e) {

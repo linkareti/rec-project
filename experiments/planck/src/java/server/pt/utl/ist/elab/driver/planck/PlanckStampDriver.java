@@ -24,7 +24,7 @@ import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.DateTime;
 import com.linkare.rec.impl.logging.LoggerUtil;
-import com.linkare.rec.impl.protocols.ReCProtocols;
+import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.impl.threading.AbstractConditionDecisor;
 import com.linkare.rec.impl.threading.TimedOutException;
 import com.linkare.rec.impl.threading.WaitForConditionResult;
@@ -112,7 +112,7 @@ public class PlanckStampDriver extends AbstractStampDriver {
 
 		java.net.URL url = null;
 		try {
-			url = ReCProtocols.getURL(prop);
+			url = Protocols.getURL(prop);
 		} catch (final java.net.MalformedURLException e) {
 			LoggerUtil.logThrowable("Unable to load resource: " + prop, e,
 					Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER));

@@ -18,7 +18,7 @@ import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.driver.IDataSource;
 import com.linkare.rec.impl.logging.LoggerUtil;
-import com.linkare.rec.impl.protocols.ReCProtocols;
+import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.impl.utils.Defaults;
 
 /**
@@ -166,7 +166,7 @@ public class STDMAPDriver extends VirtualBaseDriver {
 
 		java.net.URL url = null;
 		try {
-			url = ReCProtocols.getURL(prop);
+			url = Protocols.getURL(prop);
 		} catch (final java.net.MalformedURLException e) {
 			LoggerUtil.logThrowable("Unable to load resource: " + prop, e,
 					Logger.getLogger(STDMAPDriver.STDMAP_DRIVER_LOGGER));
