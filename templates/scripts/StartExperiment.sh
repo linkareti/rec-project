@@ -10,7 +10,7 @@ MAX_HEAP_MEM=@hardwareserver.max.heap@
 BASE_USER=elab
 BASE_USER_HOMEDIR=~elab
 EXPERIMENT_NAME=@experiment.name@
-DEPLOY_DIR="$BASE_USER_HOMEDIR/rec-deployment/$EXPERIMENT_NAME"
+DEPLOY_DIR=`pwd`
 DRIVER_BASE_DIR="$DEPLOY_DIR/hardwareserver"
 
 export GENERIC_ORB_SYSPROPS="-Dorg.omg.CORBA.ORBClass=org.openorb.orb.core.ORB -Dorg.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton -Dopenorb.config=$DRIVER_BASE_DIR/etc/openorb.xml "

@@ -154,7 +154,7 @@
 	<target name="build.elab.client" depends="clean.elab.common,clean.elab.client,compile.elab.common,compile.elab.client,jar.elab.common,jar.elab.client,repack.jar.elab.common,repack.jar.elab.client,sign.elab.common,sign.elab.client,pack.jar.elab.common,pack.jar.elab.client">
 		<create.jnlp.full.client.compile />
 		<create.jnlp.full.client.build />
-                <copy file="${common.build.dir}/ElabCommon_sig.jar" todir="${client.build.dir}" />
+                <copy file="${common.build.dir}/ELabCommon_sig.jar" todir="${client.build.dir}" />
 		
 		<copy file="${elab.client.classes.dir}/ReCFaceConfig.xml" tofile="${client.build.dir}/etc/ReCFaceConfig.xml">
 		</copy>

@@ -48,7 +48,9 @@
 		<jar href="lib/swing-worker-1.1_sig.jar" />
 		<jar href="lib/swingx_sig.jar" />
 		<jar href="lib/commons-lang-2.4_sig.jar" />
+		<jar href="lib/commons-codec-1.6_sig.jar" />
 		<jar href="lib/joda-time-1.6_sig.jar" />
+		<jar href="lib/jlatexmath-0.9.7_sig.jar" />
 
 		<jar href="lib/JCFN_sig.jar" />
 		<jar href="lib/jmf_sig.jar" />
