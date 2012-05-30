@@ -34,7 +34,7 @@
 
 			<p:dialog header="#{bundle['label.event.header']}"
 				widgetVar="eventDialog" modal="true" fixedCenter="true"
-				draggable="true" width="600px" height="400px" resizable="true"
+				draggable="true" width="600" height="400" resizable="true"
 				underlay="shadow">
 
 				<p:panel id="display">
@@ -44,7 +44,7 @@
 					<p><h:outputText value="#{bundle['group.childUsers']}" /></p>
 					<p:dataTable id="users" var="user"
 						value="#{reservationController.currentDetails.group.allUsers}"
-						paginator="false" scrollable="true" height="150px" width="300px">
+						paginator="false" scrollable="true" height="150" width="300">
 						<p:column>
 							<f:facet name="header" />
 							<h:outputText value="#{user.username}" />
