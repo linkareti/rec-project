@@ -37,7 +37,7 @@ public class EventQueue {
 	private final EventQueueDispatcher dispatcher;
 	// private final List<Prioritazible> levts;
 	private EnumMap<EnumPriority, List<Prioritazible>> levts;
-	private volatile boolean stopdispatching = false;
+	private volatile boolean stoppedDispatching = false;
 
 	private int countEvts = 0;
 
@@ -67,7 +67,7 @@ public class EventQueue {
 		for (EnumPriority priority : EnumPriority.values()) {
 			levts.put(priority, new LinkedList<Prioritazible>());
 		}
-		stopdispatching = false;
+		stoppedDispatching = false;
 		task = null;
 		mainLock = new ReentrantReadWriteLock();
 		eventQueueRunnable = new EventQueueRunnableImpl();
@@ -88,9 +88,18 @@ public class EventQueue {
 
 	public void addEvent(final Prioritazible evt) {
 		log(Level.FINEST, "EventQueue add event " + evt);
+
+		if (stoppedDispatching) {
+			return;
+		}
+
 		final Lock writeLock = mainLock.writeLock();
 		writeLock.lock();
 		try {
+			if (stoppedDispatching) {
+				return;
+			}
+
 			countEvts++;
 			levts.get(evt.getPriority()).add(evt);
 
@@ -138,13 +147,16 @@ public class EventQueue {
 	public void shutdown() {
 		log(Level.FINE, "EventQueue received shutdown. Queue size = " + levts.size());
 
-		stopdispatching = true;
 		final Lock writeLock = mainLock.writeLock();
 		writeLock.lock();
 		try {
+			stoppedDispatching = true;
+
 			cancelTask();
 			task = null;
-			levts.clear();
+			for (EnumPriority priority : levts.keySet()) {
+				levts.get(priority).clear();
+			}
 			countEvts = 0;
 		} finally {
 			writeLock.unlock();
@@ -153,7 +165,7 @@ public class EventQueue {
 	}
 
 	public boolean isStopdispatching() {
-		return stopdispatching;
+		return stoppedDispatching;
 	}
 
 	public void log(final Level debugLevel, final String message) {

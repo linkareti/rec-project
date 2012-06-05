@@ -83,9 +83,7 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 	}
 
 	public void newPoisonSamples(final int largestPacketNum) {
-		if (!messageQueue.isStopdispatching()) {
 			messageQueue.addEvent(new NewPoisonSamplesEvent(largestPacketNum));
-		}
 	}
 
 	// Helper function for chat messages...
