@@ -41,10 +41,15 @@ import org.omg.PortableServer.ThreadPolicyValue;
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
- * @version
+ * 
  */
 @SuppressWarnings("unchecked")
 public class ORBBean {
+	/**
+	 * 
+	 */
+	private static final Logger LOGGER = Logger.getLogger(ORBBean.class.getName());
+
 	public static ORBBean getORBBean() {
 		if (ORBBean.this_object == null) {
 			ORBBean.this_object = new ORBBean();
@@ -99,12 +104,10 @@ public class ORBBean {
 			try {
 				synchronized (runner) {
 					runner.start();
-					// runner.wait();
-					// getNameService();
 					runner.wait(1000);
 				}
 			} catch (final Exception e) {
-
+				LOGGER.log(Level.SEVERE, "Couldn't start the ORB!", e);
 			}
 		}
 
@@ -124,7 +127,11 @@ public class ORBBean {
 			synchronized (this) {
 				notifyAll();
 			}
-			the_orb.run();
+			try {
+				the_orb.run();
+			} catch (Exception e) {
+				LOGGER.log(Level.SEVERE, "Error running the ORB: "+e.getMessage(), e);
+			}
 		}
 	}
 
@@ -152,7 +159,7 @@ public class ORBBean {
 					opm.set_policy_overrides(new Policy[] { bidirpol }, SetOverrideType.ADD_OVERRIDE);
 
 				} catch (final Exception e) {
-					logThrowable(Level.SEVERE, e.getMessage(), e);
+					LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				}
 			}
 
@@ -169,30 +176,17 @@ public class ORBBean {
 
 					rootPOA.the_POAManager().activate();
 
-					final Policy currentBidirPolicy = getBidirPolicy();
-
 					Policy[] poa_policies = null;
 
-					if (currentBidirPolicy == null) {
-						poa_policies = new Policy[] {
-								rootPOA.create_id_assignment_policy(IdAssignmentPolicyValue.USER_ID),
-								rootPOA.create_id_uniqueness_policy(IdUniquenessPolicyValue.UNIQUE_ID),
-								rootPOA.create_implicit_activation_policy(ImplicitActivationPolicyValue.NO_IMPLICIT_ACTIVATION),
-								rootPOA.create_lifespan_policy(LifespanPolicyValue.PERSISTENT),
-								rootPOA.create_request_processing_policy(RequestProcessingPolicyValue.USE_SERVANT_MANAGER),
-								rootPOA.create_servant_retention_policy(ServantRetentionPolicyValue.RETAIN),
-								rootPOA.create_thread_policy(ThreadPolicyValue.ORB_CTRL_MODEL), };
-					} else {
-						poa_policies = new Policy[] {
-								currentBidirPolicy,
-								rootPOA.create_id_assignment_policy(IdAssignmentPolicyValue.USER_ID),
-								rootPOA.create_id_uniqueness_policy(IdUniquenessPolicyValue.UNIQUE_ID),
-								rootPOA.create_implicit_activation_policy(ImplicitActivationPolicyValue.NO_IMPLICIT_ACTIVATION),
-								rootPOA.create_lifespan_policy(LifespanPolicyValue.PERSISTENT),
-								rootPOA.create_request_processing_policy(RequestProcessingPolicyValue.USE_SERVANT_MANAGER),
-								rootPOA.create_servant_retention_policy(ServantRetentionPolicyValue.RETAIN),
-								rootPOA.create_thread_policy(ThreadPolicyValue.ORB_CTRL_MODEL) };
-					}
+					poa_policies = new Policy[] {
+							getBidirPolicy(),
+							rootPOA.create_id_assignment_policy(IdAssignmentPolicyValue.USER_ID),
+							rootPOA.create_id_uniqueness_policy(IdUniquenessPolicyValue.UNIQUE_ID),
+							rootPOA.create_implicit_activation_policy(ImplicitActivationPolicyValue.NO_IMPLICIT_ACTIVATION),
+							rootPOA.create_lifespan_policy(LifespanPolicyValue.PERSISTENT),
+							rootPOA.create_request_processing_policy(RequestProcessingPolicyValue.USE_SERVANT_MANAGER),
+							rootPOA.create_servant_retention_policy(ServantRetentionPolicyValue.RETAIN),
+							rootPOA.create_thread_policy(ThreadPolicyValue.ORB_CTRL_MODEL) };
 
 					dataProducerPOA = rootPOA.create_POA("DataProducerPOA", null, poa_policies);
 
@@ -218,29 +212,17 @@ public class ORBBean {
 					final POA rootPOA = POAHelper.narrow(the_orb.resolve_initial_references("RootPOA"));
 					rootPOA.the_POAManager().activate();
 
-					final Policy bidirpol = getBidirPolicy();
 					Policy[] poa_policies = null;
 
-					if (bidirpol == null) {
-						poa_policies = new Policy[] {
-								rootPOA.create_id_assignment_policy(IdAssignmentPolicyValue.USER_ID),
-								rootPOA.create_id_uniqueness_policy(IdUniquenessPolicyValue.UNIQUE_ID),
-								rootPOA.create_implicit_activation_policy(ImplicitActivationPolicyValue.NO_IMPLICIT_ACTIVATION),
-								rootPOA.create_lifespan_policy(LifespanPolicyValue.PERSISTENT),
-								rootPOA.create_request_processing_policy(RequestProcessingPolicyValue.USE_ACTIVE_OBJECT_MAP_ONLY),
-								rootPOA.create_servant_retention_policy(ServantRetentionPolicyValue.RETAIN),
-								rootPOA.create_thread_policy(ThreadPolicyValue.ORB_CTRL_MODEL), };
-					} else {
-						poa_policies = new Policy[] {
-								bidirpol,
-								rootPOA.create_id_assignment_policy(IdAssignmentPolicyValue.USER_ID),
-								rootPOA.create_id_uniqueness_policy(IdUniquenessPolicyValue.UNIQUE_ID),
-								rootPOA.create_implicit_activation_policy(ImplicitActivationPolicyValue.NO_IMPLICIT_ACTIVATION),
-								rootPOA.create_lifespan_policy(LifespanPolicyValue.PERSISTENT),
-								rootPOA.create_request_processing_policy(RequestProcessingPolicyValue.USE_ACTIVE_OBJECT_MAP_ONLY),
-								rootPOA.create_servant_retention_policy(ServantRetentionPolicyValue.RETAIN),
-								rootPOA.create_thread_policy(ThreadPolicyValue.ORB_CTRL_MODEL), };
-					}
+					poa_policies = new Policy[] {
+							getBidirPolicy(),
+							rootPOA.create_id_assignment_policy(IdAssignmentPolicyValue.USER_ID),
+							rootPOA.create_id_uniqueness_policy(IdUniquenessPolicyValue.UNIQUE_ID),
+							rootPOA.create_implicit_activation_policy(ImplicitActivationPolicyValue.NO_IMPLICIT_ACTIVATION),
+							rootPOA.create_lifespan_policy(LifespanPolicyValue.PERSISTENT),
+							rootPOA.create_request_processing_policy(RequestProcessingPolicyValue.USE_ACTIVE_OBJECT_MAP_ONLY),
+							rootPOA.create_servant_retention_policy(ServantRetentionPolicyValue.RETAIN),
+							rootPOA.create_thread_policy(ThreadPolicyValue.ORB_CTRL_MODEL), };
 
 					myRootPOA = rootPOA.create_POA("MyRootPOA", null, poa_policies);
 
@@ -265,29 +247,17 @@ public class ORBBean {
 					final POA rootPOA = POAHelper.narrow(the_orb.resolve_initial_references("RootPOA"));
 					rootPOA.the_POAManager().activate();
 
-					final Policy currentBidirPolicy = getBidirPolicy();
 					Policy[] poa_policies = null;
 
-					if (currentBidirPolicy == null) {
-						poa_policies = new Policy[] {
-								rootPOA.create_id_assignment_policy(IdAssignmentPolicyValue.SYSTEM_ID),
-								rootPOA.create_id_uniqueness_policy(IdUniquenessPolicyValue.UNIQUE_ID),
-								rootPOA.create_implicit_activation_policy(ImplicitActivationPolicyValue.IMPLICIT_ACTIVATION),
-								rootPOA.create_lifespan_policy(LifespanPolicyValue.TRANSIENT),
-								rootPOA.create_request_processing_policy(RequestProcessingPolicyValue.USE_ACTIVE_OBJECT_MAP_ONLY),
-								rootPOA.create_servant_retention_policy(ServantRetentionPolicyValue.RETAIN),
-								rootPOA.create_thread_policy(ThreadPolicyValue.ORB_CTRL_MODEL), };
-					} else {
-						poa_policies = new Policy[] {
-								currentBidirPolicy,
-								rootPOA.create_id_assignment_policy(IdAssignmentPolicyValue.SYSTEM_ID),
-								rootPOA.create_id_uniqueness_policy(IdUniquenessPolicyValue.UNIQUE_ID),
-								rootPOA.create_implicit_activation_policy(ImplicitActivationPolicyValue.IMPLICIT_ACTIVATION),
-								rootPOA.create_lifespan_policy(LifespanPolicyValue.TRANSIENT),
-								rootPOA.create_request_processing_policy(RequestProcessingPolicyValue.USE_ACTIVE_OBJECT_MAP_ONLY),
-								rootPOA.create_servant_retention_policy(ServantRetentionPolicyValue.RETAIN),
-								rootPOA.create_thread_policy(ThreadPolicyValue.ORB_CTRL_MODEL) };
-					}
+					poa_policies = new Policy[] {
+							getBidirPolicy(),
+							rootPOA.create_id_assignment_policy(IdAssignmentPolicyValue.SYSTEM_ID),
+							rootPOA.create_id_uniqueness_policy(IdUniquenessPolicyValue.UNIQUE_ID),
+							rootPOA.create_implicit_activation_policy(ImplicitActivationPolicyValue.IMPLICIT_ACTIVATION),
+							rootPOA.create_lifespan_policy(LifespanPolicyValue.TRANSIENT),
+							rootPOA.create_request_processing_policy(RequestProcessingPolicyValue.USE_ACTIVE_OBJECT_MAP_ONLY),
+							rootPOA.create_servant_retention_policy(ServantRetentionPolicyValue.RETAIN),
+							rootPOA.create_thread_policy(ThreadPolicyValue.ORB_CTRL_MODEL) };
 
 					myAutoIdRootPOA = rootPOA.create_POA("MyAutoIdRootPOA", null, poa_policies);
 
@@ -301,28 +271,29 @@ public class ORBBean {
 		}
 	}
 
-	public void deactivateServant(final Servant servant) {
-		synchronized (orb_synch) {
-			try {
-				getAutoIdRootPOA().deactivate_object(getAutoIdRootPOA().servant_to_id(servant));
-			} catch (final Exception e) {
-				logThrowable(Level.SEVERE, e.getMessage(), e);
-			}
-		}
-	}
+//	public void deactivateServant(final Servant servant) {
+//		synchronized (orb_synch) {
+//			try {
+//				getAutoIdRootPOA().deactivate_object(getAutoIdRootPOA().servant_to_id(servant));
+//			} catch (final Exception e) {
+//				LOGGER.log(Level.SEVERE, e.getMessage(), e);
+//			}
+//		}
+//	}
 
 	public void deactivateServant(final byte[] oid) {
 		synchronized (orb_synch) {
 			try {
 				getAutoIdRootPOA().deactivate_object(oid);
 			} catch (final Exception e) {
-				logThrowable(Level.SEVERE, e.getMessage(), e);
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			}
 		}
 	}
 
-	public Servant registerDataProducerPOAServant(final Class<?> remoteInterface, final java.lang.Object servantDelegate,
-			final byte[] oid, final ServantManager deactivator) throws Exception {
+	public Servant registerDataProducerPOAServant(final Class<?> remoteInterface,
+			final java.lang.Object servantDelegate, final byte[] oid, final ServantManager deactivator)
+			throws Exception {
 		synchronized (orb_synch) {
 			final String delegateInterfaceName = remoteInterface.getName() + "Operations";
 			final Class<?> delegateInterface = Class.forName(delegateInterfaceName, false, this.getClass()
@@ -332,8 +303,8 @@ public class ORBBean {
 			final Class<?> poaTieServantClass = Class.forName(poaTieServantClassName, false, this.getClass()
 					.getClassLoader());
 
-			final Constructor<?> servantCtr = poaTieServantClass
-					.getConstructor(new Class[] { delegateInterface, POA.class });
+			final Constructor<?> servantCtr = poaTieServantClass.getConstructor(new Class[] { delegateInterface,
+					POA.class });
 
 			final Servant servant = (Servant) servantCtr.newInstance(new java.lang.Object[] { servantDelegate,
 					getDataProducerPOA(deactivator) });
@@ -355,8 +326,8 @@ public class ORBBean {
 			final Class<?> poaTieServantClass = Class.forName(poaTieServantClassName, false, this.getClass()
 					.getClassLoader());
 
-			final Constructor<?> servantCtr = poaTieServantClass
-					.getConstructor(new Class[] { delegateInterface, POA.class });
+			final Constructor<?> servantCtr = poaTieServantClass.getConstructor(new Class[] { delegateInterface,
+					POA.class });
 
 			final Servant servant = (Servant) servantCtr.newInstance(new java.lang.Object[] { servantDelegate,
 					getRootPOA() });
@@ -378,8 +349,8 @@ public class ORBBean {
 			final Class<?> poaTieServantClass = Class.forName(poaTieServantClassName, false, this.getClass()
 					.getClassLoader());
 
-			final Constructor<?> servantCtr = poaTieServantClass
-					.getConstructor(new Class[] { delegateInterface, POA.class });
+			final Constructor<?> servantCtr = poaTieServantClass.getConstructor(new Class[] { delegateInterface,
+					POA.class });
 
 			final Servant servant = (Servant) servantCtr.newInstance(new java.lang.Object[] { servantDelegate,
 					getAutoIdRootPOA() });
@@ -465,7 +436,7 @@ public class ORBBean {
 				ns = NamingContextExtHelper.narrow(getORB().resolve_initial_references("NameService"));
 				return ns;
 			} catch (final Exception e) {
-				logThrowable(Level.SEVERE, e.getMessage(), e);
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				throw e;
 			}
 		}
@@ -479,7 +450,7 @@ public class ORBBean {
 		try {
 			out = getNameService().resolve_str(FullName);
 		} catch (final Exception e) {
-			logThrowable(Level.SEVERE, e.getMessage(), e);
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 		}
 
 		return out;
@@ -510,7 +481,7 @@ public class ORBBean {
 		try {
 			obj = getORB().string_to_object(corbalocURL);
 		} catch (final Exception e) {
-			logThrowable(Level.SEVERE, e.getMessage(), e);
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			throw e;
 		}
 
@@ -649,7 +620,7 @@ public class ORBBean {
 				result = ctor.newInstance(new java.lang.Object[] { ((ObjectImpl) obj)._get_delegate() });
 			}
 		} catch (final Exception ex) {
-			logThrowable(Level.SEVERE, ex.getMessage(), ex);
+			LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
 		}
 		return result;
 	}
@@ -667,19 +638,16 @@ public class ORBBean {
 			try {
 				the_orb.shutdown(true);
 			} catch (final Exception e) {
-				logThrowable(Level.SEVERE, e.getMessage(), e);
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			}
 			try {
 				the_orb.destroy();
 			} catch (final Exception e) {
-				logThrowable(Level.SEVERE, e.getMessage(), e);
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			}
 			the_orb = null;
 		}
 	}
 
-	private void logThrowable(final Level l, final String message, final Throwable t) {
-		Logger.getLogger(getClass().getName()).log(Level.ALL, message, t);
-	}
 
 }
