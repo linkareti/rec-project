@@ -1,5 +1,6 @@
 package com.linkare.rec.impl.newface.component;
 
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -21,16 +22,15 @@ public class ExpHistoryPanel extends javax.swing.JPanel {
 	 */
 	private static final long serialVersionUID = -7639502263719833526L;
 	private ExperimentHistoryUINode expHist = null;
-
+        final private String BUNDLE_NAME = "com.linkare.rec.impl.newface.component.resources.ExpHistoryPanel";
 	public ExpHistoryPanel() {
 		setLayout(new FlowLayout());
-		add(new JLabel("Experiment History"));
+		add(new JLabel(ReCResourceBundle.findString(BUNDLE_NAME, "lPanel")));
 	}
-
 	public ExpHistoryPanel(final ExperimentHistoryUINode expHist) {
 		this.expHist = expHist;
 		// initComponents();
-		add(new JLabel("Experiment History"));
+		add(new JLabel(ReCResourceBundle.findString(BUNDLE_NAME, "lPanel")));
 	}
 
 	/**
@@ -42,10 +42,10 @@ public class ExpHistoryPanel extends javax.swing.JPanel {
 	// <editor-fold defaultstate="collapsed"
 	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
-		lAbrir = new JButton("Abrir");
-		lConf = new JButton("Configurar");
-		lApagar = new JButton("Apagar");
-		lTitle = new JLabel("Experiencia");
+		lAbrir = new JButton(ReCResourceBundle.findString(BUNDLE_NAME, "lAbrir"));
+		lConf = new JButton(ReCResourceBundle.findString(BUNDLE_NAME, "lConf"));
+		lApagar = new JButton(ReCResourceBundle.findString(BUNDLE_NAME, "lApagar"));
+		lTitle = new JLabel(ReCResourceBundle.findString(BUNDLE_NAME, "lTitle"));
 		jPaneOps = new JPanel();
 
 		jPaneOps.setLayout(new GridBagLayout());
@@ -63,7 +63,7 @@ public class ExpHistoryPanel extends javax.swing.JPanel {
 		gridBagConstraints.insets = new java.awt.Insets(10, 2, 5, 2);
 		jPaneOps.add(lTitle, gridBagConstraints);
 
-		lAbrir.setText("<HTML><U>Abrir</U> | </HTML>");
+		lAbrir.setText(String.format("<HTML><U>%s</U> | </HTML>",ReCResourceBundle.findString(BUNDLE_NAME, "lAbrir")));
 		lAbrir.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent e) {
@@ -77,8 +77,8 @@ public class ExpHistoryPanel extends javax.swing.JPanel {
 		gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
 		gridBagConstraints.insets = new java.awt.Insets(0, 2, 5, 2);
 		jPaneOps.add(lAbrir, gridBagConstraints);
-
-		lConf.setText("<HTML> <U>Config.</U> | </HTML>");
+                
+		lConf.setText(String.format("<HTML><U>%s</U> | </HTML>",ReCResourceBundle.findString(BUNDLE_NAME, "lConfig")));
 		lConf.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent e) {
@@ -93,7 +93,7 @@ public class ExpHistoryPanel extends javax.swing.JPanel {
 		gridBagConstraints.insets = new java.awt.Insets(0, 2, 5, 2);
 		jPaneOps.add(lConf, gridBagConstraints);
 
-		lApagar.setText("<HTML> <U>Apagar</U> </HTML>");
+		lApagar.setText(String.format("<HTML><U>%s</U></HTML>",ReCResourceBundle.findString(BUNDLE_NAME, "lApagar")));
 		lApagar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(final ActionEvent e) {
