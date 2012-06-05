@@ -11,7 +11,7 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
- * @author Andr�
+ * @author André Neto
  */
 public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableModel implements ExpDataModelListener,
 		com.linkare.rec.impl.client.experiment.ExpDataModelContainer {
@@ -111,19 +111,20 @@ public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableMod
 
 		final int channelIndex = getColAtArray(columnIndex / 2);
 
+		String channelBundleKeyOrName = expDataModel.getChannelConfig(channelIndex).getChannelName();
 		if (columnIndex % 2 == 0) {
-			final String ch_name = ReCResourceBundle.findString(expDataModel.getChannelConfig(channelIndex)
-					.getChannelName());
+			final String channelLabel = ReCResourceBundle.findStringOrDefault(channelBundleKeyOrName,
+					channelBundleKeyOrName);
 			final String multiplier = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getMultiplier()
 					.toString();
 			final String ph_unit_symbol = expDataModel.getChannelConfig(channelIndex).getSelectedScale()
 					.getPhysicsUnitSymbol();
-			return ch_name + "[" + multiplier + ph_unit_symbol + "]";
+			return channelLabel + "[" + multiplier + ph_unit_symbol + "]";
 		} else {
 			if ((columnIndex / 2) >= 0 && expDataModel.getChannelConfig(channelIndex) != null) {
-				final String ch_name = ReCResourceBundle.findString(expDataModel.getChannelConfig(channelIndex)
-						.getChannelName());
-				return "\u03B5 " + ch_name;
+				final String channelLabel = ReCResourceBundle.findStringOrDefault(channelBundleKeyOrName,
+						channelBundleKeyOrName);
+				return "\u03B5 " + channelLabel;
 			}
 		}
 
@@ -241,10 +242,11 @@ public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableMod
 
 	/**
 	 * Setter for property channelDisplayY.
-	 * @param col 
+	 * 
+	 * @param col
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
-	 * @return 
+	 * @return
 	 */
 	public int getColAtArray(final int col) {
 		return colArray[col];
@@ -254,6 +256,7 @@ public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableMod
 	 * Setter for property channelDisplayY.
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
+	 * @return 
 	 */
 	public int[] getColArray() {
 		return colArray;
@@ -261,7 +264,8 @@ public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableMod
 
 	/**
 	 * Setter for property channelDisplayY.
-	 * @param colArray 
+	 * 
+	 * @param colArray
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
