@@ -13,12 +13,12 @@
 	<mediaConfig videoLocation="condensadorcilindrico$rec.exp.url.cc.video"
 		canSave="true" offlinePlay="true" />
 	<display toolTipBundleKey="condensadorcilindrico$rec.exp.display.cc.tip.1"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseCC$rec.bui.icon.sensor"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor"
 		displayStringBundleKey="condensadorcilindrico$rec.exp.display.cc.title.1"
 		classLocationBundleKey="condensadorcilindrico$rec.exp.display.cc.loc.1"
 		visible="true" selected="true" order="1" enabled="false" connected="false" />
 	<display toolTipBundleKey="condensadorcilindrico$rec.exp.display.cc.tip.4"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseCC$rec.bui.icon.sensor"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor"
 		displayStringBundleKey="condensadorcilindrico$rec.exp.display.cc.title.4"
 		classLocationBundleKey="condensadorcilindrico$rec.exp.display.cc.loc.4"
 		visible="true" selected="true" order="2" enabled="false" connected="false" />

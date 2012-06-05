@@ -15,34 +15,34 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 			.getBundle("com/linkare/rec/data/resources/messages");
 
 	private static final String APPARATUS = HardwareAcquisitionConfig.resourceBundle
-			.getString("rec.bui.hardware.acquisition.config.apparatus");
+			.getString("rec.ui.hardware.acquisition.config.apparatus");
 
 	private static final String EXPERIENCE_START_TIME = HardwareAcquisitionConfig.resourceBundle
-			.getString("rec.bui.hardware.acquisition.config.experience.start.time");
+			.getString("rec.ui.hardware.acquisition.config.experience.start.time");
 
 	private static final String FREQUENCY = HardwareAcquisitionConfig.resourceBundle
-			.getString("rec.bui.hardware.acquisition.config.frequency");
+			.getString("rec.ui.hardware.acquisition.config.frequency");
 
 	private static final String TOTAL_SAMPLES = HardwareAcquisitionConfig.resourceBundle
-			.getString("rec.bui.hardware.acquisition.config.total.samples");
+			.getString("rec.ui.hardware.acquisition.config.total.samples");
 
 	private static final String TOTAL_SAMPLES_UNDETERMINED = HardwareAcquisitionConfig.resourceBundle
-			.getString("rec.bui.hardware.acquisition.config.total.samples.undetermined");
+			.getString("rec.ui.hardware.acquisition.config.total.samples.undetermined");
 
 	private static final String PARAMETERS = HardwareAcquisitionConfig.resourceBundle
-			.getString("rec.bui.hardware.acquisition.config.parameters");
+			.getString("rec.ui.hardware.acquisition.config.parameters");
 
 	private static final String CHANNELS_CONFIGURATION = HardwareAcquisitionConfig.resourceBundle
-			.getString("rec.bui.hardware.acquisition.config.channels.onfiguration");
+			.getString("rec.ui.hardware.acquisition.config.channels.onfiguration");
 
 	private static final String CHANNEL = HardwareAcquisitionConfig.resourceBundle
-			.getString("rec.bui.hardware.acquisition.config.channel");
+			.getString("rec.ui.hardware.acquisition.config.channel");
 
 	private static final String CONFIGURATION = HardwareAcquisitionConfig.resourceBundle
-			.getString("rec.bui.hardware.acquisition.config.configuration");
+			.getString("rec.ui.hardware.acquisition.config.configuration");
 
 	private static final String CONFIGURATION_UNDEFINED = HardwareAcquisitionConfig.resourceBundle
-			.getString("rec.bui.hardware.acquisition.config.configuration.undefined");
+			.getString("rec.ui.hardware.acquisition.config.configuration.undefined");
 
 	/** Holds value of property timeStart. */
 	private com.linkare.rec.data.synch.DateTime timeStart;

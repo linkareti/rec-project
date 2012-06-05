@@ -30,17 +30,17 @@
 		classLocationBundleKey="boylemariotte$rec.exp.display.boylemariotte.loc.1" visible="true"
 		selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="boylemariotte$rec.exp.display.boylemariotte.tip.2"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
 		displayStringBundleKey="boylemariotte$rec.exp.display.boylemariotte.title.2"
 		classLocationBundleKey="boylemariotte$rec.exp.display.boylemariotte.loc.2" visible="true"
 		selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="boylemariotte$rec.exp.display.boylemariotte.tip.3"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
 		displayStringBundleKey="boylemariotte$rec.exp.display.boylemariotte.title.3"
 		classLocationBundleKey="boylemariotte$rec.exp.display.boylemariotte.loc.3" visible="true"
 		selected="true" order="0" enabled="false" connected="false" />
 	<!--<display toolTipBundleKey="boylemariotte$rec.exp.display.boylemariotte.tip.4"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
 		displayStringBundleKey="boylemariotte$rec.exp.display.boylemariotte.title.4"
 		classLocationBundleKey="boylemariotte$rec.exp.display.boylemariotte.loc.4" visible="true"
 		selected="true" order="0" enabled="false" connected="false" />
@@ -50,7 +50,7 @@
 		classLocationBundleKey="boylemariotte$rec.exp.display.boylemariotte.loc.5" visible="true"
 		selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="boylemariotte$rec.exp.display.boylemariotte.tip.5"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
 		displayStringBundleKey="boylemariotte$rec.exp.display.boylemariotte.title.5"
 		classLocationBundleKey="boylemariotte$rec.exp.display.boylemariotte.loc.5" visible="true"
 		selected="true" order="0" enabled="false" connected="false" />-->

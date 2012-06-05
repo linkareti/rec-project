@@ -13,10 +13,10 @@ public final class ParameterConfig implements org.omg.CORBA.portable.IDLEntity {
 			.getBundle("com/linkare/rec/data/resources/messages");
 
 	private static final String UNDEFINED_PARAMETER_NAME = ParameterConfig.resourceBundle
-			.getString("rec.bui.parameter.config.undefined.parameter.name");
+			.getString("rec.ui.parameter.config.undefined.parameter.name");
 
 	private static final String UNDEFINED = ParameterConfig.resourceBundle
-			.getString("rec.bui.parameter.config.undefined");
+			.getString("rec.ui.parameter.config.undefined");
 
 	/** Holds value of property parameterName. */
 	private String parameterName;

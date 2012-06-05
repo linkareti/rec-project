@@ -15,25 +15,25 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 			.getBundle("com/linkare/rec/data/resources/messages");
 
 	private static final String CHANNEL_NAME = ChannelAcquisitionConfig.resourceBundle
-			.getString("rec.bui.channel.acquisition.config.data.channel.name");
+			.getString("rec.ui.channel.acquisition.config.data.channel.name");
 
 	private static final String CHANNEL_START_TIME = ChannelAcquisitionConfig.resourceBundle
-			.getString("rec.bui.channel.acquisition.config.data.channel.start.time");
+			.getString("rec.ui.channel.acquisition.config.data.channel.start.time");
 
 	private static final String CHANNEL_FREQUENCY = ChannelAcquisitionConfig.resourceBundle
-			.getString("rec.bui.channel.acquisition.config.data.channel.frequency");
+			.getString("rec.ui.channel.acquisition.config.data.channel.frequency");
 
 	private static final String CHANNEL_SCALE = ChannelAcquisitionConfig.resourceBundle
-			.getString("rec.bui.channel.acquisition.config.data.channel.scale");
+			.getString("rec.ui.channel.acquisition.config.data.channel.scale");
 
 	private static final String CHANNEL_TOTAL_SAMPLES = ChannelAcquisitionConfig.resourceBundle
-			.getString("rec.bui.channel.acquisition.config.data.channel.total.samples");
+			.getString("rec.ui.channel.acquisition.config.data.channel.total.samples");
 
 	private static final String CHANNEL_TOTAL_SAMPLES_UNDETERMINED = ChannelAcquisitionConfig.resourceBundle
-			.getString("rec.bui.channel.acquisition.config.data.channel.total.samples.undetermined");
+			.getString("rec.ui.channel.acquisition.config.data.channel.total.samples.undetermined");
 
 	private static final String CHANNEL_PARAMETERS = ChannelAcquisitionConfig.resourceBundle
-			.getString("rec.bui.channel.acquisition.config.data.channel.parameters");
+			.getString("rec.ui.channel.acquisition.config.data.channel.parameters");
 
 	/** Holds value of property timeStart. */
 	private com.linkare.rec.data.synch.DateTime timeStart;
