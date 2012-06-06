@@ -391,6 +391,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         // Get username
         getLoginBox().getContent().setLoginProgressVisible(false);
         getLoginBox().setVisible(true);
+        getLoginBox().getContent().updateStatus("");
     }
 
     private javax.swing.Action toggleConnectionStateActionData(final boolean connected) {
@@ -582,7 +583,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
                     if (!apparatusAvailable) {
                         getLoginBox().getContent().setLoginProgressVisible(false);
                         getLoginBox().getContent().updateStatus(getResourceMap().getString("lblTaskMessage.apparatusNoAvailable.text"));
-                        recApplication.disconnect();
+                        recApplication.getLabClientBean().disconnect();
+                        recApplication.setCurrentState(NavigationWorkflow.DISCONNECTED_OFFLINE);
                         break;
                     }
                 }
@@ -619,10 +621,11 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
     private boolean checkAvailableApparatus() {
         boolean apparatusAvailable = false;
         long initialTimer = System.currentTimeMillis();
-        while ((System.currentTimeMillis() - initialTimer) < 60000 && apparatusAvailable) {
+        while ((System.currentTimeMillis() - initialTimer) < 60000 && !apparatusAvailable) {
             apparatusAvailable = (recApplication.getLabClientBean().getApparatusByID(recApplication.getApparatusAutoConnectID()) == null) ? false : true;
             try {
-                Thread.sleep(5000);
+                Thread.sleep(1000);
+                recApplication.getLabClientBean().hardwareChange();
             } catch (InterruptedException ex) {
                 Logger.getLogger(ReCFrameView.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -637,11 +640,16 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         getLoginBox().setVisible(false);
         setGlassPaneVisible(false);
         firstSelectedApparatusChange = true;
+        if(recApplication.isAutoConnectLab()){
+            recApplication.toggleApparatusState();
+        }
     }
 
     private void disconnectedFromLaboratory() {
         toolBtnConnect.setAction(toggleConnectionStateActionData(false));
-        updateStatus(getResourceMap().getString("lblTaskMessage.disconnected.text"));
+        if(!recApplication.isAutoConnectLab()){
+            updateStatus(getResourceMap().getString("lblTaskMessage.disconnected.text"));
+        }
         disconnectFromApparatus();
         getLayoutContainerPane().getApparatusDescriptionPane().setFieldsVisible(false);
         setInteractiveBoxesEnabled(false);
@@ -779,7 +787,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         // Show Info Message
         getInfoPopup().getMessagePane().setPreferredSize(getInfoPopupSizeFromApparatusTabbedPane());
         getInfoPopup().show(getApparatusTabbedPane(), 0, getInfoPopupYFromApparatusTabbedPane());
-
+        
         // Goto customizer tab
         getApparatusTabbedPane().setSelectedTabIndex(ApparatusTabbedPane.TAB_CUSTOMIZER);
         if (recApplication.getCurrentApparatusVideoLocation() != null) {
