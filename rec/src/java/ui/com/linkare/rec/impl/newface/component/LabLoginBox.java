@@ -282,7 +282,6 @@ public class LabLoginBox extends GradientPane {
         }
 
         public void setLoginProgressVisible(final boolean visible) {
-                System.out.println("Setting progress as visible?" + visible);
                 progressCicle.setVisible(visible);
                 progressCicle.setState(visible ? State.RUNNING : State.IDLE);
                 progressCicle.repaint();
