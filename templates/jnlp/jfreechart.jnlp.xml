@@ -9,6 +9,8 @@
 		<description kind="one-line">@jfreechart.description.oneline@</description>
 		<description kind="tooltip">@jfreechart.description.tooltip@</description>
 		<description kind="short">@jfreechart.description.short@</description>
+		<icon href="@jfreechart.icon@" />
+		<icon kind="splash" href="@jfreechart.icon.splash@" />
 		<offline-allowed />
 	</information>
 	<security>

@@ -512,6 +512,8 @@
 				<replacefilter token="@jfreechart.description.oneline@" property="jfreechart.description.oneline" />
 				<replacefilter token="@jfreechart.description.tooltip@" property="jfreechart.description.tooltip" />
 				<replacefilter token="@jfreechart.description.short@" property="jfreechart.description.short" />
+				<replacefilter token="@jfreechart.icon@" property="jfreechart.icon" />
+				<replacefilter token="@jfreechart.icon.splash@" property="jfreechart.icon.splash" />
 			</replace>
 
 			<copy file="${jnlp.linuxinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/linux-vlc-installer.jnlp" />
@@ -716,6 +718,8 @@
 				<replacefilter token="@jfreechart.description.oneline@" property="jfreechart.description.oneline" />
 				<replacefilter token="@jfreechart.description.tooltip@" property="jfreechart.description.tooltip" />
 				<replacefilter token="@jfreechart.description.short@" property="jfreechart.description.short" />
+				<replacefilter token="@jfreechart.icon@" property="jfreechart.icon" />
+				<replacefilter token="@jfreechart.icon.splash@" property="jfreechart.icon.splash" />
 			</replace>
 
 			<copy file="${jnlp.linuxinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/linux-vlc-installer.jnlp" />
