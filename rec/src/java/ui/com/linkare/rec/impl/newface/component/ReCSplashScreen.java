@@ -68,6 +68,7 @@ public class ReCSplashScreen extends javax.swing.JDialog {
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ReCSplashScreen.class);
         dialogPanel.setBackground(resourceMap.getColor("dialogPanel.background")); // NOI18N
+        dialogPanel.setBorder(new javax.swing.border.LineBorder(resourceMap.getColor("dialogPanel.border.lineColor"), 1, true)); // NOI18N
         dialogPanel.setMinimumSize(new java.awt.Dimension(419, 263));
         dialogPanel.setName("dialogPanel"); // NOI18N
         dialogPanel.setPreferredSize(new java.awt.Dimension(419, 263));
@@ -86,7 +87,6 @@ public class ReCSplashScreen extends javax.swing.JDialog {
             }
         });
 
-        progressCicle.setText(resourceMap.getString("progressCicle.text")); // NOI18N
         progressCicle.setMinimumSize(new java.awt.Dimension(32, 32));
         progressCicle.setName("progressCicle"); // NOI18N
         progressCicle.setPreferredSize(new java.awt.Dimension(32, 32));
@@ -110,15 +110,17 @@ public class ReCSplashScreen extends javax.swing.JDialog {
         dialogPanelLayout.setHorizontalGroup(
             dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogPanelLayout.createSequentialGroup()
-                .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(dialogPanelLayout.createSequentialGroup()
-                        .addComponent(headerLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogPanelLayout.createSequentialGroup()
+                        .addComponent(headerLbl, 0, 0, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(closeLbl))
+                        .addComponent(closeLbl)
+                        .addGap(6, 6, 6))
                     .addGroup(dialogPanelLayout.createSequentialGroup()
-                        .addComponent(progressCicle, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(progressCicle, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(progressLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(progressLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         dialogPanelLayout.setVerticalGroup(
@@ -128,12 +130,10 @@ public class ReCSplashScreen extends javax.swing.JDialog {
                     .addComponent(headerLbl)
                     .addComponent(closeLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(dialogPanelLayout.createSequentialGroup()
-                        .addComponent(progressCicle, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12))
-                    .addComponent(progressLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(dialogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(progressCicle, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(progressLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         getContentPane().add(dialogPanel);

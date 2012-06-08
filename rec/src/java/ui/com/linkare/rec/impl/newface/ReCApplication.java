@@ -737,7 +737,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 	// Unmarshal xml configuration
 	String configLocationUrl = System.getProperty(ReCSystemProperty.RECFACECONFIG.getName());
-	if (!configLocationUrl.contains("://")) {
+	if (!configLocationUrl.contains("://") && !configLocationUrl.contains(":/")) {
 	    configLocationUrl = getCodeBase() + configLocationUrl;
 	}
 	if (ReCApplication.log.isLoggable(Level.FINE)) {
