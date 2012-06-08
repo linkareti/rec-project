@@ -26,7 +26,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>JnlpDownloadServlet</servlet-name>
-		<url-pattern>*.jnlp</url-pattern>
+		<url-pattern>/client/*</url-pattern>
 	</servlet-mapping>
 	<session-config>
 		<session-timeout>20</session-timeout>
