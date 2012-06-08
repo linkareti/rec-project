@@ -23,6 +23,7 @@
 	</information>
 	<information locale="en">
 		<title>@windows.vlc.intaller.title.en@</title>
+		<vendor>@windows.vlc.intaller.vendor@</vendor>
 		<homepage href="@windows.vlc.intaller.homepage.en@" />
 		<description>@windows.vlc.intaller.description.en@</description>
 		<description kind="one-line">@windows.vlc.intaller.description.oneline.en@
@@ -30,20 +31,21 @@
 		<description kind="tooltip">@windows.vlc.intaller.description.tooltip.en@
 		</description>
 		<description kind="short">@windows.vlc.intaller.description.short.en@
-			</description>
+		</description>
 		<related-content href="@vlc.home.url.en@">
 			<title>@vlc.home.title.en@</title>
 			<description>@vlc.home.description.en@</description>
 			<icon href="@vlc.home.icon@" />
 		</related-content>
 	</information>
-	<update check="always" policy="always" />
 	<security>
 		<all-permissions />
 	</security>
+	<update check="always" policy="always" />
 	<resources>
 		<j2se version="1.6+" />
 		<jar download="eager" href="ReCClient_sig.jar" main="true" />
+		<property name="jnlp.packEnabled" value="true" />
 		<property name="vlc.plugins.destdir" value="@vlc.plugins.destdir@" />
 		<property name="vlc.plugins.filename" value="@vlc.plugins.filename@" />
 	</resources>

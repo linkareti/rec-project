@@ -11,13 +11,14 @@
 		<description kind="short">@jfreechart.description.short@</description>
 		<offline-allowed />
 	</information>
+	<security>
+		<all-permissions />
+	</security>
 	<update check="always" policy="always" />
 	<resources>
 		<jar href="lib/jfreechart-1.0.9_sig.jar" />
 		<jar href="lib/jcommon-1.0.12_sig.jar" />
+		<property name="jnlp.packEnabled" value="true" />
 	</resources>
 	<component-desc />
-	<security>
-		<all-permissions />
-	</security>
 </jnlp>

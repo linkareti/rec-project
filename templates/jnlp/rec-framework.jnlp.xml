@@ -23,6 +23,7 @@
 	</information>
 	<information locale="en">
 		<title>@rec.title.en@</title>
+		<vendor>@rec.vendor@</vendor>
 		<homepage href="@rec.homepage.en@" />
 		<description>@rec.description.en@</description>
 		<description kind="one-line">@rec.description.oneline.en@
@@ -72,6 +73,7 @@
 
 		<!-- property name="ReC.PercentFreeMemoryThreshold2Serialization" value="80" 
 			/ -->
+		<property name="jnlp.packEnabled" value="true" />
 
 	</resources>
 

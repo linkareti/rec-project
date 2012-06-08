@@ -23,6 +23,7 @@
 	</information>
 	<information locale="en">
 		<title>@linux.vlc.intaller.title.en@</title>
+		<vendor>@linux.vlc.intaller.vendor@</vendor>
 		<homepage href="@linux.vlc.intaller.homepage.en@" />
 		<description>@linux.vlc.intaller.description.en@</description>
 		<description kind="one-line">@linux.vlc.intaller.description.oneline.en@
@@ -37,13 +38,14 @@
 			<icon href="@vlc.home.icon@" />
 		</related-content>
 	</information>
-	<update check="always" policy="always" />
 	<security>
 		<all-permissions />
 	</security>
+	<update check="always" policy="always" />
 	<resources>
 		<j2se version="1.6+" />
 		<jar download="eager" href="ReCClient_sig.jar" main="true" />
+		<property name="jnlp.packEnabled" value="true" />
 		<property name="vlc.plugins.destdir" value=".@vlc.plugins.destdir@" />
 		<property name="vlc.plugins.filename" value="@vlc.plugins.filename@" />
 	</resources>

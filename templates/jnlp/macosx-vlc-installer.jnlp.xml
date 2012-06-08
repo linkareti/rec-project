@@ -23,6 +23,7 @@
 	</information>
 	<information locale="en">
 		<title>@mac.vlc.intaller.title.en@</title>
+		<vendor>@mac.vlc.intaller.vendor@</vendor>
 		<homepage href="@mac.vlc.intaller.homepage.en@" />
 		<description>@mac.vlc.intaller.description.en@</description>
 		<description kind="one-line">@mac.vlc.intaller.description.oneline.en@
@@ -37,26 +38,23 @@
 			<icon href="@vlc.home.icon@" />
 		</related-content>
 	</information>
-	<update check="always" policy="always" />
 	<security>
 		<all-permissions />
 	</security>
+	<update check="always" policy="always" />
 	<resources>
 		<j2se version="1.6+" />
 		<jar download="eager" href="ReCClient_sig.jar" main="true" />
+		<property name="jnlp.packEnabled" value="true" />
 		<property name="vlc.plugins.destdir" value=".@vlc.plugins.destdir@" />
 		<property name="vlc.plugins.filename" value="@vlc.plugins.filename@" />
 	</resources>
 
-	<!--
-		<resources arch="ppc" os="Mac OS X"> <jar
-		href="lib/vlcplugins_mac_ppc.jar"/> </resources> <resources
-		arch="ppc64" os="Mac OS X"> <jar href="lib/vlcplugins_mac_ppc64.jar"/>
-		</resources> <resources arch="x86" os="Mac OS X"> <jar
-		href="lib/vlcplugins_mac_ppc64.jar"/> </resources> <resources
-		arch="x86_64" os="Mac OS X"> <jar
-		href="lib/vlcplugins_mac_ppc64.jar"/> </resources>
-	-->
+	<!-- <resources arch="ppc" os="Mac OS X"> <jar href="lib/vlcplugins_mac_ppc.jar"/> 
+		</resources> <resources arch="ppc64" os="Mac OS X"> <jar href="lib/vlcplugins_mac_ppc64.jar"/> 
+		</resources> <resources arch="x86" os="Mac OS X"> <jar href="lib/vlcplugins_mac_ppc64.jar"/> 
+		</resources> <resources arch="x86_64" os="Mac OS X"> <jar href="lib/vlcplugins_mac_ppc64.jar"/> 
+		</resources> -->
 
 	<installer-desc
 		main-class="com.linkare.rec.impl.newface.installer.mac.MacInstaller" />

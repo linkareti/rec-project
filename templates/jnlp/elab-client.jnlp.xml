@@ -52,8 +52,10 @@
 		<extension name="Java3D" href="j3d.jnlp" />
 		<!--<extension name="JHelp" href="jhelp.jnlp"/>-->
 
-		<property name="ReCFaceConfig" value="@codebase@/etc/ReCFaceConfig.xml" />
+		<property name="jnlp.packEnabled" value="true" />
 		
+		<property name="ReCFaceConfig" value="@codebase@/etc/ReCFaceConfig.xml" />
+
 		<property name="ReC.MultiCastController.BindName" value="MultiCastController" />
 
 		<property name="org.omg.CORBA.ORBClass" value="org.openorb.orb.core.ORB" />
@@ -66,17 +68,19 @@
 		<!-- change this value to disable video -->
 		<property name="video.enabled" value="@video.enabled@" />
 		<property name="vlc.plugins.filename" value="@vlc.plugins.filename@" />
-               
-               <!-- Rec.Am Service -->
-               <property name="rec.am.endpoint" value="@rec.am.endpoint@" />
-               
-               <!-- Auto Connect ID -->
-               <property name="rec.apparatus.autoconnect.id" value="@rec.apparatus.autoconnect.id@" />
+
+		<!-- Rec.Am Service -->
+		<property name="rec.am.endpoint" value="@rec.am.endpoint@" />
 		
-                <!-- Processing manager thread pool -->
-		<property name="ReC.ProcessingManager.ThreadPool.Coresize" value="@rec.client.processingmanager.threadpool.coresize@"/>
-		<property name="ReC.ProcessingManager.ThreadPool.Maxsize" value="@rec.client.processingmanager.threadpool.maxsize@"/>
-		<property name="ReC.ProcessingManager.Thread.Idletime" value="@rec.processingmanager.thread.idletime@"/>
+		<!-- Auto Connect ID -->
+        <property name="rec.apparatus.autoconnect.id" value="@rec.apparatus.autoconnect.id@" />
+               
+		<!-- Processing manager thread pool -->
+		<property name="ReC.ProcessingManager.ThreadPool.Coresize"
+			value="@rec.client.processingmanager.threadpool.coresize@" />
+		<property name="ReC.ProcessingManager.ThreadPool.Maxsize"
+			value="@rec.client.processingmanager.threadpool.maxsize@" />
+		<property name="ReC.ProcessingManager.Thread.Idletime" value="@rec.processingmanager.thread.idletime@" />
 	</resources>
 
 	<resources os="Linux">

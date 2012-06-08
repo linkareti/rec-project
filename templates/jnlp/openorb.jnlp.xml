@@ -14,6 +14,9 @@
 		</description>
 		<offline-allowed />
 	</information>
+	<security>
+		<all-permissions />
+	</security>
 	<update check="always" policy="always" />
 	<resources>
 		<jar href="lib/openorb_orb_omg-1.4.0_sig.jar" />
@@ -26,9 +29,8 @@
 		<jar href="lib/openorb_ots-1.4.0_sig.jar" />
 		<jar href="lib/openorb_pss-1.4.0_sig.jar" />
 		<jar href="lib/commons-csv-1.0-SNAPSHOT_sig.jar" />
+		<property name="jnlp.packEnabled" value="true" />
 	</resources>
 	<component-desc />
-	<security>
-		<all-permissions />
-	</security>
+	
 </jnlp>
