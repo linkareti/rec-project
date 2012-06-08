@@ -288,10 +288,12 @@ public class VideoViewerController {
 	 */
 	public void releaseMedia() {
 
+	    if (player != null) {
 		player.getMediaDescriptor().release();
 		player.release();
-
-		state = MediaPlayerState.EMPTY;
+	    }
+	    
+	    state = MediaPlayerState.EMPTY;
 	}
 
 	/**
