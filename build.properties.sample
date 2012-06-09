@@ -219,6 +219,8 @@ jfreechart.description=JFreeChart is a free 100% Java chart library that makes i
 jfreechart.description.oneline=JFreeChart charting library
 jfreechart.description.tooltip=JFreeChart Library 
 jfreechart.description.short=Charting library
+jfreechart.icon=images/jfreechart_icon.png
+jfreechart.icon.splash=images/jfreechart_splash.png
 
 #Last but not least, the OpenORB Java CORBA Object Request Broker 
 openorb.title=Community OpenORB
