@@ -12,6 +12,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlTransient;
@@ -25,7 +26,7 @@ import com.linkare.commons.utils.EqualityUtils;
  */
 @Entity
 @Table(name = "LABORATORY")
-@NamedQueries( { @NamedQuery(name = Laboratory.FIND_ALL_QUERYNAME, query = "Select l from Laboratory l"),
+@NamedQueries({ @NamedQuery(name = Laboratory.FIND_ALL_QUERYNAME, query = "Select l from Laboratory l"),
 	@NamedQuery(name = Laboratory.COUNT_ALL_QUERYNAME, query = "Select count(l) from Laboratory l") })
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class Laboratory extends DefaultDomainObject {
@@ -45,6 +46,12 @@ public class Laboratory extends DefaultDomainObject {
 
     @Embedded
     private State state = new State();
+
+    /**
+     * Defines if the laboratory is available or not. This is verified in a near real-time basis.
+     */
+    @Transient
+    private boolean available;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "laboratory")
     private List<Experiment> experiments = new ArrayList<Experiment>();
@@ -124,6 +131,14 @@ public class Laboratory extends DefaultDomainObject {
      */
     public void setExperiments(List<Experiment> experiments) {
 	this.experiments = experiments;
+    }
+
+    public boolean isAvailable() {
+	return available;
+    }
+
+    public void setAvailable(boolean available) {
+	this.available = available;
     }
 
     @Override

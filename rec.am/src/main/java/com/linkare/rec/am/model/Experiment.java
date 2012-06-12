@@ -16,6 +16,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.linkare.commons.jpa.DefaultDomainObject;
 
@@ -25,9 +26,10 @@ import com.linkare.commons.jpa.DefaultDomainObject;
  */
 @Entity
 @Table(name = "EXPERIMENT")
-@NamedQueries( { @NamedQuery(name = Experiment.FIND_ALL_QUERYNAME, query = "Select e from Experiment e"),
+@NamedQueries({ @NamedQuery(name = Experiment.FIND_ALL_QUERYNAME, query = "Select e from Experiment e"),
 	@NamedQuery(name = Experiment.COUNT_ALL_QUERYNAME, query = "Select count(e) from Experiment e"),
-	@NamedQuery(name = Experiment.FIND_ALL_ACTIVE_QUERYNAME, query = "Select e from Experiment e where e.state.active = '1' order by e.name") })
+	@NamedQuery(name = Experiment.FIND_ALL_ACTIVE_QUERYNAME, query = "Select e from Experiment e where e.state.active = '1' order by e.name"),
+	@NamedQuery(name = Experiment.FIND_ALL_LAB, query = "Select e from Experiment e where e.laboratory = ") })
 public class Experiment extends DefaultDomainObject {
 
     private static final long serialVersionUID = 1L;
@@ -37,6 +39,12 @@ public class Experiment extends DefaultDomainObject {
     public static final String COUNT_ALL_QUERYNAME = "Experiment.countAll";
 
     public static final String FIND_ALL_ACTIVE_QUERYNAME = "Experiment.findAllActive";
+
+    public static final String FIND_ALL_LAB = "Experiment.findAllLab";
+
+    private static final String LABORATORY = "LABORATORY";
+
+    public static final String FIND_ALL_LAB_QRY = "Select e from Experiment e where e.laboratory = :" + LABORATORY;
 
     @Basic
     @Column(name = "EXTERNAL_ID", insertable = true, updatable = true, unique = true)
@@ -59,6 +67,12 @@ public class Experiment extends DefaultDomainObject {
 
     @Embedded
     private State state = new State();
+
+    /**
+     * Represents the current state of the physical hardware for this experiment.
+     */
+    @Transient
+    private HardwareState hardwareState;
 
     /**
      * @return the externalId
@@ -176,6 +190,14 @@ public class Experiment extends DefaultDomainObject {
 
     public boolean getHasLaboratory() {
 	return getLaboratory() != null;
+    }
+
+    public HardwareState getHardwareState() {
+	return hardwareState;
+    }
+
+    public void setHardwareState(HardwareState hardwareState) {
+	this.hardwareState = hardwareState;
     }
 
     @Override
