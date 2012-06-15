@@ -6,6 +6,7 @@
 
 package pt.utl.ist.elab.client.vpend2m.displays;
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -362,4 +363,8 @@ public class Animation extends Pend2M implements ExpDataDisplay, ExpDataModelLis
 		}
 	}
 
+    @Override
+    public DataDisplayEnum getDisplayType() {
+       return DataDisplayEnum.ANIMATION;
+    }
 }

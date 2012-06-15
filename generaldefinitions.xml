@@ -633,7 +633,8 @@
 				<replacefilter token="@rec.client.processingmanager.threadpool.coresize@" property="rec.client.processingmanager.threadpool.coresize" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
-                                <replacefilter token="@rec.apparatus.autoconnect.id@" property="rec.apparatus.autoconnect.id" />
+                <replacefilter token="@rec.apparatus.autoconnect.id@" property="rec.apparatus.autoconnect.id" />
+                <replacefilter token="@rec.apparatus.autoacquireresult@" property="rec.apparatus.autoacquireresult" />
 			</replace>
 
 			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
@@ -838,7 +839,8 @@
 				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
 				<replacefilter token="@jnlp.file@" value="elab-client.jnlp" />
-                                <replacefilter token="@rec.apparatus.autoconnect.id@" property="rec.apparatus.autoconnect.id" />
+                <replacefilter token="@rec.apparatus.autoconnect.id@" property="rec.apparatus.autoconnect.id" />
+                <replacefilter token="@rec.apparatus.autoacquireresult@" property="rec.apparatus.autoacquireresult" />
 			</replace>
 
 			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />

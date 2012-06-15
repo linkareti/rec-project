@@ -624,7 +624,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         while ((System.currentTimeMillis() - initialTimer) < 60000 && !apparatusAvailable) {
             apparatusAvailable = (recApplication.getLabClientBean().getApparatusByID(recApplication.getApparatusAutoConnectID()) == null) ? false : true;
             try {
-                Thread.sleep(1000);
+                Thread.sleep(5000);
                 recApplication.getLabClientBean().hardwareChange();
             } catch (InterruptedException ex) {
                 Logger.getLogger(ReCFrameView.class.getName()).log(Level.SEVERE, null, ex);

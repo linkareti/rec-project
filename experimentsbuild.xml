@@ -454,7 +454,7 @@
 				<replacefilter token="@elab.description.oneline.en@" property="@{experiment.name}.description.oneline.en" />
 				<replacefilter token="@elab.description.tooltip.en@" property="@{experiment.name}.description.tooltip.en" />
 				<replacefilter token="@elab.description.short.en@" property="@{experiment.name}.description.short.en" />
-                                <replacefilter token="@rec.apparatus.autoconnect.id@" property="@{experiment.name}.apparatus.autoconnect.id" />
+                <replacefilter token="@rec.apparatus.autoconnect.id@" property="@{experiment.name}.apparatus.autoconnect.id" />
 
 				<replacefilter token="@j2se-version@" property="@{experiment.name}.j2se-version" />
 				<replacefilter token="@client.main-class@" property="@{experiment.name}.client.main-class" />
@@ -481,7 +481,9 @@
 				<replacefilter token="@video.enabled@" property="video.enabled" />
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
 				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
-                                <replacefilter token="@rec.am.endpoint@" property="rec.am.endpoint" />
+                <replacefilter token="@rec.am.endpoint@" property="rec.am.endpoint" />
+                <replacefilter token="@rec.apparatus.autoacquireresult@" property="rec.apparatus.autoacquireresult" />
+                
 				<replacefilter token="@rec.client.processingmanager.threadpool.coresize@" property="rec.client.processingmanager.threadpool.coresize" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />

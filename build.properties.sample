@@ -318,3 +318,6 @@ rec.multicast.badwordmanager.refresh.lap.time.minutes=1440
 
 ##SYSTEM PROPERTIES - Apparatus Auto Connect ID##
 rec.apparatus.autoconnect.id=
+
+##SYSTEM PROPERTIES - Apparatus Auto acquire result ##
+rec.apparatus.autoacquireresult=false

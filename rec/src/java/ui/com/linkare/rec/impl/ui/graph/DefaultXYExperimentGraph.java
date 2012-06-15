@@ -6,6 +6,7 @@
 
 package com.linkare.rec.impl.ui.graph;
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import javax.swing.Icon;
 
 import org.jfree.chart.ChartPanel;
@@ -240,5 +241,10 @@ public class DefaultXYExperimentGraph extends javax.swing.JPanel implements ExpD
 		scrollPane.remove(labelWaitData);
 		scrollPane.setViewportView(panel);
 	}
+
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.CHART;
+    }
 
 }

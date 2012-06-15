@@ -6,6 +6,7 @@
 
 package com.linkare.rec.impl.ui.graph;
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import javax.swing.Icon;
 
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
@@ -120,5 +121,10 @@ public class MultiPanelExperimentGraph extends javax.swing.JPanel implements Exp
 			((ExpDataModelListener) (element)).dataModelWaiting();
 		}
 	}
+
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.CHART;
+    }
 
 }

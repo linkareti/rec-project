@@ -1,5 +1,6 @@
 package com.linkare.rec.impl.ui.graph;
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -258,4 +259,9 @@ public class MultSeriesXYInBlockExperimentGraph extends javax.swing.JPanel imple
 	public void setUpdateFrequency(final int updateFrequency) {
 		defaultXYDatasetProxy.setUpdateFrequency(updateFrequency);
 	}
+
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.CHART;
+    }
 }
