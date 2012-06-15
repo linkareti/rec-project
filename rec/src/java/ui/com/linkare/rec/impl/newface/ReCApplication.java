@@ -598,8 +598,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		    splash.refreshBusyIcon(true);
 		    splash.refreshLabel(getRecApplicationBundle().getString("Application.splashScreen.initialize.message"));
 		    startApplication();
-		    checkConnectivity(splash);
-		    if (splash.getErrorMessages().size() == 0) {
+		    boolean connectivityOk = checkConnectivity(splash);
+		    if (connectivityOk) {
 			Thread.sleep(1000L);
 			splash.dispose();
 			ReCApplication.runInEdt(new Runnable() {
@@ -632,10 +632,19 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
      * 
      * @param splash
      *            The splash screen that will be receive the updates.
+     * @return true if is not autoconnect and at least one lab is available, or if it's autoconnect and the autoconnect lab is available; false otherwise.
      */
-    private void checkConnectivity(ReCSplashScreen splash) {
+    private boolean checkConnectivity(ReCSplashScreen splash) {
 
-	for (Lab lab : recFaceConfig.getLab()) {
+	List<Lab> labsToCheck = null;
+	if (isAutoConnectLab()) {
+	    labsToCheck = new ArrayList<Lab>();
+	    labsToCheck.add(currentLab);
+	} else {
+	    labsToCheck = recFaceConfig.getLab();
+	}
+
+	for (Lab lab : labsToCheck) {
 
 	    String[] protocolHostMNameSplit = lab.getLocation().split("[@/]");
 	    String[] hostPort = protocolHostMNameSplit[1].split(":");
@@ -661,6 +670,12 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		continue;
 	    }
 	}
+
+	if (splash.getErrorMessages().size() < labsToCheck.size()) {
+	    return true;
+	}
+
+	return false;
     }
 
     /**
@@ -1642,7 +1657,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	    Logger.getLogger(ReCApplication.class.getName()).log(Level.SEVERE, null, ex);
 	}
     }
-    
+
     public LabClientBean getLabClientBean() {
 	return labClientBean;
     }
