@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.1" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
@@ -44,7 +44,16 @@
   <SubComponents>
     <Container class="javax.swing.JTabbedPane" name="tabs">
       <Properties>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[730, 309]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[730, 309]"/>
+        </Property>
         <Property name="name" type="java.lang.String" value="tabs" noResource="true"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[730, 309]"/>
+        </Property>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" resourceKey="tabs.AccessibleContext.accessibleName"/>
@@ -68,9 +77,20 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="about_image">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="icon" type="javax.swing.Icon" resourceKey="about_image.icon"/>
                 <Property name="text" type="java.lang.String" resourceKey="about_image.text"/>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[350, 260]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[350, 260]"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="about_image" noResource="true"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[350, 260]"/>
+                </Property>
               </Properties>
             </Component>
           </SubComponents>
@@ -93,6 +113,9 @@
               <Properties>
                 <Property name="contentType" type="java.lang.String" resourceKey="jTextPaneSobreElab.contentType"/>
                 <Property name="text" type="java.lang.String" resourceKey="jTextPaneSobreElab.text"/>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[730, 309]"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="jTextPaneSobreElab" noResource="true"/>
               </Properties>
             </Component>
@@ -116,6 +139,9 @@
               <Properties>
                 <Property name="contentType" type="java.lang.String" resourceKey="jTextPaneIST.contentType"/>
                 <Property name="text" type="java.lang.String" resourceKey="jTextPaneIST.text"/>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[730, 309]"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="jTextPaneIST" noResource="true"/>
               </Properties>
             </Component>
@@ -139,6 +165,9 @@
               <Properties>
                 <Property name="contentType" type="java.lang.String" resourceKey="jTextPaneME.contentType"/>
                 <Property name="text" type="java.lang.String" resourceKey="jTextPaneME.text"/>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[730, 309]"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="jTextPaneME" noResource="true"/>
               </Properties>
             </Component>
@@ -162,6 +191,9 @@
               <Properties>
                 <Property name="contentType" type="java.lang.String" resourceKey="jTextPaneLinkare.contentType"/>
                 <Property name="text" type="java.lang.String" resourceKey="jTextPaneLinkare.text"/>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[730, 309]"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="jTextPaneLinkare" noResource="true"/>
               </Properties>
             </Component>
@@ -185,6 +217,9 @@
               <Properties>
                 <Property name="contentType" type="java.lang.String" resourceKey="jTextPaneLicence.contentType"/>
                 <Property name="text" type="java.lang.String" resourceKey="jTextPaneLicence.text"/>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[730, 309]"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="jTextPaneLicence" noResource="true"/>
               </Properties>
             </Component>
