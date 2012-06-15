@@ -6,6 +6,7 @@
 
 package pt.utl.ist.elab.virtual.guipack.graphs;
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import javax.swing.Icon;
 
 import org.jfree.chart.ChartPanel;
@@ -317,4 +318,9 @@ public class MultSeriesXYExperimentGraphExtended extends javax.swing.JPanel impl
 	public double getValueY(final int ch, final double val) {
 		return val;
 	}
+
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.CHART;
+    }
 }

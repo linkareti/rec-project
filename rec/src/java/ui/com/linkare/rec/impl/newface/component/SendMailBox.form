@@ -100,7 +100,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnSend">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="btnSend.text"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="com/linkare/rec/impl/newface/component/resources/SendMailBox.properties" key="btnSend.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="toolTipText" type="java.lang.String" resourceKey="btnSend.toolTipText"/>
         <Property name="label" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="com/linkare/rec/impl/newface/component/resources/SendMailBox.properties" key="btnSend.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>

@@ -10,7 +10,6 @@
  */
 package com.linkare.rec.impl.newface.component;
 
-import java.awt.Font;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;

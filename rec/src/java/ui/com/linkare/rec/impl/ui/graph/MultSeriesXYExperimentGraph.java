@@ -6,6 +6,7 @@
 
 package com.linkare.rec.impl.ui.graph;
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import javax.swing.Icon;
 
 import org.jfree.chart.ChartPanel;
@@ -321,4 +322,9 @@ public class MultSeriesXYExperimentGraph extends javax.swing.JPanel implements E
 	public void setUpdateFrequency(final int updateFrequency) {
 		defaultXYDatasetProxy.setUpdateFrequency(updateFrequency);
 	}
+
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.CHART;
+    }
 }

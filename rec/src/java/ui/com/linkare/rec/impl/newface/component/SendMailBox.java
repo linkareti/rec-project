@@ -116,7 +116,7 @@ public class SendMailBox extends GradientPane {
         jLabel1.setText(bundle.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
 
-        btnSend.setText(resourceMap.getString("btnSend.text")); // NOI18N
+        btnSend.setText(bundle.getString("btnSend.text")); // NOI18N
         btnSend.setToolTipText(resourceMap.getString("btnSend.toolTipText")); // NOI18N
         btnSend.setLabel(bundle.getString("btnSend.text")); // NOI18N
         btnSend.setName("btnSend"); // NOI18N

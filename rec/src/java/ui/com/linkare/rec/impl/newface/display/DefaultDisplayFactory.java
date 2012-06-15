@@ -1,5 +1,6 @@
 package com.linkare.rec.impl.newface.display;
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -53,7 +54,9 @@ public class DefaultDisplayFactory extends AbstractDisplayFactory {
 	// tree image and label in the experiment tabs... i think this is the logic
 	// way..
 	private class ExpDataDisplayTreeIconAndName implements ExpDataDisplay {
-		private ExpDataDisplay expDisplay = null;
+        public ExpDataDisplayTreeIconAndName(){}
+        
+		private ExpDataDisplay expDisplay;
 		private Display treeDisplay = null;
 
 		public ExpDataDisplayTreeIconAndName(final ExpDataDisplay expDisplay, final Display treeDisplay) {
@@ -90,6 +93,11 @@ public class DefaultDisplayFactory extends AbstractDisplayFactory {
 		public void setExpDataModel(final com.linkare.rec.impl.client.experiment.ExpDataModel model) {
 			expDisplay.setExpDataModel(model);
 		}
+
+        @Override
+        public DataDisplayEnum getDisplayType() {
+            return expDisplay.getDisplayType();
+        }
 	}
 
 }
