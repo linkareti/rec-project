@@ -29,6 +29,7 @@ import com.linkare.rec.am.web.util.ConstantUtils;
 /**
  * 
  * @author Joao
+ * @author Bruno Catarino - Linkare TI
  */
 @Entity
 @Table(name = "RESERVATION")
@@ -134,6 +135,9 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
 
     @Transient
     private ExternalCourse externalCourse;
+    
+    @Transient
+    private boolean editable = true;
 
     /**
      * Constructor
@@ -479,4 +483,13 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
 	}
 	super.prePersist();
     }
+
+    @Override
+    public boolean isEditable() {
+        return editable;
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
+    }   
 }

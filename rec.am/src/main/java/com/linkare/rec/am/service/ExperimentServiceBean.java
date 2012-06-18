@@ -11,10 +11,12 @@ import javax.ejb.Stateless;
 import javax.persistence.Query;
 
 import com.linkare.rec.am.model.Experiment;
+import com.linkare.rec.am.model.Laboratory;
 
 /**
  * 
  * @author Joao
+ * @author Bruno Catarino - Linkare TI
  */
 @Local(ExperimentServiceLocal.class)
 @Stateless(name = "ExperimentService")
@@ -65,5 +67,10 @@ public class ExperimentServiceBean extends BusinessServiceBean<Experiment, Long>
     @Override
     public List<Experiment> findAllActiveExperiments() {
 	return getEntityManager().createNamedQuery(FIND_ALL_ACTIVE_QUERYNAME).getResultList();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Experiment> findExperimentsByLaboratory(Laboratory lab) {
+	return getEntityManager().createNamedQuery(Experiment.FIND_BY_LAB).setParameter(Experiment.LABORATORY, lab.getName()).getResultList();
     }
 }
