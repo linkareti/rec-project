@@ -24,7 +24,7 @@ public class AuthenticatedFilter implements Filter {
 
     private String timeoutPage = "timeout.faces";
 
-    private String loginPage = "Login.faces";
+    private String loginPage = "LabsStatus.faces";
 
     private String indexPage = "index.faces";
 

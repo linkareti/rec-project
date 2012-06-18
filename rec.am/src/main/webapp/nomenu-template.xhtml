@@ -4,15 +4,15 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.prime.com.tr/ui">
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title><ui:insert name="title">Default Title</ui:insert></title>
+	<title><ui:insert name="title">#{bundle['rec.elab.title.short']}</ui:insert></title>
 	<h:outputStylesheet name="css/style.css" />
 	<script type="text/javascript" src="scripts/java_socket_bridge.js" />
 	<script type="text/javascript" src="scripts/multicast.js" />
-	<!-- script src="http://www.ist.utl.pt/files/media/media-kit/badge.js" type="text/javascript"></script -->
+    <link rel="shortcut icon" href="faviconElab.ico" />
 </h:head>
 <h:body>
 

@@ -23,7 +23,7 @@ public class SessionTimeoutFilter implements Filter {
 
     private String timeoutPage = "timeout.faces";
 
-    private String loginPage = "Login.faces";
+    private String loginPage = "LabsStatus.faces";
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

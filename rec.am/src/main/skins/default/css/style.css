@@ -436,19 +436,44 @@ a img {
 }
 
 /*-------- Top Login Definitions --------*/
-#top_login {
+#top_index {
 	margin-left: 10px;
-	height: 100px;
 	background-color: #455660;
+    width: 50%;
+    float: left
+    
 }
 
-#top_login h1 {
+#top_index h1 {
 	font-size: 25px;
 	text-align: center;
 	padding-top: 30px;
 	color: white;
 }
+/*-------- Login Definitions --------*/
+#top_authentication {
+    height: 110px;
+	background-color: #455660;
+}
 
+#authentication {
+	min-height: 110px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-top: 50px;
+}
+
+#authentication form.am_authentication {
+	height: 100px;
+	width: 30%;
+	min-width: 30%;
+	overflow: hidden;
+	margin-left: 13.3%;
+	float: right;
+    color: white;
+    font-weight: bold;
+}
 /*-------- Login Definitions --------*/
 #login {
 	background-color: #E4EEED;
@@ -551,26 +576,26 @@ a img {
 
 /*-------- loginDomain Selector Definitions --------*/
 .loginDomain {
-	width: 186px;
+	width: 140px;
 	border: 1px solid;
 	border-color: black;
-	height: 23px;
+	height: 20px;
 }
 
 /*-------- username box Definitions --------*/
 .username {
 	border: 1px solid;
 	border-color: black;
-	width: 185px;
-	height: 23px;
+	width: 140px;
+	height: 18px;
 }
 
 /*-------- password box Definitions --------*/
 .password {
 	border: 1px solid;
 	border-color: black;
-	width: 185px;
-	height: 23px;
+	width: 140px;
+	height: 18px;
 }
 
 .elab_error {
