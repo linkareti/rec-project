@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	template="/nomenu-template.xhtml">
+
+	<ui:define name="body" id="auth">
+
+		<div id="top_login">
+			<!-- TODO internationalization and change css names -->
+			<p id="banner-p-elab">e-lab</p>
+			<p id="banner-p-labs">Laboratórios remotos do IST</p>
+		</div>
+
+		<div id="login">
+			<ui:insert name="content" />
+		</div>
+
+		<div id="auth_footer">
+			<p id="ext_nav"></p>
+		</div>
+
+		<div id="footer">
+			<ui:include src="footer.xhtml" />
+		</div>
+
+	</ui:define>
+
+</ui:composition>
