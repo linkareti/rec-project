@@ -16,7 +16,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.linkare.commons.jpa.DefaultDomainObject;
 
@@ -68,12 +67,6 @@ public class Experiment extends DefaultDomainObject {
 
     @Embedded
     private State state = new State();
-
-    /**
-     * Represents the current state of the physical hardware for this experiment.
-     */
-    @Transient
-    private HardwareState hardwareState;
 
     /**
      * @return the externalId
@@ -191,14 +184,6 @@ public class Experiment extends DefaultDomainObject {
 
     public boolean getHasLaboratory() {
 	return getLaboratory() != null;
-    }
-
-    public HardwareState getHardwareState() {
-	return hardwareState;
-    }
-
-    public void setHardwareState(HardwareState hardwareState) {
-	this.hardwareState = hardwareState;
     }
 
     @Override
