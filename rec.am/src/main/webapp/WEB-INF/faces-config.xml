@@ -6,6 +6,10 @@
 			<base-name>/messages</base-name>
 			<var>bundle</var>
 		</resource-bundle>
+		<resource-bundle>
+			<base-name>/labStatus</base-name>
+			<var>statusBundle</var>
+		</resource-bundle>
 		<locale-config>
 			<default-locale>pt</default-locale>
 			<supported-locale>en</supported-locale>

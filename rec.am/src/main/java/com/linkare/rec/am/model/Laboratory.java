@@ -12,6 +12,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlTransient;
@@ -46,6 +47,9 @@ public class Laboratory extends DefaultDomainObject {
     @Embedded
     private State state = new State();
 
+    @Transient
+    private boolean available;
+    
     @Column(name = "JMX_IP")
     private String jmxIP;
 
@@ -201,6 +205,14 @@ public class Laboratory extends DefaultDomainObject {
      */
     public void setExperiments(List<Experiment> experiments) {
 	this.experiments = experiments;
+    }
+
+    public boolean isAvailable() {
+	return available;
+    }
+
+    public void setAvailable(boolean available) {
+	this.available = available;
     }
 
     @Override

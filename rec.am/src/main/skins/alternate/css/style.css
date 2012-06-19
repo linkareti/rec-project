@@ -68,7 +68,7 @@ h1 {
 	font-weight: bold;
 	text-decoration: none;
 	color: #283234;
-	background: #E4EEED;
+	background: #bdd2d0;
 	height: 28px;
 	padding: 15px 0px 15px 0px;
 }
@@ -83,7 +83,7 @@ h1 {
 
 /*-------- Left Column Definitions --------*/
 #left_col {
-	background-color: #e4eeed;
+	background-color: #bdd2d0;
 	width: 17%;
 	float: left;
 	margin-right: 0.5%;
@@ -105,13 +105,13 @@ h1 {
 #left_col ul li a:hover {
 	font-weight: bold;
 	text-decoration: none;
-	color: #E4EEED;
+	color: #bdd2d0;
 	background: #283234;
 }
 
 /*-------- Contents Area Definitions --------*/
 #center {
-	background-color: #E4EEED;
+	background-color: #bdd2d0;
 	float: left;
 	width: 65%;
 	min-height: 416px;
@@ -123,7 +123,7 @@ h1 {
 
 #content div.pf-panel-hd {
 	background: #283234;
-	color: #E4EEED;
+	color: #bdd2d0;
 	border: 0px;
 	font-size: 10pt;
 }
@@ -158,13 +158,13 @@ h1 {
 .yui-dt table thead th.details_col {
 	border-left: 1px solid !important;
 	border-right: 1px solid !important;
-	border-color: #E4EEED !important;
+	border-color: #bdd2d0 !important;
 }
 
 .yui-dt table tbody * {
 	border-bottom: 1px solid !important;
 	border-top: 1px solid !important;
-	border-color: #E4EEED !important;
+	border-color: #bdd2d0 !important;
 }
 
 table .yui-dt-selected * {
@@ -251,7 +251,7 @@ form#content div {
 
 /*-------- Right Column Definitions --------*/
 #right_col {
-	background-color: #E4EEED;
+	background-color: #bdd2d0;
 	width: 17%;
 	float: left;
 	margin-left: 0.5%;
@@ -297,7 +297,7 @@ form#content div {
 
 #login form.elab_launch {
 	background: url("../../resources/images/auth_box.png") no-repeat;
-	border-left: 1px solid #E4EEED;
+	border-left: 1px solid #bdd2d0;
 	float: right;
 	height: 200px;
 	width: 30%;
@@ -342,7 +342,7 @@ form#content div {
 }
 
 #login ul li a {
-	color: #E4EEED;
+	color: #bdd2d0;
 	font-weight: bold;
 }
 

@@ -5,7 +5,8 @@ import java.util.List;
 import com.linkare.commons.jpa.security.User;
 
 /**
- * Represents an experiment deployed on a laboratory.
+ * Represents an experiment deployed on a laboratory. Contains all the information about the experiment, its current state, users currently connected and other
+ * information regarding an experiment registered on a multicast.
  * 
  * @author Bruno Catarino - Linkare TI
  * 
@@ -51,7 +52,11 @@ public class DeployedExperiment {
     public void setNumberOfUsers(int numberOfUsers) {
 	this.numberOfUsers = numberOfUsers;
     }
-
+    
+    public boolean isLabRunning() {
+	return state == HardwareState.STARTED;
+    }
+    
     @Override
     public int hashCode() {
 	final int prime = 31;

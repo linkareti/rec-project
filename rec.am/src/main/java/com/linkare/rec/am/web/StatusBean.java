@@ -1,13 +1,17 @@
 package com.linkare.rec.am.web;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import com.linkare.rec.am.model.DeployedExperiment;
 import com.linkare.rec.am.model.Experiment;
+import com.linkare.rec.am.model.HardwareState;
 import com.linkare.rec.am.model.Laboratory;
 import com.linkare.rec.am.service.ExperimentService;
 import com.linkare.rec.am.service.ExperimentServiceLocal;
@@ -33,14 +37,10 @@ public class StatusBean implements Serializable {
     @EJB(beanInterface = ExperimentServiceLocal.class)
     private ExperimentService experimentService;
     
-//    @Inject
-//    private Logger log;
-
     private List<Laboratory> labs;
     private Laboratory selectedLab;
-    private List<Experiment> selectedLabExperiments;
+    private List<DeployedExperiment> selectedLabExperiments;
 
-    //XXX is it necessary to create some kind of cache or the jmx component already does that?
     public List<Laboratory> getLabs() {
 	if (labs == null) {
 	    labs = labService.findAll();
@@ -57,7 +57,7 @@ public class StatusBean implements Serializable {
 	this.selectedLabExperiments = null;
     }
 
-    public List<Experiment> getLabExperiments() {
+    public List<DeployedExperiment> getLabExperiments() {
 
 	System.out.println("Selected lab: " + selectedLab);
 	System.out.println("Entrei no getLabExperiments: " + selectedLabExperiments);
@@ -65,9 +65,43 @@ public class StatusBean implements Serializable {
 	    if (selectedLab == null) {
 		return selectedLabExperiments;
 	    }
-	    selectedLabExperiments = experimentService.findExperimentsByLaboratory(selectedLab);
+	    List<Experiment> experiments = experimentService.findExperimentsByLaboratory(selectedLab);
+	    selectedLabExperiments = new ArrayList<DeployedExperiment>();
+	    for (Experiment experiment : experiments) {
+		DeployedExperiment deployedExperiment = new DeployedExperiment();
+		deployedExperiment.setExperiment(experiment);
+		selectedLabExperiments.add(deployedExperiment);
+	    }
+	    updateExperimentStatus();
 	}
-	System.out.println("Before return: " + selectedLabExperiments);
 	return selectedLabExperiments;
+    }
+    
+    public void updateLabStatus() {
+	//TODO implement to get this from the Singleton component developed by Artur
+	for (Laboratory lab : labs) {
+	    if (Math.random() > 0.95d) {
+		lab.setAvailable(!lab.isAvailable());
+	    }
+	}
+    }
+    
+    public void updateExperimentStatus() {
+	if (selectedLabExperiments == null) {
+	    return;
+	}
+	//TODO implement to get this from the Singleton component developed by Artur
+	Random randState = new Random();
+	Random randUsers = new Random();
+	for (DeployedExperiment experiment : selectedLabExperiments) {
+	    if (Math.random() > 0.95d) {
+		int newStateVal = randState.nextInt(HardwareState.values().length);
+		HardwareState newState = HardwareState.valueOfCode((byte) newStateVal);
+		experiment.setState(newState);
+	    }
+	    if (Math.random() > 0.50d) {
+		experiment.setNumberOfUsers(randUsers.nextInt(101));
+	    }
+	}
     }
 }
