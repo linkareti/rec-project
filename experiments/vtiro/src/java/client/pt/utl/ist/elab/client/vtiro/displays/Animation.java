@@ -6,6 +6,7 @@
 
 package pt.utl.ist.elab.client.vtiro.displays;
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import pt.utl.ist.elab.client.vtiro.Tiro;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
@@ -133,5 +134,9 @@ public class Animation extends Tiro implements ExpDataDisplay, ExpDataModelListe
 			this.model.addExpDataModelListener(this);
 		}
 	}
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.ANIMATION;
+    }
 
 }

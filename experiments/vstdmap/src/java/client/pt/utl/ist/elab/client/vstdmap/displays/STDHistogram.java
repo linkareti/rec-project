@@ -6,6 +6,7 @@
 
 package pt.utl.ist.elab.client.vstdmap.displays;
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -294,4 +295,8 @@ public class STDHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 		}
 
 	}
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.CHART;
+    }
 }

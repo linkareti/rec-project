@@ -10,6 +10,7 @@ package pt.utl.ist.elab.client.vfermap.displays;
  * @author  Antonio Jose Rodrigues Figueiredo
  */
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import java.awt.image.BufferedImage;
 
 import pt.utl.ist.elab.client.virtual.MAPanel;
@@ -364,5 +365,9 @@ public class FERMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModel
 		}
 
 	}
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.ANIMATION;
+    }
 
 }

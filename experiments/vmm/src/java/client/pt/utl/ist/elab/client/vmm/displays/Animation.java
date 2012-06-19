@@ -11,6 +11,7 @@ package pt.utl.ist.elab.client.vmm.displays;
  * @author André Neto - LEFT - IST
  */
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import org.opensourcephysics.display.DrawableShape;
 import org.opensourcephysics.display.DrawingPanel;
 import org.opensourcephysics.displayejs.InteractiveSpring;
@@ -148,4 +149,8 @@ public class Animation extends DrawingPanel implements ExpDataDisplay, ExpDataMo
 		}
 
 	}
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.ANIMATION;
+    }
 }

@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.1" encoding="UTF-8" ?>
 
-<Form version="1.0" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.2" maxVersion="1.2" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <NonVisualComponents>
     <Container class="javax.swing.JDialog" name="jDialogColorPicker">
 
@@ -43,7 +43,7 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Distances">
+                    <TitledBorder title="&lt;rec.exp.display.distances&gt;">
                       <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.distances" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
@@ -331,7 +331,7 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Grid">
+                    <TitledBorder title="&lt;rec.exp.display.black&gt;">
                       <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.black" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
@@ -490,7 +490,7 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Beam">
+                    <TitledBorder title="&lt;rec.exp.display.blue&gt;">
                       <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.blue" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
@@ -733,6 +733,14 @@
     <EventHandler event="componentResized" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="formComponentResized"/>
   </Events>
   <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
     <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,-120,0,0,1,-42"/>
   </AuxValues>
 
@@ -756,7 +764,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Original">
+                <TitledBorder title="&lt;rec.exp.display.original&gt;">
                   <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.original" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
                 </TitledBorder>
               </Border>
@@ -787,7 +795,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Edges">
+                <TitledBorder title="&lt;rec.exp.display.edges&gt;">
                   <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.edges" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
                 </TitledBorder>
               </Border>
@@ -821,7 +829,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Lines">
+                <TitledBorder title="&lt;rec.exp.display.lines&gt;">
                   <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.lines" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
                 </TitledBorder>
               </Border>
@@ -855,7 +863,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Alignment">
+                <TitledBorder title="&lt;rec.exp.display.align&gt;">
                   <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.align" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
                 </TitledBorder>
               </Border>
@@ -890,7 +898,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Beam">
+                <TitledBorder title="&lt;rec.exp.display.beam&gt;">
                   <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.beam" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
                 </TitledBorder>
               </Border>
@@ -924,7 +932,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Final">
+                <TitledBorder title="&lt;rec.exp.display.final&gt;">
                   <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.final" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
                 </TitledBorder>
               </Border>

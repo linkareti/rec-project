@@ -11,6 +11,7 @@ package pt.utl.ist.elab.client.condensadorcilindrico.displays;
  * @author  Andr�
  */
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -310,5 +311,9 @@ public class CCSensor extends javax.swing.JPanel implements com.linkare.rec.impl
 	@Override
 	public void dataModelError() {
 	}
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.SENSOR;
+    }
 
 }

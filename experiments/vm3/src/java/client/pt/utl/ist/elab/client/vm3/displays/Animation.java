@@ -11,6 +11,7 @@ package pt.utl.ist.elab.client.vm3.displays;
  * @author n0dP2
  */
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import javax.swing.JFrame;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
@@ -138,4 +139,8 @@ public class Animation extends pt.utl.ist.elab.client.vm3.DrawableMolas implemen
 		}
 
 	}
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.ANIMATION;
+    }
 }

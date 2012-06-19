@@ -6,6 +6,7 @@
 
 package pt.utl.ist.elab.client.vmvbrown.displays;
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -191,5 +192,9 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 			this.model.addExpDataModelListener(this);
 		}
 	}
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.ANIMATION;
+    }
 
 }

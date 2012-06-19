@@ -5,6 +5,7 @@ package pt.utl.ist.elab.client.vcargas3d.displays;
  * @author  n0dP2
  */
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -172,4 +173,8 @@ public class Linhas extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 			panel_.addDrawable(linha_);
 		}
 	}
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.ANIMATION;
+    }
 }

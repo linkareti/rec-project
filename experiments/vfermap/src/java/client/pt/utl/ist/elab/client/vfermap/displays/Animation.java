@@ -6,6 +6,7 @@
 
 package pt.utl.ist.elab.client.vfermap.displays;
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import pt.utl.ist.elab.client.vfermap.FERMAPAnima;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
@@ -140,5 +141,9 @@ public class Animation extends FERMAPAnima implements ExpDataDisplay, ExpDataMod
 		}
 
 	}
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.ANIMATION;
+    }
 
 }

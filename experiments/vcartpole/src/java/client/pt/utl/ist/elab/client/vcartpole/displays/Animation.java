@@ -6,6 +6,7 @@
 
 package pt.utl.ist.elab.client.vcartpole.displays;
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -273,5 +274,9 @@ public class Animation extends CartPole implements ExpDataDisplay, ExpDataModelL
 		// if (model != null)
 		// model.play();
 	}
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.ANIMATION;
+    }
 
 }

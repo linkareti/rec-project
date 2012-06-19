@@ -10,5 +10,5 @@ package com.linkare.rec.impl.client.experiment;
  */
 public enum DataDisplayEnum {
 
-    ANIMATION, CHART, DATA_TABLE, SENSOR;
+    ANALYSIS, ANIMATION, CHART, DATA_TABLE, IMAGE, SENSOR, VIDEO, FILE;
 }

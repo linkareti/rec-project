@@ -1,5 +1,6 @@
 package pt.utl.ist.elab.client.statsound.displays;
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import pt.utl.ist.elab.client.statsound.TypeOfExperiment;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
@@ -65,4 +66,8 @@ public class StatsoundChart extends AbstractStatsoundChart {
 			}
 		}
 	}
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.CHART;
+    }
 }

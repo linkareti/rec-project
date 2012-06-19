@@ -6,6 +6,7 @@
 
 package pt.utl.ist.elab.client.vquantum.displays;
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -283,5 +284,9 @@ public class Animation extends Quantum implements ExpDataDisplay, ExpDataModelLi
 		// if (model != null)
 		// model.play();
 	}
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.ANIMATION;
+    }
 
 }
