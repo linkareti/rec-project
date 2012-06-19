@@ -46,6 +46,12 @@ public class Experiment extends DefaultDomainObject {
 
     public static final String FIND_BY_LAB_QRY = "Select e from Experiment e where e.laboratory.name = :" + LABORATORY;
 
+    public static final String FIND_BY_EXTERNAL_ID = "Experiment.findByExternalID";
+
+    private static final String EXTERNAL_ID_QRY_PARAM = "externalId";
+
+    public static final String FIND_BY_EXTERNAL_ID_QRY = "Select e from Experiment e where e.externalID = :" + EXTERNAL_ID_QRY_PARAM;
+
     @Basic
     @Column(name = "EXTERNAL_ID", insertable = true, updatable = true, unique = true)
     private String externalId;

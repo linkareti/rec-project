@@ -12,7 +12,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlTransient;
@@ -26,7 +25,7 @@ import com.linkare.commons.utils.EqualityUtils;
  */
 @Entity
 @Table(name = "LABORATORY")
-@NamedQueries({ @NamedQuery(name = Laboratory.FIND_ALL_QUERYNAME, query = "Select l from Laboratory l"),
+@NamedQueries( { @NamedQuery(name = Laboratory.FIND_ALL_QUERYNAME, query = "Select l from Laboratory l"),
 	@NamedQuery(name = Laboratory.COUNT_ALL_QUERYNAME, query = "Select count(l) from Laboratory l") })
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class Laboratory extends DefaultDomainObject {
@@ -47,11 +46,17 @@ public class Laboratory extends DefaultDomainObject {
     @Embedded
     private State state = new State();
 
-    /**
-     * Defines if the laboratory is available or not. This is verified in a near real-time basis.
-     */
-    @Transient
-    private boolean available;
+    @Column(name = "JMX_IP")
+    private String jmxIP;
+
+    @Column(name = "JMX_PORT")
+    private int jmxPort;
+
+    @Column(name = "JMX_PASS")
+    private String jmxPass;
+
+    @Column(name = "JMX_USER")
+    private String jmxUser;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "laboratory")
     private List<Experiment> experiments = new ArrayList<Experiment>();
@@ -95,22 +100,87 @@ public class Laboratory extends DefaultDomainObject {
     }
 
     /**
-     * Get the value of statel
+     * Get the value of state
      * 
-     * @return the value of statel
+     * @return the value of state
      */
     public State getState() {
 	return state;
     }
 
     /**
-     * Set the value of statel
+     * Set the value of state
      * 
-     * @param statel
-     *            new value of statel
+     * @param state
+     *            new value of state
      */
     public void setState(State state) {
 	this.state = state;
+    }
+
+    /**
+     * 
+     * @return the jmx ip
+     */
+    public String getJmxIP() {
+	return jmxIP;
+    }
+
+    /**
+     * 
+     * @param jmxIP
+     */
+    public void setJmxIP(String jmxIP) {
+	this.jmxIP = jmxIP;
+    }
+
+    /**
+     * 
+     * @return the jmx port
+     */
+    public int getJmxPort() {
+	return jmxPort;
+    }
+
+    /**
+     * 
+     * @param jmxPort
+     */
+    public void setJmxPort(int jmxPort) {
+	this.jmxPort = jmxPort;
+    }
+
+    /**
+     * 
+     * @return the jmx password
+     */
+    public String getJmxPass() {
+	return jmxPass;
+    }
+
+    /**
+     * 
+     * @param the
+     *            new jmx pass
+     */
+    public void setJmxPass(String jmxPass) {
+	this.jmxPass = jmxPass;
+    }
+
+    /**
+     * 
+     * @return the jmx user
+     */
+    public String getJmxUser() {
+	return jmxUser;
+    }
+
+    /**
+     * 
+     * @param jmxUser
+     */
+    public void setJmxUser(String jmxUser) {
+	this.jmxUser = jmxUser;
     }
 
     /**
@@ -131,14 +201,6 @@ public class Laboratory extends DefaultDomainObject {
      */
     public void setExperiments(List<Experiment> experiments) {
 	this.experiments = experiments;
-    }
-
-    public boolean isAvailable() {
-	return available;
-    }
-
-    public void setAvailable(boolean available) {
-	this.available = available;
     }
 
     @Override
