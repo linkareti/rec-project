@@ -11,6 +11,7 @@ package pt.utl.ist.elab.client.vlooping.displays;
  * @author  Emanuel A.
  */
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import java.awt.Color;
 
 import javax.swing.JPanel;
@@ -246,4 +247,8 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 		}
 
 	}
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.ANIMATION;
+    }
 }

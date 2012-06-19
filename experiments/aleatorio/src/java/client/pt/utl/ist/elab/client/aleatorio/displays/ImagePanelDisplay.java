@@ -6,6 +6,7 @@
 
 package pt.utl.ist.elab.client.aleatorio.displays;
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
@@ -714,4 +715,8 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 	}
 
 	// removeArrayEntry
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.IMAGE;
+    }
 }

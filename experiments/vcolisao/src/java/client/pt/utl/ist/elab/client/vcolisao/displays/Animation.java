@@ -11,6 +11,7 @@ package pt.utl.ist.elab.client.vcolisao.displays;
  * @author  Emanuel A.
  */
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import javax.swing.JPanel;
 
 import org.opensourcephysics.display.Arrow;
@@ -252,4 +253,8 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 		}
 
 	}
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.ANIMATION;
+    }
 }

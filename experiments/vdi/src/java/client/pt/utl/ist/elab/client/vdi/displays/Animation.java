@@ -11,6 +11,7 @@ package pt.utl.ist.elab.client.vdi.displays;
  * @author  Queiro'
  */
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import java.awt.Color;
 import java.awt.FlowLayout;
 
@@ -360,4 +361,8 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 			this.model.addExpDataModelListener(this);
 		}
 	}
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.ANIMATION;
+    }
 }

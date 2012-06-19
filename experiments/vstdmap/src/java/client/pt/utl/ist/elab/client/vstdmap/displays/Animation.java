@@ -6,6 +6,7 @@
 
 package pt.utl.ist.elab.client.vstdmap.displays;
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import pt.utl.ist.elab.client.vstdmap.STDMAPAnima;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
@@ -136,5 +137,9 @@ public class Animation extends STDMAPAnima implements ExpDataDisplay, ExpDataMod
 		}
 
 	}
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.ANIMATION;
+    }
 
 }

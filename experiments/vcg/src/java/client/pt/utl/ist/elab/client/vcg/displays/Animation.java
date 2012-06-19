@@ -11,6 +11,7 @@ package pt.utl.ist.elab.client.vcg.displays;
  * @author  nomead
  */
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
@@ -248,4 +249,8 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 			updateRegua();
 		}
 	}
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.ANIMATION;
+    }
 }

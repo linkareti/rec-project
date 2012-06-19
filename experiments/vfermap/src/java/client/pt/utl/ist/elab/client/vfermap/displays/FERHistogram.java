@@ -6,6 +6,7 @@
 
 package pt.utl.ist.elab.client.vfermap.displays;
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -310,4 +311,8 @@ public class FERHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 		}
 
 	}
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.ANIMATION;
+    }
 }

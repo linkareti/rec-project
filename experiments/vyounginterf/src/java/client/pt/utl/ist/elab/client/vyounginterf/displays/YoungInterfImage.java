@@ -11,6 +11,7 @@ package pt.utl.ist.elab.client.vyounginterf.displays;
  * @author   Emanuel Antunes
  */
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -123,5 +124,9 @@ public class YoungInterfImage extends JPanel implements ExpDataDisplay, ExpDataM
 			this.model.addExpDataModelListener(this);
 		}
 	}
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.IMAGE;
+    }
 
 }

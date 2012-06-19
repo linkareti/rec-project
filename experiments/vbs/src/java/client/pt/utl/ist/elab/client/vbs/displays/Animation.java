@@ -11,6 +11,7 @@ package pt.utl.ist.elab.client.vbs.displays;
  * @author  Queiro'
  */
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import javax.swing.JPanel;
 
 import org.opensourcephysics.display.DrawableShape;
@@ -166,4 +167,8 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 			this.model.addExpDataModelListener(this);
 		}
 	}
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.ANIMATION;
+    }
 }

@@ -6,6 +6,7 @@
 
 package pt.utl.ist.elab.client.vmovproj.displays;
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
@@ -372,5 +373,9 @@ public class Animation extends MovProj implements ExpDataDisplay, ExpDataModelLi
 			viewPopMenu.show(e.getComponent(), e.getX(), e.getY());
 		}
 	}
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.ANIMATION;
+    }
 
 }

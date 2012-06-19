@@ -6,6 +6,7 @@
 
 package pt.utl.ist.elab.client.g;
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -221,5 +222,9 @@ public class GSensor extends javax.swing.JPanel implements com.linkare.rec.impl.
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	// End of variables declaration//GEN-END:variables
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.SENSOR;
+    }
 
 }

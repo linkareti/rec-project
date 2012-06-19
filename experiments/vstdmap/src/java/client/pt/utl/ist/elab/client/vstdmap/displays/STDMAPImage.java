@@ -9,6 +9,7 @@ package pt.utl.ist.elab.client.vstdmap.displays;
 /*
  * @author  nomead
  */
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import java.awt.image.BufferedImage;
 
 import pt.utl.ist.elab.client.virtual.MAPanel;
@@ -265,5 +266,9 @@ public class STDMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModel
 		}
 
 	}
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.IMAGE;
+    }
 
 }

@@ -6,6 +6,7 @@
 
 package pt.utl.ist.elab.client.meteo.displays;
 
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -433,4 +434,8 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 	private javax.swing.JButton copyBtn;
 	private javax.swing.JButton selectAllBtn;
 	// End of variables declaration
+    @Override
+    public DataDisplayEnum getDisplayType() {
+        return DataDisplayEnum.DATA_TABLE;
+    }
 }
