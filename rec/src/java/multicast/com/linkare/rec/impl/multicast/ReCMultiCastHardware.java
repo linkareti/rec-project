@@ -14,6 +14,14 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+import javax.management.ListenerNotFoundException;
+import javax.management.MBeanNotificationInfo;
+import javax.management.Notification;
+import javax.management.NotificationBroadcasterSupport;
+import javax.management.NotificationEmitter;
+import javax.management.NotificationFilter;
+import javax.management.NotificationListener;
+
 import com.linkare.rec.acquisition.DataClient;
 import com.linkare.rec.acquisition.DataClientHelper;
 import com.linkare.rec.acquisition.DataClientOperations;
@@ -31,6 +39,11 @@ import com.linkare.rec.acquisition.NotOwnerException;
 import com.linkare.rec.acquisition.NotRegistered;
 import com.linkare.rec.acquisition.UserInfo;
 import com.linkare.rec.acquisition.WrongConfigurationException;
+import com.linkare.rec.am.ClientInfoDTO;
+import com.linkare.rec.am.HardwareStateChangeDTO;
+import com.linkare.rec.am.MultiCastControllerNotifInfoDTO;
+import com.linkare.rec.am.mbean.MBeanObjectNameFactory;
+import com.linkare.rec.am.mbean.NotificationTypeEnum;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.DateTime;
@@ -41,6 +54,7 @@ import com.linkare.rec.impl.exceptions.NotAuthorizedConstants;
 import com.linkare.rec.impl.exceptions.NotAvailableExceptionConstants;
 import com.linkare.rec.impl.exceptions.NotOwnerExceptionConstants;
 import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.multicast.security.AllocationManagerSecurityManager;
 import com.linkare.rec.impl.multicast.security.DefaultOperation;
 import com.linkare.rec.impl.multicast.security.DefaultResource;
 import com.linkare.rec.impl.multicast.security.DefaultUser;
@@ -54,13 +68,16 @@ import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.impl.utils.MultiCastExperimentStats;
 import com.linkare.rec.impl.utils.ORBBean;
 import com.linkare.rec.impl.utils.ObjectID;
+import com.linkare.rec.impl.utils.mapping.DTOMapperUtils;
+import com.linkare.rec.impl.utils.mbean.ManagementException;
+import com.linkare.rec.impl.utils.mbean.PlatformMBeanServerDelegate;
 import com.linkare.rec.impl.wrappers.HardwareWrapper;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class ReCMultiCastHardware implements MultiCastHardwareOperations {
+public class ReCMultiCastHardware implements MultiCastHardwareOperations, NotificationEmitter {
 
 	public static String MC_HARDWARE_LOGGER = "MultiCastHardware.Logger";
 
@@ -139,6 +156,9 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 
 	private int maximumClients = 1;
 
+	// to be able to send jmx notifications
+	private final NotificationBroadcasterSupport notificationSupport;
+
 	/**
 	 * Creates a new instance of MultiCastHardwareImpl
 	 * 
@@ -157,6 +177,8 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 		this.maximumClients = maximumClients;
 
 		clientQueue = new ClientQueue(new ClientQueueAdapter(), maximumClients);
+
+		notificationSupport = new NotificationBroadcasterSupport();
 
 		setHardware(hardware);
 
@@ -227,9 +249,8 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 					ChangeOwnerInNextLockCycle = ReCMultiCastHardware.OWNER_ONLY_HAD_STOP_LOCK;
 				}
 
-				
 				startCalled = false;
-				
+
 				locking = false;
 				locked = true;
 				cancelTimeoutCycleLockChecker();
@@ -599,6 +620,12 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 
 		shuttingDown = true;
 
+		try {
+			PlatformMBeanServerDelegate.unregisterHardware(getHardwareUniqueId());
+		} catch (ManagementException e) {
+			logThrowable("Error unregister mbean...", e);
+		}
+
 		if (checkerStart != null) {
 			checkerStart.cancelCheck();
 		}
@@ -815,6 +842,10 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 		return retVal;
 	}
 
+	public List<UserInfo> getClientList() {
+		return clientQueue.getUsers();
+	}
+
 	@Override
 	public void registerDataClient(final DataClient data_client) throws NotAuthorized, NotAvailableException,
 			MaximumClientsReached {
@@ -866,8 +897,11 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 					+ " is not registered to MultiCastController... How did he ever get to me? Sending NotAuthorized!");
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_REGISTER_AT_PARENT_RESOURCE_FIRST);
 		}
+		sendClientNotification(NotificationTypeEnum.REGISTER_NEW_CLIENT_HARDWARE, data_client.getUserInfo());
+
 		log(Level.INFO, "Hardware " + getHardwareUniqueId() + " : Added a Data Client: "
 				+ data_client.getUserInfo().getUserName() + " to clienQueue!");
+
 		if (startupLockCycler) {
 			cycleLockHardware();
 		}
@@ -911,6 +945,48 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 				Logger.getLogger(ReCMultiCastHardware.MC_HARDWARE_LOGGER));
 	}
 
+	private void sendNotif(final NotificationTypeEnum notificationType, final MultiCastControllerNotifInfoDTO userData) {
+		final Notification notif = notificationType.createNotif(MBeanObjectNameFactory
+				.getMultiCastControllerObjectName());
+
+		// FIXME: convert to compositedata
+		notif.setUserData(userData);
+
+		notificationSupport.sendNotification(notif);
+	}
+
+	private void sendStateChangeNotification(final String oldState, final String newState) {
+
+		final MultiCastControllerNotifInfoDTO multiCastControllerNotifInfoDTO = new MultiCastControllerNotifInfoDTO(
+				AllocationManagerSecurityManager.getLaboratoryID(),
+				NotificationTypeEnum.HARDWARE_STATE_CHANGE.getType());
+
+		final HardwareStateChangeDTO hardwareStateDTO = new HardwareStateChangeDTO(getHardwareUniqueId(), newState,
+				oldState);
+		multiCastControllerNotifInfoDTO.setHardwareStateChangeDTO(hardwareStateDTO);
+
+		sendNotif(NotificationTypeEnum.HARDWARE_STATE_CHANGE, multiCastControllerNotifInfoDTO);
+
+	}
+
+	private void sendClientNotification(final NotificationTypeEnum notificationType, final UserInfo client) {
+
+		if (client == null) {
+			return;
+		}
+
+		final MultiCastControllerNotifInfoDTO multiCastControllerNotifInfoDTO = new MultiCastControllerNotifInfoDTO(
+				AllocationManagerSecurityManager.getLaboratoryID(), notificationType.getType());
+
+		final ClientInfoDTO clientInfoDTO = new ClientInfoDTO(client.getUserName());
+		multiCastControllerNotifInfoDTO.setClientInfoDTO(clientInfoDTO);
+		multiCastControllerNotifInfoDTO.setHardwareInfoDTO(DTOMapperUtils.mapToHardwareInfoDTO(getHardware()
+				.getHardwareInfo()));
+
+		sendNotif(notificationType, multiCastControllerNotifInfoDTO);
+
+	}
+
 	/**
 	 * Getter for property hardware.
 	 * 
@@ -926,6 +1002,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 
 		@Override
 		public void dataClientForQueueIsGone(final DataClientForQueue dcfq) {
+			sendClientNotification(NotificationTypeEnum.UNREGISTER_CLIENT_HARDWARE, dcfq.getUserInfo());
 			dataClientGone(dcfq);
 		}
 
@@ -984,7 +1061,12 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 				return;
 			}
 
+			final String oldState = proxyHardwareState.toString();
+
 			proxyHardwareState = newState;
+
+			sendStateChangeNotification(proxyHardwareState.toString(), oldState);
+
 			clientQueue.hardwareStateChange(proxyHardwareState);
 
 			try {
@@ -1194,6 +1276,42 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 				dcfq.shutdownAsSoonAsPossible();
 			}
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void addNotificationListener(NotificationListener listener, NotificationFilter filter, Object handback)
+			throws IllegalArgumentException {
+		notificationSupport.addNotificationListener(listener, filter, handback);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void removeNotificationListener(NotificationListener listener) throws ListenerNotFoundException {
+		notificationSupport.removeNotificationListener(listener);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public MBeanNotificationInfo[] getNotificationInfo() {
+		// FIXME: should only refer to the
+		// NotificationType.HARDWARE_STATE_CHANGE
+		return NotificationTypeEnum.getMBeanNotificationInfo();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void removeNotificationListener(NotificationListener listener, NotificationFilter filter, Object handback)
+			throws ListenerNotFoundException {
+		notificationSupport.removeNotificationListener(listener, filter, handback);
 	}
 
 }

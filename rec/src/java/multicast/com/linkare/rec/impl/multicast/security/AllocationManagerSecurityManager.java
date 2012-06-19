@@ -669,4 +669,8 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 		}
 	}
 
+	public static String getLaboratoryID() {
+		return LABORATORY_ID;
+	}
+
 }

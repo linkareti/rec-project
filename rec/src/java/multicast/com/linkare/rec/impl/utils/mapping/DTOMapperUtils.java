@@ -23,10 +23,12 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import com.linkare.rec.acquisition.NotAvailableException;
+import com.linkare.rec.acquisition.UserInfo;
+import com.linkare.rec.am.ClientInfoDTO;
+import com.linkare.rec.am.HardwareInfoDTO;
 import com.linkare.rec.am.RepositoryFacade;
 import com.linkare.rec.am.repository.ByteArrayValueDTO;
 import com.linkare.rec.am.repository.ChannelAcquisitionConfigDTO;
-import com.linkare.rec.am.repository.RowPhysicsValueDTO;
 import com.linkare.rec.am.repository.DataProducerDTO;
 import com.linkare.rec.am.repository.DataProducerStateEnum;
 import com.linkare.rec.am.repository.DateTimeDTO;
@@ -38,6 +40,7 @@ import com.linkare.rec.am.repository.ParameterConfigDTO;
 import com.linkare.rec.am.repository.PhysicsValDTO;
 import com.linkare.rec.am.repository.PhysicsValueDTO;
 import com.linkare.rec.am.repository.PhysicsValueTypeEnum;
+import com.linkare.rec.am.repository.RowPhysicsValueDTO;
 import com.linkare.rec.am.repository.SamplesPacketDTO;
 import com.linkare.rec.am.repository.ScaleDTO;
 import com.linkare.rec.data.Multiplier;
@@ -48,6 +51,7 @@ import com.linkare.rec.data.acquisition.SamplesPacket;
 import com.linkare.rec.data.config.ChannelAcquisitionConfig;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.config.ParameterConfig;
+import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.metadata.Scale;
 import com.linkare.rec.data.synch.DateTime;
 import com.linkare.rec.data.synch.Frequency;
@@ -1019,6 +1023,54 @@ public final class DTOMapperUtils {
 				io.printStackTrace();
 			}
 		}
+	}
+
+	public static ClientInfoDTO mapToClientInfoDTO(final UserInfo userInfo) {
+		ClientInfoDTO result = null;
+		if (userInfo != null) {
+			result = new ClientInfoDTO(userInfo.getUserName());
+		}
+		return result;
+	}
+
+	public static HardwareInfoDTO mapToHardwareInfoDTO(final HardwareInfo hardwareInfo) {
+		HardwareInfoDTO result = null;
+		if (hardwareInfo != null) {
+			result = new HardwareInfoDTO(hardwareInfo.getDriverVersion(), hardwareInfo.getHardwareName(),
+					hardwareInfo.getHardwareVersion(), hardwareInfo.getHardwareManufacturer(),
+					hardwareInfo.getDescriptionText(), hardwareInfo.getHardwareUniqueID(),
+					hardwareInfo.getFamiliarName());
+		}
+		return result;
+	}
+
+
+	public static List<HardwareInfoDTO> mapHardwareList(final List<HardwareInfo> hardwares) {
+		List<HardwareInfoDTO> result = Collections.emptyList();
+
+		if (hardwares != null && hardwares.size() > 0) {
+
+			result = new ArrayList<HardwareInfoDTO>(hardwares.size());
+
+			for (final HardwareInfo hardware : hardwares) {
+				result.add(mapToHardwareInfoDTO(hardware));
+			}
+		}
+		return result;
+	}
+
+	public static List<ClientInfoDTO> mapClientList(final List<UserInfo> users) {
+		List<ClientInfoDTO> result = Collections.emptyList();
+
+		if (users != null && users.size() > 0) {
+
+			result = new ArrayList<ClientInfoDTO>(users.size());
+
+			for (final UserInfo user : users) {
+				result.add(mapToClientInfoDTO(user));
+			}
+		}
+		return result;
 	}
 
 }
