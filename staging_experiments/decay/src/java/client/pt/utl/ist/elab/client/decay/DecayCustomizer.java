@@ -107,7 +107,7 @@ public class DecayCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		jPanel2.setLayout(new java.awt.GridBagLayout());
 
-		btnOK.setText(ReCResourceBundle.findString("ReCExpDecay$rec.exp.decay.lbl.ok"));
+		btnOK.setText(ReCResourceBundle.findStringOrDefault("decay$rec.exp.decay.lbl.ok","decay$rec.exp.decay.lbl.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
@@ -119,7 +119,7 @@ public class DecayCustomizer extends javax.swing.JPanel implements com.linkare.r
 		gridBagConstraints.gridy = 1;
 		jPanel2.add(btnOK, gridBagConstraints);
 
-		btnCancel.setText(ReCResourceBundle.findString("ReCExpDecay$rec.exp.decay.lbl.cancel"));
+		btnCancel.setText(ReCResourceBundle.findStringOrDefault("decay$rec.exp.decay.lbl.cancel","decay$rec.exp.decay.lbl.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
@@ -138,7 +138,7 @@ public class DecayCustomizer extends javax.swing.JPanel implements com.linkare.r
 		gridBagConstraints.weightx = 10.0;
 		jPanel2.add(jLabel1, gridBagConstraints);
 
-		btnDefaults.setText(ReCResourceBundle.findString("ReCExpDecay$rec.exp.dftcfg.decay.title.1"));
+		btnDefaults.setText(ReCResourceBundle.findStringOrDefault("decay$rec.exp.dftcfg.decay.title.1","decay$rec.exp.dftcfg.decay.title.1"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
@@ -172,22 +172,22 @@ public class DecayCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel4.setLayout(new java.awt.GridLayout(2, 0));
 
 		jPanel4.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpDecay$rec.exp.decay.inidate")));
+				.findStringOrDefault("decay$rec.exp.decay.inidate","decay$rec.exp.decay.inidate")));
 		jPanel4.setPreferredSize(new java.awt.Dimension(210, 123));
 		jPanel9.setLayout(new java.awt.GridBagLayout());
 
 		jComboBoxDayIni.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpDecay$rec.exp.decay.day")));
+				.findStringOrDefault("decay$rec.exp.decay.day","decay$rec.exp.decay.day")));
 		jPanel9.add(jComboBoxDayIni, new java.awt.GridBagConstraints());
 
 		jComboBoxMonthIni.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpDecay$rec.exp.decay.month")));
+				.findStringOrDefault("decay$rec.exp.decay.month","decay$rec.exp.decay.month")));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.insets = new java.awt.Insets(0, 8, 0, 7);
 		jPanel9.add(jComboBoxMonthIni, gridBagConstraints);
 
 		jComboBoxYearIni.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpDecay$rec.exp.decay.year")));
+				.findStringOrDefault("decay$rec.exp.decay.year","decay$rec.exp.decay.year")));
 		jPanel9.add(jComboBoxYearIni, new java.awt.GridBagConstraints());
 
 		jPanel4.add(jPanel9);
@@ -195,11 +195,11 @@ public class DecayCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel10.setLayout(new java.awt.GridBagLayout());
 
 		jComboBoxHoursIni.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpDecay$rec.exp.decay.hours")));
+				.findStringOrDefault("decay$rec.exp.decay.hours","decay$rec.exp.decay.hours")));
 		jPanel10.add(jComboBoxHoursIni, new java.awt.GridBagConstraints());
 
 		jComboBoxMinutesIni.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpDecay$rec.exp.decay.minutes")));
+				.findStringOrDefault("decay$rec.exp.decay.minutes","decay$rec.exp.decay.minutes")));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.insets = new java.awt.Insets(0, 8, 0, 7);
 		jPanel10.add(jComboBoxMinutesIni, gridBagConstraints);
@@ -211,18 +211,18 @@ public class DecayCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel7.setLayout(new java.awt.GridLayout(2, 0));
 
 		jPanel7.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpDecay$rec.exp.decay.enddate")));
+				.findStringOrDefault("decay$rec.exp.decay.enddate","decay$rec.exp.decay.enddate")));
 		jPanel7.setPreferredSize(new java.awt.Dimension(210, 123));
 		jComboBoxDayEnd.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpDecay$rec.exp.decay.day")));
+				.findStringOrDefault("decay$rec.exp.decay.day","decay$rec.exp.decay.day")));
 		jPanel11.add(jComboBoxDayEnd);
 
 		jComboBoxMonthEnd.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpDecay$rec.exp.decay.month")));
+				.findStringOrDefault("decay$rec.exp.decay.month","decay$rec.exp.decay.month")));
 		jPanel11.add(jComboBoxMonthEnd);
 
 		jComboBoxYearEnd.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpDecay$rec.exp.decay.year")));
+				.findStringOrDefault("decay$rec.exp.decay.year","decay$rec.exp.decay.year")));
 		jPanel11.add(jComboBoxYearEnd);
 
 		jPanel7.add(jPanel11);
@@ -232,11 +232,11 @@ public class DecayCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel13.setLayout(new java.awt.GridBagLayout());
 
 		jComboBoxHoursEnd.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpDecay$rec.exp.decay.hours")));
+				.findStringOrDefault("decay$rec.exp.decay.hours","decay$rec.exp.decay.hours")));
 		jPanel13.add(jComboBoxHoursEnd, new java.awt.GridBagConstraints());
 
 		jComboBoxMinutesEnd.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpDecay$rec.exp.decay.minutes")));
+				.findStringOrDefault("decay$rec.exp.decay.minutes","decay$rec.exp.decay.minutes")));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.insets = new java.awt.Insets(0, 8, 0, 7);
 		jPanel13.add(jComboBoxMinutesEnd, gridBagConstraints);
@@ -252,7 +252,7 @@ public class DecayCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
 		jPanel1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpDecay$rec.exp.decay.lbl.dheight")));
+				.findStringOrDefault("decay$rec.exp.decay.lbl.dheight","decay$rec.exp.decay.lbl.dheight")));
 		jPanel1.setMinimumSize(new java.awt.Dimension(90, 225));
 		jPanel1.setPreferredSize(new java.awt.Dimension(150, 225));
 		sldDetectorHeight.setMajorTickSpacing(10);
@@ -277,10 +277,10 @@ public class DecayCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel5.setLayout(new java.awt.GridBagLayout());
 
 		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpDecay$rec.exp.decay.lbl.material")));
+				.findStringOrDefault("decay$rec.exp.decay.lbl.material","decay$rec.exp.decay.lbl.material")));
 		btnWood.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/decay/resources/wood.gif")));
-		btnWood.setText(ReCResourceBundle.findString("ReCExpDecay$rec.exp.decay.lbl.wood"));
+		btnWood.setText(ReCResourceBundle.findStringOrDefault("decay$rec.exp.decay.lbl.wood","decay$rec.exp.decay.lbl.wood"));
 		buttonGroupMaterial.add(btnWood);
 		btnWood.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -290,7 +290,7 @@ public class DecayCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		btnCork.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/decay/resources/corticite.gif")));
-		btnCork.setText(ReCResourceBundle.findString("ReCExpDecay$rec.exp.decay.lbl.cork"));
+		btnCork.setText(ReCResourceBundle.findStringOrDefault("decay$rec.exp.decay.lbl.cork","decay$rec.exp.decay.lbl.cork"));
 		buttonGroupMaterial.add(btnCork);
 		btnCork.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -302,7 +302,7 @@ public class DecayCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		btnCopper2.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/decay/resources/cobre2.gif")));
-		btnCopper2.setText(ReCResourceBundle.findString("ReCExpDecay$rec.exp.decay.lbl.copper1"));
+		btnCopper2.setText(ReCResourceBundle.findStringOrDefault("decay$rec.exp.decay.lbl.copper1","decay$rec.exp.decay.lbl.copper1"));
 		buttonGroupMaterial.add(btnCopper2);
 		btnCopper2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -314,7 +314,7 @@ public class DecayCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		btnCopper4.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/decay/resources/cobre4.gif")));
-		btnCopper4.setText(ReCResourceBundle.findString("ReCExpDecay$rec.exp.decay.lbl.copper2"));
+		btnCopper4.setText(ReCResourceBundle.findStringOrDefault("decay$rec.exp.decay.lbl.copper2","decay$rec.exp.decay.lbl.copper2"));
 		buttonGroupMaterial.add(btnCopper4);
 		btnCopper4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -326,7 +326,7 @@ public class DecayCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		btnCopper8.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/decay/resources/cobre8.gif")));
-		btnCopper8.setText(ReCResourceBundle.findString("ReCExpDecay$rec.exp.decay.lbl.copper3"));
+		btnCopper8.setText(ReCResourceBundle.findStringOrDefault("decay$rec.exp.decay.lbl.copper3","decay$rec.exp.decay.lbl.copper3"));
 		buttonGroupMaterial.add(btnCopper8);
 		btnCopper8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -338,7 +338,7 @@ public class DecayCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		btnCopper16.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/decay/resources/cobre16.gif")));
-		btnCopper16.setText(ReCResourceBundle.findString("ReCExpDecay$rec.exp.decay.lbl.copper4"));
+		btnCopper16.setText(ReCResourceBundle.findStringOrDefault("decay$rec.exp.decay.lbl.copper4","decay$rec.exp.decay.lbl.copper4"));
 		buttonGroupMaterial.add(btnCopper16);
 		btnCopper16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -350,7 +350,7 @@ public class DecayCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		btnCopper32.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/decay/resources/cobre32.gif")));
-		btnCopper32.setText(ReCResourceBundle.findString("ReCExpDecay$rec.exp.decay.lbl.copper5"));
+		btnCopper32.setText(ReCResourceBundle.findStringOrDefault("decay$rec.exp.decay.lbl.copper5","decay$rec.exp.decay.lbl.copper5"));
 		buttonGroupMaterial.add(btnCopper32);
 		btnCopper32.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -362,7 +362,7 @@ public class DecayCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		btnAir.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/decay/resources/air.gif")));
-		btnAir.setText(ReCResourceBundle.findString("ReCExpDecay$rec.exp.decay.lbl.air"));
+		btnAir.setText(ReCResourceBundle.findStringOrDefault("decay$rec.exp.decay.lbl.air","decay$rec.exp.decay.lbl.air"));
 		buttonGroupMaterial.add(btnAir);
 		btnAir.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -373,7 +373,7 @@ public class DecayCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		btnLead.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/decay/resources/chumbo.gif")));
-		btnLead.setText(ReCResourceBundle.findString("ReCExpDecay$rec.exp.decay.lbl.lead"));
+		btnLead.setText(ReCResourceBundle.findStringOrDefault("decay$rec.exp.decay.lbl.lead","decay$rec.exp.decay.lbl.lead"));
 		buttonGroupMaterial.add(btnLead);
 		btnLead.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -385,7 +385,7 @@ public class DecayCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		btnBrick.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/decay/resources/brick.gif")));
-		btnBrick.setText(ReCResourceBundle.findString("ReCExpDecay$rec.exp.decay.lbl.brick"));
+		btnBrick.setText(ReCResourceBundle.findStringOrDefault("decay$rec.exp.decay.lbl.brick","decay$rec.exp.decay.lbl.brick"));
 		buttonGroupMaterial.add(btnBrick);
 		btnBrick.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -463,8 +463,8 @@ public class DecayCustomizer extends javax.swing.JPanel implements com.linkare.r
 			df.parse(monthini + "/" + dayini + "/" + yearini);
 			df.parse(monthend + "/" + dayend + "/" + yearend);
 		} catch (Exception e) {
-			String invDate = ReCResourceBundle.findString("ReCExpDecay$rec.exp.decay.invdate");
-			String error = ReCResourceBundle.findString("ReCExpDecay$rec.exp.decay.error");
+			String invDate = ReCResourceBundle.findStringOrDefault("decay$rec.exp.decay.invdate","decay$rec.exp.decay.invdate");
+			String error = ReCResourceBundle.findStringOrDefault("decay$rec.exp.decay.error","decay$rec.exp.decay.error");
 			javax.swing.JOptionPane.showMessageDialog(this, invDate, error, javax.swing.JOptionPane.ERROR_MESSAGE);
 
 			return false;
@@ -628,7 +628,7 @@ public class DecayCustomizer extends javax.swing.JPanel implements com.linkare.r
 	}
 
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findString("ReCExpDecay$rec.exp.decay.customizer.title");
+		return ReCResourceBundle.findStringOrDefault("decay$rec.exp.decay.customizer.title","decay$rec.exp.decay.customizer.title");
 	}
 
 	public javax.swing.JMenuBar getMenuBar() {

@@ -25,7 +25,7 @@
         <Component class="javax.swing.JButton" name="btnOK">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.ok" replaceFormat="ReCResourceBundle.findString(&quot;radioactividade${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.ok" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;radioactividade${key}&quot;,&quot;radioactividade${key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
@@ -40,7 +40,7 @@
         <Component class="javax.swing.JButton" name="btnCancel">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.cancel" replaceFormat="ReCResourceBundle.findString(&quot;radioactividade${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.cancel" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;radioactividade${key}&quot;,&quot;radioactividade${key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
@@ -62,7 +62,7 @@
         <Component class="javax.swing.JButton" name="btnDefaults">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.dftcfg.radio.title.1" replaceFormat="ReCResourceBundle.findString(&quot;radioactividade${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.dftcfg.radio.title.1" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;radioactividade${key}&quot;,&quot;radioactividade${key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
@@ -102,7 +102,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder justification="1" position="2" title="Acquisition Mode">
-                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.mode" replaceFormat="ReCResourceBundle.findString(&quot;radioactividade${key}&quot;)"/>
+                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.mode" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;radioactividade${key}&quot;,&quot;radioactividade${key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -122,7 +122,7 @@
             <Component class="javax.swing.JRadioButton" name="btnModeCounter">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.counts" replaceFormat="ReCResourceBundle.findString(&quot;radioactividade${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.counts" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;radioactividade${key}&quot;,&quot;radioactividade${key}&quot;)"/>
                 </Property>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="buttonGroupMode"/>
@@ -137,7 +137,7 @@
             <Component class="javax.swing.JRadioButton" name="btnModeTimer">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.tinter" replaceFormat="ReCResourceBundle.findString(&quot;radioactividade${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.tinter" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;radioactividade${key}&quot;,&quot;radioactividade${key}&quot;)"/>
                 </Property>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="buttonGroupMode"/>
@@ -161,7 +161,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Number of samples">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.nsamples" replaceFormat="ReCResourceBundle.findString(&quot;radioactividade${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.nsamples" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;radioactividade${key}&quot;,&quot;radioactividade${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -228,7 +228,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Detector Height [mm]">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.dheight" replaceFormat="ReCResourceBundle.findString(&quot;radioactividade${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.dheight" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;radioactividade${key}&quot;,&quot;radioactividade${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -267,7 +267,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Material">
-              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.material" replaceFormat="ReCResourceBundle.findString(&quot;radioactividade${key}&quot;)"/>
+              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.material" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;radioactividade${key}&quot;,&quot;radioactividade${key}&quot;)"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -286,7 +286,7 @@
               <Image iconType="3" name="/pt/utl/ist/elab/client/radioactividade/resources/wood.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.wood" replaceFormat="ReCResourceBundle.findString(&quot;radioactividade${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.wood" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;radioactividade${key}&quot;,&quot;radioactividade${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupMaterial"/>
@@ -305,7 +305,7 @@
               <Image iconType="3" name="/pt/utl/ist/elab/client/radioactividade/resources/corticite.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.cork" replaceFormat="ReCResourceBundle.findString(&quot;radioactividade${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.cork" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;radioactividade${key}&quot;,&quot;radioactividade${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupMaterial"/>
@@ -324,7 +324,7 @@
               <Image iconType="3" name="/pt/utl/ist/elab/client/radioactividade/resources/cobre2.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.copper1" replaceFormat="ReCResourceBundle.findString(&quot;radioactividade${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.copper1" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;radioactividade${key}&quot;,&quot;radioactividade${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupMaterial"/>
@@ -343,7 +343,7 @@
               <Image iconType="3" name="/pt/utl/ist/elab/client/radioactividade/resources/cobre4.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.copper2" replaceFormat="ReCResourceBundle.findString(&quot;radioactividade${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.copper2" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;radioactividade${key}&quot;,&quot;radioactividade${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupMaterial"/>
@@ -362,7 +362,7 @@
               <Image iconType="3" name="/pt/utl/ist/elab/client/radioactividade/resources/cobre8.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.copper3" replaceFormat="ReCResourceBundle.findString(&quot;radioactividade${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.copper3" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;radioactividade${key}&quot;,&quot;radioactividade${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupMaterial"/>
@@ -381,7 +381,7 @@
               <Image iconType="3" name="/pt/utl/ist/elab/client/radioactividade/resources/cobre16.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.copper4" replaceFormat="ReCResourceBundle.findString(&quot;radioactividade${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.copper4" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;radioactividade${key}&quot;,&quot;radioactividade${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupMaterial"/>
@@ -400,7 +400,7 @@
               <Image iconType="3" name="/pt/utl/ist/elab/client/radioactividade/resources/cobre32.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.copper5" replaceFormat="ReCResourceBundle.findString(&quot;radioactividade${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.copper5" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;radioactividade${key}&quot;,&quot;radioactividade${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupMaterial"/>
@@ -419,7 +419,7 @@
               <Image iconType="3" name="/pt/utl/ist/elab/client/radioactividade/resources/air.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.air" replaceFormat="ReCResourceBundle.findString(&quot;radioactividade${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.air" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;radioactividade${key}&quot;,&quot;radioactividade${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupMaterial"/>
@@ -438,7 +438,7 @@
               <Image iconType="3" name="/pt/utl/ist/elab/client/radioactividade/resources/chumbo.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.lead" replaceFormat="ReCResourceBundle.findString(&quot;radioactividade${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.lead" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;radioactividade${key}&quot;,&quot;radioactividade${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupMaterial"/>
@@ -457,7 +457,7 @@
               <Image iconType="3" name="/pt/utl/ist/elab/client/radioactividade/resources/brick.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.brick" replaceFormat="ReCResourceBundle.findString(&quot;radioactividade${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/radioactividade/resources/messages.properties" key="rec.exp.radio.lbl.brick" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;radioactividade${key}&quot;,&quot;radioactividade${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupMaterial"/>

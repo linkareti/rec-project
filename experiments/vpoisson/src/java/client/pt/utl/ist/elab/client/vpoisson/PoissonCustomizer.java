@@ -663,7 +663,7 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanel13.setMinimumSize(new java.awt.Dimension(350, 42));
 		jPanel13.setPreferredSize(new java.awt.Dimension(350, 42));
 		jPanel14.setMinimumSize(new java.awt.Dimension(143, 25));
-		btnOK.setText(ReCResourceBundle.findString("poisson$rec.exp.customizer.title.ok"));
+		btnOK.setText(ReCResourceBundle.findStringOrDefault("poisson$rec.exp.customizer.title.ok","poisson$rec.exp.customizer.title.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
@@ -672,7 +672,7 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 
 		jPanel14.add(btnOK);
 
-		btnCancel.setText(ReCResourceBundle.findString("poisson$rec.exp.customizer.title.cancel"));
+		btnCancel.setText(ReCResourceBundle.findStringOrDefault("poisson$rec.exp.customizer.title.cancel","poisson$rec.exp.customizer.title.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
@@ -687,7 +687,7 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanel13.add(jPanel14, gridBagConstraints);
 
 		jPanel15.setMinimumSize(new java.awt.Dimension(136, 25));
-		btnDefaults.setText(ReCResourceBundle.findString("poisson$rec.exp.customizer.title.dfc"));
+		btnDefaults.setText(ReCResourceBundle.findStringOrDefault("poisson$rec.exp.customizer.title.dfc","poisson$rec.exp.customizer.title.dfc"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);

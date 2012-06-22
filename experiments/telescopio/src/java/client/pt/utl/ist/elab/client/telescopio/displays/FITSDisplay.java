@@ -109,8 +109,8 @@ public class FITSDisplay extends javax.swing.JPanel implements com.linkare.rec.i
 
 				if (error != null && error.length > 0) {
 					javax.swing.JOptionPane.showMessageDialog(null,
-							ReCResourceBundle.findString("telescopio$rec.exp.telescopio.lbl.error"),
-							ReCResourceBundle.findString("telescopio$rec.exp.telescopio.title.error"),
+							ReCResourceBundle.findStringOrDefault("telescopio$rec.exp.telescopio.lbl.error","telescopio$rec.exp.telescopio.lbl.error"),
+							ReCResourceBundle.findStringOrDefault("telescopio$rec.exp.telescopio.title.error","telescopio$rec.exp.telescopio.title.error"),
 							javax.swing.JOptionPane.ERROR_MESSAGE);
 				}
 			}

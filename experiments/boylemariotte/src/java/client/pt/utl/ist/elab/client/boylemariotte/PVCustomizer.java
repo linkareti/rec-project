@@ -157,7 +157,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         jPanel3.setMinimumSize(new java.awt.Dimension(350, 160));
         jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.Y_AXIS));
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("boylemariotte$rec.exp.customizer.title2"))); // NOI18N
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("boylemariotte$rec.exp.customizer.title2","boylemariotte$rec.exp.customizer.title2"))); // NOI18N
         jPanel6.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         jPanel6.setMinimumSize(new java.awt.Dimension(350, 80));
         jPanel6.setPreferredSize(new java.awt.Dimension(350, 80));
@@ -206,7 +206,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
         lblErrorSamplesTooHigh.setForeground(new java.awt.Color(255, 0, 0));
         lblErrorSamplesTooHigh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("boylemariotte$rec.exp.customizer.label2")); // NOI18N
+        lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("boylemariotte$rec.exp.customizer.label2","boylemariotte$rec.exp.customizer.label2")); // NOI18N
         lblErrorSamplesTooHigh.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -217,7 +217,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
         jPanel3.add(jPanel6);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("boylemariotte$rec.exp.customizer.title3"))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("boylemariotte$rec.exp.customizer.title3","boylemariotte$rec.exp.customizer.title3"))); // NOI18N
         jPanel1.setMinimumSize(new java.awt.Dimension(350, 80));
         jPanel1.setPreferredSize(new java.awt.Dimension(350, 80));
         jPanel1.setLayout(new java.awt.GridBagLayout());
@@ -263,7 +263,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
         add(jPanel3, java.awt.BorderLayout.CENTER);
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("boylemariotte$rec.exp.customizer.title1"))); // NOI18N
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("boylemariotte$rec.exp.customizer.title1","boylemariotte$rec.exp.customizer.title1"))); // NOI18N
         jPanel5.setMinimumSize(new java.awt.Dimension(350, 160));
         jPanel5.setPreferredSize(new java.awt.Dimension(350, 160));
         jPanel5.setLayout(new java.awt.GridBagLayout());
@@ -316,7 +316,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
         lblErrorVolsAreEqua.setForeground(new java.awt.Color(255, 0, 0));
         lblErrorVolsAreEqua.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblErrorVolsAreEqua.setText(ReCResourceBundle.findString("boylemariotte$rec.exp.customizer.label1")); // NOI18N
+        lblErrorVolsAreEqua.setText(ReCResourceBundle.findStringOrDefault("boylemariotte$rec.exp.customizer.label1","boylemariotte$rec.exp.customizer.label1")); // NOI18N
         lblErrorVolsAreEqua.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -486,7 +486,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 				.setEnabled((float) Math.abs(sldPos2.getValue() - sldPos1.getValue())  < 20*sldNumSamples
 						.getValue());
 		btnOK.setEnabled(!lblErrorVolsAreEqua.isEnabled() && !lblErrorSamplesTooHigh.isEnabled());
-		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("boylemariotte$rec.exp.customizer.label2")
+		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("boylemariotte$rec.exp.customizer.label2","boylemariotte$rec.exp.customizer.label2")
 				+ (int) (Math.floor((float) Math.abs(sldPos2.getValue() - sldPos1.getValue()))/20.F));
 	}
 
@@ -494,7 +494,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 //		float maxValue = Math.min((float) sldFreq.getMaximum(), 72000.F / (float) sldNumSamples.getValue());
 //		lblSamplingIntervalTooHigh.setEnabled(sldFreq.getValue() > maxValue);
 		btnOK.setEnabled(!lblErrorVolsAreEqua.isEnabled() && !lblErrorSamplesTooHigh.isEnabled());
-//		lblSamplingIntervalTooHigh.setText(ReCResourceBundle.findString("boylemariotte$rec.exp.customizer.label2")
+//		lblSamplingIntervalTooHigh.setText(ReCResourceBundle.findStringOrDefault("boylemariotte$rec.exp.customizer.label2","boylemariotte$rec.exp.customizer.label2")
 //				+ (int) maxValue);
 	}
 
@@ -658,7 +658,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	}
 
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findString("boylemariotte$rec.exp.boylemariotte.customizer.title");
+		return ReCResourceBundle.findStringOrDefault("boylemariotte$rec.exp.boylemariotte.customizer.title","boylemariotte$rec.exp.boylemariotte.customizer.title");
 	}
 
 	public javax.swing.JMenuBar getMenuBar() {

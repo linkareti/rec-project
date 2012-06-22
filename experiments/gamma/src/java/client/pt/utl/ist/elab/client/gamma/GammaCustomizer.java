@@ -68,7 +68,7 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0)));
 		jPanel2.setMinimumSize(new java.awt.Dimension(350, 42));
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
-		btnOK.setText(ReCResourceBundle.findString("gamma$rec.exp.lbl.gamma.ok"));
+		btnOK.setText(ReCResourceBundle.findStringOrDefault("gamma$rec.exp.lbl.gamma.ok","gamma$rec.exp.lbl.gamma.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -81,7 +81,7 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		gridBagConstraints.gridy = 1;
 		jPanel2.add(btnOK, gridBagConstraints);
 
-		btnCancel.setText(ReCResourceBundle.findString("gamma$rec.exp.lbl.gamma.cancel"));
+		btnCancel.setText(ReCResourceBundle.findStringOrDefault("gamma$rec.exp.lbl.gamma.cancel","gamma$rec.exp.lbl.gamma.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -101,7 +101,7 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		gridBagConstraints.weightx = 10.0;
 		jPanel2.add(jLabel1, gridBagConstraints);
 
-		btnDefaults.setText(ReCResourceBundle.findString("gamma$rec.exp.lbl.gamma.dftcfg"));
+		btnDefaults.setText(ReCResourceBundle.findStringOrDefault("gamma$rec.exp.lbl.gamma.dftcfg","gamma$rec.exp.lbl.gamma.dftcfg"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -130,7 +130,7 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel3.setLayout(new java.awt.BorderLayout());
 
 		jPanel3.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("gamma$rec.exp.lbl.gamma.Volume")));
+				.findStringOrDefault("gamma$rec.exp.lbl.gamma.Volume","gamma$rec.exp.lbl.gamma.Volume")));
 		jPanel3.setPreferredSize(new java.awt.Dimension(400, 66));
 		jSliderVolume.setMajorTickSpacing(1);
 		jSliderVolume.setMaximum(20);
@@ -169,7 +169,7 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel5.setLayout(new java.awt.BorderLayout());
 
 		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("gamma$rec.exp.lbl.gamma.STime")));
+				.findStringOrDefault("gamma$rec.exp.lbl.gamma.STime","gamma$rec.exp.lbl.gamma.STime")));
 		jSliderSTime.setMajorTickSpacing(5);
 		jSliderSTime.setMaximum(50);
 		jSliderSTime.setMinimum(1);
@@ -204,7 +204,7 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel7.setLayout(new java.awt.BorderLayout());
 
 		jPanel7.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("gamma$rec.exp.lbl.gamma.NPoints")));
+				.findStringOrDefault("gamma$rec.exp.lbl.gamma.NPoints","gamma$rec.exp.lbl.gamma.NPoints")));
 		jSliderNPoints.setMajorTickSpacing(50);
 		jSliderNPoints.setMaximum(1000);
 		jSliderNPoints.setMinimum(1);

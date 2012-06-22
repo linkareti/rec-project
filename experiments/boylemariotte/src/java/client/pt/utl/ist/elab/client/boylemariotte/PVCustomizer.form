@@ -121,7 +121,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="N&#xfa;mero de amostras">
-                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/boylemariotte/resources/messages.properties" key="rec.exp.customizer.title2" replaceFormat="ReCResourceBundle.findString(&quot;boylemariotte${key}&quot;)"/>
+                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/boylemariotte/resources/messages.properties" key="rec.exp.customizer.title2" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;boylemariotte${key}&quot;,&quot;boylemariotte${key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -202,7 +202,7 @@
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/boylemariotte/resources/messages.properties" key="rec.exp.customizer.label2" replaceFormat="ReCResourceBundle.findString(&quot;boylemariotte${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/boylemariotte/resources/messages.properties" key="rec.exp.customizer.label2" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;boylemariotte${key}&quot;,&quot;boylemariotte${key}&quot;)"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -219,7 +219,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Tempo entre amostras [ms]">
-                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/boylemariotte/resources/messages.properties" key="rec.exp.customizer.title3" replaceFormat="ReCResourceBundle.findString(&quot;boylemariotte${key}&quot;)"/>
+                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/boylemariotte/resources/messages.properties" key="rec.exp.customizer.title3" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;boylemariotte${key}&quot;,&quot;boylemariotte${key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -294,7 +294,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Varia&#xe7;&#xe3;o de Volume [uL]">
-              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/boylemariotte/resources/messages.properties" key="rec.exp.customizer.title1" replaceFormat="ReCResourceBundle.findString(&quot;boylemariotte${key}&quot;)"/>
+              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/boylemariotte/resources/messages.properties" key="rec.exp.customizer.title1" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;boylemariotte${key}&quot;,&quot;boylemariotte${key}&quot;)"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -373,7 +373,7 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/boylemariotte/resources/messages.properties" key="rec.exp.customizer.label1" replaceFormat="ReCResourceBundle.findString(&quot;boylemariotte${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/boylemariotte/resources/messages.properties" key="rec.exp.customizer.label1" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;boylemariotte${key}&quot;,&quot;boylemariotte${key}&quot;)"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>

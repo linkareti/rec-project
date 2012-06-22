@@ -54,7 +54,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder justification="1" position="2" title="Acceleration Potential [V]">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.thomson.lbl.vpot" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.thomson.lbl.vpot" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -113,7 +113,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Deflection Potential [V]">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.thomson.lbl.dpot" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.thomson.lbl.dpot" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -171,7 +171,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Current in the Helmholtz coils [mA]">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.thomson.lbl.current" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.thomson.lbl.current" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -237,7 +237,7 @@
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.thomson.lbl.magdef" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.thomson.lbl.magdef" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                 </Property>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="buttonGroup1"/>
@@ -250,7 +250,7 @@
             <Component class="javax.swing.JRadioButton" name="jRadioButtonF">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.thomson.lbl.eqforce" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.thomson.lbl.eqforce" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                 </Property>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="buttonGroup1"/>
@@ -263,7 +263,7 @@
             <Component class="javax.swing.JCheckBox" name="jCheckBoxVideo">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.thomson.lbl.wvideo" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.thomson.lbl.wvideo" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                 </Property>
               </Properties>
             </Component>
@@ -312,7 +312,7 @@
               <Font name="Comic Sans MS" size="12" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.thomson.lbl.ok" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.thomson.lbl.ok" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
@@ -330,7 +330,7 @@
               <Font name="Comic Sans MS" size="12" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.thomson.lbl.cancel" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.thomson.lbl.cancel" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
@@ -355,7 +355,7 @@
               <Font name="Comic Sans MS" size="12" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.dftcfg.thomson.title.1" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.dftcfg.thomson.title.1" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
             </Property>
           </Properties>
           <Events>

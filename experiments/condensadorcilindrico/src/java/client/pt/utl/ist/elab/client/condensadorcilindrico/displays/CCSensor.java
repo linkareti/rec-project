@@ -8,7 +8,7 @@ package pt.utl.ist.elab.client.condensadorcilindrico.displays;
 
 /**
  *
- * @author  Andr�
+ * @author  Andre
  */
 
 import com.linkare.rec.impl.client.experiment.DataDisplayEnum;

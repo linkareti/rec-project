@@ -16,7 +16,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Resolution">
-              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.res" replaceFormat="ReCResourceBundle.findString(&quot;meteo${key}&quot;)"/>
+              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.res" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;meteo${key}&quot;,&quot;meteo${key}&quot;)"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -38,7 +38,7 @@
         <Component class="javax.swing.JRadioButton" name="jRadioButtonYear">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.yearly" replaceFormat="ReCResourceBundle.findString(&quot;meteo${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.yearly" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;meteo${key}&quot;,&quot;meteo${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroup1"/>
@@ -53,7 +53,7 @@
         <Component class="javax.swing.JRadioButton" name="jRadioButtonMonth">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.monthly" replaceFormat="ReCResourceBundle.findString(&quot;meteo${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.monthly" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;meteo${key}&quot;,&quot;meteo${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroup1"/>
@@ -68,7 +68,7 @@
         <Component class="javax.swing.JRadioButton" name="jRadioButtonDay">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.daily" replaceFormat="ReCResourceBundle.findString(&quot;meteo${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.daily" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;meteo${key}&quot;,&quot;meteo${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroup1"/>
@@ -84,7 +84,7 @@
           <Properties>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.hourly" replaceFormat="ReCResourceBundle.findString(&quot;meteo${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.hourly" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;meteo${key}&quot;,&quot;meteo${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroup1"/>
@@ -103,7 +103,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Period">
-              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.period" replaceFormat="ReCResourceBundle.findString(&quot;meteo${key}&quot;)"/>
+              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.period" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;meteo${key}&quot;,&quot;meteo${key}&quot;)"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -125,7 +125,7 @@
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.startdate" replaceFormat="ReCResourceBundle.findString(&quot;meteo${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.startdate" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;meteo${key}&quot;,&quot;meteo${key}&quot;)"/>
             </Property>
           </Properties>
           <Constraints>
@@ -137,7 +137,7 @@
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.enddate" replaceFormat="ReCResourceBundle.findString(&quot;meteo${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.enddate" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;meteo${key}&quot;,&quot;meteo${key}&quot;)"/>
             </Property>
           </Properties>
           <Constraints>
@@ -439,7 +439,7 @@
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.hour" replaceFormat="ReCResourceBundle.findString(&quot;meteo${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.hour" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;meteo${key}&quot;,&quot;meteo${key}&quot;)"/>
             </Property>
           </Properties>
           <Constraints>
@@ -451,7 +451,7 @@
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.day" replaceFormat="ReCResourceBundle.findString(&quot;meteo${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.day" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;meteo${key}&quot;,&quot;meteo${key}&quot;)"/>
             </Property>
           </Properties>
           <Constraints>
@@ -463,7 +463,7 @@
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.month" replaceFormat="ReCResourceBundle.findString(&quot;meteo${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.month" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;meteo${key}&quot;,&quot;meteo${key}&quot;)"/>
             </Property>
           </Properties>
           <Constraints>
@@ -475,7 +475,7 @@
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.year" replaceFormat="ReCResourceBundle.findString(&quot;meteo${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.year" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;meteo${key}&quot;,&quot;meteo${key}&quot;)"/>
             </Property>
           </Properties>
           <Constraints>
@@ -487,7 +487,7 @@
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.hour" replaceFormat="ReCResourceBundle.findString(&quot;meteo${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.hour" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;meteo${key}&quot;,&quot;meteo${key}&quot;)"/>
             </Property>
           </Properties>
           <Constraints>
@@ -499,7 +499,7 @@
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.day" replaceFormat="ReCResourceBundle.findString(&quot;meteo${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.day" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;meteo${key}&quot;,&quot;meteo${key}&quot;)"/>
             </Property>
           </Properties>
           <Constraints>
@@ -511,7 +511,7 @@
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.month" replaceFormat="ReCResourceBundle.findString(&quot;meteo${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.month" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;meteo${key}&quot;,&quot;meteo${key}&quot;)"/>
             </Property>
           </Properties>
           <Constraints>
@@ -523,7 +523,7 @@
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.year" replaceFormat="ReCResourceBundle.findString(&quot;meteo${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.year" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;meteo${key}&quot;,&quot;meteo${key}&quot;)"/>
             </Property>
           </Properties>
           <Constraints>
@@ -535,7 +535,7 @@
         <Component class="javax.swing.JButton" name="jButtonHour">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.nowtime" replaceFormat="ReCResourceBundle.findString(&quot;meteo${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.nowtime" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;meteo${key}&quot;,&quot;meteo${key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
@@ -570,7 +570,7 @@
             <Component class="javax.swing.JButton" name="jButtonOK">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.ok" replaceFormat="ReCResourceBundle.findString(&quot;meteo${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.ok" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;meteo${key}&quot;,&quot;meteo${key}&quot;)"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -581,7 +581,7 @@
             <Component class="javax.swing.JButton" name="jButtonCancel">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.cancel" replaceFormat="ReCResourceBundle.findString(&quot;meteo${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.meteo.lbl.cancel" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;meteo${key}&quot;,&quot;meteo${key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>
@@ -602,7 +602,7 @@
             <Component class="javax.swing.JButton" name="jButtonDefault1">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.dftcfg.meteo.title.1" replaceFormat="ReCResourceBundle.findString(&quot;meteo${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/meteo/resources/messages.properties" key="rec.exp.dftcfg.meteo.title.1" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;meteo${key}&quot;,&quot;meteo${key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>

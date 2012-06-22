@@ -155,7 +155,7 @@ public class CondensadorCustomizer extends javax.swing.JPanel implements
 		jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.Y_AXIS));
 
 		jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle
-				.findString("ReCExpcondensador$rec.exp.customizer.title2"))); // NOI18N
+				.findStringOrDefault("condensador$rec.exp.customizer.title2","condensador$rec.exp.customizer.title2"))); // NOI18N
 		jPanel6.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
 		jPanel6.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel6.setPreferredSize(new java.awt.Dimension(350, 80));
@@ -202,7 +202,7 @@ public class CondensadorCustomizer extends javax.swing.JPanel implements
 
 		lblErrorSamplesTooHigh.setForeground(new java.awt.Color(255, 0, 0));
 		lblErrorSamplesTooHigh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("ReCExpcondensador$rec.exp.customizer.label2")); // NOI18N
+		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("condensador$rec.exp.customizer.label2","condensador$rec.exp.customizer.label2")); // NOI18N
 		lblErrorSamplesTooHigh.setEnabled(false);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -216,7 +216,7 @@ public class CondensadorCustomizer extends javax.swing.JPanel implements
 		add(jPanel3, java.awt.BorderLayout.CENTER);
 
 		jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle
-				.findString("ReCExpcondensador$rec.exp.customizer.title1"))); // NOI18N
+				.findStringOrDefault("condensador$rec.exp.customizer.title1","condensador$rec.exp.customizer.title1"))); // NOI18N
 		jPanel5.setMinimumSize(new java.awt.Dimension(350, 160));
 		jPanel5.setPreferredSize(new java.awt.Dimension(350, 160));
 		jPanel5.setLayout(new java.awt.GridBagLayout());
@@ -269,7 +269,7 @@ public class CondensadorCustomizer extends javax.swing.JPanel implements
 
 		lblErrorPosAreEqual.setForeground(new java.awt.Color(255, 0, 0));
 		lblErrorPosAreEqual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		lblErrorPosAreEqual.setText(ReCResourceBundle.findString("ReCExpcondensador$rec.exp.customizer.label1")); // NOI18N
+		lblErrorPosAreEqual.setText(ReCResourceBundle.findStringOrDefault("condensador$rec.exp.customizer.label1","condensador$rec.exp.customizer.label1")); // NOI18N
 		lblErrorPosAreEqual.setEnabled(false);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -419,7 +419,7 @@ public class CondensadorCustomizer extends javax.swing.JPanel implements
 																								 * (
 																								 * )
 																								 */);
-		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("ReCExpcondensador$rec.exp.customizer.label2")
+		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("condensador$rec.exp.customizer.label2","condensador$rec.exp.customizer.label2")
 				+ (int) Math.floor((float) Math.abs(sldPos2.getValue() - sldPos1.getValue()) * 80. / 1000.F));
 	}
 
@@ -573,7 +573,7 @@ public class CondensadorCustomizer extends javax.swing.JPanel implements
 	}
 
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findString("ReCExpcondensador$rec.exp.condensador.customizer.title");
+		return ReCResourceBundle.findStringOrDefault("condensador$rec.exp.condensador.customizer.title","condensador$rec.exp.condensador.customizer.title");
 	}
 
 	public javax.swing.JMenuBar getMenuBar() {

@@ -32,7 +32,7 @@
         <Component class="javax.swing.JButton" name="btnOK">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/polaroid/resources/messages.properties" key="rec.exp.polaroid.lbl.ok" replaceFormat="ReCResourceBundle.findString(&quot;polaroid${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/polaroid/resources/messages.properties" key="rec.exp.polaroid.lbl.ok" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;polaroid${key}&quot;,&quot;polaroid${key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
@@ -47,7 +47,7 @@
         <Component class="javax.swing.JButton" name="btnCancel">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/polaroid/resources/messages.properties" key="rec.exp.polaroid.lbl.cancel" replaceFormat="ReCResourceBundle.findString(&quot;polaroid${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/polaroid/resources/messages.properties" key="rec.exp.polaroid.lbl.cancel" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;polaroid${key}&quot;,&quot;polaroid${key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
@@ -69,7 +69,7 @@
         <Component class="javax.swing.JButton" name="btnDefaults">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/polaroid/resources/messages.properties" key="rec.exp.dftcfg.polaroid.title.1" replaceFormat="ReCResourceBundle.findString(&quot;polaroid${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/polaroid/resources/messages.properties" key="rec.exp.dftcfg.polaroid.title.1" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;polaroid${key}&quot;,&quot;polaroid${key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
@@ -119,7 +119,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Fixed polarizer position [º]">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/polaroid/resources/messages.properties" key="rec.exp.polaroid.lbl.fixedpol" replaceFormat="ReCResourceBundle.findString(&quot;polaroid${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/polaroid/resources/messages.properties" key="rec.exp.polaroid.lbl.fixedpol" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;polaroid${key}&quot;,&quot;polaroid${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -179,7 +179,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Movable polarizer initial position [º]">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/polaroid/resources/messages.properties" key="rec.exp.polaroid.lbl.movepolini" replaceFormat="ReCResourceBundle.findString(&quot;polaroid${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/polaroid/resources/messages.properties" key="rec.exp.polaroid.lbl.movepolini" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;polaroid${key}&quot;,&quot;polaroid${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -231,7 +231,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Movable polarizer end position [º]">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/polaroid/resources/messages.properties" key="rec.exp.polaroid.lbl.movepolend" replaceFormat="ReCResourceBundle.findString(&quot;polaroid${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/polaroid/resources/messages.properties" key="rec.exp.polaroid.lbl.movepolend" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;polaroid${key}&quot;,&quot;polaroid${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -292,7 +292,7 @@
             <Component class="javax.swing.JCheckBox" name="jCheckBoxLightPol">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/polaroid/resources/messages.properties" key="rec.exp.polaroid.lbl.pollight" replaceFormat="ReCResourceBundle.findString(&quot;polaroid${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/polaroid/resources/messages.properties" key="rec.exp.polaroid.lbl.pollight" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;polaroid${key}&quot;,&quot;polaroid${key}&quot;)"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -304,7 +304,7 @@
             <Component class="javax.swing.JCheckBox" name="jCheckBoxCalib">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/polaroid/resources/messages.properties" key="rec.exp.polaroid.lbl.calib" replaceFormat="ReCResourceBundle.findString(&quot;polaroid${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/polaroid/resources/messages.properties" key="rec.exp.polaroid.lbl.calib" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;polaroid${key}&quot;,&quot;polaroid${key}&quot;)"/>
                 </Property>
               </Properties>
               <Constraints>

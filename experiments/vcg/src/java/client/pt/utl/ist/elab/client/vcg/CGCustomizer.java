@@ -561,7 +561,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		tbsPanel.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
 				"cg$rec.exp.customizer.title.tbs", "TBS")));
-		tbsPanel.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpMM$rec.exp.customizer.tip.tbs",
+		tbsPanel.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.tbs",
 				"Time between samples"));
 		tbsPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		tbsSlider.setMajorTickSpacing(100);
@@ -571,7 +571,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		tbsSlider.setOrientation(javax.swing.JSlider.VERTICAL);
 		tbsSlider.setPaintLabels(true);
 		tbsSlider.setPaintTicks(true);
-		tbsSlider.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpMM$rec.exp.customizer.tip.tbs",
+		tbsSlider.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.tbs",
 				"Time between samples"));
 		tbsSlider.setValue(100);
 		tbsSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -589,7 +589,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		tbsTextField.setColumns(4);
 		tbsTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		tbsTextField.setText("100");
-		tbsTextField.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpMM$rec.exp.customizer.tip.tbs",
+		tbsTextField.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.tbs",
 				"Time between samples"));
 		tbsTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(final java.awt.event.FocusEvent evt) {
@@ -613,7 +613,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		samplesPanel.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
 				"cg$rec.exp.customizer.title.samples", "N Samples")));
-		samplesPanel.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpMM$rec.exp.customizer.tip.samples",
+		samplesPanel.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.samples",
 				"Number of samples"));
 		samplesPanel.setMinimumSize(new java.awt.Dimension(70, 83));
 		samplesPanel.setPreferredSize(new java.awt.Dimension(82, 224));
@@ -624,7 +624,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		samplesSlider.setOrientation(javax.swing.JSlider.VERTICAL);
 		samplesSlider.setPaintLabels(true);
 		samplesSlider.setPaintTicks(true);
-		samplesSlider.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpMM$rec.exp.customizer.tip.samples",
+		samplesSlider.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.samples",
 				"Number of samples"));
 		samplesSlider.setValue(100);
 		samplesSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -643,7 +643,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		samplesTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		samplesTextField.setText("100");
 		samplesTextField.setToolTipText(ReCResourceBundle.findStringOrDefault(
-				"ReCExpMM$rec.exp.customizer.tip.samples", "Number of samples"));
+				"cg$rec.exp.customizer.tip.samples", "Number of samples"));
 		samplesTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(final java.awt.event.FocusEvent evt) {
 				samplesTextFieldFocusLost(evt);

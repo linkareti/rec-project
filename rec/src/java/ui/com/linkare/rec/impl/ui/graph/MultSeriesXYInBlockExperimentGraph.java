@@ -162,14 +162,14 @@ public class MultSeriesXYInBlockExperimentGraph extends javax.swing.JPanel imple
 
 		this.header = header;
 		final Scale scaleX = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getSelectedScale();
-		final String chnX = ReCResourceBundle.findString(header.getChannelsConfig(
-				defaultXYDatasetProxy.getChannelDisplayX()).getChannelName());
+		String channelNameKey = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getChannelName();
+		final String chnX = ReCResourceBundle.findStringOrDefault(channelNameKey, channelNameKey);
 		final String pusX = scaleX.getPhysicsUnitSymbol();
 		final String multiplierX = scaleX.getMultiplier().toString();
 
 		final Scale scaleY = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getSelectedScale();
-		final String chnY = ReCResourceBundle.findString(header.getChannelsConfig(
-				defaultXYDatasetProxy.getChannelDisplayY()).getChannelName());
+		channelNameKey = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getChannelName();
+		final String chnY = ReCResourceBundle.findStringOrDefault(channelNameKey,channelNameKey);
 		final String pusY = scaleY.getPhysicsUnitSymbol();
 		final String multiplierY = scaleY.getMultiplier().toString();
 
@@ -260,8 +260,8 @@ public class MultSeriesXYInBlockExperimentGraph extends javax.swing.JPanel imple
 		defaultXYDatasetProxy.setUpdateFrequency(updateFrequency);
 	}
 
-    @Override
-    public DataDisplayEnum getDisplayType() {
-        return DataDisplayEnum.CHART;
-    }
+	@Override
+	public DataDisplayEnum getDisplayType() {
+		return DataDisplayEnum.CHART;
+	}
 }

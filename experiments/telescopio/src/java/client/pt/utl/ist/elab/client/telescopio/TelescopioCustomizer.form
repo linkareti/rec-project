@@ -43,7 +43,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Objects panel ">
-                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/telescopio/resources/messages.properties" key="rec.exp.telescopio.lbl.panelobjs" replaceFormat="ReCResourceBundle.findString(&quot;telescopio${key}&quot;)"/>
+                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/telescopio/resources/messages.properties" key="rec.exp.telescopio.lbl.panelobjs" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;telescopio${key}&quot;,&quot;telescopio${key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -102,7 +102,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel3">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/telescopio/resources/messages.properties" key="rec.exp.telescopio.lbl.chooseobj" replaceFormat="ReCResourceBundle.findString(&quot;telescopio${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/telescopio/resources/messages.properties" key="rec.exp.telescopio.lbl.chooseobj" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;telescopio${key}&quot;,&quot;telescopio${key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -125,7 +125,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel2">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/telescopio/resources/messages.properties" key="rec.exp.telescopio.lbl.objectinfo" replaceFormat="ReCResourceBundle.findString(&quot;telescopio${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/telescopio/resources/messages.properties" key="rec.exp.telescopio.lbl.objectinfo" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;telescopio${key}&quot;,&quot;telescopio${key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -162,7 +162,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Exposition time">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/telescopio/resources/messages.properties" key="rec.exp.telescopio.lbl.expotime" replaceFormat="ReCResourceBundle.findString(&quot;telescopio${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/telescopio/resources/messages.properties" key="rec.exp.telescopio.lbl.expotime" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;telescopio${key}&quot;,&quot;telescopio${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -178,7 +178,7 @@
                 <Component class="javax.swing.JRadioButton" name="jRadioButtonTime">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/telescopio/resources/messages.properties" key="rec.exp.telescopio.lbl.newtime" replaceFormat="ReCResourceBundle.findString(&quot;telescopio${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/telescopio/resources/messages.properties" key="rec.exp.telescopio.lbl.newtime" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;telescopio${key}&quot;,&quot;telescopio${key}&quot;)"/>
                     </Property>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="buttonGroup1"/>
@@ -194,7 +194,7 @@
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/telescopio/resources/messages.properties" key="rec.exp.telescopio.lbl.default" replaceFormat="ReCResourceBundle.findString(&quot;telescopio${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/telescopio/resources/messages.properties" key="rec.exp.telescopio.lbl.default" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;telescopio${key}&quot;,&quot;telescopio${key}&quot;)"/>
                     </Property>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="buttonGroup1"/>
@@ -267,7 +267,7 @@
                 <Component class="javax.swing.JButton" name="jButtonConfirm">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/telescopio/resources/messages.properties" key="rec.exp.telescopio.lbl.ok" replaceFormat="ReCResourceBundle.findString(&quot;telescopio${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/telescopio/resources/messages.properties" key="rec.exp.telescopio.lbl.ok" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;telescopio${key}&quot;,&quot;telescopio${key}&quot;)"/>
                     </Property>
                     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[20, 10]"/>
@@ -285,7 +285,7 @@
                 <Component class="javax.swing.JButton" name="jButtonCancel">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/telescopio/resources/messages.properties" key="rec.exp.telescopio.lbl.cancel" replaceFormat="ReCResourceBundle.findString(&quot;telescopio${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/telescopio/resources/messages.properties" key="rec.exp.telescopio.lbl.cancel" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;telescopio${key}&quot;,&quot;telescopio${key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Events>

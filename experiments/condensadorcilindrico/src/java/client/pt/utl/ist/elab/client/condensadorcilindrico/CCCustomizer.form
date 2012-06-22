@@ -91,7 +91,7 @@
         <Component class="javax.swing.JCheckBox" name="jChkCalibrate">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/condensadorcilindrico/resources/messages.properties" key="rec.exp.cc.customizer.calibrate" replaceFormat="ReCResourceBundle.findString(&quot;condensadorcilindrico${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/condensadorcilindrico/resources/messages.properties" key="rec.exp.cc.customizer.calibrate" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;condensadorcilindrico${key}&quot;,&quot;condensadorcilindrico${key}&quot;)"/>
             </Property>
           </Properties>
           <Constraints>
@@ -142,7 +142,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Initial position [mm]">
-                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/pv/resources/messages.properties" key="rec.exp.customizer.title1" replaceFormat="ReCResourceBundle.findString(&quot;condensadorcilindrico${key}&quot;)"/>
+                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/pv/resources/messages.properties" key="rec.exp.customizer.title1" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;condensadorcilindrico${key}&quot;,&quot;condensadorcilindrico${key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -218,7 +218,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Final position [mm]">
-                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/condensadorcilindrico/resources/messages.properties" key="rec.exp.customizer.title2" replaceFormat="ReCResourceBundle.findString(&quot;condensadorcilindrico${key}&quot;)"/>
+                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/condensadorcilindrico/resources/messages.properties" key="rec.exp.customizer.title2" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;condensadorcilindrico${key}&quot;,&quot;condensadorcilindrico${key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -298,7 +298,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Number of Points">
-                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/condensadorcilindrico/resources/messages.properties" key="rec.exp.customizer.title3" replaceFormat="ReCResourceBundle.findString(&quot;condensadorcilindrico${key}&quot;)"/>
+                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/condensadorcilindrico/resources/messages.properties" key="rec.exp.customizer.title3" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;condensadorcilindrico${key}&quot;,&quot;condensadorcilindrico${key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>

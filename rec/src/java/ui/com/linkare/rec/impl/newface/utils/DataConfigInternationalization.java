@@ -19,61 +19,61 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 public class DataConfigInternationalization {
 
 	private static final String CHANNEL_NAME = ReCResourceBundle
-			.findString("ReCUI$rec.ui.channel.acquisition.config.data.channel.name");
+			.findStringOrDefault("ReCUI$rec.ui.channel.acquisition.config.data.channel.name","ReCUI$rec.ui.channel.acquisition.config.data.channel.name");
 
 	private static final String CHANNEL_START_TIME = ReCResourceBundle
-			.findString("ReCUI$rec.ui.channel.acquisition.config.data.channel.start.time");
+			.findStringOrDefault("ReCUI$rec.ui.channel.acquisition.config.data.channel.start.time","ReCUI$rec.ui.channel.acquisition.config.data.channel.start.time");
 
 	private static final String CHANNEL_FREQUENCY = ReCResourceBundle
-			.findString("ReCUI$rec.ui.channel.acquisition.config.data.channel.frequency");
+			.findStringOrDefault("ReCUI$rec.ui.channel.acquisition.config.data.channel.frequency","ReCUI$rec.ui.channel.acquisition.config.data.channel.frequency");
 
 	private static final String CHANNEL_SCALE = ReCResourceBundle
-			.findString("ReCUI$rec.ui.channel.acquisition.config.data.channel.scale");
+			.findStringOrDefault("ReCUI$rec.ui.channel.acquisition.config.data.channel.scale","ReCUI$rec.ui.channel.acquisition.config.data.channel.scale");
 
 	private static final String CHANNEL_TOTAL_SAMPLES = ReCResourceBundle
-			.findString("ReCUI$rec.ui.channel.acquisition.config.data.channel.total.samples");
+			.findStringOrDefault("ReCUI$rec.ui.channel.acquisition.config.data.channel.total.samples","ReCUI$rec.ui.channel.acquisition.config.data.channel.total.samples");
 
 	private static final String CHANNEL_TOTAL_SAMPLES_UNDETERMINED = ReCResourceBundle
-			.findString("ReCUI$rec.ui.channel.acquisition.config.data.channel.total.samples.undetermined");
+			.findStringOrDefault("ReCUI$rec.ui.channel.acquisition.config.data.channel.total.samples.undetermined","ReCUI$rec.ui.channel.acquisition.config.data.channel.total.samples.undetermined");
 
 	private static final String CHANNEL_PARAMETERS = ReCResourceBundle
-			.findString("ReCUI$rec.ui.channel.acquisition.config.data.channel.parameters");
+			.findStringOrDefault("ReCUI$rec.ui.channel.acquisition.config.data.channel.parameters","ReCUI$rec.ui.channel.acquisition.config.data.channel.parameters");
 
 	private static final String APPARATUS = ReCResourceBundle
-			.findString("ReCUI$rec.ui.hardware.acquisition.config.apparatus");
+			.findStringOrDefault("ReCUI$rec.ui.hardware.acquisition.config.apparatus","ReCUI$rec.ui.hardware.acquisition.config.apparatus");
 
 	private static final String EXPERIENCE_START_TIME = ReCResourceBundle
-			.findString("ReCUI$rec.ui.hardware.acquisition.config.experience.start.time");
+			.findStringOrDefault("ReCUI$rec.ui.hardware.acquisition.config.experience.start.time","ReCUI$rec.ui.hardware.acquisition.config.experience.start.time");
 
 	private static final String FREQUENCY = ReCResourceBundle
-			.findString("ReCUI$rec.ui.hardware.acquisition.config.frequency");
+			.findStringOrDefault("ReCUI$rec.ui.hardware.acquisition.config.frequency","ReCUI$rec.ui.hardware.acquisition.config.frequency");
 
 	private static final String TOTAL_SAMPLES = ReCResourceBundle
-			.findString("ReCUI$rec.ui.hardware.acquisition.config.total.samples");
+			.findStringOrDefault("ReCUI$rec.ui.hardware.acquisition.config.total.samples","ReCUI$rec.ui.hardware.acquisition.config.total.samples");
 
 	private static final String TOTAL_SAMPLES_UNDETERMINED = ReCResourceBundle
-			.findString("ReCUI$rec.ui.hardware.acquisition.config.total.samples.undetermined");
+			.findStringOrDefault("ReCUI$rec.ui.hardware.acquisition.config.total.samples.undetermined","ReCUI$rec.ui.hardware.acquisition.config.total.samples.undetermined");
 
 	private static final String PARAMETERS = ReCResourceBundle
-			.findString("ReCUI$rec.ui.hardware.acquisition.config.parameters");
+			.findStringOrDefault("ReCUI$rec.ui.hardware.acquisition.config.parameters","ReCUI$rec.ui.hardware.acquisition.config.parameters");
 
 	private static final String CHANNELS_CONFIGURATION = ReCResourceBundle
-			.findString("ReCUI$rec.ui.hardware.acquisition.config.channels.onfiguration");
+			.findStringOrDefault("ReCUI$rec.ui.hardware.acquisition.config.channels.onfiguration","ReCUI$rec.ui.hardware.acquisition.config.channels.onfiguration");
 
 	private static final String CHANNEL = ReCResourceBundle
-			.findString("ReCUI$rec.ui.hardware.acquisition.config.channel");
+			.findStringOrDefault("ReCUI$rec.ui.hardware.acquisition.config.channel","ReCUI$rec.ui.hardware.acquisition.config.channel");
 
 	private static final String CONFIGURATION = ReCResourceBundle
-			.findString("ReCUI$rec.ui.hardware.acquisition.config.configuration");
+			.findStringOrDefault("ReCUI$rec.ui.hardware.acquisition.config.configuration","ReCUI$rec.ui.hardware.acquisition.config.configuration");
 
 	private static final String CONFIGURATION_UNDEFINED = ReCResourceBundle
-			.findString("ReCUI$rec.ui.hardware.acquisition.config.configuration.undefined");
+			.findStringOrDefault("ReCUI$rec.ui.hardware.acquisition.config.configuration.undefined","ReCUI$rec.ui.hardware.acquisition.config.configuration.undefined");
 
 	private static final String UNDEFINED_PARAMETER_NAME = ReCResourceBundle
-			.findString("ReCUI$rec.ui.parameter.config.undefined.parameter.name");
+			.findStringOrDefault("ReCUI$rec.ui.parameter.config.undefined.parameter.name","ReCUI$rec.ui.parameter.config.undefined.parameter.name");
 
 	private static final String UNDEFINED = ReCResourceBundle
-			.findString("ReCUI$rec.ui.parameter.config.undefined");
+			.findStringOrDefault("ReCUI$rec.ui.parameter.config.undefined","ReCUI$rec.ui.parameter.config.undefined");
 
 	private DataConfigInternationalization() {
 		// Static class
@@ -84,12 +84,12 @@ public class DataConfigInternationalization {
 			return String.valueOf(scale);
 		}
 
-		return (scale.getScaleLabel() == null ? "" : ReCResourceBundle.findString(scale.getScaleLabel()) + " = ") + "["
+		return (scale.getScaleLabel() == null ? "" : ReCResourceBundle.findStringOrDefault(scale.getScaleLabel(),scale.getScaleLabel()) + " = ") + "["
 				+ scale.getMinimumValue().toEngineeringNotation() + " ; "
 				+ scale.getMaximumValue().toEngineeringNotation() + " ; \u0394="
 				+ scale.getStepValue().toEngineeringNotation() + " ; \u03B4="
 				+ scale.getDefaultErrorValue().toEngineeringNotation() + "] " + scale.getMultiplier().toString()
-				+ scale.getPhysicsUnitSymbol() + " - " + ReCResourceBundle.findString(scale.getPhysicsUnitName());
+				+ scale.getPhysicsUnitSymbol() + " - " + ReCResourceBundle.findStringOrDefault(scale.getPhysicsUnitName(),scale.getPhysicsUnitName());
 	}
 
 	public static String toString(final ChannelAcquisitionConfig config) {
@@ -102,7 +102,7 @@ public class DataConfigInternationalization {
 
 		if (config.getChannelName() != null) {
 			strBufOut.append("\t" + DataConfigInternationalization.CHANNEL_NAME)
-					.append(ReCResourceBundle.findString(config.getChannelName())).append(linesep);
+					.append(ReCResourceBundle.findStringOrDefault(config.getChannelName(),config.getChannelName())).append(linesep);
 		}
 
 		if (config.getTimeStart() != null) {

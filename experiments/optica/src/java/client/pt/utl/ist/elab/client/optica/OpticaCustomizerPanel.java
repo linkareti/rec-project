@@ -1877,7 +1877,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements
 
 	@Override
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findString("optica$rec.exp.optica.customizer.title");
+		return ReCResourceBundle.findStringOrDefault("optica$rec.exp.optica.customizer.title","optica$rec.exp.optica.customizer.title");
 	}
 
 	@Override

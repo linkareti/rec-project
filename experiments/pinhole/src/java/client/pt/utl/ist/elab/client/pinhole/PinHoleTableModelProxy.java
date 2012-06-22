@@ -81,12 +81,12 @@ public class PinHoleTableModelProxy extends DefaultTableModel implements ExpData
 	public String getColumnName(int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			if (columnIndex == 0) {
-				return ReCResourceBundle.findString("ReCUI$rec.ui.lbl.nodata");
+				return ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.lbl.nodata","ReCUI$rec.ui.lbl.nodata");
 			}
 			return null;
 		}
 		if (columnIndex == 0) {
-			return ReCResourceBundle.findString("ReCUI$rec.ui.table.model.column.sample");
+			return ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.table.model.column.sample","ReCUI$rec.ui.table.model.column.sample");
 		}
 		
 		int channelIndex = columnIndex - 1;

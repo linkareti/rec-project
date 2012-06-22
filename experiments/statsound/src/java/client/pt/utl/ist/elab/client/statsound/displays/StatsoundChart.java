@@ -17,7 +17,7 @@ public class StatsoundChart extends AbstractStatsoundChart {
 	private static final long serialVersionUID = 8368641722434402527L;
 
 	private static final String CHART_NAME = ReCResourceBundle
-			.findString("statsound$rec.exp.display.statsound.tip.statsoundTable");
+			.findStringOrDefault("statsound$rec.exp.display.statsound.tip.statsoundTable","statsound$rec.exp.display.statsound.tip.statsoundTable");
 
 	private static final String EXPERIMENT_TYPE = "experiment.type";
 

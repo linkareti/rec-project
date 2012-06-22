@@ -91,8 +91,8 @@ public class DefaultDatasetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 				.toString();
 		final String ph_unit_symbol = expDataModel.getChannelConfig(getChannelDisplay()).getSelectedScale()
 				.getPhysicsUnitSymbol();
-		final String ch_name = ReCResourceBundle.findString(expDataModel.getChannelConfig(getChannelDisplay())
-				.getChannelName());
+		String channelNameKey = expDataModel.getChannelConfig(getChannelDisplay()).getChannelName();
+		final String ch_name = ReCResourceBundle.findStringOrDefault(channelNameKey, channelNameKey);
 
 		return ch_name + " [" + multiplier + ph_unit_symbol + "]";
 	}
