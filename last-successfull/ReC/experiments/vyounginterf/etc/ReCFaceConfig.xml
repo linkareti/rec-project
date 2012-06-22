@@ -1,0 +1,31 @@
+<apparatus location="INTERFERENCIA_YOUNG_V1.0"
+	customizerClassLocationBundleKey="younginterf$rec.exp.customizer.younginterf"
+	toolTipBundleKey="younginterf$rec.exp.tip.younginterf"
+	iconLocationBundleKey="younginterf$rec.exp.icon.younginterf"
+	displayStringBundleKey="younginterf$rec.exp.title.younginterf"
+	desktopLocationBundleKey="younginterf$rec.exp.background.younginterf"
+	order="1" headerDisplayClassLocationBundleKey=""
+	displayFactoryClassLocationBundleKey=""
+	dataModelClassLocationBundleKey="" visible="true" selected="true"
+	enabled="false" connected="false">
+	<localizationBundle name="younginterf"
+		location="recresource:///pt/utl/ist/elab/client/vyounginterf/resources/messages" />
+	<display classLocationBundleKey="younginterf$rec.exp.display.younginterf.loc.1"
+		toolTipBundleKey="younginterf$rec.exp.display.younginterf.tip.1"
+		iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="younginterf$rec.exp.display.younginterf.title.1"
+		offlineCapable="false" order="1" visible="true" selected="true"
+		enabled="false" connected="false" />
+	<display classLocationBundleKey="younginterf$rec.exp.display.younginterf.loc.2"
+		toolTipBundleKey="younginterf$rec.exp.display.younginterf.tip.2"
+		iconLocationBundleKey="ReCUI$rec.ui.icon.table"
+		displayStringBundleKey="younginterf$rec.exp.display.younginterf.title.2"
+		offlineCapable="false" order="2" visible="true" selected="true"
+		enabled="false" connected="false" />
+	<display classLocationBundleKey="younginterf$rec.exp.display.younginterf.loc.3"
+		toolTipBundleKey="younginterf$rec.exp.display.younginterf.tip.3"
+		iconLocationBundleKey="ReCUI$rec.ui.icon.sensor"
+		displayStringBundleKey="younginterf$rec.exp.display.younginterf.title.3"
+		offlineCapable="false" order="3" visible="true" selected="true"
+		enabled="false" connected="false" />
+</apparatus>
