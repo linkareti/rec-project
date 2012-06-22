@@ -1,0 +1,90 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/three-row-template.xhtml">
+
+	<ui:define name="content">
+
+		<div style="height: 400px; position: relative">
+
+			<h:form id="form">
+
+				<h:panelGroup id="labsPanel" style="float: left; width: 400px">
+					<p:poll update="refreshableLabs" interval="10"
+						listener="#{statusBean.updateLabStatus}" />
+					<h:panelGroup id="refreshableLabs">
+						<h:dataTable var="lab" value="#{statusBean.labs}"
+							style="width:400px">
+							<p:column style="width: 370px">
+								<h:outputText value="#{lab.state.label}" />
+							</p:column>
+							<p:column style="width: 15px">
+								<h:graphicImage library="images" name="available.gif"
+									rendered="#{!lab.available}"
+									title="#{statusBundle['tooltip.lab.available']}" />
+								<h:graphicImage library="images" name="unavailable.gif"
+									rendered="#{lab.available}"
+									title="#{statusBundle['tooltip.lab.unavailable']}" />
+							</p:column>
+							<p:column style="width: 15px">
+								<h:commandLink title="#{statusBundle['tooltip.lab.expand']}">
+									<h:graphicImage library="images"
+										name="rt-arrow-circle-gree.png"
+										onmouseover="this.style.cursor='pointer';"
+										onmouseout="this.style.cursor='default';" />
+									<f:setPropertyActionListener target="#{statusBean.selectedLab}"
+										value="#{lab}" />
+								</h:commandLink>
+							</p:column>
+						</h:dataTable>
+					</h:panelGroup>
+				</h:panelGroup>
+
+				<h:panelGroup id="experimentsPanel"
+					style="float: left; width: 400px; height: 400px"
+					rendered="#{!empty statusBean.selectedLab}">
+					<p:poll update="table" interval="5"
+						listener="#{statusBean.updateExperimentStatus}" />
+					<script src="http://www.java.com/js/deployJava.js" />
+					<p:scrollPanel mode="native"
+						style="height: 300px; width:550px; background: #bdd2d0; border-style:none">
+						<h:dataTable id="table" var="deployedExp"
+							value="#{statusBean.labExperiments}" style="width:530px;">
+							<h:column style="width:300px">
+								<h:outputText value="#{deployedExp.experiment.state.label}" />
+							</h:column>
+							<h:column style="width:50px">
+								<h:graphicImage library="images" name="available.gif"
+									rendered="#{!deployedExp.labRunning}"
+									title="#{statusBundle['tooltip.experiment.available']}" />
+								<h:graphicImage library="images" name="unavailable.gif"
+									rendered="#{deployedExp.labRunning}"
+									title="#{statusBundle['tooltip.experiment.unavailable']}" />
+							</h:column>
+							<h:column style="width:80px">
+								<h:outputText value="#{deployedExp.numberOfUsers}"
+									title="#{statusBundle['tooltip.experiment.users']}" />
+							</h:column>
+							<h:column style="width:100px">
+								<a
+									href="javascript:var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + 'client/elab-client.jnlp'; if (!deployJava.isWebStartInstalled('1.6')) {if (deployJava.installLatestJRE()) {if (deployJava.launch(url)) {}}} else {if (deployJava.launch(url)) {}}"
+									title="#{statusBundle['tooltip.experiment.launch']}"> <img
+									src="client/images/webstart.png" border="0" />
+								</a>
+							</h:column>
+						</h:dataTable>
+					</p:scrollPanel>
+				</h:panelGroup>
+
+			</h:form>
+
+		</div>
+
+		<div style="height: 20px; text-align: center">
+			<a href=""><b>FAQ</b></a> | <a href=""><b>Requirements</b></a>
+		</div>
+
+	</ui:define>
+
+</ui:composition>
