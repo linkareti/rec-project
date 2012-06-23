@@ -100,7 +100,7 @@ public class StatusBean implements Serializable {
 		experiment.setState(newState);
 	    }
 	    if (Math.random() > 0.50d) {
-		experiment.setNumberOfUsers(randUsers.nextInt(101));
+		//		experiment.setNumberOfUsers(randUsers.nextInt(101));
 	    }
 	}
     }

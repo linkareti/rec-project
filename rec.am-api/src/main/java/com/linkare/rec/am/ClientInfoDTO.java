@@ -1,5 +1,6 @@
 package com.linkare.rec.am;
 
+import java.beans.ConstructorProperties;
 import java.io.Serializable;
 
 /**
@@ -16,6 +17,7 @@ public class ClientInfoDTO implements Serializable {
 
     private String userName = null;
 
+    @ConstructorProperties({ "userName" })
     public ClientInfoDTO(final String userName) {
 	this.userName = userName;
     }

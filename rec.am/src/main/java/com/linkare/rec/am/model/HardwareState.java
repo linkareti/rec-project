@@ -1,5 +1,8 @@
 package com.linkare.rec.am.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Represents the possible states of the Physical Hardware.
  * 
@@ -17,6 +20,15 @@ public enum HardwareState {
 	this.code = code;
     }
 
+    private static final Map<Byte, HardwareState> codeMap;
+    static {
+	codeMap = new HashMap<Byte, HardwareState>();
+
+	for (final HardwareState state : HardwareState.values()) {
+	    codeMap.put(Byte.valueOf(state.code), state);
+	}
+    }
+
     /**
      * Returns the enum value of the state for a given state code.
      * 
@@ -24,11 +36,6 @@ public enum HardwareState {
      * @return
      */
     public static HardwareState valueOfCode(byte code) {
-	for (HardwareState state : HardwareState.values()) {
-	    if (state.code == code) {
-		return state;
-	    }
-	}
-	return null;
+	return codeMap.get(code);
     }
 }

@@ -12,6 +12,7 @@ import javax.management.MXBean;
 
 import com.linkare.rec.am.ClientInfoDTO;
 import com.linkare.rec.am.HardwareInfoDTO;
+import com.linkare.rec.am.RegisteredHardwareDTO;
 
 /**
  * 
@@ -23,5 +24,9 @@ public interface IMultiCastControllerMXBean {
     List<HardwareInfoDTO> getHardwares();
 
     List<ClientInfoDTO> getClients();
+
+    List<RegisteredHardwareDTO> getRegisteredHardwaresInfo();
+
+    long getUpTimeInMillis();
 
 }

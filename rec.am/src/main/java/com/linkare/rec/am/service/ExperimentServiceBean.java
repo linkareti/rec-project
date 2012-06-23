@@ -73,4 +73,10 @@ public class ExperimentServiceBean extends BusinessServiceBean<Experiment, Long>
     public List<Experiment> findExperimentsByLaboratory(Laboratory lab) {
 	return getEntityManager().createNamedQuery(Experiment.FIND_BY_LAB).setParameter(Experiment.LABORATORY, lab.getName()).getResultList();
     }
+
+    @Override
+    public Experiment findByExternalID(String externalID) {
+	return (Experiment) getEntityManager().createNamedQuery(Experiment.FIND_BY_EXTERNAL_ID).setParameter(Experiment.EXTERNAL_ID_QRY_PARAM, externalID)
+					      .getSingleResult();
+    }
 }

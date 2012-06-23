@@ -1,5 +1,7 @@
 package com.linkare.rec.am.service;
 
+import java.util.List;
+
 import com.linkare.rec.am.model.Laboratory;
 
 /**
@@ -8,4 +10,5 @@ import com.linkare.rec.am.model.Laboratory;
  * 
  */
 public interface LaboratoryService extends BusinessService<Laboratory, Long> {
+    public List<Laboratory> findAllActive();
 }

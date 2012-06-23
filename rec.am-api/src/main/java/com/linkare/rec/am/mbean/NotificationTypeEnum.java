@@ -68,7 +68,7 @@ public enum NotificationTypeEnum implements INotificationFactory {
     public String getType() {
 	return type;
     }
-
+    
     private static final MBeanNotificationInfo[] MBEAN_NOTIFICATION_INFO;
 
     private static final Map<String, NotificationTypeEnum> notificationTypeMap;

@@ -27,7 +27,8 @@ import com.linkare.commons.utils.EqualityUtils;
 @Entity
 @Table(name = "LABORATORY")
 @NamedQueries( { @NamedQuery(name = Laboratory.FIND_ALL_QUERYNAME, query = "Select l from Laboratory l"),
-	@NamedQuery(name = Laboratory.COUNT_ALL_QUERYNAME, query = "Select count(l) from Laboratory l") })
+	@NamedQuery(name = Laboratory.COUNT_ALL_QUERYNAME, query = "Select count(l) from Laboratory l"),
+	@NamedQuery(name = Laboratory.FIND_ALL_ACTIVE_QUERYNAME, query = Laboratory.FIND_ALL_ACTIVE_QUERY) })
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class Laboratory extends DefaultDomainObject {
 
@@ -36,6 +37,11 @@ public class Laboratory extends DefaultDomainObject {
     public static final String FIND_ALL_QUERYNAME = "Laboratory.findAll";
 
     public static final String COUNT_ALL_QUERYNAME = "Laboratory.countAll";
+    
+    public static final String FIND_ALL_ACTIVE_QUERYNAME = "Laboratory.findAllActive";
+    
+    public static final String FIND_ALL_ACTIVE_QUERY = "Select l from Laboratory l where l.state.active = '1' order by l.name";
+    
 
     @Column(name = "NAME", unique = true, insertable = true, updatable = true)
     private String name;
@@ -50,11 +56,8 @@ public class Laboratory extends DefaultDomainObject {
     @Transient
     private boolean available;
     
-    @Column(name = "JMX_IP")
-    private String jmxIP;
-
-    @Column(name = "JMX_PORT")
-    private int jmxPort;
+    @Column(name = "JMX_URL")
+    private String jmxURL;
 
     @Column(name = "JMX_PASS")
     private String jmxPass;
@@ -124,34 +127,18 @@ public class Laboratory extends DefaultDomainObject {
 
     /**
      * 
-     * @return the jmx ip
+     * @return the jmx url
      */
-    public String getJmxIP() {
-	return jmxIP;
+    public String getJmxURL() {
+	return jmxURL;
     }
 
     /**
      * 
      * @param jmxIP
      */
-    public void setJmxIP(String jmxIP) {
-	this.jmxIP = jmxIP;
-    }
-
-    /**
-     * 
-     * @return the jmx port
-     */
-    public int getJmxPort() {
-	return jmxPort;
-    }
-
-    /**
-     * 
-     * @param jmxPort
-     */
-    public void setJmxPort(int jmxPort) {
-	this.jmxPort = jmxPort;
+    public void setJmxURL(String jmxURL) {
+	this.jmxURL = jmxURL;
     }
 
     /**
@@ -206,7 +193,7 @@ public class Laboratory extends DefaultDomainObject {
     public void setExperiments(List<Experiment> experiments) {
 	this.experiments = experiments;
     }
-
+    
     public boolean isAvailable() {
 	return available;
     }

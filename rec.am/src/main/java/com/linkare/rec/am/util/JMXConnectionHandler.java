@@ -1,10 +1,12 @@
 package com.linkare.rec.am.util;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javax.management.InstanceNotFoundException;
 import javax.management.Notification;
-import javax.management.NotificationFilter;
 import javax.management.NotificationListener;
 import javax.management.ObjectName;
 import javax.management.remote.JMXConnectionNotification;
@@ -14,83 +16,93 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.linkare.rec.am.mbean.MBeanConnectionResourcesUtilities;
-import com.linkare.rec.am.model.Laboratory;
 
 public final class JMXConnectionHandler {
 
     private final static Logger LOG = LoggerFactory.getLogger(JMXConnectionHandler.class);
 
-    //TODO: system property?
-    private static final int MAX_NUMBER_OF_RETRIES = 50;
-
-    private final String jmxIP;
-    private final int jmxPort;
+    private final String jmxURL;
     private final String jmxUser;
     private final String jmxPass;
 
-    private JMXConnector jmxConnector;
-    private NotificationListener listener;
+    private volatile JMXConnector jmxConnector;
+    private volatile MBeanNotificationListenerInfo listener;
     private NotificationListener connectionListener;
-    private ObjectName objName;
 
-    private int numberOfRetries;
+    private final AtomicInteger numberOfRetries;
 
-    private boolean isConnected;
+    private final Lock mainLock;
 
-    public JMXConnectionHandler(final Laboratory lab) {
+    public JMXConnectionHandler(final String jmxURL, final String jmxUser, final String jmxPass) {
 
-	this.jmxIP = lab.getJmxIP();
-	this.jmxPort = lab.getJmxPort();
-	this.jmxUser = lab.getJmxUser();
-	this.jmxPass = lab.getJmxPass();
+	if (jmxURL == null || jmxUser == null || jmxPass == null) {
+	    throw new NullPointerException("jmxURL, user or pwd cannot be null");
+	}
+
+	this.jmxURL = jmxURL;
+	this.jmxUser = jmxUser;
+	this.jmxPass = jmxPass;
 
 	this.jmxConnector = null;
-	this.numberOfRetries = 0;
+	this.numberOfRetries = new AtomicInteger(0);
 	this.listener = null;
-	this.objName = null;
-	this.isConnected = false;
+
+	mainLock = new ReentrantLock();
     }
 
-    public boolean initJMXConnectorIfPossible() {
-	try {
+    public boolean initJMXConnectorIfNotAlreadyRegistered() {
+	if (isAvailable()) {
+	    if (!isConnected()) {
 
-	    if (isAvailable()) {
+		mainLock.lock();
+		try {
 
-		if (jmxConnector == null) {
+		    jmxConnector = MBeanConnectionResourcesUtilities.getJMXConnector(jmxURL, jmxUser, jmxPass);
 
-		    jmxConnector = MBeanConnectionResourcesUtilities.getJMXConnector(jmxIP, jmxPort, jmxUser, jmxPass);
-
-		    LOG.info("jmxconnector created for: {}:{} ", new Object[] { jmxIP, jmxPort });
+		    LOG.info("jmxconnector created for: {} ", jmxURL);
 
 		    jmxConnector.addConnectionNotificationListener(getConnectionNotificationListener(), null, null);
 
-		    isConnected = true;
+		} catch (Exception e) {
+		    numberOfRetries.incrementAndGet();
+		    LOG.error(String.format("Error creating JMXCConnector to url: %s", jmxURL), e);
+		    closeJMXConnector();
+		} finally {
+		    mainLock.unlock();
 		}
 	    }
-
-	} catch (Exception e) {
-	    this.numberOfRetries++;
-	    LOG.error("Error creating JMXCConnector to ip: {}:{}", new Object[] { jmxIP, jmxPort }, e);
 	}
-	return isConnected;
+	return isConnected();
     }
 
-    public void registerNotificationListener(final NotificationListener lst, final ObjectName objectName, final NotificationFilter filter, final Object handback) {
-	try {
-	    if (listener == null) {
-		listener = lst;
-		objName = objectName;
+    public boolean registerNotifListenerIfNotAlreadyRegistered(final MBeanNotificationListenerInfo notificationListener) {
+	boolean result = false;
 
-		MBeanConnectionResourcesUtilities.addNotificationListener(jmxConnector, objectName, listener, filter, handback);
+	if (listener == null) {
 
-		LOG.info("notificationListener added for: {}:{} ", new Object[] { jmxIP, jmxPort });
+	    mainLock.lock();
+	    try {
+		if (listener == null) {
+		    listener = notificationListener;
+
+		    MBeanConnectionResourcesUtilities.addNotificationListener(jmxConnector, notificationListener.getObjectName(), listener.getListener(),
+									      notificationListener.getFilter(), null);
+
+		    LOG.info("notificationListener added for: {}", jmxURL);
+		    result = true;
+		}
+
+	    } catch (IOException e) {
+		LOG.error("jmx connection problems. next iteration will try to create a new jmxconnector", e);
+		closeJMXConnector();
+	    } catch (InstanceNotFoundException e) {
+		LOG.error(e.getMessage(), e);
+		closeJMXConnector();
+	    } finally {
+		mainLock.unlock();
 	    }
-	} catch (IOException e) {
-	    LOG.error("jmx connection problems. next iteration will try to create a new jmxconnector", e);
-	    closeJMXConnector();
-	} catch (InstanceNotFoundException e) {
-	    LOG.info(e.getMessage(), e);
 	}
+	return result;
     }
 
     private NotificationListener getConnectionNotificationListener() {
@@ -109,19 +121,15 @@ public final class JMXConnectionHandler {
 
 			    LOG.info("Receiving JMXConnectionNotification. Type:  " + type);
 
-			    if (JMXConnectionNotification.CLOSED.equals(type)) {
-				//				Events.instance().raiseEvent(EventTypeEnum.JMXCONNECTOR_CLOSED.name(), LaboratoryJMXConnectionHandler.this.laboratory);
-			    } else if (JMXConnectionNotification.FAILED.equals(type)) {
-				//				Events.instance().raiseEvent(EventTypeEnum.JMXCONNECTOR_FAILED.name(), LaboratoryJMXConnectionHandler.this.laboratory);
+			    if (JMXConnectionNotification.CLOSED.equals(type) || JMXConnectionNotification.FAILED.equals(type)) {
+				LOG.warn("Received JMXConnectionNotification CLOSED or FAILED. We will try to close jmxconnector associated with it");
+				closeJMXConnector();
 			    }
-			    // } else if
-			    // (JMXConnectionNotification.NOTIFS_LOST.equals(type))
-			    // {
-			    // // do nothing
-			    // } else if
-			    // (JMXConnectionNotification.OPENED.equals(type)) {
-			    // // do nothing
-			    // }
+			    //			    } else if (JMXConnectionNotification.NOTIFS_LOST.equals(type)) {
+			    //				//				LOG.warn("JMXConnectionNotification.NOTIFS_LOST");
+			    //			    } else if (JMXConnectionNotification.OPENED.equals(type)) {
+			    //				//				LOG.warn("Received JMXConnectionNotification.OPENED");
+			    //			    }
 			} catch (Throwable e) {
 			    LOG.info("Error handling JMXConnectionNotification.", e);
 			}
@@ -133,17 +141,18 @@ public final class JMXConnectionHandler {
     }
 
     public void closeJMXConnector() {
+	mainLock.lock();
 	try {
 	    if (jmxConnector != null) {
 		removeNotificationListener();
 		removeConnectionNotificationListener();
 		jmxConnector.close();
-		isConnected = false;
 	    }
-	} catch (IOException e) {
+	} catch (Exception e) {
 	    LOG.error("Error closing JMXConnector.", e);
 	} finally {
 	    jmxConnector = null;
+	    mainLock.unlock();
 	}
     }
 
@@ -153,9 +162,10 @@ public final class JMXConnectionHandler {
 	    if (jmxConnector != null && connectionListener != null) {
 		jmxConnector.removeConnectionNotificationListener(connectionListener);
 	    }
-	    connectionListener = null;
 	} catch (Exception e) {
 	    LOG.error("Error removing Connection NotificationListener.", e);
+	} finally {
+	    connectionListener = null;
 	}
 
     }
@@ -163,28 +173,27 @@ public final class JMXConnectionHandler {
     private void removeNotificationListener() {
 	try {
 
-	    if (jmxConnector != null && objName != null && listener != null) {
-		MBeanConnectionResourcesUtilities.removeNotificationListener(jmxConnector, objName, listener);
+	    if (jmxConnector != null && listener != null) {
+		MBeanConnectionResourcesUtilities.removeNotificationListener(jmxConnector, listener.getObjectName(), listener.getListener());
 	    }
-	    listener = null;
-	    objName = null;
-
 	} catch (Exception e) {
 	    LOG.error(e.getMessage(), e);
+	} finally {
+	    listener = null;
 	}
     }
 
     private boolean isAvailable() {
-	return (numberOfRetries < MAX_NUMBER_OF_RETRIES);
+	return (numberOfRetries.get() < Integer.MAX_VALUE);
     }
 
-    public boolean isConnected() {
-	return isConnected;
+    private boolean isConnected() {
+	return jmxConnector != null;
     }
 
     public <T> T getMbeanProxy(final ObjectName objectName, final Class<T> mbeanInterface) {
 	try {
-	    return isConnected ? MBeanConnectionResourcesUtilities.getMBeanClientProxy(jmxConnector, objectName, mbeanInterface) : null;
+	    return isConnected() ? MBeanConnectionResourcesUtilities.getMBeanClientProxy(jmxConnector, objectName, mbeanInterface, true) : null;
 	} catch (IOException e) {
 	    LOG.error("Error creating jmx client proxy", e);
 	    return null;

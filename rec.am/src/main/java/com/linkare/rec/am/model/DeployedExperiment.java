@@ -1,8 +1,7 @@
 package com.linkare.rec.am.model;
 
-import java.util.List;
-
-import com.linkare.commons.jpa.security.User;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Represents an experiment deployed on a laboratory. Contains all the information about the experiment, its current state, users currently connected and other
@@ -15,8 +14,17 @@ public class DeployedExperiment {
 
     private Experiment experiment;
     private HardwareState state;
-    private List<User> usersConnected;
+    private Set<String> usersConnected;
     private int numberOfUsers;
+
+    public DeployedExperiment(final DeployedExperiment experiment) {
+	this.experiment = experiment.getExperiment();
+	this.state = experiment.getState();
+	this.usersConnected = new HashSet<String>(experiment.getUsersConnected());
+    }
+
+    public DeployedExperiment() {
+    }
 
     public Experiment getExperiment() {
 	return experiment;
@@ -34,23 +42,19 @@ public class DeployedExperiment {
 	this.state = state;
     }
 
-    public List<User> getUsersConnected() {
+    public Set<String> getUsersConnected() {
 	return usersConnected;
     }
 
-    public void setUsersConnected(List<User> usersConnected) {
+    public void setUsersConnected(final Set<String> usersConnected) {
 	this.usersConnected = usersConnected;
     }
 
     public int getNumberOfUsers() {
-	if (usersConnected != null && usersConnected.size() > 0) {
+	if (usersConnected != null) {
 	    numberOfUsers = usersConnected.size();
 	}
 	return numberOfUsers;
-    }
-
-    public void setNumberOfUsers(int numberOfUsers) {
-	this.numberOfUsers = numberOfUsers;
     }
     
     public boolean isLabRunning() {

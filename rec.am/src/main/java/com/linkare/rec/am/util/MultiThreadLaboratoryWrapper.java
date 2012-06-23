@@ -1,89 +1,263 @@
 package com.linkare.rec.am.util;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.concurrent.ConcurrentSkipListSet;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.linkare.commons.jpa.security.User;
 import com.linkare.rec.am.ClientInfoDTO;
-import com.linkare.rec.am.HardwareInfoDTO;
-import com.linkare.rec.am.HardwareStateChangeDTO;
 import com.linkare.rec.am.MultiCastControllerNotifInfoDTO;
+import com.linkare.rec.am.RegisteredHardwareDTO;
+import com.linkare.rec.am.mbean.IMultiCastControllerMXBean;
 import com.linkare.rec.am.mbean.NotificationTypeEnum;
 import com.linkare.rec.am.model.DeployedExperiment;
+import com.linkare.rec.am.model.Experiment;
 import com.linkare.rec.am.model.HardwareState;
 import com.linkare.rec.am.model.Laboratory;
+import com.linkare.rec.am.service.ExperimentServiceLocal;
 
 public class MultiThreadLaboratoryWrapper {
 
-    private static final String PERSISTENCE_UNIT_NAME = "AllocationManagerPU";
+    private final static Logger LOGGER = LoggerFactory.getLogger(MultiThreadLaboratoryWrapper.class);
 
     private final Laboratory underlyingLaboratory;
 
-    private final ConcurrentMap<String, DeployedExperiment> experimentsMap;
+    private final ConcurrentMap<String, MultiThreadDeployedExperimentWrapper> deployedExperimentsMap;
 
-    private final ConcurrentMap<String, User> usersMap;
+    private final Set<String> usersSet;
 
-    private final EntityManagerFactory entityManagerFactory;
+    private final ExperimentServiceLocal experimentService;
 
-    private final Lock readlock;
-    private final Lock writelock;
+    private volatile long lastNotifReceived;
 
-    public MultiThreadLaboratoryWrapper(final Laboratory lab) {
-	this.underlyingLaboratory = lab;
-	final ReadWriteLock lock = new ReentrantReadWriteLock();
-	readlock = lock.readLock();
-	writelock = lock.writeLock();
+    private volatile long uptime;
 
-	experimentsMap = new ConcurrentHashMap<String, DeployedExperiment>();
-	usersMap = new ConcurrentHashMap<String, User>();
+    private IMultiCastControllerMXBean mbeanProxy;
 
-	entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+    public MultiThreadLaboratoryWrapper(final MbeanProxy<IMultiCastControllerMXBean, Laboratory> labMBeanPRoxy, final ExperimentServiceLocal experimentService) {
+	this.underlyingLaboratory = labMBeanPRoxy.getEntity();
+	this.mbeanProxy = labMBeanPRoxy.getMbeanInterface();
+	this.experimentService = experimentService;
+	this.deployedExperimentsMap = new ConcurrentHashMap<String, MultiThreadDeployedExperimentWrapper>();
+	this.usersSet = new ConcurrentSkipListSet<String>();
+	init();
     }
 
-    public void refreshFrom(final MultiCastControllerNotifInfoDTO multiCastControllerNotifInfoDTO) {
-	if (multiCastControllerNotifInfoDTO == null) {
+    private void init() {
+	final long uptime = mbeanProxy.getUpTimeInMillis();
+
+	final List<ClientInfoDTO> labUsers = mbeanProxy.getClients();
+
+	final List<RegisteredHardwareDTO> registeredHardwares = mbeanProxy.getRegisteredHardwaresInfo();
+
+	initDeployedExperimentsMap(registeredHardwares);
+	initUsersSet(labUsers);
+
+	this.lastNotifReceived = -1;
+	this.uptime = uptime;
+
+    }
+
+    private void initUsersSet(List<ClientInfoDTO> labUsers) {
+	this.usersSet.addAll(getUsersAsStringSet(labUsers));
+    }
+
+    private Set<String> getUsersAsStringSet(final List<ClientInfoDTO> labUsers) {
+	Set<String> usersSet = Collections.emptySet();
+
+	if (!labUsers.isEmpty()) {
+	    usersSet = new HashSet<String>(labUsers.size());
+
+	    for (final ClientInfoDTO clientInfoDTO : labUsers) {
+		usersSet.add(clientInfoDTO.getUserName());
+	    }
+	}
+	return usersSet;
+    }
+
+    private void initDeployedExperimentsMap(final List<RegisteredHardwareDTO> registeredHardwares) {
+
+	if (!registeredHardwares.isEmpty()) {
+	    for (final RegisteredHardwareDTO registeredHardwareDTO : registeredHardwares) {
+		initMultiThreadDeployedExperimentWrapperIfNotAlreadyInCache(registeredHardwareDTO);
+	    }
+	}
+    }
+
+    private boolean removeUserFromHardware(final String hardwareUniqueID, final String userName) {
+	boolean result = false;
+	final MultiThreadDeployedExperimentWrapper deployedExperimentWrapper = deployedExperimentsMap.get(hardwareUniqueID);
+	if (deployedExperimentWrapper != null) {
+	    result = deployedExperimentWrapper.removeClient(userName);
+	}
+	return result;
+    }
+
+    public boolean addClientToHardware(final String hardwareUniqueID, final String userName) {
+	boolean result = false;
+	final MultiThreadDeployedExperimentWrapper deployedExperimentWrapper = deployedExperimentsMap.get(hardwareUniqueID);
+	if (deployedExperimentWrapper != null) {
+	    result = deployedExperimentWrapper.addNewClient(userName);
+	}
+	return result;
+    }
+
+    private void removeHardware(final String externalID) {
+	deployedExperimentsMap.remove(externalID);
+    }
+
+    private void addUser(final String userName) {
+	usersSet.add(userName);
+    }
+
+    private void removeUser(final ClientInfoDTO clientInfoDTO) {
+	usersSet.remove(clientInfoDTO.getUserName());
+    }
+
+    private void addHardware(final RegisteredHardwareDTO deployedExperiment) {
+	initMultiThreadDeployedExperimentWrapperIfNotAlreadyInCache(deployedExperiment);
+    }
+
+    private boolean hardwareStateChange(final String experimentExternalID, final byte newStateCode) {
+	boolean result = false;
+	final MultiThreadDeployedExperimentWrapper deployedExperiment = deployedExperimentsMap.get(experimentExternalID);
+	if (deployedExperiment != null) {
+	    deployedExperiment.refreshState(newStateCode);
+	    result = true;
+	}
+	return result;
+    }
+
+    private DeployedExperiment getDeployedExperimentFrom(final RegisteredHardwareDTO registeredHardwareDTO) {
+	final DeployedExperiment deployedExperiment = new DeployedExperiment();
+	deployedExperiment.setState(HardwareState.valueOfCode(registeredHardwareDTO.getStateCode()));
+	deployedExperiment.setUsersConnected(registeredHardwareDTO.getUsersConnected());
+	return deployedExperiment;
+    }
+
+    private MultiThreadDeployedExperimentWrapper initMultiThreadDeployedExperimentWrapperIfNotAlreadyInCache(final RegisteredHardwareDTO registeredHardware) {
+
+	final String externalID = registeredHardware.getHardwareUniqueID();
+	MultiThreadDeployedExperimentWrapper multiThreadDeployedExperimentWrapper = deployedExperimentsMap.get(externalID);
+
+	if (multiThreadDeployedExperimentWrapper == null) {
+	    loadExperimentFromBD(externalID, getDeployedExperimentFrom(registeredHardware));
+	}
+
+	return deployedExperimentsMap.get(externalID);
+    }
+
+    private void loadExperimentFromBD(final String externalID, final DeployedExperiment deployedExperiment) {
+
+	synchronized (this) {
+	    MultiThreadDeployedExperimentWrapper experiment = deployedExperimentsMap.get(externalID);
+	    if (experiment == null) {
+		Experiment findByExternalID = getExperimentFromBD(externalID);
+		if (findByExternalID != null) {
+		    deployedExperiment.setExperiment(findByExternalID);
+		    deployedExperimentsMap.put(externalID, new MultiThreadDeployedExperimentWrapper(deployedExperiment));
+		}
+	    }
+	}
+    }
+
+    private void refresh() {
+	init();
+    }
+
+    private void processNotification(final MultiCastControllerNotifInfoDTO notifInfo, final NotificationTypeEnum notificationType,
+	    final long notifSequenceNumber) {
+	synchronized (this) {
+
+	    if (notifSequenceNumber < lastNotifReceived) {
+		LOGGER.warn("Discarding old notification of type {}", notificationType);
+		return;
+	    }
+
+	    switch (notificationType) {
+	    case HARDWARE_STATE_CHANGE:
+		hardwareStateChange(notifInfo.getHardwareStateChangeDTO().getHardwareUniqueID(), notifInfo.getHardwareStateChangeDTO().getNewStateCode());
+		break;
+	    case REGISTER_NEW_HARDWARE:
+		addHardware(notifInfo.getRegisteredHardwareDTO());
+		break;
+	    case REGISTER_NEW_CLIENT_MC:
+		addUser(notifInfo.getClientInfoDTO().getUserName());
+		break;
+	    case REGISTER_NEW_CLIENT_HARDWARE:
+		addClientToHardware(notifInfo.getRegisteredHardwareDTO().getHardwareUniqueID(), notifInfo.getClientInfoDTO().getUserName());
+		break;
+	    case UNREGISTER_HARDWARE:
+		removeHardware(notifInfo.getRegisteredHardwareDTO().getHardwareUniqueID());
+		break;
+	    case UNREGISTER_CLIENT_MC:
+		removeUser(notifInfo.getClientInfoDTO());
+		break;
+	    case UNREGISTER_CLIENT_HARDWARE:
+		removeUserFromHardware(notifInfo.getRegisteredHardwareDTO().getHardwareUniqueID(), notifInfo.getClientInfoDTO().getUserName());
+		break;
+	    default:
+		throw new UnsupportedOperationException();
+	    }
+
+	    //refresh lastNotifReceived with the current notification sequence number
+	    lastNotifReceived = notifSequenceNumber;
+
+	}
+    }
+
+    public void refreshFromNotif(final MultiCastControllerNotifInfoDTO notifInfo, final long notifSequenceNumber) {
+
+	if (notifInfo == null) {
 	    return;
 	}
 
-	final NotificationTypeEnum notificationType = getNotificationTypeEnum(multiCastControllerNotifInfoDTO);
+	final NotificationTypeEnum notificationType = getNotificationTypeEnum(notifInfo);
 
 	if (notificationType == null) {
+	    LOGGER.warn("NotificationType null or with unknow value [valid values: {}]. Discarding notification",
+			Arrays.deepToString(NotificationTypeEnum.values()));
 	    return;
 	}
 
-	switch (notificationType) {
-	case HARDWARE_STATE_CHANGE:
-	    hardwareStateChange(multiCastControllerNotifInfoDTO.getHardwareStateChangeDTO());
-	    break;
-	case REGISTER_NEW_HARDWARE:
-	    addHardware(multiCastControllerNotifInfoDTO.getHardwareInfoDTO());
-	    break;
-	case REGISTER_NEW_CLIENT_MC:
-	    addClient(multiCastControllerNotifInfoDTO.getClientInfoDTO());
-	    break;
-	case REGISTER_NEW_CLIENT_HARDWARE:
-	    addClient(multiCastControllerNotifInfoDTO.getClientInfoDTO());
-	    break;
-	case UNREGISTER_HARDWARE:
-	    removeHardware(multiCastControllerNotifInfoDTO.getHardwareInfoDTO());
-	    break;
-	case UNREGISTER_CLIENT_MC:
-	    removeUser(multiCastControllerNotifInfoDTO.getClientInfoDTO());
-	    break;
-	case UNREGISTER_CLIENT_HARDWARE:
-	    removeUser(multiCastControllerNotifInfoDTO.getClientInfoDTO());
-	    break;
-	default:
-	    throw new UnsupportedOperationException();
+	if (notifInfo.getUptime() > uptime) {
+	    synchronized (this) {
+
+		if (notifInfo.getUptime() > uptime) {
+		    LOGGER.warn("Uptime in notification is greater than local uptime, it could be caused by a restart of the MultiCastController/Laboratory. The laboratory information will be refreshed ");
+		    try {
+			//TODO: first get a new mbean proxy then call refresh again
+			refresh();
+		    } catch (Exception e) {
+			//FIXME: what can we do in this situation? maybe retry?
+			LOGGER.error("Error when trying to refresh laboratory state.", e);
+			return;
+
+
+		    }
+
+		}
+	    }
 	}
+
+	if (notifInfo.getUptime() < uptime) {
+	    LOGGER.warn("Uptime in notification is less than local uptime. This notification will be discarded because it arrived too late!");
+	}
+
+	if (notifSequenceNumber < lastNotifReceived) {
+	    LOGGER.warn("Discarding old notification of type {}", notificationType);
+	    return;
+	}
+
+	processNotification(notifInfo, notificationType, notifSequenceNumber);
 
     }
 
@@ -91,104 +265,28 @@ public class MultiThreadLaboratoryWrapper {
 	return NotificationTypeEnum.fromType(multiCastControllerNotifInfoDTO.getNotificationType());
     }
 
+    private Experiment getExperimentFromBD(final String externalID) {
+	return experimentService.findByExternalID(externalID);
+    }
+
+    public Collection<MultiThreadDeployedExperimentWrapper> getLiveExperiments() {
+	return Collections.unmodifiableCollection(deployedExperimentsMap.values());
+    }
+
+    public Collection<String> getConnectedUsers() {
+	return Collections.unmodifiableCollection(usersSet);
+    }
+
+    public String getDescription() {
+	return underlyingLaboratory.getDescription();
+    }
+
+    public Long getIdInternal() {
+	return underlyingLaboratory.getIdInternal();
+    }
+
     public String getName() {
 	return underlyingLaboratory.getName();
-    }
-
-    private void removeHardware(final HardwareInfoDTO hardwareInfoDTO) {
-	experimentsMap.remove(hardwareInfoDTO.getHardwareUniqueID());
-    }
-
-    private void removeUser(final ClientInfoDTO clientInfoDTO) {
-	usersMap.remove(clientInfoDTO.getUserName());
-    }
-
-    public void addHardwares(final List<HardwareInfoDTO> hardwares) {
-	for (final HardwareInfoDTO hardwareInfoDTO : hardwares) {
-	    addHardware(hardwareInfoDTO);
-	}
-    }
-
-    private void addHardware(final HardwareInfoDTO hardwareInfoDTO) {
-
-	final DeployedExperiment deployedExperiment = getDeployedExperiment(hardwareInfoDTO.getHardwareUniqueID());
-
-	experimentsMap.putIfAbsent(deployedExperiment.getExperiment().getExternalId(), deployedExperiment);
-    }
-
-    private DeployedExperiment getDeployedExperiment(final String externalID) {
-
-	DeployedExperiment experiment = experimentsMap.get(externalID);
-
-	if (experiment == null) {
-	    experiment = loadExperimentFromBD(externalID);
-	}
-	return experiment;
-    }
-
-    private DeployedExperiment loadExperimentFromBD(final String externalID) {
-	//TODO: find the best way to do this 
-	return null;
-    }
-
-    public void addUsers(final List<ClientInfoDTO> clients) {
-	for (final ClientInfoDTO user : clients) {
-	    addClient(user);
-	}
-    }
-
-    private void addClient(final ClientInfoDTO clientInfoDTO) {
-
-	User user = usersMap.get(clientInfoDTO.getUserName());
-
-	if (user == null) {
-	    user = loadUserFromBD(clientInfoDTO.getUserName());
-	}
-
-	usersMap.putIfAbsent(user.getUsername(), user);
-
-    }
-
-    private User loadUserFromBD(final String username) {
-	return null;
-    }
-
-    private void hardwareStateChange(final HardwareStateChangeDTO hardwareStateDTO) {
-
-	final DeployedExperiment deployedExperiment = getDeployedExperiment(hardwareStateDTO.getHardwareUniqueID());
-
-	final HardwareState newState = getHardwareState(hardwareStateDTO.getNewState());
-
-	if (newState == null) {
-	    return;
-	}
-
-	writelock.lock();
-	try {
-	    deployedExperiment.setState(newState);
-	} finally {
-	    writelock.unlock();
-	}
-    }
-
-    private HardwareState getHardwareState(final String stateAsStr) {
-	HardwareState state = null;
-	try {
-	    state = HardwareState.valueOf(stateAsStr);
-	} catch (IllegalArgumentException e) {
-	    state = null;
-	}
-	return state;
-    }
-
-    public List<DeployedExperiment> getLiveExperiments() {
-	try {
-
-	} finally {
-
-	}
-	
-	return Collections.emptyList();
     }
 
 }
