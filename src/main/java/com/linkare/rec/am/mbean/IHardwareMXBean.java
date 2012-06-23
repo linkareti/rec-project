@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.management.MXBean;
 
+import com.linkare.rec.am.ClientInfoDTO;
 import com.linkare.rec.am.HardwareInfoDTO;
 
 /**
@@ -23,6 +24,6 @@ public interface IHardwareMXBean {
 
     String getState();
 
-    List<String> getClientList();
+    List<ClientInfoDTO> getClientList();
 
 }
