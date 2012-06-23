@@ -68,6 +68,7 @@ import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.impl.utils.MultiCastExperimentStats;
 import com.linkare.rec.impl.utils.ORBBean;
 import com.linkare.rec.impl.utils.ObjectID;
+import com.linkare.rec.impl.utils.RegisteredHardwareInfo;
 import com.linkare.rec.impl.utils.mapping.DTOMapperUtils;
 import com.linkare.rec.impl.utils.mbean.ManagementException;
 import com.linkare.rec.impl.utils.mbean.PlatformMBeanServerDelegate;
@@ -945,9 +946,13 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations, Notifi
 				Logger.getLogger(ReCMultiCastHardware.MC_HARDWARE_LOGGER));
 	}
 
+	RegisteredHardwareInfo getRegisteredHardwareInfo() {
+		return new RegisteredHardwareInfo(getHardwareUniqueId(), getHardwareState().getValue(), getClientUsernames());
+	}
+
 	private void sendNotif(final NotificationTypeEnum notificationType, final MultiCastControllerNotifInfoDTO userData) {
 		final Notification notif = notificationType.createNotif(MBeanObjectNameFactory
-				.getMultiCastControllerObjectName());
+				.getHardwareObjectName(getHardwareUniqueId()));
 
 		// FIXME: convert to compositedata
 		notif.setUserData(userData);
@@ -955,14 +960,14 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations, Notifi
 		notificationSupport.sendNotification(notif);
 	}
 
-	private void sendStateChangeNotification(final String oldState, final String newState) {
+	private void sendStateChangeNotification(final byte oldStateCode, final byte newStateCode) {
 
 		final MultiCastControllerNotifInfoDTO multiCastControllerNotifInfoDTO = new MultiCastControllerNotifInfoDTO(
 				AllocationManagerSecurityManager.getLaboratoryID(),
 				NotificationTypeEnum.HARDWARE_STATE_CHANGE.getType());
 
-		final HardwareStateChangeDTO hardwareStateDTO = new HardwareStateChangeDTO(getHardwareUniqueId(), newState,
-				oldState);
+		final HardwareStateChangeDTO hardwareStateDTO = new HardwareStateChangeDTO(getHardwareUniqueId(), newStateCode,
+				oldStateCode);
 		multiCastControllerNotifInfoDTO.setHardwareStateChangeDTO(hardwareStateDTO);
 
 		sendNotif(NotificationTypeEnum.HARDWARE_STATE_CHANGE, multiCastControllerNotifInfoDTO);
@@ -980,8 +985,9 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations, Notifi
 
 		final ClientInfoDTO clientInfoDTO = new ClientInfoDTO(client.getUserName());
 		multiCastControllerNotifInfoDTO.setClientInfoDTO(clientInfoDTO);
-		multiCastControllerNotifInfoDTO.setHardwareInfoDTO(DTOMapperUtils.mapToHardwareInfoDTO(getHardware()
-				.getHardwareInfo()));
+
+		multiCastControllerNotifInfoDTO.setRegisteredHardwareDTO(DTOMapperUtils
+				.mapToRegisteredHardwareInfoDTO(getRegisteredHardwareInfo()));
 
 		sendNotif(notificationType, multiCastControllerNotifInfoDTO);
 
@@ -1061,11 +1067,11 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations, Notifi
 				return;
 			}
 
-			final String oldState = proxyHardwareState.toString();
+			final byte oldState = proxyHardwareState.getValue();
 
 			proxyHardwareState = newState;
 
-			sendStateChangeNotification(proxyHardwareState.toString(), oldState);
+			sendStateChangeNotification(proxyHardwareState.getValue(), oldState);
 
 			clientQueue.hardwareStateChange(proxyHardwareState);
 

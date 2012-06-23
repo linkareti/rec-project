@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.naming.InitialContext;
@@ -26,6 +27,7 @@ import com.linkare.rec.acquisition.NotAvailableException;
 import com.linkare.rec.acquisition.UserInfo;
 import com.linkare.rec.am.ClientInfoDTO;
 import com.linkare.rec.am.HardwareInfoDTO;
+import com.linkare.rec.am.RegisteredHardwareDTO;
 import com.linkare.rec.am.RepositoryFacade;
 import com.linkare.rec.am.repository.ByteArrayValueDTO;
 import com.linkare.rec.am.repository.ChannelAcquisitionConfigDTO;
@@ -62,6 +64,7 @@ import com.linkare.rec.impl.multicast.ReCMultiCastDataProducer;
 import com.linkare.rec.impl.multicast.repository.IRepository;
 import com.linkare.rec.impl.multicast.repository.RepositoryFactory;
 import com.linkare.rec.impl.utils.DataCollectorState;
+import com.linkare.rec.impl.utils.RegisteredHardwareInfo;
 
 /**
  * Utils methods to convert from rec model to DTO and DTO to rec model.
@@ -552,7 +555,7 @@ public final class DTOMapperUtils {
 
 	private static SamplesPacket[] getSamplesPacket(final List<SamplesPacketDTO> listOfDtos) {
 		List<SamplesPacket> result = Collections.emptyList();
-		if (listOfDtos != null && listOfDtos.size() > 0) {
+		if (listOfDtos != null && !listOfDtos.isEmpty()) {
 			result = new ArrayList<SamplesPacket>(listOfDtos.size());
 			for (final SamplesPacketDTO samplesPacketDTO : listOfDtos) {
 				result.add(getSamplesPacket(samplesPacketDTO));
@@ -581,7 +584,7 @@ public final class DTOMapperUtils {
 
 	private static PhysicsValue[][] getPhysicsValues(final List<RowPhysicsValueDTO> dtos) {
 		PhysicsValue[][] result = new PhysicsValue[0][0];
-		if (dtos != null && dtos.size() > 0 && dtos.get(0) != null && dtos.get(0).getColumnValues() != null) {
+		if (dtos != null && !dtos.isEmpty() && dtos.get(0) != null && dtos.get(0).getColumnValues() != null) {
 
 			result = new PhysicsValue[dtos.size()][dtos.get(0).getColumnValues().size()];
 
@@ -1044,11 +1047,10 @@ public final class DTOMapperUtils {
 		return result;
 	}
 
-
-	public static List<HardwareInfoDTO> mapHardwareList(final List<HardwareInfo> hardwares) {
+	public static List<HardwareInfoDTO> mapToHardwareInfoDTOList(final List<HardwareInfo> hardwares) {
 		List<HardwareInfoDTO> result = Collections.emptyList();
 
-		if (hardwares != null && hardwares.size() > 0) {
+		if (hardwares != null && !hardwares.isEmpty()) {
 
 			result = new ArrayList<HardwareInfoDTO>(hardwares.size());
 
@@ -1059,15 +1061,42 @@ public final class DTOMapperUtils {
 		return result;
 	}
 
-	public static List<ClientInfoDTO> mapClientList(final List<UserInfo> users) {
+	public static List<ClientInfoDTO> mapToClientInfoDTOList(final List<UserInfo> users) {
 		List<ClientInfoDTO> result = Collections.emptyList();
 
-		if (users != null && users.size() > 0) {
+		if (users != null && !users.isEmpty()) {
 
 			result = new ArrayList<ClientInfoDTO>(users.size());
 
 			for (final UserInfo user : users) {
 				result.add(mapToClientInfoDTO(user));
+			}
+		}
+		return result;
+	}
+
+	public static RegisteredHardwareDTO mapToRegisteredHardwareInfoDTO(
+			final RegisteredHardwareInfo registeredHardwareInfo) {
+		RegisteredHardwareDTO result = null;
+
+		if (registeredHardwareInfo != null) {
+			result = new RegisteredHardwareDTO(registeredHardwareInfo.getHardwareUniqueID(),
+					registeredHardwareInfo.getState(), new HashSet<String>(registeredHardwareInfo.getUsersConnected()));
+		}
+
+		return result;
+	}
+
+	public static List<RegisteredHardwareDTO> mapToRegisteredHardwareInfoDTOList(
+			final List<RegisteredHardwareInfo> hardwareInfoList) {
+		List<RegisteredHardwareDTO> result = Collections.emptyList();
+
+		if (hardwareInfoList != null && !hardwareInfoList.isEmpty()) {
+
+			result = new ArrayList<RegisteredHardwareDTO>(hardwareInfoList.size());
+
+			for (final RegisteredHardwareInfo registeredHardwareInfo : hardwareInfoList) {
+				result.add(mapToRegisteredHardwareInfoDTO(registeredHardwareInfo));
 			}
 		}
 		return result;

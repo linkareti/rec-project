@@ -7,9 +7,6 @@
 package com.linkare.rec.impl.utils.mbean;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 import javax.management.ListenerNotFoundException;
 import javax.management.MBeanNotificationInfo;
@@ -17,6 +14,7 @@ import javax.management.NotificationEmitter;
 import javax.management.NotificationFilter;
 import javax.management.NotificationListener;
 
+import com.linkare.rec.am.ClientInfoDTO;
 import com.linkare.rec.am.HardwareInfoDTO;
 import com.linkare.rec.am.mbean.IHardwareMXBean;
 import com.linkare.rec.am.mbean.NotificationTypeEnum;
@@ -29,17 +27,6 @@ import com.linkare.rec.impl.wrappers.HardwareWrapper;
  * @author Artur Correia - Linkare TI
  */
 public class Hardware implements IHardwareMXBean, NotificationEmitter {
-
-	public static final String HARDWARE_LOGGER = "Hardware.Logger";
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(Hardware.HARDWARE_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(Hardware.HARDWARE_LOGGER));
-		}
-	}
-
-	private static final AtomicLong sequenceNumber = new AtomicLong(0L);
 
 	private final ReCMultiCastHardware reCMultiCastHardware;
 
@@ -103,8 +90,8 @@ public class Hardware implements IHardwareMXBean, NotificationEmitter {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<String> getClientList() {
-		return reCMultiCastHardware.getClientUsernames();
+	public List<ClientInfoDTO> getClientList() {
+		return DTOMapperUtils.mapToClientInfoDTOList(reCMultiCastHardware.getClientList());
 	}
 
 }

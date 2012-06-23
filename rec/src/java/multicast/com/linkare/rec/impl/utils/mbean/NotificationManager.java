@@ -6,8 +6,8 @@
  */
 package com.linkare.rec.impl.utils.mbean;
 
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -31,17 +31,22 @@ import com.linkare.rec.impl.threading.ProcessingManager;
  */
 public final class NotificationManager {
 
+	// system property?
+	private static final int MAX_NOTIFICATIONS_IN_MEMORY = 1000;
+
 	private static final NotificationManager INSTANCE = new NotificationManager();
 
 	private final NotificationListener notificationListener;
 	private final NotificationBroadcasterSupport notificationBroadcaster;
 
-	private final AtomicLong sequenceNumber = new AtomicLong(1);
+	private final AtomicLong sequenceNumber = new AtomicLong(0);
 
 	private final Runnable sendNotifRunnable;
 	private final BlockingQueue<Notification> notificationQueue;
 
 	private volatile boolean shutdown = false;
+
+	private final long uptime;
 
 	private NotificationManager() {
 
@@ -56,7 +61,8 @@ public final class NotificationManager {
 			}
 		};
 
-		notificationQueue = new LinkedBlockingQueue<Notification>();
+		notificationQueue = new ArrayBlockingQueue<Notification>(MAX_NOTIFICATIONS_IN_MEMORY);
+		uptime = System.currentTimeMillis();
 	}
 
 	public static NotificationManager getInstance() {
@@ -64,6 +70,12 @@ public final class NotificationManager {
 	}
 
 	private void sendNotification(final Notification notification) {
+
+		if (notification.getUserData() instanceof MultiCastControllerNotifInfoDTO) {
+			final MultiCastControllerNotifInfoDTO userData = (MultiCastControllerNotifInfoDTO) notification
+					.getUserData();
+			userData.setUptime(uptime);
+		}
 
 		notification.setSequenceNumber(sequenceNumber.getAndIncrement());
 
@@ -105,11 +117,30 @@ public final class NotificationManager {
 		// FIXME: convert to compositedata
 		notif.setUserData(userData);
 
-		NotificationManager.getInstance().sendAsynNotification(notif);
+		sendAsynNotification(notif);
 	}
 
-	public void sendAsynNotification(final Notification notification) {
-		notificationQueue.offer(notification);
+	/**
+	 * Following the best practices describe in
+	 * 
+	 * http://weblogs.java.net/blog/emcmanus/archive/2007/08/when_can_jmx_no.
+	 * html
+	 * 
+	 * 
+	 * @param notification
+	 */
+	private void sendAsynNotification(final Notification notification) {
+
+		if (!notificationQueue.offer(notification)) {
+			// TODO: inform system administrator that we are discarding
+			// notifications because we reach the max number of notifications in
+			// memory
+			// discarding oldest notification
+			synchronized (this) {
+				notificationQueue.poll();
+				notificationQueue.offer(notification);
+			}
+		}
 		ProcessingManager.getInstance().execute(sendNotifRunnable);
 	}
 
@@ -129,13 +160,8 @@ public final class NotificationManager {
 
 						final Notification notification = notificationQueue.poll();
 
-						if (notification != null) {
-							// updateNotificationData(notification,
-							// notificationType);
-
-							if (!shutdown) {
-								NotificationManager.this.sendNotification(notification);
-							}
+						if (notification != null && !shutdown) {
+							NotificationManager.this.sendNotification(notification);
 						}
 					}
 
@@ -157,4 +183,7 @@ public final class NotificationManager {
 		shutdown = true;
 	}
 
+	public long getUptime() {
+		return uptime;
+	}
 }

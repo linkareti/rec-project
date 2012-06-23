@@ -16,6 +16,7 @@ import javax.management.NotificationListener;
 
 import com.linkare.rec.am.ClientInfoDTO;
 import com.linkare.rec.am.HardwareInfoDTO;
+import com.linkare.rec.am.RegisteredHardwareDTO;
 import com.linkare.rec.am.mbean.IMultiCastControllerMXBean;
 import com.linkare.rec.impl.multicast.ReCMultiCastController;
 import com.linkare.rec.impl.utils.mapping.DTOMapperUtils;
@@ -40,7 +41,7 @@ public class MultiCastController implements IMultiCastControllerMXBean, Notifica
 	 */
 	@Override
 	public List<HardwareInfoDTO> getHardwares() {
-		return DTOMapperUtils.mapHardwareList(reCMultiCastController.unsecureEnumerateHardware());
+		return DTOMapperUtils.mapToHardwareInfoDTOList(reCMultiCastController.unsecureEnumerateHardware());
 	}
 
 	/**
@@ -48,7 +49,15 @@ public class MultiCastController implements IMultiCastControllerMXBean, Notifica
 	 */
 	@Override
 	public List<ClientInfoDTO> getClients() {
-		return DTOMapperUtils.mapClientList(reCMultiCastController.getClientList());
+		return DTOMapperUtils.mapToClientInfoDTOList(reCMultiCastController.getClientList());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<RegisteredHardwareDTO> getRegisteredHardwaresInfo() {
+		return DTOMapperUtils.mapToRegisteredHardwareInfoDTOList(reCMultiCastController.getRegisteredHardwareInfo());
 	}
 
 	/**
@@ -85,4 +94,13 @@ public class MultiCastController implements IMultiCastControllerMXBean, Notifica
 			throws ListenerNotFoundException {
 		notificationManager.removeNotificationListener(listener, filter, handback);
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public long getUpTimeInMillis() {
+		return notificationManager.getUptime();
+	}
+
 }

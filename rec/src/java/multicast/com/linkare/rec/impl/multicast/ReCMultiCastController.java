@@ -8,6 +8,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -43,6 +44,7 @@ import com.linkare.rec.impl.threading.ExecutorScheduler;
 import com.linkare.rec.impl.threading.ScheduledWorkUnit;
 import com.linkare.rec.impl.utils.DataProducerActivator;
 import com.linkare.rec.impl.utils.Defaults;
+import com.linkare.rec.impl.utils.RegisteredHardwareInfo;
 import com.linkare.rec.impl.utils.mapping.DTOMapperUtils;
 import com.linkare.rec.impl.utils.mbean.ManagementException;
 import com.linkare.rec.impl.utils.mbean.NotificationManager;
@@ -130,39 +132,35 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 					Logger.getLogger(ReCMultiCastController.MCCONTROLLER_LOGGER));
 		}
 
+		// Create a client queue adapter
+		clientQueueAdapter = new ClientQueueAdapter();
+		// Create a hardware change adapter
+		hardwareChangeAdapter = new HardwareChangeAdapter();
+
+		resource.getProperties().put(resource.getResourceType().getPropertyKey(), multiCastLocation);
+
+		// Create a client queue with a max of MAXIMUM_CLIENTS
+		clientQueue = new ClientQueue(clientQueueAdapter, ReCMultiCastController.MAXIMUM_CLIENTS);
+
+		// register mbean to expose some statistics from processingmanager
+
 		try {
-			// Create a client queue adapter
-			clientQueueAdapter = new ClientQueueAdapter();
-			// Create a hardware change adapter
-			hardwareChangeAdapter = new HardwareChangeAdapter();
-
-			resource.getProperties().put(resource.getResourceType().getPropertyKey(), multiCastLocation);
-
-			// Create a client queue with a max of MAXIMUM_CLIENTS
-			clientQueue = new ClientQueue(clientQueueAdapter, ReCMultiCastController.MAXIMUM_CLIENTS);
-
-			// Initialize Security Manager
-			SecurityManagerFactory.getSecurityManager().registerMultiCastHardware(multiCastHardwares);
-
-			// TODO register security communicator
-			SecurityManagerFactory.getSecurityManager().registerSecurityCommunicator(this);
-
-			// register mbean to expose some statistics from processingmanager
 			PlatformMBeanServerDelegate.registerThreadPoolExecutorStatisticsMXBean();
-
 			PlatformMBeanServerDelegate.registerMultiCastControllerMXBean(this);
-
-		} catch (final Exception e) {
-			// REMOVE THIS TRY CATCH BLOCK AFTER FINISHING THE TEST PHASE...
-			LoggerUtil.logThrowable("Error initializing the ReCMultiCastController", e,
-					Logger.getLogger(ReCMultiCastController.MCCONTROLLER_LOGGER));
+		} catch (ManagementException e) {
+			throw new RuntimeException(e);
 		}
+
+		// Initialize Security Manager
+		SecurityManagerFactory.getSecurityManager().registerMultiCastHardware(multiCastHardwares);
+
+		// TODO register security communicator
+		SecurityManagerFactory.getSecurityManager().registerSecurityCommunicator(this);
 
 		// Create a hardware connection checker
 		hardwareConnectionChecker = new HardwareConnectionCheck();
 		// Start it up
 		// hardwareConnectionChecker.start();
-
 		log(Level.INFO, "Started ReCMulticastController OK.");
 	}
 
@@ -195,7 +193,35 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 	}
 
 	public List<HardwareInfo> unsecureEnumerateHardware() {
-		return hardwareChangeAdapter.unsecureEnumerateHardwares();
+		List<HardwareInfo> result = Collections.emptyList();
+
+		final List<ReCMultiCastHardware> unsecureEnumerateHardwares = hardwareChangeAdapter
+				.unsecureEnumerateHardwares();
+		if (!unsecureEnumerateHardwares.isEmpty()) {
+			result = new ArrayList<HardwareInfo>(unsecureEnumerateHardwares.size());
+			for (final ReCMultiCastHardware reCMultiCastHardware : unsecureEnumerateHardwares) {
+				result.add(reCMultiCastHardware.getHardware().getHardwareInfo());
+			}
+		}
+		return result;
+	}
+
+	public List<RegisteredHardwareInfo> getRegisteredHardwareInfo() {
+
+		List<RegisteredHardwareInfo> result = Collections.emptyList();
+
+		final List<ReCMultiCastHardware> unsecureEnumerateHardwares = hardwareChangeAdapter
+				.unsecureEnumerateHardwares();
+
+		if (!unsecureEnumerateHardwares.isEmpty()) {
+
+			result = new ArrayList<RegisteredHardwareInfo>(unsecureEnumerateHardwares.size());
+
+			for (final ReCMultiCastHardware reCMultiCastHardware : unsecureEnumerateHardwares) {
+				result.add(reCMultiCastHardware.getRegisteredHardwareInfo());
+			}
+		}
+		return result;
 	}
 
 	/**
@@ -314,8 +340,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 							log(Level.FINEST, "Hardware " + rmch.getHardwareUniqueId()
 									+ " removed from MCCContoller sucessfully. Now tell clients it is gone!");
 
-							sendHardwareNotification(rmch.getHardware().getHardwareInfo(),
-									NotificationTypeEnum.UNREGISTER_HARDWARE);
+							sendHardwareNotification(rmch, NotificationTypeEnum.UNREGISTER_HARDWARE);
 
 							clientQueue.hardwareChanged(new HardwareChangeEvent());
 							log(Level.FINEST, "Clients were told that hardware " + rmch.getHardwareUniqueId()
@@ -346,6 +371,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 		@Override
 		public void hardwareAdded(final HardwareAddEvt evt) {
 			boolean changed = false;
+			ReCMultiCastHardware addedHardware = null;
 			synchronized (multiCastHardwares) {
 
 				log(Level.INFO, "Trying to add an Hardware");
@@ -409,7 +435,6 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 				}
 
 				// PLUS, not full yet... Yuppi!
-				ReCMultiCastHardware addedHardware = null;
 				try {
 					final DefaultResource hardwareResource = resource.createChildResource();
 					addedHardware = new ReCMultiCastHardware(hardwareResource, evt.getHardware(),
@@ -431,8 +456,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 				changed = true;
 			}
 			if (changed) {
-				sendHardwareNotification(evt.getHardware().getHardwareInfo(),
-						NotificationTypeEnum.REGISTER_NEW_HARDWARE);
+				sendHardwareNotification(addedHardware, NotificationTypeEnum.REGISTER_NEW_HARDWARE);
 				clientQueue.hardwareChanged(new HardwareChangeEvent());
 			}
 		}
@@ -461,17 +485,27 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 			return retVal;
 		}
 
-		public List<HardwareInfo> unsecureEnumerateHardwares() {
+		public List<ReCMultiCastHardware> unsecureEnumerateHardwares() {
 
 			synchronized (multiCastHardwares) {
-				final List<HardwareInfo> result = new ArrayList<HardwareInfo>(multiCastHardwares.size());
-
-				for (final ReCMultiCastHardware hardwareWrapper : multiCastHardwares) {
-					result.add(hardwareWrapper.getHardware().getHardwareInfo());
-				}
+				final List<ReCMultiCastHardware> result = new ArrayList<ReCMultiCastHardware>(multiCastHardwares);
 				return result;
 			}
 		}
+
+		// public List<HardwareInfo> unsecureEnumerateHardwares() {
+		//
+		// synchronized (multiCastHardwares) {
+		// final List<HardwareInfo> result = new
+		// ArrayList<HardwareInfo>(multiCastHardwares.size());
+		//
+		// for (final ReCMultiCastHardware hardwareWrapper : multiCastHardwares)
+		// {
+		// result.add(hardwareWrapper.getHardware().getHardwareInfo());
+		// }
+		// return result;
+		// }
+		// }
 
 		public void shutdown() {
 			synchronized (multiCastHardwares) {
@@ -522,20 +556,20 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 		return result;
 	}
 
-
-	private static void sendHardwareNotification(final HardwareInfo hardwareInfo,
+	private void sendHardwareNotification(final ReCMultiCastHardware multiCastHardware,
 			final NotificationTypeEnum notificationType) {
 
 		final MultiCastControllerNotifInfoDTO multiCastControllerNotifInfoDTO = new MultiCastControllerNotifInfoDTO(
 				AllocationManagerSecurityManager.getLaboratoryID(), notificationType.getType());
 
-		multiCastControllerNotifInfoDTO.setHardwareInfoDTO(DTOMapperUtils.mapToHardwareInfoDTO(hardwareInfo));
+		multiCastControllerNotifInfoDTO.setRegisteredHardwareDTO(DTOMapperUtils
+				.mapToRegisteredHardwareInfoDTO(multiCastHardware.getRegisteredHardwareInfo()));
 
 		NotificationManager.getInstance().sendAsynNotification(notificationType, multiCastControllerNotifInfoDTO);
 
 	}
 
-	private static void sendClientNotification(final UserInfo userInfo, final NotificationTypeEnum notificationType) {
+	private void sendClientNotification(final UserInfo userInfo, final NotificationTypeEnum notificationType) {
 
 		final MultiCastControllerNotifInfoDTO multiCastControllerNotifInfoDTO = new MultiCastControllerNotifInfoDTO(
 				AllocationManagerSecurityManager.getLaboratoryID(), notificationType.getType());
