@@ -101,7 +101,7 @@ public class MultiThreadLaboratoryWrapper {
 	return result;
     }
 
-    public boolean addClientToHardware(final String hardwareUniqueID, final String userName) {
+    private boolean addClientToHardware(final String hardwareUniqueID, final String userName) {
 	boolean result = false;
 	final MultiThreadDeployedExperimentWrapper deployedExperimentWrapper = deployedExperimentsMap.get(hardwareUniqueID);
 	if (deployedExperimentWrapper != null) {
@@ -240,10 +240,7 @@ public class MultiThreadLaboratoryWrapper {
 			//FIXME: what can we do in this situation? maybe retry?
 			LOGGER.error("Error when trying to refresh laboratory state.", e);
 			return;
-
-
 		    }
-
 		}
 	    }
 	}
@@ -289,4 +286,7 @@ public class MultiThreadLaboratoryWrapper {
 	return underlyingLaboratory.getName();
     }
 
+    public boolean isAvailable() {
+	return underlyingLaboratory.isAvailable();
+    }
 }

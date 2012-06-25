@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadFactory;
@@ -40,7 +42,7 @@ public class LaboratoriesMonitor {
     //FIXME: system property?
     private static final int TIME_BETWEEN_MONITORING_EVENTS_SECONDS = 10;
 
-    private Map<String, LabJMXConnetionHandler> labsJMXConnectionHandler;
+    private ConcurrentMap<String, LabJMXConnetionHandler> labsJMXConnectionHandler;
 
     private volatile boolean destroy = false;
 
@@ -61,7 +63,7 @@ public class LaboratoriesMonitor {
     public void init() {
 	try {
 	    LOG.info("Starting LaboratoriesMonitor");
-	    labsJMXConnectionHandler = new HashMap<String, LabJMXConnetionHandler>();
+	    labsJMXConnectionHandler = new ConcurrentHashMap<String, LabJMXConnetionHandler>();
 
 	    initJMXConnectionHandlersMap();
 	    connectWithLabs(false);
@@ -108,13 +110,13 @@ public class LaboratoriesMonitor {
 
     private void initJMXConnectionHandlersMap() {
 
-	final Collection<Laboratory> laboratories = getLaboratoriesToMonitor();
-
-	for (final Laboratory laboratory : laboratories) {
-	    labsJMXConnectionHandler.put(laboratory.getName(), new LabJMXConnetionHandler(laboratory, new JMXConnectionHandler(laboratory.getJmxURL(),
-															       laboratory.getJmxUser(),
-															       laboratory.getJmxPass())));
+	for (final Laboratory laboratory : getLaboratoriesToMonitor()) {
+	    labsJMXConnectionHandler.put(laboratory.getName(), createLabJMXConnectionHandler(laboratory));
 	}
+    }
+
+    private LabJMXConnetionHandler createLabJMXConnectionHandler(final Laboratory laboratory) {
+	return new LabJMXConnetionHandler(laboratory, new JMXConnectionHandler(laboratory.getJmxURL(), laboratory.getJmxUser(), laboratory.getJmxPass()));
     }
 
     private void connectWithLabs(final boolean isToRegisterNotifListener) {
@@ -167,14 +169,12 @@ public class LaboratoriesMonitor {
 	return destroy;
     }
 
-    public Collection<MultiThreadLaboratoryWrapper> getLiveLabs() {
-	Collection<MultiThreadLaboratoryWrapper> labs = Collections.emptyList();
+    public Map<Long, Boolean> getLiveLabs() {
+	Map<Long, Boolean> labs = Collections.emptyMap();
 	if (!labsJMXConnectionHandler.isEmpty()) {
-	    labs = new ArrayList<MultiThreadLaboratoryWrapper>(labsJMXConnectionHandler.size());
+	    labs = new HashMap<Long, Boolean>(labsJMXConnectionHandler.size());
 	    for (final Entry<String, LabJMXConnetionHandler> jmxHandler : labsJMXConnectionHandler.entrySet()) {
-		//		if (jmxHandler.getValue().getJmxConnectionHandler().isConnected()) {
-		//		    //		    labs.add(jmxHandler.getValue().getLaboratory());
-		//		}
+		labs.put(jmxHandler.getValue().getLaboratory().getIdInternal(), Boolean.valueOf(jmxHandler.getValue().getJmxConnectionHandler().isConnected()));
 	    }
 	}
 	return labs;
@@ -218,6 +218,12 @@ public class LaboratoriesMonitor {
 
     public LabsNotificationListener getLabsNotificationManager() {
 	return labsNotificationListener;
+    }
+
+    public void addNewLaboratory(final Laboratory lab) {
+	if (!lab.getState().isActive()) {
+	    labsJMXConnectionHandler.put(lab.getName(), createLabJMXConnectionHandler(lab));
+	}
     }
 
 }

@@ -187,7 +187,7 @@ public final class JMXConnectionHandler {
 	return (numberOfRetries.get() < Integer.MAX_VALUE);
     }
 
-    private boolean isConnected() {
+    public boolean isConnected() {
 	return jmxConnector != null;
     }
 

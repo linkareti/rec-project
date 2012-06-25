@@ -3,11 +3,13 @@ package com.linkare.rec.am.web;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 
 import com.linkare.rec.am.model.DeployedExperiment;
 import com.linkare.rec.am.model.Experiment;
@@ -17,6 +19,7 @@ import com.linkare.rec.am.service.ExperimentService;
 import com.linkare.rec.am.service.ExperimentServiceLocal;
 import com.linkare.rec.am.service.LaboratoryService;
 import com.linkare.rec.am.service.LaboratoryServiceLocal;
+import com.linkare.rec.am.util.LaboratoriesMonitor;
 
 /**
  * Defines of the operations to retrieve the existing laboratories and it's status, and also which experiments are in each laboratory, their status, number of
@@ -36,7 +39,10 @@ public class StatusBean implements Serializable {
 
     @EJB(beanInterface = ExperimentServiceLocal.class)
     private ExperimentService experimentService;
-    
+
+    @Inject
+    private LaboratoriesMonitor laboratoriesMonitor;
+
     private List<Laboratory> labs;
     private Laboratory selectedLab;
     private List<DeployedExperiment> selectedLabExperiments;
@@ -76,16 +82,18 @@ public class StatusBean implements Serializable {
 	}
 	return selectedLabExperiments;
     }
-    
+
     public void updateLabStatus() {
-	//TODO implement to get this from the Singleton component developed by Artur
-	for (Laboratory lab : labs) {
-	    if (Math.random() > 0.95d) {
-		lab.setAvailable(!lab.isAvailable());
+	final Map<Long, Boolean> liveLabs = laboratoriesMonitor.getLiveLabs();
+	for (final Laboratory lab : labs) {
+	    final Boolean labStatus = liveLabs.get(lab.getIdInternal());
+	    if (labStatus != null) {
+		lab.setAvailable(labStatus);
 	    }
 	}
+
     }
-    
+
     public void updateExperimentStatus() {
 	if (selectedLabExperiments == null) {
 	    return;
