@@ -32,15 +32,14 @@
                     <h:commandLink action="#{badWordController.prepareEdit}"
                                    value="#{bundle['operation.edit']}" />
                     <h:outputText value=" | " />
-                    <p:commandLink value="#{bundle['operation.remove']}" action="#{badWordController.destroy}">
-                        <p:confirmDialog id="confirmDialog" message="#{bundle['label.confirmMessage']}"  
-                                         header="#{bundle['label.confirmHeader']}" severity="alert" widgetVar="confirmation">  
+                    <p:commandLink onclick="confirmation.show()" value="#{bundle['operation.remove']}" action="#{badWordController.destroy}" />
+                    <p:confirmDialog id="confirmDialog" message="#{bundle['label.confirmMessage']}"  
+                                     header="#{bundle['label.confirmHeader']}" severity="alert" widgetVar="confirmation">  
 
-                            <p:commandButton id="confirm" value="#{bundle['label.yes']}" update=":list-form:items" 
-                                             oncomplete="confirmation.hide()"  ajax="false"/>
-                            <p:commandButton id="decline" value="#{bundle['label.no']}" onclick="confirmation.hide()" type="button" />   
-                        </p:confirmDialog> 
-                    </p:commandLink>
+                        <p:commandButton id="confirm" value="#{bundle['label.yes']}" update=":list-form:items" 
+                                         oncomplete="confirmation.hide()"  ajax="false"/>
+                        <p:commandButton id="decline" value="#{bundle['label.no']}" onclick="confirmation.hide()" type="button" />   
+                    </p:confirmDialog>
                 </p:column>
             </p:dataTable>
             <p:commandButton id="cmdButtonCreate" action="#{badWordController.prepareCreate}" value="#{bundle['operation.create']}"/>

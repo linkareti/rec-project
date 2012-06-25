@@ -2,7 +2,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.prime.com.tr/ui">
+	xmlns:p="http://primefaces.org/ui">
 
 	<ul>
 		<h:panelGroup rendered="#{userView.external}">
@@ -24,6 +24,8 @@
 				value="#{bundle['menu.reservation.list']}" /></li>
 			<li><h:commandLink action="/protected/loginDomain/List"
 				value="#{bundle['menu.loginDomain.list']}" /></li>
+            <li><h:commandLink action="/protected/badword/List"
+				value="#{bundle['menu.badword.list']}" /></li>
 		</h:panelGroup>
 	</ul>
 

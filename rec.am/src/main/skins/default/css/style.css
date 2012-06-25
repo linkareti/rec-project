@@ -476,7 +476,7 @@ a img {
 }
 /*-------- Login Definitions --------*/
 #login {
-	background-color: #bdd2d0;
+	background-color: #BDD2D0;
 	min-height: 316px;
 	padding-top: 60px;
 	width: 100%;
@@ -551,8 +551,47 @@ a img {
 	margin-left: 140px;
 	
 }
+/*--------- LabStatus Definitions ---*/
+#labsStatusPanel{
+    height: 400px; 
+    position: relative;
+}
 
+.labsPanel{
+    float: left;  
+    width: 400px; 
+    margin-left: 10%
+}
 
+.experimentsPanel{
+    float: left; 
+    width: 400px; 
+    height: 400px;
+}
+.scrollPanel{
+    height: 300px; 
+    width:550px; 
+    background: #bdd2d0; 
+    border-style:none;
+}
+#statusPanelFooter{
+    height: 20px; 
+    text-align: center
+}
+.table-header{
+	text-align:center;
+	background:none repeat scroll 0 0 #E5E5E5;
+	border-bottom:1px solid #BBBBBB;
+	padding:16px;
+}
+
+/*-------- Table Definitions ------*/
+.list-row-even{
+  background-color: #F5F5F5;  
+}
+.list-row-odd{
+    background-color: #F8F8FF;
+}
 /*-------- Auth Footer Definitions --------*/
 #auth_footer {
 	color: white;

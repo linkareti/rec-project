@@ -49,7 +49,7 @@ public class StatusBean implements Serializable {
 
     public List<Laboratory> getLabs() {
 	if (labs == null) {
-	    labs = labService.findAll();
+	    labs = labService.findAllActive();
 	}
 	return labs;
     }

@@ -6,18 +6,18 @@
 
 	<ui:define name="content">
 
-		<div style="height: 400px; position: relative">
+		<div id="labsStatusPanel">
 
 			<h:form id="form">
 
-				<h:panelGroup id="labsPanel" style="float: left; width: 400px">
+                <h:panelGroup id="labsPanel" styleClass="labsPanel">
 					<p:poll update="refreshableLabs" interval="10"
 						listener="#{statusBean.updateLabStatus}" />
 					<h:panelGroup id="refreshableLabs">
 						<h:dataTable var="lab" value="#{statusBean.labs}"
-							style="width:400px">
+                                     style="width:400px" >
 							<p:column style="width: 370px">
-								<h:outputText value="#{lab.state.label}" />
+                                <h:outputText value="#{lab.state.label}" title="#{lab.description}"/>
 							</p:column>
 							<p:column style="width: 15px">
 								<h:graphicImage library="images" name="available.gif"
@@ -28,9 +28,15 @@
 									title="#{statusBundle['tooltip.lab.unavailable']}" />
 							</p:column>
 							<p:column style="width: 15px">
-								<h:commandLink title="#{statusBundle['tooltip.lab.expand']}">
+                                <h:commandLink title="#{statusBundle['tooltip.lab.expand']}" rendered="#{!lab.available}">
 									<h:graphicImage library="images"
 										name="rt-arrow-circle-gree.png"
+                                        rendered="#{statusBean.selectedLab != lab}"
+										onmouseover="this.style.cursor='pointer';"
+										onmouseout="this.style.cursor='default';"/>
+                                    <h:graphicImage library="images"
+                                                    rendered="#{statusBean.selectedLab == lab}"
+										name="down-arrow-circle-green.png"
 										onmouseover="this.style.cursor='pointer';"
 										onmouseout="this.style.cursor='default';" />
 									<f:setPropertyActionListener target="#{statusBean.selectedLab}"
@@ -41,38 +47,36 @@
 					</h:panelGroup>
 				</h:panelGroup>
 
-				<h:panelGroup id="experimentsPanel"
-					style="float: left; width: 400px; height: 400px"
-					rendered="#{!empty statusBean.selectedLab}">
+                <h:panelGroup id="experimentsPanel" styleClass="experimentsPanel"
+                              rendered="#{!empty statusBean.selectedLab}">
 					<p:poll update="table" interval="5"
 						listener="#{statusBean.updateExperimentStatus}" />
 					<script src="http://www.java.com/js/deployJava.js" />
-					<p:scrollPanel mode="native"
-						style="height: 300px; width:550px; background: #bdd2d0; border-style:none">
+                    <p:scrollPanel mode="native" styleClass="scrollPanel">
 						<h:dataTable id="table" var="deployedExp"
-							value="#{statusBean.labExperiments}" style="width:530px;">
-							<h:column style="width:300px">
+                                     value="#{statusBean.labExperiments}" style="width:530px;">
+							<p:column style="width:300px">
 								<h:outputText value="#{deployedExp.experiment.state.label}" />
-							</h:column>
-							<h:column style="width:50px">
+							</p:column>
+							<p:column style="width:50px">
 								<h:graphicImage library="images" name="available.gif"
 									rendered="#{!deployedExp.labRunning}"
 									title="#{statusBundle['tooltip.experiment.available']}" />
 								<h:graphicImage library="images" name="unavailable.gif"
 									rendered="#{deployedExp.labRunning}"
 									title="#{statusBundle['tooltip.experiment.unavailable']}" />
-							</h:column>
-							<h:column style="width:80px">
+							</p:column>
+							<p:column style="width:80px">
 								<h:outputText value="#{deployedExp.numberOfUsers}"
 									title="#{statusBundle['tooltip.experiment.users']}" />
-							</h:column>
-							<h:column style="width:100px">
+							</p:column>
+							<p:column  style="width:100px" >
 								<a
 									href="javascript:var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + 'client/elab-client.jnlp'; if (!deployJava.isWebStartInstalled('1.6')) {if (deployJava.installLatestJRE()) {if (deployJava.launch(url)) {}}} else {if (deployJava.launch(url)) {}}"
-									title="#{statusBundle['tooltip.experiment.launch']}"> <img
-									src="client/images/webstart.png" border="0" />
+                                    title="#{statusBundle['tooltip.experiment.launch']}" > <img
+									src="client/images/webstart.png" border="0" rendered="#{!deployedExp.labRunning}"/>
 								</a>
-							</h:column>
+							</p:column>
 						</h:dataTable>
 					</p:scrollPanel>
 				</h:panelGroup>
@@ -81,7 +85,7 @@
 
 		</div>
 
-		<div style="height: 20px; text-align: center">
+		<div id="statusPanelFooter">
 			<a href=""><b>FAQ</b></a> | <a href=""><b>Requirements</b></a>
 		</div>
 

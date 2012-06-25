@@ -1,63 +1,59 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.prime.com.tr/ui"
-	template="/protected/backoffice.xhtml">
-	<ui:define name="title">
-		<h:outputText value="#{bundle['page.loginDomain.list.title']}"></h:outputText>
-	</ui:define>
-	<ui:define name="body">
-		<h:form id="list-form">
-			<p:dataTable id="items" var="item" width="100%"
-				value="#{loginDomainController.items}"
-				emptyMessage="#{bundle['info.emptyList']}"
-				selection="#{laboratoryController.current}" paginator="true"
-				rows="10" selectionMode="single" dynamic="false"
-				firstPageLinkLabel="#{bundle['label.firstPage']}"
-				lastPageLinkLabel="#{bundle['label.lastPage']}"
-				nextPageLinkLabel="#{bundle['label.nextPage']}"
-				previousPageLinkLabel="#{bundle['label.previousPage']}"
-				scrollable="false">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/protected/backoffice.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle['page.loginDomain.list.title']}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="list-form">
+            <p:dataTable id="items" var="item"
+                         value="#{loginDomainController.items}"
+                         emptyMessage="#{bundle['info.emptyList']}"
+                         selection="#{laboratoryController.current}" paginator="true"
+                         rows="10" selectionMode="single" 
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                         scrollable="false"
+                         rowKey="#{item.name}">
 
-				<p:column styleClass="title_col" width="200" sortBy="#{item.name}"
-					filterBy="#{item.name}">
-					<f:facet name="header">
-						<h:outputText value="#{bundle['loginDomain.name']}" />
-					</f:facet>
-					<h:outputText value="#{item.name}" />
-				</p:column>
+                <p:column styleClass="title_col" style="width:200px" sortBy="#{item.name}"
+                          filterBy="#{item.name}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle['loginDomain.name']}" />
+                    </f:facet>
+                    <h:outputText value="#{item.name}" />
+                </p:column>
 
-				<p:column styleClass="details_col" width="450" sortBy="#{item.url}"
-					filterBy="#{item.url}">
-					<f:facet name="header">
-						<h:outputText value="#{bundle['loginDomain.url']}" />
-					</f:facet>
-					<h:outputText value="#{item.url}" />
-				</p:column>
+                <p:column styleClass="details_col" style="width:450px" sortBy="#{item.url}"
+                          filterBy="#{item.url}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle['loginDomain.url']}" />
+                    </f:facet>
+                    <h:outputText value="#{item.url}" />
+                </p:column>
 
-				<p:column styleClass="links_col" width="150" resizable="false">
-					<f:facet name="header"></f:facet>
-					<h:commandLink action="#{loginDomainController.prepareView}"
-						value="#{bundle['operation.view']}" />
-					<h:outputText value=" " />
-					<h:commandLink action="#{loginDomainController.prepareEdit}"
-						value="#{bundle['operation.edit']}" />
-					<h:outputText value=" " />
-					<p:commandLink action="#{loginDomainController.destroy}"
-						ajax="false">
-						<h:outputText value="#{bundle['operation.remove']}" />
-						<p:confirmDialog width="200px" draggable="true" effect="FADE"
-							fixedCenter="true" effectDuration="0.2" modal="false"
-							yesLabel="#{bundle['label.yes']}" noLabel="#{bundle['label.no']}"
-							message="#{bundle['label.confirmMessage']}"
-							header="#{bundle['label.confirmHeader']}" severity="warn" />
-					</p:commandLink>
-				</p:column>
+                <p:column styleClass="links_col" style="width:150px" resizable="false">
+                    <f:facet name="header"></f:facet>
+                    <h:commandLink action="#{loginDomainController.prepareView}"
+                                   value="#{bundle['operation.view']}" />
+                    <h:outputText value=" | " />
+                    <h:commandLink action="#{loginDomainController.prepareEdit}"
+                                   value="#{bundle['operation.edit']}" />
+                    <h:outputText value=" | " />
+                    <p:commandLink onclick="confirmation.show()" value="#{bundle['operation.remove']}" />
+                    <p:confirmDialog id="confirmDialog" message="#{bundle['label.confirmMessage']}"  
+                                     header="#{bundle['label.confirmHeader']}" severity="alert" widgetVar="confirmation">  
 
-			</p:dataTable>
-			<h:commandLink action="#{loginDomainController.prepareCreate}"
-				value="#{bundle['operation.create']}" />
-		</h:form>
-	</ui:define>
+                        <p:commandButton id="confirm" value="#{bundle['label.yes']}" update=":list-form:items" oncomplete="confirmation.hide()"  
+                                         actionListener="#{loginDomainController.destroy}" ajax="false"/>  
+                        <p:commandButton id="decline" value="#{bundle['label.no']}" onclick="confirmation.hide()" type="button" />   
+                    </p:confirmDialog> 
+                </p:column>
+
+            </p:dataTable>
+            <p:commandButton id="cmdButtonCreate" action="#{loginDomainController.prepareCreate}" value="#{bundle['operation.create']}"/>
+        </h:form>
+    </ui:define>
 </ui:composition>

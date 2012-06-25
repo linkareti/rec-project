@@ -10,7 +10,6 @@ import javax.faces.model.SelectItem;
 
 import com.linkare.commons.dao.Deletable;
 import com.linkare.commons.dao.Identifiable;
-import com.linkare.commons.jpa.exceptions.DomainException;
 import com.linkare.jsf.utils.JsfUtil;
 import com.linkare.rec.am.aop.AllocationManagerExceptionHandler;
 import com.linkare.rec.am.aop.ExceptionHandle;

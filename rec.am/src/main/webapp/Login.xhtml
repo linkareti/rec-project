@@ -4,22 +4,22 @@
     <h:form>
         <h:panelGrid columns="4">
             <h:outputLabel value="#{bundle['user.username']}" for="login" />
-            <h:inputText id="login" class="username"
+            <h:inputText id="login" styleClass="username"
                          value="#{authenticationBean.username}"
                          title="#{bundle['user.username']}" />
-            <h:outputText value="#{bundle['user.login.password']}" for="passwd" />
-            <h:inputSecret id="passwd" class="password"
+            <h:outputLabel value="#{bundle['user.login.password']}" for="passwd" />
+            <h:inputSecret id="passwd" styleClass="password"
                            value="#{authenticationBean.password}"
                            title="#{bundle['user.login.password']}" />
-            <h:outputText value="#{bundle['app.loginDomain']}" for="loginDomain" />
-            <h:selectOneMenu id="loginDomain" class="loginDomain"
+            <h:outputLabel value="#{bundle['app.loginDomain']}" for="loginDomain" />
+            <h:selectOneMenu id="loginDomain" styleClass="loginDomain"
                              value="#{authenticationBean.domain}"
                              title="#{bundle['app.loginDomain']}">
                 <f:selectItems value="#{loginDomainBean.loginDomains}" />
             </h:selectOneMenu>
-            <br></br>
+            <h:outputLabel value=" " />
             <h:panelGroup>
-                <h:commandButton class="submit"
+                <h:commandButton styleClass="submit"
                                  action="#{authenticationBean.login}"
                                  value="#{bundle['operation.login']}" />
             </h:panelGroup>
