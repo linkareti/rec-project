@@ -1,0 +1,43 @@
+<h:form xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+    <p:growl id="messages" showDetail="true"/>
+
+    <p:dataTable var="badword" value="#{tableBean.carsSmall}" id="carList" editable="true">
+        <p:column headerText="RegeX" style="width:125px">
+            <p:cellEditor>
+                <f:facet name="output">
+                    <h:outputText value="#{badword.regex}" />
+                </f:facet>
+                <f:facet name="input">
+                    <p:inputText value="#{badword.regex}" style="width:100%"/>
+                </f:facet>
+            </p:cellEditor>
+        </p:column>
+
+        <p:column headerText="Idioma" style="width:125px">
+            <p:cellEditor>
+                <f:facet name="output">
+                    <h:outputText value="#{badword.locale}" />
+                </f:facet>
+                <f:facet name="input">
+                    <h:selectOneMenu value="#{badword.locale}" >
+                        <f:selectItems value="#{tableBean.manufacturers}"
+                            var="man" 
+                            itemLabel="#{man}"
+                            itemValue="#{man}" />
+                    </h:selectOneMenu>
+                </f:facet>
+            </p:cellEditor>
+        </p:column>
+
+        <p:column headerText="Options" style="width:50px">
+            <p:rowEditor />
+        </p:column>
+
+    </p:dataTable>
+
+</h:form>
