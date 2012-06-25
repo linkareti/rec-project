@@ -59,18 +59,23 @@ public class LaboratoriesMonitor {
 
     @PostConstruct
     public void init() {
-	LOG.info("Starting LaboratoriesMonitor");
-	labsJMXConnectionHandler = new HashMap<String, LabJMXConnetionHandler>();
+	try {
+	    LOG.info("Starting LaboratoriesMonitor");
+	    labsJMXConnectionHandler = new HashMap<String, LabJMXConnetionHandler>();
 
-	initJMXConnectionHandlersMap();
-	connectWithLabs(false);
+	    initJMXConnectionHandlersMap();
+	    connectWithLabs(false);
 
-	labsNotificationListener = new LabsNotificationListener(getMbeanProxies(), experimentService);
+	    labsNotificationListener = new LabsNotificationListener(getMbeanProxies(), experimentService);
 
-	executorService = Executors.newSingleThreadScheduledExecutor(getThreadFactory());
+	    executorService = Executors.newSingleThreadScheduledExecutor(getThreadFactory());
 
-	executorService.scheduleAtFixedRate(getLabsMonitorTask(), TIME_BETWEEN_MONITORING_EVENTS_SECONDS, TIME_BETWEEN_MONITORING_EVENTS_SECONDS,
-					    TimeUnit.SECONDS);
+	    executorService.scheduleAtFixedRate(getLabsMonitorTask(), TIME_BETWEEN_MONITORING_EVENTS_SECONDS, TIME_BETWEEN_MONITORING_EVENTS_SECONDS,
+						TimeUnit.SECONDS);
+	} catch (Exception e) {
+	    LOG.error("Error initializing LaboratoriesMonitor. Laboratories status will not be available", e);
+	}
+
     }
 
     private ThreadFactory getThreadFactory() {
