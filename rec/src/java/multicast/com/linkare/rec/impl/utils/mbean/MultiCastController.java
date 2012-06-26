@@ -6,7 +6,10 @@
  */
 package com.linkare.rec.impl.utils.mbean;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.management.ListenerNotFoundException;
 import javax.management.MBeanNotificationInfo;
@@ -56,8 +59,20 @@ public class MultiCastController implements IMultiCastControllerMXBean, Notifica
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<RegisteredHardwareDTO> getRegisteredHardwaresInfo() {
-		return DTOMapperUtils.mapToRegisteredHardwareInfoDTOList(reCMultiCastController.getRegisteredHardwareInfo());
+	public Map<String, RegisteredHardwareDTO> getRegisteredHardwaresInfo(final List<String> hardwareUniqueIDs) {
+
+		Map<String, RegisteredHardwareDTO> result = Collections.emptyMap();
+
+		final Map<String, RegisteredHardwareDTO> mapFromList = getMapFromList();
+		if (hardwareUniqueIDs == null) {
+			result = mapFromList;
+		} else {
+			result = new HashMap<String, RegisteredHardwareDTO>(hardwareUniqueIDs.size());
+			for (final RegisteredHardwareDTO registeredHardware : mapFromList.values()) {
+				result.put(registeredHardware.getHardwareUniqueID(), registeredHardware);
+			}
+		}
+		return result;
 	}
 
 	/**
@@ -101,6 +116,20 @@ public class MultiCastController implements IMultiCastControllerMXBean, Notifica
 	@Override
 	public long getUpTimeInMillis() {
 		return notificationManager.getUptime();
+	}
+
+	private Map<String, RegisteredHardwareDTO> getMapFromList() {
+
+		Map<String, RegisteredHardwareDTO> result = Collections.emptyMap();
+
+		final List<RegisteredHardwareDTO> mapToRegisteredHardwareInfoDTOList = DTOMapperUtils
+				.mapToRegisteredHardwareInfoDTOList(reCMultiCastController.getRegisteredHardwareInfo());
+		result = new HashMap<String, RegisteredHardwareDTO>(mapToRegisteredHardwareInfoDTOList.size());
+
+		for (final RegisteredHardwareDTO registeredHardwareDTO : mapToRegisteredHardwareInfoDTOList) {
+			result.put(registeredHardwareDTO.getHardwareUniqueID(), registeredHardwareDTO);
+		}
+		return result;
 	}
 
 }
