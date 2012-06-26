@@ -4,21 +4,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import com.linkare.rec.am.model.DeployedExperiment;
-import com.linkare.rec.am.model.Experiment;
-import com.linkare.rec.am.model.HardwareState;
 import com.linkare.rec.am.model.Laboratory;
 import com.linkare.rec.am.service.ExperimentService;
 import com.linkare.rec.am.service.ExperimentServiceLocal;
 import com.linkare.rec.am.service.LaboratoryService;
 import com.linkare.rec.am.service.LaboratoryServiceLocal;
 import com.linkare.rec.am.util.LaboratoriesMonitor;
+import com.linkare.rec.am.util.MultiThreadDeployedExperimentWrapper;
+import com.linkare.rec.am.util.MultiThreadLaboratoryWrapper;
 
 /**
  * Defines of the operations to retrieve the existing laboratories and it's status, and also which experiments are in each laboratory, their status, number of
@@ -41,7 +39,7 @@ public class StatusBean implements Serializable {
 
     private List<Laboratory> labs;
     private Laboratory selectedLab;
-    private List<DeployedExperiment> selectedLabExperiments;
+    private List<MultiThreadDeployedExperimentWrapper> selectedLabExperiments;
 
     private LaboratoriesMonitor laboratoriesMonitor = LaboratoriesMonitor.getInstance();
 
@@ -61,22 +59,17 @@ public class StatusBean implements Serializable {
 	this.selectedLabExperiments = null;
     }
 
-    public List<DeployedExperiment> getLabExperiments() {
+    public List<MultiThreadDeployedExperimentWrapper> getLabExperiments() {
 
-	System.out.println("Selected lab: " + selectedLab);
-	System.out.println("Entrei no getLabExperiments: " + selectedLabExperiments);
-	if (selectedLabExperiments == null) {
-	    if (selectedLab == null) {
-		return selectedLabExperiments;
-	    }
-	    List<Experiment> experiments = experimentService.findExperimentsByLaboratory(selectedLab);
-	    selectedLabExperiments = new ArrayList<DeployedExperiment>();
-	    for (Experiment experiment : experiments) {
-		DeployedExperiment deployedExperiment = new DeployedExperiment();
-		deployedExperiment.setExperiment(experiment);
-		selectedLabExperiments.add(deployedExperiment);
-	    }
-	    updateExperimentStatus();
+	if (selectedLab == null) {
+	    return selectedLabExperiments;
+	}
+
+	final MultiThreadLaboratoryWrapper laboratory = laboratoriesMonitor.getLaboratory(selectedLab.getName());
+
+	if (laboratory != null) {
+	    final Map<String, MultiThreadDeployedExperimentWrapper> liveExperiments = laboratory.getLiveExperiments();
+	    selectedLabExperiments = new ArrayList<MultiThreadDeployedExperimentWrapper>(liveExperiments.values());
 	}
 	return selectedLabExperiments;
     }
@@ -92,22 +85,4 @@ public class StatusBean implements Serializable {
 
     }
 
-    public void updateExperimentStatus() {
-	if (selectedLabExperiments == null) {
-	    return;
-	}
-	//TODO implement to get this from the Singleton component developed by Artur
-	Random randState = new Random();
-	Random randUsers = new Random();
-	for (DeployedExperiment experiment : selectedLabExperiments) {
-	    if (Math.random() > 0.95d) {
-		int newStateVal = randState.nextInt(HardwareState.values().length);
-		HardwareState newState = HardwareState.valueOfCode((byte) newStateVal);
-		experiment.setState(newState);
-	    }
-	    if (Math.random() > 0.50d) {
-		//		experiment.setNumberOfUsers(randUsers.nextInt(101));
-	    }
-	}
-    }
 }

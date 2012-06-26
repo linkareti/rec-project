@@ -112,4 +112,8 @@ public class LabsNotificationListener {
 	return destroy;
     }
 
+    public MultiThreadLaboratoryWrapper getLaboratory(final String labID) {
+	return labs.get(labID);
+    }
+
 }

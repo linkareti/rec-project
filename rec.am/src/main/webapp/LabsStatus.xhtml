@@ -21,14 +21,14 @@
 							</p:column>
 							<p:column style="width: 15px">
 								<h:graphicImage library="images" name="available.gif"
-									rendered="#{!lab.available}"
+									rendered="#{lab.available}"
 									title="#{statusBundle['tooltip.lab.available']}" />
 								<h:graphicImage library="images" name="unavailable.gif"
-									rendered="#{lab.available}"
+									rendered="#{!lab.available}"
 									title="#{statusBundle['tooltip.lab.unavailable']}" />
 							</p:column>
 							<p:column style="width: 15px">
-                                <h:commandLink title="#{statusBundle['tooltip.lab.expand']}" rendered="#{!lab.available}">
+                                <h:commandLink title="#{statusBundle['tooltip.lab.expand']}" rendered="#{lab.available}">
 									<h:graphicImage library="images"
 										name="rt-arrow-circle-gree.png"
                                         rendered="#{statusBean.selectedLab != lab}"
@@ -56,7 +56,7 @@
 						<h:dataTable id="table" var="deployedExp"
                                      value="#{statusBean.labExperiments}" style="width:530px;">
 							<p:column style="width:300px">
-								<h:outputText value="#{deployedExp.experiment.state.label}" />
+								<h:outputText value="#{deployedExp.stateLabel}" />
 							</p:column>
 							<p:column style="width:50px">
 								<h:graphicImage library="images" name="available.gif"

@@ -1,7 +1,7 @@
 package com.linkare.rec.am.util;
 
-import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -12,13 +12,15 @@ import com.linkare.rec.am.model.HardwareState;
 
 public class MultiThreadDeployedExperimentWrapper {
 
-    private final DeployedExperiment underlyingExperiment;
+    private final DeployedExperiment underlyingDeployedExperiment;
+    private final Experiment experiment;
 
     private final Lock readLock;
     private final Lock writeLock;
 
     public MultiThreadDeployedExperimentWrapper(final DeployedExperiment experiment) {
-	this.underlyingExperiment = new DeployedExperiment(experiment);
+	this.underlyingDeployedExperiment = new DeployedExperiment(experiment);
+	this.experiment = underlyingDeployedExperiment.getExperiment();
 
 	final ReadWriteLock lock = new ReentrantReadWriteLock();
 	this.readLock = lock.readLock();
@@ -28,16 +30,16 @@ public class MultiThreadDeployedExperimentWrapper {
     public HardwareState getState() {
 	readLock.lock();
 	try {
-	    return underlyingExperiment.getState();
+	    return underlyingDeployedExperiment.getState();
 	} finally {
 	    readLock.unlock();
 	}
     }
 
-    public Collection<String> getUsersConnected() {
+    public Set<String> getUsersConnected() {
 	readLock.lock();
 	try {
-	    return Collections.unmodifiableCollection(underlyingExperiment.getUsersConnected());
+	    return Collections.unmodifiableSet(underlyingDeployedExperiment.getUsersConnected());
 	} finally {
 	    readLock.unlock();
 	}
@@ -46,7 +48,7 @@ public class MultiThreadDeployedExperimentWrapper {
     public int getNumberOfUsers() {
 	readLock.lock();
 	try {
-	    return underlyingExperiment.getNumberOfUsers();
+	    return underlyingDeployedExperiment.getNumberOfUsers();
 	} finally {
 	    readLock.unlock();
 	}
@@ -56,7 +58,7 @@ public class MultiThreadDeployedExperimentWrapper {
 	final HardwareState state = HardwareState.valueOfCode(newState);
 	writeLock.lock();
 	try {
-	    underlyingExperiment.setState(state);
+	    underlyingDeployedExperiment.setState(state);
 	} finally {
 	    writeLock.unlock();
 	}
@@ -65,7 +67,7 @@ public class MultiThreadDeployedExperimentWrapper {
     public boolean addNewClient(final String userName) {
 	writeLock.lock();
 	try {
-	    return underlyingExperiment.getUsersConnected().add(userName);
+	    return underlyingDeployedExperiment.getUsersConnected().add(userName);
 	} finally {
 	    writeLock.unlock();
 	}
@@ -74,34 +76,44 @@ public class MultiThreadDeployedExperimentWrapper {
     public boolean removeClient(final String userName) {
 	writeLock.lock();
 	try {
-	    return underlyingExperiment.getUsersConnected().remove(userName);
+	    return underlyingDeployedExperiment.getUsersConnected().remove(userName);
 	} finally {
 	    writeLock.unlock();
 	}
     }
+    
+    public boolean isLabRunning() {
+	readLock.lock();
+	try {
+	    return underlyingDeployedExperiment.isLabRunning();
+	} finally {
+	    readLock.unlock();
+	}
+    }
 
-    private Experiment getExperiment() {
-	return underlyingExperiment.getExperiment();
+
+    public String getStateLabel() {
+	return experiment.getState().getLabel();
     }
 
     public String getExternalId() {
-	return getExperiment().getExternalId();
+	return experiment.getExternalId();
     }
 
     public String getDescription() {
-	return getExperiment().getDescription();
+	return experiment.getDescription();
     }
 
     public Long getIdInternal() {
-	return getExperiment().getIdInternal();
+	return experiment.getIdInternal();
     }
 
     public String getName() {
-	return getExperiment().getName();
+	return experiment.getName();
     }
 
     public String getPresentationName() {
-	return getExperiment().getPresentationName();
+	return experiment.getPresentationName();
     }
 
 }

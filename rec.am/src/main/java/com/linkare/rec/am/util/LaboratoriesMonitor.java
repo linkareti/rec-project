@@ -108,7 +108,9 @@ public final class LaboratoriesMonitor {
     private void initJMXConnectionHandlersMap() {
 
 	for (final Laboratory laboratory : getLaboratoriesToMonitor()) {
-	    labsJMXConnectionHandler.put(laboratory.getName(), createLabJMXConnectionHandler(laboratory));
+	    if (laboratory.getJmxURL() != null) {
+		labsJMXConnectionHandler.put(laboratory.getName(), createLabJMXConnectionHandler(laboratory));
+	    }
 	}
     }
 
@@ -235,7 +237,10 @@ public final class LaboratoriesMonitor {
 	    LOG.error(e.getMessage(), e);
 	    throw new RuntimeException(e);
 	}
+    }
 
+    public MultiThreadLaboratoryWrapper getLaboratory(final String labID) {
+	return labsNotificationListener.getLaboratory(labID);
     }
 
 }

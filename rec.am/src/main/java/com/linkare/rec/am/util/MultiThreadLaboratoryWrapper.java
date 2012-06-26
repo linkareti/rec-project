@@ -308,8 +308,8 @@ public class MultiThreadLaboratoryWrapper {
 	return experimentService.findByExternalID(externalID);
     }
 
-    public Collection<MultiThreadDeployedExperimentWrapper> getLiveExperiments() {
-	return Collections.unmodifiableCollection(deployedExperimentsMap.values());
+    public Map<String, MultiThreadDeployedExperimentWrapper> getLiveExperiments() {
+	return Collections.unmodifiableMap(deployedExperimentsMap);
     }
 
     public Collection<String> getConnectedUsers() {

@@ -19,7 +19,7 @@ public class ServletContextListener implements javax.servlet.ServletContextListe
 	try {
 	    LOG.info("Context detroyed");
 	    LaboratoriesMonitor.getInstance().destroy();
-	} catch (Throwable e) {
+	} catch (Exception e) {
 	    LOG.error(e.getMessage(), e);
 	}
     }
@@ -29,7 +29,7 @@ public class ServletContextListener implements javax.servlet.ServletContextListe
 
 	try {
 	    LaboratoriesMonitor.getInstance();
-	} catch (Throwable e) {
+	} catch (Exception e) {
 	    LOG.error(e.getMessage(), e);
 	}
     }
