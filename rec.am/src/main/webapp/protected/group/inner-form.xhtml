@@ -30,8 +30,7 @@
 
         </h:panelGrid>
         <h:panelGroup rendered="#{operation == 'create'}">
-             <p:commandButton action="#{groupController.create}" value="#{bundle['operation.save']}" 
-                             onclick="this.disabled=true" oncomplete="this.disabled=false"/>
+             <p:commandButton action="#{groupController.create}" value="#{bundle['operation.save']}"  ajax="false"/>
         </h:panelGroup>
     </p:panel>
 </h:form>

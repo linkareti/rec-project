@@ -32,17 +32,17 @@
 					<h:commandLink action="#{roleController.prepareEdit}"
 						value="#{bundle['operation.edit']}" />
 					<h:outputText value=" | " />
-                    <p:commandLink onclick="confirmation.show()" value="#{bundle['operation.remove']}" />
+                    <p:commandLink onclick="confirmation.show()" value="#{bundle['operation.remove']}" action="#{roleController.destroy}" />
                     <p:confirmDialog id="confirmDialog" message="#{bundle['label.confirmMessage']}"  
                                      header="#{bundle['label.confirmHeader']}" severity="alert" widgetVar="confirmation">  
 
-                        <p:commandButton id="confirm" value="#{bundle['label.yes']}" update=":list-form:items" oncomplete="confirmation.hide()"  
-                                         actionListener="#{roleController.destroy}" ajax="false"/>  
+                        <p:commandButton id="confirm" value="#{bundle['label.yes']}" update=":list-form:items:list-form:messages" 
+                                         oncomplete="confirmation.hide()" ajax="false"/>  
                         <p:commandButton id="decline" value="#{bundle['label.no']}" onclick="confirmation.hide()" type="button" />   
                     </p:confirmDialog> 
 				</p:column>
 			</p:dataTable>
-            <p:commandButton id="cmdButtonCreate" action="#{roleController.prepareCreate}" value="#{bundle['operation.create']}"/>
+            <p:commandButton id="cmdButtonCreate" action="#{roleController.prepareCreate}" value="#{bundle['operation.create']}" ajax="false"/>
 		</h:form>
 	</ui:define>
 </ui:composition>

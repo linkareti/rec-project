@@ -87,7 +87,7 @@
                                  rendered="#{operation != 'view'}"
                                  validator="#{userWizard.validateEmail}"
                                  label="#{bundle['person.emailAddress.email']}" />
-                    <h:outputText id="lastNameOut" value="#{userWizard.user.subject.emailAddress.email}" rendered="#{operation == 'view'}"/> 
+                    <h:outputText id="emailOut" value="#{userWizard.user.subject.emailAddress.email}" rendered="#{operation == 'view'}"/> 
                     <p:message for="email" />
                 </h:panelGrid>
             </p:panel>

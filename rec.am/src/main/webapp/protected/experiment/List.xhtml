@@ -14,7 +14,7 @@
                          emptyMessage="#{bundle['info.emptyList']}"
                          selection="#{experimentController.current}" paginator="true"
                          rows="10" selectionMode="single" 
-                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" 
                          scrollable="false"
                          rowKey="#{item.name}">
 
@@ -41,17 +41,17 @@
                     <h:commandLink action="#{experimentController.prepareEdit}"
                                    value="#{bundle['operation.edit']}" />
                     <h:outputText value=" | " />
-                    <p:commandLink onclick="confirmation.show()" value="#{bundle['operation.remove']}" />
+                    <p:commandLink onclick="confirmation.show()" value="#{bundle['operation.remove']}" action="#{experimentController.destroy}"/>
                     <p:confirmDialog id="confirmDialog" message="#{bundle['label.confirmMessage']}"  
                                      header="#{bundle['label.confirmHeader']}" severity="alert" widgetVar="confirmation">  
 
-                        <p:commandButton id="confirm" value="#{bundle['label.yes']}" update=":list-form:items" oncomplete="confirmation.hide()"  
-                                         actionListener="#{experimentController.destroy}" ajax="false"/>  
+                        <p:commandButton id="confirm" value="#{bundle['label.yes']}" update=":list-form:items" 
+                                         oncomplete="confirmation.hide()" ajax="false"/>  
                         <p:commandButton id="decline" value="#{bundle['label.no']}" onclick="confirmation.hide()" type="button" />   
                     </p:confirmDialog> 
                 </p:column>
             </p:dataTable>
-            <p:commandButton id="cmdButtonCreate" action="#{experimentController.prepareCreate}" value="#{bundle['operation.create']}"/>
+            <p:commandButton id="cmdButtonCreate" action="#{experimentController.prepareCreate}" value="#{bundle['operation.create']}" ajax="false"/>
         </h:form>
     </ui:define>
 </ui:composition>

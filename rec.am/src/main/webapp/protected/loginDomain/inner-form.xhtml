@@ -28,12 +28,10 @@
         </h:panelGrid>
 
          <h:panelGroup rendered="#{operation == 'create'}">
-            <p:commandButton action="#{loginDomainController.create}" value="#{bundle['operation.save']}" 
-                             onclick="this.disabled=true" oncomplete="this.disabled=false"/>
+            <p:commandButton action="#{loginDomainController.create}" value="#{bundle['operation.save']}"  ajax="false"/>
         </h:panelGroup>
         <h:panelGroup rendered="#{operation == 'edit'}">
-            <p:commandButton action="#{loginDomainController.update}" value="#{bundle['operation.save']}"
-                             onclick="this.disabled=true" oncomplete="this.disabled=false"/>
+            <p:commandButton action="#{loginDomainController.update}" value="#{bundle['operation.save']}"  ajax="false"/>
         </h:panelGroup>
     </p:panel>
 </h:form>

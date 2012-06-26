@@ -16,7 +16,7 @@
                     <p:inputText id="username" value="#{userWizard.user.username}"
                                  title="#{bundle['user.username']}" required="true"
                                  label="#{bundle['user.username']}"
-                                 rendered="#{operation == 'create'}" size="30" maxlength="30">
+                                 rendered="#{operation != 'view'}" size="30" maxlength="30">
                         <f:validateLength minimum="5" maximum="30" />
                     </p:inputText>
                     <h:outputText id="usernameOut" value="#{userWizard.user.username}" rendered="#{operation == 'view'}"/> 
