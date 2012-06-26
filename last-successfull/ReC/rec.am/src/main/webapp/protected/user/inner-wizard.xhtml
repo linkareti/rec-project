@@ -1,0 +1,131 @@
+<h:form xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
+    <h:inputHidden id="idInternal"
+                   value="#{userController.selected.idInternal}" />
+    <h:inputHidden id="version" value="#{userController.selected.version}" />
+
+    <p:wizard widgetVar="wiz" flowListener="#{userWizard.onFlowProcess}" showNavBar="true">
+
+        <p:tab id="step1">
+
+            <p:panel header="#{bundle['page.user.wizard.step1.title']}">
+
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="#{bundle['user.username']}" for="username" />
+                    <p:inputText id="username" value="#{userWizard.user.username}"
+                                 title="#{bundle['user.username']}" required="true"
+                                 label="#{bundle['user.username']}"
+                                 rendered="#{operation == 'create'}" size="30" maxlength="30">
+                        <f:validateLength minimum="5" maximum="30" />
+                    </p:inputText>
+                    <h:outputText id="usernameOut" value="#{userWizard.user.username}" rendered="#{operation != 'create'}"/> 
+                    <p:message for="username" />
+
+                    <h:outputLabel value="#{bundle['user.login.password']}"
+                                   for="password" rendered="#{operation != 'view'}" />
+                    <p:password id="password" binding="#{userWizard.passwordInput}"
+                                value="#{userWizard.user.login.password}"
+                                title="#{bundle['user.login.password']}" required="true"
+                                label="#{bundle['user.login.password']}" inline="true"
+                                rendered="#{operation != 'view'}" />
+                    <p:message for="password" rendered="#{operation != 'view'}" />
+
+                    <h:outputLabel value="#{bundle['user.login.confirmPassword']}"
+                                   for="confirmPassword" rendered="#{operation != 'view'}" />
+                    <p:password id="confirmPassword"
+                                binding="#{userWizard.confirmPasswordInput}"
+                                value="#{userWizard.user.login.confirmPassword}"
+                                validator="#{userWizard.validatePasswords}"
+                                title="#{bundle['user.login.confirmPassword']}"
+                                required="#{operation != 'view'}"
+                                label="#{bundle['user.login.confirmPassword']}" inline="true"
+                                rendered="#{operation != 'view'}" />
+                    <p:message for="confirmPassword" rendered="#{operation != 'view'}" />
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+
+        <p:tab id="step2">
+            <p:panel header="#{bundle['page.user.wizard.step2.title']}">
+
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="#{bundle['person.personName.firstName']}"
+                                   for="firstName" />
+                    <p:inputText id="firstName"
+                                 value="#{userWizard.user.subject.name.firstName}"
+                                 title="#{bundle['person.personName.firstName']}" required="true"
+                                 rendered="#{operation != 'view'}"
+                                 label="#{bundle['person.personName.firstName']}" />
+                    <h:outputText id="firstNameOut" value="#{userWizard.user.subject.name.firstName}" rendered="#{operation == 'view'}"/> 
+                    <p:message for="firstName" />
+
+                    <h:outputLabel value="#{bundle['person.personName.lastName']}"
+                                   for="lastName" />
+                    <p:inputText id="lastName"
+                                 value="#{userWizard.user.subject.name.lastName}"
+                                 title="#{bundle['person.personName.lastName']}" required="true"
+                                 rendered="#{operation != 'view'}"
+                                 label="#{bundle['person.personName.lastName']}" />
+                    <h:outputText id="lastNameOut" value="#{userWizard.user.subject.name.lastName}" rendered="#{operation == 'view'}"/> 
+                    <p:message for="lastName" />
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+
+        <p:tab id="step3">
+            <p:panel header="#{bundle['page.user.wizard.step3.title']}">
+
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="#{bundle['person.emailAddress.email']}"
+                                   for="email" />
+                    <p:inputText id="email"
+                                 value="#{userWizard.user.subject.emailAddress.email}"
+                                 title="#{bundle['person.emailAddress.email']}" required="true"
+                                 rendered="#{operation != 'view'}"
+                                 validator="#{userWizard.validateEmail}"
+                                 label="#{bundle['person.emailAddress.email']}" />
+                    <h:outputText id="lastNameOut" value="#{userWizard.user.subject.emailAddress.email}" rendered="#{operation == 'view'}"/> 
+                    <p:message for="email" />
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+
+        <p:tab id="finalStep" rendered="#{operation != 'view'}">
+            <p:panel header="#{bundle['page.user.wizard.confirmation.title']}">
+
+                <h:panelGrid id="confirmation" columns="4">
+                    <h:outputText value="#{bundle['user.username']}" />
+                    <h:outputText value="#{userWizard.user.username}" />
+
+                    <h:outputText value="#{bundle['person.personName.name']}" />
+                    <h:outputText value="#{userWizard.user.subject.name.name}" />
+
+                    <h:outputText value="#{bundle['person.emailAddress.email']}" />
+                    <h:outputText value="#{userWizard.user.subject.emailAddress.email}" />
+
+                    <h:outputText />
+                    <h:outputText />
+
+                </h:panelGrid>
+
+                <p:commandButton value="#{bundle['operation.save']}"
+                                 action="#{userWizard.save}" ajax="false"
+                                 rendered="#{operation != 'view'}" update="msg" />
+            </p:panel>
+        </p:tab>
+    </p:wizard>
+
+    <p:ajaxStatus>
+        <f:facet name="start">
+            <h:graphicImage value="../design/ajaxloading.gif" />
+        </f:facet>
+
+        <f:facet name="complete">
+            <h:outputText value="" />
+        </f:facet>
+    </p:ajaxStatus>
+
+</h:form>
