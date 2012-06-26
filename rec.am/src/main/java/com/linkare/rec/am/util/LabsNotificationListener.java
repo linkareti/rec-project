@@ -17,7 +17,7 @@ import com.linkare.rec.am.model.Laboratory;
 
 /**
  * 
- * This class is responsible for receiving jmx notifications and do the correct forwarding of it.
+ * This class is responsible for receiving jmx notifications and doing the correct forwarding of it.
  * 
  * @author Artur Correia - Linkare TI
  * 
