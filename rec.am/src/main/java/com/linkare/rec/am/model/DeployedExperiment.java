@@ -15,7 +15,6 @@ public class DeployedExperiment {
     private Experiment experiment;
     private HardwareState state;
     private Set<String> usersConnected;
-    private int numberOfUsers;
 
     public DeployedExperiment(final DeployedExperiment experiment) {
 	this.experiment = experiment.getExperiment();
@@ -51,10 +50,7 @@ public class DeployedExperiment {
     }
 
     public int getNumberOfUsers() {
-	if (usersConnected != null) {
-	    numberOfUsers = usersConnected.size();
-	}
-	return numberOfUsers;
+	return usersConnected != null ? usersConnected.size() : 0;
     }
     
     public boolean isLabRunning() {
@@ -66,7 +62,6 @@ public class DeployedExperiment {
 	final int prime = 31;
 	int result = 1;
 	result = prime * result + ((experiment == null) ? 0 : experiment.hashCode());
-	result = prime * result + numberOfUsers;
 	result = prime * result + ((state == null) ? 0 : state.hashCode());
 	result = prime * result + ((usersConnected == null) ? 0 : usersConnected.hashCode());
 	return result;
@@ -86,8 +81,6 @@ public class DeployedExperiment {
 		return false;
 	} else if (!experiment.equals(other.experiment))
 	    return false;
-	if (numberOfUsers != other.numberOfUsers)
-	    return false;
 	if (state != other.state)
 	    return false;
 	if (usersConnected == null) {
@@ -100,7 +93,8 @@ public class DeployedExperiment {
 
     @Override
     public String toString() {
-	return "DeployedExperiment [experiment=" + experiment + ", state=" + state + ", usersConnected=" + usersConnected + ", numberOfUsers=" + numberOfUsers
+	return "DeployedExperiment [experiment=" + experiment + ", state=" + state + ", usersConnected=" + usersConnected + ", numberOfUsers="
+		+ getNumberOfUsers()
 		+ "]";
     }
 }

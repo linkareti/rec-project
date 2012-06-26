@@ -10,6 +10,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 
+import javax.naming.NamingException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +24,8 @@ import com.linkare.rec.am.model.DeployedExperiment;
 import com.linkare.rec.am.model.Experiment;
 import com.linkare.rec.am.model.HardwareState;
 import com.linkare.rec.am.model.Laboratory;
-import com.linkare.rec.am.service.ExperimentServiceLocal;
+import com.linkare.rec.am.service.ExperimentService;
+import com.linkare.rec.am.web.util.JndiHelper;
 
 public class MultiThreadLaboratoryWrapper {
 
@@ -34,7 +37,7 @@ public class MultiThreadLaboratoryWrapper {
 
     private final Set<String> usersSet;
 
-    private final ExperimentServiceLocal experimentService;
+    private final ExperimentService experimentService;
 
     private volatile long lastNotifReceived;
 
@@ -42,28 +45,30 @@ public class MultiThreadLaboratoryWrapper {
 
     private IMultiCastControllerMXBean mbeanProxy;
 
-    public MultiThreadLaboratoryWrapper(final MbeanProxy<IMultiCastControllerMXBean, Laboratory> labMBeanPRoxy, final ExperimentServiceLocal experimentService) {
+
+    public MultiThreadLaboratoryWrapper(final MbeanProxy<IMultiCastControllerMXBean, Laboratory> labMBeanPRoxy) throws NamingException {
 	this.underlyingLaboratory = labMBeanPRoxy.getEntity();
 	this.mbeanProxy = labMBeanPRoxy.getMbeanInterface();
-	this.experimentService = experimentService;
+	this.experimentService = JndiHelper.getExperimentService();
 	this.deployedExperimentsMap = new ConcurrentHashMap<String, MultiThreadDeployedExperimentWrapper>();
 	this.usersSet = new ConcurrentSkipListSet<String>();
 	init();
     }
 
     private void init() {
-	final long uptime = mbeanProxy.getUpTimeInMillis();
+	synchronized (this) {
+	    final long uptime = mbeanProxy.getUpTimeInMillis();
 
-	final List<ClientInfoDTO> labUsers = mbeanProxy.getClients();
+	    final List<ClientInfoDTO> labUsers = mbeanProxy.getClients();
 
-	final List<RegisteredHardwareDTO> registeredHardwares = mbeanProxy.getRegisteredHardwaresInfo();
+	    final List<RegisteredHardwareDTO> registeredHardwares = mbeanProxy.getRegisteredHardwaresInfo();
 
-	initDeployedExperimentsMap(registeredHardwares);
-	initUsersSet(labUsers);
+	    initDeployedExperimentsMap(registeredHardwares);
+	    initUsersSet(labUsers);
 
-	this.lastNotifReceived = -1;
-	this.uptime = uptime;
-
+	    this.lastNotifReceived = -1;
+	    this.uptime = uptime;
+	}
     }
 
     private void initUsersSet(List<ClientInfoDTO> labUsers) {
@@ -160,7 +165,7 @@ public class MultiThreadLaboratoryWrapper {
 	synchronized (this) {
 	    MultiThreadDeployedExperimentWrapper experiment = deployedExperimentsMap.get(externalID);
 	    if (experiment == null) {
-		Experiment findByExternalID = getExperimentFromBD(externalID);
+		final Experiment findByExternalID = getExperimentFromBD(externalID);
 		if (findByExternalID != null) {
 		    deployedExperiment.setExperiment(findByExternalID);
 		    deployedExperimentsMap.put(externalID, new MultiThreadDeployedExperimentWrapper(deployedExperiment));
@@ -234,7 +239,11 @@ public class MultiThreadLaboratoryWrapper {
 		if (notifInfo.getUptime() > uptime) {
 		    LOGGER.warn("Uptime in notification is greater than local uptime, it could be caused by a restart of the MultiCastController/Laboratory. The laboratory information will be refreshed ");
 		    try {
-			//TODO: first get a new mbean proxy then call refresh again
+			final IMultiCastControllerMXBean mbeanInterfaceProxy = LaboratoriesMonitor.getInstance().getMbeanInterfaceProxy(getName());
+
+			if (mbeanInterfaceProxy != null) {
+			    mbeanProxy = mbeanInterfaceProxy;
+			}
 			refresh();
 		    } catch (Exception e) {
 			//FIXME: what can we do in this situation? maybe retry?

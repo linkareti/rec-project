@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentMap;
 
 import javax.management.Notification;
 import javax.management.NotificationListener;
+import javax.naming.NamingException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import com.linkare.rec.am.MultiCastControllerNotifInfoDTO;
 import com.linkare.rec.am.mbean.IMultiCastControllerMXBean;
 import com.linkare.rec.am.model.Laboratory;
-import com.linkare.rec.am.service.ExperimentServiceLocal;
 
 /**
  * 
@@ -30,12 +30,8 @@ public class LabsNotificationListener {
 
     private volatile boolean destroy;
 
-    private final ExperimentServiceLocal experimentService;
-
-    public LabsNotificationListener(final Collection<MbeanProxy<IMultiCastControllerMXBean, Laboratory>> labProxies,
-	    final ExperimentServiceLocal experimentService) {
+    public LabsNotificationListener(final Collection<MbeanProxy<IMultiCastControllerMXBean, Laboratory>> labProxies) throws NamingException {
 	this.labs = new ConcurrentHashMap<String, MultiThreadLaboratoryWrapper>();
-	this.experimentService = experimentService;
 	initLabs(labProxies);
 	this.destroy = false;
     }
@@ -49,10 +45,16 @@ public class LabsNotificationListener {
 
     public boolean tryInitLab(final MbeanProxy<IMultiCastControllerMXBean, Laboratory> labProxy) {
 	boolean result = false;
-	try {
-	    result = (labs.putIfAbsent(labProxy.getEntity().getName(), new MultiThreadLaboratoryWrapper(labProxy, experimentService)) == null);
-	} catch (Exception e) {
-	    LOGGER.error("Error creating wrapper for laboratory: " + labProxy.getEntity().getName(), e);
+	if (labProxy != null) {
+	    try {
+
+		if (!labs.containsKey(labProxy.getEntity().getName())) {
+		    result = (labs.putIfAbsent(labProxy.getEntity().getName(), new MultiThreadLaboratoryWrapper(labProxy)) == null);
+		}
+
+	    } catch (Exception e) {
+		LOGGER.error("Error creating wrapper for laboratory: " + labProxy.getEntity().getName(), e);
+	    }
 	}
 	return result;
     }

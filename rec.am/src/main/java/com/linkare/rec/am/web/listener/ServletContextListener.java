@@ -1,6 +1,5 @@
 package com.linkare.rec.am.web.listener;
 
-import javax.inject.Inject;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.annotation.WebListener;
 
@@ -12,9 +11,6 @@ import com.linkare.rec.am.util.LaboratoriesMonitor;
 @WebListener
 public class ServletContextListener implements javax.servlet.ServletContextListener {
 
-    @Inject
-    private LaboratoriesMonitor laboratoriesMonitor;
-
     private final static Logger LOG = LoggerFactory.getLogger(ServletContextListener.class);
 
     @Override
@@ -24,7 +20,12 @@ public class ServletContextListener implements javax.servlet.ServletContextListe
 
     @Override
     public void contextInitialized(ServletContextEvent arg0) {
-	LOG.info("Initializing laboratoriesMonitor: " + laboratoriesMonitor);
+
+	try {
+	    LaboratoriesMonitor.getInstance();
+	} catch (Exception e) {
+	    LOG.error(e.getMessage(), e);
+	}
     }
 
 }

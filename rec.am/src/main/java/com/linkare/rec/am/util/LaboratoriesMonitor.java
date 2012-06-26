@@ -13,10 +13,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.ejb.EJB;
-import javax.enterprise.context.ApplicationScoped;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,60 +21,60 @@ import org.slf4j.LoggerFactory;
 import com.linkare.rec.am.mbean.IMultiCastControllerMXBean;
 import com.linkare.rec.am.mbean.MBeanObjectNameFactory;
 import com.linkare.rec.am.model.Laboratory;
-import com.linkare.rec.am.service.ExperimentServiceLocal;
-import com.linkare.rec.am.service.LaboratoryServiceLocal;
+import com.linkare.rec.am.service.LaboratoryService;
+import com.linkare.rec.am.web.util.JndiHelper;
 
 /**
  * 
- * This class is responsible for the monitoring of jmx connections to Laboratories
+ * This class is responsible for the monitoring of jmx connections
  * 
  * @author Artur Correia - Linkare - TI
  * 
  */
-@ApplicationScoped
-public class LaboratoriesMonitor {
+public final class LaboratoriesMonitor {
 
     private final static Logger LOG = LoggerFactory.getLogger(LaboratoriesMonitor.class);
 
     //FIXME: system property?
     private static final int TIME_BETWEEN_MONITORING_EVENTS_SECONDS = 10;
 
-    private ConcurrentMap<String, LabJMXConnetionHandler> labsJMXConnectionHandler;
+    private final ConcurrentMap<String, LabJMXConnetionHandler> labsJMXConnectionHandler;
 
     private volatile boolean destroy = false;
 
-    private ScheduledExecutorService executorService;
+    private final ScheduledExecutorService executorService;
 
-    private LabsNotificationListener labsNotificationListener;
+    private final LabsNotificationListener labsNotificationListener;
 
-    @EJB
-    private LaboratoryServiceLocal laboratoryService;
+    private LaboratoryService laboratoryService;
 
-    @EJB
-    private ExperimentServiceLocal experimentService;
+    private static final LaboratoriesMonitor INSTANCE = new LaboratoriesMonitor();
 
-    public LaboratoriesMonitor() {
-    }
+    private LaboratoriesMonitor() {
 
-    @PostConstruct
-    public void init() {
 	try {
+
 	    LOG.info("Starting LaboratoriesMonitor");
 	    labsJMXConnectionHandler = new ConcurrentHashMap<String, LabJMXConnetionHandler>();
+	    laboratoryService = JndiHelper.getLaboratoryService();
 
 	    initJMXConnectionHandlersMap();
 	    connectWithLabs(false);
 
-	    labsNotificationListener = new LabsNotificationListener(getMbeanProxies(), experimentService);
+	    labsNotificationListener = new LabsNotificationListener(getMbeanProxies());
 
 	    executorService = Executors.newSingleThreadScheduledExecutor(getThreadFactory());
 
 	    executorService.scheduleAtFixedRate(getLabsMonitorTask(), TIME_BETWEEN_MONITORING_EVENTS_SECONDS, TIME_BETWEEN_MONITORING_EVENTS_SECONDS,
 						TimeUnit.SECONDS);
-	} catch (Exception e) {
-	    LOG.error("Error initializing LaboratoriesMonitor. Laboratories status will not be available", e);
-	}
 
+	} catch (Exception e) {
+	    throw new RuntimeException(e);
+	}
+    }
+
+    public static LaboratoriesMonitor getInstance() {
+	return INSTANCE;
     }
 
     private ThreadFactory getThreadFactory() {
@@ -134,6 +131,7 @@ public class LaboratoriesMonitor {
 													     labsNotificationListener.getNotificationListener(),
 													     MBeanObjectNameFactory.getMultiCastControllerObjectName(),
 													     null);
+
 		labsNotificationListener.tryInitLab(getMBeanProxy(lab.getValue()));
 		jmxConnectionHandler.registerNotifListenerIfNotAlreadyRegistered(notificationListener);
 
@@ -223,6 +221,12 @@ public class LaboratoriesMonitor {
     public void addNewLaboratory(final Laboratory lab) {
 	if (!lab.getState().isActive()) {
 	    labsJMXConnectionHandler.put(lab.getName(), createLabJMXConnectionHandler(lab));
+	}
+    }
+
+    public void removeLaboratory(final Laboratory lab) {
+	if (lab != null) {
+	    labsJMXConnectionHandler.remove(lab.getName());
 	}
     }
 

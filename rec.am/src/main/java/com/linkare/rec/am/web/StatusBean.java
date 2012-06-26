@@ -9,7 +9,6 @@ import java.util.Random;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.inject.Inject;
 
 import com.linkare.rec.am.model.DeployedExperiment;
 import com.linkare.rec.am.model.Experiment;
@@ -40,12 +39,11 @@ public class StatusBean implements Serializable {
     @EJB(beanInterface = ExperimentServiceLocal.class)
     private ExperimentService experimentService;
 
-    @Inject
-    private LaboratoriesMonitor laboratoriesMonitor;
-
     private List<Laboratory> labs;
     private Laboratory selectedLab;
     private List<DeployedExperiment> selectedLabExperiments;
+
+    private LaboratoriesMonitor laboratoriesMonitor = LaboratoriesMonitor.getInstance();
 
     public List<Laboratory> getLabs() {
 	if (labs == null) {
