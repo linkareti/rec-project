@@ -214,10 +214,6 @@ public final class LaboratoriesMonitor {
 	return result;
     }
 
-    public LabsNotificationListener getLabsNotificationManager() {
-	return labsNotificationListener;
-    }
-
     public void addNewLaboratory(final Laboratory lab) {
 	if (!lab.getState().isActive()) {
 	    labsJMXConnectionHandler.put(lab.getName(), createLabJMXConnectionHandler(lab));

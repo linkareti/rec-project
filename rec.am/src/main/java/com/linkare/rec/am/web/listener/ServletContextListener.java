@@ -13,9 +13,17 @@ public class ServletContextListener implements javax.servlet.ServletContextListe
 
     private final static Logger LOG = LoggerFactory.getLogger(ServletContextListener.class);
 
+    private LaboratoriesMonitor instance;
+
     @Override
+
     public void contextDestroyed(ServletContextEvent arg0) {
-	LOG.info("Context detroyed");
+	try {
+	    LOG.info("Context detroyed");
+	    LaboratoriesMonitor.getInstance().destroy();
+	} catch (Exception e) {
+	    LOG.error(e.getMessage(), e);
+	}
     }
 
     @Override

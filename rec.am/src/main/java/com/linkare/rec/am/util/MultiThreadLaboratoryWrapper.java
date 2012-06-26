@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -45,7 +46,6 @@ public class MultiThreadLaboratoryWrapper {
 
     private IMultiCastControllerMXBean mbeanProxy;
 
-
     public MultiThreadLaboratoryWrapper(final MbeanProxy<IMultiCastControllerMXBean, Laboratory> labMBeanPRoxy) throws NamingException {
 	this.underlyingLaboratory = labMBeanPRoxy.getEntity();
 	this.mbeanProxy = labMBeanPRoxy.getMbeanInterface();
@@ -61,9 +61,9 @@ public class MultiThreadLaboratoryWrapper {
 
 	    final List<ClientInfoDTO> labUsers = mbeanProxy.getClients();
 
-	    final List<RegisteredHardwareDTO> registeredHardwares = mbeanProxy.getRegisteredHardwaresInfo();
+	    final Map<String, RegisteredHardwareDTO> registeredHardwares = mbeanProxy.getRegisteredHardwaresInfo(null);
 
-	    initDeployedExperimentsMap(registeredHardwares);
+	    initDeployedExperimentsMap(registeredHardwares.values());
 	    initUsersSet(labUsers);
 
 	    this.lastNotifReceived = -1;
@@ -88,7 +88,7 @@ public class MultiThreadLaboratoryWrapper {
 	return usersSet;
     }
 
-    private void initDeployedExperimentsMap(final List<RegisteredHardwareDTO> registeredHardwares) {
+    private void initDeployedExperimentsMap(final Collection<RegisteredHardwareDTO> registeredHardwares) {
 
 	if (!registeredHardwares.isEmpty()) {
 	    for (final RegisteredHardwareDTO registeredHardwareDTO : registeredHardwares) {
@@ -97,22 +97,27 @@ public class MultiThreadLaboratoryWrapper {
 	}
     }
 
-    private boolean removeUserFromHardware(final String hardwareUniqueID, final String userName) {
+    private boolean removeUserFromHardware(final String experimentID, final String userName) {
 	boolean result = false;
-	final MultiThreadDeployedExperimentWrapper deployedExperimentWrapper = deployedExperimentsMap.get(hardwareUniqueID);
+	final MultiThreadDeployedExperimentWrapper deployedExperimentWrapper = deployedExperimentsMap.get(experimentID);
 	if (deployedExperimentWrapper != null) {
 	    result = deployedExperimentWrapper.removeClient(userName);
 	}
 	return result;
     }
 
-    private boolean addClientToHardware(final String hardwareUniqueID, final String userName) {
-	boolean result = false;
-	final MultiThreadDeployedExperimentWrapper deployedExperimentWrapper = deployedExperimentsMap.get(hardwareUniqueID);
-	if (deployedExperimentWrapper != null) {
-	    result = deployedExperimentWrapper.addNewClient(userName);
+    private void addClientToHardware(final String experimentID, final String userName) {
+
+	MultiThreadDeployedExperimentWrapper deployedExperimentWrapper = deployedExperimentsMap.get(experimentID);
+
+	if (deployedExperimentWrapper == null) {
+	    addHardware(getRemoteHardware(experimentID));
+	    deployedExperimentWrapper = deployedExperimentsMap.get(experimentID);
 	}
-	return result;
+
+	if (deployedExperimentWrapper != null) {
+	    deployedExperimentWrapper.addNewClient(userName);
+	}
     }
 
     private void removeHardware(final String externalID) {
@@ -128,17 +133,40 @@ public class MultiThreadLaboratoryWrapper {
     }
 
     private void addHardware(final RegisteredHardwareDTO deployedExperiment) {
-	initMultiThreadDeployedExperimentWrapperIfNotAlreadyInCache(deployedExperiment);
+	if (deployedExperiment != null) {
+	    initMultiThreadDeployedExperimentWrapperIfNotAlreadyInCache(deployedExperiment);
+	}
     }
 
-    private boolean hardwareStateChange(final String experimentExternalID, final byte newStateCode) {
-	boolean result = false;
-	final MultiThreadDeployedExperimentWrapper deployedExperiment = deployedExperimentsMap.get(experimentExternalID);
+    private void hardwareStateChange(final String experimentExternalID, final byte newStateCode) {
+	MultiThreadDeployedExperimentWrapper deployedExperiment = deployedExperimentsMap.get(experimentExternalID);
+	
+	if (deployedExperiment == null) {
+	    addHardware(getRemoteHardware(experimentExternalID));
+	    deployedExperiment = deployedExperimentsMap.get(experimentExternalID);
+	}
+
 	if (deployedExperiment != null) {
 	    deployedExperiment.refreshState(newStateCode);
-	    result = true;
 	}
-	return result;
+    }
+
+    private RegisteredHardwareDTO getRemoteHardware(final String experimentID) {
+
+	synchronized (this) {
+	    RegisteredHardwareDTO result = null;
+
+	    final MultiThreadDeployedExperimentWrapper deployedExperimentWrapper = deployedExperimentsMap.get(experimentID);
+
+	    if (deployedExperimentWrapper == null) {
+		final Map<String, RegisteredHardwareDTO> registeredHardwaresInfo = mbeanProxy.getRegisteredHardwaresInfo(Arrays.asList(new String[] { experimentID }));
+		if (registeredHardwaresInfo != null) {
+		    result = registeredHardwaresInfo.get(experimentID);
+		}
+	    }
+	    return result;
+	}
+
     }
 
     private DeployedExperiment getDeployedExperimentFrom(final RegisteredHardwareDTO registeredHardwareDTO) {
@@ -263,7 +291,12 @@ public class MultiThreadLaboratoryWrapper {
 	    return;
 	}
 
-	processNotification(notifInfo, notificationType, notifSequenceNumber);
+	try {
+	    processNotification(notifInfo, notificationType, notifSequenceNumber);
+	} catch (Exception e) {
+	    LOGGER.error("Error processing notification. notificationType: {}", notificationType);
+	    LOGGER.error(e.getMessage(), e);
+	}
 
     }
 

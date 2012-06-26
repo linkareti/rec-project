@@ -7,6 +7,7 @@
 package com.linkare.rec.am.mbean;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.management.MXBean;
 
@@ -25,8 +26,9 @@ public interface IMultiCastControllerMXBean {
 
     List<ClientInfoDTO> getClients();
 
-    List<RegisteredHardwareDTO> getRegisteredHardwaresInfo();
+    Map<String, RegisteredHardwareDTO> getRegisteredHardwaresInfo(final List<String> hardwareUniqueIDs);
 
     long getUpTimeInMillis();
+
 
 }
