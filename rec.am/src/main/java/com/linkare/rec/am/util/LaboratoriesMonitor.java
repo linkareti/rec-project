@@ -36,7 +36,7 @@ public final class LaboratoriesMonitor {
 
     private final static Logger LOG = LoggerFactory.getLogger(LaboratoriesMonitor.class);
 
-    private static final int TIME_BETWEEN_MONITORING_EVENTS_SECONDS = SystemPropertiesEnum.TIME_BETWEEN_MONITORING_EVENTS_SECONDS.getValue();
+    private static final int TIME_BETWEEN_MONITORING_EVENTS_SECONDS =  Integer.class.cast(SystemPropertiesEnum.TIME_BETWEEN_MONITORING_EVENTS_SECONDS.getValue());
 
     private final ConcurrentMap<String, LabJMXConnetionHandler> labsJMXConnectionHandler;
 
