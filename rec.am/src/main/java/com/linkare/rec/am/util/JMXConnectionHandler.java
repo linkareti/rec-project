@@ -51,6 +51,7 @@ public final class JMXConnectionHandler {
     }
 
     public boolean initJMXConnectorIfNotAlreadyRegistered() {
+	boolean result = false;
 	if (isAvailable()) {
 	    if (!isConnected()) {
 
@@ -62,7 +63,7 @@ public final class JMXConnectionHandler {
 		    LOG.info("jmxconnector created for: {} ", jmxURL);
 
 		    jmxConnector.addConnectionNotificationListener(getConnectionNotificationListener(), null, null);
-
+		    result = true;
 		} catch (Exception e) {
 		    numberOfRetries.incrementAndGet();
 		    LOG.error(String.format("Error creating JMXCConnector to url: %s", jmxURL), e);
@@ -72,7 +73,7 @@ public final class JMXConnectionHandler {
 		}
 	    }
 	}
-	return isConnected();
+	return result;
     }
 
     public boolean registerNotifListenerIfNotAlreadyRegistered(final MBeanNotificationListenerInfo notificationListener) {

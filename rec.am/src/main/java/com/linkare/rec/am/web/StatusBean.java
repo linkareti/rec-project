@@ -2,6 +2,7 @@ package com.linkare.rec.am.web;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -71,13 +72,15 @@ public class StatusBean implements Serializable {
 
     public void refreshExperiments() {
 
-	if (selectedLab != null) {
+	if (selectedLab != null && selectedLab.isAvailable()) {
 	    final MultiThreadLaboratoryWrapper laboratory = laboratoriesMonitor.getLaboratory(selectedLab.getName());
 
 	    if (laboratory != null) {
 		final Map<String, MultiThreadDeployedExperimentWrapper> liveExperiments = laboratory.getLiveExperiments();
 		selectedLabExperiments = new ArrayList<MultiThreadDeployedExperimentWrapper>(liveExperiments.values());
 	    }
+	} else {
+	    selectedLabExperiments = Collections.emptyList();
 	}
     }
 

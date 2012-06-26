@@ -134,7 +134,7 @@ public final class LaboratoriesMonitor {
 													     MBeanObjectNameFactory.getMultiCastControllerObjectName(),
 													     null);
 
-		labsNotificationListener.tryInitLab(getMBeanProxy(lab.getValue()));
+		labsNotificationListener.initLab(getMBeanProxy(lab.getValue()));
 		jmxConnectionHandler.registerNotifListenerIfNotAlreadyRegistered(notificationListener);
 
 	    }

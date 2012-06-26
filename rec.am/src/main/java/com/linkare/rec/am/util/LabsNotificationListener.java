@@ -39,24 +39,18 @@ public class LabsNotificationListener {
     private void initLabs(Collection<MbeanProxy<IMultiCastControllerMXBean, Laboratory>> labProxies) {
 
 	for (final MbeanProxy<IMultiCastControllerMXBean, Laboratory> mbeanProxy : labProxies) {
-	    tryInitLab(mbeanProxy);
+	    initLab(mbeanProxy);
 	}
     }
 
-    public boolean tryInitLab(final MbeanProxy<IMultiCastControllerMXBean, Laboratory> labProxy) {
-	boolean result = false;
+    public void initLab(final MbeanProxy<IMultiCastControllerMXBean, Laboratory> labProxy) {
 	if (labProxy != null) {
 	    try {
-
-		if (!labs.containsKey(labProxy.getEntity().getName())) {
-		    result = (labs.putIfAbsent(labProxy.getEntity().getName(), new MultiThreadLaboratoryWrapper(labProxy)) == null);
-		}
-
+		labs.put(labProxy.getEntity().getName(), new MultiThreadLaboratoryWrapper(labProxy));
 	    } catch (Exception e) {
 		LOGGER.error("Error creating wrapper for laboratory: " + labProxy.getEntity().getName(), e);
 	    }
 	}
-	return result;
     }
 
     public NotificationListener getNotificationListener() {
