@@ -1,0 +1,37 @@
+<h:form xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
+
+    <p:panel id="panel" header="#{title}" style="margin-bottom:10px;">  
+        <h:inputHidden id="idInternal"
+                       value="#{roleController.selected.idInternal}" />
+        <h:inputHidden id="version" value="#{roleController.selected.version}" />
+        <h:inputHidden id="current" value="#{roleController.current}"
+                       converter="roleConverter" rendered="#{operation != 'create'}" />
+        <p:focus for="name" />
+        <h:panelGrid columns="3">
+            <h:outputLabel value="#{bundle['role.name']}" for="name" />
+            <p:inputText id="name" value="#{roleController.selected.name}"
+                         title="#{bundle['role.name']}" required="true"
+                         label="#{bundle['role.name']}" rendered="#{operation == 'create'}" />
+            <h:outputText id="nameOut" value="#{roleController.selected.name}" rendered="#{operation == 'view'}"/> 
+            <p:message for="name" />
+
+            <h:outputLabel value="#{bundle['role.childUsers']}" for="members"
+                           rendered="#{operation == 'edit'}" />
+            <p:pickList id="members" value="#{roleController.users}" var="user"
+                        itemLabel="#{user.username}" itemValue="#{user}"
+                        converter="userConverter" rendered="#{operation == 'edit'}">
+            </p:pickList>
+
+            <p:commandButton action="#{roleController.setUsersMembership}" value="#{bundle['operation.submit']}" 
+                             onclick="this.disabled=true" oncomplete="this.disabled=false" rendered="#{operation == 'edit'}"/>
+        </h:panelGrid>
+        <h:panelGroup rendered="#{operation == 'create'}">
+            <p:commandButton action="#{roleController.create}" value="#{bundle['operation.save']}" 
+                             onclick="this.disabled=true" oncomplete="this.disabled=false"/>
+        </h:panelGroup>
+    </p:panel>
+</h:form>
