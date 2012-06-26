@@ -50,7 +50,7 @@
                 <h:panelGroup id="experimentsPanel" styleClass="experimentsPanel"
                               rendered="#{!empty statusBean.selectedLab}">
 					<p:poll update="table" interval="5"
-						listener="#{statusBean.updateExperimentStatus}" />
+						listener="#{statusBean.refreshExperiments}" />
 					<script src="http://www.java.com/js/deployJava.js" />
                     <p:scrollPanel mode="native" styleClass="scrollPanel">
 						<h:dataTable id="table" var="deployedExp"

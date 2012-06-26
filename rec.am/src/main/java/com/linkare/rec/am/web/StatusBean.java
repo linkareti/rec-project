@@ -10,8 +10,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import com.linkare.rec.am.model.Laboratory;
-import com.linkare.rec.am.service.ExperimentService;
-import com.linkare.rec.am.service.ExperimentServiceLocal;
 import com.linkare.rec.am.service.LaboratoryService;
 import com.linkare.rec.am.service.LaboratoryServiceLocal;
 import com.linkare.rec.am.util.LaboratoriesMonitor;
@@ -33,9 +31,6 @@ public class StatusBean implements Serializable {
 
     @EJB(beanInterface = LaboratoryServiceLocal.class)
     private LaboratoryService labService;
-
-    @EJB(beanInterface = ExperimentServiceLocal.class)
-    private ExperimentService experimentService;
 
     private List<Laboratory> labs;
     private Laboratory selectedLab;
@@ -60,17 +55,7 @@ public class StatusBean implements Serializable {
     }
 
     public List<MultiThreadDeployedExperimentWrapper> getLabExperiments() {
-
-	if (selectedLab == null) {
-	    return selectedLabExperiments;
-	}
-
-	final MultiThreadLaboratoryWrapper laboratory = laboratoriesMonitor.getLaboratory(selectedLab.getName());
-
-	if (laboratory != null) {
-	    final Map<String, MultiThreadDeployedExperimentWrapper> liveExperiments = laboratory.getLiveExperiments();
-	    selectedLabExperiments = new ArrayList<MultiThreadDeployedExperimentWrapper>(liveExperiments.values());
-	}
+	refreshExperiments();
 	return selectedLabExperiments;
     }
 
@@ -82,7 +67,18 @@ public class StatusBean implements Serializable {
 		lab.setAvailable(labStatus);
 	    }
 	}
+    }
 
+    public void refreshExperiments() {
+
+	if (selectedLab != null) {
+	    final MultiThreadLaboratoryWrapper laboratory = laboratoriesMonitor.getLaboratory(selectedLab.getName());
+
+	    if (laboratory != null) {
+		final Map<String, MultiThreadDeployedExperimentWrapper> liveExperiments = laboratory.getLiveExperiments();
+		selectedLabExperiments = new ArrayList<MultiThreadDeployedExperimentWrapper>(liveExperiments.values());
+	    }
+	}
     }
 
 }
