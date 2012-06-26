@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
@@ -35,8 +36,7 @@ public final class LaboratoriesMonitor {
 
     private final static Logger LOG = LoggerFactory.getLogger(LaboratoriesMonitor.class);
 
-    //FIXME: system property?
-    private static final int TIME_BETWEEN_MONITORING_EVENTS_SECONDS = 10;
+    private static final int TIME_BETWEEN_MONITORING_EVENTS_SECONDS = SystemPropertiesEnum.TIME_BETWEEN_MONITORING_EVENTS_SECONDS.getValue();
 
     private final ConcurrentMap<String, LabJMXConnetionHandler> labsJMXConnectionHandler;
 
@@ -224,6 +224,18 @@ public final class LaboratoriesMonitor {
 	if (lab != null) {
 	    labsJMXConnectionHandler.remove(lab.getName());
 	}
+    }
+
+    public void forceConnection() {
+	final Future<?> task = executorService.submit(getLabsMonitorTask());
+
+	try {
+	    task.get(60, TimeUnit.SECONDS);
+	} catch (Exception e) {
+	    LOG.error(e.getMessage(), e);
+	    throw new RuntimeException(e);
+	}
+
     }
 
 }

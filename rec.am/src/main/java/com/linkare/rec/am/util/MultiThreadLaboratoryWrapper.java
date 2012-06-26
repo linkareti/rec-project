@@ -106,7 +106,7 @@ public class MultiThreadLaboratoryWrapper {
 	return result;
     }
 
-    private void addClientToHardware(final String experimentID, final String userName) {
+    private void addUserToHardware(final String experimentID, final String userName) {
 
 	MultiThreadDeployedExperimentWrapper deployedExperimentWrapper = deployedExperimentsMap.get(experimentID);
 
@@ -226,7 +226,7 @@ public class MultiThreadLaboratoryWrapper {
 		addUser(notifInfo.getClientInfoDTO().getUserName());
 		break;
 	    case REGISTER_NEW_CLIENT_HARDWARE:
-		addClientToHardware(notifInfo.getRegisteredHardwareDTO().getHardwareUniqueID(), notifInfo.getClientInfoDTO().getUserName());
+		addUserToHardware(notifInfo.getRegisteredHardwareDTO().getHardwareUniqueID(), notifInfo.getClientInfoDTO().getUserName());
 		break;
 	    case UNREGISTER_HARDWARE:
 		removeHardware(notifInfo.getRegisteredHardwareDTO().getHardwareUniqueID());
