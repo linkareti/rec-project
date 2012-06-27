@@ -218,7 +218,9 @@ public final class LaboratoriesMonitor {
 
     public void addNewLaboratory(final Laboratory lab) {
 	if (!lab.getState().isActive()) {
-	    labsJMXConnectionHandler.put(lab.getName(), createLabJMXConnectionHandler(lab));
+	    if (!labsJMXConnectionHandler.containsKey(lab.getName())) {
+		labsJMXConnectionHandler.putIfAbsent(lab.getName(), createLabJMXConnectionHandler(lab));
+	    }
 	}
     }
 
