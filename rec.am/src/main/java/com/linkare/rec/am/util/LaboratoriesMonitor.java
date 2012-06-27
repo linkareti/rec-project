@@ -36,240 +36,233 @@ import com.linkare.rec.am.web.util.JndiHelper;
 public final class LaboratoriesMonitor {
 
     private final static Logger LOG = LoggerFactory.getLogger(LaboratoriesMonitor.class);
-
     private static final int TIME_BETWEEN_MONITORING_EVENTS_SECONDS = Integer.class.cast(SystemPropertiesEnum.TIME_BETWEEN_MONITORING_EVENTS_SECONDS.getValue());
-
     private final ConcurrentMap<String, LabJMXConnetionHandler> labsJMXConnectionHandler;
-
     private volatile boolean destroy = false;
-
     private final ScheduledExecutorService executorService;
-
     private final LabsNotificationListener labsNotificationListener;
-
     private LaboratoryService laboratoryService;
-
     private static final LaboratoriesMonitor INSTANCE = new LaboratoriesMonitor();
 
     private LaboratoriesMonitor() {
 
-	try {
+        try {
 
-	    LOG.info("Starting LaboratoriesMonitor");
-	    labsJMXConnectionHandler = new ConcurrentHashMap<String, LabJMXConnetionHandler>();
-	    laboratoryService = JndiHelper.getLaboratoryService();
+            LOG.info("Starting LaboratoriesMonitor");
+            labsJMXConnectionHandler = new ConcurrentHashMap<String, LabJMXConnetionHandler>();
+            laboratoryService = JndiHelper.getLaboratoryService();
 
-	    initJMXConnectionHandlersMap();
-	    connectWithLabs(false);
+            initJMXConnectionHandlersMap();
+            connectWithLabs(false);
 
-	    labsNotificationListener = new LabsNotificationListener(getMbeanProxies());
+            labsNotificationListener = new LabsNotificationListener(getMbeanProxies());
 
-	    executorService = Executors.newSingleThreadScheduledExecutor(getThreadFactory());
+            executorService = Executors.newSingleThreadScheduledExecutor(getThreadFactory());
 
-	    executorService.scheduleAtFixedRate(getLabsMonitorTask(), TIME_BETWEEN_MONITORING_EVENTS_SECONDS, TIME_BETWEEN_MONITORING_EVENTS_SECONDS,
-						TimeUnit.SECONDS);
+            executorService.scheduleAtFixedRate(getLabsMonitorTask(), TIME_BETWEEN_MONITORING_EVENTS_SECONDS, TIME_BETWEEN_MONITORING_EVENTS_SECONDS,
+                    TimeUnit.SECONDS);
 
-	} catch (Exception e) {
-	    throw new RuntimeException(e);
-	}
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static LaboratoriesMonitor getInstance() {
-	return INSTANCE;
+        return INSTANCE;
     }
 
     private ThreadFactory getThreadFactory() {
-	return new ThreadFactory() {
+        return new ThreadFactory() {
 
-	    @Override
-	    public Thread newThread(Runnable r) {
-		final Thread t = new Thread(r, "Rec-LabsMonitor");
-		if (!t.isDaemon()) {
-		    t.setDaemon(true);
-		}
-		return t;
-	    }
-	};
+            @Override
+            public Thread newThread(Runnable r) {
+                final Thread t = new Thread(r, "Rec-LabsMonitor");
+                if (!t.isDaemon()) {
+                    t.setDaemon(true);
+                }
+                return t;
+            }
+        };
     }
 
     private Runnable getLabsMonitorTask() {
-	return new Runnable() {
+        return new Runnable() {
 
-	    @Override
-	    public void run() {
-		try {
-		    connectWithLabs(true);
-		} catch (Throwable e) {
-		    LOG.error(e.getMessage(), e);
-		}
-	    }
-	};
+            @Override
+            public void run() {
+                try {
+                    connectWithLabs(true);
+                } catch (Throwable e) {
+                    LOG.error(e.getMessage(), e);
+                }
+            }
+        };
     }
 
     private void initJMXConnectionHandlersMap() {
 
-	for (final Laboratory laboratory : getLaboratoriesToMonitor()) {
-	    if (laboratory.getJmxURL() != null) {
-		labsJMXConnectionHandler.put(laboratory.getName(), createLabJMXConnectionHandler(laboratory));
-	    }
-	}
+        for (final Laboratory laboratory : getLaboratoriesToMonitor()) {
+            if (laboratory.getJmxURL() != null) {
+                labsJMXConnectionHandler.put(laboratory.getName(), createLabJMXConnectionHandler(laboratory));
+            }
+        }
     }
 
     private LabJMXConnetionHandler createLabJMXConnectionHandler(final Laboratory laboratory) {
-	return new LabJMXConnetionHandler(laboratory, new JMXConnectionHandler(laboratory.getJmxURL(), laboratory.getJmxUser(), laboratory.getJmxPass()));
+        return new LabJMXConnetionHandler(laboratory, new JMXConnectionHandler(laboratory.getJmxURL(), laboratory.getJmxUser(), laboratory.getJmxPass()));
     }
 
     private void connectWithLabs(final boolean isToRegisterNotifListener) {
 
-	for (final Entry<String, LabJMXConnetionHandler> lab : labsJMXConnectionHandler.entrySet()) {
+        for (final Entry<String, LabJMXConnetionHandler> lab : labsJMXConnectionHandler.entrySet()) {
 
-	    if (isToCancel()) {
-		return;
-	    }
+            if (isToCancel()) {
+                return;
+            }
 
-	    final JMXConnectionHandler jmxConnectionHandler = lab.getValue().getJmxConnectionHandler();
+            final JMXConnectionHandler jmxConnectionHandler = lab.getValue().getJmxConnectionHandler();
 
-	    if (jmxConnectionHandler.initJMXConnectorIfNotAlreadyRegistered() && isToRegisterNotifListener) {
-		final MBeanNotificationListenerInfo notificationListener = new MBeanNotificationListenerInfo(
-													     labsNotificationListener.getNotificationListener(),
-													     MBeanObjectNameFactory.getMultiCastControllerObjectName(),
-													     null);
+            if (jmxConnectionHandler.initJMXConnectorIfNotAlreadyRegistered() && isToRegisterNotifListener) {
+                final MBeanNotificationListenerInfo notificationListener = new MBeanNotificationListenerInfo(
+                        labsNotificationListener.getNotificationListener(),
+                        MBeanObjectNameFactory.getMultiCastControllerObjectName(),
+                        null);
 
-		labsNotificationListener.initLab(getMBeanProxy(lab.getValue()));
-		jmxConnectionHandler.registerNotifListenerIfNotAlreadyRegistered(notificationListener);
+                labsNotificationListener.initLab(getMBeanProxy(lab.getValue()));
+                jmxConnectionHandler.registerNotifListenerIfNotAlreadyRegistered(notificationListener);
 
-	    }
-	}
+            }
+        }
     }
 
     private Collection<Laboratory> getLaboratoriesToMonitor() {
-	return laboratoryService.findAllActive();
+        return laboratoryService.findAllActive();
     }
 
     @PreDestroy
     public void destroy() {
-	LOG.debug("destroy called");
+        LOG.debug("destroy called");
 
-	try {
-	    destroy = true;
+        try {
+            destroy = true;
 
-	    labsNotificationListener.destroy();
+            labsNotificationListener.destroy();
 
-	    executorService.shutdownNow();
+            executorService.shutdownNow();
 
-	    for (final Entry<String, LabJMXConnetionHandler> jmxHandler : labsJMXConnectionHandler.entrySet()) {
-		jmxHandler.getValue().getJmxConnectionHandler().closeJMXConnector();
-	    }
-	} catch (Exception e) {
-	    LOG.error("Error on LaboratoriesManager shutdown", e);
-	}
+            for (final Entry<String, LabJMXConnetionHandler> jmxHandler : labsJMXConnectionHandler.entrySet()) {
+                jmxHandler.getValue().getJmxConnectionHandler().closeJMXConnector();
+            }
+        } catch (Exception e) {
+            LOG.error("Error on LaboratoriesManager shutdown", e);
+        }
 
     }
 
     private boolean isToCancel() {
-	return destroy;
+        return destroy;
     }
 
     public Map<Long, Boolean> getLiveLabs() {
-	Map<Long, Boolean> labs = Collections.emptyMap();
-	if (!labsJMXConnectionHandler.isEmpty()) {
-	    labs = new HashMap<Long, Boolean>(labsJMXConnectionHandler.size());
-	    for (final Entry<String, LabJMXConnetionHandler> jmxHandler : labsJMXConnectionHandler.entrySet()) {
-		labs.put(jmxHandler.getValue().getLaboratory().getIdInternal(), Boolean.valueOf(jmxHandler.getValue().getJmxConnectionHandler().isConnected()));
-	    }
-	}
-	return labs;
+        Map<Long, Boolean> labs = Collections.emptyMap();
+        if (!labsJMXConnectionHandler.isEmpty()) {
+            labs = new HashMap<Long, Boolean>(labsJMXConnectionHandler.size());
+            for (final Entry<String, LabJMXConnetionHandler> jmxHandler : labsJMXConnectionHandler.entrySet()) {
+                labs.put(jmxHandler.getValue().getLaboratory().getIdInternal(), Boolean.valueOf(jmxHandler.getValue().getJmxConnectionHandler().isConnected()));
+            }
+        }
+        return labs;
     }
 
     private Collection<MbeanProxy<IMultiCastControllerMXBean, Laboratory>> getMbeanProxies() {
-	Collection<MbeanProxy<IMultiCastControllerMXBean, Laboratory>> result = Collections.emptyList();
+        Collection<MbeanProxy<IMultiCastControllerMXBean, Laboratory>> result = Collections.emptyList();
 
-	if (!labsJMXConnectionHandler.isEmpty()) {
-	    result = new ArrayList<MbeanProxy<IMultiCastControllerMXBean, Laboratory>>(labsJMXConnectionHandler.size());
-	    for (final Entry<String, LabJMXConnetionHandler> entry : labsJMXConnectionHandler.entrySet()) {
-		final MbeanProxy<IMultiCastControllerMXBean, Laboratory> mBeanProxy = getMBeanProxy(entry.getValue());
-		if (mBeanProxy != null) {
-		    result.add(mBeanProxy);
-		}
-	    }
-	}
+        if (!labsJMXConnectionHandler.isEmpty()) {
+            result = new ArrayList<MbeanProxy<IMultiCastControllerMXBean, Laboratory>>(labsJMXConnectionHandler.size());
+            for (final Entry<String, LabJMXConnetionHandler> entry : labsJMXConnectionHandler.entrySet()) {
+                final MbeanProxy<IMultiCastControllerMXBean, Laboratory> mBeanProxy = getMBeanProxy(entry.getValue());
+                if (mBeanProxy != null) {
+                    result.add(mBeanProxy);
+                }
+            }
+        }
 
-	return result;
+        return result;
     }
 
     private MbeanProxy<IMultiCastControllerMXBean, Laboratory> getMBeanProxy(final LabJMXConnetionHandler labJMXConnetionHandler) {
-	final IMultiCastControllerMXBean proxy = labJMXConnetionHandler.getJmxConnectionHandler()
-								       .getMbeanProxy(MBeanObjectNameFactory.getMultiCastControllerObjectName(),
-										      IMultiCastControllerMXBean.class);
-	return proxy != null ? new MbeanProxy<IMultiCastControllerMXBean, Laboratory>(labJMXConnetionHandler.getLaboratory(), proxy) : null;
+        final IMultiCastControllerMXBean proxy = labJMXConnetionHandler.getJmxConnectionHandler().getMbeanProxy(MBeanObjectNameFactory.getMultiCastControllerObjectName(),
+                IMultiCastControllerMXBean.class);
+        return proxy != null ? new MbeanProxy<IMultiCastControllerMXBean, Laboratory>(labJMXConnetionHandler.getLaboratory(), proxy) : null;
     }
 
     public IMultiCastControllerMXBean getMbeanInterfaceProxy(final String labID) {
-	IMultiCastControllerMXBean result = null;
-	if (labID != null) {
-	    final LabJMXConnetionHandler labJMXConnetionHandler = labsJMXConnectionHandler.get(labID);
+        IMultiCastControllerMXBean result = null;
+        if (labID != null) {
+            final LabJMXConnetionHandler labJMXConnetionHandler = labsJMXConnectionHandler.get(labID);
 
-	    if (labJMXConnetionHandler != null) {
-		result = labJMXConnetionHandler.getJmxConnectionHandler().getMbeanProxy(MBeanObjectNameFactory.getMultiCastControllerObjectName(),
-											IMultiCastControllerMXBean.class);
-	    }
-	}
-	return result;
+            if (labJMXConnetionHandler != null) {
+                result = labJMXConnetionHandler.getJmxConnectionHandler().getMbeanProxy(MBeanObjectNameFactory.getMultiCastControllerObjectName(),
+                        IMultiCastControllerMXBean.class);
+            }
+        }
+        return result;
     }
 
     public void addNewLaboratory(final Laboratory lab) {
-	if (lab != null && !lab.getState().isActive()) {
-	    synchronized (this) {
-		if (needRefresh(lab)) {
-		    labsJMXConnectionHandler.put(lab.getName(), createLabJMXConnectionHandler(lab));
-		}
-	    }
-	}
+        if (lab != null && lab.getState().isActive()) {
+            synchronized (this) {
+                if (needRefresh(lab)) {
+                    labsJMXConnectionHandler.put(lab.getName(), createLabJMXConnectionHandler(lab));
+                }
+            }
+        }
     }
 
     private boolean needRefresh(final Laboratory lab) {
-	boolean result = false;
-	final LabJMXConnetionHandler labJMXConnetionHandler = labsJMXConnectionHandler.get(lab.getName());
+        boolean result = false;
+        final LabJMXConnetionHandler labJMXConnetionHandler = labsJMXConnectionHandler.get(lab.getName());
 
-	if (labJMXConnetionHandler != null) {
+        if (labJMXConnetionHandler != null) {
 
-	    //validate version we can received a request to change out of order
-	    if (lab.getVersion() > labJMXConnetionHandler.getLaboratory().getVersion()) {
-		final String jmxUrl = labJMXConnetionHandler.getJmxConnectionHandler().getJmxURL();
-		final String jmxUser = labJMXConnetionHandler.getJmxConnectionHandler().getJmxUser();
-		final String jmxPass = labJMXConnetionHandler.getJmxConnectionHandler().getJmxPass();
+            //validate version we can received a request to change out of order
+            if (lab.getVersion() > labJMXConnetionHandler.getLaboratory().getVersion()) {
+                final String jmxUrl = labJMXConnetionHandler.getJmxConnectionHandler().getJmxURL();
+                final String jmxUser = labJMXConnetionHandler.getJmxConnectionHandler().getJmxUser();
+                final String jmxPass = labJMXConnetionHandler.getJmxConnectionHandler().getJmxPass();
 
-		final boolean hasJMXUrlChanged = !StringUtils.equalsIgnoreCase(jmxUrl, lab.getJmxURL());
-		final boolean hasJMXUserChanged = !StringUtils.equalsIgnoreCase(jmxUser, lab.getJmxUser());
-		final boolean hasJMXPassChanged = !StringUtils.equalsIgnoreCase(jmxPass, lab.getJmxPass());
+                final boolean hasJMXUrlChanged = !StringUtils.equalsIgnoreCase(jmxUrl, lab.getJmxURL());
+                final boolean hasJMXUserChanged = !StringUtils.equalsIgnoreCase(jmxUser, lab.getJmxUser());
+                final boolean hasJMXPassChanged = !StringUtils.equalsIgnoreCase(jmxPass, lab.getJmxPass());
 
-		result = hasJMXUrlChanged || hasJMXUserChanged || hasJMXPassChanged;
-	    }
+                result = hasJMXUrlChanged || hasJMXUserChanged || hasJMXPassChanged;
+            }
 
-	}
+        } else {
+            result = true;
+        }
 
-	return result;
+        return result;
     }
 
     public void removeLaboratory(final Laboratory lab) {
-	if (lab != null) {
-	    labsJMXConnectionHandler.remove(lab.getName());
-	}
+        if (lab != null) {
+            labsJMXConnectionHandler.remove(lab.getName());
+        }
     }
 
     public void forceConnection() {
-	final Future<?> task = executorService.submit(getLabsMonitorTask());
+        final Future<?> task = executorService.submit(getLabsMonitorTask());
 
-	try {
-	    task.get(60, TimeUnit.SECONDS);
-	} catch (Exception e) {
-	    LOG.error(e.getMessage(), e);
-	    throw new RuntimeException(e);
-	}
+        try {
+            task.get(60, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+            throw new RuntimeException(e);
+        }
     }
 
     public MultiThreadLaboratoryWrapper getLaboratory(final String labID) {
-	return labsNotificationListener.getLaboratory(labID);
+        return labsNotificationListener.getLaboratory(labID);
     }
-
 }
