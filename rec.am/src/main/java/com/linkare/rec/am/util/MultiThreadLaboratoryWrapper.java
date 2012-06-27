@@ -45,6 +45,10 @@ public class MultiThreadLaboratoryWrapper {
     private volatile long uptime;
 
     private IMultiCastControllerMXBean mbeanProxy;
+    
+    private volatile boolean isAvailable;
+    
+    
 
     public MultiThreadLaboratoryWrapper(final MbeanProxy<IMultiCastControllerMXBean, Laboratory> labMBeanPRoxy) throws NamingException {
 	this.underlyingLaboratory = labMBeanPRoxy.getEntity();
@@ -328,11 +332,19 @@ public class MultiThreadLaboratoryWrapper {
 	return underlyingLaboratory.getName();
     }
 
+    public void setAvailable(final boolean available) {
+	isAvailable = available;
+    }
+
     public boolean isAvailable() {
-	return underlyingLaboratory.isAvailable();
+	return isAvailable;
     }
 
     public void kickUsers(final Set<String> userNamesToKick, final String hardwareUniqueID) {
 	mbeanProxy.kickUsers(userNamesToKick, hardwareUniqueID);
+    }
+
+    public String getStateLabel() {
+	return underlyingLaboratory.getState().getLabel();
     }
 }

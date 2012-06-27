@@ -19,7 +19,7 @@
 						<h:dataTable var="lab" value="#{statusBean.labs}"
                                      style="width:400px" >
 							<p:column style="width: 370px">
-                                <h:outputText value="#{lab.state.label}" title="#{lab.description}"/>
+                                <h:outputText value="#{lab.stateLabel}" title="#{lab.description}"/>
 							</p:column>
 							<p:column style="width: 15px">
 								<h:graphicImage library="images" name="available.gif"

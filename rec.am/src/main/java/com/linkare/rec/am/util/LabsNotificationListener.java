@@ -1,6 +1,7 @@
 package com.linkare.rec.am.util;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -108,6 +109,10 @@ public class LabsNotificationListener {
 
     public MultiThreadLaboratoryWrapper getLaboratory(final String labID) {
 	return labs.get(labID);
+    }
+    
+    public Collection<MultiThreadLaboratoryWrapper> getLaboratories(){
+	return labs.values();
     }
 
 }
