@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PreDestroy;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +37,7 @@ public final class LaboratoriesMonitor {
 
     private final static Logger LOG = LoggerFactory.getLogger(LaboratoriesMonitor.class);
 
-    private static final int TIME_BETWEEN_MONITORING_EVENTS_SECONDS =  Integer.class.cast(SystemPropertiesEnum.TIME_BETWEEN_MONITORING_EVENTS_SECONDS.getValue());
+    private static final int TIME_BETWEEN_MONITORING_EVENTS_SECONDS = Integer.class.cast(SystemPropertiesEnum.TIME_BETWEEN_MONITORING_EVENTS_SECONDS.getValue());
 
     private final ConcurrentMap<String, LabJMXConnetionHandler> labsJMXConnectionHandler;
 
@@ -217,11 +218,37 @@ public final class LaboratoriesMonitor {
     }
 
     public void addNewLaboratory(final Laboratory lab) {
-	if (!lab.getState().isActive()) {
-	    if (!labsJMXConnectionHandler.containsKey(lab.getName())) {
-		labsJMXConnectionHandler.putIfAbsent(lab.getName(), createLabJMXConnectionHandler(lab));
+	if (lab != null && !lab.getState().isActive()) {
+	    synchronized (this) {
+		if (needRefresh(lab)) {
+		    labsJMXConnectionHandler.put(lab.getName(), createLabJMXConnectionHandler(lab));
+		}
 	    }
 	}
+    }
+
+    private boolean needRefresh(final Laboratory lab) {
+	boolean result = false;
+	final LabJMXConnetionHandler labJMXConnetionHandler = labsJMXConnectionHandler.get(lab.getName());
+
+	if (labJMXConnetionHandler != null) {
+
+	    //validate version we can received a request to change out of order
+	    if (lab.getVersion() > labJMXConnetionHandler.getLaboratory().getVersion()) {
+		final String jmxUrl = labJMXConnetionHandler.getJmxConnectionHandler().getJmxURL();
+		final String jmxUser = labJMXConnetionHandler.getJmxConnectionHandler().getJmxUser();
+		final String jmxPass = labJMXConnetionHandler.getJmxConnectionHandler().getJmxPass();
+
+		final boolean hasJMXUrlChanged = !StringUtils.equalsIgnoreCase(jmxUrl, lab.getJmxURL());
+		final boolean hasJMXUserChanged = !StringUtils.equalsIgnoreCase(jmxUser, lab.getJmxUser());
+		final boolean hasJMXPassChanged = !StringUtils.equalsIgnoreCase(jmxPass, lab.getJmxPass());
+
+		result = hasJMXUrlChanged || hasJMXUserChanged || hasJMXPassChanged;
+	    }
+
+	}
+
+	return result;
     }
 
     public void removeLaboratory(final Laboratory lab) {

@@ -201,4 +201,16 @@ public final class JMXConnectionHandler {
 	}
     }
 
+    public String getJmxURL() {
+	return jmxURL;
+    }
+
+    public String getJmxUser() {
+	return jmxUser;
+    }
+
+    public String getJmxPass() {
+	return jmxPass;
+    }
+
 }
