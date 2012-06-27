@@ -1,0 +1,29 @@
+<div id="authentication" xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core">
+    <h:form>
+        <h:panelGrid columns="4">
+            <h:outputLabel value="#{bundle['user.username']}" for="login" />
+            <h:inputText id="login" styleClass="username"
+                         value="#{authenticationBean.username}"
+                         title="#{bundle['user.username']}" />
+            <h:outputLabel value="#{bundle['user.login.password']}" for="passwd" />
+            <h:inputSecret id="passwd" styleClass="password"
+                           value="#{authenticationBean.password}"
+                           title="#{bundle['user.login.password']}" />
+            <h:outputLabel value="#{bundle['app.loginDomain']}" for="loginDomain" />
+            <h:selectOneMenu id="loginDomain" styleClass="loginDomain"
+                             value="#{authenticationBean.domain}"
+                             title="#{bundle['app.loginDomain']}">
+                <f:selectItems value="#{loginDomainBean.loginDomains}" />
+            </h:selectOneMenu>
+            <h:outputLabel value=" " />
+            <h:panelGroup>
+                <h:commandButton styleClass="submit"
+                                 action="#{authenticationBean.login}"
+                                 value="#{bundle['operation.login']}" />
+            </h:panelGroup>
+        </h:panelGrid>
+    </h:form>
+</div>
