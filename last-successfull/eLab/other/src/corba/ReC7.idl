@@ -1,0 +1,716 @@
+//
+// ReC6.idl
+//
+// Created on 15 de Mar�o de 2002, 17:00
+// changed to version 6.0 on 27 of April of 2003, 00:10
+// by jp
+//
+
+#include "CORBABase.idl"
+//Include WStringValue CORBA Base idl 
+
+module com{
+module linkare{
+module rec{
+
+
+
+
+/*module acquisition 
+{
+    //forward declarations
+    interface DataProducer;
+    typedef sequence<DataProducer> DataProducerList;
+
+    valuetype VTDataProducerList DataProducerList;//had to box it because of nulls
+};*/   
+    
+    
+    
+module data
+{   
+    enum Multiplier{fento,pico,nano,micro,mili,none,kilo,mega,giga,tera};//Multiplier Enumerator for values
+    
+    module synch
+    {
+        struct Time
+        {
+            short picos;
+            short nanos;
+            short micros;
+            short milis;
+            octet seconds;
+            octet minutes;
+            octet hours;
+        };//Time Structure
+
+        struct Date
+        {
+            octet day;
+            octet month;
+            short year;
+        };//Date Structure   
+
+        struct DateTime
+        {
+            Date date;
+            Time time;
+        };//DateTime Structure
+    
+	
+	valuetype VTDateTime DateTime;//had to box it because of nulls
+
+        typedef double FrequencyVal;
+        
+        //Version 4 addition
+        enum FrequencyDefType{FrequencyType,SamplingIntervalType};
+        // are we definig frequency in terms of Frequency [Hz] or Sampling Interval Time [ms]
+        // this helps enormously to save bandwith in case we are definig Sampling Interval
+        // because normally f=1/t, wich means we could have a lot of Scales of Frequency
+        // instead of a single scale of time intervals...
+        // This way we may choose to adapt the UI to match Interval or Frequency Selection!
+        
+        struct Frequency
+        {
+            FrequencyDefType frequency_def_type;
+            FrequencyVal value;
+            ::com::linkare::rec::data::Multiplier applied_multiplier;
+        };
+
+	valuetype VTFrequency Frequency;//had to box it because of nulls
+
+    };//end Synch Module
+    
+    module acquisition
+    {
+        enum PhysicsValueType {BooleanVal,ByteVal,ShortVal,IntVal,LongVal,FloatVal,DoubleVal,ByteArrayVal};
+        //PhysicsValueType Enumerator (discriminator for Sampling Data)
+        
+        typedef sequence<octet> ByteArray;
+        //byte[] data - for complex data transfer
+        
+        
+        struct ByteArrayValue
+        {
+        	ByteArray data;
+        	::org::omg::CORBA::WStringValue mime_type; 
+        };
+        
+        
+        union PhysicsVal switch(PhysicsValueType)
+        {
+            case BooleanVal:
+                boolean boolean_value;
+            case ByteVal:
+                octet byte_value;
+            case ShortVal:
+                short short_value;
+            case IntVal:
+                long int_value;
+            case LongVal:
+                long long long_value;
+            case FloatVal:
+                float float_value;
+            case DoubleVal:
+                double double_value;
+            case ByteArrayVal:
+                ByteArrayValue byte_array_value;
+        };//PhysicsVal is one of this base types... Complex types transferred as ByteList
+
+        valuetype VTPhysicsVal PhysicsVal;
+        
+        struct PhysicsValue
+        { 
+            PhysicsVal the_value;
+            VTPhysicsVal the_error;//might be null... as requested for booleans and byte[]
+            ::com::linkare::rec::data::Multiplier applied_multiplier;
+        };//PhysicsValueStruct is a composition of value +- error - all Acquisition values have associated error 
+        
+	valuetype VTPhysicsValue PhysicsValue;//some values might be null - had to box them
+
+        typedef sequence<VTPhysicsValue> PhysicsValueList;//An acquisition column
+	
+	valuetype VTPhysicsValueList PhysicsValueList;//some columns might be null - had to box them
+	
+        typedef sequence<VTPhysicsValueList> PhysicsValueMatrix;//All acquisition columns  
+
+	valuetype VTPhysicsValueMatrix PhysicsValueMatrix;//some packets might not contain any data - had to box them
+        
+	const long TOTAL_PACKETS_UNDEFINED=-1;
+        //ReC 7.0 Addition - clear minds about packets/samples differences 
+        const long TOTAL_SAMPLES_UNDEFINED=-1;
+        
+        struct SamplesPacket
+        {
+            //Version 4 change
+            //helps to have on each package just to be sure that
+            //if packets are not sent in their correct order
+            //or if there are some packets of no interest we allways know
+            //where this packet started!
+            ::com::linkare::rec::data::synch::VTDateTime time_start;
+            //when it started at the server time (GMT+0)
+            long packet_number;//order num of the packets... 
+                                //doens't need to be related to DateTime of the experiment start!
+            long total_packets;
+            VTPhysicsValueMatrix the_data;//the data might come empty (==null)
+        };//All acquisition columns + sequence info trace
+
+        typedef sequence<SamplesPacket> SamplesPacketList;
+        //Several AcquisitionData Packets in one pass
+        
+    };//end AcquisitionData Module
+    
+    
+    
+    module metadata
+    {
+        struct FrequencyScale
+        {
+            ::com::linkare::rec::data::synch::Frequency f_min;
+            ::com::linkare::rec::data::synch::Frequency f_max;
+            ::com::linkare::rec::data::synch::Frequency step;
+            //Version 4 addition
+            //it helps to designate frequencies by name... not necessary!
+            ::org::omg::CORBA::WStringValue frequency_scale_label;
+        };//Channel Frequency Metadata description for Frequency Scale
+
+        typedef sequence<FrequencyScale> FrequencyScaleList;
+        //Channel Frequency Metadata description - full description for each channel
+
+	valuetype VTFrequencyScaleList FrequencyScaleList;//had to box because of nulls
+
+        struct Scale
+        {
+            ::com::linkare::rec::data::acquisition::PhysicsVal min_value;
+            ::com::linkare::rec::data::acquisition::PhysicsVal max_value;
+            ::com::linkare::rec::data::acquisition::PhysicsVal default_error;                   
+            ::com::linkare::rec::data::acquisition::PhysicsVal step;
+	    ::com::linkare::rec::data::Multiplier applied_multiplier;
+            //Version 6 addition
+            //it helps to designate scales by name... not necessary!
+            ::org::omg::CORBA::WStringValue scale_label;
+            wstring PhysicsUnitName;
+            wstring PhysicsUnitSymbol;
+        };//Channel Scale Description
+        
+
+	valuetype VTScale Scale;//had to box it because of nulls
+
+        typedef sequence<Scale> ScaleList;
+        //Channel Scale Description - full description for each Channel
+        
+        struct SamplesNumScale
+	{
+		long min_samples;
+	        long max_samples;
+	        long step;
+        };//Samples delimitation Scale Description
+        
+        valuetype VTSamplesNumScale SamplesNumScale;
+        
+        typedef wstring ParameterValue;//must be passed and set as a general String
+                
+        valuetype VTParameterValue ParameterValue;
+        
+        typedef sequence<ParameterValue> ParameterSelectionList;//Selection List for Parameter - List all available Options
+        
+        valuetype VTParameterSelectionList ParameterSelectionList;
+        
+        typedef wstring ParameterName;//alias for parameter name
+        
+        enum ParameterType{SelectionListValue,ContinuousValue,OnOffValue,BlackBoxValue};
+        //Type of the Parameter - Just for display
+        //if ContinuousValue it expects "min" & "max" & "step" in ParameterSelectionList as doubles...
+        //if OnOffValue it expects ParameterSelectionList as List of "True","False" values in that order
+        //BlackBoxValue it doesn't expect anything... Maybe customizer knows how to handle it
+        
+        //const long NoParameterSelected =-1;//Ok, nothing selected by default...
+        
+        struct ChannelParameter
+        {
+            ParameterName parameter_name;
+            ParameterType parameter_type;
+            VTParameterSelectionList parameter_selection_list;//selection list might be null to accomodate BlackBox Values
+            VTParameterValue actual_selected_value;//the actual selected value - might be null from version 6.0
+        };//ChannelParameter Description Structure
+        
+        typedef sequence<ChannelParameter> ChannelParameterList;
+        //the Various Parameters for each Channel
+        
+	valuetype VTChannelParameterList ChannelParameterList;//had to box because of nulls
+	
+        typedef ChannelParameter HardwareParameter;
+        //alias for the Hardware... Global Options
+        
+        typedef sequence<HardwareParameter> HardwareParameterList;
+        //Alias for the Hardware... Global Options
+        
+	valuetype VTHardwareParameterList HardwareParameterList;//had to box because of nulls
+	
+        typedef wstring ChannelName;
+        //alias... just the Channel Name
+        
+        enum ChannelDirection{CHANNEL_INPUT,CHANNEL_OUTPUT};
+        //The direction as seen from the software perspective       
+        //CHANNEL_INPUT -> From Hardware to Software
+        //CHANNEL_OUPUT -> From Software to Hardware
+        
+        //version 6.0 change - not needed any more
+        //const long NoScaleSelected=-1;//ok, no default scale
+        
+        
+        struct ChannelInfo
+        {
+            ChannelName channel_name;
+            ScaleList scales;
+            //version 6.0 change: better to pass the selected scale and not to rely on
+            //index numbers
+            //long actual_selected_scale_index;//Selected Scale Index - might be NoScaleSelected
+            VTScale selected_scale;
+            VTFrequencyScaleList frequencies;
+            ::com::linkare::rec::data::synch::VTFrequency selected_frequency;//Selected Frequency 
+            VTChannelParameterList channel_parameters; //The extra config parameters for the Channel
+            ChannelDirection channel_direction;//The direction as in ChannelDirection Enumerator
+            boolean is_channel_independent;//Does the channel permit different frequency than the Hardware
+            //::org::omg::CORBA::WStringValue url_customizer_class;
+            //Version 7.0 change: removed url_customizer_class and available_output_data_producers... this should be done by client side utilities
+            //version 6.0 change: changed name from available_data_producers to available_output_data_producers. That's what makes sense!
+            //::com::linkare::rec::acquisition::VTDataProducerList available_output_data_producers;
+            VTSamplesNumScale sampling_scale;//defines maximum & minimum samples num
+        };//All the info to describe a Channel
+
+        typedef sequence<ChannelInfo> ChannelInfoList; 
+        //All the active channels description in a Hardware
+            
+	struct HardwareInfo
+        {
+            ::org::omg::CORBA::WStringValue DriverVersion;
+            ::org::omg::CORBA::WStringValue HardwareName;
+            ::org::omg::CORBA::WStringValue HardwareVersion;
+            ::org::omg::CORBA::WStringValue HardwareManufacturer;
+            ::org::omg::CORBA::WStringValue DescriptionText;
+            //Version 7.0 change: removed url_customizer_class - this should be done client side
+            //::org::omg::CORBA::WStringValue url_customizer_class;
+            //version 5 added support for familiar names - experiment name, maybe!
+            wstring familiarName;
+            wstring hardware_unique_id;
+            ChannelInfoList channels_info;//Active channels description only - must autodetect channels
+            VTHardwareParameterList hardware_parameters;//The hardware parameters... Global Options
+            FrequencyScaleList hardware_frequencies;
+            ::com::linkare::rec::data::synch::Frequency selected_frequency;//Selected Frequency
+            SamplesNumScale sampling_scale;//defines maximum & minimum samples num
+        };//Describing the Hardware
+        
+        typedef sequence <HardwareInfo> HardwareInfoList;
+        
+       	
+        /* 
+            Version 6.0 Change:  We can use HardwareConfig to pass this information, so this class was eliminated
+	struct ChannelAcquisitionHeader
+        {
+            ::com::linkare::rec::data::synch::VTDateTime time_start;//when it started at the server time (GMT+0)
+            ::com::linkare::rec::data::synch::VTFrequency selected_frequency;
+            VTScale selected_scale;//the selected Scale...
+            VTChannelParameterList selected_channel_parameters;
+            LongValue total_samples;
+        };//one of this for each channel in the Acquisition Header
+        
+        typedef sequence<ChannelAcquisitionHeader> ChannelAcquisitionHeaderList;
+        
+        struct HardwareAcquisitionHeader
+        {
+            ::com::linkare::rec::data::synch::DateTime time_start;//when it started at the server time (GMT+0)
+            ::com::linkare::rec::data::synch::Frequency selected_frequency; //the frequency for all channels that don't specify otherwise
+            ChannelAcquisitionHeaderList samples_info;//one per channel
+            VTHardwareParameterList selected_hardware_parameters;
+            long total_samples;
+        };//All the information to replicate the hardware active configuration during acquisition...
+
+        */
+    };//end MetaData Module
+    
+    module config
+    {
+        
+        struct ParameterConfig
+        {
+            ::com::linkare::rec::data::metadata::ParameterName parameter_name;
+            ::com::linkare::rec::data::metadata::ParameterValue parameter_value;
+        };//A parameter selected values - User Speficied...
+        
+        typedef sequence<ParameterConfig> ParameterConfigList;
+        //Only changed parameters from the default are sent back for each channel... Save some network bandwith
+        
+        typedef ParameterConfigList ChannelParameterConfigList;
+	
+	valuetype VTChannelParameterConfigList ChannelParameterConfigList;//had to box it because of nulls
+
+        typedef ParameterConfigList HardwareParameterConfigList;
+               
+	valuetype VTHardwareParameterConfigList HardwareParameterConfigList;//had to box it because of nulls
+        
+	//change in version 6.0 - not necessary
+        //typedef long SelectedScaleIndex;//alias for the Scale Index that is selected from the list given in MetaData info
+        
+        
+        //valuetype LongValue long;
+        
+        struct ChannelAcquisitionConfig
+        {
+            ::com::linkare::rec::data::metadata::ChannelName channel_name;            
+            ::com::linkare::rec::data::synch::VTDateTime time_start;//when it started at the server time (GMT+0) might be null to start with the Hardware DateTimeStart
+            ::com::linkare::rec::data::synch::VTFrequency selected_frequency;//might be null if it is the AcquisitionConfig default frequency
+            //SelectedScaleIndex selected_scale_index;//the selected Scale...
+            //version 6.0 change: Easier to pass info this way, 
+            //and less error-prone, as it doesn't rely on indexes and order of arrays...
+            ::com::linkare::rec::data::metadata::VTScale selected_scale;
+            VTChannelParameterConfigList selected_channel_parameters;
+            long total_samples;
+        };//one of this for each channel in the Acquisition Header
+        
+        typedef sequence<ChannelAcquisitionConfig> ChannelAcquisitionConfigList;
+        
+        struct HardwareAcquisitionConfig
+        {
+            wstring familiarName;
+            wstring hardware_unique_id;            
+            ::com::linkare::rec::data::synch::DateTime time_start;//when it started at the server time (GMT+0)
+            ::com::linkare::rec::data::synch::Frequency selected_frequency; //the frequency for all channels that don't specify otherwise
+            ChannelAcquisitionConfigList channels_config;//one per channel
+            VTHardwareParameterConfigList selected_hardware_parameters;
+            long total_samples;
+        };//All the information to replicate the hardware active configuration during acquisition...
+        
+        
+    };//end Config Module
+    
+};//end Data Module
+
+module acquisition
+{
+    
+    //forward declaration
+    interface DataProducer;
+    
+    //Version 7.0 Change - added state to DataProducer... simpler to maintain
+    enum DataProducerState{DP_WAITING,DP_STARTED_NODATA,DP_STARTED,DP_ENDED,DP_STOPED,DP_ERROR};
+    
+    enum HardwareState{UNKNOWN,CONFIGURING,CONFIGURED,STARTING,STARTED,STOPING,STOPED,RESETING,RESETED};
+
+    valuetype VTHardwareState HardwareState;//had to box it because of nulls
+
+    //Hardware State Enumerations:
+    /*
+        version 5: changed meaning of state_unknown!
+        UNKNOWN - Indicates that hardware is in Error State - Can't do anything
+        CONFIGURING - Someone has gain configuration access and the hardware is configuring
+        CONFIGURED - You might expect data soon...
+        STARTING - Doing some initialization to Start Acquisition - no data available yet
+        STARTED - Running smoothly
+        STOPING - SomeOne stoped the Hardware - It is doing something... No more data will be available
+        STOPED - OK! Available for reconfiguring or starting - Keeps last configuration 
+        RESETING - SomeOne reseted the Hardware - It is doing something... No more data will be available - Only when something is going wrong, please
+        RESETED - OK! Available for configuring/reconfiguring - not starting...
+    */
+    
+    typedef wstring ClientName;
+    typedef ClientName VTClientName;
+    typedef sequence<ClientName> ClientNameList;
+    valuetype VTClientNameList ClientNameList;
+    
+    //Version 7.0 Addition
+    struct Property
+    {
+        wstring name;
+        any value;
+    };
+    
+    //Version 7.0 Addition
+    typedef sequence<Property> PropertyList;
+    valuetype VTPropertyList PropertyList;
+        
+    //Version 7.0 Addition
+    struct UserInfo
+    {
+        ClientName userName;
+        VTPropertyList userProps;
+    };
+    
+    //Version  7.0 Addition
+    typedef sequence<UserInfo> UserInfoList;
+    valuetype VTUserInfoList UserInfoList;
+    //Version 7.0 Addition
+    const wstring PROPKEY_USERINFO_PASS=L"ReC.UserInfo.Password";
+    const wstring PROPKEY_USERINFO_CERTIFICATE=L"ReC.UserInfo.Certificate";
+    const wstring PROPKEY_USERINFO_NEXTLOCK_DATETIME_MIN=L"ReC.UserInfo.NextLock.DateTimeMin";
+    const wstring PROPKEY_USERINFO_NEXTLOCK_DATETIME_MAX=L"ReC.UserInfo.NextLock.DateTimeMax";
+    const wstring PROPKEY_USERINFO_LOCKED_DATETIME=L"ReC.UserInfo.Locked.DateTime";
+    const wstring PROPKEY_USERINFO_HARDWARES_CONNECTED_TO=L"ReC.UserInfo.Hardwares.ConnectedTo";
+    
+      
+    exception IncorrectStateException
+    {
+        long errorCode;
+        VTHardwareState actualState;
+        VTHardwareState requiredState;
+        //Change in version 7.0 - removed errorDescription - accelerates transmission and helps to make translation
+        //::org::omg::CORBA::WStringValue errorDescription;
+    };//Some requirement was not met
+    
+    exception WrongConfigurationException
+    {
+        long errorCode;
+        //Change in version 7.0 - removed errorDescription - accelerates transmission and helps to make translation
+        //::org::omg::CORBA::WStringValue errorDescription;
+    };//Ooopppss - self-conflicting configuration request
+
+    exception NotAvailableException
+    {
+	long errorCode;
+	//Change in version 7.0 - removed errorDescription - accelerates transmission and helps to make translation
+        //::org::omg::CORBA::WStringValue errorDescription;
+    };//As the name indicates - might be network problems, someone decided to switch Hardware off or...
+
+    exception MaximumClientsReached
+    {
+        long errorCode;
+        //Change in version 7.0 - removed errorDescription - accelerates transmission and helps to make translation
+        //::org::omg::CORBA::WStringValue errorDescription;
+        //version
+        long maximumClients;
+    };//As the name indicates - MultiCastController or MCHardware is full... wait a sec...
+
+    exception NotAuthorized
+    {
+    	long errorCode;
+        //Change in version 7.0 - removed errorDescription - accelerates transmission and helps to make translation
+        //::org::omg::CORBA::WStringValue errorDescription;
+    };//As the name indicates - MultiCastController or MCHardware won't let you in...
+    
+    exception NotRegistered
+    {
+        long errorCode;
+        //Change in version 7.0 - removed errorDescription - accelerates transmission and helps to make translation
+        //::org::omg::CORBA::WStringValue errorDescription;
+    };//As the name indicates - Ooops - haven't you registered? Then do it...
+    
+    exception NotOwnerException
+    {
+        long errorCode;
+        //change in version 6.0
+        //DataClient currentOwner;
+        ClientName currentOwner;
+        //Change in version 7.0 - removed errorDescription - accelerates transmission and helps to make translation
+        //::org::omg::CORBA::WStringValue errorDescription;
+    };//As the name indicates - might be network problems, someone decided to switch Hardware off or...
+    
+    exception NotAnAvailableSamplesPacketException
+    {        
+        long errorCode;
+        //Version 7.0 Change - which was the first packet not found
+        long firstPacketNotFound;
+        //Change in version 7.0 - removed errorDescription - accelerates transmission and helps to make translation
+        //::org::omg::CORBA::WStringValue errorDescription;
+    };//Why are you requesting stupid Packets... Register a DataReceiver and get the Info from there...
+    
+    interface DataClient
+    {
+        //ClientName getUser();
+        //Version 7.0 change: removed method getUser and getPassword and changed it to getUserInfo... wich is much more generic
+        UserInfo getUserInfo();
+        //wstring getPassword();
+        void hardwareStateChange(in HardwareState newState);
+        void hardwareChange();
+        void hardwareLockable(in long long millisecs_to_lock_success);
+        //version 5 added suport for messages
+        void receiveMessage(in ::org::omg::CORBA::WStringValue clientFrom,in ::org::omg::CORBA::WStringValue clientTo,in wstring message);
+        //from=null means - MultiCastController message
+        //to=null means - message to everyone
+    };//If you identify successfully I give you access to this wonderfull system...
+
+    typedef sequence<DataClient> DataClientList;
+    valuetype VTDataClientList DataClientList;
+
+    interface DataReceiver
+    {
+	//void newSamples(in long num_packet);
+        //Version 7.0 Changed this... we must only inform of the largest packet known... all the packets before should be there
+        void newSamples(in long largestNumPacket);
+        
+        //void producerIsStoped();
+        //Version 7.0 Changed this... now we may inform of changes in state
+        void stateChanged(in DataProducerState newState);
+        
+        //Version 7.0 Changed this... now we may inform of changes in clientsList
+        void clientsListChanged();
+        
+    };
+
+    valuetype VTDataClient DataClient;//box it because of hardware...
+    
+    interface Hardware
+    {
+        ::com::linkare::rec::data::metadata::HardwareInfo getHardwareInfo();//give me a way to build a user interface
+        HardwareState getHardwareState();//How are you?
+        void registerDataClient(in DataClient data_client) raises (NotAuthorized);
+        VTDataClient getDataClient();//in case local connection, must replace by multicast controller Proxy's back again
+        void configure(in ::com::linkare::rec::data::config::HardwareAcquisitionConfig config) raises (IncorrectStateException,WrongConfigurationException);//Try to Configure... 
+        DataProducer start(in DataReceiver receiver) raises (IncorrectStateException);//Start data production/acquisition
+        DataProducer startOutput(in DataReceiver receiver,in DataProducer data_source) raises (IncorrectStateException);//might return null and might not call the DataReceiver
+        void stop() raises (IncorrectStateException);//Stop the hardware
+        void reset() raises (IncorrectStateException);//Reset the hardware
+        DataProducer getDataProducer() raises (IncorrectStateException,NotAvailableException);
+    };
+    
+    
+    const long MaxPacketNumUnknown=-1;//ok, not known at this time
+    
+    interface DataProducer
+    {
+        //version 6.0 change: instead of HardwareAcquisitionHeader we pass HardwareAcquisitionConfig...
+        //::com::linkare::rec::data::metadata::HardwareAcquisitionHeader getAcquisitionHeader() raises (NotAvailableException);
+        ::com::linkare::rec::data::config::HardwareAcquisitionConfig getAcquisitionHeader() raises (NotAvailableException);
+        //::com::linkare::rec::data::acquisition::SamplesPacket getSamples(in long num_packet) raises (NotAnAvailableSamplesPacketException);
+        //Version 7.0 changed this... now we may get blocks of packets... off course getSamples and getAllSamplesUntilNow become obsolete... we may do it
+        //by getSamples(packet_num_packet_num)
+        //and getSamples(0,getMaxPacketNum());
+        ::com::linkare::rec::data::acquisition::SamplesPacketList getSamples(in long num_packet_start,in long num_packet_end) raises (NotAnAvailableSamplesPacketException);
+        //::com::linkare::rec::data::acquisition::SamplesPacketList getAllSamplesUntilNow() raises (NotAvailableException);
+        //Version 7.0 Changed this... the configuration Utility is UI Specific... use UI Specific code to configure it...
+        //::org::omg::CORBA::WStringValue getConfiguratorURL();
+        ::org::omg::CORBA::WStringValue getDataProducerName();
+        //boolean isRunning();
+        //Version 7.0 Change this... now we may get any of the states...
+        DataProducerState getDataProducerState();
+        long getMaxPacketNum();
+        void registerDataReceiver(in DataReceiver data_receiver) raises (MaximumClientsReached);
+    };//returns data values... and metadata about those values...
+      //if you get here in a middle of1 an acquisition call getAllSamplesUntilNow
+      
+    
+    interface MultiCastHardware
+    {
+        //BIG Change in version 7.0 - change all authentication code to accept UserInfo instead of DataClient... note
+        //that the DataClient must be regsitered...
+        ::com::linkare::rec::data::metadata::HardwareInfo getHardwareInfo(in UserInfo user) raises (NotRegistered,NotAuthorized);//give me a way to build a user interface
+        HardwareState getHardwareState(in UserInfo user) raises (NotRegistered,NotAuthorized);//How are you?
+        void requireLock(in UserInfo user)  raises (IncorrectStateException,NotAvailableException,NotOwnerException,NotRegistered,NotAuthorized);
+        void registerDataClient(in DataClient data_client) raises (NotAvailableException,MaximumClientsReached,NotAuthorized);
+        void configure(in UserInfo user,in ::com::linkare::rec::data::config::HardwareAcquisitionConfig configuration) raises (IncorrectStateException,NotAvailableException,WrongConfigurationException,NotOwnerException,NotRegistered,NotAuthorized);
+        DataProducer start(in UserInfo user) raises (IncorrectStateException,NotAvailableException,NotOwnerException,NotRegistered,NotAuthorized);
+        DataProducer startOutput(in UserInfo user, in DataProducer data_source) raises (IncorrectStateException,NotAvailableException,NotOwnerException,NotRegistered,NotAuthorized);
+        void stop(in UserInfo user) raises (IncorrectStateException,NotAvailableException,NotOwnerException,NotRegistered,NotAuthorized);
+        void reset(in UserInfo user) raises (IncorrectStateException,NotAvailableException,NotOwnerException,NotRegistered,NotAuthorized);
+	DataProducer getDataProducer(in UserInfo user) raises (IncorrectStateException,NotAvailableException,NotRegistered,NotAuthorized);//raise the exception if there isn't a dataprod
+        //Version 7.0 changed this to be the same as in MultiCastController
+	//VTClientNameList getClientQueue(in DataClient data_client) raises (NotRegistered);
+        VTUserInfoList getClientList(in UserInfo user) raises (NotRegistered,NotAuthorized);
+        //version 5 added suport for messages
+        void sendMessage(in UserInfo userFrom,in VTClientName clientTo,in wstring message) raises (NotRegistered,NotAuthorized);
+        //to=null means - message to everyone
+    };//A proxy controller for each hardware running now...
+    
+    typedef sequence<MultiCastHardware> MultiCastHardwareList;
+    
+    valuetype VTMultiCastHardwareList MultiCastHardwareList;
+    
+    interface MultiCastController  
+    {
+        //BIG Change in version 7.0 - change all authentication code to accept UserInfo instead of DataClient... note
+        //that the DataClient must be regsitered...
+        //version 5 - check permissions before givin' out the Hardware List
+        VTMultiCastHardwareList enumerateHardware(in UserInfo user) raises (NotRegistered,NotAuthorized);
+        void registerDataClient(in DataClient data_client) raises (MaximumClientsReached,NotAuthorized);
+        //version 5 added suport for messages
+        VTUserInfoList getClientList(in UserInfo user) raises (NotRegistered,NotAuthorized);
+        //version 5 added suport for messages
+        void sendMessage(in UserInfo user,in VTClientName clientTo,in wstring message) raises (NotRegistered,NotAuthorized);
+        //to=null means - message to everyone
+        //Version 7.0 Addition - Trying to remove dependy on NameService
+        void registerHardware(in Hardware hardware);
+        
+    };//Default queue for hardwareChange Events
+    
+    
+};//end Acquisition Module
+
+
+
+
+module repository
+{
+        
+    struct DateTimeSearch
+    {
+        ::com::linkare::rec::data::synch::VTDateTime minDateTime;
+        ::com::linkare::rec::data::synch::VTDateTime maxDateTime;
+    };
+      
+    struct FrequencySearch
+    {
+        ::com::linkare::rec::data::synch::VTFrequency minFrequency;
+        ::com::linkare::rec::data::synch::VTFrequency maxFrequency;
+    };  
+      
+    valuetype VTLong long;
+
+    struct SamplesNumSearch
+    {
+        VTLong minSamplesNum;
+        VTLong maxSamplesNum;
+    };   
+        
+        
+    valuetype VTDateTimeSearch DateTimeSearch;    
+    valuetype VTFrequencySearch FrequencySearch;    
+    valuetype VTSamplesNumSearch SamplesNumSearch;
+    
+     valuetype VTChannelName ::com::linkare::rec::data::metadata::ChannelName;
+    
+    struct ChannelAcquisitionConfigSearch   
+    {
+        VTChannelName channel_name;
+        VTDateTimeSearch startTimeSearch;
+        VTFrequencySearch frequencySearch;
+        ::com::linkare::rec::data::metadata::VTScale selectedScale;
+        ::com::linkare::rec::data::config::VTChannelParameterConfigList selected_channel_parameters;
+        VTSamplesNumSearch samplesNumSearch;
+    };
+        
+    typedef sequence<ChannelAcquisitionConfigSearch> ChannelAcquisitionConfigSearchList;
+    valuetype VTChannelAcquisitionConfigSearchList  ChannelAcquisitionConfigSearchList;
+        
+    struct HardwareAcquisitionConfigSearch 
+    {
+        VTDateTimeSearch startTimeSearch;
+        VTFrequencySearch frequencySearch;
+        VTChannelAcquisitionConfigSearchList channelsConfigSearch;
+        ::com::linkare::rec::data::config::VTHardwareParameterConfigList selected_hardware_parameters;
+        VTSamplesNumSearch samplesNumSearch;
+    };//struct that enables searching of DataProducers from the repository
+    
+    typedef sequence<HardwareAcquisitionConfigSearch> HardwareAcquisitionConfigSearchList;
+    valuetype VTHardwareAcquisitionConfigSearchList HardwareAcquisitionConfigSearchList;
+    
+    
+    typedef wstring DataProducerId;
+    
+    struct DataProducerConfig 
+    {
+        ::com::linkare::rec::data::config::HardwareAcquisitionConfig hardwareConfig;
+        DataProducerId id;
+        wstring hardware_unique_id;
+    };//struct that enables the passing of info about the experiment back to the client
+    
+    typedef sequence<DataProducerConfig> DataProducerConfigList;
+    
+    interface RepositoryManager
+    {
+        ::com::linkare::rec::acquisition::DataProducer getDataProducer(in ::com::linkare::rec::acquisition::UserInfo user, in DataProducerId id);
+        DataProducerConfigList listDataProducers(in ::com::linkare::rec::acquisition::UserInfo user,in VTHardwareAcquisitionConfigSearchList search_params);
+    };
+      
+};//end repository module
+
+
+};};};
