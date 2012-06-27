@@ -331,4 +331,8 @@ public class MultiThreadLaboratoryWrapper {
     public boolean isAvailable() {
 	return underlyingLaboratory.isAvailable();
     }
+
+    public void kickUsers(final Set<String> userNamesToKick, final String hardwareUniqueID) {
+	mbeanProxy.kickUsers(userNamesToKick, hardwareUniqueID);
+    }
 }

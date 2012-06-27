@@ -8,6 +8,7 @@ package com.linkare.rec.am.mbean;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.management.MXBean;
 
@@ -29,6 +30,8 @@ public interface IMultiCastControllerMXBean {
     Map<String, RegisteredHardwareDTO> getRegisteredHardwaresInfo(final List<String> hardwareUniqueIDs);
 
     long getUpTimeInMillis();
+
+    void kickUsers(final Set<String> usersToKick, final String hardwareUniqueID);
 
 
 }
