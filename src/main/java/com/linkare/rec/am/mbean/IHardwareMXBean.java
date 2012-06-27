@@ -7,6 +7,7 @@
 package com.linkare.rec.am.mbean;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.management.MXBean;
 
@@ -25,5 +26,7 @@ public interface IHardwareMXBean {
     String getState();
 
     List<ClientInfoDTO> getClientList();
+
+    void kickUsers(final Set<String> usersToKick);
 
 }
