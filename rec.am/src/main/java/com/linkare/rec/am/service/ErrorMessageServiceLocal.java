@@ -2,13 +2,13 @@ package com.linkare.rec.am.service;
 
 import javax.ejb.Local;
 
-import com.linkare.rec.am.model.ErrorMessage;
 
 /**
  * 
  * @author Bruno Catarino - Linkare TI
+ * @author Gedsimon Pereira - Linkare TI
  * 
  */
 @Local
-public interface ErrorMessageServiceLocal extends BusinessService<ErrorMessage, Long> {
+public interface ErrorMessageServiceLocal extends ErrorMessageService {
 }

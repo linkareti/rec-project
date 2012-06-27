@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/protected/backoffice.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle['page.errormessage.list.title']}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="list-form">
+            <p:growl id="messages" showDetail="true"/>
+            <p:dataTable id="items" var="item" style="width:100%"
+                         value="#{errorMessageController.items}"
+                         emptyMessage="#{bundle['info.emptyList']}"
+                         selection="#{errorMessageController.current}" paginator="true"
+                         rows="10" selectionMode="single" 
+                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" 
+                         rowKey="#{item.messageId}"
+                         scrollable="false">
+
+                <p:column  style="width:200px">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle['errormessage.message']}" />
+                    </f:facet>
+                    <h:outputText value="#{item.message}" />
+                </p:column>
+
+                <p:column style="width:200px" sortBy="#{item.category}"
+                          filterBy="#{item.category}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle['errormessage.category']}" />
+                    </f:facet>
+                    <h:outputText value="#{item.category}" />
+                </p:column>
+
+                <p:column style="width:200px" sortBy="#{item.dateError}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle['errormessage.date.error']}" />
+                    </f:facet>
+                    <h:outputText value="#{item.dateError}" />
+                </p:column>
+
+                <p:column style="width:150px" resizable="false">
+                    <f:facet name="header"></f:facet>
+                    <p:commandButton id="selectButton" update=":list-form:display" oncomplete="msgDialog.show()" icon="ui-icon-search" title="#{bundle['operation.view']}">  
+                        <f:setPropertyActionListener value="#{item}" target="#{errorMessageController.current}" />    
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+            <p:dialog header="#{bundle['errormessage.detail']}" widgetVar="msgDialog" resizable="false" id="msgDlg"  
+                      showEffect="fade" hideEffect="explode" modal="true">  
+
+                <h:panelGrid id="display" columns="2" cellpadding="3" style="margin:0 auto;">  
+
+                    <h:outputText value="#{bundle['errormessage.message']}" />  
+                    <h:outputText value="#{errorMessageController.selected.message}" style="font-weight:bold"/>
+
+                    <h:outputText value="#{bundle['errormessage.category']}" />  
+                    <h:outputText value="#{errorMessageController.selected.category}" style="font-weight:bold"/>  
+
+                    <h:outputText value="#{bundle['errormessage.date.error']}" />  
+                    <h:outputText value="#{errorMessageController.selected.dateError}" style="font-weight:bold"/>    
+
+                </h:panelGrid>  
+
+            </p:dialog>  
+        </h:form>
+    </ui:define>
+</ui:composition>
