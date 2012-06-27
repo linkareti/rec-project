@@ -6,10 +6,12 @@
  */
 package com.linkare.rec.impl.utils.mbean;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.management.ListenerNotFoundException;
 import javax.management.MBeanNotificationInfo;
@@ -20,7 +22,10 @@ import javax.management.NotificationListener;
 import com.linkare.rec.am.ClientInfoDTO;
 import com.linkare.rec.am.HardwareInfoDTO;
 import com.linkare.rec.am.RegisteredHardwareDTO;
+import com.linkare.rec.am.mbean.IHardwareMXBean;
 import com.linkare.rec.am.mbean.IMultiCastControllerMXBean;
+import com.linkare.rec.am.mbean.MBeanConnectionResourcesUtilities;
+import com.linkare.rec.am.mbean.MBeanObjectNameFactory;
 import com.linkare.rec.impl.multicast.ReCMultiCastController;
 import com.linkare.rec.impl.utils.mapping.DTOMapperUtils;
 
@@ -131,5 +136,20 @@ public class MultiCastController implements IMultiCastControllerMXBean, Notifica
 		}
 		return result;
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void kickUsers(final Set<String> usersToKick, final String hardwareUniqueID) {
+		try {
+			final IHardwareMXBean mBeanClientProxy = MBeanConnectionResourcesUtilities.getMBeanClientProxy(null,
+					MBeanObjectNameFactory.getHardwareObjectName(hardwareUniqueID), IHardwareMXBean.class, true);
+			mBeanClientProxy.kickUsers(usersToKick);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 
 }

@@ -7,6 +7,7 @@
 package com.linkare.rec.impl.utils.mbean;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.management.ListenerNotFoundException;
 import javax.management.MBeanNotificationInfo;
@@ -92,6 +93,14 @@ public class Hardware implements IHardwareMXBean, NotificationEmitter {
 	@Override
 	public List<ClientInfoDTO> getClientList() {
 		return DTOMapperUtils.mapToClientInfoDTOList(reCMultiCastHardware.getClientList());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void kickUsers(Set<String> usersToKick) {
+		reCMultiCastHardware.kickUsers(usersToKick);
 	}
 
 }
