@@ -45,10 +45,8 @@ public class MultiThreadLaboratoryWrapper {
     private volatile long uptime;
 
     private IMultiCastControllerMXBean mbeanProxy;
-    
+
     private volatile boolean isAvailable;
-    
-    
 
     public MultiThreadLaboratoryWrapper(final MbeanProxy<IMultiCastControllerMXBean, Laboratory> labMBeanPRoxy) throws NamingException {
 	this.underlyingLaboratory = labMBeanPRoxy.getEntity();
@@ -61,17 +59,20 @@ public class MultiThreadLaboratoryWrapper {
 
     private void init() {
 	synchronized (this) {
-	    final long uptime = mbeanProxy.getUpTimeInMillis();
 
-	    final List<ClientInfoDTO> labUsers = mbeanProxy.getClients();
+	    if (mbeanProxy != null) {
+		final long uptime = mbeanProxy.getUpTimeInMillis();
 
-	    final Map<String, RegisteredHardwareDTO> registeredHardwares = mbeanProxy.getRegisteredHardwaresInfo(null);
+		final List<ClientInfoDTO> labUsers = mbeanProxy.getClients();
 
-	    initDeployedExperimentsMap(registeredHardwares.values());
-	    initUsersSet(labUsers);
+		final Map<String, RegisteredHardwareDTO> registeredHardwares = mbeanProxy.getRegisteredHardwaresInfo(null);
 
-	    this.lastNotifReceived = -1;
-	    this.uptime = uptime;
+		initDeployedExperimentsMap(registeredHardwares.values());
+		initUsersSet(labUsers);
+
+		this.lastNotifReceived = -1;
+		this.uptime = uptime;
+	    }
 	}
     }
 
@@ -144,7 +145,7 @@ public class MultiThreadLaboratoryWrapper {
 
     private void hardwareStateChange(final String experimentExternalID, final byte newStateCode) {
 	MultiThreadDeployedExperimentWrapper deployedExperiment = deployedExperimentsMap.get(experimentExternalID);
-	
+
 	if (deployedExperiment == null) {
 	    addHardware(getRemoteHardware(experimentExternalID));
 	    deployedExperiment = deployedExperimentsMap.get(experimentExternalID);

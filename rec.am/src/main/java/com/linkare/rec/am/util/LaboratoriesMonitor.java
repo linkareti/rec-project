@@ -190,10 +190,7 @@ public final class LaboratoriesMonitor {
 	if (!labsJMXConnectionHandler.isEmpty()) {
 	    result = new ArrayList<MbeanProxy<IMultiCastControllerMXBean, Laboratory>>(labsJMXConnectionHandler.size());
 	    for (final Entry<String, LabJMXConnetionHandler> entry : labsJMXConnectionHandler.entrySet()) {
-		final MbeanProxy<IMultiCastControllerMXBean, Laboratory> mBeanProxy = getMBeanProxy(entry.getValue());
-		if (mBeanProxy != null) {
-		    result.add(mBeanProxy);
-		}
+		result.add(getMBeanProxy(entry.getValue()));
 	    }
 	}
 
@@ -201,9 +198,10 @@ public final class LaboratoriesMonitor {
     }
 
     private MbeanProxy<IMultiCastControllerMXBean, Laboratory> getMBeanProxy(final LabJMXConnetionHandler labJMXConnetionHandler) {
-        final IMultiCastControllerMXBean proxy = labJMXConnetionHandler.getJmxConnectionHandler().getMbeanProxy(MBeanObjectNameFactory.getMultiCastControllerObjectName(),
+	final IMultiCastControllerMXBean proxy = labJMXConnetionHandler.getJmxConnectionHandler()
+								       .getMbeanProxy(MBeanObjectNameFactory.getMultiCastControllerObjectName(),
 										      IMultiCastControllerMXBean.class);
-	return proxy != null ? new MbeanProxy<IMultiCastControllerMXBean, Laboratory>(labJMXConnetionHandler.getLaboratory(), proxy) : null;
+	return new MbeanProxy<IMultiCastControllerMXBean, Laboratory>(labJMXConnetionHandler.getLaboratory(), proxy);
     }
 
     public IMultiCastControllerMXBean getMbeanInterfaceProxy(final String labID) {
@@ -248,8 +246,8 @@ public final class LaboratoriesMonitor {
 		result = hasJMXUrlChanged || hasJMXUserChanged || hasJMXPassChanged;
 	    }
 
-        } else {
-            result = true;
+	} else {
+	    result = true;
 	}
 
 	return result;
