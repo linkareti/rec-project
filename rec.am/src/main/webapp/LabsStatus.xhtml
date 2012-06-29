@@ -88,7 +88,7 @@
                                                   title="#{statusBundle['tooltip.experiment.users']}" />
                                 </p:column>
                                 <p:column  style="width:120px; text-align: center; height: 50%;" >
-                                    <a href="javascript:var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + '#{deployedExp.state.url}'; if (!deployJava.isWebStartInstalled('1.6')) {if (deployJava.installLatestJRE()) {if (deployJava.launch(url)) {}}} else {if (deployJava.launch(url)) {}}"
+                                    <a href="javascript:var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + '#{deployedExp.experiment.state.url}'; if (!deployJava.isWebStartInstalled('1.6')) {if (deployJava.installLatestJRE()) {if (deployJava.launch(url)) {}}} else {if (deployJava.launch(url)) {}}"
                                        title="#{statusBundle['tooltip.experiment.launch']}" rel="#{statusBundle['tooltip.experiment.launch']}" > 
                                         <img src="resources/images/webstart.png" border="0" />
                                     </a>
