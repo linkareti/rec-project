@@ -50,7 +50,7 @@ public final class JMXConnectionHandler {
 	mainLock = new ReentrantLock();
     }
 
-    public boolean initJMXConnectorIfNotAlreadyRegistered() {
+    public boolean initJMXConnectorIfNotAlreadyRegistered(final MBeanNotificationListenerInfo notif) {
 	boolean result = false;
 	if (isAvailable()) {
 	    if (!isConnected()) {
@@ -63,6 +63,9 @@ public final class JMXConnectionHandler {
 		    LOG.info("jmxconnector created for: {} ", jmxURL);
 
 		    jmxConnector.addConnectionNotificationListener(getConnectionNotificationListener(), null, null);
+
+		    registerNotifListener(notif);
+
 		    result = true;
 		} catch (Exception e) {
 		    numberOfRetries.incrementAndGet();
@@ -76,34 +79,14 @@ public final class JMXConnectionHandler {
 	return result;
     }
 
-    public boolean registerNotifListenerIfNotAlreadyRegistered(final MBeanNotificationListenerInfo notificationListener) {
-	boolean result = false;
+    private void registerNotifListener(final MBeanNotificationListenerInfo notificationListener) throws InstanceNotFoundException, IOException {
 
-	if (listener == null) {
+	listener = notificationListener;
 
-	    mainLock.lock();
-	    try {
-		if (listener == null) {
-		    listener = notificationListener;
+	MBeanConnectionResourcesUtilities.addNotificationListener(jmxConnector, notificationListener.getObjectName(), listener.getListener(),
+								  notificationListener.getFilter(), null);
 
-		    MBeanConnectionResourcesUtilities.addNotificationListener(jmxConnector, notificationListener.getObjectName(), listener.getListener(),
-									      notificationListener.getFilter(), null);
-
-		    LOG.info("notificationListener added for: {}", jmxURL);
-		    result = true;
-		}
-
-	    } catch (IOException e) {
-		LOG.error("jmx connection problems. next iteration will try to create a new jmxconnector", e);
-		closeJMXConnector();
-	    } catch (InstanceNotFoundException e) {
-		LOG.error(e.getMessage(), e);
-		closeJMXConnector();
-	    } finally {
-		mainLock.unlock();
-	    }
-	}
-	return result;
+	LOG.info("notificationListener added for: {}", jmxURL);
     }
 
     private NotificationListener getConnectionNotificationListener() {
@@ -197,6 +180,7 @@ public final class JMXConnectionHandler {
 	    return isConnected() ? MBeanConnectionResourcesUtilities.getMBeanClientProxy(jmxConnector, objectName, mbeanInterface, true) : null;
 	} catch (IOException e) {
 	    LOG.error("Error creating jmx client proxy", e);
+	    closeJMXConnector();
 	    return null;
 	}
     }

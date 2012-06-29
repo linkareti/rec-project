@@ -56,16 +56,14 @@ public final class LaboratoriesMonitor {
 
 	    LOG.info("Starting LaboratoriesMonitor");
 	    labsJMXConnectionHandler = new ConcurrentHashMap<String, LabJMXConnetionHandler>();
+	    labsNotificationListener = new LabsNotificationListener();
 	    laboratoryService = JndiHelper.getLaboratoryService();
 
 	    initJMXConnectionHandlersMap();
-	    connectWithLabs(false);
-
-	    labsNotificationListener = new LabsNotificationListener(getMbeanProxies());
 
 	    executorService = Executors.newSingleThreadScheduledExecutor(getThreadFactory());
 
-	    executorService.scheduleAtFixedRate(getLabsMonitorTask(), TIME_BETWEEN_MONITORING_EVENTS_SECONDS, TIME_BETWEEN_MONITORING_EVENTS_SECONDS,
+	    executorService.scheduleAtFixedRate(getLabsMonitorTask(), 0, TIME_BETWEEN_MONITORING_EVENTS_SECONDS,
 						TimeUnit.SECONDS);
 
 	} catch (Exception e) {
@@ -97,7 +95,7 @@ public final class LaboratoriesMonitor {
 	    @Override
 	    public void run() {
 		try {
-		    connectWithLabs(true);
+		    connectWithLabs();
 		} catch (Throwable e) {
 		    LOG.error(e.getMessage(), e);
 		}
@@ -118,7 +116,7 @@ public final class LaboratoriesMonitor {
 	return new LabJMXConnetionHandler(laboratory, new JMXConnectionHandler(laboratory.getJmxURL(), laboratory.getJmxUser(), laboratory.getJmxPass()));
     }
 
-    private void connectWithLabs(final boolean isToRegisterNotifListener) {
+    private void connectWithLabs() {
 
 	for (final Entry<String, LabJMXConnetionHandler> lab : labsJMXConnectionHandler.entrySet()) {
 
@@ -128,17 +126,17 @@ public final class LaboratoriesMonitor {
 
 	    final JMXConnectionHandler jmxConnectionHandler = lab.getValue().getJmxConnectionHandler();
 
-	    if (jmxConnectionHandler.initJMXConnectorIfNotAlreadyRegistered() && isToRegisterNotifListener) {
-		final MBeanNotificationListenerInfo notificationListener = new MBeanNotificationListenerInfo(
-													     labsNotificationListener.getNotificationListener(),
-													     MBeanObjectNameFactory.getMultiCastControllerObjectName(),
-													     null);
-
+	    if (jmxConnectionHandler.initJMXConnectorIfNotAlreadyRegistered(getNotifListener())) {
 		labsNotificationListener.initLab(getMBeanProxy(lab.getValue()));
-		jmxConnectionHandler.registerNotifListenerIfNotAlreadyRegistered(notificationListener);
-
 	    }
 	}
+    }
+
+    private MBeanNotificationListenerInfo getNotifListener(){
+	return new MBeanNotificationListenerInfo(
+					     labsNotificationListener.getNotificationListener(),
+					     MBeanObjectNameFactory.getMultiCastControllerObjectName(),
+						 null);
     }
 
     private Collection<Laboratory> getLaboratoriesToMonitor() {
@@ -198,6 +196,7 @@ public final class LaboratoriesMonitor {
     }
 
     private MbeanProxy<IMultiCastControllerMXBean, Laboratory> getMBeanProxy(final LabJMXConnetionHandler labJMXConnetionHandler) {
+
 	final IMultiCastControllerMXBean proxy = labJMXConnetionHandler.getJmxConnectionHandler()
 								       .getMbeanProxy(MBeanObjectNameFactory.getMultiCastControllerObjectName(),
 										      IMultiCastControllerMXBean.class);
@@ -233,7 +232,7 @@ public final class LaboratoriesMonitor {
 
 	if (labJMXConnetionHandler != null) {
 
-	    //validate version we can received a request to change out of order
+	    //validate version we can received an out of order request to change
 	    if (lab.getVersion() > labJMXConnetionHandler.getLaboratory().getVersion()) {
 		final String jmxUrl = labJMXConnetionHandler.getJmxConnectionHandler().getJmxURL();
 		final String jmxUser = labJMXConnetionHandler.getJmxConnectionHandler().getJmxUser();

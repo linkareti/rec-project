@@ -1,25 +1,22 @@
 package com.linkare.rec.am.web;
 
-import com.linkare.rec.am.model.DeployedExperiment;
-import com.linkare.rec.am.model.Experiment;
-import com.linkare.rec.am.model.HardwareState;
-import com.linkare.rec.am.service.ExperimentServiceLocal;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import com.linkare.rec.am.model.DeployedExperiment;
+import com.linkare.rec.am.model.Experiment;
+import com.linkare.rec.am.service.ExperimentServiceLocal;
 import com.linkare.rec.am.util.LaboratoriesMonitor;
 import com.linkare.rec.am.util.MultiThreadDeployedExperimentWrapper;
 import com.linkare.rec.am.util.MultiThreadLaboratoryWrapper;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
-import javax.ejb.EJB;
 
 /**
  * Defines of the operations to retrieve the existing laboratories and it's status, and also which experiments are in each laboratory, their status, number of
@@ -43,77 +40,82 @@ public class StatusBean implements Serializable {
     private Map<String, List<Experiment>> activeExperiment = new HashMap<String, List<Experiment>>();
 
     public List<MultiThreadLaboratoryWrapper> getLabs() {
-        if (labs == null) {
-            labs = LaboratoriesMonitor.getInstance().getActiveLabs();
-        }
-        return labs;
+	if (labs == null) {
+	    labs = LaboratoriesMonitor.getInstance().getActiveLabs();
+	}
+	return labs;
     }
 
     public MultiThreadLaboratoryWrapper getSelectedLab() {
-        return selectedLab;
+	return selectedLab;
     }
 
     public void setSelectedLab(MultiThreadLaboratoryWrapper selectedLab) {
-        this.selectedLab = selectedLab;
-        this.selectedLabExperiments = null;
+	this.selectedLab = selectedLab;
+	this.selectedLabExperiments = null;
     }
 
     public List<DeployedExperiment> getLabExperiments() {
-        refreshExperiments();
-        return selectedLabExperiments;
+	refreshExperiments();
+	return selectedLabExperiments;
     }
 
     public void updateLabStatus() {
-        labs = LaboratoriesMonitor.getInstance().getActiveLabs();
+	labs = LaboratoriesMonitor.getInstance().getActiveLabs();
     }
 
     public void refreshExperiments() {
 
-        if (selectedLab != null && selectedLab.isAvailable()) {
-            initActiveExperimentMap();
-            selectedLabExperiments = getDeployedExperiment(activeExperiment.get(selectedLab.getName()));
+	if (selectedLab != null && selectedLab.isAvailable()) {
+	    initActiveExperimentMap();
+	    selectedLabExperiments = getDeployedExperiment(activeExperiment.get(selectedLab.getName()));
 
-            final MultiThreadLaboratoryWrapper laboratory = laboratoriesMonitor.getLaboratory(selectedLab.getName());
+	    final MultiThreadLaboratoryWrapper laboratory = laboratoriesMonitor.getLaboratory(selectedLab.getName());
 
-            if (laboratory != null) {
+	    if (laboratory != null) {
 
-                final Map<String, MultiThreadDeployedExperimentWrapper> liveExperiments = laboratory.getLiveExperiments();
-                if (liveExperiments.size() > 0) {
-                    for (DeployedExperiment experiment : selectedLabExperiments) {
-                        String experimentName = experiment.getExperiment().getExternalId();
-                        MultiThreadDeployedExperimentWrapper mt = liveExperiments.get(experimentName);
-                        if (mt != null) {
-                            experiment.setState(mt.getState());
-                            experiment.setUsersConnected(mt.getUsersConnected());
-                        }
-                    }
-                }
+		final Map<String, MultiThreadDeployedExperimentWrapper> liveExperiments = laboratory.getLiveExperiments();
+		if (liveExperiments.size() > 0) {
+		    for (DeployedExperiment experiment : selectedLabExperiments) {
+			String experimentName = experiment.getExperiment().getExternalId();
+			MultiThreadDeployedExperimentWrapper mt = liveExperiments.get(experimentName);
+			if (mt != null) {
+			    experiment.setState(mt.getState());
+			    experiment.setUsersConnected(mt.getUsersConnected());
+			}
+		    }
+		}
 
-            }
+	    }
 
-        } else {
-            selectedLabExperiments = Collections.emptyList();
-        }
+	} else {
+	    selectedLabExperiments = Collections.emptyList();
+	}
     }
 
-    private List<DeployedExperiment> getDeployedExperiment(List<Experiment> experiment) {
-        List<DeployedExperiment> result = new ArrayList(experiment.size());
-        for (Experiment exp : experiment) {
-            DeployedExperiment deployed = new DeployedExperiment();
-            deployed.setExperiment(exp);
-            result.add(deployed);
-        }
-        return result;
+    private List<DeployedExperiment> getDeployedExperiment(final List<Experiment> experiment) {
+	List<DeployedExperiment> result = Collections.emptyList();
+
+	if (!experiment.isEmpty()) {
+	    result = new ArrayList<DeployedExperiment>(experiment.size());
+	    for (final Experiment exp : experiment) {
+		DeployedExperiment deployed = new DeployedExperiment();
+		deployed.setExperiment(exp);
+		result.add(deployed);
+	    }
+	}
+
+	return result;
     }
 
     public void initActiveExperimentMap() {
-        
-        if(selectedLab != null){
-            final List<Experiment> labExperiments = activeExperiment.get(selectedLab.getName());
-            if(labExperiments == null){
-                activeExperiment.put(selectedLab.getName(), experimentService.findExperimentsActiveByLaboratory(selectedLab.getName()));
-            }
-        }
+
+	if (selectedLab != null) {
+	    final List<Experiment> labExperiments = activeExperiment.get(selectedLab.getName());
+	    if (labExperiments == null) {
+		activeExperiment.put(selectedLab.getName(), experimentService.findExperimentsActiveByLaboratory(selectedLab.getName()));
+	    }
+	}
 
     }
 }

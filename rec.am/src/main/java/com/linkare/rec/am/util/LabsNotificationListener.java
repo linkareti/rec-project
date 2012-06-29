@@ -1,7 +1,6 @@
 package com.linkare.rec.am.util;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -31,17 +30,9 @@ public class LabsNotificationListener {
 
     private volatile boolean destroy;
 
-    public LabsNotificationListener(final Collection<MbeanProxy<IMultiCastControllerMXBean, Laboratory>> labProxies) throws NamingException {
+    public LabsNotificationListener() throws NamingException {
 	this.labs = new ConcurrentHashMap<String, MultiThreadLaboratoryWrapper>();
-	initLabs(labProxies);
 	this.destroy = false;
-    }
-
-    private void initLabs(Collection<MbeanProxy<IMultiCastControllerMXBean, Laboratory>> labProxies) {
-
-	for (final MbeanProxy<IMultiCastControllerMXBean, Laboratory> mbeanProxy : labProxies) {
-	    initLab(mbeanProxy);
-	}
     }
 
     public void initLab(final MbeanProxy<IMultiCastControllerMXBean, Laboratory> labProxy) {
