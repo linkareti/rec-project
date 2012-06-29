@@ -553,26 +553,26 @@ a img {
 }
 /*--------- LabStatus Definitions ---*/
 #labsStatusPanel{
-    height: 400px; 
+    height: 350px; 
     position: relative;
+    width:80%; margin-left: 10%; display: table;
 }
 
 .labsPanel{
     float: left;  
-    width: 400px; 
+    width: 350px; 
     margin-left: 10%
 }
 
 .experimentsPanel{
     float: left; 
-    width: 400px; 
+    width: 350px; 
     height: 400px;
 }
 .scrollPanel{
     height: 300px; 
-    width:550px; 
     background: #bdd2d0; 
-    border-style:none;
+    border-color: #bdd2d0;
 }
 #statusPanelFooter{
     height: 20px; 
