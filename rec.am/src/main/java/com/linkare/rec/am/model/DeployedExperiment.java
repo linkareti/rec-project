@@ -54,7 +54,7 @@ public class DeployedExperiment {
     }
     
     public boolean isLabRunning() {
-	return state == HardwareState.STARTED;
+	return (state != null);
     }
     
     @Override

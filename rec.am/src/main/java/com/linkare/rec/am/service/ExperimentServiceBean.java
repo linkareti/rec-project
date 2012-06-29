@@ -11,7 +11,6 @@ import javax.ejb.Stateless;
 import javax.persistence.Query;
 
 import com.linkare.rec.am.model.Experiment;
-import com.linkare.rec.am.model.Laboratory;
 
 /**
  * 
@@ -70,8 +69,8 @@ public class ExperimentServiceBean extends BusinessServiceBean<Experiment, Long>
     }
 
     @SuppressWarnings("unchecked")
-    public List<Experiment> findExperimentsByLaboratory(Laboratory lab) {
-	return getEntityManager().createNamedQuery(Experiment.FIND_BY_LAB).setParameter(Experiment.LABORATORY, lab.getName()).getResultList();
+    public List<Experiment> findExperimentsActiveByLaboratory(String labName) {
+	return getEntityManager().createNamedQuery(Experiment.FIND_BY_ACTIVE_LAB).setParameter(Experiment.LABORATORY, labName).getResultList();
     }
 
     @Override

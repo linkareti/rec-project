@@ -5,7 +5,8 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ul>
-		<h:panelGroup rendered="#{!userView.external and userView.admin}">
+		<!--h:panelGroup rendered="#{!userView.external and userView.admin}"-->
+            <h:panelGroup>
 			<li><h:commandLink action="/protected/backoffice"
 				value="#{bundle['menu.backoffice']}" /></li>
 		</h:panelGroup>

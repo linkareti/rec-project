@@ -42,7 +42,6 @@
                 </p:column>
 
                 <p:column style="width:150px" resizable="false">
-                    <f:facet name="header"></f:facet>
                     <p:commandButton id="selectButton" update=":list-form:display" oncomplete="msgDialog.show()" icon="ui-icon-search" title="#{bundle['operation.view']}">  
                         <f:setPropertyActionListener value="#{item}" target="#{errorMessageController.current}" />    
                     </p:commandButton>

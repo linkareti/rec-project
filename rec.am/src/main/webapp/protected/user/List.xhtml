@@ -27,24 +27,18 @@
 
                 <p:column resizable="false">
                     <f:facet name="header"></f:facet>
-                    <h:commandLink action="#{userController.prepareView}"
-                                   value="#{bundle['operation.view']}">
+                    <p:commandLink action="#{userController.prepareView}"
+                                   value="#{bundle['operation.view']}" ajax="false">
                         <f:param name="userId" value="#{item.idInternal}" />
-                    </h:commandLink>
+                    </p:commandLink>
                     <h:outputText value=" | " />
-                    <h:commandLink action="#{userController.prepareEdit}"
-                                   value="#{bundle['operation.edit']}">
+                    <p:commandLink action="#{userController.prepareEdit}"
+                                   value="#{bundle['operation.edit']}" ajax="false">
                         <f:param name="userId" value="#{item.idInternal}" />
-                    </h:commandLink>
+                    </p:commandLink>
                     <h:outputText value=" | " />
-                    <p:commandLink onclick="confirmation.show()" value="#{bundle['operation.remove']}" action="#{userController.destroy}"/>
-                    <p:confirmDialog id="confirmDialog" message="#{bundle['label.confirmMessage']}"  
-                                     header="#{bundle['label.confirmHeader']}" severity="alert" widgetVar="confirmation">  
-
-                        <p:commandButton id="confirm" value="#{bundle['label.yes']}" update=":list-form:items :list-form:messages"
-                                         oncomplete="confirmation.hide()" ajax="false"/>  
-                        <p:commandButton id="decline" value="#{bundle['label.no']}" onclick="confirmation.hide()" type="button" />   
-                    </p:confirmDialog> 
+                    <p:commandLink action="#{userController.destroy}" 
+                                   value="#{bundle['operation.remove']}" ajax="false"/>
                 </p:column>
             </p:dataTable>
             <p:commandButton id="cmdButtonCreate" action="#{userController.prepareCreate}" value="#{bundle['operation.create']}" ajax="false"/>

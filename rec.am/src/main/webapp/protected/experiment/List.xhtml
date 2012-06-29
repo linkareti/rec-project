@@ -12,7 +12,7 @@
             <p:dataTable id="items" var="item" style="width:100%"
                          value="#{experimentController.items}"
                          emptyMessage="#{bundle['info.emptyList']}"
-                         selection="#{experimentController.current}" paginator="true"
+                         paginator="true"
                          rows="10" selectionMode="single" 
                          paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" 
                          scrollable="false"
@@ -35,20 +35,14 @@
 
                 <p:column style="width:150px" resizable="false">
                     <f:facet name="header"></f:facet>
-                    <h:commandLink action="#{experimentController.prepareView}"
-                                   value="#{bundle['operation.view']}" />
+                    <p:commandLink action="#{experimentController.prepareView}"
+                                   value="#{bundle['operation.view']}" ajax="false"/>
                     <h:outputText value=" | " />
-                    <h:commandLink action="#{experimentController.prepareEdit}"
-                                   value="#{bundle['operation.edit']}" />
+                    <p:commandLink action="#{experimentController.prepareEdit}"
+                                   value="#{bundle['operation.edit']}" ajax="false"/>
                     <h:outputText value=" | " />
-                    <p:commandLink onclick="confirmation.show()" value="#{bundle['operation.remove']}" action="#{experimentController.destroy}"/>
-                    <p:confirmDialog id="confirmDialog" message="#{bundle['label.confirmMessage']}"  
-                                     header="#{bundle['label.confirmHeader']}" severity="alert" widgetVar="confirmation">  
-
-                        <p:commandButton id="confirm" value="#{bundle['label.yes']}" update=":list-form:items" 
-                                         oncomplete="confirmation.hide()" ajax="false"/>  
-                        <p:commandButton id="decline" value="#{bundle['label.no']}" onclick="confirmation.hide()" type="button" />   
-                    </p:confirmDialog> 
+                    <p:commandLink action="#{experimentController.destroy}"
+                                   value="#{bundle['operation.remove']}" ajax="false"/>
                 </p:column>
             </p:dataTable>
             <p:commandButton id="cmdButtonCreate" action="#{experimentController.prepareCreate}" value="#{bundle['operation.create']}" ajax="false"/>

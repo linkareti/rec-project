@@ -13,7 +13,7 @@
             <p:dataTable id="items" var="item" style="width:100%"
                          value="#{laboratoryController.items}"
                          emptyMessage="#{bundle['info.emptyList']}"
-                         selection="#{laboratoryController.current}" paginator="true"
+                          paginator="true"
                          rows="10" selectionMode="single"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
                          scrollable="false" rowKey="#{item.name}">
@@ -36,21 +36,14 @@
 
                 <p:column styleClass="links_col" style="width:150px" resizable="false">
                     <f:facet name="header"></f:facet>
-                    <h:commandLink action="#{laboratoryController.prepareView}"
-                                   value="#{bundle['operation.view']}" />
-                    <h:outputText value=" " />
-                    <h:commandLink action="#{laboratoryController.prepareEdit}"
-                                   value="#{bundle['operation.edit']}" />
-                    <h:outputText value=" " />
-                    <p:commandLink onclick="confirmation.show()" value="#{bundle['operation.remove']}" actionListener="#{laboratoryController.destroy}" />
-                    <p:confirmDialog id="confirmDialog" message="#{bundle['label.confirmMessage']}"  
-                                     header="#{bundle['label.confirmHeader']}" severity="alert" widgetVar="confirmation">  
-
-                        <p:commandButton id="confirm" value="#{bundle['label.yes']}" update=":list-form:items :list-form:messages" 
-                                         oncomplete="confirmation.hide()" ajax="false" />  
-                        <p:commandButton id="decline" value="#{bundle['label.no']}" onclick="confirmation.hide()" type="button" />   
-
-                    </p:confirmDialog> 
+                    <p:commandLink action="#{laboratoryController.prepareView}"
+                                   value="#{bundle['operation.view']}" ajax="false"/>
+                    <h:outputText value=" | " />
+                    <p:commandLink action="#{laboratoryController.prepareEdit}"
+                                   value="#{bundle['operation.edit']}" ajax="false"/>
+                    <h:outputText value=" | " />
+                    <p:commandLink value="#{bundle['operation.remove']}" 
+                                   action="#{laboratoryController.destroy}" ajax="false"/>
                 </p:column>
 
             </p:dataTable>

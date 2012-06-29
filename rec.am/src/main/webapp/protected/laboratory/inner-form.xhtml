@@ -29,6 +29,37 @@
                          style="width: 350px"/>
             <h:outputText id="descriptionOut" value="#{laboratoryController.selected.description}" rendered="#{operation == 'view'}"/>
             <p:message for="description" />
+            <h:outputLabel value="#{bundle['laboratory.jmx.url']}"
+                           for="jmxUrl" />
+            <p:inputText id="jmxUrl"
+                         value="#{laboratoryController.selected.jmxURL}"
+                         title="#{bundle['laboratory.jmx.url']}"
+                         rendered="#{operation != 'view'}" 
+                         style="width: 350px"
+                         required="true"/>
+            <h:outputText id="jmxUrlOut" value="#{laboratoryController.selected.jmxURL}" rendered="#{operation == 'view'}"/>
+            <p:message for="jmxUrl" />
+
+            <h:outputLabel value="#{bundle['laboratory.jmx.user']}"
+                           for="jmxUser" />
+            <p:inputText id="jmxUser"
+                         value="#{laboratoryController.selected.jmxUser}"
+                         title="#{bundle['laboratory.jmx.user']}"
+                         rendered="#{operation != 'view'}" 
+                         style="width: 350px"
+                         required="true"/>
+            <h:outputText id="jmxUserOut" value="#{laboratoryController.selected.jmxUser}" rendered="#{operation == 'view'}"/>
+            <p:message for="jmxUser" />
+
+            <h:outputLabel value="#{bundle['laboratory.jmx.pass']}"
+                           for="jmxPass" rendered="#{operation != 'view'}" />
+            <p:password id="jmxPass"
+                        value="#{laboratoryController.selected.jmxPass}"
+                        title="#{bundle['laboratory.jmx.pass']}" required="true"
+                        label="#{bundle['laboratory.jmx.pass']}" inline="true"
+                        rendered="#{operation != 'view'}" />
+            <p:message for="jmxPass" rendered="#{operation != 'view'}" />
+
             <h:outputLabel value="#{bundle['laboratory.state.label']}"
                            for="stateLabel" />
             <p:inputText id="stateLabel"

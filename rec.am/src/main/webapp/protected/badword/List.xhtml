@@ -15,7 +15,6 @@
                          paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" 
                          emptyMessage="#{bundle['info.emptyList']}"
                          selectionMode="single"
-                         selection="#{badWordController.current}"
                          rowKey="#{item.badWordId}">
 
                 <p:column headerText="#{bundle['badword.regex']}" style="width:125px">
@@ -26,20 +25,14 @@
                 </p:column>
 
                 <p:column headerText="#{bundle['operation.action']}" style="width:100px">
-                    <h:commandLink action="#{badWordController.prepareView}"
-                                   value="#{bundle['operation.view']}" />
+                    <p:commandLink action="#{badWordController.prepareView}"
+                                   value="#{bundle['operation.view']}" ajax="false"/>
                     <h:outputText value=" | " />
-                    <h:commandLink action="#{badWordController.prepareEdit}"
-                                   value="#{bundle['operation.edit']}" />
+                    <p:commandLink action="#{badWordController.prepareEdit}"
+                                   value="#{bundle['operation.edit']}" ajax="false"/>
                     <h:outputText value=" | " />
-                    <p:commandLink onclick="confirmation.show()" value="#{bundle['operation.remove']}" action="#{badWordController.destroy}" />
-                    <p:confirmDialog id="confirmDialog" message="#{bundle['label.confirmMessage']}"  
-                                     header="#{bundle['label.confirmHeader']}" severity="alert" widgetVar="confirmation">  
-
-                        <p:commandButton id="confirm" value="#{bundle['label.yes']}" update=":list-form:items :list-form:messages" 
-                                         oncomplete="confirmation.hide()"  ajax="false"/>
-                        <p:commandButton id="decline" value="#{bundle['label.no']}" onclick="confirmation.hide()" type="button" />   
-                    </p:confirmDialog>
+                    <p:commandLink action="#{badWordController.destroy}" 
+                                   value="#{bundle['operation.remove']}" ajax="false"/>
                 </p:column>
             </p:dataTable>
             <p:commandButton id="cmdButtonCreate" action="#{badWordController.prepareCreate}" value="#{bundle['operation.create']}" ajax="false"/>
