@@ -1,0 +1,60 @@
+<apparatus location="MOVIMENTO_DE_PROJECTEIS_V1.0"
+	customizerClassLocationBundleKey="movproj$rec.exp.customizer.movproj"
+	toolTipBundleKey="movproj$rec.exp.tip.movproj" iconLocationBundleKey="movproj$rec.exp.icon.movproj"
+	displayStringBundleKey="movproj$rec.exp.title.movproj"
+	desktopLocationBundleKey="movproj$rec.exp.background.movproj" order="1"
+	headerDisplayClassLocationBundleKey=""
+	displayFactoryClassLocationBundleKey=""
+	dataModelClassLocationBundleKey="" visible="true" selected="true"
+	enabled="false" connected="false">
+	<localizationBundle name="movproj"
+		location="recresource:///pt/utl/ist/elab/client/vmovproj/resources/messages" />
+	<display classLocationBundleKey="movproj$rec.exp.display.movproj.loc.anim"
+		toolTipBundleKey="movproj$rec.exp.display.movproj.tip.anim"
+		iconLocationBundleKey="ReCUI$rec.ui.icon.sensor"
+		displayStringBundleKey="movproj$rec.exp.display.movproj.title.anim"
+		offlineCapable="false" order="1" visible="true" selected="true"
+		enabled="false" connected="false" />
+	<display classLocationBundleKey="movproj$rec.exp.display.movproj.loc.1"
+		toolTipBundleKey="movproj$rec.exp.display.movproj.tip.1"
+		iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="movproj$rec.exp.display.movproj.title.1"
+		offlineCapable="false" order="2" visible="true" selected="true"
+		enabled="false" connected="false" />
+	<display classLocationBundleKey="movproj$rec.exp.display.movproj.loc.2"
+		toolTipBundleKey="movproj$rec.exp.display.movproj.tip.2"
+		iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="movproj$rec.exp.display.movproj.title.2"
+		offlineCapable="false" order="3" visible="true" selected="true"
+		enabled="false" connected="false" />
+	<display classLocationBundleKey="movproj$rec.exp.display.movproj.loc.3"
+		toolTipBundleKey="movproj$rec.exp.display.movproj.tip.3"
+		iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="movproj$rec.exp.display.movproj.title.3"
+		offlineCapable="false" order="4" visible="true" selected="true"
+		enabled="false" connected="false" />
+	<display classLocationBundleKey="movproj$rec.exp.display.movproj.loc.4"
+		toolTipBundleKey="movproj$rec.exp.display.movproj.tip.4"
+		iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="movproj$rec.exp.display.movproj.title.4"
+		offlineCapable="false" order="5" visible="true" selected="true"
+		enabled="false" connected="false" />
+	<display classLocationBundleKey="movproj$rec.exp.display.movproj.loc.5"
+		toolTipBundleKey="movproj$rec.exp.display.movproj.tip.5"
+		iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="movproj$rec.exp.display.movproj.title.5"
+		offlineCapable="false" order="6" visible="true" selected="true"
+		enabled="false" connected="false" />
+	<display classLocationBundleKey="movproj$rec.exp.display.movproj.loc.6"
+		toolTipBundleKey="movproj$rec.exp.display.movproj.tip.6"
+		iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="movproj$rec.exp.display.movproj.title.6"
+		offlineCapable="false" order="7" visible="true" selected="true"
+		enabled="false" connected="false" />
+	<display classLocationBundleKey="movproj$rec.exp.display.movproj.loc.7"
+		toolTipBundleKey="movproj$rec.exp.display.movproj.tip.7"
+		iconLocationBundleKey="ReCUI$rec.ui.icon.table"
+		displayStringBundleKey="movproj$rec.exp.display.movproj.title.7"
+		offlineCapable="false" order="8" visible="true" selected="true"
+		enabled="false" connected="false" />
+</apparatus>
