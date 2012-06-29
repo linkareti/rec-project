@@ -321,6 +321,10 @@ public class MultiThreadLaboratoryWrapper {
 	return Collections.unmodifiableCollection(usersSet);
     }
 
+    public int getNumberOfConnectecUsers() {
+	return usersSet.size();
+    }
+
     public String getDescription() {
 	return underlyingLaboratory.getDescription();
     }
