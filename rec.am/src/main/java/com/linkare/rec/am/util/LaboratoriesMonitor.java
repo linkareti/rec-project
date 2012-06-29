@@ -60,10 +60,11 @@ public final class LaboratoriesMonitor {
 	    laboratoryService = JndiHelper.getLaboratoryService();
 
 	    initJMXConnectionHandlersMap();
+	    connectWithLabs(true);
 
 	    executorService = Executors.newSingleThreadScheduledExecutor(getThreadFactory());
 
-	    executorService.scheduleAtFixedRate(getLabsMonitorTask(), 0, TIME_BETWEEN_MONITORING_EVENTS_SECONDS,
+	    executorService.scheduleAtFixedRate(getLabsMonitorTask(), TIME_BETWEEN_MONITORING_EVENTS_SECONDS, TIME_BETWEEN_MONITORING_EVENTS_SECONDS,
 						TimeUnit.SECONDS);
 
 	} catch (Exception e) {
@@ -95,7 +96,7 @@ public final class LaboratoriesMonitor {
 	    @Override
 	    public void run() {
 		try {
-		    connectWithLabs();
+		    connectWithLabs(false);
 		} catch (Throwable e) {
 		    LOG.error(e.getMessage(), e);
 		}
@@ -116,7 +117,7 @@ public final class LaboratoriesMonitor {
 	return new LabJMXConnetionHandler(laboratory, new JMXConnectionHandler(laboratory.getJmxURL(), laboratory.getJmxUser(), laboratory.getJmxPass()));
     }
 
-    private void connectWithLabs() {
+    private void connectWithLabs(boolean isToForceInitialization) {
 
 	for (final Entry<String, LabJMXConnetionHandler> lab : labsJMXConnectionHandler.entrySet()) {
 
@@ -126,7 +127,7 @@ public final class LaboratoriesMonitor {
 
 	    final JMXConnectionHandler jmxConnectionHandler = lab.getValue().getJmxConnectionHandler();
 
-	    if (jmxConnectionHandler.initJMXConnectorIfNotAlreadyRegistered(getNotifListener())) {
+	    if (jmxConnectionHandler.initJMXConnectorIfNotAlreadyRegistered(getNotifListener()) || isToForceInitialization) {
 		labsNotificationListener.initLab(getMBeanProxy(lab.getValue()));
 	    }
 	}
