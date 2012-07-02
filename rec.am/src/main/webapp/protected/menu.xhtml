@@ -9,8 +9,7 @@
             <li><h:commandLink action="/protected/courses/List"
                                value="#{bundle['menu.externalCourse.list']}" /></li>
         </h:panelGroup>
-        <!--h:panelGroup rendered="#{userView.admin}"-->
-        <h:panelGroup>
+        <h:panelGroup rendered="#{userView.admin}">
             <li><h:commandLink action="/protected/laboratory/List"
                                value="#{bundle['menu.laboratory.list']}" /></li>
             <li><h:commandLink action="/protected/experiment/List"

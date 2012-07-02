@@ -9,7 +9,7 @@
 
     <p:wizard widgetVar="wiz" flowListener="#{userWizard.onFlowProcess}" showNavBar="true">
 
-        <p:tab id="step1">
+        <p:tab id="step1" title="Login">
 
             <p:panel header="#{bundle['page.user.wizard.step1.title']}">
 
@@ -48,7 +48,7 @@
             </p:panel>
         </p:tab>
 
-        <p:tab id="step2">
+        <p:tab id="step2" title="#{bundle['page.user.wizard.step2.title']}">
             <p:panel header="#{bundle['page.user.wizard.step2.title']}">
 
                 <h:panelGrid columns="3">
@@ -75,7 +75,7 @@
             </p:panel>
         </p:tab>
 
-        <p:tab id="step3">
+        <p:tab id="step3" title="#{bundle['page.user.wizard.step3.title']}">
             <p:panel header="#{bundle['page.user.wizard.step3.title']}">
 
                 <h:panelGrid columns="3">
@@ -93,10 +93,10 @@
             </p:panel>
         </p:tab>
 
-        <p:tab id="finalStep" rendered="#{operation != 'view'}">
+        <p:tab id="finalStep" rendered="#{operation != 'view'}" title="#{bundle['page.user.wizard.confirmation.title']}">
             <p:panel header="#{bundle['page.user.wizard.confirmation.title']}">
 
-                <h:panelGrid id="confirmation" columns="4">
+                <h:panelGrid id="confirmation" columns="2">
                     <h:outputText value="#{bundle['user.username']}" />
                     <h:outputText value="#{userWizard.user.username}" />
 

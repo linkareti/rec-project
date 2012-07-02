@@ -574,8 +574,7 @@ a img {
     background: #bdd2d0; 
     border-color: #bdd2d0;
 }
-#statusPanelFooter{
-    height: 20px; 
+.statusPanelFooter{
     text-align: center
 }
 .table-header{
