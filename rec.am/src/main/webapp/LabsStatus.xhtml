@@ -1,107 +1,119 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui" template="/three-row-template.xhtml">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/three-row-template.xhtml">
 
-    <ui:define name="content">
+	<ui:define name="content">
 
-        <div style="width:80%; margin-left: 10%; display: table;">
-            <h:form id="form">
-
-                <p:poll update="refreshableLabs" interval="10"
-                        listener="#{statusBean.updateLabStatus}" />
-                <div style="float: left; width: 35%;">
-                    <h:panelGroup id="refreshableLabs">
-                        <h1><h:outputText value="#{bundle['rec.elab.title']}" /></h1>
-                        <h1><h:outputText value="#{bundle['rec.elab.available']}" rendered="#{empty statusBean.labs}"/></h1>
-                        <p:dataTable var="lab" value="#{statusBean.labs}" id="tableLabs" rendered="#{!empty statusBean.labs}">
-                            <p:column style="width: 370px" >
-                                <f:facet name="header">  
+		<div style="width: 80%; margin-left: 10%; display: table;">
+			<h:form id="form">
+				<p:poll update="refreshableLabs" interval="10"
+					listener="#{statusBean.updateLabStatus}" />
+				<div style="float: left; width: 35%;">
+					<h:panelGroup id="refreshableLabs">
+						<h1>
+							<h:outputText value="#{bundle['rec.elab.title']}" />
+						</h1>
+						<h1>
+							<h:outputText value="#{bundle['rec.elab.available']}"
+								rendered="#{empty statusBean.labs}" />
+						</h1>
+						<p:dataTable var="lab" value="#{statusBean.labs}" id="tableLabs"
+							rendered="#{!empty statusBean.labs}">
+							<p:column style="width: 370px">
+								<f:facet name="header">  
                                     #{bundle['experiment.laboratory']}
-                                </f:facet> 
-                                <h:outputText value="#{lab.stateLabel}" title="#{lab.description}"/>
-                            </p:column>
-                            <p:column style="width: 15px;text-align: center;">
-                                <f:facet name="header">  
+                                </f:facet>
+								<h:outputText value="#{lab.stateLabel}"
+									title="#{lab.description}" />
+							</p:column>
+							<p:column style="width: 15px;text-align: center;">
+								<f:facet name="header">  
                                     #{bundle['label.state']}
-                                </f:facet> 
-                                <h:graphicImage library="images" name="available.gif"
-                                                rendered="#{lab.available}"
-                                                title="#{statusBundle['tooltip.lab.available']}" />
-                                <h:graphicImage library="images" name="unavailable.gif"
-                                                rendered="#{!lab.available}"
-                                                title="#{statusBundle['tooltip.lab.unavailable']}" />
-                            </p:column>
-                            <p:column style="width: 15px">
-                                <h:commandLink title="#{statusBundle['tooltip.lab.expand']}" rendered="#{lab.available}">
-                                    <h:graphicImage library="images"
-                                                    name="rt-arrow-circle-gree.png"
-                                                    rendered="#{statusBean.selectedLab != lab}"
-                                                    onmouseover="this.style.cursor='pointer';"
-                                                    onmouseout="this.style.cursor='default';"/>
-                                    <h:graphicImage library="images"
-                                                    rendered="#{statusBean.selectedLab == lab}"
-                                                    name="down-arrow-circle-green.png"
-                                                    onmouseover="this.style.cursor='pointer';"
-                                                    onmouseout="this.style.cursor='default';" />
-                                    <f:setPropertyActionListener target="#{statusBean.selectedLab}"
-                                                                 value="#{lab}" />
-                                </h:commandLink>
-                            </p:column>
-                        </p:dataTable>
-                    </h:panelGroup>
-                </div>
-                <div style="margin-left: 35%;">
-                    <h:panelGroup rendered="#{!empty statusBean.selectedLab}">
-                        <p:poll update="tableExperiments" interval="5"
-                                listener="#{statusBean.refreshExperiments}" />
-                        <script src="http://www.java.com/js/deployJava.js" />
-                        <h1 style="text-align: center;"><h:outputText value="#{bundle['label.experiment.of']} #{statusBean.selectedLab.description}" /></h1>
-                        <p:scrollPanel mode="native" styleClass="scrollPanel">
-                            <p:dataTable id="tableExperiments" var="deployedExp"
-                                         value="#{statusBean.labExperiments}">
-                                <p:column style="width:350px; height: 50%;">
-                                    <f:facet name="header">  
+                                </f:facet>
+								<h:graphicImage library="images" name="available.gif"
+									rendered="#{lab.available}"
+									title="#{statusBundle['tooltip.lab.available']}" />
+								<h:graphicImage library="images" name="unavailable.gif"
+									rendered="#{!lab.available}"
+									title="#{statusBundle['tooltip.lab.unavailable']}" />
+							</p:column>
+							<p:column style="width: 15px">
+								<h:commandLink title="#{statusBundle['tooltip.lab.expand']}"
+									rendered="#{lab.available}">
+									<h:graphicImage library="images"
+										name="rt-arrow-circle-gree.png"
+										rendered="#{statusBean.selectedLab != lab}"
+										onmouseover="this.style.cursor='pointer';"
+										onmouseout="this.style.cursor='default';" />
+									<h:graphicImage library="images"
+										rendered="#{statusBean.selectedLab == lab}"
+										name="down-arrow-circle-green.png"
+										onmouseover="this.style.cursor='pointer';"
+										onmouseout="this.style.cursor='default';" />
+									<f:setPropertyActionListener target="#{statusBean.selectedLab}"
+										value="#{lab}" />
+								</h:commandLink>
+							</p:column>
+						</p:dataTable>
+					</h:panelGroup>
+				</div>
+				<div style="margin-left: 35%;">
+					<h:panelGroup rendered="#{!empty statusBean.selectedLab}">
+						<p:poll update="tableExperiments" interval="5"
+							listener="#{statusBean.refreshExperiments}" />
+						<script src="http://www.java.com/js/deployJava.js" />
+						<h1 style="text-align: center;">
+							<h:outputText
+								value="#{bundle['label.experiment.of']} #{statusBean.selectedLab.description}" />
+						</h1>
+						<p:scrollPanel mode="native" styleClass="scrollPanel">
+							<p:dataTable id="tableExperiments" var="deployedExp"
+								value="#{statusBean.labExperiments}">
+								<p:column style="width:350px; height: 50%;">
+									<f:facet name="header">  
                                         #{bundle['label.experiment.name']}
-                                    </f:facet> 
-                                    <h:outputText value="#{deployedExp.experiment.name}" />
-                                </p:column>
-                                <p:column style="width:50px; text-align: center; height: 50%;">
-                                    <f:facet name="header">  
+                                    </f:facet>
+									<h:outputText value="#{deployedExp.experiment.name}" />
+								</p:column>
+								<p:column style="width:50px; text-align: center; height: 50%;">
+									<f:facet name="header">  
                                          #{bundle['label.state']}
-                                    </f:facet> 
-                                    <h:graphicImage library="images" name="available.gif"
-                                                    rendered="#{deployedExp.labRunning}"
-                                                    title="#{statusBundle['tooltip.experiment.available']}" />
-                                    <h:graphicImage library="images" name="unavailable.gif"
-                                                    rendered="#{!deployedExp.labRunning}"
-                                                    title="#{statusBundle['tooltip.experiment.unavailable']}" />
-                                </p:column>
-                                <p:column style="width:80px; text-align: center; height: 50%;">
-                                    <f:facet name="header">  
+                                    </f:facet>
+									<h:graphicImage library="images" name="available.gif"
+										rendered="#{deployedExp.labRunning}"
+										title="#{statusBundle['tooltip.experiment.available']}" />
+									<h:graphicImage library="images" name="unavailable.gif"
+										rendered="#{!deployedExp.labRunning}"
+										title="#{statusBundle['tooltip.experiment.unavailable']}" />
+								</p:column>
+								<p:column style="width:80px; text-align: center; height: 50%;">
+									<f:facet name="header">  
                                         #{bundle['label.number.user']}
-                                    </f:facet> 
-                                    <h:outputText value="#{deployedExp.numberOfUsers}"
-                                                  title="#{statusBundle['tooltip.experiment.users']}" />
-                                </p:column>
-                                <p:column  style="width:120px; text-align: center; height: 50%;" >
-                                    <a href="javascript:var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + '#{deployedExp.experiment.state.url}'; if (!deployJava.isWebStartInstalled('1.6')) {if (deployJava.installLatestJRE()) {if (deployJava.launch(url)) {}}} else {if (deployJava.launch(url)) {}}"
-                                       title="#{statusBundle['tooltip.experiment.launch']}" rel="#{statusBundle['tooltip.experiment.launch']}" > 
-                                        <img src="resources/images/webstart.png" border="0" />
-                                    </a>
-                                </p:column>
-                            </p:dataTable>
-                        </p:scrollPanel>
-                    </h:panelGroup>
-                </div>
+                                    </f:facet>
+									<h:outputText value="#{deployedExp.numberOfUsers}"
+										title="#{statusBundle['tooltip.experiment.users']}" />
+								</p:column>
+								<p:column style="width:120px; text-align: center; height: 50%;">
+									<a
+										href="javascript:var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + '#{deployedExp.experiment.state.url}'; if (!deployJava.isWebStartInstalled('1.6')) {if (deployJava.installLatestJRE()) {if (deployJava.launch(url)) {}}} else {if (deployJava.launch(url)) {}}"
+										title="#{statusBundle['tooltip.experiment.launch']}"
+										rel="#{statusBundle['tooltip.experiment.launch']}"> <img
+										src="resources/images/webstart.png" />
+									</a>
+								</p:column>
+							</p:dataTable>
+						</p:scrollPanel>
+					</h:panelGroup>
+				</div>
 
 
-            </h:form>
+			</h:form>
 
-        </div>
-    </ui:define>
+		</div>
+	</ui:define>
 
 </ui:composition>
