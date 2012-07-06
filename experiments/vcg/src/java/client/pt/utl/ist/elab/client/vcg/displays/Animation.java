@@ -96,7 +96,7 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new Animation());
 		dummy.pack();
-		dummy.show();
+		dummy.setVisible(true);
 	}
 
 	// Chegaram novas amostras!
@@ -186,7 +186,8 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 	// O icon associado a este painel!
 	@Override
 	public javax.swing.Icon getIcon() {
-		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/newface/resources/legacy/sensor16.gif"));
+		return new javax.swing.ImageIcon(getClass().getResource(
+				"/com/linkare/rec/impl/newface/resources/legacy/sensor16.gif"));
 	}
 
 	@Override
@@ -238,7 +239,7 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 
 	@Override
 	public void actionPerformed(final java.awt.event.ActionEvent e) {
-		if (e.getActionCommand().equalsIgnoreCase("Edit")) {
+		if (e.getActionCommand().equalsIgnoreCase("Edit") && constTextBox != null) {
 			balanca.setReguaSize(PopupMenu.dialog(ReCResourceBundle.findStringOrDefault(
 					"cg$rec.exp.customizer.balanca.title.15", "Edit Target Ruler (cm)"), ReCResourceBundle
 					.findStringOrDefault("cg$rec.exp.customizer.balanca.tip.15", "Ruler length"), ReCResourceBundle
@@ -249,8 +250,9 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 			updateRegua();
 		}
 	}
-    @Override
-    public DataDisplayEnum getDisplayType() {
-        return DataDisplayEnum.ANIMATION;
-    }
+
+	@Override
+	public DataDisplayEnum getDisplayType() {
+		return DataDisplayEnum.ANIMATION;
+	}
 }
