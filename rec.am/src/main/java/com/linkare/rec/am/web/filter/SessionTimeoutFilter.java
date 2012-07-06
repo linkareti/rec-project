@@ -21,9 +21,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class SessionTimeoutFilter implements Filter {
 
-    private String timeoutPage = "timeout.faces";
+    private String timeoutPage = "Login.faces";
 
-    private String loginPage = "LabsStatus.faces";
+    private String loginPage = "Login.faces";
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

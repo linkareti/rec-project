@@ -4,13 +4,8 @@
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:p="http://primefaces.org/ui">
-    <div id="logout"><h:commandLink
-            action="#{authenticationBean.logout}" value="#{bundle['menu.logout']}" />
-    </div>
-    <p id="welcome"><h:outputText
-        value="#{bundle['label.welcome']} #{userView.username}" /></p>
-<div id="banner">
-    <p id="banner-p-elab"><h:outputLabel value="#{bundle['rec.elab.title.short']}" /></p>
-    <p id="banner-p-labs"><h:outputLabel value="#{bundle['rec.elab.subtitle']}" /></p>
-</div>
+        <h:graphicImage library="images" name="elab_logo.png" styleClass="banner"/> 
+        <h:commandLink action="#{authenticationBean.logout}" value="#{bundle['menu.logout']}" styleClass="logout"/>
+        <h:outputText value="#{bundle['label.welcome']} #{userView.username}" styleClass="welcome"/>
+        
 </h:form>

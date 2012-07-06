@@ -23,18 +23,18 @@
                 </p:ajaxStatus>
 
                 <p:messages id="messages" showDetail="true" />
-
-                <p:schedule id="schedule" value="#{scheduleController.eventModel}"
-                            widgetVar="myschedule" allDaySlot="false"
-                            showWeekends="true" draggable="false" resizable="true"
-                            firstHour="8"
-                            slotMinutes="15" locale="pt" view="month">
-                    <p:ajax event="dateSelect" listener="#{scheduleController.onDateSelect}" update="eventDetails" oncomplete="eventDialog.show()" />  
-                    <p:ajax event="eventSelect" listener="#{scheduleController.onEventSelect}" update="eventDetails" oncomplete="eventDialog.show()" />  
-                    <p:ajax event="eventMove" listener="#{scheduleController.onEventMove}" update="messages" />  
-                    <p:ajax event="eventResize" listener="#{scheduleController.onEventResize}" update="messages" />  
-                </p:schedule>
-
+                <p:scrollPanel styleClass="scrollPanelSchedule">
+                    <p:schedule id="schedule" value="#{scheduleController.eventModel}"
+                                widgetVar="myschedule" allDaySlot="false"
+                                showWeekends="true" draggable="false" resizable="true"
+                                firstHour="8"
+                                slotMinutes="15" locale="pt" view="month" aspectRatio="1.83">
+                        <p:ajax event="dateSelect" listener="#{scheduleController.onDateSelect}" update="eventDetails" oncomplete="eventDialog.show()" />  
+                        <p:ajax event="eventSelect" listener="#{scheduleController.onEventSelect}" update="eventDetails" oncomplete="eventDialog.show()" />  
+                        <p:ajax event="eventMove" listener="#{scheduleController.onEventMove}" update="messages" />  
+                        <p:ajax event="eventResize" listener="#{scheduleController.onEventResize}" update="messages" />  
+                    </p:schedule>
+                </p:scrollPanel>
                 <p:dialog widgetVar="eventDialog" header="#{bundle['label.event.header']}" showEffect="clip" hideEffect="clip">
                     <h:inputHidden id="idInternal"
                                    value="#{scheduleController.event.idInternal}" />

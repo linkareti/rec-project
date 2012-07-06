@@ -1,1 +1,1 @@
-<% response.sendRedirect("LabsStatus.faces"); %>
+<% response.sendRedirect("Login.faces"); %>
