@@ -36,34 +36,34 @@
 
     <ChannelInfo name="Imagem_Telescopio" independent="true" direction="CHANNEL_INPUT">
         <scale label="Imagem_Telescopio" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
-            <min><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></min>
-            <max><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></max>
-            <step><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></step>
-            <errordefault><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></errordefault>
+            <min><PhysicsVal type="byteArray"  mimetype="file/raw"> </PhysicsVal></min>
+            <max><PhysicsVal type="byteArray"  mimetype="file/raw"> </PhysicsVal></max>
+            <step><PhysicsVal type="byteArray"  mimetype="file/raw"> </PhysicsVal></step>
+            <errordefault><PhysicsVal type="byteArray"  mimetype="file/raw"> </PhysicsVal></errordefault>
         </scale>
     </ChannelInfo>    
     <ChannelInfo name="Imagem_Flat" independent="true" direction="CHANNEL_INPUT">
         <scale label="Imagem_Buscador" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
-            <min><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></min>
-            <max><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></max>
-            <step><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></step>
-            <errordefault><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></errordefault>
+            <min><PhysicsVal type="byteArray"  mimetype="file/raw"> </PhysicsVal></min>
+            <max><PhysicsVal type="byteArray"  mimetype="file/raw"> </PhysicsVal></max>
+            <step><PhysicsVal type="byteArray"  mimetype="file/raw"> </PhysicsVal></step>
+            <errordefault><PhysicsVal type="byteArray"  mimetype="file/raw"> </PhysicsVal></errordefault>
         </scale>
     </ChannelInfo>        
     <ChannelInfo name="Imagem_DarkFrame" independent="true" direction="CHANNEL_INPUT">
         <scale label="Imagem_DarkFrame" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
-            <min><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></min>
-            <max><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></max>
-            <step><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></step>
-            <errordefault><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="file/raw"> </PhysicsVal></errordefault>
+            <min><PhysicsVal type="byteArray"  mimetype="file/raw"> </PhysicsVal></min>
+            <max><PhysicsVal type="byteArray"  mimetype="file/raw"> </PhysicsVal></max>
+            <step><PhysicsVal type="byteArray"  mimetype="file/raw"> </PhysicsVal></step>
+            <errordefault><PhysicsVal type="byteArray"  mimetype="file/raw"> </PhysicsVal></errordefault>
         </scale>
     </ChannelInfo>
     <ChannelInfo name="Error_Channel" independent="true" direction="CHANNEL_INPUT">
         <scale label="Error_Channel" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
-            <min><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="text/str"> </PhysicsVal></min>
-            <max><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="text/str"> </PhysicsVal></max>
-            <step><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="text/str"> </PhysicsVal></step>
-            <errordefault><PhysicsVal type="byteArray" file="/usr/local/ReC7.0/EmptyByteArray.txt" mimetype="text/str"> </PhysicsVal></errordefault>
+            <min><PhysicsVal type="byteArray"  mimetype="text/str"> </PhysicsVal></min>
+            <max><PhysicsVal type="byteArray"  mimetype="text/str"> </PhysicsVal></max>
+            <step><PhysicsVal type="byteArray"  mimetype="text/str"> </PhysicsVal></step>
+            <errordefault><PhysicsVal type="byteArray"  mimetype="text/str"> </PhysicsVal></errordefault>
         </scale>
     </ChannelInfo>        
 </HardwareInfo>

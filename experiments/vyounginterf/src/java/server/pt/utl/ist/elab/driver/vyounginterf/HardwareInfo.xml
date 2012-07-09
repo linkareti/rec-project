@@ -94,10 +94,10 @@
     <!--// byte[] Imagem do Padrao -->
     <ChannelInfo name="imageIcon" independent="false" direction="CHANNEL_INPUT">
         <scale label="imageIcon" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
-            <min><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></min>
-            <max><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></max>
-            <step><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></step>
-            <errordefault><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></errordefault>
+            <min><PhysicsVal type="byteArray"  mimetype="data/raw"> </PhysicsVal></min>
+            <max><PhysicsVal type="byteArray"  mimetype="data/raw"> </PhysicsVal></max>
+            <step><PhysicsVal type="byteArray"  mimetype="data/raw"> </PhysicsVal></step>
+            <errordefault><PhysicsVal type="byteArray"  mimetype="data/raw"> </PhysicsVal></errordefault>
         </scale>
     </ChannelInfo>
     
