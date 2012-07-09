@@ -13,6 +13,7 @@ package pt.utl.ist.elab.client.vcolisao.displays;
 
 import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import org.opensourcephysics.display.Arrow;
 import org.opensourcephysics.display.Dataset;
@@ -56,11 +57,17 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 	public static void main(final String args[]) {
 		ReCResourceBundle.loadResourceBundle("colisao",
 				"recresource:///pt/utl/ist/elab/client/vcolisao/resources/messages");
-		final javax.swing.JFrame dummy = new javax.swing.JFrame();
-		dummy.getContentPane().add(new Animation());
-		dummy.pack();
-		dummy.show();
-		dummy.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				final javax.swing.JFrame dummy = new javax.swing.JFrame();
+				dummy.getContentPane().add(new Animation());
+				dummy.pack();
+				dummy.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+				dummy.setVisible(true);
+			}
+		});
 	}
 
 	// Chegaram novas amostras!
@@ -195,8 +202,9 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 
 	/**
 	 * Arredonda um double para int de acordo com as casas decimais
-	 * @param number 
-	 * @return 
+	 * 
+	 * @param number
+	 * @return
 	 */
 	public static int roundToInt(final double number) {
 		int rounded = 0;
@@ -226,7 +234,8 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 	// O icon associado a este painel!
 	@Override
 	public javax.swing.Icon getIcon() {
-		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/newface/resources/legacy/sensor16.gif"));
+		return new javax.swing.ImageIcon(getClass().getResource(
+				"/com/linkare/rec/impl/newface/resources/legacy/sensor16.gif"));
 	}
 
 	@Override
@@ -253,8 +262,9 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 		}
 
 	}
-    @Override
-    public DataDisplayEnum getDisplayType() {
-        return DataDisplayEnum.ANIMATION;
-    }
+
+	@Override
+	public DataDisplayEnum getDisplayType() {
+		return DataDisplayEnum.ANIMATION;
+	}
 }
