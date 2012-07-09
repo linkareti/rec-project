@@ -1,9 +1,3 @@
-/*
- * DataProducer.java
- *
- * Created on February 13, 2004, 12:13 PM
- */
-
 package pt.utl.ist.elab.driver.vpoisson;
 
 /**
@@ -12,11 +6,12 @@ package pt.utl.ist.elab.driver.vpoisson;
  */
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import pt.utl.ist.elab.common.virtual.utils.ByteUtil;
 import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
@@ -27,6 +22,9 @@ import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.impl.data.PhysicsValFactory;
 
 public class PoissonDataProducer extends VirtualBaseDataSource {
+
+	private static final Logger LOGGER = Logger.getLogger(PoissonDataProducer.class.getName());
+
 	private int NUM_CHANNELS = 1;
 
 	private String nx = null;
@@ -43,7 +41,6 @@ public class PoissonDataProducer extends VirtualBaseDataSource {
 	private String server = "orionte.cfn.ist.utl.pt";
 	private int port = 4444;
 
-	private boolean stopped = false;
 	private VirtualBaseDriver driver = null;
 
 	// Aproveitamos para inicializar todas as variáveis logo no construtor...
@@ -65,8 +62,8 @@ public class PoissonDataProducer extends VirtualBaseDataSource {
 	// Este é o processo que nos vai simular e criar as amostras para enviar ao
 	// cliente!
 	private class ProducerThread extends Thread {
-		private int currentSample = 0;
-		private float time = 0;
+//		private int currentSample = 0;
+//		private float time = 0;
 
 		public void run() {
 			try {
@@ -74,15 +71,13 @@ public class PoissonDataProducer extends VirtualBaseDataSource {
 
 				Socket kkSocket = null;
 				OutputStream out = null;
-				InputStream in = null;
+//				InputStream in = null;
 				ObjectInputStream ois = null;
 				String LS = System.getProperty("line.separator");
 
 				try {
 					kkSocket = new Socket(server, port);
 					out = kkSocket.getOutputStream();
-					System.out.println("1");
-					System.out.println("2");
 					out.write((fnFace1 + LS).getBytes());
 					out.write((fnFace2 + LS).getBytes());
 					out.write((fnFace3 + LS).getBytes());
@@ -106,13 +101,14 @@ public class PoissonDataProducer extends VirtualBaseDataSource {
 					value[0] = new PhysicsValue(val, null, com.linkare.rec.data.Multiplier.none);
 					addDataRow(value);
 				} catch (UnknownHostException e) {
-					System.err.println("Don't know about host: " + server);
-					System.exit(1);
+					LOGGER.log(Level.SEVERE, "Don't know about host: " + server, e);
+					throw new RuntimeException(e);
 				} catch (IOException e) {
-					System.err.println("Couldn't get I/O for the connection to: " + server);
-					System.exit(1);
+					LOGGER.log(Level.SEVERE, "Couldn't get I/O for the connection to: " + server, e);
+					throw new RuntimeException(e);
 				} catch (ClassNotFoundException nfe) {
-					nfe.printStackTrace();
+					LOGGER.log(Level.SEVERE, "Don't know about host: " + server, nfe);
+					throw new RuntimeException(nfe);
 				}
 
 				join(100);
@@ -127,24 +123,14 @@ public class PoissonDataProducer extends VirtualBaseDataSource {
 	}
 
 	public void startProduction() {
-		stopped = false;
 		new ProducerThread().start();
 	}
 
 	public void endProduction() {
-		stopped = true;
 		setDataSourceEnded();
 	}
 
-	public static void main(String args[]) {
-		/*
-		 * DPendulumDataProducer dp = new DPendulumDataProducer(null,90, 90, 10,
-		 * 0, 0.5f, 1.5f, 0.3f, 0.5f, 10, 10000); dp.startProduction();
-		 */
-	}
-
 	public void stopNow() {
-		stopped = true;
 		setDataSourceStoped();
 	}
 }
