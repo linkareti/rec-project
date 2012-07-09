@@ -151,17 +151,11 @@ public class InteractiveFERMAPAnima extends FERMAPAnima implements InteractionLi
 		setWallFreq(wFreq);
 	}
 
-	/**
-	 * @param args the command line arguments
-	 */
-	public static void main(final String[] args) {
-		// TODO code application logic here
-	}
-
 	@Override
 	public void interactionPerformed(final InteractionEvent _event) {
+		
 		final Object eventObj = _event.getSource();
-		final java.awt.event.MouseEvent e = _event.getMouseEvent();
+		final java.awt.event.MouseEvent mouseEvent = _event.getMouseEvent();
 
 		if (eventObj instanceof InteractiveSphere) {
 			bola.getGroup().setX(0);
@@ -177,7 +171,7 @@ public class InteractiveFERMAPAnima extends FERMAPAnima implements InteractionLi
 			}
 			vel.setSizeX(0);
 			vel.setSizeZ(0);
-		} else if (eventObj instanceof InteractiveBox && e.getButton() != java.awt.event.MouseEvent.NOBUTTON) {
+		} else if (eventObj instanceof InteractiveBox && mouseEvent!=null && mouseEvent.getButton() != java.awt.event.MouseEvent.NOBUTTON) {
 			if (wall.getY() < 0.5) {
 				wall.setY(0.5);
 			} else if (wall.getY() > 90.5) {
@@ -192,9 +186,9 @@ public class InteractiveFERMAPAnima extends FERMAPAnima implements InteractionLi
 			wall.setZ(0);
 		}
 		updateGUI();
-
-		if (javax.swing.SwingUtilities.isRightMouseButton(e)) {
-			editPopMenu.show(e.getComponent(), e.getX(), e.getY());
+		
+		if (mouseEvent!=null && javax.swing.SwingUtilities.isRightMouseButton(mouseEvent)) {
+			editPopMenu.show(mouseEvent.getComponent(), mouseEvent.getX(), mouseEvent.getY());
 		}
 	}
 
