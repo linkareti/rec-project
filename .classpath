@@ -142,13 +142,7 @@
 	<classpathentry kind="lib" path="rec/lib/java/client/commons-lang-2.4.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/client/joda-time-1.6.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/client/javaws.jar"/>
-	<classpathentry kind="lib" path="rec/lib/java/client/jfreechart-1.0.9.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/client/commons-csv-1.0-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="rec/lib/java/client/jcommon-1.0.12.jar"/>
-	<classpathentry kind="lib" path="rec/lib/java/client/openorb_orb_omg-1.4.0.jar"/>
-	<classpathentry kind="lib" path="rec/lib/java/client/openorb_orb-1.4.0.jar"/>
-	<classpathentry kind="lib" path="rec/lib/java/client/openorb_ots-1.4.0.jar"/>
-	<classpathentry kind="lib" path="rec/lib/java/client/openorb_pss-1.4.0.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/multicast/rec.am-api-0.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/multicast/commons-0.0.1.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/driver/RXTXcomm.jar"/>
@@ -156,11 +150,7 @@
 	<classpathentry kind="lib" path="elab/lib/java/driver/jsr80_ri.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/common/tools-1.4.0.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/client/fits1.3.jar"/>
-	<classpathentry kind="lib" path="elab/lib/java/client/jfreechart-1.0.9.jar"/>
-	<classpathentry kind="lib" path="elab/lib/java/client/OSP.jar"/>
-	<classpathentry kind="lib" path="elab/lib/java/client/OSP3D.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/driver/JCFN.jar"/>
-	<classpathentry kind="lib" path="elab/lib/java/driver/OSP.jar"/>
 	<classpathentry kind="lib" path="lib/test/commons-beanutils-1.8.0.jar"/>
 	<classpathentry kind="lib" path="lib/test/commons-beanutils-core-1.8.0.jar"/>
 	<classpathentry kind="lib" path="lib/test/commons-logging.jar"/>
@@ -228,10 +218,18 @@
 	<classpathentry kind="lib" path="rec/lib/java/multicast/glassfish/tiger-types-osgi.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/multicast/glassfish/transaction-internal-api.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/common/jmf.jar"/>
-	<classpathentry kind="lib" path="rec/lib/java/client/commons-i18n-0.0.1-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="rec/lib/java/client/commons-net-0.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/common/j3dcore.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/common/j3dutils.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/common/vecmath.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/common/commons-i18n-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/common/commons-net-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/common/jcommon-1.0.12.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/common/jfreechart-1.0.9.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/common/openorb_orb_omg-1.4.0.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/common/openorb_orb-1.4.0.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/common/openorb_ots-1.4.0.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/common/openorb_pss-1.4.0.jar"/>
+	<classpathentry kind="lib" path="elab/lib/java/common/OSP.jar"/>
+	<classpathentry kind="lib" path="elab/lib/java/common/OSP3D.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
