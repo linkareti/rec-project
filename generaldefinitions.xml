@@ -638,6 +638,7 @@
 			</replace>
 
 			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
+			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot; main=&quot;true&quot; /&gt;" />
 
 			<process.list task="add.experiment.to.full.jnlp.compile" list="${experiment.list}" attribute.name="experiment.name" />
 		</sequential>
@@ -844,7 +845,7 @@
 			</replace>
 
 			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
-			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Comon --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot; main=&quot;true&quot; /&gt;" />
+			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot; main=&quot;true&quot; /&gt;" />
 
 			<process.list task="add.experiment.to.full.jnlp.build" list="${experiment.list}" attribute.name="experiment.name" />
 		</sequential>
