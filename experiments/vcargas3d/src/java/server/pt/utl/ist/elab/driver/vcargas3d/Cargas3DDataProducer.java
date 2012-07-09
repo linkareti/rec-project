@@ -234,11 +234,9 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
 			final ArrayList<Object> linha = new ArrayList<Object>();
 			if (Q < 0) {
 				linha.add("neg");
-			}
-			if (Q > 0) {
+			} else if (Q > 0) {
 				linha.add("pos");
-			}
-			if (Q == 0) {
+			} else if (Q == 0) {
 				linha.add("nul");
 			}
 			final float passo = 0.05f;

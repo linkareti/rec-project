@@ -833,10 +833,11 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		@Override
 		public void interactionPerformed(final InteractionEvent _event) {
 
+			carga = getCarga();
+			
 			if (_event.getID() == InteractionEvent.MOUSE_OVER) {
 				cor = (java.awt.Color) (getCarga().getStyle().getFillPattern());
-				carga = getCarga();
-				getCarga().getStyle().setFillPattern(java.awt.Color.YELLOW);
+				carga.getStyle().setFillPattern(java.awt.Color.YELLOW);
 			}
 
 			if (_event.getID() == InteractionEvent.MOUSE_LEFT) {
