@@ -123,9 +123,9 @@ public class InteractiveSTDMAPAnima extends STDMAPAnima implements InteractionLi
 		}
 		updateGUI();
 
-		final java.awt.event.MouseEvent e = _event.getMouseEvent();
-		if (javax.swing.SwingUtilities.isRightMouseButton(e)) {
-			editPopMenu.show(e.getComponent(), e.getX(), e.getY());
+		final java.awt.event.MouseEvent mouseEvent = _event.getMouseEvent();
+		if (mouseEvent!=null && javax.swing.SwingUtilities.isRightMouseButton(mouseEvent)) {
+			editPopMenu.show(mouseEvent.getComponent(), mouseEvent.getX(), mouseEvent.getY());
 		}
 	}
 
