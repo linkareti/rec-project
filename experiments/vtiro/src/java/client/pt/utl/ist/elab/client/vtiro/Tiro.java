@@ -261,6 +261,7 @@ public class Tiro extends DrawingPanel3D implements ActionListener, MouseListene
 				topGutter = bottomGutter = Math.max(0, getHeight() - interiorDimension.height) / 2;
 			}
 		}
+		@SuppressWarnings("unchecked")
 		final java.util.ArrayList<Drawable> tempList = getDrawables();
 		scale(tempList);
 		setPixelScale();
@@ -314,7 +315,7 @@ public class Tiro extends DrawingPanel3D implements ActionListener, MouseListene
 			@Override
 			public void windowClosing(final java.awt.event.WindowEvent e) {
 				System.exit(0);
-			};
+			}
 		});
 		test.getContentPane().add(new Tiro());
 		test.pack();

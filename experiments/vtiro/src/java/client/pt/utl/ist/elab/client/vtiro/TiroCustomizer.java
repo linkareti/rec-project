@@ -233,10 +233,6 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 		tiro.config(10, 10, 6.7, Math.toRadians(26.56));
 	}// GEN-LAST:event_defaultButtonActionPerformed
 
-	private void formWindowClosing(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowClosing
-		System.exit(0);// A FORM PASSOU-SE
-	}// GEN-LAST:event_formWindowClosing
-
 	/**
 	 * @param args the command line arguments
 	 */
@@ -246,7 +242,7 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 			@Override
 			public void windowClosing(final java.awt.event.WindowEvent e) {
 				System.exit(0);
-			};
+			}
 		});
 		test.getContentPane().add(new TiroCustomizer());
 		test.pack();

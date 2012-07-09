@@ -56,15 +56,6 @@ public class Animation extends CartPole implements ExpDataDisplay, ExpDataModelL
 		move(x * 10, theta, xdot * 10, thetadot, action * 10);
 	}
 
-	/*
-	 * public static void main(String args[]) { javax.swing.JFrame test = new
-	 * javax.swing.JFrame(); test.addWindowListener(new
-	 * java.awt.event.WindowAdapter() { public void
-	 * windowClosing(java.awt.event.WindowEvent e) { System.exit(0); }; });
-	 * Animation stdim = new Animation(); test.getContentPane().add(stdim);
-	 * test.pack(); test.setVisible(true); stdim.start(); }
-	 */
-
 	@Override
 	public void dataModelEnded() {
 	}
