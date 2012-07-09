@@ -6,9 +6,6 @@
 
 package pt.utl.ist.elab.driver.vcargas3d;
 
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
-
 import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
 import pt.utl.ist.elab.driver.virtual.VirtualBaseDriver;
 
@@ -17,9 +14,6 @@ import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.driver.IDataSource;
-import com.linkare.rec.impl.logging.LoggerUtil;
-import com.linkare.net.protocols.Protocols;
-import com.linkare.rec.impl.utils.Defaults;
 
 /**
  * 
@@ -27,42 +21,15 @@ import com.linkare.rec.impl.utils.Defaults;
  */
 public class Cargas3DDriver extends VirtualBaseDriver {
 
-	// O código desta classe é sempre igual!!! Alterar só os nomes para o vosso
-	// caso!
-	private static String Cargas3D_DRIVER_LOGGER = "Cargas3D.Logger";
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(Cargas3DDriver.Cargas3D_DRIVER_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(Cargas3DDriver.Cargas3D_DRIVER_LOGGER));
-		}
-	}
+	// private static final Logger LOGGER =
+	// Logger.getLogger(Cargas3DDriver.class.getName());
 
 	/* Hardware and driver related variables */
-	// private static final String APPLICATION_IDENTIFIER =
-	// "E-Lab (Cargas3D Driver)";
 	private static final String DRIVER_UNIQUE_ID = "CARGAS3D_V1.0";
-	// private static final String HW_VERSION = "0.1";
 
 	protected VirtualBaseDataSource dataSource = null;
 	protected HardwareAcquisitionConfig config = null;
 	protected HardwareInfo info = null;
-
-	@Override
-	public void config(final HardwareAcquisitionConfig config, final HardwareInfo info) throws IncorrectStateException,
-			WrongConfigurationException {
-		fireIDriverStateListenerDriverConfiguring();
-		info.validateConfig(config);
-		extraValidateConfig(config, info);
-		try {
-			configure(config, info);
-		} catch (final Exception e) {
-			e.printStackTrace();
-			LoggerUtil.logThrowable("Error on config...", e, Logger.getLogger(Cargas3DDriver.Cargas3D_DRIVER_LOGGER));
-			throw new WrongConfigurationException();
-		} catch (final Throwable t) {
-			t.printStackTrace();
-		}
-	}
 
 	@Override
 	public void configure(final HardwareAcquisitionConfig config, final HardwareInfo info)
@@ -116,34 +83,6 @@ public class Cargas3DDriver extends VirtualBaseDriver {
 		fireIDriverStateListenerDriverStoping();
 		dataSource.stopNow();
 		fireIDriverStateListenerDriverStoped();
-	}
-
-	@Override
-	public Object getHardwareInfo() {
-		fireIDriverStateListenerDriverReseting();
-
-		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
-				+ "/HardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
-
-		if (prop.indexOf("://") == -1) {
-			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
-		}
-
-		java.net.URL url = null;
-		try {
-			url = Protocols.getURL(prop);
-		} catch (final java.net.MalformedURLException e) {
-			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger("DPendulum"));
-			try {
-				url = new java.net.URL(baseHardwareInfoFile);
-			} catch (final java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
-						Logger.getLogger("DPendulum"));
-			}
-		}
-		fireIDriverStateListenerDriverReseted();
-		return url;
 	}
 
 }

@@ -1,13 +1,4 @@
-/*
- * RobotDriver.java
- *
- * Created on 24 de Abril de 2003, 8:53
- */
-
 package pt.utl.ist.elab.driver.vpoisson;
-
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
 import pt.utl.ist.elab.driver.virtual.VirtualBaseDriver;
@@ -17,9 +8,6 @@ import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.driver.IDataSource;
-import com.linkare.rec.impl.logging.LoggerUtil;
-import com.linkare.net.protocols.Protocols;
-import com.linkare.rec.impl.utils.Defaults;
 
 /**
  * 
@@ -27,37 +15,18 @@ import com.linkare.rec.impl.utils.Defaults;
  */
 
 public class PoissonDriver extends VirtualBaseDriver {
-	private static String POISSON_DRIVER_LOGGER = "Poisson.Logger";
-	static {
-		Logger l = LogManager.getLogManager().getLogger(POISSON_DRIVER_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(POISSON_DRIVER_LOGGER));
-		}
-	}
+
+	// private static final Logger LOGGER =
+	// Logger.getLogger(PoissonDriver.class.getName());
 
 	/* Hardware and driver related variables */
-	private static final String APPLICATION_IDENTIFIER = "E-Lab (Poisson)";
 	private static final String DRIVER_UNIQUE_ID = "POISSON_V1.0";
-	private static final String HW_VERSION = "0.1";
 
 	protected VirtualBaseDataSource dataSource = null;
 	protected HardwareAcquisitionConfig config = null;
 	protected HardwareInfo info = null;
 
 	public PoissonDriver() {
-	}
-
-	public void config(HardwareAcquisitionConfig config, HardwareInfo info) throws IncorrectStateException,
-			WrongConfigurationException {
-		fireIDriverStateListenerDriverConfiguring();
-		info.validateConfig(config);
-		extraValidateConfig(config, info);
-		try {
-			configure(config, info);
-		} catch (Exception e) {
-			LoggerUtil.logThrowable("Error on config...", e, Logger.getLogger(POISSON_DRIVER_LOGGER));
-			throw new WrongConfigurationException();
-		}
 	}
 
 	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException {
@@ -75,7 +44,7 @@ public class PoissonDriver extends VirtualBaseDriver {
 		String fnFace6 = config.getSelectedHardwareParameterValue("fnFace6");
 		String fnRho = config.getSelectedHardwareParameterValue("fnRho");
 
-		int nSamples = config.getTotalSamples();
+		// int nSamples = config.getTotalSamples();
 
 		// Vamos criar o nosso produtor de dados!
 		dataSource = new PoissonDataProducer(this, nx, ny, nz, fnFace1, fnFace2, fnFace3, fnFace4, fnFace5, fnFace6,
@@ -116,28 +85,4 @@ public class PoissonDriver extends VirtualBaseDriver {
 		fireIDriverStateListenerDriverStoped();
 	}
 
-	public Object getHardwareInfo() {
-		fireIDriverStateListenerDriverReseting();
-		String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
-				+ "/HardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
-
-		if (prop.indexOf("://") == -1)
-			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
-
-		java.net.URL url = null;
-		try {
-			url = Protocols.getURL(prop);
-		} catch (java.net.MalformedURLException e) {
-			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger("Poisson.logger"));
-			try {
-				url = new java.net.URL(baseHardwareInfoFile);
-			} catch (java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
-						Logger.getLogger("Poisson.logger"));
-			}
-		}
-		fireIDriverStateListenerDriverReseted();
-		return url;
-	}
 }

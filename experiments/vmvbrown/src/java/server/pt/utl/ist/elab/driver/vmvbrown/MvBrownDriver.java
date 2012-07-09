@@ -6,9 +6,6 @@
 
 package pt.utl.ist.elab.driver.vmvbrown;
 
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
-
 import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
 import pt.utl.ist.elab.driver.virtual.VirtualBaseDriver;
 
@@ -17,9 +14,6 @@ import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.driver.IDataSource;
-import com.linkare.rec.impl.logging.LoggerUtil;
-import com.linkare.net.protocols.Protocols;
-import com.linkare.rec.impl.utils.Defaults;
 
 /**
  * 
@@ -28,18 +22,11 @@ import com.linkare.rec.impl.utils.Defaults;
 
 public class MvBrownDriver extends VirtualBaseDriver {
 
-	private static String MvBrown_DRIVER_LOGGER = "MvBrown.Logger";
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(MvBrownDriver.MvBrown_DRIVER_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(MvBrownDriver.MvBrown_DRIVER_LOGGER));
-		}
-	}
+	// private static final Logger LOGGER =
+	// Logger.getLogger(CartPoleDriver.class.getName());
 
 	/* Hardware and driver related variables */
-	private static final String APPLICATION_IDENTIFIER = "E-Lab (Movimento Browniano Driver)";
 	private static final String DRIVER_UNIQUE_ID = "MOVIMENTO_BROWNIANO_V1.0";
-	private static final String HW_VERSION = "0.1";
 
 	protected VirtualBaseDataSource dataSource = null;
 	protected HardwareAcquisitionConfig config = null;
@@ -47,20 +34,6 @@ public class MvBrownDriver extends VirtualBaseDriver {
 
 	/** Creates a new instance of CGDriver */
 	public MvBrownDriver() {
-	}
-
-	@Override
-	public void config(final HardwareAcquisitionConfig config, final HardwareInfo info) throws IncorrectStateException,
-			WrongConfigurationException {
-		fireIDriverStateListenerDriverConfiguring();
-		info.validateConfig(config);
-		extraValidateConfig(config, info);
-		try {
-			configure(config, info);
-		} catch (final Exception e) {
-			LoggerUtil.logThrowable("Error on config...", e, Logger.getLogger(MvBrownDriver.MvBrown_DRIVER_LOGGER));
-			throw new WrongConfigurationException();
-		}
 	}
 
 	@Override
@@ -168,34 +141,5 @@ public class MvBrownDriver extends VirtualBaseDriver {
 		fireIDriverStateListenerDriverStoping();
 		dataSource.stopNow();
 		fireIDriverStateListenerDriverStoped();
-	}
-
-	@Override
-	public Object getHardwareInfo() {
-		fireIDriverStateListenerDriverReseting();
-
-		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
-				+ "/HardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
-
-		if (prop.indexOf("://") == -1) {
-			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
-		}
-
-		java.net.URL url = null;
-		try {
-			url = Protocols.getURL(prop);
-		} catch (final java.net.MalformedURLException e) {
-			LoggerUtil.logThrowable("Unable to load resource: " + prop, e,
-					Logger.getLogger(MvBrownDriver.MvBrown_DRIVER_LOGGER));
-			try {
-				url = new java.net.URL(baseHardwareInfoFile);
-			} catch (final java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
-						Logger.getLogger(MvBrownDriver.MvBrown_DRIVER_LOGGER));
-			}
-		}
-		fireIDriverStateListenerDriverReseted();
-		return url;
 	}
 }

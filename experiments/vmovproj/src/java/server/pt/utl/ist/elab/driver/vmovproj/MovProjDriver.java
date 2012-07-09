@@ -6,21 +6,14 @@
 
 package pt.utl.ist.elab.driver.vmovproj;
 
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
-
 import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
 import pt.utl.ist.elab.driver.virtual.VirtualBaseDriver;
 
 import com.linkare.rec.acquisition.IncorrectStateException;
 import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.config.ParameterConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.driver.IDataSource;
-import com.linkare.rec.impl.logging.LoggerUtil;
-import com.linkare.net.protocols.Protocols;
-import com.linkare.rec.impl.utils.Defaults;
 
 /**
  * 
@@ -29,18 +22,11 @@ import com.linkare.rec.impl.utils.Defaults;
 
 public class MovProjDriver extends VirtualBaseDriver {
 
-	private static String MovProj_DRIVER_LOGGER = "MovProj.Logger";
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(MovProjDriver.MovProj_DRIVER_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(MovProjDriver.MovProj_DRIVER_LOGGER));
-		}
-	}
-
+	// private static final Logger LOGGER =
+		// Logger.getLogger(CartPoleDriver.class.getName());
+	
 	/* Hardware and driver related variables */
-	private static final String APPLICATION_IDENTIFIER = "E-Lab (Movimento de Projecteis Driver)";
 	private static final String DRIVER_UNIQUE_ID = "MOVIMENTO_DE_PROJECTEIS_V1.0";
-	private static final String HW_VERSION = "0.1";
 
 	protected VirtualBaseDataSource dataSource = null;
 	protected HardwareAcquisitionConfig config = null;
@@ -48,21 +34,6 @@ public class MovProjDriver extends VirtualBaseDriver {
 
 	/** Creates a new instance of CGDriver */
 	public MovProjDriver() {
-	}
-
-	@Override
-	public void config(final HardwareAcquisitionConfig config, final HardwareInfo info) throws IncorrectStateException,
-			WrongConfigurationException {
-		fireIDriverStateListenerDriverConfiguring();
-		info.validateConfig(config);
-		extraValidateConfig(config, info);
-		try {
-			configure(config, info);
-		} catch (final Exception e) {
-			e.printStackTrace();
-			LoggerUtil.logThrowable("Error on config...", e, Logger.getLogger(MovProjDriver.MovProj_DRIVER_LOGGER));
-			throw new WrongConfigurationException();
-		}
 	}
 
 	@Override
@@ -104,16 +75,16 @@ public class MovProjDriver extends VirtualBaseDriver {
 		boolean rMod = config.getSelectedHardwareParameterValue("posModulus").trim().equals("1") ? true : false;
 		boolean vMod = config.getSelectedHardwareParameterValue("velModulus").trim().equals("1") ? true : false;
 
-		final ParameterConfig[] selectedParams = config.getSelectedHardwareParameters();
+//		final ParameterConfig[] selectedParams = config.getSelectedHardwareParameters();
 
-		if (selectedParams != null) {
-			final ParameterConfig flowParam = null;
-			for (final ParameterConfig selectedParam : selectedParams) {
-				System.out.println(selectedParam.getParameterName() + " = " + selectedParam.getParameterValue());
-			}
-		}
+//		if (selectedParams != null) {
+//			final ParameterConfig flowParam = null;
+//			for (final ParameterConfig selectedParam : selectedParams) {
+//				System.out.println(selectedParam.getParameterName() + " = " + selectedParam.getParameterValue());
+//			}
+//		}
 
-		System.out.println("1");
+//		System.out.println("1");
 		if (!rMod || !vMod) {
 			final String[] graph1 = splitArroundPoint(config.getSelectedHardwareParameterValue("graph1"));
 			for (int i = 0; i < 2; i++) {
@@ -154,7 +125,7 @@ public class MovProjDriver extends VirtualBaseDriver {
 				}
 			}
 		}
-		System.out.println("2");
+//		System.out.println("2");
 		try {
 			dataSource = new MovProjDataProducer(this, x, y, z, velMod, velTheta, velPhi, spinMod, spinTheta, spinPhi,
 					radius, mass, dragCoef1, dragCoef2, densL, s0, g, dt, odeType, gType, dragType, rMod, vMod, tbs,
@@ -165,7 +136,7 @@ public class MovProjDriver extends VirtualBaseDriver {
 			t.printStackTrace();
 		}
 
-		System.out.println("3");
+//		System.out.println("3");
 		for (int i = 0; i < config.getChannelsConfig().length; i++) {
 			config.getChannelsConfig(i).setTotalSamples(config.getTotalSamples());
 		}
@@ -176,7 +147,7 @@ public class MovProjDriver extends VirtualBaseDriver {
 	}
 
 	private String[] splitArroundPoint(final String tosplit) {
-		final java.util.Vector<String> v = new java.util.Vector();
+		final java.util.Vector<String> v = new java.util.Vector<String>();
 		final java.util.StringTokenizer token = new java.util.StringTokenizer(tosplit, ".");
 		while (token.hasMoreTokens()) {
 			v.add(token.nextToken());
@@ -212,32 +183,4 @@ public class MovProjDriver extends VirtualBaseDriver {
 		fireIDriverStateListenerDriverStoped();
 	}
 
-	@Override
-	public Object getHardwareInfo() {
-		fireIDriverStateListenerDriverReseting();
-
-		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
-				+ "/HardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
-
-		if (prop.indexOf("://") == -1) {
-			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
-		}
-
-		java.net.URL url = null;
-		try {
-			url = Protocols.getURL(prop);
-		} catch (final java.net.MalformedURLException e) {
-			LoggerUtil.logThrowable("Unable to load resource: " + prop, e,
-					Logger.getLogger(MovProjDriver.MovProj_DRIVER_LOGGER));
-			try {
-				url = new java.net.URL(baseHardwareInfoFile);
-			} catch (final java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
-						Logger.getLogger(MovProjDriver.MovProj_DRIVER_LOGGER));
-			}
-		}
-		fireIDriverStateListenerDriverReseted();
-		return url;
-	}
 }

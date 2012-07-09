@@ -1,13 +1,4 @@
-/*
- * BSDriver.java
- *
- * Created on 3 de Abril de 2005, 6:09
- */
-
 package pt.utl.ist.elab.driver.vbs;
-
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
 import pt.utl.ist.elab.driver.virtual.VirtualBaseDriver;
@@ -17,30 +8,18 @@ import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.driver.IDataSource;
-import com.linkare.rec.impl.logging.LoggerUtil;
-import com.linkare.net.protocols.Protocols;
-import com.linkare.rec.impl.utils.Defaults;
 
 /**
  * 
- * @author Pedro Queiro'
+ * @author Pedro Queiró
  */
-
 public class BSDriver extends VirtualBaseDriver {
-	// O codigo desta classe e' sempre igual!!! Alterar so' os nomes para o
-	// vosso caso!
-	private static String BS_DRIVER_LOGGER = "BS.Logger";
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(BSDriver.BS_DRIVER_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(BSDriver.BS_DRIVER_LOGGER));
-		}
-	}
+
+	// private static final Logger LOGGER =
+	// Logger.getLogger(BSDriver.class.getName());
 
 	/* Hardware and driver related variables */
-	private static final String APPLICATION_IDENTIFIER = "E-Lab (Biot-Savart Driver)";
 	private static final String DRIVER_UNIQUE_ID = "BIOT_SAVART_V1.0";
-	private static final String HW_VERSION = "0.1";
 
 	protected VirtualBaseDataSource dataSource = null;
 	protected HardwareAcquisitionConfig config = null;
@@ -48,20 +27,6 @@ public class BSDriver extends VirtualBaseDriver {
 
 	/** Creates a new instance of BSDriver */
 	public BSDriver() {
-	}
-
-	@Override
-	public void config(final HardwareAcquisitionConfig config, final HardwareInfo info) throws IncorrectStateException,
-			WrongConfigurationException {
-		fireIDriverStateListenerDriverConfiguring();
-		info.validateConfig(config);
-		extraValidateConfig(config, info);
-		try {
-			configure(config, info);
-		} catch (final Exception e) {
-			LoggerUtil.logThrowable("Error on config...", e, Logger.getLogger(BSDriver.BS_DRIVER_LOGGER));
-			throw new WrongConfigurationException();
-		}
 	}
 
 	@Override
@@ -124,33 +89,4 @@ public class BSDriver extends VirtualBaseDriver {
 		fireIDriverStateListenerDriverStoped();
 	}
 
-	@Override
-	public Object getHardwareInfo() {
-		fireIDriverStateListenerDriverReseting();
-
-		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
-				+ "/HardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
-
-		if (prop.indexOf("://") == -1) {
-			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
-		}
-
-		java.net.URL url = null;
-		try {
-			url = Protocols.getURL(prop);
-		} catch (final java.net.MalformedURLException e) {
-			// Nao sera' de alterar isto para BS, ou algo do genero?
-			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger("DPendulum"));
-			try {
-				url = new java.net.URL(baseHardwareInfoFile);
-			} catch (final java.net.MalformedURLException e2) {
-				// E isto?
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
-						Logger.getLogger("DPendulum"));
-			}
-		}
-		fireIDriverStateListenerDriverReseted();
-		return url;
-	}
 }
