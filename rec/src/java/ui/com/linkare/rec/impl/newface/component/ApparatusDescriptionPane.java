@@ -161,6 +161,7 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
         txtApparatusDescription.setText(resourceMap.getString("txtApparatusDescription.text")); // NOI18N
         txtApparatusDescription.setToolTipText(resourceMap.getString("txtApparatusDescription.toolTipText")); // NOI18N
         txtApparatusDescription.setName("txtApparatusDescription"); // NOI18N
+        txtApparatusDescription.setEditable(false);
         scrollApparatusDescription.setViewportView(txtApparatusDescription);
 
 		final javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

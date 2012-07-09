@@ -110,6 +110,7 @@
             <Property name="text" type="java.lang.String" resourceKey="txtApparatusDescription.text"/>
             <Property name="toolTipText" type="java.lang.String" resourceKey="txtApparatusDescription.toolTipText"/>
             <Property name="name" type="java.lang.String" value="txtApparatusDescription" noResource="true"/>
+            <Property name="editable" type="java.lang.Boolean" value="false" noResource="true"/>
           </Properties>
         </Component>
       </SubComponents>
