@@ -74,7 +74,6 @@ public class PositionChart extends com.linkare.rec.impl.ui.graph.MultSeriesXYExp
 
 	@Override
 	public void setExpDataModel(final ExpDataModel model) {
-		super.setExpDataModel(model);
 		if (this.model != null) {
 			this.model.removeExpDataModelListener(this);
 		}
@@ -82,7 +81,7 @@ public class PositionChart extends com.linkare.rec.impl.ui.graph.MultSeriesXYExp
 		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
 		}
-
+		super.setExpDataModel(model);
 	}
 
 	private int[] getYChannels(final boolean _x, final boolean _y, final boolean _z, final boolean _rMod,

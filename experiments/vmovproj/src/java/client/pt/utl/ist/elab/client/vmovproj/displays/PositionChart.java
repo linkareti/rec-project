@@ -61,7 +61,6 @@ public class PositionChart extends MultSeriesXYExperimentGraphExtended implement
 
 	@Override
 	public void setExpDataModel(final ExpDataModel model) {
-		super.setExpDataModel(model);
 		if (this.model != null) {
 			this.model.removeExpDataModelListener(this);
 		}
@@ -69,6 +68,6 @@ public class PositionChart extends MultSeriesXYExperimentGraphExtended implement
 		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
 		}
-
+		super.setExpDataModel(model);
 	}
 }
