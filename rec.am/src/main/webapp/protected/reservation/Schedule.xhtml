@@ -102,11 +102,11 @@
                     <p:commandButton value="#{bundle['operation.save']}"
                                      actionListener="#{scheduleController.addEvent}"
                                      update=":context:myreservations, schedule-form:messages"
-                                     oncomplete="myschedule.update();" />
+                                     oncomplete="myschedule.update();" onsuccess="eventDialog.hide()"/>
                     <p:commandButton value="#{bundle['operation.remove']}"
                                      actionListener="#{scheduleController.removeEvent}"
                                      update=":context:myreservations"
-                                     oncomplete="myschedule.update();" />
+                                     oncomplete="myschedule.update();eventDialog.hide()" />
                 </p:dialog>
             </h:form>
         </h:panelGroup>

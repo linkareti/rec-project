@@ -416,3 +416,7 @@ html, body {
     min-height: 416px;
     width: 15%;
 }
+
+.ui-wizard-content{
+	margin-top: -18%;
+}
