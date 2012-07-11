@@ -1,0 +1,34 @@
+<h:form xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
+
+    <ul>
+        <h:panelGroup rendered="#{userView.external}">
+            <li><h:commandLink action="/protected/courses/List"
+                               value="#{bundle['menu.externalCourse.list']}" /></li>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{userView.admin}">
+            <li><h:commandLink action="/protected/laboratory/List"
+                               value="#{bundle['menu.laboratory.list']}" /></li>
+            <li><h:commandLink action="/protected/experiment/List"
+                               value="#{bundle['menu.experiment.list']}" /></li>
+            <li><h:commandLink action="/protected/user/List"
+                               value="#{bundle['menu.user.list']}" /></li>
+            <li><h:commandLink action="/protected/group/List"
+                               value="#{bundle['menu.group.list']}" /></li>
+            <li><h:commandLink action="/protected/role/List"
+                               value="#{bundle['menu.role.list']}" /></li>
+            <li><h:commandLink action="/protected/reservation/List"
+                               value="#{bundle['menu.reservation.list']}" /></li>
+            <li><h:commandLink action="/protected/loginDomain/List"
+                               value="#{bundle['menu.loginDomain.list']}" /></li>
+            <li><h:commandLink action="/protected/badword/List"
+                               value="#{bundle['menu.badword.list']}" /></li>
+            <li><h:commandLink action="/protected/errorMessage/List"
+                               value="#{bundle['menu.errormessage.list']}" /></li>
+        </h:panelGroup>
+    </ul>
+
+</h:form>
