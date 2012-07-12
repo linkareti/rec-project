@@ -638,14 +638,14 @@ public class WebRobotConfigurator extends javax.swing.JFrame {
 
 	/** Exit the Application */
 	private void exitForm(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_exitForm
-		hide();
+		setVisible(false);
 	}// GEN-LAST:event_exitForm
 
 	/**
 	 * @param args the command line arguments
 	 */
 	public static void main(final String args[]) {
-		new WebRobotConfigurator().show();
+		new WebRobotConfigurator().setVisible(true);
 	}
 
 	private void saveProps() {

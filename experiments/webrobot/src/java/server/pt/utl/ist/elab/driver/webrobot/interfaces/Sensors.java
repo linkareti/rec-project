@@ -49,8 +49,8 @@ public interface Sensors {
 
 	/**
 	 * Setter for property i2State.
-	 * 
-	 * @param i1State New value of property i2State.
+	 * @param i2State New value of property i2State.
+	 *
 	 */
 	public void setI2State(int i2State);
 
@@ -64,7 +64,7 @@ public interface Sensors {
 	/**
 	 * Setter for property i3State.
 	 * 
-	 * @param i1State New value of property i3State.
+	 * @param i3State New value of property i3State.
 	 */
 	public void setI3State(int i3State);
 
@@ -78,7 +78,7 @@ public interface Sensors {
 	/**
 	 * Setter for property i4State.
 	 * 
-	 * @param i1State New value of property i4State.
+	 * @param i4State New value of property i4State.
 	 */
 	public void setI4State(int i4State);
 
@@ -92,7 +92,7 @@ public interface Sensors {
 	/**
 	 * Setter for property i5State.
 	 * 
-	 * @param i1State New value of property i5State.
+	 * @param i5State New value of property i5State.
 	 */
 	public void setI5State(int i5State);
 
@@ -106,7 +106,7 @@ public interface Sensors {
 	/**
 	 * Setter for property i6State.
 	 * 
-	 * @param i1State New value of property i6State.
+	 * @param i6State New value of property i6State.
 	 */
 	public void setI6State(int i6State);
 
@@ -120,7 +120,7 @@ public interface Sensors {
 	/**
 	 * Setter for property i7State.
 	 * 
-	 * @param i1State New value of property i7State.
+	 * @param i7State New value of property i7State.
 	 */
 	public void setI7State(int i7State);
 

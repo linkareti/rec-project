@@ -170,7 +170,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * type components
 	 */
 	private int tempCurrentRow;
-	private int tempCurrentCol;
+//	private int tempCurrentCol;
 	private boolean wasAnd = false;
 
 	/**
@@ -188,12 +188,12 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	/**
 	 * Use to reset the state machine
 	 */
-	private final boolean reset = false;
+//	private final boolean reset = false;
 
 	/**
 	 * Stop the state machine until new data comes from the robot
 	 */
-	private boolean waitSerial = true;
+//	private boolean waitSerial = true;
 
 	/**
 	 * Thread variables
@@ -215,16 +215,16 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	private Thread dataProducerThread;
 
 	/** Ask for serial data every x miliseconds */
-	private final int ASKER_INT = 250;
+//	private final int ASKER_INT = 250;
 
 	/** The experiment duration in seconds */
-	private int EXP_DURATION = 240;
+//	private int EXP_DURATION = 240;
 
 	/** Counts the seconds for the pre-valued actuation block... */
-	private int counter = 0;
+//	private int counter = 0;
 
 	/** New data from the serial port is here!!! */
-	private boolean newData = true;
+//	private boolean newData = true;
 
 	/** The Driver */
 	private RobotDriver hardware = null;
@@ -233,27 +233,27 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	private boolean parked = true;
 
 	/** The IR values when is parked */
-	private int I0STATE_PARKED = 255;
-	private int I1STATE_PARKED = 255;
-	private int I2STATE_PARKED = 255;
-	private int I3STATE_PARKED = 255;
-	private int I4STATE_PARKED = 255;
-	private int I5STATE_PARKED = 255;
-	private int I6STATE_PARKED = 255;
-	private int I7STATE_PARKED = 255;
+//	private int I0STATE_PARKED = 255;
+//	private int I1STATE_PARKED = 255;
+//	private int I2STATE_PARKED = 255;
+//	private int I3STATE_PARKED = 255;
+//	private int I4STATE_PARKED = 255;
+//	private int I5STATE_PARKED = 255;
+//	private int I6STATE_PARKED = 255;
+//	private int I7STATE_PARKED = 255;
 
 	/**
 	 * We want the value of the park to be less or more than(LMT) the sensor
 	 * value?
 	 */
-	private String I0LMT_PARKED = "<";
-	private String I1LMT_PARKED = "<";
-	private String I2LMT_PARKED = "<";
-	private String I3LMT_PARKED = "<";
-	private String I4LMT_PARKED = "<";
-	private String I5LMT_PARKED = "<";
-	private String I6LMT_PARKED = "<";
-	private String I7LMT_PARKED = "<";
+//	private String I0LMT_PARKED = "<";
+//	private String I1LMT_PARKED = "<";
+//	private String I2LMT_PARKED = "<";
+//	private String I3LMT_PARKED = "<";
+//	private String I4LMT_PARKED = "<";
+//	private String I5LMT_PARKED = "<";
+//	private String I6LMT_PARKED = "<";
+//	private String I7LMT_PARKED = "<";
 
 	/** Variables for walking */
 	private int WALK_SPEED_AHEAH = 200;
@@ -263,11 +263,11 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	private int counterParked = 0;
 
 	/** Battery vars */
-	private boolean batFull = false;
+//	private boolean batFull = false;
 	private boolean batDown = false;
-	private final int counterBat = 0;
+//	private final int counterBat = 0;
 	private int batDownVal = 150;
-	private int batFullVal = 245;
+//	private int batFullVal = 245;
 
 	/** REC */
 	/**
@@ -278,7 +278,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 */
 	volatile private boolean reseting = false;
 	volatile private boolean stoping = false;
-	volatile private boolean stoped = false;
+//	volatile private boolean stoped = false;
 	private final int numChannels = 23;
 	private PhysicsValue[] values = null;
 
@@ -301,16 +301,16 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * If the state machine reaches its end without sending any pwm...let's send
 	 * the last one
 	 */
-	private final int tempPWM1 = 127;
-	private final int tempPWM2 = 127;
-	private final boolean sentPWM = false;
+//	private final int tempPWM1 = 127;
+//	private final int tempPWM2 = 127;
+//	private final boolean sentPWM = false;
 
 	/** To comunicate with the robot */
 	private final SerialComm serialComm;
 
 	/** Border test vars */
-	private final int borderSens = 235;
-	private final int chargingValue = 50;
+//	private final int borderSens = 235;
+//	private final int chargingValue = 50;
 
 	/** Vels max values */
 	private int MAX_PWM = 255;
@@ -325,13 +325,14 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	/** The time that the data producer thread sleeps... */
 	private int acqTime = 500;
 
-	/** Creates a new instance of RobotServer */
+	/** Creates a new instance of RobotServer 
+	 * @param hardware */
 	public RobotStateMachine(final RobotDriver hardware) {
 		/** Read the properties from the file */
 		readProps();
 		this.hardware = hardware;
 		serialComm = hardware.getSerialComm();
-		serialComm.registerStateMachine(this);
+//		serialComm.registerStateMachine(this);
 
 		/** Just for security, lets send the PWM to stop the robot */
 		sendPWM(127, 127, false);
@@ -381,25 +382,25 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 		try {
 			WALK_SPEED_AHEAH = Integer.parseInt(props.getProperty("velAhead"), 10);
 			WALK_SPEED_BACK = Integer.parseInt(props.getProperty("velAback"), 10);
-			EXP_DURATION = Integer.parseInt(props.getProperty("expDuration"), 10);
-			I0STATE_PARKED = Integer.parseInt(props.getProperty("i0parked"), 10);
-			I1STATE_PARKED = Integer.parseInt(props.getProperty("i1parked"), 10);
-			I2STATE_PARKED = Integer.parseInt(props.getProperty("i2parked"), 10);
-			I3STATE_PARKED = Integer.parseInt(props.getProperty("i3parked"), 10);
-			I4STATE_PARKED = Integer.parseInt(props.getProperty("i4parked"), 10);
-			I5STATE_PARKED = Integer.parseInt(props.getProperty("i5parked"), 10);
-			I6STATE_PARKED = Integer.parseInt(props.getProperty("i6parked"), 10);
-			I7STATE_PARKED = Integer.parseInt(props.getProperty("i7parked"), 10);
+//			EXP_DURATION = Integer.parseInt(props.getProperty("expDuration"), 10);
+//			I0STATE_PARKED = Integer.parseInt(props.getProperty("i0parked"), 10);
+//			I1STATE_PARKED = Integer.parseInt(props.getProperty("i1parked"), 10);
+//			I2STATE_PARKED = Integer.parseInt(props.getProperty("i2parked"), 10);
+//			I3STATE_PARKED = Integer.parseInt(props.getProperty("i3parked"), 10);
+//			I4STATE_PARKED = Integer.parseInt(props.getProperty("i4parked"), 10);
+//			I5STATE_PARKED = Integer.parseInt(props.getProperty("i5parked"), 10);
+//			I6STATE_PARKED = Integer.parseInt(props.getProperty("i6parked"), 10);
+//			I7STATE_PARKED = Integer.parseInt(props.getProperty("i7parked"), 10);
 			batDownVal = Integer.parseInt(props.getProperty("batDownVal"), 10);
-			batFullVal = Integer.parseInt(props.getProperty("batFullVal"), 10);
-			I0LMT_PARKED = props.getProperty("I0LMT");
-			I1LMT_PARKED = props.getProperty("I1LMT");
-			I2LMT_PARKED = props.getProperty("I2LMT");
-			I3LMT_PARKED = props.getProperty("I3LMT");
-			I4LMT_PARKED = props.getProperty("I4LMT");
-			I5LMT_PARKED = props.getProperty("I5LMT");
-			I6LMT_PARKED = props.getProperty("I6LMT");
-			I7LMT_PARKED = props.getProperty("I7LMT");
+//			batFullVal = Integer.parseInt(props.getProperty("batFullVal"), 10);
+//			I0LMT_PARKED = props.getProperty("I0LMT");
+//			I1LMT_PARKED = props.getProperty("I1LMT");
+//			I2LMT_PARKED = props.getProperty("I2LMT");
+//			I3LMT_PARKED = props.getProperty("I3LMT");
+//			I4LMT_PARKED = props.getProperty("I4LMT");
+//			I5LMT_PARKED = props.getProperty("I5LMT");
+//			I6LMT_PARKED = props.getProperty("I6LMT");
+//			I7LMT_PARKED = props.getProperty("I7LMT");
 			MAX_PWM = Integer.parseInt(props.getProperty("MAXPWM"));
 			MIN_PWM = Integer.parseInt(props.getProperty("MINPWM"));
 			I2BORDER = Integer.parseInt(props.getProperty("I2BORDER"));
@@ -501,7 +502,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 						addDataRow(values);
 					}
 					try {
-						dataProducerThread.sleep(2000);
+						Thread.sleep(2000);
 					} catch (final InterruptedException e) {
 						Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO, e.toString());
 					}
@@ -542,7 +543,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 						}
 					}
 					try {
-						Thread.currentThread().sleep(acqTime);
+						Thread.sleep(acqTime);
 					} catch (final InterruptedException e) {
 						Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO, e.toString());
 					}
@@ -567,13 +568,13 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 					}
 					try {
 						sensorsValues = getSensorsValues();
-						Thread.currentThread().sleep(2000);
+						Thread.sleep(2000);
 					} catch (final InterruptedException ie) {
 						Logger.getLogger(RobotStateMachine.WR_DS_LOGGER)
 								.log(Level.INFO, "Interrupted Exception\n" + ie);
 					}
 				}
-				stoped = true;
+//				stoped = true;
 
 				/** OK! The experiment ended!!! */
 				hardware.setStoped();
@@ -617,7 +618,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	private class generalThread extends Thread {
 		public synchronized void run() {
 			while (runningGeneralThread) {
-				newData = false;
+//				newData = false;
 				sensorsValues = getSensorsValues();
 				if (!stoping && isOverBorder(init)) {
 					sendPWM(127, 127, false);
@@ -626,7 +627,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 					 * overborded..
 					 */
 					try {
-						Thread.currentThread().sleep(acqTime);
+						Thread.sleep(acqTime);
 					} catch (final InterruptedException ie) {
 						Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO,
 								"Interrupted Exception:\n" + ie);
@@ -684,12 +685,12 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 						}
 						/** Make the thread sleep for 250ms */
 						try {
-							generalThread.sleep(250);
+							Thread.sleep(250);
 						} catch (final InterruptedException e) {
 							Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO, "Error" + e);
 						}
 					}
-					counter = 0;
+//					counter = 0;
 					setWalking(false);
 				}
 				/** Make the thread sleep for 25ms */
@@ -718,7 +719,8 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 		sendPWM(127, 127, false);
 	}
 
-	/** Starts the state machine! */
+	/** Starts the state machine! 
+	 * @param flowString */
 	public void startStateMachine(final String flowString) {
 		final java.io.File flowFile = new java.io.File("tempFlow.grf");
 		try {
@@ -1182,11 +1184,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	 * Sends the pwm to the motors
 	 */
 	private void sendPWM(int valor, int valor2, final boolean waitSerial) {
-		if (waitSerial) {
-			setWaitSerial(true);
-		} else {
-			setWaitSerial(false);
-		}
+//		setWaitSerial(waitSerial);
 
 		/** CHANGED */
 		/*
@@ -1413,7 +1411,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 	private synchronized void parkRobot() {
 		killGeneralThread();
 		try {
-			Thread.currentThread().sleep(5000);
+			Thread.sleep(5000);
 		} catch (final InterruptedException ie) {
 		}
 		sendPWM(127, 127, false);
@@ -1422,7 +1420,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 		generalThread = null;
 		runningGeneralThread = true;
 		generalThread = new generalThread();
-		generalThread.setPriority(generalThread.MAX_PRIORITY);
+		generalThread.setPriority(Thread.MAX_PRIORITY);
 		generalThread.start();
 		sendPWM(127, 127, false);
 		stoping = true;
@@ -1445,14 +1443,14 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 		return batDown;
 	}
 
-	private boolean isBatteryFull() {
-		if (a1State > batFullVal) {
-			batFull = true;
-		} else {
-			batFull = false;
-		}
-		return batFull;
-	}
+//	private boolean isBatteryFull() {
+//		if (a1State > batFullVal) {
+//			batFull = true;
+//		} else {
+//			batFull = false;
+//		}
+//		return batFull;
+//	}
 
 	private boolean isOverBorder(final boolean init) {
 		boolean overBoarder = false;
@@ -2443,9 +2441,9 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 		this.walking = walking;
 	}
 
-	public void setWaitSerial(final boolean waitSerial) {
-		this.waitSerial = waitSerial;
-	}
+//	public void setWaitSerial(final boolean waitSerial) {
+//		this.waitSerial = waitSerial;
+//	}
 
 	/**
 	 * Getter for property flowString.
@@ -2465,9 +2463,9 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 		this.flowString = flowString;
 	}
 
-	public void setNewData(final boolean newData) {
-		this.newData = newData;
-	}
+//	public void setNewData(final boolean newData) {
+//		this.newData = newData;
+//	}
 
 	public void resetProduction() {
 		parkRobot();
@@ -2484,7 +2482,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 		generalThread = null;
 		runningGeneralThread = true;
 		generalThread = new generalThread();
-		generalThread.setPriority(generalThread.MAX_PRIORITY);
+		generalThread.setPriority(Thread.MAX_PRIORITY);
 		generalThread.start();
 		init = true;
 		while (counter < 3) {
@@ -2499,7 +2497,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 				break;
 			}
 			try {
-				Thread.currentThread().sleep(1500);
+				Thread.sleep(1500);
 			} catch (final InterruptedException ie) {
 			}
 		}
@@ -2507,7 +2505,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 		sendPWM(127, 127, false);
 		killGeneralThread();
 		try {
-			Thread.currentThread().sleep(1000);
+			Thread.sleep(1000);
 		} catch (final InterruptedException ie) {
 		}
 		atStartPosition = true;
@@ -2530,10 +2528,10 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 		setTotalSamples(totalSamples);
 		acqTime = (int) (1 / getAcquisitionHeader().getSelectedFrequency().getFrequency() * 1000);
 		Logger.getLogger(RobotStateMachine.WR_DS_LOGGER).log(Level.INFO, "acqTime=" + acqTime);
-		counter = 0;
+//		counter = 0;
 		runningGeneralThread = true;
 		generalThread = new generalThread();
-		generalThread.setPriority(generalThread.MAX_PRIORITY);
+		generalThread.setPriority(Thread.MAX_PRIORITY);
 		generalThread.start();
 		if (hardware != null) {
 			runningDataThread = true;
@@ -2542,7 +2540,7 @@ public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab
 		}
 		reseting = false;
 		stoping = false;
-		stoped = false;
+//		stoped = false;
 		parked = false;
 	}
 

@@ -11,7 +11,6 @@ package pt.utl.ist.elab.driver.webrobot.serial;
  * @author André Neto - LEFT - IST
  */
 
-import pt.utl.ist.elab.driver.webrobot.RobotStateMachine;
 
 public class SerialComm implements gnu.io.SerialPortEventListener {
 
@@ -22,7 +21,7 @@ public class SerialComm implements gnu.io.SerialPortEventListener {
 	private static String comName = "/dev/ttyS1";
 	private static String arrivedString = null;
 	private static String appName = "Elab-WebRobot";
-	private static String encoding = "Cp437";
+//	private static String encoding = "Cp437";
 	private static int baud = 9600;
 	private static int databits = gnu.io.SerialPort.DATABITS_8;
 	private static int flowcontrol = gnu.io.SerialPort.FLOWCONTROL_NONE;
@@ -32,7 +31,7 @@ public class SerialComm implements gnu.io.SerialPortEventListener {
 	/**
 	 * The robot sends its sensors states in two packets... :(
 	 */
-	private static boolean waitingSecondPacket = false;
+//	private static boolean waitingSecondPacket = false;
 	private static boolean portOpened = false;
 
 	/** Properties stuff... */
@@ -57,7 +56,7 @@ public class SerialComm implements gnu.io.SerialPortEventListener {
 	 */
 	private int[] sensorsState = new int[13];
 
-	private pt.utl.ist.elab.driver.webrobot.RobotStateMachine robotStateMachine;
+//	private pt.utl.ist.elab.driver.webrobot.RobotStateMachine robotStateMachine;
 
 	/** Creates a new instance of SerialComm */
 	public SerialComm() {
@@ -298,9 +297,9 @@ public class SerialComm implements gnu.io.SerialPortEventListener {
 				if (arrayFilled) {
 					setWriteMode();
 					securityPeriods = 0;
-					if (robotStateMachine != null) {
-						robotStateMachine.setNewData(true);
-					}
+//					if (robotStateMachine != null) {
+//						robotStateMachine.setNewData(true);
+//					}
 					if (SerialComm.readWrite != null) {
 						SerialComm.readWrite.setValues(sensorsState);
 					}
@@ -339,9 +338,9 @@ public class SerialComm implements gnu.io.SerialPortEventListener {
 		restarting = false;
 	}
 
-	public void registerStateMachine(final RobotStateMachine robotStateMachine) {
-		this.robotStateMachine = robotStateMachine;
-	}
+//	public void registerStateMachine(final RobotStateMachine robotStateMachine) {
+//		this.robotStateMachine = robotStateMachine;
+//	}
 
 	public boolean isPortOpened() {
 		return SerialComm.portOpened;
