@@ -1,17 +1,9 @@
-/*
- * SecurityManagerFactory.java
- *
- * Created on 2 de Janeiro de 2004, 15:34
- */
-
 package com.linkare.rec.impl.multicast.security;
 
 import java.util.List;
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
 
 /**
@@ -23,55 +15,33 @@ public final class SecurityManagerFactory {
 
 	private ISecurityManager secManager = null;
 
-	public static final String SYSPROP_SECURITY_MANAGER_CLASS = "ReC.MultiCast.SecurityManager";
+	public static final String SYSPROP_SECURITY_MANAGER_CLASS = "rec.multicast.securitymanager";
 
-	// public static final String
-	// MCCONTROLLER_SECURITYMANAGER_LOGGER=ReCMultiCastController.MCCONTROLLER_LOGGER;
-	public static final String MCCONTROLLER_SECURITYMANAGER_LOGGER = "ReC.MultiCast.SecurityManager.Logger";
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(
-				SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(
-					Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER));
-		}
-	}
+	private static final Logger LOGGER = Logger.getLogger(SecurityManagerFactory.class.getName());
 
 	private void loadSecurityManager() {
 		final String secManagerClassName = System.getProperty(SecurityManagerFactory.SYSPROP_SECURITY_MANAGER_CLASS);
 		if (secManagerClassName == null || secManagerClassName.trim().length() == 0) {
-			Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
-					"SecurityManager System Property not found... Loading DefaultSecurityManager!");
+			LOGGER.log(Level.INFO, "SecurityManager System Property not found... Loading DefaultSecurityManager!");
 			secManager = new DefaultSecurityManager();
 		}
 		try {
-			Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINE,
-					"Trying to load the SecurityManager class [" + secManagerClassName + "]");
+			LOGGER.log(Level.FINE, "Trying to load the SecurityManager class [" + secManagerClassName + "]");
 			final Class<?> clazz = Class.forName(secManagerClassName);
 			if (clazz != null) {
 				secManager = (ISecurityManager) Class.forName(secManagerClassName).newInstance();
 			}
 		} catch (final Exception e) {
-			Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
-					Level.INFO,
-					"Unable to load SecurityManager defined at system : " + secManagerClassName
-							+ " - loading DefaultSecurityManager!");
-			LoggerUtil.logThrowable("Error loading specified SecurityManager", e,
-					Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER));
-			e.printStackTrace();
+			LOGGER.log(Level.INFO, "Unable to load SecurityManager defined at system : " + secManagerClassName
+					+ " - loading DefaultSecurityManager!");
+			LOGGER.log(Level.SEVERE, "Error loading specified SecurityManager", e);
 		} catch (final LinkageError e) {
-			Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
-					Level.INFO,
-					"Unable to load SecurityManager defined at system : " + secManagerClassName
-							+ " - loading DefaultSecurityManager!");
-			LoggerUtil.logThrowable("Error loading specified SecurityManager", e,
-					Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER));
-			e.printStackTrace();
+			LOGGER.log(Level.INFO, "Unable to load SecurityManager defined at system : " + secManagerClassName
+					+ " - loading DefaultSecurityManager!");
+			LOGGER.log(Level.SEVERE, "Error loading specified SecurityManager", e);
 		} finally {
 			if (secManager == null) {
-				Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
-						"SecurityManager not instatiated... Loading DefaultSecurityManager!");
+				LOGGER.log(Level.INFO, "SecurityManager not instatiated... Loading DefaultSecurityManager!");
 				secManager = new DefaultSecurityManager();
 			}
 		}
@@ -92,14 +62,11 @@ public final class SecurityManagerFactory {
 
 	private void setSecManager(final ISecurityManager secManager) {
 		if (secManager == null) {
-			Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
-					"Setting SecurityManager to null... Loading DefaultSecurityManager!");
+			LOGGER.log(Level.INFO, "Setting SecurityManager to null... Loading DefaultSecurityManager!");
 			this.secManager = new DefaultSecurityManager();
 		} else {
-			Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
-					Level.INFO,
-					"Setting SecurityManager to instance of class " + secManager.getClass().getPackage().getName()
-							+ "." + secManager.getClass().getName());
+			LOGGER.log(Level.INFO, "Setting SecurityManager to instance of class "
+					+ secManager.getClass().getPackage().getName() + "." + secManager.getClass().getName());
 			this.secManager = secManager;
 		}
 	}
@@ -116,9 +83,7 @@ public final class SecurityManagerFactory {
 		try {
 			return SecurityManagerFactory.getSecurityManager().authenticate(resource, user);
 		} catch (final Exception e) {
-			LoggerUtil.logThrowable("Exception occured authenticating user! Returning false!", e,
-					Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER));
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Exception occured authenticating user! Returning false!", e);
 			return false;
 		}
 	}
@@ -127,9 +92,7 @@ public final class SecurityManagerFactory {
 		try {
 			return SecurityManagerFactory.getSecurityManager().authorize(resource, user, op);
 		} catch (final Exception e) {
-			LoggerUtil.logThrowable("Exception occured authorizing user for operation! Returning false!", e,
-					Logger.getLogger(SecurityManagerFactory.MCCONTROLLER_SECURITYMANAGER_LOGGER));
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Exception occured authorizing user for operation! Returning false!", e);
 			return false;
 		}
 	}
