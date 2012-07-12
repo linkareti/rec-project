@@ -491,8 +491,8 @@ public class AleatorioDriver extends BaseDriver {
 	 * public javax.imageio.stream.ImageOutputStream
 	 * image2jpegStream(java.awt.Image image) { byte[] tempArray = new
 	 * byte[Integer.MAX_VALUE]; javax.imageio.stream.ImageOutputStream ios =
-	 * null; //tu j� viste a ByteArrayValBuffer... aceita ler de uma InputStream
-	 * e d�-te um ByteArray j� porreiro para enviar pelo ReC... try{ ios =
+	 * null; //tu já viste a ByteArrayValBuffer... aceita ler de uma InputStream
+	 * e dá-te um ByteArray já porreiro para enviar pelo rec... try{ ios =
 	 * javax.imageio.ImageIO.createImageOutputStream(tempArray);
 	 * javax.imageio.ImageIO.write((java.awt.image.RenderedImage) image, "jpg",
 	 * ios); } catch(java.io.IOException e){} return ios; }
