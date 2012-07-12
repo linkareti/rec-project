@@ -885,7 +885,7 @@ public final class DTOMapperUtils {
 		final File f = new File("/home/elab/ReC7.0/multicast/" + expOptica);
 		final List<ReCMultiCastDataProducer> recMultiCastDataProducers = getRecMultiCastDataProducers(f);
 
-		System.setProperty("ReC.MultiCast.Repository",
+		System.setProperty("rec.multicast.repository",
 				"com.linkare.rec.impl.multicast.repository.RepositoryFactory$RemoteRepository");
 
 		IRepository repository = RepositoryFactory.getRepository();
@@ -896,7 +896,7 @@ public final class DTOMapperUtils {
 	private static void testRepositoryFactoryGet() throws Exception {
 		final String oid = "ELAB_OPTICA_DSPIC_V1.0/Fri_Apr_01_09_18_22_GMT_2011";
 
-		System.setProperty("ReC.MultiCast.Repository",
+		System.setProperty("rec.multicast.repository",
 				"com.linkare.rec.impl.multicast.repository.RepositoryFactory$RemoteRepository");
 
 		IRepository repository = RepositoryFactory.getRepository();
