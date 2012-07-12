@@ -71,7 +71,7 @@
 
 		<!-- Jar ReC jvlc -->
 
-		<!-- property name="ReC.PercentFreeMemoryThreshold2Serialization" value="80" 
+		<!-- property name="rec.percent.freememory.threshold.serialization" value="80" 
 			/ -->
 		<property name="jnlp.packEnabled" value="true" />
 

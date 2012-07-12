@@ -56,7 +56,7 @@
 		
 		<property name="ReCFaceConfig" value="@codebase@/etc/ReCFaceConfig.xml" />
 
-		<property name="ReC.MultiCastController.BindName" value="MultiCastController" />
+		<property name="rec.multicastcontroller.bindname" value="MultiCastController" />
 
 		<property name="org.omg.CORBA.ORBClass" value="org.openorb.orb.core.ORB" />
 		<property name="org.omg.CORBA.ORBSingletonClass" value="org.openorb.orb.core.ORBSingleton" />
@@ -76,11 +76,11 @@
         <property name="rec.apparatus.autoconnect.id" value="@rec.apparatus.autoconnect.id@" />
                
 		<!-- Processing manager thread pool -->
-		<property name="ReC.ProcessingManager.ThreadPool.Coresize"
+		<property name="rec.processingmanager.threadPool.coresize"
 			value="@rec.client.processingmanager.threadpool.coresize@" />
-		<property name="ReC.ProcessingManager.ThreadPool.Maxsize"
+		<property name="rec.processingmanager.threadPool.maxsize"
 			value="@rec.client.processingmanager.threadpool.maxsize@" />
-		<property name="ReC.ProcessingManager.Thread.Idletime" value="@rec.processingmanager.thread.idletime@" />
+		<property name="rec.processingmanager.thread.idletime" value="@rec.processingmanager.thread.idletime@" />
 	</resources>
 
 	<resources os="Linux">
