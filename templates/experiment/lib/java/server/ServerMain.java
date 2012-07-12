@@ -1,8 +1,10 @@
-import java.util.logging.LogManager;
+//TODO - Migrate the java source file to the correct package and declare the package here as required.
+//package @experiment.package@;
+
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.linkare.rec.impl.driver.BaseHardware;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.ORBBean;
 
 /**
@@ -18,7 +20,9 @@ public class ServerMain {
 	public static void main(final String[] args) {
 		try {
 			ORBBean.getORBBean();
-			new BaseHardware(new @experiment.name@Driver());
+			
+			//TODO - Uncomment the next line and define the correct driver class
+			//new BaseHardware(new @experiment.name@Driver());
 
 			try {
 				Thread.currentThread().join();
