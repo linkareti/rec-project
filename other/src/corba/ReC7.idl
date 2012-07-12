@@ -440,12 +440,12 @@ module acquisition
     typedef sequence<UserInfo> UserInfoList;
     valuetype VTUserInfoList UserInfoList;
     //Version 7.0 Addition
-    const wstring PROPKEY_USERINFO_PASS=L"ReC.UserInfo.Password";
-    const wstring PROPKEY_USERINFO_CERTIFICATE=L"ReC.UserInfo.Certificate";
-    const wstring PROPKEY_USERINFO_NEXTLOCK_DATETIME_MIN=L"ReC.UserInfo.NextLock.DateTimeMin";
-    const wstring PROPKEY_USERINFO_NEXTLOCK_DATETIME_MAX=L"ReC.UserInfo.NextLock.DateTimeMax";
-    const wstring PROPKEY_USERINFO_LOCKED_DATETIME=L"ReC.UserInfo.Locked.DateTime";
-    const wstring PROPKEY_USERINFO_HARDWARES_CONNECTED_TO=L"ReC.UserInfo.Hardwares.ConnectedTo";
+    const wstring PROPKEY_USERINFO_PASS=L"rec.userinfo.password";
+    const wstring PROPKEY_USERINFO_CERTIFICATE=L"rec.userinfo.certificate";
+    const wstring PROPKEY_USERINFO_NEXTLOCK_DATETIME_MIN=L"rec.userinfo.nextlock.datetime.min";
+    const wstring PROPKEY_USERINFO_NEXTLOCK_DATETIME_MAX=L"rec.userinfo.nextlock.datetime.max";
+    const wstring PROPKEY_USERINFO_LOCKED_DATETIME=L"rec.userinfo.locked.datetime";
+    const wstring PROPKEY_USERINFO_HARDWARES_CONNECTED_TO=L"rec.userinfo.hardwares.connectedto";
     
       
     exception IncorrectStateException
