@@ -27,8 +27,8 @@ public final class BusinessServiceLocator {
 
 	private static final Logger LOG = Logger.getLogger(BusinessServiceLocator.class.getName());
 
-	public static final String SYSPROP_ALLOCATIONMANAGER_HOST = "ReC.MultiCast.AllocationManagerHost";
-	public static final String SYSPROP_ALLOCATIONMANAGER_PORT = "ReC.MultiCast.AllocationManagerPort";
+	public static final String SYSPROP_ALLOCATIONMANAGER_HOST = "rec.multicast.allocation.manager.host";
+	public static final String SYSPROP_ALLOCATIONMANAGER_PORT = "rec.multicast.allocation.manager.port";
 
 	public static final String NAMING_FACTORY = Defaults.defaultIfEmpty(
 			System.getProperty(InitialContext.INITIAL_CONTEXT_FACTORY),
