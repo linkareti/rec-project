@@ -1,13 +1,6 @@
-/*
- * DataProducerWrapper.java
- *
- * Created on 7 de Maio de 2003, 12:54
- */
-
 package com.linkare.rec.impl.wrappers;
 
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import org.omg.CORBA.SystemException;
@@ -21,7 +14,6 @@ import com.linkare.rec.acquisition.NotAnAvailableSamplesPacketException;
 import com.linkare.rec.acquisition.NotAvailableException;
 import com.linkare.rec.data.acquisition.SamplesPacket;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.impl.logging.LoggerUtil;
 
 /**
  * 
@@ -32,14 +24,7 @@ public class DataProducerWrapper implements DataProducerOperations {
 	private volatile DataProducer delegate = null;
 	private boolean connected = false;
 
-	private static String DATA_PRODUCER_LOGGER = "DataProducer.Logger";
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER));
-		}
-	}
+	private static final Logger LOGGER = Logger.getLogger(DataProducerWrapper.class.getName());
 
 	/**
 	 * Creates a new instance of DataProducerWrapper
@@ -62,8 +47,7 @@ public class DataProducerWrapper implements DataProducerOperations {
 
 	private void checkConnect() {
 		if (delegate == null) {
-			Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER).log(Level.WARNING,
-					"DataProducer  has not been set! Please set it first...");
+			LOGGER.log(Level.WARNING, "DataProducer  has not been set! Please set it first...");
 			connected = false;
 			// Why check on delegate if delegate is null? BTW, how can it ever
 			// be null?
@@ -77,8 +61,7 @@ public class DataProducerWrapper implements DataProducerOperations {
 			}
 		} catch (final Exception e) {
 
-			LoggerUtil.logThrowable("Couldn't determine remote existence of DataProducer. Assuming disconnected...", e,
-					Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER));
+			LOGGER.log(Level.SEVERE, "Couldn't determine remote existence of DataProducer. Assuming disconnected...", e);
 			connected = false;
 		}
 	}
@@ -86,15 +69,14 @@ public class DataProducerWrapper implements DataProducerOperations {
 	@Override
 	public HardwareAcquisitionConfig getAcquisitionHeader() throws NotAvailableException {
 		if (delegate == null) {
-			Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER).log(Level.WARNING,
-					"DataProducer has not been set! Please set it first...");
+			LOGGER.log(Level.WARNING, "DataProducer has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.getAcquisitionHeader();
 		} catch (final SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER));
+			LOGGER.log(Level.SEVERE, null, e);
 			checkConnect();
 			return null;
 		}
@@ -104,15 +86,14 @@ public class DataProducerWrapper implements DataProducerOperations {
 	public SamplesPacket[] getSamples(final int num_packet_start, final int num_packet_end)
 			throws NotAnAvailableSamplesPacketException {
 		if (delegate == null) {
-			Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER).log(Level.WARNING,
-					"DataProducer has not been set! Please set it first...");
+			LOGGER.log(Level.WARNING, "DataProducer has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.getSamples(num_packet_start, num_packet_end);
 		} catch (final SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER));
+			LOGGER.log(Level.SEVERE, null, e);
 			checkConnect();
 			return null;
 		}
@@ -121,15 +102,14 @@ public class DataProducerWrapper implements DataProducerOperations {
 	@Override
 	public String getDataProducerName() {
 		if (delegate == null) {
-			Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER).log(Level.WARNING,
-					"DataProducer has not been set! Please set it first...");
+			LOGGER.log(Level.WARNING, "DataProducer has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.getDataProducerName();
 		} catch (final SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER));
+			LOGGER.log(Level.SEVERE, null, e);
 			checkConnect();
 			return null;
 		}
@@ -138,15 +118,14 @@ public class DataProducerWrapper implements DataProducerOperations {
 	@Override
 	public int getMaxPacketNum() {
 		if (delegate == null) {
-			Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER).log(Level.WARNING,
-					"DataProducer has not been set! Please set it first...");
+			LOGGER.log(Level.WARNING, "DataProducer has not been set! Please set it first...");
 			return -1;
 		}
 
 		try {
 			return delegate.getMaxPacketNum();
 		} catch (final SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER));
+			LOGGER.log(Level.SEVERE, null, e);
 			checkConnect();
 			return -1;
 		}
@@ -155,16 +134,14 @@ public class DataProducerWrapper implements DataProducerOperations {
 	@Override
 	public DataProducerState getDataProducerState() {
 		if (delegate == null) {
-			Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER).log(Level.WARNING,
-					"DataProducer has not been set! Please set it first...");
+			LOGGER.log(Level.WARNING, "DataProducer has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.getDataProducerState();
 		} catch (final SystemException e) {
-			LoggerUtil.logThrowable("Error calling getDataProducerState...", e,
-					Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER));
+			LOGGER.log(Level.SEVERE, "Error calling getDataProducerState...", e);
 			checkConnect();
 			return null;
 		}
@@ -173,15 +150,14 @@ public class DataProducerWrapper implements DataProducerOperations {
 	@Override
 	public void registerDataReceiver(final DataReceiver data_receiver) throws MaximumClientsReached {
 		if (delegate == null) {
-			Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER).log(Level.WARNING,
-					"DataProducer has not been set! Please set it first...");
+			LOGGER.log(Level.WARNING, "DataProducer has not been set! Please set it first...");
 			return;
 		}
 
 		try {
 			delegate.registerDataReceiver(data_receiver);
 		} catch (final SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(DataProducerWrapper.DATA_PRODUCER_LOGGER));
+			LOGGER.log(Level.SEVERE, null, e);
 			checkConnect();
 			return;
 		}

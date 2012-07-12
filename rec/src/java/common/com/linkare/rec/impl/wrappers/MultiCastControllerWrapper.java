@@ -1,9 +1,3 @@
-/*
- * MultiCastControllerWrapper.java
- *
- * Created on 2 de Abril de 2003, 17:00
- */
-
 package com.linkare.rec.impl.wrappers;
 
 import java.util.logging.Level;
@@ -20,7 +14,6 @@ import com.linkare.rec.acquisition.MultiCastHardware;
 import com.linkare.rec.acquisition.NotAuthorized;
 import com.linkare.rec.acquisition.NotRegistered;
 import com.linkare.rec.acquisition.UserInfo;
-import com.linkare.rec.impl.logging.LoggerUtil;
 
 /**
  * This class works as a wrapper to the MCController Server It keeps checking
@@ -33,8 +26,7 @@ import com.linkare.rec.impl.logging.LoggerUtil;
  */
 public class MultiCastControllerWrapper implements MultiCastControllerOperations {
 
-	/* The name of the logger to use */
-	private static String MCCONTROLLER_LOGGER = "MultiCastController.Logger";
+	private static final Logger LOGGER = Logger.getLogger(MultiCastControllerWrapper.class.getName());
 
 	/*
 	 * The internal reference to the MultiCastController - the one that actually
@@ -139,15 +131,14 @@ public class MultiCastControllerWrapper implements MultiCastControllerOperations
 	@Override
 	public MultiCastHardware[] enumerateHardware(final UserInfo user) throws NotRegistered, NotAuthorized {
 		if (delegate == null) {
-			Logger.getLogger(MultiCastControllerWrapper.MCCONTROLLER_LOGGER).log(Level.WARNING,
-					"MultiCastController has not been set! Please set it first...");
+			LOGGER.log(Level.WARNING, "MultiCastController has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.enumerateHardware(user);
 		} catch (final SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(MultiCastControllerWrapper.MCCONTROLLER_LOGGER));
+			LOGGER.log(Level.SEVERE, null, e);
 			checkConnect();
 		}
 
@@ -234,13 +225,13 @@ public class MultiCastControllerWrapper implements MultiCastControllerOperations
 	 * Internal method to log messages
 	 */
 	private void log(final Level l, final String message) {
-		Logger.getLogger(MultiCastControllerWrapper.MCCONTROLLER_LOGGER).log(l, message);
+		LOGGER.log(l, message);
 	}
 
 	/*
 	 * Internal method to log exceptions
 	 */
 	private void logThrowable(final String message, final Throwable t) {
-		Logger.getLogger(MultiCastControllerWrapper.MCCONTROLLER_LOGGER).log(Level.ALL, message, t);
+		LOGGER.log(Level.ALL, message, t);
 	}
 }

@@ -1,13 +1,6 @@
-/*
- * DataClientWrapper.java
- *
- * Created on 1 de Abril de 2003, 15:49
- */
-
 package com.linkare.rec.impl.wrappers;
 
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import org.omg.CORBA.SystemException;
@@ -16,7 +9,6 @@ import com.linkare.rec.acquisition.DataClient;
 import com.linkare.rec.acquisition.DataClientOperations;
 import com.linkare.rec.acquisition.HardwareState;
 import com.linkare.rec.acquisition.UserInfo;
-import com.linkare.rec.impl.logging.LoggerUtil;
 
 /**
  * 
@@ -25,17 +17,14 @@ import com.linkare.rec.impl.logging.LoggerUtil;
 public class DataClientWrapper implements DataClientOperations {
 	private DataClient delegate = null;
 	private boolean connected = false;
-	/** Creates a new instance of DataClientWrapper */
 
-	private static String DATA_CLIENT_LOGGER = "DataClient.Logger";
+	private static final Logger LOGGER = Logger.getLogger(DataClientWrapper.class.getName());
 
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(DataClientWrapper.DATA_CLIENT_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(DataClientWrapper.DATA_CLIENT_LOGGER));
-		}
-	}
-
+	/**
+	 * Creates a new instance of DataClientWrapper
+	 * 
+	 * @param delegate
+	 */
 	public DataClientWrapper(final DataClient delegate) {
 		this.delegate = delegate;
 		checkConnect();
@@ -48,8 +37,7 @@ public class DataClientWrapper implements DataClientOperations {
 
 	private void checkConnect() {
 		if (delegate == null) {
-			Logger.getLogger(DataClientWrapper.DATA_CLIENT_LOGGER).log(Level.WARNING,
-					"DataClient  has not been set! Please set it first...");
+			LOGGER.log(Level.WARNING, "DataClient  has not been set! Please set it first...");
 			connected = false;
 			return;
 		}
@@ -62,8 +50,7 @@ public class DataClientWrapper implements DataClientOperations {
 			}
 		} catch (final Exception e) {
 
-			LoggerUtil.logThrowable("Couldn't determine remote existence of DataClient. Assuming disconnected...", e,
-					Logger.getLogger(DataClientWrapper.DATA_CLIENT_LOGGER));
+			LOGGER.log(Level.SEVERE, "Couldn't determine remote existence of DataClient. Assuming disconnected...", e);
 			connected = false;
 		}
 	}
@@ -71,15 +58,14 @@ public class DataClientWrapper implements DataClientOperations {
 	@Override
 	public void hardwareChange() {
 		if (delegate == null) {
-			Logger.getLogger(DataClientWrapper.DATA_CLIENT_LOGGER).log(Level.WARNING,
-					"DataClient  has not been set! Please set it first...");
+			LOGGER.log(Level.WARNING, "DataClient  has not been set! Please set it first...");
 			return;
 		}
 
 		try {
 			delegate.hardwareChange();
 		} catch (final SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(DataClientWrapper.DATA_CLIENT_LOGGER));
+			LOGGER.log(Level.SEVERE, null, e);
 			checkConnect();
 		}
 
@@ -88,15 +74,14 @@ public class DataClientWrapper implements DataClientOperations {
 	@Override
 	public void hardwareLockable(final long millisecs_to_lock_success) {
 		if (delegate == null) {
-			Logger.getLogger(DataClientWrapper.DATA_CLIENT_LOGGER).log(Level.WARNING,
-					"DataClient  has not been set! Please set it first...");
+			LOGGER.log(Level.WARNING, "DataClient  has not been set! Please set it first...");
 			return;
 		}
 
 		try {
 			delegate.hardwareLockable(millisecs_to_lock_success);
 		} catch (final SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(DataClientWrapper.DATA_CLIENT_LOGGER));
+			LOGGER.log(Level.SEVERE, null, e);
 			checkConnect();
 		}
 
@@ -105,16 +90,14 @@ public class DataClientWrapper implements DataClientOperations {
 	@Override
 	public void hardwareStateChange(final HardwareState newState) {
 		if (delegate == null) {
-			Logger.getLogger(DataClientWrapper.DATA_CLIENT_LOGGER).log(Level.WARNING,
-					"DataClient  has not been set! Please set it first...");
+			LOGGER.log(Level.WARNING, "DataClient  has not been set! Please set it first...");
 			return;
 		}
 
 		try {
 			delegate.hardwareStateChange(newState);
 		} catch (final SystemException e) {
-			LoggerUtil.logThrowable("Couldn't call hardwareStateChange on DataClient...", e,
-					Logger.getLogger(DataClientWrapper.DATA_CLIENT_LOGGER));
+			LOGGER.log(Level.SEVERE, "Couldn't call hardwareStateChange on DataClient...", e);
 			checkConnect();
 		}
 	}
@@ -123,15 +106,14 @@ public class DataClientWrapper implements DataClientOperations {
 	public void receiveMessage(final String clientFrom, final String clientTo, final String message) {
 
 		if (delegate == null) {
-			Logger.getLogger(DataClientWrapper.DATA_CLIENT_LOGGER).log(Level.WARNING,
-					"DataClient  has not been set! Please set it first...");
+			LOGGER.log(Level.WARNING, "DataClient  has not been set! Please set it first...");
 			return;
 		}
 
 		try {
 			delegate.receiveMessage(clientFrom, clientTo, message);
 		} catch (final SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(DataClientWrapper.DATA_CLIENT_LOGGER));
+			LOGGER.log(Level.SEVERE, null, e);
 			checkConnect();
 		}
 	}
@@ -151,15 +133,14 @@ public class DataClientWrapper implements DataClientOperations {
 	@Override
 	public UserInfo getUserInfo() {
 		if (delegate == null) {
-			Logger.getLogger(DataClientWrapper.DATA_CLIENT_LOGGER).log(Level.WARNING,
-					"DataClient  has not been set! Please set it first...");
+			LOGGER.log(Level.WARNING, "DataClient  has not been set! Please set it first...");
 			return null;
 		}
 
 		try {
 			return delegate.getUserInfo();
 		} catch (final SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(DataClientWrapper.DATA_CLIENT_LOGGER));
+			LOGGER.log(Level.SEVERE, null, e);
 			checkConnect();
 		}
 

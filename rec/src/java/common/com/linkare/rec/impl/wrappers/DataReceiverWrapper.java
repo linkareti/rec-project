@@ -1,13 +1,6 @@
-/*
- * DataReceiverWrapper.java
- *
- * Created on 2 de Abril de 2003, 16:58
- */
-
 package com.linkare.rec.impl.wrappers;
 
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import org.omg.CORBA.SystemException;
@@ -15,7 +8,6 @@ import org.omg.CORBA.SystemException;
 import com.linkare.rec.acquisition.DataProducerState;
 import com.linkare.rec.acquisition.DataReceiver;
 import com.linkare.rec.acquisition.DataReceiverOperations;
-import com.linkare.rec.impl.logging.LoggerUtil;
 
 /**
  * 
@@ -26,17 +18,13 @@ public class DataReceiverWrapper implements DataReceiverOperations {
 	private DataReceiver delegate = null;
 	private boolean connected = false;
 
-	private static String DATA_RECEIVER_LOGGER = "DataReceiver.Logger";
+	private static final Logger LOGGER = Logger.getLogger(DataReceiverWrapper.class.getName());
 
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(DataReceiverWrapper.DATA_RECEIVER_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(DataReceiverWrapper.DATA_RECEIVER_LOGGER));
-		}
-	}
-
-	/** Creates a new instance of DataReceiverWrapper 
-	 * @param delegate */
+	/**
+	 * Creates a new instance of DataReceiverWrapper
+	 * 
+	 * @param delegate
+	 */
 	public DataReceiverWrapper(final DataReceiver delegate) {
 		this.delegate = delegate;
 		checkConnect();
@@ -44,8 +32,7 @@ public class DataReceiverWrapper implements DataReceiverOperations {
 
 	private void checkConnect() {
 		if (delegate == null) {
-			Logger.getLogger(DataReceiverWrapper.DATA_RECEIVER_LOGGER).log(Level.WARNING,
-					"DataReceiver  has not been set! Please set it first...");
+			LOGGER.log(Level.WARNING, "DataReceiver  has not been set! Please set it first...");
 			connected = false;
 		}
 		try {
@@ -56,8 +43,7 @@ public class DataReceiverWrapper implements DataReceiverOperations {
 			}
 		} catch (final Exception e) {
 
-			LoggerUtil.logThrowable("Couldn't determine remote existence of DataReceiver. Assuming disconnected...", e,
-					Logger.getLogger(DataReceiverWrapper.DATA_RECEIVER_LOGGER));
+			LOGGER.log(Level.SEVERE, "Couldn't determine remote existence of DataReceiver. Assuming disconnected...", e);
 			connected = false;
 		}
 	}
@@ -82,14 +68,13 @@ public class DataReceiverWrapper implements DataReceiverOperations {
 	@Override
 	public void newSamples(final int largestNumPacket) {
 		if (delegate == null) {
-			Logger.getLogger(DataReceiverWrapper.DATA_RECEIVER_LOGGER).log(Level.WARNING,
-					"DataReceiver  has not been set! Please set it first...");
+			LOGGER.log(Level.WARNING, "DataReceiver  has not been set! Please set it first...");
 			return;
 		}
 		try {
 			delegate.newSamples(largestNumPacket);
 		} catch (final SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(DataReceiverWrapper.DATA_RECEIVER_LOGGER));
+			LOGGER.log(Level.SEVERE, null, e);
 			checkConnect();
 		}
 	}
@@ -97,14 +82,13 @@ public class DataReceiverWrapper implements DataReceiverOperations {
 	@Override
 	public void stateChanged(final DataProducerState newState) {
 		if (delegate == null) {
-			Logger.getLogger(DataReceiverWrapper.DATA_RECEIVER_LOGGER).log(Level.WARNING,
-					"DataReceiver  has not been set! Please set it first...");
+			LOGGER.log(Level.WARNING, "DataReceiver  has not been set! Please set it first...");
 			return;
 		}
 		try {
 			delegate.stateChanged(newState);
 		} catch (final SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(DataReceiverWrapper.DATA_RECEIVER_LOGGER));
+			LOGGER.log(Level.SEVERE, null, e);
 			checkConnect();
 		}
 	}
@@ -112,14 +96,13 @@ public class DataReceiverWrapper implements DataReceiverOperations {
 	@Override
 	public void clientsListChanged() {
 		if (delegate == null) {
-			Logger.getLogger(DataReceiverWrapper.DATA_RECEIVER_LOGGER).log(Level.WARNING,
-					"DataReceiver  has not been set! Please set it first...");
+			LOGGER.log(Level.WARNING, "DataReceiver  has not been set! Please set it first...");
 			return;
 		}
 		try {
 			delegate.clientsListChanged();
 		} catch (final SystemException e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(DataReceiverWrapper.DATA_RECEIVER_LOGGER));
+			LOGGER.log(Level.SEVERE, null, e);
 			checkConnect();
 		}
 	}
