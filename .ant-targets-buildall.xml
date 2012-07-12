@@ -1,6 +1,6 @@
 Compile,
 dist.all
 dist.client
-dist.harwareserver
+dist.hardwareserver
 dist.multicast
 help
