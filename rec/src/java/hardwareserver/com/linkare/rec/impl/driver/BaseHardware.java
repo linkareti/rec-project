@@ -53,7 +53,7 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 	private static final Logger LOGGER = Logger.getLogger(BaseHardware.class.getName());
 
 	private static final boolean SHOW_GUI = Boolean.parseBoolean(Defaults.defaultIfEmpty(
-			System.getProperty("ReC.Driver.ShowGUI"), "false"));
+			System.getProperty("rec.driver.show.gui"), "false"));
 
 	private final HardwareBinder refBinder = new HardwareBinder();
 
