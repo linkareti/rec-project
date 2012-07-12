@@ -19,10 +19,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
 import com.linkare.rec.impl.multicast.security.IResource;
 import com.linkare.rec.impl.multicast.security.ISecurityCommunicator;
@@ -32,13 +30,7 @@ import com.linkare.rec.impl.multicast.security.OperationType;
 import com.linkare.rec.impl.multicast.security.ResourceType;
 
 public class ElabSecurityManager implements ISecurityManager {
-	private static String ELAB_SECURITY_MANAGER_LOGGER = "ELABSecurity.Logger";
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(ElabSecurityManager.ELAB_SECURITY_MANAGER_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(ElabSecurityManager.ELAB_SECURITY_MANAGER_LOGGER));
-		}
-	}
+	private static final Logger LOGGER = Logger.getLogger(ElabSecurityManager.class.getCanonicalName());
 
 	private File logins = null;
 	private FileWriter fw = null;
@@ -52,8 +44,7 @@ public class ElabSecurityManager implements ISecurityManager {
 
 	@Override
 	public boolean authenticate(final IResource resource, final IUser user) {
-		Logger.getLogger(ElabSecurityManager.ELAB_SECURITY_MANAGER_LOGGER).log(Level.INFO,
-				"Authenticating " + user.getUserName());
+		LOGGER.log(Level.INFO, "Authenticating " + user.getUserName());
 
 		// First try to authenticate from the members db...
 		// String userName = user.getUserName();
@@ -90,8 +81,7 @@ public class ElabSecurityManager implements ISecurityManager {
 						+ cal.get(Calendar.MINUTE) + LS);
 				fw.close();
 			} catch (final Exception e) {
-				LoggerUtil.logThrowable("Error writting to file...", e,
-						Logger.getLogger(ElabSecurityManager.ELAB_SECURITY_MANAGER_LOGGER));
+				LOGGER.log(Level.SEVERE, "Error writting to file...", e);
 			}
 		}
 
@@ -101,9 +91,11 @@ public class ElabSecurityManager implements ISecurityManager {
 	public static void main(final String args[]) {
 		final String userName = "andre";
 		final GregorianCalendar cal = new GregorianCalendar();
-		System.out.println(userName + "logged in to lab in: " + cal.get(Calendar.DAY_OF_MONTH) + "/"
-				+ (cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR) + " at " + cal.get(Calendar.HOUR_OF_DAY)
-				+ ":" + cal.get(Calendar.MINUTE));
+		LOGGER.log(
+				Level.ALL,
+				userName + "logged in to lab in: " + cal.get(Calendar.DAY_OF_MONTH) + "/"
+						+ (cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR) + " at "
+						+ cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
 	}
 
 	/**
