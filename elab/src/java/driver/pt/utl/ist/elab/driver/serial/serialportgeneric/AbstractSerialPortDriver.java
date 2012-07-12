@@ -66,7 +66,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	protected static int totalBinaryLength = 0;
 
 	private static final String RS232_CONFIG_FILE_PATH = Defaults.defaultIfEmpty(
-			System.getProperty("ReC.Driver.RS232_CONFIG_FILE_PATH"), "hardwareserver/etc/Rs232Config.xml");
+			System.getProperty("rec.driver.rs232_config_file_path"), "hardwareserver/etc/Rs232Config.xml");
 
 	static {
 		final Logger l = LogManager.getLogManager().getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER);
@@ -552,7 +552,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 	/**
 	 * 
-	 * Only for maintaining compatibility with older versions of ReC.
+	 * Only for maintaining compatibility with older versions of rec.
 	 * 
 	 * @deprecated Use <code><b>processCommand</b></code> method instead
 	 * @throws IncorrectStateException
