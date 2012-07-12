@@ -8,7 +8,6 @@ package com.linkare.rec.impl.client;
 
 import java.util.Vector;
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import org.omg.PortableServer.Servant;
@@ -39,7 +38,6 @@ import com.linkare.rec.impl.client.experiment.ExpUsersListChangeListener;
 import com.linkare.rec.impl.client.experiment.ExpUsersListEvent;
 import com.linkare.rec.impl.client.experiment.ExpUsersListSource;
 import com.linkare.rec.impl.events.ChatMessageEvent;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.ORBBean;
 import com.linkare.rec.impl.utils.ObjectID;
 import com.linkare.rec.impl.wrappers.DataProducerWrapper;
@@ -55,14 +53,8 @@ import com.linkare.rec.impl.wrappers.MultiCastHardwareWrapper;
  */
 public class ApparatusClientBean implements DataClientOperations, ExpUsersListSource, IChatServer, ApparatusConnector {
 
-	private static String APPARATUS_CLIENT_LOGGER = "ReC.ApparatusClientBean";
+	private static final Logger LOGGER = Logger.getLogger(ApparatusClientBean.class.getName());
 
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
-		}
-	}
 	private transient DataProducerWrapper dataProducerInEffect = null;
 	private transient MultiCastHardwareWrapper mchw = null;
 	private transient DataClient _this = null;
@@ -95,8 +87,7 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 			_this = DataClientHelper.narrow(thisReference);
 			return _this;
 		} catch (final Exception e) {
-			LoggerUtil.logThrowable("Couldn't register this DataClient with ORB", e,
-					Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+			LOGGER.log(Level.SEVERE, "Couldn't register this DataClient with ORB", e);
 			return null;
 		}
 
@@ -179,8 +170,7 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	@Override
 	public void hardwareStateChange(final HardwareState newState) {
 		state = newState;
-		Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER).log(Level.INFO,
-				"Received new State info:" + newState);
+		LOGGER.log(Level.INFO, "Received new State info:" + newState);
 		processState();
 	}
 
@@ -214,7 +204,7 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 				// locked = false;
 			}
 		} catch (final Exception e) {
-			LoggerUtil.logThrowable("Error processing state", e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
+			LOGGER.log(Level.SEVERE, "Error processing state", e);
 		}
 	}
 
@@ -498,8 +488,7 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 			try {
 				dataSource = new DataProducerWrapper(apparatus.getMultiCastHardware().getDataProducer(getUserInfo()));
 			} catch (final Exception e) {
-				LoggerUtil.logThrowable("Data Source is null... unable to fetch it from MCHardware...", e,
-						Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, "Data Source is null... unable to fetch it from MCHardware...", e);
 			}
 		}
 		if (dataSource == null) {
@@ -780,10 +769,10 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 		} catch (final NotRegistered e) {
 			usersListRefreshThread.stopNow();
 			usersListRefreshThread = null;
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			fireApparatusConnectorListenerApparatusNotRegistered(e.getMessage());
 		} catch (final NotAuthorized na) {
-			LoggerUtil.logThrowable(null, na, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+			LOGGER.log(Level.SEVERE, na.getMessage(), na);
 			fireApparatusConnectorListenerApparatusNotAuthorized(na.getMessage());
 		}
 
@@ -834,9 +823,9 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 				mchw.sendMessage(getUserInfo(), evt.getUserTo().getUserName(), evt.getMessage());
 			} catch (final NotRegistered e) {
 				fireApparatusConnectorListenerApparatusNotRegistered(e.getMessage());
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			} catch (final NotAuthorized na) {
-				LoggerUtil.logThrowable(null, na, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, na.getMessage(), na);
 				fireApparatusConnectorListenerApparatusNotAuthorized(na.getMessage());
 			}
 		}
@@ -990,13 +979,13 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 					connectedBefore = true;
 					fireApparatusConnectorListenerApparatusConnected(null);
 				} catch (final MaximumClientsReached e) {
-					LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+					LOGGER.log(Level.SEVERE, e.getMessage(), e);
 					fireApparatusConnectorListenerApparatusMaxUsers(e.getMessage());
 				} catch (final NotAuthorized e) {
-					LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+					LOGGER.log(Level.SEVERE, e.getMessage(), e);
 					fireApparatusConnectorListenerApparatusNotAuthorized(e.getMessage());
 				} catch (final NotAvailableException e) {
-					LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+					LOGGER.log(Level.SEVERE, e.getMessage(), e);
 					fireApparatusConnectorListenerApparatusDisconnected(e.getMessage());
 				}
 
@@ -1004,7 +993,7 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 				fireApparatusConnectorListenerApparatusDisconnected(null);
 			}
 		} catch (final Exception e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			e.printStackTrace();
 			fireApparatusConnectorListenerApparatusUnreachable(e.getMessage());
 		}
@@ -1024,7 +1013,7 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 				fireApparatusConnectorListenerApparatusDisconnected(null);
 				connectedBefore = false;
 			} catch (final Exception e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				e.printStackTrace();
 			}
 		}
@@ -1045,19 +1034,19 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 				// locked = true;
 				fireApparatusConnectorListenerApparatusLocked(null);
 			} catch (final IncorrectStateException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireApparatusConnectorListenerApparatusIncorrectState(e.getMessage());
 			} catch (final NotAvailableException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireApparatusConnectorListenerApparatusDisconnecting(e.getMessage());
 			} catch (final NotRegistered e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireApparatusConnectorListenerApparatusNotRegistered(e.getMessage());
 			} catch (final NotOwnerException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireApparatusConnectorListenerApparatusNotOwner(e.getMessage());
 			} catch (final NotAuthorized na) {
-				LoggerUtil.logThrowable(null, na, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, na.getMessage(), na);
 				fireApparatusConnectorListenerApparatusNotAuthorized(na.getMessage());
 			}
 		} else {
@@ -1073,22 +1062,22 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 				mchw.configure(getUserInfo(), config);
 
 			} catch (final IncorrectStateException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireApparatusConnectorListenerApparatusIncorrectState(e.getMessage());
 			} catch (final NotAvailableException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireApparatusConnectorListenerApparatusDisconnecting(e.getMessage());
 			} catch (final WrongConfigurationException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireApparatusConnectorListenerApparatusStateConfigError(e.getMessage());
 			} catch (final NotRegistered e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireApparatusConnectorListenerApparatusNotRegistered(e.getMessage());
 			} catch (final NotOwnerException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireApparatusConnectorListenerApparatusNotOwner(e.getMessage());
 			} catch (final NotAuthorized na) {
-				LoggerUtil.logThrowable(null, na, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, na.getMessage(), na);
 				fireApparatusConnectorListenerApparatusNotAuthorized(na.getMessage());
 			}
 		} else {
@@ -1103,19 +1092,19 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 				mchw.reset(getUserInfo());
 				dataProducerInEffect = null;
 			} catch (final IncorrectStateException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireApparatusConnectorListenerApparatusIncorrectState(e.getMessage());
 			} catch (final NotAvailableException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireApparatusConnectorListenerApparatusDisconnecting(e.getMessage());
 			} catch (final NotRegistered e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireApparatusConnectorListenerApparatusNotRegistered(e.getMessage());
 			} catch (final NotOwnerException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireApparatusConnectorListenerApparatusNotOwner(e.getMessage());
 			} catch (final NotAuthorized na) {
-				LoggerUtil.logThrowable(null, na, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, na.getMessage(), na);
 				fireApparatusConnectorListenerApparatusNotAuthorized(na.getMessage());
 			}
 		} else {
@@ -1131,19 +1120,19 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 				dataProducerInEffect = new DataProducerWrapper(dataProducer);
 
 			} catch (final IncorrectStateException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireApparatusConnectorListenerApparatusIncorrectState(e.getMessage());
 			} catch (final NotAvailableException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireApparatusConnectorListenerApparatusDisconnecting(e.getMessage());
 			} catch (final NotRegistered e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireApparatusConnectorListenerApparatusNotRegistered(e.getMessage());
 			} catch (final NotOwnerException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireApparatusConnectorListenerApparatusNotOwner(e.getMessage());
 			} catch (final NotAuthorized na) {
-				LoggerUtil.logThrowable(null, na, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, na.getMessage(), na);
 				fireApparatusConnectorListenerApparatusNotAuthorized(na.getMessage());
 			}
 		} else {
@@ -1159,19 +1148,19 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 				dataProducerInEffect = null;
 
 			} catch (final IncorrectStateException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireApparatusConnectorListenerApparatusIncorrectState(e.getMessage());
 			} catch (final NotAvailableException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireApparatusConnectorListenerApparatusDisconnecting(e.getMessage());
 			} catch (final NotRegistered e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireApparatusConnectorListenerApparatusNotRegistered(e.getMessage());
 			} catch (final NotOwnerException e) {
-				LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireApparatusConnectorListenerApparatusNotOwner(e.getMessage());
 			} catch (final NotAuthorized na) {
-				LoggerUtil.logThrowable(null, na, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+				LOGGER.log(Level.SEVERE, na.getMessage(), na);
 				fireApparatusConnectorListenerApparatusNotAuthorized(na.getMessage());
 			}
 		} else {
@@ -1203,7 +1192,7 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 					try {
 						Thread.sleep(usersListRefreshPeriod);
 					} catch (final Exception e) {
-						LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+						LOGGER.log(Level.SEVERE, e.getMessage(), e);
 						return;
 					}
 				}
@@ -1215,7 +1204,7 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 							refreshUsersList();
 						}
 					} catch (final Exception e) {
-						LoggerUtil.logThrowable(null, e, Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
+						LOGGER.log(Level.SEVERE, e.getMessage(), e);
 						return;
 					}
 				}
