@@ -27,7 +27,7 @@ import com.linkare.rec.impl.utils.ORBBean;
 public class MultiCastControllerMain {
 
 	private static final boolean SHOW_GUI = Boolean.parseBoolean(Defaults.defaultIfEmpty(
-			System.getProperty("ReC.MultiCastController.ShowGUI"), "false"));
+			System.getProperty("rec.multicastcontroller.showgui"), "false"));
 
 	/** Creates a new instance of MultiCastControllerMain */
 	public MultiCastControllerMain() {
