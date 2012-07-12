@@ -1,16 +1,9 @@
-/*
- * ServerMain.java
- *
- * Created on 3 de Abril de 2005, 05:55
- */
-
 package pt.utl.ist.elab.driver.vbs;
 
-import java.util.logging.LogManager;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.linkare.rec.impl.driver.BaseHardware;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.ORBBean;
 
 /**
@@ -18,15 +11,8 @@ import com.linkare.rec.impl.utils.ORBBean;
  * @author Pedro Queiro'
  */
 public class ServerMain {
-	// O codigo desta classe e' sempre igual!!! Alterar so' os nomes para o
-	// vosso caso!
-	private static String BS_HARDWARE_LOGGER = "BS.Logger";
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(ServerMain.BS_HARDWARE_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(ServerMain.BS_HARDWARE_LOGGER));
-		}
-	}
+	
+	private static final Logger LOGGER=Logger.getLogger(ServerMain.class.getName());
 
 	/**
 	 * @param args the command line arguments
@@ -35,13 +21,17 @@ public class ServerMain {
 		try {
 			ORBBean.getORBBean();
 
-			final BaseHardware baseHardware = new BaseHardware(new BSDriver());
+			new BaseHardware(new BSDriver());
 
-			Thread.currentThread().join();
+			try {
+				Thread.currentThread().join();
+			} catch (final Exception ignored) {
+			}
 
-		} catch (final Exception e) {
 			ORBBean.getORBBean().killORB();
-			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(ServerMain.BS_HARDWARE_LOGGER));
+		} catch (final Exception e) {
+			LOGGER.log(Level.SEVERE,"Error on ServerMain...", e);
 		}
+
 	}
 }

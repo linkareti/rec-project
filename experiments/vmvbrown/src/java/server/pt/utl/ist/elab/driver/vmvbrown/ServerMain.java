@@ -1,16 +1,9 @@
-/*
- * ServerMain.java
- *
- * Created on 10 de Abril de 2003, 20:07
- */
-
 package pt.utl.ist.elab.driver.vmvbrown;
 
-import java.util.logging.LogManager;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.linkare.rec.impl.driver.BaseHardware;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.ORBBean;
 
 /**
@@ -19,13 +12,7 @@ import com.linkare.rec.impl.utils.ORBBean;
  */
 public class ServerMain {
 
-	private static String MvBrown_HARDWARE_LOGGER = "MvBrown.Logger";
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(ServerMain.MvBrown_HARDWARE_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(ServerMain.MvBrown_HARDWARE_LOGGER));
-		}
-	}
+	private static final Logger LOGGER=Logger.getLogger(ServerMain.class.getName());
 
 	/**
 	 * @param args the command line arguments
@@ -34,13 +21,17 @@ public class ServerMain {
 		try {
 			ORBBean.getORBBean();
 
-			final BaseHardware baseHardware = new BaseHardware(new MvBrownDriver());
+			new BaseHardware(new MvBrownDriver());
 
-			Thread.currentThread().join();
-
-		} catch (final Exception e) {
+			try {
+				Thread.currentThread().join();
+			} catch (final Exception ignored) {
+			}
+			
 			ORBBean.getORBBean().killORB();
-			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(ServerMain.MvBrown_HARDWARE_LOGGER));
+			
+		} catch (final Exception e) {
+			LOGGER.log(Level.SEVERE,"Error on ServerMain...", e);
 		}
 	}
 }

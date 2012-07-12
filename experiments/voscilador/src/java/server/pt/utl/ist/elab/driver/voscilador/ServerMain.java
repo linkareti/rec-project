@@ -6,11 +6,10 @@
 
 package pt.utl.ist.elab.driver.voscilador;
 
-import java.util.logging.LogManager;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.linkare.rec.impl.driver.BaseHardware;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.ORBBean;
 
 /**
@@ -18,15 +17,7 @@ import com.linkare.rec.impl.utils.ORBBean;
  * @author RF
  */
 public class ServerMain {
-	// O código desta classe é sempre igual!!! Alterar só os nomes para o vosso
-	// caso!
-	private static String Oscilador_HARDWARE_LOGGER = "Oscilador.Logger";
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(ServerMain.Oscilador_HARDWARE_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(ServerMain.Oscilador_HARDWARE_LOGGER));
-		}
-	}
+	private static final Logger LOGGER=Logger.getLogger(ServerMain.class.getName());
 
 	/**
 	 * @param args the command line arguments
@@ -35,13 +26,17 @@ public class ServerMain {
 		try {
 			ORBBean.getORBBean();
 
-			final BaseHardware baseHardware = new BaseHardware(new OsciladorDriver());
+			new BaseHardware(new OsciladorDriver());
 
-			Thread.currentThread().join();
+			try {
+				Thread.currentThread().join();
+			} catch (final Exception ignored) {
+			}
+
+			ORBBean.getORBBean().killORB();
 
 		} catch (final Exception e) {
-			ORBBean.getORBBean().killORB();
-			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(ServerMain.Oscilador_HARDWARE_LOGGER));
+			LOGGER.log(Level.SEVERE,"Error on ServerMain...", e);
 		}
 	}
 }

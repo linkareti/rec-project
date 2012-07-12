@@ -6,11 +6,10 @@
 
 package pt.utl.ist.elab.driver.vpend2m;
 
-import java.util.logging.LogManager;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.linkare.rec.impl.driver.BaseHardware;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.ORBBean;
 
 /**
@@ -19,13 +18,7 @@ import com.linkare.rec.impl.utils.ORBBean;
  */
 public class ServerMain {
 
-	private static String Pend2M_HARDWARE_LOGGER = "Pend2M.Logger";
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(ServerMain.Pend2M_HARDWARE_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(ServerMain.Pend2M_HARDWARE_LOGGER));
-		}
-	}
+	private static final Logger LOGGER=Logger.getLogger(ServerMain.class.getName());
 
 	/**
 	 * @param args the command line arguments
@@ -34,13 +27,17 @@ public class ServerMain {
 		try {
 			ORBBean.getORBBean();
 
-			final BaseHardware baseHardware = new BaseHardware(new Pend2MDriver());
+			new BaseHardware(new Pend2MDriver());
 
-			Thread.currentThread().join();
+			try {
+				Thread.currentThread().join();
+			} catch (final Exception ignored) {
+			}
+
+			ORBBean.getORBBean().killORB();
 
 		} catch (final Exception e) {
-			ORBBean.getORBBean().killORB();
-			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(ServerMain.Pend2M_HARDWARE_LOGGER));
+			LOGGER.log(Level.SEVERE,"Error on ServerMain...", e);
 		}
 	}
 }

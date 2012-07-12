@@ -1,16 +1,9 @@
-/*
- * HardwareServerMain.java
- *
- * Created on 26 de Junho de 2002, 16:44
- */
-
 package pt.utl.ist.elab.driver.gamma;
 
-import java.util.logging.LogManager;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.linkare.rec.impl.driver.BaseHardware;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.ORBBean;
 
 /**
@@ -19,14 +12,7 @@ import com.linkare.rec.impl.utils.ORBBean;
  */
 public class ServerMain {
 
-	private static String GAMMA_HARDWARE_LOGGER = "GammaHardware.Logger";
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(ServerMain.GAMMA_HARDWARE_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(ServerMain.GAMMA_HARDWARE_LOGGER));
-		}
-	}
+	private static final Logger LOGGER=Logger.getLogger(ServerMain.class.getName());
 
 	/**
 	 * @param args the command line arguments
@@ -35,7 +21,7 @@ public class ServerMain {
 		try {
 			ORBBean.getORBBean();
 
-			final BaseHardware baseHardware = new BaseHardware(new GammaStampDriver());
+			new BaseHardware(new GammaStampDriver());
 
 			try {
 				Thread.currentThread().join();
@@ -44,7 +30,7 @@ public class ServerMain {
 
 			ORBBean.getORBBean().killORB();
 		} catch (final Exception e) {
-			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(ServerMain.GAMMA_HARDWARE_LOGGER));
+			LOGGER.log(Level.SEVERE,"Error on ServerMain...", e);
 		}
 	}
 

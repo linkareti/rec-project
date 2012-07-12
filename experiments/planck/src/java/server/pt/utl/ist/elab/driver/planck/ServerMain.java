@@ -6,11 +6,10 @@
 
 package pt.utl.ist.elab.driver.planck;
 
-import java.util.logging.LogManager;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.linkare.rec.impl.driver.BaseHardware;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.ORBBean;
 
 /**
@@ -19,14 +18,7 @@ import com.linkare.rec.impl.utils.ORBBean;
  */
 public class ServerMain {
 
-	private static String PLANCK_HARDWARE_LOGGER = "PlanckHardware.Logger";
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(ServerMain.PLANCK_HARDWARE_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(ServerMain.PLANCK_HARDWARE_LOGGER));
-		}
-	}
+	private static final Logger LOGGER=Logger.getLogger(ServerMain.class.getName());
 
 	/**
 	 * @param args the command line arguments
@@ -35,7 +27,7 @@ public class ServerMain {
 		try {
 			ORBBean.getORBBean();
 
-			final BaseHardware baseHardware = new BaseHardware(new PlanckStampDriver());
+			new BaseHardware(new PlanckStampDriver());
 
 			try {
 				Thread.currentThread().join();
@@ -44,7 +36,7 @@ public class ServerMain {
 
 			ORBBean.getORBBean().killORB();
 		} catch (final Exception e) {
-			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(ServerMain.PLANCK_HARDWARE_LOGGER));
+			LOGGER.log(Level.SEVERE,"Error on ServerMain...", e);
 		}
 	}
 

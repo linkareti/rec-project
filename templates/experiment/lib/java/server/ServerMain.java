@@ -1,16 +1,15 @@
-package pt.utl.ist.elab.driver.vyounginterf;
-
-import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import com.linkare.rec.impl.driver.BaseHardware;
+import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.ORBBean;
 
 /**
- * 
- * @author Emanuel Antunes
+ * @author José Pedro Pereira - Linkare TI
  */
 public class ServerMain {
+
 	private static final Logger LOGGER=Logger.getLogger(ServerMain.class.getName());
 
 	/**
@@ -19,8 +18,7 @@ public class ServerMain {
 	public static void main(final String[] args) {
 		try {
 			ORBBean.getORBBean();
-
-			new BaseHardware(new YoungInterfDriver());
+			new BaseHardware(new @experiment.name@Driver());
 
 			try {
 				Thread.currentThread().join();
@@ -32,4 +30,5 @@ public class ServerMain {
 			LOGGER.log(Level.SEVERE,"Error on ServerMain...", e);
 		}
 	}
+
 }

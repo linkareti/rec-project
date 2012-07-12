@@ -1,15 +1,10 @@
-/*
- * ServerMain.java
- *
- * Created on 27 de Fevereiro de 2005, 20:07
- */
-
 package pt.utl.ist.elab.driver.vpoisson;
 
-import com.linkare.rec.impl.utils.*;
-import com.linkare.rec.impl.driver.*;
-import com.linkare.rec.impl.logging.*;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import com.linkare.rec.impl.driver.BaseHardware;
+import com.linkare.rec.impl.utils.ORBBean;
 
 /**
  * 
@@ -18,13 +13,7 @@ import java.util.logging.*;
  */
 public class ServerMain {
 
-	private static String POISSON_HARDWARE_LOGGER = "Poisson.Logger";
-	static {
-		Logger l = LogManager.getLogManager().getLogger(POISSON_HARDWARE_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(POISSON_HARDWARE_LOGGER));
-		}
-	}
+	private static final Logger LOGGER=Logger.getLogger(ServerMain.class.getName());
 
 	/**
 	 * @param args the command line arguments
@@ -33,13 +22,16 @@ public class ServerMain {
 		try {
 			ORBBean.getORBBean();
 
-			BaseHardware baseHardware = new BaseHardware(new PoissonDriver());
+			new BaseHardware(new PoissonDriver());
 
-			Thread.currentThread().join();
+			try {
+				Thread.currentThread().join();
+			} catch (final Exception ignored) {
+			}
 
-		} catch (Exception e) {
 			ORBBean.getORBBean().killORB();
-			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(POISSON_HARDWARE_LOGGER));
+		} catch (final Exception e) {
+			LOGGER.log(Level.SEVERE,"Error on ServerMain...", e);
 		}
 	}
 }
