@@ -7,5 +7,5 @@ package com.linkare.rec.acquisition;
  */
 
 public interface PROPKEY_USERINFO_NEXTLOCK_DATETIME_MIN {
-	public static final String value = "ReC.UserInfo.NextLock.DateTimeMin";
+	public static final String value = "rec.userinfo.nextlock.datetime.min";
 }

@@ -7,5 +7,5 @@ package com.linkare.rec.acquisition;
  */
 
 public interface PROPKEY_USERINFO_NEXTLOCK_DATETIME_MAX {
-	public static final String value = "ReC.UserInfo.NextLock.DateTimeMax";
+	public static final String value = "rec.userinfo.nextlock.datetime.max";
 }

@@ -7,5 +7,5 @@ package com.linkare.rec.acquisition;
  */
 
 public interface PROPKEY_USERINFO_HARDWARES_CONNECTED_TO {
-	public static final String value = "ReC.UserInfo.Hardwares.ConnectedTo";
+	public static final String value = "rec.userinfo.hardwares.connectedto";
 }

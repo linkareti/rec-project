@@ -7,5 +7,5 @@ package com.linkare.rec.acquisition;
  */
 
 public interface PROPKEY_USERINFO_CERTIFICATE {
-	public static final String value = "ReC.UserInfo.Certificate";
+	public static final String value = "rec.userinfo.certificate";
 }

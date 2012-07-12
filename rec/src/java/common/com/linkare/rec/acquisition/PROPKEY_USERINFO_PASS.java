@@ -7,7 +7,5 @@ package com.linkare.rec.acquisition;
  */
 
 public interface PROPKEY_USERINFO_PASS {
-
-	// Version 7.0 Addition
-	public static final String value = "ReC.UserInfo.Password";
+	public static final String value = "rec.userinfo.password";
 }

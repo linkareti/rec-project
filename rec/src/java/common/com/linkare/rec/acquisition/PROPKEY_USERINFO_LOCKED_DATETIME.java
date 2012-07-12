@@ -7,5 +7,5 @@ package com.linkare.rec.acquisition;
  */
 
 public interface PROPKEY_USERINFO_LOCKED_DATETIME {
-	public static final String value = "ReC.UserInfo.Locked.DateTime";
+	public static final String value = "rec.userinfo.locked.datetime";
 }
