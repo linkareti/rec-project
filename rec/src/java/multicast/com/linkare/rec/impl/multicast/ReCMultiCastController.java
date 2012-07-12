@@ -1,7 +1,3 @@
-/*
- * ELABMultiCastController.java Created on 30 de Outubro de 2002, 10:30
- */
-
 package com.linkare.rec.impl.multicast;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -57,14 +53,14 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 
 	public static final DataProducerActivator DP_DEACTIVATOR = new DataProducerActivator();
 
-	public static String MCCONTROLLER_LOGGER = "MultiCastController.Logger";
+	private static final Logger LOGGER = Logger.getLogger(ReCMultiCastController.class.getName());
 
-	public static final String SYSPROP_MULTICAST_INIT_REF = "ReC.MultiCastController.InitRef";
+	public static final String SYSPROP_MULTICAST_INIT_REF = "rec.multicastcontroller.initref";
 
 	public static final String MULTICAST_INIT_REF = Defaults.defaultIfEmpty(
 			System.getProperty(ReCMultiCastController.SYSPROP_MULTICAST_INIT_REF), "MultiCastController");
 
-	public static final String SYSPROP_MULTICAST_BIND_NAME = "ReC.MultiCastController.BindName";
+	public static final String SYSPROP_MULTICAST_BIND_NAME = "rec.multicastcontroller.bindname";
 
 	public static final String MULTICAST_BIND_NAME = Defaults.defaultIfEmpty(
 			System.getProperty(ReCMultiCastController.SYSPROP_MULTICAST_BIND_NAME), "MultiCastController");
@@ -99,13 +95,13 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 	 * The maximum number of apparatus available on this lab
 	 */
 	private static final int MAXIMUM_HARDWARES = Defaults.defaultIfEmpty(
-			System.getProperty("ReC.MultiCastController.MAXIMUM_HARDWARES"), 40);
+			System.getProperty("rec.multicastcontroller.max.hardwares"), 40);
 
 	/*
 	 * The maximum number of clients to register with each hardware
 	 */
 	private static final int MAXIMUM_CLIENTS_PER_HARDWARE = Defaults.defaultIfEmpty(
-			System.getProperty("ReC.MultiCastController.MAX_CLIENTS_PER_HARDWARE"), 20);
+			System.getProperty("rec.multicastcontroller.maxclients.per.hardware"), 20);
 
 	/*
 	 * The maximum number of clients to register with this lab
@@ -128,8 +124,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 		try {
 			multiCastLocation = InetAddress.getLocalHost().getCanonicalHostName();
 		} catch (final Exception e) {
-			LoggerUtil.logThrowable("Error determining MultiCastController Location", e,
-					Logger.getLogger(ReCMultiCastController.MCCONTROLLER_LOGGER));
+			LOGGER.log(Level.SEVERE, "Error determining MultiCastController Location", e);
 		}
 
 		// Create a client queue adapter
@@ -294,7 +289,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 	 * Internal method to log messages
 	 */
 	private void log(final Level l, final String message) {
-		Logger.getLogger(ReCMultiCastController.MCCONTROLLER_LOGGER).log(l, message);
+		LOGGER.log(l, message);
 	}
 
 	/* Inner Class - Hardware Connection Checker */
@@ -442,8 +437,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 
 				} catch (final Exception e) {
 					LoggerUtil.logThrowable(
-							"Couldn't create a ReCMultiCastHardware for a Hardware that is registering!", e,
-							Logger.getLogger(ReCMultiCastController.MCCONTROLLER_LOGGER));
+							"Couldn't create a ReCMultiCastHardware for a Hardware that is registering!", e, LOGGER);
 					return;
 				}
 
@@ -484,7 +478,6 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 			System.arraycopy(multicastHardwareArrayList.toArray(), 0, retVal, 0, retVal.length);
 			return retVal;
 		}
-
 
 		public List<ReCMultiCastHardware> unsecureEnumerateHardwares() {
 
@@ -537,7 +530,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 
 		@Override
 		public void logThrowable(final String message, final Throwable t) {
-			LoggerUtil.logThrowable(message, t, Logger.getLogger(ReCMultiCastController.MCCONTROLLER_LOGGER));
+			LOGGER.log(Level.SEVERE, message, t);
 		}
 
 	}
@@ -551,8 +544,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 					NotificationManager.getInstance().getNotificationListener(), null, null);
 			result = true;
 		} catch (ManagementException e) {
-			LoggerUtil.logThrowable("Error registing MXBean", e,
-					Logger.getLogger(ReCMultiCastController.MCCONTROLLER_LOGGER));
+			LOGGER.log(Level.SEVERE, "Error registing MXBean", e);
 		}
 		return result;
 	}

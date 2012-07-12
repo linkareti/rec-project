@@ -1,9 +1,3 @@
-/*
- * ReCMultiCastDataProducer.java
- *
- * Created on 5 de Novembro de 2002, 12:54
- */
-
 package com.linkare.rec.impl.multicast;
 
 import java.io.IOException;
@@ -11,7 +5,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.InetAddress;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,10 +27,8 @@ import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.data.SamplesPacketMatrix;
 import com.linkare.rec.impl.data.SamplesPacketReadException;
 import com.linkare.rec.impl.exceptions.NotAnAvailableSamplesPacketExceptionConstants;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.multicast.security.DefaultResource;
 import com.linkare.rec.impl.multicast.security.IResource;
-import com.linkare.rec.impl.multicast.security.ResourceType;
 import com.linkare.rec.impl.utils.DataCollector;
 import com.linkare.rec.impl.utils.DataCollectorState;
 import com.linkare.rec.impl.utils.Deactivatable;
@@ -59,7 +50,9 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 	private static final long serialVersionUID = 5596097800609305018L;
 
 	private static final long GET_SAMPLES_IDLE_TIME = Defaults.defaultIfEmpty(
-			System.getProperty("ReC.MultiCastDataProducer.GET_SAMPLES_IDLE_TIME"), 60) * 1000;
+			System.getProperty("rec.multicastdataproducer.getsamples.idletime"), 60) * 1000;
+
+	private static final Logger LOGGER = Logger.getLogger(ReCMultiCastDataProducer.class.getName());
 
 	private transient DataProducerWrapper remoteDataProducer = null;
 	private transient DataProducer _this = null;
@@ -108,8 +101,7 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 		try {
 			multiCastLocation = InetAddress.getLocalHost().getCanonicalHostName();
 		} catch (final Exception e) {
-			LoggerUtil.logThrowable("Error determining MultiCastController Location", e,
-					Logger.getLogger(ReCMultiCastController.MCCONTROLLER_LOGGER));
+			LOGGER.log(Level.SEVERE,"Error determining MultiCastController Location",e);
 		}
 
 		DefaultResource parentMCControllerResource = new DefaultResource();
