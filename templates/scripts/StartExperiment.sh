@@ -14,10 +14,10 @@ DEPLOY_DIR=`pwd`
 DRIVER_BASE_DIR="$DEPLOY_DIR/hardwareserver"
 
 export GENERIC_ORB_SYSPROPS="-Dorg.omg.CORBA.ORBClass=org.openorb.orb.core.ORB -Dorg.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton -Dopenorb.config=$DRIVER_BASE_DIR/etc/openorb.xml "
-export DRIVER_ORB_SYSPROPS="-Dopenorb.profile=ReCHardware -DReC.MultiCastController.InitRef=MultiCastController -DReC.PercentFreeMemoryThreshold2Serialization=10 -DReC.MultiCastDataProducer.GET_SAMPLES_IDLE_TIME=60 -DReC.Driver.ShowGUI=false"
+export DRIVER_ORB_SYSPROPS="-Dopenorb.profile=ReCHardware -Drec.multicastcontroller.initref=MultiCastController -Drec.percent.freememory.threshold.serialization=10 -Drec.multicastdataproducer.getsamples.idletime=60 -Drec.driver.show.gui=false"
 export MEM_SYSPROPS="-Xms$INITIAL_HEAP_MEM -Xmx$MAX_HEAP_MEM"
 export LOG_SYSPROPS="-Djava.util.logging.config.file=$DRIVER_BASE_DIR/etc/loggers.config.properties" 
-export PROCESSINGMANAGER_SYSPROPS="-DReC.ProcessingManager.ThreadPool.Coresize=@rec.driver.processingmanager.threadpool.coresize@ -DReC.ProcessingManager.ThreadPool.Maxsize=@rec.driver.processingmanager.threadpool.maxsize@ -DReC.ProcessingManager.Thread.Idletime=@rec.processingmanager.thread.idletime@"
+export PROCESSINGMANAGER_SYSPROPS="-Drec.processingmanager.threadPool.coresize=@rec.driver.processingmanager.threadpool.coresize@ -Drec.processingmanager.threadPool.maxsize=@rec.driver.processingmanager.threadpool.maxsize@ -Drec.processingmanager.thread.idletime=@rec.processingmanager.thread.idletime@"
 
 # TODO - Aleitao
 # não esquecer que cada experiência poderá querer definir command line arguments 
