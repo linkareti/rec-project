@@ -1,16 +1,9 @@
-/*
- * RobotServer.java
- *
- * Created on 10 de Abril de 2003, 20:07
- */
-
 package pt.utl.ist.elab.driver.vdpendulum;
 
-import java.util.logging.LogManager;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.linkare.rec.impl.driver.BaseHardware;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.ORBBean;
 
 /**
@@ -18,13 +11,8 @@ import com.linkare.rec.impl.utils.ORBBean;
  * @author André Neto - LEFT - IST
  */
 public class ServerMain {
-	private static String DPENDULUM_HARDWARE_LOGGER = "DPendulum.Logger";
-	static {
-		Logger l = LogManager.getLogManager().getLogger(DPENDULUM_HARDWARE_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(DPENDULUM_HARDWARE_LOGGER));
-		}
-	}
+
+	private static final Logger LOGGER = Logger.getLogger(ServerMain.class.getName());
 
 	/**
 	 * @param args the command line arguments
@@ -33,13 +21,16 @@ public class ServerMain {
 		try {
 			ORBBean.getORBBean();
 
-			BaseHardware baseHardware = new BaseHardware(new DPendulumDriver());
+			new BaseHardware(new DPendulumDriver());
 
-			Thread.currentThread().join();
+			try {
+				Thread.currentThread().join();
+			} catch (final Exception ignored) {
+			}
 
-		} catch (Exception e) {
 			ORBBean.getORBBean().killORB();
-			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(DPENDULUM_HARDWARE_LOGGER));
+		} catch (final Exception e) {
+			LOGGER.log(Level.SEVERE, "Error on ServerMain...", e);
 		}
 	}
 }

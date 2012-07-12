@@ -1,34 +1,18 @@
-/*
- * HardwareServerMain.java
- *
- * Created on 26 de Junho de 2002, 16:44
- */
-
-//TODO comentar
-
 package pt.utl.ist.elab.driver.condensador;
 
-import java.util.logging.LogManager;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.linkare.rec.impl.driver.BaseHardware;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.ORBBean;
 
 /**
  * 
- * @author jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class ServerMain {
 
-	private static String CONDENSADOR_HARDWARE_LOGGER = "CondensadorHardware.Logger";
-
-	static {
-		Logger l = LogManager.getLogManager().getLogger(CONDENSADOR_HARDWARE_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(CONDENSADOR_HARDWARE_LOGGER));
-		}
-	}
+	private static final Logger LOGGER = Logger.getLogger(ServerMain.class.getName());
 
 	/**
 	 * @param args the command line arguments
@@ -37,16 +21,16 @@ public class ServerMain {
 		try {
 			ORBBean.getORBBean();
 
-			BaseHardware baseHardware = new BaseHardware(new CondensadorStampDriver());
+			new BaseHardware(new CondensadorStampDriver());
 
 			try {
 				Thread.currentThread().join();
-			} catch (Exception ignored) {
+			} catch (final Exception ignored) {
 			}
 
 			ORBBean.getORBBean().killORB();
-		} catch (Exception e) {
-			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(CONDENSADOR_HARDWARE_LOGGER));
+		} catch (final Exception e) {
+			LOGGER.log(Level.SEVERE, "Error on ServerMain...", e);
 		}
 	}
 

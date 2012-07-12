@@ -1,33 +1,18 @@
-/*
- * HardwareServerMain.java
- *
- * Created on 26 de Junho de 2002, 16:44
- */
-
 package pt.utl.ist.elab.driver.decay;
 
-import java.util.logging.LogManager;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.linkare.rec.impl.driver.BaseHardware;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.ORBBean;
-
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
 public class ServerMain {
 
-	private static String RADIOACTIVIDADE_HARDWARE_LOGGER = "RadioactividadeHardware.Logger";
-
-	static {
-		Logger l = LogManager.getLogManager().getLogger(RADIOACTIVIDADE_HARDWARE_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(RADIOACTIVIDADE_HARDWARE_LOGGER));
-		}
-	}
-
+	private static final Logger LOGGER = Logger.getLogger(ServerMain.class.getName());
+	
 	/**
 	 * @param args the command line arguments
 	 */
@@ -35,13 +20,16 @@ public class ServerMain {
 		try {
 			ORBBean.getORBBean();
 
-//			BaseHardware baseHardware = new BaseHardware(new RadioactividadeStampDriver());
+			//new BaseHardware(new RadioactividadeStampDriver());
 
-			Thread.currentThread().join();
+			try {
+				Thread.currentThread().join();
+			} catch (final Exception ignored) {
+			}
 
-		} catch (Exception e) {
 			ORBBean.getORBBean().killORB();
-			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(RADIOACTIVIDADE_HARDWARE_LOGGER));
+		} catch (final Exception e) {
+			LOGGER.log(Level.SEVERE, "Error on ServerMain...", e);
 		}
 	}
 
