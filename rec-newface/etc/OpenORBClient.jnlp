@@ -20,7 +20,7 @@
 	<jar href="openorb_pss-1.4.0_sig.jar"/>-->
 	<property name="org.omg.CORBA.ORBClass" value="org.openorb.orb.core.ORB"/>
 	<property name="org.omg.CORBA.ORBSingletonClass" value="org.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton"/>
-	<property name="ReC.MultiCastController.BindName" value="MultiCastController"/>
+	<property name="rec.multicastcontroller.bindname" value="MultiCastController"/>
 	<property name="openorb.config" value="http://elab.ist.utl.pt/rec/openorb/OpenORB.xml"/>
   	<property name="openorb.profile" value="ReCClient"/>
     </resources>

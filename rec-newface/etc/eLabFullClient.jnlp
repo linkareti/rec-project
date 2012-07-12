@@ -36,7 +36,7 @@
 	<extension name="JFreeChartClient" href="../jfreechart/JFreeChartClient.jnlp" />
 	<extension name="ReCClient" href="../recbase/ReCClient.jnlp" />
 	<extension name="OpenORBClient" href="../openorb/OpenORBClient.jnlp" />
-	<property name="ReC.PercentFreeMemoryThreshold2Serialization" value="80" />
+	<property name="rec.percent.freememory.threshold.serialization" value="80" />
 
 	<!--Thomson properties-->
         <property name="Thomson.Cross" value="17" />
