@@ -308,7 +308,10 @@ advanced.rec.multicastcontroller.jmxremote.port=25003
 java.rmi.server.hostname=`hostname -i`
 
 ###EXPERIMENT REPOSITORY###
-rec.multicast.repository=com.linkare.rec.impl.multicast.repository.impl.RemoteRepository
+##If rec-web is available and installed, please define the implementation of the repository as remote
+#rec.multicast.repository=com.linkare.rec.impl.multicast.repository.impl.RemoteRepository
+##Otherwise use a local repository on FileSystem
+rec.multicast.repository=com.linkare.rec.impl.multicast.repository.impl.FSRepository
 
 ##REC.AM END POINT##
 rec.am.endpoint=http://localhost:8080/rec-services
