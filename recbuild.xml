@@ -5,7 +5,7 @@
 		=======================================================
 	-->
 
-<project name="ReC Module - build system" default="help" basedir=".">
+<project name="ReC Module - build system" default="build.all" basedir=".">
 	<description>
 		Compile, package, sign and run the project ReC and each of the experiments.
 	</description>
@@ -13,17 +13,6 @@
 	<property file="build.properties" description="general properties for building project" />
 
 	<import file="generaldefinitions.xml" />
-
-	<!--
-		=====================================================
-		====================== Generic ======================
-		=====================================================
-	-->
-
-	<target name="help" description="General usage of the build system, it shows a description of each target, and how to use them">
-		<echo>ReC - eBab build system</echo>
-	</target>
-
 
 	<!--
 			=====================================================
@@ -67,7 +56,7 @@
 
 	</target>
 
-	<target name="jar.rec.jvlc">
+	<target name="jar.rec.jvlc" description="create jvlc jar">
 		<create.jar destination.folder="${jvlc.build.dir}" jar.name="ReCjvlc.jar" source.basedir="${jvlc.classes.dir}" />
 	</target>
 
@@ -75,7 +64,7 @@
 		<repack.jar file="${jvlc.build.dir}/ReCjvlc.jar" />
 	</target>
 
-	<target name="sign.rec.jvlc">
+	<target name="sign.rec.jvlc" description="sign jvlc jar">
 		<sign.jar.rec folder="${jvlc.build.dir}" jar.name="ReCjvlc.jar" />
 	</target>
 
@@ -83,7 +72,7 @@
 		<pack.200.jar file="${jvlc.build.dir}/ReCjvlc_sig.jar" />
 	</target>
 
-	<target name="build.rec.jvlc" depends="clean.rec.jvlc,compile.rec.jvlc, jar.rec.jvlc, repack.jar.rec.jvlc, sign.rec.jvlc, pack.jar.rec.jvlc">
+	<target name="build.rec.jvlc" description="build jvlc - clean, compile, sign and pack" depends="clean.rec.jvlc,compile.rec.jvlc, jar.rec.jvlc, repack.jar.rec.jvlc, sign.rec.jvlc, pack.jar.rec.jvlc">
 
 	</target>
 
@@ -129,7 +118,7 @@
 
 	</target>
 
-	<target name="jar.rec.common">
+	<target name="jar.rec.common" description="create the rec common jar">
 		<create.jar destination.folder="${common.build.dir}" jar.name="ReCCommon.jar" source.basedir="${rec.common.classes.dir}" />
 	</target>
 
@@ -137,7 +126,7 @@
 		<repack.jar file="${common.build.dir}/ReCCommon.jar" />
 	</target>
 
-	<target name="sign.rec.common">
+	<target name="sign.rec.common" description="sign the rec common jar">
 		<sign.jar.rec folder="${common.build.dir}" jar.name="ReCCommon.jar" />
 	</target>
 
@@ -145,7 +134,7 @@
 		<pack.200.jar file="${common.build.dir}/ReCCommon_sig.jar" />
 	</target>
 
-	<target name="build.rec.common" depends="clean.rec.common,compile.rec.common, jar.rec.common, repack.jar.rec.common, sign.rec.common, pack.jar.rec.common">
+	<target name="build.rec.common" description="build the rec common libraries - clean, compile, sign and pack" depends="clean.rec.common,compile.rec.common, jar.rec.common, repack.jar.rec.common, sign.rec.common, pack.jar.rec.common">
 
 	</target>
 
@@ -161,7 +150,7 @@
 		<delete file="${build.dir.compile}/ReCClient_sig.jar" />
 	</target>
 
-	<target name="compile.rec.client">
+	<target name="compile.rec.client" description="compile the rec client code">
 		<mkdir dir="${rec.client.classes.dir}" />
 		<mkdir dir="${rec.client.classes.dir}/META-INF" />
 
@@ -204,7 +193,7 @@
 
 	</target>
 
-	<target name="jar.rec.client">
+	<target name="jar.rec.client" description="create the rec client jar">
 		<create.jar destination.folder="${client.build.dir}" jar.name="ReCClient.jar" source.basedir="${rec.client.classes.dir}" />
 	</target>
 
@@ -212,7 +201,7 @@
 		<repack.jar file="${common.build.dir}/ReCClient.jar" />
 	</target>
 
-	<target name="sign.rec.client">
+	<target name="sign.rec.client" description="sign the rec client jar">
 		<sign.jar.rec folder="${client.build.dir}" jar.name="ReCClient.jar" />
 	</target>
 
@@ -220,7 +209,7 @@
 		<pack.200.jar file="${client.build.dir}/ReCClient_sig.jar" />
 	</target>
 
-	<target name="build.rec.client" depends="clean.rec.client,compile.rec.client,jar.rec.client, repack.jar.rec.client, sign.rec.client, pack.jar.rec.client">
+	<target name="build.rec.client" description="build the rec client components - clean, compile, sign and pack" depends="clean.rec.client,compile.rec.client,jar.rec.client, repack.jar.rec.client, sign.rec.client, pack.jar.rec.client">
 
 		<copy file="${common.build.dir}/ReCCommon_sig.jar" todir="${client.build.dir}" />
 		<copy file="${jvlc.build.dir}/ReCjvlc_sig.jar" todir="${client.build.dir}" />
@@ -238,11 +227,11 @@
 		=====================================================
 	-->
 
-	<target name="clean.rec.hardwareserver">
+	<target name="clean.rec.hardwareserver" description="clean the rec hardware server classes">
 		<delete dir="${rec.hardwareserver.classes.dir}" />
 	</target>
 
-	<target name="compile.rec.hardwareserver">
+	<target name="compile.rec.hardwareserver" description="compile the rec hardware server classes">
 		<mkdir dir="${rec.hardwareserver.classes.dir}" />
 		<mkdir dir="${rec.hardwareserver.classes.dir}/META-INF" />
 
@@ -272,11 +261,11 @@
 
 	</target>
 
-	<target name="jar.rec.hardwareserver">
+	<target name="jar.rec.hardwareserver" description="create the rec hardware server jar">
 		<create.jar destination.folder="${hardwareserver.build.dir}" jar.name="ReCHardwareServer.jar" source.basedir="${rec.hardwareserver.classes.dir}" />
 	</target>
 
-	<target name="build.rec.hardwareserver" depends="clean.rec.hardwareserver,compile.rec.hardwareserver,jar.rec.hardwareserver">
+	<target name="build.rec.hardwareserver" description="build the rec hardware server components - clean, compile and pack" depends="clean.rec.hardwareserver,compile.rec.hardwareserver,jar.rec.hardwareserver">
 
 		<copy todir="${hardwareserver.build.dir}/lib" overwrite="true">
 			<fileset dir="${rec.common.lib.dir}">
@@ -294,7 +283,7 @@
 
 	</target>
 
-	<macrodef name="openorb.rec.hardwareserver">
+	<macrodef name="openorb.rec.hardwareserver" description="create the openorb configuration file for the hardware server">
 		<attribute name="lab.name" />
 		<sequential>
 
@@ -313,11 +302,11 @@
 		=====================================================
 	-->
 
-	<target name="clean.rec.multicastcontroller">
+	<target name="clean.rec.multicastcontroller" description="clean the rec multicastcontroller classes">
 		<delete dir="${rec.multicast.classes.dir}" />
 	</target>
 
-	<target name="compile.rec.multicastcontroller">
+	<target name="compile.rec.multicastcontroller" description="compile the rec multicastcontroller classes">
 		<mkdir dir="${rec.multicast.classes.dir}" />
 		<mkdir dir="${rec.multicast.classes.dir}/META-INF" />
 
@@ -348,11 +337,11 @@
 
 	</target>
 
-	<target name="jar.rec.multicastcontroller">
+	<target name="jar.rec.multicastcontroller" description="create the rec multicastcontroller jar">
 		<create.jar destination.folder="${multicast.build.dir}" jar.name="ReCMulticastController.jar" source.basedir="${rec.multicast.classes.dir}" />
 	</target>
 
-	<target name="build.rec.multicastcontroller" depends="clean.rec.multicastcontroller,compile.rec.multicastcontroller,jar.rec.multicastcontroller">
+	<target name="build.rec.multicastcontroller" description="build the rec multicastcontroller component - clean, compile and pack" depends="clean.rec.multicastcontroller,compile.rec.multicastcontroller,jar.rec.multicastcontroller">
 
 		<copy todir="${multicast.build.dir}/lib" overwrite="true">
 			<fileset dir="${rec.common.lib.dir}">
@@ -370,7 +359,7 @@
 
 	</target>
 
-	<macrodef name="openorb.rec.multicastcontroller">
+	<macrodef name="openorb.rec.multicastcontroller" description="create the openorb config file for the multicastcontroller">
 		<attribute name="lab.name" />
 		<sequential>
 
@@ -383,15 +372,14 @@
 		</sequential>
 	</macrodef>
 
-	<target name="run.rec.multicast">
+	<target name="run.rec.multicast" description="run the rec multicastcontroller">
 		<java classname="${multicast.main-class}" fork="true" failonerror="true" maxmemory="${max.memory}">
 			<arg value="-h" />
-			<!--bootclasspath location=" TODO /openorb/openorb_orb_omg-1.4.0_sig.jar"/-->
 			<classpath refid="run.multicastcontroller.classpath" />
 			<jvmarg value="-Xms${min.memory}" />
 			<jvmarg value="-Xmx${max.memory}" />
-			<sysproperty key="ReC.MultiCastController.InitRef" value="${rec.multicastcontroller.initref}" />
-			<sysproperty key="ReC.MultiCastController.BindName" value="${rec.multicastcontroller.bindname}" />
+			<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
+			<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
 			<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
 			<sysproperty key="openorb.profile" value="${multicast.openorb.profile}" />
 			<sysproperty key="rec.multicast.securitymanager" value="${rec.multicast.securitymanager}" />
@@ -403,10 +391,9 @@
 		</java>
 	</target>
 
-	<target name="debug.rec.multicast">
+	<target name="debug.rec.multicast" description="run the rec multicastcontroller in debug mode">
 		<java classname="com.linkare.rec.impl.multicast.startup.MultiCastControllerMain" fork="true" failonerror="true" maxmemory="${max.memory}">
 			<arg value="-h" />
-			<!--bootclasspath location=" TODO /openorb/openorb_orb_omg-1.4.0_sig.jar"/-->
 			<classpath refid="run.multicastcontroller.classpath" />
 			<jvmarg value="-Xdebug" />
 			<jvmarg value="-Xrunjdwp:transport=dt_socket,address=${multicast.debug.address.port},server=y,suspend=y" />
@@ -425,11 +412,11 @@
 		</java>
 	</target>
 
-	<target name="clean.all" depends="clean.rec.common,clean.rec.client,clean.rec.hardwareserver,clean.rec.multicastcontroller" />
+	<target name="clean.all" description="call all clean targets on rec components" depends="clean.rec.common,clean.rec.client,clean.rec.hardwareserver,clean.rec.multicastcontroller" />
 
-	<target name="build.all" depends="build.rec.common,build.rec.jvlc,build.rec.client,build.rec.hardwareserver,build.rec.multicastcontroller" />
+	<target name="build.all" description="call all build targets on rec components" depends="build.rec.common,build.rec.jvlc,build.rec.client,build.rec.hardwareserver,build.rec.multicastcontroller" />
 
-	<target name="javadoc.rec">
+	<target name="javadoc.rec" description="create the javadoc for rec components">
 		<javadoc destdir="${build.dir}/javadocs/rec" author="true" version="true" use="true" windowtitle="ReC - Javadocs">
 			<packageset dir="${rec.common.src.java.dir}" defaultexcludes="yes">
 				<include name="com/linkare/rec/**" />
@@ -452,14 +439,14 @@
 			<classpath refid="rec.hardwareserver.libs.classpath" />
 			<doctitle>ReC  <![CDATA[<h1>Package Overview</h1>]]></doctitle>
 		<bottom>
-			<![CDATA[<i>Copyright &#169; 2010 Linkare TI All Rights Reserved.</i>]]></bottom>
+			<![CDATA[<i>Copyright &#169; 2010 - Linkare TI - All Rights Reserved.</i>]]>
+			</bottom>
 	<tag name="todo" scope="all" description="To do:" />
 	<link href="http://java.sun.com/javase/6/docs/api/" />
 </javadoc>
 </target>
 
-
-<target name="clean.javadocs">
+<target name="clean.javadocs" description="clean the javadocs for rec components">
 <delete dir="${build.dir}/javadocs/rec" />
 </target>
 

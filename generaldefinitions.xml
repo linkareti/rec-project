@@ -38,7 +38,7 @@
 		<format property="today" pattern="dd-MM-yyyy" locale="en,UK" />
 	</tstamp>
 
-	<macrodef name="process.list">
+	<macrodef name="process.list" description="Process a list of elements in csv format and for each one, define a property and execute an ant target">
 		<attribute name="list" />
 		<attribute name="task" />
 		<attribute name="attribute.name" />
@@ -363,8 +363,7 @@
 	<property name="elab.hardwareserver.src.java.dir" value="${basedir}/elab/src/java/driver" />
 
 	<property name="elab.hardwareserver.lib.dir" value="${elab.lib.dir}/java/driver/" />
-
-
+	
 	<path id="elab.hardwareserver.lib.path">
 		<fileset dir="${elab.hardwareserver.lib.dir}">
 			<include name="**/*.jar" />
@@ -443,7 +442,7 @@
 		=====================================================
 	-->
 
-	<macrodef name="create.jnlp.full.client.compile">
+	<macrodef name="create.jnlp.full.client.compile" description="Create the FullClient JNLP launch file for each lab">
 		<sequential>
 			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/rec-framework.jnlp">
 				<filterset begintoken="@" endtoken="@" filtersfile="build.properties" />
@@ -644,7 +643,7 @@
 		</sequential>
 	</macrodef>
 
-	<macrodef name="add.experiment.to.full.jnlp.compile">
+	<macrodef name="add.experiment.to.full.jnlp.compile" description="Add one experiment to the jnlp of the full client">
 		<attribute name="experiment.name" />
 		<sequential>
 			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!--End Experiment Jars--&gt;">
@@ -656,7 +655,7 @@
 		</sequential>
 	</macrodef>
 
-	<macrodef name="create.jnlp.full.client.build">
+	<macrodef name="create.jnlp.full.client.build" description="Create the FullClient JNLP launch file">
 		<sequential>
 
 			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${client.build.dir}/rec-framework.jnlp" />
@@ -851,7 +850,7 @@
 		</sequential>
 	</macrodef>
 
-	<macrodef name="add.experiment.to.full.jnlp.build">
+	<macrodef name="add.experiment.to.full.jnlp.build" description="Add an experiment to the FullClient JNLP launch file">
 		<attribute name="experiment.name" />
 		<sequential>
 			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!--End Experiment Jars--&gt;">
@@ -889,7 +888,7 @@
 
 	<!--MACROS-->
 
-	<macrodef name="process.list">
+	<macrodef name="process.list" description="Process a list in csv format, for each element, define an attribute and execute an ant target">
 		<attribute name="list" />
 		<attribute name="task" />
 		<attribute name="attribute.name" />
@@ -919,7 +918,7 @@
 	<!-- = = = = = = = = = = = = = = = = =
           macrodef: create.jar          
          = = = = = = = = = = = = = = = = = -->
-	<macrodef name="create.jar">
+	<macrodef name="create.jar" description="Create a JAR and its Manifest">
 		<attribute name="destination.folder" />
 		<attribute name="jar.name" />
 		<attribute name="source.basedir" />
@@ -944,7 +943,7 @@
 	<!-- = = = = = = = = = = = = = = = = =
           macrodef: sign.jar          
          = = = = = = = = = = = = = = = = = -->
-	<macrodef name="sign.jar.rec">
+	<macrodef name="sign.jar.rec" description="Sign a rec jar">
 		<attribute name="folder" />
 		<attribute name="jar.name" />
 		<sequential>
@@ -957,7 +956,7 @@
 		</sequential>
 	</macrodef>
 
-	<macrodef name="sign.jar.elab">
+	<macrodef name="sign.jar.elab" description="Sign an elab jar">
 		<attribute name="folder" />
 		<attribute name="jar.name" />
 		<sequential>
@@ -978,7 +977,7 @@
 		================================================================
 		-->
 
-	<macrodef name="sign.all.jars.in.directory.rec.certificate">
+	<macrodef name="sign.all.jars.in.directory.rec.certificate" description="sign all rec jars within a directory">
 		<attribute name="source.dir.name" />
 		<attribute name="destination.dir.name" />
 		<sequential>
@@ -992,7 +991,7 @@
 		</sequential>
 	</macrodef>
 
-	<macrodef name="sign.all.jars.in.directory.elab.certificate">
+	<macrodef name="sign.all.jars.in.directory.elab.certificate" description="sign all elab jars within a directory">
 		<attribute name="source.dir.name" />
 		<attribute name="destination.dir.name" />
 		<sequential>
@@ -1006,7 +1005,7 @@
 		</sequential>
 	</macrodef>
 
-	<macrodef name="repack.all.jars.in.directory">
+	<macrodef name="repack.all.jars.in.directory" description="repack all jars within a directory">
 		<attribute name="dir" />
 		<sequential>
 			<p200ant repack="true">
@@ -1017,7 +1016,7 @@
 		</sequential>
 	</macrodef>
 
-	<macrodef name="repack.jar">
+	<macrodef name="repack.jar" description="Repack a single jar file">
 		<attribute name="file" />
 		<sequential>
 			<p200ant repack="true">
@@ -1049,7 +1048,7 @@
 		</sequential>
 	</macrodef>
 
-	<macrodef name="pack.200.jar">
+	<macrodef name="pack.200.jar" description="Pack200 a jar file">
 		<attribute name="file" />
 		<sequential>
 			<p200ant>
@@ -1082,7 +1081,7 @@
 	</path>
 
 
-	<macrodef name="create.faceconfig">
+	<macrodef name="create.faceconfig" description="Create a ReCFaceConfig.xml file">
 		<sequential>
 			<copy file="${faceconfig.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ReCFaceConfig.xml" />
 
@@ -1091,7 +1090,7 @@
 		</sequential>
 	</macrodef>
 
-	<macrodef name="add.lab.faceconfig">
+	<macrodef name="add.lab.faceconfig" description="Add the Lab part of the ReCFaceConfig.xml file">
 		<attribute name="lab.name" />
 		<sequential>
 
@@ -1119,7 +1118,7 @@
 		</sequential>
 	</macrodef>
 
-	<macrodef name="add.experiment.faceconfig">
+	<macrodef name="add.experiment.faceconfig" description="Add each experiment ReCFaceConfig part">
 		<attribute name="experiment.name" />
 		<sequential>
 

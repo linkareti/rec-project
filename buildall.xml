@@ -73,7 +73,7 @@
 	<!-- - - - - - - - - - - - - - - - - - 
           target: dist.all
          - - - - - - - - - - - - - - - - - -->
-	<target name="dist.all" depends="build.all,dist.client,dist.multicast,dist.harwareserver" description="Creates zip files in the dist/java directory with the contents of the client, multicast and hardware driver for all built experiments">
+	<target name="dist.all" depends="build.all,dist.client,dist.multicast,dist.hardwareserver" description="Creates zip files in the dist/java directory with the contents of the client, multicast and hardware driver for all built experiments">
 
 	</target>
 
@@ -184,7 +184,7 @@
 		</sequential>
 	</macrodef>
 
-	<target name="dist.harwareserver" description="Creates a zip of all the drivers of the experiments being built!">
+	<target name="dist.hardwareserver" description="Creates a zip of all the drivers of the experiments being built!">
 		<mkdir dir="${dist.dir}" />
 		<process.list task="dist.lab.hardwareserver" list="${lab.list}" attribute.name="lab.name" />
 	</target>
@@ -231,10 +231,11 @@
 						<replacefilter token="@experiment.name@" value="@{experiment.name}" />
 					</replace>
 
-					<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-zip.dist.harwareserver" />
+					<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-zip.dist.hardwareserver" />
 
 					<zip destfile="${dist.dir}/@{experiment.name}HarwareServer_${today}.zip">
 						<zipfileset file="${hardwareserver.build.dir}/@{experiment.name}Driver.jar" prefix="hardwareserver" />
+						<zipfileset file="${hardwareserver.build.dir}/ELabCommon.jar" prefix="hardwareserver" />
 						<zipfileset file="${hardwareserver.build.dir}/ELabHardwareServer.jar" prefix="hardwareserver" />
 						<zipfileset file="${hardwareserver.build.dir}/ReCHardwareServer.jar" prefix="hardwareserver" />
 						<zipfileset file="${hardwareserver.build.dir}/ReCCommon.jar" prefix="hardwareserver" />

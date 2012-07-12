@@ -30,7 +30,7 @@
 		=====================================================
 	-->
 
-	<macrodef name="clean.experiment">
+	<macrodef name="clean.experiment" description="Clean each experiment classes and jars">
 		<attribute name="experiment.name" />
 		<sequential>
 			<delete dir="${experiments.classes.dir}/@{experiment.name}" />
@@ -45,7 +45,7 @@
 		</sequential>
 	</macrodef>
 
-	<target name="clean.experiments.list">
+	<target name="clean.experiments.list" description="Clean all the experiments list">
 		<fail unless="experiment.list"> experiments.list must be set to clean
 					that list of experiments. define it in build.properties or pass 
 					it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
@@ -53,7 +53,7 @@
 	</target>
 
 
-	<macrodef name="compile.experiment.client">
+	<macrodef name="compile.experiment.client" description="Compiles one experiment's client classes">
 		<attribute name="experiment.name" />
 		<sequential>
 
@@ -110,7 +110,7 @@
 		</sequential>
 	</macrodef>
 
-	<macrodef name="compile.experiment.driver">
+	<macrodef name="compile.experiment.driver" description="Compiles one experiment's driver classes">
 		<attribute name="experiment.name" />
 		<sequential>
 
@@ -163,14 +163,14 @@
 		</sequential>
 	</macrodef>
 
-	<target name="compile.experiment.drivers.list">
+	<target name="compile.experiment.drivers.list" description="Compiles all experiment drivers in 'experiment.list'">
 		<fail unless="experiment.list"> experiments.list must be set to compile
 			that list of experiments. define it in build.properties or pass 
 			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
 		<process.list task="compile.experiment.driver" list="${experiment.list}" attribute.name="experiment.name" />
 	</target>
 
-	<target name="compile.experiment.clients.list">
+	<target name="compile.experiment.clients.list" description="Compiles all experiment clients in 'experiment.list'">
 		<fail unless="experiment.list"> experiments.list must be set to compile
 			that list of experiments. define it in build.properties or pass 
 			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
@@ -179,7 +179,7 @@
 
 
 
-	<macrodef name="jar.experiment.client">
+	<macrodef name="jar.experiment.client" description="Package one experiment client jar">
 		<attribute name="experiment.name" />
 		<sequential>
 			<mkdir dir="${client.build.dir}" />
@@ -193,7 +193,7 @@
 		</sequential>
 	</macrodef>
 
-	<macrodef name="jar.experiment.driver">
+	<macrodef name="jar.experiment.driver" description="Package one experiment driver jar">
 		<attribute name="experiment.name" />
 		<sequential>
 			<mkdir dir="${hardwareserver.build.dir}" />
@@ -208,14 +208,14 @@
 		</sequential>
 	</macrodef>
 
-	<target name="jar.experiment.clients.list">
+	<target name="jar.experiment.clients.list" description="Packages all experiment client jars in 'experiment.list'">
 		<fail unless="experiment.list"> experiments.list must be set to package
 			that list of experiments. define it in build.properties or pass 
 			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
 		<process.list task="jar.experiment.client" list="${experiment.list}" attribute.name="experiment.name" />
 	</target>
 
-	<target name="jar.experiment.drivers.list">
+	<target name="jar.experiment.drivers.list" description="Packages all experiment driver jars in 'experiment.list'">
 		<fail unless="experiment.list"> experiments.list must be set to package
 			that list of experiments. define it in build.properties or pass 
 			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
@@ -231,7 +231,7 @@
 		</sequential>
 	</macrodef>
 
-	<macrodef name="sign.experiment">
+	<macrodef name="sign.experiment" description="Sign one experiment client jar">
 		<attribute name="experiment.name" />
 
 		<sequential>
@@ -239,7 +239,7 @@
 				<fileset dir="${client.build.dir}" includes="@{experiment.name}Client.jar" excludes="*_sig.jar" />
 				<globmapper from="*.jar" to="*_sig.jar" />
 			</signjar>
-			<delete file="${client.build.dir}/@{experiment.name}Client.jar"/>
+			<delete file="${client.build.dir}/@{experiment.name}Client.jar" />
 		</sequential>
 	</macrodef>
 
@@ -251,7 +251,7 @@
 		</sequential>
 	</macrodef>
 
-	<target name="sign.experiments.list">
+	<target name="sign.experiments.list" description="Sign all experiments client jars on 'experiment.list'">
 		<fail unless="experiment.list"> experiments.list must be set to package
 				that list of experiments. define it in build.properties or pass 
 				it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
@@ -260,10 +260,10 @@
 		<process.list task="pack200.experiment" list="${experiment.list}" attribute.name="experiment.name" />
 	</target>
 
-	<macrodef name="run.experiment.client">
+	<macrodef name="run.experiment.client" description="Run one experiment client bypassing javawebstart">
 		<attribute name="experiment.name" />
 		<sequential>
-			<java classname="pt.utl.ist.elab.client.@{experiment.name}.ClientMain" fork="true" failonerror="true">
+			<java classname="pt.utl.ist.elab.client.FullClientNewInterface" fork="true" failonerror="true">
 				<arg value="-h" />
 				<classpath>
 					<path refid="rec.common.lib.path" />
@@ -287,20 +287,21 @@
 				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
 				<sysproperty key="openorb.config" value="${client.build.dir}/etc/openorb.xml" />
-				<sysproperty key="ReC.ProcessingManager.ThreadPool.Coresize" value="${rec.client.processingmanager.threadpool.coresize}" />
-				<sysproperty key="ReC.ProcessingManager.ThreadPool.Maxsize" value="${rec.client.processingmanager.threadpool.maxsize}" />
-				<sysproperty key="ReC.ProcessingManager.Thread.Idletime" value="${rec.processingmanager.thread.idletime}" />
+				<sysproperty key="rec.processingmanager.threadPool.coresize" value="${rec.client.processingmanager.threadpool.coresize}" />
+				<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.client.processingmanager.threadpool.maxsize}" />
+				<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
 				<sysproperty key="vlc.plugins.destdir" value="${vlc.plugins.destdir}" />
 				<sysproperty key="vlc.plugins.filename" value="${vlc.plugins.filename}" />
 				<sysproperty key="video.enabled" value="${video.enabled}" />
+				<sysproperty key="rec.apparatus.autoconnect.id" value="${@{experiment.name}.apparatus.autoconnect.id}" />
 			</java>
 		</sequential>
 	</macrodef>
 
-	<macrodef name="debug.experiment.client">
+	<macrodef name="debug.experiment.client" description="Debug one experiment client bypassing javawebstart">
 		<attribute name="experiment.name" />
 		<sequential>
-			<java classname="pt.utl.ist.elab.client.@{experiment.name}.ClientMain" fork="true" failonerror="true">
+			<java classname="pt.utl.ist.elab.client.FullClientNewInterface" fork="true" failonerror="true">
 				<arg value="-h" />
 				<classpath>
 					<path refid="rec.common.lib.path" />
@@ -326,17 +327,18 @@
 				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
 				<sysproperty key="openorb.config" value="${client.build.dir}/etc/openorb.xml" />
-				<sysproperty key="ReC.ProcessingManager.ThreadPool.Coresize" value="${rec.client.processingmanager.threadpool.coresize}" />
-				<sysproperty key="ReC.ProcessingManager.ThreadPool.Maxsize" value="${rec.client.processingmanager.threadpool.maxsize}" />
-				<sysproperty key="ReC.ProcessingManager.Thread.Idletime" value="${rec.processingmanager.thread.idletime}" />
+				<sysproperty key="rec.processingmanager.threadPool.coresize" value="${rec.client.processingmanager.threadpool.coresize}" />
+				<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.client.processingmanager.threadpool.maxsize}" />
+				<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
 				<sysproperty key="vlc.plugins.destdir" value="${vlc.plugins.destdir}" />
 				<sysproperty key="vlc.plugins.filename" value="${vlc.plugins.filename}" />
 				<sysproperty key="video.enabled" value="${video.enabled}" />
+				<sysproperty key="rec.apparatus.autoconnect.id" value="${@{experiment.name}.apparatus.autoconnect.id}" />
 			</java>
 		</sequential>
 	</macrodef>
 
-	<macrodef name="run.experiment.driver">
+	<macrodef name="run.experiment.driver" description="Run one experiment driver">
 		<attribute name="experiment.name" />
 		<sequential>
 			<echo>starting @{experiment.name} driver</echo>
@@ -356,8 +358,8 @@
 				</classpath>
 				<jvmarg value="-Xms${min.memory}" />
 				<jvmarg value="-Xmx${max.memory}" />
-				<sysproperty key="ReC.MultiCastController.InitRef" value="${rec.multicastcontroller.initref}" />
-				<sysproperty key="ReC.MultiCastController.BindName" value="${rec.multicastcontroller.bindname}" />
+				<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
+				<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
 				<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
 				<sysproperty key="openorb.profile" value="${experiment.driver.openorb.profile}" />
 				<sysproperty key="eLab.@{experiment.name}.HardwareInfo" value="${experiment.eLab.HardwareInfo}" />
@@ -365,32 +367,32 @@
 				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
 				<sysproperty key="openorb.config" value="${rec.hardwareserver.classes.dir}/openorb.xml" />
-				<sysproperty key="ReC.ProcessingManager.ThreadPool.Coresize" value="${rec.driver.processingmanager.threadpool.coresize}" />
-				<sysproperty key="ReC.ProcessingManager.ThreadPool.Maxsize" value="${rec.driver.processingmanager.threadpool.maxsize}" />
-				<sysproperty key="ReC.ProcessingManager.Thread.Idletime" value="${rec.processingmanager.thread.idletime}" />
+				<sysproperty key="rec.processingmanager.threadPool.coresize" value="${rec.driver.processingmanager.threadpool.coresize}" />
+				<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.driver.processingmanager.threadpool.maxsize}" />
+				<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
 			</java>
 		</sequential>
 	</macrodef>
 
-	<target name="run.experiment.client">
+	<target name="run.experiment.client" description="Run one experiment client bypassing javawebstart">
 		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
 			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
 		<run.experiment.client experiment.name="${experiment.name}" />
 	</target>
 
-	<target name="debug.experiment.client">
+	<target name="debug.experiment.client" description="Debug one experiment client bypassing javawebstart">
 		<fail unless="experiment.name">experiment.name must be set to debug a single experiment. 
 			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
 		<debug.experiment.client experiment.name="${experiment.name}" />
 	</target>
 
-	<target name="run.experiment.driver">
+	<target name="run.experiment.driver" description="Run one experiment driver">
 		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
 			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
 		<run.experiment.driver experiment.name="${experiment.name}" />
 	</target>
 
-	<macrodef name="debug.experiment.driver">
+	<macrodef name="debug.experiment.driver" description="Debug one experiment driver">
 		<attribute name="experiment.name" />
 		<sequential>
 			<echo>starting @{experiment.name} driver</echo>
@@ -412,8 +414,8 @@
 				<jvmarg value="-Xmx${max.memory}" />
 				<jvmarg value="-Xdebug" />
 				<jvmarg value="-Xrunjdwp:transport=dt_socket,address=${experiment.driver.debug.address.port},server=y,suspend=y" />
-				<sysproperty key="ReC.MultiCastController.InitRef" value="${rec.multicastcontroller.initref}" />
-				<sysproperty key="ReC.MultiCastController.BindName" value="${rec.multicastcontroller.bindname}" />
+				<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
+				<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
 				<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
 				<sysproperty key="openorb.profile" value="${experiment.driver.openorb.profile}" />
 				<sysproperty key="eLab.@{experiment.name}.HardwareInfo" value="${experiment.eLab.HardwareInfo}" />
@@ -421,20 +423,20 @@
 				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
 				<sysproperty key="openorb.config" value="${rec.hardwareserver.classes.dir}/openorb.xml" />
-				<sysproperty key="ReC.ProcessingManager.ThreadPool.Coresize" value="${rec.driver.processingmanager.threadpool.coresize}" />
-				<sysproperty key="ReC.ProcessingManager.ThreadPool.Maxsize" value="${rec.driver.processingmanager.threadpool.maxsize}" />
-				<sysproperty key="ReC.ProcessingManager.Thread.Idletime" value="${rec.processingmanager.thread.idletime}" />
+				<sysproperty key="rec.processingmanager.threadPool.coresize" value="${rec.driver.processingmanager.threadpool.coresize}" />
+				<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.driver.processingmanager.threadpool.maxsize}" />
+				<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
 			</java>
 		</sequential>
 	</macrodef>
 
-	<target name="debug.experiment.driver">
+	<target name="debug.experiment.driver" description="Debug one experiment driver">
 		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
 			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
 		<debug.experiment.driver experiment.name="${experiment.name}" />
 	</target>
 
-	<macrodef name="create.jnlp.for.experiment">
+	<macrodef name="create.jnlp.for.experiment" description="Create JNLP file for one experiment">
 		<attribute name="experiment.name" />
 		<sequential>
 			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/@{experiment.name}.jnlp" />
@@ -454,7 +456,7 @@
 				<replacefilter token="@elab.description.oneline.en@" property="@{experiment.name}.description.oneline.en" />
 				<replacefilter token="@elab.description.tooltip.en@" property="@{experiment.name}.description.tooltip.en" />
 				<replacefilter token="@elab.description.short.en@" property="@{experiment.name}.description.short.en" />
-                <replacefilter token="@rec.apparatus.autoconnect.id@" property="@{experiment.name}.apparatus.autoconnect.id" />
+				<replacefilter token="@rec.apparatus.autoconnect.id@" property="@{experiment.name}.apparatus.autoconnect.id" />
 
 				<replacefilter token="@j2se-version@" property="@{experiment.name}.j2se-version" />
 				<replacefilter token="@jnlp.file@" value="@{experiment.name}.jnlp" />
@@ -480,9 +482,9 @@
 				<replacefilter token="@video.enabled@" property="video.enabled" />
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
 				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
-                                <replacefilter token="@rec.am.endpoint@" property="rec.am.endpoint" />
-                                <replacefilter token="@rec.apparatus.autoacquireresult@" property="rec.apparatus.autoacquireresult" />
-                                <replacefilter token="@client.main-class@" property="client.main-class" />
+				<replacefilter token="@rec.am.endpoint@" property="rec.am.endpoint" />
+				<replacefilter token="@rec.apparatus.autoacquireresult@" property="rec.apparatus.autoacquireresult" />
+				<replacefilter token="@client.main-class@" property="client.main-class" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.coresize@" property="rec.client.processingmanager.threadpool.coresize" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
@@ -503,7 +505,7 @@
 		</sequential>
 	</macrodef>
 
-	<macrodef name="build.experiment">
+	<macrodef name="build.experiment" description="Build one experiment, compile, pack and sign driver and client">
 		<attribute name="experiment.name" />
 		<sequential>
 			<clean.experiment experiment.name="@{experiment.name}" />
@@ -539,7 +541,7 @@
 		</sequential>
 	</macrodef>
 
-	<target name="build.experiments.list">
+	<target name="build.experiments.list" description="Build all experiments in 'experiment.list'">
 		<fail unless="experiment.list"> experiments.list must be set to build
 				that list of experiments. define it in build.properties or pass 
 				it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>

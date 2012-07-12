@@ -5,7 +5,7 @@
 		=======================================================
 	-->
 
-<project name="ELab Module - build system" default="help" basedir=".">
+<project name="ELab Module - build system" default="build.all" basedir=".">
 	<description>
 		Compile, package, sign and run the project ReC and each of the experiments.
 	</description>
@@ -16,34 +16,24 @@
 
 	<!--
 		=====================================================
-		====================== Generic ======================
-		=====================================================
-	-->
-
-	<target name="help" description="General usage of the build system, it shows a description of each target, and how to use them">
-		<echo>ReC - eBab build system</echo>
-	</target>
-
-	<!--
-		=====================================================
 		=================== Elab Client =====================
 		=====================================================
 	-->
 
-	<target name="clean.elab.common">
+	<target name="clean.elab.common" description="clean elab common jars and common classes">
 		<delete dir="${elab.common.classes.dir}" />
 		<delete file="${build.dir.compile}/ELabCommon.jar" />
 		<delete file="${build.dir.compile}/ELabCommon_sig.jar" />
 	</target>
 
-	<target name="clean.elab.client">
+	<target name="clean.elab.client" description="clean elab client jars and client classes">
 		<delete dir="${elab.client.classes.dir}" />
 		<delete file="${build.dir.compile}/ELabClient.jar" />
 		<delete file="${build.dir.compile}/ELabClient_sig.jar" />
 		<delete file="${elab.client.classes.dir}/elab-client.jnlp" />
 	</target>
 
-	<target name="compile.elab.common">
+	<target name="compile.elab.common" description="compile elab common classes">
 		<mkdir dir="${elab.common.classes.dir}" />
 		<mkdir dir="${elab.common.classes.dir}/META-INF" />
 
@@ -74,7 +64,7 @@
 	</target>
 
 
-	<target name="compile.elab.client">
+	<target name="compile.elab.client" description="compile elab client classes">
 		<mkdir dir="${elab.client.classes.dir}" />
 		<mkdir dir="${elab.client.classes.dir}/META-INF" />
 
@@ -119,11 +109,11 @@
 
 	</target>
 
-	<target name="jar.elab.common">
+	<target name="jar.elab.common" description="create elab common jar">
 		<create.jar destination.folder="${common.build.dir}" jar.name="ELabCommon.jar" source.basedir="${elab.common.classes.dir}" />
 	</target>
 
-	<target name="jar.elab.client">
+	<target name="jar.elab.client" description="create elab client jar">
 		<create.jar destination.folder="${client.build.dir}" jar.name="ELabClient.jar" source.basedir="${elab.client.classes.dir}" />
 	</target>
 
@@ -135,11 +125,11 @@
 		<repack.jar file="${client.build.dir}/ELabClient.jar" />
 	</target>
 
-	<target name="sign.elab.common">
+	<target name="sign.elab.common" description="sign elab common jar">
 		<sign.jar.elab folder="${common.build.dir}" jar.name="ELabCommon.jar" />
 	</target>
 
-	<target name="sign.elab.client">
+	<target name="sign.elab.client" description="sign elab client jar">
 		<sign.jar.elab folder="${client.build.dir}" jar.name="ELabClient.jar" />
 	</target>
 
@@ -151,11 +141,11 @@
 		<pack.200.jar file="${client.build.dir}/ELabClient_sig.jar" />
 	</target>
 
-	<target name="build.elab.client" depends="clean.elab.common,clean.elab.client,compile.elab.common,compile.elab.client,jar.elab.common,jar.elab.client,repack.jar.elab.common,repack.jar.elab.client,sign.elab.common,sign.elab.client,pack.jar.elab.common,pack.jar.elab.client">
+	<target name="build.elab.client" description="build elab client - clean, compile, jar, sign and pack200 targets" depends="clean.elab.common,clean.elab.client,compile.elab.common,compile.elab.client,jar.elab.common,jar.elab.client,repack.jar.elab.common,repack.jar.elab.client,sign.elab.common,sign.elab.client,pack.jar.elab.common,pack.jar.elab.client">
 		<create.jnlp.full.client.compile />
 		<create.jnlp.full.client.build />
-                <copy file="${common.build.dir}/ELabCommon_sig.jar" todir="${client.build.dir}" />
-		
+		<copy file="${common.build.dir}/ELabCommon_sig.jar" todir="${client.build.dir}" />
+
 		<copy file="${elab.client.classes.dir}/ReCFaceConfig.xml" tofile="${client.build.dir}/etc/ReCFaceConfig.xml">
 		</copy>
 
@@ -170,13 +160,13 @@
 
 	</target>
 
-	<target name="run.elab.local.client.web.start">
+	<target name="run.elab.local.client.web.start" description="run elab client locally inside java web start">
 		<exec executable="javaws" dir="${java.home}/bin">
 			<arg value="${elab.client.classes.dir}/elab-client.jnlp" />
 		</exec>
 	</target>
 
-	<target name="debug.elab.local.client.web.start">
+	<target name="debug.elab.local.client.web.start" description="debug elab client locally inside java web start">
 		<exec executable="javaws" dir="${java.home}/bin">
 			<arg value="-J-Xdebug" />
 			<arg value="-J-Xnoagent" />
@@ -185,7 +175,7 @@
 		</exec>
 	</target>
 
-	<target name="run.elab.client">
+	<target name="run.elab.client" description="run elab client locally - outside java web start">
 		<java classname="${client.main-class}" fork="true" failonerror="true">
 			<arg value="-h" />
 			<classpath>
@@ -201,25 +191,23 @@
 			</classpath>
 			<jvmarg value="-Xms${min.memory}" />
 			<jvmarg value="-Xmx${max.memory}" />
-			<!--jvmarg value="-Xbootclasspath/p:${rec.common.lib.dir}/openorb_orb_omg-1.4.0.jar" /-->
 			<sysproperty key="ReCFaceConfig" value="file:///${elab.client.classes.dir}/ReCFaceConfig.xml" />
-			<sysproperty key="ReC.MultiCastController.BindName" value="${rec.multicastcontroller.bindname}" />
-			<!--sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" /-->
+			<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
 			<sysproperty key="openorb.profile" value="${experiment.client.openorb.profile}" />
 			<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
 			<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 			<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
 			<sysproperty key="openorb.config" value="${client.build.dir}/etc/openorb.xml" />
-			<sysproperty key="ReC.ProcessingManager.ThreadPool.Coresize" value="${rec.client.processingmanager.threadpool.coresize}" />
-			<sysproperty key="ReC.ProcessingManager.ThreadPool.Maxsize" value="${rec.client.processingmanager.threadpool.maxsize}" />
-			<sysproperty key="ReC.ProcessingManager.Thread.Idletime" value="${rec.processingmanager.thread.idletime}" />
+			<sysproperty key="rec.processingmanager.threadPool.coresize" value="${rec.client.processingmanager.threadpool.coresize}" />
+			<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.client.processingmanager.threadpool.maxsize}" />
+			<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
 			<sysproperty key="vlc.plugins.destdir" value="${vlc.plugins.destdir}" />
 			<sysproperty key="vlc.plugins.filename" value="${vlc.plugins.filename}" />
 			<sysproperty key="video.enabled" value="${video.enabled}" />
 		</java>
 	</target>
 
-	<target name="debug.elab.client">
+	<target name="debug.elab.client" description="debug elab client locally, bypassing java web start">
 		<java classname="${client.main-class}" fork="true" failonerror="true">
 			<arg value="-h" />
 			<classpath>
@@ -238,18 +226,16 @@
 			<jvmarg value="-Xrunjdwp:transport=dt_socket,address=${experiment.client.debug.address.port},server=y,suspend=n" />
 			<jvmarg value="-Xms${min.memory}" />
 			<jvmarg value="-Xmx${max.memory}" />
-			<!--  jvmarg value="-Xbootclasspath/p:${rec.common.lib.dir}/openorb_orb_omg-1.4.0.jar" /-->
 			<sysproperty key="ReCFaceConfig" value="file:///${elab.client.classes.dir}/ReCFaceConfig.xml" />
-			<sysproperty key="ReC.MultiCastController.BindName" value="${rec.multicastcontroller.bindname}" />
-			<!--sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" /-->
+			<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
 			<sysproperty key="openorb.profile" value="${experiment.client.openorb.profile}" />
 			<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
 			<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 			<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
 			<sysproperty key="openorb.config" value="${client.build.dir}/etc/openorb.xml" />
-			<sysproperty key="ReC.ProcessingManager.ThreadPool.Coresize" value="${rec.client.processingmanager.threadpool.coresize}" />
-			<sysproperty key="ReC.ProcessingManager.ThreadPool.Maxsize" value="${rec.client.processingmanager.threadpool.maxsize}" />
-			<sysproperty key="ReC.ProcessingManager.Thread.Idletime" value="${rec.processingmanager.thread.idletime}" />
+			<sysproperty key="rec.processingmanager.threadPool.coresize" value="${rec.client.processingmanager.threadpool.coresize}" />
+			<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.client.processingmanager.threadpool.maxsize}" />
+			<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
 			<sysproperty key="vlc.plugins.destdir" value="${vlc.plugins.destdir}" />
 			<sysproperty key="vlc.plugins.filename" value="${vlc.plugins.filename}" />
 			<sysproperty key="video.enabled" value="${video.enabled}" />
@@ -262,12 +248,12 @@
 		=====================================================
 	-->
 
-	<target name="clean.elab.hardwareserver">
+	<target name="clean.elab.hardwareserver" description="clean elab hardwareserver classes">
 		<delete dir="${elab.hardwareserver.classes.dir}" />
 		<delete dir="${elab.hardwareserver.classes.dir}/META-INF" />
 	</target>
 
-	<target name="compile.elab.hardwareserver">
+	<target name="compile.elab.hardwareserver" description="compile elab hardwareserver classes">
 		<mkdir dir="${elab.hardwareserver.classes.dir}" />
 		<mkdir dir="${elab.hardwareserver.classes.dir}/META-INF" />
 
@@ -297,14 +283,17 @@
 
 	</target>
 
-	<target name="jar.elab.hardwareserver">
+	<target name="jar.elab.hardwareserver" description="create elab hardwareserver jar">
 		<create.jar destination.folder="${hardwareserver.build.dir}" jar.name="ELabHardwareServer.jar" source.basedir="${elab.hardwareserver.classes.dir}" />
 	</target>
 
-	<target name="build.elab.hardwareserver" depends="clean.elab.hardwareserver,compile.elab.hardwareserver,jar.elab.hardwareserver">
+	<target name="build.elab.hardwareserver" description="build elab hardwareserver - clean,compile and jar" depends="clean.elab.hardwareserver,compile.elab.hardwareserver,jar.elab.hardwareserver">
 
 		<copy todir="${hardwareserver.build.dir}/lib" overwrite="true">
 			<fileset dir="${elab.hardwareserver.lib.dir}">
+				<include name="**/*" />
+			</fileset>
+			<fileset dir="${elab.common.lib.dir}">
 				<include name="**/*" />
 			</fileset>
 		</copy>
@@ -317,11 +306,11 @@
 		=====================================================
 	-->
 
-	<target name="clean.elab.multicastcontroller">
+	<target name="clean.elab.multicastcontroller" description="clean elab multicastcontroller classes">
 		<delete dir="${elab.multicast.classes.dir}" />
 	</target>
 
-	<target name="compile.elab.multicastcontroller">
+	<target name="compile.elab.multicastcontroller" description="compile elab multicastcontroller classes">
 		<mkdir dir="${elab.multicast.classes.dir}" />
 		<mkdir dir="${elab.multicast.classes.dir}/META-INF" />
 
@@ -351,30 +340,28 @@
 
 	</target>
 
-	<target name="jar.elab.multicastcontroller">
+	<target name="jar.elab.multicastcontroller" description="create elab multicastcontroller jar">
 		<create.jar destination.folder="${multicast.build.dir}" jar.name="ELabMulticastController.jar" source.basedir="${elab.multicast.classes.dir}" />
 	</target>
 
-	<target name="build.elab.multicastcontroller" depends="clean.elab.multicastcontroller,compile.elab.multicastcontroller,jar.elab.multicastcontroller">
-
+	<target name="build.elab.multicastcontroller" description="build elab multicastcontroller components - clean, compile and jar" depends="clean.elab.multicastcontroller,compile.elab.multicastcontroller,jar.elab.multicastcontroller">
 		<copy todir="${multicast.build.dir}/lib" overwrite="true">
 			<fileset dir="${elab.multicast.lib.dir}">
 				<include name="**/*" />
 			</fileset>
 		</copy>
+	</target>
+
+	<target name="clean.all" depends="clean.elab.client,clean.elab.hardwareserver,clean.elab.multicastcontroller" description="call all clean targets">
 
 	</target>
 
-	<target name="clean.all" depends="clean.elab.client,clean.elab.hardwareserver,clean.elab.multicastcontroller">
+	<target name="build.all" depends="build.elab.client,build.elab.hardwareserver,build.elab.multicastcontroller" description="call all build targets">
 
 	</target>
 
-	<target name="build.all" depends="build.elab.client,build.elab.hardwareserver,build.elab.multicastcontroller">
-
-	</target>
-
-	<target name="javadoc.elab">
-		<javadoc destdir="${build.dir}/javadocs/elab" author="true" version="true" use="true" windowtitle="ELab - Javadocs">
+	<target name="javadoc.elab" description="create the javadocs for elab components">
+		<javadoc destdir="${build.dir}/javadocs/elab" author="true" version="true" use="true" windowtitle="eLab - Javadocs">
 			<packageset dir="${elab.client.src.java.dir}" defaultexcludes="yes">
 				<include name="pt/utl/ist/elab/**" />
 			</packageset>
@@ -390,34 +377,17 @@
 				<include name="pt/utl/ist/elab/**" />
 			</packageset>
 			<classpath refid="elab.hardwareserver.libs.classpath" />
-			<doctitle>ELab  <![CDATA[<h1>Package Overview</h1>]]></doctitle>
-		<bottom>
-			<![CDATA[<i>Copyright &#169; 2010 Linkare TI All Rights Reserved.</i>]]></bottom>
-	<tag name="todo" scope="all" description="To do:" />
-	<link href="http://java.sun.com/javase/6/docs/api/" />
-</javadoc>
-</target>
+			<doctitle>eLab  <![CDATA[<h1>Package Overview</h1>]]></doctitle>
+			<bottom>
+				<![CDATA[<i>Copyright &#169; 2010 - Instituto Superior Técnico - All Rights Reserved.</i>]]>
+			</bottom>
+			<tag name="todo" scope="all" description="To do:" />
+			<link href="http://java.sun.com/javase/6/docs/api/" />
+		</javadoc>
+	</target>
 
-
-<target name="clean.javadocs">
-<delete dir="${build.dir}/javadocs/elab" />
-</target>
-
-
-<!--target name="jws-run" depends="jar,-verify-jnlp-enabled,-verify-codebase" description="Start javaws execution">
-        <exec executable="${java.home}/bin/javaws">
-            <arg file="${jnlp.dest.dir}/${jnlp.file}"/>
-        </exec>
-    </target>
-    
-    <target name="jws-debug" if="netbeans.home" depends="jar,-verify-jnlp-enabled,-debug-start-debugger,-debug-javaws-debuggee" 
-        description="Debug javaws project in IDE"/>
-        
-    <target name="-debug-javaws-debuggee">
-        <exec executable="${java.home}/bin/javaws">
-            <env key="JAVAWS_VM_ARGS" value="-Xdebug -Xnoagent -Djava.compiler=none -Xrunjdwp:transport=dt_socket,address=${jpda.address}"/>
-            <arg file="${jnlp.dest.dir}/${jnlp.file}"/>
-        </exec>
-    </target-->
+	<target name="clean.javadocs" description="clean all elab javadocs">
+		<delete dir="${build.dir}/javadocs/elab" />
+	</target>
 
 </project>
