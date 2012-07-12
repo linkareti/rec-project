@@ -21,7 +21,7 @@ public class ServerMain {
 		try {
 			ORBBean.getORBBean();
 
-			final BaseHardware baseHardware = new BaseHardware(new PolaroidStampDriver());
+			new BaseHardware(new PolaroidStampDriver());
 
 			try {
 				Thread.currentThread().join();
