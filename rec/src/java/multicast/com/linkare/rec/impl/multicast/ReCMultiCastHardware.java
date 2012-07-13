@@ -1,9 +1,3 @@
-/*
- * MultiCastHardwareProxy.java
- *
- * Created on 30 de Outubro de 2002, 10:27
- */
-
 package com.linkare.rec.impl.multicast;
 
 import java.util.ArrayList;
@@ -11,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import javax.management.ListenerNotFoundException;
@@ -53,7 +46,6 @@ import com.linkare.rec.impl.exceptions.IncorrectStateExceptionConstants;
 import com.linkare.rec.impl.exceptions.NotAuthorizedConstants;
 import com.linkare.rec.impl.exceptions.NotAvailableExceptionConstants;
 import com.linkare.rec.impl.exceptions.NotOwnerExceptionConstants;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.multicast.security.AllocationManagerSecurityManager;
 import com.linkare.rec.impl.multicast.security.DefaultOperation;
 import com.linkare.rec.impl.multicast.security.DefaultResource;
@@ -80,14 +72,7 @@ import com.linkare.rec.impl.wrappers.HardwareWrapper;
  */
 public class ReCMultiCastHardware implements MultiCastHardwareOperations, NotificationEmitter {
 
-	public static String MC_HARDWARE_LOGGER = "MultiCastHardware.Logger";
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(ReCMultiCastHardware.MC_HARDWARE_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(ReCMultiCastHardware.MC_HARDWARE_LOGGER));
-		}
-	}
+	private static final Logger LOGGER = Logger.getLogger(ReCMultiCastHardware.class.getName());
 
 	public static final String SYSPROP_MULTICASTHARDWARE_LOCK_PERIOD = "MultiCastHardware.LockPeriod";
 
@@ -937,13 +922,11 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations, Notifi
 	}
 
 	private void log(final Level debugLevel, final String message) {
-		Logger.getLogger(ReCMultiCastHardware.MC_HARDWARE_LOGGER).log(debugLevel,
-				"MultiCastHardware " + getHardwareUniqueId() + " - " + message);
+		LOGGER.log(debugLevel, "MultiCastHardware " + getHardwareUniqueId() + " - " + message);
 	}
 
 	private void logThrowable(final String message, final Throwable t) {
-		LoggerUtil.logThrowable("MultiCastHardware " + getHardwareUniqueId() + " - " + message, t,
-				Logger.getLogger(ReCMultiCastHardware.MC_HARDWARE_LOGGER));
+		LOGGER.log(Level.SEVERE, "MultiCastHardware " + getHardwareUniqueId() + " - " + message, t);
 	}
 
 	RegisteredHardwareInfo getRegisteredHardwareInfo() {

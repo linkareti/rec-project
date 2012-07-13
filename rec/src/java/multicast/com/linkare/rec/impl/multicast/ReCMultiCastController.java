@@ -26,7 +26,6 @@ import com.linkare.rec.impl.events.HardwareAddEvt;
 import com.linkare.rec.impl.events.HardwareChangeEvent;
 import com.linkare.rec.impl.events.HardwareChangeListener;
 import com.linkare.rec.impl.exceptions.NotAuthorizedConstants;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.multicast.security.AllocationManagerSecurityManager;
 import com.linkare.rec.impl.multicast.security.DefaultOperation;
 import com.linkare.rec.impl.multicast.security.DefaultResource;
@@ -436,8 +435,8 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 							ReCMultiCastController.MAXIMUM_CLIENTS_PER_HARDWARE, clientQueue);
 
 				} catch (final Exception e) {
-					LoggerUtil.logThrowable(
-							"Couldn't create a ReCMultiCastHardware for a Hardware that is registering!", e, LOGGER);
+					LOGGER.log(Level.SEVERE,
+							"Couldn't create a ReCMultiCastHardware for a Hardware that is registering!", e);
 					return;
 				}
 

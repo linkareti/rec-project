@@ -1,9 +1,3 @@
-/*
- * DataReceiverQueue.java
- *
- * Created on 13 de Agosto de 2002, 0:35
- */
-
 package com.linkare.rec.impl.multicast;
 
 import java.util.Collections;
@@ -22,7 +16,6 @@ import com.linkare.rec.impl.events.DataProducerStateChangeEvent;
 import com.linkare.rec.impl.events.NewPoisonSamplesEvent;
 import com.linkare.rec.impl.events.NewSamplesEvent;
 import com.linkare.rec.impl.exceptions.MaximumClientsReachedConstants;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.multicast.security.IResource;
 import com.linkare.rec.impl.threading.ExecutorScheduler;
 import com.linkare.rec.impl.threading.ScheduledWorkUnit;
@@ -58,7 +51,7 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 
 	private final IDataReceiverForQueueListener dataReceiverForQueueAdapter = new DataReceiverForQueueAdapter();
 
-	public static String DATARECEIVERQUEUE_LOGGER = "DataReceiverQueue.Logger";
+	private static final Logger LOGGER = Logger.getLogger(DataReceiverQueue.class.getName());
 
 	/**
 	 * Creates a new instance of HardwareDataReceiverQueue
@@ -83,7 +76,7 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 	}
 
 	public void newPoisonSamples(final int largestPacketNum) {
-			messageQueue.addEvent(new NewPoisonSamplesEvent(largestPacketNum));
+		messageQueue.addEvent(new NewPoisonSamplesEvent(largestPacketNum));
 	}
 
 	// Helper function for chat messages...
@@ -409,14 +402,12 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 		/* Proxy Logging methods for DataReceiverForQueue */
 		@Override
 		public void log(final Level debugLevel, final String message) {
-			Logger.getLogger(DataReceiverQueue.DATARECEIVERQUEUE_LOGGER).log(debugLevel,
-					"DataReceiverQueue - " + message);
+			LOGGER.log(debugLevel, "DataReceiverQueue - " + message);
 		}
 
 		@Override
 		public void logThrowable(final String message, final Throwable t) {
-			LoggerUtil.logThrowable("DataReceiverQueue - " + message, t,
-					Logger.getLogger(DataReceiverQueue.DATARECEIVERQUEUE_LOGGER));
+			LOGGER.log(Level.SEVERE, "DataReceiverQueue - " + message, t);
 		}
 	}
 	/* End Inner Class - DataReceivers callbacks */
