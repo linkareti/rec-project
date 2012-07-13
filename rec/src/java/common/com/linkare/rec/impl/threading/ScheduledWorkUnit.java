@@ -8,6 +8,12 @@ public abstract class ScheduledWorkUnit {
 
 	private ScheduledFuture<?> shutdownHandler = null;
 
+	protected Logger LOGGER;
+
+	public ScheduledWorkUnit() {
+		LOGGER = Logger.getLogger(this.getClass().getName());
+	}
+
 	public abstract void run();
 
 	public void shutdown() {
@@ -25,7 +31,7 @@ public abstract class ScheduledWorkUnit {
 	 * @param throwable The exception stack trace
 	 */
 	public void logThrowable(String message, Throwable throwable) {
-		Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, message, throwable);
+		LOGGER.log(Level.SEVERE, message, throwable);
 	}
 
 }
