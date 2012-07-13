@@ -13,7 +13,7 @@ public enum ReCSystemProperty {
 	/**
 	 * The MultiCastController bind name
 	 */
-	REC_MULTICASTCONTROLLER_BINDNAME("ReC.MultiCastController.BindName", true),
+	REC_MULTICASTCONTROLLER_BINDNAME("rec.multicastcontroller.bindname", true),
 	/**
 	 * The openorb configuration file
 	 */
