@@ -37,8 +37,8 @@ public class YoungInterfDataProducer extends VirtualBaseDataSource {
 	private double lambda = 580; // comprimento de onda em nanometros
 	private double lpadrao = 6;
 
-	private int tbs = 100;
-	private int nSamples = 10;
+//	private int tbs = 100;
+//	private int nSamples = 10;
 
 	private boolean stopped = false;
 	private VirtualBaseDriver driver = null;
@@ -60,8 +60,8 @@ public class YoungInterfDataProducer extends VirtualBaseDataSource {
 		this.dplanos = dplanos;
 		this.lambda = lambda;
 		this.lpadrao = lpadrao;
-		this.tbs = tbs;
-		this.nSamples = nSamples;
+//		this.tbs = tbs;
+//		this.nSamples = nSamples;
 
 	}
 
@@ -102,8 +102,8 @@ public class YoungInterfDataProducer extends VirtualBaseDataSource {
 	// Este e' o processo que nos vai simular e criar as amostras para enviar ao
 	// cliente!
 	private class ProducerThread extends Thread {
-		private final int currentSample = 0;
-		private final float time = 0;
+//		private final int currentSample = 0;
+//		private final float time = 0;
 
 		final int border = 20; // borda adicional da imagem
 		double largura = 1080; // largura da imagem, corresponde ao numero de
@@ -130,18 +130,18 @@ public class YoungInterfDataProducer extends VirtualBaseDataSource {
 				final Font littleBold = new Font("Dialog", Font.BOLD, 11);
 				final Font big = new Font("Dialog", Font.BOLD, 14);
 
-				double derivadaI = 0;
+//				double derivadaI = 0;
 				double intensidade = 0;
 				double gama = 0;
 				double xReal = -larguraReal / 2;
 				final double dx = larguraReal / largura;
 				int xVirtual = YoungInterfDataProducer.roundToInt(largura * xReal / larguraReal + largura / 2);
-				final int xVirtualAnterior = xVirtual + 1;
+//				final int xVirtualAnterior = xVirtual + 1;
 				double gamaAnterior = gama;
 
 				// System.out.println("o valor de dx e': "+dx);
 
-				final double preCalc = (wl * 10e-9 * distanciaPlano / (abertura * 10e-3)) * 1000;
+//				final double preCalc = (wl * 10e-9 * distanciaPlano / (abertura * 10e-3)) * 1000;
 				double deltaX = 0;
 				int tag = 0;
 				int tag_ = 0;
@@ -162,7 +162,7 @@ public class YoungInterfDataProducer extends VirtualBaseDataSource {
 					passa = true;
 					gamaAnterior = gama;
 					gama = YoungInterfDataProducer.CalculateGama(xReal, wl, abertura, distanciaPlano);
-					derivadaI = (gama - gamaAnterior) / dx;
+//					derivadaI = (gama - gamaAnterior) / dx;
 					intensidade = gama * 100;
 
 					// rotina ond ese determina a distancia do maximo central ao

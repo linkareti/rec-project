@@ -30,7 +30,7 @@ import java.awt.Color;
  */
 public class Wavelength {
 
-	private static final String EmbeddedCopyright = "copyright (c) 1998-2004 Roedy Green, Canadian Mind Products, http://mindprod.com";
+//	private static final String EmbeddedCopyright = "copyright (c) 1998-2004 Roedy Green, Canadian Mind Products, http://mindprod.com";
 
 	/**
 	 * Creates a Color object given the wavelength instead of the usual RGB or
@@ -40,6 +40,7 @@ public class Wavelength {
 	 *            outside the range 380..780 nanometers.
 	 * 
 	 * @param gamma 0.0 .. 1.0 intensity.
+	 * @return 
 	 */
 	public static Color wvColor(final float wl, final float gamma) {
 
@@ -171,6 +172,7 @@ public class Wavelength {
 	 *            black outside the range 384..789 TeraHertz.
 	 * 
 	 * @param gamma 0.0 .. 1.0 intensity.
+	 * @return 
 	 */
 	public static Color fColor(final float freq, final float gamma) {
 		// speed of light is 299,792,458 meters/sec

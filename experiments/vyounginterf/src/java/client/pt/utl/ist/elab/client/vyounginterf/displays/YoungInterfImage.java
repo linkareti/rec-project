@@ -11,6 +11,7 @@ package pt.utl.ist.elab.client.vyounginterf.displays;
  * @author   Emanuel Antunes
  */
 
+import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -36,6 +37,7 @@ public class YoungInterfImage extends JPanel implements ExpDataDisplay, ExpDataM
 	public JLabel label = null;
 	public ImageIcon icon = null;
 	public JScrollPane scroll = null;
+	private int channelIndexImageIcon=-1;
 
 	/** Creates a new instance of YoungInterfImage */
 	public YoungInterfImage() {
@@ -102,8 +104,9 @@ public class YoungInterfImage extends JPanel implements ExpDataDisplay, ExpDataM
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
 			// sample, canal
 
-			if (model.getValueAt(i, model.getChannelIndex("imageIcon")) != null) {
-				icon = (ImageIcon) ByteUtil.byteArrayToObject(model.getValueAt(i, model.getChannelIndex("imageIcon"))
+			PhysicsValue channelIndexValue = model.getValueAt(i, channelIndexImageIcon);
+			if (channelIndexValue != null) {
+				icon = (ImageIcon) ByteUtil.byteArrayToObject(channelIndexValue
 						.getValue().getByteArrayValue().getData());
 				label = new JLabel(icon);
 				scroll.setViewportView(label);
@@ -122,6 +125,7 @@ public class YoungInterfImage extends JPanel implements ExpDataDisplay, ExpDataM
 		this.model = model;
 		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
+			channelIndexImageIcon=this.model.getChannelIndex("imageIcon");
 		}
 	}
     @Override
