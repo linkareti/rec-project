@@ -45,22 +45,6 @@ public class ElabSecurityManager implements ISecurityManager {
 	@Override
 	public boolean authenticate(final IResource resource, final IUser user) {
 		LOGGER.log(Level.INFO, "Authenticating " + user.getUserName());
-
-		// First try to authenticate from the members db...
-		// String userName = user.getUserName();
-		// String pass = "" + new String(user.getAuth()).trim().hashCode();
-
-		/*
-		 * GregorianCalendar cal = new GregorianCalendar(); try {
-		 * if(resource.getResourceType() == resource.RES_MCCONTROLLER) { fw =
-		 * new FileWriter(logins, true); fw.write(userName +
-		 * " logged in to lab in: " + cal.get(cal.DAY_OF_MONTH) + "/" +
-		 * (cal.get(cal.MONTH) + 1) + "/" + cal.get(cal.YEAR) + " at " +
-		 * cal.get(cal.HOUR_OF_DAY) + ":" + cal.get(cal.MINUTE) + LS );
-		 * fw.close(); } } catch(Exception e) {
-		 * LoggerUtil.logThrowable("Error writting to file...", e,
-		 * Logger.getLogger(ELAB_SECURITY_MANAGER_LOGGER)); }
-		 */
 		return true;
 	}
 

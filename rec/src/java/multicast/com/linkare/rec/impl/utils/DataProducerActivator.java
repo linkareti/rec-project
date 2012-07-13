@@ -113,7 +113,7 @@ public class DataProducerActivator extends LocalObject implements ServantActivat
 					.getExperimentResult(filename);
 			dataProducer.setAlreadySavedOnRepository();
 
-			new Deactivator(dataProducer, Logger.getLogger(RECMULTICAST_DATAPRODUCER_LOGGER));
+			new Deactivator(dataProducer);
 
 			dataProducer.setOID(filename);
 
