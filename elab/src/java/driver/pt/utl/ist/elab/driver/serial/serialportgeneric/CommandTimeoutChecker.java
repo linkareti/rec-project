@@ -1,20 +1,11 @@
-/* 
- * CommandTimeoutChecker.java created on 27 Jan 2011
- *
- * Copyright 2009 Linkare TI. All rights reserved.
- * Linkare TI PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package pt.utl.ist.elab.driver.serial.serialportgeneric;
 
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommand;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommandList;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.config.TimeoutNode;
-
-import com.linkare.rec.impl.logging.LoggerUtil;
 
 /**
  * 
@@ -22,14 +13,7 @@ import com.linkare.rec.impl.logging.LoggerUtil;
  */
 public class CommandTimeoutChecker {
 
-	protected static String LOGGER = "CommandTimeoutChecker.Logger";
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(CommandTimeoutChecker.LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(CommandTimeoutChecker.LOGGER));
-		}
-	}
+	private static final Logger LOGGER = Logger.getLogger(CommandTimeoutChecker.class.getName());
 
 	private final int cfg;
 	private final int cur;
@@ -115,7 +99,7 @@ public class CommandTimeoutChecker {
 	}
 
 	public synchronized void checkCommand(final SerialPortCommand command) {
-		Logger.getLogger(CommandTimeoutChecker.LOGGER).log(Level.FINEST, "Check for the command [" + command + "]");
+		LOGGER.log(Level.FINEST, "Check for the command [" + command + "]");
 
 		if (command == null) {
 			return;
@@ -144,7 +128,7 @@ public class CommandTimeoutChecker {
 	}
 
 	public synchronized void checkNoData() {
-		Logger.getLogger(CommandTimeoutChecker.LOGGER).log(Level.FINEST, "Check for no data");
+		LOGGER.log(Level.FINEST, "Check for no data");
 
 		command = null;
 		checkerThread.waitTime(noData);
@@ -168,8 +152,7 @@ public class CommandTimeoutChecker {
 		public void reset() {
 			synchronized (synch) {
 				if (waiting) {
-					Logger.getLogger(CommandTimeoutChecker.LOGGER).log(Level.FINEST,
-							"Reset the command timeout checker for the command [" + command + "]");
+					LOGGER.log(Level.FINEST, "Reset the command timeout checker for the command [" + command + "]");
 					waiting = false;
 					synch.notifyAll();
 				}
@@ -178,8 +161,7 @@ public class CommandTimeoutChecker {
 
 		public void shutdown() {
 			synchronized (synch) {
-				Logger.getLogger(CommandTimeoutChecker.LOGGER).log(Level.INFO,
-						"Shuting down the command timeout checker thread - " + getName());
+				LOGGER.log(Level.INFO, "Shuting down the command timeout checker thread - " + getName());
 				running = false;
 				synch.notifyAll();
 			}
@@ -190,8 +172,7 @@ public class CommandTimeoutChecker {
 		 */
 		@Override
 		public void run() {
-			Logger.getLogger(CommandTimeoutChecker.LOGGER).log(Level.INFO,
-					"Starting the command timeout checker thread - " + getName());
+			LOGGER.log(Level.INFO, "Starting the command timeout checker thread - " + getName());
 
 			while (running) {
 				try {
@@ -200,8 +181,7 @@ public class CommandTimeoutChecker {
 						synch.wait();
 
 						while (running && waiting && waitTime > 0) {
-							Logger.getLogger(CommandTimeoutChecker.LOGGER).log(Level.INFO,
-									"Going to wait for [" + waitTime + "] ms");
+							LOGGER.log(Level.INFO, "Going to wait for [" + waitTime + "] ms");
 							// waiting for the specified cmd time
 							synch.wait(waitTime);
 
@@ -209,10 +189,8 @@ public class CommandTimeoutChecker {
 								final long diffTime = System.currentTimeMillis() - waitRequestTimestamp;
 								if ((diffTime >= waitTime)) {
 									// notify that the time has passed
-									Logger.getLogger(CommandTimeoutChecker.LOGGER).log(
-											Level.INFO,
-											"Firing timeout checker for the command [" + command
-													+ "] and diff time of [" + diffTime + "] ms");
+									LOGGER.log(Level.INFO, "Firing timeout checker for the command [" + command
+											+ "] and diff time of [" + diffTime + "] ms");
 									fireTimeout();
 
 									// done waiting
@@ -220,11 +198,9 @@ public class CommandTimeoutChecker {
 									command = null;
 								} else {
 									waitTime -= diffTime;
-									Logger.getLogger(CommandTimeoutChecker.LOGGER).log(
-											Level.FINE,
-											"Wait time must have been update. Diff [" + diffTime + "] ms Wait ["
-													+ waitTime + "] ms. Wait again ["
-													+ (running && waiting && waitTime > 0) + "]");
+									LOGGER.log(Level.FINE, "Wait time must have been update. Diff [" + diffTime
+											+ "] ms Wait [" + waitTime + "] ms. Wait again ["
+											+ (running && waiting && waitTime > 0) + "]");
 								}
 							}
 						}
@@ -237,15 +213,12 @@ public class CommandTimeoutChecker {
 					// done waiting
 					waiting = false;
 					command = null;
-					LoggerUtil.logThrowable("Exception occurred during run.", e,
-							Logger.getLogger(CommandTimeoutChecker.LOGGER));
+					LOGGER.log(Level.SEVERE, "Exception occurred during run.", e);
 				}
 			}
 
-			Logger.getLogger(CommandTimeoutChecker.LOGGER).log(
-					Level.WARNING,
-					"The command timeout checkeris terminating with the values of running [" + running
-							+ "] and waiting [" + waiting + "]");
+			LOGGER.log(Level.WARNING, "The command timeout checkeris terminating with the values of running ["
+					+ running + "] and waiting [" + waiting + "]");
 		}
 
 		/**
@@ -253,8 +226,7 @@ public class CommandTimeoutChecker {
 		 */
 		public void waitTime(final long waitTime) {
 			synchronized (synch) {
-				Logger.getLogger(CommandTimeoutChecker.LOGGER).log(Level.FINEST,
-						"Setting wait time [" + waitTime + "] ms");
+				LOGGER.log(Level.FINEST, "Setting wait time [" + waitTime + "] ms");
 				this.waitTime = waitTime;
 				waiting = true;
 				waitRequestTimestamp = System.currentTimeMillis();

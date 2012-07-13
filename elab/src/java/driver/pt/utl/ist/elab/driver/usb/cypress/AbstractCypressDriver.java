@@ -1,7 +1,6 @@
 package pt.utl.ist.elab.driver.usb.cypress;
 
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import javax.usb.UsbDevice;
@@ -17,7 +16,6 @@ import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.driver.BaseDriver;
 import com.linkare.rec.impl.driver.IDataSource;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.threading.AbstractConditionDecisor;
 import com.linkare.rec.impl.threading.TimedOutException;
 import com.linkare.rec.impl.threading.WaitForConditionResult;
@@ -25,14 +23,7 @@ import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
 
 public abstract class AbstractCypressDriver extends BaseDriver implements CypressFinderListener, CypressCommandListener {
-	protected static String CYPRESS_DRIVER_LOGGER = "CypressDriver.Logger";
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(AbstractCypressDriver.CYPRESS_DRIVER_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(AbstractCypressDriver.CYPRESS_DRIVER_LOGGER));
-		}
-	}
+	private static final Logger LOGGER = Logger.getLogger(BaseCypressIO.class.getName());
 
 	public static String START_STRING = "STARTED";
 	public static String CONFIG_OUT_STRING = "cfg";
@@ -44,12 +35,12 @@ public abstract class AbstractCypressDriver extends BaseDriver implements Cypres
 	public static byte OUT_2_BUF = 2;
 	public static byte IN_4_BUF = 3;
 	public static byte OUT_4_BUF = 4;
-	private final short vendorID = (short) 0x0547;
-	private final short productID = (short) 0x2131;
-	private final short interfaceNumber = (short) 0;
-	private final short alternateSetting = (short) 1;
-	private final byte inputChannelNumber = AbstractCypressDriver.IN_2_BUF;
-	private final byte outputChannelNumber = AbstractCypressDriver.OUT_2_BUF;
+	// private final short vendorID = (short) 0x0547;
+	// private final short productID = (short) 0x2131;
+	// private final short interfaceNumber = (short) 0;
+	// private final short alternateSetting = (short) 1;
+	// private final byte inputChannelNumber = AbstractCypressDriver.IN_2_BUF;
+	// private final byte outputChannelNumber = AbstractCypressDriver.OUT_2_BUF;
 
 	private BaseCypressIO cypressIO = null;
 	private CypressFinder cypressFinder = new CypressFinder();
@@ -172,8 +163,7 @@ public abstract class AbstractCypressDriver extends BaseDriver implements Cypres
 				}
 			}, 120 * 1000, timeOurPerUSB);
 		} catch (final TimedOutException e) {
-			LoggerUtil.logThrowable("Couldn't find port for Cypress in " + 120 + "s", e,
-					Logger.getLogger(AbstractCypressDriver.CYPRESS_DRIVER_LOGGER));
+			LOGGER.log(Level.SEVERE, "Couldn't find port for Cypress in " + 120 + "s", e);
 
 		}
 
@@ -212,8 +202,7 @@ public abstract class AbstractCypressDriver extends BaseDriver implements Cypres
 			try {
 				startNow();
 			} catch (final TimedOutException e) {
-				LoggerUtil.logThrowable("Error on start... - rethrowing IncorrectStateException!", e,
-						Logger.getLogger(AbstractCypressDriver.CYPRESS_DRIVER_LOGGER));
+				LOGGER.log(Level.SEVERE, "Error on start... - rethrowing IncorrectStateException!", e);
 				// I'll try to reopen the Cypress...this way it il not get stuck
 				// here...at least I hope so!
 				fireIDriverStateListenerDriverReseting();
@@ -268,34 +257,28 @@ public abstract class AbstractCypressDriver extends BaseDriver implements Cypres
 	public void handleCypressCommand(final CypressCommand command) {
 		final CypressProcessor processor = command.getProcessor();
 		if (processor == null) {
-			Logger.getLogger(AbstractCypressDriver.CYPRESS_DRIVER_LOGGER).log(Level.INFO,
-					"Didn't get a processor for command " + command.getCommandIdentifier());
-			Logger.getLogger(AbstractCypressDriver.CYPRESS_DRIVER_LOGGER).log(Level.INFO,
-					"Droping the command, as it is not understood!");
+			LOGGER.log(Level.INFO, "Didn't get a processor for command " + command.getCommandIdentifier());
+			LOGGER.log(Level.INFO, "Droping the command, as it is not understood!");
 			return;
 		}
 
 		if (processor.isData() && dataSource != null) {
 			if (!processor.process(command)) {
-				Logger.getLogger(AbstractCypressDriver.CYPRESS_DRIVER_LOGGER).log(Level.INFO,
-						"Couldn't process data command in CommandDispatcher... Strange...");
+				LOGGER.log(Level.INFO, "Couldn't process data command in CommandDispatcher... Strange...");
 				return;
 			}
 
 			if (dataSource != null) {
 				dataSource.processDataCommand(command);
 			} else {
-				Logger.getLogger(AbstractCypressDriver.CYPRESS_DRIVER_LOGGER).log(Level.INFO,
-						"No data source to process command...");
+				LOGGER.log(Level.INFO, "No data source to process command...");
 			}
 
 			// CypressCommands.addEvent(command);
 		} else {
 			if (!processor.process(command)) {
-				Logger.getLogger(AbstractCypressDriver.CYPRESS_DRIVER_LOGGER).log(
-						Level.INFO,
-						"The processor didn't understand the message... Ooooppsss... Message was : "
-								+ command.getCommand() + " !");
+				LOGGER.log(Level.INFO, "The processor didn't understand the message... Ooooppsss... Message was : "
+						+ command.getCommand() + " !");
 				return;
 			}
 			processCommand(command);
@@ -317,8 +300,7 @@ public abstract class AbstractCypressDriver extends BaseDriver implements Cypres
 					dataSource.stopNow();
 				}
 			} else {
-				Logger.getLogger(AbstractCypressDriver.CYPRESS_DRIVER_LOGGER).log(Level.INFO,
-						"CommandDispatcher doesn't know how to deal with other than CypressCommand's");
+				LOGGER.log(Level.INFO, "CommandDispatcher doesn't know how to deal with other than CypressCommand's");
 			}
 		}
 

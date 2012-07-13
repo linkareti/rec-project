@@ -1,13 +1,3 @@
-/*
- * StampFinder.java
- *
- * Created on 15 de Maio de 2003, 11:51
- *
- *
- * ->Changed by André on 26/07/04:
- *    Added suport to Basic Atom. Now we can control RTS, DTR and echo
- */
-
 package pt.utl.ist.elab.driver.serial.stamp;
 
 import gnu.io.CommPortIdentifier;
@@ -16,27 +6,18 @@ import gnu.io.SerialPort;
 import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommandListener;
-
-import com.linkare.rec.impl.logging.LoggerUtil;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
 public class StampFinder {
-	private static String STAMP_FINDER_LOGGER = "StampFinder.Logger";
+	private static final Logger LOGGER = Logger.getLogger(StampFinder.class.getName());
 
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(StampFinder.STAMP_FINDER_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER));
-		}
-	}
 	/** Holds value of property applicationNameLockPort. */
 	private String applicationNameLockPort = "StampFinder App Lock";
 
@@ -261,8 +242,7 @@ public class StampFinder {
 
 		final LinkedList<CommPortIdentifier> tempPorts = new LinkedList<CommPortIdentifier>();
 
-		Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO,
-				"Are there COMM Ports on the System? " + commPortIdentifiers.hasMoreElements());
+		LOGGER.log(Level.INFO, "Are there COMM Ports on the System? " + commPortIdentifiers.hasMoreElements());
 
 		while (commPortIdentifiers.hasMoreElements()) {
 			final CommPortIdentifier identifier = (CommPortIdentifier) commPortIdentifiers.nextElement();
@@ -274,14 +254,13 @@ public class StampFinder {
 		ports = new CommPortIdentifier[tempPorts.size()];
 		final Object[] portsObj = tempPorts.toArray();
 
-		Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO,
-				"There are " + portsObj.length + " Serial COMM Ports in the system...");
+		LOGGER.log(Level.INFO, "There are " + portsObj.length + " Serial COMM Ports in the system...");
 
 		System.arraycopy(portsObj, 0, ports, 0, ports.length);
 
-		Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO, "Serial COMM Ports in the system are:");
+		LOGGER.log(Level.INFO, "Serial COMM Ports in the system are:");
 		for (int i = 0; i < ports.length; i++) {
-			Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO, "Port[" + i + "]=" + ports[i].getName());
+			LOGGER.log(Level.INFO, "Port[" + i + "]=" + ports[i].getName());
 		}
 
 		runner = new StampFinderRunner();
@@ -364,7 +343,7 @@ public class StampFinder {
 				try {
 					current.join();
 				} catch (final InterruptedException e) {
-					LoggerUtil.logThrowable(null, e, Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER));
+					LOGGER.log(Level.SEVERE, null, e);
 				}
 			}
 		}
@@ -372,7 +351,7 @@ public class StampFinder {
 		@Override
 		public void run() {
 			while (!exit) {
-				Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO, "Cycling port...");
+				LOGGER.log(Level.INFO, "Cycling port...");
 				cyclePort();
 			}
 		}
@@ -384,22 +363,19 @@ public class StampFinder {
 
 			if (currentPort >= ports.length) {
 				currentPort = 0;
-				Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO, "Restarting from the first port!");
+				LOGGER.log(Level.INFO, "Restarting from the first port!");
 			}
 
 			final CommPortIdentifier cpi = ports[currentPort];
 
 			if (cpi.isCurrentlyOwned()) {
-				Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(
-						Level.INFO,
-						"Serial Port " + cpi.getName() + " is currently owned by another application - "
-								+ cpi.getCurrentOwner());
+				LOGGER.log(Level.INFO, "Serial Port " + cpi.getName() + " is currently owned by another application - "
+						+ cpi.getCurrentOwner());
 				currentPort++;
 				return;
 			}
 
-			Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO,
-					"Serial Port " + cpi.getName() + " is not Owned - Opening & Locking It! ");
+			LOGGER.log(Level.INFO, "Serial Port " + cpi.getName() + " is not Owned - Opening & Locking It! ");
 
 			try {
 				currentPortOpen = (SerialPort) cpi.open(applicationNameLockPort, 100);
@@ -420,53 +396,33 @@ public class StampFinder {
 				// currentPortOpen.notifyOnDataAvailable(true);
 
 			} catch (final gnu.io.PortInUseException e) {
-				LoggerUtil.logThrowable("Serial port " + cpi.getName() + " is currently in use...", e,
-						Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER));
+				LOGGER.log(Level.SEVERE, "Serial port " + cpi.getName() + " is currently in use...", e);
 				currentPort++;
 				return;
 			}
 
 			try {
-				Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(
-						Level.INFO,
-						"Sleeping for " + (timeOutPerPort > 0 ? timeOutPerPort : 100) + " ms for port " + cpi.getName()
-								+ " data events");
+				LOGGER.log(Level.INFO, "Sleeping for " + (timeOutPerPort > 0 ? timeOutPerPort : 100) + " ms for port "
+						+ cpi.getName() + " data events");
 				synchronized (this) {
 					wait(timeOutPerPort > 0 ? timeOutPerPort : 100);
-					Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(
-							Level.INFO,
-							"Ended Sleeping for " + (timeOutPerPort > 0 ? timeOutPerPort : 100) + " ms for port "
-									+ cpi.getName() + " data events");
+					LOGGER.log(Level.INFO, "Ended Sleeping for " + (timeOutPerPort > 0 ? timeOutPerPort : 100)
+							+ " ms for port " + cpi.getName() + " data events");
 				}
 
 			} catch (final InterruptedException e) {
-				LoggerUtil.logThrowable("Error waiting for SerialPort identification!", e,
-						Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER));
+				LOGGER.log(Level.SEVERE, "Error waiting for SerialPort identification!", e);
 				return;
 			}
 
 			if (!portFound) {
-				Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO, "Port was not found!");
+				LOGGER.log(Level.INFO, "Port was not found!");
 				synchronized (stampFinderRunnerEventListener) {
-					Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO,
-							"NO id string detected on port " + cpi.getName());
+					LOGGER.log(Level.INFO, "NO id string detected on port " + cpi.getName());
 					// currentPortOpen.removeEventListener();
 					stampIO.shutdown();
-					Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO, "Shuted down stampIO!");
+					LOGGER.log(Level.INFO, "Shuted down stampIO!");
 				}
-				/*
-				 * try {Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,
-				 * "Closing port "+cpi.getName()+" IO Stream!");
-				 * currentReader.close(); }catch(Exception e) {
-				 * LoggerUtil.logThrowable("Error closing port "+cpi.getName()
-				 * +" IO Stream!",e,Logger.getLogger(STAMP_FINDER_LOGGER)); }
-				 * try {Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,
-				 * "Closing port "+cpi.getName()+"!"); currentPortOpen.close();
-				 * }catch(Exception e) {
-				 * LoggerUtil.logThrowable("Error closing port "
-				 * +cpi.getName()+"!",e,Logger.getLogger(STAMP_FINDER_LOGGER));
-				 * }
-				 */
 			}
 
 			currentPort++;
@@ -476,53 +432,17 @@ public class StampFinder {
 
 		private class StampFinderRunnerPortListener implements StampCommandListener {
 
-			/*
-			 * public synchronized void serialEvent(gnu.io.SerialPortEvent
-			 * serialPortEvent) {
-			 * Logger.getLogger(STAMP_FINDER_LOGGER).log(Level
-			 * .INFO,"Received port event "
-			 * +currentPortOpen.getName()+" whith type="
-			 * +serialPortEvent.getEventType
-			 * ()+"  - DataAvailableEventType="+SerialPortEvent.DATA_AVAILABLE);
-			 * 
-			 * 
-			 * 
-			 * 
-			 * if(serialPortEvent.getEventType()==SerialPortEvent.DATA_AVAILABLE)
-			 * { String line="";
-			 * 
-			 * try {Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,
-			 * "Reading line of data from port "+currentPortOpen.getName()+"!");
-			 * line=currentReader.readLine();
-			 * Logger.getLogger(STAMP_FINDER_LOGGER
-			 * ).log(Level.INFO,"Data Line is : '"+line+"'!");
-			 * }catch(IOException e) {
-			 * LoggerUtil.logThrowable("IO Error reading line from port "
-			 * +currentPortOpen
-			 * .getName()+"!",e,Logger.getLogger(STAMP_FINDER_LOGGER)); }
-			 * if(line.equals(stampIdentifier)) {
-			 * Logger.getLogger(STAMP_FINDER_LOGGER
-			 * ).log(Level.INFO,"Identified STAMP on port "
-			 * +currentPortOpen.getName()+"!");
-			 * //currentPortOpen.removeEventListener();
-			 * fireStampFinderListenerStampFound(currentPortOpen);
-			 * portFound=true; exit=true; } } }
-			 */
-
 			@Override
 			public void handleStampCommand(final StampCommand command) {
-				Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO,
-						"Received a command " + command.getCommandIdentifier() + "!");
+				LOGGER.log(Level.INFO, "Received a command " + command.getCommandIdentifier() + "!");
 				if (command.getCommandIdentifier().equals(stampIdentifier)) {
-					Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.INFO,
-							"Identified STAMP on port " + currentPortOpen.getName() + "!");
+					LOGGER.log(Level.INFO, "Identified STAMP on port " + currentPortOpen.getName() + "!");
 					stampIO.shutdown();
 					fireStampFinderListenerStampFound(currentPortOpen);
 					portFound = true;
 					exit = true;
 				} else {
-					Logger.getLogger(StampFinder.STAMP_FINDER_LOGGER).log(Level.FINE,
-							"Command ignored for stamp finder. Command [" + command + "]");
+					LOGGER.log(Level.FINE, "Command ignored for stamp finder. Command [" + command + "]");
 				}
 			}
 

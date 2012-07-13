@@ -1,17 +1,9 @@
-/*
- * GenericHardwareServerMain.java
- *
- * Created on 26 de Junho de 2002, 16:44
- */
-
 package pt.utl.ist.elab.driver.serial.serialportgeneric.genericexperiment;
 
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import com.linkare.rec.impl.driver.BaseHardware;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.ORBBean;
 
 /**
@@ -23,30 +15,26 @@ import com.linkare.rec.impl.utils.ORBBean;
  */
 public abstract class GenericHardwareServerMain {
 
-	private static String HARDWARE_LOGGER = "GenericHardware.Logger";
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(GenericHardwareServerMain.HARDWARE_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(GenericHardwareServerMain.HARDWARE_LOGGER));
-		}
-	}
+	private static final Logger LOGGER = Logger.getLogger(GenericHardwareServerMain.class.getName());
 
 	/**
 	 * @param args : ORB Bean to be loaded
 	 */
 	public static void main(final String[] args) {
 		try {
-			Logger.getLogger(GenericHardwareServerMain.HARDWARE_LOGGER).log(Level.INFO, "Starting Driver");
+			LOGGER.log(Level.INFO, "Starting Driver");
 			ORBBean.getORBBean();
-			@SuppressWarnings("unused")
-			final BaseHardware baseHardware = new BaseHardware(new GenericSerialPortDriver());
-			Thread.currentThread().join();
 
-		} catch (final Exception e) {
-			e.printStackTrace();
+			new BaseHardware(new GenericSerialPortDriver());
+
+			try {
+				Thread.currentThread().join();
+			} catch (final Exception ignored) {
+			}
+
 			ORBBean.getORBBean().killORB();
-			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(GenericHardwareServerMain.HARDWARE_LOGGER));
+		} catch (final Exception e) {
+			LOGGER.log(Level.SEVERE, "Error on ServerMain...", e);
 		}
 	}
 

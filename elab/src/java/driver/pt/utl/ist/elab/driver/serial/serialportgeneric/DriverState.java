@@ -40,8 +40,8 @@ public enum DriverState {
 		@Override
 		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
-					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
+			LOGGER.log(Level.INFO, "Processing next state... Actual state: " + toString() + ", Actual command: "
+					+ command.toString());
 			switch (command) {
 			case IDS:
 				return DriverState.logAndReturn(DriverState.UNKNOWN);
@@ -80,8 +80,8 @@ public enum DriverState {
 		@Override
 		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
-					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
+			LOGGER.log(Level.INFO, "Processing next state... Actual state: " + toString() + ", Actual command: "
+					+ command.toString());
 			switch (command) {
 			case IDS:
 				if (HardwareStatus.valueOf(cmd.getDataHashMap().get(1)) == HardwareStatus.STOPED) {
@@ -140,8 +140,8 @@ public enum DriverState {
 		@Override
 		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
-					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
+			LOGGER.log(Level.INFO, "Processing next state... Actual state: " + toString() + ", Actual command: "
+					+ command.toString());
 			switch (command) {
 			case IDS:
 			case STP:
@@ -185,8 +185,8 @@ public enum DriverState {
 		@Override
 		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
-					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
+			LOGGER.log(Level.INFO, "Processing next state... Actual state: " + toString() + ", Actual command: "
+					+ command.toString());
 			switch (command) {
 			case IDS:
 				return DriverState.logAndReturn(this);
@@ -229,8 +229,8 @@ public enum DriverState {
 		@Override
 		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
-					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
+			LOGGER.log(Level.INFO, "Processing next state... Actual state: " + toString() + ", Actual command: "
+					+ command.toString());
 			switch (command) {
 			case IDS:
 				return DriverState.logAndReturn(this);
@@ -317,8 +317,8 @@ public enum DriverState {
 		@Override
 		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
-					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
+			LOGGER.log(Level.INFO, "Processing next state... Actual state: " + toString() + ", Actual command: "
+					+ command.toString());
 			switch (command) {
 			case IDS:
 				return DriverState.logAndReturn(this);
@@ -409,8 +409,8 @@ public enum DriverState {
 		@Override
 		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
-					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
+			LOGGER.log(Level.INFO, "Processing next state... Actual state: " + toString() + ", Actual command: "
+					+ command.toString());
 			switch (command) {
 			case IDS:
 				return DriverState.logAndReturn(this);
@@ -501,8 +501,8 @@ public enum DriverState {
 		@Override
 		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
-					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
+			LOGGER.log(Level.INFO, "Processing next state... Actual state: " + toString() + ", Actual command: "
+					+ command.toString());
 			switch (command) {
 			case IDS:
 				return DriverState.logAndReturn(this);
@@ -589,8 +589,8 @@ public enum DriverState {
 		@Override
 		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
-					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
+			LOGGER.log(Level.INFO, "Processing next state... Actual state: " + toString() + ", Actual command: "
+					+ command.toString());
 			switch (command) {
 			case IDS:
 				return DriverState.logAndReturn(this);
@@ -679,8 +679,8 @@ public enum DriverState {
 		@Override
 		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
-					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
+			LOGGER.log(Level.INFO, "Processing next state... Actual state: " + toString() + ", Actual command: "
+					+ command.toString());
 			switch (command) {
 			case IDS:
 				return DriverState.logAndReturn(this);
@@ -769,8 +769,8 @@ public enum DriverState {
 		@Override
 		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
-					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
+			LOGGER.log(Level.INFO, "Processing next state... Actual state: " + toString() + ", Actual command: "
+					+ command.toString());
 			switch (command) {
 			case IDS:
 				return DriverState.logAndReturn(this);
@@ -857,8 +857,8 @@ public enum DriverState {
 		@Override
 		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
-					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
+			LOGGER.log(Level.INFO, "Processing next state... Actual state: " + toString() + ", Actual command: "
+					+ command.toString());
 			switch (command) {
 			case IDS:
 				return DriverState.logAndReturn(this);
@@ -902,8 +902,8 @@ public enum DriverState {
 		@Deprecated
 		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
-					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
+			LOGGER.log(Level.INFO, "Processing next state... Actual state: " + toString() + ", Actual command: "
+					+ command.toString());
 			switch (command) {
 			// should never achieve this point of code ;)
 			default:
@@ -938,8 +938,8 @@ public enum DriverState {
 		@Override
 		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
-					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
+			LOGGER.log(Level.INFO, "Processing next state... Actual state: " + toString() + ", Actual command: "
+					+ command.toString());
 			switch (command) {
 			case IDS:
 				return DriverState.logAndReturn(this);
@@ -1034,8 +1034,8 @@ public enum DriverState {
 		@Override
 		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
-					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
+			LOGGER.log(Level.INFO, "Processing next state... Actual state: " + toString() + ", Actual command: "
+					+ command.toString());
 			switch (command) {
 			case IDS:
 				return DriverState.logAndReturn(this);
@@ -1120,8 +1120,8 @@ public enum DriverState {
 		@Override
 		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
-					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
+			LOGGER.log(Level.INFO, "Processing next state... Actual state: " + toString() + ", Actual command: "
+					+ command.toString());
 			switch (command) {
 			case IDS:
 				return DriverState.logAndReturn(this);
@@ -1206,8 +1206,8 @@ public enum DriverState {
 		@Override
 		public DriverState nextState(final SerialPortCommandList command, final SerialPortCommand cmd) {
 			// Log this event
-			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
-					"Processing next state... Actual state: " + toString() + ", Actual command: " + command.toString());
+			LOGGER.log(Level.INFO, "Processing next state... Actual state: " + toString() + ", Actual command: "
+					+ command.toString());
 			switch (command) {
 			case IDS:
 				return DriverState.logAndReturn(this);
@@ -1291,6 +1291,8 @@ public enum DriverState {
 		}
 	};
 
+	private static final Logger LOGGER = Logger.getLogger(DriverState.class.getName());
+
 	private static DriverState lastState = null;
 
 	public void setLastState(final DriverState lastState) {
@@ -1298,8 +1300,7 @@ public enum DriverState {
 	}
 
 	private static DriverState logAndReturn(final DriverState driverState) {
-		Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.FINE,
-				"Returning next state... New state: " + driverState.toString());
+		LOGGER.log(Level.FINE, "Returning next state... New state: " + driverState.toString());
 		return driverState;
 	}
 

@@ -1,31 +1,16 @@
-/*
- * SerialPortTranslatorManager.java
- *
- * Created on 11 de Novembro de 2002, 15:35
- */
-
 package pt.utl.ist.elab.driver.serial.stamp.transproc;
 
 import java.util.Hashtable;
-import java.util.logging.LogManager;
+import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import com.linkare.rec.impl.logging.LoggerUtil;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
 public class StampTranslatorProcessorManager {
-	private static String STAMP_TPMANAGER_LOGGER = "StampTranslatorProcessorManager.Logger";
 
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(StampTranslatorProcessorManager.STAMP_TPMANAGER_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(
-					Logger.getLogger(StampTranslatorProcessorManager.STAMP_TPMANAGER_LOGGER));
-		}
-	}
+	private static final Logger LOGGER = Logger.getLogger(StampTranslatorProcessorManager.class.getName());
 
 	private static Hashtable<String, StampTranslator> translators = new Hashtable<String, StampTranslator>(5);
 	private static Hashtable<String, StampProcessor> processors = new Hashtable<String, StampProcessor>(5);
@@ -71,8 +56,7 @@ public class StampTranslatorProcessorManager {
 			final Class<?> c = Class.forName(className);
 			c.newInstance();
 		} catch (final Exception e) {
-			LoggerUtil.logThrowable("Unable to load class:" + className, e,
-					Logger.getLogger(StampTranslatorProcessorManager.STAMP_TPMANAGER_LOGGER));
+			LOGGER.log(Level.SEVERE, "Unable to load class:" + className, e);
 		}
 	}
 
@@ -82,8 +66,7 @@ public class StampTranslatorProcessorManager {
 				final Class<?> c = Class.forName(className);
 				c.newInstance();
 			} catch (final Exception e) {
-				LoggerUtil.logThrowable("Unable to load class:" + className, e,
-						Logger.getLogger(StampTranslatorProcessorManager.STAMP_TPMANAGER_LOGGER));
+				LOGGER.log(Level.SEVERE, "Unable to load class:" + className, e);
 			}
 		}
 	}

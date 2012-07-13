@@ -1,19 +1,8 @@
-/*
- * CypressFinder.java
- *
- * Created on 15 de Maio de 2003, 11:51
- *
- *
- * ->Changed by André on 26/07/04:
- *    Added suport to Basic Atom. Now we can control RTS, DTR and echo
- */
-
 package pt.utl.ist.elab.driver.usb.cypress;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import javax.usb.UsbDevice;
@@ -22,28 +11,19 @@ import javax.usb.UsbHostManager;
 import javax.usb.UsbHub;
 import javax.usb.UsbServices;
 
-import com.linkare.rec.impl.logging.LoggerUtil;
-
 /**
  * 
  * @author André
  */
 public class CypressFinder {
-	private static String CYPRESS_FINDER_LOGGER = "CypressFinder.Logger";
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(CypressFinder.CYPRESS_FINDER_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(CypressFinder.CYPRESS_FINDER_LOGGER));
-		}
-	}
+	private static final Logger LOGGER = Logger.getLogger(CypressFinder.class.getName());
 
 	/** Utility field used by event firing mechanism. */
 	private javax.swing.event.EventListenerList listenerList = null;
 
 	/** Holds value of property waitForEcho. */
 	private boolean waitForEcho = true;
-	private boolean usbFound = false;
+	// private boolean usbFound = false;
 
 	private CypressFinderRunner runner = null;
 
@@ -120,10 +100,10 @@ public class CypressFinder {
 	/**
 	 * Setter for property CypressIdentifier.
 	 * 
-	 * @param CypressIdentifier New value of property CypressIdentifier.
+	 * @param cypressIdentifier New value of property CypressIdentifier.
 	 */
-	public void setCypressIdentifier(final String CypressIdentifier) {
-		cypressIdentifier = cypressIdentifier;
+	public void setCypressIdentifier(final String cypressIdentifier) {
+		this.cypressIdentifier = cypressIdentifier;
 	}
 
 	/**
@@ -219,9 +199,9 @@ public class CypressFinder {
 
 		try {
 			final java.util.Properties props = UsbHostManager.getProperties();
-			final java.util.Enumeration enumer = props.elements();
+			final java.util.Enumeration<Object> enumer = props.elements();
 			while (enumer.hasMoreElements()) {
-				System.out.println(enumer.nextElement().toString());
+				LOGGER.log(Level.FINE, enumer.nextElement().toString());
 			}
 
 			services = UsbHostManager.getUsbServices();
@@ -245,7 +225,7 @@ public class CypressFinder {
 		 */
 		try {
 			virtualRootUsbHub = services.getRootUsbHub();
-			System.out.println("->" + virtualRootUsbHub.getAttachedUsbDevices().size());
+			LOGGER.log(Level.FINE, "->" + virtualRootUsbHub.getAttachedUsbDevices().size());
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
@@ -302,8 +282,9 @@ public class CypressFinder {
 
 		private boolean exit = false;
 		private final Thread current = null;
-		private final int currentPort = 0;
-		private final BaseCypressIO CypressIO = null;
+
+		// private final int currentPort = 0;
+		// private final BaseCypressIO CypressIO = null;
 
 		public void stopNow() {
 			exit = true;
@@ -311,7 +292,7 @@ public class CypressFinder {
 				try {
 					current.join();
 				} catch (final InterruptedException e) {
-					LoggerUtil.logThrowable(null, e, Logger.getLogger(CypressFinder.CYPRESS_FINDER_LOGGER));
+					LOGGER.log(Level.SEVERE, null, e);
 				}
 			}
 		}
@@ -319,7 +300,7 @@ public class CypressFinder {
 		@Override
 		public void run() {
 			while (!exit) {
-				Logger.getLogger(CypressFinder.CYPRESS_FINDER_LOGGER).log(Level.INFO, "Cycling port...");
+				LOGGER.log(Level.INFO, "Cycling port...");
 				cycleUSBPorts();
 
 				try {
@@ -330,9 +311,8 @@ public class CypressFinder {
 		}
 
 		public void cycleUSBPorts() {
-			Logger.getLogger(CypressFinder.CYPRESS_FINDER_LOGGER).log(Level.INFO, "Searching for a USBDevice with:");
-			Logger.getLogger(CypressFinder.CYPRESS_FINDER_LOGGER).log(Level.INFO,
-					"staticVendorId = " + vendorID + " and staticProductId = " + productID);
+			LOGGER.log(Level.INFO, "Searching for a USBDevice with:");
+			LOGGER.log(Level.INFO, "staticVendorId = " + vendorID + " and staticProductId = " + productID);
 
 			final UsbHub virtualRootUsbHub = getVirtualRootUsbHub();
 
@@ -341,23 +321,22 @@ public class CypressFinder {
 			usbDevices = getUsbDevicesWithId(virtualRootUsbHub, vendorID, productID);
 
 			if (usbDevices != null && usbDevices.size() > 0) {
-				Logger.getLogger(CypressFinder.CYPRESS_FINDER_LOGGER).log(Level.INFO,
-						"Found " + usbDevices.size() + " device with the requested parameters!");
+				LOGGER.log(Level.INFO, "Found " + usbDevices.size() + " device with the requested parameters!");
 			} else {
-				System.out.println("Couln't found any device with the requested parameters... returning");
+				LOGGER.log(Level.SEVERE, "Couln't found any device with the requested parameters... returning");
 				return;
 			}
 
 			try {
 				final UsbDevice device = (UsbDevice) usbDevices.get(0);
 
-				usbFound = true;
+				// usbFound = true;
 				exit = true;
 
 				fireCypressFinderListenerCypressFound(device);
 			} catch (final Exception e) {
-				Logger.getLogger(CypressFinder.CYPRESS_FINDER_LOGGER).log(Level.INFO, e.getMessage());
-				usbFound = false;
+				LOGGER.log(Level.INFO, e.getMessage());
+				// usbFound = false;
 			}
 		}
 	}

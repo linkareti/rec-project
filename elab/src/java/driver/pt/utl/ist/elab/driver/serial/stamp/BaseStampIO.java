@@ -16,13 +16,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommandListener;
-
-import com.linkare.rec.impl.logging.LoggerUtil;
 
 /**
  * 
@@ -30,14 +27,8 @@ import com.linkare.rec.impl.logging.LoggerUtil;
  */
 public class BaseStampIO {
 
-	private static String STAMP_IO_LOGGER = "BaseStampIO.Logger";
+	private static final Logger LOGGER = Logger.getLogger(BaseStampIO.class.getName());
 
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(BaseStampIO.STAMP_IO_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(BaseStampIO.STAMP_IO_LOGGER));
-		}
-	}
 	private SerialPort sPort = null;
 	private SerialPortReader currentSerialPortReader = null;
 	// private BufferedReader inReader=null;
@@ -69,7 +60,7 @@ public class BaseStampIO {
 				// InputStreamReader(this.sPort.getInputStream()),100);
 			}
 		} catch (final Exception e) {
-			LoggerUtil.logThrowable(null, e, Logger.getLogger(BaseStampIO.STAMP_IO_LOGGER));
+			LOGGER.log(Level.SEVERE, null, e);
 		}
 	}
 
@@ -78,7 +69,7 @@ public class BaseStampIO {
 	public void writeMessage(final String writeMessage) {
 		synchronized (sPort) {
 			try {
-				Logger.getLogger(BaseStampIO.STAMP_IO_LOGGER).log(Level.INFO, "Write Line to STAMP: " + writeMessage);
+				LOGGER.log(Level.INFO, "Write Line to STAMP: " + writeMessage);
 				final byte[] message = (writeMessage + "\r").getBytes("us-ascii");
 				lastOutputMessage = writeMessage;
 
@@ -106,8 +97,7 @@ public class BaseStampIO {
 				}
 
 			} catch (final IOException e) {
-				LoggerUtil.logThrowable("Unable to write command to serial port...", e,
-						Logger.getLogger(BaseStampIO.STAMP_IO_LOGGER));
+				LOGGER.log(Level.SEVERE, "Unable to write command to serial port...", e);
 			}
 		}
 
@@ -155,11 +145,10 @@ public class BaseStampIO {
 						}
 
 						lineRead = lineReadTemp.toString().trim();
-						Logger.getLogger(BaseStampIO.STAMP_IO_LOGGER).log(Level.INFO,
-								"Line read from STAMP: " + lineRead);
+						LOGGER.log(Level.INFO, "Line read from STAMP: " + lineRead);
 
 						if (waitForEcho && lastOutputMessage != null) {
-							Logger.getLogger(BaseStampIO.STAMP_IO_LOGGER).log(Level.INFO, "Ignoring message...");
+							LOGGER.log(Level.INFO, "Ignoring message...");
 							if (lastOutputMessage.startsWith(lineRead) || lineRead.startsWith(lastOutputMessage)) {
 								lastOutputMessage = null;
 							}
@@ -168,13 +157,12 @@ public class BaseStampIO {
 					}
 
 					if (!lineRead.equals("")) {
-						Logger.getLogger(BaseStampIO.STAMP_IO_LOGGER).log(Level.INFO, "Processing message...");
+						LOGGER.log(Level.INFO, "Processing message...");
 						processIncomingLine(lineRead);
 					}
 
 				} catch (final Exception e) {
-					LoggerUtil.logThrowable("Unable to read line from stamp serial port...", e,
-							Logger.getLogger(BaseStampIO.STAMP_IO_LOGGER));
+					LOGGER.log(Level.SEVERE, "Unable to read line from stamp serial port...", e);
 					currentThread = null;
 					return;
 				}
@@ -257,32 +245,18 @@ public class BaseStampIO {
 	}
 
 	public void shutdown() {
-		Logger.getLogger(BaseStampIO.STAMP_IO_LOGGER).log(Level.INFO, "Shutting down port...");
+		LOGGER.log(Level.INFO, "Shutting down port...");
 		// sPort.removeEventListener();
 		if (currentSerialPortReader != null) {
 			currentSerialPortReader.exitNow();
-			/*
-			 * try { System.out.println("Trying to close inReader...");
-			 * inReader.close(); System.out.println("closed inReader...");
-			 * }catch(Exception e) {
-			 * System.out.println("oopppsss... closing inReader");
-			 * LoggerUtil.logThrowable
-			 * (null,e,Logger.getLogger(STAMP_IO_LOGGER)); }
-			 * 
-			 * try { System.out.println("Trying to close outStream...");
-			 * outStream.close(); System.out.println("Closed outStream...");
-			 * }catch(Exception e) {
-			 * LoggerUtil.logThrowable(null,e,Logger.getLogger
-			 * (STAMP_IO_LOGGER)); }
-			 */
 		}
 		if (sPort != null) {
-			Logger.getLogger(BaseStampIO.STAMP_IO_LOGGER).log(Level.INFO, "Closing sPort...");
+			LOGGER.log(Level.INFO, "Closing sPort...");
 			sPort.close();
-			Logger.getLogger(BaseStampIO.STAMP_IO_LOGGER).log(Level.INFO, "Closed sPort...");
+			LOGGER.log(Level.INFO, "Closed sPort...");
 		}
 
-		Logger.getLogger(BaseStampIO.STAMP_IO_LOGGER).log(Level.INFO, "Shutted down port...");
+		LOGGER.log(Level.INFO, "Shutted down port...");
 	}
 
 	/**

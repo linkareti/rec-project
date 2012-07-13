@@ -1,14 +1,8 @@
 package pt.utl.ist.elab.driver.serial.stamp;
 
-/**
- * 
- * ->Changed by André on 26/07/04:
- *    Added suport to Basic Atom. Now we can control RTS, DTR and echo
- */
 import gnu.io.SerialPort;
 
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
@@ -22,7 +16,6 @@ import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.driver.BaseDriver;
 import com.linkare.rec.impl.driver.IDataSource;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.threading.AbstractConditionDecisor;
 import com.linkare.rec.impl.threading.TimedOutException;
 import com.linkare.rec.impl.threading.WaitForConditionResult;
@@ -33,14 +26,8 @@ import com.linkare.rec.impl.utils.QueueLogger;
 public abstract class AbstractStampDriver extends BaseDriver implements StampFinderListener, StampCommandListener,
 		QueueLogger {
 
-	protected static String STAMP_DRIVER_LOGGER = "StampDriver.Logger";
+	private static final Logger LOGGER = Logger.getLogger(AbstractStampDriver.class.getName());
 
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER));
-		}
-	}
 	public static String START_STRING = "STARTED";
 	public static String CONFIG_OUT_STRING = "cfg";
 	public static String CONFIG_ACCEPTED_STRING = "CONFIG_START_ACCEPTED";
@@ -115,8 +102,7 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 				}
 			}, 120 * 1000, stampFinder.getTimeOutPerPort());
 		} catch (final TimedOutException e) {
-			LoggerUtil.logThrowable("Couldn't find port for STAMP in " + 120 + "s", e,
-					Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER));
+			LOGGER.log(Level.SEVERE,"Couldn't find port for STAMP in " + 120 + "s", e);
 
 		}
 
@@ -154,8 +140,7 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 		try {
 			startNow();
 		} catch (final TimedOutException e) {
-			LoggerUtil.logThrowable("Error on start... - rethrowing IncorrectStateException!", e,
-					Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER));
+			LOGGER.log(Level.SEVERE,"Error on start... - rethrowing IncorrectStateException!", e);
 			// I'll try to reopen the stamp...this way it il not get stuck
 			// here...at least I hope so!
 			fireIDriverStateListenerDriverReseting();
@@ -209,10 +194,8 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 	public void handleStampCommand(final StampCommand command) {
 		final StampProcessor processor = command.getProcessor();
 		if (processor == null) {
-			Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER).log(Level.INFO,
-					"Didn't get a processor for command " + command.getCommandIdentifier());
-			Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER).log(Level.INFO,
-					"Droping the command, as it is not understood!");
+			LOGGER.log(Level.INFO, "Didn't get a processor for command " + command.getCommandIdentifier());
+			LOGGER.log(Level.INFO, "Droping the command, as it is not understood!");
 			return;
 		}
 
@@ -225,18 +208,15 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 				if (dataSource != null) {
 					dataSource.processDataCommand(command);
 				} else {
-					Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER).log(Level.INFO,
-							"No data source to process command...");
+					LOGGER.log(Level.INFO, "No data source to process command...");
 				}
 
 			} else {
 				processCommand(command);
 			}
 		} else {
-			Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER).log(
-					Level.INFO,
-					"The processor didn't understand the message... Ooooppsss... Message was : " + command.getCommand()
-							+ " !");
+			LOGGER.log(Level.INFO, "The processor didn't understand the message... Ooooppsss... Message was : "
+					+ command.getCommand() + " !");
 		}
 
 	}
@@ -272,8 +252,7 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 					dataSource.stopNow();
 				}
 			} else {
-				Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER).log(Level.INFO,
-						"CommandDispatcher doesn't know how to deal with other than StampCommand's");
+				LOGGER.log(Level.INFO, "CommandDispatcher doesn't know how to deal with other than StampCommand's");
 			}
 		}
 
@@ -464,7 +443,7 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 	 */
 	@Override
 	public void log(final Level debugLevel, final String message) {
-		Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER).log(debugLevel, message);
+		LOGGER.log(debugLevel, message);
 	}
 
 	/**
@@ -472,6 +451,6 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 	 */
 	@Override
 	public void logThrowable(final String message, final Throwable t) {
-		LoggerUtil.logThrowable(message, t, Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER));
+		LOGGER.log(Level.SEVERE, message, t);
 	}
 }

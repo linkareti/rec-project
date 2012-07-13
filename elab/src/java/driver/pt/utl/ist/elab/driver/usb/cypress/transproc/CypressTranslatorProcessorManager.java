@@ -1,32 +1,16 @@
-/*
- * SerialPortTranslatorManager.java
- *
- * Created on 11 de Novembro de 2002, 15:35
- */
-
 package pt.utl.ist.elab.driver.usb.cypress.transproc;
 
 import java.util.Hashtable;
-import java.util.logging.LogManager;
+import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import com.linkare.rec.impl.logging.LoggerUtil;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
 public class CypressTranslatorProcessorManager {
-	private static String Cypress_TPMANAGER_LOGGER = "CypressTranslatorProcessorManager.Logger";
 
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(
-				CypressTranslatorProcessorManager.Cypress_TPMANAGER_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(
-					Logger.getLogger(CypressTranslatorProcessorManager.Cypress_TPMANAGER_LOGGER));
-		}
-	}
+	private static final Logger LOGGER = Logger.getLogger(CypressTranslatorProcessorManager.class.getName());
 
 	private static Hashtable<String, CypressTranslator> translators = new Hashtable<String, CypressTranslator>(5);
 	private static Hashtable<String, CypressProcessor> processors = new Hashtable<String, CypressProcessor>(5);
@@ -72,8 +56,7 @@ public class CypressTranslatorProcessorManager {
 			final Class<?> c = Class.forName(className);
 			c.newInstance();
 		} catch (final Exception e) {
-			LoggerUtil.logThrowable("Unable to load class:" + className, e,
-					Logger.getLogger(CypressTranslatorProcessorManager.Cypress_TPMANAGER_LOGGER));
+			LOGGER.log(Level.SEVERE, "Unable to load class:" + className, e);
 		}
 	}
 
@@ -83,8 +66,7 @@ public class CypressTranslatorProcessorManager {
 				final Class<?> c = Class.forName(className);
 				c.newInstance();
 			} catch (final Exception e) {
-				LoggerUtil.logThrowable("Unable to load class:" + className, e,
-						Logger.getLogger(CypressTranslatorProcessorManager.Cypress_TPMANAGER_LOGGER));
+				LOGGER.log(Level.SEVERE, "Unable to load class:" + className, e);
 			}
 		}
 	}
