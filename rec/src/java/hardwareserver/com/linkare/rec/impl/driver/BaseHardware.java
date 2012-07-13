@@ -34,6 +34,7 @@ import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.events.HardwareStateChangeEvent;
 import com.linkare.rec.impl.exceptions.IncorrectStateExceptionConstants;
+import com.linkare.rec.impl.exceptions.WrongConfigurationExceptionConstants;
 import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
@@ -324,8 +325,9 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 		} catch (final WrongConfigurationException e) {
 			LOGGER.log(Level.WARNING, "Invalid configuration. Thowing the exception.", e);
 			throw e;
-		} catch (final Exception e) {
-			LOGGER.log(Level.WARNING, "Error configuring the hardware.", e);
+		} catch (final Throwable t) {
+			LOGGER.log(Level.WARNING, "Error configuring the hardware.", t);
+			throw new WrongConfigurationException(WrongConfigurationExceptionConstants.PARAMETER_INVALID);
 		}
 
 	}
