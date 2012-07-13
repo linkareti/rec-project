@@ -1,9 +1,3 @@
-/*
- * RobotDriver.java
- *
- * Created on 24 de Abril de 2003, 8:53
- */
-
 package pt.utl.ist.elab.driver.vdpendulum;
 
 import java.util.logging.Logger;
@@ -14,18 +8,20 @@ import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.driver.BaseDriver;
 import com.linkare.rec.impl.driver.IDataSource;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.impl.utils.Defaults;
 
 /**
  * 
- * @author Andr�
+ * @author André
  */
 
 public class DPendulumDriver extends BaseDriver {
+
+	private static final Logger LOGGER = Logger.getLogger(DPendulumDriver.class.getName());
+
 	/* Hardware and driver related variables */
-	private static final String APPLICATION_IDENTIFIER = "E-Lab (P�ndulo Driver)";
+	private static final String APPLICATION_IDENTIFIER = "E-Lab (Pêndulo Driver)";
 	private static final String DRIVER_UNIQUE_ID = "DPENDULUM_V1.0";
 	private static final String HW_VERSION = "0.1";
 
@@ -120,10 +116,10 @@ public class DPendulumDriver extends BaseDriver {
 
 	public Object getHardwareInfo() {
 		fireIDriverStateListenerDriverReseting();
-		
-		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
+		String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+				+ "/HardwareInfo.xml";
+		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
 		if (prop.indexOf("://") == -1)
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
@@ -132,12 +128,11 @@ public class DPendulumDriver extends BaseDriver {
 		try {
 			url = Protocols.getURL(prop);
 		} catch (java.net.MalformedURLException e) {
-			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger("DPendulum"));
+			LOGGER.log(Level.SEVERE, "Unable to load resource: " + prop, e);
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
 			} catch (java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2, Logger
-						.getLogger("DPendulum"));
+				LOGGER.log(Level.SEVERE, "Unable to load resource: " + baseHardwareInfoFile, e2);
 			}
 		}
 		fireIDriverStateListenerDriverReseted();

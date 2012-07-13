@@ -1,9 +1,3 @@
-/*
- * RadioactividadeStampDriver.java
- *
- * Created on 15 de Maio de 2003, 19:38
- */
-
 package pt.utl.ist.elab.driver.rayleigh;
 
 import java.util.logging.Level;
@@ -23,7 +17,6 @@ import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.DateTime;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.impl.threading.AbstractConditionDecisor;
 import com.linkare.rec.impl.threading.TimedOutException;
@@ -35,6 +28,9 @@ import com.linkare.rec.impl.utils.Defaults;
  * @author José Pedro Pereira - Linkare TI
  */
 public class RayleighStampDriver extends AbstractStampDriver {
+
+	private static final Logger LOGGER = Logger.getLogger(RayleighStampDriver.class.getName());
+
 	private StampCommand stampConfig = null;
 
 	/** Creates a new instance of RadioactividadeStampDriver */
@@ -52,9 +48,11 @@ public class RayleighStampDriver extends AbstractStampDriver {
 
 		stampConfig = new StampCommand(CONFIG_OUT_STRING);
 
-		stampConfig.addCommandData(StampConfigTranslator.DELTAX_STR, new String(Defaults.defaultIfEmpty(config
-				.getSelectedHardwareParameterValue(StampConfigTranslator.DELTAX_STR), info
-				.getHardwareParameterValue(StampConfigTranslator.DELTAX_STR))));
+		stampConfig.addCommandData(
+				StampConfigTranslator.DELTAX_STR,
+				new String(Defaults.defaultIfEmpty(
+						config.getSelectedHardwareParameterValue(StampConfigTranslator.DELTAX_STR),
+						info.getHardwareParameterValue(StampConfigTranslator.DELTAX_STR))));
 
 		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new Integer(config.getTotalSamples()));
 
@@ -77,7 +75,8 @@ public class RayleighStampDriver extends AbstractStampDriver {
 
 	public Object getHardwareInfo() {
 
-		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+				+ "/HardwareInfo.xml";
 		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
 		if (prop.indexOf("://") == -1)
@@ -87,12 +86,11 @@ public class RayleighStampDriver extends AbstractStampDriver {
 		try {
 			url = Protocols.getURL(prop);
 		} catch (java.net.MalformedURLException e) {
-			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger(STAMP_DRIVER_LOGGER));
+			LOGGER.log(Level.SEVERE, "Unable to load resource: " + prop, e);
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
 			} catch (java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2, Logger
-						.getLogger(STAMP_DRIVER_LOGGER));
+				LOGGER.log(Level.SEVERE, "Unable to load resource: " + baseHardwareInfoFile, e2);
 			}
 		}
 

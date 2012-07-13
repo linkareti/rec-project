@@ -1,9 +1,3 @@
-/*
- * RadioactividadeStampDataSource.java
- *
- * Created on 15 de Maio de 2003, 19:38
- */
-
 package pt.utl.ist.elab.driver.planck;
 
 import pt.utl.ist.elab.driver.planck.processors.StampPlanck0Processor;
@@ -39,7 +33,7 @@ public class PlanckStampDataSource extends AbstractStampDataSource {
 		}
 
 		if (cmd.getCommandIdentifier().equalsIgnoreCase(StampPlanck2Processor.COMMAND_IDENTIFIER)) {
-			final long time;
+//			final long time;
 			float potential;
 
 			final PhysicsValue[] values = new PhysicsValue[4];
@@ -115,11 +109,11 @@ public class PlanckStampDataSource extends AbstractStampDataSource {
 				.getSelectedFrequency().getMultiplier().getExpValue())));
 	}
 
-	private boolean stopped = false;
+//	private boolean stopped = false;
 
 	@Override
 	public void stopNow() {
-		stopped = true;
+//		stopped = true;
 		setDataSourceStoped();
 	}
 

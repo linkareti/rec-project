@@ -1,9 +1,3 @@
-/*
- * RadioactividadeStampDriver.java
- *
- * Created on 15 de Maio de 2003, 19:38
- */
-
 package pt.utl.ist.elab.driver.radioactividade;
 
 import java.util.logging.Level;
@@ -19,12 +13,11 @@ import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampConfiguredP
 import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampNotConfiguredProcessor;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampStartProcessor;
 
+import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.DateTime;
-import com.linkare.rec.impl.logging.LoggerUtil;
-import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.impl.threading.AbstractConditionDecisor;
 import com.linkare.rec.impl.threading.TimedOutException;
 import com.linkare.rec.impl.threading.WaitForConditionResult;
@@ -35,6 +28,9 @@ import com.linkare.rec.impl.utils.Defaults;
  * @author José Pedro Pereira - Linkare TI
  */
 public class RadioactividadeStampDriver extends AbstractStampDriver {
+
+	private static final Logger LOGGER = Logger.getLogger(RadioactividadeStampDriver.class.getName());
+
 	public static final String[] ACQUISITION_MATERIALS = new String[] { "Madeira [10mm]", "Corticite [10mm]",
 			"Tijolo [10mm]", "Cobre [0.2mm]", "Cobre [0.4mm]", "Cobre [0.8mm]", "Cobre [1.6mm]", "Cobre [3.2mm]",
 			"Janela de controlo (Ar)", "Chumbo (isolante)" };
@@ -103,13 +99,11 @@ public class RadioactividadeStampDriver extends AbstractStampDriver {
 		try {
 			url = Protocols.getURL(prop);
 		} catch (final java.net.MalformedURLException e) {
-			LoggerUtil.logThrowable("Unable to load resource: " + prop, e,
-					Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER));
+			LOGGER.log(Level.SEVERE, "Unable to load resource: " + prop, e);
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
 			} catch (final java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
-						Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER));
+				LOGGER.log(Level.SEVERE, "Unable to load resource: " + baseHardwareInfoFile, e2);
 			}
 		}
 
@@ -133,8 +127,7 @@ public class RadioactividadeStampDriver extends AbstractStampDriver {
 	@Override
 	public void processCommand(final StampCommand cmd) {
 		if (cmd == null || cmd.getCommandIdentifier() == null) {
-			Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER).log(Level.INFO,
-					"Can not interpret command " + cmd);
+			LOGGER.log(Level.INFO, "Can not interpret command " + cmd);
 			return;
 		}
 
@@ -194,7 +187,7 @@ public class RadioactividadeStampDriver extends AbstractStampDriver {
 	private boolean initing = true;
 	private boolean waitingStart = false;
 	private boolean wroteStart = false;
-//	private final boolean waitingStop = false;
+	// private final boolean waitingStop = false;
 	private boolean started = false;
 	private boolean stoping = false;
 	private boolean reseting = true;

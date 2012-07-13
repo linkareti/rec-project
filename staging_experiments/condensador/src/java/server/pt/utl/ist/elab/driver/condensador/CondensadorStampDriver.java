@@ -1,11 +1,3 @@
-/*
- * CondensadorStampDriver.java
- *
- * Created on 15 de Maio de 2003, 19:38
- */
-
-//TODO comecado
-
 package pt.utl.ist.elab.driver.condensador;
 
 import java.util.logging.Level;
@@ -25,7 +17,6 @@ import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.DateTime;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.impl.threading.AbstractConditionDecisor;
 import com.linkare.rec.impl.threading.TimedOutException;
@@ -37,6 +28,9 @@ import com.linkare.rec.impl.utils.Defaults;
  * @author jp
  */
 public class CondensadorStampDriver extends AbstractStampDriver {
+
+	private static final Logger LOGGER = Logger.getLogger(CondensadorStampDriver.class.getName());
+
 	private StampCommand stampConfig = null;
 
 	/** Creates a new instance of RadioactividadeStampDriver */
@@ -54,13 +48,17 @@ public class CondensadorStampDriver extends AbstractStampDriver {
 
 		stampConfig = new StampCommand(CONFIG_OUT_STRING);
 
-		stampConfig.addCommandData(StampConfigTranslator.USER_POS_HIGH_STR, new Float(Defaults.defaultIfEmpty(config
-				.getSelectedHardwareParameterValue(StampConfigTranslator.USER_POS_HIGH_STR), info
-				.getHardwareParameterValue(StampConfigTranslator.USER_POS_HIGH_STR))));
+		stampConfig.addCommandData(
+				StampConfigTranslator.USER_POS_HIGH_STR,
+				new Float(Defaults.defaultIfEmpty(
+						config.getSelectedHardwareParameterValue(StampConfigTranslator.USER_POS_HIGH_STR),
+						info.getHardwareParameterValue(StampConfigTranslator.USER_POS_HIGH_STR))));
 
-		stampConfig.addCommandData(StampConfigTranslator.USER_POS_LOW_STR, new Float(Defaults.defaultIfEmpty(config
-				.getSelectedHardwareParameterValue(StampConfigTranslator.USER_POS_LOW_STR), info
-				.getHardwareParameterValue(StampConfigTranslator.USER_POS_LOW_STR))));
+		stampConfig.addCommandData(
+				StampConfigTranslator.USER_POS_LOW_STR,
+				new Float(Defaults.defaultIfEmpty(
+						config.getSelectedHardwareParameterValue(StampConfigTranslator.USER_POS_LOW_STR),
+						info.getHardwareParameterValue(StampConfigTranslator.USER_POS_LOW_STR))));
 
 		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new Integer(config.getTotalSamples()));
 
@@ -86,9 +84,9 @@ public class CondensadorStampDriver extends AbstractStampDriver {
 
 	public Object getHardwareInfo() {
 
-		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+				+ "/HardwareInfo.xml";
 		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
-
 
 		if (prop.indexOf("://") == -1)
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
@@ -97,12 +95,11 @@ public class CondensadorStampDriver extends AbstractStampDriver {
 		try {
 			url = Protocols.getURL(prop);
 		} catch (java.net.MalformedURLException e) {
-			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger(STAMP_DRIVER_LOGGER));
+			LOGGER.log(Level.SEVERE, "Unable to load resource: " + prop, e);
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
 			} catch (java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2, Logger
-						.getLogger(STAMP_DRIVER_LOGGER));
+				LOGGER.log(Level.SEVERE, "Unable to load resource: " + baseHardwareInfoFile, e2);
 			}
 		}
 

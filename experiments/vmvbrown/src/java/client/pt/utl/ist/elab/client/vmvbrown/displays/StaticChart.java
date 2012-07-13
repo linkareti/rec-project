@@ -46,7 +46,9 @@ public class StaticChart extends javax.swing.JPanel implements Printable, Action
 	protected BufferedImage image;
 	private final int width, height;
 
-	/** Creates a new instance of Chart1 */
+	/** Creates a new instance of Chart1 
+	 * @param w 
+	 * @param h */
 	public StaticChart(final int w, final int h) {
 		super();
 		width = w;

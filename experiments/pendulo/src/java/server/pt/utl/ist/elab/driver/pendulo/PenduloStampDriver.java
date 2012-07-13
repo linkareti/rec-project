@@ -1,9 +1,3 @@
-/*
- * RadioactividadeStampDriver.java
- *
- * Created on 15 de Maio de 2003, 19:38
- */
-
 package pt.utl.ist.elab.driver.pendulo;
 
 import java.util.logging.Level;
@@ -19,12 +13,11 @@ import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampConfiguredP
 import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampNotConfiguredProcessor;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampStartProcessor;
 
+import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.DateTime;
-import com.linkare.rec.impl.logging.LoggerUtil;
-import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.impl.threading.AbstractConditionDecisor;
 import com.linkare.rec.impl.threading.TimedOutException;
 import com.linkare.rec.impl.threading.WaitForConditionResult;
@@ -35,6 +28,9 @@ import com.linkare.rec.impl.utils.Defaults;
  * @author José Pedro Pereira - Linkare TI
  */
 public class PenduloStampDriver extends AbstractStampDriver {
+
+	private static final Logger LOGGER = Logger.getLogger(PenduloStampDriver.class.getName());
+
 	private StampCommand stampConfig = null;
 
 	/** Creates a new instance of RadioactividadeStampDriver */
@@ -107,13 +103,11 @@ public class PenduloStampDriver extends AbstractStampDriver {
 		try {
 			url = Protocols.getURL(prop);
 		} catch (final java.net.MalformedURLException e) {
-			LoggerUtil.logThrowable("Unable to load resource: " + prop, e,
-					Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER));
+			LOGGER.log(Level.SEVERE, "Unable to load resource: " + prop, e);
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
 			} catch (final java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
-						Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER));
+				LOGGER.log(Level.SEVERE, "Unable to load resource: " + baseHardwareInfoFile, e2);
 			}
 		}
 
@@ -136,8 +130,7 @@ public class PenduloStampDriver extends AbstractStampDriver {
 	@Override
 	public void processCommand(final StampCommand cmd) {
 		if (cmd == null || cmd.getCommandIdentifier() == null) {
-			Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER).log(Level.INFO,
-					"Can not interpret command " + cmd);
+			LOGGER.log(Level.INFO, "Can not interpret command " + cmd);
 			return;
 		}
 
@@ -197,7 +190,7 @@ public class PenduloStampDriver extends AbstractStampDriver {
 	private boolean initing = true;
 	private boolean waitingStart = false;
 	private boolean wroteStart = false;
-//	private final boolean waitingStop = false;
+	// private final boolean waitingStop = false;
 	private boolean started = false;
 	private boolean stoping = false;
 	private boolean reseting = true;

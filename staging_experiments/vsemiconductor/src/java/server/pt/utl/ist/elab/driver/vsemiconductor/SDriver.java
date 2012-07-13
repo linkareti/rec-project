@@ -6,6 +6,7 @@
 
 package pt.utl.ist.elab.driver.vsemiconductor;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.linkare.rec.acquisition.IncorrectStateException;
@@ -14,16 +15,18 @@ import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.driver.BaseDriver;
 import com.linkare.rec.impl.driver.IDataSource;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.impl.utils.Defaults;
 
 /**
  * 
- * @author Andr�
+ * @author André
  */
 
 public class SDriver extends BaseDriver {
+
+	private static final Logger LOGGER = Logger.getLogger(SDriver.class.getName());
+
 	/* Hardware and driver related variables */
 	private static final String APPLICATION_IDENTIFIER = "E-Lab (Semiconductor)";
 	private static final String DRIVER_UNIQUE_ID = "SCONDUCTOR_V1.0";
@@ -134,7 +137,8 @@ public class SDriver extends BaseDriver {
 
 	public Object getHardwareInfo() {
 		fireIDriverStateListenerDriverReseting();
-		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+				+ "/HardwareInfo.xml";
 		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
 		if (prop.indexOf("://") == -1)
@@ -144,12 +148,11 @@ public class SDriver extends BaseDriver {
 		try {
 			url = Protocols.getURL(prop);
 		} catch (java.net.MalformedURLException e) {
-			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger("S.Logger"));
+			LOGGER.log(Level.SEVERE, "Unable to load resource: " + prop, e);
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
 			} catch (java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2, Logger
-						.getLogger("S.Logger"));
+				LOGGER.log(Level.SEVERE, "Unable to load resource: " + baseHardwareInfoFile, e2);
 			}
 		}
 		fireIDriverStateListenerDriverReseted();
