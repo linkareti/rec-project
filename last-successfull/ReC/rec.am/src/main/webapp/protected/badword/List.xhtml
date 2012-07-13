@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/protected/backoffice.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle['page.badword.list.title']}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="list-form">
+            <p:growl id="messages" showDetail="true"/>
+            <p:dataTable var="item" value="#{badWordController.items}" id="items" 
+                         paginator="true" rows="10" 
+                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" 
+                         emptyMessage="#{bundle['info.emptyList']}"
+                         selectionMode="single"
+                         rowKey="#{item.badWordId}">
+
+                <p:column headerText="#{bundle['badword.regex']}" style="width:125px">
+                    <h:outputText value="#{item.regex}" />
+                </p:column>
+                <p:column headerText="#{bundle['badword.locale']}" style="width:135px">
+                    <h:outputText value="#{item.locale}" />
+                </p:column>
+
+                <p:column headerText="#{bundle['operation.action']}" style="width:100px">
+                    <p:commandLink action="#{badWordController.prepareView}"
+                                   value="#{bundle['operation.view']}" ajax="false"/>
+                    <h:outputText value=" | " />
+                    <p:commandLink action="#{badWordController.prepareEdit}"
+                                   value="#{bundle['operation.edit']}" ajax="false"/>
+                    <h:outputText value=" | " />
+                    <p:commandLink action="#{badWordController.destroy}" 
+                                   value="#{bundle['operation.remove']}" ajax="false"/>
+                </p:column>
+            </p:dataTable>
+            <p:commandButton id="cmdButtonCreate" action="#{badWordController.prepareCreate}" value="#{bundle['operation.create']}" ajax="false"/>
+
+        </h:form>
+    </ui:define>
+</ui:composition>
