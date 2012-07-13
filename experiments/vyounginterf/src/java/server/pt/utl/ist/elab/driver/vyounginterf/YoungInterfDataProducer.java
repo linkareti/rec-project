@@ -1,9 +1,3 @@
-/*
- * YoungInterfDataProducer.java
- *
- * Created on 27 de Dezembro de 2004, 16:31
- */
-
 package pt.utl.ist.elab.driver.vyounginterf;
 
 /**
