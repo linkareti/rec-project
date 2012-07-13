@@ -7,7 +7,6 @@
 package pt.utl.ist.elab.driver.conducaocalor;
 
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import pt.utl.ist.elab.driver.conducaocalor.translators.StampConfigTranslator;
@@ -20,12 +19,11 @@ import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampConfiguredP
 import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampNotConfiguredProcessor;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampStartProcessor;
 
+import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.DateTime;
-import com.linkare.rec.impl.logging.LoggerUtil;
-import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.impl.threading.AbstractConditionDecisor;
 import com.linkare.rec.impl.threading.TimedOutException;
 import com.linkare.rec.impl.threading.WaitForConditionResult;
@@ -36,14 +34,7 @@ import com.linkare.rec.impl.utils.Defaults;
  * @author José Pedro Pereira - Linkare TI
  */
 public class TStampDriver extends AbstractStampDriver {
-	public static String HEAT_DRIVER_LOGGER = "HeatDriver.Logger";
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(TStampDriver.HEAT_DRIVER_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(TStampDriver.HEAT_DRIVER_LOGGER));
-		}
-	}
+	private static final Logger LOGGER = Logger.getLogger(TStampDriver.class.getName());
 
 	private StampCommand stampConfig = null;
 
@@ -65,8 +56,7 @@ public class TStampDriver extends AbstractStampDriver {
 
 		stampConfig = new StampCommand(AbstractStampDriver.CONFIG_OUT_STRING);
 
-		Logger.getLogger(TStampDriver.HEAT_DRIVER_LOGGER)
-				.log(Level.INFO, "*******************************************");
+		LOGGER.log(Level.INFO, "*******************************************");
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.MODE_STR,
@@ -74,8 +64,7 @@ public class TStampDriver extends AbstractStampDriver {
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.MODE_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.MODE_STR))));
 
-		Logger.getLogger(TStampDriver.HEAT_DRIVER_LOGGER).log(Level.INFO,
-				info.getHardwareParameterValue(StampConfigTranslator.MODE_STR));
+		LOGGER.log(Level.INFO, info.getHardwareParameterValue(StampConfigTranslator.MODE_STR));
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.HEAT_TIME_STR,
@@ -83,8 +72,7 @@ public class TStampDriver extends AbstractStampDriver {
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.HEAT_TIME_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.HEAT_TIME_STR))));
 
-		Logger.getLogger(TStampDriver.HEAT_DRIVER_LOGGER).log(Level.INFO,
-				info.getHardwareParameterValue(StampConfigTranslator.HEAT_TIME_STR));
+		LOGGER.log(Level.INFO, info.getHardwareParameterValue(StampConfigTranslator.HEAT_TIME_STR));
 
 		stampConfig.addCommandData(
 				StampConfigTranslator.MAX_HEAT_STR,
@@ -92,18 +80,16 @@ public class TStampDriver extends AbstractStampDriver {
 						config.getSelectedHardwareParameterValue(StampConfigTranslator.MAX_HEAT_STR),
 						info.getHardwareParameterValue(StampConfigTranslator.MAX_HEAT_STR))));
 
-		Logger.getLogger(TStampDriver.HEAT_DRIVER_LOGGER).log(Level.INFO,
-				info.getHardwareParameterValue(StampConfigTranslator.MAX_HEAT_STR));
+		LOGGER.log(Level.INFO, info.getHardwareParameterValue(StampConfigTranslator.MAX_HEAT_STR));
 
 		stampConfig.addCommandData(StampConfigTranslator.TBS_STR, new Integer((int) config.getSelectedFrequency()
 				.getFrequency()));
 
-		Logger.getLogger(TStampDriver.HEAT_DRIVER_LOGGER).log(Level.INFO,
-				"" + (int) config.getSelectedFrequency().getFrequency());
+		LOGGER.log(Level.INFO, "" + (int) config.getSelectedFrequency().getFrequency());
 
 		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new Integer(config.getTotalSamples()));
 
-		Logger.getLogger(TStampDriver.HEAT_DRIVER_LOGGER).log(Level.INFO, "" + config.getTotalSamples());
+		LOGGER.log(Level.INFO, "" + config.getTotalSamples());
 
 		final StampTranslator translator = StampTranslatorProcessorManager.getTranslator(stampConfig);
 		if (!translator.translate(stampConfig)) {
@@ -120,8 +106,7 @@ public class TStampDriver extends AbstractStampDriver {
 		config.getChannelsConfig(7).setTotalSamples(config.getTotalSamples());
 		config.getChannelsConfig(8).setTotalSamples(config.getTotalSamples());
 
-		Logger.getLogger(TStampDriver.HEAT_DRIVER_LOGGER)
-				.log(Level.INFO, "*******************************************");
+		LOGGER.log(Level.INFO, "*******************************************");
 		this.config = config;
 
 		fireIDriverStateListenerDriverConfigured();
@@ -147,13 +132,11 @@ public class TStampDriver extends AbstractStampDriver {
 		try {
 			url = Protocols.getURL(prop);
 		} catch (final java.net.MalformedURLException e) {
-			LoggerUtil.logThrowable("Unable to load resource: " + prop, e,
-					Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER));
+			LOGGER.log(Level.SEVERE, "Unable to load resource: " + prop, e);
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
 			} catch (final java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
-						Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER));
+				LOGGER.log(Level.SEVERE, "Unable to load resource: " + baseHardwareInfoFile, e2);
 			}
 		}
 
@@ -176,8 +159,7 @@ public class TStampDriver extends AbstractStampDriver {
 	@Override
 	public void processCommand(final StampCommand cmd) {
 		if (cmd == null || cmd.getCommandIdentifier() == null) {
-			Logger.getLogger(AbstractStampDriver.STAMP_DRIVER_LOGGER).log(Level.INFO,
-					"Can not interpret command " + cmd);
+			LOGGER.log(Level.INFO, "Can not interpret command " + cmd);
 			return;
 		}
 
@@ -243,7 +225,7 @@ public class TStampDriver extends AbstractStampDriver {
 	private boolean initing = true;
 	private boolean waitingStart = false;
 	private boolean wroteStart = false;
-//	private final boolean waitingStop = false;
+	// private final boolean waitingStop = false;
 	private boolean started = false;
 	private boolean stoping = false;
 	private boolean reseting = true;

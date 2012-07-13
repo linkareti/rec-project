@@ -1,12 +1,7 @@
-/*
- * AleatorioDriver.java
- *
- * Created on 6 de Junho de 2003, 11:23
- */
-
 package pt.utl.ist.elab.driver.aleatorio;
 
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import pt.utl.ist.elab.driver.aleatorio.Hardware.HardwareInit;
@@ -14,6 +9,7 @@ import pt.utl.ist.elab.driver.aleatorio.Hardware.SoundThread;
 import pt.utl.ist.elab.driver.aleatorio.Hardware.WebCamThread;
 import pt.utl.ist.elab.driver.aleatorio.Utils.VideoReader;
 
+import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.acquisition.IncorrectStateException;
 import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
@@ -22,8 +18,6 @@ import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.DateTime;
 import com.linkare.rec.impl.driver.BaseDriver;
 import com.linkare.rec.impl.driver.IDataSource;
-import com.linkare.rec.impl.logging.LoggerUtil;
-import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.impl.utils.Defaults;
 
 /**
@@ -31,6 +25,8 @@ import com.linkare.rec.impl.utils.Defaults;
  * @author Pedro Carvalho - LEFT - IST
  */
 public class AleatorioDriver extends BaseDriver {
+
+	private static final Logger LOGGER = Logger.getLogger(AleatorioDriver.class.getName());
 
 	// private transient com.linkare.rec.impl.driver.IDriverStateListener =
 	// null;
@@ -117,13 +113,12 @@ public class AleatorioDriver extends BaseDriver {
 			fireIDriverStateListenerDriverReseted();// why is this here and not
 			// in GDriver?
 		} catch (final java.net.MalformedURLException e) {
-			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger("Aleatorio.logger"));
+			LOGGER.log(Level.SEVERE, "Unable to load resource: " + prop, e);
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
 				fireIDriverStateListenerDriverReseted();// And again???
 			} catch (final java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
-						Logger.getLogger("Aleatorio.logger"));
+				LOGGER.log(Level.SEVERE,"Unable to load resource: " + baseHardwareInfoFile, e2);
 			}
 		}
 		return url;
@@ -564,8 +559,7 @@ public class AleatorioDriver extends BaseDriver {
 				try {
 					imageToAnalyze = webcam.getImage();
 				} catch (final Exception e) {
-					LoggerUtil
-							.logThrowable("Unable to get image from webcam!", e, Logger.getLogger("Aleatorio.logger"));
+					LOGGER.log(Level.SEVERE,"Unable to get image from webcam!", e);
 					// TODO FIXME Handle exception and shutdown experiment!
 				}
 

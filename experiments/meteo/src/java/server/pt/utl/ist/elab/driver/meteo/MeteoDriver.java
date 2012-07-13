@@ -7,6 +7,7 @@
 package pt.utl.ist.elab.driver.meteo;
 
 import java.sql.Connection;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import pt.utl.ist.cfn.math.MathUtils;
@@ -19,19 +20,22 @@ import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.driver.BaseDriver;
 import com.linkare.rec.impl.driver.IDataSource;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.Defaults;
 
 /**
  * 
- * @author Andr�
+ * @author André
  */
 
 public class MeteoDriver extends BaseDriver {
+
+	private static final Logger LOGGER = Logger.getLogger(MeteoDriver.class.getName());
+
 	/* Hardware and driver related variables */
-	private static final String APPLICATION_IDENTIFIER = "E-Lab (Meteo Driver)";
+	// private static final String APPLICATION_IDENTIFIER =
+	// "E-Lab (Meteo Driver)";
 	private static final String DRIVER_UNIQUE_ID = "ELAB_METEO_V01";
-	private static final String HW_VERSION = "0.1";
+	// private static final String HW_VERSION = "0.1";
 
 	protected MeteoDataProducer dataSource = null;
 	protected HardwareAcquisitionConfig config = null;
@@ -205,13 +209,12 @@ public class MeteoDriver extends BaseDriver {
 			url = new java.net.URL(prop);
 			fireIDriverStateListenerDriverReseted();
 		} catch (final java.net.MalformedURLException e) {
-			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger("Meteo"));
+			LOGGER.log(Level.SEVERE, "Unable to load resource: " + prop, e);
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
 				fireIDriverStateListenerDriverReseted();
 			} catch (final java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
-						Logger.getLogger("WebRobot"));
+				LOGGER.log(Level.SEVERE, "Unable to load resource: " + baseHardwareInfoFile, e2);
 			}
 		}
 
