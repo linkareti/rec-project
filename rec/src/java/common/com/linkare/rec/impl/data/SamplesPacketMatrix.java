@@ -1,13 +1,3 @@
-/*
- 
- * SamplesPacketMatrix.java
- 
- *
- 
- * Created on 26 de Junho de 2002, 12:13
- 
- */
-
 package com.linkare.rec.impl.data;
 
 import java.io.File;
@@ -21,6 +11,7 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryUsage;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,9 +20,7 @@ import javax.swing.event.EventListenerList;
 import com.linkare.rec.acquisition.NotAnAvailableSamplesPacketException;
 import com.linkare.rec.data.acquisition.SamplesPacket;
 import com.linkare.rec.impl.exceptions.NotAnAvailableSamplesPacketExceptionConstants;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.FileObjectOutputStream;
-import java.util.List;
 
 /**
  * 
@@ -39,13 +28,16 @@ import java.util.List;
  * 
  */
 public class SamplesPacketMatrix implements SamplesPacketSource, Serializable {
+
+	private static final Logger LOGGER = Logger.getLogger(SamplesPacketMatrix.class.getName());
+
 	private static final long serialVersionUID = -8817657464936461384L;
 
 	private static final String TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG = "Tryed to serialize packets but error occurred";
 
 	// TODO - define this property in jnlp, build properties and startup
 	// scripts...
-	public static final String SYSPROP_FREE_THRESHOLD_NAME = "ReC.PercentFreeMemoryThreshold2Serialization";
+	public static final String SYSPROP_FREE_THRESHOLD_NAME = "rec.percent.freememory.threshold.serialization";
 
 	public static final String FREE_THRESHOLD_NAME = com.linkare.rec.impl.utils.Defaults.defaultIfEmpty(
 			System.getProperty(SamplesPacketMatrix.SYSPROP_FREE_THRESHOLD_NAME), "10");
@@ -223,10 +215,9 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable {
 			try {
 				ioDelegate.write(samples_packet);
 			} catch (final IOException e) {
-				LoggerUtil.logThrowable(SamplesPacketMatrix.TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG, e,
-						Logger.getLogger("SamplesPacketIO"));
+				LOGGER.log(Level.SEVERE,SamplesPacketMatrix.TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG, e);
 
-				Logger.getLogger("SamplesPacketIO").log(Level.WARNING,
+				LOGGER.log(Level.WARNING,
 						"Couldn't serialize SamplePackets to file... Defaulting to in memory ArrayList!");
 
 			}
@@ -241,10 +232,9 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable {
 				serialized = true;
 				samples.clear();
 			} catch (final IOException e) {
-				LoggerUtil.logThrowable(SamplesPacketMatrix.TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG, e,
-						Logger.getLogger("SamplesPacketIO"));
+				LOGGER.log(Level.SEVERE,SamplesPacketMatrix.TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG, e);
 
-				Logger.getLogger("SamplesPacketIO").log(Level.WARNING,
+				LOGGER.log(Level.WARNING,
 						"Couldn't serialize SamplePackets to file... Defaulting to in memory ArrayList!");
 			}
 		}
@@ -268,8 +258,8 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable {
 		final double maxMem = heapMemoryUsage.getMax();
 		final double availableMem = heapMemoryUsage.getMax() - heapMemoryUsage.getUsed();
 		final double currentPercentFreeMem = 100. * availableMem / maxMem;
-		if(currentPercentFreeMem <= percentFreeThreshold) {
-			Logger.getLogger("SamplesPacketIO").log(Level.WARNING,">>>>>>>>>>> Returning TRUE from shouldSerialize in SamplesPacketMatrix!");
+		if (currentPercentFreeMem <= percentFreeThreshold) {
+			LOGGER.log(Level.WARNING, ">>>>>>>>>>> Returning TRUE from shouldSerialize in SamplesPacketMatrix!");
 		}
 		return currentPercentFreeMem <= percentFreeThreshold;
 	}
@@ -348,11 +338,9 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable {
 					stream.writeObject(outputSamplesFile);
 
 				} catch (final IOException e) {
-					LoggerUtil.logThrowable(SamplesPacketMatrix.TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG,
-							e, Logger.getLogger("SamplesPacketIO"));
+					LOGGER.log(Level.SEVERE,SamplesPacketMatrix.TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG, e);
 
-					Logger.getLogger("SamplesPacketIO").log(Level.WARNING,
-							"Couldn't serialize SamplePackets to file...");
+					LOGGER.log(Level.WARNING, "Couldn't serialize SamplePackets to file...");
 				}
 				samples.clear();
 				return;
@@ -361,10 +349,9 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable {
 				ioDelegate.setFile(outputSamplesFile);
 				stream.writeObject(ioDelegate);
 			} catch (final IOException e) {
-				LoggerUtil.logThrowable(SamplesPacketMatrix.TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG, e,
-						Logger.getLogger("SamplesPacketIO"));
+				LOGGER.log(Level.SEVERE,SamplesPacketMatrix.TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG, e);
 
-				Logger.getLogger("SamplesPacketIO").log(Level.WARNING, "Couldn't serialize SamplePackets to file...");
+				LOGGER.log(Level.WARNING, "Couldn't serialize SamplePackets to file...");
 			}
 		} else {
 			if (serialized) {

@@ -1,13 +1,13 @@
 package com.linkare.rec.impl.data;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.event.EventListenerList;
 
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.acquisition.SamplesPacket;
 import com.linkare.rec.data.synch.Frequency;
-import java.util.List;
 
 public class SamplesSourcePacketizer implements SamplesPacketSource {
 
@@ -25,18 +25,32 @@ public class SamplesSourcePacketizer implements SamplesPacketSource {
 	/** Utility field used by event firing mechanism. */
 	private EventListenerList listenerList = null;
 
-	/** Creates a new instance of DiscardablePhysicsValueMatrixPacketizer */
+	/** Creates a new instance of DiscardablePhysicsValueMatrixPacketizer 
+	 * @param freq 
+	 */
 	public SamplesSourcePacketizer(final Frequency freq) {
 		this(freq, null, 1, 1, SamplesSourcePacketizer.NOT_AVAILABLE_TOTAL_SAMPLES_VALUE);
 	}
 
-	/** Creates a new instance of DiscardablePhysicsValueMatrixPacketizer */
+	/** Creates a new instance of DiscardablePhysicsValueMatrixPacketizer 
+	 * 
+	 * @param freq 
+	 * @param packetSize 
+	 * @param totalPackets 
+	 * @param totalSamples 
+	 */
 	public SamplesSourcePacketizer(final Frequency freq, final int packetSize, final int totalPackets,
 			final int totalSamples) {
 		this(freq, null, packetSize, totalPackets, totalSamples);
 	}
 
-	/** Creates a new instance of DiscardablePhysicsValueMatrixPacketizer */
+	/** Creates a new instance of DiscardablePhysicsValueMatrixPacketizer 
+	 * @param freq 
+	 * @param samplesSource 
+	 * @param packetSize 
+	 * @param totalPackets 
+	 * @param totalSamples 
+	 */
 	public SamplesSourcePacketizer(final Frequency freq, final SamplesSource samplesSource, final int packetSize,
 			final int totalPackets, final int totalSamples) {
 		setSamplesSource(samplesSource);

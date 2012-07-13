@@ -3,12 +3,12 @@ package com.linkare.rec.impl.data;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.event.EventListenerList;
 
 import com.linkare.rec.data.acquisition.PhysicsValue;
-import com.linkare.rec.impl.logging.LoggerUtil;
 
 /**
  * This class implements a sort of repository for data which hides the fact that
@@ -34,6 +34,8 @@ import com.linkare.rec.impl.logging.LoggerUtil;
  */
 public class DiscardablePhysicsValueMatrix implements SamplesSource {
 
+	private static final Logger LOGGER = Logger.getLogger(DiscardablePhysicsValueMatrix.class.getName());
+
 	/**
 	 * The default value of free memory space available in case the System
 	 * property named {@link #SYSPROP_FREE_THRESHOLD_NAME} is not defined
@@ -46,7 +48,7 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	 * default behaviour of 10% of free memory for serialization of data to
 	 * occur in temporary files
 	 */
-	public static final String SYSPROP_FREE_THRESHOLD_NAME = "ReC.PercentFreeMemoryThreshold2Serialization";
+	public static final String SYSPROP_FREE_THRESHOLD_NAME = "rec.percent.freememory.threshold.serialization";
 
 	/**
 	 * The free memory space after which the data dumping to disk occurs
@@ -83,14 +85,16 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	/** Utility field used by event firing mechanism. */
 	private EventListenerList listenerList = null;
 
-	
-
 	/** Creates a new instance of PhysicsValueMatrix */
 	public DiscardablePhysicsValueMatrix() {
 		setTotalSamples(totalSamples);
 	}
 
-	/** Creates a new instance of PhysicsValueMatrix */
+	/**
+	 * Creates a new instance of PhysicsValueMatrix
+	 * 
+	 * @param totalSamples
+	 */
 	public DiscardablePhysicsValueMatrix(final int totalSamples) {
 		setTotalSamples(totalSamples);
 	}
@@ -122,8 +126,7 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 			try {
 				ioDelegate.write(tempSamples);
 			} catch (final IOException e) {
-				LoggerUtil.logThrowable("Unable to write packets to file... defaulting to memory...", e,
-						Logger.getLogger("SwapIOLogger"));
+				LOGGER.log(Level.SEVERE, "Unable to write packets to file... defaulting to memory...", e);
 				samplesRows.putAll(tempSamples);
 			}
 		} else {
@@ -196,7 +199,8 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	 *         {@link #FREE_THRESHOLD_VALUE}/100. * maxMemory
 	 */
 	private boolean shouldSerialize() {
-		return (double)Runtime.getRuntime().freeMemory() <= (FREE_THRESHOLD_VALUE/100.) * (double)Runtime.getRuntime().maxMemory();
+		return (double) Runtime.getRuntime().freeMemory() <= (FREE_THRESHOLD_VALUE / 100.)
+				* (double) Runtime.getRuntime().maxMemory();
 	}
 
 	/**

@@ -20,15 +20,17 @@ import java.io.RandomAccessFile;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import com.linkare.rec.impl.logging.LoggerUtil;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
 public class SequencedObjectIO implements Serializable {
+
+	private static final Logger LOGGER = Logger.getLogger(SequencedObjectIO.class.getName());
+
 	/**
 	 * 
 	 */
@@ -132,7 +134,7 @@ public class SequencedObjectIO implements Serializable {
 				raf = null;
 			}
 		} catch (final Exception e) {
-			LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(SequencedObjectIO.class.getName()));
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -225,7 +227,7 @@ public class SequencedObjectIO implements Serializable {
 				currentIndex++;
 			}
 		} catch (final IOException e) {
-			LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(SequencedObjectIO.class.getName()));
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -235,7 +237,7 @@ public class SequencedObjectIO implements Serializable {
 				writeObject(object);
 			}
 		} catch (final Exception e) {
-			LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(SequencedObjectIO.class.getName()));
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			throw new IOException(e.getMessage());
 		}
 
@@ -283,7 +285,7 @@ public class SequencedObjectIO implements Serializable {
 				getFile().delete();
 			}
 		} catch (final Exception e) {
-			LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(SequencedObjectIO.class.getName()));
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 		}
 		super.finalize();
 	}
