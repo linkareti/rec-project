@@ -8,7 +8,7 @@
 package com.linkare.rec.impl.exceptions;
 
 /**
- * Represents the configuration exceptions group on ReC.
+ * Represents the configuration exceptions group on rec.
  * 
  * @author Henrique Fernandes
  */
