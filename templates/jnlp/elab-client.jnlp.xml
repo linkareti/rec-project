@@ -69,8 +69,8 @@
 		<property name="video.enabled" value="@video.enabled@" />
 		<property name="vlc.plugins.filename" value="@vlc.plugins.filename@" />
 
-		<!-- Rec.Am Service -->
-		<property name="rec.am.endpoint" value="@rec.am.endpoint@" />
+		<!-- rec.web Service -->
+		<property name="rec.web.endpoint" value="@rec.web.endpoint@" />
 		
 		<!-- Auto Connect ID -->
         <property name="rec.apparatus.autoconnect.id" value="@rec.apparatus.autoconnect.id@" />

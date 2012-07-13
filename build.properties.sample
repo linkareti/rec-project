@@ -89,18 +89,18 @@ advanced.multicast.controller.host=localhost
 advanced.multicast.controller.port=9003
 
 ##SECURITYMANAGER PROPERTIES##
-# This property is necessary for the StartMultiCastController to deal with the security managers that enable the communication with the rec.am.
+# This property is necessary for the StartMultiCastController to deal with the security managers that enable the communication with the rec.web.
 # It should match the ID/NAME of the laboratory
-rec.am.host=localhost
-rec.am.port=3700
-basic.rec.am.lab.id=LAB_ME_BASIC
-intermediate.rec.am.lab.id=LAB_ME_INTERMEDIATE
-advanced.rec.am.lab.id=LAB_ME_ADVANCED
-rec.am.securitymanager=com.linkare.rec.impl.multicast.security.CompositeSecurityManager
-rec.am.compositesecuritymanager.list=com.linkare.rec.impl.multicast.security.AllocationManagerSecurityManager
-rec.am.securitymanager.interval.lap.time.minutes=0
-rec.am.securitymanager.near.lap.time.minutes=5
-rec.am.securitymanager.refresh.lap.time.minutes=15
+rec.web.host=localhost
+rec.web.port=3700
+basic.rec.web.lab.id=LAB_ME_BASIC
+intermediate.rec.web.lab.id=LAB_ME_INTERMEDIATE
+advanced.rec.web.lab.id=LAB_ME_ADVANCED
+rec.web.securitymanager=com.linkare.rec.impl.multicast.security.CompositeSecurityManager
+rec.web.compositesecuritymanager.list=com.linkare.rec.impl.multicast.security.AllocationManagerSecurityManager
+rec.web.securitymanager.interval.lap.time.minutes=0
+rec.web.securitymanager.near.lap.time.minutes=5
+rec.web.securitymanager.refresh.lap.time.minutes=15
 
 ##SYSTEM PROPERTIES - EXPERIMENTS## 
 experiment.driver.openorb.profile=ReCHardware
@@ -313,8 +313,8 @@ java.rmi.server.hostname=`hostname -i`
 ##Otherwise use a local repository on FileSystem
 rec.multicast.repository=com.linkare.rec.impl.multicast.repository.impl.FSRepository
 
-##REC.AM END POINT##
-rec.am.endpoint=http://localhost:8080/rec-services
+##rec.web END POINT##
+rec.web.endpoint=http://localhost:8080/rec-services
 
 ##SYSTEM PROPERTIES - Chat##
 rec.multicast.badwordmanager.refresh.lap.time.minutes=1440

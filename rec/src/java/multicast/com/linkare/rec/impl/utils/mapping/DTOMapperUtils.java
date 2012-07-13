@@ -926,7 +926,7 @@ public final class DTOMapperUtils {
 		final InitialContext ic = new InitialContext();
 
 		return (RepositoryFacade) ic
-				.lookup("java:global/rec.am/RepositoryFacadeBean!com.linkare.rec.web.RepositoryFacade");
+				.lookup("java:global/rec.web/RepositoryFacadeBean!com.linkare.rec.web.RepositoryFacade");
 	}
 
 	private static void testExperimentResultsPersistence() {

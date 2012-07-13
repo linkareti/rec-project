@@ -293,7 +293,7 @@
 			<fileset dir="${elab.hardwareserver.lib.dir}">
 				<include name="**/*" />
 			</fileset>
-			<fileset dir="${elab.common.lib.dir}">
+                        <fileset dir="${elab.common.lib.dir}">
 				<include name="**/*" />
 			</fileset>
 		</copy>

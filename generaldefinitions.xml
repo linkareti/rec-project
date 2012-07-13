@@ -141,8 +141,8 @@
 
 	<property name="rec.client.classes.dir" value="${build.dir.compile}/classes/rec/client" />
 	<property name="client.build.dir" value="${build.dir.jars}/client" />
-	<property name="client.rec.am.resources" value="rec.am/src/main/resources-rec" />
-	<property name="client.rec.am.webapp" value="rec.am/src/main/webapp" />
+	<property name="client.rec.web.resources" value="rec.web/src/main/resources-rec" />
+	<property name="client.rec.web.webapp" value="rec.web/src/main/webapp" />
 
 	<property name="rec.client.src.java.dir" value="${basedir}/rec/src/java/client" />
 	<property name="rec.ui.src.java.dir" value="${basedir}/rec/src/java/ui" />
@@ -628,7 +628,7 @@
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
 				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 				<replacefilter token="@client.main-class@" property="client.main-class" />
-				<replacefilter token="@rec.am.endpoint@" property="rec.am.endpoint" />
+				<replacefilter token="@rec.web.endpoint@" property="rec.web.endpoint" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.coresize@" property="rec.client.processingmanager.threadpool.coresize" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
@@ -834,7 +834,7 @@
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
 				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 				<replacefilter token="@client.main-class@" property="client.main-class" />
-				<replacefilter token="@rec.am.endpoint@" property="rec.am.endpoint" />
+				<replacefilter token="@rec.web.endpoint@" property="rec.web.endpoint" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.coresize@" property="rec.client.processingmanager.threadpool.coresize" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
@@ -1106,7 +1106,7 @@
 			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" propertyFile="build.properties">
 				<replacefilter token="@multicast.controller.host@" property="@{lab.name}.multicast.controller.host" />
 				<replacefilter token="@multicast.controller.port@" property="@{lab.name}.multicast.controller.port" />
-				<replacefilter token="@lab.name@" property="@{lab.name}.rec.am.lab.id" />
+				<replacefilter token="@lab.name@" property="@{lab.name}.rec.web.lab.id" />
 			</replace>
 
 			<process.list task="add.experiment.faceconfig" list="${@{lab.name}.experiment.list}" attribute.name="experiment.name" />

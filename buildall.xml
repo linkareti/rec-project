@@ -42,26 +42,26 @@
 		<ant antfile="elabbuild.xml" dir="." target="build.all" />
 		<ant antfile="experimentsbuild.xml" dir="." target="build.experiments.list" />
 		<antcall target="build.client.lib.dependencies" />
-		<antcall target="copy.client.to.rec.am" />
+		<antcall target="copy.client.to.rec.web" />
 	</target>
 
-	<target name="copy.client.to.rec.am">
-		<delete dir="${client.rec.am.webapp}/client" failonerror="false" />
-		<mkdir dir="${client.rec.am.webapp}/client" />
-		<copy overwrite="true" todir="${client.rec.am.webapp}/client">
+	<target name="copy.client.to.rec.web">
+		<delete dir="${client.rec.web.webapp}/client" failonerror="false" />
+		<mkdir dir="${client.rec.web.webapp}/client" />
+		<copy overwrite="true" todir="${client.rec.web.webapp}/client">
 			<fileset dir="${client.build.dir}">
 				<include name="**/*" />
 			</fileset>
 		</copy>
 
-		<delete dir="${client.rec.am.resources}" failonerror="false" />
-		<mkdir dir="${client.rec.am.resources}" />
-		<copy overwrite="true" todir="${client.rec.am.resources}">
+		<delete dir="${client.rec.web.resources}" failonerror="false" />
+		<mkdir dir="${client.rec.web.resources}" />
+		<copy overwrite="true" todir="${client.rec.web.resources}">
 			<fileset dir="${elab.client.classes.dir}">
 				<include name="ReCFaceConfig.xml" />
 			</fileset>
 		</copy>
-		<copy overwrite="true" todir="${client.rec.am.resources}">
+		<copy overwrite="true" todir="${client.rec.web.resources}">
 			<cutdirsmapper dirs="2" />
 			<!--regexpmapper from="^.*/client/(.*)\.properties$$" to="\1.properties"/-->
 			<fileset dir="${experiments.classes.dir}">
@@ -110,14 +110,14 @@
 			<replace file="${multicast.build.dir}/StartMultiCastController.sh" propertyFile="build.properties">
 				<replacefilter token="@multicast.initial.heap@" property="multicast.initial.heap" />
 				<replacefilter token="@multicast.max.heap@" property="multicast.max.heap" />
-				<replacefilter token="@rec.am.lab.id@" property="@{lab.name}.rec.am.lab.id" />
-				<replacefilter token="@rec.am.host@" property="rec.am.host" />
-				<replacefilter token="@rec.am.port@" property="rec.am.port" />
-				<replacefilter token="@rec.am.securitymanager@" property="rec.am.securitymanager" />
-				<replacefilter token="@rec.am.compositesecuritymanager.list@" property="rec.am.compositesecuritymanager.list" />
-				<replacefilter token="@rec.am.securitymanager.interval.lap.time.minutes@" property="rec.am.securitymanager.interval.lap.time.minutes" />
-				<replacefilter token="@rec.am.securitymanager.near.lap.time.minutes@" property="rec.am.securitymanager.near.lap.time.minutes" />
-				<replacefilter token="@rec.am.securitymanager.refresh.lap.time.minutes@" property="rec.am.securitymanager.refresh.lap.time.minutes" />
+				<replacefilter token="@rec.web.lab.id@" property="@{lab.name}.rec.web.lab.id" />
+				<replacefilter token="@rec.web.host@" property="rec.web.host" />
+				<replacefilter token="@rec.web.port@" property="rec.web.port" />
+				<replacefilter token="@rec.web.securitymanager@" property="rec.web.securitymanager" />
+				<replacefilter token="@rec.web.compositesecuritymanager.list@" property="rec.web.compositesecuritymanager.list" />
+				<replacefilter token="@rec.web.securitymanager.interval.lap.time.minutes@" property="rec.web.securitymanager.interval.lap.time.minutes" />
+				<replacefilter token="@rec.web.securitymanager.near.lap.time.minutes@" property="rec.web.securitymanager.near.lap.time.minutes" />
+				<replacefilter token="@rec.web.securitymanager.refresh.lap.time.minutes@" property="rec.web.securitymanager.refresh.lap.time.minutes" />
 				<replacefilter token="@lab.name@" value="@{lab.name}" />
 				<replacefilter token="@rec.multicast.processingmanager.threadpool.coresize@" property="rec.multicast.processingmanager.threadpool.coresize" />
 				<replacefilter token="@rec.multicast.processingmanager.threadpool.maxsize@" property="rec.multicast.processingmanager.threadpool.maxsize" />
@@ -138,14 +138,14 @@
 			<replace file="${multicast.build.dir}/StartMultiCastController.bat" propertyFile="build.properties">
 				<replacefilter token="@multicast.initial.heap@" property="multicast.initial.heap" />
 				<replacefilter token="@multicast.max.heap@" property="multicast.max.heap" />
-				<replacefilter token="@rec.am.lab.id@" property="@{lab.name}.rec.am.lab.id" />
-				<replacefilter token="@rec.am.host@" property="rec.am.host" />
-				<replacefilter token="@rec.am.port@" property="rec.am.port" />
-				<replacefilter token="@rec.am.securitymanager@" property="rec.am.securitymanager" />
-				<replacefilter token="@rec.am.compositesecuritymanager.list@" property="rec.am.compositesecuritymanager.list" />
-				<replacefilter token="@rec.am.securitymanager.interval.lap.time.minutes@" property="rec.am.securitymanager.interval.lap.time.minutes" />
-				<replacefilter token="@rec.am.securitymanager.near.lap.time.minutes@" property="rec.am.securitymanager.near.lap.time.minutes" />
-				<replacefilter token="@rec.am.securitymanager.refresh.lap.time.minutes@" property="rec.am.securitymanager.refresh.lap.time.minutes" />
+				<replacefilter token="@rec.web.lab.id@" property="@{lab.name}.rec.web.lab.id" />
+				<replacefilter token="@rec.web.host@" property="rec.web.host" />
+				<replacefilter token="@rec.web.port@" property="rec.web.port" />
+				<replacefilter token="@rec.web.securitymanager@" property="rec.web.securitymanager" />
+				<replacefilter token="@rec.web.compositesecuritymanager.list@" property="rec.web.compositesecuritymanager.list" />
+				<replacefilter token="@rec.web.securitymanager.interval.lap.time.minutes@" property="rec.web.securitymanager.interval.lap.time.minutes" />
+				<replacefilter token="@rec.web.securitymanager.near.lap.time.minutes@" property="rec.web.securitymanager.near.lap.time.minutes" />
+				<replacefilter token="@rec.web.securitymanager.refresh.lap.time.minutes@" property="rec.web.securitymanager.refresh.lap.time.minutes" />
 				<replacefilter token="@rec.multicast.processingmanager.threadpool.coresize@" property="rec.multicast.processingmanager.threadpool.coresize" />
 				<replacefilter token="@rec.multicast.processingmanager.threadpool.maxsize@" property="rec.multicast.processingmanager.threadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />

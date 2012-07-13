@@ -41,7 +41,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 
 	/**
 	 * System property key defining the ID of the laboratory as defined in the
-	 * project AllocationManager (rec.am)
+	 * project AllocationManager (rec.web)
 	 */
 	public static final String SYSPROP_LABORATORY_ID = "rec.multicast.labid";
 
