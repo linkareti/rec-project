@@ -21,9 +21,9 @@ public final class ProcessingManager {
 
 	// system properties
 
-	public static final String SYSPROP_CORE_POOL_SIZE_MIN_PRIORITY = "ReC.ProcessingManager.ThreadPool.Coresize";
-	public static final String SYSPROP_MAX_POOL_SIZE_MIN_PRIORITY = "ReC.ProcessingManager.ThreadPool.Maxsize";
-	public static final String SYSPROP_THREAD_IDLE_TIME = "ReC.ProcessingManager.Thread.Idletime";
+	public static final String SYSPROP_CORE_POOL_SIZE_MIN_PRIORITY = "rec.processingmanager.threadPool.coresize";
+	public static final String SYSPROP_MAX_POOL_SIZE_MIN_PRIORITY = "rec.processingmanager.threadPool.maxsize";
+	public static final String SYSPROP_THREAD_IDLE_TIME = "rec.processingmanager.thread.idletime";
 
 	private static final int MAX_POOL_SIZE_PRIORITY = Defaults.defaultIfEmpty(
 			System.getProperty(ProcessingManager.SYSPROP_MAX_POOL_SIZE_MIN_PRIORITY), 20);
