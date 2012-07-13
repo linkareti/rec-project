@@ -130,13 +130,11 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 						getMaximumDataReceivers());
 			}
 
-			log(Level.INFO, "DataReceiverQueue : checking to see if DataReceiver "
-					+ drfq.getDataReceiver().getDelegate() + " is allready registered!");
+			log(Level.INFO, "DataReceiverQueue : checking to see if DataReceiver is allready registered!");
 
 			if (contains(drfq)) {
 				if (!drfq.isConnected()) {
-					log(Level.INFO, "DataReceiverQueue : dataReceiver " + drfq.getDataReceiver().getDelegate()
-							+ " is not connected - shutting it down!");
+					log(Level.INFO, "DataReceiverQueue : dataReceiver is not connected - shutting it down!");
 					drfq.shutdown();
 				} else {
 					// datareceiver is allready registered... just ignore it...
@@ -144,13 +142,10 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 				}
 			}
 
-			log(Level.INFO, "DataReceiverQueue - Going to register dataReceiver "
-					+ drfq.getDataReceiver().getDelegate() + " !");
+			log(Level.INFO, "DataReceiverQueue - Going to register dataReceiver!");
 			retVal = queueOrg.add(drfq);
-			log(Level.INFO, "DataReceiverQueue - registered dataReceiver " + drfq.getDataReceiver().getDelegate()
-					+ (retVal ? "successfully!" : "failed!"));
-			log(Level.INFO, "DataReceiverQueue - Informing dataReceiver " + drfq.getDataReceiver().getDelegate()
-					+ " of current State... just to get him goin'!");
+			log(Level.INFO, "DataReceiverQueue - registered dataReceiver " + (retVal ? "successfully!" : "failed!"));
+			log(Level.INFO, "DataReceiverQueue - Informing dataReceiver of current State... just to get him goin'!");
 			drfq.stateChanged(new DataProducerStateChangeEvent(currentState));
 
 		}
