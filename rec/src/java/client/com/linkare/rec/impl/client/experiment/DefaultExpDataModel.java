@@ -8,12 +8,11 @@ package com.linkare.rec.impl.client.experiment;
 
 import java.util.Hashtable;
 import java.util.Map;
-import java.util.logging.LogManager;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.linkare.rec.data.config.ChannelAcquisitionConfig;
 import com.linkare.rec.data.synch.DateTime;
-import com.linkare.rec.impl.logging.LoggerUtil;
 
 /**
  * 
@@ -25,19 +24,13 @@ public class DefaultExpDataModel extends AbstractExpDataModel {
 	 * 
 	 */
 	private static final long serialVersionUID = -1255034627816487663L;
-	private static String DATA_RECEIVER_LOGGER = "DataReceiver.Logger";
 	private int channelCount = -1;
 
 	private DateTime timeStart = null;
 	// private DataAcquisitionThread dataCollector=null;
 	private Hashtable<Integer, ChannelAcquisitionConfig> channels = null;
 
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(DefaultExpDataModel.DATA_RECEIVER_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(DefaultExpDataModel.DATA_RECEIVER_LOGGER));
-		}
-	}
+	private static final Logger LOGGER = Logger.getLogger(DefaultExpDataModel.class.getName());
 
 	/** Creates a new instance of DefaultExpDataModel */
 	public DefaultExpDataModel() {
@@ -64,15 +57,14 @@ public class DefaultExpDataModel extends AbstractExpDataModel {
 		try {
 			channelCount = getAcquisitionConfig().getChannelsConfig().length;
 		} catch (final NullPointerException npe) {
-			LoggerUtil.logThrowable("Couldn't get Channel Count from Acquisition Header!", npe, LogManager
-					.getLogManager().getLogger(DefaultExpDataModel.DATA_RECEIVER_LOGGER));
+			LOGGER.log(Level.SEVERE, "Couldn't get Channel Count from Acquisition Header!", npe);
 		}
 
 		return channelCount;
 	}
 
 	private Hashtable<Integer, ChannelAcquisitionConfig> getChannels() {
-		
+
 		if (channels != null) {
 			return channels;
 		}
@@ -92,8 +84,7 @@ public class DefaultExpDataModel extends AbstractExpDataModel {
 			}
 
 		} catch (final NullPointerException npe) {
-			LoggerUtil.logThrowable("Couldn't get Channel Count from Acquisition Header!", npe, LogManager
-					.getLogManager().getLogger(DefaultExpDataModel.DATA_RECEIVER_LOGGER));
+			LOGGER.log(Level.SEVERE, "Couldn't get Channel Count from Acquisition Header!", npe);
 		}
 
 		return channels;
@@ -154,8 +145,7 @@ public class DefaultExpDataModel extends AbstractExpDataModel {
 		try {
 			return getTimeStart().calculateDateTime(getAcquisitionConfig().getSelectedFrequency(), sampleIndex);
 		} catch (final NullPointerException npe) {
-			LoggerUtil.logThrowable("Couldn't calculate TimeStamp for sample " + sampleIndex, npe, LogManager
-					.getLogManager().getLogger(DefaultExpDataModel.DATA_RECEIVER_LOGGER));
+			LOGGER.log(Level.SEVERE, "Couldn't calculate TimeStamp for sample " + sampleIndex, npe);
 		}
 
 		return null;
@@ -169,8 +159,7 @@ public class DefaultExpDataModel extends AbstractExpDataModel {
 		try {
 			timeStart = getAcquisitionConfig().getTimeStart();
 		} catch (final NullPointerException npe) {
-			LoggerUtil.logThrowable("Couldn't get starting time from Acquisition Header!", npe, LogManager
-					.getLogManager().getLogger(DefaultExpDataModel.DATA_RECEIVER_LOGGER));
+			LOGGER.log(Level.SEVERE, "Couldn't get starting time from Acquisition Header!", npe);
 		}
 
 		return timeStart;

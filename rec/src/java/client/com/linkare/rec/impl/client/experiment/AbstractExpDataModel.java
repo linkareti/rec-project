@@ -1,9 +1,3 @@
-/*
- * AbstractExpDataModel.java
- *
- * Created on August 5, 2004, 5:51 PM
- */
-
 package com.linkare.rec.impl.client.experiment;
 
 import java.util.logging.Level;
@@ -25,7 +19,6 @@ import com.linkare.rec.impl.data.SamplesPacketReadException;
 import com.linkare.rec.impl.data.SamplesPacketSourceDepacketizer;
 import com.linkare.rec.impl.data.SamplesSourceEvent;
 import com.linkare.rec.impl.data.SamplesSourceEventListener;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.DataCollector;
 import com.linkare.rec.impl.utils.DataCollectorState;
 import com.linkare.rec.impl.utils.ORBBean;
@@ -42,11 +35,10 @@ import com.linkare.rec.impl.wrappers.DataProducerWrapper;
  */
 public abstract class AbstractExpDataModel extends DataCollector implements ExpDataModel, DataReceiverOperations {
 
+	private static final Logger LOGGER = Logger.getLogger(AbstractExpDataModel.class.getName());
+
 	/** Gnerated UID */
 	private static final long serialVersionUID = 5721300601918680941L;
-
-	/** The logger name */
-	private static String DATA_RECEIVER_LOGGER = "DataReceiver.Logger";
 
 	/**
 	 * Cache of the acquisition configuration
@@ -87,9 +79,9 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	private javax.swing.event.EventListenerList listenerList = null;
 
 	static {
-		final Logger l = LogManager.getLogManager().getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER);
+		final Logger l = LOGGER;
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER));
+			LogManager.getLogManager().addLogger(LOGGER);
 		}
 	}
 
@@ -121,8 +113,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 
 		} catch (final Exception e) {
 			e.printStackTrace();
-			LoggerUtil.logThrowable("DataReceiver not registered with ORB...", e,
-					LogManager.getLogManager().getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER));
+			LOGGER.log(Level.SEVERE, "DataReceiver not registered with ORB...", e);
 			return null;
 		}
 
@@ -145,8 +136,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	@Override
 	public void setDpwDataSource(final DataProducerWrapper remoteDataProducer) throws MaximumClientsReached {
 		if (!remoteDataProducer.isConnected()) {
-			Logger.getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER).log(Level.SEVERE,
-					"DataProducer is disconnected! Check it out, please...");
+			LOGGER.log(Level.SEVERE, "DataProducer is disconnected! Check it out, please...");
 		}
 		this.remoteDataProducer = remoteDataProducer;
 
@@ -156,8 +146,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 
 			} catch (final MaximumClientsReached e) {
 				// System.out.println("NOT Registered with dataProducer");
-				LoggerUtil.logThrowable(null, e,
-						LogManager.getLogManager().getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER));
+				LOGGER.log(Level.SEVERE, null, e);
 				throw e;
 			}
 		}
@@ -180,8 +169,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 				acqHeader = remoteDataProducer.getAcquisitionHeader();
 
 			} catch (final NotAvailableException nae) {
-				LoggerUtil.logThrowable("Couldn't get Acquisition Header!", nae,
-						LogManager.getLogManager().getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER));
+				LOGGER.log(Level.SEVERE, "Couldn't get Acquisition Header!", nae);
 			}
 		}
 
@@ -198,8 +186,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 			apparatusName = getAcquisitionConfig().getFamiliarName();
 			return apparatusName;
 		} catch (final NullPointerException npe) {
-			LoggerUtil.logThrowable("Couldn't get Apparatus Name from Acquisition Header!", npe, LogManager
-					.getLogManager().getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER));
+			LOGGER.log(Level.SEVERE, "Couldn't get Apparatus Name from Acquisition Header!", npe);
 		}
 
 		return "Unknown";
@@ -401,8 +388,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 			remoteDataProducer.registerDataReceiver(data_receiver);
 			newSamples(remoteDataProducer.getMaxPacketNum());
 		} catch (final com.linkare.rec.acquisition.MaximumClientsReached e) {
-			LoggerUtil.logThrowable(null, e,
-					LogManager.getLogManager().getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER));
+			LOGGER.log(Level.SEVERE, null, e);
 			throw e;
 		}
 	}
@@ -441,20 +427,6 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 		deactivateDataReceiver();
 	}
 
-	/*
-	 * public com.linkare.rec.data.config.HardwareAcquisitionConfig
-	 * getAcquisitionHeader() throws
-	 * com.linkare.rec.acquisition.NotAvailableException { if(acqHeader!=null)
-	 * return acqHeader; else { try {
-	 * acqHeader=remoteDataProducer.getAcquisitionHeader();
-	 * 
-	 * }catch(NotAvailableException nae) {
-	 * LoggerUtil.logThrowable("Couldn't get Acquisition Header!"
-	 * ,nae,LogManager.getLogManager().getLogger(DATA_RECEIVER_LOGGER)); } }
-	 * 
-	 * return acqHeader; }
-	 */
-
 	public String getDataProducerName() {
 		return remoteDataProducer.getDataProducerName();
 	}
@@ -466,13 +438,12 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 
 	@Override
 	public void log(final Level debugLevel, final String message) {
-		Logger.getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER).log(debugLevel, message);
+		LOGGER.log(debugLevel, message);
 	}
 
 	@Override
 	public void logThrowable(final String message, final Throwable t) {
-		LoggerUtil.logThrowable(t.getMessage(), t,
-				LogManager.getLogManager().getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER));
+		LOGGER.log(Level.SEVERE, t.getMessage(), t);
 	}
 
 	@Override
@@ -508,8 +479,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 		try {
 			return remoteDataProducer.getSamples(packetStartIndex, packetEndIndex);
 		} catch (final Exception e) {
-			LoggerUtil.logThrowable(e.getMessage(), e,
-					LogManager.getLogManager().getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER));
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			return null;
 		}
 	}
@@ -577,9 +547,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 		try {
 			return depacketizer.getSamples(sampleIndex, sampleIndex)[0][channelIndex];
 		} catch (final Exception e) {
-			e.printStackTrace();
-			LoggerUtil.logThrowable("Exception when getValueAt() from AbstractDataModel", e,
-					Logger.getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER));
+			LOGGER.log(Level.SEVERE, "Exception when getValueAt() from AbstractDataModel", e);
 			return null;
 		}
 	}
@@ -616,8 +584,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 			try {
 				fireExpDataModelListenerNewSamples(evt.getSampleLargestIndex());
 			} catch (final Exception e) {
-				LoggerUtil.logThrowable("Exception when newSamples(SamplesSourceEvent evt) from AbstractDataModel", e,
-						Logger.getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER));
+				LOGGER.log(Level.SEVERE, "Exception when newSamples(SamplesSourceEvent evt) from AbstractDataModel", e);
 			}
 		}
 	}
@@ -692,7 +659,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 				if (millisChecked + 5000 < System.currentTimeMillis()) {
 					try {
 						if (!remoteDataProducer.isConnected()) {
-							Logger.getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER).log(Level.WARNING,
+							LOGGER.log(Level.WARNING,
 									"remote Data Producer is gone... tested connected and it returned false...");
 							remoteDataProducerGone();
 							return;
@@ -701,11 +668,10 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 						}
 
 					} catch (final Exception e) {
-						LoggerUtil
-								.logThrowable(
-										"remote Data Producer is gone... tested connected and it has blown with an exception...",
-										e,
-										LogManager.getLogManager().getLogger(AbstractExpDataModel.DATA_RECEIVER_LOGGER));
+						LOGGER.log(
+								Level.SEVERE,
+								"remote Data Producer is gone... tested connected and it has blown with an exception...",
+								e);
 						remoteDataProducerGone();
 						return;
 					}
