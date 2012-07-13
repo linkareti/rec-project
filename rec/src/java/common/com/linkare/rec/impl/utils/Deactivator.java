@@ -1,25 +1,20 @@
-/*
- * Deactivator.java
- *
- * Created on 5 de Novembro de 2002, 15:40
- */
-
 package com.linkare.rec.impl.utils;
 
-import java.util.logging.Logger;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
-import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.threading.ExecutorScheduler;
+import com.linkare.rec.impl.threading.ScheduledWorkUnit;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class Deactivator extends Thread {
+public class Deactivator extends ScheduledWorkUnit {
+
 	private Deactivatable deactivatable = null;
 	private final long DEACTIVATION_TIME = 40000;
 	private boolean deactivated = false;
-
-	private Logger logger = null;
 
 	/**
 	 * Creates a new instance of Deactivator
@@ -27,49 +22,17 @@ public class Deactivator extends Thread {
 	 * @param deactivatable
 	 */
 	public Deactivator(final Deactivatable deactivatable) {
-		super("Deactivator Thread...");
-		setDaemon(true);
-		setPriority(Thread.NORM_PRIORITY - 2);
-		start();
-
 		this.deactivatable = deactivatable;
-	}
 
-	/**
-	 * Creates a new instance of Deactivator
-	 * 
-	 * @param deactivatable
-	 * @param logger
-	 */
-	public Deactivator(final Deactivatable deactivatable, final Logger logger) {
-		this(deactivatable);
-
-		this.logger = logger;
+		ExecutorScheduler.scheduleAtFixedRate(this, DEACTIVATION_TIME, DEACTIVATION_TIME, TimeUnit.MILLISECONDS);
 	}
 
 	@Override
 	public void run() {
-
-		synchronized (this) {
-			try {
-				this.wait(DEACTIVATION_TIME);
-			} catch (final InterruptedException ignored) {
-				return;
-			}
+		tryToDeactivate();
+		if (deactivated) {
+			shutdown();
 		}
-		while (!deactivated) {
-			synchronized (this) {
-				try {
-					this.wait(DEACTIVATION_TIME);
-				} catch (final InterruptedException ignored) {
-					return;
-				}
-			}
-
-			tryToDeactivate();
-		}
-
-		// System.out.println("***********DEACTIVATOR ENDED ITS JOB***************");
 	}
 
 	public void tryToDeactivate() {
@@ -100,7 +63,7 @@ public class Deactivator extends Thread {
 			deactivated = true;
 		} catch (final Exception e) {
 			deactivated = false;
-			LoggerUtil.logThrowable("Exception while trying to deactivate.", e, logger);
+			LOGGER.log(Level.SEVERE, "Exception while trying to deactivate.", e);
 		}
 	}
 }

@@ -16,7 +16,7 @@ import com.linkare.rec.impl.wrappers.MultiCastControllerWrapper;
  * @author José Pedro Pereira - Linkare TI
  */
 public class HardwareBinder extends Thread {
-	public static final String SYSPROP_MULTICAST_INIT_REF = "ReC.MultiCastController.InitRef";
+	public static final String SYSPROP_MULTICAST_INIT_REF = "rec.multicastcontroller.initref";
 	public static final String MULTICAST_INIT_REF = Defaults.defaultIfEmpty(
 			System.getProperty(HardwareBinder.SYSPROP_MULTICAST_INIT_REF), "MultiCastController");
 

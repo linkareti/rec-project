@@ -1,9 +1,3 @@
-/*
- * ByteArrayValBuffer.java
- *
- * Created on 9 de Maio de 2003, 18:25
- */
-
 package com.linkare.rec.impl.utils;
 
 import java.io.FileInputStream;
@@ -15,10 +9,6 @@ import java.net.URLConnection;
 
 import com.linkare.rec.data.acquisition.ByteArrayValue;
 
-/*
- import javax.media.protocol.*;
- import javax.media.*;
- */
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
@@ -280,10 +270,6 @@ public class ByteArrayValBuffer {
 			throws FileNotFoundException, IOException {
 		final java.io.InputStream is = new FileInputStream(fileLocation);
 		readInData(is, startIndex, endIndex);
-	}
-
-	private void readInData(final InputStream is, final int startIndex) throws IOException {
-		readInData(is, startIndex, is.available());
 	}
 
 	private void readInData(final InputStream is, final int startIndex, final int endIndex)
