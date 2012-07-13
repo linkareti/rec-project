@@ -7,9 +7,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 
-import com.linkare.rec.am.mail.MailMessageRequest;
-import com.linkare.rec.am.mail.MailServiceRemote;
-import com.linkare.rec.am.mail.NoValidRecipientsFoundForMessage;
+import com.linkare.rec.web.mail.MailMessageRequest;
+import com.linkare.rec.web.mail.MailServiceRemote;
+import com.linkare.rec.web.mail.NoValidRecipientsFoundForMessage;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.ui.table.DefaultExperimentDataTable;
 

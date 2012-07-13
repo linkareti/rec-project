@@ -25,26 +25,26 @@ import javax.naming.NamingException;
 
 import com.linkare.rec.acquisition.NotAvailableException;
 import com.linkare.rec.acquisition.UserInfo;
-import com.linkare.rec.am.ClientInfoDTO;
-import com.linkare.rec.am.HardwareInfoDTO;
-import com.linkare.rec.am.RegisteredHardwareDTO;
-import com.linkare.rec.am.RepositoryFacade;
-import com.linkare.rec.am.repository.ByteArrayValueDTO;
-import com.linkare.rec.am.repository.ChannelAcquisitionConfigDTO;
-import com.linkare.rec.am.repository.DataProducerDTO;
-import com.linkare.rec.am.repository.DataProducerStateEnum;
-import com.linkare.rec.am.repository.DateTimeDTO;
-import com.linkare.rec.am.repository.FrequencyDTO;
-import com.linkare.rec.am.repository.FrequencyDefTypeEnum;
-import com.linkare.rec.am.repository.HardwareAcquisitionConfigDTO;
-import com.linkare.rec.am.repository.MultiplierEnum;
-import com.linkare.rec.am.repository.ParameterConfigDTO;
-import com.linkare.rec.am.repository.PhysicsValDTO;
-import com.linkare.rec.am.repository.PhysicsValueDTO;
-import com.linkare.rec.am.repository.PhysicsValueTypeEnum;
-import com.linkare.rec.am.repository.RowPhysicsValueDTO;
-import com.linkare.rec.am.repository.SamplesPacketDTO;
-import com.linkare.rec.am.repository.ScaleDTO;
+import com.linkare.rec.web.ClientInfoDTO;
+import com.linkare.rec.web.HardwareInfoDTO;
+import com.linkare.rec.web.RegisteredHardwareDTO;
+import com.linkare.rec.web.RepositoryFacade;
+import com.linkare.rec.web.repository.ByteArrayValueDTO;
+import com.linkare.rec.web.repository.ChannelAcquisitionConfigDTO;
+import com.linkare.rec.web.repository.DataProducerDTO;
+import com.linkare.rec.web.repository.DataProducerStateEnum;
+import com.linkare.rec.web.repository.DateTimeDTO;
+import com.linkare.rec.web.repository.FrequencyDTO;
+import com.linkare.rec.web.repository.FrequencyDefTypeEnum;
+import com.linkare.rec.web.repository.HardwareAcquisitionConfigDTO;
+import com.linkare.rec.web.repository.MultiplierEnum;
+import com.linkare.rec.web.repository.ParameterConfigDTO;
+import com.linkare.rec.web.repository.PhysicsValDTO;
+import com.linkare.rec.web.repository.PhysicsValueDTO;
+import com.linkare.rec.web.repository.PhysicsValueTypeEnum;
+import com.linkare.rec.web.repository.RowPhysicsValueDTO;
+import com.linkare.rec.web.repository.SamplesPacketDTO;
+import com.linkare.rec.web.repository.ScaleDTO;
 import com.linkare.rec.data.Multiplier;
 import com.linkare.rec.data.acquisition.ByteArrayValue;
 import com.linkare.rec.data.acquisition.PhysicsVal;
@@ -926,7 +926,7 @@ public final class DTOMapperUtils {
 		final InitialContext ic = new InitialContext();
 
 		return (RepositoryFacade) ic
-				.lookup("java:global/rec.am/RepositoryFacadeBean!com.linkare.rec.am.RepositoryFacade");
+				.lookup("java:global/rec.am/RepositoryFacadeBean!com.linkare.rec.web.RepositoryFacade");
 	}
 
 	private static void testExperimentResultsPersistence() {

@@ -19,9 +19,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.linkare.commons.utils.Pair;
-import com.linkare.rec.am.AllocationDTO;
-import com.linkare.rec.am.AllocationManager;
-import com.linkare.rec.am.UnknownDomainException;
+import com.linkare.rec.web.AllocationDTO;
+import com.linkare.rec.web.AllocationManager;
+import com.linkare.rec.web.UnknownDomainException;
 import com.linkare.rec.impl.events.ChatMessageEvent;
 import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
 import com.linkare.rec.impl.threading.ExecutorScheduler;

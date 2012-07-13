@@ -11,7 +11,7 @@ import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 
-import com.linkare.rec.am.config.Lab;
+import com.linkare.rec.web.config.Lab;
 
 /**
  * 

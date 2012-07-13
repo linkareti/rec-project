@@ -1,7 +1,7 @@
 package com.linkare.rec.impl.utils;
 
-import com.linkare.rec.am.RecServiceRemote;
-import com.linkare.rec.am.repository.BadWordDTO;
+import com.linkare.rec.web.RecServiceRemote;
+import com.linkare.rec.web.repository.BadWordDTO;
 import com.linkare.rec.impl.threading.ExecutorScheduler;
 import com.linkare.rec.impl.threading.ScheduledWorkUnit;
 import com.linkare.rec.impl.utils.locator.BusinessServiceEnum;

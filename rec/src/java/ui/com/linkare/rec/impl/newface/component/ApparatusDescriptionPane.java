@@ -22,8 +22,8 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 import com.linkare.net.protocols.tex.TexUtils;
-import com.linkare.rec.am.config.Apparatus;
-import com.linkare.rec.am.config.WebResource;
+import com.linkare.rec.web.config.Apparatus;
+import com.linkare.rec.web.config.WebResource;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**

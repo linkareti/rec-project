@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.linkare.rec.am.config.Display;
+import com.linkare.rec.web.config.Display;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 

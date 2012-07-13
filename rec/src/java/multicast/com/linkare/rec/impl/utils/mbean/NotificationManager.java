@@ -19,9 +19,9 @@ import javax.management.NotificationBroadcasterSupport;
 import javax.management.NotificationFilter;
 import javax.management.NotificationListener;
 
-import com.linkare.rec.am.MultiCastControllerNotifInfoDTO;
-import com.linkare.rec.am.mbean.MBeanObjectNameFactory;
-import com.linkare.rec.am.mbean.NotificationTypeEnum;
+import com.linkare.rec.web.MultiCastControllerNotifInfoDTO;
+import com.linkare.rec.web.mbean.MBeanObjectNameFactory;
+import com.linkare.rec.web.mbean.NotificationTypeEnum;
 import com.linkare.rec.impl.threading.ProcessingManager;
 
 /**

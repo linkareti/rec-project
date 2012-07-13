@@ -11,7 +11,7 @@ import java.awt.Color;
 import javax.swing.Icon;
 
 
-import com.linkare.rec.am.config.Lab;
+import com.linkare.rec.web.config.Lab;
 import com.linkare.rec.impl.newface.ReCApplication;
 import com.linkare.rec.impl.newface.component.ProgressCicle.State;
 import com.linkare.rec.impl.newface.utils.LAFConnector;

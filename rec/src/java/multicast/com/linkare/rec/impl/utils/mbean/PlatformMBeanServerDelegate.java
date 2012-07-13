@@ -20,7 +20,7 @@ import javax.management.NotificationListener;
 import javax.management.ObjectInstance;
 import javax.management.ObjectName;
 
-import com.linkare.rec.am.mbean.MBeanObjectNameFactory;
+import com.linkare.rec.web.mbean.MBeanObjectNameFactory;
 import com.linkare.rec.impl.mbean.ThreadPoolExecutorStatistics;
 import com.linkare.rec.impl.multicast.ReCMultiCastController;
 import com.linkare.rec.impl.multicast.ReCMultiCastHardware;

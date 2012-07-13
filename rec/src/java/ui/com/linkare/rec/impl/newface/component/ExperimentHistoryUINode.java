@@ -13,7 +13,7 @@ import com.linkare.rec.impl.wrappers.DataProducerWrapper;
  */
 public class ExperimentHistoryUINode extends ExpHistory {
 
-	private final com.linkare.rec.am.config.Apparatus apparatusConfig;
+	private final com.linkare.rec.web.config.Apparatus apparatusConfig;
 
 	/**
 	 * Creates the <code>ExpHistoryUINode</code>.
@@ -25,12 +25,12 @@ public class ExperimentHistoryUINode extends ExpHistory {
 	 */
 	public ExperimentHistoryUINode(final ExpHistoryDisplayFactory expHistoryDisplayFactory,
 			final DataProducerWrapper producerWrapper, final Apparatus apparatus,
-			final com.linkare.rec.am.config.Apparatus apparatusConfig) {
+			final com.linkare.rec.web.config.Apparatus apparatusConfig) {
 		super(expHistoryDisplayFactory, producerWrapper, apparatus);
 		this.apparatusConfig = apparatusConfig;
 	}
 
-	public com.linkare.rec.am.config.Apparatus getApparatusConfig() {
+	public com.linkare.rec.web.config.Apparatus getApparatusConfig() {
 		return apparatusConfig;
 	}
 

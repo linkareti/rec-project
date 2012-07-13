@@ -15,10 +15,10 @@ import javax.management.NotificationEmitter;
 import javax.management.NotificationFilter;
 import javax.management.NotificationListener;
 
-import com.linkare.rec.am.ClientInfoDTO;
-import com.linkare.rec.am.HardwareInfoDTO;
-import com.linkare.rec.am.mbean.IHardwareMXBean;
-import com.linkare.rec.am.mbean.NotificationTypeEnum;
+import com.linkare.rec.web.ClientInfoDTO;
+import com.linkare.rec.web.HardwareInfoDTO;
+import com.linkare.rec.web.mbean.IHardwareMXBean;
+import com.linkare.rec.web.mbean.NotificationTypeEnum;
 import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
 import com.linkare.rec.impl.utils.mapping.DTOMapperUtils;
 import com.linkare.rec.impl.wrappers.HardwareWrapper;

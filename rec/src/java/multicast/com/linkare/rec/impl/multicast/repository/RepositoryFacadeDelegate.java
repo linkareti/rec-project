@@ -8,7 +8,7 @@ package com.linkare.rec.impl.multicast.repository;
 
 import java.rmi.RemoteException;
 
-import com.linkare.rec.am.RepositoryFacade;
+import com.linkare.rec.web.RepositoryFacade;
 import com.linkare.rec.impl.multicast.ReCMultiCastDataProducer;
 import com.linkare.rec.impl.utils.locator.BusinessServiceEnum;
 import com.linkare.rec.impl.utils.locator.BusinessServiceLocator;

@@ -76,11 +76,11 @@ import org.jdesktop.application.View;
 
 import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.acquisition.UserInfo;
-import com.linkare.rec.am.config.Apparatus;
-import com.linkare.rec.am.config.Display;
-import com.linkare.rec.am.config.Lab;
-import com.linkare.rec.am.config.LocalizationBundle;
-import com.linkare.rec.am.config.ReCFaceConfig;
+import com.linkare.rec.web.config.Apparatus;
+import com.linkare.rec.web.config.Display;
+import com.linkare.rec.web.config.Lab;
+import com.linkare.rec.web.config.LocalizationBundle;
+import com.linkare.rec.web.config.ReCFaceConfig;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.ApparatusClientBean;
 import com.linkare.rec.impl.client.LabClientBean;

@@ -13,7 +13,7 @@ import javax.swing.ListCellRenderer;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-import com.linkare.rec.am.config.Lab;
+import com.linkare.rec.web.config.Lab;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
