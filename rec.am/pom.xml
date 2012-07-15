@@ -8,9 +8,9 @@
 		<version>1.0.0</version>
 	</parent>
 	<groupId>com.linkare</groupId>
-	<artifactId>rec.am</artifactId>
+	<artifactId>rec.web</artifactId>
 	<packaging>war</packaging>
-	<name>rec.am</name>
+	<name>rec.web</name>
 	<description>Module containing the web interface of the ReC project, containing also an integration with Moodle</description>
 	<version>1.0.0-SNAPSHOT</version>
 
@@ -229,7 +229,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.linkare</groupId>
-			<artifactId>rec.am-api</artifactId>
+			<artifactId>rec.web-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>compile</scope>
@@ -429,7 +429,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<packageSpace>com.linkare.rec.am.wsgen.moodle</packageSpace>
+					<packageSpace>com.linkare.rec.web.wsgen.moodle</packageSpace>
 					<sourceDirectory>src/main/resources</sourceDirectory>
 					<outputDirectory>src/main/java</outputDirectory>
 				</configuration>
@@ -503,7 +503,7 @@
 							</includes>
 						</resource>
 						<resource>
-							<directory>src/main/skins/${rec.am.skin.name}</directory>
+							<directory>src/main/skins/${rec.web.skin.name}</directory>
 							<targetPath>resources</targetPath>
 							<includes>
 								<include>**</include>
@@ -545,7 +545,7 @@
 				</property>
 			</activation>
 			<properties>
-				<rec.am.skin.name>default</rec.am.skin.name>
+				<rec.web.skin.name>default</rec.web.skin.name>
 			</properties>
 		</profile>
 		<profile>
@@ -557,7 +557,7 @@
 				</property>
 			</activation>
 			<properties>
-				<rec.am.skin.name>default</rec.am.skin.name>
+				<rec.web.skin.name>default</rec.web.skin.name>
 			</properties>
 		</profile>
 		<profile>
@@ -569,7 +569,7 @@
 				</property>
 			</activation>
 			<properties>
-				<rec.am.skin.name>alternate</rec.am.skin.name>
+				<rec.web.skin.name>alternate</rec.web.skin.name>
 			</properties>
 		</profile>
 		<!-- Profiles targetenv.empty and targetenv.dev are duplicates since maven 

@@ -1,5 +1,8 @@
 package com.linkare.rec.am.service;
 
+import com.linkare.rec.web.mail.MailMessageRequest;
+import com.linkare.rec.web.mail.MailServiceRemote;
+import com.linkare.rec.web.mail.NoValidRecipientsFoundForMessage;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
@@ -13,10 +16,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.linkare.rec.am.mail.MailMessageRequest;
-import com.linkare.rec.am.mail.MailServiceRemote;
-import com.linkare.rec.am.mail.NoValidRecipientsFoundForMessage;
-import com.linkare.rec.am.model.util.BusinessException;
+import com.linkare.rec.web.model.util.BusinessException;
 
 public class MailServiceWSTest {
 

@@ -13,15 +13,7 @@
                        value="#{badWordController.selected.version}"
                        rendered="#{operation != 'create'}" />
 
-        <p:focus for="locale" />
         <h:panelGrid columns="3">
-            <h:outputLabel value="#{bundle['badword.locale']}" for="locale" />
-            <p:inputText id="locale" value="#{badWordController.selected.locale}"
-                         title="#{bundle['badword.locale']}" required="true"
-                         label="#{bundle['badword.locale']}"
-                         rendered="#{operation != 'view'}" />
-            <h:outputText id="localeOut" value="#{badWordController.selected.locale}" rendered="#{operation == 'view'}"/> 
-            <p:message for="locale" />
             <h:outputLabel value="#{bundle['badword.regex']}"
                            for="regex" />
             <p:inputText id="regex"

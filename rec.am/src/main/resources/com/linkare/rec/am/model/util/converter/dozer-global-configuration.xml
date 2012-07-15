@@ -8,9 +8,9 @@
 		<!-- these are always bi-directional -->
 		<custom-converters> 
 			<converter
-				type="com.linkare.rec.am.model.util.converter.PhysicsValConverter">
-				<class-a>com.linkare.rec.am.repository.PhysicsValDTO</class-a>
-				<class-b>com.linkare.rec.am.model.PhysicsVal</class-b>
+				type="com.linkare.rec.web.model.util.converter.PhysicsValConverter">
+				<class-a>com.linkare.rec.web.repository.PhysicsValDTO</class-a>
+				<class-b>com.linkare.rec.web.model.PhysicsVal</class-b>
 			</converter>
 		</custom-converters>
 	</configuration>

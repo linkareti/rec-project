@@ -20,10 +20,6 @@
                 <p:column headerText="#{bundle['badword.regex']}" style="width:125px">
                     <h:outputText value="#{item.regex}" />
                 </p:column>
-                <p:column headerText="#{bundle['badword.locale']}" style="width:135px">
-                    <h:outputText value="#{item.locale}" />
-                </p:column>
-
                 <p:column headerText="#{bundle['operation.action']}" style="width:100px">
                     <p:commandLink action="#{badWordController.prepareView}"
                                    value="#{bundle['operation.view']}" ajax="false"/>

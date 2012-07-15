@@ -1,5 +1,5 @@
 
-                                 rec.am 
+                                 rec.web 
 
  Source archetype: weld-jsf-jee
 
@@ -64,7 +64,7 @@
 
  Start JBoss AS. The application will be running at the following URL:
 
-  http://localhost:8080/rec.am
+  http://localhost:8080/rec.web
 
  If you want to deploy to GlassFish (standalone), you first need to change
  the name of the DataSource used by the persistence unit! Open this file:
@@ -82,7 +82,7 @@
 
   mvn package
  
- You can now deploy the target/rec.am.war archive and launch the
+ You can now deploy the target/rec.web.war archive and launch the
  application the through GlassFish administration console.
 
  Alternatively, you can deploy the application without moving any files around
@@ -94,7 +94,7 @@
 
  The application will be running at the following URL:
  
-  http://localhost:7070/rec.am
+  http://localhost:7070/rec.web
 
  Importing the project into an IDE
  =================================
@@ -152,7 +152,7 @@ php-soap from urpmi (urpmi php-soap).
 
 === Skinning ===
 
-Rec.am supports basic skinning. The two following two skins are included with the project's source:
+rec.web supports basic skinning. The two following two skins are included with the project's source:
 
  * default
  * alternate
@@ -182,7 +182,7 @@ To create a new skin:
 	  </property>
 	  </activation>
 	  <properties>
-	    <rec.am.skin.name>folder_name</rec.am.skin.name>
+	    <rec.web.skin.name>folder_name</rec.web.skin.name>
 	  </properties>
 	</profile>
 

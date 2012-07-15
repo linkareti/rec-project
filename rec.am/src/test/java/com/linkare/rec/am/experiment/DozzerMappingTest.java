@@ -1,5 +1,6 @@
 package com.linkare.rec.am.experiment;
 
+import com.linkare.rec.web.RepositoryFacade;
 import java.rmi.RemoteException;
 import java.util.Arrays;
 import java.util.Date;
@@ -12,40 +13,39 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import com.linkare.rec.am.RepositoryFacade;
-import com.linkare.rec.am.model.BooleanVal;
-import com.linkare.rec.am.model.ByteArrayVal;
-import com.linkare.rec.am.model.ByteArrayValue;
-import com.linkare.rec.am.model.ByteVal;
-import com.linkare.rec.am.model.ChannelAcquisitionConfig;
-import com.linkare.rec.am.model.DataProducer;
-import com.linkare.rec.am.model.DateTime;
-import com.linkare.rec.am.model.DoubleVal;
-import com.linkare.rec.am.model.FloatVal;
-import com.linkare.rec.am.model.Frequency;
-import com.linkare.rec.am.model.HardwareAcquisitionConfig;
-import com.linkare.rec.am.model.IntVal;
-import com.linkare.rec.am.model.LongVal;
-import com.linkare.rec.am.model.ParameterConfig;
-import com.linkare.rec.am.model.PhysicsVal;
-import com.linkare.rec.am.model.Scale;
-import com.linkare.rec.am.model.ShortVal;
-import com.linkare.rec.am.model.util.converter.DozerBeanMapperSingletonWrapper;
-import com.linkare.rec.am.repository.ByteArrayValueDTO;
-import com.linkare.rec.am.repository.ChannelAcquisitionConfigDTO;
-import com.linkare.rec.am.repository.RowPhysicsValueDTO;
-import com.linkare.rec.am.repository.DataProducerDTO;
-import com.linkare.rec.am.repository.DateTimeDTO;
-import com.linkare.rec.am.repository.FrequencyDTO;
-import com.linkare.rec.am.repository.FrequencyDefTypeEnum;
-import com.linkare.rec.am.repository.HardwareAcquisitionConfigDTO;
-import com.linkare.rec.am.repository.MultiplierEnum;
-import com.linkare.rec.am.repository.ParameterConfigDTO;
-import com.linkare.rec.am.repository.PhysicsValDTO;
-import com.linkare.rec.am.repository.PhysicsValueDTO;
-import com.linkare.rec.am.repository.PhysicsValueTypeEnum;
-import com.linkare.rec.am.repository.SamplesPacketDTO;
-import com.linkare.rec.am.repository.ScaleDTO;
+import com.linkare.rec.web.model.BooleanVal;
+import com.linkare.rec.web.model.ByteArrayVal;
+import com.linkare.rec.web.model.ByteArrayValue;
+import com.linkare.rec.web.model.ByteVal;
+import com.linkare.rec.web.model.ChannelAcquisitionConfig;
+import com.linkare.rec.web.model.DataProducer;
+import com.linkare.rec.web.model.DateTime;
+import com.linkare.rec.web.model.DoubleVal;
+import com.linkare.rec.web.model.FloatVal;
+import com.linkare.rec.web.model.Frequency;
+import com.linkare.rec.web.model.HardwareAcquisitionConfig;
+import com.linkare.rec.web.model.IntVal;
+import com.linkare.rec.web.model.LongVal;
+import com.linkare.rec.web.model.ParameterConfig;
+import com.linkare.rec.web.model.PhysicsVal;
+import com.linkare.rec.web.model.Scale;
+import com.linkare.rec.web.model.ShortVal;
+import com.linkare.rec.web.model.util.converter.DozerBeanMapperSingletonWrapper;
+import com.linkare.rec.web.repository.ByteArrayValueDTO;
+import com.linkare.rec.web.repository.ChannelAcquisitionConfigDTO;
+import com.linkare.rec.web.repository.DataProducerDTO;
+import com.linkare.rec.web.repository.DateTimeDTO;
+import com.linkare.rec.web.repository.FrequencyDTO;
+import com.linkare.rec.web.repository.FrequencyDefTypeEnum;
+import com.linkare.rec.web.repository.HardwareAcquisitionConfigDTO;
+import com.linkare.rec.web.repository.MultiplierEnum;
+import com.linkare.rec.web.repository.ParameterConfigDTO;
+import com.linkare.rec.web.repository.PhysicsValDTO;
+import com.linkare.rec.web.repository.PhysicsValueDTO;
+import com.linkare.rec.web.repository.PhysicsValueTypeEnum;
+import com.linkare.rec.web.repository.RowPhysicsValueDTO;
+import com.linkare.rec.web.repository.SamplesPacketDTO;
+import com.linkare.rec.web.repository.ScaleDTO;
 
 public class DozzerMappingTest {
 
@@ -488,7 +488,7 @@ public class DozzerMappingTest {
     public static void main(String[] args) throws NamingException, RemoteException {
 	InitialContext ic = new InitialContext();
 
-	RepositoryFacade ejb = (RepositoryFacade) ic.lookup("java:global/rec.am/ExperimentResultsManagerBean");
+	RepositoryFacade ejb = (RepositoryFacade) ic.lookup("java:global/rec.web/ExperimentResultsManagerBean");
 
 	try {
 	    DataProducerDTO dto = new DozzerMappingTest().getDataProducerDTO();
