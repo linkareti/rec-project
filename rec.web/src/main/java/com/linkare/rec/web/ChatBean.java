@@ -85,12 +85,19 @@ public class ChatBean implements Serializable {
             } else {
                 selectedLab.sendMulticastMessage(selectedUser, message);
             }
-            strBuilder.append(USER_NAME).append(" diz: ").append(message).append(System.getProperty("line.separator"));
+            strBuilder.append(USER_NAME).append(" : ").append(message).append(System.getProperty("line.separator"));
             messageReceived = strBuilder.toString();
             message = null;
         }
     }
-
+    
+    public void refreshMessageReceived(){
+        if(selectedExperimentLab != null && selectedExperimentLab.getRecChatMessages() != null){
+            for (RecChatMessageDTO recChatMessageDTO : selectedExperimentLab.getRecChatMessages()) {
+                messageReceived = recChatMessageDTO.getMessage();
+            }
+        }
+    }
     public void kickUser() {
         Set<String> userNamesToKick = new HashSet();
         userNamesToKick.add(selectedUser);

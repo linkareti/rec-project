@@ -23,7 +23,6 @@ import com.linkare.rec.web.mbean.IMultiCastControllerMXBean;
 import com.linkare.rec.web.mbean.MBeanObjectNameFactory;
 import com.linkare.rec.web.model.Laboratory;
 import com.linkare.rec.web.service.LaboratoryService;
-import com.linkare.rec.web.util.JndiHelper;
 
 /**
  * 

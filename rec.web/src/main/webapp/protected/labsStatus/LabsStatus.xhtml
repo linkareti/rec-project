@@ -83,6 +83,8 @@
             </p:contextMenu> 
             <p:poll update="userConnnected" interval="5"
                     listener="#{chatBean.refreshUserConnected}" />
+            <p:poll update="messageReceived" interval="2"
+                    listener="#{chatBean.refreshMessageReceived}" />
             <p:dialog header="Chat" widgetVar="dlg" minimizable="true" resizable="false" id="chatDlg" width="550">
                 <p:ajax event="close" listener="#{chatBean.handleClose}" update="messageReceived"/>  
                 <h:panelGroup>

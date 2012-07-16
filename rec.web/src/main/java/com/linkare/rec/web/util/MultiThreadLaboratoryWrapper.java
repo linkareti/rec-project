@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import com.linkare.rec.web.ClientInfoDTO;
 import com.linkare.rec.web.MultiCastControllerNotifInfoDTO;
+import com.linkare.rec.web.RecChatMessageDTO;
 import com.linkare.rec.web.RegisteredHardwareDTO;
 import com.linkare.rec.web.mbean.IMultiCastControllerMXBean;
 import com.linkare.rec.web.mbean.NotificationTypeEnum;
@@ -113,6 +114,20 @@ public class MultiThreadLaboratoryWrapper {
 
         if (deployedExperimentWrapper != null) {
             deployedExperimentWrapper.addNewClient(userName);
+        }
+    }
+
+    private void addNewRecMessageChat(final String experimentID, final RecChatMessageDTO recChatMessage) {
+
+        MultiThreadDeployedExperimentWrapper deployedExperimentWrapper = deployedExperimentsMap.get(experimentID);
+
+        if (deployedExperimentWrapper == null) {
+            addHardware(getRemoteHardware(experimentID));
+            deployedExperimentWrapper = deployedExperimentsMap.get(experimentID);
+        }
+
+        if (deployedExperimentWrapper != null) {
+            deployedExperimentWrapper.addNewRecChatMessage(recChatMessage);
         }
     }
 
@@ -232,6 +247,9 @@ public class MultiThreadLaboratoryWrapper {
                     break;
                 case UNREGISTER_CLIENT_HARDWARE:
                     removeUserFromHardware(notifInfo.getRegisteredHardwareDTO().getHardwareUniqueID(), notifInfo.getClientInfoDTO().getUserName());
+                    break;
+                case NEW_CHAT_MESSAGE:
+                    addNewRecMessageChat(notifInfo.getRegisteredHardwareDTO().getHardwareUniqueID(), notifInfo.getRecChatMessageDTO());
                     break;
                 default:
                     throw new UnsupportedOperationException();

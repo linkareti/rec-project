@@ -1,5 +1,6 @@
 package com.linkare.rec.web.util;
 
+import com.linkare.rec.web.RecChatMessageDTO;
 import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.locks.Lock;
@@ -90,8 +91,17 @@ public class MultiThreadDeployedExperimentWrapper {
 	    readLock.unlock();
 	}
     }
-
-
+    
+    public boolean addNewRecChatMessage(final RecChatMessageDTO recChatMessageDTO) {
+	writeLock.lock();
+	try {
+	    return underlyingDeployedExperiment.getRecChatMessages().add(recChatMessageDTO);
+                    
+	} finally {
+	    writeLock.unlock();
+	}
+    }
+ 
     public String getStateLabel() {
 	return experiment.getState().getLabel();
     }
