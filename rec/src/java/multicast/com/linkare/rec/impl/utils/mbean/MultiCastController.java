@@ -161,7 +161,7 @@ public class MultiCastController implements IMultiCastControllerMXBean, Notifica
         try {
             UserInfo userinfo = new UserInfo();
             userinfo.setUserName(user.getUserName());
-            reCMultiCastController.sendMessage(userinfo, clientTo, message);
+            reCMultiCastController.sendMessage(userinfo, clientTo, message, false);
         } catch (NotRegistered ex) {
             Logger.getLogger(MultiCastController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotAuthorized ex) {
@@ -171,7 +171,7 @@ public class MultiCastController implements IMultiCastControllerMXBean, Notifica
 
     @Override
     public void sendMulticastMessage(final String clientTo, final String message) {
-        reCMultiCastController.sendMulticastMessage(clientTo, message);
+        reCMultiCastController.sendMulticastMessage(clientTo, message, false);
     }
 
 
