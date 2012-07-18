@@ -752,7 +752,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 			// checking if we have any non spots and remove them
 		for (int i = 0; i < center_counter; i++) {
 			final int pixelIndex = refineCenters[i][0] + refineCenters[i][1] * imageWidth;
-			final boolean isItSpot = ((Boolean) isSpot(pixelIndex, radius, true, false).get(0)).booleanValue();
+			final boolean isItSpot = getSpotInformation(pixelIndex, radius, true, false).isSpot();
 			if (!isItSpot) {
 				// System.out.println("Removing spot " + i +
 				// " -> ("+houghCircles[i][0]+";"+houghCircles[i][1]+")");
@@ -1247,7 +1247,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 
 		// is an array of vectors of ints
 		@SuppressWarnings("unchecked")
-		final java.util.Vector<Integer>[] vDie = new java.util.Vector[maxDice]; 
+		final java.util.Vector<Integer>[] vDie = new java.util.Vector[maxDice];
 
 		int vDieSize;
 		boolean belongsToDie = true;
@@ -1681,16 +1681,12 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 	// checks the pixels of the B&W image and the corners of squares of side 13,
 	// 9 & 5, must be white (in either) and the center black, to be accepted as
 	// a spot
-	private java.util.Vector isSpot(final int pixelIndex, final int raio, final boolean isProbableSix,
+	private SpotInformation getSpotInformation(final int pixelIndex, final int raio, final boolean isProbableSix,
 			final boolean isProbableOne) {
 		final int[] imSize = imageSize();
 		final int imageWidth = imSize[0], imageHeight = imSize[1], numberOfFalses = 0;
 		final boolean badTopRight = true, badTop = true, badTopLeft = true, badRight = true, badBottomRight = true, badBottom = true, badBottomLeft = true, badLeft = true;
-		final java.util.Vector<Comparable> toReturn = new java.util.Vector(4);
-		toReturn.add(0, Boolean.FALSE);
-		toReturn.add(1, new Integer(0)); // zeroCounter
-		toReturn.add(2, new Integer(0)); // oneCounter
-		toReturn.add(3, new Integer(0)); // maxCounter
+		final SpotInformation toReturn = new SpotInformation(Boolean.FALSE, 0, 0, 0);
 
 		// System.out.println(pixelIndex%imageWidth+"; "+pixelIndex/imageWidth);
 
@@ -1847,7 +1843,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 
 		if (zeroCounter > 2) {
 			// System.out.println("zeroCounter("+zeroCounter+") >=2");
-			toReturn.set(1, new Integer(zeroCounter));
+			toReturn.setZeroCounter(zeroCounter);
 			return toReturn;
 		}
 
@@ -1917,9 +1913,9 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 			oneCounter++;
 		}
 
-		toReturn.set(1, new Integer(zeroCounter)); // zeroCounter
-		toReturn.set(2, new Integer(oneCounter)); // oneCounter
-		toReturn.set(3, new Integer(maxCounter)); // maxCounter
+		toReturn.setZeroCounter(zeroCounter); // zeroCounter
+		toReturn.setOneCounter(oneCounter); // oneCounter
+		toReturn.setMaxCounter(maxCounter); // maxCounter
 		// System.out.println("zeroCounter:" + zeroCounter + ", oneCounter:" +
 		// oneCounter + ", maxCounter:" + maxCounter + ", maxCount:" +
 		// maxCount);
@@ -1979,7 +1975,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 			return toReturn;
 		}// if
 
-		toReturn.set(0, Boolean.TRUE);
+		toReturn.setSpot(true);
 		return toReturn;
 	}// isSpot
 
@@ -2859,9 +2855,8 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 			if (dieDiff == 1) {
 				if (tryRemove(vDie, vDieIndex, testDieSize, spotsToRemove, pixelIndex, raio, maxClusterSize)) {
 					final java.util.Vector vDieXYpI = new java.util.Vector(4);
-					final java.util.Vector isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio, true, false);
-					final int counterSum = ((Integer) isSpotVector.get(1)).intValue()
-							+ ((Integer) isSpotVector.get(2)).intValue() + ((Integer) isSpotVector.get(3)).intValue();
+					final SpotInformation spotInformation = getSpotInformation(pixelIndex[spotsToRemove[0]], raio, true, false);
+					final int counterSum = spotInformation.sumCounters();
 
 					if (testDieSize == 6 && externalCounter > 1 && counterSum < 1) {
 						vDie = removeSpot(vDie, vDieIndex, indexa);
@@ -2921,14 +2916,10 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 					if (dieDiff == 2) {
 						if (tryRemove(vDie, vDieIndex, testDieSize, spotsToRemove, pixelIndex, raio, maxClusterSize)) {
 							final java.util.Vector vDieXYpI = new java.util.Vector(4);
-							java.util.Vector isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio, true, false);
-							int counterSum = ((Integer) isSpotVector.get(1)).intValue()
-									+ ((Integer) isSpotVector.get(2)).intValue()
-									+ ((Integer) isSpotVector.get(3)).intValue();
-							isSpotVector = isSpot(pixelIndex[spotsToRemove[1]], raio, true, false);
-							counterSum += ((Integer) isSpotVector.get(1)).intValue()
-									+ ((Integer) isSpotVector.get(2)).intValue()
-									+ ((Integer) isSpotVector.get(3)).intValue();
+							SpotInformation spotInformation = getSpotInformation(pixelIndex[spotsToRemove[0]], raio, true, false);
+							int counterSum = spotInformation.sumCounters();
+							spotInformation = getSpotInformation(pixelIndex[spotsToRemove[1]], raio, true, false);
+							counterSum += spotInformation.sumCounters();
 							if (testDieSize == 6 && externalCounter > 1) {
 								vDie = removeSpot(vDie, vDieIndex, indexb);
 								x = removeArrayEntry(x, indexb);
@@ -2996,19 +2987,13 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 								if (tryRemove(vDie, vDieIndex, testDieSize, spotsToRemove, pixelIndex, raio,
 										maxClusterSize)) {
 									final java.util.Vector vDieXYpI = new java.util.Vector(4);
-									java.util.Vector isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio, true,
+									SpotInformation spotInformation = getSpotInformation(pixelIndex[spotsToRemove[0]], raio, true,
 											false);
-									int counterSum = ((Integer) isSpotVector.get(1)).intValue()
-											+ ((Integer) isSpotVector.get(2)).intValue()
-											+ ((Integer) isSpotVector.get(3)).intValue();
-									isSpotVector = isSpot(pixelIndex[spotsToRemove[1]], raio, true, false);
-									counterSum += ((Integer) isSpotVector.get(1)).intValue()
-											+ ((Integer) isSpotVector.get(2)).intValue()
-											+ ((Integer) isSpotVector.get(3)).intValue();
-									isSpotVector = isSpot(pixelIndex[spotsToRemove[2]], raio, true, false);
-									counterSum += ((Integer) isSpotVector.get(1)).intValue()
-											+ ((Integer) isSpotVector.get(2)).intValue()
-											+ ((Integer) isSpotVector.get(3)).intValue();
+									int counterSum = spotInformation.sumCounters();
+									spotInformation = getSpotInformation(pixelIndex[spotsToRemove[1]], raio, true, false);
+									counterSum += spotInformation.sumCounters();
+									spotInformation = getSpotInformation(pixelIndex[spotsToRemove[2]], raio, true, false);
+									counterSum += spotInformation.sumCounters();
 									if (testDieSize == 6 && externalCounter > 1) {
 										vDie = removeSpot(vDie, vDieIndex, indexc);
 										x = removeArrayEntry(x, indexc);
@@ -3090,23 +3075,15 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 										if (tryRemove(vDie, vDieIndex, testDieSize, spotsToRemove, pixelIndex, raio,
 												maxClusterSize)) {
 											final java.util.Vector vDieXYpI = new java.util.Vector(4);
-											java.util.Vector isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio,
+											SpotInformation spotInformation = getSpotInformation(pixelIndex[spotsToRemove[0]], raio,
 													true, false);
-											int counterSum = ((Integer) isSpotVector.get(1)).intValue()
-													+ ((Integer) isSpotVector.get(2)).intValue()
-													+ ((Integer) isSpotVector.get(3)).intValue();
-											isSpotVector = isSpot(pixelIndex[spotsToRemove[1]], raio, true, false);
-											counterSum += ((Integer) isSpotVector.get(1)).intValue()
-													+ ((Integer) isSpotVector.get(2)).intValue()
-													+ ((Integer) isSpotVector.get(3)).intValue();
-											isSpotVector = isSpot(pixelIndex[spotsToRemove[2]], raio, true, false);
-											counterSum += ((Integer) isSpotVector.get(1)).intValue()
-													+ ((Integer) isSpotVector.get(2)).intValue()
-													+ ((Integer) isSpotVector.get(3)).intValue();
-											isSpotVector = isSpot(pixelIndex[spotsToRemove[3]], raio, true, false);
-											counterSum += ((Integer) isSpotVector.get(1)).intValue()
-													+ ((Integer) isSpotVector.get(2)).intValue()
-													+ ((Integer) isSpotVector.get(3)).intValue();
+											int counterSum = spotInformation.sumCounters();
+											spotInformation = getSpotInformation(pixelIndex[spotsToRemove[1]], raio, true, false);
+											counterSum += spotInformation.sumCounters();
+											spotInformation = getSpotInformation(pixelIndex[spotsToRemove[2]], raio, true, false);
+											counterSum += spotInformation.sumCounters();
+											spotInformation = getSpotInformation(pixelIndex[spotsToRemove[3]], raio, true, false);
+											counterSum += spotInformation.sumCounters();
 											if (testDieSize == 6 && externalCounter > 1) {
 												vDie = removeSpot(vDie, vDieIndex, indexd);
 												x = removeArrayEntry(x, indexd);
@@ -3361,8 +3338,8 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		boolean isSpotCountOK = checkSpotCount(distance, spotCount, pixelIndex, maxClusterSize);
 		boolean areSpotsOK = true;
 		for (int i = 0; i < spotCount && areSpotsOK; i++) {
-			areSpotsOK = ((Boolean) isSpot(pixelIndex[i], raio, vDie[vDieIndex].size() - 1 >= 6 ? true : false,
-					vDie[vDieIndex].size() - 1 == 1 ? true : false).get(0)).booleanValue();
+			areSpotsOK = getSpotInformation(pixelIndex[i], raio, vDie[vDieIndex].size() - 1 >= 6 ? true : false,
+					vDie[vDieIndex].size() - 1 == 1 ? true : false).isSpot();
 		}// for_i
 		final int maxWhileCounter = 6;
 		// System.out.println("SpotCount: "+spotCount);
@@ -3527,7 +3504,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 				 * }//for_i
 				 */
 
-				if (!((Boolean) isSpot(pixelIndex[1], raio, isProbableSix1, false).get(0)).booleanValue()) {
+				if (!getSpotInformation(pixelIndex[1], raio, isProbableSix1, false).isSpot()) {
 					// System.out.println("is not Spot");
 					vDie = removeSpot(vDie, vDieIndex, 1);
 					x = removeArrayEntry(x, 1);
@@ -3535,8 +3512,8 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 					pixelIndex = removeArrayEntry(pixelIndex, 1);
 					clusterCenters = getClusterCenters(vDie);
 				}// if
-				if (!((Boolean) isSpot(pixelIndex[0], raio, isProbableSix0,
-						(vDie[vDieIndex].size() == 1) ? true : false).get(0)).booleanValue()) {
+				if (!getSpotInformation(pixelIndex[0], raio, isProbableSix0,
+						(vDie[vDieIndex].size() == 1) ? true : false).isSpot()) {
 					// System.out.println("Is not Spot!");
 					vDie = removeSpot(vDie, vDieIndex, 0);
 					x = removeArrayEntry(x, 0);
@@ -4321,17 +4298,13 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		// System.out.println(x1 + ", " + y1);
 
 		final int pixelIndex1 = y1 * imageWidth + x1;
-		boolean isRelaxedSpot = true;
-		// check if it's a spot. if not, remove the cluster!
-		if (isSpot(pixelIndex1, raio, true, false).get(0).equals(Boolean.FALSE)) {
-			isRelaxedSpot = false;
-		}// if
-		final java.util.Vector isSpotVector = isSpot(pixelIndex1, raio, false, true);
+		boolean isRelaxedSpot = !getSpotInformation(pixelIndex1, raio, true, false).isSpot();
+		final SpotInformation spotInformation = getSpotInformation(pixelIndex1, raio, false, true);
 		final int maxZeroCount = 1, maxOneCount = 2, maxMaxCount = 1;
-		if (!isRelaxedSpot && isSpotVector.get(0).equals(Boolean.FALSE)
-				&& ((Integer) isSpotVector.get(1)).intValue() > maxZeroCount
-				|| ((Integer) isSpotVector.get(2)).intValue() > maxOneCount
-				|| ((Integer) isSpotVector.get(3)).intValue() > maxMaxCount) {
+		if (!isRelaxedSpot && !spotInformation.isSpot()
+				&& spotInformation.getZeroCounter() > maxZeroCount
+				|| spotInformation.getOneCounter() > maxOneCount
+				|| spotInformation.getMaxCounter() > maxMaxCount) {
 			// System.out.println("spot " + vDie[vDieIndex].get(0) +
 			// " is not spot!");
 			vDie = removeSpot(vDie, vDieIndex, 0);
@@ -4586,8 +4559,8 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 			final int xa = x[indexa];
 			final int ya = y[indexa];
 			boolean removed = false;
-			final boolean aIsSpot = ((Boolean) isSpot(pixelIndex[indexa], raio, spotCount < 6 ? false : true,
-					spotCount == 1 ? true : false).get(0)).booleanValue();
+			final boolean aIsSpot = getSpotInformation(pixelIndex[indexa], raio, spotCount < 6 ? false : true,
+					spotCount == 1 ? true : false).isSpot();
 			for (int indexb = 0; indexb < spotCount; indexb++) {
 				// System.out.println(">>Before!   spotCount:" + spotCount +
 				// ", indexa:" + indexa + ", indexb:" + indexb);
@@ -4723,10 +4696,8 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 				// get worst spot, to remove!
 				final int[] counter = new int[3];
 				for (int i = 0; i < spotCount; i++) {
-					final java.util.Vector isSpotVector = isSpot(pixelIndex[i], raio, true, false);
-					counter[i] = ((Integer) isSpotVector.get(1)).intValue();
-					counter[i] += ((Integer) isSpotVector.get(2)).intValue();
-					counter[i] += ((Integer) isSpotVector.get(3)).intValue();
+					final SpotInformation spotInformation = getSpotInformation(pixelIndex[i], raio, true, false);
+					counter[i] = spotInformation.sumCounters();
 				}// for_i
 				int worstSpot = -1;
 				int counterTemp = 0;
@@ -4848,9 +4819,9 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 			 */
 			// System.out.println("checking spot " + vDie[vDieIndex].get(index)
 			// + ", ("+x[index]+", "+y[index]+"),");
-			final java.util.Vector isSpotVector = isSpot(pixelIndex[index], raio, isProbableSix, spotCount == 1 ? true
+			final SpotInformation spotInformation = getSpotInformation(pixelIndex[index], raio, isProbableSix, spotCount == 1 ? true
 					: false);
-			if (isSpotVector.get(0).equals(Boolean.FALSE)) {
+			if (!spotInformation.isSpot()) {
 				// System.out.println("Is not Spot!");
 				// System.out.println("zeroCounter:"+tempVector.get(1)+"; oneCounter:"+tempVector.get(2)+"; maxCounter:"+tempVector.get(3)+"; isProbableSix:"+isProbableSix);
 				vDie = removeSpot(vDie, vDieIndex, index);
@@ -5504,5 +5475,88 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 
 		return vDieXYpI;
 	}// checkSpotsFromOthers
+
+	private class SpotInformation {
+		private boolean isSpot;
+		private int zeroCounter;
+		private int oneCounter;
+		private int maxCounter;
+
+		/**
+		 * Creates the <code>AnalysisPanel.SpotInformation</code>.
+		 */
+		public SpotInformation() {
+			this(false, 0, 0, 0);
+		}
+
+		public SpotInformation(boolean isSpot, int zeroCounter, int oneCounter, int maxCounter) {
+			super();
+			this.isSpot = isSpot;
+			this.zeroCounter = zeroCounter;
+			this.oneCounter = oneCounter;
+			this.maxCounter = maxCounter;
+		}
+
+		/**
+		 * @return the isSpot
+		 */
+		public boolean isSpot() {
+			return isSpot;
+		}
+
+		/**
+		 * @param isSpot the isSpot to set
+		 */
+		public void setSpot(boolean isSpot) {
+			this.isSpot = isSpot;
+		}
+
+		/**
+		 * @return the zeroCounter
+		 */
+		public int getZeroCounter() {
+			return zeroCounter;
+		}
+
+		/**
+		 * @param zeroCounter the zeroCounter to set
+		 */
+		public void setZeroCounter(int zeroCounter) {
+			this.zeroCounter = zeroCounter;
+		}
+
+		/**
+		 * @return the oneCounter
+		 */
+		public int getOneCounter() {
+			return oneCounter;
+		}
+
+		/**
+		 * @param oneCounter the oneCounter to set
+		 */
+		public void setOneCounter(int oneCounter) {
+			this.oneCounter = oneCounter;
+		}
+
+		/**
+		 * @return the maxCounter
+		 */
+		public int getMaxCounter() {
+			return maxCounter;
+		}
+
+		/**
+		 * @param maxCounter the maxCounter to set
+		 */
+		public void setMaxCounter(int maxCounter) {
+			this.maxCounter = maxCounter;
+		}
+
+		public int sumCounters() {
+			return zeroCounter + oneCounter + maxCounter;
+		}
+
+	}
 
 }
