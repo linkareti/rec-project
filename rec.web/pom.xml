@@ -431,7 +431,7 @@
 				<configuration>
 					<packageSpace>com.linkare.rec.web.wsgen.moodle</packageSpace>
 					<sourceDirectory>src/main/resources</sourceDirectory>
-					<outputDirectory>src/main/java</outputDirectory>
+					<!--  outputDirectory>src/main/java</outputDirectory-->
 				</configuration>
 			</plugin>
 
