@@ -28,6 +28,14 @@ advanced.experiment.list=vpend2m
 #the experiments defined in the experiment.list
 #experiment.name=vtiro
 
+#In case you wish to run a specific multicastcontroller
+#please define the following property to enable
+#just that lab. In every case,
+#the main targets will compile/build/distribute all
+#the labs  defined in the lab.list
+#lab.name=basic
+
+
 ###DEPLOYMENT####
 rec.server=
 rec.server.dir=
@@ -133,7 +141,6 @@ j2se-version=1.6
 #Newface Main Class - pt.utl.ist.elab.client.FullClientNewInterface
 client.main-class=pt.utl.ist.elab.client.FullClientNewInterface
 multicast.main-class=com.linkare.rec.impl.multicast.startup.MultiCastControllerMain
-experiment.client.main-class=pt.utl.ist.elab.client.@{experiment.name}.ClientMain
 experiment.driver.main-class=pt.utl.ist.elab.driver.@{experiment.name}.ServerMain
 
 
