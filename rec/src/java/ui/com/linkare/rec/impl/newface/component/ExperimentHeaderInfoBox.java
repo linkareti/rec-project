@@ -1,17 +1,8 @@
-/*
- * ExperimentHeaderInfoBox.java created on Mar 3, 2010
- *
- * Copyright 2009 HFernandes. All rights reserved.
- * HFernandes PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
-
 package com.linkare.rec.impl.newface.component;
 
-import java.util.logging.Logger;
 
 /**
- * 
- * @author hfernandes
+ * @author Henrique Fernandes - Linkare TI
  */
 public class ExperimentHeaderInfoBox extends AbstractContentPane {
 
@@ -20,7 +11,7 @@ public class ExperimentHeaderInfoBox extends AbstractContentPane {
 	 */
 	private static final long serialVersionUID = 8076617391211166322L;
 
-	private static final Logger log = Logger.getLogger(ExperimentHeaderInfoBox.class.getName());
+	//private static final Logger LOGGER = Logger.getLogger(ExperimentHeaderInfoBox.class.getName());
 
 	public static final String CLOSE_ME = "close me";
 

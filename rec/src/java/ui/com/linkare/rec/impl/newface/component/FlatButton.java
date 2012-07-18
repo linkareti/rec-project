@@ -1,9 +1,3 @@
-/* 
- * FlatButton.java created on 2009/04/28
- *
- * Copyright 2009 Linkare TI. All rights reserved.
- * Linkare TI PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.linkare.rec.impl.newface.component;
 
 import java.awt.Color;
@@ -58,7 +52,7 @@ public class FlatButton extends JButton implements Serializable {
 	}
 
 	/**
-	 * @param gradientTopOff the gradientTop to set
+	 * @param gradientTop the gradientTop to set
 	 */
 	public void setGradientTop(final Color gradientTop) {
 		this.gradientTop = gradientTop;

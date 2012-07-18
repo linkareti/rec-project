@@ -25,7 +25,12 @@ import javax.swing.JTextField;
  */
 public class SendMailBox extends GradientPane {
 
-    /** Creates new form SendMailBox */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1753733883801472238L;
+	
+	/** Creates new form SendMailBox */
     public SendMailBox() {
         initComponents();
         setFocusTraversalPolicyProvider(true);
@@ -118,7 +123,6 @@ public class SendMailBox extends GradientPane {
 
         btnSend.setText(bundle.getString("btnSend.text")); // NOI18N
         btnSend.setToolTipText(resourceMap.getString("btnSend.toolTipText")); // NOI18N
-        btnSend.setLabel(bundle.getString("btnSend.text")); // NOI18N
         btnSend.setName("btnSend"); // NOI18N
 
         btnCancel.setText(bundle.getString("btnCancel.text")); // NOI18N

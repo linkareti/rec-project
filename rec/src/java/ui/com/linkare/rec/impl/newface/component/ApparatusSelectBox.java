@@ -1,27 +1,15 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * ApparatusSelectBox.java
- *
- * Created on 20/Abr/2009, 11:06:21
- */
-
 package com.linkare.rec.impl.newface.component;
 
-import java.util.logging.Logger;
+import java.util.ResourceBundle;
 
 import org.jdesktop.application.Action;
 
 import com.linkare.rec.impl.newface.ReCApplication;
 import com.linkare.rec.impl.newface.ReCFrameView;
-import java.util.ResourceBundle;
 
 /**
  * 
- * @author Henrique Fernandes
+ * @author Henrique Fernandes - Linkare TI
  */
 public class ApparatusSelectBox extends AbstractContentPane {
 
@@ -30,7 +18,7 @@ public class ApparatusSelectBox extends AbstractContentPane {
 	 */
 	private static final long serialVersionUID = 1241521721521486528L;
 
-	private static final Logger log = Logger.getLogger(ApparatusSelectBox.class.getName());
+//	private static final Logger LOGGER = Logger.getLogger(ApparatusSelectBox.class.getName());
 
 	private final ReCApplication recApplication = ReCApplication.getApplication();
 

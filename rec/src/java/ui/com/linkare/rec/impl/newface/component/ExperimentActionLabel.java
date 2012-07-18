@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.linkare.rec.impl.newface.component;
 
 import static com.linkare.rec.impl.newface.component.ExperimentActionLabel.State.GREEN;
@@ -11,7 +8,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
 /**
- * @author Henrique Fernandes
+ * @author Henrique Fernandes - Linkare TI
  */
 public class ExperimentActionLabel extends JLabel {
 
@@ -61,7 +58,7 @@ public class ExperimentActionLabel extends JLabel {
 
 	}
 
-	private State state;
+//	private State state;
 
 	public ExperimentActionLabel() {
 		this("Hello", GREEN);
@@ -74,7 +71,7 @@ public class ExperimentActionLabel extends JLabel {
 	}
 
 	public void setState(final State state) {
-		this.state = state;
+//		this.state = state;
 		updateStateUI(state);
 	}
 

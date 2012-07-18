@@ -1,14 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * VideoBox.java
- *
- * Created on 20/Abr/2009, 11:39:32
- */
-
 package com.linkare.rec.impl.newface.component;
 
 import java.awt.Canvas;
@@ -146,7 +135,7 @@ public class VideoBox extends AbstractContentPane {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+//    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblVideo;
     private java.awt.Canvas videoCanvas;
     private javax.swing.JPanel videoPanel;

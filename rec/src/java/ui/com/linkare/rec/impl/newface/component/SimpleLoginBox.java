@@ -8,7 +8,6 @@
 package com.linkare.rec.impl.newface.component;
 
 import java.awt.Color;
-import java.util.logging.Logger;
 
 import javax.swing.Icon;
 
@@ -30,7 +29,7 @@ public class SimpleLoginBox extends GradientPane {
 	 */
 	private static final long serialVersionUID = 904480755150126781L;
 
-	private static final Logger log = Logger.getLogger(SimpleLoginBox.class.getName());
+//	private static final Logger LOGGER = Logger.getLogger(SimpleLoginBox.class.getName());
 
 	private final ReCApplication recApplication = ReCApplication.getApplication();
 

@@ -1,17 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * ExperimentHistoryBox.java
- *
- * Created on 20/Abr/2009, 11:22:31
- */
-
 package com.linkare.rec.impl.newface.component;
 
-import java.util.logging.Logger;
 
 /**
  * 
@@ -23,7 +11,7 @@ public class ExperimentHistoryBox extends AbstractContentPane {
 	 * 
 	 */
 	private static final long serialVersionUID = -2266687057755910198L;
-	private static final Logger log = Logger.getLogger(ExperimentHistoryBox.class.getName());
+//	private static final Logger LOGGER = Logger.getLogger(ExperimentHistoryBox.class.getName());
 
 	/** Creates new form ExperimentHistoryBox */
 	public ExperimentHistoryBox() {

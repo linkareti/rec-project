@@ -1,14 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * Chat.java
- *
- * Created on 20/Abr/2009, 11:47:20
- */
-
 package com.linkare.rec.impl.newface.component;
 
 import java.awt.Color;
@@ -41,11 +30,10 @@ import com.linkare.rec.impl.events.ChatMessageEvent;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
-import java.util.Locale;
 
 /**
  * 
- * @author Henrique Fernandes
+ * @author Henrique Fernandes - Linkare TI
  */
 public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 
@@ -153,7 +141,7 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 
 	private EventQueue messageQueue = null;
 
-	private UserInfo[] usersList;
+//	private UserInfo[] usersList;
 
 	/** Creates new form Chat */
 	public Chat() {
