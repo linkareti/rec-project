@@ -1,0 +1,112 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/protected/backoffice.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle['menu.labsstatus.title']}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="labs_status_form" styleClass="elab_launch">
+            <h1><h:outputText value="#{bundle['rec.elab.title']}" /></h1>
+            <p:poll update="tabView" interval="60"
+                    listener="#{statusBean.updateLabStatus}" />
+            <p:accordionPanel id="tabView" var="lab" value="#{statusBean.labs}" dynamic="true" cache="true" activeIndex="-1">
+                <p:ajax event="tabChange" listener="#{statusBean.onTabChange}" update="tableExperiments"/>
+                <p:tab id="labTab" title="#{lab.description}" 
+                       titletip="#{(lab.available) ? statusBundle['tooltip.lab.available'] : statusBundle['tooltip.lab.unavailable'] }" 
+                       disabled="#{!lab.available}"
+                       titleStyleClass="#{(lab.available) ? 'ui-icon-available' : 'ui-icon-unavailable' }">  
+                    <script src="http://www.java.com/js/deployJava.js" />
+                    <p:scrollPanel mode="native" styleClass="scrollPanel" rendered="#{!empty statusBean.selectedLab}" >
+                        <p:dataTable id="tableExperiments" var="deployedExp"
+                                     value="#{statusBean.labExperiments}" rendered="#{lab.available}" style="margin-left: 10%">
+                            <p:column >
+                                <f:facet name="header">  
+                                    #{bundle['label.experiment.name']}
+                                </f:facet>
+                                <h:outputText value="#{deployedExp.experiment.name}" />
+                            </p:column>
+                            <p:column style="text-align: center;">
+                                <f:facet name="header">  
+                                    #{bundle['label.state']}
+                                </f:facet>
+                                <h:graphicImage library="images" name="available.gif"
+                                                rendered="#{deployedExp.labRunning}"
+                                                title="#{statusBundle['tooltip.experiment.available']}" />
+                                <h:graphicImage library="images" name="unavailable.gif"
+                                                rendered="#{!deployedExp.labRunning}"
+                                                title="#{statusBundle['tooltip.experiment.unavailable']}" />
+                            </p:column>
+                            <p:column style="text-align: center;">
+                                <f:facet name="header">  
+                                    #{bundle['label.number.user']}
+                                </f:facet>
+                                <h:outputText value="#{deployedExp.numberOfUsers}"
+                                              title="#{statusBundle['tooltip.experiment.users']}" />
+                            </p:column>
+                            <p:column style="text-align: center;">
+                                <f:facet name="header">  
+                                    Chat
+                                </f:facet>
+
+                                <p:commandLink hreflang="#" process="@this" update="chatDlg" oncomplete="dlg.show();" >
+                                    <h:graphicImage library="images" name="chat.png" rendered="#{deployedExp.numberOfUsers > 0}" title="Chat online" />
+                                    <f:setPropertyActionListener target="#{chatBean.selectedExperimentLab}"
+                                                                 value="#{deployedExp}" />
+                                    <f:setPropertyActionListener target="#{chatBean.selectedLab}"
+                                                                 value="#{lab}" />
+                                </p:commandLink>
+                                <h:graphicImage library="images" name="chatOff.png" rendered="#{deployedExp.numberOfUsers == 0}" title="Chat offline"/>
+                            </p:column>
+                            <p:column style="width:120px; text-align: center; height: 50%;">
+                                
+                                <a href="javascript:var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + '../../#{deployedExp.experiment.state.url}'; if (!deployJava.isWebStartInstalled('1.6')) {if (deployJava.installLatestJRE()) {if (deployJava.launch(url)) {}}} else {if (deployJava.launch(url)) {}}"
+                                   title="#{statusBundle['tooltip.experiment.launch']}" 
+                                   rel="#{statusBundle['tooltip.experiment.launch']}" target="_blank">
+                                    <h:graphicImage library="images" name="webstart.png" rendered="#{deployedExp.labRunning}"/>
+                                </a>
+                                #{facesContext.externalContext.requestContextPath}
+                                #{pageContext.request.contextPath}
+                                #{request.contextPath}
+                            </p:column>
+                            
+                        </p:dataTable>
+                    </p:scrollPanel>
+                </p:tab>  
+            </p:accordionPanel>
+        </h:form>
+        <h:form id="chat">
+            <p:contextMenu for="userConnnected">  
+                <p:menuitem value="Kick" update="userConnnected" icon="ui-icon-close" actionListener="#{chatBean.kickUser}" process="@this"/>
+            </p:contextMenu> 
+            <p:poll update="userConnnected" interval="5"
+                    listener="#{chatBean.refreshUserConnected}" />
+            <p:poll update="messageReceived" interval="2"
+                    listener="#{chatBean.refreshMessageReceived}" />
+            <p:dialog header="Chat" widgetVar="dlg" minimizable="true" resizable="false" id="chatDlg" width="550">
+                <p:ajax event="close" listener="#{chatBean.handleClose}" update="messageReceived"/>  
+                <h:panelGroup>
+                    <h:inputTextarea value="#{chatBean.messageReceived}" id="messageReceived" 
+                                     readonly="true" cols="55" rows="10" styleClass="messageReceived" />
+                    <p:separator />  
+                    <p:inputText value="#{chatBean.message}" styleClass="messageInput" style="width:82%;" id="messageInput" autocomplete="false">  
+                        <p:ajax event="change" />
+                    </p:inputText>
+                    <p:spacer width="5" />  
+                    <p:commandButton id="btnSend" value=" #{bundle['operation.send']}" action="#{chatBean.send}" 
+                                     process="@this" update="messageReceived messageInput setFocus" /> 
+                    <div style="float: right; height: 150px; margin-top: -40%; width: 27%;">
+                        <p:selectOneMenu  value="#{chatBean.selectedUser}" id="userConnnected" style="width: 120px;">
+                            <f:selectItem itemLabel="#{bundle['label.everyone']}" itemValue="#{bundle['label.everyone']}" />  
+                            <f:selectItems value="#{chatBean.usersExperiment}" />  
+                        </p:selectOneMenu>
+                    </div>
+                </h:panelGroup>
+                <p:focus id="setFocus" for="messageInput" />
+            </p:dialog>
+        </h:form>
+        
+    </ui:define>
+</ui:composition>
