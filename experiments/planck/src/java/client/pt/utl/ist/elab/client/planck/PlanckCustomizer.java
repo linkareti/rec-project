@@ -111,7 +111,7 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0)));
 		jRadioButtonVar.setSelected(true);
-		jRadioButtonVar.setText(ReCResourceBundle.findString("planck$rec.exp.customizer.title.1.check.1"));
+		jRadioButtonVar.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.1.check.1","planck$rec.exp.customizer.title.1.check.1"));
 		buttonGroup1.add(jRadioButtonVar);
 		jRadioButtonVar.addItemListener(new java.awt.event.ItemListener() {
 			@Override
@@ -124,7 +124,7 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
 		jPanel4.add(jRadioButtonVar, gridBagConstraints);
 
-		jRadioButtonFix.setText(ReCResourceBundle.findString("planck$rec.exp.customizer.title.1.check.2"));
+		jRadioButtonFix.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.1.check.2","planck$rec.exp.customizer.title.1.check.2"));
 		buttonGroup1.add(jRadioButtonFix);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
@@ -140,33 +140,33 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 		jPanel5.setLayout(new java.awt.GridLayout(1, 2));
 
 		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("planck$rec.exp.customizer.title.2")));
+				.findStringOrDefault("planck$rec.exp.customizer.title.2","planck$rec.exp.customizer.title.2")));
 		jPanel5.setMinimumSize(new java.awt.Dimension(350, 150));
 		jPanel5.setPreferredSize(new java.awt.Dimension(350, 150));
 		jPanel8.setLayout(new java.awt.GridLayout(4, 1));
 
 		jPanel8.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("planck$rec.exp.customizer.title.2.1")));
+				.findStringOrDefault("planck$rec.exp.customizer.title.2.1","planck$rec.exp.customizer.title.2.1")));
 		jPanel8.setMinimumSize(new java.awt.Dimension(117, 200));
 		jPanel8.setPreferredSize(new java.awt.Dimension(117, 200));
 		jRadioButtonColor1.setForeground(new java.awt.Color(204, 51, 255));
 		jRadioButtonColor1.setSelected(true);
-		jRadioButtonColor1.setText(ReCResourceBundle.findString("planck$rec.exp.customizer.title.2.1.check.1"));
+		jRadioButtonColor1.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.2.1.check.1","planck$rec.exp.customizer.title.2.1.check.1"));
 		buttonGroup2.add(jRadioButtonColor1);
 		jPanel8.add(jRadioButtonColor1);
 
 		jRadioButtonColor2.setForeground(new java.awt.Color(255, 255, 0));
-		jRadioButtonColor2.setText(ReCResourceBundle.findString("planck$rec.exp.customizer.title.2.1.check.2"));
+		jRadioButtonColor2.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.2.1.check.2","planck$rec.exp.customizer.title.2.1.check.2"));
 		buttonGroup2.add(jRadioButtonColor2);
 		jPanel8.add(jRadioButtonColor2);
 
 		jRadioButtonColor3.setForeground(new java.awt.Color(102, 204, 0));
-		jRadioButtonColor3.setText(ReCResourceBundle.findString("planck$rec.exp.customizer.title.2.1.check.3"));
+		jRadioButtonColor3.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.2.1.check.3","planck$rec.exp.customizer.title.2.1.check.3"));
 		buttonGroup2.add(jRadioButtonColor3);
 		jPanel8.add(jRadioButtonColor3);
 
 		jRadioButtonColor4.setForeground(new java.awt.Color(185, 185, 185));
-		jRadioButtonColor4.setText(ReCResourceBundle.findString("planck$rec.exp.customizer.title.2.1.check.4"));
+		jRadioButtonColor4.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.2.1.check.4","planck$rec.exp.customizer.title.2.1.check.4"));
 		buttonGroup2.add(jRadioButtonColor4);
 		jPanel8.add(jRadioButtonColor4);
 
@@ -175,7 +175,7 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 		jPanel9.setLayout(new java.awt.GridLayout(3, 2));
 
 		jPanel9.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("planck$rec.exp.customizer.title.2.2")));
+				.findStringOrDefault("planck$rec.exp.customizer.title.2.2","planck$rec.exp.customizer.title.2.2")));
 		jPanel9.setMinimumSize(new java.awt.Dimension(117, 200));
 		jPanel9.setPreferredSize(new java.awt.Dimension(117, 200));
 		jRadioButtonGray0.setForeground(new java.awt.Color(185, 185, 185));
@@ -216,7 +216,7 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
 		jPanel1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("planck$rec.exp.customizer.title.3")));
+				.findStringOrDefault("planck$rec.exp.customizer.title.3","planck$rec.exp.customizer.title.3")));
 		jPanel1.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel1.setPreferredSize(new java.awt.Dimension(350, 80));
 		jSliderAng.setMajorTickSpacing(10);
@@ -263,7 +263,7 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 		jPanel6.setLayout(new java.awt.GridBagLayout());
 
 		jPanel6.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("planck$rec.exp.customizer.title.4")));
+				.findStringOrDefault("planck$rec.exp.customizer.title.4","planck$rec.exp.customizer.title.4")));
 		jPanel6.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
 		jPanel6.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel6.setPreferredSize(new java.awt.Dimension(350, 80));
@@ -316,7 +316,7 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		jPanel2.setMinimumSize(new java.awt.Dimension(350, 42));
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
-		btnOK.setText(ReCResourceBundle.findString("planck$rec.exp.planck.lbl.ok"));
+		btnOK.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.planck.lbl.ok","planck$rec.exp.planck.lbl.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -329,7 +329,7 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.gridy = 1;
 		jPanel2.add(btnOK, gridBagConstraints);
 
-		btnCancel.setText(ReCResourceBundle.findString("planck$rec.exp.planck.lbl.cancel"));
+		btnCancel.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.planck.lbl.cancel","planck$rec.exp.planck.lbl.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -349,7 +349,7 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.weightx = 10.0;
 		jPanel2.add(jLabel1, gridBagConstraints);
 
-		btnDefaults.setText(ReCResourceBundle.findString("planck$rec.exp.dftcfg.planck.title.1"));
+		btnDefaults.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.dftcfg.planck.title.1","planck$rec.exp.dftcfg.planck.title.1"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -685,7 +685,7 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 
 	@Override
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findString("planck$rec.exp.customizer.title");
+		return ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title","planck$rec.exp.customizer.title");
 	}
 
 	@Override

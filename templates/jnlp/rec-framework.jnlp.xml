@@ -73,7 +73,7 @@
 
 		<!-- property name="rec.percent.freememory.threshold.serialization" value="80" 
 			/ -->
-		<property name="jnlp.packEnabled" value="true" />
+		<!--property name="jnlp.packEnabled" value="true" /-->
 
 	</resources>
 

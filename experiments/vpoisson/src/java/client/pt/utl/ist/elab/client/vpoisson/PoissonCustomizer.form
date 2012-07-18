@@ -785,7 +785,7 @@
             <Component class="javax.swing.JButton" name="btnOK">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/vpoisson/resources/messages.properties" key="rec.exp.customizer.title.ok" replaceFormat="ReCResourceBundle.findString(&quot;poisson${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/vpoisson/resources/messages.properties" key="rec.exp.customizer.title.ok" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;poisson${key}&quot;,&quot;poisson${key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>
@@ -795,7 +795,7 @@
             <Component class="javax.swing.JButton" name="btnCancel">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/vpoisson/resources/messages.properties" key="rec.exp.customizer.title.cancel" replaceFormat="ReCResourceBundle.findString(&quot;poisson${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/vpoisson/resources/messages.properties" key="rec.exp.customizer.title.cancel" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;poisson${key}&quot;,&quot;poisson${key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>
@@ -821,7 +821,7 @@
             <Component class="javax.swing.JButton" name="btnDefaults">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/vpoisson/resources/messages.properties" key="rec.exp.customizer.title.dfc" replaceFormat="ReCResourceBundle.findString(&quot;poisson${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/vpoisson/resources/messages.properties" key="rec.exp.customizer.title.dfc" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;poisson${key}&quot;,&quot;poisson${key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>

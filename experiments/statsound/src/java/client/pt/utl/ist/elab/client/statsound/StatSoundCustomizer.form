@@ -67,7 +67,7 @@
         <Component class="javax.swing.JButton" name="jButtonOK">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.ok" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.ok" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
             </Property>
             <Property name="name" type="java.lang.String" value="jButtonOK" noResource="true"/>
           </Properties>
@@ -83,7 +83,7 @@
         <Component class="javax.swing.JButton" name="jButtonCancel">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.cancel" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.cancel" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
             </Property>
             <Property name="name" type="java.lang.String" value="jButtonCancel" noResource="true"/>
           </Properties>
@@ -109,7 +109,7 @@
         <Component class="javax.swing.JButton" name="jButtonDefaults">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.dftcfg.statsound.title.1" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.dftcfg.statsound.title.1" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
             </Property>
             <Property name="name" type="java.lang.String" value="jButtonDefaults" noResource="true"/>
           </Properties>
@@ -192,7 +192,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Canais">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.channels" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.channels" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -336,7 +336,7 @@
                 <Component class="javax.swing.JCheckBox" name="jCheckBoxSoundVelocityHeat">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.heating" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.heating" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
                     </Property>
                     <Property name="name" type="java.lang.String" value="jCheckBoxSoundVelocityHeat" noResource="true"/>
                   </Properties>
@@ -348,7 +348,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="N&#xba; de amostras">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.nsamples" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.nsamples" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -401,7 +401,7 @@
                   <Properties>
                     <Property name="foreground" type="java.awt.Color" resourceKey="jLabelSoundVelocityNSamplesAlert.foreground"/>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.maxsamples" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.maxsamples" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="jLabelSoundVelocityNSamplesAlert" noResource="true"/>
@@ -428,7 +428,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Posi&#xe7;&#xe3;o do &#xea;mbolo [mm]">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.piston" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.piston" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -491,7 +491,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Forma de onda">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.waveform" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.waveform" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -528,7 +528,7 @@
                 <Component class="javax.swing.JLabel" name="jLabelSoundVelocityWaveForm">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.waveform" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.waveform" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
                     </Property>
                     <Property name="name" type="java.lang.String" value="jLabelSoundVelocityWaveForm" noResource="true"/>
                   </Properties>
@@ -551,7 +551,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Frequ&#xea;ncia [Hz]">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.frequency" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.frequency" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -631,7 +631,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Canais">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.channels" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.channels" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -777,7 +777,7 @@
                 <Component class="javax.swing.JCheckBox" name="jCheckBoxStatSoundIHeat">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.heating" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.heating" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
                     </Property>
                     <Property name="name" type="java.lang.String" value="jCheckBoxStatSoundIHeat" noResource="true"/>
                   </Properties>
@@ -789,7 +789,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="N&#xba; de amostras">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.nsamples" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.nsamples" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -847,7 +847,7 @@
                   <Properties>
                     <Property name="foreground" type="java.awt.Color" resourceKey="jLabelStatSoundINSamplesAlert.foreground"/>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.maxsamples" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.maxsamples" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="jLabelStatSoundINSamplesAlert" noResource="true"/>
@@ -874,7 +874,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Posi&#xe7;&#xe3;o inicial do &#xea;mbolo [mm]">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.pistonstart" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.pistonstart" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -941,7 +941,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Posi&#xe7;&#xe3;o final do &#xea;mbolo [mm]">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.pistonend" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.pistonend" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -1008,7 +1008,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Frequ&#xea;ncia [Hz]">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.frequency" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.frequency" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -1093,7 +1093,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Canais">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.channels" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.channels" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -1239,7 +1239,7 @@
                 <Component class="javax.swing.JCheckBox" name="jCheckBoxStatSoundIIHeat">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.heating" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.heating" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
                     </Property>
                     <Property name="name" type="java.lang.String" value="jCheckBoxStatSoundIIHeat" noResource="true"/>
                   </Properties>
@@ -1251,7 +1251,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="N&#xba; de amostras">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.nsamples" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.nsamples" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -1309,7 +1309,7 @@
                   <Properties>
                     <Property name="foreground" type="java.awt.Color" resourceKey="jLabelStatSoundIINSamplesAlert.foreground"/>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.maxsamples" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.maxsamples" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="jLabelStatSoundIINSamplesAlert" noResource="true"/>
@@ -1340,7 +1340,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Posi&#xe7;&#xe3;o do &#xea;mbolo [mm]">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.piston" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.piston" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -1407,7 +1407,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Frequ&#xea;ncia inicial [Hz]">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.freqstart" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.freqstart" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -1474,7 +1474,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Frequ&#xea;ncia final [Hz]">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.efreq" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.efreq" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;statsound${key}&quot;,&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>

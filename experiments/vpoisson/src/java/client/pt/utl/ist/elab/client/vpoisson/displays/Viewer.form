@@ -33,7 +33,7 @@
             <Component class="javax.swing.JButton" name="jButtonShowSolutionX">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/vpoisson/resources/messages.properties" key="rec.exp.poisson.show" replaceFormat="ReCResourceBundle.findString(&quot;poisson${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/vpoisson/resources/messages.properties" key="rec.exp.poisson.show" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;poisson${key}&quot;,&quot;poisson${key}&quot;)"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -105,7 +105,7 @@
             <Component class="javax.swing.JButton" name="jButtonShowSolutionY">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/vpoisson/resources/messages.properties" key="rec.exp.poisson.show" replaceFormat="ReCResourceBundle.findString(&quot;poisson${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/vpoisson/resources/messages.properties" key="rec.exp.poisson.show" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;poisson${key}&quot;,&quot;poisson${key}&quot;)"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -177,7 +177,7 @@
             <Component class="javax.swing.JButton" name="jButtonShowSolutionZ">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/vpoisson/resources/messages.properties" key="rec.exp.poisson.show" replaceFormat="ReCResourceBundle.findString(&quot;poisson${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/vpoisson/resources/messages.properties" key="rec.exp.poisson.show" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;poisson${key}&quot;,&quot;poisson${key}&quot;)"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -249,7 +249,7 @@
             <Component class="javax.swing.JLabel" name="jLabelXCut7">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/vpoisson/resources/messages.properties" key="rec.exp.poisson.cuts" replaceFormat="ReCResourceBundle.findString(&quot;poisson${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/vpoisson/resources/messages.properties" key="rec.exp.poisson.cuts" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;poisson${key}&quot;,&quot;poisson${key}&quot;)"/>
                 </Property>
               </Properties>
               <Constraints>

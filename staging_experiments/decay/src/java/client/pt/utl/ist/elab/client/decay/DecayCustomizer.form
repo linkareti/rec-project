@@ -25,7 +25,7 @@
         <Component class="javax.swing.JButton" name="btnOK">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.ok" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.ok" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
@@ -40,7 +40,7 @@
         <Component class="javax.swing.JButton" name="btnCancel">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.cancel" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.cancel" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
@@ -62,7 +62,7 @@
         <Component class="javax.swing.JButton" name="btnDefaults">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.dftcfg.decay.title.1" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.dftcfg.decay.title.1" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
@@ -129,7 +129,7 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Initial date">
-                          <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.inidate" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+                          <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.inidate" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
                         </TitledBorder>
                       </Border>
                     </Property>
@@ -152,7 +152,7 @@
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                                 <TitledBorder title="Dia">
-                                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.day" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+                                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.day" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
                                 </TitledBorder>
                               </Border>
                             </Property>
@@ -168,7 +168,7 @@
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                                 <TitledBorder title="Month">
-                                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.month" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+                                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.month" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
                                 </TitledBorder>
                               </Border>
                             </Property>
@@ -184,7 +184,7 @@
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                                 <TitledBorder title="Year">
-                                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.year" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+                                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.year" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
                                 </TitledBorder>
                               </Border>
                             </Property>
@@ -206,7 +206,7 @@
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                                 <TitledBorder title="Hours">
-                                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.hours" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+                                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.hours" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
                                 </TitledBorder>
                               </Border>
                             </Property>
@@ -222,7 +222,7 @@
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                                 <TitledBorder title="Minutes">
-                                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.minutes" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+                                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.minutes" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
                                 </TitledBorder>
                               </Border>
                             </Property>
@@ -242,7 +242,7 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="End date">
-                          <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.enddate" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+                          <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.enddate" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
                         </TitledBorder>
                       </Border>
                     </Property>
@@ -265,7 +265,7 @@
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                                 <TitledBorder title="Dia">
-                                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.day" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+                                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.day" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
                                 </TitledBorder>
                               </Border>
                             </Property>
@@ -276,7 +276,7 @@
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                                 <TitledBorder title="Month">
-                                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.month" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+                                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.month" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
                                 </TitledBorder>
                               </Border>
                             </Property>
@@ -287,7 +287,7 @@
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                                 <TitledBorder title="Year">
-                                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.year" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+                                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.year" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
                                 </TitledBorder>
                               </Border>
                             </Property>
@@ -313,7 +313,7 @@
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                                     <TitledBorder title="Hours">
-                                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.hours" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+                                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.hours" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
                                     </TitledBorder>
                                   </Border>
                                 </Property>
@@ -329,7 +329,7 @@
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                                     <TitledBorder title="Minutes">
-                                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.minutes" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+                                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.minutes" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
                                     </TitledBorder>
                                   </Border>
                                 </Property>
@@ -353,7 +353,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Detector Height [mm]">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.dheight" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.dheight" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -392,7 +392,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Material">
-              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.material" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.material" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -411,7 +411,7 @@
               <Image iconType="3" name="/pt/utl/ist/elab/client/decay/resources/wood.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.wood" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.wood" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupMaterial"/>
@@ -430,7 +430,7 @@
               <Image iconType="3" name="/pt/utl/ist/elab/client/decay/resources/corticite.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.cork" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.cork" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupMaterial"/>
@@ -449,7 +449,7 @@
               <Image iconType="3" name="/pt/utl/ist/elab/client/decay/resources/cobre2.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.copper1" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.copper1" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupMaterial"/>
@@ -468,7 +468,7 @@
               <Image iconType="3" name="/pt/utl/ist/elab/client/decay/resources/cobre4.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.copper2" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.copper2" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupMaterial"/>
@@ -487,7 +487,7 @@
               <Image iconType="3" name="/pt/utl/ist/elab/client/decay/resources/cobre8.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.copper3" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.copper3" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupMaterial"/>
@@ -506,7 +506,7 @@
               <Image iconType="3" name="/pt/utl/ist/elab/client/decay/resources/cobre16.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.copper4" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.copper4" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupMaterial"/>
@@ -525,7 +525,7 @@
               <Image iconType="3" name="/pt/utl/ist/elab/client/decay/resources/cobre32.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.copper5" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.copper5" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupMaterial"/>
@@ -544,7 +544,7 @@
               <Image iconType="3" name="/pt/utl/ist/elab/client/decay/resources/air.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.air" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.air" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupMaterial"/>
@@ -563,7 +563,7 @@
               <Image iconType="3" name="/pt/utl/ist/elab/client/decay/resources/chumbo.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.lead" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.lead" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupMaterial"/>
@@ -582,7 +582,7 @@
               <Image iconType="3" name="/pt/utl/ist/elab/client/decay/resources/brick.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.brick" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpDecay${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/decay/resources/messages.properties" key="rec.exp.decay.lbl.brick" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;decay${key}&quot;,&quot;decay${key}&quot;)"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupMaterial"/>

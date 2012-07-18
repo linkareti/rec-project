@@ -32,31 +32,31 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 	/** Creates new form MeteoConfig */
 	public MeteoCustomizer() {
 		initComponents();
-		jComboBoxMonthIni.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.jan"));
-		jComboBoxMonthIni.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.feb"));
-		jComboBoxMonthIni.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.mar"));
-		jComboBoxMonthIni.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.april"));
-		jComboBoxMonthIni.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.may"));
-		jComboBoxMonthIni.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.june"));
-		jComboBoxMonthIni.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.july"));
-		jComboBoxMonthIni.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.aug"));
-		jComboBoxMonthIni.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.sep"));
-		jComboBoxMonthIni.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.oct"));
-		jComboBoxMonthIni.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.nov"));
-		jComboBoxMonthIni.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.dec"));
+		jComboBoxMonthIni.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.jan","meteo$rec.exp.meteo.lbl.jan"));
+		jComboBoxMonthIni.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.feb","meteo$rec.exp.meteo.lbl.feb"));
+		jComboBoxMonthIni.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.mar","meteo$rec.exp.meteo.lbl.mar"));
+		jComboBoxMonthIni.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.april","meteo$rec.exp.meteo.lbl.april"));
+		jComboBoxMonthIni.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.may","meteo$rec.exp.meteo.lbl.may"));
+		jComboBoxMonthIni.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.june","meteo$rec.exp.meteo.lbl.june"));
+		jComboBoxMonthIni.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.july","meteo$rec.exp.meteo.lbl.july"));
+		jComboBoxMonthIni.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.aug","meteo$rec.exp.meteo.lbl.aug"));
+		jComboBoxMonthIni.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.sep","meteo$rec.exp.meteo.lbl.sep"));
+		jComboBoxMonthIni.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.oct","meteo$rec.exp.meteo.lbl.oct"));
+		jComboBoxMonthIni.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.nov","meteo$rec.exp.meteo.lbl.nov"));
+		jComboBoxMonthIni.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.dec","meteo$rec.exp.meteo.lbl.dec"));
 
-		jComboBoxMonthFinal.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.jan"));
-		jComboBoxMonthFinal.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.feb"));
-		jComboBoxMonthFinal.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.mar"));
-		jComboBoxMonthFinal.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.april"));
-		jComboBoxMonthFinal.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.may"));
-		jComboBoxMonthFinal.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.june"));
-		jComboBoxMonthFinal.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.july"));
-		jComboBoxMonthFinal.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.aug"));
-		jComboBoxMonthFinal.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.sep"));
-		jComboBoxMonthFinal.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.oct"));
-		jComboBoxMonthFinal.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.nov"));
-		jComboBoxMonthFinal.addItem(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.dec"));
+		jComboBoxMonthFinal.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.jan","meteo$rec.exp.meteo.lbl.jan"));
+		jComboBoxMonthFinal.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.feb","meteo$rec.exp.meteo.lbl.feb"));
+		jComboBoxMonthFinal.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.mar","meteo$rec.exp.meteo.lbl.mar"));
+		jComboBoxMonthFinal.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.april","meteo$rec.exp.meteo.lbl.april"));
+		jComboBoxMonthFinal.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.may","meteo$rec.exp.meteo.lbl.may"));
+		jComboBoxMonthFinal.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.june","meteo$rec.exp.meteo.lbl.june"));
+		jComboBoxMonthFinal.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.july","meteo$rec.exp.meteo.lbl.july"));
+		jComboBoxMonthFinal.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.aug","meteo$rec.exp.meteo.lbl.aug"));
+		jComboBoxMonthFinal.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.sep","meteo$rec.exp.meteo.lbl.sep"));
+		jComboBoxMonthFinal.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.oct","meteo$rec.exp.meteo.lbl.oct"));
+		jComboBoxMonthFinal.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.nov","meteo$rec.exp.meteo.lbl.nov"));
+		jComboBoxMonthFinal.addItem(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.dec","meteo$rec.exp.meteo.lbl.dec"));
 	}
 
 	/**
@@ -106,10 +106,10 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel2.setLayout(new java.awt.GridBagLayout());
 
 		jPanel2.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("meteo$rec.exp.meteo.lbl.res")));
+				.findStringOrDefault("meteo$rec.exp.meteo.lbl.res","meteo$rec.exp.meteo.lbl.res")));
 		jPanel2.setMinimumSize(new java.awt.Dimension(85, 60));
 		jPanel2.setPreferredSize(new java.awt.Dimension(85, 60));
-		jRadioButtonYear.setText(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.yearly"));
+		jRadioButtonYear.setText(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.yearly","meteo$rec.exp.meteo.lbl.yearly"));
 		buttonGroup1.add(jRadioButtonYear);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 3;
@@ -117,7 +117,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
 		jPanel2.add(jRadioButtonYear, gridBagConstraints);
 
-		jRadioButtonMonth.setText(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.monthly"));
+		jRadioButtonMonth.setText(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.monthly","meteo$rec.exp.meteo.lbl.monthly"));
 		buttonGroup1.add(jRadioButtonMonth);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 2;
@@ -125,7 +125,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
 		jPanel2.add(jRadioButtonMonth, gridBagConstraints);
 
-		jRadioButtonDay.setText(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.daily"));
+		jRadioButtonDay.setText(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.daily","meteo$rec.exp.meteo.lbl.daily"));
 		buttonGroup1.add(jRadioButtonDay);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
@@ -134,7 +134,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel2.add(jRadioButtonDay, gridBagConstraints);
 
 		jRadioButtonHour.setSelected(true);
-		jRadioButtonHour.setText(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.hourly"));
+		jRadioButtonHour.setText(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.hourly","meteo$rec.exp.meteo.lbl.hourly"));
 		buttonGroup1.add(jRadioButtonHour);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -151,15 +151,15 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel3.setLayout(new java.awt.GridBagLayout());
 
 		jPanel3.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("meteo$rec.exp.meteo.lbl.period")));
+				.findStringOrDefault("meteo$rec.exp.meteo.lbl.period","meteo$rec.exp.meteo.lbl.period")));
 		jPanel3.setMinimumSize(new java.awt.Dimension(350, 300));
 		jPanel3.setPreferredSize(new java.awt.Dimension(350, 150));
-		jLabel1.setText(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.startdate"));
+		jLabel1.setText(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.startdate","meteo$rec.exp.meteo.lbl.startdate"));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 0);
 		jPanel3.add(jLabel1, gridBagConstraints);
 
-		jLabel2.setText(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.enddate"));
+		jLabel2.setText(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.enddate","meteo$rec.exp.meteo.lbl.enddate"));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 3;
@@ -287,55 +287,55 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		gridBagConstraints.gridy = 5;
 		jPanel3.add(jComboBoxDayFinal, gridBagConstraints);
 
-		jLabel3.setText(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.hour"));
+		jLabel3.setText(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.hour","meteo$rec.exp.meteo.lbl.hour"));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
 		gridBagConstraints.gridy = 1;
 		jPanel3.add(jLabel3, gridBagConstraints);
 
-		jLabel4.setText(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.day"));
+		jLabel4.setText(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.day","meteo$rec.exp.meteo.lbl.day"));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 2;
 		gridBagConstraints.gridy = 1;
 		jPanel3.add(jLabel4, gridBagConstraints);
 
-		jLabel5.setText(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.month"));
+		jLabel5.setText(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.month","meteo$rec.exp.meteo.lbl.month"));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 3;
 		gridBagConstraints.gridy = 1;
 		jPanel3.add(jLabel5, gridBagConstraints);
 
-		jLabel6.setText(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.year"));
+		jLabel6.setText(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.year","meteo$rec.exp.meteo.lbl.year"));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 4;
 		gridBagConstraints.gridy = 1;
 		jPanel3.add(jLabel6, gridBagConstraints);
 
-		jLabel7.setText(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.hour"));
+		jLabel7.setText(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.hour","meteo$rec.exp.meteo.lbl.hour"));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
 		gridBagConstraints.gridy = 4;
 		jPanel3.add(jLabel7, gridBagConstraints);
 
-		jLabel8.setText(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.day"));
+		jLabel8.setText(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.day","meteo$rec.exp.meteo.lbl.day"));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 2;
 		gridBagConstraints.gridy = 4;
 		jPanel3.add(jLabel8, gridBagConstraints);
 
-		jLabel9.setText(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.month"));
+		jLabel9.setText(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.month","meteo$rec.exp.meteo.lbl.month"));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 3;
 		gridBagConstraints.gridy = 4;
 		jPanel3.add(jLabel9, gridBagConstraints);
 
-		jLabel10.setText(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.year"));
+		jLabel10.setText(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.year","meteo$rec.exp.meteo.lbl.year"));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 4;
 		gridBagConstraints.gridy = 4;
 		jPanel3.add(jLabel10, gridBagConstraints);
 
-		jButtonHour.setText(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.nowtime"));
+		jButtonHour.setText(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.nowtime","meteo$rec.exp.meteo.lbl.nowtime"));
 		jButtonHour.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonHourActionPerformed(evt);
@@ -355,7 +355,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		jPanel4.setLayout(new java.awt.BorderLayout());
 
-		jButtonOK.setText(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.ok"));
+		jButtonOK.setText(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.ok","meteo$rec.exp.meteo.lbl.ok"));
 		jButtonOK.setEnabled(false);
 		jButtonOK.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -365,7 +365,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		jPanel5.add(jButtonOK);
 
-		jButtonCancel.setText(ReCResourceBundle.findString("meteo$rec.exp.meteo.lbl.cancel"));
+		jButtonCancel.setText(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.meteo.lbl.cancel","meteo$rec.exp.meteo.lbl.cancel"));
 		jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonCancelActionPerformed(evt);
@@ -376,7 +376,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		jPanel4.add(jPanel5, java.awt.BorderLayout.WEST);
 
-		jButtonDefault1.setText(ReCResourceBundle.findString("meteo$rec.exp.dftcfg.meteo.title.1"));
+		jButtonDefault1.setText(ReCResourceBundle.findStringOrDefault("meteo$rec.exp.dftcfg.meteo.title.1","meteo$rec.exp.dftcfg.meteo.title.1"));
 		jButtonDefault1.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonDefault1ActionPerformed(evt);

@@ -61,7 +61,8 @@ public class ApparatusRenderer extends JLabel implements ListCellRenderer {
 			setIcon(ReCResourceBundle.findImageIconOrDefault(apparatus.getIconLocationBundleKey(), null));
 
 			// Text
-			setText(ReCResourceBundle.findString(apparatus.getDisplayStringBundleKey()));
+			String displayStringBundleKey = apparatus.getDisplayStringBundleKey();
+			setText(ReCResourceBundle.findStringOrDefault(displayStringBundleKey,displayStringBundleKey));
 
 			// State
 			setEnabled(apparatus.isEnabled());

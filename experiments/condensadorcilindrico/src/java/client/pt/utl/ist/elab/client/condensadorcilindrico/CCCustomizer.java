@@ -1,6 +1,12 @@
 package pt.utl.ist.elab.client.condensadorcilindrico;
 
-import com.linkare.rec.acquisition.WrongConfigurationException;
+import java.awt.Color;
+import java.text.MessageFormat;
+
+import javax.swing.JLabel;
+import javax.swing.JSlider;
+import javax.swing.JTextField;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.config.ParameterConfig;
 import com.linkare.rec.data.metadata.ChannelParameter;
@@ -8,13 +14,6 @@ import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.metadata.SamplesNumScale;
 import com.linkare.rec.impl.client.customizer.ICustomizerListener;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
-import java.awt.Color;
-import java.text.MessageFormat;
-import java.util.Hashtable;
-import javax.swing.JLabel;
-import javax.swing.JSlider;
-import javax.swing.JTextField;
-
 /**
  * 
  * @author Ricardo Espírito Santo - Linkare TI
@@ -125,7 +124,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         jPanel3.setMinimumSize(new java.awt.Dimension(350, 160));
         jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.Y_AXIS));
 
-        jPanelInitialPosition.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("condensadorcilindrico$rec.exp.customizer.title1"))); // NOI18N
+        jPanelInitialPosition.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("condensadorcilindrico$rec.exp.customizer.title1","condensadorcilindrico$rec.exp.customizer.title1"))); // NOI18N
         jPanelInitialPosition.setMinimumSize(new java.awt.Dimension(350, 106));
         jPanelInitialPosition.setPreferredSize(new java.awt.Dimension(350, 106));
         jPanelInitialPosition.setLayout(new java.awt.GridBagLayout());
@@ -174,7 +173,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         jPanel3.add(jPanelInitialPosition);
         jPanelInitialPosition.getAccessibleContext().setAccessibleName(bundle.getString("rec.exp.customizer.title1")); // NOI18N
 
-        jPanelFinalPosition.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("condensadorcilindrico$rec.exp.customizer.title2"))); // NOI18N
+        jPanelFinalPosition.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("condensadorcilindrico$rec.exp.customizer.title2","condensadorcilindrico$rec.exp.customizer.title2"))); // NOI18N
         jPanelFinalPosition.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         jPanelFinalPosition.setMinimumSize(new java.awt.Dimension(350, 106));
         jPanelFinalPosition.setPreferredSize(new java.awt.Dimension(350, 106));
@@ -224,7 +223,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         jPanel3.add(jPanelFinalPosition);
         jPanelFinalPosition.getAccessibleContext().setAccessibleName(bundle.getString("rec.exp.customizer.title2")); // NOI18N
 
-        jPanelNumberOfPoints.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("condensadorcilindrico$rec.exp.customizer.title3"))); // NOI18N
+        jPanelNumberOfPoints.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("condensadorcilindrico$rec.exp.customizer.title3","condensadorcilindrico$rec.exp.customizer.title3"))); // NOI18N
         jPanelNumberOfPoints.setMinimumSize(new java.awt.Dimension(350, 106));
         jPanelNumberOfPoints.setPreferredSize(new java.awt.Dimension(350, 106));
         jPanelNumberOfPoints.setLayout(new java.awt.GridBagLayout());
@@ -353,7 +352,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         
         
         if (!valid) {
-            String errorMsg = ReCResourceBundle.findString("condensadorcilindrico$rec.exp.cc.customizer.validation.numberOfPointsSmallerThanPosDiff");
+            String errorMsg = ReCResourceBundle.findStringOrDefault("condensadorcilindrico$rec.exp.cc.customizer.validation.numberOfPointsSmallerThanPosDiff","condensadorcilindrico$rec.exp.cc.customizer.validation.numberOfPointsSmallerThanPosDiff");
             int minNumPoints= MINIMUM_NUMBER_OF_POINTS;
             int maxNumPointsInterval = Math.max(maxNumPoints, minNumPoints);
             errorMsg = MessageFormat.format(errorMsg, minNumPoints, maxNumPointsInterval);
@@ -559,12 +558,12 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
     @Override
     public javax.swing.ImageIcon getCustomizerIcon() {
-        return new javax.swing.ImageIcon(ReCResourceBundle.findString("condensadorcilindrico$rec.exp.icon.cc"));
+        return new javax.swing.ImageIcon(ReCResourceBundle.findStringOrDefault("condensadorcilindrico$rec.exp.icon.cc","condensadorcilindrico$rec.exp.icon.cc"));
     }
 
     @Override
     public String getCustomizerTitle() {
-        return ReCResourceBundle.findString("condensadorcilindrico$rec.exp.cc.customizer.title");
+        return ReCResourceBundle.findStringOrDefault("condensadorcilindrico$rec.exp.cc.customizer.title","condensadorcilindrico$rec.exp.cc.customizer.title");
     }
 
     @Override

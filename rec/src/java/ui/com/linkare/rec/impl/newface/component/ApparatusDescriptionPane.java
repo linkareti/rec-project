@@ -98,7 +98,7 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
 		}
 	    }
 
-	    lblApparatusName.setText(ReCResourceBundle.findString(displayStringBundleKey));
+	    lblApparatusName.setText(ReCResourceBundle.findStringOrDefault(displayStringBundleKey,displayStringBundleKey));
 	    // FIXME Set default icon
 	    lblApparatusImg.setIcon(ReCResourceBundle.findImageIconOrDefault(desktopLocationBundleKey, new ImageIcon()));
 

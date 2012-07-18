@@ -52,7 +52,7 @@
 		<extension name="Java3D" href="j3d.jnlp" />
 		<!--<extension name="JHelp" href="jhelp.jnlp"/>-->
 
-		<property name="jnlp.packEnabled" value="true" />
+		<!--property name="jnlp.packEnabled" value="true" /-->
 		
 		<property name="ReCFaceConfig" value="@codebase@/etc/ReCFaceConfig.xml" />
 
@@ -74,6 +74,9 @@
 		
 		<!-- Auto Connect ID -->
         <property name="rec.apparatus.autoconnect.id" value="@rec.apparatus.autoconnect.id@" />
+        
+        <!-- Auto Acquire Result -->
+        <property name="rec.apparatus.autoacquireresult" value="@rec.apparatus.autoacquireresult@" />
                
 		<!-- Processing manager thread pool -->
 		<property name="rec.processingmanager.threadPool.coresize"

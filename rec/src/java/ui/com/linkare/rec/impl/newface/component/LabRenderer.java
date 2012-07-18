@@ -60,7 +60,7 @@ public class LabRenderer extends JLabel implements ListCellRenderer {
 			setIcon(ReCResourceBundle.findImageIconOrDefault(lab.getIconLocationBundleKey(), null));
 
 			// Text
-			setText(ReCResourceBundle.findString(lab.getLabIdStringBundleKey()));
+			setText(ReCResourceBundle.findStringOrDefault(lab.getLabIdStringBundleKey(), lab.getLabIdStringBundleKey()));
 
 			// State
 			setEnabled(true);

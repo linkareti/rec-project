@@ -73,8 +73,8 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 
 		setToolTipText("");
 		setName("AleatorioCustomizerComponent");
-		numberOfSamplesPanel.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("aleatorio$rec.exp.aleatorio.lbl.nsamples")));
+		numberOfSamplesPanel.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"aleatorio$rec.exp.aleatorio.lbl.nsamples", "aleatorio$rec.exp.aleatorio.lbl.nsamples")));
 		numberOfSamplesPanel.setName("numberOfSamplesPanel");
 		numberOfSamplesSlider.setMajorTickSpacing(4);
 		numberOfSamplesSlider.setMaximum(20);
@@ -125,7 +125,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		add(numberOfSamplesPanel, new java.awt.GridBagConstraints());
 
 		soundDuration.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("aleatorio$rec.exp.aleatorio.lbl.sounddur")));
+				.findStringOrDefault("aleatorio$rec.exp.aleatorio.lbl.sounddur","aleatorio$rec.exp.aleatorio.lbl.sounddur")));
 		soundDuration.setName("soundDuration");
 		soundDurationSlider.setMajorTickSpacing(1700);
 		soundDurationSlider.setMaximum(10000);
@@ -166,14 +166,16 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		gridBagConstraints.gridy = 1;
 		add(soundDuration, gridBagConstraints);
 
-		watchMovieCheckBox.setText(ReCResourceBundle.findString("aleatorio$rec.exp.aleatorio.lbl.wmovie"));
+		watchMovieCheckBox.setText(ReCResourceBundle.findStringOrDefault("aleatorio$rec.exp.aleatorio.lbl.wmovie",
+				"aleatorio$rec.exp.aleatorio.lbl.wmovie"));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 2;
 		add(watchMovieCheckBox, gridBagConstraints);
 
 		okButton.setMnemonic('o');
-		okButton.setText(ReCResourceBundle.findString("aleatorio$rec.exp.aleatorio.lbl.ok"));
+		okButton.setText(ReCResourceBundle.findStringOrDefault("aleatorio$rec.exp.aleatorio.lbl.ok",
+				"aleatorio$rec.exp.aleatorio.lbl.ok"));
 		okButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -184,7 +186,8 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		buttonsPanel.add(okButton);
 
 		cancelButton.setMnemonic('c');
-		cancelButton.setText(ReCResourceBundle.findString("aleatorio$rec.exp.aleatorio.lbl.cancel"));
+		cancelButton.setText(ReCResourceBundle.findStringOrDefault("aleatorio$rec.exp.aleatorio.lbl.cancel",
+				"aleatorio$rec.exp.aleatorio.lbl.cancel"));
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -212,7 +215,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		frequency1Slider.setToolTipText("Select the Initial frequency of the sound wave.");
 		frequency1Slider.setValue(48);
 		frequency1Slider.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("aleatorio$rec.exp.aleatorio.lbl.1freq")));
+				.findStringOrDefault("aleatorio$rec.exp.aleatorio.lbl.1freq","aleatorio$rec.exp.aleatorio.lbl.1freq")));
 		frequency1Slider.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(final java.awt.event.MouseEvent evt) {
@@ -232,7 +235,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		frequency2Slider.setToolTipText("Select the final frequency of the sound wave.");
 		frequency2Slider.setValue(32);
 		frequency2Slider.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("aleatorio$rec.exp.aleatorio.lbl.ffreq")));
+				.findStringOrDefault("aleatorio$rec.exp.aleatorio.lbl.ffreq","aleatorio$rec.exp.aleatorio.lbl.ffreq")));
 		frequency2Slider.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(final java.awt.event.MouseEvent evt) {
@@ -581,7 +584,8 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 
 	@Override
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findString("aleatorio$rec.exp.aleatorio.customizer.title");
+		return ReCResourceBundle.findStringOrDefault("aleatorio$rec.exp.aleatorio.customizer.title",
+				"aleatorio$rec.exp.aleatorio.customizer.title");
 	}
 
 	@Override

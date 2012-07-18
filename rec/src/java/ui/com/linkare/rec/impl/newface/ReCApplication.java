@@ -173,7 +173,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 				ReCApplication.log.fine("Handling not connected!!!!!!!");
 				if (isApparatusVideoEnabled()) {
 					ReCApplication.log.info("Video is enable for the selected apparatus.");
-					playMedia(ReCResourceBundle.findString(currentApparatusConfig.getMediaConfig().getVideoLocation()));
+					String videoLocation = currentApparatusConfig.getMediaConfig().getVideoLocation();
+					playMedia(ReCResourceBundle.findStringOrDefault(videoLocation, videoLocation));
 				} else {
 					ReCApplication.log.info("Video isn't enable for the selected apparatus.");
 				}
@@ -288,7 +289,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	 */
 	public String getCurrentApparatusVideoLocation() {
 		if (isApparatusVideoEnabled()) {
-			return ReCResourceBundle.findString(currentApparatusConfig.getMediaConfig().getVideoLocation());
+			String videoLocation = currentApparatusConfig.getMediaConfig().getVideoLocation();
+			return ReCResourceBundle.findStringOrDefault(videoLocation, videoLocation);
 		}
 		return null;
 	}
@@ -297,7 +299,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	 * Plays the media for the current apparatus configuration.
 	 */
 	public void playMediaCurrentApparatus() {
-		playMedia(ReCResourceBundle.findString(currentApparatusConfig.getMediaConfig().getVideoLocation()));
+		String videoLocation = currentApparatusConfig.getMediaConfig().getVideoLocation();
+		playMedia(ReCResourceBundle.findStringOrDefault(videoLocation, videoLocation));
 	}
 
 	/**
@@ -664,7 +667,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 			String[] protocolHostMNameSplit = lab.getLocation().split("[@/]");
 			String[] hostPort = protocolHostMNameSplit[1].split(":");
-			String labName = ReCResourceBundle.findString(lab.getLabIdStringBundleKey());
+			String labIdStringBundleKey = lab.getLabIdStringBundleKey();
+			String labName = ReCResourceBundle.findStringOrDefault(labIdStringBundleKey, labIdStringBundleKey);
 
 			splash.refreshLabel(getRecApplicationBundle().getString("Application.splashScreen.resolve.host.message"),
 					hostPort[0], labName);
@@ -1172,8 +1176,9 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	@Override
 	public void apparatusConnected(final ApparatusConnectorEvent evt) {
 		// Load customizer
-		currentCustomizer = CustomizerUIUtil.loadCustomizer(ReCResourceBundle.findString(currentApparatusConfig
-				.getCustomizerClassLocationBundleKey()));
+		String customizerClassLocationBundleKey = currentApparatusConfig.getCustomizerClassLocationBundleKey();
+		currentCustomizer = CustomizerUIUtil.loadCustomizer(ReCResourceBundle.findStringOrDefault(
+				customizerClassLocationBundleKey, customizerClassLocationBundleKey));
 
 		// Set user info
 		if (currentCustomizer instanceof ICustomizerSecurity) {

@@ -48,7 +48,7 @@ public class FITSOpen extends javax.swing.JPanel implements com.linkare.rec.impl
 
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
-		jButtonOpen.setText(ReCResourceBundle.findString("telescopio$rec.exp.telescopio.lbl.open"));
+		jButtonOpen.setText(ReCResourceBundle.findStringOrDefault("telescopio$rec.exp.telescopio.lbl.open","telescopio$rec.exp.telescopio.lbl.open"));
 		jButtonOpen.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -58,7 +58,7 @@ public class FITSOpen extends javax.swing.JPanel implements com.linkare.rec.impl
 
 		jPanel1.add(jButtonOpen, new java.awt.GridBagConstraints());
 
-		jTabbedPaneOpen.addTab(ReCResourceBundle.findString("telescopio$rec.exp.telescopio.lbl.open"), jPanel1);
+		jTabbedPaneOpen.addTab(ReCResourceBundle.findStringOrDefault("telescopio$rec.exp.telescopio.lbl.open","telescopio$rec.exp.telescopio.lbl.open"), jPanel1);
 
 		add(jTabbedPaneOpen, java.awt.BorderLayout.CENTER);
 

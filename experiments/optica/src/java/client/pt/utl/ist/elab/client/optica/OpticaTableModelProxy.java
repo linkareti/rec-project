@@ -89,18 +89,19 @@ public class OpticaTableModelProxy extends DefaultTableModel implements ExpDataM
 	public String getColumnName(final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			if (columnIndex == 0) {
-				return ReCResourceBundle.findString("ReCUI$rec.ui.lbl.nodata");
+				return ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.lbl.nodata","ReCUI$rec.ui.lbl.nodata");
 			}
 			return null;
 		}
 		if (columnIndex == 0) {
-			return ReCResourceBundle.findString("ReCUI$rec.ui.table.model.column.sample");
+			return ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.table.model.column.sample","ReCUI$rec.ui.table.model.column.sample");
 		}
 
 		final int channelIndex = columnIndex - 1;
 
-		final String ch_name = ReCResourceBundle.findString(expDataModel.getChannelConfig(channelIndex)
-				.getChannelName());
+		String channelNameKey = expDataModel.getChannelConfig(channelIndex).getChannelName();
+		final String ch_name = ReCResourceBundle.findStringOrDefault(channelNameKey,channelNameKey);
+				
 		final String multiplier = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getMultiplier()
 				.toString();
 		final String ph_unit_symbol = expDataModel.getChannelConfig(channelIndex).getSelectedScale()

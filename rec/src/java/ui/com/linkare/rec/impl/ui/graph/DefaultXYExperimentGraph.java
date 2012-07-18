@@ -204,15 +204,17 @@ public class DefaultXYExperimentGraph extends javax.swing.JPanel implements ExpD
 
 		final Scale scaleX = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getSelectedScale();
 
-		final String chnX = ReCResourceBundle.findString(header.getChannelsConfig(
-				defaultXYDatasetProxy.getChannelDisplayX()).getChannelName());
+		String channelName = header.getChannelsConfig(
+				defaultXYDatasetProxy.getChannelDisplayX()).getChannelName();
+		final String chnX = ReCResourceBundle.findStringOrDefault(channelName,channelName);
 		final String pusX = scaleX.getPhysicsUnitSymbol();
 		final String multiplierX = scaleX.getMultiplier().toString();
 
 		final Scale scaleY = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getSelectedScale();
 
-		final String chnY = ReCResourceBundle.findString(header.getChannelsConfig(
-				defaultXYDatasetProxy.getChannelDisplayY()).getChannelName());
+		channelName = header.getChannelsConfig(
+				defaultXYDatasetProxy.getChannelDisplayY()).getChannelName();
+		final String chnY = ReCResourceBundle.findStringOrDefault(channelName,channelName);
 		final String pusY = scaleY.getPhysicsUnitSymbol();
 		final String multiplierY = scaleY.getMultiplier().toString();
 

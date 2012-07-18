@@ -66,7 +66,7 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		jPanel2.setMinimumSize(new java.awt.Dimension(350, 42));
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
-		btnOK.setText(ReCResourceBundle.findString("scuba$rec.exp.scuba.lbl.ok"));
+		btnOK.setText(ReCResourceBundle.findStringOrDefault("scuba$rec.exp.scuba.lbl.ok","scuba$rec.exp.scuba.lbl.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -79,7 +79,7 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		gridBagConstraints.gridy = 1;
 		jPanel2.add(btnOK, gridBagConstraints);
 
-		btnCancel.setText(ReCResourceBundle.findString("scuba$rec.exp.scuba.lbl.cancel"));
+		btnCancel.setText(ReCResourceBundle.findStringOrDefault("scuba$rec.exp.scuba.lbl.cancel","scuba$rec.exp.scuba.lbl.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -99,7 +99,7 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		gridBagConstraints.weightx = 10.0;
 		jPanel2.add(jLabel1, gridBagConstraints);
 
-		btnDefaults.setText(ReCResourceBundle.findString("scuba$rec.exp.dftcfg.scuba.title.1"));
+		btnDefaults.setText(ReCResourceBundle.findStringOrDefault("scuba$rec.exp.dftcfg.scuba.title.1","scuba$rec.exp.dftcfg.scuba.title.1"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -125,8 +125,8 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		jPanel3.setMinimumSize(new java.awt.Dimension(350, 160));
 		jPanel1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("scuba$rec.exp.customizer.title.1")));
-		checkCalib.setText(ReCResourceBundle.findString("scuba$rec.exp.customizer.title.1.check.1"));
+				.findStringOrDefault("scuba$rec.exp.customizer.title.1","scuba$rec.exp.customizer.title.1")));
+		checkCalib.setText(ReCResourceBundle.findStringOrDefault("scuba$rec.exp.customizer.title.1.check.1","scuba$rec.exp.customizer.title.1.check.1"));
 		jPanel1.add(checkCalib);
 
 		jPanel3.add(jPanel1);
@@ -134,7 +134,7 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel6.setLayout(new java.awt.GridBagLayout());
 
 		jPanel6.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("scuba$rec.exp.customizer.title.2")));
+				.findStringOrDefault("scuba$rec.exp.customizer.title.2","scuba$rec.exp.customizer.title.2")));
 		jPanel6.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
 		jPanel6.setMinimumSize(new java.awt.Dimension(350, 100));
 		jPanel6.setPreferredSize(new java.awt.Dimension(350, 100));
@@ -183,7 +183,7 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		lblErrorSamplesTooHigh.setForeground(new java.awt.Color(255, 0, 0));
 		lblErrorSamplesTooHigh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("scuba$rec.exp.customizer.title.2.label.1"));
+		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("scuba$rec.exp.customizer.title.2.label.1","scuba$rec.exp.customizer.title.2.label.1"));
 		lblErrorSamplesTooHigh.setEnabled(false);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -199,7 +199,7 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		jPanel5.setLayout(new java.awt.GridBagLayout());
 
 		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("scuba$rec.exp.customizer.title.3")));
+				.findStringOrDefault("scuba$rec.exp.customizer.title.3","scuba$rec.exp.customizer.title.3")));
 		jPanel5.setMinimumSize(new java.awt.Dimension(250, 350));
 		jPanel5.setPreferredSize(new java.awt.Dimension(250, 350));
 		sldPos1.setMajorTickSpacing(150);
@@ -256,7 +256,7 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 		lblErrorDeepsAreEqual.setForeground(new java.awt.Color(255, 0, 0));
 		lblErrorDeepsAreEqual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		lblErrorDeepsAreEqual.setText(ReCResourceBundle.findString("scuba$rec.exp.customizer.title.3.label.1"));
+		lblErrorDeepsAreEqual.setText(ReCResourceBundle.findStringOrDefault("scuba$rec.exp.customizer.title.3.label.1","scuba$rec.exp.customizer.title.3.label.1"));
 		lblErrorDeepsAreEqual.setEnabled(false);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -423,7 +423,7 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		lblErrorSamplesTooHigh.setEnabled(Math.abs(sldPos2.getValue() - sldPos1.getValue()) * 4.5 < sldNumSamples
 				.getValue());
 		btnOK.setEnabled(!lblErrorDeepsAreEqual.isEnabled() && !lblErrorSamplesTooHigh.isEnabled());
-		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("scuba$rec.exp.customizer.title.2.label.1")
+		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("scuba$rec.exp.customizer.title.2.label.1","scuba$rec.exp.customizer.title.2.label.1")
 				+ Math.min(500, (int) Math.floor(Math.abs(sldPos2.getValue() - sldPos1.getValue()) * 4.5)));
 	}
 

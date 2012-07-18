@@ -169,7 +169,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel6.setLayout(new java.awt.GridBagLayout());
 
 		jPanel6.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("pv$rec.exp.customizer.title2")));
+				.findStringOrDefault("pv$rec.exp.customizer.title2","pv$rec.exp.customizer.title2")));
 		jPanel6.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
 		jPanel6.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel6.setPreferredSize(new java.awt.Dimension(350, 80));
@@ -219,7 +219,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		lblErrorSamplesTooHigh.setForeground(new java.awt.Color(255, 0, 0));
 		lblErrorSamplesTooHigh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("pv$rec.exp.customizer.label2"));
+		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("pv$rec.exp.customizer.label2","pv$rec.exp.customizer.label2"));
 		lblErrorSamplesTooHigh.setEnabled(false);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -233,7 +233,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
 		jPanel1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("pv$rec.exp.customizer.title3")));
+				.findStringOrDefault("pv$rec.exp.customizer.title3","pv$rec.exp.customizer.title3")));
 		jPanel1.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel1.setPreferredSize(new java.awt.Dimension(350, 80));
 		sldFreq.setMajorTickSpacing(400);
@@ -278,7 +278,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		lblSamplingIntervalTooHigh.setForeground(new java.awt.Color(255, 0, 0));
 		lblSamplingIntervalTooHigh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		lblSamplingIntervalTooHigh.setText(ReCResourceBundle.findString("pv$rec.exp.customizer.label3"));
+		lblSamplingIntervalTooHigh.setText(ReCResourceBundle.findStringOrDefault("pv$rec.exp.customizer.label3","pv$rec.exp.customizer.label3"));
 		lblSamplingIntervalTooHigh.setEnabled(false);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -296,7 +296,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel5.setLayout(new java.awt.GridBagLayout());
 
 		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("pv$rec.exp.customizer.title1")));
+				.findStringOrDefault("pv$rec.exp.customizer.title1","pv$rec.exp.customizer.title1")));
 		jPanel5.setMinimumSize(new java.awt.Dimension(350, 160));
 		jPanel5.setPreferredSize(new java.awt.Dimension(350, 160));
 		sldPos1.setMajorTickSpacing(1000);
@@ -352,7 +352,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		lblErrorVolsAreEqua.setForeground(new java.awt.Color(255, 0, 0));
 		lblErrorVolsAreEqua.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		lblErrorVolsAreEqua.setText(ReCResourceBundle.findString("pv$rec.exp.customizer.label1"));
+		lblErrorVolsAreEqua.setText(ReCResourceBundle.findStringOrDefault("pv$rec.exp.customizer.label1","pv$rec.exp.customizer.label1"));
 		lblErrorVolsAreEqua.setEnabled(false);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -526,7 +526,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 				.setEnabled(Math.abs(sldPos2.getValue() - sldPos1.getValue()) * 80. / 1000.F < sldNumSamples.getValue());
 		btnOK.setEnabled(!lblErrorVolsAreEqua.isEnabled() && !lblErrorSamplesTooHigh.isEnabled()
 				&& !lblSamplingIntervalTooHigh.isEnabled());
-		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("pv$rec.exp.customizer.label2")
+		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("pv$rec.exp.customizer.label2","pv$rec.exp.customizer.label2")
 				+ (int) Math.floor(Math.abs(sldPos2.getValue() - sldPos1.getValue()) * 80. / 1000.F));
 	}
 
@@ -535,7 +535,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		lblSamplingIntervalTooHigh.setEnabled(sldFreq.getValue() > maxValue);
 		btnOK.setEnabled(!lblErrorVolsAreEqua.isEnabled() && !lblErrorSamplesTooHigh.isEnabled()
 				&& !lblSamplingIntervalTooHigh.isEnabled());
-		lblSamplingIntervalTooHigh.setText(ReCResourceBundle.findString("pv$rec.exp.customizer.label2")
+		lblSamplingIntervalTooHigh.setText(ReCResourceBundle.findStringOrDefault("pv$rec.exp.customizer.label2","pv$rec.exp.customizer.label2")
 				+ (int) maxValue);
 	}
 
@@ -707,7 +707,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 	@Override
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findString("pv$rec.exp.pv.customizer.title");
+		return ReCResourceBundle.findStringOrDefault("pv$rec.exp.pv.customizer.title","pv$rec.exp.pv.customizer.title");
 	}
 
 	@Override

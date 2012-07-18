@@ -44,7 +44,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="&lt;rec.exp.display.distances&gt;">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.distances" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.distances" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -60,10 +60,10 @@
                 <Component class="javax.swing.JLabel" name="jLabel4">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.beamblue" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.beamblue" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.tip.beamblue" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.tip.beamblue" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -105,10 +105,10 @@
                 <Component class="javax.swing.JLabel" name="jLabel5">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.cross" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.cross" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.tip.cross" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.tip.cross" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -149,10 +149,10 @@
                 <Component class="javax.swing.JLabel" name="jLabel6">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.d1" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.d1" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.tip.d1" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.tip.d1" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -193,10 +193,10 @@
                 <Component class="javax.swing.JLabel" name="jLabel7">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.d2" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.d2" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.tip.d2" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.tip.d2" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -238,10 +238,10 @@
                 <Component class="javax.swing.JLabel" name="jLabel8">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.p" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.p" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.tip.p" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.tip.p" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -284,10 +284,10 @@
                 <Component class="javax.swing.JLabel" name="jLabel9">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.ransac" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.ransac" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.tip.ransac" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.tip.ransac" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -332,12 +332,12 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="&lt;rec.exp.display.black&gt;">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.black" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.black" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.tip.black" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.tip.black" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -457,7 +457,7 @@
                 <Component class="javax.swing.JButton" name="jButtonB1Pick">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.pick" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.pick" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -472,7 +472,7 @@
                 <Component class="javax.swing.JButton" name="jButtonB1Select">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.selectcolor" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.selectcolor" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -491,12 +491,12 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="&lt;rec.exp.display.blue&gt;">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.blue" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.blue" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.tip.blue" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.tip.blue" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -616,7 +616,7 @@
                 <Component class="javax.swing.JButton" name="jButtonBluePick">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.pick" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.pick" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -631,7 +631,7 @@
                 <Component class="javax.swing.JButton" name="jButtonBlueSelect">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.selectcolor" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                      <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.selectcolor" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -666,7 +666,7 @@
             <Component class="javax.swing.JButton" name="jButtonEditOK">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.ok" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.ok" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>
@@ -676,7 +676,7 @@
             <Component class="javax.swing.JButton" name="jButtonEditCancel">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.cancel" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.cancel" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>
@@ -765,7 +765,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="&lt;rec.exp.display.original&gt;">
-                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.original" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.original" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -796,7 +796,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="&lt;rec.exp.display.edges&gt;">
-                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.edges" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.edges" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -830,7 +830,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="&lt;rec.exp.display.lines&gt;">
-                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.lines" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.lines" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -864,7 +864,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="&lt;rec.exp.display.align&gt;">
-                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.align" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.align" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -899,7 +899,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="&lt;rec.exp.display.beam&gt;">
-                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.beam" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.beam" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -933,7 +933,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="&lt;rec.exp.display.final&gt;">
-                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.final" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.final" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -992,7 +992,7 @@
             <Component class="javax.swing.JButton" name="jButtonEdit">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.changeanalysisvalues" replaceFormat="ReCResourceBundle.findString(&quot;thomson${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/thomson/resources/messages.properties" key="rec.exp.display.changeanalysisvalues" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;thomson${key}&quot;,&quot;thomson${key}&quot;)"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>

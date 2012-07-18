@@ -805,7 +805,7 @@ public class PinHoleCustomizerPanel extends javax.swing.JPanel implements com.li
 
     @Override
     public String getCustomizerTitle() {
-        return ReCResourceBundle.findString("pinhole$rec.exp.pinhole.customizer.title");
+        return ReCResourceBundle.findStringOrDefault("pinhole$rec.exp.pinhole.customizer.title","pinhole$rec.exp.pinhole.customizer.title");
     }
 
     @Override

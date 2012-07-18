@@ -17,7 +17,7 @@ public class StatsoundTable extends MultSeriesTable {
 	private static final String EXPERIMENT_TYPE = "experiment.type";
 
 	private static final String NAME = ReCResourceBundle
-			.findString("statsound$rec.exp.display.statsound.tip.statsoundTable");
+			.findStringOrDefault("statsound$rec.exp.display.statsound.tip.statsoundTable","statsound$rec.exp.display.statsound.tip.statsoundTable");
 
 	private TypeOfExperiment typeOfExperiment;
 

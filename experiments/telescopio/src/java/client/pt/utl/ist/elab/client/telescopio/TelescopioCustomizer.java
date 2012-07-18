@@ -89,7 +89,7 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 		jPanel2.setLayout(new java.awt.BorderLayout());
 
 		jPanel2.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("telescopio$rec.exp.telescopio.lbl.panelobjs")));
+				.findStringOrDefault("telescopio$rec.exp.telescopio.lbl.panelobjs","telescopio$rec.exp.telescopio.lbl.panelobjs")));
 		jPanel4.setLayout(new java.awt.BorderLayout());
 
 		jScrollPane1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -109,14 +109,14 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 
 		jPanel4.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-		jLabel3.setText(ReCResourceBundle.findString("telescopio$rec.exp.telescopio.lbl.chooseobj"));
+		jLabel3.setText(ReCResourceBundle.findStringOrDefault("telescopio$rec.exp.telescopio.lbl.chooseobj","telescopio$rec.exp.telescopio.lbl.chooseobj"));
 		jPanel4.add(jLabel3, java.awt.BorderLayout.NORTH);
 
 		jPanel2.add(jPanel4, java.awt.BorderLayout.WEST);
 
 		jPanel5.setLayout(new java.awt.BorderLayout());
 
-		jLabel2.setText(ReCResourceBundle.findString("telescopio$rec.exp.telescopio.lbl.objectinfo"));
+		jLabel2.setText(ReCResourceBundle.findStringOrDefault("telescopio$rec.exp.telescopio.lbl.objectinfo","telescopio$rec.exp.telescopio.lbl.objectinfo"));
 		jPanel5.add(jLabel2, java.awt.BorderLayout.NORTH);
 
 		jLabel1.setOpaque(true);
@@ -131,8 +131,8 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 		jPanel3.setLayout(new java.awt.GridBagLayout());
 
 		jPanel3.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("telescopio$rec.exp.telescopio.lbl.expotime")));
-		jRadioButtonTime.setText(ReCResourceBundle.findString("telescopio$rec.exp.telescopio.lbl.newtime"));
+				.findStringOrDefault("telescopio$rec.exp.telescopio.lbl.expotime","telescopio$rec.exp.telescopio.lbl.expotime")));
+		jRadioButtonTime.setText(ReCResourceBundle.findStringOrDefault("telescopio$rec.exp.telescopio.lbl.newtime","telescopio$rec.exp.telescopio.lbl.newtime"));
 		buttonGroup1.add(jRadioButtonTime);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -144,7 +144,7 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 		jPanel3.add(jRadioButtonTime, gridBagConstraints);
 
 		jRadioButtonDefault.setSelected(true);
-		jRadioButtonDefault.setText(ReCResourceBundle.findString("telescopio$rec.exp.telescopio.lbl.default"));
+		jRadioButtonDefault.setText(ReCResourceBundle.findStringOrDefault("telescopio$rec.exp.telescopio.lbl.default","telescopio$rec.exp.telescopio.lbl.default"));
 		buttonGroup1.add(jRadioButtonDefault);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -202,7 +202,7 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 
 		jPanel7.setLayout(new java.awt.GridBagLayout());
 
-		jButtonConfirm.setText(ReCResourceBundle.findString("telescopio$rec.exp.telescopio.lbl.ok"));
+		jButtonConfirm.setText(ReCResourceBundle.findStringOrDefault("telescopio$rec.exp.telescopio.lbl.ok","telescopio$rec.exp.telescopio.lbl.ok"));
 		jButtonConfirm.setMaximumSize(new java.awt.Dimension(20, 10));
 		jButtonConfirm.addActionListener(new java.awt.event.ActionListener() {
 			@Override
@@ -214,7 +214,7 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 
 		jPanel7.add(jButtonConfirm, new java.awt.GridBagConstraints());
 
-		jButtonCancel.setText(ReCResourceBundle.findString("telescopio$rec.exp.telescopio.lbl.cancel"));
+		jButtonCancel.setText(ReCResourceBundle.findStringOrDefault("telescopio$rec.exp.telescopio.lbl.cancel","telescopio$rec.exp.telescopio.lbl.cancel"));
 		jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {

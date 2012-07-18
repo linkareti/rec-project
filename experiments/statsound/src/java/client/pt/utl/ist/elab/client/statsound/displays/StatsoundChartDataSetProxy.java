@@ -87,35 +87,35 @@ public class StatsoundChartDataSetProxy extends org.jfree.data.xy.AbstractXYData
 		String ch_nameY = null;
 		switch (typeOfExperiment) {
 		case SOUND_VELOCITY:
-			ch_nameX = ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.acquisitionTime");
+			ch_nameX = ReCResourceBundle.findStringOrDefault("statsound$rec.exp.statsoud.lbl.acquisitionTime","statsound$rec.exp.statsoud.lbl.acquisitionTime");
 			if (series == 0) {
 				// wave1
-				ch_nameY = ReCResourceBundle.findString("statsound$rec.exp.statsound.hardwareinfo.channel.3.name");
+				ch_nameY = ReCResourceBundle.findStringOrDefault("statsound$rec.exp.statsound.hardwareinfo.channel.3.name","statsound$rec.exp.statsound.hardwareinfo.channel.3.name");
 			} else {
 				// wave2
-				ch_nameY = ReCResourceBundle.findString("statsound$rec.exp.statsound.hardwareinfo.channel.4.name");
+				ch_nameY = ReCResourceBundle.findStringOrDefault("statsound$rec.exp.statsound.hardwareinfo.channel.4.name","statsound$rec.exp.statsound.hardwareinfo.channel.4.name");
 			}
 			break;
 		case STATSOUND_VARY_FREQUENCY:
 			// frequency
-			ch_nameX = ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.frequency");
+			ch_nameX = ReCResourceBundle.findStringOrDefault("statsound$rec.exp.statsoud.lbl.frequency","statsound$rec.exp.statsoud.lbl.frequency");
 			if (series == 0) {
 				// vrms1
-				ch_nameY = ReCResourceBundle.findString("statsound$rec.exp.statsound.hardwareinfo.channel.1.name");
+				ch_nameY = ReCResourceBundle.findStringOrDefault("statsound$rec.exp.statsound.hardwareinfo.channel.1.name","statsound$rec.exp.statsound.hardwareinfo.channel.1.name");
 			} else {
 				// vrms2
-				ch_nameY = ReCResourceBundle.findString("statsound$rec.exp.statsound.hardwareinfo.channel.2.name");
+				ch_nameY = ReCResourceBundle.findStringOrDefault("statsound$rec.exp.statsound.hardwareinfo.channel.2.name","statsound$rec.exp.statsound.hardwareinfo.channel.2.name");
 			}
 			break;
 		case STATSOUND_VARY_PISTON:
 			// position
-			ch_nameX = ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.piston");
+			ch_nameX = ReCResourceBundle.findStringOrDefault("statsound$rec.exp.statsoud.lbl.piston","statsound$rec.exp.statsoud.lbl.piston");
 			if (series == 0) {
 				// vrms1
-				ch_nameY = ReCResourceBundle.findString("statsound$rec.exp.statsound.hardwareinfo.channel.1.name");
+				ch_nameY = ReCResourceBundle.findStringOrDefault("statsound$rec.exp.statsound.hardwareinfo.channel.1.name","statsound$rec.exp.statsound.hardwareinfo.channel.1.name");
 			} else {
 				// vrms2
-				ch_nameY = ReCResourceBundle.findString("statsound$rec.exp.statsound.hardwareinfo.channel.2.name");
+				ch_nameY = ReCResourceBundle.findStringOrDefault("statsound$rec.exp.statsound.hardwareinfo.channel.2.name","statsound$rec.exp.statsound.hardwareinfo.channel.2.name");
 			}
 			break;
 		}

@@ -179,10 +179,9 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 
 		jPanel2.setLayout(new java.awt.GridBagLayout());
 
-		jPanel2.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("thomson$rec.exp.display.distances")));
-		jLabel4.setText(ReCResourceBundle.findString("thomson$rec.exp.display.beamblue"));
-		jLabel4.setToolTipText(ReCResourceBundle.findString("thomson$rec.exp.display.tip.beamblue"));
+		jPanel2.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.distances","thomson$rec.exp.display.distances")));
+		jLabel4.setText(ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.beamblue","thomson$rec.exp.display.beamblue"));
+		jLabel4.setToolTipText(ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.tip.beamblue","thomson$rec.exp.display.tip.beamblue"));
 		jPanel2.add(jLabel4, new java.awt.GridBagConstraints());
 
 		jSliderBeamBlue.setMaximum(255);
@@ -204,8 +203,8 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jTextFieldRBlue.setText("0");
 		jPanel2.add(jTextFieldRBlue, new java.awt.GridBagConstraints());
 
-		jLabel5.setText(ReCResourceBundle.findString("thomson$rec.exp.display.cross"));
-		jLabel5.setToolTipText(ReCResourceBundle.findString("thomson$rec.exp.display.tip.cross"));
+		jLabel5.setText(ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.cross","thomson$rec.exp.display.cross"));
+		jLabel5.setToolTipText(ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.tip.cross","thomson$rec.exp.display.tip.cross"));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 1;
@@ -235,8 +234,8 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		gridBagConstraints.gridy = 1;
 		jPanel2.add(jTextFieldCross, gridBagConstraints);
 
-		jLabel6.setText(ReCResourceBundle.findString("thomson$rec.exp.display.d1"));
-		jLabel6.setToolTipText(ReCResourceBundle.findString("thomson$rec.exp.display.tip.d1"));
+		jLabel6.setText(ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.d1","thomson$rec.exp.display.d1"));
+		jLabel6.setToolTipText(ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.tip.d1","thomson$rec.exp.display.tip.d1"));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 2;
@@ -266,8 +265,8 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		gridBagConstraints.gridy = 2;
 		jPanel2.add(jTextFieldD1, gridBagConstraints);
 
-		jLabel7.setText(ReCResourceBundle.findString("thomson$rec.exp.display.d2"));
-		jLabel7.setToolTipText(ReCResourceBundle.findString("thomson$rec.exp.display.tip.d2"));
+		jLabel7.setText(ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.d2","thomson$rec.exp.display.d2"));
+		jLabel7.setToolTipText(ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.tip.d2","thomson$rec.exp.display.tip.d2"));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 3;
@@ -298,8 +297,8 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		gridBagConstraints.gridy = 3;
 		jPanel2.add(jTextFieldD2, gridBagConstraints);
 
-		jLabel8.setText(ReCResourceBundle.findString("thomson$rec.exp.display.p"));
-		jLabel8.setToolTipText(ReCResourceBundle.findString("thomson$rec.exp.display.tip.p"));
+		jLabel8.setText(ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.p","thomson$rec.exp.display.p"));
+		jLabel8.setToolTipText(ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.tip.p","thomson$rec.exp.display.tip.p"));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 4;
@@ -331,8 +330,8 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		gridBagConstraints.gridy = 4;
 		jPanel2.add(jTextFieldP, gridBagConstraints);
 
-		jLabel9.setText(ReCResourceBundle.findString("thomson$rec.exp.display.ransac"));
-		jLabel9.setToolTipText(ReCResourceBundle.findString("thomson$rec.exp.display.tip.ransac"));
+		jLabel9.setText(ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.ransac","thomson$rec.exp.display.ransac"));
+		jLabel9.setToolTipText(ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.tip.ransac","thomson$rec.exp.display.tip.ransac"));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 5;
@@ -371,8 +370,8 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jPanelB1.setLayout(new java.awt.GridBagLayout());
 
 		jPanelB1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("thomson$rec.exp.display.black")));
-		jPanelB1.setToolTipText(ReCResourceBundle.findString("thomson$rec.exp.display.tip.black"));
+				.findStringOrDefault("thomson$rec.exp.display.black","thomson$rec.exp.display.black")));
+		jPanelB1.setToolTipText(ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.tip.black","thomson$rec.exp.display.tip.black"));
 		jLabel10.setForeground(new java.awt.Color(255, 0, 0));
 		jLabel10.setText("R");
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -439,7 +438,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
 		jPanelB1.add(jPanelB1Preview, gridBagConstraints);
 
-		jButtonB1Pick.setText(ReCResourceBundle.findString("thomson$rec.exp.display.pick"));
+		jButtonB1Pick.setText(ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.pick","thomson$rec.exp.display.pick"));
 		jButtonB1Pick.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonB1PickActionPerformed(evt);
@@ -455,7 +454,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		gridBagConstraints.insets = new java.awt.Insets(3, 5, 0, 0);
 		jPanelB1.add(jButtonB1Pick, gridBagConstraints);
 
-		jButtonB1Select.setText(ReCResourceBundle.findString("thomson$rec.exp.display.selectcolor"));
+		jButtonB1Select.setText(ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.selectcolor","thomson$rec.exp.display.selectcolor"));
 		jButtonB1Select.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonB1SelectActionPerformed(evt);
@@ -478,8 +477,8 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jPanelBlue.setLayout(new java.awt.GridBagLayout());
 
 		jPanelBlue.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("thomson$rec.exp.display.blue")));
-		jPanelBlue.setToolTipText(ReCResourceBundle.findString("thomson$rec.exp.display.tip.blue"));
+				.findStringOrDefault("thomson$rec.exp.display.blue","thomson$rec.exp.display.blue")));
+		jPanelBlue.setToolTipText(ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.tip.blue","thomson$rec.exp.display.tip.blue"));
 		jLabel16.setForeground(new java.awt.Color(255, 0, 0));
 		jLabel16.setText("R");
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -546,7 +545,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
 		jPanelBlue.add(jPanelBluePreview, gridBagConstraints);
 
-		jButtonBluePick.setText(ReCResourceBundle.findString("thomson$rec.exp.display.pick"));
+		jButtonBluePick.setText(ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.pick","thomson$rec.exp.display.pick"));
 		jButtonBluePick.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonBluePickActionPerformed(evt);
@@ -562,7 +561,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		gridBagConstraints.insets = new java.awt.Insets(3, 5, 0, 0);
 		jPanelBlue.add(jButtonBluePick, gridBagConstraints);
 
-		jButtonBlueSelect.setText(ReCResourceBundle.findString("thomson$rec.exp.display.selectcolor"));
+		jButtonBlueSelect.setText(ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.selectcolor","thomson$rec.exp.display.selectcolor"));
 		jButtonBlueSelect.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonBlueSelectActionPerformed(evt);
@@ -587,7 +586,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jDialogChooser.getContentPane().add(jPanel4, java.awt.BorderLayout.CENTER);
 
 		jPanel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0)));
-		jButtonEditOK.setText(ReCResourceBundle.findString("thomson$rec.exp.display.ok"));
+		jButtonEditOK.setText(ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.ok","thomson$rec.exp.display.ok"));
 		jButtonEditOK.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonEditOKActionPerformed(evt);
@@ -596,7 +595,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 
 		jPanel5.add(jButtonEditOK);
 
-		jButtonEditCancel.setText(ReCResourceBundle.findString("thomson$rec.exp.display.cancel"));
+		jButtonEditCancel.setText(ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.cancel","thomson$rec.exp.display.cancel"));
 		jButtonEditCancel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonEditCancelActionPerformed(evt);
@@ -634,7 +633,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jPanelOriginal.setLayout(new java.awt.BorderLayout());
 
 		jPanelOriginal.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("thomson$rec.exp.display.original")));
+				.findStringOrDefault("thomson$rec.exp.display.original","thomson$rec.exp.display.original")));
 		jPanelOriginal.setMinimumSize(new java.awt.Dimension(160, 120));
 		jPanelOriginal.setPreferredSize(new java.awt.Dimension(160, 120));
 		jLabelOriginal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -650,7 +649,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jPanelEdge.setLayout(new java.awt.BorderLayout());
 
 		jPanelEdge.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("thomson$rec.exp.display.edges")));
+				.findStringOrDefault("thomson$rec.exp.display.edges","thomson$rec.exp.display.edges")));
 		jPanelEdge.setMinimumSize(new java.awt.Dimension(160, 120));
 		jPanelEdge.setPreferredSize(new java.awt.Dimension(160, 120));
 		jLabelEdges.setOpaque(true);
@@ -667,7 +666,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jPanelLines.setLayout(new java.awt.BorderLayout());
 
 		jPanelLines.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("thomson$rec.exp.display.lines")));
+				.findStringOrDefault("thomson$rec.exp.display.lines","thomson$rec.exp.display.lines")));
 		jPanelLines.setMinimumSize(new java.awt.Dimension(160, 120));
 		jPanelLines.setPreferredSize(new java.awt.Dimension(160, 120));
 		jLabelLines.setOpaque(true);
@@ -684,7 +683,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jPanelAlign.setLayout(new java.awt.BorderLayout());
 
 		jPanelAlign.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("thomson$rec.exp.display.align")));
+				.findStringOrDefault("thomson$rec.exp.display.align","thomson$rec.exp.display.align")));
 		jPanelAlign.setDoubleBuffered(false);
 		jPanelAlign.setMinimumSize(new java.awt.Dimension(160, 120));
 		jPanelAlign.setPreferredSize(new java.awt.Dimension(160, 120));
@@ -702,7 +701,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jPanelBeam.setLayout(new java.awt.BorderLayout());
 
 		jPanelBeam.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("thomson$rec.exp.display.beam")));
+				.findStringOrDefault("thomson$rec.exp.display.beam","thomson$rec.exp.display.beam")));
 		jPanelBeam.setMinimumSize(new java.awt.Dimension(160, 120));
 		jPanelBeam.setPreferredSize(new java.awt.Dimension(160, 120));
 		jLabelBeam.setOpaque(true);
@@ -719,7 +718,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jPanelFinal.setLayout(new java.awt.BorderLayout());
 
 		jPanelFinal.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("thomson$rec.exp.display.final")));
+				.findStringOrDefault("thomson$rec.exp.display.final","thomson$rec.exp.display.final")));
 		jPanelFinal.setMinimumSize(new java.awt.Dimension(160, 120));
 		jPanelFinal.setPreferredSize(new java.awt.Dimension(160, 120));
 		jLabelFinal.setOpaque(true);
@@ -738,7 +737,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jPanel6.setLayout(new java.awt.BorderLayout());
 
 		jPanel6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0)));
-		jButtonEdit.setText(ReCResourceBundle.findString("thomson$rec.exp.display.changeanalysisvalues"));
+		jButtonEdit.setText(ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.changeanalysisvalues","thomson$rec.exp.display.changeanalysisvalues"));
 		jButtonEdit.setEnabled(false);
 		jButtonEdit.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -891,7 +890,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 	private void jButtonBlueSelectActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonBlueSelectActionPerformed
 	{// GEN-HEADEREND:event_jButtonBlueSelectActionPerformed
 		final Color selectedColor = jColorChooser.showDialog(this,
-				ReCResourceBundle.findString("thomson$rec.exp.display.selectcolor"), jPanelBluePreview.getBackground());
+				ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.selectcolor","thomson$rec.exp.display.selectcolor"), jPanelBluePreview.getBackground());
 		updatePreview(jPanelBluePreview, selectedColor);
 	}// GEN-LAST:event_jButtonBlueSelectActionPerformed
 
@@ -906,7 +905,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 	private void jButtonB1SelectActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonB1SelectActionPerformed
 	{// GEN-HEADEREND:event_jButtonB1SelectActionPerformed
 		final Color selectedColor = jColorChooser.showDialog(this,
-				ReCResourceBundle.findString("thomson$rec.exp.display.selectcolor"), jPanelB1Preview.getBackground());
+				ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.selectcolor","thomson$rec.exp.display.selectcolor"), jPanelB1Preview.getBackground());
 		updatePreview(jPanelB1Preview, selectedColor);
 	}// GEN-LAST:event_jButtonB1SelectActionPerformed
 

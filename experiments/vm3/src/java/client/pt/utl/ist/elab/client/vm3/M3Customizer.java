@@ -792,7 +792,7 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		ReCResourceBundle.loadResourceBundle("m3", "recresource:///pt/utl/ist/elab/client/vm3/resources/messages");
 
-		System.out.println(ReCResourceBundle.findString("m3$rec.exp.display.m3.tip.3"));
+		System.out.println(ReCResourceBundle.findStringOrDefault("m3$rec.exp.display.m3.tip.3","m3$rec.exp.display.m3.tip.3"));
 		final javax.swing.JFrame frame = new javax.swing.JFrame();
 		frame.getContentPane().add(new M3Customizer());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

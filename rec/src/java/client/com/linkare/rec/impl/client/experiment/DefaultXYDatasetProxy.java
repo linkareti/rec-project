@@ -105,15 +105,15 @@ public class DefaultXYDatasetProxy extends org.jfree.data.xy.AbstractXYDataset i
 			return null;
 		}
 
-		final String ch_nameX = ReCResourceBundle.findString(expDataModel.getChannelConfig(getChannelDisplayX())
-				.getChannelName());
+		String channelNameKey = expDataModel.getChannelConfig(getChannelDisplayX()).getChannelName();
+		final String ch_nameX = ReCResourceBundle.findStringOrDefault(channelNameKey, channelNameKey);
 		final String multiplierX = expDataModel.getChannelConfig(getChannelDisplayX()).getSelectedScale()
 				.getMultiplier().toString();
 		final String ph_unit_symbolX = expDataModel.getChannelConfig(getChannelDisplayX()).getSelectedScale()
 				.getPhysicsUnitSymbol();
 
-		final String ch_nameY = ReCResourceBundle.findString(expDataModel.getChannelConfig(getChannelDisplayY())
-				.getChannelName());
+		channelNameKey = expDataModel.getChannelConfig(getChannelDisplayY()).getChannelName();
+		final String ch_nameY = ReCResourceBundle.findStringOrDefault(channelNameKey, channelNameKey);
 		final String multiplierY = expDataModel.getChannelConfig(getChannelDisplayY()).getSelectedScale()
 				.getMultiplier().toString();
 		final String ph_unit_symbolY = expDataModel.getChannelConfig(getChannelDisplayY()).getSelectedScale()
@@ -228,7 +228,8 @@ public class DefaultXYDatasetProxy extends org.jfree.data.xy.AbstractXYDataset i
 
 	/**
 	 * Setter for property channelDisplay.
-	 * @param channelDisplayX 
+	 * 
+	 * @param channelDisplayX
 	 * 
 	 * @param channelDisplay New value of property channelDisplay.
 	 */

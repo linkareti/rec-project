@@ -88,27 +88,31 @@ public class DefaultTableModelProxy extends javax.swing.table.DefaultTableModel 
 	public String getColumnName(final int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			if (columnIndex == 0) {
-				return ReCResourceBundle.findString("ReCUI$rec.ui.lbl.nodata");
+				return ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.lbl.nodata", "ReCUI$rec.ui.lbl.nodata");
 			}
 			return null;
 		}
 		if (columnIndex == 0) {
-			return ReCResourceBundle.findString("ReCUI$rec.ui.table.model.column.sample");
+			return ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.table.model.column.sample",
+					"ReCUI$rec.ui.table.model.column.sample");
 		}
 		if (columnIndex == 1) {
-			return ReCResourceBundle.findString("ReCUI$rec.ui.table.model.column.date");
+			return ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.table.model.column.date",
+					"ReCUI$rec.ui.table.model.column.date");
 		}
 		if (columnIndex == 2) {
-			return ReCResourceBundle.findString("ReCUI$rec.ui.table.model.column.time");
+			return ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.table.model.column.time",
+					"ReCUI$rec.ui.table.model.column.time");
 		}
 		if (columnIndex == 3) {
-			return ReCResourceBundle.findString("ReCUI$rec.ui.table.model.column.milliseconds");
+			return ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.table.model.column.milliseconds",
+					"ReCUI$rec.ui.table.model.column.milliseconds");
 		}
 
 		final int channelIndex = (int) Math.floor((columnIndex - 4.) / 2.);
 
-		final String ch_name = ReCResourceBundle.findString(expDataModel.getChannelConfig(channelIndex)
-				.getChannelName());
+		String channelNameKey = expDataModel.getChannelConfig(channelIndex).getChannelName();
+		final String ch_name = ReCResourceBundle.findStringOrDefault(channelNameKey, channelNameKey);
 		final String multiplier = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getMultiplier()
 				.toString();
 		final String ph_unit_symbol = expDataModel.getChannelConfig(channelIndex).getSelectedScale()
