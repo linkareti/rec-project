@@ -143,7 +143,6 @@
 	<classpathentry kind="lib" path="rec/lib/java/client/joda-time-1.6.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/client/javaws.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/client/commons-csv-1.0-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="rec/lib/java/multicast/rec.am-api-0.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/multicast/commons-0.0.1.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/driver/RXTXcomm.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/driver/jsr80.jar"/>
@@ -231,5 +230,6 @@
 	<classpathentry kind="lib" path="rec/lib/java/common/openorb_pss-1.4.0.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/common/OSP.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/common/OSP3D.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/multicast/rec.web-api-0.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
