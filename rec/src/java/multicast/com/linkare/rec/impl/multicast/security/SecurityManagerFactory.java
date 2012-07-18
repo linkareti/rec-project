@@ -11,7 +11,6 @@ import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
  * @author José Pedro Pereira - Linkare TI
  */
 public final class SecurityManagerFactory {
-	private static SecurityManagerFactory instance = new SecurityManagerFactory();
 
 	private ISecurityManager secManager = null;
 
@@ -19,8 +18,16 @@ public final class SecurityManagerFactory {
 
 	private static final Logger LOGGER = Logger.getLogger(SecurityManagerFactory.class.getName());
 
+	// Be careful about changing the order of this field. Because the
+	// SecurityManagerFactory constructor is being called, the <classinit> is
+	// being delayed by the <init>, and therefore,
+	// any method called from the <init> may not have all static references
+	// initialized.
+	private static SecurityManagerFactory instance = new SecurityManagerFactory();
+
 	private void loadSecurityManager() {
 		final String secManagerClassName = System.getProperty(SecurityManagerFactory.SYSPROP_SECURITY_MANAGER_CLASS);
+
 		if (secManagerClassName == null || secManagerClassName.trim().length() == 0) {
 			LOGGER.log(Level.INFO, "SecurityManager System Property not found... Loading DefaultSecurityManager!");
 			secManager = new DefaultSecurityManager();
@@ -32,16 +39,17 @@ public final class SecurityManagerFactory {
 				secManager = (ISecurityManager) Class.forName(secManagerClassName).newInstance();
 			}
 		} catch (final Exception e) {
-			LOGGER.log(Level.INFO, "Unable to load SecurityManager defined at system : " + secManagerClassName
-					+ " - loading DefaultSecurityManager!");
-			LOGGER.log(Level.SEVERE, "Error loading specified SecurityManager", e);
+			SecurityManagerFactory.LOGGER.log(Level.INFO, "Unable to load SecurityManager defined at system : "
+					+ secManagerClassName + " - loading DefaultSecurityManager!");
+			SecurityManagerFactory.LOGGER.log(Level.SEVERE, "Error loading specified SecurityManager", e);
 		} catch (final LinkageError e) {
-			LOGGER.log(Level.INFO, "Unable to load SecurityManager defined at system : " + secManagerClassName
-					+ " - loading DefaultSecurityManager!");
-			LOGGER.log(Level.SEVERE, "Error loading specified SecurityManager", e);
+			SecurityManagerFactory.LOGGER.log(Level.INFO, "Unable to load SecurityManager defined at system : "
+					+ secManagerClassName + " - loading DefaultSecurityManager!");
+			SecurityManagerFactory.LOGGER.log(Level.SEVERE, "Error loading specified SecurityManager", e);
 		} finally {
 			if (secManager == null) {
-				LOGGER.log(Level.INFO, "SecurityManager not instatiated... Loading DefaultSecurityManager!");
+				SecurityManagerFactory.LOGGER.log(Level.INFO,
+						"SecurityManager not instatiated... Loading DefaultSecurityManager!");
 				secManager = new DefaultSecurityManager();
 			}
 		}
@@ -62,10 +70,11 @@ public final class SecurityManagerFactory {
 
 	private void setSecManager(final ISecurityManager secManager) {
 		if (secManager == null) {
-			LOGGER.log(Level.INFO, "Setting SecurityManager to null... Loading DefaultSecurityManager!");
+			SecurityManagerFactory.LOGGER.log(Level.INFO,
+					"Setting SecurityManager to null... Loading DefaultSecurityManager!");
 			this.secManager = new DefaultSecurityManager();
 		} else {
-			LOGGER.log(Level.INFO, "Setting SecurityManager to instance of class "
+			SecurityManagerFactory.LOGGER.log(Level.INFO, "Setting SecurityManager to instance of class "
 					+ secManager.getClass().getPackage().getName() + "." + secManager.getClass().getName());
 			this.secManager = secManager;
 		}
@@ -83,7 +92,8 @@ public final class SecurityManagerFactory {
 		try {
 			return SecurityManagerFactory.getSecurityManager().authenticate(resource, user);
 		} catch (final Exception e) {
-			LOGGER.log(Level.SEVERE, "Exception occured authenticating user! Returning false!", e);
+			SecurityManagerFactory.LOGGER.log(Level.SEVERE, "Exception occured authenticating user! Returning false!",
+					e);
 			return false;
 		}
 	}
@@ -92,7 +102,8 @@ public final class SecurityManagerFactory {
 		try {
 			return SecurityManagerFactory.getSecurityManager().authorize(resource, user, op);
 		} catch (final Exception e) {
-			LOGGER.log(Level.SEVERE, "Exception occured authorizing user for operation! Returning false!", e);
+			SecurityManagerFactory.LOGGER.log(Level.SEVERE,
+					"Exception occured authorizing user for operation! Returning false!", e);
 			return false;
 		}
 	}

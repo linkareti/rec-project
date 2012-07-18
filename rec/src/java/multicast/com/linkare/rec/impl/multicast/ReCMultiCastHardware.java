@@ -1,6 +1,7 @@
 package com.linkare.rec.impl.multicast;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -32,11 +33,6 @@ import com.linkare.rec.acquisition.NotOwnerException;
 import com.linkare.rec.acquisition.NotRegistered;
 import com.linkare.rec.acquisition.UserInfo;
 import com.linkare.rec.acquisition.WrongConfigurationException;
-import com.linkare.rec.web.ClientInfoDTO;
-import com.linkare.rec.web.HardwareStateChangeDTO;
-import com.linkare.rec.web.MultiCastControllerNotifInfoDTO;
-import com.linkare.rec.web.mbean.MBeanObjectNameFactory;
-import com.linkare.rec.web.mbean.NotificationTypeEnum;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.DateTime;
@@ -65,6 +61,12 @@ import com.linkare.rec.impl.utils.mapping.DTOMapperUtils;
 import com.linkare.rec.impl.utils.mbean.ManagementException;
 import com.linkare.rec.impl.utils.mbean.PlatformMBeanServerDelegate;
 import com.linkare.rec.impl.wrappers.HardwareWrapper;
+import com.linkare.rec.web.ClientInfoDTO;
+import com.linkare.rec.web.HardwareStateChangeDTO;
+import com.linkare.rec.web.MultiCastControllerNotifInfoDTO;
+import com.linkare.rec.web.RecChatMessageDTO;
+import com.linkare.rec.web.mbean.MBeanObjectNameFactory;
+import com.linkare.rec.web.mbean.NotificationTypeEnum;
 
 /**
  * 
@@ -489,6 +491,8 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations, Notifi
 	public void sendMessage(final UserInfo user, final String clientTo, final String message) throws NotRegistered,
 			NotAuthorized {
 		clientQueue.sendChatMessage(user, clientTo, message, resource);
+		sendNewChatMessageNotification(new RecChatMessageDTO(user.getUserName() + " : " + message,
+				new Date().getTime(), null), NotificationTypeEnum.NEW_CHAT_MESSAGE_BY_APPARATUS, user.getUserName());
 	}
 
 	@Override
@@ -969,6 +973,21 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations, Notifi
 		final ClientInfoDTO clientInfoDTO = new ClientInfoDTO(client.getUserName());
 		multiCastControllerNotifInfoDTO.setClientInfoDTO(clientInfoDTO);
 
+		multiCastControllerNotifInfoDTO.setRegisteredHardwareDTO(DTOMapperUtils
+				.mapToRegisteredHardwareInfoDTO(getRegisteredHardwareInfo()));
+
+		sendNotif(notificationType, multiCastControllerNotifInfoDTO);
+
+	}
+
+	private void sendNewChatMessageNotification(final RecChatMessageDTO chatMessageDTO,
+			final NotificationTypeEnum notificationType, final String userName) {
+		final MultiCastControllerNotifInfoDTO multiCastControllerNotifInfoDTO = new MultiCastControllerNotifInfoDTO(
+				AllocationManagerSecurityManager.getLaboratoryID(), notificationType.getType());
+
+		final ClientInfoDTO clientInfoDTO = new ClientInfoDTO(userName);
+		multiCastControllerNotifInfoDTO.setClientInfoDTO(clientInfoDTO);
+		multiCastControllerNotifInfoDTO.setRecChatMessageDTO(chatMessageDTO);
 		multiCastControllerNotifInfoDTO.setRegisteredHardwareDTO(DTOMapperUtils
 				.mapToRegisteredHardwareInfoDTO(getRegisteredHardwareInfo()));
 

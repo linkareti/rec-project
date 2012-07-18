@@ -6,24 +6,27 @@
  */
 package com.linkare.rec.impl.utils.mbean;
 
-import com.linkare.rec.acquisition.NotAuthorized;
-import com.linkare.rec.acquisition.NotRegistered;
-import com.linkare.rec.acquisition.UserInfo;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.management.ListenerNotFoundException;
 import javax.management.MBeanNotificationInfo;
 import javax.management.NotificationEmitter;
 import javax.management.NotificationFilter;
 import javax.management.NotificationListener;
 
+import com.linkare.rec.acquisition.NotAuthorized;
+import com.linkare.rec.acquisition.NotRegistered;
+import com.linkare.rec.acquisition.Property;
+import com.linkare.rec.acquisition.UserInfo;
+import com.linkare.rec.impl.multicast.ReCMultiCastController;
+import com.linkare.rec.impl.utils.mapping.DTOMapperUtils;
 import com.linkare.rec.web.ClientInfoDTO;
 import com.linkare.rec.web.HardwareInfoDTO;
 import com.linkare.rec.web.RegisteredHardwareDTO;
@@ -31,14 +34,17 @@ import com.linkare.rec.web.mbean.IHardwareMXBean;
 import com.linkare.rec.web.mbean.IMultiCastControllerMXBean;
 import com.linkare.rec.web.mbean.MBeanConnectionResourcesUtilities;
 import com.linkare.rec.web.mbean.MBeanObjectNameFactory;
-import com.linkare.rec.impl.multicast.ReCMultiCastController;
-import com.linkare.rec.impl.utils.mapping.DTOMapperUtils;
 
 /**
  * 
  * @author Artur Correia - Linkare TI
  */
 public class MultiCastController implements IMultiCastControllerMXBean, NotificationEmitter {
+
+	/**
+	 * 
+	 */
+	public static final String JMX_ADMIN_IDENTIFIER_USERINFO = "JMX_ADMIN";
 
 	private final ReCMultiCastController reCMultiCastController;
 
@@ -156,23 +162,23 @@ public class MultiCastController implements IMultiCastControllerMXBean, Notifica
 		}
 	}
 
-    @Override
-    public void sendMessage(final ClientInfoDTO user, final String clientTo, final String message) {
-        try {
-            UserInfo userinfo = new UserInfo();
-            userinfo.setUserName(user.getUserName());
-            reCMultiCastController.sendMessage(userinfo, clientTo, message, false);
-        } catch (NotRegistered ex) {
-            Logger.getLogger(MultiCastController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NotAuthorized ex) {
-            Logger.getLogger(MultiCastController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+	@Override
+	public void sendMessage(final ClientInfoDTO user, final String clientTo, final String message) {
+		try {
+			UserInfo userinfo = new UserInfo();
+			userinfo.setUserName(user.getUserName());
+			userinfo.addUserProp(new Property(JMX_ADMIN_IDENTIFIER_USERINFO, null));
+			reCMultiCastController.sendMessage(userinfo, clientTo, message);
+		} catch (NotRegistered ex) {
+			Logger.getLogger(MultiCastController.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (NotAuthorized ex) {
+			Logger.getLogger(MultiCastController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
 
-    @Override
-    public void sendMulticastMessage(final String clientTo, final String message) {
-        reCMultiCastController.sendMulticastMessage(clientTo, message, false);
-    }
-
+	@Override
+	public void sendMulticastMessage(final String clientTo, final String message) {
+		reCMultiCastController.sendMulticastMessage(clientTo, message);
+	}
 
 }
