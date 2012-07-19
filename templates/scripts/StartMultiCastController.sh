@@ -12,12 +12,12 @@ export MULTICAST_ORB_SYSPROPS="-Dopenorb.profile=ReCMultiCastController -Drec.mu
 export MEM_SYSPROPS="-Xms$INITIAL_HEAP_MEM -Xmx$MAX_HEAP_MEM"
 export LOG_SYSPROPS="-Djava.util.logging.config.file=$MULTICAST_BASE_DIR/etc/loggers.config.properties"
 export TOOLKIT_SYSPROPS="-Djava.awt.headless=true"
-#export SECURITYMANAGER_SYSPROPS="-Drec.multicast.securitymanager=@rec.web.securitymanager@ -Drec.multicast.compositesecuritymanager.list=@rec.web.compositesecuritymanager.list@"
-#export SECURITYMANAGER_TIMES_SYSPROPS="-Drec.multicast.securitymanager.interval.lap.time.minutes=@rec.web.securitymanager.interval.lap.time.minutes@ -Drec.multicast.securitymanager.near.lap.time.minutes=@rec.web.securitymanager.near.lap.time.minutes@ -Drec.multicast.securitymanager.refresh.lap.time.minutes=@rec.web.securitymanager.refresh.lap.time.minutes@"
-#export ALLOCATIONMANAGER_SYSPROPS="-Drec.multicast.labid=@rec.web.lab.id@ -Drec.multicast.allocation.manager.host=@rec.web.host@ -Drec.multicast.allocation.manager.port=@rec.web.port@"
+export SECURITYMANAGER_SYSPROPS="-Drec.multicast.securitymanager=@rec.web.securitymanager@ -Drec.multicast.compositesecuritymanager.list=@rec.web.compositesecuritymanager.list@"
+export SECURITYMANAGER_TIMES_SYSPROPS="-Drec.multicast.securitymanager.interval.lap.time.minutes=@rec.web.securitymanager.interval.lap.time.minutes@ -Drec.multicast.securitymanager.near.lap.time.minutes=@rec.web.securitymanager.near.lap.time.minutes@ -Drec.multicast.securitymanager.refresh.lap.time.minutes=@rec.web.securitymanager.refresh.lap.time.minutes@"
+export ALLOCATIONMANAGER_SYSPROPS="-Drec.multicast.labid=@rec.web.lab.id@ -Drec.multicast.allocation.manager.host=@rec.web.host@ -Drec.multicast.allocation.manager.port=@rec.web.port@"
 export PROCESSINGMANAGER_SYSPROPS="-Drec.processingmanager.threadPool.coresize=@rec.multicast.processingmanager.threadpool.coresize@ -Drec.processingmanager.threadPool.maxsize=@rec.multicast.processingmanager.threadpool.maxsize@ -Drec.processingmanager.thread.idletime=@rec.processingmanager.thread.idletime@"
-#export JMX_SYSPROPS="-Djava.rmi.server.hostname=@java.rmi.server.hostname@ -Dcom.sun.management.jmxremote.authenticate=true -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port=@com.sun.management.jmxremote.port@ -Dcom.sun.management.jmxremote.access.file=$MULTICAST_BASE_DIR/etc/jmxremote.access -Dcom.sun.management.jmxremote.password.file=$MULTICAST_BASE_DIR/etc/jmxremote.password"
-#export REPOSITORY_SYSPROPS="-Drec.multicast.repository=@rec.multicast.repository@"
+export JMX_SYSPROPS="-Djava.rmi.server.hostname=@java.rmi.server.hostname@ -Dcom.sun.management.jmxremote.authenticate=true -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port=@com.sun.management.jmxremote.port@ -Dcom.sun.management.jmxremote.access.file=$MULTICAST_BASE_DIR/etc/jmxremote.access -Dcom.sun.management.jmxremote.password.file=$MULTICAST_BASE_DIR/etc/jmxremote.password"
+export REPOSITORY_SYSPROPS="-Drec.multicast.repository=@rec.multicast.repository@"
 export SYSPROP_BADWORD_REFRESH_TIME_LAP_MINUTES=-Drec.multicast.badwordmanager.refresh.lap.time.minutes=@rec.multicast.badwordmanager.refresh.lap.time.minutes@
 
 export RECCLASSPATH=$MULTICAST_BASE_DIR/lib/xml-apis.jar:$MULTICAST_BASE_DIR/lib/tools-1.4.0.jar:$MULTICAST_BASE_DIR/lib/openorb_orb-1.4.0.jar:$MULTICAST_BASE_DIR/lib/openorb_pss-1.4.0.jar:$MULTICAST_BASE_DIR/lib/openorb_ots-1.4.0.jar:$MULTICAST_BASE_DIR/lib/logkit.jar:$MULTICAST_BASE_DIR/lib/xercesImpl.jar:$MULTICAST_BASE_DIR/lib/avalon-framework.jar
