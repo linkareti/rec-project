@@ -6,36 +6,33 @@ package com.linkare.rec.web;
 
 import java.beans.ConstructorProperties;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  *
  * @author Gedsimon Pereira - Linkare TI
  */
-public class RecChatMessageDTO implements Serializable{
-    
-    private String message;
-    private Date dateOfSending;
-    
-    @ConstructorProperties({ "message", "dateOfSending" })
-    public RecChatMessageDTO(String message, Date dateOfSending){
+public final class RecChatMessageDTO implements Serializable {
+
+    private final String message;
+    private final long dateOfSending;
+    private final String hardwareUniqueId;
+
+    @ConstructorProperties({"message", "dateOfSending", "HardwareUniqueId"})
+    public RecChatMessageDTO(String message, long dateOfSending, String hardwareUniqueId) {
         this.message = message;
         this.dateOfSending = dateOfSending;
+        this.hardwareUniqueId = hardwareUniqueId;
     }
 
-    public Date getDateOfSending() {
+    public long getDateOfSending() {
         return dateOfSending;
-    }
-
-    public void setDateOfSending(Date dateOfSending) {
-        this.dateOfSending = dateOfSending;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public String getHardwareUniqueId() {
+        return hardwareUniqueId;
     }
 }
