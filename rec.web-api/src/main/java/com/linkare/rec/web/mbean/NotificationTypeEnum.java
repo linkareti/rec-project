@@ -58,7 +58,7 @@ public enum NotificationTypeEnum implements INotificationFactory {
 	    return new Notification(getType(), source, 0, System.currentTimeMillis(), name());
 	}
     },
-    NEW_CHAT_MESSAGE {
+    NEW_CHAT_MESSAGE_BY_APPARATUS {
 
 	@Override
 	public Notification createNotif(Object source) {
