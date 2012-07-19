@@ -16,7 +16,7 @@ public class DeployedExperiment {
     private Experiment experiment;
     private HardwareState state;
     private Set<String> usersConnected;
-    private Set<RecChatMessageDTO> recChatMessages;
+    private RecChatMessageDTO recChatMessages;
 
     public DeployedExperiment(final DeployedExperiment experiment) {
         this.experiment = experiment.getExperiment();
@@ -60,11 +60,11 @@ public class DeployedExperiment {
         return (state != null);
     }
 
-    public Set<RecChatMessageDTO> getRecChatMessages() {
-        return recChatMessages;
+    public RecChatMessageDTO getRecChatMessages() {
+           return recChatMessages;
     }
 
-    public void setRecChatMessages(Set<RecChatMessageDTO> recChatMessages) {
+    public void setRecChatMessages(RecChatMessageDTO recChatMessages) {
         this.recChatMessages = recChatMessages;
     }
 

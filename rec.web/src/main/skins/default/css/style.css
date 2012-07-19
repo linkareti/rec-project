@@ -288,6 +288,13 @@ html, body {
     border-color: white;
 }
 
+.scrollPanelChat{
+    width:350px;
+    max-height:200px;
+    min-height:200px;
+    background: white; 
+    border-color: white;
+}
 /*------------- Tab Definitions -------*/
 .ui-icon-unavailable {
     background-image: url("../../resources/images/unavailable.gif");
@@ -301,6 +308,10 @@ html, body {
     background-position: 95% 6px;
 }
 
+.ui-icon-user {
+    background-image: url("../../resources/images/people.png");
+    background-repeat: no-repeat;
+}
 
 /*-------- Contents Area Definitions --------*/
 #center {
@@ -310,6 +321,7 @@ html, body {
     margin-left: 19.5%;
     margin-top: -0.5%;
     max-height: 420px;
+    color: #455660;
 }
 #center a {
     color: #283234;
@@ -407,6 +419,8 @@ html, body {
     background: #283234;
 }
 
+
+
 /*-------- Right Column Definitions --------*/
 #right_col {
     clear: both;
@@ -419,4 +433,11 @@ html, body {
 
 .ui-wizard-content{
 	margin-top: -18%;
+}
+
+.messageReceived{
+    overflow :auto; 
+    border-style:hidden; 
+    margin:0px; 
+    padding:0px;
 }

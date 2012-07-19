@@ -1,4 +1,4 @@
-package com.linkare.rec.web;
+package com.linkare.rec.web.bean;
 
 import java.io.Serializable;
 import java.util.List;

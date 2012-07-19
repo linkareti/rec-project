@@ -1,5 +1,7 @@
-package com.linkare.rec.web;
+package com.linkare.rec.web.bean;
 
+import com.linkare.jsf.utils.JsfUtil;
+import com.linkare.rec.web.ClientInfoDTO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,9 +16,12 @@ import javax.faces.bean.ViewScoped;
 import com.linkare.rec.web.model.DeployedExperiment;
 import com.linkare.rec.web.model.Experiment;
 import com.linkare.rec.web.service.ExperimentServiceLocal;
+import com.linkare.rec.web.util.ConstantUtils;
 import com.linkare.rec.web.util.LaboratoriesMonitor;
 import com.linkare.rec.web.util.MultiThreadDeployedExperimentWrapper;
 import com.linkare.rec.web.util.MultiThreadLaboratoryWrapper;
+import java.util.HashSet;
+import java.util.Set;
 import org.primefaces.event.TabChangeEvent;
 
 /**
@@ -124,5 +129,16 @@ public class StatusBean implements Serializable {
     public void onTabChange(TabChangeEvent event) {
         selectedLab = (MultiThreadLaboratoryWrapper) event.getData();
         refreshExperiments();
+    }
+
+    public void listenerMethod(ClientInfoDTO clientInfo) {
+        for (DeployedExperiment dpExperiment : selectedLabExperiments) {
+            if (dpExperiment.getUsersConnected() != null && dpExperiment.getUsersConnected().contains(clientInfo.getUserName())) {
+                Set<String> userNamesToKick = new HashSet();
+                userNamesToKick.add(clientInfo.getUserName());
+                selectedLab.kickUsers(userNamesToKick, dpExperiment.getExperiment().getExternalId());
+                JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_REMOVE_KEY);
+            }
+        }
     }
 }

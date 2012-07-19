@@ -92,10 +92,10 @@ public class MultiThreadDeployedExperimentWrapper {
 	}
     }
     
-    public boolean addNewRecChatMessage(final RecChatMessageDTO recChatMessageDTO) {
+    public void newRecChatMessage(final RecChatMessageDTO recChatMessageDTO) {
 	writeLock.lock();
 	try {
-	    return underlyingDeployedExperiment.getRecChatMessages().add(recChatMessageDTO);
+	    underlyingDeployedExperiment.setRecChatMessages(recChatMessageDTO);
                     
 	} finally {
 	    writeLock.unlock();

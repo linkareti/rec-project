@@ -2,14 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.linkare.rec.web;
+package com.linkare.rec.web.bean;
 
+import com.linkare.rec.web.ClientInfoDTO;
+import com.linkare.rec.web.RecChatMessageDTO;
 import com.linkare.rec.web.model.DeployedExperiment;
 import com.linkare.rec.web.util.LaboratoriesMonitor;
 import com.linkare.rec.web.util.MultiThreadLaboratoryWrapper;
 import com.linkare.rec.web.moodle.SessionHelper;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,6 +40,7 @@ public class ChatBean implements Serializable {
     private StringBuilder strBuilder = new StringBuilder();
     private DeployedExperiment selectedExperimentLab;
     final String USER_NAME = SessionHelper.getUserView().getUsername();
+    private List<RecChatMessageDTO> chatMessageDTO;
 
     public List<MultiThreadLaboratoryWrapper> getLabs() {
         if (labs == null) {
@@ -80,24 +84,28 @@ public class ChatBean implements Serializable {
 
     public void send() {
         if (message != null) {
-            if (selectedUser == null) {
+            if (selectedUser == null || selectedUser.equals("Todos") || selectedUser.equals("Everyone")) {
                 selectedLab.sendMessage(new ClientInfoDTO(USER_NAME), null, message);
             } else {
                 selectedLab.sendMulticastMessage(selectedUser, message);
             }
+            chatMessageDTO.add(new RecChatMessageDTO(USER_NAME +" : "+message, new Date().getTime(), null));
             strBuilder.append(USER_NAME).append(" : ").append(message).append(System.getProperty("line.separator"));
-            messageReceived = strBuilder.toString();
+            //messageReceived = strBuilder.toString();
             message = null;
         }
     }
-    
-    public void refreshMessageReceived(){
-        if(selectedExperimentLab != null && selectedExperimentLab.getRecChatMessages() != null){
-            for (RecChatMessageDTO recChatMessageDTO : selectedExperimentLab.getRecChatMessages()) {
-                messageReceived = recChatMessageDTO.getMessage();
+
+    public void refreshMessageReceived() {
+        if (selectedLab != null && selectedLab.getRecChatMessageDTO() != null) {
+            for(RecChatMessageDTO newMessage : selectedLab.getRecChatMessageDTO()){
+                if(!chatMessageDTO.contains(newMessage)){
+                   chatMessageDTO.add(newMessage); 
+                }
             }
         }
     }
+
     public void kickUser() {
         Set<String> userNamesToKick = new HashSet();
         userNamesToKick.add(selectedUser);
@@ -110,11 +118,15 @@ public class ChatBean implements Serializable {
         getUsersExperiment();
     }
     
-    public void handleClose(CloseEvent event) {  
-       messageReceived = null;
-       refreshUserConnected();
-    }  
-    
+    public void listenerMethod(ClientInfoDTO clientInfo) {
+        System.out.println("Event: "+clientInfo);
+    }
+
+    public void handleClose(CloseEvent event) {
+        messageReceived = null;
+        chatMessageDTO = null;
+    }
+
     public MultiThreadLaboratoryWrapper getSelectedLab() {
         return selectedLab;
     }
@@ -161,5 +173,16 @@ public class ChatBean implements Serializable {
 
     public void setSelectedExperimentLab(DeployedExperiment selectedExperimentLab) {
         this.selectedExperimentLab = selectedExperimentLab;
+    }
+
+    public List<RecChatMessageDTO> getChatMessageDTO() {
+        if (chatMessageDTO == null) {
+            chatMessageDTO = new ArrayList<RecChatMessageDTO>();
+        }
+        return chatMessageDTO;
+    }
+
+    public void setChatMessageDTO(List<RecChatMessageDTO> chatMessageDTO) {
+        this.chatMessageDTO = chatMessageDTO;
     }
 }

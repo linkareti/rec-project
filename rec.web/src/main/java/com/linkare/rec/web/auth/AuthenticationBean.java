@@ -1,28 +1,29 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.linkare.rec.web.auth;
-
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 
 import com.linkare.jsf.utils.JsfUtil;
 import com.linkare.rec.web.aop.AllocationManagerExceptionHandler;
 import com.linkare.rec.web.aop.ExceptionHandle;
 import com.linkare.rec.web.aop.ExceptionHandleCase;
-import com.linkare.rec.web.service.UserService;
-import com.linkare.rec.web.service.UserServiceLocal;
 import com.linkare.rec.web.ex.AuthenticationException;
 import com.linkare.rec.web.moodle.SessionHelper;
+import com.linkare.rec.web.service.UserService;
+import com.linkare.rec.web.service.UserServiceLocal;
 import com.linkare.rec.web.util.ConstantUtils;
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 /**
- * 
- * @author Paulo Zenida - Linkare TI
- * 
+ *
+ * @author hfernandes
  */
 @ManagedBean(name = "authenticationBean")
-@RequestScoped
+@SessionScoped
 public class AuthenticationBean {
-
     private String username;
 
     private String password;
@@ -33,7 +34,7 @@ public class AuthenticationBean {
     private UserService userService;
 
     @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = AllocationManagerExceptionHandler.class))
-    public String login() {
+    public String login() throws AuthenticationException {
 	authenticate();
 	registerUserIfNecessary();
 	return "index";

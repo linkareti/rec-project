@@ -14,6 +14,7 @@
                     listener="#{statusBean.updateLabStatus}" />
             <p:accordionPanel id="tabView" var="lab" value="#{statusBean.labs}" dynamic="true" cache="true" activeIndex="-1">
                 <p:ajax event="tabChange" listener="#{statusBean.onTabChange}" update="tableExperiments"/>
+                <p:ajax event="tabChange" listener="#{chatBean.onTabChange}" update=":labs_status_form:usersConnected"/>
                 <p:tab id="labTab" title="#{lab.description}" 
                        titletip="#{(lab.available) ? statusBundle['tooltip.lab.available'] : statusBundle['tooltip.lab.unavailable'] }" 
                        disabled="#{!lab.available}"
@@ -43,15 +44,19 @@
                                 <f:facet name="header">  
                                     #{bundle['label.number.user']}
                                 </f:facet>
-                                <h:outputText value="#{deployedExp.numberOfUsers}"
-                                              title="#{statusBundle['tooltip.experiment.users']}" />
+                                <h:graphicImage library="images" name="people.png"
+                                                title="#{statusBundle['tooltip.experiment.users']}" width="14" height="14" onclick="users.show();">
+                                    <h:outputText value="#{deployedExp.numberOfUsers}"
+                                                  title="#{statusBundle['tooltip.experiment.users']}"/>
+                                </h:graphicImage>
+
                             </p:column>
                             <p:column style="text-align: center;">
                                 <f:facet name="header">  
                                     Chat
                                 </f:facet>
 
-                                <p:commandLink hreflang="#" process="@this" update="chatDlg" oncomplete="dlg.show();" >
+                                <p:commandLink hreflang="#" process="@this" oncomplete="dlg.show();" >
                                     <h:graphicImage library="images" name="chat.png" rendered="#{deployedExp.numberOfUsers > 0}" title="Chat online" />
                                     <f:setPropertyActionListener target="#{chatBean.selectedExperimentLab}"
                                                                  value="#{deployedExp}" />
@@ -61,21 +66,30 @@
                                 <h:graphicImage library="images" name="chatOff.png" rendered="#{deployedExp.numberOfUsers == 0}" title="Chat offline"/>
                             </p:column>
                             <p:column style="width:120px; text-align: center; height: 50%;">
-                                
+
                                 <a href="javascript:var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + '../../#{deployedExp.experiment.state.url}'; if (!deployJava.isWebStartInstalled('1.6')) {if (deployJava.installLatestJRE()) {if (deployJava.launch(url)) {}}} else {if (deployJava.launch(url)) {}}"
                                    title="#{statusBundle['tooltip.experiment.launch']}" 
                                    rel="#{statusBundle['tooltip.experiment.launch']}" target="_blank">
                                     <h:graphicImage library="images" name="webstart.png" rendered="#{deployedExp.labRunning}"/>
                                 </a>
-                                #{facesContext.externalContext.requestContextPath}
-                                #{pageContext.request.contextPath}
-                                #{request.contextPath}
                             </p:column>
-                            
+
                         </p:dataTable>
                     </p:scrollPanel>
                 </p:tab>  
             </p:accordionPanel>
+            <p:dialog header="Users" widgetVar="users" minimizable="true" resizable="false" id="userDlg" height="150" width="250">
+                <h:panelGroup>
+                    <p:dataTable id="usersConnected" var="usersCon" value="#{chatBean.users}">
+                        <p:column>
+                            <h:outputText value="#{usersCon.userName}" /> 
+                        </p:column>
+                        <p:column>
+                            <p:commandButton value="Kikar" actionListener="#{statusBean.listenerMethod(usersCon)}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGroup>
+            </p:dialog>
         </h:form>
         <h:form id="chat">
             <p:contextMenu for="userConnnected">  
@@ -88,8 +102,14 @@
             <p:dialog header="Chat" widgetVar="dlg" minimizable="true" resizable="false" id="chatDlg" width="550">
                 <p:ajax event="close" listener="#{chatBean.handleClose}" update="messageReceived"/>  
                 <h:panelGroup>
-                    <h:inputTextarea value="#{chatBean.messageReceived}" id="messageReceived" 
-                                     readonly="true" cols="55" rows="10" styleClass="messageReceived" />
+                    <p:scrollPanel id="messageReceived" styleClass="scrollPanelChat" mode="native" > 
+                        <ul>
+                            <ui:repeat var="msg" value="#{chatBean.chatMessageDTO}">
+                                <li>#{msg.message}</li>
+                            </ui:repeat>
+                        </ul>
+                    </p:scrollPanel>
+
                     <p:separator />  
                     <p:inputText value="#{chatBean.message}" styleClass="messageInput" style="width:82%;" id="messageInput" autocomplete="false">  
                         <p:ajax event="change" />
@@ -97,7 +117,7 @@
                     <p:spacer width="5" />  
                     <p:commandButton id="btnSend" value=" #{bundle['operation.send']}" action="#{chatBean.send}" 
                                      process="@this" update="messageReceived messageInput setFocus" /> 
-                    <div style="float: right; height: 150px; margin-top: -40%; width: 27%;">
+                    <div style="float: right; height: 150px; margin-top: -47%; width: 27%;">
                         <p:selectOneMenu  value="#{chatBean.selectedUser}" id="userConnnected" style="width: 120px;">
                             <f:selectItem itemLabel="#{bundle['label.everyone']}" itemValue="#{bundle['label.everyone']}" />  
                             <f:selectItems value="#{chatBean.usersExperiment}" />  
@@ -107,6 +127,6 @@
                 <p:focus id="setFocus" for="messageInput" />
             </p:dialog>
         </h:form>
-        
+
     </ui:define>
 </ui:composition>

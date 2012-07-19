@@ -27,8 +27,15 @@ import com.linkare.rec.web.model.Experiment;
 import com.linkare.rec.web.model.HardwareState;
 import com.linkare.rec.web.model.Laboratory;
 import com.linkare.rec.web.service.ExperimentService;
+import java.util.ArrayList;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+import org.apache.commons.collections.buffer.CircularFifoBuffer;
 
 public class MultiThreadLaboratoryWrapper {
+    
+    private static final int MESSAGE_QUEUE_MAX_SIZE = 100;
+    
 
     private final static Logger LOGGER = LoggerFactory.getLogger(MultiThreadLaboratoryWrapper.class);
     private final Laboratory underlyingLaboratory;
@@ -39,6 +46,11 @@ public class MultiThreadLaboratoryWrapper {
     private volatile long uptime;
     private IMultiCastControllerMXBean mbeanProxy;
     private volatile boolean isAvailable;
+    private final CircularFifoBuffer messageQueue;
+    private final ReadWriteLock readWriteLock;
+    private final Collection<RecChatMessageDTO> recChatMessageDTO;
+    
+    
 
     public MultiThreadLaboratoryWrapper(final MbeanProxy<IMultiCastControllerMXBean, Laboratory> labMBeanPRoxy) throws NamingException {
         this.underlyingLaboratory = labMBeanPRoxy.getEntity();
@@ -46,6 +58,9 @@ public class MultiThreadLaboratoryWrapper {
         this.experimentService = JndiHelper.getExperimentService();
         this.deployedExperimentsMap = new ConcurrentHashMap<String, MultiThreadDeployedExperimentWrapper>();
         this.usersSet = new ConcurrentSkipListSet<String>();
+        readWriteLock = new ReentrantReadWriteLock();
+        messageQueue = new CircularFifoBuffer(MESSAGE_QUEUE_MAX_SIZE);
+        this.recChatMessageDTO = new ArrayList<RecChatMessageDTO>();
         init();
     }
 
@@ -53,7 +68,7 @@ public class MultiThreadLaboratoryWrapper {
         synchronized (this) {
 
             if (mbeanProxy != null) {
-                final long uptime = mbeanProxy.getUpTimeInMillis();
+                final long upt = mbeanProxy.getUpTimeInMillis();
 
                 final List<ClientInfoDTO> labUsers = mbeanProxy.getClients();
 
@@ -63,7 +78,7 @@ public class MultiThreadLaboratoryWrapper {
                 initUsersSet(labUsers);
 
                 this.lastNotifReceived = -1;
-                this.uptime = uptime;
+                this.uptime = upt;
             }
         }
     }
@@ -114,20 +129,6 @@ public class MultiThreadLaboratoryWrapper {
 
         if (deployedExperimentWrapper != null) {
             deployedExperimentWrapper.addNewClient(userName);
-        }
-    }
-
-    private void addNewRecMessageChat(final String experimentID, final RecChatMessageDTO recChatMessage) {
-
-        MultiThreadDeployedExperimentWrapper deployedExperimentWrapper = deployedExperimentsMap.get(experimentID);
-
-        if (deployedExperimentWrapper == null) {
-            addHardware(getRemoteHardware(experimentID));
-            deployedExperimentWrapper = deployedExperimentsMap.get(experimentID);
-        }
-
-        if (deployedExperimentWrapper != null) {
-            deployedExperimentWrapper.addNewRecChatMessage(recChatMessage);
         }
     }
 
@@ -248,8 +249,8 @@ public class MultiThreadLaboratoryWrapper {
                 case UNREGISTER_CLIENT_HARDWARE:
                     removeUserFromHardware(notifInfo.getRegisteredHardwareDTO().getHardwareUniqueID(), notifInfo.getClientInfoDTO().getUserName());
                     break;
-                case NEW_CHAT_MESSAGE:
-                    addNewRecMessageChat(notifInfo.getRegisteredHardwareDTO().getHardwareUniqueID(), notifInfo.getRecChatMessageDTO());
+                case NEW_CHAT_MESSAGE_BY_APPARATUS:
+                    addRecChatMessageDTO(notifInfo.getRecChatMessageDTO());
                     break;
                 default:
                     throw new UnsupportedOperationException();
@@ -368,5 +369,25 @@ public class MultiThreadLaboratoryWrapper {
 
     public void sendMulticastMessage(final String clientTo, final String message) {
         mbeanProxy.sendMulticastMessage(clientTo, message);
+    }
+
+    public Collection<RecChatMessageDTO> getRecChatMessageDTO() {
+        readWriteLock.readLock().lock();
+        try {
+            return Collections.unmodifiableCollection(this.messageQueue);
+        } finally {
+            readWriteLock.readLock().unlock();
+        }
+
+    }
+
+    private void addRecChatMessageDTO(RecChatMessageDTO recChatMessageDTO) {
+        
+        readWriteLock.writeLock().lock();
+        try {
+            this.messageQueue.add(recChatMessageDTO);
+        } finally {
+            readWriteLock.writeLock().unlock();
+        }
     }
 }
