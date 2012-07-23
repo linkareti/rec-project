@@ -115,8 +115,8 @@ experiment.driver.openorb.profile=ReCHardware
 experiment.client.openorb.profile=ReCClient
 experiment.client.debug.address.port=8001
 experiment.driver.debug.address.port=8002
-hardwareserver.initial.heap=128m
-hardwareserver.max.heap=1024m
+hardwareserver.initial.heap=64m
+hardwareserver.max.heap=128m
 
 ##SYSTEM PROPERTIES - VIDEO##
 vlc.plugins.destdir=eLab/native/plugins
