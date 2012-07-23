@@ -1,0 +1,9 @@
+document.observe("xwiki:dom:loaded",function(){$$("input.searchQuery.defaultText").each(function(A){A.observe("focus",function(){if(this.value==this.defaultValue){this.value=""
+}}.bind(A))
+});
+$$("input.searchQuery").each(function(A){A.observe("focus",function(){this.select()
+}.bind(A));
+A.observe("blur",function(){if(this.value==""){this.value=this.defaultValue
+}}.bind(A))
+})
+});
