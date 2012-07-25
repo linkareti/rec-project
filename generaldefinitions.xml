@@ -632,8 +632,6 @@
 				<replacefilter token="@rec.client.processingmanager.threadpool.coresize@" property="rec.client.processingmanager.threadpool.coresize" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
-                		<!--replacefilter token="@rec.apparatus.autoconnect.id@" property="rec.apparatus.autoconnect.id"/-->
-                		<!--replacefilter token="@rec.apparatus.autoacquireresult@" property="rec.apparatus.autoacquireresult"/-->
 			</replace>
 
 			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
@@ -874,8 +872,9 @@
 	<property name="experiments.build.dir" value="${build.dir.jars}/experiments" />
 
 	<property name="jnlp.template.file" value="${basedir}/templates/jnlp/elab-client.jnlp.xml" />
+	<property name="experiment.jnlp.template.file" value="${basedir}/templates/jnlp/experiment-client.jnlp.xml" />
 	<property name="jnlp.rec.template.file" value="${basedir}/templates/jnlp/rec-framework.jnlp.xml" />
-
+	
 	<property name="jnlp.orb.template.file" value="${basedir}/templates/jnlp/openorb.jnlp.xml" />
 	<property name="jnlp.jfreechart.template.file" value="${basedir}/templates/jnlp/jfreechart.jnlp.xml" />
 	<property name="jnlp.j3d.template.file" value="${basedir}/templates/jnlp/j3d.jnlp.xml" />

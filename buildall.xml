@@ -203,9 +203,10 @@
 						<replacefilter token="@rec.driver.processingmanager.threadpool.coresize@" property="rec.driver.processingmanager.threadpool.coresize" />
 						<replacefilter token="@rec.driver.processingmanager.threadpool.maxsize@" property="rec.driver.processingmanager.threadpool.maxsize" />
 						<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
+						<replacefilter token="@driver.main.class@" property="experiment.driver.main-class" />
 					</replace>
 					<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" propertyFile="experiments/@{experiment.name}/etc/build.properties">
-						<replacefilter token="@driver.main.class@" property="@{experiment.name}.driver.main-class" />
+						<replacefilter token="@experiment.driver.class@" property="experiment.driver.class" />
 					</replace>
 
 					<copy file="${templates.dir.scripts}/ExperimentDaemon.sh" overwrite="yes" tofile="${experiments.build.dir}/@{experiment.name}Daemon.sh" />
@@ -221,9 +222,10 @@
 						<replacefilter token="@rec.driver.processingmanager.threadpool.coresize@" property="rec.driver.processingmanager.threadpool.coresize" />
 						<replacefilter token="@rec.driver.processingmanager.threadpool.maxsize@" property="rec.driver.processingmanager.threadpool.maxsize" />
 						<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
+						<replacefilter token="@driver.main.class@" property="experiment.driver.main-class" />
 					</replace>
 					<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" propertyFile="experiments/@{experiment.name}/etc/build.properties">
-						<replacefilter token="@driver.main.class@" property="@{experiment.name}.driver.main-class" />
+						<replacefilter token="@experiment.driver.class@" value="experiment.driver.class" />
 					</replace>
 
 					<copy file="${templates.dir.logs}/hardwareserver.loggers.config.properties" overwrite="yes" tofile="${experiments.build.dir}/etc/loggers.config.properties" />

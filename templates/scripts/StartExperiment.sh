@@ -18,6 +18,7 @@ export DRIVER_ORB_SYSPROPS="-Dopenorb.profile=ReCHardware -Drec.multicastcontrol
 export MEM_SYSPROPS="-Xms$INITIAL_HEAP_MEM -Xmx$MAX_HEAP_MEM"
 export LOG_SYSPROPS="-Djava.util.logging.config.file=$DRIVER_BASE_DIR/etc/loggers.config.properties" 
 export PROCESSINGMANAGER_SYSPROPS="-Drec.processingmanager.threadPool.coresize=@rec.driver.processingmanager.threadpool.coresize@ -Drec.processingmanager.threadPool.maxsize=@rec.driver.processingmanager.threadpool.maxsize@ -Drec.processingmanager.thread.idletime=@rec.processingmanager.thread.idletime@"
+export EXPERIMENT_DRIVER_CLASS="-Dexperiment.driver.class=@experiment.driver.class@"
 
 # TODO - Aleitao
 # não esquecer que cada experiência poderá querer definir command line arguments 
@@ -43,7 +44,7 @@ echo System Properties: $GENERIC_ORB_SYSPROPS $DRIVER_ORB_SYSPROPS $LOG_SYSPROPS
 echo --------------------------------------------------------------------------------
 
 
-java $BOOTCLASSPATH -Djava.library.path=/home/elab/rxtx -classpath $RECCLASSPATH:$DRIVER_CLASSPATH:$DRIVER_EXPERIMENT_CLASSPATH $GENERIC_ORB_SYSPROPS $DRIVER_ORB_SYSPROPS $LOG_SYSPROPS $PROCESSINGMANAGER_SYSPROPS $MEM_SYSPROPS $DRIVER_HARWARE_INFO_SYSPROPS $TOOLKIT_SYSPROPS $DEBUG @driver.main.class@ &
+java $BOOTCLASSPATH -Djava.library.path=/home/elab/rxtx -classpath $RECCLASSPATH:$DRIVER_CLASSPATH:$DRIVER_EXPERIMENT_CLASSPATH $GENERIC_ORB_SYSPROPS $DRIVER_ORB_SYSPROPS $LOG_SYSPROPS $PROCESSINGMANAGER_SYSPROPS $MEM_SYSPROPS $DRIVER_HARWARE_INFO_SYSPROPS $TOOLKIT_SYSPROPS $EXPERIMENT_DRIVER_CLASS $DEBUG @driver.main.class@ &
 
 PID=$!
 echo $PID > $DEPLOY_DIR/@experiment.name@.pid

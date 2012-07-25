@@ -72,6 +72,12 @@
 		<!-- rec.web Service -->
 		<property name="rec.web.endpoint" value="@rec.web.endpoint@" />
 		
+		<!-- Auto Connect ID -->
+        <property name="rec.apparatus.autoconnect.id" value="@rec.apparatus.autoconnect.id@" />
+        
+        <!-- Auto Acquire Result -->
+        <property name="rec.apparatus.autoacquireresult" value="@rec.apparatus.autoacquireresult@" />
+               
 		<!-- Processing manager thread pool -->
 		<property name="rec.processingmanager.threadPool.coresize"
 			value="@rec.client.processingmanager.threadpool.coresize@" />

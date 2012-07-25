@@ -439,7 +439,7 @@
 	<macrodef name="create.jnlp.for.experiment" description="Create JNLP file for one experiment">
 		<attribute name="experiment.name" />
 		<sequential>
-			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/@{experiment.name}.jnlp" />
+			<copy file="${experiment.jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/@{experiment.name}.jnlp" />
 			<replace file="${client.build.dir}/@{experiment.name}.jnlp" propertyFile="experiments/@{experiment.name}/etc/build.properties">
 				<replacefilter token="@elab.title@" property="@{experiment.name}.title" />
 				<replacefilter token="@elab.vendor@" property="@{experiment.name}.vendor" />
