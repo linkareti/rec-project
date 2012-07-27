@@ -141,7 +141,7 @@ j2se-version=1.6
 #Newface Main Class - pt.utl.ist.elab.client.FullClientNewInterface
 client.main-class=pt.utl.ist.elab.client.FullClientNewInterface
 multicast.main-class=com.linkare.rec.impl.multicast.startup.MultiCastControllerMain
-experiment.driver.main-class=pt.utl.ist.elab.driver.@{experiment.name}.ServerMain
+experiment.driver.main-class=com.linkare.rec.impl.driver.FullServerMain
 
 
 
@@ -298,6 +298,7 @@ mac.vlc.intaller.description.tooltip.en=VLC Installer for MaCOSX
 mac.vlc.intaller.description.short.en=VLC Installer for MaCOSX
 
 ##PROCESSINGMANAGER PROPERTIES##
+##Defined the threadpool size
 rec.multicast.processingmanager.threadpool.coresize=50
 rec.multicast.processingmanager.threadpool.maxsize=100
 rec.client.processingmanager.threadpool.coresize=2
@@ -305,10 +306,12 @@ rec.client.processingmanager.threadpool.maxsize=4
 rec.driver.processingmanager.threadpool.coresize=2
 rec.driver.processingmanager.threadpool.maxsize=4
 #NANOSECONDS
+##Life time of threadpool
 rec.processingmanager.thread.idletime=11
 
 
 ##JMX PROPERTIES##
+##This properties define the ports used in JMX by labs
 basic.rec.multicastcontroller.jmxremote.port=25001
 intermediate.rec.multicastcontroller.jmxremote.port=25002
 advanced.rec.multicastcontroller.jmxremote.port=25003
@@ -321,13 +324,17 @@ java.rmi.server.hostname=`hostname -i`
 rec.multicast.repository=com.linkare.rec.impl.multicast.repository.impl.FSRepository
 
 ##rec.web END POINT##
+#The following property defining the URL which is used by system to access the webservices
 rec.web.endpoint=http://localhost:8080/rec-services
 
 ##SYSTEM PROPERTIES - Chat##
+#This property defining the interval of updating the list of bad words
 rec.multicast.badwordmanager.refresh.lap.time.minutes=1440
 
 ##SYSTEM PROPERTIES - Apparatus Auto Connect ID##
+### This property is used to auto connect and must be the value of the, e.g (<apparatus location="MY_EXPERIMENT_NAME_V1.0" ...>) of the RecFaceConfig.xml ###
 rec.apparatus.autoconnect.id=
 
 ##SYSTEM PROPERTIES - Apparatus Auto acquire result ##
+##When this property is defined true, the user is redirected to result tab, in auto connect mode.
 rec.apparatus.autoacquireresult=false
