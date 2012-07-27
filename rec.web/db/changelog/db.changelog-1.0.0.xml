@@ -5,5 +5,5 @@
 
 	<!-- The files for the version 1.0.0 of the application should be included 
 		in this dataset -->
-	<include file="db/changelog/1.0.0/changeset-2012-07-26.xml" />
+	<include file="db/changelog/1.0.0/changeset-2012-07-27.xml" />
 </databaseChangeLog>

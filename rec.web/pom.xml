@@ -349,19 +349,9 @@
 				<directory>src/main/resources</directory>
 				<includes>
 					<include>META-INF/persistence.xml</include>
+					<include>liquibase.properties</include>
 				</includes>
 				<filtering>true</filtering>
-			</resource>
-			<resource>
-				<directory>src/main/resources</directory>
-				<excludes>
-					<exclude>META-INF/persistence.xml</exclude>
-				</excludes>
-				<filtering>false</filtering>
-			</resource>
-			<resource>
-				<directory>src/main/resources-rec</directory>
-				<filtering>false</filtering>
 			</resource>
 		</resources>
 		<finalName>${artifactId}</finalName>
@@ -582,54 +572,18 @@
 				<rec.web.skin.name>alternate</rec.web.skin.name>
 			</properties>
 		</profile>
-		<!-- Profiles targetenv.empty and targetenv.dev are duplicates since maven 
-			doesn't allow multiples of the "property" tag in a single "activation" tag -->
-		<profile>
-			<id>targetenv.empty</id>
-			<activation>
-				<property>
-					<name>!targetenv</name>
-				</property>
-			</activation>
-			<properties>
-				<targetenv.hibernate.show_sql>true</targetenv.hibernate.show_sql>
-				<targetenv.hibernate.hbm2ddl.auto>update</targetenv.hibernate.hbm2ddl.auto>
-			</properties>
-		</profile>
-		<profile>
-			<id>targetenv.dev</id>
-			<activation>
-				<property>
-					<name>targetenv</name>
-					<value>dev</value>
-				</property>
-			</activation>
-			<properties>
-				<targetenv.hibernate.show_sql>true</targetenv.hibernate.show_sql>
-				<targetenv.hibernate.hbm2ddl.auto>update</targetenv.hibernate.hbm2ddl.auto>
-			</properties>
-		</profile>
-		<profile>
-			<id>targetenv.prod</id>
-			<activation>
-				<property>
-					<name>targetenv</name>
-					<value>prod</value>
-				</property>
-			</activation>
-			<properties>
-				<targetenv.hibernate.show_sql>false</targetenv.hibernate.show_sql>
-				<targetenv.hibernate.hbm2ddl.auto>validate</targetenv.hibernate.hbm2ddl.auto>
-			</properties>
-		</profile>
 		<profile>
 			<id>dev</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>!env</name>
+				</property>
 			</activation>
 			<properties>
+				<targetenv.hibernate.show_sql>true</targetenv.hibernate.show_sql>
+				<targetenv.hibernate.hbm2ddl.auto>update</targetenv.hibernate.hbm2ddl.auto>
 				<db.driver>com.mysql.jdbc.Driver</db.driver>
-				<db.url>jdbc:mysql://localhost:3306/rec_am</db.url>
+				<db.url>jdbc:mysql://localhost:3306/allocation</db.url>
 				<db.user>root</db.user>
 				<db.pass>root</db.pass>
 			</properties>
@@ -651,33 +605,16 @@
 			</build>
 		</profile>
 		<profile>
-			<id>qa</id>
-			<properties>
-				<db.driver>com.mysql.jdbc.Driver</db.driver>
-				<db.url>jdbc:mysql://helios.linkare.com:3306/rec_am</db.url>
-				<db.user>root</db.user>
-				<db.pass>root</db.pass>
-			</properties>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.liquibase</groupId>
-						<artifactId>liquibase-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>process-resources</phase>
-								<goals>
-									<goal>updateSQL</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
 			<id>prod</id>
+			<activation>
+				<property>
+					<name>env</name>
+					<value>prod</value>
+				</property>
+			</activation>
 			<properties>
+				<targetenv.hibernate.show_sql>false</targetenv.hibernate.show_sql>
+				<targetenv.hibernate.hbm2ddl.auto>validate</targetenv.hibernate.hbm2ddl.auto>
 				<db.driver>com.mysql.jdbc.Driver</db.driver>
 				<!-- This profile has to be executed in the own server -->
 				<db.url>jdbc:mysql://localhost:3306/rec_am</db.url>
