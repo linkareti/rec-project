@@ -353,6 +353,13 @@
 				</includes>
 				<filtering>true</filtering>
 			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>META-INF/persistence.xml</exclude>
+				</excludes>
+				<filtering>false</filtering>
+			</resource>
 		</resources>
 		<finalName>${artifactId}</finalName>
 		<plugins>
@@ -585,7 +592,7 @@
 				<db.driver>com.mysql.jdbc.Driver</db.driver>
 				<db.url>jdbc:mysql://localhost:3306/allocation</db.url>
 				<db.user>root</db.user>
-				<db.pass>root</db.pass>
+				<db.pass/>
 			</properties>
 			<build>
 				<plugins>
@@ -617,7 +624,7 @@
 				<targetenv.hibernate.hbm2ddl.auto>validate</targetenv.hibernate.hbm2ddl.auto>
 				<db.driver>com.mysql.jdbc.Driver</db.driver>
 				<!-- This profile has to be executed in the own server -->
-				<db.url>jdbc:mysql://localhost:3306/rec_am</db.url>
+				<db.url>jdbc:mysql://localhost:3306/allocation</db.url>
 				<db.user>root</db.user>
 				<db.pass>root</db.pass>
 			</properties>
