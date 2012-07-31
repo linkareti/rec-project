@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<HardwareInfo id="ELAB_BOYLE_MARIOTTE_DSPIC_V1.0" familiarName="boylemariotte" name="Basic STAMP"
+	version="BS2" manufacturer="Parallax" driverVersion="v2">
+
+	<!-- This elements are still just for test -->
+
+	<description>
+        <![CDATA[ 
+        Esta experiência serve para - não esquecer de alterar esta descrição
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+	</description>
+
+	<parameter name="vol_init" type="ContinuousValue" value="100">
+		<selection-list>
+			<value order="1">100</value>
+			<value order="2">1000</value>
+			<value order="3">20</value>
+		</selection-list>
+	</parameter>
+
+	<parameter name="vol_final" type="ContinuousValue" value="1000">
+		<selection-list>
+			<value order="1">100</value>
+			<value order="2">1000</value>
+			<value order="3">20</value>
+		</selection-list>
+	</parameter>
+
+	<parameter name="n_samples" type="ContinuousValue" value="5">
+		<selection-list>
+			<value order="1">2</value>
+			<value order="2">45</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
+
+	<parameter name="tb_samples" type="ContinuousValue" value="700">
+		<selection-list>
+			<value order="1">700</value>
+			<value order="2">2000</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
+
+	<frequency-scale label="Sampling Interval">
+		<min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">700</Frequency></min-frequency>
+		<max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">2000</Frequency></max-frequency>
+		<step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
+	</frequency-scale>
+	<Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency>
+
+	<sampling-scale>
+		<min-samples>2</min-samples>
+		<max-samples>45</max-samples>
+		<step-samples>1</step-samples>
+	</sampling-scale>
+
+	<ChannelInfo name="boylemariotte$rec.exp.boylemariotte.hardwareinfo.channel.0.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="boylemariotte$rec.exp.boylemariotte.hardwareinfo.channel.0.label" physicsunitname="boylemariotte$rec.exp.boylemariotte.hardwareinfo.channel.0.physicsunitname" physicsunitsymbol="uL" multiplier="none" selected="true">
+			<min><PhysicsVal type="int">0</PhysicsVal></min>
+			<max><PhysicsVal type="int">1100</PhysicsVal></max>
+			<step><PhysicsVal type="int">1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="int">5</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+
+	<ChannelInfo name="boylemariotte$rec.exp.boylemariotte.hardwareinfo.channel.1.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="boylemariotte$rec.exp.boylemariotte.hardwareinfo.channel.1.label" physicsunitname="boylemariotte$rec.exp.boylemariotte.hardwareinfo.channel.1.physicsunitname" physicsunitsymbol="kPa" multiplier="none" selected="true">
+			<min><PhysicsVal type="int">0</PhysicsVal></min>
+			<max><PhysicsVal type="int">700</PhysicsVal></max>
+			<step><PhysicsVal type="int">1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+
+</HardwareInfo>
