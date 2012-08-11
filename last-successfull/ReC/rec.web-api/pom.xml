@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>parent</artifactId>
+		<groupId>com.linkare.maven</groupId>
+		<version>1.0.1</version>
+	</parent>
+	<groupId>com.linkare</groupId>
+	<artifactId>rec.web-api</artifactId>
+	<name>rec.web-api</name>
+	<version>1.1.0-SNAPSHOT</version>
+	<scm>
+		<connection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/trunk/rec.web-api</connection>
+		<developerConnection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/trunk/rec.web-api</developerConnection>
+		<url>https://sventon.linkare.com/repos/svnroot/list/internal/rec-project/rec/trunk/rec.web-api</url>
+	</scm>
+	<build>
+		<plugins>
+			<!-- Compiler plugin enforces Java 1.6 compatiblity -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<tagNameFormat>rel-web-api-@{project.version}</tagNameFormat>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
