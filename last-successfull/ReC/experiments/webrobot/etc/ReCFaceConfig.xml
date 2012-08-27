@@ -1,0 +1,66 @@
+<apparatus toolTipBundleKey="webrobot$rec.exp.tip.webrobot"
+	location="ELAB_WEBROBOT_V01" iconLocationBundleKey="webrobot$rec.exp.icon.webrobot"
+	headerDisplayClassLocationBundleKey=""
+	displayStringBundleKey="webrobot$rec.exp.title.webrobot"
+	displayFactoryClassLocationBundleKey=""
+	desktopLocationBundleKey="webrobot$rec.exp.background.webrobot"
+	dataModelClassLocationBundleKey=""
+	customizerClassLocationBundleKey="webrobot$rec.exp.customizer.webrobot"
+	visible="true" selected="true" order="0" enabled="false" connected="false">
+		<localizationBundle name="webrobot"
+		location="recresource:///pt/utl/ist/elab/client/webrobot/resources/messages" />
+	<mediaConfig videoLocation="webrobot$rec.exp.url.webrobot.video"
+		canSave="true" offlinePlay="true" />
+	<display toolTipBundleKey="webrobot$rec.exp.display.webrobot.tip.sensor"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor"
+		displayStringBundleKey="webrobot$rec.exp.display.webrobot.title.sensor"
+		classLocationBundleKey="webrobot$rec.exp.display.webrobot.loc.sensor"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="webrobot$rec.exp.display.webrobot.tip.sensor.2"
+		offlineCapable="false" iconLocationBundleKey="webrobot$rec.exp.display.webrobot.icon.sensor.2"
+		displayStringBundleKey="webrobot$rec.exp.display.webrobot.title.sensor.2"
+		classLocationBundleKey="webrobot$rec.exp.display.webrobot.loc.sensor.2"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="webrobot$rec.exp.display.webrobot.tip.1"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table"
+		displayStringBundleKey="webrobot$rec.exp.display.webrobot.title.1"
+		classLocationBundleKey="webrobot$rec.exp.display.webrobot.loc.1"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="webrobot$rec.exp.display.webrobot.tip.2"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="webrobot$rec.exp.display.webrobot.title.2"
+		classLocationBundleKey="webrobot$rec.exp.display.webrobot.loc.2"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="webrobot$rec.exp.display.webrobot.tip.3"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="webrobot$rec.exp.display.webrobot.title.3"
+		classLocationBundleKey="webrobot$rec.exp.display.webrobot.loc.3"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="webrobot$rec.exp.display.webrobot.tip.4"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="webrobot$rec.exp.display.webrobot.title.4"
+		classLocationBundleKey="webrobot$rec.exp.display.webrobot.loc.4"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="webrobot$rec.exp.display.webrobot.tip.5"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="webrobot$rec.exp.display.webrobot.title.5"
+		classLocationBundleKey="webrobot$rec.exp.display.webrobot.loc.5"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="webrobot$rec.exp.display.webrobot.tip.6"
+	offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+	displayStringBundleKey="webrobot$rec.exp.display.webrobot.title.6"
+	classLocationBundleKey="webrobot$rec.exp.display.webrobot.loc.6"
+	visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<webResource toolTipLocationBundleKey="" internalBrowser="false"
+		iconLocationBundleKey="" visible="true" selected="true" order="0"
+		enabled="false" connected="false" />
+	<webResource toolTipLocationBundleKey="" internalBrowser="false"
+		iconLocationBundleKey="" visible="true" selected="true" order="0"
+		enabled="false" connected="false" />
+	<webResource toolTipLocationBundleKey="" internalBrowser="false"
+		iconLocationBundleKey="" visible="true" selected="true" order="0"
+		enabled="false" connected="false" />
+	<webResource toolTipLocationBundleKey="" internalBrowser="false"
+		iconLocationBundleKey="" visible="true" selected="true" order="0"
+		enabled="false" connected="false" />
+</apparatus>
