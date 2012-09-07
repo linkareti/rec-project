@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/protected/backoffice.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle['menu.labsstatus.title']}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="labs_status_form" styleClass="elab_launch">
+            <h1><h:outputText value="Chat e-lab"/></h1>
+            <p:accordionPanel id="chatView" var="room" value="#{chatBean.labs}" dynamic="true" cache="true" activeIndex="-1">
+                <p:ajax event="tabChange" listener="#{chatBean.onTabChange}" update="container messageReceived basicList" />
+                <p:tab id="chatTab" title="#{room.description}" 
+                       titletip="#{(room.available) ? statusBundle['tooltip.lab.available'] : statusBundle['tooltip.lab.unavailable'] }" 
+                       disabled="#{!room.available}">
+                    <p:fieldset id="container" legend="#{room.description}">
+                        <p:contextMenu for="basicList">  
+                            <p:menuitem value="Kick" update="basicList" icon="ui-icon-close" actionListener="#{chatBean.kickUser}" process="@this"/>
+                        </p:contextMenu> 
+                        <h:panelGroup>
+                            <p:outputPanel layout="block" style="width:550px;height:200px;overflow:auto;"   
+                                           styleClass="chatroom" id="chatContent" autoUpdate="true" > 
+                                <h:inputTextarea value="#{chatBean.messageReceived}" id="messageReceived" 
+                                                 readonly="true" cols="95" rows="11" 
+                                                 style="overflow :auto; border-style:hidden; margin:0px; padding:0px;" />
+                            </p:outputPanel>
+                            <p:separator />  
+                            <p:focus for="messageSent" id="setFocus"/>  
+                            <p:inputText value="#{chatBean.message}" styleClass="messageInput" style="width:85%;" id="messageSent" autocomplete="false">  
+                                <p:ajax event="change" />
+                            </p:inputText>
+                            <p:spacer width="5" />  
+                            <p:commandButton id="btnSend" value="Send" action="#{chatBean.send}" 
+                                             process="@this" update="messageReceived messageSent setFocus" /> 
+                        </h:panelGroup>  
+                        <div style="float: right; height: 200px; margin-top: -42%; width: 25%;">
+                            <h:dataTable id="basicList" var="user" value="#{chatBean.users}" >
+                                <p:column headerText="Participantes" > 
+                                    #{user.userName}
+                                </p:column>
+                            </h:dataTable>
+                        </div>
+                    </p:fieldset>
+                </p:tab>
+            </p:accordionPanel>
+        </h:form>
+    </ui:define>
+</ui:composition>
