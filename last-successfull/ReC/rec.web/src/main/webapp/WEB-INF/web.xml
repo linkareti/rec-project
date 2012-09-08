@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.faces</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>JnlpDownloadServlet</servlet-name>
+		<servlet-class>com.sun.javaws.servlet.JnlpDownloadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>JnlpDownloadServlet</servlet-name>
+		<url-pattern>/client/*</url-pattern>
+	</servlet-mapping>
+	<session-config>
+		<session-timeout>20</session-timeout>
+	</session-config>
+	<listener>
+		<listener-class>com.linkare.rec.web.listener.SessionListener</listener-class>
+	</listener>
+	<filter>
+		<filter-name>AuthenticatedFilter</filter-name>
+		<filter-class>com.linkare.rec.web.filter.AuthenticatedFilter</filter-class>
+	</filter>
+	<filter>
+		<filter-name>SessionTimeoutFilter</filter-name>
+		<filter-class>com.linkare.rec.web.filter.SessionTimeoutFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AuthenticatedFilter</filter-name>
+		<url-pattern>*.faces</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>SessionTimeoutFilter</filter-name>
+		<url-pattern>*.faces</url-pattern>
+	</filter-mapping>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/AccessDenied.jsp</location>
+	</error-page>
+	<mime-mapping>
+		<extension>jnlp</extension>
+		<mime-type>application/x-java-jnlp-file</mime-type>
+	</mime-mapping>
+</web-app>
