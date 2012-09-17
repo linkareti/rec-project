@@ -16,7 +16,6 @@
 // rec_generic_driver.c
 //
 #define ID_DO_HARDWARE "ELAB_OPTICA_DSPIC_V1.0"
-#define N_PARAMETERS_MAX 8
 #define TIME_OUT 180 //* ~0.5s, this value should be relatively well majored (2x higher)
 
 //
@@ -40,7 +39,7 @@
 #define MOTOR_SPEED 100
 #define FOLGA 10
 #define VAL_THRES_MIN 1400
-#define CALIB1_AUX 4	//4
+#define CALIB1_AUX 8	//4
 
 //
 //step_motor2.c
@@ -55,7 +54,7 @@
 #define REAL_MAX_POS 1700	//1700	(1708)
 #define POSITION2_MIN 38	//38
 #define CALIB_AUX 200	//se está antes do sensor calibracao
-#define CALIB_AUX2 187	//define a posicao onde detectou
+#define CALIB_AUX2 180	//define a posicao onde detectou //187
 #define MOTOR2_SPEED 100
 #define FOLGA2 13
 

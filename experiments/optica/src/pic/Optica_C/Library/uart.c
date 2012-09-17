@@ -47,7 +47,7 @@ void configure_uart2(void){
 							// 1 = 8-bit data, even parity
 							// 0 = 8-bit data, no parity
 
-	U2MODEbits.STSEL=1;		//**Stop Selection bit**//
+	U2MODEbits.STSEL=0;		//**Stop Selection bit**//
 							// 1 = 2 Stop bits
 							// 0 = 1 Stop bit
 
@@ -152,7 +152,10 @@ void __attribute__((__interrupt__,auto_psv)) _U2RXInterrupt(void){
 	IFS1bits.U2RXIF = 0;
 
 	*Serial.receiveddata = ReadUART2();
-	Serial.receiveddata++;
+	//In order to avoid buffer overflow
+	if((Serial.receiveddata == &Serial.rbuf[79]) && (Serial.rbuf[79] != '\r'))
+		Serial.receiveddata = Serial.rbuf;
+	Serial.receiveddata++;		
 
 	if(Serial.rbuf[3] == '\r'){
 		if((Serial.rbuf[0] == 's') && 

@@ -109,7 +109,6 @@ double conv_angle_2(int);
 // rec_generic_driver.c
 //
 extern char state[20];
-extern char parameters[N_PARAMETERS_MAX][20];
 extern int stop;
 void rec_generic_driver(void);
 

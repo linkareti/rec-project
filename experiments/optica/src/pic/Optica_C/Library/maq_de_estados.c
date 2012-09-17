@@ -1,8 +1,5 @@
 #include "elab.h"
 
-//int protocolo = 0, param_7;
-//double param_1, param_2, param_3, param_4, param_5, param_6;
-
 void maq_de_estados(void)
 {
 ////UNKNOWN state
@@ -34,21 +31,13 @@ void maq_de_estados(void)
 		{
 			sprintf(state,"STOPED");
 			rec_generic_driver();
+			ClrWdt();
 		}
 	}
 	
 //CONFIGURING transition
 	if(strcmp(state,"CONFIGURING") == 0)
 	{
-//		sscanf(parameters[0],"%d", &protocolo);		
-//		sscanf(parameters[1],"%lf", &param_1);
-//		sscanf(parameters[2],"%lf", &param_2);
-//		sscanf(parameters[3],"%lf", &param_3);
-//		sscanf(parameters[4],"%lf", &param_4);
-//		sscanf(parameters[5],"%lf", &param_5);
-//		sscanf(parameters[6],"%lf", &param_6);
-//		sscanf(parameters[7],"%d", &param_7);
-
 		if(protocolo == 1) protocolo_1_configuring();
 		if(protocolo == 2) protocolo_2_configuring();
 		if(protocolo == 3) protocolo_3_configuring();
@@ -69,6 +58,7 @@ void maq_de_estados(void)
 		{
 			sprintf(state,"CONFIGURED");
 			rec_generic_driver();
+			ClrWdt();
 		}
 	}
 
@@ -100,6 +90,7 @@ void maq_de_estados(void)
 		{
 			sprintf(state,"STARTED");
 			rec_generic_driver();
+			ClrWdt();
 		}
 	}
 
@@ -120,6 +111,7 @@ void maq_de_estados(void)
 		{
 			sprintf(state,"RESETED");
 			rec_generic_driver();
+			ClrWdt();
 		}
 	}
 }

@@ -1,7 +1,6 @@
 #include "elab.h"		
 
 char state[20];
-char parameters[N_PARAMETERS_MAX][20];
 int stop = 0;
 int time_out = 0;
 
