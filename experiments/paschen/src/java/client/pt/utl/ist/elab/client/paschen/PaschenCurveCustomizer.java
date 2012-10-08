@@ -9,6 +9,8 @@ package pt.utl.ist.elab.client.paschen;
  * @author Joao Loureiro - MEFT - IST
  */
 
+import javax.swing.JFrame;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.client.customizer.ICustomizerListener;
@@ -19,6 +21,24 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  */
 public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
 
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2856996833087519856L;
+
+	public static void main(String[] args)
+    {
+		 ReCResourceBundle.loadResourceBundle("paschen","recresource:///pt/utl/ist/elab/client/paschen/resources/messages");
+		 JFrame frame=new JFrame("Teste ao CustomizerX");//Criar um objecto "Janela"
+         PaschenCurveCustomizer customizer=new PaschenCurveCustomizer(); //Criar um objecto "CustomizerX" que é do tipo JPanel
+         frame.getContentPane().add(customizer); //Adicionar o customizer gráfico ao "conteúdo" da Janela
+         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//definir que quando se fecha a janela se faz um System.exit(0), que termina a JVM também.
+         frame.pack(); //redimensionar a janela para ter o tamanho mínimo para conter o nosso painél "Customizer"
+         frame.setVisible(true); //Colocar a janela visível no ecrã
+       
+    }	
+	
+	
     /**
      * Creates new form PaschenCurveCustomizer
      */
@@ -34,8 +54,10 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+    
+    	
         java.awt.GridBagConstraints gridBagConstraints;
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
+        //bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jPanelNeedle1 = new javax.swing.JPanel();
         sldNeedle1 = new javax.swing.JSlider();
@@ -64,8 +86,8 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
         sldNumSamplesP = new javax.swing.JSlider();
         tfNumSamplesP = new javax.swing.JTextField();
         lblErrorSamplesTooHighP = new javax.swing.JLabel();
-
-        jPanelNeedle1.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("pv$rec.exp.paschen.customizer.lbl.title1","pv$rec.exp.paschen.customizer.lbl.title1"))); // NOI18N
+        
+        jPanelNeedle1.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.title1","paschen$rec.exp.paschen.customizer.lbl.title1"))); // NOI18N
         jPanelNeedle1.setLayout(new java.awt.GridBagLayout());
 
         sldNeedle1.setMajorTickSpacing(20);
@@ -96,8 +118,8 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
         tfNeedle1.setPreferredSize(new java.awt.Dimension(40, 25));
         tfNeedle1.setRequestFocusEnabled(false);
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, sldNeedle1, org.jdesktop.beansbinding.ELProperty.create("${value}"), tfNeedle1, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
+        //org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, sldNeedle1, org.jdesktop.beansbinding.ELProperty.create("${value}"), tfNeedle1, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        //bindingGroup.addBinding(binding);
 
         tfNeedle1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,7 +135,7 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
 
         lblErrorPress1.setForeground(new java.awt.Color(255, 0, 0));
         lblErrorPress1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblErrorPress1.setText(ReCResourceBundle.findStringOrDefault("pv$rec.exp.paschen.customizer.lbl.warning2","pv$rec.exp.paschen.customizer.lbl.warning2")); // NOI18N
+        lblErrorPress1.setText(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.warning2","paschen$rec.exp.paschen.customizer.lbl.warning2")); // NOI18N
         lblErrorPress1.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -122,7 +144,7 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanelNeedle1.add(lblErrorPress1, gridBagConstraints);
 
-        jPanelNeedle2.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("pv$rec.exp.paschen.customizer.lbl.title5","pv$rec.exp.paschen.customizer.lbl.title5"))); // NOI18N
+        jPanelNeedle2.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.title5","paschen$rec.exp.paschen.customizer.lbl.title5"))); // NOI18N
         jPanelNeedle2.setVerifyInputWhenFocusTarget(false);
         jPanelNeedle2.setLayout(new java.awt.GridBagLayout());
 
@@ -153,8 +175,8 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
         tfNeedle2.setPreferredSize(new java.awt.Dimension(40, 25));
         tfNeedle2.setRequestFocusEnabled(false);
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, sldNeedle2, org.jdesktop.beansbinding.ELProperty.create("${value}"), tfNeedle2, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
+        //binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, sldNeedle2, org.jdesktop.beansbinding.ELProperty.create("${value}"), tfNeedle2, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        //bindingGroup.addBinding(binding);
 
         tfNeedle2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,7 +192,7 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
 
         lblErrorPress2.setForeground(new java.awt.Color(255, 0, 0));
         lblErrorPress2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblErrorPress2.setText(ReCResourceBundle.findStringOrDefault("pv$rec.exp.customizer.label2","pv$rec.exp.customizer.label2")); // NOI18N
+        lblErrorPress2.setText(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.customizer.label2","paschen$rec.exp.customizer.label2")); // NOI18N
         lblErrorPress2.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -179,8 +201,8 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanelNeedle2.add(lblErrorPress2, gridBagConstraints);
 
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("tenta/resourses/messages"); // NOI18N
-        jPanelVoltage1.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("rec.exp.paschen.customizer.lbl.title2"))); // NOI18N
+        //java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("resourses/messages.properties"); // NOI18N
+        jPanelVoltage1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.title2", "paschen$rec.exp.paschen.customizer.lbl.title2"))); // NOI18N
         jPanelVoltage1.setLayout(new java.awt.GridBagLayout());
 
         sldVoltage1.setMajorTickSpacing(400);
@@ -211,8 +233,8 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
         tfVoltage1.setMinimumSize(new java.awt.Dimension(30, 16));
         tfVoltage1.setPreferredSize(new java.awt.Dimension(40, 25));
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, sldVoltage1, org.jdesktop.beansbinding.ELProperty.create("${value}"), tfVoltage1, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
+        //binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, sldVoltage1, org.jdesktop.beansbinding.ELProperty.create("${value}"), tfVoltage1, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        //bindingGroup.addBinding(binding);
 
         tfVoltage1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,7 +254,7 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
 
         lblErrorVoltage1.setForeground(new java.awt.Color(255, 0, 0));
         lblErrorVoltage1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblErrorVoltage1.setText(ReCResourceBundle.findStringOrDefault("pv$rec.exp.paschen.customizer.lbl.warning2","pv$rec.exp.paschen.customizer.lbl.warning2")); // NOI18N
+        lblErrorVoltage1.setText(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.warning2","paschen$rec.exp.paschen.customizer.lbl.warning2")); // NOI18N
         lblErrorVoltage1.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -241,7 +263,7 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanelVoltage1.add(lblErrorVoltage1, gridBagConstraints);
 
-        jPanelVoltage2.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("rec.exp.paschen.customizer.lbl.title3"))); // NOI18N
+        jPanelVoltage2.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.title3","paschen$rec.exp.paschen.customizer.lbl.title3"))); // NOI18N
         jPanelVoltage2.setLayout(new java.awt.GridBagLayout());
 
         sldVoltage2.setMajorTickSpacing(400);
@@ -272,8 +294,8 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
         tfVoltage2.setMinimumSize(new java.awt.Dimension(30, 16));
         tfVoltage2.setPreferredSize(new java.awt.Dimension(40, 25));
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, sldVoltage2, org.jdesktop.beansbinding.ELProperty.create("${value}"), tfVoltage2, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
+        //binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, sldVoltage2, org.jdesktop.beansbinding.ELProperty.create("${value}"), tfVoltage2, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        //bindingGroup.addBinding(binding);
 
         tfVoltage2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -293,7 +315,7 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
 
         lblErrorVoltage2.setForeground(new java.awt.Color(255, 0, 0));
         lblErrorVoltage2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblErrorVoltage2.setText(ReCResourceBundle.findStringOrDefault("pv$rec.exp.paschen.customizer.lbl.warning1","pv$rec.exp.paschen.customizer.lbl.warning1")); // NOI18N
+        lblErrorVoltage2.setText(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.warning1","paschen$rec.exp.paschen.customizer.lbl.warning1")); // NOI18N
         lblErrorVoltage2.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -302,13 +324,13 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanelVoltage2.add(lblErrorVoltage2, gridBagConstraints);
 
-        jButtonDftcfg.setText(bundle.getString("rec.exp.paschen.customizer.lbl.dftcfg")); // NOI18N
+        jButtonDftcfg.setText(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.dftcfg","paschen$rec.exp.paschen.customizer.lbl.dftcfg")); // NOI18N
 
-        jButtonCancel.setText(bundle.getString("rec.exp.paschen.customizer.lbl.cancel")); // NOI18N
+        jButtonCancel.setText(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.cancel","paschen$rec.exp.paschen.customizer.lbl.cancel")); // NOI18N
 
-        jButtonOk.setText(bundle.getString("rec.exp.paschen.customizer.lbl.ok")); // NOI18N
+        jButtonOk.setText(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.ok","paschen$rec.exp.paschen.customizer.lbl.ok")); // NOI18N
 
-        jPanelNumSamplesV.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("rec.exp.paschen.customizer.lbl.title4"))); // NOI18N
+        jPanelNumSamplesV.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.title4","paschen$rec.exp.paschen.customizer.lbl.title4"))); // NOI18N
         jPanelNumSamplesV.setLayout(new java.awt.GridBagLayout());
 
         sldNumSamplesV.setMajorTickSpacing(500);
@@ -339,8 +361,8 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
         tfNumSamplesV.setMinimumSize(new java.awt.Dimension(30, 16));
         tfNumSamplesV.setPreferredSize(new java.awt.Dimension(40, 25));
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, sldNumSamplesV, org.jdesktop.beansbinding.ELProperty.create("${value}"), tfNumSamplesV, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
+        //binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, sldNumSamplesV, org.jdesktop.beansbinding.ELProperty.create("${value}"), tfNumSamplesV, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        //bindingGroup.addBinding(binding);
 
         tfNumSamplesV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -360,7 +382,7 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
 
         lblErrorSamplesTooHighV.setForeground(new java.awt.Color(255, 0, 0));
         lblErrorSamplesTooHighV.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblErrorSamplesTooHighV.setText(ReCResourceBundle.findStringOrDefault("pv$rec.exp.paschen.customizer.lbl.warning3","pv$rec.exp.paschen.customizer.lbl.warning3")); // NOI18N
+        lblErrorSamplesTooHighV.setText(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.warning3","paschen$rec.exp.paschen.customizer.lbl.warning3")); // NOI18N
         lblErrorSamplesTooHighV.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -369,7 +391,7 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanelNumSamplesV.add(lblErrorSamplesTooHighV, gridBagConstraints);
 
-        jPanelNumSamplesP.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("rec.exp.paschen.customizer.lbl.title6"))); // NOI18N
+        jPanelNumSamplesP.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.title6","paschen$rec.exp.paschen.customizer.lbl.title6"))); // NOI18N
         jPanelNumSamplesP.setLayout(new java.awt.GridBagLayout());
 
         sldNumSamplesP.setMajorTickSpacing(10);
@@ -401,8 +423,8 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
         tfNumSamplesP.setMinimumSize(new java.awt.Dimension(30, 16));
         tfNumSamplesP.setPreferredSize(new java.awt.Dimension(40, 25));
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, sldNumSamplesP, org.jdesktop.beansbinding.ELProperty.create("${value}"), tfNumSamplesP, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
+        //binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, sldNumSamplesP, org.jdesktop.beansbinding.ELProperty.create("${value}"), tfNumSamplesP, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        //bindingGroup.addBinding(binding);
 
         tfNumSamplesP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -422,7 +444,7 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
 
         lblErrorSamplesTooHighP.setForeground(new java.awt.Color(255, 0, 0));
         lblErrorSamplesTooHighP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblErrorSamplesTooHighP.setText(ReCResourceBundle.findStringOrDefault("pv$rec.exp.paschen.customizer.lbl.warning4","pv$rec.exp.paschen.customizer.lbl.warning4")); // NOI18N
+        lblErrorSamplesTooHighP.setText(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.warning4","paschen$rec.exp.paschen.customizer.lbl.warning4")); // NOI18N
         lblErrorSamplesTooHighP.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -430,7 +452,7 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanelNumSamplesP.add(lblErrorSamplesTooHighP, gridBagConstraints);
-
+/*
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -482,7 +504,10 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        bindingGroup.bind();
+        bindingGroup.bind();  
+        
+        */
+        
     }// </editor-fold>//GEN-END:initComponents
 
     private void sldNeedle1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldNeedle1StateChanged
@@ -585,7 +610,7 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
     private javax.swing.JTextField tfNumSamplesV;
     private javax.swing.JTextField tfVoltage1;
     private javax.swing.JTextField tfVoltage2;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
+    //private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
     /** Utility field used by event firing mechanism. */
@@ -621,7 +646,7 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
     private HardwareAcquisitionConfig acqConfig = null;
     
     public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-        this.HardwareInfo = hardwareInfo;
+        this.hardwareInfo = hardwareInfo;
     }
      
 
@@ -655,9 +680,9 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
     			
             }
             
-            String h1CurrentSelectedValue = acqConfig.getSelectedHardwareParameterValue("h1");
-            heigthFallValue1.setText(h1CurrentSelectedValue);
-            sliderHeigthFallOne.setValue(Integer.valueOf(heigthFallValue1.getText()));
+            //String h1CurrentSelectedValue = acqConfig.getSelectedHardwareParameterValue("h1");
+            //heigthFallValue1.setText(h1CurrentSelectedValue);
+            //sliderHeigthFallOne.setValue(Integer.valueOf(heigthFallValue1.getText()));
             //...more code after this ...
     }    
     
@@ -670,7 +695,7 @@ public class PaschenCurveCustomizer extends javax.swing.JPanel implements com.li
     }
 
     public java.lang.String getCustomizerTitle() {
-        return ReCResourceBundle.findStringOrDefault("paschen$rec.exp.pachen.customizer.title","paschen$rec.exp.paschen.customizer.title");
+        return ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.title","paschen$rec.exp.paschen.customizer.title");
     }
 
 
