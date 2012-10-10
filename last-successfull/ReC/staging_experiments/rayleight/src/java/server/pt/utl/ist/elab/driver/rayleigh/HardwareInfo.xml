@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="EXP_RAYLEIGH_STAMP_V1.1" familiarName="Rayleigh" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
+    <description>
+        <![CDATA[ 
+        Esta experiência serve para - não esquecer de alterar esta descrição
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+    <customizer href="pt.utl.ist.elab.client.rayleigh.RayleighCustomizer"/>
+        
+    <parameter name="DeltaX" type="ContinuousValue" value="60">
+        <selection-list>
+            <value order="1">10</value>
+            <value order="2">170</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>
+    
+    <frequency-scale label="FrequencyType">
+        <min-frequency><Frequency type="FrequencyType" multiplier="milli">1</Frequency></min-frequency>
+        <max-frequency><Frequency type="FrequencyType" multiplier="milli">1000</Frequency></max-frequency>
+        <step-frequency><Frequency type="FrequencyType" multiplier="milli">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="FrequencyType" multiplier="none">100</Frequency>
+    
+    <sampling-scale>
+        <min-samples>1</min-samples>
+        <max-samples>1000</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+    
+    <ChannelInfo name="Posicao" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Posicao" physicsunitname="cm" physicsunitsymbol="cm" multiplier="none" selected="true">
+            <min><PhysicsVal type="int">10</PhysicsVal></min>
+            <max><PhysicsVal type="int">170</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Intensidade" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Intensidade" physicsunitname="Volt" physicsunitsymbol="V" multiplier="none" selected="true">
+            <min><PhysicsVal type="double">0</PhysicsVal></min>
+            <max><PhysicsVal type="double">100000</PhysicsVal></max>
+            <step><PhysicsVal type="double">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="double">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+ </HardwareInfo>
