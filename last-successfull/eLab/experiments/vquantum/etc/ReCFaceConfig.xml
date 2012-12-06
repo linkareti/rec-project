@@ -1,0 +1,30 @@
+<apparatus location="MECANICA_QUANTICA_V1.0"
+	customizerClassLocationBundleKey="quantum$rec.exp.customizer.quantum"
+	toolTipBundleKey="quantum$rec.exp.tip.quantum" iconLocationBundleKey="quantum$rec.exp.icon.quantum"
+	displayStringBundleKey="quantum$rec.exp.title.quantum"
+	desktopLocationBundleKey="quantum$rec.exp.background.quantum" order="1"
+	headerDisplayClassLocationBundleKey=""
+	displayFactoryClassLocationBundleKey=""
+	dataModelClassLocationBundleKey="" visible="true" selected="true"
+	enabled="false" connected="false">
+	<localizationBundle name="quantum"
+		location="recresource:///pt/utl/ist/elab/client/vquantum/resources/messages" />
+	<display classLocationBundleKey="quantum$rec.exp.display.quantum.loc.anim"
+		toolTipBundleKey="quantum$rec.exp.display.quantum.tip.anim"
+		iconLocationBundleKey="ReCUI$rec.ui.icon.sensor"
+		displayStringBundleKey="quantum$rec.exp.display.quantum.title.anim"
+		offlineCapable="false" order="1" visible="true" selected="true"
+		enabled="false" connected="false" />
+	<display classLocationBundleKey="quantum$rec.exp.display.quantum.loc.1"
+		toolTipBundleKey="quantum$rec.exp.display.quantum.tip.1"
+		iconLocationBundleKey="ReCUI$rec.ui.icon.table"
+		displayStringBundleKey="quantum$rec.exp.display.quantum.title.1"
+		offlineCapable="false" order="2" visible="true" selected="true"
+		enabled="false" connected="false" />
+	<display classLocationBundleKey="quantum$rec.exp.display.quantum.loc.2"
+		toolTipBundleKey="quantum$rec.exp.display.quantum.tip.2"
+		iconLocationBundleKey="ReCUI$rec.ui.icon.table"
+		displayStringBundleKey="quantum$rec.exp.display.quantum.title.2"
+		offlineCapable="false" order="3" visible="true" selected="true"
+		enabled="false" connected="false" />
+</apparatus>
