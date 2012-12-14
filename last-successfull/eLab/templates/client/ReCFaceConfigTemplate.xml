@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<reCFaceConfig usersListRefreshRateMs="10000"
+	splashIconLocationBundleKey="ReCUI$rec.ui.icon.splash"
+	showVideoFrame="false" showUserList="true" showChatFrame="true"
+	iconSponsorLocationBundleKey="bundleName#bundleKey"
+	iconLocationBundleKey="ReCUI$rec.ui.icon.frame"
+	helpPageLocationBundleKey="ReCUI$rec.ui.url.help"
+	frameTitleBundleKey="ReCUI$rec.ui.title.frame"
+	enterApparatusChatRoom="true" enableVideoFrame="false" enableUsersList="true"
+	enableLoginPassword="false" enableChatFrame="true" autoConnectLab="false"
+	appPreferredWidth="848" appPreferredHeight="478"
+	aboutPageLocationBundleKey="ReCUI$rec.ui.url.about">
+	<localizationBundle name="ReCUI"
+		location="recresource:///com/linkare/rec/impl/newface/resources/ReCUI" />
+	<localizationBundle name="ReCLabeLab"
+		location="recresource:///pt/utl/ist/elab/resources/ReCLabeLab" />
+	
+	<webResource toolTipLocationBundleKey="" internalBrowser="false"
+		iconLocationBundleKey="" visible="true" selected="true" order="0"
+		enabled="false" connected="false" />
+
+	<!--Start Lab configuration-->
+
+	<!--End Lab configuration-->
+
+</reCFaceConfig>
