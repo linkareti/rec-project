@@ -1,0 +1,114 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui" 
+                template="/index.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{bundle['page.reservation.scheduler.title']}"></h:outputText>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:panelGroup layout="block">
+            <h:form id="schedule-form">
+                <p:ajaxStatus style="height:24px;display:block;">
+                    <f:facet name="start">
+                        <h:graphicImage value="images/ajaxloading.gif" />
+                    </f:facet>
+
+                    <f:facet name="complete">
+                        <h:outputText value="" />
+                    </f:facet>
+                </p:ajaxStatus>
+
+                <p:messages id="messages" showDetail="true" />
+                <p:scrollPanel styleClass="scrollPanelSchedule">
+                    <p:schedule id="schedule" value="#{scheduleController.eventModel}"
+                                widgetVar="myschedule" allDaySlot="false"
+                                showWeekends="true" draggable="false" resizable="true"
+                                firstHour="8"
+                                slotMinutes="15" locale="pt" view="month" aspectRatio="1.83">
+                        <p:ajax event="dateSelect" listener="#{scheduleController.onDateSelect}" update="eventDetails" oncomplete="eventDialog.show()" />  
+                        <p:ajax event="eventSelect" listener="#{scheduleController.onEventSelect}" update="eventDetails" oncomplete="eventDialog.show()" />  
+                        <p:ajax event="eventMove" listener="#{scheduleController.onEventMove}" update="messages" />  
+                        <p:ajax event="eventResize" listener="#{scheduleController.onEventResize}" update="messages" />  
+                    </p:schedule>
+                </p:scrollPanel>
+                <p:dialog widgetVar="eventDialog" header="#{bundle['label.event.header']}" showEffect="clip" hideEffect="clip">
+                    <h:inputHidden id="idInternal"
+                                   value="#{scheduleController.event.idInternal}" />
+                    <h:inputHidden id="id" value="#{scheduleController.event.id}" />
+                    <h:inputHidden id="domain"
+                                   value="#{scheduleController.event.domain}" />
+                    <h:panelGrid id="eventDetails" columns="3" border="0">
+                        <h:outputLabel for="title" value="#{bundle['reservation.title']}" />
+                        <p:inputText id="title" value="#{scheduleController.event.title}"
+                                     required="true" label="#{scheduleController.event.title}" />
+                        <p:message for="title" />
+                        <h:outputLabel value="#{bundle['reservation.experiment']}"
+                                       for="experiment" />
+                        <p:selectOneMenu id="experiment"
+                                         value="#{scheduleController.event.experiment}"
+                                         label="#{bundle['reservation.experiment']}" required="true"
+                                         converter="experimentConverter">
+                            <f:selectItems
+                                value="#{experimentController.activeItemsAvailableSelectOne}" />
+                        </p:selectOneMenu>
+                        <p:message for="experiment" />
+                        <h:outputLabel value="#{bundle['reservation.reservedTo']}"
+                                       for="group" rendered="#{!userView.external}" />
+                        <p:selectOneMenu id="group"
+                                         value="#{scheduleController.event.group}"
+                                         label="#{bundle['reservation.group']}"
+                                         required="#{!userView.external}" converter="groupConverter"
+                                         rendered="#{!userView.external}">
+                            <f:selectItems
+                                value="#{groupController.itemsAvailableSelectOne}" />
+                        </p:selectOneMenu>
+                        <p:message for="group" rendered="#{!userView.external}" />
+                        <h:outputLabel value="#{bundle['reservation.reservedTo']}"
+                                       for="externalCourse" rendered="#{userView.external}" />
+                        <p:selectOneMenu id="externalCourse"
+                                         value="#{scheduleController.event.externalCourse}"
+                                         required="#{userView.external}" rendered="#{userView.external}"
+                                         disabled="#{scheduleController.event.idInternal != null}"
+                                         converter="externalCourseConverter">
+                            <f:selectItems
+                                value="#{externalCourseController.itemsAvailableSelectOne}" />
+                        </p:selectOneMenu>
+                        <p:message for="externalCourse" rendered="#{userView.external}" />
+                        <h:outputLabel for="startDate"
+                                       value="#{bundle['reservation.startDate']}" />
+                        <p:inputMask id="startDate"
+                                     value="#{scheduleController.event.startDate}"
+                                     mask="99/99/9999 99:99"
+                                     label="#{bundle['reservation.startDate']}" required="true">
+                            <f:convertDateTime timeZone="Europe/Lisbon" type="both"
+                                               pattern="dd/MM/yyyy HH:mm" />
+                        </p:inputMask>
+                        <p:message for="startDate" />
+                        <h:outputLabel for="endDate"
+                                       value="#{bundle['reservation.endDate']}" />
+                        <p:inputMask id="endDate"
+                                     value="#{scheduleController.event.endDate}"
+                                     label="#{bundle['reservation.endDate']}" mask="99/99/9999 99:99"
+                                     required="true">
+                            <f:convertDateTime timeZone="Europe/Lisbon" type="both"
+                                               pattern="dd/MM/yyyy HH:mm" />
+                        </p:inputMask>
+                        <p:message for="endDate" />
+                    </h:panelGrid>
+                    <p:commandButton value="#{bundle['operation.save']}"
+                                     actionListener="#{scheduleController.addEvent}"
+                                     update=":context:myreservations, schedule-form:messages"
+                                     oncomplete="myschedule.update();" onsuccess="eventDialog.hide()"/>
+                    <p:commandButton value="#{bundle['operation.remove']}"
+                                     actionListener="#{scheduleController.removeEvent}"
+                                     update=":context:myreservations"
+                                     oncomplete="myschedule.update();eventDialog.hide()" />
+                </p:dialog>
+            </h:form>
+        </h:panelGroup>
+    </ui:define>
+</ui:composition>
