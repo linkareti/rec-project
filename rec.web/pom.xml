@@ -581,10 +581,8 @@
 		</profile>
 		<profile>
 			<id>dev</id>
-			<activation>
-				<property>
-					<name>!env</name>
-				</property>
+                        <activation>
+				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
 				<targetenv.hibernate.show_sql>true</targetenv.hibernate.show_sql>
@@ -613,20 +611,14 @@
 		</profile>
 		<profile>
 			<id>prod</id>
-			<activation>
-				<property>
-					<name>env</name>
-					<value>prod</value>
-				</property>
-			</activation>
 			<properties>
 				<targetenv.hibernate.show_sql>false</targetenv.hibernate.show_sql>
 				<targetenv.hibernate.hbm2ddl.auto>validate</targetenv.hibernate.hbm2ddl.auto>
 				<db.driver>com.mysql.jdbc.Driver</db.driver>
 				<!-- This profile has to be executed in the own server -->
 				<db.url>jdbc:mysql://localhost:3306/allocation</db.url>
-				<db.user>root</db.user>
-				<db.pass>root</db.pass>
+				<db.user>allocation</db.user>
+				<db.pass>allocation</db.pass>
 			</properties>
 			<build>
 				<plugins>
