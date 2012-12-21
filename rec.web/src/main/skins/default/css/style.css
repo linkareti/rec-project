@@ -65,7 +65,7 @@ html, body {
     content: ".";
     display: block;
     font-size: 0;
-    height: 0;
+    height: 40px;
     visibility: hidden;
 }
 .main {
