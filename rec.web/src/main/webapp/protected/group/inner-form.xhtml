@@ -24,9 +24,9 @@
                         converter="userConverter" rendered="#{operation == 'edit'}">
             </p:pickList>
             
-            <h:commandLink action="#{groupController.setUsersMembership}"
+            <p:commandButton action="#{groupController.setUsersMembership}"
                            value="#{bundle['operation.submit']}"
-                           rendered="#{operation == 'edit'}" />
+                           rendered="#{operation == 'edit'}" ajax="false"/>
 
         </h:panelGrid>
         <h:panelGroup rendered="#{operation == 'create'}">

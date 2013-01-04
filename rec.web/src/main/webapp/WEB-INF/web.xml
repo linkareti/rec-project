@@ -54,6 +54,10 @@
 		<error-code>403</error-code>
 		<location>/AccessDenied.jsp</location>
 	</error-page>
+        <error-page>
+            <exception-type>java.lang.Exception</exception-type>
+            <location>/Error.faces</location>
+        </error-page>
 	<mime-mapping>
 		<extension>jnlp</extension>
 		<mime-type>application/x-java-jnlp-file</mime-type>

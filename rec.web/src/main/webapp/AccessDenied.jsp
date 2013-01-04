@@ -17,7 +17,7 @@
             <br><center>
                 <h1 style="color: #e33b06;">Sorry, you do not have permission to perform this task!</h1>
             <br><br>
-            <a href="/AllocationManager/faces/index.xhtml" style="color: #e33b06;">Index</a>
+            <a href="/rec.web" style="color: #e33b06;">Index</a>
             </center>
         </body>
     </html>

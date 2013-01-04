@@ -14,5 +14,7 @@ public aspect AllocationManagerPointcuts {
 	within(com.linkare.rec.web.service..*);
     
     public pointcut inWebLayer() :
-	within(com.linkare.rec.web.web..*);
+	within(com.linkare.rec.web..*) &&
+        !inDomainLayer() &&
+        !inServiceLayer();
 }
