@@ -7,9 +7,9 @@ package com.linkare.rec.web.bean;
 import com.linkare.rec.web.ClientInfoDTO;
 import com.linkare.rec.web.RecChatMessageDTO;
 import com.linkare.rec.web.model.DeployedExperiment;
+import com.linkare.rec.web.moodle.SessionHelper;
 import com.linkare.rec.web.util.LaboratoriesMonitor;
 import com.linkare.rec.web.util.MultiThreadLaboratoryWrapper;
-import com.linkare.rec.web.moodle.SessionHelper;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -64,7 +64,6 @@ public class ChatBean implements Serializable {
 
         if (selectedLab != null) {
             usersLab = new ArrayList<ClientInfoDTO>();
-            usersLab.add(new ClientInfoDTO(USER_NAME));
             List<String> connectedUsers = new ArrayList(selectedLab.getConnectedUsers());
             for (String userName : connectedUsers) {
                 usersLab.add(new ClientInfoDTO(userName));
@@ -76,7 +75,6 @@ public class ChatBean implements Serializable {
     public List<String> getUsersExperiment() {
         if (selectedExperimentLab != null) {
             usersExperiment = new ArrayList<String>();
-            usersExperiment.add(USER_NAME);
             usersExperiment.addAll(selectedExperimentLab.getUsersConnected());
         }
         return usersExperiment;
@@ -84,7 +82,8 @@ public class ChatBean implements Serializable {
 
     public void send() {
         if (message != null) {
-            if (selectedUser == null || selectedUser.equals("Todos") || selectedUser.equals("Everyone")) {
+            //if (selectedUser == null || selectedUser.equals(ResourceBundleUtil.getValue(Locale.getDefault(), "label.everyone"))) {
+            if(!usersExperiment.contains(selectedUser)){
                 selectedLab.sendMessage(new ClientInfoDTO(USER_NAME), null, message);
             } else {
                 selectedLab.sendMulticastMessage(selectedUser, message);

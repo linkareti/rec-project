@@ -441,3 +441,25 @@ html, body {
     margin:0px; 
     padding:0px;
 }
+
+.fc-event-skin {
+    background-color: transparent !important;
+    border-color: transparent !important;
+    color: #FFFFFF;
+}
+
+.myevents .fc-event-skin {
+	background-color: #CFD7D6 !important;
+	border-color: #CFD7D6 !important;
+	color: #283234 !important;
+}
+
+.others_events .fc-event-skin {
+	background-color: #87CEFA !important;
+	border-color: #87CEFA !important;
+	color: #000000 !important;
+}
+
+.hide-column-names table thead tr {
+    display: none;
+}

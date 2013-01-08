@@ -98,7 +98,7 @@
             <p:poll update="userConnnected" interval="5"
                     listener="#{chatBean.refreshUserConnected}" />
             <p:poll update="messageReceived" interval="2"
-                    listener="#{chatBean.refreshMessageReceived}" />
+                    listener="#{chatBean.refreshMessageReceived}" oncomplete="document.getElementById('chat:messageReceived').scrollTop = document.getElementById('chat:messageReceived').scrollHeight;" />
             <p:dialog header="Chat" widgetVar="dlg" minimizable="true" resizable="false" id="chatDlg" width="550">
                 <p:ajax event="close" listener="#{chatBean.handleClose}" update="messageReceived"/>  
                 <h:panelGroup>
@@ -111,12 +111,12 @@
                     </p:scrollPanel>
 
                     <p:separator />  
-                    <p:inputText value="#{chatBean.message}" styleClass="messageInput" style="width:82%;" id="messageInput" autocomplete="false">  
+                    <p:inputText value="#{chatBean.message}" styleClass="messageInput" style="width:82%;" id="messageInput" autocomplete="off">
                         <p:ajax event="change" />
                     </p:inputText>
                     <p:spacer width="5" />  
                     <p:commandButton id="btnSend" value=" #{bundle['operation.send']}" action="#{chatBean.send}" 
-                                     process="@this" update="messageReceived messageInput setFocus" /> 
+                                     process="@this" update="messageReceived messageInput setFocus" oncomplete="document.getElementById('chat:messageReceived').scrollTop = document.getElementById('chat:messageReceived').scrollHeight;" /> 
                     <div style="float: right; height: 150px; margin-top: -47%; width: 27%;">
                         <p:selectOneMenu  value="#{chatBean.selectedUser}" id="userConnnected" style="width: 120px;">
                             <f:selectItem itemLabel="#{bundle['label.everyone']}" itemValue="#{bundle['label.everyone']}" />  
@@ -127,6 +127,5 @@
                 <p:focus id="setFocus" for="messageInput" />
             </p:dialog>
         </h:form>
-
     </ui:define>
 </ui:composition>
