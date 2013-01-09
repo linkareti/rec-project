@@ -21,7 +21,6 @@
                         <h:outputText value="" />
                     </f:facet>
                 </p:ajaxStatus>
-
                 <p:messages id="messages" showDetail="true" />
                 <p:scrollPanel styleClass="scrollPanelSchedule">
                     <p:schedule id="schedule" value="#{scheduleController.eventModel}"
@@ -34,7 +33,7 @@
                         <p:ajax event="eventMove" listener="#{scheduleController.onEventMove}" update=":msg" />  
                         <p:ajax event="eventResize" listener="#{scheduleController.onEventResize}" update=":msg" />
                     </p:schedule>
-                    
+                   
                     <p:dialog widgetVar="eventDialog" header="#{bundle['label.event.header']}" showEffect="clip" hideEffect="clip">
                         <h:inputHidden id="idInternal"
                                        value="#{scheduleController.event.idInternal}" />
@@ -105,10 +104,23 @@
                                          oncomplete="myschedule.update();" onsuccess="eventDialog.hide()"/>
                         <p:commandButton value="#{bundle['operation.remove']}"
                                          actionListener="#{scheduleController.removeEvent}"
-                                         update=":msg, :context:myreservations"
+                                         update=":msg, :context:myreservations, schedule-form:schedule"
                                          oncomplete="myschedule.update();eventDialog.hide()" />
                     </p:dialog>
                 </p:scrollPanel>
+                <table width="200px" align="left">
+                    <tbody>
+                        <tr>
+                            <td align="left" colspan="6"><b>#{bundle['label.legend']}</b></td>
+                        </tr>
+                        <tr>
+                            <td width="8%" bgcolor="#CFD7D6"></td>
+                            <td align="left">#{bundle['label.myevents']}</td>
+                            <td width="8%" bgcolor="#87CEFA"></td>
+                            <td align="left">#{bundle['label.othersevents']}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </h:form>
         </h:panelGroup>
     </ui:define>
