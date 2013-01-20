@@ -1,0 +1,58 @@
+<apparatus toolTipBundleKey="conducaocalor$rec.exp.tip.conducaoCalor"
+	location="ELAB_CONDCALOR_STAMP_V1.0" iconLocationBundleKey="conducaocalor$rec.exp.icon.conducaoCalor"
+	headerDisplayClassLocationBundleKey=""
+	displayStringBundleKey="conducaocalor$rec.exp.title.conducaoCalor"
+	displayFactoryClassLocationBundleKey=""
+	desktopLocationBundleKey="conducaocalor$rec.exp.background.conducaoCalor"
+	dataModelClassLocationBundleKey=""
+	customizerClassLocationBundleKey="conducaocalor$rec.exp.customizer.conducaoCalor"
+	visible="true" selected="true" order="0" enabled="false" connected="false">
+	<localizationBundle name="conducaocalor"
+		location="recresource:///pt/utl/ist/elab/client/conducaocalor/resources/messages" />
+	<mediaConfig videoLocation="conducaocalor$rec.exp.url.conducaoCalor.video"
+		canSave="true" offlinePlay="true" />
+	<display toolTipBundleKey="conducaocalor$rec.exp.display.conducaoCalor.tip.sensor"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor"
+		displayStringBundleKey="conducaocalor$rec.exp.display.conducaoCalor.title.sensor"
+		classLocationBundleKey="conducaocalor$rec.exp.display.conducaoCalor.loc.sensor"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="conducaocalor$rec.exp.display.conducaoCalor.tip.1"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table"
+		displayStringBundleKey="conducaocalor$rec.exp.display.conducaoCalor.title.1"
+		classLocationBundleKey="conducaocalor$rec.exp.display.conducaoCalor.loc.1"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="conducaocalor$rec.exp.display.conducaoCalor.tip.2"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="conducaocalor$rec.exp.display.conducaoCalor.title.2"
+		classLocationBundleKey="conducaocalor$rec.exp.display.conducaoCalor.loc.2"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="conducaocalor$rec.exp.display.conducaoCalor.tip.3"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table"
+		displayStringBundleKey="conducaocalor$rec.exp.display.conducaoCalor.title.3"
+		classLocationBundleKey="conducaocalor$rec.exp.display.conducaoCalor.loc.3"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="conducaocalor$rec.exp.display.conducaoCalor.tip.4"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="conducaocalor$rec.exp.display.conducaoCalor.title.4"
+		classLocationBundleKey="conducaocalor$rec.exp.display.conducaoCalor.loc.4"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="conducaocalor$rec.exp.display.conducaoCalor.tip.5"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table"
+		displayStringBundleKey="conducaocalor$rec.exp.display.conducaoCalor.title.5"
+		classLocationBundleKey="conducaocalor$rec.exp.display.conducaoCalor.loc.5"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="conducaocalor$rec.exp.display.conducaoCalor.tip.6"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="conducaocalor$rec.exp.display.conducaoCalor.title.6"
+		classLocationBundleKey="conducaocalor$rec.exp.display.conducaoCalor.loc.6"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<webResource toolTipLocationBundleKey="" internalBrowser="false"
+		iconLocationBundleKey="" visible="true" selected="true" order="0"
+		enabled="false" connected="false" />
+	<webResource toolTipLocationBundleKey="" internalBrowser="false"
+		iconLocationBundleKey="" visible="true" selected="true" order="0"
+		enabled="false" connected="false" />
+	<webResource toolTipLocationBundleKey="" internalBrowser="false"
+		iconLocationBundleKey="" visible="true" selected="true" order="0"
+		enabled="false" connected="false" />
+</apparatus>
