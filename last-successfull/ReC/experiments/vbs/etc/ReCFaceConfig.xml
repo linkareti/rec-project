@@ -1,0 +1,33 @@
+<apparatus location="BIOT_SAVART_V1.0"
+	customizerClassLocationBundleKey="bs$rec.exp.customizer.bs"
+	toolTipBundleKey="bs$rec.exp.tip.bs" iconLocationBundleKey="bs$rec.exp.icon.bs"
+	displayStringBundleKey="bs$rec.exp.title.bs" desktopLocationBundleKey="bs$rec.exp.background.bs"
+	order="1" headerDisplayClassLocationBundleKey=""
+	displayFactoryClassLocationBundleKey=""
+	dataModelClassLocationBundleKey="" visible="true" selected="true"
+	enabled="false" connected="false">
+	<localizationBundle name="bs"
+		location="recresource:///pt/utl/ist/elab/client/vbs/resources/messages" />
+	<display classLocationBundleKey="bs$rec.exp.display.bs.loc.anim"
+		toolTipBundleKey="bs$rec.exp.display.bs.tip.anim"
+		iconLocationBundleKey="ReCUI$rec.ui.icon.sensor"
+		displayStringBundleKey="bs$rec.exp.display.bs.title.anim"
+		offlineCapable="false" order="1" visible="true" selected="true"
+		enabled="false" connected="false" />
+	<display classLocationBundleKey="bs$rec.exp.display.bs.loc.1"
+		toolTipBundleKey="bs$rec.exp.display.bs.tip.1" iconLocationBundleKey="ReCUI$rec.ui.icon.table"
+		displayStringBundleKey="bs$rec.exp.display.bs.title.1" offlineCapable="false"
+		order="2" visible="true" selected="true" enabled="false" connected="false" />
+	<display classLocationBundleKey="bs$rec.exp.display.bs.loc.2"
+		toolTipBundleKey="bs$rec.exp.display.bs.tip.2" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="bs$rec.exp.display.bs.title.2" offlineCapable="false"
+		order="3" visible="true" selected="true" enabled="false" connected="false" />
+	<display classLocationBundleKey="bs$rec.exp.display.bs.loc.3"
+		toolTipBundleKey="bs$rec.exp.display.bs.tip.3" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="bs$rec.exp.display.bs.title.3" offlineCapable="false"
+		order="4" visible="true" selected="true" enabled="false" connected="false" />
+	<display classLocationBundleKey="bs$rec.exp.display.bs.loc.4"
+		toolTipBundleKey="bs$rec.exp.display.bs.tip.4" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="bs$rec.exp.display.bs.title.4" offlineCapable="false"
+		order="5" visible="true" selected="true" enabled="false" connected="false" />
+</apparatus>
