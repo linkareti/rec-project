@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 public class LocaleXmlTypeAdapter extends XmlAdapter<String, Locale> {
 
-	private static final Pattern PATTERN_SERIALIZED_LOCALE = Pattern.compile("([^_]+)(_([^_]+))?(_(.*))?);
+	private static final Pattern PATTERN_SERIALIZED_LOCALE = Pattern.compile("([^_]+)(_([^_]+))?(_(.*))?)");
 	
 	@Override
 	public Locale unmarshal(String v) throws Exception {
@@ -19,7 +19,7 @@ public class LocaleXmlTypeAdapter extends XmlAdapter<String, Locale> {
 		}
 		
 		
-		Matcher matcher = pattern.matcher(v);
+		Matcher matcher = PATTERN_SERIALIZED_LOCALE.matcher(v);
 		Locale x=Locale.getDefault();
 		if(matcher.matches()) {
 			String language = matcher.group(1);
