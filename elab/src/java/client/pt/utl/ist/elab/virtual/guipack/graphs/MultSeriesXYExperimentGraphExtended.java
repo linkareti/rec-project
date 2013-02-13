@@ -86,7 +86,7 @@ public class MultSeriesXYExperimentGraphExtended extends javax.swing.JPanel impl
 		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/newface/resources/legacy/chart16.gif"));
 	}
 
-	ExpDataModel expDataModel = null;
+	private ExpDataModel expDataModel = null;
 
 	@Override
 	public void setExpDataModel(final ExpDataModel expDataModel) {
@@ -140,7 +140,7 @@ public class MultSeriesXYExperimentGraphExtended extends javax.swing.JPanel impl
 
 	@Override
 	public void dataModelStartedNoData() {
-		if (header == null) {
+		if (header == null && expDataModel!=null) {
 			headerAvailable(expDataModel.getAcquisitionConfig());
 		}
 	}
