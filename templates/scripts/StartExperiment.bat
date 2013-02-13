@@ -9,7 +9,7 @@ set MAX_HEAP_MEM=@hardwareserver.max.heap@
 
 set DRIVER_BASE_DIR=%CD%\hardwareserver
 
-set GENERIC_ORB_SYSPROPS=-Dorg.omg.CORBA.ORBClass=org.openorb.orb.core.ORB -Dorg.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton -Dopenorb.config=%DRIVER_BASE_DIR%/etc/openorb.xml 
+set GENERIC_ORB_SYSPROPS=-Dorg.omg.CORBA.ORBClass=org.openorb.orb.core.ORB -Dorg.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton -Dopenorb.config=%DRIVER_BASE_DIR%/etc/openorb.xml -Djava.net.preferIPv4Stack=true
 set DRIVER_ORB_SYSPROPS=-Dopenorb.profile=ReCHardware -Drec.multicastcontroller.initref=MultiCastController -Drec.percent.freememory.threshold.serialization=10 -Drec.multicastdataproducer.getsamples.idletime=60 -Drec.driver.show.gui=false
 set MEM_SYSPROPS=-Xms%INITIAL_HEAP_MEM% -Xmx%MAX_HEAP_MEM%
 set LOG_SYSPROPS=-Djava.util.logging.config.file=%DRIVER_BASE_DIR%/etc/loggers.config.properties
