@@ -41,7 +41,6 @@ import com.linkare.rec.impl.utils.EventQueueDispatcher;
 import com.linkare.rec.impl.utils.HardwareBinder;
 import com.linkare.rec.impl.utils.HardwareInfoXMLReader;
 import com.linkare.rec.impl.utils.ORBBean;
-import com.linkare.rec.impl.utils.QueueLogger;
 import com.linkare.rec.impl.wrappers.DataClientWrapper;
 import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 
@@ -49,7 +48,7 @@ import com.linkare.rec.impl.wrappers.DataProducerWrapper;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class BaseHardware implements HardwareOperations, BaseDataProducerListener, QueueLogger {
+public class BaseHardware implements HardwareOperations, BaseDataProducerListener {
 
 	private static final Logger LOGGER = Logger.getLogger(BaseHardware.class.getName());
 
@@ -160,7 +159,7 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 		LOGGER.info("Instatiating the BaseHardware.");
 
 		LOGGER.info("Creating EventQueue for data client dispatcher.");
-		eventQueue = new EventQueue(new BaseHardwareDataClientDispatcher(), this.getClass().getSimpleName(), this);
+		eventQueue = new EventQueue(new BaseHardwareDataClientDispatcher(), this.getClass().getSimpleName());
 
 		if (!GraphicsEnvironment.isHeadless() && BaseHardware.SHOW_GUI) {
 			final JFrame frameForKill = new JFrame();
@@ -473,22 +472,6 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 			return Thread.NORM_PRIORITY;
 		}
 
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void log(final Level debugLevel, final String message) {
-		LOGGER.log(debugLevel, message);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void logThrowable(final String message, final Throwable t) {
-		LOGGER.log(Level.SEVERE, message, t);
 	}
 
 }

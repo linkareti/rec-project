@@ -21,14 +21,13 @@ import com.linkare.rec.impl.threading.ExecutorScheduler;
 import com.linkare.rec.impl.threading.ScheduledWorkUnit;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
-import com.linkare.rec.impl.utils.QueueLogger;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
 
-public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
+public class DataReceiverQueue implements java.io.Serializable {
 
 	/**
 	 * 
@@ -45,7 +44,7 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 	private final List<DataReceiverForQueue> queueOrg = new LinkedList<DataReceiverForQueue>();
 
 	private final EventQueue messageQueue = new EventQueue(new DataReceiverQueueDispatcher(), this.getClass()
-			.getSimpleName(), this);
+			.getSimpleName());
 
 	private final DataReceiversConnectionCheck dataReceiversConnectionChecker = new DataReceiversConnectionCheck();
 
@@ -86,34 +85,35 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 			return;
 		}
 		shutDown = true;
-		log(Level.INFO, "DataReceiverQueue - shut down process initiated!");
-		log(Level.INFO, "DataReceiverQueue - shutting down message queue!");
+		LOGGER.log(Level.INFO, "DataReceiverQueue - shut down process initiated!");
+		LOGGER.log(Level.INFO, "DataReceiverQueue - shutting down message queue!");
 		messageQueue.shutdown();
-		log(Level.INFO, "DataReceiverQueue - message queue is shut down!");
+		LOGGER.log(Level.INFO, "DataReceiverQueue - message queue is shut down!");
 
-		log(Level.INFO, "DataReceiverQueue - shutting down dataReceivers connection checker!");
+		LOGGER.log(Level.INFO, "DataReceiverQueue - shutting down dataReceivers connection checker!");
 		dataReceiversConnectionChecker.shutdown();
-		log(Level.INFO, "DataReceiverQueue - dataReceivers connection checker is shut down!");
+		LOGGER.log(Level.INFO, "DataReceiverQueue - dataReceivers connection checker is shut down!");
 
-		log(Level.INFO, "DataReceiverQueue - shutting down dataReceivers!");
+		LOGGER.log(Level.INFO, "DataReceiverQueue - shutting down dataReceivers!");
 		final Iterator<DataReceiverForQueue> iter = iterator();
 		while (iter.hasNext()) {
 			final DataReceiverForQueue drfq = iter.next();
-			log(Level.INFO, "DataReceiverQueue - shutting down dataReceiver " + drfq.getDataReceiver().getDelegate());
+			LOGGER.log(Level.INFO, "DataReceiverQueue - shutting down dataReceiver "
+					+ drfq.getDataReceiver().getDelegate());
 			drfq.shutdown();
-			log(Level.INFO, "DataReceiverQueue - dataReceiver " + drfq.getDataReceiver().getDelegate()
+			LOGGER.log(Level.INFO, "DataReceiverQueue - dataReceiver " + drfq.getDataReceiver().getDelegate()
 					+ " is shut down!");
 		}
 
-		log(Level.INFO, "DataReceiverQueue - shut down completed!");
+		LOGGER.log(Level.INFO, "DataReceiverQueue - shut down completed!");
 	}
 
 	public boolean add(final DataReceiver dr, final IResource resource, final DataProducerState currentState)
 			throws MaximumClientsReached, NotAuthorized {
-		log(Level.INFO, "DataReceiverQueue - trying to register new dataReceiver!");
+		LOGGER.log(Level.INFO, "DataReceiverQueue - trying to register new dataReceiver!");
 
 		if (messageQueue.isStopdispatching()) {
-			log(Level.INFO, "DataReceiverQueue - The EventQueue is already stoped dispatching. "
+			LOGGER.log(Level.INFO, "DataReceiverQueue - The EventQueue is already stoped dispatching. "
 					+ "Can't register DataReceiver if ain't gonna be nothing more to dispatch!");
 			return false;
 		}
@@ -123,18 +123,19 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 
 		synchronized (queueOrg) {
 			if (queueOrg.size() >= getMaximumDataReceivers()) {
-				log(Level.INFO,
+				LOGGER.log(
+						Level.INFO,
 						"DataReceiverQueue - Maximum capacity reached... Going to deny dataReceiver's request for registration! Maybe try later?");
 				throw new MaximumClientsReached(
 						MaximumClientsReachedConstants.MAXIMUM_RECEIVERS_REACHED_IN_DATA_PRODUCER,
 						getMaximumDataReceivers());
 			}
 
-			log(Level.INFO, "DataReceiverQueue : checking to see if DataReceiver is allready registered!");
+			LOGGER.log(Level.INFO, "DataReceiverQueue : checking to see if DataReceiver is allready registered!");
 
 			if (contains(drfq)) {
 				if (!drfq.isConnected()) {
-					log(Level.INFO, "DataReceiverQueue : dataReceiver is not connected - shutting it down!");
+					LOGGER.log(Level.INFO, "DataReceiverQueue : dataReceiver is not connected - shutting it down!");
 					drfq.shutdown();
 				} else {
 					// datareceiver is allready registered... just ignore it...
@@ -142,10 +143,12 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 				}
 			}
 
-			log(Level.INFO, "DataReceiverQueue - Going to register dataReceiver!");
+			LOGGER.log(Level.INFO, "DataReceiverQueue - Going to register dataReceiver!");
 			retVal = queueOrg.add(drfq);
-			log(Level.INFO, "DataReceiverQueue - registered dataReceiver " + (retVal ? "successfully!" : "failed!"));
-			log(Level.INFO, "DataReceiverQueue - Informing dataReceiver of current State... just to get him goin'!");
+			LOGGER.log(Level.INFO, "DataReceiverQueue - registered dataReceiver "
+					+ (retVal ? "successfully!" : "failed!"));
+			LOGGER.log(Level.INFO,
+					"DataReceiverQueue - Informing dataReceiver of current State... just to get him goin'!");
 			drfq.stateChanged(new DataProducerStateChangeEvent(currentState));
 
 		}
@@ -171,10 +174,10 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 				if (queueOrg.contains(drfq)) {
 					returnVal = queueOrg.remove(drfq);
 
-					log(Level.INFO, "DataReceiverQueue - " + (returnVal ? "Removed" : "Failed to remove")
+					LOGGER.log(Level.INFO, "DataReceiverQueue - " + (returnVal ? "Removed" : "Failed to remove")
 							+ " dataReceiver " + drfq.getDataReceiver().getDelegate() + "!");
 					if (returnVal) {
-						log(Level.INFO, "DataReceiverQueue - informing dataReceiver is gone "
+						LOGGER.log(Level.INFO, "DataReceiverQueue - informing dataReceiver is gone "
 								+ drfq.getDataReceiver().getDelegate() + "!");
 
 						if (dataReceiverQueueListener != null) {
@@ -183,13 +186,13 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 					}
 
 				} else {
-					log(Level.INFO, "DataReceiverQueue - dataReceiver " + drfq.getDataReceiver().getDelegate()
+					LOGGER.log(Level.INFO, "DataReceiverQueue - dataReceiver " + drfq.getDataReceiver().getDelegate()
 							+ " isn't registered here!");
 				}
 
 			} catch (final Exception e) {
-				logThrowable("DataReceiverQueue - Error removing dataReceiver " + drfq.getDataReceiver().getDelegate()
-						+ "!", e);
+				LOGGER.log(Level.SEVERE, "DataReceiverQueue - Error removing dataReceiver "
+						+ drfq.getDataReceiver().getDelegate() + "!", e);
 			}
 		}
 
@@ -282,21 +285,6 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 		this.dataReceiverQueueListener = dataReceiverQueueListener;
 	}
 
-	/* Proxy Logging methods */
-	@Override
-	public void log(final Level debugLevel, final String message) {
-		if (getDataReceiverQueueListener() != null) {
-			getDataReceiverQueueListener().log(debugLevel, message);
-		}
-	}
-
-	@Override
-	public void logThrowable(final String message, final Throwable t) {
-		if (getDataReceiverQueueListener() != null) {
-			getDataReceiverQueueListener().logThrowable(message, t);
-		}
-	}
-
 	/* Inner Class - Queue Dispatcher */
 	private class DataReceiverQueueDispatcher implements EventQueueDispatcher {
 		private DataProducerState cachedDataProducerState = null;
@@ -308,15 +296,18 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 				if (cachedDataProducerState == null || !cachedDataProducerState.equals(evt.getDataProducerState())) {
 					cachedDataProducerState = evt.getDataProducerState();
 
-					log(Level.INFO, "DataReceiverQueue - dispatching DataProducer State change event. New State is: "
-							+ evt.getDataProducerState());
+					LOGGER.log(
+							Level.INFO,
+							"DataReceiverQueue - dispatching DataProducer State change event. New State is: "
+									+ evt.getDataProducerState());
 
 					final Iterator<DataReceiverForQueue> clients = iterator();
 					while (clients.hasNext()) {
 						try {
 							(clients.next()).stateChanged(evt);
 						} catch (final Exception e) {
-							logThrowable(
+							LOGGER.log(
+									Level.SEVERE,
 									"DataReceiverQueue - Error dispatching DataProducer State change events to dataReceivers!",
 									e);
 						}
@@ -326,24 +317,23 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 				}
 			} else if (o instanceof NewSamplesEvent) {
 				final NewSamplesEvent evt = (NewSamplesEvent) o;
-				log(Level.INFO,
-						"DataReceiverQueue - dispatching new samples message event " + evt + " to " + queueOrg.size()
-								+ " DataReceiverForQueue");
+				LOGGER.log(Level.INFO, "DataReceiverQueue - dispatching new samples message event " + evt + " to "
+						+ queueOrg.size() + " DataReceiverForQueue");
 
 				final Iterator<DataReceiverForQueue> clients = iterator();
 				while (clients.hasNext()) {
 					try {
 						(clients.next()).newSamples(evt);
 					} catch (final Exception e) {
-						logThrowable("DataReceiverQueue - Error dispatching new samples message event!", e);
+						LOGGER.log(Level.SEVERE, "DataReceiverQueue - Error dispatching new samples message event!", e);
 					}
 				}
 
 				// verificar se e' um evento de paragem da thread
 				if (evt.isPoisoned()) {
-					log(Level.INFO, "DataReceiverQueue - shutting down message queue!");
+					LOGGER.log(Level.INFO, "DataReceiverQueue - shutting down message queue!");
 					messageQueue.shutdown();
-					log(Level.INFO, "DataReceiverQueue - shutting down dataReceivers connection checker!");
+					LOGGER.log(Level.INFO, "DataReceiverQueue - shutting down dataReceivers connection checker!");
 					dataReceiversConnectionChecker.shutdown();
 				}
 			}
@@ -377,7 +367,7 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 						drfq.shutdownAsSoonAsPossible();
 					}
 				} catch (final Exception e) {
-					logThrowable("DataReceiverQueue - Error cheking dataReceiver connection status!", e);
+					LOGGER.log(Level.SEVERE, "DataReceiverQueue - Error cheking dataReceiver connection status!", e);
 				}
 			}
 
@@ -394,16 +384,6 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 			remove(drfq);
 		}
 
-		/* Proxy Logging methods for DataReceiverForQueue */
-		@Override
-		public void log(final Level debugLevel, final String message) {
-			LOGGER.log(debugLevel, "DataReceiverQueue - " + message);
-		}
-
-		@Override
-		public void logThrowable(final String message, final Throwable t) {
-			LOGGER.log(Level.SEVERE, "DataReceiverQueue - " + message, t);
-		}
 	}
 	/* End Inner Class - DataReceivers callbacks */
 }

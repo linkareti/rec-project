@@ -37,13 +37,12 @@ import com.linkare.rec.impl.threading.ScheduledWorkUnit;
 import com.linkare.rec.impl.utils.BadWordManager;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
-import com.linkare.rec.impl.utils.QueueLogger;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class ClientQueue implements QueueLogger {
+public class ClientQueue {
 
 	private boolean cyclingQueue = false;
 	private boolean shutDown = false;
@@ -58,7 +57,7 @@ public class ClientQueue implements QueueLogger {
 	 * of the class to be declared!
 	 */
 	private final EventQueue messageQueue = new EventQueue(new ClientQueueDispatcher(),
-			this.getClass().getSimpleName(), this);
+			this.getClass().getSimpleName());
 
 	/**
 	 * Creates the <code>ClientQueue</code>.
@@ -602,33 +601,8 @@ public class ClientQueue implements QueueLogger {
 		public void dataClientForQueueIsGone(final DataClientForQueue dcfq) {
 			remove(dcfq);
 		}
-
-		/* Proxy Logging methods for DataClientForQueue */
-		@Override
-		public void log(final Level debugLevel, final String message) {
-			getClientQueueListener().log(debugLevel, "ClientQueue - " + message);
-		}
-
-		@Override
-		public void logThrowable(final String message, final Throwable t) {
-			getClientQueueListener().logThrowable("ClientQueue - " + message, t);
-		}
 	}
 
 	/* End Inner Class - Clients callbacks */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void log(final Level debugLevel, final String message) {
-		getClientQueueListener().log(debugLevel, message);
-	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void logThrowable(final String message, final Throwable t) {
-		getClientQueueListener().logThrowable(message, t);
-	}
 }

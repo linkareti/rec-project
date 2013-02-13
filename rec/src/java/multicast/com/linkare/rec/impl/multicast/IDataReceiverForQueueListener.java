@@ -6,7 +6,6 @@
 
 package com.linkare.rec.impl.multicast;
 
-import java.util.logging.Level;
 
 /**
  * 
@@ -14,8 +13,4 @@ import java.util.logging.Level;
  */
 public interface IDataReceiverForQueueListener {
 	public void dataReceiverForQueueIsGone(DataReceiverForQueue drfq);
-
-	public void log(Level debugLevel, String message);
-
-	public void logThrowable(String message, Throwable t);
 }

@@ -41,7 +41,6 @@ import com.linkare.rec.impl.threading.WaitForConditionResult;
 import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
-import com.linkare.rec.impl.utils.QueueLogger;
 
 /**
  * 
@@ -54,7 +53,7 @@ import com.linkare.rec.impl.utils.QueueLogger;
  * evolution... extending your class from this class.
  */
 public abstract class AbstractSerialPortDriver extends BaseDriver implements SerialPortFinderListener,
-		SerialPortCommandListener, QueueLogger, ICommandTimeoutListener {
+		SerialPortCommandListener, ICommandTimeoutListener {
 
 	protected static BaseHardware baseHardware = null;
 	protected static int currentBinaryLength = 0;
@@ -127,7 +126,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		serialFinder.addStampFinderListener(this);
 
 		LOGGER.log(Level.FINE, "Creating the EventQueue for the serial commands.");
-		serialCommands = new EventQueue(new CommandDispatcher(), this.getClass().getSimpleName(), this);
+		serialCommands = new EventQueue(new CommandDispatcher(), this.getClass().getSimpleName());
 
 		final TimeoutNode timeoutNode = AbstractSerialPortDriver.rs232configs.getRs232().getTimeout();
 		commandTimeoutChecker = new CommandTimeoutChecker(this, timeoutNode);
@@ -945,20 +944,5 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		return currentDriverState == state;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void log(final Level debugLevel, final String message) {
-		LOGGER.log(debugLevel, message);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void logThrowable(final String message, final Throwable t) {
-		LOGGER.log(Level.SEVERE, message, t);
-	}
 
 }

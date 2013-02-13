@@ -21,10 +21,8 @@ import com.linkare.rec.impl.threading.TimedOutException;
 import com.linkare.rec.impl.threading.WaitForConditionResult;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
-import com.linkare.rec.impl.utils.QueueLogger;
 
-public abstract class AbstractStampDriver extends BaseDriver implements StampFinderListener, StampCommandListener,
-		QueueLogger {
+public abstract class AbstractStampDriver extends BaseDriver implements StampFinderListener, StampCommandListener {
 
 	private static final Logger LOGGER = Logger.getLogger(AbstractStampDriver.class.getName());
 
@@ -41,7 +39,7 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 	public AbstractStampDriver() {
 		stampFinder = new StampFinder();
 		stampFinder.addStampFinderListener(this);
-		stampCommands = new EventQueue(new CommandDispatcher(), this.getClass().getSimpleName(), this);
+		stampCommands = new EventQueue(new CommandDispatcher(), this.getClass().getSimpleName());
 	}
 
 	protected void loadCommandHandlers() {
@@ -437,20 +435,5 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 			stampIO.writeMessage(message);
 		}
 	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void log(final Level debugLevel, final String message) {
-		LOGGER.log(debugLevel, message);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void logThrowable(final String message, final Throwable t) {
-		LOGGER.log(Level.SEVERE, message, t);
-	}
+	
 }

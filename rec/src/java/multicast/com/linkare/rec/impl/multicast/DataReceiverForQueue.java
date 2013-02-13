@@ -11,6 +11,7 @@
 package com.linkare.rec.impl.multicast;
 
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.linkare.rec.acquisition.DataReceiver;
 import com.linkare.rec.acquisition.NotAuthorized;
@@ -19,7 +20,6 @@ import com.linkare.rec.impl.events.NewSamplesEvent;
 import com.linkare.rec.impl.exceptions.NotAuthorizedConstants;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
-import com.linkare.rec.impl.utils.QueueLogger;
 import com.linkare.rec.impl.wrappers.DataReceiverWrapper;
 
 /**
@@ -30,9 +30,10 @@ import com.linkare.rec.impl.wrappers.DataReceiverWrapper;
  * 
  */
 
-public class DataReceiverForQueue implements QueueLogger
+public class DataReceiverForQueue
 
 {
+	private final static Logger LOGGER = Logger.getLogger(DataReceiverForQueue.class.getName());
 
 	private DataReceiverWrapper drw = null;
 
@@ -53,13 +54,14 @@ public class DataReceiverForQueue implements QueueLogger
 
 		{
 
-			log(Level.SEVERE, "Error connection to DataReceiver in DataReceiverForQueue - Throwing not authorized...");
+			LOGGER.log(Level.SEVERE,
+					"Error connection to DataReceiver in DataReceiverForQueue - Throwing not authorized...");
 
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_CONNECTION_FAILED);
 
 		}
 
-		messageQueue = new EventQueue(new DataReceiverQueueDispatcher(), this.getClass().getSimpleName(), this);
+		messageQueue = new EventQueue(new DataReceiverQueueDispatcher(), this.getClass().getSimpleName());
 
 	}
 
@@ -67,35 +69,13 @@ public class DataReceiverForQueue implements QueueLogger
 		return !messageQueue.hasEvents();
 	}
 
-	/* Proxy Logging methods */
 	@Override
-	public void log(final Level debugLevel, final String message) {
-		if (getDataReceiverForQueueListener() != null) {
-			getDataReceiverForQueueListener().log(debugLevel, message);
-		}
-	}
-
-	@Override
-	public void logThrowable(final String message, final Throwable t) {
-		if (getDataReceiverForQueueListener() != null) {
-			getDataReceiverForQueueListener().logThrowable(message, t);
-		}
-	}
-
-	@Override
-	public String toString()
-
-	{
-
+	public String toString() {
 		return "Proxy Receiver " + drw.getDelegate();
-
 	}
 
 	@Override
-	public boolean equals(final Object obj)
-
-	{
-
+	public boolean equals(final Object obj) {
 		if (!(obj instanceof DataReceiverForQueue)) {
 			return false;
 		}
@@ -107,15 +87,10 @@ public class DataReceiverForQueue implements QueueLogger
 		}
 
 		return false;
-
 	}
 
-	public boolean isConnected()
-
-	{
-
+	public boolean isConnected() {
 		return drw.isConnected();
-
 	}
 
 	public void shutdownAsSoonAsPossible() {
@@ -134,30 +109,29 @@ public class DataReceiverForQueue implements QueueLogger
 
 	private boolean shutdown = false;
 
-	public synchronized void shutdown()
-
-	{
+	public synchronized void shutdown() {
 		if (shutdown) {
 			return;
 		}
 
 		shutdown = true;
 
-		log(Level.INFO, "receiver " + drw.getDelegate() + " - Shutting down!");
+		LOGGER.log(Level.INFO, "receiver " + drw.getDelegate() + " - Shutting down!");
 
-		log(Level.INFO, "receiver " + drw.getDelegate() + " - shutting down message queue!");
+		LOGGER.log(Level.INFO, "receiver " + drw.getDelegate() + " - shutting down message queue!");
 
 		messageQueue.shutdown();
 
-		log(Level.INFO, "receiver " + drw.getDelegate() + " - message queue is shut down!");
+		LOGGER.log(Level.INFO, "receiver " + drw.getDelegate() + " - message queue is shut down!");
 
-		log(Level.INFO, "receiver " + drw.getDelegate() + " - informing dataReceiverForQueueListener that I'm gone!");
+		LOGGER.log(Level.INFO, "receiver " + drw.getDelegate()
+				+ " - informing dataReceiverForQueueListener that I'm gone!");
 
 		if (getDataReceiverForQueueListener() != null) {
 			getDataReceiverForQueueListener().dataReceiverForQueueIsGone(this);
 		}
 
-		log(Level.INFO, "receiver " + drw.getDelegate() + " is shut down!");
+		LOGGER.log(Level.INFO, "receiver " + drw.getDelegate() + " is shut down!");
 	}
 
 	public boolean isShutdown() {
@@ -223,61 +197,38 @@ public class DataReceiverForQueue implements QueueLogger
 
 	}
 
-	private class DataReceiverQueueDispatcher implements EventQueueDispatcher
-
-	{
+	private class DataReceiverQueueDispatcher implements EventQueueDispatcher {
 
 		@Override
-		public void dispatchEvent(final Object o)
+		public void dispatchEvent(final Object o) {
 
-		{
-
-			if (!drw.isConnected())
-
-			{
-
+			if (!drw.isConnected()) {
 				shutdownAsSoonAsPossible();
-
 				return;
-
 			}
 
-			try
-
-			{
-
-				if (o instanceof NewSamplesEvent)
-
-				{
+			try {
+				if (o instanceof NewSamplesEvent) {
 
 					final NewSamplesEvent evt = (NewSamplesEvent) o;
 
-					log(Level.INFO, "DataReceiverForQueue - dispatching new samples message event " + evt);
+					LOGGER.log(Level.INFO, "DataReceiverForQueue - dispatching new samples message event " + evt);
 
 					drw.newSamples(evt.getLargestNumPacket());
 
 					// verificar se e' um evento de paragem da thread
 					if (evt.isPoisoned()) {
-						log(Level.FINE, "receiver " + drw.getDelegate()
+						LOGGER.log(Level.FINE, "receiver " + drw.getDelegate()
 								+ " - received a poison sample with largest num packet = " + evt.getLargestNumPacket());
 						shutdownAsSoonAsPossible();
 					}
 
 				} else if (o instanceof DataProducerStateChangeEvent) {
-
 					final DataProducerStateChangeEvent evt = (DataProducerStateChangeEvent) o;
-
 					drw.stateChanged(evt.getDataProducerState());
-
 				}
-
-			}
-
-			catch (final Exception e)
-
-			{
-
-				logThrowable("Oooppss.. receiver gone? - Error dispatching event to receiver! Why? Gone?", e);
+			} catch (final Exception e) {
+				LOGGER.log(Level.SEVERE,"Oooppss.. receiver gone? - Error dispatching event to receiver! Why? Gone?", e);
 
 				if (!isConnected())
 

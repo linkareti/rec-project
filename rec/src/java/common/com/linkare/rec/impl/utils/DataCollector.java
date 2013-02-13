@@ -10,7 +10,6 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 import java.io.Serializable;
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import com.linkare.rec.acquisition.DataProducerState;
@@ -31,8 +30,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 
 	private static final long serialVersionUID = -5606372174593582642L;
 
-	private static String DATA_RECEIVER_LOGGER = "DataReceiver.Logger";
-
+	private static final Logger LOGGER = Logger.getLogger(DataCollector.class.getName());
 
 	private transient Thread acquisitionThread = null;
 	private final Object synchWaitFetchData = new boolean[0];
@@ -47,13 +45,6 @@ public abstract class DataCollector extends Thread implements Serializable {
 	private long lastFetchPacketsTimestamp = System.currentTimeMillis();
 	private long lastPacketFetchedTimestamp = System.currentTimeMillis();
 	private transient DataCollectorFetchPacketCheck fetchPacketCheck = null;
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(DataCollector.DATA_RECEIVER_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(DataCollector.DATA_RECEIVER_LOGGER));
-		}
-	}
 
 	public DataCollector() {
 		samplesPackets = new SamplesPacketMatrix();
@@ -75,7 +66,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 
 	protected void setLargestPacketKnown(final int largestPacketKnown) {
 		synchronized (synchWaitFetchData) {
-			log(Level.FINEST, "Setting DataCollector for the largest packet know = " + largestPacketKnown);
+			LOGGER.log(Level.FINEST, "Setting DataCollector for the largest packet know = " + largestPacketKnown);
 			if (largestPacketKnown > this.largestPacketKnown) {
 				this.largestPacketKnown = largestPacketKnown;
 				notified = true;
@@ -121,12 +112,12 @@ public abstract class DataCollector extends Thread implements Serializable {
 		}
 
 		if (newState.equals(DataCollectorState.DP_WAITING)) {
-			log(Level.INFO, "Trying to set Data Collector State to " + newState
+			LOGGER.log(Level.INFO, "Trying to set Data Collector State to " + newState
 					+ " while current DataProducer State is " + dataCollectorState
 					+ " - this transition is not possible!");
 		} else if (newState.equals(DataCollectorState.DP_STARTED_NODATA)) {
 			if (!dataCollectorState.equals(DataCollectorState.DP_WAITING)) {
-				log(Level.INFO, "Trying to set Data Collector State to " + newState
+				LOGGER.log(Level.INFO, "Trying to set Data Collector State to " + newState
 						+ " while current DataProducer State is " + dataCollectorState
 						+ " - this transition is not possible!");
 			} else {
@@ -136,7 +127,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 		} else if (newState.equals(DataCollectorState.DP_STARTED)) {
 			if (!(dataCollectorState.equals(DataCollectorState.DP_WAITING) || dataCollectorState
 					.equals(DataCollectorState.DP_STARTED_NODATA))) {
-				log(Level.INFO, "Trying to set Data Collector State to " + newState
+				LOGGER.log(Level.INFO, "Trying to set Data Collector State to " + newState
 						+ " while current DataProducer State is " + dataCollectorState
 						+ " - this transition is not possible!");
 			} else {
@@ -147,7 +138,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 			if (!(dataCollectorState.equals(DataCollectorState.DP_WAITING)
 					|| dataCollectorState.equals(DataCollectorState.DP_STARTED_NODATA) || dataCollectorState
 						.equals(DataCollectorState.DP_STARTED))) {
-				log(Level.INFO, "Trying to set Data Collector State to " + newState
+				LOGGER.log(Level.INFO, "Trying to set Data Collector State to " + newState
 						+ " while current DataProducer State is " + dataCollectorState
 						+ " - this transition is not possible!");
 			} else {
@@ -158,7 +149,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 			if (!(dataCollectorState.equals(DataCollectorState.DP_WAITING)
 					|| dataCollectorState.equals(DataCollectorState.DP_STARTED_NODATA) || dataCollectorState
 						.equals(DataCollectorState.DP_STARTED))) {
-				log(Level.INFO, "Trying to set Data Collector State to " + newState
+				LOGGER.log(Level.INFO, "Trying to set Data Collector State to " + newState
 						+ " while current DataProducer State is " + dataCollectorState
 						+ " - this transition is not possible!");
 			} else {
@@ -170,7 +161,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 			fireStateChanged();
 
 		} else {
-			log(Level.INFO, "Unknown Data Collector State " + newState);
+			LOGGER.log(Level.INFO, "Unknown Data Collector State " + newState);
 		}
 	}
 
@@ -193,7 +184,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 		} else if (newState.equals(DataProducerState.DP_ERROR)) {
 			remoteDataProducerError();
 		} else {
-			log(Level.INFO, "Unknown Remote Data Collector State " + newState);
+			LOGGER.log(Level.INFO, "Unknown Remote Data Collector State " + newState);
 		}
 	}
 
@@ -227,10 +218,6 @@ public abstract class DataCollector extends Thread implements Serializable {
 
 	private volatile boolean notified = false;
 
-	abstract public void log(Level debugLevel, String message);
-
-	abstract public void logThrowable(String message, Throwable t);
-
 	abstract public void fireNewSamples();
 
 	abstract public void fireStateChanged();
@@ -243,7 +230,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 		pause = false;
 		acquisitionThread = Thread.currentThread();
 
-		log(Level.INFO, "DataCollector started. Remote data producer state = " + remoteDataProducerState);
+		LOGGER.log(Level.INFO, "DataCollector started. Remote data producer state = " + remoteDataProducerState);
 
 		try {
 			// Thread to check is the data collector is receiving samples
@@ -252,7 +239,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 
 			setDataCollectorState(DataCollectorState.DP_STARTED_NODATA);
 
-			log(Level.FINEST, "DataCollector is going to fetch available packets");
+			LOGGER.log(Level.FINEST, "DataCollector is going to fetch available packets");
 			fetchAvailablePackets();
 
 			while (samplesPackets.size() < totalSamples && !exit) {
@@ -263,7 +250,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 						try {
 							synchWaitFetchData.wait(calcWaitTime());
 						} catch (final Exception e) {
-							logThrowable("Exception while pausing", e);
+							LOGGER.log(Level.SEVERE,"Exception while pausing", e);
 							return;
 						}
 						setDataCollectorState(new DataCollectorState(stateBeforePausing));
@@ -291,10 +278,10 @@ public abstract class DataCollector extends Thread implements Serializable {
 
 			finishDataCollectorRun();
 
-			log(Level.INFO, "DataCollector ended. Remote data producer state = " + remoteDataProducerState);
+			LOGGER.log(Level.INFO, "DataCollector ended. Remote data producer state = " + remoteDataProducerState);
 
 		} catch (final Exception e) {
-			logThrowable("Unexpected exception while running DataCollector!", e);
+			LOGGER.log(Level.SEVERE,"Unexpected exception while running DataCollector!", e);
 			return;
 		}
 
@@ -304,7 +291,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 	 * Cleanup before the data collector thread terminates
 	 */
 	protected void finishDataCollectorRun() {
-		log(Level.FINEST, "DataCollector is going to finish the run");
+		LOGGER.log(Level.FINEST, "DataCollector is going to finish the run");
 
 		fetchAvailablePackets();
 		setDataCollectorState(new DataCollectorState(remoteDataProducerState));
@@ -322,7 +309,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 			try {
 				acquisitionThread.join(1000);
 			} catch (final Exception e) {
-				logThrowable("Error waiting for acquisitionThread shutdown...", e);
+				LOGGER.log(Level.SEVERE,"Error waiting for acquisitionThread shutdown...", e);
 			}
 		}
 	}
@@ -334,10 +321,10 @@ public abstract class DataCollector extends Thread implements Serializable {
 			return;
 		}
 		try {
-			log(Level.FINE, "DataCollector is going to fetch packets from " + lastPacket + " to " + largestPacketKnown);
+			LOGGER.log(Level.FINE, "DataCollector is going to fetch packets from " + lastPacket + " to " + largestPacketKnown);
 			addSamplesPackets(getRemoteDataProducer().getSamples(lastPacket, largestPacketKnown));
 		} catch (final NotAnAvailableSamplesPacketException e) {
-			logThrowable("Error fetching samples Packet " + e.firstPacketNotFound, e);
+			LOGGER.log(Level.SEVERE,"Error fetching samples Packet " + e.firstPacketNotFound, e);
 			if (!isConnected()) {
 				setRemoteDataProducerState(DataProducerState.DP_ERROR);
 			}
@@ -348,7 +335,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 			try {
 				addSamplesPackets(getRemoteDataProducer().getSamples(lastPacket, largestPacketKnown));
 			} catch (final NotAnAvailableSamplesPacketException e2) {
-				logThrowable("Error fetching samples Packet " + e2.firstPacketNotFound, e2);
+				LOGGER.log(Level.SEVERE,"Error fetching samples Packet " + e2.firstPacketNotFound, e2);
 				if (!isConnected()) {
 					setRemoteDataProducerState(DataProducerState.DP_ERROR);
 				}
@@ -370,7 +357,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 		try {
 			synchronized (synchWaitFetchData) {
 				largestPacketKnown = Math.max(getRemoteDataProducer().getMaxPacketNum(), largestPacketKnown);
-				log(Level.FINEST, "Updated DataCollector for the largest packet know = " + largestPacketKnown);
+				LOGGER.log(Level.FINEST, "Updated DataCollector for the largest packet know = " + largestPacketKnown);
 			}
 		} catch (final Exception e) {
 			if (!isConnected()) {
@@ -479,7 +466,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 		@Override
 		public void run() {
 			if (System.currentTimeMillis() - lastPacketFetchedTimestamp >= timeSpend) {
-				log(Level.INFO, "Going to exit because it has passed more than " + ((timeSpend / 1000))
+				LOGGER.log(Level.INFO, "Going to exit because it has passed more than " + ((timeSpend / 1000))
 						+ " seconds since it was received a sample.");
 				exit = true;
 				shutdown();
