@@ -14,7 +14,7 @@ import com.linkare.rec.impl.client.experiment.ExpDataModel;
 
 /**
  * 
- * @author nomead
+ * @author unknown 
  */
 public class VelocityChart extends MultSeriesXYExperimentGraphExtended implements GraphSamplesFunction {
 
