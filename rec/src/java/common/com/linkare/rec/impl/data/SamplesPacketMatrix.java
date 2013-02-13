@@ -54,7 +54,14 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable {
 
 	private transient EventListenerList listenerList = null;
 
-	private double percentFreeThreshold = 10.;
+	private static double PERCENT_FREE_TRESHOLD = 10.;
+	static {
+		try {
+			PERCENT_FREE_TRESHOLD = Double.parseDouble(SamplesPacketMatrix.FREE_THRESHOLD_NAME);
+		} catch (final NumberFormatException nfe) {
+			// noop - ignored - default value allready defined
+		}
+	}
 
 	private SamplesPacketPredictiveBuffer predictiveReadingBuffer = null;
 
@@ -85,21 +92,11 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable {
 
 	{
 		samples = new ArrayList<SamplesPacket>(1000);
-		try {
-			percentFreeThreshold = Double.parseDouble(SamplesPacketMatrix.FREE_THRESHOLD_NAME);
-		} catch (final NumberFormatException nfe) {
-			percentFreeThreshold = 10.;
-		}
 	}
 
 	public SamplesPacketMatrix(final SamplesPacket[] samples_packets) {
 		samples = new ArrayList<SamplesPacket>(samples_packets.length);
 		addSamplesPackets(samples_packets);
-		try {
-			percentFreeThreshold = Double.parseDouble(SamplesPacketMatrix.FREE_THRESHOLD_NAME);
-		} catch (final NumberFormatException nfe) {
-			percentFreeThreshold = 10.;
-		}
 	}
 
 	/**
@@ -215,7 +212,7 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable {
 			try {
 				ioDelegate.write(samples_packet);
 			} catch (final IOException e) {
-				LOGGER.log(Level.SEVERE,SamplesPacketMatrix.TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG, e);
+				LOGGER.log(Level.SEVERE, SamplesPacketMatrix.TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG, e);
 
 				LOGGER.log(Level.WARNING,
 						"Couldn't serialize SamplePackets to file... Defaulting to in memory ArrayList!");
@@ -232,7 +229,7 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable {
 				serialized = true;
 				samples.clear();
 			} catch (final IOException e) {
-				LOGGER.log(Level.SEVERE,SamplesPacketMatrix.TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG, e);
+				LOGGER.log(Level.SEVERE, SamplesPacketMatrix.TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG, e);
 
 				LOGGER.log(Level.WARNING,
 						"Couldn't serialize SamplePackets to file... Defaulting to in memory ArrayList!");
@@ -258,10 +255,10 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable {
 		final double maxMem = heapMemoryUsage.getMax();
 		final double availableMem = heapMemoryUsage.getMax() - heapMemoryUsage.getUsed();
 		final double currentPercentFreeMem = 100. * availableMem / maxMem;
-		if (currentPercentFreeMem <= percentFreeThreshold) {
+		if (currentPercentFreeMem <= PERCENT_FREE_TRESHOLD) {
 			LOGGER.log(Level.WARNING, ">>>>>>>>>>> Returning TRUE from shouldSerialize in SamplesPacketMatrix!");
 		}
-		return currentPercentFreeMem <= percentFreeThreshold;
+		return currentPercentFreeMem <= PERCENT_FREE_TRESHOLD;
 	}
 
 	/**
@@ -338,7 +335,8 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable {
 					stream.writeObject(outputSamplesFile);
 
 				} catch (final IOException e) {
-					LOGGER.log(Level.SEVERE,SamplesPacketMatrix.TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG, e);
+					LOGGER.log(Level.SEVERE, SamplesPacketMatrix.TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG,
+							e);
 
 					LOGGER.log(Level.WARNING, "Couldn't serialize SamplePackets to file...");
 				}
@@ -349,7 +347,7 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable {
 				ioDelegate.setFile(outputSamplesFile);
 				stream.writeObject(ioDelegate);
 			} catch (final IOException e) {
-				LOGGER.log(Level.SEVERE,SamplesPacketMatrix.TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG, e);
+				LOGGER.log(Level.SEVERE, SamplesPacketMatrix.TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG, e);
 
 				LOGGER.log(Level.WARNING, "Couldn't serialize SamplePackets to file...");
 			}

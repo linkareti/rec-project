@@ -22,7 +22,7 @@ public class SamplesPacketMatrixIO implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -2275422019247210861L;
-	SequencedObjectIO ioDelegate = null;
+	private SequencedObjectIO ioDelegate = null;
 
 	public SamplesPacketMatrixIO() throws IOException {
 		ioDelegate = new SequencedObjectIO();
