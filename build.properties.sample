@@ -1,11 +1,18 @@
+#Directory where java classes and intermediate files will be put on compiling the software
 build.dir=build/java
+#Directory where zip contents prepared for distribution releases will be put
 dist.dir=dist/java
 
+#Do not change the encoding unless you know what you're doing
 javac.encoding=UTF-8
+#Compile the code in debug mode. Hellpfull to check for errors in StackTraces
 javac.debug=true
+#Optimize the java code, acording to javac optimization tecnhiques
 javac.optimize=true
+#The source level of compilation. Currently, JSE6 is assumed
 javac.sourcelevel=1.6
 
+#The encoding to use when copying files. Please make sure all created files in the project are UTF-8
 copy.encoding=UTF-8
 
 #this next section esplicits which experiments are going to be compiled, packaged, distributed...
@@ -84,7 +91,6 @@ com.sun.CORBA.ORBDynamicStubFactoryFactoryClass=com.sun.corba.se.impl.presentati
 
 ##MULTICAST PROPERTIES - MULTICAST##
 multicast.openorb.profile=ReCMultiCastController
-rec.multicast.securitymanager=pt.utl.ist.elab.security.ElabSecurityManager
 rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE=15 
 multicast.initial.heap=128m
 multicast.max.heap=1024m
@@ -215,8 +221,6 @@ j3d.home.url.en=http://java.net
 j3d.home.title.en=Homepage java.net
 j3d.home.description.en=Entrance page of the Java 3D Framework supplier, java.net.
 j3d.home.icon.en=images/java-duke-icon.png
-
-
 
 #The next ones relate to the JFreeChart underlying library
 jfreechart.title=JFreeChart Library
