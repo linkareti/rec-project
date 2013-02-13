@@ -9,7 +9,7 @@ public enum ReCSystemProperty {
 	/**
 	 * The ReCFaceConfig.xml url location
 	 */
-	RECFACECONFIG("ReCFaceConfig", true),
+	RECFACECONFIG("rec.face.config", true),
 	/**
 	 * The MultiCastController bind name
 	 */

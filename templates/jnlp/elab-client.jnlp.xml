@@ -42,19 +42,19 @@
 
 		<!-- Jar eLab Client -->
 
-		<!--Start Experiment Jars-->
+		<!--Start Experiment Jars -->
 
-		<!--End Experiment Jars-->
+		<!--End Experiment Jars -->
 
 		<extension name="JFreeChartClient" href="jfreechart.jnlp" />
 		<extension name="OpenORBClient" href="openorb.jnlp" />
 		<extension name="ReCFramework" href="rec-framework.jnlp" />
 		<extension name="Java3D" href="j3d.jnlp" />
-		<!--<extension name="JHelp" href="jhelp.jnlp"/>-->
+		<!--<extension name="JHelp" href="jhelp.jnlp"/> -->
 
-		<!--property name="jnlp.packEnabled" value="true" /-->
-		
-		<property name="ReCFaceConfig" value="@codebase@/etc/ReCFaceConfig.xml" />
+		<property name="jnlp.packEnabled" value="true" />
+
+		<property name="rec.face.config" value="@codebase@/etc/ReCFaceConfig.xml" />
 
 		<property name="rec.multicastcontroller.bindname" value="MultiCastController" />
 
@@ -64,6 +64,7 @@
 			value="com.sun.corba.se.impl.presentation.rmi.StubFactoryFactoryStaticImpl" />
 		<property name="openorb.config" value="@codebase@/etc/openorb.xml" />
 		<property name="openorb.profile" value="ReCClient" />
+		<property name="java.net.preferIPv4Stack" value="true" />
 
 		<!-- change this value to disable video -->
 		<property name="video.enabled" value="@video.enabled@" />
@@ -71,7 +72,7 @@
 
 		<!-- rec.web Service -->
 		<property name="rec.web.endpoint" value="@rec.web.endpoint@" />
-		
+
 		<!-- Processing manager thread pool -->
 		<property name="rec.processingmanager.threadPool.coresize"
 			value="@rec.client.processingmanager.threadpool.coresize@" />

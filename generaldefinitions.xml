@@ -325,6 +325,7 @@
 		<fileset dir="${elab.client.lib.dir}">
 			<include name="**/*.jar" />
 		</fileset>
+		<path refid="elab.common.lib.path" />
 	</path>
 
 	<path id="elab.client.compile.lib.path">
@@ -363,11 +364,12 @@
 	<property name="elab.hardwareserver.src.java.dir" value="${basedir}/elab/src/java/driver" />
 
 	<property name="elab.hardwareserver.lib.dir" value="${elab.lib.dir}/java/driver/" />
-	
+
 	<path id="elab.hardwareserver.lib.path">
 		<fileset dir="${elab.hardwareserver.lib.dir}">
 			<include name="**/*.jar" />
 		</fileset>
+		<path refid="elab.common.lib.path" />
 	</path>
 
 	<path id="elab.hardwareserver.compile.lib.path">
@@ -411,6 +413,7 @@
 		<fileset dir="${elab.multicast.lib.dir}">
 			<include name="**/*.jar" />
 		</fileset>
+		<path refid="elab.common.lib.path"/>
 	</path>
 
 	<path id="elab.multicast.compile.lib.path">
@@ -447,7 +450,7 @@
 			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/rec-framework.jnlp">
 				<filterset begintoken="@" endtoken="@" filtersfile="build.properties" />
 			</copy>
-			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}" />
+			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="@codebase@" value="file:${client.build.dir}" />
 			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" propertyFile="build.properties">
 				<replacefilter token="@rec.title@" property="rec.title" />
 				<replacefilter token="@rec.vendor@" property="rec.vendor" />
@@ -485,7 +488,7 @@
 			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC jvlc --&gt;" value="&lt;jar href=&quot;ReCjvlc_sig.jar&quot;/&gt;" />
 
 			<copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/openorb.jnlp" />
-			<replace file="${elab.client.classes.dir}/openorb.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
+			<replace file="${elab.client.classes.dir}/openorb.jnlp" token="@codebase@" value="file:${client.build.dir}/" />
 			<replace file="${elab.client.classes.dir}/openorb.jnlp" propertyFile="build.properties">
 				<replacefilter token="@openorb.title@" property="openorb.title" />
 				<replacefilter token="@openorb.vendor@" property="openorb.vendor" />
@@ -632,6 +635,7 @@
 				<replacefilter token="@rec.client.processingmanager.threadpool.coresize@" property="rec.client.processingmanager.threadpool.coresize" />
 				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
+				<replacefilter token="@jnlp.file@" value="elab-client.jnlp" />
 			</replace>
 
 			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
@@ -837,9 +841,9 @@
 				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
 				<replacefilter token="@jnlp.file@" value="elab-client.jnlp" />
-                		<!--replacefilter token="@rec.apparatus.autoconnect.id@" property="rec.apparatus.autoconnect.id"
+				<!--replacefilter token="@rec.apparatus.autoconnect.id@" property="rec.apparatus.autoconnect.id"
 				/-->
-                		<!--replacefilter token="@rec.apparatus.autoacquireresult@" property="rec.apparatus.autoacquireresult"
+				<!--replacefilter token="@rec.apparatus.autoacquireresult@" property="rec.apparatus.autoacquireresult"
                 		/-->
 			</replace>
 
@@ -874,7 +878,7 @@
 	<property name="jnlp.template.file" value="${basedir}/templates/jnlp/elab-client.jnlp.xml" />
 	<property name="experiment.jnlp.template.file" value="${basedir}/templates/jnlp/experiment-client.jnlp.xml" />
 	<property name="jnlp.rec.template.file" value="${basedir}/templates/jnlp/rec-framework.jnlp.xml" />
-	
+
 	<property name="jnlp.orb.template.file" value="${basedir}/templates/jnlp/openorb.jnlp.xml" />
 	<property name="jnlp.jfreechart.template.file" value="${basedir}/templates/jnlp/jfreechart.jnlp.xml" />
 	<property name="jnlp.j3d.template.file" value="${basedir}/templates/jnlp/j3d.jnlp.xml" />
