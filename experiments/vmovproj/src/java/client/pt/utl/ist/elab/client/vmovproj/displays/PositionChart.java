@@ -54,7 +54,6 @@ public class PositionChart extends MultSeriesXYExperimentGraphExtended implement
 		}
 
 		isAbs = header.getSelectedHardwareParameterValue("posAbs").trim().equals("1") ? true : false;
-		super.dataModelStartedNoData();
 	}
 
 	private ExpDataModel model = null;
