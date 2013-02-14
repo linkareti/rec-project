@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created by Pedro on 4 de Agosto de 2003, 14:57 -->
-
+<!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
 <HardwareInfo id="ELAB_ALEATORIO_V02" familiarName="Estatística de Dados" name="Aleatorio" version="1" manufacturer="Pedro" driverVersion="v1">
     <description>
         <![CDATA[ 
-        Esta experiÃªncia serve para lancar dados e adquirir uma imagem dos mesmos, remotamente.
+        Esta experiência serve para lancar dados e adquirir uma imagem dos mesmos, remotamente.
         Posterior analise da imagem para contagem das pintas dos dados.
         ]]>
     </description>
-    <customizer href="pt.utl.ist.elab.client.aleatorio.AleatorioCustomizerComponent"/>
     
     <parameter name="SoundWaveDuration" type="ContinuousValue" value="2000">
         <selection-list>

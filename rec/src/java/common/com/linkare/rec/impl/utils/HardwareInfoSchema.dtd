@@ -1,36 +1,45 @@
-<?xml version='1.0' encoding='UTF-8'?>
-
 <!--
     Typical usage:
 
     <?xml version="1.0"?>
-
-    <!DOCTYPE HardwareInfo SYSTEM "HardwareInfoSchema.dtd">
-
+	<!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
     <HardwareInfo>
     ...
     </HardwareInfo>
 -->
-
-<!ELEMENT AvailableOutputIDataSource EMPTY>
-<!ATTLIST AvailableOutputIDataSource
-    href CDATA #IMPLIED
-  >
-
-<!ELEMENT ChannelInfo (AvailableOutputIDataSource|Frequency|customizer|sampling-scale|scale|frequency-scale|parameter)*>
+<!-- provides information for each channel in the system, be it output (generate) or input (capture) of data-->
+<!ELEMENT ChannelInfo (Frequency|sampling-scale|scale|frequency-scale|parameter)*>
+<!--
+ direction - one of CHANNEL_INPUT or CHANNEL_OUTPUT depending on whether the channel captures or generates data
+ independent - the frequency for this channel could be different from the frequency for the hardware?
+ name - a property resource bundle with a key to a label to be used as channel name
+-->
 <!ATTLIST ChannelInfo
     direction CDATA #IMPLIED
     independent CDATA #IMPLIED
     name CDATA #IMPLIED
   >
-
+  
+<!-- A frequency value -->
 <!ELEMENT Frequency (#PCDATA)>
+<!--
+   type = one of "FrequencyType" or "SamplingIntervalType" depending on the type of frequency7
+   multiplier = one of the values defined for multipliers in {"fento","pico","nano","micro", "milli", "none", "kilo", "mega", "giga", "tera"}
+-->
 <!ATTLIST Frequency
     type CDATA #IMPLIED
     multiplier CDATA #IMPLIED
   >
-
-<!ELEMENT HardwareInfo (Frequency|ChannelInfo|customizer|sampling-scale|description|frequency-scale|parameter)*>
+<!-- The root element -->
+<!ELEMENT HardwareInfo (Frequency|ChannelInfo|sampling-scale|description|frequency-scale|parameter)*>
+<!--
+	manufacturer - The name (actually a key to a resource bundle) identifying the hardware manufacturer
+	familiarName - The name (actually a key to a resource bundle) identifying the name of the experiment. To be presented to users.
+	name - The name identifying  the internal name of the experiment. Not to be presented to users.
+	driverVersion - The version of the driver this hardware is supposed to talk to.
+	id - The unique id of this hardware in the ReC ecosystem.
+	version - The version of the hardware identified by this specification.	
+ -->
 <!ATTLIST HardwareInfo
     manufacturer CDATA #IMPLIED
     familiarName CDATA #IMPLIED
@@ -39,8 +48,19 @@
     id CDATA #IMPLIED
     version CDATA #IMPLIED
   >
-
+<!-- A single physical value. The text value dependends on the type attribute! -->
 <!ELEMENT PhysicsVal (#PCDATA)>
+<!--
+   additional attributes to define a physical value.
+   type - one of {"boolean","byte", "short", "int", "long", "float", "double", "byteArray"} 
+   href - Location of a byte array input stream defined by an URL (only for byteArray type) - mutually exclusive to attribute "file"
+   file - Location of a file containing the byte array value (only for byteArray type)
+   mimetype - Required when the type is byteArray as it defines the content
+   
+   if the type is boolean, the allowed values would be "on"/"true"/"1" or "off"/"false"/"0"
+   if the type is an integer ("byte","short","int","long") then the value should be in the correct range for the equivalent Java Types
+   if the type is a floating one ("float","double") then the value should be in the correct range for the equivalent Java Types
+-->
 <!ATTLIST PhysicsVal
     href CDATA #IMPLIED
     type CDATA #IMPLIED
@@ -48,11 +68,17 @@
     mimetype CDATA #IMPLIED
   >
 
+<!--
+   A key to a resource bundle representing the description for the experiment apparatus
+-->
 <!ELEMENT description (#PCDATA)>
 
-<!ELEMENT errordefault (#PCDATA|PhysicsVal)*>
+<!-- The default error value for a scale -->
+<!ELEMENT errordefault (PhysicsVal)*>
 
+<!-- A scale of frequencies. The subelements should all use the same Frequency type -->
 <!ELEMENT frequency-scale (step-frequency|min-frequency|max-frequency)*>
+<!-- A label (key pointing to a resource bundle) with the frequency scale label to be presented to the user -->
 <!ATTLIST frequency-scale
     label CDATA #IMPLIED
   >
