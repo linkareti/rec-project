@@ -59,7 +59,13 @@
 
 			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/client" />
 			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/client/META-INF" />
-			<echo>Compiling experiment client: @{experiment.name}</echo>
+			<echo>
+				
+				***********************************************
+				Compiling experiment client: @{experiment.name}
+				***********************************************
+				
+			</echo>
 
 			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-compile" />
 
@@ -116,7 +122,13 @@
 
 			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/server" />
 			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/server/META-INF" />
-			<echo>Compiling experiment driver: @{experiment.name}</echo>
+			<echo>
+				
+				***********************************************
+				Compiling experiment driver: @{experiment.name}
+				***********************************************
+				
+			</echo>
 
 			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-compile" />
 
@@ -342,7 +354,13 @@
 	<macrodef name="run.experiment.driver" description="Run one experiment driver">
 		<attribute name="experiment.name" />
 		<sequential>
-			<echo>starting @{experiment.name} driver</echo>
+			<echo>
+				
+				**********************************
+				Starting @{experiment.name} driver
+				**********************************
+					
+			</echo>
 			<java classname="pt.utl.ist.elab.driver.@{experiment.name}.ServerMain" fork="true" failonerror="true">
 				<arg value="-h" />
 				<classpath>
@@ -396,7 +414,13 @@
 	<macrodef name="debug.experiment.driver" description="Debug one experiment driver">
 		<attribute name="experiment.name" />
 		<sequential>
-			<echo>starting @{experiment.name} driver</echo>
+			<echo>
+				
+				****************************************************
+				Starting (debug mode) @{experiment.name} driver
+			 	****************************************************
+			
+			</echo>
 			<java classname="pt.utl.ist.elab.driver.@{experiment.name}.ServerMain" fork="true" failonerror="true">
 				<arg value="-h" />
 				<classpath>
