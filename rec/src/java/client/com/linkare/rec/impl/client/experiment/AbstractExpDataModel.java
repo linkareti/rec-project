@@ -1,7 +1,6 @@
 package com.linkare.rec.impl.client.experiment;
 
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import org.omg.PortableServer.Servant;
@@ -78,12 +77,6 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	/** Utility field used by event firing mechanism. */
 	private javax.swing.event.EventListenerList listenerList = null;
 
-	static {
-		final Logger l = LOGGER;
-		if (l == null) {
-			LogManager.getLogManager().addLogger(LOGGER);
-		}
-	}
 
 	/**
 	 * The CORBA registered reference
@@ -434,16 +427,6 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	@Override
 	public DataProducerWrapper getRemoteDataProducer() {
 		return remoteDataProducer;
-	}
-
-	@Override
-	public void log(final Level debugLevel, final String message) {
-		LOGGER.log(debugLevel, message);
-	}
-
-	@Override
-	public void logThrowable(final String message, final Throwable t) {
-		LOGGER.log(Level.SEVERE, t.getMessage(), t);
 	}
 
 	@Override
