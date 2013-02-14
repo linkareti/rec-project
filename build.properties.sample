@@ -15,14 +15,8 @@ javac.sourcelevel=1.6
 #The encoding to use when copying files. Please make sure all created files in the project are UTF-8
 copy.encoding=UTF-8
 
-#this next section esplicits which experiments are going to be compiled, packaged, distributed...
-#you need only one list, the reason they are separated is to allow building e-lab and e-lab virtual separatly
-#just uncomment the one you need
-#list of experiments in e-lab
-experiment.list=aleatorio,gamma,vtiro,vpend2m
-
-#this next section esplicits which labs are going to be compiled, packaged, distributed...
-#the experiments must be the same as in the property experiment.list
+#this next section explicits which labs are going to be compiled, packaged, distributed...
+#and the experiments to be build in each lab
 lab.list=basic,intermediate,advanced
 basic.experiment.list=aleatorio
 intermediate.experiment.list=gamma,vtiro

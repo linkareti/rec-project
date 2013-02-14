@@ -46,10 +46,10 @@
 	</macrodef>
 
 	<target name="clean.experiments.list" description="Clean all the experiments list">
-		<fail unless="experiment.list"> experiments.list must be set to clean
+		<fail unless="lab.list"> experiments.list must be set to clean
 					that list of experiments. define it in build.properties or pass 
-					it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
-		<process.list task="clean.experiment" list="${experiment.list}" attribute.name="experiment.name" />
+					it to jvm as arg like -Dlab.list="lab1,..." -Dlab1.experiment.list="exp1,..."</fail>
+		<outer.process.list task="clean.experiment" outer.list="${lab.list}" list="experiment.list" attribute.name="experiment.name" />
 	</target>
 
 
@@ -164,17 +164,17 @@
 	</macrodef>
 
 	<target name="compile.experiment.drivers.list" description="Compiles all experiment drivers in 'experiment.list'">
-		<fail unless="experiment.list"> experiments.list must be set to compile
+		<fail unless="lab.list"> lab.list must be set to compile
 			that list of experiments. define it in build.properties or pass 
-			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
-		<process.list task="compile.experiment.driver" list="${experiment.list}" attribute.name="experiment.name" />
+			it to jvm as arg like -Dlab.list="lab1,lab2,..." -Dlab1.experiments.list="exp1,exp2,..."</fail>
+		<outer.process.list task="compile.experiment.driver" outer.list="${lab.list}" list="experiment.list" attribute.name="experiment.name" />
 	</target>
 
 	<target name="compile.experiment.clients.list" description="Compiles all experiment clients in 'experiment.list'">
-		<fail unless="experiment.list"> experiments.list must be set to compile
-			that list of experiments. define it in build.properties or pass 
-			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
-		<process.list task="compile.experiment.client" list="${experiment.list}" attribute.name="experiment.name" />
+		<fail unless="lab.list"> lab.list must be set to compile
+					that list of experiments. define it in build.properties or pass 
+					it to jvm as arg like -Dlab.list="lab1,lab2,..." -Dlab1.experiments.list="exp1,exp2,..."</fail>
+		<outer.process.list task="compile.experiment.client" outer.list="${lab.list}" list="experiment.list" attribute.name="experiment.name" />
 	</target>
 
 
@@ -209,17 +209,17 @@
 	</macrodef>
 
 	<target name="jar.experiment.clients.list" description="Packages all experiment client jars in 'experiment.list'">
-		<fail unless="experiment.list"> experiments.list must be set to package
-			that list of experiments. define it in build.properties or pass 
-			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
-		<process.list task="jar.experiment.client" list="${experiment.list}" attribute.name="experiment.name" />
+		<fail unless="lab.list"> lab.list must be set to compile
+					that list of experiments. define it in build.properties or pass 
+					it to jvm as arg like -Dlab.list="lab1,lab2,..." -Dlab1.experiment.list="exp1,exp2,..."</fail>
+		<outer.process.list task="jar.experiment.client" outer.list="${lab.list}" list="experiment.list" attribute.name="experiment.name" />
 	</target>
 
 	<target name="jar.experiment.drivers.list" description="Packages all experiment driver jars in 'experiment.list'">
-		<fail unless="experiment.list"> experiments.list must be set to package
-			that list of experiments. define it in build.properties or pass 
-			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
-		<process.list task="jar.experiment.driver" list="${experiment.list}" attribute.name="experiment.name" />
+		<fail unless="lab.list"> lab.list must be set to compile
+						that list of experiments. define it in build.properties or pass 
+						it to jvm as arg like -Dlab.list="lab1,lab2,..." -Dlab1.experiment.list="exp1,exp2,..."</fail>
+		<outer.process.list task="jar.experiment.driver" outer.list="${lab.list}" list="experiment.list" attribute.name="experiment.name" />
 	</target>
 
 
@@ -252,12 +252,13 @@
 	</macrodef>
 
 	<target name="sign.experiments.list" description="Sign all experiments client jars on 'experiment.list'">
-		<fail unless="experiment.list"> experiments.list must be set to package
-				that list of experiments. define it in build.properties or pass 
-				it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
-		<process.list task="repack200.experiment" list="${experiment.list}" attribute.name="experiment.name" />
-		<process.list task="sign.experiment" list="${experiment.list}" attribute.name="experiment.name" />
-		<process.list task="pack200.experiment" list="${experiment.list}" attribute.name="experiment.name" />
+		<fail unless="lab.list"> experiments.list must be set to clean
+					that list of experiments. define it in build.properties or pass 
+					it to jvm as arg like -Dlab.list="lab1,..." -Dlab1.experiment.list="exp1,..."</fail>
+
+		<outer.process.list task="repack200.experiment" outer.list="${lab.list}" list="experiment.list" attribute.name="experiment.name" />
+		<outer.process.list task="sign.experiment" outer.list="${lab.list}" list="experiment.list" attribute.name="experiment.name" />
+		<outer.process.list task="pack200.experiment" outer.list="${lab.list}" list="experiment.list" attribute.name="experiment.name" />
 	</target>
 
 	<macrodef name="run.experiment.client" description="Run one experiment client bypassing javawebstart">
@@ -542,10 +543,10 @@
 	</macrodef>
 
 	<target name="build.experiments.list" description="Build all experiments in 'experiment.list'">
-		<fail unless="experiment.list"> experiments.list must be set to build
-				that list of experiments. define it in build.properties or pass 
-				it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
-		<process.list task="build.experiment" list="${experiment.list}" attribute.name="experiment.name" />
+		<fail unless="lab.list"> lab.list must be set to compile
+						that list of experiments. define it in build.properties or pass 
+						it to jvm as arg like -Dlab.list="lab1,lab2,..." -Dlab1.experiment.list="exp1,exp2,..."</fail>
+		<outer.process.list task="build.experiment" outer.list="${lab.list}" list="experiment.list" attribute.name="experiment.name" />
 	</target>
 
 </project>

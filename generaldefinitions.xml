@@ -38,6 +38,44 @@
 		<format property="today" pattern="dd-MM-yyyy" locale="en,UK" />
 	</tstamp>
 
+
+	<!-- = = = = = = = = = = = = = = = = =
+          macrodef: outer.process.list          
+         = = = = = = = = = = = = = = = = = -->
+	<macrodef name="outer.process.list">
+		<attribute name="list" />
+		<attribute name="task" />
+		<attribute name="attribute.name" />
+		<attribute name="outer.list" />
+		<sequential>
+			<script language="javascript">
+				<![CDATA[
+        	    var outerList="@{outer.list}";
+				var task="@{task}";
+				var attribute_name="@{attribute.name}";
+			    var splitVars=outerList.split(",");
+				
+			    for(var i=0;i<splitVars.length;i++)
+			    {   
+        			var innerListName=splitVars[i]+"."+"@{list}";
+        	        var innerList=project.getProperty(innerListName);
+            		var innerListSplitVars=innerList.split(",");
+        			
+            		for(var j=0;j<innerListSplitVars.length;j++)
+        			{   
+                		var oTask=project.createTask(task);
+						oTask.init();
+						oTask.setDynamicAttribute(attribute_name,innerListSplitVars[j]);
+						oTask.execute();
+				 	}
+        	
+        		}
+			]]>
+			</script>
+		</sequential>
+	</macrodef>
+
+
 	<macrodef name="process.list" description="Process a list of elements in csv format and for each one, define a property and execute an ant target">
 		<attribute name="list" />
 		<attribute name="task" />
@@ -62,6 +100,7 @@
 			</script>
 		</sequential>
 	</macrodef>
+
 
 	<!--
 			=====================================================
@@ -413,7 +452,7 @@
 		<fileset dir="${elab.multicast.lib.dir}">
 			<include name="**/*.jar" />
 		</fileset>
-		<path refid="elab.common.lib.path"/>
+		<path refid="elab.common.lib.path" />
 	</path>
 
 	<path id="elab.multicast.compile.lib.path">
@@ -641,7 +680,7 @@
 			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
 			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot; main=&quot;true&quot; /&gt;" />
 
-			<process.list task="add.experiment.to.full.jnlp.compile" list="${experiment.list}" attribute.name="experiment.name" />
+			<outer.process.list outer.list="${lab.list}" list="experiment.list"  task="add.experiment.to.full.jnlp.compile" attribute.name="experiment.name" />
 		</sequential>
 	</macrodef>
 
@@ -850,7 +889,7 @@
 			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
 			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot; main=&quot;true&quot; /&gt;" />
 
-			<process.list task="add.experiment.to.full.jnlp.build" list="${experiment.list}" attribute.name="experiment.name" />
+			<outer.process.list outer.list="${lab.list}" list="experiment.list" task="add.experiment.to.full.jnlp.build" attribute.name="experiment.name" />
 		</sequential>
 	</macrodef>
 
