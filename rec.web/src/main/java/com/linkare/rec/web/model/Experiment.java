@@ -28,7 +28,7 @@ import com.linkare.commons.jpa.DefaultDomainObject;
 @Table(name = "EXPERIMENT")
 @NamedQueries( { @NamedQuery(name = Experiment.FIND_ALL_QUERYNAME, query = "Select e from Experiment e"),
 	@NamedQuery(name = Experiment.COUNT_ALL_QUERYNAME, query = "Select count(e) from Experiment e"),
-	@NamedQuery(name = Experiment.FIND_ALL_ACTIVE_QUERYNAME, query = "Select e from Experiment e where e.state.active = '1' order by e.name"),
+	@NamedQuery(name = Experiment.FIND_ALL_ACTIVE_QUERYNAME, query = "Select e from Experiment e where e.state.active = true order by e.name"),
 	@NamedQuery(name = Experiment.FIND_BY_ACTIVE_LAB, query = Experiment.FIND_BY_ACTIVE_LAB_QRY),
 	@NamedQuery(name = Experiment.FIND_BY_EXTERNAL_ID, query = Experiment.FIND_BY_EXTERNAL_ID_QRY)})
 public class Experiment extends DefaultDomainObject {
@@ -45,7 +45,7 @@ public class Experiment extends DefaultDomainObject {
 
     public static final String LABORATORY = "LABORATORY";
 
-    public static final String FIND_BY_ACTIVE_LAB_QRY = "Select e from Experiment e where e.state.active = '1' and e.laboratory.name = :" + LABORATORY;
+    public static final String FIND_BY_ACTIVE_LAB_QRY = "Select e from Experiment e where e.state.active = true and e.laboratory.name = :" + LABORATORY;
 
     public static final String FIND_BY_EXTERNAL_ID = "Experiment.findByExternalID";
 
