@@ -6,7 +6,6 @@
 package pt.utl.ist.elab.driver.gamma;
 
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import pt.utl.ist.elab.driver.gamma.processors.StampGammaProcessor;
@@ -27,14 +26,8 @@ public class GammaStampDataSource extends AbstractStampDataSource {
 	private int total_samples = 0;
 	private float timeDelayMillis = 0;
 	private float tbs = 0;
-	public static String GAMMA_DS_LOGGER = "GammaDataSource.Logger";
 
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(GammaStampDataSource.GAMMA_DS_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(GammaStampDataSource.GAMMA_DS_LOGGER));
-		}
-	}
+	private static final Logger LOGGER = Logger.getLogger(GammaStampDataSource.class.getName());
 
 	/** Creates a new instance of RadioactividadeStampDataSource */
 	public GammaStampDataSource() {
@@ -85,7 +78,7 @@ public class GammaStampDataSource extends AbstractStampDataSource {
 
 		counter++;
 		if (counter > total_samples) {
-			Logger.getLogger(GammaStampDataSource.GAMMA_DS_LOGGER).log(Level.INFO, "DataSource Ended");
+			LOGGER.log(Level.INFO, "DataSource Ended");
 			setDataSourceEnded();
 
 		}
