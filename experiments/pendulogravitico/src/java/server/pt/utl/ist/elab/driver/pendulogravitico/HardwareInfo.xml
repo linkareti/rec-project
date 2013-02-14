@@ -2,6 +2,7 @@
 
 <!-- Created by jp on 9 de Maio de 2003, 19:07 -->
 
+<!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
 <HardwareInfo id="ELAB_PENDULO_GRAV_STAMP_V01" familiarName="Pendulo gravitico amortecido" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
     <description>
         <![CDATA[ 

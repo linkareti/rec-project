@@ -2,6 +2,7 @@
 
 <!-- Created by jp on 9 de Maio de 2003, 19:07 -->
 
+<!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
 <HardwareInfo id="MASSA_MOLA_V1.0" familiarName="Massa-Mola" name="Massa-Mola" version="01" manufacturer="Elab - UTL" driverVersion="v1">
     <description>
         <![CDATA[ 
