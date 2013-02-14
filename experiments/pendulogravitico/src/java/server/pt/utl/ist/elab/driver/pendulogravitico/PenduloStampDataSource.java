@@ -7,7 +7,6 @@
 package pt.utl.ist.elab.driver.pendulogravitico;
 
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import pt.utl.ist.elab.driver.pendulogravitico.processors.StampPenduloProcessor;
@@ -28,14 +27,7 @@ public class PenduloStampDataSource extends AbstractStampDataSource {
 	private int total_samples = 0;
 	private float calib_angle = -1;
 
-	public static String PENDULO_DS_LOGGER = "PenduloDataSource.Logger";
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(PenduloStampDataSource.PENDULO_DS_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(PenduloStampDataSource.PENDULO_DS_LOGGER));
-		}
-	}
+	private static final Logger LOGGER = Logger.getLogger(PenduloStampDataSource.class.getName());
 
 	/** Creates a new instance of RadioactividadeStampDataSource */
 	public PenduloStampDataSource() {
@@ -71,7 +63,7 @@ public class PenduloStampDataSource extends AbstractStampDataSource {
 			}
 
 			if (counter == total_samples) {
-				Logger.getLogger(PenduloStampDataSource.PENDULO_DS_LOGGER).log(Level.INFO, "DataSource Ended");
+				LOGGER.log(Level.INFO, "DataSource Ended");
 				setDataSourceEnded();
 			}
 
