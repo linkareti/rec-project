@@ -44,6 +44,7 @@ public class RadioactividadeStampDriver extends AbstractStampDriver {
 		setDriverUniqueID("ELAB_RAD_STAMP_V02");
 		setApplicationNameLockPort("Radioactividade Stamp Driver V0.2");
 		setTimeOutPerPort(10000);
+		setPortBaudRate(4800);
 		loadCommandHandlers();
 	}
 
