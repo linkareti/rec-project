@@ -388,11 +388,13 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		apparatusComboBoxModel = new ApparatusComboBoxModel();
 		labComboBoxModel = new LabComboBoxModel();
 		apparatusAutoConnectID = System.getProperty("rec.apparatus.autoconnect.id");
-		if (apparatusAutoConnectID != null && !"".equals(apparatusAutoConnectID)) {
+		if (apparatusAutoConnectID != null && !"".equals(apparatusAutoConnectID)
+				&& !"@rec.apparatus.autoconnect.id@".equals(apparatusAutoConnectID)) {
 			setAutoConnectLab(true);
 		}
-		autoAcquireResult = (System.getProperty("rec.apparatus.autoacquireresult") == null || "false".equals(System
-				.getProperty("rec.apparatus.autoacquireresult"))) ? false : true;
+		autoAcquireResult = (System.getProperty("rec.apparatus.autoacquireresult") == null
+				|| "@rec.apparatus.autoacquireresult@".equals(System.getProperty("rec.apparatus.autoacquireresult")) || "false"
+				.equals(System.getProperty("rec.apparatus.autoacquireresult"))) ? false : true;
 	}
 
 	public ApparatusClientBean getApparatusClientBean() {
