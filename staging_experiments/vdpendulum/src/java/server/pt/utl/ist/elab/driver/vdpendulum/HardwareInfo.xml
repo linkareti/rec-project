@@ -2,6 +2,7 @@
 
 <!-- Created by jp on 9 de Maio de 2003, 19:07 -->
 
+<!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
 <HardwareInfo id="DPENDULUM_V1.0" familiarName="Pêndulo duplo" name="Pêndulo duplo" version="01" manufacturer="Elab - UTL" driverVersion="v1">
     <description>
         <![CDATA[ 
@@ -9,8 +10,6 @@
         <b>Penso que pode ter coisas maradas aqui como html</b>
         ]]>
     </description>
-    <customizer href="pt.utl.ist.elab.virtual.client.dpendulum.DPendulumCustomizer"/>
-        
     <parameter name="P1 ini angle" type="ContinuousValue" value="90">
         <selection-list>
             <value order="1">0</value>

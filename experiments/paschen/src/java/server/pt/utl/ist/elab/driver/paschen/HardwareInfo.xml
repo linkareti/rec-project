@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!-- Created by jloureiro on 22 de Agosto de 2012, 16:50 -->
-
+<!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
 <HardwareInfo id="PLASMALAB_PASCHEN_CURVE_STAMP_V01" familiarName="Paschen Curve" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
     <description>
         <![CDATA[ 
@@ -68,7 +67,7 @@
     <sampling-scale>
         <min-samples>1</min-samples>
         <max-samples>50000</max-samples>
-        <step-samples0>1</step-samples>
+        <step-samples>1</step-samples>
     </sampling-scale>
     
     <ChannelInfo name="paschen$rec.exp.paschen.hardwareinfo.channel.0.name" independent="false" direction="CHANNEL_INPUT">
