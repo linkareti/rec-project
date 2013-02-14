@@ -104,8 +104,11 @@ rec.web.port=3700
 basic.rec.web.lab.id=LAB_ME_BASIC
 intermediate.rec.web.lab.id=LAB_ME_INTERMEDIATE
 advanced.rec.web.lab.id=LAB_ME_ADVANCED
-rec.web.securitymanager=com.linkare.rec.impl.multicast.security.CompositeSecurityManager
-rec.web.compositesecuritymanager.list=com.linkare.rec.impl.multicast.security.AllocationManagerSecurityManager
+
+#com.linkare.rec.impl.multicast.security.AllocationManagerSecurityManager
+#com.linkare.rec.impl.multicast.security.DefaultSecurityManager
+rec.multicast.securitymanager=com.linkare.rec.impl.multicast.security.DefaultSecurityManager
+
 rec.web.securitymanager.interval.lap.time.minutes=0
 rec.web.securitymanager.near.lap.time.minutes=5
 rec.web.securitymanager.refresh.lap.time.minutes=15

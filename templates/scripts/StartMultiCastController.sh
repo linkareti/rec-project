@@ -12,7 +12,7 @@ export MULTICAST_ORB_SYSPROPS="-Dopenorb.profile=ReCMultiCastController -Drec.mu
 export MEM_SYSPROPS="-Xms$INITIAL_HEAP_MEM -Xmx$MAX_HEAP_MEM"
 export LOG_SYSPROPS="-Djava.util.logging.config.file=$MULTICAST_BASE_DIR/etc/loggers.config.properties"
 export TOOLKIT_SYSPROPS="-Djava.awt.headless=true"
-export SECURITYMANAGER_SYSPROPS="-Drec.multicast.securitymanager=@rec.web.securitymanager@ -Drec.multicast.compositesecuritymanager.list=@rec.web.compositesecuritymanager.list@"
+export SECURITYMANAGER_SYSPROPS="-Drec.multicast.securitymanager=@rec.multicast.securitymanager@"
 export SECURITYMANAGER_TIMES_SYSPROPS="-Drec.multicast.securitymanager.interval.lap.time.minutes=@rec.web.securitymanager.interval.lap.time.minutes@ -Drec.multicast.securitymanager.near.lap.time.minutes=@rec.web.securitymanager.near.lap.time.minutes@ -Drec.multicast.securitymanager.refresh.lap.time.minutes=@rec.web.securitymanager.refresh.lap.time.minutes@"
 export ALLOCATIONMANAGER_SYSPROPS="-Drec.multicast.labid=@rec.web.lab.id@ -Drec.multicast.allocation.manager.host=@rec.web.host@ -Drec.multicast.allocation.manager.port=@rec.web.port@"
 export PROCESSINGMANAGER_SYSPROPS="-Drec.processingmanager.threadPool.coresize=@rec.multicast.processingmanager.threadpool.coresize@ -Drec.processingmanager.threadPool.maxsize=@rec.multicast.processingmanager.threadpool.maxsize@ -Drec.processingmanager.thread.idletime=@rec.processingmanager.thread.idletime@"

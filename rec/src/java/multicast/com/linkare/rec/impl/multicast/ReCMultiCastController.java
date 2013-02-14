@@ -143,10 +143,9 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 		}
 
 		// Initialize Security Manager
-		SecurityManagerFactory.getSecurityManager().registerMultiCastHardware(multiCastHardwares);
+		SecurityManagerFactory.registerMultiCastHardware(multiCastHardwares);
 
-		// TODO register security communicator
-		SecurityManagerFactory.getSecurityManager().registerSecurityCommunicator(this);
+		SecurityManagerFactory.registerSecurityCommunicator(this);
 
 		// Create a hardware connection checker
 		hardwareConnectionChecker = new HardwareConnectionCheck();

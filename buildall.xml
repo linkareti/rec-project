@@ -113,8 +113,7 @@
 				<replacefilter token="@rec.web.lab.id@" property="@{lab.name}.rec.web.lab.id" />
 				<replacefilter token="@rec.web.host@" property="rec.web.host" />
 				<replacefilter token="@rec.web.port@" property="rec.web.port" />
-				<replacefilter token="@rec.web.securitymanager@" property="rec.web.securitymanager" />
-				<replacefilter token="@rec.web.compositesecuritymanager.list@" property="rec.web.compositesecuritymanager.list" />
+				<replacefilter token="@rec.multicast.securitymanager@" property="rec.multicast.securitymanager" />
 				<replacefilter token="@rec.web.securitymanager.interval.lap.time.minutes@" property="rec.web.securitymanager.interval.lap.time.minutes" />
 				<replacefilter token="@rec.web.securitymanager.near.lap.time.minutes@" property="rec.web.securitymanager.near.lap.time.minutes" />
 				<replacefilter token="@rec.web.securitymanager.refresh.lap.time.minutes@" property="rec.web.securitymanager.refresh.lap.time.minutes" />
@@ -141,8 +140,7 @@
 				<replacefilter token="@rec.web.lab.id@" property="@{lab.name}.rec.web.lab.id" />
 				<replacefilter token="@rec.web.host@" property="rec.web.host" />
 				<replacefilter token="@rec.web.port@" property="rec.web.port" />
-				<replacefilter token="@rec.web.securitymanager@" property="rec.web.securitymanager" />
-				<replacefilter token="@rec.web.compositesecuritymanager.list@" property="rec.web.compositesecuritymanager.list" />
+				<replacefilter token="@rec.multicast.securitymanager@" property="rec.multicast.securitymanager" />
 				<replacefilter token="@rec.web.securitymanager.interval.lap.time.minutes@" property="rec.web.securitymanager.interval.lap.time.minutes" />
 				<replacefilter token="@rec.web.securitymanager.near.lap.time.minutes@" property="rec.web.securitymanager.near.lap.time.minutes" />
 				<replacefilter token="@rec.web.securitymanager.refresh.lap.time.minutes@" property="rec.web.securitymanager.refresh.lap.time.minutes" />
