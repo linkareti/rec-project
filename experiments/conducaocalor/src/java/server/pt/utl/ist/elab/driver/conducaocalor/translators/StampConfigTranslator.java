@@ -6,9 +6,6 @@
 
 package pt.utl.ist.elab.driver.conducaocalor.translators;
 
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
-
 import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDriver;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.AbstractStampTranslator;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
@@ -19,14 +16,7 @@ import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
  */
 public class StampConfigTranslator extends AbstractStampTranslator {
 
-	public static String HEAT_SCT_LOGGER = "HeatStampConfigTranslator.Logger";
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(StampConfigTranslator.HEAT_SCT_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(StampConfigTranslator.HEAT_SCT_LOGGER));
-		}
-	}
+	//private static final Logger LOGGER = Logger.getLogger(StampConfigTranslator.class.getName());
 
 	public static final String COMMAND_IDENTIFIER = AbstractStampDriver.CONFIG_OUT_STRING;
 
