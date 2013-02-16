@@ -19,6 +19,7 @@ import com.linkare.rec.data.acquisition.SamplesPacket;
 import com.linkare.rec.impl.data.SamplesPacketMatrix;
 import com.linkare.rec.impl.data.SamplesPacketSource;
 import com.linkare.rec.impl.threading.ExecutorScheduler;
+import com.linkare.rec.impl.threading.ProcessingManager;
 import com.linkare.rec.impl.threading.ScheduledWorkUnit;
 import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 

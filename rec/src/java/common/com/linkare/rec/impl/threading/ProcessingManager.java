@@ -2,6 +2,8 @@ package com.linkare.rec.impl.threading;
 
 import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -36,20 +38,23 @@ public final class ProcessingManager {
 
 	private final ThreadPoolExecutor threadPool;
 
+	private final ScheduledExecutorService scheduleThreadPool;
+
 	/**
 	 * Singleton instance
 	 */
-	private final static ProcessingManager instance = new ProcessingManager();
+	private final static ProcessingManager INSTANCE = new ProcessingManager();
 
 	/**
 	 * Singleton constructor private to invalidate creation of instances from
 	 * this class.
 	 */
 	private ProcessingManager() {
-
+		scheduleThreadPool = java.util.concurrent.Executors.newSingleThreadScheduledExecutor(new RecThreadFactory(
+				"RepeatableTasks"));
 		threadPool = new ThreadPoolExecutor(ProcessingManager.CORE_POOL_SIZE_PRIORITY,
 				ProcessingManager.MAX_POOL_SIZE_PRIORITY, ProcessingManager.THREAD_IDLE_TIME, TimeUnit.NANOSECONDS,
-				new LinkedBlockingQueue<Runnable>(), new RecThreadFactory("EvtThreadPool"));
+				new LinkedBlockingQueue<Runnable>(), new RecThreadFactory("EventQueue"));
 		threadPool.prestartAllCoreThreads();
 	}
 
@@ -60,7 +65,7 @@ public final class ProcessingManager {
 	 */
 
 	public static ProcessingManager getInstance() {
-		return ProcessingManager.instance;
+		return INSTANCE;
 	}
 
 	/**
@@ -81,6 +86,7 @@ public final class ProcessingManager {
 
 	public void shutdown() {
 		threadPool.shutdownNow();
+		scheduleThreadPool.shutdownNow();
 	}
 
 	public ThreadPoolExecutorStatistics getThreadPoolStatistics() {
@@ -102,5 +108,17 @@ public final class ProcessingManager {
 
 	public int getThreadPoolMaxSize() {
 		return threadPool.getMaximumPoolSize();
+	}
+
+	/**
+	 * @param conditionChecker
+	 * @param initialDelay
+	 * @param period
+	 * @param unit
+	 * @return
+	 */
+	public ScheduledFuture<?> scheduleAtFixedRate(Runnable conditionChecker, long initialDelay, long period,
+			TimeUnit unit) {
+		return scheduleThreadPool.scheduleAtFixedRate(conditionChecker, initialDelay, period, unit);
 	}
 }

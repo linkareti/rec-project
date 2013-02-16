@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import com.linkare.rec.acquisition.MultiCastController;
 import com.linkare.rec.acquisition.MultiCastControllerPOATie;
 import com.linkare.rec.impl.multicast.ReCMultiCastController;
+import com.linkare.rec.impl.threading.ProcessingManager;
 import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.impl.utils.ORBBean;
 
@@ -76,7 +77,7 @@ public class MultiCastControllerMain {
 			System.out.println("Abnormal exit...");
 			ORBBean.getORBBean().killORB();
 			mcc.shutdown();
-			mcc = null;
+			ProcessingManager.getInstance().shutdown();
 			e.printStackTrace();
 		}
 
