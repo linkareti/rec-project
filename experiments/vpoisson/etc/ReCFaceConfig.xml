@@ -15,10 +15,4 @@
 		displayStringBundleKey="poisson$rec.exp.display.poisson.title.anim"
 		offlineCapable="false" order="1" visible="true" selected="true"
 		enabled="false" connected="false" />
-	<!--  display classLocationBundleKey="poisson$rec.exp.display.poisson.loc.1"
-		toolTipBundleKey="poisson$rec.exp.display.poisson.tip.1"
-		iconLocationBundleKey="ReCUI$rec.ui.icon.sensor"
-		displayStringBundleKey="poisson$rec.exp.display.poisson.title.1"
-		offlineCapable="false" order="2" visible="true" selected="true"
-		enabled="false" connected="false" /-->
 </apparatus>
