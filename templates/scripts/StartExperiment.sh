@@ -28,7 +28,7 @@ export EXPERIMENT_DRIVER_CLASS="-Dexperiment.driver.class=@experiment.driver.cla
 export TOOLKIT_SYSPROPS="-Dawt.toolkit=sun.awt.motif.MToolkit -Djava.awt.headless=true"
 
 export RECCLASSPATH=$DRIVER_BASE_DIR/lib/xml-apis.jar:$DRIVER_BASE_DIR/lib/tools-1.4.0.jar:$DRIVER_BASE_DIR/lib/openorb_orb-1.4.0.jar:$DRIVER_BASE_DIR/lib/openorb_pss-1.4.0.jar:$DRIVER_BASE_DIR/lib/openorb_ots-1.4.0.jar:$DRIVER_BASE_DIR/lib/logkit.jar:$DRIVER_BASE_DIR/lib/xercesImpl.jar:$DRIVER_BASE_DIR/lib/avalon-framework.jar:$DRIVER_BASE_DIR/lib/OSP.jar:$DRIVER_BASE_DIR/lib/vecmath.jar:$DRIVER_BASE_DIR/lib/jfreechart-1.0.9.jar:$DRIVER_BASE_DIR/lib/jcommon-1.0.12.jar:$DRIVER_BASE_DIR/lib/j3dcore.jar:$DRIVER_BASE_DIR/lib/j3dutils.jar:$DRIVER_BASE_DIR/lib/RXTXcomm.jar:$DRIVER_BASE_DIR/lib/commons-i18n-0.0.1-SNAPSHOT.jar:$DRIVER_BASE_DIR/lib/commons-net-0.0.1-SNAPSHOT.jar
-export DRIVER_CLASSPATH=$DRIVER_BASE_DIR/@experiment.name@Driver.jar:$DRIVER_BASE_DIR/ELabHardwareServer.jar:$DRIVER_BASE_DIR/ReCHardwareServer.jar:$DRIVER_BASE_DIR/ReCCommon.jar
+export DRIVER_CLASSPATH=$DRIVER_BASE_DIR/@experiment.name@Driver.jar:$DRIVER_BASE_DIR/ELabHardwareServer.jar:$DRIVER_BASE_DIR/ELabCommon.jar:$DRIVER_BASE_DIR/ReCHardwareServer.jar:$DRIVER_BASE_DIR/ReCCommon.jar
 export DRIVER_EXPERIMENT_CLASSPATH=
 
 #export DEBUG="-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,address=60001,suspend=n" 

@@ -289,11 +289,13 @@
 
 	<target name="build.elab.hardwareserver" description="build elab hardwareserver - clean,compile and jar" depends="clean.elab.hardwareserver,compile.elab.hardwareserver,jar.elab.hardwareserver">
 
+		<copy file="${common.build.dir}/ELabCommon.jar" todir="${hardwareserver.build.dir}" />
+
 		<copy todir="${hardwareserver.build.dir}/lib" overwrite="true">
 			<fileset dir="${elab.hardwareserver.lib.dir}">
 				<include name="**/*" />
 			</fileset>
-                        <fileset dir="${elab.common.lib.dir}">
+			<fileset dir="${elab.common.lib.dir}">
 				<include name="**/*" />
 			</fileset>
 		</copy>
@@ -378,16 +380,16 @@
 			</packageset>
 			<classpath refid="elab.hardwareserver.libs.classpath" />
 			<doctitle>eLab  <![CDATA[<h1>Package Overview</h1>]]></doctitle>
-			<bottom>
-				<![CDATA[<i>Copyright &#169; 2010 - Instituto Superior Técnico - All Rights Reserved.</i>]]>
+		<bottom>
+			<![CDATA[<i>Copyright &#169; 2010 - Instituto Superior Técnico - All Rights Reserved.</i>]]>
 			</bottom>
-			<tag name="todo" scope="all" description="To do:" />
-			<link href="http://java.sun.com/javase/6/docs/api/" />
-		</javadoc>
-	</target>
+	<tag name="todo" scope="all" description="To do:" />
+	<link href="http://java.sun.com/javase/6/docs/api/" />
+</javadoc>
+</target>
 
-	<target name="clean.javadocs" description="clean all elab javadocs">
-		<delete dir="${build.dir}/javadocs/elab" />
-	</target>
+<target name="clean.javadocs" description="clean all elab javadocs">
+<delete dir="${build.dir}/javadocs/elab" />
+</target>
 
 </project>

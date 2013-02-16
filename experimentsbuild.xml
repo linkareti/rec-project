@@ -276,8 +276,7 @@
 	<macrodef name="run.experiment.client" description="Run one experiment client bypassing javawebstart">
 		<attribute name="experiment.name" />
 		<sequential>
-			<java classname="pt.utl.ist.elab.client.FullClientNewInterface" fork="true" failonerror="true">
-				<arg value="-h" />
+			<java classname="pt.utl.ist.elab.client.FullClientNewInterface" fork="true" failonerror="true" logerror="true">
 				<classpath>
 					<path refid="rec.common.lib.path" />
 					<path refid="rec.client.lib.path" />
@@ -299,7 +298,7 @@
 				<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
 				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
-				<sysproperty key="openorb.config" value="${client.build.dir}/etc/openorb.xml" />
+				<sysproperty key="openorb.config" value="file://${client.build.dir}/etc/openorb.xml" />
 				<sysproperty key="rec.processingmanager.threadPool.coresize" value="${rec.client.processingmanager.threadpool.coresize}" />
 				<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.client.processingmanager.threadpool.maxsize}" />
 				<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
@@ -314,8 +313,7 @@
 	<macrodef name="debug.experiment.client" description="Debug one experiment client bypassing javawebstart">
 		<attribute name="experiment.name" />
 		<sequential>
-			<java classname="pt.utl.ist.elab.client.FullClientNewInterface" fork="true" failonerror="true">
-				<arg value="-h" />
+			<java classname="pt.utl.ist.elab.client.FullClientNewInterface" fork="true" failonerror="true" logerror="true">
 				<classpath>
 					<path refid="rec.common.lib.path" />
 					<path refid="rec.client.lib.path" />
@@ -339,7 +337,7 @@
 				<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
 				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
-				<sysproperty key="openorb.config" value="${client.build.dir}/etc/openorb.xml" />
+				<sysproperty key="openorb.config" value="file://${client.build.dir}/etc/openorb.xml" />
 				<sysproperty key="rec.processingmanager.threadPool.coresize" value="${rec.client.processingmanager.threadpool.coresize}" />
 				<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.client.processingmanager.threadpool.maxsize}" />
 				<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
@@ -361,8 +359,8 @@
 				**********************************
 					
 			</echo>
-			<java classname="pt.utl.ist.elab.driver.@{experiment.name}.ServerMain" fork="true" failonerror="true">
-				<arg value="-h" />
+			<property file="experiments/@{experiment.name}/etc/build.properties"/>
+			<java classname="com.linkare.rec.impl.driver.FullServerMain" fork="true" failonerror="true" logerror="true">
 				<classpath>
 					<path refid="rec.common.lib.path" />
 					<path refid="rec.hardwareserver.lib.path" />
@@ -385,13 +383,59 @@
 				<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
 				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
-				<sysproperty key="openorb.config" value="${rec.hardwareserver.classes.dir}/openorb.xml" />
+				<sysproperty key="openorb.config" value="file://${hardwareserver.build.dir}/basic/etc/openorb.xml" />
 				<sysproperty key="rec.processingmanager.threadPool.coresize" value="${rec.driver.processingmanager.threadpool.coresize}" />
 				<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.driver.processingmanager.threadpool.maxsize}" />
 				<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
+				<sysproperty key="experiment.driver.class" value="${experiment.driver.class}"/>
 			</java>
 		</sequential>
 	</macrodef>
+	
+	<macrodef name="debug.experiment.driver" description="Debug one experiment driver">
+			<attribute name="experiment.name" />
+			<sequential>
+				<echo>
+					
+					****************************************************
+					Starting (debug mode) @{experiment.name} driver
+				 	****************************************************
+				
+				</echo>
+				<property file="experiments/@{experiment.name}/etc/build.properties"/>
+				<java classname="com.linkare.rec.impl.driver.FullServerMain" fork="true" failonerror="true" logerror="true">
+					<classpath>
+						<path refid="rec.common.lib.path" />
+						<path refid="rec.hardwareserver.lib.path" />
+						<path refid="elab.hardwareserver.lib.path" />
+						<pathelement location="${rec.common.classes.dir}/" />
+						<pathelement location="${rec.hardwareserver.classes.dir}/" />
+						<pathelement location="${elab.hardwareserver.classes.dir}/" />
+						<pathelement location="${experiments.classes.dir}/@{experiment.name}/server/" />
+						<fileset dir="experiments/@{experiment.name}/lib/java/server/">
+							<include name="**/*" />
+						</fileset>
+					</classpath>
+					<jvmarg value="-Xms${min.memory}" />
+					<jvmarg value="-Xmx${max.memory}" />
+					<jvmarg value="-Xdebug" />
+					<jvmarg value="-Xrunjdwp:transport=dt_socket,address=${experiment.driver.debug.address.port},server=y,suspend=y" />
+					<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
+					<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
+					<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
+					<sysproperty key="openorb.profile" value="${experiment.driver.openorb.profile}" />
+					<sysproperty key="eLab.@{experiment.name}.HardwareInfo" value="${experiment.eLab.HardwareInfo}" />
+					<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
+					<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
+					<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
+					<sysproperty key="openorb.config" value="file://${hardwareserver.build.dir}/basic/etc/openorb.xml" />
+					<sysproperty key="rec.processingmanager.threadPool.coresize" value="${rec.driver.processingmanager.threadpool.coresize}" />
+					<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.driver.processingmanager.threadpool.maxsize}" />
+					<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
+					<sysproperty key="experiment.driver.class" value="${experiment.driver.class}"/>
+				</java>
+			</sequential>
+		</macrodef>
 
 	<target name="run.experiment.client" description="Run one experiment client bypassing javawebstart">
 		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
@@ -410,50 +454,6 @@
 			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
 		<run.experiment.driver experiment.name="${experiment.name}" />
 	</target>
-
-	<macrodef name="debug.experiment.driver" description="Debug one experiment driver">
-		<attribute name="experiment.name" />
-		<sequential>
-			<echo>
-				
-				****************************************************
-				Starting (debug mode) @{experiment.name} driver
-			 	****************************************************
-			
-			</echo>
-			<java classname="pt.utl.ist.elab.driver.@{experiment.name}.ServerMain" fork="true" failonerror="true">
-				<arg value="-h" />
-				<classpath>
-					<path refid="rec.common.lib.path" />
-					<path refid="rec.hardwareserver.lib.path" />
-					<path refid="elab.hardwareserver.lib.path" />
-					<pathelement location="${rec.common.classes.dir}/" />
-					<pathelement location="${rec.hardwareserver.classes.dir}/" />
-					<pathelement location="${elab.hardwareserver.classes.dir}/" />
-					<pathelement location="${experiments.classes.dir}/@{experiment.name}/server/" />
-					<fileset dir="experiments/@{experiment.name}/lib/java/server/">
-						<include name="**/*" />
-					</fileset>
-				</classpath>
-				<jvmarg value="-Xms${min.memory}" />
-				<jvmarg value="-Xmx${max.memory}" />
-				<jvmarg value="-Xdebug" />
-				<jvmarg value="-Xrunjdwp:transport=dt_socket,address=${experiment.driver.debug.address.port},server=y,suspend=y" />
-				<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
-				<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
-				<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
-				<sysproperty key="openorb.profile" value="${experiment.driver.openorb.profile}" />
-				<sysproperty key="eLab.@{experiment.name}.HardwareInfo" value="${experiment.eLab.HardwareInfo}" />
-				<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
-				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
-				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
-				<sysproperty key="openorb.config" value="${rec.hardwareserver.classes.dir}/openorb.xml" />
-				<sysproperty key="rec.processingmanager.threadPool.coresize" value="${rec.driver.processingmanager.threadpool.coresize}" />
-				<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.driver.processingmanager.threadpool.maxsize}" />
-				<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
-			</java>
-		</sequential>
-	</macrodef>
 
 	<target name="debug.experiment.driver" description="Debug one experiment driver">
 		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
