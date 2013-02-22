@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+		=======================================================
+		============ 2009/03/29 Build Rec - Elab ==============
+		=======================================================
+	-->
+
+<project name="Experiments - build system" default="help" basedir=".">
+	<description>
+		Compile, package, sign and run the project ReC and each of the experiments.
+	</description>
+
+	<property file="build.properties" description="general properties for building project" />
+
+	<import file="generaldefinitions.xml" />
+
+	<!--
+		=====================================================
+		====================== Generic ======================
+		=====================================================
+	-->
+
+	<target name="help" description="General usage of the build system, it shows a description of each target, and how to use them">
+		<echo>ReC - eLab build system</echo>
+	</target>
+
+	<!--
+		=====================================================
+		================ReC Experiments======================
+		=====================================================
+	-->
+
+	<macrodef name="clean.experiment" description="Clean each experiment classes and jars">
+		<attribute name="experiment.name" />
+		<sequential>
+			<delete dir="${experiments.classes.dir}/@{experiment.name}" />
+			<delete file="${build.dir.compile}/@{experiment.name}Client.jar" />
+			<delete file="${build.dir.compile}/@{experiment.name}Client_sig.jar" />
+			<delete file="${build.dir.compile}/@{experiment.name}Client_sig.jar.pack.gz" />
+
+			<!--delete file="${client.build.dir}/@{experiment.name}Client.jar"/>
+			<delete file="${client.build.dir}/@{experiment.name}Client_sig.jar"/>
+			<delete file="${hardwareserver.build.dir}/@{experiment.name}Driver.jar"/>
+			<delete file="${hardwareserver.build.dir}/@{experiment.name}Driver_sig.jar"/-->
+		</sequential>
+	</macrodef>
+
+	<target name="clean.experiments.list" description="Clean all the experiments list">
+		<fail unless="lab.list"> experiments.list must be set to clean
+					that list of experiments. define it in build.properties or pass 
+					it to jvm as arg like -Dlab.list="lab1,..." -Dlab1.experiment.list="exp1,..."</fail>
+		<outer.process.list task="clean.experiment" outer.list="${lab.list}" list="experiment.list" attribute.name="experiment.name" />
+	</target>
+
+
+	<macrodef name="compile.experiment.client" description="Compiles one experiment's client classes">
+		<attribute name="experiment.name" />
+		<sequential>
+
+			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/client" />
+			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/client/META-INF" />
+			<echo>
+				
+				***********************************************
+				Compiling experiment client: @{experiment.name}
+				***********************************************
+				
+			</echo>
+
+			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-compile" />
+
+			<javac destdir="${experiments.classes.dir}/@{experiment.name}/client" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+				<src path="experiments/@{experiment.name}/src/java/client" />
+				<src path="experiments/@{experiment.name}/src/java/common" />
+				<include name="**/*.java" />
+				<classpath>
+					<path refid="compile.experiment.client.classpath" />
+					<fileset dir="experiments/@{experiment.name}/lib/java/client">
+						<include name="**/*" />
+					</fileset>
+					<fileset dir="experiments/@{experiment.name}/lib/java/common">
+						<include name="**/*" />
+					</fileset>
+				</classpath>
+				<compilerarg value="-Xlint:unchecked, cast, -serial" />
+			</javac>
+
+			<copy todir="${experiments.classes.dir}/@{experiment.name}/client" overwrite="true">
+				<fileset dir="experiments/@{experiment.name}/src/java/client">
+					<exclude name="**/*.java" />
+					<exclude name="**/*.form" />
+				</fileset>
+				<fileset dir="experiments/@{experiment.name}/src/java/common">
+					<exclude name="**/*.java" />
+					<exclude name="**/*.form" />
+				</fileset>
+			</copy>
+
+			<manifest file="${experiments.classes.dir}/@{experiment.name}/client/META-INF/MANIFEST.MF">
+				<section name="common">
+					<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+					<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+					<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+					<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+					<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${today}" />
+					<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+				</section>
+			</manifest>
+
+			<!--jar.experiment.client experiment.name="@{experiment.name}"/>
+			
+			<sign.jar.rec jar.name="@{experiment.name}Client.jar" folder="${build.dir.compile}"/-->
+
+			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-compile" />
+
+		</sequential>
+	</macrodef>
+
+	<macrodef name="compile.experiment.driver" description="Compiles one experiment's driver classes">
+		<attribute name="experiment.name" />
+		<sequential>
+
+			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/server" />
+			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/server/META-INF" />
+			<echo>
+				
+				***********************************************
+				Compiling experiment driver: @{experiment.name}
+				***********************************************
+				
+			</echo>
+
+			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-compile" />
+
+			<javac destdir="${experiments.classes.dir}/@{experiment.name}/server" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+				<src path="experiments/@{experiment.name}/src/java/server" />
+				<src path="experiments/@{experiment.name}/src/java/common" />
+				<include name="**/*.java" />
+				<classpath>
+					<path refid="compile.experiment.driver.classpath" />
+					<fileset dir="experiments/@{experiment.name}/lib/java/server">
+						<include name="**/*" />
+					</fileset>
+					<fileset dir="experiments/@{experiment.name}/lib/java/common">
+						<include name="**/*" />
+					</fileset>
+				</classpath>
+				<compilerarg value="-Xlint:unchecked, cast, -serial" />
+			</javac>
+
+			<copy todir="${experiments.classes.dir}/@{experiment.name}/server" overwrite="true">
+				<fileset dir="experiments/@{experiment.name}/src/java/common">
+					<exclude name="**/*.java" />
+					<exclude name="**/*.form" />
+				</fileset>
+				<fileset dir="experiments/@{experiment.name}/src/java/server">
+					<exclude name="**/*.java" />
+					<exclude name="**/*.form" />
+				</fileset>
+			</copy>
+
+			<manifest file="${experiments.classes.dir}/@{experiment.name}/server/META-INF/MANIFEST.MF">
+				<section name="common">
+					<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+					<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+					<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+					<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+					<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${TODAY}" />
+					<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+				</section>
+			</manifest>
+
+			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-compile" />
+
+		</sequential>
+	</macrodef>
+
+	<target name="compile.experiment.drivers.list" description="Compiles all experiment drivers in 'experiment.list'">
+		<fail unless="lab.list"> lab.list must be set to compile
+			that list of experiments. define it in build.properties or pass 
+			it to jvm as arg like -Dlab.list="lab1,lab2,..." -Dlab1.experiments.list="exp1,exp2,..."</fail>
+		<outer.process.list task="compile.experiment.driver" outer.list="${lab.list}" list="experiment.list" attribute.name="experiment.name" />
+	</target>
+
+	<target name="compile.experiment.clients.list" description="Compiles all experiment clients in 'experiment.list'">
+		<fail unless="lab.list"> lab.list must be set to compile
+					that list of experiments. define it in build.properties or pass 
+					it to jvm as arg like -Dlab.list="lab1,lab2,..." -Dlab1.experiments.list="exp1,exp2,..."</fail>
+		<outer.process.list task="compile.experiment.client" outer.list="${lab.list}" list="experiment.list" attribute.name="experiment.name" />
+	</target>
+
+
+
+	<macrodef name="jar.experiment.client" description="Package one experiment client jar">
+		<attribute name="experiment.name" />
+		<sequential>
+			<mkdir dir="${client.build.dir}" />
+
+			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-jar" />
+
+			<jar destfile="${client.build.dir}/@{experiment.name}Client.jar" basedir="${experiments.classes.dir}/@{experiment.name}/client" />
+
+			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-jar" />
+
+		</sequential>
+	</macrodef>
+
+	<macrodef name="jar.experiment.driver" description="Package one experiment driver jar">
+		<attribute name="experiment.name" />
+		<sequential>
+			<mkdir dir="${hardwareserver.build.dir}" />
+
+			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-jar" />
+
+			<jar destfile="${hardwareserver.build.dir}/@{experiment.name}Driver.jar" basedir="${experiments.classes.dir}/@{experiment.name}/server">
+			</jar>
+
+			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-jar" />
+
+		</sequential>
+	</macrodef>
+
+	<target name="jar.experiment.clients.list" description="Packages all experiment client jars in 'experiment.list'">
+		<fail unless="lab.list"> lab.list must be set to compile
+					that list of experiments. define it in build.properties or pass 
+					it to jvm as arg like -Dlab.list="lab1,lab2,..." -Dlab1.experiment.list="exp1,exp2,..."</fail>
+		<outer.process.list task="jar.experiment.client" outer.list="${lab.list}" list="experiment.list" attribute.name="experiment.name" />
+	</target>
+
+	<target name="jar.experiment.drivers.list" description="Packages all experiment driver jars in 'experiment.list'">
+		<fail unless="lab.list"> lab.list must be set to compile
+						that list of experiments. define it in build.properties or pass 
+						it to jvm as arg like -Dlab.list="lab1,lab2,..." -Dlab1.experiment.list="exp1,exp2,..."</fail>
+		<outer.process.list task="jar.experiment.driver" outer.list="${lab.list}" list="experiment.list" attribute.name="experiment.name" />
+	</target>
+
+
+	<macrodef name="repack200.experiment" description="Packages and compresses the jar for p200 distribution.">
+		<attribute name="experiment.name" />
+
+		<sequential>
+			<repack.jar file="${client.build.dir}/@{experiment.name}Client.jar" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="sign.experiment" description="Sign one experiment client jar">
+		<attribute name="experiment.name" />
+
+		<sequential>
+			<signjar storetype="${elab.storetype}" destDir="${client.build.dir}" keystore="${elab.keystore}" keypass="${elab.keypass}" storepass="${elab.storepass}" alias="${elab.alias}">
+				<fileset dir="${client.build.dir}" includes="@{experiment.name}Client.jar" excludes="*_sig.jar" />
+				<globmapper from="*.jar" to="*_sig.jar" />
+			</signjar>
+			<delete file="${client.build.dir}/@{experiment.name}Client.jar" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="pack200.experiment" description="Packages and compresses the jar for p200 distribution.">
+		<attribute name="experiment.name" />
+
+		<sequential>
+			<pack.200.jar file="${client.build.dir}/@{experiment.name}Client_sig.jar" />
+		</sequential>
+	</macrodef>
+
+	<target name="sign.experiments.list" description="Sign all experiments client jars on 'experiment.list'">
+		<fail unless="lab.list"> experiments.list must be set to clean
+					that list of experiments. define it in build.properties or pass 
+					it to jvm as arg like -Dlab.list="lab1,..." -Dlab1.experiment.list="exp1,..."</fail>
+
+		<outer.process.list task="repack200.experiment" outer.list="${lab.list}" list="experiment.list" attribute.name="experiment.name" />
+		<outer.process.list task="sign.experiment" outer.list="${lab.list}" list="experiment.list" attribute.name="experiment.name" />
+		<outer.process.list task="pack200.experiment" outer.list="${lab.list}" list="experiment.list" attribute.name="experiment.name" />
+	</target>
+
+	<macrodef name="run.experiment.client" description="Run one experiment client bypassing javawebstart">
+		<attribute name="experiment.name" />
+		<sequential>
+			<java classname="pt.utl.ist.elab.client.FullClientNewInterface" fork="true" failonerror="true" logerror="true">
+				<classpath>
+					<path refid="rec.common.lib.path" />
+					<path refid="rec.client.lib.path" />
+					<path refid="elab.client.lib.path" />
+					<pathelement location="${rec.common.classes.dir}/" />
+					<pathelement location="${rec.client.classes.dir}" />
+					<pathelement location="${elab.client.classes.dir}/" />
+					<pathelement location="${experiments.classes.dir}/@{experiment.name}/client/" />
+					<fileset dir="experiments/@{experiment.name}/lib/java/client/">
+						<include name="**/*" />
+					</fileset>
+				</classpath>
+				<jvmarg value="-Xms${min.memory}" />
+				<jvmarg value="-Xmx${max.memory}" />
+				<jvmarg value="-Xbootclasspath/p:${rec.common.lib.dir}/openorb_orb_omg-1.4.0.jar" />
+				<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
+				<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
+				<sysproperty key="openorb.profile" value="${experiment.client.openorb.profile}" />
+				<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
+				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
+				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
+				<sysproperty key="openorb.config" value="file://${client.build.dir}/etc/openorb.xml" />
+				<sysproperty key="rec.processingmanager.threadPool.coresize" value="${rec.client.processingmanager.threadpool.coresize}" />
+				<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.client.processingmanager.threadpool.maxsize}" />
+				<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
+				<sysproperty key="vlc.plugins.destdir" value="${vlc.plugins.destdir}" />
+				<sysproperty key="vlc.plugins.filename" value="${vlc.plugins.filename}" />
+				<sysproperty key="video.enabled" value="${video.enabled}" />
+				<sysproperty key="rec.apparatus.autoconnect.id" value="${@{experiment.name}.apparatus.autoconnect.id}" />
+			</java>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="debug.experiment.client" description="Debug one experiment client bypassing javawebstart">
+		<attribute name="experiment.name" />
+		<sequential>
+			<java classname="pt.utl.ist.elab.client.FullClientNewInterface" fork="true" failonerror="true" logerror="true">
+				<classpath>
+					<path refid="rec.common.lib.path" />
+					<path refid="rec.client.lib.path" />
+					<path refid="elab.client.lib.path" />
+					<pathelement location="${rec.common.classes.dir}/" />
+					<pathelement location="${rec.client.classes.dir}" />
+					<pathelement location="${elab.client.classes.dir}/" />
+					<pathelement location="${experiments.classes.dir}/@{experiment.name}/client/" />
+					<fileset dir="experiments/@{experiment.name}/lib/java/client/">
+						<include name="**/*" />
+					</fileset>
+				</classpath>
+				<jvmarg value="-Xdebug" />
+				<jvmarg value="-Xrunjdwp:transport=dt_socket,address=${experiment.client.debug.address.port},server=y,suspend=y" />
+				<jvmarg value="-Xms${min.memory}" />
+				<jvmarg value="-Xmx${max.memory}" />
+				<jvmarg value="-Xbootclasspath/p:${rec.common.lib.dir}/openorb_orb_omg-1.4.0.jar" />
+				<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
+				<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
+				<sysproperty key="openorb.profile" value="${experiment.client.openorb.profile}" />
+				<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
+				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
+				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
+				<sysproperty key="openorb.config" value="file://${client.build.dir}/etc/openorb.xml" />
+				<sysproperty key="rec.processingmanager.threadPool.coresize" value="${rec.client.processingmanager.threadpool.coresize}" />
+				<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.client.processingmanager.threadpool.maxsize}" />
+				<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
+				<sysproperty key="vlc.plugins.destdir" value="${vlc.plugins.destdir}" />
+				<sysproperty key="vlc.plugins.filename" value="${vlc.plugins.filename}" />
+				<sysproperty key="video.enabled" value="${video.enabled}" />
+				<sysproperty key="rec.apparatus.autoconnect.id" value="${@{experiment.name}.apparatus.autoconnect.id}" />
+			</java>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="run.experiment.driver" description="Run one experiment driver">
+		<attribute name="experiment.name" />
+		<sequential>
+			<echo>
+				
+				**********************************
+				Starting @{experiment.name} driver
+				**********************************
+					
+			</echo>
+			<property file="experiments/@{experiment.name}/etc/build.properties"/>
+			<java classname="com.linkare.rec.impl.driver.FullServerMain" fork="true" failonerror="true" logerror="true">
+				<classpath>
+					<path refid="rec.common.lib.path" />
+					<path refid="rec.hardwareserver.lib.path" />
+					<path refid="elab.hardwareserver.lib.path" />
+					<pathelement location="${rec.common.classes.dir}/" />
+					<pathelement location="${rec.hardwareserver.classes.dir}/" />
+					<pathelement location="${elab.hardwareserver.classes.dir}/" />
+					<pathelement location="${experiments.classes.dir}/@{experiment.name}/server/" />
+					<fileset dir="experiments/@{experiment.name}/lib/java/server/">
+						<include name="**/*" />
+					</fileset>
+				</classpath>
+				<jvmarg value="-Xms${min.memory}" />
+				<jvmarg value="-Xmx${max.memory}" />
+				<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
+				<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
+				<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
+				<sysproperty key="openorb.profile" value="${experiment.driver.openorb.profile}" />
+				<sysproperty key="eLab.@{experiment.name}.HardwareInfo" value="${experiment.eLab.HardwareInfo}" />
+				<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
+				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
+				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
+				<sysproperty key="openorb.config" value="file://${hardwareserver.build.dir}/basic/etc/openorb.xml" />
+				<sysproperty key="rec.processingmanager.threadPool.coresize" value="${rec.driver.processingmanager.threadpool.coresize}" />
+				<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.driver.processingmanager.threadpool.maxsize}" />
+				<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
+				<sysproperty key="experiment.driver.class" value="${experiment.driver.class}"/>
+			</java>
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="debug.experiment.driver" description="Debug one experiment driver">
+			<attribute name="experiment.name" />
+			<sequential>
+				<echo>
+					
+					****************************************************
+					Starting (debug mode) @{experiment.name} driver
+				 	****************************************************
+				
+				</echo>
+				<property file="experiments/@{experiment.name}/etc/build.properties"/>
+				<java classname="com.linkare.rec.impl.driver.FullServerMain" fork="true" failonerror="true" logerror="true">
+					<classpath>
+						<path refid="rec.common.lib.path" />
+						<path refid="rec.hardwareserver.lib.path" />
+						<path refid="elab.hardwareserver.lib.path" />
+						<pathelement location="${rec.common.classes.dir}/" />
+						<pathelement location="${rec.hardwareserver.classes.dir}/" />
+						<pathelement location="${elab.hardwareserver.classes.dir}/" />
+						<pathelement location="${experiments.classes.dir}/@{experiment.name}/server/" />
+						<fileset dir="experiments/@{experiment.name}/lib/java/server/">
+							<include name="**/*" />
+						</fileset>
+					</classpath>
+					<jvmarg value="-Xms${min.memory}" />
+					<jvmarg value="-Xmx${max.memory}" />
+					<jvmarg value="-Xdebug" />
+					<jvmarg value="-Xrunjdwp:transport=dt_socket,address=${experiment.driver.debug.address.port},server=y,suspend=y" />
+					<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
+					<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
+					<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
+					<sysproperty key="openorb.profile" value="${experiment.driver.openorb.profile}" />
+					<sysproperty key="eLab.@{experiment.name}.HardwareInfo" value="${experiment.eLab.HardwareInfo}" />
+					<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
+					<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
+					<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
+					<sysproperty key="openorb.config" value="file://${hardwareserver.build.dir}/basic/etc/openorb.xml" />
+					<sysproperty key="rec.processingmanager.threadPool.coresize" value="${rec.driver.processingmanager.threadpool.coresize}" />
+					<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.driver.processingmanager.threadpool.maxsize}" />
+					<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
+					<sysproperty key="experiment.driver.class" value="${experiment.driver.class}"/>
+				</java>
+			</sequential>
+		</macrodef>
+
+	<target name="run.experiment.client" description="Run one experiment client bypassing javawebstart">
+		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
+			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
+		<run.experiment.client experiment.name="${experiment.name}" />
+	</target>
+
+	<target name="debug.experiment.client" description="Debug one experiment client bypassing javawebstart">
+		<fail unless="experiment.name">experiment.name must be set to debug a single experiment. 
+			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
+		<debug.experiment.client experiment.name="${experiment.name}" />
+	</target>
+
+	<target name="run.experiment.driver" description="Run one experiment driver">
+		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
+			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
+		<run.experiment.driver experiment.name="${experiment.name}" />
+	</target>
+
+	<target name="debug.experiment.driver" description="Debug one experiment driver">
+		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
+			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
+		<debug.experiment.driver experiment.name="${experiment.name}" />
+	</target>
+
+	<macrodef name="create.jnlp.for.experiment" description="Create JNLP file for one experiment">
+		<attribute name="experiment.name" />
+		<sequential>
+			<copy file="${experiment.jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/@{experiment.name}.jnlp" />
+			<replace file="${client.build.dir}/@{experiment.name}.jnlp" propertyFile="experiments/@{experiment.name}/etc/build.properties">
+				<replacefilter token="@elab.title@" property="@{experiment.name}.title" />
+				<replacefilter token="@elab.vendor@" property="@{experiment.name}.vendor" />
+				<replacefilter token="@elab.homepage@" property="@{experiment.name}.homepage" />
+
+				<replacefilter token="@elab.description.oneline@" property="@{experiment.name}.description.oneline" />
+				<replacefilter token="@elab.description.tooltip@" property="@{experiment.name}.description.tooltip" />
+				<replacefilter token="@elab.description.short@" property="@{experiment.name}.description.short" />
+				<replacefilter token="@elab.icon@" property="@{experiment.name}.icon" />
+				<replacefilter token="@elab.icon.splash@" property="@{experiment.name}.icon.splash" />
+				<replacefilter token="@elab.title.en@" property="@{experiment.name}.title.en" />
+				<replacefilter token="@elab.homepage.en@" property="@{experiment.name}.homepage.en" />
+				<replacefilter token="@elab.description.en@" property="@{experiment.name}.description.en" />
+				<replacefilter token="@elab.description.oneline.en@" property="@{experiment.name}.description.oneline.en" />
+				<replacefilter token="@elab.description.tooltip.en@" property="@{experiment.name}.description.tooltip.en" />
+				<replacefilter token="@elab.description.short.en@" property="@{experiment.name}.description.short.en" />
+				<replacefilter token="@rec.apparatus.autoconnect.id@" property="@{experiment.name}.apparatus.autoconnect.id" />
+
+				<replacefilter token="@j2se-version@" property="@{experiment.name}.j2se-version" />
+				<replacefilter token="@jnlp.file@" value="@{experiment.name}.jnlp" />
+			</replace>
+			<replace file="${client.build.dir}/@{experiment.name}.jnlp" propertyFile="build.properties">
+				<replacefilter token="@codebase@" property="codebase" />
+				<replacefilter token="@elab.title@" property="elab.title" />
+				<replacefilter token="@elab.vendor@" property="elab.vendor" />
+				<replacefilter token="@elab.homepage@" property="elab.homepage" />
+				<replacefilter token="@elab.description@" property="elab.description" />
+				<replacefilter token="@elab.description.oneline@" property="elab.description.oneline" />
+				<replacefilter token="@elab.description.tooltip@" property="elab.description.tooltip" />
+				<replacefilter token="@elab.description.short@" property="elab.description.short" />
+				<replacefilter token="@elab.icon@" property="elab.icon" />
+				<replacefilter token="@elab.icon.splash@" property="elab.icon.splash" />
+				<replacefilter token="@elab.title.en@" property="elab.title.en" />
+				<replacefilter token="@elab.homepage.en@" property="elab.homepage.en" />
+				<replacefilter token="@elab.description.en@" property="elab.description.en" />
+				<replacefilter token="@elab.description.oneline.en@" property="elab.description.oneline.en" />
+				<replacefilter token="@elab.description.tooltip.en@" property="elab.description.tooltip.en" />
+				<replacefilter token="@elab.description.short.en@" property="elab.description.short.en" />
+				<replacefilter token="@j2se-version@" property="j2se-version" />
+				<replacefilter token="@video.enabled@" property="video.enabled" />
+				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
+				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
+				<replacefilter token="@rec.web.endpoint@" property="rec.web.endpoint" />
+				<replacefilter token="@rec.apparatus.autoacquireresult@" property="rec.apparatus.autoacquireresult" />
+				<replacefilter token="@client.main-class@" property="client.main-class" />
+				<replacefilter token="@rec.client.processingmanager.threadpool.coresize@" property="rec.client.processingmanager.threadpool.coresize" />
+				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
+				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
+			</replace>
+			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot;/&gt;" />
+			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot;/&gt;" />
+			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
+			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
+			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar ReC jvlc --&gt;" value="&lt;jar href=&quot;ReCjvlc_sig.jar&quot;/&gt;" />
+
+			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!--End Experiment Jars--&gt;">
+				<replacevalue>
+					<![CDATA[<jar href="@temporary.experiment.jar@" main="true"/>
+					<!--End Experiment Jars-->]]></replacevalue>
+			</replace>
+			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
+
+		</sequential>
+	</macrodef>
+
+	<macrodef name="build.experiment" description="Build one experiment, compile, pack and sign driver and client">
+		<attribute name="experiment.name" />
+		<sequential>
+			<clean.experiment experiment.name="@{experiment.name}" />
+			<compile.experiment.client experiment.name="@{experiment.name}" />
+			<compile.experiment.driver experiment.name="@{experiment.name}" />
+
+			<jar.experiment.client experiment.name="@{experiment.name}" />
+			<repack200.experiment experiment.name="@{experiment.name}" />
+			<sign.experiment experiment.name="@{experiment.name}" />
+			<pack200.experiment experiment.name="@{experiment.name}" />
+			<jar.experiment.driver experiment.name="@{experiment.name}" />
+
+			<create.jnlp.for.experiment experiment.name="@{experiment.name}" />
+
+			<copy todir="${client.build.dir}/lib" overwrite="true">
+				<fileset dir="experiments/@{experiment.name}/lib/java/client">
+					<include name="**/*" />
+				</fileset>
+				<fileset dir="experiments/@{experiment.name}/lib/java/common">
+					<include name="**/*" />
+				</fileset>
+			</copy>
+
+			<copy todir="${experiments.build.dir}/@{experiment.name}/lib" overwrite="true">
+				<fileset dir="experiments/@{experiment.name}/lib/java/server">
+					<include name="**/*" />
+				</fileset>
+				<fileset dir="experiments/@{experiment.name}/lib/java/common">
+					<include name="**/*" />
+				</fileset>
+			</copy>
+
+		</sequential>
+	</macrodef>
+
+	<target name="build.experiments.list" description="Build all experiments in 'experiment.list'">
+		<fail unless="lab.list"> lab.list must be set to compile
+						that list of experiments. define it in build.properties or pass 
+						it to jvm as arg like -Dlab.list="lab1,lab2,..." -Dlab1.experiment.list="exp1,exp2,..."</fail>
+		<outer.process.list task="build.experiment" outer.list="${lab.list}" list="experiment.list" attribute.name="experiment.name" />
+	</target>
+
+</project>
