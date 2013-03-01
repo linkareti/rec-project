@@ -1,6 +1,5 @@
 #!/bin/bash
 #
-# chkconfig: 35 91 9
 # description: Starts and stops the @experiment.name@ daemon \
 #
 
@@ -12,68 +11,83 @@ DEPLOY_DIR="$BASE_USER_HOMEDIR/rec-deployment/$EXPERIMENT_NAME"
 CURDIR=`pwd`
 CURUSER=`id -nu`
 
-RETVAL=0
-
 start() {
-        echo "Starting @experiment.name@ $BASE_USER Service"
-        cd $DEPLOY_DIR
-        if [ "x$CURUSER" != "x$BASE_USER" ]; then
-             su -l $BASE_USER -c "nohup $DEPLOY_DIR/Start@experiment.name@Driver.sh 2>&1 >/dev/null"
-        else
-             nohup $DEPLOY_DIR/Start@experiment.name@Driver.sh 2>&1 >/dev/null
+        if [ -f $DEPLOY_DIR/@experiment.name@.pid ]; then
+             PID=`cat $DEPLOY_DIR/@experiment.name@.pid`
+             if kill -0 $PID > /dev/null 2>&1; then
+                  echo "The service @experiment.name@ is already running"
+                  return 1
+             fi
         fi
-        RETVAL=$?
-        echo
-        if [ $RETVAL -eq 0 ]; then
+
+        echo "Starting @experiment.name@ service..."
+
+        if [ "x$CURUSER" != "x$BASE_USER" ]; then
+             su -l $BASE_USER -c "cd $DEPLOY_DIR; nohup $DEPLOY_DIR/Start@experiment.name@Driver.sh 2>&1 >/dev/null 2>/dev/null"
+        else
+             cd $DEPLOY_DIR
+             nohup $DEPLOY_DIR/Start@experiment.name@Driver.sh 2>&1 >/dev/null 2>/dev/null
+        fi
+
+        if [ $? -eq 0 ]; then
+                echo "OK"
                 if [ "x$CURUSER" != "x$BASE_USER" ]; then
                         su -l $BASE_USER -c "touch $DEPLOY_DIR/@experiment.name@.lock"
                 else
                         touch $DEPLOY_DIR/@experiment.name@.lock
                 fi
+                return 0
         else
-                RETVAL=1
+                echo "Not OK"
+                return 1
         fi
-        return $RETVAL
 }
+
 stop() {
-		cd $DEPLOY_DIR
-        if [ -f $DEPLOY_DIR/@experiment.name@.pid ]
-        then
+        if [ -f $DEPLOY_DIR/@experiment.name@.pid ]; then
             PID=`cat $DEPLOY_DIR/@experiment.name@.pid`
-            echo "Stopping @experiment.name@ $BASE_USER Service"
-            if [ "x$CURUSER" != "x$BASE_USER" ]; then
-                su -l $BASE_USER -c "kill $PID"
+
+            [ -f $DEPLOY_DIR/@experiment.name@.lock ] && rm -rf $DEPLOY_DIR/@experiment.name@.lock
+            [ -f $DEPLOY_DIR/@experiment.name@.pid ] && rm -rf $DEPLOY_DIR/@experiment.name@.pid
+
+            if kill -0 $PID > /dev/null 2>&1; then
+                echo "Stopping @experiment.name@ service..."
+                if [ "x$CURUSER" != "x$BASE_USER" ]; then
+                    su -l $BASE_USER -c "kill $PID"
+                else
+                    kill $PID
+                fi
+                [ $? -eq 0 ] && echo "OK" || echo "Not OK"
             else
-                `kill $PID`
+                echo "The service @experiment.name@ is not running"
+                return 1
             fi
-            RETVAL=$?
-            echo
-            [ $RETVAL -eq 0 ] && rm -rf $DEPLOY_DIR/@experiment.name@.lock && rm -rf $DEPLOY_DIR/@experiment.name@.pid || \
-               RETVAL=1
-            return $RETVAL
         else
-            echo "The service @experiment.name@ is not running!"
-            return $RETVAL
+            echo "The service @experiment.name@ is not running"
+            return 1
         fi
+
+	return 0
 }
+
 restart() {
         stop
         start
 }
+
 status() {
-		cd $DEPLOY_DIR
-        if [ -f $DEPLOY_DIR/@experiment.name@.pid ]
-        then
+        if [ -f $DEPLOY_DIR/@experiment.name@.pid ]; then
+
             PID=`cat $DEPLOY_DIR/@experiment.name@.pid`
-            if ps ax | grep -v grep | grep $PID > /dev/null
-            then
-                echo "The service @experiment.name@ is running."
+
+            if kill -0 $PID > /dev/null 2>&1; then
+                echo "The service @experiment.name@ is running"
             else
-                echo "The service @experiment.name@ is not running!"
+                echo "The service @experiment.name@ is not running"
             fi
-#           status $PID
+
         else
-            echo "The service @experiment.name@ is not running!"
+            echo "The service @experiment.name@ is not running"
         fi
 }
 
