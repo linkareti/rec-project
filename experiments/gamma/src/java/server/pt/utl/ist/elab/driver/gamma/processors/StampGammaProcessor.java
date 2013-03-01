@@ -54,7 +54,7 @@ public class StampGammaProcessor extends AbstractStampProcessor {
 					command.addCommandData(StampGammaProcessor.TIME, oTime);
 
 					pressao = Integer.parseInt(splitedStr[0]);
-					final Float oPressao = new Float(pressao * 0.398 + 98);
+					final Float oPressao = new Float(pressao * 0.4476 + 25);
 					command.addCommandData(StampGammaProcessor.PRESSAO, oPressao);
 
 					ondamic = Integer.parseInt(splitedStr[1]);
