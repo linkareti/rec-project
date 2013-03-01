@@ -21,7 +21,7 @@ export PROCESSINGMANAGER_SYSPROPS="-Drec.processingmanager.threadPool.coresize=@
 export EXPERIMENT_DRIVER_CLASS="-Dexperiment.driver.class=@experiment.driver.class@"
 
 # TODO - Aleitao
-# não esquecer que cada experiência poderá querer definir command line arguments 
+# nao esquecer que cada experiencia podera querer definir command line arguments 
 # adicionais... pode ser o driver_hardware_info ou outras quaisquer...
 
 
@@ -36,14 +36,14 @@ export DRIVER_EXPERIMENT_CLASSPATH=
 export BOOTCLASSPATH=-Xbootclasspath/p:$DRIVER_BASE_DIR/lib/openorb_orb_omg-1.4.0.jar
 
 echo --------------------------------------------------------------------------------
-echo BootClassPath    : $BOOTCLASSPATH
+echo "BootClassPath     : $BOOTCLASSPATH"
 echo --------------------------------------------------------------------------------
-echo ClassPath        : $RECCLASSPATH;$DRIVER_CLASSPATH;$DRIVER_EXPERIMENT_CLASSPATH
+echo "ClassPath         : $RECCLASSPATH;$DRIVER_CLASSPATH;$DRIVER_EXPERIMENT_CLASSPATH"
 echo --------------------------------------------------------------------------------
-echo System Properties: $GENERIC_ORB_SYSPROPS $DRIVER_ORB_SYSPROPS $LOG_SYSPROPS $MEM_SYSPROPS $TOOLKIT_SYSPROPS 
+echo "System Properties : $GENERIC_ORB_SYSPROPS $DRIVER_ORB_SYSPROPS $LOG_SYSPROPS $MEM_SYSPROPS $TOOLKIT_SYSPROPS"
 echo --------------------------------------------------------------------------------
 
-
+cd $DEPLOY_DIR
 java $BOOTCLASSPATH -Djava.library.path=/home/elab/rxtx -classpath $RECCLASSPATH:$DRIVER_CLASSPATH:$DRIVER_EXPERIMENT_CLASSPATH $GENERIC_ORB_SYSPROPS $DRIVER_ORB_SYSPROPS $LOG_SYSPROPS $PROCESSINGMANAGER_SYSPROPS $MEM_SYSPROPS $DRIVER_HARWARE_INFO_SYSPROPS $TOOLKIT_SYSPROPS $EXPERIMENT_DRIVER_CLASS $DEBUG @driver.main.class@ &
 
 PID=$!
