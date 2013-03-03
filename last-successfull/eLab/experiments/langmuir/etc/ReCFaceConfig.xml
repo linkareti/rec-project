@@ -1,0 +1,20 @@
+<apparatus location="ELAB_LANGMUIR_PROBE_DSPIC_V0.1"
+	customizerClassLocationBundleKey="langmuir$rec.exp.customizer.langmuir"
+	toolTipBundleKey="langmuir$rec.exp.tip.langmuir"
+	iconLocationBundleKey="langmuir$rec.exp.icon.langmuir"
+	descriptionStringBundleKey="langmuir$rec.exp.description.langmuir"
+	displayStringBundleKey="langmuir$rec.exp.title.langmuir"
+	desktopLocationBundleKey="langmuir$rec.exp.background.langmuir"
+	order="1" headerDisplayClassLocationBundleKey=""
+	displayFactoryClassLocationBundleKey=""
+	dataModelClassLocationBundleKey="" visible="true" selected="true"
+	enabled="false" connected="false">
+	<localizationBundle name="langmuir"
+		location="recresource:///pt/utl/ist/elab/client/langmuir/resources/messages" />
+	<display classLocationBundleKey="langmuir$rec.exp.display.langmuir.loc.datatable"
+		toolTipBundleKey="langmuir$rec.exp.display.langmuir.tip.datatable"
+		iconLocationBundleKey="ReCUI$rec.ui.icon.table"
+		displayStringBundleKey="langmuir$rec.exp.display.langmuir.title.1"
+		offlineCapable="false" order="1" visible="true" selected="true"
+		enabled="false" connected="false" />
+</apparatus>
