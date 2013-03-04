@@ -1,4 +1,4 @@
-<apparatus toolTipBundleKey="paschen$rec.exp.tip.paschen" location="PLASMALAB_PASCHEN_CURVE_STAMP_V01"
+<apparatus toolTipBundleKey="paschen$rec.exp.tip.paschen" location="PLASMALAB_PASCHEN_CURVE_V1.0"
 	iconLocationBundleKey="paschen$rec.exp.icon.paschen"
 	headerDisplayClassLocationBundleKey="" displayStringBundleKey="paschen$rec.exp.title.paschen"
 	descriptionStringBundleKey="paschen$rec.exp.description.paschen"
@@ -14,22 +14,50 @@
 		selected="true" order="0" enabled="false" connected="false" />
 	<mediaConfig videoLocation="paschen$rec.exp.url.paschen.video" canSave="true"
 		offlinePlay="true" />
-	<display toolTipBundleKey="paschen$rec.exp.display.paschen.tip.sensor"
+
+	<!--display toolTipBundleKey="paschen$rec.exp.display.paschen.tip.sensor"
 		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor"
 		displayStringBundleKey="paschen$rec.exp.display.paschen.title.sensor"
 		classLocationBundleKey="paschen$rec.exp.display.paschen.loc.sensor" visible="true"
-		selected="true" order="0" enabled="false" connected="false" />
-	<display toolTipBundleKey="paschen$rec.exp.display.paschen.tip.1"
+		selected="true" order="0" enabled="false" connected="false" /-->
+
+	<display toolTipBundleKey="paschen$rec.exp.display.paschen.tip.table"
 		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table"
+		displayStringBundleKey="paschen$rec.exp.display.paschen.title.table"
+		classLocationBundleKey="paschen$rec.exp.display.paschen.loc.table" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
+
+	<display toolTipBundleKey="paschen$rec.exp.display.paschen.tip.1"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
 		displayStringBundleKey="paschen$rec.exp.display.paschen.title.1"
 		classLocationBundleKey="paschen$rec.exp.display.paschen.loc.1" visible="true"
-		selected="true" order="0" enabled="false" connected="false" />
+		selected="true" order="1" enabled="false" connected="false" />
+
 	<display toolTipBundleKey="paschen$rec.exp.display.paschen.tip.2"
 		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
 		displayStringBundleKey="paschen$rec.exp.display.paschen.title.2"
 		classLocationBundleKey="paschen$rec.exp.display.paschen.loc.2" visible="true"
-		selected="true" order="0" enabled="false" connected="false" />
-	<webResource toolTipLocationBundleKey="" internalBrowser="false"
+		selected="true" order="2" enabled="false" connected="false" />
+
+	<display toolTipBundleKey="paschen$rec.exp.display.paschen.tip.3"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="paschen$rec.exp.display.paschen.title.3"
+		classLocationBundleKey="paschen$rec.exp.display.paschen.loc.3" visible="true"
+		selected="true" order="3" enabled="false" connected="false" />
+
+	<display toolTipBundleKey="paschen$rec.exp.display.paschen.tip.4"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="paschen$rec.exp.display.paschen.title.4"
+		classLocationBundleKey="paschen$rec.exp.display.paschen.loc.4" visible="true"
+		selected="true" order="4" enabled="false" connected="false" />
+
+	<display toolTipBundleKey="paschen$rec.exp.display.paschen.tip.5"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="paschen$rec.exp.display.paschen.title.5"
+		classLocationBundleKey="paschen$rec.exp.display.paschen.loc.5" visible="true"
+		selected="true" order="5" enabled="false" connected="false" />
+
+	<!--webResource toolTipLocationBundleKey="" internalBrowser="false"
 		iconLocationBundleKey="" visible="true" selected="true" order="0"
 		enabled="false" connected="false" />
 	<webResource toolTipLocationBundleKey="" internalBrowser="false"
@@ -37,5 +65,5 @@
 		enabled="false" connected="false" />
 	<webResource toolTipLocationBundleKey="" internalBrowser="false"
 		iconLocationBundleKey="" visible="true" selected="true" order="0"
-		enabled="false" connected="false" />
+		enabled="false" connected="false" /-->
 </apparatus>
