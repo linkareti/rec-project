@@ -1,12 +1,5 @@
 package pt.utl.ist.elab.client.langmuir;
 
-import java.text.DecimalFormat;
-import java.util.Dictionary;
-import java.util.Hashtable;
-
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.text.NumberFormatter;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.ChannelParameter;
@@ -21,40 +14,13 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
 
-    private int MINIMUM_VALUE_INDEX = 0;
+	private int MINIMUM_VALUE_INDEX = 0;
     private int MAXIMUM_VALUE_INDEX = 1;
     private int STEP_VALUE_INDEX = 2;
     
 	/** Creates new form RadioactividadeCustomizer */
 	public LangmuirCustomizer() {
 		initComponents();
-
-		
-		/*
-		Hashtable<Integer, JLabel> slidersPosLabels = new Hashtable<Integer, JLabel>(4);
-		slidersPosLabels.put(new Integer(3000), new JLabel("3.0"));
-		slidersPosLabels.put(new Integer(5000), new JLabel("5.0"));
-		slidersPosLabels.put(new Integer(6000), new JLabel("6.0"));
-		slidersPosLabels.put(new Integer(7500), new JLabel("7.5"));
-
-		sldPos1.setLabelTable(slidersPosLabels);
-		sldPos2.setLabelTable(slidersPosLabels);
-
-		NumberFormatter formatterUserPos1 = new NumberFormatter(decimalFormat);
-		NumberFormatter formatterUserPos2 = new NumberFormatter(decimalFormat);
-
-		// formatterUserPos1.setAllowsInvalid(false);
-		// formatterUserPos2.setAllowsInvalid(false);
-
-		formatterUserPos1.setCommitsOnValidEdit(true);
-		formatterUserPos2.setCommitsOnValidEdit(true);
-
-		formatterUserPos1.setOverwriteMode(true);
-		formatterUserPos2.setOverwriteMode(true);
-
-		formatterUserPos1.install(this.tfPos1);
-		formatterUserPos2.install(this.tfPos2);
-*/
 		
 		//TODO:Check this out at a latter time
 		/*
@@ -105,9 +71,9 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 
 	        //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-	        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("messages"); // NOI18N
+	        //java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("messages"); // NOI18N
 	     
-	        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("rec.exp.customizer.title1"))); // NOI18N
+	        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("langmuir$rec.exp.customizer.title1"))); // NOI18N
 	        jPanel1.setMinimumSize(new java.awt.Dimension(350, 160));
 	        jPanel1.setPreferredSize(new java.awt.Dimension(350, 160));
 	        jPanel1.setLayout(new java.awt.GridBagLayout());
@@ -151,7 +117,7 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 	        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
 	        jPanel1.add(tfSigA, gridBagConstraints);
 
-	        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("rec.exp.customizer.title2")))); // NOI18N
+	        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("langmuir$rec.exp.customizer.title2")))); // NOI18N
 	        jPanel2.setMinimumSize(new java.awt.Dimension(350, 160));
 	        jPanel2.setPreferredSize(new java.awt.Dimension(350, 160));
 	        jPanel2.setLayout(new java.awt.GridBagLayout());
@@ -193,7 +159,7 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 	        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
 	        jPanel2.add(tfSigP, gridBagConstraints);
 
-	        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("rec.exp.customizer.title3"))); // NOI18N
+	        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("langmuir$rec.exp.customizer.title3"))); // NOI18N
 	        jPanel3.setAutoscrolls(true);
 	        jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 	        jPanel3.setDoubleBuffered(false);
@@ -278,7 +244,7 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 	        rButGPress.add(rBut1op2);
 	        rButGPress.add(rBut1op3);
 	        
-	        rBut1op1.setText(bundle.getString("rec.exp.customizer.radio1.op1"));
+	        rBut1op1.setText(ReCResourceBundle.findString("langmuir$rec.exp.customizer.radio1.op1"));
 	        
 	        gridBagConstraints = new java.awt.GridBagConstraints();
 	        //gridBagConstraints.gridwidth = 1;
@@ -290,7 +256,7 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 	        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
 	        jPanel3.add(rBut1op1, gridBagConstraints);
 	   
-	        rBut1op2.setText(bundle.getString("rec.exp.customizer.radio1.op2"));
+	        rBut1op2.setText(ReCResourceBundle.findString("langmuir$rec.exp.customizer.radio1.op2"));
 
 	        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
 	        gridBagConstraints.weightx = 1.0;
@@ -298,7 +264,7 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 	        
 	        jPanel3.add(rBut1op2, gridBagConstraints);
 	 
-	        rBut1op3.setText(bundle.getString("rec.exp.customizer.radio1.op3"));
+	        rBut1op3.setText(ReCResourceBundle.findString("langmuir$rec.exp.customizer.radio1.op3"));
 
 	        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
 	        gridBagConstraints.weightx = 1.0;
@@ -307,7 +273,7 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 	        jPanel3.add(rBut1op3, gridBagConstraints);
 
 	        
-	        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("rec.exp.customizer.title4"))); // NOI18N
+	        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("langmuir$rec.exp.customizer.title4"))); // NOI18N
 	        jPanel4.setMinimumSize(new java.awt.Dimension(350, 80));
 	        jPanel4.setPreferredSize(new java.awt.Dimension(350, 80));
 	        jPanel4.setLayout(new java.awt.GridBagLayout());
@@ -362,7 +328,7 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 	        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
 	        jPanel4.add(tfNumSamples, gridBagConstraints);
 
-	        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("rec.exp.customizer.title5"))); // NOI18N
+	        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("langmuir$rec.exp.customizer.title5"))); // NOI18N
 	        jPanel5.setMinimumSize(new java.awt.Dimension(350, 80));
 	        jPanel5.setPreferredSize(new java.awt.Dimension(350, 80));
 	        jPanel5.setLayout(new java.awt.GridBagLayout());
@@ -399,7 +365,7 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 	        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
 	        jPanel5.add(tfFreq, gridBagConstraints);
 
-	        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("rec.exp.customizer.title6"))); // NOI18N
+	        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("langmuir$rec.exp.customizer.title6"))); // NOI18N
 	        jPanel6.setMinimumSize(new java.awt.Dimension(350, 80));
 	        jPanel6.setPreferredSize(new java.awt.Dimension(350, 80));
 	        jPanel6.setLayout(new java.awt.GridBagLayout());
@@ -442,13 +408,13 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 	        rButG2.add(rBut2op2);
 	        rButG2.add(rBut2op3);
 	        
-	        rBut2op1.setText(bundle.getString("rec.exp.customizer.radio2.op1"));
+	        rBut2op1.setText(ReCResourceBundle.findString("langmuir$rec.exp.customizer.radio2.op1"));
 	        jPanel6.add(rBut2op1, new java.awt.GridBagConstraints());
 
-	        rBut2op2.setText(bundle.getString("rec.exp.customizer.radio2.op2"));
+	        rBut2op2.setText(ReCResourceBundle.findString("langmuir$rec.exp.customizer.radio2.op2"));
 	        jPanel6.add(rBut2op2, new java.awt.GridBagConstraints());
 
-	        rBut2op3.setText(bundle.getString("rec.exp.customizer.radio2.op3"));
+	        rBut2op3.setText(ReCResourceBundle.findString("langmuir$rec.exp.customizer.radio2.op3"));
 	        jPanel6.add(rBut2op3, new java.awt.GridBagConstraints());
 
 	        btnDef.setText("Default parameters");
@@ -472,8 +438,8 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 	            }
 	        });
 
-	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getRootPane());
-	        getRootPane().setLayout(layout);
+	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+	        this.setLayout(layout);
 	        layout.setHorizontalGroup(
 	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	            .addGroup(layout.createSequentialGroup()
@@ -529,12 +495,12 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 	                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 	        );
 
-	        jPanel1.getAccessibleContext().setAccessibleName(bundle.getString("rec.exp.customizer.title1")); // NOI18N
-	        jPanel2.getAccessibleContext().setAccessibleName(bundle.getString("rec.exp.customizer.title2")); // NOI18N
-	        jPanel3.getAccessibleContext().setAccessibleName(bundle.getString("rec.exp.customizer.title3")); // NOI18N
-	        jPanel4.getAccessibleContext().setAccessibleName(bundle.getString("rec.exp.customizer.title4")); // NOI18N
-	        jPanel5.getAccessibleContext().setAccessibleName(bundle.getString("rec.exp.customizer.title5")); // NOI18N
-	        jPanel6.getAccessibleContext().setAccessibleName(bundle.getString("rec.exp.customizer.title6")); // NOI18N
+	        jPanel1.getAccessibleContext().setAccessibleName(ReCResourceBundle.findString("langmuir$rec.exp.customizer.title1")); // NOI18N
+	        jPanel2.getAccessibleContext().setAccessibleName(ReCResourceBundle.findString("langmuir$rec.exp.customizer.title2")); // NOI18N
+	        jPanel3.getAccessibleContext().setAccessibleName(ReCResourceBundle.findString("langmuir$rec.exp.customizer.title3")); // NOI18N
+	        jPanel4.getAccessibleContext().setAccessibleName(ReCResourceBundle.findString("langmuir$rec.exp.customizer.title4")); // NOI18N
+	        jPanel5.getAccessibleContext().setAccessibleName(ReCResourceBundle.findString("langmuir$rec.exp.customizer.title5")); // NOI18N
+	        jPanel6.getAccessibleContext().setAccessibleName(ReCResourceBundle.findString("langmuir$rec.exp.customizer.title6")); // NOI18N
 	    }
 /*
 	private void checkPosOverlap() {
@@ -725,10 +691,18 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 
 	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
-/*
+
 		final int nsamples = sldNumSamples.getValue() < 10 ? 10 : sldNumSamples.getValue();
 		acqConfig.setTotalSamples(nsamples);
-
+		
+		
+		acqConfig.getSelectedHardwareParameter("amplitude").setParameterValue(String.valueOf(sldSigA.getValue()));
+		acqConfig.getSelectedHardwareParameter("sigperiod").setParameterValue("" + sldSigP.getValue());
+		acqConfig.getSelectedHardwareParameter("pressure").setParameterValue("" + sldPress.getValue());
+		acqConfig.getSelectedHardwareParameter("numsamps").setParameterValue("" + sldNumSamples.getValue());
+		acqConfig.getSelectedHardwareParameter("freq").setParameterValue("" + sldFreq.getValue());
+		
+/*
 		acqConfig.getSelectedHardwareParameter("protocolo").setParameterValue("1");
 		acqConfig.getSelectedHardwareParameter("ang1_min").setParameterValue("" + (sldPos1.getValue() / 10.F));
 		acqConfig.getSelectedHardwareParameter("ang1_max").setParameterValue("" + (sldPos2.getValue() / 10.F));
@@ -851,14 +825,14 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 		//TODO
-		/*
+		
 		if (acqConfig != null) {
 			System.out.println("LangmuirCustomizer.setHardwareAcquisitionConfig(HardwareAcquisitionConfig  acqConfig)");
 			System.out.println("acqConfig: [" + acqConfig + "]");
 
 
-		}*/
-        throw new UnsupportedOperationException("Not supported yet.");
+		}
+        //throw new UnsupportedOperationException("Not supported yet.");
 		
 	}
 

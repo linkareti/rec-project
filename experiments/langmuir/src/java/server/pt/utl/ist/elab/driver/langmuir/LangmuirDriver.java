@@ -14,4 +14,5 @@ import pt.utl.ist.elab.driver.serial.serialportgeneric.genericexperiment.Generic
  */
 public class LangmuirDriver extends GenericSerialPortDriver {
 
+	
 }
