@@ -52,14 +52,10 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 	        lblErrorSamplesTooHigh = new javax.swing.JLabel();
 	        tfNumSamples = new javax.swing.JFormattedTextField();
 	        jPanel5 = new javax.swing.JPanel();
-	        sldFreq = new javax.swing.JSlider();
-	        tfFreq = new javax.swing.JFormattedTextField();
+	        sldNumPeriod = new javax.swing.JSlider();
+	        tfNumPeriod = new javax.swing.JFormattedTextField();
 	        jPanel6 = new javax.swing.JPanel();
 	        
-	        rButGPress = new javax.swing.ButtonGroup();
-	        rBut1op1 = new javax.swing.JRadioButton();
-	        rBut1op2 = new javax.swing.JRadioButton();
-	        rBut1op3 = new javax.swing.JRadioButton();
 	        
 	        rButG2 = new javax.swing.ButtonGroup();
 	        rBut2op1 = new javax.swing.JRadioButton();
@@ -206,72 +202,6 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 	        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
 	        
 	        jPanel3.add(tfPress, gridBagConstraints);
-	       
-	        rBut1op1.addFocusListener(new java.awt.event.FocusAdapter() {
-	            public void focusLost(java.awt.event.FocusEvent evt) {
-	            	rBut1op1FocusLost(evt);
-	            }
-	        });
-	        rBut1op1.addActionListener(new java.awt.event.ActionListener() {
-	            public void actionPerformed(java.awt.event.ActionEvent evt) {
-	            	rBut1op1ActionPerformed(evt);
-	            }
-	        });
-	        
-	        rBut1op2.addFocusListener(new java.awt.event.FocusAdapter() {
-	            public void focusLost(java.awt.event.FocusEvent evt) {
-	            	rBut1op2FocusLost(evt);
-	            }
-	        });
-	        rBut1op2.addActionListener(new java.awt.event.ActionListener() {
-	            public void actionPerformed(java.awt.event.ActionEvent evt) {
-	            	rBut1op2ActionPerformed(evt);
-	            }
-	        });
-	        
-	        rBut1op3.addFocusListener(new java.awt.event.FocusAdapter() {
-	            public void focusLost(java.awt.event.FocusEvent evt) {
-	            	rBut1op3FocusLost(evt);
-	            }
-	        });
-	        rBut1op3.addActionListener(new java.awt.event.ActionListener() {
-	            public void actionPerformed(java.awt.event.ActionEvent evt) {
-	            	rBut1op3ActionPerformed(evt);
-	            }
-	        });
-	        
-	        rButGPress.add(rBut1op1);
-	        rButGPress.add(rBut1op2);
-	        rButGPress.add(rBut1op3);
-	        
-	        rBut1op1.setText(ReCResourceBundle.findString("langmuir$rec.exp.customizer.radio1.op1"));
-	        
-	        gridBagConstraints = new java.awt.GridBagConstraints();
-	        //gridBagConstraints.gridwidth = 1;
-	        gridBagConstraints.gridx = 0;
-	        gridBagConstraints.gridy = 2;
-	        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
-	        gridBagConstraints.weightx = 1.0;
-	        
-	        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-	        jPanel3.add(rBut1op1, gridBagConstraints);
-	   
-	        rBut1op2.setText(ReCResourceBundle.findString("langmuir$rec.exp.customizer.radio1.op2"));
-
-	        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
-	        gridBagConstraints.weightx = 1.0;
-	        gridBagConstraints.anchor = java.awt.GridBagConstraints.CENTER;
-	        
-	        jPanel3.add(rBut1op2, gridBagConstraints);
-	 
-	        rBut1op3.setText(ReCResourceBundle.findString("langmuir$rec.exp.customizer.radio1.op3"));
-
-	        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
-	        gridBagConstraints.weightx = 1.0;
-	        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-	        
-	        jPanel3.add(rBut1op3, gridBagConstraints);
-
 	        
 	        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("langmuir$rec.exp.customizer.title4"))); // NOI18N
 	        jPanel4.setMinimumSize(new java.awt.Dimension(350, 80));
@@ -333,37 +263,37 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 	        jPanel5.setPreferredSize(new java.awt.Dimension(350, 80));
 	        jPanel5.setLayout(new java.awt.GridBagLayout());
 
-	        sldFreq.setMajorTickSpacing(260);
-	        sldFreq.setMaximum(2000);
-	        sldFreq.setMinimum(700);
-	        sldFreq.setMinorTickSpacing(65);
-	        sldFreq.setPaintLabels(true);
-	        sldFreq.setPaintTicks(true);
-	        sldFreq.setPaintTrack(false);
-	        sldFreq.setMaximumSize(new java.awt.Dimension(1000, 32767));
-	        sldFreq.setMinimumSize(new java.awt.Dimension(250, 80));
-	        sldFreq.setPreferredSize(new java.awt.Dimension(250, 80));
-	        sldFreq.addChangeListener(new javax.swing.event.ChangeListener() {
+	        sldNumPeriod.setMajorTickSpacing(5);
+	        sldNumPeriod.setMaximum(50);
+	        sldNumPeriod.setMinimum(5);
+	        sldNumPeriod.setMinorTickSpacing(1);
+	        sldNumPeriod.setPaintLabels(true);
+	        sldNumPeriod.setPaintTicks(true);
+	        sldNumPeriod.setPaintTrack(false);
+	        sldNumPeriod.setMaximumSize(new java.awt.Dimension(1000, 32767));
+	        sldNumPeriod.setMinimumSize(new java.awt.Dimension(250, 80));
+	        sldNumPeriod.setPreferredSize(new java.awt.Dimension(250, 80));
+	        sldNumPeriod.addChangeListener(new javax.swing.event.ChangeListener() {
 	            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-	                sldFreqStateChanged(evt);
+	                sldNumPeriodStateChanged(evt);
 	            }
 	        });
-	        jPanel5.add(sldFreq, new java.awt.GridBagConstraints());
+	        jPanel5.add(sldNumPeriod, new java.awt.GridBagConstraints());
 
-	        tfFreq.setText("1000");
-	        tfFreq.addFocusListener(new java.awt.event.FocusAdapter() {
+	        tfNumPeriod.setText("1000");
+	        tfNumPeriod.addFocusListener(new java.awt.event.FocusAdapter() {
 	            public void focusLost(java.awt.event.FocusEvent evt) {
-	                tfFreqFocusLost(evt);
+	                tfNumPeriodFocusLost(evt);
 	            }
 	        });
-	        tfFreq.addActionListener(new java.awt.event.ActionListener() {
+	        tfNumPeriod.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
-	            	tfFreqActionPerformed(evt);
+	            	tfNumPeriodActionPerformed(evt);
 	            }
 	        });
 	        gridBagConstraints = new java.awt.GridBagConstraints();
 	        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-	        jPanel5.add(tfFreq, gridBagConstraints);
+	        jPanel5.add(tfNumPeriod, gridBagConstraints);
 
 	        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("langmuir$rec.exp.customizer.title6"))); // NOI18N
 	        jPanel6.setMinimumSize(new java.awt.Dimension(350, 80));
@@ -478,7 +408,7 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 	                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
 	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-	                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+	                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
 	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	                            .addComponent(btnOK)
@@ -502,31 +432,7 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 	        jPanel5.getAccessibleContext().setAccessibleName(ReCResourceBundle.findString("langmuir$rec.exp.customizer.title5")); // NOI18N
 	        jPanel6.getAccessibleContext().setAccessibleName(ReCResourceBundle.findString("langmuir$rec.exp.customizer.title6")); // NOI18N
 	    }
-/*
-	private void checkPosOverlap() {
-		lblErrorVolsAreEqua.setEnabled(sldPos1.getValue() == sldPos2.getValue());
-		btnOK.setEnabled(!lblErrorVolsAreEqua.isEnabled() && !lblErrorSamplesTooHigh.isEnabled()
-				&& !lblSamplingIntervalTooHigh.isEnabled());
-	}
 
-	private void checkMaxNumSamples() {
-		lblErrorSamplesTooHigh
-				.setEnabled(Math.abs(sldPos2.getValue() - sldPos1.getValue()) * 80. / 1000.F < sldNumSamples.getValue());
-		btnOK.setEnabled(!lblErrorVolsAreEqua.isEnabled() && !lblErrorSamplesTooHigh.isEnabled()
-				&& !lblSamplingIntervalTooHigh.isEnabled());
-		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("langmuir$rec.exp.customizer.label2")
-				+ (int) Math.floor(Math.abs(sldPos2.getValue() - sldPos1.getValue()) * 80. / 1000.F));
-	}
-
-	public void checkMaxTime() {
-		final float maxValue = Math.min(sldFreq.getMaximum(), 72000.F / sldNumSamples.getValue());
-		lblSamplingIntervalTooHigh.setEnabled(sldFreq.getValue() > maxValue);
-		btnOK.setEnabled(!lblErrorVolsAreEqua.isEnabled() && !lblErrorSamplesTooHigh.isEnabled()
-				&& !lblSamplingIntervalTooHigh.isEnabled());
-		lblSamplingIntervalTooHigh.setText(ReCResourceBundle.findString("langmuir$rec.exp.customizer.label2")
-				+ (int) maxValue);
-	}
-*/
     /**Amplitude Box**/
     private void sldSigAStateChanged(javax.swing.event.ChangeEvent evt) {
     	tfSigA.setText(Integer.toString(sldSigA.getValue()));
@@ -605,46 +511,25 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
     	sldNumSamples.setValue(parsed);
     }    
 
-    /** Freq **/
-    private void sldFreqStateChanged(javax.swing.event.ChangeEvent evt) {
-    	tfFreq.setText(Integer.toString(sldFreq.getValue()));
+    /** NumPeriod **/
+    private void sldNumPeriodStateChanged(javax.swing.event.ChangeEvent evt) {
+    	tfNumPeriod.setText(Integer.toString(sldNumPeriod.getValue()));
     }
     
-    private void tfFreqFocusLost(java.awt.event.FocusEvent evt) {
-    	int parsed = Integer.parseInt(tfFreq.getText());
-    	if(parsed > sldFreq.getMaximum()){parsed = sldFreq.getMaximum();}
-    	if(parsed < sldFreq.getMinimum()){parsed = sldFreq.getMinimum();}	
-    	sldFreq.setValue(parsed);
+    private void tfNumPeriodFocusLost(java.awt.event.FocusEvent evt) {
+    	int parsed = Integer.parseInt(tfNumPeriod.getText());
+    	if(parsed > sldNumPeriod.getMaximum()){parsed = sldNumPeriod.getMaximum();}
+    	if(parsed < sldNumPeriod.getMinimum()){parsed = sldNumPeriod.getMinimum();}	
+    	sldNumPeriod.setValue(parsed);
     }
     
-    private void tfFreqActionPerformed(java.awt.event.ActionEvent evt) {
-    	int parsed = Integer.parseInt(tfFreq.getText());
-    	if(parsed > sldFreq.getMaximum()){parsed = sldFreq.getMaximum();}
-    	if(parsed < sldFreq.getMinimum()){parsed = sldFreq.getMinimum();}	
-    	sldFreq.setValue(parsed);
+    private void tfNumPeriodActionPerformed(java.awt.event.ActionEvent evt) {
+    	int parsed = Integer.parseInt(tfNumPeriod.getText());
+    	if(parsed > sldNumPeriod.getMaximum()){parsed = sldNumPeriod.getMaximum();}
+    	if(parsed < sldNumPeriod.getMinimum()){parsed = sldNumPeriod.getMinimum();}	
+    	sldNumPeriod.setValue(parsed);
     } 
 
-    /** rBut1op1 **/
-    private void rBut1op1FocusLost(java.awt.event.FocusEvent evt) {
-    }
-    
-    private void rBut1op1ActionPerformed(java.awt.event.ActionEvent evt) {
-    }
-    
-    /** rBut1op2 **/
-    private void rBut1op2FocusLost(java.awt.event.FocusEvent evt) {
-    }
-    
-    private void rBut1op2ActionPerformed(java.awt.event.ActionEvent evt) {
-    } 
-    
-    /** rBut1op3 **/
-    private void rBut1op3FocusLost(java.awt.event.FocusEvent evt) {
-    }
-    
-    private void rBut1op3ActionPerformed(java.awt.event.ActionEvent evt) {
-    } 
-    
     
     /** rBut2op1 **/
     private void rBut2op1FocusLost(java.awt.event.FocusEvent evt) {
@@ -679,8 +564,8 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 		tfPos1.setValue(new Float(0.0));
 		sldPos2.setValue(3600);
 		tfPos2.setValue(new Float(360.0));
-		sldFreq.setValue(150);
-		tfFreq.setText("150");
+		sldNumPeriod.setValue(150);
+		tfNumPeriod.setText("150");
 		*/
 	}// GEN-LAST:event_btnDefaultsActionPerformed
 
@@ -692,23 +577,18 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
 
-		final int nsamples = sldNumSamples.getValue() < 10 ? 10 : sldNumSamples.getValue();
+		final int nsamples = (sldNumSamples.getValue()*sldNumPeriod.getValue()) < 10 ? 10 : (sldNumSamples.getValue()*sldNumPeriod.getValue());
 		acqConfig.setTotalSamples(nsamples);
 		
 		
 		acqConfig.getSelectedHardwareParameter("amplitude").setParameterValue(String.valueOf(sldSigA.getValue()));
 		acqConfig.getSelectedHardwareParameter("sigperiod").setParameterValue("" + sldSigP.getValue());
-		acqConfig.getSelectedHardwareParameter("pressure").setParameterValue("" + sldPress.getValue());
 		acqConfig.getSelectedHardwareParameter("numsamps").setParameterValue("" + sldNumSamples.getValue());
-		acqConfig.getSelectedHardwareParameter("freq").setParameterValue("" + sldFreq.getValue());
+		acqConfig.getSelectedHardwareParameter("numperiod").setParameterValue("" + sldNumPeriod.getValue());
+		acqConfig.getSelectedHardwareParameter("pressure").setParameterValue("" + sldPress.getValue());
+		//acqConfig.getSelectedHardwareParameter("freq").setParameterValue("" + sldFreq.getValue());
 		
-/*
-		acqConfig.getSelectedHardwareParameter("protocolo").setParameterValue("1");
-		acqConfig.getSelectedHardwareParameter("ang1_min").setParameterValue("" + (sldPos1.getValue() / 10.F));
-		acqConfig.getSelectedHardwareParameter("ang1_max").setParameterValue("" + (sldPos2.getValue() / 10.F));
-		acqConfig.getSelectedHardwareParameter("delta_ang1").setParameterValue("10");
-		acqConfig.getSelectedHardwareParameter("delay").setParameterValue("2");
-*/
+		
 		// acqConfig.setSelectedFrequency(new Frequency((double)
 		// sldFreq.getValue(), hardwareInfo
 		// .getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(),
@@ -731,21 +611,17 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
     private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel lblErrorSamplesTooHigh;
     
-    private javax.swing.ButtonGroup rButGPress;
-    private javax.swing.JRadioButton rBut1op1;
-    private javax.swing.JRadioButton rBut1op2;
-    private javax.swing.JRadioButton rBut1op3;
-    
+
     private javax.swing.ButtonGroup rButG2;
     private javax.swing.JRadioButton rBut2op1;
     private javax.swing.JRadioButton rBut2op2;
     private javax.swing.JRadioButton rBut2op3;
-    private javax.swing.JSlider sldFreq;
+    private javax.swing.JSlider sldNumPeriod;
     private javax.swing.JSlider sldNumSamples;
     private javax.swing.JSlider sldPress;
     private javax.swing.JSlider sldSigA;
     private javax.swing.JSlider sldSigP;
-    private javax.swing.JFormattedTextField tfFreq;
+    private javax.swing.JFormattedTextField tfNumPeriod;
     private javax.swing.JFormattedTextField tfNumSamples;
     private javax.swing.JFormattedTextField tfPress;
     private javax.swing.JFormattedTextField tfSigA;
@@ -839,36 +715,65 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 	@Override
 	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
 		this.hardwareInfo = hardwareInfo;
+		int max;
+		int min;
+		int minorspacing;
+		int majorspacing;
 		
         ChannelParameter SigAParameter = this.hardwareInfo.getHardwareParameter("amplitude");
-        sldSigA.setMaximum(Integer.valueOf(SigAParameter.getParameterSelectionList()[MAXIMUM_VALUE_INDEX]));
-        sldSigA.setMinimum(Integer.valueOf(SigAParameter.getParameterSelectionList()[MINIMUM_VALUE_INDEX]));
-        sldSigA.setMinorTickSpacing(Integer.valueOf(SigAParameter.getParameterSelectionList()[STEP_VALUE_INDEX]));
-        sldSigA.setSnapToTicks(false);
+        max = Integer.valueOf(SigAParameter.getParameterSelectionList()[MAXIMUM_VALUE_INDEX]);
+        min = Integer.valueOf(SigAParameter.getParameterSelectionList()[MINIMUM_VALUE_INDEX]);
+        majorspacing = (max - min)/4;
+        minorspacing = (majorspacing)/2;
+        sldSigA.setMaximum(max);
+        sldSigA.setMinimum(min);
+        sldSigA.setMajorTickSpacing(majorspacing);
+        sldSigA.setMinorTickSpacing(minorspacing);
+        //sldSigA.setSnapToTicks(false);
         
         ChannelParameter SigPParameter = this.hardwareInfo.getHardwareParameter("sigperiod");
-        sldSigP.setMaximum(Integer.valueOf(SigPParameter.getParameterSelectionList()[MAXIMUM_VALUE_INDEX]));
-        sldSigP.setMinimum(Integer.valueOf(SigPParameter.getParameterSelectionList()[MINIMUM_VALUE_INDEX]));
-        sldSigP.setMinorTickSpacing(Integer.valueOf(SigPParameter.getParameterSelectionList()[STEP_VALUE_INDEX]));
-        sldSigP.setSnapToTicks(false);
+        max = Integer.valueOf(SigPParameter.getParameterSelectionList()[MAXIMUM_VALUE_INDEX]);
+        min = Integer.valueOf(SigPParameter.getParameterSelectionList()[MINIMUM_VALUE_INDEX]);
+        majorspacing = (max - min)/4;
+        minorspacing = (majorspacing)/2;
+        sldSigP.setMaximum(max);
+        sldSigP.setMinimum(min);
+        sldSigP.setMajorTickSpacing(majorspacing);
+        sldSigP.setMinorTickSpacing(minorspacing);
+        //sldSigP.setSnapToTicks(false);
         
         ChannelParameter PressParameter = this.hardwareInfo.getHardwareParameter("pressure");
-        sldPress.setMaximum(Integer.valueOf(PressParameter.getParameterSelectionList()[MAXIMUM_VALUE_INDEX]));
-        sldPress.setMinimum(Integer.valueOf(PressParameter.getParameterSelectionList()[MINIMUM_VALUE_INDEX]));
-        sldPress.setMinorTickSpacing(Integer.valueOf(PressParameter.getParameterSelectionList()[STEP_VALUE_INDEX]));
-        sldPress.setSnapToTicks(false);
+        max = Integer.valueOf(PressParameter.getParameterSelectionList()[MAXIMUM_VALUE_INDEX]);
+        min = Integer.valueOf(PressParameter.getParameterSelectionList()[MINIMUM_VALUE_INDEX]);
+        majorspacing = (max - min)/4;
+        minorspacing = (majorspacing)/2;
+        sldPress.setMaximum(max);
+        sldPress.setMinimum(min);
+        sldPress.setMajorTickSpacing(majorspacing);
+        sldPress.setMinorTickSpacing(minorspacing);
+        //sldPress.setSnapToTicks(false);
         
         ChannelParameter NumSamplesParameter = this.hardwareInfo.getHardwareParameter("numsamps");
-        sldNumSamples.setMaximum(Integer.valueOf(NumSamplesParameter.getParameterSelectionList()[MAXIMUM_VALUE_INDEX]));
-        sldNumSamples.setMinimum(Integer.valueOf(NumSamplesParameter.getParameterSelectionList()[MINIMUM_VALUE_INDEX]));
-        sldNumSamples.setMinorTickSpacing(Integer.valueOf(NumSamplesParameter.getParameterSelectionList()[STEP_VALUE_INDEX]));
-        sldNumSamples.setSnapToTicks(false);
+        max = Integer.valueOf(NumSamplesParameter.getParameterSelectionList()[MAXIMUM_VALUE_INDEX]);
+        min = Integer.valueOf(NumSamplesParameter.getParameterSelectionList()[MINIMUM_VALUE_INDEX]);
+        majorspacing = (max - min)/4;
+        minorspacing = (majorspacing)/2;
+        sldNumSamples.setMaximum(max);
+        sldNumSamples.setMinimum(min);
+        sldNumSamples.setMajorTickSpacing(majorspacing);
+        sldNumSamples.setMinorTickSpacing(minorspacing);
+        //sldNumSamples.setSnapToTicks(false);
         
-        ChannelParameter FreqParameter = this.hardwareInfo.getHardwareParameter("freq");
-        sldFreq.setMaximum(Integer.valueOf(FreqParameter.getParameterSelectionList()[MAXIMUM_VALUE_INDEX]));
-        sldFreq.setMinimum(Integer.valueOf(FreqParameter.getParameterSelectionList()[MINIMUM_VALUE_INDEX]));
-        sldFreq.setMinorTickSpacing(Integer.valueOf(FreqParameter.getParameterSelectionList()[STEP_VALUE_INDEX]));
-        sldFreq.setSnapToTicks(false);
+        ChannelParameter NumPeriodParameter = this.hardwareInfo.getHardwareParameter("numperiod");
+        max = Integer.valueOf(NumPeriodParameter.getParameterSelectionList()[MAXIMUM_VALUE_INDEX]);
+        min = Integer.valueOf(NumPeriodParameter.getParameterSelectionList()[MINIMUM_VALUE_INDEX]);
+        majorspacing = (max - min)/4;
+        minorspacing = (majorspacing)/2;
+        sldNumPeriod.setMaximum(max);
+        sldNumPeriod.setMinimum(min);
+        sldNumPeriod.setMajorTickSpacing(majorspacing);
+        sldNumPeriod.setMinorTickSpacing(minorspacing);
+        //sldFreq.setSnapToTicks(false);
 		
 	}
 

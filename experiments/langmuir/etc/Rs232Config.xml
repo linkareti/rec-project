@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
-<hardware id="ELAB_LANGMUIR_PROBE_DSPIC_V0.1" num_channels="3"
-	minfrequency="10Hz" maxfrequency="1000Hz">
-	<rs232 baud="115200" stopbits="1" paritybits="0" numbits="8"
-		ports_restrict="/dev/ttyUSB0">
+<hardware id="ELAB_LANGMUIR_PROBE_DSPIC_V0.1" num_channels="3" minfrequency="10Hz" maxfrequency="1000Hz">
+	<rs232 baud="115200" stopbits="1" paritybits="0" numbits="8" ports_restrict="/dev/ttyUSB0">
 		<parameters>
 			<!-- protocolo -->
 			<!--parameter output="0" input="0" maxvalue="5" minvalue="1" order="0">
@@ -11,41 +9,59 @@
 
 
 			<!-- max_duty -->
-			<parameter output="##0" input="##0.0" maxvalue="500"
-				minvalue="0" order="1">
+			<parameter output="##0" input="##0" maxvalue="500" minvalue="50" order="0">
+				<transfer_function type="output">
+					<linear><param weight="6.429" center="14.286"/></linear>
+				</transfer_function>
+				<transfer_function type="input">
+					<linear><param weight="6.429" center="14.286"/></linear>
+				</transfer_function>
 			</parameter>
 			<!-- t_sinal -->
-			<parameter output="###0" input="##0.0" maxvalue="1100"
-				minvalue="1" order="2">
+			<parameter output="###0" input="###0" maxvalue="3000" minvalue="400" order="1">
+				<transfer_function type="output">
+					<linear><param weight="50" center="0"></param></linear>
+				</transfer_function>
+				<transfer_function type="input">
+					<linear><param weight="50" center="0"></param></linear>
+				</transfer_function>
 			</parameter>
 			<!-- n_samp -->
-			<parameter output="##0" input="##0.0" maxvalue="100"
-				minvalue="0" order="3">
+			<parameter output="##0" input="##0" maxvalue="47" minvalue="2" order="2">
 			</parameter>
 			<!-- n_period -->
-			<parameter output="##0" input="##0.0" maxvalue="30" minvalue="1"
-				order="4">
+			<parameter output="##0" input="##0" maxvalue="50" minvalue="5" order="3">
 			</parameter>
 			<!-- setpoint_press -->
-			<parameter output="###0" input="##0.0" maxvalue="1000" minvalue="0"
-				order="5">
+			<parameter output="###0" input="###0" maxvalue="5000" minvalue="100" order="4">
+				<transfer_function type="output">
+					<linear><param weight="10" center="0"></param></linear>
+				</transfer_function>
+				<transfer_function type="input">
+					<linear><param weight="10" center="0"></param></linear>
+				</transfer_function>
 			</parameter>
 
 			<!-- gas_sel -->
-			<!--parameter output="#0.0" input="#0.0" maxvalue="3"
-				minvalue="1" order="6">
+			<!--<parameter output="#0.0" input="#0.0" maxvalue="3" minvalue="1" order="6">
 			</parameter>
 			-->
 		</parameters>
 		<channels>
 			<!-- adc_value1 -->
-			<channel format="#" order="0">
+			<channel format="###" order="0">
+				<transfer_function>
+					<linear><param weight="0.0048828125" center="0"/></linear>
+				</transfer_function>
 			</channel>
 			<!-- adc_value2 -->
-			<channel format="#" order="1">
+			<channel format="###" order="1">
+				<transfer_function>
+					<linear><param weight="0.0048828125" center="0"/></linear>
+				</transfer_function>
 			</channel>
-			<!-- adc_value3 -->
-			<channel format="#" order="2">
+			<!-- pressure gauge value -->
+			<channel format="####" order="2">
 			</channel>
 		</channels>
 		<timeout>
