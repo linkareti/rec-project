@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/nomenu-template.xhtml">
+
+    <ui:define name="body" id="auth">
+        <div id="top_index" >
+            <p id="banner-p-elab"><h:outputLabel value="#{bundle['rec.elab.title.short']}" /></p>
+            <p id="banner-p-labs"><h:outputLabel value="#{bundle['rec.elab.subtitle']}" /></p>
+        </div>
+
+        <div id="top_authentication">
+            <ui:include src="Login.xhtml" />
+        </div>
+        <div id="login">
+            <ui:insert name="content" />
+        </div>
+
+        <div id="auth_footer">
+            <p id="ext_nav"></p>
+        </div>
+
+        <div id="footer">
+            <ui:include src="footer.xhtml" />
+        </div>
+
+    </ui:define>
+
+</ui:composition>
