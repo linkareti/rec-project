@@ -1,0 +1,68 @@
+<apparatus toolTipBundleKey="discos$rec.exp.tip.discos"
+	location="ELAB_DISCOS_DSPIC_V1.0" iconLocationBundleKey="discos$rec.exp.icon.discos"
+	headerDisplayClassLocationBundleKey="" displayStringBundleKey="discos$rec.exp.title.discos"
+	descriptionStringBundleKey="discos$rec.exp.description.discos"
+	displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="discos$rec.exp.background.discos"
+	dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="discos$rec.exp.customizer.discos"
+	visible="true" selected="true" order="0" enabled="false" connected="false">
+	<localizationBundle name="discos"
+		location="recresource:///pt/utl/ist/elab/client/discos/resources/messages" />
+	<defaultAcquisitionConfig toolTipBundleKey="discos$rec.exp.dftcfg.discos.tip.1"
+		iconLocationBundleKey="ReCUI$rec.ui.icon.customize"
+		displayStringBundleKey="discos$rec.exp.dftcfg.discos.title.1"
+		classLocationBundleKey="discos$rec.exp.dftcfg.discos.loc.1" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
+	<mediaConfig videoLocation="discos$rec.exp.url.discos.video"
+		canSave="true" offlinePlay="true" />
+
+	<!--display toolTipBundleKey="discos$rec.exp.display.discos.tip.sensor" 
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor" 
+		displayStringBundleKey="discos$rec.exp.display.discos.title.sensor" classLocationBundleKey="discos$rec.exp.display.discos.loc.sensor" 
+		visible="true" selected="true" order="0" enabled="false" connected="false" 
+		/ -->
+
+	<display toolTipBundleKey="discos$rec.exp.display.discos.tip.1"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table"
+		displayStringBundleKey="discos$rec.exp.display.discos.title.1"
+		classLocationBundleKey="discos$rec.exp.display.discos.loc.1" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
+
+	<display toolTipBundleKey="discos$rec.exp.display.discos.tip.2"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="discos$rec.exp.display.discos.title.2"
+		classLocationBundleKey="discos$rec.exp.display.discos.loc.2" visible="true" 
+		selected="true" order="0" enabled="false" connected="false" />
+
+	<display toolTipBundleKey="discos$rec.exp.display.discos.tip.3"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="discos$rec.exp.display.discos.title.3"
+		classLocationBundleKey="discos$rec.exp.display.discos.loc.3" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
+
+<!--
+	<display toolTipBundleKey="discos$rec.exp.display.discos.tip.4" offlineCapable="false" 
+		iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="discos$rec.exp.display.discos.title.4" 
+		classLocationBundleKey="discos$rec.exp.display.discos.loc.4" visible="true" 
+		selected="true" order="0" enabled="false" connected="false" /> <display toolTipBundleKey="discos$rec.exp.display.discos.tip.5" 
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" 
+		displayStringBundleKey="discos$rec.exp.display.discos.title.5" classLocationBundleKey="discos$rec.exp.display.discos.loc.5" 
+		visible="true" selected="true" order="0" enabled="false" connected="false" 
+		/ -->
+<!--
+	<display toolTipBundleKey="discos$rec.exp.display.discos.tip.5"
+		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
+		displayStringBundleKey="discos$rec.exp.display.discos.title.5"
+		classLocationBundleKey="discos$rec.exp.display.discos.loc.5" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
+-->
+	<webResource toolTipLocationBundleKey="" internalBrowser="false"
+		iconLocationBundleKey="" visible="true" selected="true" order="0"
+		enabled="false" connected="false" />
+	<webResource toolTipLocationBundleKey="" internalBrowser="false"
+		iconLocationBundleKey="" visible="true" selected="true" order="0"
+		enabled="false" connected="false" />
+	<webResource toolTipLocationBundleKey="" internalBrowser="false"
+		iconLocationBundleKey="" visible="true" selected="true" order="0"
+		enabled="false" connected="false" />
+
+</apparatus>
