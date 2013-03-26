@@ -1,16 +1,15 @@
-package com.linkare.rec.am.service;
+package com.linkare.rec.web.service;
 
 import com.linkare.rec.web.mail.MailMessageRequest;
 import com.linkare.rec.web.mail.MailServiceRemote;
 import com.linkare.rec.web.mail.NoValidRecipientsFoundForMessage;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.Locale;
+import java.util.Properties;
 
 import javax.ejb.EJBException;
-import javax.xml.namespace.QName;
-import javax.xml.ws.Service;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -18,25 +17,29 @@ import org.junit.Test;
 
 import com.linkare.rec.web.model.util.BusinessException;
 
-public class MailServiceWSTest {
+public class MailServiceTest {
 
     private MailServiceRemote remote;
-    private String address;
-    private URL wsdlURL;
 
     @Before
     public void setup() {
 
-	address = "http://localhost:8080/rec-services/MailServiceWS";
+	Properties props = new Properties();
+	props.setProperty("java.naming.factory.initial", "com.sun.enterprise.naming.impl.SerialInitContextFactory");
+	props.setProperty("java.naming.factory.url.pkgs", "com.sun.enterprise.naming");
+	props.setProperty("java.naming.factory.state", "com.sun.corba.ee.impl.presentation.rmi.JNDIStateFactoryImpl");
+	props.setProperty("org.omg.CORBA.ORBInitialHost", "localhost");
+	props.setProperty("org.omg.CORBA.ORBInitialPort", "3700");
+
 	try {
-	    wsdlURL = new URL(address + "?wsdl");
-	} catch (MalformedURLException e) {
-	    // TODO Auto-generated catch block
+	    InitialContext ic = new InitialContext(props);
+	    remote = (MailServiceRemote) ic.lookup("java:global/rec.web/mailService!com.linkare.rec.web.service.MailServiceRemote");
+
+	} catch (NamingException e) {
+	    e.printStackTrace();
+	} catch (Throwable e) {
 	    e.printStackTrace();
 	}
-	
-	Service service = Service.create(wsdlURL, new QName("http://webservices.linkare.com/rec", "rec-services"));
-	remote = service.getPort(MailServiceRemote.class);
     }
 
     @Test

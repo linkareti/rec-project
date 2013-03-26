@@ -1,4 +1,4 @@
-package com.linkare.rec.am.experiment;
+package com.linkare.rec.web.experiment;
 
 import com.linkare.rec.web.RepositoryFacade;
 import java.rmi.RemoteException;
