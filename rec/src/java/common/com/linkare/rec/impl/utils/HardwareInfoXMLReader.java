@@ -1,5 +1,6 @@
 package com.linkare.rec.impl.utils;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,6 +13,13 @@ import java.util.TreeMap;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Result;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
@@ -64,6 +72,14 @@ public class HardwareInfoXMLReader {
 	public static HardwareInfo readHardwareInfo(final InputStream is) throws ParserConfigurationException,
 			SAXException, IOException {
 
+		final Document document = parseInputStreamAsXmlDocument(is);
+		final HardwareInfoXMLReader scanner = new HardwareInfoXMLReader(document);
+		scanner.visitDocument();
+		return scanner.getHardwareInfo();
+	}
+
+	public static Document parseInputStreamAsXmlDocument(final InputStream is) throws ParserConfigurationException,
+			SAXException, IOException {
 		final EntityResolver entityResolver = new EntityResolver() {
 
 			@Override
@@ -104,13 +120,34 @@ public class HardwareInfoXMLReader {
 		builder.setEntityResolver(entityResolver);
 		builder.setErrorHandler(myErrorHandler);
 		final Document document = builder.parse(new InputSource(is));
-		final HardwareInfoXMLReader scanner = new HardwareInfoXMLReader(document);
-		scanner.visitDocument();
-		return scanner.getHardwareInfo();
+		return document;
+	}
+
+	public static final void writeDocument(Document hardwareInfoDocument, File f) throws IOException,
+			TransformerException {
+		if (!f.exists()) {
+			f.createNewFile();
+		}
+
+		TransformerFactory tf = TransformerFactory.newInstance();
+		Transformer transformer = tf.newTransformer();
+		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+		// <!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-"
+		// "http://rec.linkare.com/HardwareInfoSchema.dtd">
+		transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, "-//Linkare/ReC/HardwareInfo//-");
+		transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "http://rec.linkare.com/HardwareInfoSchema.dtd");
+		transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+		transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+		transformer.setOutputProperty(OutputKeys.STANDALONE, "no");
+
+		DOMSource source = new DOMSource(hardwareInfoDocument);
+		Result streamOut = new StreamResult(f);
+		transformer.transform(source, streamOut);
 	}
 
 	/** org.w3c.dom.Document document */
-	Document document;
+	private Document document;
 
 	/** Holds value of property hardwareInfo. */
 	private HardwareInfo hardwareInfo;
@@ -432,11 +469,18 @@ public class HardwareInfoXMLReader {
 							throw new RuntimeException(e.getMessage());
 						}
 					}
-					final String val = ((Text) element.getFirstChild()).getData();
+
 					if (mime == null) {
 						mime = "application/octet-stream";
 					}
-					value.setByteArrayValue(new ByteArrayValue(val.getBytes(), mime));
+
+					if (element.getFirstChild() != null && element.getFirstChild() instanceof Text) {
+						final String val = ((Text) element.getFirstChild()).getData();
+						value.setByteArrayValue(new ByteArrayValue(val.getBytes(), mime));
+					} else {
+						value.setByteArrayValue(new ByteArrayValue("".getBytes(), mime));
+					}
+
 					return value;
 				} else {
 					throw new RuntimeException(
@@ -468,6 +512,8 @@ public class HardwareInfoXMLReader {
 			if (node.getNodeType() == Node.CDATA_SECTION_NODE) {
 				desc = ((CDATASection) node).getData();
 				break;
+			} else if (node.getNodeType() == Node.TEXT_NODE) {
+				desc = ((Text) node).getData();
 			}
 		}
 		return desc;
