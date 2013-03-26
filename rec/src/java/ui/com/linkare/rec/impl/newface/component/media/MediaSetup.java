@@ -3,6 +3,7 @@ package com.linkare.rec.impl.newface.component.media;
 import java.io.File;
 import java.util.logging.Logger;
 
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.sun.jna.Platform;
 
 /**
@@ -145,7 +146,7 @@ public class MediaSetup {
 	 */
 	public static String[] getDefaultMediaParameters() {
 
-		final File pluginsDir = new File(System.getProperty("user.home"), System.getProperty("vlc.plugins.destdir"));
+		final File pluginsDir = new File(ReCSystemProperty.USER_HOME.getValue(), ReCSystemProperty.VLC_PLUGINS_DESTDIR.getValue());
 
 		MediaSetup.log.fine("Plugins Path = " + pluginsDir.getAbsolutePath());
 
