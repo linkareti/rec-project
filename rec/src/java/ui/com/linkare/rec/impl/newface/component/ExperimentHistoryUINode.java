@@ -2,11 +2,11 @@ package com.linkare.rec.impl.newface.component;
 
 import javax.swing.Icon;
 
+import com.linkare.rec.acquisition.DataProducer;
 import com.linkare.rec.impl.client.apparatus.Apparatus;
 import com.linkare.rec.impl.client.experiment.ExpHistory;
 import com.linkare.rec.impl.client.experiment.ExpHistoryDisplayFactory;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
-import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 
 /**
  * @author Henrique Fernandes
@@ -24,9 +24,9 @@ public class ExperimentHistoryUINode extends ExpHistory {
 	 * @param apparatusConfig
 	 */
 	public ExperimentHistoryUINode(final ExpHistoryDisplayFactory expHistoryDisplayFactory,
-			final DataProducerWrapper producerWrapper, final Apparatus apparatus,
+			final DataProducer producer, final Apparatus apparatus,
 			final com.linkare.rec.web.config.Apparatus apparatusConfig) {
-		super(expHistoryDisplayFactory, producerWrapper, apparatus);
+		super(expHistoryDisplayFactory, producer, apparatus);
 		this.apparatusConfig = apparatusConfig;
 	}
 
