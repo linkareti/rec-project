@@ -26,7 +26,6 @@ public class AssynchronousMailDispatcher implements MessageListener {
     @Override
     public void onMessage(Message msg) {
 
-	System.out.println("######################## I'm in the onMessage");
 	if (!(msg instanceof ObjectMessage)) {
 	    return;
 	}
