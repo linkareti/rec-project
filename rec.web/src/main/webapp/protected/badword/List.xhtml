@@ -15,7 +15,7 @@
                          paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" 
                          emptyMessage="#{bundle['info.emptyList']}"
                          selectionMode="single"
-                         rowKey="#{item.badWordId}">
+                         rowKey="#{item.idInternal}">
 
                 <p:column headerText="#{bundle['badword.regex']}" style="width:125px">
                     <h:outputText value="#{item.regex}" />
