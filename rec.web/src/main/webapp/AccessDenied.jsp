@@ -14,11 +14,11 @@
                  color: #3a4f54;
                  background-color: #dfecf1;
                  font-size: small;">
-            <br><center>
+            <br/><div style="text-align:center">
                 <h1 style="color: #e33b06;">Sorry, you do not have permission to perform this task!</h1>
-            <br><br>
+            <br/><br/>
             <a href="/rec.web" style="color: #e33b06;">Index</a>
-            </center>
+            </div>
         </body>
     </html>
 </f:view>

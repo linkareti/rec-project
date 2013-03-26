@@ -1,1 +1,1 @@
-<% response.sendRedirect("Login.faces"); %>
+<% application.getRequestDispatcher("/Login.faces").forward(request, response); %>
