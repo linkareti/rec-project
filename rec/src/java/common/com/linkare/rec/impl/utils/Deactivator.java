@@ -3,6 +3,8 @@ package com.linkare.rec.impl.utils;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
+import org.omg.PortableServer.POAPackage.ObjectNotActive;
+
 import com.linkare.rec.impl.threading.ExecutorScheduler;
 import com.linkare.rec.impl.threading.ScheduledWorkUnit;
 
@@ -61,6 +63,9 @@ public class Deactivator extends ScheduledWorkUnit {
 			 * System.out.println("************************************");
 			 */
 			deactivated = true;
+		} catch(final ObjectNotActive e) {
+			deactivated = true;
+			LOGGER.log(Level.SEVERE, "Exception while trying to deactivate. Object was not active anymore, so not trying to deactivate it again!", e);
 		} catch (final Exception e) {
 			deactivated = false;
 			LOGGER.log(Level.SEVERE, "Exception while trying to deactivate.", e);

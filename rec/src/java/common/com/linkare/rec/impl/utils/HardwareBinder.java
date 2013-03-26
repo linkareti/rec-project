@@ -1,78 +1,128 @@
 /*
- * ReferenceBinder.java
+ * HardwareBinder.java
  *
  * Created on 16 de Janeiro de 2003, 11:38
  */
 
 package com.linkare.rec.impl.utils;
 
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.linkare.rec.acquisition.Hardware;
-import com.linkare.rec.acquisition.MultiCastController;
-import com.linkare.rec.acquisition.MultiCastControllerHelper;
+import com.linkare.rec.acquisition.HardwareState;
+import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.impl.config.ReCSystemProperty;
+import com.linkare.rec.impl.threading.ProcessingManager;
 import com.linkare.rec.impl.wrappers.MultiCastControllerWrapper;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class HardwareBinder extends Thread {
-	public static final String SYSPROP_MULTICAST_INIT_REF = "rec.multicastcontroller.initref";
-	public static final String MULTICAST_INIT_REF = Defaults.defaultIfEmpty(
-			System.getProperty(HardwareBinder.SYSPROP_MULTICAST_INIT_REF), "MultiCastController");
+public class HardwareBinder implements Runnable {
+	public static final String MULTICAST_INIT_REF = ReCSystemProperty.MULTICAST_INITREF.getValue();
+
+	private static final Logger LOGGER = Logger.getLogger(HardwareBinder.class.getName());
 
 	private Hardware hardware = null;
+
 	private final long WAIT_PERIOD = 40000;
 
-	// Before trying to register please wait some time, to send the correct ID
-	// to the multicast...
-	private final long STARTUP_PERIOD = 30000;
+	private ScheduledFuture<?> hardwareBinderTask = null;
 
-	/** Creates a new instance of DirectoryCreator */
+	private ReadWriteLock rwLock = new ReentrantReadWriteLock(true);
+
+	/** Creates a new instance of HardwareBinder */
 	public HardwareBinder() {
-		super("Hardware Binder Thread...");
-		setDaemon(true);
-		setPriority(Thread.NORM_PRIORITY - 2);
-		start();
+
 	}
 
 	@Override
 	public void run() {
+		try {
+			rwLock.readLock().lock();
 
-		synchronized (this) {
-			try {
-				this.wait(STARTUP_PERIOD);
-			} catch (final InterruptedException ignored) {
-				return;
-			}
-		}
-		while (true) {
-			bindHardware();
-			synchronized (this) {
+			if (hardware == null) {
+				LOGGER.log(Level.FINE,
+						"The hardware binder task is going to be cancelled as it has no hardware reference to bind...");
+
 				try {
-					this.wait(WAIT_PERIOD);
-				} catch (final InterruptedException ignored) {
-					return;
+					// upgrade to write lock - still have to release readLock
+					rwLock.readLock().unlock();
+					rwLock.writeLock().lock();
+
+					if (hardwareBinderTask != null) {
+						hardwareBinderTask.cancel(true);
+						hardwareBinderTask = null;
+					}
+
+				} finally {
+					// downgrade by aquiring read lock before releasing write
+					// lock
+					rwLock.readLock().lock();
+					rwLock.writeLock().unlock();
+				}
+			} else {
+				HardwareInfo info = hardware.getHardwareInfo();
+				if (info == null || info.getHardwareUniqueID() == null) {
+					LOGGER.log(Level.FINE,
+							"Hardware does not have hardwareInfo or the unique hardware id is null... Not binding to multicast!");
+				} else if (hardware.getHardwareState() == HardwareState.UNKNOWN) {
+					LOGGER.log(Level.FINE, "Hardware state is 'UNKNOWN'... Not binding to multicast!");
+
+				} else {
+					try {
+						final MultiCastControllerWrapper mcw = ORBBean.getORBBean().resolveMultiCast();
+						mcw.registerHardware(hardware);
+
+					} catch (final Exception e) {
+						LOGGER.log(Level.WARNING,
+								"Problem registering hardware with multicast controller" + e.getMessage(), e);
+					}
 				}
 			}
-		}
-	}
-
-	public void bindHardware() {
-		try {
-			final MultiCastController mcc = MultiCastControllerHelper.narrow(ORBBean.getORBBean().getORB()
-					.resolve_initial_references(HardwareBinder.MULTICAST_INIT_REF));
-
-			/** Andre added the MultiCastControllerWrapper...check with JP! */
-			final MultiCastControllerWrapper mcw = new MultiCastControllerWrapper(mcc);
-			mcw.registerHardware(hardware);
-
-		} catch (final Exception e) {
-			e.printStackTrace();
+		} finally {
+			rwLock.readLock().unlock();
 		}
 
 	}
 
 	public void setHardware(final Hardware hardware) {
-		this.hardware = hardware;
+		try {
+			rwLock.readLock().lock();
+			if (this.hardware == hardware) {
+				return;
+			}
+			try {
+				// upgrade to writeLock requires releasing the readLock first
+				rwLock.readLock().unlock();
+				rwLock.writeLock().lock();
+
+				if (hardwareBinderTask != null) {
+					hardwareBinderTask.cancel(true);
+					hardwareBinderTask = null;
+				}
+
+				this.hardware = hardware;
+
+				if (this.hardware != null) {
+					hardwareBinderTask = ProcessingManager.getInstance().scheduleAtFixedRate(this, 0, WAIT_PERIOD,
+							TimeUnit.MILLISECONDS);
+				}
+			} finally {
+				// downgrade by aquiring readlock before releasing the
+				// writeLock...
+				rwLock.readLock().lock();
+				rwLock.writeLock().unlock();
+			}
+		} finally {
+			rwLock.readLock().unlock();
+		}
+
 	}
 }

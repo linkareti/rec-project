@@ -13,6 +13,7 @@ package com.linkare.rec.impl.utils;
 import java.util.EnumMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.concurrent.Future;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -37,6 +38,7 @@ public class EventQueue {
 	private static final Logger LOGGER = Logger.getLogger(EventQueue.class.getName());
 
 	private final EventQueueDispatcher dispatcher;
+	private final ReentrantReadWriteLock dispatchingLock;
 	// private final List<Prioritazible> levts;
 	private EnumMap<EnumPriority, List<Prioritazible>> levts;
 	private volatile boolean stoppedDispatching = false;
@@ -65,6 +67,7 @@ public class EventQueue {
 	 */
 	public EventQueue(final EventQueueDispatcher dispatcher, final String threadName) {
 		this.dispatcher = dispatcher;
+		this.dispatchingLock=new ReentrantReadWriteLock();
 		levts = new EnumMap<EnumPriority, List<Prioritazible>>(EnumPriority.class);
 		for (EnumPriority priority : EnumPriority.values()) {
 			levts.put(priority, new LinkedList<Prioritazible>());
@@ -134,8 +137,16 @@ public class EventQueue {
 	}
 
 	public void shutdown() {
-		LOGGER.log(Level.FINE, "EventQueue received shutdown. Queue size = " + levts.size());
-
+		
+		if(LOGGER.isLoggable(Level.FINE)) {
+			final StringBuilder countPerPriority=new StringBuilder();
+			for (Entry<EnumPriority, List<Prioritazible>> perPriorityEvtList : levts.entrySet()) {
+				countPerPriority.append("[").append(perPriorityEvtList.getKey().name()).append("=").append(perPriorityEvtList.getValue().size()).append("]");
+			}
+			
+			LOGGER.log(Level.FINE, "EventQueue received shutdown. Queue sizes per priority: " + countPerPriority);
+		}
+		
 		final Lock writeLock = mainLock.writeLock();
 		writeLock.lock();
 		try {
@@ -182,7 +193,7 @@ public class EventQueue {
 		public void run() {
 
 			try {
-
+				dispatchingLock.writeLock().lock();
 				final Object evt = getEvent();
 
 				if (evt != null) {
@@ -200,6 +211,7 @@ public class EventQueue {
 			} catch (final Exception e) {
 				LOGGER.log(Level.SEVERE, "Exception ocorred in event queue thread ", e);
 			} finally {
+				dispatchingLock.writeLock().unlock();
 				if (hasEvents() && !isInterrupted()) {
 					submitSignalTask();
 				}
