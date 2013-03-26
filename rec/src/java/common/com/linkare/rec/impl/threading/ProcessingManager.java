@@ -7,8 +7,8 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.threading.factory.RecThreadFactory;
-import com.linkare.rec.impl.utils.Defaults;
 
 /**
  * This class is responsible for managing threading pool scheduling and
@@ -21,20 +21,13 @@ import com.linkare.rec.impl.utils.Defaults;
  */
 public final class ProcessingManager {
 
-	// system properties
+	private static final int MAX_POOL_SIZE_PRIORITY = Integer
+			.parseInt(ReCSystemProperty.MAX_THREADPOOL_SIZE.getValue());
 
-	public static final String SYSPROP_CORE_POOL_SIZE_MIN_PRIORITY = "rec.processingmanager.threadPool.coresize";
-	public static final String SYSPROP_MAX_POOL_SIZE_MIN_PRIORITY = "rec.processingmanager.threadPool.maxsize";
-	public static final String SYSPROP_THREAD_IDLE_TIME = "rec.processingmanager.thread.idletime";
+	private static final int CORE_POOL_SIZE_PRIORITY = Integer.parseInt(ReCSystemProperty.CORE_THREADPOOL_SIZE
+			.getValue());
 
-	private static final int MAX_POOL_SIZE_PRIORITY = Defaults.defaultIfEmpty(
-			System.getProperty(ProcessingManager.SYSPROP_MAX_POOL_SIZE_MIN_PRIORITY), 20);
-
-	private static final int CORE_POOL_SIZE_PRIORITY = Defaults.defaultIfEmpty(
-			System.getProperty(ProcessingManager.SYSPROP_CORE_POOL_SIZE_MIN_PRIORITY), 1);
-
-	private static final int THREAD_IDLE_TIME = Defaults.defaultIfEmpty(
-			System.getProperty(ProcessingManager.SYSPROP_THREAD_IDLE_TIME), 10);
+	private static final int THREAD_IDLE_TIME = Integer.parseInt(ReCSystemProperty.MAX_THREADPOOL_IDLETIME.getValue());
 
 	private final ThreadPoolExecutor threadPool;
 

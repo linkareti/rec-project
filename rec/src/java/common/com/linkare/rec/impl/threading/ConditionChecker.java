@@ -59,7 +59,6 @@ public final class ConditionChecker implements Runnable {
 	public void run() {
 
 		ConditionResult conditionresult = conditionDecisor.getConditionResult();
-		System.out.println("Condition result = " + conditionresult);
 		if (conditionresult == ConditionResult.CONDITION_MET_TRUE) {
 			conditionDecisor.onConditionMetTrue();
 			scheduledTask.cancel(true);
@@ -68,8 +67,6 @@ public final class ConditionChecker implements Runnable {
 			scheduledTask.cancel(true);
 		} else if (conditionresult == ConditionResult.CONDITION_NOT_MET
 				&& (conditionTimeOut + startTime) < System.currentTimeMillis()) {
-			System.out.println("(conditionTimeOut + startTime)=" + (conditionTimeOut + startTime));
-			System.out.println("System.currentTimeMillis()=" + System.currentTimeMillis());
 			conditionDecisor.onConditionTimeOut();
 			scheduledTask.cancel(false);
 		}

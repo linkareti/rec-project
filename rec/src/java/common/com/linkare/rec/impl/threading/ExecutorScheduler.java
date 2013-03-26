@@ -1,14 +1,13 @@
 package com.linkare.rec.impl.threading;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ExecutorScheduler {
+	
+	private static final Logger LOGGER=Logger.getLogger(ExecutorScheduler.class.getName());
 
 	public static void scheduleAtFixedRate(final ScheduledWorkUnit work, final long initialDelay, final long period,
 			final TimeUnit unit) {
@@ -32,7 +31,7 @@ public class ExecutorScheduler {
 					work.run();
 				}
 			} catch (final Exception e) {
-				work.logThrowable("Throwable caught upon execution of Scheduled Work Unit of type "
+				LOGGER.log(Level.SEVERE,"Throwable caught upon execution of Scheduled Work Unit of type "
 						+ work.getClass().getCanonicalName() + ":" + e.getMessage(), e);
 			}
 		}
