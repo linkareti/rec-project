@@ -5,8 +5,19 @@
 	version="3.0">
 	<context-param>
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
-		<param-value>Development</param-value>
+		<param-value>PRODUCTION</param-value>
 	</context-param>
+	<listener>
+		<description>Loads the laboratories and apparatus from the ReCFaceConfig.xml file</description>
+		<display-name>Laboratories Loader and Synchronizer</display-name>
+		<listener-class>com.linkare.rec.web.listener.LaboratoriesLoader</listener-class>
+	</listener>
+	<context-param>
+		<description>Wether LaboratoriesLoader listener should attempt to synchronize from the ReCFaceConfig.xml file at startup</description>
+		<param-name>read.rec.face.config</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
 	<context-param>
 		<param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
 		<param-value>true</param-value>
@@ -22,7 +33,28 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>JnlpDownloadServlet</servlet-name>
-		<servlet-class>com.sun.javaws.servlet.JnlpDownloadServlet</servlet-class>
+		<servlet-class>jnlp.sample.servlet.JnlpDownloadServlet</servlet-class>
+		<!-- To activate logging, uncomment the following init params, and check 
+			their values -->
+		<!--init-param>
+			<param-name>logPath</param-name>
+			<param-value>/tmp/rec-jws-download-servlet.log</param-value>
+		</init-param>
+		<init-param>
+			<description>Only one of NONE,FATAL,WARNING,INFORMATIONAL,DEBUG may be specified</description>
+			<param-name>logLevel</param-name>
+			<param-value>DEBUG</param-value>
+		</init-param-->
+		<init-param>
+			<description>The jnlp files extension</description>
+			<param-name>jnlp-extension</param-name>
+			<param-value>.jnlp</param-value>
+		</init-param>
+		<init-param>
+			<description>The jar files extension</description>
+			<param-name>jar-extension</param-name>
+			<param-value>.jar</param-value>
+		</init-param>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>JnlpDownloadServlet</servlet-name>
@@ -54,10 +86,10 @@
 		<error-code>403</error-code>
 		<location>/AccessDenied.jsp</location>
 	</error-page>
-        <error-page>
-            <exception-type>java.lang.Exception</exception-type>
-            <location>/Error.faces</location>
-        </error-page>
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/Error.faces</location>
+	</error-page>
 	<mime-mapping>
 		<extension>jnlp</extension>
 		<mime-type>application/x-java-jnlp-file</mime-type>
