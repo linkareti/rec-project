@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 public class LocaleXmlTypeAdapter extends XmlAdapter<String, Locale> {
 
-	private static final Pattern PATTERN_SERIALIZED_LOCALE = Pattern.compile("([^_]+)(_([^_]+))?(_(.*))?)");
+	private static final Pattern PATTERN_SERIALIZED_LOCALE = Pattern.compile("([^_]+)(_([^_]+))?(_(.*))?");
 	
 	@Override
 	public Locale unmarshal(String v) throws Exception {
