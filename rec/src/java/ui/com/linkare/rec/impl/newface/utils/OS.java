@@ -6,6 +6,8 @@
  */
 package com.linkare.rec.impl.newface.utils;
 
+import com.linkare.rec.impl.config.ReCSystemProperty;
+
 /**
  * @author hfernandes
  */
@@ -17,7 +19,7 @@ public class OS {
 	private static boolean linux;
 
 	static {
-		OS.osName = System.getProperty("os.name").toLowerCase();
+		OS.osName = ReCSystemProperty.OS_NAME.getValue().toLowerCase();
 		OS.macOSX = "mac os x".equals(OS.osName);
 		OS.windows = OS.osName != null && OS.osName.indexOf("windows") != -1;
 		OS.linux = OS.osName != null && OS.osName.indexOf("linux") != -1;
