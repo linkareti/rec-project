@@ -4,23 +4,18 @@ import java.util.logging.Logger;
 
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
-import javax.faces.event.PhaseListener;
 
 /**
  * 
  * @author Joao
  */
-public class LifeCycleListener implements PhaseListener {
+public class LifeCycleListener implements javax.faces.event.PhaseListener {
 
-    private static Logger logger = Logger.getLogger("LifeCycleListener");
+    private static final long serialVersionUID = 5958322638117167569L;
+	
+    private static final Logger LOGGER = Logger.getLogger(LifeCycleListener.class.getName());
 
-    /**
-     * @return the logger
-     */
-    public static final Logger getLogger() {
-	return logger;
-    }
-
+    
     @Override
     public final PhaseId getPhaseId() {
 	return PhaseId.ANY_PHASE;

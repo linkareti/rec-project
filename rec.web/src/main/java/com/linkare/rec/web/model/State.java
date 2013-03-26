@@ -12,7 +12,12 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class State implements Serializable {
 
-    @Column(name = "LABEL")
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6057792977616762471L;
+
+	@Column(name = "LABEL")
     private String label;
 
     @Column(name = "HELP_MESSAGE")
