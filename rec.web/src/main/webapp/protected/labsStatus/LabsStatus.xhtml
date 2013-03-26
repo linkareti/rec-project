@@ -19,7 +19,6 @@
                        titletip="#{(lab.available) ? statusBundle['tooltip.lab.available'] : statusBundle['tooltip.lab.unavailable'] }" 
                        disabled="#{!lab.available}"
                        titleStyleClass="#{(lab.available) ? 'ui-icon-available' : 'ui-icon-unavailable' }">  
-                    <script src="http://www.java.com/js/deployJava.js" />
                     <p:scrollPanel mode="native" styleClass="scrollPanel" rendered="#{!empty statusBean.selectedLab}" >
                         <p:dataTable id="tableExperiments" var="deployedExp"
                                      value="#{statusBean.labExperiments}" rendered="#{lab.available}" style="margin-left: 10%">
@@ -67,7 +66,7 @@
                             </p:column>
                             <p:column style="width:120px; text-align: center; height: 50%;">
 
-                                <a href="javascript:var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + '../../#{deployedExp.experiment.state.url}'; if (!deployJava.isWebStartInstalled('1.6')) {if (deployJava.installLatestJRE()) {if (deployJava.launch(url)) {}}} else {if (deployJava.launch(url)) {}}"
+                                <a href="javascript:var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + '../client/#{deployedExp.experiment.state.url}.jnlp'; if (!deployJava.isWebStartInstalled('1.6')) {if (deployJava.installLatestJRE()) {if (deployJava.launch(url)) {}}} else {if (deployJava.launch(url)) {}}"
                                    title="#{statusBundle['tooltip.experiment.launch']}" 
                                    rel="#{statusBundle['tooltip.experiment.launch']}" target="_blank">
                                     <h:graphicImage library="images" name="webstart.png" rendered="#{deployedExp.labRunning}"/>

@@ -65,7 +65,6 @@
                     <h:panelGroup rendered="#{!empty statusBean.selectedLab}">
                         <p:poll update="tableExperiments" interval="5"
                                 listener="#{statusBean.refreshExperiments}" />
-                        <script src="http://www.java.com/js/deployJava.js" />
                         <h1 style="text-align: center;">
                             <h:outputText
                                 value="#{bundle['label.experiment.of']} #{statusBean.selectedLab.description}" />
@@ -99,7 +98,7 @@
                                 </p:column>
                                 <p:column style="width:120px; text-align: center; height: 50%;">
                                     <a
-                                        href="javascript:var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + '#{deployedExp.experiment.state.url}'; if (!deployJava.isWebStartInstalled('1.6')) {if (deployJava.installLatestJRE()) {if (deployJava.launch(url)) {}}} else {if (deployJava.launch(url)) {}}"
+                                        href="javascript:var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + 'client/#{deployedExp.experiment.state.url}.jnlp'; if (!deployJava.isWebStartInstalled('1.6')) {if (deployJava.installLatestJRE()) {if (deployJava.launch(url)) {}}} else {if (deployJava.launch(url)) {}}"
                                         title="#{statusBundle['tooltip.experiment.launch']}"
                                         rel="#{statusBundle['tooltip.experiment.launch']}"> <img
                                             src="resources/images/webstart.png" />
