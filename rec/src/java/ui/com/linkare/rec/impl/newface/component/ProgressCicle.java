@@ -7,7 +7,6 @@ package com.linkare.rec.impl.newface.component;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Logger;
 
 import javax.swing.Icon;
 import javax.swing.JLabel;
@@ -22,8 +21,6 @@ public class ProgressCicle extends JLabel {
 	 * 
 	 */
 	private static final long serialVersionUID = -6785925675296083188L;
-
-	private static final Logger log = Logger.getLogger(ProgressCicle.class.getName());
 
 	public enum State {
 		IDLE, RUNNING
