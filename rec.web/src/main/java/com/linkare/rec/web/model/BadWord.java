@@ -4,14 +4,13 @@
  */
 package com.linkare.rec.web.model;
 
-import com.linkare.commons.jpa.DefaultDomainObject;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+import com.linkare.commons.jpa.DefaultDomainObject;
 
 /**
  *
@@ -23,8 +22,13 @@ import javax.persistence.Table;
 	@NamedQuery(name = BadWord.COUNT_ALL_QUERYNAME, query = BadWord.COUNT_ALL_QUERY),
         @NamedQuery(name = BadWord.FIND_FOR_LOCALE_QUERYNAME, query = BadWord.FIND_FOR_LOCALE_QUERY)})
 public class BadWord extends DefaultDomainObject{
-    
-    public static final String QUERY_PARAM_LOCALE = "locale";
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public static final String QUERY_PARAM_LOCALE = "locale";
     
     public static final String FIND_ALL_QUERYNAME = "BadWord.findAll";
     public static final String FIND_ALL_QUERY = "select bw from BadWord bw";
@@ -35,24 +39,12 @@ public class BadWord extends DefaultDomainObject{
     public static final String FIND_FOR_LOCALE_QUERYNAME = "BadWord.findForLocale";
     public static final String FIND_FOR_LOCALE_QUERY = "Select bw from BadWord bw WHERE bw.locale = :" + QUERY_PARAM_LOCALE;
     
-     @Id
-    @GeneratedValue
-    @Column(name = "ID", unique = true, nullable = false)
-    private long badWordId;
 
     @Column(name = "REGEX", length = 254)
     private String regex;
 
     @Column(name = "LOCALE", length = 20)
     private String locale;
-
-    public long getBadWordId() {
-        return badWordId;
-    }
-
-    public void setBadWordId(long badWordId) {
-        this.badWordId = badWordId;
-    }
 
     public String getLocale() {
         return locale;
