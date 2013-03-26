@@ -3,11 +3,16 @@ package com.linkare.rec.web.config;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlType
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Apparatus extends DisplayNode {
 
 	/**
@@ -16,38 +21,95 @@ public class Apparatus extends DisplayNode {
 	 */
 	private boolean virtual = false;
 
-	// FIXME - HFernandes - Please set it to null or document why we need this
-	// anyhow!
+	/**
+	 * The title of the experiment - defined as a key in a ReCResourceBundle
+	 */
 	private String displayStringBundleKey = "";
 
+	/**
+	 * The description text to appear in the experiment background in the
+	 * experiment content pane on connect
+	 */
 	private String descriptionStringBundleKey = "";
 
+	/**
+	 * The icon for the experiment, defined as a ReCResourceBundle bundle key
+	 */
 	private String iconLocationBundleKey = "";
 
+	/**
+	 * The background image of the experiment description pane, defined as a
+	 * ReCResourceBundle bundle key
+	 */
 	private String desktopLocationBundleKey = "";
 
+	/**
+	 * The tooltip for the experiment, defined as a ReCResourceBundle bundle
+	 * key. Currently not used by the new interface
+	 */
 	private String toolTipBundleKey = "";
 
+	/**
+	 * The class that implements ExpDataModel in elab, defined as a
+	 * ReCResourceBundle bundle key This is not required and it is considered an
+	 * extension point
+	 */
 	private String dataModelClassLocationBundleKey = "";
 
-	// private String videoLocation = "";
-
+	/**
+	 * The class for a header display to put on experiments, defined as a
+	 * ReCResourceBundle bundle key Currently not used, not required and should
+	 * be considered as an extension point
+	 */
 	private String headerDisplayClassLocationBundleKey = "";
 
+	/**
+	 * The class that should implement DisplayFactory interface defined as a
+	 * ReCResourceBundle bundle key This is not required, and should be regarded
+	 * as an extension point
+	 */
 	private String displayFactoryClassLocationBundleKey = "";
 
+	/**
+	 * The class that should implement ICustomizer interface defined as a
+	 * ReCResourceBundle bundle key This is required!
+	 */
 	private String customizerClassLocationBundleKey = "";
 
+	/**
+	 * The unique ID of the experiment as defined in the HardwareInfo data
+	 * structure in ReC
+	 */
 	private String location = "";
 
+	/**
+	 * Substructure defining the configuration for media integration in the
+	 * experiment, mainly the video
+	 */
 	private MediaConfig mediaConfig = null;
 
+	/**
+	 * The default acquisition configurations. Currently not used!
+	 */
 	private List<DefaultAcquisitionConfig> defaultAcquisitionConfig = new ArrayList<DefaultAcquisitionConfig>();
 
+	/**
+	 * The list of displays to use in the experiment
+	 */
 	private List<Display> display = new ArrayList<Display>();
 
+	/**
+	 * The list of URL's to present in the apparatus description pane. For now,
+	 * the GUI only shows the first element, although this is expected to
+	 * change.
+	 */
 	private List<WebResource> webResource = new ArrayList<WebResource>();
 
+	/**
+	 * The localization ReCResourceBundles to use. Defined by a name that should
+	 * follow some naming conventions to avoid collision with other bundles in
+	 * the ReC client
+	 */
 	private List<LocalizationBundle> localizationBundle = new ArrayList<LocalizationBundle>();
 
 	public Apparatus() {
@@ -100,14 +162,6 @@ public class Apparatus extends DisplayNode {
 	}
 
 	/**
-	 * @return the videoLocation
-	 */
-	// Delete
-	// @XmlAttribute
-	// public String getVideoLocation() {
-	// return videoLocation;
-	// }
-	/**
 	 * @return the headerDisplayClassLocationBundleKey
 	 */
 	@XmlAttribute
@@ -139,7 +193,6 @@ public class Apparatus extends DisplayNode {
 		return location;
 	}
 
-	// Bruno tem de estar como XmlElement ou assim????
 	/**
 	 * @return the mediaConfig
 	 */
@@ -151,6 +204,7 @@ public class Apparatus extends DisplayNode {
 	/**
 	 * @return the defaultAcquisitionConfig
 	 */
+	@XmlElement
 	public List<DefaultAcquisitionConfig> getDefaultAcquisitionConfig() {
 		return defaultAcquisitionConfig;
 	}
@@ -158,6 +212,7 @@ public class Apparatus extends DisplayNode {
 	/**
 	 * @return the display
 	 */
+	@XmlElement
 	public List<Display> getDisplay() {
 		return display;
 	}
@@ -165,6 +220,7 @@ public class Apparatus extends DisplayNode {
 	/**
 	 * @return the webResource
 	 */
+	@XmlElement
 	public List<WebResource> getWebResource() {
 		return webResource;
 	}
@@ -172,6 +228,7 @@ public class Apparatus extends DisplayNode {
 	/**
 	 * @return the localizationBundle
 	 */
+	@XmlElement
 	public List<LocalizationBundle> getLocalizationBundle() {
 		return localizationBundle;
 	}
@@ -227,14 +284,6 @@ public class Apparatus extends DisplayNode {
 		this.dataModelClassLocationBundleKey = dataModelClassLocationBundleKey;
 	}
 
-	/**
-	 * @param videoLocation
-	 *            the videoLocation to set
-	 */
-	// Delete
-	// public void setVideoLocation(String videoLocation) {
-	// this.videoLocation = videoLocation;
-	// }
 	/**
 	 * @param headerDisplayClassLocationBundleKey
 	 *            the headerDisplayClassLocationBundleKey to set

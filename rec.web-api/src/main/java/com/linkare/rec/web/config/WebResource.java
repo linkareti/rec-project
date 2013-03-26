@@ -8,11 +8,11 @@ public class WebResource extends DisplayNode {
 
 	private boolean internalBrowser = false;
 
-	private String toolTipLocationBundleKey = "";
+	private String toolTipLocationBundleKey;
 
 	private String displayStringBundleKey;
 
-	private String iconLocationBundleKey = "";
+	private String iconLocationBundleKey;
 
 	private String locationBundleKey;
 

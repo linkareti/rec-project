@@ -10,18 +10,19 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class ReCFaceConfig extends AbstractConfigBean {
 
 	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(ReCFaceConfig.class
 			.getName());
-
-	private boolean autoConnectLab = false;
 
 	private boolean showVideoFrame = false;
 
@@ -107,14 +108,6 @@ public class ReCFaceConfig extends AbstractConfigBean {
 
 	// -------------------------------------------------------------------------
 	// Getters
-
-	/**
-	 * @return the autoConnectLab
-	 */
-	@XmlAttribute
-	public boolean isAutoConnectLab() {
-		return autoConnectLab;
-	}
 
 	/**
 	 * @return the showVideoFrame
@@ -252,15 +245,6 @@ public class ReCFaceConfig extends AbstractConfigBean {
 		return labList;
 	}
 
-	// Bruno tem de estar como XmlElement ou assim????
-	/**
-	 * @return the mediaConfig
-	 */
-	// Delete
-	// @XmlElement
-	// public MediaConfig getMediaConfig() {
-	// return mediaConfig;
-	// }
 	/**
 	 * @return the webResource
 	 */
@@ -312,15 +296,6 @@ public class ReCFaceConfig extends AbstractConfigBean {
 		this.appPreferredHeight = appPreferredHeight;
 	}
 
-	/**
-	 * @param autoConnectLab
-	 *            the autoConnectLab to set
-	 */
-	public void setAutoConnectLab(final boolean autoConnectLab) {
-		changeSupport.firePropertyChange("autoConnectLab", this.autoConnectLab,
-				autoConnectLab);
-		this.autoConnectLab = autoConnectLab;
-	}
 
 	/**
 	 * @param showVideoFrame
@@ -489,14 +464,6 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	}
 
 	/**
-	 * @param mediaConfig
-	 *            the mediaConfig to set
-	 */
-	// Delete
-	// public void setMediaConfig(MediaConfig mediaConfig) {
-	// this.mediaConfig = mediaConfig;
-	// }
-	/**
 	 * @param lab
 	 *            the lab to set
 	 */
@@ -530,9 +497,7 @@ public class ReCFaceConfig extends AbstractConfigBean {
 			return false;
 		}
 		final ReCFaceConfig other = (ReCFaceConfig) obj;
-		if (autoConnectLab != other.autoConnectLab) {
-			return false;
-		}
+
 		if (showVideoFrame != other.showVideoFrame) {
 			return false;
 		}
@@ -624,7 +589,6 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	@Override
 	public int hashCode() {
 		int hash = 5;
-		hash = 59 * hash + (autoConnectLab ? 1 : 0);
 		hash = 59 * hash + (showVideoFrame ? 1 : 0);
 		hash = 59 * hash + (enableVideoFrame ? 1 : 0);
 		hash = 59 * hash + (enableLoginPassword ? 1 : 0);
