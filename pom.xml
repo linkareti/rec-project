@@ -8,7 +8,7 @@
 	<groupId>com.linkare</groupId>
 	<artifactId>rec.web-api</artifactId>
 	<name>rec.web-api</name>
-	<version>1.1.0-SNAPSHOT</version>
+	<version>1.1.1-SNAPSHOT</version>
 	<scm>
 		<connection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/branches/rel-web-api-1.1.x</connection>
 		<developerConnection>scm:svn:https://svn.linkare.com/internal/rec-project/rec/branches/rel-web-api-1.1.x</developerConnection>
