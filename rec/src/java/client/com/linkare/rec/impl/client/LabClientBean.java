@@ -285,18 +285,14 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 		}
 	}
 
-	private void doConnect(final String MCobjAddress) {
-		/*
-		 * String MCobjAddress="com/linkare/rec/MultiCastController";
-		 * if(System.getProperty("Rec.MultiCastController.Address")!=null)
-		 * MCobjAddress=System.getProperty("Rec.MultiCastController.Address");
-		 */
+	private void doConnect(final String mccontrollerCORBALocAddress) {
+		
 		stop = false;
 		connecting = true;
 
 		try {
 			fireLabConnectorListenerLabStatusChanged(LabConnectorEvent.STATUS_CONNECTING);
-			final org.omg.CORBA.Object o = ORBBean.getORBBean().getRemoteCORBALocObject(MCobjAddress);
+			final org.omg.CORBA.Object o = ORBBean.getORBBean().getRemoteCORBALocObject(mccontrollerCORBALocAddress);
 
 			if (stop) {
 				synchronized (obj) {

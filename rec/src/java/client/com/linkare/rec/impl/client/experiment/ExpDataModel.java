@@ -12,7 +12,6 @@ import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.DateTime;
 import com.linkare.rec.impl.data.PhysicsValueUtil;
 import com.linkare.rec.impl.events.NewSamplesEvent;
-import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 
 /**
  * Client side abstraction of the MVC pattern model for an experiment's data
@@ -36,28 +35,28 @@ public interface ExpDataModel {
 	 * 
 	 * @param listener The listener to register.
 	 */
-	public void addExpDataModelListener(ExpDataModelListener listener);
+	void addExpDataModelListener(ExpDataModelListener listener);
 
 	/**
 	 * Removes ExpDataModelListener from the list of listeners.
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public void removeExpDataModelListener(ExpDataModelListener listener);
+	void removeExpDataModelListener(ExpDataModelListener listener);
 
 	/**
 	 * Getter for property channelCount.
 	 * 
 	 * @return Value of property channelCount.
 	 */
-	public int getChannelCount();
+	int getChannelCount();
 
 	/**
 	 * Getter for property totalSamples.
 	 * 
 	 * @return Value of property totalSamples.
 	 */
-	public int getTotalSamples();
+	int getTotalSamples();
 
 	/**
 	 * A way to access the configuration being used for this experiment
@@ -65,7 +64,7 @@ public interface ExpDataModel {
 	 * @return The {@link HardwareAcquisitionConfig} describing this
 	 *         experiment's parameters
 	 */
-	public HardwareAcquisitionConfig getAcquisitionConfig();
+	HardwareAcquisitionConfig getAcquisitionConfig();
 
 	/**
 	 * A simpler way to access the configuration of a single channel
@@ -75,7 +74,7 @@ public interface ExpDataModel {
 	 * @return The {@link ChannelAcquisitionConfig} describing the channel with
 	 *         the referred name, or null if not found
 	 */
-	public ChannelAcquisitionConfig getChannelConfig(String channelName);
+	ChannelAcquisitionConfig getChannelConfig(String channelName);
 
 	/**
 	 * A way to obtain the configuration of a single channel by its index
@@ -85,7 +84,7 @@ public interface ExpDataModel {
 	 * @return The {@link ChannelAcquisitionConfig} describing the channel with
 	 *         the referred name
 	 */
-	public ChannelAcquisitionConfig getChannelConfig(int channelIndex);
+	ChannelAcquisitionConfig getChannelConfig(int channelIndex);
 
 	/**
 	 * A way to obtain the i18n independent channel name according to the
@@ -95,7 +94,7 @@ public interface ExpDataModel {
 	 *            the {@link HardwareInfo} order of described channels
 	 * @return The i18n independent name of the channel
 	 */
-	public String getChannelName(int channelIndex);
+	String getChannelName(int channelIndex);
 
 	/**
 	 * A way to obtain the index (according to {@link HardwareInfo} described
@@ -105,7 +104,7 @@ public interface ExpDataModel {
 	 * @return The index of the channel according to {@link HardwareInfo}
 	 *         described order
 	 */
-	public int getChannelIndex(String channelName);
+	int getChannelIndex(String channelName);
 
 	/**
 	 * This method calculates the timestamp of a sample, based on its index, the
@@ -115,7 +114,7 @@ public interface ExpDataModel {
 	 * @param sampleIndex The index of the sample
 	 * @return The {@link DateTime} of the sample at the referenced index
 	 */
-	public com.linkare.rec.data.synch.DateTime getTimeStamp(int sampleIndex);
+	com.linkare.rec.data.synch.DateTime getTimeStamp(int sampleIndex);
 
 	/**
 	 * This method provides a way to fetch the data value and error value for a
@@ -129,7 +128,7 @@ public interface ExpDataModel {
 	 * 
 	 * @see PhysicsValueUtil
 	 */
-	public com.linkare.rec.data.acquisition.PhysicsValue getValueAt(int sampleIndex, int channelIndex);
+	com.linkare.rec.data.acquisition.PhysicsValue getValueAt(int sampleIndex, int channelIndex);
 
 	/**
 	 * Access to the underlying hardware familiar name
@@ -137,21 +136,21 @@ public interface ExpDataModel {
 	 * @return the i18n independent familiar name of the apparatus (the hardware
 	 *         familiar name, according to the {@link HardwareInfo} structure)
 	 */
-	public String getApparatusName();
+	String getApparatusName();
 
 	/**
 	 * Method to "pause" the acquisition... This does not actually pause the
 	 * acquisition at the remote end, but rather stops receiving data and
 	 * sending events
 	 */
-	public void pause();
+	void pause();
 
 	/**
 	 * Method to "resume" the acquisition... This does not actually resume the
 	 * acquisition at the remote end, but rather reenables the data receiving
 	 * and event communication to the {@link ExpDataModelListener}'s registered
 	 */
-	public void play();
+	void play();
 
 	/**
 	 * Method to "stop" the acquisition... This method does not actually stop
@@ -160,7 +159,7 @@ public interface ExpDataModel {
 	 * that kind of functionality) but rather stops receiving data and
 	 * deregisters from the remote endpoint
 	 */
-	public void stopNow();
+	void stopNow();
 
 	/**
 	 * Method to determine if remote experiment is still running.
@@ -169,9 +168,7 @@ public interface ExpDataModel {
 	 *         if it is stopped already, because it reached the end of data,
 	 *         someone stopped the hardware or there was a remote end error
 	 */
-	public boolean isRunning();
-
-	public void setDpwDataSource(DataProducerWrapper dpw) throws MaximumClientsReached;
+	boolean isRunning();
 
 	/**
 	 * Getter for property dataAvailable.
@@ -181,7 +178,7 @@ public interface ExpDataModel {
 	 *         {@link ExpDataModelListener#newSamples(NewExpDataEvent)}. False
 	 *         if the experiment does not have data acquired yet
 	 */
-	public boolean isDataAvailable();
+	boolean isDataAvailable();
 
 	/**
 	 * The ID of the experiment, as assigned by the multicast controller
@@ -189,6 +186,12 @@ public interface ExpDataModel {
 	 * @return Returns the object ID of the remote dataproducer, so it is a
 	 *         unique ID for the experiment
 	 */
-	public String getDataProducerName();
+	String getDataProducerName();
+
+	/**
+	 * @param remoteDataProducer
+	 * @throws MaximumClientsReached
+	 */
+	void setDpwDataSource(DataProducer remoteDataProducer) throws MaximumClientsReached;
 
 }

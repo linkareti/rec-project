@@ -6,6 +6,8 @@
 
 package com.linkare.rec.impl.client.apparatus;
 
+import com.linkare.rec.acquisition.DataProducer;
+
 /**
  * @author André Neto - LEFT - IST
  * @param <T>
@@ -18,7 +20,7 @@ public class ApparatusConnectorEvent extends java.util.EventObject {
 	private static final long serialVersionUID = -7071882058319116578L;
 	private String message = null;
 	private long millis_to_lock_success = 0;
-	private com.linkare.rec.impl.wrappers.DataProducerWrapper dataSource = null;
+	private DataProducer dataSource = null;
 
 	private String key;
 	private Object value;
@@ -34,7 +36,7 @@ public class ApparatusConnectorEvent extends java.util.EventObject {
 	}
 
 	public ApparatusConnectorEvent(final Object source,
-			final com.linkare.rec.impl.wrappers.DataProducerWrapper dataSource) {
+			final DataProducer dataSource) {
 		super(source);
 		// this.millis_to_lock_success = millis_to_lock_success;
 		this.dataSource = dataSource;
@@ -48,7 +50,7 @@ public class ApparatusConnectorEvent extends java.util.EventObject {
 		return millis_to_lock_success;
 	}
 
-	public com.linkare.rec.impl.wrappers.DataProducerWrapper getDataSource() {
+	public DataProducer getDataSource() {
 		return dataSource;
 	}
 
