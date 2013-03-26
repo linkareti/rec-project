@@ -14,6 +14,7 @@ import javax.jnlp.ServiceManager;
 import javax.jnlp.UnavailableServiceException;
 import javax.swing.JOptionPane;
 
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.newface.component.media.VideoViewerController;
 import com.linkare.rec.impl.newface.utils.PreferencesUtils;
 import com.linkare.rec.impl.newface.utils.ZipExtractor;
@@ -120,19 +121,19 @@ public abstract class Installer implements Observer {
 
 	protected void printOSInfo() {
 
-		log.fine("jna.library.path: " + System.getProperty("jna.library.path"));
+		log.fine("jna.library.path: " + ReCSystemProperty.JNA_LIBRAY_PATH.getValue());
 
-		log.fine("############ OS NAME: " + System.getProperty("os.name"));
-		log.fine("############ OS ARCH: " + System.getProperty("os.arch"));
-		log.fine("############ OS VERSION: " + System.getProperty("os.version"));
+		log.fine("############ OS NAME: " + ReCSystemProperty.OS_NAME.getValue());
+		log.fine("############ OS ARCH: " + ReCSystemProperty.OS_ARCH.getValue());
+		log.fine("############ OS VERSION: " + ReCSystemProperty.OS_VERSION.getValue());
 	}
 
 	private void installNativeLibs() throws IOException {
 
-		final String userHome = System.getProperty("user.home");
+		final String userHome = ReCSystemProperty.USER_HOME.getValue();
 		log.fine("User home is " + userHome);
 
-		final String pluginsPath = userHome + File.separator + System.getProperty("vlc.plugins.destdir");
+		final String pluginsPath = userHome + File.separator + ReCSystemProperty.VLC_PLUGINS_DESTDIR.getValue();
 		log.fine("Plugins copied to " + pluginsPath);
 
 		final File pluginsDir = new File(pluginsPath);
@@ -142,7 +143,7 @@ public abstract class Installer implements Observer {
 
 			// TODO fazer de forma a substituir sempre os ficheiros que
 			// alteraram (filesize, md5sum???)
-			final String pluginsResourceName = System.getProperty("vlc.plugins.filename");
+			final String pluginsResourceName = ReCSystemProperty.VLC_PLUGINS_FILENAME.getValue();
 			log.fine("Resource name is " + pluginsResourceName);
 
 			final ClassLoader loader = Installer.class.getClassLoader();
@@ -222,7 +223,7 @@ public abstract class Installer implements Observer {
 
 		public Uninstaller() {
 
-			final String userHome = System.getProperty("user.home");
+			final String userHome = ReCSystemProperty.USER_HOME.getValue();
 			log.fine("User home is " + userHome);
 
 			final String eLabPath = userHome + File.separator + ".eLab";

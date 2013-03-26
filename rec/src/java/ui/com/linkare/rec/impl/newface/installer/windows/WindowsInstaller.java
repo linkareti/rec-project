@@ -7,6 +7,7 @@ import java.io.InputStream;
 import javax.jnlp.UnavailableServiceException;
 import javax.swing.JOptionPane;
 
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.newface.installer.Installer;
 import com.linkare.rec.impl.newface.utils.ZipExtractor;
 
@@ -66,9 +67,9 @@ public class WindowsInstaller extends Installer {
 		log.fine("Path of temporary xvid.zip temporary file: " + path);
 
 		final ZipExtractor extractor = new ZipExtractor(path);
-		extractor.extractFiles(System.getProperty("user.home"));
+		extractor.extractFiles(ReCSystemProperty.USER_HOME.getValue());
 
-		final String xvidPath = System.getProperty("user.home") + File.separator + "xvid.exe";
+		final String xvidPath = ReCSystemProperty.USER_HOME.getValue() + File.separator + "xvid.exe";
 
 		log.fine("xvid installer extracted to " + xvidPath);
 		log.fine("Running xvid installer...");
