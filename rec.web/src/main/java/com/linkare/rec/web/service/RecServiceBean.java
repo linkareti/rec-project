@@ -37,7 +37,7 @@ public class RecServiceBean implements RecServiceRemote {
         final List<BadWord> badWords = entityManager.createNamedQuery(BadWord.FIND_FOR_LOCALE_QUERYNAME).setParameter(BadWord.QUERY_PARAM_LOCALE, locale).getResultList();
 
         for (final BadWord badword : badWords) {
-            result.add(new BadWordDTO(badword.getBadWordId(), badword.getLocale(), badword.getRegex()));
+            result.add(new BadWordDTO(badword.getIdInternal(), badword.getLocale(), badword.getRegex()));
         }
         return result;
     }
@@ -48,7 +48,7 @@ public class RecServiceBean implements RecServiceRemote {
         final List<BadWord> badWords = entityManager.createNamedQuery(BadWord.FIND_ALL_QUERYNAME).getResultList();
 
         for (final BadWord badword : badWords) {
-            result.add(new BadWordDTO(badword.getBadWordId(), badword.getLocale(), badword.getRegex()));
+            result.add(new BadWordDTO(badword.getIdInternal(), badword.getLocale(), badword.getRegex()));
         }
         return result;
     }
