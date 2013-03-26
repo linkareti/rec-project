@@ -7,7 +7,12 @@ package com.linkare.rec.web;
  */
 public class UnknownDomainException extends Exception {
 
-    public UnknownDomainException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2892502285131619123L;
+
+	public UnknownDomainException() {
 	super();
     }
 

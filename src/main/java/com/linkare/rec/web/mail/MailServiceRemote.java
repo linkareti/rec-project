@@ -10,7 +10,7 @@ import javax.jws.WebService;
  * @author Bruno Catarino - Linkare TI
  * 
  */
-@WebService(name = "MailServiceWS", serviceName = "rec-services", portName = "mail", targetNamespace = "http://webservices.linkare.com/rec")
+@WebService(name = "MailServiceWS", targetNamespace = "http://webservices.linkare.com/rec")
 public interface MailServiceRemote {
 
     /**

@@ -14,7 +14,7 @@ import javax.jws.WebService;
  *
  * @author Gedsimon Pereira - Linkare TI
  */
-@WebService(name = "RecServiceWS", serviceName = "rec-services", portName = "recservice", targetNamespace = "http://webservices.linkare.com/rec")
+@WebService(name = "RecServiceWS",  targetNamespace = "http://webservices.linkare.com/rec")
 public interface RecServiceRemote {
     
     @WebMethod
