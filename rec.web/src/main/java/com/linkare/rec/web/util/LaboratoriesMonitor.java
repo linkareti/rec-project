@@ -61,7 +61,7 @@ public final class LaboratoriesMonitor {
 			labsNotificationListener = new LabsNotificationListener();
 			laboratoryService = JndiHelper.getLaboratoryService();
 
-			initJMXConnectionHandlersMap();
+			refreshLabConnectionHandlersMap();
 			connectWithLabs(true);
 
 			executorService = Executors
@@ -100,23 +100,35 @@ public final class LaboratoriesMonitor {
 			@Override
 			public void run() {
 				try {
+					refreshLabConnectionHandlersMap();
 					connectWithLabs(false);
 				} catch (Throwable e) {
 					LOG.error(e.getMessage(), e);
 				}
 			}
+
+		
 		};
 	}
 
-	private void initJMXConnectionHandlersMap() {
-
-		for (final Laboratory laboratory : getLaboratoriesToMonitor()) {
-			if (laboratory.getJmxURL() != null) {
-				labsJMXConnectionHandler.put(laboratory.getName(),
-						createLabJMXConnectionHandler(laboratory));
+	private void refreshLabConnectionHandlersMap() {
+		
+		Collection<Laboratory> laboratoriesToMonitor = getLaboratoriesToMonitor();
+		for (final Laboratory laboratory : laboratoriesToMonitor) {
+			if(laboratory.getJmxURL()!=null && !labsJMXConnectionHandler.containsKey(laboratory.getName())) {
+				labsJMXConnectionHandler.put(laboratory.getName(), createLabJMXConnectionHandler(laboratory));
 			}
 		}
+		
+		for (Entry<String, LabJMXConnetionHandler> jmxConnectionHandler : labsJMXConnectionHandler.entrySet()) {
+			if(!getLaboratoriesToMonitor().contains(jmxConnectionHandler.getValue().getLaboratory())) {
+				jmxConnectionHandler.getValue().getJmxConnectionHandler().closeJMXConnector();
+				labsJMXConnectionHandler.remove(jmxConnectionHandler.getKey());
+			}
+		}
+		
 	}
+	
 
 	private LabJMXConnetionHandler createLabJMXConnectionHandler(
 			final Laboratory laboratory) {

@@ -69,7 +69,8 @@ public final class JMXConnectionHandler {
 		    result = true;
 		} catch (Exception e) {
 		    numberOfRetries.incrementAndGet();
-		    LOG.error(String.format("Error creating JMXCConnector to url: %s", jmxURL), e);
+		    LOG.error(String.format("Error creating JMXCConnector to url: %s", jmxURL));
+		    LOG.debug(e.getMessage(),e);
 		    closeJMXConnector();
 		} finally {
 		    mainLock.unlock();
