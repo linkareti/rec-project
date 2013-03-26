@@ -1,5 +1,7 @@
 package com.linkare.rec.data.metadata;
 
+import java.util.Arrays;
+
 import org.omg.CORBA.portable.IDLEntity;
 
 import com.linkare.rec.acquisition.WrongConfigurationException;
@@ -8,6 +10,7 @@ import com.linkare.rec.data.config.ParameterConfig;
 import com.linkare.rec.data.synch.Frequency;
 import com.linkare.rec.impl.data.FrequencyUtil;
 import com.linkare.rec.impl.exceptions.WrongConfigurationExceptionConstants;
+import com.linkare.rec.impl.utils.ValidationErrors;
 
 public final class ChannelInfo implements IDLEntity {
 	/**
@@ -289,7 +292,7 @@ public final class ChannelInfo implements IDLEntity {
 	/**
 	 * Setter for property actualSelectedFrequencyIndex.
 	 * 
-	 * @param actualSelectedFrequencyIndex New value of property
+	 * @param selectedFrequency New value of property
 	 *            actualSelectedFrequencyIndex.
 	 */
 	public void setSelectedFrequency(final Frequency selectedFrequency) {
@@ -439,46 +442,34 @@ public final class ChannelInfo implements IDLEntity {
 	 * (channelParameters[i].getParameterName())); } }
 	 */
 
-	public void validateConfig(final ChannelAcquisitionConfig config) throws WrongConfigurationException {
+	public void validateConfig(final ChannelAcquisitionConfig config, ValidationErrors errors) throws WrongConfigurationException {
 		// check selected frequency
 
-		boolean freq_ok = false;
-		if (config.getSelectedFrequency() == null) {
-			// frequency not defined... don't know better
-			freq_ok = true;
-		} else if (frequencies == null) {
-			// don't know better
-			freq_ok = true;
-
-		} else {
-			for (int i = 0; i < frequencies.length && !freq_ok; i++) {
-				freq_ok = freq_ok || FrequencyUtil.isInScale(config.getSelectedFrequency(), frequencies[i]);
+		if (config.getSelectedFrequency() != null && frequencies != null) {
+			boolean frequencyOk = false;
+			for (int i = 0; i < frequencies.length && !frequencyOk; i++) {
+				frequencyOk = frequencyOk || FrequencyUtil.isInScale(config.getSelectedFrequency(), frequencies[i]);
+			}
+			if (!frequencyOk) {
+				errors.addError(
+						"frequency = " + config.getSelectedFrequency() + ", scales "
+								+ Arrays.deepToString(frequencies),
+						WrongConfigurationExceptionConstants.FREQUENCY_NOT_IN_SCALES);
 			}
 		}
 
-		if (!freq_ok) {
-			throw new WrongConfigurationException(WrongConfigurationExceptionConstants.FREQUENCY_NOT_IN_SCALES);
-		}
-
-		boolean params_ok = true;
-		if (config.getSelectedChannelParameters() == null) {
-			// params not defined... don't know better
-			params_ok = true;
-		} else if (channelParameters == null) {
-			// don't know better
-			params_ok = true;
-		} else {
-			for (int i = 0; i < channelParameters.length && params_ok; i++) {
-				final String param_value = config.getSelectedChannelParameterValue(channelParameters[i]
-						.getParameterName());
-				if (param_value != null) {
-					params_ok = params_ok && channelParameters[i].isSelectedValueValid(param_value);
+		if (config.getSelectedChannelParameters() != null && channelParameters != null) {
+			for (int i = 0; i < channelParameters.length; i++) {
+				String parameterName = channelParameters[i].getParameterName();
+				final String paramValue = config.getSelectedChannelParameterValue(parameterName);
+				if (paramValue != null) {
+					boolean paramOk = channelParameters[i].isSelectedValueValid(paramValue);
+					if (!paramOk) {
+						errors.addError("Parameter '" + parameterName + "' with value '" + paramValue + "' is invalid "
+								+ channelParameters[i], WrongConfigurationExceptionConstants.PARAMETER_INVALID);
+					}
 				}
 			}
-		}
-
-		if (!params_ok) {
-			throw new WrongConfigurationException(WrongConfigurationExceptionConstants.PARAMETER_INVALID);
 		}
 
 		// check bigger then now, at least, or null
@@ -486,27 +477,31 @@ public final class ChannelInfo implements IDLEntity {
 		// config.getTimeStart();
 
 		// check total_samples with samplingScale
-		final int total_samples = config.getTotalSamples();
+		final int totalSamples = config.getTotalSamples();
+		
+		if (samplingScale!=null && !(totalSamples >= samplingScale.getMinSamples() && totalSamples <= samplingScale.getMaxSamples() && ((totalSamples - samplingScale
+				.getMinSamples()) % samplingScale.getStep()) == 0)) {
+			errors.addError(
+					"total samples " + totalSamples + " is not in the correct scale [" + samplingScale.getMinSamples()
+							+ "," + samplingScale.getMaxSamples() + "]",
+					WrongConfigurationExceptionConstants.SAMPLING_SCALE_INVALID);
+		}
 
-		if (samplingScale != null) {
-			if (!(total_samples >= samplingScale.getMinSamples() && total_samples <= samplingScale.getMaxSamples() && ((total_samples - samplingScale
-					.getMinSamples()) % samplingScale.getStep()) == 0)) {
-				throw new WrongConfigurationException(WrongConfigurationExceptionConstants.SAMPLING_SCALE_INVALID);
+		final com.linkare.rec.data.metadata.Scale selectedScale = config.getSelectedScale();
+		if (selectedScale != null) {
+			boolean scaleOk = false;
+			for (int i = 0; i < scales.length && !scaleOk; i++) {
+				scaleOk = scaleOk || selectedScale.equals(scales[i]);
 			}
+			if (!scaleOk) {
+				errors.addError(
+						"scale = " + selectedScale + ", scales "
+								+ Arrays.deepToString(scales),
+						WrongConfigurationExceptionConstants.SCALE_INVALID);
+			}
+			
 		}
 
-		final com.linkare.rec.data.metadata.Scale scale_selected_in_conf = config.getSelectedScale();
-		if (scale_selected_in_conf == null) {
-			return;
-		}
-
-		boolean scales_ok = false;
-		for (int i = 0; i < scales.length && !scales_ok; i++) {
-			scales_ok = scales_ok || scale_selected_in_conf.equals(scales[i]);
-		}
-		if (!scales_ok) {
-			throw new WrongConfigurationException(WrongConfigurationExceptionConstants.SCALE_INVALID);
-		}
 
 	}
 

@@ -1,10 +1,13 @@
 package com.linkare.rec.data.metadata;
 
+import java.util.Arrays;
+
 import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.config.ParameterConfig;
 import com.linkare.rec.impl.data.FrequencyUtil;
 import com.linkare.rec.impl.exceptions.WrongConfigurationExceptionConstants;
+import com.linkare.rec.impl.utils.ValidationErrors;
 
 public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 
@@ -508,73 +511,57 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 * (acq_header.getSamplesInfo(i)); } }
 	 */
 	public void validateConfig(final HardwareAcquisitionConfig config) throws WrongConfigurationException {
+		
+		ValidationErrors errors = new ValidationErrors();
+
 		// check selected frequency
-
-		boolean freq_ok = false;
-		if (config.getSelectedFrequency() == null) {
-			// frequency not defined... don't know better
-			freq_ok = true;
-		} else if (hardwareFrequencies == null) {
-			// don't know better
-			freq_ok = true;
-
-		} else {
+		if (config.getSelectedFrequency() != null && hardwareFrequencies != null) {
+			boolean freq_ok = false;
 			for (int i = 0; i < hardwareFrequencies.length && !freq_ok; i++) {
 				freq_ok = freq_ok || FrequencyUtil.isInScale(config.getSelectedFrequency(), hardwareFrequencies[i]);
 			}
+			if (!freq_ok) {
+				errors.addError(
+						"frequency = " + config.getSelectedFrequency() + ", scales "
+								+ Arrays.deepToString(hardwareFrequencies),
+						WrongConfigurationExceptionConstants.FREQUENCY_NOT_IN_SCALES);
+			}
 		}
 
-		if (!freq_ok) {
-			throw new WrongConfigurationException(WrongConfigurationExceptionConstants.FREQUENCY_NOT_IN_SCALES);
-		}
-
-		boolean params_ok = true;
-		if (config.getSelectedHardwareParameters() == null) {
-			// params not defined... don't know better
-			params_ok = true;
-		} else if (hardwareParameters == null) {
-			// don't know better
-			params_ok = true;
-		} else {
-			for (int i = 0; i < hardwareParameters.length && params_ok; i++) {
-				final String param_value = config.getSelectedHardwareParameterValue(hardwareParameters[i]
-						.getParameterName());
-				if (param_value != null) {
-					params_ok = params_ok && hardwareParameters[i].isSelectedValueValid(param_value);
+		// check selected parameters
+		if (config.getSelectedHardwareParameters() != null && hardwareParameters != null) {
+			for (int i = 0; i < hardwareParameters.length; i++) {
+				String parameterName = hardwareParameters[i].getParameterName();
+				final String paramValue = config.getSelectedHardwareParameterValue(parameterName);
+				if (paramValue != null) {
+					boolean paramOk = hardwareParameters[i].isSelectedValueValid(paramValue);
+					if (!paramOk) {
+						errors.addError("Parameter '" + parameterName + "' with value '" + paramValue + "' is invalid "
+								+ hardwareParameters[i], WrongConfigurationExceptionConstants.PARAMETER_INVALID);
+					}
 				}
 			}
 		}
 
-		if (!params_ok) {
-			throw new WrongConfigurationException(WrongConfigurationExceptionConstants.PARAMETER_INVALID);
-		}
-
-		// check bigger then now, at least, or null
-		// not now! Maybe at a later time I'll have time to do it!
-		// config.getTimeStart();
-
 		// check total_samples with samplingScale
-		final int total_samples = config.getTotalSamples();
+		final int totalSamples = config.getTotalSamples();
 
-		if (!(total_samples >= samplingScale.getMinSamples() && total_samples <= samplingScale.getMaxSamples() && ((total_samples - samplingScale
+		if (!(totalSamples >= samplingScale.getMinSamples() && totalSamples <= samplingScale.getMaxSamples() && ((totalSamples - samplingScale
 				.getMinSamples()) % samplingScale.getStep()) == 0)) {
-			throw new WrongConfigurationException(WrongConfigurationExceptionConstants.SAMPLING_SCALE_INVALID);
+			errors.addError(
+					"total samples " + totalSamples + " is not in the correct scale [" + samplingScale.getMinSamples()
+							+ "," + samplingScale.getMaxSamples() + "]",
+					WrongConfigurationExceptionConstants.SAMPLING_SCALE_INVALID);
 		}
 
-		// Check channels config
-		config.getChannelsConfig();
-
-		boolean channel_config_ok = true;
-		if (config.getChannelsConfig() == null) {
-			// channel configs not defined... don't know better
-			channel_config_ok = true;
-		} else if (channelsInfo == null) {
-			// don't know better
-			channel_config_ok = true;
-		} else {
-			for (int i = 0; i < channelsInfo.length && i < config.getChannelsConfig().length && channel_config_ok; i++) {
-				channelsInfo[i].validateConfig(config.getChannelsConfig(i));
+		if (config.getChannelsConfig() != null && channelsInfo != null) {
+			for (int i = 0; i < channelsInfo.length && i < config.getChannelsConfig().length; i++) {
+				channelsInfo[i].validateConfig(config.getChannelsConfig(i), errors);
 			}
+		}
+
+		if (errors.size() > 0) {
+			throw new WrongConfigurationException(errors.toString(), WrongConfigurationExceptionConstants.SCALE_INVALID);
 		}
 
 	}
