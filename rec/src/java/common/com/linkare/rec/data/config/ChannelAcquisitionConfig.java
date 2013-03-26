@@ -3,6 +3,7 @@ package com.linkare.rec.data.config;
 import java.util.ResourceBundle;
 
 import com.linkare.rec.data.metadata.Scale;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 
 public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.IDLEntity {
 
@@ -307,38 +308,36 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 	@Override
 	public String toString() {
 		final StringBuffer strBufOut = new StringBuffer();
-		final String linesep = System.getProperty("line.separator");
-
 		if (channelName != null) {
-			strBufOut.append("\t" + ChannelAcquisitionConfig.CHANNEL_NAME).append(channelName).append(linesep);
+			strBufOut.append("\t" + ChannelAcquisitionConfig.CHANNEL_NAME).append(channelName).append(ReCSystemProperty.LINE_SEPARATOR.getValue());
 		}
 
 		if (timeStart != null) {
 			strBufOut.append("\t" + ChannelAcquisitionConfig.CHANNEL_START_TIME).append(timeStart.toSimpleString())
-					.append(linesep);
+					.append(ReCSystemProperty.LINE_SEPARATOR.getValue());
 		}
 
 		if (selectedFrequency != null) {
 			strBufOut.append("\t" + ChannelAcquisitionConfig.CHANNEL_FREQUENCY).append(selectedFrequency)
-					.append(linesep);
+					.append(ReCSystemProperty.LINE_SEPARATOR.getValue());
 		}
 
 		if (selected_scale != null) {
-			strBufOut.append("\t" + ChannelAcquisitionConfig.CHANNEL_SCALE).append(selected_scale).append(linesep);
+			strBufOut.append("\t" + ChannelAcquisitionConfig.CHANNEL_SCALE).append(selected_scale).append(ReCSystemProperty.LINE_SEPARATOR.getValue());
 		}
 
 		if (total_samples != com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value) {
 			strBufOut.append("\t" + ChannelAcquisitionConfig.CHANNEL_TOTAL_SAMPLES).append(total_samples)
-					.append(linesep);
+					.append(ReCSystemProperty.LINE_SEPARATOR.getValue());
 		} else if (total_samples == com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value) {
-			strBufOut.append("\t" + ChannelAcquisitionConfig.CHANNEL_TOTAL_SAMPLES_UNDETERMINED).append(linesep);
+			strBufOut.append("\t" + ChannelAcquisitionConfig.CHANNEL_TOTAL_SAMPLES_UNDETERMINED).append(ReCSystemProperty.LINE_SEPARATOR.getValue());
 		}
 
 		if (selectedChannelParameters != null) {
-			strBufOut.append("\t" + ChannelAcquisitionConfig.CHANNEL_PARAMETERS).append(linesep);
+			strBufOut.append("\t" + ChannelAcquisitionConfig.CHANNEL_PARAMETERS).append(ReCSystemProperty.LINE_SEPARATOR.getValue());
 			for (final ParameterConfig selectedChannelParameter : selectedChannelParameters) {
 				if (selectedChannelParameter != null) {
-					strBufOut.append("\t\t").append(selectedChannelParameter).append(linesep);
+					strBufOut.append("\t\t").append(selectedChannelParameter).append(ReCSystemProperty.LINE_SEPARATOR.getValue());
 				}
 			}
 		}
