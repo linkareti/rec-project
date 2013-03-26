@@ -29,7 +29,11 @@ import org.primefaces.event.TabChangeEvent;
 @ViewScoped
 public class ChatBean implements Serializable {
 
-    private List<ClientInfoDTO> usersLab;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1721201942653716666L;
+	private List<ClientInfoDTO> usersLab;
     private List<String> usersExperiment;
     private MultiThreadLaboratoryWrapper selectedLab;
     private List<MultiThreadLaboratoryWrapper> labs;
@@ -64,7 +68,7 @@ public class ChatBean implements Serializable {
 
         if (selectedLab != null) {
             usersLab = new ArrayList<ClientInfoDTO>();
-            List<String> connectedUsers = new ArrayList(selectedLab.getConnectedUsers());
+            List<String> connectedUsers = new ArrayList<String>(selectedLab.getConnectedUsers());
             for (String userName : connectedUsers) {
                 usersLab.add(new ClientInfoDTO(userName));
             }
@@ -106,7 +110,7 @@ public class ChatBean implements Serializable {
     }
 
     public void kickUser() {
-        Set<String> userNamesToKick = new HashSet();
+        Set<String> userNamesToKick = new HashSet<String>();
         userNamesToKick.add(selectedUser);
         selectedLab.kickUsers(userNamesToKick, selectedExperimentLab.getExperiment().getExternalId());
         refreshUserConnected();

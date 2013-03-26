@@ -17,7 +17,12 @@ import javax.ejb.ApplicationException;
 @ApplicationException
 public final class BusinessException extends RuntimeException {
 
-    private static final String NOT_FOUND = "???";
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5784874163735347885L;
+
+	private static final String NOT_FOUND = "???";
 
     private String id;
 

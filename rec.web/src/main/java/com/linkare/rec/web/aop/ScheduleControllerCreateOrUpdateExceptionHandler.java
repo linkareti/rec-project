@@ -14,7 +14,12 @@ import com.linkare.rec.web.util.ConstantUtils;
  */
 public class ScheduleControllerCreateOrUpdateExceptionHandler extends LoggerExceptionHandler {
 
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5081356506266996234L;
+
+	@Override
     public Object execute(final Object target, final Object methodResult, Throwable throwable) {
 	super.execute(target, methodResult, throwable);
 	if (throwable.getCause() instanceof DomainException) {

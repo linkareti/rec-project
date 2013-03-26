@@ -5,7 +5,7 @@
 package com.linkare.rec.web.filter;
 
 import java.io.IOException;
-import java.io.Serializable;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -19,7 +19,7 @@ import javax.servlet.annotation.WebFilter;
  * @author Gedsimon
  */
 @WebFilter(urlPatterns="/*")
-public class CharacterEncodingFilter implements Filter, Serializable{
+public class CharacterEncodingFilter implements Filter {
    @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
         req.setCharacterEncoding("UTF-8");

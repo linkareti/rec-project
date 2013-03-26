@@ -23,11 +23,11 @@ public class LifeCycleListener implements javax.faces.event.PhaseListener {
 
     @Override
     public final void beforePhase(PhaseEvent event) {
-	//        getLogger().info("START PHASE " + event.getPhaseId());
+	        LOGGER.finest("START PHASE " + event.getPhaseId());
     }
 
     @Override
     public final void afterPhase(PhaseEvent event) {
-	//        getLogger().info("END PHASE " + event.getPhaseId());
+	        LOGGER.finest("END PHASE " + event.getPhaseId());
     }
 }

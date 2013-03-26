@@ -1,17 +1,17 @@
 package com.linkare.rec.web.service;
 
-import com.linkare.rec.web.model.Experiment;
 import static com.linkare.rec.web.model.Experiment.COUNT_ALL_QUERYNAME;
 import static com.linkare.rec.web.model.Experiment.FIND_ALL_ACTIVE_QUERYNAME;
 import static com.linkare.rec.web.model.Experiment.FIND_ALL_QUERYNAME;
-import com.linkare.rec.web.util.MultiThreadLaboratoryWrapper;
+
 import java.util.List;
+
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.linkare.rec.web.model.Experiment;
 
 /**
  * 
@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 @Stateless(name = "ExperimentService")
 public class ExperimentServiceBean extends BusinessServiceBean<Experiment, Long> implements ExperimentService {
     
-    private final static Logger LOGGER = LoggerFactory.getLogger(ExperimentServiceBean.class);
+//    private final static Logger LOGGER = LoggerFactory.getLogger(ExperimentServiceBean.class);
     
     @Override
     public void create(final Experiment experiment) {

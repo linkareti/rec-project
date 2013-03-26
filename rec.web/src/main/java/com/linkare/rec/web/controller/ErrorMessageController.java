@@ -19,7 +19,11 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class ErrorMessageController extends AbstractController<Long, ErrorMessage, ErrorMessageService>{
 
-    @EJB(beanInterface = ErrorMessageServiceLocal.class)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 614461993908462103L;
+	@EJB(beanInterface = ErrorMessageServiceLocal.class)
     private ErrorMessageService service;
         
     @Override

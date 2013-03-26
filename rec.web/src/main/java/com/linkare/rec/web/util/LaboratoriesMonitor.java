@@ -213,21 +213,21 @@ public final class LaboratoriesMonitor {
 		return labs;
 	}
 
-	private Collection<MbeanProxy<IMultiCastControllerMXBean, Laboratory>> getMbeanProxies() {
-		Collection<MbeanProxy<IMultiCastControllerMXBean, Laboratory>> result = Collections
-				.emptyList();
-
-		if (!labsJMXConnectionHandler.isEmpty()) {
-			result = new ArrayList<MbeanProxy<IMultiCastControllerMXBean, Laboratory>>(
-					labsJMXConnectionHandler.size());
-			for (final Entry<String, LabJMXConnetionHandler> entry : labsJMXConnectionHandler
-					.entrySet()) {
-				result.add(getMBeanProxy(entry.getValue()));
-			}
-		}
-
-		return result;
-	}
+//	private Collection<MbeanProxy<IMultiCastControllerMXBean, Laboratory>> getMbeanProxies() {
+//		Collection<MbeanProxy<IMultiCastControllerMXBean, Laboratory>> result = Collections
+//				.emptyList();
+//
+//		if (!labsJMXConnectionHandler.isEmpty()) {
+//			result = new ArrayList<MbeanProxy<IMultiCastControllerMXBean, Laboratory>>(
+//					labsJMXConnectionHandler.size());
+//			for (final Entry<String, LabJMXConnetionHandler> entry : labsJMXConnectionHandler
+//					.entrySet()) {
+//				result.add(getMBeanProxy(entry.getValue()));
+//			}
+//		}
+//
+//		return result;
+//	}
 
 	private MbeanProxy<IMultiCastControllerMXBean, Laboratory> getMBeanProxy(
 			final LabJMXConnetionHandler labJMXConnetionHandler) {

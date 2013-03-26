@@ -134,7 +134,7 @@ public class StatusBean implements Serializable {
     public void listenerMethod(ClientInfoDTO clientInfo) {
         for (DeployedExperiment dpExperiment : selectedLabExperiments) {
             if (dpExperiment.getUsersConnected() != null && dpExperiment.getUsersConnected().contains(clientInfo.getUserName())) {
-                Set<String> userNamesToKick = new HashSet();
+                Set<String> userNamesToKick = new HashSet<String>();
                 userNamesToKick.add(clientInfo.getUserName());
                 selectedLab.kickUsers(userNamesToKick, dpExperiment.getExperiment().getExternalId());
                 JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_REMOVE_KEY);

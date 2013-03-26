@@ -34,7 +34,8 @@ public class RecServiceBean implements RecServiceRemote {
             throw new NullPointerException("locale cannot be null");
         }
         final List<BadWordDTO> result = new ArrayList<BadWordDTO>();
-        final List<BadWord> badWords = entityManager.createNamedQuery(BadWord.FIND_FOR_LOCALE_QUERYNAME).setParameter(BadWord.QUERY_PARAM_LOCALE, locale).getResultList();
+        @SuppressWarnings("unchecked")
+		final List<BadWord> badWords = entityManager.createNamedQuery(BadWord.FIND_FOR_LOCALE_QUERYNAME).setParameter(BadWord.QUERY_PARAM_LOCALE, locale).getResultList();
 
         for (final BadWord badword : badWords) {
             result.add(new BadWordDTO(badword.getIdInternal(), badword.getLocale(), badword.getRegex()));
@@ -45,7 +46,8 @@ public class RecServiceBean implements RecServiceRemote {
     @Override
     public List<BadWordDTO> getAllBadWordRegex() throws RemoteException {
         final List<BadWordDTO> result = new ArrayList<BadWordDTO>();
-        final List<BadWord> badWords = entityManager.createNamedQuery(BadWord.FIND_ALL_QUERYNAME).getResultList();
+        @SuppressWarnings("unchecked")
+		final List<BadWord> badWords = entityManager.createNamedQuery(BadWord.FIND_ALL_QUERYNAME).getResultList();
 
         for (final BadWord badword : badWords) {
             result.add(new BadWordDTO(badword.getIdInternal(), badword.getLocale(), badword.getRegex()));
