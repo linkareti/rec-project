@@ -31,7 +31,7 @@ public class RepositoryFacadeBean implements RepositoryFacade {
 
     private static final Log LOG = LogFactory.getLog(RepositoryFacadeBean.class);
 
-    @PersistenceContext(unitName = "AllocationManagerPU")
+    @PersistenceContext(unitName = "RecPU")
     private EntityManager entityManager;
 
     @Override

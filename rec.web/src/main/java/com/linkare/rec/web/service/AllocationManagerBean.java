@@ -41,7 +41,7 @@ import com.linkare.rec.web.util.ConstantUtils;
 @Stateless(name = "AllocationManager")
 public class AllocationManagerBean implements AllocationManager {
 
-    @PersistenceContext(unitName = "AllocationManagerPU")
+    @PersistenceContext(unitName = "RecPU")
     private EntityManager entityManager;
 
     @EJB(beanInterface = LoginDomainServiceLocal.class)

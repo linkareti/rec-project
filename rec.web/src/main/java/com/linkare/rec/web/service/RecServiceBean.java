@@ -25,7 +25,7 @@ import javax.persistence.PersistenceContext;
 @WebService(endpointInterface = "com.linkare.rec.web.RecServiceRemote", name = "RecServiceWS", serviceName = "rec-services", portName = "recservice", targetNamespace = "http://webservices.linkare.com/rec")
 public class RecServiceBean implements RecServiceRemote {
 
-    @PersistenceContext(unitName = "AllocationManagerPU")
+    @PersistenceContext(unitName = "RecPU")
     private EntityManager entityManager;
 
     @Override

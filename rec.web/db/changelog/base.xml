@@ -433,11 +433,11 @@
 			</not>
 		</preConditions>
 		<addForeignKeyConstraint baseColumnNames="KEY_AUDITED"
-			baseTableName="AUDIT_OPERATION" baseTableSchemaName="allocation"
+			baseTableName="AUDIT_OPERATION" baseTableSchemaName="rec"
 			constraintName="FKE74E55C33AFC7CA6" deferrable="false"
 			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
 			referencedColumnNames="ID" referencedTableName="AUDITED_OBJECT"
-			referencedTableSchemaName="allocation" referencesUniqueColumn="false" />
+			referencedTableSchemaName="rec" referencesUniqueColumn="false" />
 	</changeSet>
 	<changeSet author="root (generated)" id="1343314492758-22">
 		<preConditions onFail="MARK_RAN"
@@ -448,11 +448,11 @@
 			</not>
 		</preConditions>
 		<addForeignKeyConstraint baseColumnNames="KEY_AUDITOR"
-			baseTableName="AUDIT_OPERATION" baseTableSchemaName="allocation"
+			baseTableName="AUDIT_OPERATION" baseTableSchemaName="rec"
 			constraintName="FKE74E55C3EC7DC58F" deferrable="false"
 			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
 			referencedColumnNames="ID" referencedTableName="AUDITOR"
-			referencedTableSchemaName="allocation" referencesUniqueColumn="false" />
+			referencedTableSchemaName="rec" referencesUniqueColumn="false" />
 	</changeSet>
 	<changeSet author="root (generated)" id="1343314492758-23">
 		<preConditions onFail="MARK_RAN"
@@ -463,11 +463,11 @@
 			</not>
 		</preConditions>
 		<addForeignKeyConstraint baseColumnNames="KEY_HARDWARE_ACQUISITION_CONFIG"
-			baseTableName="CHANNEL_AQUISITION_CONFIG" baseTableSchemaName="allocation"
+			baseTableName="CHANNEL_AQUISITION_CONFIG" baseTableSchemaName="rec"
 			constraintName="FK34D98617963CA654" deferrable="false"
 			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
 			referencedColumnNames="ID" referencedTableName="HARDWARE_ACQUISITION_CONFIG"
-			referencedTableSchemaName="allocation" referencesUniqueColumn="false" />
+			referencedTableSchemaName="rec" referencesUniqueColumn="false" />
 	</changeSet>
 	<changeSet author="root (generated)" id="1343314492758-24">
 		<preConditions onFail="MARK_RAN"
@@ -478,11 +478,11 @@
 			</not>
 		</preConditions>
 		<addForeignKeyConstraint baseColumnNames="KEY_SCALE"
-			baseTableName="CHANNEL_AQUISITION_CONFIG" baseTableSchemaName="allocation"
+			baseTableName="CHANNEL_AQUISITION_CONFIG" baseTableSchemaName="rec"
 			constraintName="FK34D98617D3EF5DD6" deferrable="false"
 			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
 			referencedColumnNames="ID" referencedTableName="SCALE"
-			referencedTableSchemaName="allocation" referencesUniqueColumn="false" />
+			referencedTableSchemaName="rec" referencesUniqueColumn="false" />
 	</changeSet>
 	<changeSet author="root (generated)" id="1343314492758-25">
 		<preConditions onFail="MARK_RAN"
@@ -493,11 +493,11 @@
 			</not>
 		</preConditions>
 		<addForeignKeyConstraint baseColumnNames="KEY_HARDWARE_ACQUISITION_CONFIG"
-			baseTableName="DATA_PRODUCER" baseTableSchemaName="allocation"
+			baseTableName="DATA_PRODUCER" baseTableSchemaName="rec"
 			constraintName="FK28D00887963CA654" deferrable="false"
 			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
 			referencedColumnNames="ID" referencedTableName="HARDWARE_ACQUISITION_CONFIG"
-			referencedTableSchemaName="allocation" referencesUniqueColumn="false" />
+			referencedTableSchemaName="rec" referencesUniqueColumn="false" />
 	</changeSet>
 	<changeSet author="root (generated)" id="1343314492758-26">
 		<preConditions onFail="MARK_RAN"
@@ -508,11 +508,11 @@
 			</not>
 		</preConditions>
 		<addForeignKeyConstraint baseColumnNames="KEY_SAMPLES_PACKET_BLOB"
-			baseTableName="DATA_PRODUCER" baseTableSchemaName="allocation"
+			baseTableName="DATA_PRODUCER" baseTableSchemaName="rec"
 			constraintName="FK28D00887A1214B2E" deferrable="false"
 			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
 			referencedColumnNames="ID" referencedTableName="SAMPLES_PACKET_BLOB"
-			referencedTableSchemaName="allocation" referencesUniqueColumn="false" />
+			referencedTableSchemaName="rec" referencesUniqueColumn="false" />
 	</changeSet>
 	<changeSet author="root (generated)" id="1343314492758-27">
 		<preConditions onFail="MARK_RAN"
@@ -523,11 +523,11 @@
 			</not>
 		</preConditions>
 		<addForeignKeyConstraint baseColumnNames="KEY_LABORATORY"
-			baseTableName="EXPERIMENT" baseTableSchemaName="allocation"
+			baseTableName="EXPERIMENT" baseTableSchemaName="rec"
 			constraintName="FK17D3C7FDDA4D64" deferrable="false"
 			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
 			referencedColumnNames="ID" referencedTableName="LABORATORY"
-			referencedTableSchemaName="allocation" referencesUniqueColumn="false" />
+			referencedTableSchemaName="rec" referencesUniqueColumn="false" />
 	</changeSet>
 	<changeSet author="root (generated)" id="1343314492758-28">
 		<preConditions onFail="MARK_RAN"
@@ -538,11 +538,11 @@
 			</not>
 		</preConditions>
 		<addForeignKeyConstraint baseColumnNames="KEY_USER"
-			baseTableName="IDENTIFICATION" baseTableSchemaName="allocation"
+			baseTableName="IDENTIFICATION" baseTableSchemaName="rec"
 			constraintName="FK9682266E7302AC2A" deferrable="false"
 			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
 			referencedColumnNames="ID" referencedTableName="PRINCIPAL"
-			referencedTableSchemaName="allocation" referencesUniqueColumn="false" />
+			referencedTableSchemaName="rec" referencesUniqueColumn="false" />
 	</changeSet>
 	<changeSet author="root (generated)" id="1343314492758-29">
 		<preConditions onFail="MARK_RAN"
@@ -553,11 +553,11 @@
 			</not>
 		</preConditions>
 		<addForeignKeyConstraint baseColumnNames="KEY_CHANNEL_ACQUISITION_CONFIG"
-			baseTableName="PARAMETER_CONFIG" baseTableSchemaName="allocation"
+			baseTableName="PARAMETER_CONFIG" baseTableSchemaName="rec"
 			constraintName="FK259B54B83BBD80DA" deferrable="false"
 			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
 			referencedColumnNames="ID" referencedTableName="CHANNEL_AQUISITION_CONFIG"
-			referencedTableSchemaName="allocation" referencesUniqueColumn="false" />
+			referencedTableSchemaName="rec" referencesUniqueColumn="false" />
 	</changeSet>
 	<changeSet author="root (generated)" id="1343314492758-30">
 		<preConditions onFail="MARK_RAN"
@@ -568,11 +568,11 @@
 			</not>
 		</preConditions>
 		<addForeignKeyConstraint baseColumnNames="KEY_HARDWARE_ACQUISITION_CONFIG"
-			baseTableName="PARAMETER_CONFIG" baseTableSchemaName="allocation"
+			baseTableName="PARAMETER_CONFIG" baseTableSchemaName="rec"
 			constraintName="FK259B54B8963CA654" deferrable="false"
 			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
 			referencedColumnNames="ID" referencedTableName="HARDWARE_ACQUISITION_CONFIG"
-			referencedTableSchemaName="allocation" referencesUniqueColumn="false" />
+			referencedTableSchemaName="rec" referencesUniqueColumn="false" />
 	</changeSet>
 	<changeSet author="root (generated)" id="1343314492758-31">
 		<preConditions onFail="MARK_RAN"
@@ -583,11 +583,11 @@
 			</not>
 		</preConditions>
 		<addForeignKeyConstraint baseColumnNames="KEY_SUBJECT"
-			baseTableName="PRINCIPAL" baseTableSchemaName="allocation"
+			baseTableName="PRINCIPAL" baseTableSchemaName="rec"
 			constraintName="FK3A16800E16E29D44" deferrable="false"
 			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
 			referencedColumnNames="ID" referencedTableName="SUBJECT"
-			referencedTableSchemaName="allocation" referencesUniqueColumn="false" />
+			referencedTableSchemaName="rec" referencesUniqueColumn="false" />
 	</changeSet>
 	<changeSet author="root (generated)" id="1343314492758-32">
 		<preConditions onFail="MARK_RAN"
@@ -598,11 +598,11 @@
 			</not>
 		</preConditions>
 		<addForeignKeyConstraint baseColumnNames="KEY_CHILD"
-			baseTableName="PRINCIPALS_ASSOCIATION" baseTableSchemaName="allocation"
+			baseTableName="PRINCIPALS_ASSOCIATION" baseTableSchemaName="rec"
 			constraintName="FK431E712739AB5D36" deferrable="false"
 			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
 			referencedColumnNames="ID" referencedTableName="PRINCIPAL"
-			referencedTableSchemaName="allocation" referencesUniqueColumn="false" />
+			referencedTableSchemaName="rec" referencesUniqueColumn="false" />
 	</changeSet>
 	<changeSet author="root (generated)" id="1343314492758-33">
 		<preConditions onFail="MARK_RAN"
@@ -613,11 +613,11 @@
 			</not>
 		</preConditions>
 		<addForeignKeyConstraint baseColumnNames="KEY_PARENT"
-			baseTableName="PRINCIPALS_ASSOCIATION" baseTableSchemaName="allocation"
+			baseTableName="PRINCIPALS_ASSOCIATION" baseTableSchemaName="rec"
 			constraintName="FK431E7127B5E33884" deferrable="false"
 			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
 			referencedColumnNames="ID" referencedTableName="PRINCIPAL"
-			referencedTableSchemaName="allocation" referencesUniqueColumn="false" />
+			referencedTableSchemaName="rec" referencesUniqueColumn="false" />
 	</changeSet>
 	<changeSet author="root (generated)" id="1343314492758-34">
 		<preConditions onFail="MARK_RAN"
@@ -628,11 +628,11 @@
 			</not>
 		</preConditions>
 		<addForeignKeyConstraint baseColumnNames="KEY_EXPERIMENT"
-			baseTableName="RESERVATION" baseTableSchemaName="allocation"
+			baseTableName="RESERVATION" baseTableSchemaName="rec"
 			constraintName="FK2328D7AC84A125F8" deferrable="false"
 			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
 			referencedColumnNames="ID" referencedTableName="EXPERIMENT"
-			referencedTableSchemaName="allocation" referencesUniqueColumn="false" />
+			referencedTableSchemaName="rec" referencesUniqueColumn="false" />
 	</changeSet>
 	<changeSet author="root (generated)" id="1343314492758-35">
 		<preConditions onFail="MARK_RAN"
@@ -643,11 +643,11 @@
 			</not>
 		</preConditions>
 		<addForeignKeyConstraint baseColumnNames="KEY_GROUP"
-			baseTableName="RESERVATION" baseTableSchemaName="allocation"
+			baseTableName="RESERVATION" baseTableSchemaName="rec"
 			constraintName="FK2328D7ACEBC7AAEA" deferrable="false"
 			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
 			referencedColumnNames="ID" referencedTableName="PRINCIPAL"
-			referencedTableSchemaName="allocation" referencesUniqueColumn="false" />
+			referencedTableSchemaName="rec" referencesUniqueColumn="false" />
 	</changeSet>
 	<changeSet author="root (generated)" id="1343314492758-36">
 		<preConditions onFail="MARK_RAN"
@@ -658,11 +658,11 @@
 			</not>
 		</preConditions>
 		<addForeignKeyConstraint baseColumnNames="KEY_USER"
-			baseTableName="RESERVATION" baseTableSchemaName="allocation"
+			baseTableName="RESERVATION" baseTableSchemaName="rec"
 			constraintName="FK2328D7AC7302AC2A" deferrable="false"
 			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
 			referencedColumnNames="ID" referencedTableName="PRINCIPAL"
-			referencedTableSchemaName="allocation" referencesUniqueColumn="false" />
+			referencedTableSchemaName="rec" referencesUniqueColumn="false" />
 	</changeSet>
 	<changeSet author="root (generated)" id="1343314492758-37">
 		<preConditions onFail="MARK_RAN"
@@ -673,10 +673,10 @@
 			</not>
 		</preConditions>
 		<addForeignKeyConstraint baseColumnNames="KEY_PHYSICS_VAL_DEFAULTERROR"
-			baseTableName="SCALE" baseTableSchemaName="allocation" constraintName="FK4B1112A21E94515"
+			baseTableName="SCALE" baseTableSchemaName="rec" constraintName="FK4B1112A21E94515"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="PHYSICS_VAL"
-			referencedTableSchemaName="allocation" referencesUniqueColumn="false" />
+			referencedTableSchemaName="rec" referencesUniqueColumn="false" />
 	</changeSet>
 	<changeSet author="root (generated)" id="1343314492758-38">
 		<preConditions onFail="MARK_RAN"
@@ -687,10 +687,10 @@
 			</not>
 		</preConditions>
 		<addForeignKeyConstraint baseColumnNames="KEY_PHYSICS_VAL_MAXVALUE"
-			baseTableName="SCALE" baseTableSchemaName="allocation" constraintName="FK4B1112A23133E3B"
+			baseTableName="SCALE" baseTableSchemaName="rec" constraintName="FK4B1112A23133E3B"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="PHYSICS_VAL"
-			referencedTableSchemaName="allocation" referencesUniqueColumn="false" />
+			referencedTableSchemaName="rec" referencesUniqueColumn="false" />
 	</changeSet>
 	<changeSet author="root (generated)" id="1343314492758-39">
 		<preConditions onFail="MARK_RAN"
@@ -701,10 +701,10 @@
 			</not>
 		</preConditions>
 		<addForeignKeyConstraint baseColumnNames="KEY_PHYSICS_VAL_MINVALUE"
-			baseTableName="SCALE" baseTableSchemaName="allocation" constraintName="FK4B1112AB934A20D"
+			baseTableName="SCALE" baseTableSchemaName="rec" constraintName="FK4B1112AB934A20D"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="PHYSICS_VAL"
-			referencedTableSchemaName="allocation" referencesUniqueColumn="false" />
+			referencedTableSchemaName="rec" referencesUniqueColumn="false" />
 	</changeSet>
 	<changeSet author="root (generated)" id="1343314492758-40">
 		<preConditions onFail="MARK_RAN"
@@ -715,10 +715,10 @@
 			</not>
 		</preConditions>
 		<addForeignKeyConstraint baseColumnNames="KEY_PHYSICS_VAL_STEP"
-			baseTableName="SCALE" baseTableSchemaName="allocation" constraintName="FK4B1112AE925257A"
+			baseTableName="SCALE" baseTableSchemaName="rec" constraintName="FK4B1112AE925257A"
 			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
 			onUpdate="NO ACTION" referencedColumnNames="ID" referencedTableName="PHYSICS_VAL"
-			referencedTableSchemaName="allocation" referencesUniqueColumn="false" />
+			referencedTableSchemaName="rec" referencesUniqueColumn="false" />
 	</changeSet>
 	<changeSet author="root (generated)" id="1343314492758-41">
 		<preConditions onFail="MARK_RAN"

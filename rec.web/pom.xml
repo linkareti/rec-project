@@ -484,7 +484,7 @@
 				<!-- common configuration shared by all executions -->
 				<configuration>
 					<driver>com.mysql.jdbc.Driver</driver>
-					<url>jdbc:mysql://localhost:3306/allocation</url>
+					<url>jdbc:mysql://localhost:3306/rec</url>
 
 					<!-- You can comment out username/password configurations and have maven 
 						to look them up in your settings.xml using ${settingsKey} -->
@@ -499,13 +499,13 @@
 					<!-- <execution> <id>drop-db-before-test-if-any</id> <phase>process-test-resources</phase> 
 						<goals> <goal>execute</goal> </goals> <configuration> need another database 
 						to drop the targeted one <url>jdbc:mysql://localhost:3306/mysql</url> <autocommit>true</autocommit> 
-						<sqlCommand>drop database allocation</sqlCommand> ignore error when database 
+						<sqlCommand>drop database rec</sqlCommand> ignore error when database 
 						is not avaiable <onError>continue</onError> </configuration> </execution> -->
 
 					<!-- <execution> <id>create-db</id> <phase>process-test-resources</phase> 
 						<goals> <goal>execute</goal> </goals> <configuration> <url>jdbc:mysql://localhost:3306</url> 
 						no transaction <autocommit>true</autocommit> <sqlCommand>create database 
-						allocation</sqlCommand> <onError>continue</onError> </configuration> </execution> -->
+						rec</sqlCommand> <onError>continue</onError> </configuration> </execution> -->
 
 					<!-- <execution> <id>create-schema</id> <phase>process-test-resources</phase> 
 						<goals> <goal>execute</goal> </goals> <configuration> <autocommit>true</autocommit> 
@@ -689,7 +689,7 @@
 				<targetenv.hibernate.show_sql>true</targetenv.hibernate.show_sql>
 				<targetenv.hibernate.hbm2ddl.auto>update</targetenv.hibernate.hbm2ddl.auto>
 				<db.driver>com.mysql.jdbc.Driver</db.driver>
-				<db.url>jdbc:mysql://localhost:3306/allocation</db.url>
+				<db.url>jdbc:mysql://localhost:3306/rec</db.url>
 				<db.user>root</db.user>
 				<db.pass />
 			</properties>
@@ -717,9 +717,9 @@
 				<targetenv.hibernate.hbm2ddl.auto>validate</targetenv.hibernate.hbm2ddl.auto>
 				<db.driver>com.mysql.jdbc.Driver</db.driver>
 				<!-- This profile has to be executed in the own server -->
-				<db.url>jdbc:mysql://localhost:3306/allocation</db.url>
-				<db.user>allocation</db.user>
-				<db.pass>allocation</db.pass>
+				<db.url>jdbc:mysql://localhost:3306/rec</db.url>
+				<db.user>rec</db.user>
+				<db.pass>rec</db.pass>
 			</properties>
 			<build>
 				<plugins>

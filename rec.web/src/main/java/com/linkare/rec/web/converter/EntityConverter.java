@@ -16,7 +16,7 @@ public class EntityConverter implements Converter, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @PersistenceContext(unitName = "AllocationManagerPU")
+    @PersistenceContext(unitName = "RecPU")
     protected EntityManager em;
 
     @Override

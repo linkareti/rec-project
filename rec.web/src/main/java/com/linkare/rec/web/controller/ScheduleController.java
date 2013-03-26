@@ -23,7 +23,7 @@ import org.primefaces.model.ScheduleModel;
 import com.linkare.commons.jpa.security.User;
 import com.linkare.commons.utils.StringUtils;
 import com.linkare.jsf.utils.JsfUtil;
-import com.linkare.rec.web.aop.AllocationManagerExceptionHandler;
+import com.linkare.rec.web.aop.ReCWebExceptionHandler;
 import com.linkare.rec.web.aop.ExceptionHandle;
 import com.linkare.rec.web.aop.ExceptionHandleCase;
 import com.linkare.rec.web.aop.ScheduleControllerCreateOrUpdateExceptionHandler;
@@ -97,7 +97,7 @@ public class ScheduleController implements Serializable {
 	event.setStyleClass("myevents");
     }
 
-    @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = AllocationManagerExceptionHandler.class))
+    @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = ReCWebExceptionHandler.class))
     public void removeEvent(ActionEvent actionEvent) {
 	if (event.getId() != null) {
 	    eventModel.deleteEvent(event);

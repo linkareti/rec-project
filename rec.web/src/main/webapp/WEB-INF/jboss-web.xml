@@ -5,8 +5,8 @@
 <jboss-web>
 	<context-root>rec.web</context-root>
 	<resource-ref>
-		<res-ref-name>jdbc/allocation</res-ref-name>
-		<jndi-name>java:/jdbc/allocation</jndi-name>
+		<res-ref-name>jdbc/rec</res-ref-name>
+		<jndi-name>java:/jdbc/rec</jndi-name>
 	</resource-ref>
 	<resource-ref>
 		<res-ref-name>com.linkare.rec.web.service.MailServiceBean/queue</res-ref-name>

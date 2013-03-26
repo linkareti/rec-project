@@ -5,7 +5,7 @@
 package com.linkare.rec.web.auth;
 
 import com.linkare.jsf.utils.JsfUtil;
-import com.linkare.rec.web.aop.AllocationManagerExceptionHandler;
+import com.linkare.rec.web.aop.ReCWebExceptionHandler;
 import com.linkare.rec.web.aop.ExceptionHandle;
 import com.linkare.rec.web.aop.ExceptionHandleCase;
 import com.linkare.rec.web.ex.AuthenticationException;
@@ -33,7 +33,7 @@ public class AuthenticationBean {
     @EJB(beanInterface = UserServiceLocal.class)
     private UserService userService;
 
-    @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = AllocationManagerExceptionHandler.class))
+    @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = ReCWebExceptionHandler.class))
     public String login() throws AuthenticationException {
 	authenticate();
 	registerUserIfNecessary();

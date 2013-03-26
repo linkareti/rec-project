@@ -10,9 +10,14 @@ import com.linkare.rec.web.util.ConstantUtils;
  * @author Paulo Zenida - Linkare TI
  * 
  */
-public class AllocationManagerExceptionHandler extends LoggerExceptionHandler {
+public class ReCWebExceptionHandler extends LoggerExceptionHandler {
 
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1694892040664288073L;
+
+	@Override
     public Object execute(final Object target, final Object methodResult, Throwable throwable) {
 	super.execute(target, methodResult, throwable);
 	if (throwable.getCause() instanceof DomainException) {

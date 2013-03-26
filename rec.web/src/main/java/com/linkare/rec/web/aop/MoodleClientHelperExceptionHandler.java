@@ -10,7 +10,7 @@ import java.rmi.RemoteException;
 import javax.naming.NamingException;
 import javax.xml.rpc.ServiceException;
 
-import com.linkare.rec.web.ex.AllocationManagerException;
+import com.linkare.rec.web.ex.ReCWebException;
 
 /**
  * 
@@ -19,17 +19,22 @@ import com.linkare.rec.web.ex.AllocationManagerException;
  */
 public class MoodleClientHelperExceptionHandler extends LoggerExceptionHandler {
 
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4141999935061998113L;
+
+	@Override
     public Object execute(Object target, Object methodResult, Throwable throwable) {
 	super.execute(target, methodResult, throwable);
 	if (throwable instanceof RemoteException) {
-	    throw new AllocationManagerException(throwable);
+	    throw new ReCWebException(throwable);
 	} else if (throwable instanceof ServiceException) {
-	    throw new AllocationManagerException(EXTERNAL_SYSTEM_CONFIGURATION_PROBLEMS, throwable);
+	    throw new ReCWebException(EXTERNAL_SYSTEM_CONFIGURATION_PROBLEMS, throwable);
 	} else if (throwable instanceof NamingException) {
-	    throw new AllocationManagerException(ERROR_ACCESSING_LOGIN_DOMAIN_FACADE_IN_JNDI, throwable);
+	    throw new ReCWebException(ERROR_ACCESSING_LOGIN_DOMAIN_FACADE_IN_JNDI, throwable);
 	} else if (throwable instanceof MalformedURLException) {
-	    throw new AllocationManagerException(ERROR_INVALID_URL_REGISTERING_LOGIN_DOMAINS, throwable);
+	    throw new ReCWebException(ERROR_INVALID_URL_REGISTERING_LOGIN_DOMAINS, throwable);
 	}
 	return methodResult;
     }

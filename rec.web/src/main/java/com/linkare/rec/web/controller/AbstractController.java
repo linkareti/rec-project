@@ -11,7 +11,7 @@ import javax.faces.model.SelectItem;
 import com.linkare.commons.dao.Deletable;
 import com.linkare.commons.dao.Identifiable;
 import com.linkare.jsf.utils.JsfUtil;
-import com.linkare.rec.web.aop.AllocationManagerExceptionHandler;
+import com.linkare.rec.web.aop.ReCWebExceptionHandler;
 import com.linkare.rec.web.aop.ExceptionHandle;
 import com.linkare.rec.web.aop.ExceptionHandleCase;
 import com.linkare.rec.web.service.BusinessService;
@@ -38,14 +38,14 @@ public abstract class AbstractController<ID extends Serializable, Entity extends
 
     public abstract String prepareCreate();
 
-    @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = AllocationManagerExceptionHandler.class))
+    @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = ReCWebExceptionHandler.class))
     public String create() {
 	getService().create(current);
 	JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_CREATE_KEY);
 	return prepareCreate();
     }
 
-    @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = AllocationManagerExceptionHandler.class))
+    @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = ReCWebExceptionHandler.class))
     public String update() {
 	getService().edit(current);
 	JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_UPDATE_KEY);
@@ -71,7 +71,7 @@ public abstract class AbstractController<ID extends Serializable, Entity extends
 	return ConstantUtils.EDIT;
     }
 
-    @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = AllocationManagerExceptionHandler.class))
+    @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = ReCWebExceptionHandler.class))
     protected void performDestroy() {
 	getService().remove(current);
 	JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_REMOVE_KEY);
