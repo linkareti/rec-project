@@ -19,17 +19,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.linkare.commons.utils.Pair;
-import com.linkare.rec.web.AllocationDTO;
-import com.linkare.rec.web.AllocationManager;
-import com.linkare.rec.web.UnknownDomainException;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.events.ChatMessageEvent;
 import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
 import com.linkare.rec.impl.threading.ExecutorScheduler;
 import com.linkare.rec.impl.threading.ScheduledWorkUnit;
-import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.impl.utils.locator.BusinessServiceEnum;
 import com.linkare.rec.impl.utils.locator.BusinessServiceLocator;
 import com.linkare.rec.impl.utils.locator.BusinessServiceLocatorException;
+import com.linkare.rec.web.AllocationDTO;
+import com.linkare.rec.web.AllocationManager;
+import com.linkare.rec.web.UnknownDomainException;
 
 /**
  * 
@@ -39,14 +39,8 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 
 	private static final Logger LOGGER = Logger.getLogger(AllocationManagerSecurityManager.class.getName());
 
-	/**
-	 * System property key defining the ID of the laboratory as defined in the
-	 * project AllocationManager (rec.web)
-	 */
-	public static final String SYSPROP_LABORATORY_ID = "rec.multicast.labid";
-
-	public static final String SYSPROP_INTERVAL_TIME_LAP_MINUTES = "rec.multicast.securitymanager.interval.lap.time.minutes";
-	public static final String SYSPROP_NEAR_TIME_LAP_MINUTES = "rec.multicast.securitymanager.near.lap.time.minutes";
+	
+	
 	public static final String SYSPROP_REFRESH_TIME_LAP_MINUTES = "rec.multicast.securitymanager.refresh.lap.time.minutes";
 
 	public static final String LABORATORY_ID;
@@ -58,16 +52,12 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 		} catch (final UnknownHostException e) {
 			LOGGER.log(java.util.logging.Level.FINEST, "Unable to find local host name " + e.getMessage());
 		}
-		LABORATORY_ID = Defaults.defaultIfEmpty(
-				System.getProperty(AllocationManagerSecurityManager.SYSPROP_LABORATORY_ID), localInetAddress);
+		LABORATORY_ID = ReCSystemProperty.MULTICAST_LAB_ID.getValue(localInetAddress);
 	}
 
-	private static final int INTERVAL_TIME_LAP_MINUTES = Defaults.defaultIfEmpty(
-			System.getProperty(SYSPROP_INTERVAL_TIME_LAP_MINUTES), 0);
-	private static final int NEAR_TIME_LAP_MINUTES = Defaults.defaultIfEmpty(
-			System.getProperty(SYSPROP_NEAR_TIME_LAP_MINUTES), 5);
-	private static final int REFRESH_TIME_LAP_MINUTES = Defaults.defaultIfEmpty(
-			System.getProperty(SYSPROP_REFRESH_TIME_LAP_MINUTES), 15);
+	private static final int INTERVAL_TIME_LAP_MINUTES = Integer.parseInt(ReCSystemProperty.MULTICAST_SECURITYMANAGER_INTERVAL_TIME_LAP_MINUTES.getValue());
+	private static final int NEAR_TIME_LAP_MINUTES = Integer.parseInt(ReCSystemProperty.MULTICAST_SECURITYMANAGER_NEAR_TIME_LAP_MINUTES.getValue());
+	private static final int REFRESH_TIME_LAP_MINUTES = Integer.parseInt(ReCSystemProperty.MULTICAST_SECURITYMANAGER_REFRESH_TIME_LAP_MINUTES.getValue());
 	private static final int REFRESH_TIME_ALLOCATIONS_CLIENT_QUEUE_MINUTES = 1;
 
 	private List<ReCMultiCastHardware> multiCastHardwares = null;

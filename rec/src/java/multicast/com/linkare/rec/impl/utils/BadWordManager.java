@@ -2,6 +2,7 @@ package com.linkare.rec.impl.utils;
 
 import com.linkare.rec.web.RecServiceRemote;
 import com.linkare.rec.web.repository.BadWordDTO;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.threading.ExecutorScheduler;
 import com.linkare.rec.impl.threading.ScheduledWorkUnit;
 import com.linkare.rec.impl.utils.locator.BusinessServiceEnum;
@@ -42,9 +43,7 @@ public final class BadWordManager {
 	private static final String REPLACEMENT = "***";
 	private RecServiceRemote recServiceRemote = null;
 	private static final Logger LOGGER = Logger.getLogger(BadWordManager.class.getName());
-	public static final String SYSPROP_BADWORD_REFRESH_TIME_LAP_MINUTES = "rec.multicast.badwordmanager.refresh.lap.time.minutes";
-	private static final int BADWORD_REFRESH_TIME_LAP_MINUTES = Defaults.defaultIfEmpty(
-			System.getProperty(SYSPROP_BADWORD_REFRESH_TIME_LAP_MINUTES), 1440);
+	private static final int BADWORD_REFRESH_TIME_LAP_MINUTES = Integer.parseInt(ReCSystemProperty.MULTICAST_BADWORD_REFRESH_TIME_LAP_MINUTES.getValue());
 	private List<BadWordDTO> badWordDTO = null;
 
 	public String filterBadWord(String message) {
@@ -85,11 +84,6 @@ public final class BadWordManager {
 		public void run() {
 			LOGGER.log(Level.INFO, "BadWordManagerRefreshScheduledUnit - Going to refresh the bad words list.");
 			refreshBadWordList();
-		}
-
-		@Override
-		public void logThrowable(String message, Throwable throwable) {
-			LOGGER.log(Level.SEVERE, message, throwable);
 		}
 	}
 }

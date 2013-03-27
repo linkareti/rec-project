@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
 
 /**
@@ -13,8 +14,6 @@ import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
 public final class SecurityManagerFactory {
 
 	private ISecurityManager secManager = null;
-
-	public static final String SYSPROP_SECURITY_MANAGER_CLASS = "rec.multicast.securitymanager";
 
 	private static final Logger LOGGER = Logger.getLogger(SecurityManagerFactory.class.getName());
 
@@ -26,15 +25,7 @@ public final class SecurityManagerFactory {
 	private static SecurityManagerFactory INSTANCE = new SecurityManagerFactory();
 
 	private void loadSecurityManager() {
-		final String secManagerClassName = System.getProperty(SecurityManagerFactory.SYSPROP_SECURITY_MANAGER_CLASS);
-
-		if (secManagerClassName == null || secManagerClassName.trim().length() == 0) {
-			if (LOGGER.isLoggable(Level.WARNING)) {
-				LOGGER.log(Level.WARNING, "SecurityManager System Property '" + SYSPROP_SECURITY_MANAGER_CLASS
-						+ "' not defined... Loading DefaultSecurityManager!");
-			}
-			secManager = new DefaultSecurityManager();
-		}
+		final String secManagerClassName = ReCSystemProperty.MULTICAST_SECURITYMANAGER_CLASSNAME.getValue();
 
 		if (secManagerClassName.contains(",")) {
 			if (LOGGER.isLoggable(Level.FINE)) {

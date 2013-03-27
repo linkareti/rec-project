@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.data.FrequencyUtil;
 
 /**
@@ -28,8 +29,8 @@ public class MultiCastExperimentStats implements Serializable {
 
 	private static String baseDir = null;
 	static {
-		MultiCastExperimentStats.baseDir = System.getProperty("user.dir") + System.getProperty("file.separator")
-				+ "ExperimentStats";
+		MultiCastExperimentStats.baseDir = ReCSystemProperty.USER_DIR.getValue()
+				+ ReCSystemProperty.FILE_SEPARATOR.getValue() + "ExperimentStats";
 		java.io.File f = new java.io.File(MultiCastExperimentStats.baseDir);
 		if (!f.exists()) {
 			f.mkdirs();
@@ -120,7 +121,8 @@ public class MultiCastExperimentStats implements Serializable {
 	}
 
 	private static String getFileName(final String hardwareUniqueId) {
-		return MultiCastExperimentStats.baseDir + System.getProperty("file.separator") + hardwareUniqueId + ".ser";
+		return MultiCastExperimentStats.baseDir + ReCSystemProperty.FILE_SEPARATOR.getValue() + hardwareUniqueId
+				+ ".ser";
 	}
 
 	private void writeObject() {
