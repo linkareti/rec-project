@@ -71,7 +71,7 @@ public class DataReceiverForQueue
 
 	@Override
 	public String toString() {
-		return "Proxy Receiver " + drw.getDelegate();
+		return "Proxy Receiver " + drw;
 	}
 
 	@Override
@@ -116,50 +116,37 @@ public class DataReceiverForQueue
 
 		shutdown = true;
 
-		LOGGER.log(Level.INFO, "receiver " + drw.getDelegate() + " - Shutting down!");
+		LOGGER.log(Level.FINEST, "receiver " + drw + " - Shutting down!");
 
-		LOGGER.log(Level.INFO, "receiver " + drw.getDelegate() + " - shutting down message queue!");
+		LOGGER.log(Level.FINEST, "receiver " + drw + " - shutting down message queue!");
 
 		messageQueue.shutdown();
 
-		LOGGER.log(Level.INFO, "receiver " + drw.getDelegate() + " - message queue is shut down!");
+		LOGGER.log(Level.FINEST, "receiver " + drw + " - message queue is shut down!");
 
-		LOGGER.log(Level.INFO, "receiver " + drw.getDelegate()
-				+ " - informing dataReceiverForQueueListener that I'm gone!");
+		LOGGER.log(Level.FINEST, "receiver " + drw + " - informing dataReceiverForQueueListener that I'm gone!");
 
 		if (getDataReceiverForQueueListener() != null) {
 			getDataReceiverForQueueListener().dataReceiverForQueueIsGone(this);
 		}
 
-		LOGGER.log(Level.INFO, "receiver " + drw.getDelegate() + " is shut down!");
+		LOGGER.log(Level.FINEST, "receiver " + drw + " is shut down!");
 	}
 
 	public boolean isShutdown() {
 		return shutdown;
 	}
 
-	public void stateChanged(final DataProducerStateChangeEvent event)
-
-	{
-
+	public void stateChanged(final DataProducerStateChangeEvent event) {
 		messageQueue.addEvent(event);
-
 	}
 
-	public void newSamples(final NewSamplesEvent event)
-
-	{
-
+	public void newSamples(final NewSamplesEvent event) {
 		messageQueue.addEvent(event);
-
 	}
 
-	public DataReceiverWrapper getDataReceiver()
-
-	{
-
+	public DataReceiverWrapper getDataReceiver() {
 		return drw;
-
 	}
 
 	/**
@@ -171,12 +158,8 @@ public class DataReceiverForQueue
 	 * 
 	 */
 
-	public IDataReceiverForQueueListener getDataReceiverForQueueListener()
-
-	{
-
+	public IDataReceiverForQueueListener getDataReceiverForQueueListener() {
 		return dataReceiverForQueueListener;
-
 	}
 
 	/**
@@ -185,16 +168,10 @@ public class DataReceiverForQueue
 	 * @param dataReceiverForQueueListener New value of property
 	 *            dataReceiverForQueueListener.
 	 * 
-	 * 
-	 * 
 	 */
 
-	public void setDataReceiverForQueueListener(final IDataReceiverForQueueListener dataReceiverForQueueListener)
-
-	{
-
+	public void setDataReceiverForQueueListener(final IDataReceiverForQueueListener dataReceiverForQueueListener) {
 		this.dataReceiverForQueueListener = dataReceiverForQueueListener;
-
 	}
 
 	private class DataReceiverQueueDispatcher implements EventQueueDispatcher {
@@ -218,8 +195,8 @@ public class DataReceiverForQueue
 
 					// verificar se e' um evento de paragem da thread
 					if (evt.isPoisoned()) {
-						LOGGER.log(Level.FINE, "receiver " + drw.getDelegate()
-								+ " - received a poison sample with largest num packet = " + evt.getLargestNumPacket());
+						LOGGER.log(Level.FINE,
+								"received a poison sample with largest num packet = " + evt.getLargestNumPacket());
 						shutdownAsSoonAsPossible();
 					}
 
@@ -228,16 +205,12 @@ public class DataReceiverForQueue
 					drw.stateChanged(evt.getDataProducerState());
 				}
 			} catch (final Exception e) {
-				LOGGER.log(Level.SEVERE,"Oooppss.. receiver gone? - Error dispatching event to receiver! Why? Gone?", e);
+				LOGGER.log(Level.SEVERE, "Oooppss.. receiver gone? - Error dispatching event to receiver! Why? Gone?",
+						e);
 
-				if (!isConnected())
-
-				{
-
+				if (!isConnected()) {
 					shutdownAsSoonAsPossible();
-
 					return;
-
 				}
 
 			}
@@ -245,14 +218,8 @@ public class DataReceiverForQueue
 		}
 
 		@Override
-		public int getPriority()
-
-		{
-
+		public int getPriority() {
 			return Thread.NORM_PRIORITY + 2;
-
 		}
-
 	}
-
 }
