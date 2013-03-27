@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.linkare.rec.acquisition.DataClient;
 import com.linkare.rec.acquisition.HardwareState;
@@ -52,12 +53,14 @@ public class ClientQueue {
 	private final List<DataClientForQueue> queueOrg = new LinkedList<DataClientForQueue>();
 	private final ClientsConnectionCheck clientsConnectionChecker = new ClientsConnectionCheck();
 	private final IDataClientForQueueListener dataClientForQueueAdapter = new DataClientForQueueAdapter();
+
+	private static final Logger LOGGER = Logger.getLogger(ClientQueue.class.getName());
+
 	/**
 	 * Client queue to send events for dispatch. This attribute must be the last
 	 * of the class to be declared!
 	 */
-	private final EventQueue messageQueue = new EventQueue(new ClientQueueDispatcher(),
-			this.getClass().getSimpleName());
+	private final EventQueue messageQueue = new EventQueue(new ClientQueueDispatcher(), this.getClass().getSimpleName());
 
 	/**
 	 * Creates the <code>ClientQueue</code>.
@@ -79,18 +82,14 @@ public class ClientQueue {
 		final DefaultUser securityUser = new DefaultUser(user);
 
 		if (!contains(user)) {
-			getClientQueueListener().log(
-					Level.INFO,
-					"ClientQueue - Client " + user.getUserName()
-							+ " doesn't exist here! - Going to send a NotRegistered Exception!");
+			LOGGER.log(Level.INFO, "ClientQueue - Client " + user.getUserName()
+					+ " doesn't exist here! - Going to send a NotRegistered Exception!");
 			throw new NotRegistered();
 		}
 
 		if (!SecurityManagerFactory.authorize(resource, securityUser, op1)) {
-			getClientQueueListener().log(
-					Level.INFO,
-					"ClientQueue - Client " + user.getUserName()
-							+ " is not authorized to make this operation! - Going to send a NotAuthorized Exception!");
+			LOGGER.log(Level.INFO, "ClientQueue - Client " + user.getUserName()
+					+ " is not authorized to make this operation! - Going to send a NotAuthorized Exception!");
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_OPERATION);
 		}
 
@@ -149,10 +148,8 @@ public class ClientQueue {
 			final IResource resource) throws NotRegistered, NotAuthorized {
 		synchronized (queueOrg) {
 			if (!isJmxAdmin(user) && !contains(user)) {
-				getClientQueueListener().log(
-						Level.INFO,
-						"ClientQueue -  The user " + user.getUserName()
-								+ " is not registered! - Going to send a NotRegistered Exception");
+				LOGGER.log(Level.INFO, "ClientQueue -  The user " + user.getUserName()
+						+ " is not registered! - Going to send a NotRegistered Exception");
 				throw new NotRegistered();
 			}
 
@@ -166,8 +163,7 @@ public class ClientQueue {
 			op.getProperties().put(IOperation.PROPKEY_USERID_OTHER, otherUser);
 
 			if (!isJmxAdmin(user) && !SecurityManagerFactory.authorize(resource, new DefaultUser(user), op)) {
-				getClientQueueListener().log(
-						Level.INFO,
+				LOGGER.log(Level.INFO,
 						"ClientQueue - The user "
 								+ user.getUserName()
 								+ " is not authorized to send messages to the user "
@@ -233,42 +229,41 @@ public class ClientQueue {
 			return;
 		}
 		shutDown = true;
-		getClientQueueListener().log(Level.INFO, "ClientQueue - shut down process initiated!");
-		getClientQueueListener().log(Level.INFO, "ClientQueue - shutting down message queue!");
+		LOGGER.log(Level.INFO, "ClientQueue - shut down process initiated!");
+		LOGGER.log(Level.INFO, "ClientQueue - shutting down message queue!");
 		messageQueue.shutdown();
-		getClientQueueListener().log(Level.INFO, "ClientQueue - message queue is shut down!");
+		LOGGER.log(Level.INFO, "ClientQueue - message queue is shut down!");
 
-		getClientQueueListener().log(Level.INFO, "ClientQueue - shutting down clients connection checker!");
+		LOGGER.log(Level.INFO, "ClientQueue - shutting down clients connection checker!");
 		clientsConnectionChecker.shutdown();
-		getClientQueueListener().log(Level.INFO, "ClientQueue - clients connection checker is shut down!");
+		LOGGER.log(Level.INFO, "ClientQueue - clients connection checker is shut down!");
 
-		getClientQueueListener().log(Level.INFO, "ClientQueue - shutting down clients!");
+		LOGGER.log(Level.INFO, "ClientQueue - shutting down clients!");
 		final Iterator<DataClientForQueue> iter = iterator();
 		while (iter.hasNext()) {
 			final DataClientForQueue dcfq = iter.next();
-			getClientQueueListener().log(Level.INFO, "ClientQueue - shutting down client " + dcfq.getUserName());
+			LOGGER.log(Level.INFO, "ClientQueue - shutting down client " + dcfq.getUserName());
 			dcfq.shutdown();
-			getClientQueueListener().log(Level.INFO, "ClientQueue - client " + dcfq.getUserName() + " is shut down!");
+			LOGGER.log(Level.INFO, "ClientQueue - client " + dcfq.getUserName() + " is shut down!");
 		}
 
-		getClientQueueListener().log(Level.INFO, "ClientQueue - shut down completed!");
+		LOGGER.log(Level.INFO, "ClientQueue - shut down completed!");
 	}
 
 	public boolean add(final DataClient dc, final IResource resource) throws MaximumClientsReached, NotAuthorized {
-		getClientQueueListener().log(Level.INFO, "ClientQueue - trying to register new client!");
+		LOGGER.log(Level.INFO, "ClientQueue - trying to register new client!");
 		boolean retVal = false;
 
 		synchronized (queueOrg) {
-			getClientQueueListener().log(Level.INFO, "CHECKING IF THERE IS SPACE AVAILABLE...");
-			getClientQueueListener().log(Level.INFO, "Number of registered users = " + queueOrg.size());
+			LOGGER.log(Level.INFO, "CHECKING IF THERE IS SPACE AVAILABLE...");
+			LOGGER.log(Level.INFO, "Number of registered users = " + queueOrg.size());
 			if (queueOrg.size() >= getMaximumClients()) {
-				getClientQueueListener()
-						.log(Level.INFO,
-								"ClientQueue - Maximum capacity reached... Going to deny client's request for registration! Maybe try later?");
+				LOGGER.log(Level.INFO,
+						"ClientQueue - Maximum capacity reached... Going to deny client's request for registration! Maybe try later?");
 				throw new MaximumClientsReached(
 						MaximumClientsReachedConstants.MAXIMUM_CLIENTS_REACHED_IN_HARDWARE_QUEUE, getMaximumClients());
 			} else {
-				getClientQueueListener().log(Level.INFO, queueOrg.size() + "<" + maximumClients + " ok to add user!");
+				LOGGER.log(Level.INFO, queueOrg.size() + "<" + maximumClients + " ok to add user!");
 			}
 
 		}
@@ -279,8 +274,8 @@ public class ClientQueue {
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_USERNAME_PASSWORD_NOT_MATCH);
 		}
 
-		getClientQueueListener().log(Level.INFO,
-				"ClientQueue : checking to see if DataClient " + dcfq.getUserName() + " is allready registered!");
+		LOGGER.log(Level.INFO, "ClientQueue : checking to see if DataClient " + dcfq.getUserName()
+				+ " is allready registered!");
 
 		if (contains(dcfq.getUserInfo())) {
 			final DataClientForQueue otherDcfq = getWrapperForUser(dcfq.getUserInfo());
@@ -301,8 +296,7 @@ public class ClientQueue {
 					}
 				}
 			} else if (!otherDcfq.getDataClient().isSameDelegate(dcfq.getDataClient())) {
-				getClientQueueListener().log(
-						Level.INFO,
+				LOGGER.log(Level.INFO,
 						"ClientQueue : There is allready a user with that name : " + otherDcfq.getUserName()
 								+ " - Sending a NotAuthorized Exception!");
 				throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_USERNAME_REPEATED);
@@ -313,11 +307,10 @@ public class ClientQueue {
 		}
 
 		synchronized (queueOrg) {
-			getClientQueueListener().log(Level.INFO,
-					"ClientQueue - Going to register client " + dcfq.getUserName() + " !");
+			LOGGER.log(Level.INFO, "ClientQueue - Going to register client " + dcfq.getUserName() + " !");
 			retVal = queueOrg.add(dcfq);
-			getClientQueueListener().log(Level.INFO,
-					"ClientQueue - registered client " + dcfq.getUserName() + (retVal ? "successfully!" : "failed!"));
+			LOGGER.log(Level.INFO, "ClientQueue - registered client " + dcfq.getUserName()
+					+ (retVal ? "successfully!" : "failed!"));
 		}
 
 		return retVal;
@@ -328,7 +321,7 @@ public class ClientQueue {
 			try {
 				return queueOrg.get(0);
 			} catch (final Exception e) {
-				getClientQueueListener().log(Level.INFO, "ClientQueue - No client at first position!");
+				LOGGER.log(Level.INFO, "ClientQueue - No client at first position!");
 				return null;
 			}
 		}
@@ -355,25 +348,20 @@ public class ClientQueue {
 					returnVal = queueOrg.remove(dcfq);
 
 					if (!cyclingQueue) {
-						getClientQueueListener().log(
-								Level.INFO,
-								"ClientQueue - " + (returnVal ? "Removed" : "Failed to remove") + " client "
-										+ dcfq.getUserName() + "!");
+						LOGGER.log(Level.INFO, "ClientQueue - " + (returnVal ? "Removed" : "Failed to remove")
+								+ " client " + dcfq.getUserName() + "!");
 						if (returnVal) {
-							getClientQueueListener().log(Level.INFO,
-									"ClientQueue - informing client is gone " + dcfq.getUserName() + "!");
+							LOGGER.log(Level.INFO, "ClientQueue - informing client is gone " + dcfq.getUserName() + "!");
 							clientQueueListener.dataClientForQueueIsGone(dcfq);
 						}
 					}
 				} else {
-					getClientQueueListener().log(Level.INFO,
-							"ClientQueue - client " + dcfq.getUserName() + " isn't registered here!");
+					LOGGER.log(Level.INFO, "ClientQueue - client " + dcfq.getUserName() + " isn't registered here!");
 				}
 
 			} catch (final Exception e) {
-				getClientQueueListener().logThrowable(
-						"ClientQueue - Error " + (cyclingQueue ? "cycling" : "removing") + " client "
-								+ dcfq.getUserName() + "!", e);
+				LOGGER.log(Level.SEVERE, "ClientQueue - Error " + (cyclingQueue ? "cycling" : "removing") + " client "
+						+ dcfq.getUserName() + "!", e);
 			}
 		}
 
@@ -388,7 +376,7 @@ public class ClientQueue {
 			if (remove(first)) {
 				queueOrg.add(first);
 			} else {
-				getClientQueueListener().log(Level.INFO, "ClientQueue - Unable to cycle users in Queue!");
+				LOGGER.log(Level.INFO, "ClientQueue - Unable to cycle users in Queue!");
 			}
 
 			cyclingQueue = false;
@@ -397,13 +385,12 @@ public class ClientQueue {
 
 	public boolean contains(final UserInfo user) {
 		final Iterator<DataClientForQueue> iter = iterator();
-		getClientQueueListener().log(Level.FINEST,
-				"ClientQueue - users size is " + Collections.unmodifiableList(queueOrg).size());
-		getClientQueueListener().log(Level.FINEST,
+		LOGGER.log(Level.FINEST, "ClientQueue - users size is " + Collections.unmodifiableList(queueOrg).size());
+		LOGGER.log(Level.FINEST,
 				"ClientQueue - username passed in is " + (user == null ? "(user is null)" : user.getUserName()));
 		while (iter.hasNext()) {
 			final DataClientForQueue dcfq = iter.next();
-			getClientQueueListener().log(Level.FINEST, "ClientQueue - dcfq.getUserName() " + dcfq.getUserName());
+			LOGGER.log(Level.FINEST, "ClientQueue - dcfq.getUserName() " + dcfq.getUserName());
 			if (dcfq.getUserName().equals(user.getUserName())) {
 				return true;
 			}
@@ -489,17 +476,15 @@ public class ClientQueue {
 						|| !cachedHardwareState.equals(((HardwareStateChangeEvent) o).getNewState())) {
 					cachedHardwareState = ((HardwareStateChangeEvent) o).getNewState();
 
-					getClientQueueListener().log(
-							Level.INFO,
-							"ClientQueue - dispatching Hardware State change event. New State is: "
-									+ ((HardwareStateChangeEvent) o).getNewState());
+					LOGGER.log(Level.INFO, "ClientQueue - dispatching Hardware State change event. New State is: "
+							+ ((HardwareStateChangeEvent) o).getNewState());
 
 					final Iterator<DataClientForQueue> iter = iterator();
 					while (iter.hasNext()) {
 						try {
 							(iter.next()).hardwareStateChange((HardwareStateChangeEvent) o);
 						} catch (final Exception e) {
-							getClientQueueListener().logThrowable(
+							LOGGER.log(Level.SEVERE,
 									"ClientQueue - Error dispatching Hardware State change events to clients!", e);
 						}
 					}
@@ -507,7 +492,7 @@ public class ClientQueue {
 					return;
 				}
 			} else if (o instanceof ChatMessageEvent) {
-				getClientQueueListener().log(Level.INFO, "ClientQueue - dispatching chat message event.");
+				LOGGER.log(Level.INFO, "ClientQueue - dispatching chat message event.");
 
 				// TODO: Apply filter bad word
 				BadWordManager badWordManager = BadWordManager.getInstance();
@@ -521,36 +506,31 @@ public class ClientQueue {
 					try {
 						(iter.next()).receiveMessage(chatMessageEvent);
 					} catch (final Exception e) {
-						getClientQueueListener().logThrowable("ClientQueue - Error dispatching chat message event!", e);
+						LOGGER.log(Level.SEVERE, "ClientQueue - Error dispatching chat message event!", e);
 					}
 				}
 			} else if (o instanceof HardwareLockEvent) {
-				getClientQueueListener().log(Level.INFO,
-						"The current free memory is: " + Runtime.getRuntime().freeMemory());
+				LOGGER.log(Level.INFO, "The current free memory is: " + Runtime.getRuntime().freeMemory());
 
-				getClientQueueListener().log(
-						Level.INFO,
-						"ClientQueue - dispatching Hardware Lock event to client "
-								+ ((HardwareLockEvent) o).getLockerClient().getUserName());
+				LOGGER.log(Level.INFO, "ClientQueue - dispatching Hardware Lock event to client "
+						+ ((HardwareLockEvent) o).getLockerClient().getUserName());
 
 				try {
 					((HardwareLockEvent) o).getLockerClient().hardwareLockable((HardwareLockEvent) o);
 
 				} catch (final Exception e) {
-					getClientQueueListener().logThrowable(
-							"ClientQueue - Error dispatching Hardware Lock event to client "
-									+ ((HardwareLockEvent) o).getLockerClient().getUserName(), e);
+					LOGGER.log(Level.SEVERE, "ClientQueue - Error dispatching Hardware Lock event to client "
+							+ ((HardwareLockEvent) o).getLockerClient().getUserName(), e);
 				}
 			} else if (o instanceof HardwareChangeEvent) {
-				getClientQueueListener().log(Level.INFO, "ClientQueue - dispatching Hardware Change event!");
+				LOGGER.log(Level.INFO, "ClientQueue - dispatching Hardware Change event!");
 
 				final Iterator<DataClientForQueue> iter = iterator();
 				while (iter.hasNext()) {
 					try {
 						iter.next().hardwareChange();
 					} catch (final Exception e) {
-						getClientQueueListener().logThrowable("ClientQueue - Error dispatching Hardware Change event!",
-								e);
+						LOGGER.log(Level.SEVERE, "ClientQueue - Error dispatching Hardware Change event!", e);
 					}
 				}
 			}
@@ -578,18 +558,11 @@ public class ClientQueue {
 						dcfq.shutdown();
 					}
 				} catch (final Exception e) {
-					getClientQueueListener().logThrowable("ClientQueue - Error cheking client connection status!", e);
+					LOGGER.log(Level.SEVERE, "ClientQueue - Error cheking client connection status!", e);
 				}
 			}
 		}
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public void logThrowable(final String message, final Throwable throwable) {
-			getClientQueueListener().logThrowable(message, throwable);
-		}
 	}
 
 	/* End Inner Class - Clients Connection Checker */
