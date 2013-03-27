@@ -112,11 +112,11 @@ public class DataReceiverQueue implements java.io.Serializable {
 			throws MaximumClientsReached, NotAuthorized {
 		LOGGER.log(Level.INFO, "DataReceiverQueue - trying to register new dataReceiver!");
 
-		if (messageQueue.isStopdispatching()) {
-			LOGGER.log(Level.INFO, "DataReceiverQueue - The EventQueue is already stoped dispatching. "
-					+ "Can't register DataReceiver if ain't gonna be nothing more to dispatch!");
-			return false;
-		}
+//		if (messageQueue.isStopdispatching()) {
+//			LOGGER.log(Level.INFO, "DataReceiverQueue - The EventQueue is already stoped dispatching. "
+//					+ "Can't register DataReceiver if ain't gonna be nothing more to dispatch!");
+//			return false;
+//		}
 
 		boolean retVal = false;
 		final DataReceiverForQueue drfq = new DataReceiverForQueue(dr, dataReceiverForQueueAdapter);
@@ -148,7 +148,7 @@ public class DataReceiverQueue implements java.io.Serializable {
 			LOGGER.log(Level.INFO, "DataReceiverQueue - registered dataReceiver "
 					+ (retVal ? "successfully!" : "failed!"));
 			LOGGER.log(Level.INFO,
-					"DataReceiverQueue - Informing dataReceiver of current State... just to get him goin'!");
+					"DataReceiverQueue - Informing dataReceiver of current State "+currentState+" - just to get him goin'!");
 			drfq.stateChanged(new DataProducerStateChangeEvent(currentState));
 
 		}
