@@ -577,7 +577,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 								.toLowerCase()));
 					}
 					// FIXME hack! martelada! it shouln't be necessary to
-					// transform but BaseSerialPort doesn't now...
+					// transform but BaseSerialPort doesn't know...
 					cmd = AbstractSerialPortDriver.createTransformedDataCommand(cmd);
 					LOGGER.log(Level.FINEST, "Going to process the transformed data command [" + cmd + "]");
 					dataSource.processDataCommand(cmd);
