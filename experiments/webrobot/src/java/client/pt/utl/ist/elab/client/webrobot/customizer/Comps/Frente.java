@@ -37,14 +37,18 @@ public class Frente extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Blo
 	/** Holds value of property cancel. */
 	private boolean cancel = false;
 
-	/** Creates a new instance of CompInt */
+	/**
+	 * Creates a new instance of CompInt
+	 * 
+	 * @param parent
+	 */
 	public Frente(final javax.swing.JFrame parent) {
 		super();
 		setCancel(false);
 		model = new pt.utl.ist.elab.client.webrobot.customizer.Models.ModelFrente();
 		confFrente = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfFrente(parent, true, model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confFrente);
-		confFrente.show();
+		confFrente.setVisible(true);
 		if (confFrente.isCancel()) {
 			setCancel(true);
 			return;
@@ -116,7 +120,7 @@ public class Frente extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Blo
 	public void edit(final javax.swing.JFrame parent) {
 		confFrente = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfFrente(parent, true, model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confFrente);
-		confFrente.show();
+		confFrente.setVisible(true);
 	}
 
 	@Override

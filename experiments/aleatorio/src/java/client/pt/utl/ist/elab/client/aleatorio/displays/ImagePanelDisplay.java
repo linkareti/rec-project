@@ -6,9 +6,13 @@
 
 package pt.utl.ist.elab.client.aleatorio.displays;
 
-import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 
 /**
  * 
@@ -18,6 +22,7 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
 
+	private static final Logger LOGGER = Logger.getLogger(ImagePanelDisplay.class.getName());
 	/**
 	 * 
 	 */
@@ -434,8 +439,6 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 	private final javax.swing.Icon icon = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/aleatorio/resources/AleatorioIcon.gif"));
 
-	private final int imageWidth = 640;
-	private final int imageHeight = 480;
 	private AnalysisPanel[] analysisPanel = null;
 	private boolean analysing = false;
 	private int currentAnalysisPanelCount = 0, currentAnalysisPanelIndex = 0;
@@ -495,20 +498,20 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 
 	@Override
 	public void newSamples(final com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
-		System.out.println(">>> Received New Samples!!");
-		System.out.println("DataChannels:");
+		LOGGER.log(Level.FINE, ">>> Received New Samples!!");
+		LOGGER.log(Level.FINE, "DataChannels:");
 		for (int i = 0; i < model.getChannelCount(); i++) {
 			if (model.getValueAt(evt.getSamplesStartIndex(), i) != null) {
-				System.out.println("channel[" + i + "].name=" + model.getChannelName(i));
+				LOGGER.log(Level.FINE, "channel[" + i + "].name=" + model.getChannelName(i));
 			}
 		}
 
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
-			// System.out.println(">>> checking sample "+i+"!!");
+			// LOGGER.log(Level.FINE,">>> checking sample "+i+"!!");
 			// byte[] imageByteArray =null;
 			// imageByteArray =null;
 
-			// System.out.println("checking for image = "+(model.getValueAt(i,
+			// LOGGER.log(Level.FINE,"checking for image = "+(model.getValueAt(i,
 			// model.getChannelIndex("Image")) != null));
 			if (model.getValueAt(i, model.getChannelIndex("Image")) != null) {
 				if (analysisPanel == null) {
@@ -522,7 +525,7 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 						.getData();
 				final java.awt.Image tempImage = byteArray2Image(imageByteArray);
 
-				// System.out.println("analysisPanel.length:"+analysisPanel.length
+				// LOGGER.log(Level.FINE,"analysisPanel.length:"+analysisPanel.length
 				// + "; currentAnalysisPanelCount:"+currentAnalysisPanelCount);
 				analysisPanel[currentAnalysisPanelCount] = new AnalysisPanel(tempImage);
 
@@ -530,8 +533,8 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 					analysisPanel[currentAnalysisPanelCount].setParams(configurationValues[0], configurationValues[1],
 							configurationValues[2], configurationValues[3], configurationValues[4],
 							configurationValues[5], configurationValues[6], configurationValues[7]);
-					System.out.println("currentAnalysisPanelCount:" + currentAnalysisPanelCount + "\nanalysisPanel:"
-							+ analysisPanel + "\nconfigured:" + configured);
+					LOGGER.log(Level.FINE, "currentAnalysisPanelCount:" + currentAnalysisPanelCount
+							+ "\nanalysisPanel:" + analysisPanel + "\nconfigured:" + configured);
 				}// if
 					// if (currentAnalysisPanelCount == 0)
 					// viewingPanel.add(analysisPanel[0]);
@@ -549,14 +552,14 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 					nextButton.setEnabled(true);
 				}
 				currentAnalysisPanelCount++;
-				// System.out.println("Image:"+analysisPanel[currentAnalysisPanelCount-1].getImage("original"));
+				// LOGGER.log(Level.FINE,"Image:"+analysisPanel[currentAnalysisPanelCount-1].getImage("original"));
 			}// if__image
 
 			// configurationByteArray = null;
-			// System.out.println("checking for config: "+(model.getValueAt(i,
+			// LOGGER.log(Level.FINE,"checking for config: "+(model.getValueAt(i,
 			// model.getChannelIndex("Configuration")) != null));
 			if (model.getValueAt(i, model.getChannelIndex("Configuration")) != null) {
-				System.out.println("Configuring!");
+				LOGGER.log(Level.FINE, "Configuring!");
 				configurationByteArray = model.getValueAt(i, model.getChannelIndex("Configuration")).getValue()
 						.getByteArrayValue().getData();
 				configurationValues = byteArray2IntArray(configurationByteArray);
@@ -580,11 +583,12 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 			 * //imageScrollPanel.add(analysisPanel[0]);
 			 * imageDisplaySingleton.setImage
 			 * (analysisPanel[0].getImage(analysisPanel[0].IMAGE_ORIGINAL));
-			 * //System.out.println(">>>Analysing Image!"); //analysisPanel[0] =
-			 * analyseImage(analysisPanel[0]);
-			 * //System.out.println(">>>Image Analysed!"); analysing = true; }
+			 * //LOGGER.log(Level.FINE,">>>Analysing Image!");
+			 * //analysisPanel[0] = analyseImage(analysisPanel[0]);
+			 * //LOGGER.log(Level.FINE,">>>Image Analysed!"); analysing = true;
+			 * }
 			 */
-			System.out.println(">>> Processed new Sample!");
+			LOGGER.log(Level.FINE, ">>> Processed new Sample!");
 		}
 	}// newSamples(NewExpDataEvent evt)
 
@@ -607,6 +611,7 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		try {
 			baos.write(byteArray);
 		} catch (final java.io.IOException e) {
+			throw new RuntimeException(e);
 		}
 
 		final java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(baos.toByteArray());
@@ -620,33 +625,11 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		try {
 			bImage = javax.imageio.ImageIO.read(mciis);
 		} catch (final java.io.IOException e) {
+			throw new RuntimeException(e);
 		}
 
 		return bImage;
 	}// byteArray2Image(byte[] byteArray)
-
-	private java.awt.Image byteArray2Image_old(final byte[] byteArray) {
-		final int[] pixels = new int[byteArray.length / 3];
-		for (int index = 0; index < byteArray.length; index += 3) {
-			pixels[index / 3] = (byteArray[index] & 0xff) << 16;
-			pixels[index / 3] += (byteArray[index + 1] & 0xff) << 8;
-			pixels[index / 3] += (byteArray[index + 2] & 0xff);
-		}
-
-		final java.awt.image.MemoryImageSource mis = new java.awt.image.MemoryImageSource(imageWidth, imageHeight,
-				pixels, 0, imageWidth);
-		final java.awt.Image image = createImage(mis);
-
-		final java.awt.MediaTracker tracker = new java.awt.MediaTracker(this);
-		tracker.addImage(image, 0);
-		try {
-			tracker.waitForAll();
-		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
-		return image;
-	}// byteArray2Image(byte[] byteArray) ******** OLD ********
 
 	private int[] byteArray2IntArray(final byte[] byteArray) {
 		final int[] temp = new int[byteArray.length / 4];
@@ -668,7 +651,6 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		// analysisPan.convolutionTransform();
 		// analysisPan.fullCount();
 		analysisPan.refineCount(AnalysisPanel.IMAGE_HOUGH);
-		;
 		return analysisPan;
 	}// analyseImage (AnalysisPanel analysisPan)
 
@@ -680,19 +662,6 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		out[out.length - 1] = null;
 		return out;
 	}// addArrayPanel
-
-	private AnalysisPanel[] removeArrayEntry(final AnalysisPanel[] analysisPan, final int index) {
-		final AnalysisPanel[] returnPanel = new AnalysisPanel[analysisPan.length - 1];
-		for (int i = 0; i < analysisPan.length; i++) {
-			if (i < index) {
-				returnPanel[i] = analysisPan[i];
-			}// if
-			else if (i > index) {
-				returnPanel[i - 1] = analysisPan[i];
-			}// else_if
-		}// for_i
-		return returnPanel;
-	}
 
 	@Override
 	public void dataModelWaiting() {
@@ -715,8 +684,8 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 	}
 
 	// removeArrayEntry
-    @Override
-    public DataDisplayEnum getDisplayType() {
-        return DataDisplayEnum.IMAGE;
-    }
+	@Override
+	public DataDisplayEnum getDisplayType() {
+		return DataDisplayEnum.IMAGE;
+	}
 }

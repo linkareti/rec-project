@@ -37,14 +37,18 @@ public class Esquerda extends pt.utl.ist.elab.client.webrobot.customizer.Comps.B
 	/** Holds value of property cancel. */
 	private boolean cancel = false;
 
-	/** Creates a new instance of CompInt */
+	/**
+	 * Creates a new instance of CompInt
+	 * 
+	 * @param parent
+	 */
 	public Esquerda(final javax.swing.JFrame parent) {
 		super();
 		setCancel(false);
 		model = new pt.utl.ist.elab.client.webrobot.customizer.Models.ModelEsquerda();
 		confEsquerda = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfEsquerda(parent, true, model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confEsquerda);
-		confEsquerda.show();
+		confEsquerda.setVisible(true);
 		if (confEsquerda.isCancel()) {
 			setCancel(true);
 			return;
@@ -117,7 +121,7 @@ public class Esquerda extends pt.utl.ist.elab.client.webrobot.customizer.Comps.B
 	public void edit(final javax.swing.JFrame parent) {
 		confEsquerda = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfEsquerda(parent, true, model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confEsquerda);
-		confEsquerda.show();
+		confEsquerda.setVisible(true);
 	}
 
 	@Override

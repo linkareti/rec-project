@@ -23,7 +23,7 @@ public class VelocityGraph extends MultSeriesXYExperimentGraph {
 	public VelocityGraph() {
 		setChannelDisplayX(2);
 		setChannelDisplayY(0);
-		setUpdatePercentage(10);
+		setUpdateFrequency(10);
 	}
 
 	@Override

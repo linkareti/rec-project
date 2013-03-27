@@ -25,7 +25,6 @@ public class CompInt extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 	private pt.utl.ist.elab.client.webrobot.customizer.Models.ModelCompInt model;
 	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfCompInt confCompInt;
 	private final java.awt.Color backgroundColor = new java.awt.Color(204, 204, 204);
-	private final java.awt.Color anotherAndColor = new java.awt.Color(102, 255, 255);
 	private String text;
 	private final String fullNameDescription = "Comparacao de numeros inteiros";
 
@@ -41,14 +40,18 @@ public class CompInt extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 	/** Holds value of property cancel. */
 	private boolean cancel = false;
 
-	/** Creates a new instance of CompInt */
+	/**
+	 * Creates a new instance of CompInt
+	 * 
+	 * @param parent
+	 */
 	public CompInt(final javax.swing.JFrame parent) {
 		super();
 		setCancel(false);
 		model = new pt.utl.ist.elab.client.webrobot.customizer.Models.ModelCompInt();
 		confCompInt = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfCompInt(parent, true, model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confCompInt);
-		confCompInt.show();
+		confCompInt.setVisible(true);
 		if (confCompInt.isCancel()) {
 			setCancel(true);
 			return;
@@ -125,7 +128,7 @@ public class CompInt extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 	public void edit(final javax.swing.JFrame parent) {
 		confCompInt = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfCompInt(parent, true, model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confCompInt);
-		confCompInt.show();
+		confCompInt.setVisible(true);
 	}
 
 	@Override

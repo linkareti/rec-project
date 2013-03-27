@@ -7,13 +7,19 @@
 package pt.utl.ist.elab.client.aleatorio.displays;
 
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * 
  * @author Pedro Carvalho - LEFT - IST
  */
+@SuppressWarnings({"unused","rawtypes","unchecked"})
 public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Cloneable {
 
+	private static final Logger LOGGER=Logger.getLogger(AnalysisPanel.class.getName());
+	
+	
 	/**
 	 * 
 	 */
@@ -108,8 +114,8 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			tracker.waitForAll();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE,"Exception: "+e.getMessage(),e);
+			throw new RuntimeException(e);
 		}
 		// Draw image at its natural size first.
 		g.drawImage(image, 0, 0, this); // 85x62 image
@@ -159,8 +165,8 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			pg.grabPixels();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE,"Exception: "+e.getMessage(),e);
+			throw new RuntimeException(e);
 		}
 
 		for (int index = 0; index < inPixels.length; index++) {
@@ -188,8 +194,8 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			tracker.waitForAll();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE,"Exception: "+e.getMessage(),e);
+			throw new RuntimeException(e);
 		}
 		setImage(BWImage, "BW");
 		BWPixels = outPixels;
@@ -233,8 +239,8 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			pg.grabPixels();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE,"Exception: "+e.getMessage(),e);
+			throw new RuntimeException(e);
 		}
 
 		for (int index = 0; index < inPixels.length; index++) {
@@ -277,8 +283,8 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			tracker.waitForAll();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE,"Exception: "+e.getMessage(),e);
+			throw new RuntimeException(e);
 		}
 		setImage(houghImage, "hough");
 		houghPixels = outPixels;
@@ -297,8 +303,8 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			pg1.grabPixels();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE,"Exception: "+e.getMessage(),e);
+			throw new RuntimeException(e);
 		}// catch
 
 		houghCountPixels = originalPixels;
@@ -309,8 +315,8 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			pg.grabPixels();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE,"Exception: "+e.getMessage(),e);
+			throw new RuntimeException(e);
 		}// catch
 
 		int valor, x, y;
@@ -448,8 +454,8 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			tracker.waitForAll();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE,"Exception: "+e.getMessage(),e);
+			throw new RuntimeException(e);
 		}
 
 		setImage(houghCountImage, "houghCount");
@@ -497,8 +503,8 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			pg.grabPixels();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE,"Exception: "+e.getMessage(),e);
+			throw new RuntimeException(e);
 		}
 
 		// removing the border of the whole image
@@ -568,8 +574,8 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			tracker.waitForAll();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE,"Exception: "+e.getMessage(),e);
+			throw new RuntimeException(e);
 		}
 		setImage(convolutionImage, "convolution");
 		return convolutionImage;
@@ -588,8 +594,8 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			pg.grabPixels();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE,"Exception: "+e.getMessage(),e);
+			throw new RuntimeException(e);
 		}
 
 		final java.awt.image.PixelGrabber pg1 = new java.awt.image.PixelGrabber(originalImage, 0, 0, imageWidth,
@@ -597,8 +603,8 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			pg1.grabPixels();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE,"Exception: "+e.getMessage(),e);
+			throw new RuntimeException(e);
 		}
 
 		boolean presente = false;
@@ -649,7 +655,7 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		 * java.awt.MediaTracker tracker = new java.awt.MediaTracker(this);
 		 * tracker.addImage(convolutionCountImage,0); try {
 		 * tracker.waitForAll(); }catch(InterruptedException e) {
-		 * e.printStackTrace(); System.exit(1); }
+		 * LOGGER.log(Level.SEVERE,"Exception: "+e.getMessage(),e); throw new RuntimeException(e); }
 		 */
 		setImage(convolutionCountImage, "convolutionCount");
 		conv_cluster_counter = countClusters(convolutionCircles);
@@ -1021,8 +1027,8 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			pg1.grabPixels();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE,"Exception: "+e.getMessage(),e);
+			throw new RuntimeException(e);
 		}// catch
 			// }//if
 		final int[] outPixels = originalPixels;
@@ -1161,8 +1167,8 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			tracker.waitForAll();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE,"Exception: "+e.getMessage(),e);
+			throw new RuntimeException(e);
 		}
 		refineCountImage = outImage;
 		fullCircles = new int[center_counter][2];
@@ -1195,8 +1201,8 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			pg.grabPixels();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE,"Exception: "+e.getMessage(),e);
+			throw new RuntimeException(e);
 		}
 
 		int indice;
@@ -1230,8 +1236,8 @@ public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			tracker.waitForAll();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE,"Exception: "+e.getMessage(),e);
+			throw new RuntimeException(e);
 		}
 		return image;
 	}// buildImage(int[][] centers, int centersCounter)

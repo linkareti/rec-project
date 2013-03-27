@@ -66,7 +66,7 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new Animation());
 		dummy.pack();
-		dummy.show();
+		dummy.setVisible(true);
 	}
 
 	// Chegaram novas amostras!

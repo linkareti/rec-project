@@ -25,7 +25,6 @@ public class IVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bloc
 	private static pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIVPWM model;
 	private static pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfIVPWM confIVPWM;
 	private static java.awt.Color backgroundColor = new java.awt.Color(204, 204, 204);
-	private String text;
 	private static String fullNameDescription = "Configuracao dos sensores IV";
 
 	/** Holds value of property paintBottom. */
@@ -37,9 +36,12 @@ public class IVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bloc
 	/** Holds value of property cancel. */
 	private boolean cancel = false;
 
-	/** Creates a new instance of CompInt 
-	 * @param parent 
-	 * @param model */
+	/**
+	 * Creates a new instance of CompInt
+	 * 
+	 * @param parent
+	 * @param model
+	 */
 	public IVPWM(final javax.swing.JFrame parent,
 			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIVPWM model) {
 		super();
@@ -47,7 +49,7 @@ public class IVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bloc
 		setCancel(false);
 		IVPWM.confIVPWM = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfIVPWM(parent, true, model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, IVPWM.confIVPWM);
-		IVPWM.confIVPWM.show();
+		IVPWM.confIVPWM.setVisible(true);
 		if (IVPWM.confIVPWM.isCancel()) {
 			setCancel(true);
 			return;
@@ -60,7 +62,6 @@ public class IVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bloc
 		setBorderPainted(false);
 		setBackground(new java.awt.Color(0, 0, 0, 0));// background transparente
 		setOpaque(false);
-		text = "";
 	}
 
 	public IVPWM(final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIVPWM model) {
@@ -72,7 +73,6 @@ public class IVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bloc
 		setBorderPainted(false);
 		setBackground(new java.awt.Color(0, 0, 0, 0));// background transparente
 		setOpaque(false);
-		text = "";
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public class IVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bloc
 		IVPWM.confIVPWM = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfIVPWM(parent, true,
 				IVPWM.model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, IVPWM.confIVPWM);
-		IVPWM.confIVPWM.show();
+		IVPWM.confIVPWM.setVisible(true);
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public class IVPWM extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bloc
 
 	@Override
 	public String getFullNameDescription() {
-		return fullNameDescription;
+		return IVPWM.fullNameDescription;
 	}
 
 	/**

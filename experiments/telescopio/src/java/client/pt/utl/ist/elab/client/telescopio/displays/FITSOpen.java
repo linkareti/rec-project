@@ -38,8 +38,6 @@ public class FITSOpen extends javax.swing.JPanel implements com.linkare.rec.impl
 	 */
 	private void initComponents()//GEN-BEGIN:initComponents
 	{
-		final java.awt.GridBagConstraints gridBagConstraints;
-
 		jTabbedPaneOpen = new javax.swing.JTabbedPane();
 		jPanel1 = new javax.swing.JPanel();
 		jButtonOpen = new javax.swing.JButton();
@@ -82,25 +80,25 @@ public class FITSOpen extends javax.swing.JPanel implements com.linkare.rec.impl
 		}
 	}// GEN-LAST:event_jButtonOpenActionPerformed
 
-	private void saveToFile(final java.io.File fName, final byte[] data) {
-		try {
-			final java.io.FileOutputStream fos = new java.io.FileOutputStream(fName);
-			fos.write(data);
-			fos.close();
-		} catch (final java.io.IOException ioe) {
-			ioe.printStackTrace();
-		}
-	}
+//	private void saveToFile(final java.io.File fName, final byte[] data) {
+//		try {
+//			final java.io.FileOutputStream fos = new java.io.FileOutputStream(fName);
+//			fos.write(data);
+//			fos.close();
+//		} catch (final java.io.IOException ioe) {
+//			ioe.printStackTrace();
+//		}
+//	}
 
-	private java.io.File showSaveDialog() {
-		final javax.swing.JFileChooser saveDialog = new javax.swing.JFileChooser();
-		final int option = saveDialog.showSaveDialog(null);
-		if (option == JFileChooser.APPROVE_OPTION) {
-			return saveDialog.getSelectedFile();
-		}
-
-		return null;
-	}
+//	private java.io.File showSaveDialog() {
+//		final javax.swing.JFileChooser saveDialog = new javax.swing.JFileChooser();
+//		final int option = saveDialog.showSaveDialog(null);
+//		if (option == JFileChooser.APPROVE_OPTION) {
+//			return saveDialog.getSelectedFile();
+//		}
+//
+//		return null;
+//	}
 
 	@Override
 	public void dataModelEnded() {
@@ -147,10 +145,6 @@ public class FITSOpen extends javax.swing.JPanel implements com.linkare.rec.impl
 		return null;
 	}
 
-	private final int dark = -1;
-	private final int image = -1;
-	private final int flat = -1;
-
 	@Override
 	public void newSamples(final com.linkare.rec.impl.client.experiment.NewExpDataEvent evt) {
 	}
@@ -182,7 +176,7 @@ public class FITSOpen extends javax.swing.JPanel implements com.linkare.rec.impl
 		final FITSOpen p = new FITSOpen();
 		dummy.getContentPane().add(p, java.awt.BorderLayout.CENTER);
 		dummy.pack();
-		dummy.show();
+		dummy.setVisible(true);
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

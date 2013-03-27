@@ -37,7 +37,11 @@ public class Atribui extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 	/** Holds value of property cancel. */
 	private boolean cancel = false;
 
-	/** Creates a new instance of CompInt */
+	/**
+	 * Creates a new instance of CompInt
+	 * 
+	 * @param parent
+	 */
 	public Atribui(final javax.swing.JFrame parent) {
 		super();
 		setCancel(false);

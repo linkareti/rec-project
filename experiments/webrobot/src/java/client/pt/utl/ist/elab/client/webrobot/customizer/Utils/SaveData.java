@@ -6,6 +6,8 @@
 
 package pt.utl.ist.elab.client.webrobot.customizer.Utils;
 
+import com.linkare.rec.impl.config.ReCSystemProperty;
+
 /**
  * 
  * @author André Neto - LEFT - IST
@@ -14,18 +16,21 @@ public class SaveData {
 
 	StringBuffer saveToString = null;
 	java.io.FileOutputStream fileOutPutStream = null;
-	String lineSeparator = System.getProperty("line.separator");
+	String lineSeparator = ReCSystemProperty.LINE_SEPARATOR.getValue();
 	pt.utl.ist.elab.client.webrobot.customizer.Comps.Block comp = null;
 	pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] matrix;
 	int shift = 0;
 
-	/** Creates a new instance of SaveData 
-	 * @param file 
-	 * @param matrix 
-	 * @param confInOut 
-	 * @param ivpwm 
-	 * @param maxRow 
-	 * @param maxColumn */
+	/**
+	 * Creates a new instance of SaveData
+	 * 
+	 * @param file
+	 * @param matrix
+	 * @param confInOut
+	 * @param ivpwm
+	 * @param maxRow
+	 * @param maxColumn
+	 */
 	public SaveData(final java.io.File file, final pt.utl.ist.elab.client.webrobot.customizer.Comps.Block[][] matrix,
 			final pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfInOut confInOut,
 			final pt.utl.ist.elab.client.webrobot.customizer.Comps.IVPWM ivpwm, final int maxRow, final int maxColumn) {

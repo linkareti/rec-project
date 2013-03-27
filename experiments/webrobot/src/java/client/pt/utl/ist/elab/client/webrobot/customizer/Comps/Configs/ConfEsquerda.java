@@ -17,10 +17,13 @@ public class ConfEsquerda extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = -3096159607197107057L;
 
-	/** Creates new form ConfCompBin 
-	 * @param parent 
-	 * @param modal 
-	 * @param model */
+	/**
+	 * Creates new form ConfCompBin
+	 * 
+	 * @param parent
+	 * @param modal
+	 * @param model
+	 */
 	public ConfEsquerda(final java.awt.Frame parent, final boolean modal,
 			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelEsquerda model) {
 		super(parent, modal);

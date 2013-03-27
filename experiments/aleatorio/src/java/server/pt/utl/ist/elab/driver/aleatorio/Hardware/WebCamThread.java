@@ -53,31 +53,29 @@ public class WebCamThread implements Runnable {
 
 	/** Creates a new instance of WebCam */
 	public WebCamThread() {
-	
+
 		// get a list of all media devices, search default devices and formats,
 		// and print it out if args[x] = "-dd"
 		// --------------------------------------------------------------------------------------------------------
-	
+
 		System.out.println(">>> get list of all media devices ...");
-	
+
 		@SuppressWarnings("rawtypes")
 		java.util.Vector deviceListVector = CaptureDeviceManager.getDeviceList(null);
 		if (deviceListVector == null) {
-			System.out.println("... error: media device list vector is null, program aborted");
-			System.exit(0);
+			throw new RuntimeException("... error: media device list vector is null, program aborted");
 		}
 		if (deviceListVector.size() == 0) {
-			System.out.println("... error: media device list vector size is 0, program aborted");
-			System.exit(0);
+			throw new RuntimeException("... error: media device list vector size is 0, program aborted");
 		}
-	
+
 		for (int x = 0; x < deviceListVector.size(); x++) {
 			// display device name
 			CaptureDeviceInfo deviceInfo = (CaptureDeviceInfo) deviceListVector.elementAt(x);
 			String deviceInfoText = deviceInfo.getName();
 			if (debugDeviceList)
 				System.out.println("device " + x + ": " + deviceInfoText);
-	
+
 			// display device formats
 			Format deviceFormat[] = deviceInfo.getFormats();
 			for (int y = 0; y < deviceFormat.length; y++) {
@@ -90,7 +88,7 @@ public class WebCamThread implements Runnable {
 						captureVideoDevice = deviceInfo;
 						System.out.println(">>> capture video device = " + deviceInfo.getName());
 						Format[] videoFormats = captureVideoDevice.getFormats();
-	
+
 						wantedFormat = null;
 						int w = 0;
 						int h = 0;
@@ -98,12 +96,12 @@ public class WebCamThread implements Runnable {
 							wantedFormat = (VideoFormat) videoFormats[i];
 							w = (int) wantedFormat.getSize().getWidth();
 							h = (int) wantedFormat.getSize().getHeight();
-	
+
 							if (w == imageWidth && h == imageHeight)
 								break;
 						}
 					}
-	
+
 				// search for default video format
 				/*
 				 * if (captureVideoDevice == deviceInfo) if (captureVideoFormat
@@ -120,32 +118,32 @@ public class WebCamThread implements Runnable {
 			}
 		}
 		// System.out.println("... list completed.");
-	
+
 		// if args[x] = "-dd" terminate now
 		// --------------------------------
 		// if (debugDeviceList)
-		// System.exit(0);
-	
+		// throw new RuntimeException(e);
+
 		// setup video data source
 		// -----------------------
 		MediaLocator ml = captureVideoDevice.getLocator();
-	
+
 		try {
 			if (ml != null) {
-	
+
 				videoDataSource = javax.media.Manager.createDataSource(ml);
-	
+
 				FormatControl[] formatControls = ((CaptureDevice) videoDataSource).getFormatControls();
-	
+
 				Format finalFormat = null;
 				for (int i = 0; i < formatControls.length; i++) {
 					if ((finalFormat = formatControls[i].setFormat(wantedFormat)) != null)
 						break;
 				}
-	
+
 				if (finalFormat == null)
 					System.out.println("Couldn't set the desired format...using the default!");
-	
+
 				videoDataSource.connect();
 				videoPlayer = Manager.createRealizedPlayer(videoDataSource);
 				videoPlayer.start();
@@ -154,26 +152,26 @@ public class WebCamThread implements Runnable {
 			}
 		} catch (IOException e) {
 			System.out.println("Creating DataSource" + e);
-			System.exit(0);
+			throw new RuntimeException(e);
 		} catch (NoDataSourceException e) {
 			System.out.println("Creating DataSource" + e);
-			System.exit(0);
+			throw new RuntimeException(e);
 		} catch (CannotRealizeException nre) {
 			nre.printStackTrace();
 		} catch (NoPlayerException npe) {
 			npe.printStackTrace();
 		}
-	
+
 		/*
 		 * if (! DeviceInfo.setFormat(videoDataSource, captureVideoFormat)) {
 		 * System
 		 * .out.println("Error: unable to set video format - program aborted");
-		 * System.exit(0); }
+		 * throw new RuntimeException(e); }
 		 */
-	
+
 		// create a new processor
 		// ----------------------
-	
+
 		// setup output file format ->> msvideo
 		/*
 		 * FileTypeDescriptor outputType = new
@@ -189,10 +187,10 @@ public class WebCamThread implements Runnable {
 		 * 
 		 * Processor videoProcessor = null; try {videoProcessor =
 		 * Manager.createRealizedProcessor(processorModel);} catch (IOException
-		 * e) { System.out.println(e); System.exit(0); } catch
-		 * (NoProcessorException e) { System.out.println(e); System.exit(0); }
-		 * catch (CannotRealizeException e) { System.out.println(e);
-		 * System.exit(0); }
+		 * e) { System.out.println(e); throw new RuntimeException(e); } catch
+		 * (NoProcessorException e) { System.out.println(e); throw new
+		 * RuntimeException(e); } catch (CannotRealizeException e) {
+		 * System.out.println(e); throw new RuntimeException(e); }
 		 * 
 		 * // get the output of the processor processorDataSource =
 		 * videoProcessor.getDataOutput();
@@ -203,15 +201,18 @@ public class WebCamThread implements Runnable {
 		 * = Manager.createRealizedPlayer(videoDataSource); //or mediaLocator
 		 * //or 'videoDataSource' //or URL //videoPlayer =
 		 * Manager.createRealizedPlayer(videoDataSource); } catch(IOException e)
-		 * {System.out.println("Can't create Player. Check Webcam!");
-		 * System.exit(1);} catch(NoPlayerException e) {e.printStackTrace();
-		 * System.exit(1);} catch(CannotRealizeException e)
-		 * {System.out.println(e.toString()); System.exit(1);}
+		 * {System.out.println("Can't create Player. Check Webcam!"); throw new
+		 * RuntimeException(e);} catch(NoPlayerException e)
+		 * {e.printStackTrace(); throw new RuntimeException(e);}
+		 * catch(CannotRealizeException e) {System.out.println(e.toString());
+		 * throw new RuntimeException(e);}
 		 * 
 		 * //videoPlayer.start(); //while (videoPlayer.getState() !=
 		 * videoPlayer.Started){} //wait for player to start!
 		 */
-	}	public void videoPlayerStart() {
+	}
+
+	public void videoPlayerStart() {
 		WebCamThread.videoPlayer.start();
 		while (WebCamThread.videoPlayer.getState() != Controller.Started) {
 			try {
@@ -247,10 +248,11 @@ public class WebCamThread implements Runnable {
 	 * java.util.Vector deviceListVector =
 	 * CaptureDeviceManager.getDeviceList(null); if (deviceListVector == null) {
 	 * System.out.println(
-	 * "... error: media device list vector is null, program aborted");
-	 * System.exit(0); } if (deviceListVector.size() == 0) { System.out.println(
-	 * "... error: media device list vector size is 0, program aborted");
-	 * System.exit(0); }
+	 * "... error: media device list vector is null, program aborted"); throw
+	 * new RuntimeException(e); } if (deviceListVector.size() == 0) {
+	 * System.out.println(
+	 * "... error: media device list vector size is 0, program aborted"); throw
+	 * new RuntimeException(e); }
 	 * 
 	 * for (int x = 0; x < deviceListVector.size(); x++) { // display device
 	 * name CaptureDeviceInfo deviceInfo = (CaptureDeviceInfo)
@@ -280,14 +282,15 @@ public class WebCamThread implements Runnable {
 	 * 
 	 * DataSource videoDataSource = null; try { videoDataSource =
 	 * javax.media.Manager.createDataSource(videoMediaLocator); } catch
-	 * (IOException e) { System.out.println("Creating DataSource" + e);
-	 * System.exit(0); } catch (NoDataSourceException e) {
-	 * System.out.println("Creating DataSource" + e); System.exit(0); }
+	 * (IOException e) { System.out.println("Creating DataSource" + e); throw
+	 * new RuntimeException(e); } catch (NoDataSourceException e) {
+	 * System.out.println("Creating DataSource" + e); throw new
+	 * RuntimeException(e); }
 	 * 
 	 * if (! DeviceInfo.setFormat(videoDataSource, captureVideoFormat)) {
 	 * System.
-	 * out.println("Error: unable to set video format - program aborted");
-	 * System.exit(0); }
+	 * out.println("Error: unable to set video format - program aborted"); throw
+	 * new RuntimeException(e); }
 	 * 
 	 * // create a new processor // ----------------------
 	 * 
@@ -302,9 +305,10 @@ public class WebCamThread implements Runnable {
 	 * ProcessorModel(videoDataSource, outputFormat, outputType); Processor
 	 * videoProcessor = null; try {videoProcessor =
 	 * Manager.createRealizedProcessor(processorModel);} catch (IOException e) {
-	 * System.out.println(e); System.exit(0); } catch (NoProcessorException e) {
-	 * System.out.println(e); System.exit(0); } catch (CannotRealizeException e)
-	 * { System.out.println(e); System.exit(0); }
+	 * System.out.println(e); throw new RuntimeException(e); } catch
+	 * (NoProcessorException e) { System.out.println(e); throw new
+	 * RuntimeException(e); } catch (CannotRealizeException e) {
+	 * System.out.println(e); throw new RuntimeException(e); }
 	 * 
 	 * // get the output of the processor processorDataSource =
 	 * videoProcessor.getDataOutput();
@@ -313,12 +317,12 @@ public class WebCamThread implements Runnable {
 	 * Manager.createRealizedPlayer(videoDataSource); //or mediaLocator //or
 	 * 'videoDataSource' //or URL //videoPlayer =
 	 * Manager.createRealizedPlayer(videoDataSource); } catch(IOException e)
-	 * {System.out.println("Can't create Player. Check Webcam!");
-	 * System.exit(1);} catch(NoPlayerException e) {e.printStackTrace();
-	 * System.exit(1);} catch(CannotRealizeException e)
-	 * {System.out.println(e.toString()); System.exit(1);} videoPlayer.start();
-	 * while (videoPlayer.getState() != videoPlayer.Started){} //wait for player
-	 * to start!
+	 * {System.out.println("Can't create Player. Check Webcam!"); throw new
+	 * RuntimeException(e);} catch(NoPlayerException e) {e.printStackTrace();
+	 * throw new RuntimeException(e);} catch(CannotRealizeException e)
+	 * {System.out.println(e.toString()); throw new RuntimeException(e);}
+	 * videoPlayer.start(); while (videoPlayer.getState() !=
+	 * videoPlayer.Started){} //wait for player to start!
 	 * 
 	 * 
 	 * //commented so no file is recorded if (movieFileName == null)
@@ -338,7 +342,8 @@ public class WebCamThread implements Runnable {
 	 */
 	/**
 	 * Configure the length of the movie file in milisecs
-	 * @param milisecs 
+	 * 
+	 * @param milisecs
 	 */
 	public void configure(final long milisecs) {
 		System.out.println(">>> Configuring webcam for recording for " + milisecs + " milisecs.");
@@ -355,7 +360,8 @@ public class WebCamThread implements Runnable {
 
 	/**
 	 * Acquires an image from the webcam
-	 * @return 
+	 * 
+	 * @return
 	 */
 	public Image getImage() {
 		if (!isVideoPlayerStarted()) {
@@ -385,8 +391,8 @@ public class WebCamThread implements Runnable {
 			 * java.awt.image.PixelGrabber pg = new
 			 * java.awt.image.PixelGrabber(imagemCapturada, 0, 0, 640, 480,
 			 * inPixels, 0, 640); try { pg.grabPixels();
-			 * }catch(InterruptedException e) { e.printStackTrace();
-			 * System.exit(1); }
+			 * }catch(InterruptedException e) { e.printStackTrace(); throw new
+			 * RuntimeException(e); }
 			 */
 
 		}
@@ -396,7 +402,8 @@ public class WebCamThread implements Runnable {
 
 	/**
 	 * Grabs a frame and returns the buffer of that frame
-	 * @return 
+	 * 
+	 * @return
 	 */
 	public Buffer grabFrameBuffer() {
 		// Control[] controls = videoPlayer.getControls();

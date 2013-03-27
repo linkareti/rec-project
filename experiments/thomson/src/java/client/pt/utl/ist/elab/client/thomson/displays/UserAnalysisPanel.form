@@ -687,8 +687,6 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JColorChooser" name="jColorChooser">
-    </Component>
     <Container class="javax.swing.JDialog" name="jDialogZoom">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>

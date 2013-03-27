@@ -16,6 +16,8 @@ import javax.swing.SwingConstants;
 
 import pt.utl.ist.elab.client.vquantum.ComplexGaussian;
 import pt.utl.ist.elab.client.vquantum.Quantum;
+import pt.utl.ist.elab.common.virtual.utils.ByteUtil;
+import pt.utl.ist.elab.common.virtual.utils.Complex;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
@@ -61,8 +63,7 @@ public class Animation extends Quantum implements ExpDataDisplay, ExpDataModelLi
 	}
 
 	public void moves(final byte[] mv) {
-		// FIXME - client should never depend on driver part
-		// setPsi((Complex[]) ByteUtil.byteArrayToObject(mv));
+		setPsi((Complex[]) ByteUtil.byteArrayToObject(mv));
 		repaint();
 	}
 
@@ -72,7 +73,7 @@ public class Animation extends Quantum implements ExpDataDisplay, ExpDataModelLi
 			@Override
 			public void windowClosing(final java.awt.event.WindowEvent e) {
 				System.exit(0);
-			};
+			}
 		});
 		final Animation stdim = new Animation();
 		test.getContentPane().add(stdim);
@@ -267,7 +268,7 @@ public class Animation extends Quantum implements ExpDataDisplay, ExpDataModelLi
 		tempDialog.setLocation((int) ((screenSize.width - tempSize.getWidth()) / 2d),
 				(int) ((screenSize.height - tempSize.getHeight()) / 2d));
 
-		tempDialog.show();
+		tempDialog.setVisible(true);
 	}
 
 	public void pause() {

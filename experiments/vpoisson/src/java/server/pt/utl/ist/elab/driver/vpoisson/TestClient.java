@@ -15,6 +15,8 @@ import java.io.*;
 import java.net.*;
 import org.opensourcephysics.frames.*;
 
+import com.linkare.rec.impl.config.ReCSystemProperty;
+
 public class TestClient {
 	private int Nx = 60;
 	private int Ny = 60;
@@ -26,7 +28,7 @@ public class TestClient {
 		OutputStream out = null;
 		InputStream in = null;
 		ObjectInputStream ois = null;
-		String LS = System.getProperty("line.separator");
+		String LS = ReCSystemProperty.LINE_SEPARATOR.getValue();
 
 		try {
 			kkSocket = new Socket("orionte.cfn.ist.utl.pt", 4444);

@@ -87,6 +87,7 @@ public class FERHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void paintEverything(final Graphics g) {
 		// find the cliping rectangle within a scroll pane viewport
@@ -158,7 +159,7 @@ public class FERHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 			@Override
 			public void windowClosing(final java.awt.event.WindowEvent e) {
 				System.exit(0);
-			};
+			}
 		});
 		final FERHistogram ferim = new FERHistogram();
 		test.getContentPane().add(ferim);

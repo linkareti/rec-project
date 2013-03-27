@@ -6,6 +6,9 @@
 
 package pt.utl.ist.elab.driver.webrobot.debug;
 
+import javax.swing.SwingUtilities;
+
+
 /**
  * 
  * @author Andr�
@@ -452,7 +455,14 @@ public class ReadWrite extends javax.swing.JFrame {
 	 * @param args the command line arguments
 	 */
 	public static void main(final String args[]) {
-		new ReadWrite().show();
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				new ReadWrite().setVisible(true);	
+			}
+		});
+
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

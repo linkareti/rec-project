@@ -23,7 +23,7 @@ public class Mode1Graph extends MultSeriesXYExperimentGraph {
 	public Mode1Graph() {
 		setChannelDisplayX(0);
 		setChannelDisplayY(3);
-		setUpdatePercentage(10);
+		setUpdateFrequency(10);
 	}
 
 	@Override

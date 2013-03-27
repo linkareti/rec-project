@@ -36,7 +36,6 @@ public class VariablePanel extends JPanel {
 	private static Dimension panelDim = new Dimension(180, 70);
 	private final TitledBorder title;
 	private final double min, max, init;
-	private final int mult;
 	private final String pTitle;
 
 	public VariablePanel(final double newMin, final double newMax, final double newInit, final int multiplier,
@@ -46,7 +45,6 @@ public class VariablePanel extends JPanel {
 		min = newMin;
 		max = newMax;
 		init = newInit;
-		mult = multiplier;
 		pTitle = newTitle;
 
 		final int sliderMin = (int) (min * Math.pow(10, multiplier));

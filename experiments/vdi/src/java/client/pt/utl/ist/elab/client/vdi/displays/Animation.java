@@ -45,7 +45,7 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 	/** Creates a new instance of Animation */
 	public Animation() {
 		final double xi = 0.15 * Math.cos(Math.toRadians(70));
-		;
+		
 		final double yi = 0.15 * Math.sin(Math.toRadians(70));
 
 		plottingPanel1 = new PlottingPanel("X (m)", "Y (m)", "1");
@@ -146,7 +146,7 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new Animation());
 		dummy.pack();
-		dummy.show();
+		dummy.setVisible(true);
 	}
 
 	// Chegaram novas amostras!

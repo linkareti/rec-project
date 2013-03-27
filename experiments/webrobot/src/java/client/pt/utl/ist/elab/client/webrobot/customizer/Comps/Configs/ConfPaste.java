@@ -17,9 +17,12 @@ public class ConfPaste extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = -7328241669138707857L;
 
-	/** Creates new form ConfCompBin 
-	 * @param parent 
-	 * @param modal */
+	/**
+	 * Creates new form ConfCompBin
+	 * 
+	 * @param parent
+	 * @param modal
+	 */
 	public ConfPaste(final java.awt.Frame parent, final boolean modal) {
 		super(parent, modal);
 		initComponents();
@@ -260,7 +263,8 @@ public class ConfPaste extends javax.swing.JDialog {
 
 	/**
 	 * Setter for property columnCopy.
-	 * @param columnPaste 
+	 * 
+	 * @param columnPaste
 	 * 
 	 * @param columnCopy New value of property columnCopy.
 	 */

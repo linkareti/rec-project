@@ -12,7 +12,7 @@ package pt.utl.ist.elab.client.webrobot.customizer.Utils;
  */
 public class Undo {
 	int index = 0;
-	java.util.Vector<Object> vectorUndo;
+	java.util.List<Object> undoList;
 	Object undo = null;
 	Object redo = null;
 
@@ -24,26 +24,26 @@ public class Undo {
 
 	/** Creates a new instance of Undo */
 	public Undo() {
-		vectorUndo = new java.util.Vector(0);
+		undoList = new java.util.ArrayList<Object>(0);
 	}
 
 	public void addElement(final Object element) {
-		vectorUndo.addElement(element);
+		undoList.add(element);
 		setUndoable(true);
-		if (vectorUndo.size() == 30) {
-			vectorUndo.remove(0);
+		if (undoList.size() == 30) {
+			undoList.remove(0);
 		}
 	}
 
 	public Object undoElement() {
 		try {
-			undo = vectorUndo.get(vectorUndo.size() - 1 - (index + 1));
+			undo = undoList.get(undoList.size() - 1 - (index + 1));
 		} catch (final java.lang.ArrayIndexOutOfBoundsException aioobe) {
 			setUndoable(false);
 		}
 		index++;
 		setRedoable(true);
-		if (vectorUndo.size() < (index + 2)) {
+		if (undoList.size() < (index + 2)) {
 			setUndoable(false);
 		}
 		return undo;
@@ -51,7 +51,7 @@ public class Undo {
 
 	public Object redoElement() {
 		try {
-			redo = vectorUndo.get(vectorUndo.size() - index);
+			redo = undoList.get(undoList.size() - index);
 		} catch (final java.lang.ArrayIndexOutOfBoundsException aioobe) {
 			setRedoable(false);
 		}

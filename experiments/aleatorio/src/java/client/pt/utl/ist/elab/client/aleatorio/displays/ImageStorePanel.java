@@ -54,7 +54,7 @@ public class ImageStorePanel extends javax.swing.JPanel {
 			// tracker.addImage(image,0);
 			/*
 			 * try { tracker.waitForAll(); }catch(InterruptedException e) {
-			 * e.printStackTrace(); System.exit(1); }
+			 * LOGGER.log(Level.SEVERE,"Exception: "+e.getMessage(),e); throw new RuntimeException(e); }
 			 */
 		}
 

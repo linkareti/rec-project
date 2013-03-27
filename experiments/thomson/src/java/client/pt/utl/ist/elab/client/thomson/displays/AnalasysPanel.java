@@ -474,7 +474,7 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new AnalasysPanel(), java.awt.BorderLayout.CENTER);
 		dummy.pack();
-		dummy.show();
+		dummy.setVisible(true);
 	}
 
 	@Override

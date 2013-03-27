@@ -6,6 +6,8 @@
 
 package pt.utl.ist.elab.driver.webrobot.debug;
 
+import javax.swing.SwingUtilities;
+
 /**
  * 
  * @author André Neto - LEFT - IST
@@ -90,7 +92,14 @@ public class Game extends javax.swing.JFrame {
 	 * @param args the command line arguments
 	 */
 	public static void main(final String args[]) {
-		new Game().show();
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				new Game().setVisible(true);
+			}
+		});
+		
 		Game.serialComm = new pt.utl.ist.elab.driver.webrobot.serial.SerialComm();
 	}
 

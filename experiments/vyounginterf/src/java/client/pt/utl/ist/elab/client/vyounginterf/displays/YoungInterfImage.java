@@ -124,8 +124,8 @@ public class YoungInterfImage extends JPanel implements ExpDataDisplay, ExpDataM
 		}
 		this.model = model;
 		if (this.model != null) {
-			this.model.addExpDataModelListener(this);
 			channelIndexImageIcon=this.model.getChannelIndex("imageIcon");
+			this.model.addExpDataModelListener(this);
 		}
 	}
     @Override

@@ -11,7 +11,6 @@ package pt.utl.ist.elab.client.condensadorcilindrico.displays;
  * @author  Andre
  */
 
-import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -22,8 +21,10 @@ import java.awt.image.BufferedImage;
 import javax.swing.Icon;
 import javax.swing.JMenuBar;
 import javax.swing.JToolBar;
+import javax.swing.SwingUtilities;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 
@@ -114,7 +115,7 @@ public class CCSensor extends javax.swing.JPanel implements com.linkare.rec.impl
 			return;
 		}
 
-		final int cY = 0;
+//		final int cY = 0;
 
 		final Color yel = Color.yellow;
 
@@ -192,10 +193,17 @@ public class CCSensor extends javax.swing.JPanel implements com.linkare.rec.impl
 	public static void main(final String args[]) {
 		final CCSensor sss = new CCSensor();
 		sss.expStarted = true;
-		final javax.swing.JFrame jf = new javax.swing.JFrame();
-		jf.getContentPane().add(sss);
-		jf.pack();
-		jf.show();
+
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				final javax.swing.JFrame jf = new javax.swing.JFrame();
+				jf.getContentPane().add(sss);
+				jf.pack();
+				jf.setVisible(true);
+			}
+		});
 
 		/*
 		 * sss.setCPos(1300); sss.freq = 533; sss.repaint();
@@ -255,11 +263,11 @@ public class CCSensor extends javax.swing.JPanel implements com.linkare.rec.impl
 	public void headerAvailable(final HardwareAcquisitionConfig header) {
 		expStarted = true;
 
-		this.header = header;
+//		this.header = header;
 	}
 
-	private HardwareAcquisitionConfig header = null;
-	private final boolean acqHeaderInited = false;
+//	private HardwareAcquisitionConfig header = null;
+//	private final boolean acqHeaderInited = false;
 
 	@Override
 	public void newSamples(final NewExpDataEvent evt) {
@@ -311,9 +319,10 @@ public class CCSensor extends javax.swing.JPanel implements com.linkare.rec.impl
 	@Override
 	public void dataModelError() {
 	}
-    @Override
-    public DataDisplayEnum getDisplayType() {
-        return DataDisplayEnum.SENSOR;
-    }
+
+	@Override
+	public DataDisplayEnum getDisplayType() {
+		return DataDisplayEnum.SENSOR;
+	}
 
 }

@@ -41,7 +41,6 @@ import javax.media.rtp.*;
 import javax.media.rtp.event.*;
 import javax.media.rtp.rtcp.*;
 import javax.media.protocol.*;
-import javax.media.protocol.DataSource;
 import javax.media.format.AudioFormat;
 import javax.media.format.VideoFormat;
 import javax.media.Format;
@@ -205,11 +204,7 @@ public class AVReceive3 implements ReceiveStreamListener, SessionListener,
 	ReceiveStream stream = evt.getReceiveStream();  // could be null.
 
 	if (evt instanceof RemotePayloadChangeEvent) {
-     
-	    System.err.println("  - Received an RTP PayloadChangeEvent.");
-	    System.err.println("Sorry, cannot handle payload change.");
-	    System.exit(0);
-
+		throw new RuntimeException("  - Received an RTP PayloadChangeEvent.Sorry, cannot handle payload change.");
 	}
     
 	else if (evt instanceof NewReceiveStreamEvent) {

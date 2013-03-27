@@ -7,6 +7,8 @@
 package pt.utl.ist.elab.driver.aleatorio.Hardware;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -24,6 +26,8 @@ import pt.utl.ist.elab.driver.aleatorio.Utils.Oscilador;
  */
 public class SoundThread implements Runnable {
 
+	private static final Logger LOGGER = Logger.getLogger(SoundThread.class.getName());
+	
 	private static final int EXTERNAL_BUFFER_SIZE = 44100;
 	private final float waveSampleRate = 44100.0F; // sampleRate do audio
 	// determina o formato do audio
@@ -59,7 +63,8 @@ public class SoundThread implements Runnable {
 			try {
 				nBytesRead = audiostream.read(abData, 0, abData.length);
 			} catch (final IOException e) {
-				e.printStackTrace();
+				LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+				throw new RuntimeException(e);
 			}
 			if (nBytesRead >= 0) {
 				linha.write(abData, 0, nBytesRead);
@@ -78,8 +83,8 @@ public class SoundThread implements Runnable {
 		try {
 			audiostream = new Oscilador(waveFrequency1, waveFrequency2, waveAmplitude, length, waveFormat);
 		} catch (final Exception e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+			throw new RuntimeException(e);
 		}
 
 		final DataLine.Info informacao = new DataLine.Info(SourceDataLine.class, waveFormat);
@@ -88,11 +93,11 @@ public class SoundThread implements Runnable {
 			linha = (SourceDataLine) AudioSystem.getLine(informacao);
 			linha.open(waveFormat);
 		} catch (final LineUnavailableException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+			throw new RuntimeException(e);
 		} catch (final Exception e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+			throw new RuntimeException(e);
 		}
 	}// newLine
 
@@ -111,15 +116,18 @@ public class SoundThread implements Runnable {
 		 * try {audiostream = new
 		 * Oscilador(this.waveFrequency1,this.waveFrequency2
 		 * ,waveAmplitude,length,waveFormat);} catch(Exception e) {
-		 * e.printStackTrace(); System.exit(1); }
+		 * LOGGER.log(Level.SEVERE,"Exception: "+e.getMessage(),e); throw new
+		 * RuntimeException(e); }
 		 * 
 		 * DataLine.Info informacao = new
 		 * DataLine.Info(SourceDataLine.class,waveFormat);
 		 * 
 		 * try { linha = (SourceDataLine) AudioSystem.getLine(informacao);
 		 * linha.open(waveFormat); }catch(LineUnavailableException e) {
-		 * e.printStackTrace(); System.exit(1); }catch(Exception e) {
-		 * e.printStackTrace(); System.exit(1); }
+		 * LOGGER.log(Level.SEVERE,"Exception: "+e.getMessage(),e); throw new
+		 * RuntimeException(e); }catch(Exception e) {
+		 * LOGGER.log(Level.SEVERE,"Exception: "+e.getMessage(),e); throw new
+		 * RuntimeException(e); }
 		 */
 	}// configWave()
 
@@ -139,7 +147,8 @@ public class SoundThread implements Runnable {
 
 	/**
 	 * Setters and getters
-	 * @param waveFrequency1 
+	 * 
+	 * @param waveFrequency1
 	 */
 	public void setFrequency1(final float waveFrequency1) {
 		this.waveFrequency1 = waveFrequency1;

@@ -15,8 +15,7 @@ import com.linkare.rec.impl.client.customizer.ICustomizerListener;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class RayleighCustomizer extends javax.swing.JPanel implements
-		com.linkare.rec.impl.client.customizer.ICustomizer {
+public class RayleighCustomizer  extends AbstractCustomizer {
 
 	java.text.DecimalFormat df = null;
 

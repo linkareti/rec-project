@@ -32,6 +32,7 @@ import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.ui.table.ExcelAdapter;
 import com.linkare.rec.impl.utils.ExtensionFilter;
 
@@ -165,7 +166,7 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 	public void saveTable(final File saveFile, final boolean append) {
 		try {
 			final Writer fileWriter = new OutputStreamWriter(new FileOutputStream(saveFile, append));
-			final String LS = System.getProperty("line.separator");
+			final String LS = ReCSystemProperty.LINE_SEPARATOR.getValue();
 			final String COMMA = ",";
 			final String QUOTE = "\"";
 			// java.io.FileWriter fileWriter = new java.io.FileWriter(saveFile,
@@ -230,7 +231,8 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 
 	@Override
 	public Icon getIcon() {
-		return new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/newface/resources/legacy/table16.gif"));
+		return new javax.swing.ImageIcon(getClass().getResource(
+				"/com/linkare/rec/impl/newface/resources/legacy/table16.gif"));
 	}
 
 	@Override
@@ -433,9 +435,10 @@ public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 	private javax.swing.JToolBar toolBarTable;
 	private javax.swing.JButton copyBtn;
 	private javax.swing.JButton selectAllBtn;
+
 	// End of variables declaration
-    @Override
-    public DataDisplayEnum getDisplayType() {
-        return DataDisplayEnum.DATA_TABLE;
-    }
+	@Override
+	public DataDisplayEnum getDisplayType() {
+		return DataDisplayEnum.DATA_TABLE;
+	}
 }

@@ -37,14 +37,18 @@ public class CompBin extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 	/** Holds value of property cancel. */
 	private boolean cancel = false;
 
-	/** Creates a new instance of CompInt */
+	/**
+	 * Creates a new instance of CompInt
+	 * 
+	 * @param parent
+	 */
 	public CompBin(final javax.swing.JFrame parent) {
 		super();
 		setCancel(false);
 		model = new pt.utl.ist.elab.client.webrobot.customizer.Models.ModelCompBin();
 		confCompBin = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfCompBin(parent, true, model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confCompBin);
-		confCompBin.show();
+		confCompBin.setVisible(true);
 		if (confCompBin.isCancel()) {
 			setCancel(true);
 			return;
@@ -117,7 +121,7 @@ public class CompBin extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 	public void edit(final javax.swing.JFrame parent) {
 		confCompBin = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfCompBin(parent, true, model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confCompBin);
-		confCompBin.show();
+		confCompBin.setVisible(true);
 	}
 
 	@Override
@@ -193,9 +197,6 @@ public class CompBin extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 	}
 
 	public void setBorderHighlighted(final boolean borderHighlighted) {
-		this.borderHighlighted = borderHighlighted;
 		repaint();
 	}
-
-	private boolean borderHighlighted = false;
 }

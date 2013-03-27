@@ -358,7 +358,7 @@ public class TSensor extends javax.swing.JPanel implements com.linkare.rec.impl.
 		final javax.swing.JFrame jf = new javax.swing.JFrame();
 		jf.getContentPane().add(ts);
 		jf.pack();
-		jf.show();
+		jf.setVisible(true);
 		for (int i = 25; i < 75; i++) {
 			try {
 				Thread.currentThread();
@@ -410,11 +410,11 @@ public class TSensor extends javax.swing.JPanel implements com.linkare.rec.impl.
 	}
 
 	public void headerAvailable(final HardwareAcquisitionConfig header) {
-		this.header = header;
+//		this.header = header;
 	}
 
-	private HardwareAcquisitionConfig header = null;
-	private final boolean acqHeaderInited = false;
+//	private HardwareAcquisitionConfig header = null;
+//	private final boolean acqHeaderInited = false;
 
 	@Override
 	public void newSamples(final NewExpDataEvent evt) {

@@ -6,6 +6,8 @@
 
 package pt.utl.ist.elab.driver.webrobot.utils;
 
+import com.linkare.rec.impl.config.ReCSystemProperty;
+
 /**
  * 
  * @author André Neto - LEFT - IST
@@ -50,7 +52,7 @@ public class OpenFile {
 		endedRowCol = false;// for treatData()!
 		counter = 0;// for treatData()!
 		int check;
-		final int lineSeparator = System.getProperty("line.separator").charAt(0);
+		final int lineSeparator = ReCSystemProperty.LINE_SEPARATOR.getValue().charAt(0);
 		StringBuffer buffer = new StringBuffer(100);
 		;
 		final java.io.FileInputStream fileInputStream = new java.io.FileInputStream(openFile);

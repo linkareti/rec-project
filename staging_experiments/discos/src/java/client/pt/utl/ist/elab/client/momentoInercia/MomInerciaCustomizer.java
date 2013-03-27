@@ -21,8 +21,7 @@ import com.linkare.rec.impl.client.customizer.ICustomizerListener;
  * @author André
  */
 
-public class MomInerciaCustomizer extends javax.swing.JPanel implements
-		com.linkare.rec.impl.client.customizer.ICustomizer {
+public class MomInerciaCustomizer  extends AbstractCustomizer {
 
 	private DecimalFormat df = new DecimalFormat();
 
