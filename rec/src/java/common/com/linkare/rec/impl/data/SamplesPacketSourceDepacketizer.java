@@ -7,6 +7,9 @@
 package com.linkare.rec.impl.data;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.event.EventListenerList;
 
@@ -15,13 +18,13 @@ import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.acquisition.SamplesPacket;
 import com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED;
 import com.linkare.rec.data.acquisition.TOTAL_SAMPLES_UNDEFINED;
-import java.util.List;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
 public class SamplesPacketSourceDepacketizer implements SamplesSource {
+	private static final Logger LOGGER = Logger.getLogger(SamplesSourcePacketizer.class.getName());
 	private SamplesPacketSource samplesPacketSource;
 	private List<int[]> samplesLocations = null;
 	private int lastSampleCount = TOTAL_SAMPLES_UNDEFINED.value;
@@ -35,7 +38,11 @@ public class SamplesPacketSourceDepacketizer implements SamplesSource {
 		this(null);
 	}
 
-	/** Creates a new instance of DiscardablePhysicsValueMatrixPacketizer */
+	/**
+	 * Creates a new instance of DiscardablePhysicsValueMatrixPacketizer
+	 * 
+	 * @param samplesPacketSource
+	 */
 	public SamplesPacketSourceDepacketizer(final SamplesPacketSource samplesPacketSource) {
 		setSamplesPacketSource(samplesPacketSource);
 	}
@@ -146,8 +153,14 @@ public class SamplesPacketSourceDepacketizer implements SamplesSource {
 			return;
 		}
 		final Object[] listeners = listenerList.getListenerList();
+		if (LOGGER.isLoggable(Level.FINEST)) {
+			LOGGER.log(Level.FINEST, "Informing "+listeners.length+" listeners of new samples available up to "+sampleLargestIndex);
+		}
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == SamplesSourceEventListener.class) {
+				if (LOGGER.isLoggable(Level.FINEST)) {
+					LOGGER.log(Level.FINEST, "Informing '"+listeners[i + 1]+"' listener of new samples available up to "+sampleLargestIndex);
+				}
 				((SamplesSourceEventListener) listeners[i + 1]).newSamples(event);
 			}
 		}
@@ -165,6 +178,8 @@ public class SamplesPacketSourceDepacketizer implements SamplesSource {
 
 	/**
 	 * Setter for property source.
+	 * 
+	 * @param samplesPacketSource
 	 * 
 	 * @param source New value of property samplesPacketSource.
 	 * 
@@ -202,6 +217,10 @@ public class SamplesPacketSourceDepacketizer implements SamplesSource {
 		public void newSamplesPackets(final SamplesPacketSourceEvent evt) {
 			// System.out.println("SamplesPacketSourceDepacktizer refreshing state... "+
 			// evt.getPacketLargestIndex());
+			if (LOGGER.isLoggable(Level.FINEST)) {
+				LOGGER.log(Level.FINEST, "SamplesPacketSourceAdapter -> refresing state with largest packet index ="
+						+ evt.getPacketLargestIndex());
+			}
 			if (evt != null) {
 				refreshState(evt.getPacketLargestIndex());
 			}
