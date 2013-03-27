@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<HardwareInfo id="ELAB_DISCOS_DSPIC_V1.0" familiarName="discos" name="Basic STAMP"
-	version="BS2" manufacturer="Parallax" driverVersion="v2">
-
-	<!-- This elements are still just for test -->
-
+<!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
+<HardwareInfo id="ELAB_DISCOS_DSPIC_V1.0" familiarName="discos"
+	name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
 	<description>
         <![CDATA[ 
         Esta experiência serve para - não esquecer de alterar esta descrição
@@ -45,9 +42,15 @@
 	</parameter>
 
 	<frequency-scale label="Sampling Interval">
-		<min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">20</Frequency></min-frequency>
-		<max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">60000</Frequency></max-frequency>
-		<step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
+		<min-frequency>
+			<Frequency type="SamplingIntervalType" multiplier="milli">20</Frequency>
+		</min-frequency>
+		<max-frequency>
+			<Frequency type="SamplingIntervalType" multiplier="milli">60000</Frequency>
+		</max-frequency>
+		<step-frequency>
+			<Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency>
+		</step-frequency>
 	</frequency-scale>
 	<Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency>
 
@@ -57,31 +60,64 @@
 		<step-samples>1</step-samples>
 	</sampling-scale>
 
-        <ChannelInfo name="discos$rec.exp.discos.hardwareinfo.channel.0.name" independent="false" direction="CHANNEL_INPUT">
-            <scale label="discos$rec.exp.discos.hardwareinfo.channel.0.label" physicsunitname="discos$rec.exp.discos.hardwareinfo.channel.0.physicsunitname" physicsunitsymbol="s" multiplier="none" selected="true">
-                <min><PhysicsVal type="int">0</PhysicsVal></min>
-                <max><PhysicsVal type="int">20000000</PhysicsVal></max>
-                <step><PhysicsVal type="int">1</PhysicsVal></step>
-                <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
-            </scale>
-        </ChannelInfo>
-        
-        <ChannelInfo name="discos$rec.exp.discos.hardwareinfo.channel.1.name" independent="false" direction="CHANNEL_INPUT">
-            <scale label="discos$rec.exp.discos.hardwareinfo.channel.1.label" physicsunitname="discos$rec.exp.discos.hardwareinfo.channel.1.physicsunitname" physicsunitsymbol="rpm" multiplier="none" selected="true">
-                <min><PhysicsVal type="int">0</PhysicsVal></min>
-                <max><PhysicsVal type="int">3000</PhysicsVal></max>
-                <step><PhysicsVal type="int">1</PhysicsVal></step>
-                <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
-            </scale>
-        </ChannelInfo>
-        
-        <ChannelInfo name="discos$rec.exp.discos.hardwareinfo.channel.2.name" independent="false" direction="CHANNEL_INPUT">
-            <scale label="discos$rec.exp.discos.hardwareinfo.channel.2.label" physicsunitname="discos$rec.exp.discos.hardwareinfo.channel.2.physicsunitname" physicsunitsymbol="V" multiplier="none" selected="true">
-                <min><PhysicsVal type="int">0</PhysicsVal></min>
-                <max><PhysicsVal type="int">2000</PhysicsVal></max>
-                <step><PhysicsVal type="int">1</PhysicsVal></step>
-                <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
-            </scale>  
-        </ChannelInfo>
-        
+	<ChannelInfo name="discos$rec.exp.discos.hardwareinfo.channel.0.name"
+		independent="false" direction="CHANNEL_INPUT">
+		<scale label="discos$rec.exp.discos.hardwareinfo.channel.0.label"
+			physicsunitname="discos$rec.exp.discos.hardwareinfo.channel.0.physicsunitname"
+			physicsunitsymbol="s" multiplier="none" selected="true">
+			<min>
+				<PhysicsVal type="int">0</PhysicsVal>
+			</min>
+			<max>
+				<PhysicsVal type="int">20000000</PhysicsVal>
+			</max>
+			<step>
+				<PhysicsVal type="int">1</PhysicsVal>
+			</step>
+			<errordefault>
+				<PhysicsVal type="int">1</PhysicsVal>
+			</errordefault>
+		</scale>
+	</ChannelInfo>
+
+	<ChannelInfo name="discos$rec.exp.discos.hardwareinfo.channel.1.name"
+		independent="false" direction="CHANNEL_INPUT">
+		<scale label="discos$rec.exp.discos.hardwareinfo.channel.1.label"
+			physicsunitname="discos$rec.exp.discos.hardwareinfo.channel.1.physicsunitname"
+			physicsunitsymbol="rpm" multiplier="none" selected="true">
+			<min>
+				<PhysicsVal type="int">0</PhysicsVal>
+			</min>
+			<max>
+				<PhysicsVal type="int">3000</PhysicsVal>
+			</max>
+			<step>
+				<PhysicsVal type="int">1</PhysicsVal>
+			</step>
+			<errordefault>
+				<PhysicsVal type="int">1</PhysicsVal>
+			</errordefault>
+		</scale>
+	</ChannelInfo>
+
+	<ChannelInfo name="discos$rec.exp.discos.hardwareinfo.channel.2.name"
+		independent="false" direction="CHANNEL_INPUT">
+		<scale label="discos$rec.exp.discos.hardwareinfo.channel.2.label"
+			physicsunitname="discos$rec.exp.discos.hardwareinfo.channel.2.physicsunitname"
+			physicsunitsymbol="V" multiplier="none" selected="true">
+			<min>
+				<PhysicsVal type="int">0</PhysicsVal>
+			</min>
+			<max>
+				<PhysicsVal type="int">2000</PhysicsVal>
+			</max>
+			<step>
+				<PhysicsVal type="int">1</PhysicsVal>
+			</step>
+			<errordefault>
+				<PhysicsVal type="int">1</PhysicsVal>
+			</errordefault>
+		</scale>
+	</ChannelInfo>
+
 </HardwareInfo>
