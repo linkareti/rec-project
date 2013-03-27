@@ -12,6 +12,7 @@ import javax.swing.Icon;
 
 
 import com.linkare.rec.web.config.Lab;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.newface.ReCApplication;
 import com.linkare.rec.impl.newface.component.ProgressCicle.State;
 import com.linkare.rec.impl.newface.utils.LAFConnector;
@@ -34,9 +35,9 @@ public class LabLoginBox extends GradientPane {
                 super();
                 setContainer(container);
                 initComponents();
-                txtUsername.setText(System.getProperty("user.name"));
+                txtUsername.setText(ReCSystemProperty.USER_NAME.getValue());
                 checkBoxComputerType.setSelected(!Preferences.userRoot().getBoolean("ElabPrivateComputer", true));
-                if (recApplication.isAutoConnectLab()) {
+                if (recApplication.isAutoConnectApparatus()) {
                         labCombo.setEnabled(false);
                 }
                 labelProgressCicle.setText("");
@@ -251,7 +252,7 @@ public class LabLoginBox extends GradientPane {
 
                 updateStatus(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.LabLoginBox").getString("lblTaskMessage.authentication.text"));
                 // set lab with selected from lab combo if autoconnect is false
-                if (!recApplication.isAutoConnectLab()) {
+                if (!recApplication.isAutoConnectApparatus()) {
                         Lab lab = (Lab) labCombo.getSelectedItem();
                         recApplication.setCurrentLab(lab);
                 }
