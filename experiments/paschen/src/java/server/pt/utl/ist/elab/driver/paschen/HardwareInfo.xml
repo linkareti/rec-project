@@ -1,93 +1,142 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
 <!-- Created by jloureiro on 22 de Agosto de 2012, 16:50 -->
-
-<HardwareInfo id="PLASMALAB_PASCHEN_CURVE_V1.0" familiarName="Paschen Curve" name="Paschen Curve" version="1.0" manufacturer="Elab - UTL / Plasmalab - TUe" driverVersion="v1">
-    <description>
+<HardwareInfo id="PLASMALAB_PASCHEN_CURVE_V1.0"
+	familiarName="Paschen Curve" name="Paschen Curve" version="1.0"
+	manufacturer="Elab - UTL / Plasmalab - TUe" driverVersion="v1">
+	<description>
         <![CDATA[ 
         This experiment studies the breakdown voltage of gas between parallel plates as a function of pressure and gap distance.
         ]]>
-    </description>
+	</description>
 
-    <parameter name="volt_ini" type="ContinuousValue" value="0">
-        <selection-list>
-            <value order="1">0</value>
-            <value order="2">3000</value>
-	    <value order="3">1</value>
-        </selection-list>
-    </parameter>
-    
-    <parameter name="volt_fin" type="ContinuousValue" value="350">
-        <selection-list>
+	<parameter name="volt_ini" type="ContinuousValue" value="0">
+		<selection-list>
 			<value order="1">0</value>
-            <value order="2">3000</value>
-	    <value order="3">1</value>
-        </selection-list>
-    </parameter>
+			<value order="2">3000</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
 
-    <parameter name="press_set" type="ContinuousValue" value="10">
-        <selection-list>
-            <value order="1">0</value>
-            <value order="2">100</value>
-	    <value order="3">1</value>
-        </selection-list>
-    </parameter>
-    
-    <parameter name="volt_step" type="ContinuousValue" value="10">
-        <selection-list>
-            <value order="1">1</value>
-            <value order="2">51</value>
-            <value order="3">1</value>
-        </selection-list>
-    </parameter>    
-    
-    <frequency-scale label="Sampling Interval">
-        <min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></min-frequency>
-        <max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">502</Frequency></max-frequency>
-        <step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
-    </frequency-scale>
-    <Frequency type="SamplingIntervalType" multiplier="milli">500</Frequency>
-    
-    <sampling-scale>
-        <min-samples>1</min-samples>
-        <max-samples>50000</max-samples>
-        <step-samples>1</step-samples>
-    </sampling-scale>
-    
-    <ChannelInfo name="paschen$rec.exp.paschen.hardwareinfo.channel.0.name" independent="false" direction="CHANNEL_INPUT">
-        <scale label="paschen$rec.exp.paschen.hardwareinfo.channel.0.label" physicsunitname="paschen$rec.exp.paschen.hardwareinfo.channel.0.physicsunitname" physicsunitsymbol="V" multiplier="none" selected="true">
-            <min><PhysicsVal type="int">0</PhysicsVal></min>
-            <max><PhysicsVal type="int">2000</PhysicsVal></max>
-            <step><PhysicsVal type="int">1</PhysicsVal></step>
-            <errordefault><PhysicsVal type="int">10</PhysicsVal></errordefault>
-        </scale>
-    </ChannelInfo>
+	<parameter name="volt_fin" type="ContinuousValue" value="350">
+		<selection-list>
+			<value order="1">0</value>
+			<value order="2">3000</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
 
-    <ChannelInfo name="paschen$rec.exp.paschen.hardwareinfo.channel.1.name" independent="false" direction="CHANNEL_INPUT">
-        <scale label="paschen$rec.exp.paschen.hardwareinfo.channel.1.label" physicsunitname="paschen$rec.exp.paschen.hardwareinfo.channel.1.physicsunitname" physicsunitsymbol="A" multiplier="micro" selected="true">
-            <min><PhysicsVal type="int">0</PhysicsVal></min>
-            <max><PhysicsVal type="int">4000</PhysicsVal></max>
-            <step><PhysicsVal type="int">10</PhysicsVal></step>
-            <errordefault><PhysicsVal type="int">10</PhysicsVal></errordefault>
-        </scale>
-    </ChannelInfo>
+	<parameter name="press_set" type="ContinuousValue" value="10">
+		<selection-list>
+			<value order="1">0</value>
+			<value order="2">100</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
 
-    <ChannelInfo name="paschen$rec.exp.paschen.hardwareinfo.channel.2.name" independent="false" direction="CHANNEL_INPUT">
-        <scale label="paschen$rec.exp.paschen.hardwareinfo.channel.2.label" physicsunitname="paschen$rec.exp.paschen.hardwareinfo.channel.2.physicsunitname" physicsunitsymbol="Bar" multiplier="micro" selected="true">
-            <min><PhysicsVal type="int">0</PhysicsVal></min>
-            <max><PhysicsVal type="int">30000</PhysicsVal></max>
-            <step><PhysicsVal type="int">10</PhysicsVal></step>
-            <errordefault><PhysicsVal type="int">10</PhysicsVal></errordefault>
-        </scale>
-    </ChannelInfo>
+	<parameter name="volt_step" type="ContinuousValue" value="10">
+		<selection-list>
+			<value order="1">1</value>
+			<value order="2">51</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
 
-	<ChannelInfo name="Tempo" independent="false" direction="CHANNEL_INPUT">
-		<scale label="Tempo" physicsunitname="segundo" physicsunitsymbol="s" multiplier="none" selected="true">
-			<min><PhysicsVal type="float">0</PhysicsVal></min>
-			<max><PhysicsVal type="float">1000000</PhysicsVal></max>
-			<step><PhysicsVal type="float">1E-10</PhysicsVal></step>
-			<errordefault><PhysicsVal type="float">1E-9</PhysicsVal></errordefault>
+	<frequency-scale label="Sampling Interval">
+		<min-frequency>
+			<Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency>
+		</min-frequency>
+		<max-frequency>
+			<Frequency type="SamplingIntervalType" multiplier="milli">502</Frequency>
+		</max-frequency>
+		<step-frequency>
+			<Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency>
+		</step-frequency>
+	</frequency-scale>
+	<Frequency type="SamplingIntervalType" multiplier="milli">500</Frequency>
+
+	<sampling-scale>
+		<min-samples>1</min-samples>
+		<max-samples>50000</max-samples>
+		<step-samples>1</step-samples>
+	</sampling-scale>
+
+	<ChannelInfo name="paschen$rec.exp.paschen.hardwareinfo.channel.0.name"
+		independent="false" direction="CHANNEL_INPUT">
+		<scale label="paschen$rec.exp.paschen.hardwareinfo.channel.0.label"
+			physicsunitname="paschen$rec.exp.paschen.hardwareinfo.channel.0.physicsunitname"
+			physicsunitsymbol="V" multiplier="none" selected="true">
+			<min>
+				<PhysicsVal type="int">0</PhysicsVal>
+			</min>
+			<max>
+				<PhysicsVal type="int">2000</PhysicsVal>
+			</max>
+			<step>
+				<PhysicsVal type="int">1</PhysicsVal>
+			</step>
+			<errordefault>
+				<PhysicsVal type="int">10</PhysicsVal>
+			</errordefault>
 		</scale>
 	</ChannelInfo>
-	
+
+	<ChannelInfo name="paschen$rec.exp.paschen.hardwareinfo.channel.1.name"
+		independent="false" direction="CHANNEL_INPUT">
+		<scale label="paschen$rec.exp.paschen.hardwareinfo.channel.1.label"
+			physicsunitname="paschen$rec.exp.paschen.hardwareinfo.channel.1.physicsunitname"
+			physicsunitsymbol="A" multiplier="micro" selected="true">
+			<min>
+				<PhysicsVal type="int">0</PhysicsVal>
+			</min>
+			<max>
+				<PhysicsVal type="int">4000</PhysicsVal>
+			</max>
+			<step>
+				<PhysicsVal type="int">10</PhysicsVal>
+			</step>
+			<errordefault>
+				<PhysicsVal type="int">10</PhysicsVal>
+			</errordefault>
+		</scale>
+	</ChannelInfo>
+
+	<ChannelInfo name="paschen$rec.exp.paschen.hardwareinfo.channel.2.name"
+		independent="false" direction="CHANNEL_INPUT">
+		<scale label="paschen$rec.exp.paschen.hardwareinfo.channel.2.label"
+			physicsunitname="paschen$rec.exp.paschen.hardwareinfo.channel.2.physicsunitname"
+			physicsunitsymbol="Bar" multiplier="micro" selected="true">
+			<min>
+				<PhysicsVal type="int">0</PhysicsVal>
+			</min>
+			<max>
+				<PhysicsVal type="int">30000</PhysicsVal>
+			</max>
+			<step>
+				<PhysicsVal type="int">10</PhysicsVal>
+			</step>
+			<errordefault>
+				<PhysicsVal type="int">10</PhysicsVal>
+			</errordefault>
+		</scale>
+	</ChannelInfo>
+
+	<ChannelInfo name="Tempo" independent="false" direction="CHANNEL_INPUT">
+		<scale label="Tempo" physicsunitname="segundo"
+			physicsunitsymbol="s" multiplier="none" selected="true">
+			<min>
+				<PhysicsVal type="float">0</PhysicsVal>
+			</min>
+			<max>
+				<PhysicsVal type="float">1000000</PhysicsVal>
+			</max>
+			<step>
+				<PhysicsVal type="float">1E-10</PhysicsVal>
+			</step>
+			<errordefault>
+				<PhysicsVal type="float">1E-9</PhysicsVal>
+			</errordefault>
+		</scale>
+	</ChannelInfo>
+
 </HardwareInfo>
