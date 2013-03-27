@@ -24,7 +24,6 @@ import pt.utl.ist.elab.driver.serial.serialportgeneric.config.TimeoutNode;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.genericexperiment.GenericSerialPortDataSource;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.translator.SerialPortTranslator;
 
-import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.acquisition.IncorrectStateException;
 import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.ChannelAcquisitionConfig;
@@ -32,6 +31,7 @@ import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.ChannelParameter;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.metadata.ParameterType;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.driver.BaseDriver;
 import com.linkare.rec.impl.driver.BaseHardware;
 import com.linkare.rec.impl.driver.IDataSource;
@@ -59,8 +59,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	protected static int currentBinaryLength = 0;
 	protected static int totalBinaryLength = 0;
 
-	private static final String RS232_CONFIG_FILE_PATH = Defaults.defaultIfEmpty(
-			System.getProperty("rec.driver.rs232_config_file_path"), "hardwareserver/etc/Rs232Config.xml");
+	private static final String RS232_CONFIG_FILE_PATH = ReCSystemProperty.DRIVER_RS232_CONFIG_FILE_PATH.getValue();
 
 	private static final Logger LOGGER = Logger.getLogger(AbstractSerialPortDriver.class.getName());
 
@@ -197,32 +196,6 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			throw new IncorrectRs232ValuesException("Error \"" + e.getMessage()
 					+ "\" on reading Rs232 definitions file: " + new File(file).getCanonicalPath());
 		}
-	}
-
-	@Override
-	public Object getHardwareInfo() {
-
-		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
-				+ "/HardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
-
-		if (prop.indexOf("://") == -1) {
-			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
-		}
-
-		java.net.URL url = null;
-		try {
-			url = Protocols.getURL(prop);
-		} catch (final java.net.MalformedURLException e) {
-			LOGGER.log(Level.SEVERE, "Unable to load resource: " + prop, e);
-			try {
-				url = new java.net.URL(baseHardwareInfoFile);
-			} catch (final java.net.MalformedURLException e2) {
-				LOGGER.log(Level.SEVERE, "Unable to load resource: " + baseHardwareInfoFile, e2);
-			}
-		}
-
-		return url;
 	}
 
 	protected void loadCommandHandlers() {
@@ -943,6 +916,5 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	public boolean isDriverInState(final DriverState state) {
 		return currentDriverState == state;
 	}
-
 
 }
