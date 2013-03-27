@@ -10,7 +10,7 @@ import pt.utl.ist.elab.driver.serial.serialportgeneric.genericexperiment.Generic
 
 /**
  * 
- * @author Paulo Zenida - Linkare TI
+ * @author João Loureiro
  */
 public class LangmuirDriver extends GenericSerialPortDriver {
 

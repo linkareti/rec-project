@@ -4,7 +4,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import pt.utl.ist.elab.driver.pendulogravitico.translators.StampConfigTranslator;
-import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDataSource;
 import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDriver;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampTranslator;
@@ -17,7 +16,6 @@ import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.DateTime;
-import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.impl.threading.AbstractConditionDecisor;
 import com.linkare.rec.impl.threading.TimedOutException;
 import com.linkare.rec.impl.threading.WaitForConditionResult;
@@ -27,7 +25,7 @@ import com.linkare.rec.impl.utils.Defaults;
  * 
  * @author André
  */
-public class PenduloStampDriver extends AbstractStampDriver {
+public class PenduloStampDriver extends AbstractStampDriver<PenduloStampDataSource> {
 
 	private static final Logger LOGGER = Logger.getLogger(PenduloStampDriver.class.getName());
 
@@ -85,36 +83,6 @@ public class PenduloStampDriver extends AbstractStampDriver {
 		return config;
 	}
 
-	@Override
-	public Object getHardwareInfo() {
-		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
-				+ "/HardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
-
-		if (prop.indexOf("://") == -1) {
-			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
-		}
-
-		java.net.URL url = null;
-		try {
-			url = Protocols.getURL(prop);
-		} catch (final java.net.MalformedURLException e) {
-			LOGGER.log(Level.SEVERE, "Unable to load resource: " + prop, e);
-			try {
-				url = new java.net.URL(baseHardwareInfoFile);
-			} catch (final java.net.MalformedURLException e2) {
-				LOGGER.log(Level.SEVERE, "Unable to load resource: " + baseHardwareInfoFile, e2);
-			}
-		}
-
-		return url;
-
-	}
-
-	@Override
-	public AbstractStampDataSource initDataSource() {
-		return new PenduloStampDataSource();
-	}
 
 	@Override
 	protected void loadExtraCommandHandlers() {

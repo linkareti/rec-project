@@ -3,7 +3,6 @@ package pt.utl.ist.elab.driver.thomson;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDataSource;
 import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDriver;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampTranslator;
@@ -13,7 +12,6 @@ import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampNotConfigur
 import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampStartProcessor;
 import pt.utl.ist.elab.driver.thomson.translators.StampConfigTranslator;
 
-import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
@@ -27,7 +25,7 @@ import com.linkare.rec.impl.utils.Defaults;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class ThomsonStampDriver extends AbstractStampDriver {
+public class ThomsonStampDriver extends AbstractStampDriver<ThomsonStampDataSource> {
 	private static final Logger LOGGER = Logger.getLogger(ThomsonStampDriver.class.getName());
 
 	private StampCommand stampConfig = null;
@@ -95,50 +93,11 @@ public class ThomsonStampDriver extends AbstractStampDriver {
 		return config;
 	}
 
-	@Override
-	public Object getHardwareInfo() {
-
-		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
-				+ "/HardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
-
-		if (prop.indexOf("://") == -1) {
-			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
-		}
-
-		java.net.URL url = null;
-		try {
-			url = Protocols.getURL(prop);
-		} catch (final Exception e) {
-			LOGGER.log(Level.SEVERE, "Unable to load resource: " + prop, e);
-			e.printStackTrace();
-			try {
-				url = new java.net.URL(baseHardwareInfoFile);
-			} catch (final Exception e2) {
-				e2.printStackTrace();
-				LOGGER.log(Level.SEVERE, "Unable to load resource: " + baseHardwareInfoFile, e2);
-			}
-		}
-
-		System.out.println("Returning url = " + url);
-		final java.io.File f = new java.io.File(url.getFile());
-		System.out.println("File = " + url.getFile());
-		if (f.exists()) {
-			System.out.println("File exists! COOL!");
-		} else {
-			System.out.println("SHIT");
-		}
-		LOGGER.log(Level.INFO, "Returning url = " + url);
-
-		return url;
-
-	}
-
 	private ThomsonStampDataSource dataSource = null;
 
 	@Override
-	public AbstractStampDataSource initDataSource() {
-		dataSource = new ThomsonStampDataSource();
+	public ThomsonStampDataSource initDataSource() throws InstantiationException, IllegalAccessException {
+		dataSource = super.initDataSource();
 		return dataSource;
 	}
 

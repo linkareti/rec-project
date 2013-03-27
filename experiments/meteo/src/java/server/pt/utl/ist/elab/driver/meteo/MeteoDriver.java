@@ -192,34 +192,4 @@ public class MeteoDriver extends BaseDriver {
 		fireIDriverStateListenerDriverStoped();
 	}
 
-	@Override
-	public Object getHardwareInfo() {
-		fireIDriverStateListenerDriverReseting();
-
-		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
-				+ "/HardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
-
-		if (prop.indexOf("://") == -1) {
-			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
-		}
-
-		java.net.URL url = null;
-		try {
-			url = new java.net.URL(prop);
-			fireIDriverStateListenerDriverReseted();
-		} catch (final java.net.MalformedURLException e) {
-			LOGGER.log(Level.SEVERE, "Unable to load resource: " + prop, e);
-			try {
-				url = new java.net.URL(baseHardwareInfoFile);
-				fireIDriverStateListenerDriverReseted();
-			} catch (final java.net.MalformedURLException e2) {
-				LOGGER.log(Level.SEVERE, "Unable to load resource: " + baseHardwareInfoFile, e2);
-			}
-		}
-
-		System.out.println("Loading url = " + url);
-
-		return url;
-	}
 }

@@ -1,6 +1,5 @@
 package pt.utl.ist.elab.driver.telescopio;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.linkare.rec.acquisition.IncorrectStateException;
@@ -9,7 +8,6 @@ import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.driver.BaseDriver;
 import com.linkare.rec.impl.driver.IDataSource;
-import com.linkare.rec.impl.utils.Defaults;
 
 /**
  * 
@@ -20,9 +18,10 @@ public class TelescopioDriver extends BaseDriver {
 
 	private static final Logger LOGGER = Logger.getLogger(TelescopioDriver.class.getName());
 	/* Hardware and driver related variables */
-//	private static final String APPLICATION_IDENTIFIER = "E-Lab Telescopio Driver";
+	// private static final String APPLICATION_IDENTIFIER =
+	// "E-Lab Telescopio Driver";
 	private static final String DRIVER_UNIQUE_ID = "ELAB_TELESCOPIO_V01";
-//	private static final String HW_VERSION = "0.1";
+	// private static final String HW_VERSION = "0.1";
 
 	protected TelescopioDataProducer dataSource = null;
 	protected HardwareAcquisitionConfig config = null;
@@ -130,37 +129,6 @@ public class TelescopioDriver extends BaseDriver {
 	@Override
 	public void stop(final HardwareInfo info) throws IncorrectStateException {
 
-	}
-
-	@Override
-	public Object getHardwareInfo() {
-		fireIDriverStateListenerDriverReseting();
-
-		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
-				+ "/HardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
-
-		if (prop.indexOf("://") == -1) {
-			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
-		}
-
-		java.net.URL url = null;
-		try {
-			url = new java.net.URL(prop);
-			fireIDriverStateListenerDriverReseted();
-		} catch (final java.net.MalformedURLException e) {
-			LOGGER.log(Level.SEVERE, "Unable to load resource: " + prop, e);
-			try {
-				url = new java.net.URL(baseHardwareInfoFile);
-				fireIDriverStateListenerDriverReseted();
-			} catch (final java.net.MalformedURLException e2) {
-				LOGGER.log(Level.SEVERE, "Unable to load resource: " + baseHardwareInfoFile, e2);
-			}
-		}
-
-		System.out.println("Loading url = " + url);
-
-		return url;
 	}
 
 	protected void stop() {

@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import pt.utl.ist.elab.driver.polaroid.translators.StampConfigTranslator;
-import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDataSource;
 import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDriver;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampTranslator;
@@ -19,7 +18,6 @@ import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampConfiguredP
 import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampNotConfiguredProcessor;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampStartProcessor;
 
-import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
@@ -33,7 +31,7 @@ import com.linkare.rec.impl.utils.Defaults;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class PolaroidStampDriver extends AbstractStampDriver {
+public class PolaroidStampDriver extends AbstractStampDriver<PolaroidStampDataSource> {
 
 	private static final Logger LOGGER = Logger.getLogger(PolaroidStampDriver.class.getName());
 
@@ -108,38 +106,6 @@ public class PolaroidStampDriver extends AbstractStampDriver {
 	@Override
 	public HardwareAcquisitionConfig getAcquisitionHeader() {
 		return config;
-	}
-
-	@Override
-	public Object getHardwareInfo() {
-
-		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
-				+ "/HardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
-
-		if (prop.indexOf("://") == -1) {
-			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
-		}
-
-		java.net.URL url = null;
-		try {
-			url = Protocols.getURL(prop);
-		} catch (final java.net.MalformedURLException e) {
-			LOGGER.log(Level.SEVERE, "Unable to load resource: " + prop, e);
-			try {
-				url = new java.net.URL(baseHardwareInfoFile);
-			} catch (final java.net.MalformedURLException e2) {
-				LOGGER.log(Level.SEVERE, "Unable to load resource: " + baseHardwareInfoFile, e2);
-			}
-		}
-
-		return url;
-
-	}
-
-	@Override
-	public AbstractStampDataSource initDataSource() {
-		return new PolaroidStampDataSource();
 	}
 
 	@Override

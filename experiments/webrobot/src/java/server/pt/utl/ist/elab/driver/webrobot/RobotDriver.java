@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 
 import pt.utl.ist.elab.driver.webrobot.serial.SerialComm;
 
-import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.acquisition.IncorrectStateException;
 import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
@@ -13,7 +12,6 @@ import com.linkare.rec.data.config.ParameterConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.driver.BaseDriver;
 import com.linkare.rec.impl.driver.IDataSource;
-import com.linkare.rec.impl.utils.Defaults;
 
 public class RobotDriver extends BaseDriver {
 
@@ -163,34 +161,6 @@ public class RobotDriver extends BaseDriver {
 	@Override
 	public void stop(final HardwareInfo info) throws IncorrectStateException {
 		dataSource.stopProduction();
-	}
-
-	@Override
-	public Object getHardwareInfo() {
-		fireIDriverStateListenerDriverReseting();
-
-		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
-				+ "/HardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
-
-		if (prop.indexOf("://") == -1) {
-			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
-		}
-
-		java.net.URL url = null;
-		try {
-			url = Protocols.getURL(prop);
-			fireIDriverStateListenerDriverReseted();
-		} catch (final java.net.MalformedURLException e) {
-			LOGGER.log(Level.SEVERE, "Unable to load resource: " + prop, e);
-			try {
-				url = new java.net.URL(baseHardwareInfoFile);
-				fireIDriverStateListenerDriverReseted();
-			} catch (final java.net.MalformedURLException e2) {
-				LOGGER.log(Level.SEVERE, "Unable to load resource: " + baseHardwareInfoFile, e2);
-			}
-		}
-		return url;
 	}
 
 	public void setStoping() {
