@@ -1,45 +1,12 @@
-<apparatus location="DISCOS_INERCIA_V1.0"
-	customizerClassLocationBundleKey="di$rec.exp.customizer.di"
-	toolTipBundleKey="di$rec.exp.tip.di" iconLocationBundleKey="di$rec.exp.icon.di"
-	displayStringBundleKey="di$rec.exp.title.di" desktopLocationBundleKey="di$rec.exp.background.di"
-	order="1" headerDisplayClassLocationBundleKey=""
-	displayFactoryClassLocationBundleKey=""
-	dataModelClassLocationBundleKey="" visible="true" selected="true"
-	enabled="false" connected="false">
-	<localizationBundle name="di"
-		location="recresource:///pt/utl/ist/elab/client/vdi/resources/messages" />
-	<display classLocationBundleKey="di$rec.exp.display.di.loc.anim"
-		toolTipBundleKey="di$rec.exp.display.di.tip.anim"
-		iconLocationBundleKey="ReCUI$rec.ui.icon.sensor"
-		displayStringBundleKey="di$rec.exp.display.di.title.anim"
-		offlineCapable="false" order="1" visible="true" selected="true"
-		enabled="false" connected="false" />
-	<display classLocationBundleKey="di$rec.exp.display.di.loc.1"
-		toolTipBundleKey="di$rec.exp.display.di.tip.1" iconLocationBundleKey="ReCUI$rec.ui.icon.table"
-		displayStringBundleKey="di$rec.exp.display.di.title.1" offlineCapable="false"
-		order="2" visible="true" selected="true" enabled="false" connected="false" />
-	<display classLocationBundleKey="di$rec.exp.display.di.loc.2"
-		toolTipBundleKey="di$rec.exp.display.di.tip.2" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
-		displayStringBundleKey="di$rec.exp.display.di.title.2" offlineCapable="false"
-		order="3" visible="true" selected="true" enabled="false" connected="false" />
-	<display classLocationBundleKey="di$rec.exp.display.di.loc.3"
-		toolTipBundleKey="di$rec.exp.display.di.tip.3" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
-		displayStringBundleKey="di$rec.exp.display.di.title.3" offlineCapable="false"
-		order="4" visible="true" selected="true" enabled="false" connected="false" />
-	<display classLocationBundleKey="di$rec.exp.display.di.loc.4"
-		toolTipBundleKey="di$rec.exp.display.di.tip.4" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
-		displayStringBundleKey="di$rec.exp.display.di.title.4" offlineCapable="false"
-		order="5" visible="true" selected="true" enabled="false" connected="false" />
-	<display classLocationBundleKey="di$rec.exp.display.di.loc.5"
-		toolTipBundleKey="di$rec.exp.display.di.tip.5" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
-		displayStringBundleKey="di$rec.exp.display.di.title.5" offlineCapable="false"
-		order="6" visible="true" selected="true" enabled="false" connected="false" />
-	<display classLocationBundleKey="di$rec.exp.display.di.loc.6"
-		toolTipBundleKey="di$rec.exp.display.di.tip.6" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
-		displayStringBundleKey="di$rec.exp.display.di.title.6" offlineCapable="false"
-		order="7" visible="true" selected="true" enabled="false" connected="false" />
-	<display classLocationBundleKey="di$rec.exp.display.di.loc.7"
-		toolTipBundleKey="di$rec.exp.display.di.tip.7" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
-		displayStringBundleKey="di$rec.exp.display.di.title.7" offlineCapable="false"
-		order="8" visible="true" selected="true" enabled="false" connected="false" />
+
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="true" toolTipBundleKey="di$rec.exp.tip.di" location="DISCOS_INERCIA_V1.0" iconLocationBundleKey="di$rec.exp.icon.di" headerDisplayClassLocationBundleKey="" displayStringBundleKey="di$rec.exp.title.di" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="di$rec.exp.background.di" descriptionStringBundleKey="di$rec.exp.description.di" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="di$rec.exp.customizer.di" order="1">
+    <display toolTipBundleKey="di$rec.exp.display.di.tip.anim" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor" displayStringBundleKey="di$rec.exp.display.di.title.anim" classLocationBundleKey="di$rec.exp.display.di.loc.anim" order="1"/>
+    <display toolTipBundleKey="di$rec.exp.display.di.tip.1" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="di$rec.exp.display.di.title.1" classLocationBundleKey="di$rec.exp.display.di.loc.1" order="2"/>
+    <display toolTipBundleKey="di$rec.exp.display.di.tip.2" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="di$rec.exp.display.di.title.2" classLocationBundleKey="di$rec.exp.display.di.loc.2" order="3"/>
+    <display toolTipBundleKey="di$rec.exp.display.di.tip.3" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="di$rec.exp.display.di.title.3" classLocationBundleKey="di$rec.exp.display.di.loc.3" order="4"/>
+    <display toolTipBundleKey="di$rec.exp.display.di.tip.4" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="di$rec.exp.display.di.title.4" classLocationBundleKey="di$rec.exp.display.di.loc.4" order="5"/>
+    <display toolTipBundleKey="di$rec.exp.display.di.tip.5" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="di$rec.exp.display.di.title.5" classLocationBundleKey="di$rec.exp.display.di.loc.5" order="6"/>
+    <display toolTipBundleKey="di$rec.exp.display.di.tip.6" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="di$rec.exp.display.di.title.6" classLocationBundleKey="di$rec.exp.display.di.loc.6" order="7"/>
+    <display toolTipBundleKey="di$rec.exp.display.di.tip.7" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="di$rec.exp.display.di.title.7" classLocationBundleKey="di$rec.exp.display.di.loc.7" order="8"/>
+    <localizationBundle name="di" location="recresource:///pt/utl/ist/elab/client/vdi/resources/messages"/>
 </apparatus>

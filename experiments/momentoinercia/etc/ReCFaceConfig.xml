@@ -1,43 +1,12 @@
-<apparatus toolTipBundleKey="momentoinercia$rec.exp.tip.momentoInercia"
-	location="EXP_ANGULAR_STAMP_V1.0" iconLocationBundleKey="momentoinercia$rec.exp.icon.momentoInercia"
-	headerDisplayClassLocationBundleKey=""
-	displayStringBundleKey="momentoinercia$rec.exp.title.momentoInercia"
-	displayFactoryClassLocationBundleKey=""
-	desktopLocationBundleKey="momentoinercia$rec.exp.background.momentoInercia"
-	dataModelClassLocationBundleKey=""
-	customizerClassLocationBundleKey="momentoinercia$rec.exp.customizer.momentoInercia"
-	visible="true" selected="true" order="0" enabled="false" connected="false">
-	<localizationBundle name="momentoinercia"
-		location="recresource:///pt/utl/ist/elab/client/momentoinercia/resources/messages" />
-	<mediaConfig videoLocation="momentoinercia$rec.exp.url.momentoInercia.video"
-		canSave="true" offlinePlay="true" />
-	<display toolTipBundleKey="momentoinercia$rec.exp.display.momentoInercia.tip.sensor"
-		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor"
-		displayStringBundleKey="momentoinercia$rec.exp.display.momentoInercia.title.sensor"
-		classLocationBundleKey="momentoinercia$rec.exp.display.momentoInercia.loc.sensor"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
-	<display toolTipBundleKey="momentoinercia$rec.exp.display.momentoInercia.tip.1"
-		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table"
-		displayStringBundleKey="momentoinercia$rec.exp.display.momentoInercia.title.1"
-		classLocationBundleKey="momentoinercia$rec.exp.display.momentoInercia.loc.1"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
-	<display toolTipBundleKey="momentoinercia$rec.exp.display.momentoInercia.tip.2"
-		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
-		displayStringBundleKey="momentoinercia$rec.exp.display.momentoInercia.title.2"
-		classLocationBundleKey="momentoinercia$rec.exp.display.momentoInercia.loc.2"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
-	<display toolTipBundleKey="momentoinercia$rec.exp.display.momentoInercia.tip.3"
-		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
-		displayStringBundleKey="momentoinercia$rec.exp.display.momentoInercia.title.3"
-		classLocationBundleKey="momentoinercia$rec.exp.display.momentoInercia.loc.3"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
-	<webResource toolTipLocationBundleKey="" internalBrowser="false"
-		iconLocationBundleKey="" visible="true" selected="true" order="0"
-		enabled="false" connected="false" />
-	<webResource toolTipLocationBundleKey="" internalBrowser="false"
-		iconLocationBundleKey="" visible="true" selected="true" order="0"
-		enabled="false" connected="false" />
-	<webResource toolTipLocationBundleKey="" internalBrowser="false"
-		iconLocationBundleKey="" visible="true" selected="true" order="0"
-		enabled="false" connected="false" />
+
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="momentoinercia$rec.exp.tip.momentoInercia" location="EXP_ANGULAR_STAMP_V1.0" iconLocationBundleKey="momentoinercia$rec.exp.icon.momentoInercia" headerDisplayClassLocationBundleKey="" displayStringBundleKey="momentoinercia$rec.exp.title.momentoInercia" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="momentoinercia$rec.exp.background.momentoInercia" descriptionStringBundleKey="momentoinercia$rec.exp.description.momentoinercia" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="momentoinercia$rec.exp.customizer.momentoInercia" order="0">
+    <display toolTipBundleKey="momentoinercia$rec.exp.display.momentoInercia.tip.sensor" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor" displayStringBundleKey="momentoinercia$rec.exp.display.momentoInercia.title.sensor" classLocationBundleKey="momentoinercia$rec.exp.display.momentoInercia.loc.sensor" order="0"/>
+    <display toolTipBundleKey="momentoinercia$rec.exp.display.momentoInercia.tip.1" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="momentoinercia$rec.exp.display.momentoInercia.title.1" classLocationBundleKey="momentoinercia$rec.exp.display.momentoInercia.loc.1" order="0"/>
+    <display toolTipBundleKey="momentoinercia$rec.exp.display.momentoInercia.tip.2" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="momentoinercia$rec.exp.display.momentoInercia.title.2" classLocationBundleKey="momentoinercia$rec.exp.display.momentoInercia.loc.2" order="0"/>
+    <display toolTipBundleKey="momentoinercia$rec.exp.display.momentoInercia.tip.3" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="momentoinercia$rec.exp.display.momentoInercia.title.3" classLocationBundleKey="momentoinercia$rec.exp.display.momentoInercia.loc.3" order="0"/>
+    <localizationBundle name="momentoinercia" location="recresource:///pt/utl/ist/elab/client/momentoinercia/resources/messages"/>
+    <mediaConfig videoLocation="momentoinercia$rec.exp.url.momentoInercia.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+    <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+    <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" order="0"/>
 </apparatus>

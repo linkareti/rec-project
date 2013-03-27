@@ -1,18 +1,5 @@
-<apparatus location="POISSON_V1.0"
-	customizerClassLocationBundleKey="poisson$rec.exp.customizer.poisson"
-	toolTipBundleKey="poisson$rec.exp.tip.poisson" iconLocationBundleKey="poisson$rec.exp.icon.poisson"
-	displayStringBundleKey="poisson$rec.exp.title.poisson"
-	desktopLocationBundleKey="poisson$rec.exp.background.poisson" order="1"
-	headerDisplayClassLocationBundleKey=""
-	displayFactoryClassLocationBundleKey=""
-	dataModelClassLocationBundleKey="" visible="true" selected="true"
-	enabled="false" connected="false">
-	<localizationBundle name="poisson"
-		location="recresource:///pt/utl/ist/elab/client/vpoisson/resources/messages" />
-	<display classLocationBundleKey="poisson$rec.exp.display.poisson.loc.anim"
-		toolTipBundleKey="poisson$rec.exp.display.poisson.tip.anim"
-		iconLocationBundleKey="ReCUI$rec.ui.icon.sensor"
-		displayStringBundleKey="poisson$rec.exp.display.poisson.title.anim"
-		offlineCapable="false" order="1" visible="true" selected="true"
-		enabled="false" connected="false" />
+
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="true" toolTipBundleKey="poisson$rec.exp.tip.poisson" location="POISSON_V1.0" iconLocationBundleKey="poisson$rec.exp.icon.poisson" headerDisplayClassLocationBundleKey="" displayStringBundleKey="poisson$rec.exp.title.poisson" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="poisson$rec.exp.background.poisson" descriptionStringBundleKey="poisson$rec.exp.description.poisson" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="poisson$rec.exp.customizer.poisson" order="1">
+    <display toolTipBundleKey="poisson$rec.exp.display.poisson.tip.anim" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor" displayStringBundleKey="poisson$rec.exp.display.poisson.title.anim" classLocationBundleKey="poisson$rec.exp.display.poisson.loc.anim" order="1"/>
+    <localizationBundle name="poisson" location="recresource:///pt/utl/ist/elab/client/vpoisson/resources/messages"/>
 </apparatus>

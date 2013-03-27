@@ -1,32 +1,9 @@
-<apparatus toolTipBundleKey="gamma$rec.exp.tip.gamma"
-	location="ELAB_GAMMA_V1.0" iconLocationBundleKey="gamma$rec.exp.icon.gamma"
-	headerDisplayClassLocationBundleKey="" displayStringBundleKey="gamma$rec.exp.title.gamma"
-	descriptionStringBundleKey="gamma$rec.exp.description.gamma"
-	displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="gamma$rec.exp.background.gamma"
-	dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="gamma$rec.exp.customizer.gamma"
-	visible="true" selected="true" order="0" enabled="false" connected="false">
-	<localizationBundle name="gamma"
-		location="recresource:///pt/utl/ist/elab/client/gamma/resources/messages" />
-	<mediaConfig videoLocation="gamma$rec.exp.url.gamma.video"
-		canSave="true" offlinePlay="true" />
-	<display toolTipBundleKey="gamma$rec.exp.display.gamma.tip.1"
-		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table"
-		displayStringBundleKey="gamma$rec.exp.display.gamma.title.1"
-		classLocationBundleKey="gamma$rec.exp.display.gamma.loc.1" visible="true"
-		selected="true" order="0" enabled="false" connected="false" />
-	<display toolTipBundleKey="gamma$rec.exp.display.gamma.tip.2"
-		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
-		displayStringBundleKey="gamma$rec.exp.display.gamma.title.2"
-		classLocationBundleKey="gamma$rec.exp.display.gamma.loc.2" visible="true"
-		selected="true" order="0" enabled="false" connected="false" />
-	<display toolTipBundleKey="gamma$rec.exp.display.gamma.tip.3"
-		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table"
-		displayStringBundleKey="gamma$rec.exp.display.gamma.title.3"
-		classLocationBundleKey="gamma$rec.exp.display.gamma.loc.3" visible="true"
-		selected="true" order="0" enabled="false" connected="false" />
-	<display toolTipBundleKey="gamma$rec.exp.display.gamma.tip.4"
-		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
-		displayStringBundleKey="gamma$rec.exp.display.gamma.title.4"
-		classLocationBundleKey="gamma$rec.exp.display.gamma.loc.4" visible="true"
-		selected="true" order="0" enabled="false" connected="false" />
+
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="gamma$rec.exp.tip.gamma" location="ELAB_GAMMA_V1.0" iconLocationBundleKey="gamma$rec.exp.icon.gamma" headerDisplayClassLocationBundleKey="" displayStringBundleKey="gamma$rec.exp.title.gamma" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="gamma$rec.exp.background.gamma" descriptionStringBundleKey="gamma$rec.exp.description.gamma" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="gamma$rec.exp.customizer.gamma" order="0">
+    <display toolTipBundleKey="gamma$rec.exp.display.gamma.tip.1" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="gamma$rec.exp.display.gamma.title.1" classLocationBundleKey="gamma$rec.exp.display.gamma.loc.1" order="0"/>
+    <display toolTipBundleKey="gamma$rec.exp.display.gamma.tip.2" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="gamma$rec.exp.display.gamma.title.2" classLocationBundleKey="gamma$rec.exp.display.gamma.loc.2" order="0"/>
+    <display toolTipBundleKey="gamma$rec.exp.display.gamma.tip.3" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="gamma$rec.exp.display.gamma.title.3" classLocationBundleKey="gamma$rec.exp.display.gamma.loc.3" order="0"/>
+    <display toolTipBundleKey="gamma$rec.exp.display.gamma.tip.4" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="gamma$rec.exp.display.gamma.title.4" classLocationBundleKey="gamma$rec.exp.display.gamma.loc.4" order="0"/>
+    <localizationBundle name="gamma" location="recresource:///pt/utl/ist/elab/client/gamma/resources/messages"/>
+    <mediaConfig videoLocation="gamma$rec.exp.url.gamma.video" offlinePlay="true" canSave="true" order="0"/>
 </apparatus>

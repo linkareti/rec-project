@@ -1,30 +1,7 @@
-<apparatus location="STANDARD_MAP_V1.0"
-	customizerClassLocationBundleKey="stdmap$rec.exp.customizer.stdmap"
-	toolTipBundleKey="stdmap$rec.exp.tip.stdmap" iconLocationBundleKey="stdmap$rec.exp.icon.stdmap"
-	displayStringBundleKey="stdmap$rec.exp.title.stdmap"
-	desktopLocationBundleKey="stdmap$rec.exp.background.stdmap" order="1"
-	headerDisplayClassLocationBundleKey=""
-	displayFactoryClassLocationBundleKey=""
-	dataModelClassLocationBundleKey="" visible="true" selected="true"
-	enabled="false" connected="false">
-	<localizationBundle name="stdmap"
-		location="recresource:///pt/utl/ist/elab/client/vstdmap/resources/messages" />
-	<display classLocationBundleKey="stdmap$rec.exp.display.stdmap.loc.anim"
-		toolTipBundleKey="stdmap$rec.exp.display.stdmap.tip.anim"
-		iconLocationBundleKey="ReCUI$rec.ui.icon.sensor"
-		displayStringBundleKey="stdmap$rec.exp.display.stdmap.title.anim"
-		offlineCapable="false" order="1" visible="true" selected="true"
-		enabled="false" connected="false" />
-	<display classLocationBundleKey="stdmap$rec.exp.display.stdmap.loc.1"
-		toolTipBundleKey="stdmap$rec.exp.display.stdmap.tip.1"
-		iconLocationBundleKey="ReCUI$rec.ui.icon.sensor"
-		displayStringBundleKey="stdmap$rec.exp.display.stdmap.title.1"
-		offlineCapable="false" order="2" visible="true" selected="true"
-		enabled="false" connected="false" />
-	<display classLocationBundleKey="stdmap$rec.exp.display.stdmap.loc.2"
-		toolTipBundleKey="stdmap$rec.exp.display.stdmap.tip.2"
-		iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
-		displayStringBundleKey="stdmap$rec.exp.display.stdmap.title.2"
-		offlineCapable="false" order="3" visible="true" selected="true"
-		enabled="false" connected="false" />
+
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="true" toolTipBundleKey="stdmap$rec.exp.tip.stdmap" location="STANDARD_MAP_V1.0" iconLocationBundleKey="stdmap$rec.exp.icon.stdmap" headerDisplayClassLocationBundleKey="" displayStringBundleKey="stdmap$rec.exp.title.stdmap" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="stdmap$rec.exp.background.stdmap" descriptionStringBundleKey="stdmap$rec.exp.description.stdmap" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="stdmap$rec.exp.customizer.stdmap" order="1">
+    <display toolTipBundleKey="stdmap$rec.exp.display.stdmap.tip.anim" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor" displayStringBundleKey="stdmap$rec.exp.display.stdmap.title.anim" classLocationBundleKey="stdmap$rec.exp.display.stdmap.loc.anim" order="1"/>
+    <display toolTipBundleKey="stdmap$rec.exp.display.stdmap.tip.1" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor" displayStringBundleKey="stdmap$rec.exp.display.stdmap.title.1" classLocationBundleKey="stdmap$rec.exp.display.stdmap.loc.1" order="2"/>
+    <display toolTipBundleKey="stdmap$rec.exp.display.stdmap.tip.2" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="stdmap$rec.exp.display.stdmap.title.2" classLocationBundleKey="stdmap$rec.exp.display.stdmap.loc.2" order="3"/>
+    <localizationBundle name="stdmap" location="recresource:///pt/utl/ist/elab/client/vstdmap/resources/messages"/>
 </apparatus>
