@@ -16,14 +16,13 @@ set LOG_SYSPROPS=-Djava.util.logging.config.file=%DRIVER_BASE_DIR%/etc/loggers.c
 set PROCESSINGMANAGER_SYSPROPS=-Drec.processingmanager.threadPool.coresize=@rec.driver.processingmanager.threadpool.coresize@ -Drec.processingmanager.threadPool.maxsize=@rec.driver.processingmanager.threadpool.maxsize@ -Drec.processingmanager.thread.idletime=@rec.processingmanager.thread.idletime@
 set EXPERIMENT_DRIVER_CLASS="-Dexperiment.driver.class=@experiment.driver.class@"
 
-REM TODO - Aleitao
-REM não esquecer que cada experiência poderá querer definir command line arguments 
-REM adicionais... pode ser o driver_hardware_info ou outras quaisquer...
+#Define-se o HeadlessToolkit em vez do java.awt.headless=false, porque isso permite que mesmo as experiências que usam JMF possam aceder
+#a um toolkit, mesmo que "virtual". No entanto, isto não resolve o problema de acesso a WebCams, porque nesse caso, infelizmente, JMF precisa
+#na mesma de um Tookit com "Head". A forma é correr um daemon anterior com o Xvfb, por exemplo... Em vez de um Xserver completo, apenas uma virtualização
+#mais simplista.
+set TOOLKIT_SYSPROPS=-Dawt.toolkit=sun.awt.HeadlessToolkit
 
-
-set TOOLKIT_SYSPROPS=-Dawt.toolkit=sun.awt.motif.MToolkit -Djava.awt.headless=true
-
-set RECCLASSPATH=%DRIVER_BASE_DIR%/lib/xml-apis.jar;%DRIVER_BASE_DIR%/lib/tools-1.4.0.jar;%DRIVER_BASE_DIR%/lib/openorb_orb-1.4.0.jar;%DRIVER_BASE_DIR%/lib/openorb_pss-1.4.0.jar;%DRIVER_BASE_DIR%/lib/openorb_ots-1.4.0.jar;%DRIVER_BASE_DIR%/lib/logkit.jar;%DRIVER_BASE_DIR%/lib/xercesImpl.jar;%DRIVER_BASE_DIR%/lib/avalon-framework.jar;%DRIVER_BASE_DIR%/lib/OSP.jar;$DRIVER_BASE_DIR/lib/vecmath.jar;$DRIVER_BASE_DIR/lib/jfreechart-1.0.9.jar;$DRIVER_BASE_DIR/lib/jcommon-1.0.12.jar;$DRIVER_BASE_DIR/lib/j3dcore.jar;$DRIVER_BASE_DIR/lib/j3dutils.jar;%DRIVER_BASE_DIR%/lib/RXTXcomm.jar;%DRIVER_BASE_DIR%/lib/commons-i18n-0.0.1-SNAPSHOT.jar;%DRIVER_BASE_DIR%/lib/commons-net-0.0.1-SNAPSHOT.jar
+set RECCLASSPATH=%DRIVER_BASE_DIR%/lib/xml-apis.jar;%DRIVER_BASE_DIR%/lib/tools-1.4.0.jar;%DRIVER_BASE_DIR%/lib/openorb_orb-1.4.0.jar;%DRIVER_BASE_DIR%/lib/openorb_pss-1.4.0.jar;%DRIVER_BASE_DIR%/lib/openorb_ots-1.4.0.jar;%DRIVER_BASE_DIR%/lib/logkit.jar;%DRIVER_BASE_DIR%/lib/xercesImpl.jar;%DRIVER_BASE_DIR%/lib/avalon-framework.jar;%DRIVER_BASE_DIR%/lib/OSP.jar;$DRIVER_BASE_DIR/lib/vecmath.jar;$DRIVER_BASE_DIR/lib/jfreechart-1.0.9.jar;$DRIVER_BASE_DIR/lib/jcommon-1.0.12.jar;$DRIVER_BASE_DIR/lib/j3dcore.jar;$DRIVER_BASE_DIR/lib/j3dutils.jar;%DRIVER_BASE_DIR%/lib/RXTXcomm.jar;%DRIVER_BASE_DIR%/lib/commons-i18n.jar;%DRIVER_BASE_DIR%/lib/commons-net.jar
 set DRIVER_CLASSPATH=%DRIVER_BASE_DIR%/@experiment.name@Driver.jar;%DRIVER_BASE_DIR%/ELabHardwareServer.jar;%DRIVER_BASE_DIR%/ELabCommon.jar;%DRIVER_BASE_DIR%/ReCHardwareServer.jar;%DRIVER_BASE_DIR%/ReCCommon.jar
 set DRIVER_EXPERIMENT_CLASSPATH=
 
