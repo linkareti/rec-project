@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-		=======================================================
-		============ 2009/03/29 Build Rec - Elab ==============
-		=======================================================
-	-->
+<!-- ======================================================= ============ 
+	2009/03/29 Build Rec - Elab ============== ======================================================= -->
 
 <project name="ReC Module - build system" default="build.all" basedir=".">
 	<description>
-		Compile, package, sign and run the project ReC and each of the experiments.
+		Compile, package, sign and run the project ReC and each of
+		the experiments.
 	</description>
 
 	<property file="build.properties" description="general properties for building project" />
 
 	<import file="generaldefinitions.xml" />
 
-	<!--
-			=====================================================
-			======================= JVLC ========================
-			=====================================================
-		-->
+	<!-- ===================================================== ======================= 
+		JVLC ======================== ===================================================== -->
 
 	<target name="clean.rec.jvlc" description="Delete the build folder containing the jvlc compiled code.">
 		<delete dir="${jvlc.classes.dir}" />
@@ -65,7 +60,7 @@
 	</target>
 
 	<target name="sign.rec.jvlc" description="sign jvlc jar">
-		<sign.jar.rec folder="${jvlc.build.dir}" jar.name="ReCjvlc.jar" />
+		<sign.jar.rec file="${jvlc.build.dir}/ReCjvlc.jar" />
 	</target>
 
 	<target name="pack.jar.rec.jvlc" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
@@ -76,11 +71,8 @@
 
 	</target>
 
-	<!--
-		=====================================================
-		==================== REC Common =====================
-		=====================================================
-	-->
+	<!-- ===================================================== ==================== 
+		REC Common ===================== ===================================================== -->
 
 	<target name="clean.rec.common" description="Delete the build folder containing the common shared compiled code.">
 		<delete dir="${rec.common.classes.dir}" />
@@ -91,7 +83,7 @@
 	<target name="compile.rec.common" description="Compile the common part of the ReC project independently.">
 		<mkdir dir="${rec.common.classes.dir}" />
 		<mkdir dir="${rec.common.classes.dir}/META-INF" />
-
+		
 		<javac srcdir="${rec.common.src.java.dir}" destdir="${rec.common.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
 			<include name="**/*.java" />
 			<classpath refid="rec.common.libs.classpath" />
@@ -104,6 +96,8 @@
 				<exclude name="**/*.form" />
 			</fileset>
 		</copy>
+
+		<copy file="${templates.dir.logs}/client.loggers.config.properties" todir="${rec.common.classes.dir}/client.loggers.config.properties"/>
 
 		<manifest file="${rec.common.classes.dir}/META-INF/MANIFEST.MF">
 			<section name="common">
@@ -127,7 +121,7 @@
 	</target>
 
 	<target name="sign.rec.common" description="sign the rec common jar">
-		<sign.jar.rec folder="${common.build.dir}" jar.name="ReCCommon.jar" />
+		<sign.jar.rec file="${common.build.dir}/ReCCommon.jar" />
 	</target>
 
 	<target name="pack.jar.rec.common" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
@@ -138,11 +132,8 @@
 
 	</target>
 
-	<!--
-		=====================================================
-		==================== ReC Client =====================
-		=====================================================
-	-->
+	<!-- ===================================================== ==================== 
+		ReC Client ===================== ===================================================== -->
 
 	<target name="clean.rec.client" description="Delete the build folder containing the common shared compiled code.">
 		<delete dir="${rec.client.classes.dir}" />
@@ -202,7 +193,7 @@
 	</target>
 
 	<target name="sign.rec.client" description="sign the rec client jar">
-		<sign.jar.rec folder="${client.build.dir}" jar.name="ReCClient.jar" />
+		<sign.jar.rec file="${client.build.dir}/ReCClient.jar" />
 	</target>
 
 	<target name="pack.jar.rec.client" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
@@ -221,11 +212,8 @@
 
 	</target>
 
-	<!--
-		=====================================================
-		================ ReC Hardware Server ================
-		=====================================================
-	-->
+	<!-- ===================================================== ================ 
+		ReC Hardware Server ================ ===================================================== -->
 
 	<target name="clean.rec.hardwareserver" description="clean the rec hardware server classes">
 		<delete dir="${rec.hardwareserver.classes.dir}" />
@@ -279,10 +267,13 @@
 		<copy file="${common.build.dir}/ReCCommon.jar" todir="${hardwareserver.build.dir}">
 		</copy>
 
-		<process.list task="openorb.rec.hardwareserver" list="${lab.list}" attribute.name="lab.name" />
+		<process.list task="-openorb.rec.hardwareserver" list="${lab.list}" attribute.name="lab.name" />
 
 	</target>
 
+	<target name="-openorb.rec.hardwareserver">
+		<openorb.rec.hardwareserver lab.name="${lab.name}"/>
+	</target>
 	<macrodef name="openorb.rec.hardwareserver" description="create the openorb configuration file for the hardware server">
 		<attribute name="lab.name" />
 		<sequential>
@@ -296,11 +287,8 @@
 		</sequential>
 	</macrodef>
 
-	<!--
-		=====================================================
-		============= ReC Multicast Controller===============
-		=====================================================
-	-->
+	<!-- ===================================================== ============= 
+		ReC Multicast Controller=============== ===================================================== -->
 
 	<target name="clean.rec.multicastcontroller" description="clean the rec multicastcontroller classes">
 		<delete dir="${rec.multicast.classes.dir}" />
@@ -355,10 +343,14 @@
 		<copy file="${common.build.dir}/ReCCommon.jar" todir="${multicast.build.dir}">
 		</copy>
 
-		<process.list task="openorb.rec.multicastcontroller" list="${lab.list}" attribute.name="lab.name" />
+		<process.list task="-openorb.rec.multicastcontroller" list="${lab.list}" attribute.name="lab.name" />
 
 	</target>
 
+	<target name="-openorb.rec.multicastcontroller">
+		<openorb.rec.multicastcontroller lab.name="${lab.name}"/>
+	</target>
+	
 	<macrodef name="openorb.rec.multicastcontroller" description="create the openorb config file for the multicastcontroller">
 		<attribute name="lab.name" />
 		<sequential>
@@ -372,43 +364,67 @@
 		</sequential>
 	</macrodef>
 
-	<target name="run.rec.multicast" description="run the rec multicastcontroller">
+	<target name="run.rec.multicast" description="run the rec multicastcontroller" if="lab.name">
+		<local name="lab.jmx.port"/> 
+		<propertycopy name="lab.jmx.port" from="${lab.name}.rec.multicastcontroller.jmxremote.port"/>
+		<local name="rec.multicast.labid"/> 
+		<propertycopy name="rec.multicast.labid" from="${lab.name}.rec.web.lab.id"/>
 		<java classname="${multicast.main-class}" fork="true" failonerror="true" maxmemory="${max.memory}">
-			<arg value="-h" />
 			<classpath refid="run.multicastcontroller.classpath" />
 			<jvmarg value="-Xms${min.memory}" />
 			<jvmarg value="-Xmx${max.memory}" />
+			<sysproperty key="rec.multicastcontroller.show.gui" value="true" />
 			<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
 			<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
-			<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
+			<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file.debug}" />
 			<sysproperty key="openorb.profile" value="${multicast.openorb.profile}" />
 			<sysproperty key="rec.multicast.securitymanager" value="${rec.multicast.securitymanager}" />
 			<sysproperty key="rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE" value="${rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE}" />
 			<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
 			<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 			<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
-			<sysproperty key="openorb.config" value="${rec.multicast.classes.dir}/openorb.xml" />
+			<sysproperty key="openorb.config" value="file://${multicast.build.dir}/${lab.name}/etc/openorb.xml" />
+			<sysproperty key="java.rmi.server.hostname" value="127.0.0.1" />
+			<sysproperty key="com.sun.management.jmxremote.authenticate" value="true" />
+			<sysproperty key="com.sun.management.jmxremote.ssl" value="false" />
+			<sysproperty key="com.sun.management.jmxremote.port" value="${lab.jmx.port}" />
+			<sysproperty key="com.sun.management.jmxremote.access.file" value="${templates.dir.jmx}/jmxremote.access" />
+			<sysproperty key="com.sun.management.jmxremote.password.file" value="${templates.dir.jmx}/jmxremote.password" />
+			<sysproperty key="rec.multicast.labid" value="${rec.multicast.labid}"/>
+			<sysproperty key="rec.multicast.repository" value="${rec.multicast.repository}"/>
 		</java>
 	</target>
 
-	<target name="debug.rec.multicast" description="run the rec multicastcontroller in debug mode">
+	<target name="debug.rec.multicast" description="run the rec multicastcontroller in debug mode" if="lab.name">
+		<local name="lab.jmx.port"/> 
+		<propertycopy name="lab.jmx.port" from="${lab.name}.rec.multicastcontroller.jmxremote.port"/>
+		<local name="rec.multicast.labid"/> 
+		<propertycopy name="rec.multicast.labid" from="${lab.name}.rec.web.lab.id"/>
 		<java classname="com.linkare.rec.impl.multicast.startup.MultiCastControllerMain" fork="true" failonerror="true" maxmemory="${max.memory}">
-			<arg value="-h" />
 			<classpath refid="run.multicastcontroller.classpath" />
 			<jvmarg value="-Xdebug" />
 			<jvmarg value="-Xrunjdwp:transport=dt_socket,address=${multicast.debug.address.port},server=y,suspend=y" />
 			<jvmarg value="-Xms${min.memory}" />
 			<jvmarg value="-Xmx${max.memory}" />
+			<sysproperty key="rec.multicastcontroller.show.gui" value="true" />
 			<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
 			<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
-			<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
+			<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file.debug}" />
 			<sysproperty key="openorb.profile" value="${multicast.openorb.profile}" />
 			<sysproperty key="rec.multicast.securitymanager" value="${rec.multicast.securitymanager}" />
 			<sysproperty key="rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE" value="${rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE}" />
 			<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
 			<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 			<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
-			<sysproperty key="openorb.config" value="${rec.multicast.classes.dir}/openorb.xml" />
+			<sysproperty key="openorb.config" value="file://${multicast.build.dir}/${lab.name}/etc/openorb.xml" />
+			<sysproperty key="java.rmi.server.hostname" value="127.0.0.1" />
+			<sysproperty key="com.sun.management.jmxremote.authenticate" value="true" />
+			<sysproperty key="com.sun.management.jmxremote.ssl" value="false" />
+			<sysproperty key="com.sun.management.jmxremote.port" value="${lab.jmx.port}" />
+			<sysproperty key="com.sun.management.jmxremote.access.file" value="${templates.dir.jmx}/jmxremote.access" />
+			<sysproperty key="com.sun.management.jmxremote.password.file" value="${templates.dir.jmx}/jmxremote.password" />
+			<sysproperty key="rec.multicast.labid" value="${rec.multicast.labid}"/> 
+			<sysproperty key="rec.multicast.repository" value="${rec.multicast.repository}"/>
 		</java>
 	</target>
 

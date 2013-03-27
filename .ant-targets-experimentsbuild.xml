@@ -5,7 +5,6 @@ compile.experiment.clients.list
 compile.experiment.drivers.list
 debug.experiment.client
 debug.experiment.driver
-help
 jar.experiment.clients.list
 jar.experiment.drivers.list
 run.experiment.client

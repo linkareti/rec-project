@@ -126,15 +126,15 @@
 	</target>
 
 	<target name="sign.elab.common" description="sign elab common jar">
-		<sign.jar.elab folder="${common.build.dir}" jar.name="ELabCommon.jar" />
+		<sign.jar.elab file="${common.build.dir}/ELabCommon.jar" />
 	</target>
 
 	<target name="sign.elab.client" description="sign elab client jar">
-		<sign.jar.elab folder="${client.build.dir}" jar.name="ELabClient.jar" />
+		<sign.jar.elab file="${client.build.dir}/ELabClient.jar" />
 	</target>
 
 	<target name="pack.jar.elab.common" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
-		<pack.200.jar file="${client.build.dir}/ELabCommon_sig.jar" />
+		<pack.200.jar file="${common.build.dir}/ELabCommon_sig.jar" />
 	</target>
 
 	<target name="pack.jar.elab.client" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
@@ -144,11 +144,13 @@
 	<target name="build.elab.client" description="build elab client - clean, compile, jar, sign and pack200 targets" depends="clean.elab.common,clean.elab.client,compile.elab.common,compile.elab.client,jar.elab.common,jar.elab.client,repack.jar.elab.common,repack.jar.elab.client,sign.elab.common,sign.elab.client,pack.jar.elab.common,pack.jar.elab.client">
 		<create.jnlp.full.client.compile />
 		<create.jnlp.full.client.build />
-		<copy file="${common.build.dir}/ELabCommon_sig.jar" todir="${client.build.dir}" />
+		<copy todir="${client.build.dir}" >
+			<fileset dir="${common.build.dir}"
+			includes="*_sig.jar*"/>
+		</copy>
 
 		<copy file="${elab.client.classes.dir}/ReCFaceConfig.xml" tofile="${client.build.dir}/etc/ReCFaceConfig.xml">
 		</copy>
-
 
 		<copy todir="${client.build.dir}/images" overwrite="true">
 			<fileset dir="${templates.dir.images}">
@@ -182,17 +184,21 @@
 				<path refid="rec.common.lib.path" />
 				<path refid="rec.client.lib.path" />
 				<path refid="elab.client.lib.path" />
+				<path refid="rec.compile.client.classpath" />
 				<pathelement location="${rec.common.classes.dir}/" />
 				<pathelement location="${rec.client.classes.dir}" />
 				<pathelement location="${elab.client.classes.dir}/" />
+				<pathelement location="${elab.common.classes.dir}" />
 				<dirset dir="${experiments.classes.dir}">
 					<include name="*/client/**" />
 				</dirset>
 			</classpath>
 			<jvmarg value="-Xms${min.memory}" />
 			<jvmarg value="-Xmx${max.memory}" />
+			<sysproperty key="rec.web.endpoint" value="${rec.web.endpoint}"/>
 			<sysproperty key="rec.face.config" value="file:///${elab.client.classes.dir}/ReCFaceConfig.xml" />
 			<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
+			<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file.debug}" />
 			<sysproperty key="openorb.profile" value="${experiment.client.openorb.profile}" />
 			<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
 			<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
@@ -214,19 +220,23 @@
 				<path refid="rec.common.lib.path" />
 				<path refid="rec.client.lib.path" />
 				<path refid="elab.client.lib.path" />
+				<path refid="rec.compile.client.classpath" />
 				<pathelement location="${rec.common.classes.dir}/" />
 				<pathelement location="${rec.client.classes.dir}" />
 				<pathelement location="${elab.client.classes.dir}/" />
+				<pathelement location="${elab.common.classes.dir}" />
 				<dirset dir="${experiments.classes.dir}">
 					<include name="*/client/**" />
 				</dirset>
 			</classpath>
 			<jvmarg value="-Xdebug" />
 			<jvmarg value="-Xnoagent" />
-			<jvmarg value="-Xrunjdwp:transport=dt_socket,address=${experiment.client.debug.address.port},server=y,suspend=n" />
+			<jvmarg value="-Xrunjdwp:transport=dt_socket,address=${experiment.client.debug.address.port},server=y,suspend=y" />
 			<jvmarg value="-Xms${min.memory}" />
 			<jvmarg value="-Xmx${max.memory}" />
+			<sysproperty key="rec.web.endpoint" value="${rec.web.endpoint}"/>
 			<sysproperty key="rec.face.config" value="file:///${elab.client.classes.dir}/ReCFaceConfig.xml" />
+			<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file.debug}" />
 			<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
 			<sysproperty key="openorb.profile" value="${experiment.client.openorb.profile}" />
 			<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />

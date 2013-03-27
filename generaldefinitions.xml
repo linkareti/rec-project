@@ -39,42 +39,21 @@
 	</tstamp>
 
 
-	<!-- = = = = = = = = = = = = = = = = =
-          macrodef: outer.process.list          
-         = = = = = = = = = = = = = = = = = -->
 	<macrodef name="outer.process.list">
 		<attribute name="list" />
 		<attribute name="task" />
 		<attribute name="attribute.name" />
 		<attribute name="outer.list" />
 		<sequential>
-			<script language="javascript">
-				<![CDATA[
-        	    var outerList="@{outer.list}";
-				var task="@{task}";
-				var attribute_name="@{attribute.name}";
-			    var splitVars=outerList.split(",");
-				
-			    for(var i=0;i<splitVars.length;i++)
-			    {   
-        			var innerListName=splitVars[i]+"."+"@{list}";
-        	        var innerList=project.getProperty(innerListName);
-            		var innerListSplitVars=innerList.split(",");
-        			
-            		for(var j=0;j<innerListSplitVars.length;j++)
-        			{   
-                		var oTask=project.createTask(task);
-						oTask.init();
-						oTask.setDynamicAttribute(attribute_name,innerListSplitVars[j]);
-						oTask.execute();
-				 	}
-        	
-        		}
-			]]>
-			</script>
+			<for list="@{outer.list}" param="outer.list.element" parallel="true" threadcount="2" delimiter=",">
+				<sequential>
+					<local name="innerlist" />
+					<propertycopy name="innerlist" from="@{outer.list.element}.@{list}" />
+					<process.list list="${innerlist}" task="@{task}" attribute.name="@{attribute.name}" />
+				</sequential>
+			</for>
 		</sequential>
 	</macrodef>
-
 
 	<macrodef name="process.list" description="Process a list of elements in csv format and for each one, define a property and execute an ant target">
 		<attribute name="list" />
@@ -82,22 +61,7 @@
 		<attribute name="attribute.name" />
 
 		<sequential>
-			<script language="javascript">
-				<![CDATA[
-					var list="@{list}";
-					var task="@{task}";
-					var attribute_name="@{attribute.name}";
-				    var splitVars=list.split(",");
-					
-				    for(var i=0;i<splitVars.length;i++)
-				    {    
-						var oTask=project.createTask(task);
-						oTask.init();
-						oTask.setDynamicAttribute(attribute_name,splitVars[i]);
-						oTask.execute();
-					}
-				]]>
-			</script>
+			<foreach list="@{list}" target="@{task}" param="@{attribute.name}" parallel="true" maxThreads="2" />
 		</sequential>
 	</macrodef>
 
@@ -648,6 +612,8 @@
 			</replace>
 
 			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/elab-client.jnlp" />
+			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Auto Connect ID --&gt;" value="" />
+			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Auto Acquire Result --&gt;" value="" />
 			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
 			<replace file="${elab.client.classes.dir}/elab-client.jnlp" propertyFile="build.properties">
 				<replacefilter token="@elab.title@" property="elab.title" />
@@ -680,17 +646,33 @@
 			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
 			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot; main=&quot;true&quot; /&gt;" />
 
-			<outer.process.list outer.list="${lab.list}" list="experiment.list"  task="add.experiment.to.full.jnlp.compile" attribute.name="experiment.name" />
+			<foreach list="${lab.list}" param="lab.name" target="-add.lab.experiments.to.full.jnlp.compile" parallel="false" />
+
 		</sequential>
 	</macrodef>
 
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: -add.lab.experiments.to.full.jnlp.compile                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="-add.lab.experiments.to.full.jnlp.compile">
+		<sequential>
+			<local name="lab.experiments.list" />
+			<propertycopy name="lab.experiments.list" from="${lab.name}.experiment.list" />
+			<foreach list="${lab.experiments.list}" param="experiment.name" target="-add.experiment.to.full.jnlp.compile" />
+		</sequential>
+	</target>
+
+
+	<target name="-add.experiment.to.full.jnlp.compile">
+		<add.experiment.to.full.jnlp.compile experiment.name="${experiment.name}" />
+	</target>
 	<macrodef name="add.experiment.to.full.jnlp.compile" description="Add one experiment to the jnlp of the full client">
 		<attribute name="experiment.name" />
 		<sequential>
-			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!--End Experiment Jars--&gt;">
+			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!--End Experiment Jars --&gt;">
 				<replacevalue>
 					<![CDATA[<jar href="@temporary.experiment.jar@" lazy="true"/>
-					<!--End Experiment Jars-->]]></replacevalue>
+					<!--End Experiment Jars -->]]></replacevalue>
 			</replace>
 			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
 		</sequential>
@@ -853,6 +835,8 @@
 			</replace>
 
 			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/elab-client.jnlp" />
+			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Auto Connect ID --&gt;" value="" />
+			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Auto Acquire Result --&gt;" value="" />
 			<replace file="${client.build.dir}/elab-client.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
 				<replacefilter token="@elab.title@" property="elab.title" />
@@ -880,26 +864,35 @@
 				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
 				<replacefilter token="@jnlp.file@" value="elab-client.jnlp" />
-				<!--replacefilter token="@rec.apparatus.autoconnect.id@" property="rec.apparatus.autoconnect.id"
-				/-->
-				<!--replacefilter token="@rec.apparatus.autoacquireresult@" property="rec.apparatus.autoacquireresult"
-                		/-->
 			</replace>
 
 			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
-			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot; main=&quot;true&quot; /&gt;" />
+			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot; /&gt;" />
 
-			<outer.process.list outer.list="${lab.list}" list="experiment.list" task="add.experiment.to.full.jnlp.build" attribute.name="experiment.name" />
+
+			<foreach list="${lab.list}" param="lab.name" target="-add.lab.experiments.to.full.jnlp.build" parallel="false" />
+
 		</sequential>
 	</macrodef>
 
+	<target name="-add.lab.experiments.to.full.jnlp.build">
+		<sequential>
+			<local name="lab.experiments.list" />
+			<propertycopy name="lab.experiments.list" from="${lab.name}.experiment.list" />
+			<foreach list="${lab.experiments.list}" param="experiment.name" target="-add.experiment.to.full.jnlp.build" />
+		</sequential>
+	</target>
+
+	<target name="-add.experiment.to.full.jnlp.build">
+		<add.experiment.to.full.jnlp.build experiment.name="${experiment.name}" />
+	</target>
 	<macrodef name="add.experiment.to.full.jnlp.build" description="Add an experiment to the FullClient JNLP launch file">
 		<attribute name="experiment.name" />
 		<sequential>
-			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!--End Experiment Jars--&gt;">
+			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!--End Experiment Jars --&gt;">
 				<replacevalue>
 					<![CDATA[<jar href="@temporary.experiment.jar@" lazy="true"/>
-					<!--End Experiment Jars-->]]></replacevalue>
+					<!--End Experiment Jars -->]]></replacevalue>
 			</replace>
 			<replace file="${client.build.dir}/elab-client.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
 		</sequential>
@@ -932,32 +925,6 @@
 
 	<!--MACROS-->
 
-	<macrodef name="process.list" description="Process a list in csv format, for each element, define an attribute and execute an ant target">
-		<attribute name="list" />
-		<attribute name="task" />
-		<attribute name="attribute.name" />
-
-		<sequential>
-			<script language="javascript">
-				<![CDATA[
-					var list="@{list}";
-					var task="@{task}";
-					var attribute_name="@{attribute.name}";
-				    var splitVars=list.split(",");
-					
-				    for(var i=0;i<splitVars.length;i++)
-				    {    
-						var oTask=project.createTask(task);
-						oTask.init();
-						oTask.setDynamicAttribute(attribute_name,splitVars[i]);
-						oTask.execute();
-					}
-				]]>
-			</script>
-		</sequential>
-	</macrodef>
-
-
 
 	<!-- = = = = = = = = = = = = = = = = =
           macrodef: create.jar          
@@ -987,29 +954,29 @@
 	<!-- = = = = = = = = = = = = = = = = =
           macrodef: sign.jar          
          = = = = = = = = = = = = = = = = = -->
+	<target name="-sign.jar.rec">
+		<sign.jar.rec file="${file}" />
+	</target>
 	<macrodef name="sign.jar.rec" description="Sign a rec jar">
-		<attribute name="folder" />
-		<attribute name="jar.name" />
+		<attribute name="file" />
 		<sequential>
-
-			<signjar storetype="${rec.storetype}" destDir="@{folder}" keystore="${rec.keystore}" keypass="${rec.keypass}" storepass="${rec.storepass}" alias="${rec.alias}">
-				<fileset dir="@{folder}" includes="@{jar.name}" excludes="*_sig.jar" />
-				<globmapper from="*.jar" to="*_sig.jar" />
+			<local name="signed.file" />
+			<propertyregex property="signed.file" input="@{file}" regexp="(.*)\.jar$" select="\1_sig.jar" />
+			<signjar storetype="${rec.storetype}" keystore="${rec.keystore}" keypass="${rec.keypass}" storepass="${rec.storepass}" alias="${rec.alias}" jar="@{file}" signedjar="${signed.file}">
 			</signjar>
-
 		</sequential>
 	</macrodef>
 
+	<target name="-sign.jar.elab">
+		<sign.jar.elab file="${file}" />
+	</target>
 	<macrodef name="sign.jar.elab" description="Sign an elab jar">
-		<attribute name="folder" />
-		<attribute name="jar.name" />
+		<attribute name="file" />
 		<sequential>
-
-			<signjar storetype="${elab.storetype}" destDir="@{folder}" keystore="${elab.keystore}" keypass="${elab.keypass}" storepass="${elab.storepass}" alias="${elab.alias}">
-				<fileset dir="@{folder}" includes="@{jar.name}" excludes="*_sig.jar" />
-				<globmapper from="*.jar" to="*_sig.jar" />
+			<local name="signed.file" />
+			<propertyregex property="signed.file" input="@{file}" regexp="(.*)\.jar$" select="\1_sig.jar" />
+			<signjar storetype="${elab.storetype}" keystore="${elab.keystore}" keypass="${elab.keypass}" storepass="${elab.storepass}" alias="${elab.alias}" jar="@{file}" signedjar="${signed.file}">
 			</signjar>
-
 		</sequential>
 	</macrodef>
 
@@ -1021,59 +988,17 @@
 		================================================================
 		-->
 
-	<macrodef name="sign.all.jars.in.directory.rec.certificate" description="sign all rec jars within a directory">
-		<attribute name="source.dir.name" />
-		<attribute name="destination.dir.name" />
-		<sequential>
-			<mkdir dir="@{destination.dir.name}" />
-
-			<signjar storetype="${rec.storetype}" destDir="@{destination.dir.name}" keystore="${rec.keystore}" keypass="${rec.keypass}" storepass="${rec.storepass}" alias="${rec.alias}">
-				<fileset dir="@{source.dir.name}" includes="**/*.jar" excludes="**/*_sig.jar" />
-				<globmapper from="*.jar" to="*_sig.jar" />
-			</signjar>
-
-		</sequential>
-	</macrodef>
-
-	<macrodef name="sign.all.jars.in.directory.elab.certificate" description="sign all elab jars within a directory">
-		<attribute name="source.dir.name" />
-		<attribute name="destination.dir.name" />
-		<sequential>
-			<mkdir dir="@{destination.dir.name}" />
-
-			<signjar storetype="${elab.storetype}" destDir="@{destination.dir.name}" keystore="${elab.keystore}" keypass="${elab.keypass}" storepass="${elab.storepass}" alias="${elab.alias}">
-				<fileset dir="@{source.dir.name}" includes="**/*.jar" excludes="**/*_sig.jar" />
-				<globmapper from="*.jar" to="*_sig.jar" />
-			</signjar>
-
-		</sequential>
-	</macrodef>
-
-	<macrodef name="repack.all.jars.in.directory" description="repack all jars within a directory">
-		<attribute name="dir" />
-		<sequential>
-			<p200ant repack="true">
-				<fileset dir="@{dir}">
-					<include name="**/*.jar" />
-				</fileset>
-			</p200ant>
-		</sequential>
-	</macrodef>
-
+	<target name="-repack.jar">
+		<repack.jar file="${file}" />
+	</target>
 	<macrodef name="repack.jar" description="Repack a single jar file">
 		<attribute name="file" />
 		<sequential>
-			<p200ant repack="true">
+			<p200ant repack="true" KeepModificationTime="true" keepOrder="true" segmentLimit="-1">
 				<fileset file="@{file}" />
 			</p200ant>
 		</sequential>
 	</macrodef>
-
-	<!--
-		================================================================
-		========================== Javadocs ============================
-		================================================================
-		-->
 
 	<taskdef name="p200ant" classname="de.matthiasmann.p200ant.P200AntTask" classpath="${rec.lib.dir}/compile/common/p200ant.jar" />
 
@@ -1081,21 +1006,13 @@
 		<istrue value="${generate.pack200}" />
 	</condition>
 
-	<macrodef name="pack.200.all.jar.in.dir">
-		<attribute name="dir" />
-		<sequential>
-			<p200ant destdir="@{dir}">
-				<fileset dir="@{dir}">
-					<include name="*_sig.jar" />
-				</fileset>
-			</p200ant>
-		</sequential>
-	</macrodef>
-
+	<target name="-pack.200.jar">
+		<pack.200.jar file="${file}" />
+	</target>
 	<macrodef name="pack.200.jar" description="Pack200 a jar file">
 		<attribute name="file" />
 		<sequential>
-			<p200ant>
+			<p200ant KeepModificationTime="true" keepOrder="true" segmentLimit="-1">
 				<fileset file="@{file}" />
 			</p200ant>
 		</sequential>
@@ -1124,26 +1041,27 @@
 		<path refid="elab.hardwareserver.libs.classpath" />
 	</path>
 
-
 	<macrodef name="create.faceconfig" description="Create a ReCFaceConfig.xml file">
 		<sequential>
 			<copy file="${faceconfig.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ReCFaceConfig.xml" />
 
-			<process.list task="add.lab.faceconfig" list="${lab.list}" attribute.name="lab.name" />
-
+			<foreach list="${lab.list}" param="lab.name" target="-add.lab.faceconfig" parallel="false" />
 		</sequential>
 	</macrodef>
 
+	<target name="-add.lab.faceconfig">
+		<add.lab.faceconfig lab.name="${lab.name}" />
+	</target>
 	<macrodef name="add.lab.faceconfig" description="Add the Lab part of the ReCFaceConfig.xml file">
 		<attribute name="lab.name" />
 		<sequential>
 
 			<loadfile property="@{lab.name}.faceconfig" srcFile="${faceconfig.lab.template.file}" />
 
-			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--End Lab configuration--&gt;">
+			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--End Lab configuration --&gt;">
 				<replacevalue>
 					<![CDATA[@temporary.lab@
-			<!--End Lab configuration-->]]></replacevalue>
+			<!--End Lab configuration -->]]></replacevalue>
 			</replace>
 			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="@temporary.lab@" value="${@{lab.name}.faceconfig}" />
 
@@ -1153,25 +1071,28 @@
 				<replacefilter token="@lab.name@" property="@{lab.name}.rec.web.lab.id" />
 			</replace>
 
-			<process.list task="add.experiment.faceconfig" list="${@{lab.name}.experiment.list}" attribute.name="experiment.name" />
-
+			<foreach list="${@{lab.name}.experiment.list}" param="experiment.name" parallel="false" target="-add.experiment.faceconfig"/>
+			
 			<!-- experiment apparatus comments -->
-			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--Start Apparatus configuration--&gt;" value="&lt;!--Start @{lab.name} Apparatus configuration--&gt;" />
-			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--End Apparatus configuration--&gt;" value="&lt;!--End @{lab.name} Apparatus configuration--&gt;" />
+			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--Start Apparatus configuration --&gt;" value="&lt;!--Start @{lab.name} Apparatus configuration --&gt;" />
+			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--End Apparatus configuration --&gt;" value="&lt;!--End @{lab.name} Apparatus configuration --&gt;" />
 
 		</sequential>
 	</macrodef>
 
+	<target name="-add.experiment.faceconfig">
+		<add.experiment.faceconfig experiment.name="${experiment.name}" />
+	</target>
 	<macrodef name="add.experiment.faceconfig" description="Add each experiment ReCFaceConfig part">
 		<attribute name="experiment.name" />
 		<sequential>
 
 			<loadfile property="@{experiment.name}.faceconfig" srcFile="experiments/@{experiment.name}/etc/ReCFaceConfig.xml" />
 
-			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--End Apparatus configuration--&gt;">
+			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--End Apparatus configuration --&gt;">
 				<replacevalue>
 					<![CDATA[@temporary.experiment.apparatus@
-			<!--End Apparatus configuration-->]]></replacevalue>
+			<!--End Apparatus configuration -->]]></replacevalue>
 			</replace>
 			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="@temporary.experiment.apparatus@" value="${@{experiment.name}.faceconfig}" />
 		</sequential>

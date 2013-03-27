@@ -1,6 +1,14 @@
 Compile,
+build.all
+build.client.lib.dependencies
+clean.all
+clean.each.module
+copy.client.external.lib.dependencies.to.build.structure
+copy.client.to.rec.web
 dist.all
 dist.client
 dist.hardwareserver
 dist.multicast
-help
+pack.client.external.lib.dependencies
+repack.client.external.lib.dependencies
+sign.client.external.lib.dependencies

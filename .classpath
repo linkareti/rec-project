@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry combineaccessrules="false" kind="src" path="/rec.web-api"/>
 	<classpathentry kind="src" path="rec/src/java/client"/>
 	<classpathentry kind="src" path="experiments/boylemariotte/src/java/client"/>
 	<classpathentry kind="src" path="experiments/boylemariotte/src/java/server"/>
@@ -135,6 +136,16 @@
 	<classpathentry kind="src" path="experiments/vtiro/src/java/common"/>
 	<classpathentry kind="src" path="experiments/vyounginterf/src/java/common"/>
 	<classpathentry kind="src" path="experiments/webrobot/src/java/common"/>
+	<classpathentry kind="src" path="experiments/langmuir/src/java/client"/>
+	<classpathentry kind="src" path="experiments/langmuir/src/java/common"/>
+	<classpathentry kind="src" path="experiments/langmuir/src/java/server"/>
+	<classpathentry excluding="driver/" kind="src" path="test/src/java"/>
+	<classpathentry kind="src" path="experiments/paschen/src/java/client"/>
+	<classpathentry kind="src" path="experiments/paschen/src/java/common"/>
+	<classpathentry kind="src" path="experiments/paschen/src/java/server"/>
+	<classpathentry kind="src" path="experiments/discos/src/java/client"/>
+	<classpathentry kind="src" path="experiments/discos/src/java/common"/>
+	<classpathentry kind="src" path="experiments/discos/src/java/server"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="rec/lib/java/client/appframework-1.0.3.jar"/>
@@ -220,8 +231,6 @@
 	<classpathentry kind="lib" path="elab/lib/java/common/j3dcore.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/common/j3dutils.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/common/vecmath.jar"/>
-	<classpathentry kind="lib" path="rec/lib/java/common/commons-i18n-0.0.1-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="rec/lib/java/common/commons-net-0.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/common/jcommon-1.0.12.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/common/jfreechart-1.0.9.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/common/openorb_orb_omg-1.4.0.jar"/>
@@ -230,6 +239,10 @@
 	<classpathentry kind="lib" path="rec/lib/java/common/openorb_pss-1.4.0.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/common/OSP.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/common/OSP3D.jar"/>
-	<classpathentry kind="lib" path="rec/lib/java/multicast/rec.web-api-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/client/swingx.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/common/rec.web-api.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/client/swing-worker-1.1.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/common/commons-i18n.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/common/commons-net.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

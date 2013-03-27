@@ -15,12 +15,19 @@ javac.sourcelevel=1.6
 #The encoding to use when copying files. Please make sure all created files in the project are UTF-8
 copy.encoding=UTF-8
 
+#All real experiments = aleatorio,boylemariotte,condensadorcilindrico,conducaocalor,g,gamma,langmuir,meteo,momentoinercia,optica,paschen,pendulo,pendulogravitico,pinhole,planck,polaroid,pv,radioactividade,scuba,statsound,telescopio,thomson,webrobot,discos
+#All virtual experiments = rollpaper,vbs,vcargas3d,vcartpole,vcg,vcolisao,vdi,vfermap,vlooping,vm3,vmm,vmovproj,vmvbrown,voscilador,vpend2m,vpoisson,vquantum,vstdmap,vtiro,vyounginterf 
+
 #this next section explicits which labs are going to be compiled, packaged, distributed...
 #and the experiments to be build in each lab
-lab.list=basic,intermediate,advanced
-basic.experiment.list=aleatorio
-intermediate.experiment.list=gamma,vtiro
-advanced.experiment.list=vpend2m
+lab.list=basic,intermediate,advanced,virtual_basic,virtual_intermediate,virtual_advanced,new_exps
+basic.experiment.list=aleatorio,boylemariotte,condensadorcilindrico,conducaocalor,g,gamma
+intermediate.experiment.list=langmuir,meteo,momentoinercia,optica,paschen,pendulo,pendulogravitico,pinhole,planck
+advanced.experiment.list=polaroid,pv,radioactividade,scuba,statsound,telescopio,thomson,webrobot,discos
+virtual_basic.experiment.list=vmvbrown,voscilador,vpend2m,vpoisson,vquantum,vstdmap,vtiro,vyounginterf
+virtual_intermediate.experiment.list=vdi,vfermap,vlooping,vm3,vmm,vmovproj
+virtual_advanced.experiment.list=vbs,vcargas3d,vcartpole,vcg,vcolisao
+new_exps.experiment.list=rollpaper
 
 #In case you wish to run a specific experiment
 #please define the following property to enable
@@ -79,6 +86,7 @@ com.linkare.rec.impl.vendor=Linkare TI
 rec.multicastcontroller.bindname=MultiCastController 
 rec.multicastcontroller.initref=MultiCastController
 java.util.logging.config.file=loggers.config.properties
+java.util.logging.config.file.debug=${basedir}/templates/log/stdout.loggers.config.properties
 org.omg.CORBA.ORBClass=org.openorb.orb.core.ORB 
 org.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton 
 com.sun.CORBA.ORBDynamicStubFactoryFactoryClass=com.sun.corba.se.impl.presentation.rmi.StubFactoryFactoryStaticImpl
@@ -95,6 +103,15 @@ intermediate.multicast.controller.host=localhost
 intermediate.multicast.controller.port=9002
 advanced.multicast.controller.host=localhost
 advanced.multicast.controller.port=9003
+virtual_basic.multicast.controller.host=localhost
+virtual_basic.multicast.controller.port=9004
+virtual_intermediate.multicast.controller.host=localhost
+virtual_intermediate.multicast.controller.port=9005
+virtual_advanced.multicast.controller.host=localhost
+virtual_advanced.multicast.controller.port=9006
+new_exps.multicast.controller.host=localhost
+new_exps.multicast.controller.port=9007
+
 
 ##SECURITYMANAGER PROPERTIES##
 # This property is necessary for the StartMultiCastController to deal with the security managers that enable the communication with the rec.web.
@@ -104,6 +121,10 @@ rec.web.port=3700
 basic.rec.web.lab.id=LAB_ME_BASIC
 intermediate.rec.web.lab.id=LAB_ME_INTERMEDIATE
 advanced.rec.web.lab.id=LAB_ME_ADVANCED
+virtual_basic.rec.web.lab.id=VIRT_LAB_IST_BASIC
+virtual_intermediate.rec.web.lab.id=VIRT_LAB_IST_INTERMEDIATE
+virtual_advanced.rec.web.lab.id=VIRT_LAB_IST_ADVANCED
+new_exps.rec.web.lab.id=NEW_EXPS_LAB
 
 #com.linkare.rec.impl.multicast.security.AllocationManagerSecurityManager
 #com.linkare.rec.impl.multicast.security.DefaultSecurityManager
@@ -313,9 +334,14 @@ rec.processingmanager.thread.idletime=11
 
 ##JMX PROPERTIES##
 ##This properties define the ports used in JMX by labs
+##Please keep the jmx port as the corba port for the multicast + 16000 if possible, because there is some generic code dependent on it...
 basic.rec.multicastcontroller.jmxremote.port=25001
 intermediate.rec.multicastcontroller.jmxremote.port=25002
 advanced.rec.multicastcontroller.jmxremote.port=25003
+virtual_basic.rec.multicastcontroller.jmxremote.port=25004
+virtual_intermediate.rec.multicastcontroller.jmxremote.port=25005
+virtual_advanced.rec.multicastcontroller.jmxremote.port=25006
+new_exps.rec.multicastcontroller.jmxremote.port=25007
 java.rmi.server.hostname=`hostname -i`
 
 ###EXPERIMENT REPOSITORY###
