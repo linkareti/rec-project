@@ -21,6 +21,7 @@ import com.linkare.rec.acquisition.NotAuthorized;
 import com.linkare.rec.acquisition.NotRegistered;
 import com.linkare.rec.acquisition.UserInfo;
 import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.events.HardwareAddEvt;
 import com.linkare.rec.impl.events.HardwareChangeEvent;
 import com.linkare.rec.impl.events.HardwareChangeListener;
@@ -37,7 +38,7 @@ import com.linkare.rec.impl.multicast.security.SecurityManagerFactory;
 import com.linkare.rec.impl.threading.ExecutorScheduler;
 import com.linkare.rec.impl.threading.ScheduledWorkUnit;
 import com.linkare.rec.impl.utils.DataProducerActivator;
-import com.linkare.rec.impl.utils.Defaults;
+import com.linkare.rec.impl.utils.ORBBean;
 import com.linkare.rec.impl.utils.RegisteredHardwareInfo;
 import com.linkare.rec.impl.utils.mapping.DTOMapperUtils;
 import com.linkare.rec.impl.utils.mbean.ManagementException;
@@ -54,13 +55,6 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 
 	public static final DataProducerActivator DP_DEACTIVATOR = new DataProducerActivator();
 	private static final Logger LOGGER = Logger.getLogger(ReCMultiCastController.class.getName());
-	public static final String SYSPROP_MULTICAST_INIT_REF = "rec.multicastcontroller.initref";
-	public static final String MULTICAST_INIT_REF = Defaults.defaultIfEmpty(
-			System.getProperty(ReCMultiCastController.SYSPROP_MULTICAST_INIT_REF), "MultiCastController");
-	public static final String SYSPROP_MULTICAST_BIND_NAME = "rec.multicastcontroller.bindname";
-	public static final String MULTICAST_BIND_NAME = Defaults.defaultIfEmpty(
-			System.getProperty(ReCMultiCastController.SYSPROP_MULTICAST_BIND_NAME), "MultiCastController");
-
 	/*
 	 * i18n support
 	 */
@@ -90,14 +84,12 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 	/*
 	 * The maximum number of apparatus available on this lab
 	 */
-	private static final int MAXIMUM_HARDWARES = Defaults.defaultIfEmpty(
-			System.getProperty("rec.multicastcontroller.max.hardwares"), 40);
+	private static final int MAXIMUM_HARDWARES = Integer.parseInt(ReCSystemProperty.MULTICAST_MAX_HARDWARES.getValue());
 
 	/*
 	 * The maximum number of clients to register with each hardware
 	 */
-	private static final int MAXIMUM_CLIENTS_PER_HARDWARE = Defaults.defaultIfEmpty(
-			System.getProperty("rec.multicastcontroller.maxclients.per.hardware"), 20);
+	private static final int MAXIMUM_CLIENTS_PER_HARDWARE = Integer.parseInt(ReCSystemProperty.MULTICAST_MAX_CLIENTS_PER_HARDWARE.getValue());
 
 	/*
 	 * The maximum number of clients to register with this lab
@@ -110,7 +102,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 	 */
 	public ReCMultiCastController() {
 		// log the number of clients available to the hardware
-		log(Level.INFO, "MAXIMUM_CLIENTS_PER_HARDWARE = " + ReCMultiCastController.MAXIMUM_CLIENTS_PER_HARDWARE
+		LOGGER.log(Level.INFO, "MAXIMUM_CLIENTS_PER_HARDWARE = " + ReCMultiCastController.MAXIMUM_CLIENTS_PER_HARDWARE
 				+ " MAXIMUM_CLIENTS=" + ReCMultiCastController.MAXIMUM_CLIENTS);
 
 		resource = new DefaultResource();
@@ -149,9 +141,17 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 
 		// Create a hardware connection checker
 		hardwareConnectionChecker = new HardwareConnectionCheck();
+		
+		//Make sure the DataProducerPOA is activated because there may come requests to DataProducers long held by clients
+		try {
+			ORBBean.getORBBean().getDataProducerPOA(DP_DEACTIVATOR);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		
 		// Start it up
 		// hardwareConnectionChecker.start();
-		log(Level.INFO, "Started ReCMulticastController OK.");
+		LOGGER.log(Level.INFO, "Started ReCMulticastController OK.");
 	}
 
 	/* my Remote Interface Implementation* */
@@ -167,13 +167,13 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 		final DefaultUser userOp = new DefaultUser(user);
 
 		if (!clientQueue.contains(user)) {
-			log(Level.INFO, "Client " + user.getUserName()
+			LOGGER.log(Level.INFO, "Client " + user.getUserName()
 					+ " doesn't exist here! - Going to send a NotRegistered Exception!");
 			throw new NotRegistered();
 		}
 
 		if (!SecurityManagerFactory.authorize(resource, userOp, op1)) {
-			log(Level.INFO, "Client " + user.getUserName()
+			LOGGER.log(Level.INFO, "Client " + user.getUserName()
 					+ " is not authorized to make this operation! - Going to send a NotAuthorized Exception!");
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_OPERATION);
 		}
@@ -218,11 +218,11 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 	 */
 	@Override
 	public UserInfo[] getClientList(final UserInfo user) throws NotRegistered, NotAuthorized {
-		log(Level.FINEST,
+		LOGGER.log(Level.FINEST,
 				"Controller - Getting the client list for user "
 						+ (user == null ? "(user is null)" : user.getUserName()));
 		final UserInfo[] retVal = clientQueue.getUsers(user, resource);
-		log(Level.FINEST, "Controller - Got as retVal " + retVal);
+		LOGGER.log(Level.FINEST, "Controller - Got as retVal " + retVal);
 		return retVal;
 	}
 
@@ -271,7 +271,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 	 * ClientQueueAdapter
 	 */
 	public void shutdown() {
-		log(Level.INFO, "Shutting down MultiCastController");
+		LOGGER.log(Level.INFO, "Shutting down MultiCastController");
 		hardwareConnectionChecker.shutdown();
 		hardwareChangeAdapter.shutdown();
 		clientQueue.shutdown();
@@ -285,12 +285,6 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 		shutdown();
 	}
 
-	/*
-	 * Internal method to log messages
-	 */
-	private void log(final Level l, final String message) {
-		LOGGER.log(l, message);
-	}
 
 	/* Inner Class - Hardware Connection Checker */
 	private class HardwareConnectionCheck extends ScheduledWorkUnit {
@@ -315,7 +309,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 			// while (!shutdown) {
 			// synchronized (this) {
 			// try {
-			// log(Level.FINE, "Hardware connector waiting...");
+			// LOGGER.log(Level.FINE, "Hardware connector waiting...");
 			// this.wait(5000);
 			// }
 			// catch (Exception ignored) {
@@ -326,25 +320,25 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 					final ReCMultiCastHardware rmch = it.next();
 					try {
 						if (!rmch.getHardware().isConnected()) {
-							log(Level.FINEST, "Hardware " + rmch.getHardwareUniqueId() + " is gone! Shutting it down!");
+							LOGGER.log(Level.FINEST, "Hardware " + rmch.getHardwareUniqueId() + " is gone! Shutting it down!");
 							rmch.shutdown();
-							log(Level.FINEST, "Hardware " + rmch.getHardwareUniqueId()
+							LOGGER.log(Level.FINEST, "Hardware " + rmch.getHardwareUniqueId()
 									+ " was shutdown successfully - Now removing it from MCController list!");
 							it.remove();
-							log(Level.FINEST, "Hardware " + rmch.getHardwareUniqueId()
+							LOGGER.log(Level.FINEST, "Hardware " + rmch.getHardwareUniqueId()
 									+ " removed from MCCContoller sucessfully. Now tell clients it is gone!");
 
 							sendHardwareNotification(rmch, NotificationTypeEnum.UNREGISTER_HARDWARE);
 
 							clientQueue.hardwareChanged(new HardwareChangeEvent());
-							log(Level.FINEST, "Clients were told that hardware " + rmch.getHardwareUniqueId()
+							LOGGER.log(Level.FINEST, "Clients were told that hardware " + rmch.getHardwareUniqueId()
 									+ " is gone!");
 						}
 					} catch (final Exception e) {
-						logThrowable("MultiCastController - Error cheking hardware connection status!", e);
+						LOGGER.log(Level.WARNING,"MultiCastController - Error cheking hardware connection status!", e);
 					}
 				}
-				log(Level.FINE, "Hardware connector waiting... " + Thread.currentThread().getName());
+				LOGGER.log(Level.FINE, "Hardware connector waiting... " + Thread.currentThread().getName());
 			}
 			// }
 		}
@@ -367,17 +361,17 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 			ReCMultiCastHardware addedHardware = null;
 			synchronized (multiCastHardwares) {
 
-				log(Level.INFO, "Trying to add an Hardware");
+				LOGGER.log(Level.INFO, "Trying to add an Hardware");
 				String hardwareId = null;
 
 				try {
 					if (evt == null || evt.getHardware() == null || evt.getHardware().getHardwareInfo() == null
 							|| evt.getHardware().getHardwareInfo().getHardwareUniqueID() == null) {
-						log(Level.WARNING, "Error Trying to add an Hardware - Couldn't get it's ID");
+						LOGGER.log(Level.WARNING, "Error Trying to add an Hardware - Couldn't get it's ID");
 						return;
 					}
 				} catch (final Exception e) {
-					log(Level.WARNING, "Exception occurred while access hardware info. " + e.getMessage());
+					LOGGER.log(Level.WARNING, "Exception occurred while access hardware info. " + e.getMessage());
 					return;
 				}
 
@@ -394,22 +388,22 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 							// same
 							// delegate... just
 							// return and do nothing
-							log(Level.INFO, "Hardware with ID " + hardwareId
+							LOGGER.log(Level.INFO, "Hardware with ID " + hardwareId
 									+ " is refreshing registration at the MultiCastController!");
 							return;
 						} else {// same id, not same delegate... say it and
 							// replace delegate...
-							log(Level.INFO,
+							LOGGER.log(Level.INFO,
 									"There seems to be two hardwares with the same ID registering at this MultiCastController. The ID in question is "
 											+ hardwareId + ". Checking to see if the old one is still connected...");
 							if (!hardware.getHardware().isConnected()) {
-								log(Level.INFO, "The old hardware with " + hardwareId
+								LOGGER.log(Level.INFO, "The old hardware with " + hardwareId
 										+ " has gonne bananas... Shut it down and replace it by a new one...");
 								hardware.shutdown();
 								iter.remove();
 								break;
 							} else {
-								log(Level.INFO, "The old hardware with " + hardwareId
+								LOGGER.log(Level.INFO, "The old hardware with " + hardwareId
 										+ " is still alive... Please give the new hardware a different ID...");
 								return;
 							}
@@ -421,7 +415,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 				if (multiCastHardwares.size() >= ReCMultiCastController.MAXIMUM_HARDWARES) {// Shaaamme,,,,
 					// I'm
 					// full
-					log(Level.INFO, "Didn't register Harware with id " + hardwareId
+					LOGGER.log(Level.INFO, "Didn't register Harware with id " + hardwareId
 							+ " because I don't have any more slots available. My Hardwares Limit is "
 							+ ReCMultiCastController.MAXIMUM_HARDWARES);
 					return;
@@ -439,7 +433,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 					return;
 				}
 
-				log(Level.INFO, "ReCMultiCastHardware " + hardwareId + " was created!");
+				LOGGER.log(Level.INFO, "ReCMultiCastHardware " + hardwareId + " was created!");
 
 				multiCastHardwares.add(addedHardware);
 
@@ -500,7 +494,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 		// }
 		public void shutdown() {
 			synchronized (multiCastHardwares) {
-				log(Level.INFO, "Shutting down HardwareChangeAdapter and all the Hardwares!");
+				LOGGER.log(Level.INFO, "Shutting down HardwareChangeAdapter and all the Hardwares!");
 
 				final Iterator<ReCMultiCastHardware> iter = multiCastHardwares.iterator();
 
@@ -517,16 +511,6 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 		@Override
 		public void dataClientForQueueIsGone(final com.linkare.rec.impl.multicast.DataClientForQueue dcfq) {
 			sendClientNotification(dcfq.getUserInfo(), NotificationTypeEnum.UNREGISTER_CLIENT_MC);
-		}
-
-		@Override
-		public void log(final Level debugLevel, final String message) {
-			ReCMultiCastController.this.log(debugLevel, message);
-		}
-
-		@Override
-		public void logThrowable(final String message, final Throwable t) {
-			LOGGER.log(Level.SEVERE, message, t);
 		}
 	}
 
