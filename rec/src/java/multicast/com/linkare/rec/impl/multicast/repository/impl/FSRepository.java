@@ -9,6 +9,7 @@ package com.linkare.rec.impl.multicast.repository.impl;
 import java.io.File;
 import java.io.IOException;
 
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.multicast.repository.IRepository;
 import com.linkare.rec.impl.multicast.repository.RepositoryException;
 import com.linkare.rec.impl.utils.SerializationHelper;
@@ -19,7 +20,7 @@ import com.linkare.rec.impl.utils.SerializationHelper;
  */
 public class FSRepository implements IRepository {
 
-	private static final String BASE_DIR = new StringBuilder(System.getProperty("user.dir")).append(File.separator)
+	private static final String BASE_DIR = new StringBuilder(ReCSystemProperty.USER_DIR.getValue()).append(File.separator)
 			.append("DataProducers").toString();
 
 	/**
