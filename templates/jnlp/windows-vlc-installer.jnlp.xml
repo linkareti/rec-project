@@ -45,6 +45,7 @@
 	<resources>
 		<j2se version="1.6+" />
 		<jar download="eager" href="ReCClient_sig.jar" main="true" />
+		<jar download="eager" href="ReCCommon_sig.jar" main="true" />
 		<!--property name="jnlp.packEnabled" value="true" /-->
 		<property name="vlc.plugins.destdir" value="@vlc.plugins.destdir@" />
 		<property name="vlc.plugins.filename" value="@vlc.plugins.filename@" />
@@ -60,7 +61,7 @@
 		<jar download="lazy" href="lib/vlcplugins_win32_x86_sig.jar" />
 		<jar download="lazy" href="lib/codecs_win32_sig.jar" />
 	</resources>
-
+	
 	<resources arch="amd" os="Windows">
 		<jar download="lazy" href="lib/vlcplugins_win32_x86_sig.jar" />
 		<jar download="lazy" href="lib/codecs_win32_sig.jar" />

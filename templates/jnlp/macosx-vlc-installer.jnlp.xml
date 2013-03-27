@@ -45,6 +45,7 @@
 	<resources>
 		<j2se version="1.6+" />
 		<jar download="eager" href="ReCClient_sig.jar" main="true" />
+		<jar download="eager" href="ReCCommon_sig.jar" main="true" />
 		<!--property name="jnlp.packEnabled" value="true" /-->
 		<property name="vlc.plugins.destdir" value=".@vlc.plugins.destdir@" />
 		<property name="vlc.plugins.filename" value="@vlc.plugins.filename@" />
