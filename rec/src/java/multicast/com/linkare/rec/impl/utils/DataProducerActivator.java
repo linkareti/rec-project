@@ -22,6 +22,7 @@ import org.omg.PortableServer.Servant;
 import org.omg.PortableServer.ServantActivator;
 
 import com.linkare.rec.acquisition.DataProducerPOATie;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.multicast.ReCMultiCastDataProducer;
 import com.linkare.rec.impl.multicast.repository.RepositoryException;
 import com.linkare.rec.impl.multicast.repository.RepositoryFactory;
@@ -40,8 +41,8 @@ public class DataProducerActivator extends LocalObject implements ServantActivat
 
 	/** Creates a new instance of HardwareActivator */
 	public DataProducerActivator() {
-		DataProducerActivator.baseDir = System.getProperty("user.dir") + System.getProperty("file.separator")
-				+ "DataProducers";
+		DataProducerActivator.baseDir = ReCSystemProperty.USER_DIR.getValue()
+				+ ReCSystemProperty.FILE_SEPARATOR.getValue() + "DataProducers";
 		java.io.File f = new java.io.File(DataProducerActivator.baseDir);
 		if (!f.exists()) {
 			f.mkdirs();
