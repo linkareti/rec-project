@@ -24,11 +24,10 @@ import org.opensourcephysics.numerics.ParsedMultiVarFunction;
 import org.opensourcephysics.numerics.ParserException;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
-public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+public class PoissonCustomizer extends AbstractCustomizer {
 
 	/**
 	 * 
@@ -663,7 +662,8 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanel13.setMinimumSize(new java.awt.Dimension(350, 42));
 		jPanel13.setPreferredSize(new java.awt.Dimension(350, 42));
 		jPanel14.setMinimumSize(new java.awt.Dimension(143, 25));
-		btnOK.setText(ReCResourceBundle.findStringOrDefault("poisson$rec.exp.customizer.title.ok","poisson$rec.exp.customizer.title.ok"));
+		btnOK.setText(ReCResourceBundle.findStringOrDefault("poisson$rec.exp.customizer.title.ok",
+				"poisson$rec.exp.customizer.title.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
@@ -672,7 +672,8 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 
 		jPanel14.add(btnOK);
 
-		btnCancel.setText(ReCResourceBundle.findStringOrDefault("poisson$rec.exp.customizer.title.cancel","poisson$rec.exp.customizer.title.cancel"));
+		btnCancel.setText(ReCResourceBundle.findStringOrDefault("poisson$rec.exp.customizer.title.cancel",
+				"poisson$rec.exp.customizer.title.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
@@ -687,7 +688,8 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanel13.add(jPanel14, gridBagConstraints);
 
 		jPanel15.setMinimumSize(new java.awt.Dimension(136, 25));
-		btnDefaults.setText(ReCResourceBundle.findStringOrDefault("poisson$rec.exp.customizer.title.dfc","poisson$rec.exp.customizer.title.dfc"));
+		btnDefaults.setText(ReCResourceBundle.findStringOrDefault("poisson$rec.exp.customizer.title.dfc",
+				"poisson$rec.exp.customizer.title.dfc"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
@@ -726,18 +728,18 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
 		// Verificar isto...
-		acqConfig.setTotalSamples(1);
+		getAcquisitionConfig().setTotalSamples(1);
 
-		acqConfig.getSelectedHardwareParameter("Nx").setParameterValue(jTextFieldNx.getText());
-		acqConfig.getSelectedHardwareParameter("Ny").setParameterValue(jTextFieldNy.getText());
-		acqConfig.getSelectedHardwareParameter("Nz").setParameterValue(jTextFieldNz.getText());
-		acqConfig.getSelectedHardwareParameter("fnFace1").setParameterValue(jTextFieldFace1.getText());
-		acqConfig.getSelectedHardwareParameter("fnFace2").setParameterValue(jTextFieldFace2.getText());
-		acqConfig.getSelectedHardwareParameter("fnFace3").setParameterValue(jTextFieldFace3.getText());
-		acqConfig.getSelectedHardwareParameter("fnFace4").setParameterValue(jTextFieldFace4.getText());
-		acqConfig.getSelectedHardwareParameter("fnFace5").setParameterValue(jTextFieldFace5.getText());
-		acqConfig.getSelectedHardwareParameter("fnFace6").setParameterValue(jTextFieldFace6.getText());
-		acqConfig.getSelectedHardwareParameter("fnRho").setParameterValue(jTextFieldRho.getText());
+		getAcquisitionConfig().getSelectedHardwareParameter("Nx").setParameterValue(jTextFieldNx.getText());
+		getAcquisitionConfig().getSelectedHardwareParameter("Ny").setParameterValue(jTextFieldNy.getText());
+		getAcquisitionConfig().getSelectedHardwareParameter("Nz").setParameterValue(jTextFieldNz.getText());
+		getAcquisitionConfig().getSelectedHardwareParameter("fnFace1").setParameterValue(jTextFieldFace1.getText());
+		getAcquisitionConfig().getSelectedHardwareParameter("fnFace2").setParameterValue(jTextFieldFace2.getText());
+		getAcquisitionConfig().getSelectedHardwareParameter("fnFace3").setParameterValue(jTextFieldFace3.getText());
+		getAcquisitionConfig().getSelectedHardwareParameter("fnFace4").setParameterValue(jTextFieldFace4.getText());
+		getAcquisitionConfig().getSelectedHardwareParameter("fnFace5").setParameterValue(jTextFieldFace5.getText());
+		getAcquisitionConfig().getSelectedHardwareParameter("fnFace6").setParameterValue(jTextFieldFace6.getText());
+		getAcquisitionConfig().getSelectedHardwareParameter("fnRho").setParameterValue(jTextFieldRho.getText());
 
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_btnOKActionPerformed
@@ -817,9 +819,9 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 	public static void main(final String args[]) {
 		ReCResourceBundle.loadResourceBundle("poisson",
 				"recresource:///pt/utl/ist/elab/client/vpoisson/resources/messages");
-		
+
 		SwingUtilities.invokeLater(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				final javax.swing.JFrame dummy = new javax.swing.JFrame();
@@ -828,7 +830,7 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 				dummy.setVisible(true);
 			}
 		});
-		
+
 	}
 
 	private void verifyText(final JTextField field, final String dftValue) {
@@ -874,79 +876,11 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 	 * slider.setValue(num); }
 	 */
 
-	// ****************************REC********************************************/
-
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
-
 	// ESTE É PARA ALTERAR
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		// Aqui são fornecidos parametros do ultimo utilizador que fez a exp, e'
 		// bom manter!
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 			jTextFieldNx.setText(acqConfig.getSelectedHardwareParameterValue("Nx"));
 			jTextFieldNy.setText(acqConfig.getSelectedHardwareParameterValue("Ny"));
@@ -961,18 +895,6 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 		}
 	}
 
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
-
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/vpoisson/resources/poisson_iconified.png"));
@@ -981,10 +903,6 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 	// ESTE É PARA ALTERAR
 	public String getCustomizerTitle() {
 		return "Poisson Experiment Configuration Utility";
-	}
-
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

@@ -22,12 +22,11 @@ import org.opensourcephysics.display.DrawingPanel;
 import org.opensourcephysics.display.axes.XAxis;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
-public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+public class CGCustomizer extends AbstractCustomizer {
 
 	/**
 	 * 
@@ -76,7 +75,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		gridBagConstraints.weighty = 0;
 		add(reg, gridBagConstraints);
 
-		final java.util.Hashtable<Integer, JLabel> htK = new java.util.Hashtable(9);
+		final java.util.Hashtable<Integer, JLabel> htK = new java.util.Hashtable<Integer, JLabel>(9);
 		htK.put(new Integer(-89), new javax.swing.JLabel("" + (-89)));
 		for (int i = -70; i <= 70; i += 20) {
 			htK.put(new Integer(i), new javax.swing.JLabel("" + i));
@@ -642,8 +641,8 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		samplesTextField.setColumns(4);
 		samplesTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		samplesTextField.setText("100");
-		samplesTextField.setToolTipText(ReCResourceBundle.findStringOrDefault(
-				"cg$rec.exp.customizer.tip.samples", "Number of samples"));
+		samplesTextField.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.samples",
+				"Number of samples"));
 		samplesTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(final java.awt.event.FocusEvent evt) {
 				samplesTextFieldFocusLost(evt);
@@ -729,27 +728,30 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	}
 
 	private void okButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
-		acqConfig.setTotalSamples(samplesSlider.getValue());
+		getAcquisitionConfig().setTotalSamples(samplesSlider.getValue());
 
-		acqConfig.setSelectedFrequency(new Frequency((double) tbsSlider.getValue(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
+		getAcquisitionConfig().setSelectedFrequency(
+				new Frequency((double) tbsSlider.getValue(), getHardwareInfo().getHardwareFrequencies(0)
+						.getMinimumFrequency().getMultiplier(), getHardwareInfo().getHardwareFrequencies(0)
+						.getMinimumFrequency().getFrequencyDefType()));
 
 		final double d = dSlider.getValue() / 1000d;
 		final double[] mm = new double[] { parseMass(mm0Label.getText()), parseMass(mm1Label.getText()) };
 		final double[] mM = new double[] { parseMass(mM0Label.getText()), parseMass(mM1Label.getText()) };
 
-		acqConfig.getSelectedHardwareParameter("expGType").setParameterValue(
+		getAcquisitionConfig().getSelectedHardwareParameter("expGType").setParameterValue(
 				"" + (expGRadioButton.isSelected() ? 1 : 0));
-		acqConfig.getSelectedHardwareParameter("angInit").setParameterValue("" + angInitSlider.getValue());
-		acqConfig.getSelectedHardwareParameter("l").setParameterValue("" + lSlider.getValue() * 10);
-		acqConfig.getSelectedHardwareParameter("s0").setParameterValue("" + (float) s0Slider.getValue() / 10000f);
-		acqConfig.getSelectedHardwareParameter("d").setParameterValue("" + (float) d);
-		acqConfig.getSelectedHardwareParameter("mm0").setParameterValue("" + (float) mm[0]);
-		acqConfig.getSelectedHardwareParameter("mm1").setParameterValue("" + (float) mm[1]);
-		acqConfig.getSelectedHardwareParameter("mM0").setParameterValue("" + (float) mM[0]);
-		acqConfig.getSelectedHardwareParameter("mM1").setParameterValue("" + (float) mM[1]);
-		acqConfig.getSelectedHardwareParameter("targetSize").setParameterValue("" + (int) balanca.getReguaSize());
+		getAcquisitionConfig().getSelectedHardwareParameter("angInit").setParameterValue("" + angInitSlider.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("l").setParameterValue("" + lSlider.getValue() * 10);
+		getAcquisitionConfig().getSelectedHardwareParameter("s0").setParameterValue(
+				"" + (float) s0Slider.getValue() / 10000f);
+		getAcquisitionConfig().getSelectedHardwareParameter("d").setParameterValue("" + (float) d);
+		getAcquisitionConfig().getSelectedHardwareParameter("mm0").setParameterValue("" + (float) mm[0]);
+		getAcquisitionConfig().getSelectedHardwareParameter("mm1").setParameterValue("" + (float) mm[1]);
+		getAcquisitionConfig().getSelectedHardwareParameter("mM0").setParameterValue("" + (float) mM[0]);
+		getAcquisitionConfig().getSelectedHardwareParameter("mM1").setParameterValue("" + (float) mM[1]);
+		getAcquisitionConfig().getSelectedHardwareParameter("targetSize").setParameterValue(
+				"" + (int) balanca.getReguaSize());
 
 		if (!sameConstRadioButton.isSelected()) {
 			final double i = (mm[0] + mm[1]) * d * d + 2 * Math.pow(d - 6.6e-3, 3) * Math.pow(1.25e-3, 2) * Math.PI
@@ -765,13 +767,13 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 				consts[2] *= 2 * Math.random();
 			}
 		}
-		acqConfig.getSelectedHardwareParameter("c").setParameterValue("" + (float) consts[0]);
-		acqConfig.getSelectedHardwareParameter("k").setParameterValue("" + (float) consts[1]);
-		acqConfig.getSelectedHardwareParameter("g").setParameterValue("" + (float) consts[2]);
+		getAcquisitionConfig().getSelectedHardwareParameter("c").setParameterValue("" + (float) consts[0]);
+		getAcquisitionConfig().getSelectedHardwareParameter("k").setParameterValue("" + (float) consts[1]);
+		getAcquisitionConfig().getSelectedHardwareParameter("g").setParameterValue("" + (float) consts[2]);
 
-		for (int i = 0; i < acqConfig.getSelectedHardwareParameters().length; i++) {
-			System.out.println(acqConfig.getSelectedHardwareParameters(i).getParameterName() + " = "
-					+ acqConfig.getSelectedHardwareParameters(i).getParameterValue());
+		for (int i = 0; i < getAcquisitionConfig().getSelectedHardwareParameters().length; i++) {
+			System.out.println(getAcquisitionConfig().getSelectedHardwareParameters(i).getParameterName() + " = "
+					+ getAcquisitionConfig().getSelectedHardwareParameters(i).getParameterValue());
 		}
 
 		fireICustomizerListenerDone();
@@ -844,7 +846,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		test.addWindowListener(new java.awt.event.WindowAdapter() {
 			public void windowClosing(final java.awt.event.WindowEvent e) {
 				System.exit(0);
-			};
+			}
 		});
 		test.getContentPane().add(new CGCustomizer());
 		test.pack();
@@ -853,74 +855,9 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 	// ****************************REC********************************************/
 
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
-
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
+
 		if (acqConfig != null) {
 			// boolean expGType =
 			// Boolean.getBoolean(acqConfig.getSelectedHardwareParameterValue("expGType"));
@@ -949,18 +886,6 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		}
 	}
 
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
-
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/vcg/resources/cg_iconified.png"));
@@ -968,10 +893,6 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 	public String getCustomizerTitle() {
 		return "Cavendish Experiment Configuration Utility";
-	}
-
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

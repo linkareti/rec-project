@@ -14,16 +14,14 @@ import pt.utl.ist.elab.client.virtual.guipack.GUtils;
 import pt.utl.ist.elab.client.virtual.guipack.InteractiveMenu;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 
 /**
  * 
  * @author nomead
  */
-public class CartPoleCustomizer extends javax.swing.JPanel implements
-		com.linkare.rec.impl.client.customizer.ICustomizer, InteractiveMenu, KeyListener {
+public class CartPoleCustomizer  extends AbstractCustomizer implements InteractiveMenu, KeyListener {
 
 	/**
 	 * 
@@ -1133,46 +1131,46 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		final int sucAngle = sucAngleSlider.getValue();
 		final int sucTime = sucTimeSlider.getValue();
 
-		acqConfig.setSelectedFrequency(new Frequency((double) tbsSlider.getValue(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
+		getAcquisitionConfig().setSelectedFrequency(new Frequency((double) tbsSlider.getValue(), getHardwareInfo()
+				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), getHardwareInfo()
 				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
-		acqConfig.setTotalSamples(samplesSlider.getValue() + 1);
+		getAcquisitionConfig().setTotalSamples(samplesSlider.getValue() + 1);
 
-		acqConfig.getSelectedHardwareParameter("xMax").setParameterValue("" + (float) xMax);
+		getAcquisitionConfig().getSelectedHardwareParameter("xMax").setParameterValue("" + (float) xMax);
 
-		acqConfig.getSelectedHardwareParameter("x").setParameterValue("" + (float) x);
-		acqConfig.getSelectedHardwareParameter("xdot").setParameterValue("" + (float) xdot);
-		acqConfig.getSelectedHardwareParameter("theta").setParameterValue("" + (float) theta);
-		acqConfig.getSelectedHardwareParameter("thetadot").setParameterValue("" + (float) thetadot);
+		getAcquisitionConfig().getSelectedHardwareParameter("x").setParameterValue("" + (float) x);
+		getAcquisitionConfig().getSelectedHardwareParameter("xdot").setParameterValue("" + (float) xdot);
+		getAcquisitionConfig().getSelectedHardwareParameter("theta").setParameterValue("" + (float) theta);
+		getAcquisitionConfig().getSelectedHardwareParameter("thetadot").setParameterValue("" + (float) thetadot);
 
-		acqConfig.getSelectedHardwareParameter("uCart").setParameterValue("" + (float) uCart);
-		acqConfig.getSelectedHardwareParameter("uPole").setParameterValue("" + (float) uPole);
+		getAcquisitionConfig().getSelectedHardwareParameter("uCart").setParameterValue("" + (float) uCart);
+		getAcquisitionConfig().getSelectedHardwareParameter("uPole").setParameterValue("" + (float) uPole);
 
-		acqConfig.getSelectedHardwareParameter("mCart").setParameterValue("" + (float) mCart);
-		acqConfig.getSelectedHardwareParameter("mPole").setParameterValue("" + (float) mPole);
+		getAcquisitionConfig().getSelectedHardwareParameter("mCart").setParameterValue("" + (float) mCart);
+		getAcquisitionConfig().getSelectedHardwareParameter("mPole").setParameterValue("" + (float) mPole);
 
-		acqConfig.getSelectedHardwareParameter("g").setParameterValue("" + (float) g);
-		acqConfig.getSelectedHardwareParameter("poleLength").setParameterValue("" + (float) poleLength);
-		acqConfig.getSelectedHardwareParameter("action").setParameterValue("" + (float) action);
+		getAcquisitionConfig().getSelectedHardwareParameter("g").setParameterValue("" + (float) g);
+		getAcquisitionConfig().getSelectedHardwareParameter("poleLength").setParameterValue("" + (float) poleLength);
+		getAcquisitionConfig().getSelectedHardwareParameter("action").setParameterValue("" + (float) action);
 
-		acqConfig.getSelectedHardwareParameter("kp").setParameterValue("" + kp);
-		acqConfig.getSelectedHardwareParameter("ki").setParameterValue("" + ki);
-		acqConfig.getSelectedHardwareParameter("kd").setParameterValue("" + kd);
+		getAcquisitionConfig().getSelectedHardwareParameter("kp").setParameterValue("" + kp);
+		getAcquisitionConfig().getSelectedHardwareParameter("ki").setParameterValue("" + ki);
+		getAcquisitionConfig().getSelectedHardwareParameter("kd").setParameterValue("" + kd);
 
-		acqConfig.getSelectedHardwareParameter("failActive").setParameterValue(
+		getAcquisitionConfig().getSelectedHardwareParameter("failActive").setParameterValue(
 				"" + (failureActivateCheckBox.isSelected() ? 1 : 0));
-		acqConfig.getSelectedHardwareParameter("failNLaps").setParameterValue("" + failNLaps);
-		acqConfig.getSelectedHardwareParameter("failN").setParameterValue("" + failN);
-		acqConfig.getSelectedHardwareParameter("failTime").setParameterValue("" + failTime);
+		getAcquisitionConfig().getSelectedHardwareParameter("failNLaps").setParameterValue("" + failNLaps);
+		getAcquisitionConfig().getSelectedHardwareParameter("failN").setParameterValue("" + failN);
+		getAcquisitionConfig().getSelectedHardwareParameter("failTime").setParameterValue("" + failTime);
 
-		acqConfig.getSelectedHardwareParameter("sucActive").setParameterValue(
+		getAcquisitionConfig().getSelectedHardwareParameter("sucActive").setParameterValue(
 				"" + (successActivateCheckBox.isSelected() ? 1 : 0));
-		acqConfig.getSelectedHardwareParameter("sucAngle").setParameterValue("" + sucAngle);
-		acqConfig.getSelectedHardwareParameter("sucTime").setParameterValue("" + sucTime);
+		getAcquisitionConfig().getSelectedHardwareParameter("sucAngle").setParameterValue("" + sucAngle);
+		getAcquisitionConfig().getSelectedHardwareParameter("sucTime").setParameterValue("" + sucTime);
 
-		for (int i = 0; i < acqConfig.getSelectedHardwareParameters().length; i++) {
-			System.out.println(acqConfig.getSelectedHardwareParameters(i).getParameterName() + " = "
-					+ acqConfig.getSelectedHardwareParameters(i).getParameterValue());
+		for (int i = 0; i < getAcquisitionConfig().getSelectedHardwareParameters().length; i++) {
+			System.out.println(getAcquisitionConfig().getSelectedHardwareParameters(i).getParameterName() + " = "
+					+ getAcquisitionConfig().getSelectedHardwareParameters(i).getParameterValue());
 		}
 
 		fireICustomizerListenerDone();
@@ -1494,74 +1492,9 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 
 	// ****************************REC********************************************/
 
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
-
+	
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 			dragCartSlider.setValue((int) Math.round(Float.parseFloat(acqConfig
 					.getSelectedHardwareParameterValue("uCart")) * 1e7d));
@@ -1605,17 +1538,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		}
 	}
 
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
+	
 
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
@@ -1624,10 +1547,6 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 
 	public String getCustomizerTitle() {
 		return "Cart-Pole Configuration Utility";
-	}
-
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

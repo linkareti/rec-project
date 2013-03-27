@@ -12,11 +12,11 @@ import java.util.Hashtable;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
@@ -24,8 +24,7 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * @author André
  */
 
-public class MomInerciaCustomizer extends javax.swing.JPanel implements
-		com.linkare.rec.impl.client.customizer.ICustomizer {
+public class MomInerciaCustomizer  extends AbstractCustomizer {
 
 	/**
 	 * 
@@ -63,7 +62,6 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 	{
 		java.awt.GridBagConstraints gridBagConstraints;
 
-		buttonGroup1 = new javax.swing.ButtonGroup();
 		jPanel7 = new javax.swing.JPanel();
 		jPanel3 = new javax.swing.JPanel();
 		jPanel8 = new javax.swing.JPanel();
@@ -574,26 +572,26 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 
 	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
-		acqConfig.setTotalSamples(jSliderNumSamples.getValue());
+		getAcquisitionConfig().setTotalSamples(jSliderNumSamples.getValue());
 
 		final int launch = jSliderLaunch.getValue() / jSliderTBS.getValue();
 
 		final int stop = jSliderStop.getValue() / jSliderTBS.getValue();
 
-		acqConfig.getSelectedHardwareParameter("Launch Iteration").setParameterValue("" + launch);
-		acqConfig.getSelectedHardwareParameter("Stop Iteration").setParameterValue("" + stop);
+		getAcquisitionConfig().getSelectedHardwareParameter("Launch Iteration").setParameterValue("" + launch);
+		getAcquisitionConfig().getSelectedHardwareParameter("Stop Iteration").setParameterValue("" + stop);
 
 		if (jCheckBoxLaunch.isSelected() && jCheckStop.isSelected()) {
-			acqConfig.getSelectedHardwareParameter("Iteration").setParameterValue("Both");
+			getAcquisitionConfig().getSelectedHardwareParameter("Iteration").setParameterValue("Both");
 		} else if (jCheckBoxLaunch.isSelected()) {
-			acqConfig.getSelectedHardwareParameter("Iteration").setParameterValue("Launch");
+			getAcquisitionConfig().getSelectedHardwareParameter("Iteration").setParameterValue("Launch");
 		} else if (jCheckStop.isSelected()) {
-			acqConfig.getSelectedHardwareParameter("Iteration").setParameterValue("Stop");
+			getAcquisitionConfig().getSelectedHardwareParameter("Iteration").setParameterValue("Stop");
 		} else {
-			acqConfig.getSelectedHardwareParameter("Iteration").setParameterValue("None");
+			getAcquisitionConfig().getSelectedHardwareParameter("Iteration").setParameterValue("None");
 		}
-		acqConfig.setSelectedFrequency(new Frequency(jSliderTBS.getValue(), hardwareInfo.getHardwareFrequencies(0)
-				.getMinimumFrequency().getMultiplier(), hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency()
+		getAcquisitionConfig().setSelectedFrequency(new Frequency(jSliderTBS.getValue(), getHardwareInfo().getHardwareFrequencies(0)
+				.getMinimumFrequency().getMultiplier(), getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency()
 				.getFrequencyDefType()));
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_btnOKActionPerformed
@@ -602,7 +600,6 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 	private javax.swing.JButton btnCancel;
 	private javax.swing.JButton btnDefaults;
 	private javax.swing.JButton btnOK;
-	private javax.swing.ButtonGroup buttonGroup1;
 	private javax.swing.JCheckBox jCheckBoxLaunch;
 	private javax.swing.JCheckBox jCheckStop;
 	private javax.swing.JLabel jLabel1;
@@ -624,78 +621,10 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 	private javax.swing.JTextField jTextFieldTBS;
 	// End of variables declaration//GEN-END:variables
 
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	@Override
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	@Override
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	@Override
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
-
+	
 	@Override
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 			jSliderNumSamples.setValue(acqConfig.getTotalSamples());
 			jTextFieldSamples.setText("" + acqConfig.getTotalSamples());
@@ -732,20 +661,7 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		}
 	}
 
-	@Override
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	@Override
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
-
+	
 	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
@@ -757,16 +673,19 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		return ReCResourceBundle.findStringOrDefault("momentoinercia$rec.exp.customizer.title.discos","momentoinercia$rec.exp.customizer.title.discos");
 	}
 
-	@Override
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
-	}
 
 	public static void main(final String args[]) {
-		final javax.swing.JFrame jf = new javax.swing.JFrame();
-		final MomInerciaCustomizer mom = new MomInerciaCustomizer();
-		jf.getContentPane().add(mom, java.awt.BorderLayout.CENTER);
-		jf.pack();
-		jf.show();
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				final javax.swing.JFrame jf = new javax.swing.JFrame();
+				final MomInerciaCustomizer mom = new MomInerciaCustomizer();
+				jf.getContentPane().add(mom, java.awt.BorderLayout.CENTER);
+				jf.pack();
+				jf.setVisible(true);
+			}
+		});
+		
 	}
 }

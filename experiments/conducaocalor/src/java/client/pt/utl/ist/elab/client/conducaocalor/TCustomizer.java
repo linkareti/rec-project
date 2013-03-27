@@ -7,18 +7,18 @@
 package pt.utl.ist.elab.client.conducaocalor;
 
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+public class TCustomizer extends AbstractCustomizer {
 
 	/**
 	 * 
@@ -73,16 +73,18 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 
 		jPanel4.setLayout(new java.awt.GridBagLayout());
 
-		jPanel4.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findStringOrDefault("conducaocalor$rec.exp.t.lbl.mode","conducaocalor$rec.exp.t.lbl.mode")));
+		jPanel4.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"conducaocalor$rec.exp.t.lbl.mode", "conducaocalor$rec.exp.t.lbl.mode")));
 		jRadioButtonOsc.setSelected(true);
-		jRadioButtonOsc.setText(ReCResourceBundle.findStringOrDefault("conducaocalor$rec.exp.t.lbl.osc","conducaocalor$rec.exp.t.lbl.osc"));
+		jRadioButtonOsc.setText(ReCResourceBundle.findStringOrDefault("conducaocalor$rec.exp.t.lbl.osc",
+				"conducaocalor$rec.exp.t.lbl.osc"));
 		buttonGroup1.add(jRadioButtonOsc);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
 		jPanel4.add(jRadioButtonOsc, gridBagConstraints);
 
-		jRadioButtonEst.setText(ReCResourceBundle.findStringOrDefault("conducaocalor$rec.exp.t.lbl.stat","conducaocalor$rec.exp.t.lbl.stat"));
+		jRadioButtonEst.setText(ReCResourceBundle.findStringOrDefault("conducaocalor$rec.exp.t.lbl.stat",
+				"conducaocalor$rec.exp.t.lbl.stat"));
 		buttonGroup1.add(jRadioButtonEst);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
@@ -97,8 +99,8 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		jPanel3.setMinimumSize(new java.awt.Dimension(350, 160));
 		jPanel5.setLayout(new java.awt.GridBagLayout());
 
-		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findStringOrDefault("conducaocalor$rec.exp.t.lbl.heattime","conducaocalor$rec.exp.t.lbl.heattime")));
+		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"conducaocalor$rec.exp.t.lbl.heattime", "conducaocalor$rec.exp.t.lbl.heattime")));
 		jPanel5.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel5.setPreferredSize(new java.awt.Dimension(350, 80));
 		jSliderAqc.setMajorTickSpacing(20);
@@ -139,8 +141,8 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
-		jPanel1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findStringOrDefault("conducaocalor$rec.exp.t.lbl.tbs","conducaocalor$rec.exp.t.lbl.tbs")));
+		jPanel1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"conducaocalor$rec.exp.t.lbl.tbs", "conducaocalor$rec.exp.t.lbl.tbs")));
 		jPanel1.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel1.setPreferredSize(new java.awt.Dimension(350, 80));
 		jSliderTBS.setMajorTickSpacing(1);
@@ -187,8 +189,8 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 
 		jPanel6.setLayout(new java.awt.GridBagLayout());
 
-		jPanel6.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findStringOrDefault("conducaocalor$rec.exp.t.lbl.nsamples","conducaocalor$rec.exp.t.lbl.nsamples")));
+		jPanel6.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"conducaocalor$rec.exp.t.lbl.nsamples", "conducaocalor$rec.exp.t.lbl.nsamples")));
 		jPanel6.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
 		jPanel6.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel6.setPreferredSize(new java.awt.Dimension(350, 80));
@@ -237,7 +239,8 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 
 		jLabelInfo.setForeground(new java.awt.Color(255, 0, 0));
 		jLabelInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabelInfo.setText(ReCResourceBundle.findStringOrDefault("conducaocalor$rec.exp.t.lbl.exptime","conducaocalor$rec.exp.t.lbl.exptime"));
+		jLabelInfo.setText(ReCResourceBundle.findStringOrDefault("conducaocalor$rec.exp.t.lbl.exptime",
+				"conducaocalor$rec.exp.t.lbl.exptime"));
 		jLabelInfo.setEnabled(false);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -252,8 +255,8 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 
 		jPanel8.setLayout(new java.awt.GridBagLayout());
 
-		jPanel8.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findStringOrDefault("conducaocalor$rec.exp.t.lbl.maxtemp","conducaocalor$rec.exp.t.lbl.maxtemp")));
+		jPanel8.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"conducaocalor$rec.exp.t.lbl.maxtemp", "conducaocalor$rec.exp.t.lbl.maxtemp")));
 		jPanel8.setMinimumSize(new java.awt.Dimension(170, 85));
 		jPanel8.setPreferredSize(new java.awt.Dimension(170, 85));
 		jSliderTMax.setMajorTickSpacing(10);
@@ -303,7 +306,8 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 
 		jPanel2.setMinimumSize(new java.awt.Dimension(350, 42));
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
-		btnOK.setText(ReCResourceBundle.findStringOrDefault("conducaocalor$rec.exp.t.lbl.ok","conducaocalor$rec.exp.t.lbl.ok"));
+		btnOK.setText(ReCResourceBundle.findStringOrDefault("conducaocalor$rec.exp.t.lbl.ok",
+				"conducaocalor$rec.exp.t.lbl.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -316,7 +320,8 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		gridBagConstraints.gridy = 1;
 		jPanel2.add(btnOK, gridBagConstraints);
 
-		btnCancel.setText(ReCResourceBundle.findStringOrDefault("conducaocalor$rec.exp.t.lbl.cancel","conducaocalor$rec.exp.t.lbl.cancel"));
+		btnCancel.setText(ReCResourceBundle.findStringOrDefault("conducaocalor$rec.exp.t.lbl.cancel",
+				"conducaocalor$rec.exp.t.lbl.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -336,7 +341,8 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		gridBagConstraints.weightx = 10.0;
 		jPanel2.add(jLabel1, gridBagConstraints);
 
-		btnDefaults.setText(ReCResourceBundle.findStringOrDefault("conducaocalor$rec.exp.t.lbl.dftacq","conducaocalor$rec.exp.t.lbl.dftacq"));
+		btnDefaults.setText(ReCResourceBundle.findStringOrDefault("conducaocalor$rec.exp.t.lbl.dftacq",
+				"conducaocalor$rec.exp.t.lbl.dftacq"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -465,13 +471,13 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 
 		if (duration > 1500) {
 			jLabelInfo.setEnabled(true);
-			jLabelInfo.setText(ReCResourceBundle.findStringOrDefault("conducaocalor$rec.exp.t.lbl.maxsamples","conducaocalor$rec.exp.t.lbl.maxsamples") + " <= "
-					+ (1500 / jSliderTBS.getValue()));
+			jLabelInfo.setText(ReCResourceBundle.findStringOrDefault("conducaocalor$rec.exp.t.lbl.maxsamples",
+					"conducaocalor$rec.exp.t.lbl.maxsamples") + " <= " + (1500 / jSliderTBS.getValue()));
 			btnOK.setEnabled(false);
 		} else {
 			jLabelInfo.setEnabled(false);
-			jLabelInfo.setText(ReCResourceBundle.findStringOrDefault("conducaocalor$rec.exp.t.lbl.exptime","conducaocalor$rec.exp.t.lbl.exptime") + " " + duration
-					+ " s");
+			jLabelInfo.setText(ReCResourceBundle.findStringOrDefault("conducaocalor$rec.exp.t.lbl.exptime",
+					"conducaocalor$rec.exp.t.lbl.exptime") + " " + duration + " s");
 			btnOK.setEnabled(true);
 		}
 	}
@@ -519,18 +525,21 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 
 	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
-		acqConfig.setTotalSamples(jSliderNumSamples.getValue());
-		acqConfig.getSelectedHardwareParameter("Temperatura maxima").setParameterValue("" + jSliderTMax.getValue());
-		acqConfig.getSelectedHardwareParameter("Tempo aquecimento").setParameterValue("" + jSliderAqc.getValue());
+		getAcquisitionConfig().setTotalSamples(jSliderNumSamples.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("Temperatura maxima").setParameterValue(
+				"" + jSliderTMax.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("Tempo aquecimento").setParameterValue(
+				"" + jSliderAqc.getValue());
 		if (jRadioButtonOsc.isSelected()) {
-			acqConfig.getSelectedHardwareParameter("Modo").setParameterValue("Oscilatorio");
+			getAcquisitionConfig().getSelectedHardwareParameter("Modo").setParameterValue("Oscilatorio");
 		} else {
-			acqConfig.getSelectedHardwareParameter("Modo").setParameterValue("Estacionario");
+			getAcquisitionConfig().getSelectedHardwareParameter("Modo").setParameterValue("Estacionario");
 		}
 
-		acqConfig.setSelectedFrequency(new Frequency(jSliderTBS.getValue(), hardwareInfo.getHardwareFrequencies(0)
-				.getMinimumFrequency().getMultiplier(), hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency()
-				.getFrequencyDefType()));
+		getAcquisitionConfig().setSelectedFrequency(
+				new Frequency(jSliderTBS.getValue(), getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency()
+						.getMultiplier(), getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency()
+						.getFrequencyDefType()));
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_btnOKActionPerformed
 
@@ -560,80 +569,12 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 	private javax.swing.JTextField jTextFieldSamples;
 	private javax.swing.JTextField jTextFieldTBS;
 	private javax.swing.JTextField jTextFieldTMax;
+
 	// End of variables declaration//GEN-END:variables
-
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	@Override
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	@Override
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	@Override
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
 
 	@Override
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 			jSliderNumSamples.setValue(acqConfig.getTotalSamples());
 			jTextFieldSamples.setText("" + acqConfig.getTotalSamples());
@@ -660,20 +601,6 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 	}
 
 	@Override
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	@Override
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
-
-	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/conducaocalor/resources/t2_iconified.gif"));
@@ -681,19 +608,22 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 
 	@Override
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findStringOrDefault("conducaocalor$rec.exp.t.customizer.title","conducaocalor$rec.exp.t.customizer.title");
-	}
-
-	@Override
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
+		return ReCResourceBundle.findStringOrDefault("conducaocalor$rec.exp.t.customizer.title",
+				"conducaocalor$rec.exp.t.customizer.title");
 	}
 
 	public static void main(final String args[]) {
-		final javax.swing.JFrame jf = new javax.swing.JFrame();
-		final TCustomizer tc = new TCustomizer();
-		jf.getContentPane().add(tc, java.awt.BorderLayout.CENTER);
-		jf.pack();
-		jf.show();
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				final javax.swing.JFrame jf = new javax.swing.JFrame();
+				final TCustomizer tc = new TCustomizer();
+				jf.getContentPane().add(tc, java.awt.BorderLayout.CENTER);
+				jf.pack();
+				jf.setVisible(true);
+			}
+		});
+
 	}
 }

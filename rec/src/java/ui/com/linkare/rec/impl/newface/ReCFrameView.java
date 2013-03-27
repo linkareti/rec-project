@@ -1,5 +1,5 @@
 /*
- * ReCView.java
+ * ReCFrameView.java
  */
 package com.linkare.rec.impl.newface;
 

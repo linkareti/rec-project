@@ -10,17 +10,17 @@ import java.awt.event.ItemEvent;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+public class PlanckCustomizer extends AbstractCustomizer {
 
 	/**
 	 * 
@@ -31,7 +31,7 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 	/** Creates new form RadioactividadeCustomizer */
 	public PlanckCustomizer() {
 		initComponents();
-		final java.util.Hashtable<Integer, JLabel> ht = new java.util.Hashtable(10);
+		final java.util.Hashtable<Integer, JLabel> ht = new java.util.Hashtable<Integer, JLabel>(10);
 		ht.put(new Integer(120), new javax.swing.JLabel("" + 12));
 		ht.put(new Integer(130), new javax.swing.JLabel("" + 13));
 		ht.put(new Integer(140), new javax.swing.JLabel("" + 14));
@@ -111,7 +111,8 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0)));
 		jRadioButtonVar.setSelected(true);
-		jRadioButtonVar.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.1.check.1","planck$rec.exp.customizer.title.1.check.1"));
+		jRadioButtonVar.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.1.check.1",
+				"planck$rec.exp.customizer.title.1.check.1"));
 		buttonGroup1.add(jRadioButtonVar);
 		jRadioButtonVar.addItemListener(new java.awt.event.ItemListener() {
 			@Override
@@ -124,7 +125,8 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
 		jPanel4.add(jRadioButtonVar, gridBagConstraints);
 
-		jRadioButtonFix.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.1.check.2","planck$rec.exp.customizer.title.1.check.2"));
+		jRadioButtonFix.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.1.check.2",
+				"planck$rec.exp.customizer.title.1.check.2"));
 		buttonGroup1.add(jRadioButtonFix);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
@@ -139,34 +141,38 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 		jPanel3.setMinimumSize(new java.awt.Dimension(350, 160));
 		jPanel5.setLayout(new java.awt.GridLayout(1, 2));
 
-		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findStringOrDefault("planck$rec.exp.customizer.title.2","planck$rec.exp.customizer.title.2")));
+		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"planck$rec.exp.customizer.title.2", "planck$rec.exp.customizer.title.2")));
 		jPanel5.setMinimumSize(new java.awt.Dimension(350, 150));
 		jPanel5.setPreferredSize(new java.awt.Dimension(350, 150));
 		jPanel8.setLayout(new java.awt.GridLayout(4, 1));
 
-		jPanel8.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findStringOrDefault("planck$rec.exp.customizer.title.2.1","planck$rec.exp.customizer.title.2.1")));
+		jPanel8.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"planck$rec.exp.customizer.title.2.1", "planck$rec.exp.customizer.title.2.1")));
 		jPanel8.setMinimumSize(new java.awt.Dimension(117, 200));
 		jPanel8.setPreferredSize(new java.awt.Dimension(117, 200));
 		jRadioButtonColor1.setForeground(new java.awt.Color(204, 51, 255));
 		jRadioButtonColor1.setSelected(true);
-		jRadioButtonColor1.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.2.1.check.1","planck$rec.exp.customizer.title.2.1.check.1"));
+		jRadioButtonColor1.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.2.1.check.1",
+				"planck$rec.exp.customizer.title.2.1.check.1"));
 		buttonGroup2.add(jRadioButtonColor1);
 		jPanel8.add(jRadioButtonColor1);
 
 		jRadioButtonColor2.setForeground(new java.awt.Color(255, 255, 0));
-		jRadioButtonColor2.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.2.1.check.2","planck$rec.exp.customizer.title.2.1.check.2"));
+		jRadioButtonColor2.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.2.1.check.2",
+				"planck$rec.exp.customizer.title.2.1.check.2"));
 		buttonGroup2.add(jRadioButtonColor2);
 		jPanel8.add(jRadioButtonColor2);
 
 		jRadioButtonColor3.setForeground(new java.awt.Color(102, 204, 0));
-		jRadioButtonColor3.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.2.1.check.3","planck$rec.exp.customizer.title.2.1.check.3"));
+		jRadioButtonColor3.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.2.1.check.3",
+				"planck$rec.exp.customizer.title.2.1.check.3"));
 		buttonGroup2.add(jRadioButtonColor3);
 		jPanel8.add(jRadioButtonColor3);
 
 		jRadioButtonColor4.setForeground(new java.awt.Color(185, 185, 185));
-		jRadioButtonColor4.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.2.1.check.4","planck$rec.exp.customizer.title.2.1.check.4"));
+		jRadioButtonColor4.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.2.1.check.4",
+				"planck$rec.exp.customizer.title.2.1.check.4"));
 		buttonGroup2.add(jRadioButtonColor4);
 		jPanel8.add(jRadioButtonColor4);
 
@@ -174,8 +180,8 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		jPanel9.setLayout(new java.awt.GridLayout(3, 2));
 
-		jPanel9.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findStringOrDefault("planck$rec.exp.customizer.title.2.2","planck$rec.exp.customizer.title.2.2")));
+		jPanel9.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"planck$rec.exp.customizer.title.2.2", "planck$rec.exp.customizer.title.2.2")));
 		jPanel9.setMinimumSize(new java.awt.Dimension(117, 200));
 		jPanel9.setPreferredSize(new java.awt.Dimension(117, 200));
 		jRadioButtonGray0.setForeground(new java.awt.Color(185, 185, 185));
@@ -215,8 +221,8 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
-		jPanel1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findStringOrDefault("planck$rec.exp.customizer.title.3","planck$rec.exp.customizer.title.3")));
+		jPanel1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"planck$rec.exp.customizer.title.3", "planck$rec.exp.customizer.title.3")));
 		jPanel1.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel1.setPreferredSize(new java.awt.Dimension(350, 80));
 		jSliderAng.setMajorTickSpacing(10);
@@ -262,8 +268,8 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		jPanel6.setLayout(new java.awt.GridBagLayout());
 
-		jPanel6.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findStringOrDefault("planck$rec.exp.customizer.title.4","planck$rec.exp.customizer.title.4")));
+		jPanel6.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"planck$rec.exp.customizer.title.4", "planck$rec.exp.customizer.title.4")));
 		jPanel6.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
 		jPanel6.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel6.setPreferredSize(new java.awt.Dimension(350, 80));
@@ -316,7 +322,8 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		jPanel2.setMinimumSize(new java.awt.Dimension(350, 42));
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
-		btnOK.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.planck.lbl.ok","planck$rec.exp.planck.lbl.ok"));
+		btnOK.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.planck.lbl.ok",
+				"planck$rec.exp.planck.lbl.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -329,7 +336,8 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.gridy = 1;
 		jPanel2.add(btnOK, gridBagConstraints);
 
-		btnCancel.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.planck.lbl.cancel","planck$rec.exp.planck.lbl.cancel"));
+		btnCancel.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.planck.lbl.cancel",
+				"planck$rec.exp.planck.lbl.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -349,7 +357,8 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.weightx = 10.0;
 		jPanel2.add(jLabel1, gridBagConstraints);
 
-		btnDefaults.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.dftcfg.planck.title.1","planck$rec.exp.dftcfg.planck.title.1"));
+		btnDefaults.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.dftcfg.planck.title.1",
+				"planck$rec.exp.dftcfg.planck.title.1"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -455,7 +464,7 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 
 	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
-		acqConfig.setTotalSamples(jSliderNumSamples.getValue());
+		getAcquisitionConfig().setTotalSamples(jSliderNumSamples.getValue());
 
 		String mode = "";
 		String filter1 = "";
@@ -491,23 +500,23 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 			filter2 = "90";
 		}
 
-		acqConfig.getSelectedHardwareParameter("Mode").setParameterValue(mode);
-		acqConfig.getSelectedHardwareParameter("Filter1").setParameterValue(filter1);
-		acqConfig.getSelectedHardwareParameter("Filter2").setParameterValue(filter2);
-		acqConfig.getSelectedHardwareParameter("AngPos").setParameterValue("" + (jSliderAng.getValue() / 10f));
+		getAcquisitionConfig().getSelectedHardwareParameter("Mode").setParameterValue(mode);
+		getAcquisitionConfig().getSelectedHardwareParameter("Filter1").setParameterValue(filter1);
+		getAcquisitionConfig().getSelectedHardwareParameter("Filter2").setParameterValue(filter2);
+		getAcquisitionConfig().getSelectedHardwareParameter("AngPos").setParameterValue("" + (jSliderAng.getValue() / 10f));
 
 		int nSamples = 0;
 		if (jRadioButtonVar.isSelected()) {
-			acqConfig.getSelectedHardwareParameter("AngPos").setParameterValue("" + 12);
+			getAcquisitionConfig().getSelectedHardwareParameter("AngPos").setParameterValue("" + 12);
 		}
 
 		nSamples = jSliderNumSamples.getValue();
 
-		acqConfig.setTotalSamples(nSamples);
+		getAcquisitionConfig().setTotalSamples(nSamples);
 
-		for (int i = 0; i < acqConfig.getSelectedHardwareParameters().length; i++) {
-			System.out.println(acqConfig.getSelectedHardwareParameters()[i].getParameterName() + "="
-					+ acqConfig.getSelectedHardwareParameters()[i].getParameterValue());
+		for (int i = 0; i < getAcquisitionConfig().getSelectedHardwareParameters().length; i++) {
+			System.out.println(getAcquisitionConfig().getSelectedHardwareParameters()[i].getParameterName() + "="
+					+ getAcquisitionConfig().getSelectedHardwareParameters()[i].getParameterValue());
 		}
 
 		System.out.println("Total samples = " + nSamples);
@@ -551,78 +560,10 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 	private javax.swing.JTextField jTextFieldSamples;
 	// End of variables declaration//GEN-END:variables
 
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	@Override
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	@Override
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	@Override
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
 
 	@Override
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 			jSliderNumSamples.setValue(acqConfig.getTotalSamples());
 
@@ -662,21 +603,7 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 			}
 		}
 	}
-
-	@Override
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	@Override
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
-
+	
 	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
@@ -685,21 +612,23 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 
 	@Override
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title","planck$rec.exp.customizer.title");
-	}
-
-	@Override
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
+		return ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title",
+				"planck$rec.exp.customizer.title");
 	}
 
 	public static void main(final String args[]) {
-		ReCResourceBundle.loadResourceBundle("planck",
-				"recresource:///pt/utl/ist/elab/client/planck/resources/messages");
-		final javax.swing.JFrame jf = new javax.swing.JFrame();
-		final PlanckCustomizer pc = new PlanckCustomizer();
-		jf.getContentPane().add(pc, java.awt.BorderLayout.CENTER);
-		jf.pack();
-		jf.show();
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				ReCResourceBundle.loadResourceBundle("planck",
+						"recresource:///pt/utl/ist/elab/client/planck/resources/messages");
+				final javax.swing.JFrame jf = new javax.swing.JFrame();
+				final PlanckCustomizer pc = new PlanckCustomizer();
+				jf.getContentPane().add(pc, java.awt.BorderLayout.CENTER);
+				jf.pack();
+				jf.setVisible(true);
+			}
+		});
 	}
 }

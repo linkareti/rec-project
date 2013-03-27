@@ -4,7 +4,7 @@ package pt.utl.ist.elab.client.langmuir;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.ChannelParameter;
 import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
@@ -12,8 +12,14 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * @author João Loureiro - IPFN
  */
 
-public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+public class LangmuirCustomizer extends AbstractCustomizer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8933425098694295695L;
+	
+	
 	private int MINIMUM_VALUE_INDEX = 0;
     private int MAXIMUM_VALUE_INDEX = 1;
     private int STEP_VALUE_INDEX = 2;
@@ -578,14 +584,14 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 	{// GEN-HEADEREND:event_btnOKActionPerformed
 
 		final int nsamples = (sldNumSamples.getValue()*sldNumPeriod.getValue()) < 10 ? 10 : (sldNumSamples.getValue()*sldNumPeriod.getValue());
-		acqConfig.setTotalSamples(nsamples);
+		getAcquisitionConfig().setTotalSamples(nsamples);
 		
 		
-		acqConfig.getSelectedHardwareParameter("amplitude").setParameterValue(String.valueOf(sldSigA.getValue()));
-		acqConfig.getSelectedHardwareParameter("sigperiod").setParameterValue("" + sldSigP.getValue());
-		acqConfig.getSelectedHardwareParameter("numsamps").setParameterValue("" + sldNumSamples.getValue());
-		acqConfig.getSelectedHardwareParameter("numperiod").setParameterValue("" + sldNumPeriod.getValue());
-		acqConfig.getSelectedHardwareParameter("pressure").setParameterValue("" + sldPress.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("amplitude").setParameterValue(String.valueOf(sldSigA.getValue()));
+		getAcquisitionConfig().getSelectedHardwareParameter("sigperiod").setParameterValue("" + sldSigP.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("numsamps").setParameterValue("" + sldNumSamples.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("numperiod").setParameterValue("" + sldNumPeriod.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("pressure").setParameterValue("" + sldPress.getValue());
 		//acqConfig.getSelectedHardwareParameter("freq").setParameterValue("" + sldFreq.getValue());
 		
 		
@@ -628,78 +634,10 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
     private javax.swing.JFormattedTextField tfSigP;
     // End of variables declaration//GEN-END:variables
 
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	@Override
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	@Override
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	@Override
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
-
+	
 	@Override
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		//TODO
 		
 		if (acqConfig != null) {
@@ -714,13 +652,13 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 
 	@Override
 	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
+		super.setHardwareInfo(hardwareInfo);
 		int max;
 		int min;
 		int minorspacing;
 		int majorspacing;
 		
-        ChannelParameter SigAParameter = this.hardwareInfo.getHardwareParameter("amplitude");
+        ChannelParameter SigAParameter = hardwareInfo.getHardwareParameter("amplitude");
         max = Integer.valueOf(SigAParameter.getParameterSelectionList()[MAXIMUM_VALUE_INDEX]);
         min = Integer.valueOf(SigAParameter.getParameterSelectionList()[MINIMUM_VALUE_INDEX]);
         majorspacing = (max - min)/4;
@@ -731,7 +669,7 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
         sldSigA.setMinorTickSpacing(minorspacing);
         //sldSigA.setSnapToTicks(false);
         
-        ChannelParameter SigPParameter = this.hardwareInfo.getHardwareParameter("sigperiod");
+        ChannelParameter SigPParameter = hardwareInfo.getHardwareParameter("sigperiod");
         max = Integer.valueOf(SigPParameter.getParameterSelectionList()[MAXIMUM_VALUE_INDEX]);
         min = Integer.valueOf(SigPParameter.getParameterSelectionList()[MINIMUM_VALUE_INDEX]);
         majorspacing = (max - min)/4;
@@ -742,7 +680,7 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
         sldSigP.setMinorTickSpacing(minorspacing);
         //sldSigP.setSnapToTicks(false);
         
-        ChannelParameter PressParameter = this.hardwareInfo.getHardwareParameter("pressure");
+        ChannelParameter PressParameter = hardwareInfo.getHardwareParameter("pressure");
         max = Integer.valueOf(PressParameter.getParameterSelectionList()[MAXIMUM_VALUE_INDEX]);
         min = Integer.valueOf(PressParameter.getParameterSelectionList()[MINIMUM_VALUE_INDEX]);
         majorspacing = (max - min)/4;
@@ -753,7 +691,7 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
         sldPress.setMinorTickSpacing(minorspacing);
         //sldPress.setSnapToTicks(false);
         
-        ChannelParameter NumSamplesParameter = this.hardwareInfo.getHardwareParameter("numsamps");
+        ChannelParameter NumSamplesParameter = hardwareInfo.getHardwareParameter("numsamps");
         max = Integer.valueOf(NumSamplesParameter.getParameterSelectionList()[MAXIMUM_VALUE_INDEX]);
         min = Integer.valueOf(NumSamplesParameter.getParameterSelectionList()[MINIMUM_VALUE_INDEX]);
         majorspacing = (max - min)/4;
@@ -764,7 +702,7 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
         sldNumSamples.setMinorTickSpacing(minorspacing);
         //sldNumSamples.setSnapToTicks(false);
         
-        ChannelParameter NumPeriodParameter = this.hardwareInfo.getHardwareParameter("numperiod");
+        ChannelParameter NumPeriodParameter = hardwareInfo.getHardwareParameter("numperiod");
         max = Integer.valueOf(NumPeriodParameter.getParameterSelectionList()[MAXIMUM_VALUE_INDEX]);
         min = Integer.valueOf(NumPeriodParameter.getParameterSelectionList()[MINIMUM_VALUE_INDEX]);
         majorspacing = (max - min)/4;
@@ -777,15 +715,7 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 		
 	}
 
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	@Override
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
-
+	
 	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
@@ -797,11 +727,6 @@ public class LangmuirCustomizer extends javax.swing.JPanel implements com.linkar
 		return ReCResourceBundle.findString("langmuir$rec.exp.langmuir.customizer.title");
 	}
 
-	@Override
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
-	}
-	
     public static void main(String args[]) {
         /*
          * Set the Nimbus look and feel

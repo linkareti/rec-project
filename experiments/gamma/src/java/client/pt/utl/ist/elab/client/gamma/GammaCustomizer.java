@@ -11,13 +11,14 @@ package pt.utl.ist.elab.client.gamma;
  * @author André Neto - LEFT - IST
  */
 
+import javax.swing.SwingUtilities;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
-public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+public class GammaCustomizer extends AbstractCustomizer {
 
 	/**
 	 * 
@@ -260,13 +261,13 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
-		acqConfig.getSelectedHardwareParameter("Volume").setParameterValue("" + jSliderVolume.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("Volume").setParameterValue("" + jSliderVolume.getValue());
 
-		acqConfig.setSelectedFrequency(new Frequency(jSliderSTime.getValue(), hardwareInfo.getHardwareFrequencies(0)
-				.getMinimumFrequency().getMultiplier(), hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency()
+		getAcquisitionConfig().setSelectedFrequency(new Frequency(jSliderSTime.getValue(), getHardwareInfo().getHardwareFrequencies(0)
+				.getMinimumFrequency().getMultiplier(), getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency()
 				.getFrequencyDefType()));
 
-		acqConfig.setTotalSamples(jSliderNPoints.getValue());
+		getAcquisitionConfig().setTotalSamples(jSliderNPoints.getValue());
 
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_btnOKActionPerformed
@@ -319,84 +320,24 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 	 * @param args the command line arguments
 	 */
 	public static void main(final String args[]) {
-		final javax.swing.JFrame dummy = new javax.swing.JFrame();
-		dummy.getContentPane().add(new GammaCustomizer(), java.awt.BorderLayout.CENTER);
-		dummy.pack();
-		dummy.show();
-	}
-
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	@Override
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	@Override
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				final javax.swing.JFrame dummy = new javax.swing.JFrame();
+				dummy.getContentPane().add(new GammaCustomizer(), java.awt.BorderLayout.CENTER);
+				dummy.pack();
+				dummy.setVisible(true);
 			}
-		}
+		});
+		
 	}
 
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
 
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	@Override
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
 
 	@Override
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 			final int vol = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("Volume"));
 			jSliderVolume.setValue(vol);
@@ -407,19 +348,7 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		}
 	}
 
-	@Override
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	@Override
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
+	
 
 	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
@@ -432,10 +361,7 @@ public class GammaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		return "Gamma Experiment Configuration Utility";
 	}
 
-	@Override
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
-	}
+	
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JButton btnCancel;

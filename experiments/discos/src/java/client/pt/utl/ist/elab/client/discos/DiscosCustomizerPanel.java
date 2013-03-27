@@ -10,26 +10,18 @@
  */
 package pt.utl.ist.elab.client.discos;
 
-import java.util.Dictionary;
-import java.util.Hashtable;
-
 import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
 
-import com.linkare.rec.data.Multiplier;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
-import com.linkare.rec.data.synch.FrequencyDefType;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
  * @author npadriano
  */
-public class DiscosCustomizerPanel extends javax.swing.JPanel implements
-		com.linkare.rec.impl.client.customizer.ICustomizer {
+public class DiscosCustomizerPanel extends AbstractCustomizer {
 
 	/** Generated UID */
 	private static final long serialVersionUID = -6367415208236048245L;
@@ -374,7 +366,7 @@ public class DiscosCustomizerPanel extends javax.swing.JPanel implements
         jPanelControlButtons.setName("jPanelControlButtons"); // NOI18N
         jPanelControlButtons.setPreferredSize(new java.awt.Dimension(350, 37));
 
-        jButtonOk.setLabel(org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DiscosCustomizerPanel.class).getString("Ok.label")); // NOI18N
+        jButtonOk.setText(org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DiscosCustomizerPanel.class).getString("Ok.label")); // NOI18N
         jButtonOk.setName("Ok"); // NOI18N
         jButtonOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -382,7 +374,7 @@ public class DiscosCustomizerPanel extends javax.swing.JPanel implements
             }
         });
 
-        jButtonCancel.setLabel(org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DiscosCustomizerPanel.class).getString("Cancel.label")); // NOI18N
+        jButtonCancel.setText(org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DiscosCustomizerPanel.class).getString("Cancel.label")); // NOI18N
         jButtonCancel.setName("Cancel"); // NOI18N
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -390,7 +382,7 @@ public class DiscosCustomizerPanel extends javax.swing.JPanel implements
             }
         });
 
-        jButtonDefaultConfig.setLabel(org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DiscosCustomizerPanel.class).getString("DefaultConfig.label")); // NOI18N
+        jButtonDefaultConfig.setText(org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DiscosCustomizerPanel.class).getString("DefaultConfig.label")); // NOI18N
         jButtonDefaultConfig.setName("DefaultConfig"); // NOI18N
         jButtonDefaultConfig.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -530,11 +522,11 @@ public class DiscosCustomizerPanel extends javax.swing.JPanel implements
 		}
                 
                 //COMENTEI PARA COMPILAR
-		acqConfig.setTotalSamples(2500);
-		acqConfig.getSelectedHardwareParameter("protocolo").setParameterValue(String.valueOf(protocol));
-		acqConfig.getSelectedHardwareParameter("servovel").setParameterValue(String.valueOf(servovel));
-		acqConfig.getSelectedHardwareParameter("relayvel").setParameterValue(String.valueOf(relayvel));
-		acqConfig.getSelectedHardwareParameter("maxvel").setParameterValue(String.valueOf(maxvel));
+		getAcquisitionConfig().setTotalSamples(2500);
+		getAcquisitionConfig().getSelectedHardwareParameter("protocolo").setParameterValue(String.valueOf(protocol));
+		getAcquisitionConfig().getSelectedHardwareParameter("servovel").setParameterValue(String.valueOf(servovel));
+		getAcquisitionConfig().getSelectedHardwareParameter("relayvel").setParameterValue(String.valueOf(relayvel));
+		getAcquisitionConfig().getSelectedHardwareParameter("maxvel").setParameterValue(String.valueOf(maxvel));
 
                 //COMENTEI PARA COMPILAR
 		//acqConfig.setSelectedFrequency(freq);
@@ -572,75 +564,11 @@ public class DiscosCustomizerPanel extends javax.swing.JPanel implements
     private javax.swing.JTabbedPane jTabbedPaneDiscos;
     // End of variables declaration//GEN-END:variables
 
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	@Override
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	@Override
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	@Override
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
+	
 
 	@Override
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 			System.out.println("DiscosCustomizer.setHardwareAcquisitionConfig(HardwareAcquisitionConfig  acqConfig)");
 			System.out.println("acqConfig: [" + acqConfig + "]");
@@ -668,19 +596,6 @@ public class DiscosCustomizerPanel extends javax.swing.JPanel implements
 		}
 	}
 
-	@Override
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	@Override
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
 
 	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
@@ -693,44 +608,12 @@ public class DiscosCustomizerPanel extends javax.swing.JPanel implements
 		return ReCResourceBundle.findStringOrDefault("discos$rec.exp.discos.customizer.title","discos$rec.exp.discos.customizer.title");
 	}
 
-	@Override
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
-	}
-
-	private void installDecimalFormatter(final JFormattedTextField ftf) {
-		/*
-		 * DecimalFormat formatDecimal = new DecimalFormat("0.0");
-		 * formatDecimal.setDecimalSeparatorAlwaysShown(true);
-		 * formatDecimal.setGroupingUsed(false);
-		 * formatDecimal.setMinimumFractionDigits(1);
-		 * 
-		 * NumberFormatter formatter = new NumberFormatter(formatDecimal);
-		 * formatter.setCommitsOnValidEdit(true);
-		 * formatter.setOverwriteMode(true); formatter.install(ftf);
-		 */
-	}
-
-	private void installNaturalFormatter(final JFormattedTextField ftf) {
-		/*
-		 * DecimalFormat naturalFormat = new DecimalFormat("0");
-		 * naturalFormat.setDecimalSeparatorAlwaysShown(false);
-		 * naturalFormat.setGroupingUsed(false);
-		 * naturalFormat.setMinimumFractionDigits(0);
-		 * 
-		 * NumberFormatter formatter = new NumberFormatter(naturalFormat);
-		 * formatter.setCommitsOnValidEdit(true);
-		 * formatter.setOverwriteMode(true); formatter.install(ftf);
-		 */
-	}
 
 	private void initComponentsManual() {
-            
 		// TODO
 		// checkMaxNumSamples();
 		// checkMaxTime();
 		// checkPosOverlap();
-
 	}
 
 	private void validateScreen() {

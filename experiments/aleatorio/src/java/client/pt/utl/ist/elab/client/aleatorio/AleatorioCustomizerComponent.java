@@ -19,10 +19,10 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
-public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
-		com.linkare.rec.impl.client.customizer.ICustomizer {
+public class AleatorioCustomizerComponent extends AbstractCustomizer {
 
 	/**
 	 * 
@@ -357,15 +357,15 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 
 	private void okButtonActionPerformedHandler(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformedHandler
 		// Add your handling code here:
-		acqConfig.getSelectedHardwareParameter("NumberOfSamples").setParameterValue(
+		getAcquisitionConfig().getSelectedHardwareParameter("NumberOfSamples").setParameterValue(
 				"" + numberOfSamplesSlider.getValue());
 		// setTotalSamples(numberOfSamplesSlider.getValue()==0?1:numberOfSamplesSlider.getValue());
-		acqConfig.getSelectedHardwareParameter("SoundWaveDuration").setParameterValue(
+		getAcquisitionConfig().getSelectedHardwareParameter("SoundWaveDuration").setParameterValue(
 				"" + soundDurationSlider.getValue());
-		acqConfig.getSelectedHardwareParameter("MovieOnOff").setParameterValue(
+		getAcquisitionConfig().getSelectedHardwareParameter("MovieOnOff").setParameterValue(
 				"" + (watchMovieCheckBox.isSelected() ? "1" : "0"));
-		acqConfig.getSelectedHardwareParameter("InitialFrequency").setParameterValue("" + frequency1Slider.getValue());
-		acqConfig.getSelectedHardwareParameter("FinalFrequency").setParameterValue("" + frequency2Slider.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("InitialFrequency").setParameterValue("" + frequency1Slider.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("FinalFrequency").setParameterValue("" + frequency2Slider.getValue());
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_okButtonActionPerformedHandler
 
@@ -431,67 +431,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 	// End of variables declaration//GEN-END:variables
 
 	// My Vars
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	@Override
-	public synchronized void addICustomizerListener(
-			final com.linkare.rec.impl.client.customizer.ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(com.linkare.rec.impl.client.customizer.ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	@Override
-	public synchronized void removeICustomizerListener(
-			final com.linkare.rec.impl.client.customizer.ICustomizerListener listener) {
-		listenerList.remove(com.linkare.rec.impl.client.customizer.ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == com.linkare.rec.impl.client.customizer.ICustomizerListener.class) {
-				((com.linkare.rec.impl.client.customizer.ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == com.linkare.rec.impl.client.customizer.ICustomizerListener.class) {
-				((com.linkare.rec.impl.client.customizer.ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
+	
 
 	private void initWatchMovieCheckBox() {
 		final ChangeListener changeListener = new ChangeListener() {
@@ -509,17 +449,9 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		watchMovieCheckBox.addChangeListener(changeListener);
 	}
 
-	private com.linkare.rec.data.metadata.HardwareInfo hardwareInfo = null;
-	private com.linkare.rec.data.config.HardwareAcquisitionConfig acqConfig = null;
-
-	@Override
-	public com.linkare.rec.data.config.HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
-
-	@Override
+		@Override
 	public void setHardwareAcquisitionConfig(final com.linkare.rec.data.config.HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 			numberOfSamplesSlider.setValue(acqConfig.getTotalSamples());
 			numberOfSamplesText.setText("" + acqConfig.getTotalSamples());
@@ -562,20 +494,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 
 	}
 
-	@Override
-	public void setHardwareInfo(final com.linkare.rec.data.metadata.HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected com.linkare.rec.data.metadata.HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	@Override
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
-
+	
 	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
@@ -586,11 +505,6 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 	public String getCustomizerTitle() {
 		return ReCResourceBundle.findStringOrDefault("aleatorio$rec.exp.aleatorio.customizer.title",
 				"aleatorio$rec.exp.aleatorio.customizer.title");
-	}
-
-	@Override
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
 	}
 
 	/**

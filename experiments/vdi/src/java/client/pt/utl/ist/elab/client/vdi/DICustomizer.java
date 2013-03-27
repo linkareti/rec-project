@@ -32,12 +32,11 @@ import org.opensourcephysics.display.DrawableShape;
 import org.opensourcephysics.display.DrawingPanel;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
-public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+public class DICustomizer  extends AbstractCustomizer {
 
 	/**
 	 * 
@@ -134,18 +133,18 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 			public void actionPerformed(final ActionEvent evt) {
 				// OK o utilizador quer enviar as informacoes, vamos colocar os
 				// valores nos canais!!!
-				acqConfig.setTotalSamples((int) nSamples.getCurrentValue());
+				getAcquisitionConfig().setTotalSamples((int) nSamples.getCurrentValue());
 
-				acqConfig.setSelectedFrequency(new Frequency(tbs.getCurrentValue(), hardwareInfo
-						.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
+				getAcquisitionConfig().setSelectedFrequency(new Frequency(tbs.getCurrentValue(), getHardwareInfo()
+						.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), getHardwareInfo()
 						.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
-				acqConfig.getSelectedHardwareParameter("r1i").setParameterValue("" + r1i.getCurrentValue());
-				acqConfig.getSelectedHardwareParameter("r1e").setParameterValue("" + r1e.getCurrentValue());
-				acqConfig.getSelectedHardwareParameter("r2i").setParameterValue("" + r2i.getCurrentValue());
-				acqConfig.getSelectedHardwareParameter("r2e").setParameterValue("" + r2e.getCurrentValue());
-				acqConfig.getSelectedHardwareParameter("m1").setParameterValue("" + m1.getCurrentValue());
-				acqConfig.getSelectedHardwareParameter("m2").setParameterValue("" + m2.getCurrentValue());
-				acqConfig.getSelectedHardwareParameter("inc").setParameterValue("" + inc.getCurrentValue());
+				getAcquisitionConfig().getSelectedHardwareParameter("r1i").setParameterValue("" + r1i.getCurrentValue());
+				getAcquisitionConfig().getSelectedHardwareParameter("r1e").setParameterValue("" + r1e.getCurrentValue());
+				getAcquisitionConfig().getSelectedHardwareParameter("r2i").setParameterValue("" + r2i.getCurrentValue());
+				getAcquisitionConfig().getSelectedHardwareParameter("r2e").setParameterValue("" + r2e.getCurrentValue());
+				getAcquisitionConfig().getSelectedHardwareParameter("m1").setParameterValue("" + m1.getCurrentValue());
+				getAcquisitionConfig().getSelectedHardwareParameter("m2").setParameterValue("" + m2.getCurrentValue());
+				getAcquisitionConfig().getSelectedHardwareParameter("inc").setParameterValue("" + inc.getCurrentValue());
 				fireICustomizerListenerDone();
 			}
 		});
@@ -255,7 +254,7 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 		final JFrame dummy = new JFrame();
 		dummy.getContentPane().add(new DICustomizer());
 		dummy.pack();
-		dummy.show();
+		dummy.setVisible(true);
 	}
 
 	public double arredondar(final double a, final int x) {
@@ -272,13 +271,10 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 		final double rext1 = r1e.getCurrentValue();
 
 		final double rint2 = r2i.getCurrentValue();
-		;
 
 		final double rext2 = r2e.getCurrentValue();
-		;
 
 		final double ang = inc.getCurrentValue();
-		;
 
 		d1i = DrawableShape.createCircle(0, 0, 2 * rint1);
 		d1e = DrawableShape.createCircle(0, 0, 2 * rext1);
@@ -312,83 +308,13 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 		panelDisco2.repaint();
 	}
 
-	// ****************************REC********************************************/
-
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	@Override
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	@Override
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	@Override
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
-
+	
 	// ESTE E' PARA ALTERAR
 	@Override
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		// Aqui sao fornecidos parametros do ultimo utilizador que fez a exp, e'
 		// bom manter!
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 			double value;
 
@@ -420,19 +346,7 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 		}
 	}
 
-	@Override
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	@Override
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
+	
 
 	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
@@ -446,8 +360,4 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 		return "Inertial Discs Experiment Configuration Utility";
 	}
 
-	@Override
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
-	}
 }

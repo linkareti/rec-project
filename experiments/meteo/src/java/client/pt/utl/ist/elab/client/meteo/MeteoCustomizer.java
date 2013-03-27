@@ -11,19 +11,23 @@ package pt.utl.ist.elab.client.meteo;
  * @author José Pedro Pereira - Linkare TI
  */
 
+import java.util.Calendar;
+
+import javax.swing.SwingUtilities;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
-public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+public class MeteoCustomizer extends AbstractCustomizer {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3910991417859398077L;
 	/** REC */
-	private HardwareInfo hardwareInfo = null;
+//	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 	private final javax.swing.ImageIcon ICON = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/meteo/resources/cloudy.gif"));
@@ -736,10 +740,10 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 	private void jButtonHourActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonHourActionPerformed
 		final java.util.GregorianCalendar gc = new java.util.GregorianCalendar();
 
-		jComboBoxMonthFinal.setSelectedIndex(gc.get(gc.MONTH));
-		jComboBoxDayFinal.setSelectedIndex(gc.get(gc.DAY_OF_MONTH) - 1);
-		jComboBoxHourFinal.setSelectedIndex(gc.get(gc.HOUR_OF_DAY));
-		jComboBoxYearFinal.setSelectedItem(new String("" + gc.get(gc.YEAR)));
+		jComboBoxMonthFinal.setSelectedIndex(gc.get(Calendar.MONTH));
+		jComboBoxDayFinal.setSelectedIndex(gc.get(Calendar.DAY_OF_MONTH) - 1);
+		jComboBoxHourFinal.setSelectedIndex(gc.get(Calendar.HOUR_OF_DAY));
+		jComboBoxYearFinal.setSelectedItem(new String("" + gc.get(Calendar.YEAR)));
 
 	}// GEN-LAST:event_jButtonHourActionPerformed
 
@@ -904,10 +908,17 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 	}// GEN-LAST:event_jComboBoxMonthIniActionPerformed
 
 	public static void main(final String args[]) {
-		final javax.swing.JFrame jf = new javax.swing.JFrame();
-		jf.getContentPane().add(new MeteoCustomizer());
-		jf.pack();
-		jf.show();
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				final javax.swing.JFrame jf = new javax.swing.JFrame();
+				jf.getContentPane().add(new MeteoCustomizer());
+				jf.pack();
+				jf.setVisible(true);
+			}
+		});
+		
 	}
 
 	private int getNumberOfDays(final int month, final int year) {
@@ -934,75 +945,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		}
 	}
 
-	/** REC impl */
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
-
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
-
+	
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return ICON;
 	}
@@ -1011,13 +954,8 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 		return TITLE;
 	}
 
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
-	}
-
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		System.out.println("Setting hardware acquisition config");
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 			/*
 			 * if(acqConfig.getSelectedHardwareParameterValue("Sensor") != null)
@@ -1090,8 +1028,7 @@ public class MeteoCustomizer extends javax.swing.JPanel implements com.linkare.r
 	}
 
 	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		System.out.println("Setting hardware info");
-		this.hardwareInfo = hardwareInfo;
+		super.setHardwareInfo(hardwareInfo);
 
 		jComboBoxYearIni.removeAllItems();
 		jComboBoxYearFinal.removeAllItems();

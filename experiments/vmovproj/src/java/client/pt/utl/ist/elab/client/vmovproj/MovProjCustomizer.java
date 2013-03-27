@@ -14,12 +14,10 @@ import pt.utl.ist.elab.client.virtual.guipack.GUtils;
 import pt.utl.ist.elab.client.virtual.guipack.InteractiveMenu;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 
-public class MovProjCustomizer extends javax.swing.JPanel implements
-		com.linkare.rec.impl.client.customizer.ICustomizer, InteractiveMenu {
+public class MovProjCustomizer extends AbstractCustomizer implements InteractiveMenu {
 
 	/**
 	 * 
@@ -1617,7 +1615,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 	private void dtTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_dtTextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(dtTextField, dtSlider, 1);
+			GUtils.validateInput(dtTextField, dtSlider, 1);
 		} catch (final NumberFormatException e) {
 			dtTextField.setText(Integer.toString(dtSlider.getValue()));
 		}
@@ -1625,7 +1623,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 	private void s0TextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_s0TextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(s0TextField, s0Slider, 1);
+			GUtils.validateInput(s0TextField, s0Slider, 1);
 		} catch (final NumberFormatException e) {
 			s0TextField.setText(Integer.toString(s0Slider.getValue()));
 		}
@@ -1641,7 +1639,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 	private void densTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_densTextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(densTextField, densSlider, 1);
+			GUtils.validateInput(densTextField, densSlider, 1);
 		} catch (final NumberFormatException e) {
 			densTextField.setText(Integer.toString(densSlider.getValue()));
 		}
@@ -1649,7 +1647,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 	private void dragCoef2TextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_dragCoef2TextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(dragCoef2TextField, dragCoef2Slider, 1);
+			GUtils.validateInput(dragCoef2TextField, dragCoef2Slider, 1);
 		} catch (final NumberFormatException e) {
 			dragCoef2TextField.setText(Integer.toString(dragCoef2Slider.getValue()));
 		}
@@ -1657,7 +1655,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 	private void dragCoef1TextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_dragCoef1TextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(dragCoef1TextField, dragCoef1Slider, 1);
+			GUtils.validateInput(dragCoef1TextField, dragCoef1Slider, 1);
 		} catch (final NumberFormatException e) {
 			dragCoef1TextField.setText(Integer.toString(dragCoef1Slider.getValue()));
 		}
@@ -1677,7 +1675,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 	private void gTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_gTextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(gTextField, gSlider, 1);
+			GUtils.validateInput(gTextField, gSlider, 1);
 			movproj.setAcel(((double) gSlider.getValue() / 10));
 		} catch (final NumberFormatException e) {
 			gTextField.setText(Integer.toString(gSlider.getValue()));
@@ -1686,7 +1684,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 	private void spinPhiTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_spinPhiTextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(spinPhiTextField, spinPhiSlider, 1);
+			GUtils.validateInput(spinPhiTextField, spinPhiSlider, 1);
 			movproj.setAngsSpin(Math.toRadians(spinThetaSlider.getValue()), Math.toRadians(spinPhiSlider.getValue()));
 		} catch (final NumberFormatException e) {
 			spinPhiTextField.setText(Integer.toString(spinPhiSlider.getValue()));
@@ -1699,7 +1697,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 	private void spinThetaTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_spinThetaTextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(spinThetaTextField, spinThetaSlider, 1);
+			GUtils.validateInput(spinThetaTextField, spinThetaSlider, 1);
 			movproj.setAngsSpin(Math.toRadians(spinThetaSlider.getValue()), Math.toRadians(spinPhiSlider.getValue()));
 		} catch (final NumberFormatException e) {
 			spinThetaTextField.setText(Integer.toString(spinThetaSlider.getValue()));
@@ -1712,7 +1710,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 	private void spinModTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_spinModTextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(spinModTextField, spinModSlider, 1);
+			GUtils.validateInput(spinModTextField, spinModSlider, 1);
 			movproj.setSpin((double) spinModSlider.getValue() / 100);
 		} catch (final NumberFormatException e) {
 			spinModTextField.setText(Integer.toString(spinModSlider.getValue()));
@@ -1725,7 +1723,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 	private void velPhiTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_velPhiTextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(velPhiTextField, velPhiSlider, 1);
+			GUtils.validateInput(velPhiTextField, velPhiSlider, 1);
 			movproj.setAngsVel(Math.toRadians(velThetaSlider.getValue()), Math.toRadians(velPhiSlider.getValue()));
 		} catch (final NumberFormatException e) {
 			velPhiTextField.setText(Integer.toString(velPhiSlider.getValue()));
@@ -1738,7 +1736,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 	private void velThetaTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_velThetaTextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(velThetaTextField, velThetaSlider, 1);
+			GUtils.validateInput(velThetaTextField, velThetaSlider, 1);
 			movproj.setAngsVel(Math.toRadians(velThetaSlider.getValue()), Math.toRadians(velPhiSlider.getValue()));
 		} catch (final NumberFormatException e) {
 			velThetaTextField.setText(Integer.toString(velThetaSlider.getValue()));
@@ -1751,7 +1749,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 	private void velModTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_velModTextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(velModTextField, velModSlider, 1);
+			GUtils.validateInput(velModTextField, velModSlider, 1);
 			movproj.setVel((double) velModSlider.getValue() / 100);
 		} catch (final NumberFormatException e) {
 			velModTextField.setText(Integer.toString(velModSlider.getValue()));
@@ -1764,7 +1762,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 	private void zPosTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_zPosTextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(zPosTextField, zPosSlider, 1);
+			GUtils.validateInput(zPosTextField, zPosSlider, 1);
 			movproj.setZ((double) zPosSlider.getValue() / 10);
 		} catch (final NumberFormatException e) {
 			zPosTextField.setText(Integer.toString(zPosSlider.getValue()));
@@ -1777,7 +1775,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 	private void yPosTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_yPosTextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(yPosTextField, yPosSlider, 1);
+			GUtils.validateInput(yPosTextField, yPosSlider, 1);
 			movproj.setY((double) yPosSlider.getValue() / 10);
 		} catch (final NumberFormatException e) {
 			yPosTextField.setText(Integer.toString(yPosSlider.getValue()));
@@ -1790,7 +1788,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 	private void xPosTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_xPosTextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(xPosTextField, xPosSlider, 1);
+			GUtils.validateInput(xPosTextField, xPosSlider, 1);
 			movproj.setX((double) xPosSlider.getValue() / 10);
 		} catch (final NumberFormatException e) {
 			xPosTextField.setText(Integer.toString(xPosSlider.getValue()));
@@ -1820,7 +1818,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 	private void samplesTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_samplesTextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(samplesTextField, samplesSlider, 1);
+			GUtils.validateInput(samplesTextField, samplesSlider, 1);
 		} catch (final NumberFormatException e) {
 			samplesTextField.setText(Integer.toString(samplesSlider.getValue()));
 		}
@@ -1828,7 +1826,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 	private void tbsTextFieldFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_tbsTextFieldFocusLost
 		try {
-			final double val = GUtils.validateInput(tbsTextField, tbsSlider, 1);
+			GUtils.validateInput(tbsTextField, tbsSlider, 1);
 		} catch (final NumberFormatException e) {
 			tbsTextField.setText(Integer.toString(tbsSlider.getValue()));
 		}
@@ -1965,22 +1963,22 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 	}// GEN-LAST:event_cancelButtonActionPerformed
 
 	private void okButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
-		acqConfig.setSelectedFrequency(new Frequency((double) tbsSlider.getValue(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
+		getAcquisitionConfig().setSelectedFrequency(new Frequency((double) tbsSlider.getValue(), getHardwareInfo()
+				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), getHardwareInfo()
 				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
-		acqConfig.setTotalSamples(samplesSlider.getValue());
+		getAcquisitionConfig().setTotalSamples(samplesSlider.getValue());
 
-		acqConfig.getSelectedHardwareParameter("odeType").setParameterValue("" + (rkRadioButton.isSelected() ? 1 : 0));
-		acqConfig.getSelectedHardwareParameter("gType").setParameterValue("" + (gTypeCheckBox.isSelected() ? 1 : 0));
-		acqConfig.getSelectedHardwareParameter("dragType").setParameterValue(
+		getAcquisitionConfig().getSelectedHardwareParameter("odeType").setParameterValue("" + (rkRadioButton.isSelected() ? 1 : 0));
+		getAcquisitionConfig().getSelectedHardwareParameter("gType").setParameterValue("" + (gTypeCheckBox.isSelected() ? 1 : 0));
+		getAcquisitionConfig().getSelectedHardwareParameter("dragType").setParameterValue(
 				"" + (dragTypeCheckBox.isSelected() ? 1 : 0));
 
-		acqConfig.getSelectedHardwareParameter("velModulus").setParameterValue(
+		getAcquisitionConfig().getSelectedHardwareParameter("velModulus").setParameterValue(
 				"" + (velModCheckBox.isSelected() ? 1 : 0));
-		acqConfig.getSelectedHardwareParameter("velAbs").setParameterValue("" + (velAbsCheckBox.isSelected() ? 1 : 0));
-		acqConfig.getSelectedHardwareParameter("posModulus").setParameterValue(
+		getAcquisitionConfig().getSelectedHardwareParameter("velAbs").setParameterValue("" + (velAbsCheckBox.isSelected() ? 1 : 0));
+		getAcquisitionConfig().getSelectedHardwareParameter("posModulus").setParameterValue(
 				"" + (posModCheckBox.isSelected() ? 1 : 0));
-		acqConfig.getSelectedHardwareParameter("posAbs").setParameterValue("" + (posAbsCheckBox.isSelected() ? 1 : 0));
+		getAcquisitionConfig().getSelectedHardwareParameter("posAbs").setParameterValue("" + (posAbsCheckBox.isSelected() ? 1 : 0));
 
 		final double x = movproj.getPosX();
 		final double y = movproj.getPosY();
@@ -2014,37 +2012,37 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		final String graph4 = ((String) graph4XComboBox.getSelectedItem()).toString().concat(
 				"." + ((String) graph4YComboBox.getSelectedItem()).toString());
 
-		acqConfig.getSelectedHardwareParameter("x").setParameterValue("" + (float) x);
-		acqConfig.getSelectedHardwareParameter("y").setParameterValue("" + (float) y);
-		acqConfig.getSelectedHardwareParameter("z").setParameterValue("" + (float) z);
+		getAcquisitionConfig().getSelectedHardwareParameter("x").setParameterValue("" + (float) x);
+		getAcquisitionConfig().getSelectedHardwareParameter("y").setParameterValue("" + (float) y);
+		getAcquisitionConfig().getSelectedHardwareParameter("z").setParameterValue("" + (float) z);
 
-		acqConfig.getSelectedHardwareParameter("velMod").setParameterValue("" + (float) velMod);
-		acqConfig.getSelectedHardwareParameter("velTheta").setParameterValue("" + (float) velTheta);
-		acqConfig.getSelectedHardwareParameter("velPhi").setParameterValue("" + (float) velPhi);
+		getAcquisitionConfig().getSelectedHardwareParameter("velMod").setParameterValue("" + (float) velMod);
+		getAcquisitionConfig().getSelectedHardwareParameter("velTheta").setParameterValue("" + (float) velTheta);
+		getAcquisitionConfig().getSelectedHardwareParameter("velPhi").setParameterValue("" + (float) velPhi);
 
-		acqConfig.getSelectedHardwareParameter("spinMod").setParameterValue("" + (float) spinMod);
-		acqConfig.getSelectedHardwareParameter("spinTheta").setParameterValue("" + (float) spinTheta);
-		acqConfig.getSelectedHardwareParameter("spinPhi").setParameterValue("" + (float) spinPhi);
+		getAcquisitionConfig().getSelectedHardwareParameter("spinMod").setParameterValue("" + (float) spinMod);
+		getAcquisitionConfig().getSelectedHardwareParameter("spinTheta").setParameterValue("" + (float) spinTheta);
+		getAcquisitionConfig().getSelectedHardwareParameter("spinPhi").setParameterValue("" + (float) spinPhi);
 
-		acqConfig.getSelectedHardwareParameter("mass").setParameterValue("" + (float) mass);
-		acqConfig.getSelectedHardwareParameter("radius").setParameterValue("" + (float) radius);
+		getAcquisitionConfig().getSelectedHardwareParameter("mass").setParameterValue("" + (float) mass);
+		getAcquisitionConfig().getSelectedHardwareParameter("radius").setParameterValue("" + (float) radius);
 
-		acqConfig.getSelectedHardwareParameter("dragCoef1").setParameterValue("" + (float) dragCoef1);
-		acqConfig.getSelectedHardwareParameter("dragCoef2").setParameterValue("" + (float) dragCoef2);
-		acqConfig.getSelectedHardwareParameter("densL").setParameterValue("" + (float) densL);
+		getAcquisitionConfig().getSelectedHardwareParameter("dragCoef1").setParameterValue("" + (float) dragCoef1);
+		getAcquisitionConfig().getSelectedHardwareParameter("dragCoef2").setParameterValue("" + (float) dragCoef2);
+		getAcquisitionConfig().getSelectedHardwareParameter("densL").setParameterValue("" + (float) densL);
 
-		acqConfig.getSelectedHardwareParameter("s0").setParameterValue("" + (float) s0);
-		acqConfig.getSelectedHardwareParameter("g").setParameterValue("" + (float) g);
-		acqConfig.getSelectedHardwareParameter("dt").setParameterValue("" + dt);
+		getAcquisitionConfig().getSelectedHardwareParameter("s0").setParameterValue("" + (float) s0);
+		getAcquisitionConfig().getSelectedHardwareParameter("g").setParameterValue("" + (float) g);
+		getAcquisitionConfig().getSelectedHardwareParameter("dt").setParameterValue("" + dt);
 
-		acqConfig.getSelectedHardwareParameter("graph1").setParameterValue("" + graph1);
-		acqConfig.getSelectedHardwareParameter("graph2").setParameterValue("" + graph2);
-		acqConfig.getSelectedHardwareParameter("graph3").setParameterValue("" + graph3);
-		acqConfig.getSelectedHardwareParameter("graph4").setParameterValue("" + graph4);
+		getAcquisitionConfig().getSelectedHardwareParameter("graph1").setParameterValue("" + graph1);
+		getAcquisitionConfig().getSelectedHardwareParameter("graph2").setParameterValue("" + graph2);
+		getAcquisitionConfig().getSelectedHardwareParameter("graph3").setParameterValue("" + graph3);
+		getAcquisitionConfig().getSelectedHardwareParameter("graph4").setParameterValue("" + graph4);
 
-		for (int i = 0; i < acqConfig.getSelectedHardwareParameters().length; i++) {
-			System.out.println(acqConfig.getSelectedHardwareParameters(i).getParameterName() + " = "
-					+ acqConfig.getSelectedHardwareParameters(i).getParameterValue());
+		for (int i = 0; i < getAcquisitionConfig().getSelectedHardwareParameters().length; i++) {
+			System.out.println(getAcquisitionConfig().getSelectedHardwareParameters(i).getParameterName() + " = "
+					+ getAcquisitionConfig().getSelectedHardwareParameters(i).getParameterValue());
 		}
 
 		fireICustomizerListenerDone();
@@ -2090,83 +2088,15 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		test.addWindowListener(new java.awt.event.WindowAdapter() {
 			public void windowClosing(final java.awt.event.WindowEvent e) {
 				System.exit(0);
-			};
+			}
 		});
 		test.getContentPane().add(new MovProjCustomizer());
 		test.pack();
 		test.setVisible(true);
 	}
 
-	// ****************************REC********************************************/
-
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
-
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 			// samplesSlider.setValue(acqConfig.getTotalSamples());
 			// tbsSlider.setValue((int)
@@ -2218,7 +2148,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 			s0Slider.setValue((int) Math.round(Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("s0")) * 1e5));
 			final float g = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("g"));
-			final int dt = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("dt"));
+			Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("dt"));
 
 			final String[] graph1 = StringUtils
 					.splitArroundPoint(acqConfig.getSelectedHardwareParameterValue("graph1"));
@@ -2256,18 +2186,6 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		}
 	}
 
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
-
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/vmovproj/resources/movproj_iconified.PNG"));
@@ -2275,10 +2193,6 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 	public String getCustomizerTitle() {
 		return "Motion of Projectiles Configuration Utility";
-	}
-
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

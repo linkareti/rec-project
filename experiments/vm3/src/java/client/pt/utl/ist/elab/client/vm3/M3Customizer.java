@@ -9,16 +9,15 @@ package pt.utl.ist.elab.client.vm3;
 import javax.swing.JFrame;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
  * @author n0dP2
  */
-public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+public class M3Customizer extends AbstractCustomizer {
 
 	/**
 	 * 
@@ -32,78 +31,9 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 
 	// ****************************REC********************************************/
 
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	@Override
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	@Override
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	@Override
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
-
 	@Override
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 			textX.setText(acqConfig.getSelectedHardwareParameterValue("x0"));
 			textY.setText(acqConfig.getSelectedHardwareParameterValue("y0"));
@@ -115,34 +45,15 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 	}
 
 	@Override
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	@Override
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
-
-	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/vm3/resources/m3_iconified.png"));
 	}
 
-	// ESTE � PARA ALTERAR
+	// ESTE É PARA ALTERAR
 	@Override
 	public String getCustomizerTitle() {
 		return "3 Strings Experiment Configuration Utility";
-	}
-
-	@Override
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
 	}
 
 	// ****************************REC********************************************/
@@ -722,18 +633,18 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 	}// GEN-LAST:event_sliderMassaStateChanged
 
 	private void buttonOKActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_buttonOKActionPerformed
-		acqConfig.setTotalSamples((sliderNS.getValue() / 100));
+		getAcquisitionConfig().setTotalSamples((sliderNS.getValue() / 100));
 
-		acqConfig.setSelectedFrequency(new Frequency(sliderTBS.getValue() * 0.01, hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
+		getAcquisitionConfig().setSelectedFrequency(new Frequency(sliderTBS.getValue() * 0.01, getHardwareInfo()
+				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), getHardwareInfo()
 				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
 
-		acqConfig.getSelectedHardwareParameter("massa").setParameterValue("" + sliderMassa.getValue() * 0.01F);
-		acqConfig.getSelectedHardwareParameter("k1").setParameterValue("" + sliderK1.getValue() * 0.01F);
-		acqConfig.getSelectedHardwareParameter("k2").setParameterValue("" + sliderK2.getValue() * 0.01F);
-		acqConfig.getSelectedHardwareParameter("k3").setParameterValue("" + sliderK3.getValue() * 0.01F);
-		acqConfig.getSelectedHardwareParameter("x0").setParameterValue(textX.getText());
-		acqConfig.getSelectedHardwareParameter("y0").setParameterValue(textY.getText());
+		getAcquisitionConfig().getSelectedHardwareParameter("massa").setParameterValue("" + sliderMassa.getValue() * 0.01F);
+		getAcquisitionConfig().getSelectedHardwareParameter("k1").setParameterValue("" + sliderK1.getValue() * 0.01F);
+		getAcquisitionConfig().getSelectedHardwareParameter("k2").setParameterValue("" + sliderK2.getValue() * 0.01F);
+		getAcquisitionConfig().getSelectedHardwareParameter("k3").setParameterValue("" + sliderK3.getValue() * 0.01F);
+		getAcquisitionConfig().getSelectedHardwareParameter("x0").setParameterValue(textX.getText());
+		getAcquisitionConfig().getSelectedHardwareParameter("y0").setParameterValue(textY.getText());
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_buttonOKActionPerformed
 
@@ -797,7 +708,7 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		frame.getContentPane().add(new M3Customizer());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
-		frame.show();
+		frame.setVisible(true);
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

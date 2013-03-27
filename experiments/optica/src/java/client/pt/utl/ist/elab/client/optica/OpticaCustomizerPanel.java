@@ -18,18 +18,16 @@ import javax.swing.JLabel;
 
 import com.linkare.rec.data.Multiplier;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
 import com.linkare.rec.data.synch.FrequencyDefType;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
  * @author npadriano
  */
-public class OpticaCustomizerPanel extends javax.swing.JPanel implements
-		com.linkare.rec.impl.client.customizer.ICustomizer {
+public class OpticaCustomizerPanel  extends AbstractCustomizer {
 
 	/** Generated UID */
 	private static final long serialVersionUID = -6367415208236048245L;
@@ -59,7 +57,6 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements
 	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
-		buttonGroupCalibration = new javax.swing.ButtonGroup();
 		buttonGroupEnergyConservationIsPolarization = new javax.swing.ButtonGroup();
 		jTabbedPaneOptica = new javax.swing.JTabbedPane();
 		jPanelSnell = new javax.swing.JPanel();
@@ -1324,7 +1321,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements
 		jPanelControlButtons.setName("jPanelControlButtons"); // NOI18N
 		jPanelControlButtons.setPreferredSize(new java.awt.Dimension(350, 37));
 
-		jButtonOk.setLabel(resourceMap.getString("Ok.label")); // NOI18N
+		jButtonOk.setText(resourceMap.getString("Ok.label")); // NOI18N
 		jButtonOk.setName("Ok"); // NOI18N
 		jButtonOk.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -1332,7 +1329,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements
 			}
 		});
 
-		jButtonCancel.setLabel(resourceMap.getString("Cancel.label")); // NOI18N
+		jButtonCancel.setText(resourceMap.getString("Cancel.label")); // NOI18N
 		jButtonCancel.setName("Cancel"); // NOI18N
 		jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -1340,7 +1337,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements
 			}
 		});
 
-		jButtonDefaultConfig.setLabel(resourceMap.getString("DefaultConfig.label")); // NOI18N
+		jButtonDefaultConfig.setText(resourceMap.getString("DefaultConfig.label")); // NOI18N
 		jButtonDefaultConfig.setName("DefaultConfig"); // NOI18N
 		jButtonDefaultConfig.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -1596,28 +1593,26 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements
 			// delay = 0;
 			// angPol = 0;
 			// checkBox = 0;
-			nsamples = 1; // TODO verificar viabilidade mas o data collector
-							// deve estar 'a espera de ler resultado
+			nsamples = 1; 
 			freq = new Frequency(OpticaCustomizerPanel.PROTOCOL_5_SAMPLING_INTERVAL_MS, Multiplier.mili,
 					FrequencyDefType.SamplingIntervalType);
 			break;
 
 		default:
-			// TODO protocolo inválido
-			return;
+			throw new RuntimeException("The selected protocol is invalid : " + protocol);
 		}
 
-		acqConfig.setTotalSamples(nsamples);
-		acqConfig.getSelectedHardwareParameter("protocolo").setParameterValue(String.valueOf(protocol));
-		acqConfig.getSelectedHardwareParameter("ang1_min").setParameterValue(String.valueOf(ang1Min));
-		acqConfig.getSelectedHardwareParameter("ang1_max").setParameterValue(String.valueOf(ang1Max));
-		acqConfig.getSelectedHardwareParameter("delta_ang1").setParameterValue(String.valueOf(deltaAng1));
-		acqConfig.getSelectedHardwareParameter("delay").setParameterValue(String.valueOf(delay));
-		acqConfig.getSelectedHardwareParameter("polarizacao").setParameterValue(String.valueOf(polarizacao));
-		acqConfig.getSelectedHardwareParameter("ang_pol").setParameterValue(String.valueOf(angPol));
-		acqConfig.getSelectedHardwareParameter("check_box").setParameterValue(String.valueOf(checkBox));
+		getAcquisitionConfig().setTotalSamples(nsamples);
+		getAcquisitionConfig().getSelectedHardwareParameter("protocolo").setParameterValue(String.valueOf(protocol));
+		getAcquisitionConfig().getSelectedHardwareParameter("ang1_min").setParameterValue(String.valueOf(ang1Min));
+		getAcquisitionConfig().getSelectedHardwareParameter("ang1_max").setParameterValue(String.valueOf(ang1Max));
+		getAcquisitionConfig().getSelectedHardwareParameter("delta_ang1").setParameterValue(String.valueOf(deltaAng1));
+		getAcquisitionConfig().getSelectedHardwareParameter("delay").setParameterValue(String.valueOf(delay));
+		getAcquisitionConfig().getSelectedHardwareParameter("polarizacao").setParameterValue(String.valueOf(polarizacao));
+		getAcquisitionConfig().getSelectedHardwareParameter("ang_pol").setParameterValue(String.valueOf(angPol));
+		getAcquisitionConfig().getSelectedHardwareParameter("check_box").setParameterValue(String.valueOf(checkBox));
 
-		acqConfig.setSelectedFrequency(freq);
+		getAcquisitionConfig().setSelectedFrequency(freq);
 
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_jButtonOkActionPerformed
@@ -1691,7 +1686,6 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements
 	}// GEN-LAST:event_jCheckBoxCalibrationSensorActionPerformed
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.ButtonGroup buttonGroupCalibration;
 	private javax.swing.ButtonGroup buttonGroupEnergyConservationIsPolarization;
 	private javax.swing.JButton jButtonCancel;
 	private javax.swing.JButton jButtonDefaultConfig;
@@ -1759,80 +1753,14 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements
 
 	// End of variables declaration//GEN-END:variables
 
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	@Override
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	@Override
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	@Override
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
-
+	
 	@Override
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 			System.out.println("OpticaCustomizer.setHardwareAcquisitionConfig(HardwareAcquisitionConfig  acqConfig)");
 			System.out.println("acqConfig: [" + acqConfig + "]");
 
-			// TODO
 			// int nsamples = acqConfig.getTotalSamples();
 			// sldNumSamples.setValue(nsamples);
 			// tfNumSamples.setText("" + nsamples);
@@ -1855,20 +1783,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements
 		}
 	}
 
-	@Override
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	@Override
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
-
+	
 	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
@@ -1878,11 +1793,6 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements
 	@Override
 	public String getCustomizerTitle() {
 		return ReCResourceBundle.findStringOrDefault("optica$rec.exp.optica.customizer.title","optica$rec.exp.optica.customizer.title");
-	}
-
-	@Override
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
 	}
 
 	private void installDecimalFormatter(final JFormattedTextField ftf) {
@@ -1898,18 +1808,18 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements
 		 */
 	}
 
-	private void installNaturalFormatter(final JFormattedTextField ftf) {
-		/*
-		 * DecimalFormat naturalFormat = new DecimalFormat("0");
-		 * naturalFormat.setDecimalSeparatorAlwaysShown(false);
-		 * naturalFormat.setGroupingUsed(false);
-		 * naturalFormat.setMinimumFractionDigits(0);
-		 * 
-		 * NumberFormatter formatter = new NumberFormatter(naturalFormat);
-		 * formatter.setCommitsOnValidEdit(true);
-		 * formatter.setOverwriteMode(true); formatter.install(ftf);
-		 */
-	}
+//	private void installNaturalFormatter(final JFormattedTextField ftf) {
+//		/*
+//		 * DecimalFormat naturalFormat = new DecimalFormat("0");
+//		 * naturalFormat.setDecimalSeparatorAlwaysShown(false);
+//		 * naturalFormat.setGroupingUsed(false);
+//		 * naturalFormat.setMinimumFractionDigits(0);
+//		 * 
+//		 * NumberFormatter formatter = new NumberFormatter(naturalFormat);
+//		 * formatter.setCommitsOnValidEdit(true);
+//		 * formatter.setOverwriteMode(true); formatter.install(ftf);
+//		 */
+//	}
 
 	private void initComponentsManual() {
 		jLabelSnellDelay.setVisible(false);
@@ -1968,7 +1878,6 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements
 		installDecimalFormatter(jFormattedTextFieldBrewsterAngleVarationMax);
 		installDecimalFormatter(jFormattedTextFieldBrewsterAnglePolarization);
 
-		// TODO
 		// checkMaxNumSamples();
 		// checkMaxTime();
 		// checkPosOverlap();
@@ -2057,9 +1966,9 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements
 		textField.setText(Float.toString((float) slider.getValue() / 10.F));
 	}
 
-	private void sliderChanged(final javax.swing.JSlider slider, final javax.swing.JFormattedTextField textField) {
-		textField.setText(Integer.toString(slider.getValue()));
-	}
+//	private void sliderChanged(final javax.swing.JSlider slider, final javax.swing.JFormattedTextField textField) {
+//		textField.setText(Integer.toString(slider.getValue()));
+//	}
 
 	private void formattedMultipliedTextChanged(final javax.swing.JSlider slider,
 			final javax.swing.JFormattedTextField textField) {
@@ -2081,22 +1990,22 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements
 		}
 	}
 
-	private void formattedTextChanged(final javax.swing.JSlider slider, final javax.swing.JFormattedTextField textField) {
-		String strPos1 = textField.getText();
-		if (strPos1.trim().equals("")) {
-			return;
-		}
-		strPos1 = strPos1.replace(",", ".");
-		try {
-			final int pos1 = (int) Integer.parseInt(strPos1);
-			if (pos1 <= slider.getMaximum() && pos1 >= slider.getMinimum()) {
-				// slider.setValue(pos1 - slider.getMinimum());
-				slider.setValue(pos1);
-			} else {
-				textField.setValue(slider.getValue());
-			}
-		} catch (final Exception e) {
-			textField.setValue(slider.getValue());
-		}
-	}
+//	private void formattedTextChanged(final javax.swing.JSlider slider, final javax.swing.JFormattedTextField textField) {
+//		String strPos1 = textField.getText();
+//		if (strPos1.trim().equals("")) {
+//			return;
+//		}
+//		strPos1 = strPos1.replace(",", ".");
+//		try {
+//			final int pos1 = (int) Integer.parseInt(strPos1);
+//			if (pos1 <= slider.getMaximum() && pos1 >= slider.getMinimum()) {
+//				// slider.setValue(pos1 - slider.getMinimum());
+//				slider.setValue(pos1);
+//			} else {
+//				textField.setValue(slider.getValue());
+//			}
+//		} catch (final Exception e) {
+//			textField.setValue(slider.getValue());
+//		}
+//	}
 }

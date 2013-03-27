@@ -9,16 +9,15 @@ package pt.utl.ist.elab.client.pendulo;
 import javax.swing.SwingConstants;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+public class PenduloCustomizer extends AbstractCustomizer {
 
 	/**
 	 * 
@@ -74,7 +73,8 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 
 		jPanel2.setMinimumSize(new java.awt.Dimension(350, 42));
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
-		btnOK.setText(ReCResourceBundle.findStringOrDefault("pendulo$rec.exp.pendulo.lbl.ok","pendulo$rec.exp.pendulo.lbl.ok"));
+		btnOK.setText(ReCResourceBundle.findStringOrDefault("pendulo$rec.exp.pendulo.lbl.ok",
+				"pendulo$rec.exp.pendulo.lbl.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -87,7 +87,8 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 		gridBagConstraints.gridy = 1;
 		jPanel2.add(btnOK, gridBagConstraints);
 
-		btnCancel.setText(ReCResourceBundle.findStringOrDefault("pendulo$rec.exp.pendulo.lbl.cancel","pendulo$rec.exp.pendulo.lbl.cancel"));
+		btnCancel.setText(ReCResourceBundle.findStringOrDefault("pendulo$rec.exp.pendulo.lbl.cancel",
+				"pendulo$rec.exp.pendulo.lbl.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -107,7 +108,8 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 		gridBagConstraints.weightx = 10.0;
 		jPanel2.add(jLabel1, gridBagConstraints);
 
-		btnDefaults.setText(ReCResourceBundle.findStringOrDefault("pendulo$rec.exp.dftcfg.pendulo.title.1","pendulo$rec.exp.dftcfg.pendulo.title.1"));
+		btnDefaults.setText(ReCResourceBundle.findStringOrDefault("pendulo$rec.exp.dftcfg.pendulo.title.1",
+				"pendulo$rec.exp.dftcfg.pendulo.title.1"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -134,8 +136,8 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanel3.setMinimumSize(new java.awt.Dimension(350, 160));
 		jPanel5.setLayout(new java.awt.GridBagLayout());
 
-		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findStringOrDefault("pendulo$rec.exp.pendulo.lbl.angini","pendulo$rec.exp.pendulo.lbl.angini")));
+		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"pendulo$rec.exp.pendulo.lbl.angini", "pendulo$rec.exp.pendulo.lbl.angini")));
 		jPanel5.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel5.setPreferredSize(new java.awt.Dimension(350, 80));
 		sldAngle.setMajorTickSpacing(5);
@@ -182,8 +184,8 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 
 		jPanel6.setLayout(new java.awt.GridBagLayout());
 
-		jPanel6.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findStringOrDefault("pendulo$rec.exp.pendulo.lbl.nsamples","pendulo$rec.exp.pendulo.lbl.nsamples")));
+		jPanel6.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"pendulo$rec.exp.pendulo.lbl.nsamples", "pendulo$rec.exp.pendulo.lbl.nsamples")));
 		jPanel6.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
 		jPanel6.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel6.setPreferredSize(new java.awt.Dimension(350, 80));
@@ -232,7 +234,8 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 
 		lblErrorSamplesTooHigh.setForeground(new java.awt.Color(255, 0, 0));
 		lblErrorSamplesTooHigh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("pendulo$rec.exp.pendulo.lbl.maxsamples.1","pendulo$rec.exp.pendulo.lbl.maxsamples.1"));
+		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault(
+				"pendulo$rec.exp.pendulo.lbl.maxsamples.1", "pendulo$rec.exp.pendulo.lbl.maxsamples.1"));
 		lblErrorSamplesTooHigh.setEnabled(false);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -245,8 +248,8 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
-		jPanel1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findStringOrDefault("pendulo$rec.exp.pendulo.lbl.freq","pendulo$rec.exp.pendulo.lbl.freq")));
+		jPanel1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"pendulo$rec.exp.pendulo.lbl.freq", "pendulo$rec.exp.pendulo.lbl.freq")));
 		jPanel1.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel1.setPreferredSize(new java.awt.Dimension(350, 80));
 		sldFreq.setMajorTickSpacing(25);
@@ -297,8 +300,8 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 
 		jPanel51.setLayout(new java.awt.GridBagLayout());
 
-		jPanel51.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findStringOrDefault("pendulo$rec.exp.pendulo.lbl.hini","pendulo$rec.exp.pendulo.lbl.hini")));
+		jPanel51.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"pendulo$rec.exp.pendulo.lbl.hini", "pendulo$rec.exp.pendulo.lbl.hini")));
 		jPanel51.setMinimumSize(new java.awt.Dimension(100, 350));
 		jPanel51.setPreferredSize(new java.awt.Dimension(100, 350));
 		sldHeight.setMajorTickSpacing(10);
@@ -348,8 +351,8 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 
 		jPanel511.setLayout(new java.awt.GridBagLayout());
 
-		jPanel511.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findStringOrDefault("pendulo$rec.exp.pendulo.lbl.friction.tittle","pendulo$rec.exp.pendulo.lbl.friction.tittle")));
+		jPanel511.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"pendulo$rec.exp.pendulo.lbl.friction.tittle", "pendulo$rec.exp.pendulo.lbl.friction.tittle")));
 		jPanel511.setMinimumSize(new java.awt.Dimension(150, 50));
 		jPanel511.setPreferredSize(new java.awt.Dimension(150, 50));
 		radioStatus00.setSelected(true);
@@ -359,7 +362,8 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		jPanel511.add(radioStatus00, gridBagConstraints);
 
-		radioStatus01.setText(ReCResourceBundle.findStringOrDefault("pendulo$rec.exp.pendulo.lbl.friction.25","pendulo$rec.exp.pendulo.lbl.friction.25"));
+		radioStatus01.setText(ReCResourceBundle.findStringOrDefault("pendulo$rec.exp.pendulo.lbl.friction.25",
+				"pendulo$rec.exp.pendulo.lbl.friction.25"));
 		buttonGroupStatus.add(radioStatus01);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
@@ -367,7 +371,8 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		jPanel511.add(radioStatus01, gridBagConstraints);
 
-		radioStatus10.setText(ReCResourceBundle.findStringOrDefault("pendulo$rec.exp.pendulo.lbl.friction.17","pendulo$rec.exp.pendulo.lbl.friction.17"));
+		radioStatus10.setText(ReCResourceBundle.findStringOrDefault("pendulo$rec.exp.pendulo.lbl.friction.17",
+				"pendulo$rec.exp.pendulo.lbl.friction.17"));
 		buttonGroupStatus.add(radioStatus10);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 2;
@@ -375,7 +380,8 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		jPanel511.add(radioStatus10, gridBagConstraints);
 
-		radioStatus11.setText(ReCResourceBundle.findStringOrDefault("pendulo$rec.exp.pendulo.lbl.friction.12","pendulo$rec.exp.pendulo.lbl.friction.12"));
+		radioStatus11.setText(ReCResourceBundle.findStringOrDefault("pendulo$rec.exp.pendulo.lbl.friction.12",
+				"pendulo$rec.exp.pendulo.lbl.friction.12"));
 		buttonGroupStatus.add(radioStatus11);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 3;
@@ -486,7 +492,9 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 	private void checkMaxNumSamples() {
 		lblErrorSamplesTooHigh.setEnabled(sldNumSamples.getValue() > 4 * sldFreq.getValue());
 		btnOK.setEnabled(!lblErrorSamplesTooHigh.isEnabled());
-		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("pendulo$rec.exp.pendulo.lbl.maxsamples.2","pendulo$rec.exp.pendulo.lbl.maxsamples.2") + 4
+		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault(
+				"pendulo$rec.exp.pendulo.lbl.maxsamples.2", "pendulo$rec.exp.pendulo.lbl.maxsamples.2")
+				+ 4
 				* sldFreq.getValue());
 	}
 
@@ -521,9 +529,10 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
 
-		acqConfig.setTotalSamples(sldNumSamples.getValue() == 0 ? 1 : sldNumSamples.getValue());
-		acqConfig.getSelectedHardwareParameter("Altura").setParameterValue("" + sldHeight.getValue());
-		acqConfig.getSelectedHardwareParameter("Amplitude inicial").setParameterValue("" + sldAngle.getValue());
+		getAcquisitionConfig().setTotalSamples(sldNumSamples.getValue() == 0 ? 1 : sldNumSamples.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("Altura").setParameterValue("" + sldHeight.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("Amplitude inicial").setParameterValue(
+				"" + sldAngle.getValue());
 		String atrito = "";
 		if (radioStatus00.isSelected()) {
 			atrito = "Sem atrito";
@@ -534,9 +543,10 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 		} else if (radioStatus11.isSelected()) {
 			atrito = "12 Ohm";
 		}
-		acqConfig.getSelectedHardwareParameter("Atrito").setParameterValue("" + atrito);
-		acqConfig.setSelectedFrequency(new Frequency(sldFreq.getValue(), hardwareInfo.getHardwareFrequencies(0)
-				.getMinimumFrequency().getMultiplier()));
+		getAcquisitionConfig().getSelectedHardwareParameter("Atrito").setParameterValue("" + atrito);
+		getAcquisitionConfig().setSelectedFrequency(
+				new Frequency(sldFreq.getValue(), getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency()
+						.getMultiplier()));
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_btnOKActionPerformed
 
@@ -576,80 +586,12 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 	private javax.swing.JTextField tfFreq;
 	private javax.swing.JTextField tfHeight;
 	private javax.swing.JTextField tfNumSamples;
+
 	// End of variables declaration//GEN-END:variables
-
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	@Override
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	@Override
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	@Override
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
 
 	@Override
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 			sldNumSamples.setValue(acqConfig.getTotalSamples());
 			tfNumSamples.setText("" + acqConfig.getTotalSamples());
@@ -680,20 +622,6 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 	}
 
 	@Override
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	@Override
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
-
-	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/pendulo/resources/pendulo_iconified.gif"));
@@ -701,12 +629,8 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 
 	@Override
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findStringOrDefault("pendulo$rec.exp.pendulo.customizer.title","pendulo$rec.exp.pendulo.customizer.title");
-	}
-
-	@Override
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
+		return ReCResourceBundle.findStringOrDefault("pendulo$rec.exp.pendulo.customizer.title",
+				"pendulo$rec.exp.pendulo.customizer.title");
 	}
 
 }

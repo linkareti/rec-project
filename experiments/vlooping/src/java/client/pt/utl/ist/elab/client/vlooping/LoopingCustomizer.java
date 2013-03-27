@@ -17,16 +17,15 @@ import org.opensourcephysics.display.Dataset;
 import org.opensourcephysics.display.PlottingPanel;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
  * @author Emanuel Antunes
  */
-public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+public class LoopingCustomizer extends AbstractCustomizer {
 
 	/**
 	 * 
@@ -692,18 +691,18 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 	}// GEN-LAST:event_jButtonCancelActionPerformed
 
 	private void jButtonOKActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonOKActionPerformed
-		acqConfig.setTotalSamples(jSliderSamples.getValue());
+		getAcquisitionConfig().setTotalSamples(jSliderSamples.getValue());
 
-		acqConfig.setSelectedFrequency(new Frequency((double) jSliderTBS.getValue(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
+		getAcquisitionConfig().setSelectedFrequency(new Frequency((double) jSliderTBS.getValue(), getHardwareInfo()
+				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), getHardwareInfo()
 				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
 
-		acqConfig.getSelectedHardwareParameter("xini").setParameterValue("" + jSliderXi.getValue() / 10f);
-		acqConfig.getSelectedHardwareParameter("vini").setParameterValue("" + jSliderXi.getValue() / 10F);
-		acqConfig.getSelectedHardwareParameter("h1").setParameterValue("" + jSliderH1.getValue() / 10F);
-		acqConfig.getSelectedHardwareParameter("h2").setParameterValue("" + jSliderH2.getValue() / 10F);
-		acqConfig.getSelectedHardwareParameter("r").setParameterValue("" + jSliderR.getValue() / 10F);
-		acqConfig.getSelectedHardwareParameter("g").setParameterValue("" + jSliderG.getValue() / 10F);
+		getAcquisitionConfig().getSelectedHardwareParameter("xini").setParameterValue("" + jSliderXi.getValue() / 10f);
+		getAcquisitionConfig().getSelectedHardwareParameter("vini").setParameterValue("" + jSliderXi.getValue() / 10F);
+		getAcquisitionConfig().getSelectedHardwareParameter("h1").setParameterValue("" + jSliderH1.getValue() / 10F);
+		getAcquisitionConfig().getSelectedHardwareParameter("h2").setParameterValue("" + jSliderH2.getValue() / 10F);
+		getAcquisitionConfig().getSelectedHardwareParameter("r").setParameterValue("" + jSliderR.getValue() / 10F);
+		getAcquisitionConfig().getSelectedHardwareParameter("g").setParameterValue("" + jSliderG.getValue() / 10F);
 
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_jButtonOKActionPerformed
@@ -742,77 +741,13 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 
 	// ****************************REC********************************************/
 
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
+	
 
 	// ESTE É PARA ALTERAR
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		// Aqui são fornecidos parametros do ultimo utilizador que fez a exp, e'
 		// bom manter!
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 
 			try {
@@ -844,17 +779,6 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 		}
 	}
 
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
 
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
@@ -866,9 +790,6 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 		return "Looping Experiment Configuration Utility";
 	}
 
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
-	}
 
 	private PlottingPanel dpanel;
 	private Dataset dataset;

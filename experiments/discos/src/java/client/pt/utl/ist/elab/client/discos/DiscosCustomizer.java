@@ -9,14 +9,13 @@ import javax.swing.SwingConstants;
 import javax.swing.text.NumberFormatter;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
  */
-public class DiscosCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+public class DiscosCustomizer extends AbstractCustomizer {
 
 	/** Generated UID */
 	private static final long serialVersionUID = 6341409723545193412L;
@@ -154,8 +153,8 @@ public class DiscosCustomizer extends javax.swing.JPanel implements com.linkare.
 		jPanel3.setMinimumSize(new java.awt.Dimension(350, 160));
 		jPanel6.setLayout(new java.awt.GridBagLayout());
 
-		jPanel6.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findStringOrDefault("discos$rec.exp.customizer.title2","discos$rec.exp.customizer.title2")));
+		jPanel6.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"discos$rec.exp.customizer.title2", "discos$rec.exp.customizer.title2")));
 		jPanel6.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
 		jPanel6.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel6.setPreferredSize(new java.awt.Dimension(350, 80));
@@ -205,7 +204,8 @@ public class DiscosCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		lblErrorSamplesTooHigh.setForeground(new java.awt.Color(255, 0, 0));
 		lblErrorSamplesTooHigh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("discos$rec.exp.customizer.label2","discos$rec.exp.customizer.label2"));
+		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("discos$rec.exp.customizer.label2",
+				"discos$rec.exp.customizer.label2"));
 		lblErrorSamplesTooHigh.setEnabled(false);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -218,8 +218,8 @@ public class DiscosCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
-		jPanel1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findStringOrDefault("discos$rec.exp.customizer.title3","discos$rec.exp.customizer.title3")));
+		jPanel1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"discos$rec.exp.customizer.title3", "discos$rec.exp.customizer.title3")));
 		jPanel1.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel1.setPreferredSize(new java.awt.Dimension(350, 80));
 		sldFreq.setMajorTickSpacing(400);
@@ -264,7 +264,8 @@ public class DiscosCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		lblSamplingIntervalTooHigh.setForeground(new java.awt.Color(255, 0, 0));
 		lblSamplingIntervalTooHigh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		lblSamplingIntervalTooHigh.setText(ReCResourceBundle.findStringOrDefault("discos$rec.exp.customizer.label3","discos$rec.exp.customizer.label3"));
+		lblSamplingIntervalTooHigh.setText(ReCResourceBundle.findStringOrDefault("discos$rec.exp.customizer.label3",
+				"discos$rec.exp.customizer.label3"));
 		lblSamplingIntervalTooHigh.setEnabled(false);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -281,8 +282,8 @@ public class DiscosCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		jPanel5.setLayout(new java.awt.GridBagLayout());
 
-		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findStringOrDefault("discos$rec.exp.customizer.title1","discos$rec.exp.customizer.title1")));
+		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"discos$rec.exp.customizer.title1", "discos$rec.exp.customizer.title1")));
 		jPanel5.setMinimumSize(new java.awt.Dimension(350, 160));
 		jPanel5.setPreferredSize(new java.awt.Dimension(350, 160));
 		sldPos1.setMajorTickSpacing(900);
@@ -338,7 +339,8 @@ public class DiscosCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		lblErrorVolsAreEqua.setForeground(new java.awt.Color(255, 0, 0));
 		lblErrorVolsAreEqua.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		lblErrorVolsAreEqua.setText(ReCResourceBundle.findStringOrDefault("discos$rec.exp.customizer.label1","discos$rec.exp.customizer.label1"));
+		lblErrorVolsAreEqua.setText(ReCResourceBundle.findStringOrDefault("discos$rec.exp.customizer.label1",
+				"discos$rec.exp.customizer.label1"));
 		lblErrorVolsAreEqua.setEnabled(false);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -526,7 +528,8 @@ public class DiscosCustomizer extends javax.swing.JPanel implements com.linkare.
 				.setEnabled(Math.abs(sldPos2.getValue() - sldPos1.getValue()) * 80. / 1000.F < sldNumSamples.getValue());
 		btnOK.setEnabled(!lblErrorVolsAreEqua.isEnabled() && !lblErrorSamplesTooHigh.isEnabled()
 				&& !lblSamplingIntervalTooHigh.isEnabled());
-		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("discos$rec.exp.customizer.label2","discos$rec.exp.customizer.label2")
+		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("discos$rec.exp.customizer.label2",
+				"discos$rec.exp.customizer.label2")
 				+ (int) Math.floor(Math.abs(sldPos2.getValue() - sldPos1.getValue()) * 80. / 1000.F));
 	}
 
@@ -535,8 +538,8 @@ public class DiscosCustomizer extends javax.swing.JPanel implements com.linkare.
 		lblSamplingIntervalTooHigh.setEnabled(sldFreq.getValue() > maxValue);
 		btnOK.setEnabled(!lblErrorVolsAreEqua.isEnabled() && !lblErrorSamplesTooHigh.isEnabled()
 				&& !lblSamplingIntervalTooHigh.isEnabled());
-		lblSamplingIntervalTooHigh.setText(ReCResourceBundle.findStringOrDefault("discos$rec.exp.customizer.label2","discos$rec.exp.customizer.label2")
-				+ (int) maxValue);
+		lblSamplingIntervalTooHigh.setText(ReCResourceBundle.findStringOrDefault("discos$rec.exp.customizer.label2",
+				"discos$rec.exp.customizer.label2") + (int) maxValue);
 	}
 
 	private void btnDefaultsActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
@@ -560,13 +563,13 @@ public class DiscosCustomizer extends javax.swing.JPanel implements com.linkare.
 	{// GEN-HEADEREND:event_btnOKActionPerformed
 
 		final int nsamples = sldNumSamples.getValue() < 10 ? 10 : sldNumSamples.getValue();
-		acqConfig.setTotalSamples(nsamples);
+		getAcquisitionConfig().setTotalSamples(nsamples);
 
-		acqConfig.getSelectedHardwareParameter("protocolo").setParameterValue("1");
-		acqConfig.getSelectedHardwareParameter("ang1_min").setParameterValue("" + (sldPos1.getValue() / 10.F));
-		acqConfig.getSelectedHardwareParameter("ang1_max").setParameterValue("" + (sldPos2.getValue() / 10.F));
-		acqConfig.getSelectedHardwareParameter("delta_ang1").setParameterValue("10");
-		acqConfig.getSelectedHardwareParameter("delay").setParameterValue("2");
+		getAcquisitionConfig().getSelectedHardwareParameter("protocolo").setParameterValue("1");
+		getAcquisitionConfig().getSelectedHardwareParameter("ang1_min").setParameterValue("" + (sldPos1.getValue() / 10.F));
+		getAcquisitionConfig().getSelectedHardwareParameter("ang1_max").setParameterValue("" + (sldPos2.getValue() / 10.F));
+		getAcquisitionConfig().getSelectedHardwareParameter("delta_ang1").setParameterValue("10");
+		getAcquisitionConfig().getSelectedHardwareParameter("delay").setParameterValue("2");
 
 		// acqConfig.setSelectedFrequency(new Frequency((double)
 		// sldFreq.getValue(), hardwareInfo
@@ -600,80 +603,12 @@ public class DiscosCustomizer extends javax.swing.JPanel implements com.linkare.
 	private javax.swing.JTextField tfNumSamples;
 	private javax.swing.JFormattedTextField tfPos1;
 	private javax.swing.JFormattedTextField tfPos2;
+
 	// End of variables declaration//GEN-END:variables
-
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	@Override
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	@Override
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	@Override
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
 
 	@Override
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 			System.out.println("DiscosCustomizer.setHardwareAcquisitionConfig(HardwareAcquisitionConfig  acqConfig)");
 			System.out.println("acqConfig: [" + acqConfig + "]");
@@ -702,20 +637,6 @@ public class DiscosCustomizer extends javax.swing.JPanel implements com.linkare.
 	}
 
 	@Override
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	@Override
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
-
-	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/discos/resources/discos_iconified.gif"));
@@ -723,12 +644,8 @@ public class DiscosCustomizer extends javax.swing.JPanel implements com.linkare.
 
 	@Override
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findStringOrDefault("discos$rec.exp.discos.customizer.title","discos$rec.exp.discos.customizer.title");
-	}
-
-	@Override
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
+		return ReCResourceBundle.findStringOrDefault("discos$rec.exp.discos.customizer.title",
+				"discos$rec.exp.discos.customizer.title");
 	}
 
 }

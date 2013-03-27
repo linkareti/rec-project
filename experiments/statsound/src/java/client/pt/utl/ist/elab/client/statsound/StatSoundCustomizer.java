@@ -15,17 +15,15 @@ import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
  * @author Paulo Zenida - Linkare TI
  */
-public class StatSoundCustomizer extends javax.swing.JPanel implements
-		com.linkare.rec.impl.client.customizer.ICustomizer {
+public class StatSoundCustomizer  extends AbstractCustomizer {
 
 	private static final long serialVersionUID = -5352646489640019503L;
 	// types of experiments
@@ -71,8 +69,6 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 			.findStringOrDefault("statsound$rec.exp.statsoud.lbl.statsound.nsamplesMessage","statsound$rec.exp.statsoud.lbl.statsound.nsamplesMessage");
 
 	/** REC */
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
 	private final javax.swing.ImageIcon ICON = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/statsound/resources/sound.gif"));
 	private final String TITLE = ReCResourceBundle.findStringOrDefault("statsound$rec.exp.statsoud.customizer.title","statsound$rec.exp.statsoud.customizer.title");
@@ -1562,62 +1558,62 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 				waveToSend = "SIN";
 				break;
 			}
-			acqConfig.setTotalSamples(jSliderSoundVelocityNSamples.getValue());
-			acqConfig.getSelectedHardwareParameter(EXPERIMENT_TYPE).setParameterValue(SOUND_VEL);
-			acqConfig.getSelectedHardwareParameter(PISTON_START).setParameterValue(
+			getAcquisitionConfig().setTotalSamples(jSliderSoundVelocityNSamples.getValue());
+			getAcquisitionConfig().getSelectedHardwareParameter(EXPERIMENT_TYPE).setParameterValue(SOUND_VEL);
+			getAcquisitionConfig().getSelectedHardwareParameter(PISTON_START).setParameterValue(
 					"" + jSliderSoundVelocityPiston.getValue());
-			acqConfig.getSelectedHardwareParameter(PISTON_END).setParameterValue(
+			getAcquisitionConfig().getSelectedHardwareParameter(PISTON_END).setParameterValue(
 					"" + jSliderSoundVelocityPiston.getValue());
-			acqConfig.getSelectedHardwareParameter(FREQUENCY_START).setParameterValue(
+			getAcquisitionConfig().getSelectedHardwareParameter(FREQUENCY_START).setParameterValue(
 					"" + jSliderSoundVelocityFrequency.getValue());
-			acqConfig.getSelectedHardwareParameter(FREQUENCY_END).setParameterValue(
+			getAcquisitionConfig().getSelectedHardwareParameter(FREQUENCY_END).setParameterValue(
 					"" + jSliderSoundVelocityFrequency.getValue());
-			acqConfig.getSelectedHardwareParameter(WAVE_FORM).setParameterValue(waveToSend);
+			getAcquisitionConfig().getSelectedHardwareParameter(WAVE_FORM).setParameterValue(waveToSend);
 			status = getStatusFromSelectedOptions(jRadioButtonSoundVelocityMic2, jRadioButtonSoundVelocityMic3,
 					jRadioButtonSoundVelocityMic4, jCheckBoxSoundVelocityHeat);
 			break;
 		// Vary piston
 		case 2:
-			acqConfig.setTotalSamples(jSliderStatSoundINSamples.getValue());
-			acqConfig.getSelectedHardwareParameter(EXPERIMENT_TYPE).setParameterValue(VARY_PISTON);
-			acqConfig.getSelectedHardwareParameter(PISTON_START).setParameterValue(
+			getAcquisitionConfig().setTotalSamples(jSliderStatSoundINSamples.getValue());
+			getAcquisitionConfig().getSelectedHardwareParameter(EXPERIMENT_TYPE).setParameterValue(VARY_PISTON);
+			getAcquisitionConfig().getSelectedHardwareParameter(PISTON_START).setParameterValue(
 					"" + jSliderStatSoundIPistonInitial.getValue());
-			acqConfig.getSelectedHardwareParameter(PISTON_END).setParameterValue(
+			getAcquisitionConfig().getSelectedHardwareParameter(PISTON_END).setParameterValue(
 					"" + jSliderStatSoundIPistonEnd.getValue());
-			acqConfig.getSelectedHardwareParameter(FREQUENCY_START).setParameterValue(
+			getAcquisitionConfig().getSelectedHardwareParameter(FREQUENCY_START).setParameterValue(
 					"" + jSliderStatSoundIFrequency.getValue());
-			acqConfig.getSelectedHardwareParameter(FREQUENCY_END).setParameterValue(
+			getAcquisitionConfig().getSelectedHardwareParameter(FREQUENCY_END).setParameterValue(
 					"" + jSliderStatSoundIFrequency.getValue());
 			waveToSend = "SIN";
-			acqConfig.getSelectedHardwareParameter(WAVE_FORM).setParameterValue(waveToSend);
+			getAcquisitionConfig().getSelectedHardwareParameter(WAVE_FORM).setParameterValue(waveToSend);
 			status = getStatusFromSelectedOptions(jRadioButtonStatSoundIMic2, jRadioButtonStatSoundIMic3,
 					jRadioButtonStatSoundIMic4, jCheckBoxStatSoundIHeat);
 			break;
 		// Vary frequency
 		case 3:
-			acqConfig.setTotalSamples(jSliderStatSoundIINSamples.getValue());
-			acqConfig.getSelectedHardwareParameter(EXPERIMENT_TYPE).setParameterValue(VARY_FREQ);
-			acqConfig.getSelectedHardwareParameter(PISTON_START).setParameterValue(
+			getAcquisitionConfig().setTotalSamples(jSliderStatSoundIINSamples.getValue());
+			getAcquisitionConfig().getSelectedHardwareParameter(EXPERIMENT_TYPE).setParameterValue(VARY_FREQ);
+			getAcquisitionConfig().getSelectedHardwareParameter(PISTON_START).setParameterValue(
 					"" + jSliderStatSoundIIPiston.getValue());
-			acqConfig.getSelectedHardwareParameter(PISTON_END).setParameterValue(
+			getAcquisitionConfig().getSelectedHardwareParameter(PISTON_END).setParameterValue(
 					"" + jSliderStatSoundIIPiston.getValue());
-			acqConfig.getSelectedHardwareParameter(FREQUENCY_START).setParameterValue(
+			getAcquisitionConfig().getSelectedHardwareParameter(FREQUENCY_START).setParameterValue(
 					"" + jSliderStatSoundIIFrequencyInitial.getValue());
-			acqConfig.getSelectedHardwareParameter(FREQUENCY_END).setParameterValue(
+			getAcquisitionConfig().getSelectedHardwareParameter(FREQUENCY_END).setParameterValue(
 					"" + jSliderStatSoundIIFrequencyEnd.getValue());
 			waveToSend = "SIN";
-			acqConfig.getSelectedHardwareParameter(WAVE_FORM).setParameterValue(waveToSend);
+			getAcquisitionConfig().getSelectedHardwareParameter(WAVE_FORM).setParameterValue(waveToSend);
 			status = getStatusFromSelectedOptions(jRadioButtonStatSoundIIMic2, jRadioButtonStatSoundIIMic3,
 					jRadioButtonStatSoundIIMic4, jCheckBoxStatSoundIIHeat);
 			break;
 		default:
 			return;
 		}
-		acqConfig.getSelectedHardwareParameter("status").setParameterValue(status);
-		acqConfig.getSelectedHardwareParameter("calibration").setParameterValue("1");
-		for (int i = 0; i < acqConfig.getSelectedHardwareParameters().length; i++) {
-			System.out.println(acqConfig.getSelectedHardwareParameters(i).getParameterName() + "="
-					+ acqConfig.getSelectedHardwareParameters(i).getParameterValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("status").setParameterValue(status);
+		getAcquisitionConfig().getSelectedHardwareParameter("calibration").setParameterValue("1");
+		for (int i = 0; i < getAcquisitionConfig().getSelectedHardwareParameters().length; i++) {
+			System.out.println(getAcquisitionConfig().getSelectedHardwareParameters(i).getParameterName() + "="
+					+ getAcquisitionConfig().getSelectedHardwareParameters(i).getParameterValue());
 		}
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_jButtonOKActionPerformed
@@ -1697,7 +1693,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 					+ StatSoundCustomizer.MIN_VALUE_FOR_VALID_SOUND_VELOCITY_CONFIG);
 			break;
 		case 2:
-			double step = hardwareInfo == null ? DEFAULT_VALUE_OF_PISTON_STEP : Double.valueOf(hardwareInfo
+			double step = getHardwareInfo() == null ? DEFAULT_VALUE_OF_PISTON_STEP : Double.valueOf(getHardwareInfo()
 					.getHardwareParameter(PISTON_START).getParameterSelectionList(
 							INDEX_OF_STEP_IN_PARAMETER_PISTON_START));
 			maxSamples = (int) (Math.abs(jSliderStatSoundIPistonInitial.getValue()
@@ -1736,7 +1732,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 		final javax.swing.JFrame jf = new javax.swing.JFrame();
 		jf.getContentPane().add(new StatSoundCustomizer());
 		jf.pack();
-		jf.show();
+		jf.setVisible(true);
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1828,72 +1824,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 	private javax.swing.ButtonGroup statSoundIIMicGroup;
 	private javax.swing.ButtonGroup statSoundIMicGroup;
 	// End of variables declaration//GEN-END:variables
-	/** REC impl */
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
-
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
+	
 
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return ICON;
@@ -1903,24 +1834,14 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 		return TITLE;
 	}
 
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
-	}
 
-	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
-		if (acqConfig == null) {
-			return;
-		}
-
-	}
-
+	@Override
 	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-		if (this.hardwareInfo != null) {
-			MIN_PISTON_POSITION = Integer.valueOf(this.hardwareInfo.getHardwareParameter(PISTON_START)
+		super.setHardwareInfo(hardwareInfo);
+		if (this.getHardwareInfo() != null) {
+			MIN_PISTON_POSITION = Integer.valueOf(this.getHardwareInfo().getHardwareParameter(PISTON_START)
 					.getParameterSelectionList(INDEX_OF_MIN_POSITION_IN_PARAMETER_PISTON_START));
-			MAX_PISTON_POSITION = Integer.valueOf(this.hardwareInfo.getHardwareParameter(PISTON_START)
+			MAX_PISTON_POSITION = Integer.valueOf(this.getHardwareInfo().getHardwareParameter(PISTON_START)
 					.getParameterSelectionList(INDEX_OF_MAX_POSITION_IN_PARAMETER_PISTON_START));
 		}
 	}

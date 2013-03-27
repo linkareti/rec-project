@@ -9,15 +9,14 @@ package pt.utl.ist.elab.client.vtiro;
 import javax.swing.SwingConstants;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 
 /**
  * 
  * @author nomead
  */
-public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+public class TiroCustomizer extends AbstractCustomizer {
 
 	/**
 	 * 
@@ -206,19 +205,20 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 		final double theta = tiro.getTheta();
 		final double g = gSlider.getValue() / 10d;
 
-		acqConfig.setSelectedFrequency(new Frequency(100d, hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency()
-				.getMultiplier(), hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
-		acqConfig.setTotalSamples(3000);
+		getAcquisitionConfig().setSelectedFrequency(
+				new Frequency(100d, getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(),
+						getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
+		getAcquisitionConfig().setTotalSamples(3000);
 
-		acqConfig.getSelectedHardwareParameter("w").setParameterValue("" + (float) w);
-		acqConfig.getSelectedHardwareParameter("h").setParameterValue("" + (float) h);
-		acqConfig.getSelectedHardwareParameter("v").setParameterValue("" + (float) v);
-		acqConfig.getSelectedHardwareParameter("theta").setParameterValue("" + (float) theta);
-		acqConfig.getSelectedHardwareParameter("g").setParameterValue("" + (float) g);
+		getAcquisitionConfig().getSelectedHardwareParameter("w").setParameterValue("" + (float) w);
+		getAcquisitionConfig().getSelectedHardwareParameter("h").setParameterValue("" + (float) h);
+		getAcquisitionConfig().getSelectedHardwareParameter("v").setParameterValue("" + (float) v);
+		getAcquisitionConfig().getSelectedHardwareParameter("theta").setParameterValue("" + (float) theta);
+		getAcquisitionConfig().getSelectedHardwareParameter("g").setParameterValue("" + (float) g);
 
-		for (int i = 0; i < acqConfig.getSelectedHardwareParameters().length; i++) {
-			System.out.println(acqConfig.getSelectedHardwareParameters(i).getParameterName() + " = "
-					+ acqConfig.getSelectedHardwareParameters(i).getParameterValue());
+		for (int i = 0; i < getAcquisitionConfig().getSelectedHardwareParameters().length; i++) {
+			System.out.println(getAcquisitionConfig().getSelectedHardwareParameters(i).getParameterName() + " = "
+					+ getAcquisitionConfig().getSelectedHardwareParameters(i).getParameterValue());
 		}
 
 		fireICustomizerListenerDone();
@@ -249,80 +249,9 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 		test.setVisible(true);
 	}
 
-	// ****************************REC********************************************/
-
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	@Override
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	@Override
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	@Override
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
-
 	@Override
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 			gSlider.setValue(Math.round(Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("g")) * 10));
 			final double w = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("w"));
@@ -335,20 +264,6 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 	}
 
 	@Override
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	@Override
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
-
-	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/vtiro/resources/tiro_iconified.PNG"));
@@ -357,11 +272,6 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 	@Override
 	public String getCustomizerTitle() {
 		return "Shot Configuration Utility";
-	}
-
-	@Override
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
