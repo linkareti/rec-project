@@ -14,6 +14,8 @@ import java.util.Date;
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
 
+import com.linkare.rec.impl.config.ReCSystemProperty;
+
 /**
  * A Simple Formatter.
  * 
@@ -21,7 +23,7 @@ import java.util.logging.LogRecord;
  */
 public class ReCFormatter extends Formatter {
 
-	private static final String LINE_SEPARATOR = System.getProperty("line.separator");
+	private static final String LINE_SEPARATOR = ReCSystemProperty.LINE_SEPARATOR.getValue();
 
 	private final Date date = new Date();
 
@@ -32,20 +34,15 @@ public class ReCFormatter extends Formatter {
 	 */
 	@Override
 	public synchronized String format(final LogRecord record) {
-		final StringBuffer str = new StringBuffer();
+		final StringBuilder str = new StringBuilder();
 		date.setTime(record.getMillis());
-		// String sourceClassName = record.getSourceClassName();
+		final String sourceClassName = record.getSourceClassName();
 		final String sourceMethodName = record.getSourceMethodName();
-		// String loggerName = record.getLoggerName();
 
 		str.append(dateFormat.format(date)).append(" ");
-		str.append("T-").append(record.getThreadID()).append(" ");
+		str.append("[Thread:").append(Thread.currentThread().getName()).append("] ");
 		str.append(record.getLevel().getName()).append(" ");
-		// str.append(sourceClassName != null ? sourceClassName :
-		// record.getLoggerName());
-		// Use always the logger name
-		str.append(ReCFormatter.getSimpleName(record.getLoggerName()));
-		// str.append(record.getLoggerName());
+		str.append(sourceClassName != null ? sourceClassName : "<UnknownClass>");
 		if (sourceMethodName != null) {
 			str.append(".").append(sourceMethodName);
 		}
@@ -64,15 +61,7 @@ public class ReCFormatter extends Formatter {
 				// best effort
 			}
 		}
+		
 		return str.toString();
 	}
-
-	public static String getSimpleName(final String loggerName) {
-		final int lastIndex = loggerName.lastIndexOf('.');
-		if (lastIndex != -1) {
-			return loggerName.substring(lastIndex + 1);
-		}
-		return loggerName;
-	}
-
 }
