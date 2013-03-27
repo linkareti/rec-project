@@ -5,9 +5,15 @@
 
 package com.linkare.rec.impl.newface.component;
 
+import java.awt.Color;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.logging.Logger;
 
 import javax.swing.JComboBox;
+
+import com.linkare.rec.impl.newface.ReCApplication;
+import com.linkare.rec.web.config.Apparatus;
 
 /**
  * 
@@ -15,6 +21,8 @@ import javax.swing.JComboBox;
  */
 public class ApparatusCombo extends JComboBox {
 
+	private Color defaultListBackgroundColor;
+	private Color defaultVirtualExperimentListBackgroundColor;
 	/**
 	 * 
 	 */
@@ -24,7 +32,20 @@ public class ApparatusCombo extends JComboBox {
 
 	public ApparatusCombo() {
 		super();
+		defaultListBackgroundColor = this.getBackground();
+		defaultVirtualExperimentListBackgroundColor = ReCApplication.getApplication().getContext().getResourceMap()
+				.getColor("virtualExperiments.background");
 		setRenderer(new ApparatusRenderer());
+		this.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getItem() != null && e.getItem() instanceof Apparatus) {
+					ApparatusCombo.this.setBackground(defaultVirtualExperimentListBackgroundColor);
+				} else {
+					ApparatusCombo.this.setBackground(defaultListBackgroundColor);
+				}
+			}
+		});
 	}
 
 }
