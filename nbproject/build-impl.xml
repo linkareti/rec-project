@@ -54,43 +54,6 @@ is divided into following sections:
         <property file="nbproject/project.properties"/>
     </target>
     <target depends="-pre-init,-init-private,-init-user,-init-project,-init-macrodef-property" name="-do-init">
-        <j2seproject1:property name="platform.home" value="platforms.${platform.active}.home"/>
-        <j2seproject1:property name="platform.bootcp" value="platforms.${platform.active}.bootclasspath"/>
-        <j2seproject1:property name="platform.compiler" value="platforms.${platform.active}.compile"/>
-        <j2seproject1:property name="platform.javac.tmp" value="platforms.${platform.active}.javac"/>
-        <condition property="platform.javac" value="${platform.home}/bin/javac">
-            <equals arg1="${platform.javac.tmp}" arg2="$${platforms.${platform.active}.javac}"/>
-        </condition>
-        <property name="platform.javac" value="${platform.javac.tmp}"/>
-        <j2seproject1:property name="platform.java.tmp" value="platforms.${platform.active}.java"/>
-        <condition property="platform.java" value="${platform.home}/bin/java">
-            <equals arg1="${platform.java.tmp}" arg2="$${platforms.${platform.active}.java}"/>
-        </condition>
-        <property name="platform.java" value="${platform.java.tmp}"/>
-        <j2seproject1:property name="platform.javadoc.tmp" value="platforms.${platform.active}.javadoc"/>
-        <condition property="platform.javadoc" value="${platform.home}/bin/javadoc">
-            <equals arg1="${platform.javadoc.tmp}" arg2="$${platforms.${platform.active}.javadoc}"/>
-        </condition>
-        <property name="platform.javadoc" value="${platform.javadoc.tmp}"/>
-        <condition property="platform.invalid" value="true">
-            <or>
-                <contains string="${platform.javac}" substring="$${platforms."/>
-                <contains string="${platform.java}" substring="$${platforms."/>
-                <contains string="${platform.javadoc}" substring="$${platforms."/>
-            </or>
-        </condition>
-        <fail unless="platform.home">Must set platform.home</fail>
-        <fail unless="platform.bootcp">Must set platform.bootcp</fail>
-        <fail unless="platform.java">Must set platform.java</fail>
-        <fail unless="platform.javac">Must set platform.javac</fail>
-        <fail if="platform.invalid">
- The J2SE Platform is not correctly set up.
- Your active platform is: ${platform.active}, but the corresponding property "platforms.${platform.active}.home" is not found in the project's properties files. 
- Either open the project in the IDE and setup the Platform with the same name or add it manually.
- For example like this:
-     ant -Duser.properties.file=&lt;path_to_property_file&gt; jar (where you put the property "platforms.${platform.active}.home" in a .properties file)
-  or ant -Dplatforms.${platform.active}.home=&lt;path_to_JDK_home&gt; jar (where no properties file is used) 
-  </fail>
         <available file="${manifest.file}" property="manifest.available"/>
         <condition property="splashscreen.available">
             <and>
@@ -177,94 +140,17 @@ is divided into following sections:
         </condition>
         <condition property="have.sources">
             <or>
-                <available file="${src.dir}"/>
-                <available file="${client.dir}"/>
-                <available file="${server.dir}"/>
-                <available file="${common.dir}"/>
-                <available file="${ui.dir}"/>
                 <available file="${JVLC.dir}"/>
+                <available file="${src.common2.dir}"/>
+                <available file="${hardwareserver.dir}"/>
+                <available file="${multicast.dir}"/>
+                <available file="${src.client.dir}"/>
+                <available file="${ui.dir}"/>
+                <available file="${src.common.dir}"/>
+                <available file="${driver.dir}"/>
+                <available file="${ReC4.dir}"/>
                 <available file="${ReC2.dir}"/>
                 <available file="${ReC3.dir}"/>
-                <available file="${multicast.dir}"/>
-                <available file="${ReC4.dir}"/>
-                <available file="${hardwareserver.dir}"/>
-                <available file="${driver.dir}"/>
-                <available file="${ReC5.dir}"/>
-                <available file="${ReC6.dir}"/>
-                <available file="${ReC7.dir}"/>
-                <available file="${ReC8.dir}"/>
-                <available file="${ReC9.dir}"/>
-                <available file="${ReC10.dir}"/>
-                <available file="${ReC11.dir}"/>
-                <available file="${ReC12.dir}"/>
-                <available file="${ReC13.dir}"/>
-                <available file="${ReC14.dir}"/>
-                <available file="${ReC15.dir}"/>
-                <available file="${ReC16.dir}"/>
-                <available file="${ReC17.dir}"/>
-                <available file="${ReC18.dir}"/>
-                <available file="${ReC19.dir}"/>
-                <available file="${ReC20.dir}"/>
-                <available file="${ReC21.dir}"/>
-                <available file="${ReC22.dir}"/>
-                <available file="${ReC23.dir}"/>
-                <available file="${ReC24.dir}"/>
-                <available file="${ReC25.dir}"/>
-                <available file="${ReC26.dir}"/>
-                <available file="${ReC27.dir}"/>
-                <available file="${ReC28.dir}"/>
-                <available file="${ReC29.dir}"/>
-                <available file="${ReC30.dir}"/>
-                <available file="${ReC31.dir}"/>
-                <available file="${ReC32.dir}"/>
-                <available file="${ReC33.dir}"/>
-                <available file="${ReC34.dir}"/>
-                <available file="${ReC35.dir}"/>
-                <available file="${ReC36.dir}"/>
-                <available file="${ReC37.dir}"/>
-                <available file="${ReC38.dir}"/>
-                <available file="${ReC39.dir}"/>
-                <available file="${ReC40.dir}"/>
-                <available file="${ReC41.dir}"/>
-                <available file="${ReC42.dir}"/>
-                <available file="${ReC43.dir}"/>
-                <available file="${ReC44.dir}"/>
-                <available file="${ReC45.dir}"/>
-                <available file="${ReC46.dir}"/>
-                <available file="${ReC47.dir}"/>
-                <available file="${ReC48.dir}"/>
-                <available file="${ReC49.dir}"/>
-                <available file="${ReC50.dir}"/>
-                <available file="${ReC51.dir}"/>
-                <available file="${ReC52.dir}"/>
-                <available file="${ReC53.dir}"/>
-                <available file="${ReC54.dir}"/>
-                <available file="${ReC55.dir}"/>
-                <available file="${ReC56.dir}"/>
-                <available file="${ReC57.dir}"/>
-                <available file="${ReC58.dir}"/>
-                <available file="${ReC59.dir}"/>
-                <available file="${ReC60.dir}"/>
-                <available file="${ReC61.dir}"/>
-                <available file="${ReC62.dir}"/>
-                <available file="${ReC63.dir}"/>
-                <available file="${ReC64.dir}"/>
-                <available file="${ReC65.dir}"/>
-                <available file="${ReC66.dir}"/>
-                <available file="${ReC67.dir}"/>
-                <available file="${ReC68.dir}"/>
-                <available file="${ReC69.dir}"/>
-                <available file="${ReC70.dir}"/>
-                <available file="${ReC71.dir}"/>
-                <available file="${ReC72.dir}"/>
-                <available file="${ReC73.dir}"/>
-                <available file="${ReC74.dir}"/>
-                <available file="${ReC75.dir}"/>
-                <available file="${ReC76.dir}"/>
-                <available file="${ReC77.dir}"/>
-                <available file="${ReC78.dir}"/>
-                <available file="${ReC79.dir}"/>
-                <available file="${ReC80.dir}"/>
             </or>
         </condition>
         <condition property="netbeans.home+have.tests">
@@ -311,6 +197,15 @@ is divided into following sections:
         <condition else="" property="endorsed.classpath.cmd.line.arg" value="-Xbootclasspath/p:'${toString:endorsed.classpath.path}'">
             <length length="0" string="${endorsed.classpath}" when="greater"/>
         </condition>
+        <condition else="false" property="jdkBug6558476">
+            <and>
+                <matches pattern="1\.[56]" string="${java.specification.version}"/>
+                <not>
+                    <os family="unix"/>
+                </not>
+            </and>
+        </condition>
+        <property name="javac.fork" value="${jdkBug6558476}"/>
         <property name="jar.index" value="false"/>
         <property name="jar.index.metainf" value="${jar.index}"/>
         <available file="${meta.inf.dir}/persistence.xml" property="has.persistence.xml"/>
@@ -320,94 +215,17 @@ is divided into following sections:
         <!-- You can override this target in the ../build.xml file. -->
     </target>
     <target depends="-pre-init,-init-private,-init-user,-init-project,-do-init" name="-init-check">
-        <fail unless="src.dir">Must set src.dir</fail>
-        <fail unless="client.dir">Must set client.dir</fail>
-        <fail unless="server.dir">Must set server.dir</fail>
-        <fail unless="common.dir">Must set common.dir</fail>
-        <fail unless="ui.dir">Must set ui.dir</fail>
         <fail unless="JVLC.dir">Must set JVLC.dir</fail>
+        <fail unless="src.common2.dir">Must set src.common2.dir</fail>
+        <fail unless="hardwareserver.dir">Must set hardwareserver.dir</fail>
+        <fail unless="multicast.dir">Must set multicast.dir</fail>
+        <fail unless="src.client.dir">Must set src.client.dir</fail>
+        <fail unless="ui.dir">Must set ui.dir</fail>
+        <fail unless="src.common.dir">Must set src.common.dir</fail>
+        <fail unless="driver.dir">Must set driver.dir</fail>
+        <fail unless="ReC4.dir">Must set ReC4.dir</fail>
         <fail unless="ReC2.dir">Must set ReC2.dir</fail>
         <fail unless="ReC3.dir">Must set ReC3.dir</fail>
-        <fail unless="multicast.dir">Must set multicast.dir</fail>
-        <fail unless="ReC4.dir">Must set ReC4.dir</fail>
-        <fail unless="hardwareserver.dir">Must set hardwareserver.dir</fail>
-        <fail unless="driver.dir">Must set driver.dir</fail>
-        <fail unless="ReC5.dir">Must set ReC5.dir</fail>
-        <fail unless="ReC6.dir">Must set ReC6.dir</fail>
-        <fail unless="ReC7.dir">Must set ReC7.dir</fail>
-        <fail unless="ReC8.dir">Must set ReC8.dir</fail>
-        <fail unless="ReC9.dir">Must set ReC9.dir</fail>
-        <fail unless="ReC10.dir">Must set ReC10.dir</fail>
-        <fail unless="ReC11.dir">Must set ReC11.dir</fail>
-        <fail unless="ReC12.dir">Must set ReC12.dir</fail>
-        <fail unless="ReC13.dir">Must set ReC13.dir</fail>
-        <fail unless="ReC14.dir">Must set ReC14.dir</fail>
-        <fail unless="ReC15.dir">Must set ReC15.dir</fail>
-        <fail unless="ReC16.dir">Must set ReC16.dir</fail>
-        <fail unless="ReC17.dir">Must set ReC17.dir</fail>
-        <fail unless="ReC18.dir">Must set ReC18.dir</fail>
-        <fail unless="ReC19.dir">Must set ReC19.dir</fail>
-        <fail unless="ReC20.dir">Must set ReC20.dir</fail>
-        <fail unless="ReC21.dir">Must set ReC21.dir</fail>
-        <fail unless="ReC22.dir">Must set ReC22.dir</fail>
-        <fail unless="ReC23.dir">Must set ReC23.dir</fail>
-        <fail unless="ReC24.dir">Must set ReC24.dir</fail>
-        <fail unless="ReC25.dir">Must set ReC25.dir</fail>
-        <fail unless="ReC26.dir">Must set ReC26.dir</fail>
-        <fail unless="ReC27.dir">Must set ReC27.dir</fail>
-        <fail unless="ReC28.dir">Must set ReC28.dir</fail>
-        <fail unless="ReC29.dir">Must set ReC29.dir</fail>
-        <fail unless="ReC30.dir">Must set ReC30.dir</fail>
-        <fail unless="ReC31.dir">Must set ReC31.dir</fail>
-        <fail unless="ReC32.dir">Must set ReC32.dir</fail>
-        <fail unless="ReC33.dir">Must set ReC33.dir</fail>
-        <fail unless="ReC34.dir">Must set ReC34.dir</fail>
-        <fail unless="ReC35.dir">Must set ReC35.dir</fail>
-        <fail unless="ReC36.dir">Must set ReC36.dir</fail>
-        <fail unless="ReC37.dir">Must set ReC37.dir</fail>
-        <fail unless="ReC38.dir">Must set ReC38.dir</fail>
-        <fail unless="ReC39.dir">Must set ReC39.dir</fail>
-        <fail unless="ReC40.dir">Must set ReC40.dir</fail>
-        <fail unless="ReC41.dir">Must set ReC41.dir</fail>
-        <fail unless="ReC42.dir">Must set ReC42.dir</fail>
-        <fail unless="ReC43.dir">Must set ReC43.dir</fail>
-        <fail unless="ReC44.dir">Must set ReC44.dir</fail>
-        <fail unless="ReC45.dir">Must set ReC45.dir</fail>
-        <fail unless="ReC46.dir">Must set ReC46.dir</fail>
-        <fail unless="ReC47.dir">Must set ReC47.dir</fail>
-        <fail unless="ReC48.dir">Must set ReC48.dir</fail>
-        <fail unless="ReC49.dir">Must set ReC49.dir</fail>
-        <fail unless="ReC50.dir">Must set ReC50.dir</fail>
-        <fail unless="ReC51.dir">Must set ReC51.dir</fail>
-        <fail unless="ReC52.dir">Must set ReC52.dir</fail>
-        <fail unless="ReC53.dir">Must set ReC53.dir</fail>
-        <fail unless="ReC54.dir">Must set ReC54.dir</fail>
-        <fail unless="ReC55.dir">Must set ReC55.dir</fail>
-        <fail unless="ReC56.dir">Must set ReC56.dir</fail>
-        <fail unless="ReC57.dir">Must set ReC57.dir</fail>
-        <fail unless="ReC58.dir">Must set ReC58.dir</fail>
-        <fail unless="ReC59.dir">Must set ReC59.dir</fail>
-        <fail unless="ReC60.dir">Must set ReC60.dir</fail>
-        <fail unless="ReC61.dir">Must set ReC61.dir</fail>
-        <fail unless="ReC62.dir">Must set ReC62.dir</fail>
-        <fail unless="ReC63.dir">Must set ReC63.dir</fail>
-        <fail unless="ReC64.dir">Must set ReC64.dir</fail>
-        <fail unless="ReC65.dir">Must set ReC65.dir</fail>
-        <fail unless="ReC66.dir">Must set ReC66.dir</fail>
-        <fail unless="ReC67.dir">Must set ReC67.dir</fail>
-        <fail unless="ReC68.dir">Must set ReC68.dir</fail>
-        <fail unless="ReC69.dir">Must set ReC69.dir</fail>
-        <fail unless="ReC70.dir">Must set ReC70.dir</fail>
-        <fail unless="ReC71.dir">Must set ReC71.dir</fail>
-        <fail unless="ReC72.dir">Must set ReC72.dir</fail>
-        <fail unless="ReC73.dir">Must set ReC73.dir</fail>
-        <fail unless="ReC74.dir">Must set ReC74.dir</fail>
-        <fail unless="ReC75.dir">Must set ReC75.dir</fail>
-        <fail unless="ReC76.dir">Must set ReC76.dir</fail>
-        <fail unless="ReC77.dir">Must set ReC77.dir</fail>
-        <fail unless="ReC78.dir">Must set ReC78.dir</fail>
-        <fail unless="ReC79.dir">Must set ReC79.dir</fail>
-        <fail unless="ReC80.dir">Must set ReC80.dir</fail>
         <fail unless="test.src.dir">Must set test.src.dir</fail>
         <fail unless="build.dir">Must set build.dir</fail>
         <fail unless="dist.dir">Must set dist.dir</fail>
@@ -429,7 +247,7 @@ is divided into following sections:
     </target>
     <target depends="-init-ap-cmdline-properties" if="ap.supported.internal" name="-init-macrodef-javac-with-processors">
         <macrodef name="javac" uri="http://www.netbeans.org/ns/j2se-project/3">
-            <attribute default="${src.dir}:${client.dir}:${server.dir}:${common.dir}:${ui.dir}:${JVLC.dir}:${ReC2.dir}:${ReC3.dir}:${multicast.dir}:${ReC4.dir}:${hardwareserver.dir}:${driver.dir}:${ReC5.dir}:${ReC6.dir}:${ReC7.dir}:${ReC8.dir}:${ReC9.dir}:${ReC10.dir}:${ReC11.dir}:${ReC12.dir}:${ReC13.dir}:${ReC14.dir}:${ReC15.dir}:${ReC16.dir}:${ReC17.dir}:${ReC18.dir}:${ReC19.dir}:${ReC20.dir}:${ReC21.dir}:${ReC22.dir}:${ReC23.dir}:${ReC24.dir}:${ReC25.dir}:${ReC26.dir}:${ReC27.dir}:${ReC28.dir}:${ReC29.dir}:${ReC30.dir}:${ReC31.dir}:${ReC32.dir}:${ReC33.dir}:${ReC34.dir}:${ReC35.dir}:${ReC36.dir}:${ReC37.dir}:${ReC38.dir}:${ReC39.dir}:${ReC40.dir}:${ReC41.dir}:${ReC42.dir}:${ReC43.dir}:${ReC44.dir}:${ReC45.dir}:${ReC46.dir}:${ReC47.dir}:${ReC48.dir}:${ReC49.dir}:${ReC50.dir}:${ReC51.dir}:${ReC52.dir}:${ReC53.dir}:${ReC54.dir}:${ReC55.dir}:${ReC56.dir}:${ReC57.dir}:${ReC58.dir}:${ReC59.dir}:${ReC60.dir}:${ReC61.dir}:${ReC62.dir}:${ReC63.dir}:${ReC64.dir}:${ReC65.dir}:${ReC66.dir}:${ReC67.dir}:${ReC68.dir}:${ReC69.dir}:${ReC70.dir}:${ReC71.dir}:${ReC72.dir}:${ReC73.dir}:${ReC74.dir}:${ReC75.dir}:${ReC76.dir}:${ReC77.dir}:${ReC78.dir}:${ReC79.dir}:${ReC80.dir}" name="srcdir"/>
+            <attribute default="${JVLC.dir}:${src.common2.dir}:${hardwareserver.dir}:${multicast.dir}:${src.client.dir}:${ui.dir}:${src.common.dir}:${driver.dir}:${ReC4.dir}:${ReC2.dir}:${ReC3.dir}" name="srcdir"/>
             <attribute default="${build.classes.dir}" name="destdir"/>
             <attribute default="${javac.classpath}" name="classpath"/>
             <attribute default="${javac.processorpath}" name="processorpath"/>
@@ -444,7 +262,7 @@ is divided into following sections:
                 <property location="${build.dir}/empty" name="empty.dir"/>
                 <mkdir dir="${empty.dir}"/>
                 <mkdir dir="@{apgeneratedsrcdir}"/>
-                <javac debug="@{debug}" deprecation="${javac.deprecation}" destdir="@{destdir}" encoding="${source.encoding}" excludes="@{excludes}" executable="${platform.javac}" fork="yes" includeantruntime="false" includes="@{includes}" source="${javac.source}" sourcepath="@{sourcepath}" srcdir="@{srcdir}" target="${javac.target}" tempdir="${java.io.tmpdir}">
+                <javac debug="@{debug}" deprecation="${javac.deprecation}" destdir="@{destdir}" encoding="${source.encoding}" excludes="@{excludes}" fork="${javac.fork}" includeantruntime="false" includes="@{includes}" source="${javac.source}" sourcepath="@{sourcepath}" srcdir="@{srcdir}" target="${javac.target}" tempdir="${java.io.tmpdir}">
                     <src>
                         <dirset dir="@{gensrcdir}" erroronmissingdir="false">
                             <include name="*"/>
@@ -469,7 +287,7 @@ is divided into following sections:
     </target>
     <target depends="-init-ap-cmdline-properties" name="-init-macrodef-javac-without-processors" unless="ap.supported.internal">
         <macrodef name="javac" uri="http://www.netbeans.org/ns/j2se-project/3">
-            <attribute default="${src.dir}:${client.dir}:${server.dir}:${common.dir}:${ui.dir}:${JVLC.dir}:${ReC2.dir}:${ReC3.dir}:${multicast.dir}:${ReC4.dir}:${hardwareserver.dir}:${driver.dir}:${ReC5.dir}:${ReC6.dir}:${ReC7.dir}:${ReC8.dir}:${ReC9.dir}:${ReC10.dir}:${ReC11.dir}:${ReC12.dir}:${ReC13.dir}:${ReC14.dir}:${ReC15.dir}:${ReC16.dir}:${ReC17.dir}:${ReC18.dir}:${ReC19.dir}:${ReC20.dir}:${ReC21.dir}:${ReC22.dir}:${ReC23.dir}:${ReC24.dir}:${ReC25.dir}:${ReC26.dir}:${ReC27.dir}:${ReC28.dir}:${ReC29.dir}:${ReC30.dir}:${ReC31.dir}:${ReC32.dir}:${ReC33.dir}:${ReC34.dir}:${ReC35.dir}:${ReC36.dir}:${ReC37.dir}:${ReC38.dir}:${ReC39.dir}:${ReC40.dir}:${ReC41.dir}:${ReC42.dir}:${ReC43.dir}:${ReC44.dir}:${ReC45.dir}:${ReC46.dir}:${ReC47.dir}:${ReC48.dir}:${ReC49.dir}:${ReC50.dir}:${ReC51.dir}:${ReC52.dir}:${ReC53.dir}:${ReC54.dir}:${ReC55.dir}:${ReC56.dir}:${ReC57.dir}:${ReC58.dir}:${ReC59.dir}:${ReC60.dir}:${ReC61.dir}:${ReC62.dir}:${ReC63.dir}:${ReC64.dir}:${ReC65.dir}:${ReC66.dir}:${ReC67.dir}:${ReC68.dir}:${ReC69.dir}:${ReC70.dir}:${ReC71.dir}:${ReC72.dir}:${ReC73.dir}:${ReC74.dir}:${ReC75.dir}:${ReC76.dir}:${ReC77.dir}:${ReC78.dir}:${ReC79.dir}:${ReC80.dir}" name="srcdir"/>
+            <attribute default="${JVLC.dir}:${src.common2.dir}:${hardwareserver.dir}:${multicast.dir}:${src.client.dir}:${ui.dir}:${src.common.dir}:${driver.dir}:${ReC4.dir}:${ReC2.dir}:${ReC3.dir}" name="srcdir"/>
             <attribute default="${build.classes.dir}" name="destdir"/>
             <attribute default="${javac.classpath}" name="classpath"/>
             <attribute default="${javac.processorpath}" name="processorpath"/>
@@ -483,7 +301,7 @@ is divided into following sections:
             <sequential>
                 <property location="${build.dir}/empty" name="empty.dir"/>
                 <mkdir dir="${empty.dir}"/>
-                <javac debug="@{debug}" deprecation="${javac.deprecation}" destdir="@{destdir}" encoding="${source.encoding}" excludes="@{excludes}" executable="${platform.javac}" fork="yes" includeantruntime="false" includes="@{includes}" source="${javac.source}" sourcepath="@{sourcepath}" srcdir="@{srcdir}" target="${javac.target}" tempdir="${java.io.tmpdir}">
+                <javac debug="@{debug}" deprecation="${javac.deprecation}" destdir="@{destdir}" encoding="${source.encoding}" excludes="@{excludes}" fork="${javac.fork}" includeantruntime="false" includes="@{includes}" source="${javac.source}" sourcepath="@{sourcepath}" srcdir="@{srcdir}" target="${javac.target}" tempdir="${java.io.tmpdir}">
                     <src>
                         <dirset dir="@{gensrcdir}" erroronmissingdir="false">
                             <include name="*"/>
@@ -501,7 +319,7 @@ is divided into following sections:
     </target>
     <target depends="-init-macrodef-javac-with-processors,-init-macrodef-javac-without-processors" name="-init-macrodef-javac">
         <macrodef name="depend" uri="http://www.netbeans.org/ns/j2se-project/3">
-            <attribute default="${src.dir}:${client.dir}:${server.dir}:${common.dir}:${ui.dir}:${JVLC.dir}:${ReC2.dir}:${ReC3.dir}:${multicast.dir}:${ReC4.dir}:${hardwareserver.dir}:${driver.dir}:${ReC5.dir}:${ReC6.dir}:${ReC7.dir}:${ReC8.dir}:${ReC9.dir}:${ReC10.dir}:${ReC11.dir}:${ReC12.dir}:${ReC13.dir}:${ReC14.dir}:${ReC15.dir}:${ReC16.dir}:${ReC17.dir}:${ReC18.dir}:${ReC19.dir}:${ReC20.dir}:${ReC21.dir}:${ReC22.dir}:${ReC23.dir}:${ReC24.dir}:${ReC25.dir}:${ReC26.dir}:${ReC27.dir}:${ReC28.dir}:${ReC29.dir}:${ReC30.dir}:${ReC31.dir}:${ReC32.dir}:${ReC33.dir}:${ReC34.dir}:${ReC35.dir}:${ReC36.dir}:${ReC37.dir}:${ReC38.dir}:${ReC39.dir}:${ReC40.dir}:${ReC41.dir}:${ReC42.dir}:${ReC43.dir}:${ReC44.dir}:${ReC45.dir}:${ReC46.dir}:${ReC47.dir}:${ReC48.dir}:${ReC49.dir}:${ReC50.dir}:${ReC51.dir}:${ReC52.dir}:${ReC53.dir}:${ReC54.dir}:${ReC55.dir}:${ReC56.dir}:${ReC57.dir}:${ReC58.dir}:${ReC59.dir}:${ReC60.dir}:${ReC61.dir}:${ReC62.dir}:${ReC63.dir}:${ReC64.dir}:${ReC65.dir}:${ReC66.dir}:${ReC67.dir}:${ReC68.dir}:${ReC69.dir}:${ReC70.dir}:${ReC71.dir}:${ReC72.dir}:${ReC73.dir}:${ReC74.dir}:${ReC75.dir}:${ReC76.dir}:${ReC77.dir}:${ReC78.dir}:${ReC79.dir}:${ReC80.dir}" name="srcdir"/>
+            <attribute default="${JVLC.dir}:${src.common2.dir}:${hardwareserver.dir}:${multicast.dir}:${src.client.dir}:${ui.dir}:${src.common.dir}:${driver.dir}:${ReC4.dir}:${ReC2.dir}:${ReC3.dir}" name="srcdir"/>
             <attribute default="${build.classes.dir}" name="destdir"/>
             <attribute default="${javac.classpath}" name="classpath"/>
             <sequential>
@@ -540,7 +358,7 @@ is divided into following sections:
             <attribute default="**" name="testincludes"/>
             <sequential>
                 <property name="junit.forkmode" value="perTest"/>
-                <junit dir="${work.dir}" errorproperty="tests.failed" failureproperty="tests.failed" fork="true" forkmode="${junit.forkmode}" jvm="${platform.java}" showoutput="true" tempdir="${build.dir}">
+                <junit dir="${work.dir}" errorproperty="tests.failed" failureproperty="tests.failed" fork="true" forkmode="${junit.forkmode}" showoutput="true" tempdir="${build.dir}">
                     <batchtest todir="${build.test.results.dir}">
                         <fileset dir="${test.src.dir}" excludes="@{excludes},${excludes}" includes="@{includes}">
                             <filename name="@{testincludes}"/>
@@ -616,9 +434,6 @@ is divided into following sections:
                     <classpath>
                         <path path="@{classpath}"/>
                     </classpath>
-                    <bootclasspath>
-                        <path path="${platform.bootcp}"/>
-                    </bootclasspath>
                 </nbjpdastart>
             </sequential>
         </macrodef>
@@ -634,9 +449,7 @@ is divided into following sections:
         </macrodef>
     </target>
     <target name="-init-debug-args">
-        <exec executable="${platform.java}" outputproperty="version-output">
-            <arg value="-version"/>
-        </exec>
+        <property name="version-output" value="java version &quot;${ant.java.version}"/>
         <condition property="have-jdk-older-than-1.4">
             <or>
                 <contains string="${version-output}" substring="java version &quot;1.0"/>
@@ -661,7 +474,7 @@ is divided into following sections:
             <attribute default="${debug.classpath}" name="classpath"/>
             <element name="customize" optional="true"/>
             <sequential>
-                <java classname="@{classname}" dir="${work.dir}" fork="true" jvm="${platform.java}">
+                <java classname="@{classname}" dir="${work.dir}" fork="true">
                     <jvmarg line="${endorsed.classpath.cmd.line.arg}"/>
                     <jvmarg line="${debug-args-line}"/>
                     <jvmarg value="-Xrunjdwp:transport=${debug-transport},address=${jpda.address}"/>
@@ -686,7 +499,7 @@ is divided into following sections:
             <attribute default="${run.classpath}" name="classpath"/>
             <element name="customize" optional="true"/>
             <sequential>
-                <java classname="@{classname}" dir="${work.dir}" fork="true" jvm="${platform.java}">
+                <java classname="@{classname}" dir="${work.dir}" fork="true">
                     <jvmarg line="${endorsed.classpath.cmd.line.arg}"/>
                     <jvmarg value="-Dfile.encoding=${runtime.encoding}"/>
                     <redirector errorencoding="${runtime.encoding}" inputencoding="${runtime.encoding}" outputencoding="${runtime.encoding}"/>
@@ -804,99 +617,22 @@ is divided into following sections:
                 <include name="*"/>
             </dirset>
         </pathconvert>
-        <j2seproject3:depend srcdir="${src.dir}:${client.dir}:${server.dir}:${common.dir}:${ui.dir}:${JVLC.dir}:${ReC2.dir}:${ReC3.dir}:${multicast.dir}:${ReC4.dir}:${hardwareserver.dir}:${driver.dir}:${ReC5.dir}:${ReC6.dir}:${ReC7.dir}:${ReC8.dir}:${ReC9.dir}:${ReC10.dir}:${ReC11.dir}:${ReC12.dir}:${ReC13.dir}:${ReC14.dir}:${ReC15.dir}:${ReC16.dir}:${ReC17.dir}:${ReC18.dir}:${ReC19.dir}:${ReC20.dir}:${ReC21.dir}:${ReC22.dir}:${ReC23.dir}:${ReC24.dir}:${ReC25.dir}:${ReC26.dir}:${ReC27.dir}:${ReC28.dir}:${ReC29.dir}:${ReC30.dir}:${ReC31.dir}:${ReC32.dir}:${ReC33.dir}:${ReC34.dir}:${ReC35.dir}:${ReC36.dir}:${ReC37.dir}:${ReC38.dir}:${ReC39.dir}:${ReC40.dir}:${ReC41.dir}:${ReC42.dir}:${ReC43.dir}:${ReC44.dir}:${ReC45.dir}:${ReC46.dir}:${ReC47.dir}:${ReC48.dir}:${ReC49.dir}:${ReC50.dir}:${ReC51.dir}:${ReC52.dir}:${ReC53.dir}:${ReC54.dir}:${ReC55.dir}:${ReC56.dir}:${ReC57.dir}:${ReC58.dir}:${ReC59.dir}:${ReC60.dir}:${ReC61.dir}:${ReC62.dir}:${ReC63.dir}:${ReC64.dir}:${ReC65.dir}:${ReC66.dir}:${ReC67.dir}:${ReC68.dir}:${ReC69.dir}:${ReC70.dir}:${ReC71.dir}:${ReC72.dir}:${ReC73.dir}:${ReC74.dir}:${ReC75.dir}:${ReC76.dir}:${ReC77.dir}:${ReC78.dir}:${ReC79.dir}:${ReC80.dir}:${build.generated.subdirs}"/>
+        <j2seproject3:depend srcdir="${JVLC.dir}:${src.common2.dir}:${hardwareserver.dir}:${multicast.dir}:${src.client.dir}:${ui.dir}:${src.common.dir}:${driver.dir}:${ReC4.dir}:${ReC2.dir}:${ReC3.dir}:${build.generated.subdirs}"/>
     </target>
     <target depends="init,deps-jar,-pre-pre-compile,-pre-compile, -copy-persistence-xml,-compile-depend" if="have.sources" name="-do-compile">
         <j2seproject3:javac gensrcdir="${build.generated.sources.dir}"/>
         <copy todir="${build.classes.dir}">
-            <fileset dir="${src.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${client.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${server.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${common.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ui.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
             <fileset dir="${JVLC.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
+            <fileset dir="${src.common2.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
+            <fileset dir="${hardwareserver.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
+            <fileset dir="${multicast.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
+            <fileset dir="${src.client.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
+            <fileset dir="${ui.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
+            <fileset dir="${src.common.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
+            <fileset dir="${driver.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
+            <fileset dir="${ReC4.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
             <fileset dir="${ReC2.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
             <fileset dir="${ReC3.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${multicast.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC4.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${hardwareserver.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${driver.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC5.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC6.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC7.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC8.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC9.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC10.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC11.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC12.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC13.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC14.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC15.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC16.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC17.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC18.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC19.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC20.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC21.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC22.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC23.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC24.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC25.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC26.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC27.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC28.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC29.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC30.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC31.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC32.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC33.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC34.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC35.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC36.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC37.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC38.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC39.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC40.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC41.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC42.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC43.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC44.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC45.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC46.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC47.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC48.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC49.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC50.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC51.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC52.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC53.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC54.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC55.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC56.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC57.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC58.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC59.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC60.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC61.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC62.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC63.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC64.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC65.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC66.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC67.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC68.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC69.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC70.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC71.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC72.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC73.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC74.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC75.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC76.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC77.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC78.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC79.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
-            <fileset dir="${ReC80.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
         </copy>
     </target>
     <target if="has.persistence.xml" name="-copy-persistence-xml">
@@ -917,7 +653,7 @@ is divided into following sections:
     <target depends="init,deps-jar,-pre-pre-compile" name="-do-compile-single">
         <fail unless="javac.includes">Must select some files in the IDE or set javac.includes</fail>
         <j2seproject3:force-recompile/>
-        <j2seproject3:javac excludes="" gensrcdir="${build.generated.sources.dir}" includes="${javac.includes}" sourcepath="${src.dir}:${client.dir}:${server.dir}:${common.dir}:${ui.dir}:${JVLC.dir}:${ReC2.dir}:${ReC3.dir}:${multicast.dir}:${ReC4.dir}:${hardwareserver.dir}:${driver.dir}:${ReC5.dir}:${ReC6.dir}:${ReC7.dir}:${ReC8.dir}:${ReC9.dir}:${ReC10.dir}:${ReC11.dir}:${ReC12.dir}:${ReC13.dir}:${ReC14.dir}:${ReC15.dir}:${ReC16.dir}:${ReC17.dir}:${ReC18.dir}:${ReC19.dir}:${ReC20.dir}:${ReC21.dir}:${ReC22.dir}:${ReC23.dir}:${ReC24.dir}:${ReC25.dir}:${ReC26.dir}:${ReC27.dir}:${ReC28.dir}:${ReC29.dir}:${ReC30.dir}:${ReC31.dir}:${ReC32.dir}:${ReC33.dir}:${ReC34.dir}:${ReC35.dir}:${ReC36.dir}:${ReC37.dir}:${ReC38.dir}:${ReC39.dir}:${ReC40.dir}:${ReC41.dir}:${ReC42.dir}:${ReC43.dir}:${ReC44.dir}:${ReC45.dir}:${ReC46.dir}:${ReC47.dir}:${ReC48.dir}:${ReC49.dir}:${ReC50.dir}:${ReC51.dir}:${ReC52.dir}:${ReC53.dir}:${ReC54.dir}:${ReC55.dir}:${ReC56.dir}:${ReC57.dir}:${ReC58.dir}:${ReC59.dir}:${ReC60.dir}:${ReC61.dir}:${ReC62.dir}:${ReC63.dir}:${ReC64.dir}:${ReC65.dir}:${ReC66.dir}:${ReC67.dir}:${ReC68.dir}:${ReC69.dir}:${ReC70.dir}:${ReC71.dir}:${ReC72.dir}:${ReC73.dir}:${ReC74.dir}:${ReC75.dir}:${ReC76.dir}:${ReC77.dir}:${ReC78.dir}:${ReC79.dir}:${ReC80.dir}"/>
+        <j2seproject3:javac excludes="" gensrcdir="${build.generated.sources.dir}" includes="${javac.includes}" sourcepath="${JVLC.dir}:${src.common2.dir}:${hardwareserver.dir}:${multicast.dir}:${src.client.dir}:${ui.dir}:${src.common.dir}:${driver.dir}:${ReC4.dir}:${ReC2.dir}:${ReC3.dir}"/>
     </target>
     <target name="-post-compile-single">
         <!-- Empty placeholder for easier customization. -->
@@ -956,7 +692,7 @@ is divided into following sections:
             <path path="${run.classpath}"/>
             <map from="${build.classes.dir.resolved}" to="${dist.jar.resolved}"/>
         </pathconvert>
-        <echo level="info">${platform.java} -cp "${run.classpath.with.dist.jar}" ${main.class}</echo>
+        <echo level="info">java -cp "${run.classpath.with.dist.jar}" ${main.class}</echo>
     </target>
     <target depends="init" if="do.archive" name="-do-jar-with-libraries-create-manifest" unless="manifest.available">
         <tempfile deleteonexit="true" destdir="${build.dir}" property="tmp.manifest.file"/>
@@ -983,7 +719,7 @@ is divided into following sections:
         <j2seproject3:copylibs manifest="${tmp.manifest.file}"/>
         <echo level="info">To run this application from the command line without Ant, try:</echo>
         <property location="${dist.jar}" name="dist.jar.resolved"/>
-        <echo level="info">${platform.java} -jar "${dist.jar.resolved}"</echo>
+        <echo level="info">java -jar "${dist.jar.resolved}"</echo>
     </target>
     <target depends="-do-jar-with-libraries-pack" if="do.archive" name="-do-jar-with-libraries-delete-manifest">
         <delete>
@@ -1133,26 +869,35 @@ is divided into following sections:
             -->
     <target depends="init" if="have.sources" name="-javadoc-build">
         <mkdir dir="${dist.javadoc.dir}"/>
-        <javadoc additionalparam="${javadoc.additionalparam}" author="${javadoc.author}" charset="UTF-8" destdir="${dist.javadoc.dir}" docencoding="UTF-8" encoding="${javadoc.encoding.used}" executable="${platform.javadoc}" failonerror="true" noindex="${javadoc.noindex}" nonavbar="${javadoc.nonavbar}" notree="${javadoc.notree}" private="${javadoc.private}" source="${javac.source}" splitindex="${javadoc.splitindex}" use="${javadoc.use}" useexternalfile="true" version="${javadoc.version}" windowtitle="${javadoc.windowtitle}">
+        <javadoc additionalparam="${javadoc.additionalparam}" author="${javadoc.author}" charset="UTF-8" destdir="${dist.javadoc.dir}" docencoding="UTF-8" encoding="${javadoc.encoding.used}" failonerror="true" noindex="${javadoc.noindex}" nonavbar="${javadoc.nonavbar}" notree="${javadoc.notree}" private="${javadoc.private}" source="${javac.source}" splitindex="${javadoc.splitindex}" use="${javadoc.use}" useexternalfile="true" version="${javadoc.version}" windowtitle="${javadoc.windowtitle}">
             <classpath>
                 <path path="${javac.classpath}"/>
             </classpath>
-            <fileset dir="${src.dir}" excludes="*.java,${excludes}" includes="${includes}">
+            <fileset dir="${JVLC.dir}" excludes="*.java,${excludes}" includes="${includes}">
                 <filename name="**/*.java"/>
             </fileset>
-            <fileset dir="${client.dir}" excludes="*.java,${excludes}" includes="${includes}">
+            <fileset dir="${src.common2.dir}" excludes="*.java,${excludes}" includes="${includes}">
                 <filename name="**/*.java"/>
             </fileset>
-            <fileset dir="${server.dir}" excludes="*.java,${excludes}" includes="${includes}">
+            <fileset dir="${hardwareserver.dir}" excludes="*.java,${excludes}" includes="${includes}">
                 <filename name="**/*.java"/>
             </fileset>
-            <fileset dir="${common.dir}" excludes="*.java,${excludes}" includes="${includes}">
+            <fileset dir="${multicast.dir}" excludes="*.java,${excludes}" includes="${includes}">
+                <filename name="**/*.java"/>
+            </fileset>
+            <fileset dir="${src.client.dir}" excludes="*.java,${excludes}" includes="${includes}">
                 <filename name="**/*.java"/>
             </fileset>
             <fileset dir="${ui.dir}" excludes="*.java,${excludes}" includes="${includes}">
                 <filename name="**/*.java"/>
             </fileset>
-            <fileset dir="${JVLC.dir}" excludes="*.java,${excludes}" includes="${includes}">
+            <fileset dir="${src.common.dir}" excludes="*.java,${excludes}" includes="${includes}">
+                <filename name="**/*.java"/>
+            </fileset>
+            <fileset dir="${driver.dir}" excludes="*.java,${excludes}" includes="${includes}">
+                <filename name="**/*.java"/>
+            </fileset>
+            <fileset dir="${ReC4.dir}" excludes="*.java,${excludes}" includes="${includes}">
                 <filename name="**/*.java"/>
             </fileset>
             <fileset dir="${ReC2.dir}" excludes="*.java,${excludes}" includes="${includes}">
@@ -1161,514 +906,43 @@ is divided into following sections:
             <fileset dir="${ReC3.dir}" excludes="*.java,${excludes}" includes="${includes}">
                 <filename name="**/*.java"/>
             </fileset>
-            <fileset dir="${multicast.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC4.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${hardwareserver.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${driver.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC5.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC6.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC7.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC8.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC9.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC10.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC11.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC12.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC13.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC14.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC15.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC16.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC17.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC18.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC19.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC20.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC21.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC22.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC23.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC24.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC25.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC26.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC27.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC28.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC29.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC30.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC31.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC32.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC33.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC34.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC35.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC36.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC37.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC38.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC39.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC40.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC41.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC42.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC43.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC44.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC45.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC46.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC47.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC48.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC49.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC50.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC51.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC52.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC53.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC54.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC55.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC56.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC57.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC58.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC59.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC60.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC61.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC62.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC63.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC64.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC65.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC66.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC67.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC68.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC69.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC70.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC71.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC72.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC73.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC74.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC75.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC76.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC77.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC78.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC79.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
-            <fileset dir="${ReC80.dir}" excludes="*.java,${excludes}" includes="${includes}">
-                <filename name="**/*.java"/>
-            </fileset>
             <fileset dir="${build.generated.sources.dir}" erroronmissingdir="false">
                 <include name="**/*.java"/>
                 <exclude name="*.java"/>
             </fileset>
         </javadoc>
         <copy todir="${dist.javadoc.dir}">
-            <fileset dir="${src.dir}" excludes="${excludes}" includes="${includes}">
+            <fileset dir="${JVLC.dir}" excludes="${excludes}" includes="${includes}">
                 <filename name="**/doc-files/**"/>
             </fileset>
-            <fileset dir="${client.dir}" excludes="${excludes}" includes="${includes}">
+            <fileset dir="${src.common2.dir}" excludes="${excludes}" includes="${includes}">
                 <filename name="**/doc-files/**"/>
             </fileset>
-            <fileset dir="${server.dir}" excludes="${excludes}" includes="${includes}">
+            <fileset dir="${hardwareserver.dir}" excludes="${excludes}" includes="${includes}">
                 <filename name="**/doc-files/**"/>
             </fileset>
-            <fileset dir="${common.dir}" excludes="${excludes}" includes="${includes}">
+            <fileset dir="${multicast.dir}" excludes="${excludes}" includes="${includes}">
+                <filename name="**/doc-files/**"/>
+            </fileset>
+            <fileset dir="${src.client.dir}" excludes="${excludes}" includes="${includes}">
                 <filename name="**/doc-files/**"/>
             </fileset>
             <fileset dir="${ui.dir}" excludes="${excludes}" includes="${includes}">
                 <filename name="**/doc-files/**"/>
             </fileset>
-            <fileset dir="${JVLC.dir}" excludes="${excludes}" includes="${includes}">
+            <fileset dir="${src.common.dir}" excludes="${excludes}" includes="${includes}">
+                <filename name="**/doc-files/**"/>
+            </fileset>
+            <fileset dir="${driver.dir}" excludes="${excludes}" includes="${includes}">
+                <filename name="**/doc-files/**"/>
+            </fileset>
+            <fileset dir="${ReC4.dir}" excludes="${excludes}" includes="${includes}">
                 <filename name="**/doc-files/**"/>
             </fileset>
             <fileset dir="${ReC2.dir}" excludes="${excludes}" includes="${includes}">
                 <filename name="**/doc-files/**"/>
             </fileset>
             <fileset dir="${ReC3.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${multicast.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC4.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${hardwareserver.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${driver.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC5.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC6.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC7.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC8.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC9.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC10.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC11.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC12.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC13.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC14.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC15.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC16.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC17.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC18.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC19.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC20.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC21.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC22.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC23.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC24.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC25.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC26.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC27.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC28.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC29.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC30.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC31.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC32.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC33.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC34.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC35.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC36.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC37.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC38.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC39.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC40.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC41.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC42.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC43.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC44.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC45.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC46.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC47.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC48.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC49.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC50.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC51.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC52.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC53.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC54.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC55.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC56.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC57.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC58.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC59.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC60.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC61.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC62.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC63.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC64.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC65.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC66.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC67.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC68.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC69.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC70.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC71.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC72.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC73.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC74.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC75.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC76.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC77.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC78.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC79.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
-            </fileset>
-            <fileset dir="${ReC80.dir}" excludes="${excludes}" includes="${includes}">
                 <filename name="**/doc-files/**"/>
             </fileset>
             <fileset dir="${build.generated.sources.dir}" erroronmissingdir="false">
