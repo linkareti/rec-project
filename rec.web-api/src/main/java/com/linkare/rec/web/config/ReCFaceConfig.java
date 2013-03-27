@@ -20,8 +20,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class ReCFaceConfig extends AbstractConfigBean {
 
+	private static final int DEFAULT_PREFERRED_HEIGHT = 478;
+
+	private static final int DEFAULT_PREFERRED_WIDTH = 848;
+
 	@SuppressWarnings("unused")
-	private static final Logger log = Logger.getLogger(ReCFaceConfig.class
+	private static final Logger LOGGER = Logger.getLogger(ReCFaceConfig.class
 			.getName());
 
 	private boolean showVideoFrame = false;
@@ -56,17 +60,15 @@ public class ReCFaceConfig extends AbstractConfigBean {
 
 	private String helpPageLocationBundleKey = "";
 
-	// Delete private MediaConfig mediaConfig = null;
-
 	private List<Lab> labList = new ArrayList<Lab>();
 
 	private List<WebResource> webResourceList = new ArrayList<WebResource>();
 
 	private List<LocalizationBundle> localizationBundleList = new ArrayList<LocalizationBundle>();
 
-	private int appPreferredWidth = 848;
+	private int appPreferredWidth = DEFAULT_PREFERRED_WIDTH;
 
-	private int appPreferredHeight = 478;
+	private int appPreferredHeight = DEFAULT_PREFERRED_HEIGHT;
 
 	/**
 	 * Creates a new <code>ReCConfig</code>. Default Constructor.
@@ -296,14 +298,14 @@ public class ReCFaceConfig extends AbstractConfigBean {
 		this.appPreferredHeight = appPreferredHeight;
 	}
 
-
 	/**
 	 * @param showVideoFrame
 	 *            the showVideoFrame to set
 	 */
 	public void setShowVideoFrame(final boolean showVideoFrame) {
 		changeSupport.firePropertyChange("showVideoFrame", this.showVideoFrame,
-				this.showVideoFrame = showVideoFrame);
+				showVideoFrame);
+		this.showVideoFrame = showVideoFrame;
 	}
 
 	/**
@@ -490,155 +492,98 @@ public class ReCFaceConfig extends AbstractConfigBean {
 
 	@Override
 	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
+		boolean retVal = true;
+		if (obj == null || getClass() != obj.getClass()) {
+			retVal = false;
+		} else {
+			final ReCFaceConfig other = (ReCFaceConfig) obj;
+			retVal = retVal
+					&& nullSafeObjectEquals(showVideoFrame,
+							other.showVideoFrame);
+			retVal = retVal
+					&& nullSafeObjectEquals(enableVideoFrame,
+							other.enableVideoFrame);
+			retVal = retVal
+					&& nullSafeObjectEquals(enableLoginPassword,
+							other.enableLoginPassword);
+			retVal = retVal
+					&& nullSafeObjectEquals(showChatFrame, other.showChatFrame);
+			retVal = retVal
+					&& nullSafeObjectEquals(enableChatFrame,
+							other.enableChatFrame);
+			retVal = retVal
+					&& nullSafeObjectEquals(showUserList, other.showUserList);
+			retVal = retVal
+					&& nullSafeObjectEquals(enableUsersList,
+							other.enableUsersList);
+			retVal = retVal
+					&& nullSafeObjectEquals(usersListRefreshRateMs,
+							other.usersListRefreshRateMs);
+			retVal = retVal
+					&& nullSafeObjectEquals(enterApparatusChatRoom,
+							other.enterApparatusChatRoom);
+			retVal = retVal
+					&& nullSafeObjectEquals(aboutPageLocationBundleKey,
+							other.aboutPageLocationBundleKey);
+			retVal = retVal
+					&& nullSafeObjectEquals(splashIconLocationBundleKey,
+							other.splashIconLocationBundleKey);
+			retVal = retVal
+					&& nullSafeObjectEquals(iconLocationBundleKey,
+							other.iconLocationBundleKey);
+			retVal = retVal
+					&& nullSafeObjectEquals(desktopLocationBundleKey,
+							other.desktopLocationBundleKey);
+			retVal = retVal
+					&& nullSafeObjectEquals(frameTitleBundleKey,
+							other.frameTitleBundleKey);
+			retVal = retVal
+					&& nullSafeObjectEquals(iconSponsorLocationBundleKey,
+							other.iconSponsorLocationBundleKey);
+			retVal = retVal
+					&& nullSafeObjectEquals(helpPageLocationBundleKey,
+							other.helpPageLocationBundleKey);
+			retVal = retVal && nullSafeObjectEquals(labList, other.labList);
+			retVal = retVal
+					&& nullSafeObjectEquals(webResourceList,
+							other.webResourceList);
+			retVal = retVal
+					&& nullSafeObjectEquals(localizationBundleList,
+							other.localizationBundleList);
+			retVal = retVal
+					&& nullSafeObjectEquals(appPreferredWidth,
+							other.appPreferredWidth);
+			retVal = retVal
+					&& nullSafeObjectEquals(appPreferredHeight,
+							other.appPreferredHeight);
 		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		final ReCFaceConfig other = (ReCFaceConfig) obj;
-
-		if (showVideoFrame != other.showVideoFrame) {
-			return false;
-		}
-		if (enableVideoFrame != other.enableVideoFrame) {
-			return false;
-		}
-		if (enableLoginPassword != other.enableLoginPassword) {
-			return false;
-		}
-		if (showChatFrame != other.showChatFrame) {
-			return false;
-		}
-		if (enableChatFrame != other.enableChatFrame) {
-			return false;
-		}
-		if (showUserList != other.showUserList) {
-			return false;
-		}
-		if (enableUsersList != other.enableUsersList) {
-			return false;
-		}
-		if (usersListRefreshRateMs != other.usersListRefreshRateMs) {
-			return false;
-		}
-		if (enterApparatusChatRoom != other.enterApparatusChatRoom) {
-			return false;
-		}
-		if ((aboutPageLocationBundleKey == null) ? (other.aboutPageLocationBundleKey != null)
-				: !aboutPageLocationBundleKey
-						.equals(other.aboutPageLocationBundleKey)) {
-			return false;
-		}
-		if ((splashIconLocationBundleKey == null) ? (other.splashIconLocationBundleKey != null)
-				: !splashIconLocationBundleKey
-						.equals(other.splashIconLocationBundleKey)) {
-			return false;
-		}
-		if ((iconLocationBundleKey == null) ? (other.iconLocationBundleKey != null)
-				: !iconLocationBundleKey.equals(other.iconLocationBundleKey)) {
-			return false;
-		}
-		if ((desktopLocationBundleKey == null) ? (other.desktopLocationBundleKey != null)
-				: !desktopLocationBundleKey
-						.equals(other.desktopLocationBundleKey)) {
-			return false;
-		}
-		if ((frameTitleBundleKey == null) ? (other.frameTitleBundleKey != null)
-				: !frameTitleBundleKey.equals(other.frameTitleBundleKey)) {
-			return false;
-		}
-		if ((iconSponsorLocationBundleKey == null) ? (other.iconSponsorLocationBundleKey != null)
-				: !iconSponsorLocationBundleKey
-						.equals(other.iconSponsorLocationBundleKey)) {
-			return false;
-		}
-		if ((helpPageLocationBundleKey == null) ? (other.helpPageLocationBundleKey != null)
-				: !helpPageLocationBundleKey
-						.equals(other.helpPageLocationBundleKey)) {
-			return false;
-		}
-		// Delete
-		// if (this.mediaConfig != other.mediaConfig && (this.mediaConfig ==
-		// null || !this.mediaConfig.equals(other.mediaConfig))) {
-		// return false;
-		// }
-		if (labList != other.labList
-				&& (labList == null || !labList.equals(other.labList))) {
-			return false;
-		}
-		if (webResourceList != other.webResourceList
-				&& (webResourceList == null || !webResourceList
-						.equals(other.webResourceList))) {
-			return false;
-		}
-		if (localizationBundleList != other.localizationBundleList
-				&& (localizationBundleList == null || !localizationBundleList
-						.equals(other.localizationBundleList))) {
-			return false;
-		}
-		if (appPreferredWidth != other.appPreferredWidth) {
-			return false;
-		}
-		if (appPreferredHeight != other.appPreferredHeight) {
-			return false;
-		}
-		return true;
+		return retVal;
 	}
 
 	@Override
 	public int hashCode() {
 		int hash = 5;
-		hash = 59 * hash + (showVideoFrame ? 1 : 0);
-		hash = 59 * hash + (enableVideoFrame ? 1 : 0);
-		hash = 59 * hash + (enableLoginPassword ? 1 : 0);
-		hash = 59 * hash + (showChatFrame ? 1 : 0);
-		hash = 59 * hash + (enableChatFrame ? 1 : 0);
-		hash = 59 * hash + (showUserList ? 1 : 0);
-		hash = 59 * hash + (enableUsersList ? 1 : 0);
-		hash = 59
-				* hash
-				+ (int) (usersListRefreshRateMs ^ (usersListRefreshRateMs >>> 32));
-		hash = 59 * hash + (enterApparatusChatRoom ? 1 : 0);
-		hash = 59
-				* hash
-				+ (aboutPageLocationBundleKey != null ? aboutPageLocationBundleKey
-						.hashCode() : 0);
-		hash = 59
-				* hash
-				+ (splashIconLocationBundleKey != null ? splashIconLocationBundleKey
-						.hashCode() : 0);
-		hash = 59
-				* hash
-				+ (iconLocationBundleKey != null ? iconLocationBundleKey
-						.hashCode() : 0);
-		hash = 59
-				* hash
-				+ (desktopLocationBundleKey != null ? desktopLocationBundleKey
-						.hashCode() : 0);
-		hash = 59
-				* hash
-				+ (frameTitleBundleKey != null ? frameTitleBundleKey.hashCode()
-						: 0);
-		hash = 59
-				* hash
-				+ (iconSponsorLocationBundleKey != null ? iconSponsorLocationBundleKey
-						.hashCode() : 0);
-		hash = 59
-				* hash
-				+ (helpPageLocationBundleKey != null ? helpPageLocationBundleKey
-						.hashCode() : 0);
-		// Delete hash = 83 * hash + (this.mediaConfig != null ?
-		// this.mediaConfig.hashCode() : 0);
-		hash = 59 * hash + (labList != null ? labList.hashCode() : 0);
-		hash = 59 * hash
-				+ (webResourceList != null ? webResourceList.hashCode() : 0);
-		hash = 59
-				* hash
-				+ (localizationBundleList != null ? localizationBundleList
-						.hashCode() : 0);
-		hash = 59 * hash + appPreferredWidth;
-		hash = 59 * hash + appPreferredHeight;
+		hash = 59 * hash + nullObjectSafeHash(showVideoFrame);
+		hash = 59 * hash + nullObjectSafeHash(enableVideoFrame);
+		hash = 59 * hash + nullObjectSafeHash(enableLoginPassword);
+		hash = 59 * hash + nullObjectSafeHash(showChatFrame);
+		hash = 59 * hash + nullObjectSafeHash(enableChatFrame);
+		hash = 59 * hash + nullObjectSafeHash(showUserList);
+		hash = 59 * hash + nullObjectSafeHash(enableUsersList);
+		hash = 59 * hash + nullObjectSafeHash(usersListRefreshRateMs);
+		hash = 59 * hash + nullObjectSafeHash(enterApparatusChatRoom);
+		hash = 59 * hash + nullObjectSafeHash(aboutPageLocationBundleKey);
+		hash = 59 * hash + nullObjectSafeHash(splashIconLocationBundleKey);
+		hash = 59 * hash + nullObjectSafeHash(iconLocationBundleKey);
+		hash = 59 * hash + nullObjectSafeHash(desktopLocationBundleKey);
+		hash = 59 * hash + nullObjectSafeHash(frameTitleBundleKey);
+		hash = 59 * hash + nullObjectSafeHash(iconSponsorLocationBundleKey);
+		hash = 59 * hash + nullObjectSafeHash(helpPageLocationBundleKey);
+		hash = 59 * hash + nullObjectSafeHash(labList != null);
+		hash = 59 * hash + nullObjectSafeHash(webResourceList != null);
+		hash = 59 * hash + nullObjectSafeHash(localizationBundleList);
+		hash = 59 * hash + nullObjectSafeHash(appPreferredWidth);
+		hash = 59 * hash + nullObjectSafeHash(appPreferredHeight);
 		return hash;
 	}
 

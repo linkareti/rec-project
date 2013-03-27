@@ -87,4 +87,13 @@ public abstract class AbstractConfigBean {
 	public PropertyChangeListener[] getPropertyChangeListeners(final String propertyName) {
 		return changeSupport.getPropertyChangeListeners(propertyName);
 	}
+	
+	protected boolean nullSafeObjectEquals(Object objValue, Object objValue2) {
+		return objValue == null ? (objValue2 == null) : objValue
+				.equals(objValue2);
+	}
+
+	protected int nullObjectSafeHash(Object x) {
+		return x != null ? x.hashCode() : 0;
+	}
 }

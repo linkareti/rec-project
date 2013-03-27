@@ -363,141 +363,74 @@ public class Apparatus extends DisplayNode {
 
 	@Override
 	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
+		boolean retVal = true;
+		if (obj == null || getClass() != obj.getClass()) {
+			retVal = false;
+		} else {
+			final Apparatus other = (Apparatus) obj;
+			retVal = retVal && nullSafeObjectEquals(virtual, other.virtual);
+			retVal = retVal
+					&& nullSafeObjectEquals(displayStringBundleKey,
+							other.displayStringBundleKey);
+			retVal = retVal
+					&& nullSafeObjectEquals(iconLocationBundleKey,
+							other.iconLocationBundleKey);
+			retVal = retVal
+					&& nullSafeObjectEquals(desktopLocationBundleKey,
+							other.desktopLocationBundleKey);
+			retVal = retVal
+					&& nullSafeObjectEquals(toolTipBundleKey,
+							other.toolTipBundleKey);
+			retVal = retVal
+					&& nullSafeObjectEquals(dataModelClassLocationBundleKey,
+							other.dataModelClassLocationBundleKey);
+			retVal = retVal
+					&& nullSafeObjectEquals(
+							headerDisplayClassLocationBundleKey,
+							other.headerDisplayClassLocationBundleKey);
+			retVal = retVal
+					&& nullSafeObjectEquals(
+							displayFactoryClassLocationBundleKey,
+							other.displayFactoryClassLocationBundleKey);
+			retVal = retVal
+					&& nullSafeObjectEquals(customizerClassLocationBundleKey,
+							other.customizerClassLocationBundleKey);
+			retVal = retVal && nullSafeObjectEquals(location, other.location);
+			retVal = retVal
+					&& nullSafeObjectEquals(mediaConfig, other.mediaConfig);
+			retVal = retVal
+					&& nullSafeObjectEquals(defaultAcquisitionConfig,
+							other.defaultAcquisitionConfig);
+			retVal = retVal && nullSafeObjectEquals(display, other.display);
+			retVal = retVal
+					&& nullSafeObjectEquals(webResource, other.webResource);
+			retVal = retVal
+					&& nullSafeObjectEquals(localizationBundle,
+							other.localizationBundle);
 		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		final Apparatus other = (Apparatus) obj;
-
-		if (virtual != other.virtual) {
-			return false;
-		}
-
-		if ((displayStringBundleKey == null) ? (other.displayStringBundleKey != null)
-				: !displayStringBundleKey.equals(other.displayStringBundleKey)) {
-			return false;
-		}
-		if ((iconLocationBundleKey == null) ? (other.iconLocationBundleKey != null)
-				: !iconLocationBundleKey.equals(other.iconLocationBundleKey)) {
-			return false;
-		}
-		if ((desktopLocationBundleKey == null) ? (other.desktopLocationBundleKey != null)
-				: !desktopLocationBundleKey
-						.equals(other.desktopLocationBundleKey)) {
-			return false;
-		}
-		if ((toolTipBundleKey == null) ? (other.toolTipBundleKey != null)
-				: !toolTipBundleKey.equals(other.toolTipBundleKey)) {
-			return false;
-		}
-		if ((dataModelClassLocationBundleKey == null) ? (other.dataModelClassLocationBundleKey != null)
-				: !dataModelClassLocationBundleKey
-						.equals(other.dataModelClassLocationBundleKey)) {
-			return false;
-		}
-		// Delete
-		// if ((this.videoLocation == null) ? (other.videoLocation != null) :
-		// !this.videoLocation.equals(other.videoLocation)) {
-		// return false;
-		// }
-		if ((headerDisplayClassLocationBundleKey == null) ? (other.headerDisplayClassLocationBundleKey != null)
-				: !headerDisplayClassLocationBundleKey
-						.equals(other.headerDisplayClassLocationBundleKey)) {
-			return false;
-		}
-		if ((displayFactoryClassLocationBundleKey == null) ? (other.displayFactoryClassLocationBundleKey != null)
-				: !displayFactoryClassLocationBundleKey
-						.equals(other.displayFactoryClassLocationBundleKey)) {
-			return false;
-		}
-		if ((customizerClassLocationBundleKey == null) ? (other.customizerClassLocationBundleKey != null)
-				: !customizerClassLocationBundleKey
-						.equals(other.customizerClassLocationBundleKey)) {
-			return false;
-		}
-		if ((location == null) ? (other.location != null) : !location
-				.equals(other.location)) {
-			return false;
-		}
-		if (mediaConfig != other.mediaConfig
-				&& (mediaConfig == null || !mediaConfig
-						.equals(other.mediaConfig))) {
-			return false;
-		}
-		if (defaultAcquisitionConfig != other.defaultAcquisitionConfig
-				&& (defaultAcquisitionConfig == null || !defaultAcquisitionConfig
-						.equals(other.defaultAcquisitionConfig))) {
-			return false;
-		}
-		if (display != other.display
-				&& (display == null || !display.equals(other.display))) {
-			return false;
-		}
-		if (webResource != other.webResource
-				&& (webResource == null || !webResource
-						.equals(other.webResource))) {
-			return false;
-		}
-		if (localizationBundle != other.localizationBundle
-				&& (localizationBundle == null || !localizationBundle
-						.equals(other.localizationBundle))) {
-			return false;
-		}
-		return true;
+		return retVal;
 	}
 
 	@Override
 	public int hashCode() {
 		int hash = 7;
-		hash = 83 * hash + (virtual ? 1 : 0);
-
-		hash = 83
-				* hash
-				+ (displayStringBundleKey != null ? displayStringBundleKey
-						.hashCode() : 0);
-		hash = 83
-				* hash
-				+ (iconLocationBundleKey != null ? iconLocationBundleKey
-						.hashCode() : 0);
-		hash = 83
-				* hash
-				+ (desktopLocationBundleKey != null ? desktopLocationBundleKey
-						.hashCode() : 0);
+		hash = 83 * hash + nullObjectSafeHash(virtual);
+		hash = 83 * hash + nullObjectSafeHash(displayStringBundleKey);
+		hash = 83 * hash + nullObjectSafeHash(iconLocationBundleKey);
+		hash = 83 * hash + nullObjectSafeHash(desktopLocationBundleKey);
+		hash = 83 * hash + nullObjectSafeHash(toolTipBundleKey);
+		hash = 83 * hash + nullObjectSafeHash(dataModelClassLocationBundleKey);
 		hash = 83 * hash
-				+ (toolTipBundleKey != null ? toolTipBundleKey.hashCode() : 0);
-		hash = 83
-				* hash
-				+ (dataModelClassLocationBundleKey != null ? dataModelClassLocationBundleKey
-						.hashCode() : 0);
-		// Delete
-		// hash = 83 * hash + (this.videoLocation != null ?
-		// this.videoLocation.hashCode() : 0);
-		hash = 83
-				* hash
-				+ (headerDisplayClassLocationBundleKey != null ? headerDisplayClassLocationBundleKey
-						.hashCode() : 0);
-		hash = 83
-				* hash
-				+ (displayFactoryClassLocationBundleKey != null ? displayFactoryClassLocationBundleKey
-						.hashCode() : 0);
-		hash = 83
-				* hash
-				+ (customizerClassLocationBundleKey != null ? customizerClassLocationBundleKey
-						.hashCode() : 0);
-		hash = 83 * hash + (location != null ? location.hashCode() : 0);
-		hash = 83 * hash + (mediaConfig != null ? mediaConfig.hashCode() : 0);
-		hash = 83
-				* hash
-				+ (defaultAcquisitionConfig != null ? defaultAcquisitionConfig
-						.hashCode() : 0);
-		hash = 83 * hash + (display != null ? display.hashCode() : 0);
-		hash = 83 * hash + (webResource != null ? webResource.hashCode() : 0);
-		hash = 83
-				* hash
-				+ (localizationBundle != null ? localizationBundle.hashCode()
-						: 0);
+				+ nullObjectSafeHash(headerDisplayClassLocationBundleKey);
+		hash = 83 * hash
+				+ nullObjectSafeHash(displayFactoryClassLocationBundleKey);
+		hash = 83 * hash + nullObjectSafeHash(customizerClassLocationBundleKey);
+		hash = 83 * hash + nullObjectSafeHash(location);
+		hash = 83 * hash + nullObjectSafeHash(mediaConfig);
+		hash = 83 * hash + nullObjectSafeHash(defaultAcquisitionConfig);
+		hash = 83 * hash + nullObjectSafeHash(display);
+		hash = 83 * hash + nullObjectSafeHash(webResource);
+		hash = 83 * hash + nullObjectSafeHash(localizationBundle);
 		return hash;
 	}
 
