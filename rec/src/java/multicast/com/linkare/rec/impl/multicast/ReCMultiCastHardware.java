@@ -36,6 +36,7 @@ import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.DateTime;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.events.HardwareLockEvent;
 import com.linkare.rec.impl.events.LockCountDown;
 import com.linkare.rec.impl.exceptions.IncorrectStateExceptionConstants;
@@ -52,7 +53,6 @@ import com.linkare.rec.impl.multicast.security.ResourceType;
 import com.linkare.rec.impl.multicast.security.SecurityManagerFactory;
 import com.linkare.rec.impl.threading.AbstractConditionDecisor;
 import com.linkare.rec.impl.threading.ConditionChecker;
-import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.impl.utils.MultiCastExperimentStats;
 import com.linkare.rec.impl.utils.ORBBean;
 import com.linkare.rec.impl.utils.ObjectID;
@@ -76,15 +76,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations, Notifi
 
 	private static final Logger LOGGER = Logger.getLogger(ReCMultiCastHardware.class.getName());
 
-	public static final String SYSPROP_MULTICASTHARDWARE_LOCK_PERIOD = "MultiCastHardware.LockPeriod";
-
-	private static final long LOCK_PERIOD = Defaults.defaultIfEmpty(
-			System.getProperty(ReCMultiCastHardware.SYSPROP_MULTICASTHARDWARE_LOCK_PERIOD), 10 * 1000);
-
-	// private static final long
-	// HARDWAREINFO_REFRESH_PERIOD=Defaults.defaultIfEmpty(System.getProperty("HARDWAREINFO_REFRESH_PERIOD"),60*1000);
-	// private static final long
-	// HARDWARESTATE_REFRESH_PERIOD=Defaults.defaultIfEmpty(System.getProperty("HARDWARESTATE_REFRESH_PERIOD"),60*1000);
+	private static final long LOCK_PERIOD = Long.parseLong(ReCSystemProperty.MULTICAST_HARDWARE_LOCK_PERIOD.getValue()) * 1000;
 
 	private ClientQueue clientQueue = null;
 
@@ -338,18 +330,13 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations, Notifi
 					dataProducerResource, new DataProducerAdapter(), getHardwareUniqueId(), maximumClients,
 					user.getUserName());
 
-			final DataProducer dataProducer = recMultiCastDataProducer._this(); // registar
-			// o
-			// objecto
-			// corba
+			// registar o objecto corba
+			final DataProducer dataProducer = recMultiCastDataProducer._this();
 			log(Level.INFO, "Going to start the hardware");
-			recMultiCastDataProducer.setRemoteDataProducer(hardware.start(recMultiCastDataProducer.getDataReceiver())); // iniciar
-			// o
-			// driver
-			recMultiCastDataProducer.initAcquisitionThread(); // iniciar a
-			// aquisicao de
-			// dados do
-			// driver
+			// iniciar o driver
+			recMultiCastDataProducer.setRemoteDataProducer(hardware.start(recMultiCastDataProducer.getDataReceiver()));
+			// iniciar a aquisicao de dados do driver
+			// recMultiCastDataProducer.initAcquisitionThread();
 
 			experimentStats.startExperimentStats();
 
@@ -401,7 +388,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations, Notifi
 					recMultiCastDataProducer.getDataReceiver(), data_source)); // iniciar
 																				// o
 																				// driver
-			recMultiCastDataProducer.initAcquisitionThread(); // iniciar a
+			// recMultiCastDataProducer.initAcquisitionThread(); // iniciar a
 			// aquisicao de
 			// dados do
 			// driver
@@ -483,7 +470,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations, Notifi
 		}
 
 		final DataProducer dataProducer = recMultiCastDataProducer._this();
-		recMultiCastDataProducer.initAcquisitionThread();
+		// recMultiCastDataProducer.initAcquisitionThread();
 		return dataProducer;
 	}
 
@@ -660,83 +647,87 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations, Notifi
 	}
 
 	private void cycleLockHardware() {
-
-		synchronized (this) {
-			if (locking && locked) {
-				return;// In locking process
-			} else if (!locking && locked) {
-				return;// Allready Locked
-			}
-
-			if (!locked) {
-				if (clientQueue.first() == null) {
-					return; // the queue was empty
+		try {
+			synchronized (this) {
+				if (locking && locked) {
+					return;// In locking process
+				} else if (!locking && locked) {
+					return;// Allready Locked
 				}
 
-				final DataClientForQueue oldOwnerDataClient = ownerDataClient;
+				if (!locked) {
+					if (clientQueue.first() == null) {
+						return; // the queue was empty
+					}
 
-				if (ChangeOwnerInNextLockCycle == ReCMultiCastHardware.OWNER_CHANGE) {
-					log(Level.INFO, "Rotating DataClient Queue for lock...");
-					clientQueue.moveFirstToLast();
-				}
+					final DataClientForQueue oldOwnerDataClient = ownerDataClient;
 
-				if (ChangeOwnerInNextLockCycle == ReCMultiCastHardware.OWNER_ONLY_HAD_STOP_LOCK) {
-					log(Level.INFO,
-							"Current owner had a stop lock! Now give him the lock, next time give it to another!");
-					ChangeOwnerInNextLockCycle = ReCMultiCastHardware.OWNER_CHANGE;
-				}
+					if (ChangeOwnerInNextLockCycle == ReCMultiCastHardware.OWNER_CHANGE) {
+						log(Level.INFO, "Rotating DataClient Queue for lock...");
+						clientQueue.moveFirstToLast();
+					}
 
-				ownerDataClient = clientQueue.first();
-				locking = true;
+					if (ChangeOwnerInNextLockCycle == ReCMultiCastHardware.OWNER_ONLY_HAD_STOP_LOCK) {
+						log(Level.INFO,
+								"Current owner had a stop lock! Now give him the lock, next time give it to another!");
+						ChangeOwnerInNextLockCycle = ReCMultiCastHardware.OWNER_CHANGE;
+					}
 
-				if (oldOwnerDataClient != ownerDataClient) {
-					experimentStats.lockEventSent();
-				}
+					ownerDataClient = clientQueue.first();
+					locking = true;
 
-				if (ownerDataClient != null) {
-					lastSentHardwareLockableTimestamp = System.currentTimeMillis();
-					clientQueue.hardwareLockable(new HardwareLockEvent(currentLocker, ReCMultiCastHardware.LOCK_PERIOD,
-							ownerDataClient));
+					if (oldOwnerDataClient != ownerDataClient) {
+						experimentStats.lockEventSent();
+					}
 
-					timeoutCycleLockChecker = new ConditionChecker(ReCMultiCastHardware.LOCK_PERIOD * 2,
-							ReCMultiCastHardware.LOCK_PERIOD, new AbstractConditionDecisor() {
-								long sentHardwareLockableTimestamp = lastSentHardwareLockableTimestamp;
-								DataClientForQueue owner = ownerDataClient;
+					if (ownerDataClient != null) {
+						lastSentHardwareLockableTimestamp = System.currentTimeMillis();
+						clientQueue.hardwareLockable(new HardwareLockEvent(currentLocker,
+								ReCMultiCastHardware.LOCK_PERIOD, ownerDataClient));
 
-								@Override
-								public ConditionResult getConditionResult() {
-									if (isLockCycleOk()) {
-										timeoutCycleLockChecker = null;
-										return ConditionResult.CONDITION_MET_TRUE;
+						timeoutCycleLockChecker = new ConditionChecker(ReCMultiCastHardware.LOCK_PERIOD * 2,
+								ReCMultiCastHardware.LOCK_PERIOD, new AbstractConditionDecisor() {
+									long sentHardwareLockableTimestamp = lastSentHardwareLockableTimestamp;
+									DataClientForQueue owner = ownerDataClient;
+
+									@Override
+									public ConditionResult getConditionResult() {
+										if (isLockCycleOk()) {
+											timeoutCycleLockChecker = null;
+											return ConditionResult.CONDITION_MET_TRUE;
+										}
+										return ConditionResult.CONDITION_NOT_MET;
 									}
-									return ConditionResult.CONDITION_NOT_MET;
-								}
 
-								@Override
-								public void onConditionTimeOut() {
-									if (!isLockCycleOk()) {
-										log(Level.INFO, "Hardware lock was sent to owner " + owner.getUserName()
-												+ " but hasn't locked it, so I'm considering it is gone!");
-										timeoutCycleLockChecker = null;
-										owner.shutdown();
+									@Override
+									public void onConditionTimeOut() {
+										if (!isLockCycleOk()) {
+											log(Level.INFO, "Hardware lock was sent to owner " + owner.getUserName()
+													+ " but hasn't locked it, so I'm considering it is gone!");
+											timeoutCycleLockChecker = null;
+											owner.shutdown();
+										}
 									}
-								}
 
-								private boolean isLockCycleOk() {
-									return sentHardwareLockableTimestamp != lastSentHardwareLockableTimestamp
-											|| !locking && locked;
-								}
-							});
+									private boolean isLockCycleOk() {
+										return sentHardwareLockableTimestamp != lastSentHardwareLockableTimestamp
+												|| !locking && locked;
+									}
+								});
+					}
+
+					if (ownerDataClient != null && ownerDataClient.getUserInfo().getLockedTime() != null
+							&& ownerDataClient.getUserInfo().getLockedTime().getMilliSeconds() != 0) {
+						timeStartMin = ownerDataClient.getUserInfo().getLockedTime();
+					} else {
+						timeStartMin = new DateTime();
+					}
+
 				}
-
-				if (ownerDataClient != null && ownerDataClient.getUserInfo().getLockedTime() != null
-						&& ownerDataClient.getUserInfo().getLockedTime().getMilliSeconds() != 0) {
-					timeStartMin = ownerDataClient.getUserInfo().getLockedTime();
-				} else {
-					timeStartMin = new DateTime();
-				}
-
 			}
+		} catch (Throwable t) {
+			// Lock Cycler should never exit in any case...
+			LOGGER.log(Level.SEVERE, "Problem cycling lock:" + t.getMessage(), t);
 		}
 
 	}
@@ -1014,19 +1005,6 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations, Notifi
 			dataClientGone(dcfq);
 		}
 
-		/*
-		 * Proxy loggging methods for ClientQueue
-		 */
-		@Override
-		public void log(final Level debugLevel, final String message) {
-			ReCMultiCastHardware.this.log(debugLevel, message);
-		}
-
-		@Override
-		public void logThrowable(final String message, final Throwable t) {
-			ReCMultiCastHardware.this.logThrowable(message, t);
-		}
-
 	}
 
 	/* Inner class - ClientQueueListener implementation */
@@ -1138,7 +1116,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations, Notifi
 	private class DataProducerAdapter implements ReCMultiCastDataProducerListener {
 
 		@Override
-		public void oneDataReceiverGone() {
+		public void onDataReceiverGone() {
 			try {
 				if (ownerDataClient == null) {
 					return;
@@ -1151,16 +1129,6 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations, Notifi
 			} catch (final Exception e) {
 				logThrowable("Error checking connection to owner client ", e);
 			}
-		}
-
-		@Override
-		public void log(final Level debugLevel, final String message) {
-			ReCMultiCastHardware.this.log(debugLevel, message);
-		}
-
-		@Override
-		public void logThrowable(final String message, final Throwable t) {
-			ReCMultiCastHardware.this.logThrowable(message, t);
 		}
 
 	}
