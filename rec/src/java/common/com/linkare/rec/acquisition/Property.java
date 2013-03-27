@@ -103,7 +103,6 @@ public final class Property implements IDLEntity {
 	}
 
 	private void createEmptyAny() {
-		setValue(ORBBean.getORBBean().getORB().create_any());
+		setValue(ORBBean.getORBBean().createAny());
 	}
-
 } // class Property
