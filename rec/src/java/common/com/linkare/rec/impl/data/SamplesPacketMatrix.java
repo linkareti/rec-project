@@ -19,6 +19,7 @@ import javax.swing.event.EventListenerList;
 
 import com.linkare.rec.acquisition.NotAnAvailableSamplesPacketException;
 import com.linkare.rec.data.acquisition.SamplesPacket;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.exceptions.NotAnAvailableSamplesPacketExceptionConstants;
 import com.linkare.rec.impl.utils.FileObjectOutputStream;
 
@@ -39,8 +40,7 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable {
 	// scripts...
 	public static final String SYSPROP_FREE_THRESHOLD_NAME = "rec.percent.freememory.threshold.serialization";
 
-	public static final String FREE_THRESHOLD_NAME = com.linkare.rec.impl.utils.Defaults.defaultIfEmpty(
-			System.getProperty(SamplesPacketMatrix.SYSPROP_FREE_THRESHOLD_NAME), "10");
+	public static final String FREE_THRESHOLD_VALUE = ReCSystemProperty.PERCENT_FREEMEMORY_SERIALIZATION.getValue();
 
 	private static final int PREDICTION_SIZE_READ = 10;
 
@@ -57,7 +57,7 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable {
 	private static double PERCENT_FREE_TRESHOLD = 10.;
 	static {
 		try {
-			PERCENT_FREE_TRESHOLD = Double.parseDouble(SamplesPacketMatrix.FREE_THRESHOLD_NAME);
+			PERCENT_FREE_TRESHOLD = Double.parseDouble(SamplesPacketMatrix.FREE_THRESHOLD_VALUE);
 		} catch (final NumberFormatException nfe) {
 			// noop - ignored - default value allready defined
 		}
