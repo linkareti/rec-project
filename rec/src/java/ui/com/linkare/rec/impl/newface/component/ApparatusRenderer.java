@@ -5,6 +5,7 @@
 
 package com.linkare.rec.impl.newface.component;
 
+import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.JLabel;
@@ -15,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.linkare.rec.web.config.Apparatus;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import com.linkare.rec.impl.newface.ReCApplication;
 
 /**
  * 
@@ -31,10 +33,15 @@ public class ApparatusRenderer extends JLabel implements ListCellRenderer {
 
 	private Apparatus apparatus;
 
+	private Color virtualBackgroundSelected=null;
+	private Color virtualBackgroundUnSelected=null;
+	
 	public ApparatusRenderer() {
 		super();
 		setOpaque(true);
 		setBorder(ApparatusRenderer.NO_FOCUS_BORDER);
+		virtualBackgroundSelected=ReCApplication.getApplication().getContext().getResourceMap().getColor("virtualExperiments.background");
+		virtualBackgroundUnSelected=virtualBackgroundSelected.brighter();
 	}
 
 	@Override
@@ -47,10 +54,18 @@ public class ApparatusRenderer extends JLabel implements ListCellRenderer {
 		if (apparatus != null) {
 
 			if (isSelected) {
-				setBackground(list.getSelectionBackground());
+				if (apparatus.isVirtual()) {
+					setBackground(virtualBackgroundSelected);
+				} else {
+					setBackground(list.getSelectionBackground());
+				}
 				setForeground(list.getSelectionForeground());
 			} else {
-				setBackground(list.getBackground());
+				if (apparatus.isVirtual()) {
+					setBackground(virtualBackgroundUnSelected);
+				} else {
+					setBackground(list.getBackground());
+				}
 				setForeground(list.getForeground());
 			}
 
@@ -62,7 +77,7 @@ public class ApparatusRenderer extends JLabel implements ListCellRenderer {
 
 			// Text
 			String displayStringBundleKey = apparatus.getDisplayStringBundleKey();
-			setText(ReCResourceBundle.findStringOrDefault(displayStringBundleKey,displayStringBundleKey));
+			setText(ReCResourceBundle.findStringOrDefault(displayStringBundleKey, displayStringBundleKey));
 
 			// State
 			setEnabled(apparatus.isEnabled());
