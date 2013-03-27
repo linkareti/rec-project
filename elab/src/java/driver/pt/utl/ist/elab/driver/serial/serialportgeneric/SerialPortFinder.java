@@ -260,9 +260,18 @@ public class SerialPortFinder {
 		LOGGER.log(Level.INFO, "Are there COMM Ports on the System? " + commPortIdentifiers.hasMoreElements());
 
 		if (AbstractSerialPortDriver.rs232configs != null) {
-			final String[] ports = AbstractSerialPortDriver.rs232configs.getRs232().getPortsRestrict().split(",");
-			LOGGER.log(Level.FINE, "RS232 xml configured ports = " + Arrays.deepToString(ports));
-			configuredPorts.addAll(Arrays.asList(ports));
+			if (AbstractSerialPortDriver.rs232configs.getRs232().getPortsRestrict() != null
+					&& AbstractSerialPortDriver.rs232configs.getRs232().getPortsRestrict().trim().length() != 0) {
+				final String[] ports = AbstractSerialPortDriver.rs232configs.getRs232().getPortsRestrict().split(",");
+				LOGGER.log(Level.FINE, "RS232 xml configured ports = " + Arrays.deepToString(ports));
+				configuredPorts.addAll(Arrays.asList(ports));
+			} else {
+				while (commPortIdentifiers.hasMoreElements()) {
+					CommPortIdentifier identifier = (CommPortIdentifier) commPortIdentifiers.nextElement();
+					configuredPorts.add(identifier.getName());
+				}
+			}
+
 		}
 
 		// Lists all the ports and filters included on rs232 configuration file
@@ -278,6 +287,13 @@ public class SerialPortFinder {
 				}
 			}
 		}
+		if(tempPorts.size()==0) {
+			while (commPortIdentifiers.hasMoreElements()) {
+				CommPortIdentifier identifier = (CommPortIdentifier) commPortIdentifiers.nextElement();
+				tempPorts.add(identifier);
+			}
+		}
+		
 
 		ports = new CommPortIdentifier[tempPorts.size()];
 		final Object[] portsObj = tempPorts.toArray();
