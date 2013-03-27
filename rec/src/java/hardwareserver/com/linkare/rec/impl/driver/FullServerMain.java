@@ -6,9 +6,12 @@
  */
 package com.linkare.rec.impl.driver;
 
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.linkare.rec.impl.config.ReCSystemProperty;
+import com.linkare.rec.impl.config.ReCSystemPropertyLocation;
 import com.linkare.rec.impl.threading.ProcessingManager;
 import com.linkare.rec.impl.utils.ORBBean;
 
@@ -19,15 +22,24 @@ import com.linkare.rec.impl.utils.ORBBean;
 public class FullServerMain {
 
 	private static final Logger LOGGER = Logger.getLogger(FullServerMain.class.getName());
-	private static String SYS_EXPERIMENT_DRIVER_CLASS = "experiment.driver.class";
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		try {
+			Set<ReCSystemProperty> listRequiredNotDefined = ReCSystemProperty
+					.listRequiredNotDefined(ReCSystemPropertyLocation.HARDWARE);
+			if (listRequiredNotDefined.size() > 0) {
+				System.out.println("The following system properties are required and where not defined:");
+				for (ReCSystemProperty reCSystemProperty : listRequiredNotDefined) {
+					System.out.println(reCSystemProperty.toString());
+				}
+				System.exit(-1);
+			}
+
 			ORBBean.getORBBean();
-			String driverClassName = System.getProperty(SYS_EXPERIMENT_DRIVER_CLASS);
+			String driverClassName = ReCSystemProperty.HARDWARE_DRIVER_CLASS.getValue();
 			if (driverClassName != null) {
 				Class<?> driverClass = Class.forName(driverClassName);
 				new BaseHardware((IDriver) driverClass.newInstance());
