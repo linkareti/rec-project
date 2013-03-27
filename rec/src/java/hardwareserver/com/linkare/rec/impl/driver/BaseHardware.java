@@ -32,10 +32,10 @@ import com.linkare.rec.acquisition.NotAvailableException;
 import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.events.HardwareStateChangeEvent;
 import com.linkare.rec.impl.exceptions.IncorrectStateExceptionConstants;
 import com.linkare.rec.impl.exceptions.WrongConfigurationExceptionConstants;
-import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
 import com.linkare.rec.impl.utils.HardwareBinder;
@@ -52,8 +52,7 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 
 	private static final Logger LOGGER = Logger.getLogger(BaseHardware.class.getName());
 
-	private static final boolean SHOW_GUI = Boolean.parseBoolean(Defaults.defaultIfEmpty(
-			System.getProperty("rec.driver.show.gui"), "false"));
+	private static final boolean SHOW_GUI = Boolean.parseBoolean(ReCSystemProperty.HARDWARE_SHOW_GUI.getValue());
 
 	private final HardwareBinder refBinder = new HardwareBinder();
 
@@ -176,6 +175,7 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 			});
 			frameForKill.getContentPane().add(btnExit);
 			frameForKill.setVisible(true);
+			frameForKill.setTitle(ReCSystemProperty.HARDWARE_DRIVER_CLASS.getValue());
 			frameForKill.pack();
 		}
 	}
@@ -199,7 +199,7 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 		return driver;
 	}
 
-	StateMachine stateMachine = new StateMachine();
+	private final StateMachine stateMachine = new StateMachine();
 
 	/**
 	 * Setter for property driver.
