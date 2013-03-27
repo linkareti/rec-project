@@ -17,7 +17,7 @@ import com.linkare.rec.impl.newface.laf.flat.elabtheme.FlatComboBoxIcon;
 public class FlatComboBoxUI extends MetalComboBoxUI {
 
 	private static final Color COLOR_ARROWBUTTON = new Color(0x64797F);
-	private static final Color COLOR_BORDER_SOLID_THIN_BLUE = new Color(0x8CABB3);
+	//private static final Color COLOR_BORDER_SOLID_THIN_BLUE = new Color(0x8CABB3);
 
 	public static ComponentUI createUI(final JComponent c) {
 		return new FlatComboBoxUI();
@@ -36,7 +36,6 @@ public class FlatComboBoxUI extends MetalComboBoxUI {
 		button.setBorder(BorderFactory.createEmptyBorder(2, 6, 2, 6));
 		button.setBackground(FlatComboBoxUI.COLOR_ARROWBUTTON);
 
-		// ASK Joao, why did you remove this?
 		button.setFocusable(false);
 		button.setFocusPainted(false);
 		button.setRolloverEnabled(false);

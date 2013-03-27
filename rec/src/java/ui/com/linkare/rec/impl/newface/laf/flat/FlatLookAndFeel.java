@@ -86,14 +86,20 @@ public class FlatLookAndFeel extends
 	protected void initClassDefaults(final UIDefaults table) {
 		super.initClassDefaults(table);
 
-		final Object[] classDefaults = { "SplitPaneUI", BasicSplitPaneUI.class.getName(), "ScrollBarUI",
-				FlatScrollBarUI.class.getName(), "ComboBoxUI", FlatComboBoxUI.class.getName(), "TabbedPaneUI",
-				FlatTabbedPaneUI.class.getName(), "MenuUI", BasicMenuUI.class.getName(),
+		final Object[] classDefaults = { 
+				"SplitPaneUI", BasicSplitPaneUI.class.getName(), 
+				"ScrollBarUI",FlatScrollBarUI.class.getName(), 
+				"ComboBoxUI", FlatComboBoxUI.class.getName(), 
+				"TabbedPaneUI",FlatTabbedPaneUI.class.getName(), 
+				"MenuUI", BasicMenuUI.class.getName(),
 				// TODO Change Names
-				"FlatButtonUI", FlatButtonUI.class.getName(), "ButtonUI", FlatOriginalButtonUI.class.getName(),
-
-				"RadioButtonUI", FlatRadioButtonUI.class.getName(), "CheckBoxUI", FlatCheckBoxUI.class.getName(),
-				"SliderUI", FlatSliderUI.class.getName(), "FlatTableUI", FlatTableUI.class.getName(), };
+				"FlatButtonUI", FlatButtonUI.class.getName(), 
+				"ButtonUI", FlatOriginalButtonUI.class.getName(),
+				"RadioButtonUI", FlatRadioButtonUI.class.getName(), 
+				"CheckBoxUI", FlatCheckBoxUI.class.getName(),
+				"SliderUI", FlatSliderUI.class.getName(), 
+				"FlatTableUI", FlatTableUI.class.getName(),
+				"TextPaneUI",FlatTextPaneUI.class.getName()};
 
 		if (FlatLookAndFeel.log.isLoggable(Level.FINER)) {
 			FlatLookAndFeel.log.finer("FlatLookAndFeel Class Defaults: " + Arrays.deepToString(classDefaults));
