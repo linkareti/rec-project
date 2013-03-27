@@ -22,14 +22,20 @@ import java.io.File;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.prefs.Preferences;
 
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -40,11 +46,11 @@ import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
 import org.jdesktop.application.TaskMonitor;
 
-import com.linkare.rec.web.config.Apparatus;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent;
 import com.linkare.rec.impl.client.apparatus.ApparatusListChangeEvent;
 import com.linkare.rec.impl.client.lab.LabConnectorEvent;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent;
 import com.linkare.rec.impl.newface.ReCApplication.ExperimentUIData;
@@ -76,19 +82,14 @@ import com.linkare.rec.impl.newface.utils.LAFConnector;
 import com.linkare.rec.impl.newface.utils.LAFConnector.SpecialELabProperties;
 import com.linkare.rec.impl.newface.utils.PreferencesUtils;
 import com.linkare.rec.impl.newface.utils.TimeUtils;
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.prefs.Preferences;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
+import com.linkare.rec.web.config.Apparatus;
 
 /**
  * The application's main frame.
  */
 public class ReCFrameView extends FrameView implements ReCApplicationListener, ItemListener {
 
-    private static final Logger log = Logger.getLogger(ReCFrameView.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ReCFrameView.class.getName());
     private static final int ONE_SECOND = 1000; // ms
 
     // Handler for application uncaught exceptions
@@ -98,7 +99,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
             @Override
             public void uncaughtException(final Thread thread, final Throwable t) {
-                ReCFrameView.log.log(Level.SEVERE, "An uncaught exception occurred in thread " + thread, t);
+                LOGGER.log(Level.SEVERE, "An uncaught exception occurred in thread " + thread, t);
                 ReCFrameView.getUnexpectedErrorBox(t).setVisible(true);
             }
         });
@@ -180,7 +181,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
             public void propertyChange(final java.beans.PropertyChangeEvent evt) {
                 final String propertyName = evt.getPropertyName();
-                ReCFrameView.log.finer(propertyName + " = " + evt.getNewValue());
+                LOGGER.finer(propertyName + " = " + evt.getNewValue());
                 if ("started".equals(propertyName)) {
                     progressCicleTask.start();
 
@@ -217,7 +218,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
     public void setInteractiveBoxesEnabled(final boolean enabled) {
         for (final AbstractContentPane box : interactiveBoxes) {
-            ReCFrameView.log.fine("Setting box " + box.getName() + " enabled = " + enabled);
+            LOGGER.fine("Setting box " + box.getName() + " enabled = " + enabled);
             box.setEnabled(enabled);
             box.setChildComponentsEnabled(enabled);
         }
@@ -474,7 +475,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
     private void askForVLC(boolean ask) {
 
-        final String LINE_SEPARATOR = System.getProperty("line.separator");
+        final String LINE_SEPARATOR = ReCSystemProperty.LINE_SEPARATOR.getValue();
         final String key = VideoViewerController.VLC_PATH_KEY;
 
         final String vlcPath = PreferencesUtils.readUserPreference(key);
@@ -496,7 +497,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
     private void defineVlcExecutable(String key) {
         final File executable = getVLCExecutableFile();
-        ReCFrameView.log.info("Selected file was: " + executable.getAbsolutePath());
+        LOGGER.info("Selected file was: " + executable.getAbsolutePath());
         PreferencesUtils.writeUserPreference(key, executable.getAbsolutePath());
     }
 
@@ -576,7 +577,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
             case LabConnectorEvent.STATUS_CONNECTED:
                 getLoginBox().getContent().updateStatus(getResourceMap().getString("lblTaskMessage.loadApparatus.text"));
                 getLoginBox().getContent().setLoginProgressVisible(true);
-                if (recApplication.isAutoConnectLab()) {
+                if (recApplication.isAutoConnectApparatus()) {
                     //check if apparatus is available
                     recApplication.getLabClientBean();
                     boolean apparatusAvailable = checkAvailableApparatus();
@@ -640,14 +641,14 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         getLoginBox().setVisible(false);
         setGlassPaneVisible(false);
         firstSelectedApparatusChange = true;
-        if(recApplication.isAutoConnectLab()){
+        if(recApplication.isAutoConnectApparatus()){
             recApplication.toggleApparatusState();
         }
     }
 
     private void disconnectedFromLaboratory() {
         toolBtnConnect.setAction(toggleConnectionStateActionData(false));
-        if(!recApplication.isAutoConnectLab()){
+        if(!recApplication.isAutoConnectApparatus()){
             updateStatus(getResourceMap().getString("lblTaskMessage.disconnected.text"));
         }
         disconnectFromApparatus();
@@ -764,13 +765,13 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
         // Video
         if (recApplication.isApparatusVideoEnabled() && recApplication.getMediaController() != null) {
-            ReCFrameView.log.info("Video is enable for the selected apparatus.");
+            LOGGER.info("Video is enable for the selected apparatus.");
             getVideoBox().initializeVideoOutput();
             setMediaToPlay(recApplication.getCurrentApparatusVideoLocation());
             recApplication.setVideoOutput(getVideoBox().getVideoOutput());
             recApplication.playMedia();
         } else {
-            ReCFrameView.log.info("Video isn't enable for the selected apparatus.");
+            LOGGER.info("Video isn't enable for the selected apparatus.");
         }
 
         // Toggle apparatus connected UI state
@@ -820,11 +821,11 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         // identificar se é uma situção com que temos mesmo de viver.
         // TODO Carregar em background
         getApparatusUserListPane().getModel().setExpUsersListSource(recApplication.getApparatusClientBean());
-        ReCFrameView.log.fine("Users List source took @ " + (System.currentTimeMillis() - timeStart) / 1000 + "s to start...");
+        LOGGER.fine("Users List source took @ " + (System.currentTimeMillis() - timeStart) / 1000 + "s to start...");
         timeStart = System.currentTimeMillis();
         getApparatusUserListPane().getModel().setAutoRefresh(recApplication.getReCFaceConfig().getUsersListRefreshRateMs());
 
-        ReCFrameView.log.fine("Auto Refresh set took @ " + (System.currentTimeMillis() - timeStart) / 1000 + "s to do!");
+        LOGGER.fine("Auto Refresh set took @ " + (System.currentTimeMillis() - timeStart) / 1000 + "s to do!");
         // getApparatusUserListPane().getModel().chechRefresh();
     }
 
@@ -1163,8 +1164,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
     }// GEN-LAST:event_toolBtnConnectPropertyChange
 
     private void onResize(final java.awt.event.HierarchyEvent evt) {// GEN-FIRST:event_onResize
-        if (ReCFrameView.log.isLoggable(Level.FINER)) {
-            ReCFrameView.log.finer("ReC Resize: Navigation=" + layoutContainerPane.getNavigationPane().getSize() + " Media="
+        if (LOGGER.isLoggable(Level.FINEST)) {
+            LOGGER.finest("ReC Resize: Navigation=" + layoutContainerPane.getNavigationPane().getSize() + " Media="
                     + layoutContainerPane.getMediaPane().getSize() + " Center=" + layoutContainerPane.getApparatusDescriptionPane().getSize()
                     + " LayoutContainer=" + layoutContainerPane.getSize() + " Frame=" + getFrame().getSize());
         }
