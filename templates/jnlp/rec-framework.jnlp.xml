@@ -61,9 +61,9 @@
 		<jar href="lib/OSP3D_sig.jar" />
 		<jar href="lib/vecmath_sig.jar" />
 
-		<jar href="lib/commons-i18n-0.0.1-SNAPSHOT_sig.jar" />
-		<jar href="lib/commons-net-0.0.1-SNAPSHOT_sig.jar" />
-		<jar href="lib/rec.web-api-0.0.1-SNAPSHOT_sig.jar" />
+		<jar href="lib/commons-i18n_sig.jar" />
+		<jar href="lib/commons-net_sig.jar" />
+		<jar href="lib/rec.web-api_sig.jar" />
 
 		<!-- Jar ReC Client -->
 
