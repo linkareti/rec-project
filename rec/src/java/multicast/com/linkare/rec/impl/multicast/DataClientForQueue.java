@@ -99,6 +99,14 @@ public class DataClientForQueue {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+		return this.dcw != null ? this.dcw.hashCode() : 0;
+	}
+
 	public boolean isConnected() {
 		return dcw.isConnected();
 	}
@@ -261,15 +269,19 @@ public class DataClientForQueue {
 			try {
 				if (o instanceof HardwareStateChangeEvent) {
 					final HardwareStateChangeEvent evt = (HardwareStateChangeEvent) o;
-					LOGGER.log(Level.FINE, "Dispatching hardware state [" + evt.getNewState() + "] + Client : "+DataClientForQueue.this.getUserName());
+					LOGGER.log(Level.FINE, "Dispatching hardware state [" + evt.getNewState() + "] + Client : "
+							+ DataClientForQueue.this.getUserName());
 					dcw.hardwareStateChange(evt.getNewState());
-					LOGGER.log(Level.FINE, "Dispatched hardware state [" + evt.getNewState() + "] + Client : "+DataClientForQueue.this.getUserName());
+					LOGGER.log(Level.FINE, "Dispatched hardware state [" + evt.getNewState() + "] + Client : "
+							+ DataClientForQueue.this.getUserName());
 				}
 				if (o instanceof HardwareChangeEvent) {
-					//HardwareChangeEvent evt=(HardwareChangeEvent) o;
-					LOGGER.log(Level.FINE, "Dispatching hardware change + Client : "+DataClientForQueue.this.getUserName());
+					// HardwareChangeEvent evt=(HardwareChangeEvent) o;
+					LOGGER.log(Level.FINE,
+							"Dispatching hardware change + Client : " + DataClientForQueue.this.getUserName());
 					dcw.hardwareChange();
-					LOGGER.log(Level.FINE, "Dispatched hardware change + Client : "+DataClientForQueue.this.getUserName());
+					LOGGER.log(Level.FINE,
+							"Dispatched hardware change + Client : " + DataClientForQueue.this.getUserName());
 				}
 				if (o instanceof ChatMessageEvent) {
 					final ChatMessageEvent evt = (ChatMessageEvent) o;
@@ -277,18 +289,20 @@ public class DataClientForQueue {
 						return;
 					}
 
-					LOGGER.log(Level.FINE, "Dispatching chat message + Client : "+DataClientForQueue.this.getUserName());
+					LOGGER.log(Level.FINE,
+							"Dispatching chat message + Client : " + DataClientForQueue.this.getUserName());
 					dcw.receiveMessage(evt.getUserFrom().getUserName(), evt.getUserTo().getUserName(), evt.getMessage());
-					LOGGER.log(Level.FINE, "Dispatched chat message + Client : "+DataClientForQueue.this.getUserName());
+					LOGGER.log(Level.FINE,
+							"Dispatched chat message + Client : " + DataClientForQueue.this.getUserName());
 				}
 				if (o instanceof HardwareLockEvent) {
 					final HardwareLockEvent evt = (HardwareLockEvent) o;
 					// aqui o evento de HardwareLock que esta na Queue e
 					// desmultiplicado
 					// para true CORBA way
-					LOGGER.log(Level.FINE, "Dispatching lock to + Client : "+DataClientForQueue.this.getUserName());
+					LOGGER.log(Level.FINE, "Dispatching lock to + Client : " + DataClientForQueue.this.getUserName());
 					dcw.hardwareLockable(evt.getMillisecondsToLockSuccess());
-					LOGGER.log(Level.FINE, "Dispatched lock to + Client : "+DataClientForQueue.this.getUserName());
+					LOGGER.log(Level.FINE, "Dispatched lock to + Client : " + DataClientForQueue.this.getUserName());
 					// para alem disso, o proprio evento tem consigo
 					// um Thread para fazer o countDown...
 					evt.startCountDown();

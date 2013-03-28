@@ -89,6 +89,14 @@ public class DataReceiverForQueue
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+		return this.drw != null ? this.drw.hashCode() : 0;
+	}
+
 	public boolean isConnected() {
 		return drw.isConnected();
 	}
