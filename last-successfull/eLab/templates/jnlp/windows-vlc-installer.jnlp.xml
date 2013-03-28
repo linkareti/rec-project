@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jnlp PUBLIC "-//Sun Microsystems, Inc//DTD JNLP Descriptor 6.0//EN" "http://java.sun.com/dtd/JNLP-6.0.dtd">
+<jnlp codebase="@codebase@" href="windows-vlc-installer.jnlp" spec="6.0+">
+	<information>
+		<title>@windows.vlc.intaller.title@</title>
+		<vendor>@windows.vlc.intaller.vendor@</vendor>
+		<homepage href="@windows.intaller.homepage@" />
+		<description>@windows.vlc.intaller.description@</description>
+		<description kind="one-line">@windows.vlc.intaller.description.oneline@
+		</description>
+		<description kind="tooltip">@windows.vlc.intaller.description.tooltip@
+		</description>
+		<description kind="short">@windows.vlc.intaller.description.short@
+		</description>
+		<icon href="@windows.vlc.intaller.icon@" />
+		<icon kind="splash" href="@windows.vlc.intaller.icon.splash@" />
+		<offline-allowed />
+		<related-content href="@vlc.home.url@">
+			<title>@vlc.home.title@</title>
+			<description>@vlc.home.description@</description>
+			<icon href="@vlc.home.icon@" />
+		</related-content>
+	</information>
+	<information locale="en">
+		<title>@windows.vlc.intaller.title.en@</title>
+		<vendor>@windows.vlc.intaller.vendor@</vendor>
+		<homepage href="@windows.vlc.intaller.homepage.en@" />
+		<description>@windows.vlc.intaller.description.en@</description>
+		<description kind="one-line">@windows.vlc.intaller.description.oneline.en@
+		</description>
+		<description kind="tooltip">@windows.vlc.intaller.description.tooltip.en@
+		</description>
+		<description kind="short">@windows.vlc.intaller.description.short.en@
+		</description>
+		<related-content href="@vlc.home.url.en@">
+			<title>@vlc.home.title.en@</title>
+			<description>@vlc.home.description.en@</description>
+			<icon href="@vlc.home.icon@" />
+		</related-content>
+	</information>
+	<security>
+		<all-permissions />
+	</security>
+	<update check="always" policy="always" />
+	<resources>
+		<j2se version="1.6+" />
+		<jar download="eager" href="ReCClient_sig.jar" main="true" />
+		<jar download="eager" href="ReCCommon_sig.jar" main="true" />
+		<!--property name="jnlp.packEnabled" value="true" /-->
+		<property name="vlc.plugins.destdir" value="@vlc.plugins.destdir@" />
+		<property name="vlc.plugins.filename" value="@vlc.plugins.filename@" />
+	</resources>
+
+	<!-- obter as libs para as várias archs se necessário -->
+	<resources arch="x86" os="Windows">
+		<jar download="lazy" href="lib/vlcplugins_win32_x86_sig.jar" />
+		<jar download="lazy" href="lib/codecs_win32_sig.jar" />
+	</resources>
+
+	<resources arch="x86_64" os="Windows">
+		<jar download="lazy" href="lib/vlcplugins_win32_x86_sig.jar" />
+		<jar download="lazy" href="lib/codecs_win32_sig.jar" />
+	</resources>
+	
+	<resources arch="amd" os="Windows">
+		<jar download="lazy" href="lib/vlcplugins_win32_x86_sig.jar" />
+		<jar download="lazy" href="lib/codecs_win32_sig.jar" />
+	</resources>
+
+	<resources arch="amd64" os="Windows">
+		<jar download="lazy" href="lib/vlcplugins_win32_x86_sig.jar" />
+		<jar download="lazy" href="lib/codecs_win32_sig.jar" />
+	</resources>
+
+	<installer-desc
+		main-class="com.linkare.rec.impl.newface.installer.windows.WindowsInstaller" />
+</jnlp>
