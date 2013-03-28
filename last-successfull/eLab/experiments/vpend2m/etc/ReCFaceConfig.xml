@@ -1,9 +1,0 @@
-
-<apparatus xmlns="http://rec.linkare.com/client/config" virtual="true" toolTipBundleKey="pend2m$rec.exp.tip.pend2m" location="PENDULO_DUPLO_MOTORIZADO_V1.0" iconLocationBundleKey="pend2m$rec.exp.icon.pend2m" headerDisplayClassLocationBundleKey="" displayStringBundleKey="pend2m$rec.exp.title.pend2m" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="pend2m$rec.exp.background.pend2m" descriptionStringBundleKey="pend2m$rec.exp.description.pend2m" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="pend2m$rec.exp.customizer.pend2m" order="1">
-    <display toolTipBundleKey="pend2m$rec.exp.display.pend2m.tip.anim" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor" displayStringBundleKey="pend2m$rec.exp.display.pend2m.title.anim" classLocationBundleKey="pend2m$rec.exp.display.pend2m.loc.anim" order="1"/>
-    <display toolTipBundleKey="pend2m$rec.exp.display.pend2m.tip.3" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="pend2m$rec.exp.display.pend2m.title.3" classLocationBundleKey="pend2m$rec.exp.display.pend2m.loc.3" order="2"/>
-    <display toolTipBundleKey="pend2m$rec.exp.display.pend2m.tip.1" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="pend2m$rec.exp.display.pend2m.title.1" classLocationBundleKey="pend2m$rec.exp.display.pend2m.loc.1" order="3"/>
-    <display toolTipBundleKey="pend2m$rec.exp.display.pend2m.tip.2" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="pend2m$rec.exp.display.pend2m.title.2" classLocationBundleKey="pend2m$rec.exp.display.pend2m.loc.2" order="4"/>
-    <localizationBundle name="pend2m" location="recresource:///pt/utl/ist/elab/client/vpend2m/resources/messages"/>
-    <mediaConfig videoLocation="http://elabmc.ist.utl.pt/planck.sdp" offlinePlay="true" canSave="true" order="0"/>
-</apparatus>
