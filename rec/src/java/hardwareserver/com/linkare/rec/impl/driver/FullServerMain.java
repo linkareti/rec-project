@@ -14,6 +14,7 @@ import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.config.ReCSystemPropertyLocation;
 import com.linkare.rec.impl.threading.ProcessingManager;
 import com.linkare.rec.impl.utils.ORBBean;
+import com.linkare.rec.impl.utils.SystemExitSecurityManager;
 
 /**
  * 
@@ -27,6 +28,7 @@ public class FullServerMain {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		System.setSecurityManager(new SystemExitSecurityManager());
 		try {
 			Set<ReCSystemProperty> listRequiredNotDefined = ReCSystemProperty
 					.listRequiredNotDefined(ReCSystemPropertyLocation.HARDWARE);

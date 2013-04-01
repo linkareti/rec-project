@@ -120,6 +120,7 @@ import com.linkare.rec.impl.newface.utils.OS;
 import com.linkare.rec.impl.newface.utils.PreferencesUtils;
 import com.linkare.rec.impl.ui.table.DefaultExperimentDataTable;
 import com.linkare.rec.impl.utils.ORBBean;
+import com.linkare.rec.impl.utils.SystemExitSecurityManager;
 import com.linkare.rec.web.config.Apparatus;
 import com.linkare.rec.web.config.Display;
 import com.linkare.rec.web.config.Lab;
@@ -139,9 +140,12 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 			@Override
 			public void uncaughtException(final Thread thread, final Throwable t) {
-				LOGGER.log(Level.SEVERE, "An uncaught exception occurred in thread " + thread, t);
-				ReCFrameView.getUnexpectedErrorBox(t).setVisible(true);
-				System.exit(-1);
+				if (SystemExitSecurityManager.isThrowingSecurityExceptionButDisposing()) {
+					SystemExitSecurityManager.clearThrowingSecurityExceptionButDisposing();
+				} else {
+					LOGGER.log(Level.SEVERE, "An uncaught exception occurred in thread " + thread, t);
+					ReCFrameView.getUnexpectedErrorBox(t).setVisible(true);
+				}
 			}
 		});
 	}
@@ -404,11 +408,11 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		try {
 			if (System.getProperty("java.util.logging.config.file") == null) {
 				LOGGER.fine("java.util.logging.config.file property is null... Deriving client.loggers.config.properties from classpath");
-				
-				
+
 				InputStream loggersConfigurationProperties = ReCApplication.class.getClassLoader().getResourceAsStream(
 						"client.loggers.config.properties");
-				LOGGER.fine("Found resource client.loggers.config.properties from classpath? "+(loggersConfigurationProperties!=null));
+				LOGGER.fine("Found resource client.loggers.config.properties from classpath? "
+						+ (loggersConfigurationProperties != null));
 				if (loggersConfigurationProperties != null) {
 					LOGGER.fine("Reading loggers configuration from inputstream from classpath... Assuming client.loggers.config.properties for client side logging configuration...");
 					LogManager.getLogManager().readConfiguration(loggersConfigurationProperties);
@@ -647,11 +651,10 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 					startApplication();
 					mayEnterApplication = checkConnectivity(splash);
 					splash.refreshBusyIcon(false);
-					if(splash.getErrorMessages().size()==0) {
+					if (splash.getErrorMessages().size() == 0) {
 						splash.dispose();
 						splashClosed();
-					}
-					else {
+					} else {
 						ReCApplication.runInEdt(new Runnable() {
 							@Override
 							public void run() {
@@ -659,7 +662,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 							}
 						});
 					}
-					
+
 				} catch (final Exception e) {
 					throw new RuntimeException(e.getMessage(), e);
 				}
@@ -667,14 +670,13 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		}.start();
 	}
 
-	
-	
-	private boolean  mayEnterApplication=false;
+	private boolean mayEnterApplication = false;
+
 	/**
 	 * 
 	 */
 	public void splashClosed() {
-		if(mayEnterApplication) {
+		if (mayEnterApplication) {
 			ReCApplication.runInEdt(new Runnable() {
 				@Override
 				public void run() {
@@ -682,12 +684,11 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 					showView();
 				}
 			});
-		}
-		else {
+		} else {
 			System.exit(0);
 		}
 	}
-	
+
 	/**
 	 * Shows the busy icon rotating and do all the validations for connectivity
 	 * testing, refreshing the error message in the interface. If an error
@@ -739,11 +740,11 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 			splash.refreshLabel(
 					getRecApplicationBundle().getString("Application.splashScreen.connecting.socket.message"), labName,
-					address.getHostAddress()+":"+hostPort[1]);
+					address.getHostAddress() + ":" + hostPort[1]);
 			if (!canReachIpOnPort(address.getHostAddress(), Integer.valueOf(hostPort[1]))) {
 				splash.registerErrorMessage(
-						getRecApplicationBundle().getString("Application.splashScreen.connecting.socket.error"), labName,
-						address.getHostAddress()+":"+hostPort[1]);
+						getRecApplicationBundle().getString("Application.splashScreen.connecting.socket.error"),
+						labName, address.getHostAddress() + ":" + hostPort[1]);
 				continue;
 			}
 
@@ -756,20 +757,22 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 					getRecApplicationBundle().getString("Application.splashScreen.autoconnect.no.lab.found"),
 					ReCSystemProperty.CLIENT_AUTO_CONNECT_APPARATUS_ID.getValue());
 		}
-		
-		if (splash.getErrorMessages().size()>0) {
-			splash.refreshLabel(true,
-					getRecApplicationBundle().getString("Application.splashScreen.errors.exist"),false);
+
+		if (splash.getErrorMessages().size() > 0) {
+			splash.refreshLabel(true, getRecApplicationBundle().getString("Application.splashScreen.errors.exist"),
+					false);
 		}
 
 		if (splash.getErrorMessages().size() < labsToCheck.size()) {
 			return true;
 		}
-		
+
 		return false;
 	}
 
 	private HashMap<String, Boolean> connectedLabs = new HashMap<String, Boolean>();
+
+	private static final SystemExitSecurityManager SYSTEM_EXIT_PREVENTER_SECURITY_MANAGER = new SystemExitSecurityManager();
 
 	/**
 	 * Checks if it is possible to resolve the name into an ip address and
@@ -915,6 +918,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 				}
 			}
 		}
+
+		SYSTEM_EXIT_PREVENTER_SECURITY_MANAGER.setMainApplicationWindow(getMainFrame());
 	}
 
 	protected void showView() {
@@ -1675,6 +1680,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	 * @param args
 	 */
 	public static void main(final String[] args) {
+		System.setSecurityManager(SYSTEM_EXIT_PREVENTER_SECURITY_MANAGER);
+
 		Application.launch(ReCApplication.class, args);
 	}
 
@@ -1766,6 +1773,4 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		return labClientBean;
 	}
 
-	
-	
 }

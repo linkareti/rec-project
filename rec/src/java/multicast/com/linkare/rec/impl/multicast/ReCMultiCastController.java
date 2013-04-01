@@ -338,7 +338,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 						LOGGER.log(Level.WARNING,"MultiCastController - Error cheking hardware connection status!", e);
 					}
 				}
-				LOGGER.log(Level.FINE, "Hardware connector waiting... " + Thread.currentThread().getName());
+				LOGGER.log(Level.FINE, "Hardware connection checker waiting... ");
 			}
 			// }
 		}

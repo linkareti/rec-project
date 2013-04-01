@@ -66,10 +66,6 @@ public class MediaSetup {
 
 	private static void loadNativeLibraries() {
 
-		// TODO alterar security manager para n ser null (O security
-		// all-permissions do jnlp n devia fazer isso????)
-		System.setSecurityManager(null);
-
 		// No Windows, é necessário fazer o System.loadLibrary antes do
 		// native.LoadLibrary. Ver se no Linux está alguma coisa num path
 		// esquisito

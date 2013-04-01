@@ -23,6 +23,7 @@ import com.linkare.rec.impl.config.ReCSystemPropertyLocation;
 import com.linkare.rec.impl.multicast.ReCMultiCastController;
 import com.linkare.rec.impl.threading.ProcessingManager;
 import com.linkare.rec.impl.utils.ORBBean;
+import com.linkare.rec.impl.utils.SystemExitSecurityManager;
 
 /**
  * 
@@ -39,6 +40,8 @@ public class MultiCastControllerMain {
 	 * @param args the command line arguments
 	 */
 	public static void main(final String[] args) {
+		System.setSecurityManager(new SystemExitSecurityManager());
+		
 		ReCMultiCastController mcc = null;
 		try {
 			
