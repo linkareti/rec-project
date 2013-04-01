@@ -97,7 +97,7 @@
 			</fileset>
 		</copy>
 
-		<copy file="${templates.dir.logs}/client.loggers.config.properties" todir="${rec.common.classes.dir}/client.loggers.config.properties"/>
+		<copy file="${templates.dir.logs}/client.loggers.config.properties" todir="${rec.common.classes.dir}/"/>
 
 		<manifest file="${rec.common.classes.dir}/META-INF/MANIFEST.MF">
 			<section name="common">
@@ -189,7 +189,7 @@
 	</target>
 
 	<target name="repack.jar.rec.client" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
-		<repack.jar file="${common.build.dir}/ReCClient.jar" />
+		<repack.jar file="${client.build.dir}/ReCClient.jar" />
 	</target>
 
 	<target name="sign.rec.client" description="sign the rec client jar">

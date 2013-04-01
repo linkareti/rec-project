@@ -51,20 +51,20 @@ web.server=
 web.server.dir=
 
 ##KEYSTORE CONFIGURATION###
-rec.keystore=cert/ISTJavaSign.KeyStore.p12
+rec.keystore=cert/jpereira_dev.jks
 #rec.storetype=jks,pkcs12
-rec.storetype=pkcs12
-rec.keypass=askPass
-rec.storepass=askPass
-rec.alias=ISTJavaSign
+rec.storetype=jks
+rec.keypass=8Hwr03Ipq0
+rec.storepass=8Hwr03Ipq0
+rec.alias=jpereira
 
 ##KEYSTORE CONFIGURATION###
-elab.keystore=cert/ISTJavaSign.KeyStore.p12
+elab.keystore=cert/jpereira_elab.jks
 #elab.storetype=jks,pkcs12
-elab.storetype=pkcs12
+elab.storetype=jks
 elab.keypass=askPass
 elab.storepass=askPass
-elab.alias=ISTJavaSign
+elab.alias=jpereira_elab
 
 ##PACK 200##
 #set it to true if you want to generate packed client libs for smaller client deployment
