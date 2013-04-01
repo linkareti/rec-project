@@ -93,7 +93,7 @@ public class GammaStampDataSource extends AbstractStampDataSource {
 
 		total_samples = config.getTotalSamples();
 
-		tbs = 1000 / (float) config.getSelectedFrequency().getFrequency();
+		tbs = (float) config.getSelectedFrequency().getFrequency();
 	}
 
 	private boolean stopped = false;

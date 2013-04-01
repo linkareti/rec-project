@@ -30,7 +30,7 @@ public class StampGammaProcessor extends AbstractStampProcessor {
 	 * This method makes the Processor process the command passed in...
 	 * 
 	 * @param command the command that this processor will have to process
-	 * @return boolean - wether the processing was successful
+	 * @return boolean - whether the processing was successful
 	 * 
 	 */
 	@Override
@@ -54,7 +54,7 @@ public class StampGammaProcessor extends AbstractStampProcessor {
 					command.addCommandData(StampGammaProcessor.TIME, oTime);
 
 					pressao = Integer.parseInt(splitedStr[0]);
-					final Float oPressao = new Float(pressao * 0.398 + 98);
+					final Float oPressao = new Float(pressao * 0.4476 + 35);
 					command.addCommandData(StampGammaProcessor.PRESSAO, oPressao);
 
 					ondamic = Integer.parseInt(splitedStr[1]);

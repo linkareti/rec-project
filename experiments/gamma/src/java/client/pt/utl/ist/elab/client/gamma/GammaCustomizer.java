@@ -176,7 +176,7 @@ public class GammaCustomizer extends AbstractCustomizer {
 		jSliderSTime.setMinimum(1);
 		jSliderSTime.setPaintLabels(true);
 		jSliderSTime.setPaintTicks(true);
-		jSliderSTime.setSnapToTicks(true);
+		jSliderSTime.setSnapToTicks(false);
 		jSliderSTime.setValue(10);
 		jSliderSTime.addChangeListener(new javax.swing.event.ChangeListener() {
 			@Override
@@ -211,7 +211,7 @@ public class GammaCustomizer extends AbstractCustomizer {
 		jSliderNPoints.setMinimum(1);
 		jSliderNPoints.setPaintLabels(true);
 		jSliderNPoints.setPaintTicks(true);
-		jSliderNPoints.setSnapToTicks(true);
+		jSliderNPoints.setSnapToTicks(false);
 		jSliderNPoints.setValue(500);
 		jSliderNPoints.addChangeListener(new javax.swing.event.ChangeListener() {
 			@Override
