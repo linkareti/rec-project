@@ -108,52 +108,36 @@ public class DataReceiverQueue implements java.io.Serializable {
 		LOGGER.log(Level.INFO, "DataReceiverQueue - shut down completed!");
 	}
 
-	public boolean add(final DataReceiver dr, final IResource resource, final DataProducerState currentState)
-			throws MaximumClientsReached, NotAuthorized {
-		LOGGER.log(Level.INFO, "DataReceiverQueue - trying to register new dataReceiver!");
+	public DataReceiverForQueue add(final DataReceiver dr, final IResource resource,
+			final DataProducerState currentState) throws MaximumClientsReached, NotAuthorized {
+		LOGGER.log(Level.FINEST, "DataReceiverQueue - trying to register new dataReceiver!");
 
-//		if (messageQueue.isStopdispatching()) {
-//			LOGGER.log(Level.INFO, "DataReceiverQueue - The EventQueue is already stoped dispatching. "
-//					+ "Can't register DataReceiver if ain't gonna be nothing more to dispatch!");
-//			return false;
-//		}
-
-		boolean retVal = false;
 		final DataReceiverForQueue drfq = new DataReceiverForQueue(dr, dataReceiverForQueueAdapter);
 
 		synchronized (queueOrg) {
 			if (queueOrg.size() >= getMaximumDataReceivers()) {
 				LOGGER.log(
-						Level.INFO,
+						Level.SEVERE,
 						"DataReceiverQueue - Maximum capacity reached... Going to deny dataReceiver's request for registration! Maybe try later?");
 				throw new MaximumClientsReached(
 						MaximumClientsReachedConstants.MAXIMUM_RECEIVERS_REACHED_IN_DATA_PRODUCER,
 						getMaximumDataReceivers());
 			}
 
-			LOGGER.log(Level.INFO, "DataReceiverQueue : checking to see if DataReceiver is allready registered!");
+			LOGGER.log(Level.FINEST, "DataReceiverQueue : checking to see if DataReceiver is allready registered!");
 
 			if (contains(drfq)) {
 				if (!drfq.isConnected()) {
-					LOGGER.log(Level.INFO, "DataReceiverQueue : dataReceiver is not connected - shutting it down!");
+					LOGGER.log(Level.SEVERE, "DataReceiverQueue : dataReceiver is not connected - shutting it down!");
 					drfq.shutdown();
-				} else {
-					// datareceiver is allready registered... just ignore it...
-					return true;
 				}
+			} else {
+				LOGGER.log(Level.FINEST, "DataReceiverQueue - Going to register dataReceiver!");
+				queueOrg.add(drfq);
 			}
-
-			LOGGER.log(Level.INFO, "DataReceiverQueue - Going to register dataReceiver!");
-			retVal = queueOrg.add(drfq);
-			LOGGER.log(Level.INFO, "DataReceiverQueue - registered dataReceiver "
-					+ (retVal ? "successfully!" : "failed!"));
-			LOGGER.log(Level.INFO,
-					"DataReceiverQueue - Informing dataReceiver of current State "+currentState+" - just to get him goin'!");
-			drfq.stateChanged(new DataProducerStateChangeEvent(currentState));
-
 		}
 
-		return retVal;
+		return drfq;
 	}
 
 	public Iterator<DataReceiverForQueue> iterator() {
@@ -350,9 +334,9 @@ public class DataReceiverQueue implements java.io.Serializable {
 
 	/* Inner Class - DataReceivers Connection Checker */
 	private class DataReceiversConnectionCheck extends ScheduledWorkUnit {
-		private final boolean shutdown = false;
 
 		DataReceiversConnectionCheck() {
+			// shutdown is made by super class
 			ExecutorScheduler.scheduleAtFixedRate(this, 1, 1, TimeUnit.SECONDS);
 		}
 
@@ -360,10 +344,10 @@ public class DataReceiverQueue implements java.io.Serializable {
 		public void run() {
 
 			final Iterator<DataReceiverForQueue> iterDataReceivers = iterator();
-			while (iterDataReceivers.hasNext() /* && !shutdown */) {
+			while (iterDataReceivers.hasNext()) {
 				try {
 					final DataReceiverForQueue drfq = iterDataReceivers.next();
-					if (!drfq.isConnected() && !shutdown) {
+					if (!drfq.isConnected()) {
 						drfq.shutdownAsSoonAsPossible();
 					}
 				} catch (final Exception e) {

@@ -18,6 +18,7 @@ import com.linkare.rec.acquisition.NotAuthorized;
 import com.linkare.rec.impl.events.DataProducerStateChangeEvent;
 import com.linkare.rec.impl.events.NewSamplesEvent;
 import com.linkare.rec.impl.exceptions.NotAuthorizedConstants;
+import com.linkare.rec.impl.threading.ProcessingManager;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
 import com.linkare.rec.impl.wrappers.DataReceiverWrapper;
@@ -106,13 +107,12 @@ public class DataReceiverForQueue
 			return;
 		}
 
-		(new Thread() {
+		ProcessingManager.getInstance().execute(new Runnable() {
 			@Override
 			public void run() {
-				setName(getName() + " - DataReceiverForQueue - shutdown");
 				shutdown();
 			}
-		}).start();
+		});
 	}
 
 	private boolean shutdown = false;

@@ -663,7 +663,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations, Notifi
 					final DataClientForQueue oldOwnerDataClient = ownerDataClient;
 
 					if (ChangeOwnerInNextLockCycle == ReCMultiCastHardware.OWNER_CHANGE) {
-						log(Level.INFO, "Rotating DataClient Queue for lock...");
+						log(Level.FINEST, "Rotating DataClient Queue for lock...");
 						clientQueue.moveFirstToLast();
 					}
 
@@ -789,11 +789,8 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations, Notifi
 
 	@Override
 	public UserInfo[] getClientList(final UserInfo user) throws NotRegistered, NotAuthorized {
-		log(Level.FINEST,
-				"Hardware - Getting the client list for user " + (user == null ? "(user is null)" : user.getUserName()));
 		final UserInfo[] retVal = clientQueue.getUsers(user, resource);
-		log(Level.FINEST, "Hardware - Got as retVal " + retVal);
-
+		
 		if (retVal != null) {
 			final DateTime initTime = new DateTime(timeStartMin);
 			final DateTime endTime = new DateTime(initTime);

@@ -218,11 +218,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 	 */
 	@Override
 	public UserInfo[] getClientList(final UserInfo user) throws NotRegistered, NotAuthorized {
-		LOGGER.log(Level.FINEST,
-				"Controller - Getting the client list for user "
-						+ (user == null ? "(user is null)" : user.getUserName()));
 		final UserInfo[] retVal = clientQueue.getUsers(user, resource);
-		LOGGER.log(Level.FINEST, "Controller - Got as retVal " + retVal);
 		return retVal;
 	}
 
@@ -361,7 +357,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 			ReCMultiCastHardware addedHardware = null;
 			synchronized (multiCastHardwares) {
 
-				LOGGER.log(Level.INFO, "Trying to add an Hardware");
+				LOGGER.log(Level.FINEST, "Trying to add an Hardware");
 				String hardwareId = null;
 
 				try {
@@ -388,12 +384,12 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 							// same
 							// delegate... just
 							// return and do nothing
-							LOGGER.log(Level.INFO, "Hardware with ID " + hardwareId
+							LOGGER.log(Level.FINEST, "Hardware with ID " + hardwareId
 									+ " is refreshing registration at the MultiCastController!");
 							return;
 						} else {// same id, not same delegate... say it and
 							// replace delegate...
-							LOGGER.log(Level.INFO,
+							LOGGER.log(Level.WARNING,
 									"There seems to be two hardwares with the same ID registering at this MultiCastController. The ID in question is "
 											+ hardwareId + ". Checking to see if the old one is still connected...");
 							if (!hardware.getHardware().isConnected()) {
@@ -403,7 +399,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 								iter.remove();
 								break;
 							} else {
-								LOGGER.log(Level.INFO, "The old hardware with " + hardwareId
+								LOGGER.log(Level.SEVERE, "The old hardware with " + hardwareId
 										+ " is still alive... Please give the new hardware a different ID...");
 								return;
 							}

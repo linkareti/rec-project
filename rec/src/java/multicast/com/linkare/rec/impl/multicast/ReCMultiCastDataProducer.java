@@ -26,6 +26,9 @@ import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.data.SamplesPacketMatrix;
 import com.linkare.rec.impl.data.SamplesPacketReadException;
+import com.linkare.rec.impl.events.DataProducerStateChangeEvent;
+import com.linkare.rec.impl.events.NewPoisonSamplesEvent;
+import com.linkare.rec.impl.events.NewSamplesEvent;
 import com.linkare.rec.impl.exceptions.NotAnAvailableSamplesPacketExceptionConstants;
 import com.linkare.rec.impl.multicast.security.DefaultResource;
 import com.linkare.rec.impl.multicast.security.IResource;
@@ -195,7 +198,7 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 		final boolean elapsedTime = lastGetSamplesTimestamp < System.currentTimeMillis()
 				- ReCMultiCastDataProducer.GET_SAMPLES_IDLE_TIME;
 		if ((!getDataProducerState().equals(DataProducerState.DP_WAITING)) && isExit()
-				&& (dataReceiversQueue == null || dataReceiversQueue.isShutdown()) && elapsedTime) {
+				&& (dataReceiversQueue == null || dataReceiversQueue.isShutdown() || alreadySavedOnRepository) && elapsedTime) {
 			LOGGER.log(Level.FINE, getOID() + " is now deactivatable!");
 			LOGGER.log(Level.FINE, getOID() + " Data Producer State is " + getDataProducerState()
 					+ " and Data Receivers Queue Shutdown is " + dataReceiversQueue.isShutdown()
@@ -215,7 +218,20 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 		LOGGER.log(Level.INFO, "Received request to register a new DataReceiver in ReCMultiCastDataProducer "
 				+ getOID());
 		try {
-			dataReceiversQueue.add(data_receiver, resource, getDataProducerState());
+			DataProducerState currentDataProducerState = getDataProducerState();
+			DataReceiverForQueue drfq = dataReceiversQueue.add(data_receiver, resource, currentDataProducerState);
+			LOGGER.log(Level.FINEST,
+					"DataReceiverQueue - Informing dataReceiver of current State "+currentDataProducerState+" - just to get him goin'!");
+			DataProducerStateChangeEvent currentDataProducerStateChangeEvent = new DataProducerStateChangeEvent(currentDataProducerState);
+			if(alreadySavedOnRepository) {
+				drfq.stateChanged(new DataProducerStateChangeEvent(DataProducerState.DP_STARTED_NODATA));
+				drfq.stateChanged(new DataProducerStateChangeEvent(DataProducerState.DP_STARTED));
+			}
+			drfq.stateChanged(currentDataProducerStateChangeEvent);
+			if(!currentDataProducerState.equals(DataProducerState.DP_WAITING) || !currentDataProducerState.equals(DataProducerState.DP_STARTED_NODATA)) {
+				NewSamplesEvent event = this.alreadySavedOnRepository?new NewPoisonSamplesEvent(getLargestPacketKnown()):new NewSamplesEvent(getLargestPacketKnown());
+				drfq.newSamples(event);
+			}
 		} catch (final NotAuthorized e) {
 			LOGGER.log(Level.SEVERE, "Couldn't register data receiver: " + data_receiver, e);
 		} catch (final MaximumClientsReached mcr) {

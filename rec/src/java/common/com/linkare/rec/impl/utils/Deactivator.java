@@ -48,20 +48,7 @@ public class Deactivator extends ScheduledWorkUnit {
 		}
 		final byte[] oid = deactivatable.getOID().getBytes();
 		try {
-			/*
-			 * System.out.println("************************************");
-			 * System.out.println("************************************");
-			 * System.out.println("Going to deactivate object with ID=" + (new
-			 * String(oid)) + " in POA "+deactivatable.getPOA().the_name());
-			 */
 			deactivatable.getPOA().deactivate_object(oid);
-			/*
-			 * System.out.println("Apparently deactivated object with ID=" +
-			 * (new String(oid)) +
-			 * " in POA "+deactivatable.getPOA().the_name());
-			 * System.out.println("************************************");
-			 * System.out.println("************************************");
-			 */
 			deactivated = true;
 		} catch(final ObjectNotActive e) {
 			deactivated = true;
