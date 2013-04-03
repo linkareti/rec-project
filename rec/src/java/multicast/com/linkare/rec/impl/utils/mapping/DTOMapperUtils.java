@@ -8,8 +8,6 @@ package com.linkare.rec.impl.utils.mapping;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -20,31 +18,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-
 import com.linkare.rec.acquisition.NotAvailableException;
 import com.linkare.rec.acquisition.UserInfo;
-import com.linkare.rec.web.ClientInfoDTO;
-import com.linkare.rec.web.HardwareInfoDTO;
-import com.linkare.rec.web.RegisteredHardwareDTO;
-import com.linkare.rec.web.RepositoryFacade;
-import com.linkare.rec.web.repository.ByteArrayValueDTO;
-import com.linkare.rec.web.repository.ChannelAcquisitionConfigDTO;
-import com.linkare.rec.web.repository.DataProducerDTO;
-import com.linkare.rec.web.repository.DataProducerStateEnum;
-import com.linkare.rec.web.repository.DateTimeDTO;
-import com.linkare.rec.web.repository.FrequencyDTO;
-import com.linkare.rec.web.repository.FrequencyDefTypeEnum;
-import com.linkare.rec.web.repository.HardwareAcquisitionConfigDTO;
-import com.linkare.rec.web.repository.MultiplierEnum;
-import com.linkare.rec.web.repository.ParameterConfigDTO;
-import com.linkare.rec.web.repository.PhysicsValDTO;
-import com.linkare.rec.web.repository.PhysicsValueDTO;
-import com.linkare.rec.web.repository.PhysicsValueTypeEnum;
-import com.linkare.rec.web.repository.RowPhysicsValueDTO;
-import com.linkare.rec.web.repository.SamplesPacketDTO;
-import com.linkare.rec.web.repository.ScaleDTO;
 import com.linkare.rec.data.Multiplier;
 import com.linkare.rec.data.acquisition.ByteArrayValue;
 import com.linkare.rec.data.acquisition.PhysicsVal;
@@ -61,10 +36,27 @@ import com.linkare.rec.data.synch.FrequencyDefType;
 import com.linkare.rec.data.synch.Time;
 import com.linkare.rec.impl.data.SamplesPacketMatrix;
 import com.linkare.rec.impl.multicast.ReCMultiCastDataProducer;
-import com.linkare.rec.impl.multicast.repository.IRepository;
-import com.linkare.rec.impl.multicast.repository.RepositoryFactory;
 import com.linkare.rec.impl.utils.DataCollectorState;
 import com.linkare.rec.impl.utils.RegisteredHardwareInfo;
+import com.linkare.rec.web.ClientInfoDTO;
+import com.linkare.rec.web.HardwareInfoDTO;
+import com.linkare.rec.web.RegisteredHardwareDTO;
+import com.linkare.rec.web.repository.ByteArrayValueDTO;
+import com.linkare.rec.web.repository.ChannelAcquisitionConfigDTO;
+import com.linkare.rec.web.repository.DataProducerDTO;
+import com.linkare.rec.web.repository.DataProducerStateEnum;
+import com.linkare.rec.web.repository.DateTimeDTO;
+import com.linkare.rec.web.repository.FrequencyDTO;
+import com.linkare.rec.web.repository.FrequencyDefTypeEnum;
+import com.linkare.rec.web.repository.HardwareAcquisitionConfigDTO;
+import com.linkare.rec.web.repository.MultiplierEnum;
+import com.linkare.rec.web.repository.ParameterConfigDTO;
+import com.linkare.rec.web.repository.PhysicsValDTO;
+import com.linkare.rec.web.repository.PhysicsValueDTO;
+import com.linkare.rec.web.repository.PhysicsValueTypeEnum;
+import com.linkare.rec.web.repository.RowPhysicsValueDTO;
+import com.linkare.rec.web.repository.SamplesPacketDTO;
+import com.linkare.rec.web.repository.ScaleDTO;
 
 /**
  * Utils methods to convert from rec model to DTO and DTO to rec model.
@@ -850,7 +842,7 @@ public final class DTOMapperUtils {
 	}
 
 	// Only for test purposes
-	public static void main(String[] args) throws Exception {
+//	public static void main(String[] args) throws Exception {
 
 		// final RepositoryFacade repositoryFacade = lookup();
 		// final DataProducerDTO experimentResultByID = repositoryFacade
@@ -875,158 +867,158 @@ public final class DTOMapperUtils {
 
 		// testRepositoryFactory();
 
-		testRepositoryFactoryGet();
+//		testRepositoryFactoryGet();
 
-	}
+//	}
 
-	private static void testRepositoryFactory() throws Exception {
-		final String expOptica = "ELAB_OPTICA_DSPIC_V1.0";
+//	private static void testRepositoryFactory() throws Exception {
+//		final String expOptica = "ELAB_OPTICA_DSPIC_V1.0";
+//
+//		final File f = new File("/home/elab/ReC7.0/multicast/" + expOptica);
+//		final List<ReCMultiCastDataProducer> recMultiCastDataProducers = getRecMultiCastDataProducers(f);
+//
+//		System.setProperty("rec.multicast.repository",
+//				"com.linkare.rec.impl.multicast.repository.RepositoryFactory$RemoteRepository");
+//
+//		IRepository repository = RepositoryFactory.getRepository();
+//		repository.persistExperimentResult(recMultiCastDataProducers.get(0), expOptica);
+//
+//	}
+//
+//	private static void testRepositoryFactoryGet() throws Exception {
+//		final String oid = "ELAB_OPTICA_DSPIC_V1.0/Fri_Apr_01_09_18_22_GMT_2011";
+//
+//		System.setProperty("rec.multicast.repository",
+//				"com.linkare.rec.impl.multicast.repository.RepositoryFactory$RemoteRepository");
+//
+//		IRepository repository = RepositoryFactory.getRepository();
+//		final ReCMultiCastDataProducer experimentResult = (ReCMultiCastDataProducer) repository
+//				.getExperimentResult(oid);
+//		System.out.println(experimentResult);
+//
+//		final HardwareAcquisitionConfig acquisitionHeader = experimentResult.getAcquisitionHeader();
+//
+//		System.out.println("getFamiliarName(): " + acquisitionHeader.getFamiliarName());
+//		System.out.println("getHardwareUniqueID(): " + acquisitionHeader.getHardwareUniqueID());
+//		System.out.println("getTotalSamples(): " + acquisitionHeader.getTotalSamples());
+//		System.out.println("getSelectedFrequency(): " + acquisitionHeader.getSelectedFrequency());
+//
+//		for (final ChannelAcquisitionConfig channelAcquisitionConfig : acquisitionHeader.getChannelsConfig()) {
+//			System.out.println("channelAcquisitionConfig.getChannelName(): "
+//					+ channelAcquisitionConfig.getChannelName());
+//			System.out.println("channelAcquisitionConfig.getFrequency(): "
+//					+ channelAcquisitionConfig.getSelectedFrequency().getFrequency());
+//			System.out.println("channelAcquisitionConfig.getChannelName(): "
+//					+ channelAcquisitionConfig.getSelectedScale());
+//		}
+//
+//	}
 
-		final File f = new File("/home/elab/ReC7.0/multicast/" + expOptica);
-		final List<ReCMultiCastDataProducer> recMultiCastDataProducers = getRecMultiCastDataProducers(f);
+//	private static RepositoryFacade lookup() throws NamingException {
+//		final InitialContext ic = new InitialContext();
+//
+//		return (RepositoryFacade) ic
+//				.lookup("java:global/rec.web/RepositoryFacadeBean!com.linkare.rec.web.RepositoryFacade");
+//	}
 
-		System.setProperty("rec.multicast.repository",
-				"com.linkare.rec.impl.multicast.repository.RepositoryFactory$RemoteRepository");
+//	private static void testExperimentResultsPersistence() {
+//		try {
+//
+//			final File f = new File("/home/elab/ReC7.0/multicast/ELAB_OPTICA_DSPIC_V1.0");
+//
+//			final RepositoryFacade ejb = lookup();
+//
+//			final List<ReCMultiCastDataProducer> recMultiCastDataProducers = getRecMultiCastDataProducers(f);
+//
+//			for (final ReCMultiCastDataProducer reCMultiCastDataProducer2 : recMultiCastDataProducers) {
+//
+//				final DataProducerDTO dataProducerDTO = DTOMapperUtils.mapToDataProducerDTO(reCMultiCastDataProducer2);
+//				System.out.println("sending dataproducer:  " + reCMultiCastDataProducer2.getOID());
+//				System.out
+//						.println("samples byte[] leght: " + dataProducerDTO.getSamplesPacketMatrixSerialized().length);
+//				System.out.println("dataProducerDTO.getAcqHeader()" + dataProducerDTO.getAcqHeader());
+//				try {
+//					ejb.persistExperimentResults(dataProducerDTO);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//
+//			}
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
-		IRepository repository = RepositoryFactory.getRepository();
-		repository.persistExperimentResult(recMultiCastDataProducers.get(0), expOptica);
+//	private static List<ReCMultiCastDataProducer> getRecMultiCastDataProducers(final File f) throws Exception {
+//
+//		try {
+//
+//			List<ReCMultiCastDataProducer> result = Collections.emptyList();
+//			if (f.isFile()) {
+//				result = new ArrayList<ReCMultiCastDataProducer>(1);
+//				result.add(getRecMultiCastDataProducer(f));
+//			} else if (f.isDirectory()) {
+//				File[] listFiles = f.listFiles();
+//				result = new ArrayList<ReCMultiCastDataProducer>(listFiles.length);
+//				for (final File file : listFiles) {
+//					if (file.isFile() && file.getName().indexOf("Samples") == -1
+//							&& file.getName().startsWith("DataBuffer")) {
+//						result.add(getRecMultiCastDataProducer(file));
+//					}
+//				}
+//			}
+//			return result;
+//
+//		} catch (Exception e) {
+//			throw e;
+//		}
+//	}
 
-	}
+//	private static ReCMultiCastDataProducer getRecMultiCastDataProducer(final File f) throws Exception {
+//
+//		if (!f.isFile()) {
+//			throw new IllegalArgumentException("invalid file.");
+//		}
+//
+//		ObjectInputStream objectInputStream = null;
+//		try {
+//			objectInputStream = new ObjectInputStream(new FileInputStream(f));
+//
+//			return (ReCMultiCastDataProducer) objectInputStream.readObject();
+//		} catch (Exception e) {
+//			System.out.println(f);
+//			System.out.println(e);
+//			throw e;
+//		} finally {
+//			try {
+//				if (objectInputStream != null) {
+//					objectInputStream.close();
+//				}
+//			} catch (IOException io) {
+//				io.printStackTrace();
+//			}
+//		}
+//	}
 
-	private static void testRepositoryFactoryGet() throws Exception {
-		final String oid = "ELAB_OPTICA_DSPIC_V1.0/Fri_Apr_01_09_18_22_GMT_2011";
-
-		System.setProperty("rec.multicast.repository",
-				"com.linkare.rec.impl.multicast.repository.RepositoryFactory$RemoteRepository");
-
-		IRepository repository = RepositoryFactory.getRepository();
-		final ReCMultiCastDataProducer experimentResult = (ReCMultiCastDataProducer) repository
-				.getExperimentResult(oid);
-		System.out.println(experimentResult);
-
-		final HardwareAcquisitionConfig acquisitionHeader = experimentResult.getAcquisitionHeader();
-
-		System.out.println("getFamiliarName(): " + acquisitionHeader.getFamiliarName());
-		System.out.println("getHardwareUniqueID(): " + acquisitionHeader.getHardwareUniqueID());
-		System.out.println("getTotalSamples(): " + acquisitionHeader.getTotalSamples());
-		System.out.println("getSelectedFrequency(): " + acquisitionHeader.getSelectedFrequency());
-
-		for (final ChannelAcquisitionConfig channelAcquisitionConfig : acquisitionHeader.getChannelsConfig()) {
-			System.out.println("channelAcquisitionConfig.getChannelName(): "
-					+ channelAcquisitionConfig.getChannelName());
-			System.out.println("channelAcquisitionConfig.getFrequency(): "
-					+ channelAcquisitionConfig.getSelectedFrequency().getFrequency());
-			System.out.println("channelAcquisitionConfig.getChannelName(): "
-					+ channelAcquisitionConfig.getSelectedScale());
-		}
-
-	}
-
-	private static RepositoryFacade lookup() throws NamingException {
-		final InitialContext ic = new InitialContext();
-
-		return (RepositoryFacade) ic
-				.lookup("java:global/rec.web/RepositoryFacadeBean!com.linkare.rec.web.RepositoryFacade");
-	}
-
-	private static void testExperimentResultsPersistence() {
-		try {
-
-			final File f = new File("/home/elab/ReC7.0/multicast/ELAB_OPTICA_DSPIC_V1.0");
-
-			final RepositoryFacade ejb = lookup();
-
-			final List<ReCMultiCastDataProducer> recMultiCastDataProducers = getRecMultiCastDataProducers(f);
-
-			for (final ReCMultiCastDataProducer reCMultiCastDataProducer2 : recMultiCastDataProducers) {
-
-				final DataProducerDTO dataProducerDTO = DTOMapperUtils.mapToDataProducerDTO(reCMultiCastDataProducer2);
-				System.out.println("sending dataproducer:  " + reCMultiCastDataProducer2.getOID());
-				System.out
-						.println("samples byte[] leght: " + dataProducerDTO.getSamplesPacketMatrixSerialized().length);
-				System.out.println("dataProducerDTO.getAcqHeader()" + dataProducerDTO.getAcqHeader());
-				try {
-					ejb.persistExperimentResults(dataProducerDTO);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	private static List<ReCMultiCastDataProducer> getRecMultiCastDataProducers(final File f) throws Exception {
-
-		try {
-
-			List<ReCMultiCastDataProducer> result = Collections.emptyList();
-			if (f.isFile()) {
-				result = new ArrayList<ReCMultiCastDataProducer>(1);
-				result.add(getRecMultiCastDataProducer(f));
-			} else if (f.isDirectory()) {
-				File[] listFiles = f.listFiles();
-				result = new ArrayList<ReCMultiCastDataProducer>(listFiles.length);
-				for (final File file : listFiles) {
-					if (file.isFile() && file.getName().indexOf("Samples") == -1
-							&& file.getName().startsWith("DataBuffer")) {
-						result.add(getRecMultiCastDataProducer(file));
-					}
-				}
-			}
-			return result;
-
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	private static ReCMultiCastDataProducer getRecMultiCastDataProducer(final File f) throws Exception {
-
-		if (!f.isFile()) {
-			throw new IllegalArgumentException("invalid file.");
-		}
-
-		ObjectInputStream objectInputStream = null;
-		try {
-			objectInputStream = new ObjectInputStream(new FileInputStream(f));
-
-			return (ReCMultiCastDataProducer) objectInputStream.readObject();
-		} catch (Exception e) {
-			System.out.println(f);
-			System.out.println(e);
-			throw e;
-		} finally {
-			try {
-				if (objectInputStream != null) {
-					objectInputStream.close();
-				}
-			} catch (IOException io) {
-				io.printStackTrace();
-			}
-		}
-	}
-
-	@SuppressWarnings("unchecked")
-	private static List<SamplesPacketDTO> getSamplesPacket(final byte[] samples) throws Exception {
-
-		ObjectInputStream objectInputStream = null;
-		try {
-			objectInputStream = new ObjectInputStream(new ByteArrayInputStream(samples));
-
-			return (List<SamplesPacketDTO>) objectInputStream.readObject();
-		} finally {
-			try {
-				if (objectInputStream != null) {
-					objectInputStream.close();
-				}
-			} catch (IOException io) {
-				io.printStackTrace();
-			}
-		}
-	}
+//	@SuppressWarnings("unchecked")
+//	private static List<SamplesPacketDTO> getSamplesPacket(final byte[] samples) throws Exception {
+//
+//		ObjectInputStream objectInputStream = null;
+//		try {
+//			objectInputStream = new ObjectInputStream(new ByteArrayInputStream(samples));
+//
+//			return (List<SamplesPacketDTO>) objectInputStream.readObject();
+//		} finally {
+//			try {
+//				if (objectInputStream != null) {
+//					objectInputStream.close();
+//				}
+//			} catch (IOException io) {
+//				io.printStackTrace();
+//			}
+//		}
+//	}
 
 	public static ClientInfoDTO mapToClientInfoDTO(final UserInfo userInfo) {
 		ClientInfoDTO result = null;

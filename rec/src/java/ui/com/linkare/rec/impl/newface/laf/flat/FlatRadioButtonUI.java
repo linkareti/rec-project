@@ -42,8 +42,8 @@ public class FlatRadioButtonUI extends MetalRadioButtonUI {
 
 		final Dimension size = c.getSize();
 
-		final int w = size.width;
-		final int h = size.height;
+//		final int w = size.width;
+//		final int h = size.height;
 
 		final Font f = c.getFont();
 		g.setFont(f);
