@@ -49,6 +49,19 @@ public final class ProcessingManager {
 				ProcessingManager.MAX_POOL_SIZE_PRIORITY, ProcessingManager.THREAD_IDLE_TIME, TimeUnit.NANOSECONDS,
 				new LinkedBlockingQueue<Runnable>(), new RecThreadFactory("EventQueue"));
 		threadPool.prestartAllCoreThreads();
+		
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			/**
+			 * {@inheritDoc}
+			 */
+			@Override
+			public void run() {
+				scheduleThreadPool.shutdownNow();
+				threadPool.shutdownNow();
+			}
+		});
+		
+		
 	}
 
 	/**

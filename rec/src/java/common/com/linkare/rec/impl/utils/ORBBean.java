@@ -120,7 +120,7 @@ public class ORBBean {
 	}
 
 	private class ORBRunner extends Thread {
-		org.omg.CORBA.ORB the_orb = null;
+		private org.omg.CORBA.ORB the_orb = null;
 
 		public ORBRunner(final org.omg.CORBA.ORB the_orb) {
 			this.the_orb = the_orb;
@@ -134,6 +134,15 @@ public class ORBBean {
 				notifyAll();
 			}
 			try {
+				Runtime.getRuntime().addShutdownHook(new Thread() {
+					/**
+					 * {@inheritDoc}
+					 */
+					@Override
+					public void run() {
+						the_orb.shutdown(false);
+					}
+				});
 				the_orb.run();
 			} catch (Exception e) {
 				LOGGER.log(Level.SEVERE, "Error running the ORB: " + e.getMessage(), e);
@@ -657,8 +666,10 @@ public class ORBBean {
 
 	/**
 	 * Resolves the multicast initial reference
+	 * 
 	 * @return A multicastcontroller wrapper
-	 * @throws InvalidName if the multicast controller system property does not refer to the correct object
+	 * @throws InvalidName if the multicast controller system property does not
+	 *             refer to the correct object
 	 */
 	public MultiCastControllerWrapper resolveMultiCast() throws InvalidName {
 		MultiCastController delegate;

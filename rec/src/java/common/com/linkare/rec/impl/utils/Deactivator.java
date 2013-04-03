@@ -12,8 +12,8 @@ import com.linkare.rec.impl.threading.ScheduledWorkUnit;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class Deactivator extends ScheduledWorkUnit {
-
+public class Deactivator extends ScheduledWorkUnit {	
+	
 	private Deactivatable deactivatable = null;
 	private final long DEACTIVATION_TIME = 40000;
 	private boolean deactivated = false;
