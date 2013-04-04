@@ -1,27 +1,15 @@
 
-	<!--
-		==================================================================
-	-->
-	<!--
-		= OpenORB XML profile =
-	-->
-	<!--
-		==================================================================
-	-->
+<!-- ================================================================== -->
+<!-- = OpenORB XML profile = -->
+<!-- ================================================================== -->
 
-	<!--
-		<!DOCTYPE OpenORB PUBLIC "-//openorb.sf.net//OpenORB Config//EN"
-		"http://openorb.sf.net/config/OpenORB.dtd">
-	-->
+<!-- <!DOCTYPE OpenORB PUBLIC "-//openorb.sf.net//OpenORB Config//EN" "http://openorb.sf.net/config/OpenORB.dtd"> -->
 
 <OpenORB profile="default" xmlns="http://openorb.sf.net/config"
 	xmlns:xlink="http://www.w3.org/1999/xlink">
 
-	<!--
-		I can't load the default.xml from the openorb.home...so I've decided
-		to do it this way. Check JP <profile name="default"
-		xlink:href="${openorb.home}config/default.xml#default">
-	-->
+	<!-- I can't load the default.xml from the openorb.home...so I've decided 
+		to do it this way. Check JP <profile name="default" xlink:href="${openorb.home}config/default.xml#default"> -->
 	<profile name="default" xlink:href="${openorb.home}config/default.xml#default">
 		<import xlink:href="${openorb.home}config/default.xml#CorbalocService" />
 		<import xlink:href="${openorb.home}config/default.xml#InitRef">
@@ -36,14 +24,10 @@
 			<property name="serverMinSocketAcceptTimeout" value="0" />
 			<property name="serverMaxSocketAcceptTimeout" value="250" />
 			<property name="serverOverrideSocketTimeout" value="250" />
-			<!--
-				do not use any rmi features
-			-->
+			<!-- do not use any rmi features -->
 			<property name="deserializationEngine" value="none" />
-			<!--
-				keep the sockets alive by pinging... this is good for the client
-				firewalls with bidir remaining open
-			-->
+			<!-- keep the sockets alive by pinging... this is good for the client 
+				firewalls with bidir remaining open -->
 			<property name="keepAlive" value="true" />
 			<propertyset prefix="stream-decoration">
 				<property name="1"
@@ -57,10 +41,8 @@
 			</propertyset>
 		</import>
 		<import xlink:href="${openorb.home}config/default.xml#rmi">
-			<!--
-				Use the orb singleton per default and do not try to open a second
-				orb listening on the same port
-			-->
+			<!-- Use the orb singleton per default and do not try to open a second 
+				orb listening on the same port -->
 			<property name="defaultorbSingleton" value="true" />
 		</import>
 
@@ -80,13 +62,15 @@
 
 	<profile name="ReCHardware" extends="default">
 		<import xlink:href="${openorb.home}config/default.xml#iiop">
-			<property name="bidirOnlyServer" value="false" />
+			<property name="publishIP" value="true" />
+			<property name="bidirOnlyServer" value="true" />
 		</import>
 	</profile>
 
 	<profile name="ReCHardwareDebug" extends="debug">
 		<import xlink:href="${openorb.home}config/default.xml#iiop">
-			<property name="bidirOnlyServer" value="false" />
+			<property name="publishIP" value="true" />
+			<property name="bidirOnlyServer" value="true" />
 		</import>
 	</profile>
 
