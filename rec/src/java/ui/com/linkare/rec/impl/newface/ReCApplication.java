@@ -701,7 +701,15 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	 *         otherwise.
 	 */
 	private boolean checkConnectivity(ReCSplashScreen splash) {
-
+		try {
+			InetAddress.getLocalHost().getHostName();
+		}catch(UnknownHostException e) {
+			splash.registerErrorMessage(
+					getRecApplicationBundle().getString("Application.splashScreen.unkown.localhost.error"));
+			return false;
+		}
+		
+		
 		List<Lab> labsToCheck = null;
 		if (isAutoConnectApparatus()) {
 			labsToCheck = new ArrayList<Lab>();
