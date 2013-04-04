@@ -435,7 +435,7 @@
 				<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.driver.processingmanager.threadpool.maxsize}" />
 				<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
 				<sysproperty key="experiment.driver.class" value="${experiment.driver.class}" />
-				<sysproperty key="rec.driver.rs232_config_file_path" value="${rec.driver.rs232_config_file_path}"/>
+				<sysproperty key="rec.driver.rs232_config_file_path" value="experiments/@{experiment.name}/etc/Rs232Config.xml"/>
 			</java>
 		</sequential>
 	</macrodef>
@@ -483,7 +483,7 @@
 				<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.driver.processingmanager.threadpool.maxsize}" />
 				<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
 				<sysproperty key="experiment.driver.class" value="${experiment.driver.class}" />
-				<sysproperty key="rec.driver.rs232_config_file_path" value="${rec.driver.rs232_config_file_path}"/>
+				<sysproperty key="rec.driver.rs232_config_file_path" value="experiments/@{experiment.name}/etc/Rs232Config.xml"/>
 			</java>
 		</sequential>
 	</macrodef>
