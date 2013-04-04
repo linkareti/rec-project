@@ -1,11 +1,11 @@
 #!/bin/bash
 clear
-echo Starting multicast
+echo Starting multicast @lab.name@
 
 INITIAL_HEAP_MEM=@multicast.initial.heap@
 MAX_HEAP_MEM=@multicast.max.heap@
 
-MULTICAST_BASE_DIR=./multicast
+export MULTICAST_BASE_DIR="@install.dir@@deployment.subdir@/@lab.name@/multicast"
 
 export GENERIC_ORB_SYSPROPS="-Dorg.omg.CORBA.ORBClass=org.openorb.orb.core.ORB -Dorg.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton -Dopenorb.config=$MULTICAST_BASE_DIR/etc/openorb.xml -Djava.net.preferIPv4Stack=true"
 export MULTICAST_ORB_SYSPROPS="-Dopenorb.profile=ReCMultiCastController -Drec.multicastcontroller.bindname=MultiCastController -Drec.multicastcontroller.initref=MultiCastController -Drec.percent.freememory.threshold.serialization=10 -Drec.multicastdataproducer.getsamples.idletime=60 -Drec.multicastcontroller.maxclients.per.hardware=20 -Drec.multicastcontroller.max.hardwares=40 -Drec.multicastcontroller.showgui=false"
@@ -28,13 +28,16 @@ export MULTICAST_CLASSPATH=$MULTICAST_BASE_DIR/ReCMulticastController.jar:$MULTI
 export BOOTCLASSPATH=-Xbootclasspath/p:$MULTICAST_BASE_DIR/lib/openorb_orb_omg-1.4.0.jar 
 
 echo --------------------------------------------------------------------------------
-echo BootClassPath    : $BOOTCLASSPATH
+echo "BootClassPath        : $BOOTCLASSPATH"
 echo --------------------------------------------------------------------------------
-echo ClassPath        : $RECCLASSPATH;$MULTICAST_CLASSPATH
+echo "ClassPath            : $RECCLASSPATH;$MULTICAST_CLASSPATH"
 echo --------------------------------------------------------------------------------
-echo System Properties: $GENERIC_ORB_SYSPROPS $MULTICAST_ORB_SYSPROPS $LOG_SYSPROPS $MEM_SYSPROPS 
+echo "System Properties    : $GENERIC_ORB_SYSPROPS $SECURITYMANAGER_SYSPROPS $SECURITYMANAGER_TIMES_SYSPROPS $ALLOCATIONMANAGER_SYSPROPS $PROCESSINGMANAGER_SYSPROPS $JMX_SYSPROPS $REPOSITORY_SYSPROPS $MULTICAST_ORB_SYSPROPS $LOG_SYSPROPS $MEM_SYSPROPS $TOOLKIT_SYSPROPS $SYSPROP_BADWORD_REFRESH_TIME_LAP_MINUTES $DEBUG"
+echo --------------------------------------------------------------------------------
+echo "Additional java args : @additional.java.args@" 
+echo --------------------------------------------------------------------------------
 
-java $BOOTCLASSPATH -classpath $RECCLASSPATH:$MULTICAST_CLASSPATH $GENERIC_ORB_SYSPROPS $SECURITYMANAGER_SYSPROPS $SECURITYMANAGER_TIMES_SYSPROPS $ALLOCATIONMANAGER_SYSPROPS $PROCESSINGMANAGER_SYSPROPS $JMX_SYSPROPS $REPOSITORY_SYSPROPS $MULTICAST_ORB_SYSPROPS $LOG_SYSPROPS $MEM_SYSPROPS $TOOLKIT_SYSPROPS $SYSPROP_BADWORD_REFRESH_TIME_LAP_MINUTES $DEBUG com.linkare.rec.impl.multicast.startup.MultiCastControllerMain &
+java $BOOTCLASSPATH @additional.java.args@ -classpath $RECCLASSPATH:$MULTICAST_CLASSPATH $GENERIC_ORB_SYSPROPS $SECURITYMANAGER_SYSPROPS $SECURITYMANAGER_TIMES_SYSPROPS $ALLOCATIONMANAGER_SYSPROPS $PROCESSINGMANAGER_SYSPROPS $JMX_SYSPROPS $REPOSITORY_SYSPROPS $MULTICAST_ORB_SYSPROPS $LOG_SYSPROPS $MEM_SYSPROPS $TOOLKIT_SYSPROPS $SYSPROP_BADWORD_REFRESH_TIME_LAP_MINUTES $DEBUG com.linkare.rec.impl.multicast.startup.MultiCastControllerMain &
 
 PID=$!
 echo $PID > multicast_@lab.name@.pid

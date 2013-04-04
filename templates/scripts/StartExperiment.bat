@@ -7,7 +7,7 @@ REM @ Initializing driver starter script @
 set INITIAL_HEAP_MEM=@hardwareserver.initial.heap@
 set MAX_HEAP_MEM=@hardwareserver.max.heap@
 
-set DRIVER_BASE_DIR=%CD%\hardwareserver
+set DRIVER_BASE_DIR="@install.dir@@deployment.subdir@\@experiment.name@\hardwareserver"
 
 set GENERIC_ORB_SYSPROPS=-Dorg.omg.CORBA.ORBClass=org.openorb.orb.core.ORB -Dorg.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton -Dopenorb.config=%DRIVER_BASE_DIR%/etc/openorb.xml -Djava.net.preferIPv4Stack=true
 set DRIVER_ORB_SYSPROPS=-Dopenorb.profile=ReCHardware -Drec.multicastcontroller.initref=MultiCastController -Drec.percent.freememory.threshold.serialization=10 -Drec.multicastdataproducer.getsamples.idletime=60 -Drec.driver.show.gui=false
@@ -31,12 +31,14 @@ REM set DEBUG=-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_sock
 set BOOTCLASSPATH=-Xbootclasspath/p:%DRIVER_BASE_DIR%/lib/openorb_orb_omg-1.4.0.jar
 
 echo --------------------------------------------------------------------------------
-echo BootClassPath    : %BOOTCLASSPATH%
+echo BootClassPath        : %BOOTCLASSPATH%
 echo --------------------------------------------------------------------------------
-echo ClassPath        : %RECCLASSPATH%;%DRIVER_CLASSPATH%;%DRIVER_EXPERIMENT_CLASSPATH%
+echo ClassPath            : %RECCLASSPATH%;%DRIVER_CLASSPATH%;%DRIVER_EXPERIMENT_CLASSPATH%
 echo --------------------------------------------------------------------------------
-echo System Properties: %GENERIC_ORB_SYSPROPS% %DRIVER_ORB_SYSPROPS% %LOG_SYSPROPS% %MEM_SYSPROPS% %TOOLKIT_SYSPROPS% 
+echo System Properties    : %GENERIC_ORB_SYSPROPS% %DRIVER_ORB_SYSPROPS% %LOG_SYSPROPS% %MEM_SYSPROPS% %DRIVER_HARWARE_INFO_SYSPROPS% %TOOLKIT_SYSPROPS% %EXPERIMENT_DRIVER_CLASS% %DEBUG% 
+echo --------------------------------------------------------------------------------
+echo Additional java args : @additional.java.args@
 echo --------------------------------------------------------------------------------
 
 
-java %BOOTCLASSPATH% -classpath %RECCLASSPATH%;%DRIVER_CLASSPATH%;%DRIVER_EXPERIMENT_CLASSPATH% %GENERIC_ORB_SYSPROPS% %DRIVER_ORB_SYSPROPS% %LOG_SYSPROPS% %MEM_SYSPROPS% %DRIVER_HARWARE_INFO_SYSPROPS% %TOOLKIT_SYSPROPS% %EXPERIMENT_DRIVER_CLASS% %DEBUG% @driver.main.class@ &
+java %BOOTCLASSPATH% @additional.java.args@ -classpath %RECCLASSPATH%;%DRIVER_CLASSPATH%;%DRIVER_EXPERIMENT_CLASSPATH% %GENERIC_ORB_SYSPROPS% %DRIVER_ORB_SYSPROPS% %LOG_SYSPROPS% %MEM_SYSPROPS% %DRIVER_HARWARE_INFO_SYSPROPS% %TOOLKIT_SYSPROPS% %EXPERIMENT_DRIVER_CLASS% %DEBUG% @driver.main.class@ &

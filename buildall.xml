@@ -164,11 +164,17 @@
 				<replacefilter token="@java.rmi.server.hostname@" property="java.rmi.server.hostname" />
 				<replacefilter token="@rec.multicast.repository@" property="rec.multicast.repository" />
 				<replacefilter token="@rec.multicast.badwordmanager.refresh.lap.time.minutes@" property="rec.multicast.badwordmanager.refresh.lap.time.minutes" />
+				<replacefilter token="@install.dir@" value="${install.dir}"/>
+				<replacefilter token="@deployment.subdir@" value="${deployment.subdir}"/>
+				<replacefilter token="@additional.java.args@" property="@{lab.name}.additional.java.args"/>
 			</replace>
 
 			<copy file="${templates.dir.scripts}/MultiCastDaemon.sh" overwrite="yes" tofile="${multicast.build.dir}/@{lab.name}/MultiCastDaemon.sh" />
 			<replace file="${multicast.build.dir}/@{lab.name}/MultiCastDaemon.sh" propertyFile="build.properties">
 				<replacefilter token="@lab.name@" value="@{lab.name}" />
+				<replacefilter token="@install.dir@" value="${install.dir}"/>
+				<replacefilter token="@deployment.subdir@" value="${deployment.subdir}"/>
+				<replacefilter token="@daemon.user@" value="${daemon.user}"/>
 			</replace>
 
 			<copy file="${templates.dir.scripts}/StartMultiCastController.bat" overwrite="yes" tofile="${multicast.build.dir}/@{lab.name}/StartMultiCastController.bat" />
@@ -189,6 +195,9 @@
 				<replacefilter token="@java.rmi.server.hostname@" property="java.rmi.server.hostname" />
 				<replacefilter token="@rec.multicast.repository@" property="rec.multicast.repository" />
 				<replacefilter token="@rec.multicast.badwordmanager.refresh.lap.time.minutes@" property="rec.multicast.badwordmanager.refresh.lap.time.minutes" />
+				<replacefilter token="@install.dir@" value="${install.dir}"/>
+				<replacefilter token="@deployment.subdir@" value="${deployment.subdir}"/>
+				<replacefilter token="@additional.java.args@" property="@{lab.name}.additional.java.args"/>
 			</replace>
 
 			<copy file="${templates.dir.logs}/multicast.loggers.config.properties" overwrite="yes" tofile="${multicast.build.dir}/@{lab.name}/etc/loggers.config.properties" />
@@ -238,16 +247,28 @@
 						<replacefilter token="@rec.driver.processingmanager.threadpool.maxsize@" property="rec.driver.processingmanager.threadpool.maxsize" />
 						<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
 						<replacefilter token="@driver.main.class@" property="experiment.driver.main-class" />
+						<replacefilter token="@install.dir@" value="${install.dir}"/>
+						<replacefilter token="@deployment.subdir@" value="${deployment.subdir}"/>
 					</replace>
 					<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" propertyFile="experiments/@{experiment.name}/etc/build.properties">
 						<replacefilter token="@experiment.driver.class@" property="experiment.driver.class" />
+						<replacefilter token="@additional.java.args@" property="additional.java.args" />
 					</replace>
 
 					<copy file="${templates.dir.scripts}/ExperimentDaemon.sh" overwrite="yes" tofile="${experiments.build.dir}/@{experiment.name}Daemon.sh" />
 					<replace file="${experiments.build.dir}/@{experiment.name}Daemon.sh" propertyFile="build.properties">
 						<replacefilter token="@experiment.name@" value="@{experiment.name}" />
+						<replacefilter token="@install.dir@" value="${install.dir}"/>
+						<replacefilter token="@deployment.subdir@" value="${deployment.subdir}"/>
+						<replacefilter token="@daemon.user@" value="${daemon.user}"/>
 					</replace>
-
+					<replace file="${experiments.build.dir}/@{experiment.name}Daemon.sh" propertyFile="experiments/@{experiment.name}/etc/build.properties">
+						<replacefilter token="@additional.service.start.script@" property="additional.service.start.script" />
+						<replacefilter token="@additional.service.stop.script@" property="additional.service.stop.script" />
+					</replace>
+						
+					
+					
 					<copy file="${templates.dir.scripts}/StartExperiment.bat" overwrite="yes" tofile="${experiments.build.dir}/Start@{experiment.name}Driver.bat" />
 					<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" propertyFile="build.properties">
 						<replacefilter token="@experiment.name@" value="@{experiment.name}" />
@@ -257,9 +278,12 @@
 						<replacefilter token="@rec.driver.processingmanager.threadpool.maxsize@" property="rec.driver.processingmanager.threadpool.maxsize" />
 						<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
 						<replacefilter token="@driver.main.class@" property="experiment.driver.main-class" />
+						<replacefilter token="@install.dir@" value="${install.dir}"/>
+						<replacefilter token="@deployment.subdir@" value="${deployment.subdir}"/>
 					</replace>
 					<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" propertyFile="experiments/@{experiment.name}/etc/build.properties">
-						<replacefilter token="@experiment.driver.class@" value="experiment.driver.class" />
+						<replacefilter token="@experiment.driver.class@" property="experiment.driver.class" />
+						<replacefilter token="@additional.java.args@" property="additional.java.args" />
 					</replace>
 
 					<copy file="${templates.dir.logs}/hardwareserver.loggers.config.properties" overwrite="yes" tofile="${experiments.build.dir}/@{experiment.name}/etc/loggers.config.properties" />

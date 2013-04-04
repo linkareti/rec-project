@@ -14,9 +14,9 @@
 # Short-Description: start and stop multicast_@lab.name@
 ### END INIT INFO
 
-BASE_USER=elab
-BASE_USER_HOMEDIR=~elab
-BASE_DIR="$BASE_USER_HOMEDIR/rec-deployment/multicast_@lab.name@"
+BASE_USER=@daemon.user@
+BASE_USER_HOMEDIR=~@daemon.user@
+BASE_DIR="@install.dir@@deployment.subdir@/@lab.name@/multicast"
 CURDIR=`pwd`
 CURUSER=`id -nu`
 
@@ -26,7 +26,7 @@ start() {
 		cd $BASE_DIR
         echo "Starting multicast_@lab.name@ $BASE_USER Service"
         if [ "x$CURUSER" != "x$BASE_USER" ]; then
-             `sudo -u elab sh StartMultiCastController.sh &>/dev/null`
+            `sudo -u $BASE_USER sh StartMultiCastController.sh &>/dev/null`
         else
             `sh $BASE_DIR/StartMultiCastController.sh &>/dev/null`
         fi

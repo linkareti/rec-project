@@ -435,6 +435,7 @@
 				<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.driver.processingmanager.threadpool.maxsize}" />
 				<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
 				<sysproperty key="experiment.driver.class" value="${experiment.driver.class}" />
+				<sysproperty key="rec.driver.rs232_config_file_path" value="${rec.driver.rs232_config_file_path}"/>
 			</java>
 		</sequential>
 	</macrodef>
@@ -482,31 +483,40 @@
 				<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.driver.processingmanager.threadpool.maxsize}" />
 				<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
 				<sysproperty key="experiment.driver.class" value="${experiment.driver.class}" />
+				<sysproperty key="rec.driver.rs232_config_file_path" value="${rec.driver.rs232_config_file_path}"/>
 			</java>
 		</sequential>
 	</macrodef>
 
 	<target name="run.experiment.client" description="Run one experiment client bypassing javawebstart">
+		<fail unless="lab.name">lab.name must be set to run a single lab. 
+						Pass it to jvm as arg like -Dlab.name=labname or define it on build.properties</fail>
 		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
-			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
+					Pass it to jvm as arg like -Dexperiment.name=experimentName or definit it on build.properties</fail>
 		<run.experiment.client experiment.name="${experiment.name}" />
 	</target>
 
 	<target name="debug.experiment.client" description="Debug one experiment client bypassing javawebstart">
-		<fail unless="experiment.name">experiment.name must be set to debug a single experiment. 
-			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
+		<fail unless="lab.name">lab.name must be set to run a single lab. 
+						Pass it to jvm as arg like -Dlab.name=labname or define it on build.properties</fail>
+		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
+					Pass it to jvm as arg like -Dexperiment.name=experimentName or definit it on build.properties</fail>
 		<debug.experiment.client experiment.name="${experiment.name}" />
 	</target>
 
 	<target name="run.experiment.driver" description="Run one experiment driver">
+		<fail unless="lab.name">lab.name must be set to run a single lab. 
+						Pass it to jvm as arg like -Dlab.name=labname or define it on build.properties</fail>
 		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
-			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
+					Pass it to jvm as arg like -Dexperiment.name=experimentName or definit it on build.properties</fail>
 		<run.experiment.driver experiment.name="${experiment.name}" />
 	</target>
 
 	<target name="debug.experiment.driver" description="Debug one experiment driver">
+		<fail unless="lab.name">lab.name must be set to run a single lab. 
+						Pass it to jvm as arg like -Dlab.name=labname or define it on build.properties</fail>
 		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
-			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
+			Pass it to jvm as arg like -Dexperiment.name=experimentName or definit it on build.properties</fail>
 		<debug.experiment.driver experiment.name="${experiment.name}" />
 	</target>
 

@@ -112,6 +112,14 @@ virtual_advanced.multicast.controller.port=9006
 new_exps.multicast.controller.host=localhost
 new_exps.multicast.controller.port=9007
 
+##Additional java arguments to start each multicast jvm
+basic.additional.java.args=
+intermediate.additional.java.args=
+advanced.additional.java.args=
+virtual_basic.additional.java.args=
+virtual_intermediate.additional.java.args=
+virtual_advanced.additional.java.args=
+new_exps.additional.java.args=
 
 ##SECURITYMANAGER PROPERTIES##
 # This property is necessary for the StartMultiCastController to deal with the security managers that enable the communication with the rec.web.
@@ -365,3 +373,12 @@ rec.apparatus.autoconnect.id=
 ##SYSTEM PROPERTIES - Apparatus Auto acquire result ##
 ##When this property is defined true, the user is redirected to result tab, in auto connect mode.
 rec.apparatus.autoacquireresult=false
+
+##PATH PROPERTIES FOR INSTALLATION##
+##Define the user home directory where the system will be installed (this is for replacing into scripts)
+install.dir=${basedir}
+##Define the subdirectory, if any, where the deployments will be made, relative to the install.dir above. 
+##Please note that specifying a path requires a forward slash (or back slash on windows) at the begggining
+deployment.subdir=/rec-deployment
+##Define the user to run-as in the daemon startup script
+daemon.user=elab

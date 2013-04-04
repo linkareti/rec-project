@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry combineaccessrules="false" kind="src" path="/rec.web-api"/>
 	<classpathentry kind="src" path="rec/src/java/client"/>
 	<classpathentry kind="src" path="experiments/boylemariotte/src/java/client"/>
 	<classpathentry kind="src" path="experiments/boylemariotte/src/java/server"/>

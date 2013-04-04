@@ -4,12 +4,14 @@
 #
 
 
-BASE_USER=elab
-BASE_USER_HOMEDIR=~elab
+BASE_USER=@daemon.user@
+BASE_USER_HOMEDIR=~@daemon.user@
 EXPERIMENT_NAME=@experiment.name@
-DEPLOY_DIR="$BASE_USER_HOMEDIR/rec-deployment/$EXPERIMENT_NAME"
+DEPLOY_DIR="@install.dir@@deployment.subdir@/@experiment.name@/hardwareserver"
 CURDIR=`pwd`
 CURUSER=`id -nu`
+ADDITIONAL_SERVICE_START="@additional.service.start.script@"
+ADDITIONAL_SERVICE_STOP="@additional.service.stop.script@"
 
 java_is_running() {
 	[[ -f "$DEPLOY_DIR/@experiment.name@.pid" ]] || return 1
@@ -28,6 +30,22 @@ start() {
 		return 1
 	fi
 
+	if [ "x$ADDITIONAL_SERVICE_START" != "x" ]; then
+		echo "Starting additional service '$ADDITIONAL_SERVICE_START'..."
+		if [ "x$CURUSER" != "x$BASE_USER" ]; then
+			su - l $BASE_USER -c "cd $DEPLOY_DIR; nohup $ADDITIONAL_SERVICE_START 2>&1 >/dev/null 2>/dev/null"
+		else
+			cd $DEPLOY_DIR
+			nohup $ADDITIONAL_SERVICE_START 2>&1 >/dev/null 2>/dev/null
+		fi
+		if [ $? -eq 0 ]; then
+			echo "OK"
+		else
+			echo "Not OK"
+			return 1
+		fi
+	fi
+	
 	echo "Starting @experiment.name@ service..."
 
 	if [ "x$CURUSER" != "x$BASE_USER" ]; then
@@ -54,10 +72,29 @@ start() {
 
 stop() {
 	if ( java_is_running ); then
+
+		if [ "x$ADDITIONAL_SERVICE_STOP" != "x" ]; then
+			echo "Stoping additional service '$ADDITIONAL_SERVICE_STOP'..."
+			if [ "x$CURUSER" != "x$BASE_USER" ]; then
+				su - l $BASE_USER -c "cd $DEPLOY_DIR; nohup $ADDITIONAL_SERVICE_STOP 2>&1 >/dev/null 2>/dev/null"
+			else
+				cd $DEPLOY_DIR
+				nohup $ADDITIONAL_SERVICE_STOP 2>&1 >/dev/null 2>/dev/null
+			fi
+			if [ $? -eq 0 ]; then
+				echo "OK"
+			else
+				echo "Not OK"
+				return 1
+			fi
+		fi
+
+
 		PID=`cat $DEPLOY_DIR/@experiment.name@.pid`
 
 		[ -f $DEPLOY_DIR/@experiment.name@.lock ] && rm -rf $DEPLOY_DIR/@experiment.name@.lock
 		[ -f $DEPLOY_DIR/@experiment.name@.pid ] && rm -rf $DEPLOY_DIR/@experiment.name@.pid
+
 
 		echo "Stopping @experiment.name@ service..."
 		if [ "x$CURUSER" != "x$BASE_USER" ]; then

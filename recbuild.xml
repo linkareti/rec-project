@@ -83,7 +83,7 @@
 	<target name="compile.rec.common" description="Compile the common part of the ReC project independently.">
 		<mkdir dir="${rec.common.classes.dir}" />
 		<mkdir dir="${rec.common.classes.dir}/META-INF" />
-		
+
 		<javac srcdir="${rec.common.src.java.dir}" destdir="${rec.common.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
 			<include name="**/*.java" />
 			<classpath refid="rec.common.libs.classpath" />
@@ -97,7 +97,7 @@
 			</fileset>
 		</copy>
 
-		<copy file="${templates.dir.logs}/client.loggers.config.properties" todir="${rec.common.classes.dir}/"/>
+		<copy file="${templates.dir.logs}/client.loggers.config.properties" todir="${rec.common.classes.dir}/" />
 
 		<manifest file="${rec.common.classes.dir}/META-INF/MANIFEST.MF">
 			<section name="common">
@@ -272,7 +272,7 @@
 	</target>
 
 	<target name="-openorb.rec.hardwareserver">
-		<openorb.rec.hardwareserver lab.name="${lab.name}"/>
+		<openorb.rec.hardwareserver lab.name="${lab.name}" />
 	</target>
 	<macrodef name="openorb.rec.hardwareserver" description="create the openorb configuration file for the hardware server">
 		<attribute name="lab.name" />
@@ -348,9 +348,9 @@
 	</target>
 
 	<target name="-openorb.rec.multicastcontroller">
-		<openorb.rec.multicastcontroller lab.name="${lab.name}"/>
+		<openorb.rec.multicastcontroller lab.name="${lab.name}" />
 	</target>
-	
+
 	<macrodef name="openorb.rec.multicastcontroller" description="create the openorb config file for the multicastcontroller">
 		<attribute name="lab.name" />
 		<sequential>
@@ -364,11 +364,14 @@
 		</sequential>
 	</macrodef>
 
-	<target name="run.rec.multicast" description="run the rec multicastcontroller" if="lab.name">
-		<local name="lab.jmx.port"/> 
-		<propertycopy name="lab.jmx.port" from="${lab.name}.rec.multicastcontroller.jmxremote.port"/>
-		<local name="rec.multicast.labid"/> 
-		<propertycopy name="rec.multicast.labid" from="${lab.name}.rec.web.lab.id"/>
+
+	<target name="run.rec.multicast" description="run the rec multicastcontroller">
+		<fail unless="lab.name">lab.name must be set to run a single lab. 
+				Pass it to jvm as arg like -Dlab.name=labname or define it on build.properties</fail>
+		<local name="lab.jmx.port" />
+		<propertycopy name="lab.jmx.port" from="${lab.name}.rec.multicastcontroller.jmxremote.port" />
+		<local name="rec.multicast.labid" />
+		<propertycopy name="rec.multicast.labid" from="${lab.name}.rec.web.lab.id" />
 		<java classname="${multicast.main-class}" fork="true" failonerror="true" maxmemory="${max.memory}">
 			<classpath refid="run.multicastcontroller.classpath" />
 			<jvmarg value="-Xms${min.memory}" />
@@ -390,16 +393,18 @@
 			<sysproperty key="com.sun.management.jmxremote.port" value="${lab.jmx.port}" />
 			<sysproperty key="com.sun.management.jmxremote.access.file" value="${templates.dir.jmx}/jmxremote.access" />
 			<sysproperty key="com.sun.management.jmxremote.password.file" value="${templates.dir.jmx}/jmxremote.password" />
-			<sysproperty key="rec.multicast.labid" value="${rec.multicast.labid}"/>
-			<sysproperty key="rec.multicast.repository" value="${rec.multicast.repository}"/>
+			<sysproperty key="rec.multicast.labid" value="${rec.multicast.labid}" />
+			<sysproperty key="rec.multicast.repository" value="${rec.multicast.repository}" />
 		</java>
 	</target>
 
-	<target name="debug.rec.multicast" description="run the rec multicastcontroller in debug mode" if="lab.name">
-		<local name="lab.jmx.port"/> 
-		<propertycopy name="lab.jmx.port" from="${lab.name}.rec.multicastcontroller.jmxremote.port"/>
-		<local name="rec.multicast.labid"/> 
-		<propertycopy name="rec.multicast.labid" from="${lab.name}.rec.web.lab.id"/>
+	<target name="debug.rec.multicast" description="run the rec multicastcontroller in debug mode">
+		<fail unless="lab.name">lab.name must be set to run a single lab. 
+				Pass it to jvm as arg like -Dlab.name=labname or define it on build.properties</fail>
+		<local name="lab.jmx.port" />
+		<propertycopy name="lab.jmx.port" from="${lab.name}.rec.multicastcontroller.jmxremote.port" />
+		<local name="rec.multicast.labid" />
+		<propertycopy name="rec.multicast.labid" from="${lab.name}.rec.web.lab.id" />
 		<java classname="com.linkare.rec.impl.multicast.startup.MultiCastControllerMain" fork="true" failonerror="true" maxmemory="${max.memory}">
 			<classpath refid="run.multicastcontroller.classpath" />
 			<jvmarg value="-Xdebug" />
@@ -423,8 +428,8 @@
 			<sysproperty key="com.sun.management.jmxremote.port" value="${lab.jmx.port}" />
 			<sysproperty key="com.sun.management.jmxremote.access.file" value="${templates.dir.jmx}/jmxremote.access" />
 			<sysproperty key="com.sun.management.jmxremote.password.file" value="${templates.dir.jmx}/jmxremote.password" />
-			<sysproperty key="rec.multicast.labid" value="${rec.multicast.labid}"/> 
-			<sysproperty key="rec.multicast.repository" value="${rec.multicast.repository}"/>
+			<sysproperty key="rec.multicast.labid" value="${rec.multicast.labid}" />
+			<sysproperty key="rec.multicast.repository" value="${rec.multicast.repository}" />
 		</java>
 	</target>
 
