@@ -10,14 +10,17 @@ import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.KeyboardFocusManager;
 import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.Window;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.AbstractButton;
@@ -37,12 +40,14 @@ import com.linkare.rec.impl.newface.laf.flat.resources.FlatLAFResources.FlatLAFI
 public class FlatFocusRenderer implements PropertyChangeListener {
 
 	@SuppressWarnings("unused")
-	private static final Logger log = Logger.getLogger(FlatFocusRenderer.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(FlatFocusRenderer.class.getName());
 
 	private static FlatFocusRenderer instance;
 
 	private final KeyboardFocusManager focusManager;
 	private final Map<Window, FocusPainter> focusComponentMap = new HashMap<Window, FocusPainter>();
+
+	private static Method COMPONENT_MIXING_CUTOUT_SHAPE_METHOD;
 
 	public static void install() {
 		if (FlatFocusRenderer.instance == null) {
@@ -84,12 +89,63 @@ public class FlatFocusRenderer implements PropertyChangeListener {
 			} else if (window instanceof JDialog) {
 				layeredPane = ((JDialog) window).getLayeredPane();
 			}
+
 			focusPainter = new FocusPainter(layeredPane);
 			layeredPane.add(focusPainter, Integer.valueOf(250));
 
+			workaroundForLightweigthOverHeavyWeigth(layeredPane);
+			workaroundForLightweigthOverHeavyWeigth(focusPainter);
+
 			focusComponentMap.put(window, focusPainter);
 		}
+
 		return focusPainter;
+	}
+
+	private static final Shape EMPTY_SHAPE = new Rectangle();
+
+	/**
+	 * @param focusPainter
+	 */
+	private void workaroundForLightweigthOverHeavyWeigth(Component focusPainter) {
+		try {
+			getComponentMixingCutoutShapeMethod().invoke(null, focusPainter, EMPTY_SHAPE);
+			LOGGER.log(Level.FINEST, "Workaround for FocusRenderer invoked ok!");
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING, "Unable to invoke workaround for FocusRenderer...", e);
+		}
+	}
+
+	/**
+	 * @return
+	 */
+	private Method getComponentMixingCutoutShapeMethod() {
+		if (COMPONENT_MIXING_CUTOUT_SHAPE_METHOD == null) {
+			try {
+				Class<?> awtUtilitiesClass = Class.forName("com.sun.awt.AWTUtilities");
+				COMPONENT_MIXING_CUTOUT_SHAPE_METHOD = awtUtilitiesClass.getMethod("setComponentMixingCutoutShape",
+						Component.class, Shape.class);
+			} catch (Exception ignored) {
+				LOGGER.log(Level.WARNING, "Unable to get AWTUtilities hack method...", ignored);
+			} finally {
+				if (COMPONENT_MIXING_CUTOUT_SHAPE_METHOD == null) {
+					try {
+						COMPONENT_MIXING_CUTOUT_SHAPE_METHOD = this.getClass().getMethod(
+								"setVoidComponentMixingCutoutShape", Component.class, Shape.class);
+					} catch (Exception e) {
+						LOGGER.log(Level.WARNING, "Unable to get hack void method...", e);
+					}
+				}
+			}
+		}
+		return COMPONENT_MIXING_CUTOUT_SHAPE_METHOD;
+	}
+
+	public static void setVoidComponentMixingCutoutShape(Component comp, Shape shape) {
+		// NOOP ON PURPOSE!!! LET IT STAY!!! DONT CHANGE!
+		if (LOGGER.isLoggable(Level.FINEST)) {
+			LOGGER.log(Level.FINEST, "AWTUtilities hack failed... Using void instead");
+		}
 	}
 
 	private static class FocusPainter extends JComponent {
@@ -120,6 +176,7 @@ public class FlatFocusRenderer implements PropertyChangeListener {
 		public void setCurrentlyFocusedComponent(final Component currentlyFocusedComponent) {
 			this.currentlyFocusedComponent = currentlyFocusedComponent;
 			repaint();
+			revalidate();
 		}
 
 		/**
@@ -142,10 +199,9 @@ public class FlatFocusRenderer implements PropertyChangeListener {
 						return; // Respect component state
 					}
 
-					// Focus focus =
-					// component.getClass().getAnnotation(Focus.class);
-					// if (focus != null && !focus.display())
-					// return;
+					Focus focus = component.getClass().getAnnotation(Focus.class);
+					if (focus != null && !focus.display())
+						return;
 
 					Rectangle bounds = new Rectangle(0, 0, component.getSize().width, component.getSize().height);
 
