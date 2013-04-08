@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+		=======================================================
+		============ 2009/03/29 Build Rec - Elab ==============
+		=======================================================
+	-->
+
+<project name="ELab Module - build system" default="build.all" basedir=".">
+	<description>
+		Compile, package, sign and run the project ReC and each of the experiments.
+	</description>
+
+	<property file="build.properties" description="general properties for building project" />
+
+	<import file="generaldefinitions.xml" />
+
+	<!--
+		=====================================================
+		=================== Elab Client =====================
+		=====================================================
+	-->
+
+	<target name="clean.elab.common" description="clean elab common jars and common classes">
+		<delete dir="${elab.common.classes.dir}" />
+		<delete file="${build.dir.compile}/ELabCommon.jar" />
+		<delete file="${build.dir.compile}/ELabCommon_sig.jar" />
+	</target>
+
+	<target name="clean.elab.client" description="clean elab client jars and client classes">
+		<delete dir="${elab.client.classes.dir}" />
+		<delete file="${build.dir.compile}/ELabClient.jar" />
+		<delete file="${build.dir.compile}/ELabClient_sig.jar" />
+		<delete file="${elab.client.classes.dir}/elab-client.jnlp" />
+	</target>
+
+	<target name="compile.elab.common" description="compile elab common classes">
+		<mkdir dir="${elab.common.classes.dir}" />
+		<mkdir dir="${elab.common.classes.dir}/META-INF" />
+
+		<javac srcdir="${elab.common.src.java.dir}" destdir="${elab.common.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+			<include name="**/*.java" />
+			<classpath refid="elab.compile.common.classpath" />
+			<compilerarg value="-Xlint:unchecked, cast, -serial" />
+		</javac>
+
+		<copy todir="${elab.common.classes.dir}" overwrite="true">
+			<fileset dir="${elab.common.src.java.dir}">
+				<exclude name="**/*.java" />
+				<exclude name="**/*.form" />
+			</fileset>
+		</copy>
+
+		<manifest file="${elab.common.classes.dir}/META-INF/MANIFEST.MF">
+			<section name="common">
+				<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${timestamp}" />
+				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+			</section>
+		</manifest>
+
+	</target>
+
+
+	<target name="compile.elab.client" description="compile elab client classes">
+		<mkdir dir="${elab.client.classes.dir}" />
+		<mkdir dir="${elab.client.classes.dir}/META-INF" />
+
+		<javac srcdir="${elab.client.src.java.dir}" destdir="${elab.client.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+			<include name="**/*.java" />
+			<classpath refid="elab.compile.client.classpath" />
+			<compilerarg value="-Xlint:unchecked, cast, -serial" />
+		</javac>
+
+		<copy todir="${elab.client.classes.dir}" overwrite="true">
+			<fileset dir="${elab.client.src.java.dir}">
+				<exclude name="**/*.java" />
+				<exclude name="**/*.form" />
+			</fileset>
+		</copy>
+
+		<javac srcdir="${elab.ui.src.java.dir}" destdir="${elab.client.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+			<include name="**/*.java" />
+			<classpath refid="elab.compile.client.classpath" />
+			<compilerarg value="-Xlint:unchecked, cast, -serial" />
+		</javac>
+
+		<copy todir="${elab.client.classes.dir}" overwrite="true">
+			<fileset dir="${elab.ui.src.java.dir}">
+				<exclude name="**/*.java" />
+				<exclude name="**/*.form" />
+			</fileset>
+		</copy>
+
+		<manifest file="${elab.client.classes.dir}/META-INF/MANIFEST.MF">
+			<section name="common">
+				<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${timestamp}" />
+				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+			</section>
+		</manifest>
+
+		<create.faceconfig />
+
+	</target>
+
+	<target name="jar.elab.common" description="create elab common jar">
+		<create.jar destination.folder="${common.build.dir}" jar.name="ELabCommon.jar" source.basedir="${elab.common.classes.dir}" />
+	</target>
+
+	<target name="jar.elab.client" description="create elab client jar">
+		<create.jar destination.folder="${client.build.dir}" jar.name="ELabClient.jar" source.basedir="${elab.client.classes.dir}" />
+	</target>
+
+	<target name="repack.jar.elab.common" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
+		<repack.jar file="${common.build.dir}/ELabCommon.jar" />
+	</target>
+
+	<target name="repack.jar.elab.client" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
+		<repack.jar file="${client.build.dir}/ELabClient.jar" />
+	</target>
+
+	<target name="sign.elab.common" description="sign elab common jar">
+		<sign.jar.elab file="${common.build.dir}/ELabCommon.jar" />
+	</target>
+
+	<target name="sign.elab.client" description="sign elab client jar">
+		<sign.jar.elab file="${client.build.dir}/ELabClient.jar" />
+	</target>
+
+	<target name="pack.jar.elab.common" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
+		<pack.200.jar file="${common.build.dir}/ELabCommon_sig.jar" />
+	</target>
+
+	<target name="pack.jar.elab.client" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
+		<pack.200.jar file="${client.build.dir}/ELabClient_sig.jar" />
+	</target>
+
+	<target name="build.elab.client" description="build elab client - clean, compile, jar, sign and pack200 targets" depends="clean.elab.common,clean.elab.client,compile.elab.common,compile.elab.client,jar.elab.common,jar.elab.client,repack.jar.elab.common,repack.jar.elab.client,sign.elab.common,sign.elab.client,pack.jar.elab.common,pack.jar.elab.client">
+		<create.jnlp.full.client.compile />
+		<create.jnlp.full.client.build />
+		<copy todir="${client.build.dir}" >
+			<fileset dir="${common.build.dir}"
+			includes="*_sig.jar*"/>
+		</copy>
+
+		<copy file="${elab.client.classes.dir}/ReCFaceConfig.xml" tofile="${client.build.dir}/etc/ReCFaceConfig.xml">
+		</copy>
+
+		<copy todir="${client.build.dir}/images" overwrite="true">
+			<fileset dir="${templates.dir.images}">
+				<include name="**/*.gif" />
+				<include name="**/*.jpg" />
+				<include name="**/*.png" />
+			</fileset>
+		</copy>
+
+	</target>
+
+	<target name="run.elab.local.client.web.start" description="run elab client locally inside java web start">
+		<exec executable="javaws" dir="${java.home}/bin">
+			<arg value="${elab.client.classes.dir}/elab-client.jnlp" />
+		</exec>
+	</target>
+
+	<target name="debug.elab.local.client.web.start" description="debug elab client locally inside java web start">
+		<exec executable="javaws" dir="${java.home}/bin">
+			<arg value="-J-Xdebug" />
+			<arg value="-J-Xnoagent" />
+			<arg value="-J-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000" />
+			<arg value="${elab.client.classes.dir}/elab-client.jnlp" />
+		</exec>
+	</target>
+
+	<target name="run.elab.client" description="run elab client locally - outside java web start">
+		<java classname="${client.main-class}" fork="true" failonerror="true">
+			<arg value="-h" />
+			<classpath>
+				<path refid="rec.common.lib.path" />
+				<path refid="rec.client.lib.path" />
+				<path refid="elab.client.lib.path" />
+				<path refid="rec.compile.client.classpath" />
+				<pathelement location="${rec.common.classes.dir}/" />
+				<pathelement location="${rec.client.classes.dir}" />
+				<pathelement location="${elab.client.classes.dir}/" />
+				<pathelement location="${elab.common.classes.dir}" />
+				<dirset dir="${experiments.classes.dir}">
+					<include name="*/client/**" />
+				</dirset>
+			</classpath>
+			<jvmarg value="-Xms${min.memory}" />
+			<jvmarg value="-Xmx${max.memory}" />
+			<sysproperty key="rec.web.endpoint" value="${rec.web.endpoint}"/>
+			<sysproperty key="rec.face.config" value="file:///${elab.client.classes.dir}/ReCFaceConfig.xml" />
+			<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
+			<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file.debug}" />
+			<sysproperty key="openorb.profile" value="${experiment.client.openorb.profile}" />
+			<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
+			<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
+			<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
+			<sysproperty key="openorb.config" value="${client.build.dir}/etc/openorb.xml" />
+			<sysproperty key="rec.processingmanager.threadPool.coresize" value="${rec.client.processingmanager.threadpool.coresize}" />
+			<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.client.processingmanager.threadpool.maxsize}" />
+			<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
+			<sysproperty key="vlc.plugins.destdir" value="${vlc.plugins.destdir}" />
+			<sysproperty key="vlc.plugins.filename" value="${vlc.plugins.filename}" />
+			<sysproperty key="video.enabled" value="${video.enabled}" />
+		</java>
+	</target>
+
+	<target name="debug.elab.client" description="debug elab client locally, bypassing java web start">
+		<java classname="${client.main-class}" fork="true" failonerror="true">
+			<arg value="-h" />
+			<classpath>
+				<path refid="rec.common.lib.path" />
+				<path refid="rec.client.lib.path" />
+				<path refid="elab.client.lib.path" />
+				<path refid="rec.compile.client.classpath" />
+				<pathelement location="${rec.common.classes.dir}/" />
+				<pathelement location="${rec.client.classes.dir}" />
+				<pathelement location="${elab.client.classes.dir}/" />
+				<pathelement location="${elab.common.classes.dir}" />
+				<dirset dir="${experiments.classes.dir}">
+					<include name="*/client/**" />
+				</dirset>
+			</classpath>
+			<jvmarg value="-Xdebug" />
+			<jvmarg value="-Xnoagent" />
+			<jvmarg value="-Xrunjdwp:transport=dt_socket,address=${experiment.client.debug.address.port},server=y,suspend=y" />
+			<jvmarg value="-Xms${min.memory}" />
+			<jvmarg value="-Xmx${max.memory}" />
+			<sysproperty key="rec.web.endpoint" value="${rec.web.endpoint}"/>
+			<sysproperty key="rec.face.config" value="file:///${elab.client.classes.dir}/ReCFaceConfig.xml" />
+			<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file.debug}" />
+			<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
+			<sysproperty key="openorb.profile" value="${experiment.client.openorb.profile}" />
+			<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
+			<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
+			<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
+			<sysproperty key="openorb.config" value="${client.build.dir}/etc/openorb.xml" />
+			<sysproperty key="rec.processingmanager.threadPool.coresize" value="${rec.client.processingmanager.threadpool.coresize}" />
+			<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.client.processingmanager.threadpool.maxsize}" />
+			<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
+			<sysproperty key="vlc.plugins.destdir" value="${vlc.plugins.destdir}" />
+			<sysproperty key="vlc.plugins.filename" value="${vlc.plugins.filename}" />
+			<sysproperty key="video.enabled" value="${video.enabled}" />
+		</java>
+	</target>
+
+	<!--
+		=====================================================
+		=================== Elab driver =====================
+		=====================================================
+	-->
+
+	<target name="clean.elab.hardwareserver" description="clean elab hardwareserver classes">
+		<delete dir="${elab.hardwareserver.classes.dir}" />
+		<delete dir="${elab.hardwareserver.classes.dir}/META-INF" />
+	</target>
+
+	<target name="compile.elab.hardwareserver" description="compile elab hardwareserver classes">
+		<mkdir dir="${elab.hardwareserver.classes.dir}" />
+		<mkdir dir="${elab.hardwareserver.classes.dir}/META-INF" />
+
+		<javac srcdir="${elab.hardwareserver.src.java.dir}" destdir="${elab.hardwareserver.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+			<include name="**/*.java" />
+			<classpath refid="elab.compile.hardwareserver.classpath" />
+			<compilerarg value="-Xlint:unchecked, cast, -serial" />
+		</javac>
+
+		<copy todir="${elab.hardwareserver.classes.dir}" overwrite="true">
+			<fileset dir="${elab.hardwareserver.src.java.dir}">
+				<exclude name="**/*.java" />
+				<exclude name="**/*.form" />
+			</fileset>
+		</copy>
+
+		<manifest file="${elab.hardwareserver.classes.dir}/META-INF/MANIFEST.MF">
+			<section name="common">
+				<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${timestamp}" />
+				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+			</section>
+		</manifest>
+
+	</target>
+
+	<target name="jar.elab.hardwareserver" description="create elab hardwareserver jar">
+		<create.jar destination.folder="${hardwareserver.build.dir}" jar.name="ELabHardwareServer.jar" source.basedir="${elab.hardwareserver.classes.dir}" />
+	</target>
+
+	<target name="build.elab.hardwareserver" description="build elab hardwareserver - clean,compile and jar" depends="clean.elab.hardwareserver,compile.elab.hardwareserver,jar.elab.hardwareserver">
+
+		<copy file="${common.build.dir}/ELabCommon.jar" todir="${hardwareserver.build.dir}" />
+
+		<copy todir="${hardwareserver.build.dir}/lib" overwrite="true">
+			<fileset dir="${elab.hardwareserver.lib.dir}">
+				<include name="**/*" />
+			</fileset>
+			<fileset dir="${elab.common.lib.dir}">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+
+	</target>
+
+	<!--
+		=====================================================
+		=========== Elab Multicast Controller ===============
+		=====================================================
+	-->
+
+	<target name="clean.elab.multicastcontroller" description="clean elab multicastcontroller classes">
+		<delete dir="${elab.multicast.classes.dir}" />
+	</target>
+
+	<target name="compile.elab.multicastcontroller" description="compile elab multicastcontroller classes">
+		<mkdir dir="${elab.multicast.classes.dir}" />
+		<mkdir dir="${elab.multicast.classes.dir}/META-INF" />
+
+		<javac srcdir="${elab.multicast.src.java.dir}" destdir="${elab.multicast.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+			<include name="**/*.java" />
+			<classpath refid="elab.compile.multicastcontroller.classpath" />
+			<compilerarg value="-Xlint:unchecked, cast, -serial" />
+		</javac>
+
+		<copy todir="${elab.multicast.classes.dir}" overwrite="true">
+			<fileset dir="${elab.multicast.src.java.dir}">
+				<exclude name="**/*.java" />
+				<exclude name="**/*.form" />
+			</fileset>
+		</copy>
+
+		<manifest file="${elab.multicast.classes.dir}/META-INF/MANIFEST.MF">
+			<section name="common">
+				<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${timestamp}" />
+				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+			</section>
+		</manifest>
+
+	</target>
+
+	<target name="jar.elab.multicastcontroller" description="create elab multicastcontroller jar">
+		<create.jar destination.folder="${multicast.build.dir}" jar.name="ELabMulticastController.jar" source.basedir="${elab.multicast.classes.dir}" />
+	</target>
+
+	<target name="build.elab.multicastcontroller" description="build elab multicastcontroller components - clean, compile and jar" depends="clean.elab.multicastcontroller,compile.elab.multicastcontroller,jar.elab.multicastcontroller">
+		<copy todir="${multicast.build.dir}/lib" overwrite="true">
+			<fileset dir="${elab.multicast.lib.dir}">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="clean.all" depends="clean.elab.client,clean.elab.hardwareserver,clean.elab.multicastcontroller" description="call all clean targets">
+
+	</target>
+
+	<target name="build.all" depends="build.elab.client,build.elab.hardwareserver,build.elab.multicastcontroller" description="call all build targets">
+
+	</target>
+
+	<target name="javadoc.elab" description="create the javadocs for elab components">
+		<javadoc destdir="${build.dir}/javadocs/elab" author="true" version="true" use="true" windowtitle="eLab - Javadocs">
+			<packageset dir="${elab.client.src.java.dir}" defaultexcludes="yes">
+				<include name="pt/utl/ist/elab/**" />
+			</packageset>
+			<packageset dir="${elab.ui.src.java.dir}" defaultexcludes="yes">
+				<include name="pt/utl/ist/elab/**" />
+			</packageset>
+			<classpath refid="elab.client.libs.classpath" />
+			<packageset dir="${elab.multicast.src.java.dir}" defaultexcludes="yes">
+				<include name="pt/utl/ist/elab/**" />
+			</packageset>
+			<classpath refid="elab.multicastcontroller.libs.classpath" />
+			<packageset dir="${elab.hardwareserver.src.java.dir}" defaultexcludes="yes">
+				<include name="pt/utl/ist/elab/**" />
+			</packageset>
+			<classpath refid="elab.hardwareserver.libs.classpath" />
+			<doctitle>eLab  <![CDATA[<h1>Package Overview</h1>]]></doctitle>
+		<bottom>
+			<![CDATA[<i>Copyright &#169; 2010 - Instituto Superior Técnico - All Rights Reserved.</i>]]>
+			</bottom>
+	<tag name="todo" scope="all" description="To do:" />
+	<link href="http://java.sun.com/javase/6/docs/api/" />
+</javadoc>
+</target>
+
+<target name="clean.javadocs" description="clean all elab javadocs">
+<delete dir="${build.dir}/javadocs/elab" />
+</target>
+
+</project>
