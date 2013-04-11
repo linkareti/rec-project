@@ -40,8 +40,7 @@ echo ---------------------------------------------------------------------------
 echo "Additional java args : @additional.java.args@"
 echo --------------------------------------------------------------------------------
 
-cd $DEPLOY_DIR
 java $BOOTCLASSPATH @additional.java.args@ -classpath $RECCLASSPATH:$DRIVER_CLASSPATH:$DRIVER_EXPERIMENT_CLASSPATH $GENERIC_ORB_SYSPROPS $DRIVER_ORB_SYSPROPS $LOG_SYSPROPS $PROCESSINGMANAGER_SYSPROPS $MEM_SYSPROPS $DRIVER_HARWARE_INFO_SYSPROPS $TOOLKIT_SYSPROPS $EXPERIMENT_DRIVER_CLASS $DEBUG @driver.main.class@ &
 
 PID=$!
-echo $PID > $DEPLOY_DIR/@experiment.name@.pid
+echo $PID > @experiment.name@.pid
