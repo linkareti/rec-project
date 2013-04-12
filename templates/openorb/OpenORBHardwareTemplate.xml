@@ -20,6 +20,7 @@
 			<property name="allowBiDir" value="true" />
 			<property name="sendBufferSize" value="64000" />
 			<property name="recieveBufferSize" value="64000" />
+			<property name="receiveBufferSize" value="64000" />
 			<property name="bufferedOutputStreamSize" value="8192" />
 			<property name="serverMinSocketAcceptTimeout" value="0" />
 			<property name="serverMaxSocketAcceptTimeout" value="250" />
