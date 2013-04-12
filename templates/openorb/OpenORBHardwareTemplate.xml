@@ -63,14 +63,14 @@
 	<profile name="ReCHardware" extends="default">
 		<import xlink:href="${openorb.home}config/default.xml#iiop">
 			<property name="publishIP" value="true" />
-			<property name="bidirOnlyServer" value="true" />
+			<property name="bidirOnlyServer" value="false" />
 		</import>
 	</profile>
 
 	<profile name="ReCHardwareDebug" extends="debug">
 		<import xlink:href="${openorb.home}config/default.xml#iiop">
 			<property name="publishIP" value="true" />
-			<property name="bidirOnlyServer" value="true" />
+			<property name="bidirOnlyServer" value="false" />
 		</import>
 	</profile>
 
