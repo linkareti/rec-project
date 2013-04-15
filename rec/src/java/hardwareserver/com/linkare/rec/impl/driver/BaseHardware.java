@@ -84,7 +84,7 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 			LOGGER.info("Registering this hardware with name " + "com/linkare/rec/hardwares/"
 					+ driver.getDriverUniqueID());
 
-			refBinder.setHardware(_this);
+			refBinder.setHardware(_this,this);
 
 			return _this;
 		} catch (final Exception e) {
