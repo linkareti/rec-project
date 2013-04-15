@@ -144,9 +144,8 @@
 	<target name="build.elab.client" description="build elab client - clean, compile, jar, sign and pack200 targets" depends="clean.elab.common,clean.elab.client,compile.elab.common,compile.elab.client,jar.elab.common,jar.elab.client,repack.jar.elab.common,repack.jar.elab.client,sign.elab.common,sign.elab.client,pack.jar.elab.common,pack.jar.elab.client">
 		<create.jnlp.full.client.compile />
 		<create.jnlp.full.client.build />
-		<copy todir="${client.build.dir}" >
-			<fileset dir="${common.build.dir}"
-			includes="*_sig.jar*"/>
+		<copy todir="${client.build.dir}">
+			<fileset dir="${common.build.dir}" includes="*_sig.jar*" />
 		</copy>
 
 		<copy file="${elab.client.classes.dir}/ReCFaceConfig.xml" tofile="${client.build.dir}/etc/ReCFaceConfig.xml">
@@ -195,7 +194,7 @@
 			</classpath>
 			<jvmarg value="-Xms${min.memory}" />
 			<jvmarg value="-Xmx${max.memory}" />
-			<sysproperty key="rec.web.endpoint" value="${rec.web.endpoint}"/>
+			<sysproperty key="rec.web.endpoint" value="${rec.web.endpoint}" />
 			<sysproperty key="rec.face.config" value="file:///${elab.client.classes.dir}/ReCFaceConfig.xml" />
 			<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
 			<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file.debug}" />
@@ -234,7 +233,7 @@
 			<jvmarg value="-Xrunjdwp:transport=dt_socket,address=${experiment.client.debug.address.port},server=y,suspend=y" />
 			<jvmarg value="-Xms${min.memory}" />
 			<jvmarg value="-Xmx${max.memory}" />
-			<sysproperty key="rec.web.endpoint" value="${rec.web.endpoint}"/>
+			<sysproperty key="rec.web.endpoint" value="${rec.web.endpoint}" />
 			<sysproperty key="rec.face.config" value="file:///${elab.client.classes.dir}/ReCFaceConfig.xml" />
 			<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file.debug}" />
 			<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
@@ -390,16 +389,16 @@
 			</packageset>
 			<classpath refid="elab.hardwareserver.libs.classpath" />
 			<doctitle>eLab  <![CDATA[<h1>Package Overview</h1>]]></doctitle>
-		<bottom>
+			<bottom>
 			<![CDATA[<i>Copyright &#169; 2010 - Instituto Superior Técnico - All Rights Reserved.</i>]]>
 			</bottom>
-	<tag name="todo" scope="all" description="To do:" />
-	<link href="http://java.sun.com/javase/6/docs/api/" />
-</javadoc>
-</target>
+			<tag name="todo" scope="all" description="To do:" />
+			<link href="http://java.sun.com/javase/6/docs/api/" />
+		</javadoc>
+	</target>
 
-<target name="clean.javadocs" description="clean all elab javadocs">
-<delete dir="${build.dir}/javadocs/elab" />
-</target>
+	<target name="clean.javadocs" description="clean all elab javadocs">
+		<delete dir="${build.dir}/javadocs/elab" />
+	</target>
 
 </project>

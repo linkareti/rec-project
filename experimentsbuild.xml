@@ -325,6 +325,7 @@
 				<jvmarg value="-Xms${min.memory}" />
 				<jvmarg value="-Xmx${max.memory}" />
 				<jvmarg value="-Xbootclasspath/p:${rec.common.lib.dir}/openorb_orb_omg-1.4.0.jar" />
+				<sysproperty key="rec.web.endpoint" value="${rec.web.endpoint}" />
 				<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
 				<sysproperty key="rec.face.config" value="file:///${elab.client.classes.dir}/ReCFaceConfig.xml" />
 				<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file.debug}" />
@@ -336,7 +337,7 @@
 				<sysproperty key="rec.processingmanager.threadPool.coresize" value="${rec.client.processingmanager.threadpool.coresize}" />
 				<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.client.processingmanager.threadpool.maxsize}" />
 				<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
-				<sysproperty key="vlc.plugins.destdir" value="${vlc.plugins.destdir}" />
+				<sysproperty key="vlc.plugins.destdir" value="${user.home}/.${vlc.plugins.destdir}" />
 				<sysproperty key="vlc.plugins.filename" value="${vlc.plugins.filename}" />
 				<sysproperty key="video.enabled" value="${video.enabled}" />
 				<sysproperty key="rec.apparatus.autoconnect.id" value="${@{experiment.name}.apparatus.autoconnect.id}" />
@@ -375,6 +376,7 @@
 				<jvmarg value="-Xms${min.memory}" />
 				<jvmarg value="-Xmx${max.memory}" />
 				<jvmarg value="-Xbootclasspath/p:${rec.common.lib.dir}/openorb_orb_omg-1.4.0.jar" />
+				<sysproperty key="rec.web.endpoint" value="${rec.web.endpoint}" />
 				<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
 				<sysproperty key="rec.face.config" value="file:///${elab.client.classes.dir}/ReCFaceConfig.xml" />
 				<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file.debug}" />
@@ -386,7 +388,7 @@
 				<sysproperty key="rec.processingmanager.threadPool.coresize" value="${rec.client.processingmanager.threadpool.coresize}" />
 				<sysproperty key="rec.processingmanager.threadPool.maxsize" value="${rec.client.processingmanager.threadpool.maxsize}" />
 				<sysproperty key="rec.processingmanager.thread.idletime" value="${rec.processingmanager.thread.idletime}" />
-				<sysproperty key="vlc.plugins.destdir" value="${vlc.plugins.destdir}" />
+				<sysproperty key="vlc.plugins.destdir" value="${user.home}/.${vlc.plugins.destdir}" />
 				<sysproperty key="vlc.plugins.filename" value="${vlc.plugins.filename}" />
 				<sysproperty key="video.enabled" value="${video.enabled}" />
 				<sysproperty key="rec.apparatus.autoconnect.id" value="${@{experiment.name}.apparatus.autoconnect.id}" />
