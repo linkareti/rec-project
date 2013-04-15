@@ -19,7 +19,7 @@ import com.linkare.rec.web.mbean.MBeanConnectionResourcesUtilities;
 
 public final class JMXConnectionHandler {
 
-    private final static Logger LOG = LoggerFactory.getLogger(JMXConnectionHandler.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(JMXConnectionHandler.class);
 
     private final String jmxURL;
     private final String jmxUser;
@@ -60,7 +60,7 @@ public final class JMXConnectionHandler {
 
 		    jmxConnector = MBeanConnectionResourcesUtilities.getJMXConnector(jmxURL, jmxUser, jmxPass);
 
-		    LOG.info("jmxconnector created for: {} ", jmxURL);
+		    LOGGER.info("jmxconnector created for: {} ", jmxURL);
 
 		    jmxConnector.addConnectionNotificationListener(getConnectionNotificationListener(), null, null);
 
@@ -69,8 +69,8 @@ public final class JMXConnectionHandler {
 		    result = true;
 		} catch (Exception e) {
 		    numberOfRetries.incrementAndGet();
-		    LOG.error(String.format("Error creating JMXCConnector to url: %s", jmxURL));
-		    LOG.debug(e.getMessage(),e);
+		    LOGGER.error(String.format("Error creating JMXCConnector to url: %s", jmxURL));
+		    LOGGER.debug(e.getMessage(),e);
 		    closeJMXConnector();
 		} finally {
 		    mainLock.unlock();
@@ -87,7 +87,7 @@ public final class JMXConnectionHandler {
 	MBeanConnectionResourcesUtilities.addNotificationListener(jmxConnector, notificationListener.getObjectName(), listener.getListener(),
 								  notificationListener.getFilter(), null);
 
-	LOG.info("notificationListener added for: {}", jmxURL);
+	LOGGER.info("notificationListener added for: {}", jmxURL);
     }
 
     private NotificationListener getConnectionNotificationListener() {
@@ -104,10 +104,10 @@ public final class JMXConnectionHandler {
 
 			    final String type = connectionNotif.getType();
 
-			    LOG.info("Receiving JMXConnectionNotification. Type:  " + type);
+			    LOGGER.info("Receiving JMXConnectionNotification. Type:  " + type);
 
 			    if (JMXConnectionNotification.CLOSED.equals(type) || JMXConnectionNotification.FAILED.equals(type)) {
-				LOG.warn("Received JMXConnectionNotification CLOSED or FAILED. We will try to close jmxconnector associated with it");
+				LOGGER.warn("Received JMXConnectionNotification CLOSED or FAILED. We will try to close jmxconnector associated with it");
 				closeJMXConnector();
 			    }
 			    //			    } else if (JMXConnectionNotification.NOTIFS_LOST.equals(type)) {
@@ -116,7 +116,7 @@ public final class JMXConnectionHandler {
 			    //				//				LOG.warn("Received JMXConnectionNotification.OPENED");
 			    //			    }
 			} catch (Throwable e) {
-			    LOG.info("Error handling JMXConnectionNotification.", e);
+			    LOGGER.info("Error handling JMXConnectionNotification.", e);
 			}
 		    }
 		}
@@ -134,7 +134,7 @@ public final class JMXConnectionHandler {
 		jmxConnector.close();
 	    }
 	} catch (Exception e) {
-	    LOG.error("Error closing JMXConnector.", e);
+	    LOGGER.error("Error closing JMXConnector.", e);
 	} finally {
 	    jmxConnector = null;
 	    mainLock.unlock();
@@ -148,7 +148,7 @@ public final class JMXConnectionHandler {
 		jmxConnector.removeConnectionNotificationListener(connectionListener);
 	    }
 	} catch (Exception e) {
-	    LOG.error("Error removing Connection NotificationListener.", e);
+	    LOGGER.error("Error removing Connection NotificationListener.", e);
 	} finally {
 	    connectionListener = null;
 	}
@@ -162,7 +162,7 @@ public final class JMXConnectionHandler {
 		MBeanConnectionResourcesUtilities.removeNotificationListener(jmxConnector, listener.getObjectName(), listener.getListener());
 	    }
 	} catch (Exception e) {
-	    LOG.error(e.getMessage(), e);
+	    LOGGER.error(e.getMessage(), e);
 	} finally {
 	    listener = null;
 	}
@@ -180,7 +180,7 @@ public final class JMXConnectionHandler {
 	try {
 	    return isConnected() ? MBeanConnectionResourcesUtilities.getMBeanClientProxy(jmxConnector, objectName, mbeanInterface, true) : null;
 	} catch (IOException e) {
-	    LOG.error("Error creating jmx client proxy", e);
+	    LOGGER.error("Error creating jmx client proxy", e);
 	    closeJMXConnector();
 	    return null;
 	}
