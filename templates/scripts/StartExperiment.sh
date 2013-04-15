@@ -7,6 +7,7 @@ echo Starting @experiment.name@ Driver
 INITIAL_HEAP_MEM=@hardwareserver.initial.heap@
 MAX_HEAP_MEM=@hardwareserver.max.heap@
 
+export DEPLOY_DIR="@install.dir@@deployment.subdir@/@experiment.name@"
 export DRIVER_BASE_DIR="@install.dir@@deployment.subdir@/@experiment.name@/hardwareserver"
 
 export GENERIC_ORB_SYSPROPS="-Dorg.omg.CORBA.ORBClass=org.openorb.orb.core.ORB -Dorg.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton -Dopenorb.config=$DRIVER_BASE_DIR/etc/openorb.xml -Djava.net.preferIPv4Stack=true"
@@ -39,9 +40,11 @@ echo "System Properties    : $GENERIC_ORB_SYSPROPS $DRIVER_ORB_SYSPROPS $LOG_SYS
 echo --------------------------------------------------------------------------------
 echo "Additional java args : @additional.java.args@"
 echo --------------------------------------------------------------------------------
+echo "LD_LIBRARY_PATH      : $LD_LIBRARY_PATH"
+echo --------------------------------------------------------------------------------
 
-cd $DRIVER_BASE_DIR
+cd $DEPLOY_DIR
 java $BOOTCLASSPATH @additional.java.args@ -classpath $RECCLASSPATH:$DRIVER_CLASSPATH:$DRIVER_EXPERIMENT_CLASSPATH $GENERIC_ORB_SYSPROPS $DRIVER_ORB_SYSPROPS $LOG_SYSPROPS $PROCESSINGMANAGER_SYSPROPS $MEM_SYSPROPS $DRIVER_HARWARE_INFO_SYSPROPS $TOOLKIT_SYSPROPS $EXPERIMENT_DRIVER_CLASS $DEBUG @driver.main.class@ &
 
 PID=$!
-echo $PID > $DRIVER_BASE_DIR/@experiment.name@.pid
+echo $PID > $DEPLOY_DIR/@experiment.name@.pid
