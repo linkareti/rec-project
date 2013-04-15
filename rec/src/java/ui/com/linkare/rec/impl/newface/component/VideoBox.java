@@ -27,7 +27,7 @@ public class VideoBox extends AbstractContentPane {
 	 */
 	public void initializeVideoOutput() {
 
-		videoCanvas = new java.awt.Canvas();
+		videoCanvas = new VideoCanvas();
 		videoPanel.add(videoCanvas);
 
 		videoCanvas.setSize(videoPanel.getWidth(), videoPanel.getHeight());
@@ -85,7 +85,7 @@ public class VideoBox extends AbstractContentPane {
 
         lblVideo = new javax.swing.JLabel();
         videoPanel = new javax.swing.JPanel();
-        videoCanvas = new java.awt.Canvas();
+        videoCanvas = new VideoCanvas();
 
         setName("Form"); // NOI18N
 
@@ -137,7 +137,7 @@ public class VideoBox extends AbstractContentPane {
     // Variables declaration - do not modify//GEN-BEGIN:variables
 //    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblVideo;
-    private java.awt.Canvas videoCanvas;
+    private VideoCanvas videoCanvas;
     private javax.swing.JPanel videoPanel;
     // End of variables declaration//GEN-END:variables
 }
