@@ -92,10 +92,6 @@ stop() {
 
 		PID=`cat $DEPLOY_DIR/@experiment.name@.pid`
 
-		[ -f $DEPLOY_DIR/@experiment.name@.lock ] && rm -rf $DEPLOY_DIR/@experiment.name@.lock
-		[ -f $DEPLOY_DIR/@experiment.name@.pid ] && rm -rf $DEPLOY_DIR/@experiment.name@.pid
-
-
 		echo "Stopping @experiment.name@ service..."
 		if [ "x$CURUSER" != "x$BASE_USER" ]; then
 			su -m -l $BASE_USER -c "kill $PID"
@@ -104,6 +100,8 @@ stop() {
 		fi
 
 		if [ $? -eq 0 ]; then
+			[ -f $DEPLOY_DIR/@experiment.name@.lock ] && rm -rf $DEPLOY_DIR/@experiment.name@.lock
+			[ -f $DEPLOY_DIR/@experiment.name@.pid ] && rm -rf $DEPLOY_DIR/@experiment.name@.pid
 			echo "OK"
 			return 0
 		else
