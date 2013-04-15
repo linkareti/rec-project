@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.linkare.rec.acquisition.Hardware;
+import com.linkare.rec.acquisition.HardwareOperations;
 import com.linkare.rec.acquisition.HardwareState;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.config.ReCSystemProperty;
@@ -30,6 +31,7 @@ public class HardwareBinder implements Runnable {
 	private static final Logger LOGGER = Logger.getLogger(HardwareBinder.class.getName());
 
 	private Hardware hardware = null;
+	private HardwareOperations localHardwareObject = null;
 
 	private final long WAIT_PERIOD = 40000;
 
@@ -68,11 +70,11 @@ public class HardwareBinder implements Runnable {
 					rwLock.writeLock().unlock();
 				}
 			} else {
-				HardwareInfo info = hardware.getHardwareInfo();
+				HardwareInfo info = localHardwareObject.getHardwareInfo();
 				if (info == null || info.getHardwareUniqueID() == null) {
 					LOGGER.log(Level.FINE,
 							"Hardware does not have hardwareInfo or the unique hardware id is null... Not binding to multicast!");
-				} else if (hardware.getHardwareState() == HardwareState.UNKNOWN) {
+				} else if (localHardwareObject.getHardwareState() == HardwareState.UNKNOWN) {
 					LOGGER.log(Level.FINE, "Hardware state is 'UNKNOWN'... Not binding to multicast!");
 
 				} else {
@@ -86,13 +88,15 @@ public class HardwareBinder implements Runnable {
 					}
 				}
 			}
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, "Problem trying to register hardware on multicast controller!", e);
 		} finally {
 			rwLock.readLock().unlock();
 		}
 
 	}
 
-	public void setHardware(final Hardware hardware) {
+	public void setHardware(final Hardware hardware, final HardwareOperations localHardwareObject) {
 		try {
 			rwLock.readLock().lock();
 			if (this.hardware == hardware) {
@@ -109,8 +113,9 @@ public class HardwareBinder implements Runnable {
 				}
 
 				this.hardware = hardware;
+				this.localHardwareObject = localHardwareObject;
 
-				if (this.hardware != null) {
+				if (this.hardware != null && this.localHardwareObject != null) {
 					hardwareBinderTask = ProcessingManager.getInstance().scheduleAtFixedRate(this, 0, WAIT_PERIOD,
 							TimeUnit.MILLISECONDS);
 				}

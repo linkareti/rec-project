@@ -10,11 +10,9 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.omg.PortableServer.Servant;
-
 import com.linkare.rec.acquisition.DataClient;
-import com.linkare.rec.acquisition.DataClientHelper;
 import com.linkare.rec.acquisition.DataClientOperations;
+import com.linkare.rec.acquisition.DataClientPOATie;
 import com.linkare.rec.acquisition.DataProducer;
 import com.linkare.rec.acquisition.HardwareState;
 import com.linkare.rec.acquisition.IncorrectStateException;
@@ -80,10 +78,8 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 
 		try {
 			oid = new ObjectID();
-			Servant registeredServant = ORBBean.getORBBean().registerAutoIdRootPOAServant(DataClient.class, this, oid);
-			org.omg.CORBA.Object thisReference = ORBBean.getORBBean().getAutoIdRootPOA()
-					.servant_to_reference(registeredServant);
-			_this = DataClientHelper.narrow(thisReference);
+			DataClientPOATie servant = (DataClientPOATie)ORBBean.getORBBean().registerAutoIdRootPOAServant(DataClient.class, this, oid);
+			_this = servant._this();
 			return _this;
 		} catch (final Exception e) {
 			LOGGER.log(Level.SEVERE, "Couldn't register this DataClient with ORB", e);

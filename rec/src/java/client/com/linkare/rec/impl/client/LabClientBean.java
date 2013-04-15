@@ -16,8 +16,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.linkare.rec.acquisition.DataClient;
-import com.linkare.rec.acquisition.DataClientHelper;
 import com.linkare.rec.acquisition.DataClientOperations;
+import com.linkare.rec.acquisition.DataClientPOATie;
 import com.linkare.rec.acquisition.MaximumClientsReached;
 import com.linkare.rec.acquisition.MultiCastController;
 import com.linkare.rec.acquisition.MultiCastControllerHelper;
@@ -90,30 +90,10 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 		}
 
 		try {
-			/*
-			 * org.omg.PortableServer.Servant servant =
-			 * ORBBean.getORBBean().registerAutoIdRootPOAServant
-			 * (DataClient.class,this,(oid=new ObjectID())); if(servant != null)
-			 * System.out.println("Servant is ok!");
-			 * 
-			 * org.omg.CORBA.Object object =
-			 * ORBBean.getORBBean().getAutoIdRootPOA
-			 * ().servant_to_reference(servant);
-			 * 
-			 * if(object != null) System.out.println("Object is ok!");
-			 * 
-			 * DataClient client = DataClientHelper.narrow(object);
-			 * 
-			 * if(client != null) System.out.println("Client is ok!");
-			 * 
-			 * return null;
-			 */
-			return (_this = DataClientHelper.narrow(ORBBean
-					.getORBBean()
-					.getAutoIdRootPOA()
-					.servant_to_reference(
-							ORBBean.getORBBean().registerAutoIdRootPOAServant(DataClient.class, this,
-									(oid = new ObjectID())))));
+			oid = new ObjectID();
+			DataClientPOATie servant = (DataClientPOATie)ORBBean.getORBBean().registerAutoIdRootPOAServant(DataClient.class, this, oid);
+			_this = servant._this();
+			return _this;
 
 		} catch (final Exception e) {
 			LOGGER.log(Level.SEVERE, "Couldn't register this DataClient with ORB", e);
@@ -286,7 +266,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 	}
 
 	private void doConnect(final String mccontrollerCORBALocAddress) {
-		
+
 		stop = false;
 		connecting = true;
 
