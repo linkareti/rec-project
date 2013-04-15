@@ -89,7 +89,8 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 	/*
 	 * The maximum number of clients to register with each hardware
 	 */
-	private static final int MAXIMUM_CLIENTS_PER_HARDWARE = Integer.parseInt(ReCSystemProperty.MULTICAST_MAX_CLIENTS_PER_HARDWARE.getValue());
+	private static final int MAXIMUM_CLIENTS_PER_HARDWARE = Integer
+			.parseInt(ReCSystemProperty.MULTICAST_MAX_CLIENTS_PER_HARDWARE.getValue());
 
 	/*
 	 * The maximum number of clients to register with this lab
@@ -141,14 +142,15 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 
 		// Create a hardware connection checker
 		hardwareConnectionChecker = new HardwareConnectionCheck();
-		
-		//Make sure the DataProducerPOA is activated because there may come requests to DataProducers long held by clients
+
+		// Make sure the DataProducerPOA is activated because there may come
+		// requests to DataProducers long held by clients
 		try {
 			ORBBean.getORBBean().getDataProducerPOA(DP_DEACTIVATOR);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-		
+
 		// Start it up
 		// hardwareConnectionChecker.start();
 		LOGGER.log(Level.INFO, "Started ReCMulticastController OK.");
@@ -281,42 +283,22 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 		shutdown();
 	}
 
-
 	/* Inner Class - Hardware Connection Checker */
 	private class HardwareConnectionCheck extends ScheduledWorkUnit {
-		// private boolean shutdown = false;
 
 		HardwareConnectionCheck() {
 			ExecutorScheduler.scheduleAtFixedRate(this, 1, 60, SECONDS);
 		}
 
-		// public void shutdown() {
-		// // shutdown = true;
-		// // try {
-		// // synchronized (this) {
-		// // this.join();
-		// // }
-		// // }
-		// // catch (Exception e) {
-		// // }
-		// }
 		@Override
 		public void run() {
-			// while (!shutdown) {
-			// synchronized (this) {
-			// try {
-			// LOGGER.log(Level.FINE, "Hardware connector waiting...");
-			// this.wait(5000);
-			// }
-			// catch (Exception ignored) {
-			// }
-			// }
 			synchronized (multiCastHardwares) {
 				for (final Iterator<ReCMultiCastHardware> it = multiCastHardwares.iterator(); it.hasNext();) {
 					final ReCMultiCastHardware rmch = it.next();
 					try {
 						if (!rmch.getHardware().isConnected()) {
-							LOGGER.log(Level.FINEST, "Hardware " + rmch.getHardwareUniqueId() + " is gone! Shutting it down!");
+							LOGGER.log(Level.FINEST, "Hardware " + rmch.getHardwareUniqueId()
+									+ " is gone! Shutting it down!");
 							rmch.shutdown();
 							LOGGER.log(Level.FINEST, "Hardware " + rmch.getHardwareUniqueId()
 									+ " was shutdown successfully - Now removing it from MCController list!");
@@ -331,16 +313,14 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 									+ " is gone!");
 						}
 					} catch (final Exception e) {
-						LOGGER.log(Level.WARNING,"MultiCastController - Error cheking hardware connection status!", e);
+						LOGGER.log(Level.WARNING, "MultiCastController - Error cheking hardware connection status!", e);
 					}
 				}
 				LOGGER.log(Level.FINE, "Hardware connection checker waiting... ");
 			}
-			// }
 		}
-	}
+	}/* End Inner Class - Hardware Connection Checker */
 
-	/* End Inner Class - Hardware Connection Checker */
 	private List<ReCMultiCastHardware> multiCastHardwares = null;
 
 	/* Inner class - HardwareChangeListener implementation */
@@ -361,8 +341,11 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 				String hardwareId = null;
 
 				try {
-					if (evt == null || evt.getHardware() == null || evt.getHardware().getHardwareInfo() == null
-							|| evt.getHardware().getHardwareInfo().getHardwareUniqueID() == null) {
+					Hardware hardware = evt != null ? evt.getHardware() : null;
+					HardwareInfo hInfo = hardware != null ? hardware.getHardwareInfo() : null;
+					hardwareId=hInfo!=null?hInfo.getHardwareUniqueID():null;
+					
+					if (hardwareId==null) {
 						LOGGER.log(Level.WARNING, "Error Trying to add an Hardware - Couldn't get it's ID");
 						return;
 					}
@@ -370,8 +353,6 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 					LOGGER.log(Level.WARNING, "Exception occurred while access hardware info. " + e.getMessage());
 					return;
 				}
-
-				hardwareId = evt.getHardware().getHardwareInfo().getHardwareUniqueID();
 
 				final Iterator<ReCMultiCastHardware> iter = multiCastHardwares.iterator();
 				while (iter.hasNext()) {// trying to find if hardware exists
