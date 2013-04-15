@@ -7,7 +7,7 @@
 BASE_USER=@daemon.user@
 BASE_USER_HOMEDIR=~@daemon.user@
 EXPERIMENT_NAME=@experiment.name@
-DEPLOY_DIR="@install.dir@@deployment.subdir@/@experiment.name@/hardwareserver"
+DEPLOY_DIR="@install.dir@@deployment.subdir@/@experiment.name@"
 CURDIR=`pwd`
 CURUSER=`id -nu`
 ADDITIONAL_SERVICE_START="@additional.service.start.script@"
@@ -16,7 +16,7 @@ ADDITIONAL_SERVICE_STOP="@additional.service.stop.script@"
 java_is_running() {
 	[[ -f "$DEPLOY_DIR/@experiment.name@.pid" ]] || return 1
 	PID=`cat $DEPLOY_DIR/@experiment.name@.pid`
-	ps aux | grep $PID |grep java > /dev/null 2>&1
+	ps aux | grep $PID | grep java > /dev/null 2>&1
 	VAR1=$?
 	kill -0 $PID > /dev/null 2>&1
 	VAR2=$?
@@ -33,7 +33,7 @@ start() {
 	if [ "x$ADDITIONAL_SERVICE_START" != "x" ]; then
 		echo "Starting additional service '$ADDITIONAL_SERVICE_START'..."
 		if [ "x$CURUSER" != "x$BASE_USER" ]; then
-			su - l $BASE_USER -c "cd $DEPLOY_DIR; nohup $ADDITIONAL_SERVICE_START 2>&1 >/dev/null 2>/dev/null"
+			su -m -l $BASE_USER -c "cd $DEPLOY_DIR; nohup $ADDITIONAL_SERVICE_START 2>&1 >/dev/null 2>/dev/null"
 		else
 			cd $DEPLOY_DIR
 			nohup $ADDITIONAL_SERVICE_START 2>&1 >/dev/null 2>/dev/null
@@ -49,7 +49,7 @@ start() {
 	echo "Starting @experiment.name@ service..."
 
 	if [ "x$CURUSER" != "x$BASE_USER" ]; then
-		su -l $BASE_USER -c "cd $DEPLOY_DIR; nohup $DEPLOY_DIR/Start@experiment.name@Driver.sh 2>&1 >/dev/null 2>/dev/null"
+		su -m -l $BASE_USER -c "cd $DEPLOY_DIR; nohup $DEPLOY_DIR/Start@experiment.name@Driver.sh 2>&1 >/dev/null 2>/dev/null"
 	else
 		cd $DEPLOY_DIR
 		nohup $DEPLOY_DIR/Start@experiment.name@Driver.sh 2>&1 >/dev/null 2>/dev/null
@@ -58,7 +58,7 @@ start() {
 	if [ $? -eq 0 ]; then
 		echo "OK"
 		if [ "x$CURUSER" != "x$BASE_USER" ]; then
-			su -l $BASE_USER -c "touch $DEPLOY_DIR/@experiment.name@.lock"
+			su -m -l $BASE_USER -c "touch $DEPLOY_DIR/@experiment.name@.lock"
 		else
 			touch $DEPLOY_DIR/@experiment.name@.lock
 		fi
@@ -76,7 +76,7 @@ stop() {
 		if [ "x$ADDITIONAL_SERVICE_STOP" != "x" ]; then
 			echo "Stoping additional service '$ADDITIONAL_SERVICE_STOP'..."
 			if [ "x$CURUSER" != "x$BASE_USER" ]; then
-				su - l $BASE_USER -c "cd $DEPLOY_DIR; nohup $ADDITIONAL_SERVICE_STOP 2>&1 >/dev/null 2>/dev/null"
+				su -m -l $BASE_USER -c "cd $DEPLOY_DIR; nohup $ADDITIONAL_SERVICE_STOP 2>&1 >/dev/null 2>/dev/null"
 			else
 				cd $DEPLOY_DIR
 				nohup $ADDITIONAL_SERVICE_STOP 2>&1 >/dev/null 2>/dev/null
@@ -98,7 +98,7 @@ stop() {
 
 		echo "Stopping @experiment.name@ service..."
 		if [ "x$CURUSER" != "x$BASE_USER" ]; then
-			su -l $BASE_USER -c "kill $PID"
+			su -m -l $BASE_USER -c "kill $PID"
 		else
 			kill $PID
 		fi
