@@ -25,22 +25,22 @@
                 <p:scrollPanel styleClass="scrollPanelSchedule">
                     <p:schedule id="schedule" value="#{scheduleController.eventModel}"
                                 widgetVar="myschedule" allDaySlot="false"
-                                showWeekends="true" draggable="false" resizable="true"
-                                firstHour="8" timeZone="Europe/Lisbon"
-                                slotMinutes="15" locale="pt" view="month" aspectRatio="1.84">
+                                showWeekends="true" draggable="true" resizable="true"
+                                firstHour="8" timeZone="Europe/Lisbon" timeFormat="HH:mm"  
+                                slotMinutes="15" locale="pt" view="month" aspectRatio="1.84" axisFormat="HH:mm">
                         <p:ajax event="dateSelect" listener="#{scheduleController.onDateSelect}" update="eventDetails" oncomplete="eventDialog.show()" />  
                         <p:ajax event="eventSelect" listener="#{scheduleController.onEventSelect}" update="eventDetails" oncomplete="eventDialog.show()" />  
-                        <p:ajax event="eventMove" listener="#{scheduleController.onEventMove}" update=":msg" />  
-                        <p:ajax event="eventResize" listener="#{scheduleController.onEventResize}" update=":msg" />
+                        <p:ajax event="eventMove" listener="#{scheduleController.onEventMove}" update=":msg" oncomplete="myschedule.update();"/>  
+                        <p:ajax event="eventResize" listener="#{scheduleController.onEventResize}" update=":msg" oncomplete="myschedule.update();"/>
                     </p:schedule>
                    
                     <p:dialog widgetVar="eventDialog" header="#{bundle['label.event.header']}" showEffect="clip" hideEffect="clip">
+                        <h:panelGrid id="eventDetails" columns="3" border="0">
                         <h:inputHidden id="idInternal"
                                        value="#{scheduleController.event.idInternal}" />
                         <h:inputHidden id="id" value="#{scheduleController.event.id}" />
                         <h:inputHidden id="domain"
                                        value="#{scheduleController.event.domain}" />
-                        <h:panelGrid id="eventDetails" columns="3" border="0">
                             <h:outputLabel for="title" value="#{bundle['reservation.title']}" />
                             <p:inputText id="title" value="#{scheduleController.event.title}"
                                          required="true" label="#{scheduleController.event.title}" />
@@ -100,11 +100,11 @@
                         </h:panelGrid>
                         <p:commandButton value="#{bundle['operation.save']}"
                                          actionListener="#{scheduleController.addEvent}"
-                                         update=":msg, :context:myreservations, schedule-form:messages, schedule-form:schedule"
+                                         update=":msg, :context:myreservations, schedule-form:messages"
                                          oncomplete="myschedule.update();" onsuccess="eventDialog.hide()"/>
                         <p:commandButton value="#{bundle['operation.remove']}"
                                          actionListener="#{scheduleController.removeEvent}"
-                                         update=":msg, :context:myreservations, schedule-form:schedule"
+                                         update=":msg, :context:myreservations"
                                          oncomplete="myschedule.update();eventDialog.hide()" />
                     </p:dialog>
                 </p:scrollPanel>
