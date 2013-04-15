@@ -201,13 +201,11 @@ public class MediaPlayer {
 		try {
 			detachCallbacks();
 		} catch (final Throwable e) {
-			// TODO tratar excepção correctamente
 			e.printStackTrace();
 		}
 		try {
 			libvlc.libvlc_media_player_release(instance);
 		} catch (final Throwable e) {
-			// TODO tratar excepção correctamente
 			e.printStackTrace();
 		}
 		released = true;

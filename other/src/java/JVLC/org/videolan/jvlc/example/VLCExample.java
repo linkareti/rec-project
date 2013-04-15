@@ -22,7 +22,7 @@ public class VLCExample {
 		final JVLC jvlc = new JVLC(args);
 		System.out.println("... done.");
 
-		final MediaDescriptor mediaDescriptor = new MediaDescriptor(jvlc, "/home/carone/apps/a.avi");
+		final MediaDescriptor mediaDescriptor = new MediaDescriptor(jvlc, "rtsp://elabmc.ist.utl.pt/planck.sdp");
 		final MediaPlayer mediaPlayer = mediaDescriptor.getMediaPlayer();
 
 		mediaPlayer.addListener(new MediaPlayerListener() {
