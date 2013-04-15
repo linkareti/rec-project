@@ -221,7 +221,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			if (vlc == null) {
 				vlc = "vlc";
 			}
-			Runtime.getRuntime().exec(new String[] { vlc, mrl });
+			Runtime.getRuntime().exec(new String[] { vlc, "--rtsp-tcp", mrl });
 		} catch (final IOException e) {
 			ReCApplication.LOGGER.info("VLC not installed on the specified directory");
 		}
