@@ -9,9 +9,9 @@ import javax.swing.event.EventListenerList;
 
 import org.videolan.jvlc.Audio;
 import org.videolan.jvlc.JVLC;
+import org.videolan.jvlc.LoggerVerbosityLevel;
 import org.videolan.jvlc.MediaDescriptor;
 import org.videolan.jvlc.MediaList;
-import org.videolan.jvlc.MediaListPlayer;
 import org.videolan.jvlc.MediaPlayer;
 import org.videolan.jvlc.VLM;
 import org.videolan.jvlc.Video;
@@ -91,10 +91,10 @@ public class VideoViewerController {
 	 */
 	private MediaList mediaList;
 
-	/**
-	 * Player que mapeia a playlist.
-	 */
-	private MediaListPlayer mediaListPlayer;
+//	/**
+//	 * Player que mapeia a playlist.
+//	 */
+//	private MediaListPlayer mediaListPlayer;
 
 	/**
 	 * Controlador de vídeo do VLC.
@@ -124,6 +124,8 @@ public class VideoViewerController {
 	private VideoViewerController() {
 
 		jvlc = new JVLC();
+		jvlc.setLogVerbosity(LoggerVerbosityLevel.DEBUG);
+	
 		initPlayer();
 	}
 

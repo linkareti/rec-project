@@ -1,6 +1,8 @@
 package com.linkare.rec.impl.newface.component.media;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.linkare.rec.impl.config.ReCSystemProperty;
@@ -146,14 +148,12 @@ public class MediaSetup {
 
 		MediaSetup.log.fine("Plugins Path = " + pluginsDir.getAbsolutePath());
 
-		int i = 0;
-		// TODO ver se todos são necessários ou se deve apagar alguns ou
-		// acrescentar outros.
-		final String[] arg = new String[4];
-		arg[i++] = "--intf=dummy";
-		arg[i++] = "--ignore-config";
-		arg[i++] = "--no-plugins-cache";
-		arg[i++] = "--plugin-path=" + pluginsDir.getAbsolutePath();
-		return arg;
+		final List<String> args = new ArrayList<String>();
+		args.add( "--intf=dummy");
+		args.add( "--ignore-config");
+		args.add( "--no-plugins-cache");
+		args.add( "--plugin-path=" + pluginsDir.getAbsolutePath());
+		//args.add( "--rtsp-tcp");
+		return args.toArray(new String[0]);
 	}
 }
