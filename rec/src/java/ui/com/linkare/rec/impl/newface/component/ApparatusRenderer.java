@@ -5,7 +5,6 @@
 
 package com.linkare.rec.impl.newface.component;
 
-import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.JLabel;
@@ -14,9 +13,8 @@ import javax.swing.ListCellRenderer;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-import com.linkare.rec.web.config.Apparatus;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
-import com.linkare.rec.impl.newface.ReCApplication;
+import com.linkare.rec.web.config.Apparatus;
 
 /**
  * 
@@ -33,15 +31,15 @@ public class ApparatusRenderer extends JLabel implements ListCellRenderer {
 
 	private Apparatus apparatus;
 
-	private Color virtualBackgroundSelected=null;
-	private Color virtualBackgroundUnSelected=null;
+//	private Color virtualBackgroundSelected=null;
+//	private Color virtualBackgroundUnSelected=nullLOGGERLOGGER;
 	
 	public ApparatusRenderer() {
 		super();
 		setOpaque(true);
 		setBorder(ApparatusRenderer.NO_FOCUS_BORDER);
-		virtualBackgroundSelected=ReCApplication.getApplication().getContext().getResourceMap().getColor("virtualExperiments.background");
-		virtualBackgroundUnSelected=virtualBackgroundSelected.brighter();
+//		virtualBackgroundSelected=ReCApplication.getApplication().getContext().getResourceMap().getColor("virtualExperiments.background");
+//		virtualBackgroundUnSelected=virtualBackgroundSelected.brighter();
 	}
 
 	@Override
@@ -54,18 +52,18 @@ public class ApparatusRenderer extends JLabel implements ListCellRenderer {
 		if (apparatus != null) {
 
 			if (isSelected) {
-				if (apparatus.isVirtual()) {
-					setBackground(virtualBackgroundSelected);
-				} else {
+//				if (apparatus.isVirtual()) {
+//					setBackground(virtualBackgroundSelected);
+//				} else {
 					setBackground(list.getSelectionBackground());
-				}
+//				}
 				setForeground(list.getSelectionForeground());
 			} else {
-				if (apparatus.isVirtual()) {
-					setBackground(virtualBackgroundUnSelected);
-				} else {
+//				if (apparatus.isVirtual()) {
+//					setBackground(virtualBackgroundUnSelected);
+//				} else {
 					setBackground(list.getBackground());
-				}
+//				}
 				setForeground(list.getForeground());
 			}
 

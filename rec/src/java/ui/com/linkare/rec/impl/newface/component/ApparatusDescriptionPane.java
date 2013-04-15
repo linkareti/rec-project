@@ -22,6 +22,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
+import javax.swing.event.HyperlinkEvent.EventType;
 
 import com.linkare.net.protocols.tex.TexUtils;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
@@ -43,7 +45,7 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
      */
 	private static final long serialVersionUID = 405323800381364687L;
 	@SuppressWarnings("unused")
-	private static final Logger log = Logger.getLogger(ApparatusDescriptionPane.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(ApparatusDescriptionPane.class.getName());
 	private Color defaultBackgroundColor = null;
 	private boolean defaultOpaque = false;
 
@@ -70,121 +72,133 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
 	 */
 	public void setApparatusConfig(final Apparatus apparatusConfig) {
 
-		if (apparatusConfig == null) {
-			lblApparatusName.setText("");
-			lblApparatusImg.setIcon(null);
-			txtApparatusDescription.setText("");
-			lblIcon.setIcon(null);
-			this.setBackground(defaultBackgroundColor);
-			txtApparatusDescription.setBackground(defaultBackgroundColor);
-			this.setOpaque(this.defaultOpaque);
-			return;
-		} else {
-			String desktopLocationBundleKey = null;
-			String displayStringBundleKey = null;
-			String descriptionStringBundleKey = null;
-			String iconLocationBundleKey = null;
+		try {
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					if (apparatusConfig == null) {
+						lblApparatusName.setText("");
+						lblApparatusImg.setIcon(null);
+						txtApparatusDescription.setText("");
+						lblIcon.setIcon(null);
+						setBackground(defaultBackgroundColor);
+						txtApparatusDescription.setBackground(defaultBackgroundColor);
+						setOpaque(defaultOpaque);
+						return;
+					} else {
+						String desktopLocationBundleKey = null;
+						String displayStringBundleKey = null;
+						String descriptionStringBundleKey = null;
+						String iconLocationBundleKey = null;
 
-			if (apparatusConfig.getDesktopLocationBundleKey() != null
-					&& apparatusConfig.getDesktopLocationBundleKey().trim().length() > 0) {
-				desktopLocationBundleKey = apparatusConfig.getDesktopLocationBundleKey();
-			}
-			if (apparatusConfig.getDisplayStringBundleKey() != null
-					&& apparatusConfig.getDisplayStringBundleKey().trim().length() > 0) {
-				displayStringBundleKey = apparatusConfig.getDisplayStringBundleKey();
-			}
-			if (apparatusConfig.getDescriptionStringBundleKey() != null
-					&& apparatusConfig.getDescriptionStringBundleKey().trim().length() > 0) {
-				descriptionStringBundleKey = apparatusConfig.getDescriptionStringBundleKey();
-			}
-			if (apparatusConfig.getIconLocationBundleKey() != null
-					&& apparatusConfig.getIconLocationBundleKey().trim().length() > 0) {
-				iconLocationBundleKey = apparatusConfig.getIconLocationBundleKey();
-			}
+						if (apparatusConfig.getDesktopLocationBundleKey() != null
+								&& apparatusConfig.getDesktopLocationBundleKey().trim().length() > 0) {
+							desktopLocationBundleKey = apparatusConfig.getDesktopLocationBundleKey();
+						}
+						if (apparatusConfig.getDisplayStringBundleKey() != null
+								&& apparatusConfig.getDisplayStringBundleKey().trim().length() > 0) {
+							displayStringBundleKey = apparatusConfig.getDisplayStringBundleKey();
+						}
+						if (apparatusConfig.getDescriptionStringBundleKey() != null
+								&& apparatusConfig.getDescriptionStringBundleKey().trim().length() > 0) {
+							descriptionStringBundleKey = apparatusConfig.getDescriptionStringBundleKey();
+						}
+						if (apparatusConfig.getIconLocationBundleKey() != null
+								&& apparatusConfig.getIconLocationBundleKey().trim().length() > 0) {
+							iconLocationBundleKey = apparatusConfig.getIconLocationBundleKey();
+						}
 
-			String description = ReCResourceBundle.findStringOrDefault(descriptionStringBundleKey,
-					"<html><body></body></html>");
-			if (!description.contains(HTML_BODY_END_TAG)) {
-				description = "<html><body>" + description + "</body></html>";
-			}
+						String description = ReCResourceBundle.findStringOrDefault(descriptionStringBundleKey,
+								"<html><body></body></html>");
+						if (!description.contains(HTML_BODY_END_TAG)) {
+							description = "<html><body>" + description + "</body></html>";
+						}
 
-			final String descriptionPre = description.substring(0, description.indexOf(HTML_BODY_END_TAG));
-			final String descriptionPost = description.substring(description.indexOf(HTML_BODY_END_TAG)
-					+ HTML_BODY_END_TAG.length());
+						final String descriptionPre = description.substring(0, description.indexOf(HTML_BODY_END_TAG));
+						final String descriptionPost = description.substring(description.indexOf(HTML_BODY_END_TAG));
 
-			final StringBuilder webResourceLinks = new StringBuilder(descriptionPre);
-			if (apparatusConfig.getWebResource() != null && apparatusConfig.getWebResource().size() > 0) {
+						final StringBuilder webResourceLinks = new StringBuilder(descriptionPre);
+						if (apparatusConfig.getWebResource() != null && apparatusConfig.getWebResource().size() > 0) {
 
-				String webResourceLocationBundleKey = null;
-				try {
-					final WebResource webResource = apparatusConfig.getWebResource().get(0);
-					webResourceLocationBundleKey = webResource.getLocationBundleKey();
-					if (webResourceLocationBundleKey != null && webResourceLocationBundleKey.trim().length() != 0) {
-						final String webResourceLocation = ReCResourceBundle.findStringOrDefault(
-								webResourceLocationBundleKey, null);
-						try {
-							// Just to check it is a valid URL
-							new URL(webResourceLocation);
-							final String iconBundleKey = webResource.getIconLocationBundleKey();
-							final String displayBundleKey = webResource.getDisplayStringBundleKey();
-							final String iconUrl = ReCResourceBundle.findStringOrDefault(iconBundleKey, null);
-							final String displayString = ReCResourceBundle.findStringOrDefault(displayBundleKey,
-									webResourceLocation);
+							String webResourceLocationBundleKey = null;
+							try {
+								final WebResource webResource = apparatusConfig.getWebResource().get(0);
+								webResourceLocationBundleKey = webResource.getLocationBundleKey();
+								if (webResourceLocationBundleKey != null
+										&& webResourceLocationBundleKey.trim().length() != 0) {
+									final String webResourceLocation = ReCResourceBundle.findStringOrDefault(
+											webResourceLocationBundleKey, null);
+									try {
+										// Just to check it is a valid URL
+										new URL(webResourceLocation);
+										final String iconBundleKey = webResource.getIconLocationBundleKey();
+										final String displayBundleKey = webResource.getDisplayStringBundleKey();
+										final String iconUrl = ReCResourceBundle.findStringOrDefault(iconBundleKey,
+												null);
+										final String displayString = ReCResourceBundle.findStringOrDefault(
+												displayBundleKey, webResourceLocation);
 
-							webResourceLinks.append("<div>");
-							if (iconUrl != null) {
-								webResourceLinks.append("<img src=\"").append(iconUrl).append("\" />");
+										webResourceLinks.append("<div>");
+										if (iconUrl != null) {
+											webResourceLinks.append("<img src=\"").append(iconUrl).append("\" />");
+										}
+										webResourceLinks.append("<a href=\"").append(webResourceLocation).append("\">")
+												.append(displayString != null ? displayString : webResourceLocation)
+												.append("</a>");
+
+										webResourceLinks.append("</div>");
+									} catch (Exception e) {
+										LOGGER.finest("url '" + webResourceLocation
+												+ "' does not represent a valid URL!");
+									}
+								}
+							} catch (final MissingResourceException e) {
+								ApparatusDescriptionPane.LOGGER.warning("Could not find the resource "
+										+ webResourceLocationBundleKey + " on the experiment bundle");
 							}
-							webResourceLinks.append("<a href=\"").append(webResourceLocation).append("\">")
-									.append(displayString != null ? displayString : webResourceLocation).append("</a>");
+						}
+						webResourceLinks.append(descriptionPost);
+						description = webResourceLinks.toString();
 
-							webResourceLinks.append("</div>");
-						} catch (Exception e) {
-							log.finest("url '" + webResourceLocation + "' does not represent a valid URL!");
+						lblApparatusName.setText(ReCResourceBundle.findStringOrDefault(displayStringBundleKey,
+								displayStringBundleKey));
+
+						if (desktopLocationBundleKey != null && desktopLocationBundleKey.trim().length() != 0) {
+							lblApparatusImg.setIcon(ReCResourceBundle.findImageIconOrDefault(desktopLocationBundleKey,
+									new ImageIcon()));
+						}
+
+						if (descriptionStringBundleKey != null) {
+							String translatedStr = TexUtils.getDescriptionWithTeXExpressions(description);
+							txtApparatusDescription.setText(translatedStr);
+						}
+
+						if (iconLocationBundleKey != null) {
+							try {
+								lblIcon.setIcon(ReCResourceBundle.findImageIcon(iconLocationBundleKey));
+							} catch (MissingResourceException e) {
+								ApparatusDescriptionPane.LOGGER.warning("Could not find the resource "
+										+ iconLocationBundleKey + " on the experiment bundle");
+							} catch (MalformedURLException e) {
+								ApparatusDescriptionPane.LOGGER.warning("The resource " + iconLocationBundleKey
+										+ " does not define a valid URL");
+							}
+						}
+
+						if (apparatusConfig.isVirtual()) {
+							setOpaque(true);
+							Color bg = getResourceMap().getColor("virtualExperiments.background");
+							setBackground(bg);
+							// txtApparatusDescription.setBackground(bg);
+							// scrollApparatusDescription.setBackground(bg);
 						}
 					}
-				} catch (final MissingResourceException e) {
-					ApparatusDescriptionPane.log.warning("Could not find the resource " + webResourceLocationBundleKey
-							+ " on the experiment bundle");
 				}
-			}
-			webResourceLinks.append(descriptionPost);
-			description = webResourceLinks.toString();
-
-			lblApparatusName.setText(ReCResourceBundle.findStringOrDefault(displayStringBundleKey,
-					displayStringBundleKey));
-
-			if (desktopLocationBundleKey != null && desktopLocationBundleKey.trim().length() != 0) {
-				lblApparatusImg.setIcon(ReCResourceBundle.findImageIconOrDefault(desktopLocationBundleKey,
-						new ImageIcon()));
-			}
-
-			if (descriptionStringBundleKey != null) {
-				String translatedStr = TexUtils.getDescriptionWithTeXExpressions(description);
-				txtApparatusDescription.setText(translatedStr);
-			}
-
-			if (iconLocationBundleKey != null) {
-				try {
-					lblIcon.setIcon(ReCResourceBundle.findImageIcon(iconLocationBundleKey));
-				} catch (MissingResourceException e) {
-					ApparatusDescriptionPane.log.warning("Could not find the resource " + iconLocationBundleKey
-							+ " on the experiment bundle");
-				} catch (MalformedURLException e) {
-					ApparatusDescriptionPane.log.warning("The resource " + iconLocationBundleKey
-							+ " does not define a valid URL");
-				}
-			}
-
-			if (apparatusConfig.isVirtual()) {
-				this.setOpaque(true);
-				Color bg = getResourceMap().getColor("virtualExperiments.background");
-				this.setBackground(bg);
-				// txtApparatusDescription.setBackground(bg);
-				// scrollApparatusDescription.setBackground(bg);
-			}
-
+			});
+		} catch (Exception e) {
+			LOGGER.log(Level.WARNING,"Unable to update apparatus description pane!",e);
 		}
+
 	}
 
 	/**
@@ -232,7 +246,9 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
 		txtApparatusDescription.setOpaque(false);
 		txtApparatusDescription.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
 			public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
-				txtApparatusDescriptionHyperlinkUpdate(evt);
+				if(evt.getEventType()==EventType.ACTIVATED) {
+					txtApparatusDescriptionHyperlinkUpdate(evt);
+				}
 			}
 		});
 		scrollApparatusDescription.setViewportView(txtApparatusDescription);
@@ -281,12 +297,12 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
 			final Desktop desktop = Desktop.getDesktop();
 			if (desktop.isSupported(Desktop.Action.BROWSE)) {
 				try {
-					ApparatusDescriptionPane.log.fine("Browsing " + urlRemote);
+					ApparatusDescriptionPane.LOGGER.fine("Browsing " + urlRemote);
 					desktop.browse(urlRemote.toURI());
 				} catch (final URISyntaxException e) {
-					ApparatusDescriptionPane.log.log(Level.SEVERE, "Invalid URL.", e);
+					ApparatusDescriptionPane.LOGGER.log(Level.SEVERE, "Invalid URL.", e);
 				} catch (final IOException e) {
-					ApparatusDescriptionPane.log.log(Level.SEVERE, "User browser not found.", e);
+					ApparatusDescriptionPane.LOGGER.log(Level.SEVERE, "User browser not found.", e);
 				}
 
 			}
