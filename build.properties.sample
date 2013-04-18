@@ -268,7 +268,7 @@ openorb.description.oneline=OpenORB Implementation of OMG CORBA 2.4.2 ORB
 openorb.description.tooltip=Community OpenORB
 openorb.description.short=OpenSource CORBA ORB
 
-#And still the vlc/jvlc properties
+#And still the vlc/vlcj properties
 vlc.home.url=http://www.videolan.org/
 vlc.home.title=Videolan Media Player
 vlc.home.description=A Multimedia Player based on opensource GPL License and other underlying software such as gstreamer, ffmpeg and alike

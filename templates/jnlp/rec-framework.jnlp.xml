@@ -55,7 +55,10 @@
 
 		<jar href="lib/JCFN_sig.jar" />
 		<jar href="lib/jmf_sig.jar" />
-		<jar href="lib/jna_sig.jar" />
+		<jar href="lib/jna-3.5.2_sig.jar" />
+		<jar href="lib/platform-3.5.2_sig.jar" />
+		<jar href="lib/vlcj-2.3.0-SNAPSHOT_sig.jar" />
+		
 
 		<jar href="lib/OSP_sig.jar" />
 		<jar href="lib/OSP3D_sig.jar" />
@@ -69,8 +72,6 @@
 
 		<!-- Jar ReC Common -->
 
-		<!-- Jar ReC jvlc -->
-
 		<!-- property name="rec.percent.freememory.threshold.serialization" value="80" 
 			/ -->
 		<!--property name="jnlp.packEnabled" value="true" /-->
@@ -79,59 +80,46 @@
 
 	<!-- ******************************************************************* 
 		****************** Resources por SO / Arch ************************ ******************************************************************* -->
-
 	<!-- falta archs x86-64 (ou x86_64?), amd64 e amd -->
-	<resources arch="x86" os="Windows">
-		<nativelib href="lib/libsvlc_win32_x86_sig.jar" />
+	<!--  resources arch="x86" os="Windows">
 		<extension href="windows-vlc-installer.jnlp" name="WindowsInstaller" />
 	</resources>
 
 	<resources arch="x86_64" os="Windows">
-		<nativelib href="lib/libsvlc_win32_x86_sig.jar" />
 		<extension href="windows-vlc-installer.jnlp" name="WindowsInstaller" />
 	</resources>
 
 	<resources arch="amd" os="Windows">
-		<nativelib href="lib/libsvlc_win32_x86_sig.jar" />
 		<extension href="windows-vlc-installer.jnlp" name="WindowsInstaller" />
 	</resources>
 
 	<resources arch="amd64" os="Windows">
-		<nativelib href="lib/libsvlc_win32_x86_sig.jar" />
 		<extension href="windows-vlc-installer.jnlp" name="windowsInstaller" />
 	</resources>
 
 	<resources arch="i386" os="Linux">
-		<nativelib href="lib/libsvlc_linux_i386_sig.jar" />
 		<extension href="linux-vlc-installer.jnlp" name="linuxInstaller" />
 	</resources>
 	<resources arch="i586" os="Linux">
-		<nativelib href="lib/libsvlc_linux_i686_sig.jar" />
 		<extension href="linux-vlc-installer.jnlp" name="linuxInstaller" />
 	</resources>
 	<resources arch="i686" os="Linux">
-		<nativelib href="lib/libsvlc_linux_i686_sig.jar" />
 		<extension href="linux-vlc-installer.jnlp" name="linuxInstaller" />
 	</resources>
 	<resources arch="amd64" os="Linux">
-		<nativelib href="lib/libsvlc_linux_amd64_sig.jar" />
 		<extension href="linux-vlc-installer.jnlp" name="linuxInstaller" />
 	</resources>
 	<resources arch="ppc" os="Mac OS X">
-		<nativelib href="lib/libsvlc_mac_ppc_sig.jar" />
 		<jar href="lib/vlcplugins_mac_ppc_sig.jar" />
 	</resources>
 	<resources arch="ppc64" os="Mac OS X">
-		<nativelib href="lib/libsvlc_mac_ppc64_sig.jar" />
 		<jar href="lib/vlcplugins_mac_ppc64_sig.jar" />
 	</resources>
 	<resources arch="x86" os="Mac OS X">
-		<nativelib href="lib/libsvlc_mac_ppc64_sig.jar" />
 		<jar href="lib/vlcplugins_mac_ppc64_sig.jar" />
 	</resources>
 	<resources arch="x86_64" os="Mac OS X">
-		<nativelib href="lib/libsvlc_mac_ppc64_sig.jar" />
 		<jar href="lib/vlcplugins_mac_ppc64_sig.jar" />
-	</resources>
+	</resources-->
 	<component-desc />
 </jnlp>

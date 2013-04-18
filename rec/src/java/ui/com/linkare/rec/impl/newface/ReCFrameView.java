@@ -536,7 +536,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 			return false;
 		}
 
-		if (!vlcExec.getName().substring(0, 3).equalsIgnoreCase("vlc")) {
+		if (!vlcExec.getName().toLowerCase().startsWith("vlc")) {
 			return false;
 		}
 

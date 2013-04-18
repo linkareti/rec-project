@@ -596,7 +596,6 @@
 			<replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot;/&gt;" />
 			<replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
 			<replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
-			<replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!-- Jar ReC jvlc --&gt;" value="&lt;jar href=&quot;ReCjvlc_sig.jar&quot;/&gt;" />
 
 			<replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!--End Experiment Jars --&gt;">
 				<replacevalue>

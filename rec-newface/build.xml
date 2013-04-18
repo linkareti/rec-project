@@ -99,13 +99,7 @@
         <copy todir="dist">
             <fileset file="screenshot.png"/>
         </copy>
-    	
-    	<!-- installer -->
-    	<copy todir="dist">
-    		<fileset file="windows-vlc-installer.jnlp"/>
-    		<fileset file="linux-vlc-installer.jnlp"/>
-    	</copy>
-
+    
     </target>
 
 </project>

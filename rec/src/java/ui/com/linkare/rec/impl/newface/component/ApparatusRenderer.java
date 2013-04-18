@@ -1,12 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.linkare.rec.impl.newface.component;
 
 import java.awt.Component;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
@@ -22,6 +20,17 @@ import com.linkare.rec.web.config.Apparatus;
  */
 public class ApparatusRenderer extends JLabel implements ListCellRenderer {
 
+		
+	/**
+	 * 
+	 * @author jpereira - Linkare TI
+	 */
+	public class ImageIconCache {
+		private ImageIcon imageIcon=null;
+	}
+
+	private Map<String, ImageIconCache> apparatusIconMap=new HashMap<String, ImageIconCache>();
+	
 	/**
 	 * 
 	 */
@@ -31,15 +40,10 @@ public class ApparatusRenderer extends JLabel implements ListCellRenderer {
 
 	private Apparatus apparatus;
 
-//	private Color virtualBackgroundSelected=null;
-//	private Color virtualBackgroundUnSelected=nullLOGGERLOGGER;
-	
 	public ApparatusRenderer() {
 		super();
-		setOpaque(true);
+	//	setOpaque(true);
 		setBorder(ApparatusRenderer.NO_FOCUS_BORDER);
-//		virtualBackgroundSelected=ReCApplication.getApplication().getContext().getResourceMap().getColor("virtualExperiments.background");
-//		virtualBackgroundUnSelected=virtualBackgroundSelected.brighter();
 	}
 
 	@Override
@@ -52,26 +56,24 @@ public class ApparatusRenderer extends JLabel implements ListCellRenderer {
 		if (apparatus != null) {
 
 			if (isSelected) {
-//				if (apparatus.isVirtual()) {
-//					setBackground(virtualBackgroundSelected);
-//				} else {
-					setBackground(list.getSelectionBackground());
-//				}
+				setBackground(list.getSelectionBackground());
 				setForeground(list.getSelectionForeground());
 			} else {
-//				if (apparatus.isVirtual()) {
-//					setBackground(virtualBackgroundUnSelected);
-//				} else {
-					setBackground(list.getBackground());
-//				}
+				setBackground(list.getBackground());
 				setForeground(list.getForeground());
 			}
 
 			// Font
 			setFont(list.getFont());
 
+			ImageIconCache cache=apparatusIconMap.get(apparatus.getIconLocationBundleKey());
+			if(cache==null) {
+				cache=new ImageIconCache();
+				cache.imageIcon=ReCResourceBundle.findImageIconOrDefault(apparatus.getIconLocationBundleKey(), null);
+				apparatusIconMap.put(apparatus.getIconLocationBundleKey(),cache);
+			}
 			// Icon
-			setIcon(ReCResourceBundle.findImageIconOrDefault(apparatus.getIconLocationBundleKey(), null));
+			setIcon(cache.imageIcon);
 
 			// Text
 			String displayStringBundleKey = apparatus.getDisplayStringBundleKey();

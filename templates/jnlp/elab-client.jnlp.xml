@@ -68,8 +68,7 @@
 
 		<!-- change this value to disable video -->
 		<property name="video.enabled" value="@video.enabled@" />
-		<property name="vlc.plugins.filename" value="@vlc.plugins.filename@" />
-
+		
 		<!-- rec.web Service -->
 		<property name="rec.web.endpoint" value="@rec.web.endpoint@" />
 
@@ -83,14 +82,6 @@
 		<property name="rec.processingmanager.threadPool.maxsize"
 			value="@rec.client.processingmanager.threadpool.maxsize@" />
 		<property name="rec.processingmanager.thread.idletime" value="@rec.processingmanager.thread.idletime@" />
-	</resources>
-
-	<resources os="Linux">
-		<property name="vlc.plugins.destdir" value=".@vlc.plugins.destdir@" />
-	</resources>
-
-	<resources os="Windows">
-		<property name="vlc.plugins.destdir" value="@vlc.plugins.destdir@" />
 	</resources>
 
 	<application-desc main-class="@client.main-class@" />

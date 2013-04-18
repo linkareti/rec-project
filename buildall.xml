@@ -334,9 +334,6 @@
 				<include name="*" />
 				<exclude name="ELabClient.jar" />
 			</fileset>
-			<fileset dir="${jvlc.lib.dir}">
-				<include name="*" />
-			</fileset>
 		</copy>
 	</target>
 

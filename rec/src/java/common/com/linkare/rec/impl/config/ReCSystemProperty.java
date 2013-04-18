@@ -173,15 +173,6 @@ public enum ReCSystemProperty {
 	 * Wether video is enabled or not
 	 */
 	VIDEO_ENABLED("video.enabled", null, ReCSystemPropertyLocation.CLIENT),
-
-	/**
-	 * The VLC plugins file name
-	 */
-	VLC_PLUGINS_FILENAME("vlc.plugins.filename", null, ReCSystemPropertyLocation.CLIENT),
-	/**
-	 * The VLC plugins destination dir
-	 */
-	VLC_PLUGINS_DESTDIR("vlc.plugins.destdir", null, ReCSystemPropertyLocation.CLIENT),
 	/**
 	 * define the client in auto acquire mode
 	 */

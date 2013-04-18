@@ -5,7 +5,6 @@
 	<classpathentry kind="src" path="experiments/boylemariotte/src/java/server"/>
 	<classpathentry kind="src" path="rec/src/java/common"/>
 	<classpathentry excluding="com/linkare/rec/impl/baseUI/config/|com/linkare/rec/impl/baseUI/labsTree/|com/linkare/rec/impl/baseUI/mdi/|com/linkare/rec/impl/baseUI/resources/|com/linkare/rec/impl/baseUI/utils/|com/linkare/rec/impl/baseUI/AboutDialog.java|com/linkare/rec/impl/baseUI/AboutDialogBeanInfo.java|com/linkare/rec/impl/baseUI/AcquisitionHeaderDisplay.java|com/linkare/rec/impl/baseUI/ChatFrame.java|com/linkare/rec/impl/baseUI/ExperimentHistoryPanel.java|com/linkare/rec/impl/baseUI/ExperimentHistoryRenderer.java|com/linkare/rec/impl/baseUI/ExperimentInternalFrame.java|com/linkare/rec/impl/baseUI/ExpHistoryPanelNew.java|com/linkare/rec/impl/baseUI/ExpHistoryUINode.java|com/linkare/rec/impl/baseUI/ImageBorder.java|com/linkare/rec/impl/baseUI/InternalBrowser.java|com/linkare/rec/impl/baseUI/JAcquisitionHeaderDisplay.java|com/linkare/rec/impl/baseUI/JDockPanel.java|com/linkare/rec/impl/baseUI/LoginFrame.java|com/linkare/rec/impl/baseUI/OfflineInternalFrame.java|com/linkare/rec/impl/baseUI/ReCBaseUI.java|com/linkare/rec/impl/baseUI/ReCSplash.java|com/linkare/rec/impl/baseUI/SendMailToQueue.java|com/linkare/rec/impl/baseUI/StatusPanel.java|com/linkare/rec/impl/baseUI/TabClosablePanel.java|com/linkare/rec/impl/baseUI/UsersListPanel.java|com/linkare/rec/impl/baseUI/WaitDialog.java|com/linkare/rec/impl/baseUI/control/|com/linkare/rec/impl/baseUI/display/AbstractDisplayFactory.java|com/linkare/rec/impl/baseUI/display/DefaultDisplayFactory.java|com/linkare/rec/impl/baseUI/display/DefaultExperimentHeaderInfo.java|com/linkare/rec/impl/baseUI/display/DisplayFactory.java|com/linkare/rec/impl/ui/display/AbstractDisplayFactory.java|com/linkare/rec/impl/ui/display/DefaultDisplayFactory.java|com/linkare/rec/impl/ui/display/DefaultExperimentHeaderInfo.java|com/linkare/rec/impl/ui/display/DisplayFactory.java" kind="src" path="rec/src/java/ui"/>
-	<classpathentry kind="src" path="other/src/java/JVLC"/>
 	<classpathentry kind="src" path="elab/src/java/client"/>
 	<classpathentry kind="src" path="elab/src/java/ui"/>
 	<classpathentry kind="src" path="rec/src/java/multicast"/>
@@ -148,7 +147,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="rec/lib/java/client/appframework-1.0.3.jar"/>
-	<classpathentry kind="lib" path="other/lib/java/jvlc/jna.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/client/commons-lang-2.4.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/client/joda-time-1.6.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/client/javaws.jar"/>
@@ -243,5 +241,8 @@
 	<classpathentry kind="lib" path="rec/lib/java/client/swing-worker-1.1.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/common/commons-i18n.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/common/commons-net.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/vlcj"/>
+	<classpathentry kind="lib" path="rec/lib/java/common/jna-3.5.2.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/common/platform-3.5.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

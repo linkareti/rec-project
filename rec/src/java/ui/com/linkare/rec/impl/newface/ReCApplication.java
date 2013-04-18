@@ -156,7 +156,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	 * @param videoOutput
 	 */
 	void setVideoOutput(final Canvas videoOutput) {
-		mediaController.setVideoOutput(videoOutput);
+		MediaSetup.setVideoOutput(videoOutput);
 	}
 
 	/**
@@ -165,18 +165,15 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	 */
 	private void initializeMediaController() {
 
-		try {
-			if (mediaController == null) {
-
-				MediaSetup.setup();
-				final String[] defaultVlcParams = MediaSetup.getDefaultMediaParameters();
-				mediaController = VideoViewerController.getInstance(defaultVlcParams);
+		if (mediaController == null) {
+			if (!MediaSetup.isVideoSubSystemAvailable()) {
+				fireApplicationEvent(new ReCAppEvent(this, ReCCommand.CHOOSE_VLC, true));
+			} else {
+				mediaController = VideoViewerController.getInstance();
 				mediaController.addMediaApplicationEventListener(getMediaApplicationEventListener());
 			}
-		} catch (final UnsatisfiedLinkError e) {
-			ReCApplication.LOGGER.severe(e.toString());
-			fireApplicationEvent(new ReCAppEvent(this, ReCCommand.CHOOSE_VLC, true));
 		}
+
 	}
 
 	private MediaApplicationEventListener getMediaApplicationEventListener() {
@@ -184,9 +181,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		return new MediaApplicationEventListener() {
 			@Override
 			public void timeChanged(final MediaTimeChangedEvent evt) {
-				ReCApplication.LOGGER.fine("Handling time changed!!!!!!!");
-				// TODO lançar evento para a view para colocar slider com time
-				// actual do controller.
+				// ReCApplication.LOGGER.fine("Handling time changed!!!!!!!");
 			}
 
 			@Override
@@ -204,7 +199,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			@Override
 			public void stopped(final MediaStoppedEvent evt) {
 				ReCApplication.LOGGER.fine("Handling stopped!!!!!!!");
-				// TODO lançar evento para a view para colocar slider a 0.
 			}
 		};
 	}
@@ -221,7 +215,13 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			if (vlc == null) {
 				vlc = "vlc";
 			}
-			Runtime.getRuntime().exec(new String[] { vlc, "--rtsp-tcp", mrl });
+			String[] args = MediaSetup.getDefaultExternalMediaParameters();
+			String[] execArgs = new String[args.length + 2];
+			System.arraycopy(args, 0, execArgs, 1, args.length);
+			execArgs[0] = vlc;
+			execArgs[execArgs.length - 1] = mrl;
+
+			Runtime.getRuntime().exec(execArgs);
 		} catch (final IOException e) {
 			ReCApplication.LOGGER.info("VLC not installed on the specified directory");
 		}
@@ -334,7 +334,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		}
 		ReCApplication.LOGGER.info("Stopping media...");
 		mediaController.stop();
-		mediaController.releaseMedia();
 	}
 
 	/**
@@ -703,13 +702,12 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	private boolean checkConnectivity(ReCSplashScreen splash) {
 		try {
 			InetAddress.getLocalHost().getHostName();
-		}catch(UnknownHostException e) {
-			splash.registerErrorMessage(
-					getRecApplicationBundle().getString("Application.splashScreen.unkown.localhost.error"));
+		} catch (UnknownHostException e) {
+			splash.registerErrorMessage(getRecApplicationBundle().getString(
+					"Application.splashScreen.unkown.localhost.error"));
 			return false;
 		}
-		
-		
+
 		List<Lab> labsToCheck = null;
 		if (isAutoConnectApparatus()) {
 			labsToCheck = new ArrayList<Lab>();
@@ -737,22 +735,24 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 				continue;
 			}
 
-			splash.refreshLabel(getRecApplicationBundle().getString("Application.splashScreen.ip.reachable.message"),
-					labName, address.getHostAddress());
-			if (!canReachIp(address)) {
-				splash.registerErrorMessage(
-						getRecApplicationBundle().getString("Application.splashScreen.ip.reachable.error"), labName,
-						address.getHostAddress());
-				continue;
-			}
-
 			splash.refreshLabel(
 					getRecApplicationBundle().getString("Application.splashScreen.connecting.socket.message"), labName,
 					address.getHostAddress() + ":" + hostPort[1]);
 			if (!canReachIpOnPort(address.getHostAddress(), Integer.valueOf(hostPort[1]))) {
-				splash.registerErrorMessage(
-						getRecApplicationBundle().getString("Application.splashScreen.connecting.socket.error"),
-						labName, address.getHostAddress() + ":" + hostPort[1]);
+
+				splash.refreshLabel(getRecApplicationBundle()
+						.getString("Application.splashScreen.ip.reachable.message"), labName, address.getHostAddress());
+				if (!canReachIp(address)) {
+					splash.registerErrorMessage(
+							getRecApplicationBundle().getString("Application.splashScreen.ip.reachable.error"),
+							labName, address.getHostAddress());
+					continue;
+				} else {
+					splash.registerErrorMessage(
+							getRecApplicationBundle().getString("Application.splashScreen.connecting.socket.error"),
+							labName, address.getHostAddress() + ":" + hostPort[1]);
+				}
+
 				continue;
 			}
 
@@ -807,11 +807,17 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	 * @return
 	 */
 	private boolean canReachIp(InetAddress address) {
+		// Windows machines do not implement reachability by
+		// using ICMP but rather TCP/Echo - port 7
+		// so, sometimes they give wrong positives
+		if (ReCSystemProperty.OS_NAME.getValue().contains("win")) {
+			return true;
+		}
 
 		try {
 			return address.isReachable(2000);
-		} catch (IOException e) {
-			LOGGER.severe("Error creating socket to " + address + " on port " + 7);
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, "Error determining reachability of address '" + address + "'", e);
 			return false;
 		}
 	}
@@ -827,8 +833,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			Socket s = new Socket();
 			s.connect(new InetSocketAddress(address, port), 2000);
 			s.close();
-		} catch (IOException e) {
-			LOGGER.severe("Error creating socket to " + address + " on port " + port);
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, "Error creating socket to " + address + " on port " + port, e);
 			return false;
 		}
 		return true;
@@ -928,6 +934,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		}
 
 		SYSTEM_EXIT_PREVENTER_SECURITY_MANAGER.setMainApplicationWindow(getMainFrame());
+
+		MediaSetup.initializeMediaFactory(this.getMainFrame());
 	}
 
 	protected void showView() {
@@ -1032,8 +1040,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			ReCApplication.LOGGER.info("Connect user " + getUsername());
 			labClientBean.connect(currentLab.getLocation());
 
-			// TODO Verify if this is the best place to
-			// initializeMediaController
 			if (isApparatusVideoEnabled()) {
 				initializeMediaController();
 			}
@@ -1682,6 +1688,10 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		return Application.getInstance(ReCApplication.class);
 	}
 
+	static {
+		MediaSetup.initializeVideoSubsystem();
+	}
+
 	/**
 	 * Main method launching the application.
 	 * 
@@ -1689,7 +1699,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	 */
 	public static void main(final String[] args) {
 		System.setSecurityManager(SYSTEM_EXIT_PREVENTER_SECURITY_MANAGER);
-
 		Application.launch(ReCApplication.class, args);
 	}
 

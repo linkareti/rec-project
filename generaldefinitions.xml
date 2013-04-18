@@ -65,39 +65,6 @@
 		</sequential>
 	</macrodef>
 
-
-	<!--
-			=====================================================
-			======================= JVLC ========================
-			=====================================================
-	-->
-
-	<property name="jvlc.classes.dir" value="${build.dir.compile}/classes/jvlc" />
-	<property name="jvlc.build.dir" value="${build.dir.jars}/jvlc" />
-
-	<property name="jvlc.src.java.dir" value="${basedir}/other/src/java/JVLC" />
-
-	<property name="other.lib.dir" value="${basedir}/other/lib" />
-
-	<property name="jvlc.lib.dir" value="${other.lib.dir}/java/jvlc/" />
-
-	<path id="jvlc.lib.path">
-		<fileset dir="${jvlc.lib.dir}">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
-
-	<path id="jvlc.compile.lib.path">
-		<fileset dir="${other.lib.dir}/compile/jvlc/">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
-
-	<path id="jvlc.libs.classpath">
-		<path refid="jvlc.lib.path" />
-		<path refid="jvlc.compile.lib.path" />
-	</path>
-
 	<!--
 		=====================================================
 		==================== REC Common =====================
@@ -171,9 +138,7 @@
 
 	<path id="rec.compile.client.dependencies.classpath">
 		<pathelement location="${rec.common.classes.dir}/" />
-		<pathelement location="${jvlc.classes.dir}/" />
 		<path refid="rec.common.libs.classpath" />
-		<path refid="jvlc.libs.classpath" />
 	</path>
 
 	<path id="rec.compile.client.classpath">
@@ -488,7 +453,6 @@
 
 			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
 			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
-			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC jvlc --&gt;" value="&lt;jar href=&quot;ReCjvlc_sig.jar&quot;/&gt;" />
 
 			<copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/openorb.jnlp" />
 			<replace file="${elab.client.classes.dir}/openorb.jnlp" token="@codebase@" value="file:${client.build.dir}/" />
@@ -711,7 +675,6 @@
 
 			<replace file="${client.build.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
 			<replace file="${client.build.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
-			<replace file="${client.build.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC jvlc --&gt;" value="&lt;jar href=&quot;ReCjvlc_sig.jar&quot;/&gt;" />
 
 			<copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${client.build.dir}/openorb.jnlp" />
 			<replace file="${client.build.dir}/openorb.jnlp" propertyFile="build.properties">

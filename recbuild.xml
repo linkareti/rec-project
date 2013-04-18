@@ -12,64 +12,6 @@
 
 	<import file="generaldefinitions.xml" />
 
-	<!-- ===================================================== ======================= 
-		JVLC ======================== ===================================================== -->
-
-	<target name="clean.rec.jvlc" description="Delete the build folder containing the jvlc compiled code.">
-		<delete dir="${jvlc.classes.dir}" />
-		<delete file="${build.dir.compile}/jvlc.jar" />
-		<delete file="${build.dir.compile}/jvlc_sig.jar" />
-	</target>
-
-	<target name="compile.rec.jvlc" description="Compile the jvlc project independently.">
-		<mkdir dir="${jvlc.classes.dir}" />
-		<mkdir dir="${jvlc.classes.dir}/META-INF" />
-
-		<javac srcdir="${jvlc.src.java.dir}" destdir="${jvlc.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="true">
-			<include name="**/*.java" />
-			<classpath refid="jvlc.libs.classpath" />
-			<compilerarg value="-Xlint:unchecked, cast, -serial" />
-		</javac>
-
-		<copy todir="${jvlc.classes.dir}" overwrite="true">
-			<fileset dir="${rec.common.src.java.dir}">
-				<exclude name="**/*.java" />
-				<exclude name="**/*.form" />
-			</fileset>
-		</copy>
-
-		<manifest file="${jvlc.classes.dir}/META-INF/MANIFEST.MF">
-			<section name="common">
-				<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
-				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
-				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
-				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
-				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${timestamp}" />
-				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
-			</section>
-		</manifest>
-
-	</target>
-
-	<target name="jar.rec.jvlc" description="create jvlc jar">
-		<create.jar destination.folder="${jvlc.build.dir}" jar.name="ReCjvlc.jar" source.basedir="${jvlc.classes.dir}" />
-	</target>
-
-	<target name="repack.jar.rec.jvlc" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
-		<repack.jar file="${jvlc.build.dir}/ReCjvlc.jar" />
-	</target>
-
-	<target name="sign.rec.jvlc" description="sign jvlc jar">
-		<sign.jar.rec file="${jvlc.build.dir}/ReCjvlc.jar" />
-	</target>
-
-	<target name="pack.jar.rec.jvlc" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
-		<pack.200.jar file="${jvlc.build.dir}/ReCjvlc_sig.jar" />
-	</target>
-
-	<target name="build.rec.jvlc" description="build jvlc - clean, compile, sign and pack" depends="clean.rec.jvlc,compile.rec.jvlc, jar.rec.jvlc, repack.jar.rec.jvlc, sign.rec.jvlc, pack.jar.rec.jvlc">
-
-	</target>
 
 	<!-- ===================================================== ==================== 
 		REC Common ===================== ===================================================== -->
@@ -203,10 +145,8 @@
 	<target name="build.rec.client" description="build the rec client components - clean, compile, sign and pack" depends="clean.rec.client,compile.rec.client,jar.rec.client, repack.jar.rec.client, sign.rec.client, pack.jar.rec.client">
 
 		<copy file="${common.build.dir}/ReCCommon_sig.jar" todir="${client.build.dir}" />
-		<copy file="${jvlc.build.dir}/ReCjvlc_sig.jar" todir="${client.build.dir}" />
 
 		<copy file="${common.build.dir}/ReCCommon_sig.jar.pack.gz" todir="${client.build.dir}" failonerror="false" />
-		<copy file="${jvlc.build.dir}/ReCjvlc_sig.jar.pack.gz" todir="${client.build.dir}" failonerror="false" />
 
 		<copy file="${templates.dir.openorb}/OpenORBClientTemplate.xml" overwrite="yes" tofile="${client.build.dir}/etc/openorb.xml" />
 
@@ -435,7 +375,7 @@
 
 	<target name="clean.all" description="call all clean targets on rec components" depends="clean.rec.common,clean.rec.client,clean.rec.hardwareserver,clean.rec.multicastcontroller" />
 
-	<target name="build.all" description="call all build targets on rec components" depends="build.rec.common,build.rec.jvlc,build.rec.client,build.rec.hardwareserver,build.rec.multicastcontroller" />
+	<target name="build.all" description="call all build targets on rec components" depends="build.rec.common,build.rec.client,build.rec.hardwareserver,build.rec.multicastcontroller" />
 
 	<target name="javadoc.rec" description="create the javadoc for rec components">
 		<javadoc destdir="${build.dir}/javadocs/rec" author="true" version="true" use="true" windowtitle="ReC - Javadocs">

@@ -5,7 +5,6 @@
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
             <name>ReC</name>
             <source-roots>
-                <root id="JVLC.dir"/>
                 <root id="src.common2.dir"/>
                 <root id="hardwareserver.dir"/>
                 <root id="multicast.dir"/>

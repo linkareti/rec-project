@@ -1,28 +1,20 @@
 package com.linkare.rec.impl.newface.component.media;
 
-import java.awt.Canvas;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.event.EventListenerList;
 
-import org.videolan.jvlc.Audio;
-import org.videolan.jvlc.JVLC;
-import org.videolan.jvlc.LoggerVerbosityLevel;
-import org.videolan.jvlc.MediaDescriptor;
-import org.videolan.jvlc.MediaList;
-import org.videolan.jvlc.MediaPlayer;
-import org.videolan.jvlc.VLM;
-import org.videolan.jvlc.Video;
-import org.videolan.jvlc.event.MediaPlayerListener;
+import uk.co.caprica.vlcj.player.MediaPlayer;
+import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
+import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
 
 import com.linkare.rec.impl.newface.component.media.events.MediaApplicationEventListener;
 import com.linkare.rec.impl.newface.component.media.events.MediaNotConnectedEvent;
 import com.linkare.rec.impl.newface.component.media.events.MediaStoppedEvent;
 import com.linkare.rec.impl.newface.component.media.events.MediaTimeChangedEvent;
 import com.linkare.rec.impl.newface.component.media.transcoding.TranscodingConfig;
-import com.sun.jna.Platform;
 
 /**
  * Wrapper em volta do JVLC e que contém as funcionalidades de controlo e
@@ -43,17 +35,6 @@ public class VideoViewerController {
 	private static VideoViewerController controller;
 
 	/**
-	 * Identificador dado à stream que se pretende gravar para ficheiro.
-	 */
-	private static final String BROADCAST_NAME = "MyBroadcast";
-
-	/**
-	 * Tempo de espera entre o pause e o play quando se move a posição do vídeo
-	 * quando este está em pausa.
-	 */
-	private static final int PAUSE_TIME = 50;
-
-	/**
 	 * Time do Player que corresponde ao momento 0 da experiência e que tem um
 	 * tempo relativo.
 	 */
@@ -68,48 +49,12 @@ public class VideoViewerController {
 	/**
 	 * Estado actual do media player.
 	 */
-	MediaPlayerState state;
-
-	/**
-	 * Principal componente de acesso às funções nativas do VLC.
-	 */
-	private final JVLC jvlc;
-
-	/**
-	 * Componente responsável pela parte de transcoding para os vários formatos
-	 * suportados pelo VLC.
-	 */
-	private VLM vlm;
-
-	/**
-	 * Representa o player do VLC.
-	 */
-	private MediaPlayer player;
-
-	/**
-	 * Playlist.
-	 */
-	private MediaList mediaList;
-
-//	/**
-//	 * Player que mapeia a playlist.
-//	 */
-//	private MediaListPlayer mediaListPlayer;
-
-	/**
-	 * Controlador de vídeo do VLC.
-	 */
-	private Video video;
-
-	/**
-	 * Controlador de audio do VLC.
-	 */
-	private Audio audio;
+	private MediaPlayerState state;
 
 	/**
 	 * Listener com eventos associados ao media player.
 	 */
-	private MediaPlayerListener mediaListener;
+	private MediaPlayerEventListener mediaListener;
 
 	/**
 	 * Event listeners do controller.
@@ -122,22 +67,17 @@ public class VideoViewerController {
 	private String mrl;
 
 	private VideoViewerController() {
-
-		jvlc = new JVLC();
-		jvlc.setLogVerbosity(LoggerVerbosityLevel.DEBUG);
-	
-		initPlayer();
-	}
-
-	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
-	private VideoViewerController(final String[] params) {
-
-		jvlc = new JVLC(params);
-		initPlayer();
+		state=MediaPlayerState.EMPTY;
+		mediaListener=getDefaultMediaListener();
+		if(MediaSetup.isVideoSubSystemAvailable()) {
+			MediaSetup.getPlayer().addMediaPlayerEventListener(mediaListener);
+		}
 	}
 
 	/**
 	 * Obtém uma instância para o controlador de vídeo, com opções por default.
+	 * 
+	 * @param window
 	 * 
 	 * @return instância do controlador do JVLC Player.
 	 */
@@ -145,30 +85,6 @@ public class VideoViewerController {
 
 		if (VideoViewerController.controller == null) {
 			VideoViewerController.controller = new VideoViewerController();
-		}
-		return VideoViewerController.controller;
-	}
-
-	/**
-	 * Obtém uma instância para o controlador de vídeo, permitindo definir
-	 * parâmetros adicionais, à semelhança da instanciação do VLC nativo através
-	 * da consola. Ter em conta que nem todos os parâmetros foram testados. É
-	 * desconhecido se o JVLC oferece suporte para todos os parâmetros
-	 * suportados nativamente.
-	 * 
-	 * @param params Parâmetros adicionais de criação do VLC (como especificado
-	 *            na documentação do VLC). Cada posição do array corresponde a
-	 *            um parâmetro adicional.
-	 * @return instância do controlador do JVLC Player.
-	 * @see <a
-	 *      href="http://wiki.videolan.org/Documentation:Play_HowTo/Advanced_Use_of_VLC">
-	 *      Lista de parâmetros suportados pelo VLC.</a>.
-	 */
-	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
-	public static VideoViewerController getInstance(final String[] params) {
-
-		if (VideoViewerController.controller == null) {
-			VideoViewerController.controller = new VideoViewerController(params);
 		}
 		return VideoViewerController.controller;
 	}
@@ -188,72 +104,13 @@ public class VideoViewerController {
 	}
 
 	/**
-	 * Inicializa os vários objectos que fazem parte do VLC.
-	 */
-	private void initPlayer() {
-
-		video = new Video(jvlc);
-		audio = new Audio(jvlc);
-		// this.player = new MediaPlayer(jvlc);
-
-		mediaListener = getDefaultMediaListener();
-		// this.player.addListener(mediaListener);
-
-		// O construtor com parâmetros do JVLC não instancia a media list.
-		// Nesses casos, é necessário garantir que a MediaList é instanciada.
-		// this.mediaList = jvlc.getMediaList() == null
-		// ? new MediaList(jvlc) : jvlc.getMediaList();
-		// this.jvlc.setMediaList(mediaList);
-		// this.mediaListPlayer = new MediaListPlayer(jvlc);
-		// this.mediaListPlayer.setMediaList(mediaList);
-		// this.mediaListPlayer.setMediaInstance(player);
-
-		state = MediaPlayerState.EMPTY;
-	}
-
-	/**
-	 * Define o Canvas onde será feito o rendering do vídeo. Se o vídeo já
-	 * estiver associado a um canvas, faz o reparent. Faz o resize do vídeo para
-	 * o tamanho do novo canvas.
-	 * 
-	 * @param jvlcCanvas
-	 */
-	public void setVideoOutput(final Canvas jvlcCanvas) {
-
-		if (!player.hasVideoOutput()) {
-			// Video output method is platform dependant. Perhaps the windows
-			// lib version is old.
-			if (Platform.isWindows()) {
-				jvlc.setVideoOutput(jvlcCanvas);
-			} else {
-				jvlc.setVideoOutput(jvlcCanvas, player.getInstance());
-			}
-		} else {
-			video.reparent(player, jvlcCanvas);
-		}
-		player.resize(jvlcCanvas.getWidth(), jvlcCanvas.getHeight());
-	}
-
-	/**
-	 * Indica se já existe um canvas associado ao output do vídeo.
-	 * 
-	 * @return true, se sim. false, caso contrário.
-	 */
-	public boolean hasVideoOutput() {
-		return player.hasVideoOutput();
-	}
-
-	/**
 	 * Define o url do media a reproduzir. Inicializa os restantes objectos do
-	 * JVLC que são específicos de cada execução de um media.
+	 * VLCJ que são específicos de cada execução de um media.
 	 * 
 	 * @param mrl URL a reproduzir. Pode ser um URL remoto ou local.
 	 */
 	public void setMediaToPlay(final String mrl) {
 		this.mrl = mrl;
-		final MediaDescriptor mediaDescriptor = new MediaDescriptor(jvlc, mrl);
-		player = new MediaPlayer(mediaDescriptor);
-		player.addListener(mediaListener);
 		state = MediaPlayerState.STOPPED;
 		resetFrame0();
 	}
@@ -269,7 +126,7 @@ public class VideoViewerController {
 
 	/**
 	 * Define o url do media a reproduzir. Inicializa os restantes objectos do
-	 * JVLC que são específicos de cada execução de um media. Define também que
+	 * VLCJ que são específicos de cada execução de um media. Define também que
 	 * a stream recebida será gravada para o ficheiro em paralelo.
 	 * 
 	 * @param mrl URL a reproduzir. Pode ser um URL remoto ou local. Contudo, se
@@ -285,19 +142,7 @@ public class VideoViewerController {
 		streamToFile(config, destFile);
 	}
 
-	/**
-	 * Liberta os recursos.
-	 */
-	public void releaseMedia() {
-
-	    if (player != null) {
-		player.getMediaDescriptor().release();
-		player.release();
-	    }
-	    
-	    state = MediaPlayerState.EMPTY;
-	}
-
+	
 	/**
 	 * Devolve o nome do media que está actualmente à frente na lista de
 	 * reprodução.
@@ -305,42 +150,42 @@ public class VideoViewerController {
 	 * @return
 	 */
 	public String getCurrentMediaURL() {
-		final MediaDescriptor descriptor = player.getMediaDescriptor();
-		if (descriptor != null) {
-			return descriptor.getMrl();
-		}
-		return "";
+		return MediaSetup.getPlayer().mrl();
 	}
 
 	/**
 	 * Devolve um Media Listener padrão que define o comportamento do player do
-	 * VLC quando cada um dos eventos internos do JVLC é disparado.
+	 * VLC quando cada um dos eventos internos do VLCJ é disparado.
 	 * 
 	 * @return
 	 */
-	private MediaPlayerListener getDefaultMediaListener() {
+	private MediaPlayerEventListener getDefaultMediaListener() {
 
-		return new MediaPlayerListener() {
+		return new MediaPlayerEventAdapter() {
 
 			@Override
-			public void playing(final MediaPlayer arg0) {
+			public void playing(final MediaPlayer mediaPlayer) {
 				state = MediaPlayerState.PLAYING;
 			}
 
 			@Override
-			public void paused(final MediaPlayer arg0) {
+			public void paused(final MediaPlayer mediaPlayer) {
 				state = MediaPlayerState.PAUSED;
 			}
 
 			@Override
-			public void stopped(final MediaPlayer arg0) {
+			public void stopped(final MediaPlayer mediaPlayer) {
 				state = MediaPlayerState.STOPPED;
 				fireMediaStoppedEvent(new MediaStoppedEvent(this));
 			}
 
 			@Override
-			public void endReached(final MediaPlayer arg0) {
+			public void timeChanged(final MediaPlayer mediaPlayer, final long arg1) {
+				fireMediaTimeChangedEvent(new MediaTimeChangedEvent(this));
+			}
 
+			@Override
+			public void finished(MediaPlayer mediaPlayer) {
 				VideoViewerController.LOGGER.info("MediaPlayer end reached.");
 
 				// Se quando chega ao end está stopped é porque não recebeu mais
@@ -352,22 +197,9 @@ public class VideoViewerController {
 				}
 
 				state = MediaPlayerState.STOPPED;
+
 			}
 
-			@Override
-			public void timeChanged(final MediaPlayer arg0, final long arg1) {
-				fireMediaTimeChangedEvent(new MediaTimeChangedEvent(this));
-			}
-
-			@Override
-			public void positionChanged(final MediaPlayer arg0) {
-				// Do nothing
-			}
-
-			@Override
-			public void errorOccurred(final MediaPlayer arg0) {
-				// Bruno Do nothing?
-			}
 		};
 	}
 
@@ -375,7 +207,7 @@ public class VideoViewerController {
 	 * Liga o som se este estiver desligado. Se o som estiver ligado, desliga.
 	 */
 	public void toggleMute() {
-		audio.toggleMute();
+		MediaSetup.getPlayer().mute(!MediaSetup.getPlayer().isMute());
 	}
 
 	/**
@@ -384,7 +216,7 @@ public class VideoViewerController {
 	 * @param units Valor para o qual se pretende alterar o som, entre 0 e 200.
 	 */
 	public void setVolume(final int units) {
-		audio.setVolume(units);
+		MediaSetup.getPlayer().setVolume(units);
 	}
 
 	/**
@@ -393,7 +225,7 @@ public class VideoViewerController {
 	 * @return
 	 */
 	public int getVolume() {
-		return audio.getVolume();
+		return MediaSetup.getPlayer().getVolume();
 	}
 
 	/**
@@ -406,7 +238,7 @@ public class VideoViewerController {
 	 *            1 são ignorados.
 	 */
 	public void setPlayRate(final float rate) {
-		player.setRate(rate);
+		MediaSetup.getPlayer().setRate(rate);
 	}
 
 	/**
@@ -417,51 +249,73 @@ public class VideoViewerController {
 	 */
 	public void play() {
 
-		if (player != null) {
-			setPlayRate(1f);
-			if (state == MediaPlayerState.STOPPED) {
-				player.play();
-				// mediaListPlayer.playItem(0, true);
-				if (vlm != null) {
-					vlm.playMedia(VideoViewerController.BROADCAST_NAME);
-				}
-			} else {
-				pause();
-				if (vlm != null) {
-					vlm.pauseMedia(VideoViewerController.BROADCAST_NAME);
+		Runnable playAction = new Runnable() {
+
+			@Override
+			public void run() {
+				if (MediaSetup.getPlayer() != null) {
+					if (state == MediaPlayerState.STOPPED) {
+						MediaSetup.getPlayer().removeMediaPlayerEventListener(mediaListener);
+						MediaSetup.getPlayer().enableOverlay(false);
+						VideoViewerController.LOGGER.finest("Playing media on EDT: " + mrl);
+						MediaSetup.getPlayer().playMedia(mrl);
+						MediaSetup.getPlayer().enableOverlay(true);
+						MediaSetup.getPlayer().addMediaPlayerEventListener(mediaListener);
+					} else {
+						VideoViewerController.LOGGER.finest("Pausing media on EDT: " + mrl);
+						pause();
+					}
+				} else {
+					VideoViewerController.LOGGER.warning("There is no player!");
 				}
 			}
-		} else {
-			VideoViewerController.LOGGER.warning("There is no player!");
-		}
+		};
+
+		// if (!SwingUtilities.isEventDispatchThread()) {
+		// try {
+		// SwingUtilities.invokeAndWait(playAction);
+		// } catch (Exception ignored) {
+		//
+		// }
+		// } else {
+		playAction.run();
+		// }
+
 	}
 
-	
 	/**
 	 * Termina a execução do player. Se estiver a fazer transcoding, termina
 	 * também e liberta os recursos do vlm.
 	 */
 	public void stop() {
 
-		if (state != MediaPlayerState.PLAYING && state != MediaPlayerState.PAUSED) {
-			return;
-		}
+		Runnable stopAction = new Runnable() {
 
-		// Coloca a stopped para quando permitir determinar no evento de end
-		// reached se chegou ao fim por acção do utilizador ou porque não
-		// existem mais streams.
-		state = MediaPlayerState.STOPPED;
+			@Override
+			public void run() {
+				if (state != MediaPlayerState.PLAYING && state != MediaPlayerState.PAUSED) {
+					return;
+				}
 
-		try {
-			// mediaListPlayer.stop();
-			player.stop();
-		} catch (final Exception e) {
-			LOGGER.log(Level.SEVERE, e.getMessage(), e);
-		}
+				state = MediaPlayerState.STOPPED;
 
-		if (vlm != null) {
-			vlm.stopMedia(VideoViewerController.BROADCAST_NAME);
-		}
+				try {
+					MediaSetup.getPlayer().stop();
+				} catch (final Exception e) {
+					LOGGER.log(Level.SEVERE, e.getMessage(), e);
+				}
+			}
+		};
+
+		// if (!SwingUtilities.isEventDispatchThread()) {
+		// try {
+		// SwingUtilities.invokeAndWait(stopAction);
+		// } catch (Exception ignored) {
+		//
+		// }
+		// } else {
+		stopAction.run();
+		// }
 
 	}
 
@@ -470,15 +324,25 @@ public class VideoViewerController {
 	 * local. Se estiver a reproduzir através de streaming, faz stop ao media.
 	 */
 	public void pause() {
-		// TODO ver se existe alguma forma de fazer mesmo pause quando está a
-		// reproduzir streaming (pause através do mediaPlayer ou do JVLC?) Em
-		// alternativa, fazer setVideoOutput para um canvas escondido
-		// mediaListPlayer.pause();
-		player.pause();
 
-		if (vlm != null) {
-			vlm.pauseMedia(VideoViewerController.BROADCAST_NAME);
-		}
+		Runnable pauseAction = new Runnable() {
+
+			@Override
+			public void run() {
+				MediaSetup.getPlayer().pause();
+			}
+		};
+
+		// if (!SwingUtilities.isEventDispatchThread()) {
+		// try {
+		// SwingUtilities.invokeAndWait(pauseAction);
+		// } catch (Exception ignored) {
+		//
+		// }
+		// } else {
+		pauseAction.run();
+		// }
+
 	}
 
 	/**
@@ -487,7 +351,7 @@ public class VideoViewerController {
 	 * @return
 	 */
 	public boolean willPlay() {
-		return player != null && player.willPlay();
+		return MediaSetup.getPlayer() != null && MediaSetup.getPlayer().isPlayable();
 	}
 
 	/**
@@ -502,23 +366,14 @@ public class VideoViewerController {
 	 */
 	public void captureScreen(final String fileName, final int width, final int height) {
 		createParentDirs(fileName);
-		video.getSnapshot(player, fileName, width, height);
+		MediaSetup.getPlayer().saveSnapshot(new File(fileName), width, height);
 	}
 
 	/**
 	 * Liga/Desliga fullscreen.
 	 */
 	public void toggleFullScreen() {
-		video.toggleFullscreen(player);
-	}
-
-	/**
-	 * Liberta os recursos do VLC. Deve ser chamado sempre no final de uma
-	 * aplicação que utilize esta funcionalidade.
-	 */
-	public void releaseVLC() {
-		// TODO ver onde faz sentido chamar isto
-		jvlc.release();
+		MediaSetup.getPlayer().toggleFullScreen();
 	}
 
 	/**
@@ -532,25 +387,18 @@ public class VideoViewerController {
 	 */
 	public void streamToFile(final TranscodingConfig config, final String destFile) {
 
-		vlm = jvlc.getVLM();
-
 		if (!validateTranscodingConfig(config)) {
-			// TODO qual a excepção a enviar e a mensagem a devolver. Ver como
-			// está feito a nível de internacionalização no resto do eLab
 			throw new IllegalArgumentException();
 		}
 
-		// TODO more config needed/possible?
 		final String sout = "#transcode{vcodec=" + config.getVideoCodec() + ",vb=" + config.getVideoBitrate()
 				+ ",scale= " + config.getVideoScale() + ",acodec=" + config.getAudioCodec() + ",ab="
 				+ config.getAudioBitrate() + ",channels=" + config.getSoundChannels() + ",audio-sync}"
-				+ ":duplicate{dst=std{access=file,mux=" + config.getMuxer() + ",dst=" + destFile + "}}";
+				+ ":duplicate{dst=std{access=file,mux=" + config.getMuxer() + ",dst=" + destFile + "},dst=display}";
 
 		createParentDirs(destFile);
 
-		vlm.addBroadcast(VideoViewerController.BROADCAST_NAME, mediaList.getMediaDescriptorAtIndex(0).getMrl(), sout,
-				new String[0], true, false);
-
+		MediaSetup.getPlayer().playMedia(MediaSetup.getPlayer().mrl(), sout);
 	}
 
 	/**
@@ -558,9 +406,10 @@ public class VideoViewerController {
 	 */
 	public void stopStreaming() {
 
-		vlm.deleteMedia(VideoViewerController.BROADCAST_NAME);
-		vlm.release();
-		vlm = null;
+		String mediaUrl = getMediaURL();
+		MediaSetup.getPlayer().stop();
+		MediaSetup.getPlayer().playMedia(mediaUrl);
+
 	}
 
 	/**
@@ -599,10 +448,9 @@ public class VideoViewerController {
 
 		final long diff = time - absoluteFrame0;
 		final long nextTime = relativeFrame0 + diff;
-		player.setTime(nextTime);
+		MediaSetup.getPlayer().setTime(nextTime);
 
 		fireMediaTimeChangedEvent(new MediaTimeChangedEvent(this));
-		refreshPausedVideo();
 	}
 
 	/**
@@ -614,59 +462,8 @@ public class VideoViewerController {
 	 *            positivo (avançar) ou negativo (recuar).
 	 */
 	public void move(final int nFrames) {
-
-		final long nextTime = getFrameToMove(nFrames);
-		player.setTime(nextTime);
-
+		MediaSetup.getPlayer().skip((long) (nFrames * 1000f / MediaSetup.getPlayer().getFps()));
 		fireMediaTimeChangedEvent(new MediaTimeChangedEvent(this));
-		refreshPausedVideo();
-	}
-
-	/**
-	 * Permite actualizar o ecrã do vídeo com a Frame actual, dada pelo
-	 * videoplayer, no caso de o player estar em pausa.
-	 */
-	private void refreshPausedVideo() {
-
-		// TODO ver se o VLC nativo tem o mesmo comportamento ou se existe
-		// alguma configuração do VLC que actualiza automaticamente o vídeo
-		// quando está em pausa.
-		if (state == MediaPlayerState.PAUSED) {
-			pause();
-			// FIXME correcção que não seja um workaround.
-			try {
-				Thread.sleep(VideoViewerController.PAUSE_TIME);
-			} catch (final InterruptedException e) {
-				LOGGER.log(Level.WARNING,e.getMessage(),e);
-			}
-			pause();
-		}
-	}
-
-	/**
-	 * Calcula qual a nova frame para o qual se vai mover, baseado no nº de
-	 * frames que se pretende mover o vídeo.
-	 * 
-	 * @param nFrames Número de frames que se pretende mover, face ao tempo
-	 *            actual do player. Pode ser um valor positivo ou negativo.
-	 * @return Novo tempo calculado que corresponde à frame actual mais o nº de
-	 *         frames que se pretende mover.
-	 */
-	private long getFrameToMove(final int nFrames) {
-
-		final float fps = player.getFPS();
-		long currentTime = player.getTime();
-
-		final double timeToMove = nFrames * 1000 / fps;
-
-		// Recua N milisegundos para compensar o tempo do sleep em pausa
-		// FIXME tem de ser um valor superior ao sleep time....
-		if (nFrames < 0) {
-			currentTime -= VideoViewerController.PAUSE_TIME;
-		}
-
-		final long nextTime = currentTime + (long) timeToMove;
-		return nextTime;
 	}
 
 	/**
@@ -679,7 +476,7 @@ public class VideoViewerController {
 		if (state == MediaPlayerState.STOPPED || state == MediaPlayerState.EMPTY) {
 			return 0L;
 		}
-		return player.getTime();
+		return MediaSetup.getPlayer().getTime();
 	}
 
 	/**
@@ -690,8 +487,8 @@ public class VideoViewerController {
 	 */
 	public long getTotalMediaTime() {
 
-		if (player != null) {
-			return player.getLength();
+		if (MediaSetup.getPlayer() != null) {
+			return MediaSetup.getPlayer().getLength();
 		}
 		return 0;
 	}
@@ -706,12 +503,9 @@ public class VideoViewerController {
 	 */
 	public void adjustVideoPosition(final int pos, final int max) {
 
-		// TODO falta sincronizar correctamente para que o player não sobreponha
-		// frames às definidas por acção do utilizador.
 		VideoViewerController.LOGGER.fine("TimeChanged event tratado por " + Thread.currentThread());
 		final long newPosition = getNewVideoPosition(pos, max);
-		player.setTime(newPosition);
-		refreshPausedVideo();
+		MediaSetup.getPlayer().setTime(newPosition);
 	}
 
 	/**
@@ -724,7 +518,7 @@ public class VideoViewerController {
 	 */
 	private long getNewVideoPosition(final int pos, final int max) {
 
-		final long movieSize = player.getLength();
+		final long movieSize = MediaSetup.getPlayer().getLength();
 		return (movieSize * pos / max);
 	}
 
@@ -746,7 +540,7 @@ public class VideoViewerController {
 	 */
 	public void setFrame0(final long frame0) {
 
-		relativeFrame0 = player.getTime();
+		relativeFrame0 = MediaSetup.getPlayer().getTime();
 		absoluteFrame0 = frame0;
 	}
 
@@ -760,9 +554,9 @@ public class VideoViewerController {
 
 	/* *******************************************************************
 	 * Código para event handling *
-	 ******************************************************************* */
+	 * ******************************************************************
+	 */
 
-	
 	public void addMediaApplicationEventListener(final MediaApplicationEventListener listener) {
 		eventListeners.add(MediaApplicationEventListener.class, listener);
 	}

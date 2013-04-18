@@ -1,12 +1,21 @@
 package com.linkare.rec.impl.newface.component.media;
 
-import java.io.File;
+import java.awt.Canvas;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.linkare.rec.impl.config.ReCSystemProperty;
-import com.sun.jna.Platform;
+import javax.swing.JFrame;
+
+import uk.co.caprica.vlcj.discovery.NativeDiscovery;
+import uk.co.caprica.vlcj.player.MediaPlayerFactory;
+import uk.co.caprica.vlcj.player.embedded.DefaultFullScreenStrategy;
+import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
+import uk.co.caprica.vlcj.player.embedded.FullScreenStrategy;
+import uk.co.caprica.vlcj.player.embedded.videosurface.CanvasVideoSurface;
+import uk.co.caprica.vlcj.runtime.RuntimeUtil;
+import uk.co.caprica.vlcj.runtime.x.LibXUtil;
 
 /**
  * Classe que faz todo o setup inicial do módulo de vídeo, extraindo as libs
@@ -17,143 +26,135 @@ import com.sun.jna.Platform;
  */
 public class MediaSetup {
 
-	private static final Logger log = Logger.getLogger(VideoViewerController.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(MediaSetup.class.getName());
+	private static MediaPlayerFactory mediaPlayerFactory;
+	private static EmbeddedMediaPlayer player;
+	private static boolean hasVideoOutput;
+
+	public static final void initializeVideoSubsystem() {
+		try {
+			// For VLC - Try to avoid linux crashes
+			if (RuntimeUtil.isNix()) {
+				LibXUtil.initialise();
+			}
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, "Unable to initialize LibX", e);
+		} catch (UnsatisfiedLinkError ignoreMaybeNotLinuxArghhhh) {
+			LOGGER.log(Level.FINEST, "Unable to initialize LibX", ignoreMaybeNotLinuxArghhhh);
+		}
+		try {
+			// For VLC - Try to discover VLC installations
+			new NativeDiscovery().discover();
+		} catch (Throwable ignoreDidMyBest) {
+			LOGGER.log(Level.FINEST, "Unable to setup VLC discovery", ignoreDidMyBest);
+		}
+	}
+
+	public static void initializeMediaFactory(JFrame window) {
+		LOGGER.finest("Initializing Media Factory!");
+		try {
+			mediaPlayerFactory = new MediaPlayerFactory(getDefaultEmbeddedMediaParameters());
+			FullScreenStrategy fullScreenStrategy = new DefaultFullScreenStrategy(window);
+			player = mediaPlayerFactory.newEmbeddedMediaPlayer(fullScreenStrategy);
+			player.setRate(1.f);
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, "Could not initialize Video SubSystem", e);
+			return;
+		} catch (UnsatisfiedLinkError e) {
+			return;
+		}
+	}
 
 	/**
-	 * Efectua todo o setup inicial da aplicação relacionada com o módulo de
-	 * vídeo, que inclui:
-	 * <ul>
-	 * <li>Load das bibliotecas nativas distribuídas juntamente com a aplicação
-	 * e que são necessárias ao funcionamento do módulo de vídeo, pela ordem de
-	 * dependências correcta</li>
-	 * <li>Extracção dos plugins necessários ao funcionamento do vídeo para uma
-	 * directoria do filesystem.</li>
-	 * </ul>
+	 * @return
 	 */
-	public static void setup() {
-
-		// TODO usado apenas para fazer o matching das caracteristicas do SO com
-		// especificacao de resources no JNLP.Delete no final ou logar?
-		// printOSInfo();
-
-		// installNativeLibs();
-		MediaSetup.loadNativeLibraries();
+	private static List<String> getSharedArgs() {
+		// See vlc -H
+		final List<String> args = new ArrayList<String>();
+		args.add("--rtsp-tcp");
+		// args.add("--no-plugins-cache");
+		args.add("--no-video-title-show");
+		args.add("--no-snapshot-preview");
+		args.add("--quiet");
+		args.add("--quiet-synchro");
+		return args;
 	}
-
-	// Delete
-	// private static void copyStream(InputStream is, File f) throws IOException
-	// {
-	//
-	// FileOutputStream fos = new FileOutputStream(f);
-	// byte[] ba = new byte[1024];
-	// int bytesRead = 0;
-	// while (bytesRead >= 0) {
-	// bytesRead = is.read(ba);
-	// if (bytesRead > 0)
-	// fos.write(ba, 0, bytesRead);
-	// }
-	// fos.flush();
-	// fos.close();
-	//
-	// }
-
-	// Delete???
-	// private static void printOSInfo() {
-	//
-	// log.fine("jna.library.path: " + System.getProperty("jna.library.path"));
-	// log.fine("############ OS NAME: " + System.getProperty("os.name"));
-	// log.fine("############ OS ARCH: " + System.getProperty("os.arch"));
-	// log.fine("############ OS VERSION: " + System.getProperty("os.version"));
-	// }
-
-	private static void loadNativeLibraries() {
-
-		// No Windows, é necessário fazer o System.loadLibrary antes do
-		// native.LoadLibrary. Ver se no Linux está alguma coisa num path
-		// esquisito
-		MediaSetup.loadLibrary(Platform.isWindows() ? "libvlccore" : "vlccore");
-		MediaSetup.loadLibrary(Platform.isWindows() ? "libvlc" : "vlc");
-	}
-
-	private static void loadLibrary(final String name) {
-		System.loadLibrary(name);
-	}
-
-	// Delete
-	// private static String saveToTempFile(InputStream is) {
-	// try {
-	// File f = File.createTempFile("libsfile", "tmp");
-	// f.deleteOnExit();
-	// copyStream(is, f);
-	// return f.getAbsolutePath();
-	// } catch (IOException ex) {
-	// Logger.getLogger(MediaSetup.class.getName()).log(Level.SEVERE, null, ex);
-	// }
-	// return null;
-	// }
-
-	// Delete
-	// private static void installNativeLibs() {
-	//
-	// try {
-	//
-	// //TODO verificar se a directoria já existe e não extrair nesse caso.
-	// String userHome = System.getProperty("user.home");
-	// log.fine("User home is " + userHome);
-	//
-	// String pluginsPath = userHome + File.separator +
-	// System.getProperty("vlc.plugins.destdir");
-	// log.fine("Plugins copied to " + pluginsPath);
-	//
-	// File pluginsDir = new File(pluginsPath);
-	// // Só extrai os plugins do zip se n existir a directoria de destino
-	// // onde irão ficar os plugins.
-	// if (!pluginsDir.exists()) {
-	// //TODO fazer de forma a substituir sempre os ficheiros que alteraram
-	// (filesize, md5sum???)
-	// String pluginsResourceName = System.getProperty("vlc.plugins.filename");
-	// log.fine("Resource name is " + pluginsResourceName);
-	//
-	// ClassLoader loader = MediaSetup.class.getClassLoader();
-	//
-	// InputStream pluginsFileStream =
-	// loader.getResourceAsStream(pluginsResourceName);
-	// String path = saveToTempFile(pluginsFileStream);
-	// pluginsFileStream.close();
-	//
-	// log.fine("File to be extracted: " + path);
-	// ZipExtractor.extractFiles(path, pluginsPath);
-	//
-	// log.fine("Terminou extracção de plugins");
-	// } else {
-	// log.fine("Não extraiu plugins!!!!");
-	// }
-	//
-	// } catch (IOException ex) {
-	// Logger.getLogger(MediaSetup.class.getName()).log(Level.SEVERE, null, ex);
-	// }
-	// }
 
 	/**
 	 * Devolve um conjunto de parâmetros de configuração do VLC que permite
-	 * fazer uma inicialização por default. Deve ter a system property
-	 * <b>vlc.plugins.destdir</b> definida com um path relativo, cuja root será
-	 * a user.home.
+	 * fazer uma inicialização por default.
 	 * 
-	 * @return
+	 * @return A lista de argumentos para o VLC em modo "embbeded"
 	 */
-	public static String[] getDefaultMediaParameters() {
+	public static String[] getDefaultEmbeddedMediaParameters() {
 
-		final File pluginsDir = new File(ReCSystemProperty.USER_HOME.getValue(), ReCSystemProperty.VLC_PLUGINS_DESTDIR.getValue());
-
-		MediaSetup.log.fine("Plugins Path = " + pluginsDir.getAbsolutePath());
-
-		final List<String> args = new ArrayList<String>();
-		args.add( "--intf=dummy");
-		args.add( "--ignore-config");
-		args.add( "--no-plugins-cache");
-		args.add( "--plugin-path=" + pluginsDir.getAbsolutePath());
-		//args.add( "--rtsp-tcp");
+		final List<String> args = getSharedArgs();
+		args.add("--intf");
+		args.add("dummy");
 		return args.toArray(new String[0]);
 	}
+
+	/**
+	 * Devolve um conjunto de parâmetros de configuração do VLC que permite
+	 * fazer uma inicialização por default.
+	 * 
+	 * @return A lista de argumentos para o VLC
+	 */
+	public static String[] getDefaultExternalMediaParameters() {
+
+		final List<String> args = getSharedArgs();
+		return args.toArray(new String[0]);
+	}
+
+	public static boolean hasVideoOutput() {
+		return hasVideoOutput;
+	}
+	
+	
+	public static boolean isVideoSubSystemAvailable() {
+		return player != null;
+	}
+
+	/**
+	 * @return the mediaPlayerFactory
+	 */
+	public static MediaPlayerFactory getMediaPlayerFactory() {
+		return mediaPlayerFactory;
+	}
+
+	/**
+	 * @return the player
+	 */
+	public static EmbeddedMediaPlayer getPlayer() {
+		return player;
+	}
+
+	public static void setVideoOutput(Canvas videoCanvas) {
+		if (hasVideoOutput) {
+			return;
+		}
+		LOGGER.finest("Setting video output canvas!");
+		CanvasVideoSurface canvasVideoSurface = mediaPlayerFactory.newVideoSurface(videoCanvas);
+		player.setVideoSurface(canvasVideoSurface);
+		hasVideoOutput = true;
+	}
+	
+	
+	/**
+	 * Liberta os recursos.
+	 */
+	public static void release() {
+
+		if (player != null) {
+			if(player.isPlaying()) {
+				player.stop();
+			}
+			player.release();
+		}
+		
+		if(mediaPlayerFactory!=null) {
+			mediaPlayerFactory.release();
+		}
+	}
+
 }

@@ -133,7 +133,7 @@ public abstract class Installer implements Observer {
 		final String userHome = ReCSystemProperty.USER_HOME.getValue();
 		log.fine("User home is " + userHome);
 
-		final String pluginsPath = userHome + File.separator + ReCSystemProperty.VLC_PLUGINS_DESTDIR.getValue();
+		final String pluginsPath = userHome + File.separator + ".eLab/vlc/plugins";
 		log.fine("Plugins copied to " + pluginsPath);
 
 		final File pluginsDir = new File(pluginsPath);
@@ -141,9 +141,7 @@ public abstract class Installer implements Observer {
 		// onde irão ficar os plugins.
 		if (!pluginsDir.exists()) {
 
-			// TODO fazer de forma a substituir sempre os ficheiros que
-			// alteraram (filesize, md5sum???)
-			final String pluginsResourceName = ReCSystemProperty.VLC_PLUGINS_FILENAME.getValue();
+			final String pluginsResourceName = "vlc-plugins.zip";
 			log.fine("Resource name is " + pluginsResourceName);
 
 			final ClassLoader loader = Installer.class.getClassLoader();
