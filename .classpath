@@ -241,8 +241,8 @@
 	<classpathentry kind="lib" path="rec/lib/java/client/swing-worker-1.1.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/common/commons-i18n.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/common/commons-net.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/vlcj"/>
 	<classpathentry kind="lib" path="rec/lib/java/common/jna-3.5.2.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/common/platform-3.5.2.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/common/vlcj-2.3.0-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
