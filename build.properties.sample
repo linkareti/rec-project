@@ -24,9 +24,9 @@ lab.list=basic,intermediate,advanced,virtual_basic,virtual_intermediate,virtual_
 basic.experiment.list=aleatorio,boylemariotte,condensadorcilindrico,conducaocalor,g,gamma
 intermediate.experiment.list=langmuir,meteo,momentoinercia,optica,paschen,pendulo,pendulogravitico,pinhole,planck
 advanced.experiment.list=polaroid,pv,radioactividade,scuba,statsound,telescopio,thomson,webrobot,discos
-virtual_basic.experiment.list=vmvbrown,voscilador,vpend2m,vpoisson,vquantum,vstdmap,vtiro,vyounginterf
-virtual_intermediate.experiment.list=vdi,vfermap,vlooping,vm3,vmm,vmovproj
-virtual_advanced.experiment.list=vbs,vcargas3d,vcartpole,vcg,vcolisao
+virtual_basic.experiment.list=vcg,vcolisao,vcartpole,vlooping,vmovproj,vtiro,vdi
+virtual_intermediate.experiment.list=vcargas3d,vpoisson,vyounginterf,vbs,vmvbrown,vm3,vmm,voscilador,vpend2m
+virtual_advanced.experiment.list=vfermap,vquantum,vstdmap
 new_exps.experiment.list=rollpaper
 
 #In case you wish to run a specific experiment
