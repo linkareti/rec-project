@@ -2,7 +2,7 @@
 <hardware id="ELAB_DISCOS_DSPIC_V1.0" num_channels="3"
 	minfrequency="10Hz" maxfrequency="1000Hz">
 	<rs232 baud="115200" stopbits="1" paritybits="0" numbits="8"
-		ports_restrict="/dev/ttyUSB0">
+		ports_restrict="/dev/ttyS1">
 		<parameters>
 			<!-- protocolo -->
 			<parameter output="0" input="0" maxvalue="2" minvalue="1"

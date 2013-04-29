@@ -65,18 +65,10 @@
 		<scale label="discos$rec.exp.discos.hardwareinfo.channel.0.label"
 			physicsunitname="discos$rec.exp.discos.hardwareinfo.channel.0.physicsunitname"
 			physicsunitsymbol="s" multiplier="none" selected="true">
-			<min>
-				<PhysicsVal type="int">0</PhysicsVal>
-			</min>
-			<max>
-				<PhysicsVal type="int">20000000</PhysicsVal>
-			</max>
-			<step>
-				<PhysicsVal type="int">1</PhysicsVal>
-			</step>
-			<errordefault>
-				<PhysicsVal type="int">1</PhysicsVal>
-			</errordefault>
+			<min><PhysicsVal type="int">0</PhysicsVal></min>
+			<max><PhysicsVal type="int">20000000</PhysicsVal></max>
+			<step><PhysicsVal type="int">1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="int">3</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 
@@ -85,18 +77,10 @@
 		<scale label="discos$rec.exp.discos.hardwareinfo.channel.1.label"
 			physicsunitname="discos$rec.exp.discos.hardwareinfo.channel.1.physicsunitname"
 			physicsunitsymbol="rpm" multiplier="none" selected="true">
-			<min>
-				<PhysicsVal type="int">0</PhysicsVal>
-			</min>
-			<max>
-				<PhysicsVal type="int">3000</PhysicsVal>
-			</max>
-			<step>
-				<PhysicsVal type="int">1</PhysicsVal>
-			</step>
-			<errordefault>
-				<PhysicsVal type="int">1</PhysicsVal>
-			</errordefault>
+			<min><PhysicsVal type="int">0</PhysicsVal></min>
+			<max><PhysicsVal type="int">3000</PhysicsVal></max>
+			<step><PhysicsVal type="int">1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 
@@ -105,18 +89,10 @@
 		<scale label="discos$rec.exp.discos.hardwareinfo.channel.2.label"
 			physicsunitname="discos$rec.exp.discos.hardwareinfo.channel.2.physicsunitname"
 			physicsunitsymbol="V" multiplier="none" selected="true">
-			<min>
-				<PhysicsVal type="int">0</PhysicsVal>
-			</min>
-			<max>
-				<PhysicsVal type="int">2000</PhysicsVal>
-			</max>
-			<step>
-				<PhysicsVal type="int">1</PhysicsVal>
-			</step>
-			<errordefault>
-				<PhysicsVal type="int">1</PhysicsVal>
-			</errordefault>
+			<min><PhysicsVal type="int">0</PhysicsVal></min>
+			<max><PhysicsVal type="int">2000</PhysicsVal></max>
+			<step><PhysicsVal type="int">1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="int">10</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 

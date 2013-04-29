@@ -74,7 +74,7 @@ public class DiscosTableModelProxy extends DefaultTableModel implements ExpDataM
 			return 1;
 		}
 
-		return expDataModel.getChannelCount() + 1;
+		return expDataModel.getChannelCount() * 2 + 1;
 	}
 
 	/**
@@ -97,17 +97,22 @@ public class DiscosTableModelProxy extends DefaultTableModel implements ExpDataM
 			return ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.table.model.column.sample","ReCUI$rec.ui.table.model.column.sample");
 		}
 
-		final int channelIndex = columnIndex - 1;
+		final int channelIndex = (int) Math.floor((columnIndex - 1.) / 2.);
 
 		String channelNameKey = expDataModel.getChannelConfig(channelIndex).getChannelName();
 		final String ch_name = ReCResourceBundle.findStringOrDefault(channelNameKey,channelNameKey);
-				
 		final String multiplier = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getMultiplier()
 				.toString();
 		final String ph_unit_symbol = expDataModel.getChannelConfig(channelIndex).getSelectedScale()
 				.getPhysicsUnitSymbol();
+		
+		final String retorna = ch_name + " [" + multiplier + ph_unit_symbol + "]";
 
-		return ch_name + " [" + multiplier + ph_unit_symbol + "]";
+		if (columnIndex % 2 == 0) {
+			return "\u03B5 " + retorna;
+		} else {
+			return retorna;
+		}
 	}
 
 	/**
@@ -147,9 +152,16 @@ public class DiscosTableModelProxy extends DefaultTableModel implements ExpDataM
 		if (columnIndex == 0) {
 			return String.valueOf(rowIndex + 1);
 		}
-		final int channelIndex = columnIndex - 1;
+		
+		final int channelIndex = (int) Math.floor((columnIndex - 1.) / 2.);
+		
 		final PhysicsValue value = expDataModel.getValueAt(rowIndex, channelIndex);
-		return value.getValue();//.toEngineeringNotation();
+
+		if (columnIndex % 2 == 0) {
+			return value.getError().toEngineeringNotation();
+		} else {
+			return value.getValue().toEngineeringNotation();
+		}
 	}
 
 	/**
