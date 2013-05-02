@@ -6,28 +6,28 @@
 		<parameters>
 			<!-- displacement -->
 			<parameter output="0" input="0" maxvalue="20"
-				minvalue="0" order="0">
+				minvalue="5" order="0">
 			</parameter>
 			<!-- number of points -->
 			<parameter output="0" input="0" maxvalue="1000"
-				minvalue="0" order="1">
+				minvalue="10" order="1">
 			</parameter>
 		</parameters>
 		<channels>
 			<!-- Point Number -->
-			<channel format="###.#" order="0">
+			<channel format="####" order="0">
 			</channel>
 			<!-- Period -->
-			<channel format="###.#" order="1">
+			<channel format="###.####" order="1">
 			</channel>
 			<!-- Gravity value -->
-			<channel format="###.#" order="2">
+			<channel format="###.####" order="2">
 			</channel>
 			<!-- Velocity -->
-			<channel format="###.#" order="3">
+			<channel format="###.####" order="3">
 			</channel>
 			<!-- Temperature -->
-			<channel format="###.#" order="4">
+			<channel format="##.#" order="4">
 			</channel>
 		</channels>
 		<timeout>
@@ -35,10 +35,10 @@
 			<id time="10000" />
 			<cfg time="80000" />
 			<cur time="5000" />
-			<str time="5000" />
+			<str time="45000" />
 			<dat_bin time="120000" />
 			<no_data time="60000" />
-			<end time="230000" />
+			<end time="3000000" />
 			<stp time="180000" />
 			<rst time="180000" />
 			<hardware_died time="3600000" />

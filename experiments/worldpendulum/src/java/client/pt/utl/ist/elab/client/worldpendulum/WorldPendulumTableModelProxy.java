@@ -74,7 +74,7 @@ public class WorldPendulumTableModelProxy extends DefaultTableModel implements E
 			return 1;
 		}
 
-		return expDataModel.getChannelCount() + 1;
+		return expDataModel.getChannelCount();
 	}
 
 	/**
@@ -93,11 +93,11 @@ public class WorldPendulumTableModelProxy extends DefaultTableModel implements E
 			}
 			return null;
 		}
-		if (columnIndex == 0) {
-			return ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.table.model.column.sample","ReCUI$rec.ui.table.model.column.sample");
-		}
+//		if (columnIndex == 0) {
+//			return ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.table.model.column.sample","ReCUI$rec.ui.table.model.column.sample");
+//		}
 
-		final int channelIndex = columnIndex - 1;
+		final int channelIndex = columnIndex;
 
 		String channelNameKey = expDataModel.getChannelConfig(channelIndex).getChannelName();
 		final String ch_name = ReCResourceBundle.findStringOrDefault(channelNameKey,channelNameKey);
@@ -144,10 +144,11 @@ public class WorldPendulumTableModelProxy extends DefaultTableModel implements E
 			return null;
 		}
 
-		if (columnIndex == 0) {
-			return String.valueOf(rowIndex + 1);
-		}
-		final int channelIndex = columnIndex - 1;
+//		if (columnIndex == 0) {
+//			return String.valueOf(rowIndex + 1);
+//		}
+
+		final int channelIndex = columnIndex;
 		final PhysicsValue value = expDataModel.getValueAt(rowIndex, channelIndex);
 		return value.getValue().toEngineeringNotation();
 	}
