@@ -9,6 +9,8 @@
 #include "laser.h"
 #include "shovel.h"
 #include "delays.h"
+#include "d7seg.h"
+#include "pendulum_N_oscs.h"
 
 static int state;
 static volatile unsigned long uptime;
@@ -21,7 +23,7 @@ static int stateFlag = NOT_OK;
 static int echoMode = NO_ECHO;
 
 void state_machine() {
-	int flag, s;
+	static int flag, s;
 	static int oscillationCounter;
 
 	if(sendIdFlag == 1 && state != STATE_SENDING_DATA) {
@@ -37,6 +39,8 @@ void state_machine() {
 	s = state;
 	stateFlag = OK;
 	IEC1bits.T4IE = 1;
+
+	print_d7seg(getGlobalNumberOfOscs(), 0);
 
 	if(s == STATE_RESET) {
 		if(flag == NOT_OK) {
@@ -73,6 +77,7 @@ void state_machine() {
 			stateReturnCtr = 0;
 			laser_on();
 			blue_led_on();
+			prepare_launch(deltaX);
 			if(echoMode == ECHO) {
 				printf("CFGOK\r");
 				reset_idmsg_timer();
@@ -83,7 +88,7 @@ void state_machine() {
 		if(flag == NOT_OK) {
 			stateReturnCtr = 0;
 			oscillationCounter = 0;
-			launch_ball(deltaX);
+			launch_ball();
 			reset_acquisition();
 			start_acquisition();
 			if(echoMode == ECHO) {
@@ -98,11 +103,17 @@ void state_machine() {
 			oscillationCounter++;
 			stateReturnCtr = 0;
 			if(oscillationCounter == 1) printf("DAT\r");
+			print_d7seg(getGlobalNumberOfOscs(), 0);
 			printf("%u\t", oscillationCounter);
+			print_d7seg(getGlobalNumberOfOscs(), 0);
 			printf("%.7f\t", get_oscillation_period());
+			print_d7seg(getGlobalNumberOfOscs(), 0);
 			printf("%.7f\t", get_calculated_G());
+			print_d7seg(getGlobalNumberOfOscs(), 0);
 			printf("%.7f\t", get_ball_velocity());
+			print_d7seg(getGlobalNumberOfOscs(), 0);
 			printf("%.1f", get_temperature());
+			print_d7seg(getGlobalNumberOfOscs(), 0);
 			printf("\r");
 		}
 
@@ -195,6 +206,7 @@ void reset_idmsg_timer() {
 //T4 for messaging (f = 2Hz)
 void __attribute__((__interrupt__, __no_auto_psv__)) _T4Interrupt(void) {
 	static int i;
+	static unsigned int i2;
 	IFS1bits.T4IF = 0;
 	i++;
 	msgTimerDivider++;
@@ -203,6 +215,7 @@ void __attribute__((__interrupt__, __no_auto_psv__)) _T4Interrupt(void) {
 		stateReturnCtr = 0;
 		set_state(STATE_STOPPED, NO_ECHO);
 	}
-	if(i % 2 == 0) uptime++;
+	if(i % 2 == 0) { uptime++; i2++; }
 	if(msgTimerDivider % 4 == 0) if(state != STATE_SENDING_DATA) sendIdFlag = 1;
+	if(i2 == 43200) { i2=0; saveGlobalNumberOfOscs(); }
 }

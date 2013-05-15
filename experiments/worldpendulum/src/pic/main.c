@@ -6,9 +6,19 @@
  * 
  * Code for the world pendulum
  *
- * Photogate on pin ----------- AN2/RB2
- * End microswitch on pin ----- AN3/RB3
- * LM35 on pin ---------------- AN4/RB4
+ * Photogate on pin ----------- AN2/RB2 (C3)
+ * End microswitch on pin ----- AN3/RB3 (C4)
+ * LM35 on pin ---------------- AN4/RB4 (C5)
+ * Laser ---------------------- PwrDvr5 (C12)
+ * Blue led ------------------- PwrDvr0 (C7)
+ * bipolar stepper ------------ C15-C16 ; C17-C18
+ *
+ * Display:
+ * DIO ------------------------ RC13 (C31)
+ * SCK ------------------------ RC14 (C32)
+ * RCK ------------------------ RF6 (C23)
+ * 5V ------------------------- (A26:A32)
+ * GND ------------------------ (B21:B32)
  */
 
 #include "world_pendulum.h"
@@ -21,6 +31,8 @@
 #include "bipolar.h"
 #include "adc.h"
 #include "state_machine.h"
+#include "d7seg.h"
+#include "pendulum_N_oscs.h"
 
 #include <p30F4011.h>
 #include <stdio.h>
@@ -39,6 +51,7 @@ _FWDT(WDT_ON & WDTPSA_512 & WDTPSB_16);	//watchdog timer (interval of ~ 16s)
 int main(void) {
 	static int pushButtonFlag;
 	static int i;
+	static int ctr;
 	static double myDouble;
 
 	pushButtonFlag = 0;
@@ -46,7 +59,7 @@ int main(void) {
 	//Leds
 	TRISDbits.TRISD2 = 0;
 	TRISDbits.TRISD3 = 0;
-	
+
 	for (i=0; i<10; i++) {
 		TOGGLE_LED1;
 		TOGGLE_LED2;
@@ -153,19 +166,34 @@ int main(void) {
 	if(myDouble < 1.0) savePendulumLength_M(1.0);
 
 	set_state(STATE_RESET, NO_ECHO);
-
 	reset_idmsg_timer();
+	init_d7seg();
+	retrieveGlobalNumberOfOscs();
 
 	while(1) {
 		asm("clrwdt");
 
 		if(PUSH_BUTTON == 0 && pushButtonFlag == 0) {
 			pushButtonFlag = 1;
-			delay_ms(100);
-			if(get_state() == STATE_RESET || get_state() == STATE_STOPPED) {
-				laser_toggle();
-				if(laser_is_on() == YES) blue_led_on();
-				else blue_led_off();
+			delay_ms(10);
+			if(get_state() == STATE_RESET || get_state() == STATE_STOPPED || get_state() == STATE_CONFIGURED) {
+				//This will start a local experiment
+				if(ctr == 0) {
+					set_deltaX(10);
+					set_Noscillations(100);
+					printf("CFG\t10\t100\r");
+					set_state(STATE_CONFIGURED, ECHO);
+					ctr++;
+				}
+				else if(ctr == 1) {
+					printf("STR\r");
+					set_state(STATE_STARTED, ECHO);
+					ctr = 0;
+				}
+				//This will toggle blue led and laser
+//				laser_toggle();
+//				if(laser_is_on() == YES) blue_led_on();
+//				else blue_led_off();
 			}
 		}
 		

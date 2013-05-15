@@ -10,17 +10,19 @@
 #include "bipolar.h"
 #include "delays.h"
 #include "state_machine.h"
+#include "pendulum_N_oscs.h"
 
 #define SERIAL_BUFFER_SIZE 64
 
-static char RXbuffer2[SERIAL_BUFFER_SIZE];		//second buffer used to store message from serial port
-static volatile int messageReceivedFlag = NO;	//indicates arrival of message through serial port
+static char RXbuffer[SERIAL_BUFFER_SIZE];		//buffer used to store message from serial port
+static volatile int messageReceivedFlag = NO;	//indicates arrival of message through serial port~
 
 void processMessage(int mode) {
 	static unsigned int u1;
 	static unsigned int u2;
 	static int flag;
 	static float myFloat;
+	static int myInt;
 	static char s[16];
 	static char message[SERIAL_BUFFER_SIZE];
 
@@ -28,7 +30,7 @@ void processMessage(int mode) {
 	asm("nop");
 	flag = messageReceivedFlag;
 	messageReceivedFlag = NO;
-	if(flag == YES) strcpy(message, RXbuffer2);
+	if(flag == YES) strcpy(message, RXbuffer);
 	IEC1bits.U2RXIE = 1;
 
 	if(flag == NO) return;
@@ -69,6 +71,7 @@ void processMessage(int mode) {
 		else if(sscanf(message, "cfg\t%u\t%u", &u1, &u2) == 2) {
 			sprintf(s, "cfg\t%u\t%u", u1, u2);
 			if(strcmp(s, message) == 0 ) {
+				sprintf(s, "CFG\t%u\t%u", u1, u2);
 				printf("%s\r", s);
 				if(get_state() == STATE_STARTED || get_state() == STATE_SENDING_DATA) return;
 				if(u1 < DELTAX_MIN || u1 > DELTAX_MAX || u2 < NOSC_MIN || u2 > NOSC_MAX) return;
@@ -84,9 +87,14 @@ void processMessage(int mode) {
 		printf("STOP BALL OK\r");
 	}
 	
-	else if(sscanf(message, "launch ball %u", &u1) == 1) {
-		launch_ball(u1);
-		printf("LAUNCH BALL %d OK\r", u1);
+	else if(sscanf(message, "prepare launch %u", &u1) == 1) {
+		prepare_launch(u1);
+		printf("PREPARE LAUNCH %d OK\r", u1);
+	}
+	
+	else if(strcmp(message, "launch ball") == 0) {
+		launch_ball();
+		printf("LAUNCH BALL OK\r");
 	}
 
 	else if(strcmp(message, "test laser") == 0) {
@@ -112,13 +120,25 @@ void processMessage(int mode) {
 	else if(sscanf(message, "set sphere diameter %f", &myFloat) == 1) {
 		if(myFloat < 1.) myFloat = 1.;
 		saveSphereDiameter_CM(myFloat);
-		printf("SPHERE DIAMETER: %f CM\r", (double)myFloat);
+		printf("SPHERE DIAMETER: %f cm\r", (double)myFloat);
 	}
 	
 	else if(sscanf(message, "set pendulum length %f", &myFloat) == 1) {
 		if(myFloat < 0.1) myFloat = 0.1;
 		savePendulumLength_M(myFloat);
-		printf("PENDULUM LENGTH: %f M\r", (double)myFloat);
+		printf("PENDULUM LENGTH: %f m\r", (double)myFloat);
+	}
+	
+	else if(sscanf(message, "set distance from laser to start %f", &myFloat) == 1) {
+		if(myFloat > 50.0) myFloat = 50.0;
+		saveDistanceLaserToStart_CM(myFloat);
+		printf("SET DISTANCE FROM LASER TO START: %f cm\r", (double)myFloat);
+	}
+	
+	else if(sscanf(message, "set stepper max freq %d", &myInt) == 1) {
+		if(myInt < 1) myInt = 1;
+		saveStepperMaxFreq_HZ(myInt);
+		printf("SET STEPPER MAX FREQ: %d Hz\r", myInt);
 	}
 	
 	else if(strcmp(message, "get sphere diameter") == 0) {
@@ -129,8 +149,16 @@ void processMessage(int mode) {
 		printf("PENDULUM LENGTH: %f m\r", getPendulumLength_M());
 	}
 	
+	else if(strcmp(message, "get distance from laser to start") == 0) {
+		printf("DISTANCE FROM LASER TO START: %f cm\r", getDistanceLaserToStart_CM());
+	}
+	
 	else if(strcmp(message, "get expected period") == 0) {
 		printf("EXPECTED PERIOD: %f s\r", getExpectedPeriod_S());
+	}
+	
+	else if(strcmp(message, "get stepper max freq") == 0) {
+		printf("MAX FREQ FOR STEPPER: %d Hz\r", getStepperMaxFreq_HZ());
 	}
 	
 	else if(strcmp(message, "release stepper") == 0) {
@@ -172,6 +200,15 @@ void processMessage(int mode) {
 	else if(strcmp(message, "get uptime") == 0) {
 		printf("UPTIME: %ld s\r", get_uptime());
 	}
+
+	else if(strcmp(message, "reset global oscillation counter") == 0) {
+		resetGlobalNumberOfOscs();
+		printf("RESET GLOBAL OSCILLATION COUNTER OK\r");
+	}
+
+	else if(strcmp(message, "get global oscillation counter") == 0) {
+		printf("GET GLOBAL OSCILLATION COUNTER: %lu\r", getGlobalNumberOfOscs());
+	}
 	
 	else if(message[0] == '?' && strlen(message) == 1) sendHelp();
 }
@@ -189,16 +226,27 @@ void sendHelp() {
 	printf("ids\r");
 	printf("cfg\tdeltaX[%u:%u]\tN[%u:%u]\r", DELTAX_MIN, DELTAX_MAX, NOSC_MIN, NOSC_MAX);
 	printf("stop ball\r");
-	printf("launch ball deltaX[%u:%u]\r", DELTAX_MIN, DELTAX_MAX);
+	printf("prepare launch deltaX[%u:%u]\r", DELTAX_MIN, DELTAX_MAX);
+	printf("launch ball\r");
 	printf("test laser\r");
-	printf("go to origin freq[1:%u]\r", MAX_STEPPER_FREQ);
-	printf("move forward deltaX[1:%u] freq[1:%u]\r", MAX_SHOVEL_DISPLACEMENT_CM, MAX_STEPPER_FREQ);
-	printf("move backward deltaX[1:%u] freq[1:%u]\r", MAX_SHOVEL_DISPLACEMENT_CM, MAX_STEPPER_FREQ);
+	printf("go to origin freq[1:%u]\r", getStepperMaxFreq_HZ());
+	printf("move forward deltaX[1:%u] freq[1:%u]\r", MAX_SHOVEL_DISPLACEMENT_CM, getStepperMaxFreq_HZ());
+	printf("move backward deltaX[1:%u] freq[1:%u]\r", MAX_SHOVEL_DISPLACEMENT_CM, getStepperMaxFreq_HZ());
+	printf("\r");
+
 	printf("set sphere diameter %%f\r");
 	printf("set pendulum length %%f\r");
+	printf("set distance from laser to start %%f\r");
+	printf("set stepper max freq %%d\r");
+	printf("\r");
+
 	printf("get sphere diameter\r");
 	printf("get pendulum length\r");
+	printf("get distance from laser to start\r");
+	printf("get stepper max freq\r");
 	printf("get expected period\r");
+	printf("\r");
+
 	printf("release stepper\r");
 	printf("hold stepper\r");
 	printf("blue led on\r");
@@ -207,14 +255,20 @@ void sendHelp() {
 	printf("laser off\r");
 	printf("reboot\r");
 	printf("get uptime\r");
+
+	printf("reset global oscillation counter\r");
+	printf("get global oscillation counter\r");
+
+	printf("\r");
+
 	printf("?\r\r\r");
 }
 
 
 /* This is UART2 receive ISR */
 void __attribute__((__interrupt__, __no_auto_psv__)) _U2RXInterrupt(void) {
-	static char RXbuffer[SERIAL_BUFFER_SIZE];
-	static unsigned int ptr;
+	static char RXb[SERIAL_BUFFER_SIZE];
+	static unsigned int counter;
 	static int o;
 	static char c;
 	
@@ -224,17 +278,16 @@ void __attribute__((__interrupt__, __no_auto_psv__)) _U2RXInterrupt(void) {
 	
     while(U2STAbits.URXDA) {
 	    c = U2RXREG;
-	    RXbuffer[ptr] = c;
-		ptr++;
+	    RXb[counter++] = c;
+
 	    if(c == '\r') {
-		    memcpy(RXbuffer2, RXbuffer, ptr);
-		    RXbuffer2[ptr-1] = 0;
-		    ptr = 0;
+		    memcpy(RXbuffer, RXb, counter);
+		    RXbuffer[counter - 1] = 0;
+		    counter = 0;
 		    messageReceivedFlag = YES;
 		}
-		if(ptr == SERIAL_BUFFER_SIZE) ptr = 0;
+		if(counter == SERIAL_BUFFER_SIZE) counter = 0;
 	}
 
 	if(o) U2STAbits.OERR = 0;
 }
-

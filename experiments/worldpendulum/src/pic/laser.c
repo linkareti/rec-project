@@ -18,11 +18,11 @@ int test_laser() {
 	for (i=0; i<20; i++) {
 		laser_on();
 		delay_ms(10);
-		if(PHOTODIODE == 0) good++;
+		if(PHOTODIODE == 1) good++;
 
 		laser_off();
 		delay_ms(10);
-		if(PHOTODIODE == 1) good++;
+		if(PHOTODIODE == 0) good++;
 	}
 
 	if(st == YES) laser_on();

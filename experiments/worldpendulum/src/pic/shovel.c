@@ -1,6 +1,5 @@
 #include <p30F4011.h>
 #include <math.h>
-#include <stdio.h>
 #include "world_pendulum.h"
 #include "shovel.h"
 #include "delays.h"
@@ -14,10 +13,11 @@ static int volatile target;
 static int dir;
 static int volatile shovel_is_moving = NO;
 static int volatile ballAndShovelStopped = YES;
+static int distance;
 
-void launch_ball(unsigned int cm) {
-	if(cm > DELTAX_MAX) return;
-	if(cm < DELTAX_MIN) return;
+void prepare_launch(unsigned int cm) {
+	if(cm > DELTAX_MAX) cm = DELTAX_MAX;
+	if(cm < DELTAX_MIN) cm = DELTAX_MIN;
 
 	stop_ball();
 	while (shovel_is_moving == YES) asm("clrwdt");
@@ -28,10 +28,13 @@ void launch_ball(unsigned int cm) {
 
 	delay_ms(5000);
 	if(test_laser() == NOT_OK) panic("ERR 1");
+	distance = cm;
+}
 
+void launch_ball() {
 	move (1, DIRECTION_BACKWARD, 200);
 	while (shovel_is_moving == YES) asm("clrwdt");
-	move (2 * cm + 1, DIRECTION_BACKWARD, 400);
+	move (2 * distance + 1, DIRECTION_BACKWARD, 300);
 	while (shovel_is_moving == YES) asm("clrwdt");
 	go_to_origin(100);
 	while (shovel_is_moving == YES) asm("clrwdt");
@@ -86,7 +89,7 @@ void stop_ball() {
 		delay_ms(1000);
 		double xMax = v0 / 100 * sqrt((getPendulumLength_M() - 0.25 * v0 * v0 / 10000 / 9.8)/9.8);
 		xMax *= 100;
-		move (21 + xMax, DIRECTION_FORWARD, 300);				//Adjust here the distance between origin and middle position (laser)
+		move (getDistanceLaserToStart_CM() + xMax, DIRECTION_FORWARD, 300);
 		while (shovel_is_moving == YES) asm("clrwdt");
 		move (1, DIRECTION_FORWARD, 100);
 	}
@@ -107,7 +110,8 @@ void stop_ball() {
 
 void go_to_origin(unsigned int speed) {
 	if(shovel_is_at_origin() == YES) return;
-	if(speed > MAX_STEPPER_FREQ) speed = MAX_STEPPER_FREQ;
+	if(speed > getStepperMaxFreq_HZ()) speed = getStepperMaxFreq_HZ();
+	if(speed < 1) speed = 1;
 	T1CONbits.TON = 0;
 	TMR1 = 0;
 	target = 1000u;
@@ -123,7 +127,8 @@ void move(double cm, unsigned int direction, unsigned int speed) {
 	else return;
 	if(cm > MAX_SHOVEL_DISPLACEMENT_CM) cm = MAX_SHOVEL_DISPLACEMENT_CM;
 	if(shovel_is_at_origin() == YES && dir == DIRECTION_BACKWARD) return;
-	if(speed > MAX_STEPPER_FREQ) speed = MAX_STEPPER_FREQ;
+	if(speed > getStepperMaxFreq_HZ()) speed = getStepperMaxFreq_HZ();
+	if(speed < 1) speed = 1;
 	T1CONbits.TON = 0;
 	target = floor(cm * 2400 / 187 + 0.5);
 	TMR1 = 0;

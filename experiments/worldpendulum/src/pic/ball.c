@@ -7,6 +7,7 @@
 #include "shovel.h"
 #include "physical.h"
 #include "state_machine.h"
+#include "pendulum_N_oscs.h"
 
 static volatile double valOscillationPeriod;
 static volatile double valLinearVelocity;
@@ -37,7 +38,7 @@ void __attribute__((__interrupt__, __no_auto_psv__)) _CNInterrupt(void) {
 	//Should be like this:
 	//light -> photoDiode = 1
 	//dark -> photoDiode = 0
-	if(PHOTODIODE == 1) { photoDiode = 0; LED1_OFF; }
+	if(PHOTODIODE == 0) { photoDiode = 0; LED1_OFF; }
 	else                { photoDiode = 1; LED1_ON; }
 
 	if(MICROSWITCH == 1) { atOrigin = NO; LED2_OFF; }
@@ -92,11 +93,14 @@ void __attribute__((__interrupt__, __no_auto_psv__)) _CNInterrupt(void) {
 			}
 		}
 
-		if(counter == 2 && acquisitionOngoing == YES) {
+		if(counter == 2) {
+			incGlobalNumberOfOscs();
 			counter = 0;
-			dataPointAvailable = YES;
-			//g = 4 * pi^2 * L / T^2
-			calculatedG = 39.478417604 * getPendulumLength_M() / valOscillationPeriod / valOscillationPeriod;
+			if(acquisitionOngoing == YES) {
+				dataPointAvailable = YES;
+				//g = 4 * pi^2 * L / T^2
+				calculatedG = 39.478417604 * getPendulumLength_M() / valOscillationPeriod / valOscillationPeriod;
+			}
 		}
 	}
 
@@ -119,7 +123,7 @@ void Yaiks() {
 	//Should be like this:
 	//light - photoDiode = 1
 	//dark - photoDiode = 0
-	if(PHOTODIODE == 1) { photoDiode = 0; LED1_OFF; }
+	if(PHOTODIODE == 0) { photoDiode = 0; LED1_OFF; }
 	else                { photoDiode = 1; LED1_ON; }
 
 	if(MICROSWITCH == 1) { atOrigin = NO; LED2_OFF; }
@@ -174,14 +178,16 @@ void reset_acquisition() {
 	oscillationMode = NOT_AVAIL;
 	dataPointAvailable = NO;
 	acquisitionOngoing = NO;
+	calculatedG = 0;
 	IEC0bits.CNIE = 1;
 }
 
 void stop_acquisition() {
 	IEC0bits.CNIE = 0;
 	asm("nop");
-	acquisitionOngoing = NO;
 	dataPointAvailable = NO;
+	acquisitionOngoing = NO;
+	calculatedG = 0;
 	IEC0bits.CNIE = 1;
 }
 
