@@ -6,6 +6,7 @@
     <display toolTipBundleKey="aleatorio$rec.exp.display.aleatorio.tip.4" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.movie" displayStringBundleKey="aleatorio$rec.exp.display.aleatorio.title.4" classLocationBundleKey="aleatorio$rec.exp.display.aleatorio.loc.4" order="0"/>
     <display toolTipBundleKey="aleatorio$rec.exp.display.aleatorio.tip.5" offlineCapable="true" iconLocationBundleKey="aleatorio$rec.exp.display.aleatorio.icon.1" displayStringBundleKey="aleatorio$rec.exp.display.aleatorio.title.5" classLocationBundleKey="aleatorio$rec.exp.display.aleatorio.loc.5" order="0"/>
     <localizationBundle name="aleatorio" location="recresource:///pt/utl/ist/elab/client/aleatorio/resources/messages"/>
+    <mediaConfig videoLocation="aleatorio$rec.exp.aleatorio.video" offlinePlay="true" canSave="true" order="0"/>
     <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" order="0"/>
     <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" order="0"/>
     <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" order="0"/>
