@@ -92,22 +92,30 @@ public class WorldPendulumTableModelProxy extends DefaultTableModel implements E
 				return ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.lbl.nodata","ReCUI$rec.ui.lbl.nodata");
 			}
 			return null;
-		}
-//		if (columnIndex == 0) {
-//			return ReCResourceBundle.findStringOrDefault("ReCUI$rec.ui.table.model.column.sample","ReCUI$rec.ui.table.model.column.sample");
-//		}
+		}	 
+		
+		int channelIndex = columnIndex;
+		
+		if (columnIndex == 2) channelIndex = columnIndex-1;
 
-		final int channelIndex = columnIndex;
-
-		String channelNameKey = expDataModel.getChannelConfig(channelIndex).getChannelName();
+		final String channelNameKey = expDataModel.getChannelConfig(channelIndex).getChannelName();
 		final String ch_name = ReCResourceBundle.findStringOrDefault(channelNameKey,channelNameKey);
 				
 		final String multiplier = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getMultiplier()
 				.toString();
+		
 		final String ph_unit_symbol = expDataModel.getChannelConfig(channelIndex).getSelectedScale()
 				.getPhysicsUnitSymbol();
-
-		return ch_name + " [" + multiplier + ph_unit_symbol + "]";
+		
+				
+		final String retorna = ch_name + " [" + multiplier + ph_unit_symbol + "]";
+		
+		if (columnIndex == 2) {
+			return "\u03B5 " + retorna;
+		} else {
+			return retorna;
+		}
+		
 	}
 
 	/**
@@ -144,13 +152,26 @@ public class WorldPendulumTableModelProxy extends DefaultTableModel implements E
 			return null;
 		}
 
+//  É usado o primeiro canal que tem sempre o número das contagens no World Pendulum.
 //		if (columnIndex == 0) {
 //			return String.valueOf(rowIndex + 1);
 //		}
+		
+		int channelIndex = columnIndex;
+		if (columnIndex == 2) channelIndex = columnIndex-1;
 
-		final int channelIndex = columnIndex;
 		final PhysicsValue value = expDataModel.getValueAt(rowIndex, channelIndex);
-		return value.getValue().toEngineeringNotation();
+		
+		if (columnIndex == 0){
+			return value.getValue().toEngineeringNotation();
+		}
+		
+		if (columnIndex==2){
+			return value.getError();
+		}
+		else{
+			return value.getValue();
+		}
 	}
 
 	/**

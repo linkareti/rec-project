@@ -68,13 +68,13 @@ public class WorldPendulumCustomizerPanel extends AbstractCustomizer {
         jButtonCancel = new javax.swing.JButton();
         jButtonDefaultConfig = new javax.swing.JButton();
 
-        setMinimumSize(new java.awt.Dimension(350, 490));
+        setMinimumSize(new java.awt.Dimension(350, 350));
         setName("OpticaCustomizer"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(350, 490));
+        setPreferredSize(new java.awt.Dimension(350, 350));
+        setRequestFocusEnabled(false);
         setLayout(new java.awt.BorderLayout());
 
         jTabbedPaneWorldPendulum.setName("jTabbedPaneWorldPendulum"); // NOI18N
-        jTabbedPaneWorldPendulum.setPreferredSize(new java.awt.Dimension(350, 417));
         jTabbedPaneWorldPendulum.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jTabbedPaneWorldPendulumStateChanged(evt);
@@ -82,13 +82,13 @@ public class WorldPendulumCustomizerPanel extends AbstractCustomizer {
         });
 
         jPanelPendulumConfig.setName("jPanelPendulumConfig"); // NOI18N
-        jPanelPendulumConfig.setPreferredSize(new java.awt.Dimension(350, 372));
+        jPanelPendulumConfig.setPreferredSize(new java.awt.Dimension(350, 360));
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(WorldPendulumCustomizerPanel.class);
         jPanelPenduloDisplacement.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelPenduloDisplacement.border.title"))); // NOI18N
         jPanelPenduloDisplacement.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanelPenduloDisplacement.setName("jPanelPenduloDisplacement"); // NOI18N
-        jPanelPenduloDisplacement.setPreferredSize(new java.awt.Dimension(330, 126));
+        jPanelPenduloDisplacement.setPreferredSize(new java.awt.Dimension(300, 126));
 
         jSliderDisplacement.setMajorTickSpacing(5);
         jSliderDisplacement.setMaximum(20);
@@ -106,7 +106,10 @@ public class WorldPendulumCustomizerPanel extends AbstractCustomizer {
             }
         });
 
+        jFormattedTextFieldDisplacement.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
+        jFormattedTextFieldDisplacement.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         jFormattedTextFieldDisplacement.setText(resourceMap.getString("jFormattedTextFieldDisplacement.text")); // NOI18N
+        jFormattedTextFieldDisplacement.setToolTipText(resourceMap.getString("jFormattedTextFieldDisplacement.toolTipText")); // NOI18N
         jFormattedTextFieldDisplacement.setMaximumSize(new java.awt.Dimension(40, 19));
         jFormattedTextFieldDisplacement.setMinimumSize(new java.awt.Dimension(40, 19));
         jFormattedTextFieldDisplacement.setName("jFormattedTextFieldDisplacement"); // NOI18N
@@ -125,7 +128,7 @@ public class WorldPendulumCustomizerPanel extends AbstractCustomizer {
                 .addComponent(jSliderDisplacement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jFormattedTextFieldDisplacement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelPenduloDisplacementLayout.setVerticalGroup(
             jPanelPenduloDisplacementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,9 +140,13 @@ public class WorldPendulumCustomizerPanel extends AbstractCustomizer {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
+        jSliderDisplacement.getAccessibleContext().setAccessibleName(ReCResourceBundle.findStringOrDefault("worldpendulum$jSliderDisplacement.toolTipText","Deslocamento"));
+        jSliderDisplacement.getAccessibleContext().setAccessibleDescription(ReCResourceBundle.findStringOrDefault("worldpendulum$jSliderDisplacement.toolTipText","Deslocamento"));
+        jFormattedTextFieldDisplacement.getAccessibleContext().setAccessibleDescription(ReCResourceBundle.findStringOrDefault("worldpendulum$jSliderDisplacement.toolTipText","Deslocamento"));
+
         jPanelNrPoints.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelNrPoints.border.title"))); // NOI18N
         jPanelNrPoints.setName("jPanelNrPoints"); // NOI18N
-        jPanelNrPoints.setPreferredSize(new java.awt.Dimension(330, 126));
+        jPanelNrPoints.setPreferredSize(new java.awt.Dimension(300, 126));
 
         jSliderNrPoints.setMajorTickSpacing(80);
         jSliderNrPoints.setMaximum(500);
@@ -157,6 +164,8 @@ public class WorldPendulumCustomizerPanel extends AbstractCustomizer {
             }
         });
 
+        jFormattedTextFieldNrPoints.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
+        jFormattedTextFieldNrPoints.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         jFormattedTextFieldNrPoints.setText(resourceMap.getString("jFormattedTextFieldNrPoints.text")); // NOI18N
         jFormattedTextFieldNrPoints.setToolTipText(resourceMap.getString("jFormattedTextFieldNrPoints.toolTipText")); // NOI18N
         jFormattedTextFieldNrPoints.setMaximumSize(new java.awt.Dimension(45, 19));
@@ -175,7 +184,7 @@ public class WorldPendulumCustomizerPanel extends AbstractCustomizer {
             .addGroup(jPanelNrPointsLayout.createSequentialGroup()
                 .addComponent(jSliderNrPoints, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextFieldNrPoints, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                .addComponent(jFormattedTextFieldNrPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanelNrPointsLayout.setVerticalGroup(
@@ -188,11 +197,15 @@ public class WorldPendulumCustomizerPanel extends AbstractCustomizer {
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        jFormattedTextFieldEstimatedTime.setText(resourceMap.getString("jFormattedTextFieldEstimatedTime.text")); // NOI18N
+        jSliderNrPoints.getAccessibleContext().setAccessibleDescription(ReCResourceBundle.findStringOrDefault("worldpendulum$jFormattedTextFieldNrPoints.toolTipText","Amostras"));
+        jFormattedTextFieldNrPoints.getAccessibleContext().setAccessibleDescription(ReCResourceBundle.findStringOrDefault("worldpendulum$jFormattedTextFieldNrPoints.toolTipText","Amostras"));
+
+        jFormattedTextFieldEstimatedTime.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
+        jFormattedTextFieldEstimatedTime.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         jFormattedTextFieldEstimatedTime.setName("jFormattedTextFieldEstimatedTime"); // NOI18N
 
         jLabelEstimatedTime.setForeground(resourceMap.getColor("jLabelEstimatedTime.foreground")); // NOI18N
-        jLabelEstimatedTime.setText(resourceMap.getString("jLabelEstimatedTime.text")); // NOI18N
+        jLabelEstimatedTime.setText(ReCResourceBundle.findStringOrDefault("worldpendulum$jLabelEstimatedTime.text","Tempo Estimado"));
         jLabelEstimatedTime.setEnabled(false);
         jLabelEstimatedTime.setName("jLabelEstimatedTime"); // NOI18N
 
@@ -205,11 +218,11 @@ public class WorldPendulumCustomizerPanel extends AbstractCustomizer {
                 .addGroup(jPanelPendulumConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanelPendulumConfigLayout.createSequentialGroup()
                         .addComponent(jLabelEstimatedTime)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jFormattedTextFieldEstimatedTime, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanelPenduloDisplacement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelNrPoints, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jFormattedTextFieldEstimatedTime, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanelPenduloDisplacement, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                    .addComponent(jPanelNrPoints, 0, 318, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanelPendulumConfigLayout.setVerticalGroup(
             jPanelPendulumConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,21 +231,27 @@ public class WorldPendulumCustomizerPanel extends AbstractCustomizer {
                 .addComponent(jPanelPenduloDisplacement, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelNrPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanelPendulumConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelEstimatedTime)
                     .addComponent(jFormattedTextFieldEstimatedTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(97, 97, 97))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        jTabbedPaneWorldPendulum.addTab(resourceMap.getString("jPanelPendulumConfig.TabConstraints.tabTitle"), jPanelPendulumConfig); // NOI18N
+        jPanelPenduloDisplacement.getAccessibleContext().setAccessibleName(ReCResourceBundle.findStringOrDefault("worldpendulum$jPanelPenduloDisplacement.border.title","Initial Displacement"));
+        jPanelNrPoints.getAccessibleContext().setAccessibleName(ReCResourceBundle.findStringOrDefault("worldpendulum$jPanelNrPoints.border.title","Samples"));
+        jLabelEstimatedTime.getAccessibleContext().setAccessibleName(ReCResourceBundle.findStringOrDefault("worldpendulum$jLabelEstimatedTime.text","Tempo Estimado"));
+        jLabelEstimatedTime.getAccessibleContext().setAccessibleDescription(ReCResourceBundle.findStringOrDefault("worldpendulum$jLabelEstimatedTime.text","Tempo Estimado"));
+
+        jTabbedPaneWorldPendulum.addTab(ReCResourceBundle.findStringOrDefault("worldpendulum$jPanelPendulumConfig.TabConstraints.tabTitle","Configure"), null, jPanelPendulumConfig, resourceMap.getString("jPanelPendulumConfig.TabConstraints.tabToolTip")); // NOI18N
 
         add(jTabbedPaneWorldPendulum, java.awt.BorderLayout.CENTER);
+        jTabbedPaneWorldPendulum.getAccessibleContext().setAccessibleName(ReCResourceBundle.findStringOrDefault("worldpendulum$jPanelPendulumConfig.TabConstraints.tabTitle","Configure"));
 
         jPanelControlButtons.setName("jPanelControlButtons"); // NOI18N
         jPanelControlButtons.setPreferredSize(new java.awt.Dimension(350, 37));
 
-        jButtonOk.setText(resourceMap.getString("Ok.label")); // NOI18N
+        jButtonOk.setLabel(resourceMap.getString("Ok.label")); // NOI18N
         jButtonOk.setName("Ok"); // NOI18N
         jButtonOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,7 +259,7 @@ public class WorldPendulumCustomizerPanel extends AbstractCustomizer {
             }
         });
 
-        jButtonCancel.setText(resourceMap.getString("Cancel.label")); // NOI18N
+        jButtonCancel.setLabel(resourceMap.getString("Cancel.label")); // NOI18N
         jButtonCancel.setName("Cancel"); // NOI18N
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,7 +267,7 @@ public class WorldPendulumCustomizerPanel extends AbstractCustomizer {
             }
         });
 
-        jButtonDefaultConfig.setText(resourceMap.getString("DefaultConfig.label")); // NOI18N
+        jButtonDefaultConfig.setLabel(resourceMap.getString("DefaultConfig.label")); // NOI18N
         jButtonDefaultConfig.setName("DefaultConfig"); // NOI18N
         jButtonDefaultConfig.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -315,7 +334,7 @@ private void jFormattedTextFieldNrPointsFocusLost(java.awt.event.FocusEvent evt)
 	private void jButtonDefaultConfigActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonDefaultConfigActionPerformed
 		// tab Snell
 		jSliderDisplacement.setValue(10);
-		jFormattedTextFieldDisplacement.setText("10.0");
+		jFormattedTextFieldDisplacement.setText("10");
 		jSliderNrPoints.setValue(100);
 		jFormattedTextFieldNrPoints.setText("100");
                 validateScreen();
@@ -393,14 +412,14 @@ private void jFormattedTextFieldNrPointsFocusLost(java.awt.event.FocusEvent evt)
 	private void validateScreen() {
 		boolean valid = true;
                         
-                jFormattedTextFieldEstimatedTime.setText(Float.toString(((float) jSliderNrPoints.getValue()) * PERIOD));
+                jFormattedTextFieldEstimatedTime.setText(Integer.toString((int) Math.ceil(((float) jSliderNrPoints.getValue()) * PERIOD)));
                 
 		jButtonOk.setEnabled(valid);
 	}
 
 	private void sliderMultipliedChanged(final javax.swing.JSlider slider,
 			final javax.swing.JFormattedTextField textField) {
-		textField.setText(Float.toString((float) slider.getValue()));
+		textField.setText(Integer.toString((int) slider.getValue()));
 	}
 
 	private void formattedMultipliedTextChanged(final javax.swing.JSlider slider,
@@ -416,10 +435,10 @@ private void jFormattedTextFieldNrPointsFocusLost(java.awt.event.FocusEvent evt)
 				// slider.setValue(pos1 - slider.getMinimum());
 				slider.setValue(pos1);
 			} else {
-				textField.setValue(Float.toString((float) slider.getValue()));
+				textField.setValue(Integer.toString((int) slider.getValue()));
 			}
 		} catch (final Exception e) {
-			textField.setValue(Float.toString((float) slider.getValue()));
+			textField.setValue(Integer.toString((int) slider.getValue()));
 		}
 	}
 

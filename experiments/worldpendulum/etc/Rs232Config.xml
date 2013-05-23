@@ -35,7 +35,7 @@
 			<id time="10000" />
 			<cfg time="80000" />
 			<cur time="5000" />
-			<str time="45000" />
+			<str time="60000" />
 			<dat_bin time="120000" />
 			<no_data time="60000" />
 			<end time="3000000" />

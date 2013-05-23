@@ -23,6 +23,6 @@ public class WorldPendulumGraphDisplay extends DefaultXYExperimentGraph{
 	public WorldPendulumGraphDisplay() {
 		super();
 		setChannelDisplayX(0); // Número da amostra
-		setChannelDisplayY(2); // g medido
+		setChannelDisplayY(3); // g medido
 	}
 }

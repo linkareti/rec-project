@@ -49,7 +49,7 @@
 			<min><PhysicsVal type="float">0.1</PhysicsVal></min>
 			<max><PhysicsVal type="float">10</PhysicsVal></max>
 			<step><PhysicsVal type="float">0.1</PhysicsVal></step>
-			<errordefault><PhysicsVal type="float">0.</PhysicsVal></errordefault>
+			<errordefault><PhysicsVal type="float">0.0005</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 
