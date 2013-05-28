@@ -158,9 +158,9 @@ public class DiscosTableModelProxy extends DefaultTableModel implements ExpDataM
 		final PhysicsValue value = expDataModel.getValueAt(rowIndex, channelIndex);
 
 		if (columnIndex % 2 == 0) {
-			return value.getError().toEngineeringNotation();
+			return value.getError();
 		} else {
-			return value.getValue().toEngineeringNotation();
+			return value.getValue();
 		}
 	}
 
