@@ -1,16 +1,12 @@
-/*
- * RadioactividadeCustomizer.java
- *
- * Created on 16 de Maio de 2003, 10:11
- */
-
 package pt.utl.ist.elab.client.planck;
 
-import java.awt.event.ItemEvent;
+import java.text.DecimalFormat;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
+import javax.swing.text.NumberFormatter;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
@@ -18,44 +14,44 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
- * @author José Pedro Pereira - Linkare TI
  */
 public class PlanckCustomizer extends AbstractCustomizer {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 753043981351945518L;
-	java.text.DecimalFormat df = null;
+	/** Generated UID */
+	private static final long serialVersionUID = 6341409723545193412L;
 
 	/** Creates new form RadioactividadeCustomizer */
 	public PlanckCustomizer() {
 		initComponents();
-		final java.util.Hashtable<Integer, JLabel> ht = new java.util.Hashtable<Integer, JLabel>(10);
-		ht.put(new Integer(120), new javax.swing.JLabel("" + 12));
-		ht.put(new Integer(130), new javax.swing.JLabel("" + 13));
-		ht.put(new Integer(140), new javax.swing.JLabel("" + 14));
-		ht.put(new Integer(150), new javax.swing.JLabel("" + 15));
-		ht.put(new Integer(160), new javax.swing.JLabel("" + 16));
-		ht.put(new Integer(170), new javax.swing.JLabel("" + 17));
-		ht.put(new Integer(180), new javax.swing.JLabel("" + 18));
-		ht.put(new Integer(190), new javax.swing.JLabel("" + 19));
-		ht.put(new Integer(200), new javax.swing.JLabel("" + 20));
-		ht.put(new Integer(210), new javax.swing.JLabel("" + 21));
-		ht.put(new Integer(220), new javax.swing.JLabel("" + 22));
-		jSliderAng.setLabelTable(ht);
 
-		jSliderAng.setEnabled(false);
-		jTextFieldAng.setEnabled(false);
-		/*
-		 * jSliderNumSamples.setMaximum(500); jSliderNumSamples.repaint();
-		 */
+		final Dictionary<Integer, JLabel> slidersPosLabels = new Hashtable<Integer, JLabel>(4);
+		slidersPosLabels.put(new Integer(0), new JLabel("0.0"));
+		slidersPosLabels.put(new Integer(900), new JLabel("90.0"));
+		slidersPosLabels.put(new Integer(1800), new JLabel("180.0"));
+		slidersPosLabels.put(new Integer(2700), new JLabel("270.0"));
+		slidersPosLabels.put(new Integer(3600), new JLabel("360.0"));
 
-		System.out.println(jSliderNumSamples.getMajorTickSpacing());
-		jSliderNumSamples.setValue(200);
-		jTextFieldSamples.setText("200");
-		df = new java.text.DecimalFormat();
-		df.setMaximumFractionDigits(1);
+		sldPos1.setLabelTable(slidersPosLabels);
+		sldPos2.setLabelTable(slidersPosLabels);
+		final DecimalFormat format = new DecimalFormat("0.0");
+		format.setDecimalSeparatorAlwaysShown(true);
+		format.setGroupingUsed(false);
+		format.setMinimumFractionDigits(1);
+		final NumberFormatter formatterUserPos1 = new NumberFormatter(format);
+		final NumberFormatter formatterUserPos2 = new NumberFormatter(format);
+
+		formatterUserPos1.setCommitsOnValidEdit(true);
+		formatterUserPos2.setCommitsOnValidEdit(true);
+
+		formatterUserPos1.setOverwriteMode(true);
+		formatterUserPos2.setOverwriteMode(true);
+
+		formatterUserPos1.install(tfPos1);
+		formatterUserPos2.install(tfPos2);
+
+		checkMaxNumSamples();
+		checkMaxTime();
+		checkPosOverlap();
 	}
 
 	/**
@@ -67,263 +63,37 @@ public class PlanckCustomizer extends AbstractCustomizer {
 	{
 		java.awt.GridBagConstraints gridBagConstraints;
 
-		buttonGroup1 = new javax.swing.ButtonGroup();
-		buttonGroup2 = new javax.swing.ButtonGroup();
-		buttonGroup3 = new javax.swing.ButtonGroup();
-		jPanel7 = new javax.swing.JPanel();
-		jPanel4 = new javax.swing.JPanel();
-		jRadioButtonVar = new javax.swing.JRadioButton();
-		jRadioButtonFix = new javax.swing.JRadioButton();
-		jPanel3 = new javax.swing.JPanel();
-		jPanel5 = new javax.swing.JPanel();
-		jPanel8 = new javax.swing.JPanel();
-		jRadioButtonColor1 = new javax.swing.JRadioButton();
-		jRadioButtonColor2 = new javax.swing.JRadioButton();
-		jRadioButtonColor3 = new javax.swing.JRadioButton();
-		jRadioButtonColor4 = new javax.swing.JRadioButton();
-		jPanel9 = new javax.swing.JPanel();
-		jRadioButtonGray0 = new javax.swing.JRadioButton();
-		jRadioButtonGray20 = new javax.swing.JRadioButton();
-		jRadioButtonGray40 = new javax.swing.JRadioButton();
-		jRadioButtonGray60 = new javax.swing.JRadioButton();
-		jRadioButtonGray80 = new javax.swing.JRadioButton();
-		jRadioButtonGray90 = new javax.swing.JRadioButton();
-		jPanel1 = new javax.swing.JPanel();
-		jSliderAng = new javax.swing.JSlider();
-		jTextFieldAng = new javax.swing.JTextField();
-		jPanel6 = new javax.swing.JPanel();
-		jSliderNumSamples = new javax.swing.JSlider();
-		jTextFieldSamples = new javax.swing.JTextField();
 		jPanel2 = new javax.swing.JPanel();
 		btnOK = new javax.swing.JButton();
 		btnCancel = new javax.swing.JButton();
 		jLabel1 = new javax.swing.JLabel();
 		btnDefaults = new javax.swing.JButton();
 		jLabel3 = new javax.swing.JLabel();
+		jPanel3 = new javax.swing.JPanel();
+		jPanel6 = new javax.swing.JPanel();
+		sldNumSamples = new javax.swing.JSlider();
+		tfNumSamples = new javax.swing.JTextField();
+		lblErrorSamplesTooHigh = new javax.swing.JLabel();
+		jPanel1 = new javax.swing.JPanel();
+		sldFreq = new javax.swing.JSlider();
+		tfFreq = new javax.swing.JTextField();
+		lblSamplingIntervalTooHigh = new javax.swing.JLabel();
+		jPanel5 = new javax.swing.JPanel();
+		sldPos1 = new javax.swing.JSlider();
+		sldPos2 = new javax.swing.JSlider();
+		lblErrorVolsAreEqua = new javax.swing.JLabel();
+		tfPos1 = new javax.swing.JFormattedTextField();
+		tfPos2 = new javax.swing.JFormattedTextField();
 
 		setLayout(new java.awt.BorderLayout());
 
-		setMinimumSize(new java.awt.Dimension(420, 460));
-		setPreferredSize(new java.awt.Dimension(420, 460));
-		jPanel7.setLayout(new java.awt.BorderLayout());
-
-		jPanel4.setLayout(new java.awt.GridBagLayout());
-
-		jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0)));
-		jRadioButtonVar.setSelected(true);
-		jRadioButtonVar.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.1.check.1",
-				"planck$rec.exp.customizer.title.1.check.1"));
-		buttonGroup1.add(jRadioButtonVar);
-		jRadioButtonVar.addItemListener(new java.awt.event.ItemListener() {
-			@Override
-			public void itemStateChanged(final java.awt.event.ItemEvent evt) {
-				jRadioButtonVarItemStateChanged(evt);
-			}
-		});
-
-		gridBagConstraints = new java.awt.GridBagConstraints();
-		gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-		jPanel4.add(jRadioButtonVar, gridBagConstraints);
-
-		jRadioButtonFix.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.1.check.2",
-				"planck$rec.exp.customizer.title.1.check.2"));
-		buttonGroup1.add(jRadioButtonFix);
-		gridBagConstraints = new java.awt.GridBagConstraints();
-		gridBagConstraints.gridx = 1;
-		gridBagConstraints.gridy = 0;
-		gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-		jPanel4.add(jRadioButtonFix, gridBagConstraints);
-
-		jPanel7.add(jPanel4, java.awt.BorderLayout.NORTH);
-
-		jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.Y_AXIS));
-
-		jPanel3.setMinimumSize(new java.awt.Dimension(350, 160));
-		jPanel5.setLayout(new java.awt.GridLayout(1, 2));
-
-		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"planck$rec.exp.customizer.title.2", "planck$rec.exp.customizer.title.2")));
-		jPanel5.setMinimumSize(new java.awt.Dimension(350, 150));
-		jPanel5.setPreferredSize(new java.awt.Dimension(350, 150));
-		jPanel8.setLayout(new java.awt.GridLayout(4, 1));
-
-		jPanel8.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"planck$rec.exp.customizer.title.2.1", "planck$rec.exp.customizer.title.2.1")));
-		jPanel8.setMinimumSize(new java.awt.Dimension(117, 200));
-		jPanel8.setPreferredSize(new java.awt.Dimension(117, 200));
-		jRadioButtonColor1.setForeground(new java.awt.Color(204, 51, 255));
-		jRadioButtonColor1.setSelected(true);
-		jRadioButtonColor1.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.2.1.check.1",
-				"planck$rec.exp.customizer.title.2.1.check.1"));
-		buttonGroup2.add(jRadioButtonColor1);
-		jPanel8.add(jRadioButtonColor1);
-
-		jRadioButtonColor2.setForeground(new java.awt.Color(255, 255, 0));
-		jRadioButtonColor2.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.2.1.check.2",
-				"planck$rec.exp.customizer.title.2.1.check.2"));
-		buttonGroup2.add(jRadioButtonColor2);
-		jPanel8.add(jRadioButtonColor2);
-
-		jRadioButtonColor3.setForeground(new java.awt.Color(102, 204, 0));
-		jRadioButtonColor3.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.2.1.check.3",
-				"planck$rec.exp.customizer.title.2.1.check.3"));
-		buttonGroup2.add(jRadioButtonColor3);
-		jPanel8.add(jRadioButtonColor3);
-
-		jRadioButtonColor4.setForeground(new java.awt.Color(185, 185, 185));
-		jRadioButtonColor4.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title.2.1.check.4",
-				"planck$rec.exp.customizer.title.2.1.check.4"));
-		buttonGroup2.add(jRadioButtonColor4);
-		jPanel8.add(jRadioButtonColor4);
-
-		jPanel5.add(jPanel8);
-
-		jPanel9.setLayout(new java.awt.GridLayout(3, 2));
-
-		jPanel9.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"planck$rec.exp.customizer.title.2.2", "planck$rec.exp.customizer.title.2.2")));
-		jPanel9.setMinimumSize(new java.awt.Dimension(117, 200));
-		jPanel9.setPreferredSize(new java.awt.Dimension(117, 200));
-		jRadioButtonGray0.setForeground(new java.awt.Color(185, 185, 185));
-		jRadioButtonGray0.setText("0%");
-		buttonGroup3.add(jRadioButtonGray0);
-		jPanel9.add(jRadioButtonGray0);
-
-		jRadioButtonGray20.setForeground(new java.awt.Color(158, 158, 158));
-		jRadioButtonGray20.setText("20%");
-		buttonGroup3.add(jRadioButtonGray20);
-		jPanel9.add(jRadioButtonGray20);
-
-		jRadioButtonGray40.setForeground(new java.awt.Color(121, 121, 121));
-		jRadioButtonGray40.setSelected(true);
-		jRadioButtonGray40.setText("40%");
-		buttonGroup3.add(jRadioButtonGray40);
-		jPanel9.add(jRadioButtonGray40);
-
-		jRadioButtonGray60.setForeground(new java.awt.Color(84, 84, 84));
-		jRadioButtonGray60.setText("60%");
-		buttonGroup3.add(jRadioButtonGray60);
-		jPanel9.add(jRadioButtonGray60);
-
-		jRadioButtonGray80.setForeground(new java.awt.Color(57, 57, 57));
-		jRadioButtonGray80.setText("80%");
-		buttonGroup3.add(jRadioButtonGray80);
-		jPanel9.add(jRadioButtonGray80);
-
-		jRadioButtonGray90.setForeground(new java.awt.Color(40, 40, 40));
-		jRadioButtonGray90.setText("90%");
-		buttonGroup3.add(jRadioButtonGray90);
-		jPanel9.add(jRadioButtonGray90);
-
-		jPanel5.add(jPanel9);
-
-		jPanel3.add(jPanel5);
-
-		jPanel1.setLayout(new java.awt.GridBagLayout());
-
-		jPanel1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"planck$rec.exp.customizer.title.3", "planck$rec.exp.customizer.title.3")));
-		jPanel1.setMinimumSize(new java.awt.Dimension(350, 80));
-		jPanel1.setPreferredSize(new java.awt.Dimension(350, 80));
-		jSliderAng.setMajorTickSpacing(10);
-		jSliderAng.setMaximum(220);
-		jSliderAng.setMinimum(120);
-		jSliderAng.setPaintLabels(true);
-		jSliderAng.setPaintTicks(true);
-		jSliderAng.setMaximumSize(new java.awt.Dimension(1000, 32767));
-		jSliderAng.setMinimumSize(new java.awt.Dimension(355, 80));
-		jSliderAng.setPreferredSize(new java.awt.Dimension(355, 80));
-		jSliderAng.addChangeListener(new javax.swing.event.ChangeListener() {
-			@Override
-			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
-				jSliderAngStateChanged(evt);
-			}
-		});
-
-		gridBagConstraints = new java.awt.GridBagConstraints();
-		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-		gridBagConstraints.weighty = 10.0;
-		jPanel1.add(jSliderAng, gridBagConstraints);
-
-		jTextFieldAng.setColumns(3);
-		jTextFieldAng.setHorizontalAlignment(SwingConstants.RIGHT);
-		jTextFieldAng.setText("12");
-		jTextFieldAng.setMaximumSize(new java.awt.Dimension(30, 16));
-		jTextFieldAng.setMinimumSize(new java.awt.Dimension(30, 16));
-		jTextFieldAng.setPreferredSize(new java.awt.Dimension(37, 16));
-		jTextFieldAng.addFocusListener(new java.awt.event.FocusAdapter() {
-			@Override
-			public void focusLost(final java.awt.event.FocusEvent evt) {
-				jTextFieldAngFocusLost(evt);
-			}
-		});
-
-		gridBagConstraints = new java.awt.GridBagConstraints();
-		gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-		jPanel1.add(jTextFieldAng, gridBagConstraints);
-
-		jPanel3.add(jPanel1);
-
-		jPanel6.setLayout(new java.awt.GridBagLayout());
-
-		jPanel6.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"planck$rec.exp.customizer.title.4", "planck$rec.exp.customizer.title.4")));
-		jPanel6.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
-		jPanel6.setMinimumSize(new java.awt.Dimension(350, 80));
-		jPanel6.setPreferredSize(new java.awt.Dimension(350, 80));
-		jSliderNumSamples.setMajorTickSpacing(50);
-		jSliderNumSamples.setMaximum(300);
-		jSliderNumSamples.setPaintLabels(true);
-		jSliderNumSamples.setPaintTicks(true);
-		jSliderNumSamples.setMaximumSize(new java.awt.Dimension(1000, 32767));
-		jSliderNumSamples.setMinimumSize(new java.awt.Dimension(355, 80));
-		jSliderNumSamples.setPreferredSize(new java.awt.Dimension(355, 80));
-		jSliderNumSamples.addChangeListener(new javax.swing.event.ChangeListener() {
-			@Override
-			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
-				jSliderNumSamplesStateChanged(evt);
-			}
-		});
-
-		gridBagConstraints = new java.awt.GridBagConstraints();
-		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-		gridBagConstraints.weighty = 10.0;
-		jPanel6.add(jSliderNumSamples, gridBagConstraints);
-
-		jTextFieldSamples.setColumns(4);
-		jTextFieldSamples.setHorizontalAlignment(SwingConstants.RIGHT);
-		jTextFieldSamples.setText("200");
-		jTextFieldSamples.setMaximumSize(new java.awt.Dimension(30, 16));
-		jTextFieldSamples.setMinimumSize(new java.awt.Dimension(30, 16));
-		jTextFieldSamples.setPreferredSize(new java.awt.Dimension(48, 16));
-		jTextFieldSamples.addFocusListener(new java.awt.event.FocusAdapter() {
-			@Override
-			public void focusLost(final java.awt.event.FocusEvent evt) {
-				jTextFieldSamplesFocusLost(evt);
-			}
-		});
-
-		gridBagConstraints = new java.awt.GridBagConstraints();
-		gridBagConstraints.gridx = 1;
-		gridBagConstraints.gridy = 0;
-		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-		jPanel6.add(jTextFieldSamples, gridBagConstraints);
-
-		jPanel3.add(jPanel6);
-
-		jPanel7.add(jPanel3, java.awt.BorderLayout.CENTER);
-
-		add(jPanel7, java.awt.BorderLayout.CENTER);
-
+		setMinimumSize(new java.awt.Dimension(350, 460));
+		setPreferredSize(new java.awt.Dimension(350, 460));
 		jPanel2.setLayout(new java.awt.GridBagLayout());
 
 		jPanel2.setMinimumSize(new java.awt.Dimension(350, 42));
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
-		btnOK.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.planck.lbl.ok",
-				"planck$rec.exp.planck.lbl.ok"));
+		btnOK.setText("OK");
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -336,8 +106,7 @@ public class PlanckCustomizer extends AbstractCustomizer {
 		gridBagConstraints.gridy = 1;
 		jPanel2.add(btnOK, gridBagConstraints);
 
-		btnCancel.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.planck.lbl.cancel",
-				"planck$rec.exp.planck.lbl.cancel"));
+		btnCancel.setText("Cancel");
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -357,8 +126,7 @@ public class PlanckCustomizer extends AbstractCustomizer {
 		gridBagConstraints.weightx = 10.0;
 		jPanel2.add(jLabel1, gridBagConstraints);
 
-		btnDefaults.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.dftcfg.planck.title.1",
-				"planck$rec.exp.dftcfg.planck.title.1"));
+		btnDefaults.setText(ReCResourceBundle.findStringOrDefault("rec.exp.dftcfg.planck.title.1", "Default Config"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
@@ -380,81 +148,410 @@ public class PlanckCustomizer extends AbstractCustomizer {
 
 		add(jPanel2, java.awt.BorderLayout.SOUTH);
 
+		jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.Y_AXIS));
+
+		jPanel3.setMinimumSize(new java.awt.Dimension(350, 160));
+		jPanel6.setLayout(new java.awt.GridBagLayout());
+
+		jPanel6.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"planck$rec.exp.customizer.title2", "planck$rec.exp.customizer.title2")));
+		jPanel6.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+		jPanel6.setMinimumSize(new java.awt.Dimension(350, 80));
+		jPanel6.setPreferredSize(new java.awt.Dimension(350, 80));
+		sldNumSamples.setMajorTickSpacing(40);
+		sldNumSamples.setMaximum(240);
+		sldNumSamples.setMinorTickSpacing(23);
+		sldNumSamples.setPaintLabels(true);
+		sldNumSamples.setPaintTicks(true);
+		sldNumSamples.setPaintTrack(false);
+		sldNumSamples.setMaximumSize(new java.awt.Dimension(1000, 32767));
+		sldNumSamples.setMinimumSize(new java.awt.Dimension(250, 42));
+		sldNumSamples.setPreferredSize(new java.awt.Dimension(250, 42));
+		sldNumSamples.setValue(1);
+		sldNumSamples.addChangeListener(new javax.swing.event.ChangeListener() {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
+				sldNumSamplesStateChanged(evt);
+			}
+		});
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 0;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+		gridBagConstraints.weighty = 10.0;
+		jPanel6.add(sldNumSamples, gridBagConstraints);
+
+		tfNumSamples.setColumns(3);
+		tfNumSamples.setHorizontalAlignment(SwingConstants.RIGHT);
+		tfNumSamples.setText("50");
+		tfNumSamples.setMaximumSize(new java.awt.Dimension(30, 16));
+		tfNumSamples.setMinimumSize(new java.awt.Dimension(30, 16));
+		tfNumSamples.setPreferredSize(new java.awt.Dimension(37, 16));
+		tfNumSamples.addFocusListener(new java.awt.event.FocusAdapter() {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
+				tfNumSamplesFocusLost(evt);
+			}
+		});
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 0;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+		jPanel6.add(tfNumSamples, gridBagConstraints);
+
+		lblErrorSamplesTooHigh.setForeground(new java.awt.Color(255, 0, 0));
+		lblErrorSamplesTooHigh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.label2",
+				"planck$rec.exp.customizer.label2"));
+		lblErrorSamplesTooHigh.setEnabled(false);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.gridwidth = 2;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		jPanel6.add(lblErrorSamplesTooHigh, gridBagConstraints);
+
+		jPanel3.add(jPanel6);
+
+		jPanel1.setLayout(new java.awt.GridBagLayout());
+
+		jPanel1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"planck$rec.exp.customizer.title3", "planck$rec.exp.customizer.title3")));
+		jPanel1.setMinimumSize(new java.awt.Dimension(350, 80));
+		jPanel1.setPreferredSize(new java.awt.Dimension(350, 80));
+		sldFreq.setMajorTickSpacing(400);
+		sldFreq.setMaximum(2000);
+		sldFreq.setMinorTickSpacing(200);
+		sldFreq.setPaintLabels(true);
+		sldFreq.setPaintTicks(true);
+		sldFreq.setPaintTrack(false);
+		sldFreq.setMaximumSize(new java.awt.Dimension(1000, 32767));
+		sldFreq.setMinimumSize(new java.awt.Dimension(255, 80));
+		sldFreq.setPreferredSize(new java.awt.Dimension(255, 80));
+		sldFreq.addChangeListener(new javax.swing.event.ChangeListener() {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
+				sldFreqStateChanged(evt);
+			}
+		});
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+		gridBagConstraints.weighty = 10.0;
+		jPanel1.add(sldFreq, gridBagConstraints);
+
+		tfFreq.setColumns(4);
+		tfFreq.setHorizontalAlignment(SwingConstants.RIGHT);
+		tfFreq.setText("50");
+		tfFreq.setMaximumSize(new java.awt.Dimension(30, 16));
+		tfFreq.setMinimumSize(new java.awt.Dimension(30, 16));
+		tfFreq.setPreferredSize(new java.awt.Dimension(48, 16));
+		tfFreq.addFocusListener(new java.awt.event.FocusAdapter() {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
+				tfFreqFocusLost(evt);
+			}
+		});
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+		jPanel1.add(tfFreq, gridBagConstraints);
+
+		lblSamplingIntervalTooHigh.setForeground(new java.awt.Color(255, 0, 0));
+		lblSamplingIntervalTooHigh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		lblSamplingIntervalTooHigh.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.label3",
+				"planck$rec.exp.customizer.label3"));
+		lblSamplingIntervalTooHigh.setEnabled(false);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.gridwidth = 2;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		jPanel1.add(lblSamplingIntervalTooHigh, gridBagConstraints);
+		lblSamplingIntervalTooHigh.getAccessibleContext().setAccessibleName(
+				ReCResourceBundle.findStringOrDefault("rec.exp.customizer.label3", "The time between samples"));
+
+		jPanel3.add(jPanel1);
+
+		add(jPanel3, java.awt.BorderLayout.CENTER);
+
+		jPanel5.setLayout(new java.awt.GridBagLayout());
+
+		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"planck$rec.exp.customizer.title1", "planck$rec.exp.customizer.title1")));
+		jPanel5.setMinimumSize(new java.awt.Dimension(350, 160));
+		jPanel5.setPreferredSize(new java.awt.Dimension(350, 160));
+		sldPos1.setMajorTickSpacing(900);
+		sldPos1.setMaximum(3600);
+		sldPos1.setMinimum(0);
+		sldPos1.setMinorTickSpacing(100);
+		sldPos1.setPaintLabels(true);
+		sldPos1.setPaintTicks(true);
+		sldPos1.setPaintTrack(false);
+		sldPos1.setSnapToTicks(true);
+		sldPos1.setValue(0);
+		sldPos1.setMinimumSize(new java.awt.Dimension(250, 42));
+		sldPos1.setPreferredSize(new java.awt.Dimension(250, 42));
+		sldPos1.addChangeListener(new javax.swing.event.ChangeListener() {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
+				sldPos1StateChanged(evt);
+			}
+		});
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 0;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+		gridBagConstraints.weighty = 10.0;
+		jPanel5.add(sldPos1, gridBagConstraints);
+
+		sldPos2.setMajorTickSpacing(900);
+		sldPos2.setMaximum(3600);
+		sldPos2.setMinimum(0);
+		sldPos2.setMinorTickSpacing(100);
+		sldPos2.setPaintLabels(true);
+		sldPos2.setPaintTicks(true);
+		sldPos2.setPaintTrack(false);
+		sldPos2.setSnapToTicks(true);
+		sldPos2.setValue(3600);
+		sldPos2.setMinimumSize(new java.awt.Dimension(250, 42));
+		sldPos2.setPreferredSize(new java.awt.Dimension(250, 42));
+		sldPos2.addChangeListener(new javax.swing.event.ChangeListener() {
+			@Override
+			public void stateChanged(final javax.swing.event.ChangeEvent evt) {
+				sldPos2StateChanged(evt);
+			}
+		});
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+		gridBagConstraints.weighty = 10.0;
+		jPanel5.add(sldPos2, gridBagConstraints);
+
+		lblErrorVolsAreEqua.setForeground(new java.awt.Color(255, 0, 0));
+		lblErrorVolsAreEqua.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		lblErrorVolsAreEqua.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.label1",
+				"planck$rec.exp.customizer.label1"));
+		lblErrorVolsAreEqua.setEnabled(false);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.gridwidth = 2;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		jPanel5.add(lblErrorVolsAreEqua, gridBagConstraints);
+
+		tfPos1.setText("0.0");
+		tfPos1.addFocusListener(new java.awt.event.FocusAdapter() {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
+				tfPos1FocusLost(evt);
+			}
+		});
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+		jPanel5.add(tfPos1, gridBagConstraints);
+
+		tfPos2.setText("360.0");
+		tfPos2.addFocusListener(new java.awt.event.FocusAdapter() {
+			@Override
+			public void focusLost(final java.awt.event.FocusEvent evt) {
+				tfPos2FocusLost(evt);
+			}
+		});
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+		jPanel5.add(tfPos2, gridBagConstraints);
+
+		add(jPanel5, java.awt.BorderLayout.NORTH);
+
 	}// GEN-END:initComponents
 
-	private void jRadioButtonVarItemStateChanged(final java.awt.event.ItemEvent evt) {// GEN-FIRST:event_jRadioButtonVarItemStateChanged
-		if (evt.getStateChange() == ItemEvent.SELECTED) {
-			jSliderAng.setEnabled(false);
-			jTextFieldAng.setEnabled(false);
-			// jSliderNumSamples.setMaximum(500);
-			// jSliderNumSamples.setMajorTickSpacing(300);
-			// jSliderNumSamples.setMinorTickSpacing(0);
-		} else {
-			jSliderAng.setEnabled(true);
-			jTextFieldAng.setEnabled(true);
-			/*
-			 * jSliderNumSamples.setMaximum(1000);
-			 * jSliderNumSamples.setMajorTickSpacing(100);
-			 * jSliderNumSamples.setMinorTickSpacing(0);
-			 */
-		}
-	}// GEN-LAST:event_jRadioButtonVarItemStateChanged
+	private void tfFreqFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfFreqFocusLost
+	{// GEN-HEADEREND:event_tfFreqFocusLost
 
-	private void jTextFieldSamplesFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldSamplesFocusLost
-		final String strNumSamples = jTextFieldSamples.getText();
-		if (strNumSamples.trim().equals("")) {
+		// TODO
+		// String strFreq = tfFreq.getText();
+		// if (strFreq.trim().equals(""))
+		// return;
+		// try {
+		// int Freq = Integer.parseInt(strFreq);
+		// if (Freq <= sldFreq.getMaximum() && Freq > sldFreq.getMinimum())
+		// sldFreq.setValue(Freq);
+		// else
+		// tfFreq.setText("" + sldFreq.getValue());
+		// } catch (Exception e) {
+		// tfFreq.setText("" + sldFreq.getValue());
+		// }
+		// checkMaxTime();
+
+	}// GEN-LAST:event_tfFreqFocusLost
+
+	private void tfNumSamplesFocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfNumSamplesFocusLost
+	{// GEN-HEADEREND:event_tfNumSamplesFocusLost
+
+		// TODO
+		// String strNumSamples = tfNumSamples.getText();
+		// if (strNumSamples.trim().equals(""))
+		// return;
+		// try {
+		// int numSamples = Integer.parseInt(strNumSamples);
+		// if (numSamples <= sldNumSamples.getMaximum() && numSamples >
+		// sldNumSamples.getMinimum())
+		// sldNumSamples.setValue(numSamples);
+		// else
+		// tfNumSamples.setText("" + sldNumSamples.getValue());
+		// } catch (Exception e) {
+		// tfNumSamples.setText("" + sldNumSamples.getValue());
+		// }
+		// checkMaxNumSamples();
+		// checkMaxTime();
+
+	}// GEN-LAST:event_tfNumSamplesFocusLost
+
+	private void tfPos2FocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfPos2FocusLost
+	{// GEN-HEADEREND:event_tfPos2FocusLost
+
+		// TODO
+		final String strPos2 = tfPos2.getText();
+		if (strPos2.trim().equals("")) {
 			return;
 		}
 		try {
-			final int numSamples = Integer.parseInt(strNumSamples);
-			if (numSamples <= jSliderNumSamples.getMaximum() && numSamples > jSliderNumSamples.getMinimum()) {
-				jSliderNumSamples.setValue(numSamples);
+			final int Pos2 = (int) (Float.parseFloat(strPos2) * 10.F);
+			if (Pos2 <= sldPos2.getMaximum() && Pos2 > sldPos2.getMinimum()) {
+				sldPos2.setValue(Pos2);
 			} else {
-				jTextFieldSamples.setText("" + jSliderNumSamples.getValue());
+				tfPos2.setValue(new Float((sldPos2.getValue() / 10.F)));
 			}
 		} catch (final Exception e) {
-			jTextFieldSamples.setText("" + jSliderNumSamples.getValue());
+			tfPos2.setValue(new Float((sldPos2.getValue() / 10.F)));
 		}
-	}// GEN-LAST:event_jTextFieldSamplesFocusLost
+		// checkPosOverlap();
+		// checkMaxNumSamples();
 
-	private void jTextFieldAngFocusLost(final java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldAngFocusLost
-		final String strAng = jTextFieldAng.getText();
-		if (strAng.trim().equals("")) {
+	}// GEN-LAST:event_tfPos2FocusLost
+
+	private void tfPos1FocusLost(final java.awt.event.FocusEvent evt)// GEN-FIRST:event_tfPos1FocusLost
+	{// GEN-HEADEREND:event_tfPos1FocusLost
+
+		// TODO
+		final String strPos1 = tfPos1.getText();
+
+		if (strPos1.trim().equals("")) {
 			return;
 		}
 		try {
-			final int Ang = (int) (10 * Float.parseFloat(strAng));
-			if (Ang <= jSliderAng.getMaximum() && Ang > jSliderAng.getMinimum()) {
-				jSliderAng.setValue(Ang);
+			final int Pos1 = (int) (Float.parseFloat(strPos1) * 10.F);
+			if (Pos1 <= sldPos1.getMaximum() && Pos1 > sldPos1.getMinimum()) {
+				sldPos1.setValue(Pos1);
 			} else {
-				jTextFieldAng.setText(df.format(jSliderAng.getValue() / 10f));
+				tfPos1.setValue(new Float((sldPos1.getValue() / 10.F)));
 			}
+
 		} catch (final Exception e) {
-			jTextFieldAng.setText(df.format(jSliderAng.getValue() / 10f));
+			tfPos1.setValue(new Float((sldPos1.getValue() / 10.F)));
 		}
-	}// GEN-LAST:event_jTextFieldAngFocusLost
+		// checkPosOverlap();
+		// checkMaxNumSamples();
 
-	private void jSliderAngStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderAngStateChanged
-		jTextFieldAng.setText(df.format(jSliderAng.getValue() / 10f));
-	}// GEN-LAST:event_jSliderAngStateChanged
+	}// GEN-LAST:event_tfPos1FocusLost
 
-	private void jSliderNumSamplesStateChanged(final javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderNumSamplesStateChanged
-		if (jSliderNumSamples.getValue() == 0) {
-			jSliderNumSamples.setValue(1);
+	private void sldPos1StateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos1StateChanged
+	{// GEN-HEADEREND:event_sldPos1StateChanged
+
+		// TODO
+		tfPos1.setValue(new Float((sldPos1.getValue() / 10.F)));
+		// checkPosOverlap();
+		// checkMaxNumSamples();
+
+	}// GEN-LAST:event_sldPos1StateChanged
+
+	private void sldPos2StateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos2StateChanged
+	{// GEN-HEADEREND:event_sldPos2StateChanged
+
+		// TODO
+		tfPos2.setValue(new Float((sldPos2.getValue() / 10.F)));
+		// checkPosOverlap();
+		// checkMaxNumSamples();
+
+	}// GEN-LAST:event_sldPos2StateChanged
+
+	private void sldFreqStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldFreqStateChanged
+	{// GEN-HEADEREND:event_sldFreqStateChanged
+
+		if (sldFreq.getValue() == 0) {
+			sldFreq.setValue(1);
+		}
+		tfFreq.setText("" + sldFreq.getValue());
+
+		// TODO
+		// checkMaxTime();
+
+	}// GEN-LAST:event_sldFreqStateChanged
+
+	private void sldNumSamplesStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldNumSamplesStateChanged
+	{// GEN-HEADEREND:event_sldNumSamplesStateChanged
+
+		if (sldNumSamples.getValue() == 0) {
+			sldNumSamples.setValue(1);
 
 		}
-		jTextFieldSamples.setText("" + jSliderNumSamples.getValue());
-	}// GEN-LAST:event_jSliderNumSamplesStateChanged
+		tfNumSamples.setText("" + sldNumSamples.getValue());
+
+		// TODO
+		// checkMaxNumSamples();
+		// checkMaxTime();
+
+	}// GEN-LAST:event_sldNumSamplesStateChanged
+
+	private void checkPosOverlap() {
+		lblErrorVolsAreEqua.setEnabled(sldPos1.getValue() == sldPos2.getValue());
+		btnOK.setEnabled(!lblErrorVolsAreEqua.isEnabled() && !lblErrorSamplesTooHigh.isEnabled()
+				&& !lblSamplingIntervalTooHigh.isEnabled());
+	}
+
+	private void checkMaxNumSamples() {
+		lblErrorSamplesTooHigh
+				.setEnabled(Math.abs(sldPos2.getValue() - sldPos1.getValue()) * 80. / 1000.F < sldNumSamples.getValue());
+		btnOK.setEnabled(!lblErrorVolsAreEqua.isEnabled() && !lblErrorSamplesTooHigh.isEnabled()
+				&& !lblSamplingIntervalTooHigh.isEnabled());
+		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.label2",
+				"planck$rec.exp.customizer.label2")
+				+ (int) Math.floor(Math.abs(sldPos2.getValue() - sldPos1.getValue()) * 80. / 1000.F));
+	}
+
+	public void checkMaxTime() {
+		final float maxValue = Math.min(sldFreq.getMaximum(), 72000.F / sldNumSamples.getValue());
+		lblSamplingIntervalTooHigh.setEnabled(sldFreq.getValue() > maxValue);
+		btnOK.setEnabled(!lblErrorVolsAreEqua.isEnabled() && !lblErrorSamplesTooHigh.isEnabled()
+				&& !lblSamplingIntervalTooHigh.isEnabled());
+		lblSamplingIntervalTooHigh.setText(ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.label2",
+				"planck$rec.exp.customizer.label2") + (int) maxValue);
+	}
 
 	private void btnDefaultsActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
 	{// GEN-HEADEREND:event_btnDefaultsActionPerformed
-		jSliderNumSamples.setValue(200);
-		jTextFieldSamples.setText("200");
-		jSliderAng.setValue(15);
-		jTextFieldAng.setText("15");
-		jRadioButtonVar.setSelected(true);
-		jRadioButtonColor1.setSelected(true);
-		jRadioButtonGray60.setSelected(true);
+		sldNumSamples.setValue(18);
+		tfNumSamples.setText("18");
+		sldPos1.setValue(0);
+		tfPos1.setValue(new Float(0.0));
+		sldPos2.setValue(3600);
+		tfPos2.setValue(new Float(360.0));
+		sldFreq.setValue(150);
+		tfFreq.setText("150");
 	}// GEN-LAST:event_btnDefaultsActionPerformed
 
 	private void btnCancelActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
@@ -464,146 +561,81 @@ public class PlanckCustomizer extends AbstractCustomizer {
 
 	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
-		getAcquisitionConfig().setTotalSamples(jSliderNumSamples.getValue());
 
-		String mode = "";
-		String filter1 = "";
-		String filter2 = "";
+		final int nsamples = sldNumSamples.getValue() < 10 ? 10 : sldNumSamples.getValue();
+		getAcquisitionConfig().setTotalSamples(nsamples);
 
-		if (jRadioButtonVar.isSelected()) {
-			mode = "All";
-		} else {
-			mode = "Fixed";
-		}
+		getAcquisitionConfig().getSelectedHardwareParameter("protocolo").setParameterValue("1");
+		getAcquisitionConfig().getSelectedHardwareParameter("ang1_min").setParameterValue("" + (sldPos1.getValue() / 10.F));
+		getAcquisitionConfig().getSelectedHardwareParameter("ang1_max").setParameterValue("" + (sldPos2.getValue() / 10.F));
+		getAcquisitionConfig().getSelectedHardwareParameter("delta_ang1").setParameterValue("10");
+		getAcquisitionConfig().getSelectedHardwareParameter("delay").setParameterValue("2");
 
-		if (jRadioButtonColor1.isSelected()) {
-			filter1 = "Pink";
-		} else if (jRadioButtonColor2.isSelected()) {
-			filter1 = "Yellow";
-		} else if (jRadioButtonColor3.isSelected()) {
-			filter1 = "Green";
-		} else {
-			filter1 = "Transparent";
-		}
-
-		if (jRadioButtonGray0.isSelected()) {
-			filter2 = "0";
-		} else if (jRadioButtonGray20.isSelected()) {
-			filter2 = "20";
-		} else if (jRadioButtonGray40.isSelected()) {
-			filter2 = "40";
-		} else if (jRadioButtonGray60.isSelected()) {
-			filter2 = "60";
-		} else if (jRadioButtonGray80.isSelected()) {
-			filter2 = "80";
-		} else {
-			filter2 = "90";
-		}
-
-		getAcquisitionConfig().getSelectedHardwareParameter("Mode").setParameterValue(mode);
-		getAcquisitionConfig().getSelectedHardwareParameter("Filter1").setParameterValue(filter1);
-		getAcquisitionConfig().getSelectedHardwareParameter("Filter2").setParameterValue(filter2);
-		getAcquisitionConfig().getSelectedHardwareParameter("AngPos").setParameterValue("" + (jSliderAng.getValue() / 10f));
-
-		int nSamples = 0;
-		if (jRadioButtonVar.isSelected()) {
-			getAcquisitionConfig().getSelectedHardwareParameter("AngPos").setParameterValue("" + 12);
-		}
-
-		nSamples = jSliderNumSamples.getValue();
-
-		getAcquisitionConfig().setTotalSamples(nSamples);
-
-		for (int i = 0; i < getAcquisitionConfig().getSelectedHardwareParameters().length; i++) {
-			System.out.println(getAcquisitionConfig().getSelectedHardwareParameters()[i].getParameterName() + "="
-					+ getAcquisitionConfig().getSelectedHardwareParameters()[i].getParameterValue());
-		}
-
-		System.out.println("Total samples = " + nSamples);
+		// acqConfig.setSelectedFrequency(new Frequency((double)
+		// sldFreq.getValue(), hardwareInfo
+		// .getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(),
+		// hardwareInfo
+		// .getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
 
 		fireICustomizerListenerDone();
+
 	}// GEN-LAST:event_btnOKActionPerformed
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JButton btnCancel;
 	private javax.swing.JButton btnDefaults;
 	private javax.swing.JButton btnOK;
-	private javax.swing.ButtonGroup buttonGroup1;
-	private javax.swing.ButtonGroup buttonGroup2;
-	private javax.swing.ButtonGroup buttonGroup3;
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JLabel jLabel3;
 	private javax.swing.JPanel jPanel1;
 	private javax.swing.JPanel jPanel2;
 	private javax.swing.JPanel jPanel3;
-	private javax.swing.JPanel jPanel4;
 	private javax.swing.JPanel jPanel5;
 	private javax.swing.JPanel jPanel6;
-	private javax.swing.JPanel jPanel7;
-	private javax.swing.JPanel jPanel8;
-	private javax.swing.JPanel jPanel9;
-	private javax.swing.JRadioButton jRadioButtonColor1;
-	private javax.swing.JRadioButton jRadioButtonColor2;
-	private javax.swing.JRadioButton jRadioButtonColor3;
-	private javax.swing.JRadioButton jRadioButtonColor4;
-	private javax.swing.JRadioButton jRadioButtonFix;
-	private javax.swing.JRadioButton jRadioButtonGray0;
-	private javax.swing.JRadioButton jRadioButtonGray20;
-	private javax.swing.JRadioButton jRadioButtonGray40;
-	private javax.swing.JRadioButton jRadioButtonGray60;
-	private javax.swing.JRadioButton jRadioButtonGray80;
-	private javax.swing.JRadioButton jRadioButtonGray90;
-	private javax.swing.JRadioButton jRadioButtonVar;
-	private javax.swing.JSlider jSliderAng;
-	private javax.swing.JSlider jSliderNumSamples;
-	private javax.swing.JTextField jTextFieldAng;
-	private javax.swing.JTextField jTextFieldSamples;
-	// End of variables declaration//GEN-END:variables
+	private javax.swing.JLabel lblErrorSamplesTooHigh;
+	private javax.swing.JLabel lblErrorVolsAreEqua;
+	private javax.swing.JLabel lblSamplingIntervalTooHigh;
+	private javax.swing.JSlider sldFreq;
+	private javax.swing.JSlider sldNumSamples;
+	private javax.swing.JSlider sldPos1;
+	private javax.swing.JSlider sldPos2;
+	private javax.swing.JTextField tfFreq;
+	private javax.swing.JTextField tfNumSamples;
+	private javax.swing.JFormattedTextField tfPos1;
+	private javax.swing.JFormattedTextField tfPos2;
 
+	// End of variables declaration//GEN-END:variables
 
 	@Override
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
-			jSliderNumSamples.setValue(acqConfig.getTotalSamples());
+			System.out.println("PlanckCustomizer.setHardwareAcquisitionConfig(HardwareAcquisitionConfig  acqConfig)");
+			System.out.println("acqConfig: [" + acqConfig + "]");
 
-			jSliderAng.setValue((int) (Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("AngPos")) * 10));
-
-			final String sMode = acqConfig.getSelectedHardwareParameterValue("Mode");
-			if (sMode.equalsIgnoreCase("All")) {
-				jRadioButtonVar.setSelected(true);
-			} else {
-				jRadioButtonFix.setSelected(true);
-			}
-
-			final String filter1 = acqConfig.getSelectedHardwareParameterValue("Filter1");
-			if (filter1.equalsIgnoreCase("Pink")) {
-				jRadioButtonColor1.setSelected(true);
-			} else if (filter1.equalsIgnoreCase("Yellow")) {
-				jRadioButtonColor2.setSelected(true);
-			} else if (filter1.equalsIgnoreCase("Green")) {
-				jRadioButtonColor3.setSelected(true);
-			} else {
-				jRadioButtonColor4.setSelected(true);
-			}
-
-			final String filter2 = acqConfig.getSelectedHardwareParameterValue("Filter2");
-			if (filter2.equalsIgnoreCase("0")) {
-				jRadioButtonGray0.setSelected(true);
-			} else if (filter2.equalsIgnoreCase("20")) {
-				jRadioButtonGray20.setSelected(true);
-			} else if (filter2.equalsIgnoreCase("40")) {
-				jRadioButtonGray40.setSelected(true);
-			} else if (filter2.equalsIgnoreCase("60")) {
-				jRadioButtonGray60.setSelected(true);
-			} else if (filter2.equalsIgnoreCase("80")) {
-				jRadioButtonGray80.setSelected(true);
-			} else {
-				jRadioButtonGray90.setSelected(true);
-			}
+			// TODO
+			// int nsamples = acqConfig.getTotalSamples();
+			// sldNumSamples.setValue(nsamples);
+			// tfNumSamples.setText("" + nsamples);
+			//
+			// int freq = (int) acqConfig.getSelectedFrequency().getFrequency();
+			// sldFreq.setValue(freq);
+			// tfFreq.setText("" + freq);
+			//
+			// float pos1f =
+			// Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("UserPosLow"));
+			// int pos1 = (int) Math.floor(pos1f * 1000.F);
+			// sldPos1.setValue(pos1);
+			// tfPos1.setValue(new Float(pos1f));
+			//
+			// float pos2f =
+			// Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("UserPosHigh"));
+			// int pos2 = (int) Math.floor(pos2f * 1000.F);
+			// sldPos2.setValue(pos2);
+			// tfPos2.setValue(new Float(pos2f));
 		}
 	}
-	
+
 	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
@@ -612,23 +644,8 @@ public class PlanckCustomizer extends AbstractCustomizer {
 
 	@Override
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findStringOrDefault("planck$rec.exp.customizer.title",
-				"planck$rec.exp.customizer.title");
+		return ReCResourceBundle.findStringOrDefault("planck$rec.exp.planck.customizer.title",
+				"planck$rec.exp.planck.customizer.title");
 	}
 
-	public static void main(final String args[]) {
-		SwingUtilities.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				ReCResourceBundle.loadResourceBundle("planck",
-						"recresource:///pt/utl/ist/elab/client/planck/resources/messages");
-				final javax.swing.JFrame jf = new javax.swing.JFrame();
-				final PlanckCustomizer pc = new PlanckCustomizer();
-				jf.getContentPane().add(pc, java.awt.BorderLayout.CENTER);
-				jf.pack();
-				jf.setVisible(true);
-			}
-		});
-	}
 }
