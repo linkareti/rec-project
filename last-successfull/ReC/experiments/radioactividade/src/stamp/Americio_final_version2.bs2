@@ -1,0 +1,256 @@
+'{$STAMP BS2}
+
+'Nota que existe um protocolo nas mensagens:
+' PC -> STAMP - minúsculas
+' STAMP -> PC - maiúsculas
+
+'******* DEFAULT VARIABLES ********
+
+speedCon   	con     16468			'16572/4800 16468/9600 16780/2400 17197/1200
+spaceByte	var	byte			'Byte auxiliar (Space)
+TX		con	16
+RX		con	16
+i		var 	word
+nsamples	var	word			' nº de amostras a adquirir
+
+'******* END DEFAULT VARIABLES *******
+
+
+'******* SPECIFIC VARIABLES *******
+'I/O	CorCabo	StepMotor
+'P15	Verde		4 - Vermelho
+'P14	Amarelo	3 - Azul
+'P13	Branco	2 - Branco
+'P12	Castanho	1 - Laranja
+'P11	Roxo		"C" - Geiger, pulsos contagem
+'P10	Azul		Servo - Altura
+'P8	Preto		SW - Limitador posicao, deteccao de zero absoluto do material
+'Ordem controlo: "relay ZZ X Y", em que ZZ altura em cm, X material [0..8], Y = 0 contagem - Y=1 histograma
+'0 - Madeira, 1 - Cortica, 2 - tijolo, 3 - Cu .2mm, 4 - Cu .4mm, 5 - Cu 0.8mm; 6- Cu 1.6,7- Cu 3.2
+'8 - Ar (aberto), 9 - Chumbo (fechado)
+
+
+Pos	data(2)	'ultima posicao do step motor
+altura	var	word	'Altura [0..100]mm step=10 
+contagem	var	word	'Contagens do Geiger
+aux	var	byte
+relay	var	byte
+x	var	word	'posicao a atingir - diferencial (material)
+p	var	word	'posicao absoluta
+mat	var	byte	'material escolhido (posicao de 0 a 8)
+mode	var	byte	'mode=2 idle, mode=1 Tempo entre eventos, mode=0 contagens
+relaydone var 	bit	'0=no relay specified, 1=relay changed 
+j 	var 	word
+samplecount var byte
+
+factor	con 	15	'factor de conversao posicao material/xx
+fact2	con 	83	'factor de conversao altitude/pulso
+CTS	con	3
+'******* END SPECIFIC VARIABLES *******
+
+
+'********************************************
+'Configuração inicial
+
+InitConfig:	'exemplo de uma rotina de inicializacao
+	x=0
+
+	low 7
+	low CTS
+	low 10
+	pulsout 10,1250-(fact2*Altura)
+	pause 20
+	outD=%0000
+	dirD=%1111
+	dirb=%1111
+	read pos,p
+	x=p
+	mode=2
+	input 10
+	relaydone=0
+	samplecount=1
+	mat=p/factor
+
+
+
+'********************************************
+'Reset - retorna à base...
+Reset:
+	gosub FlashLight 'Pisca as luzinhas em cada reset... assim sabemos que lá está...
+	goto MainWait
+
+
+'********************************************
+'Não foi configurado
+Not_Configured:
+	SerOut TX,speedCon,["CONFIG_START_NOT_DONE",cr]
+
+
+'********************************************
+'Aguarda um ConfigStart pacientemente, enquanto vai informando quem é!
+MainWait:
+	mode=2
+	outd=%0000
+	SerOut TX,speedCon,["ELAB_RAD_STAMP_V02",cr]				' Identifica-se
+	high CTS
+	Serin RX,speedCon,3000,Not_Configured,[wait("cfg "),dec2 altura,spaceByte,dec1 mat,spaceByte,dec1 mode,spaceByte,dec2 samplecount]	' Espera os dados da configuracao
+	low CTS
+
+'********************************************
+'Ok, configurado! Get Ready...
+Configured:
+	SerOut TX,speedCon,[cr,"CONFIG_START_ACCEPTED",cr]	'Aceitou a configuracao
+	x=mat*factor
+	if mat<>9 then skipadjust
+	x=x-6
+
+skipadjust:
+
+	'debug "Status ", dec2 Altura,"  ",dec3 x,"  ",dec1 mode," mat=",dec1 mat,cr, $A
+
+	low CTS
+	gosub Alt
+	gosub Posi
+	i=0
+	If mode=0 then AcqLoopCounterEnter
+	If mode=1 then AcqLoopTimerEnter
+	goto MainWait
+
+	
+
+'********************************************
+'Set... Go!
+
+AcqLoopCounterEnter:
+	SerOut TX,speedCon,["STARTED",cr]		' Avisa que vai arrancar a rotina de aquisicao
+
+AcqLoopCounter:
+	count 11,2000,contagem
+	SerOut TX,speedCon,["COUNTER ",dec5 contagem,cr]
+
+ContinueCounter:
+	i=i+1
+	if i>samplecount then StopItCounter
+	goto AcqLoopCounter
+
+'********************************************
+'Stop It!
+StopItCounter:
+	goto MainWait
+
+
+
+'********************************************
+'Set... Go!
+
+AcqLoopTimerEnter:
+	SerOut TX,speedCon,["STARTED",cr]		' Avisa que vai arrancar a rotina de aquisicao
+
+AcqLoopTimer:
+	
+	j=2*(i+1)
+	'pulsin 11,1,contagem
+	SerOut TX,speedCon,["HISTOGRAM ",dec3 (i+1),spaceByte,dec3 j,spaceByte,dec3 x,cr]
+	SerOut TX, speedCon,["STOP",cr]
+	SerIn RX, speedCon,1000, ContinueTimer, [Wait("stop")]
+	SerOut TX, speedCon,[cr]
+	goto StopItTimer
+
+ContinueTimer:
+
+	i=i+1
+	if i>=32 then StopItTimer
+	goto AcqLoopTimer
+
+'********************************************
+'Stop It!
+StopItTimer:
+	goto MainWait
+
+
+'********************************************
+' Função Posi
+
+Posi:		'conversao comprimento em ciclos de rotacoes
+	if x>p then go_up
+	if x<p then go_down
+	return
+
+'********************************************
+' Função go_up
+
+go_up:	'esquerda
+	for i=1 to x-p
+		outd=%0010
+		pause 19
+		outd=%0110
+		pause 19
+		outd=%0100
+		pause 19
+		outd=%1100
+		pause 19
+		outd=%1000
+		pause 19
+		outd=%1001
+		pause 19
+		outd=%0001
+		pause 19
+		outd=%0011
+		pause 19
+	next
+	outd=%0000
+	p=x
+	write pos,p
+	return
+
+'********************************************
+' Função go_down
+
+go_down:	'direita
+	for i=1 to p-x
+		outd=%0001
+		pause 19
+		outd=%1001
+		pause 19
+		outd=%1000
+		pause 19
+		outd=%1100
+		pause 19
+		outd=%0100
+		pause 19
+		outd=%0110
+		pause 19
+		outd=%0010
+		pause 19
+		outd=%0011
+		pause 19
+	next
+	outd=%0000
+	p=x
+	write pos,p
+	return
+
+'********************************************
+' Função Alt
+Alt:
+	low 10
+	for i=1 to 40
+		pulsout 10,1250-(fact2*Altura)
+		pause 20
+	next
+	low 10
+	return
+
+'********************************************
+' Função faz piscar 4 vezes o led vermelho para debug
+FlashLight:
+	low 7
+	for i=0 to 4
+		out7 = 0
+		pause 100
+		out7 = 1
+		pause 100
+	next
+	out7 = 0
+return
+'********************************************
