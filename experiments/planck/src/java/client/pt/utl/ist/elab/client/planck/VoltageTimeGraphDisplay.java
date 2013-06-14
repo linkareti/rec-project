@@ -16,7 +16,7 @@ public class VoltageTimeGraphDisplay extends com.linkare.rec.impl.ui.graph.Defau
 	 */
         public VoltageTimeGraphDisplay() {
 		super();
-		setChannelDisplayX(1); // Tempo
-		setChannelDisplayY(0); // Tensão
+		setChannelDisplayX(0); // Tempo
+		setChannelDisplayY(1); // Tensão
 	}
 }

@@ -64,9 +64,9 @@
 		independent="false" direction="CHANNEL_INPUT">
 		<scale label="planck$rec.exp.planck.hardwareinfo.channel.0.label"
 			physicsunitname="planck$rec.exp.planck.hardwareinfo.channel.0.physicsunitname"
-			physicsunitsymbol="V" multiplier="none" selected="true">
+			physicsunitsymbol="s" multiplier="none" selected="true">
 			<min><PhysicsVal type="int">0</PhysicsVal></min>
-			<max><PhysicsVal type="int">5000</PhysicsVal></max>
+			<max><PhysicsVal type="long">225000</PhysicsVal></max>
 			<step><PhysicsVal type="int">1</PhysicsVal></step>
 			<errordefault><PhysicsVal type="float">0.001</PhysicsVal></errordefault>
 		</scale>
@@ -76,9 +76,9 @@
 		independent="false" direction="CHANNEL_INPUT">
 		<scale label="planck$rec.exp.planck.hardwareinfo.channel.1.label"
 			physicsunitname="planck$rec.exp.planck.hardwareinfo.channel.1.physicsunitname"
-			physicsunitsymbol="s" multiplier="none" selected="true">
+			physicsunitsymbol="V" multiplier="none" selected="true">
 			<min><PhysicsVal type="int">0</PhysicsVal></min>
-			<max><PhysicsVal type="int">60000</PhysicsVal></max>
+			<max><PhysicsVal type="int">5000</PhysicsVal></max>
 			<step><PhysicsVal type="int">1</PhysicsVal></step>
 			<errordefault><PhysicsVal type="float">0.001</PhysicsVal></errordefault>
 		</scale>
