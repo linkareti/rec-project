@@ -74,7 +74,7 @@ public class WorldPendulumTableModelProxy extends DefaultTableModel implements E
 			return 1;
 		}
 
-		return expDataModel.getChannelCount();
+		return expDataModel.getChannelCount() + 1;
 	}
 
 	/**
@@ -96,7 +96,14 @@ public class WorldPendulumTableModelProxy extends DefaultTableModel implements E
 		
 		int channelIndex = columnIndex;
 		
-		if (columnIndex == 2) channelIndex = columnIndex-1;
+		/*
+		* Jump "Chanel 2" (gravity value)
+		* Col 1 = samples num; col 2 = Period; col 3 = Period Error (instead of gravity)
+		* 
+		* Also: Add the velocity error
+		* col 3 = Vel; col 4 = Vel error; col 5 = Temperature
+		*/
+		if (columnIndex == 2 || columnIndex > 3) channelIndex = columnIndex - 1;
 
 		final String channelNameKey = expDataModel.getChannelConfig(channelIndex).getChannelName();
 		final String ch_name = ReCResourceBundle.findStringOrDefault(channelNameKey,channelNameKey);
@@ -110,7 +117,7 @@ public class WorldPendulumTableModelProxy extends DefaultTableModel implements E
 				
 		final String retorna = ch_name + " [" + multiplier + ph_unit_symbol + "]";
 		
-		if (columnIndex == 2) {
+		if (columnIndex == 2 || columnIndex == 4) {
 			return "\u03B5 " + retorna;
 		} else {
 			return retorna;
@@ -157,16 +164,29 @@ public class WorldPendulumTableModelProxy extends DefaultTableModel implements E
 //			return String.valueOf(rowIndex + 1);
 //		}
 		
+		
+		//
+		//Jump "Chanel 2" (gravity value)
+		//Col 1 = samples num; col 2 = Period; col 3 = Period Error (instead of gravity)
+		//
+		//Also: Add the velocity error
+		//col 3 = Vel; col 4 = Vel error; col 5 = Temperature
+		//
+		
 		int channelIndex = columnIndex;
-		if (columnIndex == 2) channelIndex = columnIndex-1;
+		if (columnIndex == 2 || columnIndex > 3) channelIndex = columnIndex-1;
 
+		
 		final PhysicsValue value = expDataModel.getValueAt(rowIndex, channelIndex);
 		
+		
+		//O primeiro valor pode aparecer arredondado, 
+		//  os outros dá mais jeito aparecer com várias casas decimais 
 		if (columnIndex == 0){
 			return value.getValue().toEngineeringNotation();
 		}
 		
-		if (columnIndex==2){
+		if (columnIndex == 2 || columnIndex == 4){
 			return value.getError();
 		}
 		else{
