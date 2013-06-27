@@ -51,6 +51,7 @@ public class PaschenDataProducer extends VirtualBaseDataSource implements Runnab
 		volt_fin = _volt_fin;
 		volt_step = _volt_step;
 		press_set = _press_set;
+		//press_set = 1.2;
 
 		state = new double[] { volt_ini, 0 , press_set, 0};
 	}
@@ -84,15 +85,23 @@ public class PaschenDataProducer extends VirtualBaseDataSource implements Runnab
 
 		@Override
 		public void run() {
+
+		System.out.println("Ola");
 			
 	    	TUeIO.tdOpen();
-			Memory config = new Memory(2);  // allocating space for config
-			config.setShort(0,(short) -1);  // setting the -1 value, if mgConfig fails this stays -1;
-			TUeApi.pgConfig(config);
-			
-			TUeApi.pg_adcSetModeLv(zero, false, false, false, false, zero, zero, false, false);
-			TUeApi.pg_dacSetModeLv(zero, (short) 1, false, false, false, zero, zero, false, false, 0);	
-			
+		Memory config = new Memory(2);  // allocating space for config
+		config.setShort(0,(short) -1);  // setting the -1 value, if mgConfig fails this stays -1;
+		TUeApi.pgConfig(config);
+		
+		TUeApi.pg_dioInit(zero, (short) 0x05);
+		TUeApi.pg_dioSetOutputTriggerMode(zero, false);
+		TUeApi.pg_dioSetOutputBits(zero , (short) 0xFFFF);
+		TUeApi.pg_dioOutputData(zero, (short) 0x100);
+		
+		TUeApi.pg_adcSetModeLv(zero, false, false, false, false, zero, zero, false, false);
+		TUeApi.pg_dacSetModeLv(zero, (short) 1, false, false, false, zero, zero, false, false, 0);	
+		TUeApi.pg_dacSetModeLv(zero, (short) 0, false, false, false, zero, zero, false, false, 0);
+		
 	        try{
 	        	serialgauge = new SerialDriver();
 	        	serialgauge.connect("/dev/ttyUSB0");
@@ -117,15 +126,23 @@ public class PaschenDataProducer extends VirtualBaseDataSource implements Runnab
 	             
 	        int timestamp = 0;
 	        
-	        /*
-	        TUeApi.pg_dacPutValue(zero, zero, (short) ((((double) press_set)/100.)*32768));
-	        
-	        try {Thread.sleep(5000);} 
-	        catch (final InterruptedException ex) {
+
+	        double pressure_inside=0;
+	        pressure_inside = serialgauge.getValuefromGauge();
+	        try {
+		       	if(pressure_inside<= press_set/100*5){
+		       		while(pressure_inside<= press_set/100*5){
+		       			TUeApi.pg_dacPutValue(zero, zero, (short) 30000);
+		       			Thread.sleep(10);
+		       			pressure_inside = serialgauge.getValuefromGauge();
+					//TUeApi.pg_dacPutValue(zero, zero, zero);
+		       		}
+		       		TUeApi.pg_dacPutValue(zero, zero, (short) 0);
+		       		Thread.sleep(100);
+		       	}
 	        }
+	       	catch (final InterruptedException ex){}
 	        
-	        TUeApi.pg_dacPutValue(zero, zero, zero);
-	        */
 			try {
 				Thread.sleep(100);
 
@@ -134,21 +151,21 @@ public class PaschenDataProducer extends VirtualBaseDataSource implements Runnab
 		        for(dacValue = initdac; !stopped && dacValue<=finaldac; dacValue+=stepdac){
 		            
 		            TUeApi.pg_dacPutValue(zero, (short) 1, dacValue);//Value to DAC Channel 2 controls Fug Voltage
-		                                     
+	                                     
 		            Thread.sleep((long) (volt_step*10));
 		                
-		                TUeApi.pg_adcSoftwareTrigger(zero);//Trig ADC to get data
+	                TUeApi.pg_adcSoftwareTrigger(zero);//Trig ADC to get data
 
-		                TUeApi.pg_adcGetValue(zero, zero, adcValue);//Retrieve data from channel1
+	                TUeApi.pg_adcGetValue(zero, zero, adcValue);//Retrieve data from channel1
 		                //adcValChannel1 = (20./32768.)*adcValue.getShort(0);
-		                adcValChannel1 = (3500./32768.)*adcValue.getShort(0);
-		  //              adcValChannel1 = dacValue;
+	                adcValChannel1 = (3500./32768.)*adcValue.getShort(0);
+		                //adcValChannel1 = (3500./32768.)*dacValue < 350 ? (3500./32768.)*dacValue : 302 ;
 		                
-		                
-		                TUeApi.pg_adcGetValue(zero, (short) 1, adcValue);//Retrieve data from channel2
+
+	                TUeApi.pg_adcGetValue(zero, (short) 1, adcValue);//Retrieve data from channel2
 		                //adcValChannel2 = (20./32768.)*adcValue.getShort(0);
-		                adcValChannel2 = (4/32768.)*adcValue.getShort(0);
-		   //             adcValChannel2 = dacValue;
+	                adcValChannel2 = (4/32768.)*adcValue.getShort(0);
+		                //adcValChannel2 = (3500./32768.)*dacValue < 350 ? 0 : 3.98 ;
 
 		                
 						value = new PhysicsValue[NUM_CHANNELS];
@@ -178,10 +195,24 @@ public class PaschenDataProducer extends VirtualBaseDataSource implements Runnab
 				endProduction();
 
 		        TUeApi.pg_dacPutValue(zero, (short) 1, zero);//Value to DAC Channel 2 controls Fug Voltage
-		        //TUeApi.pg_dacPutValue(zero, zero, zero);//Value to DAC Channel 1 controls Pressure
+		        TUeApi.pg_dacPutValue(zero, zero, zero);//Value to DAC Channel 1 controls Pressure (close the valve)
 		        
 		        Thread.sleep(100); 
-				
+			
+		        TUeApi.pg_dacPutValue(zero, zero, zero);//Value to DAC Channel 1 controls Pressure (close the valve)
+		        Thread.sleep(100);
+			
+
+			TUeApi.pg_dioOutputData(zero, (short) 0);
+
+			
+		    while(pressure_inside>= 0.05){
+		       			pressure_inside = serialgauge.getValuefromGauge();
+		       			Thread.sleep(1000);
+		    }
+
+			Thread.sleep(100);
+
 		    	TUeIO.tdClose();
 		    	serialgauge.closeCommPort();
 				
@@ -198,15 +229,6 @@ public class PaschenDataProducer extends VirtualBaseDataSource implements Runnab
 	}
 
 	public void endProduction() {
-        TUeApi.pg_dacPutValue(zero, (short) 1, zero);//Value to DAC Channel 2 controls Fug Voltage
-        //TUeApi.pg_dacPutValue(zero, zero, zero);//Value to DAC Channel 1 controls Pressure
-        
-        try {Thread.sleep(100);} 
-        catch (final InterruptedException ex) {
-        } 
-		
-    	TUeIO.tdClose();
-    	serialgauge.closeCommPort();
 		
 		stopped = true;
 		setDataSourceStoped();
@@ -215,15 +237,25 @@ public class PaschenDataProducer extends VirtualBaseDataSource implements Runnab
 	@Override
 	public void stopNow() {
         TUeApi.pg_dacPutValue(zero, (short) 1, zero);//Value to DAC Channel 2 controls Fug Voltage
-        //TUeApi.pg_dacPutValue(zero, zero, zero);//Value to DAC Channel 1 controls Pressure
+        TUeApi.pg_dacPutValue(zero, zero, zero);//Value to DAC Channel 1 controls Pressure
         
-        try {Thread.sleep(100);} 
+        try {
+	        Thread.sleep(100);
+			TUeApi.pg_dioOutputData(zero, (short) 0);
+			
+			double pressure_inside = serialgauge.getValuefromGauge();
+		    while(pressure_inside>= 0.05){
+       			pressure_inside = serialgauge.getValuefromGauge();
+       			Thread.sleep(1000);
+		    }
+	
+        }
         catch (final InterruptedException ex) {
         } 
 		
     	TUeIO.tdClose();
     	serialgauge.closeCommPort();
-		
+    	
 		stopped = true;
 		setDataSourceStoped();
 	}

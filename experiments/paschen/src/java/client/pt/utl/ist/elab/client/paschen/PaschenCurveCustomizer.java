@@ -6,6 +6,11 @@
 
 package pt.utl.ist.elab.client.paschen;
 
+import java.util.Dictionary;
+import java.util.Hashtable;
+
+import javax.swing.JLabel;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.synch.Frequency;
 import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
@@ -27,6 +32,7 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
 	/** Creates new form PaschenCurveCustomizer */
 	public PaschenCurveCustomizer() {
 		initComponents();
+		initComponentsManual();
 	}
 
 	/**
@@ -83,7 +89,8 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
         gridBagConstraints.weighty = 10.0;
         jPanel1.add(sldSig1, gridBagConstraints);
 
-        tfSig1.setText("0000");
+        tfSig1.setText("0.0");
+        tfSig1.setPreferredSize( new java.awt.Dimension( 40, 20 ) );
         tfSig1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfSig1ActionPerformed(evt);
@@ -94,7 +101,7 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
                 tfSig1FocusLost(evt);
             }
         });
-        jPanel1.add(tfSig1, new java.awt.GridBagConstraints());
+        jPanel1.add(tfSig1);//, new java.awt.GridBagConstraints());
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.title3","paschen$rec.exp.paschen.customizer.lbl.title3")));
         jPanel2.setToolTipText(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.title3","paschen$rec.exp.paschen.customizer.lbl.title3"));
@@ -123,7 +130,8 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
         gridBagConstraints.weighty = 10.0;
         jPanel2.add(sldSig2, gridBagConstraints);
 
-        tfSig2.setText("0000");
+        tfSig2.setText("0.0");
+        tfSig2.setPreferredSize( new java.awt.Dimension( 40, 20 ) );
         tfSig2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfSig2ActionPerformed(evt);
@@ -136,7 +144,7 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel2.add(tfSig2, gridBagConstraints);
+        jPanel2.add(tfSig2);//, gridBagConstraints);
 
         btnOK.setText(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.ok","paschen$rec.exp.paschen.customizer.lbl.ok"));
         btnOK.addActionListener(new java.awt.event.ActionListener() {
@@ -180,7 +188,8 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
         gridBagConstraints.weighty = 10.0;
         jPanel3.add(sldSig3, gridBagConstraints);
 
-        tfSig3.setText("0000");
+        tfSig3.setText("0.0");
+        tfSig3.setPreferredSize( new java.awt.Dimension( 40, 20 ) );
         tfSig3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfSig3ActionPerformed(evt);
@@ -192,8 +201,10 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel3.add(tfSig3, gridBagConstraints);
+        //gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        //jPanel3.add(tfSig3, gridBagConstraints);
+        jPanel3.add(tfSig3);
+        
 
         btnDefConfig.setText(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.dftcfg","paschen$rec.exp.paschen.customizer.lbl.dftcfg"));
         btnDefConfig.addActionListener(new java.awt.event.ActionListener() {
@@ -211,8 +222,8 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
         jPanel4.setLayout(new java.awt.GridBagLayout());
 
         sldSig4.setMajorTickSpacing(10);
-        sldSig4.setMaximum(51);
-        sldSig4.setMinimum(1);
+        sldSig4.setMaximum(50);
+        sldSig4.setMinimum(0);
         sldSig4.setMinorTickSpacing(5);
         sldSig4.setPaintLabels(true);
         sldSig4.setPaintTicks(true);
@@ -233,7 +244,8 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
         gridBagConstraints.weighty = 10.0;
         jPanel4.add(sldSig4, gridBagConstraints);
 
-        tfSig4.setText("0001");
+        tfSig4.setText("1");
+        tfSig4.setPreferredSize( new java.awt.Dimension( 40, 20 ) );
         tfSig4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfSig4ActionPerformed(evt);
@@ -246,7 +258,7 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel4.add(tfSig4, gridBagConstraints);
+        jPanel4.add(tfSig4);//, gridBagConstraints);
 
         
         
@@ -262,7 +274,7 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnClose)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE)//dcaqui para baix pode dar bodega
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -308,7 +320,7 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
 	}// GEN-END:initComponents
 
     private void sldSig1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldSig1StateChanged
-        tfSig1.setText(Integer.toString(sldSig1.getValue()));
+        tfSig1.setText(Float.toString(sldSig1.getValue()/1000.F));
         
         if(sldSig1.getValue() > sldSig2.getValue()){     
             btnOK.setEnabled(false);
@@ -326,7 +338,7 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
     }//GEN-LAST:event_tfSig1FocusLost
 
     private void sldSig2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldSig2StateChanged
-        tfSig2.setText(Integer.toString(sldSig2.getValue()));
+        tfSig2.setText(Float.toString(sldSig2.getValue()/1000.F));
         
         if(sldSig2.getValue() <= sldSig1.getValue()){
             btnOK.setEnabled(false);
@@ -381,7 +393,15 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
     }//GEN-LAST:event_tfSig1ActionPerformed
 
     private void sldSig3StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldSig3StateChanged
-        tfSig3.setText(Integer.toString(sldSig3.getValue()));
+        tfSig3.setText(Float.toString(sldSig3.getValue()/20.F));
+        
+        if(sldSig3.getValue() == 0){
+            btnOK.setEnabled(false);
+        }
+        else if(sldSig3.getValue() > 0){
+            btnOK.setEnabled(true);
+        }
+        
     }//GEN-LAST:event_sldSig3StateChanged
 
     private void tfSig3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfSig3FocusLost
@@ -390,16 +410,24 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
 
     private void tfSig3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSig3ActionPerformed
         sldSig3.setValue(Integer.parseInt(tfSig3.getText()));
+        
+        if(Integer.parseInt(tfSig3.getText()) <= 0){
+            btnOK.setEnabled(false);
+        }
+        else if(Integer.parseInt(tfSig3.getText()) > 0){
+            btnOK.setEnabled(true);
+        }
+        
     }//GEN-LAST:event_tfSig3ActionPerformed
 
     private void btnDefConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDefConfigActionPerformed
         
         sldSig1.setValue(0);
         tfSig1.setText("0");
-        sldSig2.setValue(2000);
-        tfSig2.setText("2000");
-        sldSig3.setValue(50);
-        tfSig3.setText("50");
+        sldSig2.setValue(800);
+        tfSig2.setText("0.800");
+        sldSig3.setValue(20);
+        tfSig3.setText("1.0");
         sldSig4.setValue(10);
         tfSig4.setText("10");
         
@@ -412,10 +440,18 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
 
     private void sldSig4StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldSig4StateChanged
         tfSig4.setText(Integer.toString(sldSig4.getValue()));
+        
+        if(sldSig4.getValue() == 0){
+            btnOK.setEnabled(false);
+        }
+        else if(sldSig4.getValue() > 0){
+            btnOK.setEnabled(true);
+        }
     }//GEN-LAST:event_sldSig4StateChanged
 
     private void tfSig4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSig4ActionPerformed
         sldSig4.setValue(Integer.parseInt(tfSig4.getText()));
+        
     }//GEN-LAST:event_tfSig4ActionPerformed
 
     private void tfSig4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfSig4FocusLost
@@ -467,6 +503,32 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
 	@Override
 	public String getCustomizerTitle() {
 		return "Shot Configuration Utility";
+	}
+	
+	private void initComponentsManual() {
+
+		final Dictionary<Integer, JLabel> slidersVoltageLabels = new Hashtable<Integer, JLabel>();
+		slidersVoltageLabels.put(new Integer(0), new JLabel("0.0"));
+		slidersVoltageLabels.put(new Integer(500), new JLabel("0.5"));
+		slidersVoltageLabels.put(new Integer(1000), new JLabel("1.0"));
+		slidersVoltageLabels.put(new Integer(1500), new JLabel("1.5"));
+		slidersVoltageLabels.put(new Integer(2000), new JLabel("2.0"));
+		slidersVoltageLabels.put(new Integer(2500), new JLabel("2.5"));
+		slidersVoltageLabels.put(new Integer(3000), new JLabel("3.0"));
+		
+		sldSig1.setLabelTable(slidersVoltageLabels);
+		sldSig2.setLabelTable(slidersVoltageLabels);
+
+		final Dictionary<Integer, JLabel> slidersPressLabels = new Hashtable<Integer, JLabel>();
+		slidersPressLabels.put(new Integer(0), new JLabel("0.0"));
+		slidersPressLabels.put(new Integer(20), new JLabel("1.0"));
+		slidersPressLabels.put(new Integer(40), new JLabel("2.0"));
+		slidersPressLabels.put(new Integer(60), new JLabel("3.0"));
+		slidersPressLabels.put(new Integer(80), new JLabel("4.0"));
+		slidersPressLabels.put(new Integer(100), new JLabel("5.0"));
+		
+		sldSig3.setLabelTable(slidersPressLabels);
+
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
