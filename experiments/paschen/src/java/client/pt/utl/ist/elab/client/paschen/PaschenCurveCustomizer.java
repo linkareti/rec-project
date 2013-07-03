@@ -46,18 +46,25 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
         jPanel1 = new javax.swing.JPanel();
         sldSig1 = new javax.swing.JSlider();
         tfSig1 = new javax.swing.JFormattedTextField();
+        
         jPanel2 = new javax.swing.JPanel();
         sldSig2 = new javax.swing.JSlider();
         tfSig2 = new javax.swing.JFormattedTextField();
-        btnOK = new javax.swing.JButton();
-        btnClose = new javax.swing.JButton();
+        jLabelSig2Error = new javax.swing.JLabel();
+        
         jPanel3 = new javax.swing.JPanel();
         sldSig3 = new javax.swing.JSlider();
         tfSig3 = new javax.swing.JFormattedTextField();
-        btnDefConfig = new javax.swing.JButton();
+        jLabelSig3Error = new javax.swing.JLabel();
+        
         jPanel4 = new javax.swing.JPanel();
         sldSig4 = new javax.swing.JSlider();
         tfSig4 = new javax.swing.JFormattedTextField();
+        jLabelSig4Error = new javax.swing.JLabel();
+        
+        btnOK = new javax.swing.JButton();
+        btnClose = new javax.swing.JButton();
+        btnDefConfig = new javax.swing.JButton();
 
         //setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         //setTitle("Paschen Curve Customizer");
@@ -101,7 +108,10 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
                 tfSig1FocusLost(evt);
             }
         });
-        jPanel1.add(tfSig1);//, new java.awt.GridBagConstraints());
+        
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel1.add(tfSig1, new java.awt.GridBagConstraints());
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.title3","paschen$rec.exp.paschen.customizer.lbl.title3")));
         jPanel2.setToolTipText(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.title3","paschen$rec.exp.paschen.customizer.lbl.title3"));
@@ -115,7 +125,7 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
         sldSig2.setPaintLabels(true);
         sldSig2.setPaintTicks(true);
         sldSig2.setPaintTrack(false);
-        sldSig2.setValue(0);
+        sldSig2.setValue(300);
         sldSig2.setMinimumSize(new java.awt.Dimension(250, 42));
         sldSig2.setPreferredSize(new java.awt.Dimension(250, 42));
         sldSig2.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -130,13 +140,14 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
         gridBagConstraints.weighty = 10.0;
         jPanel2.add(sldSig2, gridBagConstraints);
 
-        tfSig2.setText("0.0");
+        tfSig2.setText("0.3");
         tfSig2.setPreferredSize( new java.awt.Dimension( 40, 20 ) );
         tfSig2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfSig2ActionPerformed(evt);
             }
         });
+        
         tfSig2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tfSig2FocusLost(evt);
@@ -144,7 +155,19 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel2.add(tfSig2);//, gridBagConstraints);
+        jPanel2.add(tfSig2, gridBagConstraints);
+        
+        jLabelSig2Error.setForeground(java.awt.Color.RED);
+        jLabelSig2Error.setText((ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.warning2","paschen$rec.exp.paschen.customizer.lbl.warning2"))); // NOI18N
+        jLabelSig2Error.setVisible(false);
+        
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel2.add(jLabelSig2Error, gridBagConstraints);
+       
 
         btnOK.setText(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.ok","paschen$rec.exp.paschen.customizer.lbl.ok"));
         btnOK.addActionListener(new java.awt.event.ActionListener() {
@@ -173,7 +196,7 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
         sldSig3.setPaintLabels(true);
         sldSig3.setPaintTicks(true);
         sldSig3.setPaintTrack(false);
-        sldSig3.setValue(0);
+        sldSig3.setValue(10);
         sldSig3.setMinimumSize(new java.awt.Dimension(250, 42));
         sldSig3.setPreferredSize(new java.awt.Dimension(250, 42));
         sldSig3.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -188,7 +211,7 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
         gridBagConstraints.weighty = 10.0;
         jPanel3.add(sldSig3, gridBagConstraints);
 
-        tfSig3.setText("0.0");
+        tfSig3.setText("0.5");
         tfSig3.setPreferredSize( new java.awt.Dimension( 40, 20 ) );
         tfSig3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,10 +224,19 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        //gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        //jPanel3.add(tfSig3, gridBagConstraints);
-        jPanel3.add(tfSig3);
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel3.add(tfSig3, gridBagConstraints);
         
+        jLabelSig3Error.setForeground(java.awt.Color.RED);
+        jLabelSig3Error.setText((ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.warning1","paschen$rec.exp.paschen.customizer.lbl.warning1"))); // NOI18N
+        jLabelSig3Error.setVisible(false);
+        
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel3.add(jLabelSig3Error, gridBagConstraints);
 
         btnDefConfig.setText(ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.dftcfg","paschen$rec.exp.paschen.customizer.lbl.dftcfg"));
         btnDefConfig.addActionListener(new java.awt.event.ActionListener() {
@@ -258,9 +290,18 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel4.add(tfSig4);//, gridBagConstraints);
+        jPanel4.add(tfSig4, gridBagConstraints);
 
+        jLabelSig4Error.setForeground(java.awt.Color.RED);
+        jLabelSig4Error.setText((ReCResourceBundle.findStringOrDefault("paschen$rec.exp.paschen.customizer.lbl.warning1","paschen$rec.exp.paschen.customizer.lbl.warning1"))); // NOI18N
+        jLabelSig4Error.setVisible(false);
         
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel4.add(jLabelSig4Error, gridBagConstraints);
         
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -275,10 +316,10 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
                 .addComponent(btnClose)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                 /*.addGroup(layout.createSequentialGroup()
             	.addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -324,17 +365,21 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
         
         if(sldSig1.getValue() > sldSig2.getValue()){     
             btnOK.setEnabled(false);
+            jLabelSig2Error.setVisible(true);
         }
         
         else if(sldSig1.getValue() < sldSig2.getValue()){
             btnOK.setEnabled(true);
+            jLabelSig2Error.setVisible(false);
         }
         
     }//GEN-LAST:event_sldSig1StateChanged
 
     private void tfSig1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfSig1FocusLost
-        sldSig1.setValue(Integer.parseInt(tfSig1.getText()));
-        
+    	int parsed = (int) (Double.parseDouble(tfSig1.getText())*1000);
+    	if(parsed > sldSig1.getMaximum()){parsed = sldSig1.getMaximum();}
+    	if(parsed < sldSig1.getMinimum()){parsed = sldSig1.getMinimum();}	
+    	sldSig1.setValue(parsed); 
     }//GEN-LAST:event_tfSig1FocusLost
 
     private void sldSig2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldSig2StateChanged
@@ -342,17 +387,20 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
         
         if(sldSig2.getValue() <= sldSig1.getValue()){
             btnOK.setEnabled(false);
+            jLabelSig2Error.setVisible(true);
         }
         else if(sldSig2.getValue() > sldSig1.getValue()){
             btnOK.setEnabled(true);
+            jLabelSig2Error.setVisible(false);
         }
         
     }//GEN-LAST:event_sldSig2StateChanged
 
     private void tfSig2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfSig2FocusLost
-        sldSig2.setValue(Integer.parseInt(tfSig2.getText()));
-        
-        
+    	int parsed = (int) (Double.parseDouble(tfSig2.getText())*1000);
+    	if(parsed > sldSig2.getMaximum()){parsed = sldSig2.getMaximum();}
+    	if(parsed < sldSig2.getMinimum()){parsed = sldSig2.getMinimum();}	
+    	sldSig2.setValue(parsed);
     }//GEN-LAST:event_tfSig2FocusLost
 
     @SuppressWarnings("static-access")//TODO: Watch out for static access
@@ -365,7 +413,7 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
 
 		getAcquisitionConfig().setSelectedFrequency(new Frequency(100d, getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency()
 				.getMultiplier(), getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
-		getAcquisitionConfig().setTotalSamples(3000);
+		getAcquisitionConfig().setTotalSamples(3000+((int) ((volt_fin-volt_ini)/volt_step)));
 
 		getAcquisitionConfig().getSelectedHardwareParameter("volt_ini").setParameterValue("" + (float) volt_ini);
 		getAcquisitionConfig().getSelectedHardwareParameter("volt_fin").setParameterValue("" + (float) volt_fin);
@@ -388,8 +436,10 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void tfSig1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSig1ActionPerformed
-        sldSig1.setValue(Integer.parseInt(tfSig1.getText()));
-        
+    	int parsed = (int) (Double.parseDouble(tfSig1.getText())*1000);
+    	if(parsed > sldSig1.getMaximum()){parsed = sldSig1.getMaximum();}
+    	if(parsed < sldSig1.getMinimum()){parsed = sldSig1.getMinimum();}	
+    	sldSig1.setValue(parsed);
     }//GEN-LAST:event_tfSig1ActionPerformed
 
     private void sldSig3StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldSig3StateChanged
@@ -397,27 +447,27 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
         
         if(sldSig3.getValue() == 0){
             btnOK.setEnabled(false);
+            jLabelSig3Error.setVisible(true);
         }
         else if(sldSig3.getValue() > 0){
             btnOK.setEnabled(true);
+            jLabelSig3Error.setVisible(false);
         }
         
     }//GEN-LAST:event_sldSig3StateChanged
 
     private void tfSig3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfSig3FocusLost
-        sldSig3.setValue(Integer.parseInt(tfSig3.getText()));
+    	int parsed = (int) (Double.parseDouble(tfSig3.getText())*20);
+    	if(parsed > sldSig3.getMaximum()){parsed = sldSig3.getMaximum();}
+    	if(parsed < sldSig3.getMinimum()){parsed = sldSig3.getMinimum();}	
+    	sldSig3.setValue(parsed);   
     }//GEN-LAST:event_tfSig3FocusLost
 
     private void tfSig3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSig3ActionPerformed
-        sldSig3.setValue(Integer.parseInt(tfSig3.getText()));
-        
-        if(Integer.parseInt(tfSig3.getText()) <= 0){
-            btnOK.setEnabled(false);
-        }
-        else if(Integer.parseInt(tfSig3.getText()) > 0){
-            btnOK.setEnabled(true);
-        }
-        
+    	int parsed = (int) (Double.parseDouble(tfSig3.getText())*20);
+    	if(parsed > sldSig3.getMaximum()){parsed = sldSig3.getMaximum();}
+    	if(parsed < sldSig3.getMinimum()){parsed = sldSig3.getMinimum();}	
+    	sldSig3.setValue(parsed);      
     }//GEN-LAST:event_tfSig3ActionPerformed
 
     private void btnDefConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDefConfigActionPerformed
@@ -435,7 +485,10 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
     }//GEN-LAST:event_btnDefConfigActionPerformed
 
     private void tfSig2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSig2ActionPerformed
-        sldSig2.setValue(Integer.parseInt(tfSig2.getText()));
+    	int parsed = (int) (Double.parseDouble(tfSig2.getText())*1000);
+    	if(parsed > sldSig2.getMaximum()){parsed = sldSig2.getMaximum();}
+    	if(parsed < sldSig2.getMinimum()){parsed = sldSig2.getMinimum();}	
+    	sldSig2.setValue(parsed);
     }//GEN-LAST:event_tfSig2ActionPerformed
 
     private void sldSig4StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldSig4StateChanged
@@ -443,19 +496,26 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
         
         if(sldSig4.getValue() == 0){
             btnOK.setEnabled(false);
+            jLabelSig4Error.setVisible(true);
         }
         else if(sldSig4.getValue() > 0){
             btnOK.setEnabled(true);
+            jLabelSig4Error.setVisible(false);
         }
     }//GEN-LAST:event_sldSig4StateChanged
 
     private void tfSig4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSig4ActionPerformed
-        sldSig4.setValue(Integer.parseInt(tfSig4.getText()));
-        
+    	int parsed = (int) (Double.parseDouble(tfSig4.getText()));
+    	if(parsed > sldSig4.getMaximum()){parsed = sldSig4.getMaximum();}
+    	if(parsed < sldSig4.getMinimum()){parsed = sldSig4.getMinimum();}	
+    	sldSig4.setValue(parsed);
     }//GEN-LAST:event_tfSig4ActionPerformed
 
     private void tfSig4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfSig4FocusLost
-        sldSig4.setValue(Integer.parseInt(tfSig4.getText()));
+    	int parsed = (int) (Double.parseDouble(tfSig4.getText()));
+    	if(parsed > sldSig4.getMaximum()){parsed = sldSig4.getMaximum();}
+    	if(parsed < sldSig4.getMinimum()){parsed = sldSig4.getMinimum();}	
+    	sldSig4.setValue(parsed);
     }//GEN-LAST:event_tfSig4FocusLost	
 
 	/**
@@ -547,6 +607,10 @@ public class PaschenCurveCustomizer extends AbstractCustomizer {
     private javax.swing.JFormattedTextField tfSig2;
     private javax.swing.JFormattedTextField tfSig3;
     private javax.swing.JFormattedTextField tfSig4;
+    private javax.swing.JLabel jLabelSig2Error;
+    private javax.swing.JLabel jLabelSig3Error;
+    private javax.swing.JLabel jLabelSig4Error;
+    
 	// End of variables declaration//GEN-END:variables
 
 }

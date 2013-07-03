@@ -86,9 +86,9 @@ public class PaschenDataProducer extends VirtualBaseDataSource implements Runnab
 		@Override
 		public void run() {
 
-		System.out.println("Ola");
+	
 			
-	    	TUeIO.tdOpen();
+	    TUeIO.tdOpen();
 		Memory config = new Memory(2);  // allocating space for config
 		config.setShort(0,(short) -1);  // setting the -1 value, if mgConfig fails this stays -1;
 		TUeApi.pgConfig(config);
@@ -102,123 +102,167 @@ public class PaschenDataProducer extends VirtualBaseDataSource implements Runnab
 		TUeApi.pg_dacSetModeLv(zero, (short) 1, false, false, false, zero, zero, false, false, 0);	
 		TUeApi.pg_dacSetModeLv(zero, (short) 0, false, false, false, zero, zero, false, false, 0);
 		
-	        try{
-	        	serialgauge = new SerialDriver();
-	        	serialgauge.connect("/dev/ttyUSB0");
-	        	serialgauge.configureGauge();
-			} 
-	        catch (Exception e) {
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
-			}
+        try{
+        	serialgauge = new SerialDriver();
+        	serialgauge.connect("/dev/ttyUSB0");
+        	serialgauge.configureGauge();
+		} 
+        catch (Exception e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		}
 			
-	        Memory adcValue = new Memory(2);  // allocating space
-	        adcValue.clear();
-	        
-	        short dacValue;
+        Memory adcValue = new Memory(2);  // allocating space
+        adcValue.clear();
+        
+        short dacValue;
 
-	        double adcValChannel1 = 0;
-	        double adcValChannel2 = 0;
-	        
-	        short initdac = (short) ((((double) volt_ini)/3500.)*32768);
-	        short finaldac= (short) ((((double) volt_fin)/3500.)*32768);
-	        short stepdac = (short) ((((double) volt_step)/3500.)*32768);
-	             
-	        int timestamp = 0;
-	        
-
-	        double pressure_inside=0;
-	        pressure_inside = serialgauge.getValuefromGauge();
-	        try {
-		       	if(pressure_inside<= press_set/100*5){
-		       		while(pressure_inside<= press_set/100*5){
-		       			TUeApi.pg_dacPutValue(zero, zero, (short) 30000);
-		       			Thread.sleep(10);
-		       			pressure_inside = serialgauge.getValuefromGauge();
-					//TUeApi.pg_dacPutValue(zero, zero, zero);
-		       		}
-		       		TUeApi.pg_dacPutValue(zero, zero, (short) 0);
-		       		Thread.sleep(100);
-		       	}
-	        }
-	       	catch (final InterruptedException ex){}
-	        
-			try {
-				Thread.sleep(100);
-
-				PhysicsValue[] value;
-
-		        for(dacValue = initdac; !stopped && dacValue<=finaldac; dacValue+=stepdac){
-		            
-		            TUeApi.pg_dacPutValue(zero, (short) 1, dacValue);//Value to DAC Channel 2 controls Fug Voltage
-	                                     
-		            Thread.sleep((long) (volt_step*10));
-		                
-	                TUeApi.pg_adcSoftwareTrigger(zero);//Trig ADC to get data
-
-	                TUeApi.pg_adcGetValue(zero, zero, adcValue);//Retrieve data from channel1
-		                //adcValChannel1 = (20./32768.)*adcValue.getShort(0);
-	                adcValChannel1 = (3500./32768.)*adcValue.getShort(0);
-		                //adcValChannel1 = (3500./32768.)*dacValue < 350 ? (3500./32768.)*dacValue : 302 ;
-		                
-
-	                TUeApi.pg_adcGetValue(zero, (short) 1, adcValue);//Retrieve data from channel2
-		                //adcValChannel2 = (20./32768.)*adcValue.getShort(0);
-	                adcValChannel2 = (4/32768.)*adcValue.getShort(0);
-		                //adcValChannel2 = (3500./32768.)*dacValue < 350 ? 0 : 3.98 ;
-
-		                
-						value = new PhysicsValue[NUM_CHANNELS];
-
-						value[0] = new PhysicsValue(PhysicsValFactory.fromFloat((float) adcValChannel1), getAcquisitionHeader()
+        double adcValChannel1 = 0;
+        double adcValChannel2 = 0;
+        
+        short initdac = (short) ((((double) volt_ini)/3500.)*32768);
+        short finaldac= (short) ((((double) volt_fin)/3500.)*32768);
+        short stepdac = (short) ((((double) volt_step)/3500.)*32768);
+             
+        int timestamp = 0;
+        
+        PhysicsValue[] value;
+        
+        int i1=0;
+        
+        double pressure_inside=0;
+        pressure_inside = serialgauge.getValuefromGauge();
+        try {
+        	if(pressure_inside> press_set/100*5){
+			    while(pressure_inside> press_set/100*5){
+	       			pressure_inside = serialgauge.getValuefromGauge();
+	       			Thread.sleep(1000);
+			    }
+        	}
+        	
+	       	if(pressure_inside<= press_set/100*5){
+	       		while(pressure_inside<= press_set/100*5){
+	       			TUeApi.pg_dacPutValue(zero, zero, (short) 30000);
+	       			Thread.sleep(10);
+	       			pressure_inside = serialgauge.getValuefromGauge();
+	       			i1++;
+	       			if(i1==500){
+	       				i1=0;
+	       				timestamp++;
+	       				value = new PhysicsValue[NUM_CHANNELS];
+						value[0] = new PhysicsValue(PhysicsValFactory.fromFloat(0), getAcquisitionHeader()
 								.getChannelsConfig(0).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
 								.getChannelsConfig(0).getSelectedScale().getMultiplier());
-						value[1] = new PhysicsValue(PhysicsValFactory.fromFloat((float) adcValChannel2), getAcquisitionHeader()
+						value[1] = new PhysicsValue(PhysicsValFactory.fromFloat(0), getAcquisitionHeader()
 								.getChannelsConfig(1).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
 								.getChannelsConfig(1).getSelectedScale().getMultiplier());
-						value[2] = new PhysicsValue(PhysicsValFactory.fromFloat((float) serialgauge.getValuefromGauge()), getAcquisitionHeader()
+						value[2] = new PhysicsValue(PhysicsValFactory.fromFloat((float) pressure_inside), getAcquisitionHeader()
 								.getChannelsConfig(2).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
 								.getChannelsConfig(2).getSelectedScale().getMultiplier());
 						value[3] = new PhysicsValue(PhysicsValFactory.fromFloat((float) timestamp), getAcquisitionHeader()
 								.getChannelsConfig(3).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
 								.getChannelsConfig(3).getSelectedScale().getMultiplier());
-						
-						Thread.sleep(100);
-						
 						addDataRow(value);
-		                
-		                timestamp += stepdac;
-		        
-		        }
-
-				join(100);
-				endProduction();
-
-		        TUeApi.pg_dacPutValue(zero, (short) 1, zero);//Value to DAC Channel 2 controls Fug Voltage
-		        TUeApi.pg_dacPutValue(zero, zero, zero);//Value to DAC Channel 1 controls Pressure (close the valve)
-		        
-		        Thread.sleep(100); 
-			
-		        TUeApi.pg_dacPutValue(zero, zero, zero);//Value to DAC Channel 1 controls Pressure (close the valve)
-		        Thread.sleep(100);
-			
-
-			TUeApi.pg_dioOutputData(zero, (short) 0);
-
-			
-		    while(pressure_inside>= 0.05){
-		       			pressure_inside = serialgauge.getValuefromGauge();
-		       			Thread.sleep(1000);
-		    }
-
+	       			}
+				//TUeApi.pg_dacPutValue(zero, zero, zero);
+	       		}
+	       		TUeApi.pg_dacPutValue(zero, zero, (short) 0);
+	       		Thread.sleep(100);
+	       	}
+        }
+       	catch (final InterruptedException ex){}
+        
+		try {
 			Thread.sleep(100);
 
-		    	TUeIO.tdClose();
-		    	serialgauge.closeCommPort();
-				
-				driver.stopVirtualHardware();
-			} catch (final InterruptedException ie) {
+			
+
+	        for(dacValue = initdac; !stopped && dacValue<=finaldac; dacValue+=stepdac){
+	            
+	            TUeApi.pg_dacPutValue(zero, (short) 1, dacValue);//Value to DAC Channel 2 controls Fug Voltage
+                                     
+	            Thread.sleep((long) (volt_step*10));
+	                
+                TUeApi.pg_adcSoftwareTrigger(zero);//Trig ADC to get data
+
+                TUeApi.pg_adcGetValue(zero, zero, adcValue);//Retrieve data from channel1
+	                //adcValChannel1 = (20./32768.)*adcValue.getShort(0);
+                adcValChannel1 = (3500./32768.)*adcValue.getShort(0);
+	                //adcValChannel1 = (3500./32768.)*dacValue < 350 ? (3500./32768.)*dacValue : 302 ;
+	                
+
+                TUeApi.pg_adcGetValue(zero, (short) 1, adcValue);//Retrieve data from channel2
+	                //adcValChannel2 = (20./32768.)*adcValue.getShort(0);
+                adcValChannel2 = (4/32768.)*adcValue.getShort(0);
+	                //adcValChannel2 = (3500./32768.)*dacValue < 350 ? 0 : 3.98 ;
+
+	                
+					value = new PhysicsValue[NUM_CHANNELS];
+
+					value[0] = new PhysicsValue(PhysicsValFactory.fromFloat((float) adcValChannel1), getAcquisitionHeader()
+							.getChannelsConfig(0).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
+							.getChannelsConfig(0).getSelectedScale().getMultiplier());
+					value[1] = new PhysicsValue(PhysicsValFactory.fromFloat((float) adcValChannel2), getAcquisitionHeader()
+							.getChannelsConfig(1).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
+							.getChannelsConfig(1).getSelectedScale().getMultiplier());
+					value[2] = new PhysicsValue(PhysicsValFactory.fromFloat((float) serialgauge.getValuefromGauge()), getAcquisitionHeader()
+							.getChannelsConfig(2).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
+							.getChannelsConfig(2).getSelectedScale().getMultiplier());
+					value[3] = new PhysicsValue(PhysicsValFactory.fromFloat((float) timestamp), getAcquisitionHeader()
+							.getChannelsConfig(3).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
+							.getChannelsConfig(3).getSelectedScale().getMultiplier());
+					
+					Thread.sleep(100);
+					
+					addDataRow(value);
+	                
+	                timestamp++;
+	        
+	        }
+
+	        TUeApi.pg_dacPutValue(zero, (short) 1, zero);//Value to DAC Channel 2 controls Fug Voltage
+	        TUeApi.pg_dacPutValue(zero, zero, zero);//Value to DAC Channel 1 controls Pressure (close the valve)
+	        
+	        Thread.sleep(100); 
+		
+	        TUeApi.pg_dacPutValue(zero, zero, zero);//Value to DAC Channel 1 controls Pressure (close the valve)
+	        Thread.sleep(100);
+		
+
+		TUeApi.pg_dioOutputData(zero, (short) 0);
+
+		
+	    while(pressure_inside>= 0.05){
+	       			pressure_inside = serialgauge.getValuefromGauge();
+	       			Thread.sleep(5000);
+       				timestamp++;
+       				value = new PhysicsValue[NUM_CHANNELS];
+					value[0] = new PhysicsValue(PhysicsValFactory.fromFloat(0), getAcquisitionHeader()
+							.getChannelsConfig(0).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
+							.getChannelsConfig(0).getSelectedScale().getMultiplier());
+					value[1] = new PhysicsValue(PhysicsValFactory.fromFloat(0), getAcquisitionHeader()
+							.getChannelsConfig(1).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
+							.getChannelsConfig(1).getSelectedScale().getMultiplier());
+					value[2] = new PhysicsValue(PhysicsValFactory.fromFloat((float) pressure_inside), getAcquisitionHeader()
+							.getChannelsConfig(2).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
+							.getChannelsConfig(2).getSelectedScale().getMultiplier());
+					value[3] = new PhysicsValue(PhysicsValFactory.fromFloat((float) timestamp), getAcquisitionHeader()
+							.getChannelsConfig(3).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
+							.getChannelsConfig(3).getSelectedScale().getMultiplier());
+					addDataRow(value);
+	       			
+	    }
+
+		Thread.sleep(100);
+
+	    	TUeIO.tdClose();
+	    	serialgauge.closeCommPort();
+			
+			driver.stopVirtualHardware();
+			join(100);
+			endProduction();
 			}
+		catch (final InterruptedException ie) {}
 		}
 	}
 
@@ -236,6 +280,7 @@ public class PaschenDataProducer extends VirtualBaseDataSource implements Runnab
 
 	@Override
 	public void stopNow() {
+		
         TUeApi.pg_dacPutValue(zero, (short) 1, zero);//Value to DAC Channel 2 controls Fug Voltage
         TUeApi.pg_dacPutValue(zero, zero, zero);//Value to DAC Channel 1 controls Pressure
         
