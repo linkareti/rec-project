@@ -35,17 +35,27 @@
 			<!-- setpoint_press -->
 			<parameter output="###0" input="###0" maxvalue="5000" minvalue="100" order="4">
 				<transfer_function type="output">
-					<linear><param weight="10" center="0"></param></linear>
+					<linear><param weight="100" center="0"></param></linear>
 				</transfer_function>
 				<transfer_function type="input">
-					<linear><param weight="10" center="0"></param></linear>
+					<linear><param weight="100" center="0"></param></linear>
+				</transfer_function>
+			</parameter>
+
+			<!-- pump_press -->
+			<parameter output="###0" input="###0" maxvalue="5000" minvalue="100" order="5">
+				<transfer_function type="output">
+					<linear><param weight="100" center="0"></param></linear>
+				</transfer_function>
+				<transfer_function type="input">
+					<linear><param weight="100" center="0"></param></linear>
 				</transfer_function>
 			</parameter>
 
 			<!-- gas_sel -->
-			<!--<parameter output="#0.0" input="#0.0" maxvalue="3" minvalue="1" order="6">
+			<parameter output="#0" input="#0" maxvalue="3" minvalue="1" order="6">
 			</parameter>
-			-->
+			
 		</parameters>
 		<channels>
 			<!-- adc_value1 -->
