@@ -85,7 +85,7 @@
 		independent="false" direction="CHANNEL_INPUT">
 		<scale label="paschen$rec.exp.paschen.hardwareinfo.channel.1.label"
 			physicsunitname="paschen$rec.exp.paschen.hardwareinfo.channel.1.physicsunitname"
-			physicsunitsymbol="A" multiplier="mili" selected="true">
+			physicsunitsymbol="A" multiplier="milli" selected="true">
 			<min>
 				<PhysicsVal type="int">0</PhysicsVal>
 			</min>
@@ -105,7 +105,7 @@
 		independent="false" direction="CHANNEL_INPUT">
 		<scale label="paschen$rec.exp.paschen.hardwareinfo.channel.2.label"
 			physicsunitname="paschen$rec.exp.paschen.hardwareinfo.channel.2.physicsunitname"
-			physicsunitsymbol="Bar" multiplier="mili" selected="true">
+			physicsunitsymbol="Bar" multiplier="milli" selected="true">
 			<min>
 				<PhysicsVal type="int">0</PhysicsVal>
 			</min>

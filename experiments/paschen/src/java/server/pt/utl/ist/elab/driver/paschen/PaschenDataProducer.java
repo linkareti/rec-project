@@ -146,7 +146,7 @@ public class PaschenDataProducer extends VirtualBaseDataSource implements Runnab
 	       			Thread.sleep(10);
 	       			pressure_inside = serialgauge.getValuefromGauge();
 	       			i1++;
-	       			if(i1==500){
+	       			if(i1==10){
 	       				i1=0;
 	       				timestamp++;
 	       				value = new PhysicsValue[NUM_CHANNELS];
@@ -234,7 +234,7 @@ public class PaschenDataProducer extends VirtualBaseDataSource implements Runnab
 		
 	    while(pressure_inside>= 0.05){
 	       			pressure_inside = serialgauge.getValuefromGauge();
-	       			Thread.sleep(5000);
+	       			Thread.sleep(1000);
        				timestamp++;
        				value = new PhysicsValue[NUM_CHANNELS];
 					value[0] = new PhysicsValue(PhysicsValFactory.fromFloat(0), getAcquisitionHeader()
