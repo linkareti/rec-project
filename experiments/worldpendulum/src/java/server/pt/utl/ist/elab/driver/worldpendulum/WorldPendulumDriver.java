@@ -1,5 +1,5 @@
 /* 
- * DiscosDriver.java created on 1 Fev 2013
+ * WorldPendulumDriver.java created on 1 Fev 2013
  *
  * Copyright 2009 Linkare TI. All rights reserved.
  * Linkare TI PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
