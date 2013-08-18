@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://rec.linkare.com/client/config" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://rec.linkare.com/client/config" version="1.0">
+
+  <xs:element name="apparatus" type="tns:apparatus"/>
+
+  <xs:element name="reCFaceConfig" type="tns:reCFaceConfig"/>
+
+  <xs:complexType name="displayNode">
+    <xs:sequence/>
+    <xs:attribute name="order" type="xs:int" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="apparatus">
+    <xs:complexContent>
+      <xs:extension base="tns:displayNode">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="defaultAcquisitionConfig" type="tns:defaultAcquisitionConfig"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="display" type="tns:display"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="localizationBundle" type="tns:localizationBundle"/>
+          <xs:element minOccurs="0" name="mediaConfig" type="tns:mediaConfig"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="webResource" type="tns:webResource"/>
+        </xs:sequence>
+        <xs:attribute name="customizerClassLocationBundleKey" type="xs:string"/>
+        <xs:attribute name="dataModelClassLocationBundleKey" type="xs:string"/>
+        <xs:attribute name="descriptionStringBundleKey" type="xs:string"/>
+        <xs:attribute name="desktopLocationBundleKey" type="xs:string"/>
+        <xs:attribute name="displayFactoryClassLocationBundleKey" type="xs:string"/>
+        <xs:attribute name="displayStringBundleKey" type="xs:string"/>
+        <xs:attribute name="headerDisplayClassLocationBundleKey" type="xs:string"/>
+        <xs:attribute name="iconLocationBundleKey" type="xs:string"/>
+        <xs:attribute name="location" type="xs:string"/>
+        <xs:attribute name="toolTipBundleKey" type="xs:string"/>
+        <xs:attribute name="virtual" type="xs:boolean" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="defaultAcquisitionConfig">
+    <xs:complexContent>
+      <xs:extension base="tns:displayNode">
+        <xs:sequence/>
+        <xs:attribute name="classLocationBundleKey" type="xs:string"/>
+        <xs:attribute name="displayStringBundleKey" type="xs:string"/>
+        <xs:attribute name="iconLocationBundleKey" type="xs:string"/>
+        <xs:attribute name="toolTipBundleKey" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="display">
+    <xs:complexContent>
+      <xs:extension base="tns:displayNode">
+        <xs:sequence/>
+        <xs:attribute name="classLocationBundleKey" type="xs:string"/>
+        <xs:attribute name="displayStringBundleKey" type="xs:string"/>
+        <xs:attribute name="iconLocationBundleKey" type="xs:string"/>
+        <xs:attribute name="offlineCapable" type="xs:boolean" use="required"/>
+        <xs:attribute name="toolTipBundleKey" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="localizationBundle">
+    <xs:sequence/>
+    <xs:attribute name="location" type="xs:string"/>
+    <xs:attribute name="name" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="mediaConfig">
+    <xs:complexContent>
+      <xs:extension base="tns:displayNode">
+        <xs:sequence/>
+        <xs:attribute name="canSave" type="xs:boolean" use="required"/>
+        <xs:attribute name="offlinePlay" type="xs:boolean" use="required"/>
+        <xs:attribute name="videoLocation" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="webResource">
+    <xs:complexContent>
+      <xs:extension base="tns:displayNode">
+        <xs:sequence/>
+        <xs:attribute name="displayStringBundleKey" type="xs:string"/>
+        <xs:attribute name="iconLocationBundleKey" type="xs:string"/>
+        <xs:attribute name="internalBrowser" type="xs:boolean" use="required"/>
+        <xs:attribute name="locationBundleKey" type="xs:string"/>
+        <xs:attribute name="toolTipLocationBundleKey" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="reCFaceConfig">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="lab" type="tns:lab"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="localizationBundle" type="tns:localizationBundle"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="webResource" type="tns:webResource"/>
+    </xs:sequence>
+    <xs:attribute name="aboutPageLocationBundleKey" type="xs:string"/>
+    <xs:attribute name="appPreferredHeight" type="xs:int" use="required"/>
+    <xs:attribute name="appPreferredWidth" type="xs:int" use="required"/>
+    <xs:attribute name="desktopLocationBundleKey" type="xs:string"/>
+    <xs:attribute name="enableChatFrame" type="xs:boolean" use="required"/>
+    <xs:attribute name="enableLoginPassword" type="xs:boolean" use="required"/>
+    <xs:attribute name="enableUsersList" type="xs:boolean" use="required"/>
+    <xs:attribute name="enableVideoFrame" type="xs:boolean" use="required"/>
+    <xs:attribute name="enterApparatusChatRoom" type="xs:boolean" use="required"/>
+    <xs:attribute name="frameTitleBundleKey" type="xs:string"/>
+    <xs:attribute name="helpPageLocationBundleKey" type="xs:string"/>
+    <xs:attribute name="iconLocationBundleKey" type="xs:string"/>
+    <xs:attribute name="iconSponsorLocationBundleKey" type="xs:string"/>
+    <xs:attribute name="showChatFrame" type="xs:boolean" use="required"/>
+    <xs:attribute name="showUserList" type="xs:boolean" use="required"/>
+    <xs:attribute name="showVideoFrame" type="xs:boolean" use="required"/>
+    <xs:attribute name="splashIconLocationBundleKey" type="xs:string"/>
+    <xs:attribute name="usersListRefreshRateMs" type="xs:long" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="lab">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="apparatus" nillable="true" type="tns:apparatus"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="localizationBundle" nillable="true" type="tns:localizationBundle"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="webResource" nillable="true" type="tns:webResource"/>
+    </xs:sequence>
+    <xs:attribute name="desktopLocationBundleKey" type="xs:string"/>
+    <xs:attribute name="displayStringBundleKey" type="xs:string"/>
+    <xs:attribute name="iconLocationBundleKey" type="xs:string"/>
+    <xs:attribute name="labId" type="xs:string"/>
+    <xs:attribute name="labIdStringBundleKey" type="xs:string"/>
+    <xs:attribute name="location" type="xs:string"/>
+    <xs:attribute name="toolTipBundleKey" type="xs:string"/>
+  </xs:complexType>
+</xs:schema>
