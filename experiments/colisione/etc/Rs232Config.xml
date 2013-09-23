@@ -2,7 +2,7 @@
 <hardware id="ELAB_COLISIONE_DSPIC_V1.0" num_channels="3"
 	minfrequency="0.1Hz" maxfrequency="1000Hz">
 	<rs232 baud="115200" stopbits="1" paritybits="0" numbits="8"
-		ports_restrict="/dev/ttyUSB0">
+		ports_restrict="/dev/ttyS0">
 		<parameters>
 			<!-- poder_acel1 -->
 			<parameter output="##0" input="##0" maxvalue="100" minvalue="0"
