@@ -57,6 +57,7 @@ public class ColisioneCustomizerPanel extends AbstractCustomizer {
         jSliderColisioneLaunchPower2 = new javax.swing.JSlider();
         jFormattedTextFieldColisioneLaunchPower2 = new javax.swing.JFormattedTextField();
         jPanelColisioneCamFollow = new javax.swing.JPanel();
+        jRadioButton0ColisioneCamFollow = new javax.swing.JRadioButton();
         jRadioButton1ColisioneCamFollow = new javax.swing.JRadioButton();
         jRadioButton2ColisioneCamFollow = new javax.swing.JRadioButton();
         jRadioButton3ColisioneCamFollow = new javax.swing.JRadioButton();
@@ -110,10 +111,10 @@ public class ColisioneCustomizerPanel extends AbstractCustomizer {
         jPanelColisioneLaunchPower1Layout.setVerticalGroup(
             jPanelColisioneLaunchPower1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelColisioneLaunchPower1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE)
                 .addComponent(jSliderColisioneLaunchPower1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanelColisioneLaunchPower1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(33, 33, 33)
                 .addComponent(jFormattedTextFieldColisioneLaunchPower1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(34, Short.MAX_VALUE))
         );
@@ -165,9 +166,18 @@ public class ColisioneCustomizerPanel extends AbstractCustomizer {
         jPanelColisioneCamFollow.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelColisioneCamFollow.border.title"))); // NOI18N
         jPanelColisioneCamFollow.setName("jPanelColisioneCamFollow"); // NOI18N
 
+        buttonGroup1.add(jRadioButton0ColisioneCamFollow);
+        jRadioButton0ColisioneCamFollow.setText(resourceMap.getString("jRadioButton0ColisioneCamFollow.text")); // NOI18N
+        jRadioButton0ColisioneCamFollow.setName("jRadioButton0ColisioneCamFollow"); // NOI18N
+
         buttonGroup1.add(jRadioButton1ColisioneCamFollow);
         jRadioButton1ColisioneCamFollow.setText(resourceMap.getString("jRadioButton1ColisioneCamFollow.text")); // NOI18N
         jRadioButton1ColisioneCamFollow.setName("jRadioButton1ColisioneCamFollow"); // NOI18N
+        jRadioButton1ColisioneCamFollow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ColisioneCamFollowActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(jRadioButton2ColisioneCamFollow);
         jRadioButton2ColisioneCamFollow.setText(resourceMap.getString("jRadioButton2ColisioneCamFollow.text")); // NOI18N
@@ -185,14 +195,17 @@ public class ColisioneCustomizerPanel extends AbstractCustomizer {
             .addGroup(jPanelColisioneCamFollowLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelColisioneCamFollowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton1ColisioneCamFollow)
                     .addComponent(jRadioButton2ColisioneCamFollow)
-                    .addComponent(jRadioButton3ColisioneCamFollow))
+                    .addComponent(jRadioButton3ColisioneCamFollow)
+                    .addComponent(jRadioButton1ColisioneCamFollow)
+                    .addComponent(jRadioButton0ColisioneCamFollow))
                 .addContainerGap(160, Short.MAX_VALUE))
         );
         jPanelColisioneCamFollowLayout.setVerticalGroup(
             jPanelColisioneCamFollowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelColisioneCamFollowLayout.createSequentialGroup()
+                .addComponent(jRadioButton0ColisioneCamFollow)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButton1ColisioneCamFollow)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButton2ColisioneCamFollow)
@@ -204,12 +217,12 @@ public class ColisioneCustomizerPanel extends AbstractCustomizer {
         jPanelColisione.setLayout(jPanelColisioneLayout);
         jPanelColisioneLayout.setHorizontalGroup(
             jPanelColisioneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelColisioneLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelColisioneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelColisioneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelColisioneLaunchPower1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelColisioneLaunchPower2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelColisioneCamFollow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelColisioneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanelColisioneCamFollow, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelColisioneLaunchPower1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelColisioneLaunchPower2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelColisioneLayout.setVerticalGroup(
@@ -221,7 +234,7 @@ public class ColisioneCustomizerPanel extends AbstractCustomizer {
                 .addComponent(jPanelColisioneLaunchPower2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelColisioneCamFollow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         add(jPanelColisione, java.awt.BorderLayout.WEST);
@@ -298,6 +311,10 @@ public class ColisioneCustomizerPanel extends AbstractCustomizer {
             formattedTextChanged(jSliderColisioneLaunchPower2, jFormattedTextFieldColisioneLaunchPower2);
 }//GEN-LAST:event_jFormattedTextFieldColisioneLaunchPower2FocusLost
 
+        private void jRadioButton1ColisioneCamFollowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ColisioneCamFollowActionPerformed
+            // TODO add your handling code here:
+        }//GEN-LAST:event_jRadioButton1ColisioneCamFollowActionPerformed
+
 	private void jButtonCancelActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonCancelActionPerformed
 		fireICustomizerListenerCanceled();
 	}// GEN-LAST:event_jButtonCancelActionPerformed
@@ -307,6 +324,7 @@ public class ColisioneCustomizerPanel extends AbstractCustomizer {
 		jFormattedTextFieldColisioneLaunchPower1.setText("50");
                 jSliderColisioneLaunchPower2.setValue(50);
 		jFormattedTextFieldColisioneLaunchPower2.setText("50");
+                jRadioButton0ColisioneCamFollow.setSelected(false);
                 jRadioButton1ColisioneCamFollow.setSelected(false);
                 jRadioButton2ColisioneCamFollow.setSelected(false);
                 jRadioButton3ColisioneCamFollow.setSelected(true);
@@ -326,7 +344,9 @@ public class ColisioneCustomizerPanel extends AbstractCustomizer {
 		poder_acel1 = (int) jSliderColisioneLaunchPower1.getValue();
 		poder_acel2 = (int) jSliderColisioneLaunchPower2.getValue();
 
-                if (jRadioButton1ColisioneCamFollow.isSelected()) {
+                if (jRadioButton0ColisioneCamFollow.isSelected()) {
+			cam_segue = 0;
+		} else if (jRadioButton1ColisioneCamFollow.isSelected()) {
 			cam_segue = 1;
 		} else if (jRadioButton2ColisioneCamFollow.isSelected()) {
 			cam_segue = 2;
@@ -341,7 +361,7 @@ public class ColisioneCustomizerPanel extends AbstractCustomizer {
                 //freq = new Frequency(time, Multiplier.mili, FrequencyDefType.SamplingIntervalType);
                 
                 //COMENTEI PARA COMPILAR
-		getAcquisitionConfig().setTotalSamples(2500);
+		getAcquisitionConfig().setTotalSamples(8);
 		getAcquisitionConfig().getSelectedHardwareParameter("poder_acel1").setParameterValue(String.valueOf(poder_acel1));
 		getAcquisitionConfig().getSelectedHardwareParameter("poder_acel2").setParameterValue(String.valueOf(poder_acel2));
 		getAcquisitionConfig().getSelectedHardwareParameter("cam_segue").setParameterValue(String.valueOf(cam_segue));
@@ -368,6 +388,7 @@ public class ColisioneCustomizerPanel extends AbstractCustomizer {
     private javax.swing.JPanel jPanelColisioneLaunchPower1;
     private javax.swing.JPanel jPanelColisioneLaunchPower2;
     private javax.swing.JPanel jPanelControlButtons;
+    private javax.swing.JRadioButton jRadioButton0ColisioneCamFollow;
     private javax.swing.JRadioButton jRadioButton1ColisioneCamFollow;
     private javax.swing.JRadioButton jRadioButton2ColisioneCamFollow;
     private javax.swing.JRadioButton jRadioButton3ColisioneCamFollow;

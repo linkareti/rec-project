@@ -20,7 +20,7 @@
 
 	<parameter name="cam_segue" type="ContinuousValue" value="3">
 		<selection-list>
-			<value order="1">1</value>
+			<value order="1">0</value>
 			<value order="2">3</value>
 			<value order="3">1</value>
 		</selection-list>
@@ -41,7 +41,7 @@
 
 	<sampling-scale>
 		<min-samples>1</min-samples>
-		<max-samples>3000</max-samples>
+		<max-samples>8</max-samples>
 		<step-samples>1</step-samples>
 	</sampling-scale>
 
@@ -73,18 +73,6 @@
 		independent="false" direction="CHANNEL_INPUT">
 		<scale label="colisione$rec.exp.colisione.hardwareinfo.channel.2.label"
 			physicsunitname="colisione$rec.exp.colisione.hardwareinfo.channel.2.physicsunitname"
-			physicsunitsymbol="s" multiplier="none" selected="true">
-			<min><PhysicsVal type="float">0.</PhysicsVal></min>
-			<max><PhysicsVal type="float">20.</PhysicsVal></max>
-			<step><PhysicsVal type="float">1E-6</PhysicsVal></step>
-			<errordefault><PhysicsVal type="float">3E-6</PhysicsVal></errordefault>
-		</scale>
-	</ChannelInfo>
-
-	<ChannelInfo name="colisione$rec.exp.colisione.hardwareinfo.channel.3.name"
-		independent="false" direction="CHANNEL_INPUT">
-		<scale label="colisione$rec.exp.colisione.hardwareinfo.channel.3.label"
-			physicsunitname="colisione$rec.exp.colisione.hardwareinfo.channel.3.physicsunitname"
 			physicsunitsymbol="s" multiplier="none" selected="true">
 			<min><PhysicsVal type="float">0.</PhysicsVal></min>
 			<max><PhysicsVal type="float">20.</PhysicsVal></max>
