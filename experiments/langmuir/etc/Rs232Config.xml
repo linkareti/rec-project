@@ -61,13 +61,13 @@
 			<!-- adc_value1 -->
 			<channel format="###" order="0">
 				<transfer_function>
-					<linear><param weight="0.0048828125" center="0"/></linear>
+					<linear><param weight="0.132088" center="66.383"/></linear>
 				</transfer_function>
 			</channel>
 			<!-- adc_value2 -->
 			<channel format="###" order="1">
 				<transfer_function>
-					<linear><param weight="0.0048828125" center="0"/></linear>
+                                        <linear><param weight="0.327324" center="36"/></linear>
 				</transfer_function>
 			</channel>
 			<!-- pressure gauge value -->
@@ -75,16 +75,16 @@
 			</channel>
 		</channels>
 		<timeout>
-			<default_timeout time="45000" />
-			<id time="10000" />
-			<cfg time="80000" />
-			<cur time="5000" />
-			<str time="5000" />
+			<default_timeout time="450000" />
+			<id time="100000" />
+			<cfg time="800000" />
+			<cur time="50000" />
+			<str time="50000" />
 			<dat_bin time="120000" />
 			<no_data time="60000" />
-			<end time="230000" />
-			<stp time="180000" />
-			<rst time="180000" />
+			<end time="2300000" />
+			<stp time="1800000" />
+			<rst time="1800000" />
 			<hardware_died time="3600000" />
 			<listen_to_port time="10000" />
 		</timeout>
