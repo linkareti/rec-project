@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
 <hardware id="ELAB_LANGMUIR_PROBE_DSPIC_V0.1" num_channels="3" minfrequency="10Hz" maxfrequency="1000Hz">
-	<rs232 baud="115200" stopbits="1" paritybits="0" numbits="8" ports_restrict="/dev/ttyUSB0">
+	<rs232 baud="115200" stopbits="1" paritybits="0" numbits="8" ports_restrict="/dev/ttyS0">
 		<parameters>
 			<!-- protocolo -->
 			<!--parameter output="0" input="0" maxvalue="5" minvalue="1" order="0">
