@@ -22,7 +22,7 @@
 			<channel format="#####" order="0">
 				<transfer_function>
 					<linear>
-						<param weight="0.000001" center="0"/>
+						<param weight="0.01" center="0"/>
 					</linear>
 				</transfer_function>
 			</channel>
@@ -30,7 +30,7 @@
 			<channel format="#####" order="1">
 				<transfer_function>
 					<linear>
-						<param weight="0.000001" center="0"/>
+						<param weight="0.01" center="0"/>
 					</linear>
 				</transfer_function>
 			</channel>
@@ -38,7 +38,7 @@
 			<channel format="#####" order="2">
 				<transfer_function>
 					<linear>
-						<param weight="0.000001" center="0"/>
+						<param weight="0.01" center="0"/>
 					</linear>
 				</transfer_function>
 			</channel>
