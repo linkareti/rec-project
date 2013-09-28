@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
+<HardwareInfo id="ELAB_COLISIONE_DSPIC_V1.0" familiarName="colisione"
+	name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
+	<parameter name="poder_acel1" type="ContinuousValue" value="50">
+		<selection-list>
+			<value order="1">0</value>
+			<value order="2">100</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
+
+	<parameter name="poder_acel2" type="ContinuousValue" value="50">
+		<selection-list>
+			<value order="1">0</value>
+			<value order="2">100</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
+
+	<parameter name="cam_segue" type="ContinuousValue" value="3">
+		<selection-list>
+			<value order="1">0</value>
+			<value order="2">3</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
+
+	<frequency-scale label="Sampling Interval">
+		<min-frequency>
+			<Frequency type="SamplingIntervalType" multiplier="milli">20</Frequency>
+		</min-frequency>
+		<max-frequency>
+			<Frequency type="SamplingIntervalType" multiplier="milli">60000</Frequency>
+		</max-frequency>
+		<step-frequency>
+			<Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency>
+		</step-frequency>
+	</frequency-scale>
+	<Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency>
+
+	<sampling-scale>
+		<min-samples>1</min-samples>
+		<max-samples>8</max-samples>
+		<step-samples>1</step-samples>
+	</sampling-scale>
+
+	<ChannelInfo name="colisione$rec.exp.colisione.hardwareinfo.channel.0.name"
+		independent="false" direction="CHANNEL_INPUT">
+		<scale label="colisione$rec.exp.colisione.hardwareinfo.channel.0.label"
+			physicsunitname="colisione$rec.exp.colisione.hardwareinfo.channel.0.physicsunitname"
+			physicsunitsymbol="s" multiplier="none" selected="true">
+			<min><PhysicsVal type="float">0.</PhysicsVal></min>
+			<max><PhysicsVal type="float">20.</PhysicsVal></max>
+			<step><PhysicsVal type="float">1E-6</PhysicsVal></step>
+			<errordefault><PhysicsVal type="float">3E-6</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+
+	<ChannelInfo name="colisione$rec.exp.colisione.hardwareinfo.channel.1.name"
+		independent="false" direction="CHANNEL_INPUT">
+		<scale label="colisione$rec.exp.colisione.hardwareinfo.channel.1.label"
+			physicsunitname="colisione$rec.exp.colisione.hardwareinfo.channel.1.physicsunitname"
+			physicsunitsymbol="s" multiplier="none" selected="true">
+			<min><PhysicsVal type="float">0.</PhysicsVal></min>
+			<max><PhysicsVal type="float">20.</PhysicsVal></max>
+			<step><PhysicsVal type="float">1E-6</PhysicsVal></step>
+			<errordefault><PhysicsVal type="float">3E-6</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+
+	<ChannelInfo name="colisione$rec.exp.colisione.hardwareinfo.channel.2.name"
+		independent="false" direction="CHANNEL_INPUT">
+		<scale label="colisione$rec.exp.colisione.hardwareinfo.channel.2.label"
+			physicsunitname="colisione$rec.exp.colisione.hardwareinfo.channel.2.physicsunitname"
+			physicsunitsymbol="s" multiplier="none" selected="true">
+			<min><PhysicsVal type="float">0.</PhysicsVal></min>
+			<max><PhysicsVal type="float">20.</PhysicsVal></max>
+			<step><PhysicsVal type="float">1E-6</PhysicsVal></step>
+			<errordefault><PhysicsVal type="float">3E-6</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+
+</HardwareInfo>
