@@ -98,7 +98,7 @@ void started(void)
 
         pressure = acquire_gauge_01_pressure();
         _TRISD0 = 0;    //make sure the relay control bit is an output
-        _LATD0 = 1;     //start pumping and high voltage
+        _LATD0 = 1;     //start pumping
 
         count = 0;
 
@@ -124,7 +124,7 @@ void started(void)
         //printf("\n\r puffing\n");
         _TRISE4 = 0;  //make sure that RB8 is an output
         _LATE4 = 1;     //open on-off valve
-        OC3RS = PR2*2/3;     //inject gas
+        OC3RS = 393;//PR2*2/3;     //inject gas
 
         count = 0;
         while((pressure < setpoint) && (count < 2000))
@@ -243,8 +243,8 @@ void started(void)
 	T3CONbits.TON= 0;	//Disable Timer3
 	OC3RS= 0; 			//Closes Valve
         delay_ms(2000);
-        _LATD0 = 0;               //close pump and HV
-
+        _LATD0 = 0;               //close pump
+		_LATF6 = 0;			   	  //HV off
         delay_ms(10);		//Waits 10ms
 	T2CONbits.TON= 0;	//Disable Timer2
 	ADCON1bits.ADON = 0;//Disable ADC
@@ -260,8 +260,8 @@ void stopping(void)
 	T2CONbits.TON= 1;	//Enable Timer2	
 	OC3RS= 0; 		//Closes Valve
         _LATE4 = 0;               //close ON/OFF valve argon
-        _LATD0 = 0;               //turn pump and HV off
-        _LATF6 = 0;
+        _LATD0 = 0;               //turn pump off 
+        _LATF6 = 0;				  //HV off
 }
 
 
