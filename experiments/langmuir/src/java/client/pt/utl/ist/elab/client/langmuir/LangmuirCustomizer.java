@@ -304,9 +304,8 @@ public class LangmuirCustomizer extends AbstractCustomizer {
 	        sldNumPeriod.setPaintLabels(true);
 	        sldNumPeriod.setPaintTicks(true);
 	        sldNumPeriod.setPaintTrack(false);
-	        sldNumPeriod.setMaximumSize(new java.awt.Dimension(1000, 32767));
-	        sldNumPeriod.setMinimumSize(new java.awt.Dimension(250, 80));
-	        sldNumPeriod.setPreferredSize(new java.awt.Dimension(250, 80));
+	        sldNumPeriod.setMinimumSize(new java.awt.Dimension(250, 42));
+	        sldNumPeriod.setPreferredSize(new java.awt.Dimension(250, 42));
 	        sldNumPeriod.addChangeListener(new javax.swing.event.ChangeListener() {
 	            public void stateChanged(javax.swing.event.ChangeEvent evt) {
 	                sldNumPeriodStateChanged(evt);
