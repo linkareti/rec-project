@@ -49,7 +49,7 @@
 		independent="false" direction="CHANNEL_INPUT">
 		<scale label="colisione$rec.exp.colisione.hardwareinfo.channel.0.label"
 			physicsunitname="colisione$rec.exp.colisione.hardwareinfo.channel.0.physicsunitname"
-			physicsunitsymbol="s" multiplier="none" selected="true">
+			physicsunitsymbol="s" multiplier="milli" selected="true">
 			<min><PhysicsVal type="float">0.</PhysicsVal></min>
 			<max><PhysicsVal type="float">20.</PhysicsVal></max>
 			<step><PhysicsVal type="float">1E-6</PhysicsVal></step>
@@ -61,7 +61,7 @@
 		independent="false" direction="CHANNEL_INPUT">
 		<scale label="colisione$rec.exp.colisione.hardwareinfo.channel.1.label"
 			physicsunitname="colisione$rec.exp.colisione.hardwareinfo.channel.1.physicsunitname"
-			physicsunitsymbol="s" multiplier="none" selected="true">
+			physicsunitsymbol="s" multiplier="milli" selected="true">
 			<min><PhysicsVal type="float">0.</PhysicsVal></min>
 			<max><PhysicsVal type="float">20.</PhysicsVal></max>
 			<step><PhysicsVal type="float">1E-6</PhysicsVal></step>
@@ -73,7 +73,7 @@
 		independent="false" direction="CHANNEL_INPUT">
 		<scale label="colisione$rec.exp.colisione.hardwareinfo.channel.2.label"
 			physicsunitname="colisione$rec.exp.colisione.hardwareinfo.channel.2.physicsunitname"
-			physicsunitsymbol="s" multiplier="none" selected="true">
+			physicsunitsymbol="s" multiplier="milli" selected="true">
 			<min><PhysicsVal type="float">0.</PhysicsVal></min>
 			<max><PhysicsVal type="float">20.</PhysicsVal></max>
 			<step><PhysicsVal type="float">1E-6</PhysicsVal></step>
