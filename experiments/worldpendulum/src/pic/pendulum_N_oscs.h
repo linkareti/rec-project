@@ -6,5 +6,6 @@ void saveGlobalNumberOfOscs();
 void incGlobalNumberOfOscs();
 void retrieveGlobalNumberOfOscs();
 void resetGlobalNumberOfOscs();
+void setGlobalNumberOfOscs(unsigned long val);
 
 #endif

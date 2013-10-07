@@ -9,7 +9,7 @@ unsigned long getGlobalNumberOfOscs() {
 }
 
 void saveGlobalNumberOfOscs() {
-	unsigned int ui;
+	static unsigned int ui;
 
 	eeprom_erase_word(0x007F, 0xFC0C);
 	eeprom_erase_word(0x007F, 0xFC0E);
@@ -25,7 +25,7 @@ void incGlobalNumberOfOscs() {
 }
 
 void retrieveGlobalNumberOfOscs() {
-	unsigned int ui;
+	static unsigned int ui;
 	
 	eeprom_read_word(0x007F, 0xFC0C, &ui);
 	*((unsigned int*)(&N) + 0) = ui;
@@ -35,5 +35,10 @@ void retrieveGlobalNumberOfOscs() {
 
 void resetGlobalNumberOfOscs() {
 	N = 0;
+	saveGlobalNumberOfOscs();
+}
+
+void setGlobalNumberOfOscs(unsigned long val) {
+	N = val;
 	saveGlobalNumberOfOscs();
 }

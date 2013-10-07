@@ -4,7 +4,7 @@
 
 //delay in miliseconds
 void delay_ms(unsigned int delay) {
-	unsigned int cycles;
+	static unsigned int cycles;
 	for(;delay;delay--) {
 		for(cycles=FCY/3636; cycles; cycles--);
 		asm("clrwdt");

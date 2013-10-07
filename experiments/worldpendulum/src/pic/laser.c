@@ -17,11 +17,11 @@ int test_laser() {
 
 	for (i=0; i<20; i++) {
 		laser_on();
-		delay_ms(10);
+		delay_ms(15);
 		if(PHOTODIODE == 1) good++;
 
 		laser_off();
-		delay_ms(10);
+		delay_ms(15);
 		if(PHOTODIODE == 0) good++;
 	}
 
@@ -31,8 +31,7 @@ int test_laser() {
 	IFS0bits.CNIF = 0;
 	IEC0bits.CNIE = 1;
 
-	Yaiks();
-	if(good == 40) return OK;
+	if(good > 30) return OK;
 	else return NOT_OK;
 }
 

@@ -10,14 +10,12 @@
 #include "pendulum_N_oscs.h"
 
 static volatile double valOscillationPeriod;
-static volatile double valLinearVelocity;
+static volatile double valLinearVelocityCM;
 static volatile double calculatedG;
 static volatile int ballDirection = NOT_AVAIL;
 static volatile int stopped = NOT_AVAIL;
 static volatile int oscillationMode = NOT_AVAIL;
 static volatile int movementCounter;
-static volatile int photoDiode;
-static volatile int atOrigin = NO;
 static volatile int dataPointAvailable = NO;
 static volatile int RESTART = YES;
 static volatile int acquisitionOngoing = NO;
@@ -25,13 +23,13 @@ static volatile int acquisitionOngoing = NO;
 
 void __attribute__((__interrupt__, __no_auto_psv__)) _CNInterrupt(void) {
 	static unsigned int u1, u2, u3, u4;
-	static int LASTphotoDiode;
 	static unsigned long myLong;
 	static double valPeriodPART1;
 	static double valPeriodPART2;
 	static double myDouble;
 	static double TTT;
 	static int counter;
+	static int photoDiode;
 
 	IFS0bits.CNIF = 0;
 
@@ -41,14 +39,8 @@ void __attribute__((__interrupt__, __no_auto_psv__)) _CNInterrupt(void) {
 	if(PHOTODIODE == 0) { photoDiode = 0; LED1_OFF; }
 	else                { photoDiode = 1; LED1_ON; }
 
-	if(MICROSWITCH == 1) { atOrigin = NO; LED2_OFF; }
-	else                 { atOrigin = YES; LED2_ON; }
-
-	if(photoDiode == LASTphotoDiode) return;
-
 	movementCounter = 50;
 	stopped = NO;
-	LASTphotoDiode = photoDiode;
 
 	if(RESTART == YES && photoDiode == 0) {
 		RESTART = NO;
@@ -113,25 +105,14 @@ void __attribute__((__interrupt__, __no_auto_psv__)) _CNInterrupt(void) {
 		myLong |= u3;
 		myDouble = (double)myLong / (double)FCY;
 		TTT = 0.9 * getExpectedPeriod_S();
-		if(myDouble < TTT && myDouble > 0 && oscillationMode == OSC_LONG) valLinearVelocity = getSphereDiameter_CM() / myDouble;
-		else valLinearVelocity = 0;
+		if(myDouble < TTT && myDouble > 0 && oscillationMode == OSC_LONG) valLinearVelocityCM = getSphereDiameter_CM() / myDouble;
+		else valLinearVelocityCM = 0;
 	}
 	//end of velocity measurement
 }
 
-void Yaiks() {
-	//Should be like this:
-	//light - photoDiode = 1
-	//dark - photoDiode = 0
-	if(PHOTODIODE == 0) { photoDiode = 0; LED1_OFF; }
-	else                { photoDiode = 1; LED1_ON; }
-
-	if(MICROSWITCH == 1) { atOrigin = NO; LED2_OFF; }
-	else                 { atOrigin = YES; LED2_ON; }
-}
-
 int is_data_point_available() {
-	int retVal;
+	static int retVal;
 	IEC0bits.CNIE = 0;
 	asm("nop");
 	retVal = dataPointAvailable;
@@ -141,7 +122,7 @@ int is_data_point_available() {
 }
 
 double get_oscillation_period() {
-	double retVal;
+	static double retVal;
 	IEC0bits.CNIE = 0;
 	asm("nop");
 	retVal = valOscillationPeriod;
@@ -149,17 +130,17 @@ double get_oscillation_period() {
 	return retVal;
 }
 
-double get_ball_velocity() {
-	double retVal;
+double get_ball_velocityCM() {
+	static double retVal;
 	IEC0bits.CNIE = 0;
 	asm("nop");
-	retVal = valLinearVelocity;
+	retVal = valLinearVelocityCM;
 	IEC0bits.CNIE = 1;
 	return retVal;
 }
 
 double get_calculated_G() {
-	double retVal;
+	static double retVal;
 	IEC0bits.CNIE = 0;
 	asm("nop");
 	retVal = calculatedG;
@@ -200,12 +181,12 @@ int ball_is_stopped() {
 }
 
 int photodiode_is_on() {
-	if(photoDiode == 1) return YES;
-	else return NO;
+	if(PHOTODIODE == 0) return NO;
+	else return YES;
 }
 
 int photodiode_is_off() {
-	if(photoDiode == 0) return YES;
+	if(PHOTODIODE == 0) return YES;
 	else return NO;
 }
 
@@ -213,15 +194,12 @@ int get_oscillation_mode() {
 	return oscillationMode;
 }
 
-int shovel_is_at_origin() {
-	return atOrigin;
-}
-
 void doAdvancedCalculations(double G) {
 	static double calculatedG_Arr[50];
 	static double averageG, sigmaG;
 	static int Gptr;
-	int cnt, i;
+	static int cnt;
+	static int i;
 
 	calculatedG_Arr[Gptr++] = G;
 	if(Gptr == 50) Gptr = 0;

@@ -26,7 +26,7 @@
 #define NOT_AVAIL			-1
 
 #define DELTAX_MIN 5
-#define DELTAX_MAX 20
+#define DELTAX_MAX 15
 #define NOSC_MIN 10
 #define NOSC_MAX 1000
 

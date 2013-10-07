@@ -15,4 +15,7 @@ double getExpectedPeriod_S();
 void saveStepperMaxFreq_HZ(unsigned int maxFreq);
 int getStepperMaxFreq_HZ();
 
+void saveIDstring_CHAR(char *str);
+int getIDstring_CHAR(char *str);
+
 #endif

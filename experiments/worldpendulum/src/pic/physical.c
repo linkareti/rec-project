@@ -8,12 +8,15 @@ static int PendulumLength_FLAG;
 static int ExpectedPeriod_FLAG;
 static int DistanceLaserToStart_FLAG;
 static int StepperMaxFreq_FLAG;
+static int IdString_FLAG;
 
 static double SphereDiameter_CM;
 static double PendulumLength_M;
 static double ExpectedPeriod_S;
 static double DistanceLaserToStart_CM;
 static int StepperMaxFreq_HZ;
+
+static char IdString[32];
 
 static int isNaN (const float* f) {
 	const int* rep = ((const int*) f) + 1;
@@ -22,7 +25,7 @@ static int isNaN (const float* f) {
 
 //distance from laser to start in centimeters
 void saveDistanceLaserToStart_CM(double distance) {
-	unsigned int ui;
+	static unsigned int ui;
 
 	eeprom_erase_word(0x007F, 0xFC08);
 	eeprom_erase_word(0x007F, 0xFC0A);
@@ -38,8 +41,8 @@ void saveDistanceLaserToStart_CM(double distance) {
 
 //diameter of sphere in centimeters
 double getDistanceLaserToStart_CM() {
-	double distance;
-	unsigned int ui;
+	static double distance;
+	static unsigned int ui;
 
 	if(DistanceLaserToStart_FLAG == 1) return DistanceLaserToStart_CM;
 	
@@ -57,7 +60,7 @@ double getDistanceLaserToStart_CM() {
 
 //diameter of sphere in centimeters
 void saveSphereDiameter_CM(double diameter) {
-	unsigned int ui;
+	static unsigned int ui;
 	
 	eeprom_erase_word(0x007F, 0xFC00);
 	eeprom_erase_word(0x007F, 0xFC02);
@@ -73,8 +76,8 @@ void saveSphereDiameter_CM(double diameter) {
 
 //diameter of sphere in centimeters
 double getSphereDiameter_CM() {
-	double diameter;
-	unsigned int ui;
+	static double diameter;
+	static unsigned int ui;
 
 	if(SphereDiameter_FLAG == 1) return SphereDiameter_CM;
 	
@@ -92,7 +95,7 @@ double getSphereDiameter_CM() {
 
 //length of pendulum in meters
 void savePendulumLength_M(double length) {
-	unsigned int ui;
+	static unsigned int ui;
 	
 	eeprom_erase_word(0x007F, 0xFC04);
 	eeprom_erase_word(0x007F, 0xFC06);
@@ -110,8 +113,8 @@ void savePendulumLength_M(double length) {
 
 //length of pendulum in meters
 double getPendulumLength_M() {
-	double length;
-	unsigned int ui;
+	static double length;
+	static unsigned int ui;
 
 	if(PendulumLength_FLAG == 1) return PendulumLength_M;
 	
@@ -150,7 +153,7 @@ void saveStepperMaxFreq_HZ(unsigned int maxFreq) {
 
 //maximum frequency for stepper in Hertz
 int getStepperMaxFreq_HZ() {
-	int maxFreq;
+	static int maxFreq;
 
 	if(StepperMaxFreq_FLAG == 1) return StepperMaxFreq_HZ;
 	
@@ -160,4 +163,58 @@ int getStepperMaxFreq_HZ() {
 	StepperMaxFreq_HZ = maxFreq;
 	StepperMaxFreq_FLAG = 1;
 	return maxFreq;
+}
+
+
+//save ID string
+void saveIDstring_CHAR(char *str) {
+	static int i;
+	static int ok;
+	static char buf[32];
+
+	eeprom_erase_block(0x007F, 0xFC20);
+
+	for(i=0; i<32; i++) buf[i] = 0;
+
+	ok = 1;
+	for(i=0; i<32 && ok==1; i++) {
+		buf[i] = str[i];
+		if(str[i] == 0) ok = 0;
+	}
+	buf[31] = 0;
+
+	eeprom_write_block(0x007F, 0xFC20, (unsigned int*)buf);
+
+	for(i=0; i<32; i++) IdString[i] = buf[i];
+
+	IdString_FLAG = 1;
+}
+
+//get ID string
+int getIDstring_CHAR(char *str) {
+	static char buf[32];
+	static int i;
+	static int ok;
+
+	if(IdString_FLAG == 1) {
+		ok = 1;
+		for(i=0; i<32 && ok==1; i++) {
+			str[i] = IdString[i];
+			if(str[i] == 0) ok = 0;
+		}
+		return i - 1;
+	}
+
+	eeprom_read_block(0x007F, 0xFC20, (unsigned int*)buf);
+	buf[31] = 0;
+
+	ok = 1;
+	for(i=0; i<32 && ok==1; i++) {
+		IdString[i] = buf[i];
+		str[i] = buf[i];
+		if(buf[i] == 0) ok = 0;
+	}
+
+	IdString_FLAG = 1;
+	return i - 1;
 }

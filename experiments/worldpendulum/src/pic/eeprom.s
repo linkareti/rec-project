@@ -48,6 +48,7 @@ _eeprom_erase_all:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; ERASE EEPROM BLOCK
+; (one block is 16 words or 32 bytes)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 _eeprom_erase_block:
 ;W0=page
@@ -102,6 +103,7 @@ _eeprom_erase_word:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; WRITE EEPROM BLOCK
+; (one block is 16 words or 32 bytes)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 _eeprom_write_block:
 ;W0=page
@@ -147,7 +149,7 @@ _eeprom_write_word:
 ;Write data value to holding latch
 	TBLWTL W2,[W1]
 ;NVMADR captures write address from the TBLWTL instruction.
-;Setup NVMCON for programming one block to data EEPROM
+;Setup NVMCON for programming one word to data EEPROM
 	MOV #0x4004,W0
 	MOV W0,NVMCON
 ;Disable interrupts while the KEY sequence is written
@@ -169,6 +171,7 @@ _eeprom_write_word:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; READ EEPROM BLOCK
+; (one block is 16 words or 32 bytes)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 _eeprom_read_block:
 ;W0=page
