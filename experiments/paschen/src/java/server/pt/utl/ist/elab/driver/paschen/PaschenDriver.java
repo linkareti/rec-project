@@ -1,26 +1,25 @@
 package pt.utl.ist.elab.driver.paschen;
 
-import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
-import pt.utl.ist.elab.driver.virtual.VirtualBaseDriver;
 
 import com.linkare.rec.acquisition.IncorrectStateException;
 import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.impl.driver.BaseDriver;
 import com.linkare.rec.impl.driver.IDataSource;
 
 /**
  * @author jloureiro
  */
 
-public class PaschenDriver extends VirtualBaseDriver {
+public class PaschenDriver extends BaseDriver {
 
 	//	private static final Logger LOGGER = Logger.getLogger(PaschenDriver.class.getName());
 
 	/* Hardware and driver related variables */
 	private static final String DRIVER_UNIQUE_ID = "PLASMALAB_PASCHEN_CURVE_V1.0";
 
-	protected VirtualBaseDataSource dataSource = null;
+	protected PaschenDataProducer dataSource = null;
 	protected HardwareAcquisitionConfig config = null;
 	protected HardwareInfo info = null;
 
@@ -50,12 +49,12 @@ public class PaschenDriver extends VirtualBaseDriver {
 		fireIDriverStateListenerDriverConfigured();
 	}
 
-	@Override
+
 	public String getDriverUniqueID() {
 		return PaschenDriver.DRIVER_UNIQUE_ID;
 	}
 
-	@Override
+
 	public void shutdown() {
 		if (dataSource != null) {
 			dataSource.stopNow();
@@ -63,7 +62,7 @@ public class PaschenDriver extends VirtualBaseDriver {
 		super.shutDownNow();
 	}
 
-	@Override
+
 	public IDataSource start(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverStarting();
 		dataSource.startProduction();
@@ -71,11 +70,38 @@ public class PaschenDriver extends VirtualBaseDriver {
 		return dataSource;
 	}
 
-	@Override
 	public void stop(final HardwareInfo info) throws IncorrectStateException {
 		fireIDriverStateListenerDriverStoping();
-		dataSource.stopNow();
 		fireIDriverStateListenerDriverStoped();
+	}
+	
+	public void stop() throws InterruptedException {
+		fireIDriverStateListenerDriverStoping();
+		fireIDriverStateListenerDriverStoped();
+	}
+
+	@Override
+	public void init(HardwareInfo info) {
+		fireIDriverStateListenerDriverInited();
+	}
+
+	@Override
+	public IDataSource startOutput(HardwareInfo info, IDataSource source) throws IncorrectStateException {
+		return null;
+	}
+
+	@Override
+	public void reset(HardwareInfo info) throws IncorrectStateException {	
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void extraValidateConfig(HardwareAcquisitionConfig config, HardwareInfo info)
+			throws WrongConfigurationException {
+		/** not going to use */
+		
 	}
 
 }

@@ -7,18 +7,16 @@
 package pt.utl.ist.elab.driver.paschen;
 
 
-import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
-import pt.utl.ist.elab.driver.virtual.VirtualBaseDriver;
-
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.impl.data.PhysicsValFactory;
+import com.linkare.rec.impl.driver.BaseDataSource;
 import com.sun.jna.Memory;
 
 /**
  * 
  * @author jloureiro
  */
-public class PaschenDataProducer extends VirtualBaseDataSource implements Runnable {
+public class PaschenDataProducer extends BaseDataSource implements Runnable {
 
 	private final double volt_ini;
 	private final double volt_fin;
@@ -41,9 +39,9 @@ public class PaschenDataProducer extends VirtualBaseDataSource implements Runnab
 	private final int NUM_CHANNELS = 4;
 
 	private boolean stopped = false;
-	private VirtualBaseDriver driver = null;
+	private PaschenDriver driver = null;
 
-	public PaschenDataProducer(final VirtualBaseDriver driver, final double _volt_ini, 
+	public PaschenDataProducer(final PaschenDriver driver, final double _volt_ini, 
 	final double _volt_fin, final double _volt_step, final double _press_set) {
 		this.driver = driver;
 
@@ -258,7 +256,7 @@ public class PaschenDataProducer extends VirtualBaseDataSource implements Runnab
 	    	TUeIO.tdClose();
 	    	serialgauge.closeCommPort();
 			
-			driver.stopVirtualHardware();
+			driver.stop();
 			join(100);
 			endProduction();
 			}
@@ -266,7 +264,6 @@ public class PaschenDataProducer extends VirtualBaseDataSource implements Runnab
 		}
 	}
 
-	@Override
 	public void startProduction() {
 		stopped = false;
 		new ProducerThread().start();
