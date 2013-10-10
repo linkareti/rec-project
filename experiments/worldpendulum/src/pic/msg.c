@@ -78,7 +78,7 @@ void processMessage(int mode) {
 				printf("%s\r", buf);
 				if(get_state() == STATE_STARTED || get_state() == STATE_SENDING_DATA) return;
 				if(u1 < DELTAX_MIN) u1 = DELTAX_MIN;
-				if(u1 > DELTAX_MAX) u1 = DELTAX_MAX;
+				if(u1 > getDeltaXMax_CM()) u1 = getDeltaXMax_CM();
 				if(u2 < NOSC_MIN) u2 = NOSC_MIN;
 				if(u2 > NOSC_MAX) u2 = NOSC_MAX;
 				set_deltaX(u1);
@@ -135,26 +135,33 @@ void processMessage(int mode) {
 	else if(sscanf(message, "set sphere diameter %f", &myFloat) == 1) {
 		if(myFloat < 1.) myFloat = 1.;
 		saveSphereDiameter_CM(myFloat);
-		printf("SPHERE DIAMETER: %f cm OK\r", (double)myFloat);
+		printf("SPHERE DIAMETER: %f cm OK\r", getSphereDiameter_CM());
+	}
+
+	else if(sscanf(message, "set delta X max %d", &myInt) == 1) {
+		if(myInt < 5) myInt = 5;
+		if(myInt > 20) myInt = 20;
+		saveDeltaXMax_CM(myInt);
+		printf("DELTA X MAX: %d cm OK\r", getDeltaXMax_CM());
 	}
 	
 	else if(sscanf(message, "set pendulum length %f", &myFloat) == 1) {
 		if(myFloat < 0.1) myFloat = 0.1;
 		savePendulumLength_M(myFloat);
-		printf("PENDULUM LENGTH: %f m OK\r", (double)myFloat);
+		printf("PENDULUM LENGTH: %f m OK\r", getPendulumLength_M());
 	}
 	
 	else if(sscanf(message, "set distance from laser to start %f", &myFloat) == 1) {
 		if(myFloat > MAX_SHOVEL_DISPLACEMENT_CM - 20) myFloat = MAX_SHOVEL_DISPLACEMENT_CM - 20;
 		if(myFloat < 15) myFloat = 15;
 		saveDistanceLaserToStart_CM(myFloat);
-		printf("DISTANCE FROM LASER TO START: %f cm OK\r", (double)myFloat);
+		printf("DISTANCE FROM LASER TO START: %f cm OK\r", getDistanceLaserToStart_CM());
 	}
 	
 	else if(sscanf(message, "set stepper max freq %d", &myInt) == 1) {
 		if(myInt < 1) myInt = 1;
 		saveStepperMaxFreq_HZ(myInt);
-		printf("STEPPER MAX FREQ: %d Hz OK\r", myInt);
+		printf("STEPPER MAX FREQ: %d Hz OK\r", getStepperMaxFreq_HZ());
 	}
 
 	else if(strcmp(message, "release stepper") == 0) {
@@ -188,6 +195,7 @@ void processMessage(int mode) {
 	}
 
 	else if(strcmp(message, "reboot") == 0) {
+		saveGlobalNumberOfOscs();
 		printf("REBOOTING...\r");
 		delay_ms(200);
 		asm("reset");
@@ -195,7 +203,7 @@ void processMessage(int mode) {
 
 	else if(sscanf(message, "set global oscillation counter %lu", &myULong) == 1) {
 		setGlobalNumberOfOscs(myULong);
-		printf("GLOBAL OSCILLATION COUNTER: %lu OK\r", myULong);
+		printf("GLOBAL OSCILLATION COUNTER: %lu OK\r", getGlobalNumberOfOscs());
 	}
 
 	else if(strncmp(message, "set ID string ", strlen("set ID string ")) == 0) {
@@ -203,7 +211,7 @@ void processMessage(int mode) {
 			strncpy(buf, message + strlen("set ID string "), 32);
 			buf[31] = 0;
 			saveIDstring_CHAR(buf);
-			printf("ID STRING: %s OK\r", buf);
+			printf("ID STRING: %s OK\r", getIDstring_CHAR(buf));
 		}
 	}
 	
@@ -225,11 +233,11 @@ void sendHelp() {
 	printf("stp\r");
 	printf("rst\r");
 	printf("ids\r");
-	printf("cfg\tdeltaX[%u:%u]\tN[%u:%u]\r", DELTAX_MIN, DELTAX_MAX, NOSC_MIN, NOSC_MAX);
+	printf("cfg\tdeltaX[%u:%u]\tN[%u:%u]\r", DELTAX_MIN, getDeltaXMax_CM(), NOSC_MIN, NOSC_MAX);
 	printf("\r");
 
 	printf("stop ball\r");
-	printf("prepare launch deltaX[%u:%u]\r", DELTAX_MIN, DELTAX_MAX);
+	printf("prepare launch deltaX[%u:%u]\r", DELTAX_MIN, getDeltaXMax_CM());
 	printf("launch ball\r");
 	printf("test laser\r");
 	printf("go to origin freq[1:%u]\r", getStepperMaxFreq_HZ());
@@ -247,6 +255,7 @@ void sendHelp() {
 	printf("reboot\r");
 	printf("\r");
 
+	printf("set delta X max %%d\r");
 	printf("set sphere diameter %%f\r");
 	printf("set pendulum length %%f\r");
 	printf("set distance from laser to start %%f [%d %d]\r", 15, MAX_SHOVEL_DISPLACEMENT_CM - 20);
@@ -255,6 +264,7 @@ void sendHelp() {
 	printf("set ID string %%s\r");
 	printf("\r");
 
+	printf("delta X max: %d cm\r",                  getDeltaXMax_CM());
 	printf("sphere diameter: %f cm\r",              getSphereDiameter_CM());
 	printf("pendulum length: %f m\r",               getPendulumLength_M());
 	printf("distance from laser to start: %f cm\r", getDistanceLaserToStart_CM());

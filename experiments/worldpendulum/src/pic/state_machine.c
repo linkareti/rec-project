@@ -156,7 +156,7 @@ void set_state(int st, int mode) {
 	else if(st == STATE_CONFIGURED) {
 		if(state == STATE_SENDING_DATA) return;
 		if(deltaX < DELTAX_MIN) deltaX = DELTAX_MIN;
-		if(deltaX > DELTAX_MAX) deltaX = DELTAX_MAX;
+		if(deltaX > getDeltaXMax_CM()) deltaX = getDeltaXMax_CM();
 		if(Noscillations < NOSC_MIN) Noscillations = NOSC_MIN;
 		if(Noscillations > NOSC_MAX) Noscillations = NOSC_MAX;
 		state = STATE_CONFIGURED;
@@ -165,7 +165,7 @@ void set_state(int st, int mode) {
 	else if(st == STATE_STARTED) {
 		if(state != STATE_CONFIGURED) return;
 		if(deltaX < DELTAX_MIN) deltaX = DELTAX_MIN;
-		if(deltaX > DELTAX_MAX) deltaX = DELTAX_MAX;
+		if(deltaX > getDeltaXMax_CM()) deltaX = getDeltaXMax_CM();
 		if(Noscillations < NOSC_MIN) Noscillations = NOSC_MIN;
 		if(Noscillations > NOSC_MAX) Noscillations = NOSC_MAX;
 		state = STATE_STARTED;
@@ -183,8 +183,8 @@ int get_state() {
 }
 
 void set_deltaX(unsigned int x) {
-//	if(x < DELTAX_MIN) return;
-//	if(x > DELTAX_MAX) return;
+	if(x < DELTAX_MIN) x = DELTAX_MIN;
+	if(x > getDeltaXMax_CM()) x = getDeltaXMax_CM();
 	deltaX = x;
 }
 
@@ -193,8 +193,8 @@ unsigned int get_deltaX() {
 }
 
 void set_Noscillations(unsigned int n) {
-//	if(n < NOSC_MIN) return;
-//	if(n > NOSC_MAX) return;
+	if(n < NOSC_MIN) n = NOSC_MIN;
+	if(n > NOSC_MAX) n = NOSC_MAX;
 	Noscillations = n;
 }
 

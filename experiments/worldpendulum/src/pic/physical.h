@@ -12,10 +12,13 @@ double getPendulumLength_M();
 
 double getExpectedPeriod_S();
 
-void saveStepperMaxFreq_HZ(unsigned int maxFreq);
+void saveStepperMaxFreq_HZ(int maxFreq);
 int getStepperMaxFreq_HZ();
 
 void saveIDstring_CHAR(char *str);
-int getIDstring_CHAR(char *str);
+char* getIDstring_CHAR(char *str);
+
+void saveDeltaXMax_CM(int deltaXmax);
+int getDeltaXMax_CM();
 
 #endif

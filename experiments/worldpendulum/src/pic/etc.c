@@ -43,3 +43,11 @@ void panic(char *msg) {
 		delay_ms(100);
 	}
 }
+
+
+
+int isNaN (const float* f) {
+	const int* rep = ((const int*) f) + 1;
+	return ((*rep & 0x7F00) == 0x7F00);
+}
+

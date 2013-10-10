@@ -12,11 +12,11 @@
 static int volatile target;
 static int volatile dir;
 static int volatile shovel_is_moving = NO;
-static int volatile ball_and_shovel_at_photodiode = NO;
+static int volatile ball_and_shovel_at_photodiode = YES;
 static int distance;
 
 void prepare_launch(unsigned int cm) {
-	if(cm > DELTAX_MAX) cm = DELTAX_MAX;
+	if(cm > getDeltaXMax_CM()) cm = getDeltaXMax_CM();
 	if(cm < DELTAX_MIN) cm = DELTAX_MIN;
 
 	stop_ball();
@@ -154,6 +154,7 @@ void move(double cm, unsigned int direction, unsigned int speed) {
 	if(direction == DIRECTION_FORWARD || direction == DIRECTION_BACKWARD) dir = direction;
 	else return;
 	if(cm > MAX_SHOVEL_DISPLACEMENT_CM) cm = MAX_SHOVEL_DISPLACEMENT_CM;
+	if(cm <= 0) return;
 	if(shovel_is_at_origin() == YES && dir == DIRECTION_BACKWARD) return;
 	if(speed > getStepperMaxFreq_HZ()) speed = getStepperMaxFreq_HZ();
 	if(speed < 1) speed = 1;
