@@ -1,4 +1,5 @@
 package pt.utl.ist.elab.client.worldpendulum;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.ui.graph.DefaultExperimentBarGraph;
 
 /* 
@@ -25,6 +26,7 @@ public class WorldPendulumHistogram extends DefaultExperimentBarGraph {
 	public WorldPendulumHistogram() {
 		super();
 		setChannelDisplay(1);
+		setNumberAxisName(ReCResourceBundle.findStringOrDefault("worldpendulum$display.graph.histogram.numberaxis","Hits"));
 	}
 
 	
