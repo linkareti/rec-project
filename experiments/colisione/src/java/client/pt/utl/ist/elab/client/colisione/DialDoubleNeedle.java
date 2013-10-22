@@ -42,17 +42,18 @@ import org.jfree.ui.StandardGradientPaintTransformer;
 public class DialDoubleNeedle extends JPanel {
     
     /** The first dataset. */
-    DefaultValueDataset dataset1;
+    private DefaultValueDataset dataset1;
     
     /** The second dataset. */
-    DefaultValueDataset dataset2;
+    private DefaultValueDataset dataset2;
     
+    private JFreeChart chart;
     /** 
      * Creates a new instance.
      *
      * @param title  the frame title.
      */
-    public DialDoubleNeedle(String title) {
+    public DialDoubleNeedle() {
         super();
         
         this.dataset1 = new DefaultValueDataset(0.10);
@@ -122,17 +123,51 @@ public class DialDoubleNeedle extends JPanel {
         cap.setRadius(0.10);
         plot.setCap(cap);
         
-        JFreeChart chart1 = new JFreeChart(plot);
-        chart1.setTitle(title);
-        ChartPanel cp1 = new ChartPanel(chart1);
-        cp1.setPreferredSize(new Dimension(400, 400));
-
+        chart = new JFreeChart(plot);
+        chart.setTitle("Title");
+        ChartPanel cp1 = new ChartPanel(chart);
+        cp1.setPreferredSize(new Dimension(300, 300));
+        cp1.setMouseZoomable(true, false);
         add(cp1);
         
     }
     
-
+    void setTitle(String title){
+    	chart.setTitle(title);
+    	return;
+    }
+    
+    
+    
     /**
+	 * @return the dataset1
+	 */
+	public DefaultValueDataset getDataset1() {
+		return dataset1;
+	}
+
+	/**
+	 * @param dataset1 the dataset1 to set
+	 */
+	public void setDataset1(DefaultValueDataset dataset1) {
+		this.dataset1 = dataset1;
+	}
+
+	/**
+	 * @return the dataset2
+	 */
+	public DefaultValueDataset getDataset2() {
+		return dataset2;
+	}
+
+	/**
+	 * @param dataset2 the dataset2 to set
+	 */
+	public void setDataset2(DefaultValueDataset dataset2) {
+		this.dataset2 = dataset2;
+	}
+
+	/**
      * Starting point for the demo application.
      * 
      * @param args  ignored.
@@ -152,14 +187,21 @@ public class DialDoubleNeedle extends JPanel {
 		
         JPanel jpanel1 = new JPanel();
         
-        DialDoubleNeedle app1 = new DialDoubleNeedle("Carrinho 1");
-        DialDoubleNeedle app2 = new DialDoubleNeedle("Carrinho 2");
+        DialDoubleNeedle app1 = new DialDoubleNeedle();
+        app1.setTitle("Carrinho 1");
+        DialDoubleNeedle app2 = new DialDoubleNeedle();
+        app2.setTitle("Carrinho 2");
         
         
         jpanel1.add(app1,gridBagConstraints);
         jpanel1.add(app2,gridBagConstraints);
         
-		test.getContentPane().add(jpanel1);
+        
+        javax.swing.JScrollPane scrollPane = new javax.swing.JScrollPane();
+
+        scrollPane.setViewportView(jpanel1);
+        
+		test.getContentPane().add(scrollPane);
 		test.pack();
 		test.setVisible(true);
 		
@@ -176,7 +218,7 @@ public class DialDoubleNeedle extends JPanel {
         		v=app2.dataset1.getValue();
         		app2.dataset1.setValue(v.doubleValue()+0.01);
         		
-        		jpanel1.repaint();
+        		//jpanel1.repaint();
         		}
         }
         

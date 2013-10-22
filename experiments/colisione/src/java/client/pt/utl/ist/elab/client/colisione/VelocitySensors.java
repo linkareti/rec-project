@@ -14,6 +14,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
+import org.jfree.chart.JFreeChart;
+
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
@@ -29,27 +31,16 @@ public class VelocitySensors extends JPanel implements com.linkare.rec.impl.clie
 com.linkare.rec.impl.client.experiment.ExpDataModelListener {
 	
 	private static final long serialVersionUID = 2976338158081776558L;
-	private final DialDoubleNeedle dial1 = new DialDoubleNeedle(ReCResourceBundle.findStringOrDefault("colisione$rec.exp.colisione.dial.title1", "Velocity of Car 1"));
-	private final DialDoubleNeedle dial2 = new DialDoubleNeedle(ReCResourceBundle.findStringOrDefault("colisione$rec.exp.colisione.dial.title2", "Velocity of Car 2"));
+	//private final DialDoubleNeedle dial1 = new DialDoubleNeedle(ReCResourceBundle.findStringOrDefault("colisione$rec.exp.colisione.dial.title1", "Velocity of Car 1"));
+	//private final DialDoubleNeedle dial2 = new DialDoubleNeedle(ReCResourceBundle.findStringOrDefault("colisione$rec.exp.colisione.dial.title2", "Velocity of Car 2"));
+	private final DialDoubleNeedle dial1 = new DialDoubleNeedle();
+	private final DialDoubleNeedle dial2 = new DialDoubleNeedle();
 	
+	private javax.swing.JScrollPane scrollPane;
+	private javax.swing.JLabel labelWaitData;
 	
 	public VelocitySensors(){
 		initComponents();
-		setPreferredSize(new Dimension(dial1.getWidth() * 2 + 3 * 10, dial1.getHeight() + 2 * 10));
-		setMinimumSize(getPreferredSize());
-		setMaximumSize(getPreferredSize());
-        
-		java.awt.GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-		
-        JPanel jpanel1 = new JPanel();
-
-        jpanel1.add(dial1,gridBagConstraints);
-        jpanel1.add(dial2,gridBagConstraints);
-        add(jpanel1);
-        
-        setVisible(true);
-		
 	}
 	
 
@@ -57,6 +48,19 @@ com.linkare.rec.impl.client.experiment.ExpDataModelListener {
 		setLayout(new java.awt.BorderLayout());
 		setBackground(new java.awt.Color(0, 0, 0));
 		setForeground(new java.awt.Color(51, 51, 51));
+		
+		scrollPane = new javax.swing.JScrollPane();
+		labelWaitData = new javax.swing.JLabel();
+		
+		setPreferredSize(new Dimension(dial1.getWidth() * 2 + 3 * 10, dial1.getHeight() + 2 * 10));
+		setMinimumSize(getPreferredSize());
+		setMaximumSize(getPreferredSize());
+        
+		labelWaitData.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		labelWaitData.setText("waiting for data...");
+		scrollPane.setViewportView(labelWaitData);
+
+		add(scrollPane, java.awt.BorderLayout.CENTER);
 		
 	}
 	
@@ -66,7 +70,21 @@ com.linkare.rec.impl.client.experiment.ExpDataModelListener {
 			acqHeaderInited = true;
 			this.header = header;
 		}
+		
+		dial1.setTitle(ReCResourceBundle.findStringOrDefault("colisione$rec.exp.colisione.dial.title1", "Velocity of Car 1"));
+		dial2.setTitle(ReCResourceBundle.findStringOrDefault("colisione$rec.exp.colisione.dial.title2", "Velocity of Car 2"));
+		
+		java.awt.GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+		
+        JPanel panel = new JPanel();
 
+        panel.add(dial1,gridBagConstraints);
+        panel.add(dial2,gridBagConstraints);
+        panel.setPreferredSize(new java.awt.Dimension(350, 300));
+        
+		scrollPane.remove(labelWaitData);
+		scrollPane.setViewportView(panel);
 	}
 
 	private HardwareAcquisitionConfig header = null;
@@ -94,17 +112,13 @@ com.linkare.rec.impl.client.experiment.ExpDataModelListener {
 			}
 			this.vel2 = temp_vel2;
 		}
-		//repaint();
 		
-		dial1.dataset1.setValue(this.vel1);
-		dial1.dataset2.setValue(this.velmax1);
+		dial1.getDataset1().setValue(this.vel1);
+		dial1.getDataset2().setValue(this.velmax1);
 
-		dial2.dataset1.setValue(this.vel2);
-		dial2.dataset2.setValue(this.velmax2);
+		dial2.getDataset1().setValue(this.vel2);
+		dial2.getDataset2().setValue(this.velmax2);
 		
-		dial1.repaint();
-		dial2.repaint();
-		repaint();
 	}
 	
 	

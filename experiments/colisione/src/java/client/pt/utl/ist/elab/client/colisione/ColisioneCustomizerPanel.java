@@ -367,7 +367,7 @@ public class ColisioneCustomizerPanel extends AbstractCustomizer {
 		getAcquisitionConfig().getSelectedHardwareParameter("cam_segue").setParameterValue(String.valueOf(cam_segue));
 
                 //COMENTEI PARA COMPILAR
-		//acqConfig.setSelectedFrequency(freq);
+		getAcquisitionConfig().setSelectedFrequency(new Frequency(1));
 
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_jButtonOkActionPerformed
