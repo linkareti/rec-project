@@ -9,6 +9,8 @@ package com.linkare.rec.impl.client.experiment;
 import java.util.List;
 import java.util.Vector;
 
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
+
 /**
  * 
  * @author Jos� Pedro Pereira
@@ -167,12 +169,10 @@ public class DefaultHistogramDatasetProxy extends org.jfree.data.xy.AbstractInte
 			return null;
 		}
 
-		final String multiplier = expDataModel.getChannelConfig(channelDisplay).getSelectedScale().getMultiplier()
-				.toString();
-		final String ph_unit_symbol = expDataModel.getChannelConfig(channelDisplay).getSelectedScale()
-				.getPhysicsUnitSymbol();
-		final String ch_name = expDataModel.getChannelConfig(channelDisplay).getChannelName();
-
+		final String multiplier = expDataModel.getChannelConfig(channelDisplay).getSelectedScale().getMultiplier().toString();		
+		final String ph_unit_symbol = expDataModel.getChannelConfig(channelDisplay).getSelectedScale().getPhysicsUnitSymbol();	
+		String channelNameKey = expDataModel.getChannelConfig(channelDisplay).getChannelName();		
+		final String ch_name = ReCResourceBundle.findStringOrDefault(channelNameKey, channelNameKey);
 		return ch_name + " [" + multiplier + ph_unit_symbol + "]";
 	}
 

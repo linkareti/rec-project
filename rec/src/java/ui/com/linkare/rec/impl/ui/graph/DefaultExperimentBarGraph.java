@@ -16,10 +16,12 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYBarRenderer;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.metadata.Scale;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
@@ -194,6 +196,25 @@ public class DefaultExperimentBarGraph extends javax.swing.JPanel implements Exp
 	}
 
 	private HardwareAcquisitionConfig header = null;
+	
+	private String NumberAxisName = new String("Hits"); 
+	
+	
+	
+	/**
+	 * @return the numberAxisName
+	 */
+	public String getNumberAxisName() {
+		return NumberAxisName;
+	}
+
+	/**
+	 * @param numberAxisName the numberAxisName to set
+	 * This method allows flexibility in setting the axis name while allowing for internationalization
+	 */
+	public void setNumberAxisName(String numberAxisName) {
+		NumberAxisName = numberAxisName;
+	}
 
 	private void headerAvailable(final HardwareAcquisitionConfig header) {
 		if (header == null) {
@@ -201,21 +222,18 @@ public class DefaultExperimentBarGraph extends javax.swing.JPanel implements Exp
 		}
 
 		this.header = header;
-		final NumberAxis hitsAxis = new NumberAxis("Hits");
+		final NumberAxis hitsAxis = new NumberAxis(NumberAxisName);
 		hitsAxis.setAutoRange(true);
 		hitsAxis.setAutoRangeStickyZero(false);
 		hitsAxis.setAutoRangeIncludesZero(false);
 
-		final com.linkare.rec.data.metadata.Scale scale = header.getChannelsConfig(getChannelDisplay())
-				.getSelectedScale();
-		final String chn = header.getChannelsConfig(getChannelDisplay()).getChannelName();
+		final Scale scale = header.getChannelsConfig(getChannelDisplay()).getSelectedScale();
+		String channelName = header.getChannelsConfig(getChannelDisplay()).getChannelName();
+		final String chn = ReCResourceBundle.findStringOrDefault(channelName,channelName);
 		final String pus = scale.getPhysicsUnitSymbol();
-		final String multiplier = scale.getMultiplier().toString();
-
+		final String multiplier = scale.getMultiplier().toString();	
+		
 		final NumberAxis valueAxis = new NumberAxis(chn + " [" + multiplier + pus + "]");
-
-		// NumberAxis valueAxis = new
-		// VerticalNumberAxis("Acquisition Channels");
 		valueAxis.setAutoRange(true);
 		valueAxis.setAutoRangeStickyZero(false);
 		valueAxis.setAutoRangeIncludesZero(false);
@@ -225,9 +243,9 @@ public class DefaultExperimentBarGraph extends javax.swing.JPanel implements Exp
 		final XYPlot plot = new XYPlot(defaultHistogramDatasetProxy, valueAxis, hitsAxis, new XYBarRenderer(0.1));
 
 		chart = new JFreeChart(header.getFamiliarName(), JFreeChart.DEFAULT_TITLE_FONT, plot, true);
-
-		final ChartPanel panel = new ChartPanel(chart, 350, 250, 350, 250, 350, 250, true, true, true, true, true, true);
-		panel.setPreferredSize(new java.awt.Dimension(350, 250));
+		final ChartPanel panel = new ChartPanel(chart);
+		
+		panel.setPreferredSize(new java.awt.Dimension(350, 300));
 		// panel.setMinimumSize(new java.awt.Dimension(350,250));
 		// panel.setSize(new java.awt.Dimension(350,250));
 		panel.setMouseZoomable(true, false);
