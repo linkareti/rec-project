@@ -158,7 +158,9 @@ public class DefaultExperimentBarGraph extends javax.swing.JPanel implements Exp
 
 	@Override
 	public void newSamples(final NewExpDataEvent evt) {
-
+		if (header == null && model != null) {
+			headerAvailable(model.getAcquisitionConfig());
+		}
 	}
 
 	/**
