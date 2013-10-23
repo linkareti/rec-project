@@ -18,8 +18,14 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.JPanel;
+import javax.swing.ScrollPaneConstants;
 
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -39,7 +45,7 @@ import org.jfree.ui.StandardGradientPaintTransformer;
  * A sample application showing the use of a {@link DialPlot}.
  */
 @SuppressWarnings("serial")
-public class DialDoubleNeedle extends JPanel {
+public class DialDoubleNeedle extends JPanel{
     
     /** The first dataset. */
     private DefaultValueDataset dataset1;
@@ -173,6 +179,8 @@ public class DialDoubleNeedle extends JPanel {
      * @param args  ignored.
      */
     
+	
+	
 	public static void main(final String args[]) {
 		final javax.swing.JFrame test = new javax.swing.JFrame();
 		test.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -185,7 +193,7 @@ public class DialDoubleNeedle extends JPanel {
 		java.awt.GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
 		
-        JPanel jpanel1 = new JPanel();
+        final JPanel jpanel1 = new JPanel();
         
         DialDoubleNeedle app1 = new DialDoubleNeedle();
         app1.setTitle("Carrinho 1");
@@ -197,11 +205,40 @@ public class DialDoubleNeedle extends JPanel {
         jpanel1.add(app2,gridBagConstraints);
         
         
-        javax.swing.JScrollPane scrollPane = new javax.swing.JScrollPane();
+        
+        final javax.swing.JScrollPane scrollPane = new javax.swing.JScrollPane(jpanel1, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         scrollPane.setViewportView(jpanel1);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         
-		test.getContentPane().add(scrollPane);
+		
+
+		
+        scrollPane.addPropertyChangeListener(new PropertyChangeListener(){
+        	@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+        		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+		    		public void run() {
+			    		//scrollPane.getViewportBorderBounds();
+						final Rectangle old_rect = jpanel1.getVisibleRect();
+						final Rectangle new_rect = scrollPane.getViewportBorderBounds();
+						//new_rect.x = old_rect.x - scrollPane.getHorizontalScrollBar().getHeight();
+						//new_rect.width = old_rect.width - scrollPane.getVerticalScrollBar().getWidth();
+			    		 
+						new_rect.x = old_rect.x - 20;
+						new_rect.width = old_rect.width - 20;
+						
+			    		jpanel1.scrollRectToVisible(new Rectangle(50,50));
+						//scrollPane.getViewport().getComponent(0).;
+					}
+        		});
+        	}
+        });
+        
+        
+        
+        test.getContentPane().add(scrollPane, java.awt.BorderLayout.CENTER);
 		test.pack();
 		test.setVisible(true);
 		
@@ -218,8 +255,10 @@ public class DialDoubleNeedle extends JPanel {
         		v=app2.dataset1.getValue();
         		app2.dataset1.setValue(v.doubleValue()+0.01);
         		
-        		//jpanel1.repaint();
-        		}
+        		//scrollPane.
+        		scrollPane.getHorizontalScrollBar().repaint();
+        		scrollPane.getVerticalScrollBar().repaint();
+        	}
         }
         
 	}

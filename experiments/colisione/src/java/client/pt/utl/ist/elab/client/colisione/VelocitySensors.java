@@ -13,6 +13,7 @@ import javax.swing.JComponent;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
+import javax.swing.ScrollPaneConstants;
 
 import org.jfree.chart.JFreeChart;
 
@@ -59,7 +60,10 @@ com.linkare.rec.impl.client.experiment.ExpDataModelListener {
 		labelWaitData.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		labelWaitData.setText("waiting for data...");
 		scrollPane.setViewportView(labelWaitData);
-
+		
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        
 		add(scrollPane, java.awt.BorderLayout.CENTER);
 		
 	}
@@ -118,6 +122,9 @@ com.linkare.rec.impl.client.experiment.ExpDataModelListener {
 
 		dial2.getDataset1().setValue(this.vel2);
 		dial2.getDataset2().setValue(this.velmax2);
+		
+		scrollPane.getHorizontalScrollBar().repaint();
+		scrollPane.getVerticalScrollBar().repaint();
 		
 	}
 	
@@ -252,7 +259,7 @@ com.linkare.rec.impl.client.experiment.ExpDataModelListener {
 	 */
 	@Override
 	public DataDisplayEnum getDisplayType() {
-		return DataDisplayEnum.CHART;
+		return DataDisplayEnum.SENSOR;
 		
 	}
 
