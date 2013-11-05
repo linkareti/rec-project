@@ -63,128 +63,83 @@ void started(void)
 	int estab = 0;
     int count = 0;
 
-        _TRISF6 = 0;  //make RF6 outup -> High Voltage control pin
-        _LATF6 = 0;   //make sure high voltage is off
- /*       printf("\n\ropen valve\n"); //open Argon valve since its the only one with gas
-        _TRISE4 = 0;  //make sure that RB8 is an output
-        _LATE4 = 1;     //open on-off valve
-       
-        //puff
-        OC3RS = 500;     //inject gas for 0.5s
-        delay_ms(500);
-        OC3RS = 0;
-*/
+
+    _TRISD1 = 0;  //make RD1 outup -> High Voltage control pin
+    _LATD1 = 0;   //make sure high voltage is off
 
 	float pressure=-1, setpoint=0, setpoint2=0, error=0, kp=0, ki=0, kd=0, value=0;
 	float previous_error = 0, derivative =0, integral1 =0;
 	setpoint = ((float) param_5)/1000.;
 	setpoint2 = ((float) param_6)/1000.;
-
-//	kp= 0.35;
-        //kp = 0.35;
-//	ki= 0.05;
-        //ki= 0.08;
-//	kd= 0.01;
-        //kd= 0.02;
-
-//	error =0, integral1 = 0, derivative =0, value =0;
 	
 	T2CONbits.TON= 1;	//Enable Timer2
-	PR2 = 589;		//Timer2 Period = PR2*34ns, used in PID
+	PR2 = 589;			//Timer2 Period = PR2*34ns, used in PID
 
-//	printf("\n\rSetPoint = %e   kp= %f \n",setpoint, kp);
+    pressure = acquire_gauge_01_pressure();
+    _TRISE5 = 0;    //make sure the relay control bit is an output
+    _LATE5 = 1;     //start pumping
+    count = 0;
 
-	//while(RXbuffer[str_pos-1]!= 0x0D){
+    printf("DAT\r");  //Start sending data to hardware server
 
+    while((pressure > setpoint2) && (count < 1000))
+    {
         pressure = acquire_gauge_01_pressure();
-        _TRISD0 = 0;    //make sure the relay control bit is an output
-        _LATD0 = 1;     //start pumping
+        printf("\r502\t110\t%f\n",pressure);
+        delay_ms(100);
+        ClrWdt();
+        count++;
+    }
 
-        count = 0;
+    _LATE5 = 0;     //stop pumping and valve
 
-        printf("DAT\r");
-        //TODO: Put both counts in the while to 1000 and 2000 respectivly
+    delay_ms(1500);
+    _LATD1 = 1;     //turn high voltage on
+    delay_ms(1500);
 
-        while((pressure > setpoint2) && (count < 1000))
-        {
-            pressure = acquire_gauge_01_pressure();
-            printf("\r502\t110\t%f\n",pressure);
-            delay_ms(100);
-            ClrWdt();
-            count++;
-        }
+    //Gas Selection
+    _TRISE4 = 0;  //make sure that E4 is an output
+	_TRISF6 = 0;  //make sure that F6 is an output
+	_TRISD0 = 0;  //make sure that D0 is an output
+	
+	switch(gas_selector) 
+	{
+		case 1:
+		    _LATE4 = 1;     //open on-off valve (gas 1)
+		    break;
+		case 2 :
+		    _LATF6 = 1;     //open on-off valve (gas 2)
+		    break;
+		case 3 :
+		    _LATD0 = 1;     //open on-off valve (gas 3)
+		    break;
+	}
 
-        _LATD0 = 0;     //stop pumping and valve
+    OC3RS = 393;//PR2*2/3;     //inject gas
 
-        delay_ms(1500);
-        _LATF6 = 1;     //turn high voltage on
-        //puff
-        delay_ms(1500);
+    count = 0;
+    while((pressure < setpoint) && (count < 2000))
+    {
+        pressure = acquire_gauge_01_pressure();
+        delay_ms(50);
+        count++;
+        printf("\r502\t110\t%f\n",pressure);
+        //printf("\n\r pressao:%f count: %d\n",pressure,count);
+        ClrWdt();
+    }
 
-        //printf("\n\r puffing\n");
-        _TRISE4 = 0;  //make sure that RB8 is an output
-        _LATE4 = 1;     //open on-off valve
-        OC3RS = 393;//PR2*2/3;     //inject gas
 
-        count = 0;
-        while((pressure < setpoint) && (count < 2000))
-        {
-            pressure = acquire_gauge_01_pressure();
-            delay_ms(50);
-            count++;
-            printf("\r502\t110\t%f\n",pressure);
-            //printf("\n\r pressao:%f count: %d\n",pressure,count);
-            ClrWdt();
-        }
+    _LATE4 = 0;     //close on-off valve (gas 1)
+    _LATF6 = 0;     //close on-off valve (gas 2)
+    _LATD0 = 0;     //close on-off valve (gas 3)
 
-        _LATE4 = 0;     //close on-off valve
-//	error = setpoint - pressure;
-        OC3RS= 0; 			//Closes Valve
+    OC3RS= 0; 			//Closes Flow-Valve
 	T2CONbits.TON= 0;	//Disable Timer2
 
-/*	while(estab < 20 && count < 10000){
-		//LATFbits.LATF6=0;
-		pressure =acquire_gauge_01_pressure();
-
-		error = setpoint - pressure;
-		integral1 +=error * 0.148;
-		derivative=(error-previous_error)/0.148;
-		value = 25*(kp * error  + ki * integral1 + kd * derivative)/(2.4e-2);
-		//value = kp * error;
-                /*PWM table:
-                 * PWM = 0 -> P = 17 uBar Vsol = 0,54V
-                 * PWM = 100 -> P = 80 uBar Vsol = 1,33V
-                 * PWM = 200 -> P = 88 uBar Vsol = 2,24V
-                 * PWM = 300 -> P = 99 uBar Vsol = 2,93V
-                 * PWM = 400 -> P = 150 uBar Vsol = 3,46V
-                 * PWM = 500 -> P = 1500 uBar Vsol = 3,88V
-                
-                //value = 500;
-
-                //glow from 17 uBar ->
-                previous_error = error;
-		if( value>470){value = 470;}
-		else if( value<1){ value = 1;}
-               // value = 470;
-		OC3RS = (int) value;
-		printf("\r pressao:%f PWM:%d value:%f setpoint:%f er:%f count:%d\n",pressure,OC3RS, value, setpoint, error,count);
-		//LATFbits.LATF6=1;
-		if(fabs(error/setpoint)<0.02){estab++;}
-		ClrWdt();
-                count++;
-                //delay_ms(100);
-	}
-*/
-//	OC3RS=50;
 	
 	//*Main Routine*//
 
 	PR3 = 589;			//Timer3 Period = PR3*34ns, used in WaveGeneration
-
-//	printf("\r pressao:%e \n",acquire_gauge_01_pressure ());//Debug Only
-
-	//printf("DAT\r");
-
 	timeout_count = 0;
 	points_count = 0;	//Clears acquired points counter
 	OC4RS = 0;  		//sets duty-cycle to 0 and	
@@ -193,14 +148,13 @@ void started(void)
 	IFS0bits.T3IF = 0;  //Clears Flag
 	IFS0bits.ADIF = 0;  //Clears Flag
 
-        myflag=0;
+    myflag=0;
 
-  //while(RXbuffer[str_pos-1]!= 0x0D)
 	while(points_count < n_samp * n_period){
 		if(myflag == 1){
-                        myflag=0;
-                        if (data[0]>1000){data[0] = 999;}
-                        if (data[1]>1000){data[1] = 999;}
+            myflag=0;
+            if (data[0]>1000){data[0] = 999;}
+            if (data[1]>1000){data[1] = 999;}
 			c[0] = data[0]/100;
 			c[1] = (data[0]-100*c[0])/10;
 			c[2] = data[0]%10;
@@ -210,9 +164,9 @@ void started(void)
 			c[5] = data[1]%10;
                         
                        
-                        for(count=0; count<=5; count++ ){
-                            if(c[count]>9){c[count]=9;}
-                        }
+            for(count=0; count<=5; count++ ){
+                if(c[count]>9){c[count]=9;}
+            }
 
 			putchar('\r');
 			putchar('0'+ (char)c[0]);
@@ -228,40 +182,41 @@ void started(void)
 		}
 	}
 
-        count = 0;
-        while(count < 10)
-        {
-            pressure = acquire_gauge_01_pressure();
-            delay_ms(50);
-            count++;
-            printf("\r502\t110\t%f\n",pressure);
-            ClrWdt();
-        }
+    count = 0;
+    while(count < 10)
+    {
+        pressure = acquire_gauge_01_pressure();
+        delay_ms(50);
+        count++;
+        printf("\r502\t110\t%f\n",pressure);
+        ClrWdt();
+    }
 
-	printf("END\r");
+	printf("END\r"); //Stop sending data to hardware server
 	
 	T3CONbits.TON= 0;	//Disable Timer3
 	OC3RS= 0; 			//Closes Valve
-        delay_ms(2000);
-        _LATD0 = 0;               //close pump
-		_LATF6 = 0;			   	  //HV off
-        delay_ms(10);		//Waits 10ms
+    delay_ms(2000);
+    _LATE5 = 0;               //close pump
+	_LATD1 = 0;			   	  //HV off
+    delay_ms(10);		//Waits 10ms
 	T2CONbits.TON= 0;	//Disable Timer2
 	ADCON1bits.ADON = 0;//Disable ADC
 	IFS0bits.T3IF = 0;  //Clears Flag
 	T2CONbits.TON= 0;	//Disable Timer2
-
-//	printf("\r pressao:%e \n",acquire_gauge_01_pressure ());//Debug Only
 	
 }
 
 void stopping(void)
 {
 	T2CONbits.TON= 1;	//Enable Timer2	
-	OC3RS= 0; 		//Closes Valve
-        _LATE4 = 0;               //close ON/OFF valve argon
-        _LATD0 = 0;               //turn pump off 
-        _LATF6 = 0;				  //HV off
+	OC3RS= 0; 		//Closes Flow-Valve
+    _LATE4 = 0;     //close on-off valve (gas 1)
+    _LATF6 = 0;     //close on-off valve (gas 2)
+    _LATD0 = 0;     //close on-off valve (gas 3)
+
+    _LATE5 = 0;     //close pump
+	_LATD1 = 0;		//HV off
 }
 
 
@@ -280,33 +235,15 @@ void __attribute__((__interrupt__,auto_psv)) _T3Interrupt(void)
 		OC4RS += duty_inc;
 		if((OC4RS > max_duty) || (OC4RS < 10)){ duty_inc = -duty_inc;}
 		ClrWdt();
-		//OC4RS = 2*wave_count < n_samp ? OC4RS + duty_inc : OC4RS - duty_inc;
 	}
  }
 
-/* This is T4 interrupt handler */
-//void __attribute__((__interrupt__,auto_psv)) _T4Interrupt(void)
-//{    
-//	IFS1bits.T4IF = 0;    //resets and reenables the T3 interrupt flag
-//}
 
 /* This is ADC interrupt handler */
 void __attribute__((__interrupt__,auto_psv)) _ADCInterrupt(void)
 {    
 	IFS0bits.ADIF = 0; // clear interrupt
-/*
-    c[0]=(char) (128+(ADCBUF1>>3));
-    c[1]=(char) (128+(ADCBUF1&7)+((ADCBUF0>>3)&112));
-    c[2]=(char) (128+(127&ADCBUF0));
 
-	putchar('\r');
-	putchar(c[0]);
-	putchar(' ');
-	putchar(c[1]);
-	putchar(' ');
-	putchar(c[2]);
-	putchar('\n');
-*/
 	data[0] = ADCBUF1;
 	data[1] = ADCBUF0;
 	myflag = 1;

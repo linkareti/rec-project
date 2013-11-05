@@ -24,7 +24,6 @@ int main(){
 	configure_uart2();
 	open_timer2();
 	open_timer3();
-	//open_servo();
 	configure_adc();
 	open_output_compare3();
 	open_output_compare4();
