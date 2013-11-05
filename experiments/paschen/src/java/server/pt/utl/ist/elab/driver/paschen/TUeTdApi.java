@@ -6,7 +6,7 @@ import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 
 public interface TUeTdApi extends Library {
-	TUeTdApi INSTANCE = (TUeTdApi) Native.loadLibrary("tdApi", TUeTdApi.class);
+	TUeTdApi INSTANCE = (TUeTdApi) Native.loadLibrary("TUeTdApi", TUeTdApi.class);
 
 	
 /*************************/
