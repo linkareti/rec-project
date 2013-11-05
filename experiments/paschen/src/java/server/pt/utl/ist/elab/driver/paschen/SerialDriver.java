@@ -135,7 +135,7 @@ public class SerialDriver {
     	try
         {
     		sd = new SerialDriver();
-    		sd.connect("COM5");
+    		sd.connect("/dev/ttyUSB0");
     		sd.configureGauge();
     		while(true){
     			System.out.println("Pressure is: "+sd.getValuefromGauge()+" mBar");

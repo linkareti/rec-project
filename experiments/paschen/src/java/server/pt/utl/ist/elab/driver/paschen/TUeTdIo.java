@@ -7,7 +7,7 @@ import com.sun.jna.Pointer;
 
 public interface TUeTdIo extends Library {
 
-	TUeTdIo INSTANCE = (TUeTdIo) Native.loadLibrary("TUeTdIo", TUeTdIo.class);
+	TUeTdIo INSTANCE = (TUeTdIo) Native.loadLibrary("tdIo", TUeTdIo.class);
 	
 	
 /*************************/
