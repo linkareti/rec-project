@@ -735,7 +735,7 @@ public class LangmuirCustomizer extends AbstractCustomizer {
         tfSigA.setText("50");
         sldSigP.setValue(40);
         tfSigP.setText("40");
-        sldPress.setValue(30);
+        sldPress.setValue(10);
         tfPress.setText("3.0");
         sldNumSamples.setValue(40);
         tfNumSamples.setText("40");
@@ -765,6 +765,7 @@ public class LangmuirCustomizer extends AbstractCustomizer {
 	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
 
+	
 		final int nsamples = (sldNumSamples.getValue()*sldNumPeriod.getValue()) < 10 ? 10 : (sldNumSamples.getValue()*sldNumPeriod.getValue());
 		getAcquisitionConfig().setTotalSamples(nsamples+3000);
 		
