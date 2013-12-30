@@ -3,7 +3,7 @@
 <!-- Created by jp on 9 de Maio de 2003, 19:07 -->
 
 <!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
-<HardwareInfo id="ELAB_PENDULO_GRAV_STAMP_V01" familiarName="Pendulo gravitico amortecido" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
+<HardwareInfo id="PENDULO_GRAV" familiarName="Pendulo gravitico amortecido" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
     <description>
         <![CDATA[ 
         Esta experi�ncia serve para - n�o esquecer de alterar esta descri��o
@@ -40,10 +40,10 @@
         <step-samples>1</step-samples>
     </sampling-scale>
     
-    <ChannelInfo name="Angulo" independent="false" direction="CHANNEL_INPUT">
-        <scale label="Angulo[º]" physicsunitname="º" physicsunitsymbol="º" multiplier="none" selected="true">
-            <min><PhysicsVal type="float">-90</PhysicsVal></min>
-            <max><PhysicsVal type="float">90</PhysicsVal></max>
+    <ChannelInfo name="pendulogravitico$channel.name" independent="false" direction="CHANNEL_INPUT">
+        <scale label="pendulogravitico$channel.label" physicsunitname="pendulogravitico$channel.unitname" physicsunitsymbol="º" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1000</PhysicsVal></min>
+            <max><PhysicsVal type="float">5000</PhysicsVal></max>
             <step><PhysicsVal type="float">0.00001</PhysicsVal></step>
             <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
         </scale>

@@ -32,7 +32,7 @@ public class StampPenduloProcessor extends AbstractStampProcessor {
 	@Override
 	public boolean process(final StampCommand command) {
 		float angle = 0;
-		final String[] splitedStr = command.getCommand().split(" ");
+		final String[] splitedStr = command.getCommand().split("\t");
 
 		if (command.getCommandIdentifier().equalsIgnoreCase(StampPenduloProcessor.COMMAND_IDENTIFIER)
 				&& splitedStr[0] != null) {

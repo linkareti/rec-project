@@ -34,10 +34,13 @@ public class PenduloStampDriver extends AbstractStampDriver<PenduloStampDataSour
 	/** Creates a new instance of RadioactividadeStampDriver */
 	public PenduloStampDriver() {
 		super();
-		setDriverUniqueID("ELAB_PENDULO_GRAV_STAMP_V01");
+		setDriverUniqueID("PENDULO_GRAV");
 		setApplicationNameLockPort("Pendulo Gravitico Stamp Driver V0.2");
 		setTimeOutPerPort(10000);
-		setPortBaudRate(38400);
+		// This driver is communicating with a pic which does not need
+		// the wait for echo to work...
+		setWaitForEcho(false);
+		setPortBaudRate(115200);
 		loadCommandHandlers();
 	}
 

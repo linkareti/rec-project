@@ -61,8 +61,8 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 			posfixostr = "0" + posfixostr;
 		}
 
-		final String commandStr = command.getCommandIdentifier() + " " + posfixostr + " " + posinistr + " " + posendstr
-				+ " " + calib + " " + luzpol;
+		final String commandStr = command.getCommandIdentifier() + " " + calib + " " + luzpol + " " + 
+							posfixostr + " " + posinistr + " " + posendstr;
 		command.setCommand(commandStr);
 
 		return true;

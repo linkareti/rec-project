@@ -36,7 +36,7 @@ public class StampPolaroidProcessor extends AbstractStampProcessor {
 		int angulo = 0;
 		float intensidade = 0;
 
-		final String[] splitedStr = command.getCommand().split(" ");
+		final String[] splitedStr = command.getCommand().split("\t");
 
 		if (command.getCommandIdentifier().equalsIgnoreCase(StampPolaroidProcessor.COMMAND_IDENTIFIER)
 				&& splitedStr[0] != null) {

@@ -40,7 +40,7 @@ public class PolaroidStampDriver extends AbstractStampDriver<PolaroidStampDataSo
 	/** Creates a new instance of RadioactividadeStampDriver */
 	public PolaroidStampDriver() {
 		super();
-		setDriverUniqueID("<ELAB_POLAROID>");
+		setDriverUniqueID("POLAROID"); //<ELAB_POLAROID>
 		setApplicationNameLockPort("Polaroid Stamp Driver V0.2");
 		setTimeOutPerPort(10000);
 		// This driver is communicating with a pic which does not need
