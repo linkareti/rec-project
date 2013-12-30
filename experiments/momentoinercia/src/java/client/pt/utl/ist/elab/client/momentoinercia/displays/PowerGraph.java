@@ -28,6 +28,6 @@ public class PowerGraph extends MultSeriesXYExperimentGraph {
 
 	@Override
 	public String getName() {
-		return "Pot�ncia dissipada";
+		return "Potência dissipada";
 	}
 }
