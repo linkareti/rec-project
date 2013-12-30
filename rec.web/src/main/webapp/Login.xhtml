@@ -98,7 +98,9 @@
                 </ul>
             </h:form>
             <div id="statusPanelFooter" class="statusPanelFooter">
-                <a href="#{request.contextPath}/Faq.faces"><b>#{bundle['page.faq.title']}</b></a> | <a href="#{request.contextPath}/Requirements.faces"><b>#{bundle['page.requirements.title']}</b></a> | <a href="mailto:elab@e-escola.pt" target="_blank"><b>#{bundle['page.contact.title']}</b></a>
+		<a href="#{bundle['disclaimer.java.url']}"><b>#{bundle['disclaimer.java.version']}</b></a> <br /><br />
+                <!-- <a href="#{request.contextPath}/Faq.faces"><b>#{bundle['page.faq.title']}</b></a> | <a href="#{request.contextPath}/Requirements.faces"><b>#{bundle['page.requirements.title']}</b></a> -->
+		<a href="#{bundle['page.faq.url']}"><b>#{bundle['page.faq.title']}</b></a> | <a href="#{bundle['page.requirements.url']}"><b>#{bundle['page.requirements.title']}</b></a> | <a href="mailto:elab@e-escola.pt" target="_blank"><b>#{bundle['page.contact.title']}</b></a>
             </div>
         </div>
     </ui:define>
