@@ -8,7 +8,7 @@ package pt.utl.ist.elab.client.conducaocalor.displays;
 
 /**
  *
- * @author  Andr�
+ * @author  André
  */
 
 import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
@@ -232,7 +232,7 @@ public class TSensor extends javax.swing.JPanel implements com.linkare.rec.impl.
 		g2D.drawOval(x_start + imgS1.getWidth() - 20, y_start, 20, imgS1.getHeight());
 
 		g2D.setColor(BRASS_COLOR);
-		g2D.drawString("Lat�o", x_start + imgS1.getWidth() + 10, y_start + 15);
+		g2D.drawString("Latão", x_start + imgS1.getWidth() + 10, y_start + 15);
 
 		/** Sensor 1 bar Iron */
 		final Ellipse2D.Double s21e = new Ellipse2D.Double();

@@ -119,12 +119,12 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 				.getChannelName();
 		final String ch_nameX = ReCResourceBundle.findStringOrDefault(channelNameKey,channelNameKey);
 
-		final String multiplierY = expDataModel.getChannelConfig(getChannelDisplayY()).getSelectedScale()
-				.getMultiplier().toString();
-		final String ph_unit_symbolY = expDataModel.getChannelConfig(getChannelDisplayY()).getSelectedScale()
+		final String multiplierY = expDataModel.getChannelConfig(getChannelDisplayYArray()[series]).getSelectedScale()
+				.getMultiplier().toString(); 
+		final String ph_unit_symbolY = expDataModel.getChannelConfig(getChannelDisplayYArray()[series]).getSelectedScale()
 				.getPhysicsUnitSymbol();
 		
-		channelNameKey = expDataModel.getChannelConfig(getChannelDisplayY())
+		channelNameKey = expDataModel.getChannelConfig(getChannelDisplayYArray()[series])
 				.getChannelName();
 		final String ch_nameY = ReCResourceBundle.findStringOrDefault(channelNameKey,channelNameKey);
 
