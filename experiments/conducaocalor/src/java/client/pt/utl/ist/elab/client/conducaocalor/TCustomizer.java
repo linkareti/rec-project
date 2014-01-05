@@ -147,10 +147,10 @@ public class TCustomizer extends AbstractCustomizer {
 		jPanel1.setPreferredSize(new java.awt.Dimension(350, 80));
 		jSliderTBS.setMajorTickSpacing(1);
 		jSliderTBS.setMaximum(10);
-		jSliderTBS.setMinimum(1);
+		jSliderTBS.setMinimum(2);
 		jSliderTBS.setPaintLabels(true);
 		jSliderTBS.setPaintTicks(true);
-		jSliderTBS.setValue(1);
+		jSliderTBS.setValue(2);
 		jSliderTBS.setMaximumSize(new java.awt.Dimension(1000, 32767));
 		jSliderTBS.setMinimumSize(new java.awt.Dimension(255, 80));
 		jSliderTBS.setPreferredSize(new java.awt.Dimension(255, 80));
@@ -169,7 +169,7 @@ public class TCustomizer extends AbstractCustomizer {
 
 		jTextFieldTBS.setColumns(3);
 		jTextFieldTBS.setHorizontalAlignment(SwingConstants.RIGHT);
-		jTextFieldTBS.setText("1");
+		jTextFieldTBS.setText("2");
 		jTextFieldTBS.setMaximumSize(new java.awt.Dimension(30, 16));
 		jTextFieldTBS.setMinimumSize(new java.awt.Dimension(30, 16));
 		jTextFieldTBS.setPreferredSize(new java.awt.Dimension(37, 16));
@@ -511,8 +511,8 @@ public class TCustomizer extends AbstractCustomizer {
 		jTextFieldSamples.setText("200");
 		jSliderAqc.setValue(50);
 		jTextFieldAqc.setText("50");
-		jSliderTBS.setValue(1);
-		jTextFieldTBS.setText("1");
+		jSliderTBS.setValue(2);
+		jTextFieldTBS.setText("2");
 		jSliderTMax.setValue(50);
 		jTextFieldTMax.setText("50");
 		jRadioButtonOsc.setSelected(true);

@@ -37,7 +37,7 @@
 
 	<frequency-scale label="Sampling Interval">
 		<min-frequency>
-			<Frequency type="SamplingIntervalType" multiplier="none">1</Frequency>
+			<Frequency type="SamplingIntervalType" multiplier="none">2</Frequency>
 		</min-frequency>
 		<max-frequency>
 			<Frequency type="SamplingIntervalType" multiplier="none">10</Frequency>
