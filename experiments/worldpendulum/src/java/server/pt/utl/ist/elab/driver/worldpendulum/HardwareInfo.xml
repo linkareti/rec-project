@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
-<HardwareInfo id="ELAB_WORLD_PENDULUM_CCVALG" familiarName="worldpendulum" name="Basic STAMP"
+<HardwareInfo id="ELAB_WORLD_PENDULUM_CCVALG" familiarName="Pêndulo Algarve" name="Basic STAMP"
 	version="BS2" manufacturer="Parallax" driverVersion="v2">
 	
 	<description>	</description>
