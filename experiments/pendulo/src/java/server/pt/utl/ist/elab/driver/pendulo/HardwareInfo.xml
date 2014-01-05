@@ -3,7 +3,7 @@
 <!-- Created by jp on 9 de Maio de 2003, 19:07 -->
 
 <!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
-<HardwareInfo id="ELAB_PENDULO_STAMP_V02" familiarName="Pêndulo vertical amortecido" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
+<HardwareInfo id="ELAB_PENDULO_STAMP_V02" familiarName="Pêndulo amortecido" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
     <description>
         <![CDATA[ 
         Esta experiência serve para - não esquecer de alterar esta descrição
