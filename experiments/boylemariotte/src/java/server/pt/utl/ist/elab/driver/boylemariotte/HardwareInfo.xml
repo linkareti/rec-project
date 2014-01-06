@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
-<HardwareInfo id="ELAB_BOYLE_MARIOTTE_DSPIC_V1.0" familiarName="boylemariotte" name="Basic STAMP"
+<HardwareInfo id="ELAB_BOYLE_MARIOTTE_DSPIC_V1.0" familiarName="BoyleMariotte" name="Basic STAMP"
 	version="BS2" manufacturer="Parallax" driverVersion="v2">
 
 	<!-- This elements are still just for test -->

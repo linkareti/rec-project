@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
-<HardwareInfo id="ELAB_PLANCK_DSPIC_V2.0" familiarName="planck"
+<HardwareInfo id="ELAB_PLANCK_DSPIC_V2.0" familiarName="Planck"
 	name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
 	<description>
         <![CDATA[ 
