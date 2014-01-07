@@ -275,13 +275,13 @@ public class PolaroidCustomizer  extends AbstractCustomizer {
 		getAcquisitionConfig().getSelectedHardwareParameter("LuzPol").setParameterValue(
 				"" + ((jCheckBoxLightPol.isSelected()) ? 1 : 0));
 		getAcquisitionConfig().getSelectedHardwareParameter("Calib").setParameterValue("" + ((jCheckBoxCalib.isSelected()) ? 1 : 0));
-		int nSamples = Math.abs(((jSliderPolVarEnd.getValue() - jSliderPolVarIni.getValue()) * 155) / 180);
+		int nSamples = Math.abs(((jSliderPolVarEnd.getValue() - jSliderPolVarIni.getValue()) * 1300) / 180);
 		if (nSamples == 0) {
 			nSamples = 1;
 			getAcquisitionConfig().getSelectedHardwareParameter("PosEndPolMovel").setParameterValue(
 					"" + jSliderPolVarEnd.getValue() + 2);
 		}
-		getAcquisitionConfig().setTotalSamples(Math.abs(jSliderPolVarEnd.getValue() - jSliderPolVarIni.getValue()));
+		getAcquisitionConfig().setTotalSamples(nSamples);
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_btnOKActionPerformed
 
