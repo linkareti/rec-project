@@ -71,7 +71,7 @@
         </scale>
     </ChannelInfo>        
     <ChannelInfo name="polaroid$channel.intens.name" independent="true" direction="CHANNEL_INPUT">
-        <scale label="polaroid$channel.intens.label" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+        <scale label="polaroid$channel.intens.label" physicsunitname="polaroid$channel.intens.unitname" physicsunitsymbol="V" multiplier="none" selected="true">
             <min><PhysicsVal type="float">-1000</PhysicsVal></min>
             <max><PhysicsVal type="float">1000</PhysicsVal></max>            				 
             <step><PhysicsVal type="float">0.000001</PhysicsVal></step>
