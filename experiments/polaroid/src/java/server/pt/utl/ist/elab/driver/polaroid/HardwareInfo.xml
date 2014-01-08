@@ -64,10 +64,10 @@
 
     <ChannelInfo name="polaroid$channel.angulo.name" independent="true" direction="CHANNEL_INPUT">
         <scale label="polaroid$channel.angulo.label" physicsunitname="polaroid$channel.angulo.unitname" physicsunitsymbol="º" multiplier="none" selected="true">
-            <min><PhysicsVal type="int">0</PhysicsVal></min>
-            <max><PhysicsVal type="int">180</PhysicsVal></max>            				 
-            <step><PhysicsVal type="int">1</PhysicsVal></step>
-            <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">180</PhysicsVal></max>            				 
+            <step><PhysicsVal type="float">0.001</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.015</PhysicsVal></errordefault>
         </scale>
     </ChannelInfo>        
     <ChannelInfo name="polaroid$channel.intens.name" independent="true" direction="CHANNEL_INPUT">
@@ -75,7 +75,7 @@
             <min><PhysicsVal type="float">-1000</PhysicsVal></min>
             <max><PhysicsVal type="float">1000</PhysicsVal></max>            				 
             <step><PhysicsVal type="float">0.000001</PhysicsVal></step>
-            <errordefault><PhysicsVal type="float">1</PhysicsVal></errordefault>
+            <errordefault><PhysicsVal type="float">0.005</PhysicsVal></errordefault>
         </scale>
     </ChannelInfo>        
 </HardwareInfo>

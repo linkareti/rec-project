@@ -40,18 +40,18 @@ public class PolaroidStampDataSource extends AbstractStampDataSource {
 		}
 
 		if (cmd.getCommandIdentifier().equals(StampPolaroidProcessor.COMMAND_IDENTIFIER)) {
-			int angulo;
+			float angulo;
 			float intensidade;
 			final PhysicsValue[] values = new PhysicsValue[2];
 			try {
-				angulo = ((Integer) cmd.getCommandData(StampPolaroidProcessor.ANGULO)).intValue();
+				angulo = ((Float) cmd.getCommandData(StampPolaroidProcessor.ANGULO)).floatValue();
 				intensidade = ((Float) cmd.getCommandData(StampPolaroidProcessor.INTENSIDADE)).floatValue();
 			} catch (final ClassCastException e) {
 				e.printStackTrace();
 				return;
 			}
 
-			values[0] = new PhysicsValue(PhysicsValFactory.fromInt(angulo), getAcquisitionHeader().getChannelsConfig(0)
+			values[0] = new PhysicsValue(PhysicsValFactory.fromFloat(angulo), getAcquisitionHeader().getChannelsConfig(0)
 					.getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader().getChannelsConfig(0)
 					.getSelectedScale().getMultiplier());
 
