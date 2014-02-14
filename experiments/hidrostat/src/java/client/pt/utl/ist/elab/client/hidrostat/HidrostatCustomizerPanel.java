@@ -87,7 +87,6 @@ public class HidrostatCustomizerPanel extends AbstractCustomizer {
         jSliderHidrostatInitialDepth.setOrientation(javax.swing.JSlider.VERTICAL);
         jSliderHidrostatInitialDepth.setPaintLabels(true);
         jSliderHidrostatInitialDepth.setPaintTicks(true);
-        jSliderHidrostatInitialDepth.setSnapToTicks(true);
         jSliderHidrostatInitialDepth.setToolTipText(resourceMap.getString("jSliderHidrostatInitialDepth.toolTipText")); // NOI18N
         jSliderHidrostatInitialDepth.setValue(0);
         jSliderHidrostatInitialDepth.setInverted(true);
@@ -136,7 +135,6 @@ public class HidrostatCustomizerPanel extends AbstractCustomizer {
         jSliderHidrostatFinalDepth.setOrientation(javax.swing.JSlider.VERTICAL);
         jSliderHidrostatFinalDepth.setPaintLabels(true);
         jSliderHidrostatFinalDepth.setPaintTicks(true);
-        jSliderHidrostatFinalDepth.setSnapToTicks(true);
         jSliderHidrostatFinalDepth.setToolTipText(resourceMap.getString("jSliderHidrostatFinalDepth.toolTipText")); // NOI18N
         jSliderHidrostatFinalDepth.setValue(1920);
         jSliderHidrostatFinalDepth.setInverted(true);
