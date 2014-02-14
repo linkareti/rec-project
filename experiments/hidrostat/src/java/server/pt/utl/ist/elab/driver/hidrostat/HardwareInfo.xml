@@ -72,11 +72,11 @@
 		independent="false" direction="CHANNEL_INPUT">
 		<scale label="hidrostat$rec.exp.hidrostat.hardwareinfo.channel.0.label"
 			physicsunitname="hidrostat$rec.exp.hidrostat.hardwareinfo.channel.0.physicsunitname"
-			physicsunitsymbol="m" multiplier="none" selected="true">
+			physicsunitsymbol="m" multiplier="milli" selected="true">
 			<min><PhysicsVal type="float">0</PhysicsVal></min>
 			<max><PhysicsVal type="float">1.9</PhysicsVal></max>
 			<step><PhysicsVal type="float">0.001</PhysicsVal></step>
-			<errordefault><PhysicsVal type="float">0.001</PhysicsVal></errordefault>
+			<errordefault><PhysicsVal type="float">5</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 
@@ -86,9 +86,9 @@
 			physicsunitname="hidrostat$rec.exp.hidrostat.hardwareinfo.channel.1.physicsunitname"
 			physicsunitsymbol="Pa" multiplier="kilo" selected="true">
 			<min><PhysicsVal type="float">0</PhysicsVal></min>
-			<max><PhysicsVal type="float">900</PhysicsVal></max>
+			<max><PhysicsVal type="float">30</PhysicsVal></max>
 			<step><PhysicsVal type="float">0.001</PhysicsVal></step>
-			<errordefault><PhysicsVal type="float">0.001</PhysicsVal></errordefault>
+			<errordefault><PhysicsVal type="float">0.01</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 
@@ -98,9 +98,9 @@
 			physicsunitname="hidrostat$rec.exp.hidrostat.hardwareinfo.channel.2.physicsunitname"
 			physicsunitsymbol="Pa" multiplier="kilo" selected="true">
 			<min><PhysicsVal type="float">0</PhysicsVal></min>
-			<max><PhysicsVal type="float">900</PhysicsVal></max>
+			<max><PhysicsVal type="float">30</PhysicsVal></max>
 			<step><PhysicsVal type="float">0.001</PhysicsVal></step>
-			<errordefault><PhysicsVal type="float">0.001</PhysicsVal></errordefault>
+			<errordefault><PhysicsVal type="float">0.01</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 
@@ -110,9 +110,9 @@
 			physicsunitname="hidrostat$rec.exp.hidrostat.hardwareinfo.channel.3.physicsunitname"
 			physicsunitsymbol="Pa" multiplier="kilo" selected="true">
 			<min><PhysicsVal type="float">0</PhysicsVal></min>
-			<max><PhysicsVal type="float">900</PhysicsVal></max>
+			<max><PhysicsVal type="float">30</PhysicsVal></max>
 			<step><PhysicsVal type="float">0.001</PhysicsVal></step>
-			<errordefault><PhysicsVal type="float">0.001</PhysicsVal></errordefault>
+			<errordefault><PhysicsVal type="float">0.01</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 
@@ -122,9 +122,9 @@
 			physicsunitname="hidrostat$rec.exp.hidrostat.hardwareinfo.channel.4.physicsunitname"
 			physicsunitsymbol="Pa" multiplier="kilo" selected="true">
 			<min><PhysicsVal type="float">0</PhysicsVal></min>
-			<max><PhysicsVal type="float">900</PhysicsVal></max>
+			<max><PhysicsVal type="float">30</PhysicsVal></max>
 			<step><PhysicsVal type="float">0.001</PhysicsVal></step>
-			<errordefault><PhysicsVal type="float">0.001</PhysicsVal></errordefault>
+			<errordefault><PhysicsVal type="float">0.01</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 
