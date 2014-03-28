@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ======================================================= ============ 
+	2009/03/29 Build Rec - Elab ============== ======================================================= -->
+
+<project name="ReC Module - build system" default="build.all" basedir=".">
+	<description>
+		Compile, package, sign and run the project ReC and each of
+		the experiments.
+	</description>
+
+	<property file="build.properties" description="general properties for building project" />
+
+	<import file="generaldefinitions.xml" />
+
+
+	<!-- ===================================================== ==================== 
+		REC Common ===================== ===================================================== -->
+
+	<target name="clean.rec.common" description="Delete the build folder containing the common shared compiled code.">
+		<delete dir="${rec.common.classes.dir}" />
+		<delete file="${build.dir.compile}/ReCCommon.jar" />
+		<delete file="${build.dir.compile}/ReCCommon_sig.jar" />
+	</target>
+
+	<target name="compile.rec.common" description="Compile the common part of the ReC project independently.">
+		<mkdir dir="${rec.common.classes.dir}" />
+		<mkdir dir="${rec.common.classes.dir}/META-INF" />
+
+		<javac srcdir="${rec.common.src.java.dir}" destdir="${rec.common.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+			<include name="**/*.java" />
+			<classpath refid="rec.common.libs.classpath" />
+			<compilerarg value="-Xlint:unchecked, cast, -serial" />
+		</javac>
+
+		<copy todir="${rec.common.classes.dir}" overwrite="true">
+			<fileset dir="${rec.common.src.java.dir}">
+				<exclude name="**/*.java" />
+				<exclude name="**/*.form" />
+			</fileset>
+		</copy>
+
+		<copy file="${templates.dir.logs}/client.loggers.config.properties" todir="${rec.common.classes.dir}/" />
+
+		<manifest file="${rec.common.classes.dir}/META-INF/MANIFEST.MF">
+			<section name="common">
+				<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${timestamp}" />
+				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+			</section>
+		</manifest>
+
+	</target>
+
+	<target name="jar.rec.common" description="create the rec common jar">
+		<create.jar destination.folder="${common.build.dir}" jar.name="ReCCommon.jar" source.basedir="${rec.common.classes.dir}" />
+	</target>
+
+	<target name="repack.jar.rec.common" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
+		<repack.jar file="${common.build.dir}/ReCCommon.jar" />
+	</target>
+
+	<target name="sign.rec.common" description="sign the rec common jar">
+		<sign.jar.rec file="${common.build.dir}/ReCCommon.jar" />
+	</target>
+
+	<target name="pack.jar.rec.common" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
+		<pack.200.jar file="${common.build.dir}/ReCCommon_sig.jar" />
+	</target>
+
+	<target name="build.rec.common" description="build the rec common libraries - clean, compile, sign and pack" depends="clean.rec.common,compile.rec.common, jar.rec.common, repack.jar.rec.common, sign.rec.common, pack.jar.rec.common">
+
+	</target>
+
+	<!-- ===================================================== ==================== 
+		ReC Client ===================== ===================================================== -->
+
+	<target name="clean.rec.client" description="Delete the build folder containing the common shared compiled code.">
+		<delete dir="${rec.client.classes.dir}" />
+		<delete file="${build.dir.compile}/ReCClient.jar" />
+		<delete file="${build.dir.compile}/ReCClient_sig.jar" />
+	</target>
+
+	<target name="compile.rec.client" description="compile the rec client code">
+		<mkdir dir="${rec.client.classes.dir}" />
+		<mkdir dir="${rec.client.classes.dir}/META-INF" />
+
+		<javac srcdir="${rec.client.src.java.dir}" destdir="${rec.client.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+			<include name="**/*.java" />
+			<classpath refid="rec.compile.client.classpath" />
+			<compilerarg value="-Xlint:unchecked, cast, -serial" />
+		</javac>
+
+		<copy todir="${rec.client.classes.dir}" overwrite="true">
+			<fileset dir="${rec.client.src.java.dir}">
+				<exclude name="**/*.java" />
+				<exclude name="**/*.form" />
+			</fileset>
+		</copy>
+
+		<javac srcdir="${rec.ui.src.java.dir}" destdir="${rec.client.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+			<include name="**/*.java" />
+			<classpath refid="rec.compile.client.classpath" />
+			<compilerarg value="-Xlint:unchecked, cast, -serial" />
+		</javac>
+
+		<copy todir="${rec.client.classes.dir}" overwrite="true">
+			<fileset dir="${rec.ui.src.java.dir}">
+				<exclude name="**/*.java" />
+				<exclude name="**/*.form" />
+			</fileset>
+		</copy>
+
+		<manifest file="${rec.client.classes.dir}/META-INF/MANIFEST.MF">
+			<section name="common">
+				<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${timestamp}" />
+				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+			</section>
+		</manifest>
+
+	</target>
+
+	<target name="jar.rec.client" description="create the rec client jar">
+		<create.jar destination.folder="${client.build.dir}" jar.name="ReCClient.jar" source.basedir="${rec.client.classes.dir}" />
+	</target>
+
+	<target name="repack.jar.rec.client" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
+		<repack.jar file="${client.build.dir}/ReCClient.jar" />
+	</target>
+
+	<target name="sign.rec.client" description="sign the rec client jar">
+		<sign.jar.rec file="${client.build.dir}/ReCClient.jar" />
+	</target>
+
+	<target name="pack.jar.rec.client" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
+		<pack.200.jar file="${client.build.dir}/ReCClient_sig.jar" />
+	</target>
+
+	<target name="build.rec.client" description="build the rec client components - clean, compile, sign and pack" depends="clean.rec.client,compile.rec.client,jar.rec.client, repack.jar.rec.client, sign.rec.client, pack.jar.rec.client">
+
+		<copy file="${common.build.dir}/ReCCommon_sig.jar" todir="${client.build.dir}" />
+
+		<copy file="${common.build.dir}/ReCCommon_sig.jar.pack.gz" todir="${client.build.dir}" failonerror="false" />
+
+		<copy file="${templates.dir.openorb}/OpenORBClientTemplate.xml" overwrite="yes" tofile="${client.build.dir}/etc/openorb.xml" />
+
+	</target>
+
+	<!-- ===================================================== ================ 
+		ReC Hardware Server ================ ===================================================== -->
+
+	<target name="clean.rec.hardwareserver" description="clean the rec hardware server classes">
+		<delete dir="${rec.hardwareserver.classes.dir}" />
+	</target>
+
+	<target name="compile.rec.hardwareserver" description="compile the rec hardware server classes">
+		<mkdir dir="${rec.hardwareserver.classes.dir}" />
+		<mkdir dir="${rec.hardwareserver.classes.dir}/META-INF" />
+
+		<javac srcdir="${rec.hardwareserver.src.java.dir}" destdir="${rec.hardwareserver.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+			<include name="**/*.java" />
+			<classpath refid="rec.compile.hardwareserver.classpath" />
+			<compilerarg value="-Xlint:unchecked, cast, -serial" />
+		</javac>
+
+		<copy todir="${rec.hardwareserver.classes.dir}" overwrite="true">
+			<fileset dir="${rec.hardwareserver.classes.dir}">
+				<exclude name="**/*.java" />
+				<exclude name="**/*.form" />
+			</fileset>
+		</copy>
+
+		<manifest file="${rec.hardwareserver.classes.dir}/META-INF/MANIFEST.MF">
+			<section name="common">
+				<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${timestamp}" />
+				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+			</section>
+		</manifest>
+
+	</target>
+
+	<target name="jar.rec.hardwareserver" description="create the rec hardware server jar">
+		<create.jar destination.folder="${hardwareserver.build.dir}" jar.name="ReCHardwareServer.jar" source.basedir="${rec.hardwareserver.classes.dir}" />
+	</target>
+
+	<target name="build.rec.hardwareserver" description="build the rec hardware server components - clean, compile and pack" depends="clean.rec.hardwareserver,compile.rec.hardwareserver,jar.rec.hardwareserver">
+
+		<copy todir="${hardwareserver.build.dir}/lib" overwrite="true">
+			<fileset dir="${rec.common.lib.dir}">
+				<include name="**/*" />
+			</fileset>
+			<fileset dir="${rec.hardwareserver.lib.dir}">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+
+		<copy file="${common.build.dir}/ReCCommon.jar" todir="${hardwareserver.build.dir}">
+		</copy>
+
+		<process.list task="-openorb.rec.hardwareserver" list="${lab.list}" attribute.name="lab.name" />
+
+	</target>
+
+	<target name="-openorb.rec.hardwareserver">
+		<openorb.rec.hardwareserver lab.name="${lab.name}" />
+	</target>
+	<macrodef name="openorb.rec.hardwareserver" description="create the openorb configuration file for the hardware server">
+		<attribute name="lab.name" />
+		<sequential>
+
+			<copy file="${templates.dir.openorb}/OpenORBHardwareTemplate.xml" overwrite="yes" tofile="${hardwareserver.build.dir}/@{lab.name}/etc/openorb.xml" />
+			<replace file="${hardwareserver.build.dir}/@{lab.name}/etc/openorb.xml" propertyFile="build.properties">
+				<replacefilter token="@multicast.controller.host@" property="@{lab.name}.multicast.controller.host" />
+				<replacefilter token="@multicast.controller.port@" property="@{lab.name}.multicast.controller.port" />
+			</replace>
+
+		</sequential>
+	</macrodef>
+
+	<!-- ===================================================== ============= 
+		ReC Multicast Controller=============== ===================================================== -->
+
+	<target name="clean.rec.multicastcontroller" description="clean the rec multicastcontroller classes">
+		<delete dir="${rec.multicast.classes.dir}" />
+	</target>
+
+	<target name="compile.rec.multicastcontroller" description="compile the rec multicastcontroller classes">
+		<mkdir dir="${rec.multicast.classes.dir}" />
+		<mkdir dir="${rec.multicast.classes.dir}/META-INF" />
+
+		<javac srcdir="${rec.multicast.src.java.dir}" destdir="${rec.multicast.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes" includeantruntime="false">
+			<include name="**/*.java" />
+			<classpath refid="rec.compile.multicastcontroller.classpath" />
+			<compilerarg value="-Xlint:unchecked, cast, -serial" />
+		</javac>
+
+		<copy todir="${rec.multicast.classes.dir}" overwrite="true">
+			<fileset dir="${rec.multicast.src.java.dir}">
+				<exclude name="**/*.java" />
+				<exclude name="**/*.form" />
+			</fileset>
+		</copy>
+
+		<manifest file="${rec.multicast.classes.dir}/META-INF/MANIFEST.MF">
+			<attribute name="Main-Class" value="${multicast.main-class}" />
+			<section name="common">
+				<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${timestamp}" />
+				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+			</section>
+		</manifest>
+
+	</target>
+
+	<target name="jar.rec.multicastcontroller" description="create the rec multicastcontroller jar">
+		<create.jar destination.folder="${multicast.build.dir}" jar.name="ReCMulticastController.jar" source.basedir="${rec.multicast.classes.dir}" />
+	</target>
+
+	<target name="build.rec.multicastcontroller" description="build the rec multicastcontroller component - clean, compile and pack" depends="clean.rec.multicastcontroller,compile.rec.multicastcontroller,jar.rec.multicastcontroller">
+
+		<copy todir="${multicast.build.dir}/lib" overwrite="true">
+			<fileset dir="${rec.common.lib.dir}">
+				<include name="**/*" />
+			</fileset>
+			<fileset dir="${rec.multicast.lib.dir}">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+
+		<copy file="${common.build.dir}/ReCCommon.jar" todir="${multicast.build.dir}">
+		</copy>
+
+		<process.list task="-openorb.rec.multicastcontroller" list="${lab.list}" attribute.name="lab.name" />
+
+	</target>
+
+	<target name="-openorb.rec.multicastcontroller">
+		<openorb.rec.multicastcontroller lab.name="${lab.name}" />
+	</target>
+
+	<macrodef name="openorb.rec.multicastcontroller" description="create the openorb config file for the multicastcontroller">
+		<attribute name="lab.name" />
+		<sequential>
+
+			<copy file="${templates.dir.openorb}/OpenORBMultiCastTemplate.xml" overwrite="yes" tofile="${multicast.build.dir}/@{lab.name}/etc/openorb.xml" />
+			<replace file="${multicast.build.dir}/@{lab.name}/etc/openorb.xml" propertyFile="build.properties">
+				<replacefilter token="@multicast.controller.host@" property="@{lab.name}.multicast.controller.host" />
+				<replacefilter token="@multicast.controller.port@" property="@{lab.name}.multicast.controller.port" />
+			</replace>
+
+		</sequential>
+	</macrodef>
+
+
+	<target name="run.rec.multicast" description="run the rec multicastcontroller">
+		<fail unless="lab.name">lab.name must be set to run a single lab. 
+				Pass it to jvm as arg like -Dlab.name=labname or define it on build.properties</fail>
+		<local name="lab.jmx.port" />
+		<propertycopy name="lab.jmx.port" from="${lab.name}.rec.multicastcontroller.jmxremote.port" />
+		<local name="rec.multicast.labid" />
+		<propertycopy name="rec.multicast.labid" from="${lab.name}.rec.web.lab.id" />
+		<java classname="${multicast.main-class}" fork="true" failonerror="true" maxmemory="${max.memory}">
+			<classpath refid="run.multicastcontroller.classpath" />
+			<jvmarg value="-Xms${min.memory}" />
+			<jvmarg value="-Xmx${max.memory}" />
+			<sysproperty key="rec.multicastcontroller.show.gui" value="true" />
+			<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
+			<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
+			<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file.debug}" />
+			<sysproperty key="openorb.profile" value="${multicast.openorb.profile}" />
+			<sysproperty key="rec.multicast.securitymanager" value="${rec.multicast.securitymanager}" />
+			<sysproperty key="rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE" value="${rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE}" />
+			<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
+			<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
+			<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
+			<sysproperty key="openorb.config" value="file://${multicast.build.dir}/${lab.name}/etc/openorb.xml" />
+			<sysproperty key="java.rmi.server.hostname" value="127.0.0.1" />
+			<sysproperty key="com.sun.management.jmxremote.authenticate" value="true" />
+			<sysproperty key="com.sun.management.jmxremote.ssl" value="false" />
+			<sysproperty key="com.sun.management.jmxremote.port" value="${lab.jmx.port}" />
+			<sysproperty key="com.sun.management.jmxremote.access.file" value="${templates.dir.jmx}/jmxremote.access" />
+			<sysproperty key="com.sun.management.jmxremote.password.file" value="${templates.dir.jmx}/jmxremote.password" />
+			<sysproperty key="rec.multicast.labid" value="${rec.multicast.labid}" />
+			<sysproperty key="rec.multicast.repository" value="${rec.multicast.repository}" />
+		</java>
+	</target>
+
+	<target name="debug.rec.multicast" description="run the rec multicastcontroller in debug mode">
+		<fail unless="lab.name">lab.name must be set to run a single lab. 
+				Pass it to jvm as arg like -Dlab.name=labname or define it on build.properties</fail>
+		<local name="lab.jmx.port" />
+		<propertycopy name="lab.jmx.port" from="${lab.name}.rec.multicastcontroller.jmxremote.port" />
+		<local name="rec.multicast.labid" />
+		<propertycopy name="rec.multicast.labid" from="${lab.name}.rec.web.lab.id" />
+		<java classname="com.linkare.rec.impl.multicast.startup.MultiCastControllerMain" fork="true" failonerror="true" maxmemory="${max.memory}">
+			<classpath refid="run.multicastcontroller.classpath" />
+			<jvmarg value="-Xdebug" />
+			<jvmarg value="-Xrunjdwp:transport=dt_socket,address=${multicast.debug.address.port},server=y,suspend=y" />
+			<jvmarg value="-Xms${min.memory}" />
+			<jvmarg value="-Xmx${max.memory}" />
+			<sysproperty key="rec.multicastcontroller.show.gui" value="true" />
+			<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
+			<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
+			<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file.debug}" />
+			<sysproperty key="openorb.profile" value="${multicast.openorb.profile}" />
+			<sysproperty key="rec.multicast.securitymanager" value="${rec.multicast.securitymanager}" />
+			<sysproperty key="rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE" value="${rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE}" />
+			<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
+			<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
+			<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
+			<sysproperty key="openorb.config" value="file://${multicast.build.dir}/${lab.name}/etc/openorb.xml" />
+			<sysproperty key="java.rmi.server.hostname" value="127.0.0.1" />
+			<sysproperty key="com.sun.management.jmxremote.authenticate" value="true" />
+			<sysproperty key="com.sun.management.jmxremote.ssl" value="false" />
+			<sysproperty key="com.sun.management.jmxremote.port" value="${lab.jmx.port}" />
+			<sysproperty key="com.sun.management.jmxremote.access.file" value="${templates.dir.jmx}/jmxremote.access" />
+			<sysproperty key="com.sun.management.jmxremote.password.file" value="${templates.dir.jmx}/jmxremote.password" />
+			<sysproperty key="rec.multicast.labid" value="${rec.multicast.labid}" />
+			<sysproperty key="rec.multicast.repository" value="${rec.multicast.repository}" />
+		</java>
+	</target>
+
+	<target name="clean.all" description="call all clean targets on rec components" depends="clean.rec.common,clean.rec.client,clean.rec.hardwareserver,clean.rec.multicastcontroller" />
+
+	<target name="build.all" description="call all build targets on rec components" depends="build.rec.common,build.rec.client,build.rec.hardwareserver,build.rec.multicastcontroller" />
+
+	<target name="javadoc.rec" description="create the javadoc for rec components">
+		<javadoc destdir="${build.dir}/javadocs/rec" author="true" version="true" use="true" windowtitle="ReC - Javadocs">
+			<packageset dir="${rec.common.src.java.dir}" defaultexcludes="yes">
+				<include name="com/linkare/rec/**" />
+			</packageset>
+			<classpath refid="rec.common.libs.classpath" />
+			<packageset dir="${rec.client.src.java.dir}" defaultexcludes="yes">
+				<include name="com/linkare/**" />
+			</packageset>
+			<packageset dir="${rec.ui.src.java.dir}" defaultexcludes="yes">
+				<include name="com/linkare/rec/impl**" />
+			</packageset>
+			<classpath refid="rec.client.libs.classpath" />
+			<packageset dir="${rec.multicast.src.java.dir}" defaultexcludes="yes">
+				<include name="com/linkare/rec/impl/**" />
+			</packageset>
+			<classpath refid="rec.multicastcontroller.libs.classpath" />
+			<packageset dir="${rec.hardwareserver.src.java.dir}" defaultexcludes="yes">
+				<include name="com/linkare/rec/impl/**" />
+			</packageset>
+			<classpath refid="rec.hardwareserver.libs.classpath" />
+			<doctitle>ReC  <![CDATA[<h1>Package Overview</h1>]]></doctitle>
+		<bottom>
+			<![CDATA[<i>Copyright &#169; 2010 - Linkare TI - All Rights Reserved.</i>]]>
+			</bottom>
+	<tag name="todo" scope="all" description="To do:" />
+	<link href="http://java.sun.com/javase/6/docs/api/" />
+</javadoc>
+</target>
+
+<target name="clean.javadocs" description="clean the javadocs for rec components">
+<delete dir="${build.dir}/javadocs/rec" />
+</target>
+
+</project>
