@@ -1,0 +1,207 @@
+'{$STAMP BS2}
+
+'Nota que existe um protocolo nas mensagens:
+' PC -> STAMP - minúsculas
+' STAMP -> PC - maiúsculas
+
+'*******************************************************
+'
+'   NOTA!!!
+'               ALTERACAO DO PINO 9 PARA O PINO 0 PARA
+'               O PULSOUT QUE REGULA A AMPLITUDE!!!!!
+'
+'*******************************************************
+
+
+'******* DEFAULT VARIABLES ********
+
+speedCon     CON     16390      '16390/38400 16572/4800 16468/9600 16780/2400 17197/1200
+spaceByte    VAR     Byte      'Byte auxiliar (Space)
+TX           CON     16
+RX           CON     16
+CTS          CON     3
+i            VAR     Word
+nsamples     VAR     Word      ' nº de amostras a adquirir
+
+'******* END DEFAULT VARIABLES *******
+
+
+'******* SPECIFIC VARIABLES *******
+
+CS        CON     13                   ' Selecciona o chip;  12->ADC1 ; 13->ADC2
+CLK       CON     14                   ' Clock Para os ADCs.
+DIO_n     CON     15                   ' Pino de I/O para os dados.
+config    VAR     Nib                  ' Configuração para o ADC.
+AD        VAR     Word                 ' Variável para guardar os 12 bits do ADC.
+startB    VAR     config.BIT0          ' Start bit para o ADC.
+sglDif    VAR     config.BIT1          ' Modo monocanal or diferencial.
+chsel     VAR     config.BIT2          ' Selecção do canal do ADC.
+msbf      VAR     config.BIT3          ' Lowbit para terminar a transferência.
+alt       VAR     Word                 ' Guarda a altura da massa do Pendulo em mm. O input pode ir de 40 a 90
+teta      VAR     Byte                 ' Guarda a amplitude inicial do pendulo. vai de zero a 135.
+freq      VAR     Word                 ' frequencia de sampling: máx=125 (em Hz).
+delay     VAR     Word                 ' atraso para a freq que se quer
+status    VAR     Nib                  ' config do atrito
+'******* END SPECIFIC VARIABLES *******
+
+
+'********************************************
+'Configuração inicial
+
+InitConfig:  'exemplo de uma rotina de inicializacao
+  DIRC = %1111
+  alt = 90
+  teta = 0
+'  LOW CTS
+  GOSUB Arranca
+  PAUSE 2000          ' para fazer reset à amplitude do pendulo
+
+
+'********************************************
+'Reset - retorna à base...
+Reset:
+  GOSUB FlashLight 'Pisca as luzinhas em cada reset... assim sabemos que lá está...
+  HIGH   CS           ' Deactivate ADC to begin.
+  HIGH   DIO_n          ' Set data pin for first start bit.
+  chsel = 0
+  GOTO MainWait
+
+
+'********************************************
+'Não foi configurado
+Not_Configured:
+  GOSUB Amplitude
+  GOSUB Altura
+  'SerOut TX,speed,["Altura: ",dec2 alt,$D,$A]     ' Display data.
+  'SerOut TX,speed,["Amplitude: ",dec3 teta,$D,$A]   ' Display data.
+  'SErOut TX,speed,["status: ",bin4 outC,$D,$A]    ' Display data.
+  SEROUT TX,speedCon,["CONFIG_START_NOT_DONE",CR]
+
+
+'********************************************
+'Aguarda um ConfigStart pacientemente, enquanto vai informando quem é!
+MainWait:
+  'high CTS
+  SEROUT TX,speedCon,["ELAB_PENDULO_STAMP_V02",CR]        ' Identifica-se
+  SERIN RX,speedCon,5000,Not_Configured,[WAIT("cfg "),DEC2 alt,spaceByte,DEC3 teta,spaceByte,DEC4 nsamples,spaceByte,DEC3 freq,spaceByte,BIN2 status]
+
+'  low CTS ' does not low CTS?
+
+'********************************************
+'Ok, configurado! Get Ready...
+Configured:
+
+  SEROUT TX,speedCon,[CR,"CONFIG_START_ACCEPTED",CR]  'Aceitou a configuracao
+  PAUSE 2000
+  GOSUB Amplitude
+  PAUSE 20
+  GOSUB Altura
+  PAUSE 20
+  GOSUB Setup
+  PAUSE 20
+  PAUSE 1500
+  config = %1011         ' Set all bits except oddSign.
+  GOSUB Arranca
+  delay = ((1000/freq)-(1000/125))    ' calcula o atraso pretendido          '
+  i=0
+  GOTO AcqLoopEnter
+
+
+
+'********************************************
+'Set... Go!
+
+AcqLoopEnter:
+  SEROUT TX,speedCon,["STARTED",CR]    ' Avisa que vai arrancar a rotina de aquisicao
+
+AcqLoop:
+  LOW CS             ' Activate the ADC.
+  SHIFTOUT DIO_n,CLK,LSBFIRST,[config\4]    ' Send config bits.
+  SHIFTIN DIO_n,CLK,MSBPOST,[AD\12]     ' Get data bits.
+  HIGH CS            ' Deactivate the ADC.
+  SEROUT TX,speedCon,["D ",DEC4 AD,CR]
+  PAUSE delay
+  GOTO Continue
+  'Será que não podemos mesmo parar?
+  'SerOut TX, speedCon,["STOP", cr]
+  'SerIn RX, speedCon,100, Continue, [Wait("stop")]
+  'SerOut TX, speedCon,[cr]
+  'goto StopIt
+
+Continue:
+  i=i+1
+  IF i>nsamples THEN StopIt
+  GOTO AcqLoop
+
+'********************************************
+'Stop It!
+StopIt:
+  PAUSE 2000
+  GOTO Reset
+
+'********************************************
+' Função faz piscar 4 vezes o led vermelho para debug
+FlashLight:
+  LOW 7
+  FOR i=0 TO 4
+    OUT7 = 0
+    PAUSE 100
+    OUT7 = 1
+    PAUSE 100
+  NEXT
+  OUT7 = 0
+RETURN
+'********************************************
+
+
+'********************************************
+'Faz o setup do atrito do pendulo, comuta os relés
+'de modo a ligar as resistencias de acordo com o input
+Setup:        ' pode-se por isto no ciclo principal
+        ' P10-50R, P11-25R
+  OUTC = status*4    ' 2 x shift para esquerda para passar dos bits 8 e9 para o 10 e 11
+RETURN
+
+
+'*******************************************
+'Função para controlar a altura do pendulo
+Altura:
+
+  IF (40<=alt) AND (alt<=90) THEN Alt_ok:
+  alt=90
+
+'*******************************************
+Alt_ok:
+  LOW 8
+  FOR i = 0 TO 20
+    PULSOUT 8,12*alt+120    '12*alt+120
+      PAUSE 20
+    NEXT
+  LOW 8
+RETURN
+
+'*******************************************
+' Poe o pendulo na posição inicial
+Amplitude:
+
+  LOW 0
+  FOR i = 0 TO 20
+    PULSOUT 0,730+teta
+      PAUSE 20
+  NEXT
+  LOW 0
+RETURN
+
+'*******************************************
+'liberta o pendulo da posicao inicial
+Arranca:
+
+  LOW 0
+  FOR i = 0 TO 10
+    PULSOUT 0,430
+      PAUSE 10
+    NEXT
+  LOW 0
+RETURN
+'********************************************
+
