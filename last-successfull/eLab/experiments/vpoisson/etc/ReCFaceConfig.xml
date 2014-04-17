@@ -1,0 +1,5 @@
+
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="true" toolTipBundleKey="poisson$rec.exp.tip.poisson" location="POISSON_V1.0" iconLocationBundleKey="poisson$rec.exp.icon.poisson" headerDisplayClassLocationBundleKey="" displayStringBundleKey="poisson$rec.exp.title.poisson" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="poisson$rec.exp.background.poisson" descriptionStringBundleKey="poisson$rec.exp.description.poisson" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="poisson$rec.exp.customizer.poisson" order="1">
+    <display toolTipBundleKey="poisson$rec.exp.display.poisson.tip.anim" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor" displayStringBundleKey="poisson$rec.exp.display.poisson.title.anim" classLocationBundleKey="poisson$rec.exp.display.poisson.loc.anim" order="1"/>
+    <localizationBundle name="poisson" location="recresource:///pt/utl/ist/elab/client/vpoisson/resources/messages"/>
+</apparatus>
