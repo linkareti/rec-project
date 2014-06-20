@@ -20,7 +20,7 @@
 	<parameter name="profundidade_inicial" type="ContinuousValue" value="0">
 		<selection-list>
 			<value order="1">0</value>
-			<value order="2">1920</value>
+			<value order="2">1930</value>
 			<value order="3">1</value>
 		</selection-list>
 	</parameter>
@@ -28,7 +28,7 @@
 	<parameter name="profundidade_final" type="ContinuousValue" value="1900">
 		<selection-list>
 			<value order="1">0</value>
-			<value order="2">1920</value>
+			<value order="2">1930</value>
 			<value order="3">1</value>
 		</selection-list>
 	</parameter>
@@ -37,14 +37,6 @@
 		<selection-list>
 			<value order="1">2</value>
 			<value order="2">200</value>
-			<value order="3">1</value>
-		</selection-list>
-	</parameter>
-
-	<parameter name="calibracao" type="ContinuousValue" value="0">
-		<selection-list>
-			<value order="1">0</value>
-			<value order="2">1</value>
 			<value order="3">1</value>
 		</selection-list>
 	</parameter>

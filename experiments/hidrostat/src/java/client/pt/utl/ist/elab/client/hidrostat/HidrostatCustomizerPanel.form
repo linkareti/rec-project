@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.5" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
-  <NonVisualComponents>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroupCalibration">
-    </Component>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroupEnergyConservationIsPolarization">
-    </Component>
-  </NonVisualComponents>
   <Properties>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[350, 490]"/>
@@ -26,7 +20,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,119,0,0,1,-62"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,15,0,0,1,-62"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -35,7 +29,7 @@
       <Properties>
         <Property name="name" type="java.lang.String" value="jPanelHidrostat" noResource="true"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[450, 372]"/>
+          <Dimension value="[400, 372]"/>
         </Property>
       </Properties>
       <Constraints>
@@ -47,17 +41,17 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanelHidrostatCalibration" alignment="1" max="32767" attributes="0"/>
-                      <Component id="jPanelHidrostatNumberOfSamples" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabelInitialAndFinalDepthAreEqual" alignment="1" pref="426" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanelHidrostatInitialDepth" min="-2" pref="210" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanelHidrostatFinalDepth" min="-2" pref="210" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="jLabelInitialAndFinalDepthAreEqual" alignment="1" pref="450" max="32767" attributes="0"/>
+                      <Component id="jPanelHidrostatNumberOfSamples" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jPanelControlButtons" alignment="0" min="-2" pref="450" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -67,16 +61,16 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanelHidrostatFinalDepth" alignment="0" min="-2" pref="372" max="-2" attributes="0"/>
-                      <Component id="jPanelHidrostatInitialDepth" alignment="0" min="-2" pref="372" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jPanelHidrostatInitialDepth" min="0" pref="326" max="32767" attributes="1"/>
+                      <Component id="jPanelHidrostatFinalDepth" alignment="0" pref="326" max="32767" attributes="1"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabelInitialAndFinalDepthAreEqual" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanelHidrostatNumberOfSamples" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jPanelHidrostatCalibration" min="-2" max="-2" attributes="0"/>
+                  <Component id="jPanelControlButtons" min="-2" pref="37" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -112,11 +106,11 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
+                  <Component id="jSliderHidrostatInitialDepth" min="-2" pref="300" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
                       <Component id="jFormattedTextFieldHidrostatInitialDepth" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jSliderHidrostatInitialDepth" alignment="0" min="-2" pref="346" max="-2" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -124,7 +118,7 @@
             <Component class="javax.swing.JSlider" name="jSliderHidrostatInitialDepth">
               <Properties>
                 <Property name="majorTickSpacing" type="int" value="100"/>
-                <Property name="maximum" type="int" value="1920"/>
+                <Property name="maximum" type="int" value="1930"/>
                 <Property name="minorTickSpacing" type="int" value="20"/>
                 <Property name="orientation" type="int" value="1"/>
                 <Property name="paintLabels" type="boolean" value="true"/>
@@ -133,6 +127,9 @@
                 <Property name="value" type="int" value="0"/>
                 <Property name="inverted" type="boolean" value="true"/>
                 <Property name="name" type="java.lang.String" value="jSliderHidrostatInitialDepth" noResource="true"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[89, 89]"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderHidrostatInitialDepthStateChanged"/>
@@ -182,11 +179,11 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jSliderHidrostatFinalDepth" alignment="0" min="-2" pref="300" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
                       <Component id="jFormattedTextFieldHidrostatFinalDepth" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jSliderHidrostatFinalDepth" alignment="0" min="-2" pref="346" max="-2" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -194,15 +191,18 @@
             <Component class="javax.swing.JSlider" name="jSliderHidrostatFinalDepth">
               <Properties>
                 <Property name="majorTickSpacing" type="int" value="100"/>
-                <Property name="maximum" type="int" value="1920"/>
+                <Property name="maximum" type="int" value="1930"/>
                 <Property name="minorTickSpacing" type="int" value="20"/>
                 <Property name="orientation" type="int" value="1"/>
                 <Property name="paintLabels" type="boolean" value="true"/>
                 <Property name="paintTicks" type="boolean" value="true"/>
                 <Property name="toolTipText" type="java.lang.String" resourceKey="jSliderHidrostatFinalDepth.toolTipText"/>
-                <Property name="value" type="int" value="1920"/>
+                <Property name="value" type="int" value="1930"/>
                 <Property name="inverted" type="boolean" value="true"/>
                 <Property name="name" type="java.lang.String" value="jSliderHidrostatFinalDepth" noResource="true"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[89, 89]"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderHidrostatFinalDepthStateChanged"/>
@@ -252,7 +252,7 @@
                       <Component id="jSliderHidrostatNumberOfSamples" min="-2" pref="321" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jFormattedTextFieldHidrostatNumberOfSamples" min="-2" pref="34" max="-2" attributes="0"/>
-                      <EmptySpace pref="53" max="32767" attributes="0"/>
+                      <EmptySpace pref="77" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -296,115 +296,70 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPanelHidrostatCalibration">
+        <Container class="javax.swing.JPanel" name="jPanelControlButtons">
           <Properties>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Calibra&#xe7;&#xe3;o">
-                  <Property name="titleX" resourceKey="jPanelHidrostatCalibration.border.title"/>
-                </TitledBorder>
-              </Border>
+            <Property name="name" type="java.lang.String" value="jPanelControlButtons" noResource="true"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[350, 37]"/>
             </Property>
-            <Property name="name" type="java.lang.String" value="jPanelHidrostatCalibration" noResource="true"/>
           </Properties>
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <Component id="jButtonOk" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jCheckBoxHidrostatCalibration" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="147" max="32767" attributes="0"/>
+                      <Component id="jButtonCancel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jButtonDefaultConfig" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="142" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jButtonOk" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonCancel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonDefaultConfig" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jCheckBoxHidrostatCalibration" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JCheckBox" name="jCheckBoxHidrostatCalibration">
+            <Component class="javax.swing.JButton" name="jButtonOk">
               <Properties>
-                <Property name="text" type="java.lang.String" resourceKey="jCheckBoxHidrostatCalibration.text"/>
-                <Property name="name" type="java.lang.String" value="jCheckBoxHidrostatCalibration" noResource="true"/>
+                <Property name="text" type="java.lang.String" resourceKey="jButtonOk.text"/>
+                <Property name="name" type="java.lang.String" value="jButtonOk" noResource="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonOkActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonCancel">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="jButtonCancel.text"/>
+                <Property name="name" type="java.lang.String" value="jButtonCancel" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonDefaultConfig">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="jButtonDefaultConfig.text"/>
+                <Property name="name" type="java.lang.String" value="jButtonDefaultConfig" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDefaultConfigActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
-      </SubComponents>
-    </Container>
-    <Container class="javax.swing.JPanel" name="jPanelControlButtons">
-      <Properties>
-        <Property name="name" type="java.lang.String" value="jPanelControlButtons" noResource="true"/>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[350, 37]"/>
-        </Property>
-      </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-          <BorderConstraints direction="Last"/>
-        </Constraint>
-      </Constraints>
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <Component id="jButtonOk" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButtonCancel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jButtonDefaultConfig" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="142" max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButtonOk" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButtonCancel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButtonDefaultConfig" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-      <SubComponents>
-        <Component class="javax.swing.JButton" name="jButtonOk">
-          <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="jButtonOk.text"/>
-            <Property name="name" type="java.lang.String" value="jButtonOk" noResource="true"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonOkActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButtonCancel">
-          <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="jButtonCancel.text"/>
-            <Property name="name" type="java.lang.String" value="jButtonCancel" noResource="true"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButtonDefaultConfig">
-          <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="jButtonDefaultConfig.text"/>
-            <Property name="name" type="java.lang.String" value="jButtonDefaultConfig" noResource="true"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDefaultConfigActionPerformed"/>
-          </Events>
-        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

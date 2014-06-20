@@ -9,20 +9,16 @@
 				order="0">
 			</parameter>
 			<!-- profundidade inicial -->
-			<parameter output="###0" input="###0" maxvalue="1920"
+			<parameter output="###0" input="###0" maxvalue="1930"
 				minvalue="0" order="1">
 			</parameter>
 			<!-- profundidade final -->
-			<parameter output="###0" input="###0" maxvalue="1920"
+			<parameter output="###0" input="###0" maxvalue="1930"
 				minvalue="0" order="2">
 			</parameter>
 			<!-- numero de pontos -->
 			<parameter output="##0" input="##0" maxvalue="200"
 				minvalue="2" order="3">
-			</parameter>
-			<!-- calibracao -->
-			<parameter output="0" input="0" maxvalue="1"
-				minvalue="0" order="4">
 			</parameter>
 		</parameters>
 		<channels>

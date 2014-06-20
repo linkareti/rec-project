@@ -48,8 +48,6 @@ public class HidrostatCustomizerPanel extends AbstractCustomizer {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroupCalibration = new javax.swing.ButtonGroup();
-        buttonGroupEnergyConservationIsPolarization = new javax.swing.ButtonGroup();
         jPanelHidrostat = new javax.swing.JPanel();
         jPanelHidrostatInitialDepth = new javax.swing.JPanel();
         jSliderHidrostatInitialDepth = new javax.swing.JSlider();
@@ -61,8 +59,6 @@ public class HidrostatCustomizerPanel extends AbstractCustomizer {
         jPanelHidrostatNumberOfSamples = new javax.swing.JPanel();
         jFormattedTextFieldHidrostatNumberOfSamples = new javax.swing.JFormattedTextField();
         jSliderHidrostatNumberOfSamples = new javax.swing.JSlider();
-        jPanelHidrostatCalibration = new javax.swing.JPanel();
-        jCheckBoxHidrostatCalibration = new javax.swing.JCheckBox();
         jPanelControlButtons = new javax.swing.JPanel();
         jButtonOk = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
@@ -74,7 +70,7 @@ public class HidrostatCustomizerPanel extends AbstractCustomizer {
         setLayout(new java.awt.BorderLayout());
 
         jPanelHidrostat.setName("jPanelHidrostat"); // NOI18N
-        jPanelHidrostat.setPreferredSize(new java.awt.Dimension(450, 372));
+        jPanelHidrostat.setPreferredSize(new java.awt.Dimension(400, 372));
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(HidrostatCustomizerPanel.class);
         jPanelHidrostatInitialDepth.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelHidrostatInitialDepth.border.title"))); // NOI18N
@@ -82,7 +78,7 @@ public class HidrostatCustomizerPanel extends AbstractCustomizer {
         jPanelHidrostatInitialDepth.setPreferredSize(new java.awt.Dimension(200, 100));
 
         jSliderHidrostatInitialDepth.setMajorTickSpacing(100);
-        jSliderHidrostatInitialDepth.setMaximum(1920);
+        jSliderHidrostatInitialDepth.setMaximum(1930);
         jSliderHidrostatInitialDepth.setMinorTickSpacing(20);
         jSliderHidrostatInitialDepth.setOrientation(javax.swing.JSlider.VERTICAL);
         jSliderHidrostatInitialDepth.setPaintLabels(true);
@@ -91,6 +87,7 @@ public class HidrostatCustomizerPanel extends AbstractCustomizer {
         jSliderHidrostatInitialDepth.setValue(0);
         jSliderHidrostatInitialDepth.setInverted(true);
         jSliderHidrostatInitialDepth.setName("jSliderHidrostatInitialDepth"); // NOI18N
+        jSliderHidrostatInitialDepth.setPreferredSize(new java.awt.Dimension(89, 89));
         jSliderHidrostatInitialDepth.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSliderHidrostatInitialDepthStateChanged(evt);
@@ -119,10 +116,10 @@ public class HidrostatCustomizerPanel extends AbstractCustomizer {
         );
         jPanelHidrostatInitialDepthLayout.setVerticalGroup(
             jPanelHidrostatInitialDepthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSliderHidrostatInitialDepth, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanelHidrostatInitialDepthLayout.createSequentialGroup()
-                .addGap(167, 167, 167)
+                .addGap(136, 136, 136)
                 .addComponent(jFormattedTextFieldHidrostatInitialDepth, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jSliderHidrostatInitialDepth, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jPanelHidrostatFinalDepth.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelHidrostatFinalDepth.border.title"))); // NOI18N
@@ -130,15 +127,16 @@ public class HidrostatCustomizerPanel extends AbstractCustomizer {
         jPanelHidrostatFinalDepth.setPreferredSize(new java.awt.Dimension(200, 100));
 
         jSliderHidrostatFinalDepth.setMajorTickSpacing(100);
-        jSliderHidrostatFinalDepth.setMaximum(1920);
+        jSliderHidrostatFinalDepth.setMaximum(1930);
         jSliderHidrostatFinalDepth.setMinorTickSpacing(20);
         jSliderHidrostatFinalDepth.setOrientation(javax.swing.JSlider.VERTICAL);
         jSliderHidrostatFinalDepth.setPaintLabels(true);
         jSliderHidrostatFinalDepth.setPaintTicks(true);
         jSliderHidrostatFinalDepth.setToolTipText(resourceMap.getString("jSliderHidrostatFinalDepth.toolTipText")); // NOI18N
-        jSliderHidrostatFinalDepth.setValue(1920);
+        jSliderHidrostatFinalDepth.setValue(1930);
         jSliderHidrostatFinalDepth.setInverted(true);
         jSliderHidrostatFinalDepth.setName("jSliderHidrostatFinalDepth"); // NOI18N
+        jSliderHidrostatFinalDepth.setPreferredSize(new java.awt.Dimension(89, 89));
         jSliderHidrostatFinalDepth.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSliderHidrostatFinalDepthStateChanged(evt);
@@ -167,10 +165,10 @@ public class HidrostatCustomizerPanel extends AbstractCustomizer {
         );
         jPanelHidrostatFinalDepthLayout.setVerticalGroup(
             jPanelHidrostatFinalDepthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSliderHidrostatFinalDepth, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanelHidrostatFinalDepthLayout.createSequentialGroup()
-                .addGap(167, 167, 167)
+                .addGap(136, 136, 136)
                 .addComponent(jFormattedTextFieldHidrostatFinalDepth, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jSliderHidrostatFinalDepth, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jLabelInitialAndFinalDepthAreEqual.setForeground(resourceMap.getColor("jLabelInitialAndFinalDepthAreEqual.foreground")); // NOI18N
@@ -213,7 +211,7 @@ public class HidrostatCustomizerPanel extends AbstractCustomizer {
                 .addComponent(jSliderHidrostatNumberOfSamples, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jFormattedTextFieldHidrostatNumberOfSamples, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         jPanelHidrostatNumberOfSamplesLayout.setVerticalGroup(
             jPanelHidrostatNumberOfSamplesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,62 +222,6 @@ public class HidrostatCustomizerPanel extends AbstractCustomizer {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSliderHidrostatNumberOfSamples, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        jPanelHidrostatCalibration.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelHidrostatCalibration.border.title"))); // NOI18N
-        jPanelHidrostatCalibration.setName("jPanelHidrostatCalibration"); // NOI18N
-
-        jCheckBoxHidrostatCalibration.setText(resourceMap.getString("jCheckBoxHidrostatCalibration.text")); // NOI18N
-        jCheckBoxHidrostatCalibration.setName("jCheckBoxHidrostatCalibration"); // NOI18N
-
-        javax.swing.GroupLayout jPanelHidrostatCalibrationLayout = new javax.swing.GroupLayout(jPanelHidrostatCalibration);
-        jPanelHidrostatCalibration.setLayout(jPanelHidrostatCalibrationLayout);
-        jPanelHidrostatCalibrationLayout.setHorizontalGroup(
-            jPanelHidrostatCalibrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelHidrostatCalibrationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jCheckBoxHidrostatCalibration)
-                .addContainerGap(147, Short.MAX_VALUE))
-        );
-        jPanelHidrostatCalibrationLayout.setVerticalGroup(
-            jPanelHidrostatCalibrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelHidrostatCalibrationLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jCheckBoxHidrostatCalibration))
-        );
-
-        javax.swing.GroupLayout jPanelHidrostatLayout = new javax.swing.GroupLayout(jPanelHidrostat);
-        jPanelHidrostat.setLayout(jPanelHidrostatLayout);
-        jPanelHidrostatLayout.setHorizontalGroup(
-            jPanelHidrostatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelHidrostatLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelHidrostatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelHidrostatCalibration, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelHidrostatNumberOfSamples, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelInitialAndFinalDepthAreEqual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
-                    .addGroup(jPanelHidrostatLayout.createSequentialGroup()
-                        .addComponent(jPanelHidrostatInitialDepth, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanelHidrostatFinalDepth, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        jPanelHidrostatLayout.setVerticalGroup(
-            jPanelHidrostatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelHidrostatLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelHidrostatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelHidrostatFinalDepth, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelHidrostatInitialDepth, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelInitialAndFinalDepthAreEqual)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelHidrostatNumberOfSamples, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelHidrostatCalibration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        add(jPanelHidrostat, java.awt.BorderLayout.CENTER);
 
         jPanelControlButtons.setName("jPanelControlButtons"); // NOI18N
         jPanelControlButtons.setPreferredSize(new java.awt.Dimension(350, 37));
@@ -330,7 +272,39 @@ public class HidrostatCustomizerPanel extends AbstractCustomizer {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        add(jPanelControlButtons, java.awt.BorderLayout.PAGE_END);
+        javax.swing.GroupLayout jPanelHidrostatLayout = new javax.swing.GroupLayout(jPanelHidrostat);
+        jPanelHidrostat.setLayout(jPanelHidrostatLayout);
+        jPanelHidrostatLayout.setHorizontalGroup(
+            jPanelHidrostatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelHidrostatLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelHidrostatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelHidrostatLayout.createSequentialGroup()
+                        .addComponent(jPanelHidrostatInitialDepth, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanelHidrostatFinalDepth, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelInitialAndFinalDepthAreEqual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                    .addComponent(jPanelHidrostatNumberOfSamples, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelControlButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanelHidrostatLayout.setVerticalGroup(
+            jPanelHidrostatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelHidrostatLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelHidrostatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanelHidrostatInitialDepth, 0, 326, Short.MAX_VALUE)
+                    .addComponent(jPanelHidrostatFinalDepth, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelInitialAndFinalDepthAreEqual)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelHidrostatNumberOfSamples, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelControlButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        add(jPanelHidrostat, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
         private void jSliderHidrostatInitialDepthStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderHidrostatInitialDepthStateChanged
@@ -369,7 +343,6 @@ public class HidrostatCustomizerPanel extends AbstractCustomizer {
             jFormattedTextFieldHidrostatFinalDepth.setText("1900");
             jSliderHidrostatNumberOfSamples.setValue(100);
             jFormattedTextFieldHidrostatNumberOfSamples.setText("100");
-            jCheckBoxHidrostatCalibration.setSelected(false);
         }//GEN-LAST:event_jButtonDefaultConfigActionPerformed
 
         private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOkActionPerformed
@@ -398,11 +371,6 @@ public class HidrostatCustomizerPanel extends AbstractCustomizer {
             getAcquisitionConfig().getSelectedHardwareParameter("profundidade_inicial").setParameterValue(String.valueOf(profundidade_inicial));
             getAcquisitionConfig().getSelectedHardwareParameter("profundidade_final").setParameterValue(String.valueOf(profundidade_final));
             getAcquisitionConfig().getSelectedHardwareParameter("numero_de_pontos").setParameterValue(String.valueOf(numero_de_pontos));
-            if(jCheckBoxHidrostatCalibration.isSelected()){
-                getAcquisitionConfig().getSelectedHardwareParameter("calibracao").setParameterValue(String.valueOf(1));
-            } else {
-                getAcquisitionConfig().getSelectedHardwareParameter("calibracao").setParameterValue(String.valueOf(0));
-            }
 
             //COMENTEI PARA COMPILAR
             //acqConfig.setSelectedFrequency(freq);
@@ -473,19 +441,15 @@ public class HidrostatCustomizerPanel extends AbstractCustomizer {
 	//}// GEN-LAST:event_jTabbedPaneHidrostatStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroupCalibration;
-    private javax.swing.ButtonGroup buttonGroupEnergyConservationIsPolarization;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonDefaultConfig;
     private javax.swing.JButton jButtonOk;
-    private javax.swing.JCheckBox jCheckBoxHidrostatCalibration;
     private javax.swing.JFormattedTextField jFormattedTextFieldHidrostatFinalDepth;
     private javax.swing.JFormattedTextField jFormattedTextFieldHidrostatInitialDepth;
     private javax.swing.JFormattedTextField jFormattedTextFieldHidrostatNumberOfSamples;
     private javax.swing.JLabel jLabelInitialAndFinalDepthAreEqual;
     private javax.swing.JPanel jPanelControlButtons;
     private javax.swing.JPanel jPanelHidrostat;
-    private javax.swing.JPanel jPanelHidrostatCalibration;
     private javax.swing.JPanel jPanelHidrostatFinalDepth;
     private javax.swing.JPanel jPanelHidrostatInitialDepth;
     private javax.swing.JPanel jPanelHidrostatNumberOfSamples;
