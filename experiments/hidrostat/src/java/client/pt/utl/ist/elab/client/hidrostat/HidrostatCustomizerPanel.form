@@ -197,7 +197,7 @@
                 <Property name="paintLabels" type="boolean" value="true"/>
                 <Property name="paintTicks" type="boolean" value="true"/>
                 <Property name="toolTipText" type="java.lang.String" resourceKey="jSliderHidrostatFinalDepth.toolTipText"/>
-                <Property name="value" type="int" value="1930"/>
+                <Property name="value" type="int" value="1000"/>
                 <Property name="inverted" type="boolean" value="true"/>
                 <Property name="name" type="java.lang.String" value="jSliderHidrostatFinalDepth" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -288,6 +288,7 @@
                 <Property name="minorTickSpacing" type="int" value="3"/>
                 <Property name="paintLabels" type="boolean" value="true"/>
                 <Property name="paintTicks" type="boolean" value="true"/>
+                <Property name="value" type="int" value="11"/>
                 <Property name="name" type="java.lang.String" value="jSliderHidrostatNumberOfSamples" noResource="true"/>
               </Properties>
               <Events>

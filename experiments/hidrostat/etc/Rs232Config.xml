@@ -40,8 +40,8 @@
 		</channels>
 		<timeout>
 			<default_timeout time="45000" />
-			<id time="10000" />
-			<cfg time="10000" />
+			<id time="20000" />
+			<cfg time="300000" />
 			<cur time="5000" />
 			<str time="10000" />
 			<dat_bin time="120000" />

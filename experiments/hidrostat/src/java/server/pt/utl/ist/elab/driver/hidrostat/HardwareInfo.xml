@@ -25,7 +25,7 @@
 		</selection-list>
 	</parameter>
 
-	<parameter name="profundidade_final" type="ContinuousValue" value="1900">
+	<parameter name="profundidade_final" type="ContinuousValue" value="1000">
 		<selection-list>
 			<value order="1">0</value>
 			<value order="2">1930</value>
