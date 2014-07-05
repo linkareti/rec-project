@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
+<HardwareInfo id="WP_EPM" familiarName="Pêndulo Maputo" name="Basic STAMP"
+	version="BS2" manufacturer="Parallax" driverVersion="v2">
+	
+	<description>	</description>
+	
+	<parameter name="worldpendulum$parameter.displacement" type="ContinuousValue" value="5">
+		<selection-list>
+			<value order="1">5</value>
+			<value order="2">20</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
+
+	<parameter name="worldpendulum$parameter.nrpoints" type="ContinuousValue" value="10">
+		<selection-list>
+			<value order="1">10</value>
+			<value order="2">1000</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
+
+	<frequency-scale label="Sampling Interval">
+		<min-frequency><Frequency type="SamplingIntervalType" multiplier="none">1</Frequency></min-frequency>
+		<max-frequency><Frequency type="SamplingIntervalType" multiplier="none">10</Frequency></max-frequency>
+		<step-frequency><Frequency type="SamplingIntervalType" multiplier="none">1</Frequency></step-frequency>
+	</frequency-scale>
+	<Frequency type="SamplingIntervalType" multiplier="none">1</Frequency>
+	
+	<sampling-scale>
+		<min-samples>10</min-samples>
+		<max-samples>1000</max-samples>
+		<step-samples>1</step-samples>
+	</sampling-scale>
+
+	<ChannelInfo name="worldpendulum$channel.0.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="worldpendulum$channel.0.label" physicsunitname="worldpendulum$channel.0.physicsunitname" physicsunitsymbol="N" multiplier="none" selected="true">
+			<min><PhysicsVal type="float">1</PhysicsVal></min>
+			<max><PhysicsVal type="float">1000</PhysicsVal></max>
+			<step><PhysicsVal type="float">1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="float">0.</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+
+	<ChannelInfo name="worldpendulum$channel.1.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="worldpendulum$channel.1.label" physicsunitname="worldpendulum$channel.1.physicsunitname" physicsunitsymbol="seg" multiplier="none" selected="true">
+			<min><PhysicsVal type="float">0.1</PhysicsVal></min>
+			<max><PhysicsVal type="float">10</PhysicsVal></max>
+			<step><PhysicsVal type="float">0.1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="float">0.0005</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+
+	<ChannelInfo name="worldpendulum$channel.2.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="worldpendulum$channel.2.label" physicsunitname="worldpendulum$channel.2.physicsunitname" physicsunitsymbol="m/s²" multiplier="none" selected="true">
+			<min><PhysicsVal type="float">0.</PhysicsVal></min>
+			<max><PhysicsVal type="float">20</PhysicsVal></max>
+			<step><PhysicsVal type="float">0.000001</PhysicsVal></step>
+			<errordefault><PhysicsVal type="float">0.2</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+
+	<ChannelInfo name="worldpendulum$channel.3.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="worldpendulum$channel.3.label" physicsunitname="worldpendulum$channel.3.physicsunitname" physicsunitsymbol="cm/s" multiplier="none" selected="true">
+			<min><PhysicsVal type="float">0.</PhysicsVal></min>
+			<max><PhysicsVal type="float">200</PhysicsVal></max>
+			<step><PhysicsVal type="float">0.000001</PhysicsVal></step>
+			<errordefault><PhysicsVal type="float">0.0151230</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+
+	<ChannelInfo name="worldpendulum$channel.4.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="worldpendulum$channel.4.label" physicsunitname="worldpendulum$channel.4.physicsunitname" physicsunitsymbol="ºC" multiplier="none" selected="true">
+			<min><PhysicsVal type="float">0.</PhysicsVal></min>
+			<max><PhysicsVal type="float">40</PhysicsVal></max>
+			<step><PhysicsVal type="float">0.1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="float">0.</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>	
+</HardwareInfo>
