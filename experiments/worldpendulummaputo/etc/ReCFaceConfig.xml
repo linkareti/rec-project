@@ -3,7 +3,7 @@
     <display toolTipBundleKey="worldpendulummaputo$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="worldpendulummaputo$display.graph.histogram.title" classLocationBundleKey="worldpendulummaputo$display.graph.histogram.loc" order="0"/>
     <display toolTipBundleKey="worldpendulummaputo$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="worldpendulummaputo$display.graph.period.title" classLocationBundleKey="worldpendulummaputo$display.graph.period.loc" order="0"/>
     <display toolTipBundleKey="worldpendulummaputo$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="worldpendulummaputo$display.graph.g.title" classLocationBundleKey="worldpendulummaputo$display.graph.g.loc" order="0"/>
-    <localizationBundle name="worldpendulum"    location="recresource:///pt/utl/ist/elab/client/worldpendulum/resources/messages"/>
+    <localizationBundle name="worldpendulummaputo"    location="recresource:///pt/utl/ist/elab/client/worldpendulum/resources/messages"/>
     <mediaConfig videoLocation="worldpendulummaputo$url.video" offlinePlay="true" canSave="true" order="0"/>
     <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
 </apparatus>
