@@ -357,8 +357,8 @@ private void jFormattedTextFieldNrPointsFocusLost(java.awt.event.FocusEvent evt)
 		
             getAcquisitionConfig().setTotalSamples(nsamples);
                 
-            getAcquisitionConfig().getSelectedHardwareParameter("worldpendulum$parameter.displacement").setParameterValue(String.valueOf(displacement));
-            getAcquisitionConfig().getSelectedHardwareParameter("worldpendulum$parameter.nrpoints").setParameterValue(String.valueOf(nsamples));        
+            getAcquisitionConfig().getSelectedHardwareParameter("worldpendulummaputo$parameter.displacement").setParameterValue(String.valueOf(displacement));
+            getAcquisitionConfig().getSelectedHardwareParameter("worldpendulummaputo$parameter.nrpoints").setParameterValue(String.valueOf(nsamples));        
         
             getAcquisitionConfig().setSelectedFrequency(freq);
 
