@@ -1,0 +1,7 @@
+Build order:
+------------
+1) Maven Install rec.web-api with 'mvn install'.
+2) Build elab with ant. Some files will be copied to rec.web.
+3) Maven Package rec.web with 'mvn package'.
+
+Some additional configuration is necessary for rec.web: https://xwiki-dev.linkare.com/bin/view/Product_ReC/Configuring+Glassfish+Application+Server+
