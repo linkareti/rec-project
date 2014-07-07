@@ -340,10 +340,10 @@ public class HidrostatCustomizerPanel extends AbstractCustomizer {
         private void jButtonDefaultConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDefaultConfigActionPerformed
             jSliderHidrostatInitialDepth.setValue(0);
             jFormattedTextFieldHidrostatInitialDepth.setText("0");
-            jSliderHidrostatFinalDepth.setValue(1900);
-            jFormattedTextFieldHidrostatFinalDepth.setText("1900");
-            jSliderHidrostatNumberOfSamples.setValue(100);
-            jFormattedTextFieldHidrostatNumberOfSamples.setText("100");
+            jSliderHidrostatFinalDepth.setValue(1000);
+            jFormattedTextFieldHidrostatFinalDepth.setText("1000");
+            jSliderHidrostatNumberOfSamples.setValue(11);
+            jFormattedTextFieldHidrostatNumberOfSamples.setText("11");
         }//GEN-LAST:event_jButtonDefaultConfigActionPerformed
 
         private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOkActionPerformed
