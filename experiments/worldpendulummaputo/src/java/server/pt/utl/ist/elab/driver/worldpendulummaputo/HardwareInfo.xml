@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
-<HardwareInfo id="WP_EPM" familiarName="Pêndulo Maputo" name="Basic STAMP"
-	version="BS2" manufacturer="Parallax" driverVersion="v2">
+<HardwareInfo id="WP_EPM" familiarName="Pêndulo Maputo" name="PIC"
+	version="V1" manufacturer="IST" driverVersion="v1">
 	
-	<description>	</description>
-	
-	<parameter name="worldpendulum$parameter.displacement" type="ContinuousValue" value="5">
+	<parameter name="worldpendulummaputo$parameter.displacement" type="ContinuousValue" value="5">
 		<selection-list>
 			<value order="1">5</value>
 			<value order="2">20</value>
@@ -14,7 +12,7 @@
 		</selection-list>
 	</parameter>
 
-	<parameter name="worldpendulum$parameter.nrpoints" type="ContinuousValue" value="10">
+	<parameter name="worldpendulummaputo$parameter.nrpoints" type="ContinuousValue" value="10">
 		<selection-list>
 			<value order="1">10</value>
 			<value order="2">1000</value>
@@ -35,8 +33,8 @@
 		<step-samples>1</step-samples>
 	</sampling-scale>
 
-	<ChannelInfo name="worldpendulum$channel.0.name" independent="false" direction="CHANNEL_INPUT">
-		<scale label="worldpendulum$channel.0.label" physicsunitname="worldpendulum$channel.0.physicsunitname" physicsunitsymbol="N" multiplier="none" selected="true">
+	<ChannelInfo name="worldpendulummaputo$channel.0.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="worldpendulummaputo$channel.0.label" physicsunitname="worldpendulummaputo$channel.0.physicsunitname" physicsunitsymbol="N" multiplier="none" selected="true">
 			<min><PhysicsVal type="float">1</PhysicsVal></min>
 			<max><PhysicsVal type="float">1000</PhysicsVal></max>
 			<step><PhysicsVal type="float">1</PhysicsVal></step>
@@ -44,8 +42,8 @@
 		</scale>
 	</ChannelInfo>
 
-	<ChannelInfo name="worldpendulum$channel.1.name" independent="false" direction="CHANNEL_INPUT">
-		<scale label="worldpendulum$channel.1.label" physicsunitname="worldpendulum$channel.1.physicsunitname" physicsunitsymbol="seg" multiplier="none" selected="true">
+	<ChannelInfo name="worldpendulummaputo$channel.1.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="worldpendulummaputo$channel.1.label" physicsunitname="worldpendulummaputo$channel.1.physicsunitname" physicsunitsymbol="seg" multiplier="none" selected="true">
 			<min><PhysicsVal type="float">0.1</PhysicsVal></min>
 			<max><PhysicsVal type="float">10</PhysicsVal></max>
 			<step><PhysicsVal type="float">0.1</PhysicsVal></step>
@@ -53,8 +51,8 @@
 		</scale>
 	</ChannelInfo>
 
-	<ChannelInfo name="worldpendulum$channel.2.name" independent="false" direction="CHANNEL_INPUT">
-		<scale label="worldpendulum$channel.2.label" physicsunitname="worldpendulum$channel.2.physicsunitname" physicsunitsymbol="m/s²" multiplier="none" selected="true">
+	<ChannelInfo name="worldpendulummaputo$channel.2.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="worldpendulummaputo$channel.2.label" physicsunitname="worldpendulummaputo$channel.2.physicsunitname" physicsunitsymbol="m/s²" multiplier="none" selected="true">
 			<min><PhysicsVal type="float">0.</PhysicsVal></min>
 			<max><PhysicsVal type="float">20</PhysicsVal></max>
 			<step><PhysicsVal type="float">0.000001</PhysicsVal></step>
@@ -62,8 +60,8 @@
 		</scale>
 	</ChannelInfo>
 
-	<ChannelInfo name="worldpendulum$channel.3.name" independent="false" direction="CHANNEL_INPUT">
-		<scale label="worldpendulum$channel.3.label" physicsunitname="worldpendulum$channel.3.physicsunitname" physicsunitsymbol="cm/s" multiplier="none" selected="true">
+	<ChannelInfo name="worldpendulummaputo$channel.3.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="worldpendulummaputo$channel.3.label" physicsunitname="worldpendulummaputo$channel.3.physicsunitname" physicsunitsymbol="cm/s" multiplier="none" selected="true">
 			<min><PhysicsVal type="float">0.</PhysicsVal></min>
 			<max><PhysicsVal type="float">200</PhysicsVal></max>
 			<step><PhysicsVal type="float">0.000001</PhysicsVal></step>
@@ -71,8 +69,8 @@
 		</scale>
 	</ChannelInfo>
 
-	<ChannelInfo name="worldpendulum$channel.4.name" independent="false" direction="CHANNEL_INPUT">
-		<scale label="worldpendulum$channel.4.label" physicsunitname="worldpendulum$channel.4.physicsunitname" physicsunitsymbol="ºC" multiplier="none" selected="true">
+	<ChannelInfo name="worldpendulummaputo$channel.4.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="worldpendulummaputo$channel.4.label" physicsunitname="worldpendulummaputo$channel.4.physicsunitname" physicsunitsymbol="ºC" multiplier="none" selected="true">
 			<min><PhysicsVal type="float">0.</PhysicsVal></min>
 			<max><PhysicsVal type="float">40</PhysicsVal></max>
 			<step><PhysicsVal type="float">0.1</PhysicsVal></step>

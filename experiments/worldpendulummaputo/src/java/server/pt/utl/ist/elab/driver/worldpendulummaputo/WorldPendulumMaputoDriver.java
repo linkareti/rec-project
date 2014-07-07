@@ -1,10 +1,10 @@
 /* 
- * WorldPendulumDriver.java created on 1 Fev 2013
+ * WPPlanetariumDriver.java created on 1 Fev 2013
  *
  * Copyright 2009 Linkare TI. All rights reserved.
  * Linkare TI PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
-package pt.utl.ist.elab.driver.worldpendulum;
+package pt.utl.ist.elab.driver.worldpendulummaputo;
 
 import pt.utl.ist.elab.driver.serial.serialportgeneric.genericexperiment.GenericSerialPortDriver;
 
@@ -12,6 +12,6 @@ import pt.utl.ist.elab.driver.serial.serialportgeneric.genericexperiment.Generic
  * 
  * @author npadriano
  */
-public class WorldPendulumDriver extends GenericSerialPortDriver {
+public class WorldPendulumMaputoDriver extends GenericSerialPortDriver {
 
 }
