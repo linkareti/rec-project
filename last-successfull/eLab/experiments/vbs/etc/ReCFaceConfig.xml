@@ -1,9 +1,0 @@
-
-<apparatus xmlns="http://rec.linkare.com/client/config" virtual="true" toolTipBundleKey="bs$rec.exp.tip.bs" location="BIOT_SAVART_V1.0" iconLocationBundleKey="bs$rec.exp.icon.bs" headerDisplayClassLocationBundleKey="" displayStringBundleKey="bs$rec.exp.title.bs" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="bs$rec.exp.background.bs" descriptionStringBundleKey="bs$rec.exp.description.bs" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="bs$rec.exp.customizer.bs" order="1">
-    <display toolTipBundleKey="bs$rec.exp.display.bs.tip.anim" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor" displayStringBundleKey="bs$rec.exp.display.bs.title.anim" classLocationBundleKey="bs$rec.exp.display.bs.loc.anim" order="1"/>
-    <display toolTipBundleKey="bs$rec.exp.display.bs.tip.1" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="bs$rec.exp.display.bs.title.1" classLocationBundleKey="bs$rec.exp.display.bs.loc.1" order="2"/>
-    <display toolTipBundleKey="bs$rec.exp.display.bs.tip.2" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="bs$rec.exp.display.bs.title.2" classLocationBundleKey="bs$rec.exp.display.bs.loc.2" order="3"/>
-    <display toolTipBundleKey="bs$rec.exp.display.bs.tip.3" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="bs$rec.exp.display.bs.title.3" classLocationBundleKey="bs$rec.exp.display.bs.loc.3" order="4"/>
-    <display toolTipBundleKey="bs$rec.exp.display.bs.tip.4" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="bs$rec.exp.display.bs.title.4" classLocationBundleKey="bs$rec.exp.display.bs.loc.4" order="5"/>
-    <localizationBundle name="bs" location="recresource:///pt/utl/ist/elab/client/vbs/resources/messages"/>
-</apparatus>
