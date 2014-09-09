@@ -1,0 +1,10 @@
+
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="worldpendulum$tip.worldpendulum" location="WP_EPM" iconLocationBundleKey="worldpendulum$icon.worldpendulum" headerDisplayClassLocationBundleKey="" displayStringBundleKey="worldpendulum$title.worldpendulum" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="worldpendulum$background.worldpendulum" descriptionStringBundleKey="worldpendulum$description.worldpendulum" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="worldpendulum$customizer.worldpendulum" order="0">
+    <display toolTipBundleKey="worldpendulum$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="worldpendulum$display.table.title" classLocationBundleKey="worldpendulum$display.table.loc" order="0"/>
+	<display toolTipBundleKey="worldpendulum$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="worldpendulum$display.graph.histogram.title" classLocationBundleKey="worldpendulum$display.graph.histogram.loc" order="0"/>    
+    <display toolTipBundleKey="worldpendulum$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="worldpendulum$display.graph.period.title" classLocationBundleKey="worldpendulum$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="worldpendulum$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="worldpendulum$display.graph.g.title" classLocationBundleKey="worldpendulum$display.graph.g.loc" order="0"/>
+    <localizationBundle name="worldpendulum"    location="recresource:///pt/utl/ist/elab/client/worldpendulummaputo/resources/messages"/>
+    <mediaConfig videoLocation="worldpendulum$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
