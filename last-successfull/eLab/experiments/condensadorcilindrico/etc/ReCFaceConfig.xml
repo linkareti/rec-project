@@ -1,7 +1,0 @@
-
-<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="condensadorcilindrico$rec.exp.tip.cc" location="ELAB_CC_STAMP_V02" iconLocationBundleKey="condensadorcilindrico$rec.exp.icon.cc" headerDisplayClassLocationBundleKey="" displayStringBundleKey="condensadorcilindrico$rec.exp.title.cc" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="condensadorcilindrico$rec.exp.background.cc" descriptionStringBundleKey="condensadorcilindrico$rec.exp.description.cc" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="condensadorcilindrico$rec.exp.customizer.cc" order="0">
-    <display toolTipBundleKey="condensadorcilindrico$rec.exp.display.cc.tip.1" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor" displayStringBundleKey="condensadorcilindrico$rec.exp.display.cc.title.1" classLocationBundleKey="condensadorcilindrico$rec.exp.display.cc.loc.1" order="1"/>
-    <display toolTipBundleKey="condensadorcilindrico$rec.exp.display.cc.tip.4" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor" displayStringBundleKey="condensadorcilindrico$rec.exp.display.cc.title.4" classLocationBundleKey="condensadorcilindrico$rec.exp.display.cc.loc.4" order="2"/>
-    <localizationBundle name="condensadorcilindrico" location="recresource:///pt/utl/ist/elab/client/condensadorcilindrico/resources/messages"/>
-    <mediaConfig videoLocation="condensadorcilindrico$rec.exp.url.cc.video" offlinePlay="true" canSave="true" order="0"/>
-</apparatus>
