@@ -1,0 +1,7 @@
+
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="true" toolTipBundleKey="quantum$rec.exp.tip.quantum" location="MECANICA_QUANTICA_V1.0" iconLocationBundleKey="quantum$rec.exp.icon.quantum" headerDisplayClassLocationBundleKey="" displayStringBundleKey="quantum$rec.exp.title.quantum" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="quantum$rec.exp.background.quantum" descriptionStringBundleKey="quantum$rec.exp.description.quantum" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="quantum$rec.exp.customizer.quantum" order="1">
+    <display toolTipBundleKey="quantum$rec.exp.display.quantum.tip.anim" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor" displayStringBundleKey="quantum$rec.exp.display.quantum.title.anim" classLocationBundleKey="quantum$rec.exp.display.quantum.loc.anim" order="1"/>
+    <display toolTipBundleKey="quantum$rec.exp.display.quantum.tip.1" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="quantum$rec.exp.display.quantum.title.1" classLocationBundleKey="quantum$rec.exp.display.quantum.loc.1" order="2"/>
+    <display toolTipBundleKey="quantum$rec.exp.display.quantum.tip.2" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="quantum$rec.exp.display.quantum.title.2" classLocationBundleKey="quantum$rec.exp.display.quantum.loc.2" order="3"/>
+    <localizationBundle name="quantum" location="recresource:///pt/utl/ist/elab/client/vquantum/resources/messages"/>
+</apparatus>
