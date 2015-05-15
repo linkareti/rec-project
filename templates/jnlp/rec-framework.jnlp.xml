@@ -44,6 +44,8 @@
 	<update check="always" policy="always" />
 	<resources>
 
+                <jar href="ReCClient_sig.jar" main="true" />
+            
 		<jar href="lib/fits1.3_sig.jar" />
 		<jar href="lib/appframework-1.0.3_sig.jar" />
 		<jar href="lib/swing-worker-1.1_sig.jar" />
@@ -68,8 +70,7 @@
 		<jar href="lib/commons-net_sig.jar" />
 		<jar href="lib/rec.web-api_sig.jar" />
 
-		<!-- Jar ReC Client -->
-
+	
 		<!-- Jar ReC Common -->
 
 		<!-- property name="rec.percent.freememory.threshold.serialization" value="80" 

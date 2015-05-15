@@ -43,7 +43,7 @@
 	</security>
 	<update check="always" policy="always" />
 	<resources>
-		<jar href="lib/j3dcore_sig.jar" download="lazy" part="java3d" />
+		<jar href="lib/j3dcore_sig.jar" download="eager" part="java3d" main="true"/>
 		<jar href="lib/j3dutils_sig.jar" download="lazy" part="java3d" />
 		<jar href="lib/vecmath_sig.jar" download="lazy" part="java3d" />
 		<!--property name="jnlp.packEnabled" value="true" /-->

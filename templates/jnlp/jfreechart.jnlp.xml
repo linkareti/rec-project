@@ -18,7 +18,7 @@
 	</security>
 	<update check="always" policy="always" />
 	<resources>
-		<jar href="lib/jfreechart-1.0.9_sig.jar" />
+		<jar href="lib/jfreechart-1.0.9_sig.jar" main="true" />
 		<jar href="lib/jcommon-1.0.12_sig.jar" />
 		<!--property name="jnlp.packEnabled" value="true" /-->
 	</resources>

@@ -1,1064 +1,1132 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-		=======================================================
-		=== 2009/03/29 Build Rec - Elab General Definitions ===
-		=======================================================
-	-->
+        =======================================================
+        === 2009/03/29 Build Rec - Elab General Definitions ===
+        =======================================================
+-->
 
 <project name="ReC - general definitions" basedir=".">
-	<description>
-		Compile, package, sign and run the project ReC and each of the experiments.
-	</description>
-
-	<property file="build.properties" description="general properties for building project" />
-
-	<!--
-		=====================================================
-		====================== Generic ======================
-		=====================================================
-	-->
-
-	<property name="build.dir.compile" value="${basedir}/${build.dir}/compile" />
-	<property name="build.dir.jars" value="${basedir}/${build.dir}/jars" />
-
-	<property name="templates.dir" value="${basedir}/templates" />
-	<property name="templates.dir.client" value="${basedir}/templates/client" />
-	<property name="templates.dir.openorb" value="${basedir}/templates/openorb" />
-	<property name="templates.dir.jnlp" value="${basedir}/templates/jnlp" />
-	<property name="templates.dir.scripts" value="${basedir}/templates/scripts" />
-	<property name="templates.dir.logs" value="${basedir}/templates/log" />
-	<property name="templates.dir.images" value="${basedir}/templates/images" />
-	<property name="templates.dir.jmx" value="${basedir}/templates/jmx" />
-
-	<tstamp>
-		<format property="timestamp" pattern="dd-MM-yyyy hh:mm" locale="en,UK" />
-	</tstamp>
-
-	<tstamp>
-		<format property="today" pattern="dd-MM-yyyy" locale="en,UK" />
-	</tstamp>
-
-
-	<macrodef name="outer.process.list">
-		<attribute name="list" />
-		<attribute name="task" />
-		<attribute name="attribute.name" />
-		<attribute name="outer.list" />
-		<sequential>
-			<for list="@{outer.list}" param="outer.list.element" parallel="true" threadcount="2" delimiter=",">
-				<sequential>
-					<local name="innerlist" />
-					<propertycopy name="innerlist" from="@{outer.list.element}.@{list}" />
-					<process.list list="${innerlist}" task="@{task}" attribute.name="@{attribute.name}" />
-				</sequential>
-			</for>
-		</sequential>
-	</macrodef>
-
-	<macrodef name="process.list" description="Process a list of elements in csv format and for each one, define a property and execute an ant target">
-		<attribute name="list" />
-		<attribute name="task" />
-		<attribute name="attribute.name" />
-
-		<sequential>
-			<foreach list="@{list}" target="@{task}" param="@{attribute.name}" parallel="true" maxThreads="2" />
-		</sequential>
-	</macrodef>
-
-	<!--
-		=====================================================
-		==================== REC Common =====================
-		=====================================================
-	-->
-
-	<property name="rec.common.classes.dir" value="${build.dir.compile}/classes/rec/common" />
-	<property name="common.build.dir" value="${build.dir.jars}/common" />
-
-	<property name="rec.common.src.java.dir" value="${basedir}/rec/src/java/common" />
-
-	<property name="rec.lib.dir" value="${basedir}/rec/lib" />
-
-	<property name="rec.common.lib.dir" value="${rec.lib.dir}/java/common/" />
-
-	<path id="rec.common.lib.path">
-		<fileset dir="${rec.common.lib.dir}">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
-
-	<path id="rec.common.compile.lib.path">
-		<fileset dir="${rec.lib.dir}/compile/common/">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
-
-	<path id="rec.common.libs.classpath">
-		<path refid="rec.common.lib.path" />
-		<path refid="rec.common.compile.lib.path" />
-	</path>
-
-	<taskdef resource="net/sf/antcontrib/antlib.xml">
-		<classpath>
-			<pathelement location="${rec.lib.dir}/compile/common/ant-contrib-1.0b3.jar" />
-		</classpath>
-	</taskdef>
-
-	<!--
-		=====================================================
-		==================== ReC Client =====================
-		=====================================================
-	-->
-
-	<property name="rec.client.classes.dir" value="${build.dir.compile}/classes/rec/client" />
-	<property name="client.build.dir" value="${build.dir.jars}/client" />
-	<property name="client.rec.web.resources" value="rec.web/src/main/resources-rec" />
-	<property name="client.rec.web.webapp" value="rec.web/src/main/webapp" />
-
-	<property name="rec.client.src.java.dir" value="${basedir}/rec/src/java/client" />
-	<property name="rec.ui.src.java.dir" value="${basedir}/rec/src/java/ui" />
-
-	<property name="rec.client.lib.dir" value="${rec.lib.dir}/java/client/" />
-
-	<path id="rec.client.lib.path">
-		<fileset dir="${rec.client.lib.dir}">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
-
-	<path id="rec.client.compile.lib.path">
-		<fileset dir="${rec.lib.dir}/compile/client/">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
-
-	<path id="rec.client.libs.classpath">
-		<path refid="rec.client.lib.path" />
-		<path refid="rec.client.compile.lib.path" />
-	</path>
-
-	<path id="rec.compile.client.dependencies.classpath">
-		<pathelement location="${rec.common.classes.dir}/" />
-		<path refid="rec.common.libs.classpath" />
-	</path>
-
-	<path id="rec.compile.client.classpath">
-		<path refid="rec.client.libs.classpath" />
-		<path refid="rec.compile.client.dependencies.classpath" />
-	</path>
-
-	<!--
-		=====================================================
-		================ ReC Hardware Server ================
-		=====================================================
-	-->
-
-	<property name="rec.hardwareserver.classes.dir" value="${build.dir.compile}/classes/rec/hardwareserver" />
-	<property name="hardwareserver.build.dir" value="${build.dir.jars}/hardwareserver" />
-
-	<property name="rec.hardwareserver.src.java.dir" value="${basedir}/rec/src/java/hardwareserver" />
-
-	<property name="rec.hardwareserver.lib.dir" value="${rec.lib.dir}/java/hardwareserver/" />
-
-	<path id="rec.hardwareserver.lib.path">
-		<fileset dir="${rec.hardwareserver.lib.dir}">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
-
-	<path id="rec.hardwareserver.compile.lib.path">
-		<fileset dir="${rec.lib.dir}/compile/hardwareserver/">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
-
-	<path id="rec.hardwareserver.libs.classpath">
-		<path refid="rec.hardwareserver.lib.path" />
-		<path refid="rec.hardwareserver.compile.lib.path" />
-	</path>
-
-	<path id="rec.compile.hardwareserver.dependencies.classpath">
-		<pathelement location="${rec.common.classes.dir}/" />
-		<path refid="rec.common.libs.classpath" />
-	</path>
-
-	<path id="rec.compile.hardwareserver.classpath">
-		<path refid="rec.hardwareserver.libs.classpath" />
-		<path refid="rec.compile.hardwareserver.dependencies.classpath" />
-	</path>
-
-	<!--
-		=====================================================
-		============= ReC Multicast Controller===============
-		=====================================================
-	-->
-
-	<property name="rec.multicast.classes.dir" value="${build.dir.compile}/classes/rec/multicast" />
-	<property name="multicast.build.dir" value="${build.dir.jars}/multicast" />
-
-	<property name="rec.multicast.src.java.dir" value="${basedir}/rec/src/java/multicast" />
-
-	<property name="rec.multicast.lib.dir" value="${rec.lib.dir}/java/multicast/" />
-
-	<path id="rec.multicast.lib.path">
-		<fileset dir="${rec.multicast.lib.dir}">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
-
-	<path id="rec.multicast.compile.lib.path">
-		<fileset dir="${rec.lib.dir}/compile/multicast/">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
-
-	<path id="rec.multicastcontroller.libs.classpath">
-		<path refid="rec.multicast.lib.path" />
-		<path refid="rec.multicast.compile.lib.path" />
-	</path>
-
-	<path id="rec.compile.multicastcontroller.dependencies.classpath">
-		<pathelement location="${rec.common.classes.dir}/" />
-		<path refid="rec.common.libs.classpath" />
-	</path>
-
-	<path id="rec.compile.multicastcontroller.classpath">
-		<path refid="rec.multicastcontroller.libs.classpath" />
-		<path refid="rec.compile.multicastcontroller.dependencies.classpath" />
-	</path>
-
-
-	<path id="run.multicastcontroller.classpath">
-		<path refid="rec.common.lib.path" />
-		<path refid="rec.multicast.lib.path" />
-		<pathelement location="${rec.common.classes.dir}/" />
-		<pathelement location="${rec.multicast.classes.dir}/" />
-	</path>
-
-	<!--
-			=====================================================
-			=================== Elab Common =====================
-			=====================================================
-	-->
-
-	<property name="elab.lib.dir" value="${basedir}/elab/lib" />
-
-	<property name="elab.common.classes.dir" value="${build.dir.compile}/classes/elab/common" />
-	<property name="elab.common.src.java.dir" value="${basedir}/elab/src/java/common" />
-	<property name="elab.common.lib.dir" value="${elab.lib.dir}/java/common" />
-
-	<path id="elab.common.lib.path">
-		<fileset dir="${elab.common.lib.dir}">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
-
-	<path id="elab.common.compile.lib.path">
-		<fileset dir="${elab.lib.dir}/compile/common/">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
-
-	<path id="elab.common.libs.classpath">
-		<path refid="elab.common.lib.path" />
-		<path refid="elab.common.compile.lib.path" />
-	</path>
-
-	<path id="elab.compile.common.dependencies.classpath">
-		<path refid="rec.common.libs.classpath" />
-		<pathelement location="${rec.common.classes.dir}/" />
-	</path>
-
-	<path id="elab.compile.common.classpath">
-		<path refid="elab.common.libs.classpath" />
-		<path refid="elab.compile.common.dependencies.classpath" />
-	</path>
-
-
-	<!--
-		=====================================================
-		=================== Elab Client =====================
-		=====================================================
-	-->
-
-	<property name="elab.client.classes.dir" value="${build.dir.compile}/classes/elab/client" />
-
-	<property name="elab.client.src.java.dir" value="${basedir}/elab/src/java/client" />
-	<property name="elab.ui.src.java.dir" value="${basedir}/elab/src/java/ui" />
-
-	<property name="elab.lib.dir" value="${basedir}/elab/lib" />
-
-	<property name="elab.client.lib.dir" value="${elab.lib.dir}/java/client/" />
-
-	<path id="elab.client.lib.path">
-		<fileset dir="${elab.client.lib.dir}">
-			<include name="**/*.jar" />
-		</fileset>
-		<path refid="elab.common.lib.path" />
-	</path>
-
-	<path id="elab.client.compile.lib.path">
-		<fileset dir="${elab.lib.dir}/compile/client/">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
-
-	<path id="elab.client.libs.classpath">
-		<path refid="elab.client.lib.path" />
-		<path refid="elab.client.compile.lib.path" />
-	</path>
-
-	<path id="elab.compile.client.dependencies.classpath">
-		<path refid="rec.client.libs.classpath" />
-		<pathelement location="${rec.client.classes.dir}/" />
-		<path refid="rec.common.libs.classpath" />
-		<pathelement location="${rec.common.classes.dir}/" />
-		<path refid="elab.common.libs.classpath" />
-		<pathelement location="${elab.common.classes.dir}" />
-	</path>
-
-	<path id="elab.compile.client.classpath">
-		<path refid="elab.client.libs.classpath" />
-		<path refid="elab.compile.client.dependencies.classpath" />
-	</path>
-
-	<!--
-		=====================================================
-		=================== Elab driver =====================
-		=====================================================
-	-->
-
-	<property name="elab.hardwareserver.classes.dir" value="${build.dir.compile}/classes/elab/hardwareserver" />
-
-	<property name="elab.hardwareserver.src.java.dir" value="${basedir}/elab/src/java/driver" />
-
-	<property name="elab.hardwareserver.lib.dir" value="${elab.lib.dir}/java/driver/" />
-
-	<path id="elab.hardwareserver.lib.path">
-		<fileset dir="${elab.hardwareserver.lib.dir}">
-			<include name="**/*.jar" />
-		</fileset>
-		<path refid="elab.common.lib.path" />
-	</path>
-
-	<path id="elab.hardwareserver.compile.lib.path">
-		<fileset dir="${elab.lib.dir}/compile/driver/">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
-
-	<path id="elab.hardwareserver.libs.classpath">
-		<path refid="elab.hardwareserver.lib.path" />
-		<path refid="elab.hardwareserver.compile.lib.path" />
-	</path>
-
-	<path id="elab.compile.hardwareserver.dependencies.classpath">
-		<pathelement location="${rec.hardwareserver.classes.dir}/" />
-		<path refid="rec.hardwareserver.libs.classpath" />
-		<pathelement location="${rec.common.classes.dir}/" />
-		<path refid="rec.common.libs.classpath" />
-		<path refid="elab.common.libs.classpath" />
-		<pathelement location="${elab.common.classes.dir}" />
-	</path>
-
-	<path id="elab.compile.hardwareserver.classpath">
-		<path refid="elab.hardwareserver.libs.classpath" />
-		<path refid="elab.compile.hardwareserver.dependencies.classpath" />
-	</path>
-
-	<!--
-		=====================================================
-		=========== Elab Multicast Controller ===============
-		=====================================================
-	-->
-
-	<property name="elab.multicast.classes.dir" value="${build.dir.compile}/classes/elab/multicast" />
-
-	<property name="elab.multicast.src.java.dir" value="${basedir}/elab/src/java/multicast" />
-
-	<property name="elab.multicast.lib.dir" value="${elab.lib.dir}/java/multicast/" />
-
-	<path id="elab.multicast.lib.path">
-		<fileset dir="${elab.multicast.lib.dir}">
-			<include name="**/*.jar" />
-		</fileset>
-		<path refid="elab.common.lib.path" />
-	</path>
-
-	<path id="elab.multicast.compile.lib.path">
-		<fileset dir="${elab.lib.dir}/compile/multicast/">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
-
-	<path id="elab.multicastcontroller.libs.classpath">
-		<path refid="elab.multicast.lib.path" />
-		<path refid="elab.multicast.compile.lib.path" />
-	</path>
-
-	<path id="elab.compile.multicastcontroller.dependencies.classpath">
-		<path refid="rec.common.libs.classpath" />
-		<pathelement location="${rec.common.classes.dir}/" />
-		<path refid="rec.multicastcontroller.libs.classpath" />
-		<pathelement location="${rec.multicast.classes.dir}/" />
-	</path>
-
-	<path id="elab.compile.multicastcontroller.classpath">
-		<path refid="elab.multicastcontroller.libs.classpath" />
-		<path refid="elab.compile.multicastcontroller.dependencies.classpath" />
-	</path>
-
-	<!--
-		=====================================================
-		===============ReC Entire Project====================
-		=====================================================
-	-->
-
-	<macrodef name="create.jnlp.full.client.compile" description="Create the FullClient JNLP launch file for each lab">
-		<sequential>
-			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/rec-framework.jnlp">
-				<filterset begintoken="@" endtoken="@" filtersfile="build.properties" />
-			</copy>
-			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="@codebase@" value="file:${client.build.dir}" />
-			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" propertyFile="build.properties">
-				<replacefilter token="@rec.title@" property="rec.title" />
-				<replacefilter token="@rec.vendor@" property="rec.vendor" />
-				<replacefilter token="@rec.homepage@" property="rec.homepage" />
-				<replacefilter token="@rec.description@" property="rec.description" />
-				<replacefilter token="@rec.description.oneline@" property="rec.description.oneline" />
-				<replacefilter token="@rec.description.tooltip@" property="rec.description.tooltip" />
-				<replacefilter token="@rec.description.short@" property="rec.description.short" />
-				<replacefilter token="@rec.icon@" property="rec.icon" />
-				<replacefilter token="@rec.icon.splash@" property="rec.icon.splash" />
-				<replacefilter token="@linkare.home.url@" property="linkare.home.url" />
-				<replacefilter token="@linkare.home.title@" property="linkare.home.title" />
-				<replacefilter token="@linkare.home.description@" property="linkare.home.description" />
-				<replacefilter token="@linkare.home.icon@" property="linkare.home.icon" />
-				<replacefilter token="@rec.title.en@" property="rec.title.en" />
-				<replacefilter token="@rec.homepage.en@" property="rec.homepage.en" />
-				<replacefilter token="@rec.description.en@" property="rec.description.en" />
-				<replacefilter token="@rec.description.oneline.en@" property="rec.description.oneline.en" />
-				<replacefilter token="@rec.description.tooltip.en@" property="rec.description.tooltip.en" />
-				<replacefilter token="@rec.description.short.en@" property="rec.description.short.en" />
-				<replacefilter token="@linkare.home.url.en@" property="linkare.home.url.en" />
-				<replacefilter token="@linkare.home.title.en@" property="linkare.home.title.en" />
-				<replacefilter token="@linkare.home.description.en@" property="linkare.home.description.en" />
-				<replacefilter token="@linkare.home.icon@" property="linkare.home.icon" />
-			</replace>
-
-			<!--copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/rec-framework.jnlp" />
-			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}" />
-			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" propertyFile="build.properties">
-				<replacefilter token="@href@" property="href" />
-			</replace-->
-
-			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
-			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
-
-			<copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/openorb.jnlp" />
-			<replace file="${elab.client.classes.dir}/openorb.jnlp" token="@codebase@" value="file:${client.build.dir}/" />
-			<replace file="${elab.client.classes.dir}/openorb.jnlp" propertyFile="build.properties">
-				<replacefilter token="@openorb.title@" property="openorb.title" />
-				<replacefilter token="@openorb.vendor@" property="openorb.vendor" />
-				<replacefilter token="@openorb.homepage@" property="openorb.homepage" />
-				<replacefilter token="@openorb.description@" property="openorb.description" />
-				<replacefilter token="@openorb.description.oneline@" property="openorb.description.oneline" />
-				<replacefilter token="@openorb.description.tooltip@" property="openorb.description.tooltip" />
-				<replacefilter token="@openorb.description.short@" property="openorb.description.short" />
-			</replace>
-
-			<copy file="${jnlp.j3d.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/j3d.jnlp">
-				<filterset begintoken="@" endtoken="@" filtersfile="build.properties" />
-			</copy>
-			<replace file="${elab.client.classes.dir}/j3d.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}" />
-
-			<copy file="${jnlp.jfreechart.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/jfreechart.jnlp" />
-			<replace file="${elab.client.classes.dir}/jfreechart.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
-			<replace file="${elab.client.classes.dir}/jfreechart.jnlp" propertyFile="build.properties">
-				<replacefilter token="@jfreechart.title@" property="jfreechart.title" />
-				<replacefilter token="@jfreechart.vendor@" property="jfreechart.vendor" />
-				<replacefilter token="@jfreechart.homepage@" property="jfreechart.homepage" />
-				<replacefilter token="@jfreechart.description@" property="jfreechart.description" />
-				<replacefilter token="@jfreechart.description.oneline@" property="jfreechart.description.oneline" />
-				<replacefilter token="@jfreechart.description.tooltip@" property="jfreechart.description.tooltip" />
-				<replacefilter token="@jfreechart.description.short@" property="jfreechart.description.short" />
-				<replacefilter token="@jfreechart.icon@" property="jfreechart.icon" />
-				<replacefilter token="@jfreechart.icon.splash@" property="jfreechart.icon.splash" />
-			</replace>
-
-			<copy file="${jnlp.linuxinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/linux-vlc-installer.jnlp" />
-			<replace file="${elab.client.classes.dir}/linux-vlc-installer.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
-			<replace file="${elab.client.classes.dir}/linux-vlc-installer.jnlp" propertyFile="build.properties">
-				<replacefilter token="@linux.vlc.intaller.title@" property="linux.vlc.intaller.title" />
-				<replacefilter token="@linux.vlc.intaller.vendor@" property="linux.vlc.intaller.vendor" />
-				<replacefilter token="@linux.intaller.homepage@" property="linux.intaller.homepage" />
-				<replacefilter token="@linux.vlc.intaller.description@" property="linux.vlc.intaller.description" />
-				<replacefilter token="@linux.vlc.intaller.description.oneline@" property="linux.vlc.intaller.description.oneline" />
-				<replacefilter token="@linux.vlc.intaller.description.tooltip@" property="linux.vlc.intaller.description.tooltip" />
-				<replacefilter token="@linux.vlc.intaller.description.short@" property="linux.vlc.intaller.description.short" />
-				<replacefilter token="@linux.vlc.intaller.icon@" property="linux.vlc.intaller.icon" />
-				<replacefilter token="@linux.vlc.intaller.icon.splash@" property="linux.vlc.intaller.icon.splash" />
-				<replacefilter token="@vlc.home.url@" property="vlc.home.url" />
-				<replacefilter token="@vlc.home.title@" property="vlc.home.title" />
-				<replacefilter token="@vlc.home.description@" property="vlc.home.description" />
-				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
-				<replacefilter token="@linux.vlc.intaller.title.en@" property="linux.vlc.intaller.title.en" />
-				<replacefilter token="@linux.vlc.intaller.homepage.en@" property="linux.vlc.intaller.homepage.en" />
-				<replacefilter token="@linux.vlc.intaller.description.en@" property="linux.vlc.intaller.description.en" />
-				<replacefilter token="@linux.vlc.intaller.description.oneline.en@" property="linux.vlc.intaller.description.oneline.en" />
-				<replacefilter token="@linux.vlc.intaller.description.tooltip.en@" property="linux.vlc.intaller.description.tooltip.en" />
-				<replacefilter token="@linux.vlc.intaller.description.short.en@" property="linux.vlc.intaller.description.short.en" />
-				<replacefilter token="@vlc.home.url.en@" property="vlc.home.url.en" />
-				<replacefilter token="@vlc.home.title.en@" property="vlc.home.title.en" />
-				<replacefilter token="@vlc.home.description.en@" property="vlc.home.description.en" />
-				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
-				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
-				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
-			</replace>
-
-			<copy file="${jnlp.macinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/macosx-vlc-installer.jnlp" />
-			<replace file="${elab.client.classes.dir}/macosx-vlc-installer.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
-			<replace file="${elab.client.classes.dir}/macosx-vlc-installer.jnlp" propertyFile="build.properties">
-				<replacefilter token="@mac.vlc.intaller.title@" property="mac.vlc.intaller.title" />
-				<replacefilter token="@mac.vlc.intaller.vendor@" property="mac.vlc.intaller.vendor" />
-				<replacefilter token="@mac.intaller.homepage@" property="mac.intaller.homepage" />
-				<replacefilter token="@mac.vlc.intaller.description@" property="mac.vlc.intaller.description" />
-				<replacefilter token="@mac.vlc.intaller.description.oneline@" property="mac.vlc.intaller.description.oneline" />
-				<replacefilter token="@mac.vlc.intaller.description.tooltip@" property="mac.vlc.intaller.description.tooltip" />
-				<replacefilter token="@mac.vlc.intaller.description.short@" property="mac.vlc.intaller.description.short" />
-				<replacefilter token="@mac.vlc.intaller.icon@" property="mac.vlc.intaller.icon" />
-				<replacefilter token="@mac.vlc.intaller.icon.splash@" property="mac.vlc.intaller.icon.splash" />
-				<replacefilter token="@vlc.home.url@" property="vlc.home.url" />
-				<replacefilter token="@vlc.home.title@" property="vlc.home.title" />
-				<replacefilter token="@vlc.home.description@" property="vlc.home.description" />
-				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
-				<replacefilter token="@mac.vlc.intaller.title.en@" property="mac.vlc.intaller.title.en" />
-				<replacefilter token="@mac.vlc.intaller.homepage.en@" property="mac.vlc.intaller.homepage.en" />
-				<replacefilter token="@mac.vlc.intaller.description.en@" property="mac.vlc.intaller.description.en" />
-				<replacefilter token="@mac.vlc.intaller.description.oneline.en@" property="mac.vlc.intaller.description.oneline.en" />
-				<replacefilter token="@mac.vlc.intaller.description.tooltip.en@" property="mac.vlc.intaller.description.tooltip.en" />
-				<replacefilter token="@mac.vlc.intaller.description.short.en@" property="mac.vlc.intaller.description.short.en" />
-				<replacefilter token="@vlc.home.url.en@" property="vlc.home.url.en" />
-				<replacefilter token="@vlc.home.title.en@" property="vlc.home.title.en" />
-				<replacefilter token="@vlc.home.description.en@" property="vlc.home.description.en" />
-				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
-				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
-				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
-			</replace>
-
-			<copy file="${jnlp.windowsinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/windows-vlc-installer.jnlp" />
-			<replace file="${elab.client.classes.dir}/windows-vlc-installer.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
-			<replace file="${elab.client.classes.dir}/windows-vlc-installer.jnlp" propertyFile="build.properties">
-				<replacefilter token="@windows.vlc.intaller.title@" property="windows.vlc.intaller.title" />
-				<replacefilter token="@windows.vlc.intaller.vendor@" property="windows.vlc.intaller.vendor" />
-				<replacefilter token="@windows.intaller.homepage@" property="windows.intaller.homepage" />
-				<replacefilter token="@windows.vlc.intaller.description@" property="windows.vlc.intaller.description" />
-				<replacefilter token="@windows.vlc.intaller.description.oneline@" property="windows.vlc.intaller.description.oneline" />
-				<replacefilter token="@windows.vlc.intaller.description.tooltip@" property="windows.vlc.intaller.description.tooltip" />
-				<replacefilter token="@windows.vlc.intaller.description.short@" property="windows.vlc.intaller.description.short" />
-				<replacefilter token="@windows.vlc.intaller.icon@" property="windows.vlc.intaller.icon" />
-				<replacefilter token="@windows.vlc.intaller.icon.splash@" property="windows.vlc.intaller.icon.splash" />
-				<replacefilter token="@vlc.home.url@" property="vlc.home.url" />
-				<replacefilter token="@vlc.home.title@" property="vlc.home.title" />
-				<replacefilter token="@vlc.home.description@" property="vlc.home.description" />
-				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
-				<replacefilter token="@windows.vlc.intaller.title.en@" property="windows.vlc.intaller.title.en" />
-				<replacefilter token="@windows.vlc.intaller.homepage.en@" property="windows.vlc.intaller.homepage.en" />
-				<replacefilter token="@windows.vlc.intaller.description.en@" property="windows.vlc.intaller.description.en" />
-				<replacefilter token="@windows.vlc.intaller.description.oneline.en@" property="windows.vlc.intaller.description.oneline.en" />
-				<replacefilter token="@windows.vlc.intaller.description.tooltip.en@" property="windows.vlc.intaller.description.tooltip.en" />
-				<replacefilter token="@windows.vlc.intaller.description.short.en@" property="windows.vlc.intaller.description.short.en" />
-				<replacefilter token="@vlc.home.url.en@" property="vlc.home.url.en" />
-				<replacefilter token="@vlc.home.title.en@" property="vlc.home.title.en" />
-				<replacefilter token="@vlc.home.description.en@" property="vlc.home.description.en" />
-				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
-				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
-				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
-			</replace>
-
-			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/elab-client.jnlp" />
-			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Auto Connect ID --&gt;" value="" />
-			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Auto Acquire Result --&gt;" value="" />
-			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
-			<replace file="${elab.client.classes.dir}/elab-client.jnlp" propertyFile="build.properties">
-				<replacefilter token="@elab.title@" property="elab.title" />
-				<replacefilter token="@elab.vendor@" property="elab.vendor" />
-				<replacefilter token="@elab.homepage@" property="elab.homepage" />
-				<replacefilter token="@elab.description@" property="elab.description" />
-				<replacefilter token="@elab.description.oneline@" property="elab.description.oneline" />
-				<replacefilter token="@elab.description.tooltip@" property="elab.description.tooltip" />
-				<replacefilter token="@elab.description.short@" property="elab.description.short" />
-				<replacefilter token="@elab.icon@" property="elab.icon" />
-				<replacefilter token="@elab.icon.splash@" property="elab.icon.splash" />
-				<replacefilter token="@elab.title.en@" property="elab.title.en" />
-				<replacefilter token="@elab.homepage.en@" property="elab.homepage.en" />
-				<replacefilter token="@elab.description.en@" property="elab.description.en" />
-				<replacefilter token="@elab.description.oneline.en@" property="elab.description.oneline.en" />
-				<replacefilter token="@elab.description.tooltip.en@" property="elab.description.tooltip.en" />
-				<replacefilter token="@elab.description.short.en@" property="elab.description.short.en" />
-				<replacefilter token="@j2se-version@" property="j2se-version" />
-				<replacefilter token="@video.enabled@" property="video.enabled" />
-				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
-				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
-				<replacefilter token="@client.main-class@" property="client.main-class" />
-				<replacefilter token="@rec.web.endpoint@" property="rec.web.endpoint" />
-				<replacefilter token="@rec.client.processingmanager.threadpool.coresize@" property="rec.client.processingmanager.threadpool.coresize" />
-				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
-				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
-				<replacefilter token="@jnlp.file@" value="elab-client.jnlp" />
-			</replace>
-
-			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
-			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot; main=&quot;true&quot; /&gt;" />
-
-			<foreach list="${lab.list}" param="lab.name" target="-add.lab.experiments.to.full.jnlp.compile" parallel="false" />
-
-		</sequential>
-	</macrodef>
-
-	<!-- - - - - - - - - - - - - - - - - - 
-          target: -add.lab.experiments.to.full.jnlp.compile                      
-         - - - - - - - - - - - - - - - - - -->
-	<target name="-add.lab.experiments.to.full.jnlp.compile">
-		<sequential>
-			<local name="lab.experiments.list" />
-			<propertycopy name="lab.experiments.list" from="${lab.name}.experiment.list" />
-			<foreach list="${lab.experiments.list}" param="experiment.name" target="-add.experiment.to.full.jnlp.compile" />
-		</sequential>
-	</target>
-
-
-	<target name="-add.experiment.to.full.jnlp.compile">
-		<add.experiment.to.full.jnlp.compile experiment.name="${experiment.name}" />
-	</target>
-	<macrodef name="add.experiment.to.full.jnlp.compile" description="Add one experiment to the jnlp of the full client">
-		<attribute name="experiment.name" />
-		<sequential>
-			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!--End Experiment Jars --&gt;">
-				<replacevalue>
-					<![CDATA[<jar href="@temporary.experiment.jar@" lazy="true"/>
-					<!--End Experiment Jars -->]]></replacevalue>
-			</replace>
-			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
-		</sequential>
-	</macrodef>
-
-	<macrodef name="create.jnlp.full.client.build" description="Create the FullClient JNLP launch file">
-		<sequential>
-
-			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${client.build.dir}/rec-framework.jnlp" />
-			<replace file="${client.build.dir}/rec-framework.jnlp" propertyFile="build.properties">
-				<replacefilter token="@codebase@" property="codebase" />
-				<replacefilter token="@rec.title@" property="rec.title" />
-				<replacefilter token="@rec.vendor@" property="rec.vendor" />
-				<replacefilter token="@rec.homepage@" property="rec.homepage" />
-				<replacefilter token="@rec.description@" property="rec.description" />
-				<replacefilter token="@rec.description.oneline@" property="rec.description.oneline" />
-				<replacefilter token="@rec.description.tooltip@" property="rec.description.tooltip" />
-				<replacefilter token="@rec.description.short@" property="rec.description.short" />
-				<replacefilter token="@rec.icon@" property="rec.icon" />
-				<replacefilter token="@rec.icon.splash@" property="rec.icon.splash" />
-				<replacefilter token="@linkare.home.url@" property="linkare.home.url" />
-				<replacefilter token="@linkare.home.title@" property="linkare.home.title" />
-				<replacefilter token="@linkare.home.description@" property="linkare.home.description" />
-				<replacefilter token="@linkare.home.icon@" property="linkare.home.icon" />
-				<replacefilter token="@rec.title.en@" property="rec.title.en" />
-				<replacefilter token="@rec.homepage.en@" property="rec.homepage.en" />
-				<replacefilter token="@rec.description.en@" property="rec.description.en" />
-				<replacefilter token="@rec.description.oneline.en@" property="rec.description.oneline.en" />
-				<replacefilter token="@rec.description.tooltip.en@" property="rec.description.tooltip.en" />
-				<replacefilter token="@rec.description.short.en@" property="rec.description.short.en" />
-				<replacefilter token="@linkare.home.url.en@" property="linkare.home.url.en" />
-				<replacefilter token="@linkare.home.title.en@" property="linkare.home.title.en" />
-				<replacefilter token="@linkare.home.description.en@" property="linkare.home.description.en" />
-				<replacefilter token="@linkare.home.icon@" property="linkare.home.icon" />
-			</replace>
-
-			<replace file="${client.build.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
-			<replace file="${client.build.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
-
-			<copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${client.build.dir}/openorb.jnlp" />
-			<replace file="${client.build.dir}/openorb.jnlp" propertyFile="build.properties">
-				<replacefilter token="@codebase@" property="codebase" />
-				<replacefilter token="@openorb.title@" property="openorb.title" />
-				<replacefilter token="@openorb.vendor@" property="openorb.vendor" />
-				<replacefilter token="@openorb.homepage@" property="openorb.homepage" />
-				<replacefilter token="@openorb.description@" property="openorb.description" />
-				<replacefilter token="@openorb.description.oneline@" property="openorb.description.oneline" />
-				<replacefilter token="@openorb.description.tooltip@" property="openorb.description.tooltip" />
-				<replacefilter token="@openorb.description.short@" property="openorb.description.short" />
-			</replace>
-
-			<copy file="${jnlp.j3d.template.file}" overwrite="yes" tofile="${client.build.dir}/j3d.jnlp">
-				<filterset begintoken="@" endtoken="@" filtersfile="build.properties" />
-			</copy>
-			<replace file="${client.build.dir}/j3d.jnlp" propertyFile="build.properties">
-				<replacefilter token="@codebase@" property="codebase" />
-			</replace>
-
-			<copy file="${jnlp.jfreechart.template.file}" overwrite="yes" tofile="${client.build.dir}/jfreechart.jnlp" />
-			<replace file="${client.build.dir}/jfreechart.jnlp" propertyFile="build.properties">
-				<replacefilter token="@codebase@" property="codebase" />
-				<replacefilter token="@jfreechart.title@" property="jfreechart.title" />
-				<replacefilter token="@jfreechart.vendor@" property="jfreechart.vendor" />
-				<replacefilter token="@jfreechart.homepage@" property="jfreechart.homepage" />
-				<replacefilter token="@jfreechart.description@" property="jfreechart.description" />
-				<replacefilter token="@jfreechart.description.oneline@" property="jfreechart.description.oneline" />
-				<replacefilter token="@jfreechart.description.tooltip@" property="jfreechart.description.tooltip" />
-				<replacefilter token="@jfreechart.description.short@" property="jfreechart.description.short" />
-				<replacefilter token="@jfreechart.icon@" property="jfreechart.icon" />
-				<replacefilter token="@jfreechart.icon.splash@" property="jfreechart.icon.splash" />
-			</replace>
-
-			<copy file="${jnlp.linuxinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/linux-vlc-installer.jnlp" />
-			<replace file="${client.build.dir}/linux-vlc-installer.jnlp" propertyFile="build.properties">
-				<replacefilter token="@codebase@" property="codebase" />
-				<replacefilter token="@linux.vlc.intaller.title@" property="linux.vlc.intaller.title" />
-				<replacefilter token="@linux.vlc.intaller.vendor@" property="linux.vlc.intaller.vendor" />
-				<replacefilter token="@linux.intaller.homepage@" property="linux.intaller.homepage" />
-				<replacefilter token="@linux.vlc.intaller.description@" property="linux.vlc.intaller.description" />
-				<replacefilter token="@linux.vlc.intaller.description.oneline@" property="linux.vlc.intaller.description.oneline" />
-				<replacefilter token="@linux.vlc.intaller.description.tooltip@" property="linux.vlc.intaller.description.tooltip" />
-				<replacefilter token="@linux.vlc.intaller.description.short@" property="linux.vlc.intaller.description.short" />
-				<replacefilter token="@linux.vlc.intaller.icon@" property="linux.vlc.intaller.icon" />
-				<replacefilter token="@linux.vlc.intaller.icon.splash@" property="linux.vlc.intaller.icon.splash" />
-				<replacefilter token="@vlc.home.url@" property="vlc.home.url" />
-				<replacefilter token="@vlc.home.title@" property="vlc.home.title" />
-				<replacefilter token="@vlc.home.description@" property="vlc.home.description" />
-				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
-				<replacefilter token="@linux.vlc.intaller.title.en@" property="linux.vlc.intaller.title.en" />
-				<replacefilter token="@linux.vlc.intaller.homepage.en@" property="linux.vlc.intaller.homepage.en" />
-				<replacefilter token="@linux.vlc.intaller.description.en@" property="linux.vlc.intaller.description.en" />
-				<replacefilter token="@linux.vlc.intaller.description.oneline.en@" property="linux.vlc.intaller.description.oneline.en" />
-				<replacefilter token="@linux.vlc.intaller.description.tooltip.en@" property="linux.vlc.intaller.description.tooltip.en" />
-				<replacefilter token="@linux.vlc.intaller.description.short.en@" property="linux.vlc.intaller.description.short.en" />
-				<replacefilter token="@vlc.home.url.en@" property="vlc.home.url.en" />
-				<replacefilter token="@vlc.home.title.en@" property="vlc.home.title.en" />
-				<replacefilter token="@vlc.home.description.en@" property="vlc.home.description.en" />
-				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
-				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
-				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
-			</replace>
-			<copy file="${jnlp.macinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/macosx-vlc-installer.jnlp" />
-			<replace file="${client.build.dir}/macosx-vlc-installer.jnlp" propertyFile="build.properties">
-				<replacefilter token="@codebase@" property="codebase" />
-				<replacefilter token="@mac.vlc.intaller.title@" property="mac.vlc.intaller.title" />
-				<replacefilter token="@mac.vlc.intaller.vendor@" property="mac.vlc.intaller.vendor" />
-				<replacefilter token="@mac.intaller.homepage@" property="mac.intaller.homepage" />
-				<replacefilter token="@mac.vlc.intaller.description@" property="mac.vlc.intaller.description" />
-				<replacefilter token="@mac.vlc.intaller.description.oneline@" property="mac.vlc.intaller.description.oneline" />
-				<replacefilter token="@mac.vlc.intaller.description.tooltip@" property="mac.vlc.intaller.description.tooltip" />
-				<replacefilter token="@mac.vlc.intaller.description.short@" property="mac.vlc.intaller.description.short" />
-				<replacefilter token="@mac.vlc.intaller.icon@" property="mac.vlc.intaller.icon" />
-				<replacefilter token="@mac.vlc.intaller.icon.splash@" property="mac.vlc.intaller.icon.splash" />
-				<replacefilter token="@vlc.home.url@" property="vlc.home.url" />
-				<replacefilter token="@vlc.home.title@" property="vlc.home.title" />
-				<replacefilter token="@vlc.home.description@" property="vlc.home.description" />
-				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
-				<replacefilter token="@mac.vlc.intaller.title.en@" property="mac.vlc.intaller.title.en" />
-				<replacefilter token="@mac.vlc.intaller.homepage.en@" property="mac.vlc.intaller.homepage.en" />
-				<replacefilter token="@mac.vlc.intaller.description.en@" property="mac.vlc.intaller.description.en" />
-				<replacefilter token="@mac.vlc.intaller.description.oneline.en@" property="mac.vlc.intaller.description.oneline.en" />
-				<replacefilter token="@mac.vlc.intaller.description.tooltip.en@" property="mac.vlc.intaller.description.tooltip.en" />
-				<replacefilter token="@mac.vlc.intaller.description.short.en@" property="mac.vlc.intaller.description.short.en" />
-				<replacefilter token="@vlc.home.url.en@" property="vlc.home.url.en" />
-				<replacefilter token="@vlc.home.title.en@" property="vlc.home.title.en" />
-				<replacefilter token="@vlc.home.description.en@" property="vlc.home.description.en" />
-				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
-				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
-				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
-			</replace>
-			<copy file="${jnlp.windowsinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/windows-vlc-installer.jnlp" />
-			<replace file="${client.build.dir}/windows-vlc-installer.jnlp" propertyFile="build.properties">
-				<replacefilter token="@codebase@" property="codebase" />
-				<replacefilter token="@windows.vlc.intaller.title@" property="windows.vlc.intaller.title" />
-				<replacefilter token="@windows.vlc.intaller.vendor@" property="windows.vlc.intaller.vendor" />
-				<replacefilter token="@windows.intaller.homepage@" property="windows.intaller.homepage" />
-				<replacefilter token="@windows.vlc.intaller.description@" property="windows.vlc.intaller.description" />
-				<replacefilter token="@windows.vlc.intaller.description.oneline@" property="windows.vlc.intaller.description.oneline" />
-				<replacefilter token="@windows.vlc.intaller.description.tooltip@" property="windows.vlc.intaller.description.tooltip" />
-				<replacefilter token="@windows.vlc.intaller.description.short@" property="windows.vlc.intaller.description.short" />
-				<replacefilter token="@windows.vlc.intaller.icon@" property="windows.vlc.intaller.icon" />
-				<replacefilter token="@windows.vlc.intaller.icon.splash@" property="windows.vlc.intaller.icon.splash" />
-				<replacefilter token="@vlc.home.url@" property="vlc.home.url" />
-				<replacefilter token="@vlc.home.title@" property="vlc.home.title" />
-				<replacefilter token="@vlc.home.description@" property="vlc.home.description" />
-				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
-				<replacefilter token="@windows.vlc.intaller.title.en@" property="windows.vlc.intaller.title.en" />
-				<replacefilter token="@windows.vlc.intaller.homepage.en@" property="windows.vlc.intaller.homepage.en" />
-				<replacefilter token="@windows.vlc.intaller.description.en@" property="windows.vlc.intaller.description.en" />
-				<replacefilter token="@windows.vlc.intaller.description.oneline.en@" property="windows.vlc.intaller.description.oneline.en" />
-				<replacefilter token="@windows.vlc.intaller.description.tooltip.en@" property="windows.vlc.intaller.description.tooltip.en" />
-				<replacefilter token="@windows.vlc.intaller.description.short.en@" property="windows.vlc.intaller.description.short.en" />
-				<replacefilter token="@vlc.home.url.en@" property="vlc.home.url.en" />
-				<replacefilter token="@vlc.home.title.en@" property="vlc.home.title.en" />
-				<replacefilter token="@vlc.home.description.en@" property="vlc.home.description.en" />
-				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
-				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
-				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
-			</replace>
-
-			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/elab-client.jnlp" />
-			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Auto Connect ID --&gt;" value="" />
-			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Auto Acquire Result --&gt;" value="" />
-			<replace file="${client.build.dir}/elab-client.jnlp" propertyFile="build.properties">
-				<replacefilter token="@codebase@" property="codebase" />
-				<replacefilter token="@elab.title@" property="elab.title" />
-				<replacefilter token="@elab.vendor@" property="elab.vendor" />
-				<replacefilter token="@elab.homepage@" property="elab.homepage" />
-				<replacefilter token="@elab.description@" property="elab.description" />
-				<replacefilter token="@elab.description.oneline@" property="elab.description.oneline" />
-				<replacefilter token="@elab.description.tooltip@" property="elab.description.tooltip" />
-				<replacefilter token="@elab.description.short@" property="elab.description.short" />
-				<replacefilter token="@elab.icon@" property="elab.icon" />
-				<replacefilter token="@elab.icon.splash@" property="elab.icon.splash" />
-				<replacefilter token="@elab.title.en@" property="elab.title.en" />
-				<replacefilter token="@elab.homepage.en@" property="elab.homepage.en" />
-				<replacefilter token="@elab.description.en@" property="elab.description.en" />
-				<replacefilter token="@elab.description.oneline.en@" property="elab.description.oneline.en" />
-				<replacefilter token="@elab.description.tooltip.en@" property="elab.description.tooltip.en" />
-				<replacefilter token="@elab.description.short.en@" property="elab.description.short.en" />
-				<replacefilter token="@j2se-version@" property="j2se-version" />
-				<replacefilter token="@video.enabled@" property="video.enabled" />
-				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
-				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
-				<replacefilter token="@client.main-class@" property="client.main-class" />
-				<replacefilter token="@rec.web.endpoint@" property="rec.web.endpoint" />
-				<replacefilter token="@rec.client.processingmanager.threadpool.coresize@" property="rec.client.processingmanager.threadpool.coresize" />
-				<replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
-				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
-				<replacefilter token="@jnlp.file@" value="elab-client.jnlp" />
-			</replace>
-
-			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
-			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot; /&gt;" />
-
-
-			<foreach list="${lab.list}" param="lab.name" target="-add.lab.experiments.to.full.jnlp.build" parallel="false" />
-
-		</sequential>
-	</macrodef>
-
-	<target name="-add.lab.experiments.to.full.jnlp.build">
-		<sequential>
-			<local name="lab.experiments.list" />
-			<propertycopy name="lab.experiments.list" from="${lab.name}.experiment.list" />
-			<foreach list="${lab.experiments.list}" param="experiment.name" target="-add.experiment.to.full.jnlp.build" />
-		</sequential>
-	</target>
-
-	<target name="-add.experiment.to.full.jnlp.build">
-		<add.experiment.to.full.jnlp.build experiment.name="${experiment.name}" />
-	</target>
-	<macrodef name="add.experiment.to.full.jnlp.build" description="Add an experiment to the FullClient JNLP launch file">
-		<attribute name="experiment.name" />
-		<sequential>
-			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!--End Experiment Jars --&gt;">
-				<replacevalue>
-					<![CDATA[<jar href="@temporary.experiment.jar@" lazy="true"/>
-					<!--End Experiment Jars -->]]></replacevalue>
-			</replace>
-			<replace file="${client.build.dir}/elab-client.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
-		</sequential>
-	</macrodef>
-
-	<!--
-		=====================================================
-		================ReC Experiments======================
-		=====================================================
-	-->
-
-	<property name="experiments.classes.dir" value="${build.dir.compile}/classes/experiments" />
-	<property name="experiments.build.dir" value="${build.dir.jars}/experiments" />
-
-	<property name="jnlp.template.file" value="${basedir}/templates/jnlp/elab-client.jnlp.xml" />
-	<property name="experiment.jnlp.template.file" value="${basedir}/templates/jnlp/experiment-client.jnlp.xml" />
-	<property name="jnlp.rec.template.file" value="${basedir}/templates/jnlp/rec-framework.jnlp.xml" />
-
-	<property name="jnlp.orb.template.file" value="${basedir}/templates/jnlp/openorb.jnlp.xml" />
-	<property name="jnlp.jfreechart.template.file" value="${basedir}/templates/jnlp/jfreechart.jnlp.xml" />
-	<property name="jnlp.j3d.template.file" value="${basedir}/templates/jnlp/j3d.jnlp.xml" />
-
-	<property name="jnlp.linuxinstaller.template.file" value="${basedir}/templates/jnlp/linux-vlc-installer.jnlp.xml" />
-	<property name="jnlp.macinstaller.template.file" value="${basedir}/templates/jnlp/macosx-vlc-installer.jnlp.xml" />
-	<property name="jnlp.windowsinstaller.template.file" value="${basedir}/templates/jnlp/windows-vlc-installer.jnlp.xml" />
-
-
-	<property name="faceconfig.template.file" value="${basedir}/templates/client/ReCFaceConfigTemplate.xml" />
-	<property name="faceconfig.lab.template.file" value="${basedir}/templates/client/ReCFaceConfigLabTemplate.xml" />
-
-	<!--MACROS-->
-
-
-	<!-- = = = = = = = = = = = = = = = = =
-          macrodef: create.jar          
-         = = = = = = = = = = = = = = = = = -->
-	<macrodef name="create.jar" description="Create a JAR and its Manifest">
-		<attribute name="destination.folder" />
-		<attribute name="jar.name" />
-		<attribute name="source.basedir" />
-
-		<sequential>
-			<mkdir dir="@{destination.folder}" />
-			<jar destfile="@{destination.folder}/@{jar.name}" basedir="@{source.basedir}">
-				<manifest>
-					<section name="common">
-						<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
-						<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
-						<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
-						<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
-						<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${TODAY}" />
-						<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
-					</section>
-				</manifest>
-			</jar>
-		</sequential>
-	</macrodef>
-
-	<!-- = = = = = = = = = = = = = = = = =
-          macrodef: sign.jar          
-         = = = = = = = = = = = = = = = = = -->
-	<target name="-sign.jar.rec">
-		<sign.jar.rec file="${file}" />
-	</target>
-	<macrodef name="sign.jar.rec" description="Sign a rec jar">
-		<attribute name="file" />
-		<sequential>
-			<local name="signed.file" />
-			<propertyregex property="signed.file" input="@{file}" regexp="(.*)\.jar$" select="\1_sig.jar" />
-			<signjar storetype="${rec.storetype}" keystore="${rec.keystore}" keypass="${rec.keypass}" storepass="${rec.storepass}" alias="${rec.alias}" jar="@{file}" signedjar="${signed.file}">
-			</signjar>
-		</sequential>
-	</macrodef>
-
-	<target name="-sign.jar.elab">
-		<sign.jar.elab file="${file}" />
-	</target>
-	<macrodef name="sign.jar.elab" description="Sign an elab jar">
-		<attribute name="file" />
-		<sequential>
-			<local name="signed.file" />
-			<propertyregex property="signed.file" input="@{file}" regexp="(.*)\.jar$" select="\1_sig.jar" />
-			<signjar storetype="${elab.storetype}" keystore="${elab.keystore}" keypass="${elab.keypass}" storepass="${elab.storepass}" alias="${elab.alias}" jar="@{file}" signedjar="${signed.file}">
-			</signjar>
-		</sequential>
-	</macrodef>
-
-	<!--/MACROS-->
-
-	<!--
-		================================================================
-		========================== Libraries ===========================
-		================================================================
-		-->
-
-	<target name="-repack.jar">
-		<repack.jar file="${file}" />
-	</target>
-	<macrodef name="repack.jar" description="Repack a single jar file">
-		<attribute name="file" />
-		<sequential>
-			<p200ant repack="true" KeepModificationTime="true" keepOrder="true" segmentLimit="-1">
-				<fileset file="@{file}" />
-			</p200ant>
-		</sequential>
-	</macrodef>
-
-	<taskdef name="p200ant" classname="de.matthiasmann.p200ant.P200AntTask" classpath="${rec.lib.dir}/compile/common/p200ant.jar" />
-
-	<condition property="use.pack200">
-		<istrue value="${generate.pack200}" />
-	</condition>
-
-	<target name="-pack.200.jar">
-		<pack.200.jar file="${file}" />
-	</target>
-	<macrodef name="pack.200.jar" description="Pack200 a jar file">
-		<attribute name="file" />
-		<sequential>
-			<p200ant KeepModificationTime="true" keepOrder="true" segmentLimit="-1">
-				<fileset file="@{file}" />
-			</p200ant>
-		</sequential>
-	</macrodef>
-
-	<path id="compile.experiment.client.classpath">
-		<pathelement location="${rec.common.classes.dir}" />
-		<path refid="rec.common.libs.classpath" />
-		<pathelement location="${rec.client.classes.dir}" />
-		<pathelement location="${rec.ui.classes.dir}" />
-		<path refid="rec.client.libs.classpath" />
-		<pathelement location="${elab.common.classes.dir}" />
-		<path refid="elab.common.libs.classpath" />
-		<pathelement location="${elab.client.classes.dir}" />
-		<path refid="elab.client.libs.classpath" />
-	</path>
-
-	<path id="compile.experiment.driver.classpath">
-		<pathelement location="${rec.common.classes.dir}" />
-		<path refid="rec.common.libs.classpath" />
-		<pathelement location="${rec.hardwareserver.classes.dir}" />
-		<path refid="rec.hardwareserver.libs.classpath" />
-		<pathelement location="${elab.common.classes.dir}" />
-		<path refid="elab.common.libs.classpath" />
-		<pathelement location="${elab.hardwareserver.classes.dir}" />
-		<path refid="elab.hardwareserver.libs.classpath" />
-	</path>
-
-	<macrodef name="create.faceconfig" description="Create a ReCFaceConfig.xml file">
-		<sequential>
-			<copy file="${faceconfig.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ReCFaceConfig.xml" />
-
-			<foreach list="${lab.list}" param="lab.name" target="-add.lab.faceconfig" parallel="false" />
-		</sequential>
-	</macrodef>
-
-	<target name="-add.lab.faceconfig">
-		<add.lab.faceconfig lab.name="${lab.name}" />
-	</target>
-	<macrodef name="add.lab.faceconfig" description="Add the Lab part of the ReCFaceConfig.xml file">
-		<attribute name="lab.name" />
-		<sequential>
-
-			<loadfile property="@{lab.name}.faceconfig" srcFile="${faceconfig.lab.template.file}" />
-
-			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--End Lab configuration --&gt;">
-				<replacevalue>
+    <description>
+        Compile, package, sign and run the project ReC and each of the experiments.
+    </description>
+
+    <property file="build.properties" description="general properties for building project" />
+
+    <!--
+            =====================================================
+            ====================== Generic ======================
+            =====================================================
+    -->
+
+    <property name="build.dir.compile" value="${basedir}/${build.dir}/compile" />
+    <property name="build.dir.jars" value="${basedir}/${build.dir}/jars" />
+
+    <property name="templates.dir" value="${basedir}/templates" />
+    <property name="templates.dir.client" value="${basedir}/templates/client" />
+    <property name="templates.dir.openorb" value="${basedir}/templates/openorb" />
+    <property name="templates.dir.jnlp" value="${basedir}/templates/jnlp" />
+    <property name="templates.dir.scripts" value="${basedir}/templates/scripts" />
+    <property name="templates.dir.logs" value="${basedir}/templates/log" />
+    <property name="templates.dir.images" value="${basedir}/templates/images" />
+    <property name="templates.dir.jmx" value="${basedir}/templates/jmx" />
+
+    <tstamp>
+        <format property="timestamp" pattern="dd-MM-yyyy hh:mm" locale="en,UK" />
+    </tstamp>
+
+    <tstamp>
+        <format property="today" pattern="dd-MM-yyyy" locale="en,UK" />
+    </tstamp>
+
+
+    <macrodef name="outer.process.list">
+        <attribute name="list" />
+        <attribute name="task" />
+        <attribute name="attribute.name" />
+        <attribute name="outer.list" />
+        <sequential>
+            <for list="@{outer.list}" param="outer.list.element" parallel="true" threadcount="2" delimiter=",">
+                <sequential>
+                    <local name="innerlist" />
+                    <propertycopy name="innerlist" from="@{outer.list.element}.@{list}" />
+                    <process.list list="${innerlist}" task="@{task}" attribute.name="@{attribute.name}" />
+                </sequential>
+            </for>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="process.list" description="Process a list of elements in csv format and for each one, define a property and execute an ant target">
+        <attribute name="list" />
+        <attribute name="task" />
+        <attribute name="attribute.name" />
+
+        <sequential>
+            <foreach list="@{list}" target="@{task}" param="@{attribute.name}" parallel="true" maxThreads="2" />
+        </sequential>
+    </macrodef>
+
+    <!--
+            =====================================================
+            ==================== REC Common =====================
+            =====================================================
+    -->
+
+    <property name="rec.common.classes.dir" value="${build.dir.compile}/classes/rec/common" />
+    <property name="common.build.dir" value="${build.dir.jars}/common" />
+
+    <property name="rec.common.src.java.dir" value="${basedir}/rec/src/java/common" />
+
+    <property name="rec.lib.dir" value="${basedir}/rec/lib" />
+
+    <property name="rec.common.lib.dir" value="${rec.lib.dir}/java/common/" />
+
+    <path id="rec.common.lib.path">
+        <fileset dir="${rec.common.lib.dir}">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
+    <path id="rec.common.compile.lib.path">
+        <fileset dir="${rec.lib.dir}/compile/common/">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
+    <path id="rec.common.libs.classpath">
+        <path refid="rec.common.lib.path" />
+        <path refid="rec.common.compile.lib.path" />
+    </path>
+
+    <taskdef resource="net/sf/antcontrib/antlib.xml">
+        <classpath>
+            <pathelement location="${rec.lib.dir}/compile/common/ant-contrib-1.0b3.jar" />
+        </classpath>
+    </taskdef>
+
+    <!--
+            =====================================================
+            ==================== ReC Client =====================
+            =====================================================
+    -->
+
+    <property name="rec.client.classes.dir" value="${build.dir.compile}/classes/rec/client" />
+    <property name="client.build.dir" value="${build.dir.jars}/client" />
+    <property name="client.rec.web.resources" value="rec.web/src/main/resources-rec" />
+    <property name="client.rec.web.webapp" value="rec.web/src/main/webapp" />
+
+    <property name="rec.client.src.java.dir" value="${basedir}/rec/src/java/client" />
+    <property name="rec.ui.src.java.dir" value="${basedir}/rec/src/java/ui" />
+
+    <property name="rec.client.lib.dir" value="${rec.lib.dir}/java/client/" />
+
+    <path id="rec.client.lib.path">
+        <fileset dir="${rec.client.lib.dir}">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
+    <path id="rec.client.compile.lib.path">
+        <fileset dir="${rec.lib.dir}/compile/client/">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
+    <path id="rec.client.libs.classpath">
+        <path refid="rec.client.lib.path" />
+        <path refid="rec.client.compile.lib.path" />
+    </path>
+
+    <path id="rec.compile.client.dependencies.classpath">
+        <pathelement location="${rec.common.classes.dir}/" />
+        <path refid="rec.common.libs.classpath" />
+    </path>
+
+    <path id="rec.compile.client.classpath">
+        <path refid="rec.client.libs.classpath" />
+        <path refid="rec.compile.client.dependencies.classpath" />
+    </path>
+
+    <!--
+            =====================================================
+            ================ ReC Hardware Server ================
+            =====================================================
+    -->
+
+    <property name="rec.hardwareserver.classes.dir" value="${build.dir.compile}/classes/rec/hardwareserver" />
+    <property name="hardwareserver.build.dir" value="${build.dir.jars}/hardwareserver" />
+
+    <property name="rec.hardwareserver.src.java.dir" value="${basedir}/rec/src/java/hardwareserver" />
+
+    <property name="rec.hardwareserver.lib.dir" value="${rec.lib.dir}/java/hardwareserver/" />
+
+    <path id="rec.hardwareserver.lib.path">
+        <fileset dir="${rec.hardwareserver.lib.dir}">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
+    <path id="rec.hardwareserver.compile.lib.path">
+        <fileset dir="${rec.lib.dir}/compile/hardwareserver/">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
+    <path id="rec.hardwareserver.libs.classpath">
+        <path refid="rec.hardwareserver.lib.path" />
+        <path refid="rec.hardwareserver.compile.lib.path" />
+    </path>
+
+    <path id="rec.compile.hardwareserver.dependencies.classpath">
+        <pathelement location="${rec.common.classes.dir}/" />
+        <path refid="rec.common.libs.classpath" />
+    </path>
+
+    <path id="rec.compile.hardwareserver.classpath">
+        <path refid="rec.hardwareserver.libs.classpath" />
+        <path refid="rec.compile.hardwareserver.dependencies.classpath" />
+    </path>
+
+    <!--
+            =====================================================
+            ============= ReC Multicast Controller===============
+            =====================================================
+    -->
+
+    <property name="rec.multicast.classes.dir" value="${build.dir.compile}/classes/rec/multicast" />
+    <property name="multicast.build.dir" value="${build.dir.jars}/multicast" />
+
+    <property name="rec.multicast.src.java.dir" value="${basedir}/rec/src/java/multicast" />
+
+    <property name="rec.multicast.lib.dir" value="${rec.lib.dir}/java/multicast/" />
+
+    <path id="rec.multicast.lib.path">
+        <fileset dir="${rec.multicast.lib.dir}">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
+    <path id="rec.multicast.compile.lib.path">
+        <fileset dir="${rec.lib.dir}/compile/multicast/">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
+    <path id="rec.multicastcontroller.libs.classpath">
+        <path refid="rec.multicast.lib.path" />
+        <path refid="rec.multicast.compile.lib.path" />
+    </path>
+
+    <path id="rec.compile.multicastcontroller.dependencies.classpath">
+        <pathelement location="${rec.common.classes.dir}/" />
+        <path refid="rec.common.libs.classpath" />
+    </path>
+
+    <path id="rec.compile.multicastcontroller.classpath">
+        <path refid="rec.multicastcontroller.libs.classpath" />
+        <path refid="rec.compile.multicastcontroller.dependencies.classpath" />
+    </path>
+
+
+    <path id="run.multicastcontroller.classpath">
+        <path refid="rec.common.lib.path" />
+        <path refid="rec.multicast.lib.path" />
+        <pathelement location="${rec.common.classes.dir}/" />
+        <pathelement location="${rec.multicast.classes.dir}/" />
+    </path>
+
+    <!--
+                    =====================================================
+                    =================== Elab Common =====================
+                    =====================================================
+    -->
+
+    <property name="elab.lib.dir" value="${basedir}/elab/lib" />
+
+    <property name="elab.common.classes.dir" value="${build.dir.compile}/classes/elab/common" />
+    <property name="elab.common.src.java.dir" value="${basedir}/elab/src/java/common" />
+    <property name="elab.common.lib.dir" value="${elab.lib.dir}/java/common" />
+
+    <path id="elab.common.lib.path">
+        <fileset dir="${elab.common.lib.dir}">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
+    <path id="elab.common.compile.lib.path">
+        <fileset dir="${elab.lib.dir}/compile/common/">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
+    <path id="elab.common.libs.classpath">
+        <path refid="elab.common.lib.path" />
+        <path refid="elab.common.compile.lib.path" />
+    </path>
+
+    <path id="elab.compile.common.dependencies.classpath">
+        <path refid="rec.common.libs.classpath" />
+        <pathelement location="${rec.common.classes.dir}/" />
+    </path>
+
+    <path id="elab.compile.common.classpath">
+        <path refid="elab.common.libs.classpath" />
+        <path refid="elab.compile.common.dependencies.classpath" />
+    </path>
+
+
+    <!--
+            =====================================================
+            =================== Elab Client =====================
+            =====================================================
+    -->
+
+    <property name="elab.client.classes.dir" value="${build.dir.compile}/classes/elab/client" />
+
+    <property name="elab.client.src.java.dir" value="${basedir}/elab/src/java/client" />
+    <property name="elab.ui.src.java.dir" value="${basedir}/elab/src/java/ui" />
+
+    <property name="elab.lib.dir" value="${basedir}/elab/lib" />
+
+    <property name="elab.client.lib.dir" value="${elab.lib.dir}/java/client/" />
+
+    <path id="elab.client.lib.path">
+        <fileset dir="${elab.client.lib.dir}">
+            <include name="**/*.jar" />
+        </fileset>
+        <path refid="elab.common.lib.path" />
+    </path>
+
+    <path id="elab.client.compile.lib.path">
+        <fileset dir="${elab.lib.dir}/compile/client/">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
+    <path id="elab.client.libs.classpath">
+        <path refid="elab.client.lib.path" />
+        <path refid="elab.client.compile.lib.path" />
+    </path>
+
+    <path id="elab.compile.client.dependencies.classpath">
+        <path refid="rec.client.libs.classpath" />
+        <pathelement location="${rec.client.classes.dir}/" />
+        <path refid="rec.common.libs.classpath" />
+        <pathelement location="${rec.common.classes.dir}/" />
+        <path refid="elab.common.libs.classpath" />
+        <pathelement location="${elab.common.classes.dir}" />
+    </path>
+
+    <path id="elab.compile.client.classpath">
+        <path refid="elab.client.libs.classpath" />
+        <path refid="elab.compile.client.dependencies.classpath" />
+    </path>
+
+    <!--
+            =====================================================
+            =================== Elab driver =====================
+            =====================================================
+    -->
+
+    <property name="elab.hardwareserver.classes.dir" value="${build.dir.compile}/classes/elab/hardwareserver" />
+
+    <property name="elab.hardwareserver.src.java.dir" value="${basedir}/elab/src/java/driver" />
+
+    <property name="elab.hardwareserver.lib.dir" value="${elab.lib.dir}/java/driver/" />
+
+    <path id="elab.hardwareserver.lib.path">
+        <fileset dir="${elab.hardwareserver.lib.dir}">
+            <include name="**/*.jar" />
+        </fileset>
+        <path refid="elab.common.lib.path" />
+    </path>
+
+    <path id="elab.hardwareserver.compile.lib.path">
+        <fileset dir="${elab.lib.dir}/compile/driver/">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
+    <path id="elab.hardwareserver.libs.classpath">
+        <path refid="elab.hardwareserver.lib.path" />
+        <path refid="elab.hardwareserver.compile.lib.path" />
+    </path>
+
+    <path id="elab.compile.hardwareserver.dependencies.classpath">
+        <pathelement location="${rec.hardwareserver.classes.dir}/" />
+        <path refid="rec.hardwareserver.libs.classpath" />
+        <pathelement location="${rec.common.classes.dir}/" />
+        <path refid="rec.common.libs.classpath" />
+        <path refid="elab.common.libs.classpath" />
+        <pathelement location="${elab.common.classes.dir}" />
+    </path>
+
+    <path id="elab.compile.hardwareserver.classpath">
+        <path refid="elab.hardwareserver.libs.classpath" />
+        <path refid="elab.compile.hardwareserver.dependencies.classpath" />
+    </path>
+
+    <!--
+            =====================================================
+            =========== Elab Multicast Controller ===============
+            =====================================================
+    -->
+
+    <property name="elab.multicast.classes.dir" value="${build.dir.compile}/classes/elab/multicast" />
+
+    <property name="elab.multicast.src.java.dir" value="${basedir}/elab/src/java/multicast" />
+
+    <property name="elab.multicast.lib.dir" value="${elab.lib.dir}/java/multicast/" />
+
+    <path id="elab.multicast.lib.path">
+        <fileset dir="${elab.multicast.lib.dir}">
+            <include name="**/*.jar" />
+        </fileset>
+        <path refid="elab.common.lib.path" />
+    </path>
+
+    <path id="elab.multicast.compile.lib.path">
+        <fileset dir="${elab.lib.dir}/compile/multicast/">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
+    <path id="elab.multicastcontroller.libs.classpath">
+        <path refid="elab.multicast.lib.path" />
+        <path refid="elab.multicast.compile.lib.path" />
+    </path>
+
+    <path id="elab.compile.multicastcontroller.dependencies.classpath">
+        <path refid="rec.common.libs.classpath" />
+        <pathelement location="${rec.common.classes.dir}/" />
+        <path refid="rec.multicastcontroller.libs.classpath" />
+        <pathelement location="${rec.multicast.classes.dir}/" />
+    </path>
+
+    <path id="elab.compile.multicastcontroller.classpath">
+        <path refid="elab.multicastcontroller.libs.classpath" />
+        <path refid="elab.compile.multicastcontroller.dependencies.classpath" />
+    </path>
+
+    <!--
+            =====================================================
+            ===============ReC Entire Project====================
+            =====================================================
+    -->
+
+    <macrodef name="create.jnlp.full.client.compile" description="Create the FullClient JNLP launch file for each lab">
+        <sequential>
+            <copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/rec-framework.jnlp">
+                <filterset begintoken="@" endtoken="@" filtersfile="build.properties" />
+            </copy>
+         
+            <replace file="${elab.client.classes.dir}/rec-framework.jnlp" propertyFile="build.properties">
+                <replacefilter token="@codebase@" property="codebase"/>
+                <replacefilter token="@rec.title@" property="rec.title" />
+                <replacefilter token="@rec.vendor@" property="rec.vendor" />
+                <replacefilter token="@rec.homepage@" property="rec.homepage" />
+                <replacefilter token="@rec.description@" property="rec.description" />
+                <replacefilter token="@rec.description.oneline@" property="rec.description.oneline" />
+                <replacefilter token="@rec.description.tooltip@" property="rec.description.tooltip" />
+                <replacefilter token="@rec.description.short@" property="rec.description.short" />
+                <replacefilter token="@rec.icon@" property="rec.icon" />
+                <replacefilter token="@rec.icon.splash@" property="rec.icon.splash" />
+                <replacefilter token="@linkare.home.url@" property="linkare.home.url" />
+                <replacefilter token="@linkare.home.title@" property="linkare.home.title" />
+                <replacefilter token="@linkare.home.description@" property="linkare.home.description" />
+                <replacefilter token="@linkare.home.icon@" property="linkare.home.icon" />
+                <replacefilter token="@rec.title.en@" property="rec.title.en" />
+                <replacefilter token="@rec.homepage.en@" property="rec.homepage.en" />
+                <replacefilter token="@rec.description.en@" property="rec.description.en" />
+                <replacefilter token="@rec.description.oneline.en@" property="rec.description.oneline.en" />
+                <replacefilter token="@rec.description.tooltip.en@" property="rec.description.tooltip.en" />
+                <replacefilter token="@rec.description.short.en@" property="rec.description.short.en" />
+                <replacefilter token="@linkare.home.url.en@" property="linkare.home.url.en" />
+                <replacefilter token="@linkare.home.title.en@" property="linkare.home.title.en" />
+                <replacefilter token="@linkare.home.description.en@" property="linkare.home.description.en" />
+                <replacefilter token="@linkare.home.icon@" property="linkare.home.icon" />
+            </replace>
+
+            <!--copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/rec-framework.jnlp" />
+            <replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="@codebase@" value="file://localhost${client.build.dir}" />
+            <replace file="${elab.client.classes.dir}/rec-framework.jnlp" propertyFile="build.properties">
+                    <replacefilter token="@href@" property="href" />
+            </replace-->
+
+            <replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot; main=&quot;true&quot;/&gt;" />
+            <replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
+
+            <copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/openorb.jnlp" />
+            <replace file="${elab.client.classes.dir}/openorb.jnlp" propertyFile="build.properties">
+                <replacefilter token="@codebase@" property="codebase"/>
+                <replacefilter token="@openorb.title@" property="openorb.title" />
+                <replacefilter token="@openorb.vendor@" property="openorb.vendor" />
+                <replacefilter token="@openorb.homepage@" property="openorb.homepage" />
+                <replacefilter token="@openorb.description@" property="openorb.description" />
+                <replacefilter token="@openorb.description.oneline@" property="openorb.description.oneline" />
+                <replacefilter token="@openorb.description.tooltip@" property="openorb.description.tooltip" />
+                <replacefilter token="@openorb.description.short@" property="openorb.description.short" />
+            </replace>
+
+            <copy file="${jnlp.j3d.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/j3d.jnlp">
+                <filterset begintoken="@" endtoken="@" filtersfile="build.properties" />
+            </copy>
+            <replace file="${elab.client.classes.dir}/j3d.jnlp" token="@codebase@" value="${codebase}" />
+
+            <copy file="${jnlp.jfreechart.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/jfreechart.jnlp" />
+            <replace file="${elab.client.classes.dir}/jfreechart.jnlp" propertyFile="build.properties">
+                <replacefilter token="@codebase@" property="codebase"/>
+                <replacefilter token="@jfreechart.title@" property="jfreechart.title" />
+                <replacefilter token="@jfreechart.vendor@" property="jfreechart.vendor" />
+                <replacefilter token="@jfreechart.homepage@" property="jfreechart.homepage" />
+                <replacefilter token="@jfreechart.description@" property="jfreechart.description" />
+                <replacefilter token="@jfreechart.description.oneline@" property="jfreechart.description.oneline" />
+                <replacefilter token="@jfreechart.description.tooltip@" property="jfreechart.description.tooltip" />
+                <replacefilter token="@jfreechart.description.short@" property="jfreechart.description.short" />
+                <replacefilter token="@jfreechart.icon@" property="jfreechart.icon" />
+                <replacefilter token="@jfreechart.icon.splash@" property="jfreechart.icon.splash" />
+            </replace>
+
+            <copy file="${jnlp.linuxinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/linux-vlc-installer.jnlp" />
+            <replace file="${elab.client.classes.dir}/linux-vlc-installer.jnlp" propertyFile="build.properties">
+                <replacefilter token="@codebase@" property="codebase"/>
+                <replacefilter token="@linux.vlc.intaller.title@" property="linux.vlc.intaller.title" />
+                <replacefilter token="@linux.vlc.intaller.vendor@" property="linux.vlc.intaller.vendor" />
+                <replacefilter token="@linux.intaller.homepage@" property="linux.intaller.homepage" />
+                <replacefilter token="@linux.vlc.intaller.description@" property="linux.vlc.intaller.description" />
+                <replacefilter token="@linux.vlc.intaller.description.oneline@" property="linux.vlc.intaller.description.oneline" />
+                <replacefilter token="@linux.vlc.intaller.description.tooltip@" property="linux.vlc.intaller.description.tooltip" />
+                <replacefilter token="@linux.vlc.intaller.description.short@" property="linux.vlc.intaller.description.short" />
+                <replacefilter token="@linux.vlc.intaller.icon@" property="linux.vlc.intaller.icon" />
+                <replacefilter token="@linux.vlc.intaller.icon.splash@" property="linux.vlc.intaller.icon.splash" />
+                <replacefilter token="@vlc.home.url@" property="vlc.home.url" />
+                <replacefilter token="@vlc.home.title@" property="vlc.home.title" />
+                <replacefilter token="@vlc.home.description@" property="vlc.home.description" />
+                <replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
+                <replacefilter token="@linux.vlc.intaller.title.en@" property="linux.vlc.intaller.title.en" />
+                <replacefilter token="@linux.vlc.intaller.homepage.en@" property="linux.vlc.intaller.homepage.en" />
+                <replacefilter token="@linux.vlc.intaller.description.en@" property="linux.vlc.intaller.description.en" />
+                <replacefilter token="@linux.vlc.intaller.description.oneline.en@" property="linux.vlc.intaller.description.oneline.en" />
+                <replacefilter token="@linux.vlc.intaller.description.tooltip.en@" property="linux.vlc.intaller.description.tooltip.en" />
+                <replacefilter token="@linux.vlc.intaller.description.short.en@" property="linux.vlc.intaller.description.short.en" />
+                <replacefilter token="@vlc.home.url.en@" property="vlc.home.url.en" />
+                <replacefilter token="@vlc.home.title.en@" property="vlc.home.title.en" />
+                <replacefilter token="@vlc.home.description.en@" property="vlc.home.description.en" />
+                <replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
+                <replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
+                <replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
+            </replace>
+
+            <copy file="${jnlp.macinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/macosx-vlc-installer.jnlp" />
+            <replace file="${elab.client.classes.dir}/macosx-vlc-installer.jnlp" propertyFile="build.properties">
+                <replacefilter token="@codebase@" property="codebase"/>
+                <replacefilter token="@mac.vlc.intaller.title@" property="mac.vlc.intaller.title" />
+                <replacefilter token="@mac.vlc.intaller.vendor@" property="mac.vlc.intaller.vendor" />
+                <replacefilter token="@mac.intaller.homepage@" property="mac.intaller.homepage" />
+                <replacefilter token="@mac.vlc.intaller.description@" property="mac.vlc.intaller.description" />
+                <replacefilter token="@mac.vlc.intaller.description.oneline@" property="mac.vlc.intaller.description.oneline" />
+                <replacefilter token="@mac.vlc.intaller.description.tooltip@" property="mac.vlc.intaller.description.tooltip" />
+                <replacefilter token="@mac.vlc.intaller.description.short@" property="mac.vlc.intaller.description.short" />
+                <replacefilter token="@mac.vlc.intaller.icon@" property="mac.vlc.intaller.icon" />
+                <replacefilter token="@mac.vlc.intaller.icon.splash@" property="mac.vlc.intaller.icon.splash" />
+                <replacefilter token="@vlc.home.url@" property="vlc.home.url" />
+                <replacefilter token="@vlc.home.title@" property="vlc.home.title" />
+                <replacefilter token="@vlc.home.description@" property="vlc.home.description" />
+                <replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
+                <replacefilter token="@mac.vlc.intaller.title.en@" property="mac.vlc.intaller.title.en" />
+                <replacefilter token="@mac.vlc.intaller.homepage.en@" property="mac.vlc.intaller.homepage.en" />
+                <replacefilter token="@mac.vlc.intaller.description.en@" property="mac.vlc.intaller.description.en" />
+                <replacefilter token="@mac.vlc.intaller.description.oneline.en@" property="mac.vlc.intaller.description.oneline.en" />
+                <replacefilter token="@mac.vlc.intaller.description.tooltip.en@" property="mac.vlc.intaller.description.tooltip.en" />
+                <replacefilter token="@mac.vlc.intaller.description.short.en@" property="mac.vlc.intaller.description.short.en" />
+                <replacefilter token="@vlc.home.url.en@" property="vlc.home.url.en" />
+                <replacefilter token="@vlc.home.title.en@" property="vlc.home.title.en" />
+                <replacefilter token="@vlc.home.description.en@" property="vlc.home.description.en" />
+                <replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
+                <replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
+                <replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
+            </replace>
+
+            <copy file="${jnlp.windowsinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/windows-vlc-installer.jnlp" />
+            <replace file="${elab.client.classes.dir}/windows-vlc-installer.jnlp" propertyFile="build.properties">
+                <replacefilter token="@codebase@" property="codebase"/>
+                <replacefilter token="@windows.vlc.intaller.title@" property="windows.vlc.intaller.title" />
+                <replacefilter token="@windows.vlc.intaller.vendor@" property="windows.vlc.intaller.vendor" />
+                <replacefilter token="@windows.intaller.homepage@" property="windows.intaller.homepage" />
+                <replacefilter token="@windows.vlc.intaller.description@" property="windows.vlc.intaller.description" />
+                <replacefilter token="@windows.vlc.intaller.description.oneline@" property="windows.vlc.intaller.description.oneline" />
+                <replacefilter token="@windows.vlc.intaller.description.tooltip@" property="windows.vlc.intaller.description.tooltip" />
+                <replacefilter token="@windows.vlc.intaller.description.short@" property="windows.vlc.intaller.description.short" />
+                <replacefilter token="@windows.vlc.intaller.icon@" property="windows.vlc.intaller.icon" />
+                <replacefilter token="@windows.vlc.intaller.icon.splash@" property="windows.vlc.intaller.icon.splash" />
+                <replacefilter token="@vlc.home.url@" property="vlc.home.url" />
+                <replacefilter token="@vlc.home.title@" property="vlc.home.title" />
+                <replacefilter token="@vlc.home.description@" property="vlc.home.description" />
+                <replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
+                <replacefilter token="@windows.vlc.intaller.title.en@" property="windows.vlc.intaller.title.en" />
+                <replacefilter token="@windows.vlc.intaller.homepage.en@" property="windows.vlc.intaller.homepage.en" />
+                <replacefilter token="@windows.vlc.intaller.description.en@" property="windows.vlc.intaller.description.en" />
+                <replacefilter token="@windows.vlc.intaller.description.oneline.en@" property="windows.vlc.intaller.description.oneline.en" />
+                <replacefilter token="@windows.vlc.intaller.description.tooltip.en@" property="windows.vlc.intaller.description.tooltip.en" />
+                <replacefilter token="@windows.vlc.intaller.description.short.en@" property="windows.vlc.intaller.description.short.en" />
+                <replacefilter token="@vlc.home.url.en@" property="vlc.home.url.en" />
+                <replacefilter token="@vlc.home.title.en@" property="vlc.home.title.en" />
+                <replacefilter token="@vlc.home.description.en@" property="vlc.home.description.en" />
+                <replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
+                <replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
+                <replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
+            </replace>
+
+            <copy file="${jnlp.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/elab-client.jnlp" />
+            <replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Auto Connect ID --&gt;" value="" />
+            <replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Auto Acquire Result --&gt;" value="" />
+            <replace file="${elab.client.classes.dir}/elab-client.jnlp" propertyFile="build.properties">
+                <replacefilter token="@codebase@" property="codebase"/>
+                <replacefilter token="@elab.title@" property="elab.title" />
+                <replacefilter token="@elab.vendor@" property="elab.vendor" />
+                <replacefilter token="@elab.homepage@" property="elab.homepage" />
+                <replacefilter token="@elab.description@" property="elab.description" />
+                <replacefilter token="@elab.description.oneline@" property="elab.description.oneline" />
+                <replacefilter token="@elab.description.tooltip@" property="elab.description.tooltip" />
+                <replacefilter token="@elab.description.short@" property="elab.description.short" />
+                <replacefilter token="@elab.icon@" property="elab.icon" />
+                <replacefilter token="@elab.icon.splash@" property="elab.icon.splash" />
+                <replacefilter token="@elab.title.en@" property="elab.title.en" />
+                <replacefilter token="@elab.homepage.en@" property="elab.homepage.en" />
+                <replacefilter token="@elab.description.en@" property="elab.description.en" />
+                <replacefilter token="@elab.description.oneline.en@" property="elab.description.oneline.en" />
+                <replacefilter token="@elab.description.tooltip.en@" property="elab.description.tooltip.en" />
+                <replacefilter token="@elab.description.short.en@" property="elab.description.short.en" />
+                <replacefilter token="@j2se-version@" property="j2se-version" />
+                <replacefilter token="@video.enabled@" property="video.enabled" />
+                <replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
+                <replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
+                <replacefilter token="@client.main-class@" property="client.main-class" />
+                <replacefilter token="@rec.web.endpoint@" property="rec.web.endpoint" />
+                <replacefilter token="@rec.client.processingmanager.threadpool.coresize@" property="rec.client.processingmanager.threadpool.coresize" />
+                <replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
+                <replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
+                <replacefilter token="@jnlp.file@" value="elab-client.jnlp" />
+            </replace>
+
+            <replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
+            <replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot; /&gt;" />
+                       
+            <foreach list="${lab.list}" param="lab.name" target="-add.lab.experiments.to.full.jnlp.compile" parallel="false" />
+
+        </sequential>
+    </macrodef>
+
+    <!-- - - - - - - - - - - - - - - - - - 
+     target: -add.lab.experiments.to.full.jnlp.compile                      
+    - - - - - - - - - - - - - - - - - -->
+    <target name="-add.lab.experiments.to.full.jnlp.compile">
+        <sequential>
+            <local name="lab.experiments.list" />
+            <propertycopy name="lab.experiments.list" from="${lab.name}.experiment.list" />
+            <foreach list="${lab.experiments.list}" param="experiment.name" target="-add.experiment.to.full.jnlp.compile" />
+        </sequential>
+    </target>
+
+
+    <target name="-add.experiment.to.full.jnlp.compile">
+        <add.experiment.to.full.jnlp.compile experiment.name="${experiment.name}" />
+    </target>
+    <macrodef name="add.experiment.to.full.jnlp.compile" description="Add one experiment to the jnlp of the full client">
+        <attribute name="experiment.name" />
+        <sequential>
+            <replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!--End Experiment Jars --&gt;">
+                <replacevalue><![CDATA[<jar href="@temporary.experiment.jar@" download="lazy"/><!--End Experiment Jars -->]]></replacevalue>
+            </replace>
+            <replace file="${elab.client.classes.dir}/elab-client.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
+        </sequential>
+    </macrodef>
+
+<macrodef name="create.jnlp.rec.client.build" description="Create the FullClient JNLP launch file">
+        <sequential>
+
+            <copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${client.build.dir}/rec-framework.jnlp" />
+            <replace file="${client.build.dir}/rec-framework.jnlp" propertyFile="build.properties">
+                <replacefilter token="@codebase@" property="codebase" />
+                <replacefilter token="@rec.title@" property="rec.title" />
+                <replacefilter token="@rec.vendor@" property="rec.vendor" />
+                <replacefilter token="@rec.homepage@" property="rec.homepage" />
+                <replacefilter token="@rec.description@" property="rec.description" />
+                <replacefilter token="@rec.description.oneline@" property="rec.description.oneline" />
+                <replacefilter token="@rec.description.tooltip@" property="rec.description.tooltip" />
+                <replacefilter token="@rec.description.short@" property="rec.description.short" />
+                <replacefilter token="@rec.icon@" property="rec.icon" />
+                <replacefilter token="@rec.icon.splash@" property="rec.icon.splash" />
+                <replacefilter token="@linkare.home.url@" property="linkare.home.url" />
+                <replacefilter token="@linkare.home.title@" property="linkare.home.title" />
+                <replacefilter token="@linkare.home.description@" property="linkare.home.description" />
+                <replacefilter token="@linkare.home.icon@" property="linkare.home.icon" />
+                <replacefilter token="@rec.title.en@" property="rec.title.en" />
+                <replacefilter token="@rec.homepage.en@" property="rec.homepage.en" />
+                <replacefilter token="@rec.description.en@" property="rec.description.en" />
+                <replacefilter token="@rec.description.oneline.en@" property="rec.description.oneline.en" />
+                <replacefilter token="@rec.description.tooltip.en@" property="rec.description.tooltip.en" />
+                <replacefilter token="@rec.description.short.en@" property="rec.description.short.en" />
+                <replacefilter token="@linkare.home.url.en@" property="linkare.home.url.en" />
+                <replacefilter token="@linkare.home.title.en@" property="linkare.home.title.en" />
+                <replacefilter token="@linkare.home.description.en@" property="linkare.home.description.en" />
+                <replacefilter token="@linkare.home.icon@" property="linkare.home.icon" />
+            </replace>
+
+            <replace file="${client.build.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
+            <replace file="${client.build.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
+
+        </sequential>
+    </macrodef>
+
+
+
+
+    <macrodef name="create.jnlp.full.client.build" description="Create the FullClient JNLP launch file">
+        <sequential>
+
+            <copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${client.build.dir}/openorb.jnlp" />
+            <replace file="${client.build.dir}/openorb.jnlp" propertyFile="build.properties">
+                <replacefilter token="@codebase@" property="codebase" />
+                <replacefilter token="@openorb.title@" property="openorb.title" />
+                <replacefilter token="@openorb.vendor@" property="openorb.vendor" />
+                <replacefilter token="@openorb.homepage@" property="openorb.homepage" />
+                <replacefilter token="@openorb.description@" property="openorb.description" />
+                <replacefilter token="@openorb.description.oneline@" property="openorb.description.oneline" />
+                <replacefilter token="@openorb.description.tooltip@" property="openorb.description.tooltip" />
+                <replacefilter token="@openorb.description.short@" property="openorb.description.short" />
+            </replace>
+
+            <copy file="${jnlp.j3d.template.file}" overwrite="yes" tofile="${client.build.dir}/j3d.jnlp">
+                <filterset begintoken="@" endtoken="@" filtersfile="build.properties" />
+            </copy>
+            <replace file="${client.build.dir}/j3d.jnlp" propertyFile="build.properties">
+                <replacefilter token="@codebase@" property="codebase" />
+            </replace>
+
+            <copy file="${jnlp.jfreechart.template.file}" overwrite="yes" tofile="${client.build.dir}/jfreechart.jnlp" />
+            <replace file="${client.build.dir}/jfreechart.jnlp" propertyFile="build.properties">
+                <replacefilter token="@codebase@" property="codebase" />
+                <replacefilter token="@jfreechart.title@" property="jfreechart.title" />
+                <replacefilter token="@jfreechart.vendor@" property="jfreechart.vendor" />
+                <replacefilter token="@jfreechart.homepage@" property="jfreechart.homepage" />
+                <replacefilter token="@jfreechart.description@" property="jfreechart.description" />
+                <replacefilter token="@jfreechart.description.oneline@" property="jfreechart.description.oneline" />
+                <replacefilter token="@jfreechart.description.tooltip@" property="jfreechart.description.tooltip" />
+                <replacefilter token="@jfreechart.description.short@" property="jfreechart.description.short" />
+                <replacefilter token="@jfreechart.icon@" property="jfreechart.icon" />
+                <replacefilter token="@jfreechart.icon.splash@" property="jfreechart.icon.splash" />
+            </replace>
+
+            <copy file="${jnlp.linuxinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/linux-vlc-installer.jnlp" />
+            <replace file="${client.build.dir}/linux-vlc-installer.jnlp" propertyFile="build.properties">
+                <replacefilter token="@codebase@" property="codebase" />
+                <replacefilter token="@linux.vlc.intaller.title@" property="linux.vlc.intaller.title" />
+                <replacefilter token="@linux.vlc.intaller.vendor@" property="linux.vlc.intaller.vendor" />
+                <replacefilter token="@linux.intaller.homepage@" property="linux.intaller.homepage" />
+                <replacefilter token="@linux.vlc.intaller.description@" property="linux.vlc.intaller.description" />
+                <replacefilter token="@linux.vlc.intaller.description.oneline@" property="linux.vlc.intaller.description.oneline" />
+                <replacefilter token="@linux.vlc.intaller.description.tooltip@" property="linux.vlc.intaller.description.tooltip" />
+                <replacefilter token="@linux.vlc.intaller.description.short@" property="linux.vlc.intaller.description.short" />
+                <replacefilter token="@linux.vlc.intaller.icon@" property="linux.vlc.intaller.icon" />
+                <replacefilter token="@linux.vlc.intaller.icon.splash@" property="linux.vlc.intaller.icon.splash" />
+                <replacefilter token="@vlc.home.url@" property="vlc.home.url" />
+                <replacefilter token="@vlc.home.title@" property="vlc.home.title" />
+                <replacefilter token="@vlc.home.description@" property="vlc.home.description" />
+                <replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
+                <replacefilter token="@linux.vlc.intaller.title.en@" property="linux.vlc.intaller.title.en" />
+                <replacefilter token="@linux.vlc.intaller.homepage.en@" property="linux.vlc.intaller.homepage.en" />
+                <replacefilter token="@linux.vlc.intaller.description.en@" property="linux.vlc.intaller.description.en" />
+                <replacefilter token="@linux.vlc.intaller.description.oneline.en@" property="linux.vlc.intaller.description.oneline.en" />
+                <replacefilter token="@linux.vlc.intaller.description.tooltip.en@" property="linux.vlc.intaller.description.tooltip.en" />
+                <replacefilter token="@linux.vlc.intaller.description.short.en@" property="linux.vlc.intaller.description.short.en" />
+                <replacefilter token="@vlc.home.url.en@" property="vlc.home.url.en" />
+                <replacefilter token="@vlc.home.title.en@" property="vlc.home.title.en" />
+                <replacefilter token="@vlc.home.description.en@" property="vlc.home.description.en" />
+                <replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
+                <replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
+                <replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
+            </replace>
+            <copy file="${jnlp.macinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/macosx-vlc-installer.jnlp" />
+            <replace file="${client.build.dir}/macosx-vlc-installer.jnlp" propertyFile="build.properties">
+                <replacefilter token="@codebase@" property="codebase" />
+                <replacefilter token="@mac.vlc.intaller.title@" property="mac.vlc.intaller.title" />
+                <replacefilter token="@mac.vlc.intaller.vendor@" property="mac.vlc.intaller.vendor" />
+                <replacefilter token="@mac.intaller.homepage@" property="mac.intaller.homepage" />
+                <replacefilter token="@mac.vlc.intaller.description@" property="mac.vlc.intaller.description" />
+                <replacefilter token="@mac.vlc.intaller.description.oneline@" property="mac.vlc.intaller.description.oneline" />
+                <replacefilter token="@mac.vlc.intaller.description.tooltip@" property="mac.vlc.intaller.description.tooltip" />
+                <replacefilter token="@mac.vlc.intaller.description.short@" property="mac.vlc.intaller.description.short" />
+                <replacefilter token="@mac.vlc.intaller.icon@" property="mac.vlc.intaller.icon" />
+                <replacefilter token="@mac.vlc.intaller.icon.splash@" property="mac.vlc.intaller.icon.splash" />
+                <replacefilter token="@vlc.home.url@" property="vlc.home.url" />
+                <replacefilter token="@vlc.home.title@" property="vlc.home.title" />
+                <replacefilter token="@vlc.home.description@" property="vlc.home.description" />
+                <replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
+                <replacefilter token="@mac.vlc.intaller.title.en@" property="mac.vlc.intaller.title.en" />
+                <replacefilter token="@mac.vlc.intaller.homepage.en@" property="mac.vlc.intaller.homepage.en" />
+                <replacefilter token="@mac.vlc.intaller.description.en@" property="mac.vlc.intaller.description.en" />
+                <replacefilter token="@mac.vlc.intaller.description.oneline.en@" property="mac.vlc.intaller.description.oneline.en" />
+                <replacefilter token="@mac.vlc.intaller.description.tooltip.en@" property="mac.vlc.intaller.description.tooltip.en" />
+                <replacefilter token="@mac.vlc.intaller.description.short.en@" property="mac.vlc.intaller.description.short.en" />
+                <replacefilter token="@vlc.home.url.en@" property="vlc.home.url.en" />
+                <replacefilter token="@vlc.home.title.en@" property="vlc.home.title.en" />
+                <replacefilter token="@vlc.home.description.en@" property="vlc.home.description.en" />
+                <replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
+                <replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
+                <replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
+            </replace>
+            <copy file="${jnlp.windowsinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/windows-vlc-installer.jnlp" />
+            <replace file="${client.build.dir}/windows-vlc-installer.jnlp" propertyFile="build.properties">
+                <replacefilter token="@codebase@" property="codebase" />
+                <replacefilter token="@windows.vlc.intaller.title@" property="windows.vlc.intaller.title" />
+                <replacefilter token="@windows.vlc.intaller.vendor@" property="windows.vlc.intaller.vendor" />
+                <replacefilter token="@windows.intaller.homepage@" property="windows.intaller.homepage" />
+                <replacefilter token="@windows.vlc.intaller.description@" property="windows.vlc.intaller.description" />
+                <replacefilter token="@windows.vlc.intaller.description.oneline@" property="windows.vlc.intaller.description.oneline" />
+                <replacefilter token="@windows.vlc.intaller.description.tooltip@" property="windows.vlc.intaller.description.tooltip" />
+                <replacefilter token="@windows.vlc.intaller.description.short@" property="windows.vlc.intaller.description.short" />
+                <replacefilter token="@windows.vlc.intaller.icon@" property="windows.vlc.intaller.icon" />
+                <replacefilter token="@windows.vlc.intaller.icon.splash@" property="windows.vlc.intaller.icon.splash" />
+                <replacefilter token="@vlc.home.url@" property="vlc.home.url" />
+                <replacefilter token="@vlc.home.title@" property="vlc.home.title" />
+                <replacefilter token="@vlc.home.description@" property="vlc.home.description" />
+                <replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
+                <replacefilter token="@windows.vlc.intaller.title.en@" property="windows.vlc.intaller.title.en" />
+                <replacefilter token="@windows.vlc.intaller.homepage.en@" property="windows.vlc.intaller.homepage.en" />
+                <replacefilter token="@windows.vlc.intaller.description.en@" property="windows.vlc.intaller.description.en" />
+                <replacefilter token="@windows.vlc.intaller.description.oneline.en@" property="windows.vlc.intaller.description.oneline.en" />
+                <replacefilter token="@windows.vlc.intaller.description.tooltip.en@" property="windows.vlc.intaller.description.tooltip.en" />
+                <replacefilter token="@windows.vlc.intaller.description.short.en@" property="windows.vlc.intaller.description.short.en" />
+                <replacefilter token="@vlc.home.url.en@" property="vlc.home.url.en" />
+                <replacefilter token="@vlc.home.title.en@" property="vlc.home.title.en" />
+                <replacefilter token="@vlc.home.description.en@" property="vlc.home.description.en" />
+                <replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
+                <replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
+                <replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
+            </replace>
+
+            <copy file="${jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/elab-client.jnlp" />
+            <replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Auto Connect ID --&gt;" value="" />
+            <replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Auto Acquire Result --&gt;" value="" />
+            <replace file="${client.build.dir}/elab-client.jnlp" propertyFile="build.properties">
+                <replacefilter token="@codebase@" property="codebase" />
+                <replacefilter token="@elab.title@" property="elab.title" />
+                <replacefilter token="@elab.vendor@" property="elab.vendor" />
+                <replacefilter token="@elab.homepage@" property="elab.homepage" />
+                <replacefilter token="@elab.description@" property="elab.description" />
+                <replacefilter token="@elab.description.oneline@" property="elab.description.oneline" />
+                <replacefilter token="@elab.description.tooltip@" property="elab.description.tooltip" />
+                <replacefilter token="@elab.description.short@" property="elab.description.short" />
+                <replacefilter token="@elab.icon@" property="elab.icon" />
+                <replacefilter token="@elab.icon.splash@" property="elab.icon.splash" />
+                <replacefilter token="@elab.title.en@" property="elab.title.en" />
+                <replacefilter token="@elab.homepage.en@" property="elab.homepage.en" />
+                <replacefilter token="@elab.description.en@" property="elab.description.en" />
+                <replacefilter token="@elab.description.oneline.en@" property="elab.description.oneline.en" />
+                <replacefilter token="@elab.description.tooltip.en@" property="elab.description.tooltip.en" />
+                <replacefilter token="@elab.description.short.en@" property="elab.description.short.en" />
+                <replacefilter token="@j2se-version@" property="j2se-version" />
+                <replacefilter token="@video.enabled@" property="video.enabled" />
+                <replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
+                <replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
+                <replacefilter token="@client.main-class@" property="client.main-class" />
+                <replacefilter token="@rec.web.endpoint@" property="rec.web.endpoint" />
+                <replacefilter token="@rec.client.processingmanager.threadpool.coresize@" property="rec.client.processingmanager.threadpool.coresize" />
+                <replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
+                <replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
+                <replacefilter token="@jnlp.file@" value="elab-client.jnlp" />
+            </replace>
+
+            <replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
+            <replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot; /&gt;" />
+
+                                                
+            <foreach list="${lab.list}" param="lab.name" target="-add.lab.experiments.to.full.jnlp.build" parallel="false" />
+
+        </sequential>
+    </macrodef>
+
+    <target name="-add.lab.experiments.to.full.jnlp.build">
+        <sequential>
+            <local name="lab.experiments.list" />
+            <propertycopy name="lab.experiments.list" from="${lab.name}.experiment.list" />
+            <foreach list="${lab.experiments.list}" param="experiment.name" target="-add.experiment.to.full.jnlp.build" />
+        </sequential>
+    </target>
+
+    <target name="-add.experiment.to.full.jnlp.build">
+        <add.experiment.to.full.jnlp.build experiment.name="${experiment.name}" />
+    </target>
+    <macrodef name="add.experiment.to.full.jnlp.build" description="Add an experiment to the FullClient JNLP launch file">
+        <attribute name="experiment.name" />
+        <sequential>
+            <replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!--End Experiment Jars --&gt;">
+                <replacevalue><![CDATA[<jar href="@temporary.experiment.jar@" download="lazy"/><!--End Experiment Jars -->]]></replacevalue>
+            </replace>
+            <replace file="${client.build.dir}/elab-client.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
+        </sequential>
+    </macrodef>
+
+    <!--
+            =====================================================
+            ================ReC Experiments======================
+            =====================================================
+    -->
+
+    <property name="experiments.classes.dir" value="${build.dir.compile}/classes/experiments" />
+    <property name="experiments.build.dir" value="${build.dir.jars}/experiments" />
+
+    <property name="jnlp.template.file" value="${basedir}/templates/jnlp/elab-client.jnlp.xml" />
+    <property name="experiment.jnlp.template.file" value="${basedir}/templates/jnlp/experiment-client.jnlp.xml" />
+    <property name="jnlp.rec.template.file" value="${basedir}/templates/jnlp/rec-framework.jnlp.xml" />
+
+    <property name="jnlp.orb.template.file" value="${basedir}/templates/jnlp/openorb.jnlp.xml" />
+    <property name="jnlp.jfreechart.template.file" value="${basedir}/templates/jnlp/jfreechart.jnlp.xml" />
+    <property name="jnlp.j3d.template.file" value="${basedir}/templates/jnlp/j3d.jnlp.xml" />
+
+    <property name="jnlp.linuxinstaller.template.file" value="${basedir}/templates/jnlp/linux-vlc-installer.jnlp.xml" />
+    <property name="jnlp.macinstaller.template.file" value="${basedir}/templates/jnlp/macosx-vlc-installer.jnlp.xml" />
+    <property name="jnlp.windowsinstaller.template.file" value="${basedir}/templates/jnlp/windows-vlc-installer.jnlp.xml" />
+
+
+    <property name="faceconfig.template.file" value="${basedir}/templates/client/ReCFaceConfigTemplate.xml" />
+    <property name="faceconfig.lab.template.file" value="${basedir}/templates/client/ReCFaceConfigLabTemplate.xml" />
+
+    <!--MACROS-->
+
+
+    <!-- = = = = = = = = = = = = = = = = =
+     macrodef: create.jar          
+    = = = = = = = = = = = = = = = = = -->
+    <macrodef name="create.jar" description="Create a JAR and its Manifest">
+        <attribute name="destination.folder" />
+        <attribute name="jar.name" />
+        <attribute name="source.basedir" />
+        <attribute name="jnlp.file" default=""/>
+
+        <sequential>
+            <mkdir dir="@{destination.folder}" />
+            
+            <jar destfile="@{destination.folder}/@{jar.name}" basedir="@{source.basedir}" excludes="*.jnlp">
+                <manifest>
+                    <attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+                    <attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+                    <attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+                    <attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+                    <attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${TODAY}" />
+                    <attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+                    <attribute name="Application-Name" value="${com.linkare.rec.impl.title}" />
+                    <attribute name="Permissions" value="all-permissions" />
+                    <attribute name="Codebase" value="${codebase}"/>
+                    <attribute name="Application-Library-Allowable-Codebase" value="*"/>
+                    <attribute name="Caller-Allowable-Codebase" value="*"/>
+                    <attribute name="Trusted-Only" value="true"/>
+                    <attribute name="Trusted-Library" value="true"/>
+                </manifest>
+            </jar>
+            <jar update="true" destfile="@{destination.folder}/@{jar.name}">
+                <!--VERY IMPORTANT: ALLWAYS use fullpath="JNLP-INF/APPLICATION.JNLP" DO NOT INCLUDE / before JNLP-INF....
+                it will originate problems like Found unsigned entry-->
+                <zipfileset file="@{jnlp.file}" fullpath="JNLP-INF/APPLICATION.JNLP"/>
+            </jar>
+            
+        </sequential>
+    </macrodef>
+
+    <!-- ====
+    macrodef: updatemanifest.attributes
+    ==== -->
+    <target name="-updatemanifest.attributes">
+        <update.manifest file="${file}"/>
+    </target>
+    <macrodef name="update.manifest" description="Updates new attributes in manifest files">
+        <attribute name="file" />
+        <sequential>
+            <jar destfile="@{file}" update="true">
+                <manifest>
+                    <attribute name="Permissions" value="all-permissions" />
+                    <attribute name="Codebase" value="${codebase}"/>
+                    <attribute name="Application-Library-Allowable-Codebase" value="*"/>
+                    <attribute name="Caller-Allowable-Codebase" value="*"/>
+                    <attribute name="Trusted-Only" value="true"/>
+                    <attribute name="Trusted-Library" value="true"/>
+                </manifest>
+            </jar>
+        </sequential>
+    </macrodef>
+    
+    
+    <!-- ====
+    macrodef: put.jnlp.file
+    ==== -->
+    <target name="-put.jnlp.file">
+        <put.jnlp.file jarfilename="${jarfilename}" jnlpfilename="${jnlpfilename}" />
+    </target>
+    <macrodef name="put.jnlp.file" description="Updates new attributes in manifest files">
+        <attribute name="jarfilename" />
+        <attribute name="jnlpfilename" />
+        
+        <sequential>
+            <echo>
+                ***********************************************
+                 Putting @{jnlpfilename} 
+                 inside @{jarfilename}
+                ***********************************************
+            </echo>            
+            <jar update="true" destfile="@{jarfilename}">
+                <!--VERY IMPORTANT: ALLWAYS use fullpath="JNLP-INF/APPLICATION.JNLP" DO NOT INCLUDE / before JNLP-INF....
+                it will originate problems like Found unsigned entry-->
+                <zipfileset file="@{jnlpfilename}" fullpath="JNLP-INF/APPLICATION.JNLP"/>
+            </jar>
+        </sequential>
+    </macrodef>
+
+
+    <!-- = = = = = = = = = = = = = = = = =
+     macrodef: sign.jar          
+    = = = = = = = = = = = = = = = = = -->
+    <target name="-sign.jar.rec">
+        <sign.jar.rec file="${file}" />
+    </target>
+    <macrodef name="sign.jar.rec" description="Sign a rec jar">
+        <attribute name="file" />
+        <sequential>                       
+            <local name="signed.file" />
+            <propertyregex property="signed.file" input="@{file}" regexp="(.*)\.jar$" select="\1_sig.jar" />
+            <signjar storetype="${rec.storetype}" keystore="${rec.keystore}" keypass="${rec.keypass}" storepass="${rec.storepass}" alias="${rec.alias}" jar="@{file}" signedjar="${signed.file}">
+            </signjar>
+        </sequential>
+    </macrodef>
+
+    <target name="-sign.jar.elab">
+        <sign.jar.elab file="${file}" />
+    </target>
+    <macrodef name="sign.jar.elab" description="Sign an elab jar">
+        <attribute name="file" />
+        <sequential>            
+            <local name="signed.file" />
+            <propertyregex property="signed.file" input="@{file}" regexp="(.*)\.jar$" select="\1_sig.jar" />
+            <signjar storetype="${elab.storetype}" keystore="${elab.keystore}" keypass="${elab.keypass}" storepass="${elab.storepass}" alias="${elab.alias}" jar="@{file}" signedjar="${signed.file}">
+            </signjar>
+        </sequential>
+    </macrodef>
+
+    <!--/MACROS-->
+
+    <!--
+    ================================================================
+    ========================== Libraries ===========================
+    ================================================================
+    -->
+
+    <target name="-repack.jar">
+        <repack.jar file="${file}" />
+    </target>
+    <macrodef name="repack.jar" description="Repack a single jar file">
+        <attribute name="file" />
+        <sequential>
+            <p200ant repack="true" KeepModificationTime="true" keepOrder="true" segmentLimit="-1">
+                <fileset file="@{file}" />
+            </p200ant>
+        </sequential>
+    </macrodef>
+
+    <taskdef name="p200ant" classname="de.matthiasmann.p200ant.P200AntTask" classpath="${rec.lib.dir}/compile/common/p200ant.jar" />
+
+    <condition property="use.pack200">
+        <istrue value="${generate.pack200}" />
+    </condition>
+
+    <target name="-pack.200.jar">
+        <pack.200.jar file="${file}" />
+    </target>
+    <macrodef name="pack.200.jar" description="Pack200 a jar file">
+        <attribute name="file" />
+        <sequential>
+            <p200ant KeepModificationTime="true" keepOrder="true" segmentLimit="-1">
+                <fileset file="@{file}" />
+            </p200ant>
+        </sequential>
+    </macrodef>
+
+    <path id="compile.experiment.client.classpath">
+        <pathelement location="${rec.common.classes.dir}" />
+        <path refid="rec.common.libs.classpath" />
+        <pathelement location="${rec.client.classes.dir}" />
+        <pathelement location="${rec.ui.classes.dir}" />
+        <path refid="rec.client.libs.classpath" />
+        <pathelement location="${elab.common.classes.dir}" />
+        <path refid="elab.common.libs.classpath" />
+        <pathelement location="${elab.client.classes.dir}" />
+        <path refid="elab.client.libs.classpath" />
+    </path>
+
+    <path id="compile.experiment.driver.classpath">
+        <pathelement location="${rec.common.classes.dir}" />
+        <path refid="rec.common.libs.classpath" />
+        <pathelement location="${rec.hardwareserver.classes.dir}" />
+        <path refid="rec.hardwareserver.libs.classpath" />
+        <pathelement location="${elab.common.classes.dir}" />
+        <path refid="elab.common.libs.classpath" />
+        <pathelement location="${elab.hardwareserver.classes.dir}" />
+        <path refid="elab.hardwareserver.libs.classpath" />
+    </path>
+
+    <macrodef name="create.faceconfig" description="Create a ReCFaceConfig.xml file">
+        <sequential>
+            <copy file="${faceconfig.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ReCFaceConfig.xml" />
+
+            <foreach list="${lab.list}" param="lab.name" target="-add.lab.faceconfig" parallel="false" />
+        </sequential>
+    </macrodef>
+
+    <target name="-add.lab.faceconfig">
+        <add.lab.faceconfig lab.name="${lab.name}" />
+    </target>
+    <macrodef name="add.lab.faceconfig" description="Add the Lab part of the ReCFaceConfig.xml file">
+        <attribute name="lab.name" />
+        <sequential>
+
+            <loadfile property="@{lab.name}.faceconfig" srcFile="${faceconfig.lab.template.file}" />
+
+            <replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--End Lab configuration --&gt;">
+                <replacevalue>
 					<![CDATA[@temporary.lab@
 			<!--End Lab configuration -->]]></replacevalue>
-			</replace>
-			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="@temporary.lab@" value="${@{lab.name}.faceconfig}" />
+            </replace>
+            <replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="@temporary.lab@" value="${@{lab.name}.faceconfig}" />
 
-			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" propertyFile="build.properties">
-				<replacefilter token="@multicast.controller.host@" property="@{lab.name}.multicast.controller.host" />
-				<replacefilter token="@multicast.controller.port@" property="@{lab.name}.multicast.controller.port" />
-				<replacefilter token="@lab.name@" property="@{lab.name}.rec.web.lab.id" />
-			</replace>
+            <replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" propertyFile="build.properties">
+                <replacefilter token="@multicast.controller.host@" property="@{lab.name}.multicast.controller.host" />
+                <replacefilter token="@multicast.controller.port@" property="@{lab.name}.multicast.controller.port" />
+                <replacefilter token="@lab.name@" property="@{lab.name}.rec.web.lab.id" />
+            </replace>
 
-			<foreach list="${@{lab.name}.experiment.list}" param="experiment.name" parallel="false" target="-add.experiment.faceconfig"/>
+            <foreach list="${@{lab.name}.experiment.list}" param="experiment.name" parallel="false" target="-add.experiment.faceconfig"/>
 			
-			<!-- experiment apparatus comments -->
-			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--Start Apparatus configuration --&gt;" value="&lt;!--Start @{lab.name} Apparatus configuration --&gt;" />
-			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--End Apparatus configuration --&gt;" value="&lt;!--End @{lab.name} Apparatus configuration --&gt;" />
+            <!-- experiment apparatus comments -->
+            <replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--Start Apparatus configuration --&gt;" value="&lt;!--Start @{lab.name} Apparatus configuration --&gt;" />
+            <replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--End Apparatus configuration --&gt;" value="&lt;!--End @{lab.name} Apparatus configuration --&gt;" />
 
-		</sequential>
-	</macrodef>
+        </sequential>
+    </macrodef>
 
-	<target name="-add.experiment.faceconfig">
-		<add.experiment.faceconfig experiment.name="${experiment.name}" />
-	</target>
-	<macrodef name="add.experiment.faceconfig" description="Add each experiment ReCFaceConfig part">
-		<attribute name="experiment.name" />
-		<sequential>
+    <target name="-add.experiment.faceconfig">
+        <add.experiment.faceconfig experiment.name="${experiment.name}" />
+    </target>
+    <macrodef name="add.experiment.faceconfig" description="Add each experiment ReCFaceConfig part">
+        <attribute name="experiment.name" />
+        <sequential>
 
-			<loadfile property="@{experiment.name}.faceconfig" srcFile="experiments/@{experiment.name}/etc/ReCFaceConfig.xml" />
+            <loadfile property="@{experiment.name}.faceconfig" srcFile="experiments/@{experiment.name}/etc/ReCFaceConfig.xml" />
 
-			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--End Apparatus configuration --&gt;">
-				<replacevalue>
+            <replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--End Apparatus configuration --&gt;">
+                <replacevalue>
 					<![CDATA[@temporary.experiment.apparatus@
 			<!--End Apparatus configuration -->]]></replacevalue>
-			</replace>
-			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="@temporary.experiment.apparatus@" value="${@{experiment.name}.faceconfig}" />
-		</sequential>
-	</macrodef>
+            </replace>
+            <replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="@temporary.experiment.apparatus@" value="${@{experiment.name}.faceconfig}" />
+        </sequential>
+    </macrodef>
 
 </project>

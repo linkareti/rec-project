@@ -1,4 +1,74 @@
-<?xml version="1.0" encoding="UTF-8"?><project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="8">
+        <file>
+            <url>experimentsbuild.xml</url>
+            <bookmark id="2">
+                <name/>
+                <line>624</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>elabbuild.xml</url>
+            <bookmark id="4">
+                <name/>
+                <line>165</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>generaldefinitions.xml</url>
+            <bookmark id="3">
+                <name/>
+                <line>415</line>
+                <key/>
+            </bookmark>
+            <bookmark id="1">
+                <name/>
+                <line>578</line>
+                <key/>
+            </bookmark>
+            <bookmark id="5">
+                <name/>
+                <line>622</line>
+                <key/>
+            </bookmark>
+            <bookmark id="8">
+                <name/>
+                <line>807</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>build.properties</url>
+            <bookmark id="6">
+                <name/>
+                <line>25</line>
+                <key/>
+            </bookmark>
+            <bookmark id="7">
+                <name/>
+                <line>162</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group name="rec"/>
+        <group/>
+        <group name="RecLab">
+            <file>file:/home/rvaz/NetBeansProjects/rec/experimentsbuild.xml</file>
+            <file>file:/home/rvaz/NetBeansProjects/rec/log.txt</file>
+            <file>file:/home/rvaz/NetBeansProjects/rec/elabbuild.xml</file>
+            <file>file:/home/rvaz/NetBeansProjects/rec/templates/jnlp/elab-client.jnlp.xml</file>
+            <file>file:/home/rvaz/NetBeansProjects/rec/generaldefinitions.xml</file>
+            <file>file:/home/rvaz/NetBeansProjects/rec/build.properties</file>
+            <file>file:/home/rvaz/NetBeansProjects/rec/buildall.xml</file>
+            <file>file:/home/rvaz/NetBeansProjects/rec/templates/jnlp/jfreechart.jnlp.xml</file>
+            <file>file:/home/rvaz/NetBeansProjects/rec/templates/jnlp/rec-framework.jnlp.xml</file>
+            <file>file:/home/rvaz/NetBeansProjects/rec/recbuild.xml</file>
+        </group>
+    </open-files>
 </project-private>

@@ -14,6 +14,7 @@ compile.rec.client
 compile.rec.common
 compile.rec.hardwareserver
 compile.rec.multicastcontroller
+create.jnlp.rec.client.build.framework
 debug.rec.multicast
 jar.rec.client
 jar.rec.common
@@ -22,6 +23,7 @@ jar.rec.multicastcontroller
 javadoc.rec
 pack.jar.rec.client
 pack.jar.rec.common
+put.jnlp
 repack.jar.rec.client
 repack.jar.rec.common
 run.rec.multicast

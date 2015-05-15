@@ -337,6 +337,34 @@
 		</copy>
 	</target>
 
+
+	<target name="updatemanifest.client.external.lib.dependencies" description="Updates all manifest with JDK1.7/8 required attributes">
+		<foreach target="-updatemanifest.attributes" param="file" parallel="true" maxThreads="4">
+			<fileset dir="${client.build.dir}/lib">
+				<include name="*.jar" />
+			</fileset>
+		</foreach>
+	</target>
+
+        <target name="put.jnlp.file.client.external.lib.dependencies" description="Inserts jnlp files in jars defined as extensions in ELabClient.jnlp">
+            <antcall target="-put.jnlp.file">
+                <param name="jarfilename" value="${client.build.dir}/lib/jfreechart-1.0.9.jar"/>
+                <param name="jnlpfilename" value="${client.build.dir}/jfreechart.jnlp"/>
+            </antcall>            
+            <antcall target="-put.jnlp.file">
+                <param name="jarfilename" value="${client.build.dir}/lib/openorb_orb-1.4.0.jar"/>
+                <param name="jnlpfilename" value="${client.build.dir}/openorb.jnlp"/>
+            </antcall>            
+            <antcall target="-put.jnlp.file">
+                <param name="jarfilename" value="${client.build.dir}/lib/j3dcore.jar"/>
+                <param name="jnlpfilename" value="${client.build.dir}/j3d.jnlp"/>
+            </antcall>            
+<!--            <antcall target="-put.jnlp.file">
+                <param name="jarfilename" value="${client.build.dir}/ReCClient.jar"/>
+                <param name="jnlpfilename" value="${client.build.dir}/rec-framework.jnlp"/>
+            </antcall>-->
+        </target>
+
 	<target name="repack.client.external.lib.dependencies" if="use.pack200" description="Repacks (pack200) all jars of dependency libs">
 		<foreach target="-repack.jar" param="file" parallel="true" maxThreads="4">
 			<fileset dir="${client.build.dir}/lib">
@@ -361,7 +389,7 @@
 		</foreach>
 	</target>
 
-	<target name="build.client.lib.dependencies" depends="copy.client.external.lib.dependencies.to.build.structure, repack.client.external.lib.dependencies, sign.client.external.lib.dependencies, pack.client.external.lib.dependencies" description="Builds all depency jars, signs and packs them for deployment">
+	<target name="build.client.lib.dependencies" depends="copy.client.external.lib.dependencies.to.build.structure, updatemanifest.client.external.lib.dependencies, put.jnlp.file.client.external.lib.dependencies, repack.client.external.lib.dependencies, sign.client.external.lib.dependencies, pack.client.external.lib.dependencies" description="Builds all depency jars, signs and packs them for deployment">
 
 	</target>
 

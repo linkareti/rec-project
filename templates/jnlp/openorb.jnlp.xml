@@ -19,8 +19,8 @@
 	</security>
 	<update check="always" policy="always" />
 	<resources>
-		<jar href="lib/openorb_orb_omg-1.4.0_sig.jar" />
-		<jar href="lib/openorb_orb-1.4.0_sig.jar" />
+		<jar href="lib/openorb_orb-1.4.0_sig.jar" main="true"/>
+		<jar href="lib/openorb_orb_omg-1.4.0_sig.jar"/>
 		<jar href="lib/avalon-framework_sig.jar" />
 		<jar href="lib/xercesImpl_sig.jar" />
 		<jar href="lib/logkit_sig.jar" />
