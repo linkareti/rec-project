@@ -4,6 +4,8 @@ import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.linkare.rec.utils.ClassUtils;
+
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
@@ -52,8 +54,8 @@ public class StampTranslatorProcessorManager {
 	}
 
 	public static void initStampProcessorTranslator(final String className) {
-		try {
-			final Class<?> c = Class.forName(className);
+		try {                    
+                        final Class<?> c = ClassUtils.findClass(className, ClassLoader.getSystemClassLoader());
 			c.newInstance();
 		} catch (final Exception e) {
 			LOGGER.log(Level.SEVERE, "Unable to load class:" + className, e);
@@ -63,7 +65,7 @@ public class StampTranslatorProcessorManager {
 	public static void initStampProcessorsTranslators(final String[] classNames) {
 		for (final String className : classNames) {
 			try {
-				final Class<?> c = Class.forName(className);
+                                final Class<?> c = ClassUtils.findClass(className, ClassLoader.getSystemClassLoader());
 				c.newInstance();
 			} catch (final Exception e) {
 				LOGGER.log(Level.SEVERE, "Unable to load class:" + className, e);

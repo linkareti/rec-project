@@ -17,6 +17,7 @@ import javax.swing.JMenuBar;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.utils.ClassUtils;
 
 /**
  * 
@@ -33,7 +34,7 @@ public class CustomizerUIUtil {
 	public static ICustomizer loadCustomizer(final String url) {
 		try {
 			final String className = url;
-			final Class<?> c = Class.forName(className);
+                        final Class<?> c = ClassUtils.findClass(className, ClassLoader.getSystemClassLoader());
 
 			final Object o = c.newInstance();
 
@@ -51,8 +52,8 @@ public class CustomizerUIUtil {
 
 	public static boolean customizerExists(final String url) {
 		try {
-			final String className = url;
-			final Class<?> c = Class.forName(className);
+			final String className = url;                        
+			final Class<?> c = ClassUtils.findClass(className, ClassLoader.getSystemClassLoader());
 			return (c != null);
 
 		} catch (final Exception e2) {
