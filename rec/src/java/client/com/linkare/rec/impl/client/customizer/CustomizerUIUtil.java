@@ -34,7 +34,7 @@ public class CustomizerUIUtil {
 	public static ICustomizer loadCustomizer(final String url) {
 		try {
 			final String className = url;
-                        final Class<?> c = ClassUtils.findClass(className, ClassLoader.getSystemClassLoader());
+                        final Class<?> c = ClassUtils.findClass(className, CustomizerUIUtil.class.getClassLoader());
 
 			final Object o = c.newInstance();
 
@@ -53,7 +53,7 @@ public class CustomizerUIUtil {
 	public static boolean customizerExists(final String url) {
 		try {
 			final String className = url;                        
-			final Class<?> c = ClassUtils.findClass(className, ClassLoader.getSystemClassLoader());
+			final Class<?> c = ClassUtils.findClass(className, CustomizerUIUtil.class.getClassLoader());
 			return (c != null);
 
 		} catch (final Exception e2) {

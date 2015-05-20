@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
+import com.linkare.rec.utils.ClassUtils;
 
 /**
  * 
@@ -39,8 +40,8 @@ public final class SecurityManagerFactory {
 					LOGGER.log(Level.FINE, "Trying to load the SecurityManager class [" + secManagerClassName + "]");
 				}
 				final Class<?> clazz = Thread.currentThread().getContextClassLoader().loadClass(secManagerClassName);
-				if (clazz != null) {
-					secManager = (ISecurityManager) Class.forName(secManagerClassName).newInstance();
+				if (clazz != null) {                                    
+					secManager = (ISecurityManager) ClassUtils.findClass(secManagerClassName, getClass().getClassLoader()).newInstance();
 				}
 			} catch (final Exception e) {
 				LOGGER.log(Level.WARNING, "Unable to load SecurityManager defined at system : " + secManagerClassName

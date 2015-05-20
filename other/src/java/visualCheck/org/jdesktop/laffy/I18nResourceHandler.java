@@ -12,6 +12,8 @@ import javax.swing.AbstractButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
+import com.linkare.rec.utils.ClassUtils;
+
 /**
  * 
  * @author Ken-ichi Kurosaki
@@ -55,8 +57,8 @@ public class I18nResourceHandler {
 
 			while ((idx = msg.indexOf('&', idx)) != -1) {
 				mnemonic = msg.charAt(idx + 1);
-				if (Character.isLowerCase(mnemonic) || Character.isUpperCase(mnemonic)) {
-					Class keyEvent = Class.forName("java.awt.event.KeyEvent");
+				if (Character.isLowerCase(mnemonic) || Character.isUpperCase(mnemonic)) {                                    
+                                        Class keyEvent = ClassUtils.findClass("java.awt.event.KeyEvent", ClassLoader.getSystemClassLoader());
 					Field field = keyEvent.getDeclaredField("VK_" + Character.toUpperCase(mnemonic));
 					int keyCode = field.getInt(null);
 

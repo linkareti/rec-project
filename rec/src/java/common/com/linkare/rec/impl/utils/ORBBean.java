@@ -43,6 +43,7 @@ import com.linkare.rec.acquisition.MultiCastController;
 import com.linkare.rec.acquisition.MultiCastControllerHelper;
 import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.wrappers.MultiCastControllerWrapper;
+import com.linkare.rec.utils.ClassUtils;
 
 /**
  * 
@@ -311,11 +312,11 @@ public class ORBBean {
 			throws Exception {
 		synchronized (orb_synch) {
 			final String delegateInterfaceName = remoteInterface.getName() + "Operations";
-			final Class<?> delegateInterface = Class.forName(delegateInterfaceName, false, this.getClass()
+			final Class<?> delegateInterface = ClassUtils.findClass(delegateInterfaceName, getClass()
 					.getClassLoader());
 
 			final String poaTieServantClassName = remoteInterface.getName() + "POATie";
-			final Class<?> poaTieServantClass = Class.forName(poaTieServantClassName, false, this.getClass()
+			final Class<?> poaTieServantClass = ClassUtils.findClass(poaTieServantClassName, getClass()
 					.getClassLoader());
 
 			final Constructor<?> servantCtr = poaTieServantClass.getConstructor(new Class[] { delegateInterface,
@@ -334,11 +335,11 @@ public class ORBBean {
 			final byte[] oid) throws Exception {
 		synchronized (orb_synch) {
 			final String delegateInterfaceName = remoteInterface.getName() + "Operations";
-			final Class<?> delegateInterface = Class.forName(delegateInterfaceName, false, this.getClass()
+			final Class<?> delegateInterface = ClassUtils.findClass(delegateInterfaceName, getClass()
 					.getClassLoader());
 
 			final String poaTieServantClassName = remoteInterface.getName() + "POATie";
-			final Class<?> poaTieServantClass = Class.forName(poaTieServantClassName, false, this.getClass()
+			final Class<?> poaTieServantClass = ClassUtils.findClass(poaTieServantClassName, getClass()
 					.getClassLoader());
 
 			final Constructor<?> servantCtr = poaTieServantClass.getConstructor(new Class[] { delegateInterface,
@@ -357,11 +358,11 @@ public class ORBBean {
 			final ObjectID oidOut) throws Exception {
 		synchronized (orb_synch) {
 			final String delegateInterfaceName = remoteInterface.getName() + "Operations";
-			final Class<?> delegateInterface = Class.forName(delegateInterfaceName, false, this.getClass()
+			final Class<?> delegateInterface = ClassUtils.findClass(delegateInterfaceName, getClass()
 					.getClassLoader());
 
 			final String poaTieServantClassName = remoteInterface.getName() + "POATie";
-			final Class<?> poaTieServantClass = Class.forName(poaTieServantClassName, false, this.getClass()
+			final Class<?> poaTieServantClass = ClassUtils.findClass(poaTieServantClassName, getClass()
 					.getClassLoader());
 
 			final Constructor<?> servantCtr = poaTieServantClass.getConstructor(new Class[] { delegateInterface,

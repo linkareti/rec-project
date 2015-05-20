@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.multicast.repository.impl.FSRepository;
+import com.linkare.rec.utils.ClassUtils;
 
 /**
  * 
@@ -23,8 +24,8 @@ public final class RepositoryFactory {
 
 		try {
 			LOGGER.log(Level.FINE, "Trying to load the Repository class [" + repositoryClassName + "]");
-
-			REPOSITORY = (IRepository) Class.forName(repositoryClassName).newInstance();
+                                               
+			REPOSITORY = (IRepository) ClassUtils.findClass(repositoryClassName, RepositoryFactory.class.getClassLoader()).newInstance();
 
 		} catch (Exception e) {
 			LOGGER.log(Level.INFO,

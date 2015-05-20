@@ -33,6 +33,7 @@ import javax.swing.SwingUtilities;
 
 import com.linkare.rec.impl.newface.laf.flat.resources.FlatLAFResources;
 import com.linkare.rec.impl.newface.laf.flat.resources.FlatLAFResources.FlatLAFImageResourcesEnum;
+import com.linkare.rec.utils.ClassUtils;
 
 /**
  *
@@ -121,8 +122,8 @@ public class FlatFocusRenderer implements PropertyChangeListener {
 	 */
 	private Method getComponentMixingCutoutShapeMethod() {
 		if (COMPONENT_MIXING_CUTOUT_SHAPE_METHOD == null) {
-			try {
-				Class<?> awtUtilitiesClass = Class.forName("com.sun.awt.AWTUtilities");
+			try {                            
+				Class<?> awtUtilitiesClass = ClassUtils.findClass("com.sun.awt.AWTUtilities", getClass().getClassLoader());
 				COMPONENT_MIXING_CUTOUT_SHAPE_METHOD = awtUtilitiesClass.getMethod("setComponentMixingCutoutShape",
 						Component.class, Shape.class);
 			} catch (Exception ignored) {

@@ -15,6 +15,7 @@ import com.linkare.rec.impl.config.ReCSystemPropertyLocation;
 import com.linkare.rec.impl.threading.ProcessingManager;
 import com.linkare.rec.impl.utils.ORBBean;
 import com.linkare.rec.impl.utils.SystemExitSecurityManager;
+import com.linkare.rec.utils.ClassUtils;
 
 /**
  * 
@@ -42,8 +43,8 @@ public class FullServerMain {
 
 			ORBBean.getORBBean();
 			String driverClassName = ReCSystemProperty.HARDWARE_DRIVER_CLASS.getValue();
-			if (driverClassName != null) {
-				Class<?> driverClass = Class.forName(driverClassName);
+			if (driverClassName != null) {                            
+				Class<?> driverClass = ClassUtils.findClass(driverClassName, FullServerMain.class.getClassLoader());
 				new BaseHardware((IDriver) driverClass.newInstance());
 
 				try {
