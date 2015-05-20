@@ -226,7 +226,7 @@
 
         </sequential>
     </macrodef>
-
+    
     <target name="-jar.experiment.driver">
         <jar.experiment.driver experiment.name="${experiment.name}" />
     </target>
@@ -283,6 +283,18 @@
                 <globmapper from="*.jar" to="*_sig.jar" />
             </signjar>
             <delete file="${client.build.dir}/@{experiment.name}Client.jar" />
+        </sequential>
+    </macrodef>
+        
+    <macrodef name="sign.elab.Client.experiment" description="Sign each elab Client jar related to each experiment ">
+        <attribute name="jar.name" />
+
+        <sequential>
+            <signjar storetype="${elab.storetype}" destDir="${client.build.dir}" keystore="${elab.keystore}" keypass="${elab.keypass}" storepass="${elab.storepass}" alias="${elab.alias}">
+                <fileset dir="${client.build.dir}" includes="@{jar.name}" excludes="*_sig.jar" />
+                <globmapper from="*.jar" to="*_sig.jar" />
+            </signjar>
+            <delete file="${client.build.dir}/@{jar.name}" />
         </sequential>
     </macrodef>
 
@@ -603,7 +615,7 @@
                 <replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
                 <replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
             </replace>
-            <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot;/&gt;" />
+            <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_@{experiment.name}_sig.jar&quot; main=&quot;true&quot;/&gt;" />
             <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot;/&gt;" />
 			<replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
             <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
@@ -614,14 +626,16 @@
 					<!--End Experiment Jars -->]]></replacevalue>
             </replace>
             <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
-                                                                        
-            <copy file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" tofile="${experiments.classes.dir}/@{experiment.name}/client/JNLP-INF/APPLICATION.JNLP">
-<!--                <filterchain>
-                    <filterreader classname="org.apache.tools.ant.filters.StripLineBreaks"/>
-                </filterchain>                        -->
-            </copy>
-                                                                   
-            <copy overwrite="true" file="${experiments.classes.dir}/@{experiment.name}/client/JNLP-INF/APPLICATION.JNLP" tofile="${client.build.dir}/${experiment.autoconnect.id}.jnlp"/>
+                                     
+            <duplicate.jar.include.jnlp 
+                destination.folder="${client.build.dir}" 
+                source.jar.name="ELabClient.jar"
+                dest.jar.name="ELabClient_@{experiment.name}.jar"
+                source.basedir="${elab.client.classes.dir}" 
+                jnlp.file="${experiment.autoconnect.id}.jnlp"/>
+            
+            <sign.elab.Client.experiment jar.name="ELabClient_@{experiment.name}.jar" />
+
         </sequential>
     </macrodef>
 
@@ -636,8 +650,8 @@
             <compile.experiment.client experiment.name="@{experiment.name}" />
             <compile.experiment.driver experiment.name="@{experiment.name}" />
 
-
-            <jar.experiment.client experiment.name="@{experiment.name}" />
+ 
+            <jar.experiment.client experiment.name="@{experiment.name}" />            
             <repack200.experiment experiment.name="@{experiment.name}" />
             <sign.experiment experiment.name="@{experiment.name}" />
             <pack200.experiment experiment.name="@{experiment.name}" />

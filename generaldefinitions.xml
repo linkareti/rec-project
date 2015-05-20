@@ -932,7 +932,25 @@
             
         </sequential>
     </macrodef>
-
+    
+    <macrodef name="duplicate.jar.include.jnlp" description="Duplicate a JAR and include a jnlp file if included">
+        <attribute name="destination.folder" />
+        <attribute name="source.jar.name" />
+        <attribute name="dest.jar.name" />
+        <attribute name="source.basedir" />
+        <attribute name="jnlp.file" default=""/>        
+        <sequential>
+            <copy file="@{destination.folder}/@{source.jar.name}" tofile="@{destination.folder}/@{dest.jar.name}"/>
+    
+            <jar update="true" destfile="@{destination.folder}/@{dest.jar.name}">
+<!--                VERY IMPORTANT: ALLWAYS use fullpath="JNLP-INF/APPLICATION.JNLP" DO NOT INCLUDE / before JNLP-INF....
+                it will originate problems like Found unsigned entry-->
+                <zipfileset file="@{destination.folder}/@{jnlp.file}" fullpath="JNLP-INF/APPLICATION.JNLP"/>
+            </jar>
+                        
+        </sequential>
+    </macrodef>
+    
     <!-- ====
     macrodef: updatemanifest.attributes
     ==== -->
