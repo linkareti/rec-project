@@ -29,6 +29,7 @@
 		<jboss.domain>default</jboss.domain>
 		<!-- The version of Weld extensions in use -->
 		<weld.extensions.version>1.0.0-CR2</weld.extensions.version>
+                <aspectj.version>1.8.2</aspectj.version>
 	</properties>
 
 	<dependencyManagement>
@@ -405,6 +406,13 @@
 			</exclusions>
 			<optional>false</optional>
 		</dependency>
+                
+                <!-- AspectJ dependencies -->
+                <dependency>
+                    <groupId>org.aspectj</groupId>
+                    <artifactId>aspectjrt</artifactId>
+                    <version>${aspectj.version}</version>
+                </dependency>
 	</dependencies>
 	<organization>
 		<name>Linkare TI</name>
@@ -545,8 +553,8 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
-				<version>1.3</version>
 				<configuration>
+                                        <complianceLevel>1.6</complianceLevel>
 					<target>1.6</target>
 					<source>1.6</source>
 				</configuration>
@@ -558,6 +566,13 @@
 						</goals>
 					</execution>
 				</executions>
+                                <dependencies>
+                                <dependency>
+                                    <groupId>org.aspectj</groupId>
+                                    <artifactId>aspectjtools</artifactId>
+                                    <version>${aspectj.version}</version>
+                                </dependency>
+                    </dependencies>
 			</plugin>
 			<plugin>
 				<artifactId>maven-release-plugin</artifactId>
@@ -744,7 +759,6 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
-				<version>1.2</version>
 				<configuration>
 					<verbose>true</verbose>
 					<privateScope>true</privateScope>

@@ -31,12 +31,12 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.faces</url-pattern>
 	</servlet-mapping>
-	<servlet>
+<!--	<servlet>
 		<servlet-name>JnlpDownloadServlet</servlet-name>
 		<servlet-class>jnlp.sample.servlet.JnlpDownloadServlet</servlet-class>
-		<!-- To activate logging, uncomment the following init params, and check 
-			their values -->
-		<!--init-param>
+		 To activate logging, uncomment the following init params, and check 
+			their values 
+		init-param>
 			<param-name>logPath</param-name>
 			<param-value>/tmp/rec-jws-download-servlet.log</param-value>
 		</init-param>
@@ -44,7 +44,7 @@
 			<description>Only one of NONE,FATAL,WARNING,INFORMATIONAL,DEBUG may be specified</description>
 			<param-name>logLevel</param-name>
 			<param-value>DEBUG</param-value>
-		</init-param-->
+		</init-param
 		<init-param>
 			<description>The jnlp files extension</description>
 			<param-name>jnlp-extension</param-name>
@@ -59,7 +59,7 @@
 	<servlet-mapping>
 		<servlet-name>JnlpDownloadServlet</servlet-name>
 		<url-pattern>/client/*</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping>-->
 	<session-config>
 		<session-timeout>20</session-timeout>
 	</session-config>
