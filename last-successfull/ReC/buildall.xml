@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+		=======================================================
+		============ 2009/03/29 Build Rec - Elab ==============
+		=======================================================
+	-->
+
+<project name="ReC - elab build system" default="build.all" basedir=".">
+	<description>
+		Compile, package, sign and run the project ReC and each of the experiments.
+	</description>
+
+	<property file="build.properties" description="general properties for building project" />
+
+	<import file="generaldefinitions.xml" />
+
+	<target name="clean.each.module" description="Cleans rec, elab and all the experiments">
+		<ant antfile="recbuild.xml" dir="." target="clean.all" />
+		<ant antfile="elabbuild.xml" dir="." target="clean.all" />
+		<ant antfile="experimentsbuild.xml" dir="." target="clean.experiments.list" />
+	</target>
+
+	<target name="clean.all" description="Cleans the build directory completely">
+		<delete dir="${build.dir}">
+		</delete>
+	</target>
+
+
+	<target name="build.all" depends="clean.all" description="Builds rec, elab and experiments list, and copies result to rec.web for deployment">
+		<ant antfile="recbuild.xml" dir="." target="build.all" />
+		<ant antfile="elabbuild.xml" dir="." target="build.all" />
+		<ant antfile="experimentsbuild.xml" dir="." target="build.experiments.list" />
+		<antcall target="build.client.lib.dependencies" />
+		<antcall target="copy.client.to.rec.web" />
+	</target>
+
+	<target name="copy.client.to.rec.web" description="copies the build output to the rec.web webapp for deployment">
+		<delete dir="${client.rec.web.webapp}/client" failonerror="false" />
+		<mkdir dir="${client.rec.web.webapp}/client" />
+		<copy overwrite="true" todir="${client.rec.web.webapp}/client" encoding="${copy.encoding}" includeemptydirs="false">
+			<fileset dir="${client.build.dir}">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+
+		<delete dir="${client.rec.web.resources}" failonerror="false" />
+		<mkdir dir="${client.rec.web.resources}" />
+		<copy overwrite="true" todir="${client.rec.web.resources}" encoding="${copy.encoding}" includeemptydirs="false">
+			<fileset dir="${elab.client.classes.dir}">
+				<include name="ReCFaceConfig.xml" />
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${client.rec.web.resources}" encoding="${copy.encoding}" includeemptydirs="false">
+			<cutdirsmapper dirs="2" />
+			<fileset dir="${experiments.classes.dir}">
+				<exclude name="**/*.class" />
+				<exclude name="**/META-INF/**" />
+				<exclude name="**/META-INF/**" />
+				<exclude name="**/*.txt" />
+				<include name="**/client/**/*.*" />
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${client.rec.web.resources}" encoding="${copy.encoding}" includeemptydirs="false">
+			<fileset dir="${elab.client.classes.dir}">
+				<exclude name="**/*.class" />
+				<exclude name="**/*.jnlp" />
+				<exclude name="**/META-INF/**" />
+				<exclude name="**/META-INF/**" />
+				<exclude name="**/*.txt" />
+			</fileset>
+			<fileset dir="${elab.common.classes.dir}">
+				<exclude name="**/*.class" />
+				<exclude name="**/*.jnlp" />
+				<exclude name="**/META-INF/**" />
+				<exclude name="**/META-INF/**" />
+				<exclude name="**/*.txt" />
+			</fileset>
+			<fileset dir="${elab.multicast.classes.dir}">
+				<exclude name="**/*.class" />
+				<exclude name="**/*.jnlp" />
+				<exclude name="**/META-INF/**" />
+				<exclude name="**/META-INF/**" />
+				<exclude name="**/*.txt" />
+			</fileset>
+			<fileset dir="${rec.client.classes.dir}">
+				<exclude name="**/*.class" />
+				<exclude name="**/*.jnlp" />
+				<exclude name="**/META-INF/**" />
+				<exclude name="**/META-INF/**" />
+				<exclude name="**/*.txt" />
+			</fileset>
+			<fileset dir="${rec.common.classes.dir}">
+				<exclude name="**/*.class" />
+				<exclude name="**/*.jnlp" />
+				<exclude name="**/META-INF/**" />
+				<exclude name="**/META-INF/**" />
+				<exclude name="**/*.txt" />
+			</fileset>
+			<fileset dir="${rec.multicast.classes.dir}">
+				<exclude name="**/*.class" />
+				<exclude name="**/*.jnlp" />
+				<exclude name="**/META-INF/**" />
+				<exclude name="**/META-INF/**" />
+				<exclude name="**/*.txt" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: dist.all
+         - - - - - - - - - - - - - - - - - -->
+	<target name="dist.all" depends="build.all,dist.client,dist.multicast,dist.hardwareserver" description="Creates zip files in the dist/java directory with the contents of the client, multicast and hardware driver for all built experiments">
+
+	</target>
+
+	<target name="dist.client" description="Creates a zip of the client experiments selected inside dist/java">
+
+		<mkdir dir="${dist.dir}" />
+		<zip destfile="${dist.dir}/FullClient_${today}.zip">
+			<zipfileset dir="${client.build.dir}" includes="*_sig.jar,*.jnlp,*_sig.jar.pack.gz" prefix="client" />
+
+			<zipfileset dir="${client.build.dir}/lib" includes="*_sig.jar,*_sig.jar.pack.gz" prefix="client/lib" />
+
+			<zipfileset dir="${client.build.dir}/images" includes="*.jpg,*.gif,*.png" prefix="client/images" />
+
+			<zipfileset file="${templates.dir.logs}/client.loggers.config.properties" fullpath="client/etc/loggers.config.properties" />
+			<zipfileset file="${client.build.dir}/etc/openorb.xml" fullpath="client/etc/openorb.xml" />
+			<zipfileset file="${client.build.dir}/etc/ReCFaceConfig.xml" fullpath="client/etc/ReCFaceConfig.xml" />
+		</zip>
+
+	</target>
+
+	<target name="dist.multicast" description="Creates a zip file with the multicast distribution">
+
+		<mkdir dir="${dist.dir}" />
+
+		<process.list task="-dist.multicast.zip" list="${lab.list}" attribute.name="lab.name" />
+
+	</target>
+
+	<target name="-dist.multicast.zip">
+		<dist.multicast.zip lab.name="${lab.name}" />
+	</target>
+	<macrodef name="dist.multicast.zip">
+		<attribute name="lab.name" />
+		<sequential>
+			<mkdir dir="${multicast.build.dir}/@{lab.name}" />
+			<copy file="${templates.dir.scripts}/StartMultiCastController.sh" overwrite="yes" tofile="${multicast.build.dir}/@{lab.name}/StartMultiCastController.sh" />
+			<replace file="${multicast.build.dir}/@{lab.name}/StartMultiCastController.sh" propertyFile="build.properties">
+				<replacefilter token="@multicast.initial.heap@" property="multicast.initial.heap" />
+				<replacefilter token="@multicast.max.heap@" property="multicast.max.heap" />
+				<replacefilter token="@rec.web.lab.id@" property="@{lab.name}.rec.web.lab.id" />
+				<replacefilter token="@rec.web.host@" property="rec.web.host" />
+				<replacefilter token="@rec.web.port@" property="rec.web.port" />
+				<replacefilter token="@rec.multicast.securitymanager@" property="rec.multicast.securitymanager" />
+				<replacefilter token="@rec.web.securitymanager.interval.lap.time.minutes@" property="rec.web.securitymanager.interval.lap.time.minutes" />
+				<replacefilter token="@rec.web.securitymanager.near.lap.time.minutes@" property="rec.web.securitymanager.near.lap.time.minutes" />
+				<replacefilter token="@rec.web.securitymanager.refresh.lap.time.minutes@" property="rec.web.securitymanager.refresh.lap.time.minutes" />
+				<replacefilter token="@lab.name@" value="@{lab.name}" />
+				<replacefilter token="@rec.multicast.processingmanager.threadpool.coresize@" property="rec.multicast.processingmanager.threadpool.coresize" />
+				<replacefilter token="@rec.multicast.processingmanager.threadpool.maxsize@" property="rec.multicast.processingmanager.threadpool.maxsize" />
+				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
+				<replacefilter token="@com.sun.management.jmxremote.port@" property="@{lab.name}.rec.multicastcontroller.jmxremote.port" />
+				<replacefilter token="@java.rmi.server.hostname@" property="java.rmi.server.hostname" />
+				<replacefilter token="@rec.multicast.repository@" property="rec.multicast.repository" />
+				<replacefilter token="@rec.multicast.badwordmanager.refresh.lap.time.minutes@" property="rec.multicast.badwordmanager.refresh.lap.time.minutes" />
+				<replacefilter token="@install.dir@" value="${install.dir}"/>
+				<replacefilter token="@deployment.subdir@" value="${deployment.subdir}"/>
+				<replacefilter token="@additional.java.args@" property="@{lab.name}.additional.java.args"/>
+			</replace>
+
+			<copy file="${templates.dir.scripts}/MultiCastDaemon.sh" overwrite="yes" tofile="${multicast.build.dir}/@{lab.name}/MultiCastDaemon.sh" />
+			<replace file="${multicast.build.dir}/@{lab.name}/MultiCastDaemon.sh" propertyFile="build.properties">
+				<replacefilter token="@lab.name@" value="@{lab.name}" />
+				<replacefilter token="@install.dir@" value="${install.dir}"/>
+				<replacefilter token="@deployment.subdir@" value="${deployment.subdir}"/>
+				<replacefilter token="@daemon.user@" value="${daemon.user}"/>
+			</replace>
+
+			<copy file="${templates.dir.scripts}/StartMultiCastController.bat" overwrite="yes" tofile="${multicast.build.dir}/@{lab.name}/StartMultiCastController.bat" />
+			<replace file="${multicast.build.dir}/@{lab.name}/StartMultiCastController.bat" propertyFile="build.properties">
+				<replacefilter token="@multicast.initial.heap@" property="multicast.initial.heap" />
+				<replacefilter token="@multicast.max.heap@" property="multicast.max.heap" />
+				<replacefilter token="@rec.web.lab.id@" property="@{lab.name}.rec.web.lab.id" />
+				<replacefilter token="@rec.web.host@" property="rec.web.host" />
+				<replacefilter token="@rec.web.port@" property="rec.web.port" />
+				<replacefilter token="@rec.multicast.securitymanager@" property="rec.multicast.securitymanager" />
+				<replacefilter token="@rec.web.securitymanager.interval.lap.time.minutes@" property="rec.web.securitymanager.interval.lap.time.minutes" />
+				<replacefilter token="@rec.web.securitymanager.near.lap.time.minutes@" property="rec.web.securitymanager.near.lap.time.minutes" />
+				<replacefilter token="@rec.web.securitymanager.refresh.lap.time.minutes@" property="rec.web.securitymanager.refresh.lap.time.minutes" />
+				<replacefilter token="@rec.multicast.processingmanager.threadpool.coresize@" property="rec.multicast.processingmanager.threadpool.coresize" />
+				<replacefilter token="@rec.multicast.processingmanager.threadpool.maxsize@" property="rec.multicast.processingmanager.threadpool.maxsize" />
+				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
+				<replacefilter token="@com.sun.management.jmxremote.port@" property="@{lab.name}.rec.multicastcontroller.jmxremote.port" />
+				<replacefilter token="@java.rmi.server.hostname@" property="java.rmi.server.hostname" />
+				<replacefilter token="@rec.multicast.repository@" property="rec.multicast.repository" />
+				<replacefilter token="@rec.multicast.badwordmanager.refresh.lap.time.minutes@" property="rec.multicast.badwordmanager.refresh.lap.time.minutes" />
+				<replacefilter token="@install.dir@" value="${install.dir}"/>
+				<replacefilter token="@deployment.subdir@" value="${deployment.subdir}"/>
+				<replacefilter token="@additional.java.args@" property="@{lab.name}.additional.java.args"/>
+			</replace>
+
+			<copy file="${templates.dir.logs}/multicast.loggers.config.properties" overwrite="yes" tofile="${multicast.build.dir}/@{lab.name}/etc/loggers.config.properties" />
+			<copy file="${templates.dir.jmx}/jmxremote.access" overwrite="yes" tofile="${multicast.build.dir}/@{lab.name}/etc/jmxremote.access" />
+			<copy file="${templates.dir.jmx}/jmxremote.password" overwrite="yes" tofile="${multicast.build.dir}/@{lab.name}/etc/jmxremote.password" />
+
+			<zip destfile="${dist.dir}/multicast_@{lab.name}_${today}.zip">
+				<zipfileset file="${multicast.build.dir}/ELabMulticastController.jar" prefix="multicast" />
+				<zipfileset file="${multicast.build.dir}/ReCMulticastController.jar" prefix="multicast" />
+				<zipfileset file="${multicast.build.dir}/ReCCommon.jar" prefix="multicast" />
+
+				<zipfileset dir="${multicast.build.dir}/lib" includes="**/*" prefix="multicast/lib" />
+				<zipfileset file="${multicast.build.dir}/@{lab.name}/etc/loggers.config.properties" fullpath="multicast/etc/loggers.config.properties" />
+				<zipfileset file="${multicast.build.dir}/@{lab.name}/etc/openorb.xml" fullpath="multicast/etc/openorb.xml" />
+
+				<zipfileset file="${multicast.build.dir}/@{lab.name}/etc/jmxremote.password" fullpath="multicast/etc/jmxremote.password" filemode="500" />
+				<zipfileset file="${multicast.build.dir}/@{lab.name}/etc/jmxremote.access" fullpath="multicast/etc/jmxremote.access" />
+
+				<zipfileset file="${multicast.build.dir}/@{lab.name}/StartMultiCastController.sh" fullpath="StartMultiCastController.sh" filemode="755" />
+				<zipfileset file="${multicast.build.dir}/@{lab.name}/MultiCastDaemon.sh" fullpath="MultiCastDaemon.sh" filemode="755" />
+				<zipfileset file="${multicast.build.dir}/@{lab.name}/StartMultiCastController.bat" fullpath="StartMultiCastController.bat" />
+			</zip>
+
+		</sequential>
+	</macrodef>
+
+	<target name="dist.hardwareserver" description="Creates a zip of all the drivers of the experiments being built!">
+		<mkdir dir="${dist.dir}" />
+		<process.list task="-dist.lab.hardwareserver" list="${lab.list}" attribute.name="lab.name" />
+	</target>
+
+	<target name="-dist.lab.hardwareserver">
+		<dist.lab.hardwareserver lab.name="${lab.name}" />
+	</target>
+	<macrodef name="dist.lab.hardwareserver">
+		<attribute name="lab.name" />
+		<sequential>
+
+			<for list="${@{lab.name}.experiment.list}" param="experiment.name" parallel="true" threadCount="10">
+				<sequential>
+					<copy file="${templates.dir.scripts}/StartExperiment.sh" overwrite="yes" tofile="${experiments.build.dir}/Start@{experiment.name}Driver.sh" />
+					<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" propertyFile="build.properties">
+						<replacefilter token="@experiment.name@" value="@{experiment.name}" />
+						<replacefilter token="@hardwareserver.initial.heap@" property="hardwareserver.initial.heap" />
+						<replacefilter token="@hardwareserver.max.heap@" property="hardwareserver.max.heap" />
+						<replacefilter token="@rec.driver.processingmanager.threadpool.coresize@" property="rec.driver.processingmanager.threadpool.coresize" />
+						<replacefilter token="@rec.driver.processingmanager.threadpool.maxsize@" property="rec.driver.processingmanager.threadpool.maxsize" />
+						<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
+						<replacefilter token="@driver.main.class@" property="experiment.driver.main-class" />
+						<replacefilter token="@install.dir@" value="${install.dir}"/>
+						<replacefilter token="@deployment.subdir@" value="${deployment.subdir}"/>
+					</replace>
+					<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" propertyFile="experiments/@{experiment.name}/etc/build.properties">
+						<replacefilter token="@experiment.driver.class@" property="experiment.driver.class" />
+						<replacefilter token="@additional.java.args@" property="additional.java.args" />
+					</replace>
+
+					<copy file="${templates.dir.scripts}/ExperimentDaemon.sh" overwrite="yes" tofile="${experiments.build.dir}/@{experiment.name}Daemon.sh" />
+					<replace file="${experiments.build.dir}/@{experiment.name}Daemon.sh" propertyFile="build.properties">
+						<replacefilter token="@experiment.name@" value="@{experiment.name}" />
+						<replacefilter token="@install.dir@" value="${install.dir}"/>
+						<replacefilter token="@deployment.subdir@" value="${deployment.subdir}"/>
+						<replacefilter token="@daemon.user@" value="${daemon.user}"/>
+					</replace>
+					<replace file="${experiments.build.dir}/@{experiment.name}Daemon.sh" propertyFile="experiments/@{experiment.name}/etc/build.properties">
+						<replacefilter token="@additional.service.start.script@" property="additional.service.start.script" />
+						<replacefilter token="@additional.service.stop.script@" property="additional.service.stop.script" />
+					</replace>
+						
+					
+					
+					<copy file="${templates.dir.scripts}/StartExperiment.bat" overwrite="yes" tofile="${experiments.build.dir}/Start@{experiment.name}Driver.bat" />
+					<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" propertyFile="build.properties">
+						<replacefilter token="@experiment.name@" value="@{experiment.name}" />
+						<replacefilter token="@hardwareserver.initial.heap@" property="hardwareserver.initial.heap" />
+						<replacefilter token="@hardwareserver.max.heap@" property="hardwareserver.max.heap" />
+						<replacefilter token="@rec.driver.processingmanager.threadpool.coresize@" property="rec.driver.processingmanager.threadpool.coresize" />
+						<replacefilter token="@rec.driver.processingmanager.threadpool.maxsize@" property="rec.driver.processingmanager.threadpool.maxsize" />
+						<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
+						<replacefilter token="@driver.main.class@" property="experiment.driver.main-class" />
+						<replacefilter token="@install.dir@" value="${install.dir}"/>
+						<replacefilter token="@deployment.subdir@" value="${deployment.subdir}"/>
+					</replace>
+					<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" propertyFile="experiments/@{experiment.name}/etc/build.properties">
+						<replacefilter token="@experiment.driver.class@" property="experiment.driver.class" />
+						<replacefilter token="@additional.java.args@" property="additional.java.args" />
+					</replace>
+
+					<copy file="${templates.dir.logs}/hardwareserver.loggers.config.properties" overwrite="yes" tofile="${experiments.build.dir}/@{experiment.name}/etc/loggers.config.properties" />
+					<replace file="${experiments.build.dir}/@{experiment.name}/etc/loggers.config.properties" propertyFile="build.properties">
+						<replacefilter token="@experiment.name@" value="@{experiment.name}" />
+					</replace>
+
+					<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-zip.dist.hardwareserver" />
+
+					<zip destfile="${dist.dir}/@{experiment.name}HarwareServer_${today}.zip">
+						<zipfileset file="${hardwareserver.build.dir}/@{experiment.name}Driver.jar" prefix="hardwareserver" />
+						<zipfileset file="${hardwareserver.build.dir}/ELabCommon.jar" prefix="hardwareserver" />
+						<zipfileset file="${hardwareserver.build.dir}/ELabHardwareServer.jar" prefix="hardwareserver" />
+						<zipfileset file="${hardwareserver.build.dir}/ReCHardwareServer.jar" prefix="hardwareserver" />
+						<zipfileset file="${hardwareserver.build.dir}/ReCCommon.jar" prefix="hardwareserver" />
+
+						<zipfileset dir="${hardwareserver.build.dir}/lib" includes="**/*" prefix="hardwareserver/lib" />
+						<zipfileset dir="${experiments.build.dir}/@{experiment.name}/lib" includes="**/*" prefix="hardwareserver/lib" />
+
+						<zipfileset file="${experiments.build.dir}/@{experiment.name}/etc/loggers.config.properties" fullpath="hardwareserver/etc/loggers.config.properties" />
+						<zipfileset file="${hardwareserver.build.dir}/@{lab.name}/etc/openorb.xml" fullpath="hardwareserver/etc/openorb.xml" />
+						<zipfileset file="experiments/@{experiment.name}/etc/Rs232Config.xml" fullpath="hardwareserver/etc/Rs232Config.xml" />
+						<zipfileset file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" filemode="755" />
+						<zipfileset file="${experiments.build.dir}/@{experiment.name}Daemon.sh" filemode="755" />
+						<zipfileset file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" filemode="755" />
+					</zip>
+
+				</sequential>
+			</for>
+
+		</sequential>
+	</macrodef>
+
+	<target name="copy.client.external.lib.dependencies.to.build.structure" description="copies all dependent jars from the rec, elab and experiments to the build output structure">
+		<mkdir dir="${client.build.dir}/lib" />
+		<copy todir="${client.build.dir}/lib" overwrite="true" failonerror="false">
+			<fileset dir="${rec.common.lib.dir}">
+				<include name="*" />
+			</fileset>
+			<fileset dir="${rec.client.lib.dir}">
+				<include name="*" />
+				<exclude name="ReCClient.jar" />
+			</fileset>
+			<fileset dir="${elab.common.lib.dir}">
+				<include name="*" />
+			</fileset>
+			<fileset dir="${elab.client.lib.dir}">
+				<include name="*" />
+				<exclude name="ELabClient.jar" />
+			</fileset>
+		</copy>
+	</target>
+
+
+	<target name="updatemanifest.client.external.lib.dependencies" description="Updates all manifest with JDK1.7/8 required attributes">
+		<foreach target="-updatemanifest.attributes" param="file" parallel="true" maxThreads="4">
+			<fileset dir="${client.build.dir}/lib">
+				<include name="*.jar" />
+			</fileset>
+		</foreach>
+	</target>
+
+        <target name="put.jnlp.file.client.external.lib.dependencies" description="Inserts jnlp files in jars defined as extensions in ELabClient.jnlp">
+            <antcall target="-put.jnlp.file">
+                <param name="jarfilename" value="${client.build.dir}/lib/jfreechart-1.0.9.jar"/>
+                <param name="jnlpfilename" value="${client.build.dir}/jfreechart.jnlp"/>
+            </antcall>            
+            <antcall target="-put.jnlp.file">
+                <param name="jarfilename" value="${client.build.dir}/lib/openorb_orb-1.4.0.jar"/>
+                <param name="jnlpfilename" value="${client.build.dir}/openorb.jnlp"/>
+            </antcall>            
+            <antcall target="-put.jnlp.file">
+                <param name="jarfilename" value="${client.build.dir}/lib/j3dcore.jar"/>
+                <param name="jnlpfilename" value="${client.build.dir}/j3d.jnlp"/>
+            </antcall>            
+<!--            <antcall target="-put.jnlp.file">
+                <param name="jarfilename" value="${client.build.dir}/ReCClient.jar"/>
+                <param name="jnlpfilename" value="${client.build.dir}/rec-framework.jnlp"/>
+            </antcall>-->
+        </target>
+
+	<target name="repack.client.external.lib.dependencies" if="use.pack200" description="Repacks (pack200) all jars of dependency libs">
+		<foreach target="-repack.jar" param="file" parallel="true" maxThreads="4">
+			<fileset dir="${client.build.dir}/lib">
+				<include name="*.jar" />
+			</fileset>
+		</foreach>
+	</target>
+
+	<target name="sign.client.external.lib.dependencies" description="Sign all jars that are dependency libraries">
+		<foreach target="-sign.jar.rec" param="file" parallel="true" maxThreads="4">
+			<fileset dir="${client.build.dir}/lib">
+				<include name="*.jar" />
+			</fileset>
+		</foreach>
+	</target>
+
+	<target name="pack.client.external.lib.dependencies" if="use.pack200" description="packs (pack200) all jars of dependency libs">
+		<foreach target="-pack.200.jar" param="file" parallel="true" maxThreads="4">
+			<fileset dir="${client.build.dir}/lib">
+				<include name="*.jar" />
+			</fileset>
+		</foreach>
+	</target>
+
+	<target name="build.client.lib.dependencies" depends="copy.client.external.lib.dependencies.to.build.structure, updatemanifest.client.external.lib.dependencies, put.jnlp.file.client.external.lib.dependencies, repack.client.external.lib.dependencies, sign.client.external.lib.dependencies, pack.client.external.lib.dependencies" description="Builds all depency jars, signs and packs them for deployment">
+
+	</target>
+
+</project>
