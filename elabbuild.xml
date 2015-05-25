@@ -58,7 +58,7 @@
             <attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
             <attribute name="Permissions" value="all-permissions" />
             <attribute name="Codebase" value="${codebase}"/>
-            <attribute name="Application-Library-Allowable-Codebase" value="*"/>
+            <attribute name="Application-Library-Allowable-Codebase" value="${application-library-allowable-codebase}"/>
             <attribute name="Caller-Allowable-Codebase" value="*"/>
             <attribute name="Trusted-Only" value="true"/>
             <attribute name="Trusted-Library" value="true"/>
@@ -104,7 +104,7 @@
             <attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
             <attribute name="Permissions" value="all-permissions" />
             <attribute name="Codebase" value="${codebase}"/>
-            <attribute name="Application-Library-Allowable-Codebase" value="*"/>
+            <attribute name="Application-Library-Allowable-Codebase" value="${application-library-allowable-codebase}"/>
             <attribute name="Caller-Allowable-Codebase" value="*"/>
             <attribute name="Trusted-Only" value="true"/>
             <attribute name="Trusted-Library" value="true"/>
@@ -306,7 +306,7 @@
             <attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
             <attribute name="Permissions" value="all-permissions" />
             <attribute name="Codebase" value="${codebase}"/>
-            <attribute name="Application-Library-Allowable-Codebase" value="*"/>
+            <attribute name="Application-Library-Allowable-Codebase" value="${application-library-allowable-codebase}"/>
             <attribute name="Caller-Allowable-Codebase" value="*"/>
             <attribute name="Trusted-Only" value="true"/>
             <attribute name="Trusted-Library" value="true"/>
@@ -368,7 +368,7 @@
             <attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
             <attribute name="Permissions" value="all-permissions" />
             <attribute name="Codebase" value="${codebase}"/>
-            <attribute name="Application-Library-Allowable-Codebase" value="*"/>
+            <attribute name="Application-Library-Allowable-Codebase" value="${application-library-allowable-codebase}"/>
             <attribute name="Caller-Allowable-Codebase" value="*"/>
             <attribute name="Trusted-Only" value="true"/>
             <attribute name="Trusted-Library" value="true"/>
