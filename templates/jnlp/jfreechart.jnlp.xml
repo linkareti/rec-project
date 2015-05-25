@@ -15,9 +15,11 @@
         <all-permissions />	
     </security>	
     <update check="always" policy="always" />	
-    <resources>		
+    <resources>
+        <j2se version="1.6+" />		
         <jar href="lib/jfreechart-1.0.9_sig.jar" main="true" />		
-        <jar href="lib/jcommon-1.0.12_sig.jar" />		<!--property name="jnlp.packEnabled" value="true" /-->	
+        <jar href="lib/jcommon-1.0.12_sig.jar" />		
+        <property name="jnlp.packEnabled" value="true" />	
     </resources>	
     <component-desc />
 </jnlp>

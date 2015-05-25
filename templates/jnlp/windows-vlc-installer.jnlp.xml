@@ -49,6 +49,7 @@
 		<!--property name="jnlp.packEnabled" value="true" /-->
 		<property name="vlc.plugins.destdir" value="@vlc.plugins.destdir@" />
 		<property name="vlc.plugins.filename" value="@vlc.plugins.filename@" />
+                <property name="jnlp.packEnabled" value="true" />
 	</resources>
 
 	<!-- obter as libs para as várias archs se necessário -->
