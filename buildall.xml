@@ -369,6 +369,7 @@
 		<foreach target="-repack.jar" param="file" parallel="true" maxThreads="4">
 			<fileset dir="${client.build.dir}/lib">
 				<include name="*.jar" />
+                                <exclude name="*_sig.jar"/>
 			</fileset>
 		</foreach>
 	</target>
@@ -377,6 +378,7 @@
 		<foreach target="-sign.jar.rec" param="file" parallel="true" maxThreads="4">
 			<fileset dir="${client.build.dir}/lib">
 				<include name="*.jar" />
+                                <exclude name="*_sig.jar"/>
 			</fileset>
 		</foreach>
 	</target>
@@ -384,7 +386,7 @@
 	<target name="pack.client.external.lib.dependencies" if="use.pack200" description="packs (pack200) all jars of dependency libs">
 		<foreach target="-pack.200.jar" param="file" parallel="true" maxThreads="4">
 			<fileset dir="${client.build.dir}/lib">
-				<include name="*.jar" />
+				<include name="*_sig.jar" />
 			</fileset>
 		</foreach>
 	</target>
