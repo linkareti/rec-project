@@ -1,3 +1,10 @@
+################################################################################
+#This file is a sample for to be used as a build.properties for a local build. #
+# please look at the remote build key/value local build key/value as options   #
+# choose one or the other if doing a remote or local build, the local build   #
+# key values were left uncommented                                             #
+################################################################################
+
 #Directory where java classes and intermediate files will be put on compiling the software
 build.dir=build/java
 #Directory where zip contents prepared for distribution releases will be put
@@ -15,60 +22,66 @@ javac.sourcelevel=1.6
 #The encoding to use when copying files. Please make sure all created files in the project are UTF-8
 copy.encoding=UTF-8
 
-#All real experiments = aleatorio,boylemariotte,condensadorcilindrico,conducaocalor,g,gamma,langmuir,meteo,momentoinercia,optica,paschen,pendulo,pendulogravitico,pinhole,planck,polaroid,pv,radioactividade,scuba,statsound,telescopio,thomson,webrobot,discos
+#All real experiments = aleatorio,boylemariotte,condensadorcilindrico,conducaocalor,g,gamma,langmuir,meteo,momentoinercia,optica,paschen,pendulo,pendulogravitico,pinhole,planck,polaroid,pv,radioactividade,scuba,statsound,telescopio,thomson,webrobot,discos,colisione,hidrostat
 #All virtual experiments = rollpaper,vbs,vcargas3d,vcartpole,vcg,vcolisao,vdi,vfermap,vlooping,vm3,vmm,vmovproj,vmvbrown,voscilador,vpend2m,vpoisson,vquantum,vstdmap,vtiro,vyounginterf 
 
 #this next section explicits which labs are going to be compiled, packaged, distributed...
 #and the experiments to be build in each lab
-lab.list=basic,intermediate,advanced,virtual_basic,virtual_intermediate,virtual_advanced,new_exps
-basic.experiment.list=aleatorio,boylemariotte,condensadorcilindrico,conducaocalor,g,gamma
-intermediate.experiment.list=langmuir,meteo,momentoinercia,optica,paschen,pendulo,pendulogravitico,pinhole,planck
-advanced.experiment.list=polaroid,pv,radioactividade,scuba,statsound,telescopio,thomson,webrobot,discos
-virtual_basic.experiment.list=vcg,vcolisao,vcartpole,vlooping,vmovproj,vtiro,vdi
-virtual_intermediate.experiment.list=vcargas3d,vpoisson,vyounginterf,vbs,vmvbrown,vm3,vmm,voscilador,vpend2m
-virtual_advanced.experiment.list=vfermap,vquantum,vstdmap
-new_exps.experiment.list=rollpaper
+##remote build key/value
+#lab.list=basic,advanced,new_exps
+#lab.list=basic,intermediate,advanced,virtual_basic,virtual_intermediate,virtual_advanced,new_exps
+##local build key/value
+lab.list=basic
+
+##remote build key/value
+#basic.experiment.list=wpplanetarium
+#advanced.experiment.list=paschen,langmuir,optica,conducaocalor,discos,condensadorcilindrico,aleatorio
+#new_exps.experiment.list=boylemariotte,colisione,pendulo,pendulogravitico,polaroid,hidrostat,worldpendulummaputo,vtiro
+##local build key/value
+basic.experiment.list=vtiro
 
 #In case you wish to run a specific experiment
 #please define the following property to enable
 #just that specific experiment. In every case,
 #the main targets will compile/build/distribute all
 #the experiments defined in the experiment.list
-#experiment.name=vtiro
+##local build key/value
+experiment.name=vtiro
 
 #In case you wish to run a specific multicastcontroller
 #please define the following property to enable
 #just that lab. In every case,
 #the main targets will compile/build/distribute all
 #the labs  defined in the lab.list
-#lab.name=basic
+##local build key/value
+lab.name=basic
 
 
 ###DEPLOYMENT####
-rec.server=
-rec.server.dir=
-web.server=
-web.server.dir=
+rec.server=elab1.ist.utl.pt
+rec.server.dir=/home/elab/rec-deployment
+web.server=elab1.ist.utl.pt
+web.server.dir=/home/elab/rec-deployment
 
 ##KEYSTORE CONFIGURATION###
-rec.keystore=cert/jpereira_dev.jks
+rec.keystore=cert/selfsigned.jks
 #rec.storetype=jks,pkcs12
 rec.storetype=jks
-rec.keypass=8Hwr03Ipq0
-rec.storepass=8Hwr03Ipq0
-rec.alias=jpereira
+rec.keypass=password
+rec.storepass=password
+rec.alias=selfsigned
 
 ##KEYSTORE CONFIGURATION###
-elab.keystore=cert/jpereira_elab.jks
+elab.keystore=cert/selfsigned.jks
 #elab.storetype=jks,pkcs12
 elab.storetype=jks
-elab.keypass=askPass
-elab.storepass=askPass
-elab.alias=jpereira_elab
+elab.keypass=password
+elab.storepass=password
+elab.alias=selfsigned
 
 ##PACK 200##
 #set it to true if you want to generate packed client libs for smaller client deployment
-generate.pack200=true
+generate.pack200=false
 
 ##RUN CONFIGURATION##
 max.memory=1024m
@@ -97,20 +110,25 @@ rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE=15
 multicast.initial.heap=128m
 multicast.max.heap=1024m
 multicast.debug.address.port=8000
+##remote build key/value
+#basic.multicast.controller.host=elab1.ist.utl.pt
+#basic.multicast.controller.port=9001
+#intermediate.multicast.controller.host=elab1.ist.utl.pt
+#intermediate.multicast.controller.port=9002
+#advanced.multicast.controller.host=elab1.ist.utl.pt
+#advanced.multicast.controller.port=9003
+#virtual_basic.multicast.controller.host=elab1.ist.utl.pt
+#virtual_basic.multicast.controller.port=9004
+#virtual_intermediate.multicast.controller.host=elab1.ist.utl.pt
+#virtual_intermediate.multicast.controller.port=9005
+#virtual_advanced.multicast.controller.host=elab1.ist.utl.pt
+#virtual_advanced.multicast.controller.port=9006
+#new_exps.multicast.controller.host=elab1.ist.utl.pt
+##new_exps.multicast.controller.host=elab1_vpn
+#new_exps.multicast.controller.port=9007
+##local build key/value
 basic.multicast.controller.host=localhost
 basic.multicast.controller.port=9001
-intermediate.multicast.controller.host=localhost
-intermediate.multicast.controller.port=9002
-advanced.multicast.controller.host=localhost
-advanced.multicast.controller.port=9003
-virtual_basic.multicast.controller.host=localhost
-virtual_basic.multicast.controller.port=9004
-virtual_intermediate.multicast.controller.host=localhost
-virtual_intermediate.multicast.controller.port=9005
-virtual_advanced.multicast.controller.host=localhost
-virtual_advanced.multicast.controller.port=9006
-new_exps.multicast.controller.host=localhost
-new_exps.multicast.controller.port=9007
 
 ##Additional java arguments to start each multicast jvm
 basic.additional.java.args=
@@ -124,9 +142,18 @@ new_exps.additional.java.args=
 ##SECURITYMANAGER PROPERTIES##
 # This property is necessary for the StartMultiCastController to deal with the security managers that enable the communication with the rec.web.
 # It should match the ID/NAME of the laboratory
-rec.web.host=localhost
+rec.web.host=elab1.ist.utl.pt
 rec.web.port=3700
 basic.rec.web.lab.id=LAB_ME_BASIC
+
+##remote build key/value 
+#intermediate.rec.web.lab.id=LAB_ME_INTERMEDIATE
+#advanced.rec.web.lab.id=LAB_ME_ADVANCED
+#virtual_basic.rec.web.lab.id=VIRT_LAB_IST_BASIC
+#virtual_intermediate.rec.web.lab.id=VIRT_LAB_IST_INTERMEDIATE
+#virtual_advanced.rec.web.lab.id=VIRT_LAB_IST_ADVANCED
+#new_exps.rec.web.lab.id=NEW_EXPS_LAB
+##local build key/value
 intermediate.rec.web.lab.id=LAB_ME_INTERMEDIATE
 advanced.rec.web.lab.id=LAB_ME_ADVANCED
 virtual_basic.rec.web.lab.id=VIRT_LAB_IST_BASIC
@@ -157,7 +184,17 @@ video.enabled=yes
 
 ##JNLP PROPERTIES
 #Please define the codebase without the trailing slash... It will be added automagically when needed!
-codebase=http://elab.ist.utl.pt/rec/e-lab
+##remote build key/value
+#application-library-allowable-codebase=http://elab1.ist.utl.pt/*
+#application-library-allowable-codebase=http://elab.ist.utl.pt/*
+##local key/value
+application-library-allowable-codebase=*
+
+##remote build key/value
+#codebase=http://elab1.ist.utl.pt/rec.web/client
+#codebase=http://elab1.ist.utl.pt/rec.web/client
+##local build key/value
+codebase=file://localhost/home/rvaz/NetBeansProjects/rec/build/java/jars/client
 href=elab-client.jnlp
 title=e-lab - Full Laboratory
 vendor=I.S.T. - U.T.L.
@@ -165,7 +202,7 @@ homepage=http://elab.ist.utl.pt/rec
 one-line=Laboratório e-lab - ME
 tooltip=Laboratório e-lab - ME
 short=Laboratório e-lab - ME
-j2se-version=1.6
+j2se-version=1.6+
 
 
 ##MAIN CLASSES FOR THE VARIOUS COMPONENTS
@@ -182,7 +219,7 @@ experiment.driver.main-class=com.linkare.rec.impl.driver.FullServerMain
 elab.title=e-lab
 elab.vendor=IST
 elab.homepage=http://elab.ist.utl.pt
-elab.description=Laboratórios Online do Instituto Superior Técnico - disponibilizados para o Ministério da Educação de Portugal
+elab.description=Laboratórios Online do Instituto Superior Técnico
 elab.description.oneline=Labs Online
 elab.description.tooltip=Laboratórios Online
 elab.description.short=Labs Online
@@ -268,7 +305,7 @@ openorb.description.oneline=OpenORB Implementation of OMG CORBA 2.4.2 ORB
 openorb.description.tooltip=Community OpenORB
 openorb.description.short=OpenSource CORBA ORB
 
-#And still the vlc/vlcj properties
+#And still the vlc/jvlc properties
 vlc.home.url=http://www.videolan.org/
 vlc.home.title=Videolan Media Player
 vlc.home.description=A Multimedia Player based on opensource GPL License and other underlying software such as gstreamer, ffmpeg and alike
@@ -344,12 +381,15 @@ rec.processingmanager.thread.idletime=11
 ##This properties define the ports used in JMX by labs
 ##Please keep the jmx port as the corba port for the multicast + 16000 if possible, because there is some generic code dependent on it...
 basic.rec.multicastcontroller.jmxremote.port=25001
-intermediate.rec.multicastcontroller.jmxremote.port=25002
-advanced.rec.multicastcontroller.jmxremote.port=25003
-virtual_basic.rec.multicastcontroller.jmxremote.port=25004
-virtual_intermediate.rec.multicastcontroller.jmxremote.port=25005
-virtual_advanced.rec.multicastcontroller.jmxremote.port=25006
-new_exps.rec.multicastcontroller.jmxremote.port=25007
+##remote build key/value
+#intermediate.rec.multicastcontroller.jmxremote.port=25002
+#advanced.rec.multicastcontroller.jmxremote.port=25003
+#virtual_basic.rec.multicastcontroller.jmxremote.port=25004
+#virtual_intermediate.rec.multicastcontroller.jmxremote.port=25005
+#virtual_advanced.rec.multicastcontroller.jmxremote.port=25006
+#new_exps.rec.multicastcontroller.jmxremote.port=25007
+#java.rmi.server.hostname=`hostname -i`
+##local build key/value
 java.rmi.server.hostname=`hostname -i`
 
 ###EXPERIMENT REPOSITORY###
@@ -360,6 +400,9 @@ rec.multicast.repository=com.linkare.rec.impl.multicast.repository.impl.RemoteRe
 
 ##rec.web END POINT##
 #The following property defining the URL which is used by system to access the webservices
+##remote build key/value
+#rec.web.endpoint=http://elab1.ist.utl.pt:8080/rec-services
+##local build key/value
 rec.web.endpoint=http://localhost:8080/rec-services
 
 ##SYSTEM PROPERTIES - Chat##
@@ -376,7 +419,7 @@ rec.apparatus.autoacquireresult=false
 
 ##PATH PROPERTIES FOR INSTALLATION##
 ##Define the user home directory where the system will be installed (this is for replacing into scripts)
-install.dir=${basedir}
+install.dir=/home/elab
 ##Define the subdirectory, if any, where the deployments will be made, relative to the install.dir above. 
 ##Please note that specifying a path requires a forward slash (or back slash on windows) at the begggining
 deployment.subdir=/rec-deployment
