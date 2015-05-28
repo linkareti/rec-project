@@ -121,6 +121,7 @@ import com.linkare.rec.impl.newface.utils.PreferencesUtils;
 import com.linkare.rec.impl.ui.table.DefaultExperimentDataTable;
 import com.linkare.rec.impl.utils.ORBBean;
 import com.linkare.rec.impl.utils.SystemExitSecurityManager;
+import com.linkare.rec.utils.ClassUtils;
 import com.linkare.rec.web.config.Apparatus;
 import com.linkare.rec.web.config.Display;
 import com.linkare.rec.web.config.Lab;
@@ -1487,7 +1488,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 		} else { // Ok the user wants to load his own Factory
 			try {
-				final Object displayFactoryTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
+				final Object displayFactoryTemp = ClassUtils.beansInstantiate(this.getClass().getClassLoader(),
 						factoryLocation); 
 				if (java.beans.Beans.isInstanceOf(displayFactoryTemp, DisplayFactory.class)) {
 					factory = (DisplayFactory) displayFactoryTemp;
@@ -1542,7 +1543,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		if (dataModelLocation != null) {
 			try {
 				ReCApplication.LOGGER.fine("Instatiating ExpDataModel from " + dataModelLocation);
-				final Object expDataModelTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
+				final Object expDataModelTemp = ClassUtils.beansInstantiate(this.getClass().getClassLoader(),
 						dataModelLocation);
 				if (java.beans.Beans.isInstanceOf(expDataModelTemp, ExpDataModel.class)) {
 					experimentData.setDataModel((ExpDataModel) expDataModelTemp);
