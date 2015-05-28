@@ -30,12 +30,16 @@
     </security>    
     <update check="always" policy="always" />    
     <resources>        
-        <j2se version="@j2se-version@" /><!-- Jar eLab Common --><!-- Jar eLab Client --><!--Start Experiment Jars --><!--End Experiment Jars -->        
+        <j2se version="@j2se-version@" />
+        <!-- Jar eLab Client -->
+        <!-- Jar eLab Common -->
+        <!--Start Experiment Jars -->
+        <!--End Experiment Jars -->        
         <extension name="JFreeChartClient" href="jfreechart.jnlp" />        
         <extension name="OpenORBClient" href="openorb.jnlp" />        
         <extension name="ReCFramework" href="rec-framework.jnlp" />         
         <extension name="Java3D" href="j3d.jnlp" /><!--<extension name="JHelp" href="jhelp.jnlp"/> -->        
-        <property name="jnlp.packEnabled" value="true" />        
+        <!--<property name="jnlp.packEnabled" value="true" />-->        
         <property name="rec.face.config" value="@codebase@/etc/ReCFaceConfig.xml" />        
         <property name="rec.multicastcontroller.bindname" value="MultiCastController" />        
         <property name="org.omg.CORBA.ORBClass" value="org.openorb.orb.core.ORB" />        

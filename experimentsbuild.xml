@@ -100,7 +100,7 @@
 				</classpath>				
 			</javac>
 
-			<copy todir="${experiments.classes.dir}/@{experiment.name}/client" overwrite="true">
+			<copy todir="${experiments.classes.dir}/@{experiment.name}/client" overwrite="true" encoding="${copy.encoding}">
 				<fileset dir="experiments/@{experiment.name}/src/java/client">
 					<exclude name="**/*.java" />
 					<exclude name="**/*.form" />
@@ -555,16 +555,16 @@
             <echo>
                 experiment.autoconnect.id=${experiment.autoconnect.id}
             </echo>
-            <copy file="${jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/${experiment.autoconnect.id}.jnlp" />
-            <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!-- Auto Connect ID --&gt;">
+            <copy file="${jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/${experiment.autoconnect.id}.jnlp" encoding="${copy.encoding}"/>
+            <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!-- Auto Connect ID --&gt;" encoding="${copy.encoding}">
                 <replacevalue>
 					<![CDATA[<property name="rec.apparatus.autoconnect.id" value="@rec.apparatus.autoconnect.id@" />]]></replacevalue>
             </replace>
-            <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!-- Auto Acquire Result --&gt;">
+            <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!-- Auto Acquire Result --&gt;" encoding="${copy.encoding}">
                 <replacevalue>
 					<![CDATA[<property name="rec.apparatus.autoacquireresult" value="@rec.apparatus.autoacquireresult@" />]]></replacevalue>
             </replace>
-            <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" propertyFile="experiments/@{experiment.name}/etc/build.properties">
+            <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" propertyFile="experiments/@{experiment.name}/etc/build.properties" encoding="${copy.encoding}">
                 <replacefilter token="@elab.title@" property="@{experiment.name}.title" />
                 <replacefilter token="@elab.vendor@" property="@{experiment.name}.vendor" />
                 <replacefilter token="@elab.homepage@" property="@{experiment.name}.homepage" />
@@ -587,7 +587,7 @@
             </replace>
 
 
-            <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" propertyFile="build.properties">
+            <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" propertyFile="build.properties" encoding="${copy.encoding}">
                 <replacefilter token="@codebase@" property="codebase" />
                 <replacefilter token="@elab.title@" property="elab.title" />
                 <replacefilter token="@elab.vendor@" property="elab.vendor" />
@@ -615,17 +615,17 @@
                 <replacefilter token="@rec.client.processingmanager.threadpool.maxsize@" property="rec.client.processingmanager.threadpool.maxsize" />
                 <replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
             </replace>
-            <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_@{experiment.name}_sig.jar&quot; main=&quot;true&quot;/&gt;" />
-            <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot;/&gt;" />
-			<replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
-            <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
+            <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_@{experiment.name}_sig.jar&quot; main=&quot;true&quot;/&gt;" encoding="${copy.encoding}"/>
+            <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot;/&gt;" encoding="${copy.encoding}"/>
+			<replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" encoding="${copy.encoding}"/>
+            <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" encoding="${copy.encoding}"/>
 
-            <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!--End Experiment Jars --&gt;">
+            <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="&lt;!--End Experiment Jars --&gt;" encoding="${copy.encoding}">
                 <replacevalue>
-					<![CDATA[<jar href="@temporary.experiment.jar@" download="lazy"/>
+					<![CDATA[<jar href="@temporary.experiment.jar@"/>
 					<!--End Experiment Jars -->]]></replacevalue>
             </replace>
-            <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
+            <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" encoding="${copy.encoding}"/>
                                      
             <duplicate.jar.include.jnlp 
                 destination.folder="${client.build.dir}" 

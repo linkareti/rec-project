@@ -50,6 +50,7 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.Socket;
+import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -78,6 +79,7 @@ import org.jdesktop.application.SingleFrameApplication;
 import org.jdesktop.application.View;
 
 import com.linkare.net.protocols.Protocols;
+import com.linkare.net.protocols.recresource.Handler;
 import com.linkare.rec.acquisition.UserInfo;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.ApparatusClientBean;
@@ -102,6 +104,7 @@ import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.config.ReCSystemPropertyLocation;
 import com.linkare.rec.impl.exceptions.ExceptionCode;
 import com.linkare.rec.impl.exceptions.ReCConfigurationException;
+import com.linkare.rec.impl.i18n.ClassloaderDelegate;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.newface.ReCAppEvent.ReCCommand;
 import com.linkare.rec.impl.newface.component.ApparatusComboBoxModel;
@@ -127,6 +130,8 @@ import com.linkare.rec.web.config.Display;
 import com.linkare.rec.web.config.Lab;
 import com.linkare.rec.web.config.LocalizationBundle;
 import com.linkare.rec.web.config.ReCFaceConfig;
+
+import org.jdesktop.application.ApplicationContext;
 
 /**
  * The main class of the application.
@@ -645,7 +650,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		new Thread() {
 			public void run() {
 				try {
-					splash.refreshBusyIcon(true);
+                                        splash.refreshBusyIcon(true);
 					splash.refreshLabel(getRecApplicationBundle().getString(
 							"Application.splashScreen.initialize.message"));
 					startApplication();
@@ -1704,8 +1709,58 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	 * @param args
 	 */
 	public static void main(final String[] args) {
+            ClassUtils.setOriginalThreadContextClassLoader(Thread.currentThread().getContextClassLoader());
+            ReCResourceBundle.setClassLoaderDelegate(new ClassloaderDelegate() {
+
+                @Override
+                public Object beansInstantiate(ClassLoader cl, String className) throws IOException, ClassNotFoundException {
+                    return ClassUtils.beansInstantiate(cl, className);
+                }
+
+                @Override
+                public Class<?> findClass(String className, ClassLoader cl) throws ClassNotFoundException {
+                    return ClassUtils.findClass( className,cl);
+                }
+            });
+            
+            Handler.setClassloaderDelegate(new com.linkare.net.protocols.recresource.ClassloaderDelegate() {
+               public URL loadResource(String resourceLocation, ClassLoader classLoader) {
+                   return ClassUtils.loadResource(resourceLocation, classLoader);
+               } 
+            });
+            
+            try {
+                System.out.println("LOADING TIRO");
+                Class vtiroClass=ClassUtils.findClass("pt.utl.ist.elab.client.vtiro.Tiro", ReCApplication.class.getClassLoader());
+                System.out.println("FOUND TIRO @ " + vtiroClass);
+            }catch(Exception e){
+                e.printStackTrace(System.out);
+            }
+            
+            try {
+                URL resource=ClassUtils.loadResource("pt/utl/ist/elab/client/vtiro/resources/tiro_background.PNG", ReCApplication.class.getClassLoader());
+                System.out.println("FOUND tiro resource @ " + resource);
+            }catch(Exception e){
+                e.printStackTrace(System.out);
+            }
+            
+            try {
+                URL resource=ClassUtils.loadResource("/pt/utl/ist/elab/client/vtiro/resources/tiro_background.PNG", ReCApplication.class.getClassLoader());
+                System.out.println("FOUND tiro / resource @ " + resource);
+            }catch(Exception e){
+                e.printStackTrace(System.out);
+            }
+            
+            
+            
 		System.setSecurityManager(SYSTEM_EXIT_PREVENTER_SECURITY_MANAGER);
-		Application.launch(ReCApplication.class, args);
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        Thread.currentThread().setContextClassLoader(ReCApplication.class.getClassLoader());
+                        Application.launch(ReCApplication.class, args);
+                    }
+                });
 	}
 
 	public static class ExperimentUIData {
