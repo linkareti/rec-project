@@ -5,6 +5,7 @@
  */
 package com.linkare.rec.utils;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,13 +15,32 @@ import java.util.logging.Logger;
  */
 public final class ClassUtils {
 
-    private ClassUtils () {
+    public static Object beansInstantiate(ClassLoader classLoader, String factoryLocation) throws IOException, ClassNotFoundException {
+        boolean instantiated = false;
+        Object retVal = null;
+        try {
+            retVal = java.beans.Beans.instantiate(Thread.currentThread().getContextClassLoader(), factoryLocation);
+            instantiated = true;
+        } catch (IOException ex) {
+            Logger.getLogger(ClassUtils.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ClassUtils.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (!instantiated) {
+                retVal = java.beans.Beans.instantiate(classLoader, factoryLocation);
+            }
+        }
+
+        return retVal;
     }
-    
+
+    private ClassUtils() {
+    }
+
     public static Class<?> findClass(final String className, final ClassLoader contextClassLoader) throws ClassNotFoundException {
         boolean foundClass = false;
         Class<?> c = null;
-        try {           
+        try {
             c = Class.forName(className, false, Thread.currentThread().getContextClassLoader());
             foundClass = true;
         } catch (ClassNotFoundException cnfex) {
@@ -32,8 +52,8 @@ public final class ClassUtils {
                 c = Class.forName(className, false, contextClassLoader);
             }
         }
-        
+
         return c;
-     
-    }   
+
+    }
 }

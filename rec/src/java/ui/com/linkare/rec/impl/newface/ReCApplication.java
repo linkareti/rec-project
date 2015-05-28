@@ -1488,7 +1488,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		} else { // Ok the user wants to load his own Factory
 			try {
 				final Object displayFactoryTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
-						factoryLocation);
+						factoryLocation); 
 				if (java.beans.Beans.isInstanceOf(displayFactoryTemp, DisplayFactory.class)) {
 					factory = (DisplayFactory) displayFactoryTemp;
 				}
@@ -1497,9 +1497,13 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			}
 		}
 
+                System.out.println("factory is " +  factory);
+               
 		if (factory != null) {
 			final List<Display> availableDisplays = experimentHistory.getApparatusConfig().getDisplay();
-
+                    System.out.println("availableDisplays is " + availableDisplays.size());
+                    System.out.println("availableDisplays is " + Arrays.deepToString(availableDisplays.toArray(new Display[0])));
+                    
 			factory.init(availableDisplays);
 			factory.setAcquisitionInfo(experimentHistory.getApparatus().getHardwareInfo());
 			try {
@@ -1507,6 +1511,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			} catch (final Exception e) {
 				ReCApplication.LOGGER.log(Level.SEVERE, "Could not set aquisition config", e);
 			}
+                            System.out.println("Setting list of displays on the experimentUIData "+factory.getDisplays().size());
 			experimentData.setDataDisplays(factory.getDisplays());
 		}
 
