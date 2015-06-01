@@ -3,6 +3,8 @@ package com.linkare.rec.impl.data;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -53,7 +55,7 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	/**
 	 * An indexed {@link HashMap} of rowNumber to {@link PhysicsValue}[] of data
 	 */
-	private HashMap<Integer, PhysicsValue[]> samplesRows = null;
+	private ConcurrentMap<Integer, PhysicsValue[]> samplesRows = null;
 
 	/**
 	 * The last available sample count
@@ -141,7 +143,7 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 				// Try to signal the garbage collector since we are near
 				// exaustion
 			} catch (final IOException e) {
-
+				e.printStackTrace();
 			}
 		}
 		// Now say to all listeners that data is available
@@ -163,10 +165,10 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 
 		// and creates or resizes the samplesRows variable
 		if (samplesRows == null) {
-			samplesRows = new HashMap<Integer, PhysicsValue[]>(totalSamples);
+			samplesRows = new ConcurrentHashMap<Integer, PhysicsValue[]>(totalSamples);
 		} else {
 			final Map<Integer, PhysicsValue[]> tempRows = samplesRows;
-			samplesRows = new HashMap<Integer, PhysicsValue[]>(totalSamples);
+			samplesRows = new ConcurrentHashMap<Integer, PhysicsValue[]>(totalSamples);
 			samplesRows.putAll(tempRows);
 		}
 	}
