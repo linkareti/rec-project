@@ -31,7 +31,7 @@ public class WorldPendulumTableModelProxy extends DefaultTableModel implements E
 	// BIG SILENT NOOP
 	@Override
 	public void dataModelWaiting() {
-		fireTableStructureChanged();
+		//fireTableStructureChanged();
 	}
 
 	// BIG SILENT NOOP
