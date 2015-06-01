@@ -394,9 +394,11 @@ java.rmi.server.hostname=`hostname -i`
 
 ###EXPERIMENT REPOSITORY###
 ##If rec-web is available and installed, please define the implementation of the repository as remote
-rec.multicast.repository=com.linkare.rec.impl.multicast.repository.impl.RemoteRepository
+##remote build key/value (unless experimenting with rec.web)
+#rec.multicast.repository=com.linkare.rec.impl.multicast.repository.impl.RemoteRepository
 ##Otherwise use a local repository on FileSystem
-#rec.multicast.repository=com.linkare.rec.impl.multicast.repository.impl.FSRepository
+##local build key/value
+rec.multicast.repository=com.linkare.rec.impl.multicast.repository.impl.FSRepository
 
 ##rec.web END POINT##
 #The following property defining the URL which is used by system to access the webservices
