@@ -64,11 +64,6 @@ public final class ClassUtils {
     public static Class<?> findClass(final String className, final ClassLoader contextClassLoader) throws ClassNotFoundException {
         boolean foundClass = false;
         Class<?> c = null;
-
-        System.out.println("***** Loading class "+className+" @stack ");
-        new Exception().printStackTrace(System.out);
-        System.out.println("*********");
-        System.out.println("");
         
         try {
             if (ORIGINAL_THREAD_CLASSLOADER != null) {
