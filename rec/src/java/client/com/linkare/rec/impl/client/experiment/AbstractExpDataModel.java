@@ -195,32 +195,11 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 			listener.dataModelWaiting();
 		}
 
-		if (lastsample > 0 && dataIsAvailableAtState(getDataCollectorState())) {
-			listener.newSamples(new NewExpDataEvent(this, 0, lastsample));
+		if (lastsample > 0) {
+			fireExpDataModelListenerNewSamples(new NewExpDataEvent(this, 0, lastsample));
 		}
 	}
 
-	/**
-	 * @param dataCollectorState
-	 * @return
-	 */
-	private boolean dataIsAvailableAtState(DataCollectorState dataCollectorState) {
-		boolean retVal = false;
-		switch (dataCollectorState.getValue()) {
-		case DataCollectorState._DP_ENDED:
-		case DataCollectorState._DP_STARTED:
-		case DataCollectorState._DP_STOPED:
-			retVal = true;
-			break;
-		case DataCollectorState._DP_ERROR:
-		case DataCollectorState._DP_STARTED_NODATA:
-		case DataCollectorState._DP_WAITING:
-			retVal = false;
-			break;
-		}
-
-		return retVal;
-	}
 
 	/**
 	 * Removes ExpDataModelListener from the list of listeners.
@@ -344,7 +323,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	 */
 	private void fireExpDataModelListenerNewSamples(final NewExpDataEvent event) {
 
-		if (!dataIsAvailableAtState(getDataCollectorState())) {
+		if (!isDataAvailable()) {
 			return;
 		}
 
