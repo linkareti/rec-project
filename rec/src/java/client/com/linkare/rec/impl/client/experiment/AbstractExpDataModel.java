@@ -111,7 +111,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	 */
 	@Override
 	public void setDpwDataSource(final DataProducer remoteDataProducer) throws MaximumClientsReached {
-		
+
 		super.setRemoteDataProducer(remoteDataProducer);
 
 		if (getDataReceiver() != null) {
@@ -195,9 +195,31 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 			listener.dataModelWaiting();
 		}
 
-		if (lastsample > 0) {
+		if (lastsample > 0 && dataIsAvailableAtState(getDataCollectorState())) {
 			listener.newSamples(new NewExpDataEvent(this, 0, lastsample));
 		}
+	}
+
+	/**
+	 * @param dataCollectorState
+	 * @return
+	 */
+	private boolean dataIsAvailableAtState(DataCollectorState dataCollectorState) {
+		boolean retVal = false;
+		switch (dataCollectorState.getValue()) {
+		case DataCollectorState._DP_ENDED:
+		case DataCollectorState._DP_STARTED:
+		case DataCollectorState._DP_STOPED:
+			retVal = true;
+			break;
+		case DataCollectorState._DP_ERROR:
+		case DataCollectorState._DP_STARTED_NODATA:
+		case DataCollectorState._DP_WAITING:
+			retVal = false;
+			break;
+		}
+
+		return retVal;
 	}
 
 	/**
@@ -321,6 +343,11 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	 * @param event The event to be fired
 	 */
 	private void fireExpDataModelListenerNewSamples(final NewExpDataEvent event) {
+
+		if (!dataIsAvailableAtState(getDataCollectorState())) {
+			return;
+		}
+
 		if (listenerList == null) {
 			if (LOGGER.isLoggable(Level.FINEST)) {
 				LOGGER.log(Level.FINEST, "****** No listeners for AbstractExpDataModel????");
@@ -420,7 +447,6 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	public String getDataProducerName() {
 		return remoteDataProducer.getDataProducerName();
 	}
-
 
 	@Override
 	public void pause() {

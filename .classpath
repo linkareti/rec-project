@@ -148,8 +148,6 @@
 	<classpathentry kind="src" path="experiments/worldpendulum/src/java/server"/>
 	<classpathentry kind="src" path="experiments/wpplanetarium/src/java/client"/>
 	<classpathentry kind="src" path="experiments/wpplanetarium/src/java/server"/>
-	<classpathentry kind="src" path="experiments/wpilheus/src/java/client"/>
-	<classpathentry kind="src" path="experiments/wpilheus/src/java/server"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="rec/lib/java/client/appframework-1.0.3.jar"/>
