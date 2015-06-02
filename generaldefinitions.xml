@@ -417,6 +417,9 @@
 
     <macrodef name="create.jnlp.full.client.compile" description="Create the FullClient JNLP launch file for each lab">
         <sequential>
+            <condition property="jnlpDisabled">
+                <matches string="${codebase}" pattern="file://.*"/>
+            </condition>                        
             <copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/rec-framework.jnlp" encoding="${copy.encoding}">
                 <filterset begintoken="@" endtoken="@" filtersfile="build.properties" />
             </copy>
@@ -456,6 +459,10 @@
 
             <replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot; main=&quot;true&quot;/&gt;" encoding="${copy.encoding}"/>
             <replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" encoding="${copy.encoding}"/>
+            <antcall target="insert.jnlp.enabled">
+                <param name="jnlp.file.name" value="${elab.client.classes.dir}/rec-framework.jnlp"/>
+            </antcall>
+
 
             <copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/openorb.jnlp" encoding="${copy.encoding}"/>
             <replace file="${elab.client.classes.dir}/openorb.jnlp" propertyFile="build.properties" encoding="${copy.encoding}">
@@ -468,11 +475,17 @@
                 <replacefilter token="@openorb.description.tooltip@" property="openorb.description.tooltip" />
                 <replacefilter token="@openorb.description.short@" property="openorb.description.short" />
             </replace>
+            <antcall target="insert.jnlp.enabled">
+                <param name="jnlp.file.name" value="${elab.client.classes.dir}/openorb.jnlp"/>
+            </antcall>
 
             <copy file="${jnlp.j3d.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/j3d.jnlp" encoding="${copy.encoding}">
                 <filterset begintoken="@" endtoken="@" filtersfile="build.properties" />
             </copy>
             <replace file="${elab.client.classes.dir}/j3d.jnlp" token="@codebase@" value="${codebase}" encoding="${copy.encoding}"/>
+            <antcall target="insert.jnlp.enabled">
+                <param name="jnlp.file.name" value="${elab.client.classes.dir}/j3d.jnlp"/>
+            </antcall>
 
             <copy file="${jnlp.jfreechart.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/jfreechart.jnlp" encoding="${copy.encoding}"/>
             <replace file="${elab.client.classes.dir}/jfreechart.jnlp" propertyFile="build.properties" encoding="${copy.encoding}">
@@ -487,6 +500,9 @@
                 <replacefilter token="@jfreechart.icon@" property="jfreechart.icon" />
                 <replacefilter token="@jfreechart.icon.splash@" property="jfreechart.icon.splash" />
             </replace>
+            <antcall target="insert.jnlp.enabled">
+                <param name="jnlp.file.name" value="${elab.client.classes.dir}/jfreechart.jnlp"/>
+            </antcall>
 
             <copy file="${jnlp.linuxinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/linux-vlc-installer.jnlp" encoding="${copy.encoding}"/>
             <replace file="${elab.client.classes.dir}/linux-vlc-installer.jnlp" propertyFile="build.properties" encoding="${copy.encoding}">
@@ -517,6 +533,9 @@
                 <replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
                 <replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
             </replace>
+            <antcall target="insert.jnlp.enabled">
+                <param name="jnlp.file.name" value="${elab.client.classes.dir}/linux-vlc-installer.jnlp"/>
+            </antcall>
 
             <copy file="${jnlp.macinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/macosx-vlc-installer.jnlp" encoding="${copy.encoding}"/>
             <replace file="${elab.client.classes.dir}/macosx-vlc-installer.jnlp" propertyFile="build.properties" encoding="${copy.encoding}">
@@ -547,6 +566,9 @@
                 <replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
                 <replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
             </replace>
+            <antcall target="insert.jnlp.enabled">
+                <param name="jnlp.file.name" value="${elab.client.classes.dir}/macosx-vlc-installer.jnlp"/>
+            </antcall>
 
             <copy file="${jnlp.windowsinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/windows-vlc-installer.jnlp" encoding="${copy.encoding}"/>
             <replace file="${elab.client.classes.dir}/windows-vlc-installer.jnlp" propertyFile="build.properties" encoding="${copy.encoding}">
@@ -577,6 +599,9 @@
                 <replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
                 <replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
             </replace>
+            <antcall target="insert.jnlp.enabled">
+                <param name="jnlp.file.name" value="${elab.client.classes.dir}/windows-vlc-installer.jnlp"/>
+            </antcall>
 
             <copy file="${jnlp.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/elab-client.jnlp" encoding="${copy.encoding}"/>
             <replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Auto Connect ID --&gt;" value="" encoding="${copy.encoding}"/>
@@ -612,11 +637,7 @@
 
             <replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" encoding="${copy.encoding}"/>
             <replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot; /&gt;" encoding="${copy.encoding}"/>
-
-            <condition property="jnlpEnabled">
-                <matches string="${codebase}" pattern="file://.*"/>
-            </condition>                        
-            <antcall target="replace.jnlp.enabled">
+            <antcall target="insert.jnlp.enabled">
                 <param name="jnlp.file.name" value="${elab.client.classes.dir}/elab-client.jnlp"/>
             </antcall>
                                                
@@ -652,7 +673,9 @@
 
 <macrodef name="create.jnlp.rec.client.build" description="Create the FullClient JNLP launch file">
         <sequential>
-
+             <condition property="jnlpDisabled">
+                <matches string="${codebase}" pattern="file://.*"/>
+            </condition>
             <copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${client.build.dir}/rec-framework.jnlp" encoding="${copy.encoding}"/>
             <replace file="${client.build.dir}/rec-framework.jnlp" propertyFile="build.properties" encoding="${copy.encoding}">
                 <replacefilter token="@codebase@" property="codebase" />
@@ -683,6 +706,9 @@
 
             <replace file="${client.build.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" encoding="${copy.encoding}"/>
             <replace file="${client.build.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" encoding="${copy.encoding}"/>
+            <antcall target="insert.jnlp.enabled">
+                <param name="jnlp.file.name" value="${client.build.dir}/rec-framework.jnlp"/>
+            </antcall>
 
         </sequential>
     </macrodef>
@@ -692,6 +718,9 @@
 
     <macrodef name="create.jnlp.full.client.build" description="Create the FullClient JNLP launch file">
         <sequential>
+            <condition property="jnlpDisabled">
+                <matches string="${codebase}" pattern="file://.*"/>
+            </condition>                        
 
             <copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${client.build.dir}/openorb.jnlp" encoding="${copy.encoding}"/>
             <replace file="${client.build.dir}/openorb.jnlp" propertyFile="build.properties" encoding="${copy.encoding}">
@@ -704,6 +733,9 @@
                 <replacefilter token="@openorb.description.tooltip@" property="openorb.description.tooltip" />
                 <replacefilter token="@openorb.description.short@" property="openorb.description.short" />
             </replace>
+            <antcall target="insert.jnlp.enabled">
+                <param name="jnlp.file.name" value="${client.build.dir}/openorb.jnlp"/>
+            </antcall>
 
             <copy file="${jnlp.j3d.template.file}" overwrite="yes" tofile="${client.build.dir}/j3d.jnlp" encoding="${copy.encoding}">
                 <filterset begintoken="@" endtoken="@" filtersfile="build.properties" />
@@ -711,6 +743,9 @@
             <replace file="${client.build.dir}/j3d.jnlp" propertyFile="build.properties" encoding="${copy.encoding}">
                 <replacefilter token="@codebase@" property="codebase" />
             </replace>
+            <antcall target="insert.jnlp.enabled">
+                <param name="jnlp.file.name" value="${client.build.dir}/j3d.jnlp"/>
+            </antcall>
 
             <copy file="${jnlp.jfreechart.template.file}" overwrite="yes" tofile="${client.build.dir}/jfreechart.jnlp" encoding="${copy.encoding}"/>
             <replace file="${client.build.dir}/jfreechart.jnlp" propertyFile="build.properties" encoding="${copy.encoding}">
@@ -725,6 +760,9 @@
                 <replacefilter token="@jfreechart.icon@" property="jfreechart.icon" />
                 <replacefilter token="@jfreechart.icon.splash@" property="jfreechart.icon.splash" />
             </replace>
+            <antcall target="insert.jnlp.enabled">
+                <param name="jnlp.file.name" value="${client.build.dir}/jfreechart.jnlp"/>
+            </antcall>
 
             <copy file="${jnlp.linuxinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/linux-vlc-installer.jnlp" encoding="${copy.encoding}"/>
             <replace file="${client.build.dir}/linux-vlc-installer.jnlp" propertyFile="build.properties" encoding="${copy.encoding}">
@@ -755,6 +793,10 @@
                 <replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
                 <replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
             </replace>
+            <antcall target="insert.jnlp.enabled">
+                <param name="jnlp.file.name" value="${client.build.dir}/linux-vlc-installer.jnlp"/>
+            </antcall>
+                        
             <copy file="${jnlp.macinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/macosx-vlc-installer.jnlp" encoding="${copy.encoding}"/>
             <replace file="${client.build.dir}/macosx-vlc-installer.jnlp" propertyFile="build.properties" encoding="${copy.encoding}">
                 <replacefilter token="@codebase@" property="codebase" />
@@ -783,7 +825,11 @@
                 <replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
                 <replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
                 <replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
-            </replace>
+            </replace>            
+            <antcall target="insert.jnlp.enabled">
+                <param name="jnlp.file.name" value="${client.build.dir}/macosx-vlc-installer.jnlp"/>
+            </antcall>
+            
             <copy file="${jnlp.windowsinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/windows-vlc-installer.jnlp" encoding="${copy.encoding}"/>
             <replace file="${client.build.dir}/windows-vlc-installer.jnlp" propertyFile="build.properties" encoding="${copy.encoding}">
                 <replacefilter token="@codebase@" property="codebase" />
@@ -813,7 +859,10 @@
                 <replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
                 <replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
             </replace>
-
+            <antcall target="insert.jnlp.enabled">
+                <param name="jnlp.file.name" value="${client.build.dir}/windows-vlc-installer.jnlp"/>
+            </antcall>
+            
             <copy file="${jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/elab-client.jnlp" encoding="${copy.encoding}"/>
             <replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Auto Connect ID --&gt;" value="" encoding="${copy.encoding}"/>
             <replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Auto Acquire Result --&gt;" value="" encoding="${copy.encoding}"/>
@@ -847,12 +896,8 @@
             </replace>
 
             <replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" encoding="${copy.encoding}"/>
-            <replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot; /&gt;" encoding="${copy.encoding}"/>
-            
-            <condition property="jnlpEnabled">
-                <matches string="${codebase}" pattern="file://.*"/>
-            </condition>                        
-            <antcall target="replace.jnlp.enabled">
+            <replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot; /&gt;" encoding="${copy.encoding}"/>            
+            <antcall target="insert.jnlp.enabled">
                 <param name="jnlp.file.name" value="${client.build.dir}/elab-client.jnlp"/>
             </antcall>
                                                 
@@ -861,7 +906,7 @@
         </sequential>
     </macrodef>
 
-    <target name="replace.jnlp.enabled" description="Build one experiment, compile, create jnlp, pack and sign driver and client" unless="${jnlpEnabled}" >
+    <target name="insert.jnlp.enabled" description="Build one experiment, compile, create jnlp, pack and sign driver and client" unless="${jnlpDisabled}" >
         <sequential>    
             <echo>
                 ******************************************************                

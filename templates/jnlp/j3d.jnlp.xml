@@ -39,7 +39,7 @@
         <jar href="lib/j3dcore_sig.jar" download="eager" part="java3d" main="true"/>		
         <jar href="lib/j3dutils_sig.jar" download="lazy" part="java3d" />		
         <jar href="lib/vecmath_sig.jar" download="lazy" part="java3d" />		
-        <property name="jnlp.packEnabled" value="true" />	
+        <!-- Jnlp pack enabled -->	
     </resources>	<!-- ******************************************************************* 		****************** Resources por SO / Arch ************************ ******************************************************************* -->	<!-- Check http://lopica.sourceforge.net/os.html for the os/arch matrix -->	<!-- Windows -->	
     <resources arch="x86" os="Windows">		
         <nativelib href="lib/j3d-native-windows-i586_sig.jar" />	

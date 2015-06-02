@@ -60,7 +60,7 @@
         <jar href="lib/rec.web-api_sig.jar" />			
         <!-- Jar ReC Common -->		
         <!-- property name="rec.percent.freememory.threshold.serialization" value="80" / -->		
-        <property name="jnlp.packEnabled" value="true" />	
+        <!-- Jnlp pack enabled -->	
     </resources>	
     <!-- ******************************************************************* 		****************** Resources por SO / Arch ************************ ******************************************************************* -->	
     <!-- falta archs x86-64 (ou x86_64?), amd64 e amd -->	<!--  resources arch="x86" os="Windows">		

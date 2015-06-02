@@ -25,7 +25,7 @@
         <jar href="lib/openorb_ots-1.4.0_sig.jar" />		
         <jar href="lib/openorb_pss-1.4.0_sig.jar" />		
         <jar href="lib/commons-csv-1.0-SNAPSHOT_sig.jar" />		
-        <property name="jnlp.packEnabled" value="true" />	
+        <!-- Jnlp pack enabled -->	
     </resources>	
     <component-desc />	
 </jnlp>

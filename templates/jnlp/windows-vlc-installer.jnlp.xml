@@ -46,10 +46,9 @@
 		<j2se version="1.6+" />
 		<jar download="eager" href="ReCClient_sig.jar" main="true" />
 		<jar download="eager" href="ReCCommon_sig.jar" />
-		<!--property name="jnlp.packEnabled" value="true" /-->
+		<!-- Jnlp pack enabled -->
 		<property name="vlc.plugins.destdir" value="@vlc.plugins.destdir@" />
 		<property name="vlc.plugins.filename" value="@vlc.plugins.filename@" />
-                <property name="jnlp.packEnabled" value="true" />
 	</resources>
 
 	<!-- obter as libs para as várias archs se necessário -->
