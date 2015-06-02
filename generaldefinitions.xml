@@ -612,7 +612,14 @@
 
             <replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" encoding="${copy.encoding}"/>
             <replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot; /&gt;" encoding="${copy.encoding}"/>
-                       
+
+            <condition property="jnlpEnabled">
+                <matches string="${codebase}" pattern="file://.*"/>
+            </condition>                        
+            <antcall target="replace.jnlp.enabled">
+                <param name="jnlp.file.name" value="${elab.client.classes.dir}/elab-client.jnlp"/>
+            </antcall>
+                                               
             <foreach list="${lab.list}" param="lab.name" target="-add.lab.experiments.to.full.jnlp.compile" parallel="false" />
 
         </sequential>
@@ -841,12 +848,30 @@
 
             <replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" encoding="${copy.encoding}"/>
             <replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Common --&gt;" value="&lt;jar href=&quot;ELabCommon_sig.jar&quot; /&gt;" encoding="${copy.encoding}"/>
-
+            
+            <condition property="jnlpEnabled">
+                <matches string="${codebase}" pattern="file://.*"/>
+            </condition>                        
+            <antcall target="replace.jnlp.enabled">
+                <param name="jnlp.file.name" value="${client.build.dir}/elab-client.jnlp"/>
+            </antcall>
                                                 
             <foreach list="${lab.list}" param="lab.name" target="-add.lab.experiments.to.full.jnlp.build" parallel="false" />
 
         </sequential>
     </macrodef>
+
+    <target name="replace.jnlp.enabled" description="Build one experiment, compile, create jnlp, pack and sign driver and client" unless="${jnlpEnabled}" >
+        <sequential>    
+            <echo>
+                ******************************************************                
+                Enabled jnlp.packEnabled property in ${jnlp.file.name}                                 
+                ******************************************************                              
+            </echo>     
+                
+            <replace file="${jnlp.file.name}" token="&lt;!-- Jnlp pack enabled --&gt;" value="&lt;property name=&quot;jnlp.packEnabled&quot; value=&quot;true&quot; /&gt;" encoding="${copy.encoding}" />
+        </sequential>
+    </target>
 
     <target name="-add.lab.experiments.to.full.jnlp.build">
         <sequential>

@@ -626,7 +626,14 @@
 					<!--End Experiment Jars -->]]></replacevalue>
             </replace>
             <replace file="${client.build.dir}/${experiment.autoconnect.id}.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" encoding="${copy.encoding}"/>
-                                     
+                     
+            <condition property="jnlpEnabled">
+                <matches string="${codebase}" pattern="file://.*"/>
+            </condition>                        
+            <antcall target="replace.jnlp.enabled">
+                <param name="jnlp.file.name" value="${client.build.dir}/${experiment.autoconnect.id}.jnlp"/>
+            </antcall>                
+            
             <duplicate.jar.include.jnlp 
                 destination.folder="${client.build.dir}" 
                 source.jar.name="ELabClient.jar"
@@ -638,6 +645,18 @@
 
         </sequential>
     </macrodef>
+
+    <target name="replace.jnlp.enabled" description="Build one experiment, compile, create jnlp, pack and sign driver and client" unless="${jnlpEnabled}" >
+        <sequential>    
+            <echo>
+                ******************************************************                
+                Enabled jnlp.packEnabled property in ${jnlp.file.name}                                 
+                ******************************************************                              
+            </echo>     
+                
+            <replace file="${jnlp.file.name}" token="&lt;!-- Jnlp pack enabled --&gt;" value="&lt;property name=&quot;jnlp.packEnabled&quot; value=&quot;true&quot; /&gt;" encoding="${copy.encoding}" />
+        </sequential>
+    </target>
 
     <target name="-build.experiment">
         <build.experiment experiment.name="${experiment.name}" />
