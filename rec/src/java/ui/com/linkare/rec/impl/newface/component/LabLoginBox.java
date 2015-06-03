@@ -94,7 +94,7 @@ public class LabLoginBox extends GradientPane {
                 progressCicle.setPreferredSize(null);
                 progressCicle.setState(null);
 
-                java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/linkare/rec/impl/newface/component/resources/LabLoginBox"); // NOI18N
+                java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/linkare/rec/impl/newface/component/resources/LabLoginBox",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader()); // NOI18N
                 btnGo.setText(bundle.getString("next.Action.text")); // NOI18N
                 btnGo.setToolTipText(bundle.getString("next.Action.shortDescription")); // NOI18N
                 btnGo.setFont(btnGo.getFont().deriveFont(btnGo.getFont().getStyle() | java.awt.Font.BOLD));
@@ -250,7 +250,7 @@ public class LabLoginBox extends GradientPane {
 
                 recApplication.setUserInfo(getUsername(), getPassword());
 
-                updateStatus(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.LabLoginBox").getString("lblTaskMessage.authentication.text"));
+                updateStatus(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.LabLoginBox",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader()).getString("lblTaskMessage.authentication.text"));
                 // set lab with selected from lab combo if autoconnect is false
                 if (!recApplication.isAutoConnectApparatus()) {
                         Lab lab = (Lab) labCombo.getSelectedItem();
@@ -297,12 +297,12 @@ public class LabLoginBox extends GradientPane {
         }
 
         public void refreshView() {
-                labelUsername.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.LabLoginBox").getString("labelUsername.text"));
-                labelPassword.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.LabLoginBox").getString("labelPassword.text"));
-                btnGo.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.LabLoginBox").getString("next.Action.text"));
-                btnQuit.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.LabLoginBox").getString("btnQuit.text"));
-                checkBoxComputerType.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.LabLoginBox").getString("checkBoxComputerType.text"));
-                labelLanguage.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.LabLoginBox").getString("labelLanguage.text"));
+                labelUsername.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.LabLoginBox",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader()).getString("labelUsername.text"));
+                labelPassword.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.LabLoginBox",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader()).getString("labelPassword.text"));
+                btnGo.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.LabLoginBox",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader()).getString("next.Action.text"));
+                btnQuit.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.LabLoginBox",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader()).getString("btnQuit.text"));
+                checkBoxComputerType.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.LabLoginBox",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader()).getString("checkBoxComputerType.text"));
+                labelLanguage.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.LabLoginBox",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader()).getString("labelLanguage.text"));
         }
 
         public String getUsername() {

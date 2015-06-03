@@ -10,7 +10,6 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.linkare.rec.impl.i18n.ClassloaderDelegate;
 
 /**
  *
@@ -67,7 +66,6 @@ public final class ClassUtils {
         
         try {
             if (ORIGINAL_THREAD_CLASSLOADER != null) {
-                System.out.println("ORIGINAL THREAD CLASSLOADER  " + ORIGINAL_THREAD_CLASSLOADER + " loading className " + className);
                 c = Class.forName(className, false, ORIGINAL_THREAD_CLASSLOADER);
                 foundClass = true;
             }
@@ -78,7 +76,6 @@ public final class ClassUtils {
         } finally {
             if (!foundClass) {
                 try {
-                    System.out.println("TCCL  " + Thread.currentThread().getContextClassLoader() + " loading className " + className);
                     c = Class.forName(className, false, Thread.currentThread().getContextClassLoader());
                     foundClass = true;
                 } catch (ClassNotFoundException cnfex) {
@@ -87,7 +84,6 @@ public final class ClassUtils {
                             + className, cnfex);
                 } finally {
                     if (!foundClass) {
-                        System.out.println("CL " + contextClassLoader + " loading className " + className);
                         c = Class.forName(className, false, contextClassLoader);
                     }
                 }
@@ -102,21 +98,17 @@ public final class ClassUtils {
         URL resourceURL = null;
 
         if (ORIGINAL_THREAD_CLASSLOADER != null) {
-            System.out.println("ORIGINAL THREAD CLASSLOADER  " + ORIGINAL_THREAD_CLASSLOADER + " loading resourceLocation " + resourceLocation);
             resourceURL = ORIGINAL_THREAD_CLASSLOADER.getResource(resourceLocation);
         }
 
         if (resourceURL == null) {
-            System.out.println("TCCL  " + Thread.currentThread().getContextClassLoader() + " loading resourceLocation " + resourceLocation);
             resourceURL = Thread.currentThread().getContextClassLoader().getResource(resourceLocation);
         }
 
         if (resourceURL == null) {
-            System.out.println("CL " + contextClassLoader + " loading resourceLocation " + resourceLocation);
             resourceURL = contextClassLoader.getResource(resourceLocation);
         }
 
-        System.out.println("RESOURCE WAS "+(resourceURL==null?"NOT FOUND":"FOUND @"+resourceURL));
         return resourceURL;
 
     }

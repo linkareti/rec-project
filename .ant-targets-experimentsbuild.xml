@@ -1,10 +1,12 @@
 Compile,
+ReC
 build.experiments.list
 clean.experiments.list
 compile.experiment.clients.list
 compile.experiment.drivers.list
 debug.experiment.client
 debug.experiment.driver
+insert.jnlp.enabled
 jar.experiment.clients.list
 jar.experiment.drivers.list
 run.experiment.client

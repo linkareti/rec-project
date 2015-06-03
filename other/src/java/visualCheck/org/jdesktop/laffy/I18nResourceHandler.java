@@ -19,7 +19,7 @@ import com.linkare.rec.utils.ClassUtils;
  * @author Ken-ichi Kurosaki
  */
 public class I18nResourceHandler {
-	private static final ResourceBundle rb = ResourceBundle.getBundle("org.jdesktop.laffy.resources.laffy");
+	private static final ResourceBundle rb = ResourceBundle.getBundle("org.jdesktop.laffy.resources.laffy",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader());
 
 	public static ResourceBundle getResourceBundle() {
 		return rb;

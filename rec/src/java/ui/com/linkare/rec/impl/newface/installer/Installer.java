@@ -32,7 +32,7 @@ public abstract class Installer implements Observer {
 
 	protected ExtensionInstallerService installerService = null;
 
-	protected ResourceBundle bundle = ResourceBundle.getBundle("com.linkare.rec.impl.newface.installer.installer");
+	protected ResourceBundle bundle = ResourceBundle.getBundle("com.linkare.rec.impl.newface.installer.installer",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader());
 
 	protected ExtensionInstallerService getInstallerService() throws UnavailableServiceException {
 

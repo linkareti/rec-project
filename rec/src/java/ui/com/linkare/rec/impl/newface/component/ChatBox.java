@@ -37,7 +37,7 @@ public class ChatBox extends AbstractContentPane {
 	}
         
         public void refreshView(){
-            lblChatRoom.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.ChatBox").getString("lblChatRoom.text"));
+            lblChatRoom.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.ChatBox",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader()).getString("lblChatRoom.text"));
         }
 	/**
 	 * This method is called from within the constructor to initialize the form.

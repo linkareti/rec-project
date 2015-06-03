@@ -58,6 +58,7 @@ import java.util.EventObject;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
@@ -569,7 +570,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	}
 
 	public ResourceBundle getRecApplicationBundle() {
-		return ResourceBundle.getBundle("com.linkare.rec.impl.newface.resources.ReCApplication");
+		return ResourceBundle.getBundle("com.linkare.rec.impl.newface.resources.ReCApplication",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader());
 	}
 
 	// public ExpDataModel getExperimentDataModel() {
@@ -1724,34 +1725,11 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
             });
             
             Handler.setClassloaderDelegate(new com.linkare.net.protocols.recresource.ClassloaderDelegate() {
+               @Override
                public URL loadResource(String resourceLocation, ClassLoader classLoader) {
                    return ClassUtils.loadResource(resourceLocation, classLoader);
                } 
             });
-            
-            try {
-                System.out.println("LOADING TIRO");
-                Class vtiroClass=ClassUtils.findClass("pt.utl.ist.elab.client.vtiro.Tiro", ReCApplication.class.getClassLoader());
-                System.out.println("FOUND TIRO @ " + vtiroClass);
-            }catch(Exception e){
-                e.printStackTrace(System.out);
-            }
-            
-            try {
-                URL resource=ClassUtils.loadResource("pt/utl/ist/elab/client/vtiro/resources/tiro_background.PNG", ReCApplication.class.getClassLoader());
-                System.out.println("FOUND tiro resource @ " + resource);
-            }catch(Exception e){
-                e.printStackTrace(System.out);
-            }
-            
-            try {
-                URL resource=ClassUtils.loadResource("/pt/utl/ist/elab/client/vtiro/resources/tiro_background.PNG", ReCApplication.class.getClassLoader());
-                System.out.println("FOUND tiro / resource @ " + resource);
-            }catch(Exception e){
-                e.printStackTrace(System.out);
-            }
-            
-            
             
 		System.setSecurityManager(SYSTEM_EXIT_PREVENTER_SECURITY_MANAGER);
                 SwingUtilities.invokeLater(new Runnable() {

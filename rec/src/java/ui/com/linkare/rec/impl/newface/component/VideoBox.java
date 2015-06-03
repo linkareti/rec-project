@@ -64,7 +64,7 @@ public class VideoBox extends AbstractContentPane {
 	}
 
 	public void refreshView() {
-		lblVideo.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.VideoBox")
+		lblVideo.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.VideoBox",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader())
 				.getString("lblVideo.text"));
 	}
 

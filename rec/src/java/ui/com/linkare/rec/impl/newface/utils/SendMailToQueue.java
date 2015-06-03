@@ -35,7 +35,7 @@ public class SendMailToQueue {
 		String lookupAddress = ReCSystemProperty.REC_WEB_ENDPOINT.getValue() + "/MailServiceWS";
 		try {
 			if (checkMaxNumberRecipients(recipients.split(";")))
-				return ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.SendMailBox")
+				return ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.SendMailBox",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader())
 						.getString("error.number.max.addressee");
 
 			MailMessageRequest mailMessageRequest = new MailMessageRequest();
@@ -51,9 +51,9 @@ public class SendMailToQueue {
 			mailMessageRequest.setContent(HardwareAcquisitionConfig.translatePropertyBundles(acquisitionConfig)
 					.toString());
 
-			String namespace = ResourceBundle.getBundle("com.linkare.rec.impl.newface.resources.wsconfig").getString(
+			String namespace = ResourceBundle.getBundle("com.linkare.rec.impl.newface.resources.wsconfig",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader()).getString(
 					"mail.namespace");
-			String part = java.util.ResourceBundle.getBundle("com.linkare.rec.impl.newface.resources.wsconfig")
+			String part = java.util.ResourceBundle.getBundle("com.linkare.rec.impl.newface.resources.wsconfig",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader())
 					.getString("mail.part");
 			MailServiceRemote remote = WSServiceLocator.lookup(lookupAddress, namespace, part, MailServiceRemote.class);
 
@@ -64,19 +64,19 @@ public class SendMailToQueue {
 			}
 		} catch (NoValidRecipientsFoundForMessage ex) {
 			LOGGER.log(Level.SEVERE, "Error sending email because:" +ex.getMessage(), ex);
-			return ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.SendMailBox").getString(
+			return ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.SendMailBox",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader()).getString(
 					"email.invalid");
 		} catch (RemoteException ex) {
 			LOGGER.log(Level.SEVERE, "Error sending email because:" +ex.getMessage(), ex);
-			return ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.SendMailBox").getString(
+			return ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.SendMailBox",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader()).getString(
 					"erro.server");
 		} catch (RuntimeException ex) {
 			LOGGER.log(Level.SEVERE, "Error sending email because:" +ex.getMessage(), ex);
-			return ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.SendMailBox").getString(
+			return ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.SendMailBox",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader()).getString(
 					"erro.server");
 		} catch(Throwable t) {
 			LOGGER.log(Level.SEVERE, "Error sending email because:" +t.getMessage(), t);
-			return ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.SendMailBox").getString(
+			return ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.SendMailBox",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader()).getString(
 					"erro.server");
 		}
 		return null;

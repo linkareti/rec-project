@@ -1259,12 +1259,12 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		}
 
 		for (JMenu jMenu : menuFather) {
-			jMenu.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.resources.ReCFrameView").getString(
+			jMenu.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.resources.ReCFrameView",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader()).getString(
 					jMenu.getName() + ".text"));
 		}
 
 		for (JMenuItem jMenuItem : menuChild) {
-			jMenuItem.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.resources.ReCFrameView")
+			jMenuItem.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.resources.ReCFrameView",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader())
 					.getString(jMenuItem.getName() + ".text"));
 		}
 
