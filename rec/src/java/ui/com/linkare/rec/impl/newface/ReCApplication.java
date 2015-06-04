@@ -150,6 +150,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 				if (SystemExitSecurityManager.isThrowingSecurityExceptionButDisposing()) {
 					SystemExitSecurityManager.clearThrowingSecurityExceptionButDisposing();
 				} else {
+                                        t.printStackTrace(System.out);
 					LOGGER.log(Level.SEVERE, "An uncaught exception occurred in thread " + thread, t);
 					SwingUtilities.invokeLater(new Runnable() {
                                             @Override
