@@ -151,7 +151,12 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 					SystemExitSecurityManager.clearThrowingSecurityExceptionButDisposing();
 				} else {
 					LOGGER.log(Level.SEVERE, "An uncaught exception occurred in thread " + thread, t);
-					ReCFrameView.getUnexpectedErrorBox(t).setVisible(true);
+					SwingUtilities.invokeLater(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                ReCFrameView.getUnexpectedErrorBox(t).setVisible(true);
+                                            }
+                                        });                                                                               
 				}
 			}
 		});
