@@ -132,7 +132,6 @@ import com.linkare.rec.web.config.Lab;
 import com.linkare.rec.web.config.LocalizationBundle;
 import com.linkare.rec.web.config.ReCFaceConfig;
 
-import org.jdesktop.application.ApplicationContext;
 
 /**
  * The main class of the application.
@@ -575,9 +574,31 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		return mediaController;
 	}
 
-	public ResourceBundle getRecApplicationBundle() {
-		return ResourceBundle.getBundle("com.linkare.rec.impl.newface.resources.ReCApplication",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader());
-	}
+    public ResourceBundle getRecApplicationBundle() {
+        Class reCApplicationClass = null;        
+        try {
+            System.out.println("LOADING ReCApplication");
+            reCApplicationClass = ClassUtils.findClass("com.linkare.rec.impl.newface.resources.ReCApplication", ReCApplication.class.getClassLoader());
+            System.out.println("FOUND ReCApplication @ " + reCApplicationClass);
+        } catch (Exception e) {
+            System.out.println("NOT FOUND ReCApplication ");
+            e.printStackTrace(System.out);
+        }
+    
+        try {
+            System.out.println("LOADING with: ReCApplication.class.getClassLoader()" + ReCApplication.class.getClassLoader().hashCode());
+            ResourceBundle resourceBundle = ResourceBundle.getBundle("com.linkare.rec.impl.newface.resources.ReCApplication", java.util.Locale.getDefault(),
+                    ReCApplication.class.getClassLoader());
+            System.out.println("OK ResourceBundle.getBundle of ReCApplication with: ReCApplication.class.getClassLoader()" + ReCApplication.class.getClassLoader().hashCode());
+            return resourceBundle;
+        } catch (Throwable t) {
+            System.out.println("Ups... NOT OK for OKResourceBundle.getBundle of ReCApplication" + ReCApplication.class.getClassLoader().hashCode());            
+        } 
+        
+        System.out.println("LOADING with: ReCApplication.class.getClassLoader()" + ReCApplication.class.getClassLoader().hashCode());        
+        return ResourceBundle.getBundle("com.linkare.rec.impl.newface.resources.ReCApplication", java.util.Locale.getDefault(), 
+                Thread.currentThread().getContextClassLoader());
+    }
 
 	// public ExpDataModel getExperimentDataModel() {
 	// return experimentDataModel;
