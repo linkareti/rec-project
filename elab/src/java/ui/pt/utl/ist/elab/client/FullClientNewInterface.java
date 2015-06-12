@@ -1,11 +1,6 @@
 package pt.utl.ist.elab.client;
 
-import javax.swing.SwingUtilities;
-
 import com.linkare.rec.impl.newface.ReCApplication;
-import com.linkare.rec.utils.ClassUtils;
-
-import org.jdesktop.application.Application;
 
 /**
  *
