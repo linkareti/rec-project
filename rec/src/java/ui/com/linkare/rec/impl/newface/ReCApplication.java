@@ -131,7 +131,6 @@ import com.linkare.rec.web.config.Lab;
 import com.linkare.rec.web.config.LocalizationBundle;
 import com.linkare.rec.web.config.ReCFaceConfig;
 
-
 /**
  * The main class of the application.
  */
@@ -148,14 +147,14 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 				if (SystemExitSecurityManager.isThrowingSecurityExceptionButDisposing()) {
 					SystemExitSecurityManager.clearThrowingSecurityExceptionButDisposing();
 				} else {
-                                        t.printStackTrace(System.out);
+					t.printStackTrace(System.out);
 					LOGGER.log(Level.SEVERE, "An uncaught exception occurred in thread " + thread, t);
 					SwingUtilities.invokeLater(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                ReCFrameView.getUnexpectedErrorBox(t).setVisible(true);
-                                            }
-                                        });                                                                               
+						@Override
+						public void run() {
+							ReCFrameView.getUnexpectedErrorBox(t).setVisible(true);
+						}
+					});
 				}
 			}
 		});
@@ -655,7 +654,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		new Thread() {
 			public void run() {
 				try {
-                                        splash.refreshBusyIcon(true);
+					splash.refreshBusyIcon(true);
 					splash.refreshLabel(getRecApplicationBundle().getString(
 							"Application.splashScreen.initialize.message"));
 					startApplication();
@@ -840,13 +839,20 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	 */
 	private boolean canReachIpOnPort(String address, int port) {
 
+		Socket s = null;
 		try {
-			Socket s = new Socket();
+			s = new Socket();
 			s.connect(new InetSocketAddress(address, port), 2000);
-			s.close();
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "Error creating socket to " + address + " on port " + port, e);
 			return false;
+		} finally {
+			if (s != null && !s.isClosed()) {
+				try {
+					s.close();
+				} catch (Exception ignoredOnPurpose) {
+				}
+			}
 		}
 		return true;
 	}
@@ -1499,7 +1505,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		} else { // Ok the user wants to load his own Factory
 			try {
 				final Object displayFactoryTemp = ClassUtils.beansInstantiate(this.getClass().getClassLoader(),
-						factoryLocation); 
+						factoryLocation);
 				if (java.beans.Beans.isInstanceOf(displayFactoryTemp, DisplayFactory.class)) {
 					factory = (DisplayFactory) displayFactoryTemp;
 				}
@@ -1508,13 +1514,13 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			}
 		}
 
-                System.out.println("factory is " +  factory);
-               
+		System.out.println("factory is " + factory);
+
 		if (factory != null) {
 			final List<Display> availableDisplays = experimentHistory.getApparatusConfig().getDisplay();
-                    System.out.println("availableDisplays is " + availableDisplays.size());
-                    System.out.println("availableDisplays is " + Arrays.deepToString(availableDisplays.toArray(new Display[0])));
-                    
+			System.out.println("availableDisplays is " + availableDisplays.size());
+			System.out.println("availableDisplays is " + Arrays.deepToString(availableDisplays.toArray(new Display[0])));
+
 			factory.init(availableDisplays);
 			factory.setAcquisitionInfo(experimentHistory.getApparatus().getHardwareInfo());
 			try {
@@ -1522,7 +1528,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			} catch (final Exception e) {
 				ReCApplication.LOGGER.log(Level.SEVERE, "Could not set aquisition config", e);
 			}
-                            System.out.println("Setting list of displays on the experimentUIData "+factory.getDisplays().size());
+			System.out.println("Setting list of displays on the experimentUIData " + factory.getDisplays().size());
 			experimentData.setDataDisplays(factory.getDisplays());
 		}
 
@@ -1714,35 +1720,35 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	 * @param args
 	 */
 	public static void main(final String[] args) {
-            ClassUtils.setOriginalThreadContextClassLoader(Thread.currentThread().getContextClassLoader());
-            ReCResourceBundle.setClassLoaderDelegate(new ClassloaderDelegate() {
+		ClassUtils.setOriginalThreadContextClassLoader(Thread.currentThread().getContextClassLoader());
+		ReCResourceBundle.setClassLoaderDelegate(new ClassloaderDelegate() {
 
-                @Override
-                public Object beansInstantiate(ClassLoader cl, String className) throws IOException, ClassNotFoundException {
-                    return ClassUtils.beansInstantiate(cl, className);
-                }
+			@Override
+			public Object beansInstantiate(ClassLoader cl, String className) throws IOException, ClassNotFoundException {
+				return ClassUtils.beansInstantiate(cl, className);
+			}
 
-                @Override
-                public Class<?> findClass(String className, ClassLoader cl) throws ClassNotFoundException {
-                    return ClassUtils.findClass( className,cl);
-                }
-            });
-            
-            Handler.setClassloaderDelegate(new com.linkare.net.protocols.recresource.ClassloaderDelegate() {
-               @Override
-               public URL loadResource(String resourceLocation, ClassLoader classLoader) {
-                   return ClassUtils.loadResource(resourceLocation, classLoader);
-               } 
-            });
-            
+			@Override
+			public Class<?> findClass(String className, ClassLoader cl) throws ClassNotFoundException {
+				return ClassUtils.findClass(className, cl);
+			}
+		});
+
+		Handler.setClassloaderDelegate(new com.linkare.net.protocols.recresource.ClassloaderDelegate() {
+			@Override
+			public URL loadResource(String resourceLocation, ClassLoader classLoader) {
+				return ClassUtils.loadResource(resourceLocation, classLoader);
+			}
+		});
+
 		System.setSecurityManager(SYSTEM_EXIT_PREVENTER_SECURITY_MANAGER);
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        Thread.currentThread().setContextClassLoader(ReCApplication.class.getClassLoader());
-                        Application.launch(ReCApplication.class, args);
-                    }
-                });
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				Thread.currentThread().setContextClassLoader(ReCApplication.class.getClassLoader());
+				Application.launch(ReCApplication.class, args);
+			}
+		});
 	}
 
 	public static class ExperimentUIData {
