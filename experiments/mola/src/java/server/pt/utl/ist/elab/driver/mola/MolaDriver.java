@@ -1,4 +1,4 @@
-package mola.src.java.server.pt.utl.ist.elab.driver.mola;
+package pt.utl.ist.elab.driver.mola;
 
 import pt.utl.ist.elab.driver.serial.serialportgeneric.genericexperiment.GenericSerialPortDriver;
 
