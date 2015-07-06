@@ -500,7 +500,7 @@ public class MolaCustomizer extends AbstractCustomizer {
     }
 
     public void checkMaxTime() {
-        lblErrorSamplesTooHigh.setEnabled(sldNumSamples.getValue()*sldFreq.getValue() <= 30000);
+        lblErrorSamplesTooHigh.setEnabled(sldNumSamples.getValue()*sldFreq.getValue() >= 30000);
         lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("mola$rec.exp.customizer.label2","mola$rec.exp.customizer.label2")+(30000/sldFreq.getValue()));
 	btnOK.setEnabled(!lblErrorVolsAreEqual.isEnabled() && !lblErrorSamplesTooHigh.isEnabled());
     }
@@ -524,6 +524,7 @@ public class MolaCustomizer extends AbstractCustomizer {
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
     {// GEN-HEADEREND:event_btnOKActionPerformed
+        getAcquisitionConfig().getSelectedHardwareParameter("protocol").setParameterValue("1"); // experiment expects protocol identifier, but there is only one for now
         getAcquisitionConfig().getSelectedHardwareParameter("pos_init").setParameterValue("" + (sldPos1.getValue()));
         getAcquisitionConfig().getSelectedHardwareParameter("pos_final").setParameterValue("" + (sldPos2.getValue()));
         getAcquisitionConfig().getSelectedHardwareParameter("n_samples").setParameterValue(

@@ -11,6 +11,14 @@
         <b>Penso que pode ter coisas maradas aqui como html</b>
         ]]>
 	</description>
+	
+	<parameter name="protocol" type="ContinuousValue" value="1">
+		<selection-list>
+			<value order="1">1</value>
+			<value order="2">2</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
 
 	<parameter name="pos_init" type="ContinuousValue" value="15">
 		<selection-list>
@@ -52,8 +60,8 @@
 	<Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency>
 
 	<sampling-scale>
-		<min-samples>2</min-samples>
-		<max-samples>45</max-samples>
+		<min-samples>5</min-samples>
+		<max-samples>500</max-samples>
 		<step-samples>1</step-samples>
 	</sampling-scale>
 
