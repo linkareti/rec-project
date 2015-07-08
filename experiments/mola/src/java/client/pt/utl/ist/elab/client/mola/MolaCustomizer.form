@@ -328,7 +328,7 @@
             <Property name="paintTicks" type="boolean" value="true"/>
             <Property name="paintTrack" type="boolean" value="false"/>
             <Property name="snapToTicks" type="boolean" value="true"/>
-            <Property name="value" type="int" value="15"/>
+            <Property name="value" type="int" value="-15"/>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[250, 42]"/>
             </Property>
@@ -356,7 +356,7 @@
             <Property name="paintTrack" type="boolean" value="false"/>
             <Property name="snapToTicks" type="boolean" value="true"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
-            <Property name="value" type="int" value="-15"/>
+            <Property name="value" type="int" value="15"/>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[250, 42]"/>
             </Property>
@@ -392,7 +392,7 @@
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="tfPos1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="15"/>
+            <Property name="text" type="java.lang.String" value="-15"/>
           </Properties>
           <Events>
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfPos1FocusLost"/>
@@ -405,7 +405,7 @@
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="tfPos2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="-15"/>
+            <Property name="text" type="java.lang.String" value="15"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfPos2ActionPerformed"/>

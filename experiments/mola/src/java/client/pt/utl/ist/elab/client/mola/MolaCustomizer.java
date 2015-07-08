@@ -286,7 +286,7 @@ public class MolaCustomizer extends AbstractCustomizer {
         sldPos1.setPaintTicks(true);
         sldPos1.setPaintTrack(false);
         sldPos1.setSnapToTicks(true);
-        sldPos1.setValue(15);
+        sldPos1.setValue(-15);
         sldPos1.setMinimumSize(new java.awt.Dimension(250, 42));
         sldPos1.setPreferredSize(new java.awt.Dimension(250, 42));
         sldPos1.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -310,7 +310,7 @@ public class MolaCustomizer extends AbstractCustomizer {
         sldPos2.setPaintTrack(false);
         sldPos2.setSnapToTicks(true);
         sldPos2.setToolTipText("");
-        sldPos2.setValue(-15);
+        sldPos2.setValue(15);
         sldPos2.setMinimumSize(new java.awt.Dimension(250, 42));
         sldPos2.setPreferredSize(new java.awt.Dimension(250, 42));
         sldPos2.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -337,7 +337,7 @@ public class MolaCustomizer extends AbstractCustomizer {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel5.add(lblErrorVolsAreEqual, gridBagConstraints);
 
-        tfPos1.setText("15");
+        tfPos1.setText("-15");
         tfPos1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tfPos1FocusLost(evt);
@@ -347,7 +347,7 @@ public class MolaCustomizer extends AbstractCustomizer {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         jPanel5.add(tfPos1, gridBagConstraints);
 
-        tfPos2.setText("-15");
+        tfPos2.setText("15");
         tfPos2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfPos2ActionPerformed(evt);
@@ -509,10 +509,10 @@ public class MolaCustomizer extends AbstractCustomizer {
     {// GEN-HEADEREND:event_btnDefaultsActionPerformed
         sldNumSamples.setValue(100);
         tfNumSamples.setText("100");
-        sldPos1.setValue(15);
-        tfPos1.setValue(15);
-        sldPos2.setValue(-15);
-        tfPos2.setValue(-15);
+        sldPos1.setValue(-15);
+        tfPos1.setValue(-15);
+        sldPos2.setValue(15);
+        tfPos2.setValue(15);
         sldFreq.setValue(100);
         tfFreq.setText("100");
     }// GEN-LAST:event_btnDefaultsActionPerformed
