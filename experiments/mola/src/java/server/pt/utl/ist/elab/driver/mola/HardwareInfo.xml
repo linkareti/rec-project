@@ -46,14 +46,14 @@
 
 	<parameter name="tb_samples" type="ContinuousValue" value="100">
 		<selection-list>
-			<value order="1">10</value>
+			<value order="1">20</value>
 			<value order="2">1000</value>
 			<value order="3">1</value>
 		</selection-list>
 	</parameter>
 
 	<frequency-scale label="Sampling Interval">
-		<min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">10</Frequency></min-frequency>
+		<min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">20</Frequency></min-frequency>
 		<max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1000</Frequency></max-frequency>
 		<step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
 	</frequency-scale>
@@ -66,11 +66,11 @@
 	</sampling-scale>
 
 	<ChannelInfo name="mola$rec.exp.mola.hardwareinfo.channel.0.name" independent="false" direction="CHANNEL_INPUT">
-		<scale label="mola$rec.exp.mola.hardwareinfo.channel.0.label" physicsunitname="mola$rec.exp.mola.hardwareinfo.channel.0.physicsunitname" physicsunitsymbol="m" multiplier="milli" selected="true">
-			<min><PhysicsVal type="int">-20</PhysicsVal></min>
-			<max><PhysicsVal type="int">20</PhysicsVal></max>
+		<scale label="mola$rec.exp.mola.hardwareinfo.channel.0.label" physicsunitname="mola$rec.exp.mola.hardwareinfo.channel.0.physicsunitname" physicsunitsymbol="m" multiplier="micro" selected="true">
+			<min><PhysicsVal type="int">-20000</PhysicsVal></min>
+			<max><PhysicsVal type="int">20000</PhysicsVal></max>
 			<step><PhysicsVal type="int">1</PhysicsVal></step>
-			<errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+			<errordefault><PhysicsVal type="float">50</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 

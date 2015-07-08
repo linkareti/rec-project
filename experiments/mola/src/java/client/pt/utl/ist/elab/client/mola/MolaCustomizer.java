@@ -227,7 +227,7 @@ public class MolaCustomizer extends AbstractCustomizer {
 
         sldFreq.setMajorTickSpacing(200);
         sldFreq.setMaximum(1000);
-        sldFreq.setMinimum(10);
+        sldFreq.setMinimum(20);
         sldFreq.setMinorTickSpacing(20);
         sldFreq.setPaintLabels(true);
         sldFreq.setPaintTicks(true);

@@ -1,10 +1,10 @@
 /*
- * PVXYGraphDisplay.java
+ * MolaXYGraphDisplay.java
  *
  * Created on 10 de Julho de 2003, 11:14
  */
 
-package mola.src.java.client.pt.utl.ist.elab.client.mola;
+package pt.utl.ist.elab.client.mola;
 
 /**
  * 
@@ -17,7 +17,7 @@ public class MolaXYGraphDisplay extends com.linkare.rec.impl.ui.graph.DefaultXYE
 	 */
 	private static final long serialVersionUID = -3177968201292210791L;
 
-	/** Creates a new instance of PVXYGraphDisplay */
+	/** Creates a new instance of MolaXYGraphDisplay */
 	public MolaXYGraphDisplay() {
 		super();
 		setChannelDisplayX(0);

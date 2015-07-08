@@ -15,7 +15,7 @@
 	    <parameter output="##0" input="##0" maxvalue="500" minvalue="5" order="3">
 	    </parameter>
 	    <!-- tb_samples -->
-	    <parameter output="##00" input="##00" maxvalue="1000" minvalue="10" order="4">
+	    <parameter output="##00" input="##00" maxvalue="1000" minvalue="20" order="4">
 	    </parameter>
 	</parameters>
 	<channels>

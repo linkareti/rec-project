@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.1" encoding="UTF-8" ?>
 
 <Form version="1.2" maxVersion="1.2" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
@@ -120,7 +120,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="N&#xfa;mero de amostras">
+                <TitledBorder title="&lt;rec.exp.customizer.title2&gt;">
                   <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/mola/resources/messages.properties" key="rec.exp.customizer.title2" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;mola${key}&quot;,&quot;mola${key}&quot;)"/>
                 </TitledBorder>
               </Border>
@@ -220,7 +220,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Tempo entre amostras [ms]">
+                <TitledBorder title="&lt;rec.exp.customizer.title3&gt;">
                   <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/mola/resources/messages.properties" key="rec.exp.customizer.title3" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;mola${key}&quot;,&quot;mola${key}&quot;)"/>
                 </TitledBorder>
               </Border>
@@ -239,7 +239,7 @@
               <Properties>
                 <Property name="majorTickSpacing" type="int" value="200"/>
                 <Property name="maximum" type="int" value="1000"/>
-                <Property name="minimum" type="int" value="10"/>
+                <Property name="minimum" type="int" value="20"/>
                 <Property name="minorTickSpacing" type="int" value="20"/>
                 <Property name="paintLabels" type="boolean" value="true"/>
                 <Property name="paintTicks" type="boolean" value="true"/>
@@ -298,7 +298,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Posi&#xe7;&#xe3;o [mm]">
+            <TitledBorder title="&lt;rec.exp.customizer.title1&gt;">
               <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/mola/resources/messages.properties" key="rec.exp.customizer.title1" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;mola${key}&quot;,&quot;mola${key}&quot;)"/>
             </TitledBorder>
           </Border>
