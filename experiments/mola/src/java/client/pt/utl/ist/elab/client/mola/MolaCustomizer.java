@@ -95,7 +95,7 @@ public class MolaCustomizer extends AbstractCustomizer {
         jPanel5 = new javax.swing.JPanel();
         sldPos1 = new javax.swing.JSlider();
         sldPos2 = new javax.swing.JSlider();
-        lblErrorVolsAreEqual = new javax.swing.JLabel();
+        lblErrorPosAreEqual = new javax.swing.JLabel();
         tfPos1 = new javax.swing.JFormattedTextField();
         tfPos2 = new javax.swing.JFormattedTextField();
 
@@ -326,16 +326,16 @@ public class MolaCustomizer extends AbstractCustomizer {
         gridBagConstraints.weighty = 10.0;
         jPanel5.add(sldPos2, gridBagConstraints);
 
-        lblErrorVolsAreEqual.setForeground(new java.awt.Color(255, 0, 0));
-        lblErrorVolsAreEqual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblErrorVolsAreEqual.setText(ReCResourceBundle.findStringOrDefault("mola$rec.exp.customizer.label1","mola$rec.exp.customizer.label1")); // NOI18N
-        lblErrorVolsAreEqual.setEnabled(false);
+        lblErrorPosAreEqual.setForeground(new java.awt.Color(255, 0, 0));
+        lblErrorPosAreEqual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblErrorPosAreEqual.setText(ReCResourceBundle.findStringOrDefault("mola$rec.exp.customizer.label1","mola$rec.exp.customizer.label1")); // NOI18N
+        lblErrorPosAreEqual.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel5.add(lblErrorVolsAreEqual, gridBagConstraints);
+        jPanel5.add(lblErrorPosAreEqual, gridBagConstraints);
 
         tfPos1.setText("-15");
         tfPos1.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -495,14 +495,15 @@ public class MolaCustomizer extends AbstractCustomizer {
     }// GEN-LAST:event_sldNumSamplesStateChanged
 
     private void checkPosOverlap() {
-        lblErrorVolsAreEqual.setEnabled(sldPos1.getValue() == sldPos2.getValue());
-        btnOK.setEnabled(!lblErrorVolsAreEqual.isEnabled() && !lblErrorSamplesTooHigh.isEnabled());
+        lblErrorPosAreEqual.setEnabled(sldPos1.getValue() >= sldPos2.getValue()); // There is a bug on the PIC code that causes issues when position1 > position 2
+        // lblErrorPosAreEqual.setEnabled(sldPos1.getValue() == sldPos2.getValue()); // once the bug is fixed replace with this line and change the label in messages.properties 
+        btnOK.setEnabled(!lblErrorPosAreEqual.isEnabled() && !lblErrorSamplesTooHigh.isEnabled());
     }
 
     public void checkMaxTime() {
         lblErrorSamplesTooHigh.setEnabled(sldNumSamples.getValue()*sldFreq.getValue() >= 30000);
         lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("mola$rec.exp.customizer.label2","mola$rec.exp.customizer.label2")+(30000/sldFreq.getValue()));
-	btnOK.setEnabled(!lblErrorVolsAreEqual.isEnabled() && !lblErrorSamplesTooHigh.isEnabled());
+	btnOK.setEnabled(!lblErrorPosAreEqual.isEnabled() && !lblErrorSamplesTooHigh.isEnabled());
     }
 
     private void btnDefaultsActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
@@ -549,8 +550,8 @@ public class MolaCustomizer extends AbstractCustomizer {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JLabel lblErrorPosAreEqual;
     private javax.swing.JLabel lblErrorSamplesTooHigh;
-    private javax.swing.JLabel lblErrorVolsAreEqual;
     private javax.swing.JSlider sldFreq;
     private javax.swing.JSlider sldNumSamples;
     private javax.swing.JSlider sldPos1;
