@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
-<HardwareInfo id="WP_PLANETARIUM" familiarName="Pêndulo Planetário" name="PIC"
+<HardwareInfo id="WP_PLANETARIUM" familiarName="Pêndulo Mundial Lisboa" name="PIC"
 	version="V1" manufacturer="IST" driverVersion="v1">
 	
 	<parameter name="wpplanetarium$parameter.displacement" type="ContinuousValue" value="5">
