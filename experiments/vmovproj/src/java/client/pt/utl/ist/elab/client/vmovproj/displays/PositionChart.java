@@ -14,7 +14,7 @@ import com.linkare.rec.impl.client.experiment.ExpDataModel;
 
 /**
  * 
- * @author nomead
+ * @author unknown 
  */
 public class PositionChart extends MultSeriesXYExperimentGraphExtended implements GraphSamplesFunction {
 
@@ -54,7 +54,6 @@ public class PositionChart extends MultSeriesXYExperimentGraphExtended implement
 		}
 
 		isAbs = header.getSelectedHardwareParameterValue("posAbs").trim().equals("1") ? true : false;
-		super.dataModelStartedNoData();
 	}
 
 	private ExpDataModel model = null;

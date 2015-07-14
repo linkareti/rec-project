@@ -28,10 +28,9 @@ import com.linkare.rec.impl.exceptions.NotAvailableExceptionConstants;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
 import com.linkare.rec.impl.utils.ORBBean;
-import com.linkare.rec.impl.utils.QueueLogger;
 import com.linkare.rec.impl.wrappers.DataReceiverWrapper;
 
-public class BaseDataProducer implements DataProducerOperations, QueueLogger {
+public class BaseDataProducer implements DataProducerOperations {
 	private DataProducerState dataProducerState = DataProducerState.DP_WAITING;
 	private static final Logger LOGGER = Logger.getLogger(BaseDataProducer.class.getName());
 
@@ -78,8 +77,7 @@ public class BaseDataProducer implements DataProducerOperations, QueueLogger {
 	 */
 	public BaseDataProducer(final DataReceiver dataReceiver) {
 
-		eventQueueDataReceiver = new EventQueue(new DataProducerEventsDispatcher(), this.getClass().getSimpleName(),
-				this);
+		eventQueueDataReceiver = new EventQueue(new DataProducerEventsDispatcher(), this.getClass().getSimpleName());
 		try {
 			registerDataReceiver(dataReceiver);
 		} catch (final MaximumClientsReached e) {
@@ -331,22 +329,6 @@ public class BaseDataProducer implements DataProducerOperations, QueueLogger {
 				}
 			});
 		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void log(final Level debugLevel, final String message) {
-		LOGGER.log(debugLevel, message);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void logThrowable(final String message, final Throwable t) {
-		LOGGER.log(Level.SEVERE, message, t);
 	}
 
 }

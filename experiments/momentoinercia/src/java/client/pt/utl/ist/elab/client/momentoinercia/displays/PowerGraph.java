@@ -23,11 +23,11 @@ public class PowerGraph extends MultSeriesXYExperimentGraph {
 	public PowerGraph() {
 		setChannelDisplayX(2);
 		setChannelDisplayY(1);
-		setUpdatePercentage(10);
+		setUpdateFrequency(10);
 	}
 
 	@Override
 	public String getName() {
-		return "Pot�ncia dissipada";
+		return "Potência dissipada";
 	}
 }

@@ -149,7 +149,7 @@ public class VideoErrorPanel extends AbstractContentPane {
 	}
 
 	private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_playButtonActionPerformed
-		ReCApplication.getApplication().playMediaExternalAction();
+		ReCApplication.getApplication().playMediaExternalAction(mrlText.getText());
 		closeWindow();
 	}// GEN-LAST:event_playButtonActionPerformed
 

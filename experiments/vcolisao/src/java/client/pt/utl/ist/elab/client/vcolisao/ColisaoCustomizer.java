@@ -10,21 +10,19 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import org.opensourcephysics.display.Arrow;
-import org.opensourcephysics.display.Dataset;
 import org.opensourcephysics.display.DrawableShape;
 import org.opensourcephysics.display.PlottingPanel;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
  * @author Emanuel Antunes
  */
-public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+public class ColisaoCustomizer extends AbstractCustomizer {
 
 	/**
 	 * 
@@ -37,22 +35,22 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 		initComponents();
 		initPreview();
 
-		java.util.Hashtable<Integer, JLabel> ht = new java.util.Hashtable(7);
-		ht = new java.util.Hashtable(7);
+		java.util.Hashtable<Integer, JLabel> ht = new java.util.Hashtable<Integer, JLabel>(7);
+		ht = new java.util.Hashtable<Integer, JLabel>(7);
 		for (int i = 2; i <= 500; i += 83) {
 			ht.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
 		}
 		jSliderM1.setLabelTable(ht);
 		jSliderM2.setLabelTable(ht);
 
-		ht = new java.util.Hashtable(7);
+		ht = new java.util.Hashtable<Integer, JLabel>(7);
 		for (int i = 0; i <= 200; i += 50) {
 			ht.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
 		}
 		jSliderV2.setLabelTable(ht);
 		jSliderV1.setLabelTable(ht);
 
-		ht = new java.util.Hashtable(7);
+		ht = new java.util.Hashtable<Integer, JLabel>(7);
 		for (int i = 5; i <= 100; i += 20) {
 			ht.put(new Integer(i), new javax.swing.JLabel("" + i / 100F));
 		}
@@ -124,7 +122,7 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new ColisaoCustomizer());
 		dummy.pack();
-		dummy.show();
+		dummy.setVisible(true);
 		dummy.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
@@ -669,23 +667,23 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 	}// GEN-LAST:event_jButtonCancelActionPerformed
 
 	private void jButtonOKActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonOKActionPerformed
-		acqConfig.setTotalSamples(jSliderSamples.getValue());
+		getAcquisitionConfig().setTotalSamples(jSliderSamples.getValue());
 
-		acqConfig.setSelectedFrequency(new Frequency((double) jSliderTBS.getValue(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
+		getAcquisitionConfig().setSelectedFrequency(new Frequency((double) jSliderTBS.getValue(), getHardwareInfo()
+				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), getHardwareInfo()
 				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
 
-		acqConfig.getSelectedHardwareParameter("v1").setParameterValue("" + jSliderV1.getValue() / 10f);
-		acqConfig.getSelectedHardwareParameter("v2").setParameterValue("" + jSliderV2.getValue() / 10F);
-		acqConfig.getSelectedHardwareParameter("m1").setParameterValue("" + jSliderM1.getValue() / 10F);
-		acqConfig.getSelectedHardwareParameter("m2").setParameterValue("" + jSliderM2.getValue() / 10F);
-		acqConfig.getSelectedHardwareParameter("r1").setParameterValue("" + jSliderR1.getValue() / 100F);
-		acqConfig.getSelectedHardwareParameter("r2").setParameterValue("" + jSliderR2.getValue() / 100F);
-		acqConfig.getSelectedHardwareParameter("a").setParameterValue("" + jSliderA.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("v1").setParameterValue("" + jSliderV1.getValue() / 10f);
+		getAcquisitionConfig().getSelectedHardwareParameter("v2").setParameterValue("" + jSliderV2.getValue() / 10F);
+		getAcquisitionConfig().getSelectedHardwareParameter("m1").setParameterValue("" + jSliderM1.getValue() / 10F);
+		getAcquisitionConfig().getSelectedHardwareParameter("m2").setParameterValue("" + jSliderM2.getValue() / 10F);
+		getAcquisitionConfig().getSelectedHardwareParameter("r1").setParameterValue("" + jSliderR1.getValue() / 100F);
+		getAcquisitionConfig().getSelectedHardwareParameter("r2").setParameterValue("" + jSliderR2.getValue() / 100F);
+		getAcquisitionConfig().getSelectedHardwareParameter("a").setParameterValue("" + jSliderA.getValue());
 		if (jRadioButtonElastica.isSelected()) {
-			acqConfig.getSelectedHardwareParameter("elasticCollision").setParameterValue("1");
+			getAcquisitionConfig().getSelectedHardwareParameter("elasticCollision").setParameterValue("1");
 		} else {
-			acqConfig.getSelectedHardwareParameter("elasticCollision").setParameterValue("0");
+			getAcquisitionConfig().getSelectedHardwareParameter("elasticCollision").setParameterValue("0");
 		}
 		fireICustomizerListenerDone();
 
@@ -740,77 +738,12 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 
 	// ****************************REC********************************************/
 
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
 
 	// ESTE É PARA ALTERAR
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		// Aqui são fornecidos parametros do ultimo utilizador que fez a exp, e'
 		// bom manter!
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 
 			final int v1 = (int) (10 * Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("v1")));
@@ -844,18 +777,6 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 		}
 	}
 
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
-
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/vcolisao/resources/colisao_iconified.png"));
@@ -866,12 +787,7 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 		return "Collision Experiment Configuration Utility";
 	}
 
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
-	}
-
 	private PlottingPanel dpanel;
-	private Dataset dataset;
 	private final Arrow[] vects = new Arrow[2];
 	private final DrawableShape[] circulos = new DrawableShape[2];
 	private double r1, r2, v1, v2, a;

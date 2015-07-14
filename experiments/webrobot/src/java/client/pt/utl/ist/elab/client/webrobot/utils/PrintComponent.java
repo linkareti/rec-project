@@ -17,8 +17,11 @@ public class PrintComponent implements java.awt.print.Printable {
 	private javax.swing.JTable table;
 	private boolean isTable = false;
 
-	/** Creates a new instance of PrintComponent 
-	 * @param comp */
+	/**
+	 * Creates a new instance of PrintComponent
+	 * 
+	 * @param comp
+	 */
 	public PrintComponent(final java.awt.Component comp) {
 		this.comp = comp;
 		print();

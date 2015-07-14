@@ -17,7 +17,6 @@ import javax.media.Player;
 import javax.media.format.AudioFormat;
 import javax.media.protocol.DataSource;
 
-import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDataSource;
 import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDriver;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampTranslator;
@@ -26,7 +25,6 @@ import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampConfiguredP
 import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampNotConfiguredProcessor;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampStartProcessor;
 
-import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.acquisition.IncorrectStateException;
 import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
@@ -36,7 +34,6 @@ import com.linkare.rec.data.synch.DateTime;
 import com.linkare.rec.impl.threading.AbstractConditionDecisor;
 import com.linkare.rec.impl.threading.TimedOutException;
 import com.linkare.rec.impl.threading.WaitForConditionResult;
-import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.jmf.ReCJMFUtils;
 import com.linkare.rec.jmf.media.datasink.capture.Handler;
 import com.linkare.rec.jmf.media.protocol.function.FunctorTypeControl;
@@ -45,7 +42,7 @@ import com.linkare.rec.jmf.media.protocol.function.FunctorTypeControl;
  * 
  * @author José Pedro Pereira - Linkare TI & André
  */
-public class StatSoundStampDriver extends AbstractStampDriver {
+public class StatSoundStampDriver extends AbstractStampDriver<StatSoundStampDataSource> {
 
 	// parameters
 	public static final String PISTON_START_PARAMETER = "piston.start";
@@ -76,12 +73,6 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 	private volatile boolean stoping = false;
 
 	private volatile boolean reseting = true;
-
-	private static final String HARDWARE_INFO_XML = "/HardwareInfo.xml";
-
-	private static final String USER_DIR = "user.dir";
-
-	private static final String HARDWARE_INFO = "HardwareInfo";
 
 	private static final int SAMPLE_RATE = 11025;
 
@@ -300,33 +291,6 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		return config;
 	}
 
-	@Override
-	public Object getHardwareInfo() {
-
-		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
-				+ HARDWARE_INFO_XML;
-		String prop = Defaults.defaultIfEmpty(System.getProperty(HARDWARE_INFO), baseHardwareInfoFile);
-
-		if (prop.indexOf("://") == -1) {
-			prop = "file:///" + System.getProperty(USER_DIR) + "/" + prop;
-		}
-
-		java.net.URL url = null;
-		try {
-			url = Protocols.getURL(prop);
-		} catch (final java.net.MalformedURLException e) {
-			LOGGER.log(Level.SEVERE, "Unable to load resource: " + prop, e);
-			try {
-				url = new java.net.URL(baseHardwareInfoFile);
-			} catch (final java.net.MalformedURLException e2) {
-				LOGGER.log(Level.SEVERE, "Unable to load resource: " + baseHardwareInfoFile, e2);
-			}
-		}
-
-		return url;
-
-	}
-
 	/**
 	 * {@inheritDoc}
 	 */
@@ -361,8 +325,8 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 	}
 
 	@Override
-	public AbstractStampDataSource initDataSource() {
-		dataSource = new StatSoundStampDataSource();
+	public StatSoundStampDataSource initDataSource() throws InstantiationException, IllegalAccessException {
+		dataSource = super.initDataSource();
 		return dataSource;
 	}
 

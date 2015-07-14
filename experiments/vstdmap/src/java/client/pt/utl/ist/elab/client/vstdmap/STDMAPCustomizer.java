@@ -14,11 +14,10 @@ import pt.utl.ist.elab.client.virtual.guipack.GUtils;
 import pt.utl.ist.elab.client.virtual.guipack.InteractiveMenu;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 
-public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer,
+public class STDMAPCustomizer extends AbstractCustomizer implements 
 		InteractiveMenu {
 
 	/**
@@ -1470,8 +1469,8 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 	private void okButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
 
-		acqConfig.setSelectedFrequency(new Frequency((double) stdAnima.getForceDt(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
+		getAcquisitionConfig().setSelectedFrequency(new Frequency((double) stdAnima.getForceDt(), getHardwareInfo()
+				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), getHardwareInfo()
 				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
 
 		byte simulType = 0;
@@ -1490,23 +1489,23 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 			final int nIMapa = nIMapaSlider.getValue();
 			final double dIMapa = Math.toRadians(dIMapaSlider.getValue());
 
-			acqConfig.setTotalSamples(nTheta * nIMapa * iter + nTheta * nIMapa);
+			getAcquisitionConfig().setTotalSamples(nTheta * nIMapa * iter + nTheta * nIMapa);
 
 			simulType = 1;
 
-			acqConfig.getSelectedHardwareParameter("k").setParameterValue("" + (float) k);
-			acqConfig.getSelectedHardwareParameter("pcor").setParameterValue("" + (float) pcor);
-			acqConfig.getSelectedHardwareParameter("iter").setParameterValue("" + iter);
+			getAcquisitionConfig().getSelectedHardwareParameter("k").setParameterValue("" + (float) k);
+			getAcquisitionConfig().getSelectedHardwareParameter("pcor").setParameterValue("" + (float) pcor);
+			getAcquisitionConfig().getSelectedHardwareParameter("iter").setParameterValue("" + iter);
 
-			acqConfig.getSelectedHardwareParameter("theta").setParameterValue("" + (float) theta);
-			acqConfig.getSelectedHardwareParameter("nTheta").setParameterValue("" + nTheta);
-			acqConfig.getSelectedHardwareParameter("dTheta").setParameterValue("" + (float) dTheta);
+			getAcquisitionConfig().getSelectedHardwareParameter("theta").setParameterValue("" + (float) theta);
+			getAcquisitionConfig().getSelectedHardwareParameter("nTheta").setParameterValue("" + nTheta);
+			getAcquisitionConfig().getSelectedHardwareParameter("dTheta").setParameterValue("" + (float) dTheta);
 
-			acqConfig.getSelectedHardwareParameter("iMapa").setParameterValue("" + (float) iMapa);
-			acqConfig.getSelectedHardwareParameter("nIMapa").setParameterValue("" + nIMapa);
-			acqConfig.getSelectedHardwareParameter("dIMapa").setParameterValue("" + (float) dIMapa);
+			getAcquisitionConfig().getSelectedHardwareParameter("iMapa").setParameterValue("" + (float) iMapa);
+			getAcquisitionConfig().getSelectedHardwareParameter("nIMapa").setParameterValue("" + nIMapa);
+			getAcquisitionConfig().getSelectedHardwareParameter("dIMapa").setParameterValue("" + (float) dIMapa);
 		} else if (animaRadioButton.isSelected()) {
-			acqConfig.setTotalSamples(nSamples);
+			getAcquisitionConfig().setTotalSamples(nSamples);
 			// Force dt = Frequencia
 			final double length = stdAnima.getLength() / 10d;
 			final double mass = stdAnima.getMass() / 100d;
@@ -1516,11 +1515,11 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 			simulType = 2;
 
-			acqConfig.getSelectedHardwareParameter("length").setParameterValue("" + (float) length);
-			acqConfig.getSelectedHardwareParameter("mass").setParameterValue("" + (float) mass);
-			acqConfig.getSelectedHardwareParameter("thetaDot").setParameterValue("" + (float) thetaDot);
-			acqConfig.getSelectedHardwareParameter("theta").setParameterValue("" + (float) theta);
-			acqConfig.getSelectedHardwareParameter("force").setParameterValue("" + (float) force);
+			getAcquisitionConfig().getSelectedHardwareParameter("length").setParameterValue("" + (float) length);
+			getAcquisitionConfig().getSelectedHardwareParameter("mass").setParameterValue("" + (float) mass);
+			getAcquisitionConfig().getSelectedHardwareParameter("thetaDot").setParameterValue("" + (float) thetaDot);
+			getAcquisitionConfig().getSelectedHardwareParameter("theta").setParameterValue("" + (float) theta);
+			getAcquisitionConfig().getSelectedHardwareParameter("force").setParameterValue("" + (float) force);
 		} else if (histRadioButton.isSelected()) {
 			final double k = (double) kSlider.getValue() / 100d;
 			final double pcor = (double) pcorSlider.getValue() / 100d;
@@ -1529,29 +1528,29 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 			final double theta = Math.toRadians(thetaSlider.getValue());
 			final double iMapa = Math.toRadians(iMapaSlider.getValue());
 
-			acqConfig.setTotalSamples(iter + 1);
+			getAcquisitionConfig().setTotalSamples(iter + 1);
 
 			simulType = 3;
 
-			acqConfig.getSelectedHardwareParameter("k").setParameterValue("" + (float) k);
-			acqConfig.getSelectedHardwareParameter("pcor").setParameterValue("" + (float) pcor);
-			acqConfig.getSelectedHardwareParameter("iter").setParameterValue("" + iter);
+			getAcquisitionConfig().getSelectedHardwareParameter("k").setParameterValue("" + (float) k);
+			getAcquisitionConfig().getSelectedHardwareParameter("pcor").setParameterValue("" + (float) pcor);
+			getAcquisitionConfig().getSelectedHardwareParameter("iter").setParameterValue("" + iter);
 
-			acqConfig.getSelectedHardwareParameter("theta").setParameterValue("" + (float) theta);
-			acqConfig.getSelectedHardwareParameter("iMapa").setParameterValue("" + (float) iMapa);
+			getAcquisitionConfig().getSelectedHardwareParameter("theta").setParameterValue("" + (float) theta);
+			getAcquisitionConfig().getSelectedHardwareParameter("iMapa").setParameterValue("" + (float) iMapa);
 		}
 
-		acqConfig.getSelectedHardwareParameter("staticImg").setParameterValue(
+		getAcquisitionConfig().getSelectedHardwareParameter("staticImg").setParameterValue(
 				"" + (staticRadioButton.isSelected() ? 1 : 0));
-		acqConfig.getSelectedHardwareParameter("simulType").setParameterValue("" + simulType);
+		getAcquisitionConfig().getSelectedHardwareParameter("simulType").setParameterValue("" + simulType);
 
-		acqConfig.getSelectedHardwareParameter("w").setParameterValue("" + widthSlider.getValue());
-		acqConfig.getSelectedHardwareParameter("h").setParameterValue("" + heightSlider.getValue());
-		acqConfig.getSelectedHardwareParameter("pixSize").setParameterValue("" + (byte) pixSizeSlider.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("w").setParameterValue("" + widthSlider.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("h").setParameterValue("" + heightSlider.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("pixSize").setParameterValue("" + (byte) pixSizeSlider.getValue());
 
-		for (int i = 0; i < acqConfig.getSelectedHardwareParameters().length; i++) {
-			System.out.println(acqConfig.getSelectedHardwareParameters(i).getParameterName() + " = "
-					+ acqConfig.getSelectedHardwareParameters(i).getParameterValue());
+		for (int i = 0; i < getAcquisitionConfig().getSelectedHardwareParameters().length; i++) {
+			System.out.println(getAcquisitionConfig().getSelectedHardwareParameters(i).getParameterName() + " = "
+					+ getAcquisitionConfig().getSelectedHardwareParameters(i).getParameterValue());
 		}
 
 		fireICustomizerListenerDone();
@@ -1597,76 +1596,10 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		test.setVisible(true);
 	}
 
-	// ****************************REC********************************************/
-
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
+	
 
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 
 			final byte simulType = Byte.parseByte(acqConfig.getSelectedHardwareParameterValue("simulType"));
@@ -1743,18 +1676,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		}
 	}
 
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
-
+	
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/vstdmap/resources/stdmap_iconified.PNG"));
@@ -1764,9 +1686,6 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		return "Standard Map Configuration Utility";
 	}
 
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
-	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JRadioButton animaRadioButton;

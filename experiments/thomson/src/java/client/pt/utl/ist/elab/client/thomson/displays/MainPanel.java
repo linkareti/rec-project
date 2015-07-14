@@ -112,7 +112,7 @@ public class MainPanel extends javax.swing.JPanel implements com.linkare.rec.imp
 		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new MainPanel(), java.awt.BorderLayout.CENTER);
 		dummy.pack();
-		dummy.show();
+		dummy.setVisible(true);
 
 	}
 

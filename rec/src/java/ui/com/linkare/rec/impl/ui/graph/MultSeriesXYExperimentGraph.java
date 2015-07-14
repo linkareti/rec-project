@@ -50,7 +50,7 @@ public class MultSeriesXYExperimentGraph extends javax.swing.JPanel implements E
 		scrollPane = new javax.swing.JScrollPane();
 		labelWaitData = new javax.swing.JLabel();
 
-		defaultXYDatasetProxy.setChannelDisplayY(1);
+		//defaultXYDatasetProxy.setChannelDisplayY(3);
 
 		setLayout(new java.awt.BorderLayout());
 
@@ -252,7 +252,7 @@ public class MultSeriesXYExperimentGraph extends javax.swing.JPanel implements E
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
 	public void setChannelDisplayY(final int channelDisplayY) {
-		// defaultXYDatasetProxy.setChannelDisplayY(channelDisplayY);
+		//defaultXYDatasetProxy.setChannelDisplayY(channelDisplayY);
 		setChannelDisplayYArray(new int[] { channelDisplayY });
 	}
 

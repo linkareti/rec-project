@@ -44,6 +44,7 @@ package pt.utl.ist.elab.client.webrobot.customizer;
 
 import javax.jnlp.BasicService;
 import javax.jnlp.ServiceManager;
+import javax.swing.JFileChooser;
 
 import pt.utl.ist.elab.client.webrobot.customizer.Utils.AbsoluteConstraints;
 import pt.utl.ist.elab.client.webrobot.customizer.Utils.AbsoluteLayout;
@@ -56,6 +57,7 @@ import pt.utl.ist.elab.client.webrobot.customizer.Utils.Undo;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
@@ -69,8 +71,11 @@ public class JPrograf extends javax.swing.JPanel {
 	private static final long serialVersionUID = -2937456048523484592L;
 	WebRobotCustomizer customizer;
 
-	/** Creates new form WebRobotCustomizer 
-	 * @param customizer */
+	/**
+	 * Creates new form WebRobotCustomizer
+	 * 
+	 * @param customizer
+	 */
 	public JPrograf(final WebRobotCustomizer customizer) {
 		this.customizer = customizer;
 		/**
@@ -103,6 +108,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jButtonProgStart.setMinimumSize(new java.awt.Dimension(71, 45));
 		jButtonProgStart.setPreferredSize(new java.awt.Dimension(71, 45));
 		jButtonProgStart.addMouseListener(new java.awt.event.MouseAdapter() {
+			@Override
 			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jButtonProgStartMousePressed(evt);
 			}
@@ -206,6 +212,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemNew.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/New16.gif")));
 		jMenuItemNew.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemNewActionPerformed(evt);
 			}
@@ -220,6 +227,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Open16.gif")));
 		jMenuItemOpen.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemOpenActionPerformed(evt);
 			}
@@ -234,6 +242,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemSave.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Save16.gif")));
 		jMenuItemSave.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemSaveActionPerformed(evt);
 			}
@@ -246,6 +255,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemSaveAs.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/SaveAs16.gif")));
 		jMenuItemSaveAs.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemSaveAsActionPerformed(evt);
 			}
@@ -260,6 +270,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Print16.gif")));
 		jMenuItemPrint.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemPrintActionPerformed(evt);
 			}
@@ -276,6 +287,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemOK.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/ok16.gif")));
 		jMenuItemOK.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemOKActionPerformed(evt);
 			}
@@ -289,6 +301,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Cancel16.gif")));
 		jMenuItemCancel.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemCancelActionPerformed(evt);
 			}
@@ -305,6 +318,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemUndo.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Undo16.gif")));
 		jMenuItemUndo.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemUndoActionPerformed(evt);
 			}
@@ -320,6 +334,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemRedo.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Redo16.gif")));
 		jMenuItemRedo.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemRedoActionPerformed(evt);
 			}
@@ -336,6 +351,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemCopy.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Copy16.gif")));
 		jMenuItemCopy.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemCopyActionPerformed(evt);
 			}
@@ -350,6 +366,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemPaste.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Paste16.gif")));
 		jMenuItemPaste.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemPasteActionPerformed(evt);
 			}
@@ -365,6 +382,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemHelp.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Help16.gif")));
 		jMenuItemHelp.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemHelpActionPerformed(evt);
 			}
@@ -379,6 +397,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/About16.gif")));
 		jMenuItemAbout.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemAboutActionPerformed(evt);
 			}
@@ -387,12 +406,12 @@ public class JPrograf extends javax.swing.JPanel {
 		jPopupMenu1.add(jMenuItemAbout);
 
 		jFileChooserSave.setAcceptAllFileFilterUsed(false);
-		jFileChooserSave.setCurrentDirectory(new java.io.File(System.getProperty("user.home")));
+		jFileChooserSave.setCurrentDirectory(new java.io.File(ReCSystemProperty.USER_HOME.getValue()));
 		jFileChooserSave.setDialogTitle("Guardar como...");
 		jFileChooserSave.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
 		jFileChooserSave.setFileFilter(prografExtension);
 		jFileChooserOpen.setAcceptAllFileFilterUsed(false);
-		jFileChooserOpen.setCurrentDirectory(new java.io.File(System.getProperty("user.home")));
+		jFileChooserOpen.setCurrentDirectory(new java.io.File(ReCSystemProperty.USER_HOME.getValue()));
 		jFileChooserOpen.setDialogTitle("Abrir...");
 		jFileChooserOpen.setFileFilter(prografExtension);
 		jMenuFile.setMnemonic('A');
@@ -405,6 +424,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemNew1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/New16.gif")));
 		jMenuItemNew1.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemNewActionPerformed(evt);
 			}
@@ -419,6 +439,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemOpen1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Open16.gif")));
 		jMenuItemOpen1.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemOpenActionPerformed(evt);
 			}
@@ -433,6 +454,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemSave1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Save16.gif")));
 		jMenuItemSave1.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemSaveActionPerformed(evt);
 			}
@@ -445,6 +467,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemSaveAs1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/SaveAs16.gif")));
 		jMenuItemSaveAs1.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemSaveAsActionPerformed(evt);
 			}
@@ -459,6 +482,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemPrint1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Print16.gif")));
 		jMenuItemPrint1.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemPrintActionPerformed(evt);
 			}
@@ -475,6 +499,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemOK1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/ok16.gif")));
 		jMenuItemOK1.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemOKActionPerformed(evt);
 			}
@@ -488,6 +513,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemCancel1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Cancel16.gif")));
 		jMenuItemCancel1.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemCancelActionPerformed(evt);
 			}
@@ -506,6 +532,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemUndo1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Undo16.gif")));
 		jMenuItemUndo1.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemUndoActionPerformed(evt);
 			}
@@ -521,6 +548,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemRedo1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Redo16.gif")));
 		jMenuItemRedo1.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemRedoActionPerformed(evt);
 			}
@@ -537,6 +565,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemCopy1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Copy16.gif")));
 		jMenuItemCopy1.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemCopyActionPerformed(evt);
 			}
@@ -551,6 +580,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemPaste1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Paste16.gif")));
 		jMenuItemPaste1.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemPasteActionPerformed(evt);
 			}
@@ -568,6 +598,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemHelp1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Help16.gif")));
 		jMenuItemHelp1.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemHelp1ActionPerformed(evt);
 			}
@@ -582,6 +613,7 @@ public class JPrograf extends javax.swing.JPanel {
 		jMenuItemAbout1.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/About16.gif")));
 		jMenuItemAbout1.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jMenuItemAboutActionPerformed(evt);
 			}
@@ -684,6 +716,7 @@ public class JPrograf extends javax.swing.JPanel {
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Flow16.gif")));
 		jButton1.setToolTipText("Default");
 		jButton1.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButton1ActionPerformed(evt);
 			}
@@ -695,6 +728,7 @@ public class JPrograf extends javax.swing.JPanel {
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/ok16.gif")));
 		jButtonOK.setToolTipText("Concluir o diagrama de estados");
 		jButtonOK.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonOKActionPerformed(evt);
 			}
@@ -706,6 +740,7 @@ public class JPrograf extends javax.swing.JPanel {
 				"/pt/utl/ist/elab/client/webrobot/customizer/Icons/Cancel16.gif")));
 		jButtonCancel.setToolTipText("Cancelar diagrama de estados");
 		jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				jButtonCancelActionPerformed(evt);
 			}
@@ -722,11 +757,13 @@ public class JPrograf extends javax.swing.JPanel {
 
 		jPanelContainer.setPreferredSize(new java.awt.Dimension(5000, 5000));
 		jPanelContainer.addMouseListener(new java.awt.event.MouseAdapter() {
+			@Override
 			public void mousePressed(final java.awt.event.MouseEvent evt) {
 				jPanelContainerMousePressed(evt);
 			}
 		});
 		jPanelContainer.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+			@Override
 			public void mouseMoved(final java.awt.event.MouseEvent evt) {
 				jPanelContainerMouseMoved(evt);
 			}
@@ -815,7 +852,7 @@ public class JPrograf extends javax.swing.JPanel {
 			if (confCopy.isCopying()) {
 				confCopy.setRowText("" + getRow(evt.getY()));
 				confCopy.setColText("" + getColumn(evt.getX()));
-				jMenuItemCopyActionPerformed(new java.awt.event.ActionEvent((Object) jPanelContainer, -3, null));
+				jMenuItemCopyActionPerformed(new java.awt.event.ActionEvent(jPanelContainer, -3, null));
 			}
 			/**
 			 * If in the Paste UI was selected the option to get the column and
@@ -824,7 +861,7 @@ public class JPrograf extends javax.swing.JPanel {
 			else if (confPaste.isPasting()) {
 				confPaste.setRowText("" + getRow(evt.getY()));
 				confPaste.setColText("" + getColumn(evt.getX()));
-				jMenuItemPasteActionPerformed(new java.awt.event.ActionEvent((Object) jPanelContainer, -3, null));
+				jMenuItemPasteActionPerformed(new java.awt.event.ActionEvent(jPanelContainer, -3, null));
 			}
 			/** Add the button in the selected place */
 			else {
@@ -883,7 +920,7 @@ public class JPrograf extends javax.swing.JPanel {
 		 */
 		if (evt != null && evt.getID() != -1) {
 			new CenterFrame(this, confPaste);
-			confPaste.show();
+			confPaste.setVisible(true);
 			if (confPaste.isPasting() || confPaste.isCancel()) {
 				return;
 			}
@@ -1016,7 +1053,7 @@ public class JPrograf extends javax.swing.JPanel {
 		 */
 		if (evt != null && evt.getID() != -2) {
 			new CenterFrame(this, confCopy);
-			confCopy.show();
+			confCopy.setVisible(true);
 			if (confCopy.isCopying() || confCopy.isCancel()) {
 				return;
 			}
@@ -1211,7 +1248,7 @@ public class JPrograf extends javax.swing.JPanel {
 
 	private void jMenuItemSaveAsActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemSaveAsActionPerformed
 		final int returnValue = jFileChooserSave.showSaveDialog(this);
-		if (returnValue == jFileChooserSave.APPROVE_OPTION) {
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			haveBeenChanges = false;
 			if (jFileChooserSave.getFileFilter().equals(prografExtension)) {
 				extension = prografExtension.getExtension();
@@ -1236,7 +1273,7 @@ public class JPrograf extends javax.swing.JPanel {
 
 	private void jMenuItemOpenActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItemOpenActionPerformed
 		final int returnValue = jFileChooserOpen.showOpenDialog(this);
-		if (returnValue == jFileChooserOpen.APPROVE_OPTION) {
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			jMenuItemNewActionPerformed(null);
 			if (actionNewCanceled) {
 				actionNewCanceled = false;
@@ -1286,7 +1323,7 @@ public class JPrograf extends javax.swing.JPanel {
 		confInOut = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfInOut(JPrograf.jFrameDummy, true,
 				JPrograf.modelConfInOut);
 		new CenterFrame(this, confInOut);
-		confInOut.show();
+		confInOut.setVisible(true);
 	}
 
 	/**
@@ -1317,7 +1354,7 @@ public class JPrograf extends javax.swing.JPanel {
 			if (confCopy.isCopying()) {
 				confCopy.setRowText("" + row);
 				confCopy.setColText("" + col);
-				jMenuItemCopyActionPerformed(new java.awt.event.ActionEvent((Object) jPanelContainer, -3, null));
+				jMenuItemCopyActionPerformed(new java.awt.event.ActionEvent(jPanelContainer, -3, null));
 				return;
 			}
 			/**
@@ -1327,7 +1364,7 @@ public class JPrograf extends javax.swing.JPanel {
 			else if (confPaste.isPasting()) {
 				confPaste.setRowText("" + row);
 				confPaste.setColText("" + col);
-				jMenuItemPasteActionPerformed(new java.awt.event.ActionEvent((Object) jPanelContainer, -3, null));
+				jMenuItemPasteActionPerformed(new java.awt.event.ActionEvent(jPanelContainer, -3, null));
 				return;
 			}
 
@@ -1338,7 +1375,7 @@ public class JPrograf extends javax.swing.JPanel {
 			 * block) 6-del column 7-del column
 			 */
 			new CenterFrame(this, editSubDel);
-			editSubDel.show();
+			editSubDel.setVisible(true);
 			if (editSubDel.getSelection() == 0) {
 				return;
 			}
@@ -1380,7 +1417,7 @@ public class JPrograf extends javax.swing.JPanel {
 				 */
 				subBlock.setSubTipo(-1);
 				new CenterFrame(this, subBlock);
-				subBlock.show();
+				subBlock.setVisible(true);
 				if (subBlock.getSubTipo() == -1) {
 					return;
 				}
@@ -1395,8 +1432,7 @@ public class JPrograf extends javax.swing.JPanel {
 				 */
 				rowToCopyIni = row;
 				colToCopyIni = col;
-				final java.awt.event.ActionEvent aEvt2 = new java.awt.event.ActionEvent((Object) jPanelContainer, -2,
-						null);
+				final java.awt.event.ActionEvent aEvt2 = new java.awt.event.ActionEvent(jPanelContainer, -2, null);
 				jMenuItemCopyActionPerformed(aEvt2);// aEvt2 just to send not
 				// null...
 			}
@@ -1477,7 +1513,7 @@ public class JPrograf extends javax.swing.JPanel {
 			introMethod = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.IntroMethod(
 					JPrograf.jFrameDummy, true, addEsquerda, addDireita, addPasteEsquerda, addPasteDireita);
 			new CenterFrame(this, introMethod);
-			introMethod.show();
+			introMethod.setVisible(true);
 			if (introMethod.getSelOption() == -1) {
 				return;
 			}
@@ -1535,8 +1571,7 @@ public class JPrograf extends javax.swing.JPanel {
 				 * Create an event with -1 to notify the paste method that is
 				 * has to do a left paste
 				 */
-				final java.awt.event.ActionEvent aEvt = new java.awt.event.ActionEvent((Object) jPanelContainer, -1,
-						null);
+				final java.awt.event.ActionEvent aEvt = new java.awt.event.ActionEvent(jPanelContainer, -1, null);
 				jMenuItemPasteActionPerformed(aEvt);
 
 				/**
@@ -1578,20 +1613,23 @@ public class JPrograf extends javax.swing.JPanel {
 	/**
 	 * @param args the command line arguments
 	 */
-	/** Only for debug!! 
-	 * @param args */
+	/**
+	 * Only for debug!!
+	 * 
+	 * @param args
+	 */
 	public static void main(final String args[]) {
 		final javax.swing.JFrame jf = new javax.swing.JFrame();
 		jf.getContentPane().add(new JPrograf(null));
 		jf.pack();
-		jf.show();
+		jf.setVisible(true);
 	}
 
 	/**
 	 * Get the column with the mouse X position in the panel
 	 */
 	public int getColumn(final int x) {
-		column = (int) (x / COL_WIDTH + 1);
+		column = x / COL_WIDTH + 1;
 		if (maxColumn < column) {
 			maxColumn = column;
 		}
@@ -1602,7 +1640,7 @@ public class JPrograf extends javax.swing.JPanel {
 	 * Get the row with the mouse Y position in the panel
 	 */
 	public int getRow(final int y) {
-		row = (int) (y / COL_HEIGHT + 1);
+		row = y / COL_HEIGHT + 1;
 		if (maxRow < row) {
 			maxRow = row;
 		}
@@ -1710,12 +1748,14 @@ public class JPrograf extends javax.swing.JPanel {
 		}
 		if (!isHorLine(comp)) {
 			comp.addMouseListener(new java.awt.event.MouseAdapter() {
+				@Override
 				public void mousePressed(final java.awt.event.MouseEvent evt2) {
 					compMousePressed(evt2);
 				}
 			});
 		}
 		comp.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+			@Override
 			public void mouseMoved(final java.awt.event.MouseEvent evt) {
 				compMouseMoved(evt);
 			}
@@ -2126,8 +2166,8 @@ public class JPrograf extends javax.swing.JPanel {
 	 * panel
 	 */
 	private void updateBottomPanel(final int x, final int y) {
-		final int rowCl = (int) (y / COL_HEIGHT + 1);
-		final int colCl = (int) (x / COL_WIDTH + 1);
+		final int rowCl = y / COL_HEIGHT + 1;
+		final int colCl = x / COL_WIDTH + 1;
 		jLabelNumComps.setText("N� total de blocos = " + countTotalBlocks());
 		jLabelRow.setText("Linha = " + rowCl);
 		jLabelCol.setText("Coluna = " + colCl);
@@ -2536,9 +2576,8 @@ public class JPrograf extends javax.swing.JPanel {
 		endedRowCol = false;// for treatData()!
 		counter = 0;// for treatData()!
 		int check;
-		final int lineSeparator = (int) System.getProperty("line.separator").charAt(0);
+		final int lineSeparator = ReCSystemProperty.LINE_SEPARATOR.getValue().charAt(0);
 		StringBuffer buffer = new StringBuffer(100);
-		;
 
 		try {
 			buffer = new StringBuffer(200);
@@ -2587,7 +2626,7 @@ public class JPrograf extends javax.swing.JPanel {
 		endedRowCol = false;// for treatData()!
 		counter = 0;// for treatData()!
 		int check;
-		final int lineSeparator = (int) System.getProperty("line.separator").charAt(0);
+		final int lineSeparator = ReCSystemProperty.LINE_SEPARATOR.getValue().charAt(0);
 		StringBuffer buffer = new StringBuffer(100);
 		;
 		final java.io.FileInputStream fileInputStream = new java.io.FileInputStream(openFile);

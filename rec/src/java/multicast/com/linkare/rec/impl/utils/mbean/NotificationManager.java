@@ -11,6 +11,8 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.management.ListenerNotFoundException;
 import javax.management.MBeanNotificationInfo;
@@ -19,10 +21,10 @@ import javax.management.NotificationBroadcasterSupport;
 import javax.management.NotificationFilter;
 import javax.management.NotificationListener;
 
+import com.linkare.rec.impl.threading.ProcessingManager;
 import com.linkare.rec.web.MultiCastControllerNotifInfoDTO;
 import com.linkare.rec.web.mbean.MBeanObjectNameFactory;
 import com.linkare.rec.web.mbean.NotificationTypeEnum;
-import com.linkare.rec.impl.threading.ProcessingManager;
 
 /**
  * Singleton to manage the jmx notifications
@@ -30,6 +32,8 @@ import com.linkare.rec.impl.threading.ProcessingManager;
  * @author Artur Correia - Linkare TI
  */
 public final class NotificationManager {
+
+	private static final Logger LOGGER = Logger.getLogger(NotificationManager.class.getName());
 
 	// system property?
 	private static final int MAX_NOTIFICATIONS_IN_MEMORY = 1000;
@@ -114,7 +118,6 @@ public final class NotificationManager {
 		final Notification notif = notificationType.createNotif(MBeanObjectNameFactory
 				.getMultiCastControllerObjectName());
 
-		// FIXME: convert to compositedata
 		notif.setUserData(userData);
 
 		sendAsynNotification(notif);
@@ -132,10 +135,11 @@ public final class NotificationManager {
 	private void sendAsynNotification(final Notification notification) {
 
 		if (!notificationQueue.offer(notification)) {
-			// TODO: inform system administrator that we are discarding
-			// notifications because we reach the max number of notifications in
-			// memory
-			// discarding oldest notification
+			if (LOGGER.isLoggable(Level.WARNING)) {
+				LOGGER.log(Level.WARNING,
+						"Discarding oldest JMX async notifications because the maximum number has been reached :'"
+								+ MAX_NOTIFICATIONS_IN_MEMORY + "'");
+			}
 			synchronized (this) {
 				notificationQueue.poll();
 				notificationQueue.offer(notification);
@@ -166,8 +170,7 @@ public final class NotificationManager {
 					}
 
 				} catch (Exception e) {
-					// TODO: replace with a logger
-					e.printStackTrace();
+					LOGGER.log(Level.WARNING, "Unable to send jmx notification", e);
 				} finally {
 					runningLock.unlock();
 

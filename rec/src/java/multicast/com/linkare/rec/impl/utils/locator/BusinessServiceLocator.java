@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import com.linkare.rec.impl.utils.Defaults;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 
 /**
  * 
@@ -27,21 +27,11 @@ public final class BusinessServiceLocator {
 
 	private static final Logger LOG = Logger.getLogger(BusinessServiceLocator.class.getName());
 
-	public static final String SYSPROP_ALLOCATIONMANAGER_HOST = "rec.multicast.allocation.manager.host";
-	public static final String SYSPROP_ALLOCATIONMANAGER_PORT = "rec.multicast.allocation.manager.port";
-
-	public static final String NAMING_FACTORY = Defaults.defaultIfEmpty(
-			System.getProperty(InitialContext.INITIAL_CONTEXT_FACTORY),
-			"com.sun.enterprise.naming.impl.SerialInitContextFactory");
-	public static final String NAMING_URL_PKGS = Defaults.defaultIfEmpty(
-			System.getProperty(InitialContext.URL_PKG_PREFIXES), "com.sun.enterprise.naming");
-	public static final String NAMING_STATE = Defaults.defaultIfEmpty(
-			System.getProperty(InitialContext.STATE_FACTORIES),
-			"com.sun.corba.ee.impl.presentation.rmi.JNDIStateFactoryImpl");
-	public static final String ORB_ENV_HOST = Defaults.defaultIfEmpty(
-			System.getProperty(SYSPROP_ALLOCATIONMANAGER_HOST), "localhost");
-	public static final String ORB_ENV_PORT = Defaults.defaultIfEmpty(
-			System.getProperty(SYSPROP_ALLOCATIONMANAGER_PORT), "3700");
+	public static final String NAMING_FACTORY = ReCSystemProperty.REC_WEB_INITIAL_CONTEXT_FACTORY.getValue();
+	public static final String NAMING_URL_PKGS = ReCSystemProperty.REC_WEB_NAMING_CTX_PKGS.getValue();
+	public static final String NAMING_STATE = ReCSystemProperty.REC_WEB_NAMING_FACTORY_STATE.getValue();
+	public static final String ORB_ENV_HOST = ReCSystemProperty.REC_WEB_NAMING_HOST.getValue();
+	public static final String ORB_ENV_PORT = ReCSystemProperty.REC_WEB_NAMING_PORT.getValue();
 
 	private static final String ORG_OMG_CORBA_ORB_INITIAL_PORT = "org.omg.CORBA.ORBInitialPort";
 	private static final String ORG_OMG_CORBA_ORB_INITIAL_HOST = "org.omg.CORBA.ORBInitialHost";

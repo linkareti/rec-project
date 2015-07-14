@@ -13,97 +13,100 @@ import java.util.List;
  */
 public class DataProducerDTO extends AbstractBaseDTO {
 
-    /**
+	/**
      * 
      */
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private HardwareAcquisitionConfigDTO acqHeader;
+	private HardwareAcquisitionConfigDTO acqHeader;
 
-    private String dataProducerName;
+	private String dataProducerName;
 
-    private String oid;
+	private String oid;
 
-    private String user;
+	private String user;
 
-    private DataProducerStateEnum dataCollectorState;
+	private DataProducerStateEnum dataCollectorState;
 
-    private List<SamplesPacketDTO> samplesPacketMatrix;
+	private List<SamplesPacketDTO> samplesPacketMatrix;
 
-    private byte[] samplesPacketMatrixSerialized;
+	private byte[] samplesPacketMatrixSerialized;
 
-    public DataProducerDTO() {
-    }
+	public DataProducerDTO() {
+	}
 
-    public HardwareAcquisitionConfigDTO getAcqHeader() {
-	return acqHeader;
-    }
+	public HardwareAcquisitionConfigDTO getAcqHeader() {
+		return acqHeader;
+	}
 
-    public void setAcqHeader(HardwareAcquisitionConfigDTO acqHeader) {
-	this.acqHeader = acqHeader;
-    }
+	public void setAcqHeader(HardwareAcquisitionConfigDTO acqHeader) {
+		this.acqHeader = acqHeader;
+	}
 
-    public String getDataProducerName() {
-	return dataProducerName;
-    }
+	public String getDataProducerName() {
+		return dataProducerName;
+	}
 
-    public void setDataProducerName(String dataProducerName) {
-	this.dataProducerName = dataProducerName;
-    }
+	public void setDataProducerName(String dataProducerName) {
+		this.dataProducerName = dataProducerName;
+	}
 
-    public String getOid() {
-	return oid;
-    }
+	public String getOid() {
+		return oid;
+	}
 
-    public void setOid(String oid) {
-	this.oid = oid;
-    }
+	public void setOid(String oid) {
+		this.oid = oid;
+	}
 
-    public List<SamplesPacketDTO> getSamplesPacketMatrix() {
-	return samplesPacketMatrix;
-    }
+	public List<SamplesPacketDTO> getSamplesPacketMatrix() {
+		return samplesPacketMatrix;
+	}
 
-    public void setSamplesPacketMatrix(List<SamplesPacketDTO> samplesPacketMatrix) {
-	this.samplesPacketMatrix = samplesPacketMatrix;
-    }
+	public void setSamplesPacketMatrix(
+			List<SamplesPacketDTO> samplesPacketMatrix) {
+		this.samplesPacketMatrix = samplesPacketMatrix;
+	}
 
-    public String getUser() {
-	return user;
-    }
+	public String getUser() {
+		return user;
+	}
 
-    public void setUser(String user) {
-	this.user = user;
-    }
+	public void setUser(String user) {
+		this.user = user;
+	}
 
-    public byte[] getSamplesPacketMatrixSerialized() {
-	return samplesPacketMatrixSerialized;
-    }
+	public byte[] getSamplesPacketMatrixSerialized() {
+		return samplesPacketMatrixSerialized;
+	}
 
-    public void setSamplesPacketMatrixSerialized(byte[] samplesPacketMatrixSerialized) {
-	this.samplesPacketMatrixSerialized = samplesPacketMatrixSerialized;
-    }
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
+	public void setSamplesPacketMatrixSerialized(
+			byte[] samplesPacketMatrixSerialized) {
+		this.samplesPacketMatrixSerialized = samplesPacketMatrixSerialized;
+	}
 
-    public DataProducerStateEnum getDataCollectorState() {
-	return dataCollectorState;
-    }
+	public DataProducerStateEnum getDataCollectorState() {
+		return dataCollectorState;
+	}
 
-    public void setDataCollectorState(DataProducerStateEnum dataCollectorState) {
-	this.dataCollectorState = dataCollectorState;
-    }
+	public void setDataCollectorState(DataProducerStateEnum dataCollectorState) {
+		this.dataCollectorState = dataCollectorState;
+	}
 
-    @Override
-    public String toString() {
-	StringBuilder builder = new StringBuilder();
-	builder.append("DataProducerDTO [acqHeader=");
-	builder.append(acqHeader);
-	builder.append(", dataProducerName=");
-	builder.append(dataProducerName);
-	builder.append(", oid=");
-	builder.append(oid);
-	builder.append(", user=");
-	builder.append(user);
-	builder.append("]");
-	return builder.toString();
-    }
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("DataProducerDTO [acqHeader=");
+		builder.append(acqHeader);
+		builder.append(", dataProducerName=");
+		builder.append(dataProducerName);
+		builder.append(", oid=");
+		builder.append(oid);
+		builder.append(", user=");
+		builder.append(user);
+		builder.append("]");
+		return builder.toString();
+	}
 
 }

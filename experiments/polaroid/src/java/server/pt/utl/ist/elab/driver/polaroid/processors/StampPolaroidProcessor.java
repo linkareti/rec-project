@@ -36,17 +36,17 @@ public class StampPolaroidProcessor extends AbstractStampProcessor {
 		int angulo = 0;
 		float intensidade = 0;
 
-		final String[] splitedStr = command.getCommand().split(" ");
+		final String[] splitedStr = command.getCommand().split("\t");
 
 		if (command.getCommandIdentifier().equalsIgnoreCase(StampPolaroidProcessor.COMMAND_IDENTIFIER)
 				&& splitedStr[0] != null) {
 			try {
 				angulo = Integer.parseInt(splitedStr[0]);
-				final Integer oAngulo = new Integer((angulo * 180) / 155);
+				final Float oAngulo = new Float((angulo * 180F) / 1300F);
 				command.addCommandData(StampPolaroidProcessor.ANGULO, oAngulo);
 
 				intensidade = Integer.parseInt(splitedStr[1]);
-				final Float oIntensidade = new Float((intensidade * 5) / 1024F);
+				final Float oIntensidade = new Float((intensidade * 5F) / 4096F);
 				command.addCommandData(StampPolaroidProcessor.INTENSIDADE, oIntensidade);
 
 				command.setData(true);

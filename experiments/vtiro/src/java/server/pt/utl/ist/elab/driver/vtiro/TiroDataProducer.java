@@ -117,17 +117,23 @@ public class TiroDataProducer extends VirtualBaseDataSource implements Runnable 
 							.getChannelsConfig(6).getSelectedScale().getDefaultErrorValue(), getAcquisitionHeader()
 							.getChannelsConfig(6).getSelectedScale().getMultiplier());
 
+					System.out.println("**** ADDING ROW "+currentSample);
+					
 					addDataRow(value);
+					System.out.println("**** SLEEPING FOR "+Math.round(dt * 1000));
 					Thread.sleep(Math.round(dt * 1000));
+					
 					currentSample++;
 
 				}
 
-				join(100);
+				System.out.println("***** ENDING PRODUCTION OF DATA ");
 				endProduction();
 
+				System.out.println("***** STOPING HARDWARE ");
 				driver.stopVirtualHardware();
-			} catch (final InterruptedException ie) {
+			} catch (final Throwable t) {
+				t.printStackTrace(System.out);
 			}
 		}
 	}

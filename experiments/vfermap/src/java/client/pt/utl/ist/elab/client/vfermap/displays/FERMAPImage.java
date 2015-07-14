@@ -114,9 +114,6 @@ public class FERMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModel
 		nn = nPsi * nU;
 		iter = 20000;
 
-		final int w = 800;
-		final int h = 800;
-
 		// config(false, (short)1, w, h, nTheta*nI, iter);
 		mapImg = new BufferedImage(800, 800, BufferedImage.TYPE_BYTE_INDEXED);// getWidth()-leftGutter-rightGutter,
 		// getHeight()-topGutter-bottomGutter,BufferedImage.TYPE_INT_RGB);
@@ -190,7 +187,7 @@ public class FERMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModel
 			@Override
 			public void windowClosing(final java.awt.event.WindowEvent e) {
 				System.exit(0);
-			};
+			}
 		});
 		final FERMAPImage ferim = new FERMAPImage();
 		test.getContentPane().add(ferim);

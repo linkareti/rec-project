@@ -3,12 +3,15 @@ package com.linkare.rec.impl.data;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.event.EventListenerList;
 
 import com.linkare.rec.data.acquisition.PhysicsValue;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 
 /**
  * This class implements a sort of repository for data which hides the fact that
@@ -36,12 +39,6 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 
 	private static final Logger LOGGER = Logger.getLogger(DiscardablePhysicsValueMatrix.class.getName());
 
-	/**
-	 * The default value of free memory space available in case the System
-	 * property named {@link #SYSPROP_FREE_THRESHOLD_NAME} is not defined
-	 */
-	private static final double DEFAULT_FREE_THRESHOLD = 10.;
-
 	// The free mem should be defined by in the init scripts...
 	/**
 	 * Name of the system property that should be defined to override the
@@ -53,14 +50,12 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	/**
 	 * The free memory space after which the data dumping to disk occurs
 	 */
-	public static final double FREE_THRESHOLD_VALUE = com.linkare.rec.impl.utils.Defaults.defaultIfEmpty(
-			System.getProperty(DiscardablePhysicsValueMatrix.SYSPROP_FREE_THRESHOLD_NAME),
-			DiscardablePhysicsValueMatrix.DEFAULT_FREE_THRESHOLD);
+	public static final double FREE_THRESHOLD_VALUE = Double.parseDouble(ReCSystemProperty.PERCENT_FREEMEMORY_SERIALIZATION.getValue());
 
 	/**
 	 * An indexed {@link HashMap} of rowNumber to {@link PhysicsValue}[] of data
 	 */
-	private HashMap<Integer, PhysicsValue[]> samplesRows = null;
+	private ConcurrentMap<Integer, PhysicsValue[]> samplesRows = null;
 
 	/**
 	 * The last available sample count
@@ -148,7 +143,7 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 				// Try to signal the garbage collector since we are near
 				// exaustion
 			} catch (final IOException e) {
-
+				e.printStackTrace();
 			}
 		}
 		// Now say to all listeners that data is available
@@ -170,10 +165,10 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 
 		// and creates or resizes the samplesRows variable
 		if (samplesRows == null) {
-			samplesRows = new HashMap<Integer, PhysicsValue[]>(totalSamples);
+			samplesRows = new ConcurrentHashMap<Integer, PhysicsValue[]>(totalSamples);
 		} else {
 			final Map<Integer, PhysicsValue[]> tempRows = samplesRows;
-			samplesRows = new HashMap<Integer, PhysicsValue[]>(totalSamples);
+			samplesRows = new ConcurrentHashMap<Integer, PhysicsValue[]>(totalSamples);
 			samplesRows.putAll(tempRows);
 		}
 	}

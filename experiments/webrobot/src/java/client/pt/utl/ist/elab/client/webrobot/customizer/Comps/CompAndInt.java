@@ -41,7 +41,11 @@ public class CompAndInt extends pt.utl.ist.elab.client.webrobot.customizer.Comps
 	/** Holds value of property cancel. */
 	private boolean cancel = false;
 
-	/** Creates a new instance of CompInt */
+	/**
+	 * Creates a new instance of CompInt
+	 * 
+	 * @param parent
+	 */
 	public CompAndInt(final javax.swing.JFrame parent) {
 		super();
 		setCancel(false);
@@ -49,7 +53,7 @@ public class CompAndInt extends pt.utl.ist.elab.client.webrobot.customizer.Comps
 		confCompAndInt = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfCompAndInt(parent, true,
 				model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confCompAndInt);
-		confCompAndInt.show();
+		confCompAndInt.setVisible(true);
 		if (confCompAndInt.isCancel()) {
 			setCancel(true);
 			return;
@@ -133,7 +137,7 @@ public class CompAndInt extends pt.utl.ist.elab.client.webrobot.customizer.Comps
 		confCompAndInt = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfCompAndInt(parent, true,
 				model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confCompAndInt);
-		confCompAndInt.show();
+		confCompAndInt.setVisible(true);
 	}
 
 	@Override

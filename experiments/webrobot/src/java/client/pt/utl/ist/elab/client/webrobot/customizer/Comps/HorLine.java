@@ -18,7 +18,6 @@ public class HorLine extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 	private final int WIDTH = 77;
 	private final int HEIGHT = 45;
 	private final java.awt.Dimension dimension = new java.awt.Dimension(WIDTH, HEIGHT);
-	private final int TIPO = 99;
 	private final java.awt.Color backgroundColor = new java.awt.Color(204, 204, 204);
 	private javax.swing.ImageIcon image;
 	private final String fullNameDescription = "ligacao";

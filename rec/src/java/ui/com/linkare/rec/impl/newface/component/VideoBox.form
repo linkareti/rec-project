@@ -80,7 +80,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="java.awt.Canvas" name="videoCanvas">
+        <Component class="com.linkare.rec.impl.newface.component.VideoCanvas" name="videoCanvas">
           <Properties>
             <Property name="background" type="java.awt.Color" resourceKey="videoCanvas.background"/>
             <Property name="name" type="java.lang.String" value="videoCanvas" noResource="true"/>

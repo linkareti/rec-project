@@ -30,7 +30,6 @@ public class DrawableMolas extends InteractivePanel {
 	private final InteractiveText mola1T, mola2T, mola3T;
 	public InteractiveCircle bola;
 	public Dataset caixa;
-	private int rato;
 	public M3Customizer gui;
 
 	public DrawableMolas(final M3Customizer gui_) {
@@ -94,7 +93,7 @@ public class DrawableMolas extends InteractivePanel {
 			mousey = panel.getMouseY();
 			fazMexer(mousex, mousey);
 		}
-		rato = panel.getMouseAction();
+		panel.getMouseAction();
 
 	}
 

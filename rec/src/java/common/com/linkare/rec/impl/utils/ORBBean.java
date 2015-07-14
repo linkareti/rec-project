@@ -21,6 +21,7 @@ import org.omg.CORBA.ORB;
 import org.omg.CORBA.Policy;
 import org.omg.CORBA.PolicyManager;
 import org.omg.CORBA.SetOverrideType;
+import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.CORBA.portable.Delegate;
 import org.omg.CORBA.portable.ObjectImpl;
 import org.omg.CosNaming.NameComponent;
@@ -37,6 +38,12 @@ import org.omg.PortableServer.Servant;
 import org.omg.PortableServer.ServantManager;
 import org.omg.PortableServer.ServantRetentionPolicyValue;
 import org.omg.PortableServer.ThreadPolicyValue;
+
+import com.linkare.rec.acquisition.MultiCastController;
+import com.linkare.rec.acquisition.MultiCastControllerHelper;
+import com.linkare.rec.impl.config.ReCSystemProperty;
+import com.linkare.rec.impl.wrappers.MultiCastControllerWrapper;
+import com.linkare.rec.utils.ClassUtils;
 
 /**
  * 
@@ -114,7 +121,7 @@ public class ORBBean {
 	}
 
 	private class ORBRunner extends Thread {
-		org.omg.CORBA.ORB the_orb = null;
+		private org.omg.CORBA.ORB the_orb = null;
 
 		public ORBRunner(final org.omg.CORBA.ORB the_orb) {
 			this.the_orb = the_orb;
@@ -128,14 +135,23 @@ public class ORBBean {
 				notifyAll();
 			}
 			try {
+				Runtime.getRuntime().addShutdownHook(new Thread() {
+					/**
+					 * {@inheritDoc}
+					 */
+					@Override
+					public void run() {
+						the_orb.shutdown(false);
+					}
+				});
 				the_orb.run();
 			} catch (Exception e) {
-				LOGGER.log(Level.SEVERE, "Error running the ORB: "+e.getMessage(), e);
+				LOGGER.log(Level.SEVERE, "Error running the ORB: " + e.getMessage(), e);
 			}
 		}
 	}
 
-	public org.omg.CORBA.ORB getORB() {
+	private org.omg.CORBA.ORB getORB() {
 		synchronized (orb_synch) {
 			return the_orb;
 		}
@@ -271,15 +287,15 @@ public class ORBBean {
 		}
 	}
 
-//	public void deactivateServant(final Servant servant) {
-//		synchronized (orb_synch) {
-//			try {
-//				getAutoIdRootPOA().deactivate_object(getAutoIdRootPOA().servant_to_id(servant));
-//			} catch (final Exception e) {
-//				LOGGER.log(Level.SEVERE, e.getMessage(), e);
-//			}
-//		}
-//	}
+	// public void deactivateServant(final Servant servant) {
+	// synchronized (orb_synch) {
+	// try {
+	// getAutoIdRootPOA().deactivate_object(getAutoIdRootPOA().servant_to_id(servant));
+	// } catch (final Exception e) {
+	// LOGGER.log(Level.SEVERE, e.getMessage(), e);
+	// }
+	// }
+	// }
 
 	public void deactivateServant(final byte[] oid) {
 		synchronized (orb_synch) {
@@ -296,11 +312,11 @@ public class ORBBean {
 			throws Exception {
 		synchronized (orb_synch) {
 			final String delegateInterfaceName = remoteInterface.getName() + "Operations";
-			final Class<?> delegateInterface = Class.forName(delegateInterfaceName, false, this.getClass()
+			final Class<?> delegateInterface = ClassUtils.findClass(delegateInterfaceName, getClass()
 					.getClassLoader());
 
 			final String poaTieServantClassName = remoteInterface.getName() + "POATie";
-			final Class<?> poaTieServantClass = Class.forName(poaTieServantClassName, false, this.getClass()
+			final Class<?> poaTieServantClass = ClassUtils.findClass(poaTieServantClassName, getClass()
 					.getClassLoader());
 
 			final Constructor<?> servantCtr = poaTieServantClass.getConstructor(new Class[] { delegateInterface,
@@ -319,11 +335,11 @@ public class ORBBean {
 			final byte[] oid) throws Exception {
 		synchronized (orb_synch) {
 			final String delegateInterfaceName = remoteInterface.getName() + "Operations";
-			final Class<?> delegateInterface = Class.forName(delegateInterfaceName, false, this.getClass()
+			final Class<?> delegateInterface = ClassUtils.findClass(delegateInterfaceName, getClass()
 					.getClassLoader());
 
 			final String poaTieServantClassName = remoteInterface.getName() + "POATie";
-			final Class<?> poaTieServantClass = Class.forName(poaTieServantClassName, false, this.getClass()
+			final Class<?> poaTieServantClass = ClassUtils.findClass(poaTieServantClassName, getClass()
 					.getClassLoader());
 
 			final Constructor<?> servantCtr = poaTieServantClass.getConstructor(new Class[] { delegateInterface,
@@ -342,11 +358,11 @@ public class ORBBean {
 			final ObjectID oidOut) throws Exception {
 		synchronized (orb_synch) {
 			final String delegateInterfaceName = remoteInterface.getName() + "Operations";
-			final Class<?> delegateInterface = Class.forName(delegateInterfaceName, false, this.getClass()
+			final Class<?> delegateInterface = ClassUtils.findClass(delegateInterfaceName, getClass()
 					.getClassLoader());
 
 			final String poaTieServantClassName = remoteInterface.getName() + "POATie";
-			final Class<?> poaTieServantClass = Class.forName(poaTieServantClassName, false, this.getClass()
+			final Class<?> poaTieServantClass = ClassUtils.findClass(poaTieServantClassName, getClass()
 					.getClassLoader());
 
 			final Constructor<?> servantCtr = poaTieServantClass.getConstructor(new Class[] { delegateInterface,
@@ -649,5 +665,33 @@ public class ORBBean {
 		}
 	}
 
+	/**
+	 * Resolves the multicast initial reference
+	 * 
+	 * @return A multicastcontroller wrapper
+	 * @throws InvalidName if the multicast controller system property does not
+	 *             refer to the correct object
+	 */
+	public MultiCastControllerWrapper resolveMultiCast() throws InvalidName {
+		MultiCastController delegate;
+		try {
+			delegate = MultiCastControllerHelper.narrow(this.getORB().resolve_initial_references(
+					ReCSystemProperty.MULTICAST_INITREF.getValue()));
+			MultiCastControllerWrapper wrapper = new MultiCastControllerWrapper(delegate);
+			return wrapper;
+
+		} catch (InvalidName e) {
+			LOGGER.log(Level.SEVERE, "Unable to resolve multicastcontroller " + e.getMessage(), e);
+			throw e;
+		}
+
+	}
+
+	/**
+	 * @return
+	 */
+	public Any createAny() {
+		return getORB().create_any();
+	}
 
 }

@@ -49,8 +49,6 @@ public class Animation3D extends DrawingPanel3D implements ActionListener, Mouse
 
 	private pt.utl.ist.elab.client.virtual.guipack.PopupMenu viewPopMenu;
 
-	private final boolean isConnectedTrail = false, closeUp = false;
-
 	private int numPart;
 
 	private InteractiveTrace avgPos;
@@ -141,6 +139,7 @@ public class Animation3D extends DrawingPanel3D implements ActionListener, Mouse
 				topGutter = bottomGutter = Math.max(0, getHeight() - interiorDimension.height) / 2;
 			}
 		}
+		@SuppressWarnings("unchecked")
 		final java.util.ArrayList<Drawable> tempList = getDrawables();
 		scale(tempList);
 		setPixelScale();

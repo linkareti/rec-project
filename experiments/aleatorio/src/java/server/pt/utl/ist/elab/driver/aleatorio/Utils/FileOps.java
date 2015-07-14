@@ -51,7 +51,7 @@ public class FileOps {
 			dadosFile.read(dadosFileTempData, 0, (int) dadosFile.length());
 		} catch (final IOException e) {
 		}
-		
+
 		dadosFileData = parseTempData(dadosFileTempData);
 
 		closeFile();
@@ -210,7 +210,7 @@ public class FileOps {
 			tempBytes = new byte[(int) (dadosFile.length() - dadosFile.getFilePointer())];
 		} catch (final IOException e) {
 		}
-		
+
 		try {
 			dadosFile.read(tempBytes);
 		} catch (final IOException e) {
@@ -246,8 +246,8 @@ public class FileOps {
 			// written synchronously to the underlying
 			// storage device.
 		} catch (final FileNotFoundException e) {
-			System.out.println("File Not Found!\nAborting!");
-			System.exit(0);
+			throw new RuntimeException("File Not Found: '" + filename + "'", e);
+
 		}
 
 		FileDescriptor descricao = null;

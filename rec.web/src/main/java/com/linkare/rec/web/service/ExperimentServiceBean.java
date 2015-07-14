@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import com.linkare.rec.web.model.Experiment;
@@ -20,7 +21,9 @@ import com.linkare.rec.web.model.Experiment;
 @Local(ExperimentServiceLocal.class)
 @Stateless(name = "ExperimentService")
 public class ExperimentServiceBean extends BusinessServiceBean<Experiment, Long> implements ExperimentService {
-
+    
+//    private final static Logger LOGGER = LoggerFactory.getLogger(ExperimentServiceBean.class);
+    
     @Override
     public void create(final Experiment experiment) {
 	getEntityManager().persist(experiment);
@@ -75,7 +78,12 @@ public class ExperimentServiceBean extends BusinessServiceBean<Experiment, Long>
 
     @Override
     public Experiment findByExternalID(String externalID) {
-	return (Experiment) getEntityManager().createNamedQuery(Experiment.FIND_BY_EXTERNAL_ID).setParameter(Experiment.EXTERNAL_ID_QRY_PARAM, externalID)
-					      .getSingleResult();
+        try {
+            return (Experiment) getEntityManager().createNamedQuery(Experiment.FIND_BY_EXTERNAL_ID).setParameter(Experiment.EXTERNAL_ID_QRY_PARAM, externalID)
+                    .getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
+
     }
 }

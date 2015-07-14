@@ -19,6 +19,7 @@ import pt.utl.ist.elab.driver.virtual.VirtualBaseDriver;
 
 import com.linkare.rec.data.acquisition.PhysicsVal;
 import com.linkare.rec.data.acquisition.PhysicsValue;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.data.PhysicsValFactory;
 
 public class PoissonDataProducer extends VirtualBaseDataSource {
@@ -73,7 +74,7 @@ public class PoissonDataProducer extends VirtualBaseDataSource {
 				OutputStream out = null;
 //				InputStream in = null;
 				ObjectInputStream ois = null;
-				String LS = System.getProperty("line.separator");
+				String LS = ReCSystemProperty.LINE_SEPARATOR.getValue();
 
 				try {
 					kkSocket = new Socket(server, port);

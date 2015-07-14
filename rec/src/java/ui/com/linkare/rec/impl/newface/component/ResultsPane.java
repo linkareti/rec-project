@@ -35,6 +35,7 @@ import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.newface.utils.DataConfigInternationalization;
 
@@ -155,7 +156,7 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 
     private JScrollPane experimentInfoScrollPane;
 
-    private ResultsActionBar resultsActionBar;
+//    private ResultsActionBar resultsActionBar;
 
     /**
      * Creates new form ResultsPane
@@ -171,7 +172,7 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
      */
     public ResultsPane(final ResultsActionBar resultsActionBar) {
         initComponents();
-        this.resultsActionBar = resultsActionBar;
+//        this.resultsActionBar = resultsActionBar;
     }
 
     public void setExperimentResults(final ExperimentHistoryUINode historyUINode, final ExpDataModel expDataModel,
@@ -214,7 +215,7 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 
     private void addExperimentDataDisplays(final List<ExpDataDisplay> displays) {
         String firstDisplay = null;
-        boolean autoAcquireResult = (System.getProperty("rec.apparatus.autoacquireresult") == null || "false".equals(System.getProperty("rec.apparatus.autoacquireresult"))) ? false : true;
+        boolean autoAcquireResult = Boolean.parseBoolean(ReCSystemProperty.CLIENT_AUTO_ACQUIRE_RESULTS.getValue());
         for (final ExpDataDisplay display : displays) {
             addExperimentDataDisplay(display);
         }

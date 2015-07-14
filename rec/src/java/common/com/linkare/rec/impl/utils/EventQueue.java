@@ -13,11 +13,13 @@ package com.linkare.rec.impl.utils;
 import java.util.EnumMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.concurrent.Future;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.linkare.rec.impl.events.Prioritazible;
 import com.linkare.rec.impl.threading.ProcessingManager;
@@ -33,8 +35,10 @@ import com.linkare.rec.impl.threading.util.EnumPriority;
 
 public class EventQueue {
 
-	private QueueLogger logger = null;
+	private static final Logger LOGGER = Logger.getLogger(EventQueue.class.getName());
+
 	private final EventQueueDispatcher dispatcher;
+	private final ReentrantReadWriteLock dispatchingLock;
 	// private final List<Prioritazible> levts;
 	private EnumMap<EnumPriority, List<Prioritazible>> levts;
 	private volatile boolean stoppedDispatching = false;
@@ -63,6 +67,7 @@ public class EventQueue {
 	 */
 	public EventQueue(final EventQueueDispatcher dispatcher, final String threadName) {
 		this.dispatcher = dispatcher;
+		this.dispatchingLock=new ReentrantReadWriteLock();
 		levts = new EnumMap<EnumPriority, List<Prioritazible>>(EnumPriority.class);
 		for (EnumPriority priority : EnumPriority.values()) {
 			levts.put(priority, new LinkedList<Prioritazible>());
@@ -73,21 +78,8 @@ public class EventQueue {
 		eventQueueRunnable = new EventQueueRunnableImpl();
 	}
 
-	/**
-	 * Creates the <code>EventQueue</code>.
-	 * 
-	 * @param dispatcher
-	 * @param threadName
-	 * @param logger
-	 */
-	public EventQueue(final EventQueueDispatcher dispatcher, final String threadName, final QueueLogger logger) {
-		this(dispatcher, threadName);
-
-		this.logger = logger;
-	}
-
 	public void addEvent(final Prioritazible evt) {
-		log(Level.FINEST, "EventQueue add event " + evt);
+		LOGGER.log(Level.FINEST, "EventQueue add event " + evt);
 
 		if (stoppedDispatching) {
 			return;
@@ -145,8 +137,16 @@ public class EventQueue {
 	}
 
 	public void shutdown() {
-		log(Level.FINE, "EventQueue received shutdown. Queue size = " + levts.size());
-
+		
+		if(LOGGER.isLoggable(Level.FINE)) {
+			final StringBuilder countPerPriority=new StringBuilder();
+			for (Entry<EnumPriority, List<Prioritazible>> perPriorityEvtList : levts.entrySet()) {
+				countPerPriority.append("[").append(perPriorityEvtList.getKey().name()).append("=").append(perPriorityEvtList.getValue().size()).append("]");
+			}
+			
+			LOGGER.log(Level.FINE, "EventQueue received shutdown. Queue sizes per priority: " + countPerPriority);
+		}
+		
 		final Lock writeLock = mainLock.writeLock();
 		writeLock.lock();
 		try {
@@ -166,18 +166,6 @@ public class EventQueue {
 
 	public boolean isStopdispatching() {
 		return stoppedDispatching;
-	}
-
-	public void log(final Level debugLevel, final String message) {
-		if (logger != null) {
-			logger.log(debugLevel, message);
-		}
-	}
-
-	public void logThrowable(final String message, final Throwable t) {
-		if (logger != null) {
-			logger.logThrowable(message, t);
-		}
 	}
 
 	/**
@@ -205,24 +193,25 @@ public class EventQueue {
 		public void run() {
 
 			try {
-
+				dispatchingLock.writeLock().lock();
 				final Object evt = getEvent();
 
 				if (evt != null) {
 					if (!isInterrupted()) {
-						log(Level.FINER, "EventQueue dispatching the event " + evt);
+						LOGGER.log(Level.FINER, "EventQueue dispatching the event " + evt);
 						dispatcher.dispatchEvent(evt);
 					} else {
-						log(Level.WARNING, "EventQueue isn't dispatching the event " + evt
+						LOGGER.log(Level.WARNING, "EventQueue isn't dispatching the event " + evt
 								+ " because the this runnable has been interrupted ");
 					}
 				}
 
 			} catch (final InterruptedException e) {
-				log(Level.FINER, "This runnable has been interrupted " + e.toString());
+				LOGGER.log(Level.FINER, "This runnable has been interrupted " + e.toString());
 			} catch (final Exception e) {
-				logThrowable("Exception ocorred in event queue thread ", e);
+				LOGGER.log(Level.SEVERE, "Exception ocorred in event queue thread ", e);
 			} finally {
+				dispatchingLock.writeLock().unlock();
 				if (hasEvents() && !isInterrupted()) {
 					submitSignalTask();
 				}
@@ -266,11 +255,11 @@ public class EventQueue {
 
 							final IntersectableEvent intersectableEventAfter = (IntersectableEvent) eventAfter;
 
-							log(Level.FINEST, "EventQueue the event " + intersectableEvent + " might intersect "
+							LOGGER.log(Level.FINEST, "EventQueue the event " + intersectableEvent + " might intersect "
 									+ eventAfter);
 
 							if (intersectableEvent.intersectTo(intersectableEventAfter)) {
-								log(Level.FINEST, "EventQueue removed the event at the index " + i);
+								LOGGER.log(Level.FINEST, "EventQueue removed the event at the index " + i);
 								eventList.remove(i);
 								countEvts--;
 							}

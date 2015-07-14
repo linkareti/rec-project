@@ -17,10 +17,13 @@ public class ConfIncDec extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = 1490382525852516280L;
 
-	/** Creates new form ConfCompBin 
-	 * @param parent 
-	 * @param modal 
-	 * @param model */
+	/**
+	 * Creates new form ConfCompBin
+	 * 
+	 * @param parent
+	 * @param modal
+	 * @param model
+	 */
 	public ConfIncDec(final java.awt.Frame parent, final boolean modal,
 			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIncDec model) {
 		super(parent, modal);

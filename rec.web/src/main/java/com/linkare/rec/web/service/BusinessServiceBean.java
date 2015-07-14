@@ -21,7 +21,7 @@ import com.linkare.commons.dao.Identifiable;
  */
 public abstract class BusinessServiceBean<T extends Identifiable<ID> & Deletable, ID extends Serializable> implements BusinessService<T, ID> {
 
-    @PersistenceContext(unitName = "AllocationManagerPU")
+    @PersistenceContext(unitName = "RecPU")
     private EntityManager entityManager;
 
     /**

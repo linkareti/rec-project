@@ -31,14 +31,16 @@ public class LocalizationBundle extends AbstractConfigBean {
 	}
 
 	/**
-	 * @param location the location to set
+	 * @param location
+	 *            the location to set
 	 */
 	public void setLocation(final java.lang.String location) {
 		this.location = location;
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(final java.lang.String name) {
 		this.name = name;
@@ -46,27 +48,22 @@ public class LocalizationBundle extends AbstractConfigBean {
 
 	@Override
 	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
+		boolean retVal = true;
+		if (obj == null || getClass() != obj.getClass()) {
+			retVal = false;
+		} else {
+			final LocalizationBundle other = (LocalizationBundle) obj;
+			retVal = retVal && nullSafeObjectEquals(location, other.location);
+			retVal = retVal && nullSafeObjectEquals(name, other.name);
 		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		final LocalizationBundle other = (LocalizationBundle) obj;
-		if ((location == null) ? (other.location != null) : !location.equals(other.location)) {
-			return false;
-		}
-		if ((name == null) ? (other.name != null) : !name.equals(other.name)) {
-			return false;
-		}
-		return true;
+		return retVal;
 	}
 
 	@Override
 	public int hashCode() {
 		int hash = 5;
-		hash = 97 * hash + (location != null ? location.hashCode() : 0);
-		hash = 97 * hash + (name != null ? name.hashCode() : 0);
+		hash = 97 * hash + nullObjectSafeHash(location);
+		hash = 97 * hash + nullObjectSafeHash(name);
 		return hash;
 	}
 

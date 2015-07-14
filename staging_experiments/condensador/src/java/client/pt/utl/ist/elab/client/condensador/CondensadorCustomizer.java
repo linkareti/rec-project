@@ -22,8 +22,7 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * 
  * @author andreamado
  */
-public class CondensadorCustomizer extends javax.swing.JPanel implements
-		com.linkare.rec.impl.client.customizer.ICustomizer {
+public class CondensadorCustomizer  extends AbstractCustomizer {
 
 	/**
 	 * 

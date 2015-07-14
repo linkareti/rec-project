@@ -13,6 +13,8 @@ package com.linkare.rec.impl.utils;
 
 import java.io.File;
 
+import com.linkare.rec.impl.config.ReCSystemProperty;
+
 public class SerializationHelper {
 
 	public static void writeObject(final String filename, final String dir, final Object o) throws java.io.IOException {
@@ -59,7 +61,7 @@ public class SerializationHelper {
 	}
 
 	private static String getFileName(final String filename, final String dir) {
-		return dir + System.getProperty("file.separator") + "DataBuffer_" + filename + ".ser";
+		return dir + ReCSystemProperty.FILE_SEPARATOR.getValue() + "DataBuffer_" + filename + ".ser";
 	}
 
 }

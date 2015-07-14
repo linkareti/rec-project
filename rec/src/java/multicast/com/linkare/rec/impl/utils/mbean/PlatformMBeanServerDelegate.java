@@ -8,7 +8,6 @@ package com.linkare.rec.impl.utils.mbean;
 
 import java.lang.management.ManagementFactory;
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import javax.management.InstanceAlreadyExistsException;
@@ -20,10 +19,10 @@ import javax.management.NotificationListener;
 import javax.management.ObjectInstance;
 import javax.management.ObjectName;
 
-import com.linkare.rec.web.mbean.MBeanObjectNameFactory;
 import com.linkare.rec.impl.mbean.ThreadPoolExecutorStatistics;
 import com.linkare.rec.impl.multicast.ReCMultiCastController;
 import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
+import com.linkare.rec.web.mbean.MBeanObjectNameFactory;
 
 /**
  * 
@@ -33,17 +32,7 @@ import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
  */
 public final class PlatformMBeanServerDelegate {
 
-	private static final String PLATFORM_MBEAN_SERVER_DELEGATE_LOGGER = "PlatformMBeanServerDelegate.Logger";
-
-	private static final Logger LOG;
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(PLATFORM_MBEAN_SERVER_DELEGATE_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(PLATFORM_MBEAN_SERVER_DELEGATE_LOGGER));
-		}
-		LOG = LogManager.getLogManager().getLogger(PLATFORM_MBEAN_SERVER_DELEGATE_LOGGER);
-	}
+	private static final Logger LOGGER = Logger.getLogger(PlatformMBeanServerDelegate.class.getName());
 
 	private PlatformMBeanServerDelegate() {
 		throw new UnsupportedOperationException();
@@ -56,8 +45,8 @@ public final class PlatformMBeanServerDelegate {
 			throw new NullPointerException("MBean instance cannot be null");
 		}
 
-		if (LOG.isLoggable(Level.INFO)) {
-			LOG.info("Register MBEAN: " + objectName.getCanonicalName());
+		if (LOGGER.isLoggable(Level.INFO)) {
+			LOGGER.info("Register MBEAN: " + objectName.getCanonicalName());
 		}
 
 		try {
@@ -93,15 +82,15 @@ public final class PlatformMBeanServerDelegate {
 
 	private static void unRegister(final ObjectName objectName) throws ManagementException {
 
-		if (LOG.isLoggable(Level.INFO)) {
-			LOG.info("UnRegister MBEAN: " + objectName.getCanonicalName());
+		if (LOGGER.isLoggable(Level.INFO)) {
+			LOGGER.info("UnRegister MBEAN: " + objectName.getCanonicalName());
 		}
 
 		try {
 			ManagementFactory.getPlatformMBeanServer().unregisterMBean(objectName);
 		} catch (InstanceNotFoundException e) {
-			if (LOG.isLoggable(Level.INFO)) {
-				LOG.info(String.format("MBean with object name: %s not found for unregister",
+			if (LOGGER.isLoggable(Level.INFO)) {
+				LOGGER.info(String.format("MBean with object name: %s not found for unregister",
 						objectName.getCanonicalName()));
 			}
 
@@ -111,8 +100,8 @@ public final class PlatformMBeanServerDelegate {
 	}
 
 	public static void addHardwareNotificationListener(final String hardwareUniqueID,
-			final NotificationListener listener, final NotificationFilter filter,
-			final Object handback) throws ManagementException {
+			final NotificationListener listener, final NotificationFilter filter, final Object handback)
+			throws ManagementException {
 
 		if (hardwareUniqueID == null || listener == null) {
 			throw new NullPointerException("hardwareUniqueID or listener cannot be null");
@@ -127,8 +116,8 @@ public final class PlatformMBeanServerDelegate {
 	private static void addNotificationListener(final ObjectName obName, final NotificationListener listener,
 			final NotificationFilter filter, final Object handback) throws ManagementException {
 
-		if (LOG.isLoggable(Level.INFO)) {
-			LOG.info("Register Notification Listener for MBean: " + obName.getCanonicalName());
+		if (LOGGER.isLoggable(Level.INFO)) {
+			LOGGER.info("Register Notification Listener for MBean: " + obName.getCanonicalName());
 		}
 
 		try {

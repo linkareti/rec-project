@@ -6,7 +6,7 @@
 
 package com.linkare.rec.impl.client.experiment;
 
-import com.linkare.rec.impl.wrappers.DataProducerWrapper;
+import com.linkare.rec.acquisition.DataProducer;
 
 /**
  * 
@@ -15,7 +15,7 @@ import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 public class ExpHistory {
 
 	private ExpHistoryDisplayFactory expHistoryDisplayFactory = null;
-	private DataProducerWrapper producerWrapper = null;
+	private DataProducer producer = null;
 	private long expCount = 0;
 
 	/** Holds value of property locallyOwned. */
@@ -29,20 +29,20 @@ public class ExpHistory {
 	 * Creates a new instance of ExperimentHistory
 	 * 
 	 * @param expHistoryDisplayFactory
-	 * @param producerWrapper
+	 * @param producer 
 	 * @param apparatus
 	 */
 	public ExpHistory(final ExpHistoryDisplayFactory expHistoryDisplayFactory,
-			final DataProducerWrapper producerWrapper, final com.linkare.rec.impl.client.apparatus.Apparatus apparatus) {
+			final DataProducer producer, final com.linkare.rec.impl.client.apparatus.Apparatus apparatus) {
 
 		this.expHistoryDisplayFactory = expHistoryDisplayFactory;
-		this.producerWrapper = producerWrapper;
+		this.producer = producer;
 		expCount = ExpHistoryCounter.getExperimentNumber(apparatus.getHardwareInfo().getHardwareUniqueID());
 		this.apparatus = apparatus;
 	}
 
-	public DataProducerWrapper getProducerWrapper() {
-		return producerWrapper;
+	public DataProducer getProducerWrapper() {
+		return producer;
 	}
 
 	public com.linkare.rec.impl.client.apparatus.Apparatus getApparatus() {

@@ -7,13 +7,17 @@
 package pt.utl.ist.elab.driver.aleatorio.Utils;
 
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * 
  * @author Pedro Carvalho - LEFT - IST
  */
+@SuppressWarnings({"unchecked","unused","rawtypes"})
 public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Cloneable {
 
+	private static final Logger LOGGER = Logger.getLogger(ImageAnalyser.class.getName());
 	/**
 	 * 
 	 */
@@ -115,8 +119,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			tracker.waitForAll();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+			throw new RuntimeException(e);
 		}
 		// Draw image at its natural size first.
 		g.drawImage(image, 0, 0, this); // 85x62 image
@@ -166,8 +170,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			pg.grabPixels();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+			throw new RuntimeException(e);
 		}
 
 		for (int index = 0; index < inPixels.length; index++) {
@@ -195,8 +199,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			tracker.waitForAll();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+			throw new RuntimeException(e);
 		}
 		setImage(BWImage, "BW");
 		BWPixels = outPixels;
@@ -240,8 +244,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			pg.grabPixels();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+			throw new RuntimeException(e);
 		}
 
 		for (int index = 0; index < inPixels.length; index++) {
@@ -284,8 +288,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			tracker.waitForAll();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+			throw new RuntimeException(e);
 		}
 		setImage(houghImage, "hough");
 		houghPixels = outPixels;
@@ -305,8 +309,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			pg1.grabPixels();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+			throw new RuntimeException(e);
 		}// catch
 
 		houghCountPixels = originalPixels;
@@ -317,8 +321,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			pg.grabPixels();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+			throw new RuntimeException(e);
 		}// catch
 
 		int valor, x, y;
@@ -456,8 +460,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			tracker.waitForAll();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+			throw new RuntimeException(e);
 		}
 
 		setImage(houghCountImage, "houghCount");
@@ -515,8 +519,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			pg.grabPixels();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+			throw new RuntimeException(e);
 		}
 
 		// removing the border of the whole image
@@ -586,8 +590,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			tracker.waitForAll();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+			throw new RuntimeException(e);
 		}
 		setImage(convolutionImage, "convolution");
 		return convolutionImage;
@@ -606,8 +610,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			pg.grabPixels();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+			throw new RuntimeException(e);
 		}
 
 		boolean presente = false;
@@ -645,8 +649,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			pg1.grabPixels();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+			throw new RuntimeException(e);
 		}
 
 		int indice;
@@ -682,8 +686,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			tracker.waitForAll();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+			throw new RuntimeException(e);
 		}
 
 		setImage(convolutionCountImage, "convolutionCount");
@@ -813,7 +817,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		// Counting the number of Dice by clustering
 		int currentX, currentY;
 		final int maxDice = 1024;
-		vClusters = new java.util.Vector<Vector<?>>(maxDice); // is a vector of vectors
+		vClusters = new java.util.Vector<Vector<?>>(maxDice); // is a vector of
+																// vectors
 		java.util.Vector[] vDie = new java.util.Vector[maxDice]; // is an array
 		// of
 		// vectors
@@ -1056,8 +1061,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			pg1.grabPixels();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+			throw new RuntimeException(e);
 		}// catch
 			// }//if
 		final int[] outPixels = originalPixels;
@@ -1196,8 +1201,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			tracker.waitForAll();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+			throw new RuntimeException(e);
 		}
 		refineCountImage = outImage;
 		// refineCountPixels = outPixels;
@@ -1232,8 +1237,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			pg.grabPixels();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+			throw new RuntimeException(e);
 		}
 
 		int indice;
@@ -1267,8 +1272,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		try {
 			tracker.waitForAll();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+			throw new RuntimeException(e);
 		}
 		return image;
 	}// buildImage(int[][] centers, int centersCounter)
@@ -2907,7 +2912,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 			if (dieDiff == 1) {
 				if (tryRemove(vDie, vDieIndex, testDieSize, spotsToRemove, pixelIndex, raio, maxClusterSize)) {
 					final java.util.Vector<Object> vDieXYpI = new java.util.Vector<Object>(4);
-					final java.util.Vector<Comparable> isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio, true, false);
+					final java.util.Vector<Comparable> isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio, true,
+							false);
 					final int counterSum = ((Integer) isSpotVector.get(1)).intValue()
 							+ ((Integer) isSpotVector.get(2)).intValue() + ((Integer) isSpotVector.get(3)).intValue();
 
@@ -2932,8 +2938,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 						cluster_counter++;
 						clusterCenters = getClusterCenters(vDie); // update
 						// clusterCenters
-						final java.util.Vector<Object> checkSpotsResult = checkSpots(vDie, vDieIndex, x, y, pixelIndex, raio,
-								maxClusterSize);
+						final java.util.Vector<Object> checkSpotsResult = checkSpots(vDie, vDieIndex, x, y, pixelIndex,
+								raio, maxClusterSize);
 						// System.out.println("vDie in TestRemove:"+((java.util.Vector[])checkSpotsResult.get(0))[vDieIndex]);
 						if (((Boolean) checkSpotsResult.get(4)).equals(Boolean.TRUE)) {
 							// System.out.println("Setting Die "+vDieIndex +
@@ -2969,7 +2975,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 					if (dieDiff == 2) {
 						if (tryRemove(vDie, vDieIndex, testDieSize, spotsToRemove, pixelIndex, raio, maxClusterSize)) {
 							final java.util.Vector<Object> vDieXYpI = new java.util.Vector<Object>(4);
-							java.util.Vector<Comparable> isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio, true, false);
+							java.util.Vector<Comparable> isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio,
+									true, false);
 							int counterSum = ((Integer) isSpotVector.get(1)).intValue()
 									+ ((Integer) isSpotVector.get(2)).intValue()
 									+ ((Integer) isSpotVector.get(3)).intValue();
@@ -3010,8 +3017,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 								cluster_counter++;
 								clusterCenters = getClusterCenters(vDie); // update
 								// clusterCenters
-								final java.util.Vector<Object> checkSpotsResult = checkSpots(vDie, vDieIndex, x, y, pixelIndex,
-										raio, maxClusterSize);
+								final java.util.Vector<Object> checkSpotsResult = checkSpots(vDie, vDieIndex, x, y,
+										pixelIndex, raio, maxClusterSize);
 								if (((Boolean) checkSpotsResult.get(4)).equals(Boolean.TRUE)) {
 									// System.out.println("Setting Die "+vDieIndex
 									// + " as TRUE!");
@@ -3044,8 +3051,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 								if (tryRemove(vDie, vDieIndex, testDieSize, spotsToRemove, pixelIndex, raio,
 										maxClusterSize)) {
 									final java.util.Vector<Object> vDieXYpI = new java.util.Vector<Object>(4);
-									java.util.Vector<Comparable> isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio, true,
-											false);
+									java.util.Vector<Comparable> isSpotVector = isSpot(pixelIndex[spotsToRemove[0]],
+											raio, true, false);
 									int counterSum = ((Integer) isSpotVector.get(1)).intValue()
 											+ ((Integer) isSpotVector.get(2)).intValue()
 											+ ((Integer) isSpotVector.get(3)).intValue();
@@ -3102,8 +3109,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 										clusterCenters = getClusterCenters(vDie); // update
 										// clusterCenters
 
-										final java.util.Vector<Object> checkSpotsResult = checkSpots(vDie, vDieIndex, x, y,
-												pixelIndex, raio, maxClusterSize);
+										final java.util.Vector<Object> checkSpotsResult = checkSpots(vDie, vDieIndex,
+												x, y, pixelIndex, raio, maxClusterSize);
 
 										if (((Boolean) checkSpotsResult.get(4)).equals(Boolean.TRUE)) {
 											// System.out.println("Setting Die "+vDieIndex
@@ -3138,8 +3145,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 										if (tryRemove(vDie, vDieIndex, testDieSize, spotsToRemove, pixelIndex, raio,
 												maxClusterSize)) {
 											final java.util.Vector<Object> vDieXYpI = new java.util.Vector<Object>(4);
-											java.util.Vector<Comparable> isSpotVector = isSpot(pixelIndex[spotsToRemove[0]], raio,
-													true, false);
+											java.util.Vector<Comparable> isSpotVector = isSpot(
+													pixelIndex[spotsToRemove[0]], raio, true, false);
 											int counterSum = ((Integer) isSpotVector.get(1)).intValue()
 													+ ((Integer) isSpotVector.get(2)).intValue()
 													+ ((Integer) isSpotVector.get(3)).intValue();
@@ -3208,8 +3215,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 												cluster_counter++;
 												clusterCenters = getClusterCenters(vDie); // update
 												// clusterCenters
-												final java.util.Vector<Object> checkSpotsResult = checkSpots(vDie, vDieIndex,
-														x, y, pixelIndex, raio, maxClusterSize);
+												final java.util.Vector<Object> checkSpotsResult = checkSpots(vDie,
+														vDieIndex, x, y, pixelIndex, raio, maxClusterSize);
 												if (((Boolean) checkSpotsResult.get(4)).equals(Boolean.TRUE)) {
 													// System.out.println("Setting Die "+vDieIndex
 													// + " as TRUE!");
@@ -3256,8 +3263,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 		return vDieXYpI;
 	}// testRemove
 
-	private java.util.Vector<Object> checkForSpotsThatReallyBelongToThis(java.util.Vector[] vDie, int vDieIndex, int[] x,
-			int[] y, int[] pixelIndex, final int maxClusterSize) {
+	private java.util.Vector<Object> checkForSpotsThatReallyBelongToThis(java.util.Vector[] vDie, int vDieIndex,
+			int[] x, int[] y, int[] pixelIndex, final int maxClusterSize) {
 		int spotCount = vDie[vDieIndex].size() - 1;
 		final java.util.Vector<Object> toReturn = new java.util.Vector<Object>(5);
 		toReturn.add(0, vDie);
@@ -4896,8 +4903,8 @@ public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Clone
 			 */
 			// System.out.println("checking spot " + vDie[vDieIndex].get(index)
 			// + ", ("+x[index]+", "+y[index]+"),");
-			final java.util.Vector<Comparable> isSpotVector = isSpot(pixelIndex[index], raio, isProbableSix, spotCount == 1 ? true
-					: false);
+			final java.util.Vector<Comparable> isSpotVector = isSpot(pixelIndex[index], raio, isProbableSix,
+					spotCount == 1 ? true : false);
 			if (isSpotVector.get(0).equals(Boolean.FALSE)) {
 				// System.out.println("Is not Spot!");
 				// System.out.println("zeroCounter:"+tempVector.get(1)+"; oneCounter:"+tempVector.get(2)+"; maxCounter:"+tempVector.get(3)+"; isProbableSix:"+isProbableSix);

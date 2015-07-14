@@ -22,6 +22,7 @@ import com.linkare.rec.data.metadata.Scale;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
@@ -216,7 +217,8 @@ public class SensorDisplay extends javax.swing.JPanel implements com.linkare.rec
 		final String pus = scale.getPhysicsUnitSymbol();
 		final String multiplier = scale.getMultiplier().toString();
 
-		lblChannel.setText(chn + " [" + multiplier + pus + "]");
+
+		lblChannel.setText(ReCResourceBundle.findStringOrDefault(chn,chn) + " [" + multiplier + pus + "]");
 
 	}
 

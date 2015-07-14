@@ -95,58 +95,68 @@ public class Lab extends AbstractConfigBean {
 	}
 
 	/**
-	 * @param iconLocationBundleKey the iconLocationBundleKey to set
+	 * @param iconLocationBundleKey
+	 *            the iconLocationBundleKey to set
 	 */
 	public void setIconLocationBundleKey(final String iconLocationBundleKey) {
 		this.iconLocationBundleKey = iconLocationBundleKey;
 	}
 
 	/**
-	 * @param toolTipBundleKey the toolTipBundleKey to set
+	 * @param toolTipBundleKey
+	 *            the toolTipBundleKey to set
 	 */
 	public void setToolTipBundleKey(final String toolTipBundleKey) {
 		this.toolTipBundleKey = toolTipBundleKey;
 	}
 
 	/**
-	 * @param displayStringBundleKey the displayStringBundleKey to set
+	 * @param displayStringBundleKey
+	 *            the displayStringBundleKey to set
 	 */
 	public void setDisplayStringBundleKey(final String displayStringBundleKey) {
 		this.displayStringBundleKey = displayStringBundleKey;
 	}
 
 	/**
-	 * @param location the location to set
+	 * @param location
+	 *            the location to set
 	 */
 	public void setLocation(final String location) {
 		this.location = location;
 	}
 
 	/**
-	 * @param desktopLocationBundleKey the desktopLocationBundleKey to set
+	 * @param desktopLocationBundleKey
+	 *            the desktopLocationBundleKey to set
 	 */
-	public void setDesktopLocationBundleKey(final String desktopLocationBundleKey) {
+	public void setDesktopLocationBundleKey(
+			final String desktopLocationBundleKey) {
 		this.desktopLocationBundleKey = desktopLocationBundleKey;
 	}
 
 	/**
-	 * @param apparatus the apparatus to set
+	 * @param apparatus
+	 *            the apparatus to set
 	 */
 	public void setApparatus(final List<Apparatus> apparatus) {
 		this.apparatus = apparatus;
 	}
 
 	/**
-	 * @param webResource the webResource to set
+	 * @param webResource
+	 *            the webResource to set
 	 */
 	public void setWebResource(final List<WebResource> webResource) {
 		this.webResource = webResource;
 	}
 
 	/**
-	 * @param localizationBundle the localizationBundle to set
+	 * @param localizationBundle
+	 *            the localizationBundle to set
 	 */
-	public void setLocalizationBundle(final List<LocalizationBundle> localizationBundle) {
+	public void setLocalizationBundle(
+			final List<LocalizationBundle> localizationBundle) {
 		this.localizationBundle = localizationBundle;
 	}
 
@@ -159,7 +169,8 @@ public class Lab extends AbstractConfigBean {
 	}
 
 	/**
-	 * @param labId the labId to set
+	 * @param labId
+	 *            the labId to set
 	 */
 	public void setLabId(final String labId) {
 		this.labId = labId;
@@ -174,7 +185,8 @@ public class Lab extends AbstractConfigBean {
 	}
 
 	/**
-	 * @param labIdStringBundleKey the labIdStringBundleKey to set
+	 * @param labIdStringBundleKey
+	 *            the labIdStringBundleKey to set
 	 */
 	public void setLabIdStringBundleKey(final String labIdStringBundleKey) {
 		this.labIdStringBundleKey = labIdStringBundleKey;
@@ -182,66 +194,55 @@ public class Lab extends AbstractConfigBean {
 
 	@Override
 	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
+		boolean retVal = true;
+		if (obj == null || getClass() != obj.getClass()) {
+			retVal = false;
+		} else {
+			final Lab other = (Lab) obj;
+			retVal = retVal
+					&& nullSafeObjectEquals(iconLocationBundleKey,
+							other.iconLocationBundleKey);
+			retVal = retVal
+					&& nullSafeObjectEquals(toolTipBundleKey,
+							other.toolTipBundleKey);
+			retVal = retVal
+					&& nullSafeObjectEquals(displayStringBundleKey,
+							other.displayStringBundleKey);
+			retVal = retVal && nullSafeObjectEquals(location, other.location);
+			retVal = retVal
+					&& nullSafeObjectEquals(desktopLocationBundleKey,
+							other.desktopLocationBundleKey);
+			retVal = retVal && nullSafeObjectEquals(apparatus, other.apparatus);
+			retVal = retVal
+					&& nullSafeObjectEquals(webResource, other.webResource);
+			retVal = retVal
+					&& nullSafeObjectEquals(localizationBundle,
+							other.localizationBundle);
+			retVal = retVal
+					&& nullSafeObjectEquals(labIdStringBundleKey,
+							other.labIdStringBundleKey);
+			retVal = retVal && nullSafeObjectEquals(labId, other.labId);
 		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		final Lab other = (Lab) obj;
-		if ((iconLocationBundleKey == null) ? (other.iconLocationBundleKey != null) : !iconLocationBundleKey
-				.equals(other.iconLocationBundleKey)) {
-			return false;
-		}
-		if ((toolTipBundleKey == null) ? (other.toolTipBundleKey != null) : !toolTipBundleKey
-				.equals(other.toolTipBundleKey)) {
-			return false;
-		}
-		if ((displayStringBundleKey == null) ? (other.displayStringBundleKey != null) : !displayStringBundleKey
-				.equals(other.displayStringBundleKey)) {
-			return false;
-		}
-		if ((location == null) ? (other.location != null) : !location.equals(other.location)) {
-			return false;
-		}
-		if ((desktopLocationBundleKey == null) ? (other.desktopLocationBundleKey != null) : !desktopLocationBundleKey
-				.equals(other.desktopLocationBundleKey)) {
-			return false;
-		}
-		if (apparatus != other.apparatus && (apparatus == null || !apparatus.equals(other.apparatus))) {
-			return false;
-		}
-		if (webResource != other.webResource && (webResource == null || !webResource.equals(other.webResource))) {
-			return false;
-		}
-		if (localizationBundle != other.localizationBundle
-				&& (localizationBundle == null || !localizationBundle.equals(other.localizationBundle))) {
-			return false;
-		}
-		if ((labId == null) ? (other.labId != null) : !labId.equals(other.labId)) {
-			return false;
-		}
-		if ((labIdStringBundleKey == null) ? (other.labIdStringBundleKey != null) : !labIdStringBundleKey
-				.equals(other.labIdStringBundleKey)) {
-			return false;
-		}
-		return true;
+		return retVal;
 	}
+
 
 	@Override
 	public int hashCode() {
 		int hash = 3;
-		hash = 19 * hash + (iconLocationBundleKey != null ? iconLocationBundleKey.hashCode() : 0);
-		hash = 19 * hash + (toolTipBundleKey != null ? toolTipBundleKey.hashCode() : 0);
-		hash = 19 * hash + (displayStringBundleKey != null ? displayStringBundleKey.hashCode() : 0);
-		hash = 19 * hash + (location != null ? location.hashCode() : 0);
-		hash = 19 * hash + (desktopLocationBundleKey != null ? desktopLocationBundleKey.hashCode() : 0);
-		hash = 19 * hash + (apparatus != null ? apparatus.hashCode() : 0);
-		hash = 19 * hash + (webResource != null ? webResource.hashCode() : 0);
-		hash = 19 * hash + (localizationBundle != null ? localizationBundle.hashCode() : 0);
-		hash = 19 * hash + (labId != null ? labId.hashCode() : 0);
-		hash = 19 * hash + (labIdStringBundleKey != null ? labIdStringBundleKey.hashCode() : 0);
+		hash = 19 * hash + nullObjectSafeHash(iconLocationBundleKey);
+		hash = 19 * hash + nullObjectSafeHash(toolTipBundleKey);
+		hash = 19 * hash + nullObjectSafeHash(displayStringBundleKey);
+		hash = 19 * hash + nullObjectSafeHash(location);
+		hash = 19 * hash + nullObjectSafeHash(desktopLocationBundleKey);
+		hash = 19 * hash + nullObjectSafeHash(apparatus);
+		hash = 19 * hash + nullObjectSafeHash(webResource);
+		hash = 19 * hash + nullObjectSafeHash(localizationBundle);
+		hash = 19 * hash + nullObjectSafeHash(labId);
+		hash = 19 * hash + nullObjectSafeHash(labIdStringBundleKey);
 		return hash;
 	}
+
+	
 
 }

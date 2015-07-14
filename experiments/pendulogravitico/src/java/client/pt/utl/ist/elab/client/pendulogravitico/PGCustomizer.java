@@ -10,18 +10,18 @@ import java.util.Hashtable;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+public class PGCustomizer extends AbstractCustomizer {
 
 	/**
 	 * 
@@ -74,7 +74,6 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	{
 		java.awt.GridBagConstraints gridBagConstraints;
 
-		buttonGroupStatus = new javax.swing.ButtonGroup();
 		jPanel2 = new javax.swing.JPanel();
 		btnOK = new javax.swing.JButton();
 		btnCancel = new javax.swing.JButton();
@@ -517,29 +516,35 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
 
-		acqConfig.setTotalSamples(sldNumSamples.getValue() == 0 ? 1 : sldNumSamples.getValue());
-		acqConfig.getSelectedHardwareParameter("Altura").setParameterValue("" + sldHeight.getValue() / 10f);
-		acqConfig.getSelectedHardwareParameter("Angulo inicial").setParameterValue("" + sldAngle.getValue() / 10f);
-		acqConfig.setSelectedFrequency(new Frequency(sldFreq.getValue(), hardwareInfo.getHardwareFrequencies(0)
+		getAcquisitionConfig().setTotalSamples(sldNumSamples.getValue() == 0 ? 1 : sldNumSamples.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("Altura").setParameterValue("" + sldHeight.getValue() / 10f);
+		getAcquisitionConfig().getSelectedHardwareParameter("Angulo inicial").setParameterValue("" + sldAngle.getValue() / 10f);
+		getAcquisitionConfig().setSelectedFrequency(new Frequency(sldFreq.getValue(), getHardwareInfo().getHardwareFrequencies(0)
 				.getMinimumFrequency().getMultiplier()));
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_btnOKActionPerformed
 
 	public static void main(final String[] args) {
-		ReCResourceBundle.loadResourceBundle("pg",
-				"recresource:///pt/utl/ist/elab/client/pendulogravitico/resources/messages");
-		final javax.swing.JFrame dummy = new javax.swing.JFrame();
-		final PGCustomizer pg = new PGCustomizer();
-		dummy.getContentPane().add(pg, java.awt.BorderLayout.CENTER);
-		dummy.pack();
-		dummy.show();
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				ReCResourceBundle.loadResourceBundle("pg",
+						"recresource:///pt/utl/ist/elab/client/pendulogravitico/resources/messages");
+				final javax.swing.JFrame dummy = new javax.swing.JFrame();
+				final PGCustomizer pg = new PGCustomizer();
+				dummy.getContentPane().add(pg, java.awt.BorderLayout.CENTER);
+				dummy.pack();
+				dummy.setVisible(true);
+			}
+		});
+		
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JButton btnCancel;
 	private javax.swing.JButton btnDefaults;
 	private javax.swing.JButton btnOK;
-	private javax.swing.ButtonGroup buttonGroupStatus;
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JLabel jLabel3;
 	private javax.swing.JPanel jPanel1;
@@ -563,78 +568,11 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	private javax.swing.JTextField tfNumSamples;
 	// End of variables declaration//GEN-END:variables
 
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	@Override
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	@Override
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	@Override
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
+	
 
 	@Override
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 			sldNumSamples.setValue(acqConfig.getTotalSamples());
 			tfNumSamples.setText("" + acqConfig.getTotalSamples());
@@ -652,14 +590,7 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		}
 	}
 
-	@Override
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
+	
 
 	@Override
 	public javax.swing.JComponent getCustomizerComponent() {

@@ -11,28 +11,22 @@
 package pt.utl.ist.elab.client.pinhole;
 
 import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.Hashtable;
 
+import javax.swing.AbstractButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 
-import com.linkare.rec.data.Multiplier;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.data.synch.Frequency;
-import com.linkare.rec.data.synch.FrequencyDefType;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
-import java.util.Enumeration;
-import java.util.Iterator;
-import javax.swing.AbstractButton;
-import javax.swing.JRadioButton;
 
 /**
  *
  * @author npadriano
  */
-public class PinHoleCustomizerPanel extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+public class PinHoleCustomizerPanel extends AbstractCustomizer {
 
     /** Generated UID */
     private static final long serialVersionUID = -6367415208236048245L;
@@ -60,7 +54,6 @@ public class PinHoleCustomizerPanel extends javax.swing.JPanel implements com.li
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroupCalibration = new javax.swing.ButtonGroup();
         pinholeSelect = new javax.swing.ButtonGroup();
         jTabbedPanePinhole = new javax.swing.JTabbedPane();
         jPanelConfiguration = new javax.swing.JPanel();
@@ -487,7 +480,7 @@ public class PinHoleCustomizerPanel extends javax.swing.JPanel implements com.li
         jPanelControlButtons.setName("jPanelControlButtons"); // NOI18N
         jPanelControlButtons.setPreferredSize(new java.awt.Dimension(350, 37));
 
-        jButtonOk.setLabel(resourceMap.getString("Ok.label")); // NOI18N
+        jButtonOk.setText(resourceMap.getString("Ok.label")); // NOI18N
         jButtonOk.setName("Ok"); // NOI18N
         jButtonOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -495,7 +488,7 @@ public class PinHoleCustomizerPanel extends javax.swing.JPanel implements com.li
             }
         });
 
-        jButtonCancel.setLabel(resourceMap.getString("Cancel.label")); // NOI18N
+        jButtonCancel.setText(resourceMap.getString("Cancel.label")); // NOI18N
         jButtonCancel.setName("Cancel"); // NOI18N
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -503,7 +496,7 @@ public class PinHoleCustomizerPanel extends javax.swing.JPanel implements com.li
             }
         });
 
-        jButtonDefaultConfig.setLabel(resourceMap.getString("DefaultConfig.label")); // NOI18N
+        jButtonDefaultConfig.setText(resourceMap.getString("DefaultConfig.label")); // NOI18N
         jButtonDefaultConfig.setName("DefaultConfig"); // NOI18N
         jButtonDefaultConfig.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -599,13 +592,13 @@ public class PinHoleCustomizerPanel extends javax.swing.JPanel implements com.li
             }
         }
 
-        acqConfig.getSelectedHardwareParameter("protocolo").setParameterValue(String.valueOf(protocol));
-        acqConfig.getSelectedHardwareParameter("pos_initial").setParameterValue(String.valueOf(pos_initial));
-        acqConfig.getSelectedHardwareParameter("pos_final").setParameterValue(String.valueOf(pos_final));
-        acqConfig.getSelectedHardwareParameter("delta_pos").setParameterValue(String.valueOf(delta_pos));
-        acqConfig.getSelectedHardwareParameter("delay").setParameterValue(String.valueOf(delay));
-        acqConfig.getSelectedHardwareParameter("pinhole").setParameterValue(String.valueOf(pinhole));
-        acqConfig.getSelectedHardwareParameter("motor").setParameterValue(String.valueOf(motor));
+        getAcquisitionConfig().getSelectedHardwareParameter("protocolo").setParameterValue(String.valueOf(protocol));
+        getAcquisitionConfig().getSelectedHardwareParameter("pos_initial").setParameterValue(String.valueOf(pos_initial));
+        getAcquisitionConfig().getSelectedHardwareParameter("pos_final").setParameterValue(String.valueOf(pos_final));
+        getAcquisitionConfig().getSelectedHardwareParameter("delta_pos").setParameterValue(String.valueOf(delta_pos));
+        getAcquisitionConfig().getSelectedHardwareParameter("delay").setParameterValue(String.valueOf(delay));
+        getAcquisitionConfig().getSelectedHardwareParameter("pinhole").setParameterValue(String.valueOf(pinhole));
+        getAcquisitionConfig().getSelectedHardwareParameter("motor").setParameterValue(String.valueOf(motor));
 
         fireICustomizerListenerDone();
     }//GEN-LAST:event_jButtonOkActionPerformed
@@ -658,7 +651,6 @@ public class PinHoleCustomizerPanel extends javax.swing.JPanel implements com.li
         formattedMultipliedTextChanged(jSliderDistanceBetweenSamples, jFormattedTextFieldDistanceBetweenSamples);
     }//GEN-LAST:event_jFormattedTextFieldDistanceBetweenSamplesPropertyChange
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroupCalibration;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonDefaultConfig;
     private javax.swing.JButton jButtonOk;
@@ -691,74 +683,13 @@ public class PinHoleCustomizerPanel extends javax.swing.JPanel implements com.li
     private javax.swing.ButtonGroup pinholeSelect;
     // End of variables declaration//GEN-END:variables
 
-    /**
-     * Registers ICustomizerListener to receive events.
-     *
-     * @param listener The listener to register.
-     */
-    @Override
-    public synchronized void addICustomizerListener(ICustomizerListener listener) {
-        if (listenerList == null) {
-            listenerList = new javax.swing.event.EventListenerList();
-        }
-        listenerList.add(ICustomizerListener.class, listener);
-    }
+    
 
-    /**
-     * Removes ICustomizerListener from the list of listeners.
-     *
-     * @param listener The listener to remove.
-     */
-    @Override
-    public synchronized void removeICustomizerListener(ICustomizerListener listener) {
-        listenerList.remove(ICustomizerListener.class, listener);
-    }
 
-    /**
-     * Notifies all registered listeners about the event.
-     *
-     * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-     */
-    private void fireICustomizerListenerCanceled() {
-        if (listenerList == null) {
-            return;
-        }
-        Object[] listeners = listenerList.getListenerList();
-        for (int i = listeners.length - 2; i >= 0; i -= 2) {
-            if (listeners[i] == ICustomizerListener.class) {
-                ((ICustomizerListener) listeners[i + 1]).canceled();
-            }
-        }
-    }
-
-    /**
-     * Notifies all registered listeners about the event.
-     *
-     * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-     */
-    private void fireICustomizerListenerDone() {
-        if (listenerList == null) {
-            return;
-        }
-        Object[] listeners = listenerList.getListenerList();
-        for (int i = listeners.length - 2; i >= 0; i -= 2) {
-            if (listeners[i] == ICustomizerListener.class) {
-
-                ((ICustomizerListener) listeners[i + 1]).done();
-            }
-        }
-    }
-    private HardwareInfo hardwareInfo = null;
-    private HardwareAcquisitionConfig acqConfig = null;
-
-    @Override
-    public HardwareAcquisitionConfig getAcquisitionConfig() {
-        return acqConfig;
-    }
 
     @Override
     public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
-        this.acqConfig = acqConfig;
+        super.setHardwareAcquisitionConfig(acqConfig);
         if (acqConfig != null) {
             System.out.println("PinholeCustomizer.setHardwareAcquisitionConfig(HardwareAcquisitionConfig  acqConfig)");
             System.out.println("acqConfig: [" + acqConfig + "]");
@@ -784,21 +715,7 @@ public class PinHoleCustomizerPanel extends javax.swing.JPanel implements com.li
         }
     }
 
-    @Override
-    public void setHardwareInfo(HardwareInfo hardwareInfo) {
-        this.hardwareInfo = hardwareInfo;
-    }
-
-    protected HardwareInfo getHardwareInfo() {
-        return this.hardwareInfo;
-    }
-
-    @Override
-    public javax.swing.JComponent getCustomizerComponent() {
-        return this;
-    }
-
-    @Override
+     @Override
     public javax.swing.ImageIcon getCustomizerIcon() {
         return new javax.swing.ImageIcon(getClass().getResource("/pt/utl/ist/elab/client/pinhole/resources/optica_iconified.gif"));
     }
@@ -808,11 +725,7 @@ public class PinHoleCustomizerPanel extends javax.swing.JPanel implements com.li
         return ReCResourceBundle.findStringOrDefault("pinhole$rec.exp.pinhole.customizer.title","pinhole$rec.exp.pinhole.customizer.title");
     }
 
-    @Override
-    public javax.swing.JMenuBar getMenuBar() {
-        return null;
-    }
-
+ 
     private void installDecimalFormatter(JFormattedTextField ftf) {
         /*
         DecimalFormat formatDecimal = new DecimalFormat("0.0");
@@ -827,19 +740,19 @@ public class PinHoleCustomizerPanel extends javax.swing.JPanel implements com.li
          */
     }
 
-    private void installNaturalFormatter(JFormattedTextField ftf) {
-        /*
-        DecimalFormat naturalFormat = new DecimalFormat("0");
-        naturalFormat.setDecimalSeparatorAlwaysShown(false);
-        naturalFormat.setGroupingUsed(false);
-        naturalFormat.setMinimumFractionDigits(0);
-
-        NumberFormatter formatter = new NumberFormatter(naturalFormat);
-        formatter.setCommitsOnValidEdit(true);
-        formatter.setOverwriteMode(true);
-        formatter.install(ftf);
-         */
-    }
+//    private void installNaturalFormatter(JFormattedTextField ftf) {
+//        /*
+//        DecimalFormat naturalFormat = new DecimalFormat("0");
+//        naturalFormat.setDecimalSeparatorAlwaysShown(false);
+//        naturalFormat.setGroupingUsed(false);
+//        naturalFormat.setMinimumFractionDigits(0);
+//
+//        NumberFormatter formatter = new NumberFormatter(naturalFormat);
+//        formatter.setCommitsOnValidEdit(true);
+//        formatter.setOverwriteMode(true);
+//        formatter.install(ftf);
+//         */
+//    }
 
     private void initComponentsManual() {
 
@@ -907,9 +820,9 @@ public class PinHoleCustomizerPanel extends javax.swing.JPanel implements com.li
         textField.setText(Float.toString((float) slider.getValue() / 10.F));
     }
 
-    private void sliderChanged(javax.swing.JSlider slider, javax.swing.JFormattedTextField textField) {
-        textField.setText(Integer.toString(slider.getValue()));
-    }
+//    private void sliderChanged(javax.swing.JSlider slider, javax.swing.JFormattedTextField textField) {
+//        textField.setText(Integer.toString(slider.getValue()));
+//    }
 
     private void formattedMultipliedTextChanged(javax.swing.JSlider slider, javax.swing.JFormattedTextField textField) {
         String strPos1 = textField.getText();
@@ -930,22 +843,22 @@ public class PinHoleCustomizerPanel extends javax.swing.JPanel implements com.li
         }
     }
 
-    private void formattedTextChanged(javax.swing.JSlider slider, javax.swing.JFormattedTextField textField) {
-        String strPos1 = textField.getText();
-        if (strPos1.trim().equals("")) {
-            return;
-        }
-        strPos1 = strPos1.replace(",", ".");
-        try {
-            int pos1 = (int) Integer.parseInt(strPos1);
-            if (pos1 <= slider.getMaximum() && pos1 >= slider.getMinimum()) {
-//                slider.setValue(pos1 - slider.getMinimum());
-                slider.setValue(pos1);
-            } else {
-                textField.setValue(slider.getValue());
-            }
-        } catch (Exception e) {
-            textField.setValue(slider.getValue());
-        }
-    }
+//    private void formattedTextChanged(javax.swing.JSlider slider, javax.swing.JFormattedTextField textField) {
+//        String strPos1 = textField.getText();
+//        if (strPos1.trim().equals("")) {
+//            return;
+//        }
+//        strPos1 = strPos1.replace(",", ".");
+//        try {
+//            int pos1 = (int) Integer.parseInt(strPos1);
+//            if (pos1 <= slider.getMaximum() && pos1 >= slider.getMinimum()) {
+////                slider.setValue(pos1 - slider.getMinimum());
+//                slider.setValue(pos1);
+//            } else {
+//                textField.setValue(slider.getValue());
+//            }
+//        } catch (Exception e) {
+//            textField.setValue(slider.getValue());
+//        }
+//    }
 }

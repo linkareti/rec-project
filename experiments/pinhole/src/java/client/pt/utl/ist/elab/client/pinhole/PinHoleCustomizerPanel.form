@@ -2,8 +2,6 @@
 
 <Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <NonVisualComponents>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroupCalibration">
-    </Component>
     <Component class="javax.swing.ButtonGroup" name="pinholeSelect">
     </Component>
   </NonVisualComponents>
@@ -682,7 +680,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="jButtonOk">
           <Properties>
-            <Property name="label" type="java.lang.String" resourceKey="Ok.label"/>
+            <Property name="text" type="java.lang.String" resourceKey="Ok.label"/>
             <Property name="name" type="java.lang.String" value="Ok" noResource="true"/>
           </Properties>
           <AccessibilityProperties>
@@ -694,7 +692,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonCancel">
           <Properties>
-            <Property name="label" type="java.lang.String" resourceKey="Cancel.label"/>
+            <Property name="text" type="java.lang.String" resourceKey="Cancel.label"/>
             <Property name="name" type="java.lang.String" value="Cancel" noResource="true"/>
           </Properties>
           <AccessibilityProperties>
@@ -706,7 +704,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonDefaultConfig">
           <Properties>
-            <Property name="label" type="java.lang.String" resourceKey="DefaultConfig.label"/>
+            <Property name="text" type="java.lang.String" resourceKey="DefaultConfig.label"/>
             <Property name="name" type="java.lang.String" value="DefaultConfig" noResource="true"/>
           </Properties>
           <AccessibilityProperties>

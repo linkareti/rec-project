@@ -3,6 +3,8 @@ package com.linkare.rec.impl.utils;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
+import org.omg.PortableServer.POAPackage.ObjectNotActive;
+
 import com.linkare.rec.impl.threading.ExecutorScheduler;
 import com.linkare.rec.impl.threading.ScheduledWorkUnit;
 
@@ -10,8 +12,8 @@ import com.linkare.rec.impl.threading.ScheduledWorkUnit;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class Deactivator extends ScheduledWorkUnit {
-
+public class Deactivator extends ScheduledWorkUnit {	
+	
 	private Deactivatable deactivatable = null;
 	private final long DEACTIVATION_TIME = 40000;
 	private boolean deactivated = false;
@@ -46,21 +48,11 @@ public class Deactivator extends ScheduledWorkUnit {
 		}
 		final byte[] oid = deactivatable.getOID().getBytes();
 		try {
-			/*
-			 * System.out.println("************************************");
-			 * System.out.println("************************************");
-			 * System.out.println("Going to deactivate object with ID=" + (new
-			 * String(oid)) + " in POA "+deactivatable.getPOA().the_name());
-			 */
 			deactivatable.getPOA().deactivate_object(oid);
-			/*
-			 * System.out.println("Apparently deactivated object with ID=" +
-			 * (new String(oid)) +
-			 * " in POA "+deactivatable.getPOA().the_name());
-			 * System.out.println("************************************");
-			 * System.out.println("************************************");
-			 */
 			deactivated = true;
+		} catch(final ObjectNotActive e) {
+			deactivated = true;
+			LOGGER.log(Level.SEVERE, "Exception while trying to deactivate. Object was not active anymore, so not trying to deactivate it again!", e);
 		} catch (final Exception e) {
 			deactivated = false;
 			LOGGER.log(Level.SEVERE, "Exception while trying to deactivate.", e);

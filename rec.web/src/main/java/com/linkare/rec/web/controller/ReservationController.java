@@ -11,20 +11,19 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.event.ActionEvent;
 
-import com.linkare.commons.jpa.exceptions.DomainException;
 import com.linkare.commons.jpa.security.User;
 import com.linkare.commons.utils.StringUtils;
 import com.linkare.jsf.utils.JsfUtil;
-import com.linkare.rec.web.aop.AllocationManagerExceptionHandler;
 import com.linkare.rec.web.aop.ExceptionHandle;
 import com.linkare.rec.web.aop.ExceptionHandleCase;
+import com.linkare.rec.web.aop.ReCWebExceptionHandler;
+import com.linkare.rec.web.auth.UserView;
 import com.linkare.rec.web.model.Reservation;
+import com.linkare.rec.web.moodle.SessionHelper;
 import com.linkare.rec.web.service.ReservationService;
 import com.linkare.rec.web.service.ReservationServiceLocal;
 import com.linkare.rec.web.service.UserService;
 import com.linkare.rec.web.service.UserServiceLocal;
-import com.linkare.rec.web.auth.UserView;
-import com.linkare.rec.web.moodle.SessionHelper;
 import com.linkare.rec.web.util.ConstantUtils;
 
 /**
@@ -107,7 +106,7 @@ public class ReservationController extends AbstractController<Long, Reservation,
 	setCurrent(service.getReservationDetails(reservationId));
     }
 
-    @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = AllocationManagerExceptionHandler.class))
+    @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = ReCWebExceptionHandler.class))
     public String addUser() {
 	String username = JsfUtil.getRequestParameter(CONTEXT_USERNAME_INPUT);
 	if (StringUtils.isBlank(username)) {
@@ -124,7 +123,7 @@ public class ReservationController extends AbstractController<Long, Reservation,
 	return null;
     }
 
-    @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = AllocationManagerExceptionHandler.class))
+    @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = ReCWebExceptionHandler.class))
     public String removeUser() {
 	String username = JsfUtil.getRequestParameter(CONTEXT_USERNAME_INPUT);
 	if (StringUtils.isBlank(username)) {

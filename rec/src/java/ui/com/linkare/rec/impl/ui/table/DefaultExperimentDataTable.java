@@ -350,7 +350,7 @@ public class DefaultExperimentDataTable extends javax.swing.JPanel implements Ex
 			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				if (sendMailBox.getTxtToMail().getText().trim().length() < 1) {
 					JOptionPane.showMessageDialog(null,
-							ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.SendMailBox")
+							ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.SendMailBox",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader())
 									.getString("addressee.empty"));
 				} else {
 					HardwareAcquisitionConfig acquisitionConfig = expDataModelContainer.getExpDataModel()

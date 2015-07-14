@@ -37,14 +37,18 @@ public class SetReset extends pt.utl.ist.elab.client.webrobot.customizer.Comps.B
 	/** Holds value of property cancel. */
 	private boolean cancel = false;
 
-	/** Creates a new instance of CompInt */
+	/**
+	 * Creates a new instance of CompInt
+	 * 
+	 * @param parent
+	 */
 	public SetReset(final javax.swing.JFrame parent) {
 		super();
 		setCancel(false);
 		model = new pt.utl.ist.elab.client.webrobot.customizer.Models.ModelSetReset();
 		confSetReset = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfSetReset(parent, true, model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confSetReset);
-		confSetReset.show();
+		confSetReset.setVisible(true);
 		if (confSetReset.isCancel()) {
 			setCancel(true);
 			return;
@@ -117,7 +121,7 @@ public class SetReset extends pt.utl.ist.elab.client.webrobot.customizer.Comps.B
 	public void edit(final javax.swing.JFrame parent) {
 		confSetReset = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfSetReset(parent, true, model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confSetReset);
-		confSetReset.show();
+		confSetReset.setVisible(true);
 	}
 
 	@Override

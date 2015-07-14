@@ -31,7 +31,7 @@ public class FlatLookAndFeel extends
 // BasicLookAndFeel // The initial default Base LAF for FlatLookAndFeel.
 {
 
-	private static final Logger log = Logger.getLogger(FlatLookAndFeel.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(FlatLookAndFeel.class.getName());
 
 	private static final long serialVersionUID = 3410155899630816365L;
 
@@ -49,8 +49,7 @@ public class FlatLookAndFeel extends
 	 */
 	public FlatLookAndFeel(final FlatTheme theme) {
 		this.theme = theme;
-		// FIXME Disabled because it causes a bug on VideoCanvas rendering
-		// FlatFocusRenderer.install(); // Setup focus
+		FlatFocusRenderer.install(); // Setup focus
 	}
 
 	@Override
@@ -86,17 +85,22 @@ public class FlatLookAndFeel extends
 	protected void initClassDefaults(final UIDefaults table) {
 		super.initClassDefaults(table);
 
-		final Object[] classDefaults = { "SplitPaneUI", BasicSplitPaneUI.class.getName(), "ScrollBarUI",
-				FlatScrollBarUI.class.getName(), "ComboBoxUI", FlatComboBoxUI.class.getName(), "TabbedPaneUI",
-				FlatTabbedPaneUI.class.getName(), "MenuUI", BasicMenuUI.class.getName(),
-				// TODO Change Names
-				"FlatButtonUI", FlatButtonUI.class.getName(), "ButtonUI", FlatOriginalButtonUI.class.getName(),
+		final Object[] classDefaults = { 
+				"SplitPaneUI", BasicSplitPaneUI.class.getName(), 
+				"ScrollBarUI",FlatScrollBarUI.class.getName(), 
+				"ComboBoxUI", FlatComboBoxUI.class.getName(), 
+				"TabbedPaneUI",FlatTabbedPaneUI.class.getName(), 
+				"MenuUI", BasicMenuUI.class.getName(),
+				"FlatButtonUI", FlatButtonUI.class.getName(), 
+				"ButtonUI", FlatOriginalButtonUI.class.getName(),
+				"RadioButtonUI", FlatRadioButtonUI.class.getName(), 
+				"CheckBoxUI", FlatCheckBoxUI.class.getName(),
+				"SliderUI", FlatSliderUI.class.getName(), 
+				"FlatTableUI", FlatTableUI.class.getName(),
+				"TextPaneUI",FlatTextPaneUI.class.getName()};
 
-				"RadioButtonUI", FlatRadioButtonUI.class.getName(), "CheckBoxUI", FlatCheckBoxUI.class.getName(),
-				"SliderUI", FlatSliderUI.class.getName(), "FlatTableUI", FlatTableUI.class.getName(), };
-
-		if (FlatLookAndFeel.log.isLoggable(Level.FINER)) {
-			FlatLookAndFeel.log.finer("FlatLookAndFeel Class Defaults: " + Arrays.deepToString(classDefaults));
+		if (FlatLookAndFeel.LOGGER.isLoggable(Level.FINER)) {
+			FlatLookAndFeel.LOGGER.finer("FlatLookAndFeel Class Defaults: " + Arrays.deepToString(classDefaults));
 		}
 
 		table.putDefaults(classDefaults);
@@ -105,7 +109,6 @@ public class FlatLookAndFeel extends
 	@Override
 	protected void initComponentDefaults(final UIDefaults table) {
 		super.initComponentDefaults(table);
-		// TODO Set key bindings like Nimbus LAF
 	}
 
 	@Override

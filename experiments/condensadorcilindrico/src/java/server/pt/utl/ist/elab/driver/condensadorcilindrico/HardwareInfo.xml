@@ -2,6 +2,7 @@
 
 <!-- Created by Ricardo Espírito Santo 24 Jan 2012 -->
 
+<!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
 <HardwareInfo id="ELAB_CC_STAMP_V02" familiarName="Condensador Cilíndrico" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
 	<description>
         <![CDATA[ 

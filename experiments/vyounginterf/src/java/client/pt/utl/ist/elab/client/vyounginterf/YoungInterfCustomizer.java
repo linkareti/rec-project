@@ -19,12 +19,10 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
-public class YoungInterfCustomizer extends javax.swing.JPanel implements
-		com.linkare.rec.impl.client.customizer.ICustomizer {
+public class YoungInterfCustomizer  extends AbstractCustomizer {
 
 	/**
 	 * 
@@ -342,15 +340,15 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 	}// GEN-LAST:event_jButtonCancelActionPerformed
 
 	private void jButtonOKActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonOKActionPerformed
-		acqConfig.setTotalSamples(1080);
+		getAcquisitionConfig().setTotalSamples(1082);
 
 		// acqConfig.setSelectedFrequency(new
 		// Frequency((double)jSliderTBS.getValue(),hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(),hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
 
-		acqConfig.getSelectedHardwareParameter("lambda").setParameterValue("" + YoungInterfCustomizer.wave.getValue());
-		acqConfig.getSelectedHardwareParameter("dfendas").setParameterValue("" + jSliderDFendas.getValue() / 100F);
-		acqConfig.getSelectedHardwareParameter("dplanos").setParameterValue("" + jSliderDPlanos.getValue() / 100F);
-		acqConfig.getSelectedHardwareParameter("lpadrao").setParameterValue("" + jSliderArea.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("lambda").setParameterValue("" + YoungInterfCustomizer.wave.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("dfendas").setParameterValue("" + jSliderDFendas.getValue() / 100F);
+		getAcquisitionConfig().getSelectedHardwareParameter("dplanos").setParameterValue("" + jSliderDPlanos.getValue() / 100F);
+		getAcquisitionConfig().getSelectedHardwareParameter("lpadrao").setParameterValue("" + jSliderArea.getValue());
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_jButtonOKActionPerformed
 
@@ -423,76 +421,6 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 		return rounded;
 	}
 
-	// ****************************REC********************************************/
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	@Override
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	@Override
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	@Override
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
-
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ESTE É PARA ALTERAR
 	// /////////////////////////////////////////////////////////////////////////////////
@@ -500,7 +428,7 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
 		// Aqui são fornecidos parametros do ultimo utilizador que fez a exp, e'
 		// bom manter!
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 			final int lambda = (int) (Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("lambda")));
 			final int dfendas = (int) (Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("dfendas"))) / 100;
@@ -514,19 +442,6 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 		}
 	}
 
-	@Override
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	@Override
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
 
 	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
@@ -538,11 +453,6 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 	@Override
 	public String getCustomizerTitle() {
 		return "Young's Interferences Experiment Configuration Utility";
-	}
-
-	@Override
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

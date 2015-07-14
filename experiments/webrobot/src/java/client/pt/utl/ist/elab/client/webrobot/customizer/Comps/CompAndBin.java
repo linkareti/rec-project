@@ -8,7 +8,7 @@ package pt.utl.ist.elab.client.webrobot.customizer.Comps;
 
 /**
  * 
- * @author Andr�
+ * @author André
  */
 public class CompAndBin extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Block {
 	/**
@@ -41,7 +41,11 @@ public class CompAndBin extends pt.utl.ist.elab.client.webrobot.customizer.Comps
 	/** Holds value of property cancel. */
 	private boolean cancel = false;
 
-	/** Creates a new instance of CompInt */
+	/**
+	 * Creates a new instance of CompInt
+	 * 
+	 * @param parent
+	 */
 	public CompAndBin(final javax.swing.JFrame parent) {
 		super();
 		setCancel(false);
@@ -49,7 +53,7 @@ public class CompAndBin extends pt.utl.ist.elab.client.webrobot.customizer.Comps
 		confCompAndBin = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfCompAndBin(parent, true,
 				model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confCompAndBin);
-		confCompAndBin.show();
+		confCompAndBin.setVisible(true);
 		if (confCompAndBin.isCancel()) {
 			setCancel(true);
 			return;
@@ -135,7 +139,7 @@ public class CompAndBin extends pt.utl.ist.elab.client.webrobot.customizer.Comps
 		confCompAndBin = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfCompAndBin(parent, true,
 				model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confCompAndBin);
-		confCompAndBin.show();
+		confCompAndBin.setVisible(true);
 	}
 
 	@Override

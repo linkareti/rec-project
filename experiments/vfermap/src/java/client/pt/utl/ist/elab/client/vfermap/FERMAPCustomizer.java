@@ -14,11 +14,10 @@ import pt.utl.ist.elab.client.virtual.guipack.GUtils;
 import pt.utl.ist.elab.client.virtual.guipack.InteractiveMenu;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 
-public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer,
+public class FERMAPCustomizer extends AbstractCustomizer implements
 		InteractiveMenu {
 
 	/**
@@ -1636,8 +1635,8 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 	private void okButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
 
-		acqConfig.setSelectedFrequency(new Frequency((double) tbs, hardwareInfo.getHardwareFrequencies(0)
-				.getMinimumFrequency().getMultiplier(), hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency()
+		getAcquisitionConfig().setSelectedFrequency(new Frequency((double) tbs, getHardwareInfo().getHardwareFrequencies(0)
+				.getMinimumFrequency().getMultiplier(), getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency()
 				.getFrequencyDefType()));
 
 		byte simulType = 0;
@@ -1656,21 +1655,21 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 			final int nUMapa = nUMapaSlider.getValue();
 			final double dUMapa = (double) dUMapaSlider.getValue() / 100d;
 
-			acqConfig.setTotalSamples(nPsi * nUMapa * iter + nPsi * nUMapa);
+			getAcquisitionConfig().setTotalSamples(nPsi * nUMapa * iter + nPsi * nUMapa);
 
 			simulType = 1;
 
-			acqConfig.getSelectedHardwareParameter("m").setParameterValue("" + (float) m);
-			acqConfig.getSelectedHardwareParameter("pcor").setParameterValue("" + (float) pcor);
-			acqConfig.getSelectedHardwareParameter("iter").setParameterValue("" + iter);
+			getAcquisitionConfig().getSelectedHardwareParameter("m").setParameterValue("" + (float) m);
+			getAcquisitionConfig().getSelectedHardwareParameter("pcor").setParameterValue("" + (float) pcor);
+			getAcquisitionConfig().getSelectedHardwareParameter("iter").setParameterValue("" + iter);
 
-			acqConfig.getSelectedHardwareParameter("psi").setParameterValue("" + (float) psi);
-			acqConfig.getSelectedHardwareParameter("nPsi").setParameterValue("" + nPsi);
-			acqConfig.getSelectedHardwareParameter("dPsi").setParameterValue("" + (float) dPsi);
+			getAcquisitionConfig().getSelectedHardwareParameter("psi").setParameterValue("" + (float) psi);
+			getAcquisitionConfig().getSelectedHardwareParameter("nPsi").setParameterValue("" + nPsi);
+			getAcquisitionConfig().getSelectedHardwareParameter("dPsi").setParameterValue("" + (float) dPsi);
 
-			acqConfig.getSelectedHardwareParameter("uMapa").setParameterValue("" + (float) uMapa);
-			acqConfig.getSelectedHardwareParameter("nUMapa").setParameterValue("" + nUMapa);
-			acqConfig.getSelectedHardwareParameter("dUMapa").setParameterValue("" + (float) dUMapa);
+			getAcquisitionConfig().getSelectedHardwareParameter("uMapa").setParameterValue("" + (float) uMapa);
+			getAcquisitionConfig().getSelectedHardwareParameter("nUMapa").setParameterValue("" + nUMapa);
+			getAcquisitionConfig().getSelectedHardwareParameter("dUMapa").setParameterValue("" + (float) dUMapa);
 		} else if (animaRadioButton.isSelected()) {
 			final double x = fermAnima.getSysX();
 			final double xDot = fermAnima.getVel();
@@ -1679,17 +1678,17 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 			final double d = fermAnima.getD();
 			final double wFreq = fermAnima.getWallFreq();
 
-			acqConfig.setTotalSamples(214700);
+			getAcquisitionConfig().setTotalSamples(214700);
 
 			simulType = 2;
 
-			acqConfig.getSelectedHardwareParameter("x").setParameterValue("" + (float) x);
-			acqConfig.getSelectedHardwareParameter("xDot").setParameterValue("" + (float) xDot);
-			acqConfig.getSelectedHardwareParameter("psi").setParameterValue("" + (float) psi);
-			acqConfig.getSelectedHardwareParameter("wAmp").setParameterValue("" + (float) wAmp);
-			acqConfig.getSelectedHardwareParameter("d").setParameterValue("" + (float) d);
-			acqConfig.getSelectedHardwareParameter("wFreq").setParameterValue("" + (float) wFreq);
-			acqConfig.getSelectedHardwareParameter("nCol").setParameterValue("" + nSamples);
+			getAcquisitionConfig().getSelectedHardwareParameter("x").setParameterValue("" + (float) x);
+			getAcquisitionConfig().getSelectedHardwareParameter("xDot").setParameterValue("" + (float) xDot);
+			getAcquisitionConfig().getSelectedHardwareParameter("psi").setParameterValue("" + (float) psi);
+			getAcquisitionConfig().getSelectedHardwareParameter("wAmp").setParameterValue("" + (float) wAmp);
+			getAcquisitionConfig().getSelectedHardwareParameter("d").setParameterValue("" + (float) d);
+			getAcquisitionConfig().getSelectedHardwareParameter("wFreq").setParameterValue("" + (float) wFreq);
+			getAcquisitionConfig().getSelectedHardwareParameter("nCol").setParameterValue("" + nSamples);
 		} else if (histRadioButton.isSelected()) {
 			final double m = (double) mSlider.getValue() / 10d;
 			final double pcor = (double) pcorSlider.getValue() / 100d;
@@ -1698,34 +1697,34 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 			final double psi = Math.toRadians(psiSlider.getValue());
 			final double uMapa = (double) uMapaSlider.getValue() / 10d;
 
-			acqConfig.setTotalSamples(iter + 1);
+			getAcquisitionConfig().setTotalSamples(iter + 1);
 
 			simulType = 3;
 
-			acqConfig.getSelectedHardwareParameter("m").setParameterValue("" + (float) m);
-			acqConfig.getSelectedHardwareParameter("pcor").setParameterValue("" + (float) pcor);
-			acqConfig.getSelectedHardwareParameter("iter").setParameterValue("" + iter);
+			getAcquisitionConfig().getSelectedHardwareParameter("m").setParameterValue("" + (float) m);
+			getAcquisitionConfig().getSelectedHardwareParameter("pcor").setParameterValue("" + (float) pcor);
+			getAcquisitionConfig().getSelectedHardwareParameter("iter").setParameterValue("" + iter);
 
-			acqConfig.getSelectedHardwareParameter("psi").setParameterValue("" + (float) psi);
-			acqConfig.getSelectedHardwareParameter("uMapa").setParameterValue("" + (float) uMapa);
+			getAcquisitionConfig().getSelectedHardwareParameter("psi").setParameterValue("" + (float) psi);
+			getAcquisitionConfig().getSelectedHardwareParameter("uMapa").setParameterValue("" + (float) uMapa);
 		}
 
-		acqConfig.getSelectedHardwareParameter("staticImg").setParameterValue(
+		getAcquisitionConfig().getSelectedHardwareParameter("staticImg").setParameterValue(
 				"" + (staticRadioButton.isSelected() ? 1 : 0));
-		acqConfig.getSelectedHardwareParameter("simulType").setParameterValue("" + simulType);
+		getAcquisitionConfig().getSelectedHardwareParameter("simulType").setParameterValue("" + simulType);
 
-		acqConfig.getSelectedHardwareParameter("w").setParameterValue("" + widthSlider.getValue());
-		acqConfig.getSelectedHardwareParameter("h").setParameterValue("" + heightSlider.getValue());
-		acqConfig.getSelectedHardwareParameter("pixSize").setParameterValue("" + (byte) pixSizeSlider.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("w").setParameterValue("" + widthSlider.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("h").setParameterValue("" + heightSlider.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("pixSize").setParameterValue("" + (byte) pixSizeSlider.getValue());
 		if (uMaxCheckBox.isSelected()) {
-			acqConfig.getSelectedHardwareParameter("uMax").setParameterValue("" + -1);
+			getAcquisitionConfig().getSelectedHardwareParameter("uMax").setParameterValue("" + -1);
 		} else {
-			acqConfig.getSelectedHardwareParameter("uMax").setParameterValue("" + uMaxSlider.getValue());
+			getAcquisitionConfig().getSelectedHardwareParameter("uMax").setParameterValue("" + uMaxSlider.getValue());
 		}
 
-		for (int i = 0; i < acqConfig.getSelectedHardwareParameters().length; i++) {
-			System.out.println(acqConfig.getSelectedHardwareParameters(i).getParameterName() + " = "
-					+ acqConfig.getSelectedHardwareParameters(i).getParameterValue());
+		for (int i = 0; i < getAcquisitionConfig().getSelectedHardwareParameters().length; i++) {
+			System.out.println(getAcquisitionConfig().getSelectedHardwareParameters(i).getParameterName() + " = "
+					+ getAcquisitionConfig().getSelectedHardwareParameters(i).getParameterValue());
 		}
 
 		fireICustomizerListenerDone();
@@ -1774,74 +1773,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 	// ****************************REC********************************************/
 
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
+	
 
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 
 			final byte simulType = Byte.parseByte(acqConfig.getSelectedHardwareParameterValue("simulType"));
@@ -1928,18 +1863,6 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		}
 	}
 
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
-
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/vfermap/resources/fermap_iconified.PNG"));
@@ -1947,10 +1870,6 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 	public String getCustomizerTitle() {
 		return "Fermi Map Configuration Utility";
-	}
-
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

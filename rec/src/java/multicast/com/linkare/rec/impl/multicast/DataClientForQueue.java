@@ -7,6 +7,7 @@
 package com.linkare.rec.impl.multicast;
 
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.linkare.rec.acquisition.DataClient;
 import com.linkare.rec.acquisition.NotAuthorized;
@@ -23,7 +24,6 @@ import com.linkare.rec.impl.multicast.security.IResource;
 import com.linkare.rec.impl.multicast.security.SecurityManagerFactory;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
-import com.linkare.rec.impl.utils.QueueLogger;
 import com.linkare.rec.impl.wrappers.DataClientWrapper;
 
 /**
@@ -31,7 +31,9 @@ import com.linkare.rec.impl.wrappers.DataClientWrapper;
  * @author José Pedro Pereira - Linkare TI
  */
 
-public class DataClientForQueue implements QueueLogger {
+public class DataClientForQueue {
+
+	private static final Logger LOGGER = Logger.getLogger(DataClientForQueue.class.getName());
 
 	private DataClientWrapper dcw = null;
 	private IDataClientForQueueListener dataClientForQueueListener = null;
@@ -49,29 +51,28 @@ public class DataClientForQueue implements QueueLogger {
 		dcw = new DataClientWrapper(dc);
 
 		if (!dcw.isConnected()) {
-			log(Level.SEVERE, "Error getting username in DataClientForQueue - Throwing not authorized...");
+			LOGGER.log(Level.SEVERE, "Error getting username in DataClientForQueue - Throwing not authorized...");
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_USERNAME_NOT_AVAILABLE);
 		}
 
 		setUserInfo(dcw.getUserInfo());
 
 		if (getUserInfo() == null || getUserInfo().getUserName() == null) {
-			log(Level.SEVERE, "Username is null - Throwing not authorized...");
+			LOGGER.log(Level.SEVERE, "Username is null - Throwing not authorized...");
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_USERNAME_NULL);
 		}
 
 		if (getUserInfo().getUserName().equals("")) {
-			log(Level.SEVERE, "Username is empty - Throwing not authorized...");
+			LOGGER.log(Level.SEVERE, "Username is empty - Throwing not authorized...");
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_USERNAME_EMPTY);
 		}
 
 		if (!SecurityManagerFactory.authenticate(this.resource, getAsDefaultUser())) {
-			log(Level.SEVERE, "SecurityManager didn't authenticate you");
+			LOGGER.log(Level.SEVERE, "SecurityManager didn't authenticate you");
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_SECURITY_MANAGER);
 		}
 
-		messageQueue = new EventQueue(new DataClientQueueDispatcher(),
-				"DataClientForQueue - " + userInfo.getUserName(), this);
+		messageQueue = new EventQueue(new DataClientQueueDispatcher(), "DataClientForQueue - " + userInfo.getUserName());
 	}
 
 	public String getUserName() {
@@ -96,6 +97,14 @@ public class DataClientForQueue implements QueueLogger {
 		}
 
 		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+		return this.dcw != null ? this.dcw.hashCode() : 0;
 	}
 
 	public boolean isConnected() {
@@ -123,13 +132,13 @@ public class DataClientForQueue implements QueueLogger {
 			return;
 		}
 		shutDown = true;
-		log(Level.INFO, "client " + getUserName() + " - Shutting down!");
-		log(Level.INFO, "client " + getUserName() + " - shutting down message queue!");
+		LOGGER.log(Level.INFO, "client " + getUserName() + " - Shutting down!");
+		LOGGER.log(Level.INFO, "client " + getUserName() + " - shutting down message queue!");
 		messageQueue.shutdown();
-		log(Level.INFO, "client " + getUserName() + " - message queue is shut down!");
-		log(Level.INFO, "client " + getUserName() + " - informing dataClientForQueueListener that I'm gone!");
+		LOGGER.log(Level.INFO, "client " + getUserName() + " - message queue is shut down!");
+		LOGGER.log(Level.INFO, "client " + getUserName() + " - informing dataClientForQueueListener that I'm gone!");
 		getDataClientForQueueListener().dataClientForQueueIsGone(this);
-		log(Level.INFO, "client " + getUserName() + " is shut down!");
+		LOGGER.log(Level.INFO, "client " + getUserName() + " is shut down!");
 		shutDown = false;
 	}
 
@@ -260,11 +269,19 @@ public class DataClientForQueue implements QueueLogger {
 			try {
 				if (o instanceof HardwareStateChangeEvent) {
 					final HardwareStateChangeEvent evt = (HardwareStateChangeEvent) o;
-					log(Level.FINE, "Dispatching hardware state [" + evt.getNewState() + "]");
+					LOGGER.log(Level.FINE, "Dispatching hardware state [" + evt.getNewState() + "] + Client : "
+							+ DataClientForQueue.this.getUserName());
 					dcw.hardwareStateChange(evt.getNewState());
+					LOGGER.log(Level.FINE, "Dispatched hardware state [" + evt.getNewState() + "] + Client : "
+							+ DataClientForQueue.this.getUserName());
 				}
 				if (o instanceof HardwareChangeEvent) {
+					// HardwareChangeEvent evt=(HardwareChangeEvent) o;
+					LOGGER.log(Level.FINE,
+							"Dispatching hardware change + Client : " + DataClientForQueue.this.getUserName());
 					dcw.hardwareChange();
+					LOGGER.log(Level.FINE,
+							"Dispatched hardware change + Client : " + DataClientForQueue.this.getUserName());
 				}
 				if (o instanceof ChatMessageEvent) {
 					final ChatMessageEvent evt = (ChatMessageEvent) o;
@@ -272,21 +289,27 @@ public class DataClientForQueue implements QueueLogger {
 						return;
 					}
 
+					LOGGER.log(Level.FINE,
+							"Dispatching chat message + Client : " + DataClientForQueue.this.getUserName());
 					dcw.receiveMessage(evt.getUserFrom().getUserName(), evt.getUserTo().getUserName(), evt.getMessage());
+					LOGGER.log(Level.FINE,
+							"Dispatched chat message + Client : " + DataClientForQueue.this.getUserName());
 				}
 				if (o instanceof HardwareLockEvent) {
 					final HardwareLockEvent evt = (HardwareLockEvent) o;
 					// aqui o evento de HardwareLock que esta na Queue e
 					// desmultiplicado
 					// para true CORBA way
+					LOGGER.log(Level.FINE, "Dispatching lock to + Client : " + DataClientForQueue.this.getUserName());
 					dcw.hardwareLockable(evt.getMillisecondsToLockSuccess());
+					LOGGER.log(Level.FINE, "Dispatched lock to + Client : " + DataClientForQueue.this.getUserName());
 					// para alem disso, o proprio evento tem consigo
 					// um Thread para fazer o countDown...
 					evt.startCountDown();
 				}
 
 			} catch (final Exception e) {
-				logThrowable("Oooppss.. client gone? - Error dispatching event to client! Why? Gone?", e);
+				LOGGER.log(Level.SEVERE, "Oooppss.. client gone? - Error dispatching event to client! Why? Gone?", e);
 				if (!isConnected()) {
 					shutdownAsSoonAsPossible();
 					return;
@@ -299,22 +322,6 @@ public class DataClientForQueue implements QueueLogger {
 			return Thread.NORM_PRIORITY;
 		}
 
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void log(final Level debugLevel, final String message) {
-		getDataClientForQueueListener().log(debugLevel, message);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void logThrowable(final String message, final Throwable t) {
-		getDataClientForQueueListener().logThrowable(message, t);
 	}
 
 	/**

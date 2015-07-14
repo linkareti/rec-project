@@ -17,7 +17,10 @@ public enum ExceptionCode {
 
 	THE_FAMOUS_UNKNOWN_ERROR("Unknown Error", 1),
 
-	MISSING_SYSTEM_PROPERTIES("Missing System Properties", 10);
+	MISSING_SYSTEM_PROPERTIES("Missing System Properties", 10),
+	
+	AUTOCONNECT_APPARATUS_NOT_AVAILABLE_IN_FACECONFIG("Auto connect apparatus is missing from the client configuration file!",20)
+	;
 
 	int id;
 	String description;

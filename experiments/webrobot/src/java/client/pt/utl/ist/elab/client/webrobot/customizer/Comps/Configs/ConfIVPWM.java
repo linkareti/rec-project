@@ -17,10 +17,13 @@ public class ConfIVPWM extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = 7134889764646889284L;
 
-	/** Creates new form IVPWM 
-	 * @param parent 
-	 * @param modal 
-	 * @param model */
+	/**
+	 * Creates new form IVPWM
+	 * 
+	 * @param parent
+	 * @param modal
+	 * @param model
+	 */
 	public ConfIVPWM(final java.awt.Frame parent, final boolean modal,
 			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIVPWM model) {
 		super(parent, modal);
@@ -329,6 +332,10 @@ public class ConfIVPWM extends javax.swing.JDialog {
 		}));
 		jTable.setModel(new javax.swing.table.DefaultTableModel(model.getIValues(), new String[] { "I7...I0", "PWM1",
 				"PWM2" }) {
+			/**
+					 * 
+					 */
+			private static final long serialVersionUID = 5113819335744364984L;
 			boolean[] canEdit = new boolean[] { false, false, false };
 
 			@Override
@@ -962,7 +969,7 @@ public class ConfIVPWM extends javax.swing.JDialog {
 				jRadioButtonI3.isSelected(), jRadioButtonI4.isSelected(), jRadioButtonI5.isSelected(),
 				jRadioButtonI6.isSelected(), jRadioButtonI7.isSelected(), send);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(this, confAddNewElement);
-		confAddNewElement.show();
+		confAddNewElement.setVisible(true);
 		final Object[] newRowData = confAddNewElement.getReturnObj();
 		if (newRowData[0] != null) {
 			defaultTableModel.addRow(newRowData);
@@ -990,7 +997,7 @@ public class ConfIVPWM extends javax.swing.JDialog {
 				jRadioButtonI3.isSelected(), jRadioButtonI4.isSelected(), jRadioButtonI5.isSelected(),
 				jRadioButtonI6.isSelected(), jRadioButtonI7.isSelected(), send);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(this, confAddNewElement);
-		confAddNewElement.show();
+		confAddNewElement.setVisible(true);
 		if (confAddNewElement.getClean()) {
 			defaultTableModel.removeRow(selectedRow);
 			return;

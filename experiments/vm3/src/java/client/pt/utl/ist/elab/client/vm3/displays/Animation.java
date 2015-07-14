@@ -36,7 +36,7 @@ public class Animation extends pt.utl.ist.elab.client.vm3.DrawableMolas implemen
 		frame.getContentPane().add(new Animation());
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.show();
+		frame.setVisible(true);
 	}
 
 	// Chegaram novas amostras!

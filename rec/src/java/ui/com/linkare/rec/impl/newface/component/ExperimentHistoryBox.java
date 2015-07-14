@@ -1,5 +1,7 @@
 package com.linkare.rec.impl.newface.component;
 
+import java.util.LinkedList;
+
 
 /**
  * 
@@ -7,6 +9,8 @@ package com.linkare.rec.impl.newface.component;
  */
 public class ExperimentHistoryBox extends AbstractContentPane {
 
+	private LinkedList<ExpHistoryEntryPane> historyEntries=new LinkedList<ExpHistoryEntryPane>();
+	
 	/**
 	 * 
 	 */
@@ -57,7 +61,20 @@ public class ExperimentHistoryBox extends AbstractContentPane {
 	}// </editor-fold>//GEN-END:initComponents
 
 	public void addExperimentHistory(final ExperimentHistoryUINode expHist) {
-		historyListPane.add(new ExpHistoryEntryPane(expHist, historyListPane));
+		
+		
+		ExpHistoryEntryPane expHistEntryPane = new ExpHistoryEntryPane(expHist, historyListPane);
+		if(historyEntries.size()>=5) {
+			historyEntries.removeLast();
+		}
+		historyEntries.addFirst(expHistEntryPane);
+		
+		historyListPane.removeAll();
+		for (ExpHistoryEntryPane expHistoryEntryPane : historyEntries) {
+			historyListPane.add(expHistoryEntryPane);
+		}
+		
+		repaint();
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

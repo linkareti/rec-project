@@ -17,7 +17,11 @@ import com.linkare.rec.web.util.ConstantUtils;
 @RequestScoped
 public class LoginDomainController extends AbstractController<Long, LoginDomain, LoginDomainService> {
 
-    @EJB(beanInterface = LoginDomainServiceLocal.class)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6172008057162456974L;
+	@EJB(beanInterface = LoginDomainServiceLocal.class)
     private LoginDomainService service;
 
     @Override

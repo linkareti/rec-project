@@ -180,7 +180,7 @@ public class VideoPanel extends javax.swing.JPanel implements com.linkare.rec.im
 		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new VideoPanel(), java.awt.BorderLayout.CENTER);
 		dummy.pack();
-		dummy.show();
+		dummy.setVisible(true);
 	}
 
 	@Override

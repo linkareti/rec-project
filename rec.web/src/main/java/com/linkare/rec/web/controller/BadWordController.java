@@ -24,7 +24,11 @@ import javax.faces.convert.FacesConverter;
 @RequestScoped
 public class BadWordController extends AbstractController<Long, BadWord, BadWordService> {
 
-    @EJB(beanInterface = BadWordServiceLocal.class)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4912332656715840492L;
+	@EJB(beanInterface = BadWordServiceLocal.class)
     private BadWordService service;
 
     @Override

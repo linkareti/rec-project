@@ -10,24 +10,26 @@ import java.awt.Color;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.InetAddress;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import com.linkare.rec.acquisition.MultiCastController;
 import com.linkare.rec.acquisition.MultiCastControllerPOATie;
+import com.linkare.rec.impl.config.ReCSystemProperty;
+import com.linkare.rec.impl.config.ReCSystemPropertyLocation;
 import com.linkare.rec.impl.multicast.ReCMultiCastController;
-import com.linkare.rec.impl.utils.Defaults;
+import com.linkare.rec.impl.threading.ProcessingManager;
 import com.linkare.rec.impl.utils.ORBBean;
+import com.linkare.rec.impl.utils.SystemExitSecurityManager;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
 public class MultiCastControllerMain {
-
-	private static final boolean SHOW_GUI = Boolean.parseBoolean(Defaults.defaultIfEmpty(
-			System.getProperty("rec.multicastcontroller.showgui"), "false"));
 
 	/** Creates a new instance of MultiCastControllerMain */
 	public MultiCastControllerMain() {
@@ -38,21 +40,50 @@ public class MultiCastControllerMain {
 	 * @param args the command line arguments
 	 */
 	public static void main(final String[] args) {
+		System.setSecurityManager(new SystemExitSecurityManager());
+		
 		ReCMultiCastController mcc = null;
 		try {
+			
+			Set<ReCSystemProperty> listRequiredNotDefined = ReCSystemProperty
+					.listRequiredNotDefined(ReCSystemPropertyLocation.MULTICAST);
+			if (listRequiredNotDefined.size() > 0) {
+				System.out.println("The following system properties are required and where not defined:");
+				for (ReCSystemProperty reCSystemProperty : listRequiredNotDefined) {
+					System.out.println(reCSystemProperty.toString());
+				}
+				System.exit(-1);
+			}
+			
+			
 			ORBBean.getORBBean();
 
 			mcc = new ReCMultiCastController();
 			final MultiCastControllerPOATie mccpoatie = (MultiCastControllerPOATie) ORBBean.getORBBean()
 					.registerRootPOAServant(MultiCastController.class, mcc,
-							ReCMultiCastController.MULTICAST_INIT_REF.getBytes());
+							ReCSystemProperty.MULTICAST_INITREF.getValue().getBytes());
 			final String corbaURL = ORBBean.getORBBean().bindObjectToCorbalocService(
-					ReCMultiCastController.MULTICAST_BIND_NAME,
+					ReCSystemProperty.MULTICAST_BINDNAME.getValue(),
 					ORBBean.getORBBean().getRootPOA().servant_to_reference(mccpoatie));
 
 			System.out.println("MultiCastController listening for requests at URL " + corbaURL);
+			
+			String rmiRemoteHostName=System.getProperty("java.rmi.server.hostname");
+			if(rmiRemoteHostName==null) {
+				rmiRemoteHostName=InetAddress.getLocalHost().getHostAddress();
+			}
+			String jmxRemotePort=System.getProperty("com.sun.management.jmxremote.port");
+			if(jmxRemotePort!=null && jmxRemotePort.trim().length()!=0) {
+				final String jmxServiceUrl="service:jmx:rmi:///jndi/rmi://"+rmiRemoteHostName+":"+jmxRemotePort+"/jmxrmi";
+				System.out.println("MultiCastController available for JMX at URL " + jmxServiceUrl);
+			}
+			
+			
+			
+			
+			
 
-			if (!GraphicsEnvironment.isHeadless() && MultiCastControllerMain.SHOW_GUI) {
+			if (!GraphicsEnvironment.isHeadless() && Boolean.parseBoolean(ReCSystemProperty.MULTICAST_SHOW_GUI.getValue())) {
 				final JFrame frameForKill = new JFrame();
 				final JButton btnExit = new JButton("End MulticastController!");
 				btnExit.setBackground(Color.red);
@@ -67,6 +98,7 @@ public class MultiCastControllerMain {
 				});
 				frameForKill.getContentPane().add(btnExit);
 				frameForKill.setVisible(true);
+				frameForKill.setTitle(ReCSystemProperty.MULTICAST_LAB_ID.getValue());
 				frameForKill.pack();
 			}
 
@@ -76,7 +108,7 @@ public class MultiCastControllerMain {
 			System.out.println("Abnormal exit...");
 			ORBBean.getORBBean().killORB();
 			mcc.shutdown();
-			mcc = null;
+			ProcessingManager.getInstance().shutdown();
 			e.printStackTrace();
 		}
 

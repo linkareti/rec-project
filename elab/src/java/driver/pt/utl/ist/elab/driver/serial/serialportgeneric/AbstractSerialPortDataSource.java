@@ -7,7 +7,6 @@
 package pt.utl.ist.elab.driver.serial.serialportgeneric;
 
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommand;
@@ -29,16 +28,7 @@ import com.linkare.rec.impl.driver.BaseDataSource;
  */
 public abstract class AbstractSerialPortDataSource extends BaseDataSource {
 
-	protected static String ABSTRACT_PORT_DATA_SOURCE_LOGGER = "AbstractSerialPortDataSource.Logger";
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(
-				AbstractSerialPortDataSource.ABSTRACT_PORT_DATA_SOURCE_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(
-					Logger.getLogger(AbstractSerialPortDataSource.ABSTRACT_PORT_DATA_SOURCE_LOGGER));
-		}
-	}
+	private static final Logger LOGGER = Logger.getLogger(AbstractSerialPortDataSource.class.getName());
 
 	private int counter = 0;
 	private int total_samples = 0;
@@ -120,15 +110,13 @@ public abstract class AbstractSerialPortDataSource extends BaseDataSource {
 	@Override
 	public void setAcquisitionHeader(final HardwareAcquisitionConfig config) {
 		super.setAcquisitionHeader(config);
-		Logger.getLogger(AbstractSerialPortDataSource.ABSTRACT_PORT_DATA_SOURCE_LOGGER).log(Level.FINE,
-				"Setting Hardware Acquisition Config [" + config + "]");
+		LOGGER.log(Level.FINE, "Setting Hardware Acquisition Config [" + config + "]");
 
 		total_samples = config.getTotalSamples();
 
 		// this is a formula from g experiment
 		final int packetSize = calcPacketSize(config);
-		Logger.getLogger(AbstractSerialPortDataSource.ABSTRACT_PORT_DATA_SOURCE_LOGGER).log(Level.FINEST,
-				"Setting packet size to [" + packetSize + "]");
+		LOGGER.log(Level.FINEST, "Setting packet size to [" + packetSize + "]");
 
 		setPacketSize(packetSize);
 	}

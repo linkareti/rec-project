@@ -36,9 +36,8 @@ public final class LaboratoriesMonitor {
 	private final static Logger LOG = LoggerFactory
 			.getLogger(LaboratoriesMonitor.class);
 
-	private static final int TIME_BETWEEN_MONITORING_EVENTS_SECONDS = Integer.class
-			.cast(SystemPropertiesEnum.TIME_BETWEEN_MONITORING_EVENTS_SECONDS
-					.getValue());
+	private static final int TIME_BETWEEN_MONITORING_EVENTS_SECONDS = (Integer) SystemPropertiesEnum.TIME_BETWEEN_MONITORING_EVENTS_SECONDS
+			.getValue();
 
 	private final ConcurrentMap<String, LabJMXConnetionHandler> labsJMXConnectionHandler;
 
@@ -61,7 +60,7 @@ public final class LaboratoriesMonitor {
 			labsNotificationListener = new LabsNotificationListener();
 			laboratoryService = JndiHelper.getLaboratoryService();
 
-			initJMXConnectionHandlersMap();
+			refreshLabConnectionHandlersMap();
 			connectWithLabs(true);
 
 			executorService = Executors
@@ -100,22 +99,38 @@ public final class LaboratoriesMonitor {
 			@Override
 			public void run() {
 				try {
+					refreshLabConnectionHandlersMap();
 					connectWithLabs(false);
 				} catch (Throwable e) {
 					LOG.error(e.getMessage(), e);
 				}
 			}
+
 		};
 	}
 
-	private void initJMXConnectionHandlersMap() {
+	private void refreshLabConnectionHandlersMap() {
 
-		for (final Laboratory laboratory : getLaboratoriesToMonitor()) {
-			if (laboratory.getJmxURL() != null) {
+		Collection<Laboratory> laboratoriesToMonitor = getLaboratoriesToMonitor();
+		for (final Laboratory laboratory : laboratoriesToMonitor) {
+			if (laboratory.getJmxURL() != null
+					&& !labsJMXConnectionHandler.containsKey(laboratory
+							.getName())) {
 				labsJMXConnectionHandler.put(laboratory.getName(),
 						createLabJMXConnectionHandler(laboratory));
 			}
 		}
+
+		for (Entry<String, LabJMXConnetionHandler> jmxConnectionHandler : labsJMXConnectionHandler
+				.entrySet()) {
+			if (!getLaboratoriesToMonitor().contains(
+					jmxConnectionHandler.getValue().getLaboratory())) {
+				jmxConnectionHandler.getValue().getJmxConnectionHandler()
+						.closeJMXConnector();
+				labsJMXConnectionHandler.remove(jmxConnectionHandler.getKey());
+			}
+		}
+
 	}
 
 	private LabJMXConnetionHandler createLabJMXConnectionHandler(
@@ -201,21 +216,25 @@ public final class LaboratoriesMonitor {
 		return labs;
 	}
 
-	private Collection<MbeanProxy<IMultiCastControllerMXBean, Laboratory>> getMbeanProxies() {
-		Collection<MbeanProxy<IMultiCastControllerMXBean, Laboratory>> result = Collections
-				.emptyList();
-
-		if (!labsJMXConnectionHandler.isEmpty()) {
-			result = new ArrayList<MbeanProxy<IMultiCastControllerMXBean, Laboratory>>(
-					labsJMXConnectionHandler.size());
-			for (final Entry<String, LabJMXConnetionHandler> entry : labsJMXConnectionHandler
-					.entrySet()) {
-				result.add(getMBeanProxy(entry.getValue()));
-			}
-		}
-
-		return result;
-	}
+	// private Collection<MbeanProxy<IMultiCastControllerMXBean, Laboratory>>
+	// getMbeanProxies() {
+	// Collection<MbeanProxy<IMultiCastControllerMXBean, Laboratory>> result =
+	// Collections
+	// .emptyList();
+	//
+	// if (!labsJMXConnectionHandler.isEmpty()) {
+	// result = new ArrayList<MbeanProxy<IMultiCastControllerMXBean,
+	// Laboratory>>(
+	// labsJMXConnectionHandler.size());
+	// for (final Entry<String, LabJMXConnetionHandler> entry :
+	// labsJMXConnectionHandler
+	// .entrySet()) {
+	// result.add(getMBeanProxy(entry.getValue()));
+	// }
+	// }
+	//
+	// return result;
+	// }
 
 	private MbeanProxy<IMultiCastControllerMXBean, Laboratory> getMBeanProxy(
 			final LabJMXConnetionHandler labJMXConnetionHandler) {

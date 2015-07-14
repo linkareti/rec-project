@@ -53,7 +53,7 @@ import com.linkare.rec.impl.client.customizer.ICustomizerListener;
  * simula��o, que de seguida ser�o enviados para o motor de dados onde ser�o
  * processados os v�rios c�lculos necess�rios � simula��o.
  **/
-public class SCustomizer extends JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+public class SCustomizer  extends AbstractCustomizer {
 
 	// Vari�veis necess�rias � defini��o dos valores a considerar
 	// JSliders (valores iniciais)

@@ -18,7 +18,7 @@ import com.linkare.rec.web.model.LoginDomain;
 import com.linkare.rec.web.model.moodle.ExternalCourse;
 import com.linkare.rec.web.model.moodle.ExternalUser;
 import com.linkare.rec.web.service.LoginDomainService;
-import com.linkare.rec.web.ex.AllocationManagerException;
+import com.linkare.rec.web.ex.ReCWebException;
 import com.linkare.rec.web.util.ConstantUtils;
 import com.linkare.rec.web.util.JndiHelper;
 import com.linkare.rec.web.wsgen.moodle.CourseRecord;
@@ -56,9 +56,9 @@ public final class MoodleClientHelper {
 		final LoginDomainService loginDomainService = JndiHelper.getLoginDomainService();
 		registerLoginDomains(loginDomainService.findAll());
 	    } catch (NamingException e) {
-		throw new AllocationManagerException(ERROR_ACCESSING_LOGIN_DOMAIN_FACADE_IN_JNDI, e);
+		throw new ReCWebException(ERROR_ACCESSING_LOGIN_DOMAIN_FACADE_IN_JNDI, e);
 	    } catch (MalformedURLException e) {
-		throw new AllocationManagerException(ERROR_INVALID_URL_REGISTERING_LOGIN_DOMAINS, e);
+		throw new ReCWebException(ERROR_INVALID_URL_REGISTERING_LOGIN_DOMAINS, e);
 	    }
 	}
 	return instancesMap;
@@ -82,7 +82,7 @@ public final class MoodleClientHelper {
 	try {
 	    moodleWsPort = moodleWS.getMoodleWSPort(url);
 	} catch (ServiceException e) {
-	    throw new AllocationManagerException(EXTERNAL_SYSTEM_CONFIGURATION_PROBLEMS, e);
+	    throw new ReCWebException(EXTERNAL_SYSTEM_CONFIGURATION_PROBLEMS, e);
 	}
     }
 
@@ -90,7 +90,7 @@ public final class MoodleClientHelper {
 	try {
 	    return getInstance(loginDomain).moodleWsPort.login(username, password);
 	} catch (RemoteException e) {
-	    throw new AllocationManagerException(e);
+	    throw new ReCWebException(e);
 	}
     }
 

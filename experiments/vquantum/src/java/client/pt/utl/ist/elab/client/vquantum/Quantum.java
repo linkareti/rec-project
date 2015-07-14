@@ -154,6 +154,7 @@ public class Quantum extends InteractivePanel implements InteractiveMouseHandler
 				topGutter = bottomGutter = Math.max(0, getHeight() - interiorDimension.height) / 2;
 			}
 		}
+		@SuppressWarnings("unchecked")
 		final java.util.ArrayList<Drawable> tempList = getDrawables();
 		scale(tempList);
 		setPixelScale();
@@ -164,7 +165,7 @@ public class Quantum extends InteractivePanel implements InteractiveMouseHandler
 		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(0, yToPix(0), getWidth(), getHeight() - yToPix(0));
 		g.setColor(Color.black);
-		eixo.setLocationType(eixo.DRAW_AT_LOCATION);
+		eixo.setLocationType(XYAxis.DRAW_AT_LOCATION);
 		eixo.setY(-.6);
 		paintDrawableList(g, tempList);
 
@@ -267,7 +268,7 @@ public class Quantum extends InteractivePanel implements InteractiveMouseHandler
 				tempFrame.getContentPane().add(ks);
 				tempFrame.setSize(new java.awt.Dimension(300, 200));
 				tempFrame.addWindowListener(ks);
-				tempFrame.show();
+				tempFrame.setVisible(true);
 			} else {
 				removeKS();
 			}
@@ -331,6 +332,7 @@ public class Quantum extends InteractivePanel implements InteractiveMouseHandler
 		gaussian.setPsi(psi);
 	}
 
+	@SuppressWarnings("unchecked")
 	public synchronized void addDrawable(final Drawable drawable) {
 		if ((drawable != null) && !drawableList.contains(drawable)) {
 			if (drawable instanceof ComplexGaussian
@@ -366,6 +368,7 @@ public class Quantum extends InteractivePanel implements InteractiveMouseHandler
 
 	public int getNumberOfPotentials() {
 		int n = 0;
+		@SuppressWarnings("unchecked")
 		final java.util.Iterator<Drawable> it = drawableList.iterator();
 		while (it.hasNext()) {
 			final java.lang.Object obj = it.next();

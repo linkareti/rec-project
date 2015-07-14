@@ -20,6 +20,7 @@ import java.awt.Point;
 import java.awt.Robot;
 
 import javax.swing.ImageIcon;
+import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -66,15 +67,15 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 	}
 
 	private void populateAll() {
-		jSliderCross.setValue(imageAnalyser.CROSS);
-		jSliderD1.setValue(imageAnalyser.D1);
-		jSliderD2.setValue(imageAnalyser.D2);
-		jSliderBeamBlue.setValue(imageAnalyser.AZUL_RAIO);
-		jSliderP.setValue(imageAnalyser.P);
-		jSliderRansac.setValue(imageAnalyser.RANSAC_ERROR);
+		jSliderCross.setValue(AnalizadorImagens.CROSS);
+		jSliderD1.setValue(AnalizadorImagens.D1);
+		jSliderD2.setValue(AnalizadorImagens.D2);
+		jSliderBeamBlue.setValue(AnalizadorImagens.AZUL_RAIO);
+		jSliderP.setValue(AnalizadorImagens.P);
+		jSliderRansac.setValue(AnalizadorImagens.RANSAC_ERROR);
 		updatePreview(jPanelB1Preview,
-				new Color(imageAnalyser.PRETO_R1, imageAnalyser.PRETO_G1, imageAnalyser.PRETO_B1));
-		updatePreview(jPanelBluePreview, new Color(imageAnalyser.AZUL_R, imageAnalyser.AZUL_G, imageAnalyser.AZUL_B));
+				new Color(AnalizadorImagens.PRETO_R1, AnalizadorImagens.PRETO_G1, AnalizadorImagens.PRETO_B1));
+		updatePreview(jPanelBluePreview, new Color(AnalizadorImagens.AZUL_R, AnalizadorImagens.AZUL_G, AnalizadorImagens.AZUL_B));
 	}
 
 	/**
@@ -132,7 +133,6 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jPanel5 = new javax.swing.JPanel();
 		jButtonEditOK = new javax.swing.JButton();
 		jButtonEditCancel = new javax.swing.JButton();
-		jColorChooser = new javax.swing.JColorChooser();
 		jDialogZoom = new javax.swing.JDialog();
 		jLabelZoom = new javax.swing.JLabel();
 		jPanel7 = new javax.swing.JPanel();
@@ -809,7 +809,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 
 	private void jButtonZoomActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonZoomActionPerformed
 	{// GEN-HEADEREND:event_jButtonZoomActionPerformed
-		jDialogZoom.hide();
+		jDialogZoom.setVisible(false);
 	}// GEN-LAST:event_jButtonZoomActionPerformed
 
 	private void jSliderBeamBlueStateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderBeamBlueStateChanged
@@ -882,14 +882,14 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jButtonB1Pick.setEnabled(true);
 		jButtonBluePick.setEnabled(true);
 
-		jDialogColorPicker.hide();
+		jDialogColorPicker.setVisible(false);
 
 		jPanelColorPicker.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 	}// GEN-LAST:event_jPanelColorPickerMouseReleased
 
 	private void jButtonBlueSelectActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonBlueSelectActionPerformed
 	{// GEN-HEADEREND:event_jButtonBlueSelectActionPerformed
-		final Color selectedColor = jColorChooser.showDialog(this,
+		final Color selectedColor = JColorChooser.showDialog(this,
 				ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.selectcolor","thomson$rec.exp.display.selectcolor"), jPanelBluePreview.getBackground());
 		updatePreview(jPanelBluePreview, selectedColor);
 	}// GEN-LAST:event_jButtonBlueSelectActionPerformed
@@ -904,7 +904,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 
 	private void jButtonB1SelectActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonB1SelectActionPerformed
 	{// GEN-HEADEREND:event_jButtonB1SelectActionPerformed
-		final Color selectedColor = jColorChooser.showDialog(this,
+		final Color selectedColor = JColorChooser.showDialog(this,
 				ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.selectcolor","thomson$rec.exp.display.selectcolor"), jPanelB1Preview.getBackground());
 		updatePreview(jPanelB1Preview, selectedColor);
 	}// GEN-LAST:event_jButtonB1SelectActionPerformed
@@ -921,32 +921,32 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 	{// GEN-HEADEREND:event_jButtonEditActionPerformed
 		jDialogChooser.pack();
 		jDialogChooser.setLocationRelativeTo(this);
-		jDialogChooser.show();
+		jDialogChooser.setVisible(true);
 	}// GEN-LAST:event_jButtonEditActionPerformed
 
 	private void jButtonEditOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonEditOKActionPerformed
 	{// GEN-HEADEREND:event_jButtonEditOKActionPerformed
-		jDialogChooser.hide();
+		jDialogChooser.setVisible(false);
 		final Color b1 = jPanelB1Preview.getBackground();
 		final Color blue = jPanelBluePreview.getBackground();
 
-		imageAnalyser.PRETO_R1 = b1.getRed();
-		imageAnalyser.PRETO_G1 = b1.getGreen();
-		imageAnalyser.PRETO_B1 = b1.getBlue();
+		AnalizadorImagens.PRETO_R1 = b1.getRed();
+		AnalizadorImagens.PRETO_G1 = b1.getGreen();
+		AnalizadorImagens.PRETO_B1 = b1.getBlue();
 
-		imageAnalyser.AZUL_R = blue.getRed();
-		imageAnalyser.AZUL_G = blue.getGreen();
-		imageAnalyser.AZUL_B = blue.getBlue();
+		AnalizadorImagens.AZUL_R = blue.getRed();
+		AnalizadorImagens.AZUL_G = blue.getGreen();
+		AnalizadorImagens.AZUL_B = blue.getBlue();
 
-		imageAnalyser.AZUL_RAIO = jSliderBeamBlue.getValue();
+		AnalizadorImagens.AZUL_RAIO = jSliderBeamBlue.getValue();
 
-		imageAnalyser.P = jSliderP.getValue();
+		AnalizadorImagens.P = jSliderP.getValue();
 
-		imageAnalyser.RANSAC_ERROR = jSliderRansac.getValue();
+		AnalizadorImagens.RANSAC_ERROR = jSliderRansac.getValue();
 
-		imageAnalyser.D1 = jSliderD1.getValue();
-		imageAnalyser.D2 = jSliderD2.getValue();
-		imageAnalyser.CROSS = jSliderCross.getValue();
+		AnalizadorImagens.D1 = jSliderD1.getValue();
+		AnalizadorImagens.D2 = jSliderD2.getValue();
+		AnalizadorImagens.CROSS = jSliderCross.getValue();
 
 		paintImage(jLabelOriginal, null);
 		paintImage(jLabelEdges, null);
@@ -964,7 +964,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 
 	private void jButtonEditCancelActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_jButtonEditCancelActionPerformed
 	{// GEN-HEADEREND:event_jButtonEditCancelActionPerformed
-		jDialogChooser.hide();
+		jDialogChooser.setVisible(false);
 	}// GEN-LAST:event_jButtonEditCancelActionPerformed
 
 	private void jSliderD2StateChanged(final javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_jSliderD2StateChanged
@@ -1018,7 +1018,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		jDialogChooser.setLocation(0, 0);
 		jDialogColorPicker.setLocation(jDialogChooser.getWidth(), 0);
 		jDialogColorPicker.pack();
-		jDialogColorPicker.show();
+		jDialogColorPicker.setVisible(true);
 	}
 
 	public void setImageN(final java.awt.Image img, final int n) {
@@ -1225,7 +1225,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 
 		jLabelZoom.setIcon(new ImageIcon(img));
 		jDialogZoom.pack();
-		jDialogZoom.show();
+		jDialogZoom.setVisible(true);
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1237,7 +1237,6 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 	private javax.swing.JButton jButtonEditCancel;
 	private javax.swing.JButton jButtonEditOK;
 	private javax.swing.JButton jButtonZoom;
-	private javax.swing.JColorChooser jColorChooser;
 	private javax.swing.JDialog jDialogChooser;
 	private javax.swing.JDialog jDialogColorPicker;
 	private javax.swing.JDialog jDialogZoom;

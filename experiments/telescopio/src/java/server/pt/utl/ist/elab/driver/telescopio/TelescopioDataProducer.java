@@ -13,6 +13,7 @@ package pt.utl.ist.elab.driver.telescopio;
 
 import com.linkare.rec.data.acquisition.PhysicsVal;
 import com.linkare.rec.data.acquisition.PhysicsValue;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.data.PhysicsValFactory;
 import com.linkare.rec.impl.driver.BaseDataSource;
 
@@ -24,7 +25,7 @@ public class TelescopioDataProducer extends BaseDataSource {
 	public static String FLAT_NAME = System.getProperty("c.flat.name");
 
 	private final int NUM_CHANNELS = 4;
-	private final String LS = System.getProperty("line.separator");
+	private final String LS = ReCSystemProperty.LINE_SEPARATOR.getValue();
 
 	private TelescopioDriver driver = null;
 

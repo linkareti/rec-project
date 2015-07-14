@@ -117,11 +117,9 @@ public class ThomsonStampDataSource extends AbstractStampDataSource {
 		}// wait for the full image to be available
 		try {
 			javax.imageio.ImageIO.write(bImage, "jpg", mcios);
-		} catch (final java.io.IOException e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
-		} catch (final com.sun.image.codec.jpeg.ImageFormatException e) {
-			e.printStackTrace();
-		}
+		} 
 		// create the ByteArrayInputStream and get the Byte[]
 		final java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(baos.toByteArray());
 		final byte[] byteArray = new byte[bais.available()];

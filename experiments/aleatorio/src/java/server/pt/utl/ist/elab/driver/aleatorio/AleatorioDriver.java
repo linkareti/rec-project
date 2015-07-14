@@ -95,34 +95,6 @@ public class AleatorioDriver extends BaseDriver {
 	/**
 	 * BaseDriver implementation
 	 */
-	@Override
-	public Object getHardwareInfo() {
-		// com.linkare.net.protocols.Protocols.init();
-
-		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
-				+ "/HardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
-
-		if (prop.indexOf("://") == -1) {
-			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
-		}
-
-		java.net.URL url = null;
-		try {
-			url = Protocols.getURL(prop);
-			fireIDriverStateListenerDriverReseted();// why is this here and not
-			// in GDriver?
-		} catch (final java.net.MalformedURLException e) {
-			LOGGER.log(Level.SEVERE, "Unable to load resource: " + prop, e);
-			try {
-				url = new java.net.URL(baseHardwareInfoFile);
-				fireIDriverStateListenerDriverReseted();// And again???
-			} catch (final java.net.MalformedURLException e2) {
-				LOGGER.log(Level.SEVERE,"Unable to load resource: " + baseHardwareInfoFile, e2);
-			}
-		}
-		return url;
-	}// getHardwareInfo()
 
 	@Override
 	public String getDriverUniqueID() {
@@ -405,9 +377,7 @@ public class AleatorioDriver extends BaseDriver {
 			props.load(getClass().getResourceAsStream(
 					"/pt/utl/ist/elab/driver/aleatorio/configurator/AleatorioConfigurator.properties"));
 		} catch (final IOException e) {
-			System.out.println("Error loading the configurations.");
-			e.printStackTrace();
-			System.exit(0);
+			throw new RuntimeException("Error loading the configurations.",e);
 		}
 	}
 

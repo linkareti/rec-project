@@ -37,7 +37,11 @@ public class MarchAtras extends pt.utl.ist.elab.client.webrobot.customizer.Comps
 	/** Holds value of property cancel. */
 	private boolean cancel = false;
 
-	/** Creates a new instance of CompInt */
+	/**
+	 * Creates a new instance of CompInt
+	 * 
+	 * @param parent
+	 */
 	public MarchAtras(final javax.swing.JFrame parent) {
 		super();
 		setCancel(false);
@@ -45,7 +49,7 @@ public class MarchAtras extends pt.utl.ist.elab.client.webrobot.customizer.Comps
 		confMarchAtras = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfMarchAtras(parent, true,
 				model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confMarchAtras);
-		confMarchAtras.show();
+		confMarchAtras.setVisible(true);
 		if (confMarchAtras.isCancel()) {
 			setCancel(true);
 			return;
@@ -119,7 +123,7 @@ public class MarchAtras extends pt.utl.ist.elab.client.webrobot.customizer.Comps
 		confMarchAtras = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfMarchAtras(parent, true,
 				model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confMarchAtras);
-		confMarchAtras.show();
+		confMarchAtras.setVisible(true);
 	}
 
 	@Override

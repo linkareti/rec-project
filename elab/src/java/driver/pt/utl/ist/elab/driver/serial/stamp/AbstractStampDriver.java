@@ -2,6 +2,7 @@ package pt.utl.ist.elab.driver.serial.stamp;
 
 import gnu.io.SerialPort;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,10 +22,9 @@ import com.linkare.rec.impl.threading.TimedOutException;
 import com.linkare.rec.impl.threading.WaitForConditionResult;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
-import com.linkare.rec.impl.utils.QueueLogger;
 
-public abstract class AbstractStampDriver extends BaseDriver implements StampFinderListener, StampCommandListener,
-		QueueLogger {
+public abstract class AbstractStampDriver<T extends AbstractStampDataSource> extends BaseDriver implements
+		StampFinderListener, StampCommandListener {
 
 	private static final Logger LOGGER = Logger.getLogger(AbstractStampDriver.class.getName());
 
@@ -41,7 +41,7 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 	public AbstractStampDriver() {
 		stampFinder = new StampFinder();
 		stampFinder.addStampFinderListener(this);
-		stampCommands = new EventQueue(new CommandDispatcher(), this.getClass().getSimpleName(), this);
+		stampCommands = new EventQueue(new CommandDispatcher(), this.getClass().getSimpleName());
 	}
 
 	protected void loadCommandHandlers() {
@@ -102,7 +102,7 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 				}
 			}, 120 * 1000, stampFinder.getTimeOutPerPort());
 		} catch (final TimedOutException e) {
-			LOGGER.log(Level.SEVERE,"Couldn't find port for STAMP in " + 120 + "s", e);
+			LOGGER.log(Level.SEVERE, "Couldn't find port for STAMP in " + 120 + "s", e);
 
 		}
 
@@ -134,13 +134,18 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 
 	@Override
 	public IDataSource start(final HardwareInfo info) throws IncorrectStateException {
-		dataSource = initDataSource();
+		try {
+			dataSource = initDataSource();
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, "Unable to instantiate DataSource class" + e.getMessage(), e);
+			throw new RuntimeException(e);
+		}
 		dataSource.setAcquisitionHeader(getAcquisitionHeader());
 
 		try {
 			startNow();
 		} catch (final TimedOutException e) {
-			LOGGER.log(Level.SEVERE,"Error on start... - rethrowing IncorrectStateException!", e);
+			LOGGER.log(Level.SEVERE, "Error on start... - rethrowing IncorrectStateException!", e);
 			// I'll try to reopen the stamp...this way it il not get stuck
 			// here...at least I hope so!
 			fireIDriverStateListenerDriverReseting();
@@ -221,7 +226,40 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 
 	}
 
-	public abstract AbstractStampDataSource initDataSource();
+	public T initDataSource() throws InstantiationException, IllegalAccessException {
+
+		Class<?> superClass = this.getClass();
+		ParameterizedType genericSuperType = null;
+
+		while (superClass != Object.class && genericSuperType == null) {
+			if (superClass.getGenericSuperclass() instanceof ParameterizedType) {
+				genericSuperType = (ParameterizedType) superClass.getGenericSuperclass();
+			} else {
+				superClass = superClass.getSuperclass();
+			}
+		}
+
+		while (superClass != Object.class && genericSuperType != null) {
+			if (genericSuperType.getActualTypeArguments() != null
+					&& genericSuperType.getActualTypeArguments().length > 0) {
+				@SuppressWarnings("unchecked")
+				Class<T> parameterClass = (Class<T>) genericSuperType.getActualTypeArguments()[0];
+				return parameterClass.newInstance();
+			} else {
+				genericSuperType = null;
+				while (superClass != Object.class && genericSuperType == null) {
+					if (superClass.getGenericSuperclass() instanceof ParameterizedType) {
+						genericSuperType = (ParameterizedType) superClass.getGenericSuperclass();
+					} else {
+						superClass = superClass.getSuperclass();
+					}
+				}
+			}
+		}
+
+		throw new InstantiationException("Unable to find generic super class of datasource for driver "
+				+ getClass().getName());
+	}
 
 	public abstract HardwareAcquisitionConfig getAcquisitionHeader();
 
@@ -438,19 +476,4 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void log(final Level debugLevel, final String message) {
-		LOGGER.log(debugLevel, message);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void logThrowable(final String message, final Throwable t) {
-		LOGGER.log(Level.SEVERE, message, t);
-	}
 }

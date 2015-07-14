@@ -194,7 +194,8 @@ public class ModelConfInOut extends pt.utl.ist.elab.client.webrobot.customizer.M
 
 	/**
 	 * Setter for property b1.
-	 * @param b1 
+	 * 
+	 * @param b1
 	 * 
 	 * @param b0 New value of property b1.
 	 */
@@ -213,7 +214,8 @@ public class ModelConfInOut extends pt.utl.ist.elab.client.webrobot.customizer.M
 
 	/**
 	 * Setter for property b2.
-	 * @param b2 
+	 * 
+	 * @param b2
 	 * 
 	 * @param b0 New value of property b2.
 	 */
@@ -232,7 +234,8 @@ public class ModelConfInOut extends pt.utl.ist.elab.client.webrobot.customizer.M
 
 	/**
 	 * Setter for property b3.
-	 * @param b3 
+	 * 
+	 * @param b3
 	 * 
 	 * @param b0 New value of property b3.
 	 */
@@ -251,7 +254,8 @@ public class ModelConfInOut extends pt.utl.ist.elab.client.webrobot.customizer.M
 
 	/**
 	 * Setter for property b4.
-	 * @param b4 
+	 * 
+	 * @param b4
 	 * 
 	 * @param b0 New value of property b4.
 	 */
@@ -270,7 +274,8 @@ public class ModelConfInOut extends pt.utl.ist.elab.client.webrobot.customizer.M
 
 	/**
 	 * Setter for property b5.
-	 * @param b5 
+	 * 
+	 * @param b5
 	 * 
 	 * @param b0 New value of property b5.
 	 */
@@ -289,7 +294,8 @@ public class ModelConfInOut extends pt.utl.ist.elab.client.webrobot.customizer.M
 
 	/**
 	 * Setter for property b6.
-	 * @param b6 
+	 * 
+	 * @param b6
 	 * 
 	 * @param b0 New value of property b6.
 	 */
@@ -308,7 +314,8 @@ public class ModelConfInOut extends pt.utl.ist.elab.client.webrobot.customizer.M
 
 	/**
 	 * Setter for property b7.
-	 * @param b7 
+	 * 
+	 * @param b7
 	 * 
 	 * @param b0 New value of property b7.
 	 */
@@ -327,7 +334,8 @@ public class ModelConfInOut extends pt.utl.ist.elab.client.webrobot.customizer.M
 
 	/**
 	 * Setter for property c0.
-	 * @param c0 
+	 * 
+	 * @param c0
 	 * 
 	 * @param b0 New value of property c0.
 	 */
@@ -346,7 +354,8 @@ public class ModelConfInOut extends pt.utl.ist.elab.client.webrobot.customizer.M
 
 	/**
 	 * Setter for property c3.
-	 * @param c3 
+	 * 
+	 * @param c3
 	 * 
 	 * @param b0 New value of property c3.
 	 */

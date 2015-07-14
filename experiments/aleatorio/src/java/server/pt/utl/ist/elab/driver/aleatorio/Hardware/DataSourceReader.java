@@ -259,9 +259,8 @@ implements ControllerListener, DataSinkListener {
 	public void dataSinkUpdate(final DataSinkEvent evt) {
 
 		if (evt instanceof EndOfStreamEvent) {
-			System.err.println("All done!");
 			evt.getSourceDataSink().close();
-			System.exit(0);
+			throw new RuntimeException("All done!");
 		}
 	}
 

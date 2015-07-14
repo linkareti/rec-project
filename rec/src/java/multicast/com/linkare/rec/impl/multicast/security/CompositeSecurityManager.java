@@ -10,42 +10,42 @@ import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
 /**
  * @author José Pedro Pereira - Linkare TI
  */
-public class CompositeSecurityManager implements ISecurityManager {
+public final class CompositeSecurityManager implements ISecurityManager {
 
-	private List<ISecurityManager> securityManagers = null;
-
-	public static final String SYSPROP_SECURITY_MANAGERS_CLASS_LIST = "rec.multicast.compositesecuritymanager.list";
+	private List<ISecurityManager> securityManagers = new ArrayList<ISecurityManager>();
 
 	private static final Logger LOGGER = Logger.getLogger(CompositeSecurityManager.class.getName());
 
-	private void loadSecurityManagers() {
-		securityManagers = new ArrayList<ISecurityManager>();
-		final String secManagersClassName = System
-				.getProperty(CompositeSecurityManager.SYSPROP_SECURITY_MANAGERS_CLASS_LIST);
+	private final void loadSecurityManagers(final String secManagersClassName) {
 		if (secManagersClassName == null || secManagersClassName.trim().length() == 0) {
-			LOGGER.log(Level.INFO, "SecurityManager System Property not found... Loading DefaultSecurityManager!");
-			return;
-		}
-		final String[] classNames = secManagersClassName.split(",");
-		for (final String className : classNames) {
-			try {
-				securityManagers.add((ISecurityManager) Class.forName(className).newInstance());
-			} catch (final Exception e) {
-				LOGGER.log(Level.INFO, "Unable to load SecurityManager defined at system : " + className
-						+ " - ignoring!");
-				LOGGER.log(Level.SEVERE, "Error loading specified SecurityManager", e);
-			} catch (final LinkageError e) {
-				LOGGER.log(Level.INFO, "Unable to load SecurityManager defined at system : " + className + "!");
-				LOGGER.log(Level.SEVERE, "Error loading specified SecurityManager", e);
+			LOGGER.log(Level.WARNING, "SecurityManager System Property empty!");
+		} else {
+			final String[] classNames = secManagersClassName.split(",");
+			for (final String className : classNames) {
+				try {
+					securityManagers.add((ISecurityManager) Thread.currentThread().getContextClassLoader()
+							.loadClass(className).newInstance());
+				} catch (final Exception e) {
+					LOGGER.log(Level.WARNING, "Unable to load SecurityManager defined at system : " + className
+							+ " - ignoring!", e);
+				} catch (final LinkageError e) {
+					LOGGER.log(Level.WARNING, "Unable to load SecurityManager defined at system : " + className + "!",
+							e);
+				}
 			}
+		}
+		if (securityManagers.size() == 0) {
+			securityManagers.add(new DefaultSecurityManager());
 		}
 	}
 
 	/**
 	 * Creates the <code>CompositeSecurityManager</code>.
+	 * 
+	 * @param secManagersClassName
 	 */
-	public CompositeSecurityManager() {
-		loadSecurityManagers();
+	public CompositeSecurityManager(final String secManagersClassName) {
+		loadSecurityManagers(secManagersClassName);
 	}
 
 	/**
@@ -54,12 +54,10 @@ public class CompositeSecurityManager implements ISecurityManager {
 	@Override
 	public boolean authenticate(final IResource resource, final IUser user) {
 		boolean retVal = true;
-		if (securityManagers != null) {
-			for (final ISecurityManager secManager : securityManagers) {
-				retVal = retVal && secManager.authenticate(resource, user);
-				if (!retVal) {
-					break;
-				}
+		for (final ISecurityManager secManager : securityManagers) {
+			retVal = retVal && secManager.authenticate(resource, user);
+			if (!retVal) {
+				break;
 			}
 		}
 		return retVal;
@@ -71,12 +69,10 @@ public class CompositeSecurityManager implements ISecurityManager {
 	@Override
 	public boolean authorize(final IResource resource, final IUser user, final IOperation op) {
 		boolean retVal = true;
-		if (securityManagers != null) {
-			for (final ISecurityManager secManager : securityManagers) {
-				retVal = retVal && secManager.authorize(resource, user, op);
-				if (!retVal) {
-					break;
-				}
+		for (final ISecurityManager secManager : securityManagers) {
+			retVal = retVal && secManager.authorize(resource, user, op);
+			if (!retVal) {
+				break;
 			}
 		}
 		return retVal;
@@ -87,10 +83,8 @@ public class CompositeSecurityManager implements ISecurityManager {
 	 */
 	@Override
 	public void registerMultiCastHardware(final List<ReCMultiCastHardware> multiCastHardwares) {
-		if (securityManagers != null) {
-			for (final ISecurityManager secManager : securityManagers) {
-				secManager.registerMultiCastHardware(multiCastHardwares);
-			}
+		for (final ISecurityManager secManager : securityManagers) {
+			secManager.registerMultiCastHardware(multiCastHardwares);
 		}
 	}
 
@@ -99,10 +93,8 @@ public class CompositeSecurityManager implements ISecurityManager {
 	 */
 	@Override
 	public void registerSecurityCommunicator(final ISecurityCommunicator communicator) {
-		if (securityManagers != null) {
-			for (final ISecurityManager secManager : securityManagers) {
-				secManager.registerSecurityCommunicator(communicator);
-			}
+		for (final ISecurityManager secManager : securityManagers) {
+			secManager.registerSecurityCommunicator(communicator);
 		}
 	}
 

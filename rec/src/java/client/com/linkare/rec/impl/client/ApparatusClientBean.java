@@ -10,11 +10,9 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.omg.PortableServer.Servant;
-
 import com.linkare.rec.acquisition.DataClient;
-import com.linkare.rec.acquisition.DataClientHelper;
 import com.linkare.rec.acquisition.DataClientOperations;
+import com.linkare.rec.acquisition.DataClientPOATie;
 import com.linkare.rec.acquisition.DataProducer;
 import com.linkare.rec.acquisition.HardwareState;
 import com.linkare.rec.acquisition.IncorrectStateException;
@@ -40,7 +38,6 @@ import com.linkare.rec.impl.client.experiment.ExpUsersListSource;
 import com.linkare.rec.impl.events.ChatMessageEvent;
 import com.linkare.rec.impl.utils.ORBBean;
 import com.linkare.rec.impl.utils.ObjectID;
-import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 import com.linkare.rec.impl.wrappers.MultiCastHardwareWrapper;
 
 /**
@@ -55,7 +52,7 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 
 	private static final Logger LOGGER = Logger.getLogger(ApparatusClientBean.class.getName());
 
-	private transient DataProducerWrapper dataProducerInEffect = null;
+	private transient DataProducer dataProducerInEffect = null;
 	private transient MultiCastHardwareWrapper mchw = null;
 	private transient DataClient _this = null;
 	private transient ObjectID oid = null;
@@ -81,10 +78,8 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 
 		try {
 			oid = new ObjectID();
-			Servant registeredServant = ORBBean.getORBBean().registerAutoIdRootPOAServant(DataClient.class, this, oid);
-			org.omg.CORBA.Object thisReference = ORBBean.getORBBean().getAutoIdRootPOA()
-					.servant_to_reference(registeredServant);
-			_this = DataClientHelper.narrow(thisReference);
+			DataClientPOATie servant = (DataClientPOATie)ORBBean.getORBBean().registerAutoIdRootPOAServant(DataClient.class, this, oid);
+			_this = servant._this();
 			return _this;
 		} catch (final Exception e) {
 			LOGGER.log(Level.SEVERE, "Couldn't register this DataClient with ORB", e);
@@ -483,10 +478,10 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 * 
 	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
 	 */
-	private void fireApparatusConnectorListenerApparatusStateStarted(DataProducerWrapper dataSource) {
+	private void fireApparatusConnectorListenerApparatusStateStarted(DataProducer dataSource) {
 		if (dataSource == null) {
 			try {
-				dataSource = new DataProducerWrapper(apparatus.getMultiCastHardware().getDataProducer(getUserInfo()));
+				dataSource = apparatus.getMultiCastHardware().getDataProducer(getUserInfo());
 			} catch (final Exception e) {
 				LOGGER.log(Level.SEVERE, "Data Source is null... unable to fetch it from MCHardware...", e);
 			}
@@ -1116,9 +1111,7 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	public void start() {
 		if (mchw != null) {
 			try {
-				final DataProducer dataProducer = mchw.start(getUserInfo());
-				dataProducerInEffect = new DataProducerWrapper(dataProducer);
-
+				dataProducerInEffect = mchw.start(getUserInfo());
 			} catch (final IncorrectStateException e) {
 				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				fireApparatusConnectorListenerApparatusIncorrectState(e.getMessage());

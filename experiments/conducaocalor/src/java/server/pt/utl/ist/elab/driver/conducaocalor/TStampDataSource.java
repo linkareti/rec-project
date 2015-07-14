@@ -6,9 +6,6 @@
 
 package pt.utl.ist.elab.driver.conducaocalor;
 
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
-
 import pt.utl.ist.elab.driver.conducaocalor.processors.StampTProcessor;
 import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDataSource;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
@@ -26,14 +23,8 @@ public class TStampDataSource extends AbstractStampDataSource {
 	private static final float TEMP_MAX_IRON = 90;
 	private static final float TEMP_MAX_COPPER = 90;
 
-	public static String HEAT_DS_LOGGER = "HeatDataSource.Logger";
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(TStampDataSource.HEAT_DS_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(TStampDataSource.HEAT_DS_LOGGER));
-		}
-	}
+	// private static final Logger LOGGER =
+	// Logger.getLogger(TStampDataSource.class.getName());
 
 	/** Creates a new instance of RadioactividadeStampDataSource */
 	public TStampDataSource() {

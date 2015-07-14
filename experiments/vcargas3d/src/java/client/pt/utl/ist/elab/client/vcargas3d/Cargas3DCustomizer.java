@@ -15,16 +15,14 @@ import org.opensourcephysics.displayejs.InteractionTargetElementPosition;
 import org.opensourcephysics.displayejs.InteractiveCharge;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
  * @autor n0dP2
  */
-public class Cargas3DCustomizer extends javax.swing.JPanel implements
-		com.linkare.rec.impl.client.customizer.ICustomizer {
+public class Cargas3DCustomizer extends AbstractCustomizer {
 
 	/**
 	 * 
@@ -39,83 +37,15 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		initComponents();
 	}
 
-	// ****************************REC********************************************/
+	
 
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	@Override
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	@Override
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	@Override
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
-
-	// ESTE � PARA ALTERAR
+	
+	// ESTE E PARA ALTERAR
 	@Override
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		// Aqui s�o fornecidos parametros do ultimo utilizador que fez a exp, e'
+		// Aqui sao fornecidos parametros do ultimo utilizador que fez a exp, e'
 		// bom manter!
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 			// int xini =
 			// (int)(Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("xini")));
@@ -124,19 +54,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		}
 	}
 
-	@Override
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	@Override
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
+	
 
 	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
@@ -144,17 +62,13 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 				"/pt/utl/ist/elab/client/vcargas3d/resources/cargas3d_iconified.png"));
 	}
 
-	// ESTE � PARA ALTERAR
+	// ESTE E PARA ALTERAR
 	@Override
 	public String getCustomizerTitle() {
 		return ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.12",
 				"3D Charges Experiment Configuration Utility");
 	}
 
-	@Override
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
-	}
 
 	private void initComponents() {// GEN-BEGIN:initComponents
 		java.awt.GridBagConstraints gridBagConstraints;
@@ -731,13 +645,13 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 	}// GEN-END:initComponents
 
 	private void buttonOKActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_buttonOKActionPerformed
-		acqConfig.setTotalSamples(1);
+		getAcquisitionConfig().setTotalSamples(1);
 
 		// acqConfig.setSelectedFrequency(
 		// new Frequency((double)jSliderTBS.getValue(),
 		// hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(),
 		// hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
-		acqConfig.getSelectedHardwareParameter("Sistema").setParameterValue(Sistema.sistemaToString());
+		getAcquisitionConfig().getSelectedHardwareParameter("Sistema").setParameterValue(Sistema.sistemaToString());
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_buttonOKActionPerformed
 

@@ -13,7 +13,11 @@ import java.io.Serializable;
  */
 public final class RecChatMessageDTO implements Serializable {
 
-    private final String message;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 926839542310583383L;
+	private final String message;
     private final long dateOfSending;
     private final String hardwareUniqueId;
 

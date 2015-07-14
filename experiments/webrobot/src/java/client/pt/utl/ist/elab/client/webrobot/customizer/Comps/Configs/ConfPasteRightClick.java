@@ -17,9 +17,12 @@ public class ConfPasteRightClick extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = 3059892826084796698L;
 
-	/** Creates new form ConfCompBin 
-	 * @param parent 
-	 * @param modal */
+	/**
+	 * Creates new form ConfCompBin
+	 * 
+	 * @param parent
+	 * @param modal
+	 */
 	public ConfPasteRightClick(final java.awt.Frame parent, final boolean modal) {
 		super(parent, modal);
 		initComponents();

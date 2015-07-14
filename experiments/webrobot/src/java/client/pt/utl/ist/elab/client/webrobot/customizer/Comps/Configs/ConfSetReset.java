@@ -17,10 +17,13 @@ public class ConfSetReset extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = 1907252069327434114L;
 
-	/** Creates new form ConfCompBin 
-	 * @param parent 
-	 * @param modal 
-	 * @param model */
+	/**
+	 * Creates new form ConfCompBin
+	 * 
+	 * @param parent
+	 * @param modal
+	 * @param model
+	 */
 	public ConfSetReset(final java.awt.Frame parent, final boolean modal,
 			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelSetReset model) {
 		super(parent, modal);

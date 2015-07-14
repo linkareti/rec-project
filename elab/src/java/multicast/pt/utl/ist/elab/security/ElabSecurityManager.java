@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
 import com.linkare.rec.impl.multicast.security.IResource;
 import com.linkare.rec.impl.multicast.security.ISecurityCommunicator;
@@ -40,7 +41,7 @@ public class ElabSecurityManager implements ISecurityManager {
 		logins = new File("logins.txt");
 	}
 
-	private final String LS = System.getProperty("line.separator");
+	private final String LS = ReCSystemProperty.LINE_SEPARATOR.getValue();
 
 	@Override
 	public boolean authenticate(final IResource resource, final IUser user) {

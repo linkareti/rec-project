@@ -10,8 +10,6 @@ package com.linkare.rec.impl.newface.component.media.transcoding;
 public enum AudioCodecs {
 	MP4A, MPGA;
 
-	// TODO acrescentar restantes codecs suportados pelo VLC em trancoding.
-
 	@Override
 	public String toString() {
 		return name().toLowerCase();

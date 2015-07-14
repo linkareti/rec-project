@@ -3,6 +3,7 @@ package com.linkare.rec.data.config;
 import java.util.ResourceBundle;
 
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 
 public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.IDLEntity {
 
@@ -394,48 +395,54 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	@Override
 	public String toString() {
 		final StringBuffer strBufOut = new StringBuffer();
-		final String linesep = System.getProperty("line.separator");
-
 		if (familiarName != null) {
-			strBufOut.append(HardwareAcquisitionConfig.APPARATUS).append(familiarName).append(linesep);
+			strBufOut.append(HardwareAcquisitionConfig.APPARATUS).append(familiarName)
+					.append(ReCSystemProperty.LINE_SEPARATOR.getValue());
 		}
 
 		if (timeStart != null) {
 			strBufOut.append(HardwareAcquisitionConfig.EXPERIENCE_START_TIME).append(timeStart.toSimpleString())
-					.append(linesep);
+					.append(ReCSystemProperty.LINE_SEPARATOR.getValue());
 		}
 
 		if (selectedFrequency != null) {
-			strBufOut.append(HardwareAcquisitionConfig.FREQUENCY).append(selectedFrequency).append(linesep);
+			strBufOut.append(HardwareAcquisitionConfig.FREQUENCY).append(selectedFrequency)
+					.append(ReCSystemProperty.LINE_SEPARATOR.getValue());
 		}
 
 		if (totalSamples != com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value) {
-			strBufOut.append(HardwareAcquisitionConfig.TOTAL_SAMPLES).append(totalSamples).append(linesep);
+			strBufOut.append(HardwareAcquisitionConfig.TOTAL_SAMPLES).append(totalSamples)
+					.append(ReCSystemProperty.LINE_SEPARATOR.getValue());
 		} else if (totalSamples == com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value) {
-			strBufOut.append(HardwareAcquisitionConfig.TOTAL_SAMPLES_UNDETERMINED).append(linesep);
+			strBufOut.append(HardwareAcquisitionConfig.TOTAL_SAMPLES_UNDETERMINED).append(
+					ReCSystemProperty.LINE_SEPARATOR.getValue());
 		}
 
 		if (selectedHardwareParameters != null) {
-			strBufOut.append(HardwareAcquisitionConfig.PARAMETERS).append(linesep);
+			strBufOut.append(HardwareAcquisitionConfig.PARAMETERS).append(ReCSystemProperty.LINE_SEPARATOR.getValue());
 			for (final ParameterConfig selectedHardwareParameter : selectedHardwareParameters) {
 				if (selectedHardwareParameter != null) {
-					strBufOut.append("\t").append(selectedHardwareParameter).append(linesep);
+					strBufOut.append("\t").append(selectedHardwareParameter)
+							.append(ReCSystemProperty.LINE_SEPARATOR.getValue());
 				}
 			}
 		}
 
 		if (channelsConfig != null) {
-			strBufOut.append(HardwareAcquisitionConfig.CHANNELS_CONFIGURATION).append(linesep);
+			strBufOut.append(HardwareAcquisitionConfig.CHANNELS_CONFIGURATION).append(
+					ReCSystemProperty.LINE_SEPARATOR.getValue());
 			for (int i = 0; i < channelsConfig.length; i++) {
 				if (channelsConfig[i] != null) {
 					strBufOut
 							.append("\t" + HardwareAcquisitionConfig.CHANNEL + i
-									+ HardwareAcquisitionConfig.CONFIGURATION).append(linesep)
-							.append(channelsConfig[i]).append(linesep);
+									+ HardwareAcquisitionConfig.CONFIGURATION)
+							.append(ReCSystemProperty.LINE_SEPARATOR.getValue()).append(channelsConfig[i])
+							.append(ReCSystemProperty.LINE_SEPARATOR.getValue());
 				} else {
 					strBufOut.append(
 							"\t" + HardwareAcquisitionConfig.CHANNEL + i
-									+ HardwareAcquisitionConfig.CONFIGURATION_UNDEFINED).append(linesep);
+									+ HardwareAcquisitionConfig.CONFIGURATION_UNDEFINED).append(
+							ReCSystemProperty.LINE_SEPARATOR.getValue());
 				}
 			}
 		}
@@ -479,26 +486,34 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 		this.hardwareUniqueID = hardwareUniqueID;
 	}
 
-    /**
-     * Replicates an {@link HardwareAcquisitionConfig} and replaces the keys to {@link ReCResourceBundle} to the real values, depending of the {@link Locale}.
-     * 
-     * @param acquisitionConfig
-     *            The acquisition config to copy from.
-     * @return A new {@link HardwareAcquisitionConfig} with the values for the channel name, scale label, physics unit name and symbol translated from the
-     *         resource bundles, if they exist. If one of these keys do not exist, it will stay with the key as the value of the property.
-     */
-    public static HardwareAcquisitionConfig translatePropertyBundles(HardwareAcquisitionConfig acquisitionConfig) {
-	HardwareAcquisitionConfig otherConfig = new HardwareAcquisitionConfig(acquisitionConfig);
-	for (ChannelAcquisitionConfig channel : otherConfig.getChannelsConfig()) {
-	    channel.setChannelName(ReCResourceBundle.findStringOrDefault(channel.getChannelName(), channel.getChannelName()));
-	    channel.getSelectedScale().setScaleLabel(ReCResourceBundle.findStringOrDefault(channel.getSelectedScale().getScaleLabel(),
-											   channel.getSelectedScale().getScaleLabel()));
-	    channel.getSelectedScale().setPhysicsUnitName(ReCResourceBundle.findStringOrDefault(channel.getSelectedScale().getPhysicsUnitName(),
-												channel.getSelectedScale().getPhysicsUnitName()));
-	    channel.getSelectedScale().setPhysicsUnitSymbol(ReCResourceBundle.findStringOrDefault(channel.getSelectedScale().getPhysicsUnitSymbol(),
-												  channel.getSelectedScale().getPhysicsUnitSymbol()));
+	/**
+	 * Replicates an {@link HardwareAcquisitionConfig} and replaces the keys to
+	 * {@link ReCResourceBundle} to the real values, depending of the
+	 * {@link Locale}.
+	 * 
+	 * @param acquisitionConfig The acquisition config to copy from.
+	 * @return A new {@link HardwareAcquisitionConfig} with the values for the
+	 *         channel name, scale label, physics unit name and symbol
+	 *         translated from the resource bundles, if they exist. If one of
+	 *         these keys do not exist, it will stay with the key as the value
+	 *         of the property.
+	 */
+	public static HardwareAcquisitionConfig translatePropertyBundles(HardwareAcquisitionConfig acquisitionConfig) {
+		HardwareAcquisitionConfig otherConfig = new HardwareAcquisitionConfig(acquisitionConfig);
+		for (ChannelAcquisitionConfig channel : otherConfig.getChannelsConfig()) {
+			channel.setChannelName(ReCResourceBundle.findStringOrDefault(channel.getChannelName(),
+					channel.getChannelName()));
+			channel.getSelectedScale().setScaleLabel(
+					ReCResourceBundle.findStringOrDefault(channel.getSelectedScale().getScaleLabel(), channel
+							.getSelectedScale().getScaleLabel()));
+			channel.getSelectedScale().setPhysicsUnitName(
+					ReCResourceBundle.findStringOrDefault(channel.getSelectedScale().getPhysicsUnitName(), channel
+							.getSelectedScale().getPhysicsUnitName()));
+			channel.getSelectedScale().setPhysicsUnitSymbol(
+					ReCResourceBundle.findStringOrDefault(channel.getSelectedScale().getPhysicsUnitSymbol(), channel
+							.getSelectedScale().getPhysicsUnitSymbol()));
+		}
+		return otherConfig;
 	}
-	return otherConfig;
-    }
 
 } // class HardwareAcquisitionConfig

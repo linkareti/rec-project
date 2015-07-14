@@ -7,13 +7,10 @@ package pt.utl.ist.elab.client.telescopio;
 
 import javax.swing.ScrollPaneConstants;
 
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
-public class TelescopioCustomizer extends javax.swing.JPanel implements
-		com.linkare.rec.impl.client.customizer.ICustomizer {
+public class TelescopioCustomizer  extends AbstractCustomizer {
 
 	/**
 	 * 
@@ -296,31 +293,16 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 			tempo = (int) Double.parseDouble(Ceu.objectos_visiveis[index].getTempo());
 		}
 
-		acqConfig.getSelectedHardwareParameter("TempoExp").setParameterValue("" + tempo);
+		getAcquisitionConfig().getSelectedHardwareParameter("TempoExp").setParameterValue("" + tempo);
 
-		acqConfig.getSelectedHardwareParameter("Comando").setParameterValue(name);
+		getAcquisitionConfig().getSelectedHardwareParameter("Comando").setParameterValue(name);
 
-		acqConfig.setTotalSamples(1);
+		getAcquisitionConfig().setTotalSamples(1);
 
 		fireICustomizerListenerDone();
 
 	}// GEN-LAST:event_jButtonConfirmActionPerformed
-
-	private void jButton2ActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_jButton2ActionPerformed
-
-	private void jButton2MouseClicked(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton2MouseClicked
-
-	}// GEN-LAST:event_jButton2MouseClicked
-
-	private void jButton1MouseClicked(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButton1MouseClicked
-		/*
-		 * int index= jList1.getSelectedIndex();
-		 * tester.mandarObjecto(novoCeu.objectos_visiveis
-		 * [index].getNomeObjecto());
-		 */
-	}// GEN-LAST:event_jButton1MouseClicked
+	
 
 	public static void main(final String args[]) {
 		ReCResourceBundle.loadResourceBundle("telescopio",
@@ -328,97 +310,10 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new TelescopioCustomizer());
 		dummy.pack();
-		dummy.show();
+		dummy.setVisible(true);
 	}
 
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	@Override
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	@Override
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	@Override
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
-
-	@Override
-	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
-	}
-
-	@Override
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	@Override
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
-
+	
 	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
@@ -430,11 +325,7 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 		return "Telescope Experiment Configuration Utility";
 	}
 
-	@Override
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
-	}
-
+	
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.ButtonGroup buttonGroup1;
 	private javax.swing.JButton jButtonCancel;

@@ -1,4 +1,4 @@
-package com.linkare.rec.web;
+package com.linkare.rec.web.bean;
 
 import java.io.Serializable;
 import java.net.Socket;
@@ -15,6 +15,9 @@ import com.linkare.jsf.utils.JsfUtil;
 import com.linkare.rec.web.aop.ExceptionHandle;
 import com.linkare.rec.web.aop.ExceptionHandleCase;
 import com.linkare.rec.web.util.ConstantUtils;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * 
@@ -48,7 +51,11 @@ public class PortScannerBean implements Serializable {
 
     @ExceptionHandle(@ExceptionHandleCase)
     public PortScannerBean() {
-	PropertiesManager.loadProperties("/configuration.properties");
+        try {
+            PropertiesManager.loadProperties("/configuration.properties");
+        } catch (IOException ex) {
+            Logger.getLogger(PortScannerBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @ExceptionHandle(@ExceptionHandleCase)

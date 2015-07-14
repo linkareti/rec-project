@@ -397,10 +397,6 @@ public class AnalizadorImagens {
 		int sxy = 0;
 		int sx2 = 0;
 		int sy2 = 0;
-		final double SSyy = 0;
-		final double SEE = 0;
-		final double x2 = 0;
-
 		final int[] img_BW = new int[new_width * new_height];
 		final int[] img_BW_temp = new int[new_width * new_height];
 
@@ -544,7 +540,6 @@ public class AnalizadorImagens {
 			final int[] img_BW = new int[area];
 			final int[] img_orig = new int[area];
 			int acomulado = 0;
-			final int acomulado_max = 0;
 			final double[] m_horiz = new double[7]; // y=mx+b
 			final double[] b_horiz = new double[7];
 			final double[] m_vert = new double[9]; // x=my+b
@@ -556,8 +551,6 @@ public class AnalizadorImagens {
 			double sx2 = 0;
 			double sy2 = 0;
 			double sxy = 0;
-			double sup = 0; // limites superiores e inferiores
-			double inf = 0;
 			final int[] pontos_x = new int[45];
 			final int[] pontos_y = new int[45];
 			// int[] refine_x = new int[45];
@@ -783,13 +776,10 @@ public class AnalizadorImagens {
 						sy = 0;
 						sxy = 0;
 						sx2 = 0;
-						sup = j;
-
 						for (int alfa = 0; alfa < 30; alfa++) {
 							for (int temp = 30; temp < (IMAGE_WIDTH - 31); temp++) {
 
 								if (image_pixels[temp + (j + alfa) * IMAGE_WIDTH] == 0xffffffff) {
-									inf = j + alfa;
 									p++;
 									sx += temp;
 									sy += j + alfa;
@@ -839,13 +829,11 @@ public class AnalizadorImagens {
 						sy = 0;
 						sxy = 0;
 						sy2 = 0;
-						sup = i;
 						for (int temp = 0; temp < 30; temp++) {
 
 							for (int alfa = 0; alfa < IMAGE_HEIGHT; alfa++) {
 
 								if (image_pixels[i + temp + alfa * IMAGE_WIDTH] == 0xffffffff) {
-									inf = i + temp;
 									// System.out.println(String.valueOf(j));
 									p++;
 									sx += i + temp;
@@ -967,9 +955,6 @@ public class AnalizadorImagens {
 			// original
 			final int cy = Math.round((pontos_y[44] - pontos_y[8] + pontos_y[36] - pontos_y[0]) / 8);
 			final int[] rgb = new int[3];
-			final int g = 0;
-			final int b = 0;
-
 			// System.out.println(String.valueOf(cx) + " " +
 			// String.valueOf(cy));
 			for (int alfa = 0; alfa < 8; alfa++) { // meio da grelha
@@ -1187,15 +1172,12 @@ public class AnalizadorImagens {
 			im_alinhada[2] = toolkit.createImage(new java.awt.image.MemoryImageSource(new_width, new_height, new_tmp2,
 					0, new_width));
 
-			final int[] new_tmp = new int[new_width * new_height];
 			for (i = 1; i < (new_width - 2); i++) { // onde varia a funcao.
 				// out:(imagem preto e
 				// branco)
 
 				for (j = 1; j < (new_height - 1); j++) {
 
-					final int r1 = (new_img[i + j * new_width] & 0x00ff0000) >> 16;
-					final int g1 = (new_img[i + j * new_width] & 0x0000ff00) >> 8;
 					final int b1 = (new_img[i + j * new_width] & 0x000000ff);
 
 					if (getDistancia(0, 0, b1, 0, 0, AnalizadorImagens.AZUL_B) < AnalizadorImagens.AZUL_RAIO) {
@@ -1409,8 +1391,4 @@ public class AnalizadorImagens {
 		return (java.lang.Math.sqrt(((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2))));
 	}
 
-	private double getDistancia(final double x1, final double y1, final double x2, final double y2) {
-
-		return (java.lang.Math.sqrt(((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2))));
-	}
 }

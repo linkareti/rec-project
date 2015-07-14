@@ -13,16 +13,16 @@
         <Node id="protected/backoffice.xhtml" x="1650" y="300" zoom="true"/>
         <Node id="Login.xhtml" x="400" y="900" zoom="true"/>
         <Node id="protected/laboratory/View.xhtml" x="150" y="150" zoom="true"/>
-        <Node id="protected/group/View.xhtml" x="150" y="1200" zoom="true"/>
         <Node id="protected/experiment/List.xhtml" x="650" y="1350" zoom="true"/>
+        <Node id="protected/group/View.xhtml" x="150" y="1200" zoom="true"/>
         <Node id="protected/loginDomain/inner-form.xhtml" x="1150" y="900" zoom="true"/>
         <Node id="protected/experiment/Create.xhtml" x="650" y="900" zoom="true"/>
         <Node id="protected/experiment/inner-form.xhtml" x="150" y="600" zoom="true"/>
         <Node id="*" x="650" y="1050" zoom="true"/>
         <Node id="protected/role/Edit.xhtml" x="1150" y="300" zoom="true"/>
         <Node id="protected/user/Edit.xhtml" x="650" y="450" zoom="true"/>
-        <Node id="protected/loginDomain/Edit.xhtml" x="900" y="300" zoom="true"/>
         <Node id="protected/reservation/inner-form.xhtml" x="2400" y="300" zoom="true"/>
+        <Node id="protected/loginDomain/Edit.xhtml" x="900" y="300" zoom="true"/>
         <Node id="protected/reservation/Schedule.xhtml" x="1150" y="1050" zoom="true"/>
         <Node id="protected/errorMessage/List.xhtml" x="1900" y="600" zoom="true"/>
         <Node id="protected/reservation/View.xhtml" x="150" y="900" zoom="true"/>
@@ -30,19 +30,19 @@
         <Node id="protected/role/Create.xhtml" x="1150" y="450" zoom="true"/>
         <Node id="protected/experiment/Edit.xhtml" x="2150" y="300" zoom="true"/>
         <Node id="protected/courses/inner-form.xhtml" x="2400" y="150" zoom="true"/>
-        <Node id="protected/menu.xhtml" x="900" y="450" zoom="true"/>
         <Node id="protected/laboratory/Create.xhtml" x="150" y="1350" zoom="true"/>
+        <Node id="protected/menu.xhtml" x="900" y="450" zoom="true"/>
         <Node id="footer.xhtml" x="400" y="300" zoom="true"/>
         <Node id="index.jsp" x="400" y="750" zoom="true"/>
-        <Node id="protected/role/List.xhtml" x="2650" y="150" zoom="true"/>
         <Node id="three-row-template.xhtml" x="900" y="1200" zoom="true"/>
+        <Node id="protected/role/List.xhtml" x="2650" y="150" zoom="true"/>
         <Node id="template.xhtml" x="650" y="600" zoom="true"/>
         <Node id="protected/loginDomain/View.xhtml" x="1400" y="300" zoom="true"/>
         <Node id="protected/reservation/Edit.xhtml" x="400" y="1200" zoom="true"/>
         <Node id="protected/loginDomain/List.xhtml" x="1400" y="600" zoom="true"/>
         <Node id="Faq.xhtml" x="900" y="150" zoom="true"/>
-        <Node id="protected/role/inner-form.xhtml" x="150" y="450" zoom="true"/>
         <Node id="protected/group/inner-form.xhtml" x="400" y="1050" zoom="true"/>
+        <Node id="protected/role/inner-form.xhtml" x="150" y="450" zoom="true"/>
         <Node id="protected/badword/Create.xhtml" x="1900" y="150" zoom="true"/>
         <Node id="protected/badword/Edit.xhtml" x="2150" y="150" zoom="true"/>
         <Node id="Requirements.xhtml" x="1650" y="150" zoom="true"/>
@@ -52,8 +52,8 @@
         <Node id="protected/loginDomain/Create.xhtml" x="150" y="750" zoom="true"/>
         <Node id="protected/laboratory/inner-form.xhtml" x="650" y="300" zoom="true"/>
         <Node id="protected/reservation/Create.xhtml" x="1400" y="450" zoom="true"/>
-        <Node id="protected/badword/List.xhtml" x="1650" y="450" zoom="true"/>
         <Node id="AccessDenied.jsp" x="1400" y="750" zoom="true"/>
+        <Node id="protected/badword/List.xhtml" x="1650" y="450" zoom="true"/>
         <Node id="protected/user/inner-wizard.xhtml" x="900" y="750" zoom="true"/>
         <Node id="protected/user/inner-form.xhtml" x="650" y="1200" zoom="true"/>
         <Node id="protected/group/Edit.xhtml" x="900" y="900" zoom="true"/>
@@ -63,8 +63,8 @@
         <Node id="index.xhtml" x="1400" y="150" zoom="true"/>
         <Node id="protected/user/Create.xhtml" x="900" y="1050" zoom="true"/>
         <Node id="menu.xhtml" x="1400" y="900" zoom="true"/>
-        <Node id="protected/group/Create.xhtml" x="150" y="1500" zoom="true"/>
         <Node id="protected/badword/View.xhtml" x="150" y="1050" zoom="true"/>
+        <Node id="protected/group/Create.xhtml" x="150" y="1500" zoom="true"/>
         <Node id="protected/laboratory/List.xhtml" x="1150" y="750" zoom="true"/>
     </Scope>
     <Scope Scope="All Faces Configurations"/>

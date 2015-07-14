@@ -17,9 +17,12 @@ public class ConfCopy extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = 5282877353270750357L;
 
-	/** Creates new form ConfCompBin 
-	 * @param parent 
-	 * @param modal */
+	/**
+	 * Creates new form ConfCompBin
+	 * 
+	 * @param parent
+	 * @param modal
+	 */
 	public ConfCopy(final java.awt.Frame parent, final boolean modal) {
 		super(parent, modal);
 		initComponents();
@@ -261,7 +264,8 @@ public class ConfCopy extends javax.swing.JDialog {
 	/**
 	 * Setter for property columnCopy.
 	 * 
-	 * @param columnCopy New value of property columnCopy.
+	 * @param rowCopy
+	 * 
 	 */
 	public void setRowCopy(final int rowCopy) {
 		this.rowCopy = rowCopy;

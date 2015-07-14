@@ -135,6 +135,7 @@ public class Animation extends MovProj implements ExpDataDisplay, ExpDataModelLi
 				topGutter = bottomGutter = Math.max(0, getHeight() - interiorDimension.height) / 2;
 			}
 		}
+		@SuppressWarnings("unchecked")
 		final java.util.ArrayList<Drawable> tempList = getDrawables();
 		scale(tempList);
 		setPixelScale();

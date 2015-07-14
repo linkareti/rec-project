@@ -17,15 +17,18 @@ public class ConfInOut extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = 3471345210234947864L;
 
-	/** Creates new form ConfInOut 
-	 * @param parent 
-	 * @param modal 
-	 * @param model */
+	/**
+	 * Creates new form ConfInOut
+	 * 
+	 * @param parent
+	 * @param modal
+	 * @param model
+	 */
 	public ConfInOut(final java.awt.Frame parent, final boolean modal,
 			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelConfInOut model) {
 		super(parent, modal);
 		initComponents();
-		modelConfInOut = model;
+		ConfInOut.modelConfInOut = model;
 		readModel();
 		jButtonConfInOutOk.requestFocus();
 	}
@@ -473,7 +476,7 @@ public class ConfInOut extends javax.swing.JDialog {
 	}// GEN-LAST:event_jButtonConfInOutOkKeyReleased
 
 	private void jButtonConfInOutCancelMousePressed(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jButtonConfInOutCancelMousePressed
-		hide();
+		setVisible(false);
 	}// GEN-LAST:event_jButtonConfInOutCancelMousePressed
 
 	private void formMouseClicked(final java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseClicked
@@ -509,14 +512,14 @@ public class ConfInOut extends javax.swing.JDialog {
 			ConfInOut.modelConfInOut.setB5(booleanInt(jRadioButtonB5Out.isSelected()));
 			ConfInOut.modelConfInOut.setB6(booleanInt(jRadioButtonB6Out.isSelected()));
 			ConfInOut.modelConfInOut.setB7(booleanInt(jRadioButtonB7Out.isSelected()));
-			hide();
+			setVisible(false);
 		}
 	}// GEN-LAST:event_jButtonConfInOutOkMousePressed
 
 	/** Exit the Application */
 	private void exitForm(final java.awt.event.WindowEvent evt) {// GEN-FIRST:event_exitForm
 		if (evt != null) {
-			hide();
+			setVisible(false);
 		}
 	}// GEN-LAST:event_exitForm
 

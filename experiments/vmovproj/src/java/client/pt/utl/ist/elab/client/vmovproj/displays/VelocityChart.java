@@ -14,7 +14,7 @@ import com.linkare.rec.impl.client.experiment.ExpDataModel;
 
 /**
  * 
- * @author nomead
+ * @author unknown 
  */
 public class VelocityChart extends MultSeriesXYExperimentGraphExtended implements GraphSamplesFunction {
 
@@ -54,14 +54,13 @@ public class VelocityChart extends MultSeriesXYExperimentGraphExtended implement
 		}
 
 		isAbs = header.getSelectedHardwareParameterValue("velAbs").trim().equals("1") ? true : false;
-		super.dataModelStartedNoData();
 	}
 
 	private ExpDataModel model = null;
 
 	@Override
 	public void setExpDataModel(final ExpDataModel model) {
-		super.setExpDataModel(model);
+		
 		if (this.model != null) {
 			this.model.removeExpDataModelListener(this);
 		}
@@ -69,6 +68,8 @@ public class VelocityChart extends MultSeriesXYExperimentGraphExtended implement
 		if (this.model != null) {
 			this.model.addExpDataModelListener(this);
 		}
+		
+		super.setExpDataModel(model);
 
 	}
 }

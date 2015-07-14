@@ -10,50 +10,65 @@
 
 package com.linkare.rec.impl.utils;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
 public class MathUtil {
 
-	public static boolean isValueInScale(double min_value, double max_value, double step_value, final double value) {
-		step_value = step_value < 0. ? -step_value : step_value;
+	private static final Logger LOGGER = Logger.getLogger(MathUtil.class.getName());
 
-		if (max_value < min_value) {
-			final double temp_min = min_value;
-			min_value = max_value;
-			max_value = temp_min;
+	public static boolean isValueInScale(double minValue, double maxValue, double stepValue, final double value) {
+		boolean retVal = true;
+
+		stepValue = stepValue < 0. ? -stepValue : stepValue;
+
+		if (maxValue < minValue) {
+			final double temp_min = minValue;
+			minValue = maxValue;
+			maxValue = temp_min;
 		}
 
-		System.err.println("value " + value + " should be in scale [" + min_value + " - " + max_value + "] step="
-				+ step_value);
-		if (step_value == 0.) {
-			System.err.println("step_value is 0., returning (value<=max_value && value>=min_value)="
-					+ (value <= max_value && value >= min_value));
-			return value <= max_value && value >= min_value;
+		final String originalScaleDef = new StringBuilder("scale [").append(minValue).append(" ; ").append(maxValue)
+				.append("] step=").append(stepValue).toString();
+
+		if (LOGGER.isLoggable(Level.FINE)) {
+			LOGGER.log(Level.FINE, "Is value " + value + " in " + originalScaleDef + "?");
 		}
 
-		if (value < min_value || value > max_value) {
-			System.err.println("value is out of scale... returning false!");
-			return false;
+		if (value < minValue || value > maxValue) {
+			retVal = false;
+		} else if (stepValue == 0.) {
+			retVal = (minValue <= value && value <= maxValue);
+			if (LOGGER.isLoggable(Level.FINE)) {
+				LOGGER.log(Level.FINE, "step_value is 0., returning (min_value <= value <= max_value value) = "
+						+ retVal);
+			}
+		} else {
+//			BigDecimal valueBig = new BigDecimal(value, MathContext.DECIMAL64);
+//			BigDecimal stepBig = new BigDecimal(stepValue, MathContext.DECIMAL64);
+//			BigDecimal minBig = new BigDecimal(minValue, MathContext.DECIMAL64);
+//
+//			BigDecimal delta = minBig.subtract(valueBig, MathContext.DECIMAL64);
+//			if (BigDecimal.ZERO.compareTo(delta.remainder(stepBig, MathContext.DECIMAL64))!=0) {
+//				retVal=false;
+//			}
+			retVal = (minValue <= value && value <= maxValue);
 		}
 
-		return true;
+		if(retVal && LOGGER.isLoggable(Level.FINE)) {
+			LOGGER.log(Level.FINE, "value " + value + " is in " + originalScaleDef + " ... returning true!");
+		}
+		else if(!retVal && LOGGER.isLoggable(Level.WARNING)) {
+			LOGGER.log(Level.WARNING, "value " + value + " is not in " + originalScaleDef + " ... returning false!");	
+		}
+		
+		return retVal;
 
-		/*
-		 * int dec_places_step=0; double step_value_temp=step_value;
-		 * while(Math.floor(step_value_temp)<step_value_temp) {
-		 * dec_places_step++; step_value_temp=step_value_temp*10.; }
-		 * 
-		 * double div=(value-min_value)/step_value; double
-		 * power_mult=Math.pow(10.,dec_places_step);
-		 * div=Math.floor(div*power_mult)/power_mult;
-		 * System.err.println("div="+div);
-		 * System.err.println("Math.floor(div)="+Math.floor(div));
-		 * System.err.println("Diference="+(div-Math.floor(div)));
-		 * System.err.println("Return value="+((div-Math.floor(div))==0.));
-		 * return ((div-Math.floor(div))==0.);
-		 */
 	}
-
 }

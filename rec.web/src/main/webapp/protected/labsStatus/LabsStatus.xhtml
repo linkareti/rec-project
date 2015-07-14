@@ -19,7 +19,6 @@
                        titletip="#{(lab.available) ? statusBundle['tooltip.lab.available'] : statusBundle['tooltip.lab.unavailable'] }" 
                        disabled="#{!lab.available}"
                        titleStyleClass="#{(lab.available) ? 'ui-icon-available' : 'ui-icon-unavailable' }">  
-                    <script src="http://www.java.com/js/deployJava.js" />
                     <p:scrollPanel mode="native" styleClass="scrollPanel" rendered="#{!empty statusBean.selectedLab}" >
                         <p:dataTable id="tableExperiments" var="deployedExp"
                                      value="#{statusBean.labExperiments}" rendered="#{lab.available}" style="margin-left: 10%">
@@ -67,7 +66,7 @@
                             </p:column>
                             <p:column style="width:120px; text-align: center; height: 50%;">
 
-                                <a href="javascript:var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + '../../#{deployedExp.experiment.state.url}'; if (!deployJava.isWebStartInstalled('1.6')) {if (deployJava.installLatestJRE()) {if (deployJava.launch(url)) {}}} else {if (deployJava.launch(url)) {}}"
+                                <a href="javascript:var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + '../client/#{deployedExp.experiment.state.url}.jnlp'; if (!deployJava.isWebStartInstalled('1.6')) {if (deployJava.installLatestJRE()) {if (deployJava.launch(url)) {}}} else {if (deployJava.launch(url)) {}}"
                                    title="#{statusBundle['tooltip.experiment.launch']}" 
                                    rel="#{statusBundle['tooltip.experiment.launch']}" target="_blank">
                                     <h:graphicImage library="images" name="webstart.png" rendered="#{deployedExp.labRunning}"/>
@@ -98,7 +97,7 @@
             <p:poll update="userConnnected" interval="5"
                     listener="#{chatBean.refreshUserConnected}" />
             <p:poll update="messageReceived" interval="2"
-                    listener="#{chatBean.refreshMessageReceived}" />
+                    listener="#{chatBean.refreshMessageReceived}" oncomplete="document.getElementById('chat:messageReceived').scrollTop = document.getElementById('chat:messageReceived').scrollHeight;" />
             <p:dialog header="Chat" widgetVar="dlg" minimizable="true" resizable="false" id="chatDlg" width="550">
                 <p:ajax event="close" listener="#{chatBean.handleClose}" update="messageReceived"/>  
                 <h:panelGroup>
@@ -111,12 +110,12 @@
                     </p:scrollPanel>
 
                     <p:separator />  
-                    <p:inputText value="#{chatBean.message}" styleClass="messageInput" style="width:82%;" id="messageInput" autocomplete="false">  
+                    <p:inputText value="#{chatBean.message}" styleClass="messageInput" style="width:82%;" id="messageInput" autocomplete="off">
                         <p:ajax event="change" />
                     </p:inputText>
                     <p:spacer width="5" />  
                     <p:commandButton id="btnSend" value=" #{bundle['operation.send']}" action="#{chatBean.send}" 
-                                     process="@this" update="messageReceived messageInput setFocus" /> 
+                                     process="@this" update="messageReceived messageInput setFocus" oncomplete="document.getElementById('chat:messageReceived').scrollTop = document.getElementById('chat:messageReceived').scrollHeight;" /> 
                     <div style="float: right; height: 150px; margin-top: -47%; width: 27%;">
                         <p:selectOneMenu  value="#{chatBean.selectedUser}" id="userConnnected" style="width: 120px;">
                             <f:selectItem itemLabel="#{bundle['label.everyone']}" itemValue="#{bundle['label.everyone']}" />  
@@ -127,6 +126,5 @@
                 <p:focus id="setFocus" for="messageInput" />
             </p:dialog>
         </h:form>
-
     </ui:define>
 </ui:composition>

@@ -1,6 +1,7 @@
 package com.linkare.rec.impl.newface.display;
 
 import com.linkare.rec.impl.client.experiment.DataDisplayEnum;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -9,6 +10,7 @@ import java.util.logging.Logger;
 import com.linkare.rec.web.config.Display;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import com.linkare.rec.utils.ClassUtils;
 
 public class DefaultDisplayFactory extends AbstractDisplayFactory {
 
@@ -36,7 +38,7 @@ public class DefaultDisplayFactory extends AbstractDisplayFactory {
 				if (beanName == null) {
 					continue;
 				}
-				final Object dataDisplayTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
+				final Object dataDisplayTemp = ClassUtils.beansInstantiate(this.getClass().getClassLoader(),
 						beanName.trim());
 				if (java.beans.Beans.isInstanceOf(dataDisplayTemp, ExpDataDisplay.class)) {
 					tempDisplays.add(new ExpDataDisplayTreeIconAndName((ExpDataDisplay) dataDisplayTemp, display));
@@ -46,7 +48,7 @@ public class DefaultDisplayFactory extends AbstractDisplayFactory {
 				DefaultDisplayFactory.log.log(Level.SEVERE, "Could not instantiate display", e);
 			}
 		}
-		return tempDisplays;
+		return tempDisplays.size()==0?null:tempDisplays;
 	}
 
 	// Hacked... this is the way I found to, without changing to source code,

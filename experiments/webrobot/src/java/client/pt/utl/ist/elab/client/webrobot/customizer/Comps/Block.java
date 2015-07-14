@@ -15,16 +15,8 @@ public class Block extends javax.swing.JButton {
 	 * 
 	 */
 	private static final long serialVersionUID = 4820322656995726832L;
-	private int WIDTH;
-	private int HEIGHT;
-	private int LINEWIDTH;
-	private java.awt.Dimension dimension;
 	private int TIPO;
 	private pt.utl.ist.elab.client.webrobot.customizer.Models.ModelBlock model;
-	private pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfCompAndInt confCompAndInt;
-	private java.awt.Color backgroundColor;
-	private java.awt.Color anotherAndColor;
-	private String text;
 	private String fullNameDescription;
 	public java.awt.Color darkBlue = java.awt.Color.blue.darker();
 	public java.awt.Color highlightColor = new java.awt.Color(darkBlue.getRed(), darkBlue.getGreen(),

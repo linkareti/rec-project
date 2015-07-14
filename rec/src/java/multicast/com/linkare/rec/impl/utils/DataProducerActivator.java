@@ -13,7 +13,6 @@ package com.linkare.rec.impl.utils;
  */
 
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import org.omg.CORBA.LocalObject;
@@ -23,6 +22,7 @@ import org.omg.PortableServer.Servant;
 import org.omg.PortableServer.ServantActivator;
 
 import com.linkare.rec.acquisition.DataProducerPOATie;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.multicast.ReCMultiCastDataProducer;
 import com.linkare.rec.impl.multicast.repository.RepositoryException;
 import com.linkare.rec.impl.multicast.repository.RepositoryFactory;
@@ -37,23 +37,12 @@ public class DataProducerActivator extends LocalObject implements ServantActivat
 	 * 
 	 */
 	private static final long serialVersionUID = 3719852533240590451L;
-	private static String RECMULTICAST_DATAPRODUCER_LOGGER = "ReCMultiCastDataProducer.Logger";
-	/**
-	 * 
-	 */
-	private static final Logger LOGGER = Logger.getLogger(DataProducerActivator.RECMULTICAST_DATAPRODUCER_LOGGER);
-
-	static {
-		final Logger l = LogManager.getLogManager().getLogger(DataProducerActivator.RECMULTICAST_DATAPRODUCER_LOGGER);
-		if (l == null) {
-			LogManager.getLogManager().addLogger(LOGGER);
-		}
-	}
+	private static final Logger LOGGER = Logger.getLogger(DataProducerActivator.class.getName());
 
 	/** Creates a new instance of HardwareActivator */
 	public DataProducerActivator() {
-		DataProducerActivator.baseDir = System.getProperty("user.dir") + System.getProperty("file.separator")
-				+ "DataProducers";
+		DataProducerActivator.baseDir = ReCSystemProperty.USER_DIR.getValue()
+				+ ReCSystemProperty.FILE_SEPARATOR.getValue() + "DataProducers";
 		java.io.File f = new java.io.File(DataProducerActivator.baseDir);
 		if (!f.exists()) {
 			f.mkdirs();
@@ -75,16 +64,13 @@ public class DataProducerActivator extends LocalObject implements ServantActivat
 
 				String filename = new String(oid);
 
-				Logger.getLogger(RECMULTICAST_DATAPRODUCER_LOGGER).log(Level.FINE,
-						"Deactivating object " + filename + IN_POA_STR_LITERAL + poa.the_name());
+				LOGGER.log(Level.FINE, "Deactivating object " + filename + IN_POA_STR_LITERAL + poa.the_name());
 
 				RepositoryFactory.getRepository().persistExperimentResult(objdataser, filename);
 				objdataser.setAlreadySavedOnRepository();
 				// SerializationHelper.writeObject(filename, dir, objdataser);
-				Logger.getLogger(RECMULTICAST_DATAPRODUCER_LOGGER)
-						.log(Level.FINE, "Serializing for the first time...!");
-				Logger.getLogger(RECMULTICAST_DATAPRODUCER_LOGGER).log(Level.FINE,
-						"Deactivated object " + filename + IN_POA_STR_LITERAL + poa.the_name());
+				LOGGER.log(Level.FINE, "Serializing for the first time...!");
+				LOGGER.log(Level.FINE, "Deactivated object " + filename + IN_POA_STR_LITERAL + poa.the_name());
 			} else {
 				LOGGER.log(Level.FINE, "Object already saved on repository no needed to serialize again!");
 			}
@@ -102,8 +88,7 @@ public class DataProducerActivator extends LocalObject implements ServantActivat
 		try {
 			String filename = new String(oid);
 
-			Logger.getLogger(RECMULTICAST_DATAPRODUCER_LOGGER).log(Level.FINE,
-					"Activating object " + filename + IN_POA_STR_LITERAL + poa.the_name());
+			LOGGER.log(Level.FINE, "Activating object " + filename + IN_POA_STR_LITERAL + poa.the_name());
 
 			// Object readed = SerializationHelper.readObject(filename, dir);
 			// System.out.println("is readed an instance of ReCMultiCastDataProducer?? "

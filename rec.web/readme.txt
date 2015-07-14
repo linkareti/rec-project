@@ -201,3 +201,6 @@ supported with development being the default one. To use any of the environments
 For example, to configure the project for production:
  - mvn -Dtargetenv=prod clean package
 
+
+To create a new release branch, do something as:
+mvn release:branch -DautoVersionSubmodules=true -DdevelopmentVersion=1.1.0-SNAPSHOT -DbranchName=rel-web-api-1.0.x -B -Dsvn_username=<username> -Dsvn_password=<password> -Drelease_task_id=<related_task_id>

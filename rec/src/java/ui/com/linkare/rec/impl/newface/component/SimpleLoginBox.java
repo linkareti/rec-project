@@ -13,6 +13,7 @@ import javax.swing.Icon;
 
 import org.jdesktop.application.Action;
 
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.newface.ReCApplication;
 import com.linkare.rec.impl.newface.component.ProgressCicle.State;
 import com.linkare.rec.impl.newface.utils.LAFConnector;
@@ -38,7 +39,7 @@ public class SimpleLoginBox extends GradientPane {
 		super();
 		setContainer(container);
 		initComponents();
-		txtUsername.setText(System.getProperty("user.name"));
+		txtUsername.setText(ReCSystemProperty.USER_NAME.getValue());
 	}
 
 	public void setLoginProgressVisible(final boolean visible) {

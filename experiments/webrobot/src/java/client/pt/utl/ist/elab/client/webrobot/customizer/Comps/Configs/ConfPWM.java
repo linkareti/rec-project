@@ -19,10 +19,13 @@ public class ConfPWM extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = 4369597833470516609L;
 
-	/** Creates new form ConfCompBin 
-	 * @param parent 
-	 * @param modal 
-	 * @param model */
+	/**
+	 * Creates new form ConfCompBin
+	 * 
+	 * @param parent
+	 * @param modal
+	 * @param model
+	 */
 	public ConfPWM(final java.awt.Frame parent, final boolean modal,
 			final pt.utl.ist.elab.client.webrobot.customizer.Models.ModelPWM model) {
 		super(parent, modal);
@@ -126,10 +129,10 @@ public class ConfPWM extends javax.swing.JDialog {
 		jSliderPWM1.setPaintLabels(true);
 		jSliderPWM1.setPaintTicks(true);
 		jSliderPWM1.setValue(model.getValor());
-		final java.util.Hashtable<Integer, JLabel> labelTable = new java.util.Hashtable();
-		labelTable.put(new Integer(0), new javax.swing.JLabel("Atr�s"));
-		labelTable.put(new Integer(128), new javax.swing.JLabel("Parado"));
-		labelTable.put(new Integer(255), new javax.swing.JLabel("Frente"));
+		final java.util.Hashtable<Integer, JLabel> labelTable = new java.util.Hashtable<Integer,JLabel>();
+		labelTable.put(Integer.valueOf(0), new javax.swing.JLabel("Atr�s"));
+		labelTable.put(Integer.valueOf(128), new javax.swing.JLabel("Parado"));
+		labelTable.put(Integer.valueOf(255), new javax.swing.JLabel("Frente"));
 		jSliderPWM1.setLabelTable(labelTable);
 		if (jCheckBoxPWM1.isSelected()) {
 			jSliderPWM1.setEnabled(true);

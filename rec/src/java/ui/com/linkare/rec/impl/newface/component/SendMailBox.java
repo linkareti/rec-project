@@ -106,7 +106,7 @@ public class SendMailBox extends GradientPane {
 
         labelToMail.setFont(labelToMail.getFont().deriveFont(labelToMail.getFont().getStyle() | java.awt.Font.BOLD));
         labelToMail.setForeground(LAFConnector.getColor(SpecialELabProperties.SELECTION_FOREGROUND_ON_DARK));
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/linkare/rec/impl/newface/component/resources/SendMailBox"); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/linkare/rec/impl/newface/component/resources/SendMailBox",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader()); // NOI18N
         labelToMail.setText(bundle.getString("labelToMail.text")); // NOI18N
         labelToMail.setName("labelToMail"); // NOI18N
 

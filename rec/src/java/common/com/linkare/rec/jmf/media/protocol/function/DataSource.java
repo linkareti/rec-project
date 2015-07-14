@@ -18,6 +18,8 @@ import javax.media.protocol.PullBufferDataSource;
 import javax.media.protocol.PullBufferStream;
 import javax.media.protocol.SourceStream;
 
+import com.linkare.rec.utils.ClassUtils;
+
 public class DataSource extends PullBufferDataSource {
 
     private static final int BITS_PER_BYTE = 8;
@@ -220,8 +222,8 @@ public class DataSource extends PullBufferDataSource {
         public Object getControl(String controlType) {
 
             Class<?> controlClass;
-            try {
-                controlClass = Class.forName(controlType);
+            try {                
+                controlClass = ClassUtils.findClass(controlType, getClass().getClassLoader());
             } catch (ClassNotFoundException e) {
                 return null;
             }

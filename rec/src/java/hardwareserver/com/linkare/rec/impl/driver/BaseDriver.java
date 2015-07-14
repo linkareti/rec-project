@@ -9,10 +9,12 @@ package com.linkare.rec.impl.driver;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.linkare.net.protocols.Protocols;
 import com.linkare.rec.acquisition.IncorrectStateException;
 import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.threading.TimedOutException;
 
 /**
@@ -211,4 +213,34 @@ public abstract class BaseDriver implements com.linkare.rec.impl.driver.IDriver 
 	 */
 	public abstract void configure(HardwareAcquisitionConfig config, HardwareInfo info)
 			throws WrongConfigurationException, IncorrectStateException, TimedOutException;
+	
+	
+	@Override
+	public Object getHardwareInfo() {
+		fireIDriverStateListenerDriverReseting();
+		final String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+				+ "/HardwareInfo.xml";
+		String prop = ReCSystemProperty.HARDWARE_INFO_FILE.getValue(baseHardwareInfoFile);
+
+		if (prop.indexOf("://") == -1) {
+			prop = "file:///" + ReCSystemProperty.USER_DIR.getValue() + "/" + prop;
+		}
+
+		java.net.URL url = null;
+		try {
+			url = Protocols.getURL(prop);
+		} catch (final java.net.MalformedURLException e) {
+
+			LOGGER.log(Level.WARNING, "Unable to load resource: " + prop, e);
+			try {
+				url = new java.net.URL(baseHardwareInfoFile);
+			} catch (final java.net.MalformedURLException e2) {
+				LOGGER.log(Level.SEVERE, "Unable to load resource: " + baseHardwareInfoFile, e);
+
+			}
+		}
+		fireIDriverStateListenerDriverReseted();
+		return url;
+	}
+
 }

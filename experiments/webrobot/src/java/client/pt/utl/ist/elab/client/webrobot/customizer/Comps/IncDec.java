@@ -39,14 +39,18 @@ public class IncDec extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Blo
 	/** Holds value of property cancel. */
 	private boolean cancel = false;
 
-	/** Creates a new instance of CompInt */
+	/**
+	 * Creates a new instance of CompInt
+	 * 
+	 * @param parent
+	 */
 	public IncDec(final javax.swing.JFrame parent) {
 		super();
 		setCancel(false);
 		model = new pt.utl.ist.elab.client.webrobot.customizer.Models.ModelIncDec();
 		confIncDec = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfIncDec(parent, true, model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confIncDec);
-		confIncDec.show();
+		confIncDec.setVisible(true);
 		if (confIncDec.isCancel()) {
 			setCancel(true);
 			return;
@@ -122,7 +126,7 @@ public class IncDec extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Blo
 	public void edit(final javax.swing.JFrame parent) {
 		confIncDec = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfIncDec(parent, true, model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confIncDec);
-		confIncDec.show();
+		confIncDec.setVisible(true);
 	}
 
 	@Override

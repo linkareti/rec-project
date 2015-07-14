@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-	<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
-
+<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+<!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
 <HardwareInfo id="ELAB_STATSOUND_STAMP_V01" familiarName="Ondas estacionarias e velocidade do som"
 	name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
 	<description>
@@ -9,8 +8,6 @@
         Nesta sala de controlo é possível determinar a velocidade de propagação do som.
         ]]>
 	</description>
-	<customizer href="pt.utl.ist.elab.client.statsound.StatSoundCustomizer" />
-
 	<parameter name="piston.start" type="ContinuousValue" value="1300">
 		<selection-list>
 			<value order="1">1271</value>

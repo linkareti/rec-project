@@ -37,14 +37,18 @@ public class PWM extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Block 
 	/** Holds value of property cancel. */
 	private boolean cancel = false;
 
-	/** Creates a new instance of CompInt */
+	/**
+	 * Creates a new instance of CompInt
+	 * 
+	 * @param parent
+	 */
 	public PWM(final javax.swing.JFrame parent) {
 		super();
 		setCancel(false);
 		model = new pt.utl.ist.elab.client.webrobot.customizer.Models.ModelPWM();
 		confPWM = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfPWM(parent, true, model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confPWM);
-		confPWM.show();
+		confPWM.setVisible(true);
 		if (confPWM.isCancel()) {
 			setCancel(true);
 			return;
@@ -128,7 +132,7 @@ public class PWM extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Block 
 	public void edit(final javax.swing.JFrame parent) {
 		confPWM = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfPWM(parent, true, model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confPWM);
-		confPWM.show();
+		confPWM.setVisible(true);
 	}
 
 	@Override

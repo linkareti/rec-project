@@ -25,7 +25,6 @@ public class ApparatusSelectBox extends AbstractContentPane {
 	/** Creates new form ApparatusSelectBox */
 	public ApparatusSelectBox() {
 		initComponents();
-
 		progressCicle.setBusyIcons(ReCFrameView.busyIcons);
 	}
 
@@ -75,12 +74,12 @@ public class ApparatusSelectBox extends AbstractContentPane {
 
 		btnToggleEnter.setAction(toggleApparatusStateAction);
 
-		// TODO this is fixing the focus repaint problem. Find a better way.
+		// this is fixing the focus repaint problem.
 		repaint();
 	}
         public void refreshView(){
-            lblChooseApparatus.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.ApparatusSelectBox").getString("lblChooseApparatus.text"));
-            btnToggleEnter.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.ApparatusSelectBox").getString("btnToggleEnter.text"));
+            lblChooseApparatus.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.ApparatusSelectBox",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader()).getString("lblChooseApparatus.text"));
+            btnToggleEnter.setText(ResourceBundle.getBundle("com.linkare.rec.impl.newface.component.resources.ApparatusSelectBox",java.util.Locale.getDefault(),Thread.currentThread().getContextClassLoader()).getString("btnToggleEnter.text"));
         }
 	/**
 	 * This method is called from within the constructor to initialize the form.

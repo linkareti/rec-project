@@ -63,7 +63,7 @@
 		<replace file="${experiments.build.dir}/StartaleatorioDriver.sh" propertyFile="build.properties">
 			<replacefilter token="# @ Initializing driver starter script @" property="aleatorio.starter.script" />
 			<replacefilter token="@experiment.name@" value="${experiment.name}" />
-			<replacefilter token="export DRIVER_EXPERIMENT_CLASSPATH=" value="export DRIVER_EXPERIMENT_CLASSPATH=$DRIVER_BASE_DIR/lib/jmf.jar" />
+			<replacefilter token="export DRIVER_EXPERIMENT_CLASSPATH=" value="export DRIVER_EXPERIMENT_CLASSPATH=/home/elab/jmf/elab152/JMF-2.1.1e/lib/jmf.jar" />
 			<replacefilter token="java.awt.headless=true" value="java.awt.headless=false" />
 		</replace>
 

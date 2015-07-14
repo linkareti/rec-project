@@ -15,7 +15,7 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class DecayCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+public class DecayCustomizer extends AbstractCustomizer {
 
 	/** Creates new form RadioactividadeCustomizer */
 	public DecayCustomizer() {

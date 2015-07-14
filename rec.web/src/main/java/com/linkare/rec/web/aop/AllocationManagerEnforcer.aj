@@ -19,6 +19,6 @@ public aspect AllocationManagerEnforcer extends Enforcer<UserView> {
 
     @Override
     public Class<? extends Decider<? extends Object>> defaultDeciderClass() {
-	return AllocationManagerDecider.class;
+	return ReCWebDecider.class;
     }
 }

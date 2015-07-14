@@ -32,16 +32,15 @@ import com.linkare.rec.acquisition.NotAvailableException;
 import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.events.HardwareStateChangeEvent;
 import com.linkare.rec.impl.exceptions.IncorrectStateExceptionConstants;
 import com.linkare.rec.impl.exceptions.WrongConfigurationExceptionConstants;
-import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
 import com.linkare.rec.impl.utils.HardwareBinder;
 import com.linkare.rec.impl.utils.HardwareInfoXMLReader;
 import com.linkare.rec.impl.utils.ORBBean;
-import com.linkare.rec.impl.utils.QueueLogger;
 import com.linkare.rec.impl.wrappers.DataClientWrapper;
 import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 
@@ -49,12 +48,11 @@ import com.linkare.rec.impl.wrappers.DataProducerWrapper;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class BaseHardware implements HardwareOperations, BaseDataProducerListener, QueueLogger {
+public class BaseHardware implements HardwareOperations, BaseDataProducerListener {
 
 	private static final Logger LOGGER = Logger.getLogger(BaseHardware.class.getName());
 
-	private static final boolean SHOW_GUI = Boolean.parseBoolean(Defaults.defaultIfEmpty(
-			System.getProperty("rec.driver.show.gui"), "false"));
+	private static final boolean SHOW_GUI = Boolean.parseBoolean(ReCSystemProperty.HARDWARE_SHOW_GUI.getValue());
 
 	private final HardwareBinder refBinder = new HardwareBinder();
 
@@ -86,7 +84,7 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 			LOGGER.info("Registering this hardware with name " + "com/linkare/rec/hardwares/"
 					+ driver.getDriverUniqueID());
 
-			refBinder.setHardware(_this);
+			refBinder.setHardware(_this,this);
 
 			return _this;
 		} catch (final Exception e) {
@@ -160,7 +158,7 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 		LOGGER.info("Instatiating the BaseHardware.");
 
 		LOGGER.info("Creating EventQueue for data client dispatcher.");
-		eventQueue = new EventQueue(new BaseHardwareDataClientDispatcher(), this.getClass().getSimpleName(), this);
+		eventQueue = new EventQueue(new BaseHardwareDataClientDispatcher(), this.getClass().getSimpleName());
 
 		if (!GraphicsEnvironment.isHeadless() && BaseHardware.SHOW_GUI) {
 			final JFrame frameForKill = new JFrame();
@@ -177,6 +175,7 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 			});
 			frameForKill.getContentPane().add(btnExit);
 			frameForKill.setVisible(true);
+			frameForKill.setTitle(ReCSystemProperty.HARDWARE_DRIVER_CLASS.getValue());
 			frameForKill.pack();
 		}
 	}
@@ -200,7 +199,7 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 		return driver;
 	}
 
-	StateMachine stateMachine = new StateMachine();
+	private final StateMachine stateMachine = new StateMachine();
 
 	/**
 	 * Setter for property driver.
@@ -473,22 +472,6 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 			return Thread.NORM_PRIORITY;
 		}
 
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void log(final Level debugLevel, final String message) {
-		LOGGER.log(debugLevel, message);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void logThrowable(final String message, final Throwable t) {
-		LOGGER.log(Level.SEVERE, message, t);
 	}
 
 }

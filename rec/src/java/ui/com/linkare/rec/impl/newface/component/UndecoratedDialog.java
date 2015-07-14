@@ -7,7 +7,10 @@
 
 package com.linkare.rec.impl.newface.component;
 
+import java.awt.Color;
 import java.awt.Window;
+
+import javax.swing.BorderFactory;
 
 /**
  * An Undecorated Dialog for the ReC Application.
@@ -35,6 +38,7 @@ public class UndecoratedDialog<C extends AbstractContentPane> extends DefaultDia
 	@Override
 	protected void init() {
 		setUndecorated(true);
+		getRootPane().setBorder(BorderFactory.createLineBorder(Color.black,1));
 		super.init();
 	}
 

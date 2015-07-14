@@ -10,6 +10,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 
@@ -19,6 +21,8 @@ import javax.swing.JPanel;
  */
 public class GraphPanel extends JPanel {
 
+	private static final Logger LOGGER=Logger.getLogger(GraphPanel.class.getName());
+	
 	/**
 	 * 
 	 */
@@ -35,8 +39,8 @@ public class GraphPanel extends JPanel {
 	private final int bottomMargin = 15;
 	private final int extraMargin = 5;
 	private final BufferedImage image = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_RGB);
-	private final int imageArea = imageWidth * imageHeight;
-	private final int[] pixels = new int[imageArea];
+//	private final int imageArea = imageWidth * imageHeight;
+//	private final int[] pixels = new int[imageArea];
 
 	private int[] x;
 	private int[] y;
@@ -222,8 +226,8 @@ public class GraphPanel extends JPanel {
 		try {
 			tracker.waitForAll();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE,"Exception: "+e.getMessage(),e);
+			throw new RuntimeException(e);
 		}
 		// Draw image at its natural size.
 		g.drawImage(image, 0, 0, this);

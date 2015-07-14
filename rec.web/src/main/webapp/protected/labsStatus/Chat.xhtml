@@ -20,7 +20,7 @@
                             <p:menuitem value="Kick" update="basicList" icon="ui-icon-close" actionListener="#{chatBean.kickUser}" process="@this"/>
                         </p:contextMenu> 
                         <h:panelGroup>
-                            <p:outputPanel layout="block" style="width:550px;height:200px;overflow:auto;"   
+                            <p:outputPanel layout="block" style="width:550px;height:200px;"   
                                            styleClass="chatroom" id="chatContent" autoUpdate="true" > 
                                 <h:inputTextarea value="#{chatBean.messageReceived}" id="messageReceived" 
                                                  readonly="true" cols="95" rows="11" 
@@ -32,7 +32,7 @@
                                 <p:ajax event="change" />
                             </p:inputText>
                             <p:spacer width="5" />  
-                            <p:commandButton id="btnSend" value="Send" action="#{chatBean.send}" 
+                            <p:commandButton id="btnSend" value="#{bundle['operation.send']}" action="#{chatBean.send}" 
                                              process="@this" update="messageReceived messageSent setFocus" /> 
                         </h:panelGroup>  
                         <div style="float: right; height: 200px; margin-top: -42%; width: 25%;">

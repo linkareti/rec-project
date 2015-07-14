@@ -37,14 +37,18 @@ public class Direita extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 	/** Holds value of property cancel. */
 	private boolean cancel = false;
 
-	/** Creates a new instance of CompInt */
+	/**
+	 * Creates a new instance of CompInt
+	 * 
+	 * @param parent
+	 */
 	public Direita(final javax.swing.JFrame parent) {
 		super();
 		setCancel(false);
 		model = new pt.utl.ist.elab.client.webrobot.customizer.Models.ModelDireita();
 		confDireita = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfDireita(parent, true, model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confDireita);
-		confDireita.show();
+		confDireita.setVisible(true);
 		if (confDireita.isCancel()) {
 			setCancel(true);
 			return;
@@ -117,7 +121,7 @@ public class Direita extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 	public void edit(final javax.swing.JFrame parent) {
 		confDireita = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfDireita(parent, true, model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confDireita);
-		confDireita.show();
+		confDireita.setVisible(true);
 	}
 
 	@Override

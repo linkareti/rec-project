@@ -24,10 +24,8 @@ public class RecThreadFactory implements ThreadFactory {
 	@Override
 	public Thread newThread(final Runnable r) {
 		final Thread t = new Thread(group, r, namePrefix + threadNumber.getAndIncrement(), 0);
-		if (t.isDaemon()) {
-			t.setDaemon(true);
-		}
-
+		t.setDaemon(true);
+		
 		if (t.getPriority() != Thread.NORM_PRIORITY) {
 			t.setPriority(Thread.NORM_PRIORITY);
 		}

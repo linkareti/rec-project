@@ -36,6 +36,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.TargetDataLine;
 
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.jmf.media.datasink.capture.Handler;
 
 /**
@@ -47,8 +48,6 @@ public class ReCJMFUtils {
 	public static final Logger LOGGER = Logger.getLogger(ReCJMFUtils.class.getName());
 
 	private static final String JMF_PACKAGE = ReCJMFUtils.class.getPackage().getName();
-
-	private static final String CAPTURE_DEVICE_URL_SYSPROP_KEY = "capture.device.url";
 
 	public static final void initReCJMFPackages() {
 		@SuppressWarnings("unchecked")
@@ -117,7 +116,7 @@ public class ReCJMFUtils {
 	public static final String locateCaptureDeviceForParameters(double sampleRate, int bitsPerChannel, int numChannels,
 			int endian, int signed) {
 
-		String deviceLocation = System.getProperty(CAPTURE_DEVICE_URL_SYSPROP_KEY);
+		String deviceLocation = ReCSystemProperty.JMF_CAPTURE_DEVICE_URL.getValue();
 
 		AudioFormat audioFormat = new AudioFormat(AudioFormat.LINEAR, sampleRate, bitsPerChannel, numChannels, endian,
 				signed);
@@ -131,7 +130,7 @@ public class ReCJMFUtils {
 				}
 				if (deviceList.size() > 1) {
 					LOGGER.severe("Please specify the correct device by setting the system property "
-							+ CAPTURE_DEVICE_URL_SYSPROP_KEY);
+							+ ReCSystemProperty.JMF_CAPTURE_DEVICE_URL.getName());
 				} else {
 					deviceLocation = deviceList.get(0).getLocator().toExternalForm();
 				}

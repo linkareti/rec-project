@@ -2,6 +2,7 @@
 
 <!-- Created by jp on 9 de Maio de 2003, 19:07 -->
 
+<!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
 <HardwareInfo id="SCONDUCTOR_V1.0" familiarName="Semicondutores" name="Semicondutores" version="01" manufacturer="Elab - TFComp" driverVersion="v1">
     <description>
         <![CDATA[ 
@@ -9,7 +10,6 @@
         <b>Penso que pode ter coisas maradas aqui como html</b>
         ]]>
     </description>
-    <customizer href="pt.utl.ist.elab.virtual.client.semiconductor.SCustomizer"/>
 
    <parameter name="Material" type="SelectionListValue" value="Silicio">
         <selection-list>

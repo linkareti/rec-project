@@ -135,30 +135,6 @@ public class SDriver extends BaseDriver {
 		dataSource.stopNow();
 	}
 
-	public Object getHardwareInfo() {
-		fireIDriverStateListenerDriverReseting();
-		String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
-				+ "/HardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
-
-		if (prop.indexOf("://") == -1)
-			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
-
-		java.net.URL url = null;
-		try {
-			url = Protocols.getURL(prop);
-		} catch (java.net.MalformedURLException e) {
-			LOGGER.log(Level.SEVERE, "Unable to load resource: " + prop, e);
-			try {
-				url = new java.net.URL(baseHardwareInfoFile);
-			} catch (java.net.MalformedURLException e2) {
-				LOGGER.log(Level.SEVERE, "Unable to load resource: " + baseHardwareInfoFile, e2);
-			}
-		}
-		fireIDriverStateListenerDriverReseted();
-		return url;
-	}
-
 	public void setStoping() {
 		fireIDriverStateListenerDriverStoping();
 	}

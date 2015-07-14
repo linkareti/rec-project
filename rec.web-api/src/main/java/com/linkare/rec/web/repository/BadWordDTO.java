@@ -12,7 +12,12 @@ import javax.xml.bind.annotation.XmlElement;
  */
 public class BadWordDTO extends AbstractBaseDTO {
 
-    public BadWordDTO(){
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5692985044678508912L;
+
+	public BadWordDTO(){
         super();
     }
     public BadWordDTO(long badWordID, String locale, String regex){

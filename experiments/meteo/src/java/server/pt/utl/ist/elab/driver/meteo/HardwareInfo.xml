@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!-- Created by jp on 9 de Maio de 2003, 19:07 -->
-
+<!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
 <HardwareInfo id="ELAB_METEO_V01" familiarName="Meteorologia" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
     <description>
         <![CDATA[ 
@@ -9,7 +8,6 @@
         <b>Penso que pode ter coisas maradas aqui como html</b>
         ]]>
     </description>
-    <customizer href="pt.utl.ist.elab.client.meteo.MeteoCustomizer"/>
         
     <parameter name="Sensor" type="ContinuousValue" value="1">
         <selection-list>

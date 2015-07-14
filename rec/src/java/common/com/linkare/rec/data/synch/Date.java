@@ -123,6 +123,6 @@ public final class Date implements org.omg.CORBA.portable.IDLEntity {
 		nf2.setMinimumIntegerDigits(2);
 		nf2.setMaximumIntegerDigits(2);
 
-		return nf2.format(day) + "-" + nf2.format(month) + "-" + nf4.format(year);
+		return nf2.format(day) + "-" + nf2.format(month+1) + "-" + nf4.format(year);
 	}
 } // class Date

@@ -40,9 +40,9 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 		}
 
 		final int numsamples = ((Integer) command.getCommandData(StampConfigTranslator.NUMSAMPLES_STR)).intValue();
-		final int posini = (((Integer) command.getCommandData(StampConfigTranslator.POS_INI_POL_STR)).intValue() * 155) / 180;
-		final int posend = (((Integer) command.getCommandData(StampConfigTranslator.POS_END_POL_STR)).intValue() * 155) / 180;
-		final int posfixo = (((Integer) command.getCommandData(StampConfigTranslator.POS_FIXO_STR)).intValue() * 155) / 180;
+		final int posini = (((Integer) command.getCommandData(StampConfigTranslator.POS_INI_POL_STR)).intValue() * 1300) / 180;
+		final int posend = (((Integer) command.getCommandData(StampConfigTranslator.POS_END_POL_STR)).intValue() * 1300) / 180;
+		final int posfixo = (((Integer) command.getCommandData(StampConfigTranslator.POS_FIXO_STR)).intValue() * 1300) / 180;
 		final int luzpol = ((Integer) command.getCommandData(StampConfigTranslator.LUZ_POL_STR)).intValue();
 		final int calib = ((Integer) command.getCommandData(StampConfigTranslator.CALIB_STR)).intValue();
 
@@ -61,8 +61,8 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 			posfixostr = "0" + posfixostr;
 		}
 
-		final String commandStr = command.getCommandIdentifier() + " " + posfixostr + " " + posinistr + " " + posendstr
-				+ " " + calib + " " + luzpol;
+		final String commandStr = command.getCommandIdentifier() + " " + calib + " " + luzpol + " " + 
+							posfixostr + " " + posinistr + " " + posendstr;
 		command.setCommand(commandStr);
 
 		return true;

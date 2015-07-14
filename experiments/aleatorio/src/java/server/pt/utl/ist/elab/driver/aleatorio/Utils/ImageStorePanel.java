@@ -6,12 +6,16 @@
 
 package pt.utl.ist.elab.driver.aleatorio.Utils;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * 
  * @author Pedro Carvalho - LEFT - IST
  */
 public class ImageStorePanel extends javax.swing.JPanel {
 
+	private static final Logger LOGGER = Logger.getLogger(ImageStorePanel.class.getName());
 	/**
 	 * 
 	 */
@@ -35,8 +39,8 @@ public class ImageStorePanel extends javax.swing.JPanel {
 		try {
 			tracker.waitForAll();
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
-			System.exit(1);
+			LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+			throw new RuntimeException(e);
 		}
 		g.drawImage(image, 0, 0, this); // Draw image at its natural size.
 	}// paintComponent(Graphics g)

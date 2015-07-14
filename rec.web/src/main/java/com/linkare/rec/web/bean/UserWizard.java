@@ -16,7 +16,7 @@ import com.linkare.commons.dao.security.LoginDAO;
 import com.linkare.commons.jpa.security.User;
 import com.linkare.commons.utils.EqualityUtils;
 import com.linkare.jsf.utils.JsfUtil;
-import com.linkare.rec.web.aop.AllocationManagerExceptionHandler;
+import com.linkare.rec.web.aop.ReCWebExceptionHandler;
 import com.linkare.rec.web.aop.ExceptionHandle;
 import com.linkare.rec.web.aop.ExceptionHandleCase;
 import com.linkare.rec.web.model.Person;
@@ -122,7 +122,7 @@ public class UserWizard implements Serializable {
 	this.user = user;
     }
 
-    @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = AllocationManagerExceptionHandler.class))
+    @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = ReCWebExceptionHandler.class))
     public String save() {
 	if (isNew()) {
 	    userService.create(getUser());

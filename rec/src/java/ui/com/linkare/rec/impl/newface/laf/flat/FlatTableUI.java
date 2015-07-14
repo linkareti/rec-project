@@ -47,7 +47,6 @@ public class FlatTableUI extends BasicTableUI {
 	public void installUI(final JComponent c) {
 		super.installUI(c);
 
-		// TODO save defaults.
 		table.setFocusable(false);
 		table.setSelectionBackground(FlatTableUI.SELECTION_ROW_COLOR);
 		table.setShowVerticalLines(false);

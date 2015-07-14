@@ -6,6 +6,9 @@
 
 package pt.utl.ist.elab.driver.aleatorio.Utils;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.media.Buffer;
 import javax.media.format.VideoFormat;
 import javax.media.util.BufferToImage;
@@ -19,6 +22,8 @@ import pt.utl.ist.elab.driver.aleatorio.Hardware.WebCamThread;
  * @author Pedro Carvalho - LEFT - IST
  */
 public class VideoReader extends Thread {
+
+	private static final Logger LOGGER = Logger.getLogger(VideoReader.class.getName());
 
 	private final com.linkare.rec.impl.utils.EventQueue queue = new com.linkare.rec.impl.utils.EventQueue(
 			new VideoBufferDispatcher(), this.getClass().getSimpleName());
@@ -97,8 +102,8 @@ public class VideoReader extends Thread {
 						try {
 							tracker.waitForAll();
 						} catch (final InterruptedException e) {
-							e.printStackTrace();
-							System.exit(1);
+							LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
+							throw new RuntimeException(e);
 						}
 
 						image.getGraphics().setColor(java.awt.Color.white);
@@ -122,7 +127,7 @@ public class VideoReader extends Thread {
 						try {
 							aDS.sendMovieFrame(image);
 						} catch (final NullPointerException e) {
-							e.printStackTrace();
+							LOGGER.log(Level.SEVERE, "Exception: " + e.getMessage(), e);
 						}
 
 						bufferCounter++;

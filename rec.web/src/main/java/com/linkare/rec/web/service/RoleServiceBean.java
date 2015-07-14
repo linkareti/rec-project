@@ -78,6 +78,8 @@ public class RoleServiceBean extends BusinessServiceBean<Role, Long> implements 
 	return getOrCreateDAO().setUsersMembership(role, mergeUsers(users));
     }
 
+    
+    
     private List<User> mergeUsers(final List<User> users) {
 	final List<User> mergedUsers = new ArrayList<User>();
 	for (User user : users) {

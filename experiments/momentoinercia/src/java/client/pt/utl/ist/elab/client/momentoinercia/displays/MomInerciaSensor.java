@@ -18,6 +18,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.Icon;
 import javax.swing.JMenuBar;
 import javax.swing.JToolBar;
+import javax.swing.SwingUtilities;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
@@ -42,7 +43,7 @@ public class MomInerciaSensor extends javax.swing.JPanel implements
 
 	private int imgHeight = 0;
 	private int imgWidth = 0;
-	private final int y_disk2 = 0;
+//	private final int y_disk2 = 0;
 	private int interval = 50;
 	private int d1Pos = 0;
 	private int d2Pos = 0;
@@ -262,14 +263,14 @@ public class MomInerciaSensor extends javax.swing.JPanel implements
 
 		System.out.println("Drop = " + drop);
 
-		this.header = header;
+//		this.header = header;
 
 		rotate = true;
 		new DiskThread().start();
 	}
 
-	private HardwareAcquisitionConfig header = null;
-	private final boolean acqHeaderInited = false;
+//	private HardwareAcquisitionConfig header = null;
+//	private final boolean acqHeaderInited = false;
 
 	@Override
 	public void newSamples(final NewExpDataEvent evt) {
@@ -312,10 +313,19 @@ public class MomInerciaSensor extends javax.swing.JPanel implements
 
 	public static void main(final String args[]) {
 		final MomInerciaSensor mm = new MomInerciaSensor();
-		final javax.swing.JFrame jf = new javax.swing.JFrame();
-		jf.getContentPane().add(mm);
-		jf.pack();
-		jf.show();
+		SwingUtilities.invokeLater(new Runnable() {
+			/**
+			 * {@inheritDoc}
+			 */
+			@Override
+			public void run() {
+				final javax.swing.JFrame jf = new javax.swing.JFrame();
+				jf.getContentPane().add(mm);
+				jf.pack();
+				jf.setVisible(true);
+			}
+		});
+		
 
 		mm.rotate = true;
 		mm.s();

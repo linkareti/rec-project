@@ -14,16 +14,15 @@ import javax.swing.SwingConstants;
 import javax.swing.text.NumberFormatter;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+public class PVCustomizer extends AbstractCustomizer {
 
 	/**
 	 * 
@@ -559,11 +558,11 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	private void btnOKActionPerformed(final java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
 		final int nsamples = sldNumSamples.getValue() == 0 ? 1 : sldNumSamples.getValue();
-		acqConfig.setTotalSamples(nsamples);
-		acqConfig.getSelectedHardwareParameter("UserPosLow").setParameterValue("" + (sldPos1.getValue() / 1000.F));
-		acqConfig.getSelectedHardwareParameter("UserPosHigh").setParameterValue("" + (sldPos2.getValue() / 1000.F));
-		acqConfig.setSelectedFrequency(new Frequency(sldFreq.getValue(), hardwareInfo.getHardwareFrequencies(0)
-				.getMinimumFrequency().getMultiplier(), hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency()
+		getAcquisitionConfig().setTotalSamples(nsamples);
+		getAcquisitionConfig().getSelectedHardwareParameter("UserPosLow").setParameterValue("" + (sldPos1.getValue() / 1000.F));
+		getAcquisitionConfig().getSelectedHardwareParameter("UserPosHigh").setParameterValue("" + (sldPos2.getValue() / 1000.F));
+		getAcquisitionConfig().setSelectedFrequency(new Frequency(sldFreq.getValue(), getHardwareInfo().getHardwareFrequencies(0)
+				.getMinimumFrequency().getMultiplier(), getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency()
 				.getFrequencyDefType()));
 		fireICustomizerListenerDone();
 	}// GEN-LAST:event_btnOKActionPerformed
@@ -592,78 +591,11 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	private javax.swing.JFormattedTextField tfPos2;
 	// End of variables declaration//GEN-END:variables
 
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	@Override
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	@Override
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	@Override
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
+	
 
 	@Override
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 			final int nsamples = acqConfig.getTotalSamples();
 			sldNumSamples.setValue(nsamples);
@@ -685,19 +617,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		}
 	}
 
-	@Override
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	@Override
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
+	
 
 	@Override
 	public javax.swing.ImageIcon getCustomizerIcon() {
@@ -710,9 +630,5 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		return ReCResourceBundle.findStringOrDefault("pv$rec.exp.pv.customizer.title","pv$rec.exp.pv.customizer.title");
 	}
 
-	@Override
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
-	}
 
 }

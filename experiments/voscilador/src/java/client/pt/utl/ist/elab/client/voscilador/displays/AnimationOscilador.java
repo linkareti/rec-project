@@ -102,7 +102,7 @@ public class AnimationOscilador extends javax.swing.JPanel implements ExpDataDis
 		final javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new AnimationOscilador());
 		dummy.pack();
-		dummy.show();
+		dummy.setVisible(true);
 	}
 
 	// Queremos fazer alguma coisa quandos os dados acabarem?
@@ -132,8 +132,8 @@ public class AnimationOscilador extends javax.swing.JPanel implements ExpDataDis
 
 		final float a = Float.parseFloat(header.getSelectedHardwareParameterValue("a"));
 		final float alturaInicial = Float.parseFloat(header.getSelectedHardwareParameterValue("alturaInicial"));
-		final float g = Float.parseFloat(header.getSelectedHardwareParameterValue("g"));
-		final float frequencia = Float.parseFloat(header.getSelectedHardwareParameterValue("frequencia"));
+		Float.parseFloat(header.getSelectedHardwareParameterValue("g"));
+		Float.parseFloat(header.getSelectedHardwareParameterValue("frequencia"));
 		painel2DLateralFixo.setPreferredMinMax(Math.sqrt(alturaInicial / a) * 1.2, -Math.sqrt(alturaInicial / a) * 1.2,
 				alturaInicial * 1.2, 0);
 		painel2DLateral.setPreferredMinMax(Math.sqrt(alturaInicial / a) * 1.2, -Math.sqrt(alturaInicial / a) * 1.2,

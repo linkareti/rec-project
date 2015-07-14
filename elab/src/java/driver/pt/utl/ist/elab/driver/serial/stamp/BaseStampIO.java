@@ -117,7 +117,7 @@ public class BaseStampIO {
 		public void run() {
 			currentThread = Thread.currentThread();
 			String lineRead = null;
-			StringBuffer lineReadTemp = null;
+			StringBuilder lineReadTemp = null;
 
 			while (!exit) {
 				Thread.yield();
@@ -126,7 +126,7 @@ public class BaseStampIO {
 					synchronized (sPort) {
 						char readChar = 0;
 						lineRead = null;
-						lineReadTemp = new StringBuffer(1024);
+						lineReadTemp = new StringBuilder(1024);
 						while (!exit) {
 							while (!inReader.ready()) {
 								Thread.sleep(0, 500);

@@ -10,16 +10,16 @@ package pt.utl.ist.elab.client.vquantum;
  * @author  nomead
  *
  */
+import java.awt.event.KeyEvent;
+
 import pt.utl.ist.elab.client.virtual.guipack.GUtils;
 import pt.utl.ist.elab.client.virtual.guipack.InteractiveMenu;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 
-public class QuantumCustomizer extends javax.swing.JPanel implements
-		com.linkare.rec.impl.client.customizer.ICustomizer, InteractiveMenu {
+public class QuantumCustomizer  extends AbstractCustomizer implements InteractiveMenu {
 
 	/**
 	 * 
@@ -971,37 +971,37 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 	}// GEN-END:initComponents
 
 	private void tolTextFieldKeyPressed(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_tolTextFieldKeyPressed
-		if (evt.getKeyChar() == evt.VK_ENTER) {
+		if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
 			tolTextFieldFocusLost(null);
 		}
 	}// GEN-LAST:event_tolTextFieldKeyPressed
 
 	private void samplesTextFieldKeyPressed(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_samplesTextFieldKeyPressed
-		if (evt.getKeyChar() == evt.VK_ENTER) {
+		if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
 			samplesTextFieldFocusLost(null);
 		}
 	}// GEN-LAST:event_samplesTextFieldKeyPressed
 
 	private void nTextFieldKeyPressed(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_nTextFieldKeyPressed
-		if (evt.getKeyChar() == evt.VK_ENTER) {
+		if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
 			nTextFieldFocusLost(null);
 		}
 	}// GEN-LAST:event_nTextFieldKeyPressed
 
 	private void deltaXTextFieldKeyPressed(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_deltaXTextFieldKeyPressed
-		if (evt.getKeyChar() == evt.VK_ENTER) {
+		if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
 			deltaXTextFieldFocusLost(null);
 		}
 	}// GEN-LAST:event_deltaXTextFieldKeyPressed
 
 	private void dX0TextFieldKeyPressed(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_dX0TextFieldKeyPressed
-		if (evt.getKeyChar() == evt.VK_ENTER) {
+		if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
 			dX0TextFieldFocusLost(null);
 		}
 	}// GEN-LAST:event_dX0TextFieldKeyPressed
 
 	private void vWidthTextFieldKeyPressed(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_vWidthTextFieldKeyPressed
-		if (evt.getKeyChar() == evt.VK_ENTER) {
+		if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
 			vWidthTextFieldFocusLost(null);
 		}
 	}// GEN-LAST:event_vWidthTextFieldKeyPressed
@@ -1055,7 +1055,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 	}// GEN-LAST:event_vFuncTextFieldFocusLost
 
 	private void vFuncTextFieldKeyPressed(final java.awt.event.KeyEvent evt) {// GEN-FIRST:event_vFuncTextFieldKeyPressed
-		if (evt.getKeyCode() == evt.VK_ENTER) {
+		if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 			try {
 				final String sf = vFuncTextField.getText();
 
@@ -1338,36 +1338,36 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		final short dX0 = (short) dX0Slider.getValue();
 		final byte logTol = (byte) tolSlider.getValue();
 
-		acqConfig.setSelectedFrequency(new Frequency((double) 1, hardwareInfo.getHardwareFrequencies(0)
-				.getMinimumFrequency().getMultiplier(), hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency()
+		getAcquisitionConfig().setSelectedFrequency(new Frequency((double) 1, getHardwareInfo().getHardwareFrequencies(0)
+				.getMinimumFrequency().getMultiplier(), getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency()
 				.getFrequencyDefType()));
-		acqConfig.setTotalSamples(samplesSlider.getValue() + quantum.getNumberOfPotentials() * 2 + 2);
+		getAcquisitionConfig().setTotalSamples(samplesSlider.getValue() + quantum.getNumberOfPotentials() * 2 + 2);
 
-		acqConfig.getSelectedHardwareParameter("x0").setParameterValue("" + x0);
-		acqConfig.getSelectedHardwareParameter("deltaX").setParameterValue("" + deltaX);
-		acqConfig.getSelectedHardwareParameter("log2N").setParameterValue("" + log2N);
-		acqConfig.getSelectedHardwareParameter("dX0").setParameterValue("" + dX0);
-		acqConfig.getSelectedHardwareParameter("xDt").setParameterValue("" + (byte) xDtSlider.getValue());
-		acqConfig.getSelectedHardwareParameter("nDt").setParameterValue("" + (byte) nDtSlider.getValue());
-		acqConfig.getSelectedHardwareParameter("xEnergy").setParameterValue("" + (byte) xESlider.getValue());
-		acqConfig.getSelectedHardwareParameter("nEnergy").setParameterValue("" + (byte) nESlider.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("x0").setParameterValue("" + x0);
+		getAcquisitionConfig().getSelectedHardwareParameter("deltaX").setParameterValue("" + deltaX);
+		getAcquisitionConfig().getSelectedHardwareParameter("log2N").setParameterValue("" + log2N);
+		getAcquisitionConfig().getSelectedHardwareParameter("dX0").setParameterValue("" + dX0);
+		getAcquisitionConfig().getSelectedHardwareParameter("xDt").setParameterValue("" + (byte) xDtSlider.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("nDt").setParameterValue("" + (byte) nDtSlider.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("xEnergy").setParameterValue("" + (byte) xESlider.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("nEnergy").setParameterValue("" + (byte) nESlider.getValue());
 
-		acqConfig.getSelectedHardwareParameter("logTol").setParameterValue("" + logTol);
-		acqConfig.getSelectedHardwareParameter("xTbs").setParameterValue("" + (byte) xTbsSlider.getValue());
-		acqConfig.getSelectedHardwareParameter("nTbs").setParameterValue("" + (byte) nTbsSlider.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("logTol").setParameterValue("" + logTol);
+		getAcquisitionConfig().getSelectedHardwareParameter("xTbs").setParameterValue("" + (byte) xTbsSlider.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("nTbs").setParameterValue("" + (byte) nTbsSlider.getValue());
 
-		acqConfig.getSelectedHardwareParameter("wraparoundKS").setParameterValue(
+		getAcquisitionConfig().getSelectedHardwareParameter("wraparoundKS").setParameterValue(
 				"" + (wraparoundKSCheckBox.isSelected() ? 1 : 0));
-		acqConfig.getSelectedHardwareParameter("wraparoundXS").setParameterValue(
+		getAcquisitionConfig().getSelectedHardwareParameter("wraparoundXS").setParameterValue(
 				"" + (wraparoundXSCheckBox.isSelected() ? 1 : 0));
-		acqConfig.getSelectedHardwareParameter("tunneling").setParameterValue(
+		getAcquisitionConfig().getSelectedHardwareParameter("tunneling").setParameterValue(
 				"" + (tunnelingCheckBox.isSelected() ? 1 : 0));
 
-		acqConfig.getSelectedHardwareParameter("potentials").setParameterValue(quantum.getPotentials());
+		getAcquisitionConfig().getSelectedHardwareParameter("potentials").setParameterValue(quantum.getPotentials());
 
-		for (int i = 0; i < acqConfig.getSelectedHardwareParameters().length; i++) {
-			System.out.println(acqConfig.getSelectedHardwareParameters(i).getParameterName() + " = "
-					+ acqConfig.getSelectedHardwareParameters(i).getParameterValue());
+		for (int i = 0; i < getAcquisitionConfig().getSelectedHardwareParameters().length; i++) {
+			System.out.println(getAcquisitionConfig().getSelectedHardwareParameters(i).getParameterName() + " = "
+					+ getAcquisitionConfig().getSelectedHardwareParameters(i).getParameterValue());
 		}
 
 		fireICustomizerListenerDone();
@@ -1408,83 +1408,17 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		test.addWindowListener(new java.awt.event.WindowAdapter() {
 			public void windowClosing(final java.awt.event.WindowEvent e) {
 				System.exit(0);
-			};
+			}
 		});
 		test.getContentPane().add(new QuantumCustomizer());
 		test.pack();
 		test.setVisible(true);
 	}
 
-	// ****************************REC********************************************/
-
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
+	
 
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 			final double x0 = Double.parseDouble(acqConfig.getSelectedHardwareParameterValue("x0"));
 			deltaXSlider.setValue(Short.parseShort(acqConfig.getSelectedHardwareParameterValue("deltaX")));
@@ -1517,18 +1451,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		}
 	}
 
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
-
+	
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/vquantum/resources/quantum_iconified.PNG"));
@@ -1536,10 +1459,6 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 
 	public String getCustomizerTitle() {
 		return "Quantum Mechanics - Tunnel Effect Configuration Utility";
-	}
-
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

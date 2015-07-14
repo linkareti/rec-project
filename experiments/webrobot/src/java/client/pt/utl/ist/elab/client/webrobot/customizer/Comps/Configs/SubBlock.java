@@ -17,11 +17,14 @@ public class SubBlock extends javax.swing.JDialog {
 	 */
 	private static final long serialVersionUID = -8270936120692672004L;
 
-	/** Creates new form SubBlock 
-	 * @param parent 
-	 * @param modal 
-	 * @param tipo 
-	 * @param connectComp */
+	/**
+	 * Creates new form SubBlock
+	 * 
+	 * @param parent
+	 * @param modal
+	 * @param tipo
+	 * @param connectComp
+	 */
 	public SubBlock(final java.awt.Frame parent, final boolean modal, final int tipo, final boolean connectComp) {
 		super(parent, modal);
 		initComponents();

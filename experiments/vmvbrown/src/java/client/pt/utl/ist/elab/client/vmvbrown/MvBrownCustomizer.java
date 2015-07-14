@@ -13,11 +13,10 @@ package pt.utl.ist.elab.client.vmvbrown;
 import pt.utl.ist.elab.client.virtual.guipack.GUtils;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.AbstractCustomizer;
 
-public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+public class MvBrownCustomizer extends AbstractCustomizer {
 
 	/**
 	 * 
@@ -1937,12 +1936,12 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 	}// GEN-LAST:event_cancelButtonActionPerformed
 
 	private void okButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
-		acqConfig.setSelectedFrequency(new Frequency((double) tbsSlider.getValue(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
+		getAcquisitionConfig().setSelectedFrequency(new Frequency((double) tbsSlider.getValue(), getHardwareInfo()
+				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), getHardwareInfo()
 				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
-		acqConfig.setTotalSamples(samplesSlider.getValue());
+		getAcquisitionConfig().setTotalSamples(samplesSlider.getValue());
 
-		acqConfig.getSelectedHardwareParameter("langevin").setParameterValue(
+		getAcquisitionConfig().getSelectedHardwareParameter("langevin").setParameterValue(
 				"" + (langevinRadioButton.isSelected() ? 1 : 0));
 
 		if (langevinRadioButton.isSelected()) {
@@ -1959,12 +1958,12 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 				vz = vzCheckBox.isSelected();
 			}
 
-			acqConfig.getSelectedHardwareParameter("velModulus").setParameterValue("" + (velModulus ? 1 : 0));
-			acqConfig.getSelectedHardwareParameter("velQuad").setParameterValue(
+			getAcquisitionConfig().getSelectedHardwareParameter("velModulus").setParameterValue("" + (velModulus ? 1 : 0));
+			getAcquisitionConfig().getSelectedHardwareParameter("velQuad").setParameterValue(
 					"" + (velQuadCheckBox.isSelected() ? 1 : 0));
-			acqConfig.getSelectedHardwareParameter("vx").setParameterValue("" + (vx ? 1 : 0));
-			acqConfig.getSelectedHardwareParameter("vy").setParameterValue("" + (vy ? 1 : 0));
-			acqConfig.getSelectedHardwareParameter("vz").setParameterValue("" + (vz ? 1 : 0));
+			getAcquisitionConfig().getSelectedHardwareParameter("vx").setParameterValue("" + (vx ? 1 : 0));
+			getAcquisitionConfig().getSelectedHardwareParameter("vy").setParameterValue("" + (vy ? 1 : 0));
+			getAcquisitionConfig().getSelectedHardwareParameter("vz").setParameterValue("" + (vz ? 1 : 0));
 
 			final double mass = (double) massSlider.getValue() / 100d;
 			final double radius = (double) radiusSlider.getValue() / 100d;
@@ -1975,24 +1974,24 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 			final double dP = (double) dPSlider.getValue() / 100d;
 			final double vis = (double) visSlider.getValue() / 1000d;
 
-			acqConfig.getSelectedHardwareParameter("mass").setParameterValue("" + (float) mass);
-			acqConfig.getSelectedHardwareParameter("radius").setParameterValue("" + (float) radius);
+			getAcquisitionConfig().getSelectedHardwareParameter("mass").setParameterValue("" + (float) mass);
+			getAcquisitionConfig().getSelectedHardwareParameter("radius").setParameterValue("" + (float) radius);
 
-			acqConfig.getSelectedHardwareParameter("velMod").setParameterValue("" + (float) velMod);
-			acqConfig.getSelectedHardwareParameter("velTheta").setParameterValue("" + (float) velTheta);
+			getAcquisitionConfig().getSelectedHardwareParameter("velMod").setParameterValue("" + (float) velMod);
+			getAcquisitionConfig().getSelectedHardwareParameter("velTheta").setParameterValue("" + (float) velTheta);
 			if (dim3RadioButton.isSelected()) {
 				final double velPhi = Math.toRadians(velPhiSlider.getValue());
-				acqConfig.getSelectedHardwareParameter("velPhi").setParameterValue("" + (float) velPhi);
+				getAcquisitionConfig().getSelectedHardwareParameter("velPhi").setParameterValue("" + (float) velPhi);
 			}
-			acqConfig.getSelectedHardwareParameter("freq").setParameterValue("" + (float) freq);
-			acqConfig.getSelectedHardwareParameter("dP").setParameterValue("" + (float) dP);
-			acqConfig.getSelectedHardwareParameter("vis").setParameterValue("" + (float) vis);
+			getAcquisitionConfig().getSelectedHardwareParameter("freq").setParameterValue("" + (float) freq);
+			getAcquisitionConfig().getSelectedHardwareParameter("dP").setParameterValue("" + (float) dP);
+			getAcquisitionConfig().getSelectedHardwareParameter("vis").setParameterValue("" + (float) vis);
 		} else {
 			final double d = (double) dSlider.getValue() / 10d;
-			acqConfig.getSelectedHardwareParameter("d").setParameterValue("" + (float) d);
+			getAcquisitionConfig().getSelectedHardwareParameter("d").setParameterValue("" + (float) d);
 		}
 
-		acqConfig.getSelectedHardwareParameter("radiusAnima").setParameterValue(
+		getAcquisitionConfig().getSelectedHardwareParameter("radiusAnima").setParameterValue(
 				"" + (byte) radiusAnimaSlider.getValue());
 
 		boolean posModulus = false;
@@ -2007,81 +2006,81 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 			z = zCheckBox.isSelected();
 		}
 
-		acqConfig.getSelectedHardwareParameter("posModulus").setParameterValue("" + (posModulus ? 1 : 0));
-		acqConfig.getSelectedHardwareParameter("posQuad")
+		getAcquisitionConfig().getSelectedHardwareParameter("posModulus").setParameterValue("" + (posModulus ? 1 : 0));
+		getAcquisitionConfig().getSelectedHardwareParameter("posQuad")
 				.setParameterValue("" + (posQuadCheckBox.isSelected() ? 1 : 0));
-		acqConfig.getSelectedHardwareParameter("x").setParameterValue("" + (x ? 1 : 0));
-		acqConfig.getSelectedHardwareParameter("y").setParameterValue("" + (y ? 1 : 0));
-		acqConfig.getSelectedHardwareParameter("z").setParameterValue("" + (z ? 1 : 0));
+		getAcquisitionConfig().getSelectedHardwareParameter("x").setParameterValue("" + (x ? 1 : 0));
+		getAcquisitionConfig().getSelectedHardwareParameter("y").setParameterValue("" + (y ? 1 : 0));
+		getAcquisitionConfig().getSelectedHardwareParameter("z").setParameterValue("" + (z ? 1 : 0));
 
-		acqConfig.getSelectedHardwareParameter("nPart").setParameterValue("" + nPartSlider.getValue());
+		getAcquisitionConfig().getSelectedHardwareParameter("nPart").setParameterValue("" + nPartSlider.getValue());
 
 		if (dim1RadioButton.isSelected()) {
-			acqConfig.getSelectedHardwareParameter("dim").setParameterValue("" + (byte) 1);
+			getAcquisitionConfig().getSelectedHardwareParameter("dim").setParameterValue("" + (byte) 1);
 		} else if (dim2RadioButton.isSelected()) {
-			acqConfig.getSelectedHardwareParameter("dim").setParameterValue("" + (byte) 2);
+			getAcquisitionConfig().getSelectedHardwareParameter("dim").setParameterValue("" + (byte) 2);
 		} else {
-			acqConfig.getSelectedHardwareParameter("dim").setParameterValue("" + (byte) 3);
+			getAcquisitionConfig().getSelectedHardwareParameter("dim").setParameterValue("" + (byte) 3);
 		}
 
 		if (graph1ActCheckBox.isSelected()) {
 			final String graph1 = ((String) graph1XComboBox.getSelectedItem()).toString().concat(
 					" vs " + ((String) graph1YComboBox.getSelectedItem()).toString());
-			acqConfig.getSelectedHardwareParameter("graph1").setParameterValue("" + graph1);
+			getAcquisitionConfig().getSelectedHardwareParameter("graph1").setParameterValue("" + graph1);
 		} else {
-			acqConfig.getSelectedHardwareParameter("graph1").setParameterValue("");
+			getAcquisitionConfig().getSelectedHardwareParameter("graph1").setParameterValue("");
 		}
 
 		if (graph2ActCheckBox.isSelected()) {
 			final String graph2 = ((String) graph2XComboBox.getSelectedItem()).toString().concat(
 					" vs " + ((String) graph2YComboBox.getSelectedItem()).toString());
-			acqConfig.getSelectedHardwareParameter("graph2").setParameterValue("" + graph2);
+			getAcquisitionConfig().getSelectedHardwareParameter("graph2").setParameterValue("" + graph2);
 		} else {
-			acqConfig.getSelectedHardwareParameter("graph2").setParameterValue("");
+			getAcquisitionConfig().getSelectedHardwareParameter("graph2").setParameterValue("");
 		}
 
 		if (graph3ActCheckBox.isSelected()) {
 			final String graph3 = ((String) graph3XComboBox.getSelectedItem()).toString().concat(
 					" vs " + ((String) graph3YComboBox.getSelectedItem()).toString());
-			acqConfig.getSelectedHardwareParameter("graph3").setParameterValue("" + graph3);
+			getAcquisitionConfig().getSelectedHardwareParameter("graph3").setParameterValue("" + graph3);
 		} else {
-			acqConfig.getSelectedHardwareParameter("graph3").setParameterValue("");
+			getAcquisitionConfig().getSelectedHardwareParameter("graph3").setParameterValue("");
 		}
 
 		if (graph4ActCheckBox.isSelected()) {
 			final String graph4 = ((String) graph4XComboBox.getSelectedItem()).toString().concat(
 					" vs " + ((String) graph4YComboBox.getSelectedItem()).toString());
-			acqConfig.getSelectedHardwareParameter("graph4").setParameterValue("" + graph4);
+			getAcquisitionConfig().getSelectedHardwareParameter("graph4").setParameterValue("" + graph4);
 		} else {
-			acqConfig.getSelectedHardwareParameter("graph4").setParameterValue("");
+			getAcquisitionConfig().getSelectedHardwareParameter("graph4").setParameterValue("");
 		}
 
-		acqConfig.getSelectedHardwareParameter("graph1Med").setParameterValue(
+		getAcquisitionConfig().getSelectedHardwareParameter("graph1Med").setParameterValue(
 				"" + (graph1MedCheckBox.isSelected() ? 1 : 0));
-		acqConfig.getSelectedHardwareParameter("graph2Med").setParameterValue(
+		getAcquisitionConfig().getSelectedHardwareParameter("graph2Med").setParameterValue(
 				"" + (graph2MedCheckBox.isSelected() ? 1 : 0));
-		acqConfig.getSelectedHardwareParameter("graph3Med").setParameterValue(
+		getAcquisitionConfig().getSelectedHardwareParameter("graph3Med").setParameterValue(
 				"" + (graph3MedCheckBox.isSelected() ? 1 : 0));
-		acqConfig.getSelectedHardwareParameter("graph4Med").setParameterValue(
+		getAcquisitionConfig().getSelectedHardwareParameter("graph4Med").setParameterValue(
 				"" + (graph4MedCheckBox.isSelected() ? 1 : 0));
 
 		if (resAdaptedCheckBox.isSelected()) {
-			acqConfig.getSelectedHardwareParameter("w").setParameterValue("" + getWidth());
-			acqConfig.getSelectedHardwareParameter("h").setParameterValue("" + getHeight());
+			getAcquisitionConfig().getSelectedHardwareParameter("w").setParameterValue("" + getWidth());
+			getAcquisitionConfig().getSelectedHardwareParameter("h").setParameterValue("" + getHeight());
 		} else {
-			acqConfig.getSelectedHardwareParameter("w").setParameterValue("" + (short) widthSlider.getValue());
-			acqConfig.getSelectedHardwareParameter("h").setParameterValue("" + (short) heightSlider.getValue());
+			getAcquisitionConfig().getSelectedHardwareParameter("w").setParameterValue("" + (short) widthSlider.getValue());
+			getAcquisitionConfig().getSelectedHardwareParameter("h").setParameterValue("" + (short) heightSlider.getValue());
 
 		}
 
-		acqConfig.getSelectedHardwareParameter("conPts").setParameterValue(
+		getAcquisitionConfig().getSelectedHardwareParameter("conPts").setParameterValue(
 				"" + (connectedPointsCheckBox.isSelected() ? 1 : 0));
-		acqConfig.getSelectedHardwareParameter("animaAct").setParameterValue(
+		getAcquisitionConfig().getSelectedHardwareParameter("animaAct").setParameterValue(
 				"" + (animaActCheckBox.isSelected() ? 1 : 0));
 
-		for (int i = 0; i < acqConfig.getSelectedHardwareParameters().length; i++) {
-			System.out.println(acqConfig.getSelectedHardwareParameters(i).getParameterName() + " = "
-					+ acqConfig.getSelectedHardwareParameters(i).getParameterValue());
+		for (int i = 0; i < getAcquisitionConfig().getSelectedHardwareParameters().length; i++) {
+			System.out.println(getAcquisitionConfig().getSelectedHardwareParameters(i).getParameterName() + " = "
+					+ getAcquisitionConfig().getSelectedHardwareParameters(i).getParameterValue());
 		}
 
 		fireICustomizerListenerDone();
@@ -2164,7 +2163,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		test.addWindowListener(new java.awt.event.WindowAdapter() {
 			public void windowClosing(final java.awt.event.WindowEvent e) {
 				System.exit(0);
-			};
+			}
 		});
 		test.getContentPane().add(new MvBrownCustomizer());
 		test.pack();
@@ -2173,74 +2172,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 
 	// ****************************REC********************************************/
 
-	/** Utility field used by event firing mechanism. */
-	private javax.swing.event.EventListenerList listenerList = null;
-
-	/**
-	 * Registers ICustomizerListener to receive events.
-	 * 
-	 * @param listener The listener to register.
-	 */
-	public synchronized void addICustomizerListener(final ICustomizerListener listener) {
-		if (listenerList == null) {
-			listenerList = new javax.swing.event.EventListenerList();
-		}
-		listenerList.add(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Removes ICustomizerListener from the list of listeners.
-	 * 
-	 * @param listener The listener to remove.
-	 */
-	public synchronized void removeICustomizerListener(final ICustomizerListener listener) {
-		listenerList.remove(ICustomizerListener.class, listener);
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerCanceled() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-				((ICustomizerListener) listeners[i + 1]).canceled();
-			}
-		}
-	}
-
-	/**
-	 * Notifies all registered listeners about the event.
-	 * 
-	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-	 */
-	private void fireICustomizerListenerDone() {
-		if (listenerList == null) {
-			return;
-		}
-		final Object[] listeners = listenerList.getListenerList();
-		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ICustomizerListener.class) {
-
-				((ICustomizerListener) listeners[i + 1]).done();
-			}
-		}
-	}
-
-	private HardwareInfo hardwareInfo = null;
-	private HardwareAcquisitionConfig acqConfig = null;
-
-	public HardwareAcquisitionConfig getAcquisitionConfig() {
-		return acqConfig;
-	}
+	
 
 	public void setHardwareAcquisitionConfig(final HardwareAcquisitionConfig acqConfig) {
-		this.acqConfig = acqConfig;
+		super.setHardwareAcquisitionConfig(acqConfig);
 		if (acqConfig != null) {
 			// samplesSlider.setValue(acqConfig.getTotalSamples());
 			// tbsSlider.setValue((int)
@@ -2383,17 +2318,6 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		}
 	}
 
-	public void setHardwareInfo(final HardwareInfo hardwareInfo) {
-		this.hardwareInfo = hardwareInfo;
-	}
-
-	protected HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
-
-	public javax.swing.JComponent getCustomizerComponent() {
-		return this;
-	}
 
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
@@ -2404,9 +2328,6 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		return "Brownian Motion Configuration Utility";
 	}
 
-	public javax.swing.JMenuBar getMenuBar() {
-		return null;
-	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JCheckBox animaActCheckBox;

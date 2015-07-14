@@ -1,57 +1,11 @@
-<apparatus toolTipBundleKey="pinhole$rec.exp.tip.pinhole"
-	location="ELAB_PIN_HOLE_DSPIC_V1.0" iconLocationBundleKey="pinhole$rec.exp.icon.pinhole"
-	headerDisplayClassLocationBundleKey="" displayStringBundleKey="pinhole$rec.exp.title.pinhole"
-	descriptionStringBundleKey="pinhole$rec.exp.description.pinhole"
-	displayFactoryClassLocationBundleKey=""
-	desktopLocationBundleKey="pinhole$rec.exp.background.pinhole"
-	dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="pinhole$rec.exp.customizer.pinhole"
-	visible="true" selected="true" order="0" enabled="false" connected="false">
-	<localizationBundle name="pinhole"
-		location="recresource:///pt/utl/ist/elab/client/pinhole/resources/messages" />
-	<defaultAcquisitionConfig toolTipBundleKey="pinhole$rec.exp.dftcfg.pinhole.tip.1"
-		iconLocationBundleKey="ReCUI$rec.ui.icon.customize"
-		displayStringBundleKey="pinhole$rec.exp.dftcfg.pinhole.title.1"
-		classLocationBundleKey="pinhole$rec.exp.dftcfg.pinhole.loc.1" visible="true"
-		selected="true" order="0" enabled="false" connected="false" />
-	<mediaConfig videoLocation="pinhole$rec.exp.url.pinhole.video"
-		canSave="true" offlinePlay="true" />
-	<!--display toolTipBundleKey="pinhole$rec.exp.display.pinhole.tip.sensor" 
-		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor" 
-		displayStringBundleKey="pinhole$rec.exp.display.pinhole.title.sensor" classLocationBundleKey="pinhole$rec.exp.display.pinhole.loc.sensor" 
-		visible="true" selected="true" order="0" enabled="false" connected="false" 
-		/ -->
-	<display toolTipBundleKey="pinhole$rec.exp.display.pinhole.tip.1"
-		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table"
-		displayStringBundleKey="pinhole$rec.exp.display.pinhole.title.1"
-		classLocationBundleKey="pinhole$rec.exp.display.pinhole.loc.1"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
-	<!-- display toolTipBundleKey="pinhole$rec.exp.display.pinhole.tip.2" offlineCapable="false" 
-		iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="pinhole$rec.exp.display.pinhole.title.2" 
-		classLocationBundleKey="pinhole$rec.exp.display.pinhole.loc.2" visible="true" 
-		selected="true" order="0" enabled="false" connected="false" /> <display toolTipBundleKey="pinhole$rec.exp.display.pinhole.tip.3" 
-		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" 
-		displayStringBundleKey="pinhole$rec.exp.display.pinhole.title.3" classLocationBundleKey="pinhole$rec.exp.display.pinhole.loc.3" 
-		visible="true" selected="true" order="0" enabled="false" connected="false" 
-		/> <display toolTipBundleKey="pinhole$rec.exp.display.pinhole.tip.4" offlineCapable="false" 
-		iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="pinhole$rec.exp.display.pinhole.title.4" 
-		classLocationBundleKey="pinhole$rec.exp.display.pinhole.loc.4" visible="true" 
-		selected="true" order="0" enabled="false" connected="false" /> <display toolTipBundleKey="pinhole$rec.exp.display.pinhole.tip.5" 
-		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" 
-		displayStringBundleKey="pinhole$rec.exp.display.pinhole.title.5" classLocationBundleKey="pinhole$rec.exp.display.pinhole.loc.5" 
-		visible="true" selected="true" order="0" enabled="false" connected="false" 
-		/ -->
-	<display toolTipBundleKey="pinhole$rec.exp.display.pinhole.tip.5"
-		offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart"
-		displayStringBundleKey="pinhole$rec.exp.display.pinhole.title.5"
-		classLocationBundleKey="pinhole$rec.exp.display.pinhole.loc.5"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
-	<webResource toolTipLocationBundleKey="" internalBrowser="false"
-		iconLocationBundleKey="" visible="true" selected="true" order="0"
-		enabled="false" connected="false" />
-	<webResource toolTipLocationBundleKey="" internalBrowser="false"
-		iconLocationBundleKey="" visible="true" selected="true" order="0"
-		enabled="false" connected="false" />
-	<webResource toolTipLocationBundleKey="" internalBrowser="false"
-		iconLocationBundleKey="" visible="true" selected="true" order="0"
-		enabled="false" connected="false" />
+
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="pinhole$rec.exp.tip.pinhole" location="ELAB_PIN_HOLE_DSPIC_V1.0" iconLocationBundleKey="pinhole$rec.exp.icon.pinhole" headerDisplayClassLocationBundleKey="" displayStringBundleKey="pinhole$rec.exp.title.pinhole" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="pinhole$rec.exp.background.pinhole" descriptionStringBundleKey="pinhole$rec.exp.description.pinhole" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="pinhole$rec.exp.customizer.pinhole" order="0">
+    <defaultAcquisitionConfig toolTipBundleKey="pinhole$rec.exp.dftcfg.pinhole.tip.1" iconLocationBundleKey="ReCUI$rec.ui.icon.customize" displayStringBundleKey="pinhole$rec.exp.dftcfg.pinhole.title.1" classLocationBundleKey="pinhole$rec.exp.dftcfg.pinhole.loc.1" order="0"/>
+    <display toolTipBundleKey="pinhole$rec.exp.display.pinhole.tip.1" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="pinhole$rec.exp.display.pinhole.title.1" classLocationBundleKey="pinhole$rec.exp.display.pinhole.loc.1" order="0"/>
+    <display toolTipBundleKey="pinhole$rec.exp.display.pinhole.tip.5" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="pinhole$rec.exp.display.pinhole.title.5" classLocationBundleKey="pinhole$rec.exp.display.pinhole.loc.5" order="0"/>
+    <localizationBundle name="pinhole" location="recresource:///pt/utl/ist/elab/client/pinhole/resources/messages"/>
+    <mediaConfig videoLocation="pinhole$rec.exp.url.pinhole.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+    <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+    <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" order="0"/>
 </apparatus>

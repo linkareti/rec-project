@@ -10,6 +10,7 @@ import com.linkare.rec.data.config.ChannelAcquisitionConfig;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.config.ParameterConfig;
 import com.linkare.rec.data.metadata.Scale;
+import com.linkare.rec.impl.config.ReCSystemProperty;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
@@ -98,7 +99,7 @@ public class DataConfigInternationalization {
 		}
 
 		final StringBuilder strBufOut = new StringBuilder();
-		final String linesep = System.getProperty("line.separator");
+		final String linesep = ReCSystemProperty.LINE_SEPARATOR.getValue();
 
 		if (config.getChannelName() != null) {
 			strBufOut.append("\t" + DataConfigInternationalization.CHANNEL_NAME)
@@ -145,7 +146,7 @@ public class DataConfigInternationalization {
 		}
 
 		final StringBuilder strBufOut = new StringBuilder();
-		final String linesep = System.getProperty("line.separator");
+		final String linesep = ReCSystemProperty.LINE_SEPARATOR.getValue();
 
 		if (config.getFamiliarName() != null) {
 			strBufOut.append(DataConfigInternationalization.APPARATUS).append(config.getFamiliarName()).append(linesep);
