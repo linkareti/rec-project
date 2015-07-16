@@ -10,6 +10,7 @@
 		Compile, package, sign and run the project ReC and each of the experiments.
 	</description>
 
+	<property environment="env"/>
 	<property file="build.properties" description="general properties for building project" />
 
 	<import file="generaldefinitions.xml" />
