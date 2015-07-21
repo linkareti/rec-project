@@ -46,7 +46,7 @@ basic.experiment.list=vtiro
 #the main targets will compile/build/distribute all
 #the experiments defined in the experiment.list
 ##local build key/value
-experiment.name=vtiro
+#experiment.name=vtiro
 
 #In case you wish to run a specific multicastcontroller
 #please define the following property to enable
@@ -54,7 +54,7 @@ experiment.name=vtiro
 #the main targets will compile/build/distribute all
 #the labs  defined in the lab.list
 ##local build key/value
-lab.name=basic
+#lab.name=basic
 
 
 ###DEPLOYMENT####
