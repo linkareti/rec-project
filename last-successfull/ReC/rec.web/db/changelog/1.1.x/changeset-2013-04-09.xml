@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+	<changeSet id="2013-04-09-RESERVATION_ID_DROP" author="jpereira">
+		<comment>No need to persist reservation id as it is only needed by primefaces on the user interface</comment>
+		<dropUniqueConstraint tableName="RESERVATION"
+			uniqueColumns="RESERVATION_ID" constraintName="RESERVATION_ID" />
+		<dropColumn tableName="RESERVATION" columnName="RESERVATION_ID" />
+	</changeSet>
+</databaseChangeLog>
