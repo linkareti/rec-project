@@ -1,0 +1,295 @@
+'{$STAMP BS2}
+
+'Nota que existe um protocolo nas mensagens:
+' PC -> STAMP - minúsculas
+' STAMP -> PC - maiúsculas
+
+'******* DEFAULT VARIABLES ********
+
+speedCon      CON     16468         '16572/4800 16468/9600 16780/2400 17197/1200
+spaceByte   VAR   Byte         'Byte auxiliar (Space)
+TX      CON   16
+RX      CON   16
+CTS      CON   3
+
+
+'******* END DEFAULT VARIABLES *******
+
+
+'******* SPECIFIC VARIABLES *******
+Pos   DATA(2)         'ultima posicao do step motor
+i   VAR   Word      'contador auxiliar
+j   VAR   Word      'contador auxiliar
+x   VAR   Word      'posicao a atingir (de 0 a 900 mm) input 0 a 900 em mm, step 10 mm erro 1mm
+p   VAR   Word      'posicao absoluta (em voltas step motor)
+xini   VAR   Word      'posicao inicial em milimetros
+xfin   VAR   Word      'posicao final em milimetros
+dx   VAR   Word      'intervalo entre pontos   (milimetros)
+npontos   VAR   Word      'numero de pontos a adquirir (<500, e npontos<(45*(ABS(xfin-xini))
+press0   VAR   Word      'valor lido pelo ADC1 no canal 0 (0 -> 2048 <=> 0 -> 10KPa, erro 20 Pa)
+press1   VAR   Word      'valor lido pelo ADC1 no canal 1 (0 -> 2048 <=> 0 -> 10KPa, erro 20 Pa)
+press2   VAR   Word      'valor lido pelo ADC1 no canal 2 (0 -> 2048 <=> 0 -> 10KPa, erro 20 Pa)
+press3   VAR   Word      'valor lido pelo ADC1 no canal 3 (0 -> 2048 <=> 0 -> 10KPa, erro 20 Pa)
+config    VAR   Nib      'nibble de configuração enviado aos ADCs
+calib   VAR   Bit      'flag utilizada pra calibrar (=1 calibra, 0 n calibra)
+invert   VAR   Bit      'Desce ou sobe consoante xfin>xini
+noinvert VAR    Bit      ' Se 1 desce se 0 sobe
+
+convx    CON   45      'Converte posicao em steps   *251/250
+CLK   CON   14      'linha de clock
+CS1   CON   13      'chip select ADC1
+CS2   CON   12      'chip select ADC2
+dataio   CON   15
+fimcurso  CON   2
+'******* END SPECIFIC VARIABLES *******
+
+
+'********************************************
+'Configuração inicial
+
+InitConfig:   'rotina de inicializacao
+   READ Pos,p
+
+   DIRC=%1111
+   OUTC=%0000
+
+   INPUT 2
+
+   LOW 4
+   i=0
+
+
+'********************************************
+'Reset - retorna à base...
+Reset:
+   GOSUB FlashLight 'Pisca as luzinhas em cada reset... assim sabemos que lá está...
+   'goto MainWait
+
+loop_teste:
+
+    PAUSE 100
+
+   'Calibracao inicial
+   GOSUB Calibration
+
+
+'********************************************
+'Não foi configurado
+Not_Configured:
+   LOW 4            'desliga as luzes
+   SEROUT TX,speedCon,["CONFIG_START_NOT_DONE",CR]
+
+
+'********************************************
+'Aguarda um ConfigStart pacientemente, enquanto vai informando quem é!
+MainWait:
+   HIGH CTS
+   SEROUT TX,speedCon,["ELAB_SCUBA_STAMP_V02",CR]            ' Identifica-se
+   SERIN RX,speedCon,3000,Not_Configured,[WAIT("cfg "),DEC3 xini,spaceByte,DEC3 xfin,spaceByte,DEC3 npontos,spaceByte,BIN1 calib]
+'   low CTS ' does not low CTS?
+'********************************************
+'Ok, configurado! Get Ready...
+Configured:
+
+   SEROUT TX,speedCon,[CR,"CONFIG_START_ACCEPTED",CR]   'Aceitou a configuracao
+   xini=xini/10
+   xfin=xfin/10
+   PAUSE 200
+   HIGH 4               'liga as luzes
+
+   IF (calib = 0) THEN no_calib           'Faz a calibração se for pedida
+   'foi pedida calibracao
+   GOSUB Calibration
+
+   'nao foi pedida a calibracao
+   no_calib:
+   'x = convx*xini
+
+   x = xini
+
+   GOSUB posi
+   invert=0
+   noinvert=1
+   IF xfin>xini THEN desce
+   invert=1   'sobe
+   noinvert=0
+desce:
+   dx = (convx*(ABS(xfin-xini)))/npontos
+   i=0
+   GOTO AcqLoopEnter
+
+
+
+'********************************************
+'Set... Go!
+
+AcqLoopEnter:
+   SEROUT TX,speedCon,["STARTED",CR]      ' Avisa que vai arrancar a rotina de aquisicao
+
+AcqLoop:
+
+   x=((convx*xini) + ((i*dx)*noinvert)-((i*dx)*invert))            'npontos < (1450/xini/2)
+   'debug "status: ",dec i," ",dec (10*x)/convx," ",dec dx," ",dec1 noinvert,cr,$A
+   GOSUB posi
+   PAUSE 400
+
+   config = %1011
+   LOW CS1                     ' Activate the ADC.
+   SHIFTOUT dataio,CLK,LSBFIRST,[config\4]         ' Send config bits.
+   SHIFTIN dataio,CLK,MSBPOST,[press0\12]          ' Get data bits.                  ' Deactivate the ADC.
+   HIGH CS1
+
+   config = %1111                  ' Mede a pressão
+   LOW CS1                   ' Activate the ADC.
+   SHIFTOUT dataio,CLK,LSBFIRST,[config\4]         ' Send config bits.
+   SHIFTIN dataio,CLK,MSBPOST,[press1\12]          ' Get data bits.
+   HIGH CS1
+
+   config = %1011
+   LOW CS2                   ' Activate the ADC.
+   SHIFTOUT dataio,CLK,LSBFIRST,[config\4]         ' Send config bits.
+   SHIFTIN dataio,CLK,MSBPOST,[press2\12]          ' Get data bits.                  ' Deactivate the ADC.
+   HIGH CS2
+
+   config = %1111                  ' Mede a pressão
+   LOW CS2                   ' Activate the ADC.
+   SHIFTOUT dataio,CLK,LSBFIRST,[config\4]         ' Send config bits.
+   SHIFTIN dataio,CLK,MSBPOST,[press3\12]          ' Get data bits.
+   HIGH CS2
+
+
+'   press0=0
+'   press1=1024
+'   press2=1500
+'   press3=2047
+
+   SEROUT TX,speedCon,["PRESSOES ",DEC4 press0," ",DEC4 press1," ",DEC4 press2," ",DEC4 press3," ",DEC3 (10*x)/convx,CR]
+   GOTO Continue
+
+Continue:
+   i=i+1
+   IF i > npontos THEN StopIt
+   GOTO AcqLoop
+
+'********************************************
+'Stop It!
+StopIt:
+   GOSUB Calibration     ' Para o tubo estar sempre por cima do nível do líquido.
+   GOTO MainWait
+
+
+'*********************************************
+' Função de calibração dos tubos - Força tudo a zero
+Calibration:
+   'debug "A calibrar...",cr,$A
+   x = 0
+   GOSUB posi
+
+   'testa se activou o fim de curso
+   IF IN2 = 0 THEN fim_calib
+
+Calib_loop:
+                   'força todos os tubos para a posição zero
+      OUTC=%0001
+      PAUSE 2
+      OUTC=%0011
+      PAUSE 2
+      OUTC=%0010
+      PAUSE 2
+      OUTC=%0110
+      PAUSE 2
+      OUTC=%0100
+      PAUSE 2
+      OUTC=%1100
+      PAUSE 2
+      OUTC=%1000
+      PAUSE 2
+      OUTC=%1001
+      PAUSE 2
+
+    IF IN2 = 1 THEN Calib_loop
+
+fim_calib:
+
+   p=0
+   x=50
+   GOSUB posi
+   'debug "fim de calibracao", cr, $A
+   PAUSE 1000
+   P = 0
+   WRITE pos,p
+   OUTC = %0000
+
+RETURN
+
+'***********************************************
+' Procedimento posi
+'***************************************************
+'*   coloca os sensores na altura desejada      *
+'***************************************************
+posi:
+   IF x<p THEN go_up
+
+   go_down:
+      FOR j=1 TO x-p
+         OUTC=%0001
+         PAUSE 2
+         OUTC=%1001
+         PAUSE 2
+         OUTC=%1000
+         PAUSE 2
+         OUTC=%1100
+         PAUSE 2
+         OUTC=%0100
+         PAUSE 2
+         OUTC=%0110
+         PAUSE 2
+         OUTC=%0010
+         PAUSE 2
+         OUTC=%0011
+         PAUSE 2
+      NEXT
+      p=x
+      WRITE pos,p
+      OUTC = %0000
+   RETURN
+
+   go_up:
+      FOR j=1 TO p-x
+         OUTC=%0001
+         PAUSE 2
+         OUTC=%0011
+         PAUSE 2
+         OUTC=%0010
+         PAUSE 2
+         OUTC=%0110
+         PAUSE 2
+         OUTC=%0100
+         PAUSE 2
+         OUTC=%1100
+         PAUSE 2
+         OUTC=%1000
+         PAUSE 2
+         OUTC=%1001
+         PAUSE 2
+      NEXT
+      p=x
+      WRITE Pos,p
+      OUTC = %0000
+   RETURN
+
+RETURN
+
+'********************************************
+' Função faz piscar 4 vezes o led vermelho para debug
+FlashLight:
+   LOW 7
+   FOR i=0 TO 4
+      OUT7 = 0
+      PAUSE 100
+      OUT7 = 1
+      PAUSE 100
+   NEXT
+   OUT7 = 0
+RETURN
+'********************************************
