@@ -1,0 +1,201 @@
+'{$STAMP BS2}
+
+'I/O	CorCabo	StepMotor
+'P15	Verde		4 - Vermelho
+'P14	Amarelo	3 - Azul
+'P13	Branco	2 - Branco
+'P12	Castanho	1 - Laranja
+'P11	Roxo		"C" - Geiger, pulsos contagem
+'P10	Azul		Servo - Altura
+'P8	Preto		SW - Limitador posicao, deteccao de zero absoluto do material
+'Ordem controlo: "relay ZZ X Y", em que ZZ altura em cm, X material [0..8], Y = 0 contagem - Y=1 histograma
+'0 - Madeira, 1 - Cortica, 2 - tijolo, 3 - Cu .2mm, 4 - Cu .4mm, 5 - Cu 0.8mm; 6- Cu 1.6,7- Cu 3.2
+'8 - Ar (aberto), 9 - Chumbo (fechado)
+
+
+
+
+Pos	data(2)	'ultima posicao do step motor
+altura	var	word	'Altura [0..100]mm step=10 
+contagem	var	word	'Contagens do Geiger
+aux	var	byte
+relay	var	byte
+i	var	word	'contador auxiliar
+x	var	word	'posicao a atingir - diferencial (material)
+p	var	word	'posicao absoluta
+mat	var	byte	'material escolhido (posicao de 0 a 8)
+sk	var	byte	'byte auxiliar (skip)
+mode	var	byte	'mode=2 idle, mode=1 Tempo entre eventos, mode=0 contagens
+relaydone var 	bit	'0=no relay specified, 1=relay changed 
+j 	var 	word
+samplecount var byte
+
+factor	con 	15	'factor de conversao posicao material/xx
+fact2	con 	83	'factor de conversao altitude/pulso
+CTS	con	3
+TX	con	16
+RX	con	16
+speed   con     16468	'16572/4800 16468/9600 16780/2400 17197/1200
+
+x=0
+
+low 7
+low CTS
+low 10
+pulsout 10,1250-(fact2*Altura)
+'pause 20
+outD=%0000
+dirD=%1111
+dirb=%1111
+read pos,p
+x=p
+mode=2
+input 10
+relaydone=0
+samplecount=1
+mat=p/factor
+
+'reset:
+'if !11=0 then go_down
+'if !11=0 then reset
+
+gosub Blink
+
+loop:
+mode=2
+outd=%0000
+SerOut TX,speed,["waiting command RELAY",cr]
+high CTS
+Serin RX,speed,3000,noASW,[wait("RELAY "),dec2 altura,sk,dec1 mat,sk,dec1 mode,sk,dec2 samplecount]
+low CTS
+SerOut TX,speed,["RELAY command accepted!",cr]
+
+relaydone=1
+
+:noASW
+low CTS
+if relaydone=1 then RELAY_allready_said
+goto loop
+'	gosub sayNORELAY
+:RELAY_allready_said
+relaydone=0
+
+x=mat*factor
+if mat<>9 then skipadjust
+x=x-6
+skipadjust:
+
+'debug "Status ", dec2 Altura,"  ",dec3 x,"  ",dec1 mode," mat=",dec1 mat,cr, $A
+
+low CTS
+gosub Alt
+gosub Posi
+If mode=0 then counter
+If mode=1 then timer
+goto loop
+
+counter:
+for j=0 to samplecount
+contagem=j
+'count 11,2000,contagem
+Serin RX,speed,100,continue_counter_lp,[wait("STOP")]
+goto loop
+continue_counter_lp:
+SerOut TX,speed,["Counter ",dec5 contagem,cr]
+next
+goto loop
+
+timer:
+for i=1 to 32
+j=2*i
+'pulsin 11,1,contagem
+'debug "Counted ",dec3 i,cr
+SerOut TX,speed,["Histogram ",dec3 i," ",dec3 j," ",dec3 x,cr]
+'SerOut TX,speed,["Time ",dec5 contagem," ", dec3 p,cr,$A]
+'do bruno SerOut TX,speed,["Time ",dec3 j," ", dec3 x,cr,$A]
+
+'debug "Time ",dec5 contagem," ", dec3 p,cr,$A
+next
+goto loop
+
+Posi:		'conversao comprimento em ciclos de rotacoes
+if x>p then go_up
+if x<p then go_down
+return
+
+go_up:	'esquerda
+for i=1 to x-p
+outd=%0010
+pause 19
+outd=%0110
+pause 19
+outd=%0100
+pause 19
+outd=%1100
+pause 19
+outd=%1000
+pause 19
+outd=%1001
+pause 19
+outd=%0001
+pause 19
+outd=%0011
+pause 19
+next
+outd=%0000
+p=x
+write pos,p
+return
+
+go_down:	'direita
+for i=1 to p-x
+outd=%0001
+pause 19
+outd=%1001
+pause 19
+outd=%1000
+pause 19
+outd=%1100
+pause 19
+outd=%0100
+pause 19
+outd=%0110
+pause 19
+outd=%0010
+pause 19
+outd=%0011
+pause 19
+next
+outd=%0000
+p=x
+write pos,p
+return
+
+
+
+
+Alt:
+low 10
+for i=1 to 40
+pulsout 10,1250-(fact2*Altura)
+pause 20
+next
+low 10
+return
+
+:Blink
+
+For i=0 to 4
+	out7=1
+	pause 200
+	out7=0
+	pause 200
+next
+return
+
+:sayNORELAY
+debug cr,"No Relay!",cr
+return
+
+
+DEBUG "stop"
