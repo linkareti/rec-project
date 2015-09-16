@@ -1,3 +1,0 @@
-#multicasts with hosts and ports
-#format must be host,port,host,port...
-elab.hosts.and.ports=elab.ist.utl.pt,9001,elab.ist.utl.pt,9002,elab.ist.utl.pt,9003
