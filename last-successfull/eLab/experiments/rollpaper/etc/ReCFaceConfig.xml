@@ -1,0 +1,5 @@
+
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="true" toolTipBundleKey="rollpaper$rec.exp.tip.rollpaper" location="ROLL_DOWN_TOILET_PAPER_V1.0" iconLocationBundleKey="rollpaper$rec.exp.icon.rollpaper" headerDisplayClassLocationBundleKey="" displayStringBundleKey="rollpaper$rec.exp.title.rollpaper" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="rollpaper$rec.exp.background.rollpaper" descriptionStringBundleKey="rollpaper$rec.exp.description.rollpaper" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="rollpaper$rec.exp.customizer.rollpaper" order="1">
+    <display toolTipBundleKey="rollpaper$rec.exp.display.rollpaper.tip.datatable" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="rollpaper$rec.exp.display.rollpaper.title.1" classLocationBundleKey="rollpaper$rec.exp.display.rollpaper.loc.datatable" order="1"/>
+    <localizationBundle name="rollpaper" location="recresource:///pt/utl/ist/elab/client/rollpaper/resources/messages"/>
+</apparatus>
