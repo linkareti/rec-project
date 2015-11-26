@@ -1,0 +1,116 @@
+('start_loop'):
+o STAMP envia para o PC os estados dos (step_sensor), (park_sensor1) e (park_sensor2)
+	ou seja, do sensor que indica se a câmara está na posição inicial e 
+	os dois sensores que indicam se os carros estão nas suas posições iniciais.
+
+O STAMP espera, durante 10 segundos, a string "start" do PC. Ao fim destes 10 segundos, 
+	volta a enviar o status das variávies indicadas no ponto anterior.
+
+('start'):
+Se o STAMP receber o "start", este envia a string "ok" e reinicializa as variáveis.
+
+('rec'):
+O STAMP espera, durante 65,535 segundos, que o PC lhe envie a string "va:" seguida de um 
+	número que será "equivalente" à potência a transmitir ao carro 1 (este número será
+	calculado pelo computador e ainda não está implementado, por falta de calibração).
+	Se o STAMP não receber esta informação, volta para o estado inicial ('startloop').
+Após receber esta informação, o STAMP envia a string "ok".
+
+O STAMP espera, durante 65,535 segundos, que o PC lhe envie a string "vb:" seguida de um 
+	número que será "equivalente" à potência a transmitir ao carro 2 (este número será
+	calculado pelo computador e ainda não está implementado, por falta de calibração).
+	Se o STAMP não receber esta informação, volta para o estado inicial ('startloop').
+Após receber esta informação, o STAMP envia a string "ok".
+
+O STAMP espera, durante 65,535 segundos, que o PC lhe envie a string "x:" seguida de um 
+	número que é a posição inicial (centro de massa) da câmara, em quantidade de voltas do step-motor
+	(este número será calculado pelo computador e ainda não está implementado, por 
+	falta de calibração).
+	Se o STAMP não receber esta informação, volta para o estado inicial ('startloop').
+Após receber esta informação, o STAMP envia a string "ok".
+
+O STAMP espera, durante 65,535 segundos, que o PC lhe envie a string "tp:" seguida de um 
+	número que é o tempo que o stamp espera para mudar a posição do step-motor
+	(este número será calculado pelo computador e ainda não está implementado, por 
+	falta de calibração).
+	Se o STAMP não receber esta informação, volta para o estado inicial ('startloop').
+Após receber esta informação, o STAMP envia a string "ok".
+
+O STAMP espera, durante 65,535 segundos, que o PC lhe envie a string "dir:" seguida de um 
+	número que é a direcção da câmara  (0 = direita; 1 = esquerda) 
+	(este número será calculado pelo computador e ainda não está implementado, por 
+	falta de calibração).
+	Se o STAMP não receber esta informação, volta para o estado inicial ('startloop').
+Após receber esta informação, o STAMP envia a string "ok".
+
+('check_cam'):
+O STAMP verifica se a câmara está na posição zero e, caso não esteja, desloca-a para lá
+	('step_left').
+
+('move_step'):
+O STAMP coloca a câmara na posição inicial indicada pela variável 'x'. Quando chega a esta posição
+	 envia, para o PC, a string "in position".
+
+('start_exp'):
+O STAMP espera que o PC lhe responda com a string "go", durante 500 milisegundos. Caso este
+	comando não seja recebido ao fim do tempo de espera, vai para ('retry').
+	Caso receba a string "go", o STAMP envia a string "ok" e trata do lançamento dos carros.
+
+('retry'):
+O STAMP envia, para o PC, a string "retry" e retorna a ('start_exp').
+
+('lanca1'): /('lanca2')
+lanca o carro 1 / 2
+
+('fotocelinit1'): /('fotocelinit2'):
+verifica o estado da fotocélula 1 / 2
+
+('contagem11'): / ('contagem21'):
+enquanto a fotocélula 1 /2 estiver activa incrementa uma variável (t11 / t21) que será proporcional ao
+	tempo que o carro 1 / 2 demorou a percorrer a fotocélula 1 /2.
+
+('move_step_cm'):
+Escolhe a função a seguir de acordo com a direcção que a câmara tem que tomar.
+
+('move_Step_left'):
+move a câmara para a esquerda.
+
+('move_Step_right'):
+move a câmara para a direita.
+
+Nestas duas funções, caso alguma das fotocélulas seja activada, a função é abortada e passa
+	directamente à contagem respectiva à fotocélula activada.
+
+('fotocelfinal1') e ('contagem12') / ('fotocelfinal2') e (contagem22'):
+enquanto a fotocélula 1 /2 estiver activa incrementa uma variável que será proporcional ao
+	tempo que o carro 1 / 2 demorou a percorrer a fotocélula 1 / 2 (t12 / t22). No final da primeira
+	a ser executada [por exemplo: ('fotocelfinal1') e ('contagem12')] , vai para a outra
+	função [por exemplo:('fotocelfinal2') e (contagem22')]. Após ter executado ambas estas
+	funções, vai parquear os carros.
+
+('park1') / ('park2'):
+activa o motor do carro 1 / 2 no sentido inverso ao do lançamento, para o parquear.
+
+('park_check'):
+Verifica os sensores de parqueamento. Se o sensor 1 / 2 não estiver activo, então vai para
+	('erro_sensor1') / ('erro_sensor2').
+
+('fim'):
+Coloca a câmara na posição zero.
+
+('temp_fim'):
+O STAMP envia a string "ok" para o PC e espera que este lhe envie uma string igual. Envia as
+	variáveis t11, t12, t21, t22, usando a seguinte sintaxe: envia uma string com "t??:"
+	seguida do número correspondente a t?? (em que '?' pode ser 1 ou 2!). Após o envio de
+	cada variável espera que o PC lhe envie a string "ok", excepto na última.
+	Chegado, aqui, o Stamp regressa a ('startloop').
+
+('erro_sensor1') / ('erro_sensor2'):
+O STAMP envia a string "erro1" / "erro2" para o PC e vai para ('fim').
+
+('restart'):
+vai para ('startloop').
+
+
+
+
