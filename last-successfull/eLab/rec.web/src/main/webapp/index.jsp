@@ -1,1 +1,0 @@
-<% application.getRequestDispatcher("/Login.faces").forward(request, response); %>
