@@ -1,0 +1,127 @@
+'{$STAMP BS2}
+Pos	data(2)	'ultima posicao do step motor
+PW 	var 	word	'Largura do pulso em unidades de 2us (media movel) 
+Width	var 	word	'Largura do pulso em unidades de 2us 
+Temp	var	word
+aux	var	byte
+relay	var	byte
+i	var	word	'contador auxiliar
+x	var	word	'posicao a atingir
+p	var	word	'posicao absoluta
+sk	var	byte	'byte auxiliar (skip)
+status var	nib
+
+TcLow	con	10245	'Numero de contagens para temperatura minima
+TcHigh con	11079	'Numero de contagens para temperatura maxima
+TLow	con	14	'Temperatura minima de calibracao em milesimas de grau centigrado
+THigh	con	23	'Temperatura maxima de calibracao em milesimas de grau centigrado
+
+CTS	con	3
+TX	con	16
+RX	con	16
+speed   con     16468	'16572/4800 16468/9600 16780/2400 17197/1200
+x=0
+
+low 7
+low CTS
+status=0
+outD=%1111
+dirD=%1111
+dirb=%1111
+read pos,p
+x=p
+input 10
+
+pulsin 10,1,PW
+gosub Blink
+
+loop:
+outb=%0000
+high CTS
+SerOut TX,speed,["ready",$D,$A]
+Serin RX,speed,5000,noASW,[wait("relay "),bin status,sk,dec3 x]
+pause 10
+:noASW
+
+if (status.bit1=0) then endif:
+	status.bit2=0
+endif:
+debug "Status ", bin4 status, CR, $A
+
+outD=(status ^ %1111)
+low CTS
+
+gosub posi
+gosub Temperature
+debug "Temp ", dec2 Temp," ",dec5 pw," ", dec3 p,cr,$A
+goto loop:
+
+
+
+:Temperature
+pulsin 10,1,Width
+PW=((PW/5)*4)+(Width/5)
+Temp=(THigh-TLow)*(PW-TcLow)/(TcHigh-TcLow)+Tlow
+return
+
+:Posi		'conversao comprimento em ciclos de rotacoes
+if x>p then go_up
+if x<p then go_down
+return
+
+go_up:
+for i=1 to x-p
+outb=%0001
+pause 1
+outb=%0011
+pause 1
+outb=%0010
+pause 1
+outb=%0110
+pause 1
+outb=%0100
+pause 1
+outb=%1100
+pause 1
+outb=%1000
+pause 1
+outb=%1001
+pause 1
+next
+p=x
+write pos,p
+return
+
+go_down:
+for i=1 to p-x
+outb=%0001
+pause 1
+outb=%1001
+pause 1
+outb=%1000
+pause 1
+outb=%1100
+pause 1
+outb=%0100
+pause 1
+outb=%0110
+pause 1
+outb=%0010
+pause 1
+outb=%0011
+pause 1
+next
+p=x
+write pos,p
+return
+
+:Blink
+
+For i=0 to 4
+	out7=1
+	pause 200
+	out7=0
+	pause 200
+next
+return
+DEBUG "stop"
