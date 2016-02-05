@@ -1,0 +1,34 @@
+<h:form xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
+
+    <p:panel id="panel" header="#{title}" style="margin-bottom:10px;">  
+        <p:growl id="messages" showDetail="true"/>
+        <h:inputHidden id="idInternal"
+                       value="#{badWordController.selected.idInternal}"
+                       rendered="#{operation != 'create'}" />
+        <h:inputHidden id="version"
+                       value="#{badWordController.selected.version}"
+                       rendered="#{operation != 'create'}" />
+
+        <h:panelGrid columns="3">
+            <h:outputLabel value="#{bundle['badword.regex']}"
+                           for="regex" />
+            <p:inputText id="regex"
+                         value="#{badWordController.selected.regex}"
+                         title="#{bundle['badword.regex']}"
+                         rendered="#{operation != 'view'}" style="width: 350px" required="true">
+                <f:validateLength minimum="3" maximum="254"/>  
+            </p:inputText>
+            <h:outputText id="regexOut" value="#{badWordController.selected.regex}" rendered="#{operation == 'view'}"/> 
+        </h:panelGrid>
+        <h:panelGroup rendered="#{operation == 'create'}">
+            <p:commandButton action="#{badWordController.create}" value="#{bundle['operation.save']}" ajax="false"/>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{operation == 'edit'}">
+            <p:commandButton action="#{badWordController.update}" value="#{bundle['operation.save']}" ajax="false"/>
+        </h:panelGroup>
+    </p:panel>  
+</h:form>
