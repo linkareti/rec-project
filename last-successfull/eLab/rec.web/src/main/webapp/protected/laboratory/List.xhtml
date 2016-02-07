@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/protected/backoffice.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle['page.laboratory.list.title']}"></h:outputText>
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="list-form">
+            <p:growl id="messages" showDetail="true"/>
+            <p:dataTable id="items" var="item" style="width:100%"
+                         value="#{laboratoryController.items}"
+                         emptyMessage="#{bundle['info.emptyList']}"
+                          paginator="true"
+                         rows="10" selectionMode="single"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                         scrollable="false" rowKey="#{item.name}">
+
+                <p:column styleClass="title_col" style="width:200px" sortBy="#{item.name}"
+                          filterBy="#{item.name}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle['laboratory.name']}" />
+                    </f:facet>
+                    <h:outputText value="#{item.name}" />
+                </p:column>
+
+                <p:column styleClass="details_col" style="width:450px"
+                          sortBy="#{item.description}" filterBy="#{item.description}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle['laboratory.description']}" />
+                    </f:facet>
+                    <h:outputText value="#{item.description}" />
+                </p:column>
+
+                <p:column styleClass="links_col" style="width:150px" resizable="false">
+                    <f:facet name="header"></f:facet>
+                    <p:commandLink action="#{laboratoryController.prepareView}"
+                                   value="#{bundle['operation.view']}" ajax="false"/>
+                    <h:outputText value=" | " />
+                    <p:commandLink action="#{laboratoryController.prepareEdit}"
+                                   value="#{bundle['operation.edit']}" ajax="false"/>
+                    <h:outputText value=" | " />
+                    <p:commandLink value="#{bundle['operation.remove']}" 
+                                   action="#{laboratoryController.destroy}" ajax="false"/>
+                </p:column>
+
+            </p:dataTable>
+            <p:commandButton id="cmdButtonCreate" action="#{laboratoryController.prepareCreate}" value="#{bundle['operation.create']}" ajax="false"/>
+        </h:form>
+    </ui:define>
+</ui:composition>
