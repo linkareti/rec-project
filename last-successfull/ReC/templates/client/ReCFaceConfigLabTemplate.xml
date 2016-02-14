@@ -1,0 +1,14 @@
+<lab
+	location="corbaloc:iiop:1.2@@multicast.controller.host@:@multicast.controller.port@/MultiCastController"
+	labId="@lab.name@" labIdStringBundleKey="ReCLabeLab$rec.lab.name.elab.@lab.name@"
+	displayStringBundleKey="ReCLabeLab$rec.lab.title.elab.@lab.name@"
+	toolTipBundleKey="ReCLabeLab$rec.lab.tip.elab.@lab.name@"
+	iconLocationBundleKey="ReCLabeLab$rec.lab.icon.elab.@lab.name@"
+	desktopLocationBundleKey="ReCLabeLab$rec.lab.image.desktop.@lab.name@" xmlns="http://rec.linkare.com/client/config">
+	<webResource toolTipLocationBundleKey="ReCLabeLab$rec.url.tip.elab.@lab.name@"
+		displayStringBundleKey="ReCLabeLab$rec.url.title.elab.@lab.name@"
+		locationBundleKey="ReCLabeLab$rec.url.href.elab.@lab.name@"
+		iconLocationBundleKey="" order="0" enabled="true" internalBrowser="false" />
+	<!--Start Apparatus configuration -->
+	<!--End Apparatus configuration -->
+</lab>
