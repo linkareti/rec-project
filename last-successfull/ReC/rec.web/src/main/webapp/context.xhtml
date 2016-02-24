@@ -1,0 +1,82 @@
+<h:form id="context" xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
+
+    <p:panel id="myreservations"
+             header="#{bundle['page.context.myreservations.header']}"
+             toggleable="true" closable="false" toggleSpeed="500" styleClass="dark"
+             closeSpeed="2000" widgetVar="myreservations">
+
+        <h:panelGroup rendered="#{!userView.hasReservations}">
+            <h:outputText
+                value="#{bundle['page.context.myreservations.body.noreservations']}" />
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{userView.hasReservations}">
+            <p:dataTable var="event" value="#{userView.reservations}"
+                         paginator="false" selection="#{reservationController.current}"
+                         selectionMode="single" styleClass="hide-column-names"
+                         rowKey="#{event.title}" id="myevents">
+                <p:ajax event="rowSelect" update=":context:display,:context:myevents " oncomplete="eventDialogContext.show()" />  
+                <p:column>
+                    <h:outputText id="eventStartDate" value="#{event.startDate}">
+                        <f:convertDateTime timeZone="Europe/Lisbon" dateStyle="short"
+                                           type="both" />
+                    </h:outputText>
+                    <p:tooltip for="eventStartDate" value="#{event.title}" />
+                </p:column>
+            </p:dataTable>
+
+            <p:dialog header="#{bundle['label.event.header']}"
+                      widgetVar="eventDialogContext" modal="true"
+                      draggable="true" width="600" height="300" resizable="false">
+                <p:ajax event="close" listener="#{reservationController.setCurrent(null)}" update=":context:myevents" />
+                <p:panel id="display">
+                    <h3>
+                        <h:outputText
+                            value="#{reservationController.current.title}: #{reservationController.current.reservedTo}@#{reservationController.current.experiment}" />
+                    </h3>
+                    <br/>
+                    <p>
+                        <h:outputText value="#{bundle['group.childUsers']}" />
+                    </p>
+                    <p:outputPanel rendered="#{not empty reservationController.currentDetails and not empty reservationController.currentDetails.group}">
+                        <p:dataTable id="users" var="user"
+                                     value="#{reservationController.currentDetails.group.allUsers}"
+                                     paginator="false" scrollable="true" style="width:100%" emptyMessage="#{bundle['info.emptyList']}">
+                            <p:column style="width: 100%">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle['user.username']}" />
+                                </f:facet>
+                                <h:outputText value="#{user.username}" />
+                            </p:column>
+                        </p:dataTable>
+                    </p:outputPanel>
+                    <br/>
+                    <div>
+                        <h:outputLabel value="#{bundle['user.username']} :" for="context:username" /> 
+                        <h:outputLabel value=" " />
+                        <p:autoComplete value="#{userAutoComplete.selectedUser}"
+                                        id="username" completeMethod="#{userAutoComplete.completeUser}" 
+                                        var="user" itemLabel="#{user.username}" itemValue="#{user}"
+                                        converter="userConverter" maxResults="10" minQueryLength="2" forceSelection="true" />
+                    </div>
+                    <h:outputLabel value=" " />
+                    <h:outputLabel value=" " />
+
+                    <p>
+                        <p:commandLink action="#{reservationController.addUser}"
+                                      value="#{bundle['operation.add']}" update="users,:msg" /> 
+                        <h:outputText value=" | " /> 
+                        <p:commandLink
+                                      action="#{reservationController.removeUser}"
+                                      value="#{bundle['operation.remove']}" update="users,:msg"/>
+                    </p>
+                    
+                </p:panel>
+            </p:dialog>
+        </h:panelGroup>
+    </p:panel>
+</h:form>
