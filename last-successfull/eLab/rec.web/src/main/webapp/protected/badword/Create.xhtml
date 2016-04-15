@@ -1,0 +1,16 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/protected/backoffice.xhtml">
+	<ui:define name="title">
+		<h:outputText value="#{bundle['page.badword.create.title']}"></h:outputText>
+	</ui:define>
+	<ui:define name="body">
+		<ui:include src="inner-form.xhtml">
+			<ui:param name="operation" value="create" />
+            <ui:param name="title" value="#{bundle['page.badword.create.title']}" />
+		</ui:include>
+	</ui:define>
+</ui:composition>
