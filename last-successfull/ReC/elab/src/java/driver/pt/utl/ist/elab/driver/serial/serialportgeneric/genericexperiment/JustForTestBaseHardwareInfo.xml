@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="ELAB_RAD_STAMP_V02" familiarName="Exp de Radioactividade" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
+    <description>
+        <![CDATA[ 
+        Esta experiência serve para - não esquecer de alterar esta descrição
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+    
+    <parameter name="Modo de aquisicao" type="SelectionListValue" value="Contagens">
+        <selection-list>
+            <value order="1">Contagens</value>
+            <value order="2">Intervalo entre eventos</value>
+        </selection-list>
+    </parameter>
+    
+    <parameter name="Altura do detector" type="ContinuousValue" value="0">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">100</value>
+            <value order="3">10</value>
+        </selection-list>
+    </parameter>
+    
+    <parameter name="Material" type="SelectionListValue" value="Chumbo (isolante)">
+        <selection-list>
+            <value order="1">Madeira [10mm]</value>
+            <value order="2">Corticite [10mm]</value>
+            <value order="3">Tijolo [10mm]</value>
+            <value order="4">Cobre [0.2mm]</value>
+            <value order="5">Cobre [0.4mm]</value>
+            <value order="6">Cobre [0.8mm]</value>
+            <value order="7">Cobre [1.6mm]</value>
+            <value order="8">Cobre [3.2mm]</value>
+            <value order="9">Janela de controlo (Ar)</value>
+            <value order="10">Chumbo (isolante)</value>
+        </selection-list>
+    </parameter>
+    
+    <frequency-scale label="0.477 Hz">
+        <min-frequency><Frequency type="FrequencyType" multiplier="none">0.477</Frequency></min-frequency>
+        <max-frequency><Frequency type="FrequencyType" multiplier="none">0.477</Frequency></max-frequency>
+        <step-frequency><Frequency type="FrequencyType" multiplier="none">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="FrequencyType" multiplier="none">0.477</Frequency>
+    
+    <sampling-scale>
+        <min-samples>1</min-samples>
+        <max-samples>100</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+    
+    <ChannelInfo name="Contagens" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Contagens Geiger" physicsunitname="Contagens" physicsunitsymbol="Cts" multiplier="none" selected="true">
+            <min><PhysicsVal type="int">0</PhysicsVal></min>
+            <max><PhysicsVal type="int">99999</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+
+</HardwareInfo>
+
