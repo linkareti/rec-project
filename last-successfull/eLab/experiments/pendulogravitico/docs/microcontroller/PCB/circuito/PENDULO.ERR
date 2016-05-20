@@ -1,0 +1,8 @@
+AutoECO Error Report
+FILE-A: C:\SAD\TRAB1\PENDULO.MAX
+FILE-B: C:\SAD\TRAB1\PENDULO.MNL
+ERROR: No footprint found for comp U1
+ERROR: No footprint found for comp R21
+ERROR: No footprint found for comp R22
+Unable to complete ECO due to errors
+3 errors found
