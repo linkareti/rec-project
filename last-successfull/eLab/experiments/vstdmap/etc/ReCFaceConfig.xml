@@ -1,0 +1,7 @@
+
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="true" toolTipBundleKey="stdmap$rec.exp.tip.stdmap" location="STANDARD_MAP_V1.0" iconLocationBundleKey="stdmap$rec.exp.icon.stdmap" headerDisplayClassLocationBundleKey="" displayStringBundleKey="stdmap$rec.exp.title.stdmap" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="stdmap$rec.exp.background.stdmap" descriptionStringBundleKey="stdmap$rec.exp.description.stdmap" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="stdmap$rec.exp.customizer.stdmap" order="1">
+    <display toolTipBundleKey="stdmap$rec.exp.display.stdmap.tip.anim" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor" displayStringBundleKey="stdmap$rec.exp.display.stdmap.title.anim" classLocationBundleKey="stdmap$rec.exp.display.stdmap.loc.anim" order="1"/>
+    <display toolTipBundleKey="stdmap$rec.exp.display.stdmap.tip.1" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor" displayStringBundleKey="stdmap$rec.exp.display.stdmap.title.1" classLocationBundleKey="stdmap$rec.exp.display.stdmap.loc.1" order="2"/>
+    <display toolTipBundleKey="stdmap$rec.exp.display.stdmap.tip.2" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="stdmap$rec.exp.display.stdmap.title.2" classLocationBundleKey="stdmap$rec.exp.display.stdmap.loc.2" order="3"/>
+    <localizationBundle name="stdmap" location="recresource:///pt/utl/ist/elab/client/vstdmap/resources/messages"/>
+</apparatus>
