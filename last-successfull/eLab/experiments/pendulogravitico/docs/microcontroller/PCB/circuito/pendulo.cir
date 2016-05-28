@@ -1,0 +1,192 @@
+***** d:\users\guilhoto\pendulo\pendulo.ewb ******
+*  Interactive Image Technologies                *
+*                                                *
+*  This File was created by:                     *
+*    Electronics Workbench to SPICE netlist      *
+*    conversion DLL                              *
+*                                                *
+*  Tue Oct 26 10:13:19 2004                      *
+**************************************************
+
+* Battery(s)
+* 
+V1 1 0 DC 7.5 
+
+* Resistor(s)
+* 
+R2 0 10 4.7K 
+* 
+R1 10 1 10K 
+* 
+R4 12 0 10K 
+* 
+R5 1 13 3.3K 
+* 
+R6 1 18 1K 
+* 
+R7 19 0 10K 
+
+* Capacitor(s)
+* 
+C1 2 3 220n
+
+* 3-Terminal Opamp(s)
+* 
+X_opamp3_0 2 10 9 op_motorola_LM358
+
+* <Subcircuit>(s)
+Xsub_multivib_0 1 0 3 2 multivib
+Xsub_bobinas_1 14 7 3 2 bobinas
+Xsub_s_hold_2 0 9 7 20 s_hold
+Xsub_subtract_3 17 20 12 OPEN_1 subtract
+Roc_OPEN_1 OPEN_1 0 1Tohm
+
+* Connector(s)
+* node = 0, label = 
+* node = 13, label = 
+* node = 12, label = 
+* node = 12, label = 
+* node = 9, label = 
+* node = 6, label = 
+* node = 6, label = 
+* node = 5, label = 
+* node = 0, label = 
+* node = 6, label = 
+
+* Potentiometer(s)
+* 
+R3 12 14 4.5K
+R3 14 13 5.5K
+* 
+R8 19 17 1K
+R8 17 18 1K
+
+* Polarized Capacitor(s)
+* 
+C2 12 0 1u
+
+* Subcircuits
+.SUBCKT multivib 1 4 2 5 
+    * <Contact>(s)
+
+    * Resistor(s)
+    * 
+    R2 5 1 220 
+    * 
+    R1 2 1 220 
+    * 
+    R3 3 1 18K 
+    * 
+    R4 6 1 18K 
+
+    * Capacitor(s)
+    * 
+    C1 5 3 10n
+    * 
+    C2 6 2 10n
+
+    * NPN Transistor(s)
+    * 
+    Q1 5 6 4 Qnmotorol2_BC547C
+    * 
+    Q2 2 3 4 Qnmotorol2_BC547C
+
+    * Connector(s)
+    * node = 1, label = 
+    * node = 1, label = 
+    * node = 3, label = 
+    * node = 5, label = 
+    * node = 6, label = 
+    * node = 4, label = 
+    * node = 2, label = 
+
+.ENDS
+.SUBCKT bobinas 2 3 4 5 
+    * <Contact>(s)
+
+    * Inductor(s)
+    * 
+    L3 1 2 1m
+    * 
+    L1 3 1 1m
+    * 
+    L2 5 4 3.6m
+
+.ENDS
+.SUBCKT s_hold 5 6 3 1 
+    * <Contact>(s)
+
+    * Resistor(s)
+    * 
+    R1 4 3 1MEG 
+    * 
+    R2 6 4 47K 
+    * 
+    R3 1 2 5.6K 
+
+    * N-Channel JFET(s)
+    * 
+    J_n_jfet_Q1 3 4 2 nJFnationl1_J2N3819
+
+    * Connector(s)
+    * node = 6, label = 
+    * node = 4, label = 
+    * node = 3, label = 
+
+    * Polarized Capacitor(s)
+    * 
+    C1 1 5 3.3u
+
+.ENDS
+.SUBCKT subtract 4 7 6 1 
+    * <Contact>(s)
+
+    * Resistor(s)
+    * 
+    R7 7 3 460K 
+    * 
+    R6 4 2 460K 
+    * 
+    R9 6 3 1MEG 
+    * 
+    R8 2 1 1MEG 
+
+    * 3-Terminal Opamp(s)
+    * 
+    X_opamp3_0 3 2 1 op_motorola_LM358
+
+    * Connector(s)
+    * node = 5, label = 
+    * node = 6, label = 
+    * node = 4, label = 
+
+.ENDS
+* Misc
+.SUBCKT op_motorola_LM358 1 2 3
+    Vos 4 1 DC 0V
+    Ib1 4 0 0A
+    Ib2 2 0 0A
+    G1 0 5 4 2 0
+    G2 0 6 5 0 0
+    G3 0 3 6 0 0
+    Ri 4 2 1nohm
+    R1 5 0 1Kohm
+    R2 6 0 1nohm
+    R3 3 0 1nohm
+    C1 5 0 0
+    C2 6 0 1.59155e-24
+.ENDS
+
+.MODEL Qnmotorol2_BC547C NPN(Is=22.874f BF=2.1956 BR=2 Rb=0 Re=0 Rc=0
++Cjs=0 Cje=7.0582p Cjc=3.8607p Vje=750m Vjc=1.5 Tf=619.64p Tr=10n
++mje=380.01m mjc=402.8m VA=100 ISE=770.18p IKF=1.8241 Ne=1.8137 NF=1 NR=1
++VAR=100 IKR=10.01m ISC=22.874f NC=2 IRB=1e+30 RBM=0 XTF=800.24 VTF=88.107
++ITF=3.6017 PTF=0 XCJC=1 VJS=750m MJS=0 XTB=0 EG=1.11 XTI=3 KF=0 AF=1
++FC=500m TNOM=27)
+
+.MODEL nJFnationl1_J2N3819 NJF(VTO=-2.9339 BETA=2.2636m LAMBDA=16.5m Rd=1
++Rs=1 Cgd=16p Cgs=4p PB={LIMIT(1,1u,1000T)} IS=24.39p B=1 KF=5.0356e-17
++AF=1 FC=500m TNOM=27)
+
+.OPTIONS ITL4=25
+.END
