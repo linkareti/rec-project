@@ -1,0 +1,209 @@
+<!-- 
+<p>Typical usage:</p>
+<pre>
+<?xml version="1.0"?>
+<!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
+<HardwareInfo ...>
+...
+</HardwareInfo>
+</pre>
+<br/>
+<p>Attributes:</p>
+<ul>
+<li><b>manufacturer</b>: The name (actually a key to a resource bundle) identifying the hardware manufacturer</li>
+<li><b>familiarName</b>: The name (actually a key to a resource bundle) identifying the name of the experiment. To be presented to users.</li>
+<li><b>name</b>: The name identifying  the internal name of the experiment. Not to be presented to users.</li>
+<li><b>driverVersion</b>: The version of the driver this hardware is supposed to talk to.</li>
+<li><b>id</b>: The unique id of this hardware in the ReC ecosystem.</li>
+<li><b>version</b>: The version of the hardware identified by this specification</li>.	
+</ul>
+-->
+<!ELEMENT HardwareInfo (description|parameter|sampling-scale|frequency-scale|Frequency|ChannelInfo)*>
+<!ATTLIST HardwareInfo
+    manufacturer CDATA #IMPLIED
+    familiarName CDATA #IMPLIED
+    name CDATA #IMPLIED
+    driverVersion CDATA #IMPLIED
+    id CDATA #IMPLIED
+    version CDATA #IMPLIED
+>
+
+<!-- 
+<p>Provides information for each channel in the system, be it output (generate) or input (capture) of data</p>
+<br/>
+<p>Attributes:</p>
+<ul>
+<li><b>direction</b>: one of <pre>CHANNEL_INPUT</pre> or <pre>CHANNEL_OUTPUT</pre> depending on whether the channel captures or generates data</li>
+<li><b>independent</b>: the frequency for this channel could be different from the frequency for the hardware?</li>
+<li><b>name</b>: a property resource bundle with a key to a label to be used as channel name</li>
+</ul>
+-->
+<!ELEMENT ChannelInfo (Frequency|sampling-scale|scale|frequency-scale|parameter)*>
+<!ATTLIST ChannelInfo
+    direction CDATA #IMPLIED
+    independent CDATA #IMPLIED
+    name CDATA #IMPLIED
+>
+  
+<!-- 
+<p>A single physical value. The text value dependends on the type attribute</p>
+<br/>
+<p>Attributes:</p>
+<ul>
+<li><b>type</b>: one of <pre>{boolean,byte,short,int,long,float,double,byteArray}</pre></li>
+<li><b>href</b>: Location of a byte array input stream defined by an URL (only for byteArray type) - mutually exclusive to attribute "file"</li>
+<li><b>file</b>: Location of a file containing the byte array value (only for byteArray type)</li>
+<li><b>mimetype</b>: Required when the type is byteArray as it defines the content</li>
+</ul>
+<p>if the type is boolean, the allowed values would be <pre>on/true/1</pre> or <pre>off/false/0</pre></p>
+<p>if the type is an integer <pre>(byte,short,int,long)</pre> then the value should be in the correct range for the equivalent Java Types</p>
+<p>if the type is a floating one (float,double) then the value should be in the correct range for the equivalent Java Types</p>
+<p>if the type is a <pre>byteArray</pre> then only href or file should be defined, or the content maybe encoded directly as child text</p>
+-->
+<!ELEMENT PhysicsVal (#PCDATA)>
+<!ATTLIST PhysicsVal
+    type CDATA #IMPLIED
+    href CDATA #IMPLIED
+    file CDATA #IMPLIED
+    mimetype CDATA #IMPLIED
+>
+
+<!--
+<p>A key to a resource bundle representing the description for the experiment apparatus</p>
+-->
+<!ELEMENT description (#PCDATA)>
+
+
+<!-- 
+<p>A scale of frequencies. The subelements should all use the same Frequency type</p> 
+<br/>
+<p>Attributes:</p>
+<ul>
+<li><b>label</b>: A key to a resource bundle with a description of the frequency scale</li>
+</ul>
+-->
+<!ELEMENT frequency-scale (min-frequency|max-frequency|step-frequency)*>
+<!ATTLIST frequency-scale
+    label CDATA #IMPLIED
+  >
+
+<!-- 
+<p>The minimum frequency</p> 
+-->
+<!ELEMENT min-frequency (Frequency)*>
+<!-- 
+<p>The maximum frequency</p> 
+-->
+<!ELEMENT max-frequency (Frequency)*>
+<!--
+<p>The step for a scale</p>
+-->
+<!ELEMENT step-frequency (Frequency)*>
+<!-- 
+<p>A frequency value</p>
+<br/>
+<p>Attributes:</p>
+<ul>
+<li><b>type</b>: one of <pre>FrequencyType</pre> or <pre>SamplingIntervalType</pre> depending on the type of frequency</li>
+<li><b>multiplier</b>: one of the values defined for multipliers in <pre>{fento,pico,nano,micro,milli,none,kilo,mega,giga,tera}</pre></li>
+</ul>
+-->
+<!ELEMENT Frequency (#PCDATA)>
+<!ATTLIST Frequency
+    type CDATA #IMPLIED
+    multiplier CDATA #IMPLIED
+  >
+
+<!-- 
+<p>A configuration parameter for the hardware</p> 
+<br/>
+<p>Attributes:</p>
+<ul>
+<li><b>name</b>: A key to a resource bundle with a description of the parameter</li>
+<li><b>type</b>: one of <pre>{OnOffValue,ContinuousValue,SelectionListValue,BlackBoxValue}</pre></li>
+<li><b>value</b>: The value that should be current for the parameter at startup</li>
+</ul>
+<p>if the type is OnOffValue, the child selection-list values should be in the order: <pre>off/false/0</pre> label,  <pre>on/true/1</pre> label (represented as resource bundle keys)</p>
+<p>if the type is ContinuousValue, the child selection-list values should be in the order: <pre>minimum</pre>,  <pre>maximum</pre>, <pre>step</pre></p>
+<p>if the type is SelectionListValue, the child selection-list values should be the values to be selected, represented as resource bundle keys</p>
+<p>if the type is BlackBoxValue, there should be no selection-list sub elements</p>
+-->
+<!ELEMENT parameter (selection-list)*>
+<!ATTLIST parameter
+    value CDATA #IMPLIED
+    type CDATA #IMPLIED
+    name CDATA #IMPLIED
+>
+
+<!--
+<p>Container for values to be used in a parameter</p>
+-->
+<!ELEMENT selection-list (value)*>
+<!--
+<p>A value for a selection-list container of a parameter</p>
+<p>Attributes:</p>
+<ul>
+<li><b>order</b>: An integer zero (0) based number to order the values in the selection list</li>
+</ul>
+-->
+<!ELEMENT value (#PCDATA)>
+<!ATTLIST value
+    order CDATA #IMPLIED
+  >
+  
+<!-- 
+<p>The range for the number of samples that this experiment should be limited to!</p> 
+-->
+<!ELEMENT sampling-scale (min-samples|max-samples|step-samples)*>
+<!-- 
+<p>The minimum number of samples</p> 
+-->
+<!ELEMENT min-samples (#PCDATA)>
+<!-- 
+<p>The maximum number of samples</p> 
+-->
+<!ELEMENT max-samples (#PCDATA)>
+<!-- 
+<p>The step for number of samples</p> 
+-->
+<!ELEMENT step-samples (#PCDATA)>
+
+<!-- 
+<p>An acquisition channel output values scale. Each acquisition channel may have more than one scale!</p> 
+<br/>
+<p>Attributes:</p>
+<ul>
+<li><b>selected</b>: If this is the default selected scale for the channel. Only one scale should have selected=true (all the other should have selected=false)</li>
+<li><b>label</b>: A resource bundle key with the label to be presented to the user to select this scale</li>
+<li><b>physicsunitname</b>: A resource bundle key for the physical units name of this scale (<i>e.g.</i>:Hertz, Events, Ampere, Atmosphere, Meter)</li>
+<li><b>physicsunitsymbol</b>: A resource bundle key for the physical units name of this scale (<i>e.g.</i>:Hz, Cts, A, Hg, m)</li>
+<li><b>multiplier</b>: one of the values defined for multipliers in <pre>{fento,pico,nano,micro,milli,none,kilo,mega,giga,tera}</pre></li>
+</ul>
+-->
+<!ELEMENT scale (min|max|step|errordefault)*>
+<!ATTLIST scale
+    selected CDATA #IMPLIED
+    label CDATA #IMPLIED
+    physicsunitname CDATA #IMPLIED
+    physicsunitsymbol CDATA #IMPLIED
+    multiplier CDATA #IMPLIED
+  >
+
+<!-- 
+<p>The minimum Physical value for a scale</p> 
+-->
+<!ELEMENT min (PhysicsVal)*>
+<!-- 
+<p>The maximum Physical value for a scale</p> 
+-->
+<!ELEMENT max (PhysicsVal)*>
+<!--
+<p>The step Physical value for a scale</p>
+-->
+<!ELEMENT step (PhysicsVal)*>
+<!-- 
+<p>The default error value for a scale</p> 
+-->
+<!ELEMENT errordefault (PhysicsVal)*>
+
+
