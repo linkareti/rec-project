@@ -1,0 +1,7 @@
+
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="true" toolTipBundleKey="fermap$rec.exp.tip.fermap" location="FERMI_MAP_V1.0" iconLocationBundleKey="fermap$rec.exp.icon.fermap" headerDisplayClassLocationBundleKey="" displayStringBundleKey="fermap$rec.exp.title.fermap" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="fermap$rec.exp.background.fermap" descriptionStringBundleKey="fermap$rec.exp.description.fermap" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="fermap$rec.exp.customizer.fermap" order="1">
+    <display toolTipBundleKey="fermap$rec.exp.display.fermap.tip.anim" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor" displayStringBundleKey="fermap$rec.exp.display.fermap.title.anim" classLocationBundleKey="fermap$rec.exp.display.fermap.loc.anim" order="1"/>
+    <display toolTipBundleKey="fermap$rec.exp.display.fermap.tip.1" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor" displayStringBundleKey="fermap$rec.exp.display.fermap.title.1" classLocationBundleKey="fermap$rec.exp.display.fermap.loc.1" order="2"/>
+    <display toolTipBundleKey="fermap$rec.exp.display.fermap.tip.2" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="fermap$rec.exp.display.fermap.title.2" classLocationBundleKey="fermap$rec.exp.display.fermap.loc.2" order="3"/>
+    <localizationBundle name="fermap" location="recresource:///pt/utl/ist/elab/client/vfermap/resources/messages"/>
+</apparatus>
