@@ -1,0 +1,1 @@
+This code is not totally operational, it fails in the RecGeneric communication: Incorrect state diagram (it stays in UNKNOWN state after its initialization) and the commands RST and STP are not totally operational.
