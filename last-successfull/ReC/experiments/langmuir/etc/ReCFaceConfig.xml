@@ -1,8 +1,0 @@
-
-<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="langmuir$rec.exp.tip.langmuir" location="ELAB_LANGMUIR_PROBE_DSPIC_V0.1" iconLocationBundleKey="langmuir$rec.exp.icon.langmuir" headerDisplayClassLocationBundleKey="" displayStringBundleKey="langmuir$rec.exp.title.langmuir" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="langmuir$rec.exp.background.langmuir" descriptionStringBundleKey="langmuir$rec.exp.description.langmuir" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="langmuir$rec.exp.customizer.langmuir" order="1">
-    <display toolTipBundleKey="langmuir$rec.exp.display.langmuir.tip.table" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="langmuir$rec.exp.display.langmuir.title.table" classLocationBundleKey="langmuir$rec.exp.display.langmuir.loc.table" order="0"/>
-    <display toolTipBundleKey="langmuir$rec.exp.display.langmuir.tip.1" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="langmuir$rec.exp.display.langmuir.title.1" classLocationBundleKey="langmuir$rec.exp.display.langmuir.loc.1" order="1"/>
-    <display toolTipBundleKey="langmuir$rec.exp.display.langmuir.tip.2" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="langmuir$rec.exp.display.langmuir.title.2" classLocationBundleKey="langmuir$rec.exp.display.langmuir.loc.2" order="2"/>
-    <localizationBundle name="langmuir" location="recresource:///pt/utl/ist/elab/client/langmuir/resources/messages"/>
-    <mediaConfig videoLocation="langmuir$rec.exp.url.langmuir.video" offlinePlay="true" canSave="true" order="0"/>
-</apparatus>
