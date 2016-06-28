@@ -1,0 +1,18 @@
+This project uses liquibase to perform the database upgrade, rollback, etc. operations.
+
+0. The base.xml file was firstly generated from the existing database, on 2012-04-29, from liquibase, with the following statement
+(notice that you have to download liquibase first), and edited after that for minor improvements: 
+		
+./liquibase --driver=com.mysql.jdbc.Driver \
+--classpath=/home/gpereira/.m2/repository/mysql/mysql-connector-java-5.1.21/mysql-connector-java-5.1.21-bin.jar \
+--changeLogFile=base.xml --url=jdbc:mysql://localhost:3306/rec --username=root --password=root generateChangeLog
+
+1. To upgrade the database, simply run the following statement:
+mvn liquibase:update -P<profile> (where profile may be dev, qa and prod)
+
+2. To perform a rollback of the operations executed, simply run the following statement
+mvn liquibase:rollback -P<profile> (where profile may be dev, qa and prod) \
+(choose one of 
+-Dliquibase.rollbackTag=<tag of the script, if you have specified one>
+-Dliquibase.rollbackCount=<number of changesets to rollback>
+-Dliquibase.rollbackDate=dd-MMM-yyyy of the set to rollback) 
