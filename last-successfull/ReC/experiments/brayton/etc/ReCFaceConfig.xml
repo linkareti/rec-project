@@ -1,0 +1,18 @@
+<apparatus virtual="true/false" location="<APPARATUS_ID_LIKE_HARDWARE_INFO>"
+	customizerClassLocationBundleKey="<BUNDLE_NAME>$<BUNDLE_KEY_WITH_CLASS_FOR_CUSTOMIZER>"
+	toolTipBundleKey="<BUNDLE_NAME>$<BUNDLE_KEY_TOOLTIP>" iconLocationBundleKey="<BUNDLE_NAME>$<BUNDLE_KEY_ICON_URL>"
+	displayStringBundleKey="<BUNDLE_NAME>$<BUNDLE_KEY_DISPLAY_TITLE>"
+	desktopLocationBundleKey="<BUNDLE_NAME>$<BUNDLE_KEY_DESKTOP_IMAGE_BACKGROUND_URL>" order="<ORDER_IN_LAB>"
+	headerDisplayClassLocationBundleKey="<BUNDLE_NAME>$<BUNDLE_KEY_CLASS_FOR_HEADER>"
+	displayFactoryClassLocationBundleKey="<BUNDLE_NAME>$<BUNDLE_KEY_CLASS_FOR_DISPLAY_CREATION>"
+	dataModelClassLocationBundleKey="<BUNDLE_NAME>$<BUNDLE_KEY_CLASS_FOR_DATAMODEL>" visible="true/false" selected="true/false"
+	enabled="true/false" connected="true/false" xmlns="http://rec.linkare.com/client/config">
+	<localizationBundle name="<BUNDLE_NAME>"
+		location="recresource:///pt/utl/ist/elab/client/<EXPERIMENT_PACKAGE>/resources/messages" />
+	<display classLocationBundleKey="<BUNDLE_NAME>$<BUNDLE_KEY_CLASS_FOR_DISPLAY>"
+		toolTipBundleKey="<BUNDLE_NAME>$<BUNDLE_KEY_TOOLTIP>"
+		iconLocationBundleKey="ReCUI$<BUNDLE_KEY_ICON_URL>"
+		displayStringBundleKey="<BUNDLE_NAME>$<BUNDLE_KEY_DISPLAY_TITLE>"
+		offlineCapable="true/false" order="<ORDER_IN_TABS>" visible="true/false" selected="true/false"
+		enabled="true/false" connected="true/false" />
+</apparatus>
