@@ -1,0 +1,90 @@
+'{$STAMP BS2}
+'{$PORT COM1}
+
+'Nota que existe um protocolo nas mensagens:
+' PC -> STAMP - minúsculas
+' STAMP -> PC - maiúsculas
+
+'******* DEFAULT VARIABLES ********
+
+speedCon   	con     16390			'16390/34000 16572/4800 16468/9600 16780/2400 17197/1200
+spaceByte	var	byte			'Byte auxiliar (Space)
+TX		con	16
+RX		con	16
+i		var 	word
+nsamples	var	word			'nº de amostras a adquirir
+'******* END DEFAULT VARIABLES *******
+
+
+'******* SPECIFIC VARIABLES *******
+disparo		con	9	' pin utilizado para fazer o disparo da bola
+trigger		con	10	' pin utilizado para fazer o trigger do sensor
+sensorin	con	11	' pin de input que le o PWM do sensor
+delay_time	var	word	' delay entre aquisições (0 => 73Hz (13.7ms); 100 => 8,878Hz(113ms) TBS[s]=0.0028+altura [m]*0.01+delay_time/1000)
+'				min=10 max=250
+altura		var	word	' altura da bola ALTURA=0.000346*rctime [m]
+power		var	word	' potencia do disparo (0->100; 0 =>salto minimo;  100 => salto max)
+'******* END SPECIFIC VARIABLES *******
+
+
+'********************************************
+'Configuração inicial
+
+InitConfig:			'exemplo de uma rotina de inicializacao
+	low disparo
+	low trigger
+	DIRC = %0011		'disparo e trigger como output e sensorin como input
+	gosub FlashLight
+
+'********************************************
+'Não foi configurado
+Not_Configured:
+	SerOut TX,speedCon,["CONFIG_START_NOT_DONE",cr]
+
+
+'********************************************
+'Aguarda um ConfigStart pacientemente, enquanto vai informando quem é!
+MainWait:
+	SerOut TX,speedCon,["ELAB_G_STAMP_V00",cr]	' Identifica-se
+	Serin RX,speedCon,5000,Not_Configured,[wait("cfg "),dec4 nsamples,spaceByte,dec3 power,spaceByte,dec3 delay_time]
+
+'********************************************
+'Ok, configurado! Get Ready...
+Configured:
+
+	SerOut TX,speedCon,[cr,"CONFIG_START_ACCEPTED",cr]	'Aceitou a configuracao
+	pause 2000		'espera que a bola pare
+	
+'********************************************
+'Set... Go!
+
+AcqLoopEnter:
+	SerOut TX,speedCon,["STARTED",cr]		' Avisa que vai arrancar a rotina de aquisicao
+
+AcqLoop:
+	pulsout disparo,(power*50 + 3000)
+
+	for i=0 to nsamples
+		low trigger				' diz ao sensor para começar a medir
+		rctime	sensorin,0,altura		' mede o tempo que o sensor esta a zero
+		high trigger
+		SerOut TX,speedCon,["HEIGHT ",dec4 altura,cr]	' devolve o valor medido
+		pause delay_time			' espera x tempo entre aquisiçoes
+	next	
+
+AcqLoopEnd:
+	goto MainWait
+
+'********************************************
+' Função faz piscar 4 vezes o led verde para debug
+FlashLight:
+	low 7
+	for i=0 to 5
+		out7 = 0
+		pause 200
+		out7 = 1
+		pause 200
+	next
+	out7 = 0
+return
+'********************************************
