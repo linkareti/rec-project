@@ -1,0 +1,429 @@
+################################################################################
+#This file is a sample for to be used as a build.properties for a local build. #
+# please look at the remote build key/value local build key/value as options   #
+# choose one or the other if doing a remote or local build, the local build   #
+# key values were left uncommented                                             #
+################################################################################
+
+#Directory where java classes and intermediate files will be put on compiling the software
+build.dir=build/java
+#Directory where zip contents prepared for distribution releases will be put
+dist.dir=dist/java
+
+#Do not change the encoding unless you know what you're doing
+javac.encoding=UTF-8
+#Compile the code in debug mode. Hellpfull to check for errors in StackTraces
+javac.debug=true
+#Optimize the java code, acording to javac optimization tecnhiques
+javac.optimize=true
+#The source level of compilation. Currently, JSE6 is assumed
+javac.sourcelevel=1.6
+
+#The encoding to use when copying files. Please make sure all created files in the project are UTF-8
+copy.encoding=UTF-8
+
+#All real experiments = aleatorio,boylemariotte,condensadorcilindrico,conducaocalor,g,gamma,langmuir,meteo,momentoinercia,optica,paschen,pendulo,pendulogravitico,pinhole,planck,polaroid,pv,radioactividade,scuba,statsound,telescopio,thomson,webrobot,discos,colisione,hidrostat
+#All virtual experiments = rollpaper,vbs,vcargas3d,vcartpole,vcg,vcolisao,vdi,vfermap,vlooping,vm3,vmm,vmovproj,vmvbrown,voscilador,vpend2m,vpoisson,vquantum,vstdmap,vtiro,vyounginterf 
+
+#this next section explicits which labs are going to be compiled, packaged, distributed...
+#and the experiments to be build in each lab
+##remote build key/value
+#lab.list=basic,advanced,new_exps
+#lab.list=basic,intermediate,advanced,virtual_basic,virtual_intermediate,virtual_advanced,new_exps
+##local build key/value
+lab.list=basic
+
+##remote build key/value
+#basic.experiment.list=wpplanetarium
+#advanced.experiment.list=paschen,langmuir,optica,conducaocalor,discos,condensadorcilindrico,aleatorio
+#new_exps.experiment.list=boylemariotte,colisione,pendulo,pendulogravitico,polaroid,hidrostat,worldpendulummaputo,vtiro
+##local build key/value
+basic.experiment.list=vtiro
+
+#In case you wish to run a specific experiment
+#please define the following property to enable
+#just that specific experiment. In every case,
+#the main targets will compile/build/distribute all
+#the experiments defined in the experiment.list
+##local build key/value
+#experiment.name=vtiro
+
+#In case you wish to run a specific multicastcontroller
+#please define the following property to enable
+#just that lab. In every case,
+#the main targets will compile/build/distribute all
+#the labs  defined in the lab.list
+##local build key/value
+#lab.name=basic
+
+
+###DEPLOYMENT####
+rec.server=elab1.ist.utl.pt
+rec.server.dir=/home/elab/rec-deployment
+web.server=elab1.ist.utl.pt
+web.server.dir=/home/elab/rec-deployment
+
+##KEYSTORE CONFIGURATION###
+rec.keystore=cert/selfsigned.jks
+#rec.storetype=jks,pkcs12
+rec.storetype=jks
+rec.keypass=password
+rec.storepass=password
+rec.alias=selfsigned
+
+##KEYSTORE CONFIGURATION###
+elab.keystore=cert/selfsigned.jks
+#elab.storetype=jks,pkcs12
+elab.storetype=jks
+elab.keypass=password
+elab.storepass=password
+elab.alias=selfsigned
+
+##PACK 200##
+#set it to true if you want to generate packed client libs for smaller client deployment
+generate.pack200=false
+
+##RUN CONFIGURATION##
+max.memory=1024m
+min.memory=128m
+
+##COMMON MANIFEST## (adopted from com.linkare.commons project)
+com.linkare.rec.spec.title=ReC - e-lab
+com.linkare.rec.spec.version=1.0.0
+com.linkare.rec.spec.vendor=Linkare TI
+com.linkare.rec.impl.title=ReC - e-lab
+com.linkare.rec.impl.version=1.0.0
+com.linkare.rec.impl.vendor=Linkare TI
+
+###########################SYSTEM PROPERTIES###############################
+rec.multicastcontroller.bindname=MultiCastController 
+rec.multicastcontroller.initref=MultiCastController
+java.util.logging.config.file=loggers.config.properties
+java.util.logging.config.file.debug=${basedir}/templates/log/stdout.loggers.config.properties
+org.omg.CORBA.ORBClass=org.openorb.orb.core.ORB 
+org.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton 
+com.sun.CORBA.ORBDynamicStubFactoryFactoryClass=com.sun.corba.se.impl.presentation.rmi.StubFactoryFactoryStaticImpl
+
+##MULTICAST PROPERTIES - MULTICAST##
+multicast.openorb.profile=ReCMultiCastController
+rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE=15 
+multicast.initial.heap=128m
+multicast.max.heap=1024m
+multicast.debug.address.port=8000
+##remote build key/value
+#basic.multicast.controller.host=elab1.ist.utl.pt
+#basic.multicast.controller.port=9001
+#intermediate.multicast.controller.host=elab1.ist.utl.pt
+#intermediate.multicast.controller.port=9002
+#advanced.multicast.controller.host=elab1.ist.utl.pt
+#advanced.multicast.controller.port=9003
+#virtual_basic.multicast.controller.host=elab1.ist.utl.pt
+#virtual_basic.multicast.controller.port=9004
+#virtual_intermediate.multicast.controller.host=elab1.ist.utl.pt
+#virtual_intermediate.multicast.controller.port=9005
+#virtual_advanced.multicast.controller.host=elab1.ist.utl.pt
+#virtual_advanced.multicast.controller.port=9006
+#new_exps.multicast.controller.host=elab1.ist.utl.pt
+##new_exps.multicast.controller.host=elab1_vpn
+#new_exps.multicast.controller.port=9007
+##local build key/value
+basic.multicast.controller.host=localhost
+basic.multicast.controller.port=9001
+
+##Additional java arguments to start each multicast jvm
+basic.additional.java.args=
+intermediate.additional.java.args=
+advanced.additional.java.args=
+virtual_basic.additional.java.args=
+virtual_intermediate.additional.java.args=
+virtual_advanced.additional.java.args=
+new_exps.additional.java.args=
+
+##SECURITYMANAGER PROPERTIES##
+# This property is necessary for the StartMultiCastController to deal with the security managers that enable the communication with the rec.web.
+# It should match the ID/NAME of the laboratory
+rec.web.host=elab1.ist.utl.pt
+rec.web.port=3700
+basic.rec.web.lab.id=LAB_ME_BASIC
+
+##remote build key/value 
+#intermediate.rec.web.lab.id=LAB_ME_INTERMEDIATE
+#advanced.rec.web.lab.id=LAB_ME_ADVANCED
+#virtual_basic.rec.web.lab.id=VIRT_LAB_IST_BASIC
+#virtual_intermediate.rec.web.lab.id=VIRT_LAB_IST_INTERMEDIATE
+#virtual_advanced.rec.web.lab.id=VIRT_LAB_IST_ADVANCED
+#new_exps.rec.web.lab.id=NEW_EXPS_LAB
+##local build key/value
+intermediate.rec.web.lab.id=LAB_ME_INTERMEDIATE
+advanced.rec.web.lab.id=LAB_ME_ADVANCED
+virtual_basic.rec.web.lab.id=VIRT_LAB_IST_BASIC
+virtual_intermediate.rec.web.lab.id=VIRT_LAB_IST_INTERMEDIATE
+virtual_advanced.rec.web.lab.id=VIRT_LAB_IST_ADVANCED
+new_exps.rec.web.lab.id=NEW_EXPS_LAB
+
+#com.linkare.rec.impl.multicast.security.AllocationManagerSecurityManager
+#com.linkare.rec.impl.multicast.security.DefaultSecurityManager
+rec.multicast.securitymanager=com.linkare.rec.impl.multicast.security.DefaultSecurityManager
+
+rec.web.securitymanager.interval.lap.time.minutes=0
+rec.web.securitymanager.near.lap.time.minutes=5
+rec.web.securitymanager.refresh.lap.time.minutes=15
+
+##SYSTEM PROPERTIES - EXPERIMENTS## 
+experiment.driver.openorb.profile=ReCHardware
+experiment.client.openorb.profile=ReCClient
+experiment.client.debug.address.port=8001
+experiment.driver.debug.address.port=8002
+hardwareserver.initial.heap=64m
+hardwareserver.max.heap=128m
+
+##SYSTEM PROPERTIES - VIDEO##
+vlc.plugins.destdir=eLab/native/plugins
+vlc.plugins.filename=vlcplugins.zip
+video.enabled=yes
+
+##JNLP PROPERTIES
+#Please define the codebase without the trailing slash... It will be added automagically when needed!
+##remote build key/value
+#application-library-allowable-codebase=http://elab1.ist.utl.pt/*
+#application-library-allowable-codebase=http://elab.ist.utl.pt/*
+##local key/value
+application-library-allowable-codebase=*
+
+##remote build key/value
+#codebase=http://elab1.ist.utl.pt/rec.web/client
+#codebase=http://elab1.ist.utl.pt/rec.web/client
+##local build key/value
+codebase=file://localhost/home/rvaz/NetBeansProjects/rec/build/java/jars/client
+href=elab-client.jnlp
+title=e-lab - Full Laboratory
+vendor=I.S.T. - U.T.L.
+homepage=http://elab.ist.utl.pt/rec
+one-line=Laboratório e-lab - ME
+tooltip=Laboratório e-lab - ME
+short=Laboratório e-lab - ME
+j2se-version=1.6+
+
+
+##MAIN CLASSES FOR THE VARIOUS COMPONENTS
+#Old interface Main Class - pt.utl.ist.elab.client.FullClient
+#Newface Main Class - pt.utl.ist.elab.client.FullClientNewInterface
+client.main-class=pt.utl.ist.elab.client.FullClientNewInterface
+multicast.main-class=com.linkare.rec.impl.multicast.startup.MultiCastControllerMain
+experiment.driver.main-class=com.linkare.rec.impl.driver.FullServerMain
+
+
+
+#Marketing/Information messages
+#The following properties are for the elab application title.
+elab.title=e-lab
+elab.vendor=IST
+elab.homepage=http://elab.ist.utl.pt
+elab.description=Laboratórios Online do Instituto Superior Técnico - disponibilizados para o Ministério da Educação de Portugal
+elab.description.oneline=Labs Online
+elab.description.tooltip=Laboratórios Online
+elab.description.short=Labs Online
+elab.icon=images/icon_elab_32.png
+elab.icon.splash=images/splash.png
+elab.title.en=e-lab
+elab.homepage.en=http://elab.ist.utl.pt
+elab.description.en=Instituto Superior Técnico's online laboratories
+elab.description.oneline.en=Online Labs
+elab.description.tooltip.en=Online Laboratories
+elab.description.short.en=Online Labs
+
+#and the next ones for the ReC framework and the Linkare TI vendor
+rec.title=Framework ReC
+rec.vendor=Linkare TI
+rec.homepage=http://www.linkare.com/rec
+rec.description='Remote Experienced Control' sistema distribuído de controle e aquisição de dados para suporte de experimentação online, telemedicina e soluções industriais
+rec.description.oneline=Framework Remote Experienced Control
+rec.description.tooltip=Framework distribuída de controle de aquisição de dados
+rec.description.short=Framework ReC
+rec.icon=images/ReCIconHand16.jpg
+rec.icon.splash=images/RecLogo2Gray.png
+linkare.home.url=http://www.linkare.com
+linkare.home.title=Homepage Linkare TI
+linkare.home.description=Página de entrada do sítio da internet do fornecedor da framework 'Remote Experienced Control', Linkare TI.
+linkare.home.icon=images/linkare_logo_small.jpg
+rec.title.en=ReC Framework
+rec.homepage.en=http://www.linkare.com/en/rec
+rec.description.en='Remote Experienced Control' distributed data acquisition and control framework for online experiments, telemedicine and industrial solutions
+rec.description.oneline.en=Remote Experienced Control Framework
+rec.description.tooltip.en=Data acquisition and control distributed Framework
+rec.description.short.en=ReC Framework
+linkare.home.url.en=http://www.linkare.com/en
+linkare.home.title.en=Linkare TI's Homepage
+linkare.home.description.en=Linkare TI's webSite, the provider of Remote Experienced Control Framework
+
+
+#and the next ones for the Java3D framework and the Oracle vendor
+j3d.title=Java 3D Framework
+j3d.vendor=java.net
+j3d.homepage=http://java3d.java.net
+j3d.description=Projecto para componentes 3D em Java
+j3d.description.oneline=Java 3D
+j3d.description.tooltip=Components 3D - Java
+j3d.description.short=Componentes 3D - Java
+j3d.icon=images/java-duke-icon.png
+j3d.icon.splash=images/duke3d.jpg
+j3d.home.url=http://java.net
+j3d.home.title=Página inicial do java.net
+j3d.home.description=Página de entrada do sítio da internet do fornecedor da framework 'Java 3D', java.net
+j3d.home.icon=images/java-duke-icon.png
+j3d.title.en=Java 3D Framework
+j3d.vendor.en=java.net
+j3d.homepage.en=http://java3d.java.net
+j3d.description.en=Java 3D components development project
+j3d.description.oneline.en=Java 3D
+j3d.description.tooltip.en=3D Components - Java
+j3d.description.short.en=3D Components - Java
+j3d.icon.en=images/java-duke-icon.png
+j3d.icon.splash.en=images/duke3d.jpg
+j3d.home.url.en=http://java.net
+j3d.home.title.en=Homepage java.net
+j3d.home.description.en=Entrance page of the Java 3D Framework supplier, java.net.
+j3d.home.icon.en=images/java-duke-icon.png
+
+#The next ones relate to the JFreeChart underlying library
+jfreechart.title=JFreeChart Library
+jfreechart.vendor=JFree.org - David Gilbert (Object Refinery Limited)
+jfreechart.homepage=http://www.jfree.org/jfreechart
+jfreechart.description=JFreeChart is a free 100% Java chart library that makes it easy for developers to display professional quality charts in their applications.
+jfreechart.description.oneline=JFreeChart charting library
+jfreechart.description.tooltip=JFreeChart Library 
+jfreechart.description.short=Charting library
+jfreechart.icon=images/jfreechart_icon.png
+jfreechart.icon.splash=images/jfreechart_splash.png
+
+#Last but not least, the OpenORB Java CORBA Object Request Broker 
+openorb.title=Community OpenORB
+openorb.vendor=The Community OpenORB community - see http://openorb.sourceforge.net/who-we-are.html
+openorb.homepage=http://openorb.sourceforge.net/
+openorb.description=OpenORB provides a Java implementation of the OMG CORBA 2.4.2 specification.
+openorb.description.oneline=OpenORB Implementation of OMG CORBA 2.4.2 ORB
+openorb.description.tooltip=Community OpenORB
+openorb.description.short=OpenSource CORBA ORB
+
+#And still the vlc/vlcj properties
+vlc.home.url=http://www.videolan.org/
+vlc.home.title=Videolan Media Player
+vlc.home.description=A Multimedia Player based on opensource GPL License and other underlying software such as gstreamer, ffmpeg and alike
+vlc.home.icon=images/vlc_icon.png
+vlc.home.url.en=http://www.videolan.org/
+vlc.home.title.en=Videolan Media Player
+vlc.home.description.en=A Multimedia Player based on opensource GPL License and other underlying software such as gstreamer, ffmpeg and alike
+
+#And the os based installer ones
+linux.vlc.intaller.title=Instalador VLC para Linux
+linux.vlc.intaller.vendor=Linkare TI
+linux.intaller.homepage=http://www.linkare.com
+linux.vlc.intaller.description=Instalador do Videolan MediaPlayer e plugins
+linux.vlc.intaller.description.oneline=Instalador VLC para Linux
+linux.vlc.intaller.description.tooltip=Instalador VLC para Linux
+linux.vlc.intaller.description.short=Instalador VLC para Linux
+linux.vlc.intaller.icon=images/vlc_icon.png
+linux.vlc.intaller.icon.splash=images/vlc_splash.jpg
+linux.vlc.intaller.title.en=Linux VLC Installer
+linux.vlc.intaller.homepage.en=http://www.linkare.com
+linux.vlc.intaller.description.en=Videolan MediaPlayer and plugins installer
+linux.vlc.intaller.description.oneline.en=VLC Installer for Linux
+linux.vlc.intaller.description.tooltip.en=VLC Installer for Linux
+linux.vlc.intaller.description.short.en=VLC Installer for Linux
+
+
+windows.vlc.intaller.title=Instalador VLC para Windows
+windows.vlc.intaller.vendor=Linkare TI
+windows.intaller.homepage=http://www.linkare.com
+windows.vlc.intaller.description=Instalador do Videolan MediaPlayer e plugins
+windows.vlc.intaller.description.oneline=Instalador VLC para Windows
+windows.vlc.intaller.description.tooltip=Instalador VLC para Windows
+windows.vlc.intaller.description.short=Instalador VLC para Windows
+windows.vlc.intaller.icon=images/vlc_icon.png
+windows.vlc.intaller.icon.splash=images/vlc_splash.jpg
+windows.vlc.intaller.title.en=Windows VLC Installer
+windows.vlc.intaller.homepage.en=http://www.linkare.com
+windows.vlc.intaller.description.en=Videolan MediaPlayer and plugins installer
+windows.vlc.intaller.description.oneline.en=VLC Installer for Windows
+windows.vlc.intaller.description.tooltip.en=VLC Installer for Windows
+windows.vlc.intaller.description.short.en=VLC Installer for Windows
+
+mac.vlc.intaller.title=Instalador VLC para MaCOSX
+mac.vlc.intaller.vendor=Linkare TI
+mac.intaller.homepage=http://www.linkare.com
+mac.vlc.intaller.description=Instalador do Videolan MediaPlayer e plugins
+mac.vlc.intaller.description.oneline=Instalador VLC para MaCOSX
+mac.vlc.intaller.description.tooltip=Instalador VLC para MaCOSX
+mac.vlc.intaller.description.short=Instalador VLC para MaCOSX
+mac.vlc.intaller.icon=images/vlc_icon.png
+mac.vlc.intaller.icon.splash=images/vlc_splash.jpg
+mac.vlc.intaller.title.en=mac VLC Installer
+mac.vlc.intaller.homepage.en=http://www.linkare.com
+mac.vlc.intaller.description.en=Videolan MediaPlayer and plugins installer
+mac.vlc.intaller.description.oneline.en=VLC Installer for MaCOSX
+mac.vlc.intaller.description.tooltip.en=VLC Installer for MaCOSX
+mac.vlc.intaller.description.short.en=VLC Installer for MaCOSX
+
+##PROCESSINGMANAGER PROPERTIES##
+##Defined the threadpool size
+rec.multicast.processingmanager.threadpool.coresize=50
+rec.multicast.processingmanager.threadpool.maxsize=100
+rec.client.processingmanager.threadpool.coresize=2
+rec.client.processingmanager.threadpool.maxsize=4
+rec.driver.processingmanager.threadpool.coresize=2
+rec.driver.processingmanager.threadpool.maxsize=4
+#NANOSECONDS
+##Life time of threadpool
+rec.processingmanager.thread.idletime=11
+
+
+##JMX PROPERTIES##
+##This properties define the ports used in JMX by labs
+##Please keep the jmx port as the corba port for the multicast + 16000 if possible, because there is some generic code dependent on it...
+basic.rec.multicastcontroller.jmxremote.port=25001
+##remote build key/value
+#intermediate.rec.multicastcontroller.jmxremote.port=25002
+#advanced.rec.multicastcontroller.jmxremote.port=25003
+#virtual_basic.rec.multicastcontroller.jmxremote.port=25004
+#virtual_intermediate.rec.multicastcontroller.jmxremote.port=25005
+#virtual_advanced.rec.multicastcontroller.jmxremote.port=25006
+#new_exps.rec.multicastcontroller.jmxremote.port=25007
+#java.rmi.server.hostname=`hostname -i`
+##local build key/value
+java.rmi.server.hostname=`hostname -i`
+
+###EXPERIMENT REPOSITORY###
+##If rec-web is available and installed, please define the implementation of the repository as remote
+##remote build key/value (unless experimenting with rec.web)
+#rec.multicast.repository=com.linkare.rec.impl.multicast.repository.impl.RemoteRepository
+##Otherwise use a local repository on FileSystem
+##local build key/value
+rec.multicast.repository=com.linkare.rec.impl.multicast.repository.impl.FSRepository
+
+##rec.web END POINT##
+#The following property defining the URL which is used by system to access the webservices
+##remote build key/value
+#rec.web.endpoint=http://elab1.ist.utl.pt:8080/rec-services
+##local build key/value
+rec.web.endpoint=http://localhost:8080/rec-services
+
+##SYSTEM PROPERTIES - Chat##
+#This property defining the interval of updating the list of bad words
+rec.multicast.badwordmanager.refresh.lap.time.minutes=1440
+
+##SYSTEM PROPERTIES - Apparatus Auto Connect ID##
+### This property is used to auto connect and must be the value of the, e.g (<apparatus location="MY_EXPERIMENT_NAME_V1.0" ...>) of the RecFaceConfig.xml ###
+rec.apparatus.autoconnect.id=
+
+##SYSTEM PROPERTIES - Apparatus Auto acquire result ##
+##When this property is defined true, the user is redirected to result tab, in auto connect mode.
+rec.apparatus.autoacquireresult=false
+
+##PATH PROPERTIES FOR INSTALLATION##
+##Define the user home directory where the system will be installed (this is for replacing into scripts)
+install.dir=/home/elab
+##Define the subdirectory, if any, where the deployments will be made, relative to the install.dir above. 
+##Please note that specifying a path requires a forward slash (or back slash on windows) at the begggining
+deployment.subdir=/rec-deployment
+##Define the user to run-as in the daemon startup script
+daemon.user=elab
