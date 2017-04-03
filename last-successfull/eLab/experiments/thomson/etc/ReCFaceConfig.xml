@@ -1,9 +1,0 @@
-
-<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="thomson$rec.exp.tip.thomson" location="ELAB_THOMSON_STAMP_V01" iconLocationBundleKey="thomson$rec.exp.icon.thomson" headerDisplayClassLocationBundleKey="" displayStringBundleKey="thomson$rec.exp.title.thomson" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="" descriptionStringBundleKey="thomson$rec.exp.background.thomson" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="thomson$rec.exp.customizer.thomson" order="0">
-    <display toolTipBundleKey="thomson$rec.exp.display.thomson.tip.sensor" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor" displayStringBundleKey="thomson$rec.exp.display.thomson.title.sensor" classLocationBundleKey="thomson$rec.exp.display.thomson.loc.sensor" order="0"/>
-    <display toolTipBundleKey="thomson$rec.exp.display.thomson.tip.1" offlineCapable="false" iconLocationBundleKey="thomson$rec.exp.icon.thomson" displayStringBundleKey="thomson$rec.exp.display.thomson.title.1" classLocationBundleKey="thomson$rec.exp.display.thomson.loc.1" order="0"/>
-    <display toolTipBundleKey="thomson$rec.exp.display.thomson.tip.3" offlineCapable="false" iconLocationBundleKey="thomson$rec.exp.icon.thomson" displayStringBundleKey="thomson$rec.exp.display.thomson.title.3" classLocationBundleKey="thomson$rec.exp.display.thomson.loc.3" order="0"/>
-    <display toolTipBundleKey="thomson$rec.exp.display.thomson.tip.2" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.movie" displayStringBundleKey="thomson$rec.exp.display.thomson.title.2" classLocationBundleKey="thomson$rec.exp.display.thomson.loc.2" order="0"/>
-    <localizationBundle name="thomson" location="recresource:///pt/utl/ist/elab/client/thomson/resources/messages"/>
-    <mediaConfig videoLocation="thomson$rec.exp.url.thomson.video" offlinePlay="true" canSave="true" order="0"/>
-</apparatus>
