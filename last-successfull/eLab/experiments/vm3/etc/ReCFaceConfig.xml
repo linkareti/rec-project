@@ -1,9 +1,0 @@
-
-<apparatus xmlns="http://rec.linkare.com/client/config" virtual="true" toolTipBundleKey="m3$rec.exp.tip.m3" location="MOLAS3_V1.0" iconLocationBundleKey="m3$rec.exp.icon.m3" headerDisplayClassLocationBundleKey="" displayStringBundleKey="m3$rec.exp.title.m3" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="m3$rec.exp.background.m3" descriptionStringBundleKey="m3$rec.exp.description.m3" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="m3$rec.exp.customizer.m3" order="1">
-    <display toolTipBundleKey="m3$rec.exp.display.m3.tip.anim" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.sensor" displayStringBundleKey="m3$rec.exp.display.m3.title.anim" classLocationBundleKey="m3$rec.exp.display.m3.loc.anim" order="1"/>
-    <display toolTipBundleKey="m3$rec.exp.display.m3.tip.1" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="m3$rec.exp.display.m3.title.1" classLocationBundleKey="m3$rec.exp.display.m3.loc.1" order="2"/>
-    <display toolTipBundleKey="m3$rec.exp.display.m3.tip.2" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="m3$rec.exp.display.m3.title.2" classLocationBundleKey="m3$rec.exp.display.m3.loc.2" order="3"/>
-    <display toolTipBundleKey="m3$rec.exp.display.m3.tip.3" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="m3$rec.exp.display.m3.title.3" classLocationBundleKey="m3$rec.exp.display.m3.loc.3" order="4"/>
-    <display toolTipBundleKey="m3$rec.exp.display.m3.tip.4" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="m3$rec.exp.display.m3.title.4" classLocationBundleKey="m3$rec.exp.display.m3.loc.4" order="5"/>
-    <localizationBundle name="m3" location="recresource:///pt/utl/ist/elab/client/vm3/resources/messages"/>
-</apparatus>
