@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
-<hardware id="ELAB_MAG3D_DSPIC_V0.1" num_channels="2" minfrequency="0.1Hz" maxfrequency="1000Hz">
+<hardware id="ELAB_MAG3D_DSPIC_V0.1" num_channels="4" minfrequency="0.1Hz" maxfrequency="1000Hz">
   <rs232 baud="115200" stopbits="1" paritybits="0" numbits="8" ports_restrict="/dev/ttyS0">
 	<parameters>
 		<!-- protocol -->
 	    <parameter output="0" input="0" maxvalue="2" minvalue="1" order="0">
 	    </parameter>
-	    <!-- pos_init -->
-	    <parameter output="##0" input="##0" maxvalue="340" minvalue="6" order="1">
-	    </parameter>
 	    <!-- current -->
-	    <parameter output="##0" input="##0" maxvalue="150" minvalue="0" order="2">
+	    <parameter output="##0" input="##0" maxvalue="100" minvalue="0" order="1">
 	    </parameter>
-	    <!-- angle -->
-	    <parameter output="#0" input="#0" maxvalue="90" minvalue="0" order="3">
+	     <!-- angle -->
+	    <parameter output="#0" input="#0" maxvalue="90" minvalue="0" order="2">
+	    </parameter>
+	    <!-- pos_init -->
+	    <parameter output="##0" input="##0" maxvalue="323" minvalue="5" order="3">
 	    </parameter>
 	    <!--n_samples -->
-	    <parameter output="##0" input="##0" maxvalue="335" minvalue="2" order="4">
+	    <parameter output="##0" input="##0" maxvalue="318" minvalue="1" order="4">
 	    </parameter>
 	</parameters>
 	<channels>

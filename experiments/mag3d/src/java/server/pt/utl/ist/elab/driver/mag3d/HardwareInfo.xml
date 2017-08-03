@@ -19,19 +19,11 @@
 			<value order="3">1</value>
 		</selection-list>
 	</parameter>
-
-	<parameter name="pos_init" type="ContinuousValue" value="12">
-		<selection-list>
-			<value order="1">6</value>
-			<value order="2">340</value>
-			<value order="3">1</value>
-		</selection-list>
-	</parameter>
 	
 	<parameter name="current" type="ContinuousValue" value="100">
 		<selection-list>
 			<value order="1">0</value>
-			<value order="2">150</value>
+			<value order="2">100</value>
 			<value order="3">1</value>
 		</selection-list>
 	</parameter>
@@ -44,10 +36,18 @@
 		</selection-list>
 	</parameter>
 
-	<parameter name="n_samples" type="ContinuousValue" value="108">
+	<parameter name="pos_init" type="ContinuousValue" value="50">
 		<selection-list>
-			<value order="1">2</value>
-			<value order="2">335</value>
+			<value order="1">5</value>
+			<value order="2">323</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
+	
+	<parameter name="n_samples" type="ContinuousValue" value="100">
+		<selection-list>
+			<value order="1">1</value>
+			<value order="2">318</value>
 			<value order="3">1</value>
 		</selection-list>
 	</parameter>
@@ -60,8 +60,8 @@
 	<Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency>
 
 	<sampling-scale>
-		<min-samples>2</min-samples>
-		<max-samples>335</max-samples>
+		<min-samples>1</min-samples>
+		<max-samples>318</max-samples>
 		<step-samples>1</step-samples>
 	</sampling-scale>
 
@@ -75,29 +75,29 @@
 	</ChannelInfo>
 
 	<ChannelInfo name="mag3d$rec.exp.mag3d.hardwareinfo.channel.1.name" independent="false" direction="CHANNEL_INPUT">
-		<scale label="mag3d$rec.exp.mag3d.hardwareinfo.channel.1.label" physicsunitname="mag3d$rec.exp.mag3d.hardwareinfo.channel.1.physicsunitname" physicsunitsymbol="" multiplier="milli" selected="true">
-			<min><PhysicsVal type="float">-5</PhysicsVal></min>
-			<max><PhysicsVal type="float">5</PhysicsVal></max>
-			<step><PhysicsVal type="float">1</PhysicsVal></step>
-			<errordefault><PhysicsVal type="float">0.01</PhysicsVal></errordefault>
+		<scale label="mag3d$rec.exp.mag3d.hardwareinfo.channel.1.label" physicsunitname="mag3d$rec.exp.mag3d.hardwareinfo.channel.1.physicsunitname" physicsunitsymbol="" multiplier="" selected="true">
+			<min><PhysicsVal type="int">-4095</PhysicsVal></min>
+			<max><PhysicsVal type="int">4096</PhysicsVal></max>
+			<step><PhysicsVal type="int">1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="float">1</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 	
 	<ChannelInfo name="mag3d$rec.exp.mag3d.hardwareinfo.channel.2.name" independent="false" direction="CHANNEL_INPUT">
-		<scale label="mag3d$rec.exp.mag3d.hardwareinfo.channel.2.label" physicsunitname="mag3d$rec.exp.mag3d.hardwareinfo.channel.2.physicsunitname" physicsunitsymbol="" multiplier="milli" selected="true">
-			<min><PhysicsVal type="float">-5</PhysicsVal></min>
-			<max><PhysicsVal type="float">5</PhysicsVal></max>
-			<step><PhysicsVal type="float">1</PhysicsVal></step>
-			<errordefault><PhysicsVal type="float">0.01</PhysicsVal></errordefault>
+		<scale label="mag3d$rec.exp.mag3d.hardwareinfo.channel.2.label" physicsunitname="mag3d$rec.exp.mag3d.hardwareinfo.channel.2.physicsunitname" physicsunitsymbol="" multiplier="" selected="true">
+			<min><PhysicsVal type="int">-4095</PhysicsVal></min>
+			<max><PhysicsVal type="int">4096</PhysicsVal></max>
+			<step><PhysicsVal type="int">1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="float">1</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 	
 	<ChannelInfo name="mag3d$rec.exp.mag3d.hardwareinfo.channel.3.name" independent="false" direction="CHANNEL_INPUT">
-		<scale label="mag3d$rec.exp.mag3d.hardwareinfo.channel.3.label" physicsunitname="mag3d$rec.exp.mag3d.hardwareinfo.channel.3.physicsunitname" physicsunitsymbol="" multiplier="milli" selected="true">
-			<min><PhysicsVal type="float">-5</PhysicsVal></min>
-			<max><PhysicsVal type="float">5</PhysicsVal></max>
-			<step><PhysicsVal type="float">1</PhysicsVal></step>
-			<errordefault><PhysicsVal type="float">0.01</PhysicsVal></errordefault>
+		<scale label="mag3d$rec.exp.mag3d.hardwareinfo.channel.3.label" physicsunitname="mag3d$rec.exp.mag3d.hardwareinfo.channel.3.physicsunitname" physicsunitsymbol="" multiplier="" selected="true">
+			<min><PhysicsVal type="int">-4095</PhysicsVal></min>
+			<max><PhysicsVal type="int">4096</PhysicsVal></max>
+			<step><PhysicsVal type="int">1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="float">1</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 
