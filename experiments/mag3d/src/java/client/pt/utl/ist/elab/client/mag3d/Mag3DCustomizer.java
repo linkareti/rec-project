@@ -84,18 +84,18 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         btnDefaults = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         slidersPanel = new javax.swing.JPanel();
-        coilCurrentPanel = new javax.swing.JPanel();
-        sldCoilCurrent = new javax.swing.JSlider();
-        tfCoilCurrent = new javax.swing.JTextField();
-        anglePanel = new javax.swing.JPanel();
-        sldAngle = new javax.swing.JSlider();
-        tfAngle = new javax.swing.JTextField();
         positionPanel = new javax.swing.JPanel();
         sldPos1 = new javax.swing.JSlider();
         sldPos2 = new javax.swing.JSlider();
         lblErrorPosAreEqual = new javax.swing.JLabel();
         tfPos1 = new javax.swing.JFormattedTextField();
         tfPos2 = new javax.swing.JFormattedTextField();
+        coilCurrentPanel = new javax.swing.JPanel();
+        sldCoilCurrent = new javax.swing.JSlider();
+        tfCoilCurrent = new javax.swing.JTextField();
+        anglePanel = new javax.swing.JPanel();
+        sldAngle = new javax.swing.JSlider();
+        tfAngle = new javax.swing.JTextField();
 
         setMinimumSize(new java.awt.Dimension(350, 460));
         setPreferredSize(new java.awt.Dimension(350, 460));
@@ -157,15 +157,103 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         slidersPanel.setMinimumSize(new java.awt.Dimension(350, 160));
         slidersPanel.setLayout(new javax.swing.BoxLayout(slidersPanel, javax.swing.BoxLayout.Y_AXIS));
 
+        positionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.customizer.title1","mag3d$rec.exp.customizer.title1"))); // NOI18N
+        positionPanel.setMinimumSize(new java.awt.Dimension(350, 160));
+        positionPanel.setPreferredSize(new java.awt.Dimension(350, 160));
+        positionPanel.setLayout(new java.awt.GridBagLayout());
+
+        sldPos1.setMajorTickSpacing(53);
+        sldPos1.setMaximum(323);
+        sldPos1.setMinimum(5);
+        sldPos1.setPaintLabels(true);
+        sldPos1.setPaintTicks(true);
+        sldPos1.setPaintTrack(false);
+        sldPos1.setValue(12);
+        sldPos1.setMinimumSize(new java.awt.Dimension(250, 42));
+        sldPos1.setPreferredSize(new java.awt.Dimension(250, 42));
+        sldPos1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sldPos1StateChanged(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.weighty = 10.0;
+        positionPanel.add(sldPos1, gridBagConstraints);
+
+        sldPos2.setMajorTickSpacing(53);
+        sldPos2.setMaximum(323);
+        sldPos2.setMinimum(5);
+        sldPos2.setPaintLabels(true);
+        sldPos2.setPaintTicks(true);
+        sldPos2.setPaintTrack(false);
+        sldPos2.setSnapToTicks(true);
+        sldPos2.setToolTipText("");
+        sldPos2.setMinimumSize(new java.awt.Dimension(250, 42));
+        sldPos2.setPreferredSize(new java.awt.Dimension(250, 42));
+        sldPos2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sldPos2StateChanged(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weighty = 10.0;
+        positionPanel.add(sldPos2, gridBagConstraints);
+
+        lblErrorPosAreEqual.setForeground(new java.awt.Color(255, 0, 0));
+        lblErrorPosAreEqual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblErrorPosAreEqual.setText(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.customizer.label1","mag3d$rec.exp.customizer.label1")); // NOI18N
+        lblErrorPosAreEqual.setEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        positionPanel.add(lblErrorPosAreEqual, gridBagConstraints);
+
+        tfPos1.setText("12");
+        tfPos1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfPos1FocusLost(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        positionPanel.add(tfPos1, gridBagConstraints);
+
+        tfPos2.setText("120");
+        tfPos2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfPos2ActionPerformed(evt);
+            }
+        });
+        tfPos2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfPos2FocusLost(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        positionPanel.add(tfPos2, gridBagConstraints);
+
+        slidersPanel.add(positionPanel);
+
         coilCurrentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.customizer.title2","mag3d$rec.exp.customizer.title2"))); // NOI18N
         coilCurrentPanel.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         coilCurrentPanel.setMinimumSize(new java.awt.Dimension(350, 80));
         coilCurrentPanel.setPreferredSize(new java.awt.Dimension(350, 80));
         coilCurrentPanel.setLayout(new java.awt.GridBagLayout());
 
-        sldCoilCurrent.setMajorTickSpacing(25);
-        sldCoilCurrent.setMaximum(150);
-        sldCoilCurrent.setMinorTickSpacing(5);
+        sldCoilCurrent.setMajorTickSpacing(20);
+        sldCoilCurrent.setMinorTickSpacing(2);
         sldCoilCurrent.setPaintLabels(true);
         sldCoilCurrent.setPaintTicks(true);
         sldCoilCurrent.setPaintTrack(false);
@@ -258,98 +346,6 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         slidersPanel.add(anglePanel);
 
         add(slidersPanel, java.awt.BorderLayout.CENTER);
-
-        positionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.customizer.title1","mag3d$rec.exp.customizer.title1"))); // NOI18N
-        positionPanel.setMinimumSize(new java.awt.Dimension(350, 160));
-        positionPanel.setPreferredSize(new java.awt.Dimension(350, 160));
-        positionPanel.setLayout(new java.awt.GridBagLayout());
-
-        sldPos1.setMajorTickSpacing(84);
-        sldPos1.setMaximum(340);
-        sldPos1.setMinimum(6);
-        sldPos1.setMinorTickSpacing(6);
-        sldPos1.setPaintLabels(true);
-        sldPos1.setPaintTicks(true);
-        sldPos1.setPaintTrack(false);
-        sldPos1.setValue(12);
-        sldPos1.setMinimumSize(new java.awt.Dimension(250, 42));
-        sldPos1.setPreferredSize(new java.awt.Dimension(250, 42));
-        sldPos1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                sldPos1StateChanged(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
-        gridBagConstraints.weighty = 10.0;
-        positionPanel.add(sldPos1, gridBagConstraints);
-
-        sldPos2.setMajorTickSpacing(84);
-        sldPos2.setMaximum(340);
-        sldPos2.setMinimum(6);
-        sldPos2.setMinorTickSpacing(6);
-        sldPos2.setPaintLabels(true);
-        sldPos2.setPaintTicks(true);
-        sldPos2.setPaintTrack(false);
-        sldPos2.setSnapToTicks(true);
-        sldPos2.setToolTipText("");
-        sldPos2.setValue(120);
-        sldPos2.setMinimumSize(new java.awt.Dimension(250, 42));
-        sldPos2.setPreferredSize(new java.awt.Dimension(250, 42));
-        sldPos2.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                sldPos2StateChanged(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weighty = 10.0;
-        positionPanel.add(sldPos2, gridBagConstraints);
-
-        lblErrorPosAreEqual.setForeground(new java.awt.Color(255, 0, 0));
-        lblErrorPosAreEqual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblErrorPosAreEqual.setText(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.customizer.label1","mag3d$rec.exp.customizer.label1")); // NOI18N
-        lblErrorPosAreEqual.setEnabled(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        positionPanel.add(lblErrorPosAreEqual, gridBagConstraints);
-
-        tfPos1.setText("12");
-        tfPos1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                tfPos1FocusLost(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        positionPanel.add(tfPos1, gridBagConstraints);
-
-        tfPos2.setText("120");
-        tfPos2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfPos2ActionPerformed(evt);
-            }
-        });
-        tfPos2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                tfPos2FocusLost(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        positionPanel.add(tfPos2, gridBagConstraints);
-
-        add(positionPanel, java.awt.BorderLayout.NORTH);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfAngleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAngleActionPerformed
@@ -475,7 +471,7 @@ public class Mag3DCustomizer extends AbstractCustomizer {
     }// GEN-LAST:event_sldCoilCurrentStateChanged
 
     private void checkPosOverlap() {
-        lblErrorPosAreEqual.setEnabled(sldPos1.getValue()+1 >= sldPos2.getValue()); // this determines the number of samples and they must be at least 2
+        lblErrorPosAreEqual.setEnabled(sldPos1.getValue() <= sldPos2.getValue()); // this determines the number of samples and they must be at least 1
         btnOK.setEnabled(!lblErrorPosAreEqual.isEnabled());
     }
 
@@ -503,7 +499,7 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         getAcquisitionConfig().getSelectedHardwareParameter("current").setParameterValue(
                 "" + (sldCoilCurrent.getValue()));
         getAcquisitionConfig().getSelectedHardwareParameter("angle").setParameterValue("" + (sldAngle.getValue()));
-        getAcquisitionConfig().setTotalSamples(sldPos2.getValue()-sldPos1.getValue()+1);
+        getAcquisitionConfig().setTotalSamples(sldPos2.getValue()-sldPos1.getValue());
         //getAcquisitionConfig().setSelectedFrequency(
         //        new Frequency((double) sldAngle.getValue(), getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
         fireICustomizerListenerDone();

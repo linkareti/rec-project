@@ -89,7 +89,7 @@ public class DialDoubleNeedle extends JPanel {
         dvi.setOutlinePaint(Color.darkGray);
         dvi.setRadius(0.60);
         dvi.setAngle(-103.0);
-        dvi.setNumberFormat(new java.text.DecimalFormat("0.00"));
+        dvi.setNumberFormat(new java.text.DecimalFormat("0"));
         plot.addLayer(dvi);
 
         DialValueIndicator dvi2 = new DialValueIndicator(1);//new DialValueIndicator(1, "c");
@@ -97,7 +97,7 @@ public class DialDoubleNeedle extends JPanel {
         dvi2.setOutlinePaint(Color.red);
         dvi2.setRadius(0.60);
         dvi2.setAngle(-77.0);
-        dvi2.setNumberFormat(new java.text.DecimalFormat("0.00"));
+        dvi2.setNumberFormat(new java.text.DecimalFormat("0"));
         plot.addLayer(dvi2);
 
         StandardDialScale scale = new StandardDialScale(0, 200, -130, -280, 20, 9);
@@ -106,7 +106,7 @@ public class DialDoubleNeedle extends JPanel {
         scale.setTickLabelFont(new Font("Dialog", Font.PLAIN, 14));
         plot.addScale(0, scale);
 
-        StandardDialScale scale2 = new StandardDialScale(0, 90, -135, -90, 30, 5);
+        StandardDialScale scale2 = new StandardDialScale(0, 90, -180, -90, 30, 5);
         scale2.setTickRadius(0.50);
         scale2.setTickLabelOffset(0.15);
         scale2.setTickLabelFont(new Font("Dialog", Font.PLAIN, 10));
