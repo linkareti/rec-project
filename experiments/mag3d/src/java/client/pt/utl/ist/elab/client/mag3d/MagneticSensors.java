@@ -91,7 +91,11 @@ public class MagneticSensors extends JPanel implements com.linkare.rec.impl.clie
     public void setMagField(final PhysicsValue current, final PhysicsValue angle) {
 
         this.lastCurrent = current.getValue().toDouble();
-        this.lastAngle = angle.getValue().toDouble();
+        if (angle == null) {
+            this.lastAngle = Double.valueOf(model.getAcquisitionConfig().getSelectedHardwareParameterValue("angle"));
+        } else {
+            this.lastAngle = angle.getValue().toDouble();
+        }
 
         dial1.getDataset1().setValue(this.lastCurrent);
         dial1.getDataset2().setValue(this.lastAngle);
@@ -112,7 +116,8 @@ public class MagneticSensors extends JPanel implements com.linkare.rec.impl.clie
         }
 
         for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
-            setMagField(model.getValueAt(i, 1), model.getValueAt(i, 2));
+            //setMagField(model.getValueAt(i, 1), model.getValueAt(i, 2));
+            setMagField(model.getValueAt(i, 1), null);
         }
 
     }

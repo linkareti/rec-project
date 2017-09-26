@@ -471,7 +471,7 @@ public class Mag3DCustomizer extends AbstractCustomizer {
     }// GEN-LAST:event_sldCoilCurrentStateChanged
 
     private void checkPosOverlap() {
-        lblErrorPosAreEqual.setEnabled(sldPos1.getValue() <= sldPos2.getValue()); // this determines the number of samples and they must be at least 1
+        lblErrorPosAreEqual.setEnabled(sldPos1.getValue() >= sldPos2.getValue()); // this determines the number of samples and they must be at least 1
         btnOK.setEnabled(!lblErrorPosAreEqual.isEnabled());
     }
 
@@ -529,9 +529,9 @@ public class Mag3DCustomizer extends AbstractCustomizer {
     public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
         super.setHardwareAcquisitionConfig(acqConfig);
         if (acqConfig != null) {
-            int nsamples = acqConfig.getTotalSamples();
-
-            int freq = (int) acqConfig.getSelectedFrequency().getFrequency();
+//            int nsamples = acqConfig.getTotalSamples();
+//
+//            int freq = (int) acqConfig.getSelectedFrequency().getFrequency();
             
             int ccurr = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("current"));
             sldCoilCurrent.setValue(ccurr);
@@ -545,9 +545,9 @@ public class Mag3DCustomizer extends AbstractCustomizer {
             sldPos1.setValue(pos1);
             tfPos1.setValue(pos1);
 
-            int pos2 = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("pos_final"));
-            sldPos2.setValue(pos2);
-            tfPos2.setValue(pos2);
+            int nsamp = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("n_samples"));
+            sldPos2.setValue(pos1+nsamp);
+            tfPos2.setValue(pos1+nsamp);
         }
     }
 
