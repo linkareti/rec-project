@@ -68,7 +68,7 @@ public class MagneticSensors extends JPanel implements com.linkare.rec.impl.clie
             this.header = header;
         }
 
-        dial1.setTitle(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.mag3d.dial.title1", "Current and Angle"));
+        dial1.setTitle(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.display.mag3d.title.4", "Current and Angle"));
         //dial2.setTitle(ReCResourceBundle.findStringOrDefault("colisione$rec.exp.colisione.dial.title2", "Velocity of Car 2"));
 
         java.awt.GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
@@ -117,7 +117,7 @@ public class MagneticSensors extends JPanel implements com.linkare.rec.impl.clie
 
         for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
             //setMagField(model.getValueAt(i, 1), model.getValueAt(i, 2));
-            setMagField(model.getValueAt(i, 1), null);
+            setMagField(model.getValueAt(i, 4), null);
         }
 
     }

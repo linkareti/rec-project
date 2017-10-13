@@ -1,7 +1,7 @@
 /*
- * RadioactividadeCustomizer.java
+ * Mag3DCustomizer.java
  *
- * Created on 16 de Maio de 2003, 10:11
+ * Created on 13 de Outubro de 2017
  */
 package pt.utl.ist.elab.client.mag3d;
 
@@ -19,7 +19,7 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  *
- * @author José Pedro Pereira - Linkare TI
+ * @author André Sancho Duarte - IPFN
  */
 public class Mag3DCustomizer extends AbstractCustomizer {
 
@@ -96,6 +96,10 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         anglePanel = new javax.swing.JPanel();
         sldAngle = new javax.swing.JSlider();
         tfAngle = new javax.swing.JTextField();
+        samplesPanel = new javax.swing.JPanel();
+        sldNumSamples = new javax.swing.JSlider();
+        tfNumSamples = new javax.swing.JTextField();
+        lblErrorTooManySamples = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(350, 460));
         setPreferredSize(new java.awt.Dimension(350, 460));
@@ -162,13 +166,14 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         positionPanel.setPreferredSize(new java.awt.Dimension(350, 160));
         positionPanel.setLayout(new java.awt.GridBagLayout());
 
-        sldPos1.setMajorTickSpacing(53);
-        sldPos1.setMaximum(323);
-        sldPos1.setMinimum(5);
+        sldPos1.setMajorTickSpacing(45);
+        sldPos1.setMaximum(330);
+        sldPos1.setMinimum(15);
+        sldPos1.setMinorTickSpacing(5);
         sldPos1.setPaintLabels(true);
         sldPos1.setPaintTicks(true);
         sldPos1.setPaintTrack(false);
-        sldPos1.setValue(12);
+        sldPos1.setValue(15);
         sldPos1.setMinimumSize(new java.awt.Dimension(250, 42));
         sldPos1.setPreferredSize(new java.awt.Dimension(250, 42));
         sldPos1.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -183,14 +188,16 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         gridBagConstraints.weighty = 10.0;
         positionPanel.add(sldPos1, gridBagConstraints);
 
-        sldPos2.setMajorTickSpacing(53);
-        sldPos2.setMaximum(323);
-        sldPos2.setMinimum(5);
+        sldPos2.setMajorTickSpacing(45);
+        sldPos2.setMaximum(330);
+        sldPos2.setMinimum(15);
+        sldPos2.setMinorTickSpacing(5);
         sldPos2.setPaintLabels(true);
         sldPos2.setPaintTicks(true);
         sldPos2.setPaintTrack(false);
         sldPos2.setSnapToTicks(true);
         sldPos2.setToolTipText("");
+        sldPos2.setValue(120);
         sldPos2.setMinimumSize(new java.awt.Dimension(250, 42));
         sldPos2.setPreferredSize(new java.awt.Dimension(250, 42));
         sldPos2.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -217,7 +224,7 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         positionPanel.add(lblErrorPosAreEqual, gridBagConstraints);
 
-        tfPos1.setText("12");
+        tfPos1.setText("15");
         tfPos1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tfPos1FocusLost(evt);
@@ -345,12 +352,99 @@ public class Mag3DCustomizer extends AbstractCustomizer {
 
         slidersPanel.add(anglePanel);
 
+        samplesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.customizer.title4","mag3d$rec.exp.customizer.title4"))); // NOI18N
+        samplesPanel.setMinimumSize(new java.awt.Dimension(350, 80));
+        samplesPanel.setPreferredSize(new java.awt.Dimension(350, 80));
+        samplesPanel.setLayout(new java.awt.GridBagLayout());
+
+        sldNumSamples.setMajorTickSpacing(200);
+        sldNumSamples.setMaximum(800);
+        sldNumSamples.setMinorTickSpacing(25);
+        sldNumSamples.setPaintLabels(true);
+        sldNumSamples.setPaintTicks(true);
+        sldNumSamples.setPaintTrack(false);
+        sldNumSamples.setToolTipText("");
+        sldNumSamples.setValue(300);
+        sldNumSamples.setMaximumSize(new java.awt.Dimension(1000, 32767));
+        sldNumSamples.setMinimumSize(new java.awt.Dimension(255, 80));
+        sldNumSamples.setPreferredSize(new java.awt.Dimension(255, 80));
+        sldNumSamples.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sldNumSamplesStateChanged(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.weighty = 10.0;
+        samplesPanel.add(sldNumSamples, gridBagConstraints);
+
+        tfNumSamples.setColumns(4);
+        tfNumSamples.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        tfNumSamples.setText("300");
+        tfNumSamples.setMaximumSize(new java.awt.Dimension(30, 16));
+        tfNumSamples.setMinimumSize(new java.awt.Dimension(30, 16));
+        tfNumSamples.setPreferredSize(new java.awt.Dimension(48, 16));
+        tfNumSamples.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfNumSamplesActionPerformed(evt);
+            }
+        });
+        tfNumSamples.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfNumSamplesFocusLost(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        samplesPanel.add(tfNumSamples, gridBagConstraints);
+
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/mag3d/resources/messages"); // NOI18N
+        lblErrorTooManySamples.setText(bundle.getString("rec.exp.customizer.label2")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        samplesPanel.add(lblErrorTooManySamples, gridBagConstraints);
+
+        slidersPanel.add(samplesPanel);
+        samplesPanel.getAccessibleContext().setAccessibleName(bundle.getString("rec.exp.customizer.title4")); // NOI18N
+
         add(slidersPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfAngleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAngleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfAngleActionPerformed
+
+    private void sldNumSamplesStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldNumSamplesStateChanged
+        if (sldNumSamples.getValue() == 0) { // checks if the number of samples is 0
+            sldNumSamples.setValue(1);
+        }
+        tfNumSamples.setText("" + sldNumSamples.getValue());
+        checkNsamples();
+    }//GEN-LAST:event_sldNumSamplesStateChanged
+
+    private void tfNumSamplesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNumSamplesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfNumSamplesActionPerformed
+
+    private void tfNumSamplesFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNumSamplesFocusLost
+        String strNsamples = tfNumSamples.getText();
+        if (strNsamples.trim().equals("")) {
+            return;
+        }
+        try {
+            int nsamples = Integer.parseInt(strNsamples);
+            if (nsamples <= sldNumSamples.getMaximum() && nsamples > 0) {
+                sldNumSamples.setValue(nsamples);
+            } else {
+                tfNumSamples.setText("" + sldNumSamples.getValue());
+            }
+        } catch (Exception e) {
+            tfNumSamples.setText("" + sldNumSamples.getValue());
+        }
+    }//GEN-LAST:event_tfNumSamplesFocusLost
 
     private void tfPos2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_tfPos2ActionPerformed
         // TODO add your handling code here:
@@ -364,7 +458,7 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         }
         try {
             int angle = Integer.parseInt(strAngle);
-            if (angle <= sldAngle.getMaximum() && angle > sldAngle.getMinimum()) {
+            if (angle <= sldAngle.getMaximum() && angle >= sldAngle.getMinimum()) {
                 sldAngle.setValue(angle);
             } else {
                 tfAngle.setText("" + sldAngle.getValue());
@@ -400,7 +494,7 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         }
         try {
             int Pos2 = Integer.parseInt(strPos2);
-            if (Pos2 <= sldPos2.getMaximum() && Pos2 > sldPos2.getMinimum()) {
+            if (Pos2 <= sldPos2.getMaximum() && Pos2 >= sldPos2.getMinimum()) {
                 sldPos2.setValue(Pos2);
             } else {
                 tfPos2.setValue(sldPos2.getValue());
@@ -421,7 +515,7 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         }
         try {
             int Pos1 = Integer.parseInt(strPos1);
-            if (Pos1 <= sldPos1.getMaximum() && Pos1 > sldPos1.getMinimum()) {
+            if (Pos1 <= sldPos1.getMaximum() && Pos1 >= sldPos1.getMinimum()) {
                 sldPos1.setValue(Pos1);
             } else {
                 tfPos1.setValue(sldPos1.getValue());
@@ -451,10 +545,6 @@ public class Mag3DCustomizer extends AbstractCustomizer {
 
     private void sldAngleStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldAngleStateChanged
     {// GEN-HEADEREND:event_sldAngleStateChanged
-
-        if (sldAngle.getValue() == 0) {
-            sldAngle.setValue(1);
-        }
         tfAngle.setText("" + sldAngle.getValue());
 
     }// GEN-LAST:event_sldAngleStateChanged
@@ -464,27 +554,34 @@ public class Mag3DCustomizer extends AbstractCustomizer {
 
         if (sldCoilCurrent.getValue() == 0) {
             sldCoilCurrent.setValue(1);
-
         }
         tfCoilCurrent.setText("" + sldCoilCurrent.getValue());
 
     }// GEN-LAST:event_sldCoilCurrentStateChanged
 
     private void checkPosOverlap() {
-        lblErrorPosAreEqual.setEnabled(sldPos1.getValue() >= sldPos2.getValue()); // this determines the number of samples and they must be at least 1
+        lblErrorPosAreEqual.setEnabled(sldPos1.getValue() > sldPos2.getValue()); // checks if the initial postion is greater than the final
         btnOK.setEnabled(!lblErrorPosAreEqual.isEnabled());
+        checkNsamples(); // since the maximum number of samples depends on the positions, we need to always check 
+    }
+
+    private void checkNsamples() {
+        lblErrorTooManySamples.setEnabled(sldNumSamples.getValue() > (sldPos2.getValue() - sldPos1.getValue()) * 3 + 1); // checks if the number of samples is too big 
+        btnOK.setEnabled(!lblErrorTooManySamples.isEnabled());
     }
 
     private void btnDefaultsActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
     {// GEN-HEADEREND:event_btnDefaultsActionPerformed
-        sldPos1.setValue(12);
-        tfPos1.setValue(12);
+        sldPos1.setValue(15);
+        tfPos1.setValue(15);
         sldPos2.setValue(120);
         tfPos2.setValue(120);
         sldCoilCurrent.setValue(100);
         tfCoilCurrent.setText("100");
         sldAngle.setValue(0);
         tfAngle.setText("0");
+        sldNumSamples.setValue(300);
+        tfNumSamples.setText("300");
     }// GEN-LAST:event_btnDefaultsActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
@@ -496,10 +593,11 @@ public class Mag3DCustomizer extends AbstractCustomizer {
     {// GEN-HEADEREND:event_btnOKActionPerformed
         getAcquisitionConfig().getSelectedHardwareParameter("protocol").setParameterValue("1"); // experiment expects protocol identifier, but there is only one for now
         getAcquisitionConfig().getSelectedHardwareParameter("pos_init").setParameterValue("" + (sldPos1.getValue()));
+        getAcquisitionConfig().getSelectedHardwareParameter("pos_final").setParameterValue("" + (sldPos2.getValue()));
         getAcquisitionConfig().getSelectedHardwareParameter("current").setParameterValue(
                 "" + (sldCoilCurrent.getValue()));
         getAcquisitionConfig().getSelectedHardwareParameter("angle").setParameterValue("" + (sldAngle.getValue()));
-        getAcquisitionConfig().setTotalSamples(sldPos2.getValue()-sldPos1.getValue());
+        getAcquisitionConfig().setTotalSamples(sldNumSamples.getValue());
         //getAcquisitionConfig().setSelectedFrequency(
         //        new Frequency((double) sldAngle.getValue(), getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
         fireICustomizerListenerDone();
@@ -514,29 +612,36 @@ public class Mag3DCustomizer extends AbstractCustomizer {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblErrorPosAreEqual;
+    private javax.swing.JLabel lblErrorTooManySamples;
     private javax.swing.JPanel positionPanel;
+    private javax.swing.JPanel samplesPanel;
     private javax.swing.JSlider sldAngle;
     private javax.swing.JSlider sldCoilCurrent;
+    private javax.swing.JSlider sldNumSamples;
     private javax.swing.JSlider sldPos1;
     private javax.swing.JSlider sldPos2;
     private javax.swing.JPanel slidersPanel;
     private javax.swing.JTextField tfAngle;
     private javax.swing.JTextField tfCoilCurrent;
+    private javax.swing.JTextField tfNumSamples;
     private javax.swing.JFormattedTextField tfPos1;
     private javax.swing.JFormattedTextField tfPos2;
     // End of variables declaration//GEN-END:variables
 
+    @Override
     public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
         super.setHardwareAcquisitionConfig(acqConfig);
         if (acqConfig != null) {
-//            int nsamples = acqConfig.getTotalSamples();
+            int nsamples = acqConfig.getTotalSamples();
+            sldNumSamples.setValue(nsamples);
+            tfNumSamples.setText("" + nsamples);
 //
 //            int freq = (int) acqConfig.getSelectedFrequency().getFrequency();
-            
+
             int ccurr = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("current"));
             sldCoilCurrent.setValue(ccurr);
             tfCoilCurrent.setText("" + ccurr);
-            
+
             int angle = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("angle"));
             sldAngle.setValue(angle);
             tfAngle.setText("" + angle);
@@ -545,9 +650,9 @@ public class Mag3DCustomizer extends AbstractCustomizer {
             sldPos1.setValue(pos1);
             tfPos1.setValue(pos1);
 
-            int nsamp = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("n_samples"));
-            sldPos2.setValue(pos1+nsamp);
-            tfPos2.setValue(pos1+nsamp);
+            int pos2 = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("pos_final"));
+            sldPos2.setValue(pos2);
+            tfPos2.setValue(pos2);
         }
     }
 
