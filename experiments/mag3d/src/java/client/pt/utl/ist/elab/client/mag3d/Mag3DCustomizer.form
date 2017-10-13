@@ -140,10 +140,9 @@
           <SubComponents>
             <Component class="javax.swing.JSlider" name="sldPos1">
               <Properties>
-                <Property name="majorTickSpacing" type="int" value="45"/>
-                <Property name="maximum" type="int" value="330"/>
+                <Property name="majorTickSpacing" type="int" value="61"/>
+                <Property name="maximum" type="int" value="320"/>
                 <Property name="minimum" type="int" value="15"/>
-                <Property name="minorTickSpacing" type="int" value="5"/>
                 <Property name="paintLabels" type="boolean" value="true"/>
                 <Property name="paintTicks" type="boolean" value="true"/>
                 <Property name="paintTrack" type="boolean" value="false"/>
@@ -166,16 +165,14 @@
             </Component>
             <Component class="javax.swing.JSlider" name="sldPos2">
               <Properties>
-                <Property name="majorTickSpacing" type="int" value="45"/>
-                <Property name="maximum" type="int" value="330"/>
+                <Property name="majorTickSpacing" type="int" value="61"/>
+                <Property name="maximum" type="int" value="320"/>
                 <Property name="minimum" type="int" value="15"/>
-                <Property name="minorTickSpacing" type="int" value="5"/>
                 <Property name="paintLabels" type="boolean" value="true"/>
                 <Property name="paintTicks" type="boolean" value="true"/>
                 <Property name="paintTrack" type="boolean" value="false"/>
                 <Property name="snapToTicks" type="boolean" value="true"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
-                <Property name="value" type="int" value="120"/>
                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[250, 42]"/>
                 </Property>

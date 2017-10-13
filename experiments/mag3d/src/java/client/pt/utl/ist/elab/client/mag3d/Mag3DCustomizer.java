@@ -166,10 +166,9 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         positionPanel.setPreferredSize(new java.awt.Dimension(350, 160));
         positionPanel.setLayout(new java.awt.GridBagLayout());
 
-        sldPos1.setMajorTickSpacing(45);
-        sldPos1.setMaximum(330);
+        sldPos1.setMajorTickSpacing(61);
+        sldPos1.setMaximum(320);
         sldPos1.setMinimum(15);
-        sldPos1.setMinorTickSpacing(5);
         sldPos1.setPaintLabels(true);
         sldPos1.setPaintTicks(true);
         sldPos1.setPaintTrack(false);
@@ -188,16 +187,14 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         gridBagConstraints.weighty = 10.0;
         positionPanel.add(sldPos1, gridBagConstraints);
 
-        sldPos2.setMajorTickSpacing(45);
-        sldPos2.setMaximum(330);
+        sldPos2.setMajorTickSpacing(61);
+        sldPos2.setMaximum(320);
         sldPos2.setMinimum(15);
-        sldPos2.setMinorTickSpacing(5);
         sldPos2.setPaintLabels(true);
         sldPos2.setPaintTicks(true);
         sldPos2.setPaintTrack(false);
         sldPos2.setSnapToTicks(true);
         sldPos2.setToolTipText("");
-        sldPos2.setValue(120);
         sldPos2.setMinimumSize(new java.awt.Dimension(250, 42));
         sldPos2.setPreferredSize(new java.awt.Dimension(250, 42));
         sldPos2.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -352,7 +349,7 @@ public class Mag3DCustomizer extends AbstractCustomizer {
 
         slidersPanel.add(anglePanel);
 
-        samplesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.customizer.title4","mag3d$rec.exp.customizer.title4"))); // NOI18N
+        samplesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.customizer.title3","mag3d$rec.exp.customizer.title3"))); // NOI18N
         samplesPanel.setMinimumSize(new java.awt.Dimension(350, 80));
         samplesPanel.setPreferredSize(new java.awt.Dimension(350, 80));
         samplesPanel.setLayout(new java.awt.GridBagLayout());

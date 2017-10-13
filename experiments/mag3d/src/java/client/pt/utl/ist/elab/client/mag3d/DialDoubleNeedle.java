@@ -100,7 +100,7 @@ public class DialDoubleNeedle extends JPanel {
         dvi2.setNumberFormat(new java.text.DecimalFormat("0"));
         plot.addLayer(dvi2);
 
-        StandardDialScale scale = new StandardDialScale(0, 200, -130, -280, 20, 9);
+        StandardDialScale scale = new StandardDialScale(0, 100, -130, -280, 10, 9);
         scale.setTickRadius(0.88);
         scale.setTickLabelOffset(0.15);
         scale.setTickLabelFont(new Font("Dialog", Font.PLAIN, 14));
