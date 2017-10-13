@@ -39,7 +39,7 @@
 	<parameter name="pos_init" type="ContinuousValue" value="15">
 		<selection-list>
 			<value order="1">15</value>
-			<value order="2">330</value>
+			<value order="2">320</value>
 			<value order="3">1</value>
 		</selection-list>
 	</parameter>
@@ -47,7 +47,7 @@
 	<parameter name="pos_final" type="ContinuousValue" value="120">
 		<selection-list>
 			<value order="1">15</value>
-			<value order="2">330</value>
+			<value order="2">320</value>
 			<value order="3">1</value>
 		</selection-list>
 	</parameter>
@@ -68,7 +68,7 @@
 	<ChannelInfo name="mag3d$rec.exp.mag3d.hardwareinfo.channel.0.name" independent="false" direction="CHANNEL_INPUT">
 		<scale label="mag3d$rec.exp.mag3d.hardwareinfo.channel.0.label" physicsunitname="mag3d$rec.exp.mag3d.hardwareinfo.channel.0.physicsunitname" physicsunitsymbol="m" multiplier="milli" selected="true">
 			<min><PhysicsVal type="float">15.0</PhysicsVal></min>
-			<max><PhysicsVal type="float">330.0</PhysicsVal></max>
+			<max><PhysicsVal type="float">320.0</PhysicsVal></max>
 			<step><PhysicsVal type="float">.1</PhysicsVal></step>
 			<errordefault><PhysicsVal type="float">.05</PhysicsVal></errordefault>
 		</scale>
