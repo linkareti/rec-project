@@ -51,6 +51,14 @@
 			<value order="3">1</value>
 		</selection-list>
 	</parameter>
+	
+	<parameter name="n_samples" type="ContinuousValue" value="300">
+		<selection-list>
+			<value order="1">1</value>
+			<value order="2">800</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
 
 	<frequency-scale label="Sampling Interval">
 		<min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">20</Frequency></min-frequency>

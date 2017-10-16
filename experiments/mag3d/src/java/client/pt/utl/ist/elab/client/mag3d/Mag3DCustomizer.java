@@ -349,7 +349,7 @@ public class Mag3DCustomizer extends AbstractCustomizer {
 
         slidersPanel.add(anglePanel);
 
-        samplesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.customizer.title3","mag3d$rec.exp.customizer.title3"))); // NOI18N
+        samplesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.customizer.title4","mag3d$rec.exp.customizer.title4"))); // NOI18N
         samplesPanel.setMinimumSize(new java.awt.Dimension(350, 80));
         samplesPanel.setPreferredSize(new java.awt.Dimension(350, 80));
         samplesPanel.setLayout(new java.awt.GridBagLayout());
@@ -589,12 +589,13 @@ public class Mag3DCustomizer extends AbstractCustomizer {
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
     {// GEN-HEADEREND:event_btnOKActionPerformed
         getAcquisitionConfig().getSelectedHardwareParameter("protocol").setParameterValue("1"); // experiment expects protocol identifier, but there is only one for now
+        getAcquisitionConfig().getSelectedHardwareParameter("current").setParameterValue("" + (sldCoilCurrent.getValue()));
+        getAcquisitionConfig().getSelectedHardwareParameter("angle").setParameterValue("" + (sldAngle.getValue()));
         getAcquisitionConfig().getSelectedHardwareParameter("pos_init").setParameterValue("" + (sldPos1.getValue()));
         getAcquisitionConfig().getSelectedHardwareParameter("pos_final").setParameterValue("" + (sldPos2.getValue()));
-        getAcquisitionConfig().getSelectedHardwareParameter("current").setParameterValue(
-                "" + (sldCoilCurrent.getValue()));
-        getAcquisitionConfig().getSelectedHardwareParameter("angle").setParameterValue("" + (sldAngle.getValue()));
+        getAcquisitionConfig().getSelectedHardwareParameter("n_samples").setParameterValue("" + (sldNumSamples.getValue()));
         getAcquisitionConfig().setTotalSamples(sldNumSamples.getValue());
+
         //getAcquisitionConfig().setSelectedFrequency(
         //        new Frequency((double) sldAngle.getValue(), getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
         fireICustomizerListenerDone();

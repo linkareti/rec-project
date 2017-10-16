@@ -12,7 +12,7 @@
 	    <parameter output="#0" input="#0" maxvalue="90" minvalue="0" order="2">
 	    </parameter>
 	    <!-- pos_init -->
-	    <parameter output="##0" input="##0" maxvalue="200" minvalue="15" order="3">
+	    <parameter output="##0" input="##0" maxvalue="320" minvalue="15" order="3">
 	    </parameter>
 	    <!-- pos_final -->
 	    <parameter output="##0" input="##0" maxvalue="320" minvalue="15" order="4">
@@ -26,13 +26,13 @@
 	    <channel format="##0.0" order="0">
 	    </channel>
 	    <!-- field_y -->
-	    <channel format="####0" order="1">
+	    <channel format="#####0" order="1">
 	    </channel>
 	    <!-- field_z -->
-	    <channel format="####0" order="2">
+	    <channel format="#####0" order="2">
 	    </channel>
 	    <!-- field_x -->
-	    <channel format="####0" order="3">
+	    <channel format="#####0" order="3">
 	    </channel>
 	    <!-- current -->
 	    <channel format="##0" order="4">
