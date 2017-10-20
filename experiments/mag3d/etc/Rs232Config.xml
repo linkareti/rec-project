@@ -25,23 +25,23 @@
 		<!-- position -->
 	    <channel format="##0.0" order="0">
 	    </channel>
-	    <!-- field_y -->
-	    <channel format="#####0" order="1">
+	    <!-- current -->
+	    <channel format="##0.0" order="1">
 	    </channel>
-	    <!-- field_z -->
+	    <!-- field_y -->
 	    <channel format="#####0" order="2">
 	    </channel>
-	    <!-- field_x -->
+	    <!-- field_z -->
 	    <channel format="#####0" order="3">
 	    </channel>
-	    <!-- current -->
-	    <channel format="##0" order="4">
+	    <!-- field_x -->
+	    <channel format="#####0" order="4">
 	    </channel>
 	</channels>
 	<timeout>
 	    <default_timeout time="45000" />
 	    <id time="5000" />
-	    <cfg time="10000" />
+	    <cfg time="20000" />
 	    <cur time="5000" />
 	    <str time="5000" />
 	    <dat_bin time="210000" />

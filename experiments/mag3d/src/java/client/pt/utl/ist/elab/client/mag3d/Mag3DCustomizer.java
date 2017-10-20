@@ -193,8 +193,8 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         sldPos2.setPaintLabels(true);
         sldPos2.setPaintTicks(true);
         sldPos2.setPaintTrack(false);
-        sldPos2.setSnapToTicks(true);
         sldPos2.setToolTipText("");
+        sldPos2.setValue(120);
         sldPos2.setMinimumSize(new java.awt.Dimension(250, 42));
         sldPos2.setPreferredSize(new java.awt.Dimension(250, 42));
         sldPos2.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -349,7 +349,7 @@ public class Mag3DCustomizer extends AbstractCustomizer {
 
         slidersPanel.add(anglePanel);
 
-        samplesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.customizer.title4","mag3d$rec.exp.customizer.title4"))); // NOI18N
+        samplesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.customizer.title3","mag3d$rec.exp.customizer.title3"))); // NOI18N
         samplesPanel.setMinimumSize(new java.awt.Dimension(350, 80));
         samplesPanel.setPreferredSize(new java.awt.Dimension(350, 80));
         samplesPanel.setLayout(new java.awt.GridBagLayout());
@@ -397,8 +397,10 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         samplesPanel.add(tfNumSamples, gridBagConstraints);
 
+        lblErrorTooManySamples.setForeground(new java.awt.Color(255, 0, 0));
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/mag3d/resources/messages"); // NOI18N
         lblErrorTooManySamples.setText(bundle.getString("rec.exp.customizer.label2")); // NOI18N
+        lblErrorTooManySamples.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -577,8 +579,8 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         tfCoilCurrent.setText("100");
         sldAngle.setValue(0);
         tfAngle.setText("0");
-        sldNumSamples.setValue(300);
-        tfNumSamples.setText("300");
+        sldNumSamples.setValue(100);
+        tfNumSamples.setText("100");
     }// GEN-LAST:event_btnDefaultsActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
@@ -600,6 +602,7 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         //        new Frequency((double) sldAngle.getValue(), getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
         fireICustomizerListenerDone();
     }// GEN-LAST:event_btnOKActionPerformed
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel anglePanel;
     private javax.swing.JButton btnCancel;

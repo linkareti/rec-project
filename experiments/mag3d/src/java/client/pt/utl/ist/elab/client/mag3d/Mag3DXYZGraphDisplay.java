@@ -21,7 +21,7 @@ public class Mag3DXYZGraphDisplay extends com.linkare.rec.impl.ui.graph.MultSeri
 	public Mag3DXYZGraphDisplay() {
 		super();
 		setChannelDisplayX(0);
-                int[] channelList = {3,1,2};
+                int[] channelList = {4,2,3};
 		setChannelDisplayYArray(channelList);
 	}
 
