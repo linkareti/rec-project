@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
-<hardware id="ELAB_MAG3D_DSPIC_V0.1" num_channels="4" minfrequency="0.1Hz" maxfrequency="1000Hz">
+<hardware id="ELAB_MAG3D_DSPIC_V0.1" num_channels="5" minfrequency="0.1Hz" maxfrequency="1000Hz">
   <rs232 baud="115200" stopbits="1" paritybits="0" numbits="8" ports_restrict="/dev/ttyUSB0">
 	<parameters>
 		<!-- protocol -->

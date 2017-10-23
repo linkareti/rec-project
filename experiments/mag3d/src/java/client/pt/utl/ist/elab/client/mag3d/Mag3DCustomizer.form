@@ -395,8 +395,8 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="&#xc2;ngulo [&#xba;]">
-                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/mag3d/resources/messages.properties" key="rec.exp.customizer.title3" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;mag3d${key}&quot;,&quot;mag3d${key}&quot;)"/>
+                <TitledBorder title="N&#xfa;mero de Amostras">
+                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/mag3d/resources/messages.properties" key="rec.exp.customizer.title4" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;mag3d${key}&quot;,&quot;mag3d${key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>

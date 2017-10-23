@@ -117,7 +117,7 @@ public class MagneticSensors extends JPanel implements com.linkare.rec.impl.clie
 
         for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
             //setMagField(model.getValueAt(i, 1), model.getValueAt(i, 2));
-            setMagField(model.getValueAt(i, 4), null);
+            setMagField(model.getValueAt(i, 1), null);
         }
 
     }

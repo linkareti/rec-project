@@ -61,7 +61,7 @@
 	</parameter>
 
 	<frequency-scale label="Sampling Interval">
-		<min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">20</Frequency></min-frequency>
+		<min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">50</Frequency></min-frequency>
 		<max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1000</Frequency></max-frequency>
 		<step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
 	</frequency-scale>
@@ -83,9 +83,9 @@
 	</ChannelInfo>
 	
 	<ChannelInfo name="mag3d$rec.exp.mag3d.hardwareinfo.channel.4.name" independent="false" direction="CHANNEL_INPUT">
-		<scale label="mag3d$rec.exp.mag3d.hardwareinfo.channel.4.label" physicsunitname="mag3d$rec.exp.mag3d.hardwareinfo.channel.1.physicsunitname" physicsunitsymbol="A" multiplier="milli" selected="true">
+		<scale label="mag3d$rec.exp.mag3d.hardwareinfo.channel.4.label" physicsunitname="mag3d$rec.exp.mag3d.hardwareinfo.channel.4.physicsunitname" physicsunitsymbol="A" multiplier="milli" selected="true">
 			<min><PhysicsVal type="float">0</PhysicsVal></min>
-			<max><PhysicsVal type="float">999</PhysicsVal></max>
+			<max><PhysicsVal type="float">256</PhysicsVal></max>
 			<step><PhysicsVal type="float">.1</PhysicsVal></step>
 			<errordefault><PhysicsVal type="int">5</PhysicsVal></errordefault>
 		</scale>

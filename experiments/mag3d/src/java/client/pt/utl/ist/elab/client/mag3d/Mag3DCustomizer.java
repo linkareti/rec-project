@@ -349,7 +349,7 @@ public class Mag3DCustomizer extends AbstractCustomizer {
 
         slidersPanel.add(anglePanel);
 
-        samplesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.customizer.title3","mag3d$rec.exp.customizer.title3"))); // NOI18N
+        samplesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.customizer.title4","mag3d$rec.exp.customizer.title4"))); // NOI18N
         samplesPanel.setMinimumSize(new java.awt.Dimension(350, 80));
         samplesPanel.setPreferredSize(new java.awt.Dimension(350, 80));
         samplesPanel.setLayout(new java.awt.GridBagLayout());
@@ -598,8 +598,8 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         getAcquisitionConfig().getSelectedHardwareParameter("n_samples").setParameterValue("" + (sldNumSamples.getValue()));
         getAcquisitionConfig().setTotalSamples(sldNumSamples.getValue());
 
-        //getAcquisitionConfig().setSelectedFrequency(
-        //        new Frequency((double) sldAngle.getValue(), getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
+        getAcquisitionConfig().setSelectedFrequency(
+                new Frequency(50.0, getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
         fireICustomizerListenerDone();
     }// GEN-LAST:event_btnOKActionPerformed
     
