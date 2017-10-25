@@ -82,7 +82,6 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         btnCancel = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnDefaults = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         slidersPanel = new javax.swing.JPanel();
         positionPanel = new javax.swing.JPanel();
         sldPos1 = new javax.swing.JSlider();
@@ -90,24 +89,24 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         lblErrorPosAreEqual = new javax.swing.JLabel();
         tfPos1 = new javax.swing.JFormattedTextField();
         tfPos2 = new javax.swing.JFormattedTextField();
+        samplesPanel = new javax.swing.JPanel();
+        sldNumSamples = new javax.swing.JSlider();
+        tfNumSamples = new javax.swing.JTextField();
+        lblErrorTooManySamples = new javax.swing.JLabel();
         coilCurrentPanel = new javax.swing.JPanel();
         sldCoilCurrent = new javax.swing.JSlider();
         tfCoilCurrent = new javax.swing.JTextField();
         anglePanel = new javax.swing.JPanel();
         sldAngle = new javax.swing.JSlider();
         tfAngle = new javax.swing.JTextField();
-        samplesPanel = new javax.swing.JPanel();
-        sldNumSamples = new javax.swing.JSlider();
-        tfNumSamples = new javax.swing.JTextField();
-        lblErrorTooManySamples = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(350, 460));
         setPreferredSize(new java.awt.Dimension(350, 460));
-        setLayout(new java.awt.BorderLayout());
+        setLayout(null);
 
         buttonPanel.setMinimumSize(new java.awt.Dimension(350, 42));
         buttonPanel.setPreferredSize(new java.awt.Dimension(350, 42));
-        buttonPanel.setLayout(new java.awt.GridBagLayout());
+        buttonPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 5));
 
         btnOK.setText("OK");
         btnOK.addActionListener(new java.awt.event.ActionListener() {
@@ -115,10 +114,7 @@ public class Mag3DCustomizer extends AbstractCustomizer {
                 btnOKActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        buttonPanel.add(btnOK, gridBagConstraints);
+        buttonPanel.add(btnOK);
 
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -126,16 +122,10 @@ public class Mag3DCustomizer extends AbstractCustomizer {
                 btnCancelActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        buttonPanel.add(btnCancel, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 10.0;
-        buttonPanel.add(jLabel1, gridBagConstraints);
+        buttonPanel.add(btnCancel);
+
+        jLabel1.setText("   ");
+        buttonPanel.add(jLabel1);
 
         btnDefaults.setText(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.dftcfg.mag3d.title.1","mag3d$rec.exp.dftcfg.mag3d.title.1")); // NOI18N
         btnDefaults.setActionCommand("<rec.exp.dftcfg.mag3d.title.1>");
@@ -144,26 +134,17 @@ public class Mag3DCustomizer extends AbstractCustomizer {
                 btnDefaultsActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
-        buttonPanel.add(btnDefaults, gridBagConstraints);
+        buttonPanel.add(btnDefaults);
 
-        jLabel3.setText("    ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weighty = 1.0;
-        buttonPanel.add(jLabel3, gridBagConstraints);
+        add(buttonPanel);
+        buttonPanel.setBounds(0, 412, 372, 42);
 
-        add(buttonPanel, java.awt.BorderLayout.SOUTH);
-
-        slidersPanel.setMinimumSize(new java.awt.Dimension(350, 160));
-        slidersPanel.setLayout(new javax.swing.BoxLayout(slidersPanel, javax.swing.BoxLayout.Y_AXIS));
+        slidersPanel.setMinimumSize(new java.awt.Dimension(700, 320));
+        slidersPanel.setLayout(new java.awt.GridLayout(2, 2));
 
         positionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.customizer.title1","mag3d$rec.exp.customizer.title1"))); // NOI18N
-        positionPanel.setMinimumSize(new java.awt.Dimension(350, 160));
-        positionPanel.setPreferredSize(new java.awt.Dimension(350, 160));
+        positionPanel.setMinimumSize(new java.awt.Dimension(350, 180));
+        positionPanel.setPreferredSize(new java.awt.Dimension(350, 180));
         positionPanel.setLayout(new java.awt.GridBagLayout());
 
         sldPos1.setMajorTickSpacing(61);
@@ -250,113 +231,14 @@ public class Mag3DCustomizer extends AbstractCustomizer {
 
         slidersPanel.add(positionPanel);
 
-        coilCurrentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.customizer.title2","mag3d$rec.exp.customizer.title2"))); // NOI18N
-        coilCurrentPanel.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
-        coilCurrentPanel.setMinimumSize(new java.awt.Dimension(350, 80));
-        coilCurrentPanel.setPreferredSize(new java.awt.Dimension(350, 80));
-        coilCurrentPanel.setLayout(new java.awt.GridBagLayout());
-
-        sldCoilCurrent.setMajorTickSpacing(20);
-        sldCoilCurrent.setMinorTickSpacing(2);
-        sldCoilCurrent.setPaintLabels(true);
-        sldCoilCurrent.setPaintTicks(true);
-        sldCoilCurrent.setPaintTrack(false);
-        sldCoilCurrent.setToolTipText("");
-        sldCoilCurrent.setValue(100);
-        sldCoilCurrent.setMaximumSize(new java.awt.Dimension(1000, 32767));
-        sldCoilCurrent.setMinimumSize(new java.awt.Dimension(250, 42));
-        sldCoilCurrent.setPreferredSize(new java.awt.Dimension(250, 42));
-        sldCoilCurrent.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                sldCoilCurrentStateChanged(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.weighty = 10.0;
-        coilCurrentPanel.add(sldCoilCurrent, gridBagConstraints);
-
-        tfCoilCurrent.setColumns(3);
-        tfCoilCurrent.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        tfCoilCurrent.setText("100");
-        tfCoilCurrent.setToolTipText("");
-        tfCoilCurrent.setMaximumSize(new java.awt.Dimension(30, 16));
-        tfCoilCurrent.setMinimumSize(new java.awt.Dimension(30, 16));
-        tfCoilCurrent.setPreferredSize(new java.awt.Dimension(37, 16));
-        tfCoilCurrent.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                tfCoilCurrentFocusLost(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        coilCurrentPanel.add(tfCoilCurrent, gridBagConstraints);
-
-        slidersPanel.add(coilCurrentPanel);
-
-        anglePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.customizer.title3","mag3d$rec.exp.customizer.title3"))); // NOI18N
-        anglePanel.setMinimumSize(new java.awt.Dimension(350, 80));
-        anglePanel.setPreferredSize(new java.awt.Dimension(350, 80));
-        anglePanel.setLayout(new java.awt.GridBagLayout());
-
-        sldAngle.setMajorTickSpacing(10);
-        sldAngle.setMaximum(90);
-        sldAngle.setMinorTickSpacing(2);
-        sldAngle.setPaintLabels(true);
-        sldAngle.setPaintTicks(true);
-        sldAngle.setPaintTrack(false);
-        sldAngle.setToolTipText("");
-        sldAngle.setValue(0);
-        sldAngle.setMaximumSize(new java.awt.Dimension(1000, 32767));
-        sldAngle.setMinimumSize(new java.awt.Dimension(255, 80));
-        sldAngle.setPreferredSize(new java.awt.Dimension(255, 80));
-        sldAngle.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                sldAngleStateChanged(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        gridBagConstraints.weighty = 10.0;
-        anglePanel.add(sldAngle, gridBagConstraints);
-
-        tfAngle.setColumns(4);
-        tfAngle.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        tfAngle.setText("0");
-        tfAngle.setMaximumSize(new java.awt.Dimension(30, 16));
-        tfAngle.setMinimumSize(new java.awt.Dimension(30, 16));
-        tfAngle.setPreferredSize(new java.awt.Dimension(48, 16));
-        tfAngle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfAngleActionPerformed(evt);
-            }
-        });
-        tfAngle.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                tfAngleFocusLost(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        anglePanel.add(tfAngle, gridBagConstraints);
-
-        slidersPanel.add(anglePanel);
-
         samplesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.customizer.title4","mag3d$rec.exp.customizer.title4"))); // NOI18N
         samplesPanel.setMinimumSize(new java.awt.Dimension(350, 80));
-        samplesPanel.setPreferredSize(new java.awt.Dimension(350, 80));
+        samplesPanel.setPreferredSize(new java.awt.Dimension(350, 180));
         samplesPanel.setLayout(new java.awt.GridBagLayout());
 
         sldNumSamples.setMajorTickSpacing(200);
         sldNumSamples.setMaximum(800);
-        sldNumSamples.setMinorTickSpacing(25);
+        sldNumSamples.setMinorTickSpacing(50);
         sldNumSamples.setPaintLabels(true);
         sldNumSamples.setPaintTicks(true);
         sldNumSamples.setPaintTrack(false);
@@ -404,12 +286,113 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
         samplesPanel.add(lblErrorTooManySamples, gridBagConstraints);
 
         slidersPanel.add(samplesPanel);
         samplesPanel.getAccessibleContext().setAccessibleName(bundle.getString("rec.exp.customizer.title4")); // NOI18N
 
-        add(slidersPanel, java.awt.BorderLayout.CENTER);
+        coilCurrentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.customizer.title2","mag3d$rec.exp.customizer.title2"))); // NOI18N
+        coilCurrentPanel.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        coilCurrentPanel.setMinimumSize(new java.awt.Dimension(350, 180));
+        coilCurrentPanel.setPreferredSize(new java.awt.Dimension(350, 180));
+        coilCurrentPanel.setLayout(new java.awt.GridBagLayout());
+
+        sldCoilCurrent.setMajorTickSpacing(20);
+        sldCoilCurrent.setMinorTickSpacing(5);
+        sldCoilCurrent.setPaintLabels(true);
+        sldCoilCurrent.setPaintTicks(true);
+        sldCoilCurrent.setPaintTrack(false);
+        sldCoilCurrent.setToolTipText("");
+        sldCoilCurrent.setValue(100);
+        sldCoilCurrent.setMaximumSize(new java.awt.Dimension(1000, 32767));
+        sldCoilCurrent.setMinimumSize(new java.awt.Dimension(250, 42));
+        sldCoilCurrent.setPreferredSize(new java.awt.Dimension(250, 42));
+        sldCoilCurrent.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sldCoilCurrentStateChanged(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.weighty = 10.0;
+        coilCurrentPanel.add(sldCoilCurrent, gridBagConstraints);
+
+        tfCoilCurrent.setColumns(3);
+        tfCoilCurrent.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        tfCoilCurrent.setText("100");
+        tfCoilCurrent.setToolTipText("");
+        tfCoilCurrent.setMaximumSize(new java.awt.Dimension(30, 16));
+        tfCoilCurrent.setMinimumSize(new java.awt.Dimension(30, 16));
+        tfCoilCurrent.setPreferredSize(new java.awt.Dimension(37, 16));
+        tfCoilCurrent.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfCoilCurrentFocusLost(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        coilCurrentPanel.add(tfCoilCurrent, gridBagConstraints);
+
+        slidersPanel.add(coilCurrentPanel);
+
+        anglePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.customizer.title3","mag3d$rec.exp.customizer.title3"))); // NOI18N
+        anglePanel.setMinimumSize(new java.awt.Dimension(350, 80));
+        anglePanel.setPreferredSize(new java.awt.Dimension(350, 180));
+        anglePanel.setLayout(new java.awt.GridBagLayout());
+
+        sldAngle.setMajorTickSpacing(15);
+        sldAngle.setMaximum(90);
+        sldAngle.setMinorTickSpacing(5);
+        sldAngle.setPaintLabels(true);
+        sldAngle.setPaintTicks(true);
+        sldAngle.setPaintTrack(false);
+        sldAngle.setToolTipText("");
+        sldAngle.setValue(0);
+        sldAngle.setMaximumSize(new java.awt.Dimension(1000, 32767));
+        sldAngle.setMinimumSize(new java.awt.Dimension(255, 80));
+        sldAngle.setPreferredSize(new java.awt.Dimension(255, 80));
+        sldAngle.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sldAngleStateChanged(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.weighty = 10.0;
+        anglePanel.add(sldAngle, gridBagConstraints);
+
+        tfAngle.setColumns(4);
+        tfAngle.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        tfAngle.setText("0");
+        tfAngle.setMaximumSize(new java.awt.Dimension(30, 16));
+        tfAngle.setMinimumSize(new java.awt.Dimension(30, 16));
+        tfAngle.setPreferredSize(new java.awt.Dimension(48, 16));
+        tfAngle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfAngleActionPerformed(evt);
+            }
+        });
+        tfAngle.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfAngleFocusLost(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        anglePanel.add(tfAngle, gridBagConstraints);
+
+        slidersPanel.add(anglePanel);
+
+        add(slidersPanel);
+        slidersPanel.setBounds(0, 0, 790, 360);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfAngleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAngleActionPerformed
@@ -611,7 +594,6 @@ public class Mag3DCustomizer extends AbstractCustomizer {
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JPanel coilCurrentPanel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblErrorPosAreEqual;
     private javax.swing.JLabel lblErrorTooManySamples;
     private javax.swing.JPanel positionPanel;

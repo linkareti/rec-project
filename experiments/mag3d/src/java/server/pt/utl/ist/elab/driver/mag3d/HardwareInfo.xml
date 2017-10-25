@@ -110,7 +110,7 @@
 	</ChannelInfo>
 	
 	<ChannelInfo name="mag3d$rec.exp.mag3d.hardwareinfo.channel.3.name" independent="false" direction="CHANNEL_INPUT">
-		<scale label="mag3d$rec.exp.mag3d.hardwareinfo.channel.3.label" physicsunitname="mag3d$rec.exp.mag3d.hardwareinfo.channel.4.physicsunitname" physicsunitsymbol="T" multiplier="nano" selected="true">
+		<scale label="mag3d$rec.exp.mag3d.hardwareinfo.channel.3.label" physicsunitname="mag3d$rec.exp.mag3d.hardwareinfo.channel.3.physicsunitname" physicsunitsymbol="T" multiplier="nano" selected="true">
 			<min><PhysicsVal type="int">-32768</PhysicsVal></min>
 			<max><PhysicsVal type="int">32767</PhysicsVal></max>
 			<step><PhysicsVal type="int">1</PhysicsVal></step>
