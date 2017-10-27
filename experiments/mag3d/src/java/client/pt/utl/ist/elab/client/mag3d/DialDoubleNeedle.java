@@ -89,7 +89,7 @@ public class DialDoubleNeedle extends JPanel {
         dvi.setOutlinePaint(Color.darkGray);
         dvi.setRadius(0.60);
         dvi.setAngle(-103.0);
-        dvi.setNumberFormat(new java.text.DecimalFormat("0"));
+        dvi.setNumberFormat(new java.text.DecimalFormat("##0.0"));
         plot.addLayer(dvi);
 
         DialValueIndicator dvi2 = new DialValueIndicator(1);//new DialValueIndicator(1, "c");

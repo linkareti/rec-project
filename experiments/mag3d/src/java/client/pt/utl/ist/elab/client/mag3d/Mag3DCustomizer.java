@@ -5,7 +5,6 @@
  */
 package pt.utl.ist.elab.client.mag3d;
 
-import pt.utl.ist.elab.client.mag3d.*;
 import java.text.DecimalFormat;
 import java.util.Hashtable;
 
@@ -86,7 +85,7 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         positionPanel = new javax.swing.JPanel();
         sldPos1 = new javax.swing.JSlider();
         sldPos2 = new javax.swing.JSlider();
-        lblErrorPosAreEqual = new javax.swing.JLabel();
+        lblErrorPosOverlap = new javax.swing.JLabel();
         tfPos1 = new javax.swing.JFormattedTextField();
         tfPos2 = new javax.swing.JFormattedTextField();
         samplesPanel = new javax.swing.JPanel();
@@ -191,16 +190,16 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         gridBagConstraints.weighty = 10.0;
         positionPanel.add(sldPos2, gridBagConstraints);
 
-        lblErrorPosAreEqual.setForeground(new java.awt.Color(255, 0, 0));
-        lblErrorPosAreEqual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblErrorPosAreEqual.setText(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.customizer.label1","mag3d$rec.exp.customizer.label1")); // NOI18N
-        lblErrorPosAreEqual.setEnabled(false);
+        lblErrorPosOverlap.setForeground(new java.awt.Color(255, 0, 0));
+        lblErrorPosOverlap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblErrorPosOverlap.setText(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.customizer.label1","mag3d$rec.exp.customizer.label1")); // NOI18N
+        lblErrorPosOverlap.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        positionPanel.add(lblErrorPosAreEqual, gridBagConstraints);
+        positionPanel.add(lblErrorPosOverlap, gridBagConstraints);
 
         tfPos1.setText("15");
         tfPos1.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -542,8 +541,8 @@ public class Mag3DCustomizer extends AbstractCustomizer {
     }// GEN-LAST:event_sldCoilCurrentStateChanged
 
     private void checkPosOverlap() {
-        lblErrorPosAreEqual.setEnabled(sldPos1.getValue() > sldPos2.getValue()); // checks if the initial postion is greater than the final
-        btnOK.setEnabled(!lblErrorPosAreEqual.isEnabled());
+        lblErrorPosOverlap.setEnabled(sldPos1.getValue() > sldPos2.getValue()); // checks if the initial postion is greater than the final
+        btnOK.setEnabled(!lblErrorPosOverlap.isEnabled());
         checkNsamples(); // since the maximum number of samples depends on the positions, we need to always check 
     }
 
@@ -573,16 +572,21 @@ public class Mag3DCustomizer extends AbstractCustomizer {
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
     {// GEN-HEADEREND:event_btnOKActionPerformed
+        int posInit=sldPos1.getValue();
+        int posFinal=sldPos2.getValue();
+        int nsamples=sldNumSamples.getValue();
+        double tbs=(double)((posFinal-posInit)*3.0+1.0)/(double)nsamples;
+        
         getAcquisitionConfig().getSelectedHardwareParameter("protocol").setParameterValue("1"); // experiment expects protocol identifier, but there is only one for now
-        getAcquisitionConfig().getSelectedHardwareParameter("current").setParameterValue("" + (sldCoilCurrent.getValue()));
-        getAcquisitionConfig().getSelectedHardwareParameter("angle").setParameterValue("" + (sldAngle.getValue()));
-        getAcquisitionConfig().getSelectedHardwareParameter("pos_init").setParameterValue("" + (sldPos1.getValue()));
-        getAcquisitionConfig().getSelectedHardwareParameter("pos_final").setParameterValue("" + (sldPos2.getValue()));
-        getAcquisitionConfig().getSelectedHardwareParameter("n_samples").setParameterValue("" + (sldNumSamples.getValue()));
+        getAcquisitionConfig().getSelectedHardwareParameter("current").setParameterValue("" + sldCoilCurrent.getValue());
+        getAcquisitionConfig().getSelectedHardwareParameter("angle").setParameterValue("" + sldAngle.getValue());
+        getAcquisitionConfig().getSelectedHardwareParameter("pos_init").setParameterValue("" + posInit);
+        getAcquisitionConfig().getSelectedHardwareParameter("pos_final").setParameterValue("" + posFinal);
+        getAcquisitionConfig().getSelectedHardwareParameter("n_samples").setParameterValue("" + sldNumSamples.getValue());
         getAcquisitionConfig().setTotalSamples(sldNumSamples.getValue());
 
         getAcquisitionConfig().setSelectedFrequency(
-                new Frequency(50.0, getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
+                new Frequency( tbs, getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), getHardwareInfo().getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
         fireICustomizerListenerDone();
     }// GEN-LAST:event_btnOKActionPerformed
     
@@ -594,7 +598,7 @@ public class Mag3DCustomizer extends AbstractCustomizer {
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JPanel coilCurrentPanel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel lblErrorPosAreEqual;
+    private javax.swing.JLabel lblErrorPosOverlap;
     private javax.swing.JLabel lblErrorTooManySamples;
     private javax.swing.JPanel positionPanel;
     private javax.swing.JPanel samplesPanel;
