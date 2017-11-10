@@ -575,7 +575,7 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         int posInit=sldPos1.getValue();
         int posFinal=sldPos2.getValue();
         int nsamples=sldNumSamples.getValue();
-        double tbs=(double)((posFinal-posInit)*3.0+1.0)/(double)nsamples;
+       double tbs=50.0+(double)((posFinal-posInit)*24.0)/(double)nsamples;
         
         getAcquisitionConfig().getSelectedHardwareParameter("protocol").setParameterValue("1"); // experiment expects protocol identifier, but there is only one for now
         getAcquisitionConfig().getSelectedHardwareParameter("current").setParameterValue("" + sldCoilCurrent.getValue());

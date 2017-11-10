@@ -61,11 +61,11 @@
 	</parameter>
 
 	<frequency-scale label="Sampling Interval">
-		<min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></min-frequency>
-		<max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">916</Frequency></max-frequency>
+		<min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">50</Frequency></min-frequency>
+		<max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">7370</Frequency></max-frequency>
 		<step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
 	</frequency-scale>
-	<Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency>
+	<Frequency type="SamplingIntervalType" multiplier="milli">2500</Frequency>
 
 	<sampling-scale>
 		<min-samples>1</min-samples>
@@ -87,7 +87,7 @@
 			<min><PhysicsVal type="float">0</PhysicsVal></min>
 			<max><PhysicsVal type="float">256</PhysicsVal></max>
 			<step><PhysicsVal type="float">.1</PhysicsVal></step>
-			<errordefault><PhysicsVal type="int">5</PhysicsVal></errordefault>
+			<errordefault><PhysicsVal type="int">2</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 	
