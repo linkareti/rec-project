@@ -736,7 +736,7 @@ public class LangmuirCustomizer extends AbstractCustomizer {
         sldSigP.setValue(40);
         tfSigP.setText("40");
         sldPress.setValue(10);
-        tfPress.setText("3.0");
+        tfPress.setText("1.0");
         sldNumSamples.setValue(40);
         tfNumSamples.setText("40");
         sldNumPeriod.setValue(20);
