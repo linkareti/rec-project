@@ -1,0 +1,12 @@
+
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="mola$rec.exp.tip.mola" location="ELAB_MOLA_DSPIC_V0.1" iconLocationBundleKey="mola$rec.exp.icon.mola" headerDisplayClassLocationBundleKey="" displayStringBundleKey="mola$rec.exp.title.mola" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="mola$rec.exp.background.mola" descriptionStringBundleKey="mola$rec.exp.description.mola" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="mola$rec.exp.customizer.mola" order="0">
+    <defaultAcquisitionConfig toolTipBundleKey="mola$rec.exp.dftcfg.mola.tip.1" iconLocationBundleKey="ReCUI$rec.ui.icon.customize" displayStringBundleKey="mola$rec.exp.dftcfg.mola.title.1" classLocationBundleKey="mola$rec.exp.dftcfg.mola.loc.1" order="0"/>
+    <display toolTipBundleKey="mola$rec.exp.display.mola.tip.1" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="mola$rec.exp.display.mola.title.1" classLocationBundleKey="mola$rec.exp.display.mola.loc.1" order="0"/>
+    <display toolTipBundleKey="mola$rec.exp.display.mola.tip.2" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="mola$rec.exp.display.mola.title.2" classLocationBundleKey="mola$rec.exp.display.mola.loc.2" order="0"/>
+    <display toolTipBundleKey="mola$rec.exp.display.mola.tip.3" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="mola$rec.exp.display.mola.title.3" classLocationBundleKey="mola$rec.exp.display.mola.loc.3" order="0"/>
+    <localizationBundle name="mola" location="recresource:///pt/utl/ist/elab/client/mola/resources/messages"/>
+    <mediaConfig videoLocation="mola$rec.exp.url.mola.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+    <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+    <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
