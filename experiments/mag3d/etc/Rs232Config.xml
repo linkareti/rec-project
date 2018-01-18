@@ -18,7 +18,7 @@
 	    <parameter output="##0" input="##0" maxvalue="320" minvalue="15" order="4">
 	    </parameter>
 	    <!--n_samples -->
-	    <parameter output="##0" input="##0" maxvalue="800" minvalue="1" order="5">
+	    <parameter output="##0" input="##0" maxvalue="750" minvalue="1" order="5">
 	    </parameter>
 	</parameters>
 	<channels>

@@ -236,7 +236,7 @@ public class Mag3DCustomizer extends AbstractCustomizer {
         samplesPanel.setLayout(new java.awt.GridBagLayout());
 
         sldNumSamples.setMajorTickSpacing(200);
-        sldNumSamples.setMaximum(800);
+        sldNumSamples.setMaximum(750);
         sldNumSamples.setMinorTickSpacing(50);
         sldNumSamples.setPaintLabels(true);
         sldNumSamples.setPaintTicks(true);

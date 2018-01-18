@@ -55,7 +55,7 @@
 	<parameter name="n_samples" type="ContinuousValue" value="100">
 		<selection-list>
 			<value order="1">1</value>
-			<value order="2">800</value>
+			<value order="2">750</value>
 			<value order="3">1</value>
 		</selection-list>
 	</parameter>
@@ -69,7 +69,7 @@
 
 	<sampling-scale>
 		<min-samples>1</min-samples>
-		<max-samples>800</max-samples>
+		<max-samples>750</max-samples>
 		<step-samples>1</step-samples>
 	</sampling-scale>
 
