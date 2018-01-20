@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ElabNewUI" company="Linkare TI" webLink="" view-date="2008-12-22" view-index="0" gantt-divider-location="426" resource-divider-location="322" version="2.0">
+    <description/>
+    <view zooming-state="default:8" id="gantt-chart"/>
+    <view id="resource-table">
+        <field id="0" name="Nome" width="54" order="0"/>
+        <field id="1" name="Função padrão" width="45" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <calendar id="1" name="default">
+                <default-week sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+                <overriden-day-types/>
+                <days/>
+            </calendar>
+        </day-types>
+    </calendars>
+    <tasks color="#99ccff">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="1" name="Desenvolvimento da nova interface do ELab" color="#99ccff" meeting="false" start="2009-02-10" duration="54" complete="13" priority="1" expand="true">
+            <task id="16" name="ELabLAF - UIManager Defaults" color="#99ccff" meeting="false" start="2009-02-10" duration="4" complete="50" priority="1" expand="true">
+                <depend id="14" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="14" name="Configuração ReCBaseUI Especifica" color="#99ccff" meeting="false" start="2009-02-16" duration="4" complete="50" priority="1" expand="true">
+                <depend id="5" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="5" name="AboutDialog" color="#99ccff" meeting="false" start="2009-02-20" duration="1" complete="50" priority="1" expand="true">
+                <depend id="8" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="8" name="SplashScreen" color="#99ccff" meeting="false" start="2009-02-23" duration="1" complete="49" priority="1" expand="true">
+                <depend id="24" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="23" name="MenuBar" color="#99ccff" meeting="false" start="2009-02-24" duration="3" complete="50" priority="1" expand="true">
+                <task id="24" name="MenuBarUI" color="#99ccff" meeting="false" start="2009-02-24" duration="1" complete="50" priority="1" expand="true">
+                    <depend id="25" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="25" name="MenuUI" color="#99ccff" meeting="false" start="2009-02-25" duration="1" complete="50" priority="1" expand="true">
+                    <depend id="26" type="1" difference="0" hardness="Strong"/>
+                </task>
+                <task id="26" name="MenuItemUI" color="#99ccff" meeting="false" start="2009-02-25" duration="1" complete="50" priority="1" expand="true">
+                    <depend id="28" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="28" name="Estado e eventos" color="#99ccff" meeting="false" start="2009-02-26" duration="1" complete="53" priority="1" expand="true">
+                    <depend id="30" type="2" difference="0" hardness="Strong"/>
+                </task>
+            </task>
+            <task id="29" name="ToolBar" color="#99ccff" meeting="false" start="2009-02-27" duration="1" complete="33" priority="1" expand="true">
+                <task id="30" name="ToolBarUI" color="#99ccff" meeting="false" start="2009-02-27" duration="1" complete="50" priority="1" expand="true">
+                    <depend id="31" type="1" difference="0" hardness="Strong"/>
+                </task>
+                <task id="31" name="ToggleImageButton (Login/Logoff)" color="#99ccff" meeting="false" start="2009-02-27" duration="1" complete="50" priority="1" expand="true"/>
+            </task>
+            <task id="15" name="LoginPane" color="#99ccff" meeting="false" start="2009-03-02" duration="4" complete="0" priority="1" expand="true">
+                <task id="12" name="GlassPane com Semi-transparência" color="#99ccff" meeting="false" start="2009-03-02" duration="1" complete="0" priority="1" expand="true">
+                    <depend id="27" type="1" difference="0" hardness="Strong"/>
+                </task>
+                <task id="27" name="BackgroundImagePane" color="#99ccff" meeting="false" start="2009-03-02" duration="1" complete="0" priority="1" expand="true">
+                    <depend id="18" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="18" name="FlatTextField/TextUI" color="#99ccff" meeting="false" start="2009-03-03" duration="1" complete="0" priority="1" expand="true">
+                    <depend id="19" type="1" difference="0" hardness="Strong"/>
+                </task>
+                <task id="19" name="ImageButton (Ex: Login Avançar)" color="#99ccff" meeting="false" start="2009-03-03" duration="1" complete="0" priority="1" expand="true">
+                    <depend id="21" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="20" name="FlatCombo" color="#99ccff" meeting="false" start="2009-03-04" duration="2" complete="0" priority="1" expand="false">
+                    <task id="21" name="ComboBoxUI" color="#99ccff" meeting="false" start="2009-03-04" duration="2" complete="0" priority="1" expand="true">
+                        <depend id="35" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                </task>
+            </task>
+            <task id="33" name="LeftPane" color="#99ccff" meeting="false" start="2009-03-06" duration="10" complete="0" priority="1" expand="true">
+                <task id="34" name="ApparatusCombo" color="#99ccff" meeting="false" start="2009-03-06" duration="3" complete="0" priority="1" expand="true">
+                    <task id="35" name="ApparatusCellRenderer" color="#99ccff" meeting="false" start="2009-03-06" duration="2" complete="0" priority="1" expand="true">
+                        <depend id="38" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="38" name="Eventos" color="#99ccff" meeting="false" start="2009-03-10" duration="1" complete="0" priority="1" expand="true">
+                        <depend id="37" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                </task>
+                <task id="37" name="ImageToggleButton (Entrar-Sair)" color="#99ccff" meeting="false" start="2009-03-11" duration="1" complete="0" priority="1" expand="true">
+                    <depend id="39" type="1" difference="0" hardness="Strong"/>
+                </task>
+                <task id="39" name="LinkButton (Histórico)" color="#99ccff" meeting="false" start="2009-03-11" duration="1" complete="0" priority="1" expand="true">
+                    <depend id="56" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="56" name="TimeLeftClock" color="#99ccff" meeting="false" start="2009-03-12" duration="2" complete="0" priority="1" expand="true">
+                    <depend id="74" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="40" name="ExperimentHistory" color="#99ccff" meeting="false" start="2009-03-16" duration="4" complete="0" priority="1" expand="true">
+                    <task id="74" name="ListUI" color="#99ccff" meeting="false" start="2009-03-16" duration="1" complete="0" priority="1" expand="true">
+                        <depend id="44" type="1" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="44" name="ScrollBarUI" color="#99ccff" meeting="false" start="2009-03-16" duration="1" complete="0" priority="1" expand="true">
+                        <depend id="41" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="41" name="ExperimentCellRenderer" color="#99ccff" meeting="false" start="2009-03-17" duration="2" complete="0" priority="1" expand="true">
+                        <depend id="43" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="43" name="Eventos" color="#99ccff" meeting="false" start="2009-03-19" duration="1" complete="0" priority="1" expand="true">
+                        <depend id="45" type="2" difference="0" hardness="Strong"/>
+                        <depend id="47" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                </task>
+            </task>
+            <task id="45" name="CenterPane" color="#99ccff" meeting="false" start="2009-03-20" duration="18" complete="0" priority="1" expand="true">
+                <task id="46" name="ControllerActionPane" color="#99ccff" meeting="false" start="2009-03-20" duration="3" complete="0" priority="1" expand="true">
+                    <task id="47" name="GlassToolTip" color="#99ccff" meeting="false" start="2009-03-20" duration="1" complete="0" priority="1" expand="true">
+                        <depend id="48" type="1" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="48" name="ImageToggleButton Play/Stop" color="#99ccff" meeting="false" start="2009-03-20" duration="1" complete="0" priority="1" expand="true">
+                        <depend id="49" type="1" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="49" name="Auto-play CheckBox" color="#99ccff" meeting="false" start="2009-03-20" duration="1" complete="0" priority="1" expand="true">
+                        <depend id="50" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="50" name="Color Info Label" color="#99ccff" meeting="false" start="2009-03-23" duration="1" complete="0" priority="1" expand="true">
+                        <depend id="55" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="55" name="Estado e Eventos" color="#99ccff" meeting="false" start="2009-03-24" duration="1" complete="0" priority="1" expand="true">
+                        <depend id="52" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                </task>
+                <task id="51" name="ExperienceTabPane" color="#99ccff" meeting="false" start="2009-03-25" duration="15" complete="0" priority="1" expand="true">
+                    <task id="52" name="TabbedPaneUI" color="#99ccff" meeting="false" start="2009-03-25" duration="2" complete="0" priority="1" expand="true">
+                        <depend id="53" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="53" name="DescriptionPane" color="#99ccff" meeting="false" start="2009-03-27" duration="1" complete="0" priority="1" expand="true">
+                        <depend id="64" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="54" name="CustomizerPane" color="#99ccff" meeting="false" start="2009-03-30" duration="4" complete="0" priority="1" expand="true">
+                        <task id="64" name="SliderUI" color="#99ccff" meeting="false" start="2009-03-30" duration="1" complete="0" priority="1" expand="true">
+                            <depend id="65" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                        <task id="65" name="BasicRadioButtonUI" color="#99ccff" meeting="false" start="2009-03-31" duration="1" complete="0" priority="1" expand="true">
+                            <depend id="66" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                        <task id="66" name="BasicCheckBoxUI" color="#99ccff" meeting="false" start="2009-04-01" duration="1" complete="0" priority="1" expand="true">
+                            <depend id="67" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                        <task id="67" name="ButtonUI" color="#99ccff" meeting="false" start="2009-04-02" duration="1" complete="0" priority="1" expand="true">
+                            <depend id="68" type="1" difference="0" hardness="Strong"/>
+                        </task>
+                        <task id="68" name="BasicToggleButtonUI" color="#99ccff" meeting="false" start="2009-04-02" duration="1" complete="0" priority="1" expand="true">
+                            <depend id="58" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                    </task>
+                    <task id="57" name="ResultsPane" color="#99ccff" meeting="false" start="2009-04-03" duration="6" complete="0" priority="1" expand="true">
+                        <task id="58" name="ResultDisplaysCombo" color="#99ccff" meeting="false" start="2009-04-03" duration="1" complete="0" priority="1" expand="true">
+                            <depend id="60" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                        <task id="60" name="SensorDisplayPane" color="#99ccff" meeting="false" start="2009-04-06" duration="1" complete="0" priority="1" expand="true">
+                            <depend id="62" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                        <task id="61" name="ResultsDataTable" color="#99ccff" meeting="false" start="2009-04-07" duration="3" complete="0" priority="1" expand="true">
+                            <task id="62" name="TableUI" color="#99ccff" meeting="false" start="2009-04-07" duration="2" complete="0" priority="1" expand="true">
+                                <depend id="63" type="2" difference="0" hardness="Strong"/>
+                            </task>
+                            <task id="63" name="TableHeaderUI" color="#99ccff" meeting="false" start="2009-04-09" duration="1" complete="0" priority="1" expand="true">
+                                <depend id="59" type="2" difference="0" hardness="Strong"/>
+                            </task>
+                        </task>
+                        <task id="59" name="ExperimentInfoPane" color="#99ccff" meeting="false" start="2009-04-10" duration="1" complete="0" priority="1" expand="true">
+                            <depend id="73" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                    </task>
+                    <task id="73" name="UserPane (Table/List?)" color="#99ccff" meeting="false" start="2009-04-13" duration="2" complete="0" priority="1" expand="true"/>
+                </task>
+            </task>
+            <task id="69" name="RighMediaPane" color="#99ccff" meeting="false" start="2009-03-05" duration="7" complete="0" priority="1" expand="true">
+                <task id="71" name="LiveChatPane" color="#99ccff" meeting="false" start="2009-03-05" duration="6" complete="0" priority="1" expand="true">
+                    <depend id="70" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="70" name="LiveVideoPane - Mock" color="#99ccff" meeting="false" start="2009-03-13" duration="1" complete="0" priority="1" expand="true">
+                    <depend id="47" type="2" difference="0" hardness="Strong"/>
+                </task>
+            </task>
+            <task id="75" name="Mensagens e tooltips da aplicação" color="#99ccff" meeting="false" start="2009-04-15" duration="2" complete="0" priority="1" expand="true"/>
+            <task id="2" name="ELabBaseUI - Frame" color="#99ccff" meeting="false" start="2009-04-17" duration="6" complete="0" priority="1" expand="true">
+                <task id="3" name="Integração dos componentes" color="#99ccff" meeting="false" start="2009-04-17" duration="3" complete="0" priority="1" expand="true">
+                    <depend id="4" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="4" name="Eventos Globais" color="#99ccff" meeting="false" start="2009-04-22" duration="3" complete="0" priority="1" expand="true"/>
+            </task>
+        </task>
+        <task id="76" name="Tarefas inacabadas" color="#99ccff" meeting="false" start="2009-04-27" duration="8" complete="0" priority="1" expand="true"/>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <taskdisplaycolumns>
+        <displaycolumn property-id="tpd3" order="0" width="334"/>
+        <displaycolumn property-id="tpd6" order="1" width="18"/>
+    </taskdisplaycolumns>
+    <previous>
+        <previous-tasks name="Guardar_2">
+            <previous-task id="1" start="2009-02-10" duration="49" meeting="false" super="true"/>
+            <previous-task id="16" start="2009-02-10" duration="4" meeting="false" super="false"/>
+            <previous-task id="14" start="2009-02-16" duration="4" meeting="false" super="false"/>
+            <previous-task id="5" start="2009-02-16" duration="1" meeting="false" super="false"/>
+            <previous-task id="8" start="2009-02-16" duration="1" meeting="false" super="false"/>
+            <previous-task id="23" start="2009-02-17" duration="3" meeting="false" super="true"/>
+            <previous-task id="24" start="2009-02-17" duration="1" meeting="false" super="false"/>
+            <previous-task id="25" start="2009-02-18" duration="1" meeting="false" super="false"/>
+            <previous-task id="26" start="2009-02-18" duration="1" meeting="false" super="false"/>
+            <previous-task id="28" start="2009-02-19" duration="1" meeting="false" super="false"/>
+            <previous-task id="29" start="2009-02-20" duration="1" meeting="false" super="true"/>
+            <previous-task id="30" start="2009-02-20" duration="1" meeting="false" super="false"/>
+            <previous-task id="31" start="2009-02-20" duration="1" meeting="false" super="false"/>
+            <previous-task id="15" start="2009-02-23" duration="4" meeting="false" super="true"/>
+            <previous-task id="12" start="2009-02-23" duration="1" meeting="false" super="false"/>
+            <previous-task id="27" start="2009-02-23" duration="1" meeting="false" super="false"/>
+            <previous-task id="18" start="2009-02-24" duration="1" meeting="false" super="false"/>
+            <previous-task id="19" start="2009-02-24" duration="1" meeting="false" super="false"/>
+            <previous-task id="20" start="2009-02-25" duration="2" meeting="false" super="true"/>
+            <previous-task id="21" start="2009-02-25" duration="2" meeting="false" super="false"/>
+            <previous-task id="33" start="2009-02-27" duration="10" meeting="false" super="true"/>
+            <previous-task id="34" start="2009-02-27" duration="3" meeting="false" super="true"/>
+            <previous-task id="35" start="2009-02-27" duration="2" meeting="false" super="false"/>
+            <previous-task id="38" start="2009-03-03" duration="1" meeting="false" super="false"/>
+            <previous-task id="37" start="2009-03-04" duration="1" meeting="false" super="false"/>
+            <previous-task id="39" start="2009-03-04" duration="1" meeting="false" super="false"/>
+            <previous-task id="56" start="2009-03-05" duration="2" meeting="false" super="false"/>
+            <previous-task id="40" start="2009-03-09" duration="4" meeting="false" super="true"/>
+            <previous-task id="74" start="2009-03-09" duration="1" meeting="false" super="false"/>
+            <previous-task id="44" start="2009-03-09" duration="1" meeting="false" super="false"/>
+            <previous-task id="41" start="2009-03-10" duration="2" meeting="false" super="false"/>
+            <previous-task id="43" start="2009-03-12" duration="1" meeting="false" super="false"/>
+            <previous-task id="45" start="2009-03-13" duration="18" meeting="false" super="true"/>
+            <previous-task id="46" start="2009-03-13" duration="3" meeting="false" super="true"/>
+            <previous-task id="47" start="2009-03-13" duration="1" meeting="false" super="false"/>
+            <previous-task id="48" start="2009-03-13" duration="1" meeting="false" super="false"/>
+            <previous-task id="49" start="2009-03-13" duration="1" meeting="false" super="false"/>
+            <previous-task id="50" start="2009-03-16" duration="1" meeting="false" super="false"/>
+            <previous-task id="55" start="2009-03-17" duration="1" meeting="false" super="false"/>
+            <previous-task id="51" start="2009-03-18" duration="15" meeting="false" super="true"/>
+            <previous-task id="52" start="2009-03-18" duration="2" meeting="false" super="false"/>
+            <previous-task id="53" start="2009-03-20" duration="1" meeting="false" super="false"/>
+            <previous-task id="54" start="2009-03-23" duration="4" meeting="false" super="true"/>
+            <previous-task id="64" start="2009-03-23" duration="1" meeting="false" super="false"/>
+            <previous-task id="65" start="2009-03-24" duration="1" meeting="false" super="false"/>
+            <previous-task id="66" start="2009-03-25" duration="1" meeting="false" super="false"/>
+            <previous-task id="67" start="2009-03-26" duration="1" meeting="false" super="false"/>
+            <previous-task id="68" start="2009-03-26" duration="1" meeting="false" super="false"/>
+            <previous-task id="57" start="2009-03-27" duration="6" meeting="false" super="true"/>
+            <previous-task id="58" start="2009-03-27" duration="1" meeting="false" super="false"/>
+            <previous-task id="60" start="2009-03-30" duration="1" meeting="false" super="false"/>
+            <previous-task id="61" start="2009-03-31" duration="3" meeting="false" super="true"/>
+            <previous-task id="62" start="2009-03-31" duration="2" meeting="false" super="false"/>
+            <previous-task id="63" start="2009-04-02" duration="1" meeting="false" super="false"/>
+            <previous-task id="59" start="2009-04-03" duration="1" meeting="false" super="false"/>
+            <previous-task id="73" start="2009-04-06" duration="2" meeting="false" super="false"/>
+            <previous-task id="69" start="2009-04-08" duration="3" meeting="false" super="true"/>
+            <previous-task id="70" start="2009-04-08" duration="1" meeting="false" super="false"/>
+            <previous-task id="71" start="2009-04-09" duration="2" meeting="false" super="false"/>
+            <previous-task id="75" start="2009-04-13" duration="1" meeting="false" super="false"/>
+            <previous-task id="2" start="2009-04-14" duration="4" meeting="false" super="true"/>
+            <previous-task id="3" start="2009-04-14" duration="1" meeting="false" super="false"/>
+            <previous-task id="4" start="2009-04-15" duration="3" meeting="false" super="false"/>
+        </previous-tasks>
+        <previous-tasks name="Guardar_2_1">
+            <previous-task id="1" start="2009-02-10" duration="54" meeting="false" super="true"/>
+            <previous-task id="16" start="2009-02-10" duration="4" meeting="false" super="false"/>
+            <previous-task id="14" start="2009-02-16" duration="4" meeting="false" super="false"/>
+            <previous-task id="5" start="2009-02-20" duration="1" meeting="false" super="false"/>
+            <previous-task id="8" start="2009-02-23" duration="1" meeting="false" super="false"/>
+            <previous-task id="23" start="2009-02-24" duration="3" meeting="false" super="true"/>
+            <previous-task id="24" start="2009-02-24" duration="1" meeting="false" super="false"/>
+            <previous-task id="25" start="2009-02-25" duration="1" meeting="false" super="false"/>
+            <previous-task id="26" start="2009-02-25" duration="1" meeting="false" super="false"/>
+            <previous-task id="28" start="2009-02-26" duration="1" meeting="false" super="false"/>
+            <previous-task id="29" start="2009-02-27" duration="1" meeting="false" super="true"/>
+            <previous-task id="30" start="2009-02-27" duration="1" meeting="false" super="false"/>
+            <previous-task id="31" start="2009-02-27" duration="1" meeting="false" super="false"/>
+            <previous-task id="15" start="2009-03-02" duration="4" meeting="false" super="true"/>
+            <previous-task id="12" start="2009-03-02" duration="1" meeting="false" super="false"/>
+            <previous-task id="27" start="2009-03-02" duration="1" meeting="false" super="false"/>
+            <previous-task id="18" start="2009-03-03" duration="1" meeting="false" super="false"/>
+            <previous-task id="19" start="2009-03-03" duration="1" meeting="false" super="false"/>
+            <previous-task id="20" start="2009-03-04" duration="2" meeting="false" super="true"/>
+            <previous-task id="21" start="2009-03-04" duration="2" meeting="false" super="false"/>
+            <previous-task id="33" start="2009-03-06" duration="10" meeting="false" super="true"/>
+            <previous-task id="34" start="2009-03-06" duration="3" meeting="false" super="true"/>
+            <previous-task id="35" start="2009-03-06" duration="2" meeting="false" super="false"/>
+            <previous-task id="38" start="2009-03-10" duration="1" meeting="false" super="false"/>
+            <previous-task id="37" start="2009-03-11" duration="1" meeting="false" super="false"/>
+            <previous-task id="39" start="2009-03-11" duration="1" meeting="false" super="false"/>
+            <previous-task id="56" start="2009-03-12" duration="2" meeting="false" super="false"/>
+            <previous-task id="40" start="2009-03-16" duration="4" meeting="false" super="true"/>
+            <previous-task id="74" start="2009-03-16" duration="1" meeting="false" super="false"/>
+            <previous-task id="44" start="2009-03-16" duration="1" meeting="false" super="false"/>
+            <previous-task id="41" start="2009-03-17" duration="2" meeting="false" super="false"/>
+            <previous-task id="43" start="2009-03-19" duration="1" meeting="false" super="false"/>
+            <previous-task id="45" start="2009-03-20" duration="18" meeting="false" super="true"/>
+            <previous-task id="46" start="2009-03-20" duration="3" meeting="false" super="true"/>
+            <previous-task id="47" start="2009-03-20" duration="1" meeting="false" super="false"/>
+            <previous-task id="48" start="2009-03-20" duration="1" meeting="false" super="false"/>
+            <previous-task id="49" start="2009-03-20" duration="1" meeting="false" super="false"/>
+            <previous-task id="50" start="2009-03-23" duration="1" meeting="false" super="false"/>
+            <previous-task id="55" start="2009-03-24" duration="1" meeting="false" super="false"/>
+            <previous-task id="51" start="2009-03-25" duration="15" meeting="false" super="true"/>
+            <previous-task id="52" start="2009-03-25" duration="2" meeting="false" super="false"/>
+            <previous-task id="53" start="2009-03-27" duration="1" meeting="false" super="false"/>
+            <previous-task id="54" start="2009-03-30" duration="4" meeting="false" super="true"/>
+            <previous-task id="64" start="2009-03-30" duration="1" meeting="false" super="false"/>
+            <previous-task id="65" start="2009-03-31" duration="1" meeting="false" super="false"/>
+            <previous-task id="66" start="2009-04-01" duration="1" meeting="false" super="false"/>
+            <previous-task id="67" start="2009-04-02" duration="1" meeting="false" super="false"/>
+            <previous-task id="68" start="2009-04-02" duration="1" meeting="false" super="false"/>
+            <previous-task id="57" start="2009-04-03" duration="6" meeting="false" super="true"/>
+            <previous-task id="58" start="2009-04-03" duration="1" meeting="false" super="false"/>
+            <previous-task id="60" start="2009-04-06" duration="1" meeting="false" super="false"/>
+            <previous-task id="61" start="2009-04-07" duration="3" meeting="false" super="true"/>
+            <previous-task id="62" start="2009-04-07" duration="2" meeting="false" super="false"/>
+            <previous-task id="63" start="2009-04-09" duration="1" meeting="false" super="false"/>
+            <previous-task id="59" start="2009-04-10" duration="1" meeting="false" super="false"/>
+            <previous-task id="73" start="2009-04-13" duration="2" meeting="false" super="false"/>
+            <previous-task id="69" start="2009-04-15" duration="3" meeting="false" super="true"/>
+            <previous-task id="70" start="2009-04-15" duration="1" meeting="false" super="false"/>
+            <previous-task id="71" start="2009-04-16" duration="2" meeting="false" super="false"/>
+            <previous-task id="75" start="2009-04-20" duration="1" meeting="false" super="false"/>
+            <previous-task id="2" start="2009-04-21" duration="4" meeting="false" super="true"/>
+            <previous-task id="3" start="2009-04-21" duration="1" meeting="false" super="false"/>
+            <previous-task id="4" start="2009-04-22" duration="3" meeting="false" super="false"/>
+        </previous-tasks>
+    </previous>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+</project>
