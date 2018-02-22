@@ -30,6 +30,7 @@
 		<!-- The version of Weld extensions in use -->
 		<weld.extensions.version>1.0.0-CR2</weld.extensions.version>
                 <aspectj.version>1.8.2</aspectj.version>
+		<aspectj-maven-plugin.version>1.7</aspectj-maven-plugin.version>
 	</properties>
 
 	<dependencyManagement>
@@ -553,6 +554,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
+				<version>${aspectj-maven-plugin.version}</version>
 				<configuration>
                                         <complianceLevel>1.6</complianceLevel>
 					<target>1.6</target>
@@ -638,9 +640,9 @@
 										<artifactId>
 											aspectj-maven-plugin
 										</artifactId>
-										<versionRange>
-											[1.4,1.7]
-										</versionRange>
+										<version>
+											${aspectj-maven-plugin.version}
+										</version>
 										<goals>
 											<goal>compile</goal>
 										</goals>
@@ -759,6 +761,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
+				<version>${aspectj-maven-plugin.version}</version>
 				<configuration>
 					<verbose>true</verbose>
 					<privateScope>true</privateScope>
