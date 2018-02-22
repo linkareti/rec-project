@@ -639,7 +639,7 @@
 											aspectj-maven-plugin
 										</artifactId>
 										<versionRange>
-											[1.4,)
+											[1.4,1.7]
 										</versionRange>
 										<goals>
 											<goal>compile</goal>
