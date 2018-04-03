@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<hardware id="ELAB_MAG3D_DSPIC_V0.1" num_channels="5" minfrequency="1Hz" maxfrequency="1000Hz">
+  <rs232 baud="115200" stopbits="1" paritybits="0" numbits="8" ports_restrict="/dev/ttyUSB0">
+	<parameters>
+		<!-- protocol -->
+	    <parameter output="0" input="0" maxvalue="2" minvalue="1" order="0">
+	    </parameter>
+	    <!-- current -->
+	    <parameter output="##0" input="##0" maxvalue="100" minvalue="0" order="1">
+	    </parameter>
+	     <!-- angle -->
+	    <parameter output="#0" input="#0" maxvalue="90" minvalue="0" order="2">
+	    </parameter>
+	    <!-- pos_init -->
+	    <parameter output="##0" input="##0" maxvalue="320" minvalue="15" order="3">
+	    </parameter>
+	    <!-- pos_final -->
+	    <parameter output="##0" input="##0" maxvalue="320" minvalue="15" order="4">
+	    </parameter>
+	    <!--n_samples -->
+	    <parameter output="##0" input="##0" maxvalue="750" minvalue="1" order="5">
+	    </parameter>
+	</parameters>
+	<channels>
+		<!-- position -->
+	    <channel format="##0.0" order="0">
+	    </channel>
+	    <!-- current -->
+	    <channel format="##0.0" order="1">
+	    </channel>
+	    <!-- field_y -->
+	    <channel format="#####0" order="2">
+	    </channel>
+	    <!-- field_z -->
+	    <channel format="#####0" order="3">
+	    </channel>
+	    <!-- field_x -->
+	    <channel format="#####0" order="4">
+	    </channel>
+	</channels>
+	<timeout>
+	    <default_timeout time="45000" />
+	    <id time="5000" />
+	    <cfg time="20000" />
+	    <cur time="5000" />
+	    <str time="5000" />
+	    <dat_bin time="210000" />
+	    <no_data time="10000" />
+	    <end time="210000" />
+	    <stp time="20000" />
+	    <rst time="60000" />
+	    <hardware_died time="3600000" />
+	    <listen_to_port time="10000" />
+	</timeout>
+	<errors>
+	    <error code="0" key="OPS" message="Something wrong happened !" />
+	    <error code="1" key="SENSOR" message="Sensor has failed." />
+	    <error code="2" key="OUT" message="Value out of range..." />
+	</errors>
+  </rs232>
+</hardware>
