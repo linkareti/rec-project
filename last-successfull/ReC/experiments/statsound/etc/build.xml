@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="statsound" basedir=".">
+	<description>Specific Build file for statsound in the elab project</description>
+
+
+	<!--
+	Only override this task on an as-needed basis. This task occurs before
+	any compilation is made, but right after the inicial setup of build and dist dirs
+	and their associated cleanup.
+	-->
+	<target name="pre-compile" description="Pre compile for statsound">
+
+	</target>
+
+	<!--
+		Only override this task on an as-needed basis. This task occurs after
+		any compilation is made, but right after the inicial setup of build and dist dirs
+		and their associated cleanup.
+		-->
+	<target name="post-compile" description="Post compile for statsound">
+
+	</target>
+
+
+	<!--
+	Only override this task on an as-needed basis. This task occurs before
+	any jar is packed, but right after the compile step of build.
+	-->
+	<target name="pre-jar" description="Pre jar creation for statsound">
+
+	</target>
+
+	<!--
+		Only override this task on an as-needed basis. This task occurs after
+		any jar is packed, but right after the compile step of build.
+		-->
+	<target name="post-jar" description="Post jar creation for statsound">
+
+	</target>
+
+	<!--
+	Only override this task on an as-needed basis. This task occurs before
+	any dist file is created, but right after the jar step of build.
+	-->
+	<target name="pre-dist" description="Pre dist creation for statsound">
+
+	</target>
+
+	<!--
+		Only override this task on an as-needed basis. This task occurs after
+		any dist file is created, but right after the jar step of build.
+		-->
+	<target name="post-dist" description="Post dist creation for statsound">
+
+	</target>
+
+	<!--
+	Only override this task on an as-needed basis. This task occurs before
+	the driver zip dist file is created, but right after the replace files step of build.
+	-->
+	<target name="pre-zip.dist.hardwareserver" description="Pre zip dist hardwareserver creation for aleatorio">
+
+		<replace file="${experiments.build.dir}/StartstatsoundDriver.sh" propertyFile="build.properties">
+			<replacefilter token="export DRIVER_EXPERIMENT_CLASSPATH=" value="export DRIVER_EXPERIMENT_CLASSPATH=$DRIVER_BASE_DIR/lib/jmf.jar:$DRIVER_BASE_DIR/lib/jmf.properties" />
+			<replacefilter token="java.awt.headless=true" value="java.awt.headless=false" />
+		</replace>
+
+	</target>
+
+</project>
