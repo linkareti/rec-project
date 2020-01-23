@@ -52,7 +52,7 @@ int main(void) {
 	static int pushButtonFlag;
 	static int i;
 	static int ctr;
-	static double myDouble;
+//	static double myDouble;
 
 	pushButtonFlag = 0;
 	
@@ -86,13 +86,14 @@ int main(void) {
 	ADPCFGbits.PCFG3 = 1;
 	TRISBbits.TRISB3 = 1;
 	
-	//Change notification config (period measurement and microswitch)
+	//Change notification config (period measurement)
 	IPC3bits.CNIP = 6;
 	CNEN1bits.CN4IE = 1;	//photodiode
-	CNEN1bits.CN5IE = 1;	//microswitch
-	CNPU1bits.CN5PUE = 1;	//weak pullup for microswitch
 	IFS0bits.CNIF = 0;
 	IEC0bits.CNIE = 1;
+
+	//Pull-up config for microswitch
+	CNPU1bits.CN5PUE = 1;	//weak pullup for microswitch
 	
 	//Stepper motor
 	releaseBipolar();
@@ -156,15 +157,13 @@ int main(void) {
 	IEC1bits.U2RXIE = 1;
 	
 	__C30_UART = 2; 	//define UART2 as predefined for use with stdio library, printf etc
-
-	Yaiks();
 	
-	myDouble = getSphereDiameter_CM();
+/*	myDouble = getSphereDiameter_CM();
 	if(myDouble < 1.0) saveSphereDiameter_CM(1.0);
 
 	myDouble = getPendulumLength_M();
 	if(myDouble < 1.0) savePendulumLength_M(1.0);
-
+*/
 	set_state(STATE_RESET, NO_ECHO);
 	reset_idmsg_timer();
 	init_d7seg();

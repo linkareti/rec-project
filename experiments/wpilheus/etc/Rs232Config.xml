@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
 <hardware id="WORLDPENDULUM_ILHEUS" num_channels="5"
-	minfrequency="10Hz" maxfrequency="100Hz">
+	minfrequency="10Hz" maxfrequency="1000Hz">
 	<rs232 baud="115200" stopbits="1" paritybits="0" numbits="8"
 		ports_restrict="/dev/ttyS0">
 		<parameters>

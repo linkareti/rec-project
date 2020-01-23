@@ -31,6 +31,8 @@
 		<weld.extensions.version>1.0.0-CR2</weld.extensions.version>
                 <aspectj.version>1.8.2</aspectj.version>
 		<aspectj-maven-plugin.version>1.7</aspectj-maven-plugin.version>
+    <maven.compiler.source>1.6</maven.compiler.source>
+    <maven.compiler.target>1.6</maven.compiler.target>
 	</properties>
 
 	<dependencyManagement>

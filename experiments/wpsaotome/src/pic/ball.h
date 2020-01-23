@@ -1,15 +1,12 @@
 #ifndef _BALL_H_
 #define _BALL_H_
 
-void Yaiks();
-
 int get_ball_direction();
-double get_ball_velocity();
+double get_ball_velocityCM();
 int ball_is_stopped();
 int photodiode_is_on();
 int photodiode_is_off();
 int get_oscillation_mode();
-int shovel_is_at_origin();
 void measurement();
 int is_data_point_available();
 void start_acquisition();

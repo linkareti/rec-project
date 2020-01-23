@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
-<HardwareInfo id="WORLDPENDULUM_ILHEUS" familiarName="Pêndulo Ilhéus" name="PIC"
-	version="v1" manufacturer="IST" driverVersion="v2">
-		
+<HardwareInfo id="WORLDPENDULUM_ILHEUS" familiarName="Pêndulo Mundial Faro" name="Basic STAMP"
+	version="BS2" manufacturer="Parallax" driverVersion="v2">
+	
+	<description>	</description>
+	
 	<parameter name="wpilheus$parameter.displacement" type="ContinuousValue" value="5">
 		<selection-list>
 			<value order="1">5</value>

@@ -37,7 +37,6 @@
 	<classpathentry kind="src" path="experiments/planck/src/java/server"/>
 	<classpathentry kind="src" path="experiments/polaroid/src/java/client"/>
 	<classpathentry kind="src" path="experiments/polaroid/src/java/server"/>
-	<classpathentry kind="src" path="experiments/pv/src/java/client"/>
 	<classpathentry kind="src" path="experiments/pv/src/java/server"/>
 	<classpathentry kind="src" path="experiments/radioactividade/src/java/client"/>
 	<classpathentry kind="src" path="experiments/radioactividade/src/java/server"/>

@@ -1,0 +1,10 @@
+
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wppucrio$tip.wppucrio" location="WP_PUC_RIO" iconLocationBundleKey="wppucrio$icon.wppucrio" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wppucrio$title.wppucrio" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wppucrio$background.wppucrio" descriptionStringBundleKey="wppucrio$description.wppucrio" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wppucrio$customizer.wppucrio" order="0">
+    <display toolTipBundleKey="wppucrio$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wppucrio$display.table.title" classLocationBundleKey="wppucrio$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wppucrio$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wppucrio$display.graph.histogram.title" classLocationBundleKey="wppucrio$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wppucrio$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wppucrio$display.graph.period.title" classLocationBundleKey="wppucrio$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wppucrio$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wppucrio$display.graph.g.title" classLocationBundleKey="wppucrio$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wppucrio" location="recresource:///pt/utl/ist/elab/client/wppucrio/resources/messages"/>
+    <mediaConfig videoLocation="wppucrio$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>

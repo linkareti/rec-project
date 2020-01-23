@@ -1,9 +1,10 @@
+
 <apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpsaotome$tip.wpsaotome" location="WP_SAOTOME" iconLocationBundleKey="wpsaotome$icon.wpsaotome" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpsaotome$title.wpsaotome" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpsaotome$background.wpsaotome" descriptionStringBundleKey="wpsaotome$description.wpsaotome" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpsaotome$customizer.wpsaotome" order="0">
-	<display toolTipBundleKey="wpsaotome$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpsaotome$display.table.title" classLocationBundleKey="wpsaotome$display.table.loc" order="0"/>
-    <display toolTipBundleKey="wpsaotome$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpsaotome$display.graph.histogram.title" classLocationBundleKey="wpsaotome$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpsaotome$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpsaotome$display.table.title" classLocationBundleKey="wpsaotome$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wpsaotome$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpsaotome$display.graph.histogram.title" classLocationBundleKey="wpsaotome$display.graph.histogram.loc" order="0"/>
     <display toolTipBundleKey="wpsaotome$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpsaotome$display.graph.period.title" classLocationBundleKey="wpsaotome$display.graph.period.loc" order="0"/>
     <display toolTipBundleKey="wpsaotome$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpsaotome$display.graph.g.title" classLocationBundleKey="wpsaotome$display.graph.g.loc" order="0"/>
-    <localizationBundle name="wpsaotome"    location="recresource:///pt/utl/ist/elab/client/wpsaotome/resources/messages"/>
+    <localizationBundle name="wpsaotome" location="recresource:///pt/utl/ist/elab/client/wpsaotome/resources/messages"/>
     <mediaConfig videoLocation="wpsaotome$url.video" offlinePlay="true" canSave="true" order="0"/>
     <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
 </apparatus>

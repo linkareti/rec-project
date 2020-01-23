@@ -22,7 +22,7 @@ public class ServerMain {
 			ORBBean.getORBBean();
 			
 			//TODO - Uncomment the next line and define the correct driver class
-			//new BaseHardware(new wpmaputoDriver());
+			//new BaseHardware(new wpbarcelonaDriver());
 
 			try {
 				Thread.currentThread().join();

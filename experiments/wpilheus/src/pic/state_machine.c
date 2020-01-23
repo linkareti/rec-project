@@ -12,7 +12,7 @@
 #include "d7seg.h"
 #include "pendulum_N_oscs.h"
 
-static int state;
+static int state = STATE_RESET;
 static volatile unsigned long uptime;
 static volatile int sendIdFlag;				//indicates that IDS message should be sent
 static int deltaX;
@@ -25,13 +25,15 @@ static int echoMode = NO_ECHO;
 void state_machine() {
 	static int flag, s;
 	static int oscillationCounter;
+	static char buf[32];
 
 	if(sendIdFlag == 1 && state != STATE_SENDING_DATA) {
 		reset_idmsg_timer();
-		if(state == STATE_RESET) printf("IDS\tELAB_WORLD_PENDULUM_PLANETARIUM\tRESETED\r");
-		else if(state == STATE_STOPPED) printf("IDS\tELAB_WORLD_PENDULUM_PLANETARIUM\tSTOPED\r");
-		else if(state == STATE_CONFIGURED) printf("IDS\tELAB_WORLD_PENDULUM_PLANETARIUM\tCONFIGURED\r");
-		else if(state == STATE_STARTED) printf("IDS\tELAB_WORLD_PENDULUM_PLANETARIUM\tSTARTED\r");
+		getIDstring_CHAR(buf);		//WORLDPENDULUM_ILHEUS, ELAB_WORLD_PENDULUM_PLANETARIUM, etc
+		if(state == STATE_RESET)           printf("IDS\t%s\tRESETED\r", buf);
+		else if(state == STATE_STOPPED)    printf("IDS\t%s\tSTOPED\r", buf);
+		else if(state == STATE_CONFIGURED) printf("IDS\t%s\tCONFIGURED\r", buf);
+		else if(state == STATE_STARTED)    printf("IDS\t%s\tSTARTED\r", buf);
 	}
 
 	IEC1bits.T4IE = 0;
@@ -110,7 +112,7 @@ void state_machine() {
 			print_d7seg(getGlobalNumberOfOscs(), 0);
 			printf("%.7f\t", get_calculated_G());
 			print_d7seg(getGlobalNumberOfOscs(), 0);
-			printf("%.7f\t", get_ball_velocity());
+			printf("%.7f\t", get_ball_velocityCM());
 			print_d7seg(getGlobalNumberOfOscs(), 0);
 			printf("%.1f", get_temperature());
 			print_d7seg(getGlobalNumberOfOscs(), 0);
@@ -127,7 +129,7 @@ void state_machine() {
 }
 
 unsigned long get_uptime() {
-	unsigned long retVal;
+	static unsigned long retVal;
 	IEC1bits.T4IE = 0;
 	asm("nop");
 	retVal = uptime;
@@ -153,13 +155,19 @@ void set_state(int st, int mode) {
 	}
 	else if(st == STATE_CONFIGURED) {
 		if(state == STATE_SENDING_DATA) return;
-		if(deltaX < DELTAX_MIN || deltaX > DELTAX_MAX || Noscillations < NOSC_MIN || Noscillations > NOSC_MAX) return;
+		if(deltaX < DELTAX_MIN) deltaX = DELTAX_MIN;
+		if(deltaX > getDeltaXMax_CM()) deltaX = getDeltaXMax_CM();
+		if(Noscillations < NOSC_MIN) Noscillations = NOSC_MIN;
+		if(Noscillations > NOSC_MAX) Noscillations = NOSC_MAX;
 		state = STATE_CONFIGURED;
 		stateFlag = NOT_OK;
 	}
 	else if(st == STATE_STARTED) {
 		if(state != STATE_CONFIGURED) return;
-		if(deltaX < DELTAX_MIN || deltaX > DELTAX_MAX || Noscillations < NOSC_MIN || Noscillations > NOSC_MAX) return;
+		if(deltaX < DELTAX_MIN) deltaX = DELTAX_MIN;
+		if(deltaX > getDeltaXMax_CM()) deltaX = getDeltaXMax_CM();
+		if(Noscillations < NOSC_MIN) Noscillations = NOSC_MIN;
+		if(Noscillations > NOSC_MAX) Noscillations = NOSC_MAX;
 		state = STATE_STARTED;
 		stateFlag = NOT_OK;
 	}
@@ -175,8 +183,8 @@ int get_state() {
 }
 
 void set_deltaX(unsigned int x) {
-//	if(x < DELTAX_MIN) return;
-//	if(x > DELTAX_MAX) return;
+	if(x < DELTAX_MIN) x = DELTAX_MIN;
+	if(x > getDeltaXMax_CM()) x = getDeltaXMax_CM();
 	deltaX = x;
 }
 
@@ -185,8 +193,8 @@ unsigned int get_deltaX() {
 }
 
 void set_Noscillations(unsigned int n) {
-//	if(n < NOSC_MIN) return;
-//	if(n > NOSC_MAX) return;
+	if(n < NOSC_MIN) n = NOSC_MIN;
+	if(n > NOSC_MAX) n = NOSC_MAX;
 	Noscillations = n;
 }
 

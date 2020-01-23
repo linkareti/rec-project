@@ -9,7 +9,7 @@ static volatile double temperatureCelsius;
 //Initializes all the necessary stuff for acquiring with the adc
 //Uses AN2 for temperature measurement from LM35
 void adc_init () {
-	ADCON1bits.ADSIDL = 1;		//Stop in Idle Mode bit
+    ADCON1bits.ADSIDL = 1;		//Stop in Idle Mode bit
 								//1 = Discontinue module operation when device enters Idle mode
 								//0 = Continue module operation in Idle mode
 								
@@ -29,7 +29,7 @@ void adc_init () {
                                 //001 = Active transition on INT0 pin ends sampling and starts conversion
                                 //000 = Clearing SAMP bit ends sampling and starts conversion
                                 
-	ADCON1bits.SIMSAM = 1;		//Simultaneous Sample Select bit (only applicable when CHPS = 01 or 1x)
+    ADCON1bits.SIMSAM = 1;		//Simultaneous Sample Select bit (only applicable when CHPS = 01 or 1x)
 								//1 = Samples CH0, CH1, CH2, CH3 simultaneously (when CHPS = 1x)
 								//or
 								//Samples CH0 and CH1 simultaneously (when CHPS = 01)
@@ -97,24 +97,24 @@ void adc_init () {
                                     //000001 = TCY/2 (ADCS<5:0> + 1) = TCY
                                     //000000 = TCY/2 (ADCS<5:0> + 1) = TCY/2
 
-	ADCHSbits.CH123NB = 0b00;	//Channel 1, 2, 3 Negative Input Select for MUX B Multiplexer Setting bits
-	ADCHSbits.CH123NA = 0b00;	//Channel 1, 2, 3 Negative Input Select for MUX A Multiplexer Setting bits
+    ADCHSbits.CH123NB = 0b00;	//Channel 1, 2, 3 Negative Input Select for MUX B Multiplexer Setting bits
+    ADCHSbits.CH123NA = 0b00;	//Channel 1, 2, 3 Negative Input Select for MUX A Multiplexer Setting bits
 								//11 = CH1 negative input is AN9, CH2 negative input is AN10, CH3 negative input is AN11
 								//10 = CH1 negative input is AN6, CH2 negative input is AN7, CH3 negative input is AN8
 								//0x = CH1, CH2, CH3 negative input is VREF-
 
-	ADCHSbits.CH123SB = 0b00;	//Channel 1, 2, 3 Positive Input Select for MUX B Multiplexer Setting bit
-	ADCHSbits.CH123SA = 0b00;	//Channel 1, 2, 3 Positive Input Select for MUX A Multiplexer Setting bit
+    ADCHSbits.CH123SB = 0b00;	//Channel 1, 2, 3 Positive Input Select for MUX B Multiplexer Setting bit
+    ADCHSbits.CH123SA = 0b00;	//Channel 1, 2, 3 Positive Input Select for MUX A Multiplexer Setting bit
 								//1 = CH1 positive input is AN3, CH2 positive input is AN4, CH3 positive input is AN5
 								//0 = CH1 positive input is AN0, CH2 positive input is AN1, CH3 positive input is AN2
 
-	ADCHSbits.CH0NB = 0;	//Channel 0 Negative Input Select for MUX B Multiplexer Setting bit
+    ADCHSbits.CH0NB = 0;	//Channel 0 Negative Input Select for MUX B Multiplexer Setting bit
     ADCHSbits.CH0NA = 0;	//Channel 0 Negative Input Select for MUX A Multiplexer Setting bit
 							//1 = Channel 0 negative input is AN1
 							//0 = Channel 0 negative input is VREF-
 							
-	ADCHSbits.CH0SB = 0b0000;	//Channel 0 Positive Input Select for MUX B Multiplexer Setting bits
-	ADCHSbits.CH0SA = 0b0100;	//Channel 0 Positive Input Select for MUX A Multiplexer Setting bit
+    ADCHSbits.CH0SB = 0b0000;	//Channel 0 Positive Input Select for MUX B Multiplexer Setting bits
+    ADCHSbits.CH0SA = 0b0100;	//Channel 0 Positive Input Select for MUX A Multiplexer Setting bit
 								//1111 = Channel 0 positive input is AN15
 								//1110 = Channel 0 positive input is AN14
 								//1101 = Channel 0 positive input is AN13
@@ -130,7 +130,7 @@ void adc_init () {
 									//1 = Select ANx for input scan
 									//0 = Skip ANx for input scan
 
-	TRISB |= 0b0000000000010000;	//Set analog pins to inputs
+    TRISB |= 0b0000000000010000;	//Set analog pins to inputs
 
     ADCON1bits.ADON = 1;	//enable ad converter
     IFS0bits.ADIF = 0;		//clear adc interrupt flag
@@ -139,7 +139,7 @@ void adc_init () {
     //ADCON1bits.DONE		//DONE is '0' if adc is converting
     						//DONE is '1' if adc ended the conversion
     						
-	//ADCON1bits.BUFS 		//Buffer Fill Status bit
+    //ADCON1bits.BUFS 		//Buffer Fill Status bit
 							//Only valid when BUFM = 1 (ADRES split into 2 x 8-word buffers).
 							//1 = A/D is currently filling buffer 0x8-0xF, user should access data in 0x0-0x7
 							//0 = A/D is currently filling buffer 0x0-0x7, user should access data in 0x8-0xF
@@ -187,7 +187,7 @@ void  __attribute__((__interrupt__, __no_auto_psv__)) _ADCInterrupt (void) {
 }
 
 double get_temperature() {
-	double retVal;
+	static double retVal;
 
     IEC0bits.ADIE = 0;
 	asm("nop");

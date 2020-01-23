@@ -1,0 +1,420 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <Properties>
+    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[350, 350]"/>
+    </Property>
+    <Property name="name" type="java.lang.String" value="WorldPendulumCustomizer" noResource="true"/>
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[350, 350]"/>
+    </Property>
+    <Property name="requestFocusEnabled" type="boolean" value="false"/>
+  </Properties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="2"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,114,0,0,1,94"/>
+  </AuxValues>
+
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+  <SubComponents>
+    <Container class="javax.swing.JTabbedPane" name="jTabbedPaneWorldPendulum">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="jTabbedPaneWorldPendulum" noResource="true"/>
+      </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="ReCResourceBundle.findStringOrDefault(&quot;wpilheus$jPanelPendulumConfig.TabConstraints.tabTitle&quot;,&quot;Configure&quot;)" type="code"/>
+        </Property>
+      </AccessibilityProperties>
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jTabbedPaneWorldPendulumStateChanged"/>
+      </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+          <BorderConstraints direction="Center"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="jPanelPendulumConfig">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="jPanelPendulumConfig" noResource="true"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[350, 360]"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="&lt;User Code&gt;" toolTip="">
+                <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;wpilheus$jPanelPendulumConfig.TabConstraints.tabTitle&quot;,&quot;Configure&quot;)" type="code"/>
+                </Property>
+                <Property name="tabToolTip" type="java.lang.String" resourceKey="jPanelPendulumConfig.TabConstraints.tabToolTip"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabelEstimatedTime" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jPanelPenduloDisplacement" alignment="0" pref="318" max="32767" attributes="1"/>
+                          <Component id="jPanelNrPoints" alignment="0" min="0" pref="318" max="32767" attributes="1"/>
+                      </Group>
+                      <EmptySpace pref="15" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanelPenduloDisplacement" min="-2" pref="99" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanelNrPoints" min="-2" pref="104" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jLabelEstimatedTime" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="52" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="jPanelPenduloDisplacement">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="&lt;User Code&gt;">
+                      <Connection PropertyName="titleX" code="ReCResourceBundle.findStringOrDefault(&quot;wpilheus$jPanelPenduloDisplacement.border.title&quot;,&quot;Initial Displacement&quot;)" type="code"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Default Cursor"/>
+                </Property>
+                <Property name="name" type="java.lang.String" value="jPanelPenduloDisplacement" noResource="true"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[300, 126]"/>
+                </Property>
+              </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;wpilheus$jPanelPenduloDisplacement.border.title&quot;,&quot;Initial Displacement&quot;)" type="code"/>
+                </Property>
+                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;wpilheus$jPanelPenduloDisplacement.border.title&quot;,&quot;Initial Displacement&quot;)" type="code"/>
+                </Property>
+              </AccessibilityProperties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jSliderDisplacement" min="-2" max="-2" attributes="1"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jFormattedTextFieldDisplacement" min="-2" max="-2" attributes="1"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jFormattedTextFieldDisplacement" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jSliderDisplacement" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="24" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JSlider" name="jSliderDisplacement">
+                  <Properties>
+                    <Property name="majorTickSpacing" type="int" value="5"/>
+                    <Property name="maximum" type="int" value="20"/>
+                    <Property name="minimum" type="int" value="5"/>
+                    <Property name="minorTickSpacing" type="int" value="1"/>
+                    <Property name="paintLabels" type="boolean" value="true"/>
+                    <Property name="paintTicks" type="boolean" value="true"/>
+                    <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="ReCResourceBundle.findStringOrDefault(&quot;wpilheus$jSliderDisplacement.toolTipText&quot;,&quot;Initial Displacement&quot;)" type="code"/>
+                    </Property>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[250, 16]"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="jSliderDisplacement" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[250, 42]"/>
+                    </Property>
+                  </Properties>
+                  <AccessibilityProperties>
+                    <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="ReCResourceBundle.findStringOrDefault(&quot;wpilheus$jSliderDisplacement.toolTipText&quot;,&quot;Deslocamento&quot;)" type="code"/>
+                    </Property>
+                    <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="ReCResourceBundle.findStringOrDefault(&quot;wpilheus$jSliderDisplacement.toolTipText&quot;,&quot;Deslocamento&quot;)" type="code"/>
+                    </Property>
+                  </AccessibilityProperties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderDisplacementStateChanged"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldDisplacement">
+                  <Properties>
+                    <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                      <Format format="#,##0" subtype="-1" type="0"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="11"/>
+                    <Property name="text" type="java.lang.String" resourceKey="jFormattedTextFieldDisplacement.text"/>
+                    <Property name="toolTipText" type="java.lang.String" resourceKey="jFormattedTextFieldDisplacement.toolTipText"/>
+                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="jFormattedTextFieldDisplacement" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
+                  </Properties>
+                  <AccessibilityProperties>
+                    <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="ReCResourceBundle.findStringOrDefault(&quot;wpilheus$jSliderDisplacement.toolTipText&quot;,&quot;Deslocamento&quot;)" type="code"/>
+                    </Property>
+                  </AccessibilityProperties>
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFormattedTextFieldDisplacementFocusLost"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanelNrPoints">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="&lt;User Code&gt;">
+                      <Connection PropertyName="titleX" code="ReCResourceBundle.findStringOrDefault(&quot;wpilheus$jPanelNrPoints.border.title&quot;,&quot;Samples&quot;)" type="code"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+                <Property name="name" type="java.lang.String" value="jPanelNrPoints" noResource="true"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[300, 126]"/>
+                </Property>
+              </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;wpilheus$jPanelNrPoints.border.title&quot;,&quot;Samples&quot;)" type="code"/>
+                </Property>
+                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;wpilheus$jPanelNrPoints.border.title&quot;,&quot;Samples&quot;)" type="code"/>
+                </Property>
+              </AccessibilityProperties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jSliderNrPoints" min="-2" max="-2" attributes="1"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jFormattedTextFieldNrPoints" min="-2" pref="43" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jFormattedTextFieldNrPoints" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jSliderNrPoints" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="29" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JSlider" name="jSliderNrPoints">
+                  <Properties>
+                    <Property name="majorTickSpacing" type="int" value="80"/>
+                    <Property name="maximum" type="int" value="500"/>
+                    <Property name="minimum" type="int" value="10"/>
+                    <Property name="minorTickSpacing" type="int" value="40"/>
+                    <Property name="paintLabels" type="boolean" value="true"/>
+                    <Property name="paintTicks" type="boolean" value="true"/>
+                    <Property name="value" type="int" value="100"/>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[250, 16]"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="jSliderNrPoints" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[250, 42]"/>
+                    </Property>
+                  </Properties>
+                  <AccessibilityProperties>
+                    <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="ReCResourceBundle.findStringOrDefault(&quot;wpilheus$jFormattedTextFieldNrPoints.toolTipText&quot;,&quot;Amostras&quot;)" type="code"/>
+                    </Property>
+                  </AccessibilityProperties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderNrPointsStateChanged"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldNrPoints">
+                  <Properties>
+                    <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                      <Format format="#,##0" subtype="-1" type="0"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="11"/>
+                    <Property name="text" type="java.lang.String" resourceKey="jFormattedTextFieldNrPoints.text"/>
+                    <Property name="toolTipText" type="java.lang.String" resourceKey="jFormattedTextFieldNrPoints.toolTipText"/>
+                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[45, 19]"/>
+                    </Property>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="jFormattedTextFieldNrPoints" noResource="true"/>
+                  </Properties>
+                  <AccessibilityProperties>
+                    <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="ReCResourceBundle.findStringOrDefault(&quot;wpilheus$jFormattedTextFieldNrPoints.toolTipText&quot;,&quot;Amostras&quot;)" type="code"/>
+                    </Property>
+                  </AccessibilityProperties>
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFormattedTextFieldNrPointsFocusLost"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JLabel" name="jLabelEstimatedTime">
+              <Properties>
+                <Property name="font" type="java.awt.Font" resourceKey="jLabelEstimatedTime.font"/>
+                <Property name="foreground" type="java.awt.Color" resourceKey="jLabelEstimatedTime.foreground"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="labelBegin + &quot; &quot; + labelEnd" type="code"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" resourceKey="jLabelEstimatedTime.toolTipText"/>
+                <Property name="enabled" type="boolean" value="false"/>
+                <Property name="name" type="java.lang.String" value="jLabelEstimatedTime" noResource="true"/>
+              </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;wpilheus$jLabelEstimatedTime.text&quot;,&quot;Tempo Estimado&quot;)" type="code"/>
+                </Property>
+                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;wpilheus$jLabelEstimatedTime.text&quot;,&quot;Tempo Estimado&quot;)" type="code"/>
+                </Property>
+              </AccessibilityProperties>
+            </Component>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanelControlButtons">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="jPanelControlButtons" noResource="true"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[350, 37]"/>
+        </Property>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+          <BorderConstraints direction="Last"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="jButtonOk" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jButtonCancel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="68" max="32767" attributes="0"/>
+                  <Component id="jButtonDefaultConfig" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jButtonOk" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonCancel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonDefaultConfig" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JButton" name="jButtonOk">
+          <Properties>
+            <Property name="label" type="java.lang.String" resourceKey="Ok.label"/>
+            <Property name="name" type="java.lang.String" value="Ok" noResource="true"/>
+          </Properties>
+          <AccessibilityProperties>
+            <Property name="AccessibleContext.accessibleName" type="java.lang.String" resourceKey="Ok.AccessibleContext.accessibleName"/>
+          </AccessibilityProperties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonOkActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonCancel">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ReCResourceBundle.findStringOrDefault(&quot;wpilheus$Cancel.label&quot;,&quot;Cancel&quot;)" type="code"/>
+            </Property>
+            <Property name="name" type="java.lang.String" value="Cancel" noResource="true"/>
+          </Properties>
+          <AccessibilityProperties>
+            <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ReCResourceBundle.findStringOrDefault(&quot;wpilheus$jButtonCancel.AccessibleContext.accessibleName&quot;,&quot;Cancel&quot;)" type="code"/>
+            </Property>
+          </AccessibilityProperties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonDefaultConfig">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ReCResourceBundle.findStringOrDefault(&quot;wpilheus$DefaultConfig.label&quot;,&quot;Default Config&quot;)" type="code"/>
+            </Property>
+            <Property name="name" type="java.lang.String" value="DefaultConfig" noResource="true"/>
+          </Properties>
+          <AccessibilityProperties>
+            <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ReCResourceBundle.findStringOrDefault(&quot;wpilheus$jButtonDefaultConfig.AccessibleContext.accessibleName&quot;,&quot;Default Config&quot;)" type="code"/>
+            </Property>
+          </AccessibilityProperties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDefaultConfigActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

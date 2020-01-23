@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE HardwareInfo PUBLIC "-//Linkare/ReC/HardwareInfo//-" "http://rec.linkare.com/HardwareInfoSchema.dtd">
-<HardwareInfo id="WP_EPM" familiarName="Pêndulo Barcelona" name="PIC"
-	version="V1" manufacturer="IST" driverVersion="v1">
+<HardwareInfo id="WP_BCN" familiarName="Pêndulo Mundial Barcelona" name="Basic STAMP"
+	version="BS2" manufacturer="Parallax" driverVersion="v2">
+	
+	<description>	</description>
 	
 	<parameter name="wpbarcelona$parameter.displacement" type="ContinuousValue" value="5">
 		<selection-list>
