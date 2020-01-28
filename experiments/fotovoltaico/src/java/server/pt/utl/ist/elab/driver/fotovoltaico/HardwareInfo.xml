@@ -62,15 +62,15 @@
 	</parameter>
 
 	<frequency-scale label="Sampling Interval">
-		<min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">2</Frequency></min-frequency>
-		<max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">100</Frequency></max-frequency>
+		<min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">3</Frequency></min-frequency>
+		<max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">55</Frequency></max-frequency>
 		<step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
 	</frequency-scale>
 	<Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency>
 
 	<sampling-scale>
 		<min-samples>1</min-samples>
-		<max-samples>10000</max-samples>
+		<max-samples>120</max-samples>
 		<step-samples>1</step-samples>
 	</sampling-scale>
 
