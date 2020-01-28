@@ -76,7 +76,7 @@
                                                   title="#{statusBundle['tooltip.experiment.users']}" />
                                 </p:column>
                                 <p:column style="width:120px; text-align: center; height: 50%;">
-                                    <a href="javascript:var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + 'client/#{deployedExp.experiment.state.url}.jnlp'; if (!deployJava.isWebStartInstalled('1.6')) {if (deployJava.installLatestJRE()) {if (deployJava.launch(url)) {}}} else {if (deployJava.launch(url)) {}}"
+                                    <a  href="#void" onclick="var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + 'client/#{deployedExp.experiment.state.url}.jnlp'; window.open(url);" download="#{deployedExp.experiment.state.url}.jnlp"
                                                   title="#{statusBundle['tooltip.experiment.launch']}" 
                                                   rel="#{statusBundle['tooltip.experiment.launch']}" >
                                         <h:graphicImage library="images" name="webstart.png" rendered="#{deployedExp.labRunning}"/>
@@ -92,7 +92,8 @@
                 <ul>
                     <li>
                         <a
-                            href="javascript:var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + 'client/elab-client.jnlp'; if (!deployJava.isWebStartInstalled('1.6')) {if (deployJava.installLatestJRE()) {if (deployJava.launch(url)) {}}} else {if (deployJava.launch(url)) {}}">
+                                href="#void" onclick="var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + 'client/elab-client.jnlp'; window.open(url);" download="elab-client.jnlp">
+
                             <h:graphicImage library="images" name="webstart.png"/> 
                         </a></li>
                 </ul>
