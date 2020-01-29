@@ -15,9 +15,8 @@
 	<parameter name="protocol" type="ContinuousValue" value="1">
 		<selection-list>
 			<value order="1">1</value>
-			<value order="2">2</value>
-			<value order="3">3</value>
-			<value order="4">1</value>
+			<value order="2">3</value>
+			<value order="3">1</value>
 		</selection-list>
 	</parameter>
 
@@ -97,7 +96,7 @@
 			<min><PhysicsVal type="float">0.0</PhysicsVal></min>
 			<max><PhysicsVal type="float">6.0</PhysicsVal></max>
 			<step><PhysicsVal type="float">0.000001</PhysicsVal></step>
-			<errordefault><PhysicsVal type="foat">0.000001</PhysicsVal></errordefault>
+			<errordefault><PhysicsVal type="float">0.000001</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 
@@ -106,7 +105,7 @@
 			<min><PhysicsVal type="float">-10.0</PhysicsVal></min>
 			<max><PhysicsVal type="float">100.0</PhysicsVal></max>
 			<step><PhysicsVal type="float">0.000001</PhysicsVal></step>
-			<errordefault><PhysicsVal type="foat">0.000001</PhysicsVal></errordefault>
+			<errordefault><PhysicsVal type="float">0.000001</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 
@@ -115,7 +114,7 @@
 			<min><PhysicsVal type="float">0.0</PhysicsVal></min>
 			<max><PhysicsVal type="float">600.0</PhysicsVal></max>
 			<step><PhysicsVal type="float">0.000001</PhysicsVal></step>
-			<errordefault><PhysicsVal type="foat">0.000001</PhysicsVal></errordefault>
+			<errordefault><PhysicsVal type="float">0.000001</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 
