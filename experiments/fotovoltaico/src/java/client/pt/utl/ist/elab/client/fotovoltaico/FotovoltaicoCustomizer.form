@@ -346,11 +346,6 @@
               <Dimension value="[350, 180]"/>
             </Property>
           </Properties>
-          <AccessibilityProperties>
-            <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/mag3d/resources/messages.properties" key="rec.exp.customizer.title4" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
-            </Property>
-          </AccessibilityProperties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
               <BorderConstraints direction="West"/>

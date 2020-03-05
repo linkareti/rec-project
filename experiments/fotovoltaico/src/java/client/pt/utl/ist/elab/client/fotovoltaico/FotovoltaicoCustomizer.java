@@ -393,8 +393,6 @@ public class FotovoltaicoCustomizer extends AbstractCustomizer {
         colorPanel.add(blueSldPanel);
 
         slidersPanel.add(colorPanel, java.awt.BorderLayout.WEST);
-        java.util.ResourceBundle bundle1 = java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/mag3d/resources/messages"); // NOI18N
-        colorPanel.getAccessibleContext().setAccessibleName(bundle1.getString("rec.exp.customizer.title4")); // NOI18N
 
         add(slidersPanel);
         slidersPanel.setBounds(0, 0, 720, 420);
