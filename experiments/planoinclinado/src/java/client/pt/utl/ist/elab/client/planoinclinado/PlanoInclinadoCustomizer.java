@@ -113,7 +113,8 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
         jLabel1.setText("   ");
         buttonPanel.add(jLabel1);
 
-        btnDefaults.setText(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.planoinclinado.lbl.dftcfg","mag3d$rec.exp.planoinclinado.lbl.dftcfg")); // NOI18N
+        btnDefaults.setText(ReCResourceBundle.findStringOrDefault("planoinclinado$rec.exp.planoinclinado.lbl.dftcfg","planoinclinado$rec.exp.planoinclinado.lbl.dftcfg")); // NOI18N
+        btnDefaults.setLabel(ReCResourceBundle.findStringOrDefault("planoinclinado$rec.exp.dftcfg.planoinclinado.title.1","planoinclinado$rec.exp.dftcfg.planoinclinado.title.1")); // NOI18N
         btnDefaults.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDefaultsActionPerformed(evt);
@@ -127,7 +128,7 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
         slidersPanel.setMinimumSize(new java.awt.Dimension(700, 320));
         slidersPanel.setLayout(new java.awt.GridLayout(2, 2));
 
-        samplesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.planoinclinado.lbl.nsamples","mag3d$rec.exp.planoinclinado.lbl.nsamples"))); // NOI18N
+        samplesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("planoinclinado$rec.exp.planoinclinado.lbl.nsamples","planoinclinado$rec.exp.planoinclinado.lbl.nsamples"))); // NOI18N
         samplesPanel.setMinimumSize(new java.awt.Dimension(350, 80));
         samplesPanel.setPreferredSize(new java.awt.Dimension(350, 180));
         samplesPanel.setLayout(new java.awt.GridBagLayout());
@@ -187,18 +188,17 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
         samplesPanel.add(lblErrorTooManySamples, gridBagConstraints);
 
         slidersPanel.add(samplesPanel);
-        java.util.ResourceBundle bundle1 = java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/mag3d/resources/messages"); // NOI18N
-        samplesPanel.getAccessibleContext().setAccessibleName(bundle1.getString("rec.exp.customizer.title4")); // NOI18N
+        samplesPanel.getAccessibleContext().setAccessibleName(ReCResourceBundle.findStringOrDefault("fotovoltaico$rec.exp.planoinclinado.lbl.nsamples","fotovoltaico$rec.exp.planoinclinado.lbl.nsamples")); // NOI18N
 
-        heightPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.planoinclinado.lbl.height","mag3d$rec.exp.planoinclinado.lbl.height"))); // NOI18N
+        heightPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("planoinclinado$rec.exp.planoinclinado.lbl.height","planoinclinado$rec.exp.planoinclinado.lbl.height"))); // NOI18N
         heightPanel.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         heightPanel.setMinimumSize(new java.awt.Dimension(350, 180));
         heightPanel.setPreferredSize(new java.awt.Dimension(350, 180));
         heightPanel.setLayout(new java.awt.GridBagLayout());
 
-        sldHeight.setMajorTickSpacing(39);
-        sldHeight.setMaximum(234);
-        sldHeight.setMinorTickSpacing(3);
+        sldHeight.setMajorTickSpacing(40);
+        sldHeight.setMaximum(235);
+        sldHeight.setMinorTickSpacing(5);
         sldHeight.setPaintLabels(true);
         sldHeight.setPaintTicks(true);
         sldHeight.setPaintTrack(false);
@@ -240,7 +240,7 @@ public class PlanoInclinadoCustomizer extends AbstractCustomizer {
 
         slidersPanel.add(heightPanel);
 
-        tbsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("mag3d$rec.exp.planoinclinado.lbl.tbs","mag3d$rec.exp.planoinclinado.lbl.tbs"))); // NOI18N
+        tbsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findStringOrDefault("planoinclinado$rec.exp.planoinclinado.lbl.tbs","planoinclinado$rec.exp.planoinclinado.lbl.tbs"))); // NOI18N
         tbsPanel.setMinimumSize(new java.awt.Dimension(350, 80));
         tbsPanel.setPreferredSize(new java.awt.Dimension(350, 180));
         tbsPanel.setLayout(new java.awt.GridBagLayout());

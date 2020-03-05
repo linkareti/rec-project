@@ -71,7 +71,10 @@
         <Component class="javax.swing.JButton" name="btnDefaults">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/planoinclinado/resources/messages.properties" key="rec.exp.planoinclinado.lbl.dftcfg" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;mag3d${key}&quot;,&quot;mag3d${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/planoinclinado/resources/messages.properties" key="rec.exp.planoinclinado.lbl.dftcfg" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;planoinclinado${key}&quot;,&quot;planoinclinado${key}&quot;)"/>
+            </Property>
+            <Property name="label" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="pt/utl/ist/elab/client/planoinclinado/resources/messages.properties" key="rec.exp.dftcfg.planoinclinado.title.1" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;planoinclinado${key}&quot;,&quot;planoinclinado${key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
@@ -102,7 +105,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="N&#xfa;mero de amostras">
-                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/planoinclinado/resources/messages.properties" key="rec.exp.planoinclinado.lbl.nsamples" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;mag3d${key}&quot;,&quot;mag3d${key}&quot;)"/>
+                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/planoinclinado/resources/messages.properties" key="rec.exp.planoinclinado.lbl.nsamples" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;planoinclinado${key}&quot;,&quot;planoinclinado${key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -115,7 +118,7 @@
           </Properties>
           <AccessibilityProperties>
             <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/mag3d/resources/messages.properties" key="rec.exp.customizer.title4" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/planoinclinado/resources/messages.properties" key="rec.exp.planoinclinado.lbl.nsamples" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;fotovoltaico${key}&quot;,&quot;fotovoltaico${key}&quot;)"/>
             </Property>
           </AccessibilityProperties>
 
@@ -199,7 +202,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Altura [mm]">
-                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/planoinclinado/resources/messages.properties" key="rec.exp.planoinclinado.lbl.height" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;mag3d${key}&quot;,&quot;mag3d${key}&quot;)"/>
+                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/planoinclinado/resources/messages.properties" key="rec.exp.planoinclinado.lbl.height" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;planoinclinado${key}&quot;,&quot;planoinclinado${key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -222,9 +225,9 @@
           <SubComponents>
             <Component class="javax.swing.JSlider" name="sldHeight">
               <Properties>
-                <Property name="majorTickSpacing" type="int" value="39"/>
-                <Property name="maximum" type="int" value="234"/>
-                <Property name="minorTickSpacing" type="int" value="3"/>
+                <Property name="majorTickSpacing" type="int" value="40"/>
+                <Property name="maximum" type="int" value="235"/>
+                <Property name="minorTickSpacing" type="int" value="5"/>
                 <Property name="paintLabels" type="boolean" value="true"/>
                 <Property name="paintTicks" type="boolean" value="true"/>
                 <Property name="paintTrack" type="boolean" value="false"/>
@@ -281,7 +284,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Tempo entre amostras [ms]">
-                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/planoinclinado/resources/messages.properties" key="rec.exp.planoinclinado.lbl.tbs" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;mag3d${key}&quot;,&quot;mag3d${key}&quot;)"/>
+                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/planoinclinado/resources/messages.properties" key="rec.exp.planoinclinado.lbl.tbs" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;planoinclinado${key}&quot;,&quot;planoinclinado${key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>
