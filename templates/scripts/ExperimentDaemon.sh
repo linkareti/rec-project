@@ -4,8 +4,6 @@
 #
 
 
-BASE_USER=@daemon.user@
-BASE_USER_HOMEDIR=~@daemon.user@
 EXPERIMENT_NAME=@experiment.name@
 CURDIR=`pwd`
 CURUSER=`id -nu`
@@ -31,12 +29,8 @@ start() {
 
 	if [ "x$ADDITIONAL_SERVICE_START" != "x" ]; then
 		echo "Starting additional service '$ADDITIONAL_SERVICE_START'..."
-		if [ "x$CURUSER" != "x$BASE_USER" ]; then
-			su -m -l $BASE_USER -c "cd $CURDIR; nohup $ADDITIONAL_SERVICE_START 2>&1 >/dev/null 2>/dev/null"
-		else
-			cd $CURDIR
-			nohup $ADDITIONAL_SERVICE_START 2>&1 >/dev/null 2>/dev/null
-		fi
+		cd $CURDIR
+		nohup $ADDITIONAL_SERVICE_START 2>&1 >/dev/null 2>/dev/null
 		if [ $? -eq 0 ]; then
 			echo "OK"
 		else
@@ -47,20 +41,12 @@ start() {
 	
 	echo "Starting @experiment.name@ service..."
 
-	if [ "x$CURUSER" != "x$BASE_USER" ]; then
-		su -m -l $BASE_USER -c "cd $CURDIR; nohup $CURDIR/Start@experiment.name@Driver.sh 2>&1 >/dev/null 2>/dev/null"
-	else
-		cd $CURDIR
-		nohup $CURDIR/Start@experiment.name@Driver.sh 2>&1 >/dev/null 2>/dev/null
-	fi
+	cd $CURDIR
+	nohup $CURDIR/Start@experiment.name@Driver.sh 2>&1 >/dev/null 2>/dev/null
 
 	if [ $? -eq 0 ]; then
 		echo "OK"
-		if [ "x$CURUSER" != "x$BASE_USER" ]; then
-			su -m -l $BASE_USER -c "touch $CURDIR/@experiment.name@.lock"
-		else
-			touch $CURDIR/@experiment.name@.lock
-		fi
+		touch $CURDIR/@experiment.name@.lock
 		return 0
 	else
 		echo "Not OK"
@@ -74,12 +60,8 @@ stop() {
 
 		if [ "x$ADDITIONAL_SERVICE_STOP" != "x" ]; then
 			echo "Stoping additional service '$ADDITIONAL_SERVICE_STOP'..."
-			if [ "x$CURUSER" != "x$BASE_USER" ]; then
-				su -m -l $BASE_USER -c "cd $CURDIR; nohup $ADDITIONAL_SERVICE_STOP 2>&1 >/dev/null 2>/dev/null"
-			else
-				cd $CURDIR
-				nohup $ADDITIONAL_SERVICE_STOP 2>&1 >/dev/null 2>/dev/null
-			fi
+			cd $CURDIR
+			nohup $ADDITIONAL_SERVICE_STOP 2>&1 >/dev/null 2>/dev/null
 			if [ $? -eq 0 ]; then
 				echo "OK"
 			else
@@ -92,12 +74,7 @@ stop() {
 		PID=`cat $CURDIR/@experiment.name@.pid`
 
 		echo "Stopping @experiment.name@ service..."
-		if [ "x$CURUSER" != "x$BASE_USER" ]; then
-			su -m -l $BASE_USER -c "kill $PID"
-		else
-			kill $PID
-		fi
-
+		kill $PID
 		if [ $? -eq 0 ]; then
 			[ -f $CURDIR/@experiment.name@.lock ] && rm -rf $CURDIR/@experiment.name@.lock
 			[ -f $CURDIR/@experiment.name@.pid ] && rm -rf $CURDIR/@experiment.name@.pid

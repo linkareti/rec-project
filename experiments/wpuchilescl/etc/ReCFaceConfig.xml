@@ -1,0 +1,10 @@
+
+<apparatus xmlns="http://rec.linkare.com/client/config" virtual="false" toolTipBundleKey="wpuchilescl$tip.wpuchilescl" location="WP_UCHILE_SCL" iconLocationBundleKey="wpuchilescl$icon.wpuchilescl" headerDisplayClassLocationBundleKey="" displayStringBundleKey="wpuchilescl$title.wpuchilescl" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="wpuchilescl$background.wpuchilescl" descriptionStringBundleKey="wpuchilescl$description.wpuchilescl" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="wpuchilescl$customizer.wpuchilescl" order="0">
+    <display toolTipBundleKey="wpuchilescl$display.table.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.table" displayStringBundleKey="wpuchilescl$display.table.title" classLocationBundleKey="wpuchilescl$display.table.loc" order="0"/>
+	<display toolTipBundleKey="wpuchilescl$display.graph.histogram.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpuchilescl$display.graph.histogram.title" classLocationBundleKey="wpuchilescl$display.graph.histogram.loc" order="0"/>
+    <display toolTipBundleKey="wpuchilescl$display.graph.period.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpuchilescl$display.graph.period.title" classLocationBundleKey="wpuchilescl$display.graph.period.loc" order="0"/>
+    <display toolTipBundleKey="wpuchilescl$display.graph.g.tip" offlineCapable="false" iconLocationBundleKey="ReCUI$rec.ui.icon.chart" displayStringBundleKey="wpuchilescl$display.graph.g.title" classLocationBundleKey="wpuchilescl$display.graph.g.loc" order="0"/>
+    <localizationBundle name="wpuchilescl" location="recresource:///pt/utl/ist/elab/client/wpuchilescl/resources/messages"/>
+    <mediaConfig videoLocation="wpuchilescl$url.video" offlinePlay="true" canSave="true" order="0"/>
+    <webResource toolTipLocationBundleKey="http://groups.ist.utl.pt/wwwelab/wiki/index.php?title=P%C3%AAndulo_Mundial" internalBrowser="false" iconLocationBundleKey="" order="0"/>
+</apparatus>
