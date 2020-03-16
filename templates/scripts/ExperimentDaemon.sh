@@ -7,15 +7,14 @@
 BASE_USER=@daemon.user@
 BASE_USER_HOMEDIR=~@daemon.user@
 EXPERIMENT_NAME=@experiment.name@
-DEPLOY_DIR="@install.dir@@deployment.subdir@/@experiment.name@"
 CURDIR=`pwd`
 CURUSER=`id -nu`
 ADDITIONAL_SERVICE_START="@additional.service.start.script@"
 ADDITIONAL_SERVICE_STOP="@additional.service.stop.script@"
 
 java_is_running() {
-	[[ -f "$DEPLOY_DIR/@experiment.name@.pid" ]] || return 1
-	PID=`cat $DEPLOY_DIR/@experiment.name@.pid`
+	[[ -f "$CURDIR/@experiment.name@.pid" ]] || return 1
+	PID=`cat $CURDIR/@experiment.name@.pid`
 	ps aux | grep $PID | grep java > /dev/null 2>&1
 	VAR1=$?
 	kill -0 $PID > /dev/null 2>&1
@@ -33,9 +32,9 @@ start() {
 	if [ "x$ADDITIONAL_SERVICE_START" != "x" ]; then
 		echo "Starting additional service '$ADDITIONAL_SERVICE_START'..."
 		if [ "x$CURUSER" != "x$BASE_USER" ]; then
-			su -m -l $BASE_USER -c "cd $DEPLOY_DIR; nohup $ADDITIONAL_SERVICE_START 2>&1 >/dev/null 2>/dev/null"
+			su -m -l $BASE_USER -c "cd $CURDIR; nohup $ADDITIONAL_SERVICE_START 2>&1 >/dev/null 2>/dev/null"
 		else
-			cd $DEPLOY_DIR
+			cd $CURDIR
 			nohup $ADDITIONAL_SERVICE_START 2>&1 >/dev/null 2>/dev/null
 		fi
 		if [ $? -eq 0 ]; then
@@ -49,18 +48,18 @@ start() {
 	echo "Starting @experiment.name@ service..."
 
 	if [ "x$CURUSER" != "x$BASE_USER" ]; then
-		su -m -l $BASE_USER -c "cd $DEPLOY_DIR; nohup $DEPLOY_DIR/Start@experiment.name@Driver.sh 2>&1 >/dev/null 2>/dev/null"
+		su -m -l $BASE_USER -c "cd $CURDIR; nohup $CURDIR/Start@experiment.name@Driver.sh 2>&1 >/dev/null 2>/dev/null"
 	else
-		cd $DEPLOY_DIR
-		nohup $DEPLOY_DIR/Start@experiment.name@Driver.sh 2>&1 >/dev/null 2>/dev/null
+		cd $CURDIR
+		nohup $CURDIR/Start@experiment.name@Driver.sh 2>&1 >/dev/null 2>/dev/null
 	fi
 
 	if [ $? -eq 0 ]; then
 		echo "OK"
 		if [ "x$CURUSER" != "x$BASE_USER" ]; then
-			su -m -l $BASE_USER -c "touch $DEPLOY_DIR/@experiment.name@.lock"
+			su -m -l $BASE_USER -c "touch $CURDIR/@experiment.name@.lock"
 		else
-			touch $DEPLOY_DIR/@experiment.name@.lock
+			touch $CURDIR/@experiment.name@.lock
 		fi
 		return 0
 	else
@@ -76,9 +75,9 @@ stop() {
 		if [ "x$ADDITIONAL_SERVICE_STOP" != "x" ]; then
 			echo "Stoping additional service '$ADDITIONAL_SERVICE_STOP'..."
 			if [ "x$CURUSER" != "x$BASE_USER" ]; then
-				su -m -l $BASE_USER -c "cd $DEPLOY_DIR; nohup $ADDITIONAL_SERVICE_STOP 2>&1 >/dev/null 2>/dev/null"
+				su -m -l $BASE_USER -c "cd $CURDIR; nohup $ADDITIONAL_SERVICE_STOP 2>&1 >/dev/null 2>/dev/null"
 			else
-				cd $DEPLOY_DIR
+				cd $CURDIR
 				nohup $ADDITIONAL_SERVICE_STOP 2>&1 >/dev/null 2>/dev/null
 			fi
 			if [ $? -eq 0 ]; then
@@ -90,7 +89,7 @@ stop() {
 		fi
 
 
-		PID=`cat $DEPLOY_DIR/@experiment.name@.pid`
+		PID=`cat $CURDIR/@experiment.name@.pid`
 
 		echo "Stopping @experiment.name@ service..."
 		if [ "x$CURUSER" != "x$BASE_USER" ]; then
@@ -100,8 +99,8 @@ stop() {
 		fi
 
 		if [ $? -eq 0 ]; then
-			[ -f $DEPLOY_DIR/@experiment.name@.lock ] && rm -rf $DEPLOY_DIR/@experiment.name@.lock
-			[ -f $DEPLOY_DIR/@experiment.name@.pid ] && rm -rf $DEPLOY_DIR/@experiment.name@.pid
+			[ -f $CURDIR/@experiment.name@.lock ] && rm -rf $CURDIR/@experiment.name@.lock
+			[ -f $CURDIR/@experiment.name@.pid ] && rm -rf $CURDIR/@experiment.name@.pid
 			echo "OK"
 			return 0
 		else

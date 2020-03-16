@@ -392,7 +392,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 				if (multiCastHardwares.size() >= ReCMultiCastController.MAXIMUM_HARDWARES) {// Shaaamme,,,,
 					// I'm
 					// full
-					LOGGER.log(Level.INFO, "Didn't register Harware with id " + hardwareId
+					LOGGER.log(Level.INFO, "Didn't register Hardware with id " + hardwareId
 							+ " because I don't have any more slots available. My Hardwares Limit is "
 							+ ReCMultiCastController.MAXIMUM_HARDWARES);
 					return;

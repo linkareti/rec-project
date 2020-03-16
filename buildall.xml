@@ -294,7 +294,7 @@
 
 					<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-zip.dist.hardwareserver" />
 
-					<zip destfile="${dist.dir}/@{experiment.name}HarwareServer_${today}.zip">
+					<zip destfile="${dist.dir}/@{experiment.name}HardwareServer_${today}.zip">
 						<zipfileset file="${hardwareserver.build.dir}/@{experiment.name}Driver.jar" prefix="hardwareserver" />
 						<zipfileset file="${hardwareserver.build.dir}/ELabCommon.jar" prefix="hardwareserver" />
 						<zipfileset file="${hardwareserver.build.dir}/ELabHardwareServer.jar" prefix="hardwareserver" />
